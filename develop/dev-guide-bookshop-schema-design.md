@@ -8,9 +8,9 @@ Bookshop is a virtual online bookstore application through which you can buy boo
 
 This document describes the following information:
 
-- How to import data into the Bookshop application via TiUP and the import function of TiDB Cloud.
-- What are the definitions of the tables in the Bookshop application.
-- How to use the `dbinit.sql` script.
+- How to import data into the Bookshop application via TiUP and the import function of TiDB Cloud
+- What are the definitions of the tables in the Bookshop application
+- How to use the `dbinit.sql` script
 
 ## Import data
 
@@ -21,7 +21,7 @@ You can import data either by using `tiup demo` or by using the import function 
 
 ### Via `tiup demo`
 
-If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application running the following command:
+If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 {{< copyable "shell" >}}
 
@@ -29,11 +29,11 @@ If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-refer
 tiup demo bookshop prepare
 ```
 
-By default, this command connects to port `4000` on the address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#details-about-table) in a database named `bookshop`.
+By default, this command connects to port `4000` on address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#description-of-the-tables) in a database named `bookshop`.
 
 #### Configure connection information
 
-The following table lists the connection parameters. You can change the default settings to match your environment.
+The following table lists the connection parameters. You can change their default settings to match your environment.
 
 | Parameter    | Abbreviation | Default value      | Description           |
 | ------------ | ---- | ----------- | -------------- |
@@ -53,7 +53,7 @@ tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbc
 
 #### Set the data volume
 
-You can specify the amount of data to be generated in each database table by configuring the following parameters:
+You can specify the volume of data to be generated in each database table by configuring the following parameters:
 
 | Parameter        | Default value   | Description                              |
 | ----------- | -------- | --------------------------------- |
@@ -84,7 +84,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### Via TiDB Cloud Import
 
-On the database details page of TiDB Cloud, click the **Import** option to enter the **Data Import Task** page. On this page. Perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
+On the database details page of TiDB Cloud, click the **Import** option to enter the **Data Import Task** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
 1. Copy the following **Bucket URL** and **Role-ARN** to the corresponding input boxes:
 
@@ -123,7 +123,7 @@ On the database details page of TiDB Cloud, click the **Import** option to enter
 
     ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
 
-    If the following error message appears during the import process, you need to use the `DROP TABLE bookshop;` command to clear the previously created sample database and then import data again.
+    If the following error message appears during the import process, run the `DROP TABLE bookshop;` command to clear the previously created sample database and then import data again.
 
     > table(s) [`bookshop`.`authors`, `bookshop`.`book_authors`, `bookshop`.`books`, `bookshop`.`orders`, `bookshop`.`ratings`, `bookshop`.`users`] are not empty.
 
