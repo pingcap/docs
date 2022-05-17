@@ -1,6 +1,6 @@
 ---
 title: Update Data
-summary: The ways, best practices and examples for updating data, batch update data.
+summary: Learn about how to update data and batch update data.
 ---
 
 # Update Data
@@ -8,7 +8,7 @@ summary: The ways, best practices and examples for updating data, batch update d
 This document describes how to use the following SQL statements to update the data in TiDB with various programming languages:
 
 - [UPDATE](/common/sql-statements/sql-statement-update.md): Used to modify the data in the specified table.
-- [INSERT ON DUPLICATE KEY UPDATE](/common/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. Note that it is **_NOT RECOMMENDED_** to use this statement if there are multiple unique keys (including primary keys). This is because this statement updates the data when it detects any unique key (including primary key) conflicts. When there are more than one row of conflicts, only one row will be updated.
+- [INSERT ON DUPLICATE KEY UPDATE](/common/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. It is **not recommended** to use this statement if there are multiple unique keys (including primary keys). This is because this statement updates the data once it detects any unique key (including primary key) conflict. When there are more than one row conflicts, it updates only one row.
 
 ## Before you start
 
@@ -24,8 +24,8 @@ To update an existing row in a table, you need to use a [UPDATE statement](/comm
 
 > **Note:**
 >
-> If you need to update a large number of rows, for example, tens of thousands or more, then it is recommended that you do **_NOT_** doing a complete update at once, but rather updating a portion at a time iteratively until all rows are updated. You can write scripts or programs to loop this operation.
-> See [Bulk-update](#bulk-update) for guidelines.
+> If you need to update a large number of rows, for example, more than ten thousand, it is recommended that you do **_NOT_** doing a complete update at once, but rather updating a portion at a time iteratively until all rows are updated. You can write scripts or programs to loop this operation.
+> See [Bulk-update](#bulk-update) for details.
 
 ### `UPDATE` SQL syntax
 
@@ -42,21 +42,21 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 |     `{table}`     |         Table Name         |
 | `{update_column}` |     Column names to be updated     |
 | `{update_value}`  |   Column values to be updated   |
-| `{filter_column}` | Column names used by conditional filters |
-| `{filter_value}`  | Column values used by conditional filters |
+| `{filter_column}` | Column names matching filters |
+| `{filter_value}`  | Column values matching filters |
 
-This only shows a simple example of `UPDATE`. For detailed information, see [UPDATE syntax](/common/sql-statements/sql-statement-update.md).
+For detailed information, see [UPDATE syntax](/common/sql-statements/sql-statement-update.md).
 
 ### `UPDATE` best practices
 
-There are some best practices to follow when updating rows as follows:
+The following are some best practices for updating data:
 
-- Always specify the `WHERE` clause in the update statement. If the `UPDATE` statement does not have a `WHERE` clause, TiDB will update **_ALL ROWS_** within this table.
-- Use [bulk-update](#bulk-update) when you need to update a large number of rows (tens of thousands or more), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default), and too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause a lot of conflicts ([optimistic transactions](/optimistic-transaction.md)).
+- Always specify the `WHERE` clause in the `UPDATE` statement. If the `UPDATE` statement does not have a `WHERE` clause, TiDB will update **_ALL ROWS_** in the table.
+- Use [bulk-update](#bulk-update) when you need to update a large number of rows (for example, more than ten thousand). Because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default), too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md)) or cause conflicts ([optimistic transactions](/optimistic-transaction.md)).
 
 ### `UPDATE` example
 
-Suppose an author changes her name to **Helen Haruki** and needs to change the [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, and the filter should be: `id = 1`.
+Suppose an author changes her name to **Helen Haruki**. You need to change the [authors](/develop/dev-guide-bookshop-schema-design.md#authors-table) table. Assume that her unique `id` is **1**, and the filter should be: `id = 1`.
 
 <SimpleTab>
 <div label="SQL" href="update-sql">
@@ -90,11 +90,11 @@ try (Connection connection = ds.getConnection()) {
 
 ## Use `INSERT ON DUPLICATE KEY UPDATE`
 
-If you need to insert new data into a table, but if any unique key (primary key is also a unique key) conflicts, the first entry of the conflicted data will be updated. You can use `INSERT ... ON DUPLICATE KEY UPDATE ...` statement to insert or update.
+If you need to insert new data into a table, but if there are unique key (a primary key is also a unique key) conflicts, the first conflicted record will be updated. You can use `INSERT ... ON DUPLICATE KEY UPDATE ...` statement to insert or update.
 
 ### `INSERT ON DUPLICATE KEY UPDATE` SQL Syntax
 
-In SQL, the `INSERT ... ON DUPLICATE KEY UPDATE ...` statement is generally of the following form:
+In SQL, the `INSERT ... ON DUPLICATE KEY UPDATE ...` statement is generally in the following form:
 
 {{< copyable "sql" >}}
 
@@ -105,7 +105,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 | Parameter Name | Description |
 | :---------------: | :--------------: |
-|     `{table}`     |       Table Name       |
+|     `{table}`     |       Table name       |
 |    `{columns}`    |   Column names to be inserted   |
 |    `{values}`     | Column values to be inserted |
 | `{update_column}` |   Column names to be updated   |
@@ -113,14 +113,14 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE` best practices
 
-- Use `INSERT ON DUPLICATE KEY UPDATE` only on a table with one unique key. This statement updates the data if any **_UNIQUE KEY_** (including the primary key) conflicts are detected. If more than one row is matched for a conflict, only one row of data will be matched. Therefore, it is not recommended to use the `INSERT ON DUPLICATE KEY UPDATE` statement in tables with multiple unique keys unless you can guarantee that there is only one row of conflicted data.
+- Use `INSERT ON DUPLICATE KEY UPDATE` only for a table with one unique key. This statement updates the data if any **_UNIQUE KEY_** (including the primary key) conflicts are detected. If there are more than one row conflicts, only one row will be updated. Therefore, it is not recommended to use the `INSERT ON DUPLICATE KEY UPDATE` statement in tables with multiple unique keys unless you can guarantee that there is only one row conflict.
 - Use this statement when you create data or update data.
 
 ### `INSERT ON DUPLICATE KEY UPDATE` example
 
-For example, we need to update the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) table to include the user's ratings for the book, so that if the user has not yet rated the book, a new rating will be created, and if the user has already rated it, then his previous rating will be updated.
+For example, you need to update the [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table) table to include the user's ratings for the book. If the user has not yet rated the book, a new rating will be created. If the user has already rated it, his previous rating will be updated.
 
-The primary key here is the joint primary key of `book_id` and `user_id`. `user_id` is `1` and the user gives a rating of `5` to a book with a `book_id` of `1000`.
+In the following example, the primary key is the joint primary keys of `book_id` and `user_id`. A user `user_id = 1` gives a rating of `5` to a book `book_id = 1000`.
 
 <SimpleTab>
 <div label="SQL" href="upsert-sql">
@@ -162,9 +162,9 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ## Bulk-update
 
-When you need to update multiple rows of data in a table, you can choose to [use `INSERT ON DUPLICATE KEY UPDATE`](#use-insert-on-duplicate-key-update) and use the `WHERE` clause to filter the data that needs to be updated.
+When you need to update multiple rows of data in a table, you can [use `INSERT ON DUPLICATE KEY UPDATE`](#use-insert-on-duplicate-key-update) with the `WHERE` clause to filter the data that needs to be updated.
 
-However, if you need to update a large number of rows (tens of thousands or more), we recommend that you update the data in an iterative way, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing a lot of conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
+However, if you need to update a large number of rows (for example, more than ten thousand), it is recommended that you update the data iteratively, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
 
 This document provides examples of writing scripts to handle iterative updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
 
@@ -174,9 +174,9 @@ First, you should write a `SELECT` query in a loop of your application or script
 
 ### Example
 
-Suppose that you have had a lot of book ratings from users on your `bookshop` website over the past year, but the original design of a 5-point scale has resulted in a lack of differentiation in book ratings. A large number of books rated around a `3`. You decide to switch from a 5-point scale to a 10-point scale to increase the differentiation of book ratings.
+Suppose that you have had a lot of book ratings from users on your `bookshop` website over the past year, but the original design of a 5-point scale has resulted in a lack of differentiation in book ratings. Most books are rated `3`. You decide to switch from a 5-point scale to a 10-point scale to differentiate ratings.
 
-At this point, you need to multiply by `2` the data in the `ratings` table from the previous 5-point scale and add a new column to the ratings table to indicate whether the rows have been updated. Using this column, you can filter out rows that have been updated in `SELECT`, which will prevent the script from crashing and updating the rows multiple times, resulting in unreasonable data.
+You need to multiply by `2` the data in the `ratings` table from the previous 5-point scale, and add a new column to the ratings table to indicate whether the rows have been updated. Using this column, you can filter out rows that have been updated in `SELECT`, which will prevent the script from crashing and updating the rows multiple times, resulting in unreasonable data.
 
 For example, you create a column named `ten_point` with the data type [BOOL](/data-type-numeric.md#boolean-type) as an identifier of whether it is a 10-point scale:
 
@@ -188,12 +188,12 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 
 > **Note:**
 >
-> This bulk-update application uses **DDL** statements to make schema changes to the data tables. All DDL change operations for TiDB are executed online. For more information, see [ADD COLUMN](/common/sql-statements/sql-statement-add-column.md).
+> This bulk-update application uses the **DDL** statements to make schema changes to the data tables. All DDL change operations for TiDB are executed online. For more information, see [ADD COLUMN](/common/sql-statements/sql-statement-add-column.md).
 
 <SimpleTab>
 <div label="Golang">
 
-In Golang, a bulk-update application might be similar to the following:
+In Golang, a bulk-update application is similar to the following:
 
 ```go
 package main
@@ -269,7 +269,7 @@ func placeHolder(n int) string {
 }
 ```
 
-In each iteration, `SELECT` queries in order of the primary key, selecting primary key values for up to `1000` rows of data that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` with a primary key larger than the largest of the previous `SELECT` results to prevent duplication. Then, using a bulk-update, multiply its `score` column by `2` and set `ten_point` to `true`. The point of updating `ten_point` is to prevent our update application from crashing and restarting and repeatedly updating the same row of data, which can lead to data corruption. `time.Sleep(time.Second)` in each loop will make the update application pause for 1 second to prevent the update application from consuming too much hardware resources.
+In each iteration, `SELECT` queries in order of the primary key. It selects primary key values for up to `1000` rows that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` statement selects primary keys larger than the largest of the previous `SELECT` results to prevent duplication. Then, it uses bulk-update, multiples its `score` column by `2`, and sets `ten_point` to `true`. The purpose of updating `ten_point` is to prevent the update application from repeatedly updating the same row in case of restart after crashing, which can cause data corruption. `time.Sleep(time.Second)` in each loop makes the update application pause for 1 second to prevent the update application from consuming too many hardware resources.
 
 </div>
 
@@ -439,7 +439,7 @@ public class BatchUpdateExample {
 </hibernate-configuration>
 ```
 
-In each iteration, `SELECT` queries in order of the primary key, selecting primary key values for up to `1000` rows of data that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` with a primary key larger than the largest of the previous `SELECT` results to prevent duplication. Then, using a bulk-update, multiply its `score` column by `2` and set `ten_point` to `true`. The point of updating `ten_point` is to prevent the update application from crashing and restarting and repeatedly updating the same row of data, which can lead to data corruption. `TimeUnit.SECONDS.sleep(1);` in each loop will make the update application pause for 1 second to prevent the update application from consuming too much hardware resources.
+In each iteration, `SELECT` queries in order of the primary key. It selects primary key values for up to `1000` rows that have not been updated to the 10-point scale (`ten_point` is `false`). Each `SELECT` statement selects primary keys larger than the largest of the previous `SELECT` results to prevent duplication. Then, it uses bulk-update, multiples its `score` column by `2`, and sets `ten_point` to `true`. The purpose of updating `ten_point` is to prevent the update application from repeatedly updating the same row in case of restart after crashing, which can cause data corruption. `TimeUnit.SECONDS.sleep(1);` in each loop makes the update application pause for 1 second to prevent the update application from consuming too many hardware resources.
 
 </div>
 
