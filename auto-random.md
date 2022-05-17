@@ -66,7 +66,11 @@ To use different number of shard bits, append a pair of parentheses to `AUTO_RAN
 CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM(3), b varchar(255))
 ```
 
+<<<<<<< HEAD
 In the above `CREATE TABLE` statement, `3` shard bits are specified. The range of the number of shard bits is `[1, field_max_bits)`. `field_max_bits` is the length of bits occupied by the primary key column.
+=======
+In the above `CREATE TABLE` statement, `3` shard bits are specified. The range of the number of shard bits is `[1, 16)`.
+>>>>>>> d5f369c42 (Update auto-random.md (#8661))
 
 After creating the table, use the `SHOW WARNINGS` statement to see the maximum number of implicit allocations supported by the current table:
 
