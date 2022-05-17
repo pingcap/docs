@@ -1,31 +1,31 @@
 ---
 title: Optimize SQL Performance Overview
-summary: Provides an overview of SQL performance tuning for TiDB.
+summary: Provides an overview of SQL performance tuning for TiDB application developers.
 ---
 
 # Optimize SQL Performance Overview
 
-This section introduce how to optimize the performance of SQL in TiDB. To get good performance, you can start with the following:
+This document introduces how to optimize the performance of SQL statements in TiDB. To get good performance, you can start with the following aspects:
 
-* SQL Performance Tuning
-* Schema design: Depending on your SQL schema and the data access patterns of your workload, you may need to make some changes to the table's schema in order to avoid transaction contention or hot spots.
+* SQL performance tuning
+* Schema design: Based on your application workload patterns, you might need to make some changes to the table schema to avoid transaction contention or hot spots.
 
-## SQL Performance Tuning
+## SQL performance tuning
 
 To get good SQL statement performance, you can follow these guidelines:
 
-* Scan as few rows as possible. It's best to scan only the data you need and avoid scanning excess data.
-* Use right index, you need to ensure that there is a corresponding index for the column in the `WHERE` clause in SQL, otherwise it will be a full table scan, and the performance will be poor.
-* Use the right join type. Depending on the relative size of the tables in the query, it is also important to choose the right join type. In general, TiDB's cost-base optimizer should pick the best-performing join type. However, in a few cases it may be better for the user to specify the join type manually.
-* Use the right storage engine. For mixed OLTP and OLAP workloads, the TiFlash engine is recommended. For details, see [HTAP Query](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
+* Scan as few rows as possible. It is recommended to scan only the data you need and avoid scanning excess data.
+* Use the right index. Ensure that there is a corresponding index for the column in the `WHERE` clause in SQL. If not, the statement entails a full table scan and thus poor performance.
+* Use the right join type. It is important to choose the right join type based on the relative size of the tables involved in the query. In general, TiDB's cost-based optimizer picks the best-performing join type. However, in a few cases, it might be better if the user manually specifies the join type.
+* Use the right storage engine. For hybrid OLTP and OLAP workloads, the TiFlash engine is recommended. For details, see [HTAP Query](/develop/dev-guide-hybrid-oltp-and-olap-queries.md).
 
-## Schema Design
+## Schema design
 
-If you still not get good performance after tuning according to [SQL Performance Tuning](#sql-performance-tuning), you may need to check your schema design and data access patterns to make sure you avoid the following issues:
+After [tuning SQL performance](#sql-performance-tuning), if your application still cannot get good performance, you might need to check your schema design and data access patterns to avoid the following issues:
 
 * Transaction contention. For how to diagnose and resolve transaction contention, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 * Hot spots. For how to diagnose and resolve hot spots, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
-### See Also
+### See also
 
 * [SQL Performance Tuning](/sql-tuning-overview.md)
