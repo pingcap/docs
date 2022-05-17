@@ -3,7 +3,7 @@ title: Optimistic transaction and pessimistic transaction
 summary: Introduces optimistic and pessimistic transactions in TiDB, retries of optimistic transaction, etc.
 ---
 
-# Optimistic transaction and pessimistic transactions
+# Optimistic transactions and pessimistic transactions
 
 The [optimistic transaction](/optimistic-transaction.md) model commits the transaction directly, and rolls back when there is a conflict. By contrast, the [pessimistic transaction](/pessimistic-transaction.md) model tries to lock the resources that need to be modified before actually committing the transaction, and only starts committing after ensuring that the transaction can be successfully executed.
 
