@@ -49,9 +49,9 @@ Result:
 3 rows in set (0.00 sec)
 ```
 
-As you can see, since the `a`.`class` and `a`.`stuname` fields are specified in the `GROUP BY` statement, and the selected columns are `a`.`class`, `a`.`stuname` and `b`.`courscore`. The only column that is not in the `GROUP BY` condition, `b`.`courscore`, is also specified with a unique value using the `max()` function. That is, there is **_ONLY ONE_** result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
+The `a`.`class` and `a`.`stuname` fields are specified in the `GROUP BY` statement, and the selected columns are `a`.`class`, `a`.`stuname` and `b`.`courscore`. The only column that is not in the `GROUP BY` condition, `b`.`courscore`, is also specified with a unique value using the `max()` function. There is **_ONLY ONE_** result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
 
-And the counter example is the `NON-FULL GROUP BY` syntax. For example,  in these two tables, write the following SQL query (delete `a`.`stuname` in `GROUP BY`).
+The counter example is the `NON-FULL GROUP BY` syntax. For example, in these two tables, write the following SQL query (delete `a`.`stuname` in `GROUP BY`).
 
 {{< copyable "sql" >}}
 
@@ -94,9 +94,9 @@ The second returned value:
    +------------+--------------+------------------+
    ```
 
-It happens because you did **_NOT_** specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. This results in an unstable result set. Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
+It happens because you did **_NOT_** specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. It results in an unstable result set. Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
 
-MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not, TiDB is also compatible with this `sql_mode` switch.
+MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not. TiDB is also compatible with this `sql_mode` switch.
 
 {{< copyable "sql" >}}
 
@@ -121,7 +121,7 @@ ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and cont
 
 ## ORDER BY
 
-In SQL semantics, the result set is output in order only if the `ORDER BY` syntax is used. For a single-instance database,since the data is stored on one server, the results of multiple executions are often stable without data reorganization. Some databases (especially the MySQL InnoDB storage engine) can even output the result sets in the order of the primary key or index.
+In SQL semantics, the result set is output in order only if the `ORDER BY` syntax is used. For a single-instance database, since the data is stored on one server, the results of multiple executions are often stable without data reorganization. Some databases (especially the MySQL InnoDB storage engine) can even output the result sets in order of the primary key or index.
 
 As a distributed database, TiDB stores data on multiple servers. In addition, the TiDB layer does not cache data pages, so the result set order of SQL statements without `ORDER BY` is easily perceived as unstable. To output a sequential result set, you need to explicitly add the order field into the `ORDER BY` clause, which conforms to SQL semantics.
 
@@ -181,7 +181,7 @@ Results are unstable when the `ORDER BY` values are the same. To reduce randomne
 
 The result set is unstable because TiDB reads data from the storage layer in parallel, so the result set order returned by `GROUP_CONCAT()` without `ORDER BY` is easily perceived as unstable.
 
-To let `GROUP_CONCAT()` get the result set output in order, you need to add the sorting fields to the `ORDER BY` clause, which conforms to the SQL semantics. In the following example, using `GROUP_CONCAT()` to splice `customer_id` without `ORDER BY` causes the result set to be unstable.
+To let `GROUP_CONCAT()` get the result set output in order, you need to add the sorting fields to the `ORDER BY` clause, which conforms to the SQL semantics. In the following example, `GROUP_CONCAT()` that splices `customer_id` without `ORDER BY` causes an unstable result set.
 
 1. Excluded `ORDER BY`
 
