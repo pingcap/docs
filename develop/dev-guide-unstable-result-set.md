@@ -9,7 +9,7 @@ This document describes how to solve unstable result set errors.
 
 ## GROUP BY
 
-For convenience, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, i.e., the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes unstable result sets.
+For convenience, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, that is, the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes unstable result sets.
 
 For example, you have two tables:
 
@@ -38,6 +38,7 @@ ORDER BY
 
 Result:
 
+```sql
 +------------+--------------+------------------+
 | class      | stuname      | max(b.courscore) |
 +------------+--------------+------------------+
@@ -46,6 +47,7 @@ Result:
 | 2018_CS_03 | SpongeBob    |             95.0 |
 +------------+--------------+------------------+
 3 rows in set (0.00 sec)
+```
 
 As you can see, since the `a`.`class` and `a`.`stuname` fields are specified in the `GROUP BY` statement, and the selected columns are `a`.`class`, `a`.`stuname` and `b`.`courscore`. The only column that is not in the `GROUP BY` condition, `b`.`courscore`, is also specified with a unique value using the `max()` function. That is, there is **_ONLY ONE_** result that satisfies this SQL statement without any ambiguity, which is called the `FULL GROUP BY` syntax.
 
