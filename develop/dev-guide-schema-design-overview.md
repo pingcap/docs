@@ -21,7 +21,7 @@ To distinguish with some general terms, here is a brief agreement on the terms u
 
 Database in the TiDB is a collection of objects such as tables and indexes.
 
-Each TiDB cluster comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
+TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
 
 ### Table
 
