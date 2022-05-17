@@ -152,7 +152,7 @@ We can query the indexes in the table using the [SHOW INDEXES](/common/sql-state
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
 
-Running results:
+Running result:
 
 ```
 +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
