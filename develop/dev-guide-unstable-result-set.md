@@ -11,7 +11,10 @@ This chapter will describe the treatment of result set unstable errors.
 
 For convenience reasons, MySQL "extends" the `GROUP BY` syntax to allow the `SELECT` clause to refer to non-aggregated fields not declared in the `GROUP BY` clause, i.e., the `NON-FULL GROUP BY` syntax. In other databases, this is considered a syntax **_ERROR_** because it causes the result set to be unstable.
 
-For example, we have two tables: `stu_info` to save student information data and `stu_score` to holdsave student test scores.
+For example, you have two tables:
+
+- `stu_info` stores the student information
+- `stu_score` stores the student test scores.
 
 Then you can write a SQL query statement like this:
 
@@ -91,7 +94,7 @@ There will be two results that match this SQL:
    +------------+--------------+------------------+
    ```
 
-This happens because you did **_NOT_** specify how to value the `a`.`stuname` field in the SQL, and both results are consistent with the SQL semantics. This results in an unstable result set.Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, please use `FULL GROUP BY` syntax.
+It happens because you did **_NOT_** specify how to get the value of the `a`.`stuname` field in SQL, and two results are both satisfied by SQL semantics. This results in an unstable result set. Therefore, if you want to guarantee the stability of `GROUP BY` statement result set, use the `FULL GROUP BY` syntax.
 
 MySQL provides a `sql_mode` switch `ONLY_FULL_GROUP_BY` to control whether to check the `FULL GROUP BY` syntax or not, TiDB is also compatible with this `sql_mode` switch.
 
