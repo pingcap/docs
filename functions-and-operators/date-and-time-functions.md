@@ -78,29 +78,3 @@ TiDB supports all of the [date and time functions](https://dev.mysql.com/doc/ref
 | [`YEARWEEK()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_yearweek) | Return the year and week                 |
 
 For details, see [Date and Time Functions](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html).
-<<<<<<< HEAD
-=======
-
-## MySQL compatibility
-
-The function `str_to_date()` is supported by TiDB, but is unable to parse all date and time values. In addition, the following date and time formatting options are **not implemented**:
-
-| Format | Description                                                                           |
-|--------|---------------------------------------------------------------------------------------|
-| "%a"   | Abbreviated weekday name (Sun..Sat)                                                   |
-| "%D"   | Day of the month with English suffix (0th, 1st, 2nd, 3rd)                             |
-| "%U"   | Week (00..53), where Sunday is the first day of the week; WEEK() mode 0               |
-| "%u"   | Week (00..53), where Monday is the first day of the week; WEEK() mode 1               |
-| "%V"   | Week (01..53), where Sunday is the first day of the week; WEEK() mode 2; used with %X |
-| "%v"   | Week (01..53), where Monday is the first day of the week; WEEK() mode 3; used with %x |
-| "%W"   | Weekday name (Sunday..Saturday)                                                       |
-| "%w"   | Day of the week (0=Sunday..6=Saturday)                                                |
-| "%X"   | Year for the week where Sunday is the first day of the week, numeric, four digits.    |
-| "%x"   | Year for the week, where Monday is the first day of the week, numeric, four digits.   |
-
-See [issue #30082](https://github.com/pingcap/tidb/issues/30082) for more details.
-
-## Related system variables
-
-The `default_week_format` variable affects the `WEEK()` function.
->>>>>>> bdee50183 (Add notes on datetime (#7468))
