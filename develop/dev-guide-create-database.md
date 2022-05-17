@@ -1,15 +1,15 @@
 ---
 title: Create a Database
-summary: Learn methods, rules, and examples to create a database.
+summary: Learn steps, rules, and examples to create a database.
 ---
 
 # Create a Database
 
-This document describes how to create a database using SQL and various programming languages and lists the rules in database creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of database creation.
+This document describes how to create a database using SQL and various programming languages and lists the rules of database creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of database creation.
 
 ## Before you start
 
-Before reading this page, you need to prepare the following:
+Before creating a database, do the following:
 
 - [Build a TiDB Cluster in TiDB Cloud Developer Tier](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
@@ -20,7 +20,7 @@ Before reading this page, you need to prepare the following:
 
 ## Create a database
 
-You can use the [`CREATE DATABASE`](/common/sql-statements/sql-statement-create-database.md) statement to create a database.
+To create a database, you can use the `CREATE DATABASE` statement.
 
 For example, to create a database named `bookshop` if it does not exist, use the following statement:
 
@@ -29,6 +29,8 @@ For example, to create a database named `bookshop` if it does not exist, use the
 ```sql
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
+
+For more information and examples of the `CREATE DATABASE` statement, see the [`CREATE DATABASE`](/common/sql-statements/sql-statement-create-database.md) document.
 
 To execute the library build statement as the **root user**, run the following command:
 
@@ -83,4 +85,4 @@ The following is an example output:
 
 ## Next step
 
-After creating a database, you can add **tables** to it. For information on how to add a table, see [Create a Table](/develop/dev-guide-create-table.md).
+After creating a database, you can add **tables** to it. For more information, see [Create a Table](/develop/dev-guide-create-table.md).
