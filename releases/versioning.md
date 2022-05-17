@@ -24,11 +24,11 @@ TiDB versioning has the form of `X.Y.Z`. `X.Y` represents a release series.
 
 For the versioning system of TiDB v5.0.0 and earlier versions, refer to [Historical versioning](#historical-versioning-deprecated).
 
-## Long-Term Support Releases
+## Long-Term Support releases
 
-Long-Term Support Releases (LTS) are released approximately every six months and introduce new features, improvements, bug fixes and security vulnerability fixes.
+Long-Term Support (LTS) versions are released approximately every six months and introduce new features, improvements, bug fixes and security vulnerability fixes.
 
-LTS are versioned as `X.Y.Z`. `Z` defaults to 0.
+LTS releases are versioned as `X.Y.Z`. `Z` defaults to 0.
 
 Example versions:
 
@@ -39,7 +39,7 @@ During the lifecycle of LTS, patch releases are made available on demand. Patch 
 
 Patch releases are versioned as `X.Y.Z`. `X.Y` is consistent with the corresponding LTS versioning. The patch number `Z` increments from 1.
 
-Example versions:
+Example version:
 
 - 6.1.1
 
@@ -49,23 +49,23 @@ v5.1.0, v5.2.0, v5.3.0, v5.4.0 were released only two months after their precedi
 
 ## Development Milestone Releases
 
-Development Milestone Releases (DMR) are released approximately every two months that do not contain LTS. DMR introduce new features, improvements and bug fixes. TiDB does not provide patch releases based on DMR, and any related bugs are fixed in the subsequent release series.
+Development Milestone Releases (DMR) are released approximately every two months that do not contain LTS. DMR versions introduce new features, improvements and bug fixes. TiDB does not provide patch releases based on DMR, and any related bugs are fixed in the subsequent release series.
 
 DMR are versioned as `X.Y.Z`. `Z` defaults to 0. A `-DMR` suffix is appended to the version number.
 
-Example versions:
+Example version:
 
 - 6.0.0-DMR
 
 ## Versioning of TiDB ecosystem tools
 
-Some TiDB tools are released together with TiDB server and use the same version numbering system, such as TiDB Lightning. Some TiDB tools are released separately from the TiDB server and use their own version numbering system, such as TiUP and TiDB Operator.
+Some TiDB tools are released together with the TiDB server and use the same version numbering system, such as TiDB Lightning. Some TiDB tools are released separately from the TiDB server and use their own version numbering system, such as TiUP and TiDB Operator.
 
 ## Historical versioning (deprecated)
 
-### General Availability Releases
+### General Availability releases
 
-General Availability Releases (GA) are stable versions of the current release series of TiDB. GA are released after Release Candidate Releases (RC). GA can be used in production environments.
+General Availability (GA) releases are stable versions of the current release series of TiDB. GA versions are released after Release Candidate (RC) versions. GA can be used in production environments.
 
 Example versions:
 
@@ -73,9 +73,9 @@ Example versions:
 - 2.1 GA
 - 5.0 GA
 
-### Release Candidate Releases
+### Release Candidate releases
 
-Release Candidate Releases (RC) introduce new features and improvements. RC are significantly more stable than Beta releases. RC can be used for early testing, but are not suitable for production.
+Release Candidate (RC) releases introduce new features and improvements. RC versions are significantly more stable than Beta versions. RC can be used for early testing, but are not suitable for production.
 
 Example versions:
 
@@ -83,9 +83,9 @@ Example versions:
 - 2.0-RC1
 - 3.0.0-rc.1
 
-### Beta Releases
+### Beta releases
 
-Beta Releases introduces new features and improvements. Beta Releases are greatly improved over Alpha Releases and have eliminated critical bugs, but still contain some bugs. Beta Releases are available for users to test the latest features.
+Beta releases introduces new features and improvements. Beta versions are greatly improved over Alpha versions and have eliminated critical bugs, but still contain some bugs. Beta releases are available for users to test the latest features.
 
 Example versions:
 
@@ -93,10 +93,10 @@ Example versions:
 - 2.1 Beta
 - 4.0.0-beta.1
 
-### Alpha Releases
+### Alpha releases
 
-Alpha Releases are internal releases for testing and introduce new features and improvements. Alpha releases are the initial versions of the current release series. Alpha Releases might have some bugs and are available for users to test the latest features.
+Alpha releases are internal releases for testing and introduce new features and improvements. Alpha releases are the initial versions of the current release series. Alpha releases might have some bugs and are available for users to test the latest features.
 
-Example versions:
+Example version:
 
 - 1.1 Alpha
