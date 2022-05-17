@@ -51,7 +51,7 @@ v5.1.0, v5.2.0, v5.3.0, v5.4.0 were released only two months after their precedi
 
 Development Milestone Releases (DMR) are released approximately every two months that do not contain LTS. DMR versions introduce new features, improvements and bug fixes. TiDB does not provide patch releases based on DMR, and any related bugs are fixed in the subsequent release series.
 
-DMR are versioned as `X.Y.Z`. `Z` defaults to 0. A `-DMR` suffix is appended to the version number.
+DMRs are versioned as `X.Y.Z`. `Z` defaults to 0. A `-DMR` suffix is appended to the version number.
 
 Example version:
 
