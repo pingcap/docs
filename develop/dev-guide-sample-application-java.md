@@ -13,10 +13,8 @@ This document will show you how to use TiDB and Java to build a simple CRUD appl
 > **Note:**
 >
 > We recommend writing TiDB applications using Java 8 later version.
-
-> Tip:
 >
-> If you want to write a TiDB application using Spring Boot, you can check to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+> If you want to write a TiDB application using Spring Boot, you can refer to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
 
 ## Step 1. Launch your TiDB cluster
 
@@ -30,7 +28,7 @@ This part describes how to start a TiDB cluster.
 
 This will briefly describe the process of starting a test cluster, for a full environment cluster deployment, or to see a more detailed deployment, please refer to [Starting TiDB Locally](/quick-start-with-tidb.md).
 
-**Deploy local test clusters**
+**Deploy a local test cluster**
 
 Applicable scenario: Use a local macOS or single-instance Linux environment to quickly deploy a TiDB test cluster, and experience the basic architecture of a TiDB cluster, and the operation of basic components such as TiDB, TiKV, PD, and Monitoring.
 
