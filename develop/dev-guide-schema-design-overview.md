@@ -13,13 +13,13 @@ In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-desig
 
 To distinguish with some general terms, here is a brief agreement on the terms used in TiDB database schema design:
 
-- To avoid confusion with the generic term [Database](https://en.wikipedia.org/wiki/Database), **Database** in this document is referred to as the logical object, TiDB is still referred to as **TiDB**, and the deployed instances of TiDB is referred to as **Cluster**.
+- To avoid confusion with the generic term [Database](https://en.wikipedia.org/wiki/Database), **Database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
 
-- Because TiDB uses a MySQL-compatible syntax, under this syntax, **Schema** represents a [generic term definition only](https://en.wiktionary.org/wiki/schema), and there is no **logical object definition** according to [MySQL document](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from other databases that have schema logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
+- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [Schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in database. For more information, see [MySQL documentation](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that treat schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
 
 ### Database
 
-Database in TiDB is a collection of objects such as tables and indexes.
+A database in TiDB is a collection of objects such as tables and indexes.
 
 TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
 
@@ -27,7 +27,7 @@ TiDB comes with a default database named `test`. However, it is recommended that
 
 A table is a collection of related data in a [Database](#database).
 
-Each table consists of **rows** and **columns**. Each value in a row belongs to a specific **column**. Each column allows only a single data type. To further qualify the columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns (experimental feature)](/generated-columns.md).
+Each table consists of **rows** and **columns**. Each value in a row belongs to a specific **column**. Each column allows only a single data type. To further qualify columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns (experimental feature)](/generated-columns.md).
 
 ### Index
 
@@ -35,12 +35,12 @@ An index is a copy of selected columns in a table. You can create an index using
 
 There are two common types of indexes:
 
-- **Primary Key**: Indexes on the primary key column.
-- **Secondary Index**: Indexes on non-primary key columns.
+- **Primary Key**: indexes on the primary key column.
+- **Secondary Index**: indexes on non-primary key columns.
 
 > **Note:**
 >
-> In TiDB, the default definition of **Primary Key** is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL).
+> In TiDB, the default definition of **Primary Key** is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/) (the common storage engine of MySQL).
 >
 > - In InnoDB, the definition of **Primary Key** is unique, not null, and a **clustered index**.
 > - In TiDB, the definition of **Primary Key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. To specify whether the primary key is a clustered index, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement. If a statement does not explicitly specify the keyword `CLUSTERED` or `NONCLUSTERED`, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. For more information, see [Clustered Indexes](/clustered-indexes.md).
@@ -61,11 +61,11 @@ To improve query performance of various user scenarios, TiDB provides some speci
 
 ### Other supported logical objects
 
-TiDB supports several logical objects at the same level as **table**:
+TiDB supports the following logical objects at the same level as **table**:
 
-- [Views](/views.md): a view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
+- [View](/views.md): a view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
 - [Sequence](/common/sql-statements/sql-statement-create-sequence.md): a sequence generates and stores sequential data.
-- [Temporary tables](/temporary-tables.md): a table whose data is not persistent.
+- [Temporary table](/temporary-tables.md): a table whose data is not persistent.
 
 ## Access Control
 
@@ -73,7 +73,7 @@ TiDB supports both user-based and role-based access control. To allow users to v
 
 ## Database schema changes
 
-To change database schemas, using a Driver or ORM  is not recommended. Instead, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or any GUI client, which is a best practice based on experience. In the subsequent documents, **MySQL client** will be used to execute database schema changes.
+As a best practice based on experience, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead a driver or ORM to execute database schema changes.
 
 ## Object limitations
 
