@@ -1,11 +1,11 @@
 ---
 title: Handle Transaction Errors
-summary: Describes how to handle transaction errors.
+summary: Learn about how to handle transaction errors, such as deadlocks and application retry errors.
 ---
 
 # Handle Transaction Errors
 
-This document introduces how to handle deadlocks.
+This document introduces how to handle transaction errors, such as deadlocks and application retry errors.
 
 ## Deadlocks
 
