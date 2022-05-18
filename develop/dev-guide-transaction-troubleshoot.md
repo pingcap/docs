@@ -19,7 +19,7 @@ A deadlock occurs when two or more transactions are waiting for each other to re
 
 The following is an example of a deadlock using the table `books` in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database:
 
-First insert 2 rows into the table `books`:
+First, insert 2 rows into the table `books`:
 
 ```sql
 INSERT INTO books (id, title, stock, published_at) VALUES (1, 'book-1', 10, now()), (2, 'book-2', 10, now());
@@ -36,11 +36,11 @@ In TiDB pessimistic transaction model, if two clients execute the following stat
 | UPDATE books SET stock=stock-1 WHERE id=2; -- execution will be blocked |                                                                     |
 |                                                               | UPDATE books SET stock=stock-1 WHERE id=1; -- a deadlock error occurs |
 
-After client-B encounters a deadlock error, TiDB will automatically `ROLLBACK` the transaction in client-B, and then update `id=2` in client-A will be executed successfully. You can then run `COMMIT` to finish the transaction.
+After client-B encounters a deadlock error, TiDB automatically rolls back the transaction in client-B. Update `id=2` in client-A will be executed successfully. You can then run `COMMIT` to finish the transaction.
 
 ### Solution 1：avoid deadlocks
 
-To get better performance, you can avoid deadlocks at the application level by adjusting the business logic or schema design. In the example above, if client-B also uses the same update order as client-A, that is, they `UPDATE` books with `id=1` first, and then `UPDATE` books with `id=2`. The deadlock can then be avoided:
+To get better performance, you can avoid deadlocks at the application level by adjusting the business logic or schema design. In the example above, if client-B also uses the same update order as client-A, that is, they update books with `id=1` first, and then update books with `id=2`. The deadlock can then be avoided:
 
 | Client-A                                                    | Client-B                                                         |
 | ---------------------------------------------------------- | ----------------------------------------------------------------|
@@ -65,26 +65,26 @@ If you only update 1 book in each transaction, you can also avoid deadlocks. How
 
 ### Solution 3: use optimistic transactions
 
-There are no deadlocks in the optimistic transaction model, but in your application, you need to add the optimistic transaction retry logic upon failure. For details, see [Application retry and error handling](#application-retry-and-error-handling).
+There are no deadlocks in the optimistic transaction model. But in your application, you need to add the optimistic transaction retry logic in case of failure. For details, see [Application retry and error handling](#application-retry-and-error-handling).
 
 ### Solution 4: retry
 
-As suggested in the error message, just add the retry logic in the application. For details, see [Application retry and error handling](#application-retry-and-error-handling).
+Add the retry logic in the application as suggested in the error message. For details, see [Application retry and error handling](#application-retry-and-error-handling).
 
 ## Application retry and error handling
 
 Although TiDB is as compatible as possible with MySQL, the nature of its distributed system leads to certain differences. One of them is the transaction model.
 
-The Adapters and ORMs that developers use to connect with databases are tailored for traditional databases such as MySQL and Oracle. In these databases, transactions rarely fail to commit at the default isolation level, so no retry mechanism is required. For these clients, when a transaction commit fails, they abort due to an error, as this is presented as an exception in these databases.
+The Adapters and ORMs that developers use to connect with databases are tailored for traditional databases such as MySQL and Oracle. In these databases, transactions rarely fail to commit at the default isolation level, so retry mechanisms are not required. When a transaction fails to commit, these clients abort due to an error, as it is treated as an exception in these databases.
 
 Different from traditional databases such as MySQL, in TiDB, if you use the optimistic transaction model and want to avoid commit failure, you need to add a mechanism to handle related exceptions in your applications.
 
-The following Python pseudocode shows how to implement application-level retries. It does not require your driver or ORM to implement advanced retry logic, so it can be used in any programming language or environment.
+The following Python pseudocode shows how to implement application-level retries. It does not require your driver or ORM to implement advanced retry logic. It can be used in any programming language or environment.
 
 Your retry logic must follow the following rules:
 
 - Throws an error if the number of failed retries reaches the `max_retries` limit.
-- Use `try ... catch ...` to catch SQL execution exceptions. Retry when encountering the following errors. Roll back when encountering other errors. More error code detail, see [Error Codes and Troubleshooting](/error-codes.md).
+- Use `try ... catch ...` to catch SQL execution exceptions. Retry when encountering the following errors. Roll back when encountering other errors. For more information about error codes, see [Error Codes and Troubleshooting](/error-codes.md).
     - `Error 8002: can not retry select for update statement`: SELECT FOR UPDATE write conflict error
     - `Error 8022: Error: KV error safe to retry`: transaction commit failed error.
     - `Error 8028: Information schema is changed during the execution of the statement`: Table schema has been changed by DDL operation, resulting in an error in the transaction commit.
@@ -115,7 +115,7 @@ while True:
 
 > Note:
 >
-> If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of conflict and avoid conflicts by design.
+> If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of the conflict and try to avoid conflicts by a better design.
 > For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
 ## See also
