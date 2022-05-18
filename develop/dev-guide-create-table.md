@@ -110,9 +110,9 @@ This table contains more data types than the `users` table.
 
 > **Note:**
 >
-> In TiDB, the default definition of **Primary Key** is different from [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL). In **InnoDB**, the semantics of **Primary Key** is unique, not null, and **index clustered**.
+> In TiDB, the default definition of **primary key** is different from [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL). In **InnoDB**, the semantics of **primary key** is unique, not null, and **index clustered**.
 >
-> However, in TiDB, the definition of **Primary Key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **Primary Key** is a **Clustered Index**. If the keyword is not specified, it is controlled by the system variable `@@global.tidb_enable_clustered_index`, as described in [clustered indexes](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes).
+> However, in TiDB, the definition of **primary key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **primary key** is a **clustered index**. If the keyword is not specified, it is controlled by the system variable `@@global.tidb_enable_clustered_index`, as described in [clustered indexes](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes).
 
 The **primary key** is defined in the `CREATE TABLE` statement. The [primary key constraint](/constraints.md#primary-key) requires that all constrained columns contain only non-NULL values.
 
@@ -122,7 +122,7 @@ When the **primary key** of a table is an [integer type](/data-type-numeric.md#i
 
 For more information on how to handle hotspot issues, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
-Following the [guidelines for selecting primary key](#rules-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
+Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), the following example shows how an `AUTO_RANDOM` primary key is defined in the `users` table.
 
 {{< copyable "sql" >}}
 
@@ -155,7 +155,7 @@ As described in [select primary key](#select-primary-key), **clustered indexes**
 >
 > TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
 
-Following the [guidelines for selecting clustered index](#rules-to-follow-when-selecting-clustered-index), the following example creates a table with an association between `books` and `users`, which represents the `ratings` of a `book` by `users`. The example creates the table and constructs a composite primary key using `book_id` and `user_id`, and creates a **clustered index** on that **primary key**.
+Following the [guidelines for selecting clustered index](#guidelines-to-follow-when-selecting-clustered-index), the following example creates a table with an association between `books` and `users`, which represents the `ratings` of a `book` by `users`. The example creates the table and constructs a composite primary key using `book_id` and `user_id`, and creates a **clustered index** on that **primary key**.
 
 {{< copyable "sql" >}}
 
@@ -371,7 +371,7 @@ Running results:
 
 - Check the [data types](/basic-features.md#data-types-functions-and-operators) of the supporting columns and organize your data according to the data type restrictions. Select the appropriate type for the data you plan to be present in the column.
 - Check the [guidelines to follow](#guidelines-to-follow-when-selecting-primary-key) for selecting primary keys and decide whether to use primary key columns.
-- Check the [guidelines to follow](#rules-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
+- Check the [guidelines to follow](#guidelines-to-follow-when-selecting-clustered-index) for selecting clustered indexes and decide whether to specify **clustered indexes**.
 - Check [adding column constraints](#add-column-constraints) and decide whether to add constraints to the columns.
 - Use meaningful column names. It is recommended that you follow your company or organization's table naming convention. If your company or organization does not have a corresponding naming convention, refer to the [column naming convention](/develop/dev-guide-object-naming-guidelines.md#field-naming-convention).
 
@@ -387,7 +387,7 @@ Running results:
 
 ### Guidelines to follow when selecting clustered index
 
-- Following the [guidelines for selecting primary key](#rules-to-follow-when-selecting-primary-key), **Clustered indexes** will be built based on **primary keys**.
+- Following the [guidelines for selecting primary key](#guidelines-to-follow-when-selecting-primary-key), **Clustered indexes** will be built based on **primary keys**.
 - Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
     - When data is inserted, the clustered index reduces one write of the index data from the network.
     - When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
