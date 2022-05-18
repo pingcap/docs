@@ -11,11 +11,11 @@ In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-desig
 
 ## Objects in TiDB
 
-To distinguish with some general terms, here is a brief agreement on the terms used in TiDB database schema design:
+To distinguish with some general terms, here is a brief agreement on the terms used in TiDB:
 
-- To avoid confusion with the generic term [Database](https://en.wikipedia.org/wiki/Database), **Database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
+- To avoid confusion with the generic term [database](https://en.wikipedia.org/wiki/Database), **database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
 
-- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [Schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in database. For more information, see [MySQL documentation](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that treat schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
+- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in database. For more information, see [MySQL documentation](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that have schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
 
 ### Database
 
@@ -25,7 +25,7 @@ TiDB comes with a default database named `test`. However, it is recommended that
 
 ### Table
 
-A table is a collection of related data in a [Database](#database).
+A table is a collection of related data in a [database](#database).
 
 Each table consists of **rows** and **columns**. Each value in a row belongs to a specific **column**. Each column allows only a single data type. To further qualify columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns (experimental feature)](/generated-columns.md).
 
@@ -40,14 +40,14 @@ There are two common types of indexes:
 
 > **Note:**
 >
-> In TiDB, the default definition of **Primary Key** is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/) (the common storage engine of MySQL).
+> In TiDB, the default definition of **Primary Key** is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/) (a common storage engine of MySQL).
 >
 > - In InnoDB, the definition of **Primary Key** is unique, not null, and a **clustered index**.
-> - In TiDB, the definition of **Primary Key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. To specify whether the primary key is a clustered index, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement. If a statement does not explicitly specify the keyword `CLUSTERED` or `NONCLUSTERED`, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. For more information, see [Clustered Indexes](/clustered-indexes.md).
+> - In TiDB, the definition of **Primary Key** is unique and not null. But the primary key is not guaranteed to be a **clustered index**. To specify whether the primary key is a clustered index, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement. If a statement does not explicitly specify these keywords, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. For more information, see [Clustered Indexes](/clustered-indexes.md).
 
 #### Specialized indexes
 
-To improve query performance of various user scenarios, TiDB provides some specialized types of indexes. For details of each type, see the following links:
+To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see the following links:
 
 - [Expression indexes](/common/sql-statements/sql-statement-create-index.md#expression-index) (Experimental)
 - [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)
@@ -73,11 +73,11 @@ TiDB supports both user-based and role-based access control. To allow users to v
 
 ## Database schema changes
 
-As a best practice based on experience, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead a driver or ORM to execute database schema changes.
+As a best practice, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead a driver or ORM to execute database schema changes.
 
 ## Object limitations
 
-This section describes the object limitations on identifier length, a single table, and string types. For more information, see [TiDB Limitations](/tidb-limitations.md).
+This section lists the object limitations on identifier length, a single table, and string types. For more information, see [TiDB Limitations](/tidb-limitations.md).
 
 ### Limitations on identifier length
 
