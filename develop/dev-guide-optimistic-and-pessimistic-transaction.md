@@ -1,6 +1,6 @@
 ---
 title: Optimistic transaction and pessimistic transaction
-summary: Introduces optimistic and pessimistic transactions in TiDB, retries of optimistic transaction, etc.
+summary: Learn about optimistic and pessimistic transactions in TiDB.
 ---
 
 # Optimistic transactions and pessimistic transactions
@@ -13,21 +13,21 @@ The advantage of the pessimistic transaction model is that for scenarios with hi
 
 The pessimistic transaction model is more intuitive and easier to implement on the application side. The optimistic transaction model requires complex application-side retry mechanisms.
 
-The following is an example of [bookshop](/develop/dev-guide-bookshop-schema-design.md). It uses an example of buying books to show the advantages and disadvantages of optimistic and pessimistic transactions. The process of buying books mainly consists of the following:
+The following is an example of a [bookshop](/develop/dev-guide-bookshop-schema-design.md). It uses an example of buying books to show the pros and cons of optimistic and pessimistic transactions. The process of buying books mainly consists of the following:
 
 1. Update the stock quantity
 2. Create an order
 3. Pay the order
 
-These three operations need to ensure that all of them succeed or all fail, and in the case of concurrency, they must be guaranteed not to be oversold.
+These operations must either all succeed or all fail. You must ensure that overselling does not happen in the case of concurrency.
 
 ## Pessimistic transactions
 
-The following code uses two threads to simulate the process that two users buy the same book in a pessimistic transaction model. There are 10 books left in the bookstore, Bob buys 6 books, and Alice buys 4 books. They complete the orders at nearly the same time. All books in inventory are sold out.
+The following code uses two threads to simulate the process that two users buy the same book in a pessimistic transaction model. There are 10 books left in the bookstore. Bob buys 6 books, and Alice buys 4 books. They complete the orders at nearly the same time. As a result, all books in inventory are sold out.
 
-Because we use multiple threads to simulate the situation that multiple users insert data simultaneously, we need to use a connection object with safe threads. Here we use Java's popular connection pool [HikariCP](https://github.com/brettwooldridge/HikariCP) for demo.
+Because you use multiple threads to simulate the situation that multiple users insert data simultaneously, you need to use a connection object with safe threads. Here use Java's popular connection pool [HikariCP](https://github.com/brettwooldridge/HikariCP) for demo.
 
-### 1. Write a pessimistic transaction example
+### Write a pessimistic transaction example
 
 #### Configuration file
 
@@ -258,7 +258,7 @@ public class TxnExample {
 }
 ```
 
-### 2. An example that does not involve overselling
+### An example that does not involve overselling
 
 Run the sample program:
 
@@ -288,7 +288,7 @@ SQL logs:
 /* txn 1 */ COMMIT
 ```
 
-Finally, we check that the order creation, user balance deduction, and book inventory deduction are all done as expected.
+Finally, check that the order is created, the user balance is deducted, and the book inventory is deducted as expected.
 
 ```sql
 mysql> SELECT * FROM `books`;
@@ -318,9 +318,9 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### 3. An example that prevents overselling
+### An example that prevents overselling
 
-The task in this example is more challenging. If there are 10 books left in stock, Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. Imagine what will happen? We reuse the code from the previous example to solve this challenge, and change Bob's purchase quantity from 6 to 7:
+The task in this example is more challenging. Suppose there are 10 books left in stock. Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. What will happen? You can reuse the code from the previous example to solve this challenge, and change Bob's purchase quantity from 6 to 7.
 
 Run the sample program:
 
@@ -379,9 +379,9 @@ mysql> SELECT * FROM users;
 
 ## Optimistic transactions
 
-The following code uses two threads to simulate the process that two users buy the same book in an optimistic transaction, just like the pessimistic transaction example. There are 10 books left in the bookstore, Bob buys 6 and Alice buys 4. They completed the order at about the same time. In the end, no books are left in inventory.
+The following code uses two threads to simulate the process that two users buy the same book in an optimistic transaction, just like the pessimistic transaction example. There are 10 books left in inventory. Bob buys 6 and Alice buys 4. They complete the order at about the same time. In the end, no books are left in inventory.
 
-### 1. Write an optimistic transaction example
+### Write an optimistic transaction example
 
 #### Coding
 
@@ -561,7 +561,7 @@ Change it to the following to point to the optimistic transaction example.
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
 ```
 
-### 2. An example that does not involve overselling
+### An example that does not involve overselling
 
 Run the sample program:
 
@@ -597,9 +597,9 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 /* txn 1 */ COMMIT
 ```
 
-In the optimistic transaction model, because the intermediate state is not necessarily correct, it is not possible to judge whether a statement is successfully executed through `affected_rows` as in the pessimistic transaction model. We need to regard the transaction as a whole, and judge whether the current transaction has a write conflict by checking whether the final COMMIT statement returns an exception.
+In the optimistic transaction model, because the intermediate state is not necessarily correct, it is not possible to judge whether a statement is successfully executed through `affected_rows` as in the pessimistic transaction model. You need to regard the transaction as a whole, and judge whether the current transaction has a write conflict by checking whether the final `COMMIT` statement returns an exception.
 
-As you can see from the above SQL log, because two transactions are executed concurrently and the same record is modified, a `9007 Write conflict` exception is thrown after `txn 1` COMMIT. For write conflicts in the optimistic transaction model, you can safely retry on the application side. After one retry, the commitment is successful, and the final execution result is as expected:
+As you can see from the above SQL log, because two transactions are executed concurrently and the same record is modified, a `9007 Write conflict` exception is thrown after `txn 1` COMMIT. For write conflicts in the optimistic transaction model, you can safely retry on the application side. After one retry, the data is committed successfully. The final execution result is as expected:
 
 ```sql
 mysql> SELECT * FROM books;
@@ -629,9 +629,9 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### 3. An example that prevents overselling
+### An example that prevents overselling
 
-Let's check the example of using the optimistic transaction model that prevents overselling. If there are 10 books left in inventory, Bob buys 7 books, Alice buys 4 books, and they place orders almost at the same time. Imagine what will happen? We reuse the code from the optimistic transaction example to address this requirement, but change Bob's purchases from 6 to 7:
+This section describes an optimistic transaction example that prevents overselling. Suppose there are 10 books left in inventory. Bob buys 7 books,and Alice buys 4 books. They place orders almost at the same time. What will happen? You can reuse the code from the optimistic transaction example to address this requirement. Change Bob's purchases from 6 to 7.
 
 Run the sample program:
 
@@ -663,7 +663,7 @@ Fail -> out of stock
 /* txn 1 */ ROLLBACK
 ```
 
-You can see from the above SQL log that `txn 1` is retried on the application side due to a write conflict in the first execution. By comparing the latest snapshots, you can find that the stock is not enough. The application side throws `out of stock`, and ends abnormally.
+You can see from the above SQL log that `txn 1` is retried on the application side due to a write conflict in the first execution. By comparing the latest snapshots, you can find that the stock is running out. The application side throws `out of stock`, and ends abnormally.
 
 ```sql
 mysql> SELECT * FROM books;
