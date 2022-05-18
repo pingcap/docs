@@ -127,7 +127,7 @@ Flags:
     tiup bench tpcc --warehouses 4 prepare --output data --pprof :10111
     ```
 
-3. Clean up data:
+8. Clean up data:
 
     {{< copyable "shell-regular" >}}
 
