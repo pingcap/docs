@@ -18,10 +18,11 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 ### tidb-lightning global configuration
 
 [lightning]
-# The HTTP port for the web interface and Prometheus metrics pulling (0 to disable).
+# The HTTP port for displaying the web interface, pulling Prometheus metrics, exposing debug data, and submitting import tasks (in server mode). Setting it to 0 disables the port.
 status-addr = ':8289'
 
-# Toggle server mode and use of the web interface.
+# Server mode. Defaults to false, which means an import task starts immediately after you execute the command.
+# If this value is set to true, after you execute the command, TiDB Lightning waits until you submit an import task in the web interface.
 # See the "TiDB Lightning Web Interface" section for details.
 server-mode = false
 
@@ -168,10 +169,7 @@ batch-import-ratio = 0.75
 
 # Local source data directory or the URL of the external storage.
 data-source-dir = "/data/my_database"
-# If no-schema is set to true, tidb-lightning assumes that the table skeletons
-# already exist on the target TiDB cluster, and will not execute the `CREATE
-# TABLE` statements.
-no-schema = false
+
 # The character set of the schema files, containing CREATE TABLE statements;
 # only supports one of:
 #  - utf8mb4: the schema files must be encoded as UTF-8; otherwise, an error is reported.
@@ -243,25 +241,13 @@ trim-last-separator = false
 # schema = '$1'
 # table = '$2'
 # type = '$3'
-# 
-# Sets rules for merging sharded schemas and tables. Specifically, import `table1` and `table2` from `my_db1`, and `table3` and `table4` from `my_db2` to `table5` in `my_db`.
-# [[routes]]
-# schema-pattern = "my_db1"
-# table-pattern = "table[1-2]"
-# target-schema = "my_db"
-# target-table = "table5"
-# 
-# [[routes]]
-# schema-pattern = "my_db2"
-# table-pattern = "table[3-4]"
-# target-schema = "my_db"
-# target-table = "table5"
 
 [tidb]
 # Configuration of any TiDB server from the cluster.
 host = "172.16.31.1"
 port = 4000
 user = "root"
+# Configure the password to connect to TiDB. The password can either be plaintext or Base64 encoded.
 password = ""
 # Table schema information is fetched from TiDB via this status-port.
 status-port = 10080
@@ -440,8 +426,7 @@ min-available-ratio = 0.05
 | --tidb-port *port* | TiDB server port (default = 4000) | `tidb.port` |
 | --tidb-status *port* | TiDB status port (default = 10080) | `tidb.status-port` |
 | --tidb-user *user* | User name to connect to TiDB | `tidb.user` |
-| --tidb-password *password* | Password to connect to TiDB | `tidb.password` |
-| --no-schema | Ignore schema files, get schema directly from TiDB | `mydumper.no-schema` |
+| --tidb-password *password* | Password to connect to TiDB. The password can either be plaintext or Base64 encoded. | `tidb.password` |
 | --enable-checkpoint *bool* | Whether to enable checkpoints (default = true) | `checkpoint.enable` |
 | --analyze *level* | Analyze tables after importing. Available values are "required", "optional" (default value), and "off" | `post-restore.analyze` |
 | --checksum *level* | Compare checksum after importing. Available values are "required" (default value), "optional", and "off" | `post-restore.checksum` |

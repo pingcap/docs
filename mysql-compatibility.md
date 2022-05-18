@@ -38,7 +38,11 @@ However, some features of MySQL are not supported. This could be because there i
 + `CREATE TABLE tblName AS SELECT stmt` syntax [#4754](https://github.com/pingcap/tidb/issues/4754)
 + `CHECK TABLE` syntax [#4673](https://github.com/pingcap/tidb/issues/4673)
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
++ `REPAIR TABLE` syntax
++ `OPTIMIZE TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
++ `HANDLER` statement
++ `CREATE TABLESPACE` statement
 
 ## Features that are different from MySQL
 
@@ -46,7 +50,7 @@ However, some features of MySQL are not supported. This could be because there i
 
 + In TiDB, auto-incremental columns are globally unique. They are incremental on a single TiDB server, but *not* necessarily incremental among multiple TiDB servers or allocated sequentially. It is recommended that you do not mix default values and custom values. Otherwise, you might encounter the `Duplicated Error` error message.
 
-+ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `alter table modify` or `alter table change`.
++ You can use the `tidb_allow_remove_auto_inc` system variable to allow or forbid removing the `AUTO_INCREMENT` column attribute. The syntax of removing the column attribute is `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE`.
 
 + TiDB does not support adding the `AUTO_INCREMENT` column attribute, and this attribute cannot be recovered once it is removed.
 
@@ -57,14 +61,14 @@ However, some features of MySQL are not supported. This could be because there i
 > + If you have not specified the primary key when creating a table, TiDB uses `_tidb_rowid` to identify the row. The allocation of this value shares an allocator with the auto-increment column (if such a column exists). If you specify an auto-increment column as the primary key, TiDB uses this column to identify the row. In this situation, the following situation might happen:
 
 ```sql
-mysql> create table t(id int unique key AUTO_INCREMENT);
+mysql> CREATE TABLE t(id INT UNIQUE KEY AUTO_INCREMENT);
 Query OK, 0 rows affected (0.05 sec)
 
-mysql> insert into t values(),(),();
+mysql> INSERT INTO t VALUES(),(),();
 Query OK, 3 rows affected (0.00 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
-mysql> select _tidb_rowid, id from t;
+mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 | _tidb_rowid | id   |
 +-------------+------+
@@ -102,7 +106,8 @@ In TiDB, all supported DDL changes are performed online. Compared with DDL opera
 * The `ALGORITHM={INSTANT,INPLACE,COPY}` syntax functions only as an assertion in TiDB, and does not modify the `ALTER` algorithm. See [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md) for further details.
 * Adding/Dropping the primary key of the `CLUSTERED` type is unsupported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 * Different types of indexes (`HASH|BTREE|RTREE|FULLTEXT`) are not supported, and will be parsed and ignored when specified.
-* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. The other partition operations are ignored. The `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type. The following Table Partition syntaxes are not supported:
+* Table Partitioning supports `HASH`, `RANGE`, and `LIST` partitioning types. For the unsupported partition type, the `Warning: Unsupported partition type %s, treat as normal table` error might be output, where `%s` is a specific partition type.
+* Table Partitioning also supports `ADD`, `DROP`, and `TRUNCATE` operations. Other partition operations are ignored. The following Table Partition syntaxes are not supported:
     - `PARTITION BY KEY`
     - `SUBPARTITION`
     - `{CHECK|TRUNCATE|OPTIMIZE|REPAIR|IMPORT|DISCARD|REBUILD|REORGANIZE|COALESCE} PARTITION`
@@ -123,6 +128,10 @@ These differences are documented further in [`ANALYZE TABLE`](/sql-statements/sq
 
 For details, see the [`SELECT`](/sql-statements/sql-statement-select.md) statement reference.
 
+### `UPDATE` statement
+
+See the [`UPDATE`](/sql-statements/sql-statement-update.md) statement reference.
+
 ### Views
 
 Views in TiDB are not updatable. They do not support write operations such as `UPDATE`, `INSERT`, and `DELETE`.
@@ -137,6 +146,8 @@ For details, see [Compatibility between TiDB local temporary tables and MySQL te
 
 * To learn the MySQL compatibility of the GBK character set, see [GBK compatibility](/character-set-gbk.md#mysql-compatibility) .
 
+* TiDB inherits the character set used in the table as the national character set.
+
 ### Storage engines
 
 For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines. In implementation, TiDB describes the metadata as the InnoDB storage engine.
@@ -147,7 +158,7 @@ TiDB supports storage engine abstraction similar to MySQL, but you need to speci
 
 TiDB supports most [SQL modes](/sql-mode.md):
 
-- The compatibility modes, such as `ORACLE` and `POSTGRESQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
+- The compatibility modes, such as `Oracle` and `PostgreSQL` are parsed but ignored. Compatibility modes are deprecated in MySQL 5.7 and removed in MySQL 8.0.
 - The `ONLY_FULL_GROUP_BY` mode has minor [semantic differences](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql) from MySQL 5.7.
 - The `NO_DIR_IN_CREATE` and `NO_ENGINE_SUBSTITUTION` SQL modes in MySQL are accepted for compatibility, but are not applicable to TiDB.
 

@@ -332,6 +332,12 @@ Configuration items related to security.
 - Determines whether to automatically generate the TLS certificates on startup.
 - Default value: `false`
 
+### `tls-version`
+
+- Set the minimum TLS version for MySQL Protocol connections.
+- Default value: "", which allows TLSv1.1 or higher.
+- Optional values: `"TLSv1.0"`, `"TLSv1.1"`, `"TLSv1.2"` and `"TLSv1.3"`
+
 ## Performance
 
 Configuration items related to performance.
@@ -463,7 +469,7 @@ Configuration items related to performance.
 
 ## prepared-plan-cache
 
-The Plan Cache configuration of the `PREPARE` statement.
+The [`plan cache`](/sql-prepared-plan-cache.md) configuration of the `PREPARE` statement.
 
 ### `enabled`
 
@@ -481,6 +487,78 @@ The Plan Cache configuration of the `PREPARE` statement.
 - It is used to prevent `performance.max-memory` from being exceeded. When `max-memory * (1 - prepared-plan-cache.memory-guard-ratio)` is exceeded, the elements in the LRU are removed.
 - Default value: `0.1`
 - The minimum value is `0`; the maximum value is `1`.
+
+## opentracing
+
+Configuration items related to opentracing.
+
+### `enable`
+
++ Enables opentracing to trace the call overhead of some TiDB components. Note that enabling opentracing causes some performance loss.
++ Default value: `false`
+
+### `rpc-metrics`
+
++ Enables RPC metrics.
++ Default value: `false`
+
+## opentracing.sampler
+
+Configuration items related to opentracing.sampler.
+
+### `type`
+
++ Specifies the type of the opentracing sampler.
++ Default value: `"const"`
++ Value options: `"const"`, `"probabilistic"`, `"rateLimiting"`, `"remote"`
+
+### `param`
+
++ The parameter of the opentracing sampler.
+    - For the `const` type, the value can be `0` or `1`, which indicates whether to enable the `const` sampler.
+    - For the `probabilistic` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
+    - For the `rateLimiting` type, the parameter specifies the number of spans sampled per second.
+    - For the `remote` type, the parameter specifies the sampling probability, which can be a float number between `0` and `1`.
++ Default value: `1.0`
+
+### `sampling-server-url`
+
++ The HTTP URL of the jaeger-agent sampling server.
++ Default value: `""`
+
+### `max-operations`
+
++ The maximum number of operations that the sampler can trace. If an operation is not traced, the default probabilistic sampler is used.
++ Default value: `0`
+
+### `sampling-refresh-interval`
+
++ Controls the frequency of polling the jaeger-agent sampling policy.
++ Default value: `0`
+
+## opentracing.reporter
+
+Configuration items related to opentracing.reporter.
+
+### `queue-size`
+
++ The queue size with which the reporter records spans in memory.
++ Default value: `0`
+
+### `buffer-flush-interval`
+
++ The interval at which the reporter flushes the spans in memory to the storage.
++ Default value: `0`
+
+### `log-spans`
+
++ Determines whether to print the log for all submitted spans.
++ Default value: `false`
+
+### `local-agent-host-port`
+
++ The address at which the reporter sends spans to the jaeger-agent.
++ Default value: `""`
 
 ## tikv-client
 
@@ -500,6 +578,12 @@ The Plan Cache configuration of the `PREPARE` statement.
 - The timeout of the RPC `keepalive` check between TiDB and TiKV nodes.
 - Default value: `3`
 - Unit: second
+
+### `grpc-compression-type`
+
+- Specifies the compression type used for data transfer between TiDB and TiKV nodes. The default value is `"none"`, which means no compression. To enable the gzip compression, set this value to `"gzip"`.
+- Default value: `"none"`
+- Value options: `"none"`, `"gzip"`
 
 ### `commit-timeout`
 
@@ -599,20 +683,6 @@ Configuration related to the status of TiDB service.
 - Determines whether to transmit the database-related QPS metrics to Prometheus.
 - Default value: `false`
 
-## stmt-summary <span class="version-mark">New in v3.0.4</span>
-
-Configurations related to [statement summary tables](/statement-summary-tables.md).
-
-### max-stmt-count
-
-- The maximum number of SQL categories allowed to be saved in [statement summary tables](/statement-summary-tables.md).
-- Default value: `3000`
-
-### max-sql-length
-
-- The longest display length for the `DIGEST_TEXT` and `QUERY_SAMPLE_TEXT` columns in [statement summary tables](/statement-summary-tables.md).
-- Default value: `4096`
-
 ## pessimistic-txn
 
 For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md).
@@ -632,6 +702,12 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### deadlock-history-collect-retryable
 
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
+
+### pessimistic-auto-commit (New in v6.0.0)
+
++ Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
++ For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
++ For scenarios with no conflicts, if there are many auto-commit transactions, and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + Default value: `false`
 
 ## experimental

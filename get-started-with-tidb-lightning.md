@@ -28,7 +28,7 @@ First, use [`dumpling`](/dumpling-overview.md) to export data from MySQL:
 {{< copyable "shell-regular" >}}
 
 ```sh
-./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 In the above command:
@@ -44,13 +44,13 @@ After executing this command, the full backup data is exported to the `/data/my_
 
 ### Step 1: Deploy TiDB cluster
 
-Before the data import, you need to deploy a TiDB cluster. In this tutorial, TiDB v5.0.0 is used as an example. For the deployment method, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+Before the data import, you need to deploy a TiDB cluster. In this tutorial, TiDB v5.4.0 is used as an example. For the deployment method, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 ### Step 2: Download TiDB Lightning installation package
 
 Download the TiDB Lightning installation package from the following link:
 
-- **v5.0.0**: [tidb-toolkit-v5.0.0-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v5.0.0-linux-amd64.tar.gz)
+- **v5.4.0**: [tidb-toolkit-v5.4.0-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v5.4.0-linux-amd64.tar.gz)
 
 > **Note:**
 >
