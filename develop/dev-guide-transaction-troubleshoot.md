@@ -77,7 +77,7 @@ Although TiDB is as compatible as possible with MySQL, the nature of its distrib
 
 The Adapters and ORMs that developers use to connect with databases are tailored for traditional databases such as MySQL and Oracle. In these databases, transactions rarely fail to commit at the default isolation level, so no retry mechanism is required. For these clients, when a transaction commit fails, they abort due to an error, as this is presented as an exception in these databases.
 
-Different from traditional databases such as MySQL, in TiDB,if you use the optimistic transaction model and want to avoid commit failure, you need to add a mechanism to handle related exceptions in your applications.
+Different from traditional databases such as MySQL, in TiDB, if you use the optimistic transaction model and want to avoid commit failure, you need to add a mechanism to handle related exceptions in your applications.
 
 The following Python pseudocode shows how to implement application-level retries. It does not require your driver or ORM to implement advanced retry logic, so it can be used in any programming language or environment.
 
