@@ -40,7 +40,7 @@ BEGIN;
 COMMIT;
 ```
 
-After the above transaction is successful, the table should look like this:
+After the above transaction is executed successfully, the table should look like this:
 
 ```
 +----+--------------+---------+
@@ -68,7 +68,7 @@ BEGIN;
 START TRANSACTION;
 ```
 
-The default transaction model of TiDB is pessimistic transaction. You can also explicitly specify to enable the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+The default transaction model of TiDB is pessimistic transaction. You can also explicitly specify the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
 
 {{< copyable "sql" >}}
 
@@ -96,11 +96,11 @@ You can use the `COMMIT` statement to commit all modifications made by TiDB in t
 COMMIT;
 ```
 
-Before enabling optimistic transactions, make sure that your application can properly handle errors that may be returned by a `COMMIT` statement. If you are not sure how your application will handle it, it is recommended to use hte pessimistic transaction model instead.
+Before enabling optimistic transactions, make sure that your application can properly handle errors that may be returned by a `COMMIT` statement. If you are not sure how your application will handle it, it is recommended to use the pessimistic transaction model instead.
 
 ### Roll back a transaction
 
-You can use the `ROLLBACK` statement to roll back and undo all modifications of the current transaction.
+You can use the `ROLLBACK` statement to roll back modifications of the current transaction.
 
 {{< copyable "sql" >}}
 
@@ -108,7 +108,7 @@ You can use the `ROLLBACK` statement to roll back and undo all modifications of 
 ROLLBACK;
 ```
 
-In the previous transfer example, if you use `ROLLBACK` to roll back the entire transaction, neither Alice's nor Bob's balances have changed, and all modifications of the current transaction are canceled.
+In the previous transfer example, if you roll back the entire transaction, Alice's and Bob's balances will remain unchanged, and all modifications of the current transaction are canceled.
 
 {{< copyable "sql" >}}
 
@@ -143,7 +143,7 @@ The transaction is also automatically rolled back if the client connection is st
 
 ## Transaction isolation levels
 
-The transaction isolation levels are the basis of database transaction processing. The "I" in **ACID**, that is, Isolation, refers to the isolation of the transactions.
+The transaction isolation levels are the basis of database transaction processing. The "I" (Isolation) in **ACID** refers to the isolation of the transactions.
 
 The SQL-92 standard defines four isolation levels:
 
