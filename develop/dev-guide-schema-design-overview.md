@@ -1,15 +1,15 @@
 ---
 title: TiDB Database Schema Design Overview
-summary: Learn the the basics on TiDB database schema design
+summary: Learn the the basics on TiDB database schema design.
 ---
 
 # TiDB Database Schema Design Overview
 
-This document provides the basics on TiDB database schema design, including the objects used in database schema design, access control, database schema changes, and object limitations.
+This document provides the basics on TiDB database schema design, including the objects in TiDB, access control, database schema changes, and object limitations.
 
 In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-design.md) will be taken as an example to show you how to design a database and perform data read and write operations in a database.
 
-## Objects used in database schema design
+## Objects in TiDB
 
 To distinguish with some general terms, here is a brief agreement on the terms used in TiDB database schema design:
 
@@ -19,7 +19,7 @@ To distinguish with some general terms, here is a brief agreement on the terms u
 
 ### Database
 
-Database in the TiDB is a collection of objects such as tables and indexes.
+Database in TiDB is a collection of objects such as tables and indexes.
 
 TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
 
