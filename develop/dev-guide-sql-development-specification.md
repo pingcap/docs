@@ -1,25 +1,25 @@
 ---
 title: SQL Development Specification
-summary: SQL Development Specification of TiDB.
+summary: Learn about the SQL development specification for TiDB.
 ---
 
 # SQL Development Specification
 
-This chapter will introduce some generalized development specifications for using SQL.
+This document introduces some general development specifications for using SQL.
 
-## Specification for table build and delete
+## Create and delete tables
 
 - Basic principle: the table is created under the premise of following the table naming specification, and it is recommended to add judgment logic to the build and delete table statements in the internal package of business applications to prevent abnormal interruption of business processes.
 - Details: `create table if not exists table_name` or `drop table if exists table_name` statements are recommended to add if judgments to avoid abnormal interruptions caused by SQL commands running abnormally on the application side.
 
-## SELECT \* Usage specification
+## `SELECT *` usage
 
-- Basic principle: Avoid using SELECT \* for queries.
-- Details: Select the appropriate field columns as required and avoid blind SELECT \* to read all fields as it consumes network bandwidth. Consider adding the queried fields to the index as well to make effective use of the overriding index function.
+- Basic principle: avoid using `SELECT *` for queries.
+- Details: select the appropriate columns as required and avoid using `SELECT *` to read all fields because such operations consume network bandwidth. Consider adding the queried fields to the index to make effective use of the covering index.
 
-## Specification for using functions on fields
+## Use functions on fields
 
-- Basic principle: You can use related functions on the takeout fields, but avoid using any functions on the filter condition fields in the Where condition, including data type conversion functions, to avoid index failure. Or you can consider using the expression index function.
+- Basic principle: You can use related functions on the queried fields. To avoid index failure, do not use any functions on the filtered fields in the `WHERE` clause, including data type conversion functions. You may consider using the expression index.
 - Detailed description:
 
     NOT recommended:
@@ -42,13 +42,13 @@ This chapter will introduce some generalized development specifications for usin
     WHERE gmt_create = str_to_date('20090101 00:00:00'，'%Y%m%d %H:%i:s')
     ```
 
-## Other Specifications
+## Other specifications
 
 - Do not perform mathematical operations or functions on the index column in the `WHERE` condition.
-- Replace `OR` with `IN/UNION`, and note that the number of `IN` is less than `300`.
-- Avoid using `%` prefix for fuzzy prefix queries.
-- If the application uses **Multi Statements** to execute SQL, i.e. multiple SQLs are joined with semicolons and sent to the client for execution at once, TiDB will only return the result of the first SQL execution.
-- When using expressions, check if they support compute push-down to the storage layer (TiKV, TiFlash), otherwise you should expect more memory consumption and even OOM at the TiDB layer. the list of compute push-down to the storage layer is as follows:
-    - [TiFlash - Supported push-down calculations](/tiflash/use-tiflash.md#supported-push-down-calculations).
+- Replace `OR` with `IN` or `UNION`. The number of `IN` must be less than `300`.
+- Avoid using the `%` prefix for fuzzy prefix queries.
+- If the application uses **Multi Statements** to execute SQL, that is, multiple SQLs are joined with semicolons and sent to the client for execution at once, TiDB only returns the result of the first SQL execution.
+- When you use expressions, check if the expressions support computing push-down to the storage layer (TiKV or TiFlash). If not, you should expect more memory consumption and even OOM at the TiDB layer. Computing that can be pushe down the storage layer is as follows:
+    - [TiFlash supported push-down calculations](/tiflash/use-tiflash.md#supported-push-down-calculations).
     - [TiKV - List of Expressions for Pushdown](/functions-and-operators/expressions-pushed-down.md).
     - [Predicate push down](/predicate-push-down.md).
