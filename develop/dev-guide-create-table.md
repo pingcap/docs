@@ -7,10 +7,6 @@ summary: Learn the methods, guidelines, and examples of table creation.
 
 This document introduces how to create tables using the SQL statement and the related best practices. An example of the TiDB-based [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application) is provided to illustrate the best practices.
 
-> **Note:**
->
-> This document only briefly describes the `CREATE TABLE` statement. For detailed reference, see [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md).
-
 ## Before you start
 
 Before reading this document, make sure that the following tasks are completed:
