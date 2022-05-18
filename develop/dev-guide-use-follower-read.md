@@ -1,40 +1,47 @@
 ---
 title: Follower Read
+summary: Introduce how to use follower read to optimize query performance.
 ---
 
 # Follower Read
 
+This document introduces how to use follower read to optimize query performance.
+
 ## Introduction
 
-In TiDB, data is stored in units of [Region](/tidb-storage.md#region), which are dispersed on all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
+TiDB uses [Region](/tidb-storage.md#region) as the basic unit and distributes data to all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
 
-By default, TiDB will only read and write data on the leader of the same Region. When there is a read hotspot Region in the system, the leader resource is tight and becomes the reading bottleneck of the whole system. Enabling the Follower Read feature can significantly reduce the burden on the leader, and significantly improve the overall system throughput by balancing the load among multiple followers. .
+By default, TiDB only reads and writes data on the leader of the same Region. When a read hotspot appears in a Region, the Region leader can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load of the leader, and improve the throughput of the whole system by balancing the load among multiple followers.
 
 ## When to use
 
-You can visually analyze whether your application has hotspot regions on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether there is a read hotspot region by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+You can visually analyze whether your application has hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether there appears a read hotspot by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
 
-If you find that there is indeed a hotspot problem, you can avoid it from the application level by reading the chapter [TiDB Hotspot Problem Handling](https://docs.pingcap.com/zh/tidb/stable/troubleshoot-hot-spot-issues) to troubleshoot it one by one.
+For more about handling hotspot, see [TiDB Hotspot Problem Handling](/troubleshoot-hot-spot-issues.md).
 
-If read hotspots are unavoidable or the cost of changes is very high, you can try to use the Follower Read function to better load balance read requests to the follower region.
+If read hotspots are unavoidable or the changing cost is very high, you can try to use the Follower Read to better load balance of read requests to the follower region.
 
 ## Enable follower read
 
 <SimpleTab>
 <div label="SQL">
 
-You can set the value of the variable `tidb_replica_read` (the default is `leader`) to `follower` or `leader-and-follower` to enable TiDB's Follower Read feature:
+To enable TiDB's Follower Read, set the variable `tidb_replica_read` (default is `leader`) to `follower` or `leader-and-follower`:
+
+{{< copyable "sql" >}}
 
 ```sql
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-You can checkout the [Follower Read - Usage](/follower-read.md#usage) section for more details on this variable.
+For more details about this variable, see[Follower Read Usage](/follower-read.md#usage).
 
 </div>
 <div label="Java">
 
-In the Java language, we can define a `FollowerReadHelper` class to enable the Follower Read feature:
+In Java, to enable TiDB's Follower Read, define a `FollowerReadHelper` class.
+
+{{< copyable "" >}}
 
 ```java
 public enum FollowReadMode {
@@ -76,7 +83,9 @@ public class FollowerReadHelper {
 }
 ```
 
-When you need to read data from the follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature that can load balance between the leader node and the follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
+When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can load balance between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
+
+{{< copyable "" >}}
 
 ```java
 public static class AuthorDAO {

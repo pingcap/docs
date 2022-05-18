@@ -1,36 +1,39 @@
 ---
-title: Subqueries
+title: Subquery
+summary: Introduce subquery in TiDB.
 ---
 
-# Subqueries
+# Subquery
+
+This document mainly introduces the statement and category of subquery in TiDB.
 
 ## Overview
 
-Subqueries are SQL expressions nested within another query, with the help of subqueries, we can use the query results of another query in one query.
+SUbquery is a query within another SQL query. With subquery, the query result can be used in another query.
 
-Below we will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subqueries:
+The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
 
 ## Subquery statement
 
-Typically, subquery statements are divided into the following forms:
+Generally speaking, there are following five types of subqueries:
 
-- Scalar Subquery (Scalar Subquery), such as `SELECT (SELECT s1 FROM t2) FROM t1`.
+- Scalar Subquery, such as `SELECT (SELECT s1 FROM t2) FROM t1`.
 - Derived Tables, such as `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`.
-- Existential Test, e.g. `WHERE NOT EXISTS(SELECT ... FROM t2)`, `WHERE t1.a IN (SELECT ... FROM t2)`.
-- Quantified Comparison, e.g. `WHERE t1.a = ANY(SELECT ... FROM t2)`, `WHERE t1.a = ANY(SELECT ... FROM t2)`.
-- Subquery as a comparison operator operand, e.g. `WHERE t1.a > (SELECT ... FROM t2)`.
+- Existential Test, such as `WHERE NOT EXISTS(SELECT ... FROM t2)`, `WHERE t1.a IN (SELECT ... FROM t2)`.
+- Quantified Comparison, such as `WHERE t1.a = ANY(SELECT ... FROM t2)`, `WHERE t1.a = ANY(SELECT ... FROM t2)`.
+- Subquery as a comparison operator operand, such as `WHERE t1.a > (SELECT ... FROM t2)`.
 
-## The category of subqueries
+## The category of subquery
 
-Generally speaking, we can divide subqueries into two categories: [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types of subqueries differently.
+Generally speaking, subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
 
-The basis for determining whether a subquery is related or not is whether we refer to the columns of the outer query in the subquery.
+The basis for determining whether a query is correlated is whether it refers to a subquery with columns from outer references.
 
 ### Self-contained subquery
 
-For unrelated subqueries that use subqueries as operand of comparison operators (`>` / `>=`/ `<` / `<=` / `=` / `! =`), the inner subquery needs to be queried only once, and TiDB rewrites the inner subquery as a constant during the execution plan generation phase.
+For self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
 
-For example, if we want to find authors in the `authors` table whose age is greater than the overall average age, we can do so by using the subquery as the operand of the comparison operator.
+For example, to query authors in the `authors` table whose age is greater than the average age, you can use subquery as a comparison operator operand.
 
 {{< copyable "sql" >}}
 
@@ -43,7 +46,7 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 )
 ```
 
-First of all, the inner subquery is executed once when TiDB executes the above query in advance:
+The inner subquery is executed before TiDB executing the above query:
 
 {{< copyable "sql" >}}
 
@@ -51,7 +54,7 @@ First of all, the inner subquery is executed once when TiDB executes the above q
 SELECT AVG(IFNULL(a2.death_year, YEAR(NOW())) - a2.birth_year) AS average_age FROM authors a2;
 ```
 
-Suppose the result of the query is 34, i.e., the overall average age is 34, and 34 will be used as a constant to replace the original subquery.
+Suppose the result of the query is 34, that is, the average age is 34, and 34 will be used as a constant to replace the original subquery.
 
 {{< copyable "sql" >}}
 
@@ -59,6 +62,8 @@ Suppose the result of the query is 34, i.e., the overall average age is 34, and 
 SELECT * FROM authors a1
 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ```
+
+The result is as follows:
 
 ```
 +--------+-------------------+--------+------------+------------+
@@ -80,15 +85,15 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 ...
 ```
 
-For unrelated column subqueries in both existence test and quantified comparison cases, TiDB rewrites and equivalently replaces them for better execution performance, you can read the [Subquery Related Optimizations](/subquery-optimization.md) chapter for more implementation details.
+For self-contained subquery like Existential Test and Quantified Comparison, TiDB rewrites and equivalently replaces them for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
 
-## Correlated subquery
+### Correlated subquery
 
-For correlated subquery, since the inner subquery references the columns of the outer query, the subquery needs to be executed on every row obtained by the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will cause the query to consume more time and resources.
+For correlated subquery, since the inner subquery references the columns from outer query, each subquery is executed once for every row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
 
 Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency in the execution plan level.
 
-For example, if we want to find authors who are older than the average age of other writers of the same gender, the SQL statement could be written like this.
+The following statement is to query authors who are older than the average age of other authors of the same gender.
 
 {{< copyable "sql" >}}
 
@@ -104,7 +109,7 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 );
 ```
 
-When TiDB processes this SQL statement, it will rewrite it into an equivalent join query:
+TiDB rewrites it to an equivalent `join` query:
 
 {{< copyable "sql" >}}
 
@@ -126,7 +131,7 @@ WHERE
     AND (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > a2.average_age;
 ```
 
-As a best practice, in actual development, it is recommended to avoid querying through correlated subqueries when it is clear that there is a better equivalent way of writing.
+As a best practice, in actual development, it is recommended to avoid querying through correlated subquery when it is clear that there is a better way.
 
 ## Read more
 

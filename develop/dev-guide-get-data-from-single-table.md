@@ -1,31 +1,32 @@
 ---
-title: Get Data from Single Table
+title: Query data from a single table
+summary: This document describes how to query data from a single table in database.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Get Data from Single Table
+# Query data from a single table
 
-In this chapter, we will begin to explain how to use SQL and various programming languages to query data in TiDB.
+This document focus on how to use SQL and various programming languages to query data from a single table in database.
 
 ## Before you begin
 
-Next, we will introduce the data query section of TiDB around the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
+The following will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to explain data query from a single table in TiDB.
 
-Before reading this chapter, you need to do the following:
+Make sure you have the following things before continue:
 
-1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md)).
-2. [Import table schema and sample data of Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
+1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
+2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-data).
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
 ## A simple query
 
-In the database of the Bookshop application, the `authors` table stores the basic information of writers. We can use the `SELECT ... FROM ...` statement retrieves data from the database.
+In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement query data from the database.
 
 <SimpleTab>
 <div label="SQL" href="simple-sql">
 
-In a client such as MySQL Client, you can input and execute the following SQL statement:
+Execute the following SQL statement in MySQL client:
 
 {{< copyable "sql" >}}
 
@@ -33,7 +34,7 @@ In a client such as MySQL Client, you can input and execute the following SQL st
 SELECT id, name FROM authors;
 ```
 
-The output results are as follows:
+The output is as follows:
 
 ```
 +------------+--------------------------+
@@ -57,11 +58,11 @@ The output results are as follows:
 </div>
 <div label="Java" href="simple-java">
 
-In the Java language, we define how to store the author's basic information by declaring a `Author` class. We can select the appropriate data type according to the [type](/data-type-overview.md) and [value range](https://docs.pingcap.com/zh/tidb/stable/data-type-numeric) of the data in the database, to store the corresponding data in the Java language, for example:
+In Java, authors' basic information can be stored by declaring a class `Author`. You should choose appropriate Java data types according to the [type](/data-type-overview.md) and [value range](/data-type-numeric.md) in the database. For example:
 
 - Use a variable of type `Int` to store data of type `int`.
 - Use a variable of type `Long` to store data of type `bigint`.
-- Use `Short` type variable to store data of type `tinyint`.
+- Use a variable of type `Short` to store data of type `tinyint`.
 - Use a variable of type `String` to store data of type `varchar`.
 - ...
 
@@ -106,23 +107,23 @@ public class AuthorDAO {
 }
 ```
 
-- After [getting the database connection](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` instance object using the `conn.createStatus()` statement.
-- Then call the `stmt.executeQuery("query_sql")` method to initiate a database query request to TiDB.
-- The query results return by the database will be stored in `ResultSet` object. By traversing the `ResultSet` object, the return result can be mapped to the `Author` class object prepared earlier.
+- After [acquiring the database connection](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
+- Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
+- The query results will be stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
 </div>
 </SimpleTab>
 
 ## Filter results
 
-The query got a lot of results, but not all of them were what we wanted? We can filter the results of the query with the `WHERE` statement to find the part we want to query.
+You can use the `WHERE` statement to filter query results.
 
-For example, we want to find the writers born in 1998 among a lot of writers:
+For example, the following command will query authors who were born in 1998 among all authors:
 
 <SimpleTab>
 <div label="SQL" href="filter-sql">
 
-We can add filter conditions in the `WHERE` clause:
+Add filter conditions in the `WHERE` statement:
 
 {{< copyable "sql" >}}
 
@@ -133,11 +134,11 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" href="filter-java">
 
-For Java programs, we want to use the same SQL to handle data query request with dynamic parameters.
+In Java, you can use the same SQL to handle data query request with dynamic parameters.
 
-Splicing parameters into a SQL statement may be a method, but it is not a good idea, as it poses a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to our application.
+This can be done by splicing parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the  application.
 
-When dealing with such queries, we should use [preparedStatement](/develop/dev-guide-prepared-statement.md) instead of a normal Statement.
+When dealing with such queries, [prepared statement](/develop/dev-guide-prepared-statement.md) should be used instead of a normal statement.
 
 {{< copyable "java" >}}
 
@@ -166,9 +167,9 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 ## Sorting results
 
-Using the `ORDER BY` statement can make the query results sort in the way we expect.
+With the `ORDER BY` statement, you can sort query results.
 
-For example, we can use the following SQL statement to sort the `authors` table in descending order (`DESC`) according to the `birth_year` column to get a list of the youngest authors.
+For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
 
 {{< copyable "sql" >}}
 
@@ -178,7 +179,7 @@ FROM authors
 ORDER BY birth_year DESC;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +-----------+------------------------+------------+
@@ -200,7 +201,7 @@ The query results are as follows:
 
 ## Limit the number of query results
 
-If we want TiDB to return only partial results, we can use the `LIMIT` statement to limit the number of records return by the query result.
+You can use the `LIMIT` statement to limit the number of query results.
 
 {{< copyable "java" >}}
 
@@ -211,7 +212,7 @@ ORDER BY birth_year DESC
 LIMIT 10;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +-----------+------------------------+------------+
@@ -231,13 +232,13 @@ The query results are as follows:
 10 rows in set (0.11 sec)
 ```
 
-By observing the query results, you can see that after using the `LIMIT` statement, the query time is significantly shortened. This is the result of TiDB's optimization of the LIMIT clause. You can push down [TopN and Limit](/topn-limit-push-down.md) for more details.
+With TiDB's optimization of LIMIT statement, the query time is significantly reduced from `0.23 sec` to `0.11 sec`. For more information, see [TopN and Limit](/topn-limit-push-down.md).
 
 ## Aggregate Queries
 
-If you want to focus on the data as a whole rather than a portion of the data, you can use the `GROUP BY` statement with the aggregate function to construct an aggregate query to help you have a better understanding of the overall situation of the data.
+To have a better understanding of the overall data situation, you can use the `GROUP BY` statement to aggregate query results.
 
-For example, if you want to know which years have more writers born, you can group the basic information of writers according to the `birth_year` column, and then count the number of writers born in that year separately:
+For example, if you want to know which years there are more authors born, you can group the `authors` table by the `birth_year` column, and then count for each year:
 
 {{< copyable "java" >}}
 
@@ -248,7 +249,7 @@ GROUP BY birth_year
 ORDER BY author_count DESC;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +------------+--------------+
@@ -269,4 +270,4 @@ The query results are as follows:
 71 rows in set (0.00 sec)
 ```
 
-In addition to the `COUNT` function, TiDB also supports many useful aggregate functions. You can do this by checking the [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md) section to learn more.
+In addition to the `COUNT` function, TiDB also supports other aggregate functions. For more information, see [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md).

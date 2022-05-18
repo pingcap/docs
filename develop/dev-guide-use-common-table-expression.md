@@ -1,26 +1,29 @@
 ---
 title: Common Table Expression
+summary: Introduce the CTE capability of TiDB, which is used to write SQL statements more efficiently.
 ---
 
 # Common Table Expression
 
-Due to the objective complexity of the business, sometimes a single SQL statement as long as 2000 lines is written, which contains a large number of aggregations and multi-level sub-query nesting. Maintaining such SQL is a developer's nightmare.
+In some transaction scenarios, due to application complexity, you may sometimes write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such an SQL statement can be a developer’s nightmare.
 
-In the previous subsections we have described how to use [views](/develop/dev-guide-use-views.md) to simplify queries and how to use [temporary tables](/develop/dev-guide-use-temporary-tables.md) to cache intermediate query results.
+For more information about simplifying queries, see [Views](/develop/dev-guide-use-views.md). For more details about caching intermediate results, see [Temporary tables](/develop/dev-guide-use-temporary-tables.md) to cache intermediate query results.
 
-In this section, we will introduce the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
+This document introduces the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
 
-Since version 5.1, TiDB supports ANSI SQL 99 standard CTE and its recursive form, which greatly improves the efficiency of developers and DBAs in writing complex business logic SQL, and enhances the maintainability of the code.
+Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion. This helps developers and DBAs more efficiently write SQL statements for complex application logic and makes the code easier to maintain.
 
 ## Basic use
 
-Common Table Expression (CTE) is a temporary intermediate result set that can be referenced multiple times in SQL statements to improve the readability and execution efficiency of SQL statements. In TiDB, common table expressions can be used through the `WITH` statement。
+A Common Table Expression (CTE) is a temporary result set that can be referred multiple times within a SQL statement to improve the statement's readability and execution efficiency. You can apply the `WITH` statement to use Common Table Expressions.
 
-Common table expressions can be classified into non-recursive and recursive types.
+Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
 
 ### Non-recursive CTE
 
-Non-recursive CTEs are defined using the following syntax:
+Non-recursive CTE can be defined using the following syntax:
+
+{{< copyable "sql" >}}
 
 ```sql
 WITH <query_name> AS (
@@ -29,12 +32,12 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-For example, suppose we still want to know how many books each of the 50 oldest authors has written.
+For example, If you want to know how many books each of the 50 oldest authors has written.
 
 <SimpleTab>
 <div label="SQL">
 
-We can change the example in the [temporary tables](/develop/dev-guide-use-temporary-tables.md) section to the following SQL statement:
+Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
 
 {{< copyable "sql" >}}
 
@@ -55,7 +58,7 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +------------+------------+---------------------+-------+
@@ -112,7 +115,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-We found that the author named "Ray Macejkovic" wrote 4 books, let's go on to find out the orders and ratings of these 4 books by CTE query:
+It can be found that the author "Ray Macejkovic" wrote 4 books. With CTE query, you can find out the order and rating of these 4 books.
 
 {{< copyable "sql" >}}
 
@@ -149,7 +152,7 @@ FROM
 ;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +------------+-------------------------+----------------+--------+
@@ -163,15 +166,15 @@ The query results are as follows:
 4 rows in set (0.06 sec)
 ```
 
-In this SQL statement, we define three CTE blocks, which are separated by `,`.
+Three CTE blocks, which are separated by `,`, are defined in this SQL statement, .
 
-We first check out the books written by the author (The ID of the author is `2299112019`) in the CTE block `books_authored_by_rm`, then find the average rating and number of orders for these books in `books_with_average_ratings` and `books_with_orders` respectively, and finally aggregate the results by `JOIN` statement.
+First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by `JOIN` statement.
 
-It is noteworthy that the query in `books_authored_by_rm` will only be executed once, and TiDB will open up a temporary space to cache the results of the query. When `books_with_average_ratings` and `books_with_orders` refer to, it will directly obtain data from this temporary space.
+It is worthy to note that the query in `books_authored_by_rm` executes only once, and TiDB will open a temporary space to cache the results. When `books_with_average_ratings` and `books_with_orders` reference, it will get data directly from this temporary space.
 
 ### Recursive CTE
 
-Recursive common table expressions can be defined using the following syntax:
+Recursive CTE can be defined using the following syntax:
 
 ```sql
 WITH RECURSIVE <query_name> AS (
@@ -180,7 +183,7 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-A more classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) through recursive CTE：
+A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE：
 
 {{< copyable "sql" >}}
 
@@ -194,7 +197,7 @@ WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
 SELECT * FROM fibonacci;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +------+-------+------------+

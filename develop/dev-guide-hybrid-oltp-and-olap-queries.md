@@ -1,18 +1,19 @@
 ---
 title: HTAP Queries
+summary: Introduce the HTAP queries in TiDB.
 ---
 
 # HTAP Queries
 
-HTAP stands for Hybrid Transactional / Analytical Processing. Traditionally, databases are often designed for transactional or analytical scenarios, so the data platform often needs to be split into Transactional Processing and Analytical Processing, and the data needs to be replicated from the transactional database to the analytical database for quick response to analytical queries. TiDB databases can perform both transactional and analytical tasks, which greatly simplifies the construction of data platforms and allows users to use fresher data for analysis.
+HTAP stands for Hybrid Transactional and Analytical Processing. Traditionally, databases are often designed for transactional or analytical scenarios, so the data platform often needs to be split into Transactional Processing and Analytical Processing, and the data needs to be replicated from the transactional database to the analytical database for quick response to analytical queries. TiDB databases can perform both transactional and analytical tasks, which greatly simplifies the construction of data platforms and allows users to use fresher data for analysis.
 
-In TiDB, we have both TiKV, a row-store engine for online transactions, and TiFlash, a column-store engine for real-time analytics scenarios. Data exists in both the Row-Store and Columnar-Store, which are automatically synchronized for strong consistency. The Row-Store is optimized for online transactional OLTP, while the Columnar-Store is optimized for online analytical OLAP performance.
+TiDB has both TiKV, a row-based storage engine for Online Transactional Processing(OLTP), and TiFlash, a columnar storage engine for Online Analytical Processing(OLAP). The row-based storage engine and the columnar storage engine co-exist for HTAP. Both storage engines can replicate data automatically and keep strong consistency. The row-based storage engine optimizes OLTP performance, and the columnar storage engine optimizes OLAP performance.
 
-In the [Create Database](/develop/dev-guide-create-table.md#use-htap-capabilities) chapter, we have introduced how to enable the HTAP capability of TiDB. Below we'll take a closer look at how to use HTAP capabilities to analyze data faster.
+The [Create Database](/develop/dev-guide-create-table.md#using-htap-capabilities) section introduces how to enable the HTAP capability of TiDB. The following describes how to use HTAP to analyze data faster.
 
 ## Data preparation
 
-You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo) to prepare data:
+Before starting, you can import more extensive sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-through-tiup-demo-command-line). For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -20,17 +21,17 @@ You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#vi
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or [using the import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
+Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
 
-## Window function
+## Window functions
 
-When we use the database, in addition to the hope that it can store the data we want to record, and can realize business functions such as ordering and buying books, rating books, etc., we may also need to analyze our existing data, so as to make further decisions or take some operations based on the data.
+When using the database, in addition to storing data and implementing functions(such as order, rate books), you may also need to analyze the data you already have in order to make further operations and decisions based on the data.
 
-In the [Single Table Read](/develop/dev-guide-get-data-from-single-table.md) section, we have introduced how to use aggregate queries to analyze the data as a whole. In more complex usage scenarios, we may want to aggregate the results of multiple aggregate queries in a single query. For example, if we want to know the historical trend of orders for a particular book, we may need to use aggregate function `sum` for all the orders every month, and then aggregate the `sum` results together to get the historical trend data.
+The [Query data from a single table](/develop/dev-guide-get-data-from-single-table.md) introduces how to use aggregate queries to analyze the data as a whole. In more complex usage scenarios, you may want to aggregate the results of multiple aggregation queries into a single query. If you want to know the historical trend of the order amount of a particular book, you can aggregate `sum` for all order data every month, and then aggregate the `sum` results together to get the historical trend.
 
-In order to help users simplify the processing of such analysis, TiDB has supported window functions since version 3.0. Window functions provide cross-row data access capability for each row of data. Different from aggregation queries, window functions are used to aggregate data rows in the window range, but does not cause the result set to be merged into a single row of data.
+To facilitate such analysis, since TiDB v3.0, TiDB supports window functions. For each row of data, this function provides the ability to access data across multiple rows. Different from regular aggregation query, the window function aggregates rows without merging results set into a single row.
 
-Similar to aggregate functions, window functions also need to be used with a fixed set of syntax:
+Similar to aggregate functions, a fixed set of syntax is required when using the window function:
 
 ```sql
 SELECT
@@ -41,7 +42,7 @@ FROM
 
 ### `ORDER BY` clause
 
-For example, we can use the accumulation effect of the aggregation window function `sum()` to analyze the historical trend of the order volume of a certain book:
+With the aggregate window function `sum()`, you can analyze the historical trend of the order amount of a particular book. For example:
 
 {{< copyable "sql" >}}
 
@@ -59,7 +60,7 @@ FROM orders_group_by_month
 ORDER BY month ASC;
 ```
 
-The `sum()` function will accumulate the data in order according to the ordering method specified by the `ORDER BY` clause in the `OVER` clause. The accumulated results are as follows:
+The `sum()` function accumulates the data in the order specified by the `ORDER BY` statement in the `OVER` clause. The result is as follows:
 
 ```
 +---------+-------+
@@ -82,13 +83,13 @@ The `sum()` function will accumulate the data in order according to the ordering
 13 rows in set (0.01 sec)
 ```
 
-By visualizing the data obtained through a line graph with time on the horizontal axis and accumulate orders on the vertical axis, we can easily get a macro view of the historical order growth trend of the book through the change in the slope of the line graph.
+Visualize the data through a line chart with time on the horizontal axis and cumulative order amount on the vertical axis. It's easy to know the historical trend of the book through the change of the slope.
 
 ### `PARTITION BY` clause
 
-Let's make our requirements a little more complicated. Suppose you want to analyze the historical order growth trend of different types of books, and you want to present this data in the same multi-series line chart.
+Suppose that you want to analyze the historical trend of different types of books, and visualize in the same line chart with multiple series.
 
-We can use the `PARTITION BY` clause to group books according to their types and count their order accumulation history   separately for different types of books.
+Using the `PARTITION BY` clause to group books by types and count history order accumulation separately for different types of books.
 
 {{< copyable "sql" >}}
 
@@ -113,7 +114,7 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +------------------------------+---------+------+
@@ -139,17 +140,19 @@ The query results are as follows:
 1500 rows in set (1.70 sec)
 ```
 
-### Non-aggregate window function
+### Non-aggregate window functions
 
-Besides, TiDB also provides us with some non-aggregated [window functions](/functions-and-operators/window-functions.md), with the help of which we can realize richer analysis queries.
+Besides, TiDB also provides some non-aggregated [window functions](/functions-and-operators/window-functions.md) for more analysis.
 
-For example, in the previous [Pagination Query](/develop/dev-guide-paginate-results.md) chapter, we have introduced how to use the `row_number()` function to achieve efficient pagination batch processing.
+For example, the [Pagination Query](/develop/dev-guide-paginate-results.md) section introduces how to use the `row_number()` function to achieve efficient pagination batch processing.
 
 ## Hybrid workload
 
-### Enable column replica
+When using TiDB for real-time Online Analytical Processing in hybrid load scenarios, you only need to provide an entry point of TiDB to your data. TiDB automatically selects different processing engines based on the specific business.
 
-TiDB's default storage engine, TiKV, is row-stored. Before proceeding to the next steps, you can read the section [Enable HTAP Capability](/develop/dev-guide-create-table.md#use-htap-capabilities) and add a TiFlash column-stored replica of the `books` and `orders` tables using the following SQL.
+### Create TiFlash replicas
+
+TiDB's default storage engine, TiKV, is row based. To use TiFlash, see [Enable HTAP capability](/develop/dev-guide-create-table.md#using-htap-capabilities). Before performing the following steps, you should create TiFlash replicas for `books` and `orders` tables using the following statement.
 
 {{< copyable "sql" >}}
 
@@ -158,7 +161,7 @@ ALTER TABLE books SET TIFLASH REPLICA 1;
 ALTER TABLE orders SET TIFLASH REPLICA 1;
 ```
 
-By executing the following SQL statement, we can view the progress of TiDB creating a column-stored replica:
+You can check the progress of the TiFlash replicas using the following statement:
 
 {{< copyable "sql" >}}
 
@@ -167,7 +170,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop'
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bookshop' and TABLE_NAME = 'orders';
 ```
 
-A `PROGRESS` column of 1 indicates that the synchronization progress is 100% complete, and a `AVAILABLE` column of 1 indicates that the replica is currently available.
+A `PROGRESS` column of 1 indicates that the progress is 100% complete, and a `AVAILABLE` column of 1 indicates that the replica is currently available.
 
 ```
 +--------------+------------+----------+---------------+-----------------+-----------+----------+
@@ -184,9 +187,9 @@ A `PROGRESS` column of 1 indicates that the synchronization progress is 100% com
 1 row in set (0.07 sec)
 ```
 
-After the replica is added, you can view the execution plan of the above window function [example SQL](#partition-by-clause) by using the `EXPLAIN` statement. You will find that the words `cop[tiflash]` have appeared in the execution plan, indicating that the TiFlash engine has begun to function.
+After replicas added, you can use the `EXPLAIN` statement to check out the execution plan of the above window function [partition by clause](#partition-by-clause). If `cop[tiflash]` appears in the execution plan, it means that the TiFlash engine has started to work.
 
-Query results as follow:
+Execute [partition by clause](#partition-by-clause) again, the result is as follow:
 
 ```
 +------------------------------+---------+------+
@@ -212,20 +215,18 @@ Query results as follow:
 1500 rows in set (0.79 sec)
 ```
 
-By comparing the two execution results before and after, you will find that the query speed is significantly improved by using TiFlash (when the amount of data is larger, the improvement will be more significant). 
-
-This is because when using window functions, it is often necessary to perform a full table scan on the data of some columns. Compared with TiKV in row storage, TiFlash in column storage is more suitable for handling the load of such analytical tasks. For TiKV, if the number of rows to be queried can be quickly reduced through the primary key or index, the query speed is often very fast, and the resource consumption is generally less than that of TiFlash.
+By comparing the two execution results, you can find that the query speed is significantly improved with TiFlash (the improvement is more significant with larger amount of data). This is because full table scan is needed when using window functions, and columnar TiFlash is better suited to handle this type of analytical task than row-based TiKV. For TiKV, using primary keys or indexed to reduce the number of rows, it will be very fast and consume fewer resources compared to TiFlash.
 
 ### Specify the query engine
 
-TiDB will use the cost-based optimizer (CBO) to automatically choose whether to use TiFlash replicas based on cost estimates. However, in practice, if you are very sure about the type of query, it is recommended that you use [Optimizer Hints](/optimizer-hints.md) to explicitly specify the query engine used for the query to avoid fluctuations in application performance due to different optimization results from the optimizer.
+TiDB uses the Cost Based Optimizer (CBO) to automatically choose whether to use TiFlash replicas based on cost estimates. However, if you are sure about the type of query in practice, you can specify the query engine to be used with [Optimizer Hints](/optimizer-hints.md).
 
-You can use Hint `/*+ read_from_storage(engine_name[table_name]) */` to specify the query engine to be used when querying in the SELECT statement like the following SQL:
+You can use Hint `/*+ read_from_storage(engine_name[table_name]) */` to specify the query engine to be used in the following statement.:
 
 > **Notice:**
 >
-> 1. If your table uses aliases, you should replace table_name in Hints with alias_name, otherwise Hints will be invalid.
-> 2. Also, setting read_from_storage Hint for [common table expression](/develop/dev-guide-use-common-table-expression.md) does not work.
+> 1. If the table has an alias, use the alias in Hint, otherwise, Hint will not work.
+> 2. Additionally, setting read_from_storage Hint for [common table expression](/develop/dev-guide-use-common-table-expression.md) does not work.
 
 {{< copyable "sql" >}}
 
@@ -251,13 +252,13 @@ WITH orders_group_by_month AS (
 SELECT * FROM acc;
 ```
 
-If you check the execution plan of the above SQL with the `EXPLAIN` statement, you will see both `cop[tiflash]` and `cop[tikv]` in the task column, which means that TiDB is scheduling both the row-store query engine and the column-store query engine to complete the query when it processes this query. It is important to note that since the tiflash and tikv storage engines are usually part of different compute nodes, the two query types are not affected by each other.
+You can use the `EXPLAIN` statement to check out the execution plan of the above SQL. If `cop[tiflash]` and `cop[tikv]` appear in the task column at the same time, it means that TiFlash and TiKV are scheduled to complete this query. It is worthy to note that TiFlash and TiKV storage engines are usually part of different TiDB nodes, so the two query types are not affected by each other.
 
-You can learn more about how TiDB chooses to use TiFlash by reading the section [Reading TiFlash with TiDB](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas) as a query engine.
+For more information about how TiDB chooses to use TiFlash, see [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas)
 
 ## Read more
 
-- [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md)
+- [Quick Start with HTAP](/quick-start-with-htap.md)
 - [Explore HTAP](/explore-htap.md)
 - [Window Functions](/functions-and-operators/window-functions.md)
 - [Use TiFlash](/tiflash/use-tiflash.md)
