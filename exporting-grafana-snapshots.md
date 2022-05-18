@@ -5,8 +5,7 @@ summary: Learn how to export snapshots of Grafana Dashboard, and how to visualiz
 
 > **Warning:**
 >
-> - Since TiDB v6.0.0, PingCAP no longer maintains MetricsTool.
-> - Since TiDB v6.1.0, PingCAP no longer maintains the MetricsTool documentation.
+> - Since TiDB v6.0.0, PingCAP no longer maintains MetricsTool. Since v6.1.0, PingCAP no longer maintains the MetricsTool documentation.
 > - To export monitoring metrics data, use the [PingCAP Clinic diagnostic service](/clinic/clinic-introduction.md) to get the information required for diagnosing a TiDB cluster, including the monitoring metrics, logs, cluster topology, configuration, and parameters.
 
 # Export Grafana Snapshots
