@@ -5,17 +5,17 @@ summary: Learn the the basics on TiDB database schema design.
 
 # TiDB Database Schema Design Overview
 
-This document provides the basics on TiDB database schema design, including the objects in TiDB, access control, database schema changes, and object limitations.
+This document provides the basics of TiDB database schema design, including the objects in TiDB, access control, database schema changes, and object limitations.
 
 In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-design.md) will be taken as an example to show you how to design a database and perform data read and write operations in a database.
 
 ## Objects in TiDB
 
-To distinguish with some general terms, here is a brief agreement on the terms used in TiDB:
+To distinguish some general terms, here is a brief agreement on the terms used in TiDB:
 
 - To avoid confusion with the generic term [database](https://en.wikipedia.org/wiki/Database), **database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
 
-- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in database. For more information, see [MySQL documentation](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that have schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
+- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in a database. For more information, see [MySQL documentation](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that have schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
 
 ### Database
 
@@ -73,7 +73,7 @@ TiDB supports both user-based and role-based access control. To allow users to v
 
 ## Database schema changes
 
-As a best practice, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead a driver or ORM to execute database schema changes.
+As a best practice, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead of a driver or ORM to execute database schema changes.
 
 ## Object limitations
 
@@ -113,4 +113,4 @@ This section lists the object limitations on identifier length, a single table, 
 
 ### Number of rows
 
-TiDB supports **unlimited** number of rows by adding nodes to the cluster. For the relevant principles, see [TiDB Best Practices](/best-practices/tidb-best-practices.md).
+TiDB supports an **unlimited** number of rows by adding nodes to the cluster. For the relevant principles, see [TiDB Best Practices](/best-practices/tidb-best-practices.md).
