@@ -1334,7 +1334,7 @@ Configuration items related to Raft Engine.
 ### `enable`
 
 + Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
-+ Default value: `"true"`
++ Default value: `true`
 
 ### `dir`
 
