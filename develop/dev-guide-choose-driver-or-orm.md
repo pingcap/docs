@@ -5,7 +5,7 @@ summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 
 # Choose Driver or ORM
 
-TiDB is highly compatible with the MySQL 5.7 protocol, but some features are not compatible with MySQL.
+TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
 
 For example:
 
