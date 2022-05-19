@@ -44,11 +44,11 @@ If `n` is a very large value (such as `3600000` in the above example), it is lik
 
 Different connection pool implementations might support one or more of the above methods. You can check your connection pool documentation to find the corresponding configuration.
 
-### Formula based on experiences
+### Formulas based on experience
 
-According to the [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) article of HikariCP, if you have no idea about how to set a proper database connection pool size, you can get started with a [formula based on experiences](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count). Based on the performance result of the pool size calculated from the formula, you can further adjust the size to achieve the best performance.
+According to the [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) article of HikariCP, if you have no idea about how to set a proper size for the database connection pool, you can get started with a [formula based on experience](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count). Then, based on the performance result of the pool size calculated from the formula, you can further adjust the size to achieve the best performance.
 
-The formula based on experiences is as follows:
+The formula based on experience is as follows:
 
 ```
 connections = ((core_count * 2) + effective_spindle_count)
@@ -58,7 +58,7 @@ The description of each parameter in the formula is as follows:
 
 - **connections**: the size of connections obtained.
 - **core_count**: the number of CPU cores.
-- **effective_spindle_count**: the number of hard drives (not [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)). Because each spinning hard disk can be called a spindle. For example, if you are using a server with a RAID of 16 disks, the **effective_spindle_count** should be 16. Because **HDD** usually can handle only one thing at a time, the formula here is actually measuring how many concurrent I/O requests your server can manage.
+- **effective_spindle_count**: the number of hard drives (not [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)). Because each spinning hard disk can be called a spindle. For example, if you are using a server with a RAID of 16 disks, the **effective_spindle_count** should be 16. Because **HDD** usually can handle only one request at a time, the formula here is actually measuring how many concurrent I/O requests your server can manage.
 
 In particular, pay attention to the following note below the [formula](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula).
 
@@ -78,7 +78,7 @@ This note indicates that:
 - When data is fully cached, you need to set **effective_spindle_count** to `0`. As the hit rate of cache decreases, the count is more and more closer to the actual number of `HDD`.
 - **Whether the formula works for _SSD_ is not tested and unknown.**
 
-When using SSDs, it is recommended that you using the following formula based on experiences instead:
+When using SSDs, it is recommended that you using the following formula based on experience instead:
 
 ```
 connections = (number of cores * 4)
@@ -88,14 +88,14 @@ Therefore, you can set the maximum connection size of the initial connection poo
 
 ### Tuning direction
 
-As you can see, the size calculated from the [formula based on experiences](#formula-based-on-experiences) is just a recommended base value. To get the best value on a specific machine, you need to further adjust the size to achieve the best performance.
+As you can see, a size calculated from the [formulas based on experience](#formula-based-on-experiences) is just a recommended base value. To get the optimal size on a specific machine, you need to try other values around the base value and test the performance.
 
-To get an optimal size, you can follow some basic rules as follows:
+Here are some basic rules to help you get the optimal size:
 
-1. If your network or storage latency is high, increase your maximum number of connections to reduce the latency waiting time. Once a thread is blocked by latency, other threads can take over and continue processing.
-2. If you have multiple services deployed on your server, and each service has a separate connection pool, consider the sum of their connection pools' maximum connections.
+- If your network or storage latency is high, increase your maximum number of connections to reduce the latency waiting time. Once a thread is blocked by latency, other threads can take over and continue processing.
+- If you have multiple services deployed on your server and each service has a separate connection pool, consider the sum of the maximum number of connections to all connection pools.
 
-## Connection Parameters
+## Connection parameters
 
 Java applications can be encapsulated with various frameworks. In most of the frameworks, JDBC API is called on the bottommost level to interact with the database server. For JDBC, it is recommended that you focus on the following things:
 
