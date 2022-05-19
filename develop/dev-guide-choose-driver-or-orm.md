@@ -17,7 +17,7 @@ For example:
 
 - Features that are different from MySQL:
 
-    - Auto-increment ID: In TiDB, auto-incremental columns are globally unique. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
+    - Auto-increment ID: auto-incremental columns are globally unique in TiDB. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
 
 For a full list of compatibility differences, see [MySQL Compatibility](/mysql-compatibility.md).
 
@@ -25,8 +25,8 @@ For a full list of compatibility differences, see [MySQL Compatibility](/mysql-c
 
 TiDB provides the following two support levels for Java:
 
-- **Full**: Indicates that using this driver or ORM does not have any known issues.
-- **Verified**: Indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
+- **Full**: indicates that using this driver or ORM does not have any known issues.
+- **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
 
 ### Java Drivers
 
@@ -38,12 +38,12 @@ You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8
 
 > **Note:**
 >
-> The version `8.0.16` or later is strongly recommended, which fixes two Common Vulnerabilities and Exposures (CVEs):
+> Version `8.0.16` or later is strongly recommended, which fixes two Common Vulnerabilities and Exposures (CVEs):
 >
 > - Fix CVE-2019-2692 directly
 > - Fix CVE-2021-22569 indirectly
 
-For an example about how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
+For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
 
 ### Java ORM framework
 
