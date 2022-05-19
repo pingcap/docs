@@ -1,9 +1,9 @@
 ---
-title: Object Naming Convention
+title: Object naming convention
 summary: Introduces the object naming convention in TiDB.
 ---
 
-# Object Naming Convention
+# Object naming convention
 
 This document introduces the rules for naming database objects, such as DATABASE, TABLE, INDEX, USER.
 
@@ -14,11 +14,11 @@ This document introduces the rules for naming database objects, such as DATABASE
 - Avoid using TiDB reserved words, such as `group`, `order`, as a field name.
 - It is recommended to use lowercase letters for all database objects.
 
-## Database Naming Convention
+## Database naming convention
 
 It is recommended to differentiate names by business, product, or other metrics, generally no more than 20 characters. For example: temporary library (tmp_crm), test library (test_crm).
 
-## Table Naming Convention
+## Table naming convention
 
 - Use the same prefix for tables of the same business or module and the name should express it's meaning of as much as possible.
 - Multiple words are separated by underscores, and it is not recommended to exceed 32 characters.
@@ -30,7 +30,7 @@ It is recommended to differentiate names by business, product, or other metrics,
 - Create separate DATABASE for tables of different business modules and add annotations accordingly.
 - Currently, TiDB only supports setting the value of `lower-case-table-names` to `2`. This means it is case-sensitive when you save a table name, but case-insensitive when you compare table names. The comparison is based on the lower case.
 
-## Field Naming Convention
+## Field naming convention
 
 - The field naming is the actual meaning or abbreviation of the field.
 - It is recommended to use the same name between tables with the same meaning field.
@@ -39,7 +39,7 @@ It is recommended to differentiate names by business, product, or other metrics,
 - It is not recommended to name a field with more than 30 characters, and the number of fields should be less than 60.
 - Avoid using TiDB reserved words, such as `order`, `from`, `desc`. For more information, refer to the TiDB reserved words.
 
-## Index Naming Convention
+## Index naming convention
 
 - Primary key index: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
 - Unique index: `uk_{table_name_abbreviation}_{field_name_abbreviation}`

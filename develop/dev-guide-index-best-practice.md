@@ -1,11 +1,11 @@
 ---
-title: Best Practices for Indexing
-summary: Introduce best practices for indexing in TiDB.
+title: Best practices for indexing
+summary: Introducing best practices for indexing in TiDB.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Best Practices for Indexing
+# Best practices for indexing
 
 This document introduces some best practices for creating and using index in TiDB.
 
@@ -27,7 +27,7 @@ CREATE TABLE `books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-## Best Practices for creating Index
+## Best practices for creating indexes
 
 - Creating combined index with multiple columns, which is a optimization called [covering index optimization](/explain-indexes.md#indexreader). **Covering index optimization** allows TiDB to query data directly on the index, which helps improve performance.
 - Avoid creating secondary index on columns that you don't query often. A useful secondary index can speed up queries, but be aware that it also has side effects. Each time you add an index, an additional Key-Value is added when you insert a row. The more indexes you have, the slower you write, and the more space it takes up. In addition, too many indexes affect optimizer runtime, and inappropriate indexes can mislead the optimizer. So, more indexes aren't always better.
@@ -38,7 +38,7 @@ CREATE TABLE `books` (
 
 - Use meaningful secondary index name, and it is recommend to follow table naming conventions of your company or organization. If not, refer to [Index Naming Specification](/develop/dev-guide-object-naming-guidelines.md).
 
-## Best Practices for using Index
+## Best practices for using indexes
 
 - Index is to speed up the query, so make sure the index can be used in some queries. If an index is not used by any query, the index is meaningless, so, drop it.
 - When using combined index, satisfy the left-prefix rule.
