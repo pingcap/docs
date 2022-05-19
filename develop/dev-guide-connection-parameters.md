@@ -1,13 +1,12 @@
 ---
-title: Connection Pools and Connection Parameter
+title: Connection Pools and Connection Parameters
 ---
 
-# Connection Pools and Connection Parameter
+# Connection Pools and Connection Parameters
 
-> **Note:**
->
-> - Connection Pooling Parameters: **Configure the number of connections**, **Probe configuration** of two sections from [Best Practices for Developing Java Applications with TiDB - Connection pool](/best-practices/java-app-best-practices.md#connection-pool)
-> - Connection Parameters from [Best Practices for Developing Java Applications with TiDB - JDBC](/best-practices/java-app-best-practices.md#jdbc)
+This document describes how to configure connection pools and connection parameters when you use a driver or ORM framework to connect to TiDB.
+
+If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md#connection-pool)
 
 ## Connection pool
 
@@ -75,10 +74,10 @@ In particular, pay attention to the following note below the [formula](https://g
 This note indicates that:
 
 - **core_count** is the number of physical cores, regardless of whether you enable [Hyper-Threading](https://en.wikipedia.org/wiki/Hyper-threading) or not.
-- When data is fully cached, you need to set **effective_spindle_count** to `0`. As the hit rate of cache decreases, the count is more and more closer to the actual number of `HDD`.
+- When data is fully cached, you need to set **effective_spindle_count** to `0`. As the hit rate of cache decreases, the count is closer to the actual number of `HDD`.
 - **Whether the formula works for _SSD_ is not tested and unknown.**
 
-When using SSDs, it is recommended that you using the following formula based on experience instead:
+When using SSDs, it is recommended that you use the following formula based on experience instead:
 
 ```
 connections = (number of cores * 4)
@@ -280,6 +279,6 @@ After it is configured, you can check the monitoring to see a decreased number o
 
 #### Timeout-related parameters
 
-TiDB provides two MySQL-compatible parameters that controls the timeout: **wait_timeout** and **max_execution_time**. These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
+TiDB provides two MySQL-compatible parameters to control the timeout: **wait_timeout** and **max_execution_time**. These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
 
 However, in an actual production environment, idle connections and SQL statements with excessively long execution time negatively affect databases and applications. To avoid idle connections and SQL statements that are executed for too long, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).
