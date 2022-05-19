@@ -165,7 +165,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 </div>
 </SimpleTab>
 
-## Sorting results
+## Sort results
 
 With the `ORDER BY` statement, you can sort query results.
 

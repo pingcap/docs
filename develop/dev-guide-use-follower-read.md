@@ -1,11 +1,11 @@
 ---
 title: Follower Read
-summary: Introduce how to use follower read to optimize query performance.
+summary: Introduce how to use Follower Read to optimize query performance.
 ---
 
 # Follower Read
 
-This document introduces how to use follower read to optimize query performance.
+This document introduces how to use Follower Read to optimize query performance.
 
 ## Introduction
 
@@ -21,7 +21,7 @@ For more about handling hotspot, see [TiDB Hotspot Problem Handling](/troublesho
 
 If read hotspots are unavoidable or the changing cost is very high, you can try to use the Follower Read to better load balance of read requests to the follower region.
 
-## Enable follower read
+## Enable Follower Read
 
 <SimpleTab>
 <div label="SQL">

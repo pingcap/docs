@@ -227,7 +227,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 This method significantly improves the efficiency of batch processing by avoiding wasting computing resources caused by frequent data sorting operations.
 
-## Paging batch for composite primary key table
+## Paging batches for composite primary key tables
 
 ### Non-clustered index table
 
