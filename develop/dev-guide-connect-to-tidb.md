@@ -11,7 +11,7 @@ TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/inter
 
 ## MySQL Shell
 
-You can connect to TiDB using MySQL Shell, which can be used a command line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
+You can connect to TiDB using MySQL Shell, which can be used as a command line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -21,7 +21,7 @@ mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 
 > **Note:**
 >
-> The MySQL Shell earlier than version 5.7.7 clears [Optimizer Hints](/optimizer-hints.md#optimizer-hints) by default. If you need to use the Hint syntax in an earlier version, add the `--comments` option when starting the client.
+> The MySQL Shell earlier than version 5.7.7 clears [Optimizer Hints](/optimizer-hints.md#optimizer-hints) by default. If you need to use the Hint syntax in an earlier MySQL Shell version, add the `--comments` option when starting the client.
 
 ## JDBC
 
@@ -36,11 +36,11 @@ MysqlDataSource mysqlDataSource = new MysqlDataSource();
 mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/{database}?user={username}&password={password}");
 ```
 
-For more information on JDBC connections, see [JDBC documentation](https://dev.mysql.com/doc/connector-j/8.0/en/)
+For more information on JDBC connections, see the [JDBC documentation](https://dev.mysql.com/doc/connector-j/8.0/en/)
 
 ### Connection parameters
 
-| Parameter Name | Description |
+| Parameter name | Description |
 | :---: | :----------------------------: |
 | `{username}` | A [SQL user](/user-account-management.md) to connect to the TiDB cluster |
 | `{password}` | The password of the SQL user |
@@ -88,7 +88,7 @@ For more information about Hibernate connection parameters, see [Hibernate docum
 
 ### Connection parameters
 
-| Parameter Name | Description |
+| Parameter name | Description |
 | :---: | :----------------------------: |
 | `{username}` |  A [SQL user](/user-account-management.md) to connect to the TiDB cluster  |
 | `{password}` | The password of the SQL user |
