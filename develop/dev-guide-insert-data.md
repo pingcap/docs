@@ -142,7 +142,7 @@ If you need to quickly import a large amount of data into a TiDB cluster, the be
 
 ## Avoid hot spots
 
-When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
+When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
 
 For more information on how to handle hotspot issues, please refer to the [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) documentation.
 
@@ -185,4 +185,4 @@ This is intended to indicate to you that it is not recommended to manually speci
 
 ## Using HTAP
 
-In TiDB, using HTAP capabilities does not require you to perform additional operations when inserting data. There is no additional insertion logic, and TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table and you can use the column copy to speed up your queries directly.
+In TiDB, using HTAP capabilities does not require you to perform additional operations when inserting data. There is no additional insertion logic, and TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-guide-create-table.md#use-htap-capabilities) after creating the table and you can use the column copy to speed up your queries directly.
