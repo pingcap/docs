@@ -9,8 +9,8 @@ This document introduces some general development specifications for using SQL.
 
 ## Create and delete tables
 
-- Basic principle: the table is created under the premise of following the table naming specification, and it is recommended to add judgment logic to the build and delete table statements in the internal package of business applications to prevent abnormal interruption of business processes.
-- Details: `create table if not exists table_name` or `drop table if exists table_name` statements are recommended to add if judgments to avoid abnormal interruptions caused by SQL commands running abnormally on the application side.
+- Basic principle: under the premise of following the table naming convention, it is recommended that the application internally packages the table creation and deletion statements and adds judgment logic to prevent abnormal interruption of business processes.
+- Details: `create table if not exists table_name` or `drop table if exists table_name` statements are recommended to add `if` judgments to avoid abnormal interruptions caused by SQL commands running abnormally on the application side.
 
 ## `SELECT *` usage
 
