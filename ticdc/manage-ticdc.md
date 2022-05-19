@@ -613,9 +613,9 @@ Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Ch
 enable-old-value = true
 ```
 
-This feature is enabled by default since v5.0. To learn about the output format of the TiCDC Open Protocol after this feature is enabled, see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event).
+This feature is enabled by default since v5.0. To learn the output format of the TiCDC Open Protocol after this feature is enabled, see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event).
 
-## Replicate tables enabled with new framework for collations
+## Replicate tables with the new framework for collations enabled
 
 Starting from v4.0.15, v5.0.4, v5.1.1 and v5.2.0, TiCDC supports tables that have enabled [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
 
