@@ -15,10 +15,10 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
 1. If you do not have a TiDB Cloud account, click [TiDB Cloud](https://tidbcloud.com/signup) to sign up for an account.
 2. [Sign in](https://tidbcloud.com/) with your TiDB Cloud account.
-3. Choose a **Developer Tier** plan for one year free at [plans](https://tidbcloud.com/console/plans), or go directly to the **Create a Cluster (Dev Tier)** page by clicking [Create a Cluster (Dev Tier)](https://tidbcloud.com/console/create-cluster?tier=dev).
-4. Please fill in the cluster name, password, cloud service provider (for now, only AWS is available), availability zone (nearby is recommended) on the **Create a Cluster (Dev Tier)** page and then click the **Create** button to create a cluster.
+3. On the [plan page]((https://tidbcloud.com/console/plans)), select the **Developer Tier** plan for one year free, or click [Create a Cluster (Dev Tier)](https://tidbcloud.com/console/create-cluster?tier=dev) to the **Create a Cluster (Dev Tier)** page.
+4. On the **Create a Cluster (Dev Tier)** page, set up your cluster name, password, cloud service provider (for now, only AWS is available) and availability zone (nearby is recommended). Then click the **Create** button to create your cluster.
 5. Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes. You can check the creation progress at [Active Clusters](https://tidbcloud.com/console/clusters).
-6. After creation, on the **Active Clusters** page, click the cluster name to enter the cluster control panel.
+6. After creating a cluster, on the **Active Clusters** page, click the name of your newly created cluster to navigate to the cluster control panel.
 
     ![active clusters](/media/develop/IMG_20220331-232643794.png)
 
@@ -26,8 +26,8 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
     ![connect](/media/develop/IMG_20220331-232726165.png)
 
-8. Click **Add Your Current IP Address** in the popup window. We will be filled in by your current network IP. Click **Create Filter** to create a traffic filter.
-9. Copy the connection string from the popup window **Step 2: Connect with a SQL client** for the next step.
+8. Click **Add Your Current IP Address** in the popup window, which will be filled in by your current network IP. Click **Create Filter** to create a traffic filter.
+9. Copy the connection string from the popup window for the next step.
 
     ![SQL string](/media/develop/IMG_20220331-232800929.png)
 
@@ -39,7 +39,7 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
 <div label="macOS">
 
-If you don't have Homebrew, please refer to the [brew official website](https://brew.sh/index) to install.
+If you don't have Homebrew, refer to the [brew official website](https://brew.sh/index) to install.
 
 {{< copyable "shell-regular" >}}
 
@@ -47,7 +47,7 @@ If you don't have Homebrew, please refer to the [brew official website](https://
 brew install mysql-client
 ```
 
-In the command line output of the installation, you get the following information:
+The output is as follows:
 
 ```
 mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
@@ -61,7 +61,7 @@ For compilers to find mysql-client you may need to set:
   export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 ```
 
-Run this line (if the command line output is inconsistent with the documentation here, please refer to the command line output):
+Run the following command in the above output (if your command line output is inconsistent with the documentation here, refer to the command line output):
 
 {{< copyable "shell-regular" >}}
 
@@ -69,7 +69,7 @@ Run this line (if the command line output is inconsistent with the documentation
 echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
-Once done, declare the global environment variable by `source` command and verify that the MySQL client is installed successfully:
+Then, declare the global environment variable by `source` command and verify that the MySQL client is installed successfully:
 
 {{< copyable "shell-regular" >}}
 
@@ -78,7 +78,7 @@ source ~/.zshrc
 mysql --version
 ```
 
-Expect output :
+Expected output:
 
 ```
 mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
@@ -96,7 +96,7 @@ Take CentOS 7 as an example:
 yum install mysql
 ```
 
-Once done, verify that the MySQL client is installed successfully:
+Then, verify that the MySQL client is installed successfully:
 
 {{< copyable "shell-regular" >}}
 
@@ -104,7 +104,7 @@ Once done, verify that the MySQL client is installed successfully:
 mysql --version
 ```
 
-Expect output:
+Expected output:
 
 ```
 mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
@@ -114,7 +114,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [step 1](#step-1-create-a-free-cluster).
+2. Run the connection string obtained in [Step 1](#step-1-create-a-free-cluster).
 
 {{< copyable "shell-regular" >}}
 
@@ -122,66 +122,66 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 mysql --connect-timeout 15 -u root -h <host> -P 4000 -p
 ```
 
-3. Fill in the password to complete the sign in.
+3. Fill in the password to sign in.
 
 ## Step 3. Run the sample application
 
-1. Clone the tidb-example-java project.
+1. Clone the `tidb-example-java` project.
 
-{{< copyable "shell-regular" >}}
+  {{< copyable "shell-regular" >}}
 
-```shell
-git clone https://github.com/pingcap-inc/tidb-example-java.git
-```
+  ```shell
+  git clone https://github.com/pingcap-inc/tidb-example-java.git
+  ```
 
 2. Change connection parameters.
 
-<SimpleTab>
+  <SimpleTab>
 
-<div label="Local default cluster">
+  <div label="Local default cluster">
 
-No changes required.
+  No changes required.
 
-</div>
+  </div>
 
-<div label="Non-local default cluster, TiDB Cloud, or other remote cluster">
+  <div label="Non-local default cluster, TiDB Cloud, or other remote cluster">
 
-Change the parameters for Host, Post, User and Password in `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`:
+  Change the parameters for Host, Post, User and Password in `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`:
 
-{{< copyable "" >}}
+  {{< copyable "" >}}
 
-```java
-mysqlDataSource.setServerName("localhost");
-mysqlDataSource.setPortNumber(4000);
-mysqlDataSource.setDatabaseName("test");
-mysqlDataSource.setUser("root");
-mysqlDataSource.setPassword("");
-```
+  ```java
+  mysqlDataSource.setServerName("localhost");
+  mysqlDataSource.setPortNumber(4000);
+  mysqlDataSource.setDatabaseName("test");
+  mysqlDataSource.setUser("root");
+  mysqlDataSource.setPassword("");
+  ```
 
-If the password you set is `123456`, the connection string you get in TiDB Cloud is:
+  If the password you set is `123456`, the connection string you get in TiDB Cloud is:
 
-{{< copyable "" >}}
+  {{< copyable "" >}}
 
-```shell
-mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
-```
+  ```shell
+  mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
+  ```
 
-Then here you should change the parameter to:
+  Then change the parameter:
 
-{{< copyable "" >}}
+  {{< copyable "" >}}
 
-```java
-mysqlDataSource.setServerName("tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com");
-mysqlDataSource.setPortNumber(4000);
-mysqlDataSource.setDatabaseName("test");
-mysqlDataSource.setUser("root");
-mysqlDataSource.setPassword("123456");
-```
+  ```java
+  mysqlDataSource.setServerName("tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com");
+  mysqlDataSource.setPortNumber(4000);
+  mysqlDataSource.setDatabaseName("test");
+  mysqlDataSource.setUser("root");
+  mysqlDataSource.setPassword("123456");
+  ```
 
-</div>
+  </div>
 
-</SimpleTab>
+  </SimpleTab>
 
 3. Run `make plain-java-jdbc`.
 
-The output should be as [expected](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc).
+  The [expected output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc).

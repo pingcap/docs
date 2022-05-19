@@ -15,7 +15,7 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 > **Note:**
 >
-> This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md) from the TiDB documentation, so you can go directly to this document for more comprehensive, in-depth information on basic SQL operations.
+> This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md). For more details, see [Explore SQL with TiDB](/basic-sql-operations.md).
 
 TiDB is compatible with MySQL, you can use MySQL statements directly in most the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
@@ -97,7 +97,7 @@ To query a specific column, add the column name after the `SELECT` keyword:
 SELECT name FROM person;
 ```
 
-Running results:
+The result is as follows:
 
 ```
 +------+
