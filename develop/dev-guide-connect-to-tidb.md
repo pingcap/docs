@@ -5,13 +5,13 @@ summary: Learn how to connect to TiDB.
 
 # Connect to TiDB
 
-TiDB is highly compatible with MySQL 5.7 protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
+TiDB is highly compatible with the MySQL 5.7 protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
 
 TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
 
 ## MySQL Shell
 
-You can connect to TiDB using MySQL Shell, which can be used as a command line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
+You can connect to TiDB using MySQL Shell, which can be used as a command-line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
 
 {{< copyable "shell-regular" >}}
 
