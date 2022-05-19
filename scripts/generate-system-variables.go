@@ -116,7 +116,11 @@ func skipSv(sv *variable.SysVar) bool {
 		variable.TiDBRemoveOrderbyInSubquery,
 		variable.TiDBTxnCommitBatchSize,
 		variable.TiDBOptProjectionPushDown,
-		variable.TiDBEnableNewCostInterface:
+		variable.TiDBEnableNewCostInterface,
+		variable.TiDBStatsCacheMemQuota,
+		variable.TiDBMaxTiFlashThreads,
+		variable.TiDBMemQuotaAnalyze,
+		variable.TiDBNonTransactionalIgnoreError:
 
 		return true
 	}
@@ -258,6 +262,10 @@ func formatSpecialVersionComment(sv *variable.SysVar) string {
 		variable.TiDBPlacementMode, variable.TiDBTxnAssertionLevel, variable.TiDBRCReadCheckTS,
 		variable.TiDBTopSQLMaxMetaCount, variable.TiDBTopSQLMaxTimeSeriesCount:
 		return ` <span class="version-mark">New in v6.0.0</span>`
+	case variable.RequireSecureTransport, variable.TiDBCommitterConcurrency, variable.TiDBEnableAutoAnalyze,
+	variable.TiDBEnableBatchDML, variable.TiDBEnablePrepPlanCache,
+	variable.TiDBMemOOMAction, variable.TiDBPrepPlanCacheSize, variable.TiDBPrepPlanCacheMemoryGuardRatio:
+		return ` <span class="version-mark">New in v6.1.0</span>`
 	default:
 		return ""
 	}
@@ -356,7 +364,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"> **Note:**\n" +
 			">\n" +
-			"> Only when the `run-auto-analyze` option is enabled in the starting configuration file of TiDB, the `auto_analyze` feature can be triggered."
+			"> This feature requires the system variable `tidb_enable_auto_analyze` set to `ON`."
 	case variable.TiDBAutoAnalyzeStartTime:
 		return "- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1AM and 3AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`."
 	case variable.TiDBBackoffLockFast:
@@ -489,6 +497,7 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    * `SQL_CALC_FOUND_ROWS` syntax\n" +
 			"    * `START TRANSACTION READ ONLY` and `SET TRANSACTION READ ONLY` syntax\n" +
 			"    * The `tx_read_only`, `transaction_read_only`, `offline_mode`, `super_read_only`, `read_only` and `sql_auto_is_null` system variables\n" +
+			"    * `GROUP BY <expr> ASC|DESC` syntax\n" +
 			"\n" +
 			"> **Warning:**\n" +
 			">\n" +
@@ -769,7 +778,8 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"\n" +
 			"```sql\n" +
 			"SET tidb_query_log_max_len = 20\n" +
-			"```"
+			"```\n" +
+			"- This setting was previously also available a tidb.toml option (`log.query-log-max-len`), but is only a system variable starting from TiDB 6.1."
 	case variable.TiDBRecordPlanInSlowLog:
 		return "- This variable is used to control whether to include the execution plan of slow queries in the slow log."
 	case variable.TiDBReplicaRead:
@@ -1051,7 +1061,33 @@ func getExtendedDescription(sv *variable.SysVar) string {
 			"    - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.\n" +
 			"- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.\n" +
 			"- Users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable."
-
+	case variable.RequireSecureTransport:
+		return "- This variable ensures that all connections to TiDB are either on a local socket, or using TLS. See [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md) for additional details.\n" +
+			"- Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.\n" +
+"- This setting was previously a tidb.toml option (`security.require-secure-transport`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBCommitterConcurrency:
+		return "- The number of goroutines for requests related to executing commit in the commit phase of the single transaction.\n" +
+		"- If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.\n" +
+		"- This setting was previously a tidb.toml option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBEnableAutoAnalyze:
+		return "- Determines whether TiDB automatically updates table statistics as a background operation\n" +
+		"- This setting was previously a tidb.toml option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBEnableBatchDML:
+		return "- Determines if TiDB permits non-transactional 'batched' statements. Only the value of `OFF` can be considered safe, as batch DML does not provide ACID guarantees.\n" +
+		"- This setting was previously a tidb.toml option (`enable-batch-dml`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBEnablePrepPlanCache:
+		return "- Determines whether to enable Plan Cache of the `PREPARE` statement.\n" +
+		"- This setting was previously a tidb.toml option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBMemOOMAction:
+		return "- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `tidb_mem_quota_query` and cannot be spilled over to disk. See [TiDB Memory Control](/configure-memory-usage.md) for details.\n" +
+"- The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.\n" +
+		"- This setting was previously a tidb.toml option (`oom-action`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBPrepPlanCacheMemoryGuardRatio:
+		return "- This setting is used to prevent the tidb.toml option `performance.max-memory` from being exceeded. When `max-memory` * (1 - `tidb_prepared_plan_cache_memory_guard_ratio`) is exceeded, the elements in the LRU are removed.\n" + 
+		"- This setting was previously a tidb.toml option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB 6.1."
+	case variable.TiDBPrepPlanCacheSize:
+		return "- The maximum number of statements that can be cached in the prepared plan cache.\n" +
+		"- This setting was previously a tidb.toml option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB 6.1."
 	default:
 		return "- No documentation is currently available for this variable."
 	}
