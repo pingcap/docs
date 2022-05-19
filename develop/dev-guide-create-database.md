@@ -16,7 +16,7 @@ Before creating a database, do the following:
 
 ## What is database
 
-[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB can contain **tables**, **views**, **sequences**, and other objects.
+[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB contain **tables**, **views**, **sequences**, and other objects.
 
 ## Create a database
 
@@ -32,7 +32,7 @@ CREATE DATABASE IF NOT EXISTS `bookshop`;
 
 For more information and examples of the `CREATE DATABASE` statement, see the [`CREATE DATABASE`](/common/sql-statements/sql-statement-create-database.md) document.
 
-To execute the library build statement as the **root user**, run the following command:
+To execute the library build statement as the `root` user, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -47,7 +47,7 @@ mysql
 
 ## View databases
 
-To view the databases in the cluster, use the [`SHOW DATABASES`](/common/sql-statements/sql-statement-show-databases.md) statement.
+To view the databases in a cluster, use the [`SHOW DATABASES`](/common/sql-statements/sql-statement-show-databases.md) statement.
 
 For example:
 
@@ -78,10 +78,10 @@ The following is an example output:
 
 ## Rules in database creation
 
-- Follow the [Database Naming Guidelines](/develop/dev-guide-object-naming-guidelines.md) and name your database meaningfully.
+- Follow the [Database Naming Conventions](/develop/dev-guide-object-naming-guidelines.md) and name your database meaningfully.
 - TiDB comes with a default database named `test`. However, it is not recommended that you use it in a production environment if you do not have to. You can create your own database using the `CREATE DATABASE` statement and change the current database using the [`USE {databasename};`](/common/sql-statements/sql-statement-use.md) statement in a SQL session.
 - Use the `root` user to create objects such as database, roles, and users. Grant only the necessary privileges to roles and users.
-- To change database schemas, using a Driver or ORM  is not recommended. Instead, it is recommended that you use a **MySQL command-line client** or a **MySQL GUI client**, which is a best practice based on experience.
+- As a best practice, it is recommended that you use a **MySQL command-line client** or a **MySQL GUI client** instead of a driver or ORM to execute database schema changes.
 
 ## Next step
 
