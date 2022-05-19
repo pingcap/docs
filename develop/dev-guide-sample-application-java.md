@@ -1,12 +1,12 @@
 ---
-title: Build a Simple CRUD App with TiDB and Java
+title: Build a simple CRUD App with TiDB and Java
 summary: Build an example of a simple CRUD application with TiDB and Java.
 ---
 
 <!-- markdownlint-disable MD024 -->
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and Java
+# Build a simple CRUD App with TiDB and Java
 
 This document introduces how to use TiDB and Java to build a simple CRUD application.
 
@@ -20,11 +20,11 @@ This document introduces how to use TiDB and Java to build a simple CRUD applica
 
 The following introduces how to start a TiDB cluster.
 
-### Using a TiDB Cloud Free Cluster
+### Use a TiDB Cloud Free Cluster
 
 [Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)
 
-### Using a Local Cluster
+### Use a Local Cluster
 
 For more information, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) for more information.
 
@@ -819,7 +819,7 @@ public class HibernateExample
 
 The following introduces how to run the code step by step.
 
-### Step 3.1 Table Initialization
+### Step 3.1 Table initialization
 
 <SimpleTab>
 
@@ -853,7 +853,7 @@ No need to initialize tables manually.
 
 </SimpleTab>
 
-### Step 3.2 Change Parameters for TiDB Cloud
+### Step 3.2 Change parameters for TiDB Cloud
 
 <SimpleTab>
 
@@ -993,7 +993,7 @@ You can also run these two `make` commands individually or run the native comman
 
 </SimpleTab>
 
-## Step 4. Expected Output
+## Step 4. Expected output
 
 <SimpleTab>
 

@@ -35,9 +35,9 @@ SQL is divided into the following 4 types according to their functions:
 
 - **DCL (Data Control Language)**: It is used to define access privileges and security levels.
 
-In this document, we mainly introduce DML and DQL, the Data Manipulation Language and the Data Query Language. The rest can be found in the [Explore SQL with TiDB](/basic-sql-operations.md) or the [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/) for more information.
+The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/).
 
-## DML (Data Manipulation Language)
+## Data Manipulation Language
 
 Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
 
@@ -77,7 +77,7 @@ DELETE FROM person WHERE id=2;
 >
 > The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
 
-## DQL (Data Query Language)
+## Data Query Language
 
 DQL is used to retrieve the desired data rows from a table or multiple tables.
 
