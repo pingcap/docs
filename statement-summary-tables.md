@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance
 
 # Statement Summary Tables
 
-To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
+To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema` (_not_ `performance_schema`) that are similar to `events_statements_summary_by_digest` in terms of features.
 
@@ -130,13 +130,6 @@ set global tidb_stmt_summary_history_size = 24;
 After the configuration above takes effect, every 30 minutes the `statements_summary` table is cleared. The `statements_summary_history` table stores data generated over the recent 12 hours.
 
 The `statements_summary_evicted` table records the recent 24 periods during which SQL statements are evicted from the statement summary. The `statements_summary_evicted` table is updated every 30 minutes.
-
-The system variables above have two scopes: global and session. These scopes work differently from other system variables:
-
-- After setting the global variable, your setting applies to the whole cluster immediately.
-- After setting the session variable, your setting applies to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
-- The session variable has a higher read priority. The global variable is read only when no session variable is set.
-- If you set the session variable to a blank string, the global variable is re-read.
 
 > **Note:**
 >
