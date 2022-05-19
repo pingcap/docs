@@ -457,3 +457,22 @@ mysql root@127.0.0.1:test> show create table test;
 From the result, you can see that the table schema before and after the replication is inconsistent. This is because the default value of `explicit_defaults_for_timestamp` in TiDB is different from that in MySQL. See [MySQL Compatibility](/mysql-compatibility.md#default-differences) for details.
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
+<<<<<<< HEAD
+=======
+
+## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
+
+When the sink is TiDB or MySQL, the users of the downstream database need the following permissions:
+
+- `Select`
+- `Index`
+- `Insert`
+- `Update`
+- `Delete`
+- `Create`
+- `Drop`
+- `Alter`
+- `Create View`
+
+If you need to replicate `recover table` to the downstream TiDB, you should have the `Super` permission.
+>>>>>>> aadba08e6 (ticdc: synchronize data in the new collations (#8584))
