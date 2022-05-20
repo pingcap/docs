@@ -134,7 +134,7 @@ The query results are as follows:
 10 rows in set (0.30 sec)
 ```
 
-It seems that the latest published book already has a lot of ratings. To verify the above method, let's delete all the ratings of the book **The Documentary of lion** through the SQL statement:
+It seems that the latest published book already has a lot of ratings. To verify the above method, let's delete all the ratings of the book _The Documentary of lion_ through the SQL statement:
 
 {{< copyable "sql" >}}
 
