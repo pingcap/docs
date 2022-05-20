@@ -90,7 +90,7 @@ Do not execute the `PREPARE` statement repeatedly. Otherwise, the execution effi
 
 ### Only query the columns you need
 
-If you do not need data from all columns, do not always use `SELECT *` to return all columns data. The following query is inefficient:
+If you do not need data from all columns, do not use `SELECT *` to return all columns data. The following query is inefficient:
 
 {{< copyable "sql" >}}
 
@@ -108,11 +108,11 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### Use bulk delete
 
-When a large amount of data needs to be deleted, it is recommended to use [bulk delete](/develop/dev-guide-delete-data.md#bulk-delete).
+When you delete a large amount of data, it is recommended to use [bulk delete](/develop/dev-guide-delete-data.md#bulk-delete).
 
 ### Use bulk update
 
-When a large amount of data needs to be updated, it is recommended to use [bulk update](/develop/dev-guide-update-data.md#bulk-update).
+When you update a large amount of data, it is recommended to use [bulk update](/develop/dev-guide-update-data.md#bulk-update).
 
 ### Use `TRUNCATE` instead of `DELETE` for full table data
 
