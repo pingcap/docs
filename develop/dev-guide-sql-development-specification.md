@@ -1,6 +1,6 @@
 ---
-title: SQL Development Specification
-summary: Learn about the SQL development specification for TiDB.
+title: SQL Development Specifications
+summary: Learn about the SQL development specifications for TiDB.
 ---
 
 # SQL Development Specification
