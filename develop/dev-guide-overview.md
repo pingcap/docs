@@ -11,14 +11,14 @@ This tutorial shows how to quickly build an application using TiDB, the possible
 
 ## TiDB basics
 
-Before you start working with TiDB, you need to understand some important mechanics of how TiDB databases work:
+Before you start working with TiDB, you need to understand some important mechanisms of how TiDB works:
 
 - Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how transactions work in TiDB, or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to learn about transaction knowledge required for application development.
 - Understand [the way applications interact with TiDB](#the-way-applications-interact-with-tidb).
 
-## The TiDB transaction mechanism
+## TiDB transaction mechanisms
 
-TiDB supports distributed transactions and offers both [optimistic transaction](/optimistic-transaction.md) and [pessimistic transaction](/pessimistic-transaction.md) modes. The current version of TiDB defaults to the **pessimistic transaction** mode, which allows you to transact with TiDB as you would with a traditional monolithic database (for example, MySQL).
+TiDB supports distributed transactions and offers both [optimistic transaction](/optimistic-transaction.md) and [pessimistic transaction](/pessimistic-transaction.md) modes. The current version of TiDB uses the **pessimistic transaction** mode by default, which allows you to transact with TiDB as you would with a traditional monolithic database (for example, MySQL).
 
 You can start a transaction using [`BEGIN`](/common/sql-statements/sql-statement-begin.md), explicitly specify a **pessimistic transaction** using `BEGIN PESSIMISTIC`, or explicitly specify an **optimistic transaction** using `BEGIN OPTIMISTIC`. After that, you can either commit ([`COMMIT`](/common/sql-statements/sql-statement-commit.md)) or roll back ([`ROLLBACK`](/common/sql-statements/sql-statement-rollback.md)) the transaction.
 

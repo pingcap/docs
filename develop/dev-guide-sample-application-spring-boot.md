@@ -7,13 +7,13 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 # Build a TiDB Application Using Spring Boot
 
-This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. The code for this sample application can be downloaded from [GitHub](https://github.com/pingcap-inc/tidb-example-java).
+This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. You can download the code for this sample application from [GitHub](https://github.com/pingcap-inc/tidb-example-java).
 
 This is a sample application for building a RESTful API, which shows a generic **Spring Boot** backend service using **TiDB** as the database. The following process was designed to recreate a real-world scenario:
 
-This is an example of a game where each player has two attributes: `coins` and `goods`, and each player has an `id` field that uniquely identifies the player. Players can trade freely if they have sufficient coins and goods.
+This is an example of a game where each player has two attributes: `coins` and `goods`. Each player is uniquely identified by an `id` field. Players can trade freely if they have sufficient coins and goods.
 
-You can use this example as a base to build your application.
+You can build your own application based on this example.
 
 ## Step 1: Launch your TiDB cluster
 
@@ -29,13 +29,13 @@ You can start a local cluster by either [deploying a local testing cluster](/qui
 
 ## Step 2: Install JDK
 
-Download and install the **Java Development Kit** (JDK) on your computer, which is a necessary tool for Java development. **Spring Boot** supports JDK for Java 8 and above.However, due to the **Hibernate** version, we recommend using JDK for Java 11 and above.
+Download and install the **Java Development Kit** (JDK) on your computer. It is a necessary tool for Java development. **Spring Boot** supports JDK for Java 8 and later versions. However, due to the **Hibernate** version, it is recommended that you use JDK for Java 11 and later versions.
 
 Both **Oracle JDK** and **OpenJDK** are supported. You can choose at your own discretion. This tutorial uses JDK 17 from **OpenJDK**.
 
 ## Step 3: Install Maven
 
-This sample application uses **Apache Maven** to manage the application's dependencies; Spring supports Maven 3.3 or above. As dependency management software, the latest stable version of **Maven** is recommended.
+This sample application uses **Apache Maven** to manage the application's dependencies. Spring supports Maven 3.3 and later versions. As dependency management software, the latest stable version of **Maven** is recommended.
 
 To install **Maven** from the command line.
 
@@ -176,7 +176,7 @@ In this step, the application code is compiled and run, which produces a web app
 
 If you want to learn more about the code of this application, refer to [Implementation details](#implementation-details).
 
-### Step 5.1 Changing parameters
+### Step 5.1 Change parameters
 
 If you use a non-local default cluster, a TiDB Cloud cluster or a remote cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
 
@@ -306,17 +306,17 @@ The output log indicates the application behavior during startup. In this exampl
 
 If you want to learn more about the code of this application, refer to [implementation details](#implementation-details).
 
-## Step 6: HTTP request
+## Step 6: HTTP requests
 
-After the service is up and running, you can send the HTTP request to the backend application. <http://localhost:8080> is the base URL that provides services. This tutorial uses a series of HTTP requests to show how to use the service.
+After the service is up and running, you can send the HTTP requests to the backend application. <http://localhost:8080> is the base URL that provides services. This tutorial uses a series of HTTP requests to show how to use the service.
 
-### Step 6.1 Using Postman requests (recommended)
+### Step 6.1 Use Postman requests (recommended)
 
 You can download this [configuration file](https://raw.githubusercontent.com/pingcap-inc/tidb-example-java/main/spring-jpa-hibernate/Player.postman_collection.json) locally and import it into [Postman](https://www.postman.com/) as shown here:
 
 ![import the collection into Postman](/media/develop/IMG_20220402-003303222.png)
 
-#### Create player
+#### Create players
 
 Click on the **Create** tab and the **Send** button to send a POST request to `http://localhost:8080/player/`. The return value is the number of players added, which is expected to be 1.
 
@@ -336,7 +336,7 @@ Click on the **GetByLimit** tab and the **Send** button to send a GET request to
 
 #### Get player information by page
 
-Click on the **GetByPage** tab and the **Send** button to send a GET request to `http://localhost:8080/player/page?index=0&size=2`. The return value is the page with index `0`, with `2` players per page. The return value also contains paging information such as offset, totalPages, sort, etc.
+Click on the **GetByPage** tab and the **Send** button to send a GET request to `http://localhost:8080/player/page?index=0&size=2`. The return value is the page with index `0`, with `2` players per page. The return value also contains the paging information such as offset, totalPages, and sort.
 
 ![Postman-GetByPage](/media/develop/IMG_20220402-003528474.png)
 
@@ -358,7 +358,7 @@ The return value is whether the transaction is successful or not. When there are
 
 You can also use curl to make requests directly.
 
-#### Create player
+#### Create players
 
 To create players, you can send a **POST** request to the `/player` endpoint. For example:
 
@@ -376,7 +376,7 @@ The request uses JSON as the payload. The example above indicates creating a pla
 
 #### Get player information by ID
 
-To get the player information, you can send a **GET** request to the `/player` endpoint. You need to specify `id` of the player in the path parameter as follows: `/player/{id}`. The following example shows how to get the information of a player with `id` 1:
+To get the player information, you can send a **GET** request to the `/player` endpoint. You need to specify the `id` of the player in the path parameter as follows: `/player/{id}`. The following example shows how to get the information of a player with `id` 1:
 
 {{< copyable "shell-regular" >}}
 
@@ -511,7 +511,7 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
   --data-urlencode 'price=100'
 ```
 
-The request uses **Form Data** as the payload. The example request indicated that the seller's ID (`sellID`) is 1, the buyer's ID (`buyID`) is 2, the number of goods purchased (`amount`) is 10, and the number of coins consumed for purchase (`price`) is 100.
+The request uses **Form Data** as the payload. The example request indicates that the seller's ID (`sellID`) is 1, the buyer's ID (`buyID`) is 2, the number of goods purchased (`amount`) is 10, and the number of coins consumed for purchase (`price`) is 100.
 
 The return value is whether the transaction is successful or not. When there are insufficient goods for the seller, insufficient coins for the buyer, or a database error, the [database transaction](/develop/dev-guide-transaction-overview.md) guarantees that the trade is not successful and no player's coins or goods are lost.
 
@@ -519,7 +519,7 @@ The return value is whether the transaction is successful or not. When there are
 true
 ```
 
-### Step 6.3 Request with Shell script
+### Step 6.3 Requests with Shell script
 
 You can download [this shell script](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/request.sh) for testing purposes. The script performs the following operations:
 
@@ -530,7 +530,7 @@ You can download [this shell script](https://github.com/pingcap-inc/tidb-example
 5. Get the total number of players.
 6. Perform a transaction, where the player with the `id` of 1 is the seller and the player with the `id` of 2 is the buyer, and 10 `goods` are purchased at the cost of 100 `coins`.
 
-You can run this script with `make request` or `./request.sh` command. The result should look like this:
+You can run this script with `make request` or `./request.sh`. The result should look like this:
 
 ```shell
 cheese@CheesedeMacBook-Pro spring-jpa-hibernate % make request
@@ -714,7 +714,7 @@ spring:
 The configuration is written in [YAML](https://yaml.org/). The fields are described as follows:
 
 - `spring.datasource.url` : URL of the database connection.
-- `spring.datasource.url` : the database username.
+- `spring.datasource.username` : the database username.
 - `spring.datasource.password` : the database password. Empty. You need to comment out or delete this field.
 - `spring.datasource.driver-class-name` : the database driver. Because TiDB is compatible with MySQL, use a mysql-connector-java driver class `com.mysql.cj.jdbc`.
 - `jpa.show-sql` : when this field is set to `true`, the SQL statements run by JPA are printed.
@@ -1042,7 +1042,7 @@ public class PlayerServiceImpl implements PlayerService {
 
 The `@Service` annotation is used to declare that the lifecycle of this object is managed by `Spring`.
 
-The `PlayerServiceImpl` implementation class also has a [`@Transactional`](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations) annotation in addition to the `@Service` annotation. When transaction management is enabled in the application (which can be turned on using [`@EnableTransactionManagement`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html), but is turned on by default by `Spring Boot` and does not need to be configured manually again), `Spring` automatically wraps all objects with the `@Transactional` annotation in a proxy and uses this proxy for object invocation processing.
+The `PlayerServiceImpl` implementation class also has a [`@Transactional`](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations) annotation in addition to the `@Service` annotation. When transaction management is enabled in the application (which can be turned on using [`@EnableTransactionManagement`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html), but is turned on by default by `Spring Boot`. You don not need to manually configure it.), `Spring` automatically wraps all objects with the `@Transactional` annotation in a proxy and uses this proxy for object invocation processing.
 
 You can simply assume that when the agent calls a function inside an object with the `@Transactional` annotation:
 
