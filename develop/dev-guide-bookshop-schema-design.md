@@ -119,7 +119,7 @@ On the database details page of TiDB Cloud, click the **Import** button to enter
 
     ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
 
-    If the following error message appears during the import process, run the `DROP TABLE bookshop;` command to clear the previously created sample database and then import data again.
+    If the following error message appears during the import process, run the `DROP DATABASE bookshop;` command to clear the previously created sample database and then import data again.
 
     > table(s) [`bookshop`.`authors`, `bookshop`.`book_authors`, `bookshop`.`books`, `bookshop`.`orders`, `bookshop`.`ratings`, `bookshop`.`users`] are not empty.
 
