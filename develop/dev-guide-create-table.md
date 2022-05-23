@@ -151,7 +151,7 @@ Currently, tables **_containing primary_** keys in TiDB are divided into the fol
 - `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
     - Primary key data (key) - row data (value)
 
-As described in [select primary key](#select-primary-key), **clustered indexes** are controlled in TiDB using the keywords `CLUSTERED`, `NONCLUSTERED`.
+As described in [select primary key](#select-primary-key), **clustered indexes** are controlled in TiDB using the keywords `CLUSTERED` and `NONCLUSTERED`.
 
 > **Note:**
 >
