@@ -1,19 +1,19 @@
 ---
 title: Performance Tuning Best Practices
-summary: Introducing performance tuning best practices with TiDB.
+summary: Introduces the best practices for tuning TiDB performance.
 ---
 
 # Performance Tuning Best Practices
 
-This section introduce some best practices for using TiDB databases.
+This document introduces some best practices for using TiDB databases.
 
-## DML Best Practices
+## DML best practices
 
-The following describes the best practices involved when using DML with TiDB.
+This section describes the best practices involved when you use DML with TiDB.
 
-### Use multi-row statement
+### Use multi-row statements
 
-When you need to modify multiple rows of table, it is recommended to use multi-row statement:
+When you need to modify multiple rows of table, it is recommended to use multi-row statements:
 
 {{< copyable "sql" >}}
 
@@ -23,7 +23,7 @@ INSERT INTO t VALUES (1, 'a'), (2, 'b'), (3, 'c');
 DELETE FROM t WHERE id IN (1, 2, 3);
 ```
 
-Not recommended to use multiple single-row statements:
+It is not recommended to use multiple single-row statements:
 
 {{< copyable "sql" >}}
 
@@ -37,9 +37,9 @@ DELETE FROM t WHERE id = 2;
 DELETE FROM t WHERE id = 3;
 ```
 
-### Use PREPARE
+### Use `PREPARE`
 
-When you need to execute a SQL statement multiple times, it is recommended to use the `PREPARE` statement to avoid the overhead of repeatedly parse the SQL syntax.
+When you need to execute a SQL statement for multiple times, it is recommended to use the `PREPARE` statement to avoid the overhead of repeatedly parsing the SQL syntax.
 
 <SimpleTab>
 <div label="Golang">
@@ -90,7 +90,7 @@ Do not execute the `PREPARE` statement repeatedly. Otherwise, the execution effi
 
 ### Only query the columns you need
 
-Don't always use `SELECT *` to return all columns data if you don't have to; the following query is inefficient
+If you do not need data from all columns, do not use `SELECT *` to return all columns data. The following query is inefficient:
 
 {{< copyable "sql" >}}
 
@@ -98,7 +98,7 @@ Don't always use `SELECT *` to return all columns data if you don't have to; the
 SELECT * FROM books WHERE title = 'Marian Yost';
 ```
 
-You should only query the columns you need, for example:
+You should only query the columns you need. For example:
 
 {{< copyable "sql" >}}
 
@@ -106,15 +106,15 @@ You should only query the columns you need, for example:
 SELECT title, price FROM books WHERE title = 'Marian Yost';
 ```
 
-### Use Batch Delete
+### Use bulk delete
 
-When a large amount of data needs to be deleted, it is recommended to use [Batch Delete](/develop/dev-guide-delete-data.md#bulk-delete)
+When you delete a large amount of data, it is recommended to use [bulk delete](/develop/dev-guide-delete-data.md#bulk-delete).
 
-### Use Batch Update
+### Use bulk update
 
-When a large amount of data needs to be update, it is recommended to use [Batch Update](/develop/dev-guide-delete-data.md#bulk-delete)
+When you update a large amount of data, it is recommended to use [bulk update](/develop/dev-guide-update-data.md#bulk-update).
 
-### Use TRUNCATE instead of DELETE full table data
+### Use `TRUNCATE` instead of `DELETE` for full table data
 
 When you need to delete all data from a table, it is recommended to use the `TRUNCATE` statement:
 
@@ -124,7 +124,7 @@ When you need to delete all data from a table, it is recommended to use the `TRU
 TRUNCATE TABLE t;
 ```
 
-Not recommended to use `DELETE` full table data:
+It is not recommended to use `DELETE` for full table data:
 
 {{< copyable "sql" >}}
 
@@ -132,26 +132,26 @@ Not recommended to use `DELETE` full table data:
 DELETE FROM t;
 ```
 
-## DDL Best Practices
+## DDL best practices
 
-The following describes the best practices involved when using TiDB's DDL.
+This section describes the best practices involved when using TiDB's DDL.
 
-### Primary Key Best Practices
+### Primary key best practices
 
-See the [Rules to follow when selecting primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
+See the [rules to follow when selecting the primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
 
-## Index Best Practices
+## Index best practices
 
-See [Index Best Practice](/develop/dev-guide-index-best-practice.md).
+See [Index Best Practices](/develop/dev-guide-index-best-practice.md).
 
-### Add Index Best Practices
+### `ADD INDEX` best practices
 
-TiDB supports the online `ADD INDEX` operation and does not block data reads and writes in the table. The speed of `ADD INDEX` can be adjusted by modify the following system variable:
+TiDB supports the online `ADD INDEX` operation and does not block data reads and writes in the table. You can adjust the speed of `ADD INDEX` by modifying the following system variables:
 
-* [tidb_ddl_reorg_worker_cnt](/system-variables.md#tidb_ddl_reorg_worker_cnt)
-* [tidb_ddl_reorg_batch_size](/system-variables.md#tidb_ddl_reorg_batch_size)
+* [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+* [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-To reduce the impact on online business, the default speed of `ADD INDEX` is conservative. When the target column of `ADD INDEX` only involves read load or is not directly related to online load, the above variable can be appropriately increased to speed up `ADD INDEX`:
+To reduce the impact on the online application, the default speed of `ADD INDEX` is slow. When the target column of `ADD INDEX` only involves read load or is not directly related to online workload, you can appropriately increase the value of the above variables to speed up the `ADD INDEX` operation:
 
 {{< copyable "sql" >}}
 
@@ -160,7 +160,7 @@ SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-When the target column of `ADD INDEX` is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increase the above variable will cause more write conflicts, resulting in impact online business load; at the same time, `ADD INDEX` may take a long time to complete due to constant retries. In this case, it is recommended to reduce the above variable to avoid write conflicts with online load:
+When the target column of `ADD INDEX` is updated frequently (including `UPDATE`, `INSERT` and `DELETE`), increasing the above variables causes more write conflicts, which impacts the online workload. Accordingly, `ADD INDEX` might take a long time to complete due to constant retries. In this case, it is recommended to decrease the value of the above variables to avoid write conflicts with the online application:
 
 {{< copyable "sql" >}}
 
@@ -169,14 +169,14 @@ SET @@global.tidb_ddl_reorg_worker_cnt = 4;
 SET @@global.tidb_ddl_reorg_batch_size = 128;
 ```
 
-## Transaction Conflicts
+## Transaction conflicts
 
-About how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
-## Best Practices for Developing Java Applications with TiDB
+## Best practices for developing Java applications with TiDB
 
-See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md)
+See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
 
-### See Also
+### See also
 
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
