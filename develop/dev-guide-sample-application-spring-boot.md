@@ -1,145 +1,85 @@
 ---
-title: Build the TiDB Application using Spring Boot
-summary: Gives an example of building a TiDB application using Spring Boot.
+title: Build a TiDB Application Using Spring Boot
+summary: Learn an example of how to build a TiDB application using Spring Boot.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# Build the TiDB Application using Spring Boot
+# Build a TiDB Application Using Spring Boot
 
-This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) Web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. The code repository for this sample application can be downloaded from [Github](https://github.com/pingcap-inc/tidb-example-java).
+This tutorial shows you how to build a [Spring Boot](https://spring.io/projects/spring-boot) web application using TiDB. The [Spring Data JPA](https://spring.io/projects/spring-data-jpa) module is used as the framework for data access capabilities. You can download the code for this sample application from [GitHub](https://github.com/pingcap-inc/tidb-example-java).
 
-This is an example application for building a Restful API, showing a generic **Spring Boot** backend service using **TiDB** as the database. The following process was designed to recreate a realistic scenario:
+This is a sample application for building a RESTful API, which shows a generic **Spring Boot** backend service using **TiDB** as the database. The following process was designed to recreate a real-world scenario:
 
-This is an example of a game where each player has two attributes: `coins` and `goods`, and each player has a field `id` that uniquely identifies the player. Players can trade freely if they have sufficient coins and goods.
+This is an example of a game where each player has two attributes: `coins` and `goods`. Each player is uniquely identified by an `id` field. Players can trade freely if they have sufficient coins and goods.
 
-You can use this example as a base to build your application.
+You can build your own application based on this example.
 
-## Step 1. Launch your TiDB cluster
+## Step 1: Launch your TiDB cluster
 
-This part describes how to start a TiDB cluster.
+This step describes how to start a TiDB cluster.
 
-### Using TiDB Cloud Free Cluster
+### Using a TiDB Cloud free cluster
 
-[Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)
+[Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster).
 
-### Using Local Clusters
+### Using a local cluster
 
-This will briefly describe the process of starting a test cluster, for a full environment cluster deployment, or to see a more detailed deployment, please refer to [Starting TiDB Locally](/quick-start-with-tidb.md).
+You can start a local cluster by either [deploying a local testing cluster](/quick-start-with-tidb.md) or [deploying a TiDB cluster in production](/production-deployment-using-tiup.md).
 
-**Deploy local test clusters**
+## Step 2: Install JDK
 
-Applicable scenario: Use a local Mac or single-instance Linux environment to quickly deploy a TiDB test cluster, and experience the basic architecture of a TiDB cluster, and the operation of basic components such as TiDB, TiKV, PD, and Monitoring.
+Download and install the **Java Development Kit** (JDK) on your computer. It is a necessary tool for Java development. **Spring Boot** supports JDK for Java 8 and later versions. However, due to the **Hibernate** version, it is recommended that you use JDK for Java 11 and later versions.
 
-1. Download and install TiUP.
+Both **Oracle JDK** and **OpenJDK** are supported. You can choose at your own discretion. This tutorial uses JDK 17 from **OpenJDK**.
 
-    {{< copyable "shell-regular" >}}
+## Step 3: Install Maven
 
-    ```shell
-    curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
-    ```
+This sample application uses **Apache Maven** to manage the application's dependencies. Spring supports Maven 3.3 and later versions. As dependency management software, the latest stable version of **Maven** is recommended.
 
-2. Declare global environment variables.
-
-    > **Note:**
-    >
-    > When TiUP is installed, you will be prompted for the absolute path of the corresponding `profile` file. Before executing the following `source` command, you need to modify the command according to the actual location of the `profile` file.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    source .bash_profile
-    ```
-
-3. Execute the following command in the current session to start the cluster.
-
-    - Executing the `tiup playground` command directly runs the latest version of the TiDB cluster, with 1 TiDB, TiKV, PD, and TiFlash instance:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        tiup playground
-        ```
-
-    - You can also specify the TiDB version and the number of instances of each component. The command is similar to:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        tiup playground v5.4.0 --db 2 --pd 3 --kv 3
-        ```
-
-    The above command downloads and launches a version of the cluster locally (for example, v5.4.0). The latest version can be executed by `tiup list tidb` to check it out. The results of the operation will show how the cluster is accessed:
-
-    ```
-    CLUSTER START SUCCESSFULLY, Enjoy it ^-^
-    To connect TiDB: mysql --comments --host 127.0.0.1 --port 4001 -u root -p (no password)
-    To connect TiDB: mysql --comments --host 127.0.0.1 --port 4000 -u root -p (no password)
-    To view the dashboard: http://127.0.0.1:2379/dashboard
-    PD client endpoints: [127.0.0.1:2379 127.0.0.1:2382 127.0.0.1:2384]
-    To view the Prometheus: http://127.0.0.1:9090
-    To view the Grafana: http://127.0.0.1:3000
-    ```
-
-> **Note:**
->
-> - TiDB supports v5.2.0 and later version runs `tiup playground` on Apple M1 machines.
-> - When a playground is executed in this way, TiUP will clean up the original cluster data after the deployment test is completed, and a new cluster will be obtained after re-executing the command.
-> - If you want to persist the data, you can execute TiUp's `--tag` parameter: `tiup --tag <your-tag> playground ...`, refer to the [TiUP Reference](/tiup/tiup-reference.md#-t---tag) for details.
-
-## Step 2. Install JDK
-
-Please download and install the **Java Development Kit** (JDK) on your computer, which is a necessary tool for Java development. **Spring Boot** supports Java version 8 or higher JDK, we recommend using Java version 11 or higher JDK due to **Hibernate** version.
-
-We support both **Oracle JDK** and **OpenJDK**, please choose your preference, this tutorial will use version 17 of **OpenJDK**.
-
-## Step 3. Install Maven
-
-This sample application uses **Maven** to manage the application's dependencies; Spring supports **Maven** from version 3.2 and above, and as dependency management software, the latest stable version of **Maven** is recommended.
-
-Here is how to install **Maven** from the command line.
+To install **Maven** from the command line.
 
 - macOS:
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```shell
     brew install maven
     ```
 
-- Installation on Debian-based Linux distributions (e.g. Ubuntu, etc.):
+- Debian-based Linux distributions (such as Ubuntu):
 
     {{< copyable "shell-regular" >}}
 
-    ```
+    ```shell
     apt-get install maven
     ```
 
-- Install on Red Hat-based Linux distributions (e.g. Fedora, CentOS, etc.):
+- Red Hat-based Linux distributions (such as Fedora, CentOS):
 
-1. dnf software package manager
+    - dnf:
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```
-    dnf install maven
-    ```
+        ```shell
+        dnf install maven
+        ```
 
-2. yum software package manager
+    - yum:
 
-    {{< copyable "shell-regular" >}}
+        {{< copyable "shell-regular" >}}
 
-    ```
-    yum install maven
-    ```
+        ```shell
+        yum install maven
+        ```
 
-For other installation methods, please refer to the Maven [official documentation](https://maven.apache.org/install.html).
+For other installation methods, refer to the [Maven official documentation](https://maven.apache.org/install.html).
 
-## Step 4. Get the application code
+## Step 4: Get the application code
 
-Please download or clone the [sample code library](https://github.com/pingcap-inc/tidb-example-java) and go to the directory `spring-jpa-hibernate`.
+Download or clone the [sample code repository](https://github.com/pingcap-inc/tidb-example-java) and navigate to the `spring-jpa-hibernate` directory.
 
-### Create the same dependency blank application (optional)
+### Create a blank application with the same dependency (optional)
 
 This application is built using [Spring Initializr](https://start.spring.io/). You can quickly get a blank application with the same dependencies as this sample application by clicking on the following options and changing a few configuration items:
 
@@ -170,23 +110,25 @@ This application is built using [Spring Initializr](https://start.spring.io/). Y
 - Spring Data JPA
 - MySQL Driver
 
-After the configuration is completed as shown in the figure:
+The complete configuration is as follows:
 
-![Spring Initializr Config](/media/develop/IMG_20220401-234316020.png)
+![Spring Initializr Configuration](/media/develop/develop-spring-initializr-configuration.png)
 
 > **Note:**
 >
-> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database’s dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
+> Although SQL is relatively standardized, each database vendor uses a subset and superset of ANSI SQL defined syntax. This is referred to as the database's dialect. Hibernate handles variations across these dialects through its `org.hibernate.dialect.Dialect` class and the various subclasses for each database vendor.
 >
-> In most cases, Hibernate will be able to determine the proper Dialect to use by asking some questions of the JDBC Connection during bootstrap. For information on Hibernate’s ability to determine the proper Dialect to use (and your ability to influence that resolution), see [Dialect resolution](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver).
+> In most cases, Hibernate will be able to determine the proper Dialect to use by asking some questions of the JDBC Connection during bootstrap. For information on Hibernate's ability to determine the proper Dialect to use (and your ability to influence that resolution), see [Dialect resolution](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#portability-dialectresolver).
 >
 > If for some reason it is not able to determine the proper one or you want to use a custom Dialect, you will need to set the `hibernate.dialect` setting.
 >
 > _—— Excerpt from the Hibernate official documentation: [Database Dialect](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#database-dialect)_
 
-Subsequently, the project can be used normally, but only in the same way that **TiDB** can be used with **MySQL**, i.e. using the **MySQL Dialect**. This is due to the fact that **Hibernate** supports the **TiDB Dialect** from version `6.0.0.Beta2` and above, while the default dependency of **Spring Data JPA** on **Hibernate** is `5.6.4.Final`. Therefore, we recommend the following changes to `pom.xml`.
+After the configuration, the project can be used normally, but only in the same way that you use with MySQL, that is, using the **MySQL dialect**. This is because **Hibernate** supports the **TiDB dialect** in `6.0.0.Beta2` and later versions, but the default dependency of Spring Data JPA on Hibernate is `5.6.4.Final`. Therefore, we recommend the following changes to `pom.xml`.
 
-1. The `jakarta` packages introduced within `Spring Data JPA` are excluded as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L26):
+1. Exclude the `jakarta` packages introduced in `Spring Data JPA`, as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L26):
+
+    Change the dependency file from:
 
     {{< copyable "" >}}
 
@@ -197,7 +139,7 @@ Subsequently, the project can be used normally, but only in the same way that **
     </dependency>
     ```
 
-    Changed to:
+    To:
 
     {{< copyable "" >}}
 
@@ -214,7 +156,7 @@ Subsequently, the project can be used normally, but only in the same way that **
     </dependency>
     ```
 
-2. Then introduce **Hibernate** dependencies from version `6.0.0.Beta2` and above, as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L53), using version `6.0.0.CR2` as an example:
+2. Introduce **Hibernate** dependencies from `6.0.0.Beta2` or a later version, as shown in this [dependency file](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/pom.xml#L53):
 
     {{< copyable "" >}}
 
@@ -228,15 +170,15 @@ Subsequently, the project can be used normally, but only in the same way that **
 
     Once the changes are made, you can get a blank **Spring Boot** application with the same dependencies as the sample application.
 
-## Step 5. Run the application
+## Step 5: Run the application
 
-Here the application code is compiled and run, resulting in a web application. hibernate will create a table `player_jpa` within the database `test`, and if you make requests using the application's Restful API, these requests will run database [transactions](/develop/dev-guide-transaction-overview.md) on the TiDB cluster.
+In this step, the application code is compiled and run, which produces a web application. Hibernate creates a `player_jpa` table within the `test` database. If you make requests using the application's RESTful API, these requests run [database transactions](/develop/dev-guide-transaction-overview.md) on the TiDB cluster.
 
-If you want to learn more about the code of this application, you can see the [Implementation Details](#implementation-details) at the bottom of this tutorial.
+If you want to learn more about the code of this application, refer to [Implementation details](#implementation-details).
 
-### Step 5.1 Changing Parameters
+### Step 5.1 Change parameters
 
-If you are using a non-local default cluster, TiDB Cloud or other remote cluster, change the `application.yml` (located in `src/main/resources`) for spring.datasource.url / spring.datasource.username / spring.datasource.password parameters.
+If you use a non-local default cluster, a TiDB Cloud cluster or a remote cluster, change the `spring.datasource.url`, `spring.datasource.username`, `spring.datasource.password` parameters in the `application.yml` (located in `src/main/resources`).
 
 {{< copyable "" >}}
 
@@ -254,15 +196,15 @@ spring:
       ddl-auto: create-drop
 ```
 
-If you set the password to `123456`, the connection string you get in TiDB Cloud is:
+If you set the password to `123456`, the connection string you get in TiDB Cloud is as follows:
 
 {{< copyable "shell-regular" >}}
 
-```
+```shell
 mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
 ```
 
-Then the configuration file should be changed to:
+Accordingly, the parameters must be set as folows:
 
 {{< copyable "" >}}
 
@@ -282,7 +224,7 @@ spring:
 
 ### Step 5.2 Run
 
-Open a terminal and make sure you are in the `spring-jpa-hibernate` directory, or if you are not already in this directory, use the command to enter.
+Open a terminal session and make sure you are in the `spring-jpa-hibernate` directory. If you are not already in this directory, navigate to the directory with the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -300,23 +242,23 @@ make
 
 #### Build and run manually
 
-We recommend that you build and run using the `make` command, but if you prefer to build manually, follow these steps step-by-step to get the same results.
+If you prefer to build manually, follow these steps:
 
-Clear cache and package:
+1. Clear cache and package:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-mvn clean package
-```
+    ```shell
+    mvn clean package
+    ```
 
-Running applications with JAR files:
+2. Run applications with JAR files:
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-java -jar target/spring-jpa-hibernate-0.0.1.jar
-```
+    ```shell
+    java -jar target/spring-jpa-hibernate-0.0.1.jar
+    ```
 
 ### Step 5.3 Output
 
@@ -360,63 +302,65 @@ Hibernate: create table player_jpa (id bigint not null, coins integer, goods int
 2022-03-28 18:46:03.311  INFO 14923 --- [           main] com.pingcap.App                          : Started App in 2.072 seconds (JVM running for 2.272)
 ```
 
-The output log, which indicates what the application did during startup, shows that the application started a **Servlet** using [Tomcat](https://tomcat.apache.org/), used `Hibernate` as the ORM, [HikariCP](https://github.com/brettwooldridge/HikariCP) as the database connection pool implementation, and used `org.hibernate.dialect.TiDBDialect` as the database dialect. After startup, `Hibernate` deletes and re-creates the table `player_jpa` and the sequence `player_jpa_id_seq`. At the end of startup, it listens on port `8080` to provide HTTP services to the outside.
+The output log indicates the application behavior during startup. In this example, the application starts a **Servlet** using [Tomcat](https://tomcat.apache.org/), uses Hibernate as the ORM, uses [HikariCP](https://github.com/brettwooldridge/HikariCP) as the database connection pool implementation, and uses `org.hibernate.dialect.TiDBDialect` as the database dialect. After startup, Hibernate deletes and re-creates the `player_jpa` table and the `player_jpa_id_seq` sequence. At the end of startup, the application listens on port `8080` to provide HTTP services to the outside.
 
-If you want to learn more about the code of this application, you can see the [implementation details](#implementation-details) at the bottom of this tutorial.
+If you want to learn more about the code of this application, refer to [implementation details](#implementation-details).
 
-## Step 6. HTTP Request
+## Step 6: HTTP requests
 
-Once the service is up and running, the HTTP interface can be used to request the back-end application. `http://localhost:8080` is our service providing the root address. We use a series of HTTP requests to show how to use the service.
+After the service is up and running, you can send the HTTP requests to the backend application. <http://localhost:8080> is the base URL that provides services. This tutorial uses a series of HTTP requests to show how to use the service.
 
-### Step 6.1 Using Postman Requests (recommended)
+### Step 6.1 Use Postman requests (recommended)
 
 You can download this [configuration file](https://raw.githubusercontent.com/pingcap-inc/tidb-example-java/main/spring-jpa-hibernate/Player.postman_collection.json) locally and import it into [Postman](https://www.postman.com/) as shown here:
 
-![postman import](/media/develop/IMG_20220402-003303222.png)
+![import the collection into Postman](/media/develop/IMG_20220402-003303222.png)
 
-#### Create player
+#### Create players
 
-Click on the **Create** tab and the **Send** button to send a request in the form of a Post to `http://localhost:8080/player/`. The return value is the number of players added, which is expected to be 1.
+Click on the **Create** tab and the **Send** button to send a POST request to `http://localhost:8080/player/`. The return value is the number of players added, which is expected to be 1.
 
-![Postman-Create](/media/develop/IMG_20220402-003350731.png)
+![Postman-Create a player](/media/develop/IMG_20220402-003350731.png)
 
-#### Get Player Information by ID
+#### Get player information by ID
 
-Click on the **GetByID** tab and the **Send** button to send a Get form of the `http://localhost:8080/player/1` request. The return value is the player information with ID 1.
+Click on the **GetByID** tab and the **Send** button to send a GET request to `http://localhost:8080/player/1`. The return value is the information of the player with ID `1`.
 
 ![Postman-GetByID](/media/develop/IMG_20220402-003416079.png)
 
-#### Get Player Information in Bulk by Limit
+#### Get player information in bulk by limit
 
-Click on the **GetByLimit** tab and the **Send** button to send a request in the form of a Get to `http://localhost:8080/player/limit/3`. The return value is a list of information for up to 3 players.
+Click on the **GetByLimit** tab and the **Send** button to send a GET request to `http://localhost:8080/player/limit/3`. The return value is a list of information for up to 3 players.
 
 ![Postman-GetByLimit](/media/develop/IMG_20220402-003505846.png)
 
-#### Get Player Information by Page
+#### Get player information by page
 
-Click on the **GetByPage** tab and the **Send** button to send a Get form of the `http://localhost:8080/player/page?index=0&size=2` request. The return value is the page with index 0, with 2 lists of player information per page. In addition, it contains paging information such as offset, totalPages, sort, etc.
+Click on the **GetByPage** tab and the **Send** button to send a GET request to `http://localhost:8080/player/page?index=0&size=2`. The return value is the page with index `0`, with `2` players per page. The return value also contains the paging information such as offset, totalPages, and sort.
 
 ![Postman-GetByPage](/media/develop/IMG_20220402-003528474.png)
 
-#### Count Players
+#### Count players
 
-Click the **Count** tab and the **Send** button to send a Get form of the `http://localhost:8080/player/count` request. The return value is the number of players.
+Click the **Count** tab and the **Send** button to send a GET request to `http://localhost:8080/player/count`. The return value is the number of players.
 
 ![Postman-Count](/media/develop/IMG_20220402-003549966.png)
 
-#### Player Trading
+#### Player trading
 
-Click on the **Trade** tab and the **Send** button to send a Put request to `http://localhost:8080/player/trade` with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for the purchase `price`. The return value is whether the transaction is successful or not. When there are insufficient goods for the selling player, insufficient gold for the buying player, or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/dev-guide-transaction-overview.md) guarantee.
+Click on the **Trade** tab and the **Send** button to send a PUT request to `http://localhost:8080/player/trade`. The request parameters are the seller's ID `sellID`, the buyer's ID `buyID`, the number of goods purchased `amount`, the number of coins consumed for the purchase `price`.
+
+The return value is whether the transaction is successful or not. When there are insufficient goods for the seller, insufficient coins for the buyer, or a database error, the [database transaction](/develop/dev-guide-transaction-overview.md) guarantees that the trade is not successful and no player's coins or goods are lost.
 
 ![Postman-Trade](/media/develop/IMG_20220402-003659102.png)
 
 ### Step 6.2 Using curl requests
 
-Of course, you can also use curl to make requests directly.
+You can also use curl to make requests directly.
 
-#### Create player
+#### Create players
 
-We use the **Post** method to request the `/player` endpoint request to create players, i.e.
+To create players, you can send a **POST** request to the `/player` endpoint. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -424,15 +368,15 @@ We use the **Post** method to request the `/player` endpoint request to create p
 curl --location --request POST 'http://localhost:8080/player/' --header 'Content-Type: application/json' --data-raw '[{"coins":100,"goods":20}]'
 ```
 
-Here we use JSON as the load of our message. It means that we need to create a player with `coins` of 100 and `goods` of 20. The return value is the number of players created.
+The request uses JSON as the payload. The example above indicates creating a player with 100 `coins` and 20 `goods`. The return value is the number of players created.
 
 ```json
 1
 ```
 
-#### Get Player Information by ID
+#### Get player information by ID
 
-We use the **Get** method to request the `/player` endpoint request to get the player information, additionally we need to give the player `id` parameter in the path, i.e. `/player/{id}`, for example when requesting a player with `id` 1:
+To get the player information, you can send a **GET** request to the `/player` endpoint. You need to specify the `id` of the player in the path parameter as follows: `/player/{id}`. The following example shows how to get the information of a player with `id` 1:
 
 {{< copyable "shell-regular" >}}
 
@@ -450,9 +394,9 @@ The return value is the player's information:
 }
 ```
 
-#### Get Player Information in Bulk by Limit
+#### Get player information in bulk by limit
 
-We use the **Get** method to request the `/player/limit` endpoint request to get player information, additionally we need to give the total number of player information to limit the query on the path, i.e. `/player/limit/{limit}`, for example when requesting information for up to 3 players.
+To get the player information in bulk, you can send a **GET** request to the `/player/limit` endpoint. You need to specify the total number of players in the path parameter as follows: `/player/limit/{limit}`. The following example shows how to get the information of up to 3 players:
 
 {{< copyable "shell-regular" >}}
 
@@ -482,9 +426,9 @@ The return value is a list of player information:
 ]
 ```
 
-#### Get Player Information by Page
+#### Get player information by page
 
-We use the **Get** method to request the `/player/page` endpoint request to paginate the player information, additionally we need to use the URL parameter, for example when requesting a page number `index` of 0 and a maximum request `size` of 2 per page.
+To get paginated player information, you can send a **GET** request to the `/player/page` endpoint. To specify additional parameters, you need to use the URL parameter. The following example shows how to get the information from a page whose `index` is 0, where each page has a maximum `size` of 2 players.
 
 {{< copyable "shell-regular" >}}
 
@@ -492,7 +436,7 @@ We use the **Get** method to request the `/player/page` endpoint request to pagi
 curl --location --request GET 'http://localhost:8080/player/page?index=0&size=2'
 ```
 
-The return value is the page with `index` 0, with 2 lists of player information per page. In addition, it contains paging information such as offset, totalPages, sort, etc.
+The return value is the page with `index` 0, where 2 players are listed per page. In addition, the return value contains pagination information such as offset, total pages, and whether the results are sorted.
 
 ```json
 {
@@ -536,9 +480,9 @@ The return value is the page with `index` 0, with 2 lists of player information 
 }
 ```
 
-#### Count Players
+#### Count players
 
-We use the **Get** method to request the `/player/count` endpoint request to get the number of players:
+To get the number of players, you can send a **GET** request to the `/player/count` endpoint:
 
 {{< copyable "shell-regular" >}}
 
@@ -552,9 +496,9 @@ The return value is the number of players:
 4
 ```
 
-#### Player Trading
+#### Player trading
 
-We initiate a transaction between players by requesting the `/player/trade` endpoint request using the **Put** method, i.e.
+To initiate a transaction between players, you can send a **PUT** request to the `/player/trade` endpoint. For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -567,28 +511,28 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
   --data-urlencode 'price=100'
 ```
 
-We use **Form Data** as the payload of our message with the request parameters are sell player ID `sellID`, buy player ID `buyID`, number of goods purchased `amount`, number of coins consumed for purchase `price`.
+The request uses **Form Data** as the payload. The example request indicates that the seller's ID (`sellID`) is 1, the buyer's ID (`buyID`) is 2, the number of goods purchased (`amount`) is 10, and the number of coins consumed for purchase (`price`) is 100.
 
-The return value is whether the transaction is successful or not. When there is insufficient goods for the selling player, insufficient gold for the buying player or database error, the transaction will not be successful and no player's gold or goods will be lost due to the database [transaction](/develop/dev-guide-transaction-overview.md) guarantee.
+The return value is whether the transaction is successful or not. When there are insufficient goods for the seller, insufficient coins for the buyer, or a database error, the [database transaction](/develop/dev-guide-transaction-overview.md) guarantees that the trade is not successful and no player's coins or goods are lost.
 
 ```json
 true
 ```
 
-### Step 6.3 Request with Shell Script
+### Step 6.3 Requests with Shell script
 
-We have written the request process as a [shell script](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/request.sh) for your testing purposes and the script will do the following things:
+You can download [this shell script](https://github.com/pingcap-inc/tidb-example-java/blob/main/spring-jpa-hibernate/request.sh) for testing purposes. The script performs the following operations:
 
-1. create 10 players in a loop
-2. get the information of players with the `id` of 1
-3. get a list of up to 3 players
-4. get a page of players with the `index` of 0 and the `size` of 2
-5. get the total number of players
-6. the player with the `id` of 1 is the seller and the player with the id of 2 is the buyer, buy 10 goods and cost 100 gold coins
+1. Create 10 players in a loop.
+2. Get the information of players with the `id` of 1.
+3. Get a list of up to 3 players.
+4. Get a page of players with the `index` of 0 and the `size` of 2.
+5. Get the total number of players.
+6. Perform a transaction, where the player with the `id` of 1 is the seller and the player with the `id` of 2 is the buyer, and 10 `goods` are purchased at the cost of 100 `coins`.
 
-You can run this script with `make request` or `./request.sh` command and the result should look like this:
+You can run this script with `make request` or `./request.sh`. The result should look like this:
 
-```
+```shell
 cheese@CheesedeMacBook-Pro spring-jpa-hibernate % make request
 ./request.sh
 loop to create 10 players:
@@ -610,13 +554,13 @@ trade by two players:
 false
 ```
 
-## Implementation Details
+## Implementation details
 
 This subsection describes the components in the sample application project.
 
 ### Overview
 
-The catalog tree for this example project is shown below (with the parts that are incomprehensible removed):
+The catalog tree for this example project is shown below (some incomprehensible parts are removed):
 
 ```
 .
@@ -640,20 +584,20 @@ The catalog tree for this example project is shown below (with the parts that ar
             └── application.yml
 ```
 
-- `pom.xml` declares the project's Maven configuration, such as dependencies, packaging, etc.
-- `application.yml` declares the project's user configuration, such as database address, password, database dialect used, etc.
-- `App.java` is the entry point of the project
-- `controller` is the package that exposes the HTTP interface to the project
-- `service` is the package that implements the interface and logic of the project
-- `dao` is the package that implements the connection to the database and the persistence of the data
+- `pom.xml` declares the project's Maven configuration, such as dependencies and packaging.
+- `application.yml` declares the project's user configuration, such as database address, password, and database dialect used.
+- `App.java` is the entry point of the project.
+- `controller` is the package that exposes the HTTP interface to the outside.
+- `service` is the package that implements the interface and logic of the project.
+- `dao` is the package that implements the connection to the database and the persistence of the data.
 
 ### Configuration
 
-This part will briefly describe the Maven configuration in the `pom.xml` file and the user configuration in the `application.yml` file.
+This part briefly describes the Maven configuration in the `pom.xml` file and the user configuration in the `application.yml` file.
 
-#### Maven Configuration
+#### Maven configuration
 
-The `pom.xml` file is a Maven configuration file that declares the project's Maven dependencies, packaging methods, packaging information, etc. You can replicate the process of generating this configuration file by [create the same dependency blank application](#create-the-same-dependency-blank-application-optional), or copying it directly to your project.
+The `pom.xml` file is a Maven configuration file that declares the project's Maven dependencies, packaging methods, and packaging information. You can replicate the process of generating this configuration file by [creating a blank application with the same dependency](#create-a-blank-application-with-the-same-dependency-optional), or copying it directly to your project.
 
 {{< copyable "" >}}
 
@@ -749,9 +693,9 @@ The `pom.xml` file is a Maven configuration file that declares the project's Mav
 </project>
 ```
 
-#### User Configuration
+#### User configuration
 
-`application.yml` This configuration file declares the user configuration, such as database address, password, database dialect used, etc.
+The `application.yml` configuration file declares the user configuration, such as database address, password, and the database dialect used.
 
 ```yaml
 spring:
@@ -767,19 +711,19 @@ spring:
       ddl-auto: create-drop
 ```
 
-The [YAML](https://yaml.org/) configuration has:
+The configuration is written in [YAML](https://yaml.org/). The fields are described as follows:
 
-- `spring.datasource.url` : URL of the database connection
-- `spring.datasource.url` : database username
-- `spring.datasource.password` : the database password, this is empty, need to comment or delete
-- `spring.datasource.driver-class-name` : database driver, since TiDB is compatible with MySQL, use mysql-connector-java driver class here `com.mysql.cj.jdbc`.
-- `jpa.show-sql` : when true, the SQL run by JPA will be printed
-- `jpa.database-platform` : the selected database dialect, here we connect to TiDB, so naturally we choose **TiDB dialect**, this dialect is only available in Hibernate version `6.0.0.Beta2` and above, please notice the dependency version.
-- `jpa.hibernate.ddl-auto` : The `create-drop` selected here will create the table at the beginning of the program and delete it on exit. Please do not use this in a formal environment, but we are using this as a sample application and want to minimize the impact on the database data, so we have chosen this option.
+- `spring.datasource.url` : URL of the database connection.
+- `spring.datasource.username` : the database username.
+- `spring.datasource.password` : the database password. Empty. You need to comment out or delete this field.
+- `spring.datasource.driver-class-name` : the database driver. Because TiDB is compatible with MySQL, use a mysql-connector-java driver class `com.mysql.cj.jdbc`.
+- `jpa.show-sql` : when this field is set to `true`, the SQL statements run by JPA are printed.
+- `jpa.database-platform` : the selected database dialect. Because the application connects to TiDB, choose **TiDB dialect**. Note that this dialect is only available in Hibernate `6.0.0.Beta2` and later versions, so choose the applicable dependency version.
+- `jpa.hibernate.ddl-auto` : `create-drop` creates the table at the beginning of the program and deletes the table on exit. Do not set this option in a production environment. Because this is a sample application, this option is set to minimize the impact on the database data.
 
-### Entry Point
+### Entry point
 
-Entry point `App.java`:
+The `App.java` file is the entry point:
 
 {{< copyable "" >}}
 
@@ -800,11 +744,11 @@ public class App {
 }
 ```
 
-Our entry class is very simple, starting with the standard configuration annotation [@SpringBootApplication](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html) for Spring Boot applications. For more information, see [Using the @SpringBootApplication Annotation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation) in the Spring Boot official documentation. Then, use the `ApplicationPidFileWriter` to write a PID (process identification number) file called `spring-jpa-hibernate.pid` during application startup, which can be used externally to close the application.
+The entry class starts with the standard configuration annotation [`@SpringBootApplication`](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/SpringBootApplication.html) for Spring Boot applications. For more information, see [Using the `@SpringBootApplication` Annotation](https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-using-springbootapplication-annotation) in the Spring Boot official documentation. Then, the program uses the `ApplicationPidFileWriter` to write a PID (process identification number) file called `spring-jpa-hibernate.pid` during application startup. The PID file can be used to close this application from an external source.
 
-### Data Access Object
+### Data access object
 
-The `dao` (Data Access Object) package, implements the persistence of data objects.
+The `dao` (Data Access Object) package implements the persistence of data objects.
 
 #### Entity objects
 
@@ -870,18 +814,18 @@ public class PlayerBean {
 }
 ```
 
-We can see that the entity class has several annotations that give Hibernate additional information to bind the entity class to the table.
+The entity class has several annotations that give Hibernate additional information to bind the entity class to the table.
 
-- `@Entity` declares that `PlayerBean` is an entity class
-- `@Table` relates this entity class to the table `player_jpa` using the annotated attribute `name`
-- `@Id` declare that this property is related to the primary key column of the table
-- `@GeneratedValue` indicates that the value of this column is generated automatically and should not be set manually, using the attribute `generator` to specify the name of the generator as `player_id`.
-- `@SequenceGenerator` declares a generator that uses [sequence](/common/sql-statements/sql-statement-create-sequence.md), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (to be consistent with the name specified in `@GeneratedValue`). Then use the annotation attribute `sequenceName` to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
-- `@Column` declares each private attribute as a column of the table `player_jpa`, and uses the annotated attribute `name` to determine the name of the column corresponding to the attribute.
+- `@Entity` declares that `PlayerBean` is an entity class.
+- `@Table` relates this entity class to the `player_jpa` table using the annotation attribute `name`.
+- `@Id` declares that this property is related to the primary key column of the table.
+- `@GeneratedValue` indicates that the value of this column is generated automatically and should not be set manually. The attribute `generator` is used to specify the name of the generator as `player_id`.
+- `@SequenceGenerator` declares a generator that uses [sequence](/common/sql-statements/sql-statement-create-sequence.md), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (consistent with the name specified in `@GeneratedValue`). The annotation attribute `sequenceName` is used to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
+- `@Column` declares each private attribute as a column of the `player_jpa` table, and uses the annotation attribute `name` to determine the name of the column corresponding to the attribute.
 
 #### Repository
 
-To abstract the database layer, Spring applications use the [Repository](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA will implement some methods for us, such as [INSERT](/common/sql-statements/sql-statement-insert.md), or [SELECT](/common/sql-statements/sql-statement-select.md), etc.
+To abstract the database layer, Spring applications use the [`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA implements some pre-built methods, such as [`INSERT`](/common/sql-statements/sql-statement-insert.md), or [`SELECT`](/common/sql-statements/sql-statement-select.md) using the primay key.
 
 {{< copyable "" >}}
 
@@ -929,11 +873,14 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 }
 ```
 
-The `PlayerRepository` extends the interface JpaRepository used by Spring for JPA data access, and we use the `@Query` annotation to indicate Hibernate how to implement queries in this interface. We use two query syntaxes here, where the query in the interface `getPlayersByPage` uses a syntax that Hibernate calls [HQL](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#hql) (Hibernate Query Language). The interface `getPlayersByLimit` uses native SQL, and the `@Query` annotation parameter `nativeQuery` needs to be set to `true` when using the native SQL syntax.
+The `PlayerRepository` interface extends the `JpaRepository` interface used by Spring for JPA data access. The `@Query` annotation is used to tell Hibernate how to implement queries in this interface. Two query syntaxes are used:
 
-In the SQL for the `getPlayersByLimit` annotation, `:limit` is called [named parameters](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#jpql-query-parameters) in Hibernate, and Hibernate will automatically find and splice the parameter by name within the interface where the annotation resides. You can also use `@Param` to specify a different name than the parameter for injection.
+* In the `getPlayersByPage` interface, [Hibernate Query Language](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#hql) (HQL) is used.
+* In the `getPlayersByLimit` interface, native SQL is used. When the interface uses the native SQL syntax, the `@Query` annotation parameter `nativeQuery` must be set to `true`.
 
-In `getPlayerAndLock` we use an annotation [@Lock](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html) which declares that locking is done here using pessimistic locks, for more information about other locking methods see [here](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html). The `@Lock` annotation can only be used with `HQL`, otherwise, an error will occur. If you want to use SQL directly for locking, you can use the annotation directly in the comments section:
+In the SQL for the `getPlayersByLimit` annotation, `:limit` is called a [named parameter](https://docs.jboss.org/hibernate/orm/6.0/userguide/html_single/Hibernate_User_Guide.html#jpql-query-parameters) in Hibernate. Hibernate automatically finds and splices the parameter by name within the interface where the annotation resides. You can also use `@Param` to specify a name different from the parameter for injection.
+
+In `getPlayerAndLock`, an annotation [`@Lock`](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/Lock.html) is used to declare that pessimistic locking is applied. For details on other locking methods, see [Entity Locking](https://openjpa.apache.org/builds/2.2.2/apache-openjpa/docs/jpa_overview_em_locking.html). The `@Lock` annotation must be used with `HQL`; otherwise, an error occurs. If you want to use SQL directly for locking, you can use the annotation from the comment:
 
 {{< copyable "" >}}
 
@@ -941,15 +888,15 @@ In `getPlayerAndLock` we use an annotation [@Lock](https://docs.spring.io/spring
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
 
-Use SQL: `FOR UPDATE` to add locks directly. You can also go deeper into the principles with the TiDB [SELECT document](/common/sql-statements/sql-statement-select.md).
+The SQL statement above uses `FOR UPDATE` to add locks directly. You can also dive deeper into the principles with the TiDB [`SELECT` statement](/common/sql-statements/sql-statement-select.md).
 
-### Logic Implementation
+### Logic implementation
 
-The logic implementation layer: `service` package, contains the interfaces and logic implemented by the project.
+The logic implementation layer is the `service` package, which contains the interfaces and logic implemented by the project.
 
 #### Interface
 
-The reason for defining an interface within the `PlayerService.java` file and implementing the interface instead of writing a class directly is to try to keep the example as close to actual use as possible and to reflect the [open-closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of the design. You can also omit this interface and inject the implementation class directly into the dependency class, but we don't recommend this.
+The `PlayerService.java` file defines the logical interface and implements the interface rather than writing a class directly. This is to keep the example as close to actual use as possible and to reflect the [open-closed principle](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle) of the design. You may omit this interface and inject the implementation class directly in the dependency class, but this approach is not recommended.
 
 {{< copyable "" >}}
 
@@ -1015,7 +962,7 @@ public interface PlayerService {
 
 #### Implementation (Important)
 
-The `PlayerService.java` file implements the `PlayerService` interface, where all our data processing logic is written.
+The `PlayerService.java` file implements the `PlayerService` interface, which contains all the data processing logic.
 
 {{< copyable "" >}}
 
@@ -1093,19 +1040,19 @@ public class PlayerServiceImpl implements PlayerService {
 }
 ```
 
-Here we use the `@Service` annotation to declare that the life cycle of this object is managed by `Spring`.
+The `@Service` annotation is used to declare that the lifecycle of this object is managed by `Spring`.
 
-Note that the PlayerServiceImpl implementation class has a [@Transactional](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations) annotation in addition to the `@Service` annotation. When transaction management is enabled in the application (which can be turned on using [@EnableTransactionManagement](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html), but is turned on by default by `Spring Boot` and does not need to be configured manually again), `Spring` automatically wraps all objects with the `@Transactional` annotation in a proxy, which is used for object invocation processing.
+The `PlayerServiceImpl` implementation class also has a [`@Transactional`](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#transaction-declarative-annotations) annotation in addition to the `@Service` annotation. When transaction management is enabled in the application (which can be turned on using [`@EnableTransactionManagement`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/annotation/EnableTransactionManagement.html), but is turned on by default by `Spring Boot`. You don not need to manually configure it.), `Spring` automatically wraps all objects with the `@Transactional` annotation in a proxy and uses this proxy for object invocation processing.
 
-You can simply assume that when the agent calls a function inside an object with the `@Transactional` annotation: 
+You can simply assume that when the agent calls a function inside an object with the `@Transactional` annotation:
 
-- At the top of the function it will start the transaction with `transaction.begin()`
-- When the function returns, it will call `transaction.commit()` to commit the transaction
-- When any runtime error occurs, the agent will call `transaction.rollback()` to roll back.
+- At the top of the function, it starts the transaction with `transaction.begin()`.
+- When the function returns, it calls `transaction.commit()` to commit the transaction.
+- When any runtime error occurs, the agent calls `transaction.rollback()` to roll back.
 
-You can refer to [Database Transactions](/develop/dev-guide-transaction-overview.md) for more information on transactions, or read the article on the `Spring` website to [Understanding the Spring Framework’s Declarative Transaction Implementation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained).
+You can refer to [Database Transactions](/develop/dev-guide-transaction-overview.md) for more information on transactions, or read [Understanding the Spring Framework's Declarative Transaction Implementation](https://docs.spring.io/spring-framework/docs/current/reference/html/data-access.html#tx-decl-explained) on the `Spring` website.
 
-Of the implementation classes, the `buyGoods` function is the one to focus on, as it throws an exception if it is not logical and directs `Hibernate` to perform a transaction rollback to prevent incorrect data.
+In all implementation classes, the `buyGoods` function is requires attention. When the function encounters an illogical operation, it throws an exception and directs Hibernate to perform a transaction rollback to prevent incorrect data.
 
 ### External HTTP Interface
 
@@ -1169,15 +1116,15 @@ public class PlayerController {
 }
 ```
 
-`PlayerController` uses annotations as many as possible to demonstrate feature, in real projects, please try to keep the style uniform while following the rules of your company or group. We will explain annotations in `PlayerController` one by one:
+`PlayerController` uses annotations as many as possible to demonstrate features. In real projects, keep the style consistent while following the rules of your company or team. The annotations in `PlayerController` are explained as follows:
 
-- [@RestController](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) declares the `PlayerController` as a [Web Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and serializes the return value as `JSON` output.
-- [@RequestMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html)  maps the URL endpoint to `/player`, i.e. this `Web Controller` only listens for requests under the `/player` URL.
-- `@Autowired` means `Spring` container can autowire relationships between collaborating beans. As you can see, we declare that we need a `PlayerService` object here, which is an interface, and we don't specify which implementation class to use. This is automatically assembled by Spring. For the rules of this assembly, see the article [The IoC container](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html) on Spring's official website.
-- [@PostMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html) declares that this function will respond to a [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) type request in HTTP.
-    - `@RequestBody` declares that the entire HTTP payload is parsed here into the parameter named `playerList`.
-    - `@NonNull` declares that the parameter must not be null, otherwise, it will return an error
-- [@GetMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html) declares that this function will respond to a [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) type request in HTTP.
-    - [@PathVariable](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) shows that the annotation has placeholders like `{id}`, `{limit_size}` which will be bound to the variable annotated by `@PathVariable`, based on the annotation attribute name (variable name can be omitted, i.e. `@PathVariable(name="limit_size")` can be written as `@PathVariable("limit_size")`), which is the same as the variable name when not specified specifically
-- [@PutMapping](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) declares that this function will respond to a [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) type request in HTTP
-- [@RequestParam](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html) declares that this function will parse URL parameters, form parameters, and other parameters in the request and bind them to the annotated variables
+- [`@RestController`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) declares `PlayerController` as a [Web Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) and serializes the return value as `JSON` output.
+- [`@RequestMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html) maps the URL endpoint to `/player`, that is, this `Web Controller` only listens for requests sent to the `/player` URL.
+- `@Autowired` means `Spring` container can autowire relationships between collaborating beans. The declaration requires a `PlayerService` object, which is an interface and does not specify which implementation class to use. This is assembled by Spring. For the rules of this assembly, see [The IoC container](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html) on Spring's official website.
+- [`@PostMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html) declares that this function responds to a [POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request in HTTP.
+    - `@RequestBody` declares that the entire HTTP payload is parsed into the `playerList` parameter.
+    - `@NonNull` declares that the parameter must not be null; otherwise, it returns an error.
+- [`@GetMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/GetMapping.html) declares that this function responds to a [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) request in HTTP.
+    - [`@PathVariable`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PathVariable.html) shows that the annotation has placeholders like `{id}` and `{limit_size}`, which are bound to the variable annotated by `@PathVariable`. Such binding is based on the annotation attribute `name`. If the annotation attribute `name` is not specified, it is the same as the variable name. The variable name can be omitted, that is, `@PathVariable(name="limit_size")` can be written as `@PathVariable("limit_size")`.
+- [`@PutMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PutMapping.html) declares that this function responds to a [PUT](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT) request in HTTP.
+- [`@RequestParam`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestParam.html) declares that this function parses URL parameters, form parameters, and other parameters in the request and binds them to the annotated variables.
