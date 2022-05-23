@@ -7,26 +7,26 @@ summary: This document describes how to query data from a single table in databa
 
 # Query data from a single table
 
-This document focus on how to use SQL and various programming languages to query data from a single table in database.
+This document describes how to use SQL and various programming languages to query data from a single table in a database. 
 
 ## Before you begin
 
-The following will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to explain data query from a single table in TiDB.
+The following content will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
 
-Make sure you have the following things before continue:
+Before querying data, make sure that you have completed the following steps:
 
 1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
 2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-data).
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
-## A simple query
+## Execute a simple query
 
-In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement query data from the database.
+In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement to query data from the database.
 
 <SimpleTab>
 <div label="SQL" href="simple-sql">
 
-Execute the following SQL statement in MySQL client:
+Execute the following SQL statement in a MySQL client:
 
 {{< copyable "sql" >}}
 
@@ -107,7 +107,7 @@ public class AuthorDAO {
 }
 ```
 
-- After [acquiring the database connection](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
+- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
 - Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
 - The query results will be stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
 
@@ -134,11 +134,11 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" href="filter-java">
 
-In Java, you can use the same SQL to handle data query request with dynamic parameters.
+In Java, you can use the same SQL to handle data query requests with dynamic parameters.
 
 This can be done by splicing parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the  application.
 
-When dealing with such queries, [prepared statement](/develop/dev-guide-prepared-statement.md) should be used instead of a normal statement.
+To deal with such queries, use a [prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
 
 {{< copyable "java" >}}
 
@@ -232,9 +232,9 @@ The result is as follows:
 10 rows in set (0.11 sec)
 ```
 
-With TiDB's optimization of LIMIT statement, the query time is significantly reduced from `0.23 sec` to `0.11 sec`. For more information, see [TopN and Limit](/topn-limit-push-down.md).
+With the `LIMIT` statement, the query time is significantly reduced from `0.23 sec` to `0.11 sec` in this example. For more information, see [TopN and Limit](/topn-limit-push-down.md).
 
-## Aggregate Queries
+## Aggregate queries
 
 To have a better understanding of the overall data situation, you can use the `GROUP BY` statement to aggregate query results.
 
