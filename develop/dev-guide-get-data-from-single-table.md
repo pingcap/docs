@@ -15,7 +15,7 @@ Next, we will introduce the data query section of TiDB around the [Bookshop](/de
 Before reading this chapter, you need to do the following:
 
 1. Build a TiDB cluster (recommended to use [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md)).
-2. [Import table schema and sample data of Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-data).
+2. [Import table schema and sample data of Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
 ## A simple query
