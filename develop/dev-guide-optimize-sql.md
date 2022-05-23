@@ -9,7 +9,7 @@ This section introduce some common reasons for slow SQL statements, and you will
 
 ## Before you begin
 
-You can use [`tiup demo` Import](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo) to prepare data:
+You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo) to prepare data:
 
 {{< copyable "shell-regular" >}}
 

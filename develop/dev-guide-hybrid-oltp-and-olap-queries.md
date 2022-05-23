@@ -20,7 +20,7 @@ Before starting, you can import much larger sample data [via the `tiup demo` com
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or [using the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
+Or [using the import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
 
 ## Window function
 
