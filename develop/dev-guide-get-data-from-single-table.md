@@ -1,6 +1,6 @@
 ---
 title: Query data from a single table
-summary: This document describes how to query data from a single table in database.
+summary: This document describes how to query data from a single table in a database.
 ---
 
 <!-- markdownlint-disable MD029 -->
