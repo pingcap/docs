@@ -1,9 +1,9 @@
 ---
-title: Object naming convention
+title: Object Naming Convention
 summary: Introduces the object naming convention in TiDB.
 ---
 
-# Object naming convention
+# Object Naming Convention
 
 This document introduces the rules for naming database objects, such as DATABASE, TABLE, INDEX, USER.
 
@@ -20,22 +20,22 @@ It is recommended to differentiate names by business, product, or other metrics,
 
 ## Table naming convention
 
-- Use the same prefix for tables of the same business or module and the name should express it's meaning of as much as possible.
+- Use the same prefix for tables of the same business or module and the name should express its meaning as much as possible.
 - Multiple words are separated by underscores, and it is not recommended to exceed 32 characters.
 - It is recommended to annotate the purpose of the table for understanding. For example:
     - Temporary table: `tmp_t_crm_relation_0425`
     - Backup table: `bak_t_crm_relation_20170425`
     - Temporary table of business operations: `tmp_st_{business code}_{creator abbreviation}_{date}`
     - Record table of accounts period: `t_crm_ec_record_YYYY{MM}{dd}`
-- Create separate DATABASE for tables of different business modules and add annotations accordingly.
+- Create separate databases for tables of different business modules and add annotations accordingly.
 - Currently, TiDB only supports setting the value of `lower-case-table-names` to `2`. This means it is case-sensitive when you save a table name, but case-insensitive when you compare table names. The comparison is based on the lower case.
 
 ## Field naming convention
 
 - The field naming is the actual meaning or abbreviation of the field.
 - It is recommended to use the same name between tables with the same meaning field.
-- It is recommended to add annotations to the field and specify named values for enumerated type, such as "0: offline, 1: online".
-- It is recommended to name the boolean column as `is_{description}`. For example, the column of a `member` table which indicates whether the member is enabled, can be named as `is_enabled`.
+- It is recommended to add annotations to the field and specify named values for enumerated types, such as "0: offline, 1: online".
+- It is recommended to name the boolean column as `is_{description}`. For example, the column of a `member` table that indicates whether the member is enabled, can be named as `is_enabled`.
 - It is not recommended to name a field with more than 30 characters, and the number of fields should be less than 60.
 - Avoid using TiDB reserved words, such as `order`, `from`, `desc`. For more information, refer to the TiDB reserved words.
 
