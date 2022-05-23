@@ -15,6 +15,8 @@ You can import Bookshop table structures and data either [via TiUP](#via-tiup-de
 <SimpleTab>
 <div label="Via `TiUP demo`">
 
+### Via `tiup demo`
+
 If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
 
 {{< copyable "shell" >}}
@@ -25,7 +27,7 @@ tiup demo bookshop prepare
 
 By default, this command enables your application to connect to port `4000` on address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#description-of-the-tables) in a database named `bookshop`.
 
-**Configure connection information**
+#### Configure connection information
 
 The following table lists the connection parameters. You can change their default settings to match your environment.
 
@@ -45,7 +47,7 @@ For example, if you want to connect to a database on TiDB Cloud, you can specify
 tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
 ```
 
-**Set the data volume**
+#### Set the data volume
 
 You can specify the volume of data to be generated in each database table by configuring the following parameters:
 
@@ -75,6 +77,8 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 </div>
 <div label="Via TiDB Cloud Import">
+
+### Via TiDB Cloud Import
 
 On the database details page of TiDB Cloud, click the **Import** button to enter the **Data Import Task** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
@@ -121,7 +125,7 @@ On the database details page of TiDB Cloud, click the **Import** button to enter
 
 For more information about TiDB Cloud, see [TiDB Cloud Documentation](https://docs.pingcap.com/tidbcloud).
 
-**View data import status**
+### View data import status
 
 After the import is completed, you can view the data volume information of each table by executing the following SQL statement:
 
