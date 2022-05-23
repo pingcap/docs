@@ -17,7 +17,7 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 >
 > This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md). For more details, see [Explore SQL with TiDB](/basic-sql-operations.md).
 
-TiDB is compatible with MySQL, you can use MySQL statements directly in most the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
+TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
 To experiment with SQL and test out TiDB compatibility with MySQL queries, you can [run TiDB directly in your web browser without installing it](https://tour.tidb.io/). You can also first deploy a TiDB cluster and then run SQL statements in it.
 
