@@ -68,16 +68,16 @@ By querying the latest books list, you can see that the price of this book has i
 5 rows in set (0.01 sec)
 ```
 
-If it is not necessary to use the latest data, you can query with Stale Read, which might return outdated data, to avoid the latency caused by data synchronization during strongly consistent read.
+If it is not necessary to use the latest data, you can query with Stale Read, which might return outdated data, to avoid the latency caused by data synchronization during a strongly consistent read.
 
-Assuming that in the Bookshop application, real-time prices of books is not required on the book lists page, while real-time price is only required on book details and order pages. Stale Read can be used to improve throughput of the application.
+Assuming that in the Bookshop application, real-time prices of books are not required on the book lists page, while the real-time price is only required on book details and order pages. Stale Read can be used to improve throughout of the application.
 
 ## Statement level
 
 <SimpleTab>
 <div label="SQL" href="statement-sql">
 
-To query the price of the book before a specific time, add a `AS OF TIMESTAMP <datetime>` clause in the above query statement.
+To query the price of the book before a specific time, add an `AS OF TIMESTAMP <datetime>` clause in the above query statement.
 
 {{< copyable "sql" >}}
 
@@ -307,7 +307,7 @@ public static class StaleReadHelper {
 }
 ```
 
-Then define a method to enable Stale Read feature through a transaction in the `BookDAO` class. Use the method to query instead of add `AS OF TIMESTAMP` to the query statement.
+Then define a method to enable the Stale Read feature through a transaction in the `BookDAO` class. Use the method to query instead of adding `AS OF TIMESTAMP` to the query statement.
 
 {{< copyable "" >}}
 
@@ -419,7 +419,7 @@ public static class TxnHelper {
 }
 ```
 
-Then define a method to enable Stale Read feature through a transaction in the `BookDAO` class. Use the method to query instead of add `AS OF TIMESTAMP` to the query statement.
+Then define a method to enable the Stale Read feature through a transaction in the `BookDAO` class. Use the method to query instead of adding `AS OF TIMESTAMP` to the query statement.
 
 {{< copyable "" >}}
 

@@ -15,11 +15,11 @@ By default, TiDB only reads and writes data on the leader of the same Region. Wh
 
 ## When to use
 
-You can visually analyze whether your application has hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether there appears a read hotspot by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+You can visually analyze whether your application has a hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether there appears a read hotspot by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
 
 For more about handling hotspot, see [TiDB Hotspot Problem Handling](/troubleshoot-hot-spot-issues.md).
 
-If read hotspots are unavoidable or the changing cost is very high, you can try to use the Follower Read to better load balance of read requests to the follower region.
+If read hotspots are unavoidable or the changing cost is very high, you can try to use the Follower Read to better load the balance of reading requests to the follower region.
 
 ## Enable Follower Read
 
@@ -83,7 +83,7 @@ public class FollowerReadHelper {
 }
 ```
 
-When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can load balance between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
+When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can load the balance between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
 
 {{< copyable "" >}}
 

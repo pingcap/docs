@@ -11,7 +11,7 @@ This document introduces how to use views in TiDB.
 
 TiDB supports views. A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
 
-- Exposing only safe fields and data to users to ensure security of sensitive fields and data stored in the underlying table.
+- Exposing only safe fields and data to users to ensure the security of sensitive fields and data stored in the underlying table.
 - Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
 
 ## Create a view
@@ -48,11 +48,11 @@ Once the view is created, you can use the `SELECT` statement to query the view j
 SELECT * FROM book_with_ratings LIMIT 10;
 ```
 
-When TiDB queries a view, it actually queries the `SELECT` statement associated with the view.
+When TiDB queries a view, it queries the `SELECT` statement associated with the view.
 
 ## Update views
 
-Currently, the view in TiDB does not support `ALTER VIEW view_name AS query;`, you can "update" a view in the following two ways:
+Currently, the view in TiDB does not support the `ALTER VIEW view_name AS query;`, you can "update" a view in the following two ways:
 
 - Delete the old view with the `DROP VIEW view_name;` statement, and then update the view by creating a new view with the `CREATE VIEW view_name AS query;` statement.
 - Use the `CREATE OR REPLACE VIEW view_name AS query;` statement to overwrite an existing view with the same name.

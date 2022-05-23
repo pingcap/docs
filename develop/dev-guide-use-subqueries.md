@@ -9,13 +9,13 @@ This document mainly introduces the statement and category of subquery in TiDB.
 
 ## Overview
 
-SUbquery is a query within another SQL query. With subquery, the query result can be used in another query.
+The Subquery is a query within another SQL query. With subquery, the query result can be used in another query.
 
 The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
 
 ## Subquery statement
 
-Generally speaking, there are following five types of subqueries:
+Generally speaking, there are the following five types of subqueries:
 
 - Scalar Subquery, such as `SELECT (SELECT s1 FROM t2) FROM t1`.
 - Derived Tables, such as `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`.
@@ -25,15 +25,15 @@ Generally speaking, there are following five types of subqueries:
 
 ## The category of subquery
 
-Generally speaking, subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
+Generally speaking, the subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
 
 The basis for determining whether a query is correlated is whether it refers to a subquery with columns from outer references.
 
 ### Self-contained subquery
 
-For self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
+For a self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
 
-For example, to query authors in the `authors` table whose age is greater than the average age, you can use subquery as a comparison operator operand.
+For example, to query authors in the `authors` table whose age is greater than the average age, you can use a subquery as a comparison operator operand.
 
 {{< copyable "sql" >}}
 
@@ -46,7 +46,7 @@ SELECT * FROM authors a1 WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_ye
 )
 ```
 
-The inner subquery is executed before TiDB executing the above query:
+The inner subquery is executed before TiDB executes the above query:
 
 {{< copyable "sql" >}}
 
@@ -85,13 +85,13 @@ The result is as follows:
 ...
 ```
 
-For self-contained subquery like Existential Test and Quantified Comparison, TiDB rewrites and equivalently replaces them for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
+For a self-contained subquery like Existential Test and Quantified Comparison, TiDB rewrites and equivalently replaces them for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
 
 ### Correlated subquery
 
-For correlated subquery, since the inner subquery references the columns from outer query, each subquery is executed once for every row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
+For correlated subquery, since the inner subquery references the columns from the outer query, each subquery is executed once for every row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
 
-Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency in the execution plan level.
+Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency at the execution plan level.
 
 The following statement is to query authors who are older than the average age of other authors of the same gender.
 

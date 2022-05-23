@@ -15,7 +15,7 @@ Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion.
 
 ## Basic use
 
-A Common Table Expression (CTE) is a temporary result set that can be referred multiple times within a SQL statement to improve the statement's readability and execution efficiency. You can apply the `WITH` statement to use Common Table Expressions.
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement's readability and execution efficiency. You can apply the `WITH` statement to use Common Table Expressions.
 
 Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
 
@@ -32,7 +32,7 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-For example, If you want to know how many books each of the 50 oldest authors has written.
+For example, If you want to know how many books each of the 50 oldest authors have written.
 
 <SimpleTab>
 <div label="SQL">
@@ -115,7 +115,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-It can be found that the author "Ray Macejkovic" wrote 4 books. With CTE query, you can find out the order and rating of these 4 books.
+It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can find out the order and rating of these 4 books.
 
 {{< copyable "sql" >}}
 
@@ -166,9 +166,9 @@ The result is as follows:
 4 rows in set (0.06 sec)
 ```
 
-Three CTE blocks, which are separated by `,`, are defined in this SQL statement, .
+Three CTE blocks, which are separated by `,`, are defined in this SQL statement.
 
-First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by `JOIN` statement.
+First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by the `JOIN` statement.
 
 It is worthy to note that the query in `books_authored_by_rm` executes only once, and TiDB will open a temporary space to cache the results. When `books_with_average_ratings` and `books_with_orders` reference, it will get data directly from this temporary space.
 

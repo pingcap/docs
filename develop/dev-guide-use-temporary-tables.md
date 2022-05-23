@@ -1,6 +1,6 @@
 ---
 title: Temporary Tables
-summary: Introduce how to create, view, query and delete temporary tables.
+summary: Introduce how to create, view, query, and delete temporary tables.
 ---
 
 # Temporary Tables
@@ -39,7 +39,7 @@ The result is as follows:
 50 rows in set (0.01 sec)
 ```
 
-For the convenience of subsequent queries, you need to cache the result of this query. When using general tables for storage, you should pay attention to: how to avoid the table name duplication problem between different sessions, the need of cleaning up intermediate results in time, as these tables may not be used after a batch query.
+For the convenience of subsequent queries, you need to cache the result of this query. When using general tables for storage, you should pay attention to how to avoid the table name duplication problem between different sessions, and the need of cleaning up intermediate results in time, as these tables may not be used after a batch query.
 
 ## Create a temporary table
 
@@ -59,7 +59,7 @@ Before creating a local temporary table, you need to add `CREATE TEMPORARY TABLE
 <SimpleTab>
 <div label="SQL" href="local-sql">
 
-Temporary tables are created through the `CREATE TEMPORARY TABLE <table_name>` statement. The default type is local temporary table, which is visible only to the current session.
+Temporary tables are created through the `CREATE TEMPORARY TABLE <table_name>` statement. The default type is a local temporary table, which is visible only to the current session.
 
 {{< copyable "sql" >}}
 
@@ -72,7 +72,7 @@ CREATE TEMPORARY TABLE top_50_eldest_authors (
 );
 ```
 
-After creating the temporary table, you can use the `INSERT INTO table_name SELECT ...` statement to insert results of the above query into the temporary table you just created.
+After creating the temporary table, you can use the `INSERT INTO table_name SELECT ...` statement to insert the results of the above query into the temporary table you just created.
 
 {{< copyable "sql" >}}
 
@@ -141,7 +141,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 <SimpleTab>
 <div label="SQL" href="global-sql">
 
-To create a global temporary table, you can add the `GLOBAL` keyword and ended with `ON COMMIT DELETE ROWS`, which means the table will be deleted after the current transaction ends.
+To create a global temporary table, you can add the `GLOBAL` keyword and end with `ON COMMIT DELETE ROWS`, which means the table will be deleted after the current transaction ends.
 
 {{< copyable "sql" >}}
 
@@ -154,12 +154,12 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 ) ON COMMIT DELETE ROWS;
 ```
 
-When inserting data to global temporary tables, you must explicitly declare the start of the transaction via `BEGIN`. Otherwise, the data will be cleared after executing the `INSERT INTO` statement. Because in Auto Commit mode, the transaction is automatically committed after executing `INSERT INTO` statement, and the global temporary table is cleared when the transaction ends.
+When inserting data to global temporary tables, you must explicitly declare the start of the transaction via `BEGIN`. Otherwise, the data will be cleared after executing the `INSERT INTO` statement. Because in Auto Commit mode, the transaction is automatically committed after executing the `INSERT INTO` statement, and the global temporary table is cleared when the transaction ends.
 
 </div>
 <div label="Java" href="global-java">
 
-When using global temporary tables, you need to turn off Auto Commit mode first. In Java, you can do this with the `conn.setAutoCommit(false);` statement, and you can commit the transaction explicitly with `conn.commit();`. The data added to the global temporary table during the transaction will be cleared after the transaction is committed or cancelled.
+When using global temporary tables, you need to turn off Auto Commit mode first. In Java, you can do this with the `conn.setAutoCommit(false);` statement, and you can commit the transaction explicitly with `conn.commit();`. The data added to the global temporary table during the transaction will be cleared after the transaction is committed or canceled.
 
 {{< copyable "java" >}}
 
@@ -229,7 +229,7 @@ For example, you can see the global temporary table `top_50_eldest_authors_globa
 
 ## Query a temporary table
 
-Once the temporary table is ready, you can query as a normal data table:
+Once the temporary table is ready, you can query it as a normal data table:
 
 {{< copyable "sql" >}}
 
@@ -248,7 +248,7 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-Different from [view](/develop/dev-guide-use-views.md), querying a temporary table get data directly from the temporary table instead of executing the original query used in insert. In some cases, this can improve the query performance.
+Different from [view](/develop/dev-guide-use-views.md), querying a temporary table gets data directly from the temporary table instead of executing the original query used in the insert. In some cases, this can improve the query performance.
 
 ## Drop a temporary table
 

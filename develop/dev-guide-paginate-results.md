@@ -1,11 +1,11 @@
 ---
-title: Paginate result
+title: Paginate Result
 summary: Introduce paginate result feature in TiDB.
 ---
 
-# Paginate result
+# Paginate Result
 
-To page through a larger query results, you can get the required part in a "paginated" manner.
+To page through a larger query result, you can get the required part in a "paginated" manner.
 
 ## Paginate query results
 
@@ -19,12 +19,12 @@ SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 
 `offset` indicates the beginning number of records and `row_count` indicates the number of records per page. Besides, TiDB also supports `LIMIT row_count OFFSET offset` syntax.
 
-It's recommended to sort query results with the `ORDER BY` statement when using pagination, unless there is a need to display data randomly.
+It's recommended to sort query results with the `ORDER BY` statement when using pagination unless there is a need to display data randomly.
 
 <SimpleTab>
 <div label="SQL" href="page-sql">
 
-For example, in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, querying the latest book lists in a paginated manner. The `LIMIT 0, 10` statement queries the first page of books' information list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`, and so on.
+For example, in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, querying the latest book lists in a paginated manner. The `LIMIT 0, 10` statement queries the first page of the books' information list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`, and so on.
 
 {{< copyable "sql" >}}
 
@@ -38,7 +38,7 @@ LIMIT 0, 10;
 </div>
 <div label="Java" href="page-java">
 
-In application development, the backend program receives the `page_number` parameter (which means the number of the page being requested) and the`page_size` parameter (which means how many records per page) from the frontend instead of `offset` parameter. Therefore, some conversions needed to be done before query.
+In application development, the backend program receives the `page_number` parameter (which means the number of the page being requested) and the`page_size` parameter (which means how many records per page) from the frontend instead of the `offset` parameter. Therefore, some conversions needed to be done before querying.
 
 {{< copyable "java" >}}
 
@@ -76,7 +76,7 @@ public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLE
 
 ## Paging batches for single-field primary key tables
 
-Conventional paging update uses primary key or unique index for sorting, and then with the `offset` statement in the `LIMIT` clause to split pages by a specified row count. Then wrap the pages into independent transactions to achieve flexible paging updates. However, the disadvantage is also obvious. As the primary key or unique index needs to be sorted, larger offset consumes more computing resources, especially in the case of large data.
+Conventional paging update uses a primary key or unique index for sorting, and then with the `offset` statement in the `LIMIT` clause to split pages by a specified row count. Then wrap the pages into independent transactions to achieve flexible paging updates. However, the disadvantage is also obvious. As the primary key or unique index needs to be sorted, a larger offset consumes more computing resources, especially in the case of large data.
 
 The following introduces a more efficient paging batching method:
 
@@ -118,7 +118,7 @@ The result is as follows:
 20 rows in set (0.01 sec)
 ```
 
-Next, use the `WHERE id BETWEEN start_key AND end_key` statement to query the data of each slice. To update data more efficient, you can use the above slice information when modifying the data.
+Next, use the `WHERE id BETWEEN start_key AND end_key` statement to query the data of each slice. To update data more efficiently, you can use the above slice information when modifying the data.
 
 To delete the basic information of all books on page 1, replace the `start_key` and `end_key` with values of page 1 above:
 
@@ -279,11 +279,11 @@ The result is as follows:
 
 For clustered index tables (also known as "index-organized tables"), the `concat` function can be used to concatenate multiple columns' values as a key, and then use the window function to query the paging information.
 
-It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, in order to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation function. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to pad it.
+It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation function. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to pad it.
 
 For example, paging batch for the data in the `ratings` table.
 
-Create the meta information table by using the following statement. As the key concatenated by `book_id` and `user_id`, which are `bigint` type, is unable to convert to the same length, `LPAD` function is used to pad the length with `0` according to the maximum bits 19 of `bigint`.
+Create the meta information table by using the following statement. As the key concatenated by `book_id` and `user_id`, which are `bigint` types, is unable to convert to the same length, the `LPAD` function is used to pad the length with `0` according to the maximum bits 19 of `bigint`.
 
 {{< copyable "sql" >}}
 
