@@ -25,7 +25,7 @@ DM WebUI has the following pages:
 
 The interface is as follows:
 
-![webui](/media/dm/dm-webui-interface-en.png)
+![webui](/media/dm/dm-webui-preview-en.png)
 
 ## Access method
 
