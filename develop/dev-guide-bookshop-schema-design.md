@@ -6,15 +6,11 @@ title: Bookshop Example Application
 
 Bookshop is a virtual online bookstore application through which you can buy books of various categories and rate the books you have read.
 
-This document describes the following information:
+To make your reading on the application developer guide more smoothly, we present the SQL statements based on the [table structures](#description-of-the-tables) and data of the Bookshop application. This document focuses on the methods of importing the table structures and data as well as the definitions of the table structures.
 
-- How to import data into the Bookshop application via TiUP and the import feature of TiDB Cloud
-- What are the table definitions in the Bookshop application
-- How to use the `dbinit.sql` script
+## Import table structures and data
 
-## Import data
-
-You can import data either by using `tiup demo` or by using the import function of TiDB Cloud.
+You can import Bookshop table structures and data either [via TiUP](#via-tiup-demo) or [via the import feature of TiDB Cloud](#via-tidb-cloud-import).
 
 <SimpleTab>
 <div label="Via `TiUP demo`">
@@ -37,11 +33,11 @@ The following table lists the connection parameters. You can change their defaul
 
 | Parameter    | Abbreviation | Default value      | Description           |
 | ------------ | ---- | ----------- | -------------- |
+| `--password` | `-p` | None        | Database user password |
 | `--host`     | `-H` | `127.0.0.1` | Database address     |
 | `--port`     | `-P` | `4000`      | Database port     |
-| `--user`     | `-U` | `root`      | Database user     |
-| `--password` | `-p` | None        | Database user password |
 | `--db`       | `-D` | `bookshop`  | Database name     |
+| `--user`     | `-U` | `root`      | Database user     |
 
 For example, if you want to connect to a database on TiDB Cloud, you can specify the connection information as follows:
 
@@ -84,7 +80,7 @@ You can delete the original table structure through the `--drop-tables` paramete
 
 ### Via TiDB Cloud Import
 
-On the database details page of TiDB Cloud, click the **Import** option to enter the **Data Import Task** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
+On the database details page of TiDB Cloud, click the **Import** button to enter the **Data Import Task** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
 1. Copy the following **Bucket URL** and **Role-ARN** to the corresponding input boxes:
 
@@ -118,7 +114,7 @@ On the database details page of TiDB Cloud, click the **Import** option to enter
     ![Import Bookshop data in TiDB Cloud](/media/develop/tidb_cloud_import_bookshop_data.png)
 
 4. Enter database login information.
-5. Click the **Import** option to confirm the import.
+5. Click the **Import** button to confirm the import.
 6. Wait for TiDB Cloud to complete the import.
 
     ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
@@ -131,7 +127,7 @@ For more information about TiDB Cloud, see [TiDB Cloud Documentation](https://do
 
 ### View data import status
 
-After the import is completed, you can obtain the data volume information of each table by executing the following SQL statement:
+After the import is completed, you can view the data volume information of each table by executing the following SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -238,6 +234,8 @@ This table stores user purchase information.
 | ordered_at | datetime   | Purchase time                                                  |
 
 ## Database initialization script `dbinit.sql`
+
+If you want to manually create database table structures in the Bookshop application, run the following SQL statements:
 
 {{< copyable "sql" >}}
 
