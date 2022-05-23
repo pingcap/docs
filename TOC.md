@@ -613,6 +613,7 @@
       - [Bit Functions and Operators](/functions-and-operators/bit-functions-and-operators.md)
       - [Cast Functions and Operators](/functions-and-operators/cast-functions-and-operators.md)
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
+      - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
@@ -767,9 +768,11 @@
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - [TiDB Versioning](/releases/versioning.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
     - [5.3.1](/releases/release-5.3.1.md)

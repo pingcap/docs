@@ -259,6 +259,10 @@ For detailed integration guide, see [Quick Start Guide on Integrating TiDB with 
 
 #### Configure sink URI with `pulsar`
 
+> **Warning:**
+>
+> This is still an experimental feature. Do **NOT** use it in a production environment.
+
 Sample configuration:
 
 {{< copyable "shell-regular" >}}
@@ -280,6 +284,7 @@ The following are descriptions of parameters that can be configured for the sink
 | `auth.tls` | Uses the TLS mode to verify the downstream Pulsar (optional). For example, `auth=tls&auth.tlsCertFile=/path/to/cert&auth.tlsKeyFile=/path/to/key`. |
 | `auth.token` | Uses the token mode to verify the downstream Pulsar (optional). For example, `auth=token&auth.token=secret-token` or `auth=token&auth.file=path/to/secret-token-file`. |
 | `name` | The name of Pulsar producer in TiCDC (optional) |
+| `protocol` | The protocol with which messages are output to Pulsar. The value options are `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
 | `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
 | `disableBatching` |  Disables automatically sending messages in batches (optional) |
 | `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
@@ -602,11 +607,7 @@ protocol = "canal-json"
 
 ## Output the historical value of a Row Changed Event <span class="version-mark">New in v4.0.5</span>
 
-> **Warning:**
->
-> Currently, outputting the historical value of a Row Changed Event is still an experimental feature. It is **NOT** recommended to use it in the production environment.
-
-In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0, nor can be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
+In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value cannot be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
 
 Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the `changefeed` configuration file at the root level:
 
@@ -616,7 +617,11 @@ Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Ch
 enable-old-value = true
 ```
 
-After this feature is enabled, you can see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event) for the detailed output format. The new TiDB v4.0 collation framework will also be supported when you use the MySQL sink.
+This feature is enabled by default since v5.0. To learn the output format of the TiCDC Open Protocol after this feature is enabled, see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event).
+
+## Replicate tables with the new framework for collations enabled
+
+Starting from v4.0.15, v5.0.4, v5.1.1 and v5.2.0, TiCDC supports tables that have enabled [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
 
 ## Replicate tables without a valid index
 
