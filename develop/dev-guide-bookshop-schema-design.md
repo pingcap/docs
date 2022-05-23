@@ -8,8 +8,8 @@ Bookshop is a virtual online bookstore application through which you can buy boo
 
 This document describes the following information:
 
-- How to import data into the Bookshop application via TiUP and the import function of TiDB Cloud
-- What are the definitions of the tables in the Bookshop application
+- How to import data into the Bookshop application via TiUP and the import feature of TiDB Cloud
+- What are the table definitions in the Bookshop application
 - How to use the `dbinit.sql` script
 
 ## Import data
@@ -29,7 +29,7 @@ If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-refer
 tiup demo bookshop prepare
 ```
 
-By default, this command connects to port `4000` on address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#description-of-the-tables) in a database named `bookshop`.
+By default, this command enables your application to connect to port `4000` on address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#description-of-the-tables) in a database named `bookshop`.
 
 #### Configure connection information
 
@@ -166,7 +166,7 @@ The result is as follows:
 </div>
 </SimpleTab>
 
-## Description of the Tables
+## Description of the tables
 
 This section describes the database tables of the Bookshop application in detail.
 
