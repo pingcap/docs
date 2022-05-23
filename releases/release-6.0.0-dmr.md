@@ -113,7 +113,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
 - Optimization of hotspot index
 
-    When writing data in batches to TiDB, the single index, auto-incremented by hotspot, causes a performance bottleneck easily, affecting the overall write throughput. In v6.0.0, TiDB supports sharding the index to different nodes through the `tidb_shard` function, which improves the write performance. This is an application-friendly solution and does not require modifying the original query conditions. You can use the solution under the scenarios of high write throughput, point queries, and batch point queries. Note that you need to use this feature after verifying it because using the data that is sharded by range query might cause performance rollback.
+    When writing monotonically increasing data in batches to the secondary index, it makes a hotspot index and causes a performance bottleneck easily, affecting the overall write throughput. In v6.0.0, TiDB supports sharding the index to different nodes through the `tidb_shard` function, which improves the write performance. Currently, `tidb_shard` only affects the secondary unique index. This is an application-friendly solution and does not require modifying the original query conditions. You can use the solution under the scenarios of high write throughput, point queries, and batch point queries. Note that you need to use this feature after verifying it because using the data that is sharded by range query might cause performance rollback.
 
     [User document](/functions-and-operators/tidb-functions.md#tidbshard), [#31040](https://github.com/pingcap/tidb/issues/31040)
 
