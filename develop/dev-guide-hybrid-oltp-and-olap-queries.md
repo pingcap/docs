@@ -12,7 +12,7 @@ In the [Create Database](/develop/dev-guide-create-table.md#using-htap-capabilit
 
 ## Data preparation
 
-Before starting, you can import much larger sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-through-tiup-demo-command-line), for example:
+You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo) to prepare data:
 
 {{< copyable "shell-regular" >}}
 
@@ -20,7 +20,7 @@ Before starting, you can import much larger sample data [via the `tiup demo` com
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or [using the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
+Or [using the import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
 
 ## Window function
 
