@@ -6,7 +6,7 @@ title: Bookshop Example Application
 
 Bookshop is a virtual online bookstore application through which you can buy books of various categories and rate the books you have read.
 
-To make your reading on the application developer guide more smoothly, we present the SQL statements based on the [table structures](#description-of-the-tables) and data of the Bookshop application. This document focuses on the methods of importing the table structures and data as well as the definitions of the table structures.
+To make your reading on the application developer guide more smoothly, we present the example SQL statements based on the [table structures](#description-of-the-tables) and data of the Bookshop application. This document focuses on the methods of importing the table structures and data as well as the definitions of the table structures.
 
 ## Import table structures and data
 
