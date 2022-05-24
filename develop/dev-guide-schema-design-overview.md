@@ -1,6 +1,6 @@
 ---
 title: TiDB Database Schema Design Overview
-summary: Learn the the basics on TiDB database schema design.
+summary: Learn the basics on TiDB database schema design.
 ---
 
 # TiDB Database Schema Design Overview
