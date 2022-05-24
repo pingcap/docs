@@ -25,7 +25,7 @@ If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-refer
 tiup demo bookshop prepare
 ```
 
-By default, this command enables your application to connect to port `4000` on address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#description-of-the-tables) in a database named `bookshop`.
+By default, this command enables your application to connect to port `4000` on address `127.0.0.1`, enables you to log in as the root user without a password, and creates a [table structure](#description-of-the-tables) in the database named `bookshop`.
 
 #### Configure connection information
 
