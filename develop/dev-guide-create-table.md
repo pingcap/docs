@@ -322,7 +322,7 @@ When the field `cop[tiflash]` appears, it means that the task is sent to **TiFla
 
 ## Execute the `CREATE TABLE` statement
 
-After creating all the tables according to the above examples, the [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) script should look like this. To see the table information in detail, refer to [Description of the tables](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables).
+After creating all the tables according to the above examples, the [database initialization](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql) script should look like this. To see the table information in detail, refer to [Description of the tables](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql).
 
 To name the database initialization script `init.sql` and save it, you can execute the following statement to initialize the database.
 

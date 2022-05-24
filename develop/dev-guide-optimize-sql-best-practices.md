@@ -138,7 +138,7 @@ This section describes the best practices involved when using TiDB's DDL.
 
 ### Primary key best practices
 
-See the [rules to follow when selecting the primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
+See the [rules to follow when selecting the primary key](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key).
 
 ## Index best practices
 
