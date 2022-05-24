@@ -1,24 +1,24 @@
 ---
 title: Insert Data
-summary: The ways, best practices and examples for inserting data, bulk data import.
+summary: Learn about how to insert data.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
 # Insert Data
 
-This page will demonstrate the use of SQL language with different programming languages to insert data into TiDB.
+This document describes how to insert data into TiDB by using the SQL language with different programming languages.
 
 ## Before you start
 
-Before reading this page, you need to prepare the following:
+Before reading this document, you need to prepare the following:
 
 - [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
-## Insert Rows
+## Insert rows
 
-Assuming that you need to insert multiple rows of data, there would be two ways to insert, for example, if we need to insert **3** players' data.
+There are two ways to insert multiple rows of data. For example, if you need to insert **3** players' data.
 
 - A **multi-line insertion statement**：
 
@@ -38,7 +38,7 @@ Assuming that you need to insert multiple rows of data, there would be two ways 
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (3, 300, 5);
     ```
 
-Generally using a `multi-line insertion statement` will be faster than multiple `single-line insertion statements`.
+Generally the `multi-line insertion statement` runs faster than the multiple `single-line insertion statements`.
 
 <SimpleTab>
 <div label="SQL">
@@ -50,7 +50,7 @@ CREATE TABLE `player` (`id` INT, `coins` INT, `goods` INT);
 INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2);
 ```
 
-For more information on how to use this SQL, see the [Connecting to a TiDB Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster) documentation section and follow the documentation steps to enter the SQL statement after connecting to a TiDB cluster using a client.
+For more information on how to use this SQL, see [Connecting to a TiDB Cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-2-connect-to-a-cluster) and follow the steps to enter the SQL statement after connecting to a TiDB cluster using a client.
 
 </div>
 
@@ -84,18 +84,18 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-Also, due to the default MySQL JDBC Driver settings, you will need to change some of the parameters to get better bulk insert performance.
+Due to the default MySQL JDBC Driver settings, you need to change some parameters to get better bulk insert performance.
 
 |            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
 | :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
-|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statement support    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statement        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
-|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (default 256 characters)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
-|    `prepStmtCacheSize`     | Maximum number of prepared statement caches (default 25) | When the number of prepared statement is greater than 25  | Configured according to the actual number of prepared statements |
+|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
+|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
+|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
+|    `prepStmtCacheSize`     | Maximum number of prepared statement caches (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
 | `rewriteBatchedStatements` |          Whether to rewrite **Batched** statements          | When batch operations are required |          `true`          |
 |    `allowMultiQueries`     |             Start batch operations              | Because a [client bug](https://bugs.mysql.com/bug.php?id=96623) requires this to be set when `rewriteBatchedStatements = true` and `useServerPrepStmts = true` |          `true`          |
 
-MySQL JDBC Driver also provides an integrated configuration item: `useConfigs`. When it is configured with `maxPerformance`, it is equivalent to configuring a set of configurations, for example, `mysql:mysql-connector-java:8.0.28`, `useConfigs=maxPerformance` contains:
+MySQL JDBC Driver also provides an integrated configuration: `useConfigs`. When it is configured with `maxPerformance`, it is equivalent to configuring a set of configurations. Taking `mysql:mysql-connector-java:8.0.28` as an example, `useConfigs=maxPerformance` contains:
 
 {{< copyable "" >}}
 
@@ -111,9 +111,9 @@ connectionAttributes=none
 useInformationSchema=true
 ```
 
-You can check `mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties` yourself to get the `useConfigs=maxPerformance` contains configurations for the corresponding version of MySQL JDBC Driver.
+You can check `mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties` to get the configurations contained in `useConfigs=maxPerformance` for the corresponding version of MySQL JDBC Driver.
 
-A more generic scenario of JDBC connection string configuration is given here, with Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test` as an example:
+The following is a typical scenario of JDBC connection string configurations. In this example, Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
 
 {{< copyable "" >}}
 
@@ -133,24 +133,26 @@ For a complete example in Java, see:
 
 ## Bulk-Insert
 
-If you need to quickly import a large amount of data into a TiDB cluster, the best way to do it is not to use the `INSERT` statement, which is not the most efficient way and requires you to handle exceptions and other issues on your own. We recommend using a range of tools provided by **PingCAP** for data migration.
+If you need to quickly import a large amount of data into a TiDB cluster, it is recommended that you use a range of tools provided by **PingCAP** for data migration. Using the `INSERT` statement is not the best way, because it is not efficient and requires to handle exceptions and other issues on your own.
 
-- Data export tool: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
-- Data import tool: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or [Amazon S3 cloud disk](/br/backup-and-restore-storages.md).
-- Data synchronization tool: [TiDB Data Migration](/dm/dm-overview.md). You can synchronize MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the original sharded instances and tables from the source databases.
-- Data backup restore tool: [Backup & Restore (BR)](/br/backup-and-restore-tool.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
+The following are the recommended tools for bulk-insert:
 
-## Avoid hot spots
+- Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
+- Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or [Amazon S3 cloud disk](/br/backup-and-restore-storages.md).
+- Data replication: [TiDB Data Migration](/dm/dm-overview.md). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
+- Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-tool.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
 
-When designing a table you need to consider if there is a large number of inserts. And if so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
+## Avoid hotspots
 
-For more information on how to handle hotspot issues, please refer to the [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) documentation.
+When designing a table, you need to consider if there is a large number of insert operations. If so, you need to avoid hotspots during table design. See the [Select primary key](/develop/dev-guide-create-table.md#select-primary-key) section and follow the [Rules when selecting primary key](/develop/dev-guide-create-table.md#rules-to-follow-when-selecting-primary-key).
 
-## Insert data to a table with `AUTO_RANDOM` primary key
+For more information on how to handle hotspot issues, see [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 
-In case the primary key of the table we insert has the `AUTO_RANDOM` attribute, then by default, the primary key cannot be specified. For example, in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database, we can see that the `id` field of the [users table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
+## Insert data to a table with the `AUTO_RANDOM` primary key
 
-In this case, we cannot use SQL like the following to insert:
+If the primary key of the table you insert has the `AUTO_RANDOM` attribute, then by default the primary key cannot be specified. For example, in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database, you can see that the `id` field of the [`users` table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
+
+In this case, you **cannot** use SQL like the following to insert:
 
 {{< copyable "sql" >}}
 
@@ -164,7 +166,9 @@ An error will occur：
 ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random column is disabled. Try to set @@allow_auto_random_explicit_insert = true.
 ```
 
-This is intended to indicate to you that it is not recommended to manually specify the `AUTO_RANDOM` column at insert time. At this point, you have two solutions to handle this error:
+It is not recommended to manually specify the `AUTO_RANDOM` column during insertion time.
+
+There are two solutions to handle this error:
 
 - (Recommended) Remove this column from the insert statement and use the `AUTO_RANDOM` value that TiDB initialized for you. This fits the semantics of `AUTO_RANDOM`.
 
@@ -174,7 +178,7 @@ This is intended to indicate to you that it is not recommended to manually speci
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
-- If you confirm that you **_must_** specify this column, then you can use the [SET statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified at insert time by changing the user variable.
+- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
 
     {{< copyable "sql" >}}
 
@@ -183,6 +187,6 @@ This is intended to indicate to you that it is not recommended to manually speci
     INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');
     ```
 
-## Using HTAP
+## Use HTAP
 
-In TiDB, using HTAP capabilities does not require you to perform additional operations when inserting data. There is no additional insertion logic, and TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table and you can use the column copy to speed up your queries directly.
+In TiDB, HTAP capabilities save you from performing additional operations when inserting data. There is no additional insertion logic. TiDB automatically guarantees data consistency. All you need to do is [turn on column-oriented replica synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table, and use the column-oriented replica to speed up your queries directly.

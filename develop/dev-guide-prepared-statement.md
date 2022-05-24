@@ -1,22 +1,22 @@
 ---
-title: Prepared Statement
-summary: This page describes the TiDB prepared statement function.
+title: Prepared Statements
+summary: Learn about how to use the TiDB prepared statements.
 ---
 
-# Prepared Statement
+# Prepared Statements
 
-[Prepared statement](/common/sql-statements/sql-statement-prepare.md) is a statement that templates multiple SQL statements with only different parameters. It separates the SQL statements from the parameters. We can use it to improve our SQL statements:
+A [prepared statement](/common/sql-statements/sql-statement-prepare.md) templatizes multiple SQL statements in which only parameters are different. It separates the SQL statements from the parameters. You can use it to improve the following aspects of SQL statements:
 
 - **Security**: Because parameters and statements are separated, the risk of [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks is avoided.
-- **Performance**: Because the statement is pre-parsed on the TiDB server-side, only parameters need to be passed for subsequent execution, saving the cost of complete SQL parse, splicing SQL statement strings, and network transmission.
+- **Performance**: Because the statement is parsed in advance on the TiDB server, only parameters are passed for subsequent executions, saving the cost of parsing the entire SQL statements, splicing SQL statement strings, and network transmission.
 
-In most applications, SQL statements can be enumerated, and a limited number of SQL statements can be used to complete data queries for the entire application, so using prepared statement is one of the best practices.
+In most applications, SQL statements can be enumerated. You can use a limited number of SQL statements to complete data queries for the entire application. So using a prepared statement is a best practice.
 
-## SQL Syntax
+## SQL syntax
 
-This section describes the SQL syntax for creating, running and deleting prepared statements.
+This section describes the SQL syntax for creating, running and deleting a prepared statement.
 
-### Create prepared statement
+### Create a prepared statement
 
 {{< copyable "sql" >}}
 
@@ -26,14 +26,14 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 
 | Parameter Name | Description |
 | :-------------------------: | :------------------------------------: |
-| `{prepared_statement_name}` | Prepared statement name|
-| `{prepared_statement_sql}`  | Prepared statement SQL with a question mark as a placeholder |
+| `{prepared_statement_name}` | name of the prepared statement|
+| `{prepared_statement_sql}`  | the prepared statement SQL with a question mark as a placeholder |
 
-You can see the [PREPARE statement](/common/sql-statements/sql-statement-prepare.md) for more information.
+See [PREPARE statement](/common/sql-statements/sql-statement-prepare.md) for more information.
 
-### Use prepared statement
+### Use the prepared statement
 
-Prepared statements can only use **user variables** as parameters, so use the [SET statement](/common/sql-statements/sql-statement-set-variable.md) to set the variables before the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) can call the prepared statement.
+A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/common/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/common/sql-statements/sql-statement-execute.md) can call the prepared statement.
 
 {{< copyable "sql" >}}
 
@@ -44,13 +44,13 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 
 | Parameter Name | Description |
 | :-------------------------: | :-------------------------------------------------------------------: |
-|     `{parameter_name}`      |                              user variables name                               |
-|     `{parameter_value}`     |                              user variables value                               |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [create prepared statement](#create-prepared-statement) |
+|     `{parameter_name}`      |                              user variable name                               |
+|     `{parameter_value}`     |                              user variable value                               |
+| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
-You can see the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) for more information.
+See the [`EXECUTE` statement](/common/sql-statements/sql-statement-execute.md) for more information.
 
-### Delete prepared statement
+### Delete the prepared statement
 
 {{< copyable "sql" >}}
 
@@ -60,17 +60,17 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 | Parameter Name | Description |
 | :-------------------------: | :-------------------------------------------------------------------: |
-| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [create prepared statement](#create-prepared-statement) |
+| `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
-You can see the [DEALLOCATE statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
+See the [`DEALLOCATE` statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
 
-## Example
+## Examples
 
-This section uses prepared statements to complete two scenarios with examples of `SELECT` data and `INSERT` data.
+This section describes two examples of prepared statements: `SELECT` data and `INSERT` data.
 
-### `SELECT` Example
+### `SELECT` example
 
-For example, we need to query the `bookshop` application for [books](/develop/dev-guide-bookshop-schema-design.md#books-table) with `id` is `1`.
+For example, you need to query a book with `id = 1` in the [`bookshop` application](/develop/dev-guide-bookshop-schema-design.md#books-table).
 
 <SimpleTab>
 
@@ -147,9 +147,9 @@ try (Connection connection = ds.getConnection()) {
 
 </SimpleTab>
 
-### `INSERT` Example
+### `INSERT` example
 
-Using the [books table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, we need to insert a book with a `title` of `TiDB Developer Guide`, `type` of `Science & Technology`, `stock` of `100`, `price` of `0.0`, and `published_at` the `current time of insertion`. Note that the **primary key** of our `books` table contains the `AUTO_RANDOM` attribute, which we don't need to specify. If you are not familiar with inserting data, you can learn more about inserting data in the [Insert Data](/develop/dev-guide-insert-data.md) document.
+Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
 
 <SimpleTab>
 
@@ -218,22 +218,24 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-As you can see, JDBC helps you control the life cycle of prepared statements without the need for you to manually use prepared statements in your application to create, use, delete, etc. However, it is worth noting that because TiDB is compatible with MySQL protocol, the default configuration for using MySQL JDBC Driver on the client-side is not to enable the **_server-side_** prepared statement option but to use the client-side prepared statement. You need to focus on the following configuration items to get support for TiDB server-side prepared statements under JDBC and the best configuration for your usage scenario:
+As you can see, JDBC helps you control the life cycle of prepared statements and you don't need to manually create, use, or delete prepared statements in your application. However, note that because TiDB is compatible with MySQL, the default configuration for using MySQL JDBC Driver on the client-side is not to enable the **_server-side_** prepared statement option, but to use the client-side prepared statement.
+
+The following configurations help you use the TiDB server-side prepared statements under JDBC:
 
 |            Parameter            |                 Means                  |   Recommended Scenario   | Recommended Configuration|
 | :------------------------: | :-----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------: |
-|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statement support    |  When you need to use a prepared statement more than once                                                             |          `true`          |
-|      `cachePrepStmts`      |       Whether the client caches prepared statement        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
-|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (default 256 characters)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
-|    `prepStmtCacheSize`     | Maximum number of prepared statement caches (default 25) | When the number of prepared statement is greater than 25  | Configured according to the actual number of prepared statements |
+|    `useServerPrepStmts`    |    Whether to use the server side to enable prepared statements    |  When you need to use a prepared statement more than once                                                             |          `true`          |
+|      `cachePrepStmts`      |       Whether the client caches prepared statements        |                                                           `useServerPrepStmts=true` 时                                                            |          `true`          |
+|  `prepStmtCacheSqlLimit`   |  Maximum size of a prepared statement (256 characters by default)  | When the prepared statement is greater than 256 characters | Configured according to the actual size of the prepared statement |
+|    `prepStmtCacheSize`     | Maximum number of prepared statements (25 by default) | When the number of prepared statements is greater than 25  | Configured according to the actual number of prepared statements |
 
-A more generic scenario of JDBC connection string configuration is given here, with Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test` as an example:
+The following is a typical scenario of JDBC connection string configurations. Host: `127.0.0.1`, Port: `4000`, User name: `root`, Password: null, Default database: `test`:
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows) chapter if you need to change other JDBC parameters in the insert data scenario.
+You can also see the [insert rows](/develop/dev-guide-insert-data.md#insert-rows) chapter if you need to change other JDBC parameters when inserting data.
 
 For a complete example in Java, see:
 
