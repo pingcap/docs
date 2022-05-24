@@ -5,7 +5,7 @@ summary: A brief introduction to transactions in TiDB.
 
 # Transaction overview
 
-TiDB supports complete distributed transactions, providing [optimistic transactions](/optimistic-transaction.md) and [pessimistic transactions](/pessimistic-transaction.md) (introduced in TiDB 3.0). This article mainly introduces transactions statements, optimistic transactions and pessimistic transactions, transaction isolation levels, and application-side retry and error handling in optimistic transactions.
+TiDB supports complete distributed transactions, providing [optimistic transactions](/optimistic-transaction.md) and [pessimistic transactions](/pessimistic-transaction.md) (introduced in TiDB 3.0). This article mainly introduces transaction statements, optimistic transactions and pessimistic transactions, transaction isolation levels, and application-side retry and error handling in optimistic transactions.
 
 ## Common statements
 
@@ -68,7 +68,7 @@ BEGIN;
 START TRANSACTION;
 ```
 
-The default transaction model of TiDB is pessimistic transaction. You can also explicitly specify the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+The default transaction mode of TiDB is pessimistic. You can also explicitly specify the [optimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
 
 {{< copyable "sql" >}}
 
@@ -76,7 +76,7 @@ The default transaction model of TiDB is pessimistic transaction. You can also e
 BEGIN OPTIMISTIC;
 ```
 
-Enable the [pessimistic transaction model](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
+Enable the [pessimistic transaction mode](/develop/dev-guide-optimistic-and-pessimistic-transaction.md):
 
 {{< copyable "sql" >}}
 
@@ -96,7 +96,7 @@ You can use the `COMMIT` statement to commit all modifications made by TiDB in t
 COMMIT;
 ```
 
-Before enabling optimistic transactions, make sure that your application can properly handle errors that may be returned by a `COMMIT` statement. If you are not sure how your application will handle it, it is recommended to use the pessimistic transaction model instead.
+Before enabling optimistic transactions, make sure that your application can properly handle errors that may be returned by a `COMMIT` statement. If you are not sure how your application will handle it, it is recommended to use the pessimistic transaction mode instead.
 
 ### Roll back a transaction
 

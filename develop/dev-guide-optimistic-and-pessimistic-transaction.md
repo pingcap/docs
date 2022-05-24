@@ -7,9 +7,9 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 The [optimistic transaction](/optimistic-transaction.md) model commits the transaction directly, and rolls back when there is a conflict. By contrast, the [pessimistic transaction](/pessimistic-transaction.md) model tries to lock the resources that need to be modified before actually committing the transaction, and only starts committing after ensuring that the transaction can be successfully executed.
 
-The optimistic transaction model is suitable for scenarios with low conflict rates, because the direct commitment has a high probability of success. But once a transaction conflict occurs, the cost of rollback is relatively high.
+The optimistic transaction model is suitable for scenarios with low conflict rates, because the direct commit has a high probability of success. But once a transaction conflict occurs, the cost of rollback is relatively high.
 
-The advantage of the pessimistic transaction model is that for scenarios with high conflict rates. The cost of locking ahead is less than the cost of rollback afterwards. Moreover, it can solve the problem that multiple concurrent transactions fail to commit due to conflicts. However, the pessimistic transaction model is not as efficient as the optimistic transaction model in scenarios with low conflict rates.
+The advantage of the pessimistic transaction model is that for scenarios with high conflict rates, the cost of locking ahead is less than the cost of rollback afterwards. Moreover, it can solve the problem that multiple concurrent transactions fail to commit due to conflicts. However, the pessimistic transaction model is not as efficient as the optimistic transaction model in scenarios with low conflict rates.
 
 The pessimistic transaction model is more intuitive and easier to implement on the application side. The optimistic transaction model requires complex application-side retry mechanisms.
 
@@ -17,13 +17,13 @@ The following is an example of a [bookshop](/develop/dev-guide-bookshop-schema-d
 
 1. Update the stock quantity
 2. Create an order
-3. Pay the order
+3. Make the payment
 
-These operations must either all succeed or all fail. You must ensure that overselling does not happen in the case of concurrency.
+These operations must either all succeed or all fail. You must ensure that overselling does not happen in the case of concurrent transactions.
 
 ## Pessimistic transactions
 
-The following code uses two threads to simulate the process that two users buy the same book in a pessimistic transaction model. There are 10 books left in the bookstore. Bob buys 6 books, and Alice buys 4 books. They complete the orders at nearly the same time. As a result, all books in inventory are sold out.
+The following code uses two threads to simulate the process that two users buy the same book in a pessimistic transaction mode. There are 10 books left in the bookstore. Bob buys 6 books, and Alice buys 4 books. They complete the orders at nearly the same time. As a result, all books in inventory are sold out.
 
 Because you use multiple threads to simulate the situation that multiple users insert data simultaneously, you need to use a connection object with safe threads. Here use Java's popular connection pool [HikariCP](https://github.com/brettwooldridge/HikariCP) for demo.
 
@@ -597,9 +597,9 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 /* txn 1 */ COMMIT
 ```
 
-In the optimistic transaction model, because the intermediate state is not necessarily correct, it is not possible to judge whether a statement is successfully executed through `affected_rows` as in the pessimistic transaction model. You need to regard the transaction as a whole, and judge whether the current transaction has a write conflict by checking whether the final `COMMIT` statement returns an exception.
+In the optimistic transaction mode, because the intermediate state is not necessarily correct, it is not possible to judge whether a statement is successfully executed through `affected_rows` as in the pessimistic transaction mode. You need to regard the transaction as a whole, and judge whether the current transaction has a write conflict by checking whether the final `COMMIT` statement returns an exception.
 
-As you can see from the above SQL log, because two transactions are executed concurrently and the same record is modified, a `9007 Write conflict` exception is thrown after `txn 1` COMMIT. For write conflicts in the optimistic transaction model, you can safely retry on the application side. After one retry, the data is committed successfully. The final execution result is as expected:
+As you can see from the above SQL log, because two transactions are executed concurrently and the same record is modified, a `9007 Write conflict` exception is thrown after `txn 1` COMMIT. For write conflicts in the optimistic transaction mode, you can safely retry on the application side. After one retry, the data is committed successfully. The final execution result is as expected:
 
 ```sql
 mysql> SELECT * FROM books;

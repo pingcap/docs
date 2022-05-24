@@ -142,7 +142,7 @@ It seems that the latest published book already has a lot of ratings. To verify 
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-Query again. The book **The Documentary of lion** still appears in the result set, but the `average_score` column calculated from `score` of the right table `ratings` is filled with `NULL`.
+Query again. The book _The Documentary of lion_ still appears in the result set, but the `average_score` column calculated from `score` of the right table `ratings` is filled with `NULL`.
 
 ```
 +------------+---------------------------------+---------------+
@@ -219,7 +219,7 @@ TiDB does not support `LEFT SEMI JOIN table_name` at the SQL syntax level. But a
 
 ## Implicit join
 
-Before the `JOIN` statement that explicitly declared a join appeared as an SQL standard, it was possible to join two or more tables in a SQL statement using the `FROM t1, t2` clause, and using the `WHERE t1.id = t2.id` clause to specify the conditions for the join. You can understand it as an implicit join, which uses the inner join to join tables.
+Before the `JOIN` statement that explicitly declared a join was added to the SQL standard, it was possible to join two or more tables in a SQL statement using the `FROM t1, t2` clause, and specify the conditions for the join using the `WHERE t1.id = t2.id` clause. You can understand it as an implicit join, which uses the inner join to join tables.
 
 ## Join related algorithms
 
@@ -233,7 +233,7 @@ The optimizer selects an appropriate join algorithm to execute based on the fact
 
 If the optimizer of TiDB does not execute according to the optimal join algorithm, you can use [Optimizer Hints](/optimizer-hints.md) to force TiDB to use a better join algorithm.
 
-For example, assuming the example for the left join query above executes faster using the Hash Join algorithm, which is not chosen by the optimizer, you can append the hint `/*+ HASH_JOIN(b, r) */` after the `SELECT` keyword. Note that If an alias is added to the table name, use the alias in the hint.
+For example, assuming the example for the left join query above executes faster using the Hash Join algorithm, which is not chosen by the optimizer, you can append the hint `/*+ HASH_JOIN(b, r) */` after the `SELECT` keyword. Note that If the table has an alias, use the alias in the hint.
 
 {{< copyable "sql" >}}
 

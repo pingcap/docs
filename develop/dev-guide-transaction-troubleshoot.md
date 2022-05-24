@@ -17,7 +17,7 @@ ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 
 A deadlock occurs when two or more transactions are waiting for each other to release the lock they already hold, or the inconsistent lock order results in a loop waiting for the lock resources.
 
-The following is an example of a deadlock using the table `books` in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database:
+The following is an example of a deadlock using the table `books` in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database:
 
 First, insert 2 rows into the table `books`:
 
@@ -25,7 +25,7 @@ First, insert 2 rows into the table `books`:
 INSERT INTO books (id, title, stock, published_at) VALUES (1, 'book-1', 10, now()), (2, 'book-2', 10, now());
 ```
 
-In TiDB pessimistic transaction model, if two clients execute the following statements respectively, a deadlock will occur:
+In TiDB pessimistic transaction mode, if two clients execute the following statements respectively, a deadlock will occur:
 
 | Client-A                                                      | Client-B                                                            |
 | --------------------------------------------------------------| --------------------------------------------------------------------|
@@ -36,7 +36,7 @@ In TiDB pessimistic transaction model, if two clients execute the following stat
 | UPDATE books SET stock=stock-1 WHERE id=2; -- execution will be blocked |                                                                     |
 |                                                               | UPDATE books SET stock=stock-1 WHERE id=1; -- a deadlock error occurs |
 
-After client-B encounters a deadlock error, TiDB automatically rolls back the transaction in client-B. Update `id=2` in client-A will be executed successfully. You can then run `COMMIT` to finish the transaction.
+After client-B encounters a deadlock error, TiDB automatically rolls back the transaction in client-B. Updating `id=2` in client-A will be executed successfully. You can then run `COMMIT` to finish the transaction.
 
 ### Solution 1：avoid deadlocks
 
@@ -53,7 +53,7 @@ To get better performance, you can avoid deadlocks at the application level by a
 |                                                            | UPDATE books SET stock=stock-1 WHERE id=2;                      |
 |                                                            | COMMIT;                                                         |
 
-Alternatively, you can update 2 books with 1 SQL, which can also avoid the deadlock and execute more efficiently:
+Alternatively, you can update 2 books with 1 SQL statement, which can also avoid the deadlock and execute more efficiently:
 
 ```sql
 UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
