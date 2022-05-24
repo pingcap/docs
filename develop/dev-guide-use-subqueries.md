@@ -5,7 +5,7 @@ summary: Learn how to use subquery in TiDB.
 
 # Subquery
 
-This document mainly introduces the statement and category of subquery in TiDB.
+This document introduces subquery statements and categories in TiDB.
 
 ## Overview
 
@@ -15,7 +15,7 @@ The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md)
 
 ## Subquery statement
 
-Generally speaking, there are the following five types of subqueries:
+In most cases, there are five types of subqueries:
 
 - Scalar Subquery, such as `SELECT (SELECT s1 FROM t2) FROM t1`.
 - Derived Tables, such as `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1`.
@@ -23,15 +23,15 @@ Generally speaking, there are the following five types of subqueries:
 - Quantified Comparison, such as `WHERE t1.a = ANY(SELECT ... FROM t2)`, `WHERE t1.a = ANY(SELECT ... FROM t2)`.
 - Subquery as a comparison operator operand, such as `WHERE t1.a > (SELECT ... FROM t2)`.
 
-## The category of subquery
+## Category of subquery
 
-Generally speaking, the subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
+The subquery can be categorized as [Correlated Subquery](https://en.wikipedia.org/wiki/Correlated_subquery) and Self-contained Subquery. TiDB treats these two types differently.
 
-The basis for determining whether a query is correlated is whether it refers to a subquery with columns from outer references.
+Whether a subquery is correlated or not depends on whether it refers to columns used in its outer query.
 
 ### Self-contained subquery
 
-For a self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
+For a self-contained subquery that uses subquery as operand of comparison operators (`>`, `>=`, `<` , `<=` , `=` , or `! =`), the inner subquery queries only once, and TiDB rewrites it as a constant during the execution plan phase.
 
 For example, to query authors in the `authors` table whose age is greater than the average age, you can use a subquery as a comparison operator operand.
 
@@ -85,11 +85,11 @@ The result is as follows:
 ...
 ```
 
-For a self-contained subquery like Existential Test and Quantified Comparison, TiDB rewrites and equivalently replaces them for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
+For self-contained subqueries such as Existential Test and Quantified Comparison, TiDB rewrites and replaces them with equivalent queries for better performance. For more information, see [Subquery Related Optimizations](/subquery-optimization.md).
 
 ### Correlated subquery
 
-For correlated subquery, since the inner subquery references the columns from the outer query, each subquery is executed once for every row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
+For correlated subquery, because the inner subquery references the columns from the outer query, each subquery is executed once for each row of the outer query. That is, assuming that the outer query gets 10 million results, the subquery will also be executed 10 million times, which will consume more time and resources.
 
 Therefore, in the process of processing, TiDB will try to [Decorrelate of Correlated Subquery](/correlated-subquery-optimization.md) to improve the query efficiency at the execution plan level.
 
@@ -131,7 +131,7 @@ WHERE
     AND (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > a2.average_age;
 ```
 
-As a best practice, in actual development, it is recommended to avoid querying through correlated subquery when it is clear that there is a better way.
+As a best practice, in actual development, it is recommended to avoid querying through a correlated subquery if you can write another equivalent query with better performance.
 
 ## Read more
 

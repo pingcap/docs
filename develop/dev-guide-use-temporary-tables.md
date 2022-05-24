@@ -9,7 +9,7 @@ Temporary tables can be thought of as a technique for reusing query results.
 
 If you want to know something about the eldest authors in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you might write multiple queries that use the list of eldest authors.
 
-The following statement is to get the top 50 eldest authors from the `authors` table:
+For example, you can use the following statement to get the top 50 eldest authors from the `authors` table:
 
 {{< copyable "sql" >}}
 
@@ -43,14 +43,14 @@ For the convenience of subsequent queries, you need to cache the result of this 
 
 ## Create a temporary table
 
-To cache intermediate results, the temporary tables feature is introduced in TiDB v5.3.0. For a local temporary table, TiDB automatically drops this after a session ends, freeing from worry about the management trouble caused by intermediate results' increment.
+To cache intermediate results, the temporary tables feature is introduced in TiDB v5.3.0. TiDB automatically drops a local temporary table after a session ends, which frees you from worrying about the management trouble caused by increasing intermediate results.
 
 ### Types of temporary tables
 
 Temporary tables in TiDB are divided into two types: local temporary tables and global temporary tables.
 
 - For a local temporary table, the table definition and data in the table are visible only to the current session. This type is suitable for temporarily storing intermediate data in the session.
-- For a global temporary table, the table definition is visible to the entire TiDB cluster, and the data in the table is visible only to the current transaction. This type is suitable for temporarily storing intermediate data in the transaction.
+- For a global temporary table, the table definition is visible to the entire TiDB cluster, and the data in the table is visible only to the current transaction. This type is suitable for temporarily storing intermediate data in a transaction.
 
 ### Create a local temporary table
 
@@ -59,7 +59,7 @@ Before creating a local temporary table, you need to add `CREATE TEMPORARY TABLE
 <SimpleTab>
 <div label="SQL" href="local-sql">
 
-Temporary tables are created through the `CREATE TEMPORARY TABLE <table_name>` statement. The default type is a local temporary table, which is visible only to the current session.
+You can create a temporary table using the `CREATE TEMPORARY TABLE <table_name>` statement. The default type is a local temporary table, which is visible only to the current session.
 
 {{< copyable "sql" >}}
 
@@ -154,7 +154,7 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 ) ON COMMIT DELETE ROWS;
 ```
 
-When inserting data to global temporary tables, you must explicitly declare the start of the transaction via `BEGIN`. Otherwise, the data will be cleared after executing the `INSERT INTO` statement. Because in Auto Commit mode, the transaction is automatically committed after executing the `INSERT INTO` statement, and the global temporary table is cleared when the transaction ends.
+When inserting data to global temporary tables, you must explicitly declare the start of the transaction via `BEGIN`. Otherwise, the data will be cleared after the `INSERT INTO` statement is executed. Because in the Auto Commit mode, the transaction is automatically committed after the `INSERT INTO` statement is executed, and the global temporary table is cleared when the transaction ends.
 
 </div>
 <div label="Java" href="global-java">
@@ -206,9 +206,9 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-## View a temporary table's information
+## View temporary tables
 
-With the `SHOW [FULL] TABLES` statement, you can view the created global temporary table, but you cannot see the information of the local temporary table. For now, TiDB does not have a similar `information_schema.INNODB_TEMP_TABLE_INFO` system table for storing temporary table information.
+With the `SHOW [FULL] TABLES` statement, you can view a list of existing global temporary tables, but you cannot see any local temporary tables in the list. For now, TiDB does not have a similar `information_schema.INNODB_TEMP_TABLE_INFO` system table for storing temporary table information.
 
 For example, you can see the global temporary table `top_50_eldest_authors_global` in the table list, but not the `top_50_eldest_authors` table.
 
@@ -248,11 +248,11 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-Different from [view](/develop/dev-guide-use-views.md), querying a temporary table gets data directly from the temporary table instead of executing the original query used in the insert. In some cases, this can improve the query performance.
+Different from [view](/develop/dev-guide-use-views.md), querying a temporary table gets data directly from the temporary table instead of executing the original query used in the data insert. In some cases, this can improve the query performance.
 
 ## Drop a temporary table
 
-Local temporary tables are automatically dropped after the **session** ends, along with both data and table structures. Global temporary tables are automatically cleared at the end of a **transaction**, but the table structure remains and needs to be deleted manually.
+A local temporary table in a session is automatically dropped after the **session** ends, along with both data and table schema. A global temporary table in a transaction is automatically cleared at the end of the **transaction**, but the table schema remains and needs to be deleted manually.
 
 To manually drop local temporary tables, use the `DROP TABLE` or `DROP TEMPORARY TABLE` syntax. For example:
 
@@ -272,7 +272,7 @@ DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 
 ## Limitation
 
-For more information about the limitations of temporary tables in TiDB, see [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features) section in the reference documents.
+For limitations of temporary tables in TiDB, see [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
 
 ## Read more
 

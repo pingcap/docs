@@ -1,6 +1,6 @@
 ---
 title: Follower Read
-summary: Introduce how to use Follower Read to optimize query performance.
+summary: Learn how to use Follower Read to optimize query performance.
 ---
 
 # Follower Read

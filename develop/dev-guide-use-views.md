@@ -5,14 +5,14 @@ summary: Learn how to use views in TiDB.
 
 # Views
 
-This document introduces how to use views in TiDB.
+This document describes how to use views in TiDB.
 
 ## Overview
 
 TiDB supports views. A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
 
-- Exposing only safe fields and data to users to ensure the security of sensitive fields and data stored in the underlying table.
-- Defining complex queries that frequently appear as views to make complex queries easier and more convenient.
+- You can create views to expose only safe fields and data to users, which ensures the security of sensitive fields and data in the underlying tables.
+- You can create views for complex queries that are frequently used to make complex queries easier and more convenient.
 
 ## Create a view
 
@@ -26,7 +26,7 @@ Note that you cannot create a view with the same name as an existing view or tab
 
 For example, the [multi-table join query](/develop/dev-guide-join-tables.md) gets a list of books with average ratings by joining the `books` table and the `ratings` table through a `JOIN` statement.
 
-For the convenience of subsequent queries, the following statement defines the query statement as a view:
+For the convenience of subsequent queries, you can define the query as a view using the following statement:
 
 {{< copyable "sql" >}}
 
@@ -40,7 +40,7 @@ GROUP BY b.id;
 
 ## Query views
 
-Once the view is created, you can use the `SELECT` statement to query the view just like a normal table.
+Once a view is created, you can use the `SELECT` statement to query the view just like a normal table.
 
 {{< copyable "sql" >}}
 
@@ -125,7 +125,7 @@ DROP VIEW book_with_ratings;
 
 ## Limitation
 
-For more information about the limitations of views, see [Limitations of Views](/views.md#limitations).
+For limitations of views in TiDB, see [Limitations of Views](/views.md#limitations).
 
 ## Read More
 
