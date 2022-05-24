@@ -96,6 +96,6 @@ In the above table, the result of `SELECT HEX('a');` in the `utf8mb4` byte set i
 
 - TiDB Lightning does not support importing `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
 
-- TiCDC versions earlier than v6.1.0 do not support replicating `charset=GBK` tables. No version of TiCDC supports replicating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+- TiCDC versions earlier than v6.1.0 do not support replicating `charset=GBK` tables. No version of TiCDC supports replicating `charset=GBK` tables to TiDB clusters earlier than v6.1.0.
 
 - Backup & Restore (BR) versions earlier than v5.4.0 do not support recovering `charset=GBK` tables. No version of BR supports recovering `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
