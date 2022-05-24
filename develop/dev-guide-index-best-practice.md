@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Indexing
-summary: Introducing best practices for indexing in TiDB.
+summary: Learn some best practices for creating and using indexes in TiDB.
 ---
 
 <!-- markdownlint-disable MD029 -->
@@ -29,7 +29,7 @@ CREATE TABLE `books` (
 
 ## Best practices for creating indexes
 
-- Creating combined index with multiple columns, which is a optimization called [covering index optimization](/explain-indexes.md#indexreader). **Covering index optimization** allows TiDB to query data directly on the index, which helps improve performance.
+- Creating a combined index with multiple columns, which is a optimization called [covering index optimization](/explain-indexes.md#indexreader). **Covering index optimization** allows TiDB to query data directly on the index, which helps improve performance.
 - Avoid creating a secondary index on columns that you don't query often. A useful secondary index can speed up queries, but be aware that it also has side effects. Each time you add an index, an additional Key-Value is added when you insert a row. The more indexes you have, the slower you write, and the more space it takes up. In addition, too many indexes affect optimizer runtime, and inappropriate indexes can mislead the optimizer. So, more indexes aren't always better.
 - Create an appropriate index based on business. In principle, you need to create indexes on the columns needed to be used in queries to improve performance. The following situations are suitable for creating an index:
 
@@ -40,7 +40,7 @@ CREATE TABLE `books` (
 
 ## Best practices for using indexes
 
-- Index is to speed up the query, so make sure the index can be used in some queries. If an index is not used by any query, the index is meaningless, so, drop it.
+- The index is to speed up the query, so make sure the index can be used in some queries. If an index is not used by any query, the index is meaningless, so, drop it.
 - When using a combined index, satisfy the left-prefix rule.
 
     Suppose that you create a new combined index on the column `title, published_at`:
@@ -93,7 +93,7 @@ CREATE TABLE `books` (
     SELECT * FROM books WHERE published_at >= '2022-01-01' AND published_at < '2023-01-01';
     ```
 
-    You can also use the expression index, for example, to create an expression index for `YEAR(Published at)` in the query condition:
+    You can also use the expression index to create an expression index for `YEAR(Published at)` in the query condition:
 
     {{< copyable "sql" >}}
 

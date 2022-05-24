@@ -1,6 +1,6 @@
 ---
 title: Object Naming Convention
-summary: Introduces the object naming convention in TiDB.
+summary: Learn the object naming convention in TiDB.
 ---
 
 # Object Naming Convention
@@ -44,4 +44,4 @@ It is recommended to differentiate names by business, product, or other metrics,
 - Primary key index: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
 - Unique index: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
 - Common index: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
-- Multi-word column name: use meaningful abbreviations
+- Column name with multiple words: use meaningful abbreviations
