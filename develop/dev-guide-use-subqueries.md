@@ -1,6 +1,6 @@
 ---
 title: Subquery
-summary: Introduce subquery in TiDB.
+summary: Learn how to use subquery in TiDB.
 ---
 
 # Subquery
@@ -9,7 +9,7 @@ This document mainly introduces the statement and category of subquery in TiDB.
 
 ## Overview
 
-The Subquery is a query within another SQL query. With subquery, the query result can be used in another query.
+An subquery is a query within another SQL query. With subquery, the query result can be used in another query.
 
 The following takes the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to introduce subquery.
 

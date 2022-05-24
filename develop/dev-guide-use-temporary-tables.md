@@ -1,13 +1,13 @@
 ---
 title: Temporary Tables
-summary: Introduce how to create, view, query, and delete temporary tables.
+summary: Learn how to create, view, query, and delete temporary tables.
 ---
 
 # Temporary Tables
 
 Temporary tables can be thought of as a technique for reusing query results.
 
-If you want to know something about the eldest authors in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you may write multiple queries that use the list of eldest authors.
+If you want to know something about the eldest authors in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you might write multiple queries that use the list of eldest authors.
 
 The following statement is to get the top 50 eldest authors from the `authors` table:
 
@@ -39,7 +39,7 @@ The result is as follows:
 50 rows in set (0.01 sec)
 ```
 
-For the convenience of subsequent queries, you need to cache the result of this query. When using general tables for storage, you should pay attention to how to avoid the table name duplication problem between different sessions, and the need of cleaning up intermediate results in time, as these tables may not be used after a batch query.
+For the convenience of subsequent queries, you need to cache the result of this query. When using general tables for storage, you should pay attention to how to avoid the table name duplication problem between different sessions, and the need of cleaning up intermediate results in time, as these tables might not be used after a batch query.
 
 ## Create a temporary table
 

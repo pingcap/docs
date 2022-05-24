@@ -1,6 +1,6 @@
 ---
 title: Views
-summary: Introduce how to use views in TiDB.
+summary: Learn how to use views in TiDB.
 ---
 
 # Views
