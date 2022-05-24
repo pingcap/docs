@@ -382,6 +382,13 @@ Configuration items related to storage.
 + Default value: `"12h"`
 + Minimum value: `"0s"`
 
+### `background-error-recovery-window` <span class="version-mark">New in v6.1.0</span>
+
++ The maximum recovery time when RocksDB detects recoverable background errors. When detects the Peer of damaged SST, it reports to PD by heartbeat, after which PD will actively send scheduling operations to remove this Peer. Damaged SST files will then be deleted, and the schedule will recover.
++ The damaged SST files still exist before the recovery finishes. RocksDB can continue writing data, but an error will be reported when reading damaged data.
++ TiKV will panic when recovery does not finish in the time window.
++ Default value: 1h
+
 ## storage.block-cache
 
 Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
