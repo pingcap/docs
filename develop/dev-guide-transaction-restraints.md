@@ -1,15 +1,15 @@
 ---
 title: Transaction Restraints
-summary: Introducing restraints limits in TiDB.
+summary: Learn about transaction restraints in TiDB.
 ---
 
 # Transaction Restraints
 
-This chapter will briefly introduce the transaction restrictions in TiDB.
+This document briefly introduces the transaction restraints in TiDB.
 
-## Isolation level
+## Isolation levels
 
-The isolation levels supported by TiDB are **RC (Read Committed)** and **SI (Snapshot Isolation)**, where **SI** is basically equivalent to **RR (Repeatable Read)** isolation level.
+The isolation levels supported by TiDB are **RC (Read Committed)** and **SI (Snapshot Isolation)**, where **SI** is basically equivalent to the **RR (Repeatable Read)** isolation level.
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
@@ -17,19 +17,21 @@ The isolation levels supported by TiDB are **RC (Read Committed)** and **SI (Sna
 
 The `SI` isolation level of TiDB can avoid **Phantom Reads**, but the `RR` in ANSI/ISO SQL standard cannot.
 
-The **phantom reads** are: **Transaction A** first gets `n` rows according to the condition query, and then **Transaction B** changes `m` rows other than these `n` rows or adds `m` rows that match the condition query of **Transaction A**. When **Transaction A** starts the request again, it finds that there are `n+m` rows that match the condition, and then a **phantom read** occurs.
+The following two examples show what **phantom reads** is. 
 
-For example, system **administrator A** changes the grades of all students in the database from specific scores to ABCDE grades, but system **administrator B** inserts a record with specific scores at this time, and when system **administrator A** finishes changing it and finds that there is still a record that has not been changed, it is like a phantom, which is called a **phantom read**.
+- Example 1: **Transaction A** first gets `n` rows according to the query, and then **Transaction B** changes `m` rows other than these `n` rows or adds `m` rows that match the query of **Transaction A**. When **Transaction A** runs the query again, it finds that there are `n+m` rows that match the condition. It is like a phantom, so it is called a **phantom read**.
+
+- Example 2: **Admin A** changes the grades of all students in the database from specific scores to ABCDE grades, but **Admin B** inserts a record with a specific score at this time. When **Admin A** finishes changing and finds that there is still a record (the one inserted by **Admin B**) that has not been changed yet. That is a **phantom read**.
 
 ## SI cannot avoid write skew
 
-TiDB's SI isolation level cannot avoid **write skew** exceptions and requires the `SELECT FOR UPDATE` syntax to avoid **write skew** exceptions.
+TiDB's SI isolation level cannot avoid **write skew** exceptions. You can use the `SELECT FOR UPDATE` syntax to avoid **write skew** exceptions.
 
-A **write skew** exception is when two concurrent transactions read different but related records, and then each transaction updates the data it reads and eventually commits the transaction. If there is a constraint between these related records that cannot be modified concurrently by multiple transactions, then the end result will be a violation of the constraint.
+A **write skew** exception occurs when two concurrent transactions read different but related records, and then each transaction updates the data it reads and eventually commits the transaction. If there is a constraint between these related records that cannot be modified concurrently by multiple transactions, then the end result will violate the constraint.
 
-As an example, suppose you are writing a doctor shift management program for a hospital. Hospitals typically require several doctors to be on call at the same time, but the baseline is that at least one doctor is on call. Doctors can drop their shifts (for example, if they are felling sick) as long as at least one of their colleagues continues to work during that shift.
+For example, suppose you are writing a doctor shift management program for a hospital. Hospitals typically require several doctors to be on call at the same time, but the minimum requirement is that at least one doctor is on call. Doctors can drop their shifts (for example, if they are feeling sick) as long as at least one doctor is on call during that shift.
 
-Now there is a situation where `Alice` and `Bob` are the two doctors on call. Both of them are feeling sick, so they both decide to take time off. Unfortunately, they happen to click the button to leave work at the same time. Let's simulate this process with a program:
+Now there is a situation where doctors `Alice` and `Bob` are on call. Both are feeling sick, so they decide to take sick leave. They happen to click the button at the same time. Let's simulate this process with the following program:
 
 {{< copyable "" >}}
 
@@ -182,7 +184,7 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-In both transactions, the application first checks to see if two or more doctors are on call; if so, it assumes that one doctor can safely take a break from work. Since the database uses snapshot isolation, both checks return `2`, so both transactions move on to the next stage. `Alice` updates her record to be off duty, and `Bob` does the same thing. Both transactions are successfully committed, and now there are no doctors on duty. The requirement of having at least one doctor on call has been violated. The following diagram (quoted from **_Designing Data-Intensive Applications_**) illustrates what actually happens.
+In both transactions, the application first checks if two or more doctors are on call; if so, it assumes that one doctor can safely take leave. Since the database uses the snapshot isolation, both checks return `2`, so both transactions move on to the next stage. `Alice` updates her record to be off duty, and so does `Bob`. Both transactions are successfully committed. Now there are no doctors on duty which violates the requirement that at least one doctor should be on call. The following diagram (quoted from **_Designing Data-Intensive Applications_**) illustrates what actually happens.
 
 ![Write Skew](/media/develop/write-skew.png)
 
@@ -341,7 +343,11 @@ mysql> SELECT * FROM doctors;
 
 ## `savepoint` and nested transactions are not supported
 
-The `PROPAGATION_NESTED` propagation behavior supported by **Spring** starts a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded at the beginning of the nested transaction, and if the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction when it is committed. The following example demonstrates the `savepoint` mechanism:
+TiDB does **_NOT_** support the `savepoint` mechanism and therefore does not support the `PROPAGATION_NESTED` propagation behavior. If your applications are based on the **Java Spring** framework that use the `PROPAGATION_NESTED` propagation behavior, you need to adapt it on the application side to remove the logic for nested transactions.
+
+The `PROPAGATION_NESTED` propagation behavior supported by **Spring** triggers a nested transaction, which is a child transaction that is started independently of the current transaction. A `savepoint` is recorded when the nested transaction starts. If the nested transaction fails, the transaction will roll back to the `savepoint` state. The nested transaction is part of the outer transaction and will be committed together with the outer transaction.
+
+The following example demonstrates the `savepoint` mechanism:
 
 {{< copyable "sql" >}}
 
@@ -361,23 +367,19 @@ mysql> SELECT * FROM T2;
 +------+
 ```
 
-TiDB does **_NOT_** support the `savepoint` mechanism and therefore does not support the `PROPAGATION_NESTED` propagation behavior. Applications based on the **Java Spring** framework that use the `PROPAGATION_NESTED` propagation behavior will need to be adapted on the application side to remove the logic for nested transactions.
+## Large transaction restrictions
 
-## Large Transaction Restrictions
+The basic principle is to limit the size of the transaction. At the KV level, TiDB has a restriction on the size of a single transaction. At the SQL level, one row of data is mapped to one KV entry, and each additional index will add one KV entry. The restriction is as follows at the SQL level:
 
-TiDB has a restrictions on the size of a single transaction, and this restrictions is at the KV level. This restrictions is reflected in the SQL level, simply speaking, one row of data will be mapped to one KV entry, and each additional index will increase one KV entry, so this restrictions is reflected in the SQL level as follows:
+- The maximum single row record size is `120 MB`. You can configure it by `performance.txn-entry-size-limit` for TiDB v5.0 and later versions. The value is `6 MB` for earlier versions.
+- The maximum single transaction size supported is `10 GB`. You can configure it by `performance.txn-total-size-limit` for TiDB v4.0 and later versions. The value is `100 MB` for earlier versions.
 
-- The maximum single row record size is `120MB` (adjustable by tidb-server configuration item `performance.txn-entry-size-limit` for TiDB v5.0 and higher, and `6MB` for versions lower than TiDB v5.0).
-- The maximum single transaction size supported is `10GB` (TiDB v4.0 and higher can be adjusted via the tidb-server configuration item `performance.txn-total-size-limit`, and the maximum single transaction size supported for versions lower than TiDB v4.0 is `100MB`).
+Note that for both the size restrictions and row restrictions, you should also consider the overhead of encoding and additional keys for the transaction during the transaction execution. To achieve optimal performance, it is recommended to write one transaction every 100 ~ 500 rows.
 
-Also note that both the size restrictions and row restrictions should be considered, as well as the overhead of encoding and additional keys for the transaction during the transaction execution. When using TiDB, it is recommended to write one transaction every 100~500 rows for optimal performance.
+## Auto-committed `SELECT FOR UPDATE` statements do NOT wait for locks
 
-## Auto-committed SELECT FOR UPDATE statements do NOT wait for locks
-
-`SELECT FOR UPDATE` under auto-commit currently does not add locks. The effect is shown in the following figure:
+Currently locks are not added to auto-committed `SELECT FOR UPDATE` statements. The effect is shown in the following figure:
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
-This is a known incompatibility with MySQL.
-
-This can be solved by using the explicit `BEGIN;COMMIT;`.
+This is a known incompatibility issue with MySQL. You can solve this issue by using the explicit `BEGIN;COMMIT;` statements.
