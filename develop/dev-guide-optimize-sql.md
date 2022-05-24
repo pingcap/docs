@@ -9,7 +9,7 @@ This document introduces some common reasons for slow SQL statements and techniq
 
 ## Before you begin
 
-Before you begin performance tuning, you need to prepare some sample data. You can import data either by using the [`tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-through-tiup-demo-command-line):
+You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo) to prepare data:
 
 {{< copyable "shell-regular" >}}
 
@@ -17,7 +17,7 @@ Before you begin performance tuning, you need to prepare some sample data. You c
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-Or [using the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function).
+Or [using the Import feature of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
 
 ## Issue: Full table scan
 
