@@ -9,9 +9,9 @@ This document describes various timeouts in TiDB to help you troubleshoot errors
 
 ## GC timeout
 
-TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Control) mechanism. When the newly written data overwrites the old data, the old data will not be replaced, but kept together with the newly written data. The versions are distinguished by the time stamp. TiDB uses the mechanism of periodic Garbage Collection (GC) to clean up the old data that is no longer needed.
+TiDB's transaction implementation uses the MVCC (Multiple Version Concurrency Control) mechanism. When the newly written data overwrites the old data, the old data will not be replaced, but kept together with the newly written data. The versions are distinguished by the timestamp. TiDB uses the mechanism of periodic Garbage Collection (GC) to clean up the old data that is no longer needed.
 
-By default, each MVCC version (consistency snapshots) is kept for `10` minutes. Transactions that take longer than `10` minutes to read will receive an error `GC life time is shorter than transaction duration`.
+By default, each MVCC version (consistency snapshots) is kept for 10 minutes. Transactions that take longer than 10 minutes to read will receive an error `GC life time is shorter than transaction duration`.
 
 If you need longer read time, for example, when you are using **Mydumper** for full backups (**Mydumper** backs up consistent snapshots), you can adjust the value of `tikv_gc_life_time` in the `mysql.tidb` table in TiDB to increase the MVCC version retention time. Note that `tikv_gc_life_time` takes effect globally and immediately. Increasing the value will increase the life time of all existing snapshots, and decreasing it will immediately shorten the life time of all snapshots. Too many MVCC versions will impact TiKV's processing efficiency. So you need to change `tikv_gc_life_time` back to the previous setting in time after doing a full backup with **Mydumper**.
 
@@ -27,7 +27,7 @@ SQL statements such as `INSERT INTO t10 SELECT * FROM t1` are not affected by GC
 
 TiDB also provides a system variable (`max_execution_time`, `0` by default, indicating no limit) to limit the execution time of a single SQL statement. `max_execution_time` currently takes effect for all types of statements, not just the `SELECT` statements. The unit is `ms`, but the actual precision is at the `100ms` level instead of the millisecond level.
 
-## JDBC Query timeout
+## JDBC query timeout
 
 MySQL JDBC's query timeout setting for `setQueryTimeout()` does **_NOT_** work for TiDB, because the client sends a `KILL` command to the database when it detects the timeout. However, the tidb-server is load balanced, and it will not execute this `KILL` command to avoid termination of the connection on a wrong tidb-server. You need to use `MAX_EXECUTION_TIME` to check the query timeout effect.
 
