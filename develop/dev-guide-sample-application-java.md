@@ -40,7 +40,7 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 <div label="Using JDBC" href="get-code-jdbc">
 
-Change directory to `plain-java-jdbc`:
+Change to the `plain-java-jdbc` directory:
 
 {{< copyable "shell-regular" >}}
 
@@ -520,7 +520,7 @@ Compared with Hibernate, the JDBC implementation might be not a best practice, b
 
 Hibernate is a popular open-source Java ORM, and it supports TiDB dialect starting from `v6.0.0.Beta2`, which fits TiDB features well. The following instructions take `v6.0.0.Beta2` as an example.
 
-Change directory to `plain-java-hibernate`:
+Change to the `plain-java-hibernate` directory:
 
 {{< copyable "shell-regular" >}}
 
