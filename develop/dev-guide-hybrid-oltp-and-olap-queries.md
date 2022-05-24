@@ -12,7 +12,7 @@ In the [Create Database](/develop/dev-guide-create-table.md#using-htap-capabilit
 
 ## Data preparation
 
-Before starting, you can import much larger sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo), for example:
+You can use [`tiup demo` import](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo) to prepare data:
 
 {{< copyable "shell-regular" >}}
 
