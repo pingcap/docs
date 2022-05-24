@@ -8,23 +8,23 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 
 # Build a Simple CRUD App with TiDB and Java
 
-This document introduces how to use TiDB and Java to build a simple CRUD application.
+This document describes how to use TiDB and Java to build a simple CRUD application.
 
 > **Note:**
 >
-> It is recommended to use a version later than Java 8.
+> It is recommended to use Java 8 or a later Java version.
 >
-> For using Spring Boot, refer to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+> If you want to use Spring Boot for application development, refer to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
 
 ## Step 1. Launch your TiDB cluster
 
 The following introduces how to start a TiDB cluster.
 
-### Use a TiDB Cloud Free Cluster
+### Use a TiDB Cloud free cluster
 
-[Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)
+For detailed steps, see [Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster).
 
-### Use a Local Cluster
+### Use a local cluster
 
 For more information about how to use a local cluster, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
@@ -65,7 +65,7 @@ The structure of this directory is as follows:
             └── dbinit.sql
 ```
 
-Initialization statements for the table are defined in `dbinit.sql`:
+You can find initialization statements for the table creation in `dbinit.sql`:
 
 {{< copyable "sql" >}}
 
@@ -81,7 +81,7 @@ CREATE TABLE player (
 );
 ```
 
-`JDBCExample.java` is the main body of the `plain-java-jdbc`. TiDB is highly compatible with the MySQL protocol, so you need to initialize a MySQL source instance `MysqlDataSource` to connect to TiDB. Then, initialize `PlayerDAO` to manage data and use it to read, edit, add and delete.
+`JDBCExample.java` is the main body of the `plain-java-jdbc`. TiDB is highly compatible with the MySQL protocol, so you need to initialize a MySQL source instance `MysqlDataSource` to connect to TiDB. Then, you can initialize `PlayerDAO` for object management and use it to read, edit, add, and delete data.
 
 `PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods to provide the ability to write data.
 
@@ -516,9 +516,9 @@ public class JDBCExample
 
 <div label="Using Hibernate (Recommended)" href="get-code-hibernate">
 
-The JDBC implementation is slightly redundant. It is not a best practice as the requirement for handling the error logic manually and lack code reusability.
+Compared with Hibernate, the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
 
-Hibernate is a popular open-source Java ORM, and it supports TiDB dialect in `v6.0.0.Beta2` and later, which fits TiDB features well. The following introduces with `v6.0.0.Beta2` and later versions.
+Hibernate is a popular open-source Java ORM, and it supports TiDB dialect starting from `v6.0.0.Beta2`, which fits TiDB features well. The following instructions take `v6.0.0.Beta2` as an example.
 
 Change directory to `plain-java-hibernate`:
 
@@ -575,9 +575,9 @@ The structure of this directory is as follows:
 </hibernate-configuration>
 ```
 
-`HibernateExample.java` is the main body of the `plain-java-hibernate`. Compared with JDBC, when using Hibernate, it is only needed to write the path of configuration, as Hibernate avoid detailed difference between different databases when creating a database.
+`HibernateExample.java` is the main body of the `plain-java-hibernate`. Compared with JDBC, when using Hibernate, you only need to write the path of the configuration file, because Hibernate avoids differences in database creation between different databases.
 
-`PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods for writing data. Compared with JDBC, Hibernate encapsulates a large number of operations such as object mapping, and CRUD of basic objects, which greatly simplifies the amount of code.
+`PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods for writing data. Compared with JDBC, Hibernate encapsulates a large number of operations such as object mapping and CRUD of basic objects, which greatly simplifies the code.
 
 `PlayerBean` is a data entity class that is a mapping for tables. Each property of a `PlayerBean` corresponds to a field in the `player` table. Compared with JDBC, `PlayerBean` in Hibernate adds annotations to indicate mapping relationships for more information.
 
@@ -833,7 +833,7 @@ When using JDBC, you need to initialize the database tables manually. If you are
 make mysql
 ```
 
-Or you can execute the following command directly:
+Or you can execute the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -853,13 +853,13 @@ No need to initialize tables manually.
 
 </SimpleTab>
 
-### Step 3.2 Change parameters for TiDB Cloud
+### Step 3.2 Modify parameters for TiDB Cloud
 
 <SimpleTab>
 
 <div label="Using JDBC" href="tidb-cloud-jdbc">
 
-If you are using a non-local default cluster, such as TiDB Cloud or other remote clusters, change the parameters for Host, Post, User, Password in `JDBCExample.java`:
+If you are using a non-local default cluster, such as TiDB Cloud or other remote clusters, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
 
 {{< copyable "" >}}
 
@@ -871,13 +871,13 @@ mysqlDataSource.setUser("root");
 mysqlDataSource.setPassword("");
 ```
 
-If the password you set is `123456`, the connection string you get in TiDB Cloud is:
+Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
 
 ```
 mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 ```
 
-Then change the parameters:
+In this case, you can modify the parameters as follows:
 
 {{< copyable "" >}}
 
@@ -893,7 +893,7 @@ mysqlDataSource.setPassword("123456");
 
 <div label="Using Hibernate (Recommended)" href="tidb-cloud-hibernate">
 
-If you are using a non-local default cluster, such as TiDB Cloud or other remote cluster, change the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
+If you are using a non-local default cluster, such as TiDB Cloud or other remote cluster, modify the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
 
 {{< copyable "" >}}
 
@@ -923,7 +923,7 @@ If you are using a non-local default cluster, such as TiDB Cloud or other remote
 </hibernate-configuration>
 ```
 
-If the password you set is `123456`, the connection string you get in TiDB Cloud is:
+Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
 
 {{< copyable "shell-regular" >}}
 
@@ -931,7 +931,7 @@ If the password you set is `123456`, the connection string you get in TiDB Cloud
 mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
 ```
 
-Then change the configuration:
+In this case, you can modify the parameters as follows:
 
 {{< copyable "" >}}
 
@@ -971,7 +971,7 @@ Then change the configuration:
 
 <div label="Using JDBC" href="run-jdbc">
 
-To run the code, you can run `make build` and `make run` individually:
+To run the code, you can run `make build` and `make run` respectively:
 
 {{< copyable "shell" >}}
 
@@ -989,13 +989,13 @@ mvn clean package
 java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly which is a combination of `make build` and `make run`.
+Or run the `make` command directly, which is a combination of `make build` and `make run`.
 
 </div>
 
 <div label="Using Hibernate (Recommended)" href="run-hibernate">
 
-To run the code, you can run `make build` and `make run` individually:
+To run the code, you can run `make build` and `make run` respectively:
 
 {{< copyable "shell" >}}
 
@@ -1013,7 +1013,7 @@ mvn clean package
 java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly which is a combination of `make build` and `make run`.
+Or run the `make` command directly, which is a combination of `make build` and `make run`.
 
 </div>
 
