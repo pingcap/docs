@@ -406,7 +406,7 @@ This section provides guidelines you need to follow when creating a table.
 ### Guidelines to follow when executing the `CREATE TABLE` statement
 
 - It is not recommended to use a client-side Driver or ORM to perform database schema changes. It is recommended to use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or use a GUI client to perform database schema changes. In this document, the **MySQL client** is used to pass in SQL files to perform database schema changes in most scenarios.
-- Follow the SQL development [specification for table build and delete](/develop/dev-guide-sql-development-specification.md#specification-for-table-build-and-delete). It is recommended to wrap the build and delete statements inside the business application to add judgment logic.
+- Follow the SQL development [specification for creating and deleting tables](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables). It is recommended to wrap the build and delete statements inside the business application to add judgment logic.
 
 ## One more step
 
