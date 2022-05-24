@@ -1,6 +1,6 @@
 ---
 title: Unstable Result Set
-summary: The treatment of result set unstable error.
+summary: Learn how to handle the error of an unstable result set.
 ---
 
 # Unstable Result Set
