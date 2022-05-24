@@ -20,7 +20,7 @@ Before reading this document, you need to prepare the following:
 
 ## Use `UPDATE`
 
-To update an existing row in a table, you need to use a [UPDATE statement](/common/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
+To update an existing row in a table, you need to use an [`UPDATE` statement](/common/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
 
 > **Note:**
 >
@@ -113,7 +113,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE` best practices
 
-- Use `INSERT ON DUPLICATE KEY UPDATE` only for a table with one unique key. This statement updates the data if any **_UNIQUE KEY_** (including the primary key) conflicts are detected. If there are more than one row conflicts, only one row will be updated. Therefore, it is not recommended to use the `INSERT ON DUPLICATE KEY UPDATE` statement in tables with multiple unique keys unless you can guarantee that there is only one row conflict.
+- Use `INSERT ON DUPLICATE KEY UPDATE` only for a table with one unique key. This statement updates the data if any **_UNIQUE KEY_** (including the primary key) conflicts are detected. If there are more than one row of conflicts, only one row will be updated. Therefore, it is not recommended to use the `INSERT ON DUPLICATE KEY UPDATE` statement in tables with multiple unique keys unless you can guarantee that there is only one row of conflict.
 - Use this statement when you create data or update data.
 
 ### `INSERT ON DUPLICATE KEY UPDATE` example
@@ -166,7 +166,7 @@ When you need to update multiple rows of data in a table, you can [use `INSERT O
 
 However, if you need to update a large number of rows (for example, more than ten thousand), it is recommended that you update the data iteratively, that is, updating only a portion of the data at each iteration until the update is complete. This is because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default). Too many data updates at once will result in holding locks for too long ([pessimistic transactions](/pessimistic-transaction.md), or causing conflicts ([optimistic transactions](/optimistic-transaction.md)). You can use a loop in your program or script to complete the operation.
 
-This document provides examples of writing scripts to handle iterative updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
+This section provides examples of writing scripts to handle iterative updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
 
 ### Write bulk-update loop
 

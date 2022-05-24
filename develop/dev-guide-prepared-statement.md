@@ -33,7 +33,7 @@ See [PREPARE statement](/common/sql-statements/sql-statement-prepare.md) for mor
 
 ### Use the prepared statement
 
-A prepared statement can only use **user variables** as parameters, so use the [SET statement](/common/sql-statements/sql-statement-set-variable.md) to set the variables before the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) can call the prepared statement.
+A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/common/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/common/sql-statements/sql-statement-execute.md) can call the prepared statement.
 
 {{< copyable "sql" >}}
 
@@ -48,7 +48,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |     `{parameter_value}`     |                              user variable value                               |
 | `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
-See the [EXECUTE statement](/common/sql-statements/sql-statement-execute.md) for more information.
+See the [`EXECUTE` statement](/common/sql-statements/sql-statement-execute.md) for more information.
 
 ### Delete the prepared statement
 
@@ -62,7 +62,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :-------------------------------------------------------------------: |
 | `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
-See the [DEALLOCATE statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
+See the [`DEALLOCATE` statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
 
 ## Examples
 
@@ -149,7 +149,7 @@ try (Connection connection = ds.getConnection()) {
 
 ### `INSERT` example
 
-Using the [books table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
+Using the [`books` table](/develop/dev-guide-bookshop-schema-design.md#books-table) as an example, you need to insert a book with `title = TiDB Developer Guide`, `type = Science & Technology`, `stock = 100`, `price = 0.0`, and `published_at = NOW()` (current time of insertion). Note that you don't need to specify the `AUTO_RANDOM` attribute in the **primary key** of the `books` table. For more information about inserting data, see [Insert Data](/develop/dev-guide-insert-data.md).
 
 <SimpleTab>
 

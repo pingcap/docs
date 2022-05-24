@@ -150,7 +150,7 @@ For more information on how to handle hotspot issues, see [Troubleshoot Hotspot 
 
 ## Insert data to a table with the `AUTO_RANDOM` primary key
 
-If the primary key of the table you insert has the `AUTO_RANDOM` attribute, then by default the primary key cannot be specified. For example, in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database, you can see that the `id` field of the [users table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
+If the primary key of the table you insert has the `AUTO_RANDOM` attribute, then by default the primary key cannot be specified. For example, in the [`bookshop`](/develop/dev-guide-bookshop-schema-design.md) database, you can see that the `id` field of the [`users` table](/develop/dev-guide-bookshop-schema-design.md#users-table) contains the `AUTO_RANDOM` attribute.
 
 In this case, you **cannot** use SQL like the following to insert:
 
@@ -178,7 +178,7 @@ There are two solutions to handle this error:
     INSERT INTO `bookshop`.`users` (`balance`, `nickname`) VALUES (0.00, 'nicky');
     ```
 
-- If you are sure that you **_must_** specify this column, then you can use the [SET statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
+- If you are sure that you **_must_** specify this column, then you can use the [`SET` statement](https://docs.pingcap.com/zh/tidb/stable/sql-statement-set-variable) to allow the column of `AUTO_RANDOM` to be specified during insertion time by changing the user variable.
 
     {{< copyable "sql" >}}
 
@@ -189,4 +189,4 @@ There are two solutions to handle this error:
 
 ## Use HTAP
 
-In TiDB, HTAP capabilities save you from performing additional operations when inserting data. There is no additional insertion logic. TiDB does the data consistency assurance automatically. All you need to do is [turn on column-oriented copy synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table, and use the column copy to speed up your queries directly.
+In TiDB, HTAP capabilities save you from performing additional operations when inserting data. There is no additional insertion logic. TiDB automatically guarantees data consistency. All you need to do is [turn on column-oriented replica synchronization](/develop/dev-guide-create-table.md#using-htap-capabilities) after creating the table, and use the column-oriented replica to speed up your queries directly.
