@@ -1,6 +1,6 @@
 ---
 title: Build a TiDB Cluster in TiDB Cloud (DevTier)
-summary: Learn about how to build a TiDB Cluster in TiDB Cloud (DevTier) and connect to a TiDB Cloud cluster.
+summary: Learn how to build a TiDB Cluster in TiDB Cloud (DevTier) and connect to a TiDB Cloud cluster.
 ---
 
 <!-- markdownlint-disable MD029 -->
