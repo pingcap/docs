@@ -1,13 +1,13 @@
 ---
 title: Stale Read
-summary: Use Stale Read to speed up query under certain conditions.
+summary: Learn how to use Stale Read to accelerate queries under certain conditions.
 ---
 
 # Stale Read
 
-Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes. When you are using Steal Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading.
+Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data at a specific time or within a specified time range, and thus save the latency caused by data replication between storage nodes. When you are using Steal Read, TiDB randomly selects a replica for data reading, which means that all replicas are available for data reading.
 
-In practice, please determine if it is appropriate to enable Stale Read in TiDB based on the usage [scenario](/stale-read.md#usage-scenarios-of-stale-read). Do not enable Stale Read if your application cannot tolerate reading non-real-time data.
+In practice, consider carefully whether it is appropriate to enable Stale Read in TiDB based on the [usage scenarios](/stale-read.md#usage-scenarios-of-stale-read). Do not enable Stale Read if your application cannot tolerate reading non-real-time data.
 
 TiDB provides three levels of Stale Read: statement level, transaction level, and session level.
 
@@ -38,7 +38,7 @@ The result is as follows:
 
 In the list at this time (2022-04-20 15:20:00), the price of *The Story of Droolius Caesar* is 100.0.
 
-At the same time, the seller found that the book was very popular, so he raised the price of the book to 150.0 through the following SQL statement:
+At the same time, the seller found that the book was very popular and raised the price of the book to 150.0 through the following SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -68,16 +68,16 @@ By querying the latest books list, you can see that the price of this book has i
 5 rows in set (0.01 sec)
 ```
 
-If it is not necessary to use the latest data, you can query with Stale Read, which might return outdated data, to avoid the latency caused by data synchronization during a strongly consistent read.
+If it is not necessary to use the latest data, you can query with Stale Read, which might return outdated data, to avoid the latency caused by data replication during a strongly consistent read.
 
-Assuming that in the Bookshop application, real-time prices of books are not required on the book lists page, while the real-time price is only required on book details and order pages. Stale Read can be used to improve throughout of the application.
+Assuming that in the Bookshop application, the real-time price of a book is not required on the book lists page but only required on the book details and order pages. Stale Read can be used to improve throughout of the application.
 
 ## Statement level
 
 <SimpleTab>
 <div label="SQL" href="statement-sql">
 
-To query the price of the book before a specific time, add an `AS OF TIMESTAMP <datetime>` clause in the above query statement.
+To query the price of a book before a specific time, add an `AS OF TIMESTAMP <datetime>` clause in the above query statement.
 
 {{< copyable "sql" >}}
 
@@ -100,15 +100,15 @@ The result is as follows:
 5 rows in set (0.01 sec)
 ```
 
-In addition to specifying the exact time, you can also use:
+In addition to specifying an exact time, you can also specify the following:
 
-- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` instructs to query the latest data 10 seconds ago.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` instructs to query the latest data between `2016-10-08 16:45:26` and `2016-10-08 16:45:29`.
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` instructs to query the latest data within 20 seconds.
+- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` queries the latest data 10 seconds ago.
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` queries the latest data between `2016-10-08 16:45:26` and `2016-10-08 16:45:29`.
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` queries the latest data within 20 seconds.
 
-It should be noted that the specified timestamp or interval cannot be too early or later than the current time.
+Note that the specified timestamp or interval cannot be too early or later than the current time.
 
-Expired data will be recycled by [Garbage Collection](/garbage-collection-overview.md) in TiDB, and the data will be retained for a short period before being cleared. The period is called [GC Life Time (default 10 minutes)](/system-variables.md#tidb_gc_life_time-new-in-v50). When a GC happens, the current time minus the time period will be used as the **GC Safe Point**. If you try to read the data before GC Safe Point, TiDB will report the following error:
+Expired data will be recycled by [Garbage Collection](/garbage-collection-overview.md) in TiDB, and the data will be retained for a short period before being cleared. The period is called [GC Life Time (default 10 minutes)](/system-variables.md#tidb_gc_life_time-new-in-v50). When a GC starts, the current time minus the time period will be used as the **GC Safe Point**. If you try to read the data before GC Safe Point, TiDB will report the following error:
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
@@ -219,7 +219,7 @@ if (top5LatestBooks.size() > 0) {
 }
 ```
 
-The following result shows that the price returned by Stale Read is 100.00 which is the value before update.
+The following result shows that the price returned by Stale Read is 100.00, which is the value before the update.
 
 ```
 The latest book price (before update): 100.00
@@ -234,7 +234,7 @@ WARN: GC life time is shorter than transaction duration.
 
 ## Transaction level
 
-With the `START TRANSACTION READ ONLY AS OF TIMESTAMP` statement, you can start a read-only transaction based on historical time, which reads historical data based on the specified historical time.
+With the `START TRANSACTION READ ONLY AS OF TIMESTAMP` statement, you can start a read-only transaction based on historical time, which reads historical data from a specified historical timestamp.
 
 <SimpleTab>
 <div label="SQL" href="txn-sql">
@@ -247,7 +247,7 @@ For example:
 START TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 ```
 
-By querying the latest price of the book, you can see that the price of *The Story of Droolius Caesar* is still 100.0 which is the value before update.
+By querying the latest price of the book, you can see that the price of *The Story of Droolius Caesar* is still 100.0, which is the value before the update.
 
 {{< copyable "sql" >}}
 
@@ -270,7 +270,7 @@ The result is as follows:
 5 rows in set (0.01 sec)
 ```
 
-After committing the transaction with the `COMMIT;` statement, it is able to read the latest data.
+After the transaction with the `COMMIT;` statement is committed, you can read the latest data.
 
 ```
 +------------+------------------------------+-----------------------+--------+
@@ -288,7 +288,7 @@ After committing the transaction with the `COMMIT;` statement, it is able to rea
 </div>
 <div label="Java" href="txn-java">
 
-Defining a helper class for transactions, which encapsulates the command to open a transaction level stale read as a helper method.
+You can define a helper class for transactions, which encapsulates the command to enable Stale Read at the transaction level as a helper method.
 
 {{< copyable "" >}}
 
@@ -392,7 +392,7 @@ With the `SET TRANSACTION READ ONLY AS OF TIMESTAMP` statement, you can set the 
 <SimpleTab>
 <div label="SQL" href="next-txn-sql">
 
-The following statement is used to switch the opened transaction to read-only mode. With the `AS OF TIMESTAMP` clause, you can read historical data 5 seconds ago through the `AS OF TIMESTAMP` statement.
+For example, you can use the following `AS OF TIMESTAMP` statement to switch the ongoing transactions to the read-only mode and read historical data 5 seconds ago.
 
 ```sql
 SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
@@ -401,7 +401,7 @@ SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 </div>
 <div label="Java" href="next-txn-java">
 
-Defining a helper class for transactions, which encapsulates the command to open a transaction level Stale Read as a helper method.
+You can define a helper class for transactions, which encapsulates the command to enable Stale Read at the transaction level as a helper method.
 
 {{< copyable "" >}}
 
@@ -470,7 +470,7 @@ public class BookDAO {
 
 ## Session level
 
-To support reading historical version data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. It is used to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
+To support reading historical data, TiDB has introduced a new system variable `tidb_read_staleness` since v5.4. you can use it to set the range of historical data that the current session is allowed to read. Its data type is `int` and its scope is `SESSION`.
 
 <SimpleTab>
 <div label="SQL">
@@ -483,9 +483,9 @@ Enable Stale Read in a session:
 SET @@tidb_read_staleness="-5";
 ```
 
-For example, if the value is set to -5, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range.
+For example, if the value is set to `-5` and TiKV has the corresponding historical data, TiDB selects a timestamp as new as possible within a 5-second time range.
 
-Close Stale Read in the session:
+Disable Stale Read in the session:
 
 {{< copyable "sql" >}}
 

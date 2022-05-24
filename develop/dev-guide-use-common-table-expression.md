@@ -1,21 +1,21 @@
 ---
 title: Common Table Expression
-summary: Introduce the CTE capability of TiDB, which is used to write SQL statements more efficiently.
+summary: Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
 ---
 
 # Common Table Expression
 
-In some transaction scenarios, due to application complexity, you may sometimes write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such an SQL statement can be a developer’s nightmare.
+In some transaction scenarios, due to application complexity, you might need to write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such a long SQL statement can be a developer’s nightmare.
 
-For more information about simplifying queries, see [Views](/develop/dev-guide-use-views.md). For more details about caching intermediate results, see [Temporary tables](/develop/dev-guide-use-temporary-tables.md) to cache intermediate query results.
+To avoid such a long SQL statement, you can simplify queries by using [Views](/develop/dev-guide-use-views.md) or cache intermediate query results by using [Temporary tables](/develop/dev-guide-use-temporary-tables.md).
 
 This document introduces the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
 
-Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion. This helps developers and DBAs more efficiently write SQL statements for complex application logic and makes the code easier to maintain.
+Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion. With CTE, you can write SQL statements for complex application logic more efficiently and maintain the code much easier.
 
 ## Basic use
 
-A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement's readability and execution efficiency. You can apply the `WITH` statement to use Common Table Expressions.
+A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the `WITH` statement to use CTE.
 
 Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
 
@@ -32,7 +32,7 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-For example, If you want to know how many books each of the 50 oldest authors have written.
+For example, if you want to know how many books each of the 50 oldest authors have written, take the following steps:
 
 <SimpleTab>
 <div label="SQL">
@@ -115,7 +115,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can find out the order and rating of these 4 books.
+It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can further get the order and rating information of these 4 books as follows:
 
 {{< copyable "sql" >}}
 
@@ -170,7 +170,7 @@ Three CTE blocks, which are separated by `,`, are defined in this SQL statement.
 
 First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by the `JOIN` statement.
 
-It is worthy to note that the query in `books_authored_by_rm` executes only once, and TiDB will open a temporary space to cache the results. When `books_with_average_ratings` and `books_with_orders` reference, it will get data directly from this temporary space.
+Note that the query in `books_authored_by_rm` executes only once, and then TiDB creates a temporary space to cache its result. When the queries in `books_with_average_ratings` and `books_with_orders` refer to `books_authored_by_rm`, TiDB gets its result directly from this temporary space.
 
 ### Recursive CTE
 
