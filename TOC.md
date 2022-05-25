@@ -77,7 +77,7 @@
     - SQL
       - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
     - Guidelines
-      - [Object Naming Guidelines](/develop/dev-guide-object-naming-guidelines.md)
+      - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specification](/develop/dev-guide-sql-development-specification.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
