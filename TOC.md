@@ -397,7 +397,6 @@
 - Contribute
   - [Contribute to TiDB](/contribute.md#contribute-to-tidb)
   - [Improve the Docs](/contribute.md#improve-the-docs)
-- [Adopters](/adopters.md)
 - Releases
   - [All Releases](/releases/release-notes.md)
   - v3.1
