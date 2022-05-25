@@ -12,7 +12,6 @@
     - [v5.0 MPP mode TPC-H 100GB Performance Test](/benchmark/v5.0-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
-  - [TiDB Adopters](/adopters.md)
   - [Credits](/credits.md)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
