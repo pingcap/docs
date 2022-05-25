@@ -1,7 +1,12 @@
 ---
 title: TiDB Introduction
+<<<<<<< HEAD
 summary: Learn how to quickly start a TiDB cluster.
 aliases: ['/docs/v2.1/']
+=======
+summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
+aliases: ['/docs/dev/','/docs/dev/adopters/','/tidb/dev/adopters']
+>>>>>>> c895704e1 (delete adopters.md (#8725))
 ---
 
 # TiDB Introduction
@@ -15,7 +20,16 @@ TiDB can be deployed on-premise or in-cloud. The following deployment options ar
 - [Docker Deployment](/test-deployment-using-docker.md): This guide describes how to deploy TiDB using Docker.
 - [Binary Tarball Deployment](/production-deployment-from-binary-tarball.md): This guide describes how to deploy TiDB from a binary tarball in production. Guides for [development](/deploy-tidb-from-binary.md) and [testing](/test-deployment-from-binary-tarball.md) environments are also available.
 
+<<<<<<< HEAD
 ## Community Provided Blog Posts & Tutorials
+=======
+- [TiDB Introduction](/overview.md)
+- [Basic Features](/basic-features.md)
+- [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
+- [TiDB Release Timeline](/releases/release-timeline.md)
+- [Compatibility with MySQL](/mysql-compatibility.md)
+- [Usage Limitations](/tidb-limitations.md)
+>>>>>>> c895704e1 (delete adopters.md (#8725))
 
 The following list collects deployment guides and tutorials from the community. The content is subject to change by the contributors.
 
