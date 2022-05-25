@@ -212,74 +212,74 @@ In non-transactional DML statements, the larger the batch size is, the fewer SQL
 
 The information of each batch is stored in memory, so too many batches can significantly increase memory consumption. This explains why the batch size cannot be too small. The upper limit of memory consumed by non-transactional statements for storing batch information is the same as [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), and the action triggered when this limit is exceeded is determined by the configuration item [`oom-action`](/tidb-configuration -file.md#oom-action).
 
-------------
+## Restrictions
 
-## usage restrictions
+The following are hard restrictions on non-transactional DML statements. If these restrictions are not met, TiDB will report an error.
 
-Hard restrictions on non-transactional DML statements, TiDB will report an error if these conditions are not met.
-
-- You can only operate on a single table, and multi-table joins are not currently supported.
-- DML statements cannot contain `ORDER BY` or `LIMIT` clauses.
-- The column used for splitting must be indexed. The index can be a single-column index, or the first column of a joint index.
-- Must be used in [`autocommit`](/system-variables.md#autocommit) mode.
+- You can only operate on a single table. Multi-table joins are currently not supported.
+- The DML statements cannot contain `ORDER BY` or `LIMIT` clauses.
+- The dividing column must be indexed. The index can be a single-column index, or the first column of a joint index.
+- Must be used in the [`autocommit`](/system-variables.md#autocommit) mode.
 - Cannot be used when batch-dml is enabled.
 - Cannot be used when [`tidb_snapshot`](/read-historical-data.md#operation flow) is set.
 - Cannot be used with the `prepare` statement.
-- `ENUM`, `BIT`, `SET`, `JSON` types are not supported for partition columns.
+- `ENUM`, `BIT`, `SET`, `JSON` types are not supported as the dividing columns.
 - Not supported for [temporary tables](/temporary-tables.md).
 - [Common Table Expression](/develop/use-common-table-expression.md) is not supported.
 
 ## Control batch execution failure
 
-Non-transactional DML statements do not satisfy atomicity, and some batches may succeed and some fail. The system variable [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error - introduced since -v610-) controls the behavior of non-transactional DML statements to handle errors.
+Non-transactional DML statements do not satisfy atomicity. Some batches might succeed and some might fail. The system variable [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610) controls how the non-transactional DML statements handle errors.
 
-An exception is that if the first batch fails to execute, there is a high probability that the statement itself is wrong, and the entire non-transactional statement will directly return an error.
+An exception is that if the first batch fails, there is a high probability that the statement itself is wrong. In this case, the entire non-transactional statement will directly return an error.
 
 ## Implementation principle
 
-The implementation principle of non-transactional DML statements is to build in the splitting of SQL statements that need to be manually executed on the user side as a function of TiDB to simplify user operations. To understand the behavior of a non-transactional DML statement, think of it as a user script doing the following:
+The implementation principle of non-transactional DML statements is to build into TiDB the automatic splitting of SQL statements. Without non-transactional DML statements, you will need to manually split the SQL statements. To understand the behavior of a non-transactional DML statement, think of it as a user script doing the following tasks:
 
-For non-transactional DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`, where `$C$` is the column used for splitting, `$N$` is the batch size, `$ P$` is the filter condition.
+For the non-transactional DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`, $C$ is the column used for dividing, $N$ is the batch size, and $P$ is the filter condition.
 
-1. According to the filter condition `$P$` of the original statement and the specified column `$C$` for splitting, TiDB queries all `$C$` that satisfy `$P$`. Sort these `$C$` into groups `$B_1 \dots B_k$` by `$N$`. For all `$B_i$`, keep its first and last `$C$` as `$S_i$` and `$E_i$`. The query statement executed in this step can be viewed through [`DRY RUN QUERY`](/non-transactional-dml.md# query non-transactional-dml-statement divided-batch-statement).
-2. The data involved in `$B_i$` is a subset that satisfies ```$P_i$:`C BETWEEN <S_i> AND <E_i>` ```. You can use `$P_i$` to narrow down the range of data that each batch needs to process.
-3. For `$B_i$`, embed the above condition into the `WHERE` condition of the original statement, making it `WHERE ($P_i$) AND ($P$)`. The execution result of this step can be viewed through [`DRY RUN`](/non-transactional-dml.md# query the statement corresponding to the first and last -batch- in the non-transactional-dml-statement).
+1. According to the filter condition $P$ of the original statement and the specified column $C$ for dividing, TiDB queries all $C$ that satisfy $P$. TiDB sorts these $C$ into groups $B_1 \dots B_k$ according to $N$. For each of all $B_i$, TiDB keeps its first and last $C$ as $S_i$ and $E_i$. The query statement executed in this step can be viewed through [`DRY RUN QUERY`](/non-transactional-dml.md#-query-the-batch-dividing-statement).
+2. The data involved in $B_i$ is a subset that satisfies $P_i$: $C$ BETWEEN $S_i$ AND $E_i$. You can use $P_i$ to narrow down the range of data that each batch needs to process.
+3. For $B_i$, TiDB embeds the above condition into the `WHERE` condition of the original statement, which makes it WHERE ($P_i$) AND ($P$). The execution result of this step can be viewed through [`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches).
 4. For all batches, execute new statements in sequence. The errors for each grouping are collected and combined, and returned as the result of the entire non-transactional DML statement after all groupings are complete.
 
 ## Similarities and differences with batch-dml
 
-batch-dml is a mechanism for splitting a transaction into multiple transaction commits during DML statement execution.
+batch-dml is a mechanism for splitting a transaction into multiple transaction commits during the execution of a DML statement.
 
 > **Note:**
 >
-> When the batch-dml function is used improperly, there is a risk of data index inconsistency. This function will be deprecated in subsequent versions of TiDB, so it is not recommended to use it.
+> It is not recommended to use batch-dml. When the batch-dml feature is not properly used, there is a risk of data index inconsistency. batch-dml will be deprecated in a later release of TiDB.
 
-Non-transactional DML statements are not yet a replacement for all batch-dml use cases. Their main differences are:
+Non-transactional DML statements are not yet a replacement for all batch-dml usage scenarios. Their main differences are as follows:
 
-- Performance: In the case of high [Partition Efficiency] (#selection of partition columns), the performance of non-transactional DML statements and batch-dml are close. Non-transactional DML statements can be significantly slower than batch-dml in cases where partitioning is less efficient.
+- Performance: When the [dividing column](#column-selection) is efficient, the performance of non-transactional DML statements is close to that of batch-dml. When the dividing column is less efficient, the performance of non-transactional DML statements is significantly lower than that of batch-dml.
 
-- Stability: batch-dml is prone to data index inconsistencies due to improper use. Non-transactional DML statements do not cause data index inconsistencies. However, when used incorrectly, non-transactional DML statements are not equivalent to the original statements, and applications may observe unexpected behavior. See [FAQ](#FAQ) for details.
+- Stability: batch-dml is prone to data index inconsistencies due to improper use. Non-transactional DML statements do not cause data index inconsistencies. However, when used improperly, non-transactional DML statements are not equivalent to the original statements, and the applications might observe unexpected behavior. See [FAQ](#faq) for details.
 
-## common problem
+## Common issues
 
-### An error occurs during execution `Failed to restore the delete statement, probably because of unsupported type of the shard column`
+### The `Failed to restore the delete statement, probably because of unsupported type of the shard column` error occurs during execution
 
-The type of partition column does not support `ENUM`, `BIT`, `SET`, `JSON` types, please try to specify a new partition column. Columns of type integer or string are recommended. If the partition column is not of these types, please contact PingCAP technical support.
+The dividing column does not support `ENUM`, `BIT`, `SET`, `JSON` types. Try to specify a new dividing column. It is recommended to use an integer or string type column.
+
+If the error occurs when the dividing column you have selected is not one of these unsupported types, contact PingCAP technical support.
 
 ### Non-transactional `DELETE` has "exceptional" behavior that is not equivalent to normal `DELETE`
 
-A non-transactional DML statement is not equivalent to the original form of this DML statement, which may be due to the following reasons:
+A non-transactional DML statement is not equivalent to the original form of this DML statement, which might have the following reasons:
 
-- There are other writes concurrently.
-- A non-transactional DML statement modifies a value that the statement itself would read.
-- The actual execution of the SQL statement in each batch may cause the execution plan and expression calculation order to be different due to the change of the `WHERE` condition, resulting in different execution results.
-- DML statements contain non-deterministic operations.
+- There are other concurrent writes.
+- The non-transactional DML statement modifies a value that the statement itself will read.
+- The SQL statement actually executed in each batch might cause a different execution plan and expression calculation order because the `WHERE` condition is changed. Therefore, the execution result might be different from the original statement.
+- The DML statements contain non-deterministic operations.
 
-## Compatibility information
+## MySQL compatibility
 
-Non-transactional statements are unique to TiDB and are not compatible with MySQL.
+Non-transactional statements are TiDB-specific and are not compatible with MySQL.
 
-## Explore more
+## See also
 
-* [BATCH](/sql-statements/sql-statement-batch.md) syntax
-* [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-introduced from -v610-)
+* The [`BATCH`](/sql-statements/sql-statement-batch.md) syntax
+* [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610)

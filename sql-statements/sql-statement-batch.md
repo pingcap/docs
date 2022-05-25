@@ -1,19 +1,19 @@
 ---
 title: BATCH
-summary: TiDB 数据库中 BATCH 的使用概况。
+summary: An overview of the usage of BATCH for the TiDB database.
 ---
 
 # BATCH
 
-BATCH 语句将一个 DML 语句拆成多个语句在内部执行，因此**不保证**事务的原子性和隔离性，是一个“非事务”语句。
+The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there is **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
 
-目前 BATCH 语句仅支持 `DELETE`。
+Currently, only `DELETE` is supported in `BATCH`.
 
-BATCH 语句在某一列将 DML 语句涉及的范围划分为多个区间，在每个区间执行一条 SQL。
+Based on a column, the `BATCH` syntax divides a DML statement into multiple ranges of scope for execution. In each range, a single SQL statement is executed.
 
-详细的说明和使用限制见[非事务语句](/non-transactional-dml.md)。
+For details about the usage and restrictions, see [Non-transactional DML statements](/non-transactional-dml.md).
 
-## 语法图
+## Synopsis
 
 ```ebnf+diagram
 NonTransactionalDeleteStmt ::=
@@ -22,10 +22,10 @@ DryRunOptions ::=
     'DRY' 'RUN' 'QUERY'?
 ```
 
-## MySQL 兼容性
+## MySQL compatibility
 
-BATCH 语句是 TiDB 独有的语句，与 MySQL 不兼容。
+The `BATCH` syntax is TiDB-specific and not compatible with MySQL.
 
-## 另请参阅
+## See also
 
-* [非事务语句](/non-transactional-dml.md)
+* [Non-transactional DML statements](/non-transactional-dml.md)
