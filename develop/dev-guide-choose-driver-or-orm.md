@@ -1,49 +1,51 @@
 ---
 title: Choose Driver or ORM
-summary: Choose driver or ORM framework to connect to TiDB.
+summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 ---
 
 # Choose Driver or ORM
 
-TiDB is compatible with MySQL's protocol, but some features are not compatible with MySQL, such as:
+TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
 
-Unsupported features:
+For example:
 
-- Stored procedures and functions
-- Triggers
-- `FOREIGN KEY` constraints
+- Features that are not supported by TiDB:
 
-Features that are different from MySQL:
+    - Stored procedures and functions
+    - Triggers
+    - `FOREIGN KEY` constraints
 
-- Auto-increment ID: In TiDB, auto-incremental columns are globally unique. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
+- Features that are different from MySQL:
 
-Full compatibility differences can be found at [MySQL Compatibility](/mysql-compatibility.md)
+    - Auto-increment ID: auto-incremental columns are globally unique in TiDB. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
+
+For a full list of compatibility differences, see [MySQL Compatibility](/mysql-compatibility.md).
 
 ## Java
 
-> Support levels
->
-> - **Full**: Indicates that there are no known issues with this Driver or ORM
-> - **Verified**: You may have errors due to TiDB compatibility issues
+TiDB provides the following two support levels for Java:
+
+- **Full**: indicates that using this driver or ORM does not have any known issues.
+- **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
 
 ### Java Drivers
 
 **JDBC**
 
-Support level: **Full`
+Support level: **Full**
 
-Follow the instructions in the [JDBC official documentation](https://dev.mysql.com/doc/connector-j/8.0/en/), download and configure the Java JDBC driver to use it.
+You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/) to download and configure a Java JDBC driver.
 
 > **Note:**
 >
-> Version `8.0.16` and above is strongly recommended, which fixes two CVEs:
+> Version `8.0.16` or later is strongly recommended, which fixes two Common Vulnerabilities and Exposures (CVEs):
 >
-> - *CVE-2019-2692 directly
-> - *CVE-2021-22569 indirectly
+> - Fix CVE-2019-2692 directly
+> - Fix CVE-2021-22569 indirectly
 
-For a complete example application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md)
+For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
 
-### Java ORM Framework
+### Java ORM framework
 
 #### Hibernate
 
@@ -51,9 +53,9 @@ Support level: `Full`
 
 > **Note:**
 >
-> Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres) currently. And TiDB does [not support Savepoint](https://github.com/pingcap/tidb/issues/6840) in the current version. If you are using a framework such as `Spring Data JPA`, do not use the `Propagation.NESTED` transaction propagation option in `@Transactional`, i.e.: `@Transactional( propagation = Propagation.NESTED)`
+> Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres), and TiDB does [not support Savepoint](https://github.com/pingcap/tidb/issues/6840). If you are using a framework such as `Spring Data JPA`, do not use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, do not set `@Transactional( propagation = Propagation.NESTED)`
 >
-> You can use [this example](https://github.com/Icemap/tidb-savepoint) to quickly reproduce the output of TiDB and MySQL for Savepoint.
+> Using [this example](https://github.com/Icemap/tidb-savepoint), you can quickly reproduce the output of TiDB and MySQL for Savepoint:
 
 > ```
 > MySQL:
@@ -61,18 +63,18 @@ Support level: `Full`
 > id: 3, coins: 1, goods: 1
 >
 > TiDB:
-> 
-> 2022/04/02 13:59:48 /<path>/go/pkg/mod/gorm.io/driver/mysql@v1.3.2/mysql.go:397 Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 9 near "SAVEPOINT sp0x102cf8960" 
+>
+> 2022/04/02 13:59:48 /<path>/go/pkg/mod/gorm.io/driver/mysql@v1.3.2/mysql.go:397 Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 9 near "SAVEPOINT sp0x102cf8960"
 > [1.119ms] [rows:0] SAVEPOINT sp0x102cf8960
-> 
-> 2022/04/02 13:59:48 /<path>/go/pkg/mod/gorm.io/driver/mysql@v1.3.2/mysql.go:397 Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 9 near "SAVEPOINT sp0x102cf8960" 
+>
+> 2022/04/02 13:59:48 /<path>/go/pkg/mod/gorm.io/driver/mysql@v1.3.2/mysql.go:397 Error 1064: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 9 near "SAVEPOINT sp0x102cf8960"
 > [0.001ms] [rows:0] SAVEPOINT sp0x102cf8a00
 > id: 1, coins: 1, goods: 1
 > ```
 
-You can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all the dependencies of your application and will download all dependencies (including the indirect dependencies) for you, to avoid managing the complex dependencies manually. Note that the TiDB dialect is only supported in Hibernate `6.0.0.Beta2` and above.
+To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones. Note that only Hibernate `6.0.0.Beta2` or above supports the TiDB dialect.
 
-If you are using **Maven**, please add the following to your `<dependencies></dependencies>`:
+If you are using **Maven**, add the following to your `<dependencies></dependencies>`:
 
 {{< copyable "" >}}
 
@@ -90,7 +92,7 @@ If you are using **Maven**, please add the following to your `<dependencies></de
 </dependency>
 ```
 
-If you are using **Gradle**, please add the following to your `dependencies`:
+If you are using **Gradle**, add the following to your `dependencies`:
 
 {{< copyable "" >}}
 
@@ -99,9 +101,11 @@ implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
 implementation 'mysql:mysql-connector-java:8.0.28'
 ```
 
-Example of building a TiDB application:
+- For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
+- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md).
 
-- Native Java using Hibernate, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)
-- Spring Data JPA / Hibernate, see [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported by Hibernate `6.0.0.Beta2` or above. If your `Hibernate` version is earlier than `6.0.0.Beta2`, upgrade it first.
 
-In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported in Hibernate `6.0.0.Beta2` and above. If you are unable to upgrade your `Hibernate` version, then please use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this may cause unpredictable usage results and the absence of some TiDB-specific features, such as [sequences](/common/sql-statements/sql-statement-create-sequence.md), etc.
+> **Note:**
+>
+> If you are unable to upgrade your `Hibernate` version, use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this setting might cause unpredictable results and the absence of some TiDB-specific features, such as [sequences](/common/sql-statements/sql-statement-create-sequence.md).

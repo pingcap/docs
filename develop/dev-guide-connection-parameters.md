@@ -1,17 +1,16 @@
 ---
-title: Connection Pools and Connection Parameter
+title: Connection Pools and Connection Parameters
 ---
 
-# Connection Pools and Connection Parameter
+# Connection Pools and Connection Parameters
 
-> **Note:**
->
-> - Connection Pooling Parameters: **Configure the number of connections**, **Probe configuration** of two sections from [Best Practices for Developing Java Applications with TiDB - Connection pool](/best-practices/java-app-best-practices.md#connection-pool)
-> - Connection Parameters from [Best Practices for Developing Java Applications with TiDB - JDBC](/best-practices/java-app-best-practices.md#jdbc)
+This document describes how to configure connection pools and connection parameters when you use a driver or ORM framework to connect to TiDB.
+
+If you are interested in more tips about Java application development, see [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md#connection-pool)
 
 ## Connection pool
 
-Building TiDB (MySQL) connections are relatively expensive (for OLTP scenarios at least). Because in addition to building a TCP connection, connection authentication is also required. Therefore, the client usually saves the TiDB (MySQL) connections to the connection pool for reuse.
+Building TiDB (MySQL) connections is relatively expensive (for OLTP scenarios at least). Because in addition to building a TCP connection, connection authentication is also required. Therefore, the client usually saves the TiDB (MySQL) connections to the connection pool for reuse.
 
 Java has many connection pool implementations such as [HikariCP](https://github.com/brettwooldridge/HikariCP), [tomcat-jdbc](https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html), [druid](https://github.com/alibaba/druid), [c3p0](https://www.mchange.com/projects/c3p0/), and [dbcp](https://commons.apache.org/proper/commons-dbcp/). TiDB does not limit which connection pool you use, so you can choose whichever you like for your application.
 
@@ -19,14 +18,14 @@ Java has many connection pool implementations such as [HikariCP](https://github.
 
 It is a common practice that the connection pool size is well adjusted according to the application's own needs. Take HikariCP as an example:
 
-- **maximumPoolSize**: The maximum number of connections in the connection pool. If this value is too large, TiDB consumes resources to maintain useless connections. If this value is too small, the application gets slow connections. To configure values according to your servers. For details, see [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
-- **minimumIdle**: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You can also configure it according to your application needs.
+- **maximumPoolSize**: The maximum number of connections in the connection pool. If this value is too large, TiDB consumes resources to maintain useless connections. If this value is too small, the application gets slow connections. Therefore, you need to configure this value according to your application characteristics. For details, see [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing).
+- **minimumIdle**: The minimum number of idle connections in the connection pool. It is mainly used to reserve some connections to respond to sudden requests when the application is idle. You also need to configure it according to your application characteristics.
 
-The application needs to return the connection after finishing using it. It is also recommended that the application use the corresponding connection pool monitoring (such as **metricRegistry**) to locate the connection pool issue in time.
+The application needs to return the connection after finishing using it. It is recommended that the application uses the corresponding connection pool monitoring (such as **metricRegistry**) to locate connection pool issues in time.
 
 ### Probe configuration
 
-The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally, there will be network proxies such as [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server) or [HAProxy](https://en.wikipedia.org/wiki/HAProxy) between the client and TiDB. Usually, these proxies will proactively clean up connections that are idle for a certain period. In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
+The connection pool maintains persistent connections to TiDB. TiDB does not proactively close client connections by default (unless an error is reported), but generally, there are also network proxies such as [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server) or [HAProxy](https://en.wikipedia.org/wiki/HAProxy) between the client and TiDB. Usually, these proxies proactively clean up connections that are idle for a certain period. In addition to paying attention to the idle configuration of the proxies, the connection pool also needs to keep alive or probe connections.
 
 If you often see the following error in your Java application:
 
@@ -36,31 +35,31 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 If `n` in `n milliseconds ago` is `0` or a very small value, it is usually because the executed SQL operation causes TiDB to exit abnormally. To find the cause, it is recommended to check the TiDB stderr log.
 
-If `n` is a very large value (such as `3600000` in the above example), it is likely that this connection was idle for a long time and then closed by the inter/media/developte proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
+If `n` is a very large value (such as `3600000` in the above example), it is likely that this connection was idle for a long time and then closed by the proxy. The usual solution is to increase the value of the proxy's idle configuration and allow the connection pool to:
 
-- Check whether the connection is available before using the connection every time
+- Check whether the connection is available before using the connection every time.
 - Regularly check whether the connection is available using a separate thread.
-- Send a test query regularly to keep alive connections
+- Send a test query regularly to keep alive connections.
 
 Different connection pool implementations might support one or more of the above methods. You can check your connection pool documentation to find the corresponding configuration.
 
-### Empirical Formula
+### Formulas based on experience
 
-As we can see in HikariCP's [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) article, when we don't know how to set the database connection pool size at all, we can consider the following [empirical formula](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count) as a starting point and try around this result based on this. The result is the highest performance connection pool size.
+According to the [About Pool Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing) article of HikariCP, if you have no idea about how to set a proper size for the database connection pool, you can get started with a [formula based on experience](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#connections--core_count--2--effective_spindle_count). Then, based on the performance result of the pool size calculated from the formula, you can further adjust the size to achieve the best performance.
 
-The empirical formula is described as follows:
+The formula based on experience is as follows:
 
 ```
 connections = ((core_count * 2) + effective_spindle_count)
 ```
 
-Explain the meaning of the parameters:
+The description of each parameter in the formula is as follows:
 
-- **connections**: Size of connections obtained
-- **core_count**: Number of CPU cores
-- **effective_spindle_count**: It means how many hard drives (not [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)) you have. Because each spinning hard disk can be called a spindle. For example, if you are using a server with a RAID of 16 disks, the **effective_spindle_count** should be 16. The empirical formula here is actually a measure of how many concurrent I/O requests your server can manage. Because usually, **HDD** can only handle one thing at a time
+- **connections**: the size of connections obtained.
+- **core_count**: the number of CPU cores.
+- **effective_spindle_count**: the number of hard drives (not [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)). Because each spinning hard disk can be called a spindle. For example, if you are using a server with a RAID of 16 disks, the **effective_spindle_count** should be 16. Because **HDD** usually can handle only one request at a time, the formula here is actually measuring how many concurrent I/O requests your server can manage.
 
-In particular, at the bottom of this empirical formula, we also see a statement that:
+In particular, pay attention to the following note below the [formula](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula).
 
 > ```
 > A formula which has held up pretty well across a lot of benchmarks for years is
@@ -72,32 +71,30 @@ In particular, at the bottom of this empirical formula, we also see a statement 
 > how well the formula works with SSDs.
 > ```
 
-This note states that:
+This note indicates that:
 
-1. **core_count** is the number of physical cores, regardless of whether you enable [Hyper-Threading](https://en.wikipedia.org/wiki/Hyper-threading) or not.
-2. When data is fully cached, **effective_spindle_count** should be set to `0`. As the hit rate decreases, it will be closer to the actual number of `HDD`
-3. **There is no empirical formula based on _SSD_**
+- **core_count** is the number of physical cores, regardless of whether you enable [Hyper-Threading](https://en.wikipedia.org/wiki/Hyper-threading) or not.
+- When data is fully cached, you need to set **effective_spindle_count** to `0`. As the hit rate of cache decreases, the count is closer to the actual number of `HDD`.
+- **Whether the formula works for _SSD_ is not tested and unknown.**
 
-The instructions here let us explore additional empirical formulas when using SSDs.
-
-Our recommended formula for the number of connections size is:
+When using SSDs, it is recommended that you use the following formula based on experience instead:
 
 ```
 connections = (number of cores * 4)
 ```
 
-Therefore, we can set the number of connections to `cores * 4` in the case of SSDs. This is used to reach the initial connection pool maximum connection size, and further tuning is done around this data.
+Therefore, you can set the maximum connection size of the initial connection pool to `cores * 4` in the case of SSDs and further adjust the size to tune the performance.
 
 ### Tuning direction
 
-As you can see, what we get in the above [empirical formula](#empirical-formula) is a recommended initial value, if you need to get the best value on a specific machine, you need to get the best value by trying around the recommended value.
+As you can see, a size calculated from the [formulas based on experience](#formulas-based-on-experience) is just a recommended base value. To get the optimal size on a specific machine, you need to try other values around the base value and test the performance.
 
-There are some basic rules for obtaining this optimal value, which is listed below:
+Here are some basic rules to help you get the optimal size:
 
-1. If your network or storage latency is high, increase your maximum number of connections that can wait so that other threads can continue processing while the thread is blocked.
-2. If you have multiple services deployed on your server, and each service has a separate connection pool, consider the sum of their connection pools' maximum connections.
+- If your network or storage latency is high, increase your maximum number of connections to reduce the latency waiting time. Once a thread is blocked by latency, other threads can take over and continue processing.
+- If you have multiple services deployed on your server and each service has a separate connection pool, consider the sum of the maximum number of connections to all connection pools.
 
-## Connection Parameters
+## Connection parameters
 
 Java applications can be encapsulated with various frameworks. In most of the frameworks, JDBC API is called on the bottommost level to interact with the database server. For JDBC, it is recommended that you focus on the following things:
 
@@ -282,6 +279,6 @@ After it is configured, you can check the monitoring to see a decreased number o
 
 #### Timeout-related parameters
 
-TiDB provides two MySQL-compatible parameters that controls the timeout: **wait_timeout** and **max_execution_time**. These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
+TiDB provides two MySQL-compatible parameters to control the timeout: **wait_timeout** and **max_execution_time**. These two parameters respectively control the connection idle timeout with the Java application and the timeout of the SQL execution in the connection; that is to say, these parameters control the longest idle time and the longest busy time for the connection between TiDB and the Java application. The default value of both parameters is `0`, which by default allows the connection to be infinitely idle and infinitely busy (an infinite duration for one SQL statement to execute).
 
 However, in an actual production environment, idle connections and SQL statements with excessively long execution time negatively affect databases and applications. To avoid idle connections and SQL statements that are executed for too long, you can configure these two parameters in your application's connection string. For example, set `sessionVariables=wait_timeout=3600` (1 hour) and `sessionVariables=max_execution_time=300000` (5 minutes).

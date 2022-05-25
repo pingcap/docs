@@ -1,17 +1,17 @@
 ---
 title: Connect to TiDB
-summary: Describes how to connect to TiDB.
+summary: Learn how to connect to TiDB.
 ---
 
 # Connect to TiDB
 
-**TiDB** is highly compatible with **MySQL 5.7** protocol, for a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
+TiDB is highly compatible with the MySQL 5.7 protocol. For a full list of client link parameters, see [MySQL Client Options](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html).
 
-TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html). This allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
+TiDB supports the [MySQL Client/Server Protocol](https://dev.mysql.com/doc/internals/en/client-server-protocol.html), which allows most client drivers and ORM frameworks to connect to TiDB just as they connect to MySQL.
 
-## MySQL Client
+## MySQL Shell
 
-You can use MySQL Client as a command line tool for TiDB. You can find the installation method for different operating systems in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation you can connect to TiDB using the following command-line:
+You can connect to TiDB using MySQL Shell, which can be used as a command-line tool for TiDB. To install MySQL Shell, follow the instructions in the [MySQL Shell documentation](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html). After the installation, you can connect to TiDB using the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -21,11 +21,11 @@ mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 
 > **Note:**
 >
-> The MySQL command-line client cleared [Optimizer Hints](/optimizer-hints.md#optimizer-hints) by default before version 5.7.7. If you need to use the Hint syntax in these earlier versions of the client, you need to add the `--comments` option when starting the client.
+> The MySQL Shell earlier than version 5.7.7 clears [Optimizer Hints](/optimizer-hints.md#optimizer-hints) by default. If you need to use the Hint syntax in an earlier MySQL Shell version, add the `--comments` option when starting the client.
 
 ## JDBC
 
-You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/) driver, which requires creating a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both of which implement the `DataSource` interface) and set the connection string using the `setURL` function.
+You can connect to TiDB using the [JDBC](https://dev.mysql.com/doc/connector-j/8.0/en/) driver. To do that, you need to create a `MysqlDataSource` or `MysqlConnectionPoolDataSource` object (both objects support the `DataSource` interface), and then set the connection string using the `setURL` function.
 
 For example:
 
@@ -36,23 +36,23 @@ MysqlDataSource mysqlDataSource = new MysqlDataSource();
 mysqlDataSource.setURL("jdbc:mysql://{host}:{port}/{database}?user={username}&password={password}");
 ```
 
-For more information on JDBC connections, refer to the official [JDBC documentation](https://dev.mysql.com/doc/connector-j/8.0/en/)
+For more information on JDBC connections, see the [JDBC documentation](https://dev.mysql.com/doc/connector-j/8.0/en/)
 
 ### Connection parameters
 
-| Parameter Name | Description |
+| Parameter name | Description |
 | :---: | :----------------------------: |
-| `{username}` | [SQL users](/user-account-management.md) that need to connect to the TiDB cluster |
-| `{password}` | The password of the `SQL user` |
-| `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of TiDB nodes |
+| `{username}` | A [SQL user](/user-account-management.md) to connect to the TiDB cluster |
+| `{password}` | The password of the SQL user |
+| `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of a TiDB node |
 | `{port}` | Port that the TiDB node is listening on |
-| `{database}` | Name of the database (that already exists) |
+| `{database}` | Name of an existing database |
 
 ## Hibernate
 
-You can connect to TiDB using the [Hibernate ORM](https://hibernate.org/orm/). Set `hibernate.connection.url` in Hibernate configuration to a legal TiDB connection string.
+You can connect to TiDB using the [Hibernate ORM](https://hibernate.org/orm/). To do that, you need to set `hibernate.connection.url` in the Hibernate configuration file to a legal TiDB connection string.
 
-For example, if you use the `hibernate.cfg.xml` configuration file, then your configuration file should be:
+For example, if you use a `hibernate.cfg.xml` configuration file, set `hibernate.connection.url` as follows:
 
 {{< copyable "" >}}
 
@@ -70,7 +70,7 @@ For example, if you use the `hibernate.cfg.xml` configuration file, then your co
 </hibernate-configuration>
 ```
 
-Subsequently, the configuration file is read using the code to obtain the `SessionFactory` object:
+After the configuration is done, you can use the following command to read the configuration file and get the `SessionFactory` object:
 
 {{< copyable "" >}}
 
@@ -78,20 +78,20 @@ Subsequently, the configuration file is read using the code to obtain the `Sessi
 SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
 ```
 
-Here are a few points to note:
+Note the following:
 
-1. Since we are using the configuration file `hibernate.cfg.xml` is XML format, and the `&` character, which is a special character in XML, needs to be changed from `&` to `&amp;`. That means, our connection string `hibernate.connection.url` need changed from `jdbc:mysql://{host}:{port}/{database}?user={user}&password={password}` to `jdbc:mysql://{host}:{ port}/{database}?user={user}&amp;password={password}`.
-2. When you use Hibernate, we recommend that you use the `TiDB` dialect, which is `hibernate.dialect` set to `org.hibernate.dialect.TiDBDialect`.
-3. Hibernate supports TiDB dialects in version `6.0.0.Beta2` and above, so we recommend using `6.0.0.Beta2` and above for Hibernate
+- Because the `hibernate.cfg.xml` configuration file is in the XML format and `&` is a special character in XML, you need to change `&` to `&amp;` when configuring the file. For example, you need to change the connection string `hibernate.connection.url` from `jdbc:mysql://{host}:{port}/{database}?user={user}&password={password}` to `jdbc:mysql://{host}:{ port}/{database}?user={user}&amp;password={password}`.
+- It is recommended that you use the `TiDB` dialect by setting `hibernate.dialect` to `org.hibernate.dialect.TiDBDialect`.
+- Hibernate supports TiDB dialects starting from `6.0.0.Beta2`, so it is recommended that you use Hibernate `6.0.0.Beta2` or a later version to connect to TiDB.
 
-For more information about Hibernate connection parameters, see the [Hibernate documentation](https://hibernate.org/orm/documentation).
+For more information about Hibernate connection parameters, see [Hibernate documentation](https://hibernate.org/orm/documentation).
 
 ### Connection parameters
 
-| Parameter Name | Description |
+| Parameter name | Description |
 | :---: | :----------------------------: |
-| `{username}` | [SQL users](/user-account-management.md) that need to connect to the TiDB cluster |
-| `{password}` | The password of the `SQL user` |
-| `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of TiDB nodes |
+| `{username}` |  A [SQL user](/user-account-management.md) to connect to the TiDB cluster  |
+| `{password}` | The password of the SQL user |
+| `{host}` | [Host](https://en.wikipedia.org/wiki/Host_(network)) of a TiDB node |
 | `{port}` | Port that the TiDB node is listening on |
-| `{database}` | Name of the database (that already exists) |
+| `{database}` |  Name of an existing database |
