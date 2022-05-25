@@ -9,9 +9,9 @@ Avro is a data exchange format protocol defined by [Apache Avro™](https://avro
 
 ## Use Avro
 
-When using Message Queue (MQ) as downstream sink, you can specify Avro in `sink-uri`. TiCDC wraps Avro Messages with Event as the basic unit and sends TiDB DML events downstream. When Avro detects a schema change, it registers the latest schema with Schema Registry.
+When using Message Queue (MQ) as downstream sink, you can specify Avro in `sink-uri`. TiCDC wraps Avro Messages with events as the basic unit and sends TiDB DML events downstream. When Avro detects a schema change, it registers the latest schema with Schema Registry.
 
-Following is a configuration example when Avro is used:
+The following is a configuration example using Avro:
 
 {{< copyable "shell-regular" >}}
 
@@ -23,7 +23,7 @@ The value of `--schema-registry` supports the https protocol and `username:passw
 
 ## TiDB extension fields
 
-By default, Avro only includes data of the row where data changes in the DML event, excluding the type of data change or unique identifiers of TiDB-specific CommitTS  transactions. To address this issue, TiCDC introduces three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with three new fields:
+By default, Avro only includes data of the row where data changes in the DML event, excluding the type of data change or unique identifiers of TiDB-specific CommitTS  transactions. To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with these three fields:
 
 - `_tidb_op`: The DML type. "c" indicates insert and "u" indicates updates.
 - `_tidb_commit_ts`: The unique identifier of a transaction.
@@ -77,7 +77,7 @@ The `fields` in the key contains only primary key columns or unique index column
 
 The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns, not just the primary key columns.
 
-If you enable `enable-tidb-extension`, the data format of the Value will be as follows:
+After you enable `enable-tidb-extension`, the data format of the Value will be as follows:
 
 ```
 {
@@ -142,7 +142,6 @@ If one row can be NULL, the Column data format can be:
 - `{{ColumnName}}` indicates the column name.
 - `{{TIDB_TYPE}}` indicates the type in TiDB, which is not a one-to-one mapping with the SQL type.
 - `{{AVRO_TYPE}}` indicates the type in [avro spec](https://avro.apache.org/docs/current/spec.html).
-
 
 | SQL TYPE   | TIDB_TYPE | AVRO_TYPE | Description                                                                                                               |
 |------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------|
@@ -252,7 +251,7 @@ Avro does not generate DDL events downstream. It checks whether a schema changes
 
 Note that, even if the compatibility check is passed and the registration succeeds, Avro producers and consumers still need to perform an upgrade to ensure normal running of the system.
 
-Assume that the default compatibility policy of Confluent Schema Registry is `BACKWARD` and we add a non-empty column to the source table. In this condition, Avro will fail to generate a new schema and register it with Schema Registry due to compatibility issues. At this time, the changefeed is displayed as erroneous.
+Assume that the default compatibility policy of Confluent Schema Registry is `BACKWARD` and add a non-empty column to the source table. In this condition, Avro will fail to generate a new schema and register it with Schema Registry due to compatibility issues. At this time, the changefeed is displayed as erroneous.
 
 For more information about schemas, refer to [Schema Registry related materials](https://docs.confluent.io/platform/current/schema-registry/avro.html).
 
