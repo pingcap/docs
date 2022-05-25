@@ -1,6 +1,10 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
+<<<<<<< HEAD
+=======
+aliases: ['/docs/dev/','/docs/dev/adopters/','/tidb/dev/adopters']
+>>>>>>> c895704e1 (delete adopters.md (#8725))
 ---
 
 # TiDB Introduction
@@ -19,7 +23,6 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 - [TiDB Release Timeline](/releases/release-timeline.md)
 - [Compatibility with MySQL](/mysql-compatibility.md)
 - [Usage Limitations](/tidb-limitations.md)
-- [TiDB Adopters](/adopters.md)
 
 </NavColumn>
 
