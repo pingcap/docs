@@ -1,7 +1,7 @@
 ---
 title: TiDB Introduction
 summary: Learn how to quickly start a TiDB cluster.
-aliases: ['/docs/v3.1/']
+aliases: ['/docs/v3.1/','/tidb/v3.1/adopters']
 ---
 
 # TiDB Introduction
