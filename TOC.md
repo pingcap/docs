@@ -20,7 +20,7 @@
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
-- Application Develop
+- Develop Application
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
     - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
@@ -33,7 +33,7 @@
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-  - Database Schema Design
+  - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
     - [Create a Table](/develop/dev-guide-create-table.md)
@@ -64,7 +64,7 @@
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
     - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
     - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
-    - Others
+    - Other Optimization Methods
       - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
       - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
   - Troubleshoot
