@@ -21,15 +21,14 @@
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
 - Application Develop
+  - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
-  - Developer
-    - [Overview](/develop/dev-guide-overview.md)
-    - Example Applications
-      - [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+  - Example Applications
+    - [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
