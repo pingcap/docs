@@ -130,7 +130,7 @@ For limitations of views in TiDB, see [Limitations of Views](/views.md#limitatio
 ## Read More
 
 - [Views](/views.md)
-- [CREATE VIEW Statement](/common/sql-statements/sql-statement-create-view.md)
-- [DROP VIEW Statement](/common/sql-statements/sql-statement-drop-view.md)
+- [CREATE VIEW Statement](/sql-statements/sql-statement-create-view.md)
+- [DROP VIEW Statement](/sql-statements/sql-statement-drop-view.md)
 - [EXPLAIN Statements Using Views](/explain-views.md)
 - [TiFlink: Strongly Consistent Materialized Views Using TiKV and Flink](https://github.com/tiflink/tiflink)
