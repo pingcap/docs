@@ -87,7 +87,7 @@ Therefore, you can set the maximum connection size of the initial connection poo
 
 ### Tuning direction
 
-As you can see, a size calculated from the [formulas based on experience](#formula-based-on-experiences) is just a recommended base value. To get the optimal size on a specific machine, you need to try other values around the base value and test the performance.
+As you can see, a size calculated from the [formulas based on experience](#formulas-based-on-experience) is just a recommended base value. To get the optimal size on a specific machine, you need to try other values around the base value and test the performance.
 
 Here are some basic rules to help you get the optimal size:
 
