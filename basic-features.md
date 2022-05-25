@@ -109,7 +109,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 ## Partitioning
 
 | Partitioning                                             | 6.1 | 6.0| 5.4          |   5.3    |   5.2    |   5.1    |   5.0    | 4.0 |
-| ------------------------------------------------------------ | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :-----: |
+| ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :-----: |
 | [Range partitioning](/partitioned-table.md)                  | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |    Y    |
 | [Hash partitioning](/partitioned-table.md)                   | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |    Y    |
 | [List partitioning](/partitioned-table.md)                   | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |    N    |
