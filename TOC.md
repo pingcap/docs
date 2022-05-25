@@ -45,7 +45,7 @@
     - [Delete Data](/develop/dev-guide-delete-data.md)
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
-    - [Get Data from Single Table](/develop/dev-guide-get-data-from-single-table.md)
+    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
     - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
     - [Subqueries](/develop/dev-guide-use-subqueries.md)
     - [Paginate Results](/develop/dev-guide-paginate-results.md)
