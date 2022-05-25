@@ -60,7 +60,7 @@
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transaction](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
     - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
-    - [Transaction Troubleshoot](/develop/dev-guide-transaction-troubleshoot.md)
+    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
   - Optimize
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
     - [SQL Optimize](/develop/dev-guide-optimize-sql.md)
