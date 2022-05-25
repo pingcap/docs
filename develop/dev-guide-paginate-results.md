@@ -1,14 +1,15 @@
 ---
-title: Paginate Result
+title: Paginate Results
+summary: Introduce paginate result feature in TiDB.
 ---
 
-# Paginate Result
+# Paginate Results
 
-When the query results are large, we often want to return the desired part in a "paginated" manner.
+To page through a large query result, you can get your desired part in a "paginated" manner.
 
 ## Paginate query results
 
-In TiDB, we can use the `LIMIT` statement to implement the paging function, the regular paging statement is written as follows:
+In TiDB, you can paginate query results using the `LIMIT` statement. For example:
 
 {{< copyable "sql" >}}
 
@@ -16,14 +17,14 @@ In TiDB, we can use the `LIMIT` statement to implement the paging function, the 
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 ```
 
-`offset` indicates the starting number of records and `row_count` indicates the number of records per page. Besides, TiDB also supports `LIMIT row_count OFFSET offset` syntax.
+`offset` indicates the beginning number of records and `row_count` indicates the number of records per page. TiDB also supports `LIMIT row_count OFFSET offset` syntax.
 
-Unless explicitly requested not to use any sorting to randomize the data, you should specify how to sort the query results with the `ORDER BY` statement when using paged query statements.
+When pagination is used, it is recommended that you sort query results with the `ORDER BY` statement unless there is a need to display data randomly.
 
 <SimpleTab>
 <div label="SQL" href="page-sql">
 
-For example, in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, we want to return the latest book list to the user in a paginated form. With the `LIMIT 0, 10` statement, we can get the information about the books on page 1 of the list, with a maximum of 10 records per page. To get page 2, we can change it to `LIMIT 10, 10`, and so on.
+For example, to let users of the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application view the latest published books in a paginated manner, you can use the `LIMIT 0, 10` statement, which returns the first page of the result list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`, and so on.
 
 {{< copyable "sql" >}}
 
@@ -37,7 +38,7 @@ LIMIT 0, 10;
 </div>
 <div label="Java" href="page-java">
 
-In application development, the back-end program receives the  `page_number` parameter (which means the number of the page being requested) and the`page_size` parameter (which means how many records per page) from the front-end instead of `offset` parameter, so we need to do some conversions before making database queries.
+In application development, the backend program receives the `page_number` parameter (which means the number of the page being requested) and the `page_size` parameter (which controls how many records per page) from the frontend instead of the `offset` parameter. Therefore, some conversions needed to be done before querying.
 
 {{< copyable "java" >}}
 
@@ -75,16 +76,14 @@ public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLE
 
 ## Paging batches for single-field primary key tables
 
-Regular paged update SQL usually uses primary key or unique index for sorting, and then with `offset` in LIMIT syntax to split the pages by a fixed number of rows. Then the pages are wrapped into a separate transaction to achieve flexible paging updates. 
+Usually, you can write a pagination SQL statement using a primary key or unique index to sort results and the `offset` keyword in the `LIMIT` clause to split pages by a specified row count. Then the pages are wrapped into independent transactions to achieve flexible paging updates. However, the disadvantage is also obvious. As the primary key or unique index needs to be sorted, a larger offset consumes more computing resources, especially in the case of a large volume of data.
 
-However, the disadvantage is also obvious: because of the need to sort the primary key or unique index, the more backward pages will be involved in sorting more rows, especially when the volume of data involved in batch processing is large, it may take up too much computing resources.
-
-Below we will introduce a more efficient paging batching schema:
+The following introduces a more efficient paging batching method:
 
 <SimpleTab>
 <div label="SQL" href="offset-sql">
 
-First sort the data by primary key, then call the window function `row_number()` to generate a row number for each row of data, then call the aggregation function to group the row numbers according to the set page size, and finally calculate the minimum and maximum values of each page.
+First, sort the data by primary key and call the window function `row_number()` to generate a row number for each row. Then, call the aggregation function to group row numbers by the specified page size and calculate the minimum and maximum values of each page.
 
 {{< copyable "sql" >}}
 
@@ -102,7 +101,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +----------+------------+------------+-----------+
@@ -119,9 +118,9 @@ The query results are as follows:
 20 rows in set (0.01 sec)
 ```
 
-Next, just use the `WHERE id BETWEEN start_key AND end_key` statement to query the data of each slice. When modifying the data, you can also use the above calculated slice information to achieve efficient data update.
+Next, use the `WHERE id BETWEEN start_key AND end_key` statement to query the data of each slice. To update data more efficiently, you can use the above slice information when modifying the data.
 
-For example, if we want to delete the basic information of all the books on page 1, we can fill the `start_key` and `end_key` corresponding to page 1 of the above table into the SQL statement.
+To delete the basic information of all books on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
 
 {{< copyable "sql" >}}
 
@@ -135,7 +134,7 @@ ORDER BY id;
 </div>
 <div label="Java" href="offset-java">
 
-In the Java language, we can define a `PageMeta` class to store page meta information.
+In Java, define a `PageMeta` class to store page meta information.
 
 {{< copyable "java" >}}
 
@@ -151,7 +150,7 @@ public class PageMeta<K> {
 }
 ```
 
-We define a `getPageMetaList()` method to get the page meta information list, and then define a method `deleteBooksByPageMeta()` that can delete data in batches according to the page meta information.
+Define a `getPageMetaList()` method to get the page meta information list, and then define a `deleteBooksByPageMeta()` method to delete data in batches according to the page meta information.
 
 {{< copyable "java" >}}
 
@@ -197,7 +196,7 @@ public class BookDAO {
 }
 ```
 
-If we wanted to delete the data on page 1, we could write:
+The following statement is to delete the data on page 1:
 
 {{< copyable "java" >}}
 
@@ -208,7 +207,7 @@ if (pageMetaList.size() > 0) {
 }
 ```
 
-If we want to delete all book data in batches by paging, we can write:
+The following statement is to delete all book data in batches by paging:
 
 {{< copyable "java" >}}
 
@@ -226,13 +225,13 @@ pageMetaList.forEach((pageMeta) -> {
 </div>
 </SimpleTab>
 
-The improved scheme significantly improves the efficiency of batch processing by avoiding the performance loss caused by frequent data sorting operations.
+This method significantly improves the efficiency of batch processing by avoiding wasting computing resources caused by frequent data sorting operations.
 
-## Paging batch for composite primary key table
+## Paging batches for composite primary key tables
 
 ### Non-clustered index table
 
-For non-clustered index tables (also known as "non-index-organized tables"), the hidden field `_tidb_rowid` can be used as a pagination key, and the pagination method is the same as that described in the single-column primary key table.
+For non-clustered index tables (also known as "non-index-organized tables"), the internal field `_tidb_rowid` can be used as a pagination key, and the pagination method is the same as that of single-field primary key tables.
 
 > **Tips:**
 >
@@ -256,7 +255,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +----------+-----------+---------+-----------+
@@ -278,13 +277,13 @@ The query results are as follows:
 
 ### Clustered index table
 
-For clustered index tables (also known as "index-organized tables"), we can use the `concat` function to concatenate the values ​​of multiple columns as a key, and then use the window function to get the paging information.
+For clustered index tables (also known as "index-organized tables"), you can use the `concat` function to concatenate values of multiple columns as a key, and then use a window function to query the paging information.
 
-It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, in order to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation functions. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to complete it.
+It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation function. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to pad it.
 
-For example, we want to do a paged batch of the data in the `ratings` table.
+For example, you can implement a paging batch for the data in the `ratings` table as follows:
 
-We can first create the meta information table by using the following SQL statement. Because the `book_id` and `user_id` columns that make up the key are both of type `bigint`, the conversion to string is not of equal width, so we need to use the `LPAD` function to fill in the length with `0` if it is not long enough according to the maximum number of bits 19 of type `bigint`.
+Create the meta information table by using the following statement. As the key concatenated by `book_id` and `user_id`, which are `bigint` types, is unable to convert to the same length, the `LPAD` function is used to pad the length with `0` according to the maximum bits 19 of `bigint`.
 
 {{< copyable "sql" >}}
 
@@ -304,7 +303,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The query results are as follows:
+The result is as follows:
 
 ```
 +----------+-------------------------------------------+-------------------------------------------+-----------+
@@ -322,7 +321,7 @@ The query results are as follows:
 30 rows in set (0.28 sec)
 ```
 
-If we want to delete all rating records on page 1, we can fill in the `start_key` and `end_key` corresponding to page 1 of the above table into the SQL statement.
+To delete all rating records on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
 
 {{< copyable "sql" >}}
 
