@@ -33,21 +33,21 @@
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
-    - [Connection Pools and Connection Parameter](/develop/dev-guide-connection-parameters.md)
+    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
   - Database Schema Design
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
     - [Create a Table](/develop/dev-guide-create-table.md)
-    - [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
+    - [Create Secondary a Index](/develop/dev-guide-create-secondary-indexes.md)
   - Write Data
     - [Insert Data](/develop/dev-guide-insert-data.md)
-    - [Update Data](/develop/dev-guide-unstable-result-set.md)
+    - [Update Data](/develop/dev-guide-update-data.md)
     - [Delete Data](/develop/dev-guide-delete-data.md)
-    - [Prepared Statement](/develop/dev-guide-prepared-statement.md)
+    - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
-    - [Get Data from Single Table](/develop/dev-guide-get-data-from-single-table.md)
+    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
     - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
-    - [Subqueries](/develop/dev-guide-use-subqueries.md)
+    - [Subquery](/develop/dev-guide-use-subqueries.md)
     - [Paginate Results](/develop/dev-guide-paginate-results.md)
     - [Views](/develop/dev-guide-use-views.md)
     - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
@@ -60,13 +60,13 @@
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transaction](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
     - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
-    - [Transaction Troubleshoot](/develop/dev-guide-transaction-troubleshoot.md)
+    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
   - Optimize
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
-    - [SQL Optimize](/develop/dev-guide-optimize-sql.md)
+    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
     - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
     - Others
-      - [Implicit Type Conversion](/develop/dev-guide-implicit-type-conversion.md)
+      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
       - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
   - Troubleshoot
     - [Overview](/develop/dev-guide-troubleshoot-overview.md)
@@ -77,8 +77,8 @@
     - SQL
       - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
     - Guidelines
-      - [Object Naming Guidelines](/develop/dev-guide-object-naming-guidelines.md)
-      - [SQL Development Specification](/develop/dev-guide-sql-development-specification.md)
+      - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
+      - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
