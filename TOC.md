@@ -12,7 +12,6 @@
     - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.0-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
-  - [TiDB Adopters](/adopters.md)
   - [Credits](/credits.md)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
@@ -613,6 +612,7 @@
       - [Bit Functions and Operators](/functions-and-operators/bit-functions-and-operators.md)
       - [Cast Functions and Operators](/functions-and-operators/cast-functions-and-operators.md)
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
+      - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
@@ -764,13 +764,14 @@
   - [Cluster Management FAQs](/faq/manage-cluster-faq.md)
   - [High Availability FAQs](/faq/high-availability-faq.md)
   - [High Reliability FAQs](/faq/high-reliability-faq.md)
-- [Glossary](/glossary.md)
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - [TiDB Versioning](/releases/versioning.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
     - [5.3.1](/releases/release-5.3.1.md)
@@ -916,3 +917,4 @@
     - [RC3](/releases/release-rc.3.md)
     - [RC2](/releases/release-rc.2.md)
     - [RC1](/releases/release-rc.1.md)
+- [Glossary](/glossary.md)
