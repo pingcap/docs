@@ -18,7 +18,7 @@ Before creating a database, do the following:
 
 [Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB contain **tables**, **views**, **sequences**, and other objects.
 
-## Create a database
+## Create databases
 
 To create a database, you can use the `CREATE DATABASE` statement.
 
