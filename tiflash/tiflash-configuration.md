@@ -3,8 +3,8 @@ title: Configure TiFlash
 summary: Learn how to configure TiFlash.
 aliases:
 [
-    '/docs/dev/tiflash/tiflash-configuration/',
-    '/docs/dev/reference/tiflash/configuration/',
+    "/docs/dev/tiflash/tiflash-configuration/",
+    "/docs/dev/reference/tiflash/configuration/",
 ]
 ---
 
