@@ -47,7 +47,7 @@
   - Read Data
     - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
     - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
-    - [Subqueries](/develop/dev-guide-use-subqueries.md)
+    - [Subquery](/develop/dev-guide-use-subqueries.md)
     - [Paginate Results](/develop/dev-guide-paginate-results.md)
     - [Views](/develop/dev-guide-use-views.md)
     - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
