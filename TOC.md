@@ -13,7 +13,6 @@
     - [Interaction Test on Online Workloads and `ADD INDEX`](/benchmark/online-workloads-and-add-index-operations.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
-  - [TiDB Adopters](/adopters.md)
   - [Credits](/credits.md)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
