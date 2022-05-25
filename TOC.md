@@ -41,7 +41,7 @@
     - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
   - Write Data
     - [Insert Data](/develop/dev-guide-insert-data.md)
-    - [Update Data](/develop/dev-guide-unstable-result-set.md)
+    - [Update Data](/develop/dev-guide-update-data.md)
     - [Delete Data](/develop/dev-guide-delete-data.md)
     - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
   - Read Data
