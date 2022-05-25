@@ -18,6 +18,7 @@ For details about the usage and restrictions, see [Non-transactional DML stateme
 ```ebnf+diagram
 NonTransactionalDeleteStmt ::=
     'BATCH' ( 'ON' ColumnName )? 'LIMIT' NUM DryRunOptions? DeleteFromStmt
+
 DryRunOptions ::=
     'DRY' 'RUN' 'QUERY'?
 ```
