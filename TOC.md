@@ -64,7 +64,7 @@
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
     - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
     - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
-    - Others
+    - Other Optimization Methods
       - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
       - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
   - Troubleshoot
