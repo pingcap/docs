@@ -136,7 +136,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 In Java, you can use the same SQL to handle data query requests with dynamic parameters.
 
-This can be done by splicing parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the  application.
+This can be done by concatenating parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
 
 To deal with such queries, use a [prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
 
