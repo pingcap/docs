@@ -7,7 +7,7 @@ summary: This document describes how to query data from a single table in a data
 
 # Query data from a single table
 
-This document describes how to use SQL and various programming languages to query data from a single table in a database. 
+This document describes how to use SQL and various programming languages to query data from a single table in a database.
 
 ## Before you begin
 
@@ -16,7 +16,7 @@ The following content will take the [Bookshop](/develop/dev-guide-bookshop-schem
 Before querying data, make sure that you have completed the following steps:
 
 1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
-2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-data).
+2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
 3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
 
 ## Execute a simple query

@@ -9,11 +9,11 @@ HTAP stands for Hybrid Transactional and Analytical Processing. Traditionally, d
 
 TiDB uses TiKV, a row-based storage engine, for Online Transactional Processing (OLTP), and TiFlash, a columnar storage engine, for Online Analytical Processing (OLAP). The row-based storage engine and the columnar storage engine co-exist for HTAP. Both storage engines can replicate data automatically and keep strong consistency. The row-based storage engine optimizes OLTP performance, and the columnar storage engine optimizes OLAP performance.
 
-The [Create a table](/develop/dev-guide-create-table.md#using-htap-capabilities) section introduces how to enable the HTAP capability of TiDB. The following describes how to use HTAP to analyze data faster.
+The [Create a table](/develop/dev-guide-create-table.md#use-htap-capabilities) section introduces how to enable the HTAP capability of TiDB. The following describes how to use HTAP to analyze data faster.
 
 ## Data preparation
 
-Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#method-1-through-tiup-demo-command-line). For example:
+Before starting, you can import more sample data [via the `tiup demo` command](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo). For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -21,7 +21,7 @@ Before starting, you can import more sample data [via the `tiup demo` command](/
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#method-2-through-the-tidb-cloud-import-function) to import the pre-prepared sample data.
+Or you can [use the Import function of TiDB Cloud](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import) to import the pre-prepared sample data.
 
 ## Window functions
 
@@ -152,7 +152,7 @@ When using TiDB for real-time online analytical processing in hybrid load scenar
 
 ### Create TiFlash replicas
 
-TiDB uses the row-based storage engine, TiKV, by default. To use the columnar storage engine, TiFlash, see [Enable HTAP capability](/develop/dev-guide-create-table.md#using-htap-capabilities). Before querying data through TiFlash, you need to create TiFlash replicas for `books` and `orders` tables using the following statement:
+TiDB uses the row-based storage engine, TiKV, by default. To use the columnar storage engine, TiFlash, see [Enable HTAP capability](/develop/dev-guide-create-table.md#use-htap-capabilities). Before querying data through TiFlash, you need to create TiFlash replicas for `books` and `orders` tables using the following statement:
 
 {{< copyable "sql" >}}
 
