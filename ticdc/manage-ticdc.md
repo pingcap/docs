@@ -602,7 +602,7 @@ protocol = "canal-json"
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
 
-## Customize the dispatch rules for Topic and Partition of Kafka Sink
+## Customize the rules for Topic and Partition dispatchers of Kafka Sink
 
 ### Matcher rules
 
@@ -613,7 +613,7 @@ In the example of the previous section:
 - For tables that do not match any matcher rule, the corresponding data change events are sent to the default topic specified in --sink-uri. For example, table test10.aa is sent to the default topic.
 - For tables that match the matcher rule but do not specify a topic dispatcher, the corresponding data changes are sent to the default topic specified in --sink-uri. For example, table test6.aa is sent to the default topic.
 
-### Topic dispatcher
+### Topic dispatchers
 
 You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies.
 
@@ -640,11 +640,11 @@ Some examples:
 
 ### Dispatch DDL events
 
-#### Schema-level DDL
+#### Schema-level DDLs
 
 DDLs such as `create database` and `drop database` that are not related to a specific table are called schema-level DDLs. The events corresponding to schema-level DDLs are sent to the default topic specified in `-sink-uri`.
 
-#### Table-level DDL
+#### Table-level DDLs
 
 DDLs such as `alter table` and `create table` that are related to a specific table are called table-level DDLs. The events corresponding to table-level DDLs are sent to the corresponding topic according to dispatcher configurations.
 
@@ -653,9 +653,9 @@ For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{tabl
 - If a single table is involved in the DDL event, the DDL event is sent to the corresponding topic as is. For example, for the DDL event `drop table test.table1`, the event is sent to the topic named `test_table1`.
 - If multiple tables are involved in the DDL event (`rename table` / `drop table` / `drop view` may involve multiple tables), the DDL event is split into multiple events and sent to the corresponding topics. For example, for the DDL event `rename table test.table1 to test.table10, test.table2 to test.table20`, the event `rename table test.table1 to test.table10` is sent to the topic named `test_table1` and the event `rename table test.table2 to test.table20` is sent to the topic named `test.table2`.
 
-### Partition dispatcher
+### Partition dispatchers
 
-You can use  partition = "xxx" to specify the partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
+You can use partition = "xxx" to specify a partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
 
 - default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the index-value mode.
 - ts: Use the commitTs of the row change to hash and dispatch events.
