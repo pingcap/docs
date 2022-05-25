@@ -26,7 +26,7 @@ For detailed steps, see [Create a free cluster](/develop/dev-guide-build-cluster
 
 ### Use a local cluster
 
-For more information about how to use a local cluster, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
 ## Step 2. Get the code
 
