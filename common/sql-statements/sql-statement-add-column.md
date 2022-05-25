@@ -89,9 +89,13 @@ mysql> SELECT * FROM t1;
 * Adding multiple columns at the same time in a statement is currently not supported.
 * Adding a new column and setting it to the `PRIMARY KEY` is not supported.
 * Adding a new column and setting it to `AUTO_INCREMENT` is not supported.
+
+<!--
 * There are limitations on adding generated columns, refer to: [generated column limitations](/generated-columns.md#limitations).
 
 ## See also
 
 * [ADD INDEX](/common/sql-statements/sql-statement-add-index.md)
 * [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md)
+
+-->

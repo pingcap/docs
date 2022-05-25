@@ -129,6 +129,8 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
 * Descending indexes are not supported (similar to MySQL 5.7).
 * Adding multiple indexes at the same time is currently not supported.
+
+<!--
 * Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
 
 ## See also
@@ -142,3 +144,5 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 * [ADD COLUMN](/common/sql-statements/sql-statement-add-column.md)
 * [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md)
 * [EXPLAIN](/common/sql-statements/sql-statement-explain.md)
+
+-->
