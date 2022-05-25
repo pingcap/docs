@@ -5,7 +5,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a TiDB Cluster in TiDB cloud (DevTier)
+# Build a TiDB cluster in TiDB Cloud (DevTier)
 
 This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://en.pingcap.com/tidb-cloud) to create a free TiDB cluster, connect to it, and run a sample application on it.
 
