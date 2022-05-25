@@ -1352,78 +1352,21 @@ mysql> explain select * from t1 where id < 150;
 
 From the above query results, you can see that the `Union` operator in the execution plan disappears while the partition pruning still takes effect and the execution plan only accesses `p0` and `p1`.
 
-`dynamic` mode makes execution plans simpler and clearer. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also solves two problems that cannot be solved in `static` mode:
+`dynamic` mode makes execution plans simpler and clearer. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also allows execution plans with IndexJoin which cannot be used in `static` mode. (See examples below)
 
-+ Plan Cache cannot be used. (See example 1 and 2) (Currently disabled, see https://github.com/pingcap/tidb/issues/33031)
-+ Execution plans with IndexJoin cannot be used. (See example 3 and 4) (TODO: Verify if this is fixed yet or not?)
-
-**Example 1**：In the following example, the Plan Cache feature is enabled in the configuration file and the same query is executed twice in `static` mode:
+**Example 1**: In the following example, a query is performed in `static` mode using the execution plan with IndexJoin:
 
 {{< copyable "sql" >}}
 
 ```sql
-mysql> set @a=150;
-Query OK, 0 rows affected (0.00 sec)
+mysql> create table t1 (id int, age int, key(id)) partition by range(id)
+    -> (partition p0 values less than (100),
+    ->  partition p1 values less than (200),
+    ->  partition p2 values less than (300),
+    ->  partition p3 values less than (400));
+Query OK, 0 rows affected (0,08 sec)
 
-mysql> set @@tidb_partition_prune_mode = 'static';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> prepare stmt from 'select * from t1 where id < ?';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> execute stmt using @a;
-Empty set (0.00 sec)
-
-mysql> execute stmt using @a;
-Empty set (0.00 sec)
-
--- In static mode, when the same query is executed twice, the cache cannot be hit at the second time.
-mysql> select @@last_plan_from_cache;
-+------------------------+
-| @@last_plan_from_cache |
-+------------------------+
-|                      0 |
-+------------------------+
-1 row in set (0.00 sec)
-```
-
-The `last_plan_from_cache` variable can show whether the last query hits the Plan Cache or not. From example 1, you can see that in `static` mode, even if the same query is executed multiple times on the partitioned table, the Plan Cache is not hit.
-
-**Example 2**: In the following example, the same operations are performed in `dynamic` mode as done in example 1:
-
-{{< copyable "sql" >}}
-
-```sql
-mysql> set @@tidb_partition_prune_mode = 'dynamic';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> prepare stmt from 'select * from t1 where id < ?';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> execute stmt using @a;
-Empty set (0.00 sec)
-
-mysql> execute stmt using @a;
-Empty set (0.00 sec)
-
--- In dynamic mode, the cache can be hit at the second time.
-mysql> select @@last_plan_from_cache;
-+------------------------+
-| @@last_plan_from_cache |
-+------------------------+
-|                      1 |
-+------------------------+
-1 row in set (0.00 sec)
-```
-
-From example 2, you can see that in `dynamic` mode, querying the partitioned table hits the Plan Cache.
-
-**Example 3**: In the following example, a query is performed in `static` mode using the execution plan with IndexJoin:
-
-{{< copyable "sql" >}}
-
-```sql
-mysql> create table t2(id int, code int);
+mysql> create table t2 (id int, code int);
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> set @@tidb_partition_prune_mode = 'static';
@@ -1452,11 +1395,19 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 |       └─TableFullScan_34       | 10000.00 | cop[tikv] | table:t1, partition:p3 | keep order:false, stats:pseudo                 |
 +--------------------------------+----------+-----------+------------------------+------------------------------------------------+
 17 rows in set, 1 warning (0.00 sec)
+
+mysql> show warnings;
++---------+------+------------------------------------------------------------------------------------+
+| Level   | Code | Message                                                                            |
++---------+------+------------------------------------------------------------------------------------+
+| Warning | 1815 | Optimizer Hint /*+ INL_JOIN(t1, t2) */ or /*+ TIDB_INLJ(t1, t2) */ is inapplicable |
++---------+------+------------------------------------------------------------------------------------+
+1 row in set (0,00 sec)
 ```
 
-From example 3, you can see that even if the `TIDB_INLJ` hint is used, the query on the partitioned table cannot select the execution plan with IndexJoin.
+From example 1, you can see that even if the `TIDB_INLJ` hint is used, the query on the partitioned table cannot select the execution plan with IndexJoin.
 
-**Example 4**: In the following example, the query is performed in `dynamic` mode using the execution plan with IndexJoin:
+**Example 2**: In the following example, the query is performed in `dynamic` mode using the execution plan with IndexJoin:
 
 {{< copyable "sql" >}}
 
@@ -1480,4 +1431,4 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 8 rows in set (0.00 sec)
 ```
 
-From example 4, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
+From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
