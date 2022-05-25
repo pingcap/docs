@@ -10,10 +10,17 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "12"
+          node-version: "16"
       - name: Verify duplicated file names
         run: ./scripts/verify-duplicated-file-name.sh
       - name: Verify internal links
         run: ./scripts/verify-links.sh
       - name: Verify internal link anchors
         run: ./scripts/verify-link-anchors.sh
+      - name: Verify internal links - cloud only
+        run: |
+          npm i
+          node ./scripts/filterCloudDoc.js
+          cp ./scripts/verify-links.sh ./tmp/verify-links.sh
+          cd tmp
+          ./verify-links.sh
