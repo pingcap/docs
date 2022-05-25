@@ -33,7 +33,7 @@
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
-    - [Connection Pools and Connection Parameter](/develop/dev-guide-connection-parameters.md)
+    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
   - Database Schema Design
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
