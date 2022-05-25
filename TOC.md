@@ -66,7 +66,7 @@
     - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
     - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
     - Others
-      - [Implicit Type Conversion](/develop/dev-guide-implicit-type-conversion.md)
+      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
       - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
   - Troubleshoot
     - [Overview](/develop/dev-guide-troubleshoot-overview.md)
