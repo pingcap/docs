@@ -5,7 +5,7 @@ summary: A brief introduction to TiDB's CURD SQL.
 
 # CRUD SQL in TiDB
 
-This page will briefly introduce how to use TiDB's CURD SQL.
+This document briefly introduces how to use TiDB's CURD SQL.
 
 ## Before you start
 
@@ -15,9 +15,9 @@ Please make sure you are connected to a TiDB cluster. If not, refer to [Build a 
 
 > **Note:**
 >
-> This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md) from the TiDB documentation, so you can go directly to this document for more comprehensive, in-depth information on basic SQL operations.
+> This document references and simplifies [Explore SQL with TiDB](/basic-sql-operations.md). For more details, see [Explore SQL with TiDB](/basic-sql-operations.md).
 
-TiDB is compatible with MySQL, you can use MySQL statements directly in most the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
+TiDB is compatible with MySQL, you can use MySQL statements directly in most cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 
 To experiment with SQL and test out TiDB compatibility with MySQL queries, you can [run TiDB directly in your web browser without installing it](https://tour.tidb.io/). You can also first deploy a TiDB cluster and then run SQL statements in it.
 
@@ -35,9 +35,9 @@ SQL is divided into the following 4 types according to their functions:
 
 - **DCL (Data Control Language)**: It is used to define access privileges and security levels.
 
-In this document, we mainly introduce DML and DQL, the Data Manipulation Language and the Data Query Language. The rest can be found in the [Explore SQL with TiDB](/basic-sql-operations.md) or the [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/) for more information.
+The following mainly introduces DML and DQL. For more information about DDL and DCL, see [Explore SQL with TiDB](/basic-sql-operations.md) or [TiDB SQL syntax detailed explanation](https://pingcap.github.io/sqlgram/).
 
-## DML (Data Manipulation Language)
+## Data Manipulation Language
 
 Common DML features are adding, modifying, and deleting table records. The corresponding commands are `INSERT`, `UPDATE`, and `DELETE`.
 
@@ -77,7 +77,7 @@ DELETE FROM person WHERE id=2;
 >
 > The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
 
-## DQL (Data Query Language)
+## Data Query Language
 
 DQL is used to retrieve the desired data rows from a table or multiple tables.
 
@@ -97,7 +97,7 @@ To query a specific column, add the column name after the `SELECT` keyword:
 SELECT name FROM person;
 ```
 
-Running results:
+The result is as follows:
 
 ```
 +------+
