@@ -63,7 +63,7 @@
     - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
   - Optimize
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
-    - [SQL Optimize](/develop/dev-guide-optimize-sql.md)
+    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
     - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
     - Others
       - [Implicit Type Conversion](/develop/dev-guide-implicit-type-conversion.md)
