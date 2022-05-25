@@ -13,7 +13,7 @@ After a write occurs, TiDB automatically performs data compaction at the backend
 
 The execution of this statement does not block the existing SQL statements, affect such TiDB functions as transactions, DDL, and GC, or change data obtained by executing SQL statements. However, executing this statement may take up some IO and CPU resources, which might result in business latency.
 
-The execution finishes with execution result returned only when all copies of a table are compacted. During the execution process, you can safely interrupt the compaction for the current table by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or automatic compactions.
+The execution finishes with execution result returned only when all replicas of a table are compacted. During the execution process, you can safely interrupt the compaction for the current table by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or automatic compactions.
 
 Data compaction is currently supported only for TiFlash, not for TiKV.
 
@@ -67,7 +67,7 @@ The `ALTER TABLE ... COMPACT` syntax is an extension to the standard SQL syntax 
 
 ## TiDB Binlog and TiCDC compatibility
 
-The `ALTER TABLE ... COMPACT` statements does not result in logical data changes and are therefore not replicated downstream by TiDB Binlog and TiCDC.
+The `ALTER TABLE ... COMPACT` statement does not result in logical data changes and are therefore not replicated downstream by TiDB Binlog or TiCDC.
 
 ## See also
 
