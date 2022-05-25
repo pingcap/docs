@@ -482,7 +482,6 @@
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
         - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
-      - [`ALTER TABLE ALGORITHM`](/sql-statements/sql-statement-alter-table-algorithm.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
