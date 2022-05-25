@@ -1,30 +1,28 @@
 ---
 title: Create a Database
-summary: Methods, rules to be followed and examples when creating a database.
+summary: Learn steps, rules, and examples to create a database.
 ---
 
 # Create a Database
 
-In this section, we will begin to cover how to create databases using SQL and various programming languages, and the rules to follow when creating databases. In this section, we will cover the database creation part of TiDB around the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
-
-> **Note:**
->
-> The `CREATE DATABASE` statement is only briefly described here; for detailed reference documentation (including additional examples), see the [CREATE DATABASE](https://docs.pingcap.com/zh/tidb/stable/sql-statement-create-database) documentation.
+This document describes how to create a database using SQL and various programming languages and lists the rules of database creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of database creation.
 
 ## Before you start
 
-Before reading this page, you need to prepare the following:
+Before creating a database, do the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cluster in TiDB Cloud Developer Tier](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 
 ## What is database
 
-[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB can contain **tables**, **views**, **sequences**, and other objects.
+[Database](/develop/dev-guide-schema-design-overview.md) objects in TiDB contain **tables**, **views**, **sequences**, and other objects.
 
-## Create Database
+## Create databases
 
-You can use the `CREATE DATABASE` statement to create a database.
+To create a database, you can use the `CREATE DATABASE` statement.
+
+For example, to create a database named `bookshop` if it does not exist, use the following statement:
 
 {{< copyable "sql" >}}
 
@@ -32,9 +30,9 @@ You can use the `CREATE DATABASE` statement to create a database.
 CREATE DATABASE IF NOT EXISTS `bookshop`;
 ```
 
-This statement will create a database named `bookshop` (if it does not already exist).
+For more information and examples of the `CREATE DATABASE` statement, see the [`CREATE DATABASE`](/common/sql-statements/sql-statement-create-database.md) document.
 
-To execute the library build statement as the **root user**, run the following command:
+To execute the library build statement as the `root` user, run the following command:
 
 {{< copyable "shell-regular" >}}
 
@@ -47,7 +45,11 @@ mysql
     -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
-To view the databases in the cluster, execute a `SHOW DATABASES` statement.
+## View databases
+
+To view the databases in a cluster, use the [`SHOW DATABASES`](/common/sql-statements/sql-statement-show-databases.md) statement.
+
+For example:
 
 {{< copyable "shell-regular" >}}
 
@@ -59,6 +61,8 @@ mysql
     -p {password} \
     -e "SHOW DATABASES;"
 ```
+
+The following is an example output:
 
 ```
 +--------------------+
@@ -72,15 +76,13 @@ mysql
 +--------------------+
 ```
 
-## Rules to follow when creating a database
+## Rules in database creation
 
-- Follow the [Database Naming Guidelines](/develop/dev-guide-object-naming-guidelines.md) and give your database a meaningful name.
-- The `test` database is a default database provided by TiDB. Try not to use it in a production environment if you don't have to. You can create the database yourself with the `CREATE DATABASE` statement and [change the current database](/common/sql-statements/sql-statement-use.md) with the `USE {databasename};` statement in the SQL session.
-- Create the **database**, **roles**, **users**, etc. using the root user. and grant only the necessary privileges.
-- As a general rule, we do not recommend using Driver, ORM to define and change the database schema. Instead, please use **MySQL command-line client** or other **MySQL GUI client** of your choice to do so.
+- Follow the [Database Naming Conventions](/develop/dev-guide-object-naming-guidelines.md) and name your database meaningfully.
+- TiDB comes with a default database named `test`. However, it is not recommended that you use it in a production environment if you do not have to. You can create your own database using the `CREATE DATABASE` statement and change the current database using the [`USE {databasename};`](/common/sql-statements/sql-statement-use.md) statement in a SQL session.
+- Use the `root` user to create objects such as database, roles, and users. Grant only the necessary privileges to roles and users.
+- As a best practice, it is recommended that you use a **MySQL command-line client** or a **MySQL GUI client** instead of a driver or ORM to execute database schema changes.
 
-## One more step
+## Next step
 
-At this point, you have finished preparing the `bookshop` database and can add **tables** to it.
-
-You can continue reading [the create a table](/develop/dev-guide-create-table.md) for guidance.
+After creating a database, you can add **tables** to it. For more information, see [Create a Table](/develop/dev-guide-create-table.md).

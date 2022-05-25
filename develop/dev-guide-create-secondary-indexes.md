@@ -1,28 +1,30 @@
 ---
-title: Create Secondary Indexes
-summary: Methods, rules to follow and examples when creating secondary indexes.
+title: Create a Secondary Index
+summary: Learn steps, rules, and examples to create a secondary index.
 ---
 
-# Create Secondary Indexes
+# Create a Secondary Index
 
-In this section, we will begin to describe how to create secondary indexes using SQL and various programming languages and the rules to follow when creating secondary indexes. In this section we will cover the secondary index creation part of TiDB around the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application.
+This document describes how to create a secondary index using SQL and various programming languages and lists the rules of index creation. In this document, the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application is taken as an example to walk you through the steps of secondary index creation.
 
 ## Before you start
 
-Before reading this page, you need to prepare the following:
+Before creating a secondary index, do the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cluster in TiDB Cloud Developer Tier](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
-- [Create a Table](/develop/dev-guide-create-table.md)。
+- [Create a Table](/develop/dev-guide-create-table.md).
 
 ## What is secondary index
 
-Secondary index is a logical object in the TiDB cluster, you can simply think of it as the sorting of data, TiDB uses this orderliness to speed up the query.TiDB's operation of creating a secondary index is online and does not block data reads and writes in the table.TiDB creates references to rows in the table and sorts them by the selected columns. Instead of sorting the data in the table itself. More information can be found in [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index). Secondary indexes can be [Create a secondary index while creating a new table](#create-a-secondary-index-while-creating-a-new-table) or [Adding a secondary index to an existing table](#adding-a-secondary-index-to-an-existing-table).
+A secondary index is a logical object in a TiDB cluster. You can simply regard it as a sorting type of data that TiDB uses to improve the query performance. In TiDB, creating a secondary index is an online operation, which does not block any data read and write operations on a table. For each index, TiDB creates references for each row in a table and sorts the references by selected columns instead of by data directly. For more information, see [Secondary Indexes](/best-practices/tidb-best-practices.md#secondary-index).
 
-## Adding a secondary index to an existing table
+In TiDB, you can either [add a secondary index to an existing table](#add-a-secondary-index-to-an-existing-table) or [create a secondary index when creating a new table](#create-a-secondary-index-when-creating-a-new-table).
 
-If you need to add a secondary index to an existing table, you can use the [CREATE INDEX](/common/sql-statements/sql-statement-create-index.md) statement. In TiDB, `CREATE INDEX` is an online operation, it indicated the statement does not block data reads or writes to the table. Secondary indexes are typically created in the following form.
+## Add a secondary index to an existing table
+
+To add a secondary index to an existing table, you can use the [CREATE INDEX](/common/sql-statements/sql-statement-create-index.md) statement as follows:
 
 {{< copyable "sql" >}}
 
@@ -30,15 +32,15 @@ If you need to add a secondary index to an existing table, you can use the [CREA
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
 
-**Parameter Description**
+Parameter description:
 
-- `{index_name}`: Secondary Index Name.
-- `{table_name}`: Table name.
-- `{column_names}`: List the names of the columns to be indexed, separated by semi-colon commas.
+- `{index_name}`: the name of a secondary index.
+- `{table_name}`: the table name.
+- `{column_names}`: the names of the columns to be indexed, separated by semi-colon commas.
 
-## Create a secondary index while creating a new table
+## Create a secondary index when creating a new table
 
-If you want to create a secondary index at the same time as the table, use a clause containing the KEY keyword at the end of [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) to create the secondary index:
+To create a secondary index at the same time as table creation, you can add a clause containing the `KEY` keyword to the end of the [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) statement:
 
 {{< copyable "sql" >}}
 
@@ -46,27 +48,31 @@ If you want to create a secondary index at the same time as the table, use a cla
 KEY `{index_name}` (`{column_names}`)
 ```
 
-**Parameter Description**
+Parameter description:
 
-- `{index_name}`: Secondary Index Name.
-- `{column_names}`: List the names of the columns to be indexed, separated by semi-colon commas.
+- `{index_name}`: the name of a secondary index.
+- `{column_names}`: the names of the columns to be indexed, separated by semi-colon commas.
 
-## Rules to follow when creating secondary indexes
+## Rules in secondary index creation
 
-Please refer to the [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md).
+See [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md).
 
 ## Example
 
-Suppose you want the `bookshop` application to have the ability to **search for all books published in a given year**. Our `books` table looks like this:
+Suppose you want the `bookshop` application to support **searching for all books published in a given year**.
 
-| Field name   | Type          | Explain                                                          |
+The fields in the `books` table are as follows:
+
+| Field name   | Type          | Field description                                                          |
 |--------------|---------------|------------------------------------------------------------------|
 | id           | bigint(20)    | Unique ID of the book                                            |
 | title        | varchar(100)  | Book title                                                       |
-| type         | enum          | Types of books (eg: magazines / animation / teaching aids, etc.) |
+| type         | enum          | Types of books (for example, magazines, animations, and teaching aids) |
 | stock        | bigint(20)    | Stock                                                            |
 | price        | decimal(15,2) | Price                                                            |
-| published_at | datetime      | Date of publish                                                  |
+| published_at | datetime      | Date of publishing                                                  |
+
+The `books` table is created using the following SQL statement:
 
 {{< copyable "sql" >}}
 
@@ -82,7 +88,7 @@ CREATE TABLE `bookshop`.`books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-Then we need to write the SQL for **search for all books published in a given year**, using 2022 as an example, as follows:
+To support the searching by year feature, you need to write a SQL statement to **search for all books published in a given year**. Taking 2022 as an example, write a SQL statement as follows:
 
 {{< copyable "sql" >}}
 
@@ -90,7 +96,7 @@ Then we need to write the SQL for **search for all books published in a given ye
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-We can use [EXPLAIN](/common/sql-statements/sql-statement-explain.md) to check the execution plan of a SQL statement.
+To check the execution plan of the SQL statement, you can use the [`EXPLAIN`](/common/sql-statements/sql-statement-explain.md) statement.
 
 {{< copyable "sql" >}}
 
@@ -98,7 +104,7 @@ We can use [EXPLAIN](/common/sql-statements/sql-statement-explain.md) to check t
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-Running results:
+The following is an example output of the execution plan:
 
 ```
 +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -111,9 +117,9 @@ Running results:
 3 rows in set (0.61 sec)
 ```
 
-You can see something like **TableFullScan** in the returned plan, which means TiDB is ready to do a full table scan of the `books` table in this query, which can be almost fatal in the case of a large amount of data.
+In the example output, **TableFullScan** is displayed in the `id` column, which means that TiDB is ready to do a full table scan on the `books` table in this query. In the case of a large amount of data, however, a full table scan might be quite slow and cause a fatal impact.
 
-So we need to add an index to the `books` table for the `published_at` column.
+To avoid such impact, you can add an index for the `published_at` column to the `books` table as follows:
 
 {{< copyable "sql" >}}
 
@@ -121,7 +127,9 @@ So we need to add an index to the `books` table for the `published_at` column.
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
 ```
 
-After adding the index, run the `EXPLAIN` statement again to check the execution plan.
+After adding the index, execute the `EXPLAIN` statement again to check the execution plan.
+
+The following is an example output.
 
 ```
 +-------------------------------+---------+-----------+--------------------------------------------------------+-------------------------------------------------------------------+
@@ -134,17 +142,17 @@ After adding the index, run the `EXPLAIN` statement again to check the execution
 3 rows in set (0.18 sec)
 ```
 
-Instead of **TableFullScan** in the execution plan, you can see **IndexRangeScan**, which means that TiDB is ready to use indexes when doing this query.
+In the output, **IndexRangeScan** is displayed instead of **TableFullScan**, which means that TiDB is ready to use indexes to do this query.
 
 > **Note:**
 >
-> The **TableFullScan**, **IndexRangeScan**, etc. in the execution plan above are called [operators](/explain-overview.md#operator-overview) within TiDB. If you are interested, you can go to the [TiDB Query Execution Plan Overview](/explain-overview.md) document to learn more about execution plans and operators.
+> The words such as **TableFullScan** and **IndexRangeScan** in the execution plan are [operators](/explain-overview.md#operator-overview) in TiDB. For more information about execution plans and operators, see [TiDB Query Execution Plan Overview](/explain-overview.md).
 >
-> The execution plan does not return the same operator every time, because TiDB uses a **Cost-Based Optimization (CBO)** approach. It means execution plan is not only rule-dependent, but also data distribution-dependent. You can go to the [SQL Tuning Overview](/sql-tuning-overview.md) documentation for a more detailed description of TiDB SQL performance.
+> The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/sql-tuning-overview.md).
 >
-> TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you don't understand what's going on inside it, please **_don't use it yet_**.
+> TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you do not know well about indexes, optimizer hints, or SPM, **DO NOT** use this feature to avoid any unexpected results.
 
-We can query the indexes in the table using the [SHOW INDEXES](/common/sql-statements/sql-statement-show-indexes.md) statement:
+To query the indexes on a table, you can use the [SHOW INDEXES](/common/sql-statements/sql-statement-show-indexes.md) statement:
 
 {{< copyable "sql" >}}
 
@@ -152,7 +160,7 @@ We can query the indexes in the table using the [SHOW INDEXES](/common/sql-state
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
 
-Running result:
+The following is an example output:
 
 ```
 +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+
@@ -164,6 +172,6 @@ Running result:
 2 rows in set (1.63 sec)
 ```
 
-## One more step
+## Next step
 
-At this point, you have completed the creation of the **database**, **tables**, and **secondary indexes**. Next, the database schema is ready to give your application the ability to [write](/develop/dev-guide-insert-data.md) to and [read](/develop/dev-guide-get-data-from-single-table.md) from it.
+After creating a database and adding tables and secondary indexes to it, you can start adding the data [write](/develop/dev-guide-insert-data.md) and [read](/develop/dev-guide-get-data-from-single-table.md) features to your application.

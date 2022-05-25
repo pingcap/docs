@@ -1,83 +1,85 @@
 ---
-title: Overview
-summary: Overview of TiDB database schema design.
+title: TiDB Database Schema Design Overview
+summary: Learn the basics on TiDB database schema design.
 ---
 
-# Overview
+# TiDB Database Schema Design Overview
 
-This page gives an overview of the database schema in TiDB. We will start from this page, design a database, and use this database for subsequent data writing and reading examples.
+This document provides the basics of TiDB database schema design, including the objects in TiDB, access control, database schema changes, and object limitations.
 
-> **Note:**
->
-> To avoid confusion with the general term, Here is a brief agreement on the term used in the database schema design documentation section:
->
-> 1. To avoid confusion with the generic term [Database](https://en.wikipedia.org/wiki/Database), we will refer to the logical object as **Database**, TiDB will still use the **TiDB**, and the deployed instances of TiDB will be referred to as **Cluster**.
-> 2. Because TiDB uses a MySQL-compatible syntax, under this syntax, **Schema** represents a [generic term definition only](https://en.wiktionary.org/wiki/schema), and there is no **logical object definition**, that can be found in this [official document](https://dev.mysql.com/doc/refman/8.0/en/create-database.html). Please note this difference if you are migrating from other databases that have Schema logical objects (e.g. [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15), etc.).
+In the subsequent documents, [Bookshop](/develop/dev-guide-bookshop-schema-design.md) will be taken as an example to show you how to design a database and perform data read and write operations in a database.
 
-## Database
+## Objects in TiDB
 
-Database in the TiDB can be thought of as a collection of objects such as tables and indexes.
+To distinguish some general terms, here is a brief agreement on the terms used in TiDB:
 
-TiDB clusters contain a database named `test`. However, we recommend that you create your own database instead of using the `test` database.
+- To avoid confusion with the generic term [database](https://en.wikipedia.org/wiki/Database), **database** in this document refers to a logical object, **TiDB** refers to TiDB itself, and **cluster** refers to a deployed instance of TiDB.
 
-## Table
+- TiDB uses MySQL-compatible syntax, in which **schema** means the generic term [schema](https://en.wiktionary.org/wiki/schema) instead of a logical object in a database. For more information, see [MySQL documentation](https://dev.mysql.com/doc-/refman/8.0/en/create-database.html). Make sure that you note this difference if you are migrating from databases that have schemas as logical objects (for example, [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html), and [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15)).
 
-A Table in the TiDB is subordinate to a [Database](#database).
+### Database
 
-A table contains **rows**. Each value in each row of data belongs to a specific **column**. Each column allows only a single data type. Columns can be further qualified by adding [constraints](/constraints.md). You can also add [generated columns (experimental feature)](/generated-columns.md) for calculations.
+A database in TiDB is a collection of objects such as tables and indexes.
 
-## Index
+TiDB comes with a default database named `test`. However, it is recommended that you create your own database instead of using the `test` database.
 
-An index is a copy of rows in a single table, sorted by a column or set of columns.TiDB queries use indexes to find data in a table more efficiently while giving values for specific columns. Each index is subordinate to a particular [table](#table).
+### Table
+
+A table is a collection of related data in a [database](#database).
+
+Each table consists of **rows** and **columns**. Each value in a row belongs to a specific **column**. Each column allows only a single data type. To further qualify columns, you can add some [constraints](/constraints.md). To accelerate calculations, you can add [generated columns (experimental feature)](/generated-columns.md).
+
+### Index
+
+An index is a copy of selected columns in a table. You can create an index using one or more columns of a [table](#table). With indexes, TiDB can quickly locate data without having to search every row in a table every time, which greatly improves your query performance.
 
 There are two common types of indexes:
 
-1. **Primary Key**: Indexes that are identified on the primary key column.
-2. **Secondary Index**: Indexes identified on non-primary keys
+- **Primary Key**: indexes on the primary key column.
+- **Secondary Index**: indexes on non-primary key columns.
 
 > **Note:**
 >
-> In TiDB, the default definition of **Primary Key** is different from [InnoDB](https://mariadb.com/kb/en/innodb/)(the common storage engine of MySQL). In **InnoDB**, The semantics of **Primary Key** is unique, not null, and **index clustered**.
+> In TiDB, the default definition of **Primary Key** is different from that in [InnoDB](https://mariadb.com/kb/en/innodb/) (a common storage engine of MySQL).
 >
-> However, in TiDB, the definition of **Primary Key** is: unique, not null. But the primary key is not guaranteed to be a **clustered index**. Instead, another set of keywords `CLUSTERED` / `NONCLUSTERED` additionally controls whether the **Primary Key** is a **Clustered Index**, and if not specified, is affected by the system variable `@@global.tidb_enable_clustered_index`, as described in [this document](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes).
+> - In InnoDB, the definition of **Primary Key** is unique, not null, and a **clustered index**.
+> - In TiDB, the definition of **Primary Key** is unique and not null. But the primary key is not guaranteed to be a **clustered index**. To specify whether the primary key is a clustered index, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement. If a statement does not explicitly specify these keywords, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. For more information, see [Clustered Indexes](/clustered-indexes.md).
 
-### Specialized indexes
+#### Specialized indexes
 
-TiDB supports some specialized types of indexes, designed to improve query performance in specific use cases. For guidance on specialized indexes, see the following table:
+To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see the following links:
 
-| Indexing and constraints                                     | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Expression indexes](/common/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Titan plugin](/storage-engine/titan-overview.md)            | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Invisible indexes](/common/sql-statements/sql-statement-add-index.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
-| [Composite `PRIMARY KEY`](/constraints.md)                   | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Unique indexes](/constraints.md)                            | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Clustered index on integer `PRIMARY KEY`](/constraints.md)  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Clustered index on composite or non-integer key](/constraints.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
+- [Expression indexes](/common/sql-statements/sql-statement-create-index.md#expression-index) (Experimental)
+- [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)
+- [RocksDB engine](/storage-engine/rocksdb-overview.md)
+- [Titan plugin](/storage-engine/titan-overview.md)
+- [Invisible indexes](/common/sql-statements/sql-statement-add-index.md)
+- [Composite `PRIMARY KEY`](/constraints.md#primary-key)
+- [Unique indexes](/constraints.md#unique-key)
+- [Clustered indexes on integer `PRIMARY KEY`](/constraints.md)
+- [Clustered indexes on composite or non-integer key](/constraints.md)
 
-## Other logical objects
+### Other supported logical objects
 
-TiDB supports several logical objects at the same level as **table**:
+TiDB supports the following logical objects at the same level as **table**:
 
-1. [Views](/views.md): A view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
-2. [Sequence](/common/sql-statements/sql-statement-create-sequence.md): Create and store sequential data.
-3. [Temporary tables](/temporary-tables.md): Temporary table is a table whose data is not persistent.
+- [View](/views.md): a view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
+- [Sequence](/common/sql-statements/sql-statement-create-sequence.md): a sequence generates and stores sequential data.
+- [Temporary table](/temporary-tables.md): a table whose data is not persistent.
 
 ## Access Control
 
-TiDB supports user-based or role-based access control. You can grant **users** [permission](/privilege-management.md) to view, modify, or delete data objects and data schemas through [roles](/role-based-access-control.md) or directly to [users](/user-account-management.md).
+TiDB supports both user-based and role-based access control. To allow users to view, modify, or delete data objects and data schemas, you can either grant [privileges](/privilege-management.md) to [users](/user-account-management.md) directly or grant [privileges](/privilege-management.md) to users through [roles](/role-based-access-control.md).
 
-## Execute database schema changes
+## Database schema changes
 
-We do not recommend using a Driver or ORM to change database schemas. As a best practice from experience, we recommend using a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or using any GUI client you like. In this document, we will execute database schema changes using the **MySQL client**.
+As a best practice, it is recommended that you use a [MySQL client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or a GUI client instead of a driver or ORM to execute database schema changes.
 
-## Object Limitations
+## Object limitations
 
-These are some of the common object size restrictions, please refer to [tidb limitations](/tidb-limitations.md) for detailed usage restrictions.
+This section lists the object limitations on identifier length, a single table, and string types. For more information, see [TiDB Limitations](/tidb-limitations.md).
 
-## Limitations on identifier length
+### Limitations on identifier length
 
 | Identifier type | Maximum length (number of characters allowed) |
 |:---------|:--------------|
@@ -88,7 +90,7 @@ These are some of the common object size restrictions, please refer to [tidb lim
 | View     | 64 |
 | Sequence | 64 |
 
-## Limitations on a single table
+### Limitations on a single table
 
 | Type       | Upper limit (default value)  |
 |:----------|:----------|
@@ -98,7 +100,7 @@ These are some of the common object size restrictions, please refer to [tidb lim
 | Single Line Size | 6 MB by default. You can adjust the size limit via the [**txn-entry-size-limit**](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item. |
 | Single Column in a Line Size | 6 MB       |
 
-## Limitations on string types
+### Limitations on string types
 
 | Type       | Upper limit   |
 |:----------|:----------|
@@ -111,4 +113,4 @@ These are some of the common object size restrictions, please refer to [tidb lim
 
 ### Number of rows
 
-TiDB can support **any** number of rows by adding nodes in the cluster, see the [tidb best practices](/best-practices/tidb-best-practices.md) for the mechanics.
+TiDB supports an **unlimited** number of rows by adding nodes to the cluster. For the relevant principles, see [TiDB Best Practices](/best-practices/tidb-best-practices.md).
