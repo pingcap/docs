@@ -219,4 +219,4 @@ The result is as follows:
 
 ## Read more
 
-- [WITH](/common/sql-statements/sql-statement-with.md)
+- [WITH](/sql-statements/sql-statement-with.md)

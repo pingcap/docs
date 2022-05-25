@@ -17,7 +17,7 @@ The limitation of `AUTO_INCREMENT` columns is that the column must be of the int
 
 A **Sequence** is a database object that an application can invoke to produce incremental sequence values. Applications can flexibly use the sequence values to assign values to one or more tables. Applications can also use the sequence values for more complex processing to produce a combination of text and numbers. This approach gives some tracking and classification meaning to proxy keys.
 
-Sequence is available starting with TiDB v4.0. For details, refer to [sequence documentation](/common/sql-statements/sql-statement-create-sequence.md#create-sequence).
+Sequence is available starting with TiDB v4.0. For details, refer to [sequence documentation](/sql-statements/sql-statement-create-sequence.md#create-sequence).
 
 ## Snowflake-like solutions
 

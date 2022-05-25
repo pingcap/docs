@@ -24,7 +24,7 @@ In TiDB, you can either [add a secondary index to an existing table](#add-a-seco
 
 ## Add a secondary index to an existing table
 
-To add a secondary index to an existing table, you can use the [CREATE INDEX](/common/sql-statements/sql-statement-create-index.md) statement as follows:
+To add a secondary index to an existing table, you can use the [CREATE INDEX](/sql-statements/sql-statement-create-index.md) statement as follows:
 
 {{< copyable "sql" >}}
 
@@ -40,7 +40,7 @@ Parameter description:
 
 ## Create a secondary index when creating a new table
 
-To create a secondary index at the same time as table creation, you can add a clause containing the `KEY` keyword to the end of the [CREATE TABLE](/common/sql-statements/sql-statement-create-table.md) statement:
+To create a secondary index at the same time as table creation, you can add a clause containing the `KEY` keyword to the end of the [CREATE TABLE](/sql-statements/sql-statement-create-table.md) statement:
 
 {{< copyable "sql" >}}
 
@@ -96,7 +96,7 @@ To support the searching by year feature, you need to write a SQL statement to *
 SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-To check the execution plan of the SQL statement, you can use the [`EXPLAIN`](/common/sql-statements/sql-statement-explain.md) statement.
+To check the execution plan of the SQL statement, you can use the [`EXPLAIN`](/sql-statements/sql-statement-explain.md) statement.
 
 {{< copyable "sql" >}}
 
@@ -152,7 +152,7 @@ In the output, **IndexRangeScan** is displayed instead of **TableFullScan**, whi
 >
 > TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you do not know well about indexes, optimizer hints, or SPM, **DO NOT** use this feature to avoid any unexpected results.
 
-To query the indexes on a table, you can use the [SHOW INDEXES](/common/sql-statements/sql-statement-show-indexes.md) statement:
+To query the indexes on a table, you can use the [SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md) statement:
 
 {{< copyable "sql" >}}
 

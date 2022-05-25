@@ -105,7 +105,7 @@ CREATE TABLE `books` (
 
     > **Warning:**
     >
-    > Currently, expression index is an experimental feature, and it needs to be enabled in the TiDB configuration file. For more details, see [expression index](/common/sql-statements/sql-statement-create-index.md#expression-index).
+    > Currently, expression index is an experimental feature, and it needs to be enabled in the TiDB configuration file. For more details, see [expression index](/sql-statements/sql-statement-create-index.md#expression-index).
 
 - Try to use a covering index, in which the columns in the index contain the columns to be queried, and avoid querying all columns with `SELECT *` statements.
 
