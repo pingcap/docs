@@ -1,10 +1,7 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-<<<<<<< HEAD
-=======
-aliases: ['/docs/dev/','/docs/dev/adopters/','/tidb/dev/adopters']
->>>>>>> c895704e1 (delete adopters.md (#8725))
+aliases: ['/tidb/v5.2/adopters']
 ---
 
 # TiDB Introduction
