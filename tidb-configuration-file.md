@@ -28,12 +28,12 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 ### `oom-use-tmp-storage`
 
-+ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Controls whether to enable the temporary storage for some operators when a single SQL statement exceeds the memory quota specified by the system variable `tidb_mem_quota_query`.
 + Default value:  `true`
 
 ### `tmp-storage-path`
 
-+ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by `mem-quota-query`.
++ Specifies the temporary storage path for some operators when a single SQL statement exceeds the memory quota specified by the system variable `tidb_mem_quota_query`.
 + Default value: `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage`. `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=` is the `Base64` encoding result of `<host>:<port>/<statusHost>:<statusPort>`.
 + This configuration takes effect only when `oom-use-tmp-storage` is `true`.
 

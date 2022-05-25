@@ -1674,7 +1674,7 @@ explain select * from t where age=5;
 - Default value: `4096` (4 KiB)
 - Range: `[0, 1073741824]`
 - Unit: Bytes
-- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query-log-max-len` value, the statement is truncated to output.
+- The maximum length of the SQL statement output. When the output length of a statement is larger than the `tidb_query_log_max_len` value, the statement is truncated to output.
 - This setting was previously also available a tidb.toml option (`log.query-log-max-len`), but is only a system variable starting from TiDB 6.1.
 
 ### tidb_rc_read_check_ts <span class="version-mark">New in v6.0.0</span>
