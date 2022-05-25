@@ -1,12 +1,7 @@
 ---
 title: TiDB Introduction
-<<<<<<< HEAD
 summary: Learn how to quickly start a TiDB cluster.
-aliases: ['/docs/v3.1/']
-=======
-summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-aliases: ['/docs/dev/','/docs/dev/adopters/','/tidb/dev/adopters']
->>>>>>> c895704e1 (delete adopters.md (#8725))
+aliases: ['/docs/v3.1/','/tidb/v3.1/adopters']
 ---
 
 # TiDB Introduction
@@ -20,16 +15,7 @@ TiDB can be deployed on-premise or in-cloud. The following deployment options ar
 - [Docker Deployment](/test-deployment-using-docker.md): This guide describes how to deploy TiDB using Docker.
 - Kubernetes Deployment:
 
-<<<<<<< HEAD
     You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB on:
-=======
-- [TiDB Introduction](/overview.md)
-- [Basic Features](/basic-features.md)
-- [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
-- [TiDB Release Timeline](/releases/release-timeline.md)
-- [Compatibility with MySQL](/mysql-compatibility.md)
-- [Usage Limitations](/tidb-limitations.md)
->>>>>>> c895704e1 (delete adopters.md (#8725))
 
     - [AWS EKS (Elastic Kubernetes Service)](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-on-aws-eks/)
     - [GKE (Google Kubernetes Engine)](https://pingcap.com/docs/tidb-in-kubernetes/stable/deploy-on-gcp-gke/)
