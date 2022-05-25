@@ -421,6 +421,26 @@ Configuration items related to performance.
 + Default value: `false`
 + This configuration item controls the initial value of [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51). For example, when this configuration item is set to `true`, the default value of `tidb_enforce_mpp` is `ON`.
 
+### `stats-load-concurrency` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
++ The maximum number of columns that the TiDB synchronously loading statistics feature can process concurrently.
++ Default value: `5`
++ Currently, the valid value range is `[1, 128]`.
+
+### `stats-load-queue-size` <span class="version-mark">New in v5.4.0</span>
+
+> **WARNING:**
+>
+> Currently, synchronously loading statistics is an experimental feature. It is not recommended that you use it in production environments.
+
++ The maximum number of column requests that the TiDB synchronously loading statistics feature can cache.
++ Default value: `1000`
++ Currently, the valid value range is `[1, 100000]`.
+
 ## opentracing
 
 Configuration items related to opentracing.

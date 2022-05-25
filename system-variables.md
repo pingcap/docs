@@ -363,7 +363,7 @@ This variable is an alias for `last_insert_id`.
 - Default value: `OFF`
 - This variable ensures that all connections to TiDB are either on a local socket, or using TLS. See [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md) for additional details.
 - Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
-- This setting was previously a tidb.toml option (`security.require-secure-transport`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### skip_name_resolve <span class="version-mark">New in v5.2.0</span>
 
@@ -602,7 +602,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Range: `[1, 10000]`
 - The number of goroutines for requests related to executing commit in the commit phase of the single transaction.
 - If the transaction to commit is too large, the waiting time for the flow control queue when the transaction is committed might be too long. In this situation, you can increase the configuration value to speed up the commit.
-- This setting was previously a tidb.toml option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_config
 
@@ -766,7 +766,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Persists to cluster: Yes
 - Default value: `ON`
 - Determines whether TiDB automatically updates table statistics as a background operation
-- This setting was previously a tidb.toml option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_enable_auto_increment_in_generated
 
@@ -781,7 +781,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Persists to cluster: Yes
 - Default value: `OFF`
 - Determines if TiDB permits non-transactional 'batched' statements. Only the value of `OFF` can be considered safe, as batch DML does not provide ACID guarantees.
-- This setting was previously a tidb.toml option (`enable-batch-dml`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`enable-batch-dml`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_enable_cascades_planner
 
@@ -932,8 +932,8 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
-- Determines whether to enable Plan Cache of the `PREPARE` statement.
-- This setting was previously a tidb.toml option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB 6.1.
+- Determines whether to enable [Prepared Plan Cache](/sql-prepared-plan-cache.md). When it is enabled, the execution plans of `Prepare` and `Execute` are cached so that the subsequent executions skip optimizing the execution plans, which brings performance improvement.
+- This setting was previously a `tidb.toml` option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
 
@@ -1378,7 +1378,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Possible values: `CANCEL`, `LOG`
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `tidb_mem_quota_query` and cannot be spilled over to disk. See [TiDB Memory Control](/configure-memory-usage.md) for details.
 - The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.
-- This setting was previously a tidb.toml option (`oom-action`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 
@@ -1408,7 +1408,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the threshold value of memory quota for a query.
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
+- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by `tidb_mem_oom_action`.
+- This setting was previously session scoped and used the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0 `tidb_mem_quota_query` is now a `SESSION | GLOBAL` scoped variable.
 
 ### tidb_memory_usage_alarm_ratio
 
@@ -1639,8 +1640,9 @@ explain select * from t where age=5;
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `0.1`
+- Range: `[0, 1]`
 - This setting is used to prevent the tidb.toml option `performance.max-memory` from being exceeded. When `max-memory` * (1 - `tidb_prepared_plan_cache_memory_guard_ratio`) is exceeded, the elements in the LRU are removed.
-- This setting was previously a tidb.toml option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
 
@@ -1649,7 +1651,7 @@ explain select * from t where age=5;
 - Default value: `100`
 - Range: `[1, 100000]`
 - The maximum number of statements that can be cached in the prepared plan cache.
-- This setting was previously a tidb.toml option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB 6.1.
+- This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB 6.1.0.
 
 ### tidb_projection_concurrency
 
