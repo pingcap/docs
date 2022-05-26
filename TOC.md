@@ -37,7 +37,7 @@
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
     - [Create a Table](/develop/dev-guide-create-table.md)
-    - [Create Secondary a Index](/develop/dev-guide-create-secondary-indexes.md)
+    - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
   - Write Data
     - [Insert Data](/develop/dev-guide-insert-data.md)
     - [Update Data](/develop/dev-guide-update-data.md)
