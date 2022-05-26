@@ -228,7 +228,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
 | `write-timeout` | The timeout in sending a request to the downstream Kafka. The default value is `10s` |
 | `avro-decimal-handling-mode` | Only effective with protocol `avro`. Control mapping DECIMAL field to string or precise floating number. Value could be `string` or `precise` |
-| `avro-bigint-unsigned-handling-mode | Only effective with protocl `avro`. Control mapping BIGINT UNSIGNED field to 64 bit signed number or string. Value could be `string` or `long` |
+| `avro-bigint-unsigned-handling-mode` | Only effective with protocl `avro`. Control mapping BIGINT UNSIGNED field to 64 bit signed number or string. Value could be `string` or `long` |
 
 Best practices:
 
