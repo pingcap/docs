@@ -266,7 +266,7 @@ The dividing column does not support `ENUM`, `BIT`, `SET`, `JSON` types. Try to 
 
 If the error occurs when the dividing column you have selected is not one of these unsupported types, contact PingCAP technical support.
 
-### Non-transactional `DELETE` has "exceptional" behavior that is not equivalent to normal `DELETE`
+### Non-transactional `DELETE` has "exceptional" behavior that is not equivalent to ordinary `DELETE`
 
 A non-transactional DML statement is not equivalent to the original form of this DML statement, which might have the following reasons:
 
