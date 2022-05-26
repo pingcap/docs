@@ -56,7 +56,7 @@ TiCDC converts a DML event into a Kafka event, and the Key and value of an event
 ```
 
 - `{{TableName}}` indicates the name of the table where the event occurs.
-- `{{Namespace}}` is a combination of the changefeed namespace and the schema name of the data source.
+- `{{Namespace}}` is the namespace of Avro.
 - `{{ColumnValueBlock}}` defines the format of each row of data.
 
 The `fields` in the key contains only primary key columns or unique index columns.
