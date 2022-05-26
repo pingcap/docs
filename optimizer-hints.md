@@ -260,8 +260,6 @@ The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer, when generati
 
 {{< copyable "sql" >}}
 
-```sql
-
 {{< copyable "sql" >}}
 
 ```sql
