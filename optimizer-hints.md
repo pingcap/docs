@@ -319,7 +319,7 @@ In the following hint, `MEMORY_QUOTA(1024 MB)` means that the memory usage is li
 select /*+ MEMORY_QUOTA(1024 MB) */ * from t;
 ```
 
-In addition to this hint, the `tidb_mem_quota_query` system variable can also limit the memory usage of a statement.
+In addition to this hint, the [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) system variable can also limit the memory usage of a statement.
 
 ### READ_CONSISTENT_REPLICA()
 
