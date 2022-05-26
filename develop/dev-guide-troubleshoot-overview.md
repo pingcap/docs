@@ -1,6 +1,6 @@
 ---
 title: SQL or Transaction Issues
-summary: Describes the problems that may occur during application development and related documents.
+summary: Learn how to troubleshoot SQL or transaction issues that might occur during application development.
 ---
 
 # SQL or Transaction Issues
