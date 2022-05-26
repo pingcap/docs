@@ -1,9 +1,9 @@
 ---
-title: Troubleshooting Overview
+title: SQL or Transaction Issues
 summary: Describes the problems that may occur during application development and related documents.
 ---
 
-# Troubleshooting Overview
+# SQL or Transaction Issues
 
 This document introduces problems that may occur during application development and related documents.
 
