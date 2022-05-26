@@ -28,7 +28,7 @@
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
   - Example Applications
-    - [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+    - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
@@ -57,7 +57,7 @@
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
-    - [Optimistic and Pessimistic Transaction](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+    - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
     - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
     - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
   - Optimize
