@@ -1,6 +1,6 @@
 ---
 title: Developer Overview
-summary: Describe the outline of the developer's guide is listed.
+summary: Introduce the overview of the developer guide.
 ---
 
 # Developer Guide Overview
