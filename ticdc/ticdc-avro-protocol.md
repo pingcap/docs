@@ -181,7 +181,7 @@ In the Avro protocol, there are two other `sink-uri` parameters that affect the 
 - `avro-decimal-handling-mode` controls how Avro handles decimal fields, including:
 
     - string: Avro handles decimal fields as strings.
-    - precise：Avro stores decimal fields as bytes.
+    - precise: Avro handles decimal fields as bytes.
 
 - `avro-bigint-unsigned-handling-mode` controls how Avro handles BIGINT UNSIGNED fields, including:
 
