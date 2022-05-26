@@ -9,7 +9,7 @@ Avro is a data exchange format protocol defined by [Apache Avro™](https://avro
 
 ## Use Avro
 
-When using Message Queue (MQ) as downstream sink, you can specify Avro in `sink-uri`. TiCDC wraps Avro Messages with events as the basic unit and sends TiDB DML events downstream. When Avro detects a schema change, it registers the latest schema with Schema Registry.
+When using Message Queue (MQ) as downstream sink, you can specify Avro in `sink-uri`. TiCDC captures TiDB DML events and creates Avro messages from them, send these events downstream. When Avro detects a schema change, it registers the latest schema with Schema Registry.
 
 The following is a configuration example using Avro:
 
@@ -23,7 +23,7 @@ The value of `--schema-registry` supports the https protocol and `username:passw
 
 ## TiDB extension fields
 
-By default, Avro only includes data of the row where data changes in the DML event, excluding the type of data change or unique identifiers of TiDB-specific CommitTS  transactions. To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with these three fields:
+By default, Avro only includes data of changed rows in the DML event, and does not record the type of data change or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with these three fields:
 
 - `_tidb_op`: The DML type. "c" indicates insert and "u" indicates updates.
 - `_tidb_commit_ts`: The unique identifier of a transaction.
@@ -251,10 +251,10 @@ Avro does not generate DDL events downstream. It checks whether a schema changes
 
 Note that, even if the compatibility check is passed and the registration succeeds, Avro producers and consumers still need to perform an upgrade to ensure normal running of the system.
 
-Assume that the default compatibility policy of Confluent Schema Registry is `BACKWARD` and add a non-empty column to the source table. In this condition, Avro will fail to generate a new schema and register it with Schema Registry due to compatibility issues. At this time, the changefeed is displayed as erroneous.
+Assume that the default compatibility policy of Confluent Schema Registry is `BACKWARD` and add a non-empty column to the source table. In this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters error state.
 
 For more information about schemas, refer to [Schema Registry related materials](https://docs.confluent.io/platform/current/schema-registry/avro.html).
 
 ## Topic distribution
 
-Schema Registry supports three [Subject Name Strategies](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy). Currently, TiCDC Avro only supports TopicNameStrategy, which means that a Kafka topic can only receive data in one data format. Therefore, TiCDC Avro prohibits mapping multiple tables to the same topic. When creating a changefeed, an error will be reported if the topic rule does not include the `{schema}` and `{table}` placeholders in the configured distribution rule.
+Schema Registry supports three [Subject Name Strategies](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy): TopicNameStrategy, RecordNameStrategy, and TopicRecordNameStrategy. Currently, TiCDC Avro only supports TopicNameStrategy, which means that a Kafka topic can only receive data in one data format. Therefore, TiCDC Avro prohibits mapping multiple tables to the same topic. When creating a changefeed, an error will be reported if the topic rule does not include the `{schema}` and `{table}` placeholders in the configured distribution rule.
