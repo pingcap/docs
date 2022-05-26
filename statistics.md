@@ -294,8 +294,8 @@ When accessing partitioned tables in [dynamic pruning mode](/partitioned-table.m
 >
 > - When GlobalStats update is triggered:
 >
->    - If some partitions have no statistics (such as an new partition that has never been analyzed), GlobalStats generation is interrupted and a warning message is displayed saying that no column statistics are available on partitions.
->    - If statistics of some columns are absent in specific partitions (different columns are specified when analyzing partitions), GlobalStats generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
+>     - If some partitions have no statistics (such as an new partition that has never been analyzed), GlobalStats generation is interrupted and a warning message is displayed saying that no column statistics are available on partitions.
+>     - If statistics of some columns are absent in specific partitions (different columns are specified when analyzing partitions), GlobalStats generation is interrupted when statistics of these columns are aggregated, and a warning message is displayed saying that statistics of some columns are absent in specific partitions.
 >
 > - In dynamic pruning mode, the Analyze configurations of partitions and tables should be the same. Therefore, the `COLUMNS` configuration specified following the `ANALYZE TABLE TableName PARTITION PartitionNameList` command and the `OPTIONS` configuration following `WITH` are ignored and users are informed of this via a warning message.
 
