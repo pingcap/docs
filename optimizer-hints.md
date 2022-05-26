@@ -259,8 +259,6 @@ The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer, when generati
 
 {{< copyable "sql" >}}
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
 ```
