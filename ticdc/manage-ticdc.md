@@ -216,7 +216,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
-| `enable-tidb-extension` | When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. (optional, `false` by default)|
+| `enable-tidb-extension` | When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message (optional, `false` by default). From v6.1.0, this parameter could also be set with protocol `avro`, if the value is `true`, TiCDC adds some TiDB extension fields to the Kafka message (optional, `false` by default).|
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol`. (optional, `16` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
@@ -227,6 +227,8 @@ The following are descriptions of parameters and parameter values that can be co
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
 | `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
 | `write-timeout`| The timeout in sending a request to the downstream Kafka. The default value is `10s` |
+| `avro-decimal-handling-mode` | Map DECIMAL field to string or precise floating number. Value could be `string` or `precise |
+| `avro-bigint-unsigned-handling-mode | Map BIGINT UNSIGNED field to 64 bit signed number or string. Value could be `string` or `long` |
 
 Best practices:
 
@@ -240,20 +242,15 @@ Best practices:
 
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
-> **Warning:**
->
-> This is still an experimental feature. Do **NOT** use it in a production environment.
+To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you should use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
 
 Sample configuration:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
---opts registry="http://127.0.0.1:8081"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro&replication-factor=3" --schema-registry="http://127.0.0.1:8081"
 ```
-
-To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you should use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `opts`. Note that the `avro` protocol and Confluent integration are **experimental**.
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
