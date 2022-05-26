@@ -5,7 +5,7 @@ summary: Learn about how to use the TiDB prepared statements.
 
 # Prepared Statements
 
-A [prepared statement](/common/sql-statements/sql-statement-prepare.md) templatizes multiple SQL statements in which only parameters are different. It separates the SQL statements from the parameters. You can use it to improve the following aspects of SQL statements:
+A [prepared statement](/sql-statements/sql-statement-prepare.md) templatizes multiple SQL statements in which only parameters are different. It separates the SQL statements from the parameters. You can use it to improve the following aspects of SQL statements:
 
 - **Security**: Because parameters and statements are separated, the risk of [SQL injection](https://en.wikipedia.org/wiki/SQL_injection) attacks is avoided.
 - **Performance**: Because the statement is parsed in advance on the TiDB server, only parameters are passed for subsequent executions, saving the cost of parsing the entire SQL statements, splicing SQL statement strings, and network transmission.
@@ -29,11 +29,11 @@ PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 | `{prepared_statement_name}` | name of the prepared statement|
 | `{prepared_statement_sql}`  | the prepared statement SQL with a question mark as a placeholder |
 
-See [PREPARE statement](/common/sql-statements/sql-statement-prepare.md) for more information.
+See [PREPARE statement](/sql-statements/sql-statement-prepare.md) for more information.
 
 ### Use the prepared statement
 
-A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/common/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/common/sql-statements/sql-statement-execute.md) can call the prepared statement.
+A prepared statement can only use **user variables** as parameters, so use the [`SET` statement](/sql-statements/sql-statement-set-variable.md) to set the variables before the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) can call the prepared statement.
 
 {{< copyable "sql" >}}
 
@@ -48,7 +48,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 |     `{parameter_value}`     |                              user variable value                               |
 | `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
-See the [`EXECUTE` statement](/common/sql-statements/sql-statement-execute.md) for more information.
+See the [`EXECUTE` statement](/sql-statements/sql-statement-execute.md) for more information.
 
 ### Delete the prepared statement
 
@@ -62,7 +62,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 | :-------------------------: | :-------------------------------------------------------------------: |
 | `{prepared_statement_name}` | The name of the preprocessing statement, which must be the same as the name defined in the [Create a prepared statement](#create-a-prepared-statement) |
 
-See the [`DEALLOCATE` statement](/common/sql-statements/sql-statement-deallocate.md) for more information.
+See the [`DEALLOCATE` statement](/sql-statements/sql-statement-deallocate.md) for more information.
 
 ## Examples
 

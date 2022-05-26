@@ -20,7 +20,7 @@ Before you start working with TiDB, you need to understand some important mechan
 
 TiDB supports distributed transactions and offers both [optimistic transaction](/optimistic-transaction.md) and [pessimistic transaction](/pessimistic-transaction.md) modes. The current version of TiDB uses the **pessimistic transaction** mode by default, which allows you to transact with TiDB as you would with a traditional monolithic database (for example, MySQL).
 
-You can start a transaction using [`BEGIN`](/common/sql-statements/sql-statement-begin.md), explicitly specify a **pessimistic transaction** using `BEGIN PESSIMISTIC`, or explicitly specify an **optimistic transaction** using `BEGIN OPTIMISTIC`. After that, you can either commit ([`COMMIT`](/common/sql-statements/sql-statement-commit.md)) or roll back ([`ROLLBACK`](/common/sql-statements/sql-statement-rollback.md)) the transaction.
+You can start a transaction using [`BEGIN`](/sql-statements/sql-statement-begin.md), explicitly specify a **pessimistic transaction** using `BEGIN PESSIMISTIC`, or explicitly specify an **optimistic transaction** using `BEGIN OPTIMISTIC`. After that, you can either commit ([`COMMIT`](/sql-statements/sql-statement-commit.md)) or roll back ([`ROLLBACK`](/sql-statements/sql-statement-rollback.md)) the transaction.
 
 TiDB guarantees atomicity for all statements between the start of `BEGIN` and the end of `COMMIT` or `ROLLBACK`, that is, all statements that are executed during this period either succeed or fail as a whole. This is used to ensure data consistency you need for application development.
 

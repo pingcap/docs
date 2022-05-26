@@ -7,8 +7,8 @@ summary: Learn about how to update data and batch update data.
 
 This document describes how to use the following SQL statements to update the data in TiDB with various programming languages:
 
-- [UPDATE](/common/sql-statements/sql-statement-update.md): Used to modify the data in the specified table.
-- [INSERT ON DUPLICATE KEY UPDATE](/common/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. It is **not recommended** to use this statement if there are multiple unique keys (including primary keys). This is because this statement updates the data once it detects any unique key (including primary key) conflict. When there are more than one row conflicts, it updates only one row.
+- [UPDATE](/sql-statements/sql-statement-update.md): Used to modify the data in the specified table.
+- [INSERT ON DUPLICATE KEY UPDATE](/sql-statements/sql-statement-insert.md): Used to insert data and update this data if there is a primary key or unique key conflict. It is **not recommended** to use this statement if there are multiple unique keys (including primary keys). This is because this statement updates the data once it detects any unique key (including primary key) conflict. When there are more than one row conflicts, it updates only one row.
 
 ## Before you start
 
@@ -20,7 +20,7 @@ Before reading this document, you need to prepare the following:
 
 ## Use `UPDATE`
 
-To update an existing row in a table, you need to use an [`UPDATE` statement](/common/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
+To update an existing row in a table, you need to use an [`UPDATE` statement](/sql-statements/sql-statement-update.md) with a `WHERE` clause to filter the columns for updating.
 
 > **Note:**
 >
@@ -45,7 +45,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 | `{filter_column}` | Column names matching filters |
 | `{filter_value}`  | Column values matching filters |
 
-For detailed information, see [UPDATE syntax](/common/sql-statements/sql-statement-update.md).
+For detailed information, see [UPDATE syntax](/sql-statements/sql-statement-update.md).
 
 ### `UPDATE` best practices
 
@@ -188,7 +188,7 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 
 > **Note:**
 >
-> This bulk-update application uses the **DDL** statements to make schema changes to the data tables. All DDL change operations for TiDB are executed online. For more information, see [ADD COLUMN](/common/sql-statements/sql-statement-add-column.md).
+> This bulk-update application uses the **DDL** statements to make schema changes to the data tables. All DDL change operations for TiDB are executed online. For more information, see [ADD COLUMN](/sql-statements/sql-statement-add-column.md).
 
 <SimpleTab>
 <div label="Golang">

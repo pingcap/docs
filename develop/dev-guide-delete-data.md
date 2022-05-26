@@ -5,7 +5,7 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 # Delete Data
 
-This document describes how to use the [DELETE](/common/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB.
+This document describes how to use the [DELETE](/sql-statements/sql-statement-delete.md) SQL statement to delete the data in TiDB.
 
 ## Before you start
 
@@ -30,7 +30,7 @@ DELETE FROM {table} WHERE {filter}
 | `{table}`  |      Table name      |
 | `{filter}` | Matching conditions of the filter|
 
-This example only shows a simple use case of `DELETE`. For detailed information, see [DELETE syntax](/common/sql-statements/sql-statement-delete.md).
+This example only shows a simple use case of `DELETE`. For detailed information, see [DELETE syntax](/sql-statements/sql-statement-delete.md).
 
 ## Best practices
 
@@ -38,7 +38,7 @@ The following are some best practices to follow when you delete data:
 
 - Always specify the `WHERE` clause in the `DELETE` statement. If the `WHERE` clause is not specified, TiDB will delete **_ALL ROWS_** in the table.
 - Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
-- If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/common/sql-statements/sql-statement-truncate.md) statement.
+- If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
 - For performance considerations, see [Performance Considerations](#performance-considerations).
 
 ## Example

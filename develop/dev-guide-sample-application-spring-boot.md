@@ -820,12 +820,12 @@ The entity class has several annotations that give Hibernate additional informat
 - `@Table` relates this entity class to the `player_jpa` table using the annotation attribute `name`.
 - `@Id` declares that this property is related to the primary key column of the table.
 - `@GeneratedValue` indicates that the value of this column is generated automatically and should not be set manually. The attribute `generator` is used to specify the name of the generator as `player_id`.
-- `@SequenceGenerator` declares a generator that uses [sequence](/common/sql-statements/sql-statement-create-sequence.md), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (consistent with the name specified in `@GeneratedValue`). The annotation attribute `sequenceName` is used to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
+- `@SequenceGenerator` declares a generator that uses [sequence](/sql-statements/sql-statement-create-sequence.md), and uses the annotation attribute `name` to declare the name of the generator as `player_id` (consistent with the name specified in `@GeneratedValue`). The annotation attribute `sequenceName` is used to specify the name of the sequence in the database. Finally, the annotation attribute `allocationSize` is used to declare the sequence's step size to be 1.
 - `@Column` declares each private attribute as a column of the `player_jpa` table, and uses the annotation attribute `name` to determine the name of the column corresponding to the attribute.
 
 #### Repository
 
-To abstract the database layer, Spring applications use the [`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA implements some pre-built methods, such as [`INSERT`](/common/sql-statements/sql-statement-insert.md), or [`SELECT`](/common/sql-statements/sql-statement-select.md) using the primay key.
+To abstract the database layer, Spring applications use the [`Repository`](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories) interface, or a sub-interface of the `Repository`. This interface maps to a database object, such as a table. JPA implements some pre-built methods, such as [`INSERT`](/sql-statements/sql-statement-insert.md), or [`SELECT`](/sql-statements/sql-statement-select.md) using the primay key.
 
 {{< copyable "" >}}
 
@@ -888,7 +888,7 @@ In `getPlayerAndLock`, an annotation [`@Lock`](https://docs.spring.io/spring-dat
 @Query(value = "SELECT * FROM player_jpa WHERE id = :id FOR UPDATE", nativeQuery = true)
 ```
 
-The SQL statement above uses `FOR UPDATE` to add locks directly. You can also dive deeper into the principles with the TiDB [`SELECT` statement](/common/sql-statements/sql-statement-select.md).
+The SQL statement above uses `FOR UPDATE` to add locks directly. You can also dive deeper into the principles with the TiDB [`SELECT` statement](/sql-statements/sql-statement-select.md).
 
 ### Logic implementation
 

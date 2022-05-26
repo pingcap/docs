@@ -49,11 +49,11 @@ There are two common types of indexes:
 
 To improve query performance of various user scenarios, TiDB provides you with some specialized types of indexes. For details of each type, see the following links:
 
-- [Expression indexes](/common/sql-statements/sql-statement-create-index.md#expression-index) (Experimental)
+- [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) (Experimental)
 - [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)
 - [RocksDB engine](/storage-engine/rocksdb-overview.md)
 - [Titan plugin](/storage-engine/titan-overview.md)
-- [Invisible indexes](/common/sql-statements/sql-statement-add-index.md)
+- [Invisible indexes](/sql-statements/sql-statement-add-index.md)
 - [Composite `PRIMARY KEY`](/constraints.md#primary-key)
 - [Unique indexes](/constraints.md#unique-key)
 - [Clustered indexes on integer `PRIMARY KEY`](/constraints.md)
@@ -64,7 +64,7 @@ To improve query performance of various user scenarios, TiDB provides you with s
 TiDB supports the following logical objects at the same level as **table**:
 
 - [View](/views.md): a view acts as a virtual table, whose schema is defined by the `SELECT` statement that creates the view.
-- [Sequence](/common/sql-statements/sql-statement-create-sequence.md): a sequence generates and stores sequential data.
+- [Sequence](/sql-statements/sql-statement-create-sequence.md): a sequence generates and stores sequential data.
 - [Temporary table](/temporary-tables.md): a table whose data is not persistent.
 
 ## Access Control
