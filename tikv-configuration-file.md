@@ -1387,6 +1387,12 @@ Configuration items related to Raft Engine.
 + Default value: `4`
 + Minimum value: `1`
 
+### `memory-limit`
+
++ Memory usage limit for Raft Engine.
++ When it's not set, 15% of available system memory will be used.
++ Default value: `Total machine memory * 15%`
+
 ## security
 
 Configuration items related to security.
