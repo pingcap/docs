@@ -19,7 +19,7 @@
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
-- Develop Application
+- Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
     - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
