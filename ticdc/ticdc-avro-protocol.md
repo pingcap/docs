@@ -23,7 +23,7 @@ The value of `--schema-registry` supports the https protocol and `username:passw
 
 ## TiDB extension fields
 
-By default, Avro only includes data of changed rows in the DML event, and does not record the type of data change or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with these three fields:
+By default, Avro only collects data of changed rows in the DML event, and does not collect the type of data change or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with these three fields:
 
 - `_tidb_op`: The DML type. "c" indicates insert and "u" indicates updates.
 - `_tidb_commit_ts`: The unique identifier of a transaction.
@@ -77,7 +77,7 @@ The `fields` in the key contains only primary key columns or unique index column
 
 The data format of Value is the same as that of Key, by default. However, `fields` in the Value contains all columns, not just the primary key columns.
 
-After you enable `enable-tidb-extension`, the data format of the Value will be as follows:
+After you enable [`enable-tidb-extension`](#tidb-extension-fields), the data format of the Value will be as follows:
 
 ```
 {
@@ -176,7 +176,7 @@ If one row can be NULL, the Column data format can be:
 | SET        | SET       | string    |                                                                                                                           |
 | DECIMAL    | DECIMAL   | bytes     | When `avro-decimal-handling-mode` is string, AVRO_TYPE is string.                                                         |
 
-In the Avro protocol, there are two other `sink-uri` parameters that affect the Column data format: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
+In the Avro protocol, two other `sink-uri` parameters may affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
 
 - `avro-decimal-handling-mode` controls how Avro handles decimal fields, including:
 
@@ -247,13 +247,13 @@ DECIMAL(10, 4)
 
 ## DDL events and schema changes
 
-Avro does not generate DDL events downstream. It checks whether a schema changes at each DML event. If a schema changes, Avro generates a new schema and registers it with the Schema Registry. If the schema change does not pass the compatibility check, the registration fails. Avro does not resolve any schema compatibility issues.
+Avro does not generate DDL events downstream. It checks whether a schema changes each time a DML event occurs. If a schema changes, Avro generates a new schema and registers it with the Schema Registry. If the schema change does not pass the compatibility check, the registration fails. Avro does not resolve any schema compatibility issues.
 
-Note that, even if the compatibility check is passed and the registration succeeds, Avro producers and consumers still need to perform an upgrade to ensure normal running of the system.
+Note that, even if the schema change passes the compatibility check and the new version is registered, the data producers and consumers still need to perform an upgrade to ensure normal running of the system.
 
 Assume that the default compatibility policy of Confluent Schema Registry is `BACKWARD` and add a non-empty column to the source table. In this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters error state.
 
-For more information about schemas, refer to [Schema Registry related materials](https://docs.confluent.io/platform/current/schema-registry/avro.html).
+For more information about schemas, refer to [Schema Registry related documents](https://docs.confluent.io/platform/current/schema-registry/avro.html).
 
 ## Topic distribution
 
