@@ -216,7 +216,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
-| `enable-tidb-extension` | When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message (optional, `false` by default). From v6.1.0, this parameter could also be set with protocol `avro`, if the value is `true`, TiCDC adds some TiDB extension fields to the Kafka message (optional, `false` by default).|
+| `enable-tidb-extension` | <ul><li>Optional. `false` by default. </li> <li> When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. </li> <li>  From v6.1.0, this parameter could also be set with protocol `avro`. If the value is `true`, TiCDC adds some TiDB extension fields to the Kafka message </li></ul>|
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol`. (optional, `16` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
@@ -227,8 +227,8 @@ The following are descriptions of parameters and parameter values that can be co
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
 | `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
 | `write-timeout` | The timeout in sending a request to the downstream Kafka. The default value is `10s` |
-| `avro-decimal-handling-mode` | Only effective with protocol `avro`. Control mapping DECIMAL field to string or precise floating number. Value could be `string` or `precise` |
-| `avro-bigint-unsigned-handling-mode` | Only effective with protocl `avro`. Control mapping BIGINT UNSIGNED field to 64 bit signed number or string. Value could be `string` or `long` |
+| `avro-decimal-handling-mode` | Only effective with the protocol `avro`. Determines how Avro handles the DECIMAL field. The value can be `string` or `precise`, indicating either mapping the DECIMAL field to a string or a precise floating number.  |
+| `avro-bigint-unsigned-handling-mode` | Only effective with the protocol `avro`. Determines how Avro handles the BIGINT UNSIGNED field. The value can be `string` or `long`, indicating either mapping BIGINT UNSIGNED field to a 64-bit signed number or a string.  |
 
 Best practices:
 
