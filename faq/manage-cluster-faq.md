@@ -9,7 +9,7 @@ This document summarizes the FAQs related to TiDB cluster management.
 
 ## Daily management
 
-This section describes common problems you may encounter during daily cluster management and their causes and solutions.
+This section describes common problems you might encounter during daily cluster management, their causes, and solutions.
 
 ### How to log into TiDB?
 
@@ -37,9 +37,9 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 ### How to safely stop TiDB?
 
-- A load balancer is running (recommended): Stop the load balancer and then run the kill command. Then TiDB waits for a period specified by [graceful-wait-before-shutdown](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) until all sessions are terminated. Then TiDB stops running.
+- When a load balancer is running (recommended): Stop the load balancer and execute the SQL statement `SHUTDOWN`. Then TiDB waits for a period as specified by [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) until all sessions are terminated. Then TiDB stops running.
 
-- No load balancer is running: Run the kill command. The TiDB components are gracefully stopped.
+- When no load balancer is running: Execute the `SHUTDOWN` statement`. Then TiDB components are gracefully stopped.
 
 ### Can `kill` be executed in TiDB?
 
@@ -280,7 +280,7 @@ In addition, in the above statement:
 
 ## TiKV server management
 
-This section describes common problems you may encounter during TiKV server management and their causes and solutions.
+This section describes common problems you might encounter during TiKV server management, their causes, and solutions.
 
 ### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
@@ -395,7 +395,7 @@ No. TiDB (or data created from the transactional API) relies on a specific key f
 
 ## TiDB testing
 
-This section describes common problems you may encounter during TiDB testing and their causes and solutions.
+This section describes common problems you might encounter during TiDB testing, their causes, and solutions.
 
 ### What is the performance test result for TiDB using Sysbench?
 
