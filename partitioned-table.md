@@ -724,6 +724,8 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
 * partition_column = constant
 * partition_column IN (constant1, constant2, ..., constantN)
 
+It cannot currently prune partitions on LIKE conditions.
+
 ### Some cases for partition pruning to take effect
 
 1. Partition pruning uses the query conditions on the partitioned table, so if the query conditions can not be pushed down to the partitioned table according to the planner's optimization rules, partition pruning does not apply for this query.
@@ -1432,3 +1434,6 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 ```
 
 From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
+
+
+Neither static or dynamic prune mode supports prepared statements plan cache. Dynamic mode may support it in a future version.
