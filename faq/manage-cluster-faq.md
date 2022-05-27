@@ -121,7 +121,7 @@ In the following situations, even you have enabled the [Async Commit](/system-va
 
 ## PD management
 
-This section describes common problems you may encounter during PD management and their causes and solutions.
+This section describes common problems you may encounter during PD management, their causes, and solutions.
 
 ### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
 
@@ -169,7 +169,7 @@ The offline node usually indicates the TiKV node. You can determine whether the 
 
 ## TiDB server management
 
-This section describes common problems you may encounter during TiDB server management and their causes and solutions.
+This section describes common problems you may encounter during TiDB server management, their causes, and solutions.
 
 ### How to set the `lease` parameter in TiDB?
 
@@ -418,7 +418,7 @@ TiDB is not suitable for tables of small size (such as below ten million level),
 
 ## Backup and restoration
 
-This section describes common problems you may encounter during backup and restoration, and their causes and solutions.
+This section describes common problems you may encounter during backup and restoration, their causes, and solutions.
 
 ### How to back up data in TiDB?
 
