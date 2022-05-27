@@ -724,7 +724,7 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
 * partition_column = constant
 * partition_column IN (constant1, constant2, ..., constantN)
 
-It cannot currently prune partitions on LIKE conditions.
+It cannot currently prune partitions on `LIKE` conditions.
 
 ### Some cases for partition pruning to take effect
 
