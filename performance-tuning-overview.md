@@ -37,85 +37,85 @@ User response time consists of service time, queuing time, and concurrent waitin
 User Response time = Service time + Queuing delay + Coherency delay
 ```
 
-- Service Time: the time that an application consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
-- Queuing delay: the time that an application waits in a queue so that it can be scheduled by a service of certain resources when processing a request.
-- Coherency delay: the time that an application communicates and collaborates with other concurrent tasks so that it can access shared resources when processing a request.
+- Service Time: the time a system consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
+- Queuing delay: the time a system waits in a queue for getting a service of certain resources when processing a request.
+- Coherency delay: the time a system communicates and collaborates with other concurrent tasks so that it can access shared resources when processing a request.
 
-System throughput refers to the number of requests completed by the system per second. User response time and throughput are usually inversely inverse of each other. As throughput rises, system resource utilization rises and queuing latency for the requested service rises, and when resource utilization exceeds a certain inflection point, queuing latency rises dramatically.
+System throughput indicates the number of requests that can be completed by a system per second. User response time and throughput are usually inverse of each other. When the throughput increases, the system resource utilization and the queuing latency for a requested service increase accordingly. Once resource utilization exceeds a certain inflection point, the queuing latency will increase dramatically.
 
-For example, for database systems running OLTP loads, CPU queueing scheduling latency increases significantly after CPU utilization exceeds 65%. Because the concurrent requests of the system are not completely independent, there is collaboration and contention for shared resources between requests, e.g., different database requests may have mutually exclusive locking operations on the same data. When the resource utilization rises, the queuing and scheduling latency rises, which will result in the shared resources held not being released in time, which in turn prolongs the waiting time for shared resources by other tasks.
+For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different database might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
 
-## performance tuning Process
+## performance tuning process
 
-The performance tuning process consists of the following 6 steps.
+The performance tuning process consists of the following 6 steps:
 
-1. Defining the optimization objective
-2. Establishing a performance baseline
-3. Locating bottlenecks in user response times
-4. Propose optimization options, estimating the benefits, risks and costs of each option
-5. Implementation optimization
-6. Evaluation of optimization results
+1. Define a tuning objective.
+2. Establish a performance baseline.
+3. Locate bottlenecks in user response time.
+4. Propose tuning solutions, assess the benefits, risks, and costs of each solution
+5. Implement the tuning process.
+6. Evaluate the tuning results.
 
-A performance tuning project often requires multiple iterations of steps 2 through 6 to achieve the optimization goal.
+To achieve the tuning objective of a performance tuning project, you usually need to repeat steps 2 to step 6 for multiple times.
 
-### Step 1: Define the optimization objective
+### Step 1. Define a tuning objective
 
-Optimization goals differ for different types of systems. For example, for a financial core OLTP system, the optimization goal may be to reduce the long-tail latency of transactions; for a financial settlement system, the optimization goal may be to make better use of hardware resources and reduce batch settlement task times.
+For different types of systems, tuning objectives are different too. For example, for a financial core OLTP system, the tuning objective might be to reduce the long-tail latency of transactions; for a financial settlement system, the tuning objective might be to make better use of hardware resources and reduce time of batch settlement tasks.
 
-A good optimization goal should be easily quantifiable, e.g.
+A good tuning objective should be easily quantifiable. For example:
 
-- Good optimization goal: "The p99 latency for transfer transactions needs to be less than 200 ms during peak business hours of 9am to 10am"
-- Poor optimization goal: "The system is too slow and unresponsive and needs to be optimized"
+- Good tuning objective: The p99 latency for transfer transactions needs to be less than 200 ms during peak business hours of 9am to 10am.
+- Poor tuning objective: The system is too slow to respond so it needs to be optimized.
 
-Defining a clear optimization goal helps guide subsequent performance tuning efforts.
+Defining a clear tuning objective helps guide the subsequent performance tuning steps.
 
-### Step 2: Establish a performance baseline
+### Step 2. Establish a performance baseline
 
-To perform performance tuning efficiently, you need to capture current performance data to establish a performance baseline. The performance data that needs to be captured typically contains the following.
+To tune performance efficiently, you need to capture the current performance data to establish a performance baseline. The performance data to be captured typically includes the following:
 
-- Mean and long-tail values of user response time, application system throughput
-- Database performance data such as database time, Query latency and QPS.
+- Mean and long-tail values of user response time, and throughput of your application
+- Database performance data such as database time, query latency, and QPS
 
-    TiDB has refined measurements and storage for different dimensions of performance data, such as [slow logs](/identify-slow-queries.md), [Top SQL](/dashboard/top-sql.md), [continuous performance profiling capabilities](/dashboard//continuous- profiling.md), and [traffic visualization](/dashboard/dashboard-key-visualizer.md), among others. In addition, you can perform historical backtracking and comparison of the timing metrics data stored in Prometheus.
+    TiDB measures and stores performance data thoroughly in different dimensions, such as [slow query logs](/identify-slow-queries.md), [Top SQL](/dashboard/top-sql.md), [Continuous Performance Profiling](/dashboard/continuous-profiling.md), and [traffic visualizer](/dashboard/dashboard-key-visualizer.md). In addition, you can perform historical backtracking and comparison of the timing metrics data stored in Prometheus.
 
-- Resource utilization, including CPU, IO, and network resources
-- Configuration information, such as application, database and operating system configuration
+- Resource utilization, including resources such as CPU, IO, and network
+- Configuration information, such as application configurations, database configurations, and operating system configurations
 
-### Step 3: Locate bottlenecks in user response time
+### Step 3. Locate bottlenecks in user response time
 
 Locate or speculate on bottlenecks in user response times based on data from the performance baseline.
 
-Implementations often do not have complete measurement and documentation of the links requested by the user, so you cannot effectively decompose the user response time from top to bottom through the application.
+Applications usually do not measure and record the full chain of user requests, so you cannot effectively break down user response time from top to bottom through the application.
 
-In contrast, performance metrics such as query latency and throughput are very well documented within the database. Based on database time, you can determine if the bottleneck in user response time is in the database.
+In contrast, databases have a complete record of performance metrics such as query latency and throughput. Based on database time, you can determine if the bottleneck in user response time is in a database.
 
-- If the bottleneck is not in the database, you need to rely on the resource utilization collected outside the database or profile the application to identify the bottleneck outside the database. Common scenarios include insufficient application or proxy server resources, applications with serial points that cannot fully utilize hardware resources, etc.
-- If bottlenecks exist in the database, you can perform internal database performance analysis and diagnosis through the database's comprehensive tuning tools. Common scenarios include the presence of slow SQL, applications using the database in an unreasonable manner, and the presence of read and write hotspots in the database.
+- If the bottleneck is not in databases, you need to rely on the resource utilization collected outside databases or profile the application to identify the bottleneck outside databases. Common scenarios include insufficient resource of an application or proxy server, and insufficient usage of hardware resources caused by serial points in an application.
+- If bottlenecks are in databases, you can analyze and diagnose the database performances using comprehensive tuning tools. Common scenarios include the presence of slow SQL, unreasonable usage of a database by an application, and the presence of read and write hotspots in databases.
 
-For specific analysis and diagnostic methods and tools, please refer to [performance-optimization-methods](/performance-tuning-methods.md).
+For more information about the analysis and diagnostic methods and tools, see [Performance Tuning Methods](/performance-tuning-methods.md).
 
-### Step 4: Propose optimization options, assessing the benefits, risks and costs of each option
+### Step 4. Propose tuning solutions, assess the benefits, risks, and costs of each solution
 
-After identifying the bottleneck points of the system through performance analysis, an optimization solution is proposed that is cost effective, low risk, and provides the maximum benefit based on the actual situation.
+After identifying the bottleneck of a system through performance analysis, you can propose an tuning solution that is cost effective, has low risks, and provides the maximum benefit based on the actual situation.
 
-According to [Amdahl's Law](https://zh.wikipedia.org/wiki/%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B), the maximum gain from performance tuning depends on the percentage of the optimized part of the overall system. Therefore, you need to identify the system bottlenecks and the corresponding share based on the performance data, and predict the gains after the bottleneck is resolved or optimized.
+According to [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law), the maximum gain from performance tuning depends on the percentage of the optimized part in the overall system. Therefore, you need to identify the system bottlenecks and the corresponding percentage based on the performance data, and then predict the gains after the bottleneck is resolved or optimized.
 
-It is important to note that even if the potential benefits of optimizing a particular solution for the largest bottleneck point are greatest, the risks and costs of that solution need to be evaluated as well. For example.
+Note that even if a solution can bring greatest potential benefits by tunning the largest bottleneck, you still need to evaluate the risks and costs of this solution. For example:
 
-- The most straightforward optimization solution for resource-overloaded systems is to expand the capacity, but in practice the expansion solution may be too costly to be adopted.
-- When a slow SQL in a business module causes a slow response time for the entire module, the solution of upgrading to a new version of the database can solve the slow SQL problem, but it may also affect modules that did not have the problem, so this solution may have a potentially high risk. A low-risk solution is to rewrite the existing slow SQL without upgrading the database version and resolve the problem in the current database version.
+- The most straightforward tuning objective solution for a resource-overloaded system is to expand its capacity, but in practice the expansion solution might be too costly to be adopted.
+- When a slow query in a business module causes slow response for the entire module, upgrading to a new version of the database can solve the slow query issue, but it might also affect modules that did not have this issue. Therefore, this solution might have a potentially high risk. A low-risk solution is to skip the database version upgrade and rewrite the existing slow queries for the current database version.
 
-### Step 5: Implement optimization
+### Step 5. Implement the tuning process
 
-Considering the benefits, risks and costs, one or more optimization options are selected for implementation, and changes to the production system are thoroughly prepared and well documented.
+Considering the benefits, risks, and costs, choose one or more tuning solutions for implementation. In the implementation process, you need to make thorough preparation for changes to the production system and record the changes in details.
 
-To mitigate risk and validate the benefits of the optimization solution, it is recommended that the changes be validated and fully regressed in a test and quasi-production environment. For example, for slow SQL for a query business, if the selected optimization solution is to create a new index to optimize the access path of the query, you need to ensure that the new index does not introduce significant write hotspots in the existing data insertion business, causing the rest of the business to slow down.
+To mitigate risks and validate the benefits of a tuning solution, it is recommended that you perform validation and complete regression of changes in both test and staging environments. For example, if the selected tuning solution of a slow query is to create a new index to optimize the query access path, you need to ensure that the new index does not introduce any obvious write hotspots to the existing data insertion business and slows down other business.
 
-### Step 6: Evaluate optimization results
+### Step 6. Evaluate the tuning results
 
-After implementing the optimization, the results need to be evaluated.
+After implementing the tuning solution, you need to evaluate the results:
 
-- If the optimization goal is met, the entire optimization project is successfully completed.
-- If the optimization goal is not reached, you need to repeat steps 2 through 6 until the optimization goal is reached.
+- If the tuning objective is reached, the entire tuning project is successfully completed.
+- If the tuning objective is not reached, you need to repeat step 2 to step 6 in this document until the tuning objective is reached.
 
-After reaching your optimization goals, you may need to further plan the capacity of your system in order to handle the growth of your business.
+After reaching your tuning objectives, you might need to further plan your system capacity to meet your business growth.
