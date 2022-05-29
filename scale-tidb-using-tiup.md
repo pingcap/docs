@@ -24,7 +24,7 @@ For example, if the original topology of the cluster is as follows:
 
 ## Scale out a TiDB/PD/TiKV cluster
 
-Assume that you want to add a TiDB node to the `10.0.1.5` host. Take the following steps.
+This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
 
 > **Note:**
 >
@@ -149,7 +149,7 @@ After the scale-out, the cluster topology is as follows:
 
 ## Scale out a TiFlash cluster
 
-Assume that you want to add a TiFlash node to the `10.0.1.4` host. Take the following steps.
+This section exemplifies how to add a TiFlash node to the `10.0.1.4` host.
 
 > **Note:**
 >
@@ -205,7 +205,7 @@ After the scale-out, the cluster topology is as follows:
 
 ## Scale out a TiCDC cluster
 
-Assume that you want to add two TiCDC nodes to the `10.0.1.3` and `10.0.1.4` hosts. Take the following steps.
+This section exemplifies how to add two TiCDC nodes to the `10.0.1.3` and `10.0.1.4` hosts.
 
 1. Add the node information to the `scale-out.yaml` file:
 
@@ -257,7 +257,7 @@ After the scale-out, the cluster topology is as follows:
 
 ## Scale in a TiDB/PD/TiKV cluster
 
-Assume that you want to remove a TiKV node from the `10.0.1.5` host. Take the following steps.
+This section exemplifies how to remove a TiKV node from the `10.0.1.5` host.
 
 > **Note:**
 >
@@ -333,7 +333,7 @@ The current topology is as follows:
 
 ## Scale in a TiFlash cluster
 
-Assume that you want to remove a TiFlash node from the `10.0.1.4` host. Take the following steps.
+This section exemplifies how to remove a TiFlash node from the `10.0.1.4` host.
 
 ### 1. Adjust the number of replicas of the tables according to the number of remaining TiFlash nodes
 
@@ -486,7 +486,7 @@ After the scale-out, the cluster topology is as follows:
 
 ## Scale in a TiCDC cluster
 
-Assume that you want to remove the TiCDC node from the `10.0.1.4` host. Take the following steps:
+ This section exemplifies how to remove the TiCDC node from the `10.0.1.4` host.
 
 1. Take the node offline:
 
