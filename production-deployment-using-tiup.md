@@ -221,7 +221,7 @@ tiup cluster template > topology.yaml
 
 In the following two common scenarios, you can generate recommended topology templates by running commands:
 
-- Hybrid deployment: Multiple instances are deployed on a single machine. For details, see [Hybrid Deployment Topology](/hybrid-deployment-topology.md).
+- For hybrid deployment: Multiple instances are deployed on a single machine. For details, see [Hybrid Deployment Topology](/hybrid-deployment-topology.md).
 
     {{< copyable "shell-regular" >}}
 
@@ -229,7 +229,7 @@ In the following two common scenarios, you can generate recommended topology tem
     tiup cluster template --full > topology.yaml
     ```
 
-- Geo-distributed deployment: TiDB clusters are deployed in geographically distributed data centers. Fordetails, see [Geo-Distributed Deployment Topology](/geo-distributed-deployment-topology.md).
+- For geo-distributed deployment: TiDB clusters are deployed in geographically distributed data centers. For details, see [Geo-Distributed Deployment Topology](/geo-distributed-deployment-topology.md).
 
     {{< copyable "shell-regular" >}}
 
@@ -237,7 +237,7 @@ In the following two common scenarios, you can generate recommended topology tem
     tiup cluster template --multi-dc > topology.yaml
     ```
 
-Execute `vi topology.yaml` to see the configuration file content:
+Run `vi topology.yaml` to see the configuration file content:
 
 {{< copyable "shell-regular" >}}
 
@@ -335,12 +335,12 @@ Before you run the `deploy` command, use the `check` and `check --apply` command
     tiup cluster deploy tidb-test v6.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-In the preceding command:
+In the `tiup cluster deploy` command above:
 
-- `tidb-test` is the name of the deployed TiDB cluster.
-- `v6.0.0` is the version of the deployed TiDB cluster. You can see the latest supported versions by running `tiup list tidb`.
+- `tidb-test` is the name of the TiDB cluster to be deployed.
+- `v6.0.0` is the version of the TiDB cluster to be deployed. You can see the latest supported versions by running `tiup list tidb`.
 - `topology.yaml` is the initialization configuration file.
-- `--user root` indicates logging in to the target machine as the root user to complete the cluster deployment. The root user should have`ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
+- `--user root` indicates logging into the target machine as the `root` user to complete the cluster deployment. The `root` user is expected to have `ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
 - `[-i]` and `[-p]` are optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the root user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
 
 At the end of the output log, you will see ```Deployed cluster `tidb-test` successfully```. This indicates that the deployment is successful.

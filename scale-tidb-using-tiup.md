@@ -351,7 +351,7 @@ Before the node goes down, make sure that the number of remaining nodes in the T
 
 ### 2. Perform the scale-in operation
 
-perform the scale-in operation with one of the following solutions.
+Perform the scale-in operation with one of the following solutions.
 
 #### Solution 1. Use TiUP to remove a TiFlash node
 
