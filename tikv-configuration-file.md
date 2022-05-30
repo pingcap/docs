@@ -693,6 +693,10 @@ Configuration items related to Raftstore.
 
 ### `consistency-check-interval`
 
+> **Warning:**
+>
+> It is **NOT** recommended to enable the consistency check in production environments, because it affects cluster performance and is incompatible with the garbage collection in TiDB.
+
 + The time interval at which the consistency check is triggered. `0` means that this feature is disabled.
 + Default value: `"0s"`
 + Minimum value: `0`
@@ -1328,14 +1332,13 @@ Configuration items related to Raft Engine.
 
 > **Note:**
 >
-> - Raft Engine is an experimental feature. It is not recommended to use it in the production environment.
 > - When you enable Raft Engine for the first time, TiKV transfers its data from RocksDB to Raft Engine. Therefore, you need to wait extra tens of seconds for TiKV to start.
 > - The data format of Raft Engine in TiDB v5.4.0 is not compatible with earlier TiDB versions. Therefore, if you need to downgrade a TiDB cluster from v5.4.0 to an earlier version, **before** downgrading, disable Raft Engine by setting `enable` to `false` and restart TiKV for the configuration to take effect.
 
 ### `enable`
 
 + Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
-+ Default value: `false`
++ Default value: `true`
 
 ### `dir`
 
@@ -1383,6 +1386,12 @@ Configuration items related to Raft Engine.
 + The number of threads used to scan and recover log files.
 + Default value: `4`
 + Minimum value: `1`
+
+### `memory-limit`
+
++ Specifies the limit on the memory usage of Raft Engine.
++ When this configuration value is not set, 15% of the available system memory is used.
++ Default value: `Total machine memory * 15%`
 
 ## security
 
