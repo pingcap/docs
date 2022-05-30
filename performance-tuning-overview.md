@@ -11,17 +11,17 @@ This document introduces the basic concepts of performance tuning, such as user 
 
 ### User response time
 
-User response time indicates how long an application takes to return the results of a request to users. As you can see from the following processing timing diagram, the time of a typical user request contains the network latency between the user and the application, the processing time of the application, the network latency during the interaction between the application and the database, and the service time of the database. The user response time is affected by various subsystems on the request chain, such as network latency and bandwidth, number and request types of concurrent users, and resource usage of server CPU and I/O. To optimize the entire system effectively, you need to first locate the bottlenecks in user response time.
+User response time indicates how long an application takes to return the results of a request to users. As you can see from the following sequential timing diagram, the time of a typical user request contains the network latency between the user and the application, the processing time of the application, the network latency during the interaction between the application and the database, and the service time of the database. The user response time is affected by various subsystems on the request chain, such as network latency and bandwidth, number and request types of concurrent users, and resource usage of server CPU and I/O. To optimize the entire system effectively, you need to first identify the bottlenecks in user response time.
 
 To get a total user response time within a specified time range (`ΔT`), you can use the following formula:
 
 Total user response time in `ΔT` = Average TPS (Transactions Per Second) x Average user response time x `ΔT`.
 
-! [user_response_time](/media/performance/user_response_time_cn.png)
+![user_response_time](/media/performance/user_response_time_cn.png)
 
 ### Database time
 
-Database time indicates how long a database takes to provide services. The database time in `ΔT` is the sum of the time that a database takes to process all application requests concurrently.
+Database time indicates the total service time provided by a database. The database time in `ΔT` is the sum of the time that a database takes to process all application requests concurrently.
 
 To get the database time, you can use any of the following methods:
 
@@ -38,12 +38,12 @@ User Response time = Service time + Queuing delay + Coherency delay
 ```
 
 - Service Time: the time a system consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
-- Queuing delay: the time a system waits in a queue for getting a service of certain resources when processing a request.
-- Coherency delay: the time a system communicates and collaborates with other concurrent tasks so that it can access shared resources when processing a request.
+- Queuing delay: the time a system waits in a queue for service of certain resources when processing a request.
+- Coherency delay: the time a system communicates and collaborates with other concurrent tasks, so that it can access shared resources when processing a request.
 
 System throughput indicates the number of requests that can be completed by a system per second. User response time and throughput are usually inverse of each other. When the throughput increases, the system resource utilization and the queuing latency for a requested service increase accordingly. Once resource utilization exceeds a certain inflection point, the queuing latency will increase dramatically.
 
-For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different databases might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
+For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different users might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
 
 ## performance tuning process
 
@@ -51,9 +51,9 @@ The performance tuning process consists of the following 6 steps:
 
 1. Define a tuning objective.
 2. Establish a performance baseline.
-3. Locate bottlenecks in user response time.
-4. Propose tuning solutions, assess the benefits, risks, and costs of each solution
-5. Implement the tuning process.
+3. Identify bottlenecks in user response time.
+4. Propose tuning solutions, evaluates the benefits, risks, and costs of each solution
+5. Implement the tuning solution.
 6. Evaluate the tuning results.
 
 To achieve the tuning objective of a performance tuning project, you usually need to repeat Step 2 to Step 6 multiple times.
@@ -81,9 +81,9 @@ To tune performance efficiently, you need to capture the current performance dat
 - Resource utilization, including resources such as CPU, IO, and network
 - Configuration information, such as application configurations, database configurations, and operating system configurations
 
-### Step 3. Locate bottlenecks in user response time
+### Step 3. Identify bottlenecks in user response time
 
-Locate or speculate on bottlenecks in user response times based on data from the performance baseline.
+Identify or speculate on bottlenecks in user response times based on data from the performance baseline.
 
 Applications usually do not measure and record the full chain of user requests, so you cannot effectively break down user response time from top to bottom through the application.
 
@@ -94,7 +94,7 @@ In contrast, databases have a complete record of performance metrics such as que
 
 For more information about the analysis and diagnostic methods and tools, see [Performance Tuning Methods](/performance-tuning-methods.md).
 
-### Step 4. Propose tuning solutions, assess the benefits, risks, and costs of each solution
+### Step 4. Propose tuning solutions, evaluates the benefits, risks, and costs of each solution
 
 After identifying the bottleneck of a system through performance analysis, you can propose a tuning solution that is cost-effective, has low risks, and provides the maximum benefit based on the actual situation.
 
@@ -105,15 +105,15 @@ Note that even if a solution can bring the greatest potential benefits by tunnin
 - The most straightforward tuning objective solution for a resource-overloaded system is to expand its capacity, but in practice, the expansion solution might be too costly to be adopted.
 - When a slow query in a business module causes a slow response of the entire module, upgrading to a new version of the database can solve the slow query issue, but it might also affect modules that did not have this issue. Therefore, this solution might have a potentially high risk. A low-risk solution is to skip the database version upgrade and rewrite the existing slow queries for the current database version.
 
-### Step 5. Implement the tuning process
+### Step 5. Implement the tuning solutions
 
 Considering the benefits, risks, and costs, choose one or more tuning solutions for implementation. In the implementation process, you need to make thorough preparation for changes to the production system and record the changes in detail.
 
-To mitigate risks and validate the benefits of a tuning solution, it is recommended that you perform validation and complete regression of changes in both test and staging environments. For example, if the selected tuning solution of a slow query is to create a new index to optimize the query access path, you need to ensure that the new index does not introduce any obvious write hotspots to the existing data insertion business and slows down other business.
+To mitigate risks and validate the benefits of a tuning solution, it is recommended that you perform validation and complete regression of changes in both test and staging environments. For example, if the selected tuning solution of a slow query is to create a new index to optimize the query access path, you need to ensure that the new index does not introduce any obvious write hotspots to the existing data insertion workload and slows down other modules.
 
 ### Step 6. Evaluate the tuning results
 
-After implementing the tuning solution, you need to evaluate the results:
+After Applying the tuning solution, you need to evaluate the results:
 
 - If the tuning objective is reached, the entire tuning project is completed successfully.
 - If the tuning objective is not reached, you need to repeat Step 2 to Step 6 in this document until the tuning objective is reached.
