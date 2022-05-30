@@ -1,34 +1,46 @@
 ---
-title: KILL [TIDB] | TiDB SQL Statement Reference
-summary: An overview of the usage of KILL [TIDB] for the TiDB database.
+title: KILL
+summary: An overview of the usage of KILL for the TiDB database.
 aliases: ['/docs/dev/sql-statements/sql-statement-kill/','/docs/dev/reference/sql/statements/kill/']
 ---
 
-# KILL [TIDB]
+# KILL
 
-The statement `KILL TIDB` is used to terminate connections in TiDB.
+The statement `KILL TIDB` is used to terminate a connection in any TiDB instance in the current TiDB cluster.
 
 ## Synopsis
 
 ```ebnf+diagram
-KillStmt ::= KillOrKillTiDB ( 'CONNECTION' | 'QUERY' )? NUM
-
-KillOrKillTiDB ::= 'KILL' 'TIDB'?
+KillStmt ::= 'KILL' 'TIDB'? ( 'CONNECTION' | 'QUERY' )? CONNECTION_ID
 ```
 
 ## Examples
 
-```sql
-mysql> SHOW PROCESSLIST;
-+------+------+-----------+------+---------+------+-------+------------------+
-| Id   | User | Host      | db   | Command | Time | State | Info             |
-+------+------+-----------+------+---------+------+-------+------------------+
-|    1 | root | 127.0.0.1 | test | Query   |    0 | 2     | SHOW PROCESSLIST |
-|    2 | root | 127.0.0.1 |      | Sleep   |    4 | 2     |                  |
-+------+------+-----------+------+---------+------+-------+------------------+
-2 rows in set (0.00 sec)
+The following example shows how to query all active queries in the current cluster and terminate one of the connections.
 
-KILL TIDB 2;
+{{< copyable "sql" >}}
+
+```sql
+SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST;
+```
+
+```
++---------------------+------+-----------------+-----------------------------------------------------------------------------+
+| ID                  | USER | INSTANCE        | INFO                                                                        |
++---------------------+------+-----------------+-----------------------------------------------------------------------------+
+| 8306449708033769879 | root | 127.0.0.1:10082 | select sleep(30), 'foo'                                                     |
+| 5857102839209263511 | root | 127.0.0.1:10080 | select sleep(50)                                                            |
+| 5857102839209263513 | root | 127.0.0.1:10080 | SELECT ID, USER, INSTANCE, INFO FROM INFORMATION_SCHEMA.CLUSTER_PROCESSLIST |
++---------------------+------+-----------------+-----------------------------------------------------------------------------+
+```
+
+{{< copyable "sql" >}}
+
+```sql
+KILL 5857102839209263511;
+```
+
+```
 Query OK, 0 rows affected (0.00 sec)
 ```
 
