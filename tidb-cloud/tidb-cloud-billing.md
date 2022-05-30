@@ -60,7 +60,7 @@ Both AWS and GCP might charge for data transfer, calculated per GB, whenever dat
 
 TiDB Cloud passes these charges onto customers as they are incurred, calculated using the published [AWS](https://aws.amazon.com/ec2/pricing/on-demand/) and [GCP](https://cloud.google.com/vpc/network-pricing) price tables as applicable, and without any additional fees.
 
-This cost policy applies to all TiDB Cloud customers with [Dedicated Tier](/select-cluster-tier#dedicated-tier) clusters, regardless of how those clusters are licensed.
+This cost policy applies to all TiDB Cloud customers with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, regardless of how those clusters are licensed.
 
 To make these charges easier to view, your TiDB Cloud bills and invoices aggregate and organize all data transfer charges under the following categories:
 
