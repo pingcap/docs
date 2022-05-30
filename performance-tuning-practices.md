@@ -7,13 +7,13 @@ summary: This document describes how to analyze and tune performance for OLTP wo
 
 TiDB provides comprehensive performance diagnostics and analysis features, such as [Top SQL](/dashboard/top-sql.md) and [Continuous Profiling](/dashboard/continuous-profiling.md) features on the TiDB Dashboard, and TiDB [Performance Overview Dashboard](/grafana-performance-overview-dashboard.md).
 
-This document describes how to use these features together to analyze and compare the performance of a same OLTP workload in seven different runtime scenarios, which demonstrates a performance tuning process to help you analyze and tune TiDB performance quickly.
+This document describes how to use these features together to analyze and compare the performance of the same OLTP workload in seven different runtime scenarios, which demonstrates a performance tuning process to help you analyze and tune TiDB performance quickly.
 
 > **Note:**
 >
 > [Top SQL](/dashboard/top-sql.md) and [Continuous Profiling](/dashboard/continuous-profiling.md) are not enabled by default so you need to enable them in advance.
 
-By running a same application with different JDBC configurations in these scenarios, this document shows you how the overall system performance is affected by different interaction ways between applications and databases so that you can apply [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md) for better performance.
+By running the same application with different JDBC configurations in these scenarios, this document shows you how the overall system performance is affected by different interactions between applications and databases so that you can apply [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md) for better performance.
 
 ## Environment description
 
@@ -44,7 +44,7 @@ From the Top SQL page in the TiDB Dashboard below, you can see that the non-busi
 
 ! [dashboard-for-query-interface](/media/performance/case1.png)
 
-From the following flame chart of TiDB, you can see that the CPU consumption of functions such as `Compile` and `Optimize` is significant during the SQL execution. Because the application uses the Query interface, TiDB cannot use the execution plan cache, which result in that TiDB needs to compile and generate an execution plan for each SQL statement.
+From the following flame chart of TiDB, you can see that the CPU consumption of functions such as `Compile` and `Optimize` is significant during the SQL execution. Because the application uses the Query interface, TiDB cannot use the execution plan cache, which results in TiDB needing to compile and generate an execution plan for each SQL statement.
 
 ! [flame-graph-for-query-interface](/media/performance/7.1.png)
 
@@ -61,7 +61,7 @@ Check the database time overview and QPS in the following Performance Overview d
 - Database Time by SQL Type: the `Select` statement type takes the most time.
 - Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
 - SQL Execute Time Overview: `Get`, `Cop`, and `tso wait` take most of the time.
-- CPS By Type: only the `Query` the command is used.
+- CPS By Type: only the `Query` command is used.
 - Queries Using Plan Cache OPS: No data indicates that the execution plan cache is not hit.
 - In the query duration, the latency of `execute` and `compile` takes the highest percentage.
 - avg QPS = 56.8k
@@ -72,7 +72,7 @@ Check the resource consumption of the cluster: the average utilization of TiDB C
 
 ### Analysis conclusion
 
-There is a need to block these useless non-business SQL statements, which has a large number.
+There is a need to block these useless non-business SQL statements, which have a large number.
 
 ## Scenario 2. Use the maxPerformance configuration
 
@@ -110,9 +110,9 @@ The data of the database time overview and QPS is as follows:
 - Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
 - SQL Execute Time Overview: `Get`, `Cop`, `Prewrite`, and `tso wait` take most of the time.
 - In the database time, the latency of `execute` and `compile` takes the highest percentage.
-- CPS By Type: only the `Query` the command is used.
+- CPS By Type: only the `Query` command is used.
 - avg QPS = 24.2k (56.3k -> 24.2k)
-- Execution plan cache is not hit.
+- The execution plan cache is not hit.
 
 From Scenario 1 to Scenario 2, the average TiDB CPU utilization drops from 925% to 874%, and the average TiKV CPU utilization increases from 201% to about 250%.
 
@@ -129,15 +129,15 @@ The changes in key latency metrics are as follows:
 
 ### Analysis conclusion
 
-Compared with Scenario 1, the QPS of Scenario 2 has significantly decreased. The average query duration and average `parse`, `compile` and `execute` durations have significantly increased. This is because SQL statements such as `select @@session.transaction_read_only` in Scenario 1, which are executed many times and have fast processing time, lower the average performance data. After Scenario 2 blocks such statements, only business related SQL statements remain, so the average duration increases.
+Compared with Scenario 1, the QPS of Scenario 2 has significantly decreased. The average query duration and average `parse`, `compile`, and `execute` durations have significantly increased. This is because SQL statements such as `select @@session.transaction_read_only` in Scenario 1, which are executed many times and have fast processing time, lower the average performance data. After Scenario 2 blocks such statements, only business-related SQL statements remain, so the average duration increases.
 
-When the application uses the Query interface, TiDB cannot use the execution plan cache, which results in that TiDB consumes high resources to compile execution plans. In this case, it is recommended that you use the pre-compiled Prepared Statement interface, which uses TiDB execution plan cache to reduce the TiDB CPU consumption caused by execution plan compiling and decrease the latency.
+When the application uses the Query interface, TiDB cannot use the execution plan cache, which results in TiDB consuming high resources to compile execution plans. In this case, it is recommended that you use the pre-compiled Prepared Statement interface, which uses the execution plan cache of TiDB to reduce the TiDB CPU consumption caused by execution plan compiling and decrease the latency.
 
 ## Scenario 3. Use the Prepared Statement interface with execution plan caching not enabled
 
 ### Application configuration
 
-The application uses the following connection configuration. Comparing with Scenario 2, the value of the JDBC parameter `useServerPrepStmts` is modified to `true`, indicating that the interface of pre-compiled statements is enabled.
+The application uses the following connection configuration. Compared with Scenario 2, the value of the JDBC parameter `useServerPrepStmts` is modified to `true`, indicating that the interface of pre-compiled statements is enabled.
 
 ```
 useServerPrepStmts=true&useConfigs=maxPerformance"
@@ -169,7 +169,7 @@ The QPS drops from 24.4k to 19.7k. From the Database Time Overview, you can see 
 - SQL Execute Time Overview: `Get`, `Cop`, `Prewrite`, and `tso wait` take most of the time.
 - CPS By Type: 3 types of commands (`StmtPrepare`, `StmtExecute`, `StmtClose`) are used.
 - avg QPS = 19.7k (from 24.4k to 19.7k)
-- Execution plan cache is not hit.
+- The execution plan cache is not hit.
 
 The TiDB average CPU utilization increases from 874% to 936%.
 
@@ -191,9 +191,9 @@ Unlike Scenario 2, the application in Scenario 3 enables the Prepared Statement 
 - Reason analysis for the decrease in QPS: From the **CPS By Type** pane, you can see that Scenario 2 has only one CPS By Type command type (`Query`), while Scenario 3 has three more command types (`StmtPrepare`, `StmtExecute`, `StmtClose`). `StmtPrepare` and `StmtClose` are non-conventional commands that are not counted by QPS, so QPS is reduced. The non-conventional commands `StmtPrepare` and `StmtClose` are counted in the `general` SQL type, so `general` time is displayed in the database overview of Scenario 3, and it accounts for more than a quarter of the database time.
 - Reason analysis for the significant decrease in average query duration: for the `StmtPrepare` and `StmtClose` command types newly added in Scenario 3, their query duration is calculated separately in the TiDB internal processing. TiDB executes these two types of commands very quickly, so the average query duration is significantly reduced.
 
-Although Scenario 3 uses the Prepare Statement pre-compiled interface, the execution plan cache is still not hit, because many application frameworks call the `StmtClose` method after `StmtExecute` to prevent memory leaks. Starting from v6.0.0, you can set the global variable `tidb_ignore_prepared_cache_close_stmt=on;`. After that, TiDB will not clear the cached execution plans even if the application calls the `StmtClose` method, so that the next SQL execution can reuse an existing execution plan and avoid compiling the execution plan repeatedly.
+Although Scenario 3 uses the Prepare Statement pre-compiled interface, the execution plan cache is still not hit, because many application frameworks call the `StmtClose` method after `StmtExecute` to prevent memory leaks. Starting from v6.0.0, you can set the global variable `tidb_ignore_prepared_cache_close_stmt=on;`. After that, TiDB will not clear the cached execution plans even if the application calls the `StmtClose` method, so the next SQL execution can reuse an existing execution plan and avoid compiling the execution plan repeatedly.
 
-## Scenario 4. Using the Prepared Statement interface and enable execution plan caching
+## Scenario 4. Use the Prepared Statement interface and enable execution plan caching
 
 ### Application configuration
 
@@ -206,7 +206,7 @@ The application configuration remains the same as that of Scenario 3. To resolve
 
 #### TiDB Dashboard
 
-From the flame chart of TiDB CPU usage, you can see that `CompileExecutePreparedStmt` and `Optimize` have no significant CPU consumption. 25% of the CPU is consumed by the `Prepare` command, which contains parsing-related functions of Prepare such as `PlanBuilder` and `parseSQL`.
+From The flame chart of the TiDB CPU usage, you can see that `CompileExecutePreparedStmt` and `Optimize` have no significant CPU consumption. 25% of the CPU is consumed by the `Prepare` command, which contains parsing-related functions of Prepare such as `PlanBuilder` and `parseSQL`.
 
 PreparseStmt cpu = 25% cpu time = 12.75s
 
@@ -214,16 +214,16 @@ PreparseStmt cpu = 25% cpu time = 12.75s
 
 #### Performance Overview dashboard
 
-In the Performance Overview dashboard, the most significant change is the average time of the `compile` phase, which is reduced from 8.95 seconds per second in Scenario 3 to 1.18 seconds per second. The number of queries using execution plan cache is roughly equal to the value of `StmtExecute`. With the increase in QPS, the database time consumed by `Select` statements per second decreases, and the database time consumed by `general` statements per second type increases.
+In the Performance Overview dashboard, the most significant change is the average time of the `compile` phase, which is reduced from 8.95 seconds per second in Scenario 3 to 1.18 seconds per second. The number of queries using the execution plan cache is roughly equal to the value of `StmtExecute`. With the increase in QPS, the database time consumed by `Select` statements per second decreases, and the database time consumed by `general` statements per second type increases.
 
 ! [performance-overview-1-for-3-commands](/media/performance/j-4.png)
 
 - Database Time by SQL Type: the `Select` statement type takes the most time.
 - Database Time by SQL Phase: the `execute` phase takes most of the time.
 - SQL Execute Time Overview: `tso wait`, `Get`, and `Cop` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals to `StmtExecute` per second.
+- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
 - CPS By Type: 3 types of commands (same as Scenario 3)
-- Compared with scenario 3, the time consumed by `general` statements is longer  because the QPS is increased.
+- Compared with scenario 3, the time consumed by `general` statements is longer because the QPS is increased.
 - avg QPS = 22.1k (from 19.7k to 22.1k)
 
 The average TiDB CPU utilization drops from 936% to 827%.
@@ -273,15 +273,15 @@ From the following flame chart of TiDB, you can see that the high CPU consumptio
 
 #### Performance Overview dashboard
 
-In the Performance Overview dashboard, the most notable changes are that the three Stmt command types in the **CPS By Type** pane changes to one type, the `general` statement type in the **Database Time by SQL Type** pane is disappeared, and the QPS in the **QPS** pane increases to 30.9k.
+In the Performance Overview dashboard, the most notable changes are that the three Stmt command types in the **CPS By Type** pane drop to one type, the `general` statement type in the **Database Time by SQL Type** pane is disappeared, and the QPS in the **QPS** pane increases to 30.9k.
 
 ! [performance-overview-for-1-command](/media/performance/j-5.png)
 
 - Database Time by SQL Type: the `Select` statement type takes the most time and the `general` statement type disappears.
 - Database Time by SQL Phase: the `execute` phase takes most of the time.
 - SQL Execute Time Overview: `tso wait`, `Get`, and `Cop` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals to `StmtExecute` per second.
-- CPS By Type: only the `StmtExecute` the command is used.
+- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
+- CPS By Type: only the `StmtExecute` command is used.
 - avg QPS = 30.9k (from 22.1k to 30.9k)
 
 The average TiDB CPU utilization drops from 827% to 577%. As the QPS increases, the average TiKV CPU utilization increases to 313%.
@@ -312,13 +312,13 @@ TiDB v6.0 provides `rc read`, which optimizes the `read committed` isolation lev
 
 ### Application configuration
 
-Comparing with Scenario 5, the application configuration remains the same. The only difference is that, the `set global tidb_rc_read_check_ts=on;` variable is configured to reduce TSO requests.
+Compared with Scenario 5, the application configuration remains the same. The only difference is that the `set global tidb_rc_read_check_ts=on;` variable is configured to reduce TSO requests.
 
 ### Performance analysis
 
 #### Dashboard
 
-The flame chart of TiDB CPU does not have any significant changes.
+The flame chart of the TiDB CPU does not have any significant changes.
 
 - ExecutePreparedStmt cpu = 22% cpu time = 8.4s
 
@@ -333,15 +333,15 @@ After using RC read, QPS increases from 30.9k to 34.9k, and the `tso wait` time 
 - Database Time by SQL Type: the `Select` statement type takes the most time.
 - Database Time by SQL Phase: the `execute` phase takes most of the time.
 - SQL Execute Time Overview: `Get`, `Cop`, and `Prewrite` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals to `StmtExecute` per second.
-- CPS By Type: only the `StmtExecute` the command is used.
+- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
+- CPS By Type: only the `StmtExecute` command is used.
 - avg QPS = 34.9k (from 30.9k to 34.9k)
 
 The `tso cmd` per second drops from 28.3k to 2.7k.
 
 ! [performance-overview-2-for-rc-read](/media/performance/j-6-cmd.png)
 
-The average TiDB CPU increase to 603% (from 577% to 603%).
+The average TiDB CPU increases to 603% (from 577% to 603%).
 
 ! [performance-overview-3-for-rc-read](/media/performance/j-6-cpu.png)
 
@@ -361,17 +361,17 @@ After enabling RC Read by `set global tidb_rc_read_check_ts=on;`, RC Read signif
 
 The bottlenecks of both current database time and latency are in the `execute` phase, in which the `Get` and `Cop` read requests take the highest percentage. Most of the tables in this workload are read-only or rarely modified, so you can use the small table caching feature supported since TiDB v6.0.0 to cache the data of these small tables and reduce the waiting time and resource consumption of KV read requests.
 
-## Scenario 7: Using small table cache
+## Scenario 7: Use the small table cache
 
 ### Application configuration
 
-Comparing with scenarios 6, the application configuration remains the same. The only difference is that , Scenario 7 uses SQL statements such as `alter table t1 cache;` to cache those read-only tables for the business.
+Compared with Scenario 6, the application configuration remains the same. The only difference is that Scenario 7 uses SQL statements such as `alter table t1 cache;` to cache those read-only tables for the business.
 
 ### Performance analysis
 
 #### TiDB Dashboard
 
-The flame chart of TiDB CPU does not have any significant changes.
+The flame chart of the TiDB CPU does not have any significant changes.
 
 ! [flame-graph-for-table-cache](/media/performance/7.2.png)
 
@@ -384,8 +384,8 @@ The QPS increases from 34.9k to 40.9k, and the KV request types take the most ti
 - Database Time by SQL Type: the `Select` statement type takes the most time.
 - Database Time by SQL Phase: the `execute` and `compile` phases take most of the time.
 - SQL Execute Time Overview: `Prewrite`, `Commit`, and `Get` take most of the time.
-- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals to `StmtExecute` per second.
-- CPS By Type: only the `StmtExecute` the command is used.
+- Execution plan cache is hit. The value of Queries Using Plan Cache OPS roughly equals `StmtExecute` per second.
+- CPS By Type: only the `StmtExecute` command is used.
 - avg QPS = 40.9k (from 34.9k to 40.9k)
 
 The average TiDB CPU utilization drops from 603% to 478% and the average TiKV CPU utilization drops from 346% to 256%.
@@ -405,7 +405,7 @@ The average query latency drops from 533 us to 313 us. The average `execute` lat
 
 After caching all read-only tables, the `Execute Duration` drops significantly because all read-only tables are cached in TiDB and there is no need to query data in TiKV for those tables, so the query duration drops and the QPS increases.
 
-This is an optimistic result, because data of read-only tables in actual business might be too large for TiDB to cache them all. Another limitation is that although the small table caching feature supports write operations, the write operation requires a default wait of 3 seconds to ensure that the cache of all TiDB nodes to be invalidated first, which might not be friendly to applications with strict latency requirements.
+This is an optimistic result because data of read-only tables in actual business might be too large for TiDB to cache them all. Another limitation is that although the small table caching feature supports write operations, the write operation requires a default wait of 3 seconds to ensure that the cache of all TiDB nodes is invalidated first, which might not be friendly to applications with strict latency requirements.
 
 ## Summary
 
@@ -418,7 +418,7 @@ The following table lists the performance of seven different scenarios.
 
 In these scenarios, Scenario 2 is a common scenario where applications use the Query interface, and Scenario 5 is an ideal scenario where applications use the Prepared Statement interface.
 
-- Comparing Scenario 2 with Scenario 5, you can see that by using best practices for Java application development and caching Prepared Statement objects on the clint side, each SQL statement requires only one command and database interaction to hit the execution plan cache, which results in a 38% drop in query latency and a 28% increase in QPS, while the average TiDB CPU utilization drops from 936% to 577%.
+- Comparing Scenario 2 with Scenario 5, you can see that by using best practices for Java application development and caching Prepared Statement objects on the client side, each SQL statement requires only one command and database interaction to hit the execution plan cache, which results in a 38% drop in query latency and a 28% increase in QPS, while the average TiDB CPU utilization drops from 936% to 577%.
 - Comparing Scenario 2 with Scenario 7, you can see that with the latest TiDB optimization features such as RC Read and small table cache on top of Scenario 5, latency is reduced by 51% and QPS is increased by 108%, while the average TiDB CPU utilization drops from 936% to 478%.
 
 By comparing the performance of each scenario, we can get the following conclusions:

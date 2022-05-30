@@ -43,7 +43,7 @@ User Response time = Service time + Queuing delay + Coherency delay
 
 System throughput indicates the number of requests that can be completed by a system per second. User response time and throughput are usually inverse of each other. When the throughput increases, the system resource utilization and the queuing latency for a requested service increase accordingly. Once resource utilization exceeds a certain inflection point, the queuing latency will increase dramatically.
 
-For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different database might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
+For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different databases might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
 
 ## performance tuning process
 
@@ -56,15 +56,15 @@ The performance tuning process consists of the following 6 steps:
 5. Implement the tuning process.
 6. Evaluate the tuning results.
 
-To achieve the tuning objective of a performance tuning project, you usually need to repeat steps 2 to step 6 for multiple times.
+To achieve the tuning objective of a performance tuning project, you usually need to repeat Step 2 to Step 6 multiple times.
 
 ### Step 1. Define a tuning objective
 
-For different types of systems, tuning objectives are different too. For example, for a financial core OLTP system, the tuning objective might be to reduce the long-tail latency of transactions; for a financial settlement system, the tuning objective might be to make better use of hardware resources and reduce time of batch settlement tasks.
+For different types of systems, tuning objectives are different too. For example, for a financial core OLTP system, the tuning objective might be to reduce the long-tail latency of transactions; for a financial settlement system, the tuning objective might be to make better use of hardware resources and reduce the time of batch settlement tasks.
 
 A good tuning objective should be easily quantifiable. For example:
 
-- Good tuning objective: The p99 latency for transfer transactions needs to be less than 200 ms during peak business hours of 9am to 10am.
+- Good tuning objective: The p99 latency for transfer transactions needs to be less than 200 ms during peak business hours of 9 am to 10 am.
 - Poor tuning objective: The system is too slow to respond so it needs to be optimized.
 
 Defining a clear tuning objective helps guide the subsequent performance tuning steps.
@@ -89,25 +89,25 @@ Applications usually do not measure and record the full chain of user requests, 
 
 In contrast, databases have a complete record of performance metrics such as query latency and throughput. Based on database time, you can determine if the bottleneck in user response time is in a database.
 
-- If the bottleneck is not in databases, you need to rely on the resource utilization collected outside databases or profile the application to identify the bottleneck outside databases. Common scenarios include insufficient resource of an application or proxy server, and insufficient usage of hardware resources caused by serial points in an application.
+- If the bottleneck is not in databases, you need to rely on the resource utilization collected outside databases or profile the application to identify the bottleneck outside databases. Common scenarios include insufficient resources of an application or proxy server, and insufficient usage of hardware resources caused by serial points in an application.
 - If bottlenecks are in databases, you can analyze and diagnose the database performances using comprehensive tuning tools. Common scenarios include the presence of slow SQL, unreasonable usage of a database by an application, and the presence of read and write hotspots in databases.
 
 For more information about the analysis and diagnostic methods and tools, see [Performance Tuning Methods](/performance-tuning-methods.md).
 
 ### Step 4. Propose tuning solutions, assess the benefits, risks, and costs of each solution
 
-After identifying the bottleneck of a system through performance analysis, you can propose an tuning solution that is cost effective, has low risks, and provides the maximum benefit based on the actual situation.
+After identifying the bottleneck of a system through performance analysis, you can propose a tuning solution that is cost-effective, has low risks, and provides the maximum benefit based on the actual situation.
 
 According to [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law), the maximum gain from performance tuning depends on the percentage of the optimized part in the overall system. Therefore, you need to identify the system bottlenecks and the corresponding percentage based on the performance data, and then predict the gains after the bottleneck is resolved or optimized.
 
-Note that even if a solution can bring greatest potential benefits by tunning the largest bottleneck, you still need to evaluate the risks and costs of this solution. For example:
+Note that even if a solution can bring the greatest potential benefits by tunning the largest bottleneck, you still need to evaluate the risks and costs of this solution. For example:
 
-- The most straightforward tuning objective solution for a resource-overloaded system is to expand its capacity, but in practice the expansion solution might be too costly to be adopted.
-- When a slow query in a business module causes slow response for the entire module, upgrading to a new version of the database can solve the slow query issue, but it might also affect modules that did not have this issue. Therefore, this solution might have a potentially high risk. A low-risk solution is to skip the database version upgrade and rewrite the existing slow queries for the current database version.
+- The most straightforward tuning objective solution for a resource-overloaded system is to expand its capacity, but in practice, the expansion solution might be too costly to be adopted.
+- When a slow query in a business module causes a slow response of the entire module, upgrading to a new version of the database can solve the slow query issue, but it might also affect modules that did not have this issue. Therefore, this solution might have a potentially high risk. A low-risk solution is to skip the database version upgrade and rewrite the existing slow queries for the current database version.
 
 ### Step 5. Implement the tuning process
 
-Considering the benefits, risks, and costs, choose one or more tuning solutions for implementation. In the implementation process, you need to make thorough preparation for changes to the production system and record the changes in details.
+Considering the benefits, risks, and costs, choose one or more tuning solutions for implementation. In the implementation process, you need to make thorough preparation for changes to the production system and record the changes in detail.
 
 To mitigate risks and validate the benefits of a tuning solution, it is recommended that you perform validation and complete regression of changes in both test and staging environments. For example, if the selected tuning solution of a slow query is to create a new index to optimize the query access path, you need to ensure that the new index does not introduce any obvious write hotspots to the existing data insertion business and slows down other business.
 
@@ -115,7 +115,7 @@ To mitigate risks and validate the benefits of a tuning solution, it is recommen
 
 After implementing the tuning solution, you need to evaluate the results:
 
-- If the tuning objective is reached, the entire tuning project is successfully completed.
-- If the tuning objective is not reached, you need to repeat step 2 to step 6 in this document until the tuning objective is reached.
+- If the tuning objective is reached, the entire tuning project is completed successfully.
+- If the tuning objective is not reached, you need to repeat Step 2 to Step 6 in this document until the tuning objective is reached.
 
 After reaching your tuning objectives, you might need to further plan your system capacity to meet your business growth.
