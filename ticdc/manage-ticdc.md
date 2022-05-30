@@ -583,7 +583,7 @@ worker-num = 16
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
-# Support two types of event dispatchers: partition and topic. For more information, see the following section.
+# Since v6.1, TiDB supports two types of event dispatchers: partition and topic. For more information, see the following section.
 # The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see the following section.
 
 dispatchers = [
