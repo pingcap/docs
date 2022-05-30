@@ -74,7 +74,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 - [Billing](/tidb-cloud/tidb-cloud-billing.md)
 - [Support](/tidb-cloud/tidb-cloud-support.md)
-- [Glossary](/tidb-cloud/glossary.md)
+- [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 
 </NavColumn>
 

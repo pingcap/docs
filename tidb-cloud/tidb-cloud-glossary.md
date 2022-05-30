@@ -2,6 +2,7 @@
 title: TiDB Cloud Glossary
 summary: Learn the terms used in TiDB Cloud.
 category: glossary
+aliases: ['/tidbcloud/glossary']
 ---
 
 # TiDB Cloud Glossary
