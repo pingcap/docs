@@ -111,7 +111,7 @@ The data of the database time overview and QPS is as follows:
 - SQL Execute Time Overview: `Get`, `Cop`, `Prewrite`, and `tso wait` take most of the time.
 - In the database time, the latency of `execute` and `compile` takes the highest percentage.
 - CPS By Type: only the `Query` command is used.
-- avg QPS = 24.2k (56.3k -> 24.2k)
+- avg QPS = 24.2k (from 56.3k to 24.2k)
 - The execution plan cache is not hit.
 
 From Scenario 1 to Scenario 2, the average TiDB CPU utilization drops from 925% to 874%, and the average TiKV CPU utilization increases from 201% to about 250%.
@@ -122,10 +122,10 @@ The changes in key latency metrics are as follows:
 
 ! [performance-overview-3-for-maxPerformance](/media/performance/9.2.2.png)
 
-- avg query duration = 1.12ms (479μs->1.12ms)
-- avg parse duration = 84.7μs (37.2μs->84.7μs)
-- avg compile duration = 370μs (166μs->370μs)
-- avg execution duration = 626μs (251μs->626μs)
+- avg query duration = 1.12ms (from 479μs to 1.12ms)
+- avg parse duration = 84.7μs (from 37.2μs to 84.7μs)
+- avg compile duration = 370μs (from 166μs to 370μs)
+- avg execution duration = 626μs (from 251μs to 626μs)
 
 ### Analysis conclusion
 
@@ -234,10 +234,10 @@ The average `compile` time drops significantly, from 374 us to 53.3 us. Because 
 
 ! [performance-overview-3-for-3-commands](/media/performance/4.5.png)
 
-- avg query duration = 426μs (528μs->426μs)
-- avg parse duration = 12.3μs (14.8μs->12.3μs)
-- avg compile duration = 53.3μs (374μs->53.3μs)
-- avg execution duration = 699μs (649μs->699us)
+- avg query duration = 426μs (from 528μs to 426μs)
+- avg parse duration = 12.3μs (from 14.8μs to 12.3μs)
+- avg compile duration = 53.3μs (from 374μs to 53.3μs)
+- avg execution duration = 699μs (from 649μs to 699us)
 
 ### Analysis conclusion
 
