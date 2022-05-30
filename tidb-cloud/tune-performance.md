@@ -23,7 +23,7 @@ To use the statement analysis, perform the following steps:
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
-![Statement Analysis](/media/statement-analysis.png)
+![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
 
 For details, see [Statement Execution Details in TiDB Dashboard](https://docs.pingcap.com/tidb/stable/dashboard-statement-details).
 
@@ -35,7 +35,7 @@ To view the key analytics, perform the following steps:
 
 2. Select the **Key Visualizer** tab.
 
-![Key Visualizer](/media/key-visualizer.png)
+![Key Visualizer](/media/tidb-cloud/key-visualizer.png)
 
 On the **Key Visualizer** page, a large heat map shows changes on access traffic over time. The average values ​​along each axis of the heat map are shown below and on the right side. The left side is the table name, index name and other information.
 

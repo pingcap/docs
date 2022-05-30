@@ -40,7 +40,7 @@ category: intro
 
 ## Architecture
 
-![TiDB Cloud architecture](/media/tidb-cloud-architecture.png)
+![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
 
 - TiDB VPC (Virtual Private Cloud)
 

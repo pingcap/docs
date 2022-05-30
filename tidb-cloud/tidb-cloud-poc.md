@@ -211,7 +211,7 @@ Once your application for the PoC is approved, you will receive trial points in 
 
 To check the points left for your PoC, go to the **Clusters** page, as shown in the following screenshot.
 
-![TiDB Cloud PoC Points](/media/poc-points.png)
+![TiDB Cloud PoC Points](/media/tidb-cloud/poc-points.png)
 
 To save points, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
 
