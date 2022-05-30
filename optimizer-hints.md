@@ -256,7 +256,7 @@ This hint takes effect on strict conditions, including:
 
 ### LEADING(t1_name [, tl_name ...])
 
-The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer, when generating the execution plan, to determine the order of multiple table joins according to the order of table names specified in the hint. For example:
+The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when generating the execution plan, to determine the order of multiple table joins according to the order of table names specified in the hint. For example:
 
 {{< copyable "sql" >}}
 
