@@ -11,7 +11,7 @@ summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB databa
 
 TiDB automatically schedules data compaction on storage nodes in the background. During the compaction, storage nodes rewrite the physical data, including cleaning up deleted rows and merging multiple versions caused by updates. This enhances read performance with less disk usage. The `ALTER TABLE ... COMPACT` statement allows you to initiate compaction for a specific table immediately, without waiting until compaction is triggered in the background.
 
-The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. However, executing this statement may take up some IO and CPU resources, which might result in higher SQL execution latency.
+The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. However, executing this statement consumes some IO and CPU resources, which might result in higher SQL execution latency.
 
 The compaction statement will be finished and returned when all replicas of a table are compacted. During the execution process, you can safely interrupt the compaction by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or background compactions.
 
@@ -28,7 +28,7 @@ AlterTableCompactStmt ::=
 
 ### Compact TiFlash replicas in a table
 
-Consider that an `employees` table has 4 partitions with 2 TiFlash replicas:
+The following takes an `employees` table as an example, which has 4 partitions with 2 TiFlash replicas:
 
 ```sql
 CREATE TABLE employees (
@@ -57,13 +57,13 @@ ALTER TABLE employee COMPACT TIFLASH REPLICA;
 
 The `ALTER TABLE ... COMPACT` statement compacts all replicas in a table simultaneously.
 
-To avoid significant impact on online business, each TiFlash instance only processes compaction command for one table at a time by default (except for the compaction triggered in the background). This means that if you execute the `ALTER TABLE ... COMPACT` statement on multiple tables at the same time, their executions will be queued on the same TiFlash instance, rather than being executed simultaneously.
+To avoid a significant impact on online business, each TiFlash instance only compacts data in one table at a time by default (except for the compaction triggered in the background). This means that if you execute the `ALTER TABLE ... COMPACT` statement on multiple tables at the same time, their executions will be queued on the same TiFlash instance, rather than being executed simultaneously.
 
-To obtain greater table-level concurrency with higher resource usage, you can modify the TiFlash configuration [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md). For example, when `manual_compact_pool_size` is set to 2, compaction for 2 tables will be processed simultaneously.
+To obtain greater table-level concurrency with higher resource usage, you can modify the TiFlash configuration [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md). For example, when `manual_compact_pool_size` is set to 2, compaction for 2 tables can be processed simultaneously.
 
 ## MySQL compatibility
 
-The `ALTER TABLE ... COMPACT` syntax is a TiDB specific syntax, which is an extension to the standard SQL syntax. Although there is no equivalent MySQL syntax, you can still execute this statement by using MySQL clients or various database drivers that follow the MySQL protocol.
+The `ALTER TABLE ... COMPACT` syntax is TiDB specific, which is an extension to the standard SQL syntax. Although there is no equivalent MySQL syntax, you can still execute this statement by using MySQL clients or various database drivers that comply with the MySQL protocol.
 
 ## TiDB Binlog and TiCDC compatibility
 
