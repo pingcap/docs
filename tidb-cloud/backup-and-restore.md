@@ -101,8 +101,6 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 ### Restore a deleted cluster
 
-When you delete a TiDB cluster, TiDB Cloud automatically creates a backup of the deleted cluster in the recycle bin and retains the backup for 7 days.
-
 To restore a deleted cluster from recycle bin, take the following steps:
 
 1. In the TiDB Cloud console, go to the target project and click the **Recycle Bin** tab.
