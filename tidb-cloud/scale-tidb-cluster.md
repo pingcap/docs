@@ -31,7 +31,7 @@ When a cluster is running, you cannot change its vCPU or storage size. To make s
 
 - Method 1: Scale vCPU or storage size through backup and restore
 
-    Scaling vCPU or storage size through backup and restore means that you need to [create a latest backup of the cluster](backup-and-restore#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then change the vCPU or storage size when you [restore the deleted cluster](/tidb-cloud/restore-deleted-tidb-cluster.md). Before taking this method, make sure the following impacts are acceptable:
+    Scaling vCPU or storage size through backup and restore means that you need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then change the vCPU or storage size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
 
     - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
     - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
