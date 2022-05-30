@@ -15,4 +15,4 @@ You can delete a cluster at any time by performing the following steps:
 4. In the cluster deleting window, enter the cluster name to confirm.
 5. Click **I understand the consequences, delete this cluster**.
 
-When you delete a TiDB cluster, TiDB Cloud automatically creates a backup of the deleted cluster in the recycle bin and retains the backup for 7 days. If you want to restore a deleted cluster from recycle bin, see [Restore a deleted cluster](backup-and-restore.md#restore-a-deleted-cluster).
+When you delete a TiDB cluster, TiDB Cloud automatically creates a backup of the deleted cluster in the recycle bin and retains the backup for 7 days. If you want to restore a deleted cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster).

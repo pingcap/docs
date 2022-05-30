@@ -29,7 +29,7 @@ TiDB Cloud provides the following two cluster tier options. Before creating a Ti
 
     The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For more information about the two options, see [Select Your Cluster Tier](select-cluster-tier.md).
+For more information about the two options, see [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md).
 
 ## Step 3. Use your default project or create a new project
 
@@ -96,7 +96,7 @@ To create a Dedicated Tier cluster, take the following steps:
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
 
-5. Configure the [cluster size](size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+5. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
 
 6. Confirm the cluster information in the middle area and the billing information in the right pane.
 

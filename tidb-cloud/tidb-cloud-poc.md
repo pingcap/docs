@@ -13,7 +13,7 @@ This document describes the typical PoC procedures and aims to help you quickly 
 
 If you are interested in doing a PoC, feel free to contact the <a href="mailto:tidbcloud-support@pingcap.com">TiDB Cloud support team</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
-Alternatively, you can [create a Developer Tier](tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial) to get familiar with TiDB Cloud for a quick evaluation. Note that the Developer Tier has some [special terms and conditions](select-cluster-tier.md#developer-tier-special-terms-and-conditions).
+Alternatively, you can [create a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial) to get familiar with TiDB Cloud for a quick evaluation. Note that the Developer Tier has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#developer-tier-special-terms-and-conditions).
 
 ## Overview of the PoC procedures
 
@@ -62,29 +62,29 @@ To get started with TiDB Cloud, take the following steps:
 
 1. [Sign up](https://tidbcloud.com/signup) for a TiDB Cloud account and complete the email verification.
 2. Log in to your [TiDB Cloud](http://tidbcloud.com) account. The plan selection page is displayed by default.
-3. Click **Apply for a PoC Trial** and refer to [Quick Start](tidb-cloud-quickstart.md) to create a [Dedicated Tier](select-cluster-tier.md#dedicated-tier) cluster for the PoC.
+3. Click **Apply for a PoC Trial** and refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster for the PoC.
 
 The **Proof of Concept plan** is a 14-day free trial option specifically designed for the PoC purpose. Selecting this plan takes you to the PoC application form. Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer trial points to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash<sup>beta</sup> nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
-- For more information about estimation practice, see [Size Your TiDB](size-your-cluster.md).
-- For configurations of the dedicated cluster, see [Create a TiDB Cluster](create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively.
+- For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
+- For configurations of the dedicated cluster, see [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively.
 - For how to plan and optimize your PoC trial points consumption effectively, see [FAQ](#faq) in this document.
-- For more information about scaling, see [Scale Your TiDB Cluster](scale-tidb-cluster.md).
+- For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
-Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Cluster](connect-to-tidb-cluster.md).
+Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 For a newly created cluster, note the following configurations:
 
-- The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](manage-user-access.md#set-the-local-time-zone).
-- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](backup-and-restore.md#backup).
+- The default time zone (the **Create Time** column on the Dashboard) is UTC. You can change it to your local time zone by following [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone).
+- The default backup setting on a new cluster is full database backup on a daily basis. You can specify a preferred backup time or back up data manually. For the default backup time and more details, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
 
 ## Step 4. Adapt your schemas and SQL
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC trial points is limited, to maximize the value of trial points, it is recommended that you create a [Developer Tier cluster](select-cluster-tier.md#developer-tier) (one-year free trial) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC trial points is limited, to maximize the value of trial points, it is recommended that you create a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) (one-year free trial) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 5.7. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
@@ -105,7 +105,7 @@ Here are some best practices:
 
 For SQL statements, you might need to adapt them depending on the level of your data source's compatibility with TiDB.
 
-If you have any questions, contact [TiDB Cloud Support](tidb-cloud-support.md) for consultation.
+If you have any questions, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
 ## Step 5. Import data
 
@@ -113,28 +113,28 @@ You can import a small dataset to quickly test feasibility, or a large dataset t
 
 You can import data in various formats to TiDB Cloud:
 
-- [Import sample data in the TiDB Dumpling format](import-sample-data.md)
-- [Migrate from Amazon Aurora MySQL](migrate-from-aurora-bulk-import.md)
-- [Import CSV Files from Amazon S3 or GCS](import-csv-files.md)
-- [Import Apache Parquet Files](import-parquet-files.md)
+- [Import sample data in the TiDB Dumpling format](/tidb-cloud/import-sample-data.md)
+- [Migrate from Amazon Aurora MySQL](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+- [Import CSV Files from Amazon S3 or GCS](/tidb-cloud/import-csv-files.md)
+- [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)
 
 > **Note:**
 >
-> - For information about character collations supported by TiDB Cloud, see [Migrate from MySQL-Compatible Databases](migrate-data-into-tidb.md). Understanding how your data is stored originally will be very helpful.
+> - For information about character collations supported by TiDB Cloud, see [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md). Understanding how your data is stored originally will be very helpful.
 > - Data import on the **Data Import Task** page does not generate additional billing fees.
 
 ## Step 6. Run your workload and evaluate results
 
 Now you have created the environment, adapted the schemas, and imported data. It is time to test your workload.
 
-Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](backup-and-restore.md#backup).
+Before testing the workload, consider performing a manual backup, so that you can restore the database to its original state if needed. For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md#backup).
 
 After kicking off the workload, you can observe the system using the following methods:
 
-- The commonly used metrics of the cluster can be found on the **Overview** page, including Total QPS, Latency, Connections, TiFlash<sup>beta</sup> Request QPS, TiFlash<sup>beta</sup> Request Duration, TiFlash<sup>beta</sup> Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](monitor-tidb-cluster.md).
-- Go to **Diagnostic > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](tune-performance.md).
-- Go to **Diagnostic > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](tune-performance.md#key-visualizer).
-- You can also integrate these metrics to your own Datadog and Prometheus. See [Third-party integrations](monitor-tidb-cluster.md#third-party-integrations).
+- The commonly used metrics of the cluster can be found on the **Overview** page, including Total QPS, Latency, Connections, TiFlash<sup>beta</sup> Request QPS, TiFlash<sup>beta</sup> Request Duration, TiFlash<sup>beta</sup> Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
+- Go to **Diagnostic > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md).
+- Go to **Diagnostic > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
+- You can also integrate these metrics to your own Datadog and Prometheus. See [Third-party integrations](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations).
 
 Now it is time for evaluating the test results.
 
@@ -152,7 +152,7 @@ The following are tips for performance tuning:
 
 - Improve write performance
 
-    - Increase the write throughput by scaling out the TiDB clusters (see [Scale a TiDB Cluster](scale-tidb-cluster.md)).
+    - Increase the write throughput by scaling out the TiDB clusters (see [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)).
     - Reduce lock conflicts by using the [optimistic transaction model](https://docs.pingcap.com/tidb/stable/optimistic-transaction#tidb-optimistic-transaction-model).
 
 - Improve query performance
@@ -160,7 +160,7 @@ The following are tips for performance tuning:
     - Check the SQL execution plan on the **Diagnostic > Statements** page.
     - Check hotspot issues on the **Dashboard > Key Visualizer** page.
     - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
-    - Use the TiFlash<sup>beta</sup> feature to optimize analytical processing. See [Use an HTAP Cluster](use-htap-cluster.md).
+    - Use the TiFlash<sup>beta</sup> feature to optimize analytical processing. See [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
 
 ## Step 7. Explore more features
 
@@ -168,21 +168,21 @@ Now the workload testing is finished, you can explore more features, for example
 
 - Upgrade
 
-    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade a TiDB Cluster](upgrade-tidb-cluster.md).
+    TiDB Cloud regularly upgrades the TiDB clusters, while you can also submit a support ticket to request an upgrade to your clusters. See [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md).
 
 - Backup
 
-    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Export Data from TiDB](export-data-from-tidb-cloud.md).
+    To avoid vendor lock-in, you can use daily full backup to migrate data to a new cluster and use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data. For more information, see [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md).
 
 ## Step 8. Clean up the environment and finish the PoC
 
 You have completed the full cycle of a PoC after you test TiDB Cloud using real workloads and get the testing results. These results help you determine if TiDB Cloud meets your expectations. Meanwhile, you have accumulated best practices for using TiDB Cloud.
 
-If you want to try TiDB Cloud on a larger scale, for a new round of deployments and tests, such as deploying with other storage sizes offered by TiDB Cloud, get full access to TiDB Cloud by creating a [Dedicated Tier](select-cluster-tier.md#dedicated-tier).
+If you want to try TiDB Cloud on a larger scale, for a new round of deployments and tests, such as deploying with other storage sizes offered by TiDB Cloud, get full access to TiDB Cloud by creating a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
-If your trial points are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](tidb-cloud-support.md) for consultation.
+If your trial points are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
-You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](delete-tidb-cluster.md).
+You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
 
 Any feedback to our support team is highly appreciated by filling in the [TiDB Cloud Feedback form](https://www.surveymonkey.com/r/L3VVW8R), such as the PoC process, the feature requests, and how we can improve the products.
 
@@ -200,14 +200,14 @@ Database backup and restore operations are typically CPU-intensive, and always r
 
 The following are some considerations about scaling:
 
-- During peak hours or data import, if you observe that the capacity metrics on the dashboard have reached the upper limits (see [Monitor a TiDB Cluster](monitor-tidb-cluster.md)), you might need to scale out the cluster.
+- During peak hours or data import, if you observe that the capacity metrics on the dashboard have reached the upper limits (see [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md)), you might need to scale out the cluster.
 - If you observe that the resource usage is persistently low, for example, only 10%-20% of CPU usage, you can scale in the cluster to save resources.
 
-You can scale out clusters on the console by yourself. If you need to scale in a cluster, you need to contact [TiDB Cloud Support](tidb-cloud-support.md) for help. For more information about scaling, see [Scale Your TiDB Cluster](scale-tidb-cluster.md). You can keep in touch with the support team to track the exact progress. You must wait for the scaling operation to finish before starting your test because it can impact the performance due to data rebalancing.
+You can scale out clusters on the console by yourself. If you need to scale in a cluster, you need to contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help. For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md). You can keep in touch with the support team to track the exact progress. You must wait for the scaling operation to finish before starting your test because it can impact the performance due to data rebalancing.
 
 ### 3. How to make the best use of my PoC trial points?
 
-Once your application for the PoC is approved, you will receive trial points in your account. Generally, the trial points are sufficient for a 14-day PoC. The trial points are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](tidb-cloud-billing.md#trial-points).
+Once your application for the PoC is approved, you will receive trial points in your account. Generally, the trial points are sufficient for a 14-day PoC. The trial points are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#trial-points).
 
 To check the points left for your PoC, go to the **Clusters** page, as shown in the following screenshot.
 
@@ -221,4 +221,4 @@ If you want to extend the PoC trial period or are running out of trial points, c
 
 ### 5. I'm stuck with a technical problem. How do I get help for my PoC?
 
-You can always contact [TiDB Cloud Support](tidb-cloud-support.md) for help.
+You can always contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.

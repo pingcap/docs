@@ -11,7 +11,7 @@ This document describes how to use [Dumpling](https://docs.pingcap.com/tidb/stab
 
 > **Note:**
 >
-> If your upstream database is Amazon Aurora MySQL, instead of referring to this document, follow instructions in [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/migrate-from-aurora-bulk-import.md).
+> If your upstream database is Amazon Aurora MySQL, instead of referring to this document, follow instructions in [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md).
 
 ## Prerequisites
 
@@ -82,12 +82,12 @@ Depending on the location and size of your source data, the importing methods ar
 
 - If your source data is located in Amazon S3 cloud storage, take the following steps:
 
-    1. Configure Amazon S3 access to allow TiDB cloud to access the source data in your Amazon S3 bucket. For more information, see [configure Amazon S3 access](/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access). 
+    1. Configure Amazon S3 access to allow TiDB cloud to access the source data in your Amazon S3 bucket. For more information, see [configure Amazon S3 access](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access). 
     2. From the TiDB Cloud console, navigate to the TiDB Clusters page, and then click the name of your target cluster to go to its own overview page. In the cluster information pane on the left, click **Import**, and then fill in the importing related information on the **Data Import Task** page.
 
 - If your source data is in local files, do one of the following:
 
-    - If the data is larger than 1 TB, it is recommended that you use Amazon S3 or GCS as a staging area to import or migrate data into TiDB Cloud. For more information, see [Import or migrate from Amazon S3 or GCS to TiDB Cloud](/migrate-from-amazon-s3-or-gcs.md). 
+    - If the data is larger than 1 TB, it is recommended that you use Amazon S3 or GCS as a staging area to import or migrate data into TiDB Cloud. For more information, see [Import or migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md). 
     - If the data is less than 1 TB, you can use TiDB Lightning TiDB-backend according to the following steps in this document. 
 
 The following steps show how to import data to TiDB Cloud using TiDB Lightning TiDB-backend.

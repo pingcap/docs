@@ -7,7 +7,7 @@ summary: Learn about TiDB Cloud billing.
 
 > **Note:**
 >
-> [Developer Tier clusters](/select-cluster-tier.md#developer-tier) are free to use for up to one year. You will not be charged for the use of your Developer Tier cluster, and your TiDB Cloud bill will not display any Developer Tier charges.
+> [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) are free to use for up to one year. You will not be charged for the use of your Developer Tier cluster, and your TiDB Cloud bill will not display any Developer Tier charges.
 
 TiDB Cloud charges according to the resources that you consume, which include:
 
@@ -110,7 +110,7 @@ To view the billing details, perform the following steps:
 
 ## Trial points
 
-During the [PoC](tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
+During the [PoC](/tidb-cloud/tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
 
 > **Note:**
 >

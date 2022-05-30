@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Support configuring vCPU size of TiDB, TiKV, and TiFlash<sup>beta</sup> when you create or restore a cluster
 * Add the support of the AWS region `Mumbai` for cluster creation
-* Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud-billing.md)
+* Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud/tidb-cloud-billing.md)
 
 ## April 7, 2022
 
@@ -46,7 +46,7 @@ TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.c
 
 New feature:
 
-* Support [TiDB Cloud built-in alerting](/monitor-built-in-alerting.md)
+* Support [TiDB Cloud built-in alerting](/tidb-cloud/monitor-built-in-alerting.md)
 
     With the TiDB Cloud built-in alerting feature, you can be notified by emails whenever a TiDB Cloud cluster in your project triggers one of TiDB Cloud built-in alert conditions.
 
@@ -60,23 +60,23 @@ General changes:
 * Introduce a new public region: `eu-central-1`.
 * Deprecate 8 vCPU TiFlash<sup>beta</sup> and provide 16 vCPU TiFlash.
 * Separate the price of CPU and storage (both have 30% public preview discount).
-* Update the [billing information](/tidb-cloud-billing.md) and the [price table](https://en.pingcap.com/tidb-cloud/#pricing).
+* Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://en.pingcap.com/tidb-cloud/#pricing).
 
 New features:
 
-* Support [the Prometheus and Grafana integration](/monitor-prometheus-and-grafana-integration.md)
+* Support [the Prometheus and Grafana integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
     With the Prometheus and Grafana integration, you can configure a [Prometheus](https://prometheus.io/) service to read key metrics from the TiDB Cloud endpoint and view the metrics using [Grafana](https://grafana.com/).
 
 * Support assigning a default backup time based on the selected region of your new cluster
 
-    For more information, see [Back up and Restore TiDB Cluster Data](/backup-and-restore.md).
+    For more information, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
 
 ## March 04, 2022
 
 New feature:
 
-* Support [the Datadog integration](/monitor-datadog-integration.md)
+* Support [the Datadog integration](/tidb-cloud/monitor-datadog-integration.md)
 
     With the Datadog integration, you can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
 
@@ -88,7 +88,7 @@ General change:
 
 Improvement:
 
-* Support using custom file names when importing [CSV files](/import-csv-files.md) or [Apache Parquet files](/import-parquet-files.md) into TiDB Cloud
+* Support using custom file names when importing [CSV files](/tidb-cloud/import-csv-files.md) or [Apache Parquet files](/tidb-cloud/import-parquet-files.md) into TiDB Cloud
 
 ## January 11, 2022
 

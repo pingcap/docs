@@ -11,7 +11,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 New feature:
 
-* Support [importing Apache Parquet files from Amazon S3 or GCS into TiDB Cloud](/import-parquet-files.md)
+* Support [importing Apache Parquet files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
 
 Bug fixes:
 
@@ -26,7 +26,7 @@ General change:
 
 New feature:
 
-* Support [adding VPC CIDR for your TiDB cloud project](set-up-vpc-peering-connections.md)
+* Support [adding VPC CIDR for your TiDB cloud project](/tidb-cloud/set-up-vpc-peering-connections.md)
 
 Improvements:
 
@@ -40,7 +40,7 @@ Bug fixes:
 
 ## November 8, 2021
 
-* Launch [Developer Tier](/select-cluster-tier.md#developer-tier), which offers you a one-year free trial of TiDB Cloud
+* Launch [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier), which offers you a one-year free trial of TiDB Cloud
 
     Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
     
@@ -48,16 +48,16 @@ Bug fixes:
     * One TiKV shared node (with 10 GiB of OLTP storage)
     * One TiFlash<sup>beta</sup> shared node (with 10 GiB of OLAP storage)
   
-  Get started [here](/tidb-cloud-quickstart.md).
+  Get started [here](/tidb-cloud/tidb-cloud-quickstart.md).
   
 ## October 21, 2021
 
 * Open user registration to personal email accounts
-* Support [importing or migrating from Amazon S3 or GCS to TiDB Cloud](/migrate-from-amazon-s3-or-gcs.md)
+* Support [importing or migrating from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 
 ## October 11, 2021
 
-* Support [viewing and exporting billing details of TiDB Cloud](tidb-cloud-billing.md#billing-details), including the cost of each service and each project
+* Support [viewing and exporting billing details of TiDB Cloud](/tidb-cloud/tidb-cloud-billing.md#billing-details), including the cost of each service and each project
 * Fix several issues of TiDB Cloud internal features
 
 ## September 16, 2021
@@ -120,7 +120,7 @@ Management Console
 
 * Email verification and anti-robot reCAPTCHA have been added to the sign up process
 * [TiDB Cloud Service Agreement](https://pingcap.com/legal/tidb-cloud-services-agreement) and [PingCAP Privacy Policy](https://pingcap.com/legal/privacy-policy/) have been updated
-* You can apply for a [PoC](tidb-cloud-poc.md) by filling out an application form in the console
+* You can apply for a [PoC](/tidb-cloud/tidb-cloud-poc.md) by filling out an application form in the console
 * You can import sample data into TiDB Cloud cluster through UI
 * Clusters with the same name are not allowed to avoid confusion 
 * You can give feedback by clicking **Give Feedback** in the **Support** menu  

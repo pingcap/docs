@@ -17,7 +17,7 @@ You can configure TiDB Cloud to send metric data about your TiDB clusters to [Da
 
 ## Limitation
 
-You cannot use the Datadog integration in [Developer Tier clusters](/select-cluster-tier.md#developer-tier).
+You cannot use the Datadog integration in [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
 
 ## Steps
 

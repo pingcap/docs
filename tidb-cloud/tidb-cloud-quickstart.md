@@ -13,7 +13,7 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-You can either create a free [Developer Tier (Dev Tier)](select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](select-cluster-tier.md#dedicated-tier).
+You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 <SimpleTab>
 <div label="Developer Tier">
@@ -55,7 +55,7 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
     > **Note:**
     >
-    > If you want to get a 14-day free trial of TiDB Cloud first, click **Apply for a PoC Trial** in the **Proof of Concept** plan, fill in the application form, and then click **OK**. The PingCAP support team will get back to you in 48 hours. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](tidb-cloud-poc.md).
+    > If you want to get a 14-day free trial of TiDB Cloud first, click **Apply for a PoC Trial** in the **Proof of Concept** plan, fill in the application form, and then click **OK**. The PingCAP support team will get back to you in 48 hours. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
 4. On the **Create a Cluster** page, set up your cluster name and root password, and then update the default port number `4000` if you cannot use `4000` for connection.
 
@@ -67,7 +67,7 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. The CIDR of a project cannot be modified once it is set.
 
-7. Configure the [cluster size](size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+7. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
 
 8. Confirm the cluster information in the middle area and also the billing information in the right pane.
 

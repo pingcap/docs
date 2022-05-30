@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 > **Note:**
 >
-> - Currently, you cannot scale a [Developer Tier cluster](/select-cluster-tier.md#developer-tier).
+> - Currently, you cannot scale a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier).
 > - When a cluster is in the scaling status, you cannot perform any new scaling operations on it.
 
 ## Scale out a cluster
@@ -31,14 +31,14 @@ When a cluster is running, you cannot change its vCPU or storage size. To make s
 
 - Method 1: Scale vCPU or storage size through backup and restore
 
-    Scaling vCPU or storage size through backup and restore means that you need to [create a latest backup of the cluster](backup-and-restore#manual-backup), [delete the cluster](delete-tidb-cluster.md), and then change the vCPU or storage size when you [restore the deleted cluster](restore-deleted-tidb-cluster.md). Before taking this method, make sure the following impacts are acceptable:
+    Scaling vCPU or storage size through backup and restore means that you need to [create a latest backup of the cluster](backup-and-restore#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then change the vCPU or storage size when you [restore the deleted cluster](/tidb-cloud/restore-deleted-tidb-cluster.md). Before taking this method, make sure the following impacts are acceptable:
 
     - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
     - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
 
 - Method 2: Scale vCPU or storage size through a support ticket
 
-    Perform the steps in [TiDB Cloud Support](/tidb-cloud-support.md) to create a support ticket. For each node to be scaled, provide the following information in the **Description** box of the ticket:
+    Perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to create a support ticket. For each node to be scaled, provide the following information in the **Description** box of the ticket:
 
     - Node type: TiDB, TiKV, or TiFlash
     - Current vCPU size: xxx
@@ -66,7 +66,7 @@ To scale in TiKV nodes or TiFlash<sup>beta</sup> nodes, you need to submit a sca
 >
 > Scaling in your TiKV nodes and TiFlash<sup>beta</sup> nodes can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
 
-To submit a scale-in request, perform the steps in [TiDB Cloud Support](/tidb-cloud-support.md) to contact our support team. For each node to be scaled, provide the following information in the **Description** box:
+To submit a scale-in request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. For each node to be scaled, provide the following information in the **Description** box:
 
 - Node type: TiKV or TiFlash
 - Current node number: xxx

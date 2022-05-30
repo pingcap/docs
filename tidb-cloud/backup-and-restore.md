@@ -12,7 +12,7 @@ This document describes how to back up and restore your TiDB cluster data on TiD
 
 TiDB Cloud provides two types of data backup: automatic backup and manual backup.
 
-For [Developer Tier clusters](/select-cluster-tier.md#developer-tier), each cluster allows one automatic backup and two manual backups:
+For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), each cluster allows one automatic backup and two manual backups:
 
 - For the automatic backup, the existing backup will be replaced by the newer backup.
 - For the manual backup, if you already have two backups, you need to delete at least one backup before you are able to make another backup.

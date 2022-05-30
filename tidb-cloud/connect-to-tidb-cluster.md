@@ -10,7 +10,7 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 + Connect via a SQL client
 
     - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop.
-    - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/select-cluster-tier.md#developer-tier) using VPC peering.
+    - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
 
 - [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
 
@@ -48,7 +48,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
 > **Note:**
 >
-> This method does not work for Developer Tier clusters because you cannot connect to [Developer Tier clusters](/select-cluster-tier.md#developer-tier) using VPC peering.
+> This method does not work for Developer Tier clusters because you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
 
 To connect to your TiDB cluster via VPC peering, perform the following steps:
 
@@ -56,7 +56,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 2. Click **Connect**, and select the **VPC Peering** tab at the **Connect to TiDB** dialog.
 
-3. Set up VPC peering. See [Set up VPC Peering](set-up-vpc-peering-connections.md) for details.
+3. Set up VPC peering. See [Set up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
 
 4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
 

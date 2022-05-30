@@ -9,7 +9,7 @@ This document describes how to use Amazon Simple Storage Service (Amazon S3) or 
 
 > **Note:**
 >
-> If your upstream database is Amazon Aurora MySQL, instead of referring to this document, follow instructions in [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/migrate-from-aurora-bulk-import.md).
+> If your upstream database is Amazon Aurora MySQL, instead of referring to this document, follow instructions in [Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md).
 
 ## Import or migrate from Amazon S3 to TiDB Cloud
 
@@ -30,7 +30,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure the following:
 
 2. If you are migrating data from an upstream database, you need to export the source data first.
 
-    For more information, see [Install TiUP](/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
+    For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
 
 > **Note:**
 > 
@@ -173,7 +173,7 @@ Before migrating data from GCS to TiDB Cloud, ensure the following:
 
 2. If you are migrating data from an upstream database, you need to export the source data first.
 
-    For more information, see [Install TiUP](/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
+    For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
 
 > **Note:**
 > 

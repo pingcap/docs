@@ -48,9 +48,9 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 
 The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash<sup>beta</sup> easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/high-availability-with-multi-az.md).
+For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash<sup>beta</sup> easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
 
-To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](tidb-cloud-poc.md).
+To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
 
 > **Note:**
 >

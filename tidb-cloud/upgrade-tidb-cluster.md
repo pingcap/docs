@@ -13,7 +13,7 @@ For the TiDB version that is too low, TiDB Cloud will regularly upgrade it unifo
 
 ## Contact support to upgrade
 
-To submit an upgrade request, perform the steps in [TiDB Cloud Support](/tidb-cloud-support.md) to contact our support team. Note to provide the following information in the **Description** box:
+To submit an upgrade request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. Note to provide the following information in the **Description** box:
 
 - Cloud Provider: GCP or AWS
 - Cluster Name: xxx

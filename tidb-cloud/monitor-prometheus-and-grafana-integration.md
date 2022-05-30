@@ -17,7 +17,7 @@ This document describes how to configure your Prometheus service to read key met
 
 ## Limitation
 
-You cannot use the Prometheus and Grafana integration in [Developer Tier](select-cluster-tier.md#developer-tier).
+You cannot use the Prometheus and Grafana integration in [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier).
 
 ## Steps
 

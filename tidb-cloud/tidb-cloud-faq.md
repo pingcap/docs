@@ -35,15 +35,15 @@ TiDB Cloud is currently available on Amazon Web Services and Google Cloud.
 
 ## What versions of TiDB are supported on TiDB Cloud?
 
-For the currently supported TiDB version, see [TiDB Cloud Release Notes](release-notes-2022.md).
+For the currently supported TiDB version, see [TiDB Cloud Release Notes](/tidb-cloud/release-notes-2022.md).
 
 ## How can I learn more about TiDB Cloud?
 
 The best way to learn about TiDB Cloud is to follow our step-by-step tutorial. Check out the following topics to get started:
 
-- [TiDB Cloud Introduction](tidb-cloud-intro.md)
-- [Get Started](tidb-cloud-quickstart.md)
-- [Create a TiDB Cluster](create-tidb-cluster.md)
+- [TiDB Cloud Introduction](/tidb-cloud/tidb-cloud-intro.md)
+- [Get Started](/tidb-cloud/tidb-cloud-quickstart.md)
+- [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
 
 ## What companies are using TiDB or TiDB Cloud in production?
 

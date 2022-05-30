@@ -19,7 +19,7 @@ Make sure that your TiDB Cluster can connect to the Apache Kafka service.
 
 If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
 2. Modify the inbound rules of the security group that the Apache Kafka service is associated with. 
 
     You must add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
@@ -31,7 +31,7 @@ If your Apache Kafka service is in an AWS VPC that has no internet access, take 
 
 If your Apache Kafka service is in a GCP VPC that has no internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
 2. Modify the ingress firewall rules of the VPC where Apache Kafka is located. 
 
     You must add the CIDR of the Region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.

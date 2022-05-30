@@ -7,7 +7,7 @@ summary: Learn how to use HTAP cluster in TiDB Cloud.
 
 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) means Hybrid Transactional/Analytical Processing. The HTAP cluster in TiDB Cloud is composed of [TiKV](https://tikv.org), a row-based storage engine designed for transactional processing, and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>beta</sup>, a columnar storage designed for analytical processing. Your application data is first stored in TiKV and then replicated to TiFlash<sup>beta</sup> via the Raft consensus algorithm. So it is real time replication from the row store to the columnar store.
 
-With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more TiFlash<sup>beta</sup> nodes according to your HTAP workload. If the TiFlash<sup>beta</sup> node count is not specified when you create the cluster or you want to add more TiFlash<sup>beta</sup> nodes, you can change the node count by [scaling the cluster](/scale-tidb-cluster.md).
+With TiDB Cloud, you can create an HTAP cluster easily by specifying one or more TiFlash<sup>beta</sup> nodes according to your HTAP workload. If the TiFlash<sup>beta</sup> node count is not specified when you create the cluster or you want to add more TiFlash<sup>beta</sup> nodes, you can change the node count by [scaling the cluster](/tidb-cloud/scale-tidb-cluster.md).
 
 > **Note:**
 >

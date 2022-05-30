@@ -19,7 +19,7 @@ Make sure that your TiDB Cluster can connect to the MySQL service.
 
 If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
 2. Modify the inbound rules of the security group that the MySQL service is associated with. 
 
     You must add the CIDR of the Region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the VPC Peering Page. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
@@ -32,7 +32,7 @@ If your MySQL service is in an AWS VPC that has no public internet access, take 
 If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
 
 1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
-2. [Set up a VPC peering connection](/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
+2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
 3. Modify the ingress firewall rules of the VPC where MySQL is located.
 
     You must add the CIDR of the Region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the VPC Peering Page. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.

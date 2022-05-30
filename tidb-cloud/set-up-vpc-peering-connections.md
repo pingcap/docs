@@ -5,7 +5,7 @@ summary: Learn how to set up VPC peering connections.
 
 # Set Up VPC Peering Connections
 
-To connect your application to TiDB Cloud, you need to set up [VPC peering](glossary.md#vpc-peering) with TiDB Cloud. It's one step of [Connect to Your TiDB Cluster](connect-to-tidb-cluster.md). This document walks you through setting up VPC peering connections [on AWS](#on-aws) and [on GCP](#on-gcp).
+To connect your application to TiDB Cloud, you need to set up [VPC peering](/tidb-cloud/glossary.md#vpc-peering) with TiDB Cloud. It's one step of [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md). This document walks you through setting up VPC peering connections [on AWS](#on-aws) and [on GCP](#on-gcp).
 
 VPC peering connection is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses. Instances in either VPC can communicate with each other as if they are within the same network.
 
@@ -190,7 +190,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 2. Click **Connect**. The **Connect to TiDB** dialog displays. You could see the **Status** of the VPC peering is **active**.
 
-3. Access the TiDB Cluster from the instance within the VPC. See [Connect to Your TiDB Cluster](connect-to-tidb-cluster.md).
+3. Access the TiDB Cluster from the instance within the VPC. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
 ## On GCP
 
