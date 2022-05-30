@@ -50,7 +50,7 @@ You can execute the following statement to immediately initiate the compaction f
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE employee COMPACT TIFLASH REPLICA;
+ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
 ## Concurrency
