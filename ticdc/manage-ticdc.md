@@ -252,8 +252,6 @@ The following are examples when using Kafka SASL authentication:
 
 {{< copyable "shell-regular" >}}
 
-```shell
-
 - SASL/PLAIN
 
 {{< copyable "shell-regular" >}}
