@@ -221,9 +221,17 @@ The following are descriptions of parameters and parameter values that can be co
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
-| `sasl-user` | The identity (authcid) of SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-password` | The password of SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-mechanism` | The name of SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
+| `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
+| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
+| `sasl-mechanism` | The name of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
+| `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional) |
+| `sasl-gssapi-keytab-path` | The gssapi keytab path (optional)|
+| `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional) |
+| `sasl-gssapi-service-name` | The gssapi service name（ (optional) |
+| `sasl-gssapi-user` | The user name of the gssapi `user` authentication type |
+| `sasl-gssapi-password` |  The password of the gssapi `user` authentication type |
+| `sasl-gssapi-realm` | The gssapi realm name (optional) |
+| `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional) |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
 | `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
 | `write-timeout`| The timeout in sending a request to the downstream Kafka. The default value is `10s` |
@@ -237,6 +245,59 @@ Best practices:
 > **Note:**
 >
 > When `protocol` is `open-protocol`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
+
+#### TiCDC uses the authentication and authorization of Kafka
+
+The following are examples when using Kafka SASL authentication:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+
+- SASL/PLAIN
+
+{{< copyable "shell-regular" >}}
+
+```shell
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-user=alice-user&sasl-password=alice-secret&sasl-mechanism=plain"
+```
+
+- SASL/SCRAM
+
+SCRAM-SHA-256 and SCRAM-SHA-512 are similar to the PLAIN method. You just need to specify `sasl-mechanism` as the corresponding authentication method.
+
+- SASL/GSSAPI
+
+SASL/GSSAPI `user` authentication:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
+```
+
+Values of `sasl-gssapi-user` and `sasl-gssapi-realm` are related to the [principle](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html) specified in kerberos. For example, if the principle is set as `alice/for-kafka@example.com`, then `sasl-gssapi-user` and `sasl-gssapi-realm` are specified as `alice/for-kafka` and `example.com` respectively.
+
+SASL/GSSAPI `keytab` authentication type:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=a&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
+```
+
+For more information about SASL/GSSAPI authentication methods, see [Configuring GSSAPI](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html).
+
+- TLS/SSL encryption
+
+If the Kafka broker has TLS/SSL encryption enabled, you need to add the `-enable-tls=true` parameter to `--sink-uri`. If you want to use self-signed certificates, you also need to specify `-ca`, `cert` and `key` in `-sink-uri`.
+
+- ACL authorization
+
+The minimum set of permissions required for TiCDC to function properly is as follows.
+
+- The `Create` and `Write` permissions for the Topic [resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
+- The `DescribeConfigs` permissions for the Cluster resources.
 
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
