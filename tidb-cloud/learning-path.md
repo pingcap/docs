@@ -19,7 +19,7 @@ hide_sidebar: true
 -->
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Introduction</h4>
 
@@ -32,7 +32,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Pricing</h4>
 
@@ -43,7 +43,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Tiers</h4>
 
@@ -53,7 +53,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Try</h4>
 
@@ -64,7 +64,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Deploy</h4>
 
@@ -78,7 +78,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Migrate</h4>
 
@@ -92,7 +92,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Monitor</h4>
 
@@ -105,7 +105,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![avator](https://avatars.githubusercontent.com/u/773853)
+![Icon](https://avatars.githubusercontent.com/u/773853)
 
 <h4>Monitor</h4>
 
