@@ -52,7 +52,7 @@ The performance tuning process consists of the following 6 steps:
 1. Define a tuning objective.
 2. Establish a performance baseline.
 3. Identify bottlenecks in user response time.
-4. Propose tuning solutions, evaluates the benefits, risks, and costs of each solution
+4. Propose tuning solutions, evaluate the benefits, risks, and costs of each solution
 5. Implement the tuning solution.
 6. Evaluate the tuning results.
 
@@ -94,7 +94,7 @@ In contrast, databases have a complete record of performance metrics such as que
 
 For more information about the analysis and diagnostic methods and tools, see [Performance Tuning Methods](/performance-tuning-methods.md).
 
-### Step 4. Propose tuning solutions, evaluates the benefits, risks, and costs of each solution
+### Step 4. Propose tuning solutions, evaluate the benefits, risks, and costs of each solution
 
 After identifying the bottleneck of a system through performance analysis, you can propose a tuning solution that is cost-effective, has low risks, and provides the maximum benefit based on the actual situation.
 
@@ -113,7 +113,7 @@ To mitigate risks and validate the benefits of a tuning solution, it is recommen
 
 ### Step 6. Evaluate the tuning results
 
-After Applying the tuning solution, you need to evaluate the results:
+After applying the tuning solution, you need to evaluate the results:
 
 - If the tuning objective is reached, the entire tuning project is completed successfully.
 - If the tuning objective is not reached, you need to repeat Step 2 to Step 6 in this document until the tuning objective is reached.
