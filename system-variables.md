@@ -516,6 +516,18 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `00:00 +0000`
 - This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1AM and 3AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
 
+### `tidb_mem_quota_analyze` <span class="version-mark">New in v6.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `0`
+- Unit: Bytes
+- This variable controls the maximum memory usage when TiDB updates statistics, including [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) executed by the user and automatic statistics updates in the TiDB background. When the total memory usage exceeds this threshold, the `ANALYZE` executed by the user will terminate and an error message will prompt the user to try a lower sampling rate or retry later. If the automatic update task in the TiDB background exits due to memory exceeding, and the sampling rate used is higher than the default value, it will retry once using the default sampling rate. When the variable is negative or zero, TiDB does not limit the memory usage of both user use and TiDB background automatic update task.
+
+> **Note:**
+>
+> The TiDB Cluster will trigger `auto_analyze` only if the `run-auto-analyze` is enabled in the TiDB startup configuration file.
+
 ### tidb_backoff_lock_fast
 
 - Scope: SESSION | GLOBAL
