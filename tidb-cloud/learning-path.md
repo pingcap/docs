@@ -19,7 +19,7 @@ hide_sidebar: true
 -->
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Introduction](/media/tidb-cloud/tidb-cloud-intro.png)
 
 <h4>Introduction</h4>
 
@@ -32,7 +32,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Pricing](/media/tidb-cloud/tidb-cloud-pricing.png)
 
 <h4>Pricing</h4>
 
@@ -43,28 +43,19 @@ hide_sidebar: true
 
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Try](/media/tidb-cloud/tidb-cloud-try.png)
 
-<h4>Tiers</h4>
+<h4>Try</h4>
 
+[Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
+[Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 [Cluster Tier](/tidb-cloud/select-cluster-tier.md)
 
 </LearningPath>
 
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
-
-<h4>Try</h4>
-
-[Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
-[Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
-
-</LearningPath>
-
-<LearningPath>
-
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Deploy](/media/tidb-cloud/tidb-cloud-deploy.png)
 
 <h4>Deploy</h4>
 
@@ -78,7 +69,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Migrate](/media/tidb-cloud/tidb-cloud-migrate.png)
 
 <h4>Migrate</h4>
 
@@ -92,7 +83,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Monitor](/media/tidb-cloud/tidb-cloud-monitor.png)
 
 <h4>Monitor</h4>
 
@@ -105,7 +96,7 @@ hide_sidebar: true
 
 <LearningPath>
 
-![Icon](https://avatars.githubusercontent.com/u/773853)
+![Tune Performance](/media/tidb-cloud/tidb-cloud-tune.png)
 
 <h4>Tune Performance</h4>
 
