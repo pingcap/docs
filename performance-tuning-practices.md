@@ -17,7 +17,7 @@ By running the same application with different JDBC configurations in these scen
 
 ## Environment description
 
-This document takes an OLTP simulation workload of a bank transaction system for demonstration. The configurations of the simulation environment are as follows:
+This document takes an OLTP simulation workload of a bank core system for demonstration. The configurations of the simulation environment are as follows:
 
 - Application development language for the workload: JAVA
 - SQL statements used in business: 200 statements in total, 90% of which are SELECT statements. It is a typical read-heavy OLTP workload.
