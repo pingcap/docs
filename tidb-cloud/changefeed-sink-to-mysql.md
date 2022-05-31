@@ -100,4 +100,4 @@ SET GLOBAL tidb_gc_life_time = '10m';
 
 ## Restrictions
 
-Because TiDB Cloud uses TiCDC to establish connectors, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
