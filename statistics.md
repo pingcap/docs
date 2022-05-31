@@ -429,7 +429,7 @@ Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing 
 
 `SHOW ANALYZE STATUS` shows the most recent task records only. Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
 
-When [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is set and the TiDB background automatic update task exceeds this threshold, the automatic update task will be retried. You can see failed and retried tasks with the following `SHOW ANALYZE STATUS` command.
+When [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is set, and the automatic analyze task in the TiDB background uses more memory than this threshold, the task will be retried. You can see failed and retried tasks with the following `SHOW ANALYZE STATUS` command.
 
 ```sql
 mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];

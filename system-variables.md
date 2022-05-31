@@ -552,7 +552,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Default value: `0`
 - Unit: Bytes
-- This variable controls the maximum memory usage when TiDB updates statistics, including [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) executed by the user and automatic statistics updates in the TiDB background. When the total memory usage exceeds this threshold, the `ANALYZE` executed by the user will terminate and an error message will prompt the user to try a lower sampling rate or retry later. If the automatic update task in the TiDB background exits due to memory exceeding, and the sampling rate used is higher than the default value, it will retry once using the default sampling rate. When the variable is negative or zero, TiDB does not limit the memory usage of both user use and TiDB background automatic update task.
+- This variable controls the maximum memory usage when TiDB updates statistics, including manually executed [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) by users and automatic analyze tasks in the TiDB background. When the total memory usage exceeds this threshold, manually executed `ANALYZE` will terminate and an error message will prompt the user to try a lower sampling rate or retry later. If the automatic task in the TiDB background exits due to memory exceeding, and the sampling rate used is higher than the default value, it will retry once using the default sampling rate. When the variable is negative or zero, TiDB does not limit the memory usage of both user use and TiDB background automatic analyze task.
 
 > **Note:**
 >
