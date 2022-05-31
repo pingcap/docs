@@ -14,9 +14,7 @@ hide_sidebar: true
 
 <LearningPathContainer>
 
-<!-- Tab lable
-<LearningPathContent id="dba" label="dba title">
--->
+<LearningPathContent id="dba" label="DBA">
 
 <LearningPath>
 
@@ -106,7 +104,6 @@ hide_sidebar: true
 
 </LearningPath>
 
-<!-- Tab
 </LearningPathContent>
--->
+
 </LearningPathContainer>
