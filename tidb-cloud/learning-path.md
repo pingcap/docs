@@ -7,14 +7,15 @@ hide_sidebar: true
 -- Note the parameters in the frontmatter:
     - `hide_title: true` Hide the document title.
     - `hide_sidebar: true` Hides the right sidbar.
--- Each <LearningPath> specifies one category.
--- Each content tab is labeled with <LearningPathContent>. Note that you must define the id and label. The label is the name displayed on the tab. In our case, it's the target user name, such as DBA, Dev.
--- The whole content is enclosed by <LearningPathContainer>.
+-- Each `LearningPath` specifies one category.
+-- Each content tab is labeled with `LearningPathContent`. Note that you must define the id and label. The label is the name displayed on the tab. In our case, it's the target user name, such as DBA, Dev.
+-- The whole content is enclosed by `LearningPathContainer`.
 -->
 
 <LearningPathContainer>
-
+<!--
 <LearningPathContent id="dba" label="DBA">
+-->
 
 <LearningPath>
 
@@ -103,7 +104,8 @@ hide_sidebar: true
 - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </LearningPath>
-
+<!--
 </LearningPathContent>
+-->
 
 </LearningPathContainer>
