@@ -13,7 +13,7 @@ LearningPath就是每条内容
 
 <LearningPathContainer>
 
-<!--
+<!-- Tab 标签
 <LearningPathContent id="dba" label="dba title">
 -->
 <LearningPath>
@@ -115,7 +115,7 @@ LearningPath就是每条内容
 
 </LearningPath>
 
-<!--
+<!-- Tab 标签
 </LearningPathContent>
 -->
 </LearningPathContainer>
