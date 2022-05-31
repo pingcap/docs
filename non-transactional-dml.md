@@ -226,7 +226,7 @@ The following are hard restrictions on non-transactional DML statements. If thes
 - Cannot be used with the `prepare` statement.
 - `ENUM`, `BIT`, `SET`, `JSON` types are not supported as the dividing columns.
 - Not supported for [temporary tables](/temporary-tables.md).
-- [Common Table Expression](/sql-statements/sql-statement-with.md) is not supported.
+- [Common Table Expression](/develop/dev-guide-use-common-table-expression.md) is not supported.
 
 ## Control batch execution failure
 
