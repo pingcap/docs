@@ -103,6 +103,16 @@ hide_sidebar: true
 
 </LearningPath>
 
+<LearningPath>
+
+![Icon](https://avatars.githubusercontent.com/u/773853)
+
+<h4>Tune Performance</h4>
+
+[Analyze and Tune Performance](/tidb-cloud/tune-performance.md)
+
+</LearningPath>
+
 <!-- Tab
 </LearningPathContent>
 -->
