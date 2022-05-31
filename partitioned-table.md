@@ -1307,6 +1307,7 @@ In `dynamic` mode, TiDB collects table-level summary statistics, or GloablStats,
 When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables only have partition statistics, and no table statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
 
 {{< copyable "sql" >}}
+
 ```sql
 mysql> set session tidb_partition_prune_mode = 'dynamic';
 mysql> show stats_meta where table_name like "t";
@@ -1332,6 +1333,7 @@ mysql> show stats_meta where table_name like "t";
 To get GlobalStats, you need to manually trigger `analyze` on tables or a single partition.
 
 {{< copyable "sql" >}}
+
 ```sql
 mysql> analyze table t partition p1;
 Query OK, 0 rows affected, 1 warning (0.06 sec)
