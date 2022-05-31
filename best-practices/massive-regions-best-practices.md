@@ -123,6 +123,18 @@ raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
 If Region followers have not received the heartbeat from the leader within the `raft-election-timeout` interval, these followers determine that the leader has failed and start a new election. `raft-heartbeat-interval` is the interval at which a leader sends a heartbeat to followers. Therefore, increasing the value of `raft-base-tick-interval` can reduce the number of network messages sent from Raft state machines but also makes it longer for Raft state machines to detect the leader failure.
 
+### Method 6: Adjust Region size
+
+The default size of Region is 96 MiB, you can reduce the Region number by adjusting it to a larger value. For more information, see [Tune Region Performance](/tune-region-performance.md)
+
+> **Warning:**
+>
+> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are:
+>
+> + More prone to performance jitter.
+> + Query performance regression, especially when querying a large amount of data.
+> + The schedule operator slows down.
+
 ## Other problems and solutions
 
 This section describes some other problems and solutions.
