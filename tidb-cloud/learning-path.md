@@ -17,6 +17,7 @@ hide_sidebar: true
 <!-- Tab lable
 <LearningPathContent id="dba" label="dba title">
 -->
+
 <LearningPath>
 
 ![Introduction](/media/tidb-cloud/tidb-cloud-intro.png)
