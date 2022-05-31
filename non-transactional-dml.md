@@ -5,7 +5,7 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
 
 # Non-Transactional DML Statements
 
-This document describes the usage scenarios, usage methods, restrictions of non-transactional DML statements in TiDB. In addition, the implementation principle and common issues are also explained.
+This document describes the usage scenarios, usage methods, and restrictions of non-transactional DML statements in TiDB. In addition, the implementation principle and common issues are also explained.
 
 A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence, which enhances the performance and ease of use in the scenarios of batch data processing, at the expense of transactional atomicity and isolation.
 
@@ -19,9 +19,9 @@ Non-transactional DML statements include `INSERT`, `UPDATE`, and `DELETE`, of wh
 
 In the scenarios of large data processing, you might often need to perform the same operation on a large batch of data. If you perform the operations directly using one SQL statement, the transaction size might exceed the limit and affect the execution performance.
 
-Batch data processing often has no overlap of time or data with the online application operations. Data isolation is unnecessary when no concurrent operations exist. Atomicity is also unnecessary if bulk data operations are idempotent or easily retryable. If your application needs neither data isolation nor atomicity, you can consider using non-transactional DML statements.
+Batch data processing often has no overlap of time or data with the online application operations. Isolation (I in ACID) is unnecessary when no concurrent operations exist. Atomicity is also unnecessary if bulk data operations are idempotent or easily retryable. If your application needs neither data isolation nor atomicity, you can consider using non-transactional DML statements.
 
-Non-transactional DML statements are used to bypass the size limit on large transactions in certain scenarios. One statement is used to complete tasks that should have been split into multiple transactions, with higher execution efficiency and less resource consumption.
+Non-transactional DML statements are used to bypass the size limit on large transactions in certain scenarios. One statement is used to complete tasks that would otherwise require manually splitting of transactions, with higher execution efficiency and less resource consumption.
 
 For example, to delete expired data, if you ensure that no application will access the expired data, you can use a non-transactional DML statement to improve the `DELETE` performance.
 
@@ -30,7 +30,7 @@ For example, to delete expired data, if you ensure that no application will acce
 Before using non-transactional DML statements, make sure that the following conditions are met:
 
 - The statement does not require atomicity, which permits some rows to be modified and some rows to remain unmodified in the execution result.
-- The statement is idempotent, or you are prepared to retry some data based on the error message. If the system variables `tidb_redact_log = 1` and `tidb_nontransactional_ignore_error = 1`, this statement must be idempotent. Otherwise, when the statement partially fails, the failed part cannot be accurately located.
+- The statement is idempotent, or you are prepared to retry on a part of the data according to the error message. If the system variables are set to `tidb_redact_log = 1` and `tidb_nontransactional_ignore_error = 1`, this statement must be idempotent. Otherwise, when the statement partially fails, the failed part cannot be accurately located.
 - The data to be operated on by the statement has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected result such as missing deletions and wrong deletions might occur.
 - The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected result.
 - The statement meets the [restrictions](#restrictions).
@@ -192,12 +192,12 @@ To use a non-transactional DML statement, the following steps are recommended:
 
 | Parameter | Description | Default value | Required or not | Recommended value |
 | :-- | :-- | :-- | :-- | :-- |
-| Dividing column | The column used to batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a dividing column. | No | Select a column that can meet the `WHERE` condition in a most efficient way. |
+| Dividing column | The column used to batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a dividing column. | No | Select a column that can meet the `WHERE` condition in the most efficient way. |
 | Batch size | Used to control the size of each batch. The number of batches is the number of SQL statements into which DML operations are split, such as `LIMIT 2` in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6` 2`. The more batches, the smaller the batch size. | N/A | Yes | 1000-1000000. Too small or too large a batch will lead to performance degradation. |
 
 ### How to select a dividing column
 
-A non-transactional DML statement uses a column as the basis for data batching, which is the dividing column. For higher execution efficiency, a dividing column is expected to use index. The execution efficiency brought by different indexes and dividing columns might vary by dozens of times. When choosing the dividing column, consider the following suggestions:
+A non-transactional DML statement uses a column as the basis for data batching, which is the dividing column. For higher execution efficiency, a dividing column is required to use index. The execution efficiency brought by different indexes and dividing columns might vary by dozens of times. When choosing the dividing column, consider the following suggestions:
 
 - If you know the application data distribution, according to the `WHERE` condition, choose the column that divides data with smaller ranges after the batching.
     - Ideally, the `WHERE` condition can take advantage of the index of the dividing column to reduce the amount of data to be scanned per batch. For example, there is a transaction table that records the start and end time of each transaction, and you want to delete all transaction records whose end time is before one month. If there is an index on the start time of the transaction, and the start and end times of the transaction are relatively close, then you can choose the start time column as the dividing column.
