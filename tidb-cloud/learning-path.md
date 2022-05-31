@@ -110,6 +110,7 @@ hide_sidebar: true
 <h4>Tune Performance</h4>
 
 [Analyze and Tune Performance](/tidb-cloud/tune-performance.md)
+[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </LearningPath>
 
