@@ -1302,6 +1302,67 @@ TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `st
 set @@session.tidb_partition_prune_mode = 'dynamic'
 ```
 
+In `dynamic` mode, TiDB collects table-level summary statistics, or GloablStats, from partition tables. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+
+When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables only have partition statistics, and no table statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+
+{{< copyable "sql" >}}
+```sql
+mysql> set session tidb_partition_prune_mode = 'dynamic';
+mysql> show stats_meta where table_name like "t";
++---------+------------+----------------+---------------------+--------------+-----------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
++---------+------------+----------------+---------------------+--------------+-----------+
+| test    | t          | p0             | 2022-05-27 20:23:34 |            1 |         2 |
+| test    | t          | p1             | 2022-05-27 20:23:34 |            2 |         4 |
+| test    | t          | p2             | 2022-05-27 20:23:34 |            2 |         4 |
++---------+------------+----------------+---------------------+--------------+-----------+
+3 rows in set (0.01 sec)
+mysql> show stats_meta where table_name like "t";
++---------+------------+----------------+---------------------+--------------+-----------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
++---------+------------+----------------+---------------------+--------------+-----------+
+| test    | t          | p0             | 2022-05-27 20:23:34 |            1 |         2 |
+| test    | t          | p1             | 2022-05-27 20:23:34 |            2 |         4 |
+| test    | t          | p2             | 2022-05-27 20:23:34 |            2 |         4 |
++---------+------------+----------------+---------------------+--------------+-----------+
+3 rows in set (0.01 sec)
+```
+
+To get GlobalStats, you need to manually trigger `analyze` on tables or a single partition.
+
+{{< copyable "sql" >}}
+```sql
+mysql> analyze table t partition p1;
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+mysql> show stats_meta where table_name like "t";
++---------+------------+----------------+---------------------+--------------+-----------+
+| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
++---------+------------+----------------+---------------------+--------------+-----------+
+| test    | t          | global         | 2022-05-27 20:50:53 |            0 |         5 |
+| test    | t          | p0             | 2022-05-27 20:23:34 |            1 |         2 |
+| test    | t          | p1             | 2022-05-27 20:50:52 |            0 |         2 |
+| test    | t          | p2             | 2022-05-27 20:50:08 |            0 |         2 |
++---------+------------+----------------+---------------------+--------------+-----------+
+4 rows in set (0.00 sec)
+```
+
+If the following warning is displayed during the analyze process, partition statistics are inconsistent, and you need to collect statistics of the partitions or all tables.
+
+```
+| Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
+```
+
+You can also use scripts to update statistics of all partitioned tables. For details, see [Update statistics of partitioned tables in dynamic pruning mode](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+
+After table-level statistics are ready, enable the global dynamic pruning mode.
+
+{{< copyable "sql" >}}
+
+```sql
+set global tidb_partition_prune_mode = dynamic
+```
+
 In `static` mode, TiDB accesses each partition separately using multiple operators, and then merges the results using `Union`. The following example is a simple read operation where TiDB merges the results of two corresponding partitions using `Union`:
 
 {{< copyable "sql" >}}
@@ -1431,4 +1492,59 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
 
-Currently, neither static nor dynamic pruning mode supports prepared statements plan cache. 
+Currently, neither `static` nor `dynamic` pruning mode supports prepared statements plan cache.
+
+#### Update statistics of partitioned tables in dynamic pruning mode
+
+1. Locate all partitioned tables:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    mysql> select distinct concat(TABLE_SCHEMA,'.',TABLE_NAME)
+        from information_schema.PARTITIONS
+        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    +-------------------------------------+
+    | concat(TABLE_SCHEMA,'.',TABLE_NAME) |
+    +-------------------------------------+
+    | test.t                              |
+    +-------------------------------------+
+    1 row in set (0.02 sec)
+    ```
+
+2. Generate the statements to update the statistics of all partitioned tables:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    mysql> select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
+        from information_schema.PARTITIONS
+        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    +----------------------------------------------------------------------+
+    | concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') |
+    +----------------------------------------------------------------------+
+    | ANALYZE TABLE test.t ALL COLUMNS;                                    |
+    +----------------------------------------------------------------------+
+    1 row in set (0.01 sec)
+    ```
+
+    You can change `ALL COLUMNS` to the column you need.
+
+3. Export the batch update sentences to a file:
+
+    {{< copyable "sql" >}}
+
+    ```
+    $ mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
+         from information_schema.PARTITIONS \
+         where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
+    ```
+
+4. Execute a batch update:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    mysql> SET session tidb_partition_prune_mode = dynamic;
+    mysql> source gatherGlobalStats.sql
+    ```
