@@ -20,7 +20,7 @@ By running the same application with different JDBC configurations in these scen
 This document takes an OLTP simulation workload of a bank transaction system for demonstration. The configurations of the simulation environment are as follows:
 
 - Application development language for the workload: JAVA
-- SQL statements used in business: 200 statements in total, 90% of which are SELECT statements. It is a typical read-intensive OLTP scenario.
+- SQL statements used in business: 200 statements in total, 90% of which are SELECT statements. It is a typical read-heavy OLTP workload.
 - Tables used in transactions: 60 tables in total. 12 tables involve update operations, and the rest 48 tables are read-only.
 - Isolation level used by the application: `read committed`.
 - TiDB cluster configuration: 3 TiDB nodes and 3 TiKV nodes, with 16 CPUs allocated to each node.
