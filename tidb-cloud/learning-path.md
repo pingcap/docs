@@ -24,10 +24,10 @@ hide_sidebar: true
 
 <h4>Introduction</h4>
 
-[What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
-[Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
-[High Availability](/tidb-cloud/high-availability-with-multi-az.md)
-[FAQs](/tidb-cloud/tidb-cloud-faq.md)
+- [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
+- [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
+- [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
+- [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 
 </LearningPath>
 
@@ -37,8 +37,8 @@ hide_sidebar: true
 
 <h4>Pricing</h4>
 
-[Billing](/tidb-cloud/tidb-cloud-billing.md)
-[Pricing](https://en.pingcap.com/tidb-cloud-pricing)
+- [Billing](/tidb-cloud/tidb-cloud-billing.md)
+- [Pricing](https://en.pingcap.com/tidb-cloud-pricing)
 
 </LearningPath>
 
@@ -48,9 +48,9 @@ hide_sidebar: true
 
 <h4>Try</h4>
 
-[Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
-[Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
-[Cluster Tier](/tidb-cloud/select-cluster-tier.md)
+- [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
+- [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
+- [Cluster Tier](/tidb-cloud/select-cluster-tier.md)
 
 </LearningPath>
 
@@ -60,11 +60,11 @@ hide_sidebar: true
 
 <h4>Deploy</h4>
 
-[Determine TiDB Size](/tidb-cloud/size-your-cluster.md)
-[Create TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
-[Connect to Cluster](/tidb-cloud/connect-to-tidb-cluster.md)
-[Set Up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
-[Manage User Access](/tidb-cloud/manage-user-access.md)
+- [Determine TiDB Size](/tidb-cloud/size-your-cluster.md)
+- [Create TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
+- [Connect to Cluster](/tidb-cloud/connect-to-tidb-cluster.md)
+- [Set Up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)
+- [Manage User Access](/tidb-cloud/manage-user-access.md)
 
 </LearningPath>
 
@@ -74,11 +74,11 @@ hide_sidebar: true
 
 <h4>Migrate</h4>
 
-[From MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
-[From Aurora](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-[From S3 or GCS](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-[Import CSV Files](/tidb-cloud/import-csv-files.md)
-[Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)
+- [From MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
+- [From Aurora](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+- [From S3 or GCS](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+- [Import CSV Files](/tidb-cloud/import-csv-files.md)
+- [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md)
 
 </LearningPath>
 
@@ -88,10 +88,10 @@ hide_sidebar: true
 
 <h4>Monitor</h4>
 
-[Overview](/tidb-cloud/monitor-tidb-cluster.md)
-[Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-[Datadog](/tidb-cloud/monitor-datadog-integration.md)
-[Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+- [Overview](/tidb-cloud/monitor-tidb-cluster.md)
+- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
+- [Datadog](/tidb-cloud/monitor-datadog-integration.md)
+- [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 </LearningPath>
 
@@ -101,8 +101,8 @@ hide_sidebar: true
 
 <h4>Tune Performance</h4>
 
-[Analyze and Tune Performance](/tidb-cloud/tune-performance.md)
-[Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
+- [Analyze and Tune Performance](/tidb-cloud/tune-performance.md)
+- [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </LearningPath>
 
