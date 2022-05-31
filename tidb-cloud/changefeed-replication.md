@@ -15,7 +15,7 @@ With TiDB Cloud Replication, you can perform quick disaster recovery of a databa
 >
 > * One primary cluster can only have one replication.
 > * You cannot use a secondary cluster as a source of **TiDB Cloud Replication** to another cluster.
-> * **TiDB Cloud Replication** contradicts **Sink to Apache Kafka**](/tidb-cloud/changefeed-sink-to-apache-kafka.md) and [**Sink to MySQL**](/tidb-cloud/changefeed-sink-to-mysql.md). When **TiDB Cloud Replication** is enabled, neither the primary nor the secondary cluster can use **Sink to Apache Kafka** or **Sink to MySQL** changefeed and vice versa.
+> * **TiDB Cloud Replication** contradicts **Sink to Apache Kafka**](/tidb-cloud/changefeed-sink-to-apache-kafka.md) and [**Sink to MySQL**](/tidb-cloud/changefeed-sink-to-mysql.md). When **TiDB Cloud Replication** is enabled, neither the primary nor the secondary cluster can use the **Sink to Apache Kafka** or **Sink to MySQL** changefeed and vice versa.
 > * Because TiDB Cloud uses TiCDC to establish replication, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
 
 To support application replication, you must deploy your applications in both primary and secondary regions, and ensure that each application is connected to the TiDB cluster in the same region. The applications in the secondary region are on standby. When the primary region fails, you can initiate a "Detach" operation to make the TiDB cluster in the secondary region active, and then transfer all data traffic to the applications in the secondary region.
@@ -34,17 +34,17 @@ Creating a secondary TiDB cluster is only a part of the business continuity solu
 
 ### Automatic asynchronous replication
 
-Only one secondary cluster can be created for each Primary TiDB cluster. TiDB Cloud makes a full Backup for the primary TiDB cluster, then restore to the newly created secondary cluster which means all existing data is included in the secondary cluster. After the secondary cluster is created, all data changes on the primary cluster will be replicated asynchronously to the secondary cluster.
+For each primary TiDB cluster, only one secondary cluster can be created. TiDB Cloud makes a full backup of the primary TiDB cluster and then restores the backup to the newly created secondary cluster, which makes sure that the secondary cluster has all the existing data. After the secondary cluster is created, all data changes on the primary cluster will be replicated asynchronously to the secondary cluster.
 
 ### Readable secondary cluster
 
-The secondary cluster is opened in read-only mode, you can distribute your read-only workload with low real-time data requirements to the secondary cluster.
+The secondary cluster is in the read-only mode. If you have any read-only workload with low real-time data requirements, you can distribute it to the secondary cluster.
 
 To satisfy read-intensive scenarios in the same region, you can use **TiDB Cloud Replication** to create a readable secondary cluster in the same region as the primary cluster. However, because a secondary cluster in the same region does not provide additional resiliency for large-scale outages or catastrophic failures, do not use it as a failover target for regional disaster recovery purposes.
 
 ### Planned Detach
 
-**Planned Detach** can be trigged by you manually. It is used for planned maintenance in most cases, such as disaster recovery drills. **Planned detach** makes sure all data changes are replicated to the secondary cluster and no data loss (RPO=0). For RTO, it depends on the replication lag between primary and secondary clusters. In most cases, the RTO is minutes level.
+**Planned Detach** can be triggered by you manually. It is used for planned maintenance in most cases, such as disaster recovery drills. **Planned detach** makes sure that all data changes are replicated to the secondary cluster without data loss (RPO=0). For RTO, it depends on the replication lag between primary and secondary clusters. In most cases, the RTO is at a level of minutes.
 
 **Planned Detach** detaches the secondary cluster from the primary cluster into an individual cluster. When **Planned Detach** is triggered, it performs the following steps:
 
@@ -71,12 +71,12 @@ To recover from an unplanned outage, use **Force Detach**. In the event of a cat
 **Force Detach** detaches the secondary cluster from the primary cluster into an individual cluster. When **Force Detach** is triggered, it performs the following steps：
 
 1. Stops data replication from the primary to the secondary cluster immediately.
-2. Sets the original secondary cluster as writable so that it can start to serve your workload.
-3. If the old primary cluster is still reachable, or when the original primary cluster recovers, TiDB Cloud sets it as read-only to avoid any new transaction from being committed to it.
+2. Sets the original secondary cluster as writable so that it can start serving your workload.
+3. If the original primary cluster is still accessible, or when the original primary cluster recovers, TiDB Cloud sets it as read-only to avoid any new transaction being committed to it.
 
-If the original primary cluster is recovered from the outage, you still have the opportunity to review transactions that would have been executed in the original primary cluster but not in the original secondary cluster by comparing the data in the two clusters, and decide whether to manually replicate these unsynchronized transactions to the original secondary cluster based on your business situation.
+Once the original primary cluster is recovered from the outage, you still have the opportunity to review transactions that have been executed in the original primary cluster but not in the original secondary cluster by comparing the data in the two clusters, and decide whether to manually replicate these unsynchronized transactions to the original secondary cluster based on your business situation.
 
-The data replication topology between primary and secondary clusters does not exist anymore after you detached the secondary cluster. The original primary cluster is set to read-only mode and the original secondary cluster becomes writable. You need to disable read-only mode manually on the original primary cluster if any DML/DDL is planned to run on it. If you want to disable the read-only mode on the original primary, do one of the following:
+The data replication topology between primary and secondary clusters does not exist anymore after you detach the secondary cluster. The original primary cluster is set to the read-only mode and the original secondary cluster becomes writable. If any DML or DDL is planned on the original primary cluster, you need to disable the read-only mode manually on it by doing one of the following:
 
 - Go to the cluster details page, click **Settings**, and then click the **Make Writable** drop-down button.
 - Connect to the SQL port of the original primary cluster and execute the following statement:
