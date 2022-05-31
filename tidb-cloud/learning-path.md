@@ -58,7 +58,7 @@ hide_sidebar: true
 <h4>Try</h4>
 
 [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
-[Perform a POC](/tidb-cloud/tidb-cloud-poc.md)
+[Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 
 </LearningPath>
 
