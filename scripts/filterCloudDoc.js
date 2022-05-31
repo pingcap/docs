@@ -62,15 +62,39 @@ const extractFilefromList = (
   });
 };
 
+const getAllFiles = (dirPath, arrayOfFiles) => {
+  const files = fs.readdirSync(dirPath);
+
+  arrayOfFiles = arrayOfFiles || [];
+
+  files.forEach((file) => {
+    if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+      arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
+    } else {
+      arrayOfFiles.push(path.join(dirPath, "/", file));
+    }
+  });
+
+  return arrayOfFiles;
+};
+
+export const copyDirectorySync = (srcPath, destPath) => {
+  const allFiles = getAllFiles(srcPath);
+  allFiles.forEach((filePath) => {
+    const relativePath = path.relative(srcPath, filePath);
+    copySingleFileSync(filePath, destPath + relativePath);
+  });
+};
+
 const main = () => {
-  const tocFile = fs.readFileSync("TOC-cloud.md");
+  const tocFile = fs.readFileSync("TOC-tidb-cloud.md");
   const mdAst = generateMdAstFromFile(tocFile);
   const linkList = extractLinkNodeFromAst(mdAst);
   const filteredLinkList = filterLink(linkList);
 
   extractFilefromList(filteredLinkList, ".", "./tmp");
-  copySingleFileSync("TOC-cloud.md", "./tmp/TOC.md");
-  copySingleFileSync("./cloud/_index.md", "./tmp/cloud/_index.md");
+  copySingleFileSync("TOC-tidb-cloud.md", "./tmp/TOC.md");
+  copyDirectorySync("./tidb-cloud/", "./tmp/tidb-cloud/");
 };
 
 main();
