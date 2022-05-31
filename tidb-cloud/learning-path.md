@@ -5,10 +5,12 @@ hide_sidebar: true
 ---
 
 <!--
-注意frontmatter里的内容，hide了右边栏和文章的title。
-最外面用LearningPathContainer包围。
-每个content tab里的内容用LearningPathContent标注，注意一定要定义id和label，label就是显示在切换上的内容
-LearningPath就是每条内容
+注意 frontmatter 里的内容
+-- hide_title 为 true 隐藏文档 title。
+-- hide_sidebar: true 隐藏右边栏。
+-- LearningPath 就是每条内容。
+-- 每个 content tab 里的内容用 LearningPathContent 标注。注意一定要定义 id 和 label，label 就是显示在切换按钮上的名称。
+-- 最外面用 LearningPathContainer 包围。
 -->
 
 <LearningPathContainer>
