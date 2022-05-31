@@ -9,7 +9,7 @@ The `ANALYZE_STATUS` table provides information about the running tasks that col
 
 Since TiDB v6.1.0, the `ANALYZE_STATUS` table supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this table. Before TiDB v6.1.0, the `ANALYZE_STATUS` table can only show instance-level tasks, and task records are cleared after a TiDB restart.
 
-Since TiDB v6.1.0, you can view the task history within the last 7 days through the system table `mysql.analyze_jobs`.
+Since TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
 
 {{< copyable "sql" >}}
 
