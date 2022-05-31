@@ -115,7 +115,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 > **Note:**
 >
-> If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-overview.md#compatibility). In this document, we assume that the upstream and downstream clusters are the same version.
+> If the versions of the upstream and downstream clusters are different, you should check [BR compatibility](/br/backup-and-restore-overview.md#before-you-use-br). In this document, we assume that the upstream and downstream clusters are the same version.
 
 1. Disable GC.
 

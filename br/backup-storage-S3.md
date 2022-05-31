@@ -1,9 +1,9 @@
 ---
-title: Back up and restore data on Amazon S3 using BR
+title: Back Up and Restore Data on Amazon S3 Using BR
 summary: Learn how to use BR to back up and restore data to Amazon S3 storage.
 ---
 
-# Back up and restore data on Amazon S3 using BR
+# Back Up and Restore Data on Amazon S3 Using BR
 
 The Backup & Restore (BR) tool provided by TiDB supports using Amazon S3 or other Amazon S3-compatible file storages as external storage.
 

@@ -31,8 +31,8 @@ This section describes backup functions, impact of backup, and backup file types
 #### Backup functions
 
 - **Back up cluster snapshots**: A snapshot of a TiDB cluster contains only the latest and transaction-consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
-- **Back up cluster incremental data**: Incremental data of a TiDB cluster is the differentiated data between the latest snapshot and the previous snapshot. Incremental data is smaller compared with full data and incremental data backup is a supplementary to snapshot backup, which reduces the volume of backup data. For details, see [Back up cluster incremental data](/br/br-usage-backup.md#back-up-tidb-cluster-incremental-data).
-- **Back up a specific database or table**: In addition to snapshot and incremental data backup, BR supports backing up data of a specific database or table and filtering out unnecessary data. For details, see [Back up a specific database or table](/br/br-usage-backup.md#back-up-a-specific-database-or-table).
+- **Back up incremental data**: Incremental data of a TiDB cluster is the differentiated data between the latest snapshot and the previous snapshot. Incremental data is smaller compared with full data and incremental data backup is a supplementary to snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
+- **Back up a database or a table**: In addition to snapshot and incremental data backup, BR supports backing up a database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
 - **Encrypt backup data**: BR supports encrypting data at the backup source or the storage end when data is backed up to Amazon S3. You can select an encryption method as required. For details, see [Encrypt backup data](/br/br-usage-backup.md#encrypt-backup-data).
 
 #### Impact on performance
@@ -51,7 +51,7 @@ This section describes restoration functions and impact on performance.
 
 - **Restore cluster snapshot backup**: You can restore cluster data to that of a snapshot backup in an empty cluster at a certain time. For details, see [Restore snapshot backup](/br/br-usage-restore.md#restore-snapshot-backup).
 - **Restore cluster incremental backup**: You can restore cluster data to that of an incremental backup at a certain time. For details, see [Restore cluster incremental backup](/br/br-usage-restore.md#restore-cluster-incremental-backup).
-- **Restore a specific database or table from backup**: You can restore part of a specific database or table. During the process, you need to filter out unnecessary data. For details, see [Restore a specific database or table from backup](/br/br-usage-restore.md#restore-a-specific-database-or-table-from-backup).
+- **Restore a database or a table from backup**: You can restore part of a specific database or table. During the process, you need to filter out unnecessary data. For details, see [Restore a specific database or table from backup](/br/br-usage-restore.md#restore-a-database-or-a-table-from-backup).
 
 #### Impact on performance
 

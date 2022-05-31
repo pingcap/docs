@@ -176,9 +176,9 @@ When using BR to restore the backup data with the value of [`--ddl-batch-size`](
 
 If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported.
 
-## Does BR support in-place full recovery of some historical backup?
+## Does BR support in-place full restoration of some historical backup?
 
-No. BR does not support in-place full recovery of some historical backup.
+No. BR does not support in-place full restoration of some historical backup.
 
 ## How can I use BR for incremental backup in the Kubernetes environment?
 
@@ -218,3 +218,7 @@ If the backup operation fails and the preceding message occurs, perform one of t
 
 - Change the directory for the backup. For example, change `/dir/backup-2020-01-01/` to `/dir/backup_local/`.
 - Delete the backup directories of all TiKV nodes and BR nodes.
+
+## What should I do if the disk usage shown on the monitoring node is inconsistent after BR backup or restoration?
+
+This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restoration. If the checksum succeeds, you can ignore this issue.

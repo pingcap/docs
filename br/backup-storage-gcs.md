@@ -1,9 +1,9 @@
 ---
-title: Back up and Restore Data on Google Cloud Storage Using BR
+title: Back Up and Restore Data on Google Cloud Storage Using BR
 summary: Learn how to use BR to back up and restore data on Google Cloud Storage.
 ---
 
-# Back up and Restore Data on Google Cloud Storage Using BR
+# Back Up and Restore Data on Google Cloud Storage Using BR
 
 The Backup & Restore (BR) tool supports using Google Cloud Storage (GCS) as the external storage for backing up and restoring data.
 

@@ -385,9 +385,9 @@
       - [BR Design Principles](/br/backup-and-restore-design.md)
       - [BR Command-line](/br/use-br-command-line-tool.md)
       - [External Storages](/br/backup-and-restore-storages.md)
-      - [Use BR to Back Up and Restore Data on Amazon S3](/br/backup-storage-S3.md)
-      - [Use BR to Back Up and Restore Data on Azure Blob Storage](/br/backup-storage-azblob.md)
-      - [Use BR to Back Up and Restore Data on Google Cloud Storage](/br/backup-storage-gcs.md)
+      - [Back Up and Restore Data on Amazon S3 Using BR](/br/backup-storage-S3.md)
+      - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
+      - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [BR FAQ](/br/backup-and-restore-faq.md)
   - TiDB Binlog
