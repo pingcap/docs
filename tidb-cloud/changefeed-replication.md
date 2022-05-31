@@ -58,11 +58,11 @@ After **Planned Detach** is finished, the original primary cluster is set as rea
 - Go to the cluster details page, click **Settings**, and then click the **Make Writable** drop-down button.
 - Connect to the SQL port of the original primary cluster and execute the following statement:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-set global tidb_super_read_only=OFF;
-```
+    ```sql
+    set global tidb_super_read_only=OFF;
+    ```
 
 ### Force Detach
 
@@ -81,11 +81,11 @@ The data replication topology between primary and secondary clusters does not ex
 - Go to the cluster details page, click **Settings**, and then click the **Make Writable** drop-down button.
 - Connect to the SQL port of the original primary cluster and execute the following statement:
 
-{{< copyable "sql" >}}
+    {{< copyable "sql" >}}
 
-```sql
-set global tidb_super_read_only=OFF;
-```
+    ```sql
+    set global tidb_super_read_only=OFF;
+    ```
 
 ## Configure TiDB Cloud Replication
 
