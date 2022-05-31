@@ -16,9 +16,7 @@ The whole content is enclosed by `LearningPathContainer`.
 
 <LearningPathContainer>
 
-<!--
-<LearningPathContent id="dba" label="DBA">
--->
+<!--  <LearningPathContent id="dba" label="DBA">   -->
 
 <LearningPath>
 
