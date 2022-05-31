@@ -6,6 +6,7 @@ hide_sidebar: true
 <!--
 
 Note the parameters in the frontmatter:
+
     - `hide_title: true` Hide the document title.
     - `hide_sidebar: true` Hides the right sidbar.
 
@@ -16,7 +17,9 @@ The whole content is enclosed by `LearningPathContainer`.
 
 <LearningPathContainer>
 
-<!--  <LearningPathContent id="dba" label="DBA">   -->
+<!--
+<LearningPathContent id="dba" label="DBA">
+-->
 
 <LearningPath>
 
