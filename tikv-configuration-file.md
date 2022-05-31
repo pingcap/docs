@@ -684,6 +684,12 @@ Configuration items related to Raftstore.
 + Default value: `128`
 + Minimum value: `10`
 
+### `max-snapshot-file-raw-size` <span class="version-mark">New in v6.1.0</span>
+
++ The snapshot file will split to multiple files when the snapshot file size exceeds this value.
++ Default value: 100MiB
++ Minimum value: 100MiB
+
 ### `snap-apply-batch-size`
 
 + The memory cache size required when the imported snapshot file is written into the disk
@@ -810,24 +816,40 @@ Configuration items related to Coprocessor.
 ### `region-max-size`
 
 + The maximum size of a Region. When the value is exceeded, the Region splits into many.
-+ Default value: `"144MB"`
-+ Unit: KB|MB|GB
++ Default value: `region-split-size / 2 * 3`
++ Unit: KiB|MiB|GiB
 
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MB"`
-+ Unit: KB|MB|GB
++ Default value: `"96MiB"`
++ Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
 
 + The maximum allowable number of keys in a Region. When this value is exceeded, the Region splits into many.
-+ Default value: `1440000`
++ Default value: `region-split-keys / 2 * 3`
 
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
+
+### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
+
++ Determines whether to divide a Region into bucket, which is several smaller ranges within a Region. The bucket is used as the unit of concurrency query to improve the scan concurrency. For more about the design of bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
++ Default value: false
+
+> **Warning:**
+>
+> - Currently, `enable-region-bucket` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production.
+> - This configuration only makes sense when `region-split-size` is twice `region-bucket-size` or above, otherwise no bucket is actually divided.
+> Adjust `region-split-size` larger might cause the risk of potential performance regression and slow data scheduling.
+
+### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
+
++ The size of a bucket when `enable-region-bucket` is true.
++ Default value: 96MiB
 
 ## RocksDB
 
