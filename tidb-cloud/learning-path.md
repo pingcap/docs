@@ -98,7 +98,7 @@ hide_sidebar: true
 
 [Overview](/tidb-cloud/monitor-tidb-cluster.md)
 [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-[Datadog](tidb-cloud/monitor-datadog-integration.md)
+[Datadog](/tidb-cloud/monitor-datadog-integration.md)
 [Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 </LearningPath>
