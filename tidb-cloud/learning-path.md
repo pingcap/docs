@@ -103,20 +103,7 @@ hide_sidebar: true
 
 </LearningPath>
 
-<LearningPath>
-
-![Icon](https://avatars.githubusercontent.com/u/773853)
-
-<h4>Monitor</h4>
-
-[Overview](/tidb-cloud/monitor-tidb-cluster.md)
-[Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-[Datadog](tidb-cloud/monitor-datadog-integration.md)
-[Prometheus and Grafana](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
-
-</LearningPath>
-
-<!-- Tab 标签
+<!-- Tab
 </LearningPathContent>
 -->
 </LearningPathContainer>
