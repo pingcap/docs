@@ -248,6 +248,8 @@ Usage:
 
     The following command specifies that the maximum waiting time for the store to go online is 4 hours.
 
+    {{< copyable "" >}}
+    
     ```bash
     >> config set max-store-preparing-time 4h
     ```
