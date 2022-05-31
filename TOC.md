@@ -62,7 +62,8 @@
   - Optimize
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
     - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
-    - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
     - Other Optimization Methods
       - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
       - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
@@ -71,8 +72,7 @@
     - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
     - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
   - Reference
-    - SQL
-      - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+    - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
