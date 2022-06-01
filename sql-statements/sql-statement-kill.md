@@ -51,7 +51,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 ## Behavior change descriptions
 
-Since v6.1.0, TiDB supports the Global Kill feature, which is enabled by default and controlled by the [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610-version) configuration. When the Global Kill feature is enabled, both the `KILL` and the `KILL TIDB` statement can terminate queries or connections across nodes so you do not need to worry about erroneously terminating queries or connections any more. When you use a client to connect to any TiDB node and execute the `KILL` statement or `KILL TIDB` statement, the statement will be forwarded to the corresponding TiDB node. If there is an agent between the client and TiDB, the `KILL` and `KILL TIDB` statements will also be forwarded to the corresponding TiDB node for execution.
+Since v6.1.0, TiDB supports the Global Kill feature, which is enabled by default and controlled by the [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610-version) configuration. When the Global Kill feature is enabled, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` statement or `KILL TIDB` statement, the statement will be forwarded to the corresponding TiDB instance. If there is a proxy between the client and TiDB, the `KILL` and `KILL TIDB` statements will also be forwarded to the corresponding TiDB node for execution.
 
 If the Global Kill function is not enabled or you are using a version earlier than TiDB v6.1.0, note the following:
 
