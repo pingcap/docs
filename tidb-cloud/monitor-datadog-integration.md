@@ -1,6 +1,6 @@
 ---
 title: Datadog Integration (Third-Party Monitoring Service)
-summary: Learn how to monitor your TiDB cluster with the Datadog integration. 
+summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
 # Datadog Integration
@@ -26,7 +26,7 @@ You cannot use the Datadog integration in [Developer Tier clusters](/tidb-cloud/
 1. On the TiDB Cloud console, choose the target project for Datadog integration, and then click the gear icon in the upper left corner to open the project settings.
 2. In the left pane, click **Integrations**.
 3. Click **Integration to Datadog**.
-4. Enter your API key of Datadog, choose the site of Datadog.
+4. Enter your API key of Datadog and choose the site of Datadog.
 5. Click **Test Integration**.
 
     - If the test successes, the **Confirm** button is displayed.
