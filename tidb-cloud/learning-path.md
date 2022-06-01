@@ -13,7 +13,7 @@ hide_commit: true
 
 ![Introduction](https://user-images.githubusercontent.com/35301108/171351090-bf3dc31f-c0b9-47c1-a36e-ec8890fc7099.png)
 
-<h4>Introduction</h4>
+<h4>Learn</h4>
 
 - [What is TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
 - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
