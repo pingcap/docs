@@ -619,11 +619,11 @@ You can use topic = "xxx" to specify a Topic dispatcher and use topic expression
 
 The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
 
-- `prefix`: Optional. Indicates the prefix of the Topic Name.
-- `{schema}`: Mandatory. Used to match the schema name.
-- `middle`: Optional. Indicates the delimiter between schemas.
-- `{table}`: Optional. Used to match the table name.
-- `suffix`: Optional. Indicates the suffix of the Topic Name.
+- `prefix`: optional. Indicates the prefix of the Topic Name.
+- `{schema}`: required. Used to match the schema name.
+- `middle`: optional. Indicates the delimiter between schemas.
+- `{table}`: optional. Used to match the table name.
+- `suffix`: optional. Indicates the suffix of the Topic Name.
 
 `prefix`, `middle` and `suffix` can only include the following characters: `a-z`, `A-Z`, `0-9`, `.`, `_` and `-`. `{schema}` and `{table}` can only include `a-z`. Placeholders such as `{Schema}` and `{TABLE}` are invalid.
 
