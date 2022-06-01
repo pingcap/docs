@@ -19,11 +19,11 @@ Before adding VPC Peering requests to a region, you need to set a project CIDR f
 
 You can set the project CIDR during creating the first Dedicated Tier of your project. If you want to set the project CIDR before creating the tier, do the following:
 
-1. Go to the target project, and click **Network Access** > **Project CIDR**.
+1. On the TiDB Cloud console, choose the target project, and then click the gear icon in the upper left corner to open the project settings.
 
-    ![Project-CIDR](/media/tidb-cloud/Project-CIDR.png)
+2. In the left pane, click **Project CIDR**.
 
-2. Click **Add a project CIDR for AWS** or **Add a project CIDR for Google Cloud** according to your cloud provider, specify one of the following network addresses in the **Project CIDR** field, and then click **Confirm**.
+3. Click **Add a project CIDR for AWS** or **Add a project CIDR for Google Cloud** according to your cloud provider, specify one of the following network addresses in the **Project CIDR** field, and then click **Confirm**.
 
     > **Note:**
     >
@@ -38,7 +38,7 @@ You can set the project CIDR during creating the first Dedicated Tier of your pr
 
     ![Project-CIDR4](/media/tidb-cloud/Project-CIDR4.png)
 
-3. View the CIDR of the cloud provider and the specific region.
+4. View the CIDR of the cloud provider and the specific region.
 
     The region CIDR is inactive by default. To activate the region CIDR, you need to create a cluster in the target region. When the region CIDR is active, you can create VPC Peering for the region.
 
@@ -48,9 +48,11 @@ You can set the project CIDR during creating the first Dedicated Tier of your pr
 
 ### Step 1: Add VPC peering requests
 
-1. Go to the target project, click **Network Access** > **VPC Peerings**, and then click **Add**.
+1. On the TiDB Cloud console, choose the target project for VPC peering, and then click the gear icon in the upper left corner to open the project settings.
 
-2. On the **Add VPC** dialog, fill in the required information of your existing AWS VPC:
+    The **VPC Peering** page is displayed by default.
+
+2. Click **Add**, choose the AWS icon, and then fill in the required information of your existing AWS VPC:
 
     - Region
     - AWS Account ID
@@ -196,11 +198,11 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 ### Steps
 
-1. Go to the target project, click **Network Access** > **VPC Peerings**, and then click **Add**.
+1. On the TiDB Cloud console, choose the target project for VPC peering, and then click the gear icon in the upper left corner to open the project settings.
 
-    <!-- ![VPC-Peering](/media/tidb-cloud/VPC-Peering1.png) -->
+    The **VPC Peering** page is displayed by default.
 
-2. On the **Add VPC** dialog, fill in the required information of your existing GCP VPC:
+2. Click **Add**, choose the Google Cloud icon, and then fill in the required information of your existing GCP VPC:
 
     - Region
     - Application GCP project ID

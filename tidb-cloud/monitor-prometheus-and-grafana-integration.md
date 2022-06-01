@@ -21,21 +21,18 @@ You cannot use the Prometheus and Grafana integration in [Developer Tier](/tidb-
 
 ## Steps
 
-### Step 1. View the Prometheus integration
-
-1. On the TiDB Cloud console, click the account name in the upper-right corner of the window.
-2. Click **Preferences**. The project preferences page is displayed.
-3. In the **Integrations** column, click the **Prometheus** icon of a project that you want to view or modify. The **Integration** page of the project is displayed.
-
-### Step 2. Get a scrape_config file for Prometheus
+### Step 1. Get a scrape_config file for Prometheus
 
 Before configuring your Prometheus service to read metrics of TiDB Cloud, you need to generate a scrape_config YAML file in TiDB Cloud first. The scrape_config file contains a unique bearer token that allows the Prometheus service to monitor any database clusters in the current project.
 
 To get the scrape_config file for Prometheus, do the following:
 
-1. On the **Integration** page, click **Add File** under **Integration to Prometheus** to generate and show the scrape_config file for the current project.
+1. On the TiDB Cloud console, choose a target project for Prometheus integration, and then click the gear icon in the upper left corner to open the project settings.
+2. In the left pane, click **Integrations**.
+3. Click **Integration to Prometheus**.
+4. Click **Add File** to generate and show the scrape_config file for the current project.
 
-2. Make a copy of the scrape_config file content for later use.
+5. Make a copy of the scrape_config file content for later use.
 
     > **Note:**
     >
