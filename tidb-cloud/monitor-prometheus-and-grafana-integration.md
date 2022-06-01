@@ -58,7 +58,7 @@ For more information about how to use Grafana, see [Grafana documentation](https
 
 To improve data security, it is a general best practice to periodically rotate scrape_config file bearer tokens.
 
-1. Follow [Step 2](#step-2-get-a-scrape_config-file-for-prometheus) to create a new scrape_config file for Prometheus.
+1. Follow [Step 1](#step-1-get-a-scrape_config-file-for-prometheus) to create a new scrape_config file for Prometheus.
 2. Add the content of the new file to your Prometheus configuration file.
 3. Once you have confirmed that your Prometheus service is still able to read from TiDB Cloud, remove the content of the old scrape_config file from your Prometheus configuration file.
 4. On the **Integration** page of your project, delete the corresponding old scrape_config file to block anyone else from using it to read from the TiDB Cloud Prometheus endpoint.
