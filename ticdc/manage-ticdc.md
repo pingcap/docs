@@ -608,10 +608,10 @@ protocol = "canal-json"
 
 In the example of the previous section:
 
-- For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, table test3.aa is dispatched according to "Topic expression 2"; table test5.aa is dispatched according to "Topic expression 3".
-- For a table that matches multiple matcher rules, it is dispatched according to first matching topic expression. For example, the table test1.aa is distributed according to "Topic expression 1".
-- For tables that do not match any matcher rule, the corresponding data change events are sent to the default topic specified in --sink-uri. For example, table test10.aa is sent to the default topic.
-- For tables that match the matcher rule but do not specify a topic dispatcher, the corresponding data changes are sent to the default topic specified in --sink-uri. For example, table test6.aa is sent to the default topic.
+- For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, the `test3.aa` table is dispatched according to "Topic expression 2"; the `test5.aa` table is dispatched according to "Topic expression 3".
+- For a table that matches multiple matcher rules, it is dispatched according to the first matching topic expression. For example, the `test1.aa` table is distributed according to "Topic expression 1".
+- For tables that do not match any matcher rule, the corresponding data change events are sent to the default topic specified in `--sink-uri`. For example, the `test10.aa` table is sent to the default topic.
+- For tables that match the matcher rule but do not specify a topic dispatcher, the corresponding data changes are sent to the default topic specified in `--sink-uri`. For example, the `test6.aa` table is sent to the default topic.
 
 ### Topic dispatchers
 
@@ -630,11 +630,11 @@ The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]
 Some examples:
 
 - `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - The data change events corresponding to `test1.table1` are send to the topic named `hello_test1_table1`
-    - The data change events corresponding to `test2.table2` are send to the topic named `hello_test2_table2`
+    - The data change events corresponding to `test1.table1` are sent to the topic named `hello_test1_table1`.
+    - The data change events corresponding to `test2.table2` are sent to the topic named `hello_test2_table2`.
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - The data change events corresponding to `test3` are send to the topic named `hello_test3_world`
-    - The data change events corresponding to `test4` are send to the topic named `hello_test4_world`
+    - The data change events corresponding to all tables in `test3` are sent to the topic named `hello_test3_world`.
+    - The data change events corresponding to all tables in `test4` are sent to the topic named `hello_test4_world`.
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
     - All tables listened by TiCDC are dispatched to separate topics according to the "schema_table" rule. For example, for the `test.account` table, TiCDC dispatches its data change log to a Topic named `test_account`.
 
@@ -642,11 +642,11 @@ Some examples:
 
 #### Schema-level DDLs
 
-DDLs such as `create database` and `drop database` that are not related to a specific table are called schema-level DDLs. The events corresponding to schema-level DDLs are sent to the default topic specified in `-sink-uri`.
+DDLs that are not related to a specific table are called schema-level DDLs, such as `create database` and `drop database`. The events corresponding to schema-level DDLs are sent to the default topic specified in `--sink-uri`.
 
 #### Table-level DDLs
 
-DDLs such as `alter table` and `create table` that are related to a specific table are called table-level DDLs. The events corresponding to table-level DDLs are sent to the corresponding topic according to dispatcher configurations.
+DDLs that are related to a specific table are called table-level DDLs, such as `alter table` and `create table`. The events corresponding to table-level DDLs are sent to the corresponding topic according to dispatcher configurations.
 
 For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{table}`, DDL events are dispatched as follows:
 
@@ -655,7 +655,7 @@ For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{tabl
 
 ### Partition dispatchers
 
-You can use partition = "xxx" to specify a partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
+You can use `partition = "xxx"` to specify a partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
 
 - default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the index-value mode.
 - ts: Use the commitTs of the row change to hash and dispatch events.
@@ -663,6 +663,7 @@ You can use partition = "xxx" to specify a partition dispatcher. It supports fou
 - table: Use the schema name of the table and the table name to hash and dispatch events.
 
 > **Note:**
+>
 >
 > Since v6.1, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
 >
