@@ -147,11 +147,17 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `true`
 + When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
 
-#### `graceful-wait-before-shutdown` <span class="version-mark">New in v5.0</span>
+### `graceful-wait-before-shutdown` <span class="version-mark">New in v5.0</span>
 
 - Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
 - Default value: `0`
 - When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
+
+### `enable-global-kill` <span class="version-mark">New in v6.1.0</span>
+
++ Controls whether to enable Global Kill (termination of queries or connections) feature.
++ Default value: `true`
++ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across nodes so you do not need to worry about erroneously terminating queries or connections any more. When you use a client to connect to any TiDB node and execute the `KILL` statement or `KILL TIDB` statement, the statement will be forwarded to the corresponding TiDB node. If there is an agent between the client and TiDB, the `KILL` and `KILL TIDB` statements will also be forwarded to the corresponding TiDB node for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL [TIDB]](/sql-statements/sql-statement-kill.md).
 
 ## Log
 
