@@ -9,7 +9,7 @@ Avro is a data exchange format protocol defined by [Apache Avro™](https://avro
 
 ## Use Avro
 
-When using Message Queue (MQ) as downstream sink, you can specify Avro in `sink-uri`. TiCDC captures TiDB DML events， creates Avro messages from these events, and sends the messages downstream. When Avro detects a schema change, it registers the latest schema with Schema Registry.
+When using Message Queue (MQ) as a downstream sink, you can specify Avro in `sink-uri`. TiCDC captures TiDB DML events， creates Avro messages from these events, and sends the messages downstream. When Avro detects a schema change, it registers the latest schema with Schema Registry.
 
 The following is a configuration example using Avro:
 
@@ -19,11 +19,11 @@ The following is a configuration example using Avro:
 cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.6.0&protocol=avro" --schema-registry=http://127.0.0.1:8081
 ```
 
-The value of `--schema-registry` supports the https protocol and `username:password` authentication, for example, `--schema-registry=https://username:password@schema-registry-uri.com`. The username and password must be URL-encoded.
+The value of `--schema-registry` supports the `https` protocol and `username:password` authentication, for example, `--schema-registry=https://username:password@schema-registry-uri.com`. The username and password must be URL-encoded.
 
 ## TiDB extension fields
 
-By default, Avro only collects data of changed rows in the DML event, and does not collect the type of data change or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol. When `enable-tidb-extension` is set to `true` (defaults to `false`) in `sink-uri`, TiCDC generates Avro messages with these three fields:
+By default, Avro only collects data of changed rows in DML events and does not collect the type of data changes or TiDB-specific CommitTS (the unique identifiers of transactions). To address this issue, TiCDC introduces the following three TiDB extension fields to the Avro protocol message. When `enable-tidb-extension` is set to `true` (`false` by default) in `sink-uri`, TiCDC adds these three fields to the Avro messages during message generation.
 
 - `_tidb_op`: The DML type. "c" indicates insert and "u" indicates updates.
 - `_tidb_commit_ts`: The unique identifier of a transaction.
@@ -39,7 +39,7 @@ cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro
 
 ## Definition of the data format
 
-TiCDC converts a DML event into a Kafka event, and the Key and value of an event are encoded according to the Avro protocol.
+TiCDC converts a DML event into a Kafka event, and the Key and Value of an event are encoded according to the Avro protocol.
 
 ### Key data format
 
@@ -57,7 +57,7 @@ TiCDC converts a DML event into a Kafka event, and the Key and value of an event
 
 - `{{TableName}}` indicates the name of the table where the event occurs.
 - `{{Namespace}}` is the namespace of Avro.
-- `{{ColumnValueBlock}}` defines the format of each row of data.
+- `{{ColumnValueBlock}}` defines the format of each column of data.
 
 The `fields` in the key contains only primary key columns or unique index columns.
 
@@ -121,7 +121,7 @@ The Column data is the `{{ColumnValueBlock}}` part of the Key/Value data format.
 }
 ```
 
-If one row can be NULL, the Column data format can be:
+If one column can be NULL, the Column data format can be:
 
 ```
 {
@@ -146,7 +146,7 @@ If one row can be NULL, the Column data format can be:
 | SQL TYPE   | TIDB_TYPE | AVRO_TYPE | Description                                                                                                               |
 |------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------|
 | BOOL       | INT       | int       |                                                                                                                           |
-| TINYINT    | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
+| TINYINT    | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
 | SMALLINT   | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
 | MEDIUMINT  | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
 | INT        | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED and AVRO_TYPE is long.                                                      |
@@ -176,7 +176,7 @@ If one row can be NULL, the Column data format can be:
 | SET        | SET       | string    |                                                                                                                           |
 | DECIMAL    | DECIMAL   | bytes     | When `avro-decimal-handling-mode` is string, AVRO_TYPE is string.                                                         |
 
-In the Avro protocol, two other `sink-uri` parameters may affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
+In the Avro protocol, two other `sink-uri` parameters might affect the Column data format as well: `avro-decimal-handling-mode` and `avro-bigint-unsigned-handling-mode`.
 
 - `avro-decimal-handling-mode` controls how Avro handles decimal fields, including:
 
@@ -196,7 +196,7 @@ The following is a configuration example:
 cdc cli changefeed create --pd=http://127.0.0.1:2379 --changefeed-id="kafka-avro-enable-extension" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.6.0&protocol=avro&avro-decimal-handling-mode=string&avro-bigint-unsigned-handling-mode=string" --schema-registry=http://127.0.0.1:8081
 ```
 
-Most SQL Types are mapped to the base Column data format. Some other SQL types are expanded on the base data format to provide more information.
+Most SQL Types are mapped to the base Column data format. Some other SQL types extend the base data format to provide more information.
 
 BIT(64)
 
@@ -249,7 +249,7 @@ DECIMAL(10, 4)
 
 Avro does not generate DDL events downstream. It checks whether a schema changes each time a DML event occurs. If a schema changes, Avro generates a new schema and registers it with the Schema Registry. If the schema change does not pass the compatibility check, the registration fails. Avro does not resolve any schema compatibility issues.
 
-Note that, even if the schema change passes the compatibility check and the new version is registered, the data producers and consumers still need to perform an upgrade to ensure normal running of the system.
+Note that, even if a schema change passes the compatibility check and a new version is registered, the data producers and consumers still need to perform an upgrade to ensure normal running of the system.
 
 Assume that the default compatibility policy of Confluent Schema Registry is `BACKWARD` and add a non-empty column to the source table. In this situation, Avro generates a new schema but fails to register it with Schema Registry due to compatibility issues. At this time, the changefeed enters error state.
 
@@ -257,4 +257,4 @@ For more information about schemas, refer to [Schema Registry related documents]
 
 ## Topic distribution
 
-Schema Registry supports three [Subject Name Strategies](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy): TopicNameStrategy, RecordNameStrategy, and TopicRecordNameStrategy. Currently, TiCDC Avro only supports TopicNameStrategy, which means that a Kafka topic can only receive data in one data format. Therefore, TiCDC Avro prohibits mapping multiple tables to the same topic. When creating a changefeed, an error will be reported if the topic rule does not include the `{schema}` and `{table}` placeholders in the configured distribution rule.
+Schema Registry supports three [Subject Name Strategies](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy): TopicNameStrategy, RecordNameStrategy, and TopicRecordNameStrategy. Currently, TiCDC Avro only supports TopicNameStrategy, which means that a Kafka topic can only receive data in one data format. Therefore, TiCDC Avro prohibits mapping multiple tables to the same topic. When you create a changefeed, an error will be reported if the topic rule does not include the `{schema}` and `{table}` placeholders in the configured distribution rule.
