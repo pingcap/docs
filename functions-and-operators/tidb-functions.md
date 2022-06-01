@@ -249,7 +249,7 @@ The `TIDB_SHARD` function can be used to create a SHARD INDEX to scatter the ind
 
 - Limitations:
 
-    - SHARD INDEX cannot be used with inequality or `IN` queries.
+    - SHARD INDEX cannot be used with inequality queries.
     - SHARD INDEX cannot be used with an outmost `AND` operator mixed with `OR`.
     - SHARD INDEX cannot be used with `GROUP BY` clause.
     - SHARD INDEX cannot be used with `ORDER BY` clause.
