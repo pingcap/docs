@@ -615,7 +615,7 @@ In the example of the previous section:
 
 ### Topic dispatchers
 
-You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies.
+You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
 
 The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
 
@@ -663,6 +663,7 @@ You can use partition = "xxx" to specify a partition dispatcher. It supports fou
 - table: Use the schema name of the table and the table name to hash and dispatch events.
 
 > **Note:**
+>
 > Since v6.1, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
 >
 > ```
