@@ -11,7 +11,7 @@ Initiating a proof of concept (PoC) is the best way to determine whether TiDB Cl
 
 This document describes the typical PoC procedures and aims to help you quickly complete a TiDB Cloud PoC. It is a best practice that has been validated by TiDB experts and a large customer base.
 
-If you are interested in doing a PoC, feel free to contact the <a href="mailto:tidbcloud-support@pingcap.com">TiDB Cloud support team</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
+If you are interested in doing a PoC, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a> before you get started. The support team can help you create a test plan and walk you through the PoC procedures smoothly.
 
 Alternatively, you can [create a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial) to get familiar with TiDB Cloud for a quick evaluation. Note that the Developer Tier has some [special terms and conditions](/tidb-cloud/select-cluster-tier.md#developer-tier-special-terms-and-conditions).
 
@@ -43,7 +43,7 @@ Use the following questions to help identify the goals of your PoC:
 - What are the necessary metrics for operational efficiency? How do you measure them?
 - What are the security and compliance requirements for your workload?
 
-For more information about the success criteria and how to create a test plan, feel free to contact the <a href="mailto:tidbcloud-support@pingcap.com">TiDB Cloud support team</a>.
+For more information about the success criteria and how to create a test plan, feel free to contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>.
 
 ## Step 2. Identify characteristics of your workload
 
@@ -105,7 +105,7 @@ Here are some best practices:
 
 For SQL statements, you might need to adapt them depending on the level of your data source's compatibility with TiDB.
 
-If you have any questions, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
+If you have any questions, contact [PingCAP](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
 ## Step 5. Import data
 
@@ -217,8 +217,8 @@ To save points, remove the cluster that you are not using. Currently, you cannot
 
 ### 4. Can I take more than 2 weeks to complete a PoC?
 
-If you want to extend the PoC trial period or are running out of trial points, contact [the sales team](https://en.pingcap.com/contact-us/) for help.
+If you want to extend the PoC trial period or are running out of trial points, contact [PingCAP](https://en.pingcap.com/contact-us/) for help.
 
 ### 5. I'm stuck with a technical problem. How do I get help for my PoC?
 
-You can always contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
+You can always contact [PingCAP](/tidb-cloud/tidb-cloud-support.md) for help.
