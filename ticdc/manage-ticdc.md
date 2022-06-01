@@ -218,6 +218,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
 | `enable-tidb-extension` | When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. (optional, `false` by default)|
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol`. (optional, `16` by default) |
+| `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
