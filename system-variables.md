@@ -1740,7 +1740,7 @@ Usage example:
 SET tidb_slow_log_threshold = 200;
 ```
 
-### `tidb_max_tiflash_threads`
+### tidb_max_tiflash_threads <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
