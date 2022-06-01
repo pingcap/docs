@@ -38,7 +38,7 @@ To get the scrape_config file for Prometheus, do the following:
     >
     > For security reasons, TiDB Cloud only shows a newly generated scrape_config file once. Ensure that you copy the content before closing the file window. If you forget to do so, you need to delete the scrape_config file in TiDB Cloud and generate a new one. To delete a scrape_config file, select the file, click **...**, and then click **Delete**.
 
-### Step 3. Integrate with Prometheus
+### Step 2. Integrate with Prometheus
 
 1. In the monitoring directory specified by your Prometheus service, locate the Prometheus configuration file.
 
@@ -48,7 +48,7 @@ To get the scrape_config file for Prometheus, do the following:
 
 3. In your Prometheus service, check **Status** > **Targets** to confirm that the new scrape_config file has been read. If not, you might need to restart the Prometheus service.
 
-### Step 4. Use Grafana GUI dashboards to visualize the metrics
+### Step 3. Use Grafana GUI dashboards to visualize the metrics
 
 After your Prometheus service is reading metrics from TiDB Cloud, you can use Grafana GUI dashboards to visualize the metrics.
 
