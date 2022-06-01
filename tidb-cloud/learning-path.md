@@ -11,7 +11,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Introduction](/media/tidb-cloud/tidb-cloud-intro.png)
+![Introduction](https://user-images.githubusercontent.com/35301108/171351090-bf3dc31f-c0b9-47c1-a36e-ec8890fc7099.png)
 
 <h4>Introduction</h4>
 
@@ -24,7 +24,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Pricing](/media/tidb-cloud/tidb-cloud-pricing.png)
+![Pricing](https://user-images.githubusercontent.com/35301108/171351097-c7162d02-3d59-4f82-a8f7-b134bbd83c75.png)
 
 <h4>Pricing</h4>
 
@@ -35,7 +35,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Try](/media/tidb-cloud/tidb-cloud-try.png)
+![Try](https://user-images.githubusercontent.com/35301108/171351100-89567eff-d384-461c-9e40-e19d7734f04b.png)
 
 <h4>Try</h4>
 
@@ -47,7 +47,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Deploy](/media/tidb-cloud/tidb-cloud-deploy.png)
+![Deploy](https://user-images.githubusercontent.com/35301108/171351085-6843a1f8-226e-4381-a8fd-bc85d6125dbb.png)
 
 <h4>Deploy</h4>
 
@@ -61,7 +61,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Migrate](/media/tidb-cloud/tidb-cloud-migrate.png)
+![Migrate](https://user-images.githubusercontent.com/35301108/171351093-81b0955f-59fa-4275-bbad-01a385e31513.png)
 
 <h4>Migrate</h4>
 
@@ -75,7 +75,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Monitor](/media/tidb-cloud/tidb-cloud-monitor.png)
+![Monitor](https://user-images.githubusercontent.com/35301108/171351095-f5688a19-1e36-42ed-8ed7-e15579f02ff6.png)
 
 <h4>Monitor</h4>
 
@@ -88,7 +88,7 @@ hide_commit: true
 
 <LearningPath>
 
-![Tune Performance](/media/tidb-cloud/tidb-cloud-tune.png)
+![Tune Performance](https://user-images.githubusercontent.com/35301108/171351103-a376306b-d828-4ae9-ad7a-b2f95baa9b31.png)
 
 <h4>Tune Performance</h4>
 
