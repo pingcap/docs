@@ -47,7 +47,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
     First use `information_schema.cluster_processlist` to find TiDB instance address and session ID. Connect the client directly to the TiDB instance that is executing the DML statement. Then run the `kill tidb session_id` statement.
 
-      If the client connects to another TiDB instance or there is a proxy between the client and the TiDB cluster, the `kill tidb session_id` statement might be routed to another TiDB instance, which might incorrectly terminate another session. For details, see [`KILL`](/sql-statements/sql-statement-kill.md).
+    If the client connects to another TiDB instance or there is a proxy between the client and the TiDB cluster, the `kill tidb session_id` statement might be routed to another TiDB instance, which might incorrectly terminate another session. For details, see [`KILL`](/sql-statements/sql-statement-kill.md).
 
 - Kill DDL statements: First use `admin show ddl jobs` to find the ID of the DDL job you need to terminate, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
 
