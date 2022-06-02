@@ -321,11 +321,9 @@ The following TiDB configuration items can be modified online:
 
 ### Modify TiFlash configuration online
 
-You can modify TiFlash configuration by using [system variables](/system-variables.md).
+Currently, you can modify the TiFlash configuration `max_threads` by using the system variable [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610), which specifies the maximum concurrency for TiFlash to execute a request.
 
-The following example shows how to modify `max_threads` online by using the [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) variable.
-
-The default value of `max_threads` is -1, indicating that this system variable is invalid and depends on the setting of the TiFlash configuration file. You can set `max_threads` to 10 by using `tidb_max_tiflash_threads`:
+The default value of `tidb_max_tiflash_threads` is -1, indicating that this system variable is invalid and depends on the setting of the TiFlash configuration file. You can set `max_threads` to 10 by using `tidb_max_tiflash_threads`:
 
 {{< copyable "sql" >}}
 
@@ -351,9 +349,3 @@ select @@tidb_max_tiflash_threads;
 +----------------------------+
 1 row in set (0.00 sec)
 ```
-
-The following TiFlash configuration items can be modified online:
-
-| Configuration item | SQL variable | Description |
-| --- | --- | --- |
-| max_threads | tidb_max_tiflash_threads | The maximum concurrency for TiFlash to execute a request |
