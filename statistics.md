@@ -343,12 +343,12 @@ Since TiDB v6.0, TiDB supports using the `KILL` statement to terminate an `ANALY
     SHOW ANALYZE STATUS
     ```
 
-    By checking the `instance` column and the `process_id` column in the result, you can get the address and task `ID` of the TiDB instance that is executing the background `ANALYZE` task.
+    By checking the `instance` column and the `process_id` column in the result, you can get the TiDB instance address and the task `ID` of the background `ANALYZE` task.
 
 2. Terminate the `ANALYZE` task that is running in the background.
 
-   - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-introduced-from-v610-version) is `true` (`true` by default), you can execute the `KILL TIDB ${id}; ` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
-   - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and TiDB, the `KILL` statement cannot terminate the background `ANALYZE` task.
+   - If [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-introduced-from-v610-version) is `true` (`true` by default), you can execute the `KILL TIDB ${id};` statement directly, where `${id}` is the `ID` of the background `ANALYZE` task obtained from the previous step.
+   - If `enable-global-kill` is `false`, you need to use a client to connect to the TiDB instance that is executing the backend `ANALYZE` task, and then execute the `KILL TIDB ${id};` statement. If you use a client to connect to another TiDB instance, or if there is a proxy between the client and the TiDB cluster, the `KILL` statement cannot terminate the background `ANALYZE` task.
 
 For more information on the `KILL` statement, see [`KILL`](/sql-statements/sql-statement-kill.md).
 
