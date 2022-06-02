@@ -205,7 +205,7 @@ For each database event record in audit logs, TiDB provides the following fields
 
 > **Note:**
 >
-> In the following table, empty max length of a field means that the data type of this field has a well defined constant length (for example, 4 bytes for INTEGER).
+> In the following tables, empty max length of a field means that the data type of this field has a well defined constant length (for example, 4 bytes for INTEGER).
 
 | Col # | Field name | TiDB data type | Max length | Description |
 |---|---|---|---|---|
@@ -224,9 +224,9 @@ For each database event record in audit logs, TiDB provides the following fields
 | 13 | DATABASE | VARCHAR | 64 | Event-related database      |
 | 14 | TABLES | VARCHAR | 64 | Event-related table name          |
 | 15 | SQL_TEXT | VARCHAR |  | Masked SQL statement   |
-| 16 | ROWS | INTEGER |  | The number of affected rows (`0` indicates that no rows are affected)      |
+| 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
 
-Depending on the EVENT_CLASS field value set by TiDB, database audit log event records also contain additional fields.
+Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
 
 - If EVENT_CLASS is `CONNECTION`, database event records also contain the following fields:
 
