@@ -37,7 +37,7 @@ It takes some risks to use the optimistic mode. Follow these rules when you use 
 
 In the optimistic mode, most of the DDL statements executed in the upstream are automatically migrated to the downstream with no extra effort required. These DDL statements are called "Type 1 DDL".
 
-DDL statements that change the column name, the column type, or the column default value are called "Type 2 DDL". When you execute Type 2 DDL statements in the upstream, make sure that the DDL statements are executed in all sharded tables in the same order.
+DDL statements that change the column name, the column type, or the column default value are called "Type 2 DDL". When you execute Type 2 DDL statements in the upstream, make sure that you execute the DDL statements in all sharded tables in the same order.
 
 Some examples of Type 2 DDL statements are as follows:
 
