@@ -39,7 +39,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
 - When a load balancer is running (recommended): Stop the load balancer and execute the SQL statement `SHUTDOWN`. Then TiDB waits for a period as specified by [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) until all sessions are terminated. Then TiDB stops running.
 
-- When no load balancer is running: Execute the `SHUTDOWN` statement`. Then TiDB components are gracefully stopped.
+- When no load balancer is running: Execute the `SHUTDOWN` statement. Then TiDB components are gracefully stopped.
 
 ### Can `kill` be executed in TiDB?
 
