@@ -224,7 +224,7 @@ The following are descriptions of parameters and parameter values that can be co
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
 | `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-mechanism` | The name of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
+| `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
 | `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional) |
 | `sasl-gssapi-keytab-path` | The gssapi keytab path (optional)|
 | `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional) |
