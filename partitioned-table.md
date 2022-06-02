@@ -1304,7 +1304,7 @@ set @@session.tidb_partition_prune_mode = 'dynamic'
 
 In `dynamic` mode, TiDB collects table-level summary statistics, or GlobalStats, from partitioned tables. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
-When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, there are only partition statistics, and no table statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+When switching from the `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
 
 {{< copyable "sql" >}}
 
@@ -1330,7 +1330,7 @@ mysql> show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To get GlobalStats, you need to manually trigger `analyze` on the tables or a single partition.
+To get GlobalStats, you need to manually trigger `analyze` on the table or on a partition of the table.
 
 {{< copyable "sql" >}}
 
@@ -1349,7 +1349,7 @@ mysql> show stats_meta where table_name like "t";
 4 rows in set (0.00 sec)
 ```
 
-If the following warning is displayed during the `analyze` process, partition statistics are inconsistent, and you need to collect statistics of the partitions or all tables.
+If the following warning is displayed during the `analyze` process, partition statistics are inconsistent, and you need to collect statistics of all partitions or the entire table.
 
 ```
 | Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
@@ -1532,7 +1532,7 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
     You can change `ALL COLUMNS` to the columns you need.
 
-3. Export the batch update sentences to a file:
+3. Export the batch update statements to a file:
 
     {{< copyable "sql" >}}
 
