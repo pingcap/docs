@@ -57,4 +57,4 @@ After completing the Prerequisites, you can sink your data to Apache Kafka.
 
 ## Restrictions
 
-Because TiDB Cloud uses TiCDC to establish connectors, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
