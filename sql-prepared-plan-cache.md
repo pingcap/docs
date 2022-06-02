@@ -132,7 +132,7 @@ For example, the current TiDB instance has 50 sessions in concurrency and each s
 You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows:
 
 - When the memory threshold of the TiDB server instance is <= 64 GiB, set `tidb_prepared_plan_cache_size` to `50`.
-- When the memory threshold of the TiDB server instance is > 60 GiB, set `tidb_prepared_plan_cache_size` to `100`.
+- When the memory threshold of the TiDB server instance is > 64 GiB, set `tidb_prepared_plan_cache_size` to `100`.
 
 When the unused memory of the TiDB server is less than a certain threshold, the memory protection mechanism of plan cache is triggered, through which some cached plans will be evicted.
 
