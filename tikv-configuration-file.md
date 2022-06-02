@@ -386,7 +386,7 @@ Configuration items related to storage.
 
 + The maximum allowable time for TiKV to recover after RocksDB detects a recoverable background error. If some background SST files are damaged, RocksDB will report to PD via heartbeat after locating the Peer to which the damaged SST files belong. PD then performs scheduling operations to remove this Peer. Finally, the damaged SST files are deleted directly, and the TiKV background will work as normal again.
 + The damaged SST files still exist before the recovery finishes. During such a period, RocksDB can continue writing data, but an error will be reported when the damaged part of the data is read.
-+  If the recovery fails to finish within this time window, TiKV will panic.
++ If the recovery fails to finish within this time window, TiKV will panic.
 + Default value: 1h
 
 ## storage.block-cache
