@@ -49,7 +49,7 @@ By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is sp
 
     TiDB v6.1.0 introduces the Global Kill feature (controlled by the `enable-global-kill` configuration, which is enabled by default). To enable Global Kill, execute `kill session_id`.
 
-    If the TiDB version is earlier than v6.1.0, or if the Global Kill feature is not enabled, `kill session_id` does not take effect by default. To terminate a DML statement, connect the client to the TiDB instance that is executing the DML statement and then execute the `kill tidb session_id` statement. If the client connects to another TiDB instance or if there is a proxy between the client and the TiDB cluster, the `kill tidb session_id` statement may be routed to other TiDB instances, which may incorrectly terminate other sessions. For details, see [`KILL`](/sql-statements/sql-statement-kill.md).
+    If the TiDB version is earlier than v6.1.0, or if the Global Kill feature is not enabled, `kill session_id` does not take effect by default. To terminate a DML statement, connect the client to the TiDB instance that is executing the DML statement and then execute the `kill tidb session_id` statement. If the client connects to another TiDB instance or if there is a proxy between the client and the TiDB cluster, the `kill tidb session_id` statement might be routed to other TiDB instances, which might incorrectly terminate other sessions. For details, see [`KILL`](/sql-statements/sql-statement-kill.md).
 
 - Kill DDL statements: First use `admin show ddl jobs` to find the ID of the DDL job you need to terminate, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
 
