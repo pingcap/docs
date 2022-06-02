@@ -215,7 +215,7 @@ Configuration items related to scheduling
 
 ### `max-store-preparing-time` <span class="version-mark">New in v6.1.0</span>
 
-+ Controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the newly online store. In most scenarios, you do not need to adjust this parameter.
++ Controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
 + Default value: `48h`
 
 ### `leader-schedule-limit`
