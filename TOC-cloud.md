@@ -59,6 +59,7 @@
 - Reference
   - [Select Your Cluster Tier](/cloud/select-cluster-tier.md)
   - [Size Your TiDB Cluster](/cloud/size-your-cluster.md)
+  - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Release Notes](/cloud/cloud-release-notes.md)
   - SQL Statements
     - [`ADD COLUMN`](/common/sql-statements/sql-statement-add-column.md)
