@@ -402,17 +402,17 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 + The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
 + Value options:
-    + `1`: Uses API V1, does not encode the data passed to the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
+    + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
     + `2`: Uses API V2:
-        + The data is stored in the MVCC (Multi Version Concurrency Control) format, where the timestamp (TSO) is obtained from PD by tikv-server.
-        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, it is mandatory to turn on `enable-ttl` in case that `enable-ttl` appears in contradiction with API V2.
+        + The data is stored in the MVCC (Multi Version Concurrency Control) format, where the timestamp is obtained from PD (for example, TSO) by tikv-server.
+        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim expired data. Note that this tidb-server instance cannot provide read or write services. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
 + Default value: `1`
 
 > **Warning:**
 >
-> - You can set the value of `api-version` to `2` **only when** deploying a new TiKV cluster. **Do not** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `api-version` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats, which causes data corruption and the "unable to switch storage.api_version" error when you start the TiKV cluster.
+> - You can set the value of `api-version` to `2` **only when** deploying a new TiKV cluster. **Do not** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `api-version` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats and causes data corruption. It will raise the "unable to switch storage.api_version" error when you start the TiKV cluster.
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
 
 ## storage.flow-control
@@ -1623,6 +1623,6 @@ To reduce write latency and avoid frequent access to PD, TiKV periodically fetch
 ### `renew-batch-min-size`
 
 + The minimum number of locally cached timestamps.
-+ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If the usage of locally cached timestamps is low, TiKV gradually reduces the number of cached timestamps until it reaches `renew-batch-min-size`. If large traffic writes often occur in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
++ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If the usage of locally cached timestamps is low, TiKV gradually reduces the number of cached timestamps until it reaches `renew-batch-min-size`. If large bursty write traffic often occur in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
 + In the **TiKV-RAW** \> **Causal timestamp** panel in Grafana, **TSO batch size** is the number of locally cached timestamps that has been dynamically adjusted according to the application workload. You can refer to this metric to adjust `renew-batch-min-size`.
 + Default value: `100`
