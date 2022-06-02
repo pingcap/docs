@@ -198,3 +198,49 @@ For example, `13796619446086334065/0/tidb-audit-2022-04-21T18-16-29.529.log`. In
 ## Disable audit logging
 
 If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off** .
+
+## Audit log fields
+
+For each event record of audit logs, TiDB provides the following fields:
+
+| Col # | Field Name | TiDB Data Type | Max Length | Description |
+|---|---|---|---|---|
+| 1 | N/A |  |  | Reserved for internal use |
+| 2 | N/A |  |  | Reserved for internal use |
+| 3 | N/A |  |  | Reserved for internal use |
+| 4 | ID       | INTEGER |  | Unique event ID  |
+| 5 | TIMESTAMP | TIMESTAMP |  | Time of event   |
+| 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
+| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
+| 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
+| 9 | COST_TIME | INTEGER |  | Time consumed by the statement    |
+| 10 | HOST | VARCHAR | 16 | Server IP    |
+| 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
+| 12 | USER | VARCHAR | 17 | Login username    |
+| 13 | DATABASE | VARCHAR | 64 | Event-related database      |
+| 14 | TABLES | VARCHAR | 64 | Event-related table name          |
+| 15 | SQL_TEXT | VARCHAR |  | Masked SQL statement   |
+| 16 | ROWS | INTEGER |  | The number of rows affected (“0” indicates that no rows are affected)      |
+
+Database audit log event records will also contain additional fields depending on the EVENT_CLASS field value. If that value is set to ‘CONNECTION’, the following fields will be included:
+
+| Col # | Field Name | TiDB Data Type | Max Length | Description |
+|---|---|---|---|---|
+| 17 | CLIENT_PORT | INTEGER |  | Client port number |
+| 18 | CONNECTION_ID | INTEGER |  | Connection ID |
+| 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connect via `socket` or `unix-socket` |
+| 20 | SERVER_ID | INTEGER |  | TiDB server ID |
+| 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to the MySQL protocol |
+| 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
+| 23 | OS_VERSION | VARCH<br>AR | NA | The version of the operating system where the TiDB server is located  |
+| 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
+| 25 | PID | INTEGER |  | The PID of the TiDB process |
+
+If the EVENT_CLASS field value is set to ‘TABLE_ACCESS’ or ‘GENERAL’, the following fields will be included:
+
+| Col # | Field Name | TiDB Data Type | Max Length | Description |
+|---|---|---|---|---|
+| 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
+| 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
+| 19 | SQL_STATEMENT  | VARCHAR | 17 | The SQL statement type |
+| 20 | PID | INTEGER |  | The PID of the TiDB process  |
