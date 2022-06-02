@@ -147,10 +147,10 @@ If one column can be NULL, the Column data format can be:
 |------------|-----------|-----------|---------------------------------------------------------------------------------------------------------------------------|
 | BOOL       | INT       | int       |                                                                                                                           |
 | TINYINT    | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
-| SMALLINT   | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
-| MEDIUMINT  | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
-| INT        | INT       | int       | When it's unsigned, TIDB_TYPE is INT UNSIGNED and AVRO_TYPE is long.                                                      |
-| BIGINT     | BIGINT    | long      | When it's unsigned, TIDB_TYPE is BIGINT UNSIGNED. If `avro-bigint-unsigned-handling-mode` is string, AVRO_TYPE is string. |
+| SMALLINT   | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
+| MEDIUMINT  | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED.                                                                            |
+| INT        | INT       | int       | When it is unsigned, TIDB_TYPE is INT UNSIGNED and AVRO_TYPE is long.                                                      |
+| BIGINT     | BIGINT    | long      | When it is unsigned, TIDB_TYPE is BIGINT UNSIGNED. If `avro-bigint-unsigned-handling-mode` is string, AVRO_TYPE is string. |
 | TINYBLOB   | BLOB      | bytes     |                                                                                                                           |
 | BLOB       | BLOB      | bytes     |                                                                                                                           |
 | MEDIUMBLOB | BLOB      | bytes     |                                                                                                                           |
