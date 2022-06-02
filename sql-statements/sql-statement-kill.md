@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-kill/','/docs/dev/reference/sq
 
 # KILL
 
-The statement `KILL TIDB` is used to terminate a connection in any TiDB instance in the current TiDB cluster.
+The `KILL` statement is used to terminate a connection in any TiDB instance in the current TiDB cluster.
 
 ## Synopsis
 
@@ -16,7 +16,7 @@ KillStmt ::= 'KILL' 'TIDB'? ( 'CONNECTION' | 'QUERY' )? CONNECTION_ID
 
 ## Examples
 
-The following example shows how to query all active queries in the current cluster and terminate the connection to one of the queries.
+The following example shows how to get all active queries in the current cluster and terminate any one of them.
 
 {{< copyable "sql" >}}
 
