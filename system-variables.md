@@ -1272,7 +1272,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `86400`
 - Range: `[600, 31536000]`
 - Unit: Seconds
-- This variable is used to set the maximum time of GC safe point blocked by uncommitted transactions. During GC, the safe point does not exceed the start time of the ongoing transactions by default. If the runtime of uncommitted transactions does not exceed this value, GC safe point will be blocked until the runtime exceeds this value.
+- This variable is used to set the maximum time that active transactions block the GC safe point. During each time of GC, the safe point does not exceed the start time of the ongoing transactions by default. If the runtime of active transactions does not exceed this variable value, the GC safe point will be blocked until the runtime exceeds this value. This variable value is an integer type.
 
 ### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
 
