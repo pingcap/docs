@@ -251,8 +251,6 @@ Best practices:
 
 The following are examples when using Kafka SASL authentication:
 
-{{< copyable "shell-regular" >}}
-
 - SASL/PLAIN
 
   {{< copyable "shell-regular" >}}
