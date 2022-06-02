@@ -621,11 +621,11 @@ The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]
 
 - `prefix`: optional. Indicates the prefix of the Topic Name.
 - `{schema}`: required. Used to match the schema name.
-- `middle`: optional. Indicates the delimiter between schemas.
+- `middle`: optional. Indicates the delimiter between schema name and table name.
 - `{table}`: optional. Used to match the table name.
 - `suffix`: optional. Indicates the suffix of the Topic Name.
 
-`prefix`, `middle` and `suffix` can only include the following characters: `a-z`, `A-Z`, `0-9`, `.`, `_` and `-`. `{schema}` and `{table}` can only include `a-z`. Placeholders such as `{Schema}` and `{TABLE}` are invalid.
+`prefix`, `middle` and `suffix` can only include the following characters: `a-z`, `A-Z`, `0-9`, `.`, `_` and `-`. `{schema}` and `{table}` are both lowercase. Placeholders such as `{Schema}` and `{TABLE}` are invalid.
 
 Some examples:
 
