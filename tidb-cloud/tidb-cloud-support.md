@@ -11,6 +11,12 @@ TiDB Cloud offers support services to your organization. To contact our support 
 
 2. In the **Leave us a message** dialog, fill in the ticket.
 
+    - Issue description
+    - Organization ID
+    - Project ID
+    - Cluster ID
+    - Operation duration
+
 3. Click **Send** to submit your ticket. After the support team receives your ticket, they will reply to you via email.
 
 4. Check your email to view the reply, your ticket history, and communication records.
