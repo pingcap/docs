@@ -228,9 +228,9 @@ The following are descriptions of parameters and parameter values that can be co
 | `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional) |
 | `sasl-gssapi-keytab-path` | The gssapi keytab path (optional)|
 | `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional) |
-| `sasl-gssapi-service-name` | The gssapi service name（ (optional) |
-| `sasl-gssapi-user` | The user name of the gssapi `user` authentication type |
-| `sasl-gssapi-password` |  The password of the gssapi `user` authentication type |
+| `sasl-gssapi-service-name` | The gssapi service name (optional) |
+| `sasl-gssapi-user` | The user name of gssapi authentication (optional) |
+| `sasl-gssapi-password` | The password of gssapi authentication (optional)  |
 | `sasl-gssapi-realm` | The gssapi realm name (optional) |
 | `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional) |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
@@ -282,21 +282,21 @@ The following are examples when using Kafka SASL authentication:
   {{< copyable "shell-regular" >}}
 
   ```shell
-  --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=a&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
+  --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
   ```
 
   For more information about SASL/GSSAPI authentication methods, see [Configuring GSSAPI](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html).
 
 - TLS/SSL encryption
 
-  If the Kafka broker has TLS/SSL encryption enabled, you need to add the `-enable-tls=true` parameter to `--sink-uri`. If you want to use self-signed certificates, you also need to specify `-ca`, `cert` and `key` in `-sink-uri`.
+  If the Kafka broker has TLS/SSL encryption enabled, you need to add the `-enable-tls=true` parameter to `--sink-uri`. If you want to use self-signed certificates, you also need to specify `ca`, `cert` and `key` in `--sink-uri`.
 
 - ACL authorization
 
   The minimum set of permissions required for TiCDC to function properly is as follows.
 
-    - The `Create` and `Write` permissions for the Topic [resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
-    - The `DescribeConfigs` permissions for the Cluster resources.
+    - The `Create` and `Write` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
+    - The `DescribeConfigs` permission for the Cluster resource type.
 
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
