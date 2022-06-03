@@ -74,7 +74,7 @@ In the operating environment of BR and TiKV, configure the environment variables
     echo $AZURE_CLIENT_SECRET
     ```
 
-For more information about the environment variables, see [Azblob URL parameters](br/backup-and-restore-storages.md#azblob-url-parameters).
+For more information about the environment variables, see [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters).
 
 #### Back up
 

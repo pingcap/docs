@@ -33,4 +33,4 @@ br restore full --pd "${PDIP}:2379" --Storage 'gcs://bucket-name/prefix?credenti
 
 ## See also
 
-To know other external storages supported by BR, see [External storages](br/backup-and-restore-storages.md).
+To know other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
