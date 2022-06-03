@@ -94,7 +94,7 @@ This document only describes the parameters that are not included in command-lin
 
 + Configuration items related to the server.
 
-## `status-thread-pool-size`
+### `status-thread-pool-size`
 
 + The number of worker threads for the `HTTP` API service
 + Default value: `1`
@@ -241,19 +241,19 @@ Configuration items related to storage thread pool.
 ### `high-concurrency`
 
 + The allowable number of concurrent threads that handle high-priority `read` requests
-+ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is smaller than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `normal-concurrency`
 
 + The allowable number of concurrent threads that handle normal-priority `read` requests
-+ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is smaller than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `low-concurrency`
 
 + The allowable number of concurrent threads that handle low-priority `read` requests
-+ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is greater than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
++ When `8` ≤ `cpu num` ≤ `16`, the default value is `cpu_num * 0.5`; when `cpu num` is smaller than `8`, the default value is `4`; when `cpu num` is greater than `16`, the default value is `8`.
 + Minimum value: `1`
 
 ### `max-tasks-per-worker-high`
@@ -626,7 +626,7 @@ Configuration items related to Raftstore.
 + Configures the size of the `snap-generator` thread pool.
 + To make Regions generate snapshot faster in TiKV in recovery scenarios, you need to increase the count of the `snap-generator` threads of the corresponding worker. You can use this configuration item to increase the size of the `snap-generator` thread pool.
 + Default value: `2`
-+ Minimum value: `0`
++ Minimum value: `1`
 
 ### `lock-cf-compact-interval`
 
@@ -692,6 +692,10 @@ Configuration items related to Raftstore.
 + Unit: MB
 
 ### `consistency-check-interval`
+
+> **Warning:**
+>
+> It is **NOT** recommended to enable the consistency check in production environments, because it affects cluster performance and is incompatible with the garbage collection in TiDB.
 
 + The time interval at which the consistency check is triggered. `0` means that this feature is disabled.
 + Default value: `"0s"`
@@ -1328,14 +1332,13 @@ Configuration items related to Raft Engine.
 
 > **Note:**
 >
-> - Raft Engine is an experimental feature. It is not recommended to use it in the production environment.
 > - When you enable Raft Engine for the first time, TiKV transfers its data from RocksDB to Raft Engine. Therefore, you need to wait extra tens of seconds for TiKV to start.
 > - The data format of Raft Engine in TiDB v5.4.0 is not compatible with earlier TiDB versions. Therefore, if you need to downgrade a TiDB cluster from v5.4.0 to an earlier version, **before** downgrading, disable Raft Engine by setting `enable` to `false` and restart TiKV for the configuration to take effect.
 
 ### `enable`
 
 + Determines whether to use Raft Engine to store Raft logs. When it is enabled, configurations of `raftdb` are ignored.
-+ Default value: `false`
++ Default value: `true`
 
 ### `dir`
 
@@ -1383,6 +1386,12 @@ Configuration items related to Raft Engine.
 + The number of threads used to scan and recover log files.
 + Default value: `4`
 + Minimum value: `1`
+
+### `memory-limit`
+
++ Specifies the limit on the memory usage of Raft Engine.
++ When this configuration value is not set, 15% of the available system memory is used.
++ Default value: `Total machine memory * 15%`
 
 ## security
 
@@ -1450,12 +1459,6 @@ Configuration items related to TiDB Lightning import and BR restore.
 ### `num-threads`
 
 + The number of threads to process RPC requests
-+ Default value: `8`
-+ Minimum value: `1`
-
-### `num-import-jobs`
-
-+ The number of jobs imported concurrently
 + Default value: `8`
 + Minimum value: `1`
 
