@@ -81,7 +81,7 @@ The following are the basics of TiDB Lightning:
 
 The following are the basics of BR:
 
-- [Input and output data source](/br/br/backup-and-restore-design.md#types-of-backup-files): SST + `backupmeta` file
+- [Input and output data source](/br/backup-and-restore-design.md#types-of-backup-files): SST + `backupmeta` file
 - Supported TiDB versions: v3.1 and v4.0
 - Kubernetes support: Yes. See [Back up Data to S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br) and [Restore Data from S3-Compatible Storage Using BR](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br) for details.
 

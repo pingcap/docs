@@ -1,13 +1,13 @@
 ---
 title: Use BR Command-line for Backup and Restoration
-summary: Learn how to use the BR command line to backup and restore cluster data.
+summary: Learn how to use the BR command line to back up and restore cluster data.
 ---
 
 # Use BR Command-line for Backup and Restoration
 
 This document describes how to back up and restore TiDB cluster data using the BR command line.
 
-Make sure you have read [BR Tool Overview](/br/backup-and-restore-overview.md), especially [Usage Restrictions](/br/backup-and-restore-overview.md#usage-restrictions) and [Some tips](/br/backup-and-restore-overview.md#some-tips).
+Make sure you have read [BR Tool Overview](/br/backup-and-restore-overview.md), especially [Usage restrictions](/br/backup-and-restore-overview.md#usage-restrictions) and [Some tips](/br/backup-and-restore-overview.md#some-tips).
 
 ## BR command-line description
 
@@ -65,12 +65,11 @@ To back up cluster data, run the `br backup` command. You can add the `full` or 
 - [Back up a database](/br/br-usage-backup.md#back-up-a-database)
 - [Back up a table](/br/br-usage-backup.md#back-up-a-table)
 - [Back up multiple tables with table filter](/br/br-usage-backup.md#back-up-multiple-tables-with-table-filter)
-- [Back Up data on Amazon S3 using BR](br/backup-storage-S3.md)
+- [Back Up data on Amazon S3 using BR](/br/backup-storage-S3.md)
 - [Back up data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
 - [Back up data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
 - [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data)
 - [Encrypt data during backup](/br/br-usage-backup.md#encrypte-backup-data-at-the-backup-end)
-
 
 ## Examples of using BR command-line to restore cluster data
 

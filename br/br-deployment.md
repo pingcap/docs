@@ -5,11 +5,11 @@ summary: Learn how to deploy and use BR.
 
 # Deploy and Use BR
 
-This document describes the recommended deployment of Backup & Restore (BR) and how to use BR to backup and restore data.
+This document describes the recommended deployment of Backup & Restore (BR) and how to use BR to back up and restore data.
 
 ## Deploy BR
 
-Following are recommended practices when deploying BR:
+Recommended practices When deploying BR:
 
 - In production environments, deploy BR on a node with at least 8 cores and 16 GB memory. Select an appropriate OS version by following [Linux OS version requirements](/hardware-and-software-requirements.md#linux-os-version-requirements).
 - Save backup data to Amazon S3, GCS or Azure Blob Storage.
@@ -28,18 +28,14 @@ Following are recommended practices when deploying BR:
 
 Currently, the following methods are supported to run the BR tool:
 
-- Use SQL statements
-- Use the command-line tool
-- Use BR In the Kubernetes environment
-
 ### Use SQL statements
 
 TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) SQL statements. The progress of these operations can be monitored with the statement [`SHOW BACKUPS| RESTORE`](/sql-statements/sql-statement-show-backups.md).
 
 ### Use the command-line tool
 
-You can use BR command-line tool for backup and restoration. For details, see [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
+For details, see [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md).
 
-### In the Kubernetes environment
+### Use BR in the Kubernetes environment
 
-In a Kubernetes environment, you can use TiDB Operator to back up TiDB cluster data to Amazon S3, GCS or persistent volumes or restore data from the backup data in such systems. For details, see [Backup and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview).
+In a Kubernetes environment, you can use TiDB Operator to back up TiDB cluster data to Amazon S3, GCS or persistent volumes or restore data from the backup data in such systems. For details, see [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview).

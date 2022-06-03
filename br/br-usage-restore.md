@@ -5,7 +5,7 @@ summary: Learn how to restore data using BR commands
 
 # Use BR to Restore Cluster Data
 
-This document describes restoring cluster data using BR in different scenarios, including:
+This document describes how to restore cluster data using BR in the following scenarios:
 
 - [Restore TiDB cluster snapshots](#restore-tidb-cluster-snapshots)
 - [Restore a database](#restore-a-database)
@@ -25,7 +25,7 @@ If you are not familiar with Backup & Restore (BR), it is recommended that you r
 
 BR supports restoring snapshot backup on an empty cluster to restore the target cluster to the latest state when the snapshot is backed up.
 
-Example: Restore the snapshot generated at `2022-01-30 07:42:23` from the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+Example: Restore the snapshot generated at `2022-01-30 07:42:23` from the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3 to the target cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -53,15 +53,15 @@ br restore full \
 Full Restore <---------/...............................................> 17.12%.
 ```
 
-## Restore a database
+## Restore a database or a table
 
-BR only supports restoring partial data of a specified database or table from backup data. This feature allows you to filter out unwanted data and back up only a specific database or table.
+BR supports restoring partial data of a specified database or table from backup data. This feature allows you to filter out unwanted data and back up only a specific database or table.
 
 ### Restore a database
 
 To restore a database to the cluster, run the `br restore db` command. To get help on this command, run the `br restore db --help` command.
 
-Example: Restore the `test` database from the `db-test/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+Example: Restore the `test` database from the `db-test/2022-01-30/` directory in the `backup-data` bucket of Amazon S3 to the target cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -82,9 +82,9 @@ In the preceding command, `--db` specifies the name of the database to be restor
 
 ### Restore a table
 
-To restore a single table to the cluster, run the `br restore table` command. To get help on this command, run `br restore table --help`.
+To restore a single table to the cluster, run the `br restore table` command. To get help on this command, run the `br restore table --help` command.
 
-Example: Restore `test`.`usertable` from the `table-db-usertable/2022-01-30/`directory in the `backup-data` bucket of Amazon S3.
+Example: Restore `test`.`usertable` from the `table-db-usertable/2022-01-30/`directory in the `backup-data` bucket of Amazon S3 to the target cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -102,9 +102,9 @@ In the preceding command, `--table` specifies the name of the table to be restor
 
 ### Restore multiple tables with table filter
 
-To restore multiple tables with more complex criteria, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+To restore multiple tables with more criteria, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
-Example: Restore data matching the `db*.tbl*` table from the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+Example: Restore data matching the `db*.tbl*` table from the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3 to the target cluster.
 
 {{< copyable "shell-regular" >}}
 
@@ -124,14 +124,13 @@ BR supports restoring data to Amazon S3, Google Cloud Storage (GCS), Azure Blob 
 - [Restore data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
 - [Restore data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
 
-
 ## Restore incremental data
 
 > **Warning:**
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
-Restoring incremental data is similar to restoring full data using BR. Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster. Also, because incremental restoration updates ts data, you need to ensure that there are no other writes during the restoration. Otherwise, conflicts might occur.
+Restoring incremental data is similar to restoring full data using BR. When restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster. Also, because incremental restoration updates ts data, you need to ensure that there are no other writes during the restoration. Otherwise, conflicts might occur.
 
 ```shell
 br restore full \
@@ -173,7 +172,11 @@ BR backs up tables created in the `mysql` schema by default. When you restore da
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 ```
 
-In the preceding command, `-f '*.*'` is used to override the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` should be restored. For detailed implementation, refer to the [table filter document](/table-filter.md#syntax).
+In the preceding command,
+
+- `-f '*.*'` is used to override the default rules
+- `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated.
+- `-f 'mysql.usertable'` indicates that `mysql.usertable` should be restored.
 
 If you only need to restore `mysql.usertable`, run the following command:
 
@@ -197,8 +200,8 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 ## Restoration performance and impact
 
 - TiDB fully uses TiKV CPU, disk IO, network bandwidth, and other resources when restoring data. Therefore, it is recommended that you restore backup data on an empty cluster to avoid affecting running services.
-- The restoration speed can reach 100 MB/s (per TiKV node).
+- The restoration speed depends much on cluser configuration, deployment, and running services. Generally, the restoration speed can reach 100 MB/s (per TiKV node).
 
 > **Note:**
 >
-> The restoration speed depends much on cluser configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, have reference value. However, the restoration speed may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
+> The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, have reference value. However, the restoration speed may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.

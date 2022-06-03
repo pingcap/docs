@@ -6,7 +6,7 @@ aliases: ['/docs/dev/br/backup-and-restore-storages/']
 
 # External Storages
 
-Backup & Restore (BR), TiDB Lighting, and Dumpling support reading and writing data on the local filesystem and on Amazon S3. BR also supports reading and writing data on the [Google Cloud Storage (GCS)](/br/backup-storage-gcs.md) and [Azure Blob Storage (Azblob)](/br/backup-storage-azblob.md). These are distinguished by the URL scheme in the `--storage` parameter passed into BR, in the `-d` parameter passed into TiDB Lightning, and in the `--output` (`-o`) parameter passed into Dumpling.
+Backup & Restore (BR), TiDB Lightning, and Dumpling support reading and writing data on the local filesystem and on Amazon S3. BR also supports reading and writing data on the [Google Cloud Storage (GCS)](/br/backup-storage-gcs.md) and [Azure Blob Storage (Azblob)](/br/backup-storage-azblob.md). These are distinguished by the URL scheme in the `--storage` parameter passed into BR, in the `-d` parameter passed into TiDB Lightning, and in the `--output` (`-o`) parameter passed into Dumpling.
 
 ## Schemes
 

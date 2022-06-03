@@ -19,7 +19,7 @@ You can quickly back up the data of a TiDB cluster deployed in Google Compute En
 br backup full --pd "${PDIP}:2379" --Storage 'gcs://bucket-name/prefix?credentials-file=${credentials-file-path}' --send-credentials-to-tikv=true
 ```
 
-When backing up data to GCS, you need to place a credential file in node where BR is running. The credential file contains the account credentials for accessing GCS. If `--send-credentials-to-tikv` is displayed, it means the account access credentials of GCS will be passed to the TiKV node.
+When backing up data to GCS, you need to place a credential file in the node where BR is running. The credential file contains the account credentials for accessing GCS. If `--send-credentials-to-tikv` is displayed, it means the account access credentials of GCS will be passed to the TiKV node.
 
 To obtain the credential files, refer to [CREATE AND DOWNLOAD THE GCS CREDENTIALS FILE](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/google_cloud_backup_guide/creds).
 
@@ -33,4 +33,4 @@ br restore full --pd "${PDIP}:2379" --Storage 'gcs://bucket-name/prefix?credenti
 
 ## See also
 
-To know other external storages supported by BR, see [External storages](br/backup-and-restore-storages.md#).
+To know other external storages supported by BR, see [External storages](br/backup-and-restore-storages.md).

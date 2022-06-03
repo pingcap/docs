@@ -5,7 +5,7 @@ summary: Learn how to back up data using BR commands
 
 # Use BR to Back Up Cluster Data
 
-This document describes backing up cluster data using BR in different scenarios, including:
+This document describes how to back up cluster data using BR in the following scenarios:
 
 - [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots)
 - [Back up a database](#back-up-a-database)
@@ -22,9 +22,9 @@ If you are not familiar with Backup & Restore (BR), it is recommended that you r
 
 ## Back up TiDB cluster snapshots
 
-A snapshot of a TiDB cluster contains only the latest and transaction-consistent data at a specific time. You can back up the latest or specified snapshot data of a TiDB cluster by running the `br backup full` command. To get help on this command, run the `br backup full --help`.
+A snapshot of a TiDB cluster contains only the latest and transactionally consistent data at a specific time. You can back up the latest or specified snapshot data of a TiDB cluster by running the `br backup full` command. To get help on this command, run the `br backup full --help` command.
 
-Example: Back up the snapshot generated at '2022-01-30 07:42:23' to the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+Example: Back up the snapshot generated at `2022-01-30 07:42:23` to the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
 
 {{< copyable "shell-regular" >}}
 
@@ -58,7 +58,7 @@ After the backup is completed, BR compares the checksum of the backup data with 
 
 ## Back up a database or a table
 
-BR only supports backing up partial data of a specified database or table from a cluster snapshot or incremental data backup. This feature allows you to filter out unwanted data from snapshot backup and incremental data backup, and back up only business-critical data.
+BR supports backing up partial data of a specified database or table from a cluster snapshot or incremental data backup. This feature allows you to filter out unwanted data from snapshot backup and incremental data backup, and back up only business-critical data.
 
 ### Back up a database
 
@@ -77,7 +77,7 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` specifies the database name and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots).
+In the preceding command, `--db` specifies the database name, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots).
 
 ### Back up a table
 
@@ -101,7 +101,7 @@ In the preceding command, `--db` and `--table` specify the database name and tab
 
 ### Back up multiple tables with table filter
 
-To back up multiple tables with more complex criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
 
 Example: Back up `db*.tbl*` data of a table to  the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
 
@@ -130,7 +130,7 @@ BR supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
-Incremental data of a TiDB cluster is the differentiated data between the snapshot of a starting point and that of an end point. Compared with snapshot data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data.
+Incremental data of a TiDB cluster is differentiated data between the snapshot of a starting point and that of an end point. Compared with snapshot data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data.
 
 To back up incremental data, run the `br backup` command with **the last backup timestamp** `--lastbackupts` specified. To get `--lastbackupts`, run the `validate` command. The following is an example:
 
@@ -143,7 +143,7 @@ LAST_BACKUP_TS=`br validate decode --field="end-version" -s s3://backup-data/202
 > **Note:**
 >
 > - The incremental backup needs to be under a different path from the previous snapshot backup.
-> - GC safepoint must be prior to `lastbackupts`. The defalt GC lifetime is 10 minutes in TiDB, which means that TiDB only backs up incremental data within the last 10 minutes. To back up earlier incremental data, you need to [adjust TiDB GC Lifetime setting](/system-variables.md#tidb_gc_life_time-new-in-v50).
+> - GC safepoint must be prior to `lastbackupts`. The defalt GC lifetime is 10 minutes in TiDB, which means that TiDB only backs up incremental data generated in the last 10 minutes. To back up earlier incremental data, you need to [adjust TiDB GC Lifetime setting](/system-variables.md#tidb_gc_life_time-new-in-v50).
 
 {{< copyable "shell-regular" >}}
 
@@ -155,7 +155,7 @@ br backup full\
     --lastbackupts ${LAST_BACKUP_TS}
 ```
 
-The preceding command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period. when restoring incremental data, BR restores all DDLs first, and then restores data.
+The preceding command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period. When restoring incremental data, BR restores all DDLs first, and then restores data.
 
 ## Encrypte backup data
 
@@ -205,12 +205,10 @@ To illustrate the impact of backup, this document lists the test conclusions of 
 - (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 75%, the impact of BR tasks on the cluster (write and read) is 10% at most.
 - (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 60%, BR tasks has little impact on the cluster (write and read).
 
-You can mitigate impact on cluster performance by reducing the number of backup threads. However, this may cause backup performance to deteriorate. Based on the preceding test results: (On a single TiKV node) the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MB/thread. For example, a single node with 5 backup threads can reach a backup speed of 100 MB/s.
+You can mitigate impact on cluster performance by reducing the number of backup threads. However, this might cause backup performance to deteriorate. Based on the preceding test results: (On a single TiKV node) the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MB/thread. For example, a single node with 5 backup threads can deliver a backup speed of 100 MB/s.
 
 > **Note:**
 >
 > The impact and speed of backup depends much on cluser configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, have reference value. However, the exact impact and performance cap may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
 
-For more details about the backup impact and performance, see the following documents:
-
-- Since v5.3.0, BR introduces the auto tunning feature (enabled by default) to adjust the number of backup threads. It can maintain the CPU utilization of the cluster below 80% during backup tasks. For details, see [BR Auto-Tune](/br/br-auto-tune.md).
+ Since v5.3.0, BR introduces the auto tunning feature (enabled by default) to adjust the number of backup threads. It can maintain the CPU utilization of the cluster below 80% during backup tasks. For details, see [BR Auto-Tune](/br/br-auto-tune.md).

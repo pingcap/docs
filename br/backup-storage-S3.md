@@ -5,11 +5,11 @@ summary: Learn how to use BR to back up and restore data to Amazon S3 storage.
 
 # Back Up and Restore Data on Amazon S3 Using BR
 
-The Backup & Restore (BR) tool provided by TiDB supports using Amazon S3 or other Amazon S3-compatible file storages as external storage.
+The Backup & Restore (BR) tool supports using Amazon S3 or other Amazon S3-compatible file storages as the external storage for backing up and restoring data.
 
 ## Application scenarios
 
-By using Amazon S3, you can quickly back up the data of a TiDB cluster deployed on Amazon EC2 to Amazon S3, or quickly restore TiDB cluster data from Amazon S3.
+By using Amazon S3, you can quickly back up the data of a TiDB cluster deployed on Amazon EC2 to Amazon S3, or quickly a TiDB cluster from the backup data in Amazon S3.
 
 ## Configure privileges to access S3
 
@@ -17,12 +17,12 @@ Before backup or restoration using S3, you need to configure the privileges to a
 
 ### Configure access to the S3 directory
 
-Before backup, you need to configure privileges required for BR to access the backup directory of S3.
+Before backup, configure the following privileges to access the backup directory of S3.
 
 - Minimum privileges for TiKV and BR during backup, able to access backup directories `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`
 - Minimum privileges for TiKV and BR during restoration, able to access backup directories `s3:ListBucket` and `s3:GetObject`
 
-If you have not yet created a backup directory, refer to [AWS Official Document](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified Region. If necessary, you can also create a folder in the Bucket by referring to [AWS official documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+If you have not yet created a backup directory, refer to [AWS Official Document](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified Region. If necessary, you can also create a folder in the bucket by referring to [AWS official documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
 ### Configure a user to access S3
 

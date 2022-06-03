@@ -45,9 +45,9 @@ You can use either of the following solutions to manually control the impact of 
 
 ## Does BR back up system tables? During data restoration, do they raise conflicts?
 
-Before v5.1.0, BR filters out data from the system schemas `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
+Before v5.1.0, BR filters out data from the system schema `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
 
-During data restoration, system tables do not raise conflicts. The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to the [Back up and restore table data in the `mysql` system schema (experimental feature)](/br/br-usage-restore.md#back-up-and-restore-table-data-in-the-mysql-system-schema).
+During data restoration, system tables do not raise conflicts. The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables created in the `mysql` schema](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema).
 
 ## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
 
@@ -142,7 +142,7 @@ For example, you might encounter the `Code: 22(invalid argument)` error when bac
 
 This error might occur when the capacity of the cluster to restore (using BR) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
 
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restore, and enable the `RATE_LIMIT` option.
+To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restoration, and enable the `RATE_LIMIT` option.
 
 ## Where are the backed up files stored when I use `local` storage?
 

@@ -8,7 +8,7 @@ aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tool
 
 [Backup & Restore (BR)](/br/backup-and-restore-overview.md) is a tool for distributed backup and restoration of the TiDB cluster data.
 
-This document describes common backup and restore scenarios:
+This document describes common backup and restoration scenarios:
 
 - [Back up a single table to a network disk (recommended in production environment)](#back-up-a-single-table-to-a-network-disk-recommended-in-production-environment)
 - [Restore data from a network disk (recommended in production environment)](#restore-data-from-a-network-disk-recommended-in-production-environment)
@@ -40,21 +40,21 @@ It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-clust
 
 ### Cluster versions
 
-- TiDB: v5.4.0
-- TiKV: v5.4.0
-- PD: v5.4.0
-- BR: v5.4.0
+- TiDB: v6.1.0
+- TiKV: v6.1.0
+- PD: v6.1.0
+- BR: v6.1.0
 
 > **Note:**
 >
-> v5.4.0 was the latest version at the time this document was written. It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
+> It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
 
 ### TiKV hardware information
 
 - Operating system: CentOS Linux release 7.6.1810 (Core)
 - CPU: 16-Core Common KVM processor
-- RAM: 32GB
-- Disk: 500G SSD * 2
+- RAM: 32 GB
+- Disk: 500 GB SSD * 2
 - NIC: 10 Gigabit network card
 
 ### Cluster configuration
@@ -73,11 +73,11 @@ Besides the preceding prerequisites, you should also perform the following check
 Before running the [`br backup` command](/br/use-br-command-line-tool.md#br-command-line-description), make sure the following conditions are met:
 
 - No DDL statements are running on the TiDB cluster.
-- The target storage device has sufficient space.
+- The target storage device has required space.
 
-#### Check before restore
+#### Check before restoration
 
-Before running the [`br restore` command](/br/use-br-command-line-tool.md#br-command-line-description), check the new cluster to ensure that the table in the cluster does not have a duplicate name.
+Before running the [`br restore` command](/br/use-br-command-line-tool.md#br-command-line-description), check the target cluster to ensure that the table in this cluster does not have a duplicate name.
 
 ## Back up a single table to a network disk (recommended in production environment)
 

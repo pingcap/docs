@@ -21,7 +21,7 @@ With BR, you can back up and restore data on Azure Blob Storage by the following
 
 In common cases, to avoid exposing the key information (such as `account-key`) in command lines, it is recommended to use Azure AD.
 
-The following is an example of backup and restore operations on Azure Blob Storage using the preceding two methods. The purpose of the operations are as follows:
+The following is an example of backup and restoration operations on Azure Blob Storage using the preceding two methods. The purpose of the operations are as follows:
 
 - Back up: Back up the `test` database to a space in the `container=test` container with `t1` as the path prefix in Azure Blob Storage.
 - Restore: Restore data from a space in the `container=test` container with `t1` as the path prefix in Azure Blob Storage to the `test` database.
@@ -32,11 +32,11 @@ The following is an example of backup and restore operations on Azure Blob Stora
 
 ### Method 1: Back up and restore data using Azure AD (recommended)
 
-This section describes how to back up and restore data using Azure AD. Before backup or restore, you need to configure environment variables.
+This section describes how to back up and restore data using Azure AD. Before backup or restoration, you need to configure environment variables.
 
 #### Configure environment variables
 
-In the operating environment of BR and TiKV, you should configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` must be configured.
+In the operating environment of BR and TiKV, configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`.
 
 - When you start a cluster using TiUP, TiKV uses the "systemd" service. The following example provides how to configure the preceding three environment variables as parameters for TiKV:
 
@@ -148,8 +148,8 @@ This feature is **only compatible** with v5.4.0 and later versions.
 
 ## See also
 
-- To know other external storages supported by BR, see [External storages](br/backup-and-restore-storages.md#).
+- To know other external storages supported by BR, see [External storages](br/backup-and-restore-storages.md).
 - To know more about the parameters, see the following documents:
 
-  - [Azblob URL parameters](br/backup-and-restore-storages.md#azblob-url-parameters)
-  - [Azblob command-line parameters](/br/backup-and-restore-storages.md#azblob-command-line-parameters)
+    - [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters)
+    - [Azblob command-line parameters](/br/backup-and-restore-storages.md#azblob-command-line-parameters)

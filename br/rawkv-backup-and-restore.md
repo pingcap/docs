@@ -5,7 +5,7 @@ summary: Learn how to back up and restore Raw KV using BR.
 
 # Back Up and Restore Raw KV
 
-Backup & Restore (BR) supports backing up and restoring Raw KV (used by TiKV and PD) in particular.This document describes how to back up and restore Raw KV.
+Backup & Restore (BR) supports backing up and restoring Raw KV (used by TiKV and PD) in particular. This document describes how to back up and restore Raw KV.
 
 > **Warning:**
 >
@@ -62,6 +62,3 @@ br restore raw --pd $PD_ADDR \
 ```
 
 In this example, all the backed up keys in the range `[0x31, 0x3130303030303030)` are restored to the TiKV cluster. The coding formats of these keys are identical to that of keys during the backup process.
-
-
-
