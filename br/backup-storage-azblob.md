@@ -148,7 +148,7 @@ This feature is **only compatible** with v5.4.0 and later versions.
 
 ## See also
 
-- To know other external storages supported by BR, see [External storages](br/backup-and-restore-storages.md).
+- To know other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
 - To know more about the parameters, see the following documents:
 
     - [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters)
