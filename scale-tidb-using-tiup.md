@@ -121,7 +121,7 @@ This section exemplifies how to add a TiDB node to the `10.0.1.5` host.
     In the preceding commands:
 
     - `scale-out.yaml` is the scale-out configuration file.
-    - `--user root` indicates logging in to the target machine as the root user to complete the cluster scale out. The root user should have`ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
+    - `--user root` indicates logging in to the target machine as the `root` user to complete the cluster scale out. The `root` user is expected to have `ssh` and `sudo` privileges to the target machine. Alternatively, you can use other users with `ssh` and `sudo` privileges to complete the deployment.
     - `[-i]` and `[-p]` are optional. If you have configured login to the target machine without password, these parameters are not required. If not, choose one of the two parameters. `[-i]` is the private key of the root user (or other users specified by `--user`) that has access to the target machine. `[-p]` is used to input the user password interactively.
 
     If you see `Scaled cluster <cluster-name> out successfully`, the scale-out operation succeeds.
