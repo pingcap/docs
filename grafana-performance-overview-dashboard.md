@@ -13,11 +13,11 @@ The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiK
 
 - Overview: Database time and SQL execution time summary. Tuning by color, you can quickly identify the database load profile and the performance bottleneck.
 
-- Resource load: Key metrics and resource usage, including database QPS, connection information and request command type of an application and the database, database internal TSO and KV request OPS, and resource usage of the TiKV and TiDB.
+- Load profile: Key metrics and resource usage, including database QPS, connection information, the MySQL command types the application interactes with TiDB, database internal TSO and KV request OPS, and resource usage of the TiKV and TiDB.
 
 - Top-down latency breakdown: Query latency versus connection idel time ratio, query latency breakdown, TSO/KV request latency during execution, breakdown of write latency within TiKV.
 
-With the Performance Overview Dashboard, you can analyze performance efficiently, and confirm whether the bottleneck of user response time is in the database. If the bottleneck is in the database, you can locate the bottleneck causes inside the database. Then, perform targeted tuning based on the database time overview and SQL latency breakdown. For details, see [TiDB Performance Analysis and Tuning](/tidb-performance-analysis-and-tuning.md).
+With the Performance Overview Dashboard, you can analyze performance efficiently, and confirm whether the bottleneck of user response time is in the database. If the bottleneck is in the database, you can identify the bottleneck inside the database, with database time overview, load profile and SQL latency breakdown. For details, see [TiDB Performance Analysis and Tuning](/tidb-performance-analysis-and-tuning.md).
 
 The following sections illustrate the metrics on the Performance Overview dashboard.
 
@@ -39,7 +39,7 @@ The SQL execution phase is in green and other phases are in red on general. If n
 - tso_wait: Concurrent TSO waiting time per second during SQL execution
 - kv request type: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
 
-Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention. For example, adding a pessimistic lock is marked red and TSO waiting is marked dark brown. 
+Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. 
 
 If non-blue or non-green areas are large, it means there is bottleneck during SQL execution. For example:
 
@@ -65,7 +65,7 @@ Number of queries using plan cache per second in all TiDB instances
 - tso - cmd: Number of `tso cmd` requests per second in all TiDB instances
 - tso - request: Number of `tso request` requests per second in all TiDB instances
 
-Generally, dividing `tso - request`  by using `tso - cmd` yields the average batch size of requests per second.
+Generally, dividing `tso - cmd` by `tso - request` yields the average batch size of requests per second.
 
 ## Connection Count
 
@@ -92,7 +92,7 @@ Generally, dividing `tso - request`  by using `tso - cmd` yields the average bat
 
 - Duration: Execution time
 
-    - The duration from sending a request from the client to TiDB till TiDB exeucting the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.
+    - The duration from receiving a request from the client to TiDB till TiDB exeucting the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`.
     - TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements.
 
 - avg: Average time to execute all requests
@@ -103,10 +103,10 @@ Generally, dividing `tso - request`  by using `tso - cmd` yields the average bat
 
 Connection Idle Duration indicates the duration of a connection being idle.
 
-- avg-in-txn: Average idle duration of transactional connections
-- avg-not-in-txn: Average idle duration of non-transactional connections
-- 99-in-txn: P99 duration of transactional connections
-- 99-not-in-txn: P99 idle duration of non-transactional connections
+- avg-in-txn: Average connection idle duration when the connection is within a transaction
+- avg-not-in-txn: Average connection idle duration when the connection is not within a transaction
+- 99-in-txn: P99 connection idle duration when the connection is within a transaction
+- 99-not-in-txn: P99 connection idle duration when the connection is within a transaction
 
 ## Parse Duration, Compile Duration, and Execute Duration
 
@@ -122,7 +122,7 @@ Average time consumed in executing KV requests in all TiDB instances based on th
 
 ## Avg TiKV GRPC Duration
 
-Average time consumed in executing gRPC requests in all TiKV instances based on the type, including `Get`, `kv_prewrite`, and `kv_commit`.
+Average time consumed in executing gRPC requests in all TiKV instances based on the type, including `kv_get`, `kv_prewrite`, and `kv_commit`.
 
 ## PD TSO Wait/RPC Duration
 
@@ -134,8 +134,8 @@ Average time consumed in executing gRPC requests in all TiKV instances based on 
 ## Storage Async Write Duration, Store Duration, and Apply Duration
 
 - Storage Async Write Duration: Time consumed in asynchronous write
-- Store Duration: Time consumed in asynchronously write store
-- Apply Duration: Time consumed in asynchronously write Apply
+- Store Duration: Time consumed in store loop during asynchronously write 
+- Apply Duration: Time consumed in apply loop during asynchronously write
 
 All these three metrics include the average duration and P99 duration in all TiKV instances.
 
