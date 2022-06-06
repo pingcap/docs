@@ -42,7 +42,7 @@ To access a cluster in a project under an organization, a user must be both a me
 To check which project you belong to, perform these steps:
 
 1. Click the account name in the upper-right corner of the window.
-2. Click **Preferences**. The **Project** tab is displayed by default.
+2. Click **Organization Settings**. The **Projects** tab is displayed by default.
 
 ## Invite an organization member
 
@@ -52,18 +52,17 @@ To invite a member to an organization, perform the following steps:
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**. The organization preferences page is displayed.
+2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **User Access**, and then select the **By all users** tab.
+3. Click **User Management**, and then select the **By All Users** tab.
 
-4. Click the **+ Invite** icon.
+4. Click **Invite**.
 
-5. Enter the email address of the user that you want to invite in the dialog box. 
+5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
 
     > **Tip:**
-    > 
-    > - If you know which project the user belongs to, you can also choose the project to invite the user as a project member.
-    > - If you want to invite multiple members at one time, you can enter multiple email addresses.
+    >
+    > If you want to invite multiple members at one time, you can enter multiple email addresses.
 
 6. Click **Confirm**. Then the new user is successfully added into the user list. At the same time, an email is sent to the invited email address with a verification link.
 
@@ -83,13 +82,13 @@ To invite a member to a project, perform the following steps:
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**. The organization preferences page is displayed.
+2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **User Access**, and then select the **By Project** tab.
+3. Click **User Management**, and then select the **By Project** tab.
 
-4. Click the **+ Invite** icon.
+4. Click **Invite**.
 
-5. Enter the email address of the user that you want to invite in the dialog box, and then choose the project that you want to invite.
+5. Enter the email address of the user to be invited, select a role for the user, and then choose a project for the user.
 
     > **Tip:**
     > 
@@ -110,8 +109,8 @@ To invite a member to a project, perform the following steps:
 If you are the owner of an organization, you can perform the following steps to configure roles for your organization members:
 
 1. Click the account name in the upper-right corner of the window.
-2. Click **Preferences**. The project preference page is displayed.
-3. Click **User Access**, and then select the **By All Users** tab.
+2. Click **Organization Settings**. The organization settings page is displayed.
+3. Click **User Management**, and then select the **By All Users** tab.
 4. Click the role of the target member, and then modify the role.
 
 There are four roles in an organization. The permissions of each role are as follows:
@@ -144,9 +143,9 @@ To remove a member from an organization, perform the following steps:
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**. The organization preferences page is displayed.
+2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **User Access by all users**.
+3. Click **By All Users**.
 
 4. Click **Delete** in the user row that you want to delete.
 
@@ -158,9 +157,9 @@ To remove a member from a project, perform the following steps:
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**. The organization preferences page is displayed.
+2. Click **Organization Settings**. The organization settings page is displayed.
 
-3. Click **User Access by project**.
+3. Click **By Project**.
 
 4. Click **Delete** in the user row that you want to delete.
 
@@ -172,7 +171,7 @@ To change the local timezone setting, perform the following steps:
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**. The organization preferences page is displayed.
+2. Click **Organization Settings**. The organization settings page is displayed.
 
 3. Click **Time Zone**.
 

@@ -67,9 +67,8 @@ To edit third-party integration settings, you must have the `Organization Owner`
 
 ### View or modify third-party integrations
 
-1. On the TiDB Cloud console, click the account name in the upper-right corner of the window.
-2. Click **Preferences**. The project preferences page is displayed.
-3. Click the integration icon of a project that you want to view or modify.
+1. On the TiDB Cloud console, choose a target project that you want to view or modify, and then click the gear icon in the upper left corner to open the project settings.
+2. In the left pane, click **Integrations**. The available third-party integrations are displayed.
 
 ### Available integrations
 

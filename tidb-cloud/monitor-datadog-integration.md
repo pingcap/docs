@@ -21,23 +21,20 @@ You cannot use the Datadog integration in [Developer Tier clusters](/tidb-cloud/
 
 ## Steps
 
-### Step 1. View the datadog integration
+### Step 1. Integrate with your Datadog API Key
 
-1. On the TiDB Cloud console, click the account name in the upper-right corner of the window.
-2. Click **Preferences**. The project preferences page is displayed.
-3. In the **Integrations** column, click the **Datadog** icon of a project that you want to view or modify. The **Integration** page of the project is displayed.
-
-### Step 2. Integrate with your Datadog API Key
-
-1. On the **Integration** page, enter your **API Key** of **Datadog**, and choose the **Site** of **Datadog**.
-2. Click **Test Integration**.
+1. On the TiDB Cloud console, choose the target project for Datadog integration, and then click the gear icon in the upper left corner to open the project settings.
+2. In the left pane, click **Integrations**.
+3. Click **Integration to Datadog**.
+4. Enter your API key of Datadog and choose the site of Datadog.
+5. Click **Test Integration**.
 
     - If the test successes, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
 
-3. Click **Confirm** to complete the integration.
+6. Click **Confirm** to complete the integration.
 
-### Step 3. Install TiDB Cloud Integration in Datadog
+### Step 2. Install TiDB Cloud Integration in Datadog
 
 1. Log in to [Datadog](https://app.datadoghq.com).
 2. Go to the **TiDB Cloud Integration** page (<https://app.datadoghq.com/account/settings#integrations/tidb-cloud>) in Datadog.

@@ -37,7 +37,7 @@ If you are an organization owner, once you log in to TiDB Cloud, you have a defa
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**.
+2. Click **Organization Settings**.
 
     The **Projects** tab is displayed by default.
 
@@ -51,9 +51,9 @@ If you are a project member, you can access only the specific projects to which 
 
 1. Click the account name in the upper-right corner of the window.
 
-2. Click **Preferences**.
+2. Click **Organization Settings**.
 
-    The **Project** tab is displayed by default.
+    The **Projects** tab is displayed by default.
 
 3. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
 
