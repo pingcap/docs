@@ -34,7 +34,7 @@ After that, you will see a page similar to the following:
 
 This scenario in the page uses [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
 
-Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal.
+Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal area.
 
 You can see the page as shown below after all tasks finished. Besides, you can find your port `8080` URL in `REMOTE EXPLORER` in the left nav (Gitpod supports URL-based port forwarding).
 
