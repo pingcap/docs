@@ -32,7 +32,7 @@ After that, you will see a page similar to the following:
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-This scenario in the page uses [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal.
+This scenario in the page uses [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview) to build a TiDB Playground. You can check the progress on the left side of the terminal area.
 
 Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal.
 
