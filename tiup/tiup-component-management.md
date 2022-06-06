@@ -3,116 +3,114 @@ title: Manage TiUP Components with TiUP Commands
 summary: Learn how to manage TiUP components using TiUP commands.
 ---
 
-# Manage TiUP Components with TiUP Commands
+# TiUPコマンドを使用したTiUPコンポーネントの管理 {#manage-tiup-components-with-tiup-commands}
 
-You can use the following TiUP commands to manage components in the TiUP ecosystem:
+次のTiUPコマンドを使用して、TiUPエコシステムのコンポーネントを管理できます。
 
-- list: Queries the component list. By using this TiUP command, you can see all the optional components to install and all the optional versions of each component.
-- install: Installs the specific version of a component.
-- update: Updates a component to the latest version.
-- uninstall: Uninstalls a component.
-- status: Checks the status of a running component.
-- clean: Cleans up the instance on which a component is deployed.
-- help: Prints the help information. If you append another TiUP command to this command, the usage of the appended command is printed.
+-   list：コンポーネントリストを照会します。このTiUPコマンドを使用すると、インストールするすべてのオプションコンポーネントと、各コンポーネントのすべてのオプションバージョンを確認できます。
+-   install：コンポーネントの特定のバージョンをインストールします。
+-   update：コンポーネントを最新バージョンに更新します。
+-   アンインストール：コンポーネントをアンインストールします。
+-   status：実行中のコンポーネントのステータスを確認します。
+-   clean：コンポーネントがデプロイされているインスタンスをクリーンアップします。
+-   help：ヘルプ情報を出力します。このコマンドに別のTiUPコマンドを追加すると、追加されたコマンドの使用法が出力されます。
 
-This document introduces the common component management operations and the corresponding TiUP commands.
+このドキュメントでは、一般的なコンポーネント管理操作と対応するTiUPコマンドを紹介します。
 
-## Query the component list
+## コンポーネントリストをクエリする {#query-the-component-list}
 
-You can use the `tiup list` command to query the component list. This usage of this command is as follows:
+`tiup list`コマンドを使用して、コンポーネントリストを照会できます。このコマンドのこの使用法は次のとおりです。
 
-- `tiup list`: checks which components can be installed.
-- `tiup list ${component}`: checks which versions of a specific component can be installed.
+-   `tiup list` ：インストールできるコンポーネントを確認します。
+-   `tiup list ${component}` ：特定のコンポーネントのどのバージョンをインストールできるかを確認します。
 
-You can also use the following flags in the above commands:
+上記のコマンドで次のフラグを使用することもできます。
 
-- `--installed`: checks which components or which version of a specific component has been installed locally.
--`--all`: views all components, including the hidden ones
--`--verbose`: views all columns (including installed versions and supported platforms)
+-   `--installed` ：特定のコンポーネントのどのコンポーネントまたはどのバージョンがローカルにインストールされているかを確認します。 `--all` ：非表示のコンポーネントを含むすべてのコンポーネントを表示します`--verbose` ：すべての列を表示します（インストールされているバージョンとサポートされているプラットフォームを含む）
 
-Example 1: View all currently installed components.
+例1：現在インストールされているすべてのコンポーネントを表示します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup list --installed
 ```
 
-Example 2: Get a list of the TiKV component of all installable versions from the server.
+例2：サーバーからインストール可能なすべてのバージョンのTiKVコンポーネントのリストを取得します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup list tikv
 ```
 
-## Install components
+## コンポーネントをインストールする {#install-components}
 
-You can use the `tiup install` command to query the component list. This usage of this command is as follows:
+`tiup install`コマンドを使用して、コンポーネントリストを照会できます。このコマンドのこの使用法は次のとおりです。
 
-- `tiup install <component>`: installs the latest stable version of a specified component.
-- `tiup install <component>:[version]`: installs the specified version of a specified component.
+-   `tiup install <component>` ：指定されたコンポーネントの最新の安定バージョンをインストールします。
+-   `tiup install <component>:[version]` ：指定されたコンポーネントの指定されたバージョンをインストールします。
 
-Example 1: Use TiUP to install the latest stable version of TiDB.
+例1：TiUPを使用して、最新の安定バージョンのTiDBをインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup install tidb
 ```
 
-Example 2: Use TiUP to install the nightly version of TiDB.
+例2：TiUPを使用して、ナイトリーバージョンのTiDBをインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup install tidb:nightly
 ```
 
-Example 3: Use TiUP to install TiKV v5.4.1.
+例3：TiUPを使用してTiKVv5.4.1をインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup install tikv:v5.4.1
 ```
 
-## Upgrade components
+## コンポーネントをアップグレードする {#upgrade-components}
 
-After a new version of a component is published, you can use the `tiup update` command to upgrade this component. The usage of this command is basically the same as that of `tiup install`, except for the following flags:
+コンポーネントの新しいバージョンが公開されたら、 `tiup update`コマンドを使用してこのコンポーネントをアップグレードできます。このコマンドの使用法は、次のフラグを除いて、基本的に`tiup install`の使用法と同じです。
 
-- `--all`: Upgrades all components.
-- `--nightly`: Upgrades to the nightly version.
-- `--self`: Upgrades TiUP itself to the latest version.
-- `--force`: Forcibly upgrades to the latest version.
+-   `--all` ：すべてのコンポーネントをアップグレードします。
+-   `--nightly` ：ナイトリーバージョンにアップグレードします。
+-   `--self` ：TiUP自体を最新バージョンにアップグレードします。
+-   `--force` ：強制的に最新バージョンにアップグレードします。
 
-Example 1: Upgrade all components to the latest versions.
+例1：すべてのコンポーネントを最新バージョンにアップグレードします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup update --all
 ```
 
-Example 2: Upgrade all components to the nightly version.
+例2：すべてのコンポーネントをナイトリーバージョンにアップグレードします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup update --all --nightly
 ```
 
-Example 3: Upgrade TiUP to the latest version.
+例3：TiUPを最新バージョンにアップグレードします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup update --self
 ```
 
-## Operate components
+## コンポーネントを操作する {#operate-components}
 
-After the installation is complete, you can use the `tiup <component>` command to start the corresponding component:
+インストールが完了したら、 `tiup <component>`コマンドを使用して対応するコンポーネントを起動できます。
 
 ```shell
 tiup [flags] <component>[:version] [args...]
@@ -121,122 +119,122 @@ Flags:
   -T, --tag string                     Specifies the tag for the component instance.
 ```
 
-To use this command, you need to specify the component name and the optional version. If no version is specified, the latest stable version (installed) of this component is used.
+このコマンドを使用するには、コンポーネント名とオプションのバージョンを指定する必要があります。バージョンが指定されていない場合は、このコンポーネントの最新の安定バージョン（インストール済み）が使用されます。
 
-Before the component is started, TiUP creates a directory for it, and then puts this component into the directory for operation. The component generates all the data in this directory, and the name of this directory is the tag name specified when the component operates. If no tag is specified, a tag name is randomly generated. This working directory will be *automatically deleted* when the instance is terminated.
+コンポーネントが開始される前に、TiUPはそのコンポーネントのディレクトリを作成し、このコンポーネントを操作のためにディレクトリに配置します。コンポーネントはこのディレクトリにすべてのデータを生成します。このディレクトリの名前は、コンポーネントの動作時に指定されたタグ名です。タグが指定されていない場合、タグ名はランダムに生成されます。この作業ディレクトリは、インスタンスが終了すると*自動的に削除され*ます。
 
-If you want to start the same component multiple times and reuse the previous working directory, you can use `--tag` to specify the same name when the component is started. After the tag is specified, the working directory will *not be automatically deleted* when the instance is terminated, which makes it convenient to reuse the working directory.
+同じコンポーネントを複数回起動して前の作業ディレクトリを再利用する場合は、 `--tag`を使用して、コンポーネントの起動時に同じ名前を指定できます。タグを指定すると、インスタンスの終了時に作業ディレクトリが*自動的に削除されないため*、作業ディレクトリを再利用できます。
 
-Example 1: Operate TiDB v5.4.1.
+例1：TiDBv5.4.1を操作します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup tidb:v5.4.1
 ```
 
-Example 2: Specify the tag with which TiKV operates.
+例2：TiKVが動作するタグを指定します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup --tag=experiment tikv
 ```
 
-### Query the operating status of a component
+### コンポーネントの動作ステータスを照会する {#query-the-operating-status-of-a-component}
 
-You can use the `tiup status` command to check the operating status of a component:
+`tiup status`コマンドを使用して、コンポーネントの動作ステータスを確認できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup status
 ```
 
-By executing this command, you will get a list of instances, one instance per line. The list contains the following columns:
+このコマンドを実行すると、インスタンスのリストが1行に1つずつ表示されます。リストには次の列が含まれています。
 
-- `Name`: The tag name of the instance.
-- `Component`: The component name of the instance.
-- `PID`: The process ID of the operating instance.
-- `Status`: The instance status. `RUNNING` means that the instance is operating. `TERM` means that the instance is terminated.
-- `Created Time`: The starting time of the instance.
-- `Directory`: The working directory of the instance, which can be specified using `--tag`.
-- `Binary`: The executable program of the instance, which can be specified using `--binpath`.
-- `Args`: The arguments of the operating instance.
+-   `Name` ：インスタンスのタグ名。
+-   `Component` ：インスタンスのコンポーネント名。
+-   `PID` ：オペレーティングインスタンスのプロセスID。
+-   `Status` ：インスタンスのステータス。 `RUNNING`は、インスタンスが動作していることを意味します。 `TERM`は、インスタンスが終了することを意味します。
+-   `Created Time` ：インスタンスの開始時刻。
+-   `Directory` ：インスタンスの作業ディレクトリ`--tag`を使用して指定できます。
+-   `Binary` ：インスタンスの実行可能プログラム`--binpath`を使用して指定できます。
+-   `Args` ：オペレーティングインスタンスの引数。
 
-### Clean component instance
+### コンポーネントインスタンスをクリーンアップ {#clean-component-instance}
 
-You can use the `tiup clean` command to clean up component instances and delete the working directory. If the instance is still operating before the cleaning, the related process is killed first. The command usage is as follows:
+`tiup clean`コマンドを使用して、コンポーネントインスタンスをクリーンアップし、作業ディレクトリを削除できます。クリーニングの前にインスタンスがまだ動作している場合は、関連するプロセスが最初に強制終了されます。コマンドの使用法は次のとおりです。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 tiup clean [tag] [flags]
 ```
 
-The following flag is supported:
+次のフラグがサポートされています。
 
-- `--all`: Cleans up all instance information.
+-   `--all` ：すべてのインスタンス情報をクリーンアップします。
 
-In the above command, `tag` is the instance tag to be cleaned. If `--all` is used, no tag is passed.
+上記のコマンドで、 `tag`はクリーニングされるインスタンスタグです。 `--all`を使用すると、タグは渡されません。
 
-Example 1: Clean up the component instance with the `experiment` tag name.
+例1： `experiment`のタグ名でコンポーネントインスタンスをクリーンアップします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup clean experiment
 ```
 
-Example 2: Clean up all component instances.
+例2：すべてのコンポーネントインスタンスをクリーンアップします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup clean --all
 ```
 
-### Uninstall components
+### コンポーネントをアンインストールします {#uninstall-components}
 
-The components installed using TiUP take up local disk space. If you do not want to keep too many components of old versions, you can check which versions of a component are currently installed, and then uninstall this component.
+TiUPを使用してインストールされたコンポーネントは、ローカルディスクスペースを占有します。古いバージョンのコンポーネントをあまり多く保持したくない場合は、コンポーネントのどのバージョンが現在インストールされているかを確認してから、このコンポーネントをアンインストールできます。
 
-You can use the `tiup uninstall` command to uninstall all versions or specific versions of a component. This command also supports uninstalling all components. The command usage is as follows:
+`tiup uninstall`コマンドを使用して、コンポーネントのすべてのバージョンまたは特定のバージョンをアンインストールできます。このコマンドは、すべてのコンポーネントのアンインストールもサポートします。コマンドの使用法は次のとおりです。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 tiup uninstall [component][:version] [flags]
 ```
 
-The following flags are supported in this command:
+このコマンドでは、次のフラグがサポートされています。
 
-- `--all`: Uninstalls all components or versions.
-- `--self`: Uninstalls TiUP itself.
+-   `--all` ：すべてのコンポーネントまたはバージョンをアンインストールします。
+-   `--self` ：TiUP自体をアンインストールします。
 
-`component` is the component to be uninstalled. `version` is the version to be uninstalled. Both `component` and `version` can be ignored in the `tiup uninstall` command. If you ignore either one of these two, you need to add the `--all` flag.
+`component`はアンインストールするコンポーネントです。 `version`はアンインストールするバージョンです。 `tiup uninstall`コマンドでは、 `component`と`version`の両方を無視できます。これら2つのいずれかを無視する場合は、 `--all`フラグを追加する必要があります。
 
-- If the version is ignored, adding `--all` means to uninstall all versions of this component.
-- If the version and the component are both ignored, adding `--all` means to uninstall all components of all versions.
+-   バージョンが無視される場合、 `--all`を追加すると、このコンポーネントのすべてのバージョンがアンインストールされます。
+-   バージョンとコンポーネントの両方が無視される場合、 `--all`を追加すると、すべてのバージョンのすべてのコンポーネントがアンインストールされます。
 
-Example 1: Uninstall TiDB v5.4.1.
+例1：TiDBv5.4.1をアンインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup uninstall tidb:v5.4.1
 ```
 
-Example 2: Uninstall TiKV of all versions.
+例2：すべてのバージョンのTiKVをアンインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup uninstall tikv --all
 ```
 
-Example 3: Uninstall all installed components.
+例3：インストールされているすべてのコンポーネントをアンインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup uninstall --all

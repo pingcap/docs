@@ -3,123 +3,123 @@ title: Titan Overview
 summary: Learn the overview of the Titan storage engine.
 ---
 
-# Titan Overview
+# Titanの概要 {#titan-overview}
 
-[Titan](https://github.com/pingcap/rocksdb/tree/titan-5.15) is a high-performance [RocksDB](https://github.com/facebook/rocksdb) plugin for key-value separation. Titan can reduce write amplification in RocksDB when large values are used.
+[巨人](https://github.com/pingcap/rocksdb/tree/titan-5.15)は、キーと値を分離するための高性能[RocksDB](https://github.com/facebook/rocksdb)プラグインです。 Titanは、大きな値が使用されている場合、RocksDBでの書き込み増幅を減らすことができます。
 
-When the value size in Key-Value pairs is large, Titan performs better than RocksDB in write, update, and point read scenarios. However, Titan gets a higher write performance by sacrificing storage space and range query performance. As the price of SSDs continues to decrease, this trade-off will be more and more meaningful.
+キーと値のペアの値のサイズが大きい場合、Titanは、書き込み、更新、およびポイント読み取りのシナリオでRocksDBよりも優れたパフォーマンスを発揮します。ただし、Titanは、ストレージスペースと範囲クエリのパフォーマンスを犠牲にすることで、書き込みパフォーマンスを向上させます。 SSDの価格が下がり続けるにつれて、このトレードオフはますます意味のあるものになるでしょう。
 
-## Key features
+## 主な機能 {#key-features}
 
-- Reduce write amplification by separating values from the log-structured merge-tree (LSM-tree) and storing them independently.
-- Seamlessly upgrade RocksDB instances to Titan. The upgrade does not require human intervention and does not impact online services.
-- Achieve 100% compatibility with all RocksDB features used by the current TiKV.
+-   ログ構造のマージツリー（LSMツリー）から値を分離し、それらを個別に保存することにより、書き込みの増幅を減らします。
+-   RocksDBインスタンスをTitanにシームレスにアップグレードします。アップグレードは人間の介入を必要とせず、オンラインサービスに影響を与えません。
+-   現在のTiKVで使用されているすべてのRocksDB機能と100％の互換性を実現します。
 
-## Usage scenarios
+## 使用シナリオ {#usage-scenarios}
 
-Titan is suitable for the scenarios where a huge volume of data is written to the TiKV foreground:
+Titanは、大量のデータがTiKVフォアグラウンドに書き込まれるシナリオに適しています。
 
-- RocksDB triggers a large amount of compactions, which consumes a lot of I/O bandwidth or CPU resources. This causes poor read and write performance of the foreground.
-- The RocksDB compaction lags much behind (due to the I/O bandwidth limit or CPU bottleneck) and frequently causes write stalls.
-- RocksDB triggers a large amount of compactions, which causes a lot of I/O writes and affects the life of the SSD disk.
+-   RocksDBは大量の圧縮をトリガーし、大量のI/O帯域幅またはCPUリソースを消費します。これにより、フォアグラウンドの読み取りおよび書き込みパフォーマンスが低下します。
+-   RocksDBの圧縮は（I / O帯域幅の制限またはCPUのボトルネックのために）大幅に遅れており、書き込みストールが頻繁に発生します。
+-   RocksDBは大量の圧縮をトリガーします。これにより、大量のI / O書き込みが発生し、SSDディスクの寿命に影響します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-The prerequisites for enabling Titan are as follows:
+Titanを有効にするための前提条件は次のとおりです。
 
-- The average size of values is large, or the size of all large values accounts for much of the total value size. Currently, the size of a value greater than 1 KB is considered as a large value. In some situations, this number (1 KB) can be 512 B. Note that a single value written to TiKV cannot exceed 8 MB due to the limitation of the TiKV Raft layer. You can adjust the [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) configuration value to relax the limit.
-- No range query will be performed or you do not need a high performance of range query. Because the data stored in Titan is not well-ordered, its performance of range query is poorer than that of RocksDB, especially for the query of a large range. According PingCAP's internal test, Titan's range query performance is 40% to a few times lower than that of RocksDB.
-- Sufficient disk space, because Titan reduces write amplification at the cost of disk space. In addition, Titan compresses values one by one, and its compression rate is lower than that of RocksDB. RocksDB compresses blocks one by one. Therefore, Titan consumes more storage space than RocksDB, which is expected and normal. In some situations, Titan's storage consumption can be twice that of RocksDB.
+-   値の平均サイズが大きいか、すべての大きい値のサイズが合計値サイズの大部分を占めています。現在、1KBを超える値のサイズは大きな値と見なされます。状況によっては、この数値（1 KB）は512 Bになる場合があります。TiKVRaftレイヤーの制限により、TiKVに書き込まれる単一の値が8MBを超えることはできないことに注意してください。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)構成値を調整して、制限を緩和できます。
+-   範囲クエリは実行されないか、範囲クエリの高性能は必要ありません。 Titanに格納されているデータは順序が正しくないため、範囲クエリのパフォーマンスは、特に広い範囲のクエリの場合、RocksDBのパフォーマンスよりも劣ります。 PingCAPの内部テストによると、Titanの範囲クエリのパフォーマンスはRocksDBのパフォーマンスの40％から数分の1です。
+-   Titanはディスクスペースを犠牲にして書き込み増幅を減らすため、十分なディスクスペース。さらに、Titanは値を1つずつ圧縮し、その圧縮率はRocksDBよりも低くなっています。 RocksDBはブロックを1つずつ圧縮します。したがって、TitanはRocksDBよりも多くのストレージスペースを消費しますが、これは予想どおりであり、正常です。状況によっては、Titanのストレージ消費量がRocksDBの2倍になる場合があります。
 
-If you want to improve the performance of Titan, see the blog post [Titan: A RocksDB Plugin to Reduce Write Amplification](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/).
+Titanのパフォーマンスを向上させたい場合は、ブログ投稿[Titan：ライトアンプリフィケーションを減らすためのRocksDBプラグイン](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/)を参照してください。
 
-## Architecture and implementation
+## アーキテクチャと実装 {#architecture-and-implementation}
 
-The following figure shows the architecture of Titan:
+次の図は、Titanのアーキテクチャを示しています。
 
 ![Titan Architecture](/media/titan/titan-1.png)
 
-During flush and compaction operations, Titan separates values from the LSM-tree. The advantage of this approach is that the write process is consistent with RocksDB, which reduces the chance of invasive changes to RocksDB.
+フラッシュおよび圧縮操作中に、TitanはLSMツリーから値を分離します。このアプローチの利点は、書き込みプロセスがRocksDBと一貫していることです。これにより、RocksDBへの侵襲的な変更の可能性が減少します。
 
-### BlobFile
+### BlobFile {#blobfile}
 
-When Titan separates the value file from the LSM-tree, it stores the value file in the BlobFile. The following figure shows the BlobFile format:
+Titanが値ファイルをLSMツリーから分離すると、値ファイルがBlobFileに保存されます。次の図は、BlobFile形式を示しています。
 
 ![BlobFile Format](/media/titan/titan-2.png)
 
-A blob file mainly consists of blob records, meta blocks, a meta index block, and a footer. Each block record stores a Key-Value pair. The meta blocks are used for scalability, and store properties related to the blob file. The meta index block is used for meta block searching.
+BLOBファイルは、主にBLOBレコード、メタブロック、メタインデックスブロック、およびフッターで構成されます。各ブロックレコードには、キーと値のペアが格納されます。メタブロックはスケーラビリティのために使用され、blobファイルに関連するプロパティを格納します。メタインデックスブロックは、メタブロックの検索に使用されます。
 
-> **Note:**
+> **ノート：**
 >
-> + The Key-Value pairs in the blob file are stored in order, so that when the Iterator is implemented, the sequential reading performance can be improved via prefetching.
-> + Each blob record keeps a copy of the user key corresponding to the value. This way, when Titan performs Garbage Collection (GC), it can query the user key and identify whether the corresponding value is outdated. However, this process introduces some write amplification.
-> + BlobFile supports compression at the blob record level. Titan supports multiple compression algorithms, such as [Snappy](https://github.com/google/snappy), [LZ4](https://github.com/lz4/lz4), and [Zstd](https://github.com/facebook/zstd). Currently, the default compression algorithm Titan uses is LZ4.
+> -   BLOBファイルのキーと値のペアは順番に格納されるため、イテレータを実装すると、プリフェッチによってシーケンシャル読み取りのパフォーマンスを向上させることができます。
+> -   各blobレコードは、値に対応するユーザーキーのコピーを保持します。このように、Titanがガベージコレクション（GC）を実行するときに、ユーザーキーを照会し、対応する値が古くなっているかどうかを識別できます。ただし、このプロセスでは、ライトアンプリフィケーションが発生します。
+> -   BlobFileは、blobレコードレベルでの圧縮をサポートします。 Titanは、 [スナッピー](https://github.com/google/snappy)などの複数の圧縮アルゴリズムをサポートして[Zstd](https://github.com/facebook/zstd) [LZ4](https://github.com/lz4/lz4) 。現在、Titanが使用するデフォルトの圧縮アルゴリズムはLZ4です。
 
-### TitanTableBuilder
+### TitanTableBuilder {#titantablebuilder}
 
 ![TitanTableBuilder](/media/titan/titan-3.png)
 
-TitanTableBuilder is the key to achieving Key-Value separation. TitanTableBuilder determines the Key-Pair value size, and based on that, decides whether to separate the value from the Key-Value pair and store it in the blob file.
+TitanTableBuilderは、キーと値の分離を実現するための鍵です。 TitanTableBuilderは、キーペアの値のサイズを決定し、それに基づいて、値をキーと値のペアから分離してblobファイルに保存するかどうかを決定します。
 
-+ If the value size is greater than or equal to `min_blob_size`, TitanTableBuilder separates the value and stores it in the blob file. TitanTableBuilder also generates an index and writes it into the SST.
-+ If the value size is smaller than `min_blob_size`, TitanTableBuilder writes the value directly into the SST.
+-   値のサイズが`min_blob_size`以上の場合、TitanTableBuilderは値を分離し、blobファイルに保存します。 TitanTableBuilderはインデックスも生成し、SSTに書き込みます。
+-   値のサイズが`min_blob_size`より小さい場合、TitanTableBuilderは値をSSTに直接書き込みます。
 
-Titan can also be downgraded to RocksDB in the process above. When RocksDB is performing compactions, the separated value can be written back to the newly generated SST files.
+上記のプロセスで、TitanをRocksDBにダウングレードすることもできます。 RocksDBが圧縮を実行しているときに、分離された値を新しく生成されたSSTファイルに書き戻すことができます。
 
-## Garbage Collection
+## ガベージコレクション {#garbage-collection}
 
-Titan uses Garbage Collection (GC) to reclaim space. As the keys are being reclaimed in the LSM-tree compaction, some values stored in blob files are not deleted at the same time. Therefore, Titan needs to perform GC periodically to delete outdated values. Titan provides the following two types of GC:
+タイタンはガベージコレクション（GC）を使用してスペースを再利用します。キーはLSMツリーの圧縮で再利用されるため、blobファイルに格納されている一部の値は同時に削除されません。したがって、Titanは古い値を削除するために定期的にGCを実行する必要があります。 Titanは、次の2種類のGCを提供します。
 
-+ Blob files are periodically integrated and rewritten to delete outdated values. This is the regular way of performing GC.
-+ Blob files are rewritten while the LSM-tree compaction is performed at the same time. This is the feature of Level Merge.
+-   Blobファイルは定期的に統合および書き換えられ、古い値が削除されます。これは、GCを実行する通常の方法です。
+-   LSMツリーの圧縮が同時に実行されている間にBLOBファイルが書き換えられます。これがレベルマージの機能です。
 
-### Regular GC
+### 通常のGC {#regular-gc}
 
-Titan uses the TablePropertiesCollector and EventListener components of RocksDB to collect the information for GC.
+Titanは、RocksDBのTablePropertiesCollectorおよびEventListenerコンポーネントを使用して、GCの情報を収集します。
 
-#### TablePropertiesCollector
+#### TablePropertiesCollector {#tablepropertiescollector}
 
-RocksDB supports using BlobFileSizeCollector, a custom table property collector, to collect properties from the SST which are written into corresponding SST files. The collected properties are named BlobFileSizeProperties. The following figure shows the BlobFileSizeCollector workflow and data formats:
+RocksDBは、カスタムテーブルプロパティコレクターであるBlobFileSizeCollectorを使用して、対応するSSTファイルに書き込まれるSSTからプロパティを収集することをサポートしています。収集されたプロパティの名前はBlobFileSizePropertiesです。次の図は、BlobFileSizeCollectorのワークフローとデータ形式を示しています。
 
 ![BlobFileSizeProperties](/media/titan/titan-4.png)
 
-On the left is the SST index format. The first column is the blob file ID; the second column is the offset for the blob record in the blob file; the third column is the blob record size.
+左側はSSTインデックスフォーマットです。最初の列はblobファイルIDです。 2番目の列は、blobファイル内のblobレコードのオフセットです。 3番目の列はblobレコードサイズです。
 
-On the right is the BlobFileSizeProperties format. Each line represents a blob file and how much data is saved in this blob file. The first column is the blob file ID; the second column is the size of the data.
+右側はBlobFileSizeProperties形式です。各行は、blobファイルと、このblobファイルに保存されるデータの量を表します。最初の列はblobファイルIDです。 2番目の列はデータのサイズです。
 
-#### EventListener
+#### EventListener {#eventlistener}
 
-RocksDB uses compaction to discard old data and reclaim space. After each compaction, some blob files in Titan might contain partly or entirely outdated data. Therefore, you can trigger GC by listening to compaction events. During compaction, you can collect and compare the input/output blob file size properties of SST to determine which blob files require GC. The following figure shows the general process:
+RocksDBは、圧縮を使用して古いデータを破棄し、スペースを再利用します。圧縮するたびに、Titanの一部のBLOBファイルに部分的または完全に古いデータが含まれる場合があります。したがって、圧縮イベントをリッスンすることでGCをトリガーできます。圧縮中に、SSTの入力/出力BLOBファイルサイズプロパティを収集および比較して、GCが必要なBLOBファイルを判別できます。次の図は、一般的なプロセスを示しています。
 
 ![EventListener](/media/titan/titan-5.png)
 
-+ *inputs* stands for the blob file size properties for all SSTs that participate in the compaction.
-+ *outputs* stands for the blob file size properties for all SSTs generated in the compaction.
-+ *discardable size* is the size of the file to be discarded for each blob file, calculated based on inputs and outputs. The first column is the blob file ID. The second column is the size of the file to be discarded.
+-   *input*は、圧縮に参加するすべてのSSTのblobファイルサイズプロパティを表します。
+-   *出力*は、圧縮で生成されたすべてのSSTのblobファイルサイズプロパティを表します。
+-   *破棄可能なサイズ*は、入力と出力に基づいて計算された、blobファイルごとに破棄されるファイルのサイズです。最初の列はblobファイルIDです。 2番目の列は、破棄されるファイルのサイズです。
 
-For each valid blob file, Titan maintains a discardable size variable in memory. After each compaction, this variable is accumulated for the corresponding blob file. Each time when GC starts, it picks the blob file with the greatest discardable size as the candidate file for GC. To reduce write amplification, a certain level of space amplification is allowed, which means GC can be started on a blob file only when the discardable file has reached a specific proportion in size.
+有効なblobファイルごとに、Titanは破棄可能なサイズ変数をメモリに保持します。各圧縮後、この変数は対応するblobファイルに対して累積されます。 GCが起動するたびに、破棄可能なサイズが最大のblobファイルがGCの候補ファイルとして選択されます。書き込み増幅を減らすために、特定のレベルのスペース増幅が許可されます。つまり、破棄可能なファイルのサイズが特定の比率に達した場合にのみ、BLOBファイルでGCを開始できます。
 
-For the selected blob file, Titan checks whether the blob index of the key corresponding to each value exists or has been updated to determine whether this value is outdated. If the value is not outdated, Titan merges and sorts the value into a new blob file, and writes the updated blob index into SST using WriteCallback or MergeOperator. Then, Titan records the latest sequence number of RocksDB and does not delete the old blob file until the sequence of the oldest snapshot exceeds the recorded sequence number. The reason is that after the blob index is written back to SST, the old blob index is still accessible via the previous snapshot. Therefore, we need to ensure that no snapshot will access the old blob index before GC can safely deletes the corresponding blob file.
+選択したblobファイルについて、Titanは、各値に対応するキーのblobインデックスが存在するかどうか、またはこの値が古くなっているかどうかを判断するために更新されているかどうかを確認します。値が古くない場合、Titanは値をマージして新しいblobファイルに並べ替え、WriteCallbackまたはMergeOperatorを使用して更新されたblobインデックスをSSTに書き込みます。次に、TitanはRocksDBの最新のシーケンス番号を記録し、最も古いスナップショットのシーケンスが記録されたシーケンス番号を超えるまで、古いblobファイルを削除しません。その理由は、blobインデックスがSSTに書き戻された後も、以前のスナップショットを介して古いblobインデックスにアクセスできるためです。したがって、GCが対応するblobファイルを安全に削除する前に、スナップショットが古いblobインデックスにアクセスしないようにする必要があります。
 
-### Level Merge
+### レベルマージ {#level-merge}
 
-Level Merge is a newly introduced algorithm in Titan. According to the implementation principle of Level Merge, Titan merges and rewrites blob file that corresponds to the SST file, and generates new blob file while compactions are performed in LSM-tree. The following figure shows the general process:
+レベルマージは、Titanで新しく導入されたアルゴリズムです。レベルマージの実装原理に従って、TitanはSSTファイルに対応するblobファイルをマージして再書き込みし、LSMツリーで圧縮が実行されている間に新しいblobファイルを生成します。次の図は、一般的なプロセスを示しています。
 
 ![LevelMerge General Process](/media/titan/titan-6.png)
 
-When compactions are performed on the SSTs of level z-1 and level z, Titan reads and writes Key-Value pairs in order. Then it writes the values of the selected blob files into new blob files in order, and updates the blob indexes of keys when new SSTs are generated. For the keys deleted in compactions, the corresponding values will not be written to the new blob file, which works similar to GC.
+レベルz-1およびレベルzのSSTで圧縮が実行されると、Titanはキーと値のペアを順番に読み書きします。次に、選択したBLOBファイルの値を新しいBLOBファイルに順番に書き込み、新しいSSTが生成されたときにキーのBLOBインデックスを更新します。圧縮で削除されたキーの場合、対応する値は新しいblobファイルに書き込まれません。これはGCと同様に機能します。
 
-Compared with the regular way of GC, the Level Merge approach completes the blob GC while compactions are performed in LSM-tree. In this way, Titan no longer needs to check the status of blob index in LSM-tree or to write the new blob index into LSM-tree. This reduces the impact of GC on the foreground operations. As the blob file is repeatedly rewritten, fewer files overlap with each other, which makes the whole system in better order and improves the performance of scan.
+GCの通常の方法と比較すると、レベルマージアプローチは、LSMツリーで圧縮が実行されている間にblobGCを完了します。このようにして、TitanはLSMツリーのblobインデックスのステータスを確認したり、新しいblobインデックスをLSMツリーに書き込んだりする必要がなくなりました。これにより、フォアグラウンド操作に対するGCの影響が軽減されます。 BLOBファイルが繰り返し書き換えられるため、重複するファイルが少なくなり、システム全体の順序が改善され、スキャンのパフォーマンスが向上します。
 
-However, layering blob files similar to tiering compaction brings write amplification. Because 99% of the data in LSM-tree is stored at the lowest two levels, Titan performs the Level Merge operation on the blob files corresponding to the data that is compacted only to the lowest two levels of LSM-tree.
+ただし、階層化圧縮と同様にBLOBファイルを階層化すると、ライトアンプリフィケーションが発生します。 LSMツリーのデータの99％が最下位の2つのレベルに格納されているため、Titanは、LSMツリーの最下位の2つのレベルにのみ圧縮されたデータに対応するblobファイルに対してレベルマージ操作を実行します。
 
-#### Range Merge
+#### レンジマージ {#range-merge}
 
-Range Merge is an optimized approach of GC based on Level Merge. However, the bottom level of LSM-tree might be in poorer order in the following situations:
+Range Mergeは、LevelMergeに基づくGCの最適化されたアプローチです。ただし、次の状況では、LSMツリーの最下位レベルの順序が悪くなる可能性があります。
 
-- When `level_compaction_dynamic_level_bytes` is enabled, data volume at each level of LSM-tree dynamically increases, and the sorted runs at the bottom level keep increasing.
-- A specific range of data is frequently compacted, and this causes a lot of sorted runs in that range.
+-   `level_compaction_dynamic_level_bytes`を有効にすると、LSMツリーの各レベルでのデータ量が動的に増加し、最下位レベルでの並べ替えられた実行が増加し続けます。
+-   特定の範囲のデータが頻繁に圧縮されるため、その範囲で多くの並べ替えられた実行が発生します。
 
 ![RangeMerge](/media/titan/titan-7.png)
 
-Therefore, the Range Merge operation is needed to keep the number of sorted runs within a certain level. At the time of OnCompactionComplete, Titan counts the number of sorted runs in a range. If the number is large, Titan marks the corresponding blob file as ToMerge and rewrites it in the next compaction.
+したがって、ソートされた実行の数を特定のレベル内に維持するには、範囲マージ操作が必要です。 OnCompactionCompleteの時点で、Titanは範囲内のソートされた実行の数をカウントします。数が多い場合、Titanは対応するblobファイルをToMergeとしてマークし、次の圧縮で再書き込みします。

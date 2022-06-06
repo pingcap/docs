@@ -3,60 +3,60 @@ title: Three Data Centers in Two Cities Deployment
 summary: Learn the deployment solution to three data centers in two cities.
 ---
 
-# Three Data Centers in Two Cities Deployment
+# 2つの都市に配置された3つのデータセンター {#three-data-centers-in-two-cities-deployment}
 
-This document introduces the architecture and configuration of the three data centers (DC) in two cities deployment.
+このドキュメントでは、2つの都市に展開されている3つのデータセンター（DC）のアーキテクチャと構成を紹介します。
 
-## Overview
+## 概要 {#overview}
 
-The architecture of three DCs in two cities is a highly available and disaster tolerant deployment solution that provides a production data center, a disaster recovery center in the same city, and a disaster recovery center in another city. In this mode, the three DCs in two cities are interconnected. If one DC fails or suffers from a disaster, other DCs can still operate well and take over the the key applications or all applications. Compared with the the multi-DC in one city deployment, this solution has the advantage of cross-city high availability and can survive city-level natural disasters.
+2つの都市にある3つのDCのアーキテクチャは、本番データセンター、同じ都市のディザスタリカバリセンター、および別の都市のディザスタリカバリセンターを提供する、可用性と耐災害性の高い展開ソリューションです。このモードでは、2つの都市の3つのDCが相互接続されます。 1つのDCに障害が発生したり、災害が発生した場合でも、他のDCは正常に動作し、主要なアプリケーションまたはすべてのアプリケーションを引き継ぐことができます。 1つの都市展開でのマルチDCと比較すると、このソリューションには、都市間の高可用性という利点があり、都市レベルの自然災害に耐えることができます。
 
-The distributed database TiDB natively supports the three-DC-in-two-city architecture by using the Raft algorithm, and guarantees the consistency and high availability of data within a database cluster. Because the network latency across DCs in the same city is relatively low, the application traffic can be dispatched to two DCs in the same city, and the traffic load can be shared by these two DCs by controlling the distribution of TiKV Region leaders and PD leaders.
+分散データベースTiDBは、Raftアルゴリズムを使用して2都市の3 DCアーキテクチャをネイティブにサポートし、データベースクラスタ内のデータの一貫性と高可用性を保証します。同じ都市のDC間のネットワーク遅延は比較的低いため、アプリケーショントラフィックを同じ都市の2つのDCにディスパッチでき、TiKVリージョンリーダーとPDリーダーの分散を制御することでトラフィック負荷をこれら2つのDCで共有できます。 。
 
-## Deployment architecture
+## デプロイメントアーキテクチャ {#deployment-architecture}
 
-This section takes the example of Seattle and San Francisco to explain the deployment mode of three DCs in two cities for the distributed database of TiDB.
+このセクションでは、シアトルとサンフランシスコの例を取り上げて、TiDBの分散データベースの2つの都市における3つのDCの展開モードについて説明します。
 
-In this example, two DCs (IDC1 and IDC2) are located in Seattle and another DC (IDC3) is located in San Francisco. The network latency between IDC1 and IDC2 is lower than 3 milliseconds. The network latency between IDC3 and IDC1/IDC2 in Seattle is about 20 milliseconds (ISP dedicated network is used).
+この例では、2つのDC（IDC1とIDC2）がシアトルにあり、もう1つのDC（IDC3）がサンフランシスコにあります。 IDC1とIDC2の間のネットワーク遅延は3ミリ秒未満です。シアトルのIDC3とIDC1/IDC2の間のネットワーク遅延は約20ミリ秒です（ISP専用ネットワークが使用されます）。
 
-The architecture of the cluster deployment is as follows:
+クラスタ展開のアーキテクチャーは次のとおりです。
 
-- The TiDB cluster is deployed to three DCs in two cities: IDC1 in Seattle, IDC2 in Seattle, and IDC3 in San Francisco.
-- The cluster has five replicas, two in IDC1, two in IDC2, and one in IDC3. For the TiKV component, each rack has a label, which means that each rack has a replica.
-- The Raft protocol is adopted to ensure consistency and high availability of data, which is transparent to users.
+-   TiDBクラスタは、シアトルのIDC1、シアトルのIDC2、サンフランシスコのIDC3の2つの都市の3つのDCに展開されます。
+-   クラスタには5つのレプリカがあり、2つはIDC1に、2つはIDC2に、1つはIDC3にあります。 TiKVコンポーネントの場合、各ラックにはラベルがあります。これは、各ラックにレプリカがあることを意味します。
+-   Raftプロトコルは、データの一貫性と高可用性を確保するために採用されており、ユーザーには透過的です。
 
 ![3-DC-in-2-city architecture](/media/three-data-centers-in-two-cities-deployment-01.png)
 
-This architecture is highly available. The distribution of Region leaders is restricted to the two DCs (IDC1 and IDC2) that are in the same city (Seattle). Compared with the three-DC solution in which the distribution of Region leaders is not restricted, this architecture has the following advantages and disadvantages:
+このアーキテクチャは高可用性です。リージョンリーダーの配布は、同じ都市（シアトル）にある2つのDC（IDC1とIDC2）に制限されています。リージョンリーダーの分散が制限されていない3DCソリューションと比較すると、このアーキテクチャには次の長所と短所があります。
 
-- **Advantages**
+-   **利点**
 
-    - Region leaders are in DCs of the same city with low latency, so the write is faster.
-    - The two DCs can provide services at the same time, so the resources usage rate is higher.
-    - If one DC fails, services are still available and data safety is ensured.
+    -   リージョンリーダーは同じ都市のDCにいて、レイテンシが低いため、書き込みが高速になります。
+    -   2つのDCは同時にサービスを提供できるため、リソース使用率が高くなります。
+    -   1つのDCに障害が発生しても、サービスは引き続き利用可能であり、データの安全性が確保されます。
 
-- **Disadvantages**
+-   **短所**
 
-    - Because the data consistency is achieved by the Raft algorithm, when two DCs in the same city fail at the same time, only one surviving replica remains in the disaster recovery DC in another city (San Francisco). This cannot meet the requirement of the Raft algorithm that most replicas survive. As a result, the cluster can be temporarily unavailable. Maintenance staff needs to recover the cluster from the one surviving replica and a small amount of hot data that has not been replicated will be lost. But this case is a rare occurrence.
-    - Because the ISP dedicated network is used, the network infrastructure of this architecture has a high cost.
-    - Five replicas are configured in three DCs in two cities, data redundancy increases, which brings a higher storage cost.
+    -   データの一貫性はRaftアルゴリズムによって実現されるため、同じ都市の2つのDCに同時に障害が発生した場合、別の都市（サンフランシスコ）のディザスタリカバリDCに残っているレプリカは1つだけです。これは、ほとんどのレプリカが存続するRaftアルゴリズムの要件を満たすことができません。その結果、クラスタが一時的に使用できなくなる可能性があります。メンテナンススタッフは、残っている1つのレプリカからクラスタを回復する必要があり、複製されていない少量のホットデータが失われます。しかし、このケースはまれなケースです。
+    -   ISP専用のネットワークを使用しているため、このアーキテクチャのネットワークインフラストラクチャには高いコストがかかります。
+    -   2つの都市の3つのDCに5つのレプリカが構成されているため、データの冗長性が高まり、ストレージコストが高くなります。
 
-### Deployment details
+### 展開の詳細 {#deployment-details}
 
-The configuration of the three DCs in two cities (Seattle and San Francisco) deployment plan is illustrated as follows:
+2つの都市（シアトルとサンフランシスコ）の展開計画における3つのDCの構成は、次のように示されています。
 
 ![3-DC-2-city](/media/three-data-centers-in-two-cities-deployment-02.png)
 
-- From the illustration above, you can see that Seattle has two DCs: IDC1 and IDC2. IDC1 has three sets of racks: RAC1, RAC2, and RAC3. IDC2 has two racks: RAC4 and RAC5. The IDC3 DC in San Francisco has the RAC6 rack.
-- From the RAC1 rack illustrated above, TiDB and PD services are deployed on the same server. Each of the two TiKV servers are deployed with two TiKV instances (tikv-server). This is similar to RAC2, RAC4, RAC5, and RAC6.
-- The TiDB server, the control machine, and the monitoring server are on RAC3. The TiDB server is deployed for regular maintenance and backup. Prometheus, Grafana, and the restore tools are deployed on the control machine and monitoring machine.
-- Another backup server can be added to deploy Drainer. Drainer saves binlog data to a specified location by outputting files, to achieve incremental backup.
+-   上の図から、シアトルにはIDC1とIDC2の2つのDCがあることがわかります。 IDC1には、RAC1、RAC2、およびRAC3の3セットのラックがあります。 IDC2には、RAC4とRAC5の2つのラックがあります。サンフランシスコのIDC3DCにはRAC6ラックがあります。
+-   上記のRAC1ラックから、TiDBサービスとPDサービスが同じサーバーに展開されます。 2つのTiKVサーバーのそれぞれは、2つのTiKVインスタンス（tikv-server）とともにデプロイされます。これは、RAC2、RAC4、RAC5、およびRAC6に似ています。
+-   TiDBサーバー、制御マシン、および監視サーバーはRAC3上にあります。 TiDBサーバーは、定期的なメンテナンスとバックアップのために展開されます。 Prometheus、Grafana、および復元ツールは、制御マシンと監視マシンにデプロイされます。
+-   別のバックアップサーバーを追加して、Drainerを展開できます。 Drainerは、ファイルを出力してbinlogデータを指定された場所に保存し、増分バックアップを実現します。
 
-## Configuration
+## Configuration / コンフィグレーション {#configuration}
 
-### Example
+### 例 {#example}
 
-See the following `tiup topology.yaml` yaml file for example:
+たとえば、次の`tiup topology.yaml`つのyamlファイルを参照してください。
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of
@@ -122,13 +122,13 @@ alertmanager_servers:
   - host: 10.63.10.60
 ```
 
-### Labels design
+### ラベルデザイン {#labels-design}
 
-In the deployment of three DCs in two cities, the label design requires taking availability and disaster recovery into account. It is recommended that you define the four levels (`dc`, `zone`, `rack`, `host`) based on the physical structure of the deployment.
+2つの都市に3つのDCを展開する場合、ラベルの設計では、可用性と災害復旧を考慮する必要があります。デプロイメントの物理構造に基づいて、 `zone` `host`のレベル（ `dc` ）を定義することをお勧めし`rack` 。
 
 ![Label logical definition](/media/three-data-centers-in-two-cities-deployment-03.png)
 
-In the PD configuration, add level information of TiKV labels:
+PD構成で、TiKVラベルのレベル情報を追加します。
 
 ```yaml
 server_configs:
@@ -136,7 +136,7 @@ server_configs:
     replication.location-labels:  ["dc","zone","rack","host"]
 ```
 
-The configuration of `tikv_servers` is based on the label information of the real physical deployment location of TiKV, which makes it easier for PD to perform global management and scheduling.
+`tikv_servers`の構成は、TiKVの実際の物理展開場所のラベル情報に基づいているため、PDはグローバルな管理とスケジューリングを簡単に実行できます。
 
 ```yaml
 tikv_servers:
@@ -157,46 +157,46 @@ tikv_servers:
       server.labels: { dc: "3", zone: "5", rack: "5", host: "34" }
 ```
 
-### Optimize parameter configuration
+### パラメータ設定を最適化する {#optimize-parameter-configuration}
 
-In the deployment of three DCs in two cities, to optimize performance, you need to not only configure regular parameters, but also adjust component parameters.
+2つの都市に3つのDCを配置する場合、パフォーマンスを最適化するには、通常のパラメーターを構成するだけでなく、コンポーネントのパラメーターも調整する必要があります。
 
-- Enable gRPC message compression in TiKV. Because data of the cluster is transmitted in the network, you can enable the gRPC message compression to lower the network traffic.
+-   TiKVでgRPCメッセージ圧縮を有効にします。クラスタのデータはネットワークで送信されるため、gRPCメッセージ圧縮を有効にしてネットワークトラフィックを減らすことができます。
 
     ```yaml
     server.grpc-compression-type: gzip
     ```
 
-- Adjust the PD balance buffer size and increase the tolerance of PD. Because PD calculates the score of each object according to the situation of the node as the basis for scheduling, when the difference between the scores of leaders (or Regions) of two stores is less than the specified multiple of the Region size, PD believes the balance is achieved.
+-   PDバランスバッファサイズを調整し、PDの許容範囲を増やします。 PDは、ノードの状況に応じて各オブジェクトのスコアをスケジューリングの基準として計算するため、2つのストアのリーダー（またはリージョン）のスコアの差が、指定されたリージョンサイズの倍数よりも小さい場合、PDはバランスが取れています。
 
     ```yaml
     schedule.tolerant-size-ratio: 20.0
     ```
 
-- Optimize the network configuration of the TiKV node in another city (San Francisco). Modify the following TiKV parameters for IDC3 (alone) in San Francisco and try to prevent the replica in this TiKV node from participating in the Raft election.
+-   別の都市（サンフランシスコ）のTiKVノードのネットワーク構成を最適化します。サンフランシスコのIDC3（単独）の次のTiKVパラメーターを変更し、このTiKVノードのレプリカがラフト選挙に参加しないようにします。
 
     ```yaml
     raftstore.raft-min-election-timeout-ticks: 1000
     raftstore.raft-max-election-timeout-ticks: 1200
     ```
 
-- Configure scheduling. After the cluster is enabled, use the `tiup ctl pd` tool to modify the scheduling policy. Modify the number of TiKV Raft replicas. Configure this number as planned. In this example, the number of replicas is five.
+-   スケジューリングを構成します。クラスタを有効にした後、 `tiup ctl pd`ツールを使用してスケジューリングポリシーを変更します。 TiKVRaftレプリカの数を変更します。この番号を計画どおりに構成します。この例では、レプリカの数は5です。
 
     ```yaml
     config set max-replicas 5
     ```
 
-- Forbid scheduling the Raft leader to IDC3. Scheduling the Raft leader to in another city (IDC3) causes unnecessary network overhead between IDC1/IDC2 in Seattle and IDC3 in San Francisco. The network bandwidth and latency also affect performance of the TiDB cluster.
+-   ラフトリーダーをIDC3にスケジュールすることを禁止します。ラフトリーダーを別の都市（IDC3）にスケジュールすると、シアトルのIDC1/IDC2とサンフランシスコのIDC3の間に不要なネットワークオーバーヘッドが発生します。ネットワーク帯域幅と遅延もTiDBクラスタのパフォーマンスに影響します。
 
     ```yaml
     config set label-property reject-leader dc 3
     ```
-   
-   > **Note:**
-   >
-   > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
-- Configure the priority of PD. To avoid the situation where the PD leader is in another city (IDC3), you can increase the priority of local PD (in Seattle) and decrease the priority of PD in another city (San Francisco). The larger the number, the higher the priority.
+    > **ノート：**
+    >
+    > TiDB 5.2以降、 `label-property`構成はデフォルトでサポートされていません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
+
+-   PDの優先度を設定します。 PDリーダーが別の都市（IDC3）にいる状況を回避するには、ローカルPD（シアトル）の優先度を上げ、別の都市（サンフランシスコ）のPDの優先度を下げることができます。数値が大きいほど、優先度が高くなります。
 
     ```yaml
     member leader_priority PD-10 5

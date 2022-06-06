@@ -3,90 +3,90 @@ title: TiDB Lightning Backends
 summary: Learn the backends of TiDB Lightning.
 ---
 
-# TiDB Lightning Backends
+# TiDBLightningバックエンド {#tidb-lightning-backends}
 
-The backend determines how TiDB Lightning imports data into the target cluster.
+バックエンドは、TiDBLightningがデータをターゲットクラスタにインポートする方法を決定します。
 
-TiDB Lightning supports the following [backends](/tidb-lightning/tidb-lightning-glossary.md#back-end):
+TiDB Lightningは次の[バックエンド](/tidb-lightning/tidb-lightning-glossary.md#back-end)をサポートします：
 
-+ [Local-backend](#tidb-lightning-local-backend)
-+ [Importer-backend](#tidb-lightning-importer-backend)
-+ [TiDB-backend](#tidb-lightning-tidb-backend)
+-   [ローカルバックエンド](#tidb-lightning-local-backend)
+-   [インポーター-バックエンド](#tidb-lightning-importer-backend)
+-   [TiDB-バックエンド](#tidb-lightning-tidb-backend)
 
-The **Local-backend**: `tidb-lightning` first encodes data into key-value pairs, sorts and stores them in a local temporary directory, and *upload* these key-value pairs to each TiKV node *as SST files*. Then, TiKV ingests these *SST files* into the cluster. The implementation of Local-backend is the same with that of Importer-backend but does not rely on the external `tikv-importer` component.
+**ローカルバックエンド**： `tidb-lightning`は、最初にデータをキーと値のペアにエンコードし、並べ替えてローカルの一時ディレクトリに保存し、これらのキーと値のペアを*SSTファイルとして*各TiKVノードに<em>アップロード</em>します。次に、TiKVはこれらの<em>SSTファイル</em>をクラスタに取り込みます。 Local-backendの実装は、Importer-backendの実装と同じですが、外部`tikv-importer`コンポーネントに依存しません。
 
-The **Importer-backend**: `tidb-lightning` first encodes the SQL or CSV data into KV pairs, and relies on the external `tikv-importer` program to sort these KV pairs and ingest directly into the TiKV nodes.
+**Importer-backend** ： `tidb-lightning`は、最初にSQLまたはCSVデータをKVペアにエンコードし、外部`tikv-importer`プログラムに依存して、これらのKVペアを並べ替え、TiKVノードに直接取り込みます。
 
-The **TiDB-backend**: `tidb-lightning` first encodes these data into SQL `INSERT` statements, and has these statements executed directly on the TiDB node.
+**TiDBバックエンド**： `tidb-lightning`は、最初にこれらのデータをSQL `INSERT`ステートメントにエンコードし、これらのステートメントをTiDBノードで直接実行します。
 
-| Backend | Local-backend | Importer-backend | TiDB-backend |
-|:---|:---|:---|:---|
-| Speed | Fast (~500 GB/hr) | Fast (~300 GB/hr) | Slow (~50 GB/hr) |
-| Resource usage | High | High | Low |
-| Network bandwidth usage| High | Medium | Low |
-| ACID respected while importing | No | No | Yes |
-| Target tables | Must be empty | Must be empty | Can be populated |
-| Additional component required | No | `tikv-importer` | No |
-| TiDB versions supported | >= v4.0.0 | All | All |
-| TiDB services impacted | Yes | Yes | No |
+| バックエンド             | ローカルバックエンド    | インポーター-バックエンド   | TiDB-バックエンド     |
+| :----------------- | :------------ | :-------------- | :-------------- |
+| スピード               | 高速（〜500GB /時） | 高速（〜300GB /時）   | 遅い（〜50 GB / hr） |
+| リソースの使用            | 高い            | 高い              | 低い              |
+| ネットワーク帯域幅の使用       | 高い            | 中くらい            | 低い              |
+| インポート中に尊重されるACID   | いいえ           | いいえ             | はい              |
+| ターゲットテーブル          | 空である必要があります   | 空である必要があります     | 移入可能            |
+| 追加のコンポーネントが必要      | いいえ           | `tikv-importer` | いいえ             |
+| サポートされているTiDBバージョン | = v4.0.0      | 全て              | 全て              |
+| 影響を受けるTiDBサービス     | はい            | はい              | いいえ             |
 
-> **Note**:
+> **注**：
 >
-> - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both Local-backend and TiDB-backend modes at the same time.
+> -   複数のTiDBLightningインスタンスを使用して同じターゲットにデータをインポートする場合は、一度に1つのバックエンドのみを適用してください。たとえば、ローカルバックエンドモードとTiDBバックエンドモードの両方で同時にデータを同じTiDBクラスタにインポートすることはできません。
 >
-> - By default, you cannot start multiple TiDB Lightning instances to import data into the same TiDB cluster. Instead, you can use the [Parallel Import](/tidb-lightning/tidb-lightning-distributed-import.md) feature.
+> -   デフォルトでは、複数のTiDB Lightningインスタンスを起動して、同じTiDBクラスタにデータをインポートすることはできません。代わりに、 [並列インポート](/tidb-lightning/tidb-lightning-distributed-import.md)つの機能を使用できます。
 
-## How to choose the backend modes
+## バックエンドモードの選択方法 {#how-to-choose-the-backend-modes}
 
-- If the target cluster of data import is v4.0 or later versions, consider using the Local-backend mode first, which is easier to use and has higher performance than that of the other two modes.
-- If the target cluster of data import is v3.x or earlier versions, it is recommended to use the Importer-backend mode.
-- If the target cluster of data import is in the online production environment, or if the target table of data import already has data on it, it is recommended to use the TiDB-backend mode.
+-   データインポートのターゲットクラスタがv4.0以降のバージョンである場合は、最初にローカルバックエンドモードを使用することを検討してください。これは、他の2つのモードよりも使いやすく、パフォーマンスが高くなります。
+-   データインポートのターゲットクラスタがv3.x以前のバージョンの場合は、インポーターバックエンドモードを使用することをお勧めします。
+-   データインポートのターゲットクラスタがオンライン実稼働環境にある場合、またはデータインポートのターゲットテーブルにすでにデータが含まれている場合は、TiDBバックエンドモードを使用することをお勧めします。
 
-## TiDB Lightning Local-backend
+## TiDBLightningLocal-バックエンド {#tidb-lightning-local-backend}
 
-The Local-backend feature is introduced to TiDB Lightning since TiDB v4.0.3. You can use this feature to import data to TiDB clusters of v4.0.0 or above.
+ローカルバックエンド機能は、TiDBv4.0.3以降のTiDBLightningに導入されました。この機能を使用して、v4.0.0以降のTiDBクラスターにデータをインポートできます。
 
-### Deployment for Local-backend
+### ローカルバックエンドの展開 {#deployment-for-local-backend}
 
-To deploy TiDB Lightning in the Local-backend mode, see [TiDB Lightning Deployment](/tidb-lightning/deploy-tidb-lightning.md).
+TiDB Lightningをローカルバックエンドモードでデプロイするには、 [TiDBLightningの導入](/tidb-lightning/deploy-tidb-lightning.md)を参照してください。
 
-## TiDB Lightning TiDB-backend
+## TiDBLightningTiDB-バックエンド {#tidb-lightning-tidb-backend}
 
-> **Note:**
+> **ノート：**
 >
-> Since TiDB v4.0, PingCAP no longer maintains the [Loader](https://docs.pingcap.com/tidb/v4.0/loader-overview) tool. Since v5.0, the Loader documentation is no longer available. Loader's functionality has been completely replaced by the TiDB-backend of TiDB Lightning, so it is highly recommended to switch to TiDB Lightning.
+> TiDB v4.0以降、PingCAPは[ローダ](https://docs.pingcap.com/tidb/v4.0/loader-overview)のツールを維持しなくなりました。 v5.0以降、ローダーのドキュメントは利用できなくなりました。ローダーの機能は、TiDB LightningのTiDBバックエンドに完全に置き換えられているため、TiDBLightningに切り替えることを強くお勧めします。
 
-### Deployment for TiDB-backend
+### TiDBバックエンドの展開 {#deployment-for-tidb-backend}
 
-When using the TiDB-backend, deploying `tikv-importer` is not necessary. Compared with the [standard deployment procedure](/tidb-lightning/deploy-tidb-lightning.md), the TiDB-backend deployment has the following two differences:
+TiDBバックエンドを使用する場合、 `tikv-importer`をデプロイする必要はありません。 [標準の展開手順](/tidb-lightning/deploy-tidb-lightning.md)と比較すると、TiDBバックエンドの展開には次の2つの違いがあります。
 
-* All steps involving `tikv-importer` can be skipped.
-* The configuration must be changed to declare that the TiDB-backend is used.
+-   `tikv-importer`を含むすべてのステップをスキップできます。
+-   TiDBバックエンドが使用されることを宣言するには、構成を変更する必要があります。
 
-#### Hardware requirements
+#### ハードウェア要件 {#hardware-requirements}
 
-The speed of TiDB Lightning using TiDB-backend is limited by the SQL processing speed of TiDB. Therefore, even a lower-end machine may max out the possible performance. The recommended hardware configuration is:
+TiDBバックエンドを使用するTiDBLightningの速度は、TiDBのSQL処理速度によって制限されます。したがって、ローエンドのマシンでさえ、可能なパフォーマンスを最大にする可能性があります。推奨されるハードウェア構成は次のとおりです。
 
-* 16 logical cores CPU
-* An SSD large enough to store the entire data source, preferring higher read speed
-* 1 Gigabit network card
+-   16論理コアCPU
+-   データソース全体を保存するのに十分な大きさのSSDで、より高速な読み取り速度を優先します
+-   1ギガビットネットワークカード
 
-#### Manual deployment
+#### 手動展開 {#manual-deployment}
 
-You do not need to download and configure `tikv-importer`. You can download TiDB Lightning from [here](/download-ecosystem-tools.md#tidb-lightning).
+`tikv-importer`をダウンロードして構成する必要はありません。 TiDBLightningは[ここ](/download-ecosystem-tools.md#tidb-lightning)からダウンロードできます。
 
-Before running `tidb-lightning`, add the following lines into the configuration file:
+`tidb-lightning`を実行する前に、構成ファイルに次の行を追加します。
 
 ```toml
 [tikv-importer]
 backend = "tidb"
 ```
 
-or supplying the `--backend tidb` arguments when executing `tidb-lightning`.
+または、 `tidb-lightning`を実行するときに`--backend tidb`の引数を指定します。
 
-#### Configuration description and samples
+#### Configuration / コンフィグレーションの説明とサンプル {#configuration-description-and-samples}
 
-This section provides the samples for task configuration in TiDB Lightning.
+このセクションでは、TiDBLightningでのタスク構成のサンプルを提供します。
 
 ```toml
 # tidb-lightning task configuration
@@ -241,11 +241,11 @@ sql-mode = "ONLY_FULL_GROUP_BY,NO_ENGINE_SUBSTITUTION"
 log-progress = "5m"
 ```
 
-For detailed descriptions of the configuration items, see [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
+構成項目の詳細については、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-### Conflict resolution
+### 紛争解決 {#conflict-resolution}
 
-The TiDB-backend supports importing to an already-populated table. However, the new data might cause a unique key conflict with the old data. You can control how to resolve the conflict by using this task configuration.
+TiDBバックエンドは、すでに入力されているテーブルへのインポートをサポートしています。ただし、新しいデータにより、古いデータとの一意のキーの競合が発生する可能性があります。このタスク構成を使用して、競合を解決する方法を制御できます。
 
 ```toml
 [tikv-importer]
@@ -253,20 +253,17 @@ backend = "tidb"
 on-duplicate = "replace" # or "error" or "ignore"
 ```
 
-| Setting | Behavior on conflict | Equivalent SQL statement |
-|:---|:---|:---|
-| replace | New entries replace old ones | `REPLACE INTO ...` |
-| ignore | Keep old entries and ignore new ones | `INSERT IGNORE INTO ...` |
-| error | Abort import | `INSERT INTO ...` |
+| 設定  | 紛争時の行動                   | 同等のSQLステートメント            |
+| :-- | :----------------------- | :----------------------- |
+| 交換  | 新しいエントリが古いエントリを置き換えます    | `REPLACE INTO ...`       |
+| 無視  | 古いエントリを保持し、新しいエントリを無視します | `INSERT IGNORE INTO ...` |
+| エラー | インポートを中止する               | `INSERT INTO ...`        |
 
-### Migrating from Loader to TiDB Lightning TiDB-backend
+### ローダーからTiDBLightningTiDBバックエンドへの移行 {#migrating-from-loader-to-tidb-lightning-tidb-backend}
 
-If you need to import data into a TiDB cluster, TiDB Lightning using the TiDB-backend can completely replace the functionalities of [Loader](https://docs.pingcap.com/tidb/v4.0/loader-overview). The following list shows how to translate Loader configurations into [TiDB Lightning configurations](/tidb-lightning/tidb-lightning-configuration.md).
+データをTiDBクラスタにインポートする必要がある場合、TiDBバックエンドを使用するTiDB Lightningは、 [ローダ](https://docs.pingcap.com/tidb/v4.0/loader-overview)の機能を完全に置き換えることができます。次のリストは、ローダー構成を[TiDBLightning構成](/tidb-lightning/tidb-lightning-configuration.md)に変換する方法を示しています。
 
-<table>
-<thead><tr><th>Loader</th><th>TiDB Lightning</th></tr></thead>
-<tbody>
-<tr><td>
+<table><thead><tr><th>ローダ</th><th>TiDB Lightning</th></tr></thead><tbody><tr><td>
 
 ```toml
 
@@ -327,7 +324,6 @@ schema = "tidb_lightning_checkpoint"
 <tr><td>
 
 ```toml
-
 ```
 
 </td><td>
@@ -413,53 +409,53 @@ password = ""
 </tbody>
 </table>
 
-## TiDB Lightning Importer-backend
+## TiDBLightningImporter-バックエンド {#tidb-lightning-importer-backend}
 
-### Deployment for Importer-backend mode
+### インポーターバックエンドモードの展開 {#deployment-for-importer-backend-mode}
 
-This section describes how to [deploy TiDB Lightning manually](#deploy-tidb-lightning-manually) in the Importer-backend mode:
+このセクションでは、インポーターバックエンドモードで[TiDBLightningを手動でデプロイする](#deploy-tidb-lightning-manually)を実行する方法について説明します。
 
-#### Hardware requirements
+#### ハードウェア要件 {#hardware-requirements}
 
-`tidb-lightning` and `tikv-importer` are both resource-intensive programs. It is recommended to deploy them into two separate machines.
+`tidb-lightning`と`tikv-importer`は、どちらもリソースを大量に消費するプログラムです。それらを2つの別々のマシンにデプロイすることをお勧めします。
 
-To achieve the best performance, it is recommended to use the following hardware configuration:
+最高のパフォーマンスを実現するには、次のハードウェア構成を使用することをお勧めします。
 
-- `tidb-lightning`:
+-   `tidb-lightning` ：
 
-    - 32+ logical cores CPU
-    - An SSD large enough to store the entire data source, preferring higher read speed
-    - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+    -   32以上の論理コアCPU
+    -   データソース全体を保存するのに十分な大きさのSSDで、より高速な読み取り速度を優先します
+    -   10ギガビットネットワークカード（300MB /秒以上で転送可能）
+    -   `tidb-lightning`は、実行時にすべてのCPUコアを完全に消費するため、専用マシンにデプロイすることを強くお勧めします。不可能な場合は、 `tidb-lightning`を`tidb-server`などの他のコンポーネントと一緒にデプロイし、CPU使用率を`region-concurrency`設定で制限することができます。
 
-- `tikv-importer`:
+-   `tikv-importer` ：
 
-    - 32+ logical cores CPU
-    - 40 GB+ memory
-    - 1 TB+ SSD, preferring higher IOPS (≥ 8000 is recommended)
-        * The disk should be larger than the total size of the top N tables, where `N` = `max(index-concurrency, table-concurrency)`.
-    - 10 Gigabit network card (capable of transferring at ≥300 MB/s)
-    - `tikv-importer` fully consumes all CPU, disk I/O and network bandwidth when running, and deploying on a dedicated machine is strongly recommended.
+    -   32以上の論理コアCPU
+    -   40GB以上のメモリ
+    -   1 TB + SSD、より高いIOPSを優先（8000以上を推奨）
+        -   ディスクは、上位N個のテーブルの合計サイズ（ `N` = `max(index-concurrency, table-concurrency)` ）よりも大きくする必要があります。
+    -   10ギガビットネットワークカード（300MB /秒以上で転送可能）
+    -   `tikv-importer`は、実行時にすべてのCPU、ディスクI / O、およびネットワーク帯域幅を完全に消費するため、専用マシンに展開することを強くお勧めします。
 
-If you have sufficient machines, you can deploy multiple `tidb lightning` + `tikv importer` servers, with each working on a distinct set of tables, to import the data in parallel.
+十分な数のマシンがある場合は、複数の`tidb lightning` + `tikv importer`サーバーをデプロイし、それぞれが別個のテーブルセットで動作して、データを並列にインポートできます。
 
-#### Deploy TiDB Lightning manually
+#### TiDBLightningを手動でデプロイ {#deploy-tidb-lightning-manually}
 
-##### Step 1: Deploy a TiDB cluster
+##### ステップ1：TiDBクラスタをデプロイする {#step-1-deploy-a-tidb-cluster}
 
-Before importing data, you need to have a deployed TiDB cluster, with the cluster version 2.0.9 or above. It is highly recommended to use the latest version.
+データをインポートする前に、クラスタバージョン2.0.9以降のTiDBクラスタをデプロイする必要があります。最新バージョンを使用することを強くお勧めします。
 
-You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-with-tidb.md).
+展開手順は[TiDBクイックスタートガイド](/quick-start-with-tidb.md)にあります。
 
-#### Step 2: Download the TiDB Lightning installation package
+#### 手順2：TiDBLightningインストールパッケージをダウンロードする {#step-2-download-the-tidb-lightning-installation-package}
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package (choose the same version as that of the TiDB cluster).
+[TiDBエンタープライズツールのダウンロードページ](/download-ecosystem-tools.md#tidb-lightning)を参照して、TiDB Lightningパッケージをダウンロードします（TiDBクラスタと同じバージョンを選択します）。
 
-#### Step 3: Start `tikv-importer`
+#### ステップ3： <code>tikv-importer</code>起動します {#step-3-start-code-tikv-importer-code}
 
-1. Upload `bin/tikv-importer` from the installation package.
+1.  インストールパッケージから`bin/tikv-importer`をアップロードします。
 
-2. Configure `tikv-importer.toml`.
+2.  `tikv-importer.toml`を構成します。
 
     ```toml
     # TiKV Importer configuration file template
@@ -482,21 +478,21 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     import-dir = "/mnt/ssd/data.import/"
     ```
 
-    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tikv-importer) section for the full list of settings.
+    上記は基本的な設定のみを示しています。設定の完全なリストについては、 [Configuration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md#tikv-importer)セクションを参照してください。
 
-3. Run `tikv-importer`.
+3.  `tikv-importer`を実行します。
 
     ```sh
     nohup ./tikv-importer -C tikv-importer.toml > nohup.out &
     ```
 
-#### Step 4: Start `tidb-lightning`
+#### ステップ4： <code>tidb-lightning</code>を開始します {#step-4-start-code-tidb-lightning-code}
 
-1. Upload `bin/tidb-lightning` and `bin/tidb-lightning-ctl` from the tool set.
+1.  ツールセットから`bin/tidb-lightning`と`bin/tidb-lightning-ctl`をアップロードします。
 
-2. Mount the data source onto the same machine.
+2.  データソースを同じマシンにマウントします。
 
-3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
+3.  `tidb-lightning.toml`を構成します。以下のテンプレートに表示されない構成の場合、TiDBLightningは構成エラーをログファイルに書き込んで終了します。
 
     ```toml
     [lightning]
@@ -527,9 +523,9 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     status-port = 10080
     ```
 
-    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    上記は基本的な設定のみを示しています。設定の完全なリストについては、 [Configuration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)セクションを参照してください。
 
-4. Run `tidb-lightning`. If you directly run the command in the command-line, the process might exit because of the SIGHUP signal received. Instead, it's preferable to run a bash script that contains the `nohup` command:
+4.  `tidb-lightning`を実行します。コマンドラインでコマンドを直接実行すると、SIGHUP信号を受信したためにプロセスが終了する場合があります。代わりに、次の`nohup`のコマンドを含むbashスクリプトを実行することをお勧めします。
 
     ```sh
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &

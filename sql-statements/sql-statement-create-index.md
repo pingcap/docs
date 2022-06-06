@@ -3,11 +3,11 @@ title: CREATE INDEX | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE INDEX for the TiDB database.
 ---
 
-# CREATE INDEX
+# インデックスの作成 {#create-index}
 
-This statement adds a new index to an existing table. It is an alternative syntax to `ALTER TABLE .. ADD INDEX`, and included for MySQL compatibility.
+このステートメントは、既存のテーブルに新しいインデックスを追加します。これは`ALTER TABLE .. ADD INDEX`の代替構文であり、MySQLとの互換性のために含まれています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateIndexStmt ::=
@@ -62,7 +62,7 @@ KeyOrIndex ::=
     'Key' | 'Index'
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -101,51 +101,51 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-## Expression index
+## 式インデックス {#expression-index}
 
-In some scenarios, the filtering condition of a query is based on a certain expression. In these scenarios, the query performance is relatively poor because ordinary indexes cannot take effect, the query can only be executed by scanning the entire table. The expression index is a type of special index that can be created on an expression. Once an expression index is created, TiDB can use the index for the expression-based query, which significantly improves the query performance.
+一部のシナリオでは、クエリのフィルタリング条件は特定の式に基づいています。これらのシナリオでは、通常のインデックスを有効にできないため、クエリのパフォーマンスは比較的低くなります。クエリは、テーブル全体をスキャンすることによってのみ実行できます。式インデックスは、式に作成できる特殊なインデックスの一種です。式インデックスが作成されると、TiDBは式ベースのクエリにインデックスを使用できるため、クエリのパフォーマンスが大幅に向上します。
 
-For example, if you want to create an index based on `lower(col1)`, execute the following SQL statement:
+たとえば、 `lower(col1)`に基づいてインデックスを作成する場合は、次のSQLステートメントを実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE INDEX idx1 ON t1 ((lower(col1)));
 ```
 
-Or you can execute the following equivalent statement:
+または、次の同等のステートメントを実行できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE t1 ADD INDEX idx1((lower(col1)));
 ```
 
-You can also specify the expression index when you create the table:
+テーブルを作成するときに、式インデックスを指定することもできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1(col1 char(10), col2 char(10), index((lower(col1))));
 ```
 
-> **Note**
+> **ノート**
 >
-> The expression in an expression index must be surrounded by '(' and ')'. Otherwise, a syntax error is reported.
+> 式インデックスの式は、「（」および「）」で囲む必要があります。それ以外の場合は、構文エラーが報告されます。
 
-You can drop an expression index in the same way as dropping an ordinary index:
+通常のインデックスを削除するのと同じ方法で、式インデックスを削除できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP INDEX idx1 ON t1;
 ```
 
-> **Note:**
-> 
-> Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying `tidb_allow_function_for_expression_index` variable. In future versions, more functions might be added to the list.
-> 
-> {{< copyable "sql" >}}
+> **ノート：**
+>
+> 式インデックスには、さまざまな種類の式が含まれます。正確性を確保するために、完全にテストされた一部の関数のみが式インデックスの作成を許可されています。これは、これらの関数のみが実稼働環境の式で許可されることを意味します。これらの関数は、 `tidb_allow_function_for_expression_index`の変数をクエリすることで取得できます。将来のバージョンでは、さらに多くの機能がリストに追加される可能性があります。
+>
+> {{< copyable "" >}}
 >
 > ```sql
 > mysql> select @@tidb_allow_function_for_expression_index;
@@ -156,48 +156,48 @@ DROP INDEX idx1 ON t1;
 > +--------------------------------------------+
 > 1 row in set (0.00 sec)
 > ```
-> 
-> For the functions that are not included in the returned result above, those functions are not fully tested and not recommended for a production environment, which can be seen as experimental. Other expressions such as operators, `cast`, and `case when` are also seen as experimental and not recommended for production. However, if you still want to use those expressions, you can make the following configuration in the [TiDB configuration file](/tidb-configuration-file.md#allow-expression-index-new-in-v400):
-> 
-> {{< copyable "sql" >}}
-> 
+>
+> 上記の戻り結果に含まれていない関数の場合、これらの関数は十分にテストされておらず、実験的ものと見なすことができる実稼働環境には推奨されません。演算子、 `cast`などの他の式も実験的ものと見`case when` 、本番環境には推奨されません。ただし、それでもこれらの式を使用する場合は、 [TiDB構成ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
+>
+> {{< copyable "" >}}
+>
 > ```sql
 > allow-expression-index = true
 > ```
 >
-> An expression index cannot be created on a primary key.
+> 主キーに式インデックスを作成することはできません。
 >
-> The expression in an expression index cannot contain the following content:
+> 式インデックスの式に次の内容を含めることはできません。
 >
-> - Volatile functions, such as `rand()` and `now()`.
-> - System variables and user variables.
-> - Subqueries.
-> - `AUTO_INCREMENT` column. You can remove this restriction by setting the value of `tidb_enable_auto_increment_in_generated` (system variable) to `true`.
-> - Window functions.
-> - ROW functions, such as `create table t (j json, key k (((j,j))));`.
-> - Aggregate functions.
-> 
-> An expression index implicitly takes up a name (for example, `_V$_{index_name}_{index_offset}`). If you try to create a new expression index with the name that a column has already had, an error occurs. In addition, if you add a new column with the same name, an error also occurs.
+> -   `rand()`や`now()`などの揮発性関数。
+> -   システム変数とユーザー変数。
+> -   サブクエリ。
+> -   `AUTO_INCREMENT`列。 `tidb_enable_auto_increment_in_generated` （システム変数）の値を`true`に設定することで、この制限を取り除くことができます。
+> -   ウィンドウ関数。
+> -   `create table t (j json, key k (((j,j))));`などのROW関数。
+> -   集計関数。
 >
-> Make sure that the number of function parameters in the expression of an expression index is correct.
+> 式インデックスは暗黙的に名前を取ります（たとえば、 `_V$_{index_name}_{index_offset}` ）。列にすでにある名前で新しい式インデックスを作成しようとすると、エラーが発生します。また、同じ名前の新しい列を追加すると、エラーも発生します。
 >
-> When the expression of an index contains a string-related function, affected by the returned type and the length, creating the expression index might fail. In this situation, you can use the `cast()` function to explicitly specify the returned type and the length. For example, to create an expression index based on the `repeat(a, 3)` expression, you need to modify this expression to `cast(repeat(a, 3) as char(20))`.
+> 式インデックスの式の関数パラメータの数が正しいことを確認してください。
+>
+> インデックスの式に、返されるタイプと長さの影響を受ける文字列関連の関数が含まれている場合、式インデックスの作成が失敗する可能性があります。この状況では、 `cast()`関数を使用して、返されるタイプと長さを明示的に指定できます。たとえば、 `repeat(a, 3)`式に基づいて式インデックスを作成するには、この式を`cast(repeat(a, 3) as char(20))`に変更する必要があります。
 
-When the expression in a query statement matches the expression in an expression index, the optimizer can choose the expression index for the query. In some cases, the optimizer might not choose an expression index depending on statistics. In this situation, you can force the optimizer to select an expression index by using optimizer hints.
+クエリステートメントの式が式インデックスの式と一致する場合、オプティマイザはクエリの式インデックスを選択できます。統計によっては、オプティマイザが式インデックスを選択しない場合があります。この状況では、オプティマイザのヒントを使用して、オプティマイザに式インデックスを選択させることができます。
 
-In the following examples, suppose that you create the expression index `idx` on the expression `lower(col1)`:
+次の例では、式`lower(col1)`に式インデックス`idx`を作成するとします。
 
-If the results of the query statement are the same expressions, the expression index applies. Take the following statement as an example:
+クエリステートメントの結果が同じ式である場合、式インデックスが適用されます。例として、次のステートメントを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT lower(col1) FROM t;
 ```
 
-If the same expression is included in the filtering conditions, the expression index applies. Take the following statements as an example:
+同じ式がフィルタリング条件に含まれている場合、式インデックスが適用されます。例として、次のステートメントを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM t WHERE lower(col1) = "a";
@@ -208,62 +208,62 @@ SELECT * FROM t WHERE lower(col1) > "a" AND lower(col1) < "b";
 SELECT * FROM t WHERE lower(col1) > "b" OR lower(col1) < "a";
 ```
 
-When the queries are sorted by the same expression, the expression index applies. Take the following statement as an example:
+クエリが同じ式でソートされている場合、式インデックスが適用されます。例として、次のステートメントを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM t ORDER BY lower(col1);
 ```
 
-If the same expression is included in the aggregate (`GROUP BY`) functions, the expression index applies. Take the following statements as an example:
+同じ式がaggregate（ `GROUP BY` ）関数に含まれている場合、式インデックスが適用されます。例として、次のステートメントを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT max(lower(col1)) FROM t；
 SELECT min(col1) FROM t GROUP BY lower(col1);
 ```
 
-To see the expression corresponding to the expression index, execute `show index`, or check the system tables `information_schema.tidb_indexes` and the table `information_schema.STATISTICS`. The `Expression` column in the output indicates the corresponded expression. For the non-expression indexes, the column shows `NULL`.
+式インデックスに対応する式を確認するには、 `show index`を実行するか、システムテーブル`information_schema.tidb_indexes`とテーブル`information_schema.STATISTICS`を確認してください。出力の`Expression`列は、対応する式を示しています。非式インデックスの場合、列には`NULL`が表示されます。
 
-The cost of maintaining an expression index is higher than that of maintaining other indexes, because the value of the expression needs to be calculated whenever a row is inserted or updated. The value of the expression is already stored in the index, so this value does not require recalculation when the optimizer selects the expression index.
+行が挿入または更新されるたびに式の値を計算する必要があるため、式インデックスを維持するコストは他のインデックスを維持するコストよりも高くなります。式の値はすでにインデックスに格納されているため、オプティマイザが式のインデックスを選択するときに、この値を再計算する必要はありません。
 
-Therefore, when the query performance outweighs the insert and update performance, you can consider indexing the expressions.
+したがって、クエリのパフォーマンスが挿入と更新のパフォーマンスを上回っている場合は、式のインデックス作成を検討できます。
 
-Expression indexes have the same syntax and limitations as in MySQL. They are implemented by creating indexes on generated virtual columns that are invisible, so the supported expressions inherit all [limitations of virtual generated columns](/generated-columns.md#limitations).
+式インデックスには、MySQLと同じ構文と制限があります。これらは、生成された非表示の仮想列にインデックスを作成することで実装されるため、サポートされている式はすべて[仮想生成列の制限](/generated-columns.md#limitations)を継承します。
 
-## Invisible index
+## 見えないインデックス {#invisible-index}
 
-Invisible indexes are indexes that are ignored by the query optimizer:
+非表示のインデックスは、クエリオプティマイザによって無視されるインデックスです。
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-For details, see [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md).
+詳細については、 [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)を参照してください。
 
-## Associated system variables
+## 関連するシステム変数 {#associated-system-variables}
 
-The system variables associated with the `CREATE INDEX` statement are `tidb_ddl_reorg_worker_cnt`, `tidb_ddl_reorg_batch_size`, `tidb_enable_auto_increment_in_generated`, and `tidb_ddl_reorg_priority`. Refer to [system variables](/system-variables.md#tidb_ddl_reorg_worker_cnt) for details.
+`CREATE INDEX`ステートメントに関連付けられているシステム変数は、 `tidb_ddl_reorg_worker_cnt` 、 `tidb_ddl_reorg_priority` `tidb_ddl_reorg_batch_size` `tidb_enable_auto_increment_in_generated`詳細は[システム変数](/system-variables.md#tidb_ddl_reorg_worker_cnt)を参照してください。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* `FULLTEXT`, `HASH` and `SPATIAL` indexes are not supported.
-* Descending indexes are not supported (similar to MySQL 5.7).
-* Adding the primary key of the `CLUSTERED` type to a table is not supported. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-* Expression indexes are incompatible with views. When a query is executed using a view, the expression index cannot be used at the same time.
-* Expression indexes have compatibility issues with bindings. When the expression of an expression index has a constant, the binding created for the corresponding query expands its scope. For example, suppose that the expression in the expression index is  `a+1`, and the corresponding query condition is  `a+1 > 2`. In this case, the created binding is `a+? > ?`, which means that the query with the condition such as `a+2 > 2` is also forced to use the expression index and results in a poor execution plan. In addition, this also affects the baseline capturing and baseline evolution in SQL Plan Management (SPM).
+-   `FULLTEXT` 、および`HASH`のインデックスはサポートさ`SPATIAL`ていません。
+-   降順インデックスはサポートされていません（MySQL 5.7と同様）。
+-   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
+-   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
+-   式インデックスには、バインディングとの互換性の問題があります。式インデックスの式に定数がある場合、対応するクエリに対して作成されたバインディングはそのスコープを拡張します。たとえば、式インデックスの式が`a+1`であり、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されたバインディングは`a+? > ?`です。これは、 `a+2 > 2`などの条件を持つクエリも式インデックスを使用するように強制され、実行プランが不十分になることを意味します。さらに、これはSQL Plan Management（SPM）のベースラインキャプチャとベースラインの進化にも影響します。
 
-## See also
+## も参照してください {#see-also}
 
-* [Index Selection](/choose-index.md)
-* [Wrong Index Solution](/wrong-index-solution.md)
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
-* [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
-* [ADD COLUMN](/sql-statements/sql-statement-add-column.md)
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [インデックスの選択](/choose-index.md)
+-   [インデックス問題の解決方法](/wrong-index-solution.md)
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
+-   [列を追加](/sql-statements/sql-statement-add-column.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [説明](/sql-statements/sql-statement-explain.md)

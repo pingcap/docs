@@ -3,21 +3,21 @@ title: CLIENT_ERRORS_SUMMARY_GLOBAL
 summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` information_schema table.
 ---
 
-# CLIENT_ERRORS_SUMMARY_GLOBAL
+# CLIENT_ERRORS_SUMMARY_GLOBAL {#client-errors-summary-global}
 
-The table `CLIENT_ERRORS_SUMMARY_GLOBAL` provides a global summary of all SQL errors and warnings that have been returned to clients that connect to a TiDB server. These include:
+表`CLIENT_ERRORS_SUMMARY_GLOBAL`は、TiDBサーバーに接続するクライアントに返されたすべてのSQLエラーと警告のグローバルな要約を示しています。これらには以下が含まれます：
 
-* Malformed SQL statements.
-* Division by zero errors.
-* The attempt to insert out-of-range of duplicate key values.
-* Permission errors.
-* A table does not exist.
+-   不正な形式のSQLステートメント。
+-   ゼロ除算エラー。
+-   範囲外の重複キー値を挿入しようとしました。
+-   許可エラー。
+-   テーブルが存在しません。
 
-Client errors are returned to the client via the MySQL server protocol, where applications are expected to take appropriate action. The `information_schema`.`CLIENT_ERRORS_SUMMARY_GLOBAL` table provides a high-level overview, and is useful in the scenario where applications are not correctly handling (or logging) errors returned by the TiDB server.
+クライアントエラーは、MySQLサーバープロトコルを介してクライアントに返されます。このプロトコルでは、アプリケーションが適切なアクションを実行することが期待されます。 `information_schema` 。 `CLIENT_ERRORS_SUMMARY_GLOBAL`表は、概要を示しており、アプリケーションがTiDBサーバーから返されたエラーを正しく処理（またはログ記録）していないシナリオで役立ちます。
 
-The summarized counts can be reset with the statement `FLUSH CLIENT_ERRORS_SUMMARY`. The summary is local to each TiDB server and is only retained in memory. Summaries will be lost if the TiDB server restarts.
+要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各TiDBサーバーに対してローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、要約は失われます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -38,18 +38,18 @@ DESC CLIENT_ERRORS_SUMMARY_GLOBAL;
 6 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明：
 
-* `ERROR_NUMBER`: The MySQL-compatible error number that was returned.
-* `ERROR_MESSAGE`: The error message which matches the error number (in prepared statement form).
-* `ERROR_COUNT`: The number of times this error was returned.
-* `WARNING_COUNT`: The number of times this warning was returned.
-* `FIRST_SEEN`: The first time this error (or warning) was sent.
-* `LAST_SEEN`: The most recent time this error (or warning) was sent.
+-   `ERROR_NUMBER` ：返されたMySQL互換のエラー番号。
+-   `ERROR_MESSAGE` ：エラー番号と一致するエラーメッセージ（プリペアドステートメント形式）。
+-   `ERROR_COUNT` ：このエラーが返された回数。
+-   `WARNING_COUNT` ：この警告が返された回数。
+-   `FIRST_SEEN` ：このエラー（または警告）が初めて送信されたとき。
+-   `LAST_SEEN` ：このエラー（または警告）が送信された最新の時刻。
 
-The following example shows a warning being generated when connecting to a local TiDB server. The summary is reset after executing `FLUSH CLIENT_ERRORS_SUMMARY`:
+次の例は、ローカルTiDBサーバーに接続するときに生成される警告を示しています。要約は`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT 0/0;

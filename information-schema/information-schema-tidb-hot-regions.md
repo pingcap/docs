@@ -3,11 +3,11 @@ title: TIDB_HOT_REGIONS
 summary: Learn the `TIDB_HOT_REGIONS` information_schema table.
 ---
 
-# TIDB_HOT_REGIONS
+# TIDB_HOT_REGIONS {#tidb-hot-regions}
 
-The `TIDB_HOT_REGIONS` table provides information about the current hot Regions. For information about history hot Regions, see `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`.
+`TIDB_HOT_REGIONS`の表は、現在のホットリージョンに関する情報を提供します。歴史的なホットリージョンについては、 `[TIDB_HOT_REGIONS_HISTORY](/information-schema/information-schema-tidb-hot-regions-history.md)`を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -32,15 +32,15 @@ DESC tidb_hot_regions;
 10 rows in set (0.00 sec)
 ```
 
-The description of columns in the `TIDB_HOT_REGIONS` table is as follows:
+`TIDB_HOT_REGIONS`テーブルの列の説明は次のとおりです。
 
-* `TABLE_ID`: The ID of the table in which the hot Region is located.
-* `INDEX_ID`: The ID of the index in which the hot Region is located.
-* `DB_NAME`: The database name of the object in which the hot Region is located.
-* `TABLE_NAME`: The name of the table in which the hot Region is located.
-* `INDEX_NAME`: The name of the index in which the hot Region is located.
-* `REGION_ID`: The ID of the hot Region.
-* `TYPE`: The type of the hot Region.
-* `MAX_HOT_DEGREE`: The maximum hot degree of the Region.
-* `REGION_COUNT`: The number of hot Regions in the instance. 
-* `FLOW_BYTES`: The number of bytes written and read in the Region.
+-   `TABLE_ID` ：ホットリージョンが配置されているテーブルのID。
+-   `INDEX_ID` ：ホットリージョンが配置されているインデックスのID。
+-   `DB_NAME` ：ホットリージョンが配置されているオブジェクトのデータベース名。
+-   `TABLE_NAME` ：ホットリージョンが配置されているテーブルの名前。
+-   `INDEX_NAME` ：ホットリージョンが配置されているインデックスの名前。
+-   `REGION_ID` ：ホットリージョンのID。
+-   `TYPE` ：ホットリージョンのタイプ。
+-   `MAX_HOT_DEGREE` ：リージョンの最大ホット度。
+-   `REGION_COUNT` ：インスタンス内のホットリージョンの数。
+-   `FLOW_BYTES` ：リージョンで書き込まれ、読み取られたバイト数。

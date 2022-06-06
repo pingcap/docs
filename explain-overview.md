@@ -3,17 +3,17 @@ title: TiDB Query Execution Plan Overview
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# TiDB Query Execution Plan Overview
+# TiDBクエリ実行プランの概要 {#tidb-query-execution-plan-overview}
 
-> **Note:**
+> **ノート：**
 >
-> When you use the MySQL client to connect to TiDB, to read the output result in a clearer way without line wrapping, you can use the `pager less -S` command. Then, after the `EXPLAIN` result is output, you can press the right arrow <kbd>→</kbd> button on your keyboard to horizontally scroll through the output.
+> MySQLクライアントを使用してTiDBに接続する場合、行を折り返すことなく出力結果をより明確に読み取るために、 `pager less -S`コマンドを使用できます。次に、 `EXPLAIN`の結果が出力されたら、キーボードの右矢印<kbd>→</kbd>ボタンを押して、出力を水平方向にスクロールできます。
 
-SQL is a declarative language. It describes what the results of a query should look like, **not the methodology** to actually retrieve those results. TiDB considers all the possible ways in which a query could be executed, including using what order to join tables and whether any potential indexes can be used. The process of _considering query execution plans_ is known as SQL optimization.
+SQLは宣言型言語です。これは、クエリの結果がどのように見えるかを説明するものであり、実際にそれらの結果を取得する**方法ではありません**。 TiDBは、テーブルを結合する順序の使用や、潜在的なインデックスを使用できるかどうかなど、クエリを実行できるすべての可能な方法を検討します。*クエリ実行プランを検討する*プロセスは、SQL最適化として知られています。
 
-The `EXPLAIN` statement shows the selected execution plan for a given statement. That is, after considering hundreds or thousands of ways in which the query could be executed, TiDB believes that this _plan_ will consume the least resources and execute in the shortest amount of time:
+`EXPLAIN`ステートメントは、特定のステートメントに対して選択された実行プランを示します。つまり、クエリを実行できる数百または数千の方法を検討した後、TiDBは、この*プラン*が最小のリソースを消費し、最短の時間で実行されると考えています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (id INT NOT NULL PRIMARY KEY auto_increment, a INT NOT NULL, pad1 VARCHAR(255), INDEX(a));
@@ -37,70 +37,70 @@ Records: 2  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-`EXPLAIN` does not execute the actual query. [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) can be used to execute the query and show `EXPLAIN` information. This can be useful in diagnosing cases where the execution plan selected is suboptimal. For additional examples of using `EXPLAIN`, see the following documents:
+`EXPLAIN`は実際のクエリを実行しません。 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を使用してクエリを実行し、 `EXPLAIN`の情報を表示できます。これは、選択した実行プランが最適ではない場合の診断に役立ちます。 `EXPLAIN`の使用例については、次のドキュメントを参照してください。
 
-* [Indexes](/explain-indexes.md)
-* [Joins](/explain-joins.md)
-* [Subqueries](/explain-subqueries.md)
-* [Aggregation](/explain-aggregation.md)
-* [Views](/explain-views.md)
-* [Partitions](/explain-partitions.md)
+-   [インデックス](/explain-indexes.md)
+-   [テーブル結合](/explain-joins.md)
+-   [サブクエリ](/explain-subqueries.md)
+-   [集計](/explain-aggregation.md)
+-   [ビュー](/explain-views.md)
+-   [パーティション](/explain-partitions.md)
 
-## Understand EXPLAIN output
+## EXPLAIN出力を理解する {#understand-explain-output}
 
-The following describes the output of the `EXPLAIN` statement above:
+次に、上記の`EXPLAIN`ステートメントの出力について説明します。
 
-* `id` describes the name of an operator, or sub-task that is required to execute the SQL statement. See [Operator overview](#operator-overview) for additional details.
-* `estRows` shows an estimate of the number of rows TiDB expects to process. This number might be based on dictionary information, such as when the access method is based on a primary or unique key, or it could be based on statistics such as a CMSketch or histogram.
-* `task` shows where an operator is performing the work. See [Task overview](#task-overview) for additional details.
-* `access object` shows the table, partition and index that is being accessed. The parts of the index are also shown, as in the case above that the column `a` from the index was used. This can be useful in cases where you have composite indexes.
-* `operator info` shows additional details about the access. See [Operator info overview](#operator-info-overview) for additional details.
+-   `id`は、SQLステートメントの実行に必要なオペレーターまたはサブタスクの名前を示します。詳細については、 [オペレーターの概要](#operator-overview)を参照してください。
+-   `estRows`は、TiDBが処理すると予想する行数の見積もりを示しています。この数は、アクセス方法が主キーまたは一意キーに基づいている場合などのディクショナリ情報に基づいている場合もあれば、CMSketchやヒストグラムなどの統計に基づいている場合もあります。
+-   `task`は、オペレーターが作業を実行している場所を示します。詳細については、 [タスクの概要](#task-overview)を参照してください。
+-   `access object`は、アクセスされているテーブル、パーティション、およびインデックスを示します。上記の場合のように、インデックスの列`a`が使用された場合のように、インデックスの部分も表示されます。これは、複合インデックスがある場合に役立ちます。
+-   `operator info`は、アクセスに関する追加の詳細を示します。詳細については、 [オペレーター情報の概要](#operator-info-overview)を参照してください。
 
-### Operator overview
+### オペレーターの概要 {#operator-overview}
 
-An operator is a particular step that is executed as part of returning query results. The operators that perform table scans (of the disk or the TiKV Block Cache) are listed as follows:
+演算子は、クエリ結果を返す一部として実行される特定のステップです。 （ディスクまたはTiKVブロックキャッシュの）テーブルスキャンを実行するオペレーターは次のとおりです。
 
-- **TableFullScan**: Full table scan
-- **TableRangeScan**: Table scans with the specified range
-- **TableRowIDScan**: Scans the table data based on the RowID. Usually follows an index read operation to retrieve the matching data rows.
-- **IndexFullScan**: Similar to a "full table scan", except that an index is scanned, rather than the table data.
-- **IndexRangeScan**: Index scans with the specified range.
+-   **TableFullScan** ：全表スキャン
+-   **TableRangeScan** ：指定された範囲のテーブルスキャン
+-   **TableRowIDScan** ：RowIDに基づいてテーブルデータをスキャンします。通常、インデックス読み取り操作の後に、一致するデータ行を取得します。
+-   **IndexFullScan** ：「フルテーブルスキャン」に似ていますが、テーブルデータではなく、インデックスがスキャンされる点が異なります。
+-   **IndexRangeScan** ：指定された範囲でのインデックススキャン。
 
-TiDB aggregates the data or calculation results scanned from TiKV/TiFlash. The data aggregation operators can be divided into the following categories:
+TiDBは、TiKV/TiFlashからスキャンされたデータまたは計算結果を集約します。データ集約演算子は、次のカテゴリに分類できます。
 
-- **TableReader**: Aggregates the data obtained by the underlying operators like `TableFullScan` or `TableRangeScan` in TiKV.
-- **IndexReader**: Aggregates the data obtained by the underlying operators like `IndexFullScan` or `IndexRangeScan` in TiKV.
-- **IndexLookUp**: First aggregates the RowID (in TiKV) scanned by the `Build` side. Then at the `Probe` side, accurately reads the data from TiKV based on these RowIDs. At the `Build` side, there are operators like `IndexFullScan` or `IndexRangeScan`; at the `Probe` side, there is the `TableRowIDScan` operator.
-- **IndexMerge**: Similar to `IndexLookUp`. `IndexMerge` can be seen as an extension of `IndexLookupReader`. `IndexMerge` supports reading multiple indexes at the same time. There are many `Build`s and one `Probe`. The execution process of `IndexMerge` the same as that of `IndexLookUp`.
+-   **TableReader** ：TiKVの`TableFullScan`や`TableRangeScan`などの基礎となる演算子によって取得されたデータを集約します。
+-   **IndexReader** ：TiKVの`IndexFullScan`や`IndexRangeScan`などの基礎となる演算子によって取得されたデータを集約します。
+-   **IndexLookUp** ：最初に`Build`面でスキャンされたRowID（TiKV）を集約します。次に、 `Probe`側で、これらのRowIDに基づいてTiKVからデータを正確に読み取ります。 `Build`側には、 `IndexFullScan`や`IndexRangeScan`のような演算子があります。 `Probe`側には、 `TableRowIDScan`人のオペレーターがいます。
+-   **IndexMerge** ： `IndexLookUp`に似ています。 `IndexMerge`は`IndexLookupReader`の拡張として見ることができます。 `IndexMerge`は、複数のインデックスの同時読み取りをサポートします。多くの`Build`と1つの`Probe`があります。 `IndexMerge`の実行プロセスは`IndexLookUp`の実行プロセスと同じです。
 
-While the structure appears as a tree, executing the query does not strictly require the child nodes to be completed before the parent nodes. TiDB supports intra-query parallelism, so a more accurate way to describe the execution is that the child nodes _flow into_ their parent nodes. Parent, child and sibling operators _might_ potentially be executing parts of the query in parallel.
+構造はツリーとして表示されますが、クエリを実行するために、親ノードの前に子ノードを完了する必要はありません。 TiDBはクエリ内の並列処理をサポートしているため、実行をより正確に説明する方法は、子ノードが親ノード*に流れること*です。親、子、および兄弟の演算子は、クエリの一部を並行して実行している<em>可能</em>性があります。
 
-In the previous example, the `├─IndexRangeScan_8(Build)` operator finds the internal `RowID` for rows that match the `a(a)` index. The `└─TableRowIDScan_9(Probe)` operator then retrieves these rows from the table.
+前の例では、 `├─IndexRangeScan_8(Build)`演算子は、 `a(a)`インデックスに一致する行の内部`RowID`を検索します。次に、 `└─TableRowIDScan_9(Probe)`オペレーターは、これらの行をテーブルから取得します。
 
-#### Range query
+#### 範囲クエリ {#range-query}
 
-In the `WHERE`/`HAVING`/`ON` conditions, the TiDB optimizer analyzes the result returned by the primary key query or the index key query. For example, these conditions might include comparison operators of the numeric and date type, such as `>`, `<`, `=`, `>=`, `<=`, and the character type such as `LIKE`.
+`WHERE`条件では、 `HAVING`オプティマイザーは主`ON`またはインデックスキークエリによって返された結果を分析します。たとえば、これらの条件には、 `>`などの`>=`型と`<` `<=` 、および`=`などの文字型の比較演算子が含まれる場合があり`LIKE` 。
 
-> **Note:**
+> **ノート：**
 >
-> - In order to use an index, the condition must be _sargable_. For example, the condition `YEAR(date_column) < 1992` can not use an index, but `date_column < '1992-01-01` can.
-> - It is recommended to compare data of the same type and [character set and collation](/character-set-and-collation.md). Mixing types may require additional `cast` operations, or prevent indexes from being used.
-> - You can also use `AND` (intersection) and `OR` (union) to combine the range query conditions of one column. For a multi-dimensional composite index, you can use conditions in multiple columns. For example, regarding the composite index `(a, b, c)`:
->     - When `a` is an equivalent query, continue to figure out the query range of `b`; when `b` is also an equivalent query, continue to figure out the query range of `c`.
->     - Otherwise, if `a` is a non-equivalent query, you can only figure out the range of `a`.
+> -   インデックスを使用するには、条件が*sargable*である必要があります。たとえば、条件`YEAR(date_column) < 1992`はインデックスを使用できませんが、 `date_column < '1992-01-01`は使用できます。
+> -   同じタイプと[文字セットと照合順序](/character-set-and-collation.md)のデータを比較することをお勧めします。タイプを混在させるには、追加の`cast`の操作が必要になるか、インデックスが使用されない場合があります。
+> -   `AND` （交差）と`OR` （結合）を使用して、1つの列の範囲クエリ条件を組み合わせることもできます。多次元複合インデックスの場合、複数の列で条件を使用できます。たとえば、複合インデックス`(a, b, c)`について：
+>     -   `a`が同等のクエリである場合、引き続き`b`のクエリ範囲を計算します。 `b`も同等のクエリである場合は、引き続き`c`のクエリ範囲を計算します。
+>     -   それ以外の場合、 `a`が同等でないクエリである場合、 `a`の範囲しか把握できません。
 
-### Task overview
+### タスクの概要 {#task-overview}
 
-Currently, calculation tasks of TiDB can be divided into two categories: cop tasks and root tasks. A `cop[tikv]` task indicates that the operator is performed inside the TiKV coprocessor. A `root` task indicates that it will be completed inside of TiDB.
+現在、TiDBの計算タスクは、警官タスクとルートタスクの2つのカテゴリに分類できます。 `cop[tikv]`タスクは、オペレーターがTiKVコプロセッサー内で実行されることを示します。 `root`タスクは、TiDB内で完了することを示します。
 
-One of the goals of SQL optimization is to push the calculation down to TiKV as much as possible. The Coprocessor in TiKV supports most of the built-in SQL functions (including the aggregate functions and the scalar functions), SQL `LIMIT` operations, index scans, and table scans. However, all `Join` operations can only be performed as root tasks in TiDB.
+SQL最適化の目標の1つは、計算を可能な限りTiKVに下げることです。 TiKVのコプロセッサーは、ほとんどの組み込みSQL関数（集計関数とスカラー関数を含む）、SQL `LIMIT`演算、インデックススキャン、およびテーブルスキャンをサポートします。ただし、 `Join`の操作はすべて、TiDBのルートタスクとしてのみ実行できます。
 
-### Operator info overview
+### オペレーター情報の概要 {#operator-info-overview}
 
-The `operator info` can show useful information such as which conditions were able to be pushed down:
+`operator info`は、どの条件をプッシュダウンできたかなどの有用な情報を表示できます。
 
-* `range: [1,1]` shows that the predicate from the where clause of the query (`a = 1`) was pushed right down to TiKV (the task is of `cop[tikv]`).
-* `keep order:false` shows that the semantics of this query did not require TiKV to return the results in order. If the query were to be modified to require an order (such as `SELECT * FROM t WHERE a = 1 ORDER BY id`), then this condition would be `keep order:true`.
-* `stats:pseudo` shows that the estimates shown in `estRows` might not be accurate. TiDB periodically updates statistics as part of a background operation. A manual update can also be performed by running `ANALYZE TABLE t`.
+-   `range: [1,1]`は、クエリ（ `a = 1` ）のwhere句からの述語がTiKVにプッシュダウンされたことを示します（タスクは`cop[tikv]`です）。
+-   `keep order:false`は、このクエリのセマンティクスが結果を順番に返すためにTiKVを必要としなかったことを示します。注文（ `SELECT * FROM t WHERE a = 1 ORDER BY id`など）を必要とするようにクエリを変更する場合、この条件は`keep order:true`になります。
+-   `stats:pseudo`は、 `estRows`に示されている推定値が正確でない可能性があることを示します。 TiDBは、バックグラウンド操作の一部として統計を定期的に更新します。手動更新は、 `ANALYZE TABLE t`を実行して実行することもできます。
 
-Different operators output different information after the `EXPLAIN` statement is executed. You can use optimizer hints to control the behavior of the optimizer, and thereby controlling the selection of the physical operators. For example, `/*+ HASH_JOIN(t1, t2) */` means that the optimizer uses the `Hash Join` algorithm. For more details, see [Optimizer Hints](/optimizer-hints.md).
+`EXPLAIN`ステートメントが実行された後、異なる演算子は異なる情報を出力します。オプティマイザーのヒントを使用してオプティマイザーの動作を制御し、それによって物理オペレーターの選択を制御できます。たとえば、 `/*+ HASH_JOIN(t1, t2) */`は、オプティマイザが`Hash Join`アルゴリズムを使用することを意味します。詳細については、 [オプティマイザーのヒント](/optimizer-hints.md)を参照してください。

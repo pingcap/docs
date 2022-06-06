@@ -3,11 +3,11 @@ title: PLACEMENT_RULES
 summary: Learn the `PLACEMENT_RULES` information_schema table.
 ---
 
-# PLACEMENT_RULES
+# PLACEMENT_RULES {#placement-rules}
 
-The `PLACEMENT_RULES` table provides information on all explicitly configured [Placement Rules in SQL](/placement-rules-in-sql.md). The information includes both placement policies and directly attached rules.
+`PLACEMENT_RULES`の表は、明示的に構成されたすべての[SQLの配置ルール](/placement-rules-in-sql.md)に関する情報を提供します。この情報には、配置ポリシーと直接添付されたルールの両方が含まれます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -37,11 +37,11 @@ DESC placement_rules;
 15 rows in set (0.00 sec)
 ```
 
-## Examples
+## 例 {#examples}
 
-The `PLACEMENT_RULES` table only shows explicitly configured rules. To see the canonical version of placement rules (including placement policies attached to tables), use the statement `SHOW PLACEMENT` instead:
+`PLACEMENT_RULES`の表は、明示的に構成されたルールのみを示しています。配置ルールの正規バージョン（テーブルに添付された配置ポリシーを含む）を表示するには、代わりにステートメント`SHOW PLACEMENT`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (a INT); 

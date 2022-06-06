@@ -2,84 +2,84 @@
 title: tiup cluster reload
 ---
 
-# tiup cluster reload
+# tiupクラスタのリロード {#tiup-cluster-reload}
 
-After [modifying the cluster configuration](/tiup/tiup-component-cluster-edit-config.md), the cluster needs to be reloaded using the `tiup cluster reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running, and follows the upgrade process to restart the services in order according to the upgrade process. The cluster is still available during the restart process.
+[クラスタ構成の変更](/tiup/tiup-component-cluster-edit-config.md)の後、設定を有効にするには、 `tiup cluster reload`コマンドを使用してクラスタをリロードする必要があります。このコマンドは、制御マシンの構成をサービスが実行されているリモートマシンに公開し、アップグレードプロセスに従って、アップグレードプロセスに従ってサービスを再起動します。クラスタは、再起動プロセス中も引き続き使用できます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster reload <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the cluster name to operate on.
+`<cluster-name>` ：操作するクラスタ名。
 
-## Options
+## オプション {#options}
 
-### --force
+### - 力 {#force}
 
-- Ignores errors in the reloading process and forces reload.
-- Data type: `BOOLEAN`
-- Default: false
+-   リロードプロセスのエラーを無視し、強制的にリロードします。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### --transfer-timeout
+### --転送タイムアウト {#transfer-timeout}
 
-- When restarting PD or TiKV, the leader of the restarted node is migrated to other nodes first, and the migration process takes some time. You can set the maximum wait time (in seconds) by setting `-transfer-timeout`. After the timeout, the service can be restarted directly without waiting.
-- Data type: `UINT`
-- Default: 300
+-   PDまたはTiKVを再起動する場合、再起動したノードのリーダーが最初に他のノードに移行され、移行プロセスに時間がかかります。 `-transfer-timeout`を設定すると、最大待機時間（秒単位）を設定できます。タイムアウト後、サービスは待機せずに直接再開できます。
+-   データ型： `UINT`
+-   デフォルト：300
 
-> **Note:**
+> **ノート：**
 >
-> In the case of skipping the waiting and restarting directly, the service performance might jitter.
+> 待機をスキップして直接再起動した場合、サービスのパフォーマンスが低下する可能性があります。
 
-### --ignore-config-check
+### --ignore-config-check {#ignore-config-check}
 
-- After the binary files of components are deployed, the configurations of TiDB, TiKV, and PD components are checked using `<binary> --config-check <config-file>`. `<binary>` is the path of the deployed binary file. `<config-file>` is the configuration file generated based on the user configuration. If you want to skip this check, you can use this option.
-- Data type: `BOOLEAN`
-- Default: false
+-   コンポーネントのバイナリファイルが展開された後、TiDB、TiKV、およびPDコンポーネントの構成が`<binary> --config-check <config-file>`を使用してチェックされます。 `<binary>`は、デプロイされたバイナリファイルのパスです。 `<config-file>`は、ユーザー構成に基づいて生成された構成ファイルです。このチェックをスキップする場合は、このオプションを使用できます。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the nodes to be restarted. If not specified, all nodes are restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup cluster display`](/tiup/tiup-component-cluster-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are selected by default.
+-   再起動するノードを指定します。指定しない場合、すべてのノードが再起動されます。このオプションの値は、ノードIDのコンマ区切りのリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   データ型： `STRINGS`
+-   コマンドでこのオプションが指定されていない場合、デフォルトですべてのノードが選択されます。
 
-> **Note:**
+> **ノート：**
 >
-> + If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
-> + If the `--skip-restart` option is specified, the `-N, --node` option is invalid.
+> -   `-R, --role`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが再起動されます。
+> -   `--skip-restart`オプションが指定されている場合、 `-N, --node`オプションは無効です。
 
-### -R, --role
+### -R、-role {#r-role}
 
-- Specifies the roles to be restarted. If not specified, all roles are restarted. The value of this option is a comma-separated list of node roles. The role is the second column of the [cluster status](/tiup/tiup-component-cluster-display.md) table.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are selected by default.
+-   再起動するロールを指定します。指定しない場合、すべての役割が再開されます。このオプションの値は、ノードの役割のコンマ区切りのリストです。役割は、 [クラスタステータス](/tiup/tiup-component-cluster-display.md)テーブルの2番目の列です。
+-   データ型： `STRINGS`
+-   このオプションがコマンドで指定されていない場合、デフォルトですべての役割が選択されます。
 
-> **Note:**
+> **ノート：**
 >
-> 1. If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
-> 2. If the `--skip-restart` option is specified, the `-R, --role` option is invalid.
+> 1.  `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが再起動されます。
+> 2.  `--skip-restart`オプションが指定されている場合、 `-R, --role`オプションは無効です。
 
-### --skip-restart
+### --スキップ-再起動 {#skip-restart}
 
-The `tiup cluster reload` command performs two operations:
+`tiup cluster reload`コマンドは、次の2つの操作を実行します。
 
-- Refreshes all node configurations
-- Restarts the specified node
+-   すべてのノード構成を更新します
+-   指定されたノードを再起動します
 
-After you specify the `--skip-restart` option, it only refreshes the configuration without restarting any nodes, so that the refreshed configuration is not applied and does not take effect until the next restart of the corresponding service.
+`--skip-restart`オプションを指定すると、ノードを再起動せずに構成が更新されるだけなので、更新された構成は適用されず、対応するサービスが次に再起動されるまで有効になりません。
 
-- Data type: `BOOLEAN`
-- Default: false
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-The execution log of the tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -4,52 +4,52 @@ summary: Learn the basic concepts and working principles of RocksDB.
 category: reference
 ---
 
-# RocksDB Overview
+# RocksDBの概要 {#rocksdb-overview}
 
-[RocksDB](https://github.com/facebook/rocksdb) is an LSM-tree storage engine that provides key-value store and read-write functions. It is developed by Facebook and based on LevelDB. Key-value pairs written by the user are firstly inserted into Write Ahead Log (WAL) and then written to the SkipList in memory (a data structure called MemTable). LSM-tree engines convert the random modification (insertion) to sequential writes to the WAL file, so they provide better write throughput than B-tree engines.
+[RocksDB](https://github.com/facebook/rocksdb)は、Key-Valueストアおよび読み取り/書き込み機能を提供するLSMツリーストレージエンジンです。 Facebookによって開発され、LevelDBに基づいています。ユーザーが書き込んだキーと値のペアは、最初にログ先行書き込み（WAL）に挿入され、次にメモリ内のスキップリスト（MemTableと呼ばれるデータ構造）に書き込まれます。 LSMツリーエンジンは、ランダムな変更（挿入）をWALファイルへの順次書き込みに変換するため、Bツリーエンジンよりも優れた書き込みスループットを提供します。
 
-Once the data in memory reaches a certain size, RocksDB flushes the content into a Sorted String Table (SST) file in the disk. SST files are organized in multiple levels (the default is up to 6 levels). When the total size of a level reaches the threshold, RocksDB chooses part of the SST files and merges them into the next level. Each subsequent level is 10 times larger than the previous one, so 90% of the data is stored in the last layer.
+メモリ内のデータが特定のサイズに達すると、RocksDBはコンテンツをディスク内のSorted String Table（SST）ファイルにフラッシュします。 SSTファイルは複数のレベルで編成されています（デフォルトは最大6レベルです）。レベルの合計サイズがしきい値に達すると、RocksDBはSSTファイルの一部を選択し、それらを次のレベルにマージします。後続の各レベルは前のレベルの10倍であるため、データの90％が最後のレイヤーに格納されます。
 
-RocksDB allows users to create multiple Column Families (CFs). CFs have their own SkipList and SST files, and they share the same WAL file. In this way, different CFs can have different settings according to the application characteristics. It does not increase the number of writes to WAL at the same time.
+RocksDBを使用すると、ユーザーは複数の列ファミリー（CF）を作成できます。 CFには独自のSkipListファイルとSSTファイルがあり、同じWALファイルを共有します。このように、CFが異なれば、アプリケーションの特性に応じて設定も異なります。同時にWALへの書き込み回数が増えることはありません。
 
-## TiKV architecture
+## TiKVアーキテクチャ {#tikv-architecture}
 
-The architecture of TiKV is illustrated as follows:
+TiKVのアーキテクチャは次のように示されています。
 
 ![TiKV RocksDB](/media/tikv-rocksdb.png)
 
-As the storage engine of TiKV, RocksDB is used to store Raft logs and user data. All data in a TiKV node shares two RocksDB instances. One is for Raft log (often called raftdb), and the other is for user data and MVCC metadata (often called kvdb). There are four CFs in kvdb: raft, lock, default, and write:
+TiKVのストレージエンジンとして、RocksDBはRaftログとユーザーデータを保存するために使用されます。 TiKVノードのすべてのデータは2つのRocksDBインスタンスを共有します。 1つはRaftログ（多くの場合raftdbと呼ばれます）用で、もう1つはユーザーデータとMVCCメタデータ（多くの場合kvdbと呼ばれます）用です。 kvdbには、raft、lock、default、およびwriteの4つのCFがあります。
 
-* raft CF: Store metadata of each Region. It occupies only a very small amount of space, and users do not need to care.
-* lock CF: Store the pessimistic lock of pessimistic transactions and the Prewrite lock for distributed transactions. After the transaction is committed, the corresponding data in lock CF is deleted quickly. Therefore, the size of data in lock CF is usually very small (less than 1 GB). If the data in lock CF increases a lot, it means that a large number of transactions are waiting to be committed, and that the system meets a bug or failure.
-* write CF: Store the user's real written data and MVCC metadata (the start timestamp and commit timestamp of the transaction to which the data belongs). When the user writes a row of data, it is stored in the write CF if the data length is less than 255 bytes. Otherwise, it is stored in the default CF. In TiDB, the secondary index only occupies the space of write CF, since the value stored in the non-unique index is empty and the value stored in the unique index is the primary key index.
-* default CF: Store data longer than 255 bytes.
+-   raft CF：各リージョンのメタデータを保存します。占有するスペースはごくわずかで、ユーザーは気にする必要がありません。
+-   ロックCF：ペシミスティックトランザクションのペシミスティックロックと分散トランザクションのプリライトロックを保存します。トランザクションがコミットされた後、ロックCF内の対応するデータはすぐに削除されます。したがって、ロックCFのデータのサイズは通常非常に小さい（1 GB未満）。ロックCFのデータが大幅に増加する場合は、多数のトランザクションがコミットされるのを待機していること、およびシステムがバグまたは障害に遭遇したことを意味します。
+-   書き込みCF：ユーザーの実際に書き込まれたデータとMVCCメタデータ（データが属するトランザクションの開始タイムスタンプとコミットタイムスタンプ）を保存します。ユーザーがデータの行を書き込むとき、データ長が255バイト未満の場合、そのデータは書き込みCFに格納されます。それ以外の場合は、デフォルトのCFに保存されます。 TiDBでは、非一意インデックスに格納されている値が空であり、一意インデックスに格納されている値が主キーインデックスであるため、セカンダリインデックスは書き込みCFのスペースのみを占有します。
+-   デフォルトCF：255バイトより長いデータを保存します。
 
-## RocksDB memory usage
+## RocksDBのメモリ使用量 {#rocksdb-memory-usage}
 
-To improve the reading performance and reduce the reading operations to the disk, RocksDB divides the files stored on the disk into blocks based on a certain size (the default is 64 KB). When reading a block, it first checks if the data already exists in BlockCache in memory. If true, it can read the data directly from memory without accessing the disk.
+RocksDBは、読み取りパフォーマンスを向上させ、ディスクへの読み取り操作を減らすために、ディスクに保存されているファイルを特定のサイズ（デフォルトは64 KB）に基づいてブロックに分割します。ブロックを読み取るとき、最初にデータがメモリ内のBlockCacheにすでに存在するかどうかをチェックします。 trueの場合、ディスクにアクセスせずにメモリから直接データを読み取ることができます。
 
-BlockCache discards the least recently used data according to the LRU algorithm. By default, TiKV devotes 45% of the system memory to BlockCache. Users can also modify the `storage.block-cache.capacity` configuration to an appropriate value by themselves. However, it is not recommended to exceed 60% of the total system memory.
+BlockCacheは、LRUアルゴリズムに従って、最も使用頻度の低いデータを破棄します。デフォルトでは、TiKVはシステムメモリの45％をBlockCacheに割り当てます。ユーザーは、 `storage.block-cache.capacity`の構成を自分で適切な値に変更することもできます。ただし、システムメモリ全体の60％を超えることはお勧めしません。
 
-The data written to RocksDB is written to MemTable firstly. When the size of a MemTable exceeds 128 MB, it switches to a new MemTable. There are 2 RocksDB instances in TiKV, a total of 4 CFs. The size limit of a single MemTable for each CF is 128 MB. A maximum of 5 MemTables can exist at the same time; otherwise, the foreground writes is blocked. The memory occupied by this part is at most 2.5 GB (4 x 5 x 128 MB). It is not recommended to change this limit since it costs less memory.
+RocksDBに書き込まれるデータは、最初にMemTableに書き込まれます。 MemTableのサイズが128MBを超えると、新しいMemTableに切り替わります。 TiKVには2つのRocksDBインスタンス、合計4つのCFがあります。 CFごとの単一のMemTableのサイズ制限は128MBです。最大5つのMemTableが同時に存在できます。それ以外の場合、フォアグラウンド書き込みはブロックされます。この部分が占めるメモリは、最大で2.5 GB（4 x 5 x 128 MB）です。メモリのコストが少ないため、この制限を変更することはお勧めしません。
 
-## RocksDB space usage
+## RocksDBのスペース使用量 {#rocksdb-space-usage}
 
-* Multi-version: As RocksDB is a key-value storage engine with LSM-tree structure, the data in MemTable is flushed to L0 first. Because the file is arranged in the order of which they are generated, there might be overlap between the ranges of SSTs at the L0. As a result, the same key might have multiple versions in L0. When a file is merged from L0 to L1, it is cut into multiple files in a certain size (the default is 8 MB). The key range of each file on the same level does not overlap with each other, so there is only one version for each key on L1 and subsequent levels.
-* Space amplification: The total size of files on each level is x (the default is 10) times that of the previous level, so 90% of the data is stored in the last level. It also means that the space amplification of RocksDB does not exceed 1.11 (L0 has fewer data and can be ignored).
-* Space amplification of TiKV: TiKV has it's own MVCC strategy. When a user writes a key, the real data written to RocksDB is key + commit_ts, that is to say, the update and deletion also write a new key to RocksDB. TiKV deletes the old version of the data (through the Delete interface of RocksDB) at intervals, so it can be considered that the actual space of the data stored by the user on TiKV is enlarged to 1.11 plus the data written in the last 10 minutes (assuming that TiKV cleans up the old data promptly).
+-   マルチバージョン：RocksDBはLSMツリー構造のキー値ストレージエンジンであるため、MemTableのデータは最初にL0にフラッシュされます。ファイルは生成された順序で配置されているため、L0のSSTの範囲が重複している可能性があります。その結果、同じキーのL0に複数のバージョンが含まれる場合があります。ファイルがL0からL1にマージされると、特定のサイズ（デフォルトは8 MB）の複数のファイルにカットされます。同じレベルの各ファイルのキー範囲は互いに重複しないため、L1以降のレベルの各キーには1つのバージョンしかありません。
+-   スペースの増幅：各レベルのファイルの合計サイズは、前のレベルのx（デフォルトは10）倍であるため、データの90％が最後のレベルに保存されます。また、RocksDBのスペース増幅が1.11を超えないことも意味します（L0のデータは少なく、無視できます）。
+-   TiKVのスペース増幅：TiKVには独自のMVCC戦略があります。ユーザーがキーを書き込むと、RocksDBに書き込まれる実際のデータはkey + commit_tsになります。つまり、更新と削除によってRocksDBに新しいキーも書き込まれます。 TiKVは（RocksDBのDeleteインターフェイスを介して）古いバージョンのデータを定期的に削除するため、ユーザーがTiKVに保存したデータの実際のスペースは1.11に、過去10分間に書き込まれたデータを加えたものに拡大されたと見なすことができます。 （TiKVが古いデータをすぐにクリーンアップすると仮定します）。
 
-## RocksDB background threads and compaction
+## RocksDBのバックグラウンドスレッドと圧縮 {#rocksdb-background-threads-and-compaction}
 
-In RocksDB, operations such as converting the MemTable into SST files and merging SST files at various levels are performed in the background thread pool. The default size of the background thread pool is 8. When the number of CPUs in the machine is less than or equal to 8, the default size of the background thread pool is the number of CPUs minus one.
+RocksDBでは、MemTableをSSTファイルに変換したり、さまざまなレベルでSSTファイルをマージしたりするなどの操作がバックグラウンドスレッドプールで実行されます。バックグラウンドスレッドプールのデフォルトサイズは8です。マシン内のCPUの数が8以下の場合、バックグラウンドスレッドプールのデフォルトサイズはCPUの数から1を引いたものです。
 
-Generally speaking, users do not need to change this configuration. If the user deploys multiple TiKV instances on a machine, or the machine has a relatively high read load and a low write load, you can adjust the `rocksdb/max-background-jobs` to 3 or 4 as appropriate.
+一般的に、ユーザーはこの構成を変更する必要はありません。ユーザーがマシンに複数のTiKVインスタンスをデプロイする場合、またはマシンの読み取り負荷が比較的高く、書き込み負荷が低い場合は、必要に応じて`rocksdb/max-background-jobs`または4を調整できます。
 
-## WriteStall
+## WriteStall {#writestall}
 
-The L0 of RocksDB is different from other levels. The SSTs of L0 are arranged in the order of generation. The key ranges between the SSTs can overlap. Therefore, each SST in L0 must be queried in turn when a query is performed. In order not to affect query performance, WriteStall is triggered to block writing when there are too many files in L0.
+RocksDBのL0は他のレベルとは異なります。 L0のSSTは、生成順に並べられています。 SST間のキー範囲は重複する可能性があります。したがって、クエリを実行するときに、L0の各SSTを順番にクエリする必要があります。クエリのパフォーマンスに影響を与えないように、L0にファイルが多すぎる場合、WriteStallがトリガーされて書き込みがブロックされます。
 
-When encountering a sudden sharp increase in write delay, you can first check the **WriteStall Reason** metric on the Grafana RocksDB KV panel. If it is a WriteStall caused by too many L0 files, you can adjust the following configurations to 64.
+書き込み遅延が急激に増加した場合は、最初にGrafanaRocksDBKVパネルで**WriteStallReason**メトリックを確認できます。 L0ファイルが多すぎるために発生したWriteStallの場合は、次の構成を64に調整できます。
 
 ```
 rocksdb.defaultcf.level0-slowdown-writes-trigger

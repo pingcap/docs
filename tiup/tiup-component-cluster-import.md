@@ -2,69 +2,69 @@
 title: tiup cluster import
 ---
 
-# tiup cluster import
+# tiupクラスタのインポート {#tiup-cluster-import}
 
-Before TiDB v4.0, TiDB clusters were mainly deployed using TiDB Ansible. For TiDB v4.0 and later releases, TiUP Cluster provides the `import` command to transfer the clusters to the tiup-cluster component for management.
+TiDB v4.0より前は、TiDBクラスターは主にTiDBAnsibleを使用してデプロイされていました。 TiDB v4.0以降のリリースでは、TiUP Clusterは、管理のためにクラスターをtiup-clusterコンポーネントに転送するための`import`のコマンドを提供します。
 
-> **Note:**
+> **ノート：**
 >
-> + After importing the TiDB Ansible configuration to TiUP for management, **DO NOT** use TiDB Ansible for cluster operations anymore. Otherwise, conflicts might be caused due to inconsistent meta information.
-> + If the clusters deployed using TiDB Ansible are in any of the following situations, do not use the `import` command.
->     + Clusters with TLS encryption enabled
->     + Pure KV clusters (clusters without TiDB instances)
->     + Clusters with Kafka enabled
->     + Clusters with Spark enabled
->     + Clusters with TiDB Lightning/TiKV Importer enabled
->     + Clusters still using the old `push` mode to collect monitoring metrics (if you keep the default mode `pull` unchanged, using the `import` command is supported)
->     + Clusters in which the non-default ports (the ports configured in the `group_vars` directory are compatible) are separately configured in the `inventory.ini` configuration file using `node_exporter_port` / `blackbox_exporter_port`
-> + If some nodes in the cluster deployed using TiDB Ansible are deployed without monitoring components, you should first use TiDB Ansible to add the corresponding node information in the `monitored_servers` section of the `inventory.ini` file, and then use the `deploy.yaml` playbook to fully deploy monitoring components. Otherwise, when you perform maintenance operations after the cluster is imported into TiUP, errors might occur due to the lack of monitoring components.
+> -   管理のためにTiDBAnsible構成をTiUPにインポートした後は、クラスタ操作に**TiDBAnsible**を使用しないでください。そうしないと、一貫性のないメタ情報が原因で競合が発生する可能性があります。
+> -   TiDB Ansibleを使用してデプロイされたクラスターが次のいずれかの状況にある場合は、 `import`コマンドを使用しないでください。
+>     -   TLS暗号化が有効になっているクラスター
+>     -   純粋なKVクラスター（TiDBインスタンスのないクラスター）
+>     -   Kafkaが有効になっているクラスター
+>     -   Sparkが有効になっているクラスター
+>     -   TiDB Lightning/TiKVインポーターが有効になっているクラスター
+>     -   監視メトリックを収集するために引き続き古い`push`モードを使用しているクラスター（デフォルトのモード`pull`を変更しない場合は、 `import`コマンドの使用がサポートされます）
+>     -   デフォルト以外のポート（ `group_vars`ディレクトリで構成されたポートが互換性がある）が`node_exporter_port`を使用して`inventory.ini`構成ファイルで個別に構成されている`blackbox_exporter_port`
+> -   TiDB Ansibleを使用してデプロイされたクラスタの一部のノードがモニタリングコンポーネントなしでデプロイされる場合は、最初にTiDB Ansibleを使用して対応するノード情報を`inventory.ini`ファイルの`monitored_servers`セクションに追加し、次に`deploy.yaml`プレイブックを使用してモニタリングコンポーネントを完全にデプロイする必要があります。そうしないと、クラスタがTiUPにインポートされた後に保守操作を実行するときに、監視コンポーネントが不足しているためにエラーが発生する可能性があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster import [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -d, --dir
+### -d、-dir {#d-dir}
 
-- Specifies the directory where TiDB Ansible is located.
-- Data type: `STRING`
-- The option is enabled by default with the current directory (the default value) passed in.
+-   TiDBAnsibleが配置されているディレクトリを指定します。
+-   データ型： `STRING`
+-   このオプションは、現在のディレクトリ（デフォルト値）が渡された状態でデフォルトで有効になっています。
 
-### --ansible-config
+### --ansible-config {#ansible-config}
 
-- Specifies the path of the Ansible configuration file.
-- Data type: `STRING`
-- The option is enabled by default with `. /ansible.cfg` (the default value) passed in.
+-   Ansible構成ファイルのパスを指定します。
+-   データ型： `STRING`
+-   このオプションはデフォルトで有効になっており、 `. /ansible.cfg` （デフォルト値）が渡されます。
 
-### --inventory
+### - 在庫 {#inventory}
 
-- Specifies the name of the Ansible inventory file.
-- Data type: `STRING`
-- The option is enabled by default with `inventory.ini` (the default value) passed in.
+-   Ansibleインベントリファイルの名前を指定します。
+-   データ型： `STRING`
+-   このオプションはデフォルトで有効になっており、 `inventory.ini` （デフォルト値）が渡されます。
 
-### --no-backup
+### --バックアップなし {#no-backup}
 
-- Controls whether to disable the backup of files in the directory where TiDB Ansible is located.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. After a successful import, everything in the directory specified by the `-dir` option is backed up to the `${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup` directory. If there are multiple inventory files (when multiple clusters are deployed) in this directory, it is recommended to enable this option. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   TiDBAnsibleが配置されているディレクトリ内のファイルのバックアップを無効にするかどうかを制御します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。インポートが成功すると、 `-dir`オプションで指定されたディレクトリ内のすべてが`${TIUP_HOME}/.tiup/storage/cluster/clusters/{cluster-name}/ansible-backup`ディレクトリにバックアップされます。このディレクトリに複数のインベントリファイルがある場合（複数のクラスタが展開されている場合）、このオプションを有効にすることをお勧めします。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-### --rename
+### --名前を変更 {#rename}
 
-- Renames the imported cluster.
-- Data type: `STRING`
-- Default: NULL. If this option is not specified in the command, the cluster_name specified in inventory is used as the cluster name.
+-   インポートしたクラスタの名前を変更します。
+-   データ型： `STRING`
+-   デフォルト：NULL。このオプションがコマンドで指定されていない場合、inventoryで指定されたcluster_nameがクラスタ名として使用されます。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-Shows the logs of the import process.
+インポートプロセスのログを表示します。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

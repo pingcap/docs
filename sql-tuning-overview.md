@@ -2,14 +2,14 @@
 title: SQL Tuning Overview
 ---
 
-# SQL Tuning Overview
+# SQLチューニングの概要 {#sql-tuning-overview}
 
-SQL is a declarative language. That is, an SQL statement describes _what the final result should look like_ and not a set of steps to execute in sequence. TiDB will optimize the execution, and is semantically permitted to execute parts of the query in any order provided that it correctly returns the final result as described.
+SQLは宣言型言語です。つまり、SQLステートメントは、順番に実行する一連のステップではなく*、最終結果がどのようになるか*を記述します。 TiDBは実行を最適化し、説明されているように最終結果を正しく返すという条件で、クエリの一部を任意の順序で実行することを意味的に許可されます。
 
-A useful comparison to SQL optimization, is to describe what happens when you use GPS navigation. From your provided address, _2955 Campus Drive San Mateo CA 94403_, the GPS software plans the most time-efficient way to route you. It may make use of various statistics such as previous trips, meta data such as speed limits, and in modern cases, a live feed of traffic information. Several of these analogies translate to TiDB.
+SQL最適化との有用な比較は、GPSナビゲーションを使用したときに何が起こるかを説明することです。あなたが提供した住所、 *2955 Campus Drive San Mateo CA 94403*から、GPSソフトウェアはあなたをルーティングするための最も時間効率の良い方法を計画します。これは、以前の旅行などのさまざまな統計、制限速度などのメタデータ、および最近の場合は交通情報のライブフィードを利用する場合があります。これらのアナロジーのいくつかはTiDBに変換されます。
 
-This section introduces several concepts about query execution:
+このセクションでは、クエリの実行に関するいくつかの概念を紹介します。
 
-- [Understanding the Query Execution Plan](/explain-overview.md) introduces how to use the `EXPLAIN` statement to understand how TiDB has decided to execute a statement.
-- [SQL Optimization Process](/sql-optimization-concepts.md) introduces what optimizations TiDB is capable of using to improve query execution performance.
-- [Control Execution Plans](/control-execution-plan.md) introduces ways to control the generation of the execution plan. This can be useful in cases where the execution plan decided by TiDB is suboptimal.
+-   [クエリ実行プランを理解する](/explain-overview.md)は、TiDBがステートメントの実行をどのように決定したかを理解するために`EXPLAIN`ステートメントを使用する方法を紹介します。
+-   [SQL最適化プロセス](/sql-optimization-concepts.md)は、クエリ実行パフォーマンスを向上させるためにTiDBが使用できる最適化を示しています。
+-   [実行計画の管理](/control-execution-plan.md)は、実行プランの生成を制御する方法を紹介します。これは、TiDBによって決定された実行プランが最適ではない場合に役立ちます。

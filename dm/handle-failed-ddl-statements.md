@@ -3,38 +3,38 @@ title: Handle Failed DDL Statements
 summary: Learn how to handle failed DDL statements when you're using the TiDB Data Migration tool to migrate data.
 ---
 
-# Handle Failed DDL Statements
+# 失敗したDDLステートメントの処理 {#handle-failed-ddl-statements}
 
-This document introduces how to handle failed DDL statements when you're using the TiDB Data Migration (DM) tool to migrate data.
+このドキュメントでは、TiDBデータ移行（DM）ツールを使用してデータを移行するときに失敗したDDLステートメントを処理する方法を紹介します。
 
-Currently, TiDB is not completely compatible with all MySQL syntax (see [the DDL statements supported by TiDB](/mysql-compatibility.md#ddl)). Therefore, when DM is migrating data from MySQL to TiDB and TiDB does not support the corresponding DDL statement, an error might occur and break the migration process. In this case, you can use the `handle-error` command of DM to resume the migration.
+現在、TiDBはすべてのMySQL構文と完全に互換性があるわけではありません（ [TiDBでサポートされているDDLステートメント](/mysql-compatibility.md#ddl)を参照）。したがって、DMがMySQLからTiDBにデータを移行していて、TiDBが対応するDDLステートメントをサポートしていない場合、エラーが発生して移行プロセスが中断する可能性があります。この場合、DMの`handle-error`コマンドを使用して移行を再開できます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-If it is unacceptable in the actual production environment that the failed DDL statement is skipped in the downstream TiDB and it cannot be replaced with other DDL statements, then do not use this command.
+失敗したDDLステートメントがダウンストリームTiDBでスキップされ、他のDDLステートメントで置き換えることができないことが実際の実稼働環境で受け入れられない場合は、このコマンドを使用しないでください。
 
-For example, `DROP PRIMARY KEY`. In this scenario, you can only create a new table in the downstream with the new table schema (after executing the DDL statement), and re-import all the data into this new table.
+たとえば、 `DROP PRIMARY KEY` 。このシナリオでは、（DDLステートメントの実行後に）新しいテーブルスキーマを使用してダウンストリームに新しいテーブルを作成し、すべてのデータをこの新しいテーブルに再インポートすることしかできません。
 
-## Supported scenarios
+## サポートされているシナリオ {#supported-scenarios}
 
-During the migration, the DDL statement unsupported by TiDB is executed in the upstream and migrated to the downstream, and as a result, the migration task gets interrupted.
+移行中、TiDBでサポートされていないDDLステートメントがアップストリームで実行され、ダウンストリームに移行されます。その結果、移行タスクが中断されます。
 
-- If it is acceptable that this DDL statement is skipped in the downstream TiDB, then you can use `handle-error <task-name> skip` to skip migrating this DDL statement and resume the migration.
-- If it is acceptable that this DDL statement is replaced with other DDL statements, then you can use `handle-error <task-name> replace` to replace this DDL statement and resume the migration.
+-   このDDLステートメントがダウンストリームTiDBでスキップされることが許容される場合は、 `handle-error <task-name> skip`を使用して、このDDLステートメントの移行をスキップし、移行を再開できます。
+-   このDDLステートメントが他のDDLステートメントに置き換えられることが許容される場合は、 `handle-error <task-name> replace`を使用してこのDDLステートメントを置き換え、移行を再開できます。
 
-## Command
+## 指示 {#command}
 
-When you use dmctl to manually handle the failed DDL statements, the commonly used commands include `query-status` and `handle-error`.
+dmctlを使用して失敗したDDLステートメントを手動で処理する場合、一般的に使用されるコマンドには`query-status`と`handle-error`が含まれます。
 
-### query-status
+### クエリステータス {#query-status}
 
-The `query-status` command is used to query the current status of items such as the subtask and the relay unit in each MySQL instance. For details, see [query status](/dm/dm-query-status.md).
+`query-status`コマンドは、各MySQLインスタンスのサブタスクやリレーユニットなどのアイテムの現在のステータスを照会するために使用されます。詳細については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
 
-### handle-error
+### ハンドルエラー {#handle-error}
 
-The `handle-error` command is used to handle the failed DDL statements.
+`handle-error`コマンドは、失敗したDDLステートメントを処理するために使用されます。
 
-### Command usage
+### コマンドの使用法 {#command-usage}
 
 ```bash
 » handle-error -h
@@ -52,37 +52,37 @@ Global Flags:
   -s, --source strings   MySQL Source ID
 ```
 
-### Flags descriptions
+### フラグの説明 {#flags-descriptions}
 
-+ `task-name`:
-    - Non-flag parameter, string, required
-    - `task-name` specifies the name of the task in which the presetted operation is going to be executed.
+-   `task-name` ：
+    -   非フラグパラメータ、文字列、必須
+    -   `task-name`は、事前設定された操作が実行されるタスクの名前を指定します。
 
-+ `source`:
-    - Flag parameter, string, `--source`
-    - `source` specifies the MySQL instance in which the preset operation is to be executed.
+-   `source` ：
+    -   フラグパラメータ、文字列、 `--source`
+    -   `source`は、プリセット操作が実行されるMySQLインスタンスを指定します。
 
-+ `skip`: Skip the error
+-   `skip` ：エラーをスキップします
 
-+ `replace`: Replace the failed DDL statement
+-   `replace` ：失敗したDDLステートメントを置き換えます
 
-+ `revert`: Reset the previous skip/replace operation before the error occurs (only reset it when the previous skip/replace operation has not finally taken effect)
+-   `revert` ：エラーが発生する前に前のスキップ/置換操作をリセットします（前のスキップ/置換操作が最終的に有効になっていない場合にのみリセットします）
 
-+ `binlog-pos`:
-    - Flag parameter, string, `--binlog-pos`
-    - If it is not specified, DM automatically handles the currently failed DDL statement.
-    - If it is specified, the skip operation is executed when `binlog-pos` matches with the position of the binlog event. The format is `binlog-filename:binlog-pos`, for example, `mysql-bin|000001.000003:3270`.
-    - After the migration returns an error, the binlog position can be obtained from `position` in `startLocation` returned by `query-status`. Before the migration returns an error, the binlog position can be obtained by using [`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html) in the upstream MySQL instance.
+-   `binlog-pos` ：
+    -   フラグパラメータ、文字列、 `--binlog-pos`
+    -   指定されていない場合、DMは現在失敗しているDDLステートメントを自動的に処理します。
+    -   指定した場合、 `binlog-pos`がbinlogイベントの位置と一致するとスキップ操作が実行されます。形式は`binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270`です。
+    -   移行でエラーが返された後、binlogの位置は`query-status`で返された`startLocation`の`position`から取得できます。移行でエラーが返される前に、アップストリームのMySQLインスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-### Skip DDL if the migration gets interrupted
+### 移行が中断された場合はDDLをスキップします {#skip-ddl-if-the-migration-gets-interrupted}
 
-#### Non-shard-merge scenario
+#### 非シャードマージシナリオ {#non-shard-merge-scenario}
 
-Assume that you need to migrate the upstream table `db1.tbl1` to the downstream TiDB. The initial table schema is:
+アップストリームテーブル`db1.tbl1`をダウンストリームTiDBに移行する必要があると想定します。初期テーブルスキーマは次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE TABLE db1.tbl1;
@@ -100,23 +100,23 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+--------------------------------------------------+
 ```
 
-Now, the following DDL statement is executed in the upstream to alter the table schema (namely, alter DECIMAL(11, 3) of c2 into DECIMAL(10, 3)):
+ここで、次のDDLステートメントがアップストリームで実行され、テーブルスキーマが変更されます（つまり、c2のDECIMAL（11、3）がDECIMAL（10、3）に変更されます）。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE db1.tbl1 CHANGE c2 c2 DECIMAL (10, 3);
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task of DM gets interrupted. Execute the `query-status <task-name>` command, and you can see the following error:
+このDDLステートメントはTiDBでサポートされていないため、DMの移行タスクが中断されます。 `query-status <task-name>`コマンドを実行すると、次のエラーが表示されます。
 
 ```
 ERROR 8200 (HY000): Unsupported modify column: can't change decimal column precision
 ```
 
-Assume that it is acceptable in the actual production environment that this DDL statement is not executed in the downstream TiDB (namely, the original table schema is retained). Then you can use `handle-error <task-name> skip` to skip this DDL statement to resume the migration. The procedures are as follows:
+実際の実稼働環境では、このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが許容できると想定します。次に、 `handle-error <task-name> skip`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
-1. Execute `handle-error <task-name> skip` to skip the currently failed DDL statement:
+1.  `handle-error <task-name> skip`を実行して、現在失敗しているDDLステートメントをスキップします。
 
     {{< copyable "" >}}
 
@@ -139,7 +139,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     }
     ```
 
-2. Execute `query-status <task-name>` to view the task status:
+2.  `query-status <task-name>`を実行して、タスクのステータスを表示します。
 
     {{< copyable "" >}}
 
@@ -147,7 +147,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果をご覧ください。</summary>
 
     ```
     {
@@ -194,18 +194,18 @@ Assume that it is acceptable in the actual production environment that this DDL 
 
     </details>
 
-    You can see that the task runs normally and the wrong DDL is skipped.
+    タスクが正常に実行され、間違ったDDLがスキップされていることがわかります。
 
-#### Shard merge scenario
+#### シャードマージシナリオ {#shard-merge-scenario}
 
-Assume that you need to merge and migrate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream. The task mode is "pessimistic".
+アップストリームの次の4つのテーブルを、ダウンストリームの1つの同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると想定します。タスクモードは「悲観的」です。
 
-- MySQL instance 1 contains the `shard_db_1` schema, which includes the `shard_table_1` and `shard_table_2` tables.
-- MySQL instance 2 contains the `shard_db_2` schema, which includes the `shard_table_1` and `shard_table_2` tables.
+-   MySQLインスタンス1には、 `shard_table_1`つと`shard_table_2`のテーブルを含む`shard_db_1`のスキーマが含まれています。
+-   MySQLインスタンス2には、 `shard_table_1`つと`shard_table_2`のテーブルを含む`shard_db_2`のスキーマが含まれています。
 
-The initial table schema is:
+初期テーブルスキーマは次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE TABLE shard_db.shard_table;
@@ -222,15 +222,15 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-Now, execute the following DDL statement to all upstream sharded tables to alter their character set:
+次に、すべてのアップストリームシャードテーブルに対して次のDDLステートメントを実行して、文字セットを変更します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DANISH_CI;
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task of DM gets interrupted. Execute the `query-status` command, and you can see the following errors reported by the `shard_db_1`.`shard_table_1` table in MySQL instance 1 and the `shard_db_2`.`shard_table_1` table in MySQL instance 2:
+このDDLステートメントはTiDBでサポートされていないため、DMの移行タスクが中断されます。 `query-status`コマンドを実行すると、 `shard_db_1`によって報告された次のエラーが表示されます。 MySQLインスタンス1および`shard_db_2`の`shard_table_1`テーブル。 MySQLインスタンス2の`shard_table_1`テーブル：
 
 ```
 {
@@ -246,9 +246,9 @@ Because this DDL statement is not supported by TiDB, the migration task of DM ge
 }
 ```
 
-Assume that it is acceptable in the actual production environment that this DDL statement is not executed in the downstream TiDB (namely, the original table schema is retained). Then you can use `handle-error <task-name> skip` to skip this DDL statement to resume the migration. The procedures are as follows:
+実際の実稼働環境では、このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが許容できると想定します。次に、 `handle-error <task-name> skip`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
-1. Execute `handle-error <task-name> skip` to skip the currently failed DDL statements in MySQL instance 1 and 2:
+1.  `handle-error <task-name> skip`を実行して、MySQLインスタンス1および2で現在失敗しているDDLステートメントをスキップします。
 
     {{< copyable "" >}}
 
@@ -277,7 +277,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     }
     ```
 
-2. Execute the `query-status` command, and you can see the errors reported by the `shard_db_1`.`shard_table_2` table in MySQL instance 1 and the `shard_db_2`.`shard_table_2` table in MySQL instance 2:
+2.  `query-status`コマンドを実行すると、 `shard_db_1`によって報告されたエラーを確認できます。 MySQLインスタンス1および`shard_db_2`の`shard_table_2`テーブル。 MySQLインスタンス2の`shard_table_2`テーブル：
 
     ```
     {
@@ -293,7 +293,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     }
     ```
 
-3. Execute `handle-error <task-name> skip` again to skip the currently failed DDL statements in MySQL instance 1 and 2:
+3.  MySQLインスタンス1および2で現在失敗しているDDLステートメントをスキップするには、もう一度`handle-error <task-name> skip`を実行します。
 
     {{< copyable "" >}}
 
@@ -322,7 +322,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     }
     ```
 
-4. Use `query-status <task-name>` to view the task status:
+4.  `query-status <task-name>`を使用して、タスクのステータスを表示します。
 
     {{< copyable "" >}}
 
@@ -330,7 +330,7 @@ Assume that it is acceptable in the actual production environment that this DDL 
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果をご覧ください。</summary>
 
     ```
     {
@@ -411,15 +411,15 @@ Assume that it is acceptable in the actual production environment that this DDL 
 
     </details>
 
-    You can see that the task runs normally with no error and all four wrong DDL statements are skipped.
+    タスクがエラーなしで正常に実行され、4つの間違ったDDLステートメントがすべてスキップされていることがわかります。
 
-### Replace DDL if the migration gets interrupted
+### 移行が中断された場合は、DDLを置き換えます {#replace-ddl-if-the-migration-gets-interrupted}
 
-#### Non-shard-merge scenario
+#### 非シャードマージシナリオ {#non-shard-merge-scenario}
 
-Assume that you need to migrate the upstream table `db1.tbl1` to the downstream TiDB. The initial table schema is:
+アップストリームテーブル`db1.tbl1`をダウンストリームTiDBに移行する必要があると想定します。初期テーブルスキーマは次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE TABLE db1.tbl1;
@@ -436,15 +436,15 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-Now, perform the following DDL operation in the upstream to add a new column with the UNIQUE constraint:
+次に、アップストリームで次のDDL操作を実行して、UNIQUE制約を持つ新しい列を追加します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task gets interrupted. Execute the `query-status` command, and you can see the following error:
+このDDLステートメントはTiDBでサポートされていないため、移行タスクは中断されます。 `query-status`コマンドを実行すると、次のエラーが表示されます。
 
 ```
 {
@@ -453,9 +453,9 @@ Because this DDL statement is not supported by TiDB, the migration task gets int
 }
 ```
 
-You can replace this DDL statement with two equivalent DDL statements. The steps are as follows:
+このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
 
-1. Replace the wrong DDL statement by the following command:
+1.  間違ったDDLステートメントを次のコマンドで置き換えます。
 
     {{< copyable "" >}}
 
@@ -478,7 +478,7 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
     }
     ```
 
-2. Use `query-status <task-name>` to view the task status:
+2.  `query-status <task-name>`を使用して、タスクのステータスを表示します。
 
     {{< copyable "" >}}
 
@@ -486,7 +486,7 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果をご覧ください。</summary>
 
     ```
     {
@@ -533,18 +533,18 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
 
     </details>
 
-    You can see that the task runs normally and the wrong DDL statement is replaced by new DDL statements that execute successfully.
+    タスクが正常に実行され、間違ったDDLステートメントが正常に実行される新しいDDLステートメントに置き換えられていることがわかります。
 
-#### Shard merge scenario
+#### シャードマージシナリオ {#shard-merge-scenario}
 
-Assume that you need to merge and migrate the following four tables in the upstream to one same table ``` `shard_db`.`shard_table` ``` in the downstream. The task mode is "pessimistic".
+アップストリームの次の4つのテーブルを、ダウンストリームの1つの同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると想定します。タスクモードは「悲観的」です。
 
-- In the MySQL instance 1, there is a schema `shard_db_1`, which has two tables `shard_table_1` and `shard_table_2`.
-- In the MySQL instance 2, there is a schema `shard_db_2`, which has two tables `shard_table_1` and `shard_table_2`.
+-   MySQLインスタンス1には、2つのテーブル`shard_table_1`と`shard_table_2`を持つスキーマ`shard_db_1`があります。
+-   MySQLインスタンス2には、2つのテーブル`shard_table_1`と`shard_table_2`を持つスキーマ`shard_db_2`があります。
 
-The initial table schema is:
+初期テーブルスキーマは次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE TABLE shard_db.shard_table;
@@ -561,15 +561,15 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-Now, perform the following DDL operation to all upstream sharded tables to add a new column with the UNIQUE constraint:
+次に、すべてのアップストリームシャードテーブルに対して次のDDL操作を実行して、UNIQUE制約を持つ新しい列を追加します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 ```
 
-Because this DDL statement is not supported by TiDB, the migration task gets interrupted. Execute the `query-status` command, and you can see the following errors reported by the `shard_db_1`.`shard_table_1` table in MySQL instance 1 and the `shard_db_2`.`shard_table_1` table in MySQL instance 2:
+このDDLステートメントはTiDBでサポートされていないため、移行タスクは中断されます。 `query-status`コマンドを実行すると、 `shard_db_1`によって報告された次のエラーが表示されます。 MySQLインスタンス1および`shard_db_2`の`shard_table_1`テーブル。 MySQLインスタンス2の`shard_table_1`テーブル：
 
 ```
 {
@@ -585,9 +585,9 @@ Because this DDL statement is not supported by TiDB, the migration task gets int
 }
 ```
 
-You can replace this DDL statement with two equivalent DDL statements. The steps are as follows:
+このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
 
-1. Replace the wrong DDL statements respectively in MySQL instance 1 and MySQL instance 2 by the following commands:
+1.  次のコマンドで、MySQLインスタンス1とMySQLインスタンス2のそれぞれ間違ったDDLステートメントを置き換えます。
 
     {{< copyable "" >}}
 
@@ -631,7 +631,7 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
     }
     ```
 
-2. Use `query-status <task-name>` to view the task status, and you can see the following errors reported by the `shard_db_1`.`shard_table_2` table in MySQL instance 1 and the `shard_db_2`.`shard_table_2` table in MySQL instance 2:
+2.  `query-status <task-name>`を使用してタスクのステータスを表示すると、 `shard_db_1`によって報告された次のエラーを確認できます。 MySQLインスタンス1および`shard_db_2`の`shard_table_2`テーブル。 MySQLインスタンス2の`shard_table_2`テーブル：
 
     ```
     {
@@ -645,7 +645,7 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
     }
     ```
 
-3. Execute `handle-error <task-name> replace` again to replace the wrong DDL statements in MySQL instance 1 and 2:
+3.  MySQLインスタンス1および2の間違ったDDLステートメントを置き換えるには、もう一度`handle-error <task-name> replace`を実行します。
 
     {{< copyable "" >}}
 
@@ -689,7 +689,7 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
     }
     ```
 
-4. Use `query-status <task-name>` to view the task status:
+4.  `query-status <task-name>`を使用して、タスクのステータスを表示します。
 
     {{< copyable "" >}}
 
@@ -697,7 +697,7 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
     » query-status test
     ```
 
-    <details><summary> See the execution result.</summary>
+    <details><summary>実行結果をご覧ください。</summary>
 
     ```
     {
@@ -782,4 +782,4 @@ You can replace this DDL statement with two equivalent DDL statements. The steps
 
     </details>
 
-    You can see that the task runs normally with no error and all four wrong DDL statements are replaced.
+    タスクがエラーなしで正常に実行され、4つの間違ったDDLステートメントがすべて置き換えられていることがわかります。

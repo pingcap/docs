@@ -3,74 +3,74 @@ title: AUTO_RANDOM
 summary: Learn the AUTO_RANDOM attribute.
 ---
 
-# AUTO_RANDOM <span class="version-mark">New in v3.1.0</span>
+# AUTO_RANDOMv3.1.0<span class="version-mark">の新機能</span> {#auto-random-span-class-version-mark-new-in-v3-1-0-span}
 
-> **Note:**
+> **ノート：**
 >
-> `AUTO_RANDOM` was marked as stable in v4.0.3.
+> `AUTO_RANDOM`はv4.0.3で安定としてマークされました。
 
-## User scenario
+## ユーザーシナリオ {#user-scenario}
 
-When you write data intensively into TiDB and TiDB has the table with a primary key of the auto-increment integer type, hotspot issue might occur. To solve the hotspot issue, you can use the `AUTO_RANDOM` attribute. Refer to [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md#complex-hotspot-problems) for details.
+データをTiDBに集中的に書き込む場合、TiDBに自動インクリメント整数型の主キーを持つテーブルがあると、ホットスポットの問題が発生する可能性があります。ホットスポットの問題を解決するには、 `AUTO_RANDOM`属性を使用できます。詳細は[非常に同時の書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md#complex-hotspot-problems)を参照してください。
 
-Take the following created table as an example:
+例として、次の作成されたテーブルを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a bigint PRIMARY KEY AUTO_INCREMENT, b varchar(255))
 ```
 
-On this `t` table, you execute a large number of `INSERT` statements that do not specify the values of the primary key as below:
+この`t`のテーブルで、次のように主キーの値を指定しない`INSERT`のステートメントを多数実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t(b) VALUES ('a'), ('b'), ('c')
 ```
 
-In the above statement, values of the primary key (column `a`) are not specified, so TiDB uses the continuous auto-increment row values as the row IDs, which might cause write hotspot in a single TiKV node and affect the performance. To avoid such write hotspot, you can specify the `AUTO_RANDOM` attribute rather than the `AUTO_INCREMENT` attribute for the column `a` when you create the table. See the follow examples:
+上記のステートメントでは、主キー（列`a` ）の値が指定されていないため、TiDBは行IDとして連続自動インクリメント行値を使用します。これにより、単一のTiKVノードで書き込みホットスポットが発生し、パフォーマンスに影響を与える可能性があります。このような書き込みホットスポットを回避するために、テーブルの作成時に列`a`の`AUTO_INCREMENT`属性ではなく`AUTO_RANDOM`属性を指定できます。次の例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM, b varchar(255))
 ```
 
-or
+また
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a bigint AUTO_RANDOM, b varchar(255), PRIMARY KEY (a))
 ```
 
-Then execute the `INSERT` statement such as `INSERT INTO t(b) VALUES...`. Now the results will be as follows:
+次に、 `INSERT INTO t(b) VALUES...`などの`INSERT`ステートメントを実行します。これで、結果は次のようになります。
 
-+ Implicitly allocating values: If the `INSERT` statement does not specify the values of the integer primary key column (column `a`) or specify the value as `NULL`, TiDB automatically allocates values to this column. These values are not necessarily auto-increment or continuous but are unique, which avoids the hotspot problem caused by continuous row IDs.
-+ Explicitly inserting values: If the `INSERT` statement explicitly specifies the values of the integer primary key column, TiDB saves these values, which works similarly to the `AUTO_INCREMENT` attribute. Note that if you do not set `NO_AUTO_VALUE_ON_ZERO` in the `@@sql_mode` system variable, TiDB will automatically allocate values to this column even if you explicitly specify the value of the integer primary key column as `0`.
+-   値の暗黙的な割り当て： `INSERT`ステートメントで整数主キー列（列`a` ）の値が指定されていない場合、または値が`NULL`として指定されていない場合、TiDBはこの列に値を自動的に割り当てます。これらの値は、必ずしも自動インクリメントまたは連続である必要はありませんが、一意であるため、連続行IDによって引き起こされるホットスポットの問題を回避できます。
+-   値の明示的な挿入： `INSERT`ステートメントが整数主キー列の値を明示的に指定する場合、TiDBはこれらの値を保存します。これは、 `AUTO_INCREMENT`属性と同様に機能します。 `@@sql_mode`システム変数に`NO_AUTO_VALUE_ON_ZERO`を設定しない場合、整数主キー列の値を`0`として明示的に指定しても、TiDBはこの列に値を自動的に割り当てることに注意してください。
 
-> **Note:**
+> **ノート：**
 >
-> Since v4.0.3, if you want to insert values explicitly, set the value of the `@@allow_auto_random_explicit_insert` system variable to `1` (`0` by default). This explicit insertion is not supported by default and the reason is documented in the [restrictions](#restrictions) section.
+> v4.0.3以降、値を明示的に挿入する場合は、 `@@allow_auto_random_explicit_insert`システム変数の値を`1` （デフォルトでは`0` ）に設定します。この明示的な挿入はデフォルトではサポートされておらず、その理由は[制限](#restrictions)セクションに記載されています。
 
-TiDB automatically allocates values in the following way:
+TiDBは、次の方法で値を自動的に割り当てます。
 
-The highest five digits (ignoring the sign bit) of the row value in binary (namely, shard bits) are determined by the starting time of the current transaction. The remaining digits are allocated values in an auto-increment order.
+バイナリ（つまり、シャードビット）の行値の上位5桁（符号ビットを無視）は、現在のトランザクションの開始時刻によって決定されます。残りの桁には、自動インクリメント順に値が割り当てられます。
 
-To use different number of shard bits, append a pair of parentheses to `AUTO_RANDOM` and specify the desired number of shard bits in the parentheses. See the following example:
+異なる数のシャードビットを使用するには、 `AUTO_RANDOM`に括弧のペアを追加し、括弧内に必要な数のシャードビットを指定します。次の例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM(3), b varchar(255))
 ```
 
-In the above `CREATE TABLE` statement, `3` shard bits are specified. The range of the number of shard bits is `[1, 16)`.
+上記の`CREATE TABLE`のステートメントでは、 `3`のシャードビットが指定されています。シャードビット数の範囲は`[1, 16)`です。
 
-After creating the table, use the `SHOW WARNINGS` statement to see the maximum number of implicit allocations supported by the current table:
+テーブルを作成した後、 `SHOW WARNINGS`ステートメントを使用して、現在のテーブルでサポートされている暗黙的な割り当ての最大数を確認します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW WARNINGS
@@ -84,15 +84,15 @@ SHOW WARNINGS
 +-------+------+----------------------------------------------------------+
 ```
 
-> **Note:**
+> **ノート：**
 >
-> Since v4.0.3, the type of the `AUTO_RANDOM` column can only be `BIGINT`. This is to ensure the maximum number of implicit allocations.
+> v4.0.3以降、 `AUTO_RANDOM`列のタイプは`BIGINT`のみになります。これは、暗黙的な割り当ての最大数を確保するためです。
 
-In addition, to view the shard bit number of the table with the `AUTO_RANDOM` attribute, you can see the value of the `PK_AUTO_RANDOM_BITS=x` mode in the `TIDB_ROW_ID_SHARDING_INFO` column in the `information_schema.tables` system table. `x` is the number of shard bits.
+さらに、 `AUTO_RANDOM`属性を持つテーブルのシャードビット番号を表示するには、 `information_schema.tables`システムテーブルの`TIDB_ROW_ID_SHARDING_INFO`列に`PK_AUTO_RANDOM_BITS=x`モードの値を表示できます。 `x`はシャードビットの数です。
 
-Values allocated to the `AUTO_RANDOM` column affect `last_insert_id()`. You can use `SELECT last_insert_id ()` to get the ID that TiDB last implicitly allocates. For example:
+`AUTO_RANDOM`列に割り当てられた値は`last_insert_id()`に影響します。 `SELECT last_insert_id ()`を使用して、TiDBが最後に暗黙的に割り当てるIDを取得できます。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t (b) VALUES ("b")
@@ -100,7 +100,7 @@ SELECT * FROM t;
 SELECT last_insert_id()
 ```
 
-You might see the following result:
+次の結果が表示される場合があります。
 
 ```
 +------------+---+
@@ -115,35 +115,35 @@ You might see the following result:
 +------------------+
 ```
 
-## Compatibility
+## 互換性 {#compatibility}
 
-TiDB supports parsing the version comment syntax. See the following example:
+TiDBは、バージョンコメント構文の解析をサポートしています。次の例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a bigint PRIMARY KEY /*T![auto_rand] auto_random */)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a bigint PRIMARY KEY AUTO_RANDOM)
 ```
 
-The above two statements have the same meaning.
+上記の2つのステートメントは同じ意味です。
 
-In the result of `SHOW CREATE TABLE`, the `AUTO_RANDOM` attribute is commented out. This comment includes an attribute identifier (for example, `/*T![auto_rand] auto_random */`). Here `auto_rand` represents the `AUTO_RANDOM` attribute. Only the version of TiDB that implements the feature corresponding to this identifier can parse the SQL statement fragment properly.
+`SHOW CREATE TABLE`の結果では、 `AUTO_RANDOM`属性がコメント化されています。このコメントには、属性識別子（たとえば、 `/*T![auto_rand] auto_random */` ）が含まれます。ここで、 `auto_rand`は`AUTO_RANDOM`属性を表します。この識別子に対応する機能を実装するバージョンのTiDBのみが、SQLステートメントフラグメントを適切に解析できます。
 
-This attribute supports forward compatibility, namely, downgrade compatibility. TiDB of earlier versions that do not implement this feature ignore the `AUTO_RANDOM` attribute of a table (with the above comment) and can also use the table with the attribute.
+この属性は、上位互換性、つまりダウングレード互換性をサポートします。この機能を実装していない以前のバージョンのTiDBは、テーブルの`AUTO_RANDOM`属性（上記のコメント付き）を無視し、その属性でテーブルを使用することもできます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-Pay attention to the following restrictions when you use `AUTO_RANDOM`:
+`AUTO_RANDOM`を使用する場合は、次の制限に注意してください。
 
-- Specify this attribute for the primary key column **ONLY** of integer type. Otherwise, an error might occur. In addition, when the attribute of the primary key is `NONCLUSTERED`, `AUTO_RANDOM` is not supported even on the integer primary key. For more details about the primary key of the `CLUSTERED` type, refer to [clustered index](/clustered-indexes.md).
-- You cannot use `ALTER TABLE` to modify the `AUTO_RANDOM` attribute, including adding or removing this attribute.
-- You cannot change the column type of the primary key column that is specified with `AUTO_RANDOM` attribute.
-- You cannot specify `AUTO_RANDOM` and `AUTO_INCREMENT` for the same column at the same time.
-- You cannot specify `AUTO_RANDOM` and `DEFAULT` (the default value of a column) for the same column at the same time.
-- It is **not** recommended that you explicitly specify a value for the column with the `AUTO_RANDOM` attribute when you insert data. Otherwise, the numeral values that can be automatically allocated for this table might be used up in advance.
+-   この属性は、整数型の主キー列に**のみ**指定してください。そうしないと、エラーが発生する可能性があります。また、主キーの属性が`NONCLUSTERED`の場合、整数の主キーでも`AUTO_RANDOM`はサポートされません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
+-   `ALTER TABLE`を使用して、この属性の追加または削除を含め、 `AUTO_RANDOM`属性を変更することはできません。
+-   `AUTO_RANDOM`属性で指定された主キー列の列タイプは変更できません。
+-   同じ列に`AUTO_RANDOM`と`AUTO_INCREMENT`を同時に指定することはできません。
+-   同じ列に`AUTO_RANDOM`と`DEFAULT` （列のデフォルト値）を同時に指定することはできません。
+-   データを挿入するときに、 `AUTO_RANDOM`属性を持つ列の値を明示的に指定することは**お**勧めしません。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされる可能性があります。

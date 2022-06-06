@@ -3,60 +3,60 @@ title: LOAD DATA | TiDB SQL Statement Reference
 summary: An overview of the usage of LOAD DATA for the TiDB database.
 ---
 
-# LOAD DATA
+# データを読み込む {#load-data}
 
-The `LOAD DATA` statement batch loads data into a TiDB table.
+`LOAD DATA`ステートメントバッチはデータをTiDBテーブルにロードします。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 LoadDataStmt ::=
     'LOAD' 'DATA' LocalOpt 'INFILE' stringLit DuplicateOpt 'INTO' 'TABLE' TableName CharsetOpt Fields Lines IgnoreLines ColumnNameOrUserVarListOptWithBrackets LoadDataSetSpecOpt
 ```
 
-## Parameters
+## パラメーター {#parameters}
 
-### `LocalOpt`
+### <code>LocalOpt</code> {#code-localopt-code}
 
-You can specify that the imported data file is located on the client or on the server by configuring the `LocalOpt` parameter. Currently, TiDB only supports data import from the client. Therefore, when importing data, set the value of `LocalOpt` to `Local`.
+`LocalOpt`パラメーターを構成することにより、インポートされたデータファイルがクライアントまたはサーバーに配置されるように指定できます。現在、TiDBはクライアントからのデータインポートのみをサポートしています。したがって、データをインポートするときは、値`LocalOpt`を設定して`Local` 。
 
-### `Fields` and `Lines`
+### <code>Fields</code>と<code>Lines</code> {#code-fields-code-and-code-lines-code}
 
-You can specify how to process the data format by configuring the `Fields` and `Lines` parameters.
+`Fields`および`Lines`パラメーターを構成することにより、データ形式の処理方法を指定できます。
 
-- `FIELDS TERMINATED BY`: Specifies the separating character of each data.
-- `FIELDS ENCLOSED BY`: Specifies the enclosing character of each data.
-- `LINES TERMINATED BY`: Specifies the line terminator, if you want to end a line with a certain character.
+-   `FIELDS TERMINATED BY` ：各データの区切り文字を指定します。
+-   `FIELDS ENCLOSED BY` ：各データの囲み文字を指定します。
+-   `LINES TERMINATED BY` ：特定の文字で行を終了する場合は、行末記号を指定します。
 
-Take the following data format as an example:
+例として、次のデータ形式を取り上げます。
 
 ```
 "bob","20","street 1"\r\n
 "alice","33","street 1"\r\n
 ```
 
-If you want to extract `bob`, `20`, and `street 1`, specify the separating character as `','`, and the enclosing character as `'\"'`:
+`bob` 、および`20`を抽出する場合は、区切り文字を`street 1`として指定し、囲み文字を`','`として指定し`'\"'` 。
 
 ```sql
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-If you do not specify the parameters above, the imported data is processed in the following way by default:
+上記のパラメータを指定しない場合、インポートされたデータはデフォルトで次の方法で処理されます。
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY ''
 LINES TERMINATED BY '\n'
 ```
 
-### `IGNORE number LINES`
+### <code>IGNORE number LINES</code> {#code-ignore-number-lines-code}
 
-You can ignore the first `number` lines of a file by configuring the `IGNORE number LINES` parameter. For example, if you configure `IGNORE 1 LINES`, the first line of a file is ignored.
+`IGNORE number LINES`パラメータを設定することにより、ファイルの最初の`number`行を無視できます。たとえば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行は無視されます。
 
-In addition, TiDB currently only supports parsing the syntax of the `DuplicateOpt`, `CharsetOpt`, and `LoadDataSetSpecOpt` parameters.
+さらに、TiDBは現在、 `DuplicateOpt` 、および`CharsetOpt`パラメーターの構文解析のみをサポートして`LoadDataSetSpecOpt`ます。
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE trips (
@@ -77,11 +77,11 @@ CREATE TABLE trips (
 Query OK, 0 rows affected (0.14 sec)
 ```
 
-The following example imports data using `LOAD DATA`. Comma is specified as the separating character. The double quotation marks that enclose the data is ignored. The first line of the file is ignored.
+次の例では、 `LOAD DATA`を使用してデータをインポートします。区切り文字としてコンマを指定します。データを囲む二重引用符は無視されます。ファイルの最初の行は無視されます。
 
-If you see the error message `ERROR 1148 (42000): the used command is not allowed with this TiDB version`, refer to [ERROR 1148 (42000): the used command is not allowed with this TiDB version](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version).
+エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されたコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
@@ -92,28 +92,28 @@ Query OK, 815264 rows affected (39.63 sec)
 Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ```
 
-`LOAD DATA` also supports using hexadecimal ASCII character expressions or binary ASCII character expressions as the parameters for `FIELDS ENCLOSED BY` and `FIELDS TERMINATED BY`. See the following example:
+`LOAD DATA`は、 `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`のパラメーターとして16進ASCII文字式または2進ASCII文字式の使用もサポートします。次の例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY x'2c' ENCLOSED BY b'100010' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
 ```
 
-In the above example, `x'2c'` is the hexadecimal representation of the `,` character and `b'100010'` is the binary representation of the `"` character.
+上記の例では、 `x'2c'`は`,`文字の16進表現であり、 `b'100010'`は`"`文字の2進表現です。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL except for the `LOAD DATA...REPLACE INTO` syntax [#24515](https://github.com/pingcap/tidb/issues/24515). Any other compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、 `LOAD DATA...REPLACE INTO`構文[＃24515](https://github.com/pingcap/tidb/issues/24515)を除いて、MySQLと完全に互換性があると理解されています。その他の互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> In earlier releases of TiDB, `LOAD DATA` committed every 20000 rows. By default, TiDB now commits all rows in one transaction. This can result in the error `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058` after upgrading from TiDB 4.0 or earlier versions.
+> TiDBの以前のリリースでは、20000行ごとに`LOAD DATA`コミットされていました。デフォルトでは、TiDBは1つのトランザクションですべての行をコミットするようになりました。これにより、TiDB4.0以前のバージョンからアップグレードした後にエラー`ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。
 >
-> The recommended way to resolve this error is to increase the `txn-total-size-limit` value in your `tidb.toml` file. If you are unable to increase this limit, you can also restore the previous behavior by setting [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size) to `20000`.
+> このエラーを解決するための推奨される方法は、 `tidb.toml`ファイルの`txn-total-size-limit`の値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`に設定して、以前の動作を復元することもできます。
 
-## See also
+## も参照してください {#see-also}
 
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [Import Example Database](/import-example-data.md)
-* [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [サンプルデータベースのインポート](/import-example-data.md)
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)

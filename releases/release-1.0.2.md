@@ -2,27 +2,27 @@
 title: TiDB 1.0.2 Release Notes
 ---
 
-# TiDB 1.0.2 Release Notes
+# TiDB1.0.2リリースノート {#tidb-1-0-2-release-notes}
 
-On November 13, 2017, TiDB 1.0.2 is released with the following updates:
+2017年11月13日、TiDB1.0.2がリリースされました。アップデートは次のとおりです。
 
-## TiDB
+## TiDB {#tidb}
 
-- Optimize the cost estimation of index point query
-- Support the `Alter Table Add Column (ColumnDef ColumnPosition)` syntax
-- Optimize the queries whose `where` conditions are contradictory
-- Optimize the `Add Index` operation to rectify the progress and reduce repetitive operations
-- Optimize the `Index Look Join` operator to accelerate the query speed for small data size
-- Fix the issue with prefix index judgment
+-   インデックスポイントクエリのコスト見積もりを最適化する
+-   `Alter Table Add Column (ColumnDef ColumnPosition)`構文をサポートする
+-   `where`の条件が矛盾するクエリを最適化する
+-   `Add Index`の操作を最適化して、進行状況を修正し、繰り返しの操作を減らします
+-   `Index Look Join`演算子を最適化して、データサイズが小さい場合のクエリ速度を高速化します
+-   プレフィックスインデックスの判断に関する問題を修正します
 
-## Placement Driver (PD)
+## 配置ドライバー（PD） {#placement-driver-pd}
 
-- Improve the stability of scheduling under exceptional situations
+-   例外的な状況でのスケジューリングの安定性を向上させる
 
-## TiKV
+## TiKV {#tikv}
 
-- Support splitting table to ensure one region does not contain data from multiple tables
-- Limit the length of a key to be no more than 4 KB
-- More accurate read traffic statistics
-- Implement deep protection on the coprocessor stack
-- Fix the `LIKE` behavior and the `do_div_mod` bug
+-   テーブルの分割をサポートして、1つのリージョンに複数のテーブルのデータが含まれないようにします
+-   キーの長さを4KB以下に制限します
+-   より正確な読み取りトラフィック統計
+-   コプロセッサースタックに深い保護を実装する
+-   `LIKE`の動作と`do_div_mod`のバグを修正

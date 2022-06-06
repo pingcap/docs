@@ -3,21 +3,21 @@ title: SHARD_ROW_ID_BITS
 summary: Learn the SHARD_ROW_ID_BITS attribute.
 ---
 
-# SHARD_ROW_ID_BITS
+# SHARD_ROW_ID_BITS {#shard-row-id-bits}
 
-This document introduces the `SHARD_ROW_ID_BITS` table attribute, which is used to set the number of bits of the shards after the implicit `_tidb_rowid` is sharded.
+このドキュメントでは、暗黙の`_tidb_rowid`がシャーディングされた後にシャードのビット数を設定するために使用される`SHARD_ROW_ID_BITS`テーブル属性を紹介します。
 
-## Concept
+## 概念 {#concept}
 
-For the tables with a non-integer primary key or no primary key, TiDB uses an implicit auto-increment row ID. When a large number of `INSERT` operations are performed, the data is written into a single Region, causing a write hot spot.
+非整数の主キーがあるテーブルまたは主キーがないテーブルの場合、TiDBは暗黙の自動インクリメント行IDを使用します。 `INSERT`の操作を多数実行すると、データが1つのリージョンに書き込まれ、書き込みホットスポットが発生します。
 
-To mitigate the hot spot issue, you can configure `SHARD_ROW_ID_BITS`. The row IDs are scattered and the data are written into multiple different Regions. But setting an overlarge value might lead to an excessively large number of RPC requests, which increases the CPU and network overheads.
+ホットスポットの問題を軽減するために、 `SHARD_ROW_ID_BITS`を構成できます。行IDは分散しており、データは複数の異なるリージョンに書き込まれます。ただし、値が大きすぎると、RPC要求の数が多すぎて、CPUとネットワークのオーバーヘッドが増加する可能性があります。
 
-- `SHARD_ROW_ID_BITS = 4` indicates 16 shards
-- `SHARD_ROW_ID_BITS = 6` indicates 64 shards
-- `SHARD_ROW_ID_BITS = 0` indicates the default 1 shard
+-   `SHARD_ROW_ID_BITS = 4`は16個のシャードを示します
+-   `SHARD_ROW_ID_BITS = 6`は64個のシャードを示します
+-   `SHARD_ROW_ID_BITS = 0`はデフォルトの1シャードを示します
 
-## Examples
+## 例 {#examples}
 
-- `CREATE TABLE`: `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
-- `ALTER TABLE`: `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`
+-   `CREATE TABLE` ： `CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;`
+-   `ALTER TABLE` ： `ALTER TABLE t SHARD_ROW_ID_BITS = 4;`

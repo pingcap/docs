@@ -3,18 +3,18 @@ title: DELETE | TiDB SQL Statement Reference
 summary: An overview of the usage of DELETE for the TiDB database.
 ---
 
-# DELETE
+# 消去 {#delete}
 
-The `DELETE` statement removes rows from a specified table.
+`DELETE`ステートメントは、指定されたテーブルから行を削除します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DeleteFromStmt ::=
     'DELETE' TableOptimizerHints PriorityOpt QuickOptional IgnoreOptional ( 'FROM' ( TableName TableAsNameOpt IndexHintListOpt WhereClauseOptional OrderByOptional LimitClause | TableAliasRefList 'USING' TableRefs WhereClauseOptional ) | TableAliasRefList 'FROM' TableRefs WhereClauseOptional )
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -51,13 +51,13 @@ mysql> SELECT * FROM t1;
 4 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [SELECT](/sql-statements/sql-statement-select.md)
-* [UPDATE](/sql-statements/sql-statement-update.md)
-* [REPLACE](/sql-statements/sql-statement-replace.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [アップデート](/sql-statements/sql-statement-update.md)
+-   [交換](/sql-statements/sql-statement-replace.md)

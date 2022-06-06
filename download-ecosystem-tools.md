@@ -3,88 +3,88 @@ title: Download TiDB Tools
 summary: Download the most officially maintained versions of TiDB tools.
 ---
 
-# Download TiDB Tools
+# TiDBツールをダウンロードする {#download-tidb-tools}
 
-This document collects the available downloads for most officially maintained versions of TiDB tools.
+このドキュメントは、TiDBツールのほとんどの公式に保守されているバージョンで利用可能なダウンロードを収集します。
 
-## TiUP
+## TiUP {#tiup}
 
-You can install TiUP with a single command in both Darwin and Linux operating systems. For more information, see [Install TiUP](/tiup/tiup-overview.md#install-tiup).
+ダーウィンとLinuxの両方のオペレーティングシステムに、1つのコマンドでTiUPをインストールできます。詳細については、 [TiUPをインストールします](/tiup/tiup-overview.md#install-tiup)を参照してください。
 
-## TiDB Operator
+## TiDB Operator {#tidb-operator}
 
-TiDB Operator runs in Kubernetes. After deploying the Kubernetes cluster, you can choose to deploy TiDB Operator either online or offline. For more information, see [Deploying TiDB Operator in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator/).
+TiDB OperatorはKubernetesで実行されます。 Kubernetesクラスタをデプロイした後、 TiDB Operatorをオンラインまたはオフラインでデプロイすることを選択できます。詳細については、 [KubernetesでのTiDB Operatorのデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator/)を参照してください。
 
-## TiDB Binlog
+## TiDB Binlog {#tidb-binlog}
 
-If you want to download the latest version of [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md), directly download the TiDB package, because TiDB Binlog is included in the TiDB package.
+TiDB BinlogはTiDBパッケージに含まれているため、最新バージョンの[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)をダウンロードする場合は、TiDBパッケージを直接ダウンロードしてください。
 
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (TiDB Binlog) | Linux | amd64 | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
+| パッケージ名                                                                         | OS    | 建築    | SHA256チェックサム                                                     |
+| :----------------------------------------------------------------------------- | :---- | :---- | :--------------------------------------------------------------- |
+| `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` （TiDB Binlog） | Linux | amd64 | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
 
-> **Note:**
+> **ノート：**
 >
-> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v5.4.1` is `https://download.pingcap.org/tidb-v5.4.1-linux-amd64.tar.gz`.
+> 上記のダウンロードリンクの`{version}`は、TiDBのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.1-linux-amd64.tar.gz`です。
 
-## TiDB Lightning
+## TiDB Lightning {#tidb-lightning}
 
-Download [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) by using the download link in the following table:
+次の表のダウンロードリンクを使用して[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)をダウンロードします。
 
-| Package name | OS | Architecture |  SHA256 checksum |
-|:---|:---|:---|:---|
+| パッケージ名                                                                   | OS    | 建築    | SHA256チェックサム                                                             |
+| :----------------------------------------------------------------------- | :---- | :---- | :----------------------------------------------------------------------- |
 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
 
-> **Note:**
+> **ノート：**
 >
-> `{version}` in the above download link indicates the version number of TiDB Lightning. For example, the download link for `v5.4.1` is `https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`.
+> 上記のダウンロードリンクの`{version}`は、TiDBLightningのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`です。
 
-## BR (backup and restore)
+## BR（バックアップと復元） {#br-backup-and-restore}
 
-Download [BR](/br/backup-and-restore-tool.md) by using the download link in the following table:
+次の表のダウンロードリンクを使用して[BR](/br/backup-and-restore-tool.md)をダウンロードします。
 
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
+| パッケージ名                                                                  | OS    | 建築    | SHA256チェックサム                                                            |
+| :---------------------------------------------------------------------- | :---- | :---- | :---------------------------------------------------------------------- |
 | `http://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `http://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
 
-> **Note:**
+> **ノート：**
 >
-> `{version}` in the above download link indicates the version number of BR. For example, the download link for `v5.4.1` is `https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`.
+> 上記のダウンロードリンクの`{version}`は、BRのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`です。
 
-## TiDB DM (Data Migration)
+## TiDB DM（データ移行） {#tidb-dm-data-migration}
 
-Download [DM](/dm/dm-overview.md) by using the download link in the following table:
+次の表のダウンロードリンクを使用して[DM](/dm/dm-overview.md)をダウンロードします。
 
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
+| パッケージ名                                                         | OS    | 建築    | SHA256チェックサム                                                   |
+| :------------------------------------------------------------- | :---- | :---- | :------------------------------------------------------------- |
 | `https://download.pingcap.org/dm-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/dm-{version}-linux-amd64.sha256` |
 
-> **Note:**
+> **ノート：**
 >
-> `{version}` in the above download link indicates the version number of DM. For example, the download link for `v5.4.1` is `https://download.pingcap.org/dm-v5.4.1-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/dm/releases) page.
+> 上記のダウンロードリンクの`{version}`は、DMのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/dm-v5.4.1-linux-amd64.tar.gz`です。公開されているDMのバージョンは[DMリリース](https://github.com/pingcap/dm/releases)ページで確認できます。
 
-## Dumpling
+## Dumpling {#dumpling}
 
-Download [Dumpling](/dumpling-overview.md) from the links below:
+以下のリンクから[Dumpling](/dumpling-overview.md)をダウンロードしてください。
 
-| Installation package | Operating system | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
+| インストールパッケージ                                                              | オペレーティング·システム | 建築    | SHA256チェックサム                                                             |
+| :----------------------------------------------------------------------- | :------------ | :---- | :----------------------------------------------------------------------- |
+| `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.tar.gz` | Linux         | amd64 | `https://download.pingcap.org/tidb-toolkit-{version}-linux-amd64.sha256` |
 
-> **Note:**
+> **ノート：**
 >
-> The `{version}` in the download link is the version number of Dumpling. For example, the link for downloading the `v5.4.1` version of Dumpling is `https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`. You can view the currently released versions in [TiDB Releases](https://github.com/pingcap/tidb/releases).
+> ダウンロードリンクの`{version}`は、 Dumplingのバージョン番号です。たとえば、 `v5.4.1`バージョンのDumplingをダウンロードするためのリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`です。現在リリースされているバージョンは[TiDBリリース](https://github.com/pingcap/tidb/releases)で表示できます。
 >
-> Dumpling supports arm64 linux. You can replace `amd64` in the download link with `arm64`, which means the `arm64` version of Dumpling.
+> Dumplingはarm64linuxをサポートします。ダウンロードリンクの`amd64`を`arm64`に置き換えることができます。これは、 Dumplingの`arm64`バージョンを意味します。
 
-## sync-diff-inspector
+## sync-diff-inspector {#sync-diff-inspector}
 
-Download [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) from the links below:
+以下のリンクから[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)をダウンロードしてください。
 
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
+| パッケージ名                                                                                                                            | OS    | 建築    | SHA256チェックサム                                                                                                                      |
+| :-------------------------------------------------------------------------------------------------------------------------------- | :---- | :---- | :-------------------------------------------------------------------------------------------------------------------------------- |
 | [tidb-enterprise-tools-nightly-linux-amd64.tar.gz](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) | Linux | amd64 | [tidb-enterprise-tools-nightly-linux-amd64.sha256](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.sha256) |
 
-## TiCDC
+## TiCDC {#ticdc}
 
-To download [TiCDC](/ticdc/ticdc-overview.md), refer to [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+[TiCDC](/ticdc/ticdc-overview.md)をダウンロードするには、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)を参照してください。

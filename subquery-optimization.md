@@ -3,48 +3,48 @@ title: Subquery Related Optimizations
 summary: Understand optimizations related to subqueries.
 ---
 
-# Subquery Related Optimizations
+# サブクエリ関連の最適化 {#subquery-related-optimizations}
 
-This article mainly introduces subquery related optimizations.
+この記事では、主にサブクエリ関連の最適化を紹介します。
 
-Subqueries usually appear in the following situations:
+サブクエリは通常、次の状況で表示されます。
 
-- `NOT IN (SELECT ... FROM ...)`
-- `NOT EXISTS (SELECT ... FROM ...)`
-- `IN (SELECT ... FROM ..)`
-- `EXISTS (SELECT ... FROM ...)`
-- `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
+-   `NOT IN (SELECT ... FROM ...)`
+-   `NOT EXISTS (SELECT ... FROM ...)`
+-   `IN (SELECT ... FROM ..)`
+-   `EXISTS (SELECT ... FROM ...)`
+-   `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
 
-Sometimes a subquery contains non-subquery columns, such as `select * from t where t.a in (select * from t2 where t.b=t2.b)`. The `t.b` column in the subquery does not belong to the subquery, it is introduced from the outside of the subquery. This kind of subquery is usually called a "correlated subquery", and the externally introduced column is called a "correlated column". For optimizations about correlated subquery, see [Decorrelation of correlated subquery](/correlated-subquery-optimization.md). This article focuses on subqueries that do not involve correlated columns.
+サブクエリに`select * from t where t.a in (select * from t2 where t.b=t2.b)`などの非サブクエリ列が含まれる場合があります。サブクエリの`t.b`列はサブクエリに属しておらず、サブクエリの外部から導入されています。この種のサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [相関サブクエリの無相関化](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てます。
 
-By default, subqueries use `semi join` mentioned in [Understanding TiDB Execution Plan](/explain-overview.md) as the execution method. For some special subqueries, TiDB do some logical rewrite to get better performance.
+デフォルトでは、サブクエリは実行方法として[TiDB実行プランを理解する](/explain-overview.md)で述べた`semi join`を使用します。一部の特別なサブクエリの場合、TiDBは、パフォーマンスを向上させるために論理的な書き換えを行います。
 
-## `... < ALL (SELECT ... FROM ...)` or `... > ANY (SELECT ... FROM ...)`
+## <code>... &lt; ALL (SELECT ... FROM ...)</code>または<code>... &gt; ANY (SELECT ... FROM ...)</code> {#code-x3c-all-select-from-code-or-code-any-select-from-code}
 
-In this case, `ALL` and `ANY` can be replaced by `MAX` and `MIN`. When the table is empty, the result of `MAX(EXPR)` and `MIN(EXPR)` is NULL. It works the same when the result of `EXPR` contains `NULL`. Whether the result of `EXPR` contains `NULL` may affect the final result of the expression, so the complete rewrite is given in the following form:
+この場合、 `ALL`と`ANY`は`MAX`と`MIN`に置き換えることができます。テーブルが空の場合、 `MAX(EXPR)`と`MIN(EXPR)`の結果はNULLになります。 `EXPR`の結果に`NULL`が含まれている場合も、同じように機能します。 `EXPR`の結果に`NULL`が含まれるかどうかは、式の最終結果に影響を与える可能性があるため、完全な書き換えは次の形式で行われます。
 
-- `t.id < all (select s.id from s)` is rewritten as `t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`
-- `t.id < any (select s.id from s)` is rewritten as `t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`
+-   `t.id < all (select s.id from s)`は`t.id < min(s.id) and if(sum(s.id is null) != 0, null, true)`に書き換えられます
+-   `t.id < any (select s.id from s)`は`t.id < max(s.id) or if(sum(s.id is null) != 0, null, false)`に書き換えられます
 
-## `... != ANY (SELECT ... FROM ...)`
+## <code>... != ANY (SELECT ... FROM ...)</code> {#code-any-select-from-code}
 
-In this case, if all the values from the subquery are distinct, it is enough to compare the query with them. If the number of different values in the subquery is more than one, then there must be inequality. Therefore, such subqueries can be rewritten as follows:
+この場合、サブクエリのすべての値が異なる場合は、クエリをそれらと比較するだけで十分です。サブクエリの異なる値の数が複数ある場合は、不等式が存在する必要があります。したがって、このようなサブクエリは次のように書き直すことができます。
 
-- `select * from t where t.id != any (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`
+-   `select * from t where t.id != any (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s) where (t.id != s.id or cnt_distinct > 1)`に書き換えられます
 
-## `... = ALL (SELECT ... FROM ...)`
+## <code>... = ALL (SELECT ... FROM ...)</code> {#code-all-select-from-code}
 
-In this case, when the number of different values in the subquery is more than one, then the result of this expression must be false. Therefore, such subquery is rewritten into the following form in TiDB:
+この場合、サブクエリの異なる値の数が複数の場合、この式の結果はfalseである必要があります。したがって、このようなサブクエリはTiDBで次の形式に書き換えられます。
 
-- `select * from t where t.id = all (select s.id from s)` is rewritten as `select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`
+-   `select * from t where t.id = all (select s.id from s)`は`select t.* from t, (select s.id, count(distinct s.id) as cnt_distinct from s ) where (t.id = s.id and cnt_distinct <= 1)`に書き換えられます
 
-## `... IN (SELECT ... FROM ...)`
+## <code>... IN (SELECT ... FROM ...)</code> {#code-in-select-from-code}
 
-In this case, the subquery of `IN` is rewritten into `SELECT ... FROM ... GROUP ...`, and then rewritten into the normal form of `JOIN`.
+この場合、 `IN`のサブクエリは`SELECT ... FROM ... GROUP ...`に書き直され、次に通常の形式の`JOIN`に書き直されます。
 
-For example, `select * from t1 where t1.a in (select t2.a from t2)` is rewritten as `select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`. The `DISTINCT` attribute here can be eliminated automatically if `t2.a` has the `UNIQUE` attribute.
+たとえば、 `select * from t1 where t1.a in (select t2.a from t2)`は`select t1.* from t1, (select distinct(a) a from t2) t2 where t1.a = t2. The form of a`に書き換えられます。 `t2.a`に`UNIQUE`属性がある場合、ここでの`DISTINCT`属性は自動的に削除できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 explain select * from t1 where t1.a in (select t2.a from t2);
@@ -63,13 +63,13 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-This rewrite gets better performance when the `IN` subquery is relatively small and the external query is relatively large, because without rewriting, using `index join` with t2 as the driving table is impossible. However, the disadvantage is that when the aggregation cannot be automatically eliminated during the rewrite and the `t2` table is relatively large, this rewrite affects the performance of the query. Currently, the variable [tidb\_opt\_insubq\_to\_join\_and\_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg) is used to control this optimization. When this optimization is not suitable, you can manually disable it.
+この書き換えは、 `IN`のサブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えがないと、駆動テーブルとしてt2を使用して`index join`を使用することが不可能だからです。ただし、不利な点は、リライト中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、このリライトがクエリのパフォーマンスに影響を与えることです。現在、変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)はこの最適化を制御するために使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
-## `EXISTS` subquery and `... >/>=/</<=/=/!= (SELECT ... FROM ...)`
+## <code>EXISTS</code>サブクエリおよび<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 
-At present, for a subquery in such scenarios, if the subquery is not a correlated subquery, TiDB evaluates it in advance in the optimization stage, and directly replaces it with a result set. As shown in the figure below, the `EXISTS` subquery is evaluated to `TRUE` in the optimization stage in advance, so it does not show in the final execution result.
+現在、このようなシナリオのサブクエリでは、サブクエリが相関サブクエリでない場合、TiDBは最適化段階で事前に評価し、結果セットに直接置き換えます。次の図に示すように、 `EXISTS`のサブクエリは事前に最適化段階で`TRUE`と評価されるため、最終的な実行結果には表示されません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t1(a int);

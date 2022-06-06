@@ -3,106 +3,106 @@ title: Troubleshoot a TiFlash Cluster
 summary: Learn common operations when you troubleshoot a TiFlash cluster.
 ---
 
-# Troubleshoot a TiFlash Cluster
+# TiFlashクラスターのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
 
-This section describes some commonly encountered issues when using TiFlash, the reasons, and the solutions.
+このセクションでは、TiFlashを使用するときによく発生する問題、その理由、および解決策について説明します。
 
-## TiFlash fails to start
+## TiFlashの起動に失敗する {#tiflash-fails-to-start}
 
-The issue might occur due to different reasons. It is recommended that you troubleshoot it following the steps below:
+この問題は、さまざまな理由で発生する可能性があります。以下の手順に従ってトラブルシューティングを行うことをお勧めします。
 
-1. Check whether your system is CentOS8.
+1.  システムがCentOS8であるかどうかを確認してください。
 
-     CentOS8 does not have the `libnsl.so` system library. You can manually install it via the following command:
+    CentOS8には`libnsl.so`のシステムライブラリがありません。次のコマンドを使用して手動でインストールできます。
 
-     {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
-     ```shell
-     dnf install libnsl
-     ```
+    ```shell
+    dnf install libnsl
+    ```
 
-2. Check your system's `ulimit` parameter setting.
+2.  システムの`ulimit`パラメータ設定を確認してください。
 
-     {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
-     ```shell
-     ulimit -n 1000000
-     ```
+    ```shell
+    ulimit -n 1000000
+    ```
 
-3. Use the PD Control tool to check whether there is any TiFlash instance that failed to go offline on the node (same IP and Port) and force the instance(s) to go offline. For detailed steps, refer to [Scale in a TiFlash cluster](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster).
+3.  PD制御ツールを使用して、ノード（同じIPとポート）でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [TiFlashクラスタでのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
-If the above methods cannot resolve your issue, save the TiFlash log files and email to [info@pingcap.com](mailto:info@pingcap.com) for more information.
+上記の方法で問題を解決できない場合は、TiFlashログファイルと電子メールを[info@pingcap.com](mailto:info@pingcap.com)に保存して詳細を確認してください。
 
-## TiFlash replica is always unavailable
+## TiFlashレプリカは常に利用できません {#tiflash-replica-is-always-unavailable}
 
-This is because TiFlash is in an abnormal state caused by configuration errors or environment issues. Take the following steps to identify the faulty component:
+これは、TiFlashが構成エラーまたは環境問題によって異常な状態にあるためです。障害のあるコンポーネントを特定するには、次の手順を実行します。
 
-1. Check whether PD enables the `Placement Rules` feature:
+1.  PDが`Placement Rules`つの機能を有効にしているかどうかを確認します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     echo 'config show replication' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
     ```
 
-    - If `true` is returned, go to the next step.
-    - If `false` is returned, [enable the Placement Rules feature](/configure-placement-rules.md#enable-placement-rules) and go to the next step.
+    -   `true`が返された場合は、次の手順に進みます。
+    -   `false`が返された場合は、 [配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)を実行して、次の手順に進みます。
 
-2. Check whether the TiFlash process is working correctly by viewing `UpTime` on the TiFlash-Summary monitoring panel.
+2.  TiFlash-Summaryモニタリングパネルで`UpTime`を表示して、TiFlashプロセスが正しく機能しているかどうかを確認します。
 
-3. Check whether the TiFlash proxy status is normal through `pd-ctl`.
+3.  TiFlashプロキシのステータスが`pd-ctl`まで正常かどうかを確認します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     echo "store" | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
     ```
 
-    The TiFlash proxy's `store.labels` includes information such as `{"key": "engine", "value": "tiflash"}`. You can check this information to confirm a TiFlash proxy.
+    TiFlashプロキシの`store.labels`には、 `{"key": "engine", "value": "tiflash"}`などの情報が含まれています。この情報を確認して、TiFlashプロキシを確認できます。
 
-4. Check whether `pd buddy` can correctly print the logs (the log path is the value of `log` in the [flash.flash_cluster] configuration item; the default log path is under the `tmp` directory configured in the TiFlash configuration file).
+4.  `pd buddy`がログを正しく印刷できるかどうかを確認します（ログパスは[flash.flash_cluster]構成項目の値`log`です。デフォルトのログパスは、TiFlash構成ファイルで構成された`tmp`ディレクトリの下にあります）。
 
-5. Check whether the number of configured replicas is less than or equal to the number of TiKV nodes in the cluster. If not, PD cannot replicate data to TiFlash:
+5.  構成されたレプリカの数がクラスタのTiKVノードの数以下であるかどうかを確認します。そうでない場合、PDはデータをTiFlashに複製できません。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     echo 'config placement-rules show' | /path/to/pd-ctl -u http://${pd-ip}:${pd-port}
     ```
 
-    Reconfirm the value of `default: count`.
+    `default: count`の値を再確認します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > After the [placement rules](/configure-placement-rules.md) feature is enabled, the previously configured `max-replicas` and `location-labels` no longer take effect. To adjust the replica policy, use the interface related to placement rules.
+    > [配置ルール](/configure-placement-rules.md)機能を有効にすると、以前に構成した`max-replicas`と`location-labels`は無効になります。レプリカポリシーを調整するには、配置ルールに関連するインターフェイスを使用します。
 
-6. Check whether the remaining disk space of the machine (where `store` of the TiFlash node is) is sufficient. By default, when the remaining disk space is less than 20% of the `store` capacity (which is controlled by the `low-space-ratio` parameter), PD cannot schedule data to this TiFlash node.
+6.  マシンの残りのディスク容量（TiFlashノードの`store` ）が十分かどうかを確認します。デフォルトでは、残りのディスク容量が`store`の容量（ `low-space-ratio`のパラメーターによって制御される）の20％未満の場合、PDはこのTiFlashノードにデータをスケジュールできません。
 
-## TiFlash query time is unstable, and the error log prints many `Lock Exception` messages
+## TiFlashのクエリ時間は不安定であり、エラーログには多くの<code>Lock Exception</code>メッセージが出力されます {#tiflash-query-time-is-unstable-and-the-error-log-prints-many-code-lock-exception-code-messages}
 
-This is because large amounts of data are written to the cluster, which causes that the TiFlash query encounters a lock and requires query retry.
+これは、大量のデータがクラスタに書き込まれるため、TiFlashクエリでロックが発生し、クエリの再試行が必要になるためです。
 
-You can set the query timestamp to one second earlier in TiDB. For example, if the current time is '2020-04-08 20:15:01', you can execute `set @@tidb_snapshot='2020-04-08 20:15:00';` before you execute the query. This makes less TiFlash queries encounter a lock and mitigates the risk of unstable query time.
+TiDBでは、クエリのタイムスタンプを1秒前に設定できます。たとえば、現在の時刻が「2020-04-08 20:15:01」の場合、クエリを実行する前に`set @@tidb_snapshot='2020-04-08 20:15:00';`を実行できます。これにより、TiFlashクエリでロックが発生することが少なくなり、クエリ時間が不安定になるリスクが軽減されます。
 
-## Some queries return the `Region Unavailable` error
+## 一部のクエリは、 <code>Region Unavailable</code>エラーを返します {#some-queries-return-the-code-region-unavailable-code-error}
 
-If the load pressure on TiFlash is too heavy and it causes that TiFlash data replication falls behind, some queries might return the `Region Unavailable` error.
+TiFlashの負荷圧力が大きすぎて、TiFlashデータレプリケーションが遅れる場合、一部のクエリは`Region Unavailable`エラーを返す可能性があります。
 
-In this case, you can balance the load pressure by adding more TiFlash nodes.
+この場合、TiFlashノードを追加することで負荷圧力のバランスをとることができます。
 
-## Data file corruption
+## データファイルの破損 {#data-file-corruption}
 
-Take the following steps to handle the data file corruption:
+データファイルの破損を処理するには、次の手順を実行します。
 
-1. Refer to [Take a TiFlash node down](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster) to take the corresponding TiFlash node down.
-2. Delete the related data of the TiFlash node.
-3. Redeploy the TiFlash node in the cluster.
+1.  対応するTiFlashノードを停止するには、 [TiFlashノードを停止します](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+2.  TiFlashノードの関連データを削除します。
+3.  クラスタにTiFlashノードを再デプロイします。
 
-## TiFlash analysis is slow
+## TiFlash分析は遅い {#tiflash-analysis-is-slow}
 
-If a statement contains operators or functions not supported in the MPP mode, TiDB does not select the MPP mode. Therefore, the analysis of the statement is slow. In this case, you can execute the `EXPLAIN` statement to check for operators or functions not supported in the MPP mode.
+ステートメントにMPPモードでサポートされていない演算子または関数が含まれている場合、TiDBはMPPモードを選択しません。したがって、ステートメントの分析は遅くなります。この場合、 `EXPLAIN`ステートメントを実行して、MPPモードでサポートされていない演算子または関数をチェックできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(a datetime);
@@ -113,7 +113,7 @@ explain select count(*) from t where subtime(a, '12:00:00') > '2022-01-01' group
 show warnings;
 ```
 
-In this example, the warning message shows that TiDB does not select the MPP mode because TiDB 5.4 and earlier versions do not support the `subtime` function.
+この例では、警告メッセージは、TiDB 5.4以前のバージョンが`subtime`機能をサポートしていないため、TiDBがMPPモードを選択しないことを示しています。
 
 ```
 +---------+------+-----------------------------------------------------------------------------+
@@ -123,43 +123,44 @@ In this example, the warning message shows that TiDB does not select the MPP mod
 +---------+------+-----------------------------------------------------------------------------+
 ```
 
-## Data is not replicated to TiFlash
+## データはTiFlashに複製されません {#data-is-not-replicated-to-tiflash}
 
-After deploying a TiFlash node and starting replication (by performing the ALTER operation), no data is replicated to it. In this case, you can identify and address the problem by following the steps below:
+TiFlashノードをデプロイしてレプリケーションを開始した後（ALTER操作を実行することにより）、データはそのノードにレプリケートされません。この場合、以下の手順に従って問題を特定して対処できます。
 
-1. Check whether the replication is successful by running the `ALTER table <tbl_name> set tiflash replica <num>` command and check the output.
+1.  `ALTER table <tbl_name> set tiflash replica <num>`コマンドを実行してレプリケーションが成功したかどうかを確認し、出力を確認します。
 
-    - If there is output, go to the next step.
-    - If there is no output, run the `SELECT * FROM information_schema.tiflash_replica` command to check whether TiFlash replicas have been created. If not, run the `ALTER table ${tbl_name} set tiflash replica ${num}` command again, check whether other statements (for example, `add index`) have been executed, or check whether DDL executions are successful.
+    -   出力がある場合は、次の手順に進みます。
+    -   出力がない場合は、 `SELECT * FROM information_schema.tiflash_replica`コマンドを実行して、TiFlashレプリカが作成されているかどうかを確認します。そうでない場合は、 `ALTER table ${tbl_name} set tiflash replica ${num}`コマンドを再度実行するか、他のステートメント（たとえば、 `add index` ）が実行されたかどうかを確認するか、DDLの実行が成功したかどうかを確認します。
 
-2. Check whether the TiFlash process runs correctly.
+2.  TiFlashプロセスが正しく実行されているかどうかを確認します。
 
-   Check whether there is any change in `progress`, the `flash_region_count` parameter in the `tiflash_cluster_manager.log` file, and the Grafana monitoring item `Uptime`:
+    `progress`ファイルの`flash_region_count`パラメータ、および`tiflash_cluster_manager.log`監視項目`Uptime`に変更があるかどうかを確認します。
 
-   - If yes, the TiFlash process runs correctly.
-   - If no, the TiFlash process is abnormal. Check the `tiflash` log for further information.
+    -   はいの場合、TiFlashプロセスは正しく実行されます。
+    -   いいえの場合、TiFlashプロセスは異常です。詳細については、 `tiflash`ログを確認してください。
 
-3. Check whether the [Placement Rules](/configure-placement-rules.md) function has been enabled by using pd-ctl:
+3.  pd-ctlを使用して、 [配置ルール](/configure-placement-rules.md)の機能が有効になっているかどうかを確認します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     echo 'config show replication' | /path/to/pd-ctl -u http://<pd-ip>:<pd-port>
     ```
 
-    - If `true` is returned, go to the next step.
-    - If `false` is returned, [enable the Placement Rules feature](/configure-placement-rules.md#enable-placement-rules) and go to the next step.
+    -   `true`が返された場合は、次の手順に進みます。
+    -   `false`が返された場合は、 [配置ルール機能を有効にする](/configure-placement-rules.md#enable-placement-rules)を実行して、次の手順に進みます。
 
-4. Check whether the `max-replicas` configuration is correct:
+4.  `max-replicas`の構成が正しいかどうかを確認します。
 
-    - If the value of `max-replicas` does not exceed the number of TiKV nodes in the cluster, go to the next step.
-    - If the value of `max-replicas` is greater than the number of TiKV nodes in the cluster, the PD does not replicate data to the TiFlash node. To address this issue, change `max-replicas` to an integer fewer than or equal to the number of TiKV nodes in the cluster.
+    -   `max-replicas`の値がクラスタのTiKVノードの数を超えない場合は、次の手順に進みます。
 
-    > **Note:**
+    -   `max-replicas`の値がクラスタのTiKVノードの数よりも大きい場合、PDはデータをTiFlashノードに複製しません。この問題に対処するには、 `max-replicas`をクラスタのTiKVノードの数以下の整数に変更します。
+
+    > **ノート：**
     >
-    > `max-replicas` is defaulted to 3. In production environments, the value is usually fewer than the number of TiKV nodes. In test environments, the value can be 1.
+    > `max-replicas`はデフォルトで3に設定されます。実稼働環境では、値は通常、TiKVノードの数よりも少なくなります。テスト環境では、値は1にすることができます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
         curl -X POST -d '{
@@ -175,90 +176,90 @@ After deploying a TiFlash node and starting replication (by performing the ALTER
         }' <http://172.16.x.xxx:2379/pd/api/v1/config/rule>
     ```
 
-5. Check whether the connection between TiDB or PD and TiFlash is normal.
+5.  TiDBまたはPDとTiFlash間の接続が正常かどうかを確認します。
 
-    Search the `flash_cluster_manager.log` file for the `ERROR` keyword.
+    `flash_cluster_manager.log`ファイルで`ERROR`キーワードを検索します。
 
-    - If no `ERROR` is found, the connection is normal. Go to the next step.
-    - If `ERROR` is found, the connection is abnormal. Perform the following check.
+    -   `ERROR`が見つからない場合、接続は正常です。次のステップに進みます。
+    -   `ERROR`が見つかった場合、接続は異常です。以下の確認を行ってください。
 
-      - Check whether the log records PD keywords.
+        -   ログにPDキーワードが記録されているかどうかを確認します。
 
-          If PD keywords are found, check whether `raft.pd_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{pd-addr}/pd/api/v1/config/rules'` command and check whether there is any output in 5s.
+            PDキーワードが見つかった場合は、TiFlash構成ファイルの`raft.pd_addr`が有効かどうかを確認してください。具体的には、 `curl '{pd-addr}/pd/api/v1/config/rules'`コマンドを実行し、5秒以内に出力があるかどうかを確認します。
 
-      - Check whether the log records TiDB-related keywords.
+        -   ログにTiDB関連のキーワードが記録されているかどうかを確認します。
 
-          If TiDB keywords are found, check whether `flash.tidb_status_addr` in the TiFlash configuration file is valid. Specifically, run the `curl '{tidb-status-addr}/tiflash/replica'` command and check whether there is any output in 5s.
+            TiDBキーワードが見つかった場合は、TiFlash構成ファイルの`flash.tidb_status_addr`が有効かどうかを確認してください。具体的には、 `curl '{tidb-status-addr}/tiflash/replica'`コマンドを実行し、5秒以内に出力があるかどうかを確認します。
 
-      - Check whether the nodes can ping through each other.
+        -   ノードが相互にpingできるかどうかを確認します。
 
-    > **Note:**
+    > **ノート：**
     >
-    >  If the problem persists, collect logs of the corresponding component for troubleshooting.
+    > 問題が解決しない場合は、トラブルシューティングのために対応するコンポーネントのログを収集します。
 
-6. Check whether `placement-rule` is created for tables.
+6.  テーブルに`placement-rule`が作成されているかどうかを確認します。
 
-    Search the `flash_cluster_manager.log` file for the `Set placement rule … table-<table_id>-r` keyword.
+    `flash_cluster_manager.log`ファイルで`Set placement rule … table-<table_id>-r`キーワードを検索します。
 
-    - If the keyword is found, go to the next step.
-    - If not, collect logs of the corresponding component for troubleshooting.
+    -   キーワードが見つかった場合は、次の手順に進みます。
+    -   そうでない場合は、トラブルシューティングのために対応するコンポーネントのログを収集します。
 
-7. Check whether the PD schedules properly.
+7.  PDが適切にスケジュールされているかどうかを確認します。
 
-    Search the `pd.log` file for the `table-<table_id>-r` keyword and scheduling behaviors like `add operator`.
+    `pd.log`のファイルで`table-<table_id>-r`のキーワードと`add operator`のようなスケジューリング動作を検索します。
 
-    - If the keyword is found, the PD schedules properly.
-    - If not, the PD does not schedule properly. Contact PingCAP technical support for help.
+    -   キーワードが見つかった場合、PDは適切にスケジュールします。
+    -   そうでない場合、PDは適切にスケジュールされません。ヘルプが必要な場合は、PingCAPテクニカルサポートにお問い合わせください。
 
-> **Note:**
+> **ノート：**
 >
-> When there are many small Regions in the table to be replicated, and the `region merge` parameter is enabled or set to a large value, the replication progress might stay unchanged or be reduced in a period of time.
+> 複製するテーブルに多数の小さなリージョンがあり、 `region merge`パラメーターが有効になっているか、大きな値に設定されている場合、複製の進行状況は変わらないか、一定期間減少する可能性があります。
 
-## Data replication gets stuck
+## データレプリケーションがスタックする {#data-replication-gets-stuck}
 
-If data replication on TiFlash starts normally but then all or some data fails to be replicated after a period of time, you can confirm or resolve the issue by performing the following steps:
+TiFlashでのデータ複製は正常に開始されますが、一定期間後にすべてまたは一部のデータが複製されない場合は、次の手順を実行して問題を確認または解決できます。
 
-1. Check the disk space.
+1.  ディスク容量を確認してください。
 
-    Check whether the disk space ratio is higher than the value of `low-space-ratio` (defaulted to 0.8. When the space usage of a node exceeds 80%, the PD stops migrating data to this node to avoid exhaustion of disk space).
+    ディスクスペース率が値`low-space-ratio` （デフォルトは0.8）より大きいかどうかを確認します。ノードのスペース使用量が80％を超えると、PDはディスクスペースの枯渇を防ぐためにこのノードへのデータの移行を停止します。
 
-    - If the disk usage ratio is greater than or equal to the value of `low-space-ratio`, the disk space is insufficient. To relieve the disk space, remove unnecessary files, such as `space_placeholder_file` (if necessary, set `reserve-space` to 0MB after removing the file) under the `${data}/flash/` folder.
-    - If the disk usage ratio is less than the value of `low-space-ratio`, the disk space is sufficient. Go to the next step.
+    -   ディスク使用率が`low-space-ratio`以上の場合、ディスク容量が不足しています。ディスク容量を減らすには、 `${data}/flash/`フォルダの下にある`space_placeholder_file`などの不要なファイルを削除します（必要に応じて、ファイルを削除した後、 `reserve-space`を0MBに設定します）。
+    -   ディスク使用率が`low-space-ratio`未満の場合は、ディスク容量で十分です。次のステップに進みます。
 
-2. Check the network connectivity between TiKV, TiFlash, and PD.
+2.  TiKV、TiFlash、PD間のネットワーク接続を確認してください。
 
-    In `flash_cluster_manager.log`, check whether there are any new updates to `flash_region_count` corresponding to the table that gets stuck.
+    `flash_cluster_manager.log`で、スタックしたテーブルに対応する`flash_region_count`への新しい更新があるかどうかを確認します。
 
-    - If no, go to the next step.
-    - If yes, search for `down peer` (replication gets stuck if there is a peer that is down).
+    -   いいえの場合は、次の手順に進みます。
+    -   はいの場合、 `down peer`を検索します（ダウンしているピアがある場合、レプリケーションがスタックします）。
 
-        - Run `pd-ctl region check-down-peer` to search for `down peer`.
-        - If `down peer` is found, run `pd-ctl operator add remove-peer\<region-id> \<tiflash-store-id>` to remove it.
+        -   `pd-ctl region check-down-peer`を実行して`down peer`を検索します。
+        -   `down peer`が見つかった場合は、 `pd-ctl operator add remove-peer\<region-id> \<tiflash-store-id>`を実行して削除します。
 
-3. Check CPU usage.
+3.  CPU使用率を確認してください。
 
-    On Grafana, choose **TiFlash-Proxy-Details** > **Thread CPU** > **Region task worker pre-handle/generate snapshot CPU**. Check the CPU usage of `<instance-ip>:<instance-port>-region-worker`.
+    Grafanaで、 **TiFlash-Proxy-Details** &gt; <strong>Thread CPU</strong> &gt; Regiontaskworkerの<strong>事前処理/スナップショットCPUの生成を</strong>選択します。 `<instance-ip>:<instance-port>-region-worker`のCPU使用率を確認します。
 
-    If the curve is a straight line, the TiFlash node is stuck. Terminate the TiFlash process and restart it, or contact PingCAP technical support for help.
+    曲線が直線の場合、TiFlashノードはスタックしています。 TiFlashプロセスを終了して再起動するか、PingCAPテクニカルサポートに問い合わせてください。
 
-## Data replication is slow
+## データ複製が遅い {#data-replication-is-slow}
 
-The causes may vary. You can address the problem by performing the following steps.
+原因はさまざまです。次の手順を実行することで、問題に対処できます。
 
-1. Adjust the value of the scheduling parameters.
+1.  スケジューリングパラメータの値を調整します。
 
-    - Increase [`store limit`](/configure-store-limit.md#usage) to accelerate replication.
-    - Decrease [`config set patrol-region-interval 10ms`](/pd-control.md#command) to make checker scan on Regions more frequent in TiKV.
-    - Increase [`region merge`](/pd-control.md#command) to reduce the number of Regions, which means fewer scans and higher check frequencies.
+    -   [`store limit`](/configure-store-limit.md#usage)を増やすと、複製が高速化されます。
+    -   [`config set patrol-region-interval 10ms`](/pd-control.md#command)を減らすと、TiKVでリージョンのチェッカースキャンがより頻繁になります。
+    -   [`region merge`](/pd-control.md#command)を増やすと、リージョンの数が減ります。つまり、スキャンが少なくなり、チェック頻度が高くなります。
 
-2. Adjust the load on TiFlsh.
+2.  TiFlshの負荷を調整します。
 
-    Excessively high load on TiFlash can also result in slow replication. You can check the load of TiFlash indicators on the **TiFlash-Summary** panel on Grafana:
+    TiFlashの負荷が高すぎると、レプリケーションが遅くなる可能性もあります。 TiFlashインジケーターの負荷は、Grafanaの**TiFlash-Summary**パネルで確認できます。
 
-    - `Applying snapshots Count`: `TiFlash-summary` > `raft` > `Applying snapshots Count`
-    - `Snapshot Predecode Duration`: `TiFlash-summary` > `raft` > `Snapshot Predecode Duration`
-    - `Snapshot Flush Duration`: `TiFlash-summary` > `raft` > `Snapshot Flush Duration`
-    - `Write Stall Duration`: `TiFlash-summary` > `Storage Write Stall` > `Write Stall Duration`
-    - `generate snapshot CPU`: `TiFlash-Proxy-Details` > `Thread CPU` > `Region task worker pre-handle/generate snapshot CPU`
+    -   `Applying snapshots Count` ： `TiFlash-summary` &gt; `raft` &gt; `Applying snapshots Count`
+    -   `Snapshot Predecode Duration` ： `TiFlash-summary` &gt; `raft` &gt; `Snapshot Predecode Duration`
+    -   `Snapshot Flush Duration` ： `TiFlash-summary` &gt; `raft` &gt; `Snapshot Flush Duration`
+    -   `Write Stall Duration` ： `TiFlash-summary` &gt; `Storage Write Stall` &gt; `Write Stall Duration`
+    -   `generate snapshot CPU` ： `TiFlash-Proxy-Details` &gt; `Thread CPU` &gt; `Region task worker pre-handle/generate snapshot CPU`
 
-    Based on your service priorities, adjust the load accordingly to achieve optimal performance.
+    サービスの優先順位に基づいて、それに応じて負荷を調整し、最適なパフォーマンスを実現します。

@@ -3,23 +3,23 @@ title: Maintain DM Clusters Using dmctl
 summary: Learn how to maintain a DM cluster using dmctl.
 ---
 
-# Maintain DM Clusters Using dmctl
+# dmctlを使用してDMクラスターを管理する {#maintain-dm-clusters-using-dmctl}
 
-> **Note:**
+> **ノート：**
 >
-> For DM clusters deployed using TiUP, you are recommended to directly use [`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl) to maintain the clusters.
+> TiUPを使用してデプロイされたDMクラスターの場合、クラスターを維持するために[`tiup dmctl`](/dm/maintain-dm-using-tiup.md#dmctl)を直接使用することをお勧めします。
 
-dmctl is a command line tool used to maintain DM clusters. It supports both the interactive mode and the command mode.
+dmctlは、DMクラスターを維持するために使用されるコマンドラインツールです。インタラクティブモードとコマンドモードの両方をサポートします。
 
-## Interactive mode
+## インタラクティブモード {#interactive-mode}
 
-Enter the interactive mode to interact with DM-master:
+DMマスターと対話するには、対話モードに入ります。
 
-> **Note:**
+> **ノート：**
 >
-> The interactive mode does not support Bash features. For example, you need to directly pass string flags instead of passing them in quotes.
+> インタラクティブモードはBash機能をサポートしていません。たとえば、文字列フラグを引用符で囲むのではなく、直接渡す必要があります。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./dmctl --master-addr 172.16.30.14:8261
@@ -68,16 +68,16 @@ Flags:
 Use "dmctl [command] --help" for more information about a command.
 ```
 
-## Command mode
+## コマンドモード {#command-mode}
 
-The command mode differs from the interactive mode in that you need to append the task operation right after the dmctl command. The parameters of the task operation in the command mode are the same as those in the interactive mode.
+コマンドモードは、dmctlコマンドの直後にタスク操作を追加する必要があるという点でインタラクティブモードとは異なります。コマンドモードでのタスク操作のパラメータは、インタラクティブモードでのパラメータと同じです。
 
-> **Note:**
+> **ノート：**
 >
-> + A dmctl command must be followed by only one task operation.
-> + Starting from v2.0.4, DM supports reading the `-master-addr` parameter from the environment variable `DM_MASTER_ADDR`.
+> -   dmctlコマンドの後には、1つのタスク操作のみを続ける必要があります。
+> -   v2.0.4以降、DMは環境変数`DM_MASTER_ADDR`からの`-master-addr`パラメーターの読み取りをサポートします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./dmctl --master-addr 172.16.30.14:8261 start-task task.yaml

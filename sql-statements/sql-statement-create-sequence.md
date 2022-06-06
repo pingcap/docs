@@ -3,11 +3,11 @@ title: CREATE SEQUENCE
 summary: An overview of the usage of CREATE SEQUENCE for the TiDB database.
 ---
 
-# CREATE SEQUENCE
+# シーケンスの作成 {#create-sequence}
 
-The `CREATE SEQUENCE` statement creates sequence objects in TiDB. The sequence is a database object that is on a par with the table and the `View` object. The sequence is used to generate serialized IDs in a customized way.
+`CREATE SEQUENCE`ステートメントは、TiDBにシーケンスオブジェクトを作成します。シーケンスは、テーブルおよび`View`オブジェクトと同等のデータベースオブジェクトです。このシーケンスは、カスタマイズされた方法でシリアル化されたIDを生成するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateSequenceStmt ::=
@@ -35,9 +35,9 @@ SequenceOption ::=
 |   'NOCYCLE'
 ```
 
-## Syntax
+## 構文 {#syntax}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
@@ -50,43 +50,43 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     [table_options]
 ```
 
-## Parameters
+## パラメーター {#parameters}
 
-|Parameters | Default value | Description |
-| :-- | :-- | :--|
-| `TEMPORARY` | `false` | TiDB currently does not support the `TEMPORARY` option and provides only syntax compatibility for it. |
-| `INCREMENT` | `1` | Specifies the increment of a sequence. Its positive or negative values can control the growth direction of the sequence. |
-| `MINVALUE` | `1` or `-9223372036854775807` | Specifies the minimum value of a sequence. When `INCREMENT` > `0`, the default value is `1`. When `INCREMENT` < `0`, the default value is `-9223372036854775807`. |
-| `MAXVALUE` | `9223372036854775806` or `-1` | Specifies the maximum value of a sequence. When `INCREMENT` > `0`, the default value is `9223372036854775806`. When `INCREMENT` < `0`, the default value is `-1`. |
-| `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
-| `CACHE` | `1000` | Specifies the local cache size of a sequence in TiDB. |
-| `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
+| パラメーター      | デフォルト値                       | 説明                                                                                                                                   |
+| :---------- | :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| `TEMPORARY` | `false`                      | TiDBは現在、 `TEMPORARY`オプションをサポートしておらず、構文の互換性のみを提供しています。                                                                                |
+| `INCREMENT` | `1`                          | シーケンスの増分を指定します。その正または負の値は、シーケンスの成長方向を制御できます。                                                                                         |
+| `MINVALUE`  | `1`または`-9223372036854775807` | シーケンスの最小値を指定します。 `INCREMENT` &gt; `0`の場合、デフォルト値は`1`です。 `INCREMENT` &lt; `0`の場合、デフォルト値は`-9223372036854775807`です。                      |
+| `MAXVALUE`  | `9223372036854775806`または`-1` | シーケンスの最大値を指定します。 `INCREMENT` &gt; `0`の場合、デフォルト値は`9223372036854775806`です。 `INCREMENT` &lt; `0`の場合、デフォルト値は`-1`です。                      |
+| `START`     | `MINVALUE`または`MAXVALUE`      | シーケンスの初期値を指定します。 `INCREMENT` &gt; `0`の場合、デフォルト値は`MINVALUE`です。 `INCREMENT` &lt; `0`の場合、デフォルト値は`MAXVALUE`です。                           |
+| `CACHE`     | `1000`                       | TiDBのシーケンスのローカルキャッシュサイズを指定します。                                                                                                       |
+| `CYCLE`     | `NO CYCLE`                   | シーケンスを最小値（または降順シーケンスの最大値）から再開するかどうかを指定します。 `INCREMENT` &gt; `0`の場合、デフォルト値は`MINVALUE`です。 `INCREMENT` &lt; `0`の場合、デフォルト値は`MAXVALUE`です。 |
 
-## `SEQUENCE` function
+## <code>SEQUENCE</code>関数 {#code-sequence-code-function}
 
-You can control a sequence through the following expression functions:
+次の式関数を使用してシーケンスを制御できます。
 
-+ `NEXTVAL` or `NEXT VALUE FOR`
+-   `NEXTVAL`または`NEXT VALUE FOR`
 
-    Essentially, both are the `nextval()` function that gets the next valid value of a sequence object. The parameter of the `nextval()` function is the `identifier` of the sequence.
+    基本的に、どちらもシーケンスオブジェクトの次の有効な値を取得する`nextval()`の関数です。 `nextval()`関数のパラメーターは、シーケンスの`identifier`です。
 
-+ `LASTVAL`
+-   `LASTVAL`
 
-    This function gets the last used value of this session. If the value does not exist, `NULL` is used. The parameter of this function is the `identifier` of the sequence.
+    この関数は、このセッションで最後に使用された値を取得します。値が存在しない場合は、 `NULL`が使用されます。この関数のパラメーターは、シーケンスの`identifier`です。
 
-+ `SETVAL`
+-   `SETVAL`
 
-    This function sets the progression of the current value for a sequence. The first parameter of this function is the `identifier` of the sequence; the second parameter is `num`.
+    この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメーターは、シーケンスの`identifier`です。 2番目のパラメーターは`num`です。
 
-> **Note:**
+> **ノート：**
 >
-> In the implementation of a sequence in TiDB, the `SETVAL` function cannot change the initial progression or cycle progression of this sequence. This function only returns the next valid value based on this progression.
+> TiDBでのシーケンスの実装では、 `SETVAL`関数はこのシーケンスの初期進行またはサイクル進行を変更できません。この関数は、この進行に基づいて次の有効な値のみを返します。
 
-## Examples
+## 例 {#examples}
 
-+ Create a sequence object with the default parameter:
+-   デフォルトのパラメータを使用してシーケンスオブジェクトを作成します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     CREATE SEQUENCE seq;
@@ -96,9 +96,9 @@ You can control a sequence through the following expression functions:
     Query OK, 0 rows affected (0.06 sec)
     ```
 
-+ Use the `nextval()` function to get the next value of the sequence object:
+-   `nextval()`関数を使用して、シーケンスオブジェクトの次の値を取得します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT nextval(seq);
@@ -113,9 +113,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.02 sec)
     ```
 
-+ Use the `lastval()` function to get the value generated by the last call to a sequence object in this session:
+-   `lastval()`関数を使用して、このセッションでのシーケンスオブジェクトへの最後の呼び出しによって生成された値を取得します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT lastval(seq);
@@ -130,9 +130,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.02 sec)
     ```
 
-+ Use the `setval()` function to set the current value (or the current position) of the sequence object:
+-   `setval()`関数を使用して、シーケンスオブジェクトの現在の値（または現在の位置）を設定します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT setval(seq, 10);
@@ -147,9 +147,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.01 sec)
     ```
 
-+ You can also use the `next value for` syntax to get the next value of the sequence:
+-   `next value for`構文を使用して、シーケンスの次の値を取得することもできます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT next value for seq;
@@ -164,9 +164,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ Create a sequence object with default custom parameters:
+-   デフォルトのカスタムパラメータを使用してシーケンスオブジェクトを作成します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;
@@ -176,9 +176,9 @@ You can control a sequence through the following expression functions:
     Query OK, 0 rows affected (0.01 sec)
     ```
 
-+ When the sequence object has not been used in this session, the `lastval()` function returns a `NULL` value.
+-   このセッションでシーケンスオブジェクトが使用されていない場合、 `lastval()`関数は`NULL`の値を返します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT lastval(seq2);
@@ -193,9 +193,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.01 sec)
     ```
 
-+ The first valid value of the `nextval()` function for the sequence object is the value of `START` parameter.
+-   シーケンスオブジェクトの`nextval()`関数の最初の有効な値は、 `START`パラメーターの値です。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT nextval(seq2);
@@ -210,9 +210,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ Although the `setval()` function can change the current value of the sequence object, it cannot change the arithmetic progression rule for the next value.
+-   `setval()`関数はシーケンスオブジェクトの現在の値を変更できますが、次の値の等差数列ルールを変更することはできません。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT setval(seq2, 6);
@@ -227,9 +227,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ When you use `nextval()` to get the next value, the next value will follow the arithmetic progression rule defined by the sequence.
+-   `nextval()`を使用して次の値を取得すると、次の値はシーケンスで定義された等差数列の規則に従います。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT next value for seq2;
@@ -244,9 +244,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ You can use the next value of the sequence as the default value for the column, as in the following example.
+-   次の例のように、シーケンスの次の値を列のデフォルト値として使用できます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     CREATE table t(a int default next value for seq2);
@@ -256,9 +256,9 @@ You can control a sequence through the following expression functions:
     Query OK, 0 rows affected (0.02 sec)
     ```
 
-+ In the following example, the value is not specified, so the default value of `seq2` is used.
+-   次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT into t values();
@@ -268,7 +268,7 @@ You can control a sequence through the following expression functions:
     Query OK, 1 row affected (0.00 sec)
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * from t;
@@ -283,9 +283,9 @@ You can control a sequence through the following expression functions:
     1 row in set (0.00 sec)
     ```
 
-+ In the following example, the value is not specified, so the default value of `seq2` is used. But the next value of `seq2` is not within the range defined in the above example (`CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;`), so an error is returned.
+-   次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。ただし、次の値`seq2`は、上記の例（ `CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;` ）で定義された範囲内にないため、エラーが返されます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT into t values();
@@ -295,13 +295,13 @@ You can control a sequence through the following expression functions:
     ERROR 4135 (HY000): Sequence 'test.seq2' has run out
     ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension. The implementation is modeled on sequences available in MariaDB.
+このステートメントはTiDB拡張です。実装は、MariaDBで利用可能なシーケンスに基づいてモデル化されています。
 
-Except for the `SETVAL` function, all other functions have the same _progressions_ as MariaDB. Here "progression" means that the numbers in a sequence follow a certain arithmetic progression rule defined by the sequence. Although you can use `SETVAL` to set the current value of a sequence, the subsequent values of the sequence still follow the original progression rule.
+`SETVAL`の関数を除いて、他のすべての関数はMariaDBと同じ*進行*をします。ここで「進行」とは、シーケンス内の数値が、シーケンスによって定義された特定の等差数列規則に従うことを意味します。 `SETVAL`を使用してシーケンスの現在の値を設定できますが、シーケンスの後続の値は元の進行規則に従います。
 
-For example:
+例えば：
 
 ```
 1, 3, 5, ...            // The sequence starts from 1 and increments by 2.
@@ -309,9 +309,9 @@ select setval(seq, 6)   // Sets the current value of a sequence to 6.
 7, 9, 11, ...           // Subsequent values still follow the progression rule.
 ```
 
-In the `CYCLE` mode, the initial value of a sequence in the first round is the value of the `START` parameter, and the initial value in the subsequent rounds is the value of `MinValue` (`INCREMENT` > 0) or `MaxValue` (`INCREMENT` < 0).
+`CYCLE`モードでは、最初のラウンドのシーケンスの初期値は`START`パラメーターの値であり、後続のラウンドの初期値は`MinValue` （ `INCREMENT` &gt; 0）または`MaxValue` （ `INCREMENT` &lt;0）の値です。
 
-## See also
+## も参照してください {#see-also}
 
-* [DROP SEQUENCE](/sql-statements/sql-statement-drop-sequence.md)
-* [SHOW CREATE SEQUENCE](/sql-statements/sql-statement-show-create-sequence.md)
+-   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
+-   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)

@@ -3,26 +3,26 @@ title: List of Expressions for Pushdown
 summary: Learn a list of expressions that can be pushed down to TiKV and the related operations.
 ---
 
-# List of Expressions for Pushdown
+# プッシュダウンの式のリスト {#list-of-expressions-for-pushdown}
 
-When TiDB reads data from TiKV, TiDB tries to push down some expressions (including calculations of functions or operators) to be processed to TiKV. This reduces the amount of transferred data and offloads processing from a single TiDB node. This document introduces the expressions that TiDB already supports pushing down and how to prohibit specific expressions from being pushed down using blocklist.
+TiDBがTiKVからデータを読み取るとき、TiDBは処理されるいくつかの式（関数または演算子の計算を含む）をTiKVにプッシュダウンしようとします。これにより、転送されるデータの量が減り、単一のTiDBノードからの処理がオフロードされます。このドキュメントでは、TiDBがすでにプッシュダウンをサポートしている式と、ブロックリストを使用して特定の式がプッシュダウンされるのを禁止する方法を紹介します。
 
-## Supported expressions for pushdown
+## プッシュダウンでサポートされる式 {#supported-expressions-for-pushdown}
 
-| Expression Type | Operations |
-| :-------------- | :------------------------------------- |
-| [Logical operators](/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
-| [Comparison functions and operators](/functions-and-operators/operators.md#comparison-functions-and-operators) | <, <=, =, != (`<>`), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
-| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | +, -, *, /, [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs), [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil), [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling), [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) |
-| [Control flow functions](/functions-and-operators/control-flow-functions.md) | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#operator_case), [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_if), [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_ifnull) |
-| [JSON functions](/functions-and-operators/json-functions.md) | [JSON_TYPE(json_val)][json_type],<br/> [JSON_EXTRACT(json_doc, path[, path] ...)][json_extract],<br/> [JSON_OBJECT(key, val[, key, val] ...)][json_object],<br/> [JSON_ARRAY([val[, val] ...])][json_array],<br/> [JSON_MERGE(json_doc, json_doc[, json_doc] ...)][json_merge],<br/> [JSON_SET(json_doc, path, val[, path, val] ...)][json_set],<br/> [JSON_INSERT(json_doc, path, val[, path, val] ...)][json_insert],<br/> [JSON_REPLACE(json_doc, path, val[, path, val] ...)][json_replace],<br/> [JSON_REMOVE(json_doc, path[, path] ...)][json_remove] |
-| [Date and time functions](/functions-and-operators/date-and-time-functions.md) | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)  |
+| 式の種類                                                                                 | オペレーション                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [論理演算子](/functions-and-operators/operators.md#logical-operators)                     | AND（&amp;&amp;）、OR（||）、NOT（！）                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| [比較関数と演算子](/functions-and-operators/operators.md#comparison-functions-and-operators) | &lt;、&lt;=、=、！=（ `<>` ）、&gt;、&gt; =、 [`&#x3C;=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to) 、IS NULL、LIKE、IS TRUE、IS [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) 、 [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in)                                                                                                                                                                                                                                            |
+| [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)              | [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) 、-、 [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil) 、 [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling) 、 [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs)                                                                                                                                                                                                    |
+| [制御フロー機能](/functions-and-operators/control-flow-functions.md)                        | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#operator_case) [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_if) [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_ifnull)                                                                                                                                                                                                                                                                                                                  |
+| [JSON関数](/functions-and-operators/json-functions.md)                                 | [JSON\_TYPE(json\_val)][json_type] 、<br/> [JSON\_EXTRACT(json\_doc, path\[, path\] ...)][json_extract] 、<br/> [JSON\_OBJECT(key, val\[, key, val\] ...)][json_object] 、<br/> [JSON\_ARRAY(\[val\[, val\] ...\])][json_array] 、<br/> [JSON\_MERGE(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge] 、<br/> [JSON\_SET(json\_doc, path, val\[, path, val\] ...)][json_set] 、<br/> [JSON\_INSERT(json\_doc, path, val\[, path, val\] ...)][json_insert] 、<br/> [JSON\_REPLACE(json\_doc, path, val\[, path, val\] ...)][json_replace] 、<br/> [JSON\_REMOVE(json\_doc, path\[, path\] ...)][json_remove] |
+| [日付と時刻の関数](/functions-and-operators/date-and-time-functions.md)                      | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-## Blocklist specific expressions
+## ブロックリスト固有の式 {#blocklist-specific-expressions}
 
-If unexpected behavior occurs during the calculation of a function caused by its pushdown, you can quickly restore the application by blocklisting that function. Specifically, you can prohibit an expression from being pushed down by adding the corresponding functions or operator to the blocklist `mysql.expr_pushdown_blacklist`.
+プッシュダウンが原因で関数の計算中に予期しない動作が発生した場合は、その関数をブロックリストに登録することで、アプリケーションをすばやく復元できます。具体的には、対応する関数または演算子をブロックリスト`mysql.expr_pushdown_blacklist`に追加することにより、式がプッシュダウンされるのを禁止できます。
 
-The schema of `mysql.expr_pushdown_blacklist` is as follows:
+`mysql.expr_pushdown_blacklist`のスキーマは次のとおりです。
 
 ```sql
 tidb> desc mysql.expr_pushdown_blacklist;
@@ -36,33 +36,33 @@ tidb> desc mysql.expr_pushdown_blacklist;
 3 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明：
 
-+ `name`: the name of the function that is prohibited from being pushed down.
-+ `store_type`: specifies to which storage engine the function is prohibited from being pushed down. Currently, TiDB supports the three storage engines: `tikv`, `tidb`, and `tiflash`. `store_type` is case-insensitive. If a function is prohibited from being pushed down to multiple storage engines, use a comma to separate each engine.
-+ `reason` : The reason why the function is blocklisted.
+-   `name` ：プッシュダウンが禁止されている関数の名前。
+-   `store_type` ：機能のプッシュダウンを禁止するストレージエンジンを指定します。現在、TiDBは`tikv` 、および`tiflash`の`tidb`つのストレージエンジンをサポートしています。 `store_type`では大文字と小文字は区別されません。関数を複数のストレージエンジンにプッシュダウンすることが禁止されている場合は、コンマを使用して各エンジンを区切ります。
+-   `reason` ：関数がブロックリストに登録されている理由。
 
-### Add to the blocklist
+### ブロックリストに追加 {#add-to-the-blocklist}
 
-To add one or more functions or operators to the blocklist, perform the following steps:
+1つ以上の関数または演算子をブロックリストに追加するには、次の手順を実行します。
 
-1. Insert the function or operator name and the collection of storage types to be prohibited from the function pushdown to `mysql.expr_pushdown_blacklist`.
+1.  関数または演算子の名前と、関数のプッシュダウンで禁止するストレージタイプのコレクションを`mysql.expr_pushdown_blacklist`に挿入します。
 
-2. Execute the `admin reload expr_pushdown_blacklist;` command.
+2.  `admin reload expr_pushdown_blacklist;`コマンドを実行します。
 
-### Remove from the blocklist
+### ブロックリストから削除する {#remove-from-the-blocklist}
 
-To remove one or more functions or operators from the blocklist, perform the following steps:
+ブロックリストから1つ以上の関数または演算子を削除するには、次の手順を実行します。
 
-1. Delete the function or operator name in `mysql.expr_pushdown_blacklist`.
+1.  `mysql.expr_pushdown_blacklist`の関数または演算子名を削除します。
 
-2. Execute the `admin reload expr_pushdown_blacklist;` command.
+2.  `admin reload expr_pushdown_blacklist;`コマンドを実行します。
 
-### Blocklist usage examples
+### ブロックリストの使用例 {#blocklist-usage-examples}
 
-The following example demonstrates how to add the `<` and `>` operators to the blocklist, then remove `>` from the blocklist.
+次の例は、 `<`と`>`の演算子をブロックリストに追加し、 `>`をブロックリストから削除する方法を示しています。
 
-You can see whether the blocklist takes effect by checking the results returned by `EXPLAIN` statement (See [Understanding `EXPLAIN` results](/explain-overview.md)).
+`EXPLAIN`のステートメントによって返される結果を確認することで、ブロックリストが有効かどうかを確認できます（ [`EXPLAIN`の結果を理解する](/explain-overview.md)を参照）。
 
 ```sql
 tidb> create table t(a int);
@@ -113,35 +113,35 @@ tidb> explain select * from t where a < 2 and a > 2;
 4 rows in set (0.00 sec)
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - `admin reload expr_pushdown_blacklist` only takes effect on the TiDB server that executes this SQL statement. To make it apply to all TiDB servers, execute the SQL statement on each TiDB server.
-> - The feature of blocklisting specific expressions is supported in TiDB 3.0.0 or later versions.
-> - TiDB 3.0.3 or earlier versions does not support adding some of the operators (such as ">", "+", "is null") to the blocklist by using their original names. You need to use their aliases (case-sensitive) instead, as shown in the following table:
+> -   `admin reload expr_pushdown_blacklist`は、このSQLステートメントを実行するTiDBサーバーでのみ有効です。すべてのTiDBサーバーに適用するには、各TiDBサーバーでSQLステートメントを実行します。
+> -   特定の式をブロックリストする機能は、TiDB3.0.0以降のバージョンでサポートされています。
+> -   TiDB 3.0.3以前のバージョンでは、元の名前を使用したブロックリストへの一部の演算子（ &quot;&gt;&quot;、 &quot;+&quot;、 &quot;is null&quot;など）の追加はサポートされていません。次の表に示すように、代わりにエイリアス（大文字と小文字を区別）を使用する必要があります。
 
-| Operator Name | Aliases |
-| :-------- | :---------- |
-| < | lt |
-| > | gt |
-| <= | le |
-| >= | ge |
-| = | eq |
-| != | ne |
-| `<>` | ne |
-| `<=>` | nulleq |
-| &#124; | bitor |
-| && | bitand|
-| &#124;&#124; | or |
-| ! | not |
-| in | in |
-| + | plus|
-| - | minus |
-| * | mul |
-| / | div |
-| DIV | intdiv|
-| IS NULL | isnull |
-| IS TRUE | istrue |
-| IS FALSE | isfalse |
+| オペレーター名    | エイリアス   |
+| :--------- | :------ |
+| &lt;       | lt      |
+|            | gt      |
+| &lt;=      | ル       |
+| =          | ge      |
+| =          | eq      |
+| ！=         | ne      |
+| `<>`       | ne      |
+| `<=>`      | nulleq  |
+| |          | ビター     |
+| &amp;&amp; | ビタンド    |
+| ||         | また      |
+| ！          | いいえ     |
+| の          | の       |
+| <li></li>  | プラス     |
+| <li></li>  | マイナス    |
+| *          | mul     |
+| /          | div     |
+| DIV        | intdiv  |
+| 無効です       | 無効です    |
+| 本当です       | istrue  |
+| 偽です        | isfalse |
 
 [json_extract]: https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract
 

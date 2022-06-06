@@ -3,33 +3,33 @@ title: SHOW INDEXES [FROM|IN] | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW INDEXES [FROM|IN] for the TiDB database.
 ---
 
-# SHOW INDEXES [FROM|IN]
+# インデックスを表示[FROM|IN] {#show-indexes-from-in}
 
-The statement `SHOW INDEXES [FROM|IN]` lists the indexes on a specified table.  The statements `SHOW INDEX [FROM|IN]`, `SHOW KEYS [FROM|IN]` are aliases of this statement, and included for compatibility with MySQL.
+ステートメント`SHOW INDEXES [FROM|IN]`は、指定されたテーブルのインデックスをリストします。ステートメント`SHOW INDEX [FROM|IN]`はこのステートメントのエイリアスであり、MySQLとの互換性のために含まれて`SHOW KEYS [FROM|IN]`ます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowIndexStmt:**
+**ShowIndexStmt：**
 
 ![ShowIndexStmt](/media/sqlgram/ShowIndexStmt.png)
 
-**ShowIndexKwd:**
+**ShowIndexKwd：**
 
 ![ShowIndexKwd](/media/sqlgram/ShowIndexKwd.png)
 
-**FromOrIn:**
+**FromOrIn：**
 
 ![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**TableName:**
+**TableName：**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-**ShowLikeOrWhereOpt:**
+**ShowLikeOrWhereOpt：**
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT, INDEX(col1));
@@ -69,12 +69,12 @@ mysql> SHOW KEYS FROM t1;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `Cardinality` column in MySQL shows the number of different values on the index. In TiDB, the `Cardinality` column always shows `0`.
+MySQLの`Cardinality`列は、インデックスのさまざまな値の数を示しています。 TiDBでは、 `Cardinality`列には常に`0`が表示されます。
 
-## See also
+## も参照してください {#see-also}
 
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの作成](/sql-statements/sql-statement-create-index.md)

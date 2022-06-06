@@ -3,81 +3,81 @@ title: Best Practices for TiKV Performance Tuning with Massive Regions
 summary: Learn how to tune the performance of TiKV with a massive amount of Regions.
 ---
 
-# Best Practices for TiKV Performance Tuning with Massive Regions
+# 大規模なリージョンでのTiKV性能チューニングのベストプラクティス {#best-practices-for-tikv-performance-tuning-with-massive-regions}
 
-In TiDB, data is split into Regions, each storing data for a specific key range. These Regions are distributed among multiple TiKV instances. As data is written into a cluster, millions of or even tens of millions of Regions are created. Too many Regions on a single TiKV instance can bring a heavy burden to the cluster and affect its performance.
+TiDBでは、データはリージョンに分割され、各リージョンには特定のキー範囲のデータが格納されます。これらのリージョンは、複数のTiKVインスタンスに分散されています。データがクラスタに書き込まれると、数百万または数千万のリージョンが作成されます。 1つのTiKVインスタンスのリージョンが多すぎると、クラスターに大きな負担がかかり、クラスタのパフォーマンスに影響を与える可能性があります。
 
-This document introduces the workflow of Raftstore (a core module of TiKV), explains why a massive amount of Regions affect the performance, and offers methods for tuning TiKV performance.
+このドキュメントでは、Raftstore（TiKVのコアモジュール）のワークフローを紹介し、大量のリージョンがパフォーマンスに影響を与える理由を説明し、TiKVのパフォーマンスを調整する方法を提供します。
 
-## Raftstore workflow
+## Raftstoreワークフロー {#raftstore-workflow}
 
-A TiKV instance has multiple Regions on it. The Raftstore module drives the Raft state machine to process Region messages. These messages include processing read or write requests on Regions, persisting or replicating Raft logs, and processing Raft heartbeats. However, an increasing number of Regions can affect performance of the whole cluster. To understand this, it is necessary to learn the workflow of Raftstore shown as follows:
+TiKVインスタンスには、複数のリージョンがあります。 Raftstoreモジュールは、Raftステートマシンを駆動してRegionメッセージを処理します。これらのメッセージには、リージョンでの読み取りまたは書き込み要求の処理、Raftログの永続化または複製、およびRaftハートビートの処理が含まれます。ただし、リージョンの数が増えると、クラスタ全体のパフォーマンスに影響を与える可能性があります。これを理解するには、次のようなRaftstoreのワークフローを学ぶ必要があります。
 
 ![Raftstore Workflow](/media/best-practices/raft-process.png)
 
-> **Note:**
+> **ノート：**
 >
-> This diagram only illustrates the workflow of Raftstore and does not represent the actual code structure.
+> この図は、Raftstoreのワークフローを示しているだけであり、実際のコード構造を表すものではありません。
 
-From the above diagram, you can see that requests from the TiDB servers, after passing through the gRPC and storage modules, become read and write messages of KV (key-value), and are sent to the corresponding Regions. These messages are not immediately processed but are temporarily stored. Raftstore polls to check whether each Region has messages to process. If a Region has messages to process, Raftstore drives the Raft state machine of this Region to process these messages and perform subsequent operations according to the state changes of these messages. For example, when write requests come in, the Raft state machine stores logs into disk and sends logs to other Region replicas; when the heartbeat interval is reached, the Raft state machine sends heartbeat information to other Region replicas.
+上の図から、TiDBサーバーからのリクエストは、gRPCおよびストレージモジュールを通過した後、KV（キー値）の読み取りおよび書き込みメッセージになり、対応するリージョンに送信されることがわかります。これらのメッセージはすぐには処理されませんが、一時的に保存されます。 Raftstoreはポーリングして、各リージョンに処理するメッセージがあるかどうかを確認します。リージョンに処理するメッセージがある場合、RaftstoreはこのリージョンのRaftステートマシンを駆動してこれらのメッセージを処理し、これらのメッセージの状態変化に従って後続の操作を実行します。たとえば、書き込み要求が着信すると、Raftステートマシンはログをディスクに保存し、他のリージョンレプリカにログを送信します。ハートビート間隔に達すると、ラフトステートマシンはハートビート情報を他のリージョンレプリカに送信します。
 
-## Performance problem
+## パフォーマンスの問題 {#performance-problem}
 
-From the Raftstore workflow diagram, messages in each Region are processed one by one. When a large number of Regions exist, it takes Raftstore some time to process the heartbeats of these Regions, which can cause some delay. As a result, some read and write requests are not processed in time. If read and write pressure is high, the CPU usage of the Raftstore thread might easily become the bottleneck, which further increases the delay and affects the performance.
+Raftstoreワークフロー図から、各リージョンのメッセージが1つずつ処理されます。リージョンが多数存在する場合、Raftstoreがこれらのリージョンのハートビートを処理するのに時間がかかり、遅延が発生する可能性があります。その結果、一部の読み取りおよび書き込み要求は時間内に処理されません。読み取りと書き込みの負荷が高い場合、RaftstoreスレッドのCPU使用率がボトルネックになりやすく、遅延がさらに増加し、パフォーマンスに影響を与える可能性があります。
 
-Generally, if the CPU usage of the loaded Raftstore reaches 85% or higher, Raftstore goes into a busy state and becomes the bottleneck. At the same time, `propose wait duration` can be as high as hundreds of milliseconds.
+一般に、ロードされたRaftstoreのCPU使用率が85％以上に達すると、Raftstoreはビジー状態になり、ボトルネックになります。同時に、 `propose wait duration`は数百ミリ秒にもなる可能性があります。
 
-> **Note:**
+> **ノート：**
 >
-> + For the CPU usage of Raftstore as mentioned above, Raftstore is single-threaded. If Raftstore is multi-threaded, you can increase the CPU usage threshold (85%) proportionally.
-> + Because I/O operations exist in the Raftstore thread, CPU usage cannot reach 100%.
+> -   上記のRaftstoreのCPU使用率については、Raftstoreはシングルスレッドです。 Raftstoreがマルチスレッドの場合、CPU使用率のしきい値（85％）を比例して増やすことができます。
+> -   I / O操作はRaftstoreスレッドに存在するため、CPU使用率を100％に到達させることはできません。
 
-### Performance monitoring
+### パフォーマンス監視 {#performance-monitoring}
 
-You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
+Grafanaの**TiKVダッシュボード**で次のモニタリング指標を確認できます。
 
-+ `Raft store CPU` in the **Thread-CPU** panel
+-   **スレッドCPU**パネルの`Raft store CPU`
 
-    Reference value: lower than `raftstore.store-pool-size * 85%`.
+    基準値： `raftstore.store-pool-size * 85%`未満。
 
     ![Check Raftstore CPU](/media/best-practices/raft-store-cpu.png)
 
-+ `Propose wait duration` in the **Raft Propose** panel
+-   **RaftPropose**パネルの`Propose wait duration`
 
-    `Propose wait duration` is the delay between the time a request is sent to Raftstore and the time Raftstore actually starts processing the request. Long delay means that Raftstore is busy, or that processing the append log is time-consuming, making Raftstore unable to process the request in time.
+    `Propose wait duration`は、リクエストがRaftstoreに送信されてから、Raftstoreが実際にリクエストの処理を開始するまでの遅延です。遅延が長いということは、Raftstoreがビジーであるか、追加ログの処理に時間がかかり、Raftstoreが時間内にリクエストを処理できないことを意味します。
 
-    Reference value: lower than 50~100 ms according to the cluster size
+    基準値：クラスタサイズに応じて50〜100ms未満
 
     ![Check Propose wait duration](/media/best-practices/propose-wait-duration.png)
 
-## Performance tuning methods
+## パフォーマンスチューニング方法 {#performance-tuning-methods}
 
-After finding out the cause of a performance problem, try to solve it from the following two aspects:
+パフォーマンスの問題の原因を突き止めたら、次の2つの側面から解決してみてください。
 
-+ Reduce the number of Regions on a single TiKV instance
-+ Reduce the number of messages for a single Region
+-   単一のTiKVインスタンス上のリージョンの数を減らします
+-   単一のリージョンのメッセージ数を減らす
 
-### Method 1: Increase Raftstore concurrency
+### 方法1：Raftstoreの同時実行性を増やす {#method-1-increase-raftstore-concurrency}
 
-Raftstore has been upgraded to a multi-threaded module since TiDB v3.0, which greatly reduces the possibility that a Raftstore thread becomes the bottleneck.
+Raftstoreは、TiDB v3.0以降、マルチスレッドモジュールにアップグレードされました。これにより、Raftstoreスレッドがボトルネックになる可能性が大幅に減少します。
 
-By default, `raftstore.store-pool-size` is configured to `2` in TiKV. If a bottleneck occurs in Raftstore, you can properly increase the value of this configuration item according to the actual situation. But to avoid introducing unnecessary thread switching overhead, it is recommended that you do not set this value too high.
+デフォルトでは、TiKVでは`raftstore.store-pool-size`が`2`に設定されています。 Raftstoreでボトルネックが発生した場合は、実際の状況に応じて、この構成アイテムの値を適切に増やすことができます。ただし、不要なスレッドスイッチングのオーバーヘッドが発生しないように、この値を高く設定しすぎないようにすることをお勧めします。
 
-### Method 2: Enable Hibernate Region
+### 方法2：休止状態を有効にする {#method-2-enable-hibernate-region}
 
-In the actual situation, read and write requests are not evenly distributed on every Region. Instead, they are concentrated on a few Regions. Then you can minimize the number of messages between the Raft leader and the followers for the temporarily idle Regions, which is the feature of Hibernate Region. In this feature, Raftstore does sent tick messages to the Raft state machines of idle Regions if not necessary. Then these Raft state machines will not be triggered to generate heartbeat messages, which can greatly reduce the workload of Raftstore.
+実際の状況では、読み取りおよび書き込み要求はすべてのリージョンに均等に分散されているわけではありません。代わりに、それらはいくつかの地域に集中しています。次に、一時的にアイドル状態のリージョンのRaftリーダーとフォロワー間のメッセージの数を最小限に抑えることができます。これはHibernateリージョンの機能です。この機能では、Raftstoreは、必要がない場合、アイドル状態のリージョンのRaftステートマシンにティックメッセージを送信します。その場合、これらのRaftステートマシンはトリガーされてハートビートメッセージを生成しません。これにより、Raftstoreのワークロードを大幅に削減できます。
 
-Hibernate Region is enabled by default in [TiKV master](https://github.com/tikv/tikv/tree/master). You can configure this feature according to your needs. For details, refer to [Configure Hibernate Region](/tikv-configuration-file.md).
+Hibernateリージョンはデフォルトで[TiKVマスター](https://github.com/tikv/tikv/tree/master)で有効になっています。この機能は、必要に応じて構成できます。詳しくは[Hibernateリージョンを構成する](/tikv-configuration-file.md)をご覧ください。
 
-### Method 3: Enable `Region Merge`
+### 方法3： <code>Region Merge</code>有効にする {#method-3-enable-code-region-merge-code}
 
-> **Note:**
+> **ノート：**
 >
-> `Region Merge` is enabled by default since TiDB v3.0.
+> TiDB v3.0以降、デフォルトで`Region Merge`が有効になっています。
 
-You can also reduce the number of Regions by enabling `Region Merge`. Contrary to `Region Split`, `Region Merge` is the process of merging adjacent small Regions through scheduling. After dropping data or executing the `Drop Table` or `Truncate Table` statement, you can merge small Regions or even empty Regions to reduce resource consumption.
+`Region Merge`を有効にすることで、リージョンの数を減らすこともできます。 `Region Split`とは異なり、 `Region Merge`は、スケジューリングによって隣接する小さなリージョンをマージするプロセスです。データを削除するか、 `Drop Table`または`Truncate Table`ステートメントを実行した後、小さなリージョンまたは空のリージョンをマージして、リソース消費を減らすことができます。
 
-Enable `Region Merge` by configuring the following parameters:
+次のパラメータを設定して`Region Merge`を有効にします。
 
 {{< copyable "" >}}
 
@@ -87,21 +87,21 @@ Enable `Region Merge` by configuring the following parameters:
 >> pd-ctl config set merge-schedule-limit 8
 ```
 
-Refer to [Region Merge](https://tikv.org/docs/4.0/tasks/configure/region-merge/) and the following three configuration parameters in the [PD configuration file](/pd-configuration-file.md#schedule) for more details:
+詳細については、 [リージョンマージ](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および3の次の[PD構成ファイル](/pd-configuration-file.md#schedule)つの構成パラメーターを参照してください。
 
-- [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
-- [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
-- [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
+-   [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
+-   [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
+-   [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
-The default configuration of the `Region Merge` parameters is rather conservative. You can speed up the `Region Merge` process by referring to the method provided in [PD Scheduling Best Practices](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow).
+`Region Merge`つのパラメーターのデフォルト構成はかなり保守的です。 [PDスケジューリングのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)で提供されている方法を参照することにより、 `Region Merge`のプロセスを高速化できます。
 
-### Method 4: Increase the number of TiKV instances
+### 方法4：TiKVインスタンスの数を増やす {#method-4-increase-the-number-of-tikv-instances}
 
-If I/O resources and CPU resources are sufficient, you can deploy multiple TiKV instances on a single machine to reduce the number of Regions on a single TiKV instance; or you can increase the number of machines in the TiKV cluster.
+I / OリソースとCPUリソースが十分な場合は、単一のマシンに複数のTiKVインスタンスをデプロイして、単一のTiKVインスタンスのリージョンの数を減らすことができます。または、TiKVクラスタのマシンの数を増やすことができます。
 
-### Method 5: Adjust `raft-base-tick-interval`
+### 方法5： <code>raft-base-tick-interval</code>調整する {#method-5-adjust-code-raft-base-tick-interval-code}
 
-In addition to reducing the number of Regions, you can also reduce pressure on Raftstore by reducing the number of messages for each Region within a unit of time. For example, you can properly increase the value of the `raft-base-tick-interval` configuration item:
+リージョンの数を減らすことに加えて、単位時間内に各リージョンのメッセージの数を減らすことで、Raftstoreへのプレッシャーを減らすこともできます。たとえば、 `raft-base-tick-interval`の構成アイテムの値を適切に増やすことができます。
 
 {{< copyable "" >}}
 
@@ -110,9 +110,9 @@ In addition to reducing the number of Regions, you can also reduce pressure on R
 raft-base-tick-interval = "2s"
 ```
 
-In the above configuration, `raft-base-tick-interval` is the time interval at which Raftstore drives the Raft state machine of each Region, which means at this time interval, Raftstore sends a tick message to the Raft state machine. Increasing this interval can effectively reduce the number of messages from Raftstore.
+上記の構成では、 `raft-base-tick-interval`はRaftstoreが各リージョンのRaftステートマシンを駆動する時間間隔です。つまり、この時間間隔で、RaftstoreはティックメッセージをRaftステートマシンに送信します。この間隔を長くすると、Raftstoreからのメッセージの数を効果的に減らすことができます。
 
-Note that this interval between tick messages also determines the intervals between `election timeout` and `heartbeat`. See the following example:
+ティックメッセージ間のこの間隔は、 `election timeout`と`heartbeat`の間の間隔も決定することに注意してください。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -121,28 +121,28 @@ raft-election-timeout = raft-base-tick-interval * raft-election-timeout-ticks
 raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 ```
 
-If Region followers have not received the heartbeat from the leader within the `raft-election-timeout` interval, these followers determine that the leader has failed and start a new election. `raft-heartbeat-interval` is the interval at which a leader sends a heartbeat to followers. Therefore, increasing the value of `raft-base-tick-interval` can reduce the number of network messages sent from Raft state machines but also makes it longer for Raft state machines to detect the leader failure.
+リージョンフォロワーが`raft-election-timeout`間隔内にリーダーからハートビートを受信しなかった場合、これらのフォロワーはリーダーが失敗したと判断し、新しい選挙を開始します。 `raft-heartbeat-interval`は、リーダーがフォロワーにハートビートを送信する間隔です。したがって、値を`raft-base-tick-interval`に増やすと、Raftステートマシンから送信されるネットワークメッセージの数を減らすことができますが、Raftステートマシンがリーダーの障害を検出する時間が長くなります。
 
-## Other problems and solutions
+## その他の問題と解決策 {#other-problems-and-solutions}
 
-This section describes some other problems and solutions.
+このセクションでは、その他の問題と解決策について説明します。
 
-### Switching PD Leader is slow
+### PDリーダーの切り替えが遅い {#switching-pd-leader-is-slow}
 
-PD needs to persist Region Meta information on etcd to ensure that PD can quickly resume to provide Region routing services after switching the PD Leader node. As the number of Regions increases, the performance problem of etcd appears, making it slower for PD to get Region Meta information from etcd when PD is switching the Leader. With millions of Regions, it might take more than ten seconds or even tens of seconds to get the meta information from etcd.
+PDは、PDリーダーノードを切り替えた後、PDがリージョンルーティングサービスの提供を迅速に再開できるように、etcdにリージョンメタ情報を保持する必要があります。リージョンの数が増えると、etcdのパフォーマンスの問題が発生し、PDがリーダーを切り替えているときにPDがetcdからリージョンメタ情報を取得するのが遅くなります。数百万のリージョンでは、etcdからメタ情報を取得するのに10秒以上または数十秒かかる場合があります。
 
-To address this problem, `use-region-storage` is enabled by default in PD since TiDB v3.0. With this feature enabled, PD stores Region Meta information on local LevelDB and synchronizes the information among PD nodes through other mechanisms.
+この問題に対処するために、TiDB v3.0以降、PDではデフォルトで`use-region-storage`が有効になっています。この機能を有効にすると、PDはリージョンメタ情報をローカルLevelDBに保存し、他のメカニズムを介してPDノード間で情報を同期します。
 
-### PD routing information is not updated in time
+### PDルーティング情報が時間内に更新されない {#pd-routing-information-is-not-updated-in-time}
 
-In TiKV, pd-worker regularly reports Region Meta information to PD. When TiKV is restarted or switches the Region leader, PD needs to recalculate Region's `approximate size / keys` through statistics. Therefore, with a large number of Regions, the single-threaded pd-worker might become the bottleneck, causing tasks to be piled up and not processed in time. In this situation, PD cannot obtain certain Region Meta information in time so that the routing information is not updated in time. This problem does not affect the actual reads and writes, but might cause inaccurate PD scheduling and require several round trips when TiDB updates Region cache.
+TiKVでは、pd-workerはRegionMeta情報をPDに定期的に報告します。 TiKVが再起動されるか、リージョンリーダーが切り替わると、PDは統計を通じてリージョン`approximate size / keys`を再計算する必要があります。したがって、リージョンの数が多いと、シングルスレッドのpd-workerがボトルネックになり、タスクが積み重なって時間内に処理されない可能性があります。この状況では、PDは特定のRegion Meta情報を時間内に取得できないため、ルーティング情報は時間内に更新されません。この問題は実際の読み取りと書き込みには影響しませんが、不正確なPDスケジューリングを引き起こし、TiDBがリージョンキャッシュを更新するときに数回のラウンドトリップが必要になる可能性があります。
 
-You can check **Worker pending tasks** under **Task** in the **TiKV Grafana** panel to determine whether pd-worker has tasks piled up. Generally, `pending tasks` should be kept at a relatively low value.
+**TiKV Grafana**パネルの<strong>[タスク</strong>]で[<strong>ワーカーの保留中のタスク</strong>]を確認して、pd-workerにタスクが積み上げられているかどうかを確認できます。一般に、 `pending tasks`は比較的低い値に保つ必要があります。
 
 ![Check pd-worker](/media/best-practices/pd-worker-metrics.png)
 
-pd-worker has been optimized for better performance since [v3.0.5](/releases/release-3.0.5.md#tikv). If you encounter a similar problem, it is recommended to upgrade to the latest version.
+pd-workerは、 [v3.0.5](/releases/release-3.0.5.md#tikv)以降、パフォーマンスが向上するように最適化されています。同様の問題が発生した場合は、最新バージョンにアップグレードすることをお勧めします。
 
-### Prometheus is slow to query metrics
+### Prometheusはメトリックのクエリに時間がかかります {#prometheus-is-slow-to-query-metrics}
 
-In a large-scale cluster, as the number of TiKV instances increases, Prometheus has greater pressure to query metrics, making it slower for Grafana to display these metrics. To ease this problem, metrics pre-calculation is configured since v3.0.
+大規模なクラスタでは、TiKVインスタンスの数が増えると、Prometheusはメトリックのクエリに大きなプレッシャーをかけ、Grafanaがこれらのメトリックを表示するのが遅くなります。この問題を緩和するために、v3.0以降、メトリックの事前計算が構成されています。

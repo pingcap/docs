@@ -2,78 +2,78 @@
 title: tiup dm patch
 ---
 
-# tiup dm patch
+# tiupdmパッチ {#tiup-dm-patch}
 
-If you need to dynamically replace the binaries of a service while the cluster is running (that is, to keep the cluster available during the replacement), you can use the `tiup dm patch` command. The command does the following:
+クラスタの実行中にサービスのバイナリを動的に置換する必要がある場合（つまり、置換中にクラスタを使用可能な状態に保つため）、 `tiup dm patch`コマンドを使用できます。このコマンドは次のことを行います。
 
-- Uploads the binary package for replacement to the target machine.
-- Takes the related nodes offline using the API.
-- Stops the target service.
-- Unpacks the binary package and replaces the service.
-- Starts the target service.
+-   交換用のバイナリパッケージをターゲットマシンにアップロードします。
+-   APIを使用して関連ノードをオフラインにします。
+-   ターゲットサービスを停止します。
+-   バイナリパッケージを解凍し、サービスを置き換えます。
+-   ターゲットサービスを開始します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm patch <cluster-name> <package-path> [flags]
 ```
 
-- `<cluster-name>`: The name of the cluster to be operated.
-- `<package-path>`: The path to the binary package used for replacement.
+-   `<cluster-name>` ：操作するクラスタの名前。
+-   `<package-path>` ：置換に使用されるバイナリパッケージへのパス。
 
-### Preparation
+### 準備 {#preparation}
 
-You need to pack the binary package required for this command in advance according to the following steps:
+次の手順に従って、このコマンドに必要なバイナリパッケージを事前にパックする必要があります。
 
-- Determine the name `${component}` of the component to be replaced (dm-master, dm-worker ...), the `${version}` of the component (v2.0.0, v2.0.1 ...), and the operating system `${os}` and platform `${arch}` on which the component runs.
-- Download the current component package using the command `wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`.
-- Run `mkdir -p /tmp/package && cd /tmp/package` to create a temporary directory to pack files.
-- Run `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz` to unpack the original binary package.
-- Run `find .` to view the file structure in the temporary package directory.
-- Copy the binary files or configuration files to the corresponding locations in the temporary directory.
-- Run `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *` to pack the files in the temporary directory.
-- Finally, you can use `/tmp/${component}-hotfix-${os}-${arch}.tar.gz` as the value of `<package-path>` in the `tiup dm patch` command.
+-   置き換えるコンポーネントの名前`${component}` （dm-master、dm-worker ...）、コンポーネントの`${version}` （v2.0.0、v2.0.1 ...）、およびオペレーティングシステム`${os}`とプラットフォーム`${arch}`を決定します。コンポーネントが実行します。
+-   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネントパッケージをダウンロードします。
+-   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
+-   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリパッケージを解凍します。
+-   `find .`を実行して、一時パッケージディレクトリ内のファイル構造を表示します。
+-   バイナリファイルまたは構成ファイルを一時ディレクトリの対応する場所にコピーします。
+-   `tar czf /tmp/${component}-hotfix-${os}-${arch}.tar.gz *`を実行して、ファイルを一時ディレクトリにパックします。
+-   最後に、 `tiup dm patch`コマンドで`<package-path>`の値として`/tmp/${component}-hotfix-${os}-${arch}.tar.gz`を使用できます。
 
-## Options
+## オプション {#options}
 
-### --overwrite
+### -上書き {#overwrite}
 
-- After you patch a certain component (such as dm-worker), when the tiup-dm scales out the component, tiup-dm uses the original component version by default. To use the version that you patch when the cluster scales out in the future, you need to specify the option `--overwrite` in the command.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   特定のコンポーネント（dm-workerなど）にパッチを適用した後、tiup-dmがコンポーネントをスケールアウトすると、tiup-dmはデフォルトで元のコンポーネントバージョンを使用します。クラスタが将来スケールアウトするときにパッチを適用するバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the nodes to be replaced. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
-- Data type: `STRING`
-- If this option is not specified, TiUP selects all nodes to replace by default.
+-   置き換えるノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   データ型： `STRING`
+-   このオプションが指定されていない場合、TiUPはデフォルトで置き換えるすべてのノードを選択します。
 
-> **Note:**
+> **ノート：**
 >
-> If the option `-R, --role` is specified at the same time, TiUP then replaces service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+> オプション`-R, --role`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを置き換えます。
 
-### -R, --role
+### -R、-role {#r-role}
 
-- Specifies the roles to be replaced. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
-- Data type: `STRING`
-- If this option is not specified, TiUP selects all roles to replace by default.
+-   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの2番目の列から取得できます。
+-   データ型： `STRING`
+-   このオプションが指定されていない場合、TiUPはデフォルトで置き換えるすべての役割を選択します。
 
-> **Note:**
+> **ノート：**
 >
-> If the option `-N, --node` is specified at the same time, TiUP then replaces service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+> オプション`-N, --node`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを置き換えます。
 
-### --offline
+### - オフライン {#offline}
 
-- Declares that the current cluster is offline. When this option is specified, TiUP DM only replaces the binary files of the cluster components in place without restarting the service.
+-   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-The execution log of tiup-dm.
+tiup-dmの実行ログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

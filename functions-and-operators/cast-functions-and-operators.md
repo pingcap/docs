@@ -3,14 +3,14 @@ title: Cast Functions and Operators
 summary: Learn about the cast functions and operators.
 ---
 
-# Cast Functions and Operators
+# キャスト関数と演算子 {#cast-functions-and-operators}
 
-TiDB supports all of the [cast functions and operators](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html) available in MySQL 5.7.
+TiDBは、MySQL5.7で利用可能な[キャスト関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html)すべてをサポートします。
 
-| Name                                     | Description                      |
-| ---------------------------------------- | -------------------------------- |
-| [`BINARY`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary) | Cast a string to a binary string |
-| [`CAST()`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_cast) | Cast a value as a certain type   |
-| [`CONVERT()`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_convert) | Cast a value as a certain type   |
+| 名前                                                                                          | 説明                  |
+| ------------------------------------------------------------------------------------------- | ------------------- |
+| [`BINARY`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#operator_binary)     | 文字列をバイナリ文字列にキャストします |
+| [`CAST()`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_cast)       | 特定のタイプとして値をキャストする   |
+| [`CONVERT()`](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html#function_convert) | 特定のタイプとして値をキャストする   |
 
-Cast functions and operators enable conversion of values from one data type to another.
+キャスト関数と演算子を使用すると、あるデータ型から別のデータ型に値を変換できます。

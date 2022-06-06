@@ -3,27 +3,27 @@ title: Placement Rules in SQL
 summary: Learn how to schedule placement of tables and partitions using SQL statements.
 ---
 
-# Placement Rules in SQL
+# SQLの配置ルール {#placement-rules-in-sql}
 
-> **Warning:**
+> **警告：**
 >
-> Placement Rules in SQL is an experimental feature introduced in v5.3.0. The syntax might change before its GA, and there might also be bugs. If you understand the risks, you can enable this experiment feature by executing `SET GLOBAL tidb_enable_alter_placement = 1;`.
+> SQLの配置ルールは、v5.3.0で導入された実験的機能です。 GAの前に構文が変更される可能性があり、バグもある可能性があります。リスクを理解している場合は、 `SET GLOBAL tidb_enable_alter_placement = 1;`を実行することでこの実験機能を有効にできます。
 
-Placement Rules in SQL is a feature that enables you to specify where data is stored in a TiKV cluster using SQL interfaces. Using this feature, tables and partitions are scheduled to specific regions, data centers, racks, or hosts. This is useful for scenarios including optimizing a high availability strategy with lower cost, ensuring that local replicas of data are available for local stale reads, and adhering to data locality requirements.
+SQLの配置ルールは、SQLインターフェイスを使用してTiKVクラスタのどこにデータを格納するかを指定できる機能です。この機能を使用して、テーブルとパーティションは特定のリージョン、データセンター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化する、データのローカルレプリカをローカルの古い読み取りに使用できるようにする、データの局所性要件を順守するなどのシナリオで役立ちます。
 
-The detailed user scenarios are as follows:
+詳細なユーザーシナリオは次のとおりです。
 
-- Merge multiple databases of different applications to reduce the cost on database maintenance
-- Increase replica count for important data to improve the application availability and data reliability
-- Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
-- Schedule the leaders of hotspot data to high-performance TiKV instances
-- Separate cold data to lower-cost storage mediums to improve cost efficiency
+-   異なるアプリケーションの複数のデータベースをマージして、データベースの保守コストを削減します
+-   重要なデータのレプリカ数を増やして、アプリケーションの可用性とデータの信頼性を向上させます
+-   新しいデータをSSDに保存し、古いデータをHHDに保存して、データのアーカイブとストレージのコストを削減します
+-   ホットスポットデータのリーダーを高性能TiKVインスタンスにスケジュールする
+-   コールドデータを低コストのストレージメディアに分離して、コスト効率を向上させます
 
-## Specify placement options
+## 配置オプションを指定する {#specify-placement-options}
 
-To use Placement Rules in SQL, you need to specify one or more placement options in a SQL statement. To specify the Placement options, you can either use _direct placement_ or use a _placement policy_.
+SQLで配置ルールを使用するには、SQLステートメントで1つ以上の配置オプションを指定する必要があります。配置オプションを指定するには、*直接配置*を使用するか、<em>配置ポリシー</em>を使用できます。
 
-In the following example, both tables `t1` and `t2` have the same rules. `t1` is specified rules using a direct placement while `t2` is specified rules using a placement policy.
+次の例では、テーブル`t1`と`t2`の両方に同じルールがあります。 `t1`は直接配置を使用して指定されたルールであり、 `t2`は配置ポリシーを使用して指定されたルールです。
 
 ```sql
 CREATE TABLE t1 (a INT) PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -31,17 +31,17 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-It is recommended to use placement policies for simpler rule management. When you change a placement policy (via [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)), the change automatically propagates to all database objects.
+ルール管理を簡単にするために、配置ポリシーを使用することをお勧めします。配置ポリシーを（ [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)を介して）変更すると、変更はすべてのデータベースオブジェクトに自動的に反映されます。
 
-If you use direct placement options, you have to alter rules for each object (for example, tables and partitions).
+直接配置オプションを使用する場合は、各オブジェクト（テーブルやパーティションなど）のルールを変更する必要があります。
 
-`PLACEMENT POLICY` is not associated with any database schema and has the global scope. Therefore, assigning a placement policy does not require any additional privileges over the `CREATE TABLE` privilege.
+`PLACEMENT POLICY`はどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるために、 `CREATE TABLE`の特権に対する追加の特権は必要ありません。
 
-## Option reference
+## オプションリファレンス {#option-reference}
 
-> **Note:**
+> **ノート：**
 >
-> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
+> 配置オプションは、各TiKVノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションはTiKVの`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの要約を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
 > ```sql
 > mysql> show placement labels;
@@ -55,51 +55,51 @@ If you use direct placement options, you have to alter rules for each object (fo
 > 3 rows in set (0.00 sec)
 > ```
 
-| Option Name                | Description                                                                                    |
-|----------------------------|------------------------------------------------------------------------------------------------|
-| `PRIMARY_REGION`           | Raft leaders are placed in stores that have the `region` label that matches the value of this option.     |
-| `REGIONS`                  | Raft followers are placed in stores that have the `region` label that matches the value of this option. |
-| `SCHEDULE`                 | The strategy used to schedule the placement of followers. The value options are `EVEN` (default) or `MAJORITY_IN_PRIMARY`. |
-| `FOLLOWERS`                | The number of followers. For example, `FOLLOWERS=2` means that there will be 3 replicas of the data (2 followers and 1 leader). |
+| オプション名           | 説明                                                                            |
+| ---------------- | ----------------------------------------------------------------------------- |
+| `PRIMARY_REGION` | いかだリーダーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                             |
+| `REGIONS`        | いかだフォロワーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                            |
+| `SCHEDULE`       | フォロワーの配置をスケジュールするために使用される戦略。値のオプションは`EVEN` （デフォルト）または`MAJORITY_IN_PRIMARY`です。 |
+| `FOLLOWERS`      | フォロワーの数。たとえば、 `FOLLOWERS=2`は、データのレプリカが3つあることを意味します（フォロワー2つとリーダー1つ）。           |
 
-In addition to the placement options above, you can also use the advance configurations. For details, see [Advance placement](#advanced-placement).
+上記の配置オプションに加えて、事前構成を使用することもできます。詳細については、 [アドバンストプレイスメント](#advanced-placement)を参照してください。
 
-| Option Name                | Description                                                                                    |
-| --------------| ------------ |
-| `CONSTRAINTS`              | A list of constraints that apply to all roles. For example, `CONSTRAINTS="[+disk=ssd]`.        |
-| `FOLLOWER_CONSTRAINTS`     | A list of constraints that only apply to followers.                                            |
+| オプション名                 | 説明                                                    |
+| ---------------------- | ----------------------------------------------------- |
+| `CONSTRAINTS`          | すべての役割に適用される制約のリスト。たとえば、 `CONSTRAINTS="[+disk=ssd]` 。 |
+| `FOLLOWER_CONSTRAINTS` | フォロワーにのみ適用される制約のリスト。                                  |
 
-## Examples
+## 例 {#examples}
 
-### Increase the number of replicas
+### レプリカの数を増やす {#increase-the-number-of-replicas}
 
-The default configuration of [`max-replicas`](/pd-configuration-file.md#max-replicas) is `3`. To increase this for a specific set of tables, you can use a placement policy as follows:
+[`max-replicas`](/pd-configuration-file.md#max-replicas)のデフォルト構成は`3`です。特定のテーブルセットに対してこれを増やすには、次のように配置ポリシーを使用できます。
 
 ```sql
 CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
 ```
 
-Note that the PD configuration includes the leader and follower count, thus 4 followers + 1 leader equals 5 replicas in total.
+PD構成にはリーダーとフォロワーの数が含まれているため、4つのフォロワー+1つのリーダーは合計5つのレプリカに相当することに注意してください。
 
-To expand on this example, you can also use `PRIMARY_REGION` and `REGIONS` placement options to describe the placement for the followers:
+この例を拡張するために、 `PRIMARY_REGION`と`REGIONS`の配置オプションを使用して、フォロワーの配置を説明することもできます。
 
 ```sql
 CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-The `SCHEDULE` option instructs TiDB on how to balance the followers. The default schedule of `EVEN` ensures a balance of followers in all regions.
+`SCHEDULE`オプションは、フォロワーのバランスをとる方法についてTiDBに指示します。デフォルトのスケジュールである`EVEN`は、すべての地域でフォロワーのバランスを確保します。
 
-To ensure that enough followers are placed in the primary region (`us-east-1`) so that quorum can be achieved, you can use the `MAJORITY_IN_PRIMARY` schedule. This schedule helps provide lower latency transactions at the expense of some availability. If the primary region fails, `MAJORITY_IN_PRIMARY` cannot provide automatic failover.
+クォーラムを達成できるように十分なフォロワーがプライマリリージョン（ `us-east-1` ）に配置されるようにするには、 `MAJORITY_IN_PRIMARY`のスケジュールを使用できます。このスケジュールは、可用性をいくらか犠牲にして、待ち時間の短いトランザクションを提供するのに役立ちます。プライマリリージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`は自動フェイルオーバーを提供できません。
 
-### Assign placement to a partitioned table
+### パーティションテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
 
-> **Note:**
+> **ノート：**
 >
-> The following example uses list partitioning, which is currently an experimental feature of TiDB. Partitioned tables also require the `PRIMARY KEY` to be included in all columns in the table's partitioning function.
+> 次の例では、現在TiDBの実験的機能であるリストパーティショニングを使用しています。パーティション化されたテーブルでは、テーブルのパーティション化関数のすべての列に`PRIMARY KEY`が含まれている必要もあります。
 
-In addition to assigning placement options to tables, you can also assign the options to table partitions. For example:
+テーブルに配置オプションを割り当てるだけでなく、テーブルパーティションにオプションを割り当てることもできます。例えば：
 
 ```sql
 CREATE PLACEMENT POLICY europe PRIMARY_REGION="eu-central-1" REGIONS="eu-central-1,eu-west-1";
@@ -115,9 +115,9 @@ CREATE TABLE t1 (
 );
 ```
 
-### Set the default placement for a schema
+### スキーマのデフォルトの配置を設定します {#set-the-default-placement-for-a-schema}
 
-You can directly attach the default placement options to a database schema. This works similar to setting the default character set or collation for a schema. Your specified placement options apply when no other options are specified. For example:
+デフォルトの配置オプションをデータベーススキーマに直接アタッチできます。これは、スキーマのデフォルトの文字セットまたは照合順序を設定するのと同様に機能します。指定した配置オプションは、他のオプションが指定されていない場合に適用されます。例えば：
 
 ```sql
 CREATE TABLE t1 (a INT);  -- Creates a table t1 with no placement options.
@@ -133,13 +133,13 @@ ALTER DATABASE test FOLLOWERS=2;  -- Changes the default placement, and does not
 CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default FOLLOWERS=2 option.
 ```
 
-Because placement options are only inherited from the database schema when a table is created, it is recommended to set the default placement option using a `PLACEMENT POLICY`. This ensures that future changes to the policy propagate to existing tables.
+配置オプションは、テーブルの作成時にデータベーススキーマからのみ継承されるため、 `PLACEMENT POLICY`を使用してデフォルトの配置オプションを設定することをお勧めします。これにより、ポリシーへの将来の変更が既存のテーブルに確実に反映されます。
 
-### Advanced placement
+### アドバンストプレイスメント {#advanced-placement}
 
-The placement options `PRIMARY_REGION`, `REGIONS`, and `SCHEDULE` meet the basic needs of data placement at the loss of some flexibility. For more complex scenarios with the need for higher flexibility, you can also use the advanced placement options of `CONSTRAINTS` and `FOLLOWER_CONSTRAINTS`. You cannot specify the `PRIMARY_REGION`, `REGIONS`, or `SCHEDULE` option with the `CONSTRAINTS` option at the same time. If you specify both at the same time, an error will be returned.
+配置オプション`PRIMARY_REGION` 、および`REGIONS`は、ある程度の柔軟性を失いながら、データ配置の基本的なニーズを満たし`SCHEDULE` 。より高い柔軟性が必要なより複雑なシナリオでは、 `CONSTRAINTS`および`FOLLOWER_CONSTRAINTS`の高度な配置オプションを使用することもできます。 `PRIMARY_REGION` 、または`REGIONS`オプションと`SCHEDULE`オプションを`CONSTRAINTS`指定することはできません。両方を同時に指定すると、エラーが返されます。
 
-For example, to set constraints that data must reside on a TiKV store where the label `disk` must match a value:
+たとえば、データがラベル`disk`が値と一致する必要があるTiKVストアに存在する必要があるという制約を設定するには、次のようにします。
 
 ```sql
 CREATE PLACEMENT POLICY storeonfastssd CONSTRAINTS="[+disk=ssd]";
@@ -157,23 +157,23 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd: 1,+disk=hdd: 2}`).
+制約は、リスト形式（ `[+disk=ssd]` ）またはディクショナリ形式（ `{+disk=ssd: 1,+disk=hdd: 2}` ）のいずれかで指定できます。
 
-In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=hdd` indicates that the label `disk` must not be `hdd`.
+リスト形式では、制約はキーと値のペアのリストとして指定されます。キーは`+`または`-`で始まります。 `+disk=ssd`は、ラベル`disk`を`ssd`に設定する必要があることを示し、 `-disk=hdd`は、ラベル`disk`を`hdd`に設定してはならないことを示します。
 
-In dictionary format, constraints also indicate a number of instances that apply to that rule. For example, `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1,+any: 1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2, 1 follower is in us-west-1, and 1 follower can be in any region. For another example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=hdd":1,"+region=us-west-1":1}';` indicates that 1 follower is in us-east-1 with an hdd disk, and 1 follower is in us-west-1.
+ディクショナリ形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1,+any: 1}";`は、1人のフォロワーがus-east-1にいること、1人のフォロワーがus-east-2にいること、1人のフォロワーがus-west-1にいること、1人のフォロワーが任意の地域にいることを示します。別の例では、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=hdd":1,"+region=us-west-1":1}';`は、1人のフォロワーがhddディスクを使用してus-east-1にあり、1人のフォロワーがus-west-1にいることを示します。
 
-> **Note:**
+> **ノート：**
 >
-> Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=hdd:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`. But `"{+disk=ssd: 1,+disk=hdd: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=hdd": 1}'`.
+> 辞書とリストの形式はYAMLパーサーに基づいていますが、YAML構文が正しく解析されていない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=hdd:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=hdd: 1}"`は`'{"+disk=ssd": 1, "+disk=hdd": 1}'`として正しく解析されます。
 
-## Known limitations
+## 既知の制限 {#known-limitations}
 
-The following known limitations exist in the experimental release of Placement Rules in SQL:
+SQLの配置ルールの実験的リリースには、次の既知の制限があります。
 
-* Dumpling does not support dumping placement policies. See [issue #29371](https://github.com/pingcap/tidb/issues/29371).
-* TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
-* Temporary tables do not support placement options (either via direct placement or placement policies).
-* Syntactic sugar rules are permitted for setting `PRIMARY_REGION` and `REGIONS`. In the future, we plan to add varieties for `PRIMARY_RACK`, `PRIMARY_ZONE`, and `PRIMARY_HOST`. See [issue #18030](https://github.com/pingcap/tidb/issues/18030).
-* TiFlash learners are not configurable through Placement Rules syntax.
-* Placement rules only ensure that data at rest resides on the correct TiKV store. The rules do not guarantee that data in transit (via either user queries or internal operations) only occurs in a specific region.
+-   Dumplingは、餃子配置ポリシーをサポートしていません。 [号＃29371](https://github.com/pingcap/tidb/issues/29371)を参照してください。
+-   Backup＆Restore（BR）、TiCDC、TiDB Lightning、TiDB Data Migration（DM）などのTiDBツールは、配置ルールをまだサポートしていません。
+-   一時テーブルは、配置オプションをサポートしていません（直接配置または配置ポリシーのいずれかを介して）。
+-   設定`PRIMARY_REGION`および`REGIONS`には、構文糖衣規則が許可されています。将来的には、 `PRIMARY_RACK`の`PRIMARY_ZONE`を追加する予定`PRIMARY_HOST` 。 [号18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
+-   TiFlash学習者は、配置ルール構文を使用して構成することはできません。
+-   配置ルールは、保存されているデータが正しいTiKVストアに存在することのみを保証します。このルールは、転送中のデータ（ユーザークエリまたは内部操作のいずれかを介して）が特定のリージョンでのみ発生することを保証するものではありません。

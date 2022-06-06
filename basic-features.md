@@ -3,178 +3,178 @@ title: TiDB Features
 summary: Learn about the basic features of TiDB.
 ---
 
-# TiDB Features
+# TiDBの機能 {#tidb-features}
 
-This document lists the features supported in each TiDB version. Note that supports for experimental features might change before the final release.
+このドキュメントには、各TiDBバージョンでサポートされている機能がリストされています。実験的機能のサポートは、最終リリースの前に変更される可能性があることに注意してください。
 
-## Data types, functions, and operators
+## データ型、関数、および演算子 {#data-types-functions-and-operators}
 
-| Data types, functions, and operators                         | **5.4**          |     5.3      |     5.2      |     5.1      |     5.0      |     4.0      |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Numeric types](/data-type-numeric.md)                       | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Date and time types](/data-type-date-and-time.md)           | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [String types](/data-type-string.md)                         | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [JSON type](/data-type-json.md)                              | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Control flow functions](/functions-and-operators/control-flow-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [String functions](/functions-and-operators/string-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Date and time functions](/functions-and-operators/date-and-time-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Bit functions and operators](/functions-and-operators/bit-functions-and-operators.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Cast functions and operators](/functions-and-operators/cast-functions-and-operators.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Encryption and compression functions](/functions-and-operators/encryption-and-compression-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Information functions](/functions-and-operators/information-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [JSON functions](/functions-and-operators/json-functions.md) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Aggregation functions](/functions-and-operators/aggregate-group-by-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Window functions](/functions-and-operators/window-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Operators](/functions-and-operators/operators.md)           | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Character sets and collations](/character-set-and-collation.md) [^1] | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| データ型、関数、および演算子                                                                 | **5.4** | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 4.0 |
+| ------------------------------------------------------------------------------ | ------- | :-: | :-: | :-: | :-: | :-----: |
+| [数値タイプ](/data-type-numeric.md)                                                 | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [日付と時刻のタイプ](/data-type-date-and-time.md)                                       | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [文字列タイプ](/data-type-string.md)                                                 | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [JSONタイプ](/data-type-json.md)                                                  | 実験的     | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
+| [制御フロー機能](/functions-and-operators/control-flow-functions.md)                  | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [文字列関数](/functions-and-operators/string-functions.md)                          | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)        | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [日付と時刻の関数](/functions-and-operators/date-and-time-functions.md)                | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [ビット関数と演算子](/functions-and-operators/bit-functions-and-operators.md)           | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)         | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md) | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [情報機能](/functions-and-operators/information-functions.md)                      | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [JSON関数](/functions-and-operators/json-functions.md)                           | 実験的     | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
+| [集計関数](/functions-and-operators/aggregate-group-by-functions.md)               | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [ウィンドウ関数](/functions-and-operators/window-functions.md)                        | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [その他の機能](/functions-and-operators/miscellaneous-functions.md)                  | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [オペレーター](/functions-and-operators/operators.md)                                | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [^1] [キャラクターセットと照合](/character-set-and-collation.md)                           | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 
-## Indexing and constraints
+## インデックス作成と制約 {#indexing-and-constraints}
 
-| Indexing and constraints                                     | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)   | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [RocksDB engine](/storage-engine/rocksdb-overview.md)        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Titan plugin](/storage-engine/titan-overview.md)            | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Invisible indexes](/sql-statements/sql-statement-add-index.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
-| [Composite `PRIMARY KEY`](/constraints.md)                   | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Unique indexes](/constraints.md)                            | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Clustered index on integer `PRIMARY KEY`](/constraints.md)  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Clustered index on composite or non-integer key](/constraints.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
+| インデックス作成と制約                                                               | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| ------------------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index) | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [列型ストレージ（TiFlash）](/tiflash/tiflash-overview.md)                          | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [RocksDBエンジン](/storage-engine/rocksdb-overview.md)                        | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [Titanプラグイン](/storage-engine/titan-overview.md)                           | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [見えないインデックス](/sql-statements/sql-statement-add-index.md)                  | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
+| [複合`PRIMARY KEY`](/constraints.md)                                        | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [一意のインデックス](/constraints.md)                                              | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [整数の`PRIMARY KEY`のクラスター化されたインデックス](/constraints.md)                       | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [複合キーまたは非整数キーのクラスター化されたインデックス](/constraints.md)                           | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
 
-## SQL statements
+## SQLステートメント {#sql-statements}
 
-| **SQL statements** [^2]                                      | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| Basic `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `REPLACE`      | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `INSERT ON DUPLICATE KEY UPDATE`                             | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `LOAD DATA INFILE`                                           | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `SELECT INTO OUTFILE`                                        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `INNER JOIN`, `LEFT\|RIGHT [OUTER] JOIN`                     | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| `UNION`, `UNION ALL`                                         | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXCEPT` and `INTERSECT` operators](/functions-and-operators/set-operators.md) | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
-| `GROUP BY`, `ORDER BY`                                       | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Window Functions](/functions-and-operators/window-functions.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Common Table Expressions (CTE)](/sql-statements/sql-statement-with.md) | Y            |      Y       |      Y       |      Y       |      N       |      N       |
-| `START TRANSACTION`, `COMMIT`, `ROLLBACK`                    | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [User-defined variables](/user-defined-variables.md)         | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| **SQLステートメント**[^2]                                                                | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| --------------------------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| `REPLACE` `SELECT` `INSERT` `UPDATE` `DELETE`                                     | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| `INSERT ON DUPLICATE KEY UPDATE`                                                  | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| `LOAD DATA INFILE`                                                                | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| `SELECT INTO OUTFILE`                                                             | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| `INNER JOIN` `LEFT\|RIGHT [OUTER] JOIN`                                           | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| `UNION` `UNION ALL`                                                               | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [`EXCEPT`および<code>INTERSECT</code>演算子](/functions-and-operators/set-operators.md) | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
+| `GROUP BY` `ORDER BY`                                                             | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [ウィンドウ関数](/functions-and-operators/window-functions.md)                           | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [共通テーブル式（CTE）](/sql-statements/sql-statement-with.md)                             | Y       |    Y    |    Y    |    Y    |    N    |      N      |
+| `START TRANSACTION` `COMMIT` `ROLLBACK`                                           | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [`EXPLAIN`](/sql-statements/sql-statement-explain.md)                             | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)             | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [ユーザー定義変数](/user-defined-variables.md)                                            | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
 
-## Advanced SQL features
+## 高度なSQL機能 {#advanced-sql-features}
 
-| **Advanced SQL features**                                    | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [Prepared statement cache](/sql-prepared-plan-cache.md)       | Y            |      Y       | Experimental | Experimental | Experimental | Experimental |
-| [SQL plan management (SPM)](/sql-plan-management.md)         | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Coprocessor cache](/coprocessor-cache.md)                   | Y            |      Y       |      Y       |      Y       |      Y       | Experimental |
-| [Stale Read](/stale-read.md)                                 | Y            |      Y       |      Y       |      Y       |      N       |      N       |
-| [Follower reads](/follower-read.md)                          | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Read historical data (tidb_snapshot)](/read-historical-data.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Optimizer hints](/optimizer-hints.md)                       | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [MPP Execution Engine](/explain-mpp.md)                       | Y            |      Y       |      Y       |      Y       |      Y       |      N       |
-| [Index Merge](/explain-index-merge.md)                  | Y            | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Placement Rules in SQL](/placement-rules-in-sql.md)         | Experimental | Experimental |      N       |      N       |      N       |      N       |
+| **高度なSQL機能**                                          | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| ----------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [プリペアドステートメントキャッシュ](/sql-prepared-plan-cache.md)      | Y       |    Y    |   実験的   |   実験的   |   実験的   |     実験的     |
+| [SQL計画管理（SPM）](/sql-plan-management.md)               | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [コプロセッサーキャッシュ](/coprocessor-cache.md)                 | Y       |    Y    |    Y    |    Y    |    Y    |     実験的     |
+| [古い読み取り](/stale-read.md)                              | Y       |    Y    |    Y    |    Y    |    N    |      N      |
+| [フォロワーの読み取り](/follower-read.md)                       | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [履歴データの読み取り（tidb_snapshot）](/read-historical-data.md) | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [オプティマイザーのヒント](/optimizer-hints.md)                   | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [MPP実行エンジン](/explain-mpp.md)                          | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
+| [インデックスマージ](/explain-index-merge.md)                  | Y       |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [SQLの配置ルール](/placement-rules-in-sql.md)               | 実験的     |   実験的   |    N    |    N    |    N    |      N      |
 
-## Data definition language (DDL)
+## データ定義言語（DDL） {#data-definition-language-ddl}
 
-| **Data definition language (DDL)**                           | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`        | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Generated columns](/generated-columns.md)                   | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Views](/views.md)                                           | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Auto increment](/auto-increment.md)                         | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Auto random](/auto-random.md)                               | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Multi schema change: add column(s)                           | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Change column type](/sql-statements/sql-statement-modify-column.md) | Y            |      Y       |      Y       |      Y       |      N       |      N       |
-| [Temporary tables](/temporary-tables.md)                     | Y            |      Y       |      N       |      N       |      N       |      N       |
+| **データ定義言語（DDL）**                                                | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| --------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| `TRUNCATE` `CREATE` `DROP` `ALTER` `RENAME`                     | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [生成された列](/generated-columns.md)                                 | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [ビュー](/views.md)                                                | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [シーケンス](/sql-statements/sql-statement-create-sequence.md)       | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [自動増加](/auto-increment.md)                                      | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [自動ランダム](/auto-random.md)                                       | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [DDLアルゴリズムアサーション](/sql-statements/sql-statement-alter-table.md) | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| マルチスキーマの変更：列を追加                                                 | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [列タイプを変更する](/sql-statements/sql-statement-modify-column.md)     | Y       |    Y    |    Y    |    Y    |    N    |      N      |
+| [一時的なテーブル](/temporary-tables.md)                                | Y       |    Y    |    N    |    N    |    N    |      N      |
 
-## Transactions
+## トランザクション {#transactions}
 
-| **Transactions**                                             | **5.4**  | **5.3** | **5.2** | **5.1** | **5.0** | **4.0** |
-| ------------------------------------------------------------ | ---- | :-----: | :-----: | :-----: | :-----: | :-----: |
-| [Async commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) | Y    |    Y    |    Y    |    Y    |    Y    |    N    |
-| [1PC](/system-variables.md#tidb_enable_1pc-new-in-v50)       | Y    |    Y    |    Y    |    Y    |    Y    |    N    |
-| [Large transactions (10GB)](/transaction-overview.md#transaction-size-limit) | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Pessimistic transactions](/pessimistic-transaction.md)      | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Optimistic transactions](/optimistic-transaction.md)        | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Repeatable-read isolation (snapshot isolation)](/transaction-isolation-levels.md) | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Read-committed isolation](/transaction-isolation-levels.md) | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
+| **トランザクション**                                                          | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| --------------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)   | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
+| [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                 | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
+| [大規模なトランザクション（10GB）](/transaction-overview.md#transaction-size-limit) | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [悲観的な取引](/pessimistic-transaction.md)                                 | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [楽観的な取引](/optimistic-transaction.md)                                  | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [繰り返し可能-読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)         | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [読み取り-コミットされた分離](/transaction-isolation-levels.md)                    | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 
-## Partitioning
+## パーティショニング {#partitioning}
 
-| **Partitioning**                                             | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    | **4.0** |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :-----: |
-| [Range partitioning](/partitioned-table.md)                  | Y            |      Y       |      Y       |      Y       |      Y       |    Y    |
-| [Hash partitioning](/partitioned-table.md)                   | Y            |      Y       |      Y       |      Y       |      Y       |    Y    |
-| [List partitioning](/partitioned-table.md)                   | Experimental | Experimental | Experimental | Experimental | Experimental |    N    |
-| [List COLUMNS partitioning](/partitioned-table.md)           | Experimental | Experimental | Experimental | Experimental | Experimental |    N    |
-| [`EXCHANGE PARTITION`](/partitioned-table.md)                | Experimental | Experimental | Experimental | Experimental | Experimental |    N    |
-| [Dynamic Pruning](/partitioned-table.md#dynamic-pruning-mode) | Experimental | Experimental | Experimental | Experimental |      N       |    N    |
+| **パーティショニング**                                      | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| -------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [範囲分割](/partitioned-table.md)                      | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [ハッシュ分割](/partitioned-table.md)                    | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [リストのパーティション化](/partitioned-table.md)              | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |      N      |
+| [COLUMNSパーティショニングを一覧表示します](/partitioned-table.md)  | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |      N      |
+| [`EXCHANGE PARTITION`](/partitioned-table.md)      | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |      N      |
+| [動的剪定](/partitioned-table.md#dynamic-pruning-mode) | 実験的     |   実験的   |   実験的   |   実験的   |    N    |      N      |
 
-## Statistics
+## 統計 {#statistics}
 
-| **Statistics**                                               | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [CMSketch](/statistics.md)                                   | Deprecated   |  Deprecated  |  Deprecated  |  Deprecated  |  Deprecated  |      Y       |
-| [Histograms](/statistics.md)                                 | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Extended statistics (multiple columns)](/statistics.md)     | Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
-| [Statistics Feedback](/statistics.md#automatic-update)       | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| **統計**                                                | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| ----------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [CMSketch](/statistics.md)                            | 非推奨     |   非推奨   |   非推奨   |   非推奨   |   非推奨   |      Y      |
+| [ヒストグラム](/statistics.md)                              | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [拡張統計（複数の列）](/statistics.md)                          | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |      N      |
+| [統計フィードバック](/statistics.md#automatic-update)          | 非推奨     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [高速分析](/system-variables.md#tidb_enable_fast_analyze) | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
 
-## Security
+## 安全 {#security}
 
-| **Security**                                                 | **5.4**  | **5.3** | **5.2** | **5.1** | **5.0** | **4.0** |
-| ------------------------------------------------------------ | ---- | :-----: | :-----: | :-----: | :-----: | :-----: |
-| [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md) | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Encryption at rest (TDE)](/encryption-at-rest.md)           | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Role-based authentication (RBAC)](/role-based-access-control.md) | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Certificate-based authentication](/certificate-authentication.md) | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| `caching_sha2_password` authentication                       | Y    |    Y    |    Y    |    N    |    N    |    N    |
-| [MySQL compatible `GRANT` system](/privilege-management.md)  | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
-| [Dynamic Privileges](/privilege-management.md#dynamic-privileges) | Y    |    Y    |    Y    |    Y    |    N    |    N    |
-| [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) | Y    |    Y    |    Y    |    Y    |    N    |    N    |
-| [Redacted Log Files](/log-redaction.md)                      | Y    |    Y    |    Y    |    Y    |    Y    |    N    |
+| **安全**                                                                 | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| ---------------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [トランスペアレントレイヤーセキュリティ（TLS）](/enable-tls-between-clients-and-servers.md) | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [保管時の暗号化（TDE）](/encryption-at-rest.md)                                 | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [役割ベースの認証（RBAC）](/role-based-access-control.md)                        | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [証明書ベースの認証](/certificate-authentication.md)                            | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| `caching_sha2_password`認証                                              | Y       |    Y    |    Y    |    N    |    N    |      N      |
+| [MySQL互換`GRANT`システム](/privilege-management.md)                         | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [動的権限](/privilege-management.md#dynamic-privileges)                    | Y       |    Y    |    Y    |    Y    |    N    |      N      |
+| [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)      | Y       |    Y    |    Y    |    Y    |    N    |      N      |
+| [編集されたログファイル](/log-redaction.md)                                       | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
 
-## Data import and export
+## データのインポートとエクスポート {#data-import-and-export}
 
-| **Data import and export**                                                                               | **5.4**   | **5.3**      | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
-|----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|:------------:|:------------:|
-| [Fast Importer (TiDB Lightning)](/tidb-lightning/tidb-lightning-overview.md)                             | Y           | Y            | Y            | Y            | Y            | Y            |
-| mydumper logical dumper                                                                                  | Deprecated | Deprecated   | Deprecated   | Deprecated   | Deprecated   | Deprecated   |
-| [Dumpling logical dumper](/dumpling-overview.md)                                                         | Y           | Y            | Y            | Y            | Y            | Y            |
-| [Transactional `LOAD DATA`](/sql-statements/sql-statement-load-data.md)                                  | Y           | Y            | Y            | Y            | Y            | N [^3]       |
-| [Database migration toolkit (DM)](/migration-overview.md)                                                | Y           | Y            | Y            | Y            | Y            | Y            |
-| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                                                      | Y   | Y    | Y    | Y    | Y    | Y    |
-| [Change data capture (CDC)](/ticdc/ticdc-overview.md)                                                    | Y           | Y            | Y            | Y            | Y            | Y            |
+| **データのインポートとエクスポート**                                                        | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| --------------------------------------------------------------------------- | :-----: | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [Fast Importer（TiDB Lightning）](/tidb-lightning/tidb-lightning-overview.md) |    Y    |    Y    |    Y    |    Y    |    Y    |      Y      |
+| mydumper論理ダンパー                                                              |   非推奨   |   非推奨   |   非推奨   |   非推奨   |   非推奨   |     非推奨     |
+| [Dumpling論理ダンパー](/dumpling-overview.md)                                     |    Y    |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [トランザクション`LOAD DATA`](/sql-statements/sql-statement-load-data.md)           |    Y    |    Y    |    Y    |    Y    |    Y    |    N [^3]   |
+| [データベース移行ツールキット（DM）](/migration-overview.md)                                |    Y    |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                         |    Y    |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [変更データキャプチャ（CDC）](/ticdc/ticdc-overview.md)                                 |    Y    |    Y    |    Y    |    Y    |    Y    |      Y      |
 
-## Management, observability, and tools
+## 管理、可観測性、およびツール {#management-observability-and-tools}
 
-| **Management, observability, and tools**                     | **5.4**          |   **5.3**    |   **5.2**    |   **5.1**    |   **5.0**    |   **4.0**    |
-| ------------------------------------------------------------ | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [TiDB Dashboard](/dashboard/dashboard-intro.md)              | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Information schema](/information-schema/information-schema.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Metrics schema](/metrics-schema.md)                         | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Statements summary tables](/statement-summary-tables.md)    | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Slow query log](/identify-slow-queries.md)                  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [TiUP deployment](/tiup/tiup-overview.md)                    | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Ansible deployment                                           | N            |      N       |      N       |      N       |      N       |  Deprecated  |
-| [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Built-in physical backup](/br/backup-and-restore-use-cases.md) | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Global Kill](/sql-statements/sql-statement-kill.md)         | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Lock View](/information-schema/information-schema-data-lock-waits.md) | Y            |      Y       |      Y       | Experimental | Experimental | Experimental |
-| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [`SET CONFIG`](/dynamic-config.md)                           | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Continuous Profiling](/dashboard/continuous-profiling.md)   | Experimental | Experimental |      N       |      N       |      N       |      N       |
-| [Top SQL](/dashboard/top-sql.md)                                                      | Experimental |      N       |      N       |      N       |      N       |      N       |
+| **管理、可観測性、およびツール**                                                     | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| ---------------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
+| [TiDBダッシュボード](/dashboard/dashboard-intro.md)                           | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [SQL診断](/information-schema/information-schema-sql-diagnostics.md)     | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [情報スキーマ](/information-schema/information-schema.md)                    | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [メトリクススキーマ](/metrics-schema.md)                                        | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [ステートメント要約表](/statement-summary-tables.md)                             | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [遅いクエリログ](/identify-slow-queries.md)                                   | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [TiUPの展開](/tiup/tiup-overview.md)                                      | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| Ansibleデプロイメント                                                         | N       |    N    |    N    |    N    |    N    |     非推奨     |
+| [Kubernetesオペレーター](https://docs.pingcap.com/tidb-in-kubernetes/)       | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [組み込みの物理バックアップ](/br/backup-and-restore-use-cases.md)                   | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [グローバルキル](/sql-statements/sql-statement-kill.md)                       | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [ビューをロックする](/information-schema/information-schema-data-lock-waits.md) | Y       |    Y    |    Y    |   実験的   |   実験的   |     実験的     |
+| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)          | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [`SET CONFIG`](/dynamic-config.md)                                     | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
+| [継続的なプロファイリング](/dashboard/continuous-profiling.md)                     | 実験的     |   実験的   |    N    |    N    |    N    |      N      |
+| [Top SQL](/dashboard/top-sql.md)                                       | 実験的     |    N    |    N    |    N    |    N    |      N      |
 
-[^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+[^1]: TiDBは、latin1をutf8のサブセットとして誤って扱います。詳細については、 [TiDB＃18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
 
-[^2]: See [Statement Reference](/sql-statements/sql-statement-select.md) for a full list of SQL statements supported.
+[^2]: サポートされているSQLステートメントの完全なリストについては、 [ステートメントリファレンス](/sql-statements/sql-statement-select.md)を参照してください。
 
-[^3]: For TiDB v4.0, the `LOAD DATA` transaction does not guarantee atomicity.
+[^3]: TiDB v4.0の場合、 `LOAD DATA`トランザクションはアトミック性を保証しません。

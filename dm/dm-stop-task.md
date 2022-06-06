@@ -3,9 +3,9 @@ title: Stop a Data Migration Task
 summary: Learn how to stop a data migration task.
 ---
 
-# Stop a Data Migration Task
+# データ移行タスクを停止する {#stop-a-data-migration-task}
 
-You can use the `stop-task` command to stop a data migration task. For differences between `stop-task` and `pause-task`, refer to [Pause a Data Migration Task](/dm/dm-pause-task.md).
+`stop-task`コマンドを使用して、データ移行タスクを停止できます。 `stop-task`と`pause-task`の違いについては、 [データ移行タスクを一時停止します](/dm/dm-pause-task.md)を参照してください。
 
 {{< copyable "" >}}
 
@@ -26,7 +26,7 @@ Global Flags:
  -s, --source strings   MySQL Source ID
 ```
 
-## Usage example
+## 使用例 {#usage-example}
 
 {{< copyable "" >}}
 
@@ -34,12 +34,12 @@ Global Flags:
 stop-task [-s "mysql-replica-01"]  task-name
 ```
 
-## Flags description
+## フラグの説明 {#flags-description}
 
-- `-s`: (Optional) Specifies the MySQL source where the subtasks of the migration task (that you want to stop) run. If it is set, only subtasks on the specified MySQL source are stopped.
-- `task-name | task-file`: (Required) Specifies the task name or task file path.
+-   `-s` :(オプション）移行タスク（停止する）のサブタスクが実行されるMySQLソースを指定します。設定されている場合、指定されたMySQLソースのサブタスクのみが停止されます。
+-   `task-name | task-file` :(必須）タスク名またはタスクファイルのパスを指定します。
 
-## Returned results
+## 返された結果 {#returned-results}
 
 {{< copyable "" >}}
 

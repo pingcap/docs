@@ -3,11 +3,11 @@ title: REVOKE <role> | TiDB SQL Statement Reference
 summary: An overview of the usage of REVOKE <role> for the TiDB database.
 ---
 
-# `REVOKE <role>`
+# <code>REVOKE &#x3C;role></code> {#code-revoke-x3c-role-code}
 
-This statement removes a previously assigned role from a specified user (or list of users).
+このステートメントは、指定されたユーザー（またはユーザーのリスト）から以前に割り当てられた役割を削除します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 RevokeRoleStmt ::=
@@ -20,9 +20,9 @@ UsernameList ::=
     Username ( ',' Username )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Create a new role for the analytics team, and a new user called `jennifer`:
+分析チームの新しい役割と、 `jennifer`という名前の新しいユーザーを作成します。
 
 ```sql
 $ mysql -uroot
@@ -51,7 +51,7 @@ mysql> GRANT analyticsteam TO jennifer;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-Note that by default `jennifer` needs to `SET ROLE analyticsteam` in order to be able to use the privileges associated with the role:
+ロールに関連付けられた特権を使用できるようにするには、デフォルトで`jennifer`が`SET ROLE analyticsteam`である必要があることに注意してください。
 
 ```sql
 $ mysql -ujennifer
@@ -100,7 +100,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-The statement `SET DEFAULT ROLE` can be used to associated a role to `jennifer` so that she will not have to execute the statement `SET ROLE` in order to assume the privileges associated with the role:
+ステートメント`SET DEFAULT ROLE`を使用してロールを`jennifer`に関連付けることができるため、ロールに関連付けられた特権を引き受けるためにステートメント`SET ROLE`を実行する必要はありません。
 
 ```sql
 $ mysql -uroot
@@ -153,7 +153,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-Revoke the role of analyticsteam from `jennifer`:
+analyticsteamの役割を`jennifer`から取り消します：
 
 ```sql
 $ mysql -uroot
@@ -196,15 +196,15 @@ mysql> SHOW GRANTS;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with roles, which are a feature of MySQL 8.0. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [CREATE ROLE](/sql-statements/sql-statement-create-role.md)
-* [DROP ROLE](/sql-statements/sql-statement-drop-role.md)
-* [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
-* [SET ROLE](/sql-statements/sql-statement-set-role.md)
-* [SET DEFAULT ROLE](/sql-statements/sql-statement-set-default-role.md)
-* [Role-Based Access Control](/role-based-access-control.md)
+-   [役割の作成](/sql-statements/sql-statement-create-role.md)
+-   [ドロップロール](/sql-statements/sql-statement-drop-role.md)
+-   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
+-   [役割を設定する](/sql-statements/sql-statement-set-role.md)
+-   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
+-   [ロールベースのアクセス制御](/role-based-access-control.md)

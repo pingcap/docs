@@ -3,89 +3,90 @@ title: Precheck the Upstream MySQL Instance Configurations
 summary: Learn how to use the precheck feature provided by DM to detect errors in the upstream MySQL instance configurations.
 ---
 
-# Precheck the Upstream MySQL Instance Configurations
+# アップストリームMySQLインスタンス構成を事前に確認します {#precheck-the-upstream-mysql-instance-configurations}
 
-This document introduces the precheck feature provided by DM. This feature is used to detect possible errors in the upstream MySQL instance configuration when the data migration task is started.
+このドキュメントでは、DMが提供する事前チェック機能を紹介します。この機能は、データ移行タスクの開始時にアップストリームのMySQLインスタンス構成で発生する可能性のあるエラーを検出するために使用されます。
 
-## Command
+## 指示 {#command}
 
-`check-task` allows you to precheck whether the upstream MySQL instance configuration satisfies the DM requirements.
+`check-task`を使用すると、アップストリームのMySQLインスタンス構成がDM要件を満たしているかどうかを事前に確認できます。
 
-## Checking items
+## 確認項目 {#checking-items}
 
-Upstream and downstream database users must have the corresponding read and write privileges. DM checks the following privileges and configuration automatically while the data migration task is started:
+アップストリームおよびダウンストリームのデータベースユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。 DMは、データ移行タスクの開始時に、次の特権と構成を自動的にチェックします。
 
-+ Database version
+-   データベースバージョン
 
-    - MySQL version > 5.5
-    - MariaDB version >= 10.1.2
+    -   MySQLバージョン&gt;5.5
 
-    > **Warning:**
+    -   MariaDBバージョン&gt;=10.1.2
+
+    > **警告：**
     >
-    > Support for MySQL 8.0 is an experimental feature of TiDB Data Migration v2.0 and later versions. It is **NOT** recommended that you use it in a production environment.
+    > MySQL 8.0のサポートは、TiDB DataMigrationv2.0以降のバージョンの実験的機能です。実稼働環境で使用することはお勧めし**ません**。
 
-+ Database configuration
+-   データベース構成
 
-    - Whether `server_id` is configured
+    -   `server_id`が構成されているかどうか
 
-+ MySQL binlog configuration
+-   MySQLのbinlog構成
 
-    - Whether the binlog is enabled (DM requires that the binlog must be enabled)
-    - Whether `binlog_format=ROW` (DM only supports migration of the binlog in the ROW format)
-    - Whether `binlog_row_image=FULL` (DM only supports `binlog_row_image=FULL`)
+    -   binlogが有効かどうか（DMではbinlogを有効にする必要があります）
+    -   `binlog_format=ROW`かどうか（DMはROW形式のbinlogの移行のみをサポートします）
+    -   `binlog_row_image=FULL`かどうか（DMは`binlog_row_image=FULL`のみをサポートします）
 
-+ The privileges of the upstream MySQL instance users
+-   アップストリームMySQLインスタンスユーザーの権限
 
-    MySQL users in DM configuration need to have the following privileges at least:
+    DM構成のMySQLユーザーは、少なくとも次の権限を持っている必要があります。
 
-    - REPLICATION SLAVE
-    - REPLICATION CLIENT
-    - RELOAD
-    - SELECT
+    -   レプリケーションスレーブ
+    -   複製クライアント
+    -   リロード
+    -   選択する
 
-+ The compatibility of the upstream MySQL table schema
+-   アップストリームMySQLテーブルスキーマの互換性
 
-    TiDB differs from MySQL in compatibility in the following aspects:
+    TiDBは、次の点でMySQLと互換性が異なります。
 
-    - TiDB does not support the foreign key.
-    - [Character set compatibility differs](/character-set-and-collation.md).
+    -   TiDBは外部キーをサポートしていません。
+    -   [文字セットの互換性が異なります](/character-set-and-collation.md) 。
 
-    DM will also check whether the primary key or unique key restriction exists in all upstream tables. This check is introduced in v1.0.7.
+    DMは、すべてのアップストリームテーブルに主キーまたは一意キーの制限が存在するかどうかもチェックします。このチェックはv1.0.7で導入されました。
 
-+ The consistency of the sharded tables in the multiple upstream MySQL instances
+-   複数のアップストリームMySQLインスタンスのシャーディングされたテーブルの一貫性
 
-    + The schema consistency of all sharded tables
+    -   すべてのシャーディングされたテーブルのスキーマの一貫性
 
-        - Column size
-        - Column name
-        - Column position
-        - Column type
-        - Primary key
-        - Unique index
+        -   列サイズ
+        -   列名
+        -   列の位置
+        -   列タイプ
+        -   主キー
+        -   一意のインデックス
 
-    + The conflict of the auto increment primary keys in the sharded tables
+    -   シャーディングされたテーブルの自動インクリメント主キーの競合
 
-        - The check fails in the following two conditions:
+        -   チェックは、次の2つの条件で失敗します。
 
-            - The auto increment primary key exists in the sharded tables and its column type *is not* bigint.
-            - The auto increment primary key exists in the sharded tables and its column type *is* bigint, but column mapping *is not* configured.
+            -   自動インクリメントの主キーはシャーディングされたテーブルに存在し、その列タイプ*はbigintではありません*。
+            -   自動インクリメントの主キーはシャーディングされたテーブルに存在し、その列タイプ*は*bigintですが、列マッピング<em>は構成されていません</em>。
 
-        - The check succeeds in other conditions except the two above.
+        -   チェックは、上記の2つを除く他の条件で成功します。
 
-### Disable checking items
+### チェック項目を無効にする {#disable-checking-items}
 
-DM checks items according to the task type, and you can use `ignore-checking-items` in the task configuration file to disable checking items. The list of element options for `ignore-checking-items` is as follows:
+DMは、タスクタイプに従って項目をチェックします。タスク構成ファイルで`ignore-checking-items`を使用すると、項目のチェックを無効にできます。 `ignore-checking-items`の要素オプションのリストは次のとおりです。
 
-| Element  | Description   |
-| :----  | :-----|
-| all | Disables all checks |
-| dump_privilege | Disables checking dump-related privileges of the upstream MySQL instance user |
-| replication_privilege | Disables checking replication-related privileges of the upstream MySQL instance user |
-| version | Disables checking the upstream database version |
-| server_id | Disables checking the upstream database server_id |
-| binlog_enable | Disables checking whether the upstream database has binlog enabled |
-| binlog_format | Disables checking whether the binlog format of the upstream database is ROW |
-| binlog_row_image |  Disables checking whether the binlog_row_image of the upstream database is FULL |
-| table_schema | Disables checking the compatibility of the upstream MySQL table schema |
-| schema_of_shard_tables | Disables checking whether the schemas of upstream MySQL sharded tables are consistent in the multi-instance sharding scenario |
-| auto_increment_ID | Disables checking the conflicts of auto-increment primary keys of the upstream MySQL shared tables in the multi-instance sharding scenario |
+| エレメント                  | 説明                                                                        |
+| :--------------------- | :------------------------------------------------------------------------ |
+| 全て                     | すべてのチェックを無効にします                                                           |
+| dump_privilege         | アップストリームMySQLインスタンスユーザーのダンプ関連権限のチェックを無効にします                               |
+| Replication_privilege  | アップストリームMySQLインスタンスユーザーのレプリケーション関連の特権のチェックを無効にします                         |
+| バージョン                  | アップストリームデータベースのバージョンのチェックを無効にします                                          |
+| server_id              | アップストリームデータベースserver_idのチェックを無効にします                                       |
+| binlog_enable          | アップストリームデータベースでbinlogが有効になっているかどうかのチェックを無効にします                            |
+| binlog_format          | アップストリームデータベースのbinlog形式がROWであるかどうかのチェックを無効にします                            |
+| binlog_row_image       | アップストリームデータベースのbinlog_row_imageがFULLであるかどうかのチェックを無効にします                   |
+| table_schema           | アップストリームのMySQLテーブルスキーマの互換性のチェックを無効にします                                    |
+| schema_of_shard_tables | マルチインスタンスシャーディングシナリオでアップストリームMySQLシャーディングテーブルのスキーマが一貫しているかどうかのチェックを無効にします |
+| auto_increment_ID      | マルチインスタンスシャーディングシナリオで、アップストリームMySQL共有テーブルの自動インクリメント主キーの競合のチェックを無効にします     |

@@ -2,66 +2,66 @@
 title: tiup cluster display
 ---
 
-# tiup cluster display
+# tiupクラスタ表示 {#tiup-cluster-display}
 
-If you want to see the operation status of each component in the cluster, it is obviously inefficient to log in to each machine one by one. Therefore, tiup-cluster provides the `tiup cluster display` command to efficiently complete this task.
+クラスタの各コンポーネントの動作ステータスを確認したい場合は、各マシンに1つずつログインするのは明らかに非効率的です。したがって、tiup-clusterは、このタスクを効率的に完了するための`tiup cluster display`のコマンドを提供します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster display <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>` ：操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### --dashboard
+### -ダッシュボード {#dashboard}
 
-- By default, all node information of the entire cluster is displayed. With the `--dashboard` option, only dashboard information is displayed.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   デフォルトでは、クラスタ全体のすべてのノード情報が表示されます。 `--dashboard`オプションでは、ダッシュボード情報のみが表示されます。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the node to display. If this option is not specified, all nodes are displayed. The value of this option is a comma-separated list of node IDs. If you are not sure about the ID of a node, you can skip this option in the command to show the IDs and status of all nodes in the output.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are checked by default.
+-   表示するノードを指定します。このオプションを指定しない場合、すべてのノードが表示されます。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードのIDがわからない場合は、コマンドでこのオプションをスキップして、出力にすべてのノードのIDとステータスを表示できます。
+-   データ型： `STRINGS`
+-   このオプションがコマンドで指定されていない場合、デフォルトですべてのノードがチェックされます。
 
-> **Note:**
+> **ノート：**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are checked.
+> `-R, --role`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみがチェックされます。
 
-### -R, --role
+### -R、-role {#r-role}
 
-- Specifies the role to display. If it is not specified, all roles are displayed. The value of this option is a comma-separated list of node roles. If you are not sure about the role deployed on a node, you can skip this option in the command to show the roles and status of all nodes in the output.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are displayed by default.
+-   表示する役割を指定します。指定しない場合は、すべての役割が表示されます。このオプションの値は、ノードの役割のコンマ区切りのリストです。ノードにデプロイされている役割がわからない場合は、コマンドでこのオプションをスキップして、出力にすべてのノードの役割とステータスを表示できます。
+-   データ型： `STRINGS`
+-   コマンドでこのオプションが指定されていない場合、デフォルトですべての役割が表示されます。
 
-> **Note:**
+> **ノート：**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are displayed.
+> `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが表示されます。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-- The cluster name
-- The cluster version
-- SSH Client Type
-- Dashboard address
-- The table with the following fields:
-    - ID: the node ID, composed of `IP:PORT`
-    - Role: the service role deployed on this node (such as TiDB, TiKV)
-    - Host: the IP of the machine corresponding to the node
-    - Ports: the port number occupied by the service
-    - OS/Arch: the operating system and the machine architecture of this node
-    - Status: the current status of the node service
-    - Data Dir: the data directory of the service. `-` means no data directory.
-    - Deploy Dir: the deployment directory of the service
+-   クラスタ名
+-   クラスタバージョン
+-   SSHクライアントタイプ
+-   ダッシュボードアドレス
+-   次のフィールドを持つテーブル：
+    -   ID： `IP:PORT`で構成されるノードID
+    -   ロール：このノードにデプロイされたサービスロール（TiDB、TiKVなど）
+    -   ホスト：ノードに対応するマシンのIP
+    -   ポート：サービスが占有するポート番号
+    -   OS / Arch：このノードのオペレーティングシステムとマシンアーキテクチャ
+    -   ステータス：ノードサービスの現在のステータス
+    -   データディレクトリ：サービスのデータディレクトリ。 `-`はデータディレクトリがないことを意味します。
+    -   デプロイ Dir：サービスのデプロイメントディレクトリ
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

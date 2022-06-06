@@ -3,137 +3,137 @@ title: Troubleshoot Increased Read and Write Latency
 summary: Learn how to troubleshoot the issue of increased read and write latency.
 ---
 
-# Troubleshoot Increased Read and Write Latency
+# 読み取りと書き込みの待ち時間の増加のトラブルシューティング {#troubleshoot-increased-read-and-write-latency}
 
-This document introduces the possible causes of read and write latency and jitters, and how to troubleshoot these issues.
+このドキュメントでは、読み取りと書き込みの遅延とジッターの考えられる原因と、これらの問題のトラブルシューティング方法を紹介します。
 
-## Common causes
+## 一般的な原因 {#common-causes}
 
-### Incorrect TiDB execution plan
+### 不正なTiDB実行プラン {#incorrect-tidb-execution-plan}
 
-The execution plan of queries is unstable and might select the incorrect index, which causes higher latency.
+クエリの実行プランは不安定であり、誤ったインデックスを選択する可能性があります。これにより、待ち時間が長くなります。
 
-#### Phenomenon
+#### 現象 {#phenomenon}
 
-* If the query execution plan is output in the slow log, you can directly view the plan. Execute the `select tidb_decode_plan('xxx...')` statement to parse the detailed execution plan.
-* The number of scanned keys in the monitor abnormally increases; in the slow log, the number of `Scan Keys` are large.
-* The SQL execution duration in TiDB is greatly different than that in other databases such as MySQL. You can compare the execution plan of other databases (for example, whether `Join Order` is different).
+-   クエリ実行プランがスローログに出力されている場合は、プランを直接表示できます。 `select tidb_decode_plan('xxx...')`ステートメントを実行して、詳細な実行プランを解析します。
+-   モニターでスキャンされたキーの数が異常に増加します。遅いログでは、 `Scan Keys`の数が多いです。
+-   TiDBのSQL実行時間は、MySQLなどの他のデータベースの実行時間とは大きく異なります。他のデータベースの実行プランを比較できます（たとえば、 `Join Order`が異なるかどうか）。
 
-#### Possible reason
+#### 考えられる理由 {#possible-reason}
 
-The statistics is inaccurate.
+統計は不正確です。
 
-#### Troubleshooting methods
+#### トラブルシューティング方法 {#troubleshooting-methods}
 
-* Update the statistical information
-    * Execute `analyze table` manually and execute `analyze` periodically with the `crontab` command to keep the statistics accurate.
-    * Execute `auto analyze` automatically. Lower the threshold value of `analyze ratio`, increase the frequency of information collection, and set the start and end time of the execution. See the following examples:
-        * `set global tidb_auto_analyze_ratio=0.2;`
-        * `set global tidb_auto_analyze_start_time='00:00 +0800';`
-        * `set global tidb_auto_analyze_end_time='06:00 +0800';`
-* Bind the execution plan
-    * Modify the application SQL statements and execute `use index` to consistently use the index of the column.
-    * In 3.0 versions, you do not need to modify the application SQL statements. Use `create global binding` to create the binding SQL statement of `force index`.
-    * In 4.0 versions, [SQL Plan Management](/sql-plan-management.md) is supported, which avoids the performance decrease caused by unstable execution plans.
+-   統計情報を更新する
+    -   統計を正確に保つために、 `analyze table`を手動で実行し、 `crontab`コマンドを使用して`analyze`を定期的に実行します。
+    -   `auto analyze`を自動的に実行します。しきい値を`analyze ratio`に下げ、情報収集の頻度を増やし、実行の開始時刻と終了時刻を設定します。次の例を参照してください。
+        -   `set global tidb_auto_analyze_ratio=0.2;`
+        -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
+        -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
+-   実行プランをバインドする
+    -   アプリケーションのSQLステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
+    -   3.0バージョンでは、アプリケーションのSQLステートメントを変更する必要はありません。 `create global binding`を使用して、 `force index`のバインディングSQLステートメントを作成します。
+    -   4.0バージョンでは、 [SQL計画管理](/sql-plan-management.md)がサポートされており、不安定な実行計画によって引き起こされるパフォーマンスの低下を回避します。
 
-### PD anomalies
+### PDの異常 {#pd-anomalies}
 
-#### Phenomenon
+#### 現象 {#phenomenon}
 
-There is an abnormal increase of the `wait duration` metric for the PD TSO. This metric represents the duration of waiting for PD to return requests.
+PDTSOの`wait duration`メトリックの異常な増加があります。このメトリックは、PDが要求を返すのを待機する時間を表します。
 
-#### Possible reasons
+#### 考えられる理由 {#possible-reasons}
 
-* Disk issue. The disk where the PD node is located has full I/O load. Investigate whether PD is deployed with other components with high I/O demand and the health of the disk. You can verify the cause by viewing the monitor metrics in **Grafana** -> **disk performance** -> **latency**/**load**. You can also use the FIO tool to run a check on the disk if necessary.
+-   ディスクの問題。 PDノードが配置されているディスクには、完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。
 
-* Network issues between PD peers. The PD log shows `lost the TCP streaming connection`. You need to check whether there is a problem with the network between PD nodes and verify the cause by viewing `round trip` in the monitor **Grafana** -> **PD** -> **etcd**.
+-   PDピア間のネットワークの問題。 PDログには`lost the TCP streaming connection`が表示されます。 PDノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana-** &gt; <strong>PD-</strong> &gt; <strong>etcd</strong>で`round trip`を表示して、原因を確認する必要があります。
 
-* High server load. The log shows `server is likely overloaded`.
+-   サーバーの負荷が高い。ログには`server is likely overloaded`が表示されます。
 
-* PD cannot elect a Leader: The PD log shows `lease is not expired`. [This issue](https://github.com/etcd-io/etcd/issues/10355) has been fixed in v3.0.x and v2.1.19.
+-   PDはリーダーを選出できません：PDログには`lease is not expired`が表示されます。 [この問題](https://github.com/etcd-io/etcd/issues/10355)はv3.0.xおよびv2.1.19で修正されています。
 
-* The leader election is slow. The Region loading duration is long. You can check this issue by running `grep "regions cost"` in the PD log. If the result is in seconds, such as `load 460927 regions cost 11.77099s`, it means the Region loading is slow. You can enable the `region storage` feature in v3.0 by setting `use-region-storage` to `true`, which significantly reduce the Region loading duration.
+-   リーダー選挙は遅いです。リージョンの読み込み時間が長いです。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒などの秒単位の場合は、リージョンの読み込みが遅いことを意味します。 `use-region-storage`を`true`に設定すると、v3.0で`region storage`機能を有効にできます。これにより、リージョンの読み込み時間が大幅に短縮されます。
 
-* The network issue between TiDB and PD. Check whether the network from TiDB to PD Leader is running normally by accessing the monitor **Grafana** -> **blackbox_exporter** -> **ping latency**.
+-   TiDBとPD間のネットワークの問題。モニター**Grafana-** &gt; <strong>blackbox_exporter-</strong> &gt; <strong>pingレイテンシー</strong>にアクセスして、TiDBからPDリーダーへのネットワークが正常に実行されているかどうかを確認します。
 
-* PD reports the `FATAL` error, and the log shows `range failed to find revision pair`. This issue has been fixed in v3.0.8 ([#2040](https://github.com/pingcap/pd/pull/2040)).
+-   PDは`FATAL`のエラーを報告し、ログには`range failed to find revision pair`が表示されます。この問題はv3.0.8（ [＃2040](https://github.com/pingcap/pd/pull/2040) ）で修正されています。
 
-* When the `/api/v1/regions` interface is used, too many Regions might cause PD OOM. This issue has been fixed in v3.0.8 ([#1986](https://github.com/pingcap/pd/pull/1986)).
+-   `/api/v1/regions`のインターフェイスを使用する場合、リージョンが多すぎるとPDOOMが発生する可能性があります。この問題はv3.0.8（ [＃1986](https://github.com/pingcap/pd/pull/1986) ）で修正されています。
 
-* PD OOM during the rolling upgrade. The size of gRPC messages is not limited, and the monitor shows that `TCP InSegs` is relatively large. This issue has been fixed in v3.0.6 ([#1952](https://github.com/pingcap/pd/pull/1952)). 
+-   ローリングアップグレード中のPDOOM。 gRPCメッセージのサイズは制限されておらず、モニターは`TCP InSegs`が比較的大きいことを示しています。この問題はv3.0.6（ [＃1952](https://github.com/pingcap/pd/pull/1952) ）で修正されています。
 
-* PD panics. [Report a bug](https://github.com/tikv/pd/issues/new?labels=kind/bug&template=bug-report.md).
+-   PDはパニックになります。 [バグを報告](https://github.com/tikv/pd/issues/new?labels=kind/bug&#x26;template=bug-report.md) 。
 
-* Other causes. Get goroutine by running `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2` and [report a bug](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&template=bug-report.md).
+-   その他の原因。 `curl http://127.0.0.1:2379/debug/pprof/goroutine?debug=2`と[バグを報告](https://github.com/pingcap/pd/issues/new?labels=kind%2Fbug&#x26;template=bug-report.md)を実行してゴルーチンを取得します。
 
-### TiKV anomalies
+### TiKVの異常 {#tikv-anomalies}
 
-#### Phenomenon
+#### 現象 {#phenomenon}
 
-The `KV Cmd Duration` metric in the monitor increases abnormally. This metric represents the duration between the time that TiDB sends a request to TiKV and the time that TiDB receives the response.
+モニターの`KV Cmd Duration`メトリックが異常に増加します。このメトリックは、TiDBがTiKVに要求を送信してからTiDBが応答を受信するまでの時間を表します。
 
-#### Possible reasons
+#### 考えられる理由 {#possible-reasons}
 
-* Check the `gRPC duration` metric. This metric represents the total duration of a gRPC request in TiKV. You can find out the potential network issue by comparing `gRPC duration` of TiKV and `KV duration` of TiDB. For example, the gRPC duration is short but the KV duration of TiDB is long, which indicates that the network latency between TiDB and TiKV might be high, or that the NIC bandwidth between TiDB and TiKV is fully occupied.
+-   `gRPC duration`のメトリックを確認してください。このメトリックは、TiKVでのgRPCリクエストの合計期間を表します。 `gRPC duration`のTiKVと`KV duration`つのTiDBを比較することで、潜在的なネットワークの問題を見つけることができます。たとえば、gRPC期間は短いが、TiDBのKV期間は長いため、TiDBとTiKVの間のネットワーク遅延が高いか、TiDBとTiKVの間のNIC帯域幅が完全に占有されている可能性があります。
 
-* Re-election because TiKV is restarted.
-    * After TiKV panics, it is pulled up by `systemd` and runs normally. You can check whether panic has occurred by viewing the TiKV log. Because this issue is unexpected, [report a bug](https://github.com/tikv/tikv/issues/new?template=bug-report.md) if it happens.
-    * TiKV is stopped or killed by a third party and then pulled up by `systemd`. Check the cause by viewing `dmesg` and the TiKV log.
-    * TiKV is OOM, which causes restart.
-    * TiKV is hung because of dynamically adjusting `THP` (Transparent Hugepage).
+-   TiKVが再開されたため、再選。
+    -   TiKVがパニックになった後、 `systemd`だけ引き上げられ、正常に動作します。 TiKVログを表示することで、パニックが発生したかどうかを確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md)です。
+    -   TiKVは、サードパーティによって停止または強制終了された後、 `systemd`によってプルアップされます。 `dmesg`とTiKVログを表示して原因を確認してください。
+    -   TiKVはOOMであり、再起動します。
+    -   `THP` （Transparent Hugepage）を動的に調整するため、TiKVがハングします。
 
-* Check monitor: TiKV RocksDB encounters write stall and thus results in re-election. You can check if the monitor **Grafana** -> **TiKV-details** -> **errors** shows `server is busy`.
+-   モニターを確認してください：TiKV RocksDBで書き込みストールが発生したため、再選されました。モニターの**Grafana-** &gt; <strong>TiKV-details-</strong> &gt;<strong>エラー</strong>が`server is busy`を示しているかどうかを確認できます。
 
-* Re-election because of network isolation.
+-   ネットワークの分離による再選。
 
-* If the `block-cache` configuration is too large, it might cause TiKV OOM. To verify the cause of the problem, check the `block cache size` of RocksDB by selecting the corresponding instance in the monitor **Grafana** -> **TiKV-details**. Meanwhile, check whether the `[storage.block-cache] capacity = # "1GB"`parameter is set properly. By default, TiKV's `block-cache` is set to `45%` of the total memory of the machine. You need to explicitly specify this parameter when you deploy TiKV in the container, because TiKV obtains the memory of the physical machine, which might exceed the memory limit of the container.
+-   `block-cache`の構成が大きすぎると、TiKVOOMが発生する可能性があります。問題の原因を確認するには、モニター**Grafana-** &gt; <strong>TiKV-details</strong>で対応するインスタンスを選択して、RocksDBの`block cache size`を確認します。その間、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているか確認してください。デフォルトでは、TiKVの`block-cache`はマシンの合計メモリの`45%`に設定されています。 TiKVは物理マシンのメモリを取得するため、コンテナにTiKVをデプロイするときに、このパラメータを明示的に指定する必要があります。これは、コンテナのメモリ制限を超える可能性があります。
 
-* Coprocessor receives many large queries and returns a large volume of data. gRPC fails to send data as quickly as the coprocessor returns data, which results in OOM. To verify the cause, you can check whether `response size` exceeds the `network outbound` traffic by viewing the monitor **Grafana** -> **TiKV-details** -> **coprocessor overview**.
+-   コプロセッサーは多くの大きなクエリを受け取り、大量のデータを返します。 gRPCは、コプロセッサーがデータを返すのと同じ速さでデータを送信できず、その結果、OOMになります。原因を確認するには、モニターの**Grafana-** &gt; <strong>TiKV-details-</strong> &gt;<strong>コプロセッサーの概要</strong>を表示して、 `response size`が`network outbound`トラフィックを超えているかどうかを確認できます。
 
-### Bottleneck of a single TiKV thread
+### 単一のTiKVスレッドのボトルネック {#bottleneck-of-a-single-tikv-thread}
 
-There are some single threads in TiKV that might become the bottleneck.
+TiKVには、ボトルネックになる可能性のあるシングルスレッドがいくつかあります。
 
-* Too many Regions in a TiKV instance causes a single gRPC thread to be the bottleneck (Check the **Grafana** -> **TiKV-details** -> **Thread CPU/gRPC CPU Per Thread** metric). In v3.x or later versions, you can enable `Hibernate Region` to resolve the issue.
-* For versions earlier than v3.0, when the raftstore thread or the apply thread becomes the bottleneck (**Grafana** -> **TiKV-details** -> **Thread CPU/raft store CPU** and **Async apply CPU** metrics exceed `80%`), you can scale out TiKV (v2.x) instances or upgrade to v3.x with multi-threading.
+-   TiKVインスタンスのリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（Grafana-&gt; **TiKV** <strong>-details-</strong> &gt; <strong>Thread CPU / gRPC CPU Per Thread</strong>メトリックを確認してください）。 v3.x以降のバージョンでは、 `Hibernate Region`を有効にして問題を解決できます。
+-   v3.0より前のバージョンでは、raftstoreスレッドまたはapplyスレッドがボトルネックになった場合（ **Grafana-** &gt; <strong>TiKV-details-</strong> &gt; <strong>Thread CPU / raft</strong> storeCPUおよび<strong>AsyncapplyCPU</strong>メトリックが`80%`を超える場合）、TiKV（v2 .x）インスタンスまたはマルチスレッドを使用したv3.xへのアップグレード。
 
-### CPU load increases
+### CPU負荷が増加します {#cpu-load-increases}
 
-#### Phenomenon
+#### 現象 {#phenomenon}
 
-The usage of CPU resources becomes the bottleneck.
+CPUリソースの使用がボトルネックになります。
 
-#### Possible reasons
+#### 考えられる理由 {#possible-reasons}
 
-* Hotspot issue
-* High overall load. Check the slow queries and expensive queries of TiDB. Optimize the executing queries by adding indexes or executing queries in batches. Another solution is to scale out the cluster.
+-   ホットスポットの問題
+-   全体的な負荷が高い。 TiDBの遅いクエリと高価なクエリを確認してください。インデックスを追加するか、クエリをバッチで実行することにより、実行中のクエリを最適化します。別の解決策は、クラスタをスケールアウトすることです。
 
-## Other causes
+## その他の原因 {#other-causes}
 
-### Cluster maintenance
+### クラスターのメンテナンス {#cluster-maintenance}
 
-Most of each online cluster has three or five nodes. If the machine to be maintained has the PD component, you need to determine whether the node is the leader or the follower. Disabling a follower has no impact on the cluster operation. Before disabling a leader, you need to switch the leadership. During the leadership change, performance jitter of about 3 seconds will occur.
+各オンラインクラスタのほとんどには、3つまたは5つのノードがあります。保守対象のマシンにPDコンポーネントがある場合は、ノードがリーダーであるかフォロワーであるかを判別する必要があります。フォロワーを無効にしても、クラスタの動作には影響しません。リーダーを無効にする前に、リーダーシップを切り替える必要があります。リーダーシップの変更中に、約3秒のパフォーマンスジッターが発生します。
 
-### Minority of replicas are offline
+### 少数のレプリカがオフラインです {#minority-of-replicas-are-offline}
 
-By default, each TiDB cluster has three replicas, so each Region has three replicas in the cluster. These Regions elect the leader and replicate data through the Raft protocol. The Raft protocol ensures that TiDB can still provide services without data loss even when the nodes (that are fewer than half of replicas) fail or are isolated. For the cluster with three replicas, the failure of one node might cause performance jitter but the usability and correctness in theory are not affected.
+デフォルトでは、各TiDBクラスタには3つのレプリカがあるため、各リージョンにはクラスタに3つのレプリカがあります。これらのリージョンはリーダーを選出し、Raftプロトコルを介してデータを複製します。 Raftプロトコルは、ノード（レプリカの半分未満）に障害が発生したり、分離されたりした場合でも、TiDBがデータを失うことなくサービスを提供できることを保証します。 3つのレプリカを持つクラスタの場合、1つのノードに障害が発生するとパフォーマンスのジッターが発生する可能性がありますが、理論上の使いやすさと正確性には影響しません。
 
-### New indexes
+### 新しいインデックス {#new-indexes}
 
-Creating indexes consumes a huge amount of resources when TiDB scans tables and backfills indexes. Index creation might even conflict with the frequently updated fields, which affects the application. Creating indexes on a large table often takes a long time, so you must try to balance the index creation time and the cluster performance (for example, creating indexes at the off-peak time).
+TiDBがテーブルをスキャンしてインデックスを埋め戻す場合、インデックスの作成は大量のリソースを消費します。インデックスの作成は、頻繁に更新されるフィールドと競合することもあり、アプリケーションに影響します。大きなテーブルでのインデックスの作成には時間がかかることが多いため、インデックスの作成時間とクラスタのパフォーマンスのバランスをとる必要があります（たとえば、オフピーク時にインデックスを作成する）。
 
-**Parameter adjustment:**
+**パラメータ調整：**
 
-Currently, you can use `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` to dynamically adjust the speed of index creation. Usually, the smaller the values, the smaller the impact on the system, with longer execution time though.
+現在、 `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`を使用して、インデックス作成の速度を動的に調整できます。通常、値が小さいほど、システムへの影響は小さくなりますが、実行時間は長くなります。
 
-In general cases, you can first keep their default values (`4` and `256`), observe the resource usage and response speed of the cluster, and then increase the value of `tidb_ddl_reorg_worker_cnt` to increase the concurrency. If no obvious jitter is observed in the monitor, increase the value of `tidb_ddl_reorg_batch_size`. If the columns involved in the index creation are frequently updated, the many resulting conflicts will cause the index creation to fail and be retried.
+通常、最初にデフォルト値（ `4`と`256` ）を維持し、クラスタのリソース使用量と応答速度を観察してから、値`tidb_ddl_reorg_worker_cnt`を増やして同時実行性を高めることができます。モニターに明らかなジッターが見られない場合は、 `tidb_ddl_reorg_batch_size`の値を増やします。インデックスの作成に関係する列が頻繁に更新される場合、結果として生じる多くの競合により、インデックスの作成が失敗し、再試行されます。
 
-In addition, you can also set the value of `tidb_ddl_reorg_priority` to `PRIORITY_HIGH` to prioritize the index creation and speed up the process. But in the general OLTP system, it is recommended to keep its default value.
+さらに、 `tidb_ddl_reorg_priority`の`PRIORITY_HIGH`を設定して、インデックスの作成に優先順位を付け、プロセスを高速化することもできます。ただし、一般的なOLTPシステムでは、デフォルト値を維持することをお勧めします。
 
-### High GC pressure
+### 高いGC圧力 {#high-gc-pressure}
 
-The transaction of TiDB adopts the Multi-Version Concurrency Control (MVCC) mechanism. When the newly written data overwrites the old data, the old data is not replaced, and both versions of data are stored. Timestamps are used to mark different versions. The task of GC is to clear the obsolete data.
+TiDBのトランザクションは、マルチバージョン同時実行制御（MVCC）メカニズムを採用しています。新しく書き込まれたデータが古いデータを上書きする場合、古いデータは置き換えられず、両方のバージョンのデータが保存されます。タイムスタンプは、さまざまなバージョンをマークするために使用されます。 GCのタスクは、廃止されたデータをクリアすることです。
 
-* In the phase of Resolve Locks, a large amount of `scan_lock` requests are created in TiKV, which can be observed in the gRPC-related metrics. These `scan_lock` requests call all Regions.
-* In the phase of Delete Ranges, a few (or no) `unsafe_destroy_range` requests are sent to TiKV, which can be observed in the gRPC-related metrics and the **GC tasks** panel.
-* In the phase of Do GC, each TiKV by default scans the leader Regions on the machine and performs GC to each leader, which can be observed in the **GC tasks** panel.
+-   ロックの解決のフェーズでは、TiKVで大量の`scan_lock`リクエストが作成されます。これは、gRPC関連のメトリックで確認できます。これらの`scan_lock`のリクエストは、すべてのリージョンを呼び出します。
+-   範囲の削除のフェーズでは、いくつかの（またはまったく） `unsafe_destroy_range`のリクエストがTiKVに送信されます。これは、gRPC関連のメトリックと**GCタスク**パネルで確認できます。
+-   Do GCのフェーズでは、各TiKVはデフォルトでマシン上のリーダー領域をスキャンし、各リーダーに対してGCを実行します。これは、 **GCタスク**パネルで確認できます。

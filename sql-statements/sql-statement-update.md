@@ -3,37 +3,37 @@ title: UPDATE | TiDB SQL Statement Reference
 summary: An overview of the usage of UPDATE for the TiDB database.
 ---
 
-# UPDATE
+# アップデート {#update}
 
-The `UPDATE` statement is used to modify data in a specified table.
+`UPDATE`ステートメントは、指定されたテーブルのデータを変更するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**UpdateStmt:**
+**UpdateStmt：**
 
 ![UpdateStmt](/media/sqlgram/UpdateStmt.png)
 
-**PriorityOpt:**
+**PriorityOpt：**
 
 ![PriorityOpt](/media/sqlgram/PriorityOpt.png)
 
-**TableRef:**
+**TableRef：**
 
 ![TableRef](/media/sqlgram/TableRef.png)
 
-**TableRefs:**
+**TableRefs：**
 
 ![TableRefs](/media/sqlgram/TableRefs.png)
 
-**AssignmentList:**
+**AssignmentList：**
 
 ![AssignmentList](/media/sqlgram/AssignmentList.png)
 
-**WhereClauseOptional:**
+**WhereClauseOptional：**
 
 ![WhereClauseOptional](/media/sqlgram/WhereClauseOptional.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -68,9 +68,9 @@ mysql> SELECT * FROM t1;
 3 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-TiDB always uses the original value of a column when evaluating expressions. For example:
+TiDBは、式を評価するときに常に列の元の値を使用します。例えば：
 
 ```sql
 CREATE TABLE t (a int, b int);
@@ -78,13 +78,13 @@ INSERT INTO t VALUES (1,2);
 UPDATE t SET a = a+1,b=a;
 ```
 
-In MySQL, the column `b` is updated to 2 because it is set to the value of `a`, and the value of `a` (which is 1) is updated to `a+1` (which is 2) in the same statement. 
+MySQLでは、同じステートメントで列1が値`a`に設定されているため、列`b`が2に更新され、値`a` （1）が`a+1` （2）に更新されます。
 
-TiDB follows the more standard SQL behavior, and updates `b` to 1.
+TiDBは、より標準的なSQLの動作に従い、 `b`から1に更新します。
 
-## See also
+## も参照してください {#see-also}
 
-* [INSERT](/sql-statements/sql-statement-insert.md)
-* [SELECT](/sql-statements/sql-statement-select.md)
-* [DELETE](/sql-statements/sql-statement-delete.md)
-* [REPLACE](/sql-statements/sql-statement-replace.md)
+-   [入れる](/sql-statements/sql-statement-insert.md)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [消去](/sql-statements/sql-statement-delete.md)
+-   [交換](/sql-statements/sql-statement-replace.md)

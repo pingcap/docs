@@ -3,96 +3,96 @@ title: Determine Your TiDB Size
 summary: Learn how to determine the size of your TiDB Cloud cluster.
 ---
 
-# Determine Your TiDB Size
+# TiDBサイズを決定する {#determine-your-tidb-size}
 
-This document describes how to determine the size of your TiDB cluster.
+このドキュメントでは、TiDBクラスタのサイズを決定する方法について説明します。
 
-## Size TiDB
+## サイズTiDB {#size-tidb}
 
-TiDB is for computing only and does not store data. It is horizontally scalable.
+TiDBはコンピューティング専用であり、データを保存しません。水平方向にスケーラブルです。
 
-You can configure both vCPUs size and node quantity for TiDB.
+TiDBのvCPUサイズとノード数の両方を構成できます。
 
-### TiDB vCPUs size
+### TiDBvCPUのサイズ {#tidb-vcpus-size}
 
-The supported vCPU size includes 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+サポートされているvCPUサイズには、4つのvCPU（ベータ）、8つのvCPU、および16のvCPUが含まれます。
 
-> **Note:**
+> **ノート：**
 >
-> If the vCPU size of TiDB is set as **4 vCPU (Beta)**, note the following restrictions:
+> TiDBのvCPUサイズが**4vCPU（ベータ）**に設定されている場合は、次の制限に注意してください。
 >
-> - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - TiDB can only be used with TiKV with 4 vCPU.
-> - TiFlash<sup>beta</sup> is not supported.
+> -   TiDBのノード数は1または2にのみ設定でき、TiKVのノード数は3に固定されています。
+> -   TiDBは、4vCPUのTiKVでのみ使用できます。
+> -   TiFlash<sup>ベータ</sup>はサポートされていません。
 
-### TiDB node quantity
+### TiDBノードの数量 {#tidb-node-quantity}
 
-For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB Cloud cluster.
+高可用性を実現するには、TiDBクラウドクラスタごとに少なくとも2つのTiDBノードを構成することをお勧めします。
 
-## Size TiKV
+## サイズTiKV {#size-tikv}
 
-TiKV is responsible for storing data. It is horizontally scalable.
+TiKVはデータの保存を担当します。水平方向にスケーラブルです。
 
-You can configure vCPUs size, node quantity, and storage size for TiKV.
+TiKVのvCPUサイズ、ノード数、およびストレージサイズを構成できます。
 
-### TiKV vCPUs size
+### TiKVvCPUのサイズ {#tikv-vcpus-size}
 
-The supported size includes 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+サポートされているサイズには、4 vCPU（ベータ）、8 vCPU、および16vCPUが含まれます。
 
-> **Note:**
+> **ノート：**
 >
-> If the vCPUs size of TiKV is set as **4 vCPU (Beta)**, note the following restrictions:
+> TiKVのvCPUサイズが**4vCPU（ベータ）**に設定されている場合は、次の制限に注意してください。
 >
-> - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - TiKV can only be used with TiDB with 4 vCPU.
-> - TiFlash<sup>beta</sup> is not supported.
+> -   TiDBのノード数は1または2にのみ設定でき、TiKVのノード数は3に固定されています。
+> -   TiKVは、4vCPUのTiDBでのみ使用できます。
+> -   TiFlash<sup>ベータ</sup>はサポートされていません。
 
-### TiKV node quantity
+### TiKVノードの数量 {#tikv-node-quantity}
 
-The number of TiKV nodes should be **at least 1 set (3 nodes in 3 different Available Zones)**.
+TiKVノードの数は**少なくとも1セット（3つの異なる使用可能ゾーンに3つのノード）で**ある必要があります。
 
-TiDB Cloud deploys TiKV nodes evenly to all availability zones (at least 3) in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node.
+TiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョンのすべてのアベイラビリティーゾーン（少なくとも3つ）にTiKVノードを均等にデプロイします。通常の3レプリカのセットアップでは、データはすべてのアベイラビリティーゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに保持されます。
 
-> **Note:**
+> **ノート：**
 >
-> When you scale your TiDB cluster, nodes in the 3 availability zones are increased or decreased at the same time. For how to scale in or scale out a TiDB cluster based on your needs, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
+> TiDBクラスタをスケーリングすると、3つのアベイラビリティーゾーンのノードが同時に増減します。ニーズに基づいてTiDBクラスタをスケールインまたはスケールアウトする方法については、 [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
-Minimum number of TiKV nodes: `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
+TiKVノードの最小数： `ceil(compressed size of your data ÷ one TiKV capacity) × the number of replicas`
 
-Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 70%, the storage needed is 3584 GB.
+MySQLダンプファイルのサイズが5TBで、TiDB圧縮率が70％であるとすると、必要なストレージは3584GBです。
 
-For example, if you configure the storage size of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
+たとえば、AWSの各TiKVノードのストレージサイズを1024 GBに設定した場合、必要なTiKVノードの数は次のようになります。
 
-Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
+TiKVノードの最小数： `ceil(3584 ÷ 1024) × 3 = 12`
 
-### TiKV storage size
+### TiKVストレージサイズ {#tikv-storage-size}
 
-You can configure the TiKV storage size only when you create or restore a cluster.
+TiKVストレージサイズは、クラスタを作成または復元する場合にのみ構成できます。
 
-## Size TiFlash<sup>beta</sup>
+## サイズTiFlash<sup>ベータ</sup> {#size-tiflash-sup-beta-sup}
 
-TiFlash<sup>beta</sup> synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
+TiFlash<sup>ベータ版</sup>は、TiKVからのデータをリアルタイムで同期し、箱から出してすぐにリアルタイム分析ワークロードをサポートします。水平方向にスケーラブルです。
 
-You can configure vCPUs size, node quantity, and storage size for TiFlash<sup>beta</sup>.
+TiFlash<sup>ベータ版</sup>のvCPUサイズ、ノード数、およびストレージサイズを構成できます。
 
-### TiFlash<sup>beta</sup> vCPUs size
+### TiFlash<sup>ベータ</sup>vCPUのサイズ {#tiflash-sup-beta-sup-vcpus-size}
 
-The supported vCPUs size includes 8 vCPU and 16 vCPU.
+サポートされているvCPUのサイズには、8個のvCPUと16個のvCPUが含まれます。
 
-If the vCPUs size of TiDB or TiKV is set as **4 vCPU (Beta)**, TiFlash<sup>beta</sup> is not supported.
+TiDBまたはTiKVのvCPUサイズが**4vCPU（ベータ）**に設定されている場合、TiFlash<sup>ベータ</sup>はサポートされません。
 
-### TiFlash<sup>beta</sup> node quantity
+### TiFlash<sup>ベータ</sup>ノードの数量 {#tiflash-sup-beta-sup-node-quantity}
 
-TiDB Cloud deploys TiFlash<sup>beta</sup> nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash<sup>beta</sup> nodes in each TiDB Cloud cluster and create at least 2 replicas of the data for high availability in your production environment.
+TiDB Cloudは、TiFlash<sup>ベータ</sup>ノードをリージョン内のさまざまなアベイラビリティーゾーンに均等にデプロイします。各TiDBクラウドクラスタに少なくとも2つのTiFlash<sup>ベータ</sup>ノードを構成し、実稼働環境で高可用性を実現するためにデータのレプリカを少なくとも2つ作成することをお勧めします。
 
-The minimum number of TiFlash<sup>beta</sup> nodes depends on the TiFlash<sup>beta</sup> replica counts for specific tables:
+TiFlash<sup>ベータ</sup>ノードの最小数は、特定のテーブルのTiFlash<sup>ベータ</sup>レプリカ数によって異なります。
 
-Minimum number of TiFlash<sup>beta</sup> nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
+TiFlash<sup>ベータ</sup>ノードの最小数： `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-For example, if you configure the storage size of each TiFlash<sup>beta</sup> node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash<sup>beta</sup> nodes is as follows:
+たとえば、AWSの各TiFlash<sup>ベータ</sup>ノードのストレージサイズを1024 GBに設定し、テーブルAに2つのレプリカ（圧縮サイズは800 GB）、テーブルBに1つのレプリカ（圧縮サイズは100 GB）を設定すると、その場合、必要なTiFlash<sup>ベータ</sup>ノードの数は次のとおりです。
 
-Minimum number of TiFlash<sup>beta</sup> nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+TiFlash<sup>ベータ</sup>ノードの最小数： `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
 
-### TiFlash<sup>beta</sup> storage size
+### TiFlash<sup>ベータ</sup>ストレージサイズ {#tiflash-sup-beta-sup-storage-size}
 
-You can configure the TiFlash<sup>beta</sup> storage size only when you create or restore a cluster.
+クラスタを作成または復元する場合にのみ、TiFlash<sup>ベータ</sup>ストレージサイズを構成できます。

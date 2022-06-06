@@ -3,64 +3,64 @@ title: TiDB Dashboard Introduction
 summary: Introduce TiDB Dashboard.
 ---
 
-# TiDB Dashboard Introduction
+# TiDBダッシュボードの紹介 {#tidb-dashboard-introduction}
 
-TiDB Dashboard is a Web UI for monitoring, diagnosing, and managing the TiDB cluster, which is available since v4.0. It is built into the PD component and does not require an independent deployment.
+TiDBダッシュボードは、TiDBクラスタを監視、診断、および管理するためのWeb UIであり、v4.0以降で使用できます。 PDコンポーネントに組み込まれており、独立した展開は必要ありません。
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
-TiDB Dashboard is open-sourced on [GitHub](https://github.com/pingcap-incubator/tidb-dashboard).
+TiDBダッシュボードは[GitHub](https://github.com/pingcap-incubator/tidb-dashboard)でオープンソースです。
 
-This document introduces the main features of TiDB Dashboard. You can click links in the following sections to learn more details.
+このドキュメントでは、TiDBダッシュボードの主な機能を紹介します。詳細については、次のセクションのリンクをクリックしてください。
 
-## Show the overall running status of the TiDB cluster
+## TiDBクラスタの全体的な実行ステータスを表示する {#show-the-overall-running-status-of-the-tidb-cluster}
 
-You can use TiDB Dashboard to learn the TiDB cluster's queries per second (QPS), execution time, the types of SQL statements that consume the most resources, and other overview information.
+TiDBダッシュボードを使用して、TiDBクラスターの1秒あたりのクエリ数（QPS）、実行時間、最も多くのリソースを消費するSQLステートメントの種類、およびその他の概要情報を学習できます。
 
-See [TiDB Dashboard Overview](/dashboard/dashboard-overview.md) for details.
+詳細については、 [TiDBダッシュボードの概要](/dashboard/dashboard-overview.md)を参照してください。
 
-## Show the running status of components and hosts
+## コンポーネントとホストの実行ステータスを表示する {#show-the-running-status-of-components-and-hosts}
 
-You can use TiDB Dashboard to view the running status of TiDB, TiKV, PD, TiFlash components in the entire cluster and the running status of the host on which these components are located.
+TiDBダッシュボードを使用して、クラスタ全体のTiDB、TiKV、PD、TiFlashコンポーネントの実行ステータス、およびこれらのコンポーネントが配置されているホストの実行ステータスを表示できます。
 
-See [TiDB Dashboard Cluster Information Page](/dashboard/dashboard-cluster-info.md) for details.
+詳細については、 [TiDBダッシュボードクラスター情報ページ](/dashboard/dashboard-cluster-info.md)を参照してください。
 
-## Show distribution and trends of read and write traffic
+## 読み取りおよび書き込みトラフィックの分布と傾向を表示する {#show-distribution-and-trends-of-read-and-write-traffic}
 
-The Key Visualizer feature of TiDB Dashboard visually shows the change of read and write traffic over time in the entire cluster in the form of heatmap. You can use this feature to timely discover changes of application modes or locate hotspot issues with uneven performance.
+TiDBダッシュボードのキービジュアライザー機能は、クラスタ全体の読み取りおよび書き込みトラフィックの経時変化をヒートマップの形式で視覚的に表示します。この機能を使用して、アプリケーションモードの変更をタイムリーに検出したり、パフォーマンスが不均一なホットスポットの問題を特定したりできます。
 
-See [Key Visualizer Page](/dashboard/dashboard-key-visualizer.md) for details.
+詳細については、 [キービジュアライザーページ](/dashboard/dashboard-key-visualizer.md)を参照してください。
 
-## Show a list of execution information of all SQL statements
+## すべてのSQLステートメントの実行情報のリストを表示する {#show-a-list-of-execution-information-of-all-sql-statements}
 
-The execution information of all SQL statements is listed on the SQL Statements page. You can use this page to learn the execution time and total executions at all stages, which helps you analyze and locate the SQL queries that consume the most resources and improve the overall cluster performance.
+すべてのSQLステートメントの実行情報は、[SQLステートメント]ページに一覧表示されます。このページを使用して、すべての段階での実行時間と合計実行を学習できます。これは、最も多くのリソースを消費し、クラスタ全体のパフォーマンスを向上させるSQLクエリを分析および特定するのに役立ちます。
 
-See [SQL Statements Page of TiDB Dashboard](/dashboard/dashboard-statement-list.md) for details.
+詳細については、 [TiDBダッシュボードのSQLステートメントページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
-## Learn the detailed execution information of slow queries
+## 遅いクエリの詳細な実行情報を学ぶ {#learn-the-detailed-execution-information-of-slow-queries}
 
-The Slow Queries page of TiDB Dashboard shows a list of all SQL statements that take a long time to execute, including the SQL texts and execution information. This page helps you locate the cause of slow queries or performance jitter.
+TiDBダッシュボードの[低速クエリ]ページには、SQLテキストや実行情報など、実行に時間がかかるすべてのSQLステートメントのリストが表示されます。このページは、クエリの速度低下やパフォーマンスのジッターの原因を特定するのに役立ちます。
 
-See [Slow Queries Page](/dashboard/dashboard-slow-query.md) for details.
+詳細については、 [遅いクエリページ](/dashboard/dashboard-slow-query.md)を参照してください。
 
-## Diagnose common cluster problems and generate reports
+## 一般的なクラスタの問題を診断し、レポートを生成します {#diagnose-common-cluster-problems-and-generate-reports}
 
-The diagnostic feature of TiDB Dashboard automatically determines whether some common risks (such as inconsistent configurations) or problems exist in the cluster, generates reports, and gives operation suggestions, or compares the status of each cluster metric in different time ranges for you to analyze possible problems.
+TiDBダッシュボードの診断機能は、いくつかの一般的なリスク（一貫性のない構成など）または問題がクラスタに存在するかどうかを自動的に判断し、レポートを生成し、操作の提案を提供します。または、さまざまな時間範囲で各クラスタメトリックのステータスを比較して、可能な分析を行います。問題。
 
-See [TiDB Dashboard Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md) for details.
+詳細については、 [TiDBダッシュボードクラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
-## Query logs of all components
+## すべてのコンポーネントのクエリログ {#query-logs-of-all-components}
 
-On the Search Logs page of TiDB Dashboard, you can quickly search logs of all running instances in the cluster by keywords, time range, and other conditions, package these logs, and download them to your local machine.
+TiDBダッシュボードの[ログの検索]ページでは、クラスタで実行中のすべてのインスタンスのログをキーワード、時間範囲、およびその他の条件ですばやく検索し、これらのログをパッケージ化して、ローカルマシンにダウンロードできます。
 
-See [Search Logs Page](/dashboard/dashboard-log-search.md) for details.
+詳細については、 [検索ログページ](/dashboard/dashboard-log-search.md)を参照してください。
 
-## Collect profiling data for each instance
+## 各インスタンスのプロファイリングデータを収集する {#collect-profiling-data-for-each-instance}
 
-This is an advanced debugging feature that lets you profile each instance online and analyze various internal operations an instance performed during the profiling data collection period and the proportion of the operation execution time in this period without third-party tools.
+これは高度なデバッグ機能であり、各インスタンスをオンラインでプロファイリングし、プロファイリングデータ収集期間中にインスタンスが実行したさまざまな内部操作と、サードパーティツールを使用せずにこの期間の操作実行時間の割合を分析できます。
 
-See [Profile Instances Page](/dashboard/dashboard-profiling.md) for details.
+詳細については、 [プロファイルインスタンスページ](/dashboard/dashboard-profiling.md)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> By default, TiDB Dashboard shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](/telemetry.md).
+> デフォルトでは、TiDBダッシュボードは使用状況の詳細をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。

@@ -4,11 +4,11 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 category: reference
 ---
 
-# ADMIN CHECKSUM TABLE
+# 管理チェックサムテーブル {#admin-checksum-table}
 
-The `ADMIN CHECKSUM TABLE` statement calculates a CRC64 checksum for the data and indexes of a table. This statement is used by programs such as TiDB Lightning to ensure that import operations have completed successfully.
+`ADMIN CHECKSUM TABLE`ステートメントは、テーブルのデータとインデックスのCRC64チェックサムを計算します。このステートメントは、インポート操作が正常に完了したことを確認するためにTiDBLightningなどのプログラムによって使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=
@@ -18,11 +18,11 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Examples
+## 例 {#examples}
 
-Calculate the checksum for a table:
+テーブルのチェックサムを計算します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment);
@@ -47,6 +47,6 @@ mysql> ADMIN CHECKSUM TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。

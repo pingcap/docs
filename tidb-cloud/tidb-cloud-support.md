@@ -3,19 +3,19 @@ title: TiDB Cloud Support
 summary: Learn how to contact the support team of TiDB Cloud.
 ---
 
-# TiDB Cloud Support
+# TiDBクラウドサポート {#tidb-cloud-support}
 
-TiDB Cloud offers support services to your organization. To contact our support team, perform the following steps:
+TiDB Cloudは、組織にサポートサービスを提供します。サポートチームに連絡するには、次の手順を実行します。
 
-1. Click **Support** on the upper right of the top navigation bar, and click **Request Support**. Or directly click the **Help** icon on the lower right.
+1.  上部のナビゲーションバーの右上にある[**サポート**]をクリックし、[<strong>サポートのリクエスト</strong>]をクリックします。または、右下の<strong>ヘルプ</strong>アイコンを直接クリックします。
 
-2. In the **Leave us a message** dialog, fill in the ticket.
+2.  [**メッセージを残す**]ダイアログで、チケットを入力します。
 
-3. Click **Send** to submit your ticket. After the support team receives your ticket, they will reply to you via email.
+3.  [**送信]**をクリックしてチケットを送信します。サポートチームがチケットを受け取った後、メールで返信します。
 
-4. Check your email to view the reply, your ticket history, and communication records.
+4.  メールをチェックして、返信、チケット履歴、通信記録を確認してください。
 
-    Before the ticket is closed, you can continue to communicate with the support team via either of the following two methods:
+    チケットがクローズされる前に、次の2つの方法のいずれかを介してサポートチームとの通信を継続できます。
 
-    - Replying to the email sent by the support team directly
-    - Clicking the ticket link attached in the email to go to the support portal to check and add comments to your ticket
+    -   サポートチームから直接送信されたメールに返信する
+    -   メールに添付されているチケットリンクをクリックしてサポートポータルに移動し、チケットを確認してコメントを追加します

@@ -3,34 +3,34 @@ title: Privilege Management
 summary: Learn how to manage the privilege.
 ---
 
-# Privilege Management
+# 権限管理 {#privilege-management}
 
-TiDB supports MySQL 5.7's privilege management system, including the syntax and privilege types. The following features from MySQL 8.0 are also supported:
+TiDBは、構文や特権タイプなど、MySQL5.7の特権管理システムをサポートしています。 MySQL8.0の次の機能もサポートされています。
 
-* SQL Roles, starting with TiDB 3.0.
-* Dynamic privileges, starting with TiDB 5.1.
+-   TiDB3.0以降のSQLロール。
+-   TiDB5.1以降の動的特権。
 
-This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
+このドキュメントでは、特権関連のTiDB操作、TiDB操作に必要な特権、および特権システムの実装について説明します。
 
-## Privilege-related operations
+## 特権関連の操作 {#privilege-related-operations}
 
-### Grant privileges
+### 特権を付与する {#grant-privileges}
 
-The `GRANT` statement grants privileges to the user accounts.
+`GRANT`ステートメントは、ユーザーアカウントに特権を付与します。
 
-For example, use the following statement to grant the `xxx` user the privilege to read the `test` database.
+たとえば、次のステートメントを使用して、 `xxx`人のユーザーに`test`のデータベースを読み取る権限を付与します。
 
 ```sql
 GRANT SELECT ON test.* TO 'xxx'@'%';
 ```
 
-Use the following statement to grant the `xxx` user all privileges on all databases:
+次のステートメントを使用して、 `xxx`人のユーザーにすべてのデータベースに対するすべての特権を付与します。
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-By default, `GRANT` statements will return an error if the user specified does not exist. This behavior depends on if the SQL Mode `NO_AUTO_CREATE_USER` is specified:
+デフォルトでは、指定したユーザーが存在しない場合、 `GRANT`ステートメントはエラーを返します。この動作は、SQLモード`NO_AUTO_CREATE_USER`が指定されているかどうかによって異なります。
 
 ```sql
 mysql> SET sql_mode=DEFAULT;
@@ -54,7 +54,7 @@ mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idonte
 Empty set (0.00 sec)
 ```
 
-In the following example, the user `idontexist` is automatically created with an empty password because the SQL Mode `NO_AUTO_CREATE_USER` was not set. This is **not recommended** since it presents a security risk: miss-spelling a username will result in a new user created with an empty password:
+次の例では、SQLモード`NO_AUTO_CREATE_USER`が設定されていないため、ユーザー`idontexist`は空のパスワードで自動的に作成されます。これはセキュリティ上のリスクがあるため、**お勧めしません**。ユーザー名のスペルを間違えると、空のパスワードで新しいユーザーが作成されます。
 
 ```sql
 mysql> SET @@sql_mode='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -83,7 +83,7 @@ mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idonte
 1 row in set (0.01 sec)
 ```
 
-You can use fuzzy matching in `GRANT` to grant privileges to databases.
+`GRANT`のあいまい一致を使用して、データベースに特権を付与できます。
 
 ```sql
 mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
@@ -98,37 +98,37 @@ mysql> SELECT user,host,db FROM mysql.db WHERE user='genius';
 1 row in set (0.00 sec)
 ```
 
-In this example, because of the `%` in `te%`, all the databases starting with `te` are granted the privilege.
+この例では、 `te%`分の`%`であるため、 `te`で始まるすべてのデータベースに特権が付与されます。
 
-### Revoke privileges
+### 特権を取り消す {#revoke-privileges}
 
-The `REVOKE` statement enables system administrators to revoke privileges from the user accounts.
+`REVOKE`ステートメントを使用すると、システム管理者はユーザーアカウントから特権を取り消すことができます。
 
-The `REVOKE` statement corresponds with the `REVOKE` statement:
+`REVOKE`ステートメントは`REVOKE`ステートメントに対応します。
 
 ```sql
 REVOKE ALL PRIVILEGES ON `test`.* FROM 'genius'@'localhost';
 ```
 
-> **Note:**
+> **ノート：**
 >
-> To revoke privileges, you need the exact match. If the matching result cannot be found, an error will be displayed:
+> 特権を取り消すには、完全に一致する必要があります。一致する結果が見つからない場合は、エラーが表示されます。
 
 ```sql
 mysql> REVOKE ALL PRIVILEGES ON `te%`.* FROM 'genius'@'%';
 ERROR 1141 (42000): There is no such grant defined for user 'genius' on host '%'
 ```
 
-About fuzzy matching, escape, string and identifier:
+あいまい一致、エスケープ、文字列、および識別子について：
 
 ```sql
 mysql> GRANT ALL PRIVILEGES ON `te\%`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-This example uses exact match to find the database named `te%`. Note that the `%` uses the `\` escape character so that `%` is not considered as a wildcard.
+この例では、完全一致を使用して`te%`という名前のデータベースを検索します。 `%`は`\`エスケープ文字を使用するため、 `%`はワイルドカードとは見なされないことに注意してください。
 
-A string is enclosed in single quotation marks(''), while an identifier is enclosed in backticks (``). See the differences below:
+文字列は一重引用符（&#39;&#39;）で囲まれ、識別子はバッククォート（ ``）で囲まれます。以下の違いを参照してください。
 
 ```sql
 mysql> GRANT ALL PRIVILEGES ON 'test'.* TO 'genius'@'localhost';
@@ -140,16 +140,16 @@ mysql> GRANT ALL PRIVILEGES ON `test`.* TO 'genius'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-If you want to use special keywords as table names, enclose them in backticks (``). For example:
+テーブル名として特別なキーワードを使用する場合は、それらをバッククォート（ ``）で囲みます。例えば：
 
 ```sql
 mysql> CREATE TABLE `select` (id int);
 Query OK, 0 rows affected (0.27 sec)
 ```
 
-### Check privileges granted to users
+### ユーザーに付与されている権限を確認する {#check-privileges-granted-to-users}
 
-You can use the `SHOW GRANTS` statement to see what privileges are granted to a user. For example:
+`SHOW GRANTS`ステートメントを使用して、ユーザーに付与されている特権を確認できます。例えば：
 
 ```sql
 SHOW GRANTS; -- show grants for the current user
@@ -162,7 +162,7 @@ SHOW GRANTS; -- show grants for the current user
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
-For example, create a user `rw_user@192.168.%` and grant the user with write privilege on the `test.write_table` table and global read privilege.
+たとえば、ユーザー`rw_user@192.168.%`を作成し、そのユーザーに`test.write_table`テーブルへの書き込み権限とグローバル読み取り権限を付与します。
 
 ```sql
 CREATE USER `rw_user`@`192.168.%`;
@@ -170,7 +170,7 @@ GRANT SELECT ON *.* TO `rw_user`@`192.168.%`;
 GRANT INSERT, UPDATE ON `test`.`write_table` TO `rw_user`@`192.168.%`;
 ```
 
-Show granted privileges of the `rw_user@192.168.%` user:
+`rw_user@192.168.%`人のユーザーに付与された特権を表示します。
 
 ```sql
 SHOW GRANTS FOR `rw_user`@`192.168.%`;
@@ -183,24 +183,24 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 +------------------------------------------------------------------+
 ```
 
-### Dynamic privileges
+### 動的特権 {#dynamic-privileges}
 
-Since v5.1, TiDB features support dynamic privileges, a feature borrowed from MySQL 8.0. Dynamic privileges are intended to replace the `SUPER` privilege by implementing more fine-grained access to certain operations. For example, using dynamic privileges, system administrators can create a user account that can only perform `BACKUP` and `RESTORE` operations.
+v5.1以降、TiDB機能は動的特権をサポートします。これはMySQL8.0から借用した機能です。動的特権は、特定の操作へのよりきめ細かいアクセスを実装することにより、 `SUPER`の特権を置き換えることを目的としています。たとえば、動的特権を使用して、システム管理者は`BACKUP`および`RESTORE`の操作のみを実行できるユーザーアカウントを作成できます。
 
-Dynamic privileges include:
+動的特権には次のものがあります。
 
-* `BACKUP_ADMIN`
-* `RESTORE_ADMIN`
-* `ROLE_ADMIN`
-* `CONNECTION_ADMIN`
-* `SYSTEM_VARIABLES_ADMIN`
-* `RESTRICTED_REPLICA_WRITER_ADMIN` allows privilege owners to perform write or update operations without being affected when the read-only mode is enabled in the TiDB cluster. For details, see [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520).
+-   `BACKUP_ADMIN`
+-   `RESTORE_ADMIN`
+-   `ROLE_ADMIN`
+-   `CONNECTION_ADMIN`
+-   `SYSTEM_VARIABLES_ADMIN`
+-   `RESTRICTED_REPLICA_WRITER_ADMIN`を使用すると、特権所有者は、TiDBクラスタで読み取り専用モードが有効になっている場合に影響を受けることなく書き込みまたは更新操作を実行できます。詳細については、 [`tidb_restricted_read_only`](/system-variables.md#tidb_restricted_read_only-new-in-v520)を参照してください。
 
-To see the full set of dynamic privileges, execute the `SHOW PRIVILEGES` statement. Because plugins are permitted to add new privileges, the list of privileges that are assignable might differ based on your TiDB installation.
+動的特権の完全なセットを表示するには、 `SHOW PRIVILEGES`ステートメントを実行します。プラグインは新しい特権を追加することが許可されているため、割り当て可能な特権のリストは、TiDBのインストールによって異なる場合があります。
 
-## Privileges required for TiDB operations
+## TiDB操作に必要な権限 {#privileges-required-for-tidb-operations}
 
-You can check privileges of TiDB users in the `INFORMATION_SCHEMA.USER_PRIVILEGES` table. For example:
+`INFORMATION_SCHEMA.USER_PRIVILEGES`の表でTiDBユーザーの権限を確認できます。例えば：
 
 ```sql
 mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@'%'";
@@ -242,139 +242,139 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 31 rows in set (0.00 sec)
 ```
 
-### ALTER
+### ALTER {#alter}
 
-- For all `ALTER` statements, users must have the `ALTER` privilege for the corresponding table.
-- For statements except `ALTER...DROP` and `ALTER...RENAME TO`, users must have the `INSERT` and `CREATE` privileges for the corresponding table.
-- For the `ALTER...DROP` statement, users must have the `DROP` privilege for the corresponding table.
-- For the `ALTER...RENAME TO` statement, users must have the `DROP` privilege for the table before renaming, and the `CREATE` and `INSERT` privileges for the table after renaming.
+-   `ALTER`のステートメントすべてについて、ユーザーは対応するテーブルに対して`ALTER`の特権を持っている必要があります。
+-   `ALTER...DROP`と`ALTER...RENAME TO`を除くステートメントの場合、ユーザーは対応するテーブルに対して`INSERT`と`CREATE`の特権を持っている必要があります。
+-   `ALTER...DROP`ステートメントの場合、ユーザーは対応するテーブルに対して`DROP`特権を持っている必要があります。
+-   `ALTER...RENAME TO`ステートメントの場合、ユーザーは、名前を変更する前にテーブルに対して`DROP`の特権を持ち、名前を変更した後にテーブルに対して`CREATE`と`INSERT`の特権を持っている必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> In MySQL 5.7 documentation, users need `INSERT` and `CREATE` privileges to perform the `ALTER` operation on a table. But in reality for MySQL 5.7.25, only the `ALTER` privilege is required in this case. Currently, the `ALTER` privilege in TiDB is consistent with the actual behavior in MySQL.
+> MySQL 5.7のドキュメントでは、ユーザーはテーブルに対して`ALTER`の操作を実行するために`INSERT`と`CREATE`の特権が必要です。ただし、実際にはMySQL 5.7.25の場合、この場合は`ALTER`の特権のみが必要です。現在、TiDBの`ALTER`特権は、MySQLの実際の動作と一致しています。
 
-### BACKUP
+### バックアップ {#backup}
 
-Requires the `SUPER` or `BACKUP_ADMIN` privilege.
+`SUPER`または`BACKUP_ADMIN`の特権が必要です。
 
-### CREATE DATABASE
+### データベースの作成 {#create-database}
 
-Requires the `CREATE` privilege for the database.
+データベースに`CREATE`の特権が必要です。
 
-### CREATE INDEX
+### インデックスの作成 {#create-index}
 
-Requires the `INDEX` privilege for the table.
+テーブルに`INDEX`の特権が必要です。
 
-### CREATE TABLE
+### CREATE TABLE {#create-table}
 
-Requires the `CREATE` privilege for the table.
+テーブルに`CREATE`の特権が必要です。
 
-To execute the `CREATE TABLE...LIKE...` statement, the `SELECT` privilege for the table is required.
+`CREATE TABLE...LIKE...`ステートメントを実行するには、テーブルに対する`SELECT`特権が必要です。
 
-### CREATE VIEW
+### ビューの作成 {#create-view}
 
-Requires the `CREATE VIEW` privilege.
+`CREATE VIEW`の特権が必要です。
 
-> **Note:**
+> **ノート：**
 >
-> If the current user is not the user that creates the View, both the `CREATE VIEW` and `SUPER` privileges are required.
+> 現在のユーザーがビューを作成したユーザーでない場合は、 `CREATE VIEW`と`SUPER`の両方の権限が必要です。
 
-### DROP DATABASE
+### ドロップデータベース {#drop-database}
 
-Requires the `DROP` privilege for the table.
+テーブルに`DROP`の特権が必要です。
 
-### DROP INDEX
+### ドロップインデックス {#drop-index}
 
-Requires the `INDEX` privilege for the table.
+テーブルに`INDEX`の特権が必要です。
 
-### DROP TABLES
+### ドロップテーブル {#drop-tables}
 
-Requires the `DROP` privilege for the table.
+テーブルに`DROP`の特権が必要です。
 
-### LOAD DATA
+### データを読み込む {#load-data}
 
-Requires the `INSERT` privilege for the table.
+テーブルに`INSERT`の特権が必要です。
 
-### TRUNCATE TABLE
+### 切り捨てテーブル {#truncate-table}
 
-Requires the `DROP` privilege for the table.
+テーブルに`DROP`の特権が必要です。
 
-### RENAME TABLE
+### テーブルの名前を変更 {#rename-table}
 
-Requires the `ALTER` and `DROP` privileges for the table before renaming and the `CREATE` and `INSERT` privileges for the table after renaming.
+名前を変更する前にテーブルに`ALTER`と`DROP`の特権が必要であり、名前を変更した後にテーブルに`CREATE`と`INSERT`の特権が必要です。
 
-### ANALYZE TABLE
+### テーブルの分析 {#analyze-table}
 
-Requires the `INSERT` and `SELECT` privileges for the table.
+テーブルには`INSERT`と`SELECT`の権限が必要です。
 
-### SHOW
+### 見せる {#show}
 
-`SHOW CREATE TABLE` requires any single privilege to the table.
+`SHOW CREATE TABLE`には、テーブルに対する単一の特権が必要です。
 
-`SHOW CREATE VIEW` requires the `SHOW VIEW` privilege.
+`SHOW CREATE VIEW`には`SHOW VIEW`特権が必要です。
 
-`SHOW GRANTS` requires the `SELECT` privilege to the `mysql` database. If the target user is current user, `SHOW GRANTS` does not require any privilege.
+`SHOW GRANTS`には、 `mysql`データベースに対する`SELECT`特権が必要です。ターゲットユーザーが現在のユーザーである場合、 `SHOW GRANTS`は特権を必要としません。
 
-`SHOW PROCESSLIST` requires `SUPER` to show connections belonging to other users.
+`SHOW PROCESSLIST`は、他のユーザーに属する接続を表示するために`SUPER`を必要とします。
 
-### CREATE ROLE/USER
+### 役割/ユーザーの作成 {#create-role-user}
 
-`CREATE ROLE` requires the `CREATE ROLE` privilege.
+`CREATE ROLE`には`CREATE ROLE`特権が必要です。
 
-`CREATE USER` requires the `CREATE USER` privilege.
+`CREATE USER`には`CREATE USER`特権が必要です。
 
-### DROP ROLE/USER
+### ドロップロール/ユーザー {#drop-role-user}
 
-`DROP ROLE` requires the `DROP ROLE` privilege.
+`DROP ROLE`には`DROP ROLE`特権が必要です。
 
-`DROP USER` requires the `CREATE USER` privilege.
+`DROP USER`には`CREATE USER`特権が必要です。
 
-### ALTER USER
+### ALTER USER {#alter-user}
 
-Requires the `CREATE USER` privilege.
+`CREATE USER`の特権が必要です。
 
-### GRANT
+### 許す {#grant}
 
-Requires the `GRANT` privilege with the privileges granted by `GRANT`.
+`GRANT`によって付与された特権を持つ`GRANT`の特権が必要です。
 
-Requires additional `CREATE USER` privilege to create a user implicitly.
+暗黙的にユーザーを作成するには、追加の`CREATE USER`の特権が必要です。
 
-`GRANT ROLE` requires `SUPER` or `ROLE_ADMIN` privilege.
+`GRANT ROLE`には`SUPER`または`ROLE_ADMIN`の特権が必要です。
 
-### REVOKE
+### 取り消す {#revoke}
 
-Requires the `GRANT` privilege and those privileges targeted by the `REVOKE` statement.
+`GRANT`の特権と`REVOKE`のステートメントの対象となる特権が必要です。
 
-`REVOKE ROLE` requires `SUPER` or `ROLE_ADMIN` privilege.
+`REVOKE ROLE`には`SUPER`または`ROLE_ADMIN`の特権が必要です。
 
-### SET GLOBAL
+### グローバルに設定 {#set-global}
 
-Requires `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege to set global variables.
+グローバル変数を設定するには、 `SUPER`つまたは`SYSTEM_VARIABLES_ADMIN`の特権が必要です。
 
-### ADMIN
+### 管理者 {#admin}
 
-Requires `SUPER` privilege.
+`SUPER`の特権が必要です。
 
-### SET DEFAULT ROLE
+### デフォルトの役割を設定 {#set-default-role}
 
-Requires `SUPER` privilege.
+`SUPER`の特権が必要です。
 
-### KILL
+### 殺す {#kill}
 
-Requires `SUPER` or `CONNECTION_ADMIN` privilege to kill other user sessions.
+他のユーザーセッションを強制終了するには、 `SUPER`つまたは`CONNECTION_ADMIN`の特権が必要です。
 
-## Implementation of the privilege system
+## 特権システムの実装 {#implementation-of-the-privilege-system}
 
-### Privilege table
+### 特権テーブル {#privilege-table}
 
-The following system tables are special because all the privilege-related data is stored in them:
+次のシステムテーブルは、すべての特権関連データが格納されているため、特別です。
 
-- `mysql.user` (user account, global privilege)
-- `mysql.db` (database-level privilege)
-- `mysql.tables_priv` (table-level privilege)
-- `mysql.columns_priv` (column-level privilege; not currently supported)
+-   `mysql.user` （ユーザーアカウント、グローバル特権）
+-   `mysql.db` （データベースレベルの特権）
+-   `mysql.tables_priv` （テーブルレベルの特権）
+-   `mysql.columns_priv` （列レベルの特権。現在はサポートされていません）
 
-These tables contain the effective range and privilege information of the data. For example, in the `mysql.user` table:
+これらのテーブルには、データの有効範囲と特権情報が含まれています。たとえば、 `mysql.user`の表では次のようになります。
 
 ```sql
 mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
@@ -386,41 +386,41 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
-In this record, `Host` and `User` determine that the connection request sent by the `root` user from any host (`%`) can be accepted. `Select_priv` and `Insert_priv` mean that the user has global `Select` and `Insert` privilege. The effective range in the `mysql.user` table is global.
+このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`表の有効射程はグローバルです。
 
-`Host` and `User` in `mysql.db` determine which databases users can access. The effective range is the database.
+`mysql.db`の`Host`と`User`は、ユーザーがアクセスできるデータベースを決定します。有効射程はデータベースです。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to only update the privilege tables via the supplied syntax such as `GRANT`, `CREATE USER` and `DROP USER`. Making direct edits to the underlying privilege tables will not automatically update the privilege cache, leading to unpredictable behavior until `FLUSH PRIVILEGES` is executed.
+> `GRANT`などの提供された`DROP USER`を介してのみ特権テーブルを更新することをお勧めし`CREATE USER` 。基になる特権テーブルを直接編集しても、特権キャッシュは自動的に更新されないため、 `FLUSH PRIVILEGES`が実行されるまで予期しない動作が発生します。
 
-### Connection verification
+### 接続検証 {#connection-verification}
 
-When the client sends a connection request, TiDB server will verify the login operation. TiDB server first checks the `mysql.user` table. If a record of `User` and `Host` matches the connection request, TiDB server then verifies the `authentication_string`.
+クライアントが接続要求を送信すると、TiDBサーバーはログイン操作を確認します。 TiDBサーバーは最初に`mysql.user`のテーブルをチェックします。 `User`と`Host`のレコードが接続要求に一致する場合、TiDBサーバーは`authentication_string`を検証します。
 
-User identity is based on two pieces of information: `Host`, the host that initiates the connection, and `User`, the user name. If the user name is not empty, the exact match of user named is a must.
+ユーザーIDは、接続を開始するホストである`Host`とユーザー名である`User`の2つの情報に基づいています。ユーザー名が空でない場合、指定されたユーザーと完全に一致する必要があります。
 
-`User`+`Host` may match several rows in `user` table. To deal with this scenario, the rows in the `user` table are sorted. The table rows will be checked one by one when the client connects; the first matched row will be used to verify. When sorting, Host is ranked before User.
+`User` + `Host`は、 `user`のテーブルの複数の行に一致する場合があります。このシナリオに対処するために、 `user`テーブルの行がソートされます。クライアントが接続すると、テーブルの行が1つずつチェックされます。最初に一致した行が検証に使用されます。並べ替えの際、ホストはユーザーの前にランク付けされます。
 
-### Request verification
+### 確認をリクエストする {#request-verification}
 
-When the connection is successful, the request verification process checks whether the operation has the privilege.
+接続が成功すると、要求検証プロセスは、操作に特権があるかどうかを確認します。
 
-For database-related requests (`INSERT`, `UPDATE`), the request verification process first checks the user’s global privileges in the `mysql.user` table. If the privilege is granted, you can access directly. If not, check the `mysql.db` table.
+データベース関連の要求（ `INSERT` ）の場合、要求検証プロセスは最初に`UPDATE`テーブル内のユーザーのグローバル特権をチェックし`mysql.user` 。特権が付与されている場合は、直接アクセスできます。そうでない場合は、 `mysql.db`の表を確認してください。
 
-The `user` table has global privileges regardless of the default database. For example, the `DELETE` privilege in `user` can apply to any row, table, or database.
+`user`テーブルには、デフォルトのデータベースに関係なくグローバル権限があります。たとえば、 `user`の`DELETE`特権は、任意の行、テーブル、またはデータベースに適用できます。
 
-In the `db` table, an empty user is to match the anonymous user name. Wildcards are not allowed in the `User` column. The value for the `Host` and `Db` columns can use `%` and `_`, which can use pattern matching.
+`db`の表では、空のユーザーは匿名ユーザー名と一致します。 `User`列にワイルドカードを使用することはできません。 `Host`列と`Db`列の値は、パターンマッチングを使用できる`%`列と`_`列を使用できます。
 
-Data in the `user` and `db` tables is also sorted when loaded into memory.
+`user`および`db`テーブルのデータも、メモリにロードされるときにソートされます。
 
-The use of `%` in `tables_priv` and `columns_priv` is similar, but column value in `Db`, `Table_name` and `Column_name` cannot contain `%`. The sorting is also similar when loaded.
+`tables_priv`と`columns_priv`の`%`の使用法は似てい`Table_name`が、 `Db`の列の値に`Column_name`を含めることはできませ`%` 。ロード時の並べ替えも同様です。
 
-### Time of effect
+### 効果の時間 {#time-of-effect}
 
-When TiDB starts, some privilege-check tables are loaded into memory, and then the cached data is used to verify the privileges. Executing privilege management statements such as `GRANT`, `REVOKE`, `CREATE USER`, `DROP USER` will take effect immediately.
+TiDBが起動すると、いくつかの特権チェックテーブルがメモリにロードされ、キャッシュされたデータが特権の検証に使用されます。 `GRANT`などの`CREATE USER`管理ステートメントの実行はすぐに`DROP USER`になり`REVOKE` 。
 
-Manually editing tables such as `mysql.user` with statements such as `INSERT`, `DELETE`, `UPDATE` will not take effect immediately. This behavior is compatible with MySQL, and privilege cache can be updated with the following statement:
+`INSERT`などの`UPDATE`を使用して`mysql.user`などのテーブルを手動で編集しても、すぐには有効になりませ`DELETE` 。この動作はMySQLと互換性があり、特権キャッシュは次のステートメントで更新できます。
 
 ```sql
 FLUSH PRIVILEGES;

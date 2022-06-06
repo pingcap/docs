@@ -2,39 +2,39 @@
 title: TiDB 2.1.7 Release Notes
 ---
 
-# TiDB 2.1.7 Release Notes
+# TiDB2.1.7リリースノート {#tidb-2-1-7-release-notes}
 
-Release Date: March 28, 2019
+発売日：2019年3月28日
 
-TiDB version: 2.1.7
+TiDBバージョン：2.1.7
 
-TiDB Ansible version: 2.1.7
+TiDB Ansibleバージョン：2.1.7
 
-## TiDB
+## TiDB {#tidb}
 
-- Fix the issue of longer startup time when upgrading the program caused by canceling DDL operations [#9768](https://github.com/pingcap/tidb/pull/9768)
-- Fix the issue that the `check-mb4-value-in-utf8` configuration item is in the wrong position in the `config.example.toml` file [#9852](https://github.com/pingcap/tidb/pull/9852)
-- Improve the compatibility of the `str_to_date` built-in function with MySQL [#9817](https://github.com/pingcap/tidb/pull/9817)
-- Fix the compatibility issue of the `last_day` built-in function [#9750](https://github.com/pingcap/tidb/pull/9750)
-- Add the `tidb_table_id` column for `infoschema.tables` to facilitate getting `table_id` by using SQL statements and add the `tidb_indexes` system table to manage the relationship between Table and Index [#9862](https://github.com/pingcap/tidb/pull/9862)
-- Add a check about the null definition of Table Partition [#9663](https://github.com/pingcap/tidb/pull/9663)
-- Change the privileges required by `Truncate Table` from `Delete` to `Drop` to make it consistent with MySQL [#9876](https://github.com/pingcap/tidb/pull/9876)
-- Support using subqueries in the `DO` statement [#9877](https://github.com/pingcap/tidb/pull/9877)
-- Fix the issue that the `default_week_format` variable does not take effect in the `week` function [#9753](https://github.com/pingcap/tidb/pull/9753)
-- Support the plugin framework [#9880](https://github.com/pingcap/tidb/pull/9880), [#9888](https://github.com/pingcap/tidb/pull/9888)
-- Support checking the enabling state of binlog by using the `log_bin` system variable [#9634](https://github.com/pingcap/tidb/pull/9634)
-- Support checking the Pump/Drainer status by using SQL statements [#9896](https://github.com/pingcap/tidb/pull/9896)
-- Fix the compatibility issue about checking mb4 character on utf8 when upgrading TiDB [#9887](https://github.com/pingcap/tidb/pull/9887)
-- Fix the panic issue when the aggregate function calculates JSON data in some cases [#9927](https://github.com/pingcap/tidb/pull/9927)
+-   DDL操作をキャンセルすることによってプログラムをアップグレードするときに起動時間が長くなる問題を修正します[＃9768](https://github.com/pingcap/tidb/pull/9768)
+-   `check-mb4-value-in-utf8`の構成アイテムが`config.example.toml`のファイル[＃9852](https://github.com/pingcap/tidb/pull/9852)の間違った位置にある問題を修正します
+-   `str_to_date`組み込み関数とMySQL3の互換性を改善し[＃9817](https://github.com/pingcap/tidb/pull/9817)
+-   `last_day`組み込み関数[＃9750](https://github.com/pingcap/tidb/pull/9750)の互換性の問題を修正します
+-   SQLステートメントを使用して`table_id`を取得しやすくするために、 `infoschema.tables`に`tidb_table_id`列を追加し、テーブルとインデックス[＃9862](https://github.com/pingcap/tidb/pull/9862)の間の関係を管理するために`tidb_indexes`システムテーブルを追加します。
+-   テーブルパーティション[＃9663](https://github.com/pingcap/tidb/pull/9663)のnull定義に関するチェックを追加します
+-   MySQL [＃9876](https://github.com/pingcap/tidb/pull/9876)との整合性を保つために、 `Truncate Table`に必要な権限を`Delete`から`Drop`に変更します
+-   `DO`ステートメント[＃9877](https://github.com/pingcap/tidb/pull/9877)でのサブクエリの使用のサポート
+-   `default_week_format`変数が`week`関数[＃9753](https://github.com/pingcap/tidb/pull/9753)で有効にならない問題を修正します
+-   プラグインフレームワークをサポートする[＃9880](https://github.com/pingcap/tidb/pull/9880) 、 [＃9888](https://github.com/pingcap/tidb/pull/9888)
+-   `log_bin`システム変数[＃9634](https://github.com/pingcap/tidb/pull/9634)を使用して、binlogの有効化状態のチェックをサポートします。
+-   SQLステートメントを使用したポンプ/ドレイナーステータスのチェックのサポート[＃9896](https://github.com/pingcap/tidb/pull/9896)
+-   TiDB1をアップグレードするときにutf8でmb4文字をチェックすることに関する互換性の問題を修正し[＃9887](https://github.com/pingcap/tidb/pull/9887)
+-   集計関数が場合によってはJSONデータを計算するときのパニックの問題を修正します[＃9927](https://github.com/pingcap/tidb/pull/9927)
 
-## PD
+## PD {#pd}
 
-- Fix the issue that the transferring leader step cannot be created in the balance-region when the number of replicas is one [#1462](https://github.com/pingcap/pd/pull/1462)
+-   レプリカの数が1の場合、バランス領域に転送リーダーステップを作成できない問題を修正します[＃1462](https://github.com/pingcap/pd/pull/1462)
 
-## Tools
+## ツール {#tools}
 
-- Support replicating generated columns by using binlog
+-   binlogを使用して生成された列の複製をサポートする
 
-## TiDB Ansible
+## TiDB Ansible {#tidb-ansible}
 
-Change the default retention time of Prometheus monitoring data to 30d
+Prometheusモニタリングデータのデフォルトの保持時間を30dに変更します

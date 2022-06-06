@@ -3,11 +3,11 @@ title: ALTER USER | TiDB SQL Statement Reference
 summary: An overview of the usage of ALTER USER for the TiDB database.
 ---
 
-# ALTER USER
+# ALTER USER {#alter-user}
 
-This statement changes an existing user inside the TiDB privilege system. In the MySQL privilege system, a user is the combination of a username and the host from which they are connecting from. Thus, it is possible to create a user `'newuser2'@'192.168.1.1'` who is only able to connect from the IP address `192.168.1.1`. It is also possible to have two users have the same user-portion, and different permissions as they login from different hosts.
+このステートメントは、TiDB特権システム内の既存のユーザーを変更します。 MySQL特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することができます。また、2人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterUserStmt ::=
@@ -26,7 +26,7 @@ AuthOption ::=
     ( 'IDENTIFIED' ( 'BY' ( AuthString | 'PASSWORD' HashString ) | 'WITH' StringName ( 'BY' AuthString | 'AS' HashString )? ) )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
@@ -52,13 +52,13 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* In MySQL this statement is used to change attributes such as to expire a password. This functionality is not yet supported by TiDB.
+-   MySQLでは、このステートメントは、パスワードの有効期限などの属性を変更するために使用されます。この機能は、TiDBではまだサポートされていません。
 
-## See also
+## も参照してください {#see-also}
 
-* [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [DROP USER](/sql-statements/sql-statement-drop-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
+-   [MySQLとのセキュリティの互換性](/security-compatibility-with-mysql.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
+-   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)

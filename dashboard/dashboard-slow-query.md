@@ -3,58 +3,58 @@ title: Slow Queries Page of TiDB Dashboard
 summary: Learn the Slow Queries page of TiDB Dashboard.
 ---
 
-# Slow Queries Page of TiDB Dashboard
+# TiDBダッシュボードの低速クエリページ {#slow-queries-page-of-tidb-dashboard}
 
-On the Slow Queries page of TiDB Dashboard, you can search and view all slow queries in the cluster.
+TiDBダッシュボードの[低速クエリ]ページで、クラスタのすべての低速クエリを検索および表示できます。
 
-By default, SQL queries with an execution time of more than 300 milliseconds are considered as slow queries. These queries are recorded in the [slow query logs](/identify-slow-queries.md) and can be searched via TiDB Dashboard. You can adjust the threshold of slow queries through the [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) session variable or the [`slow-threshold`](/tidb-configuration-file.md#slow-threshold) TiDB parameter.
+デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリは低速クエリと見なされます。これらのクエリは[遅いクエリログ](/identify-slow-queries.md)に記録され、TiDBダッシュボードを介して検索できます。 [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)セッション変数または[`slow-threshold`](/tidb-configuration-file.md#slow-threshold)パラメーターを使用して、低速クエリのしきい値を調整できます。
 
-> **Note:**
+> **ノート：**
 >
-> If the slow query log is disabled, this feature will be unavailable. The slow query log is enabled by default, and you can enable or disable the slow query log through the [`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log) TiDB configuration item.
+> 低速クエリログが無効になっている場合、この機能は使用できなくなります。低速クエリログはデフォルトで有効になっており、 [`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log)つのTiDB構成アイテムを使用して低速クエリログを有効または無効にできます。
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can use one of the following two methods to access the slow query page:
+次の2つの方法のいずれかを使用して、低速クエリページにアクセスできます。
 
-* After logging into TiDB Dashboard, click **Slow Queries** on the left navigation menu:
+-   TiDBダッシュボードにログインした後、左側のナビゲーションメニューで[**低速クエリ**]をクリックします。
 
 ![Access slow query page](/media/dashboard/dashboard-slow-queries-access.png)
 
-* Visit <http://127.0.0.1:2379/dashboard/#/slow_query> in your browser. Replace `127.0.0.1:2379` with the actual PD address and port.
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/slow_query](http://127.0.0.1:2379/dashboard/#/slow_query)にアクセスします。 `127.0.0.1:2379`を実際のPDアドレスとポートに置き換えます。
 
-All data displayed on the slow query page comes from TiDB slow query system tables and slow query logs. See [slow query logs](/identify-slow-queries.md) for details.
+低速クエリページに表示されるすべてのデータは、TiDB低速クエリシステムテーブルと低速クエリログから取得されます。詳細については、 [遅いクエリログ](/identify-slow-queries.md)を参照してください。
 
-### Change Filters
+### フィルタを変更する {#change-filters}
 
-You can filter slow queries based on the time range, the related database, SQL keywords, SQL types, the number of slow queries to be displayed. In the image below, 100 slow queries over the recent 30 minutes are displayed by default.
+時間範囲、関連データベース、SQLキーワード、SQLタイプ、表示される低速クエリの数に基づいて、低速クエリをフィルタリングできます。下の画像では、最近30分間に100回の遅いクエリがデフォルトで表示されています。
 
 ![Modify list filters](/media/dashboard/dashboard-slow-queries-list1.png)
 
-### Display More Columns
+### その他の列を表示する {#display-more-columns}
 
-Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
+ページの[**列]**をクリックすると、さらに列を表示するように選択できます。列名の右側にある<strong>（i）</strong>アイコンにマウスを移動すると、この列の説明が表示されます。
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2.png)
 
-### Sort by Column
+### 列で並べ替え {#sort-by-column}
 
-By default, the list is sorted by **Finish Time** in the descending order. Click column headings to sort by the column or switch the sorting order:
+デフォルトでは、リストは**終了時間**の降順で並べ替えられます。列見出しをクリックして列で並べ替えるか、並べ替え順序を切り替えます。
 
 ![Modify sorting basis](/media/dashboard/dashboard-slow-queries-list3.png)
 
-## View execution details
+## 実行の詳細を表示する {#view-execution-details}
 
-Click any item in the list to display detailed execution information of the slow query, including:
+リスト内の任意の項目をクリックして、次のような低速クエリの詳細な実行情報を表示します。
 
-- Query: The text of the SQL statement (see area 1 in the image below);
-- Plan: The execution plan of the slow query. See [Understand the Query Execution Plan](/explain-overview.md) to learn how to read the execution plan (see area 2 in the image below);
-- Other sorted SQL execution information (see area 3 in the image below).
+-   クエリ：SQLステートメントのテキスト（下の画像の領域1を参照）。
+-   計画：低速クエリの実行計画。実行プランの読み方については、 [クエリ実行プランを理解する](/explain-overview.md)を参照してください（下の画像の領域2を参照）。
+-   その他のソートされたSQL実行情報（下の画像の領域3を参照）。
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1.png)
 
-Click the **Expand** link to show the detailed information of an item. Click the **Copy** link to copy the detailed information to the clipboard.
+アイテムの詳細情報を表示するには、 **[展開]**リンクをクリックします。 [<strong>コピー]</strong>リンクをクリックして、詳細情報をクリップボードにコピーします。
 
-Click the corresponding tab titles to switch information of different sorted SQL executions.
+対応するタブタイトルをクリックして、ソートされたさまざまなSQL実行の情報を切り替えます。
 
 ![Show different sorted execution information](/media/dashboard/dashboard-slow-queries-detail2.png)

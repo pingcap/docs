@@ -3,11 +3,11 @@ title: CLUSTER_INFO
 summary: Learn the `CLUSTER_INFO` cluster topology information table.
 ---
 
-# CLUSTER_INFO
+# CLUSTER_INFO {#cluster-info}
 
-The `CLUSTER_INFO` cluster topology table provides the current topology information of the cluster, the version information of each instance, the Git Hash corresponding to the instance version, the starting time of each instance, and the running time of each instance.
+`CLUSTER_INFO`クラスタトポロジテーブルは、クラスタの現在のトポロジ情報、各インスタンスのバージョン情報、インスタンスバージョンに対応するGitハッシュ、各インスタンスの開始時間、および各インスタンスの実行時間を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -29,17 +29,17 @@ desc cluster_info;
 7 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明：
 
-* `TYPE`: The instance type. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: The instance address, which is a string in the format of `IP:PORT`.
-* `STATUS_ADDRESS`: The service address of HTTP API. Some commands in tikv-ctl, pd-ctl, or tidb-ctl might use this API and this address. You can also get more cluster information via this address. Refer to [TiDB HTTP API document](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md) for details.
-* `VERSION`: The semantic version number of the corresponding instance. To be compatible with the MySQL version number, the TiDB version is displayed in the format of `${mysql-version}-${tidb-version}`.
-* `GIT_HASH`: The Git Commit Hash when compiling the instance version, which is used to identify whether two instances are of the absolutely consistent version.
-* `START_TIME`: The starting time of the corresponding instance.
-* `UPTIME`: The uptime of the corresponding instance.
+-   `TYPE` ：インスタンスタイプ。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `INSTANCE` ：インスタンスアドレス`IP:PORT`の形式の文字列です。
+-   `STATUS_ADDRESS` ：HTTPAPIのサービスアドレス。 tikv-ctl、pd-ctl、またはtidb-ctlの一部のコマンドは、このAPIとこのアドレスを使用する場合があります。このアドレスを介して、より多くのクラスタ情報を取得することもできます。詳細は[TiDBHTTPAPIドキュメント](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
+-   `VERSION` ：対応するインスタンスのセマンティックバージョン番号。 MySQLのバージョン番号と互換性を持たせるために、TiDBのバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。
+-   `GIT_HASH` ：インスタンスバージョンをコンパイルするときのGitコミットハッシュ。これは、2つのインスタンスが完全に一貫したバージョンであるかどうかを識別するために使用されます。
+-   `START_TIME` ：対応するインスタンスの開始時刻。
+-   `UPTIME` ：対応するインスタンスの稼働時間。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM cluster_info;

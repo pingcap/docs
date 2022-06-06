@@ -6,75 +6,68 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 <!-- markdownlint-disable MD046 -->
 
-# TiDB Cloud Documentation
+# TiDBクラウドドキュメント {#tidb-cloud-documentation}
 
-[TiDB Cloud](https://pingcap.com/products/tidbcloud) is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, and lets you focus on your applications, not the complexities of your database.
+[TiDBクラウド](https://pingcap.com/products/tidbcloud)は、フルマネージドのサービスとしてのデータベース（DBaaS）であり、TiDBの優れた機能をすべてクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
-<NavColumns>
-<NavColumn>
-<ColumnTitle>Quick Start</ColumnTitle>
+<NavColumns><NavColumn><ColumnTitle>クイックスタート</ColumnTitle>
 
-- [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
-- [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
-- [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
-- [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
-- [FAQs](/tidb-cloud/tidb-cloud-faq.md)
+-   [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)
+-   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
+-   [TiDBクラウドが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
+-   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
+-   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Manage Cluster</ColumnTitle>
+<NavColumn><ColumnTitle>クラスターの管理</ColumnTitle>
 
-- [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
-- [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
-- [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
-- [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md)
-- [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md)
-- [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
-- [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-
-</NavColumn>
-
-<NavColumn>
-<ColumnTitle>Manage Data</ColumnTitle>
-
-- [Import Sample Data](/tidb-cloud/import-sample-data.md)
-- [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
-- [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-- [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-- [Back Up and Restore Data](/tidb-cloud/backup-and-restore.md)
-- [Export Data from TiDB Cloud](/tidb-cloud/export-data-from-tidb-cloud.md)
+-   [クラスタ層を選択してください](/tidb-cloud/select-cluster-tier.md)
+-   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
+-   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
+-   [TiDBクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)
+-   [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)
+-   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
+-   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Monitor Cluster</ColumnTitle>
+<NavColumn><ColumnTitle>データの管理</ColumnTitle>
 
-- [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-- [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
-- [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
-
-</NavColumn>
-
-<NavColumn>
-<ColumnTitle>Manage User Access</ColumnTitle>
-
-- [Sign In](/tidb-cloud/manage-user-access.md#sign-in)
-- [Sign Out](/tidb-cloud/manage-user-access.md#sign-out)
-- [View the Organization and Project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
-- [Invite an Organization Member](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
-- [Invite a Project Member](/tidb-cloud/manage-user-access.md#invite-a-project-member)
-- [Configure Member Roles](/tidb-cloud/manage-user-access.md#configure-member-roles)
-- [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+-   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
+-   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
+-   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+-   [AmazonS3またはGCSからTiDBクラウドへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+-   [データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
+-   [TiDBクラウドからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Reference</ColumnTitle>
+<NavColumn><ColumnTitle>モニタークラスター</ColumnTitle>
 
-- [Billing](/tidb-cloud/tidb-cloud-billing.md)
-- [Support](/tidb-cloud/tidb-cloud-support.md)
-- [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+-   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
+-   [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)
+-   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+
+</NavColumn>
+
+<NavColumn><ColumnTitle>ユーザーアクセスの管理</ColumnTitle>
+
+-   [ログイン](/tidb-cloud/manage-user-access.md#sign-in)
+-   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
+-   [組織とプロジェクトを表示する](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
+-   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
+-   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
+-   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)
+-   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+
+</NavColumn>
+
+<NavColumn><ColumnTitle>参照</ColumnTitle>
+
+-   [請求する](/tidb-cloud/tidb-cloud-billing.md)
+-   [サポート](/tidb-cloud/tidb-cloud-support.md)
+-   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 
 </NavColumn>
 

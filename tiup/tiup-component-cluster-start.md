@@ -2,48 +2,48 @@
 title: tiup cluster start
 ---
 
-# tiup cluster start
+# tiupクラスタ開始 {#tiup-cluster-start}
 
-The `tiup cluster start` command is used to start all services or some services of the specified cluster.
+`tiup cluster start`コマンドは、指定されたクラスタのすべてのサービスまたは一部のサービスを開始するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster start <cluster-name> [flags]
 ```
 
-`<cluster-name>` is the name of the cluster to operate on. If you forget the cluster name, you can check it using the [`tiup cluster list`](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>`は、操作するクラスタの名前です。クラスタ名を忘れた場合は、 [`tiup cluster list`](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the nodes to be started. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are started by default.
+-   開始するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `tiup cluster display`コマンドによって返された[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノードIDを取得できます。
+-   データ型： `STRINGS`
+-   このオプションがコマンドで指定されていない場合、すべてのノードがデフォルトで開始されます。
 
-> **Note:**
+> **ノート：**
 >
-> If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are started.
+> `-R, --role`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが起動します。
 
-### -R, --role
+### -R、-role {#r-role}
 
-- Specifies the roles of nodes to be started. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the [cluster status table](/tiup/tiup-component-cluster-display.md) returned by the `tiup cluster display` command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are started by default.
+-   開始するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の2番目の列からノードの役割を取得できます。
+-   データ型： `STRINGS`
+-   このオプションがコマンドで指定されていない場合、すべての役割がデフォルトで開始されます。
 
-> **Note:**
+> **ノート：**
 >
-> If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are started.
+> `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが起動します。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-The log of starting the service.
+サービス開始のログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

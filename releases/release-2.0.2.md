@@ -2,28 +2,28 @@
 title: TiDB 2.0.2 Release Notes
 ---
 
-# TiDB 2.0.2 Release Notes
+# TiDB2.0.2リリースノート {#tidb-2-0-2-release-notes}
 
-On May 21, 2018, TiDB 2.0.2 is released. Compared with TiDB 2.0.1, this release has great improvement in system stability.
+2018年5月21日、TiDB2.0.2がリリースされました。 TiDB 2.0.1と比較して、このリリースではシステムの安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Fix the issue of pushing down the Decimal division expression
-- Support using the `USE INDEX` syntax in the `Delete` statement
-- Forbid using the `shard_row_id_bits` feature in columns with `Auto-Increment`
-- Add the timeout mechanism for writing Binlog
+-   10進数の除算式をプッシュダウンする問題を修正します
+-   `Delete`ステートメントでの`USE INDEX`構文の使用のサポート
+-   `Auto-Increment`の列で`shard_row_id_bits`つの機能を使用することを禁止します
+-   Binlogを書き込むためのタイムアウトメカニズムを追加します
 
-## PD
+## PD {#pd}
 
-- Make the balance leader scheduler filter the disconnected nodes
-- Modify the timeout of the transfer leader operator to 10s
-- Fix the issue that the label scheduler does not schedule when the cluster Regions are in an unhealthy state
-- Fix the improper scheduling issue of `evict leader scheduler`
+-   バランスリーダースケジューラに切断されたノードをフィルタリングさせる
+-   転送リーダーオペレーターのタイムアウトを10秒に変更します
+-   クラスタリージョンが異常な状態にあるときにラベルスケジューラがスケジュールしない問題を修正します
+-   `evict leader scheduler`の不適切なスケジューリングの問題を修正します
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that the Raft log is not printed
-- Support configuring more gRPC related parameters
-- Support configuring the timeout range of leader election
-- Fix the issue that the obsolete learner is not deleted
-- Fix the issue that the snapshot intermediate file is mistakenly deleted
+-   Raftログが印刷されない問題を修正します
+-   より多くのgRPC関連パラメーターの構成をサポート
+-   リーダー選出のタイムアウト範囲の構成をサポート
+-   廃止された学習者が削除されない問題を修正します
+-   スナップショット中間ファイルが誤って削除される問題を修正します

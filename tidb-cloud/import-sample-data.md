@@ -3,43 +3,45 @@ title: Import Sample Data
 summary: Learn how to import sample data into TiDB Cloud via UI.
 ---
 
-# Import Sample Data
+# サンプルデータのインポート {#import-sample-data}
 
-This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
+このドキュメントでは、UIを介してサンプルデータをTiDBCloudにインポートする方法について説明します。使用されているサンプルデータは、Capital Bikeshare DataLicenseAgreementに基づいてリリースされたCapitalBikeshareのシステムデータです。サンプルデータをインポートする前に、1つのTiDBクラスタが必要です。
 
-1. Navigate to the TiDB Clusters page and click the name of your target cluster. The overview page of your target cluster is displayed.
-2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
-3. Depending on where the TiDB cluster is hosted, do one of the following: 
+1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
 
-    - If the TiDB cluster is hosted by AWS, select **AWS S3** for **Data Source Type**, enter the sample data URL `s3://tidbcloud-samples/data-ingestion/` in the **Bucket URL** field, and then select **US West (Oregon)** for  **Bucket Region**. The sample data bucket is hosted in the US West (Oregon) region for AWS.
+2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
 
-    - If the TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field, and then select **US-West1 (Oregon)** for **Bucket Region**. The sample data bucket is hosted in the US-West1 (Oregon) for GCP.
+3.  TiDBクラスタがホストされている場所に応じて、次のいずれかを実行します。
 
-4. For **Data Format**, select **TiDB Dumpling**.
+    -   TiDBクラスタがAWSによってホストされている場合は、[**データソースタイプ**]に[ <strong>AWS S3</strong> ]を選択し、[<strong>バケットURL</strong> ]フィールドにサンプルデータURL `s3://tidbcloud-samples/data-ingestion/`を入力してから、[<strong>バケットリージョン</strong>]に[ <strong>US West（オレゴン）]</strong>を選択します。サンプルデータバケットは、AWSの米国西部（オレゴン）リージョンでホストされています。
 
-5. If the TiDB cluster is hosted by GCP, skip this step. If the TiDB cluster is hosted by AWS, enter the Role-ARN: 
+    -   TiDBクラスタがGCPでホストされている場合は、[**データソースの種類**]に[ <strong>Google Cloud Storage</strong> ]を選択し、[<strong>バケットURL</strong> ]フィールドにサンプルデータのURL `gcs://tidbcloud-samples-us-west1`を入力して、[<strong>バケットリージョン</strong>]に[ <strong>US-West1（オレゴン）]</strong>を選択します。サンプルデータバケットは、GCPのUS-West1（オレゴン）でホストされています。
+
+4.  [**データ形式]**で、[ <strong>TiDBDumpling</strong>]を選択します。
+
+5.  TiDBクラスタがGCPでホストされている場合は、この手順をスキップしてください。 TiDBクラスタがAWSによってホストされている場合は、Role-ARNを入力します。
 
     ```
     arn:aws:iam::385595570414:role/import-sample-access
     ```
 
-6. For **Target Database**, enter `root` in the **Username** field, and enter the root password you have set when you created the cluster in the **Password** field.
+6.  [**ターゲットデータベース**]で、 <strong>[ユーザー</strong>名]フィールドに`root`を入力し、クラスタの作成時に設定したルートパスワードを[<strong>パスワード</strong>]フィールドに入力します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > If you have created a custom user and have the enough permissions, you can also use the name of the newly created user and the corresponding password.
+    > カスタムユーザーを作成し、十分な権限がある場合は、新しく作成したユーザーの名前と対応するパスワードを使用することもできます。
 
-7. Leave the **DB/Tables Filter** field blank.
+7.  [ **DB/テーブルフィルター]**フィールドは空白のままにします。
 
-8. Click **Import**. Then the sample data starts being imported.
+8.  [**インポート]**をクリックします。その後、サンプルデータのインポートが開始されます。
 
-Once the cluster finishes the data importing process, you will get the sample data in your database.
+クラスタがデータのインポートプロセスを完了すると、データベースにサンプルデータが取得されます。
 
-You can run some queries to check the result, for example:
+たとえば、いくつかのクエリを実行して結果を確認できます。
 
-1. Get the trip records starting at "12th & U St NW":
+1.  「12th＆UStNW」から始まる旅行記録を入手してください。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     use bikeshare;
@@ -63,9 +65,9 @@ You can run some queries to check the result, for example:
     +------------------+---------------+---------------------+---------------------+--------------------+------------------+-------------------------------------------+----------------+-----------+------------+-----------+------------+---------------+
     ```
 
-2. Get the trip records with electric bikes:
+2.  電動自転車で旅行記録を取得します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     use bikeshare;

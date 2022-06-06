@@ -3,13 +3,13 @@ title: Data Check for TiDB Upstream and Downstream Clusters
 summary: Learn how to check data for TiDB upstream and downstream clusters.
 ---
 
-# Data Check for TiDB Upstream and Downstream Clusters
+# TiDBアップストリームおよびダウンストリームクラスターのデータチェック {#data-check-for-tidb-upstream-and-downstream-clusters}
 
-You can use TiDB Binlog to build upstream and downstream clusters of TiDB. When Drainer replicates data to TiDB, the checkpoint is saved and the TSO mapping relationship between the upstream and downstream is also saved as `ts-map`. To check data between the upstream and downstream, configure `snapshot` in sync-diff-inspector.
+TiDB Binlogを使用して、TiDBのアップストリームおよびダウンストリームクラスターを構築できます。 DrainerがデータをTiDBに複製すると、チェックポイントが保存され、アップストリームとダウンストリーム間のTSOマッピング関係も`ts-map`として保存されます。アップストリームとダウンストリーム間のデータをチェックするには、sync-diff-inspectorで`snapshot`を設定します。
 
-## Step 1: obtain `ts-map`
+## ステップ1： <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
 
-To obtain `ts-map`, execute the following SQL statement in the downstream TiDB cluster:
+`ts-map`を取得するには、ダウンストリームTiDBクラスタで次のSQLステートメントを実行します。
 
 ```sql
 mysql> select * from tidb_binlog.checkpoint;
@@ -20,11 +20,11 @@ mysql> select * from tidb_binlog.checkpoint;
 +---------------------+---------------------------------------------------------------------------------------------------------+
 ```
 
-## Step 2: configure snapshot
+## ステップ2：スナップショットを構成する {#step-2-configure-snapshot}
 
-Then configure the snapshot information of the upstream and downstream databases by using the `ts-map` information obtained in [Step 1](#step-1-obtain-ts-map).
+次に、 [ステップ1](#step-1-obtain-ts-map)で取得した`ts-map`の情報を使用して、アップストリームおよびダウンストリームデータベースのスナップショット情報を構成します。
 
-Here is a configuration example of the `Datasource config` section:
+`Datasource config`セクションの構成例を次に示します。
 
 ```toml
 ######################### Datasource config ########################
@@ -41,9 +41,9 @@ Here is a configuration example of the `Datasource config` section:
     snapshot = "409621863377928345"
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - Set `db-type` of Drainer to `tidb` to ensure that `ts-map` is saved in the checkpoint.
-> - Modify the Garbage Collection (GC) time of TiKV to ensure that the historical data corresponding to snapshot is not collected by GC during the data check. It is recommended that you modify the GC time to 1 hour and recover the setting after the check.
-> - In some versions of TiDB Binlog, `master-ts` and `slave-ts` are stored in `ts-map`. `master-ts` is equivalent to `primary-ts` and `slave-ts` is equivalent to `secondary-ts`.
-> - The above example only shows the section of `Datasource config`. For complete configuration, refer to [sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+> -   Drainerの`db-type`を`tidb`に設定して、 `ts-map`がチェックポイントに保存されるようにします。
+> -   TiKVのガベージコレクション（GC）時間を変更して、スナップショットに対応する履歴データがデータチェック中にGCによって収集されないようにします。 GC時間を1時間に変更し、チェック後に設定を復元することをお勧めします。
+> -   TiDB Binlogの一部のバージョンでは、 `master-ts`と`slave-ts`が`ts-map`に格納されます。 `master-ts`は`primary-ts`に相当し、 `slave-ts`は`secondary-ts`に相当します。
+> -   上記の例は、 `Datasource config`のセクションのみを示しています。完全な構成については、 [sync-diff-inspectorユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。

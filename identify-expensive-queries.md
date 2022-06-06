@@ -2,52 +2,52 @@
 title: Identify Expensive Queries
 ---
 
-# Identify Expensive Queries
+# 高価なクエリを特定する {#identify-expensive-queries}
 
-TiDB allows you to identify expensive queries during SQL execution, so you can diagnose and improve the performance of SQL execution. Specifically, TiDB prints the information about statements whose execution time exceeds [`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) (60 seconds by default) or memory usage exceeds [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query) (1 GB by default) to the [tidb-server log file](/tidb-configuration-file.md#logfile) ("tidb.log" by default).
+TiDBを使用すると、SQL実行中にコストのかかるクエリを識別できるため、SQL実行の診断とパフォーマンスの向上を実現できます。具体的には、TiDBは、実行時間が[`tidb_expensive_query_time_threshold`](/system-variables.md#tidb_expensive_query_time_threshold) （デフォルトでは60秒）を超える、またはメモリ使用量が[`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query) （デフォルトでは1 GB）を超えるステートメントに関する情報を[tidb-serverログファイル](/tidb-configuration-file.md#logfile) （デフォルトでは「tidb.log」）に出力します。
 
-> **Note:**
+> **ノート：**
 >
-> The expensive query log differs from the [slow query log](/identify-slow-queries.md) in this way: TiDB prints statement information to the expensive query log **as soon as** the statement exceeds the threshold of resource usage (execution time or memory usage); while TiDB prints statement information to the slow query log **after** the statement execution.
+> 高価なクエリログは、次の点で[遅いクエリログ](/identify-slow-queries.md)とは異なります。TiDBは、ステートメントがリソース使用量のしきい値（実行時間またはメモリ使用量）を超える**とすぐに**、ステートメント情報を高価なクエリログに出力します。一方、TiDBは、ステートメントの実行<strong>後</strong>にステートメント情報を低速クエリログに出力します。
 
-## Expensive query log example
+## 高価なクエリログの例 {#expensive-query-log-example}
 
 ```sql
 [2020/02/05 15:32:25.096 +08:00] [WARN] [expensivequery.go:167] [expensive_query] [cost_time=60.008338935s] [wait_time=0s] [request_count=1] [total_keys=70] [process_keys=65] [num_cop_tasks=1] [process_avg_time=0s] [process_p90_time=0s] [process_max_time=0s] [process_max_addr=10.0.1.9:20160] [wait_avg_time=0.002s] [wait_p90_time=0.002s] [wait_max_time=0.002s] [wait_max_addr=10.0.1.9:20160] [stats=t:pseudo] [conn_id=60026] [user=root] [database=test] [table_ids="[122]"] [txn_start_ts=414420273735139329] [mem_max="1035 Bytes (1.0107421875 KB)"] [sql="insert into t select sleep(1) from t"]
 ```
 
-## Fields description
+## フィールドの説明 {#fields-description}
 
-Basic fields:
+基本フィールド：
 
-* `cost_time`: The execution time of a statement when the log is printed.
-* `stats`: The version of statistics used by the tables or indexes involved in a statement. If the value is `pseudo`, it means that there are no available statistics. In this case, you need to analyze the tables or indexes.
-* `table_ids`: The IDs of the tables involved in a statement.
-* `txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
-* `sql`: The sql statement.
+-   `cost_time` ：ログを出力するときのステートメントの実行時間。
+-   `stats` ：ステートメントに含まれるテーブルまたはインデックスによって使用される統計のバージョン。値が`pseudo`の場合、使用可能な統計がないことを意味します。この場合、テーブルまたはインデックスを分析する必要があります。
+-   `table_ids` ：ステートメントに含まれるテーブルのID。
+-   `txn_start_ts` ：開始タイムスタンプとトランザクションの一意のID。この値を使用して、トランザクション関連のログを検索できます。
+-   `sql` ：SQLステートメント。
 
-Memory usage related fields:
+メモリ使用量関連フィールド：
 
-* `mem_max`: Memory usage of a statement when the log is printed. This field has two kinds of units to measure memory usage: byte and other readable and adaptable units (such as MB and GB).
+-   `mem_max` ：ログが出力されるときのステートメントのメモリ使用量。このフィールドには、メモリ使用量を測定するための2種類の単位があります。バイトとその他の読み取り可能で適応可能な単位（MBやGBなど）です。
 
-User related fields:
+ユーザー関連フィールド：
 
-* `user`: The name of the user who executes the statement.
-* `conn_id`: The connection ID (session ID). For example, you can use the keyword `con:60026` to search for the log whose session ID is `60026`.
-* `database`: The database where the statement is executed.
+-   `user` ：ステートメントを実行するユーザーの名前。
+-   `conn_id` ：接続ID（セッションID）。たとえば、キーワード`con:60026`を使用して、セッションIDが`60026`のログを検索できます。
+-   `database` ：ステートメントが実行されるデータベース。
 
-TiKV Coprocessor task related fields:
+TiKVコプロセッサーのタスク関連フィールド：
 
-* `wait_time`: The total waiting time of all Coprocessor requests of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
-* `request_count`: The number of Coprocessor requests that a statement sends.
-* `total_keys`: The number of keys that Coprocessor has scanned.
-* `processed_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that many old versions exist.
-* `num_cop_tasks`: The number of Coprocessor requests that a statement sends.
-* `process_avg_time`: The average execution time of Coprocessor tasks.
-* `process_p90_time`: The P90 execution time of Coprocessor tasks.
-* `process_max_time`: The maximum execution time of Coprocessor tasks.
-* `process_max_addr`: The address of the Coprocessor task with the longest execution time.
-* `wait_avg_time`: The average waiting time of Coprocessor tasks.
-* `wait_p90_time`: The P90 waiting time of Coprocessor tasks.
-* `wait_max_time`: The maximum waiting time of Coprocessor tasks.
-* `wait_max_addr`: The address of the Coprocessor task with the longest waiting time.
+-   `wait_time` ：TiKVのステートメントのすべてのコプロセッサー要求の合計待機時間。 TiKVのコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが機能しているときに要求がキューに入れられる可能性があります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待機時間が長くなります。
+-   `request_count` ：ステートメントが送信するコプロセッサー要求の数。
+-   `total_keys` ：コプロセッサーがスキャンしたキーの数。
+-   `processed_keys` ：コプロセッサーが処理したキーの数。 `total_keys`と比較すると、 `processed_keys`には古いバージョンのMVCCが含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `num_cop_tasks` ：ステートメントが送信するコプロセッサー要求の数。
+-   `process_avg_time` ：コプロセッサータスクの平均実行時間。
+-   `process_p90_time` ：コプロセッサータスクのP90実行時間。
+-   `process_max_time` ：コプロセッサータスクの最大実行時間。
+-   `process_max_addr` ：実行時間が最も長いコプロセッサータスクのアドレス。
+-   `wait_avg_time` ：コプロセッサー・タスクの平均待機時間。
+-   `wait_p90_time` ：コプロセッサータスクのP90待機時間。
+-   `wait_max_time` ：コプロセッサー・タスクの最大待機時間。
+-   `wait_max_addr` ：待機時間が最も長いコプロセッサータスクのアドレス。

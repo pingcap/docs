@@ -2,52 +2,52 @@
 title: tiup dm restart
 ---
 
-# tiup dm restart
+# tiup dm restart {#tiup-dm-restart}
 
-The command `tiup dm restart` is used to restart all or some of the services of the specified cluster.
+コマンド`tiup dm restart`は、指定されたクラスタのすべてまたは一部のサービスを再起動するために使用されます。
 
-> **Note:**
+> **ノート：**
 >
-> During the restart process, the related services are unavailable for a period of time.
+> 再起動プロセス中、関連するサービスは一定期間利用できません。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm restart <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>` ：操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
-- Data type: `STRING`
-- If this option is not specified, TiUP restarts all nodes by default.
+-   再起動するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   データ型： `STRING`
+-   このオプションが指定されていない場合、TiUPはデフォルトですべてのノードを再起動します。
 
-> **Note:**
+> **ノート：**
 >
-> If the option `-R, --role` is specified at the same time, TiUP restarts service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+> オプション`-R, --role`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
 
-### -R, --role
+### -R、-role {#r-role}
 
-- Specifies the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
-- Data type: `STRING`
-- If this option is not specified, TiUP restarts nodes of all roles by default.
+-   再起動するノードの役割を指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。ノードの役割は、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの2番目の列から取得できます。
+-   データ型： `STRING`
+-   このオプションが指定されていない場合、TiUPはデフォルトですべての役割のノードを再起動します。
 
-> **Note:**
+> **ノート：**
 >
-> If the option `-N, --node` is specified at the same time, TiUP restarts service nodes that match both the requirements of `-N, --node` and `-R, --role`.
+> オプション`-N, --node`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-The log of the service restart process.
+サービス再開プロセスのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

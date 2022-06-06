@@ -3,68 +3,69 @@ title: Sink to MySQL
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQL.
 ---
 
-# Sink to MySQL
+# MySQLにシンク {#sink-to-mysql}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, **Sink to MySQL** is an experimental feature. It is not recommended that you use it for production environments.
+> 現在、 **SinktoMySQL**は実験的機能です。実稼働環境での使用はお勧めしません。
 
-This document describes how to stream data from TiDB Cloud to MySQL using the **Sink to MySQL** changefeed.
+このドキュメントでは、SinktoMySQLチェンジフィードを使用してTiDBCloud**から**MySQLにデータをストリーミングする方法について説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-### Network
+### 通信網 {#network}
 
-Make sure that your TiDB Cluster can connect to the MySQL service.
+TiDBクラスターがMySQLサービスに接続できることを確認してください。
 
-If your MySQL service is in an AWS VPC that has no public internet access, take the following steps:
+MySQLサービスがパブリックインターネットアクセスのないAWSVPCにある場合は、次の手順を実行します。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster.
-2. Modify the inbound rules of the security group that the MySQL service is associated with. 
+1.  MySQLサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-    You must add the CIDR of the Region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the VPC Peering Page. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL instance.
+2.  MySQLサービスが関連付けられているセキュリティグループのインバウンドルールを変更します。
 
-3. If the MySQL URL contains a hostname, you need to allow TiDB Cloud to be able to resolve the DNS hostname of the MySQL service. 
+    TiDBクラウドクラスタが配置されているリージョンのCIDRをインバウンドルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスターからMySQLインスタンスに流れるようになります。
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
-    2. Enable the **Accepter DNS resolution** option.
+3.  MySQL URLにホスト名が含まれている場合は、TiDBCloudがMySQLサービスのDNSホスト名を解決できるようにする必要があります。
 
-If your MySQL service is in a GCP VPC that has no public internet access, take the following steps:
+    1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    2.  **AccepterDNS解決**オプションを有効にします。
 
-1. If your MySQL service is Google Cloud SQL, you must expose a MySQL endpoint in the associated VPC of the Google Cloud SQL instance. You may need to use the [**Cloud SQL Auth proxy**](https://cloud.google.com/sql/docs/mysql/sql-proxy) which is developed by Google.
-2. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the MySQL service and your TiDB cluster. 
-3. Modify the ingress firewall rules of the VPC where MySQL is located.
+MySQLサービスがパブリックインターネットアクセスのないGCPVPCにある場合は、次の手順を実行します。
 
-    You must add the CIDR of the Region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the VPC Peering Page. Doing so allows the traffic to flow from your TiDB Cluster to the MySQL endpoint.
+1.  MySQLサービスがGoogleCloudSQLの場合、GoogleCloudSQLインスタンスの関連付けられたVPCでMySQLエンドポイントを公開する必要があります。 Googleが開発した[**CloudSQLAuthプロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要があるかもしれません。
+2.  MySQLサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+3.  MySQLが配置されているVPCの入力ファイアウォールルールを変更します。
 
-### Full load data
+    TiDBクラウドクラスタが配置されているリージョンのCIDRを入力ファイアウォールルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスターからMySQLエンドポイントに流れるようになります。
 
-The **Sink to MySQL** connector can only sink incremental data from your TiDB cluster to MySQL after a certain timestamp. If you already have data in your TiDB cluster, you must export and load the full load data of your TiDB cluster into MySQL before enabling **Sink to MySQL**:
+### 全負荷データ {#full-load-data}
 
-1. Extend the [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50) to be longer than the total time of the following two operations, so that historical data during the time is not garbage collected by TiDB.
+**Sink to MySQL**コネクタは、特定のタイムスタンプの後にのみ、TiDBクラスタからMySQLに増分データをシンクできます。 TiDBクラスタにすでにデータがある場合は、 <strong>Sink to MySQL</strong>を有効にする前に、TiDBクラスタのフルロードデータをエクスポートしてMySQLにロードする必要があります。
 
-    - The time to export and import the full load data
-    - The time to create **Sink to MySQL**
+1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を次の2つの操作の合計時間より長くするように拡張して、その時間中の履歴データがTiDBによってガベージコレクションされないようにします。
 
-    For example:
+    -   全負荷データをエクスポートおよびインポートする時間
+    -   **SinktoMySQL**を作成する時間
 
-    {{< copyable "sql" >}}
+    例えば：
+
+    {{< copyable "" >}}
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data from your TiDB cluster, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the MySQL service.
+2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してTiDBクラスタからデータをエクスポートしてから、 [mydumper / myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してMySQLサービスにデータをロードします。
 
-3. From the [exported files of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files), get the TSO from the metadata file:
+3.  [Dumplingのエクスポートされたファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータファイルからTSOを取得します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cat metadata
     ```
 
-    The following is an example output. The "Pos" of "SHOW MASTER STATUS" is the TSO of the full load data.
+    以下は出力例です。 「SHOWMASTERSTATUS」の「Pos」は、全負荷データのTSOです。
 
     ```
     Started dump at: 2020-11-10 10:40:19
@@ -72,32 +73,32 @@ The **Sink to MySQL** connector can only sink incremental data from your TiDB cl
             Log: tidb-binlog
             Pos: 420747102018863124
     Finished dump at: 2020-11-10 10:40:20
-    ``` 
+    ```
 
-## Create a Sink
+## シンクを作成する {#create-a-sink}
 
-After completing the prerequisites, you can sink your data to MySQL.
+前提条件を完了したら、データをMySQLにシンクできます。
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
-2. Click **Sink to MySQL**.
-3. Fill in the MySQL URL, user, and password.
-    - If you already have data in your TiDB Cluster, you must fill in a specific TSO number that Dumpling provides.
-    - If you do not have any data in your TiDB Cluster, you can choose the "current" TSO.
-4. Click **Test Connectivity**. If your TiDB Cluster can connect to the MySQL service, the **Confirm** button is displayed.
-5. Click **Confirm** and after a while, the sink will begin its work, and the status of the sink will be changed to "**Producing**".
-6. After the operation is complete, set the GC time back (the default value is `10m`):
+1.  **TiDB**クラスタの[チェンジフィード]タブに移動します。
+2.  [ **MySQLにシンク]を**クリックします。
+3.  MySQLのURL、ユーザー、およびパスワードを入力します。
+    -   TiDBクラスターにすでにデータがある場合は、 Dumplingが提供する特定のTSO番号を入力する必要があります。
+    -   TiDBクラスターにデータがない場合は、「現在の」TSOを選択できます。
+4.  [**接続のテスト]**をクリックします。 TiDBクラスターがMySQLサービスに接続できる場合は、[<strong>確認</strong>]ボタンが表示されます。
+5.  [**確認**]をクリックすると、しばらくするとシンクが動作を開始し、シンクのステータスが[<strong>生産</strong>中]に変わります。
+6.  操作が完了したら、GC時間を元に戻します（デフォルト値は`10m`です）。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';
 ```
 
-## Delete a Sink
+## シンクを削除する {#delete-a-sink}
 
-1. Navigate to the **Changefeed** tab of a cluster.
-2. Click the trash button of **Sink to MySQL**.
+1.  クラスタの[**チェンジフィード**]タブに移動します。
+2.  SinktoMySQLのゴミ箱ボタンをクリック**します**。
 
-## Restrictions
+## 制限 {#restrictions}
 
-Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+TiDBクラウドはTiCDCを使用してチェンジフィードを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。

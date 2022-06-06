@@ -1,71 +1,72 @@
 <!-- markdownlint-disable MD007 -->
+
 <!-- markdownlint-disable MD041 -->
 
-- About TiDB Cloud
-  - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
-  - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
-  - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
-  - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
-- Get Started
-  - [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
-- Manage Cluster
-  - Plan Your Cluster
-    - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
-    - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
-  - [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
-  - Connect to Your TiDB Cluster
-    - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
-    - [Connect via SQL Shell](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-  - [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md)
-  - [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md)
-  - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
-  - Tune Performance
-    - [Statement Analysis](/tidb-cloud/tune-performance.md)
-    - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
-  - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
-- Manage Data
-  - [Import Sample Data](/tidb-cloud/import-sample-data.md)
-  - Migrate Data into TiDB
-    - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
-    - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-    - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-    - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
-    - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
-  - Back Up and Restore Data
-    - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
-    - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
-    - [Restore](/tidb-cloud/backup-and-restore.md#restore)
-  - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
-- Monitor Cluster
-  - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
-  - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
-  - Third-Party Monitoring Integrations
-    - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
-    - [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
-- Manage User Access
-  - [Sign In](/tidb-cloud/manage-user-access.md)
-  - [Sign Out](/tidb-cloud/manage-user-access.md#sign-out)
-  - [View the Organization and Project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
-  - [Invite an Organization Member](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
-  - [Invite a Project Member](/tidb-cloud/manage-user-access.md#invite-a-project-member)
-  - [Configure Member Roles](/tidb-cloud/manage-user-access.md#configure-member-roles)
-  - [Remove an Organization Member](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
-  - [Remove a Project Member](/tidb-cloud/manage-user-access.md#remove-a-project-member)
-  - [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
-- Manage Billing
-  - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
-  - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
-  - [Data Transfer Cost](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
-  - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
-  - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-  - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
-  - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-- Reference
-    - [Support](/tidb-cloud/tidb-cloud-support.md)
-    - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
-- Release Notes
-  - [2022](/tidb-cloud/release-notes-2022.md)
-  - [2021](/tidb-cloud/release-notes-2021.md)
-  - [2020](/tidb-cloud/release-notes-2020.md)
+-   TiDBクラウドについて
+    -   [TiDBクラウドが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
+    -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
+    -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
+    -   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
+-   はじめに
+    -   [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
+-   クラスターの管理
+    -   クラスターを計画する
+        -   [クラスタ層を選択してください](/tidb-cloud/select-cluster-tier.md)
+        -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
+    -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
+    -   TiDBクラスターに接続する
+        -   [SQLクライアントを介して接続する](/tidb-cloud/connect-to-tidb-cluster.md)
+        -   [SQLシェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
+    -   [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)
+    -   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
+    -   パフォーマンスの調整
+        -   [ステートメント分析](/tidb-cloud/tune-performance.md)
+        -   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
+    -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+    -   [TiDBクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
+-   データの管理
+    -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
+    -   データをTiDBに移行する
+        -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
+        -   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+        -   [AmazonS3またはGCSからTiDBクラウドへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+        -   [AmazonS3またはGCSからTiDBクラウドにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
+        -   [AmazonS3またはGCSからTiDBクラウドにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
+    -   データのバックアップと復元
+        -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
+        -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
+        -   [戻す](/tidb-cloud/backup-and-restore.md#restore)
+    -   [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
+-   モニタークラスター
+    -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
+    -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
+    -   サードパーティの監視統合
+        -   [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)
+        -   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+-   ユーザーアクセスの管理
+    -   [ログイン](/tidb-cloud/manage-user-access.md)
+    -   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
+    -   [組織とプロジェクトを表示する](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
+    -   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
+    -   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
+    -   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)
+    -   [組織メンバーを削除する](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
+    -   [プロジェクトメンバーを削除する](/tidb-cloud/manage-user-access.md#remove-a-project-member)
+    -   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+-   請求を管理する
+    -   [ノードコスト](/tidb-cloud/tidb-cloud-billing.md)
+    -   [バックアップストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
+    -   [データ転送コスト](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
+    -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
+    -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+    -   [トライアルポイント](/tidb-cloud/tidb-cloud-billing.md#trial-points)
+    -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
+-   参照
+    -   [サポート](/tidb-cloud/tidb-cloud-support.md)
+    -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
+-   リリースノート
+    -   [2022年](/tidb-cloud/release-notes-2022.md)
+    -   [2021年](/tidb-cloud/release-notes-2021.md)
+    -   [2020](/tidb-cloud/release-notes-2020.md)

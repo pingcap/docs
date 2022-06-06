@@ -3,96 +3,96 @@ title: Tune TiKV Thread Pool Performance
 summary: Learn how to tune TiKV thread pools for optimal performance.
 ---
 
-# Tune TiKV Thread Pool Performance
+# TiKVスレッドプールのパフォーマンスを調整する {#tune-tikv-thread-pool-performance}
 
-This document introduces TiKV internal thread pools and how to tune their performance.
+このドキュメントでは、TiKV内部スレッドプールとそのパフォーマンスを調整する方法を紹介します。
 
-## Thread pool introduction
+## スレッドプールの紹介 {#thread-pool-introduction}
 
-The TiKV thread pool is mainly composed of gRPC, Scheduler, UnifyReadPool, Raftstore, StoreWriter, Apply, RocksDB, and some scheduled tasks and detection components that do not consume much CPU. This document mainly introduces a few CPU-intensive thread pools that affect the performance of read and write requests.
+TiKVスレッドプールは、主にgRPC、Scheduler、UnifyReadPool、Raftstore、StoreWriter、Apply、RocksDB、およびCPUをあまり消費しないいくつかのスケジュールされたタスクと検出コンポーネントで構成されています。このドキュメントでは、主に、読み取りおよび書き込み要求のパフォーマンスに影響を与えるCPUを集中的に使用するスレッドプールをいくつか紹介します。
 
-* The gRPC thread pool: it handles all network requests and forwards requests of different task types to different thread pools.
+-   gRPCスレッドプール：すべてのネットワークリクエストを処理し、さまざまなタスクタイプのリクエストをさまざまなスレッドプールに転送します。
 
-* The Scheduler thread pool: it detects write transaction conflicts, converts requests like the two-phase commit, pessimistic locking, and transaction rollbacks into key-value pair arrays, and then sends them to the Raftstore thread for Raft log replication.
+-   スケジューラスレッドプール：書き込みトランザクションの競合を検出し、2フェーズコミット、ペシミスティックロック、トランザクションロールバックなどのリクエストをキーと値のペアの配列に変換してから、RaftログレプリケーションのためにRaftstoreスレッドに送信します。
 
-* The Raftstore thread pool:
+-   Raftstoreスレッドプール：
 
-    - It processes all Raft messages and the proposal to add a new log.
-    - It writes Raft logs to the disk. If the value of  [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) is `0`, the Raftstore thread writes the logs to the disk; if the value is not `0`, the Raftstore thread sends the logs to the StoreWriter thread.
-    - When Raft logs in the majority of replicas are consistent, the Raftstore thread sends the logs to the Apply thread.
+    -   すべてのRaftメッセージと、新しいログを追加するための提案を処理します。
+    -   Raftログをディスクに書き込みます。 [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)の値が`0`の場合、Raftstoreスレッドはログをディスクに書き込みます。値が`0`でない場合、RaftstoreスレッドはログをStoreWriterスレッドに送信します。
+    -   大部分のレプリカのRaftログに一貫性がある場合、RaftstoreスレッドはログをApplyスレッドに送信します。
 
-* The StoreWriter thread pool: it writes all Raft logs to the disk and returns the result to the Raftstore thread.
+-   StoreWriterスレッドプール：すべてのRaftログをディスクに書き込み、結果をRaftstoreスレッドに返します。
 
-* The Apply thread pool: it receives the submitted log sent from the Raftstore thread pool, parses it as a key-value request, then writes it to RocksDB, calls the callback function to notify the gRPC thread pool that the write request is complete, and returns the result to the client.
+-   スレッドプールの適用：Raftstoreスレッドプールから送信された送信済みログを受信し、それをキー値要求として解析してからRocksDBに書き込み、コールバック関数を呼び出して書き込み要求が完了したことをgRPCスレッドプールに通知します。結果をクライアントに返します。
 
-* The RocksDB thread pool: it is a thread pool for RocksDB to compact and flush tasks. For RocksDB's architecture and `Compact` operation, refer to [RocksDB: A Persistent Key-Value Store for Flash and RAM Storage](https://github.com/facebook/rocksdb).
+-   RocksDBスレッドプール：これは、RocksDBがタスクを圧縮およびフラッシュするためのスレッドプールです。 RocksDBのアーキテクチャと`Compact`の操作については、 [RocksDB：フラッシュおよびRAMストレージ用の永続的なKey-Valueストア](https://github.com/facebook/rocksdb)を参照してください。
 
-* The UnifyReadPool thread pool: it is a combination of the Coprocessor thread pool and Storage Read Pool. All read requests such as kv get, kv batch get, raw kv get, and coprocessor are executed in this thread pool.
+-   UnifyReadPoolスレッドプール：コプロセッサースレッドプールとストレージ読み取りプールの組み合わせです。 kv get、kv batch get、raw kv get、コプロセッサーなどのすべての読み取り要求は、このスレッドプールで実行されます。
 
-## TiKV read-only requests
+## TiKV読み取り専用リクエスト {#tikv-read-only-requests}
 
-TiKV's read requests are divided into the following types:
+TiKVの読み取り要求は、次のタイプに分けられます。
 
-- Simple queries that specify a certain row or several rows, running in the Storage Read Pool.
-- Complex aggregate calculation and range queries, running in the Coprocessor Read Pool.
+-   ストレージ読み取りプールで実行される、特定の行または複数の行を指定する単純なクエリ。
+-   コプロセッサー読み取りプールで実行される、複雑な集計計算と範囲クエリ。
 
-Starting from TiKV v5.0, all read requests use the unified thread pool for queries by default. If your TiKV cluster is upgraded from TiKV v4.0 and the `use-unified-pool` configuration of `readpool.storage` was set to `false` before the upgrade, all read requests continue using different thread pools after the upgrade. In this scenario, to make all read requests use the unified thread pool for queries, you can set the value of `readpool.storage.use-unified-pool` to `true`.
+TiKV v5.0以降、すべての読み取り要求は、デフォルトでクエリに統合スレッドプールを使用します。 TiKVクラスタがTiKVv4.0からアップグレードされ、アップグレード前に`readpool.storage`の`use-unified-pool`構成が`false`に設定されていた場合、すべての読み取り要求は、アップグレード後も異なるスレッドプールを使用し続けます。このシナリオでは、すべての読み取り要求でクエリに統合スレッドプールを使用するように、 `readpool.storage.use-unified-pool`の値を設定でき`true` 。
 
-## Performance tuning for TiKV thread pools
+## TiKVスレッドプールのパフォーマンスチューニング {#performance-tuning-for-tikv-thread-pools}
 
-* The gRPC thread pool.
+-   gRPCスレッドプール。
 
-    The default size (configured by `server.grpc-concurrency`) of the gRPC thread pool is `5`. This thread pool has almost no computing overhead and is mainly responsible for network I/O and deserialization requests, so generally you do not need to adjust the default configuration.
+    gRPCスレッドプールのデフォルトサイズ（ `server.grpc-concurrency`で構成）は`5`です。このスレッドプールにはコンピューティングのオーバーヘッドがほとんどなく、主にネットワークI / Oと逆シリアル化の要求を担当するため、通常、デフォルトの構成を調整する必要はありません。
 
-    - If the machine deployed with TiKV has a small number (less than or equal to 8) of CPU cores, consider setting the `server.grpc-concurrency` configuration item to `2`.
-    - If the machine deployed with TiKV has very high configuration, TiKV undertakes a large number of read and write requests, and the value of `gRPC poll CPU` that monitors Thread CPU on Grafana exceeds 80% of `server.grpc-concurrency`, then consider increasing the value of `server.grpc-concurrency` to keep the thread pool usage rate below 80% (that is, the metric on Grafana is lower than `80% * server.grpc-concurrency`).
+    -   TiKVを使用してデプロイされたマシンのCPUコアの数が少ない（8以下）場合は、 `server.grpc-concurrency`構成項目を`2`に設定することを検討してください。
+    -   TiKVでデプロイされたマシンの構成が非常に高い場合、TiKVは多数の読み取りおよび書き込み要求を実行し、GrafanaでスレッドCPUを監視する`gRPC poll CPU`の値が`server.grpc-concurrency`の80％を超える場合は、 `server.grpc-concurrency`の値を増やしてスレッドを維持することを検討してください。プールの使用率が80％未満（つまり、Grafanaのメトリックが`80% * server.grpc-concurrency`未満）。
 
-* The Scheduler thread pool.
+-   スケジューラスレッドプール。
 
-    When TiKV detects that the number of machine CPU cores is larger than or equal to 16, the default size (configured by `storage.scheduler-worker-pool-size`) of the Scheduler thread pool is `8`; when TiKV detects that the number of machine CPU cores is smaller than 16, the default size is `4`.
+    TiKVがマシンのCPUコアの数が16以上であることを検出すると、スケジューラスレッドプールのデフォルトサイズ（ `storage.scheduler-worker-pool-size`で構成）は`8`になります。 TiKVがマシンのCPUコアの数が16未満であることを検出すると、デフォルトのサイズは`4`になります。
 
-    This thread pool is mainly used to convert complex transaction requests into simple key-value read and write requests. However, **the Scheduler thread pool itself does not perform any write operation**.
+    このスレッドプールは主に、複雑なトランザクション要求を単純なキー値の読み取りおよび書き込み要求に変換するために使用されます。ただし、**スケジューラスレッドプール自体は書き込み操作を実行しません**。
 
-    - If it detects a transaction conflict, then this thread pool returns the conflict result to the client in advance.
-    - If no conflict is detected, then this thread pool merges the key-value requests that perform write operations into a Raft log and sends it to the Raftstore thread for Raft log replication.
+    -   トランザクションの競合が検出された場合、このスレッドプールは競合の結果を事前にクライアントに返します。
+    -   競合が検出されない場合、このスレッドプールは、書き込み操作を実行するキー値要求をRaftログにマージし、RaftログレプリケーションのためにRaftstoreスレッドに送信します。
 
-    Generally speaking, to avoid excessive thread switching, it is best to ensure that the utilization rate of the Scheduler thread pool is between 50% and 75%. If the thread pool size is `8`, then it is recommended to keep `TiKV-Details.Thread CPU.scheduler worker CPU` on Grafana between 400% and 600%.
+    一般的に、過度のスレッドスイッチングを回避するには、スケジューラスレッドプールの使用率が50％から75％の間であることを確認するのが最善です。スレッドプールのサイズが`8`の場合、Grafanaで`TiKV-Details.Thread CPU.scheduler worker CPU`を400％から600％の間に保つことをお勧めします。
 
-* The Raftstore thread pool.
+-   Raftstoreスレッドプール。
 
-    The Raftstore thread pool is the most complex thread pool in TiKV. The default size (configured by `raftstore.store-pool-size`) of this thread pool is `2`. For the StoreWriter thread pool, the default size (configured by `raftstore.store-io-pool-size`) is `0`.
+    Raftstoreスレッドプールは、TiKVで最も複雑なスレッドプールです。このスレッドプールのデフォルトサイズ（ `raftstore.store-pool-size`で構成）は`2`です。 StoreWriterスレッドプールの場合、デフォルトのサイズ（ `raftstore.store-io-pool-size`で構成）は`0`です。
 
-    - When the size of the StoreWriter thread pool is 0, all write requests are written into RocksDB in the way of `fsync` by the Raftstore thread. In this case, it is recommended to tune the performance as follows:
+    -   StoreWriterスレッドプールのサイズが0の場合、すべての書き込み要求はRaftstoreスレッドによって`fsync`の方法でRocksDBに書き込まれます。この場合、次のようにパフォーマンスを調整することをお勧めします。
 
-        - Keep the overall CPU usage of the Raftstore thread below 60%. When the number of Raftstore threads is 2, keep the **TiKV-Details**, **Thread CPU**, **Raft store CPU** on Grafana below 120%. Due to I/O requests, the CPU usage of Raftstore threads in theory is always lower than 100%.
-        - Do not increase the size of the Raftstore thread pool to improve write performance without careful consideration, because this might increase the disk burden and degrade performance.
+        -   Raftstoreスレッドの全体的なCPU使用率を60％未満に保ちます。 Raftstoreスレッドの数が2の場合、 **TiKV-Details** 、 <strong>Thread CPU</strong> 、 <strong>Raft store CPU</strong>をGrafanaで120％未満に保ちます。 I / O要求により、理論上、RaftstoreスレッドのCPU使用率は常に100％未満です。
+        -   慎重に検討せずに書き込みパフォーマンスを向上させるためにRaftstoreスレッドプールのサイズを大きくしないでください。ディスクの負荷が増加し、パフォーマンスが低下する可能性があります。
 
-    - When the size of the StoreWriter thread pool is not 0, all write requests are written into RocksDB in the way of `fsync` by the StoreWriter thread. In this case, it is recommended to tune the performance as follows:
+    -   StoreWriterスレッドプールのサイズが0でない場合、すべての書き込み要求は、StoreWriterスレッドによって`fsync`の方法でRocksDBに書き込まれます。この場合、次のようにパフォーマンスを調整することをお勧めします。
 
-        - Enable the StoreWriter thread pool ONLY when the overall CPU resources are sufficient. When the StoreWriter thread pool is enabled, keep the CPU usage of the StoreWriter thread and the Raftstore thread below 80%.
+        -   全体的なCPUリソースが十分な場合にのみ、StoreWriterスレッドプールを有効にします。 StoreWriterスレッドプールが有効になっている場合は、StoreWriterスレッドとRaftstoreスレッドのCPU使用率を80％未満に保ちます。
 
-         Compared with the case that the write requests are processed by the Raftstore thread, in theory, when the write requests are processed by the StoreWriter thread, write latency and the tail latency of data read are significantly reduced. However, as the write speed grows faster, the number of Raft logs increases accordingly. This can cause the CPU overhead of the Raftstore threads, the Apply threads, and the gRPC threads to increase. In this case, insufficient CPU resources might offset the tuning effect, and as a result, the write speed might become slower than before. Therefore, if the CPU resources are not sufficient, it is not recommended to enable the StoreWriter thread. Because the Raftstore thread sends most of the I/O requests to the StoreWriter thread, you need to keep the CPU usage of the Raftstore thread below 80%.
+        書き込み要求がRaftstoreスレッドによって処理される場合と比較して、理論的には、書き込み要求がStoreWriterスレッドによって処理される場合、書き込みレイテンシとデータ読み取りのテールレイテンシが大幅に短縮されます。ただし、書き込み速度が速くなると、それに応じてRaftログの数が増えます。これにより、Raftstoreスレッド、Applyスレッド、およびgRPCスレッドのCPUオーバーヘッドが増加する可能性があります。この場合、CPUリソースが不足するとチューニング効果が相殺され、書き込み速度が以前より遅くなる可能性があります。したがって、CPUリソースが十分でない場合は、StoreWriterスレッドを有効にすることはお勧めしません。 RaftstoreスレッドはほとんどのI/O要求をStoreWriterスレッドに送信するため、RaftstoreスレッドのCPU使用率を80％未満に保つ必要があります。
 
-    - In most cases, set the size of the StoreWriter thread pool to 1 or 2. This is because the size of the StoreWriter thread pool affects the number of Raft logs, so the value of the thread pool size should not be too large. If the CPU usage is higher than 80%, consider increasing the thread pool size.
+    -   ほとんどの場合、StoreWriterスレッドプールのサイズを1または2に設定します。これは、StoreWriterスレッドプールのサイズがRaftログの数に影響するため、スレッドプールサイズの値が大きすぎないようにする必要があるためです。 CPU使用率が80％を超える場合は、スレッドプールサイズを増やすことを検討してください。
 
-    - Pay attention to the impact of increasing Raft logs on the CPU overhead of other thread pools. If necessary, you need to increase the number of Raftstore threads, Apply threads, and gRPC threads accordingly.
+    -   Raftログの増加が他のスレッドプールのCPUオーバーヘッドに与える影響に注意してください。必要に応じて、Raftstoreスレッド、Applyスレッド、およびgRPCスレッドの数を増やす必要があります。
 
-* The UnifyReadPool thread pool.
+-   UnifyReadPoolスレッドプール。
 
-    The UnifyReadPool is responsible for handling all read requests. The default size (configured by `readpool.unified.max-thread-count`) is 80% of the number of the machine's CPU cores. For example, if the machine CPU has 16 cores, the default thread pool size is 12. It is recommended to adjust the CPU usage rate according to the application workloads and keep it between 60% and 90% of the thread pool size.
+    UnifyReadPoolは、すべての読み取り要求を処理する責任があります。デフォルトのサイズ（ `readpool.unified.max-thread-count`で構成）は、マシンのCPUコアの数の80％です。たとえば、マシンのCPUに16コアがある場合、デフォルトのスレッドプールサイズは12です。アプリケーションのワークロードに応じてCPU使用率を調整し、スレッドプールサイズの60％から90％の間に保つことをお勧めします。
 
-    If the peak value of the `TiKV-Details.Thread CPU.Unified read pool CPU` on Grafana does not exceed 800%, then it is recommended to set `readpool.unified.max-thread-count` to `10`. Too many threads can cause more frequent thread switching, and take up resources of other thread pools.
+    Grafanaの`TiKV-Details.Thread CPU.Unified read pool CPU`のピーク値が800％を超えない場合は、 `readpool.unified.max-thread-count`から`10`に設定することをお勧めします。スレッドが多すぎると、スレッドの切り替えが頻繁になり、他のスレッドプールのリソースを消費する可能性があります。
 
-* The RocksDB thread pool.
+-   RocksDBスレッドプール。
 
-    The RocksDB thread pool is a thread pool for RocksDB to compact and flush tasks. Usually, you do not need to configure it.
+    RocksDBスレッドプールは、RocksDBがタスクを圧縮およびフラッシュするためのスレッドプールです。通常、設定する必要はありません。
 
-    * If the machine has a small number of CPU cores, set both `rocksdb.max-background-jobs` and `raftdb.max-background-jobs` to `4`.
-    * If you encounter write stall, go to Write Stall Reason in **RocksDB-kv** on Grafana and check on the metrics that are not `0`.
+    -   マシンのCPUコアの数が少ない場合は、 `rocksdb.max-background-jobs`と`raftdb.max-background-jobs`の両方を`4`に設定します。
+    -   書き込みストールが発生した場合は、 **GrafanaのRocksDB-kvの**書き込みストール理由に移動し、 `0`以外のメトリックを確認してください。
 
-        * If it is caused by reasons related to pending compaction bytes, set `rocksdb.max-sub-compactions` to `2` or `3`. This configuration item indicates the number of sub-threads allowed for a single compaction job. Its default value is `3` in TiKV 4.0 and `1` in TiKV 3.0.
-        * If the reason is related to memtable count, it is recommended to increase the `max-write-buffer-number` of all columns (`5` by default).
-        * If the reason is related to the level0 file limit, it is recommended to increase values of the following parameters to `64` or a larger number:
+        -   保留中の圧縮バイトに関連する理由が原因である場合は、 `rocksdb.max-sub-compactions`を`2`または`3`に設定します。この構成項目は、単一の圧縮ジョブで許可されるサブスレッドの数を示します。デフォルト値は、TiKV 4.0では`3` 、TiKV3.0では`1`です。
+        -   理由がmemtablecountに関連している場合は、すべての列の`max-write-buffer-number`を増やすことをお勧めします（デフォルトでは`5` ）。
+        -   理由がレベル0のファイル制限に関連している場合は、次のパラメーターの値を`64`以上に増やすことをお勧めします。
 
             ```
             rocksdb.defaultcf.level0-slowdown-writes-trigger

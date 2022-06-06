@@ -3,82 +3,82 @@ title: Online Unsafe Recovery
 summary: Learn how to use Online Unsafe Recovery.
 ---
 
-# Online Unsafe Recovery
+# オンラインの安全でない回復 {#online-unsafe-recovery}
 
-> **Warning:**
+> **警告：**
 >
-> - Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed.
-> - Online Unsafe Recovery is an experimental feature, and it is **NOT** recommended to use it in the production environment. The interface, strategy, and internal implementation of this feature might change when it becomes generally available (GA). Although this feature has been tested in some scenarios, it is not thoroughly validated and might cause system unavailability.
-> - It is recommended to perform the feature-related operations with the support from the TiDB team. If any misoperation is performed, it might be hard to recover the cluster.
+> -   オンラインの安全でないリカバリは、損失のあるリカバリの一種です。この機能を使用する場合、データとデータインデックスの整合性は保証されません。
+> -   Online Unsafe Recoveryは実験的機能であり、実稼働環境で使用することはお勧めし**ません**。この機能のインターフェース、戦略、および内部実装は、一般提供（GA）になると変更される可能性があります。この機能はいくつかのシナリオでテストされていますが、完全には検証されておらず、システムが使用できなくなる可能性があります。
+> -   TiDBチームのサポートを受けて、機能関連の操作を実行することをお勧めします。誤操作が発生した場合、クラスタの復旧が困難になる場合があります。
 
-When permanently damaged replicas cause part of data on TiKV to be unreadable and unwritable, you can use the Online Unsafe Recovery feature to perform a lossy recovery operation.
+恒久的に損傷したレプリカが原因でTiKV上のデータの一部が読み取りおよび書き込み不能になった場合、オンラインの安全でない回復機能を使用して、不可逆回復操作を実行できます。
 
-## Feature description
+## 機能の説明 {#feature-description}
 
-In TiDB, the same data might be stored in multiple stores at the same time according to the replica rules defined by users. This guarantees that data is still readable and writable even if a single or a few stores are temporarily offline or damaged. However, when most or all replicas of a Region go offline during a short period of time, the Region becomes temporarily unavailable, by design, to ensure data integrity.
+TiDBでは、ユーザーが定義したレプリカルールに従って、同じデータが同時に複数のストアに保存される場合があります。これにより、1つまたはいくつかのストアが一時的にオフラインになったり破損したりした場合でも、データの読み取りと書き込みが可能になります。ただし、リージョンのほとんどまたはすべてのレプリカが短期間にオフラインになると、データの整合性を確保するために、設計上、リージョンは一時的に使用できなくなります。
 
-Suppose that multiple replicas of a data range encounter issues like permanent damage (such as disk damage), and these issues cause the stores to stay offline. In this case, this data range is temporarily unavailable. If you want the cluster back in use and also accept data rewind or data loss, in theory, you can re-form the majority of replicas by manually removing the failed replicas from the group. This allows application-layer services to read and write this data range (might be stale or empty) again.
+データ範囲の複数のレプリカで永続的な損傷（ディスクの損傷など）などの問題が発生し、これらの問題によってストアがオフラインのままになるとします。この場合、このデータ範囲は一時的に利用できません。クラスタを再び使用し、データの巻き戻しまたはデータの損失も受け入れる場合は、理論的には、障害が発生したレプリカをグループから手動で削除することで、レプリカの大部分を再形成できます。これにより、アプリケーション層サービスは、このデータ範囲（古くなっているか空である可能性があります）を再度読み書きできます。
 
-In this case, if some stores with loss-tolerant data are permanently damaged, you can perform a lossy recovery operation by using Online Unsafe Recovery. Using this feature, PD, under its global perspective, collects the metadata of data shards from all stores and generates a real-time and complete recovery plan. Then, PD distributes the plan to all surviving stores to make them perform data recovery tasks. In addition, once the data recovery plan is distributed, PD periodically monitors the recovery progress and re-send the plan when necessary.
+この場合、損失耐性のあるデータを持つ一部のストアが恒久的に損傷している場合は、OnlineUnsafeRecoveryを使用して損失のある回復操作を実行できます。この機能を使用して、PDは、グローバルな視点で、すべてのストアからデータシャードのメタデータを収集し、リアルタイムで完全なリカバリプランを生成します。次に、PDは、存続しているすべてのストアに計画を配布して、データ回復タスクを実行させます。さらに、データ回復計画が配布されると、PDは定期的に回復の進行状況を監視し、必要に応じて計画を再送信します。
 
-## User scenarios
+## ユーザーシナリオ {#user-scenarios}
 
-The Online Unsafe Recovery feature is suitable for the following scenarios:
+オンラインの安全でないリカバリ機能は、次のシナリオに適しています。
 
-* The data for application services is unreadable and unwritable, because permanently damaged stores cause the stores to fail to restart.
-* You can accept data loss and want the affected data to be readable and writable.
-* You want to perform a one-stop online data recovery operation.
+-   永続的に破損したストアが原因でストアの再起動に失敗するため、アプリケーションサービスのデータは読み取りおよび書き込みできません。
+-   データの損失を受け入れ、影響を受けるデータを読み取りおよび書き込み可能にすることができます。
+-   ワンストップのオンラインデータ回復操作を実行したい。
 
-## Usage
+## 使用法 {#usage}
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-Before using Online Unsafe Recovery, make sure that the following requirements are met:
+Online Unsafe Recoveryを使用する前に、次の要件が満たされていることを確認してください。
 
-* The offline stores indeed cause some pieces of data to be unavailable.
-* The offline stores cannot be automatically recovered or restarted.
+-   オフラインストアでは、実際に一部のデータが使用できなくなります。
+-   オフラインストアを自動的に回復または再開することはできません。
 
-### Step 1. Disable all types of scheduling
+### 手順1.すべてのタイプのスケジューリングを無効にする {#step-1-disable-all-types-of-scheduling}
 
-You need to temporarily disable all types of internal scheduling, such as load balancing. After disabling them, it is recommended to wait for about 10 minutes so that the triggered scheduling can have sufficient time to complete the scheduled tasks.
+負荷分散など、すべてのタイプの内部スケジューリングを一時的に無効にする必要があります。それらを無効にした後、トリガーされたスケジューリングがスケジュールされたタスクを完了するのに十分な時間を確保できるように、約10分間待つことをお勧めします。
 
-> **Note:**
+> **ノート：**
 >
-> After the scheduling is disabled, the system cannot resolve data hotspot issues. Therefore, you need to enable the scheduling as soon as possible after the recovery is completed.
+> スケジューリングを無効にすると、システムはデータホットスポットの問題を解決できなくなります。したがって、リカバリが完了した後、できるだけ早くスケジューリングを有効にする必要があります。
 
-1. Use PD Control to get the current configuration by running the [`config show`](/pd-control.md#config-show--set-option-value--placement-rules) command.
-2. Use PD Control to disable all types of scheduling. For example:
+1.  PD制御を使用して、 [`config show`](/pd-control.md#config-show--set-option-value--placement-rules)コマンドを実行して現在の構成を取得します。
+2.  PD制御を使用して、すべてのタイプのスケジューリングを無効にします。例えば：
 
-    * [`config set region-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
-    * [`config set replica-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
-    * [`config set merge-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
+    -   [`config set region-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
+    -   [`config set replica-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
+    -   [`config set merge-schedule-limit 0`](/pd-control.md#config-show--set-option-value--placement-rules)
 
-### Step 2. Remove the stores that cannot be automatically recovered
+### 手順2.自動的に復元できないストアを削除する {#step-2-remove-the-stores-that-cannot-be-automatically-recovered}
 
-Use PD Control to remove the stores that cannot be automatically recovered by running the [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show--history) command.
+PD制御を使用して、 [`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show--history)コマンドを実行しても自動的に回復できないストアを削除します。
 
-> **Note:**
+> **ノート：**
 >
-> The returned result of this command only indicates that the request is accepted, not that the recovery is completed successfully. The stores are actually recovered in the background.
+> このコマンドの返される結果は、要求が受け入れられたことを示すだけであり、リカバリーが正常に完了したことを示すものではありません。店舗は実際にバックグラウンドで復元されます。
 
-### Step 3. Check the progress
+### ステップ3.進捗状況を確認します {#step-3-check-the-progress}
 
-When the above store removal command runs successfully, you can use PD Control to check the removal progress by running the [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules) command. When the command result shows "Last recovery has finished", the system recovery is completed.
+上記のストア削除コマンドが正常に実行されたら、PD Controlを使用して、 [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)コマンドを実行することで削除の進行状況を確認できます。コマンドの結果に「最後のリカバリが終了しました」と表示されたら、システムのリカバリは完了です。
 
-### Step 4. Test read and write tasks
+### ステップ4.読み取りおよび書き込みタスクをテストする {#step-4-test-read-and-write-tasks}
 
-After the progress command shows that the recovery task is completed, you can try to execute some simple SQL queries like the following example or perform write tasks to ensure that the data is readable and writable.
+progressコマンドで回復タスクが完了したことが示された後、次の例のようないくつかの単純なSQLクエリを実行するか、書き込みタスクを実行して、データの読み取りと書き込みが可能であることを確認できます。
 
 ```sql
 select count(*) from table_that_suffered_from_group_majority_failure;
 ```
 
-> **Note:**
+> **ノート：**
 >
-> The situation that data can be read and written does not indicate there is no data loss.
+> データの読み取りと書き込みが可能な状況は、データの損失がないことを示すものではありません。
 
-### Step 5. Restart the scheduling
+### ステップ5.スケジューリングを再開します {#step-5-restart-the-scheduling}
 
-To restart the scheduling, you need to adjust the `0` value of `config set region-schedule-limit 0`, `config set replica-schedule-limit 0`, and `config set merge-schedule-limit 0` modified in step 1 to the initial values.
+スケジューリングを再開するには、ステップ`config set merge-schedule-limit 0`で変更した`config set region-schedule-limit 0` 、および`config set replica-schedule-limit 0`の`0`の値を初期値に調整する必要があります。
 
-Then, the whole process is finished.
+その後、プロセス全体が終了します。

@@ -2,12 +2,12 @@
 title: Filter DMLs Using SQL Expressions
 ---
 
-# Filter DMLs Using SQL Expressions
+# SQL式を使用してDMLをフィルタリングする {#filter-dmls-using-sql-expressions}
 
-## Overview
+## 概要 {#overview}
 
-In the process of incremental data migration, you can filter certain types of binlog events using the [Filter Binlog Events](/filter-binlog-event.md) feature. For example, for archiving or auditing purposes, you can filter out `DELETE` events when migrating data to the downstream. However, Binlog Event Filter cannot judge with a greater granularity on whether to filter out a specific row of `DELETE` events.
+増分データ移行のプロセスでは、 [Binlogイベントをフィルタリングする](/filter-binlog-event.md)機能を使用して特定のタイプのbinlogイベントをフィルタリングできます。たとえば、アーカイブまたは監査の目的で、データをダウンストリームに移行するときに`DELETE`のイベントを除外できます。ただし、Binlog Event Filterは、 `DELETE`のイベントの特定の行を除外するかどうかをより詳細に判断することはできません。
 
-To solve the above issue, DM supports filtering data during incremental migration using `binlog value filter` since v2.0.5. The binlog in the `ROW` format supported by DM has the values of all columns in binlog events. You can configure SQL expressions according to these values. If the SQL expressions evaluate a row change as `TRUE`, DM will not migrate the row change downstream.
+上記の問題を解決するために、DMはv2.0.5以降の`binlog value filter`を使用した増分移行中のデータのフィルタリングをサポートしています。 DMでサポートされている`ROW`形式のbinlogには、binlogイベントのすべての列の値があります。これらの値に従ってSQL式を構成できます。 SQL式が行の変更を`TRUE`と評価した場合、DMは行の変更をダウンストリームに移行しません。
 
-For detailed operation and implementation, see [Filter DML Events Using SQL Expressions](/filter-dml-event.md).
+詳細な操作と実装については、 [SQL式を使用してDMLイベントをフィルタリングする](/filter-dml-event.md)を参照してください。

@@ -3,11 +3,11 @@ title: SESSION_VARIABLES
 summary: Learn the `SESSION_VARIABLES` information_schema table.
 ---
 
-# SESSION_VARIABLES
+# SESSION_VARIABLES {#session-variables}
 
-The `SESSION_VARIABLES` table provides information about session variables. The table data is similar to the result of the `SHOW SESSION VARIABLES` statement.
+`SESSION_VARIABLES`の表は、セッション変数に関する情報を提供します。テーブルデータは、 `SHOW SESSION VARIABLES`ステートメントの結果と同様です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -24,7 +24,7 @@ DESC session_variables;
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM session_variables ORDER BY variable_name LIMIT 10;
@@ -48,7 +48,7 @@ SELECT * FROM session_variables ORDER BY variable_name LIMIT 10;
 10 rows in set (0.00 sec)
 ```
 
-The description of columns in the `SESSION_VARIABLES` table is as follows:
+`SESSION_VARIABLES`テーブルの列の説明は次のとおりです。
 
-* `VARIABLE_NAME`: The name of the session-level variable in the database.
-* `VARIABLE_VALUE`: The value of the session-level variable in the database.
+-   `VARIABLE_NAME` ：データベース内のセッションレベル変数の名前。
+-   `VARIABLE_VALUE` ：データベース内のセッションレベル変数の値。

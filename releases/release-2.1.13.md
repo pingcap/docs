@@ -2,35 +2,35 @@
 title: TiDB 2.1.13 Release Notes
 ---
 
-# TiDB 2.1.13 Release Notes
+# TiDB2.1.13リリースノート {#tidb-2-1-13-release-notes}
 
-Release date: June 21, 2019
+発売日：2019年6月21日
 
-TiDB version: 2.1.13
+TiDBバージョン：2.1.13
 
-TiDB Ansible version: 2.1.13
+TiDB Ansibleバージョン：2.1.13
 
-## TiDB
+## TiDB {#tidb}
 
-- Add a feature to use `SHARD_ROW_ID_BITS` to scatter row IDs when the column contains an `AUTO_INCREMENT` attribute to relieve the hotspot issue [#10788](https://github.com/pingcap/tidb/pull/10788)
-- Optimize the lifetime of invalid DDL metadata to speed up recovering the normal execution of DDL operations after upgrading the TiDB cluster [#10789](https://github.com/pingcap/tidb/pull/10789)
-- Fix the OOM issue in high concurrent scenarios caused by the failure to quickly release Coprocessor resources, resulted from the `execdetails.ExecDetails` pointer [#10833](https://github.com/pingcap/tidb/pull/10833)
-- Add the `update-stats` configuration item to control whether to update statistics [#10772](https://github.com/pingcap/tidb/pull/10772)
-- Add the following TiDB-specific syntax to support Region presplit to solve the hotspot issue:
-- Add the `PRE_SPLIT_REGIONS` table option [#10863](https://github.com/pingcap/tidb/pull/10863)
-- Add the `SPLIT TABLE table_name INDEX index_name` syntax [#10865](https://github.com/pingcap/tidb/pull/10865)
-- Add the `SPLIT TABLE [table_name] BETWEEN (min_value...) AND (max_value...) REGIONS [region_num]` syntax [#10882](https://github.com/pingcap/tidb/pull/10882)
-- Fix the panic issue caused by the `KILL` syntax in some cases [#10879](https://github.com/pingcap/tidb/pull/10879)
-- Improve the compatibility with MySQL for `ADD_DATE` in some cases [#10718](https://github.com/pingcap/tidb/pull/10718)
-- Fix the wrong estimation for the selectivity rate of the inner table selection in index join [#10856](https://github.com/pingcap/tidb/pull/10856)
+-   ホットスポットの問題を軽減するために、列に`AUTO_INCREMENT`属性が含まれている場合に、 `SHARD_ROW_ID_BITS`を使用して行IDを分散する機能を追加します[＃10788](https://github.com/pingcap/tidb/pull/10788)
+-   無効なDDLメタデータの存続期間を最適化して、TiDBクラスタのアップグレード後のDDL操作の通常の実行の回復を高速化します[＃10789](https://github.com/pingcap/tidb/pull/10789)
+-   `execdetails.ExecDetails`ポインター[＃10833](https://github.com/pingcap/tidb/pull/10833)に起因する、コプロセッサー・リソースの迅速な解放の失敗によって引き起こされる、同時発生率の高いシナリオでのOOMの問題を修正します。
+-   `update-stats`の構成項目を追加して、統計を更新するかどうかを制御します[＃10772](https://github.com/pingcap/tidb/pull/10772)
+-   ホットスポットの問題を解決するためにRegionpresplitをサポートするには、次のTiDB固有の構文を追加します。
+-   `PRE_SPLIT_REGIONS`テーブルオプション[＃10863](https://github.com/pingcap/tidb/pull/10863)を追加します
+-   `SPLIT TABLE table_name INDEX index_name`構文[＃10865](https://github.com/pingcap/tidb/pull/10865)を追加します
+-   `SPLIT TABLE [table_name] BETWEEN (min_value...) AND (max_value...) REGIONS [region_num]`構文[＃10882](https://github.com/pingcap/tidb/pull/10882)を追加します
+-   場合によっては`KILL`構文によって引き起こされるパニックの問題を修正します[＃10879](https://github.com/pingcap/tidb/pull/10879)
+-   MySQLとの互換性を改善する`ADD_DATE`場合によっては[＃10718](https://github.com/pingcap/tidb/pull/10718)
+-   インデックス結合[＃10856](https://github.com/pingcap/tidb/pull/10856)での内部テーブル選択の選択率の誤った推定を修正しました
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that incomplete snapshots are generated in the system caused by the iterator not checking the status [#4940](https://github.com/tikv/tikv/pull/4940)
-- Add a feature to check the validity for the `block-size` configuration [#4930](https://github.com/tikv/tikv/pull/4930)
+-   イテレータがステータスをチェックしないためにシステムで不完全なスナップショットが生成される問題を修正します[＃4940](https://github.com/tikv/tikv/pull/4940)
+-   `block-size`構成の有効性を確認する機能を追加します[＃4930](https://github.com/tikv/tikv/pull/4930)
 
-## Tools
+## ツール {#tools}
 
-- TiDB Binlog
-    - Fix the wrong offset issue caused by Pump not checking the returned value when it fails to write data [#640](https://github.com/pingcap/tidb-binlog/pull/640)
-    - Add the `advertise-addr` configuration in Drainer to support the bridge mode in the container environment [#634](https://github.com/pingcap/tidb-binlog/pull/634)
+-   TiDB Binlog
+    -   データの書き込みに失敗したときにポンプが戻り値をチェックしないことによって引き起こされる誤ったオフセットの問題を修正します[＃640](https://github.com/pingcap/tidb-binlog/pull/640)
+    -   コンテナ環境でブリッジモードをサポートするために、Drainerに`advertise-addr`の構成を追加します[＃634](https://github.com/pingcap/tidb-binlog/pull/634)

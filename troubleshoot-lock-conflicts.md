@@ -3,255 +3,253 @@ title: Troubleshoot Lock Conflicts
 summary: Learn to analyze and resolve lock conflicts in TiDB.
 ---
 
-# Troubleshoot Lock Conflicts
- 
-TiDB supports complete distributed transactions. Starting from v3.0, TiDB provides optimistic transaction mode and pessimistic transaction mode. This document introduces how to troubleshoot and resolve lock conflicts in TiDB.
+# ロックの競合のトラブルシューティング {#troubleshoot-lock-conflicts}
 
-## Optimistic transaction mode
+TiDBは完全な分散トランザクションをサポートしています。 v3.0以降、TiDBは楽観的トランザクションモードと悲観的トランザクションモードを提供します。このドキュメントでは、TiDBでのロックの競合をトラブルシューティングして解決する方法を紹介します。
 
-Transactions in TiDB use two-phase commit (2PC) that includes the Prewrite phase and the Commit phase. The procedure is as follows:
+## 楽観的なトランザクションモード {#optimistic-transaction-mode}
+
+TiDBのトランザクションは、プリライトフェーズとコミットフェーズを含む2フェーズコミット（2PC）を使用します。手順は次のとおりです。
 
 ![two-phase commit in the optimistic transaction mode](/media/troubleshooting-lock-pic-01.png)
- 
-For details of Percolator and TiDB's algorithm of the transactions, see [Google's Percolator](https://ai.google/research/pubs/pub36726).
 
-### Prewrite phase (optimistic)
- 
-In the Prewrite phase, TiDB adds a primary lock and a secondary lock to target keys. If there are lots of requests for adding locks to the same target key, TiDB prints an error such as write conflict or `keyislocked` to the log and reports it to the client. Specifically, the following errors related to locks might occur in the Prewrite phase.
- 
-#### Read-write conflict (optimistic)
- 
-As the TiDB server receives a read request from a client, it gets a globally unique and increasing timestamp at the physical time as the start_ts of the current transaction. The transaction needs to read the latest data before start_ts, that is, the target key of the latest commit_ts that is smaller than start_ts. When the transaction finds that the target key is locked by another transaction, and it cannot know which phase the other transaction is in, a read-write conflict happens. The diagram is as follows:
+PercolatorとTiDBのトランザクションのアルゴリズムの詳細については、 [Googleのパーコレーター](https://ai.google/research/pubs/pub36726)を参照してください。
+
+### 事前書き込みフェーズ（楽観的） {#prewrite-phase-optimistic}
+
+事前書き込みフェーズでは、TiDBはターゲットキーにプライマリロックとセカンダリロックを追加します。同じターゲットキーにロックを追加する要求が多数ある場合、TiDBは書き込みの競合や`keyislocked`などのエラーをログに出力し、クライアントに報告します。具体的には、事前書き込みフェーズで、ロックに関連する次のエラーが発生する可能性があります。
+
+#### 読み取りと書き込みの競合（楽観的） {#read-write-conflict-optimistic}
+
+TiDBサーバーは、クライアントから読み取り要求を受信すると、現在のトランザクションのstart_tsとして、物理的な時間にグローバルに一意で増加するタイムスタンプを取得します。トランザクションは、start_tsの前に最新のデータ、つまりstart_tsよりも小さい最新のcommit_tsのターゲットキーを読み取る必要があります。トランザクションがターゲットキーが別のトランザクションによってロックされていることを検出し、他のトランザクションがどのフェーズにあるかを知ることができない場合、読み取りと書き込みの競合が発生します。回路図は以下の通りです：
 
 ![read-write conflict](/media/troubleshooting-lock-pic-04.png)
 
-Txn0 completes the Prewrite phase and enters the Commit phase. At this time, Txn1 requests to read the same target key. Txn1 needs to read the target key of the latest commit_ts that is smaller than its start_ts. Because Txn1’s start_ts is larger than Txn0's lock_ts, Txn1 must wait for the target key's lock to be cleared, but it hasn’t been done. As a result, Txn1 cannot confirm whether Txn0 has been committed or not. Thus, a read-write conflict between Txn1 and Txn0 happens.
+Txn0はプリライトフェーズを完了し、コミットフェーズに入ります。このとき、Txn1は同じターゲットキーの読み取りを要求します。 Txn1は、start_tsよりも小さい最新のcommit_tsのターゲットキーを読み取る必要があります。 Txn1のstart_tsはTxn0のlock_tsよりも大きいため、Txn1はターゲットキーのロックがクリアされるのを待つ必要がありますが、まだ実行されていません。その結果、Txn1はTxn0がコミットされているかどうかを確認できません。したがって、Txn1とTxn0の間で読み取りと書き込みの競合が発生します。
 
-You can detect the read-write conflict in your TiDB cluster by the following ways:
+次の方法で、TiDBクラスタの読み取り/書き込みの競合を検出できます。
 
-1. Monitoring metrics and logs of the TiDB server
+1.  TiDBサーバーのメトリックとログの監視
 
-    * Monitoring data through Grafana
+    -   Grafanaを介したデータの監視
 
-        On the `KV Errors` panel in the TiDB dashboard, there are two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check read-write conflicts in the transactions. If the values of both `not_expired` and `resolve` under `Lock Resolve OPS` increase, there might be many read-write conflicts. The `not_expired` item means that the transaction's lock has not timed out. The `resolve` item means that the other transaction tries to clean up the locks. If the value of another `txnLockFast` item under `KV Backoff OPS` increases, there might also be read-write conflicts.
+        TiDBダッシュボードの`KV Errors`のパネルには、トランザクションの読み取りと書き込みの競合をチェックするために使用できる2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`があります。 `Lock Resolve OPS`未満の`not_expired`と`resolve`の両方の値が増加すると、多くの読み取り/書き込みの競合が発生する可能性があります。 `not_expired`項目は、トランザクションのロックがタイムアウトしていないことを意味します。 `resolve`項目は、他のトランザクションがロックをクリーンアップしようとすることを意味します。 `KV Backoff OPS`未満の別の`txnLockFast`項目の値が増加すると、読み取りと書き込みの競合も発生する可能性があります。
 
-        ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
-        ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png)
+        ![KV-Errors-resolve-optimistic](/media/troubleshooting-lock-pic-08.png) ![KV-backoff-txnLockFast-optimistic](/media/troubleshooting-lock-pic-09.png)
 
-    * Logs of the TiDB server
+    -   TiDBサーバーのログ
 
-        If there is any read-write conflict, you can see the following message in the TiDB log:
+        読み取りと書き込みの競合がある場合は、TiDBログに次のメッセージが表示されます。
 
         ```log
         [INFO] [coprocessor.go:743] ["[TIME_COP_PROCESS] resp_time:406.038899ms txnStartTS:416643508703592451 region_id:8297 store_addr:10.8.1.208:20160 backoff_ms:255 backoff_types:[txnLockFast,txnLockFast] kv_process_ms:333 scan_total_write:0 scan_processed_write:0 scan_total_data:0 scan_processed_data:0 scan_total_lock:0 scan_processed_lock:0"]
         ```
 
-        * txnStartTS: The start_ts of the transaction that is sending the read request. In the above log, `416643508703592451` is the start_ts.
-        * backoff_types: If a read-write conflict happens, and the read request performs backoff and retry, the type of retry is `TxnLockFast`.
-        * backoff_ms: The time that the read request spends in the backoff and retry, and the unit is milliseconds. In the above log, the read request spends 255 milliseconds in the backoff and retry.
-        * region_id: Region ID corresponding to the target key of the read request.
+        -   txnStartTS：読み取り要求を送信しているトランザクションのstart_ts。上記のログでは、 `416643508703592451`はstart_tsです。
+        -   backoff_types：読み取りと書き込みの競合が発生し、読み取り要求がバックオフと再試行を実行する場合、再試行のタイプは`TxnLockFast`です。
+        -   backoff_ms：読み取り要求がバックオフと再試行に費やす時間。単位はミリ秒です。上記のログでは、読み取り要求はバックオフと再試行に255ミリ秒を費やしています。
+        -   region_id：読み取り要求のターゲットキーに対応するリージョンID。
 
-2. Logs of the TiKV server
+2.  TiKVサーバーのログ
 
-    If there is any read-write conflict, you can see the following message in the TiKV log:
+    読み取りと書き込みの競合がある場合は、TiKVログに次のメッセージが表示されます。
 
     ```log
     [ERROR] [endpoint.rs:454] [error-response] [err=""locked primary_lock:7480000000000004D35F6980000000000000010380000000004C788E0380000000004C0748 lock_version: 411402933858205712 key: 7480000000000004D35F7280000000004C0748 lock_ttl: 3008 txn_size: 1""]
     ```
 
-    This message indicates that a read-write conflict occurs in TiDB. The target key of the read request has been locked by another transaction. The locks are from the uncommitted optimistic transaction and the uncommitted pessimistic transaction after the prewrite phase.
+    このメッセージは、TiDBで読み取りと書き込みの競合が発生していることを示しています。読み取り要求のターゲットキーが別のトランザクションによってロックされています。ロックは、コミットされていない楽観的トランザクションと、事前書き込みフェーズ後のコミットされていない悲観的トランザクションからのものです。
 
-    * primary_lock：Indicates that the target key is locked by the primary lock.
-    * lock_version：The start_ts of the transaction that owns the lock.
-    * key：The target key that is locked.
-    * lock_ttl: The lock’s TTL (Time To Live)
-    * txn_size：The number of keys that are in the Region of the transaction that owns the lock.
+    -   primary_lock：ターゲットキーがプライマリロックによってロックされていることを示します。
+    -   lock_version：ロックを所有するトランザクションのstart_ts。
+    -   key：ロックされているターゲットキー。
+    -   lock_ttl：ロックのTTL（Time To Live）
+    -   txn_size：ロックを所有するトランザクションのリージョンにあるキーの数。
 
-Solutions:
+ソリューション：
 
-* A read-write conflict triggers an automatic backoff and retry. As in the above example, Txn1 has a backoff and retry. The first time of the retry is 100 ms, the longest retry is 3000 ms, and the total time is 20000 ms at maximum.
+-   読み取りと書き込みの競合により、自動バックオフと再試行がトリガーされます。上記の例のように、Txn1にはバックオフと再試行があります。最初の再試行は100ミリ秒、最長の再試行は3000ミリ秒、合計時間は最大で20000ミリ秒です。
 
-* You can use the sub-command [`decoder`](/tidb-control.md#the-decoder-command) of TiDB Control to view the table id and rowid of the row corresponding to the specified key:
+-   TiDB Controlのサブコマンド[`decoder`](/tidb-control.md#the-decoder-command)を使用して、指定されたキーに対応する行のテーブルIDとROWIDを表示できます。
 
     ```sh
     ./tidb-ctl decoder -f table_row -k "t\x00\x00\x00\x00\x00\x00\x00\x1c_r\x00\x00\x00\x00\x00\x00\x00\xfa"
-    
+
     table_id: -9223372036854775780
     row_id: -9223372036854775558
     ```
 
-#### KeyIsLocked error
+#### KeyIsLockedエラー {#keyislocked-error}
 
-In the Prewrite phase of a transaction, TiDB checks whether there is any write-write conflict, and then checks whether the target key has been locked by another transaction. If the key is locked, the TiKV server outputs a "KeyIsLocked" error. At present, the error message is not printed in the logs of TiDB and TiKV. Same as read-write conflicts, when "KeyIsLocked" occurs, TiDB automatically performs backoff and retry for the transaction.
+トランザクションの事前書き込みフェーズでは、TiDBは書き込みと書き込みの競合があるかどうかを確認し、次にターゲットキーが別のトランザクションによってロックされているかどうかを確認します。キーがロックされている場合、TiKVサーバーは「KeyIsLocked」エラーを出力します。現在、エラーメッセージはTiDBとTiKVのログに出力されません。読み取りと書き込みの競合と同じように、「KeyIsLocked」が発生すると、TiDBは自動的にバックオフを実行し、トランザクションを再試行します。
 
-You can check whether there's any "KeyIsLocked" error in the TiDB monitoring on Grafana:
+GrafanaのTiDBモニタリングに「KeyIsLocked」エラーがあるかどうかを確認できます。
 
-The `KV Errors` panel in the TiDB dashboard has two monitoring metrics `Lock Resolve OPS` and `KV Backoff OPS` which can be used to check write-write conflicts caused by a transaction. If the `resolve` item under `Lock Resolve OPS` and the `txnLock` item under `KV Backoff OPS` have a clear upward trend, a "KeyIsLocked" error occurs. `resolve` refers to the operation that attempts to clear the lock, and `txnLock` represents a write conflict.
+TiDBダッシュボードの`KV Errors`のパネルには、トランザクションによって引き起こされた書き込みと書き込みの競合をチェックするために使用できる2つの監視メトリック`Lock Resolve OPS`と`KV Backoff OPS`があります。 `Lock Resolve OPS`未満の`resolve`アイテムと`KV Backoff OPS`未満の`txnLock`アイテムに明確な上昇傾向がある場合、「KeyIsLocked」エラーが発生します。 `resolve`はロックをクリアしようとする操作を示し、 `txnLock`は書き込みの競合を表します。
 
-![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png)
-![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png)
+![KV-Errors-resolve-optimistic-01](/media/troubleshooting-lock-pic-08.png) ![KV-backoff-txnLockFast-optimistic-01](/media/troubleshooting-lock-pic-07.png)
 
-Solutions:
+ソリューション：
 
-* If there is a small amount of txnLock in the monitoring, no need to pay too much attention. The backoff and retry is automatically performed in the background. The first time of the retry is 200 ms and the maximum time is 3000 ms for a single retry.
-* If there are too many “txnLock” operations in the `KV Backoff OPS`, it is recommended that you analyze the reasons to the write conflicts from the application side.
-* If your application is a write-write conflict scenario, it is strongly recommended to use the pessimistic transaction mode.
+-   監視に少量のtxnLockがある場合は、あまり注意を払う必要はありません。バックオフと再試行はバックグラウンドで自動的に実行されます。 1回の再試行の初回は200ミリ秒で、最大時間は3000ミリ秒です。
+-   `KV Backoff OPS`に「txnLock」操作が多すぎる場合は、アプリケーション側から書き込みの競合の理由を分析することをお勧めします。
+-   アプリケーションが書き込みと書き込みの競合シナリオである場合は、ペシミスティックトランザクションモードを使用することを強くお勧めします。
 
-### Commit phase (optimistic)
+### コミットフェーズ（楽観的） {#commit-phase-optimistic}
 
-After the Prewrite phase completes, the client obtains commit_ts, and then the transaction is going to the next phase of 2PC - the Commit phase.
+事前書き込みフェーズが完了した後、クライアントはcommit_tsを取得し、トランザクションは2PCの次のフェーズであるコミットフェーズに進みます。
 
-#### LockNotFound error
+#### LockNotFoundエラー {#locknotfound-error}
 
-The error log of "TxnLockNotFound" means that transaction commit time is longer than the the TTL time, and when the transaction is going to commit, its lock has been rolled back by other transactions. If the TiDB server enables transaction commit retry, this transaction is re-executed according to [tidb_retry_limit](/system-variables.md#tidb_retry_limit). (Note about the difference between explicit and implicit transactions.)
+「TxnLockNotFound」のエラーログは、トランザクションのコミット時間がTTL時間よりも長く、トランザクションがコミットしようとしているときに、そのロックが他のトランザクションによってロールバックされていることを意味します。 TiDBサーバーがトランザクションコミットの再試行を有効にしている場合、このトランザクションは[tidb_retry_limit](/system-variables.md#tidb_retry_limit)に従って再実行されます。 （明示的トランザクションと暗黙的トランザクションの違いに注意してください。）
 
-You can check whether there is any "LockNotFound" error in the following ways:
+次の方法で、「LockNotFound」エラーがあるかどうかを確認できます。
 
-1. View the logs of the TiDB server
+1.  TiDBサーバーのログを表示する
 
-    If a "TxnLockNotFound" error occurs, the TiDB log message is like this:
+    「TxnLockNotFound」エラーが発生した場合、TiDBログメッセージは次のようになります。
 
     ```log
     [WARN] [session.go:446] ["commit failed"] [conn=149370] ["finished txn"="Txn{state=invalid}"] [error="[kv:6]Error: KV error safe to retry tikv restarts txn: Txn(Mvcc(TxnLockNotFound{ start_ts: 412720515987275779, commit_ts: 412720519984971777, key: [116, 128, 0, 0, 0, 0, 1, 111, 16, 95, 114, 128, 0, 0, 0, 0, 0, 0, 2] })) [try again later]"]
     ```
 
-    * start_ts: The start_ts of the transaction that outputs the `TxnLockNotFound` error because its lock has been rolled back by other transactions. In the above log, `412720515987275779` is the start_ts.
-    * commit_ts: The commit_ts of the transaction that outputs the `TxnLockNotFound` error. In the above log, `412720519984971777` is the commit_ts.
+    -   start_ts：ロックが他のトランザクションによってロールバックされたために`TxnLockNotFound`エラーを出力するトランザクションのstart_ts。上記のログでは、 `412720515987275779`がstart_tsです。
+    -   commit_ts： `TxnLockNotFound`エラーを出力するトランザクションのcommit_ts。上記のログでは、 `412720519984971777`はcommit_tsです。
 
-2. View the logs of the TiKV server
+2.  TiKVサーバーのログを表示する
 
-    If a "TxnLockNotFound" error occurs, the TiKV log message is like this:
+    「TxnLockNotFound」エラーが発生した場合、TiKVログメッセージは次のようになります。
 
     ```log
     Error: KV error safe to retry restarts txn: Txn(Mvcc(TxnLockNotFound)) [ERROR [Kv.rs:708] ["KvService::batch_raft send response fail"] [err=RemoteStoped]
     ```
- 
-Solutions:
 
-* By checking the time interval between start_ts and commit_ts, you can confirm whether the commit time exceeds the TTL time.
+ソリューション：
 
-    Checking the time interval using the PD control tool:
+-   start_tsとcommit_tsの時間間隔を確認することで、コミット時間がTTL時間を超えているかどうかを確認できます。
+
+    PD制御ツールを使用して時間間隔を確認します。
 
     ```shell
     tiup ctl pd tso [start_ts]
     tiup ctl pd tso [commit_ts]
     ```
 
-* It is recommended to check whether the write performance is slow, which might cause that the efficiency of transaction commit is poor, and thus the lock is cleared.
+-   書き込みパフォーマンスが遅いかどうかを確認することをお勧めします。これにより、トランザクションコミットの効率が低下し、ロックが解除される可能性があります。
 
-* In the case of disabling the TiDB transaction retry, you need to catch the exception on the application side and try again.
+-   TiDBトランザクションの再試行を無効にする場合は、アプリケーション側で例外をキャッチして再試行する必要があります。
 
-## Pessimistic transaction mode
+## 悲観的なトランザクションモード {#pessimistic-transaction-mode}
 
-Before v3.0.8, TiDB uses the optimistic transaction mode by default. In this mode, if there is a transaction conflict, the latest transaction will fail to commit. Therefore, the application needs to support retrying transactions. The pessimistic transaction mode resolves this issue, and the application does not need to modify any logic for the workaround.
+v3.0.8より前では、TiDBはデフォルトで楽観的トランザクションモードを使用します。このモードでは、トランザクションの競合がある場合、最新のトランザクションはコミットに失敗します。したがって、アプリケーションはトランザクションの再試行をサポートする必要があります。悲観的トランザクションモードはこの問題を解決し、アプリケーションは回避策のためにロジックを変更する必要はありません。
 
-The commit phase of the pessimistic transaction mode and the optimistic transaction mode in TiDB has the same logic, and both commits are in the 2PC mode. The important adaptation of pessimistic transactions is DML execution.
+TiDBのペシミスティックトランザクションモードとオプティミスティックトランザクションモードのコミットフェーズは同じロジックであり、両方のコミットは2PCモードです。悲観的なトランザクションの重要な適応は、DMLの実行です。
 
 ![TiDB pessimistic transaction commit logic](/media/troubleshooting-lock-pic-05.png)
- 
-The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
 
-1. (same as the optimistic transaction mode) Receive the `begin` request from the client, and the current timestamp is this transaction’s start_ts.
-2. When the TiDB server receives an `update` request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
-3. (same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the 2PC similar to the optimistic transaction mode. 
+悲観的なトランザクションは、2PCの前に`Acquire Pessimistic Lock`フェーズを追加します。このフェーズには、次の手順が含まれます。
+
+1.  （楽観的トランザクションモードと同じ）クライアントから`begin`の要求を受信し、現在のタイムスタンプはこのトランザクションのstart_tsです。
+2.  TiDBサーバーがクライアントから`update`要求を受信すると、TiDBサーバーはTiKVサーバーへの悲観的なロック要求を開始し、ロックはTiKVサーバーに保持されます。
+3.  （楽観的トランザクションモードと同じ）クライアントがコミット要求を送信すると、TiDBは楽観的トランザクションモードと同様に2PCの実行を開始します。
 
 ![Pessimistic transactions in TiDB](/media/troubleshooting-lock-pic-06.png)
 
-For details, see [Pessimistic transaction mode](/pessimistic-transaction.md).
+詳細については、 [悲観的なトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
-### Prewrite phase (pessimistic)
+### 事前書き込みフェーズ（悲観的） {#prewrite-phase-pessimistic}
 
-In the transaction pessimistic mode, the commit phase is the same as the 2PC. Therefore, the read-write conflict also exists as in the optimistic transaction mode.
+トランザクションペシミスティックモードでは、コミットフェーズは2PCと同じです。したがって、楽観的トランザクションモードの場合と同様に、読み取りと書き込みの競合も存在します。
 
-#### Read-write conflict (pessimistic)
+#### 読み取りと書き込みの競合（悲観的） {#read-write-conflict-pessimistic}
 
-Same as [Read-write conflict (optimistic)](#read-write-conflict-optimistic).
+[読み取りと書き込みの競合（楽観的）](#read-write-conflict-optimistic)と同じ。
 
-### Commit phase (pessimistic)
+### コミットフェーズ（悲観的） {#commit-phase-pessimistic}
 
-In the pessimistic transaction mode, there will be no `TxnLockNotFound` error. Instead, the pessimistic lock will automatically update the TTL of the transaction through `txnheartbeat` to ensure that the second transaction does not clear the lock of the first transaction.
+悲観的トランザクションモードでは、 `TxnLockNotFound`のエラーは発生しません。代わりに、ペシミスティックロックはトランザクションのTTLを`txnheartbeat`まで自動的に更新して、2番目のトランザクションが最初のトランザクションのロックをクリアしないようにします。
 
-### Other errors related to locks
+### ロックに関連するその他のエラー {#other-errors-related-to-locks}
 
-#### Pessimistic lock retry limit reached
+#### 悲観的なロックの再試行制限に達しました {#pessimistic-lock-retry-limit-reached}
 
-When the transaction conflict is very serious or a write conflict occurs, the optimistic transaction will be terminated directly, and the pessimistic transaction will retry the statement with the latest data from storage until there is no write conflict.
+トランザクションの競合が非常に深刻な場合、または書き込みの競合が発生した場合、オプティミスティックトランザクションは直接終了し、ペシミスティックトランザクションは、書き込みの競合がなくなるまで、ストレージからの最新データを使用してステートメントを再試行します。
 
-Because TiDB's locking operation is a write operation, and the process of the operation is to read first and then write, there are two RPC requests. If a write conflict occurs in the middle of a transaction, TiDB will try again to lock the target keys, and each retry will be printed to the TiDB log. The number of retries is determined by [pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count).
+TiDBのロック操作は書き込み操作であり、操作のプロセスは最初に読み取り、次に書き込みであるため、2つのRPC要求があります。トランザクションの途中で書き込みの競合が発生した場合、TiDBはターゲットキーのロックを再試行し、再試行するたびにTiDBログに出力されます。再試行の回数は[pessimistic-txn.max-retry-count](/tidb-configuration-file.md#max-retry-count)によって決定されます。
 
-In the pessimistic transaction mode, if a write conflict occurs and the number of retries reaches the upper limit, an error message containing the following keywords appears in the TiDB log:
+ペシミスティックトランザクションモードでは、書き込みの競合が発生し、再試行回数が上限に達すると、次のキーワードを含むエラーメッセージがTiDBログに表示されます。
 
 ```log
 err="pessimistic lock retry limit reached"
 ```
 
-Solutions:
+ソリューション：
 
-* If the above error occurs frequently, it is recommended to adjust from the application side.
+-   上記のエラーが頻繁に発生する場合は、アプリケーション側から調整することをお勧めします。
 
-#### Lock wait timeout exceeded
- 
-In the pessimistic transaction mode, transactions wait for locks of each other. The timeout for waiting a lock is defined by the [innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors) parameter of TiDB. This is the maximum wait lock time at the SQL statement level, which is the expectation of a SQL statement Locking, but the lock has never been acquired. After this time, TiDB will not try to lock again and will return the corresponding error message to the client.
+#### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
 
-When a wait lock timeout occurs, the following error message will be returned to the client:
+悲観的トランザクションモードでは、トランザクションは相互のロックを待機します。ロックを待機するためのタイムアウトは、TiDBの[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)パラメーターによって定義されます。これは、SQLステートメントのロックの予想であるSQLステートメントレベルでの最大待機ロック時間ですが、ロックが取得されたことはありません。この後、TiDBは再度ロックを試みず、対応するエラーメッセージをクライアントに返します。
+
+待機ロックのタイムアウトが発生すると、次のエラーメッセージがクライアントに返されます。
 
 ```log
 ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 ```
- 
-Solutions:
 
-* If the above error occurs frequently, it is recommended to adjust the application logic.
+ソリューション：
 
-#### TTL manager has timed out
+-   上記のエラーが頻繁に発生する場合は、アプリケーションロジックを調整することをお勧めします。
 
-The transaction execution time can not exceed the GC time limit. In addition, the TTL time of pessimistic transactions has an upper limit, whose default value is 1 hour. Therefore, a pessimistic transaction executed for more than 1 hour will fail to commit. This timeout threshold is controlled by the TiDB parameter [performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example).
+#### TTLマネージャーがタイムアウトしました {#ttl-manager-has-timed-out}
 
-When the execution time of a pessimistic transaction exceeds the TTL time, the following error message occurs in the TiDB log:
+トランザクションの実行時間は、GCの制限時間を超えることはできません。さらに、ペシミスティックトランザクションのTTL時間には上限があり、デフォルト値は1時間です。したがって、1時間以上実行された悲観的なトランザクションは、コミットに失敗します。このタイムアウトしきい値は、TiDBパラメーター[performance.max-txn-ttl](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)によって制御されます。
+
+ペシミスティックトランザクションの実行時間がTTL時間を超えると、TiDBログに次のエラーメッセージが表示されます。
 
 ```log
 TTL manager has timed out, pessimistic locks may expire, please commit or rollback this transaction
 ```
 
-Solutions:
+ソリューション：
 
-* First, confirm whether the application logic can be optimized. For example, large transactions may trigger TiDB's transaction size limit, which can be split into multiple small transactions.
-* Also, you can adjust the related parameters properly to meet the application transaction logic.
+-   まず、アプリケーションロジックを最適化できるかどうかを確認します。たとえば、大きなトランザクションはTiDBのトランザクションサイズ制限をトリガーする可能性があり、これは複数の小さなトランザクションに分割できます。
+-   また、アプリケーションのトランザクションロジックに合わせて、関連するパラメータを適切に調整できます。
 
-#### Deadlock found when trying to get lock
+#### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}
 
-Due to resource competition between two or more transactions, a deadlock occurs. If you do not handle it manually, transactions that block each other cannot be executed successfully and will wait for each other forever. To resolve dead locks, you need to manually terminate one of the transactions to resume other transaction requests.
+2つ以上のトランザクション間のリソース競合により、デッドロックが発生します。手動で処理しないと、相互にブロックし合うトランザクションを正常に実行できず、永久に待機します。デッドロックを解決するには、トランザクションの1つを手動で終了して、他のトランザクション要求を再開する必要があります。
 
-When a pessimistic transaction has a deadlock, one of the transactions must be terminated to unlock the deadlock. The client will return the same `Error 1213` error as in MySQL, for example:
+悲観的トランザクションにデッドロックがある場合、デッドロックのロックを解除するには、トランザクションの1つを終了する必要があります。クライアントは、MySQLと同じ`Error 1213`のエラーを返します。次に例を示します。
 
 ```log
 [err="[executor:1213]Deadlock found when trying to get lock; try restarting transaction"]
 ```
 
-Solutions:
+ソリューション：
 
-* If it is difficult to confirm the cause of the deadlock, for v5.1 and later versions, you are recommended to try to query the `INFORMATION_SCHEMA.DEADLOCKS` or `INFORMATION_SCHEMA.CLUSTER_DEADLOCKS` system table to get the information of deadlock waiting chain. For details, see the [Deadlock errors](#deadlock-errors) section and the [`DEADLOCKS` table](/information-schema/information-schema-deadlocks.md) document.
-* If the deadlock occurs frequently, you need to adjust the transaction query logic in your application to reduce such occurrences.
+-   デッドロックの原因を確認するのが難しい場合、v5.1以降のバージョンでは、デッドロック待機チェーンの情報を取得するために`INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`システムテーブルを照会することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)セクションおよび[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
+-   デッドロックが頻繁に発生する場合は、アプリケーションのトランザクションクエリロジックを調整して、そのような発生を減らす必要があります。
 
-### Use Lock View to troubleshoot issues related to pessimistic locks
+### ロックビューを使用して、悲観的なロックに関連する問題のトラブルシューティングを行います {#use-lock-view-to-troubleshoot-issues-related-to-pessimistic-locks}
 
-Since v5.1, TiDB supports the Lock View feature. This feature has several system tables built in `information_schema` that provide more information about the pessimistic lock conflicts and pessimistic lock waitings. For the detailed introduction of these tables, see the following documents:
+v5.1以降、TiDBはロックビュー機能をサポートしています。この機能には、ペシミスティックロックの競合とペシミスティックロックの待機に関する詳細情報を提供するいくつかのシステムテーブルが組み込まれてい`information_schema` 。これらの表の詳細な紹介については、次のドキュメントを参照してください。
 
-* [`TIDB_TRX` and `CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md): Provides information of all running transactions on the current TiDB node or in the entire cluster, including whether the transaction is in the lock-waiting state, the lock-waiting time, and the digests of statements that have been executed in the transaction.
-* [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md): Provides the pessimistic lock-waiting information in TiKV, including the `start_ts` of the blocking and blocked transaction, the digest of the blocked SQL statement, and the key on which the waiting occurs.
-* [`DEADLOCKS` and `CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md): Provides the information of several deadlock events that have recently occurred on the current TiDB node or in the entire cluster, including the waiting relationship among transactions in the deadlock loops, the digest of the statement currently being executed in the transaction, and the key on which the waiting occurs.
+-   [`TIDB_TRX`および<code>CLUSTER_TIDB_TRX</code>](/information-schema/information-schema-tidb-trx.md) ：トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど、現在のTiDBノードまたはクラスタ全体で実行中のすべてのトランザクションの情報を提供します。
+-   [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) ：ブロックおよびブロックされたトランザクションの`start_ts` 、ブロックされたSQLステートメントのダイジェスト、および待機が発生するキーを含む、TiKVの悲観的なロック待機情報を提供します。
+-   [`DEADLOCKS`および<code>CLUSTER_DEADLOCKS</code>](/information-schema/information-schema-deadlocks.md) ：現在のTiDBノードまたはクラスタ全体で最近発生したいくつかのデッドロックイベントの情報を提供します。これには、デッドロックループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、およびキーが含まれます。待機が発生する場所。
 
-> **Note:**
+> **ノート：**
 >
-> The SQL statements shown in the Lock View-related system tables are normalized SQL statements (that is, SQL statements without formats and arguments), which are obtained by internal queries according to SQL digests, so the tables cannot obtain the complete statements that include the format and arguments. For the detailed description of SQL digests and normalized SQL statement, see [Statement Summary Tables](/statement-summary-tables.md).
+> ロックビュー関連のシステムテーブルに表示されるSQLステートメントは正規化されたSQLステートメント（つまり、フォーマットと引数のないSQLステートメント）であり、SQLダイジェストに従った内部クエリによって取得されるため、テーブルは、フォーマットと引数。 SQLダイジェストと正規化されたSQLステートメントの詳細については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
 
-The following sections show the examples of troubleshooting some issues using these tables.
+次のセクションでは、これらの表を使用していくつかの問題をトラブルシューティングする例を示します。
 
-#### Deadlock errors
+#### デッドロックエラー {#deadlock-errors}
 
-To get the information of the recent deadlock errors, you can query the `DEADLOCKS` or `CLUSTER_DEADLOCKS` table. For example:
+最近のデッドロックエラーの情報を取得するには、 `DEADLOCKS`または`CLUSTER_DEADLOCKS`のテーブルを照会できます。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from information_schema.deadlocks;
@@ -266,15 +264,15 @@ select * from information_schema.deadlocks;
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-The query result above shows the waiting relationship among multiple transactions in the deadlock error, the normalized form of the SQL statements currently being executed in each transaction (statements without formats and arguments), the key on which the conflict occurs, and the information of the key.
+上記のクエリ結果は、デッドロックエラーでの複数のトランザクション間の待機関係、各トランザクションで現在実行されているSQLステートメントの正規化された形式（形式と引数のないステートメント）、競合が発生するキー、および鍵。
 
-For example, in the above example, the first row means that the transaction with the ID of `426812829645406216` is executing a statement like ``update `t` set `v` =? Where `id` =? ;`` but is blocked by another transaction with the ID of `426812829645406217`. The transaction with the ID of `426812829645406217` is also executing a statement that is in the form of ``update `t` set `v` =? Where `id` =? ;`` but is blocked by the transaction with the ID of `426812829645406216`. The two transactions thus form a deadlock.
+たとえば、上記の例では、最初の行は、IDが`426812829645406216`のトランザクションが``update `t` set `v` =? Where `id` =? ;``のようなステートメントを実行しているが、IDが`426812829645406217`の別のトランザクションによってブロックされていることを意味します。 IDが`426812829645406217`のトランザクションも、 ``update `t` set `v` =? Where `id` =? ;``の形式のステートメントを実行していますが、IDが`426812829645406216`のトランザクションによってブロックされています。したがって、2つのトランザクションはデッドロックを形成します。
 
-#### A few hot keys cause queueing locks
+#### いくつかのホットキーにより、キューイングロックが発生します {#a-few-hot-keys-cause-queueing-locks}
 
-The `DATA_LOCK_WAITS` system table provides the lock-waiting status on the TiKV nodes. When you query this table, TiDB automatically obtains the real-time lock-waiting information from all TiKV nodes. If a few hot keys are frequently locked and block many transactions, you can query the `DATA_LOCK_WAITS` table and aggregate the results by key to try to find the keys on which issues frequently occur:
+`DATA_LOCK_WAITS`システムテーブルは、TiKVノードのロック待機ステータスを提供します。このテーブルを照会すると、TiDBはすべてのTiKVノードからリアルタイムのロック待機情報を自動的に取得します。いくつかのホットキーが頻繁にロックされ、多くのトランザクションがブロックされる場合は、 `DATA_LOCK_WAITS`のテーブルをクエリし、キーごとに結果を集計して、問題が頻繁に発生するキーを見つけようとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select `key`, count(*) as `count` from information_schema.data_lock_waits group by `key` order by `count` desc;
@@ -289,13 +287,13 @@ select `key`, count(*) as `count` from information_schema.data_lock_waits group 
 +----------------------------------------+-------+
 ```
 
-To avoid contingency, you might need to make multiple queries.
+不測の事態を回避するために、複数のクエリを実行する必要がある場合があります。
 
-If you know the key that frequently has issues occurred, you can try to get the information of the transaction that tries to lock the key from the `TIDB_TRX` or `CLUSTER_TIDB_TRX` table.
+問題が頻繁に発生するキーがわかっている場合は、 `TIDB_TRX`または`CLUSTER_TIDB_TRX`のテーブルからキーをロックしようとするトランザクションの情報を取得してみてください。
 
-Note that the information displayed in the `TIDB_TRX` and `CLUSTER_TIDB_TRX` tables is also the information of the transactions that are running at the time the query is performed. These tables do not display the information of the completed transactions. If there is a large number of concurrent transactions, the result set of the query might also be large. You can use the `limit` clause or the `where` clause to filter out transactions with a long lock-waiting time. Note that when you join multiple tables in Lock View, the data in different tables might not be obtained at the same time, so the information in different tables might not be consistent.
+`TIDB_TRX`と`CLUSTER_TIDB_TRX`の表に表示される情報は、クエリの実行時に実行されているトランザクションの情報でもあることに注意してください。これらのテーブルには、完了したトランザクションの情報は表示されません。同時トランザクションが多数ある場合、クエリの結果セットも大きくなる可能性があります。 `limit`句または`where`句を使用して、ロック待機時間が長いトランザクションを除外できます。ロックビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報に一貫性がない可能性があることに注意してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select trx.* from information_schema.data_lock_waits as l left join information_schema.tidb_trx as trx on l.trx_id = trx.id where l.key = "7480000000000000415F728000000000000001"\G
@@ -331,11 +329,11 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 2 rows in set (0.00 sec)
 ```
 
-#### A transaction is blocked for a long time
+#### トランザクションが長期間ブロックされている {#a-transaction-is-blocked-for-a-long-time}
 
-If a transaction is known to be blocked by another transaction (or multiple transactions) and the `start_ts` (transaction ID) of the current transaction is known, you can use the following method to obtain the information of the blocking transaction. Note that when you join multiple tables in Lock View, the data in different tables might not be obtained at the same time, so the information in different tables might not be consistent.
+トランザクションが別のトランザクション（または複数のトランザクション）によってブロックされていることがわかっていて、現在のトランザクションの`start_ts` （トランザクションID）がわかっている場合は、次の方法を使用して、ブロックしているトランザクションの情報を取得できます。ロックビューで複数のテーブルを結合すると、異なるテーブルのデータが同時に取得されない可能性があるため、異なるテーブルの情報に一貫性がない可能性があることに注意してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select l.key, trx.*, tidb_decode_sql_digests(trx.all_sql_digests) as sqls from information_schema.data_lock_waits as l join information_schema.cluster_tidb_trx as trx on l.current_holding_trx_id = trx.id where l.trx_id = 426831965449355272\G
@@ -361,6 +359,6 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ? ;
 1 row in set (0.01 sec)
 ```
 
-In the above query, the [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests) function is used on the `ALL_SQL_DIGESTS` column of the `CLUSTER_TIDB_TRX` table. This function tries to convert this column (the value is a set of SQL digests) to the normalized SQL statements, which improves readability.
+上記のクエリでは、 `CLUSTER_TIDB_TRX`テーブルの`ALL_SQL_DIGESTS`列で[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数が使用されています。この関数は、この列（値はSQLダイジェストのセット）を正規化されたSQLステートメントに変換しようとします。これにより、読みやすさが向上します。
 
-If the `start_ts` of the current transaction is unknown, you can try to find it out from the information in the `TIDB_TRX` / `CLUSTER_TIDB_TRX` table or in the [`PROCESSLIST` / `CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md) table.
+現在のトランザクションの`start_ts`が不明な場合は、 `TIDB_TRX` / `CLUSTER_TIDB_TRX`テーブルまたは[`PROCESSLIST` / <code>CLUSTER_PROCESSLIST</code>](/information-schema/information-schema-processlist.md)テーブルの情報からそれを見つけることができます。

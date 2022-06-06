@@ -3,53 +3,53 @@ title: Data Migration Scenarios
 summary: Learn how to configure a data migration task in different scenarios.
 ---
 
-# Data Migration Scenario Overview
+# データ移行シナリオの概要 {#data-migration-scenario-overview}
 
-> **Note:**
+> **ノート：**
 >
-> Before creating a data migration task, you need to perform the following operations:
+> データ移行タスクを作成する前に、次の操作を実行する必要があります。
 >
-> 1. [Deploy a DM Cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md).
-> 2. [Create a Data Source](/dm/quick-start-create-source.md).
+> 1.  [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md) 。
+> 2.  [データソースを作成する](/dm/quick-start-create-source.md) 。
 
-This document introduces how to perform data migration tasks in different scenarios.
+このドキュメントでは、さまざまなシナリオでデータ移行タスクを実行する方法を紹介します。
 
-In addition to scenario-based documents, you can also refer to the following documents:
+シナリオベースのドキュメントに加えて、次のドキュメントも参照できます。
 
-- For a complete example of data migration task configuration, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
-- For a data migration task configuration guide, refer to [Data Migration Task Configuration Guide](/dm/dm-task-configuration-guide.md).
+-   データ移行タスクの構成の完全な例については、 [DM高度なタスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+-   データ移行タスク構成ガイドについては、 [データ移行タスクConfiguration / コンフィグレーションガイド](/dm/dm-task-configuration-guide.md)を参照してください。
 
-## Migrate data from Amazon Aurora to TiDB
+## AuroraからTiDBにデータを移行する {#migrate-data-from-amazon-aurora-to-tidb}
 
-When you migrate data from Aurora to a TiDB cluster deployed on AWS, your data migration takes two operations: full data migration and incremental replication. You can choose the corresponding operation according to your application needs.
+AuroraからAWSにデプロイされたTiDBクラスタにデータを移行する場合、データ移行には、完全なデータ移行と増分レプリケーションの2つの操作が必要です。アプリケーションのニーズに応じて、対応する操作を選択できます。
 
--[Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md)
+[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)
 
-## Migrate data from MySQL to TiDB
+## MySQLからTiDBにデータを移行する {#migrate-data-from-mysql-to-tidb}
 
-If a cloud storage (S3) service is not used, the network connectivity is good, and the network latency is low, you can use the following method to migrate data from MySQL to TiDB.
+クラウドストレージ（S3）サービスが使用されておらず、ネットワーク接続が良好で、ネットワークレイテンシが低い場合は、次の方法を使用して、MySQLからTiDBにデータを移行できます。
 
-- [Migrate MySQL of Small Datasets to TiDB](/migrate-small-mysql-to-tidb.md)
+-   [小さなデータセットのMySQLをTiDBに移行する](/migrate-small-mysql-to-tidb.md)
 
-If you have a high demand on migration speed, or if the data size is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly import data. Then, you can use DM to replicate incremental data (binlog) based on your application needs.
+移行速度に対する要求が高い場合、またはデータサイズが大きい場合（たとえば、1 TiBより大きい場合）、移行期間中に他のアプリケーションがTiDBに書き込むことを許可しない場合は、TiDBLightningを使用してすばやく実行できます。データをインポートします。次に、DMを使用して、アプリケーションのニーズに基づいて増分データ（binlog）を複製できます。
 
-[Migrate MySQL of Large Datasets to TiDB](/migrate-large-mysql-to-tidb.md)
+[大規模なデータセットのMySQLをTiDBに移行する](/migrate-large-mysql-to-tidb.md)
 
-## Migrate and merge MySQL shards into TiDB
+## MySQLシャードをTiDBに移行およびマージします {#migrate-and-merge-mysql-shards-into-tidb}
 
-Suppose that your application uses MySQL shards for data storage, and you need to migrate these shards into TiDB as one table. In this case, you can use DM to perform the shard merge and migration.
+アプリケーションがデータストレージにMySQLシャードを使用しており、これらのシャードを1つのテーブルとしてTiDBに移行する必要があるとします。この場合、DMを使用してシャードのマージと移行を実行できます。
 
-- [Migrate and Merge MySQL Shards of Small Datasets to TiDB](/migrate-small-mysql-shards-to-tidb.md)
+-   [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
 
-If the data size of the sharded tables is large (for example, larger than 1 TiB), and you do not allow other applications to write to TiDB during the migration period, you can use TiDB Lightning to quickly merge and import the sharded tables. Then, you can use DM to replicate incremental sharding data (binlog) based on your application needs.
+シャードテーブルのデータサイズが大きく（たとえば、1 TiBより大きい）、移行期間中に他のアプリケーションがTiDBに書き込むことを許可しない場合は、TiDBLightningを使用してシャードテーブルをすばやくマージおよびインポートできます。次に、DMを使用して、アプリケーションのニーズに基づいて増分シャーディングデータ（binlog）を複製できます。
 
-- [Migrate and Merge MySQL Shards of Large Datasets to TiDB](/migrate-large-mysql-shards-to-tidb.md)
+-   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-## More advanced migration solutions
+## より高度な移行ソリューション {#more-advanced-migration-solutions}
 
-The following features can improve the migration process and meet more needs in your application.
+次の機能は、移行プロセスを改善し、アプリケーションのより多くのニーズを満たすことができます。
 
-- [Continuous Replication from Databases that Use gh-ost or pt-osc](/migrate-with-pt-ghost.md)
-- [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md)
-- [Filter Binlog Events](/filter-binlog-event.md)
-- [Filter DML Events Using SQL Expressions](/filter-dml-event.md)
+-   [gh-ostまたはpt-oscを使用するデータベースからの継続的なレプリケーション](/migrate-with-pt-ghost.md)
+-   [より多くの列を持つダウンストリームTiDBテーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
+-   [Binlogイベントをフィルタリングする](/filter-binlog-event.md)
+-   [SQL式を使用してDMLイベントをフィルタリングする](/filter-dml-event.md)

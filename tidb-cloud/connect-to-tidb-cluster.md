@@ -3,83 +3,85 @@ title: Connect to Your TiDB Cluster
 summary: Connect to your TiDB cluster via a SQL client or SQL shell.
 ---
 
-# Connect to Your TiDB Cluster
+# TiDBクラスターに接続する {#connect-to-your-tidb-cluster}
 
-After your TiDB cluster is created on TiDB Cloud, you can use one of the following three methods to connect to your TiDB cluster. You can access your cluster via a SQL client, or quickly via SQL Shell in the TiDB Cloud Console.
+TiDBクラスタがTiDBクラウド上に作成されたら、次の3つの方法のいずれかを使用してTiDBクラスタに接続できます。 SQLクライアントを介して、またはTiDBクラウドコンソールのSQLシェルを介してクラスタにすばやくアクセスできます。
 
-+ Connect via a SQL client
+-   SQLクライアントを介して接続する
 
-    - [Connect via standard connection](#connect-via-standard-connection): The standard connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster from your laptop.
-    - [Connect via VPC peering](#connect-via-vpc-peering): If you want lower latency and more security, set up VPC peering and connect via a private endpoint using a VM instance on the corresponding cloud provider in your cloud account. Note that you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
+    -   [標準接続で接続する](#connect-via-standard-connection) ：標準接続では、トラフィックフィルターを使用してパブリックエンドポイントが公開されるため、ラップトップからTiDBクラスタに接続できます。
+    -   [VPCピアリングを介して接続する](#connect-via-vpc-peering) ：レイテンシーを下げてセキュリティを強化したい場合は、VPCピアリングを設定し、クラウドアカウントの対応するクラウドプロバイダーのVMインスタンスを使用してプライベートエンドポイント経由で接続します。 VPCピアリングを使用して[開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に接続することはできないことに注意してください。
 
-- [Connect via SQL shell](#connect-via-sql-shell): to try TiDB SQL and test out TiDB's compatibility with MySQL quickly, or administer user privileges
+<!---->
 
-## Connect via standard connection
+-   [SQLシェルを介して接続する](#connect-via-sql-shell) ：TiDB SQLを試して、TiDBとMySQLの互換性をすばやくテストするか、ユーザー権限を管理します
 
-To connect to your TiDB cluster via standard connection, perform the following steps:
+## 標準接続で接続する {#connect-via-standard-connection}
 
-1. Navigate to the **TiDB Cluster** page and click the name of your newly created cluster.
+標準接続を介してTiDBクラスタに接続するには、次の手順を実行します。
 
-2. Click **Connect**. The **Connect to TiDB** dialog displays.
+1.  [ **TiDBクラスター**]ページに移動し、新しく作成したクラスタの名前をクリックします。
 
-3. Create the traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via SQL client.
+2.  [**接続]**をクリックします。 [ <strong>TiDBに接続</strong>]ダイアログが表示されます。
 
-    If it is the first time that you connect to the cluster, the traffic filter is empty by default. Perform the following sub-steps to add one. If the traffic filter is already set, skip this step.
+3.  クラスタのトラフィックフィルタを作成します。トラフィックフィルターは、SQLクライアントを介してTiDBクラウドにアクセスできるIPとCIDRアドレスのリストです。
 
-    1. Click one of the buttons to add some rules quickly.
+    クラスタに初めて接続する場合、トラフィックフィルタはデフォルトで空です。次のサブステップを実行して追加します。トラフィックフィルタがすでに設定されている場合は、この手順をスキップしてください。
 
-        - **Add Your Current IP Address**
-        - **Add Rules from Default Set**
-        - **Allow Access from Anywhere**
+    1.  ボタンの1つをクリックして、いくつかのルールをすばやく追加します。
 
-    2. Provide an optional description for the newly added IP address or CIDR range.
+        -   **現在のIPアドレスを追加する**
+        -   **デフォルトセットからルールを追加**
+        -   **どこからでもアクセスを許可する**
 
-    3. Click **Create Filter** to confirm the changes.
+    2.  新しく追加されたIPアドレスまたはCIDR範囲のオプションの説明を提供します。
 
-4. Use a SQL client to connect to TiDB.
+    3.  [**フィルターの作成]**をクリックして、変更を確認します。
 
-    {{< copyable "shell" >}}
+4.  SQLクライアントを使用してTiDBに接続します。
+
+    {{< copyable "" >}}
 
     ```shell
     mysql -u root -h <endpoint> -P <port number> -p
     ```
 
-## Connect via VPC peering
+## VPCピアリングを介して接続する {#connect-via-vpc-peering}
 
-> **Note:**
+> **ノート：**
 >
-> This method does not work for Developer Tier clusters because you cannot connect to [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) using VPC peering.
+> VPCピアリングを使用して[開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に接続できないため、この方法は開発者層クラスターでは機能しません。
 
-To connect to your TiDB cluster via VPC peering, perform the following steps:
+VPCピアリングを介してTiDBクラスタに接続するには、次の手順を実行します。
 
-1. Navigate to the **TiDB Cluster** page and click the name of your newly created cluster.
+1.  [ **TiDBクラスター**]ページに移動し、新しく作成したクラスタの名前をクリックします。
 
-2. Click **Connect**, and select the **VPC Peering** tab at the **Connect to TiDB** dialog.
+2.  [**接続**]をクリックし、[ <strong>TiDBに接続</strong>]ダイアログで[ <strong>VPCピアリング</strong>]タブを選択します。
 
-3. Set up VPC peering. See [Set up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+3.  VPCピアリングを設定します。詳細については、 [VPCピアリングを設定する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
-4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
+4.  [**エンドポイントの取得]**をクリックして、数分待ちます。次に、接続コマンドがダイアログに表示されます。
 
-5. Use a SQL client to connect to TiDB from your server which has set up VPC peering with TiDB Cloud.
+5.  SQLクライアントを使用して、TiDBクラウドとのVPCピアリングを設定したサーバーからTiDBに接続します。
 
-    {{< copyable "shell" >}}
+    {{< copyable "" >}}
 
     ```shell
     mysql -u root -h <endpoint> -P <port number> -p
     ```
 
-## Connect via SQL Shell
+## SQLシェル経由で接続 {#connect-via-sql-shell}
 
-To connect to your TiDB cluster using SQL shell, perform the following steps:
+SQLシェルを使用してTiDBクラスタに接続するには、次の手順を実行します。
 
-1. Navigate to the **TiDB Cluster** page and click the name of your newly created cluster.
+1.  [ **TiDBクラスター**]ページに移動し、新しく作成したクラスタの名前をクリックします。
 
-2. Click **Connect**, and select the **Web SQL Shell** tab at the **Connect to TiDB** dialog.
+2.  [**接続**]をクリックし、[TiDBに<strong>接続]ダイアログで[WebSQL</strong><strong>シェル</strong>]タブを選択します。
 
-3. Click **Open SQL Shell**.
+3.  [ **SQLシェルを開く]**をクリックします。
 
-4. On the prompted **TiDB password** line, enter the root password of the current cluster. Then your application is connected to the TiDB cluster.
+4.  プロンプトが表示された**TiDBパスワード**行で、現在のクラスタのルートパスワードを入力します。次に、アプリケーションをTiDBクラスタに接続します。
 
-## What's next
+## 次は何ですか {#what-s-next}
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](https://docs.pingcap.com/tidb/stable/basic-sql-operations).
+TiDBクラスタに正常に接続した後、次のことができます[TiDBを使用してSQLステートメントを調べる](https://docs.pingcap.com/tidb/stable/basic-sql-operations) 。

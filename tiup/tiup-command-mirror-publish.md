@@ -2,84 +2,86 @@
 title: tiup mirror publish
 ---
 
-# tiup mirror publish
+# tiupミラー公開 {#tiup-mirror-publish}
 
-The command `tiup mirror publish` is used to publish a new component or a new version of an existing component. Only component owner that has the access to the target component can publish it. To add a new component owner, see the usage of the [`grant` command](/tiup/tiup-command-mirror-grant.md).
+コマンド`tiup mirror publish`は、新しいコンポーネントまたは既存のコンポーネントの新しいバージョンを公開するために使用されます。ターゲットコンポーネントにアクセスできるコンポーネント所有者のみがそれを公開できます。新しいコンポーネント所有者を追加するには、 [`grant`コマンド](/tiup/tiup-command-mirror-grant.md)の使用法を参照してください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 ```
 
-The meaning of each parameter is as follows:
+各パラメーターの意味は次のとおりです。
 
-- `<comp-name>`: The name of the components, such as `tidb`. It is recommended to use a string that matches the regular expression `^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`.
-- `<version>`: The version of the component to be published. The version number needs to follow the requirements of [Semantic Versioning](https://semver.org/).
-- `<tarball>`: The local directory of the `.tar.gz` package. You need to put dependencies and the executable file of the component in this package. TiUP uploads this package to the mirror.
-- `<entry>`: The location of the component's executable file in `<tarball>`.
+-   `<comp-name>` ： `tidb`などのコンポーネントの名前。正規表現`^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`に一致する文字列を使用することをお勧めします。
+-   `<version>` ：公開するコンポーネントのバージョン。バージョン番号は、 [セマンティックバージョニング](https://semver.org/)の要件に従う必要があります。
+-   `<tarball>` ： `.tar.gz`パッケージのローカルディレクトリ。コンポーネントの依存関係と実行可能ファイルをこのパッケージに入れる必要があります。 TiUPはこのパッケージをミラーにアップロードします。
+-   `<entry>` ： `<tarball>`内のコンポーネントの実行可能ファイルの場所。
 
-## Options
+## オプション {#options}
 
-### -k, --key
+### -k、-key {#k-key}
 
-- Specifies the component owner's private key. The client uses the private key to sign `{component}.json` files.
-- Data type: `STRING`
-- Default: "${TIUP_HOME}/keys/private.json"
+-   コンポーネント所有者の秘密鍵を指定します。クライアントは秘密鍵を使用して`{component}.json`のファイルに署名します。
+-   データ型： `STRING`
+-   デフォルト：「${TIUP_HOME}/keys/private.json」
 
-### --arch
+### - アーチ {#arch}
 
-- Specifies the platform on which the binary files in `<tarball>` can run. For a single `<tarball>` package, you can only choose the platform from the following options:
+-   `<tarball>`のバイナリファイルを実行できるプラットフォームを指定します。単一の`<tarball>`パッケージの場合、プラットフォームは次のオプションからのみ選択できます。
 
-    - `amd64`: Indicates that the files run on AMD64 machines.
-    - `arm64`: Indicates that the files run on ARM64 machines.
-    - `any`: Indicates that the files, such as scripts, run on both AMD64 and ARM64 machines.
+    -   `amd64` ：ファイルがAMD64マシンで実行されていることを示します。
+    -   `arm64` ：ファイルがARM64マシンで実行されていることを示します。
+    -   `any` ：スクリプトなどのファイルがAMD64マシンとARM64マシンの両方で実行されることを示します。
 
-- Data type: `STRING`
-- Default: "${GOARCH}"
+-   データ型： `STRING`
 
-> **Note:**
+-   デフォルト： &quot;$ {GOARCH}&quot;
+
+> **ノート：**
 >
-> If `--arch` is set to `any`, then `--os` must be set to `any` as well.
+> `--arch`が`any`に設定されている場合、 `--os`も`any`に設定する必要があります。
 
-### --os
+### --os {#os}
 
-- Specifies the operating system on which the binary files in `<tarball>` can run. For a single `<tarball>` package, you can only choose the operating system from the following options:
+-   `<tarball>`のバイナリファイルを実行できるオペレーティングシステムを指定します。単一の`<tarball>`パッケージの場合、オペレーティングシステムは次のオプションからのみ選択できます。
 
-    - `linux`: Indicates that the files run on the Linux operating system.
-    - `darwin`: Indicates that the files run on the Darwin operating system.
-    - `any`: Indicates that the files, such as scripts, run on both the Linux and Darwin operating systems.
+    -   `linux` ：ファイルがLinuxオペレーティングシステムで実行されていることを示します。
+    -   `darwin` ：ファイルがDarwinオペレーティングシステムで実行されていることを示します。
+    -   `any` ：スクリプトなどのファイルがLinuxとDarwinの両方のオペレーティングシステムで実行されていることを示します。
 
-- Data type: `STRING`
-- Default: "${GOOS}"
+-   データ型： `STRING`
 
-> **Note:**
+-   デフォルト：「${GOOS}」
+
+> **ノート：**
 >
-> If `--os` is set to `any`, then `--arch` must be set to `any` as well.
+> `--os`が`any`に設定されている場合、 `--arch`も`any`に設定する必要があります。
 
-### --desc
+### --desc {#desc}
 
-- Specifies the description of the component.
-- Data type: `String`
-- Default: NULL
+-   コンポーネントの説明を指定します。
+-   データ型： `String`
+-   デフォルト：NULL
 
-### --hide
+### - 隠れる {#hide}
 
-- Specifies whether the component is hidden. If it is a hidden component, it can be seen in the result list of `tiup list -all`, but not in that of `tiup list`.
-- Data type: `STRING`
-- Default: NULL
+-   コンポーネントを非表示にするかどうかを指定します。非表示のコンポーネントの場合、 `tiup list -all`の結果リストには表示されますが、 `tiup list`の結果リストには表示されません。
+-   データ型： `STRING`
+-   デフォルト：NULL
 
-### --standalone
+### -スタンドアロン {#standalone}
 
-- Controls whether the component can run standalone. This option is currently **NOT available**.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   コンポーネントをスタンドアロンで実行できるかどうかを制御します。このオプションは現在**利用できません**。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-- If the command is executed successfully, there is no output.
-- If the component owner is not authorized to modify the target component:
-    - If the mirror is a remote mirror, TiUP reports the error `Error: The server refused, make sure you have access to this component`.
-    - If the mirror is a local mirror, TiUP reports the error `Error: the signature is not correct`.
+-   コマンドが正常に実行された場合、出力はありません。
+-   コンポーネントの所有者がターゲットコンポーネントを変更する権限を持っていない場合：
+    -   ミラーがリモートミラーの場合、TiUPはエラー`Error: The server refused, make sure you have access to this component`を報告します。
+    -   ミラーがローカルミラーの場合、TiUPはエラー`Error: the signature is not correct`を報告します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

@@ -3,72 +3,72 @@ title: TiDB Optimistic Transaction Model
 summary: Learn the optimistic transaction model in TiDB.
 ---
 
-# TiDB Optimistic Transaction Model
+# TiDBオプティミスティックトランザクションモデル {#tidb-optimistic-transaction-model}
 
-With optimistic transactions, conflicting changes are detected as part of a transaction commit. This helps improve the performance when concurrent transactions are infrequently modifying the same rows, because the process of acquiring row locks can be skipped. In the case that concurrent transactions frequently modify the same rows (a conflict), optimistic transactions may perform worse than [Pessimistic Transactions](/pessimistic-transaction.md).
+楽観的なトランザクションでは、競合する変更がトランザクションコミットの一部として検出されます。これにより、行ロックを取得するプロセスをスキップできるため、同時トランザクションが同じ行を頻繁に変更しない場合のパフォーマンスが向上します。並行トランザクションが同じ行を頻繁に変更する場合（競合）、楽観的なトランザクションは[悲観的なトランザクション](/pessimistic-transaction.md)よりもパフォーマンスが低下する可能性があります。
 
-Before enabling optimistic transactions, make sure that your application correctly handles that a `COMMIT` statement could return errors. If you are unsure of how your application handles this, it is recommended to instead use Pessimistic Transactions.
+楽観的なトランザクションを有効にする前に、アプリケーションが`COMMIT`ステートメントがエラーを返す可能性があることを正しく処理することを確認してください。アプリケーションがこれをどのように処理するかわからない場合は、代わりにペシミスティックトランザクションを使用することをお勧めします。
 
-> **Note:**
+> **ノート：**
 >
-> Starting from v3.0.8, TiDB uses the [pessimistic transaction mode](/pessimistic-transaction.md) by default. However, this does not affect your existing cluster if you upgrade it from v3.0.7 or earlier to v3.0.8 or later. In other words, **only newly created clusters default to using the pessimistic transaction mode**.
+> v3.0.8以降、TiDBはデフォルトで[悲観的なトランザクションモード](/pessimistic-transaction.md)を使用します。ただし、v3.0.7以前からv3.0.8以降にアップグレードした場合、これは既存のクラスタには影響しません。つまり、**新しく作成されたクラスターのみがデフォルトで悲観的トランザクションモードを使用します**。
 
-## Principles of optimistic transactions
+## 楽観的な取引の原則 {#principles-of-optimistic-transactions}
 
-To support distributed transactions, TiDB adopts two-phase commit (2PC) in optimistic transactions. The procedure is as follows:
+分散トランザクションをサポートするために、TiDBは楽観的なトランザクションで2フェーズコミット（2PC）を採用しています。手順は次のとおりです。
 
 ![2PC in TiDB](/media/2pc-in-tidb.png)
 
-1. The client begins a transaction.
+1.  クライアントがトランザクションを開始します。
 
-    TiDB gets a timestamp (monotonically increasing in time and globally unique) from PD as the unique transaction ID of the current transaction, which is called `start_ts`. TiDB implements multi-version concurrency control, so `start_ts` also serves as the version of the database snapshot obtained by this transaction. This means that the transaction can only read the data from the database at `start_ts`.
+    TiDBは、PDからタイムスタンプ（時間的に単調に増加し、グローバルに一意）を現在のトランザクションの一意のトランザクションIDとして取得します。これは`start_ts`と呼ばれます。 TiDBはマルチバージョン同時実行制御を実装しているため、 `start_ts`はこのトランザクションによって取得されるデータベーススナップショットのバージョンとしても機能します。これは、トランザクションがデータベースからデータを読み取ることができるのは`start_ts`時のみであることを意味します。
 
-2. The client issues a read request.
+2.  クライアントは読み取り要求を発行します。
 
-    1. TiDB receives routing information (how data is distributed among TiKV nodes) from PD.
-    2. TiDB receives the data of the `start_ts` version from TiKV.
+    1.  TiDBは、PDからルーティング情報（TiKVノード間でデータがどのように分散されるか）を受信します。
+    2.  TiDBは、TiKVから`start_ts`バージョンのデータを受信します。
 
-3. The client issues a write request.
+3.  クライアントは書き込み要求を発行します。
 
-    TiDB checks whether the written data satisfies constraints (to ensure the data types are correct, the NOT NULL constraint is met, etc.). **Valid data is stored in the private memory of this transaction in TiDB**.
+    TiDBは、書き込まれたデータが制約を満たしているかどうかをチェックします（データ型が正しいことを確認するため、NOT NULL制約が満たされていることなど）。**有効なデータは、TiDBのこのトランザクションのプライベートメモリに保存されます**。
 
-4. The client issues a commit request.
+4.  クライアントはコミット要求を発行します。
 
-5. TiDB begins 2PC, and persists data in store while guaranteeing the atomicity of transactions.
+5.  TiDBは2PCを開始し、トランザクションのアトミック性を保証しながらデータをストアに保持します。
 
-    1. TiDB selects a Primary Key from the data to be written.
-    2. TiDB receives the information of Region distribution from PD, and groups all keys by Region accordingly.
-    3. TiDB sends prewrite requests to all TiKV nodes involved. Then, TiKV checks whether there are conflict or expired versions. Valid data is locked.
-    4. TiDB receives all responses in the prewrite phase and the prewrite is successful.
-    5. TiDB receives a commit version number from PD and marks it as `commit_ts`.
-    6. TiDB initiates the second commit to the TiKV node where Primary Key is located. TiKV checks the data, and cleans the locks left in the prewrite phase.
-    7. TiDB receives the message that reports the second phase is successfully finished.
+    1.  TiDBは、書き込まれるデータから主キーを選択します。
+    2.  TiDBはPDから地域分布の情報を受け取り、それに応じて地域ごとにすべてのキーをグループ化します。
+    3.  TiDBは、関係するすべてのTiKVノードに事前書き込み要求を送信します。次に、TiKVは、競合するバージョンまたは期限切れのバージョンがあるかどうかを確認します。有効なデータはロックされています。
+    4.  TiDBはプリライトフェーズですべての応答を受信し、プリライトは成功します。
+    5.  TiDBはPDからコミットバージョン番号を受け取り、それを`commit_ts`としてマークします。
+    6.  TiDBは、主キーが配置されているTiKVノードへの2番目のコミットを開始します。 TiKVはデータをチェックし、プリライトフェーズで残ったロックをクリーンアップします。
+    7.  TiDBは、第2フェーズが正常に終了したことを報告するメッセージを受信します。
 
-6. TiDB returns a message to inform the client that the transaction is successfully committed.
+6.  TiDBは、トランザクションが正常にコミットされたことをクライアントに通知するメッセージを返します。
 
-7. TiDB asynchronously cleans the locks left in this transaction.
+7.  TiDBは、このトランザクションに残っているロックを非同期的にクリーンアップします。
 
-## Advantages and disadvantages
+## 長所と短所 {#advantages-and-disadvantages}
 
-From the process of transactions in TiDB above, it is clear that TiDB transactions have the following advantages:
+上記のTiDBでのトランザクションのプロセスから、TiDBトランザクションには次の利点があることは明らかです。
 
-* Simple to understand
-* Implement cross-node transaction based on single-row transaction
-* Decentralized lock management
+-   わかりやすい
+-   単一行トランザクションに基づくクロスノードトランザクションを実装する
+-   分散型ロック管理
 
-However, TiDB transactions also have the following disadvantages:
+ただし、TiDBトランザクションには次の欠点もあります。
 
-* Transaction latency due to 2PC
-* In need of a centralized timestamp allocation service
-* OOM (out of memory) when extensive data is written in the memory
+-   2PCによるトランザクション遅延
+-   一元化されたタイムスタンプ割り当てサービスが必要
+-   大量のデータがメモリに書き込まれるときのOOM（メモリ不足）
 
-## Transaction retries
+## トランザクションの再試行 {#transaction-retries}
 
-In the optimistic transaction model, transactions might fail to be committed because of write–write conflict in heavy contention scenarios. TiDB uses optimistic concurrency control by default, whereas MySQL applies pessimistic concurrency control. This means that MySQL adds locks during the execution of write-type SQL statements, and its Repeatable Read isolation level allows for current reads, so commits generally do not encounter exceptions. To lower the difficulty of adapting applications, TiDB provides an internal retry mechanism.
+楽観的なトランザクションモデルでは、激しい競合シナリオでの書き込みと書き込みの競合が原因で、トランザクションがコミットされない場合があります。 TiDBはデフォルトで楽観的同時実行制御を使用しますが、MySQLは悲観的同時実行制御を適用します。これは、MySQLが書き込みタイプのSQLステートメントの実行中にロックを追加し、その反復可能読み取り分離レベルで現在の読み取りが可能になるため、通常、コミットで例外が発生しないことを意味します。アプリケーションの適応の難しさを軽減するために、TiDBは内部再試行メカニズムを提供します。
 
-### Automatic retry
+### 自動再試行 {#automatic-retry}
 
-If a write-write conflict occurs during the transaction commit, TiDB automatically retries the SQL statement that includes write operations. You can enable the automatic retry by setting `tidb_disable_txn_auto_retry` to `OFF` and set the retry limit by configuring `tidb_retry_limit`:
+トランザクションのコミット中に書き込みと書き込みの競合が発生した場合、TiDBは書き込み操作を含むSQLステートメントを自動的に再試行します。 `tidb_disable_txn_auto_retry`を`OFF`に設定して自動再試行を有効にし、 `tidb_retry_limit`を設定して再試行制限を設定できます。
 
 ```toml
 # Whether to disable automatic retry. ("on" by default)
@@ -78,67 +78,67 @@ tidb_disable_txn_auto_retry = OFF
 tidb_retry_limit = 10
 ```
 
-You can enable the automatic retry in either session level or global level:
+自動再試行は、セッションレベルまたはグローバルレベルのいずれかで有効にできます。
 
-1. Session level:
+1.  セッションレベル：
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET tidb_disable_txn_auto_retry = OFF;
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET tidb_retry_limit = 10;
     ```
 
-2. Global level:
+2.  グローバルレベル：
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET GLOBAL tidb_disable_txn_auto_retry = OFF;
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET GLOBAL tidb_retry_limit = 10;
     ```
 
-> **Note:**
+> **ノート：**
 >
-> The `tidb_retry_limit` variable decides the maximum number of retries. When this variable is set to `0`, none of the transactions automatically retries, including the implicit single statement transactions that are automatically committed. This is the way to completely disable the automatic retry mechanism in TiDB. After the automatic retry is disabled, all conflicting transactions report failures (including the `try again later` message) to the application layer in the fastest way.
+> `tidb_retry_limit`変数は、再試行の最大数を決定します。この変数が`0`に設定されている場合、自動的にコミットされる暗黙の単一ステートメントトランザクションを含め、どのトランザクションも自動的に再試行されません。これは、TiDBの自動再試行メカニズムを完全に無効にする方法です。自動再試行が無効にされた後、競合するすべてのトランザクションは、最も速い方法でアプリケーション層に失敗（ `try again later`メッセージを含む）を報告します。
 
-### Limits of retry
+### 再試行の制限 {#limits-of-retry}
 
-By default, TiDB will not retry transactions because this might lead to lost updates and damaged [`REPEATABLE READ` isolation](/transaction-isolation-levels.md).
+デフォルトでは、TiDBはトランザクションを再試行しません。これは、更新が失われたり[`REPEATABLE READ`分離](/transaction-isolation-levels.md)が破損したりする可能性があるためです。
 
-The reason can be observed from the procedures of retry:
+その理由は、再試行の手順から確認できます。
 
-1. Allocate a new timestamp and mark it as `start_ts`.
-2. Retry the SQL statements that contain write operations.
-3. Implement the two-phase commit.
+1.  新しいタイムスタンプを割り当て、 `start_ts`としてマークします。
+2.  書き込み操作を含むSQLステートメントを再試行してください。
+3.  2フェーズコミットを実装します。
 
-In Step 2, TiDB only retries SQL statements that contain write operations. However, during retrying, TiDB receives a new version number to mark the beginning of the transaction. This means that TiDB retries SQL statements with the data in the new `start_ts` version. In this case, if the transaction updates data using other query results, the results might be inconsistent because the `REPEATABLE READ` isolation is violated.
+ステップ2では、TiDBは書き込み操作を含むSQLステートメントのみを再試行します。ただし、再試行中に、TiDBはトランザクションの開始を示す新しいバージョン番号を受け取ります。これは、TiDBが新しい`start_ts`バージョンのデータを使用してSQLステートメントを再試行することを意味します。この場合、トランザクションが他のクエリ結果を使用してデータを更新すると、 `REPEATABLE READ`の分離に違反するため、結果に一貫性がなくなる可能性があります。
 
-If your application can tolerate lost updates, and does not require `REPEATABLE READ` isolation consistency, you can enable this feature by setting `tidb_disable_txn_auto_retry = OFF`.
+アプリケーションが失われた更新を許容でき、 `REPEATABLE READ`の分離整合性を必要としない場合は、 `tidb_disable_txn_auto_retry = OFF`を設定することでこの機能を有効にできます。
 
-## Conflict detection
+## 競合の検出 {#conflict-detection}
 
-As a distributed database, TiDB performs in-memory conflict detection in the TiKV layer, mainly in the prewrite phase. TiDB instances are stateless and unaware of each other, which means they cannot know whether their writes result in conflicts across the cluster. Therefore, conflict detection is performed in the TiKV layer.
+分散データベースとして、TiDBは、主にプリライトフェーズで、TiKVレイヤーでメモリ内の競合検出を実行します。 TiDBインスタンスはステートレスであり、相互に認識していません。つまり、書き込みによってクラスタ全体で競合が発生するかどうかを知ることはできません。したがって、競合検出はTiKV層で実行されます。
 
-The configuration is as follows:
+構成は次のとおりです。
 
 ```toml
 # Controls the number of slots. ("2048000" by default）
 scheduler-concurrency = 2048000
 ```
 
-In addition, TiKV supports monitoring the time spent on waiting latches in the scheduler.
+さらに、TiKVは、スケジューラーでラッチを待機するために費やされる時間の監視をサポートします。
 
 ![Scheduler latch wait duration](/media/optimistic-transaction-metric.png)
 
-When `Scheduler latch wait duration` is high and there are no slow writes, it can be safely concluded that there are many write conflicts at this time.
+`Scheduler latch wait duration`が高く、書き込みが遅い場合は、現時点で書き込みの競合が多いと安全に判断できます。

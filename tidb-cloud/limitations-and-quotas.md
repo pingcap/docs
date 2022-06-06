@@ -3,28 +3,28 @@ title: Limitations and Quotas in TiDB Cloud
 summary: Learn the limitations and quotas in TiDB Cloud.
 ---
 
-# Limitations and Quotas in TiDB Cloud
+# TiDBクラウドの制限と割り当て {#limitations-and-quotas-in-tidb-cloud}
 
-TiDB Cloud limits how many of each kind of component you can create, and the common usage limitations of TiDB. In addition, there are some organization-level quotas to limit the amount of resources created by users to prevent from creating more resources than you actually need. These tables outline limits and quotas.
+TiDB Cloudは、作成できる各種類のコンポーネントの数と、TiDBの一般的な使用制限を制限します。さらに、実際に必要な数よりも多くのリソースが作成されないように、ユーザーが作成するリソースの量を制限するための組織レベルの割り当てがいくつかあります。これらの表は、制限と割り当ての概要を示しています。
 
-> **Note:**
+> **ノート：**
 >
-> If any of these limits or quotas present a problem for your organization, please contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+> これらの制限または割り当てのいずれかが組織に問題をもたらす場合は、 [TiDBクラウドのサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してください。
 
-## Cluster Limits
+## クラスターの制限 {#cluster-limits}
 
-| Component | Limit |
-|:-|:-|
-| Number of data replicas | 3 |
-| Number of Availability Zones for a cross-zone deployment | 3 |
+| 成分                      | 制限 |
+| :---------------------- | :- |
+| データレプリカの数               | 3  |
+| クロスゾーン展開のアベイラビリティーゾーンの数 | 3  |
 
-> **Note:**
+> **ノート：**
 >
-> If you want to learn more about common usage limitations of TiDB, please refer to [TiDB Limitations](https://docs.pingcap.com/tidb/stable/tidb-limitations).
+> TiDBの一般的な使用制限について詳しく知りたい場合は、 [TiDBの制限](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## Cluster Quotas
+## クラスタークォータ {#cluster-quotas}
 
-| Component | Quota (default) |
-|:-|:-|
-| Maximum number of total TiDB nodes for all clusters in your organization | 20 |
-| Maximum number of total TiKV nodes for all clusters in your organization | 30 |
+| 成分                          | クォータ（デフォルト） |
+| :-------------------------- | :---------- |
+| 組織内のすべてのクラスターの合計TiDBノードの最大数 | 20          |
+| 組織内のすべてのクラスターの合計TiKVノードの最大数 | 30          |

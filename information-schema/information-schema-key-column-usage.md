@@ -3,11 +3,11 @@ title: KEY_COLUMN_USAGE
 summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
 ---
 
-# KEY_COLUMN_USAGE
+# KEY_COLUMN_USAGE {#key-column-usage}
 
-The `KEY_COLUMN_USAGE` table describes the key constraints of the columns, such as the primary key constraint.
+`KEY_COLUMN_USAGE`の表は、主キー制約などの列のキー制約を示しています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -34,7 +34,7 @@ DESC key_column_usage;
 12 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM key_column_usage WHERE table_schema='mysql' and table_name='user';
@@ -70,17 +70,17 @@ POSITION_IN_UNIQUE_CONSTRAINT: NULL
 2 rows in set (0.00 sec)
 ```
 
-The description of columns in the `KEY_COLUMN_USAGE` table is as follows:
+`KEY_COLUMN_USAGE`テーブルの列の説明は次のとおりです。
 
-* `CONSTRAINT_CATALOG`: The name of the catalog to which the constraint belongs. The value is always `def`.
-* `CONSTRAINT_SCHEMA`: The name of the schema to which the constraint belongs.
-* `CONSTRAINT_NAME`: The name of the constraint.
-* `TABLE_CATALOG`: The name of the catalog to which the table belongs. The value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema to which the table belongs.
-* `TABLE_NAME`: The name of the table with constraints.
-* `COLUMN_NAME`: The name of the column with constraints.
-* `ORDINAL_POSITION`: The position of the column in the constraint, rather than in the table. The position number starts from `1`.
-* `POSITION_IN_UNIQUE_CONSTRAINT`: The unique constraint and the primary key constraint are empty. For foreign key constraints, this column is the position of the referenced table's key.
-* `REFERENCED_TABLE_SCHEMA`: The name of the schema referenced by the constraint. Currently in TiDB, the value of this column in all constraints is `nil`, except for the foreign key constraint.
-* `REFERENCED_TABLE_NAME`: The name of the table referenced by the constraint. Currently in TiDB, the value of this column in all constraints is `nil`, except for the foreign key constraint.
-* `REFERENCED_COLUMN_NAME`: The name of the column referenced by the constraint. Currently in TiDB, the value of this column in all constraints is `nil`, except for the foreign key constraint.
+-   `CONSTRAINT_CATALOG` ：制約が属するカタログの名前。値は常に`def`です。
+-   `CONSTRAINT_SCHEMA` ：制約が属するスキーマの名前。
+-   `CONSTRAINT_NAME` ：制約の名前。
+-   `TABLE_CATALOG` ：テーブルが属するカタログの名前。値は常に`def`です。
+-   `TABLE_SCHEMA` ：テーブルが属するスキーマの名前。
+-   `TABLE_NAME` ：制約のあるテーブルの名前。
+-   `COLUMN_NAME` ：制約のある列の名前。
+-   `ORDINAL_POSITION` ：テーブルではなく、制約内の列の位置。ポジション番号は`1`から始まります。
+-   `POSITION_IN_UNIQUE_CONSTRAINT` ：一意性制約と主キー制約は空です。外部キー制約の場合、この列は参照されるテーブルのキーの位置です。
+-   `REFERENCED_TABLE_SCHEMA` ：制約によって参照されるスキーマの名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。
+-   `REFERENCED_TABLE_NAME` ：制約によって参照されるテーブルの名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。
+-   `REFERENCED_COLUMN_NAME` ：制約によって参照される列の名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。

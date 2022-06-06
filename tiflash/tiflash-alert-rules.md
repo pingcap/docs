@@ -3,66 +3,66 @@ title: TiFlash Alert Rules
 summary: Learn the alert rules of the TiFlash cluster.
 ---
 
-# TiFlash Alert Rules
+# TiFlashアラートルール {#tiflash-alert-rules}
 
-This document introduces the alert rules of the TiFlash cluster.
+このドキュメントでは、TiFlashクラスタのアラートルールを紹介します。
 
-## `TiFlash_schema_error`
+## <code>TiFlash_schema_error</code> {#code-tiflash-schema-error-code}
 
-- Alert rule:
+-   アラートルール：
 
     `increase(tiflash_schema_apply_count{type="failed"}[15m]) > 0`
 
-- Description:
+-   説明：
 
-    When the schema apply error occurs, an alert is triggered.
+    スキーマ適用エラーが発生すると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    The error might be caused by some wrong logic. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
+    エラーは、いくつかの間違ったロジックが原因である可能性があります。サポートについては[TiFlash R＆D](mailto:support@pingcap.com)にお問い合わせください。
 
-## `TiFlash_schema_apply_duration`
+## <code>TiFlash_schema_apply_duration</code> {#code-tiflash-schema-apply-duration-code}
 
-- Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tiflash_schema_apply_duration_seconds_bucket[1m])) BY (le, instance)) > 20`
 
-- Description:
+-   説明：
 
-    When the probability that the apply duration exceeds 20 seconds is over 99%, an alert is triggered.
+    適用期間が20秒を超える確率が99％を超えると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    It might be caused by the internal problems of the TiFlash storage engine. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
+    TiFlashストレージエンジンの内部の問題が原因である可能性があります。サポートについては[TiFlash R＆D](mailto:support@pingcap.com)にお問い合わせください。
 
-## `TiFlash_raft_read_index_duration`
+## <code>TiFlash_raft_read_index_duration</code> {#code-tiflash-raft-read-index-duration-code}
 
-- Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tiflash_raft_read_index_duration_seconds_bucket[1m])) BY (le, instance)) > 3`
 
-- Description:
+-   説明：
 
-    When the probability that the read index duration exceeds 3 seconds is over 99%, an alert is triggered.
+    読み取りインデックス期間が3秒を超える確率が99％を超えると、アラートがトリガーされます。
 
-    > **Note:**
+    > **ノート：**
     >
-    > `read index` is the kvproto request sent to the TiKV leader. TiKV region retries, busy store, or network problems might lead to long request time of `read index`.
+    > `read index`は、TiKVリーダーに送信されるkvproto要求です。 TiKVリージョンの再試行、ビジーストア、またはネットワークの問題により、要求時間が`read index`に長くなる可能性があります。
 
-- Solution:
+-   解決：
 
-    The frequent retries might be caused by frequent splitting or migration of the TiKV cluster. You can check the TiKV cluster status to identify the retry reason.
+    頻繁な再試行は、TiKVクラスタの頻繁な分割または移行が原因である可能性があります。 TiKVクラスタのステータスを確認して、再試行の理由を特定できます。
 
-## `TiFlash_raft_wait_index_duration`
+## <code>TiFlash_raft_wait_index_duration</code> {#code-tiflash-raft-wait-index-duration-code}
 
-- Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tiflash_raft_wait_index_duration_seconds_bucket[1m])) BY (le, instance)) > 2`
 
-- Description:
+-   説明：
 
-    When the probability that the waiting time for Region Raft Index in TiFlash exceeds 2 seconds is over 99%, an alert is triggered.
+    TiFlashのRegionRaftIndexの待機時間が2秒を超える確率が99％を超えると、アラートがトリガーされます。
 
-- Solution:
+-   解決：
 
-    It might be caused by a communication error between TiKV and the proxy. Contact [TiFlash R&D](mailto:support@pingcap.com) for support.
+    TiKVとプロキシ間の通信エラーが原因である可能性があります。サポートについては[TiFlash R＆D](mailto:support@pingcap.com)にお問い合わせください。

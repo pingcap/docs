@@ -3,15 +3,15 @@ title: EXPLAIN | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN for the TiDB database.
 ---
 
-# `EXPLAIN`
+# <code>EXPLAIN</code> {#code-explain-code}
 
-The `EXPLAIN` statement shows the execution plan for a query without executing it. It is complimented by `EXPLAIN ANALYZE` which will execute the query. If the output of `EXPLAIN` does not match the expected result, consider executing `ANALYZE TABLE` on each table in the query.
+`EXPLAIN`ステートメントは、クエリを実行せずに実行するための実行プランを示しています。クエリを実行する`EXPLAIN ANALYZE`によって補完されます。 `EXPLAIN`の出力が期待される結果と一致しない場合は、クエリの各テーブルで`ANALYZE TABLE`を実行することを検討してください。
 
-The statements `DESC` and `DESCRIBE` are aliases of this statement. The alternative usage of `EXPLAIN <tableName>` is documented under [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md).
+ステートメント`DESC`と`DESCRIBE`は、このステートメントのエイリアスです。 `EXPLAIN <tableName>`の代替使用法は、 [`SHOW [FULL] COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)に記載されています。
 
-TiDB supports the `EXPLAIN [options] FOR CONNECTION connection_id` statement. However, this statement is different from the `EXPLAIN FOR` statement in MySQL. For more details, see [`EXPLAIN FOR CONNECTION`](#explain-for-connection).
+TiDBは`EXPLAIN [options] FOR CONNECTION connection_id`ステートメントをサポートします。ただし、このステートメントはMySQLの`EXPLAIN FOR`ステートメントとは異なります。詳細については、 [`EXPLAIN FOR CONNECTION`](#explain-for-connection)を参照してください。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ExplainSym ::=
@@ -31,25 +31,25 @@ ExplainableStmt ::=
 |   UnionStmt
 ```
 
-## `EXPLAIN` output format
+## <code>EXPLAIN</code>出力フォーマット {#code-explain-code-output-format}
 
-> **Note:**
+> **ノート：**
 >
-> When you use the MySQL client to connect to TiDB, to read the output result in a clearer way without line wrapping, you can use the `pager less -S` command. Then, after the `EXPLAIN` result is output, you can press the right arrow <kbd>→</kbd> button on your keyboard to horizontally scroll through the output.
+> MySQLクライアントを使用してTiDBに接続する場合、行を折り返すことなく出力結果をより明確に読み取るために、 `pager less -S`コマンドを使用できます。次に、 `EXPLAIN`の結果が出力されたら、キーボードの右矢印<kbd>→</kbd>ボタンを押して、出力を水平方向にスクロールできます。
 
-Currently, `EXPLAIN` in TiDB outputs 5 columns: `id`, `estRows`, `task`, `access object`, `operator info`. Each operator in the execution plan is described by these attributes, with each row in the `EXPLAIN` output describing an operator. The description of each attribute is as follows:
+現在、 `task`の`EXPLAIN` `operator info`は`estRows`つの列を出力し`access object` ： `id` 。実行プランの各演算子はこれらの属性によって記述され、 `EXPLAIN`出力の各行は演算子を記述します。各属性の説明は次のとおりです。
 
-| Attribute name          | Description |
-|:----------------|:----------------------------------------------------------------------------------------------------------|
-| id            | The operator ID is the unique identifier of the operator in the entire execution plan. In TiDB 2.1, the ID is formatted to display the tree structure of the operator. Data flows from the child node to the parent node. One and only one parent node for each operator. |
-| estRows       | The number of rows that the operator is expected to output. This number is estimated according to the statistics and the operator's logic. `estRows` is called `count` in the earlier versions of TiDB 4.0. |
-| task          | The type of task the operator belongs to. Currently, the execution plans are divided into two tasks: **root** task, which is executed on tidb-server, and **cop** task, which is performed in parallel on TiKV or TiFlash. The topology of the execution plan at the task level is that a root task followed by many cop tasks. The root task uses the output of cop tasks as input. The cop tasks refer to tasks that TiDB pushes down to TiKV or TiFlash. Each cop task is distributed in the TiKV cluster or the TiFlash cluster, and is executed by multiple processes. |
-| access object | Data item information accessed by the operator. The information includes `table`, `partition`, and `index` (if any). Only operators that directly access the data have such information. |
-| operator info | Other information about the operator. `operator info` of each operator is different. You can refer to the following examples. |
+| 属性名        | 説明                                                                                                                                                                                                                                                                                                        |
+| :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | オペレーターIDは、実行プラン全体におけるオペレーターの一意の識別子です。 TiDB 2.1では、IDはオペレーターのツリー構造を表示するようにフォーマットされています。データは子ノードから親ノードに流れます。オペレーターごとに1つだけの親ノード。                                                                                                                                                                              |
+| estRows    | オペレーターが出力することが期待される行数。この数は、統計とオペレーターのロジックに従って推定されます。以前のバージョンのTiDB4.0では`estRows`は`count`と呼ばれていました。                                                                                                                                                                                                         |
+| 仕事         | オペレーターが属するタスクのタイプ。現在、実行計画は、tidb-serverで実行される**root**タスクと、TiKVまたはTiFlashで並行して実行される<strong>cop</strong>タスクの2つのタスクに分割されています。タスクレベルでの実行プランのトポロジは、ルートタスクの後に多くの警官タスクが続くというものです。ルートタスクは、copタスクの出力を入力として使用します。警官タスクは、TiDBがTiKVまたはTiFlashにプッシュダウンするタスクを指します。各警官タスクは、TiKVクラスタまたはTiFlashクラスタに分散され、複数のプロセスによって実行されます。 |
+| アクセスオブジェクト | オペレーターがアクセスするデータ項目情報。情報には、 `table` 、および`partition` （存在する場合）が含まれ`index` 。データに直接アクセスするオペレーターだけがそのような情報を持っています。                                                                                                                                                                                              |
+| オペレーター情報   | オペレーターに関するその他の情報。各オペレーターの`operator info`つは異なります。以下の例を参照してください。                                                                                                                                                                                                                                            |
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT 1;
@@ -65,7 +65,7 @@ EXPLAIN SELECT 1;
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -75,7 +75,7 @@ CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t1 (c1) VALUES (1), (2), (3);
@@ -86,7 +86,7 @@ Query OK, 3 rows affected (0.02 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id = 1;
@@ -101,7 +101,7 @@ EXPLAIN SELECT * FROM t1 WHERE id = 1;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DESC SELECT * FROM t1 WHERE id = 1;
@@ -116,7 +116,7 @@ DESC SELECT * FROM t1 WHERE id = 1;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DESCRIBE SELECT * FROM t1 WHERE id = 1;
@@ -131,7 +131,7 @@ DESCRIBE SELECT * FROM t1 WHERE id = 1;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN INSERT INTO t1 (c1) VALUES (4);
@@ -146,7 +146,7 @@ EXPLAIN INSERT INTO t1 (c1) VALUES (4);
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN UPDATE t1 SET c1=5 WHERE c1=3;
@@ -164,7 +164,7 @@ EXPLAIN UPDATE t1 SET c1=5 WHERE c1=3;
 4 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN DELETE FROM t1 WHERE c1=3;
@@ -182,11 +182,11 @@ EXPLAIN DELETE FROM t1 WHERE c1=3;
 4 rows in set (0.01 sec)
 ```
 
-If you do not specify the `FORMAT`, or specify `FORMAT = "row"`, `EXPLAIN` statement will output the results in a tabular format. See [Understand the Query Execution Plan](/explain-overview.md) for more information.
+`FORMAT`を指定しない場合、または`FORMAT = "row"`を指定する場合、 `EXPLAIN`ステートメントは結果を表形式で出力します。詳細については、 [クエリ実行プランを理解する](/explain-overview.md)を参照してください。
 
-In addition to the MySQL standard result format, TiDB also supports DotGraph and you need to specify `FORMAT = "dot"` as in the following example:
+MySQLの標準結果形式に加えて、TiDBはDotGraphもサポートしているため、次の例のように`FORMAT = "dot"`を指定する必要があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(a bigint, b bigint);
@@ -228,7 +228,7 @@ label = "cop"
 1 row in set (0.00 sec)
 ```
 
-If the `dot` program (in the `graphviz` package) is installed on your computer, you can generate a PNG file using the following method:
+`dot`のプログラム（ `graphviz`のパッケージに含まれる）がコンピューターにインストールされている場合は、次の方法を使用してPNGファイルを生成できます。
 
 ```bash
 dot xx.dot -T png -O
@@ -236,25 +236,25 @@ dot xx.dot -T png -O
 The xx.dot is the result returned by the above statement.
 ```
 
-If the `dot` program is not installed on your computer, copy the result to [this website](http://www.webgraphviz.com/) to get a tree diagram:
+`dot`のプログラムがコンピューターにインストールされていない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーして、樹形図を取得します。
 
 ![Explain Dot](/media/explain_dot.png)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Both the format of `EXPLAIN` and the potential execution plans in TiDB differ substaintially from MySQL.
-* TiDB does not support the `FORMAT=JSON`  or `FORMAT=TREE` options.
+-   `EXPLAIN`の形式とTiDBの潜在的な実行プランは、MySQLとは実質的に異なります。
+-   TiDBは`FORMAT=JSON`つまたは`FORMAT=TREE`のオプションをサポートしていません。
 
-### `EXPLAIN FOR CONNECTION`
+### <code>EXPLAIN FOR CONNECTION</code> {#code-explain-for-connection-code}
 
-`EXPLAIN FOR CONNECTION` is used to get the execution plan of the currently executed SQL query or the last executed SQL query in a connection. The output format is the same as that of `EXPLAIN`. However, the implementation of `EXPLAIN FOR CONNECTION` in TiDB is different from that in MySQL. Their differences (apart from the output format) are listed as follows:
+`EXPLAIN FOR CONNECTION`は、接続で現在実行されているSQLクエリまたは最後に実行されたSQLクエリの実行プランを取得するために使用されます。出力形式は`EXPLAIN`と同じです。ただし、TiDBでの`EXPLAIN FOR CONNECTION`の実装は、MySQLでの実装とは異なります。それらの違い（出力形式は別として）は次のとおりです。
 
-- MySQL returns the query plan that is **being executing**, while TiDB returns the **last executed** query plan.
-- MySQL requires the login user to be the same as the connection being queried, or the login user has the **`PROCESS`** privilege; while TiDB requires the login user to be the same as the connection being queried, or the login user has the **`SUPER`** privilege.
+-   MySQLは**実行中**のクエリプランを返し、TiDBは<strong>最後に実行された</strong>クエリプランを返します。
+-   MySQLでは、ログインユーザーがクエリ対象の接続と同じである必要があります。そうでない場合、ログインユーザーには**`PROCESS`**権限があります。一方、TiDBでは、ログインユーザーがクエリ対象の接続と同じである必要があります。そうでない場合、ログインユーザーには<strong><code>SUPER</code></strong>権限があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [Understanding the Query Execution Plan](/explain-overview.md)
-* [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
-* [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-* [TRACE](/sql-statements/sql-statement-trace.md)
+-   [クエリ実行プランを理解する](/explain-overview.md)
+-   [説明分析](/sql-statements/sql-statement-explain-analyze.md)
+-   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
+-   [痕跡](/sql-statements/sql-statement-trace.md)

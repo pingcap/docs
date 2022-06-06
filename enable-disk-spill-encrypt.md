@@ -3,19 +3,19 @@ title: Enable Encryption for Disk Spill
 summary: Learn how to enable encryption for disk spill in TiDB.
 ---
 
-# Enable Encryption for Disk Spill
+# ディスク流出時の暗号化機能を有効にする {#enable-encryption-for-disk-spill}
 
-When the `oom-use-tmp-storage` configuration item is set to `true`, if the memory usage of a single SQL statement exceeds the limit of `mem-quota-query` setting, some operators can save the intermediate results during execution as a temporary file to the disk and delete the file after the query is completed.
+`oom-use-tmp-storage`構成項目が`true`に設定されている場合、単一のSQLステートメントのメモリ使用量が`mem-quota-query`設定の制限を超えると、一部のオペレーターは実行中に中間結果を一時ファイルとしてディスクに保存し、クエリ後にファイルを削除できます。完了しました。
 
-You can enable encryption for disk spill to prevent attackers from accessing data by reading these temporary files.
+ディスクスピルの暗号化を有効にして、攻撃者がこれらの一時ファイルを読み取ることでデータにアクセスするのを防ぐことができます。
 
-## Configure
+## 構成、設定 {#configure}
 
-To enable encryption for the disk spill files, you can configure the item [`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method) in the `[security]` section of the TiDB configuration file.
+ディスクスピルファイルの暗号化を有効にするには、TiDB構成ファイルの`[security]`セクションで項目[`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method)を構成できます。
 
 ```toml
 [security]
 spilled-file-encryption-method = "aes128-ctr"
 ```
 
-Value options for `spilled-file-encryption-method` are `aes128-ctr` and `plaintext`. The default value is `plaintext`, which means that encryption is disabled.
+`spilled-file-encryption-method`の値オプションは`aes128-ctr`と`plaintext`です。デフォルト値は`plaintext`です。これは、暗号化が無効になっていることを意味します。

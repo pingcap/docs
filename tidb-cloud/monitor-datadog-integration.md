@@ -3,60 +3,64 @@ title: Datadog Integration (Third-Party Monitoring Service)
 summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 ---
 
-# Datadog Integration
+# Datadog統合 {#datadog-integration}
 
-You can configure TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). After that, you can view these metrics in your Datadog dashboards directly.
+TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDBクラウドを構成できます。その後、これらのメトリックをDatadogダッシュボードで直接表示できます。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-- To integrate TiDB Cloud with Datadog, you must have a Datadog account and a [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys). Datadog grants you an API key when you first create a Datadog account.
+-   TiDB CloudをDatadogと統合するには、Datadogアカウントと[DatadogAPIキー](https://app.datadoghq.com/organization-settings/api-keys)が必要です。 Datadogは、最初にDatadogアカウントを作成するときにAPIキーを付与します。
 
-    If you do not have a Datadog account, sign up at [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup).
+    Datadogアカウントをお持ちでない場合は、 [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)でサインアップしてください。
 
-- To edit third-party integration settings of TiDB Cloud, you must have the `Organization Owner` access to your organization or `Project Member` access to the target project in TiDB Cloud.
+-   TiDB Cloudのサードパーティ統合設定を編集するには、組織への`Organization Owner`つのアクセス、またはTiDBCloudのターゲットプロジェクトへの`Project Member`のアクセスが必要です。
 
-## Limitation
+## 制限 {#limitation}
 
-You cannot use the Datadog integration in [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+[開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)でDatadog統合を使用することはできません。
 
-## Steps
+## 手順 {#steps}
 
-### Step 1. Integrate with your Datadog API Key
+### ステップ1.DatadogAPIキーと統合する {#step-1-integrate-with-your-datadog-api-key}
 
-1. On the TiDB Cloud console, choose the target project for Datadog integration, and then click the gear icon in the upper left corner to open the project settings.
-2. In the left pane, click **Integrations**.
-3. Click **Integration to Datadog**.
-4. Enter your API key of Datadog and choose the site of Datadog.
-5. Click **Test Integration**.
+1.  TiDB Cloudコンソールで、Datadog統合のターゲットプロジェクトを選択し、左上隅の歯車アイコンをクリックしてプロジェクト設定を開きます。
 
-    - If the test successes, the **Confirm** button is displayed.
-    - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
+2.  左側のペインで、[**統合**]をクリックします。
 
-6. Click **Confirm** to complete the integration.
+3.  [ **Datadogへの統合]を**クリックします。
 
-### Step 2. Install TiDB Cloud Integration in Datadog
+4.  DatadogのAPIキーを入力し、Datadogのサイトを選択します。
 
-1. Log in to [Datadog](https://app.datadoghq.com).
-2. Go to the **TiDB Cloud Integration** page (<https://app.datadoghq.com/account/settings#integrations/tidb-cloud>) in Datadog.
-3. In the **Configuration** tab, click **Install Integration**. The [**TiDBCloud Cluster Overview**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview) dashboard is displayed in your [**Dashboard List**](https://app.datadoghq.com/dashboard/lists).
+5.  [**統合のテスト]**をクリックします。
 
-## Pre-built dashboard
+    -   テストが成功すると、[**確認**]ボタンが表示されます。
+    -   テストが失敗すると、エラーメッセージが表示されます。トラブルシューティングのメッセージに従って、統合を再試行してください。
 
-Click the **Dashboard** link in the **Datadog** card of the integrations. You can see the pre-built dashboard of your TiDB clusters.
+6.  [**確認]**をクリックして統合を完了します。
 
-## Metrics available to Datadog
+### ステップ2.DatadogにTiDBクラウド統合をインストールする {#step-2-install-tidb-cloud-integration-in-datadog}
 
-Datadog tracks the following metric data for your TiDB clusters.
+1.  [Datadog](https://app.datadoghq.com)にログインします。
+2.  Datadogの**TiDBCloudIntegration**ページ（ [https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) ）に移動します。
+3.  [**Configuration / コンフィグレーション**]タブで、[<strong>統合のインストール</strong>]をクリックします。 [**TiDBCloudクラスターの概要**](https://app.datadoghq.com/dash/integration/30586/tidbcloud-cluster-overview)ダッシュボードが[**ダッシュボードリスト**](https://app.datadoghq.com/dashboard/lists)に表示されます。
 
-| Metric name  | Metric type | Labels | Description                                   |
-| :------------| :---------- | :------| :----------------------------------------------------- |
-| tidb_cloud.db_queries_total| count | sql_type: `Select\|Insert\|...`<br/>cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | The total number of statements executed |
-| tidb_cloud.db_failed_queries_total | count | type: `planner:xxx\|executor:2345\|...`<br/>cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | The total number of execution errors |
-| tidb_cloud.db_connections | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | Current number of connections in your TiDB server |
-| tidb_cloud.db_query_duration_seconds | histogram | sql_type: `Select\|Insert\|...`<br/>cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…`<br/>component: `tidb` | The duration histogram of statements |
-| tidb_cloud.node_storage_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk usage bytes of TiKV/TiFlash<sup>beta</sup> nodes |
-| tidb_cloud.node_storage_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>component: `tikv\|tiflash` | The disk capacity bytes of TiKV/TiFlash<sup>beta</sup> nodes |
-| tidb_cloud.node_cpu_seconds_total | count | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU usage of TiDB/TiKV/TiFlash<sup>beta</sup> nodes |
-| tidb_cloud.node_cpu_capacity_cores | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The CPU limit cores of TiDB/TiKV/TiFlash<sup>beta</sup> nodes |
-| tidb_cloud.node_memory_used_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The used memory bytes of TiDB/TiKV/TiFlash<sup>beta</sup> nodes |
-| tidb_cloud.node_memory_capacity_bytes | gauge | cluster_name: `<cluster name>`<br/>instance: `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>component: `tidb\|tikv\|tiflash` | The memory capacity bytes of TiDB/TiKV/TiFlash<sup>beta</sup> nodes |
+## 構築済みのダッシュボード {#pre-built-dashboard}
+
+統合の**Datadog**カードの[<strong>ダッシュボード</strong>]リンクをクリックします。 TiDBクラスターの構築済みダッシュボードを確認できます。
+
+## Datadogで利用可能なメトリック {#metrics-available-to-datadog}
+
+Datadogは、TiDBクラスターの次のメトリックデータを追跡します。
+
+| メトリック名                                 | メトリックタイプ | ラベル                                                                                                                          | 説明                                              |
+| :------------------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| tidb_cloud.db_queries_total            | カウント     | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | 実行されたステートメントの総数                                 |
+| tidb_cloud.db_failed_queries_total     | カウント     | タイプ： `planner:xxx\|executor:2345\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb` | 実行エラーの総数                                        |
+| tidb_cloud.db_connections              | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`                                             | TiDBサーバーの現在の接続数                                 |
+| tidb_cloud.db_query_duration_seconds   | ヒストグラム   | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | ステートメントの期間ヒストグラム                                |
+| tidb_cloud.node_storage_used_bytes     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlash<sup>ベータ</sup>ノードのディスク使用量バイト        |
+| tidb_cloud.node_storage_capacity_bytes | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlash<sup>ベータ</sup>ノードのディスク容量バイト         |
+| tidb_cloud.node_cpu_seconds_total      | カウント     | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードのCPU使用率     |
+| tidb_cloud.node_cpu_capacity_cores     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードのCPU制限コア    |
+| tidb_cloud.node_memory_used_bytes      | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードの使用済みメモリバイト |
+| tidb_cloud.node_memory_capacity_bytes  | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードのメモリ容量バイト   |

@@ -3,50 +3,50 @@ title: Follower Read
 summary: This document describes the use and implementation of Follower Read.
 ---
 
-# Follower Read
+# フォロワー読み取り {#follower-read}
 
-When a read hotspot appears in a Region, the Region leader can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load of the leader, and improve the throughput of the whole system by balancing the load among multiple followers. This document introduces the use and implementation mechanism of Follower Read.
+読み取りホットスポットがリージョンに表示されると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。この状況で、フォロワー読み取り機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。このドキュメントでは、フォロワー読み取りの使用と実装のメカニズムを紹介します。
 
-## Overview
+## 概要 {#overview}
 
-The Follower Read feature refers to using any follower replica of a Region to serve a read request under the premise of strongly consistent reads. This feature improves the throughput of the TiDB cluster and reduces the load of the leader. It contains a series of load balancing mechanisms that offload TiKV read loads from the leader replica to the follower replica in a Region. TiKV's Follower Read implementation provides users with strongly consistent reads.
+フォロワー読み取り機能とは、リージョンのフォロワーレプリカを使用して、強一貫性のある読み取りを前提として読み取り要求を処理することを指します。この機能により、TiDBクラスタのスループットが向上し、リーダーの負荷が軽減されます。これには、リージョン内のリーダーレプリカからフォロワーレプリカにTiKV読み取りロードをオフロードする一連のロードバランシングメカニズムが含まれています。 TiKVのフォロワー読み取りの実装は、ユーザーに一貫性の高い読み取りを提供します。
 
-> **Note:**
+> **ノート：**
 >
-> To achieve strongly consistent reads, the follower node currently needs to request the current execution progress from the leader node (that is `ReadIndex`), which causes an additional network request overhead. Therefore, the main benefits of Follower Read are to isolate read requests from write requests in the cluster and to increase overall read throughput.
+> 強一貫性のある読み取りを実現するには、現在、フォロワーノードがリーダーノード（つまり`ReadIndex` ）に現在の実行の進行状況を要求する必要があります。これにより、追加のネットワーク要求のオーバーヘッドが発生します。したがって、フォロワー読み取りの主な利点は、クラスタの書き込み要求から読み取り要求を分離し、全体的な読み取りスループットを向上させることです。
 
-## Usage
+## 使用法 {#usage}
 
-To enable TiDB's Follower Read feature, modify the value of the `tidb_replica_read` variable to `follower` or `leader-and-follower`:
+TiDBのフォロワー読み取り機能を有効にするには、 `tidb_replica_read`変数の値を`follower`または`leader-and-follower`に変更します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set [session | global] tidb_replica_read = '<target value>';
 ```
 
-Scope: SESSION | GLOBAL
+スコープ：セッション|グローバル
 
-Default: leader
+デフォルト：リーダー
 
-This variable is used to set the expected data read mode.
+この変数は、予想されるデータ読み取りモードを設定するために使用されます。
 
-- When the value of `tidb_replica_read` is set to `leader` or an empty string, TiDB maintains its original behavior and sends all read operations to the leader replica to perform.
-- When the value of `tidb_replica_read` is set to `follower`, TiDB selects a follower replica of the Region to perform all read operations.
-- When the value of `tidb_replica_read` is set to `leader-and-follower`, TiDB can select any replicas to perform read operations.
+-   `tidb_replica_read`の値が`leader`または空の文字列に設定されている場合、TiDBは元の動作を維持し、すべての読み取り操作をリーダーレプリカに送信して実行します。
+-   `tidb_replica_read`の値が`follower`に設定されている場合、TiDBはリージョンのフォロワーレプリカを選択して、すべての読み取り操作を実行します。
+-   `tidb_replica_read`の値が`leader-and-follower`に設定されている場合、TiDBは任意のレプリカを選択して読み取り操作を実行できます。
 
-## Implementation mechanism
+## 実装メカニズム {#implementation-mechanism}
 
-Before the Follower Read feature was introduced, TiDB applied the strong leader principle and submitted all read and write requests to the leader node of a Region to handle. Although TiKV can distribute Regions evenly on multiple physical nodes, for each Region, only the leader can provide external services. The other followers can do nothing to handle read requests but receive the data replicated from the leader at all times and prepare for voting to elect a leader in case of a failover.
+フォロワー読み取り機能が導入される前は、TiDBは強力なリーダーの原則を適用し、すべての読み取りおよび書き込み要求をリージョンのリーダーノードに送信して処理していました。 TiKVは複数の物理ノードにリージョンを均等に分散できますが、リージョンごとに、リーダーのみが外部サービスを提供できます。他のフォロワーは、読み取り要求を処理するために何もできませんが、リーダーから複製されたデータを常に受信し、フェイルオーバーの場合にリーダーを選出するための投票の準備をします。
 
-To allow data reading in the follower node without violating linearizability or affecting Snapshot Isolation in TiDB, the follower node needs to use `ReadIndex` of the Raft protocol to ensure that the read request can read the latest data that has been committed on the leader. At the TiDB level, the Follower Read feature simply needs to send the read request of a Region to a follower replica based on the load balancing policy.
+線形化可能性に違反したり、TiDBのスナップショットアイソレーションに影響を与えたりせずにフォロワーノードでデータを読み取れるようにするには、フォロワーノードでRaftプロトコルの`ReadIndex`を使用して、読み取り要求がリーダーでコミットされた最新のデータを読み取れるようにする必要があります。 TiDBレベルでは、フォロワー読み取り機能は、負荷分散ポリシーに基づいて、リージョンの読み取り要求をフォロワーレプリカに送信する必要があるだけです。
 
-### Strongly consistent reads
+### 強一貫性のある読み取り {#strongly-consistent-reads}
 
-When the follower node processes a read request, it first uses `ReadIndex` of the Raft protocol to interact with the leader of the Region, to obtain the latest commit index of the current Raft group. After the latest commit index of the leader is applied locally to the follower, the processing of a read request starts.
+フォロワーノードが読み取り要求を処理するとき、最初にRaftプロトコルの`ReadIndex`つを使用してリージョンのリーダーと対話し、現在のRaftグループの最新のコミットインデックスを取得します。リーダーの最新のコミットインデックスがローカルでフォロワーに適用された後、読み取り要求の処理が開始されます。
 
-### Follower replica selection strategy
+### フォロワーレプリカ選択戦略 {#follower-replica-selection-strategy}
 
-Because the Follower Read feature does not affect TiDB's Snapshot Isolation transaction isolation level, TiDB adopts the round-robin strategy to select the follower replica. Currently, for the coprocessor requests, the granularity of the Follower Read load balancing policy is at the connection level. For a TiDB client connected to a specific Region, the selected follower is fixed, and is switched only when it fails or the scheduling policy is adjusted.
+フォロワー読み取り機能はTiDBのスナップショットアイソレーショントランザクション分離レベルに影響を与えないため、TiDBはラウンドロビン戦略を採用してフォロワーレプリカを選択します。現在、コプロセッサー要求の場合、フォロワー読み取り負荷分散ポリシーの粒度は接続レベルにあります。特定のリージョンに接続されているTiDBクライアントの場合、選択されたフォロワーは固定されており、障害が発生した場合、またはスケジューリングポリシーが調整された場合にのみ切り替えられます。
 
-However, for the non-coprocessor requests, such as a point query, the granularity of the Follower Read load balancing policy is at the transaction level. For a TiDB transaction on a specific Region, the selected follower is fixed, and is switched only when it fails or the scheduling policy is adjusted.
+ただし、ポイントクエリなどの非コプロセッサ要求の場合、フォロワー読み取り負荷分散ポリシーの粒度はトランザクションレベルにあります。特定のリージョンでのTiDBトランザクションの場合、選択されたフォロワーは固定され、失敗した場合、またはスケジューリングポリシーが調整された場合にのみ切り替えられます。

@@ -3,94 +3,94 @@ title: Use TiDB Lightning to Import Data in Parallel
 summary: Learn the concept, user scenarios, usages, and limitations of importing data in parallel when using TiDB Lightning.
 ---
 
-# Use TiDB Lightning to Import Data in Parallel
+# TiDBLightningを使用してデータを並行してインポートする {#use-tidb-lightning-to-import-data-in-parallel}
 
-Since v5.3.0, the [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) of TiDB Lightning supports the parallel import of a single table or multiple tables. By simultaneously running multiple TiDB Lightning instances, you can import data in parallel from different single tables or multiple tables. In this way, TiDB Lightning provides the ability to scale horizontally, which can greatly reduce the time required to import large amounts of data.
+v5.3.0以降、TiDB Lightningの[ローカルバックエンドモード](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend)は、単一のテーブルまたは複数のテーブルの並列インポートをサポートします。複数のTiDBLightningインスタンスを同時に実行することにより、異なる単一のテーブルまたは複数のテーブルからデータを並行してインポートできます。このように、TiDB Lightningは水平方向にスケーリングする機能を提供し、大量のデータのインポートに必要な時間を大幅に短縮できます。
 
-In technical implementation, TiDB Lightning records the meta data of each instance and the data of each imported table in the target TiDB, and coordinates the Row ID allocation range of different instances, the record of global Checksum, and the configuration changes and recovery of TiKV and PD.
+技術的な実装では、TiDB Lightningは、各インスタンスのメタデータとインポートされた各テーブルのデータをターゲットTiDBに記録し、さまざまなインスタンスの行ID割り当て範囲、グローバルチェックサムの記録、およびTiKVの構成変更とリカバリを調整します。およびPD。
 
-You can use TiDB Lightning to import data in parallel in the following scenarios:
+次のシナリオでは、TiDBLightningを使用してデータを並行してインポートできます。
 
-- Import sharded schemas and sharded tables. In this scenario, multiple tables from multiple upstream database instances are imported into the downstream TiDB database by different TiDB Lightning instances in parallel.
-- Import single tables in parallel. In this scenario, single tables stored in a certain directory or cloud storage (such as Amazon S3) are imported into the downstream TiDB cluster by different TiDB Lightning instances in parallel. This is a new feature introduced in TiDB 5.3.0.
+-   シャーディングされたスキーマとシャーディングされたテーブルをインポートします。このシナリオでは、複数のアップストリームデータベースインスタンスからの複数のテーブルが、異なるTiDBLightningインスタンスによって並列にダウンストリームTiDBデータベースにインポートされます。
+-   単一のテーブルを並行してインポートします。このシナリオでは、特定のディレクトリまたはクラウドストレージ（Amazon S3など）に保存されている単一のテーブルが、異なるTiDBLightningインスタンスによって並列にダウンストリームTiDBクラスタにインポートされます。これは、TiDB5.3.0で導入された新機能です。
 
-> **Note:**
+> **ノート：**
 >
-> - Parallel import only supports initialized empty tables in TiDB and does not support migrating data to tables with data written by existing services. Otherwise, data inconsistencies may occur.
+> -   並列インポートは、TiDBで初期化された空のテーブルのみをサポートし、既存のサービスによって書き込まれたデータを含むテーブルへのデータの移行をサポートしません。そうしないと、データの不整合が発生する可能性があります。
 >
-> - Parallel import is usually used in local-backend mode.
+> -   並列インポートは通常、ローカルバックエンドモードで使用されます。
 >
-> - Apply only one backend at a time when using multiple TiDB Lightning instances to import data to the same target. For example, you cannot import data to the same TiDB cluster in both Local-backend and TiDB-backend modes at the same time.
+> -   複数のTiDBLightningインスタンスを使用して同じターゲットにデータをインポートする場合は、一度に1つのバックエンドのみを適用してください。たとえば、ローカルバックエンドモードとTiDBバックエンドモードの両方で同時にデータを同じTiDBクラスタにインポートすることはできません。
 
-The following diagram shows how importing sharded schemas and sharded tables works. In this scenario, you can use multiple TiDB Lightning instances to import MySQL sharded tables to a downstream TiDB cluster.
+次の図は、シャーディングされたスキーマとシャーディングされたテーブルのインポートがどのように機能するかを示しています。このシナリオでは、複数のTiDB Lightningインスタンスを使用して、MySQLシャードテーブルをダウンストリームTiDBクラスタにインポートできます。
 
 ![Import sharded schemas and sharded tables](/media/parallel-import-shard-tables-en.png)
 
-The following diagram shows how importing single tables works. In this scenario, you can use multiple TiDB Lightning instances to split data from a single table and import it in parallel to a downstream TiDB cluster.
+次の図は、単一のテーブルのインポートがどのように機能するかを示しています。このシナリオでは、複数のTiDB Lightningインスタンスを使用して、単一のテーブルからデータを分割し、それをダウンストリームのTiDBクラスタに並行してインポートできます。
 
 ![Import single tables](/media/parallel-import-single-tables-en.png)
 
-## Considerations
+## 考慮事項 {#considerations}
 
-No additional configuration is required for parallel import using TiDB Lightning. When TiDB Lightning is started, it registers meta data in the downstream TiDB cluster and automatically detects whether there are other instances migrating data to the target cluster at the same time. If there is, it automatically enters the parallel import mode.
+TiDB Lightningを使用した並列インポートには、追加の構成は必要ありません。 TiDB Lightningが起動すると、ダウンストリームのTiDBクラスタにメタデータが登録され、同時にターゲットクラスタにデータを移行する他のインスタンスがあるかどうかが自動的に検出されます。存在する場合は、自動的に並列インポートモードになります。
 
-But when migrating data in parallel, you need to take the following into consideration:
+ただし、データを並行して移行する場合は、次の点を考慮する必要があります。
 
-- Handle conflicts between primary keys or unique indexes across multiple sharded tables
-- Optimize import performance
+-   複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します
+-   インポートパフォーマンスを最適化する
 
-### Handle conflicts between primary keys or unique indexes
+### 主キーまたは一意のインデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes}
 
-When using [Local-backend mode](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend) to import in parallel, you need to ensure that there are no primary key or unique index conflicts between data sources, and between the tables in the target TiDB cluster. Ensure that there are no data writes in the target table during import. Otherwise, TiDB Lightning will not be able to guarantee the correctness of the imported data, and the target table will contain inconsistent indexes after the import is completed.
+[ローカルバックエンドモード](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-local-backend)を使用して並行してインポートする場合は、データソース間、およびターゲットTiDBクラスタのテーブル間で主キーまたは一意のインデックスの競合がないことを確認する必要があります。インポート中にターゲットテーブルにデータ書き込みがないことを確認してください。そうしないと、TiDB Lightningはインポートされたデータの正確性を保証できず、インポートの完了後にターゲットテーブルに一貫性のないインデックスが含まれます。
 
-### Optimize import performance
+### インポートパフォーマンスを最適化する {#optimize-import-performance}
 
-Because TiDB Lightning needs to upload the generated Key-Value data to the TiKV node where each copy of the corresponding Region is located, the import speed is limited by the size of the target cluster. It is recommended to ensure that the number of TiKV instances in the target TiDB cluster and the number of TiDB Lightning instances are greater than n:1 (n is the number of copies of the Region). At the same time, the following requirements should be met to achieve optimal import performance:
+TiDB Lightningは、生成されたKey-Valueデータを対応するリージョンの各コピーが配置されているTiKVノードにアップロードする必要があるため、インポート速度はターゲットクラスタのサイズによって制限されます。ターゲットTiDBクラスタのTiKVインスタンスの数とTiDBLightningインスタンスの数がn：1（nはリージョンのコピーの数）より大きいことを確認することをお勧めします。同時に、最適なインポートパフォーマンスを実現するには、次の要件を満たす必要があります。
 
-- Deploy each TiDB Lightning instance on a dedicated machine. Since one TiDB Lightning instance consumes all CPU resources by default, deploying multiple instances on a single machine cannot improve performance.
-- The total size of source files for each TiDB Lightning instance performing parallel import should be smaller than 5 TiB
-- The total number of TiDB Lightning instances should be smaller than 10.
+-   各TiDBLightningインスタンスを専用マシンにデプロイします。 1つのTiDBLightningインスタンスがデフォルトですべてのCPUリソースを消費するため、単一のマシンに複数のインスタンスをデプロイしてもパフォーマンスを向上させることはできません。
+-   並列インポートを実行する各TiDBLightningインスタンスのソースファイルの合計サイズは、5TiB未満である必要があります
+-   TiDBLightningインスタンスの総数は10未満である必要があります。
 
-When using TiDB Lightning to import shared databases and tables in parallel, choose an appropriate number of TiDB Lightning instances according to the amount of data.
+TiDB Lightningを使用して共有データベースとテーブルを並行してインポートする場合は、データの量に応じて適切な数のTiDBLightningインスタンスを選択してください。
 
-- If the MySQL data volume is less than 2 TiB, you can use one TiDB Lightning instance for parallel import.
-- If the MySQL data volume exceeds 2 TiB and the total number of MySQL instances is smaller than 10, it is recommended that you use one TiDB Lightning instance for each MySQL instance, and the number of parallel TiDB Lightning instances should not exceed 10.
-- If the MySQL data volume exceeds 2 TiB and the total number of MySQL instances exceeds 10, it is recommended that you allocate 5 to 10 TiDB Lightning instances for importing the data exported by these MySQL instances.
+-   MySQLデータボリュームが2TiB未満の場合、並列インポートに1つのTiDBLightningインスタンスを使用できます。
+-   MySQLデータボリュームが2TiBを超え、MySQLインスタンスの総数が10未満の場合は、MySQLインスタンスごとに1つのTiDB Lightningインスタンスを使用することをお勧めします。また、並列TiDBLightningインスタンスの数は10を超えないようにする必要があります。
+-   MySQLデータボリュームが2TiBを超え、MySQLインスタンスの総数が10を超える場合、これらのMySQLインスタンスによってエクスポートされたデータをインポートするために5〜10個のTiDBLightningインスタンスを割り当てることをお勧めします。
 
-Next, this document uses two examples to detail the operation steps of parallel import in different scenarios:
+次に、このドキュメントでは2つの例を使用して、さまざまなシナリオでの並列インポートの操作手順を詳しく説明します。
 
-- Example 1: Use Dumpling + TiDB Lightning to import sharded databases and tables into TiDB in parallel
-- Example 2: Import single tables in parallel
+-   例1： Dumpling + TiDB Lightningを使用して、シャーディングされたデータベースとテーブルをTiDBに並行してインポートします
+-   例2：単一のテーブルを並行してインポートする
 
-### Restrictions
+### 制限 {#restrictions}
 
-TiDB Lightning exclusively uses some resources when it is running. If you need to deploy multiple TiDB Lightning instances on a single machine (which is not recommended for production environments), or on a disk shared by multiple machines, be aware of the following usage restrictions.
+TiDB Lightningは、実行時に一部のリソースを排他的に使用します。 1台のマシン（実稼働環境では推奨されません）または複数のマシンで共有されるディスクに複数のTiDB Lightningインスタンスをデプロイする必要がある場合は、次の使用制限に注意してください。
 
-- Set `tikv-importer.sorted-kv-dir` to a unique path for each TiDB Lightning instance. Multiple instances sharing the same path can lead to unintended behavior and may result in import failures or data errors.
-- Store each TiDB Lightning checkpoint separately. For more information about checkpoint configurations, see [TiDB Lightning Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md).
-    - If you set checkpoint.driver = "file" (default), make sure that the path to the checkpoint is unique for each instance.
-    - If you set checkpoint.driver = "mysql", you need to set a unique schema for each instance.
-- The log file for each TiDB Lightning should be set to a unique path. Sharing the same log file will impact log querying and troubleshooting.
-- If you use the [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md) or Debug API, you need to set `lightning.status-addr` to a unique address for each instance; otherwise, the TiDB Lightning process fails to start due to port conflict.
+-   各TiDBLightningインスタンスの一意のパスに`tikv-importer.sorted-kv-dir`を設定します。同じパスを共有する複数のインスタンスは、意図しない動作を引き起こし、インポートの失敗やデータエラーを引き起こす可能性があります。
+-   各TiDBLightningチェックポイントを個別に保存します。チェックポイント構成の詳細については、 [TiDBLightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
+    -   checkpoint.driver = &quot;file&quot;（デフォルト）を設定する場合は、チェックポイントへのパスがインスタンスごとに一意であることを確認してください。
+    -   checkpoint.driver = &quot;mysql&quot;を設定する場合は、インスタンスごとに一意のスキーマを設定する必要があります。
+-   各TiDBLightningのログファイルは一意のパスに設定する必要があります。同じログファイルを共有すると、ログのクエリとトラブルシューティングに影響します。
+-   [Webインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)またはDebugAPIを使用する場合は、インスタンスごとに`lightning.status-addr`を一意のアドレスに設定する必要があります。そうしないと、ポートの競合が原因でTiDBLightningプロセスを開始できません。
 
-## Example 1: Use Dumpling + TiDB Lightning to Import Sharded Databases and Tables into TiDB in Parallel
+## 例1： Dumpling + TiDB Lightningを使用して、シャーディングされたデータベースとテーブルをTiDBに並行してインポートする {#example-1-use-dumpling-tidb-lightning-to-import-sharded-databases-and-tables-into-tidb-in-parallel}
 
-In this example, assume that the upstream is a MySQL cluster with 10 sharded tables, with a total size of 10 TiB. You can Use 5 TiDB Lightning instances to perform parallel import, and each instance imports 2 TiB. It is estimated that the total import time (excluding the time required for Dumpling export) can be reduced from about 40 hours to about 10 hours.
+この例では、アップストリームが10個のシャードテーブルを持つMySQLクラスタであり、合計サイズが10TiBであると想定しています。 5つのTiDBLightningインスタンスを使用して並列インポートを実行でき、各インスタンスは2つのTiBをインポートします。総輸入時間（Dumplingの輸出にかかる時間を除く）は、約40時間から約10時間に短縮できると見込まれます。
 
-Assume that the upstream library is named `my_db`, and the name of each sharded table is `my_table_01` ~ `my_table_10`. You want to merge and import them into the downstream `my_db.my_table` table. The specific steps are described in the following sections.
+アップストリームライブラリの名前が`my_db`で、各シャーディングテーブルの名前が`my_table_01`であると想定し`my_table_10` 。それらをマージして、ダウンストリーム`my_db.my_table`テーブルにインポートします。特定の手順については、次のセクションで説明します。
 
-### Step 1: Use Dumpling to export data
+### ステップ1：Dumplingを使用してデータをエクスポートする {#step-1-use-dumpling-to-export-data}
 
-Export two sharded tables on the 5 nodes where TiDB Lightning is deployed:
+TiDBLightningがデプロイされている5つのノードに2つのシャーディングされたテーブルをエクスポートします。
 
-- If the two sharded tables are in the same MySQL instance, you can use the `--filter` parameter of Dumpling to directly export them. When using TiDB Lightning to import, you can specify `data-source-dir` as the directory where Dumpling exports data to;
-- If the data of the two sharded tables are distributed on different MySQL nodes, you need to use Dumpling to separately export them. The exported data needs to be placed in the same parent directory <b>but in different sub-directories</b>. When using TiDB Lightning to perform parallel import, you need to specify `data-source-dir` as the parent directory.
+-   2つのシャードテーブルが同じMySQLインスタンスにある場合は、 Dumplingの`--filter`パラメーターを使用してそれらを直接エクスポートできます。 TiDB Lightningを使用してインポートする場合、 Dumplingがデータをエクスポートするディレクトリとして`data-source-dir`を指定できます。
+-   2つのシャーディングされたテーブルのデータが異なるMySQLノードに分散されている場合は、 Dumplingを使用してそれらを個別にエクスポートする必要があります。エクスポートされたデータは、同じ親ディレクトリに配置する必要があります<b>が、サブディレクトリは異なり</b>ます。 TiDB Lightningを使用して並列インポートを実行する場合、親ディレクトリとして`data-source-dir`を指定する必要があります。
 
-For more information on how to use Dumpling to export data, see [Dumpling](/dumpling-overview.md).
+Dumplingを使用してデータをエクスポートする方法の詳細については、 [Dumpling](/dumpling-overview.md)を参照してください。
 
-### Step 2: Configure TiDB Lightning data sources
+### 手順2：TiDBLightningデータソースを構成する {#step-2-configure-tidb-lightning-data-sources}
 
-Create a configuration file `tidb-lightning.toml`, and then add the following content:
+構成ファイル`tidb-lightning.toml`を作成してから、次のコンテンツを追加します。
 
 ```
 [lightning]
@@ -119,45 +119,45 @@ target-schema = "my_db"
 target-table = "my_table"
 ```
 
-If the data source is stored in external storage such as Amazon S3 or GCS, see [External Storages](/br/backup-and-restore-storages.md).
+データソースがAmazonS3やGCSなどの外部ストレージに保存されている場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。
 
-### Step 3: Start TiDB Lightning to import data
+### ステップ3：TiDBLightningを起動してデータをインポートする {#step-3-start-tidb-lightning-to-import-data}
 
-During parallel import, the server configuration requirements for each TiDB Lightning node are the same as the non-parallel import mode. Each TiDB Lightning node needs to consume the same resources. It is recommended to deploy them on different servers. For detailed deployment steps, see [Deploy TiDB Lightning](/tidb-lightning/deploy-tidb-lightning.md).
+並列インポート中、各TiDB Lightningノードのサーバー構成要件は、非並列インポートモードと同じです。各TiDBLightningノードは同じリソースを消費する必要があります。それらを別のサーバーにデプロイすることをお勧めします。詳細な展開手順については、 [TiDBLightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)を参照してください。
 
-Start TiDB Lightning on each server in turn. If you use `nohup` to directly start it from the command line, it might exit due to the SIGHUP signal. So it is recommended to put `nohup` in the script, for example:
+各サーバーでTiDBLightningを順番に起動します。 `nohup`を使用してコマンドラインから直接起動すると、SIGHUP信号が原因で終了する場合があります。したがって、スクリプトに`nohup`を含めることをお勧めします。次に例を示します。
 
 ```shell
 # !/bin/bash
 nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
 ```
 
-During parallel import, TiDB Lightning automatically performs the following checks after starting the task.
+並列インポート中、TiDB Lightningは、タスクの開始後に次のチェックを自動的に実行します。
 
-- Check whether there is enough space on the local disk and on the TiKV cluster for importing data. TiDB Lightning samples the data sources and estimates the percentage of the index size from the sample result. Because indexes are included in the estimation, there may be cases where the size of the source data is less than the available space on the local disk, but still the check fails.
-- Check whether the regions in the TiKV cluster are distributed evenly and whether there are too many empty regions. If the number of empty regions exceeds max(1000, number of tables * 3), i.e. greater than the bigger one of "1000" or "3 times the number of tables ", then the import cannot be executed.
-- Check whether the data is imported in order from the data sources. The size of `mydumper.batch-size` is automatically adjusted based on the result of the check. Therefore, the `mydumper.batch-size` configuration is no longer available.
+-   ローカルディスクとTiKVクラスタにデータをインポートするための十分なスペースがあるかどうかを確認します。 TiDB Lightningはデータソースをサンプリングし、サンプル結果からインデックスサイズのパーセンテージを推定します。見積もりにはインデックスが含まれているため、ソースデータのサイズがローカルディスクの使用可能なスペースよりも小さい場合がありますが、それでもチェックは失敗します。
+-   TiKVクラスタの領域が均等に分散されているかどうか、および空の領域が多すぎるかどうかを確認します。空の領域の数がmax（1000、テーブルの数* 3）を超える場合、つまり「1000」または「テーブルの数の3倍」の大きい方よりも多い場合、インポートは実行できません。
+-   データがデータソースから順番にインポートされているかどうかを確認します。 `mydumper.batch-size`のサイズは、チェックの結果に基づいて自動的に調整されます。したがって、 `mydumper.batch-size`の構成は使用できなくなります。
 
-You can also turn off the check and perform a forced import with the `lightning.check-requirements` configuration. For more detailed checks, see [TiDB Lightning prechecks](/tidb-lightning/tidb-lightning-prechecks.md)
+チェックをオフにして、 `lightning.check-requirements`構成で強制インポートを実行することもできます。詳細なチェックについては、 [TiDBLightningの事前チェック](/tidb-lightning/tidb-lightning-prechecks.md)を参照してください。
 
-### Step 4: Check the import progress
+### ステップ4：インポートの進行状況を確認する {#step-4-check-the-import-progress}
 
-After starting the import, you can check the progress in either of the following ways:
+インポートを開始した後、次のいずれかの方法で進行状況を確認できます。
 
-- Check the progress through the `grep` log keyword `progress`. It is updated every 5 minutes by default.
-- Check the progress through the monitoring console. For details, see [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md).
+-   `grep`ログキーワード`progress`で進捗状況を確認します。デフォルトでは5分ごとに更新されます。
+-   監視コンソールで進行状況を確認します。詳細については、 [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
 
-Wait for all TiDB Lightning instances to finish, then the entire import is completed.
+すべてのTiDBLightningインスタンスが終了するのを待ってから、インポート全体が完了します。
 
-## Example 2: Import single tables in parallel
+## 例2：単一のテーブルを並行してインポートする {#example-2-import-single-tables-in-parallel}
 
-TiDB Lightning also supports parallel import of single tables. For example, import multiple single tables stored in Amazon S3 by different TiDB Lightning instances into the downstream TiDB cluster in parallel. This method can speed up the overall import speed. For more information on external storages, see [External Storages](/br/backup-and-restore-storages.md)).
+TiDB Lightningは、単一テーブルの並列インポートもサポートしています。たとえば、AmazonS3に異なるTiDBLightningインスタンスによって保存されている複数の単一テーブルをダウンストリームTiDBクラスタに並行してインポートします。この方法により、全体的なインポート速度を上げることができます。外部ストレージの詳細については、 [外部ストレージ](/br/backup-and-restore-storages.md) ）を参照してください。
 
-> **Note:**
+> **ノート：**
 >
->In the local environment, you can use the `--filesize` or `--where` parameter of Dumpling to divide the data of a single table into different parts and export it to the local disks of multiple servers in advance. This way, you can still perform parallel import. The configuration is the same as Example 1.
+> ローカル環境では、 Dumplingの`--filesize`または`--where`パラメーターを使用して、単一のテーブルのデータを異なる部分に分割し、事前に複数のサーバーのローカルディスクにエクスポートできます。このようにして、引き続き並列インポートを実行できます。構成は例1と同じです。
 
-Assuming that the source files are stored in Amazon S3, the table files are `my_db.my_table.00001.sql` ~ `my_db.my_table.10000.sql`, a total of 10,000 SQL files. If you want to use 2 TiDB Lightning instances to speed up the import, you need to add the following settings in the configuration file:
+ソースファイルが`my_db.my_table.10000.sql` `my_db.my_table.00001.sql` 、合計10,000のSQLファイルです。 2つのTiDBLightningインスタンスを使用してインポートを高速化する場合は、構成ファイルに次の設定を追加する必要があります。
 
 ```
 [[mydumper.files]]
@@ -181,22 +181,22 @@ table = "my_table"
 type = "sql"
 ```
 
-You can modify the configuration of the other instance to only import the `05001 ~ 10000` data files.
+他のインスタンスの構成を変更して、 `05001 ~ 10000`のデータファイルのみをインポートすることができます。
 
-For other steps, see the relevant steps in Example 1.
+その他の手順については、例1の関連する手順を参照してください。
 
-## Handle errors
+## エラーを処理する {#handle-errors}
 
-### Some TiDB Lightning nodes exit abnormally
+### 一部のTiDBLightningノードが異常終了します {#some-tidb-lightning-nodes-exit-abnormally}
 
-If one or more TiDB Lightning nodes exit abnormally during a parallel import, identify the cause based on the logged error, and handle the error according to the error type:
+並列インポート中に1つ以上のTiDBLightningノードが異常終了した場合は、ログに記録されたエラーに基づいて原因を特定し、エラーの種類に従ってエラーを処理します。
 
-- If the error shows normal exit (for example, exit in response to a kill command) or termination by the operating system due to OOM, adjust the configuration and then restart the TiDB Lightning nodes.
+-   エラーが正常な終了（たとえば、killコマンドに応答した終了）またはOOMによるオペレーティングシステムによる終了を示している場合は、構成を調整してから、TiDBLightningノードを再起動します。
 
-- If the error has no impact on data accuracy, for example, network timeout, run `checkpoint-error-ignore` by using tidb-lightning-ctl on all failed nodes to clean errors in the checkpoint source data. Then restart these nodes to continue importing data from checkpoints. For details, see [checkpoint-error-ignore](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore).
+-   エラーがデータの精度に影響を与えない場合（ネットワークタイムアウトなど）、失敗したすべてのノードでtidb-lightning-ctlを使用して`checkpoint-error-ignore`を実行し、チェックポイントソースデータのエラーをクリーンアップします。次に、これらのノードを再起動して、チェックポイントからのデータのインポートを続行します。詳細については、 [チェックポイント-エラー-無視](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)を参照してください。
 
-- If the log reports errors resulting in data inaccuracy, for example, checksum mismatched, which indicates invalid data in the source file, run `checkpoint-error-destroy` by using tidb-lightning-ctl on all failed nodes to clean data imported to the failed tables as well as the checkpoint source data. For details, see [checkpoint-error-destroy](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy). This command removes the data imported to the failed tables downstream. Therefore, you need to re-configure and import the data of the failed tables on all TiDB Lightning nodes (including those that exit normally) by using the `filters` parameter.
+-   ログがデータの不正確さをもたらすエラーを報告する場合、たとえば、チェックサムの不一致（ソースファイル内の無効なデータを示す）の場合は、失敗したすべてのノードでtidb-lightning-ctlを使用して`checkpoint-error-destroy`を実行し、失敗したテーブルにインポートされたデータとチェックポイントソースデータ。詳細については、 [チェックポイント-エラー-破棄](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-destroy)を参照してください。このコマンドは、障害が発生したテーブルにインポートされたデータをダウンストリームで削除します。したがって、 `filters`パラメーターを使用して、すべてのTiDB Lightningノード（正常に終了するノードを含む）で障害が発生したテーブルのデータを再構成してインポートする必要があります。
 
-### During an import, an error "Target table is calculating checksum. Please wait until the checksum is finished and try again" is reported
+### インポート中に、「ターゲットテーブルがチェックサムを計算しています。チェックサムが終了するまで待ってから再試行してください」というエラーが報告されます。 {#during-an-import-an-error-target-table-is-calculating-checksum-please-wait-until-the-checksum-is-finished-and-try-again-is-reported}
 
-Some parallel imports involve a large number of tables or tables with a small volume of data. In this case, it is possible that before one or more tasks start processing a table, other tasks of this table have finished and data checksum is in progress. At this time, an error `Target table is calculating checksum. Please wait until the checksum is finished and try again` is reported. In this case, you can wait for the completion of checksum and then restart the failed tasks. The error disappears and data accuracy is not affected.
+一部の並列インポートには、多数のテーブルまたは少量のデータを含むテーブルが含まれます。この場合、1つ以上のタスクがテーブルの処理を開始する前に、このテーブルの他のタスクが終了し、データのチェックサムが進行中である可能性があります。このとき、エラー`Target table is calculating checksum. Please wait until the checksum is finished and try again`が報告されます。この場合、チェックサムの完了を待ってから、失敗したタスクを再開できます。エラーは消え、データの精度は影響を受けません。

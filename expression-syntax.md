@@ -3,21 +3,21 @@ title: Expression Syntax
 summary: Learn about the expression syntax in TiDB.
 ---
 
-# Expression Syntax
+# 式の構文 {#expression-syntax}
 
-An expression is a combination of one or more values, operators, or functions. In TiDB, expressions are mainly used in various clauses of the `SELECT` statement, including Group by clause, Where clause, Having clause, Join condition and window function. In addition, some DDL statements also use expressions, such as the setting of the default values, columns, and partition rules when creating tables.
+式は、1つ以上の値、演算子、または関数の組み合わせです。 TiDBでは、式は主に`SELECT`ステートメントのさまざまな句で使用されます。これには、Group by句、Where句、Having句、Join条件、ウィンドウ関数が含まれます。さらに、一部のDDLステートメントでは、テーブルの作成時にデフォルト値、列、パーティションルールの設定などの式も使用されます。
 
-The expressions can be divided into the following types:
+式は次のタイプに分けることができます。
 
-- Identifier. For reference, see [Schema object names](/schema-object-names.md).
+-   識別子。参考までに、 [スキーマオブジェクト名](/schema-object-names.md)を参照してください。
 
-- Predicates, numeric values, strings, date expressions. The [Literal values](/literal-values.md) of these types are also expressions.
+-   述語、数値、文字列、日付式。これらのタイプの[リテラル値](/literal-values.md)つも式です。
 
-- Function calls and window functions. For reference, see [Functions and operators overview](/functions-and-operators/functions-and-operators-overview.md) and [Window functions](/functions-and-operators/window-functions.md)
+-   関数呼び出しとウィンドウ関数。参考までに、 [関数と演算子の概要](/functions-and-operators/functions-and-operators-overview.md)と[ウィンドウ関数](/functions-and-operators/window-functions.md)を参照してください。
 
-- ParamMarker (`?`), system variables, user variables and CASE expressions.
+-   ParamMarker（ `?` ）、システム変数、ユーザー変数、およびCASE式。
 
-The following rules are the expression syntax, which is based on the [parser.y](https://github.com/pingcap/parser/blob/master/parser.y) rules of TiDB parser. For the navigable version of the following syntax diagram, refer to [TiDB SQL Syntax Diagram](https://pingcap.github.io/sqlgram/#Expression).
+次のルールは、TiDBパーサーの[parser.y](https://github.com/pingcap/parser/blob/master/parser.y)のルールに基づく式の構文です。次のシンタックスダイアグラムのナビゲート可能なバージョンについては、 [TiDBSQL構文図](https://pingcap.github.io/sqlgram/#Expression)を参照してください。
 
 ```ebnf+diagram
 Expression ::=
