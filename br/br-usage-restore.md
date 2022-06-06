@@ -11,7 +11,7 @@ This document describes how to restore cluster data using BR in the following sc
 - [Restore a database](#restore-a-database)
 - [Restore a table](#restore-a-table)
 - [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
-- [Restore data from external storage](#restore-data-from-external-storage)
+- [Restore backup data from external storage](#restore-backup-data-from-external-storage)
 - [Restore incremental data](#restore-incremental-data)
 - [Restore encrypted backup data](#restore-encrypted-backup-data)
 - [Restore tables created in the `mysql` schema](#restore-tables-created-in-the-mysql-schema)

@@ -222,7 +222,7 @@ Use the `br restore` command to restore the complete backup data to an offline c
 
 ### Restoration prerequisites
 
-- [Check before restore](#check-before-restore)
+- [Check before restore](#check-before-restoration)
 
 ### Topology
 
@@ -393,7 +393,7 @@ Run the `br restore` command to restore the complete backup data to an offline c
 
 ### Restoration prerequisites
 
-* [Check before restore](#check-before-restore)
+* [Check before restore](#check-before-restoration)
 * The TiKV cluster and the backup data do not have a duplicate database or table. Currently, BR does not support table route.
 * Each TiKV node has a separate disk to store backupSST files.
 * The `restore_endpoint` node has a separate disk to store `backupmeta` files.

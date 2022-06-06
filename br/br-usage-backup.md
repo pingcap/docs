@@ -13,7 +13,7 @@ This document describes how to back up cluster data using BR in the following sc
 - [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
 - [Back up data to external storage](#back-up-data-to-external-storage)
 - [Back up incremental data](#back-up-incremental-data)
-- [Encrypt data during backup](#encrypt-data-during-backup)
+- [Encrypt backup data](#encrypt-backup-data)
 
 If you are not familiar with Backup & Restore (BR), it is recommended that you read the following documents to fully understand BR usage principles and methods:
 
@@ -157,7 +157,7 @@ br backup full\
 
 The preceding command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period. When restoring incremental data, BR restores all DDLs first, and then restores data.
 
-## Encrypte backup data
+## Encrypt backup data
 
 > **Warning:**
 >
@@ -165,15 +165,15 @@ The preceding command backs up the incremental data between `(LAST_BACKUP_TS, cu
 
 BR supports encrypting backup data at the backup end and at the storage end when backing up to Amazon S3. You can choose either encryption method as required.
 
-### Encrypte backup data at the backup end
+### Encrypt backup data at the backup end
 
-Since TiDB v5.3.0, you can encrypte backup data by configuring the following parameters:
+Since TiDB v5.3.0, you can encrypt backup data by configuring the following parameters:
 
 - `--crypter.method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
 - `--crypter.key`: Encryption key in hexadecimal string format. It is a  128-bit (16 bytes) key for the algorithm `aes128-ctr`, 24-byte key for the algorithm `aes192-ctr`, and 32-byte key for the algorithm `aes256-ctr`.
 - `--crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in "crypter.key".
 
-Example: Encrypte backup data at the backup end.
+Example: Encrypt backup data at the backup end.
 
 {{< copyable "shell-regular" >}}
 
@@ -188,11 +188,11 @@ br backup full\
 > **Note:**
 >
 > - If the key is lost, the backup data cannot be restored to the cluster.
-> - The encryption feature needs to be used on BR tools and TiDB clusters v5.3.0 or later versions. The encrypted backup data cannot be restored on clusters ealier than v5.3.0.
+> - The encryption feature needs to be used on BR tools and TiDB clusters v5.3.0 or later versions. The encrypted backup data cannot be restored on clusters earlier than v5.3.0.
 
-### Encrypte backup data when backing up to Amazon S3
+### Encrypt backup data when backing up to Amazon S3
 
-BR supports server-side encryption (SSE) when backing up data to S3. In this scenario, you can use AWS KMS keys you have created to encrypte data. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
+BR supports server-side encryption (SSE) when backing up data to S3. In this scenario, you can use AWS KMS keys you have created to encrypt data. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
 
 ## Backup performance and impact
 
