@@ -1,7 +1,6 @@
 ---
 title: Data Migration Overview
 summary: Learn about the Data Migration tool, the architecture, the key components, and features.
-aliases: ['/docs/tidb-data-migration/dev/overview/']
 ---
 
 <!-- markdownlint-disable MD007 -->
@@ -80,7 +79,7 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 
 - [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
 - [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) 
+- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
 
 > **Note:**
 >

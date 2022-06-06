@@ -1,7 +1,6 @@
 ---
 title: SELECT | TiDB SQL Statement Reference
 summary: An overview of the usage of SELECT for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-select/','/docs/dev/reference/sql/statements/select/']
 ---
 
 # SELECT
@@ -75,7 +74,7 @@ AsOfClause ::=
 **SelectLockOpt:**
 
 ```ebnf+diagram
-SelectLockOpt ::= 
+SelectLockOpt ::=
     ( ( 'FOR' 'UPDATE' ( 'OF' TableList )? 'NOWAIT'? )
 |   ( 'LOCK' 'IN' 'SHARE' 'MODE' ) )?
 

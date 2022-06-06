@@ -1,7 +1,6 @@
 ---
 title: TiDB Cluster Alert Rules
 summary: Learn the alert rules in a TiDB cluster.
-aliases: ['/docs/dev/alert-rules/','/docs/dev/reference/alert-rules/']
 ---
 
 <!-- markdownlint-disable MD024 -->
@@ -234,7 +233,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. 
+    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time.
 
 * Solution:
 
@@ -425,7 +424,7 @@ This section gives the alert rules for the TiKV component.
 
 * Alert rule:
 
-    `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and (sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1 and sum(increase(tikv_engine_event_total{db="kv", cf="write", type="compaction"}[1d])) >= 1)` 
+    `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and (sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1 and sum(increase(tikv_engine_event_total{db="kv", cf="write", type="compaction"}[1d])) >= 1)`
 
 * Description:
 

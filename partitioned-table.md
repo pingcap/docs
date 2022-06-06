@@ -1,7 +1,6 @@
 ---
 title: Partitioning
 summary: Learn how to use partitioning in TiDB.
-aliases: ['/docs/dev/partitioned-table/','/docs/dev/reference/sql/partitioning/']
 ---
 
 # Partitioning
@@ -1431,4 +1430,4 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 
 From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
 
-Currently, neither static nor dynamic pruning mode supports prepared statements plan cache. 
+Currently, neither static nor dynamic pruning mode supports prepared statements plan cache.

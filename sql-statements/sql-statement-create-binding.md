@@ -1,7 +1,6 @@
 ---
 title: CREATE [GLOBAL|SESSION] BINDING
 summary: Use of CREATE BINDING in TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-create-binding/']
 ---
 
 # CREATE [GLOBAL|SESSION] BINDING
