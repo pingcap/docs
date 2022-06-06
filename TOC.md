@@ -32,7 +32,7 @@
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-  - Design Database Schema 
+  - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
     - [Create a Table](/develop/dev-guide-create-table.md)
@@ -116,6 +116,7 @@
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
+    - [TiFlash v6.1.0 Upgrade Guide](/tiflash-610-upgrade.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
