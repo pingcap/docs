@@ -24,7 +24,7 @@ Gitpod is an open-source Kubernetes application (GitHub repository address: <htt
 
 ## Use the default Gitpod configuration and environment
 
-After completing the [quick-start](#quick-start) steps, Gitpod will take a while to set up your workspace.
+After completing the [quick-start](#quick-start) steps, it will take a while for Gitpod to set up your workspace.
 
 Take the [Spring Boot Web](/develop/dev-guide-sample-application-spring-boot.md) application as an example. You can create a new workspace by URL `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java`.
 
