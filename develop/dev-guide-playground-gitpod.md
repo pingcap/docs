@@ -36,7 +36,7 @@ This scenario in the page uses [TiUP](https://docs.pingcap.com/zh/tidb/stable/ti
 
 Once the TiDB Playground is ready, another `Spring JPA Hibernate` task will run. You can check the progress on the right side of the terminal area.
 
-After all these tasks are finished, you will see a page similar to the following. On this page,  check the `REMOTE EXPLORER` area in the left navigation pane (Gitpod supports URL-based port forwarding) and find the URL of your port `8080`.
+After all these tasks are finished, you will see a page similar to the following. On this page, check the `REMOTE EXPLORER` area in the left navigation pane (Gitpod supports URL-based port forwarding) and find the URL of your port `8080`.
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 
@@ -98,7 +98,7 @@ By default, Gitpod uses a standard Docker image named Workspace-Full as the basi
 
 You can use a public Docker image or a Dockerfile and also install any required dependencies for your project.
 
-For example, you can use a Dockerfile (see also [Example .gitpod.Dockerfile](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)) as follows:
+For example, you can use a Dockerfile (see also [Example `.gitpod.Dockerfile`](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)) as follows:
 
 ```dockerfile
 FROM gitpod/workspace-java-17
