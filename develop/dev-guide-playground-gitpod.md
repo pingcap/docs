@@ -28,7 +28,7 @@ After completing the [quick-start](#quick-start) steps, it will take a while for
 
 Take the [Spring Boot Web](/develop/dev-guide-sample-application-spring-boot.md) application as an example. You can create a new workspace by the `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java` URL.
 
-You will see a page like the one below after all settled.
+After that, you will see a page similar to the following:
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
