@@ -150,15 +150,6 @@ After the recovery is completed, the data and index might be inconsistent. Use t
 
 ### Step 4: Remove unrecoverable stores (optional)
 
-Use PD Control to remove unrecoverable stores from PD's metadata by running [`store remove-tombstone`](/pd-control.md#store-delete--cancel-delete--label--weight--remove-tombstone--limit--store_id---jqquery-string).
-
-> **Note:**
->
-> - The recovery operation has turned some failed voters to failed learners. Then PD scheduling needs some time to remove these failed learners. `store remove-tombstone` can be run only after all failed learners are removed.
-> - It is recommended to add new stores in time.
-
-You can remove the tombstone TiKV stores from the cluster topology only after you have removed these tombstone stores from PD.
-
 <SimpleTab>
 <div label="Stores deployed using TiUP">
 
