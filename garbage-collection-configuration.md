@@ -12,6 +12,7 @@ Garbage collection is configured via the following system variables:
 * [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
 * [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
 * [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
+* [`tidb_gc_max_wait_time`](system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
 ## GC I/O limit
 
@@ -34,6 +35,12 @@ In previous releases of TiDB, garbage collection was configured via the `mysql.t
 The `CENTRAL` garbage collection mode is no longer supported. The `DISTRIBUTED` GC mode (which has been the default since TiDB 3.0) will automatically be used in its place. This mode is more efficient, since TiDB no longer needs to send requests to each TiKV region to trigger garbage collection.
 
 For information on changes in previous releases, refer to earlier versions of this document using the _TIDB version selector_ in the left hand menu.
+
+## Changes in TiDB 6.1.0
+
+In versions before TiDB 6.1.0, the internal transaction does not affect the GC safe point. Since TiDB 6.1.0, the internal transaction's startTS is considered when calculating the GC safe point, to resolve the access problem of cleaned data. When the internal transaction is too long, the safe point will be blocked for a long time, which affect the performance of application.
+
+TiDB v6.1.0 introduces the system variable [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)to control the maximum time that active transactions block the GC safe point. After the value is exceeded, the GC safe point is forwarded forcefully.
 
 ### GC in Compaction Filter
 
