@@ -430,7 +430,7 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following 7 columns:
 | start_time | The time at which the task starts |
 | state | The state of a task, including `pending`, `running`, `finished`, and `failed` |
 
-When [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is set, and the automatic analyze task in the TiDB background uses more memory than this threshold, the task will be retried. You can see failed and retried tasks with the following `SHOW ANALYZE STATUS` command.
+When [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is set and the automatic analysis task in the TiDB background uses more memory than this threshold, the task will be retried. You can see failed and retried tasks in the output of the `SHOW ANALYZE STATUS` statement.
 
 ```sql
 mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
