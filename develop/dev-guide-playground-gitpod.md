@@ -16,7 +16,7 @@ Gitpod is an open-source Kubernetes application (GitHub repository address: <htt
 
 2. Start your Gitpod workspace by prefixing the URL of the sample code repository with `https://gitpod.io/#` in the address bar of your browser.
 
-   - E.g, `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java`。
+   - For example, `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java`。
 
    - Support for configuring environment variables in the URL. E.g, `https://gitpod.io/#targetFile=spring-jpa-hibernate_Makefile,targetMode=spring-jpa-hibernate/https://github.com/pingcap-inc/tidb-example-java`。
 
