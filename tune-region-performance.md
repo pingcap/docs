@@ -25,7 +25,7 @@ Enable [Hibernate Region](/best-practices/massive-regions-best-practices.md#meth
 > + Query performance regression, especially when querying a large amount of data.
 > + The schedule operator slows down.
 
-You can adjust the Region size with [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size). It is recommended to set it to 96 MiB, 128 MiB, 256 MiB. The larger the `region-split-size`, the more jittery the performance will be. It is not recommended to set the Region size over 1 GiB and strongly recommend setting it below 10 GiB. When using TiFlash, the Region size should not exceed 256 MiB. When using the Dumpling tool, the Region size is not recommended to exceed 1 GiB and you need to reduce the concurrency after increasing the Region size, otherwise, TiDB might OOM.
+You can adjust the Region size with [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size). It is recommended to set it to 96 MiB, 128 MiB, 256 MiB. The larger the `region-split-size`, the more jittery the performance will be. It is not recommended to set the Region size over 1 GiB and strongly recommend setting it below 10 GiB. When using TiFlash, the Region size should not exceed 256 MiB. When using the Dumpling tool, the Region size should not exceed 1 GiB and you need to reduce the concurrency after increasing the Region size, otherwise, TiDB might OOM.
 
 ## Use bucket to increase concurrency
 
