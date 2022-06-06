@@ -1302,7 +1302,9 @@ TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `st
 set @@session.tidb_partition_prune_mode = 'dynamic'
 ```
 
-In `dynamic` mode, TiDB collects table-level summary statistics, or GlobalStats, from partitioned tables. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
+
+In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level statistics, or GlobalStats. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
 When switching from the `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
 
@@ -1310,15 +1312,7 @@ When switching from the `static` mode to `dynamic` mode, you need to check and c
 
 ```sql
 mysql> set session tidb_partition_prune_mode = 'dynamic';
-mysql> show stats_meta where table_name like "t";
-+---------+------------+----------------+---------------------+--------------+-----------+
-| Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
-+---------+------------+----------------+---------------------+--------------+-----------+
-| test    | t          | p0             | 2022-05-27 20:23:34 |            1 |         2 |
-| test    | t          | p1             | 2022-05-27 20:23:34 |            2 |         4 |
-| test    | t          | p2             | 2022-05-27 20:23:34 |            2 |         4 |
-+---------+------------+----------------+---------------------+--------------+-----------+
-3 rows in set (0.01 sec)
+
 mysql> show stats_meta where table_name like "t";
 +---------+------------+----------------+---------------------+--------------+-----------+
 | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
@@ -1337,6 +1331,7 @@ To get GlobalStats, you need to manually trigger `analyze` on the table or on a 
 ```sql
 mysql> analyze table t partition p1;
 Query OK, 0 rows affected, 1 warning (0.06 sec)
+
 mysql> show stats_meta where table_name like "t";
 +---------+------------+----------------+---------------------+--------------+-----------+
 | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
@@ -1357,7 +1352,7 @@ If the following warning is displayed during the `analyze` process, partition st
 
 You can also use scripts to update statistics of all partitioned tables. For details, see [Update statistics of partitioned tables in dynamic pruning mode](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
-After table-level statistics are ready, you can enable the global dynamic pruning mode.
+After table-level statistics are ready, you can enable the global dynamic pruning mode, which is effective to all SQL statements and auto analyze operations.
 
 {{< copyable "sql" >}}
 
