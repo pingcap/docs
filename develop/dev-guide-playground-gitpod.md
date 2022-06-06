@@ -22,7 +22,7 @@ Gitpod is an open-source Kubernetes application (GitHub repository address: <htt
 
 3. Log in and start the workspace using one of the providers listed. For example, `Github`.
 
-## Use default Gitpod configuration and environment
+## Use the default Gitpod configuration and environment
 
 After completing the [quick-start](#quick-start) steps, Gitpod will take a while to set up your workspace.
 
