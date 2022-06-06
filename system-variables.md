@@ -1593,8 +1593,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Default value: `0`
-- This variable specifies whether to return error immediately when an error occurs in a non-transactional DML statement.
-- When the value is set to `0` and an error occurs in the first batch, the non-transactional DML statement stops immediately and returns the error. All the following batches are canceled.
+- This variable specifies whether to return an error immediately when the error occurs in a non-transactional DML statement.
+- When the value is set to `0`, the non-transactional DML statement stops immediately at the first error and returns the error. All the following batches are canceled.
 - When the value is set to `1` and an error occurs in a batch, the following batches will continue to be executed until all batches are executed. All errors occurred during the execution process are returned together in the result.
 
 ### tidb_opt_agg_push_down

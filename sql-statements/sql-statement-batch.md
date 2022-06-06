@@ -5,7 +5,7 @@ summary: An overview of the usage of BATCH for the TiDB database.
 
 # BATCH
 
-The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there is **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
+The `BATCH` syntax splits a DML statement into multiple statements in TiDB for execution. This means that there are **no guarantees** of transactional atomicity and isolation. Therefore, it is a "non-transactional" statement.
 
 Currently, only `DELETE` is supported in `BATCH`.
 

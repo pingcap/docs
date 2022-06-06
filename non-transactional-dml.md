@@ -31,8 +31,8 @@ Before using non-transactional DML statements, make sure that the following cond
 
 - The statement does not require atomicity, which permits some rows to be modified and some rows to remain unmodified in the execution result.
 - The statement is idempotent, or you are prepared to retry on a part of the data according to the error message. If the system variables are set to `tidb_redact_log = 1` and `tidb_nontransactional_ignore_error = 1`, this statement must be idempotent. Otherwise, when the statement partially fails, the failed part cannot be accurately located.
-- The data to be operated on by the statement has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected result such as missing deletions and wrong deletions might occur.
-- The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected result.
+- The data to be operated on by the statement has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing deletions and wrong deletions might occur.
+- The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 - The statement meets the [restrictions](#restrictions).
 - It is not recommended to perform concurrent DDL operations on the table to be read and written by this DML statement.
 
@@ -75,7 +75,7 @@ The following operation uses a non-transactional DML statement to delete rows wi
 {{< copyable "sql" >}}
 
 ```sql
-BATCH ON id LIMIT 2 DELETE FROM t where v < 6;
+BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6;
 ```
 
 ```sql
@@ -111,7 +111,7 @@ During the execution of a non-transactional DML statement, you can view the exec
 {{< copyable "sql" >}}
 
 ```sql
-show processlist;
+SHOW PROCESSLIST;
 ```
 
 ```sql
@@ -155,7 +155,7 @@ To query the actual DML statements corresponding to the first and last batches i
 {{< copyable "sql" >}}
 
 ```sql
-BATCH ON id LIMIT 2 DRY RUN DELETE FROM t where v < 6;
+BATCH ON id LIMIT 2 DRY RUN DELETE FROM t WHERE v < 6;
 ```
 
 ```sql
@@ -175,7 +175,7 @@ If an optimizer hint is originally supported in the `DELETE` statement, the opti
 {{< copyable "sql" >}}
 
 ```sql
-BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t where v < 6;
+BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 ```
 
 ## Best practices
