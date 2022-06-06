@@ -546,7 +546,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `00:00 +0000`
 - This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
 
-### `tidb_max_auto_analyze_time` <span class="version-mark"> Introduced from v6.1.0 version </span>
+### `tidb_max_auto_analyze_time` <span class="version-mark"> New in v6.1.0 </span>
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
