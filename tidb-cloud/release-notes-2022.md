@@ -8,6 +8,10 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## June 7, 2022
+
+* Remove the **Proof of Concept plan** from the plan selection page. If you want to apply for a 14-day PoC trial for free, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+
 ## May 24, 2022
 
 * Support customizing TiDB port number when you create or restore a Dedicated Tier cluster

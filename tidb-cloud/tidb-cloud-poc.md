@@ -58,13 +58,16 @@ You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/st
 
 ## Step 3. Sign up and create a dedicated cluster for the PoC
 
-To get started with TiDB Cloud, take the following steps:
+To create a dedicated cluster for the PoC, take the following steps:
 
-1. [Sign up](https://tidbcloud.com/signup) for a TiDB Cloud account and complete the email verification.
-2. Log in to your [TiDB Cloud](http://tidbcloud.com) account. The plan selection page is displayed by default.
-3. Click **Apply for a PoC Trial** and refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster for the PoC.
+1. Fill in the PoC application form by doing one of the following:
 
-The **Proof of Concept plan** is a 14-day free trial option specifically designed for the PoC purpose. Selecting this plan takes you to the PoC application form. Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer trial points to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
+    - If you have already [created a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial), an prompt bar about submitting your PoC application is displayed in TiDB Cloud console. You can click the PoC application link in the bar to fill in the PoC application form.
+    - If you have not created a Developer tier yet, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page to fill in the PoC application form.
+
+    Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer trial points to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
+
+2. Refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster for the PoC.
 
 Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash<sup>beta</sup> nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
