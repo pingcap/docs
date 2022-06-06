@@ -844,7 +844,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `ON`
+- Default value: `OFF`
 - This variable is used to control whether to enable the cascades planner.
 
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
