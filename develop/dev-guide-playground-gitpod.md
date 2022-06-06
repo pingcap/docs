@@ -96,7 +96,7 @@ ports:
 
 By default, Gitpod uses a standard Docker image named Workspace-Full as the basis for the workspace. Workspaces launched from this default image are pre-installed with Docker, Go, Java, Node.js, C/C++, Python, Ruby, Rust, PHP, and tools such as Homebrew, Tailscale, and Nginx.
 
-You can provide a public Docker image or a Dockerfile. and install any required dependencies for your project.
+You can use a public Docker image or a Dockerfile and also install any required dependencies for your project.
 
 For example, you can use a Dockerfile (see also [Example .gitpod.Dockerfile](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)) as follows:
 
