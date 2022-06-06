@@ -126,15 +126,15 @@ If Region followers have not received the heartbeat from the leader within the `
 
 ### Method 6: Adjust Region size
 
-The default size of Region is 96 MiB, you can reduce the Region number by adjusting it to a larger value. For more information, see [Tune Region Performance](/tune-region-performance.md)
+The default size of a Region is 96 MiB, and you can reduce the number of Regions by setting Regions to a larger size. For more information, see [Tune Region Performance](/tune-region-performance.md).
 
 > **Warning:**
 >
-> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are:
+> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
 >
-> + More prone to performance jitter.
-> + Query performance regression, especially when querying a large amount of data.
-> + The schedule operator slows down.
+> + Performance jitter might be caused.
+> + The query performance, especially for queries that deal with a large range of data, might decrease.
+> + The Region scheduling slows down.
 
 ## Other problems and solutions
 

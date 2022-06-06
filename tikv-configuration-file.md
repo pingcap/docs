@@ -686,9 +686,9 @@ Configuration items related to Raftstore.
 
 ### `max-snapshot-file-raw-size` <span class="version-mark">New in v6.1.0</span>
 
-+ The snapshot file will split to multiple files when the snapshot file size exceeds this value.
-+ Default value: 100MiB
-+ Minimum value: 100MiB
++ When the size of a snapshot file exceeds this configuration value, this file will be split into multiple files.
++ Default value: `100MiB`
++ Minimum value: `100MiB`
 
 ### `snap-apply-batch-size`
 
@@ -837,14 +837,14 @@ Configuration items related to Coprocessor.
 
 ### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
 
-+ Determines whether to divide a Region into bucket, which is several smaller ranges within a Region. The bucket is used as the unit of concurrency query to improve the scan concurrency. For more about the design of bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
++ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
 + Default value: false
 
 > **Warning:**
 >
-> - Currently, `enable-region-bucket` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production.
-> - This configuration only makes sense when `region-split-size` is twice `region-bucket-size` or above, otherwise no bucket is actually divided.
-> Adjust `region-split-size` larger might cause the risk of potential performance regression and slow data scheduling.
+> - `enable-region-bucket` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
+> - This configuration makes sense only when `region-split-size` is twice of `region-bucket-size` or above; otherwise, no bucket is actually generated.
+> Adjusting `region-split-size` to a larger value might have the risk of performance regression and slow scheduling.
 
 ### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
 

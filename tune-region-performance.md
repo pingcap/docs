@@ -1,6 +1,6 @@
 ---
 title: Tune Region Performance
-summary: Introduce how to tune Region performance by adjusting the Region size and how to use bucket to optimize concurrent queries when the Region size is large.
+summary: Learn how to tune Region performance by adjusting the Region size and how to use buckets to optimize concurrent queries when the Region size is large.
 ---
 
 # Tune Region Performance
