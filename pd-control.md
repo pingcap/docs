@@ -1,7 +1,6 @@
 ---
 title: PD Control User Guide
 summary: Use PD Control to obtain the state information of a cluster and tune a cluster.
-aliases: ['/docs/dev/pd-control/','/docs/dev/reference/tools/pd-control/']
 ---
 
 # PD Control User Guide
@@ -604,7 +603,7 @@ Usage:
 
 Use this command to query all Regions in a given range `[startkey, endkey)`. Ranges without `endKey`s are supported.
 
-The `limit` parameter limits the number of keys. The default value of `limit` is `16`, and the value of `-1` means unlimited keys. 
+The `limit` parameter limits the number of keys. The default value of `limit` is `16`, and the value of `-1` means unlimited keys.
 
 Usage:
 

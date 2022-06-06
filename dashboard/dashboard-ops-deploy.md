@@ -1,7 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
 summary: Learn how to deploy TiDB Dashboard.
-aliases: ['/docs/dev/dashboard/dashboard-ops-deploy/']
 ---
 
 # Deploy TiDB Dashboard

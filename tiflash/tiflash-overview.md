@@ -1,7 +1,6 @@
 ---
 title: TiFlash Overview
 summary: Learn the architecture and key features of TiFlash.
-aliases: ['/docs/dev/tiflash/tiflash-overview/','/docs/dev/reference/tiflash/overview/']
 ---
 
 # TiFlash Overview
@@ -56,7 +55,7 @@ Every time TiFlash receives a read request, the Region replica sends a progress 
 
 ### Intelligent choice
 
-TiDB can automatically choose to use TiFlash (column-wise) or TiKV (row-wise), or use both of them in one query to ensure the best performance. 
+TiDB can automatically choose to use TiFlash (column-wise) or TiKV (row-wise), or use both of them in one query to ensure the best performance.
 
 This selection mechanism is similar to that of TiDB which chooses different indexes to execute query. TiDB optimizer makes the appropriate choice based on statistics of the read cost.
 

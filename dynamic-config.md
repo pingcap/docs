@@ -1,7 +1,6 @@
 ---
 title: Modify Configuration Online
 summary: Learn how to change the cluster configuration online.
-aliases: ['/docs/dev/dynamic-config/']
 ---
 
 # Modify Configuration Online
@@ -293,7 +292,7 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 
 Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [system variables](/system-variables.md).
 
-The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. 
+The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable.
 
 The default value of `slow-threshold` is 300 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
 

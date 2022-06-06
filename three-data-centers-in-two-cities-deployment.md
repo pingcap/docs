@@ -1,7 +1,6 @@
 ---
 title: Three Data Centers in Two Cities Deployment
 summary: Learn the deployment solution to three data centers in two cities.
-aliases: ['/docs/dev/three-data-centers-in-two-cities-deployment/']
 ---
 
 # Three Data Centers in Two Cities Deployment
@@ -192,7 +191,7 @@ In the deployment of three DCs in two cities, to optimize performance, you need 
     ```yaml
     config set label-property reject-leader dc 3
     ```
-   
+
    > **Note:**
    >
    > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
