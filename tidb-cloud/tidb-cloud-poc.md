@@ -62,8 +62,8 @@ To create a dedicated cluster for the PoC, take the following steps:
 
 1. Fill in the PoC application form by doing one of the following:
 
-    - If you have already [created a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial), an prompt bar about submitting your PoC application is displayed in TiDB Cloud console. You can click the PoC application link in the bar to fill in the PoC application form.
-    - If you have not created a Developer tier yet, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page to fill in the PoC application form.
+    - If you have already [created a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial), an prompt bar about submitting your PoC application is displayed in the TiDB Cloud console. You can click the PoC application link in the bar to fill in the PoC application form.
+    - If you have not created a Developer Tier yet, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page to fill in the PoC application form.
 
     Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer trial points to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
