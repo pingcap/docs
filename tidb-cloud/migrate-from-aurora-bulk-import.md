@@ -3,75 +3,75 @@ title: Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk
 summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk.
 ---
 
-# Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk
+# AuroraからTiDBクラウドに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-This document describes how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk using the import tools on TiDB Cloud console. 
+このドキュメントでは、TiDBクラウドコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraクラウドにデータを一括で移行する方法について説明します。
 
-## Learn how to create an import task on the TiDB Cloud console
+## TiDBCloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
 
-To import data, perform the following steps:
+データをインポートするには、次の手順を実行します。
 
-1. Navigate to the TiDB Clusters page and click the name of your target cluster. The overview page of your target cluster is displayed.
-2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
-3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
-4. Fill in the **Data Source Type**, **Bucket Name**, **Region**, and **Data Format** fields according to the specification of your source data.
-5. Fill in the **Username** and **Password** fields of the **Target Database** according to the connection settings of your cluster.
-6. Create the bucket policy and role for cross-account access according to [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
-7. Click **Import** to create the task.
+1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
+2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
+3.  [AmazonS3バケットを作成してソースデータファイルを準備する方法を学ぶ](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。データの準備の部分で、さまざまな**データ形式**の長所と短所を確認できます。
+4.  ソースデータの仕様に従って、[**データソースタイプ**]、[<strong>バケット名]</strong> 、[<strong>地域</strong>]、および<strong>[データ形式]</strong>フィールドに入力します。
+5.  クラスタの接続設定に従って、**ターゲットデータベース**の<strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
+6.  [クロスアカウントアクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウントアクセスのバケットポリシーとロールを作成します。
+7.  [**インポート]**をクリックしてタスクを作成します。
 
-> **Note:**
+> **ノート：**
 >
-> If your task fails, refer to [Learn how to clean up incomplete data](#learn-how-to-clean-up-incomplete-data).
+> タスクが失敗した場合は、 [不完全なデータをクリーンアップする方法を学ぶ](#learn-how-to-clean-up-incomplete-data)を参照してください。
 
-## Learn how to create an Amazon S3 Bucket and prepare source data files
+## AmazonS3バケットを作成してソースデータファイルを準備する方法を学ぶ {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
-To prepare data, you can select one from the following two options:
+データを準備するには、次の2つのオプションから1つを選択できます。
 
-- [Option 1: Prepare source data files using Dumpling](#option-1-prepare-source-data-files-using-dumpling)
+-   [オプション1：Dumplingを使用してソースデータファイルを準備する](#option-1-prepare-source-data-files-using-dumpling)
 
-    You need to launch [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) on your EC2, and export the data to Amazon S3. The data you export is the current latest data of your source database. This might affect the online service. Dumpling will lock the table when you export data.
+    EC2で[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を起動し、データをAmazonS3にエクスポートする必要があります。エクスポートするデータは、ソースデータベースの現在の最新データです。これはオンラインサービスに影響を与える可能性があります。データをエクスポートするときに、Dumplingはテーブルをロックします。
 
-- [Option 2: Prepare source data files using Amazon Aurora snapshots](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
+-   [オプション2： Auroraスナップショットを使用してソースデータファイルを準備する](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
 
-    This affects your online service. It might take a while when you export data, because the export task on Amazon Aurora first restores and scales the database before exporting data to Amazon S3. For more details, see [Exporting DB snapshot data to Amazon S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html).
+    これはオンラインサービスに影響します。 Amazon Auroraのエクスポートタスクは、データをAmazon S3にエクスポートする前に、最初にデータベースを復元してスケーリングするため、データをエクスポートするときに時間がかかる場合があります。詳細については、 [DBスナップショットデータをAmazonS3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。
 
-### Prechecks and preparations
+### 事前チェックと準備 {#prechecks-and-preparations}
 
-> **Note:**
+> **ノート：**
 >
-> Currently, it is not recommended to import more than 2 TB of data.
+> 現在、2TBを超えるデータをインポートすることはお勧めしません。
 >
-> Before starting the migration, you need to do the following prechecks and preparations.
+> 移行を開始する前に、次の事前チェックと準備を行う必要があります。
 
-#### Ensure enough free space
+#### 十分な空きスペースを確保する {#ensure-enough-free-space}
 
-Ensure that the free space of your TiDB cluster is larger than the size of your data. It is recommended that you should reserve 600 GB free space on each TiKV node. You can add more TiKV nodes to fulfill your demand.
+TiDBクラスタの空き領域がデータのサイズよりも大きいことを確認してください。各TiKVノードに600GBの空き領域を予約することをお勧めします。需要を満たすために、TiKVノードをさらに追加できます。
 
-#### Check the database’s collation set settings
+#### データベースの照合順序セット設定を確認してください {#check-the-database-s-collation-set-settings}
 
-Currently, TiDB only supports the `utf8_general_ci` and `utf8mb4_general_ci` collation. To verify the collation settings of your database, execute the following command in the MySQL terminal connected to Aurora:
+現在、TiDBは`utf8_general_ci`と`utf8mb4_general_ci`の照合順序のみをサポートしています。データベースの照合順序設定を確認するには、 Auroraに接続されているMySQLターミナルで次のコマンドを実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from ((select table_schema, table_name, column_name, collation_name from information_schema.columns where character_set_name is not null) union all (select table_schema, table_name, null, table_collation from information_schema.tables)) x where table_schema not in ('performance_schema', 'mysql', 'information_schema') and collation_name not in ('utf8_bin', 'utf8mb4_bin', 'ascii_bin', 'latin1_bin', 'binary', 'utf8_general_ci', 'utf8mb4_general_ci');
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```output
 Empty set (0.04 sec)
 ```
 
-If TiDB does not support your character set or collation, consider converting them to supported types. For more details, see [Character Set and Collation](https://docs.pingcap.com/tidb/stable/character-set-and-collation).
+TiDBが文字セットまたは照合順序をサポートしていない場合は、それらをサポートされているタイプに変換することを検討してください。詳細については、 [キャラクターセットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 
-### Option 1: Prepare source data files using Dumpling
+### オプション1：Dumplingを使用してソースデータファイルを準備する {#option-1-prepare-source-data-files-using-dumpling}
 
-You need to prepare an EC2 to run the following data export task. It's better to run on the same network with Aurora and S3 to avoid extra fees.
+次のデータエクスポートタスクを実行するには、EC2を準備する必要があります。追加料金を回避するために、 AuroraおよびS3と同じネットワーク上で実行することをお勧めします。
 
-1. Install Dumpling on EC2.
+1.  EC2にDumplingをインストールします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
@@ -79,28 +79,28 @@ You need to prepare an EC2 to run the following data export task. It's better to
     tiup install dumpling 
     ```
 
-    In the above commands, you need to modify `~/.bash_profile` to the path of your profile file.
+    上記のコマンドでは、プロファイルファイルのパスに`~/.bash_profile`を変更する必要があります。
 
-2. Grant the write privilege to Dumpling for writing S3.
+2.  S3を書き込むためのDumplingに書き込み権限を付与します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > If you have assigned the IAM role to the EC2, you can skip configuring the access key and security key, and directly run Dumpling on this EC2.
-    
-    You can grant the write privilege using the access key and security key of your AWS account in the environment. Create a specific key pair for preparing data, and revoke the access key immediately after you finish the preparation.
+    > EC2にIAMロールを割り当てている場合は、アクセスキーとセキュリティキーの設定をスキップして、このEC2で直接Dumplingを実行できます。
 
-    {{< copyable "shell-regular" >}}
+    環境内のAWSアカウントのアクセスキーとセキュリティキーを使用して、書き込み権限を付与できます。データを準備するための特定のキーペアを作成し、準備が完了したらすぐにアクセスキーを取り消します。
+
+    {{< copyable "" >}}
 
     ```bash
     export AWS_ACCESS_KEY_ID=AccessKeyID
     export AWS_SECRET_ACCESS_KEY=SecretKey
     ```
 
-3. Back up the source database to S3.
+3.  ソースデータベースをS3にバックアップします。
 
-    Use Dumpling to export the data from Amazon Aurora. Based on your environment, replace the content in angle brackets (>), and then execute the following commands. If you want to use filter rules when exporting the data, refer to [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter#cli).
+    Dumplingを使用して、 Auroraからデータをエクスポートします。ご使用の環境に応じて、中括弧（&gt;）の内容を置き換えてから、次のコマンドを実行してください。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     export_username="<Aurora username>"
@@ -125,25 +125,25 @@ You need to prepare an EC2 to run the following data export task. It's better to
     -F 256MiB
     ```
 
-4. On the data import task panel of TiDB Cloud, choose **TiDB Dumpling** as the **Data Format**.
+4.  TiDB Cloudのデータインポートタスクパネルで、**データ形式**として<strong>Dumpling</strong>を選択します。
 
-### Option 2: Prepare source data files using Amazon Aurora snapshots
+### オプション2： Auroraスナップショットを使用してソースデータファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
 
-#### Back up the schema of the database and restore on TiDB Cloud
+#### データベースのスキーマをバックアップし、TiDBクラウドで復元します {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
 
-To migrate data from Aurora, you need to back up the schema of the database.
+Auroraからデータを移行するには、データベースのスキーマをバックアップする必要があります。
 
-1. Install the MySQL client.
+1.  MySQLクライアントをインストールします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```bash
     yum install mysql -y
     ```
 
-2. Back up the schema of the database.
+2.  データベースのスキーマをバックアップします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```bash
     export_username="<Aurora username>"
@@ -153,9 +153,9 @@ To migrate data from Aurora, you need to back up the schema of the database.
     mysqldump -h ${export_endpoint} -u ${export_username} -p --ssl-mode=DISABLED -d${export_database} >db.sql
     ```
 
-3. Import the schema of the database into TiDB Cloud. 
+3.  データベースのスキーマをTiDBクラウドにインポートします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```bash
     dest_endpoint="<TiDB Cloud connect endpoint>"
@@ -165,40 +165,40 @@ To migrate data from Aurora, you need to back up the schema of the database.
     mysql -u ${dest_username} -h ${dest_endpoint} -P ${dest_port_number} -p -D${dest_database}<db.sql
     ```
 
-4. On the data import task panel of TiDB Cloud, choose **Aurora Backup Snapshot** as the **Data Format**.
+4.  TiDB Cloudのデータインポートタスクパネルで、**データ形式**として<strong>Aurora</strong>を選択します。
 
-#### Take a snapshot and export it to S3
+#### スナップショットを取り、S3にエクスポートします {#take-a-snapshot-and-export-it-to-s3}
 
- 1. From the Amazon RDS console, choose **Snapshots**, and click **Take snapshots** to create a manual snapshot.
+1.  Amazon RDSコンソールから[スナップショット]を選択し、[**スナップショット**の取得]をクリックして手動スナップ<strong>ショット</strong>を作成します。
 
- 2. Fill in the blank under **Snapshot Name**. Click **Take snapshot**. When you finish creating the snapshot, the snapshot shows under the snapshot table.
+2.  [**スナップショット名]**の下に空欄を入力します。 [<strong>スナップショットを撮る]を</strong>クリックします。スナップショットの作成が完了すると、スナップショットがスナップショットテーブルの下に表示されます。
 
- 3. Choose the snapshot you have taken, click **Actions**. In the drop-down box, click **Export to Amazon S3**.
+3.  作成したスナップショットを選択し、[**アクション**]をクリックします。ドロップダウンボックスで、[ <strong>AmazonS3にエクスポート]を</strong>クリックします。
 
- 4. Fill the blank under **Export identifier**.
+4.  **エクスポート識別子**の下の空白を埋めます。
 
- 5. Choose the amount of data to be exported. In this guide, **All** is selected. You can also choose partial to use identifiers to decide which part of the database needs to be exported.
+5.  エクスポートするデータの量を選択します。このガイドでは、 **[すべて]**が選択されています。部分を選択して識別子を使用し、データベースのどの部分をエクスポートする必要があるかを決定することもできます。
 
- 6. Choose the S3 bucket to store the snapshot. You can create a new bucket to store the data for security concerns. It is recommended to use the bucket in the same region as your TiDB cluster. Downloading data across regions can cause additional network costs.
+6.  スナップショットを保存するS3バケットを選択します。セキュリティ上の懸念からデータを保存するための新しいバケットを作成できます。 TiDBクラスタと同じリージョンでバケットを使用することをお勧めします。リージョン間でデータをダウンロードすると、追加のネットワークコストが発生する可能性があります。
 
- 7. Choose the proper IAM role to grant write access to the S3 bucket. Make a note of this role as it will be used later when you import the snapshot to TiDB Cloud.
+7.  適切なIAMロールを選択して、S3バケットへの書き込みアクセスを許可します。後でスナップショットをTiDBCloudにインポートするときに使用されるため、この役割をメモしてください。
 
- 8. Choose a proper AWS KMS Key and make sure the IAM role has already been added to the KMS Key Users. To add a role, you can select a KSM service, select the key, and then click **Add**. 
+8.  適切なAWSKMSキーを選択し、IAMロールがKMSキーユーザーにすでに追加されていることを確認します。役割を追加するには、KSMサービスを選択し、キーを選択して、[**追加**]をクリックします。
 
- 9. Click **Export Amazon S3**. You can see the progress in the task table.
+9.  [ **AmazonS3のエクスポート]**をクリックします。タスクテーブルで進行状況を確認できます。
 
- 10. From the task table, record the destination bucket (for example, `s3://snapshot-bucket/snapshot-samples-1`).
+10. タスクテーブルから、宛先バケットを記録します（たとえば、 `s3://snapshot-bucket/snapshot-samples-1` ）。
 
-## Learn how to configure cross-account access
+## クロスアカウントアクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
 
-The TiDB Cloud cluster and the S3 bucket are in different AWS accounts. To allow the TiDB Cloud cluster to access the source data files in the S3 bucket, you need to configure the cross-account access to Amazon S3. For more information, see [Configure the Amazon S3 access](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access).
+TiDBクラウドクラスタとS3バケットは異なるAWSアカウントにあります。 TiDBクラウドクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
 
-Once finished, you will have created a policy and role for cross-account. You can then continue with the configuration on the data import task panel of TiDB Cloud.
+完了すると、クロスアカウントのポリシーと役割が作成されます。その後、TiDBCloudのデータインポートタスクパネルで設定を続行できます。
 
-## Learn how to set up filter rules
+## フィルタルールを設定する方法を学ぶ {#learn-how-to-set-up-filter-rules}
 
-Refer to the [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter#cli) document. Currently, TiDB Cloud only supports one table filter rule.
+[テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)ドキュメントを参照してください。現在、TiDBCloudは1つのテーブルフィルタールールのみをサポートしています。
 
-## Learn how to clean up incomplete data
+## 不完全なデータをクリーンアップする方法を学ぶ {#learn-how-to-clean-up-incomplete-data}
 
-You can check the requirements again. When all the problems are solved, you can drop the incomplete database and restart the importing process.
+要件を再度確認できます。すべての問題が解決したら、不完全なデータベースを削除して、インポートプロセスを再開できます。

@@ -3,11 +3,11 @@ title: ROLLBACK | TiDB SQL Statement Reference
 summary: An overview of the usage of ROLLBACK for the TiDB database.
 ---
 
-# ROLLBACK
+# ロールバック {#rollback}
 
-This statement reverts all changes in the current transaction inside of TIDB.  It is the opposite of a `COMMIT` statement.
+このステートメントは、TIDB内の現在のトランザクションのすべての変更を元に戻します。これは、 `COMMIT`ステートメントの反対です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 RollbackStmt ::=
@@ -18,7 +18,7 @@ CompletionTypeWithinTransaction ::=
 |   'NO'? 'RELEASE'
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
@@ -37,14 +37,14 @@ mysql> SELECT * FROM t1;
 Empty set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* TiDB does not support savepoints or the syntax `ROLLBACK TO SAVEPOINT`.
-* TiDB parses but ignores the syntax `ROLLBACK AND [NO] RELEASE`. This functionality is used in MySQL to disconnect the client session immediately after rolling back the transaction. In TiDB, it is recommended to instead use the `mysql_close()` functionality of your client driver.
-* TiDB parses but ignores the syntax `ROLLBACK AND [NO] CHAIN`. This functionality is used in MySQL to immediately start a new transaction with the same isolation level while the current transaction is being rolled back. In TiDB, it is recommended to instead start a new transaction.
+-   TiDBは、セーブポイントまたは構文`ROLLBACK TO SAVEPOINT`をサポートしていません。
+-   TiDBは構文`ROLLBACK AND [NO] RELEASE`を解析しますが、無視します。この機能は、トランザクションをロールバックした直後にクライアントセッションを切断するためにMySQLで使用されます。 TiDBでは、代わりにクライアントドライバーの`mysql_close()`の機能を使用することをお勧めします。
+-   TiDBは構文`ROLLBACK AND [NO] CHAIN`を解析しますが、無視します。この機能はMySQLで使用され、現在のトランザクションがロールバックされている間、同じ分離レベルで新しいトランザクションをすぐに開始します。 TiDBでは、代わりに新しいトランザクションを開始することをお勧めします。
 
-## See also
+## も参照してください {#see-also}
 
-* [COMMIT](/sql-statements/sql-statement-commit.md)
-* [BEGIN](/sql-statements/sql-statement-begin.md)
-* [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [始める](/sql-statements/sql-statement-begin.md)
+-   [トランザクションを開始します](/sql-statements/sql-statement-start-transaction.md)

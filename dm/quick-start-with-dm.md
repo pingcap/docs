@@ -3,38 +3,38 @@ title: TiDB Data Migration Quick Start
 summary: Learn how to quickly deploy a DM cluster using binary packages.
 ---
 
-# Quick Start Guide for TiDB Data Migration
+# TiDBデータ移行のクイックスタートガイド {#quick-start-guide-for-tidb-data-migration}
 
-This document describes how to migrate data from MySQL to TiDB using [TiDB Data Migration](https://github.com/pingcap/dm) (DM).
+このドキュメントでは、 [TiDBデータ移行](https://github.com/pingcap/dm) （DM）を使用してMySQLからTiDBにデータを移行する方法について説明します。
 
-If you need to deploy DM in the production environment, refer to the following documents:
+DMを実稼働環境にデプロイする必要がある場合は、次のドキュメントを参照してください。
 
-- [Deploy a DM cluster Using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md)
-- [Create a Data Source](/dm/quick-start-create-source.md)
-- [Create a Data Migration Task](/dm/quick-create-migration-task.md)
+-   [TiUPを使用してDMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [データソースを作成する](/dm/quick-start-create-source.md)
+-   [データ移行タスクを作成する](/dm/quick-create-migration-task.md)
 
-## Sample scenario
+## サンプルシナリオ {#sample-scenario}
 
-Suppose you deploy DM-master and DM-worker instances in an on-premise environment, and migrate data from an upstream MySQL instance to a downstream TiDB instance.
+オンプレミス環境にDM-masterインスタンスとDM-workerインスタンスをデプロイし、データをアップストリームのMySQLインスタンスからダウンストリームのTiDBインスタンスに移行するとします。
 
-The detailed information of each instance is as follows:
+各インスタンスの詳細情報は次のとおりです。
 
-| Instance        | Server Address   | Port |
-| :---------- | :----------- | :----------- |
-| DM-master  | 127.0.0.1 | 8261, 8291 (Internal port) |
-| DM-worker  | 127.0.0.1 | 8262 |
-| MySQL-3306 | 127.0.0.1 | 3306 |
-| TiDB       | 127.0.0.1 | 4000 |
+| 実例         | サーバーアドレス  | ポート              |
+| :--------- | :-------- | :--------------- |
+| DMマスター     | 127.0.0.1 | 8261、8291（内部ポート） |
+| DMワーカー     | 127.0.0.1 | 8262             |
+| MySQL-3306 | 127.0.0.1 | 3306             |
+| TiDB       | 127.0.0.1 | 4000             |
 
-## Deploy DM using the binary package
+## バイナリパッケージを使用してDMをデプロイ {#deploy-dm-using-the-binary-package}
 
-### Download DM binary package
+### DMバイナリパッケージをダウンロード {#download-dm-binary-package}
 
-Download DM latest binary package or compile the package manually.
+DMの最新のバイナリパッケージをダウンロードするか、パッケージを手動でコンパイルします。
 
-#### Method 1: Download the latest version of binary package
+#### 方法1：最新バージョンのバイナリパッケージをダウンロードする {#method-1-download-the-latest-version-of-binary-package}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 wget http://download.pingcap.org/dm-nightly-linux-amd64.tar.gz
@@ -42,9 +42,9 @@ tar -xzvf dm-nightly-linux-amd64.tar.gz
 cd dm-nightly-linux-amd64
 ```
 
-#### Method 2: Compile the latest version of binary package
+#### 方法2：最新バージョンのバイナリパッケージをコンパイルする {#method-2-compile-the-latest-version-of-binary-package}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 git clone https://github.com/pingcap/dm.git
@@ -52,37 +52,37 @@ cd dm
 make
 ```
 
-### Deploy DM-master
+### DMマスターをデプロイ {#deploy-dm-master}
 
-Execute the following command to start the DM-master:
+次のコマンドを実行して、DMマスターを起動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 nohup bin/dm-master --master-addr='127.0.0.1:8261' --log-file=/tmp/dm-master.log --name="master1" >> /tmp/dm-master.log 2>&1 &
 ```
 
-### Deploy DM-worker
+### DM-workerをデプロイ {#deploy-dm-worker}
 
-Execute the following command to start the DM-worker:
+次のコマンドを実行して、DM-workerを起動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 nohup bin/dm-worker --worker-addr='127.0.0.1:8262' --log-file=/tmp/dm-worker.log --join='127.0.0.1:8261' --name="worker1" >> /tmp/dm-worker.log 2>&1 &
 ```
 
-### Check deployment status
+### 展開ステータスを確認する {#check-deployment-status}
 
-To check whether the DM cluster has been deployed successfully, execute the following command:
+DMクラスタが正常にデプロイされたかどうかを確認するには、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 bin/dmctl --master-addr=127.0.0.1:8261 list-member
 ```
 
-A normal DM cluster returns the following information:
+通常のDMクラスタは、次の情報を返します。
 
 ```bash
 {
@@ -131,13 +131,13 @@ A normal DM cluster returns the following information:
 }
 ```
 
-## Migrate data from MySQL to TiDB
+## MySQLからTiDBにデータを移行する {#migrate-data-from-mysql-to-tidb}
 
-### Prepare sample data
+### サンプルデータを準備する {#prepare-sample-data}
 
-Before using DM, insert the following sample data to `MySQL-3306`:
+DMを使用する前に、次のサンプルデータを`MySQL-3306`に挿入します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 drop database if exists `testdm`;
@@ -149,20 +149,20 @@ insert into t1 (id, uid, name) values (1, 10001, 'Gabriel García Márquez'), (2
 insert into t2 (id, uid, name) values (3, 20001, 'José Arcadio Buendía'), (4, 20002, 'Úrsula Iguarán'), (5, 20003, 'José Arcadio');
 ```
 
-### Load data source configurations
+### データソース構成をロードする {#load-data-source-configurations}
 
-Before running a data migration task, you need to first load the configuration file of the corresponding data source (that is, `MySQL-3306` in the example) to DM.
+データ移行タスクを実行する前に、まず対応するデータソース（つまり、例では`MySQL-3306` ）の構成ファイルをDMにロードする必要があります。
 
-#### Encrypt the data source password
+#### データソースのパスワードを暗号化する {#encrypt-the-data-source-password}
 
-> **Note:**
+> **ノート：**
 >
-> + You can skip this step if the data source does not have a password.
-> + You can use the plaintext password to configure the data source information in DM v2.0 and later versions.
+> -   データソースにパスワードがない場合は、この手順をスキップできます。
+> -   プレーンテキストのパスワードを使用して、DMv2.0以降のバージョンでデータソース情報を構成できます。
 
-For safety reasons, it is recommended to configure and use encrypted passwords for data sources. Suppose the password is "123456":
+安全上の理由から、データソースに暗号化されたパスワードを設定して使用することをお勧めします。パスワードが「123456」であるとします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./bin/dmctl --encrypt "123456"
@@ -172,11 +172,11 @@ For safety reasons, it is recommended to configure and use encrypted passwords f
 fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
 ```
 
-Save this encrypted value, and use it for creating a MySQL data source in the following steps.
+この暗号化された値を保存し、次の手順でMySQLデータソースを作成するために使用します。
 
-#### Edit the source configuration file of the MySQL instance
+#### MySQLインスタンスのソース構成ファイルを編集します {#edit-the-source-configuration-file-of-the-mysql-instance}
 
-Write the following configurations to `conf/source1.yaml`.
+次の構成を`conf/source1.yaml`に書き込みます。
 
 ```yaml
 # MySQL1 Configuration.
@@ -188,17 +188,17 @@ from:
   port: 3306
 ```
 
-#### Load data source configuration file
+#### データソース構成ファイルをロードします {#load-data-source-configuration-file}
 
-To load the data source configuration file of MySQL to the DM cluster using dmctl, run the following command in the terminal:
+dmctlを使用してMySQLのデータソース構成ファイルをDMクラスタにロードするには、ターミナルで次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./bin/dmctl --master-addr=127.0.0.1:8261 operate-source create conf/source1.yaml
 ```
 
-The following is an example of the returned results:
+返される結果の例を次に示します。
 
 ```bash
 {
@@ -215,13 +215,13 @@ The following is an example of the returned results:
 }
 ```
 
-Now you successfully add the data source `MySQL-3306` to the DM cluster.
+これで、データソース`MySQL-3306`がDMクラスタに正常に追加されました。
 
-### Create a data migration task
+### データ移行タスクを作成する {#create-a-data-migration-task}
 
-After inserting the [sample data](#prepare-sample-data) into `MySQL-3306`, take the following steps to migrate the tables `testdm`.`t1` and `testdm`.`t2` to the downstream TiDB instance:
+[サンプルデータ](#prepare-sample-data)を`MySQL-3306`に挿入した後、次の手順を実行してテーブル`testdm`を移行します。 `t1`と`testdm` 。 `t2`ダウンストリームTiDBインスタンスへ：
 
-1. Create a task configuration file `testdm-task.yaml`, and add the following configurations to the file.
+1.  タスク構成ファイル`testdm-task.yaml`を作成し、次の構成をファイルに追加します。
 
     {{< copyable "" >}}
 
@@ -242,15 +242,15 @@ After inserting the [sample data](#prepare-sample-data) into `MySQL-3306`, take 
         do-dbs: ["testdm"]
     ```
 
-2. Load the task configuration file using dmctl:
+2.  dmctlを使用してタスク構成ファイルをロードします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     ./bin/dmctl --master-addr 127.0.0.1:8261 start-task testdm-task.yaml
     ```
 
-    The following is an example of the returned results:
+    返される結果の例を次に示します。
 
     ```bash
     {
@@ -267,19 +267,19 @@ After inserting the [sample data](#prepare-sample-data) into `MySQL-3306`, take 
     }
     ```
 
-Now you successfully create a data migration task that migrates data from `MySQL-3306` to the downstream TiDB instance.
+これで、データを`MySQL-3306`からダウンストリームTiDBインスタンスに移行するデータ移行タスクを正常に作成できました。
 
-### Check status of the data migration task 
+### データ移行タスクのステータスを確認する {#check-status-of-the-data-migration-task}
 
-After the data migration task is created, you can use `dmtcl query-status` to check the status of the task. See the following example:
+データ移行タスクが作成されたら、 `dmtcl query-status`を使用してタスクのステータスを確認できます。次の例を参照してください。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./bin/dmctl --master-addr 127.0.0.1:8261 query-status
 ```
 
-The following is an example of the returned results:
+返される結果の例を次に示します。
 
 ```bash
 {

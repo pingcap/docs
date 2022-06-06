@@ -3,24 +3,27 @@ title: Delete a TiDB Cluster
 summary: Learn how to delete a TiDB cluster.
 ---
 
-# Delete a TiDB Cluster
+# TiDBクラスターを削除する {#delete-a-tidb-cluster}
 
-This document describes how to delete a TiDB cluster on TiDB Cloud.
+このドキュメントでは、TiDBCloudでTiDBクラスタを削除する方法について説明します。
 
-You can delete a cluster at any time by performing the following steps:
+次の手順を実行することにより、いつでもクラスタを削除できます。
 
-1. Navigate to the TiDB Clusters page and click the name of a cluster that you want to delete. The overview page of the cluster is displayed.
-2. In the cluster information pane on the left, click **Setting**.
-3. Click **Delete** in the drop-down menu.
-4. In the cluster deleting window, enter the cluster name.
+1.  [TiDBクラスター]ページに移動し、削除するクラスタの名前をクリックします。クラスタの概要ページが表示されます。
 
-    If you want to restore the cluster sometime in the future, make sure you have a backup of the cluster. Otherwise, you cannot restore it anymore. For more information about how to back up clusters, see [Back up and Restore TiDB Cluster Data](/tidb-cloud/backup-and-restore.md).
+2.  左側のクラスタ情報ペインで、[**設定**]をクリックします。
 
-5. Click **I understand the consequences, delete this cluster**.
+3.  ドロップダウンメニューで[**削除]**をクリックします。
 
- Once a backed up cluster is deleted, the existing backup files of the cluster are moved to the recycle bin.
+4.  クラスタ削除ウィンドウで、クラスタ名を入力します。
 
-- For backup files from an automatic backup, the recycle bin can retain them for 7 days.
-- For backup files from a manual backup, there is no expiration date.
+    将来的にクラスタを復元する場合は、クラスタのバックアップがあることを確認してください。そうしないと、それを復元できなくなります。クラスタをバックアップする方法の詳細については、 [TiDBクラスターデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
- If you want to restore a cluster from recycle bin, see [Restore a deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster).
+5.  [**結果を理解しました]をクリックして、このクラスタを削除します**。
+
+バックアップされたクラスタが削除されると、クラスタの既存のバックアップファイルがごみ箱に移動されます。
+
+-   自動バックアップからのバックアップファイルの場合、ごみ箱はそれらを7日間保持できます。
+-   手動バックアップからのバックアップファイルの場合、有効期限はありません。
+
+ごみ箱からクラスタを復元する場合は、 [削除したクラスタを復元する](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster)を参照してください。

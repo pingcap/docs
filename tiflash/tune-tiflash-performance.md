@@ -3,51 +3,51 @@ title: Tune TiFlash Performance
 summary: Learn how to tune the performance of TiFlash.
 ---
 
-# Tune TiFlash Performance
+# TiFlashのパフォーマンスを調整する {#tune-tiflash-performance}
 
-This document introduces how to tune the performance of TiFlash, including planning machine resources and tuning TiDB parameters.
+このドキュメントでは、マシンリソースの計画やTiDBパラメータの調整など、TiFlashのパフォーマンスを調整する方法を紹介します。
 
-## Plan resources
+## リソースを計画する {#plan-resources}
 
-If you want to save machine resources and have no requirement on isolation, you can use the method that combines the deployment of both TiKV and TiFlash. It is recommended that you save enough resources for TiKV and TiFlash respectively, and do not share disks.
+マシンリソースを節約し、分離の要件がない場合は、TiKVとTiFlashの両方の展開を組み合わせた方法を使用できます。 TiKVとTiFlashにそれぞれ十分なリソースを節約し、ディスクを共有しないことをお勧めします。
 
-## Tune TiDB parameters
+## TiDBパラメータを調整する {#tune-tidb-parameters}
 
-1. For the TiDB node dedicated to OLAP/TiFlash, it is recommended that you increase the value of the [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) configuration item for this node to `80`:
+1.  OLAP / TiFlash専用のTiDBノードの場合、このノードの[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)構成項目の値を`80`に増やすことをお勧めします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set @@tidb_distsql_scan_concurrency = 80;
     ```
 
-2. Enable the super batch feature:
+2.  スーパーバッチ機能を有効にします。
 
-    You can use the [`tidb_allow_batch_cop`](/system-variables.md#tidb_allow_batch_cop-new-in-v40) variable to set whether to merge Region requests when reading from TiFlash.
+    [`tidb_allow_batch_cop`](/system-variables.md#tidb_allow_batch_cop-new-in-v40)変数を使用して、TiFlashから読み取るときにRegionリクエストをマージするかどうかを設定できます。
 
-    When the number of Regions involved in the query is relatively large, try to set this variable to `1` (effective for coprocessor requests with `aggregation` operators that are pushed down to TiFlash), or set this variable to `2` (effective for all coprocessor requests that are pushed down to TiFlash).
+    クエリに関係するリージョンの数が比較的多い場合は、この変数を`1` （TiFlashにプッシュダウンされる`aggregation`のオペレーターを持つコプロセッサー要求に有効）に設定するか、この変数を`2` （すべてのコプロセッサー要求に有効）に設定してみてください。 TiFlashにプッシュダウン）。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set @@tidb_allow_batch_cop = 1;
     ```
 
-3. Enable the optimization of pushing down aggregate functions before TiDB operators such as `JOIN` or `UNION`:
+3.  `JOIN`や`UNION`などのTiDB演算子の前に集計関数をプッシュダウンする最適化を有効にします。
 
-    You can use the [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down) variable to control the optimizer to execute this optimization. When the aggregate operations are quite slow in the query, try to set this variable to `1`.
+    [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)変数を使用してオプティマイザーを制御し、この最適化を実行できます。クエリで集計操作が非常に遅い場合は、この変数を`1`に設定してみてください。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set @@tidb_opt_agg_push_down = 1;
     ```
 
-4. Enable the optimization of pushing down aggregate functions with `Distinct` before TiDB operators such as `JOIN` or `UNION`:
+4.  `JOIN`や`UNION`などのTiDB演算子の前に`Distinct`を使用して集計関数をプッシュダウンする最適化を有効にします。
 
-    You can use the [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) variable to control the optimizer to execute this optimization. When the aggregate operations with `Distinct` are quite slow in the query, try to set this variable to `1`.
+    [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)変数を使用してオプティマイザーを制御し、この最適化を実行できます。クエリで`Distinct`の集計操作が非常に遅い場合は、この変数を`1`に設定してみてください。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set @@tidb_opt_distinct_agg_push_down = 1;

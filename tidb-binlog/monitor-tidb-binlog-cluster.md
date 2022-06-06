@@ -3,168 +3,168 @@ title: TiDB Binlog Monitoring
 summary: Learn how to monitor the cluster version of TiDB Binlog.
 ---
 
-# TiDB Binlog Monitoring
+# TiDBBinlogモニタリング {#tidb-binlog-monitoring}
 
-After you have deployed TiDB Binlog successfully, you can go to the Grafana Web (default address: <http://grafana_ip:3000>, default account: admin, password: admin) to check the state of Pump and Drainer.
+TiDB Binlogを正常にデプロイしたら、Grafana Web（デフォルトのアドレス： [http：// grafana_ip：3000](http://grafana_ip:3000) 、デフォルトのアカウント：admin、パスワード：admin）にアクセスして、PumpandDrainerの状態を確認できます。
 
-## Monitoring metrics
+## モニタリング指標 {#monitoring-metrics}
 
-TiDB Binlog consists of two components: Pump and Drainer. This section shows the monitoring metrics of Pump and Drainer.
+TiDB Binlogは、ポンプとドレイナーの2つのコンポーネントで構成されています。このセクションでは、ポンプとドレイナーの監視メトリックを示します。
 
-### Pump monitoring metrics
+### ポンプ監視メトリクス {#pump-monitoring-metrics}
 
-To understand the Pump monitoring metrics, check the following table:
+ポンプ監視メトリックを理解するには、次の表を確認してください。
 
-| Pump monitoring metrics | Description |
-| --- | --- |
-| Storage Size | Records the total disk space (capacity) and the available disk space (available)|
-| Metadata | Records the biggest TSO (`gc_tso`) of the binlog that each Pump node can delete, and the biggest commit TSO (`max_commit_tso`) of the saved binlog |
-| Write Binlog QPS by Instance | Shows QPS of writing binlog requests received by each Pump node |
-| Write Binlog Latency | Records the latency time of each Pump node writing binlog |
-| Storage Write Binlog Size | Shows the size of the binlog data written by Pump |
-| Storage Write Binlog Latency | Records the latency time of the Pump storage module writing binlog |
-| Pump Storage Error By Type | Records the number of errors encountered by Pump, counted based on the type of error |
-| Query TiKV | The number of times that Pump queries the transaction status through TiKV |
+| ポンプ監視メトリクス              | 説明                                                                                       |
+| ----------------------- | ---------------------------------------------------------------------------------------- |
+| ストレージサイズ                | 合計ディスク容量（容量）と使用可能なディスク容量（使用可能）を記録します                                                     |
+| メタデータ                   | 各Pumpノードが削除できるbinlogの最大TSO（ `gc_tso` ）と、保存されたbinlogの最大コミットTSO（ `max_commit_tso` ）を記録します。 |
+| インスタンスごとのBinlogQPSの書き込み | 各Pumpノードが受信したbinlog要求の書き込みのQPSを表示します                                                     |
+| Binlogレイテンシを書き込む        | binlogを書き込む各Pumpノードのレイテンシー時間を記録します                                                       |
+| ストレージ書き込みビンログサイズ        | Pumpによって書き込まれたbinlogデータのサイズを表示します                                                        |
+| ストレージ書き込みBinlogレイテンシ    | binlogを書き込むポンプストレージモジュールの待ち時間を記録します                                                      |
+| タイプ別の揚水発電エラー            | エラーのタイプに基づいてカウントされた、Pumpで発生したエラーの数を記録します                                                 |
+| TiKVを照会する               | PumpがTiKVを介してトランザクションステータスを照会する回数                                                        |
 
-### Drainer monitoring metrics
+### ドレイナーモニタリングメトリクス {#drainer-monitoring-metrics}
 
-To understand the Drainer monitoring metrics, check the following table:
+Drainerの監視メトリックを理解するには、次の表を確認してください。
 
-| Drainer monitoring metrics | Description |
-| --- | --- |
-| Checkpoint TSO | Shows the biggest TSO time of the binlog that Drainer has already replicated into the downstream. You can get the lag by using the current time to subtract the binlog timestamp. But be noted that the timestamp is allocated by PD of the master cluster and is determined by the time of PD.|
-| Pump Handle TSO | Records the biggest TSO time among the binlog files that Drainer obtains from each Pump node |
-| Pull Binlog QPS by Pump NodeID | Shows the QPS when Drainer obtains binlog from each Pump node |
-| 95% Binlog Reach Duration By Pump | Records the delay from the time when binlog is written into Pump to the time when the binlog is obtained by Drainer |
-| Error By Type | Shows the number of errors encountered by Drainer, counted based on the type of error |
-| SQL Query Time | Records the time it takes Drainer to execute the SQL statement in the downstream |
-| Drainer Event | Shows the number of various types of events, including "ddl", "insert", "delete", "update", "flush", and "savepoint" |
-| Execute Time | Records the time it takes to write binlog into the downstream syncing module |
-| 95% Binlog Size | Shows the size of the binlog data that Drainer obtains from each Pump node |
-| DDL Job Count | Records the number of DDL statements handled by Drainer |
-| Queue Size | Records the work queue size in Drainer |
+| ドレイナーモニタリングメトリクス         | 説明                                                                                                                                                    |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| チェックポイントTSO              | Drainerがすでにダウンストリームに複製したbinlogの最大TSO時間を表示します。現在の時刻を使用してbinlogタイムスタンプを差し引くことにより、ラグを取得できます。ただし、タイムスタンプはマスタークラスタのPDによって割り当てられ、PDの時刻によって決定されることに注意してください。 |
+| ポンプハンドルTSO               | Drainerが各Pumpノードから取得するbinlogファイルの中で最大のTSO時間を記録します                                                                                                     |
+| ポンプNodeIDによるBinlogQPSのプル | Drainerが各Pumpノードからbinlogを取得したときのQPSを表示します                                                                                                             |
+| ポンプによる95％のBinlogリーチ期間    | binlogがPumpに書き込まれてから、binlogがDrainerによって取得されるまでの遅延を記録します。                                                                                              |
+| タイプ別エラー                  | エラーのタイプに基づいてカウントされた、Drainerが遭遇したエラーの数を示します                                                                                                            |
+| SQLクエリ時間                 | DrainerがダウンストリームでSQLステートメントを実行するのにかかる時間を記録します                                                                                                         |
+| ドレイナーイベント                | 「ddl」、「insert」、「delete」、「update」、「flush」、「savepoint」など、さまざまな種類のイベントの数を表示します                                                                           |
+| 実行時間                     | binlogをダウンストリーム同期モジュールに書き込むのにかかる時間を記録します                                                                                                              |
+| 95％のビンログサイズ              | Drainerが各Pumpノードから取得するbinlogデータのサイズを示します                                                                                                              |
+| DDLジョブ数                  | Drainerによって処理されたDDLステートメントの数を記録します                                                                                                                    |
+| キューサイズ                   | 作業キューのサイズをDrainerに記録します                                                                                                                               |
 
-## Alert rules
+## アラートルール {#alert-rules}
 
-This section gives the alert rules for TiDB Binlog. According to the severity level, TiDB Binlog alert rules are divided into three categories (from high to low): emergency-level, critical-level and warning-level.
+このセクションでは、TiDBBinlogのアラートルールについて説明します。重大度レベルに応じて、TiDB Binlogアラートルールは、緊急レベル、クリティカルレベル、および警告レベルの3つのカテゴリ（高から低）に分類されます。
 
-### Emergency-level alerts
+### 緊急レベルのアラート {#emergency-level-alerts}
 
-Emergency-level alerts are often caused by a service or node failure. Manual intervention is required immediately.
+緊急レベルのアラートは、多くの場合、サービスまたはノードの障害によって発生します。すぐに手動で介入する必要があります。
 
-#### `binlog_pump_storage_error_count`
+#### <code>binlog_pump_storage_error_count</code> {#code-binlog-pump-storage-error-count-code}
 
-* Alert rule:
+-   アラートルール：
 
     `changes(binlog_pump_storage_error_count[1m]) > 0`
 
-* Description:
+-   説明：
 
-    Pump fails to write the binlog data to the local storage.
+    Pumpはbinlogデータをローカルストレージに書き込めません。
 
-* Solution:
+-   解決：
 
-    Check whether an error exists in the `pump_storage_error` monitoring and check the Pump log to find the causes.
+    `pump_storage_error`モニタリングにエラーが存在するかどうかを確認し、ポンプログを確認して原因を特定します。
 
-### Critical-level alerts
+### クリティカルレベルのアラート {#critical-level-alerts}
 
-For the critical-level alerts, a close watch on the abnormal metrics is required.
+クリティカルレベルのアラートの場合、異常なメトリックを注意深く監視する必要があります。
 
-#### `binlog_drainer_checkpoint_high_delay`
+#### <code>binlog_drainer_checkpoint_high_delay</code> {#code-binlog-drainer-checkpoint-high-delay-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(time() - binlog_drainer_checkpoint_tso / 1000) > 3600`
 
-* Description:
+-   説明：
 
-    The delay of Drainer replication exceeds one hour.
+    ドレイナーの複製の遅延が1時間を超えています。
 
-* Solution:
+-   解決：
 
-    - Check whether it is too slow to obtain the data from Pump:
+    -   Pumpからデータを取得するには遅すぎるかどうかを確認します。
 
-        You can check `handle tso` of Pump to get the time for the latest message of each Pump. Check whether a high latency exists for Pump and make sure the corresponding Pump is running normally.
+        ポンプの`handle tso`をチェックして、各ポンプの最新メッセージの時間を取得できます。ポンプに高い待ち時間が存在するかどうかを確認し、対応するポンプが正常に動作していることを確認します。
 
-    - Check whether it is too slow to replicate data in the downstream based on Drainer `event` and Drainer `execute latency`:
+    -   `event`と`execute latency`に基づいて、ダウンストリームでデータを複製するには遅すぎるかどうかを確認します。
 
-        - If Drainer `execute time` is too large, check the network bandwidth and latency between the machine with Drainer deployed and the machine with the target database deployed, and the state of the target database.
-        - If Drainer `execute time` is not too large and Drainer `event` is too small, add `work count` and `batch` and retry.
+        -   Drainer `execute time`が大きすぎる場合は、Drainerが展開されているマシンとターゲットデータベースが展開されているマシンの間のネットワーク帯域幅と遅延、およびターゲットデータベースの状態を確認してください。
+        -   ドレイナー`execute time`が大きすぎず、ドレイナー`event`が小さすぎる場合は、 `work count`と`batch`を追加して、再試行してください。
 
-    - If the two solutions above cannot work, contact [support@pingcap.com](mailto:support@pingcap.com).
+    -   上記の2つの解決策が機能しない場合は、 [support@pingcap.com](mailto:support@pingcap.com)に連絡してください。
 
-### Warning-level alerts
+### 警告レベルのアラート {#warning-level-alerts}
 
-Warning-level alerts are a reminder for an issue or error.
+警告レベルのアラートは、問題またはエラーのリマインダーです。
 
-#### `binlog_pump_write_binlog_rpc_duration_seconds_bucket`
+#### <code>binlog_pump_write_binlog_rpc_duration_seconds_bucket</code> {#code-binlog-pump-write-binlog-rpc-duration-seconds-bucket-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.9, rate(binlog_pump_rpc_duration_seconds_bucket{method="WriteBinlog"}[5m])) > 1`
 
-* Description:
+-   説明：
 
-    It takes too much time for Pump to handle the TiDB request of writing binlog.
+    Pumpがbinlogを書き込むTiDB要求を処理するのに時間がかかりすぎます。
 
-* Solution:
+-   解決：
 
-    - Verify the disk performance pressure and check the disk performance monitoring via `node exported`.
-    - If both `disk latency` and `util` are low, contact [support@pingcap.com](mailto:support@pingcap.com).
+    -   ディスクパフォーマンスのプレッシャーを確認し、 `node exported`を介してディスクパフォーマンスの監視を確認します。
+    -   `disk latency`と`util`の両方が低い場合は、 [support@pingcap.com](mailto:support@pingcap.com)に連絡してください。
 
-#### `binlog_pump_storage_write_binlog_duration_time_bucket`
+#### <code>binlog_pump_storage_write_binlog_duration_time_bucket</code> {#code-binlog-pump-storage-write-binlog-duration-time-bucket-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.9, rate(binlog_pump_storage_write_binlog_duration_time_bucket{type="batch"}[5m])) > 1`
 
-* Description:
+-   説明：
 
-    The time it takes for Pump to write the local binlog to the local disk.
+    Pumpがローカルbinlogをローカルディスクに書き込むのにかかる時間。
 
-* Solution:
+-   解決：
 
-    Check the state of the local disk of Pump and fix the problem.
+    Pumpのローカルディスクの状態を確認し、問題を修正します。
 
-#### `binlog_pump_storage_available_size_less_than_20G`
+#### <code>binlog_pump_storage_available_size_less_than_20G</code> {#code-binlog-pump-storage-available-size-less-than-20g-code}
 
-* Alert rule:
+-   アラートルール：
 
     `binlog_pump_storage_storage_size_bytes{type="available"} < 20 * 1024 * 1024 * 1024`
 
-* Description:
+-   説明：
 
-    The available disk space of Pump is less than 20 GB.
+    Pumpの使用可能なディスク容量は20GB未満です。
 
-* Solution:
+-   解決：
 
-    Check whether Pump `gc_tso` is normal. If not, adjust the GC time configuration of Pump or get the corresponding Pump offline.
+    ポンプ`gc_tso`が正常か確認してください。そうでない場合は、ポンプのGC時間構成を調整するか、対応するポンプをオフラインにします。
 
-#### `binlog_drainer_checkpoint_tso_no_change_for_1m`
+#### <code>binlog_drainer_checkpoint_tso_no_change_for_1m</code> {#code-binlog-drainer-checkpoint-tso-no-change-for-1m-code}
 
-* Alert rule:
+-   アラートルール：
 
     `changes(binlog_drainer_checkpoint_tso[1m]) < 1`
 
-* Description:
+-   説明：
 
-    Drainer `checkpoint` has not been updated for one minute.
+    ドレイナー`checkpoint`は1分間更新されていません。
 
-* Solution:
+-   解決：
 
-    Check whether all the Pumps that are not offline are running normally.
+    オフラインではないすべてのポンプが正常に動作しているかどうかを確認します。
 
-#### `binlog_drainer_execute_duration_time_more_than_10s`
+#### <code>binlog_drainer_execute_duration_time_more_than_10s</code> {#code-binlog-drainer-execute-duration-time-more-than-10s-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.9, rate(binlog_drainer_execute_duration_time_bucket[1m])) > 10`
 
-* Description:
+-   説明：
 
-    The transaction time it takes Drainer to replicate data to TiDB. If it is too large, the Drainer replication of data is affected.
+    DrainerがデータをTiDBに複製するのにかかるトランザクション時間。大きすぎると、データのDrainerレプリケーションが影響を受けます。
 
-* Solution:
+-   解決：
 
-    - Check the TiDB cluster state.
-    - Check the Drainer log or monitor. If a DDL operation causes this problem, you can ignore it.
+    -   TiDBクラスタの状態を確認してください。
+    -   ドレイナーログまたはモニターを確認してください。 DDL操作によってこの問題が発生する場合は、無視してかまいません。

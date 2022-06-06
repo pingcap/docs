@@ -2,61 +2,61 @@
 title: tiup mirror rotate
 ---
 
-# tiup mirror rotate
+# tiupミラーが回転します {#tiup-mirror-rotate}
 
-`root.json` is an important file in a TiUP mirror. It stores the public keys needed for the entire system and is the basis of the chain of trust in TiUP. It mainly contains the following parts:
+`root.json`はTiUPミラーの重要なファイルです。システム全体に必要な公開鍵を保存し、TiUPの信頼の鎖の基礎となります。主に次の部分が含まれています。
 
-- Signatures of mirror administrators. For the official mirror, there are five signatures. For an initialized mirror, there are three signatures by default.
-- The public keys used to verify the following files:
-    - root.json
-    - index.json
-    - snapshot.json
-    - timestamp.json
-- Expiration date of `root.json`. For the official mirror, the expiration date is one year later than the creation date of `root.json`.
+-   ミラー管理者の署名。公式ミラーには、5つの署名があります。初期化されたミラーの場合、デフォルトで3つのシグニチャがあります。
+-   次のファイルの検証に使用される公開キー：
+    -   root.json
+    -   index.json
+    -   snapshot.json
+    -   timestamp.json
+-   有効期限は`root.json`です。オフィシャルミラーの場合、有効期限は作成日`root.json`より1年遅れています。
 
-For detailed description of TiUP mirror, see [TiUP Mirror Reference](/tiup/tiup-mirror-reference.md).
+TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 
-You need to update `root.json` in the following cases:
+次の場合は`root.json`を更新する必要があります。
 
-- Replace the key of the mirror.
-- Update the expiration date of certificate files.
+-   ミラーのキーを交換してください。
+-   証明書ファイルの有効期限を更新します。
 
-After the content of `root.json` is updated, the file must be re-signed by all administrators; otherwise, the client rejects the file. The update process is as follows:
+`root.json`の内容が更新された後、ファイルはすべての管理者によって再署名される必要があります。それ以外の場合、クライアントはファイルを拒否します。更新プロセスは次のとおりです。
 
-1. The user (client) updates the content of `root.json`.
-2. All administrators sign the new `root.json` file.
-3. tiup-server updates `snapshot.json` to record the version of the new `root.json` file.
-4. tiup-server signs the new `snapshot.json` file.
-5. tiup-server updates `timestamp.json` to record the hash value of the new `snapshot.json` file.
-6. tiup-server signs the new `timestamp.json` file.
+1.  ユーザー（クライアント）は`root.json`の内容を更新します。
+2.  すべての管理者が新しい`root.json`のファイルに署名します。
+3.  tiup-serverは`snapshot.json`を更新して、新しい`root.json`ファイルのバージョンを記録します。
+4.  tiup-serverは新しい`snapshot.json`ファイルに署名します。
+5.  tiup-serverは`timestamp.json`を更新して、新しい`snapshot.json`ファイルのハッシュ値を記録します。
+6.  tiup-serverは新しい`timestamp.json`ファイルに署名します。
 
-TiUP uses the command `tiup mirror rotate` to automate the above process.
+TiUPは、コマンド`tiup mirror rotate`を使用して上記のプロセスを自動化します。
 
-> **Note:**
+> **ノート：**
 >
-> + For TiUP versions earlier than v1.5.0, running this command does not returns a correct new `root.json` file. See [#983](https://github.com/pingcap/tiup/issues/983).
-> + Before using this command, make sure that all TiUP clients are upgraded to v1.5.0 or a later version.
+> -   v1.5.0より前のバージョンのTiUPの場合、このコマンドを実行しても正しい新しい`root.json`ファイルは返されません。 [＃983](https://github.com/pingcap/tiup/issues/983)を参照してください。
+> -   このコマンドを使用する前に、すべてのTiUPクライアントがv1.5.0以降のバージョンにアップグレードされていることを確認してください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror rotate [flags]
 ```
 
-After executing this command, TiUP starts an editor for the user to modify the file content to the target value, such as changing the value of the `expires` field to a later date. Then, TiUP changes the `version` field from `N` to `N+1` and saves the file. After the file is saved, TiUP starts a temporary HTTP server and waits for all mirror administrators to sign the file.
+このコマンドを実行した後、TiUPは、 `expires`フィールドの値を後日変更するなど、ユーザーがファイルの内容をターゲット値に変更するためのエディターを起動します。次に、TiUPは`version`フィールドを`N`から`N+1`に変更し、ファイルを保存します。ファイルが保存された後、TiUPは一時的なHTTPサーバーを起動し、すべてのミラー管理者がファイルに署名するのを待ちます。
 
-For how mirror administrators sign files, refer to the [`sign` command](/tiup/tiup-command-mirror-sign.md).
+ミラー管理者がファイルに署名する方法については、 [`sign`コマンド](/tiup/tiup-command-mirror-sign.md)を参照してください。
 
-## Options
+## オプション {#options}
 
-### --addr
+### --addr {#addr}
 
-- Specifies the listening address of the temporary server. You need to make sure that the address is accessible to other mirror administrators so that they can use the [`sign` command](/tiup/tiup-command-mirror-sign.md) to sign the file.
-- Data type: `STRING`
-- If this option is not specified in the command, TiUP listens on `0.0.0.0:8080` by default.
+-   一時サーバーのリスニングアドレスを指定します。他のミラー管理者が[`sign`コマンド](/tiup/tiup-command-mirror-sign.md)を使用してファイルに署名できるように、アドレスにアクセスできることを確認する必要があります。
+-   データ型： `STRING`
+-   このオプションがコマンドで指定されていない場合、TiUPはデフォルトで`0.0.0.0:8080`をリッスンします。
 
-## Outputs
+## 出力 {#outputs}
 
-The current signature status of each mirror administrator.
+各ミラー管理者の現在の署名状況。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

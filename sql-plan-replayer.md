@@ -3,42 +3,42 @@ title: Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluste
 summary: Learn how to use PLAN REPLAYER to save and restore the on-site information of a cluster.
 ---
 
-# Use PLAN REPLAYER to Save and Restore the On-Site Information of a Cluster
+# PLAN REPLAYERを使用して、クラスターのオンサイト情報を保存および復元します {#use-plan-replayer-to-save-and-restore-the-on-site-information-of-a-cluster}
 
-When you locate and troubleshoot the issues of a TiDB cluster, you often need to provide information on the system and the execution plan. To help you get the information and troubleshoot cluster issues in a more convenient and efficient way, the `PLAN REPLAYER` command is introduced in TiDB v5.3.0. This command enables you to easily save and restore the on-site information of a cluster, improves the efficiency of troubleshooting, and helps you more easily archive the issue for management.
+TiDBクラスタの問題を見つけてトラブルシューティングするときは、多くの場合、システムと実行プランに関する情報を提供する必要があります。より便利で効率的な方法で情報を取得し、クラスタの問題をトラブルシューティングするのに役立つように、 `PLAN REPLAYER`コマンドがTiDBv5.3.0に導入されました。このコマンドを使用すると、クラスタのオンサイト情報を簡単に保存および復元でき、トラブルシューティングの効率が向上し、管理のために問題をより簡単にアーカイブできます。
 
-The features of `PLAN REPLAYER` are as follows:
+`PLAN REPLAYER`の特徴は次のとおりです。
 
-- Exports the information of a TiDB cluster at an on-site troubleshooting to a ZIP-formatted file for storage.
-- Imports into a cluster the ZIP-formatted file exported from another TiDB cluster. This file contains the information of the latter TiDB cluster at an on-site troubleshooting.
+-   オンサイトトラブルシューティングでのTiDBクラスタの情報をZIP形式のファイルにエクスポートして保存します。
+-   別のTiDBクラスタからエクスポートされたZIP形式のファイルをクラスタにインポートします。このファイルには、オンサイトトラブルシューティングでの後者のTiDBクラスタの情報が含まれています。
 
-## Use `PLAN REPLAER` to export cluster information
+## <code>PLAN REPLAER</code>を使用してクラスタ情報をエクスポートします {#use-code-plan-replaer-code-to-export-cluster-information}
 
-You can use `PLAN REPLAYER` to save the on-site information of a TiDB cluster. The export interface is as follows:
+`PLAN REPLAYER`を使用して、TiDBクラスタのオンサイト情報を保存できます。エクスポートインターフェイスは次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 PLAN REPLAYER DUMP EXPLAIN [ANALYZE] sql-statement;
 ```
 
-Based on `sql-statement`, TiDB sorts out and exports the following on-site information:
+`sql-statement`に基づいて、TiDBは次のオンサイト情報を分類してエクスポートします。
 
-- TiDB version
-- TiDB configuration
-- TiDB session variables
-- TiDB SQL bindings
-- The table schema in `sql-statement`
-- The statistics of the table in `sql-statement`
-- The result of `EXPLAIN [ANALYZE] sql-statement`
+-   TiDBバージョン
+-   TiDB構成
+-   TiDBセッション変数
+-   TiDBSQLバインディング
+-   `sql-statement`のテーブルスキーマ
+-   `sql-statement`のテーブルの統計
+-   `EXPLAIN [ANALYZE] sql-statement`の結果
 
-> **Note:**
+> **ノート：**
 >
-> `PLAN REPLAYER` **DOES NOT** export any table data.
+> `PLAN REPLAYER`テーブルデータをエクスポートし**ません**。
 
-### Examples of exporting cluster information
+### クラスタ情報のエクスポートの例 {#examples-of-exporting-cluster-information}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 use test;
@@ -49,11 +49,11 @@ analyze table t;
 plan replayer dump explain select * from t;
 ```
 
-`PLAN REPLAYER DUMP` packages the table information above into a `ZIP` file and returns the file identifier as the execution result. This file is a one-time file. After the file is downloaded, TiDB will delete it.
+`PLAN REPLAYER DUMP`は、上記のテーブル情報を`ZIP`ファイルにパッケージ化し、実行結果としてファイル識別子を返します。このファイルは1回限りのファイルです。ファイルがダウンロードされた後、TiDBはそれを削除します。
 
-> **Note:**
+> **ノート：**
 >
-> The `ZIP` file is stored in a TiDB cluster for at most one hour. After one hour, TiDB will delete it.
+> `ZIP`のファイルは最大1時間TiDBクラスタに保存されます。 1時間後、TiDBはそれを削除します。
 
 ```sql
 MySQL [test]> plan replayer dump explain select * from t;
@@ -65,41 +65,41 @@ MySQL [test]> plan replayer dump explain select * from t;
 1 row in set (0.015 sec)
 ```
 
-Because the file cannot be downloaded on MySQL Client, you need to use the TiDB HTTP interface and the file identifier to download the file:
+ファイルはMySQLクライアントにダウンロードできないため、ファイルをダウンロードするには、TiDBHTTPインターフェイスとファイル識別子を使用する必要があります。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 http://${tidb-server-ip}:${tidb-server-status-port}/plan_replayer/dump/${file_token}
 ```
 
-`${tidb-server-ip}:${tidb-server-status-port}` is the address of any TiDB server in the cluster. For example:
+`${tidb-server-ip}:${tidb-server-status-port}`は、クラスタの任意のTiDBサーバーのアドレスです。例えば：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 curl http://127.0.0.1:10080/plan_replayer/dump/replayer_single_JOGvpu4t7dssySqJfTtS4A==_1635750890568691080.zip > plan_replayer.zip
 ```
 
-## Use `PLAN REPLAYER` to import cluster information
+## <code>PLAN REPLAYER</code>を使用してクラスタ情報をインポートします {#use-code-plan-replayer-code-to-import-cluster-information}
 
-> **Warning:**
+> **警告：**
 >
-> When you import the on-site information of a TiDB cluster to another cluster, the TiDB session variables, SQL bindings, table schemas and statistics of the latter cluster are modified.
+> TiDBクラスタのオンサイト情報を別のクラスタにインポートすると、後者のクラスタのTiDBセッション変数、SQLバインディング、テーブルスキーマ、および統計が変更されます。
 
-With an existing `ZIP` file exported using `PLAN REPLAYER`, you can use the `PLAN REPLAYER` import interface to restore the on-site information of a cluster to any other TiDB cluster. The syntax is as follows:
+`PLAN REPLAYER`を使用してエクスポートされた既存の`ZIP`ファイルでは、 `PLAN REPLAYER`インポートインターフェイスを使用して、クラスタのオンサイト情報を他のTiDBクラスタに復元できます。構文は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 PLAN REPLAYER LOAD 'file_name';
 ```
 
-In the statement above, `file_name` is the name of the `ZIP` file to be exported.
+上記のステートメントで、 `file_name`はエクスポートされる`ZIP`のファイルの名前です。
 
-For example:
+例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 PLAN REPLAYER LOAD 'plan_replayer.zip';

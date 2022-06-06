@@ -2,59 +2,59 @@
 title: TiDB RC3 Release Notes
 ---
 
-# TiDB RC3 Release Notes
+# TiDBRC3リリースノート {#tidb-rc3-release-notes}
 
-On June 16, 2017, TiDB RC3 is released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+2017年6月16日、TiDB RC3がリリースされました！このリリースは、MySQLの互換性、SQLの最適化、安定性、およびパフォーマンスに重点を置いています。
 
-## Highlight
+## ハイライト {#highlight}
 
-- The privilege management is refined to enable users to manage the data access privileges using the same way as in MySQL.
-- DDL is accelerated.
-- The load balancing policy and process are optimized for performance.
-- TiDB Ansible is open sourced. By using TiDB-Ansible, you can deploy, upgrade, start and shutdown a TiDB cluster with one click.
+-   特権管理は、ユーザーがMySQLと同じ方法を使用してデータアクセス特権を管理できるように改良されています。
+-   DDLが高速化されます。
+-   負荷分散のポリシーとプロセスは、パフォーマンスが最適化されています。
+-   TiDBAnsibleはオープンソースです。 TiDB-Ansibleを使用すると、ワンクリックでTiDBクラスタをデプロイ、アップグレード、開始、シャットダウンできます。
 
-## Detailed updates
+## 詳細な更新 {#detailed-updates}
 
-## TiDB
+## TiDB {#tidb}
 
-+ The following features are added or improved in the SQL query optimizer:
-    - Support incremental statistics
-    - Support the `Merge Sort Join` operator
-    - Support the `Index Lookup Join` operator
-    - Support the `Optimizer Hint` Syntax
-    - Optimize the memory consumption of the `Scan`, `Join`, `Aggregation` operators
-    - Optimize the Cost Based Optimizer (CBO) framework
-    - Refactor `Expression`
-+ Support more complete privilege management
-+ DDL acceleration
-+ Support using HTTP API to get the data distribution information of tables
-+ Support using system variables to control the query concurrency
-+ Add more MySQL built-in functions
-+ Support using system variables to automatically split a big transaction into smaller ones to commit
+-   SQLクエリオプティマイザでは、次の機能が追加または改善されています。
+    -   増分統計をサポートする
+    -   `Merge Sort Join`オペレーターをサポート
+    -   `Index Lookup Join`オペレーターをサポート
+    -   `Optimizer Hint`構文をサポートする
+    -   `Scan` `Join`の`Aggregation`消費を最適化する
+    -   コストベースのオプティマイザー（CBO）フレームワークを最適化する
+    -   リファクタリング`Expression`
+-   より完全な特権管理をサポートする
+-   DDLアクセラレーション
+-   テーブルのデータ分散情報を取得するためのHTTPAPIの使用をサポート
+-   システム変数を使用してクエリの同時実行性を制御することをサポート
+-   MySQL組み込み関数をさらに追加する
+-   システム変数を使用して、大きなトランザクションを小さなトランザクションに自動的に分割してコミットすることをサポートします
 
-## Placement Driver (PD)
+## 配置ドライバー（PD） {#placement-driver-pd}
 
-+ Support gRPC
-+ Provide the Disaster Recovery Toolkit
-+ Use Garbage Collection to clear stale data automatically
-+ Support more efficient data balance
-+ Support hot Region scheduling to enable load balancing and speed up the data importing
-+ Performance
-    - Accelerate getting Client TSO
-    - Improve the efficiency of Region Heartbeat processing
-+ Improve the `pd-ctl` function
-    - Update the Replica configuration dynamically
-    - Get the Timestamp Oracle (TSO)
-    - Use ID to get the Region information
+-   gRPCをサポートする
+-   ディザスタリカバリツールキットを提供する
+-   ガベージコレクションを使用して、古いデータを自動的にクリアします
+-   より効率的なデータバランスをサポートする
+-   ホットリージョンスケジューリングをサポートして、負荷分散を有効にし、データのインポートを高速化します
+-   パフォーマンス
+    -   クライアントTSOの取得を加速する
+    -   リージョンハートビート処理の効率を向上させる
+-   `pd-ctl`機能を改善する
+    -   レプリカ構成を動的に更新します
+    -   タイムスタンプOracle（TSO）を入手する
+    -   IDを使用して地域情報を取得します
 
-## TiKV
+## TiKV {#tikv}
 
-+ Support gRPC
-+ Support the Sorted String Table (SST) format snapshot to improve the load balancing speed of a cluster
-+ Support using the Heap Profile to uncover memory leaks
-+ Support Streaming SIMD Extensions (SSE) and speed up the CRC32 calculation
-+ Accelerate transferring leader for faster load balancing
-+ Use Batch Apply to reduce CPU usage and improve the write performance
-+ Support parallel Prewrite to improve the transaction write speed
-+ Optimize the scheduling of the coprocessor thread pool to reduce the impact of big queries on point get
-+ The new Loader supports data importing at the table level, as well as splitting a big table into smaller logical blocks to import concurrently to improve the data importing speed.
+-   gRPCをサポートする
+-   ソートされた文字列テーブル（SST）形式のスナップショットをサポートして、クラスタの負荷分散速度を向上させます
+-   ヒーププロファイルを使用したメモリリークの発見をサポート
+-   ストリーミングSIMD拡張命令（SSE）をサポートし、CRC32計算を高速化します
+-   転送リーダーを高速化して、負荷分散を高速化します
+-   バッチ適用を使用して、CPU使用率を削減し、書き込みパフォーマンスを向上させます
+-   並列プリライトをサポートして、トランザクションの書き込み速度を向上させます
+-   コプロセッサースレッドプールのスケジューリングを最適化して、ポイント取得に対する大きなクエリの影響を減らします
+-   新しいローダーは、テーブルレベルでのデータのインポートをサポートし、大きなテーブルを小さな論理ブロックに分割して同時にインポートし、データのインポート速度を向上させます。

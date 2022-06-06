@@ -2,33 +2,33 @@
 title: tiup dm upgrade
 ---
 
-# tiup dm upgrade
+# tiupdmアップグレード {#tiup-dm-upgrade}
 
-The `tiup dm upgrade` command is used to upgrade a specified cluster to a specific version.
+`tiup dm upgrade`コマンドは、指定されたクラスタを特定のバージョンにアップグレードするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm upgrade <cluster-name> <version> [flags]
 ```
 
-- `<cluster-name>` is the name of the cluster to be operated on. If you forget the cluster name, you can check it using the [`tiup dm list`](/tiup/tiup-component-dm-list.md) command.
-- `<version>` is the target version to be upgraded to. Currently, only upgrading to a later version is allowed, and upgrading to an earlier version is not allowed, which means the downgrade is not allowed. Upgrading to a nightly version is not allowed either.
+-   `<cluster-name>`は、操作対象のクラスタの名前です。クラスタ名を忘れた場合は、 [`tiup dm list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+-   `<version>`は、アップグレード先のターゲットバージョンです。現在、新しいバージョンへのアップグレードのみが許可されており、以前のバージョンへのアップグレードは許可されていません。つまり、ダウングレードは許可されていません。ナイトリーバージョンへのアップグレードも許可されていません。
 
-## Options
+## オプション {#options}
 
-### --offline
+### - オフライン {#offline}
 
-- Declares that the current cluster is offline. When this option is specified, TiUP DM only replaces the binary files of the cluster components in place without restarting the service.
+-   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-Log of the service upgrade process.
+サービスアップグレードプロセスのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

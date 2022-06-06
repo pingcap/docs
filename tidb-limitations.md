@@ -3,74 +3,74 @@ title: TiDB Limitations
 summary: Learn the usage limitations of TiDB.
 ---
 
-# TiDB Limitations
+# TiDBの制限 {#tidb-limitations}
 
-This document describes the common usage limitations of TiDB, including the maximum identifier length and the maximum number of supported databases, tables, indexes, partitioned tables, and sequences.
+このドキュメントでは、サポートされるデータベース、テーブル、インデックス、パーティションテーブル、シーケンスの最大識別子の長さや最大数など、TiDBの一般的な使用制限について説明します。
 
-## Limitations on identifier length
+## 識別子の長さの制限 {#limitations-on-identifier-length}
 
-| Identifier type | Maximum length (number of characters allowed) |
-|:---------|:--------------|
-| Database | 64 |
-| Table    | 64 |
-| Column   | 64 |
-| Index    | 64 |
-| View     | 64 |
-| Sequence | 64 |
+| 識別子の種類 | 最大長（許可される文字数） |
+| :----- | :------------ |
+| データベース | 64            |
+| テーブル   | 64            |
+| 桁      | 64            |
+| 索引     | 64            |
+| 意見     | 64            |
+| 順序     | 64            |
 
-## Limitations on the total number of databases, tables, views, and connections
+## データベース、テーブル、ビュー、および接続の総数の制限 {#limitations-on-the-total-number-of-databases-tables-views-and-connections}
 
-| Identifier type  | Maximum number  |
-|:----------|:----------|
-| Databases | unlimited |
-| Tables    | unlimited |
-| Views     | unlimited |
-| Connections| unlimited|
+| 識別子の種類 | 最大数 |
+| :----- | :-- |
+| データベース | 無制限 |
+| テーブル   | 無制限 |
+| ビュー    | 無制限 |
+| 接続     | 無制限 |
 
-## Limitations on a single database
+## 単一データベースの制限 {#limitations-on-a-single-database}
 
-| Type       | Upper limit   |
-|:----------|:----------|
-| Tables    | unlimited  |
+| タイプ  | 上限  |
+| :--- | :-- |
+| テーブル | 無制限 |
 
-## Limitations on a single table
+## 単一のテーブルの制限 {#limitations-on-a-single-table}
 
-| Type       | Upper limit (default value)  |
-|:----------|:----------|
-| Columns   | Defaults to 1017 and can be adjusted up to 4096     |
-| Indexes   |  Defaults to 64 and can be adjusted up to 512        |
-| Rows      | unlimited |
-| Size      | unlimited |
-| Partitions | 8192     |
+| タイプ     | 上限（デフォルト値）                  |
+| :------ | :-------------------------- |
+| 列       | デフォルトは1017で、最大4096まで調整できます。 |
+| インデックス  | デフォルトは64で、最大512まで調整できます     |
+| 行       | 無制限                         |
+| サイズ     | 無制限                         |
+| パーティション | 8192                        |
 
-* The upper limit of `Columns` can be modified via [`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50).
-* The upper limit of `Indexes` can be modified via [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50).
+-   `Columns`の上限は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)を介して変更できます。
+-   `Indexes`の上限は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)を介して変更できます。
 
-## Limitation on a single row
+## 単一行の制限 {#limitation-on-a-single-row}
 
-| Type       | Upper limit   |
-|:----------|:----------|
-| Size       | 6 MB by default. You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item. |
+| タイプ | 上限                                                                                                                      |
+| :-- | :---------------------------------------------------------------------------------------------------------------------- |
+| サイズ | デフォルトでは6MB。サイズ制限は、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成アイテムで調整できます。 |
 
-## Limitation on a single column
+## 単一列の制限 {#limitation-on-a-single-column}
 
-| Type       | Upper limit   |
-|:----------|:----------|
-| Size       | 6 MB       |
+| タイプ | 上限   |
+| :-- | :--- |
+| サイズ | 6 MB |
 
-## Limitations on string types
+## 文字列タイプの制限 {#limitations-on-string-types}
 
-| Type       | Upper limit   |
-|:----------|:----------|
-| CHAR       | 256 characters      |
-| BINARY     | 256 characters      |
-| VARBINARY  | 65535 characters    |
-| VARCHAR    | 16383 characters    |
-| TEXT       | 6 MB                |
-| BLOB       | 6 MB                |
+| タイプ       | 上限      |
+| :-------- | :------ |
+| CHAR      | 256文字   |
+| バイナリ      | 256文字   |
+| VARBINARY | 65535文字 |
+| VARCHAR   | 16383文字 |
+| 文章        | 6 MB    |
+| BLOB      | 6 MB    |
 
-## Limitations on SQL statements
+## SQLステートメントの制限 {#limitations-on-sql-statements}
 
-| Type       | Upper limit   |
-|:----------|:----------|
-| The maximum number of SQL statements in a single transaction |  When the optimistic transaction is used and the transaction retry is enabled, the default upper limit is 5000, which can be modified using [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit). |
+| タイプ                         | 上限                                                                                                                                        |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| 1回のトランザクションでのSQLステートメントの最大数 | 楽観的トランザクションが使用され、トランザクションの再試行が有効になっている場合、デフォルトの上限は5000であり、 [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)を使用して変更できます。 |

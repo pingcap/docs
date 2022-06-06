@@ -3,11 +3,11 @@ title: VIEWS
 summary: Learn the `VIEWS` information_schema table.
 ---
 
-# VIEWS
+# ビュー {#views}
 
-The `VIEWS` table provides information about SQL views.
+`VIEWS`の表は、SQLビューに関する情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -32,7 +32,7 @@ DESC views;
 10 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE VIEW test.v1 AS SELECT 1;
@@ -54,15 +54,15 @@ COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
 ```
 
-Fields in the `VIEWS` table are described as follows:
+`VIEWS`表のフィールドは次のように説明されています。
 
-* `TABLE_CATALOG`: The name of the catalog to which the view belongs. This value is always `def`.
-* `TABLE_SCHEMA`: The name of the schema to which the view belongs.
-* `TABLE_NAME`: The view name.
-* `VIEW_DEFINITION`: The definition of view, which is made by the `SELECT` statement when the view is created.
-* `CHECK_OPTION`: The `CHECK_OPTION` value. The value options are `NONE`, `CASCADE`, and `LOCAL`.
-* `IS_UPDATABLE`: Whether `UPDATE`/`INSERT`/`DELETE` is applicable to the view. In TiDB, the value is always `NO`.
-* `DEFINER`: The name of the user who creates the view, which is in the format of `'user_name'@'host_name'`.
-* `SECURITY_TYPE`: The value of `SQL SECURITY`. The value options are `DEFINER` and `INVOKER`.
-* `CHARACTER_SET_CLIENT`: The value of the `character_set_client` session variable when the view is created.
-* `COLLATION_CONNECTION`: The value of the `collation_connection` session variable when the view is created.
+-   `TABLE_CATALOG` ：ビューが属するカタログの名前。この値は常に`def`です。
+-   `TABLE_SCHEMA` ：ビューが属するスキーマの名前。
+-   `TABLE_NAME` ：ビュー名。
+-   `VIEW_DEFINITION` ：ビューの定義。ビューの作成時に`SELECT`ステートメントによって作成されます。
+-   `CHECK_OPTION` ： `CHECK_OPTION`の値。値のオプションは`NONE` 、および`CASCADE` `LOCAL` 。
+-   `IS_UPDATABLE` ： `UPDATE`が`DELETE`に適用できるか`INSERT`か。 TiDBでは、値は常に`NO`です。
+-   `DEFINER` ：ビューを作成するユーザーの名前`'user_name'@'host_name'`の形式です。
+-   `SECURITY_TYPE` ： `SQL SECURITY`の値。値のオプションは`DEFINER`と`INVOKER`です。
+-   `CHARACTER_SET_CLIENT` ：ビュー作成時の`character_set_client`セッション変数の値。
+-   `COLLATION_CONNECTION` ：ビュー作成時の`collation_connection`セッション変数の値。

@@ -3,27 +3,27 @@ title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 ---
 
-# SHOW [GLOBAL|SESSION] VARIABLES
+# [グローバル|セッション]変数を表示 {#show-global-session-variables}
 
-This statement shows a list of variables for the scope of either `GLOBAL` or `SESSION`. If no scope is specified, the default scope of `SESSION` will apply.
+このステートメントは、 `GLOBAL`または`SESSION`のスコープの変数のリストを示しています。スコープが指定されていない場合、デフォルトのスコープ`SESSION`が適用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**ShowStmt：**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable:**
+**ShowTargetFilterable：**
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-**GlobalScope:**
+**GlobalScope：**
 
 ![GlobalScope](/media/sqlgram/GlobalScope.png)
 
-## Examples
+## 例 {#examples}
 
-List all TiDB specific variables. For detailed description, refer to [System Variables](/system-variables.md).
+すべてのTiDB固有の変数を一覧表示します。詳細な説明については、 [システム変数](/system-variables.md)を参照してください。
 
 ```sql
 mysql> SHOW GLOBAL VARIABLES LIKE 'tidb%';
@@ -149,10 +149,10 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)
+-   [`SET [GLOBAL|SESSION]`](/sql-statements/sql-statement-set-variable.md)

@@ -3,11 +3,11 @@ title: DDL_JOBS
 summary: Learn the `DDL_JOBS` information_schema table.
 ---
 
-# DDL_JOBS
+# DDL_JOBS {#ddl-jobs}
 
-The `DDL_JOBS` table provides an `INFORMATION_SCHEMA` interface to the `ADMIN SHOW DDL JOBS` command. It provides both the current status and a short history of DDL operations across the TiDB cluster.
+`DDL_JOBS`テーブルは、 `ADMIN SHOW DDL JOBS`コマンドへの`INFORMATION_SCHEMA`インターフェイスを提供します。これは、TiDBクラスタ全体のDDL操作の現在のステータスと短い履歴の両方を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -34,7 +34,7 @@ DESC ddl_jobs;
 12 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM ddl_jobs LIMIT 3\G

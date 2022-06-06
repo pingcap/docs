@@ -3,44 +3,44 @@ title: Migrate Data Using Data Migration
 summary: Use the Data Migration tool to migrate the full data and the incremental data.
 ---
 
-# Migrate Data Using Data Migration
+# データ移行を使用してデータを移行する {#migrate-data-using-data-migration}
 
-This guide shows how to migrate data using the Data Migration (DM) tool.
+このガイドでは、データ移行（DM）ツールを使用してデータを移行する方法を示します。
 
-## Step 1: Deploy the DM cluster
+## ステップ1：DMクラスタをデプロイ {#step-1-deploy-the-dm-cluster}
 
-It is recommended to [deploy the DM cluster using TiUP](/dm/deploy-a-dm-cluster-using-tiup.md). You can also [deploy the DM cluster using binary](/dm/deploy-a-dm-cluster-using-binary.md) for trial or test.
+[TiUPを使用してDMクラスタをデプロイします](/dm/deploy-a-dm-cluster-using-tiup.md)にすることをお勧めします。トライアルまたはテスト用に[バイナリを使用してDMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-binary.md)することもできます。
 
-> **Note:**
+> **ノート：**
 >
-> - For database passwords in all the DM configuration files, it is recommended to use the passwords encrypted by `dmctl`. If a database password is empty, it is unnecessary to encrypt it. See [Encrypt the database password using dmctl](/dm/dm-manage-source.md#encrypt-the-database-password).
-> - The user of the upstream and downstream databases must have the corresponding read and write privileges.
+> -   すべてのDM構成ファイルのデータベースパスワードには、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースパスワードが空の場合、暗号化する必要はありません。 [dmctlを使用してデータベースパスワードを暗号化します](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
+> -   アップストリームおよびダウンストリームデータベースのユーザーは、対応する読み取りおよび書き込み権限を持っている必要があります。
 
-## Step 2: Check the cluster information
+## ステップ2：クラスタ情報を確認する {#step-2-check-the-cluster-information}
 
-After the DM cluster is deployed using TiUP, the configuration information is like what is listed below.
+TiUPを使用してDMクラスタを展開した後の構成情報は、以下のようになります。
 
-- The configuration information of related components in the DM cluster:
+-   DMクラスタの関連コンポーネントの構成情報：
 
-    | Component | Host | Port |
-    |------| ---- | ---- |
+    | 成分         | ホスト          | ポート  |
+    | ---------- | ------------ | ---- |
     | dm_worker1 | 172.16.10.72 | 8262 |
     | dm_worker2 | 172.16.10.73 | 8262 |
-    | dm_master | 172.16.10.71 | 8261 |
+    | dm_master  | 172.16.10.71 | 8261 |
 
-- The information of upstream and downstream database instances:
+-   アップストリームおよびダウンストリームデータベースインスタンスの情報：
 
-    | Database instance | Host | Port | Username | Encrypted password |
-    | -------- | --- | --- | --- | --- |
-    | Upstream MySQL-1 | 172.16.10.81 | 3306 | root | VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU= |
-    | Upstream MySQL-2 | 172.16.10.82 | 3306 | root | VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU= |
-    | Downstream TiDB | 172.16.10.83 | 4000 | root | |
+    | データベースインスタンス    | ホスト          | ポート  | ユーザー名 | 暗号化されたパスワード                           |
+    | --------------- | ------------ | ---- | ----- | ------------------------------------- |
+    | アップストリームMySQL-1 | 172.16.10.81 | 3306 | 根     | VjX8cEeTX + qcvZ3bPaO4h0C80pe / 1aU = |
+    | アップストリームMySQL-2 | 172.16.10.82 | 3306 | 根     | VjX8cEeTX + qcvZ3bPaO4h0C80pe / 1aU = |
+    | ダウンストリームTiDB    | 172.16.10.83 | 4000 | 根     |                                       |
 
-The list of privileges needed on the MySQL host can be found in the [precheck](/dm/dm-precheck.md) documentation.
+MySQLホストに必要な特権のリストは、 [事前チェック](/dm/dm-precheck.md)のドキュメントに記載されています。
 
-## Step 3: Create data source
+## ステップ3：データソースを作成する {#step-3-create-data-source}
 
-1. Write MySQL-1 related information to `conf/source1.yaml`:
+1.  MySQL-1関連情報を`conf/source1.yaml`に書き込みます：
 
     ```yaml
     # MySQL1 Configuration.
@@ -56,21 +56,21 @@ The list of privileges needed on the MySQL host can be found in the [precheck](/
       port: 3306
     ```
 
-2. Execute the following command in the terminal, and use `tiup dmctl` to load the MySQL-1 data source configuration to the DM cluster:
+2.  ターミナルで次のコマンドを実行し、 `tiup dmctl`を使用してMySQL-1データソース構成をDMクラスタにロードします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     tiup dmctl --master-addr 172.16.10.71:8261 operate-source create conf/source1.yaml
     ```
 
-3. For MySQL-2, modify the relevant information in the configuration file and execute the same `dmctl` command.
+3.  MySQL-2の場合、構成ファイルの関連情報を変更して、同じ`dmctl`コマンドを実行します。
 
-## Step 4: Configure the data migration task
+## ステップ4：データ移行タスクを構成する {#step-4-configure-the-data-migration-task}
 
-The following example assumes that you need to migrate all the `test_table` table data in the `test_db` database of both the upstream MySQL-1 and MySQL-2 instances, to the downstream `test_table` table in the `test_db` database of TiDB, in the full data plus incremental data mode.
+次の例では、アップストリームMySQL-1インスタンスとMySQL-2インスタンスの両方の`test_db`データベースのすべての`test_table`テーブルデータを、完全データと増分データのTiDBの`test_db`データベースのダウンストリーム`test_table`テーブルに移行する必要があると想定しています。モード。
 
-Edit the `task.yaml` task configuration file as below:
+`task.yaml`のタスク構成ファイルを次のように編集します。
 
 ```yaml
 # The task name. You need to use a different name for each of the multiple tasks that
@@ -116,20 +116,20 @@ mydumpers:
     extra-args: ""
 ```
 
-## Step 5: Start the data migration task
+## ステップ5：データ移行タスクを開始します {#step-5-start-the-data-migration-task}
 
-To detect possible errors of data migration configuration in advance, DM provides the precheck feature:
+データ移行構成で発生する可能性のあるエラーを事前に検出するために、DMは事前チェック機能を提供します。
 
-- DM automatically checks the corresponding privileges and configuration while starting the data migration task.
-- You can also use the `check-task` command to manually precheck whether the upstream MySQL instance configuration satisfies the DM requirements.
+-   DMは、データ移行タスクの開始時に、対応する特権と構成を自動的にチェックします。
+-   `check-task`コマンドを使用して、アップストリームのMySQLインスタンス構成がDM要件を満たしているかどうかを手動で事前チェックすることもできます。
 
-For details about the precheck feature, see [Precheck the upstream MySQL instance configuration](/dm/dm-precheck.md).
+事前チェック機能の詳細については、 [アップストリームのMySQLインスタンス構成を事前に確認します](/dm/dm-precheck.md)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> Before starting the data migration task for the first time, you should have got the upstream configured. Otherwise, an error is reported while you start the task.
+> データ移行タスクを初めて開始する前に、アップストリームを構成しておく必要があります。それ以外の場合は、タスクの開始中にエラーが報告されます。
 
-Run the `tiup dmctl` command to start the data migration tasks. `task.yaml` is the configuration file that is edited above.
+`tiup dmctl`コマンドを実行して、データ移行タスクを開始します。 `task.yaml`は、上記で編集した構成ファイルです。
 
 {{< copyable "" >}}
 
@@ -137,7 +137,7 @@ Run the `tiup dmctl` command to start the data migration tasks. `task.yaml` is t
 tiup dmctl --master-addr 172.16.10.71:8261 start-task ./task.yaml
 ```
 
-- If the above command returns the following result, it indicates the task is successfully started.
+-   上記のコマンドが次の結果を返す場合は、タスクが正常に開始されたことを示しています。
 
     ```json
     {
@@ -158,11 +158,11 @@ tiup dmctl --master-addr 172.16.10.71:8261 start-task ./task.yaml
     }
     ```
 
-- If you fail to start the data migration task, modify the configuration according to the returned prompt and then run the `start-task task.yaml` command to restart the task.
+-   データ移行タスクの開始に失敗した場合は、返されたプロンプトに従って構成を変更してから、 `start-task task.yaml`コマンドを実行してタスクを再開してください。
 
-## Step 6: Check the data migration task
+## 手順6：データ移行タスクを確認する {#step-6-check-the-data-migration-task}
 
-If you need to check the task state or whether a certain data migration task is running in the DM cluster, run the following command in `tiup dmctl`:
+タスクの状態を確認する必要がある場合、または特定のデータ移行タスクがDMクラスタで実行されているかどうかを確認する必要がある場合は、次のコマンドを`tiup dmctl`で実行します。
 
 {{< copyable "" >}}
 
@@ -170,21 +170,21 @@ If you need to check the task state or whether a certain data migration task is 
 tiup dmctl --master-addr 172.16.10.71:8261 query-status
 ```
 
-## Step 7: Stop the data migration task
+## 手順7：データ移行タスクを停止する {#step-7-stop-the-data-migration-task}
 
-If you do not need to migrate data any more, run the following command in `tiup dmctl` to stop the task:
+データを移行する必要がなくなった場合は、次のコマンドを`tiup dmctl`で実行して、タスクを停止します。
 
 ```bash
 tiup dmctl --master-addr 172.16.10.71:8261 stop-task test
 ```
 
-`test` is the task name that you set in the `name` configuration item of the `task.yaml` configuration file.
+`test`は、 `task.yaml`構成ファイルの`name`構成項目で設定したタスク名です。
 
-## Step 8: Monitor the task and check logs
+## ステップ8：タスクを監視し、ログを確認します {#step-8-monitor-the-task-and-check-logs}
 
-Assuming that Prometheus, Alertmanager, and Grafana are successfully deployed along with the DM cluster deployment using TiUP, and the Grafana address is `172.16.10.71`. To view the alert information related to DM, you can open <http://172.16.10.71:9093> in a browser and enter into Alertmanager; to check monitoring metrics, go to <http://172.16.10.71:3000>, and choose the DM dashboard.
+Prometheus、Alertmanager、およびGrafanaが、TiUPを使用したDMクラスタのデプロイとともに正常にデプロイされ、Grafanaアドレスが`172.16.10.71`であると仮定します。 DMに関連するアラート情報を表示するには、ブラウザーで[http://172.16.10.71：9093](http://172.16.10.71:9093)を開き、Alertmanagerに入ります。監視メトリックを確認するには、 [http://172.16.10.71：3000](http://172.16.10.71:3000)に移動し、DMダッシュボードを選択します。
 
-While the DM cluster is running, DM-master, DM-worker, and dmctl output the monitoring metrics information through logs. The log directory of each component is as follows:
+DMクラスタの実行中、DM-master、DM-worker、およびdmctlは、ログを介して監視メトリック情報を出力します。各コンポーネントのログディレクトリは次のとおりです。
 
-- DM-master log directory: It is specified by the `--log-file` DM-master process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-master node.
-- DM-worker log directory: It is specified by the `--log-file` DM-worker process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-worker node.
+-   DM-masterログディレクトリ： `--log-file`のDM-masterプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDMマスターノードで`{log_dir}`です。
+-   DM-workerログディレクトリ： `--log-file` -workerプロセスパラメータで指定されます。 DMがTiUPを使用してデプロイされている場合、ログディレクトリはDM-workerノードで`{log_dir}`です。

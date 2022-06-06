@@ -3,37 +3,37 @@ title: Quick Start Guide on Integrating TiDB with Confluent Platform
 summary: Learn how to stream TiDB data to the Confluent Platform using TiCDC.
 ---
 
-# Quick Start Guide on Integrating TiDB with Confluent Platform
+# TiDBとConfluentプラットフォームの統合に関するクイックスタートガイド {#quick-start-guide-on-integrating-tidb-with-confluent-platform}
 
-This document introduces how to integrate TiDB to Confluent Platform using [TiCDC](/ticdc/ticdc-overview.md).
+このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用してTiDBをConfluentプラットフォームに統合する方法を紹介します。
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. Do **NOT** use it in a production environment.
+> これはまだ実験的機能です。実稼働環境では使用し**ない**でください。
 
-[Confluent Platform](https://docs.confluent.io/current/platform.html) is a data streaming platform with Apache Kafka at its core. With many official and third-party sink connectors, Confluent Platform enables you to easily connect stream sources to relational or non-relational databases.
+[コンフルエントなプラットフォーム](https://docs.confluent.io/current/platform.html)は、ApacheKafkaをコアとするデータストリーミングプラットフォームです。多くの公式およびサードパーティのシンクコネクタを備えたConfluentPlatformを使用すると、ストリームソースをリレーショナルデータベースまたは非リレーショナルデータベースに簡単に接続できます。
 
-To integrate TiDB with Confluent Platform, you can use the TiCDC component with the Avro protocol. TiCDC can stream data changes to Kafka in the format that Confluent Platform recognizes. For the detailed integration guide, see the following sections:
+TiDBをConfluentPlatformと統合するには、TiCDCコンポーネントをAvroプロトコルで使用できます。 TiCDCは、ConfluentPlatformが認識する形式でデータ変更をKafkaにストリーミングできます。詳細な統合ガイドについては、次のセクションを参照してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-> **Note:**
+> **ノート：**
 >
-> In this tutorial, the [JDBC sink connector](https://docs.confluent.io/current/connect/kafka-connect-jdbc/sink-connector/index.html#load-the-jdbc-sink-connector) is used to replicate TiDB data to a downstream relational database. To make it simple, **SQLite** is used here as an example.
+> このチュートリアルでは、 [JDBCシンクコネクタ](https://docs.confluent.io/current/connect/kafka-connect-jdbc/sink-connector/index.html#load-the-jdbc-sink-connector)を使用してTiDBデータをダウンストリームのリレーショナルデータベースに複製します。簡単にするために、ここでは例として**SQLite**を使用しています。
 
-+ Make sure that Zookeeper, Kafka, and Schema Registry are properly installed. It is recommended that you follow the [Confluent Platform Quick Start Guide](https://docs.confluent.io/current/quickstart/ce-quickstart.html#ce-quickstart) to deploy a local test environment.
+-   Zookeeper、Kafka、およびSchemaRegistryが正しくインストールされていることを確認してください。 [Confluentプラットフォームクイックスタートガイド](https://docs.confluent.io/current/quickstart/ce-quickstart.html#ce-quickstart)に従って、ローカルテスト環境を展開することをお勧めします。
 
-+ Make sure that JDBC sink connector is installed by running the following command. The result should contain `jdbc-sink`.
+-   次のコマンドを実行して、JDBCシンクコネクタがインストールされていることを確認します。結果には`jdbc-sink`が含まれている必要があります。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     confluent local services connect connector list
     ```
 
-## Integration procedures
+## 統合手順 {#integration-procedures}
 
-1. Save the following configuration into `jdbc-sink-connector.json`:
+1.  次の構成を`jdbc-sink-connector.json`に保存します。
 
     {{< copyable "" >}}
 
@@ -53,49 +53,49 @@ To integrate TiDB with Confluent Platform, you can use the TiCDC component with 
     }
     ```
 
-2. Create an instance of the JDBC sink connector by running the following command (assuming Kafka is listening on `127.0.0.1:8083`):
+2.  次のコマンドを実行して、JDBCシンクコネクタのインスタンスを作成します（Kafkaが`127.0.0.1:8083`をリッスンしていると仮定します）。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     curl -X POST -H "Content-Type: application/json" -d @jdbc-sink-connector.json http://127.0.0.1:8083/connectors
     ```
 
-3. Deploy TiCDC in one of the following ways. If TiCDC is already deployed, you can skip this step.
+3.  次のいずれかの方法でTiCDCをデプロイします。 TiCDCがすでに展開されている場合は、この手順をスキップできます。
 
-    - [Deploy a new TiDB cluster that includes TiCDC using TiUP](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup)
-    - [Add TiCDC to an existing TiDB cluster using TiUP](/ticdc/deploy-ticdc.md#add-ticdc-to-an-existing-tidb-cluster-using-tiup)
-    - [Add TiCDC to an existing TiDB cluster using binary (not recommended)](/ticdc/deploy-ticdc.md#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended)
+    -   [TiUPを使用してTiCDCを含む新しいTiDBクラスタをデプロイします](/ticdc/deploy-ticdc.md#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup)
+    -   [TiUPを使用して既存のTiDBクラスタにTiCDCを追加します](/ticdc/deploy-ticdc.md#add-ticdc-to-an-existing-tidb-cluster-using-tiup)
+    -   [バイナリを使用して既存のTiDBクラスタにTiCDCを追加します（非推奨）](/ticdc/deploy-ticdc.md#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended)
 
-    Make sure that your TiDB and TiCDC clusters are healthy before proceeding.
+    続行する前に、TiDBおよびTiCDCクラスターが正常であることを確認してください。
 
-4. Create a `changefeed` by running the `cdc cli` command:
+4.  `cdc cli`コマンドを実行して`changefeed`を作成します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     ./cdc cli changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/testdb_test?protocol=avro" --opts "registry=http://127.0.0.1:8081"
     ```
 
-    > **Note:**
+    > **ノート：**
     >
-    > Make sure that PD, Kafka, and Schema Registry are running on their respective default ports.
+    > PD、Kafka、およびSchemaRegistryがそれぞれのデフォルトポートで実行されていることを確認してください。
 
-## Test data replication
+## データ複製のテスト {#test-data-replication}
 
-After TiDB is integrated with Confluent Platform, you can follow the example procedures below to test the data replication.
+TiDBがConfluentPlatformと統合された後、以下の手順例に従ってデータ複製をテストできます。
 
-1. Create the `testdb` database in your TiDB cluster:
+1.  TiDBクラスタに`testdb`のデータベースを作成します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     CREATE DATABASE IF NOT EXISTS testdb;
     ```
 
-    Create the `test` table in `testdb`:
+    `testdb`で`test`のテーブルを作成します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     USE testdb;
@@ -105,13 +105,13 @@ After TiDB is integrated with Confluent Platform, you can follow the example pro
     );
     ```
 
-    > **Note:**
+    > **ノート：**
     >
-    > If you need to change the database name or the table name, change `topics` in `jdbc-sink-connector.json` accordingly.
+    > データベース名またはテーブル名を変更する必要がある場合は、それに応じて`jdbc-sink-connector.json`の`topics`を変更してください。
 
-2. Insert data into TiDB:
+2.  TiDBにデータを挿入します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT INTO test (id, v) values (1, 'a');
@@ -120,9 +120,9 @@ After TiDB is integrated with Confluent Platform, you can follow the example pro
     INSERT INTO test (id, v) values (4, 'd');
     ```
 
-3. Wait a moment for data to be replicated to the downstream. Then check the downstream for data:
+3.  データがダウンストリームに複製されるまでしばらく待ちます。次に、ダウンストリームでデータを確認します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     sqlite3 test.db

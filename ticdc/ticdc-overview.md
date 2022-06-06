@@ -3,151 +3,151 @@ title: TiCDC Overview
 summary: Learn what TiCDC is, what features TiCDC provides, etc.
 ---
 
-# TiCDC Overview
+# TiCDCの概要 {#ticdc-overview}
 
-[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc) is a tool used for replicating incremental data of TiDB. Specifically, TiCDC pulls TiKV change logs, sorts captured data, and exports row-based incremental data to downstream databases. 
+[TiCDC](https://github.com/pingcap/tiflow/tree/master/cdc)は、TiDBの増分データを複製するために使用されるツールです。具体的には、TiCDCはTiKV変更ログをプルし、キャプチャされたデータを並べ替え、行ベースの増分データをダウンストリームデータベースにエクスポートします。
 
-## Usage scenarios
+## 使用シナリオ {#usage-scenarios}
 
-- Database disaster recovery: TiCDC can be used for disaster recovery between homogeneous databases to ensure eventual data consistency of primary and secondary databases after a disaster event. This function works only with TiDB primary and secondary clusters.
-- Data integration: TiCDC provides [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md), which allows other systems to subscribe data changes from TiCDC. In this way, TiCDC provides data sources for various scenarios such as monitoring, caching, global indexing, data analysis, and primary-secondary replication between heterogeneous databases.
+-   データベースのディザスタリカバリ：TiCDCを同種データベース間のディザスタリカバリに使用して、ディザスタイベント後のプライマリデータベースとセカンダリデータベースの最終的なデータの一貫性を確保できます。この関数は、TiDBプライマリおよびセカンダリクラスターでのみ機能します。
+-   データ統合：TiCDCは[TiCDC運河-JSONプロトコル](/ticdc/ticdc-canal-json.md)を提供します。これにより、他のシステムがTiCDCからのデータ変更をサブスクライブできます。このように、TiCDCは、監視、キャッシング、グローバルインデックス作成、データ分析、異種データベース間のプライマリ-セカンダリレプリケーションなどのさまざまなシナリオのデータソースを提供します。
 
-## TiCDC architecture
+## TiCDCアーキテクチャ {#ticdc-architecture}
 
-When TiCDC is running, it is a stateless node that achieves high availability through etcd in PD. The TiCDC cluster supports creating multiple replication tasks to replicate data to multiple different downstream platforms.
+TiCDCが実行されている場合、PDのetcdを介して高可用性を実現するステートレスノードです。 TiCDCクラスタは、複数の異なるダウンストリームプラットフォームにデータを複製するための複数の複製タスクの作成をサポートします。
 
-The architecture of TiCDC is shown in the following figure:
+TiCDCのアーキテクチャを次の図に示します。
 
 ![TiCDC architecture](/media/ticdc/cdc-architecture.png)
 
-### System roles
+### システムの役割 {#system-roles}
 
-- TiKV CDC component: Only outputs key-value (KV) change logs.
+-   TiKV CDCコンポーネント：キー値（KV）変更ログのみを出力します。
 
-    - Assembles KV change logs in the internal logic.
-    - Provides the interface to output KV change logs. The data sent includes real-time change logs and incremental scan change logs.
+    -   KV変更ログを内部ロジックにアセンブルします。
+    -   KV変更ログを出力するためのインターフェースを提供します。送信されるデータには、リアルタイムの変更ログと増分スキャンの変更ログが含まれます。
 
-- `capture`: The operating process of TiCDC. Multiple `captures` form a TiCDC cluster that replicates KV change logs.
+-   `capture` ：TiCDCの運用プロセス。複数`captures`は、KV変更ログを複製するTiCDCクラスタを形成します。
 
-    - Each `capture` pulls a part of KV change logs.
-    - Sorts the pulled KV change log(s).
-    - Restores the transaction to downstream or outputs the log based on the TiCDC open protocol.
+    -   各`capture`は、KV変更ログの一部をプルします。
+    -   プルされたKV変更ログをソートします。
+    -   トランザクションをダウンストリームに復元するか、TiCDCオープンプロトコルに基づいてログを出力します。
 
-## Replication features
+## レプリケーション機能 {#replication-features}
 
-This section introduces the replication features of TiCDC.
+このセクションでは、TiCDCのレプリケーション機能を紹介します。
 
-### Sink support
+### シンクサポート {#sink-support}
 
-Currently, the TiCDC sink component supports replicating data to the following downstream platforms:
+現在、TiCDCシンクコンポーネントは、次のダウンストリームプラットフォームへのデータの複製をサポートしています。
 
-- Databases compatible with MySQL protocol. The sink component provides the final consistency support.
-- Kafka based on the TiCDC Open Protocol. The sink component ensures the row-level order, final consistency or strict transactional consistency.
+-   MySQLプロトコルと互換性のあるデータベース。シンクコンポーネントは、最終的な整合性サポートを提供します。
+-   TiCDCオープンプロトコルに基づくKafka。シンクコンポーネントは、行レベルの順序、最終的な一貫性、または厳密なトランザクションの一貫性を保証します。
 
-### Ensure replication order and consistency
+### 複製の順序と一貫性を確保する {#ensure-replication-order-and-consistency}
 
-#### Replication order
+#### 複製順序 {#replication-order}
 
-- For all DDL or DML statements, TiCDC outputs them **at least once**.
-- When the TiKV or TiCDC cluster encounters failure, TiCDC might send the same DDL/DML statement repeatedly. For duplicated DDL/DML statements:
+-   すべてのDDLまたはDMLステートメントについて、TiCDCはそれら**を少なくとも1回**出力します。
+-   TiKVまたはTiCDCクラスタで障害が発生すると、TiCDCは同じDDL/DMLステートメントを繰り返し送信する場合があります。重複したDDL/DMLステートメントの場合：
 
-    - MySQL sink can execute DDL statements repeatedly. For DDL statements that can be executed repeatedly in the downstream, such as `truncate table`, the statement is executed successfully. For those that cannot be executed repeatedly, such as `create table`, the execution fails, and TiCDC ignores the error and continues the replication.
-    - Kafka sink sends messages repeatedly, but the duplicate messages do not affect the constraints of `Resolved Ts`. Users can filter the duplicated messages from Kafka consumers.
+    -   MySQLシンクはDDLステートメントを繰り返し実行できます。 `truncate table`など、ダウンストリームで繰り返し実行できるDDLステートメントの場合、ステートメントは正常に実行されます。 `create table`など、繰り返し実行できないものの場合、実行は失敗し、TiCDCはエラーを無視して複製を続行します。
+    -   Kafkaシンクはメッセージを繰り返し送信しますが、重複したメッセージは`Resolved Ts`の制約に影響しません。ユーザーは、Kafkaコンシューマーからの重複メッセージをフィルタリングできます。
 
-#### Replication consistency
+#### レプリケーションの一貫性 {#replication-consistency}
 
-- MySQL sink
+-   MySQLシンク
 
-    - TiCDC does not split single-table transactions and **ensures** the atomicity of single-table transactions.
-    - TiCDC does **not ensure** that the execution order of downstream transactions is the same as that of upstream transactions.
-    - TiCDC splits cross-table transactions in the unit of table and does **not ensure** the atomicity of cross-table transactions.
-    - TiCDC **ensures** that the order of single-row updates is consistent with that in the upstream.
+    -   TiCDCは、単一テーブルトランザクションを分割せず、単一テーブルトランザクションの原子性を**保証**します。
+    -   TiCDCは、ダウンストリームトランザクションの実行順序がアップストリームトランザクションの実行順序と同じであることを**保証しません**。
+    -   TiCDCは、クロステーブルトランザクションをテーブルの単位で分割し、クロステーブルトランザクションのアトミック性を**保証しません**。
+    -   TiCDCは、単一行の更新の順序がアップストリームの順序と一致することを**保証**します。
 
-- Kafka sink
+-   カフカシンク
 
-    - TiCDC provides different strategies for data distribution. You can distribute data to different Kafka partitions based on the table, primary key, or timestamp.
-    - For different distribution strategies, the different consumer implementations can achieve different levels of consistency, including row-level consistency, eventual consistency, or cross-table transactional consistency.
-    - TiCDC does not have an implementation of Kafka consumers, but only provides [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md). You can implement the Kafka consumer according to this protocol.
+    -   TiCDCは、データ配布のためのさまざまな戦略を提供します。テーブル、主キー、またはタイムスタンプに基づいて、さまざまなKafkaパーティションにデータを配布できます。
+    -   さまざまな配布戦略の場合、さまざまなコンシューマー実装は、行レベルの一貫性、結果整合性、またはクロステーブルトランザクションの一貫性など、さまざまなレベルの一貫性を実現できます。
+    -   TiCDCにはKafkaコンシューマーの実装はありませんが、提供するのは[TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)だけです。このプロトコルに従って、Kafkaコンシューマーを実装できます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-There are some restrictions when using TiCDC.
+TiCDCを使用する場合、いくつかの制限があります。
 
-### Requirements for valid index
+### 有効なインデックスの要件 {#requirements-for-valid-index}
 
-TiCDC only replicates the table that has at least one **valid index**. A **valid index** is defined as follows:
+TiCDCは、少なくとも1つの**有効なインデックス**を持つテーブルのみを複製します。<strong>有効なインデックス</strong>は次のように定義されます。
 
-- The primary key (`PRIMARY KEY`) is a valid index.
-- The unique index (`UNIQUE INDEX`) that meets the following conditions at the same time is a valid index:
-    - Every column of the index is explicitly defined as non-nullable (`NOT NULL`).
-    - The index does not have the virtual generated column (`VIRTUAL GENERATED COLUMNS`).
+-   主キー（ `PRIMARY KEY` ）は有効なインデックスです。
+-   次の条件を満たす一意のインデックス（ `UNIQUE INDEX` ）は、有効なインデックスです。
+    -   インデックスのすべての列は、null許容ではないものとして明示的に定義されています（ `NOT NULL` ）。
+    -   インデックスには、仮想的に生成された列（ `VIRTUAL GENERATED COLUMNS` ）がありません。
 
-Since v4.0.8, TiCDC supports replicating tables **without a valid index** by modifying the task configuration. However, this compromises the guarantee of data consistency to some extent. For more details, see [Replicate tables without a valid index](/ticdc/manage-ticdc.md#replicate-tables-without-a-valid-index).
+v4.0.8以降、TiCDCは、タスク構成を変更することにより**、有効なインデックスなしで**テーブルを複製することをサポートしています。ただし、これにより、データの一貫性の保証がある程度損なわれます。詳細については、 [有効なインデックスなしでテーブルを複製する](/ticdc/manage-ticdc.md#replicate-tables-without-a-valid-index)を参照してください。
 
-### Unsupported scenarios
+### サポートされていないシナリオ {#unsupported-scenarios}
 
-Currently, the following scenarios are not supported:
+現在、次のシナリオはサポートされていません。
 
-- The TiKV cluster that uses RawKV alone.
-- The [DDL operation `CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) and the [SEQUENCE function](/sql-statements/sql-statement-create-sequence.md#sequence-function) in TiDB. When the upstream TiDB uses `SEQUENCE`, TiCDC ignores `SEQUENCE` DDL operations/functions performed upstream. However, DML operations using `SEQUENCE` functions can be correctly replicated.
+-   RawKVのみを使用するTiKVクラスタ。
+-   TiDBの[DDL操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームTiDBが`SEQUENCE`を使用する場合、TiCDCはアップストリームで実行される`SEQUENCE`のDDL操作/機能を無視します。ただし、 `SEQUENCE`の関数を使用したDML操作は正しく複製できます。
 
-TiCDC only provides partial support for scenarios of large transactions in the upstream. For details, refer to [FAQ: Does TiCDC support replicating large transactions? Is there any risk?](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk).
+TiCDCは、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳しくは[FAQ：TiCDCは大規模なトランザクションの複製をサポートしていますか？リスクはありますか？](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)をご覧ください。
 
-> **Note:**
+> **ノート：**
 >
-> Since v5.3.0, TiCDC no longer supports the cyclic replication feature.
+> v5.3.0以降、TiCDCは循環レプリケーション機能をサポートしなくなりました。
 
-## Install and deploy TiCDC
+## TiCDCをインストールして展開します {#install-and-deploy-ticdc}
 
-You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. For details, see [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+TiCDCを新しいTiDBクラスタと一緒にデプロイするか、TiCDCコンポーネントを既存のTiDBクラスタに追加することができます。詳細については、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
 
-## Manage TiCDC Cluster and Replication Tasks
+## TiCDCクラスターおよびレプリケーションタスクの管理 {#manage-ticdc-cluster-and-replication-tasks}
 
-Currently, you can use the `cdc cli` tool to manage the status of a TiCDC cluster and data replication tasks. For details, see:
+現在、 `cdc cli`のツールを使用して、TiCDCクラスタとデータレプリケーションタスクのステータスを管理できます。詳細については、以下を参照してください。
 
-- [Use `cdc cli` to manage cluster status and data replication task](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
-- [Use OpenAPI to manage cluster status and data replication task](/ticdc/ticdc-open-api.md)
+-   [`cdc cli`を使用して、クラスタステータスとデータレプリケーションタスクを管理します](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)
+-   [OpenAPIを使用して、クラスタのステータスとデータレプリケーションタスクを管理します](/ticdc/ticdc-open-api.md)
 
-## TiCDC Open Protocol
+## TiCDCオープンプロトコル {#ticdc-open-protocol}
 
-TiCDC Open Protocol is a row-level data change notification protocol that provides data sources for monitoring, caching, full-text indexing, analysis engines, and primary-secondary replication between different databases. TiCDC complies with TiCDC Open Protocol and replicates data changes of TiDB to third-party data medium such as MQ (Message Queue). For more information, see [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md).
+TiCDC Open Protocolは、行レベルのデータ変更通知プロトコルであり、監視、キャッシング、フルテキストインデックス作成、分析エンジン、および異なるデータベース間のプライマリ-セカンダリレプリケーション用のデータソースを提供します。 TiCDCはTiCDCOpenProtocolに準拠し、TiDBのデータ変更をMQ（メッセージキュー）などのサードパーティのデータメディアに複製します。詳細については、 [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)を参照してください。
 
-## Compatibility notes
+## 互換性に関する注意事項 {#compatibility-notes}
 
-### Incompatibility issue caused by using the TiCDC v5.0.0-rc `cdc cli` tool to operate a v4.0.x cluster
+### TiCDC v5.0.0- <code>cdc cli</code>ツールを使用してv4.0.xクラスタを操作することによって引き起こされる非互換性の問題 {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-code-cdc-cli-code-tool-to-operate-a-v4-0-x-cluster}
 
-When using the `cdc cli` tool of TiCDC v5.0.0-rc to operate a v4.0.x TiCDC cluster, you might encounter the following abnormal situations:
+TiCDCv5.0.0-rcの`cdc cli`ツールを使用してv4.0.xTiCDCクラスタを操作すると、次の異常な状況が発生する可能性があります。
 
-- If the TiCDC cluster is v4.0.8 or an earlier version, using the v5.0.0-rc `cdc cli` tool to create a replication task might cause cluster anomalies and get the replication task stuck.
+-   TiCDCクラスタがv4.0.8以前のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーションタスクを作成すると、クラスタの異常が発生し、レプリケーションタスクがスタックする可能性があります。
 
-- If the TiCDC cluster is v4.0.9 or a later version, using the v5.0.0-rc `cdc cli` tool to create a replication task will cause the old value and unified sorter features to be unexpectedly enabled by default.
+-   TiCDCクラスタがv4.0.9以降のバージョンの場合、v5.0.0-rc `cdc cli`ツールを使用してレプリケーションタスクを作成すると、デフォルトで古い値と統合ソーター機能が予期せず有効になります。
 
-Solutions: Use the `cdc` executable file corresponding to the TiCDC cluster version to perform the following operations:
+解決策：TiCDCクラスタバージョンに対応する`cdc`の実行可能ファイルを使用して、次の操作を実行します。
 
-1. Delete the changefeed created using the v5.0.0-rc `cdc cli` tool. For example, run the `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force` command.
-2. If the replication task is stuck, restart the TiCDC cluster. For example, run the `tiup cluster restart <cluster_name> -R cdc` command.
-3. Re-create the changefeed. For example, run the `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx` command.
+1.  v5.0.0- `cdc cli`ツールを使用して作成されたチェンジフィードを削除します。たとえば、 `tiup cdc:v4.0.9 cli changefeed remove -c xxxx --pd=xxxxx --force`コマンドを実行します。
+2.  レプリケーションタスクがスタックしている場合は、TiCDCクラスタを再起動します。たとえば、 `tiup cluster restart <cluster_name> -R cdc`コマンドを実行します。
+3.  チェンジフィードを再作成します。たとえば、 `tiup cdc:v4.0.9 cli changefeed create --sink-uri=xxxx --pd=xxx`コマンドを実行します。
 
-> **Note:**
+> **ノート：**
 >
-> The above issue exists only when `cdc cli` is v5.0.0-rc. Other v5.0.x `cdc cli` tool can be compatible with v4.0.x clusters.
+> 上記の問題は、 `cdc cli`がv5.0.0-rcの場合にのみ発生します。他の`cdc cli`ツールは、v4.0.xクラスターと互換性があります。
 
-### Compatibility notes for `sort-dir` and `data-dir`
+### <code>sort-dir</code>と<code>data-dir</code>の互換性に関する注意 {#compatibility-notes-for-code-sort-dir-code-and-code-data-dir-code}
 
-The `sort-dir` configuration is used to specify the temporary file directory for the TiCDC sorter. Its functionalities might vary in different versions. The following table lists `sort-dir`'s compatibility changes across versions.
+`sort-dir`構成は、TiCDCソーターの一時ファイルディレクトリを指定するために使用されます。その機能はバージョンによって異なる場合があります。次の表に、バージョン間の`sort-dir`の互換性の変更を示します。
 
-|  Version  |  `sort-engine` functionality  |  Note   |  Recommendation   |
-|  :---  |    :---               |  :--    | :-- |
-| v4.0.11 or an earlier v4.0 version, v5.0.0-rc | It is a changefeed configuration item and specifies temporary file directory for the `file` sorter and `unified` sorter. | In these versions, `file` sorter and `unified` sorter are **experimental features** and **NOT** recommended for the production environment. <br/><br/> If multiple changefeeds use the `unified` sorter as its `sort-engine`, the actual temporary file directory might be the `sort-dir` configuration of any changefeed, and the directory used for each TiCDC node might be different. | It is not recommended to use `unified` sorter in the production environment. |
-| v4.0.12, v4.0.13, v5.0.0, and v5.0.1 |  It is a configuration item of changefeed or of `cdc server`. | By default, the `sort-dir` configuration of a changefeed does not take effect, and the `sort-dir` configuration of `cdc server` defaults to `/tmp/cdc_sort`. It is recommended to only configure `cdc server` in the production environment.<br /><br /> If you use TiUP to deploy TiCDC, it is recommended to use the latest TiUP version and set `sorter.sort-dir` in the TiCDC server configuration.<br /><br /> The `unified` sorter is enabled by default in v4.0.13, v5.0.0, and v5.0.1. If you want to upgrade your cluster to these versions, make sure that you have correctly configured `sorter.sort-dir` in the TiCDC server configuration. | You need to configure `sort-dir` using the `cdc server` command-line parameter (or TiUP). |
-|  v4.0.14 and later v4.0 versions, v5.0.3 and later v5.0 versions, later TiDB versions | `sort-dir` is deprecated. It is recommended to configure `data-dir`.  |  You can configure `data-dir` using the latest version of TiUP. In these TiDB versions, `unified` sorter is enabled by default. Make sure that `data-dir` has been configured correctly when you upgrade your cluster. Otherwise, `/tmp/cdc_data` will be used by default as the temporary file directory. <br /><br /> If the storage capacity of the device where the directory is located is insufficient, the problem of insufficient hard disk space might occur. In this situation, the previous `sort-dir` configuration of changefeed will become invalid.| You need to configure `data-dir` using the `cdc server` command-line parameter (or TiUP).  |
+| バージョン                                                 | `sort-engine`機能                                                    | ノート                                                                                                                                                                                                                                                                                                                                                                                   | おすすめ                                                          |
+| :---------------------------------------------------- | :----------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------ |
+| v4.0.11またはそれ以前のv4.0バージョン、v5.0.0-rc                    | これはチェンジフィード構成アイテムであり、 `file`ソーターと`unified`ソーターの一時ファイルディレクトリを指定します。 | これらのバージョンでは、 `file`のソーターと`unified`のソーターは**実験的機能**であり、実稼働環境には推奨され<strong>ません</strong>。<br/><br/>複数のチェンジフィードが`unified`ソーターを`sort-engine`として使用する場合、実際の一時ファイルディレクトリはチェンジフィードの`sort-dir`構成である可能性があり、各TiCDCノードに使用されるディレクトリは異なる可能性があります。                                                                                                                                                     | 実稼働環境で`unified`のソーターを使用することはお勧めしません。                          |
+| v4.0.12、v4.0.13、v5.0.0、およびv5.0.1                      | チェンジフィードまたは`cdc server`の構成項目です。                                    | デフォルトでは、チェンジフィードの`sort-dir`の構成は有効にならず、 `cdc server`つの`sort-dir`の構成はデフォルトで`/tmp/cdc_sort`になります。実稼働環境では`cdc server`のみを構成することをお勧めします。<br/><br/> TiUPを使用してTiCDCを展開する場合は、最新のTiUPバージョンを使用し、TiCDCサーバー構成で`sorter.sort-dir`を設定することをお勧めします。<br/><br/> `unified`ソーターは、v4.0.13、v5.0.0、およびv5.0.1ではデフォルトで有効になっています。クラスタをこれらのバージョンにアップグレードする場合は、TiCDCサーバー構成で`sorter.sort-dir`が正しく構成されていることを確認してください。 | `cdc server`コマンドラインパラメータ（またはTiUP）を使用して`sort-dir`を設定する必要があります。 |
+| v4.0.14以降のv4.0バージョン、v5.0.3以降のv5.0バージョン、それ以降のTiDBバージョン | `sort-dir`は非推奨です。 `data-dir`を構成することをお勧めします。                        | 最新バージョンのTiUPを使用して`data-dir`を構成できます。これらのTiDBバージョンでは、 `unified`ソーターがデフォルトで有効になっています。クラスタをアップグレードするときは、 `data-dir`が正しく構成されていることを確認してください。それ以外の場合は、デフォルトで`/tmp/cdc_data`が一時ファイルディレクトリとして使用されます。<br/><br/>ディレクトリが配置されているデバイスのストレージ容量が不足している場合、ハードディスク容量が不足しているという問題が発生する可能性があります。この状況では、変更フィードの以前の`sort-dir`の構成は無効になります。                                                                   | `cdc server`コマンドラインパラメータ（またはTiUP）を使用して`data-dir`を設定する必要があります。 |
 
-### Compatibility with temporary tables
+### 一時テーブルとの互換性 {#compatibility-with-temporary-tables}
 
-Since v5.3.0, TiCDC supports [global temporary tables](/temporary-tables.md#global-temporary-tables). Replicating global temporary tables to the downstream using TiCDC of a version earlier than v5.3.0 causes table definition error.
+v5.3.0以降、TiCDCは[グローバル一時テーブル](/temporary-tables.md#global-temporary-tables)をサポートします。 v5.3.0より前のバージョンのTiCDCを使用してグローバル一時テーブルをダウンストリームに複製すると、テーブル定義エラーが発生します。
 
-If the upstream cluster contains a global temporary table, the downstream TiDB cluster is expected to be v5.3.0 or a later version. Otherwise, an error occurs during the replication process.
+アップストリームクラスタにグローバル一時テーブルが含まれている場合、ダウンストリームTiDBクラスタはv5.3.0以降のバージョンであると予想されます。そうしないと、レプリケーションプロセス中にエラーが発生します。
 
-## Troubleshoot TiCDC
+## TiCDCのトラブルシューティング {#troubleshoot-ticdc}
 
-For details, refer to [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).
+詳しくは[TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)をご覧ください。

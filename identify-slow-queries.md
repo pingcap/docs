@@ -3,13 +3,13 @@ title: Identify Slow Queries
 summary: Use the slow query log to identify problematic SQL statements.
 ---
 
-# Identify Slow Queries
+# 遅いクエリを特定する {#identify-slow-queries}
 
-To help users identify slow queries, analyze and improve the performance of SQL execution, TiDB outputs the statements whose execution time exceeds [slow-threshold](/tidb-configuration-file.md#slow-threshold) (The default value is 300 milliseconds) to [slow-query-file](/tidb-configuration-file.md#slow-query-file) (The default value is "tidb-slow.log").
+ユーザーが遅いクエリを識別し、SQL実行のパフォーマンスを分析および改善できるように、TiDBは、実行時間が[遅いしきい値](/tidb-configuration-file.md#slow-threshold) （デフォルト値は300ミリ秒）から[遅いクエリファイル](/tidb-configuration-file.md#slow-query-file) （デフォルト値は「tidb-slow.log」）を超えるステートメントを出力します。
 
-TiDB enables the slow query log by default. You can enable or disable the feature by modifying the configuration [`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log).
+TiDBは、デフォルトで低速クエリログを有効にします。構成を変更することにより、機能を有効または無効にできます[`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log) 。
 
-## Usage example
+## 使用例 {#usage-example}
 
 ```sql
 # Time: 2019-08-14T09:26:59.487776265+08:00
@@ -42,86 +42,86 @@ use test;
 insert into t select * from t;
 ```
 
-## Fields description
+## フィールドの説明 {#fields-description}
 
-> **Note:**
+> **ノート：**
 >
-> The unit of all the following time fields in the slow query log is **"second"**.
+> 低速クエリログの以下のすべての時間フィールドの単位は**「秒」**です。
 
-Slow query basics:
+遅いクエリの基本：
 
-* `Time`: The print time of log.
-* `Query_time`: The execution time of a statement.
-* `Parse_time`: The parsing time for the statement.
-* `Compile_time`: The duration of the query optimization.
-* `Query`: A SQL statement. `Query` is not printed in the slow log, but the corresponding field is called `Query` after the slow log is mapped to the memory table.
-* `Digest`: The fingerprint of the SQL statement.
-* `Txn_start_ts`: The start timestamp and the unique ID of a transaction. You can use this value to search for the transaction-related logs.
-* `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
-* `Index_ids`: The IDs of the indexes involved in a statement.
-* `Succ`: Whether a statement is executed successfully.
-* `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
-* `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
-* `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
-* `Plan_from_cache`: Whether this statement hits the execution plan cache.
-* `Rewrite_time`: The time consumed for rewriting the query of this statement.
-* `Preproc_subqueries`: The number of subqueries (in the statement) that are executed in advance. For example, the `where id in (select if from t)` subquery might be executed in advance.
-* `Preproc_subqueries_time`: The time consumed for executing the subquery of this statement in advance.
-* `Exec_retry_count`: The retry times of this statement. This field is usually for pessimistic transactions in which the statement is retried when the lock is failed.
-* `Exec_retry_time`: The execution retry duration of this statement. For example, if a statement has been executed three times in total (failed for the first two times), `Exec_retry_time` means the total duration of the first two executions. The duration of the last execution is `Query_time` minus `Exec_retry_time`.
+-   `Time` ：ログの印刷時間。
+-   `Query_time` ：ステートメントの実行時間。
+-   `Parse_time` ：ステートメントの解析時間。
+-   `Compile_time` ：クエリ最適化の期間。
+-   `Query` ：SQLステートメント。 `Query`はスローログに出力されませんが、スローログがメモリテーブルにマップされた後、対応するフィールドは`Query`と呼ばれます。
+-   `Digest` ：SQLステートメントのフィンガープリント。
+-   `Txn_start_ts` ：開始タイムスタンプとトランザクションの一意のID。この値を使用して、トランザクション関連のログを検索できます。
+-   `Is_internal` ：SQLステートメントがTiDB内部であるかどうか。 `true`はSQLステートメントがTiDBの内部で実行されることを示し、 `false`はSQLステートメントがユーザーによって実行されることを示します。
+-   `Index_ids` ：ステートメントに含まれるインデックスのID。
+-   `Succ` ：ステートメントが正常に実行されたかどうか。
+-   `Backoff_time` ：ステートメントで再試行が必要なエラーが発生した場合の再試行までの待機時間。一般的なエラーには、 `lock occurs` 、および`Region split`が含まれ`tikv server is busy` 。
+-   `Plan` ：ステートメントの実行プラン。 `select tidb_decode_plan('xxx...')`ステートメントを使用して、特定の実行プランを解析します。
+-   `Prepared` ：このステートメントが`Prepare`または`Execute`の要求であるかどうか。
+-   `Plan_from_cache` ：このステートメントが実行プランのキャッシュにヒットするかどうか。
+-   `Rewrite_time` ：このステートメントのクエリを書き換えるのにかかった時間。
+-   `Preproc_subqueries` ：事前に実行された（ステートメント内の）サブクエリの数。たとえば、 `where id in (select if from t)`のサブクエリが事前に実行される場合があります。
+-   `Preproc_subqueries_time` ：このステートメントのサブクエリを事前に実行するために費やされた時間。
+-   `Exec_retry_count` ：このステートメントの再試行回数。このフィールドは通常、ロックが失敗したときにステートメントが再試行される悲観的なトランザクション用です。
+-   `Exec_retry_time` ：このステートメントの実行再試行時間。たとえば、ステートメントが合計3回実行された（最初の2回失敗した）場合、 `Exec_retry_time`は最初の2回の実行の合計期間を意味します。最後の実行の期間は`Query_time`マイナス`Exec_retry_time`です。
 
-The following fields are related to transaction execution:
+次のフィールドは、トランザクションの実行に関連しています。
 
-* `Prewrite_time`: The duration of the first phase (prewrite) of the two-phase transaction commit.
-* `Commit_time`: The duration of the second phase (commit) of the two-phase transaction commit.
-* `Get_commit_ts_time`: The time spent on getting `commit_ts` during the second phase (commit) of the two-phase transaction commit.
-* `Local_latch_wait_time`: The time that TiDB spends on waiting for the lock before the second phase (commit) of the two-phase transaction commit.
-* `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
-* `Write_size`: The total size of the keys or values to be written when the transaction commits.
-* `Prewrite_region`: The number of TiKV Regions involved in the first phase (prewrite) of the two-phase transaction commit. Each Region triggers a remote procedure call.
+-   `Prewrite_time` ：2フェーズトランザクションコミットの最初のフェーズ（プリライト）の期間。
+-   `Commit_time` ：2フェーズトランザクションコミットの2番目のフェーズ（コミット）の期間。
+-   `Get_commit_ts_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）中に`commit_ts`を取得するために費やされた時間。
+-   `Local_latch_wait_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）の前にTiDBがロックの待機に費やす時間。
+-   `Write_keys` ：トランザクションがTiKVの書き込みCFに書き込むキーの数。
+-   `Write_size` ：トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
+-   `Prewrite_region` ：2フェーズトランザクションコミットの最初のフェーズ（プリライト）に関与するTiKVリージョンの数。各リージョンは、リモートプロシージャコールをトリガーします。
 
-Memory usage fields:
+メモリ使用量フィールド：
 
-* `Mem_max`: The maximum memory space used during the execution period of a SQL statement (the unit is byte).
+-   `Mem_max` ：SQLステートメントの実行期間中に使用される最大メモリスペース（単位はバイト）。
 
-Hard disk fields:
+ハードディスクフィールド：
 
-* `Disk_max`: The maximum disk space used during the execution period of a SQL statement (the unit is byte).
+-   `Disk_max` ：SQL文の実行中に使用される最大ディスク容量（単位はバイト）。
 
-User fields:
+ユーザーフィールド：
 
-* `User`: The name of the user who executes this statement.
-* `Conn_ID`: The Connection ID (session ID). For example, you can use the keyword `con:3` to search for the log whose session ID is `3`.
-* `DB`: The current database.
+-   `User` ：このステートメントを実行するユーザーの名前。
+-   `Conn_ID` ：接続ID（セッションID）。たとえば、キーワード`con:3`を使用して、セッションIDが`3`のログを検索できます。
+-   `DB` ：現在のデータベース。
 
-TiKV Coprocessor Task fields:
+TiKVコプロセッサータスクフィールド：
 
-* `Request_count`: The number of Coprocessor requests that a statement sends.
-* `Total_keys`: The number of keys that Coprocessor has scanned.
-* `Process_time`: The total processing time of a SQL statement in TiKV. Because data is sent to TiKV concurrently, this value might exceed `Query_time`.
-* `Wait_time`: The total waiting time of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
-* `Process_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that many old versions exist.
-* `Cop_proc_avg`: The average execution time of cop-tasks.
-* `Cop_proc_p90`: The P90 execution time of cop-tasks.
-* `Cop_proc_max`: The maximum execution time of cop-tasks.
-* `Cop_proc_addr`: The address of the cop-task with the longest execution time.
-* `Cop_wait_avg`: The average waiting time of cop-tasks.
-* `Cop_wait_p90`: The P90 waiting time of cop-tasks.
-* `Cop_wait_max`: The maximum waiting time of cop-tasks.
-* `Cop_wait_addr`: The address of the cop-task whose waiting time is the longest.
-* `Cop_backoff_{backoff-type}_total_times`: The total times of backoff caused by an error.
-* `Cop_backoff_{backoff-type}_total_time`: The total time of backoff caused by an error.
-* `Cop_backoff_{backoff-type}_max_time`: The longest time of backoff caused by an error.
-* `Cop_backoff_{backoff-type}_max_addr`: The address of the cop-task that has the longest backoff time caused by an error.
-* `Cop_backoff_{backoff-type}_avg_time`: The average time of backoff caused by an error.
-* `Cop_backoff_{backoff-type}_p90_time`: The P90 percentile backoff time caused by an error.
+-   `Request_count` ：ステートメントが送信するコプロセッサー要求の数。
+-   `Total_keys` ：コプロセッサーがスキャンしたキーの数。
+-   `Process_time` ：TiKVでのSQLステートメントの合計処理時間。データは同時にTiKVに送信されるため、この値は`Query_time`を超える可能性があります。
+-   `Wait_time` ：TiKVでのステートメントの合計待機時間。 TiKVのコプロセッサーは限られた数のスレッドを実行するため、コプロセッサーのすべてのスレッドが機能しているときに要求がキューに入れられる可能性があります。キュー内のリクエストの処理に時間がかかると、後続のリクエストの待機時間が長くなります。
+-   `Process_keys` ：コプロセッサーが処理したキーの数。 `total_keys`と比較すると、 `processed_keys`には古いバージョンのMVCCが含まれていません。 `processed_keys`と`total_keys`の大きな違いは、多くの古いバージョンが存在することを示しています。
+-   `Cop_proc_avg` ：cop-tasksの平均実行時間。
+-   `Cop_proc_p90` ：cop-tasksのP90実行時間。
+-   `Cop_proc_max` ：cop-tasksの最大実行時間。
+-   `Cop_proc_addr` ：実行時間が最も長いcop-taskのアドレス。
+-   `Cop_wait_avg` ：警官タスクの平均待機時間。
+-   `Cop_wait_p90` ：cop-tasksのP90待機時間。
+-   `Cop_wait_max` ：cop-tasksの最大待機時間。
+-   `Cop_wait_addr` ：待ち時間が最も長い警官タスクのアドレス。
+-   `Cop_backoff_{backoff-type}_total_times` ：エラーによって発生したバックオフの合計時間。
+-   `Cop_backoff_{backoff-type}_total_time` ：エラーによって発生したバックオフの合計時間。
+-   `Cop_backoff_{backoff-type}_max_time` ：エラーによるバックオフの最長時間。
+-   `Cop_backoff_{backoff-type}_max_addr` ：エラーによるバックオフ時間が最も長いcop-taskのアドレス。
+-   `Cop_backoff_{backoff-type}_avg_time` ：エラーによって発生したバックオフの平均時間。
+-   `Cop_backoff_{backoff-type}_p90_time` ：エラーが原因のP90パーセンタイルバックオフ時間。
 
-## Related system variables
+## 関連するシステム変数 {#related-system-variables}
 
-* [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold): Sets the threshold for the slow log. The SQL statement whose execution time exceeds this threshold is recorded in the slow log. The default value is 300 (ms).
-* [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len): Sets the maximum length of the SQL statement recorded in the slow log. The default value is 4096 (byte).
-* [tidb_redact_log](/system-variables.md#tidb_redact_log): Determines whether to desensitize user data using `?` in the SQL statement recorded in the slow log. The default value is `0`, which means to disable the feature.
-* [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info): Determines whether to record the physical execution information of each operator in the execution plan. The default value is `1`. This feature impacts the performance by approximately 3%. After enabling this feature, you can view the `Plan` information as follows:
+-   [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) ：低速ログのしきい値を設定します。実行時間がこのしきい値を超えるSQLステートメントは、低速ログに記録されます。デフォルト値は300（ms）です。
+-   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) ：スローログに記録されるSQLステートメントの最大長を設定します。デフォルト値は4096（バイト）です。
+-   [tidb_redact_log](/system-variables.md#tidb_redact_log) ：低速ログに記録されたSQLステートメントで`?`を使用してユーザーデータの感度を下げるかどうかを決定します。デフォルト値は`0`で、これは機能を無効にすることを意味します。
+-   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) ：各オペレーターの物理実行情報を実行プランに記録するかどうかを決定します。デフォルト値は`1`です。この機能は、パフォーマンスに約3％の影響を与えます。この機能を有効にすると、次の`Plan`の情報を表示できます。
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
@@ -136,31 +136,31 @@ TiKV Coprocessor Task fields:
     +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     ```
 
-If you are conducting a performance test, you can disable the feature of automatically collecting the execution information of operators:
+パフォーマンステストを実施している場合は、オペレーターの実行情報を自動的に収集する機能を無効にすることができます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-The returned result of the `Plan` field has roughly the same format with that of `EXPLAIN` or `EXPLAIN ANALYZE`. For more details of the execution plan, see [`EXPLAIN`](/sql-statements/sql-statement-explain.md) or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md).
+`Plan`フィールドの返される結果は、 `EXPLAIN`または`EXPLAIN ANALYZE`の結果とほぼ同じ形式になります。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
-For more information, see [TiDB specific variables and syntax](/system-variables.md).
+詳細については、 [TiDB固有の変数と構文](/system-variables.md)を参照してください。
 
-## Memory mapping in slow log
+## 遅いログのメモリマッピング {#memory-mapping-in-slow-log}
 
-You can query the content of the slow query log by querying the `INFORMATION_SCHEMA.SLOW_QUERY` table. Each column name in the table corresponds to one field name in the slow log. For table structure, see the introduction to the `SLOW_QUERY` table in [Information Schema](/information-schema/information-schema-slow-query.md).
+`INFORMATION_SCHEMA.SLOW_QUERY`のテーブルを照会することにより、低速照会ログの内容を照会できます。表の各列名は、低速ログの1つのフィールド名に対応しています。テーブル構造については、 [情報スキーマ](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> Every time you query the `SLOW_QUERY` table, TiDB reads and parses the current slow query log.
+> `SLOW_QUERY`のテーブルをクエリするたびに、TiDBは現在の低速クエリログを読み取って解析します。
 
-For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time, including the rotated slow log file. You need to specify the `TIME` range to locate the slow log files that need to be parsed. If you don't specify the `TIME` range, TiDB only parses the current slow log file. For example:
+TiDB 4.0の場合、 `SLOW_QUERY`は、ローテーションされた低速ログファイルを含む、任意の期間の低速ログのクエリをサポートします。解析する必要のある低速ログファイルを見つけるには、 `TIME`の範囲を指定する必要があります。 `TIME`の範囲を指定しない場合、TiDBは現在の低速ログファイルのみを解析します。例えば：
 
-* If you don't specify the time range, TiDB only parses the slow query data that TiDB is writing to the slow log file:
+-   時間範囲を指定しない場合、TiDBは、TiDBが低速ログファイルに書き込んでいる低速クエリデータのみを解析します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select count(*),
@@ -177,9 +177,9 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
     +----------+----------------------------+----------------------------+
     ```
 
-* If you specify the time range, for example, from `2020-03-10 00:00:00` to `2020-03-11 00:00:00`, TiDB first locates the slow log files of the specified time range, and then parses the slow query information:
+-   たとえば`2020-03-10 00:00:00`の時間範囲を指定すると、 `2020-03-11 00:00:00`は最初に指定された時間範囲の低速ログファイルを検索し、次に低速クエリ情報を解析します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select count(*),
@@ -198,21 +198,21 @@ For TiDB 4.0, `SLOW_QUERY` supports querying the slow log of any period of time,
     +----------+----------------------------+----------------------------+
     ```
 
-> **Note:**
+> **ノート：**
 >
-> If the slow log files of the specified time range are removed, or there is no slow query, the query returns NULL.
+> 指定された時間範囲の低速ログファイルが削除された場合、または低速クエリがない場合、クエリはNULLを返します。
 
-TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table) system table to query the slow query information of all TiDB nodes. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. You can use `CLUSTER_SLOW_QUERY` the way you do with [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md).
+TiDB 4.0は、すべてのTiDBノードの低速クエリ情報をクエリするために[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)のシステムテーブルを追加します。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で`SLOW_QUERY`テーブルのテーブルスキーマとは異なります。 `INSTANCE`列は、低速クエリの行情報のTiDBノードアドレスを表します。 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように`CLUSTER_SLOW_QUERY`を使用できます。
 
-When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and the judgment down to other nodes, instead of retrieving all slow query information from other nodes and executing the operations on one TiDB node.
+`CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBは、他のノードからすべての低速クエリ情報を取得して1つのTiDBノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
-## `SLOW_QUERY` / `CLUSTER_SLOW_QUERY` usage examples
+## <code>SLOW_QUERY</code> / <code>CLUSTER_SLOW_QUERY</code>の使用例 {#code-slow-query-code-code-cluster-slow-query-code-usage-examples}
 
-### Top-N slow queries
+### トップNの遅いクエリ {#top-n-slow-queries}
 
-Query the Top 2 slow queries of users. `Is_internal=false` means excluding slow queries inside TiDB and only querying slow queries of users.
+ユーザーの上位2つの遅いクエリをクエリします。 `Is_internal=false`は、TiDB内の遅いクエリを除外し、ユーザーの遅いクエリのみをクエリすることを意味します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select query_time, query
@@ -222,7 +222,7 @@ order by query_time desc
 limit 2;
 ```
 
-Output example:
+出力例：
 
 ```
 +--------------+------------------------------------------------------------------+
@@ -233,11 +233,11 @@ Output example:
 +--------------+------------------------------------------------------------------+
 ```
 
-### Query the Top-N slow queries of the `test` user
+### <code>test</code>ユーザーの上位N個の低速クエリをクエリする {#query-the-top-n-slow-queries-of-the-code-test-code-user}
 
-In the following example, the slow queries executed by the `test` user are queried, and the first two results are displayed in reverse order of execution time.
+次の例では、 `test`人のユーザーによって実行された低速クエリが照会され、最初の2つの結果が実行時間の逆の順序で表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select query_time, query, user
@@ -248,7 +248,7 @@ order by query_time desc
 limit 2;
 ```
 
-Output example:
+出力例：
 
 ```
 +-------------+------------------------------------------------------------------+----------------+
@@ -258,13 +258,13 @@ Output example:
 +-------------+------------------------------------------------------------------+----------------+
 ```
 
-### Query similar slow queries with the same SQL fingerprints
+### 同じSQLフィンガープリントを使用して同様の低速クエリをクエリする {#query-similar-slow-queries-with-the-same-sql-fingerprints}
 
-After querying the Top-N SQL statements, continue to query similar slow queries using the same fingerprints.
+Top-N SQLステートメントをクエリした後、同じフィンガープリントを使用して同様の遅いクエリをクエリし続けます。
 
-1. Acquire Top-N slow queries and the corresponding SQL fingerprints.
+1.  Top-Nの低速クエリと対応するSQLフィンガープリントを取得します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select query_time, query, digest
@@ -274,7 +274,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     limit 1;
     ```
 
-    Output example:
+    出力例：
 
     ```
     +-------------+-----------------------------+------------------------------------------------------------------+
@@ -284,9 +284,9 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     +-------------+-----------------------------+------------------------------------------------------------------+
     ```
 
-2. Query similar slow queries with the fingerprints.
+2.  フィンガープリントを使用して、同様の低速クエリをクエリします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select query, query_time
@@ -294,7 +294,7 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     where digest = "4751cb6008fda383e22dacb601fde85425dc8f8cf669338d55d944bafb46a6fa";
     ```
 
-    Output example:
+    出力例：
 
     ```
     +-----------------------------+-------------+
@@ -305,9 +305,9 @@ After querying the Top-N SQL statements, continue to query similar slow queries 
     +-----------------------------+-------------+
     ```
 
-## Query slow queries with pseudo `stats`
+## 疑似<code>stats</code>を使用して低速クエリをクエリする {#query-slow-queries-with-pseudo-code-stats-code}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select query, query_time, stats
@@ -316,7 +316,7 @@ where is_internal = false
   and stats like '%pseudo%';
 ```
 
-Output example:
+出力例：
 
 ```
 +-----------------------------+-------------+---------------------------------+
@@ -330,11 +330,11 @@ Output example:
 +-----------------------------+-------------+---------------------------------+
 ```
 
-### Query slow queries whose execution plan is changed
+### 実行プランが変更された低速クエリをクエリする {#query-slow-queries-whose-execution-plan-is-changed}
 
-When the execution plan of SQL statements of the same category is changed, the execution slows down, because the statistics is outdated, or the statistics is not accurate enough to reflect the real data distribution. You can use the following SQL statement to query SQL statements with different execution plans.
+同じカテゴリのSQLステートメントの実行プランが変更されると、統計が古くなっているか、統計が実際のデータ分布を反映するのに十分正確でないため、実行が遅くなります。次のSQLステートメントを使用して、さまざまな実行プランでSQLステートメントをクエリできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select count(distinct plan_digest) as count,
@@ -346,7 +346,7 @@ having count > 1
 limit 3\G
 ```
 
-Output example:
+出力例：
 
 ```
 ***************************[ 1. row ]***************************
@@ -363,9 +363,9 @@ digest     | db705c89ca2dfc1d39d10e0f30f285cbbadec7e24da4f15af461b148d8ffb020
 min(query) | SELECT DISTINCT c FROM sbtest11 WHERE id BETWEEN ? AND ? ORDER BY c [arguments: (303359, 303458)];
 ```
 
-Then you can query the different plans using the SQL fingerprint in the query result above:
+次に、上記のクエリ結果のSQLフィンガープリントを使用してさまざまなプランをクエリできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select min(plan),
@@ -375,7 +375,7 @@ where digest='17b4518fde82e32021877878bec2bb309619d384fca944106fcaf9c93b536e94'
 group by plan_digest\G
 ```
 
-Output example:
+出力例：
 
 ```
 *************************** 1. row ***************************
@@ -392,15 +392,15 @@ plan_digest: 6afbbd21f60ca6c6fdf3d3cd94f7c7a49dd93c00fcf8774646da492e50e204ee
               └─TableScan_11    cop     1.2440069558121831      table:sbtest25, range:[472745,472844], keep order:false
 ```
 
-### Query the number of slow queries for each TiDB node in a cluster
+### クラスタの各TiDBノードの低速クエリの数をクエリする {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select instance, count(*) from information_schema.cluster_slow_query where time >= "2020-03-06 00:00:00" and time < now() group by instance;
 ```
 
-Output example:
+出力例：
 
 ```
 +---------------+----------+
@@ -411,11 +411,11 @@ Output example:
 +---------------+----------+
 ```
 
-### Query slow logs occurring only in abnormal time period
+### 異常な期間にのみ発生する低速ログのクエリ {#query-slow-logs-occurring-only-in-abnormal-time-period}
 
-If you find problems such as decreased QPS or increased latency for the time period from `2020-03-10 13:24:00` to `2020-03-10 13:27:00`, the reason might be that a large query crops up. Run the following SQL statement to query slow logs that occur only in abnormal time period. The time range from `2020-03-10 13:20:00` to `2020-03-10 13:23:00` refers to the normal time period.
+QPSの低下や`2020-03-10 13:24:00`から`2020-03-10 13:27:00`までの期間の遅延の増加などの問題が見つかった場合は、大きなクエリが発生することが原因である可能性があります。次のSQLステートメントを実行して、異常な期間にのみ発生する低速ログをクエリします。 `2020-03-10 13:20:00`の時間範囲は、通常の期間を指し`2020-03-10 13:23:00` 。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM
@@ -445,7 +445,7 @@ WHERE t1.digest NOT IN
 ORDER BY  t1.sum_query_time DESC limit 10\G
 ```
 
-Output example:
+出力例：
 
 ```
 ***************************[ 1. row ]***************************
@@ -464,33 +464,33 @@ min(prev_stmt)     |
 digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8d03df
 ```
 
-### Parse other TiDB slow log files
+### 他のTiDB低速ログファイルを解析する {#parse-other-tidb-slow-log-files}
 
-TiDB uses the session variable `tidb_slow_query_file` to control the files to be read and parsed when querying `INFORMATION_SCHEMA.SLOW_QUERY`. You can query the content of other slow query log files by modifying the value of the session variable.
+TiDBは、セッション変数`tidb_slow_query_file`を使用して、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会するときに読み取られて解析されるファイルを制御します。セッション変数の値を変更することにより、他の低速クエリログファイルのコンテンツをクエリできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set tidb_slow_query_file = "/path-to-log/tidb-slow.log"
 ```
 
-### Parse TiDB slow logs with `pt-query-digest`
+### <code>pt-query-digest</code>してTiDBの低速ログを解析します {#parse-tidb-slow-logs-with-code-pt-query-digest-code}
 
-Use `pt-query-digest` to parse TiDB slow logs.
+`pt-query-digest`を使用して、TiDBの低速ログを解析します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use `pt-query-digest` 3.0.13 or later versions.
+> `pt-query-digest`以降のバージョンを使用することをお勧めします。
 
-For example:
+例えば：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 pt-query-digest --report tidb-slow.log
 ```
 
-Output example:
+出力例：
 
 ```
 # 320ms user time, 20ms system time, 27.00M rss, 221.32M vsz
@@ -516,34 +516,34 @@ Output example:
 .
 ```
 
-## Identify problematic SQL statements
+## 問題のあるSQLステートメントを特定する {#identify-problematic-sql-statements}
 
-Not all of the `SLOW_QUERY` statements are problematic. Only those whose `process_time` is very large increase the pressure on the entire cluster.
+`SLOW_QUERY`のステートメントすべてに問題があるわけではありません。 `process_time`が非常に大きいものだけが、クラスタ全体の圧力を高めます。
 
-The statements whose `wait_time` is very large and `process_time` is very small are usually not problematic. This is because the statement is blocked by real problematic statements and it has to wait in the execution queue, which leads to a much longer response time.
+`wait_time`が非常に大きく、 `process_time`が非常に小さいステートメントは、通常、問題ありません。これは、ステートメントが実際の問題のあるステートメントによってブロックされ、実行キューで待機する必要があるためです。これにより、応答時間が大幅に長くなります。
 
-### `admin show slow` command
+### <code>admin show slow</code>コマンド {#code-admin-show-slow-code-command}
 
-In addition to the TiDB log file, you can identify slow queries by running the `admin show slow` command:
+TiDBログファイルに加えて、 `admin show slow`コマンドを実行することで遅いクエリを特定できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 admin show slow recent N
 admin show slow top [internal | all] N
 ```
 
-`recent N` shows the recent N slow query records, for example:
+`recent N`は、最近のN個の低速クエリレコードを示します。次に例を示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 admin show slow recent 10
 ```
 
-`top N` shows the slowest N query records recently (within a few days). If the `internal` option is provided, the returned results would be the inner SQL executed by the system; If the `all` option is provided, the returned results would be the user's SQL combinated with inner SQL; Otherwise, this command would only return the slow query records from the user's SQL.
+`top N`は、最近（数日以内）最も遅いN個のクエリレコードを示します。 `internal`オプションが指定されている場合、返される結果はシステムによって実行される内部SQLになります。 `all`オプションが指定されている場合、返される結果は、ユーザーのSQLと内部SQLの組み合わせになります。それ以外の場合、このコマンドはユーザーのSQLから遅いクエリレコードのみを返します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 admin show slow top 3
@@ -551,22 +551,22 @@ admin show slow top internal 3
 admin show slow top all 5
 ```
 
-TiDB stores only a limited number of slow query records because of the limited memory. If the value of `N` in the query command is greater than the records count, the number of returned records is smaller than `N`.
+TiDBは、メモリが限られているため、限られた数の低速クエリレコードのみを保存します。 queryコマンドの値`N`がレコード数よりも大きい場合、返されるレコードの数は`N`より少なくなります。
 
-The following table shows output details:
+次の表に、出力の詳細を示します。
 
-| Column name | Description |
-|:------|:---- |
-| start | The starting time of the SQL execution |
-| duration | The duration of the SQL execution |
-| details | The details of the SQL execution |
-| succ | Whether the SQL statement is executed successfully. `1` means success and `0` means failure. |
-| conn_id | The connection ID for the session |
-| transcation_ts | The `commit ts` for a transaction commit |
-| user | The user name for the execution of the statement |
-| db | The database involved when the statement is executed |
-| table_ids | The ID of the table involved when the SQL statement is executed |
-| index_ids | The ID of the index involved when the SQL statement is executed |
-| internal | This is a TiDB internal SQL statement |
-| digest | The fingerprint of the SQL statement |
-| sql | The SQL statement that is being executed or has been executed |
+| 列名             | 説明                                                 |
+| :------------- | :------------------------------------------------- |
+| 始める            | SQL実行の開始時刻                                         |
+| 間隔             | SQL実行の期間                                           |
+| 詳細             | SQL実行の詳細                                           |
+| サク             | SQLステートメントが正常に実行されたかどうか。 `1`は成功を意味し、 `0`は失敗を意味します。 |
+| conn_id        | セッションの接続ID                                         |
+| transcation_ts | トランザクションコミットの`commit ts`                           |
+| ユーザー           | ステートメントを実行するためのユーザー名                               |
+| db             | ステートメントの実行時に関係するデータベース                             |
+| table_ids      | SQLステートメントの実行時に関係するテーブルのID                         |
+| index_ids      | SQLステートメントの実行時に関係するインデックスのID                       |
+| 内部             | これはTiDBの内部SQLステートメントです                             |
+| ダイジェスト         | SQLステートメントのフィンガープリント                               |
+| sql            | 実行中または実行されたSQLステートメント                              |

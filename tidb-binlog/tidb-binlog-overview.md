@@ -3,78 +3,78 @@ title: TiDB Binlog Overview
 summary: Learn overview of the cluster version of TiDB Binlog.
 ---
 
-# TiDB Binlog Cluster Overview
+# TiDBBinlogクラスターの概要 {#tidb-binlog-cluster-overview}
 
-This document introduces the architecture and the deployment of the cluster version of TiDB Binlog.
+このドキュメントでは、TiDBBinlogのクラスタバージョンのアーキテクチャと展開について説明します。
 
-TiDB Binlog is a tool used to collect binlog data from TiDB and provide near real-time backup and replication to downstream platforms.
+TiDB Binlogは、TiDBからbinlogデータを収集し、ダウンストリームプラットフォームにほぼリアルタイムのバックアップとレプリケーションを提供するために使用されるツールです。
 
-TiDB Binlog has the following features:
+TiDBBinlogには次の機能があります。
 
-* **Data replication:** replicate the data in the TiDB cluster to other databases
-* **Real-time backup and restoration:** back up the data in the TiDB cluster and restore the TiDB cluster when the cluster fails
+-   **データ複製：** TiDBクラスタのデータを他のデータベースに複製します
+-   **リアルタイムのバックアップと復元：** TiDBクラスタ内のデータをバックアップし、クラスタに障害が発生したときにTiDBクラスタを復元します
 
-> **Note:**
+> **ノート：**
 >
-> TiDB Binlog is not compatible with some features introduced in TiDB v5.0 and they cannot be used together. For details, see [Notes](#notes). It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
+> TiDB Binlogは、TiDB v5.0で導入された一部の機能と互換性がなく、一緒に使用することはできません。詳細については、 [ノート](#notes)を参照してください。 TiDBBinlogの代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用することをお勧めします。
 
-## TiDB Binlog architecture
+## TiDBBinlogアーキテクチャ {#tidb-binlog-architecture}
 
-The TiDB Binlog architecture is as follows:
+TiDBBinlogアーキテクチャは次のとおりです。
 
 ![TiDB Binlog architecture](/media/tidb-binlog-cluster-architecture.png)
 
-The TiDB Binlog cluster is composed of Pump and Drainer.
+TiDB Binlogクラスタは、ポンプとドレイナーで構成されています。
 
-### Pump
+### ポンプ {#pump}
 
-[Pump](https://github.com/pingcap/tidb-binlog/blob/master/pump) is used to record the binlogs generated in TiDB, sort the binlogs based on the commit time of the transaction, and send binlogs to Drainer for consumption.
+[ポンプ](https://github.com/pingcap/tidb-binlog/blob/master/pump)は、TiDBで生成されたbinlogを記録し、トランザクションのコミット時間に基づいてbinlogをソートし、消費のためにbinlogをDrainerに送信するために使用されます。
 
-### Drainer
+### ドレイナー {#drainer}
 
-[Drainer](https://github.com/pingcap/tidb-binlog/tree/master/drainer) collects and merges binlogs from each Pump, converts the binlog to SQL or data of a specific format, and replicates the data to a specific downstream platform.
+[ドレイナー](https://github.com/pingcap/tidb-binlog/tree/master/drainer)は、各ポンプからbinlogを収集してマージし、binlogをSQLまたは特定の形式のデータに変換し、データを特定のダウンストリームプラットフォームに複製します。
 
-### `binlogctl` guide
+### <code>binlogctl</code>ガイド {#code-binlogctl-code-guide}
 
-[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) is an operations tool for TiDB Binlog with the following features:
+[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl)は、次の機能を備えたTiDBBinlogの操作ツールです。
 
-* Obtaining the current `tso` of TiDB cluster
-* Checking the Pump/Drainer state
-* Modifying the Pump/Drainer state
-* Pausing or closing Pump/Drainer
+-   TiDBクラスタの現在の`tso`を取得する
+-   ポンプ/ドレイナーの状態を確認する
+-   ポンプ/ドレイナーの状態の変更
+-   ポンプ/ドレイナーの一時停止または閉鎖
 
-## Main features
+## 主な特徴 {#main-features}
 
-* Multiple Pumps form a cluster which can scale out horizontally
-* TiDB uses the built-in Pump Client to send the binlog to each Pump
-* Pump stores binlogs and sends the binlogs to Drainer in order
-* Drainer reads binlogs of each Pump, merges and sorts the binlogs, and sends the binlogs downstream
-* Drainer supports [relay log](/tidb-binlog/tidb-binlog-relay-log.md). By the relay log, Drainer ensures that the downstream clusters are in a consistent state.
+-   複数のポンプがクラスタを形成し、水平方向にスケールアウトできます
+-   TiDBは、組み込みのPump Clientを使用して、binlogを各Pumpに送信します
+-   Pumpはbinlogを保存し、binlogをDrainerに順番に送信します
+-   Drainerは、各ポンプのbinlogを読み取り、binlogをマージして並べ替え、binlogをダウンストリームに送信します。
+-   ドレイナーは[リレーログ](/tidb-binlog/tidb-binlog-relay-log.md)をサポートします。リレーログによって、Drainerはダウンストリームクラスターが一貫した状態にあることを確認します。
 
-## Notes
+## ノート {#notes}
 
-* In v5.1, the incompatibility between the clustered index feature introduced in v5.0 and TiDB Binlog has been resolved. After you upgrade TiDB Binlog and TiDB Server to v5.1 and enable TiDB Binlog, TiDB will support creating tables with clustered indexes; data insertion, deletion, and update on the created tables with clustered indexes will be replicated to the downstream via TiDB Binlog. When you use TiDB Binlog to replicate the tables with clustered indexes, pay attention to the following:
+-   v5.1では、v5.0で導入されたクラスター化インデックス機能とTiDBBinlogの間の非互換性が解決されました。 TiDBBinlogとTiDBServerをv5.1にアップグレードし、TiDB Binlogを有効にすると、TiDBはクラスター化インデックスを使用したテーブルの作成をサポートします。クラスター化インデックスを使用して作成されたテーブルでのデータの挿入、削除、および更新は、TiDBBinlogを介してダウンストリームに複製されます。 TiDB Binlogを使用してクラスター化されたインデックスを持つテーブルを複製する場合は、次の点に注意してください。
 
-    - If you have upgraded the cluster to v5.1 from v5.0 by manually controlling the upgrade sequence, make sure that TiDB binlog is upgraded to v5.1 before upgrading the TiDB server to v5.1.
-    - It is recommended to configure the system variable [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50) to a same value to ensure that the structure of TiDB clustered index tables between the upstream and downstream is consistent.
+    -   アップグレードシーケンスを手動で制御してクラスタをv5.0からv5.1にアップグレードした場合は、TiDBサーバーをv5.1にアップグレードする前に、TiDBbinlogがv5.1にアップグレードされていることを確認してください。
+    -   システム変数[`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)を同じ値に構成して、アップストリームとダウンストリームの間でTiDBクラスター化インデックステーブルの構造に一貫性を持たせることをお勧めします。
 
-* TiDB Binlog is incompatible with the following features introduced in TiDB v5.0 and they cannot be used together.
+-   TiDB Binlogは、TiDB v5.0で導入された次の機能と互換性がなく、一緒に使用することはできません。
 
-    - [TiDB Clustered Index](/clustered-indexes.md#limitations): After TiDB Binlog is enabled, TiDB does not allow creating clustered indexes with non-single integer columns as primary keys; data insertion, deletion, and update of the created clustered index tables will not be replicated downstream via TiDB Binlog. If you need to replicate tables with clustered indexes, upgrade your cluster to v5.1 or use [TiCDC](/ticdc/ticdc-overview.md) instead.
-    - TiDB system variable [tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v50): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
-    - TiDB system variable [tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v50): After TiDB Binlog is enabled, performance cannot be improved by enabling this option. It is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead of TiDB Binlog.
+    -   [TiDBクラスター化インデックス](/clustered-indexes.md#limitations) ：TiDB Binlogが有効になった後、TiDBは、主キーとして非単一整数列を使用してクラスター化インデックスを作成することを許可しません。作成されたクラスター化インデックステーブルのデータの挿入、削除、および更新は、TiDBBinlogを介してダウンストリームに複製されません。クラスタ化インデックスを使用してテーブルを複製する必要がある場合は、クラスタをv5.1にアップグレードするか、代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用してください。
+    -   TiDBシステム変数[tidb_enable_async_commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) ：TiDB Binlogを有効にした後、このオプションを有効にしてもパフォーマンスを向上させることはできません。 TiDBBinlogの代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用することをお勧めします。
+    -   TiDBシステム変数[tidb_enable_1pc](/system-variables.md#tidb_enable_1pc-new-in-v50) ：TiDB Binlogを有効にした後、このオプションを有効にしてもパフォーマンスを向上させることはできません。 TiDBBinlogの代わりに[TiCDC](/ticdc/ticdc-overview.md)を使用することをお勧めします。
 
-* TiDB Binlog is incompatible with the following feature introduced in TiDB v4.0.7 and they cannot be used together:
+-   TiDB Binlogは、TiDB v4.0.7で導入された次の機能と互換性がなく、一緒に使用することはできません。
 
-    - TiDB system variable [tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407): The two features have compatibility issues. Using them together might cause the issue that TiDB Binlog replicates data inconsistently.
+    -   TiDBシステム変数[tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) ：2つの機能には互換性の問題があります。それらを一緒に使用すると、TiDBBinlogがデータを一貫して複製しないという問題が発生する可能性があります。
 
-* Drainer supports replicating binlogs to MySQL, TiDB, Kafka or local files. If you need to replicate binlogs to other Drainer unsuppored destinations, you can set Drainer to replicate the binlog to Kafka and read the data in Kafka for customized processing according to binlog consumer protocol. See [Binlog Consumer Client User Guide](/tidb-binlog/binlog-consumer-client.md).
+-   Drainerは、binlogのMySQL、TiDB、Kafka、またはローカルファイルへの複製をサポートしています。 binlogを他のDrainerでサポートされていない宛先に複製する必要がある場合は、binlogをKafkaに複製し、Kafkaでデータを読み取って、binlogコンシューマープロトコルに従ってカスタマイズされた処理を行うようにDrainerを設定できます。 [Binlogコンシューマークライアントユーザーガイド](/tidb-binlog/binlog-consumer-client.md)を参照してください。
 
-* To use TiDB Binlog for recovering incremental data, set the config `db-type` to `file` (local files in the proto buffer format). Drainer converts the binlog to data in the specified [proto buffer format](https://github.com/pingcap/tidb-binlog/blob/master/proto/pb_binlog.proto) and writes the data to local files. In this way, you can use [Reparo](/tidb-binlog/tidb-binlog-reparo.md) to recover data incrementally.
+-   増分データを回復するためにTiDBBinlogを使用するには、config `db-type`を`file` （proto buffer形式のローカルファイル）に設定します。 Drainerは、binlogを指定された[プロトバッファ形式](https://github.com/pingcap/tidb-binlog/blob/master/proto/pb_binlog.proto)のデータに変換し、そのデータをローカルファイルに書き込みます。このように、 [レパロ](/tidb-binlog/tidb-binlog-reparo.md)を使用してデータを段階的に回復できます。
 
-    Pay attention to the value of `db-type`:
+    `db-type`の値に注意してください：
 
-    - If your TiDB version is earlier than 2.1.9, set `db-type="pb"`.
-    - If your TiDB version is 2.1.9 or later, set `db-type="file"` or `db-type="pb"`.
+    -   TiDBのバージョンが2.1.9より前の場合は、 `db-type="pb"`を設定します。
+    -   TiDBのバージョンが2.1.9以降の場合は、 `db-type="file"`または`db-type="pb"`を設定します。
 
-* If the downstream is MySQL, MariaDB, or another TiDB cluster, you can use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to verify the data after data replication.
+-   ダウンストリームがMySQL、MariaDB、または別のTiDBクラスタの場合、 [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)を使用して、データ複製後にデータを検証できます。

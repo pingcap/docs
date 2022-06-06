@@ -3,134 +3,134 @@ title: TiDB Data Migration Glossary
 summary: Learn the terms used in TiDB Data Migration.
 ---
 
-# TiDB Data Migration Glossary
+# TiDBデータ移行用語集 {#tidb-data-migration-glossary}
 
-This document lists the terms used in the logs, monitoring, configurations, and documentation of TiDB Data Migration (DM).
+このドキュメントには、TiDBデータ移行（DM）のログ、監視、構成、およびドキュメントで使用される用語がリストされています。
 
-## B
+## B {#b}
 
-### Binlog
+### ビンログ {#binlog}
 
-In TiDB DM, binlogs refer to the binary log files generated in the TiDB database. It has the same indications as that in MySQL or MariaDB. Refer to [MySQL Binary Log](https://dev.mysql.com/doc/internals/en/binary-log.html) and [MariaDB Binary Log](https://mariadb.com/kb/en/library/binary-log/) for details.
+TiDB DMでは、binlogsはTiDBデータベースで生成されたバイナリログファイルを参照します。 MySQLまたはMariaDBと同じ表示があります。詳細については、 [MySQLバイナリログ](https://dev.mysql.com/doc/internals/en/binary-log.html)と[MariaDBバイナリログ](https://mariadb.com/kb/en/library/binary-log/)を参照してください。
 
-### Binlog event
+### Binlogイベント {#binlog-event}
 
-Binlog events are information about data modification made to a MySQL or MariaDB server instance. These binlog events are stored in the binlog files. Refer to [MySQL Binlog Event](https://dev.mysql.com/doc/internals/en/binlog-event.html) and [MariaDB Binlog Event](https://mariadb.com/kb/en/library/1-binlog-events/) for details.
+Binlogイベントは、MySQLまたはMariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントは、binlogファイルに保存されます。詳細については、 [MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDBBinlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
 
-### Binlog event filter
+### Binlogイベントフィルター {#binlog-event-filter}
 
-[Binlog event filter](/dm/dm-key-features.md#binlog-event-filter) is a more fine-grained filtering feature than the block and allow lists filtering rule. Refer to [binlog event filter](/dm/dm-overview.md#binlog-event-filtering) for details.
+[Binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックおよび許可リストのフィルタリングルールよりもきめ細かいフィルタリング機能です。詳細は[binlogイベントフィルター](/dm/dm-overview.md#binlog-event-filtering)を参照してください。
 
-### Binlog position
+### ビンログの位置 {#binlog-position}
 
-The binlog position is the offset information of a binlog event in a binlog file. Refer to [MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html) and [MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/) for details.
+binlog位置は、binlogファイル内のbinlogイベントのオフセット情報です。詳細については、 [MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
 
-### Binlog replication processing unit/sync unit
+### Binlogレプリケーション処理ユニット/同期ユニット {#binlog-replication-processing-unit-sync-unit}
 
-Binlog replication processing unit is the processing unit used in DM-worker to read upstream binlogs or local relay logs, and to migrate these logs to the downstream. Each subtask corresponds to a binlog replication processing unit. In the current documentation, the binlog replication processing unit is also referred to as the sync processing unit.
+Binlogレプリケーション処理ユニットは、DM-workerでアップストリームbinlogまたはローカルリレーログを読み取り、これらのログをダウンストリームに移行するために使用される処理ユニットです。各サブタスクは、binlogレプリケーション処理ユニットに対応します。現在のドキュメントでは、binlogレプリケーション処理ユニットは同期処理ユニットとも呼ばれます。
 
-### Block & allow table list
+### テーブルリストをブロックして許可する {#block-x26-allow-table-list}
 
-Block & allow table list is the feature that filters or only migrates all operations of some databases or some tables. Refer to [block & allow table lists](/dm/dm-overview.md#block-and-allow-lists-migration-at-the-schema-and-table-levels) for details. This feature is similar to [MySQL Replication Filtering](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html) and [MariaDB Replication Filters](https://mariadb.com/kb/en/replication-filters/).
+テーブルリストのブロックと許可は、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングまたは移行する機能です。詳細は[テーブルリストをブロックして許可する](/dm/dm-overview.md#block-and-allow-lists-migration-at-the-schema-and-table-levels)を参照してください。この機能は、 [MySQLレプリケーションフィルタリング](https://dev.mysql.com/doc/refman/5.6/en/replication-rules.html)および[MariaDBレプリケーションフィルター](https://mariadb.com/kb/en/replication-filters/)に似ています。
 
-## C
+## C {#c}
 
-### Checkpoint
+### チェックポイント {#checkpoint}
 
-A checkpoint indicates the position from which a full data import or an incremental replication task is paused and resumed, or is stopped and restarted.
+チェックポイントは、完全なデータのインポートまたは増分レプリケーションタスクが一時停止して再開する位置、または停止して再開する位置を示します。
 
-- In a full import task, a checkpoint corresponds to the offset and other information of the successfully imported data in a file that is being imported. A checkpoint is updated synchronously with the data import task.
-- In an incremental replication, a checkpoint corresponds to the [binlog position](#binlog-position) and other information of a [binlog event](#binlog-event) that is successfully parsed and migrated to the downstream. A checkpoint is updated after the DDL operation is successfully migrated or 30 seconds after the last update.
+-   完全インポートタスクでは、チェックポイントは、インポートされているファイル内の正常にインポートされたデータのオフセットおよびその他の情報に対応します。チェックポイントは、データインポートタスクと同期して更新されます。
+-   インクリメンタルレプリケーションでは、チェックポイントは、正常に解析されてダウンストリームに移行された[binlogの位置](#binlog-position)および[binlogイベント](#binlog-event)のその他の情報に対応します。チェックポイントは、DDL操作が正常に移行された後、または最後の更新から30秒後に更新されます。
 
-In addition, the `relay.meta` information corresponding to a [relay processing unit](#relay-processing-unit) works similarly to a checkpoint. A relay processing unit pulls the [binlog event](#binlog-event) from the upstream and writes this event to the [relay log](#relay-log), and writes the [binlog position](#binlog-position) or the GTID information corresponding to this event to `relay.meta`.
+さらに、 [リレー処理ユニット](#relay-processing-unit)に対応する`relay.meta`の情報は、チェックポイントと同様に機能します。リレー処理ユニットは、 [binlogイベント](#binlog-event)をアップストリームからプルしてこのイベントを[リレーログ](#relay-log)に書き込み、 [binlogの位置](#binlog-position)またはこのイベントに対応するGTID情報を`relay.meta`に書き込みます。
 
-## D
+## D {#d}
 
-### Dump processing unit/dump unit
+### ダンプ処理ユニット/ダンプユニット {#dump-processing-unit-dump-unit}
 
-The dump processing unit is the processing unit used in DM-worker to export all data from the upstream. Each subtask corresponds to a dump processing unit.
+ダンプ処理ユニットは、DM-workerでアップストリームからすべてのデータをエクスポートするために使用される処理ユニットです。各サブタスクは、ダンプ処理ユニットに対応します。
 
-## G
+## G {#g}
 
-### GTID
+### GTID {#gtid}
 
-The GTID is the global transaction ID of MySQL or MariaDB. With this feature enabled, the GTID information is recorded in the binlog files. Multiple GTIDs form a GTID set. Refer to [MySQL GTID Format and Storage](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html) and [MariaDB Global Transaction ID](https://mariadb.com/kb/en/library/gtid/) for details.
+GTIDは、MySQLまたはMariaDBのグローバルトランザクションIDです。この機能を有効にすると、GTID情報がbinlogファイルに記録されます。複数のGTIDがGTIDセットを形成します。詳細については、 [MySQLGTIDフォーマットとストレージ](https://dev.mysql.com/doc/refman/5.7/en/replication-gtids-concepts.html)と[MariaDBグローバルトランザクションID](https://mariadb.com/kb/en/library/gtid/)を参照してください。
 
-## L
+## L {#l}
 
-### Load processing unit/load unit
+### 負荷処理ユニット/負荷ユニット {#load-processing-unit-load-unit}
 
-The load processing unit is the processing unit used in DM-worker to import the fully exported data to the downstream. Each subtask corresponds to a load processing unit. In the current documentation, the load processing unit is also referred to as the import processing unit.
+負荷処理ユニットは、完全にエクスポートされたデータをダウンストリームにインポートするためにDM-workerで使用される処理ユニットです。各サブタスクは、負荷処理ユニットに対応します。現在のドキュメントでは、ロード処理ユニットはインポート処理ユニットとも呼ばれます。
 
-## M
+## M {#m}
 
-### Migrate/migration
+### 移行/移行 {#migrate-migration}
 
-The process of using the TiDB Data Migration tool to copy the **full data** of the upstream database to the downstream database.
+TiDBデータ移行ツールを使用して、アップストリームデータベースの**完全なデータ**をダウンストリームデータベースにコピーするプロセス。
 
-In the case of clearly mentioning "full", not explicitly mentioning "full or incremental", and clearly mentioning "full + incremental", use migrate/migration instead of replicate/replication.
+「フル」を明示的に言及し、「フルまたはインクリメンタル」を明示的に言及せず、「フル+インクリメンタル」を明確に言及する場合は、レプリケート/レプリケーションの代わりに移行/移行を使用してください。
 
-## R
+## R {#r}
 
-### Relay log
+### リレーログ {#relay-log}
 
-The relay log refers to the binlog files that DM-worker pulls from the upstream MySQL or MariaDB, and stores in the local disk. The format of the relay log is the standard binlog file, which can be parsed by tools such as [mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html) of a compatible version. Its role is similar to [MySQL Relay Log](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html) and [MariaDB Relay Log](https://mariadb.com/kb/en/library/relay-log/).
+リレーログは、DM-workerがアップストリームのMySQLまたはMariaDBからプルし、ローカルディスクに保存するbinlogファイルを参照します。リレーログの形式は標準のbinlogファイルであり、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQLリレーログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)と[MariaDBリレーログ](https://mariadb.com/kb/en/library/relay-log/)に似ています。
 
-For more details such as the relay log's directory structure, initial migration rules, and data purge in TiDB DM, see [TiDB DM relay log](/dm/relay-log.md).
+リレーログのディレクトリ構造、初期移行ルール、TiDB DMでのデータパージなどの詳細については、 [TiDBDMリレーログ](/dm/relay-log.md)を参照してください。
 
-### Relay processing unit
+### リレー処理ユニット {#relay-processing-unit}
 
-The relay processing unit is the processing unit used in DM-worker to pull binlog files from the upstream and write data into relay logs. Each DM-worker instance has only one relay processing unit.
+リレー処理ユニットは、DM-workerでアップストリームからbinlogファイルをプルし、リレーログにデータを書き込むために使用される処理ユニットです。各DM-workerインスタンスには、リレー処理ユニットが1つだけあります。
 
-### Replicate/replication
+### 複製/複製 {#replicate-replication}
 
-The process of using the TiDB Data Migration tool to copy the **incremental data** of the upstream database to the downstream database.
+TiDBデータ移行ツールを使用して、アップストリームデータベースの**インクリメンタルデータ**をダウンストリームデータベースにコピーするプロセス。
 
-In the case of clearly mentioning "incremental", use replicate/replication instead of migrate/migration.
+「インクリメンタル」について明確に言及する場合は、移行/移行の代わりにレプリケート/レプリケーションを使用してください。
 
-## S
+## S {#s}
 
-### Safe mode
+### セーフモード {#safe-mode}
 
-Safe mode is the mode in which DML statements can be imported more than once when the primary key or unique index exists in the table schema. In this mode, some statements from the upstream are migrated to the downstream only after they are re-written. The `INSERT` statement is re-written as `REPLACE`; the `UPDATE` statement is re-written as `DELETE` and `REPLACE`.
+セーフモードは、主キーまたは一意のインデックスがテーブルスキーマに存在する場合に、DMLステートメントを複数回インポートできるモードです。このモードでは、アップストリームからの一部のステートメントは、書き直された後にのみダウンストリームに移行されます。 `INSERT`ステートメントは`REPLACE`として書き直されます。 `UPDATE`ステートメントは`DELETE`および`REPLACE`として書き直されます。
 
-This mode is enabled in any of the following situations:
+このモードは、次のいずれかの状況で有効になります。
 
-- The safe mode remains enabled when the `safe-mode` parameter in the task configuration file is set to `true`.
-- In shard merge scenarios, the safe mode remains enabled before DDL statements are replicated in all sharded tables.
-- If the argument `--consistency none` is configured for the dump processing unit of a full migration task, it cannot be determined whether the binlog changes at the beginning of the export affect the exported data or not. Therefore, the safe mode remains enabled for the incremental replication of these binlog changes.
-- If the task is paused by error and then resumed, the operations on some data might be executed twice.
+-   タスク構成ファイルの`safe-mode`パラメーターが`true`に設定されている場合、セーフモードは有効なままです。
+-   シャードマージシナリオでは、すべてのシャードテーブルにDDLステートメントが複製される前に、セーフモードが有効のままになります。
+-   引数`--consistency none`が完全移行タスクのダンプ処理装置用に構成されている場合、エクスポートの開始時にbinlogの変更がエクスポートされたデータに影響を与えるかどうかを判別できません。したがって、これらのbinlog変更の増分レプリケーションでは、セーフモードが有効のままになります。
+-   タスクがエラーによって一時停止されてから再開された場合、一部のデータに対する操作が2回実行される可能性があります。
 
-### Shard DDL
+### シャードDDL {#shard-ddl}
 
-The shard DDL is the DDL statement that is executed on the upstream sharded tables. It needs to be coordinated and migrated by TiDB DM in the process of merging the sharded tables. In the current documentation, the shard DDL is also referred to as the sharding DDL.
+シャードDDLは、アップストリームのシャードテーブルで実行されるDDLステートメントです。シャーディングされたテーブルをマージするプロセスでは、TiDBDMによって調整および移行する必要があります。現在のドキュメントでは、シャードDDLはシャーディングDDLとも呼ばれます。
 
-### Shard DDL lock
+### シャードDDLロック {#shard-ddl-lock}
 
-The shard DDL lock is the lock mechanism that coordinates the migration of shard DDL. Refer to [the implementation principles of merging and migrating data from sharded tables in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#principles) for details. In the current documentation, the shard DDL lock is also referred to as the sharding DDL lock.
+シャードDDLロックは、シャードDDLの移行を調整するロックメカニズムです。詳細は[悲観的モードでシャーディングされたテーブルからデータをマージおよび移行する実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャードDDLロックはシャーディングDDLロックとも呼ばれます。
 
-### Shard group
+### シャードグループ {#shard-group}
 
-A shard group is all the upstream sharded tables to be merged and migrated to the same table in the downstream. Two-level shard groups are used for implementation of TiDB DM. Refer to [the implementation principles of merging and migrating data from sharded tables in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#principles) for details. In the current documentation, the shard group is also referred to as the sharding group.
+シャードグループは、ダウンストリームの同じテーブルにマージおよび移行されるすべてのアップストリームシャードテーブルです。 TiDB DMの実装には、2レベルのシャードグループが使用されます。詳細は[悲観的モードでシャーディングされたテーブルからデータをマージおよび移行する実装原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください。現在のドキュメントでは、シャードグループはシャーディンググループとも呼ばれます。
 
-### Subtask
+### サブタスク {#subtask}
 
-The subtask is a part of a data migration task that is running on each DM-worker instance. In different task configurations, a single data migration task might have one subtask or multiple subtasks.
+サブタスクは、各DM-workerインスタンスで実行されているデータ移行タスクの一部です。異なるタスク構成では、単一のデータ移行タスクに1つのサブタスクまたは複数のサブタスクが含まれる場合があります。
 
-### Subtask status
+### サブタスクのステータス {#subtask-status}
 
-The subtask status is the status of a data migration subtask. The current status options include `New`, `Running`, `Paused`, `Stopped`, and `Finished`. Refer to [subtask status](/dm/dm-query-status.md#subtask-status) for more details about the status of a data migration task or subtask.
+サブタスクステータスは、データ移行サブタスクのステータスです。現在のステータスオプションには、 `New` 、および`Running`が`Stopped` `Finished` `Paused` 。データ移行タスクまたはサブタスクのステータスの詳細については、 [サブタスクステータス](/dm/dm-query-status.md#subtask-status)を参照してください。
 
-## T
+## T {#t}
 
-### Table routing
+### テーブルルーティング {#table-routing}
 
-The table routing feature enables DM to migrate a certain table of the upstream MySQL or MariaDB instance to the specified table in the downstream, which can be used to merge and migrate sharded tables. Refer to [table routing](/dm/dm-key-features.md#table-routing) for details.
+テーブルルーティング機能を使用すると、DMはアップストリームのMySQLまたはMariaDBインスタンスの特定のテーブルをダウンストリームの指定されたテーブルに移行できます。これを使用して、シャーディングされたテーブルをマージおよび移行できます。詳細は[テーブルルーティング](/dm/dm-key-features.md#table-routing)を参照してください。
 
-### Task
+### 仕事 {#task}
 
-The data migration task, which is started after you successfully execute a `start-task` command. In different task configurations, a single migration task can run on a single DM-worker instance or on multiple DM-worker instances at the same time.
+`start-task`コマンドを正常に実行した後に開始されるデータ移行タスク。さまざまなタスク構成では、単一の移行タスクを単一のDM-workerインスタンスまたは複数のDM-workerインスタンスで同時に実行できます。
 
-### Task status
+### タスクステータス {#task-status}
 
-The task status refers to the status of a data migration task. The task status depends on the statuses of all its subtasks. Refer to [subtask status](/dm/dm-query-status.md#subtask-status) for details.
+タスクステータスは、データ移行タスクのステータスを指します。タスクのステータスは、そのすべてのサブタスクのステータスによって異なります。詳細は[サブタスクステータス](/dm/dm-query-status.md#subtask-status)を参照してください。

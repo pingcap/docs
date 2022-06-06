@@ -3,11 +3,11 @@ title: TIFLASH_REPLICA
 summary: Learn the `TIFLASH_REPLICA` information_schema table.
 ---
 
-# TIFLASH_REPLICA
+# TIFLASH_REPLICA {#tiflash-replica}
 
-The `TIFLASH_REPLICA` table provides information about TiFlash replicas available.
+`TIFLASH_REPLICA`の表は、使用可能なTiFlashレプリカに関する情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;

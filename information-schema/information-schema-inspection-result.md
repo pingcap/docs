@@ -3,15 +3,15 @@ title: INSPECTION_RESULT
 summary: Learn the `INSPECTION_RESULT` diagnostic result table.
 ---
 
-# INSPECTION_RESULT
+# INSPECTION_RESULT {#inspection-result}
 
-TiDB has some built-in diagnostic rules for detecting faults and hidden issues in the system.
+TiDBには、システムの障害や隠れた問題を検出するための診断ルールが組み込まれています。
 
-The `INSPECTION_RESULT` diagnostic feature can help you quickly find problems and reduce your repetitive manual work. You can use the `select * from information_schema.inspection_result` statement to trigger the internal diagnostics.
+`INSPECTION_RESULT`の診断機能は、問題をすばやく見つけて、繰り返しの手作業を減らすのに役立ちます。 `select * from information_schema.inspection_result`ステートメントを使用して、内部診断をトリガーできます。
 
-The structure of the `information_schema.inspection_result` diagnostic result table `information_schema.inspection_result` is as follows:
+`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構成は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -35,28 +35,28 @@ DESC inspection_result;
 9 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明：
 
-* `RULE`: The name of the diagnostic rule. Currently, the following rules are available:
-    * `config`: Checks whether the configuration is consistent and proper. If the same configuration is inconsistent on different instances, a `warning` diagnostic result is generated.
-    * `version`: The consistency check of version. If the same version is inconsistent on different instances, a `warning` diagnostic result is generated.
-    * `node-load`: Checks the server load. If the current system load is too high, the corresponding `warning` diagnostic result is generated.
-    * `critical-error`: Each module of the system defines critical errors. If a critical error exceeds the threshold within the corresponding time period, a warning diagnostic result is generated.
-    * `threshold-check`: The diagnostic system checks the thresholds of key metrics. If a threshold is exceeded, the corresponding diagnostic information is generated.
-* `ITEM`: Each rule diagnoses different items. This field indicates the specific diagnostic items corresponding to each rule.
-* `TYPE`: The instance type of the diagnostics. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: The specific address of the diagnosed instance.
-* `STATUS_ADDRESS`: The HTTP API service address of the instance.
-* `VALUE`: The value of a specific diagnostic item.
-* `REFERENCE`: The reference value (threshold value) for this diagnostic item. If `VALUE` exceeds the threshold, the corresponding diagnostic information is generated.
-* `SEVERITY`: The severity level. The optional values are `warning` and `critical`.
-* `DETAILS`: Diagnostic details, which might also contain SQL statement(s) or document links for further diagnostics.
+-   `RULE` ：診断ルールの名前。現在、次のルールを使用できます。
+    -   `config` ：構成が一貫していて適切かどうかを確認します。同じ構成が異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
+    -   `version` ：バージョンの整合性チェック。同じバージョンが異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
+    -   `node-load` ：サーバーの負荷を確認します。現在のシステム負荷が高すぎる場合、対応する`warning`の診断結果が生成されます。
+    -   `critical-error` ：システムの各モジュールは重大なエラーを定義します。対応する期間内に重大なエラーがしきい値を超えると、警告診断結果が生成されます。
+    -   `threshold-check` ：診断システムは主要なメトリックのしきい値をチェックします。しきい値を超えると、対応する診断情報が生成されます。
+-   `ITEM` ：各ルールは異なるアイテムを診断します。このフィールドは、各ルールに対応する特定の診断項目を示します。
+-   `TYPE` ：診断のインスタンスタイプ。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `INSTANCE` ：診断されたインスタンスの特定のアドレス。
+-   `STATUS_ADDRESS` ：インスタンスのHTTPAPIサービスアドレス。
+-   `VALUE` ：特定の診断項目の値。
+-   `REFERENCE` ：この診断項目の基準値（しきい値）。 `VALUE`がしきい値を超えると、対応する診断情報が生成されます。
+-   `SEVERITY` ：重大度レベル。オプションの値は`warning`と`critical`です。
+-   `DETAILS` ：診断の詳細。SQLステートメントまたはさらなる診断のためのドキュメントリンクも含まれる場合があります。
 
-## Diagnostics example
+## 診断例 {#diagnostics-example}
 
-Diagnose issues currently existing in the cluster.
+クラスタに現在存在する問題を診断します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.inspection_result\G
@@ -101,15 +101,15 @@ SEVERITY  | warning
 DETAILS   | max duration of 172.16.5.40:20151 tikv rocksdb-write-duration was too slow
 ```
 
-The following issues can be detected from the diagnostic result above:
+上記の診断結果から、次の問題を検出できます。
 
-* The first row indicates that TiDB's `log.slow-threshold` value is configured to `0`, which might affect performance.
-* The second row indicates that two different TiDB versions exist in the cluster.
-* The third and fourth rows indicate that the TiKV write delay is too long. The expected delay is no more than 0.1 second, while the actual delay is far longer than expected.
+-   最初の行は、TiDBの`log.slow-threshold`の値が`0`に構成されていることを示しています。これは、パフォーマンスに影響を与える可能性があります。
+-   2行目は、2つの異なるTiDBバージョンがクラスタに存在することを示しています。
+-   3行目と4行目は、TiKVの書き込み遅延が長すぎることを示しています。予想される遅延は0.1秒以内ですが、実際の遅延は予想よりはるかに長くなります。
 
-You can also diagnose issues existing within a specified range, such as from "2020-03-26 00:03:00" to "2020-03-26 00:08:00". To specify the time range, use the SQL Hint of `/*+ time_range() */`. See the following query example:
+また、「2020-03-2600:03:00」から「2020-03-2600:08:00」など、指定した範囲内に存在する問題を診断することもできます。時間範囲を指定するには、SQLヒント`/*+ time_range() */`を使用します。次のクエリ例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select /*+ time_range("2020-03-26 00:03:00", "2020-03-26 00:08:00") */ * from information_schema.inspection_result\G
@@ -136,34 +136,34 @@ SEVERITY  | warning
 DETAILS   | max duration of 172.16.5.40:10089 tidb get-token-duration is too slow
 ```
 
-The following issues can be detected from the diagnostic result above:
+上記の診断結果から、次の問題を検出できます。
 
-* The first row indicates that the `172.16.5.40:4009` TiDB instance is restarted at `2020/03/26 00:05:45.670`.
-* The second row indicates that the maximum `get-token-duration` time of the `172.16.5.40:10089` TiDB instance is 0.234s, but the expected time is less than 0.001s.
+-   最初の行は、 `172.16.5.40:4009`つのTiDBインスタンスが`2020/03/26 00:05:45.670`で再起動されることを示しています。
+-   2番目の行は、 `172.16.5.40:10089`のTiDBインスタンスの最大`get-token-duration`時間が0.234秒であることを示していますが、予想される時間は0.001秒未満です。
 
-You can also specify conditions, for example, to query the `critical` level diagnostic results:
+たとえば、条件を指定して、 `critical`レベルの診断結果を照会することもできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from information_schema.inspection_result where severity='critical';
 ```
 
-Query only the diagnostic result of the `critical-error` rule:
+`critical-error`のルールの診断結果のみを照会します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from information_schema.inspection_result where rule='critical-error';
 ```
 
-## Diagnostic rules
+## 診断ルール {#diagnostic-rules}
 
-The diagnostic module contains a series of rules. These rules compare the results with the thresholds after querying the existing monitoring tables and cluster information tables. If the results exceed the thresholds, the diagnostics of `warning` or `critical` is generated and the corresponding information is provided in the `details` column.
+診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えると、 `warning`または`critical`の診断が生成され、対応する情報が`details`列に表示されます。
 
-You can query the existing diagnostic rules by querying the `inspection_rules` system table:
+`inspection_rules`のシステムテーブルをクエリすることにより、既存の診断ルールをクエリできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from information_schema.inspection_rules where type='inspection';
@@ -181,11 +181,11 @@ select * from information_schema.inspection_rules where type='inspection';
 +-----------------+------------+---------+
 ```
 
-### `config` diagnostic rule
+### <code>config</code>診断ルール {#code-config-code-diagnostic-rule}
 
-In the `config` diagnostic rule, the following two diagnostic rules are executed by querying the `CLUSTER_CONFIG` system table:
+`config`つの診断ルールでは、 `CLUSTER_CONFIG`のシステムテーブルを照会することにより、次の2つの診断ルールが実行されます。
 
-* Check whether the configuration values of the same component are consistent. Not all configuration items has this consistency check. The allowlist of consistency check is as follows:
+-   同じコンポーネントの構成値が一貫しているかどうかを確認します。すべての構成アイテムにこの整合性チェックがあるわけではありません。整合性チェックの許可リストは次のとおりです。
 
     ```go
     // The allowlist of the TiDB configuration consistency check
@@ -220,18 +220,18 @@ In the `config` diagnostic rule, the following two diagnostic rules are executed
     storage.block-cache.capacity
     ```
 
-* Check whether the values of the following configuration items are as expected.
+-   次の構成項目の値が期待どおりかどうかを確認してください。
 
-    |  Component  | Configuration item | Expected value |
-    |  ----  | ----  |  ----  |
-    | TiDB | log.slow-threshold | larger than `0` |
-    | TiKV | raftstore.sync-log | `true` |
+    | 成分   | Configuration / コンフィグレーション項目 | 期待値      |
+    | ---- | ---------------------------- | -------- |
+    | TiDB | log.slow-threshold           | `0`より大きい |
+    | TiKV | raftstore.sync-log           | `true`   |
 
-### `version` diagnostic rule
+### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
 
-The `version` diagnostic rule checks whether the version hash of the same component is consistent by querying the `CLUSTER_INFO` system table. See the following example:
+`version`診断ルールは、 `CLUSTER_INFO`システムテーブルを照会することにより、同じコンポーネントのバージョンハッシュが一貫しているかどうかをチェックします。次の例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM information_schema.inspection_result WHERE rule='version'\G
@@ -249,62 +249,62 @@ SEVERITY  | critical
 DETAILS   | the cluster has 2 different tidb versions, execute the sql to see more detail: SELECT * FROM information_schema.cluster_info WHERE type='tidb'
 ```
 
-### `critical-error` diagnostic rule
+### <code>critical-error</code>診断ルール {#code-critical-error-code-diagnostic-rule}
 
-In `critical-error` diagnostic rule, the following two diagnostic rules are executed:
+`critical-error`つの診断ルールでは、次の2つの診断ルールが実行されます。
 
-* Detect whether the cluster has the following errors by querying the related monitoring system tables in the metrics schema:
+-   メトリックスキーマ内の関連する監視システムテーブルをクエリして、クラスタに次のエラーがあるかどうかを検出します。
 
-    |  Component  | Error name | Monitoring table | Error description |
-    |  ----  | ----  |  ----  |  ----  |
-    | TiDB | panic-count | tidb_panic_count_total_count | Panic occurs in TiDB. |
-    | TiDB | binlog-error | tidb_binlog_error_total_count | An error occurs when TiDB writes binlog. |
-    | TiKV | critical-error | tikv_critical_error_total_coun | The critical error of TiKV. |
-    | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | The TiKV scheduler is too busy, which makes TiKV temporarily unavailable. |
-    | TiKV | coprocessor-is-busy | tikv_coprocessor_is_busy_total_count | The TiKV Coprocessor is too busy. |
-    | TiKV | channel-is-full | tikv_channel_full_total_count | The "channel full" error occurs in TiKV. |
-    | TiKV | tikv_engine_write_stall | tikv_engine_write_stall | The "stall" error occurs in TiKV. |
+    | 成分   | エラー名                    | モニタリングテーブル                           | エラーの説明                                     |
+    | ---- | ----------------------- | ------------------------------------ | ------------------------------------------ |
+    | TiDB | パニックカウント                | tidb_panic_count_total_count         | パニックはTiDBで発生します。                           |
+    | TiDB | binlog-エラー              | tidb_binlog_error_total_count        | TiDBがbinlogを書き込むときにエラーが発生します。              |
+    | TiKV | クリティカル・エラー              | tikv_critical_error_total_coun       | TiKVの重大なエラー。                               |
+    | TiKV | スケジューラーは忙しい             | tikv_scheduler_is_busy_total_count   | TiKVスケジューラがビジー状態であるため、TiKVが一時的に使用できなくなります。 |
+    | TiKV | コプロセッサーはビジーです           | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジーすぎます。                       |
+    | TiKV | チャネルがいっぱいです             | tikv_channel_full_total_count        | 「チャネルフル」エラーはTiKVで発生します。                    |
+    | TiKV | tikv_engine_write_stall | tikv_engine_write_stall              | 「ストール」エラーはTiKVで発生します。                      |
 
-* Check whether any component is restarted by querying the `metrics_schema.up` monitoring table and the `CLUSTER_LOG` system table.
+-   `metrics_schema.up`の監視テーブルと`CLUSTER_LOG`のシステムテーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
 
-### `threshold-check` diagnostic rule
+### <code>threshold-check</code>診断ルール {#code-threshold-check-code-diagnostic-rule}
 
-The `threshold-check` diagnostic rule checks whether the following metrics in the cluster exceed the threshold by querying the related monitoring system tables in the metrics schema:
+`threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルをクエリすることにより、クラスタの次のメトリックがしきい値を超えているかどうかをチェックします。
 
-|  Component  | Monitoring metric | Monitoring table | Expected value |  Description  |
-|  :----  | :----  |  :----  |  :----  |  :----  |
-| TiDB | tso-duration              | pd_tso_wait_duration                | < 50ms  |   The wait duration of getting the TSO of transaction. |
-| TiDB | get-token-duration        | tidb_get_token_duration             | < 1ms   |  Queries the time it takes to get the token. The related TiDB configuration item is [`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit).  |
-| TiDB | load-schema-duration      | tidb_load_schema_duration           | < 1s    |   The time it takes for TiDB to update the schema metadata.|
-| TiKV | scheduler-cmd-duration    | tikv_scheduler_command_duration     | < 0.1s  |  The time it takes for TiKV to execute the KV `cmd` request. |
-| TiKV | handle-snapshot-duration  | tikv_handle_snapshot_duration       | < 30s   |  The time it takes for TiKV to handle the snapshot. |
-| TiKV | storage-write-duration    | tikv_storage_async_request_duration | < 0.1s  |  The write latency of TiKV. |
-| TiKV | storage-snapshot-duration | tikv_storage_async_request_duration | < 50ms  |  The time it takes for TiKV to get the snapshot. |
-| TiKV | rocksdb-write-duration    | tikv_engine_write_duration          | < 100ms |  The write latency of TiKV RocksDB. |
-| TiKV | rocksdb-get-duration | tikv_engine_max_get_duration | < 50ms |   The read latency of TiKV RocksDB. |
-| TiKV | rocksdb-seek-duration | tikv_engine_max_seek_duration | < 50ms |  The latency of TiKV RocksDB to execute `seek`.   |
-| TiKV | scheduler-pending-cmd-coun | tikv_scheduler_pending_commands  | < 1000 |  The number of commands stalled in TiKV.  |
-| TiKV | index-block-cache-hit | tikv_block_index_cache_hit | > 0.95 |  The hit rate of index block cache in TiKV. |
-| TiKV | filter-block-cache-hit | tikv_block_filter_cache_hit | > 0.95 |  The hit rate of filter block cache in TiKV. |
-| TiKV | data-block-cache-hit | tikv_block_data_cache_hit | > 0.80 |  The hit rate of data block cache in TiKV. |
-| TiKV | leader-score-balance | pd_scheduler_store_status  | < 0.05 |  Checks whether the leader score of each TiKV instance is balanced. The expected difference between instances is less than 5%. |
-| TiKV | region-score-balance | pd_scheduler_store_status  | < 0.05 |  Checks whether the Region score of each TiKV instance is balanced. The expected difference between instances is less than 5%. |
-| TiKV | store-available-balance | pd_scheduler_store_status  | < 0.2 | Checks whether the available storage of each TiKV instance is balanced. The expected difference between instances is less than 20%. |
-| TiKV | region-count | pd_scheduler_store_status  | < 20000 |  Checks the number of Regions on each TiKV instance. The expected number of Regions in a single instance is less than 20,000. |
-| PD | region-health | pd_region_health | < 100  |  Detects the number of Regions that are in the process of scheduling in the cluster. The expected number is less than 100 in total. |
+| 成分   | モニタリングメトリック            | モニタリングテーブル                          | 期待値       | 説明                                                                                                                 |
+| :--- | :--------------------- | :---------------------------------- | :-------- | :----------------------------------------------------------------------------------------------------------------- |
+| TiDB | tso-期間                 | pd_tso_wait_duration                | &lt;50ms  | トランザクションのTSOを取得するための待機時間。                                                                                          |
+| TiDB | get-token-duration     | tidb_get_token_duration             | &lt;1ms   | トークンの取得にかかる時間を照会します。関連するTiDB構成アイテムは[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
+| TiDB | load-schema-duration   | tidb_load_schema_duration           | &lt;1秒    | TiDBがスキーマメタデータを更新するのにかかる時間。                                                                                        |
+| TiKV | スケジューラー-cmd-期間         | tikv_scheduler_command_duration     | &lt;0.1秒  | TiKVが`cmd`要求を実行するのにかかる時間。                                                                                          |
+| TiKV | ハンドル-スナップショット-期間       | tikv_handle_snapshot_duration       | &lt;30秒   | TiKVがスナップショットを処理するのにかかる時間。                                                                                         |
+| TiKV | ストレージ-書き込み-期間          | tikv_storage_async_request_duration | &lt;0.1秒  | TiKVの書き込みレイテンシ。                                                                                                    |
+| TiKV | ストレージ-スナップショット-期間      | tikv_storage_async_request_duration | &lt;50ms  | TiKVがスナップショットを取得するのにかかる時間。                                                                                         |
+| TiKV | rocksdb-書き込み-期間        | tikv_engine_write_duration          | &lt;100ms | TiKVRocksDBの書き込みレイテンシ。                                                                                             |
+| TiKV | rocksdb-get-duration   | tikv_engine_max_get_duration        | &lt;50ms  | TiKVRocksDBの読み取りレイテンシ。                                                                                             |
+| TiKV | rocksdb-seek-duration  | tikv_engine_max_seek_duration       | &lt;50ms  | TiKVRocksDBが`seek`を実行するまでの待ち時間。                                                                                    |
+| TiKV | スケジューラー保留中のcmd-coun    | tikv_scheduler_pending_commands     | &lt;1000  | TiKVで停止したコマンドの数。                                                                                                   |
+| TiKV | index-block-cache-hit  | tikv_block_index_cache_hit          | 0.95      | TiKVのインデックスブロックキャッシュのヒット率。                                                                                         |
+| TiKV | filter-block-cache-hit | tikv_block_filter_cache_hit         | 0.95      | TiKVのフィルターブロックキャッシュのヒット率。                                                                                          |
+| TiKV | data-block-cache-hit   | tikv_block_data_cache_hit           | 0.80      | TiKVのデータブロックキャッシュのヒット率。                                                                                            |
+| TiKV | リーダー-スコア-バランス          | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのリーダースコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                   |
+| TiKV | リージョンスコアバランス           | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのリージョンスコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                  |
+| TiKV | 店舗利用可能残高               | pd_scheduler_store_status           | &lt;0.2   | 各TiKVインスタンスの使用可能なストレージのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は20％未満です。                                               |
+| TiKV | リージョンカウント              | pd_scheduler_store_status           | &lt;20000 | 各TiKVインスタンスのリージョン数を確認します。 1つのインスタンスで予想されるリージョンの数は20,000未満です。                                                       |
+| PD   | 地域の健康                  | pd_region_health                    | &lt;100   | クラスタでスケジューリング中のリージョンの数を検出します。予想される数は合計で100未満です。                                                                    |
 
-In addition, this rule also checks whether the CPU usage of the following threads in a TiKV instance is too high:
+さらに、このルールは、TiKVインスタンス内の次のスレッドのCPU使用率が高すぎるかどうかもチェックします。
 
-* scheduler-worker-cpu
-* coprocessor-normal-cpu
-* coprocessor-high-cpu
-* coprocessor-low-cpu
-* grpc-cpu
-* raftstore-cpu
-* apply-cpu
-* storage-readpool-normal-cpu
-* storage-readpool-high-cpu
-* storage-readpool-low-cpu
-* split-check-cpu
+-   スケジューラー-ワーカー-CPU
+-   コプロセッサー-通常-CPU
+-   コプロセッサー-high-cpu
+-   コプロセッサー-low-cpu
+-   grpc-cpu
+-   raftstore-cpu
+-   apply-cpu
+-   storage-readpool-normal-cpu
+-   storage-readpool-high-cpu
+-   storage-readpool-low-cpu
+-   split-check-cpu
 
-The built-in diagnostic rules are constantly being improved. If you have more diagnostic rules, welcome to create a PR or an issue in the [`tidb` repository](https://github.com/pingcap/tidb).
+組み込みの診断ルールは常に改善されています。より多くの診断ルールがある場合は、 [`tidb`リポジトリ](https://github.com/pingcap/tidb)でPRまたは問題を作成することを歓迎します。

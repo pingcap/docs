@@ -3,57 +3,61 @@ title: Upgrade TiDB Binlog
 summary: Learn how to upgrade TiDB Binlog to the latest cluster version.
 ---
 
-# Upgrade TiDB Binlog
+# TiDBBinlogをアップグレードする {#upgrade-tidb-binlog}
 
-This document introduces how to upgrade TiDB Binlog that is deployed manually to the latest [cluster](/tidb-binlog/tidb-binlog-overview.md) version. There is also a section on how to upgrade TiDB Binlog from an earlier incompatible version (Kafka/Local version) to the latest version.
+このドキュメントでは、手動でデプロイされたTiDBBinlogを最新の[クラスタ](/tidb-binlog/tidb-binlog-overview.md)バージョンにアップグレードする方法を紹介します。 TiDB Binlogを以前の互換性のないバージョン（Kafka /ローカルバージョン）から最新バージョンにアップグレードする方法に関するセクションもあります。
 
-## Upgrade TiDB Binlog deployed manually
+## 手動でデプロイされたTiDBBinlogをアップグレードする {#upgrade-tidb-binlog-deployed-manually}
 
-Follow the steps in this section if you deploy TiDB Binlog manually.
+TiDB Binlogを手動でデプロイする場合は、このセクションの手順に従ってください。
 
-### Upgrade Pump
+### アップグレードポンプ {#upgrade-pump}
 
-First, upgrade each Pump instance in the cluster one by one. This ensures that there are always Pump instances in the cluster that can receive binlogs from TiDB. The steps are as below:
+まず、クラスタの各Pumpインスタンスを1つずつアップグレードします。これにより、TiDBからbinlogを受信できるPumpインスタンスがクラスタに常に存在するようになります。手順は次のとおりです。
 
-1. Replace the original file with the new version of `pump`.
-2. Restart the Pump process.
+1.  元のファイルを新しいバージョンの`pump`に置き換えます。
+2.  ポンププロセスを再開します。
 
-### Upgrade Drainer
+### ドレイナーをアップグレードする {#upgrade-drainer}
 
-Second, upgrade the Drainer component:
+次に、Drainerコンポーネントをアップグレードします。
 
-1. Replace the original file with the new version of `drainer`.
-2. Restart the Drainer process.
+1.  元のファイルを新しいバージョンの`drainer`に置き換えます。
+2.  ドレイナープロセスを再開します。
 
-## Upgrade TiDB Binlog from Kafka/Local version to the cluster version
+## TiDBBinlogをKafka/Localバージョンからクラスタバージョンにアップグレードします {#upgrade-tidb-binlog-from-kafka-local-version-to-the-cluster-version}
 
-The new TiDB versions (v2.0.8-binlog, v2.1.0-rc.5 or later) are not compatible with the Kafka version or Local version of TiDB Binlog. If TiDB is upgraded to one of the new versions, it is required to use the cluster version of TiDB Binlog. If the Kafka or local version of TiDB Binlog is used before upgrading, you need to upgrade your TiDB Binlog to the cluster version.
+新しいTiDBバージョン（v2.0.8-binlog、v2.1.0-rc.5以降）は、KafkaバージョンまたはローカルバージョンのTiDBBinlogと互換性がありません。 TiDBを新しいバージョンのいずれかにアップグレードする場合は、クラスタバージョンのTiDBBinlogを使用する必要があります。アップグレードする前にKafkaまたはローカルバージョンのTiDBBinlogを使用する場合は、TiDBBinlogをクラスタバージョンにアップグレードする必要があります。
 
-The corresponding relationship between TiDB Binlog versions and TiDB versions is shown in the following table:
+次の表に、TiDBBinlogバージョンとTiDBバージョンの対応する関係を示します。
 
-| TiDB Binlog version | TiDB version                              | Note                                                                                       |
-|---------------------|-------------------------------------------|--------------------------------------------------------------------------------------------|
-| Local               | TiDB 1.0 or earlier                       |                                                                                            |
-| Kafka               | TiDB 1.0 ~ TiDB 2.1 RC5                   | TiDB 1.0 supports both the local and Kafka versions of TiDB Binlog.                        |
-| Cluster             | TiDB v2.0.8-binlog, TiDB 2.1 RC5 or later | TiDB v2.0.8-binlog is a special 2.0 version supporting the cluster version of TiDB Binlog. |
+| TiDBBinlogバージョン | TiDBバージョン                       | ノート                                                           |
+| --------------- | ------------------------------- | ------------------------------------------------------------- |
+| ローカル            | TiDB1.0以前                       |                                                               |
+| カフカ             | TiDB 1.0〜TiDB 2.1 RC5           | TiDB 1.0は、ローカルバージョンとKafkaバージョンの両方のTiDBBinlogをサポートします。         |
+| 集まる             | TiDB v2.0.8-binlog、TiDB2.1RC5以降 | TiDB v2.0.8-binlogは、TiDBBinlogのクラスタバージョンをサポートする特別な2.0バージョンです。 |
 
-### Upgrade process
+### アップグレードプロセス {#upgrade-process}
 
-> **Note:**
+> **ノート：**
 >
-> If importing the full data is acceptable, you can abandon the old version and deploy TiDB Binlog following [TiDB Binlog Cluster Deployment](/tidb-binlog/deploy-tidb-binlog.md).
+> 完全なデータのインポートが許容される場合は、古いバージョンを破棄して、 [TiDBBinlogクラスターの展開](/tidb-binlog/deploy-tidb-binlog.md)の後にTiDBBinlogをデプロイできます。
 
-If you want to resume replication from the original checkpoint, perform the following steps to upgrade TiDB Binlog:
+元のチェックポイントからレプリケーションを再開する場合は、次の手順を実行してTiDBBinlogをアップグレードします。
 
-1. Deploy the new version of Pump.
-2. Stop the TiDB cluster service.
-3. Upgrade TiDB and the configuration, and write the binlog data to the new Pump cluster.
-4. Reconnect the TiDB cluster to the service.
-5. Make sure that the old version of Drainer has replicated the data in the old version of Pump to the downstream completely;
+1.  新しいバージョンのPumpをデプロイします。
 
-    Query the `status` interface of Drainer，command as below：
+2.  TiDBクラスタサービスを停止します。
 
-    {{< copyable "shell-regular" >}}
+3.  TiDBと構成をアップグレードし、binlogデータを新しいPumpクラスタに書き込みます。
+
+4.  TiDBクラスタをサービスに再接続します。
+
+5.  古いバージョンのDrainerが、古いバージョンのPumpのデータをダウンストリームに完全に複製していることを確認してください。
+
+    Drainerの`status`のインターフェースを照会し、次のようにコマンドを実行します。
+
+    {{< copyable "" >}}
 
     ```bash
     curl 'http://172.16.10.49:8249/status'
@@ -63,7 +67,8 @@ If you want to resume replication from the original checkpoint, perform the foll
     {"PumpPos":{"172.16.10.49:8250":{"offset":32686}},"Synced": true ,"DepositWindow":{"Upper":398907800202772481,"Lower":398907799455662081}}
     ```
 
-    If the return value of `Synced` is True, it means Drainer has replicated the data in the old version of Pump to the downstream completely.
+    戻り値`Synced`がTrueの場合、Drainerが古いバージョンのPumpのデータをダウンストリームに完全に複製したことを意味します。
 
-6. Start the new version of Drainer.
-7. Close the Pump and Drainer of the old versions and the dependent Kafka and ZooKeeper.
+6.  Drainerの新しいバージョンを起動します。
+
+7.  古いバージョンのポンプとドレイナー、および依存するKafkaとZooKeeperを閉じます。

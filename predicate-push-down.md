@@ -3,17 +3,17 @@ title: Predicates Push Down
 summary: Introduce one of the TiDB's logic optimization rules—Predicate Push Down (PPD).
 ---
 
-# Predicates Push Down (PPD)
+# Predicate Push Down（PPD） {#predicates-push-down-ppd}
 
-This document introduces one of the TiDB's logic optimization rules—Predicate Push Down (PPD). It aims to help you understand the predicate push down and know its applicable and inapplicable scenarios.
+このドキュメントでは、TiDBのロジック最適化ルールの1つである述語プッシュダウン（PPD）を紹介します。これは、述語のプッシュダウンを理解し、その適用可能なシナリオと適用できないシナリオを理解するのに役立つことを目的としています。
 
-PPD pushes down selection operators to data source as close as possible to complete data filtering as early as possible, which significantly reduces the cost of data transmission or computation. 
+PPDは、選択演算子をデータソースにできるだけ近づけて、データフィルタリングをできるだけ早く完了します。これにより、データの送信または計算のコストが大幅に削減されます。
 
-## Examples
+## 例 {#examples}
 
-The following cases describe the optimization of PPD. Case 1, 2, and 3 are scenarios where PPD is applicable, and Case 4, 5, and 6 are scenarios where PPD is not applicable.
+次のケースでは、PPDの最適化について説明します。ケース1、2、および3はPPDが適用可能なシナリオであり、ケース4、5、および6はPPDが適用されないシナリオです。
 
-### Case 1: push predicates to storage layer
+### ケース1：述語をストレージレイヤーにプッシュする {#case-1-push-predicates-to-storage-layer}
 
 ```sql
 create table t(id int primary key, a int);
@@ -28,9 +28,9 @@ explain select * from t where a < 1;
 3 rows in set (0.00 sec)
 ```
 
-In this query, pushing down the predicate `a < 1` to the TiKV layer to filter the data can reduce the overhead of network transmission.
+このクエリでは、述語`a < 1`をTiKV層にプッシュダウンしてデータをフィルタリングすると、ネットワーク送信のオーバーヘッドを減らすことができます。
 
-### Case 2: push predicates to storage layer
+### ケース2：述語をストレージレイヤーにプッシュする {#case-2-push-predicates-to-storage-layer}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -44,9 +44,9 @@ explain select * from t where a < substring('123', 1, 1);
 +-------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-This query has the same execution plan as the query in case 1, because the input parameters of the `substring` of the predicate `a < substring('123', 1, 1)` are constants, so they can be calculated in advance. Then the predicate is simplified to the equivalent predicate `a < 1`. After that, TiDB can push `a < 1` down to TiKV.
+このクエリは、ケース1のクエリと同じ実行プランを持っています。これは、述語`a < substring('123', 1, 1)`の`substring`の入力パラメーターが定数であり、事前に計算できるためです。次に、述語は同等の述語`a < 1`に簡略化されます。その後、TiDBは`a < 1`をTiKVにプッシュダウンできます。
 
-### Case 3: push predicates below join operator
+### ケース3：結合演算子の下に述語をプッシュする {#case-3-push-predicates-below-join-operator}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -66,11 +66,11 @@ explain select * from t join s on t.a = s.a where t.a < 1;
 7 rows in set (0.00 sec)
 ```
 
-In this query, the predicate `t.a < 1` is pushed below join to filter in advance, which can reduce the calculation overhead of join.
+このクエリでは、述語`t.a < 1`が結合の下にプッシュされて事前にフィルタリングされます。これにより、結合の計算オーバーヘッドを削減できます。
 
-In addition，This SQL statement has an inner join executed, and the `ON` condition is `t.a = s.a`. The predicate `s.a <1` can be derived from `t.a < 1` and pushed down to `s` table below the join operator. Filtering the `s` table can further reduce the calculation overhead of join.
+さらに、このSQLステートメントでは内部結合が実行され、 `ON`の条件は`t.a = s.a`です。述部`s.a <1`は、 `t.a < 1`から派生し、結合演算子の下の`s`テーブルにプッシュダウンできます。 `s`テーブルをフィルタリングすると、結合の計算オーバーヘッドをさらに削減できます。
 
-### Case 4: predicates that are not supported by storage layers cannot be pushed down
+### ケース4：ストレージレイヤーでサポートされていない述語をプッシュダウンできない {#case-4-predicates-that-are-not-supported-by-storage-layers-cannot-be-pushed-down}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -84,11 +84,11 @@ desc select * from t where substring('123', a, 1) = '1';
 +-------------------------+---------+-----------+---------------+----------------------------------------+
 ```
 
-In this query, there is a predicate `substring('123', a, 1) = '1'`.
+このクエリには、述語`substring('123', a, 1) = '1'`があります。
 
-From the `explain` results, we can see that the predicate is not pushed down to TiKV for calculation. This is because the TiKV coprocessor does not support the built-in function `substring`.
+`explain`の結果から、計算のために述語がTiKVにプッシュダウンされていないことがわかります。これは、TiKVコプロセッサーが組み込み関数`substring`をサポートしていないためです。
 
-### Case 5: predicates of inner tables on the outer join can't be pushed down
+### ケース5：外部結合の内部テーブルの述語をプッシュダウンできない {#case-5-predicates-of-inner-tables-on-the-outer-join-can-t-be-pushed-down}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -107,11 +107,11 @@ explain select * from t left join s on t.a = s.a where s.a is null;
 6 rows in set (0.00 sec)
 ```
 
-In this query，there is a predicate `s.a is null` on the inner table `s`.
+このクエリでは、内部テーブル`s`に述語`s.a is null`があります。
 
-From the `explain` results，we can see that the predicate is not pushed below join operator. This is because the outer join fills the inner table with `NULL` values when the `on` condition isn't satisfied, and the predicate `s.a is null` is used to filter the results after the join. If it is pushed down to the inner table below join, the execution plan is not equivalent to the original one.
+`explain`の結果から、述語が結合演算子の下にプッシュされていないことがわかります。これは、 `on`条件が満たされない場合、外部結合が内部テーブルに`NULL`の値を入力し、述部`s.a is null`が結合後の結果をフィルタリングするために使用されるためです。結合の下の内側のテーブルにプッシュダウンされた場合、実行プランは元のプランと同等ではありません。
 
-### Case 6: the predicates which contain user variables cannot be pushed down
+### ケース6：ユーザー変数を含む述語をプッシュダウンできない {#case-6-the-predicates-which-contain-user-variables-cannot-be-pushed-down}
 
 ```sql
 create table t(id int primary key, a char);
@@ -127,11 +127,11 @@ explain select * from t where a < @a;
 3 rows in set (0.00 sec)
 ```
 
-In this query，there is a predicate `a < @a` on table `t`. The `@a` of the predicate is a user variable.
+このクエリでは、テーブル`t`に述語`a < @a`があります。述語の`@a`はユーザー変数です。
 
-As can be seen from `explain` results, the predicate is not like case 2, which is simplified to `a < 1` and pushed down to TiKV. This is because the value of the user variable `@a` may change during the computation, and TiKV is not aware of the changes. So TiDB does not replace `@a` with `1`, and does not push down it to TiKV.
+`explain`の結果からわかるように、述語はケース2とは異なり、 `a < 1`に簡略化され、TiKVにプッシュダウンされます。これは、ユーザー変数`@a`の値が計算中に変更される可能性があり、TiKVがその変更を認識しないためです。したがって、TiDBは`@a`を`1`に置き換えず、TiKVにプッシュダウンしません。
 
-An example to help you understand is as follows：
+理解しやすい例は次のとおりです。
 
 ```sql
 create table t(id int primary key, a int);
@@ -147,4 +147,4 @@ select id, a, @a:=@a+1 from t where a = @a;
 2 rows in set (0.00 sec)
 ```
 
-As you can see from this query, the value of `@a` will change during the query. So if you replace `a = @a` with `a = 1` and push it down to TiKV, it's not an equivalent execution plan. 
+このクエリからわかるように、 `@a`の値はクエリ中に変更されます。したがって、 `a = @a`を`a = 1`に置き換えてTiKVにプッシュダウンした場合、それは同等の実行プランではありません。

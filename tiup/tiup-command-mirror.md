@@ -2,38 +2,38 @@
 title: tiup mirror
 ---
 
-# tiup mirror
+# tiupミラー {#tiup-mirror}
 
-In TiUP, [mirror](/tiup/tiup-mirror-reference.md) is an important concept. TiUP currently supports two forms of mirroring:
+TiUPでは、 [鏡](/tiup/tiup-mirror-reference.md)は重要な概念です。 TiUPは現在、次の2つの形式のミラーリングをサポートしています。
 
-- Local mirror: the TiUP client and the mirror are on the same machine, and the client accesses the mirror through the file system.
-- Remote mirror: the TiUP client and the mirror are not on the same machine, and the client accesses the mirror through network.
+-   ローカルミラー：TiUPクライアントとミラーは同じマシン上にあり、クライアントはファイルシステムを介してミラーにアクセスします。
+-   リモートミラー：TiUPクライアントとミラーは同じマシン上になく、クライアントはネットワークを介してミラーにアクセスします。
 
-The `tiup mirror` command is used to manage mirrors and provides ways to create mirrors, distribute components, and manage keys.
+`tiup mirror`コマンドは、ミラーを管理するために使用され、ミラーを作成し、コンポーネントを配布し、キーを管理する方法を提供します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror <command> [flags]
 ```
 
-`<command>` stands for sub-commands. For the list of supported sub-commands, refer to the [command list](#command-list) below.
+`<command>`はサブコマンドを表します。サポートされているサブコマンドのリストについては、以下の[コマンドリスト](#command-list)を参照してください。
 
-## Option
+## オプション {#option}
 
-None
+なし
 
-## Command list
+## コマンドリスト {#command-list}
 
-- [genkey](/tiup/tiup-command-mirror-genkey.md): generates the private key file
-- [sign](/tiup/tiup-command-mirror-sign.md): signs a specific file using a private key file
-- [init](/tiup/tiup-command-mirror-init.md): initiates an empty mirror
-- [set](/tiup/tiup-command-mirror-set.md): sets the current mirror
-- [grant](/tiup/tiup-command-mirror-grant.md): grants a new component owner for the current mirror
-- [publish](/tiup/tiup-command-mirror-publish.md): publishes new components to the current mirror
-- [modify](/tiup/tiup-command-mirror-modify.md): modifies the attributes of the components in the current mirror
-- [rotate](/tiup/tiup-command-mirror-rotate.md): updates the root certificate in the current mirror
-- [clone](/tiup/tiup-command-mirror-clone.md): clones a new mirror from an existing one
-- [merge](/tiup/tiup-command-mirror-merge.md): merges mirrors
+-   [ゲンキー](/tiup/tiup-command-mirror-genkey.md) ：秘密鍵ファイルを生成します
+-   [サイン](/tiup/tiup-command-mirror-sign.md) ：秘密鍵ファイルを使用して特定のファイルに署名します
+-   [初期化](/tiup/tiup-command-mirror-init.md) ：空のミラーを開始します
+-   [設定](/tiup/tiup-command-mirror-set.md) ：現在のミラーを設定します
+-   [許す](/tiup/tiup-command-mirror-grant.md) ：現在のミラーの新しいコンポーネント所有者を付与します
+-   [公開](/tiup/tiup-command-mirror-publish.md) ：新しいコンポーネントを現在のミラーに公開します
+-   [変更](/tiup/tiup-command-mirror-modify.md) ：現在のミラーのコンポーネントの属性を変更します
+-   [回転する](/tiup/tiup-command-mirror-rotate.md) ：現在のミラーのルート証明書を更新します
+-   [クローン](/tiup/tiup-command-mirror-clone.md) ：既存のミラーから新しいミラーを複製します
+-   [マージ](/tiup/tiup-command-mirror-merge.md) ：ミラーをマージします
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

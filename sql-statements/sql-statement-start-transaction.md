@@ -3,15 +3,15 @@ title: START TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of START TRANSACTION for the TiDB database.
 ---
 
-# START TRANSACTION
+# トランザクションを開始します {#start-transaction}
 
-This statement starts a new transaction inside of TiDB. It is similar to the statement `BEGIN`.
+このステートメントは、TiDB内で新しいトランザクションを開始します。これは、ステートメント`BEGIN`に似ています。
 
-In the absence of a `START TRANSACTION` statement, every statement will by default autocommit in its own transaction. This behavior ensures MySQL compatibility.
+`START TRANSACTION`のステートメントがない場合、すべてのステートメントはデフォルトで独自のトランザクションで自動コミットされます。この動作により、MySQLの互換性が保証されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**BeginTransactionStmt:**
+**BeginTransactionStmt：**
 
 ```ebnf+diagram
 BeginTransactionStmt ::=
@@ -22,7 +22,7 @@ AsOfClause ::=
     ( 'AS' 'OF' 'TIMESTAMP' Expression)
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
@@ -38,15 +38,15 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* `START TRANSACTION` immediately starts a transaction inside TiDB. This differs from MySQL, where `START TRANSACTION` lazily creates a transaction. But `START TRANSACTION` in TiDB is equivalent to MySQL's `START TRANSACTION WITH CONSISTENT SNAPSHOT`.
+-   `START TRANSACTION`は、TiDB内ですぐにトランザクションを開始します。これは、 `START TRANSACTION`が遅延してトランザクションを作成するMySQLとは異なります。ただし、TiDBの`START TRANSACTION`はMySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`と同等です。
 
-* The statement `START TRANSACTION READ ONLY` is parsed for compatibility with MySQL, but still allows write operations.
+-   ステートメント`START TRANSACTION READ ONLY`は、MySQLとの互換性のために解析されますが、それでも書き込み操作は許可されます。
 
-## See also
+## も参照してください {#see-also}
 
-* [COMMIT](/sql-statements/sql-statement-commit.md)
-* [ROLLBACK](/sql-statements/sql-statement-rollback.md)
-* [BEGIN](/sql-statements/sql-statement-begin.md)
-* [START TRANSACTION WITH CAUSAL CONSISTENCY ONLY](/transaction-overview.md#causal-consistency)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [始める](/sql-statements/sql-statement-begin.md)
+-   [因果整合性のみでトランザクションを開始する](/transaction-overview.md#causal-consistency)

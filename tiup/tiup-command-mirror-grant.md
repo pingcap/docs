@@ -2,43 +2,43 @@
 title: tiup mirror grant
 ---
 
-# tiup mirror grant
+# tiupミラーグラント {#tiup-mirror-grant}
 
-The `tiup mirror grant` command is used to introduce a component owner to the current mirror.
+`tiup mirror grant`コマンドは、コンポーネントの所有者に現在のミラーを紹介するために使用されます。
 
-Component owners can use their keys to publish new components or to modify components they previously published. Before adding a new component owner, the component owner to be added needs to send his or her own public key to the mirror administrator.
+コンポーネントの所有者は、キーを使用して新しいコンポーネントを公開したり、以前に公開したコンポーネントを変更したりできます。新しいコンポーネント所有者を追加する前に、追加するコンポーネント所有者は自分の公開鍵をミラー管理者に送信する必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> This command is only supported when the current mirror is a local mirror.
+> このコマンドは、現在のミラーがローカルミラーである場合にのみサポートされます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror grant <id> [flags]
 ```
 
-`<id>` stands for the component owner's ID, which must be unique in the whole mirror. It is recommended to use an ID that matches the regular expression `^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`.
+`<id>`はコンポーネント所有者のIDを表し、ミラー全体で一意である必要があります。正規表現`^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`と一致するIDを使用することをお勧めします。
 
-## Options
+## オプション {#options}
 
-### -k, --key
+### -k、-key {#k-key}
 
-- Specifies the key of the introduced component owner. This key can either be public or private. If it is a private key, TiUP converts it to the corresponding public key before storing it in the mirror.
-- A key can be used by only one component owner.
-- Data type: `STRING`
-- Default: "${TIUP_HOME}/keys/private.json"
+-   導入されたコンポーネント所有者のキーを指定します。このキーは、パブリックまたはプライベートのいずれかになります。秘密鍵の場合、TiUPはそれを対応する公開鍵に変換してからミラーに保存します。
+-   キーは、1人のコンポーネント所有者のみが使用できます。
+-   データ型： `STRING`
+-   デフォルト：「${TIUP_HOME}/keys/private.json」
 
-### -n, --name
+### -n、-name {#n-name}
 
-- Specifies the name of the component owner. The name is displayed on the `Owner` field of the component list. If `-n/--name` is not specified, `<id>` is used as the component owner's name.
-- Data type: `STRING`
-- Default: `<id>`
+-   コンポーネント所有者の名前を指定します。名前は、コンポーネントリストの`Owner`フィールドに表示されます。 `-n/--name`が指定されていない場合、 `<id>`がコンポーネント所有者の名前として使用されます。
+-   データ型： `STRING`
+-   デフォルト： `<id>`
 
-### Outputs
+### 出力 {#outputs}
 
-- If the command is executed successfully, there is no output.
-- If the component owner's ID is duplicated, TiUP reports the error `Error: owner %s exists`.
-- If the key is used by another component owner, TiUP reports the error `Error: key %s exists`.
+-   コマンドが正常に実行された場合、出力はありません。
+-   コンポーネント所有者のIDが重複している場合、TiUPはエラー`Error: owner %s exists`を報告します。
+-   キーが別のコンポーネント所有者によって使用されている場合、TiUPはエラー`Error: key %s exists`を報告します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

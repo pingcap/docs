@@ -3,58 +3,59 @@ title: Sink to Apache Kafka
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. 
 ---
 
-# Sink to Apache Kafka
+# ApacheKafkaにシンクします {#sink-to-apache-kafka}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, **Sink to Apache Kafka** is an experimental feature. It is not recommended that you use it for production environments.
+> 現在、 **Sink toApacheKafka**は実験的機能です。実稼働環境での使用はお勧めしません。
 
-This document describes how to stream data from TiDB Cloud to Apache Kafka using the **Sink to Apache Kafka** changefeed.
+このドキュメントでは、 **Sink** toApacheKafkaチェンジフィードを使用してTiDBCloudからApacheKafkaにデータをストリーミングする方法について説明します。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-### Network
+### 通信網 {#network}
 
-Make sure that your TiDB Cluster can connect to the Apache Kafka service.
+TiDBクラスターがApacheKafkaサービスに接続できることを確認してください。
 
-If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
+ApacheKafkaサービスがインターネットにアクセスできないAWSVPCにある場合は、次の手順を実行します。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
-2. Modify the inbound rules of the security group that the Apache Kafka service is associated with. 
+1.  ApacheKafkaサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 
-    You must add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+2.  ApacheKafkaサービスが関連付けられているセキュリティグループのインバウンドルールを変更します。
 
-3. If the Apache Kafka URL contains hostnames, you need to allow TiDB Cloud to be able to resolve the DNS hostnames of the Apache Kafka brokers.
+    TiDBクラウドクラスタが配置されているリージョンのCIDRをインバウンドルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
 
-    1. Follow the steps in [Enable DNS resolution for a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
-    2. Enable the **Accepter DNS resolution** option.
+3.  Apache Kafka URLにホスト名が含まれている場合は、TiDBCloudがApacheKafkaブローカーのDNSホスト名を解決できるようにする必要があります。
 
-If your Apache Kafka service is in a GCP VPC that has no internet access, take the following steps:
+    1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
+    2.  **AccepterDNS解決**オプションを有効にします。
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
-2. Modify the ingress firewall rules of the VPC where Apache Kafka is located. 
+ApacheKafkaサービスがインターネットにアクセスできないGCPVPCにある場合は、次の手順を実行します。
 
-    You must add the CIDR of the Region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+1.  ApacheKafkaサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+2.  ApacheKafkaが配置されているVPCの入力ファイアウォールルールを変更します。
 
-### Topic
+    TiDBクラウドクラスタが配置されているリージョンのCIDRを入力ファイアウォールルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
 
-You must prepare a Topic before creating an Apache Kafka Sink. Based on table, the Sink will distribute data to different partitions of the Topic.
+### トピック {#topic}
 
-## Create a Sink
+Apache Kafka Sinkを作成する前に、トピックを準備する必要があります。テーブルに基づいて、シンクはトピックのさまざまなパーティションにデータを配布します。
 
-After completing the Prerequisites, you can sink your data to Apache Kafka.
+## シンクを作成する {#create-a-sink}
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
-2. Click **Sink to Apache Kafka**.
-3. Fill the Kafka URL and Kafka Topic.
-4. Click **Test Connectivity**. If your TiDB Cluster can connect to the Apache Kafka service, the **Confirm** button is displayed.
-5. Click **Confirm** and after a while, the sink will begin its work, and the status of the sink will be changed to "**Producing**".
+前提条件を完了したら、データをApacheKafkaにシンクできます。
 
-## Delete a Sink
+1.  **TiDB**クラスタの[チェンジフィード]タブに移動します。
+2.  [ **Sink toApacheKafka]を**クリックします。
+3.  KafkaURLとKafkaトピックを入力します。
+4.  [**接続のテスト]**をクリックします。 TiDBクラスターがApacheKafkaサービスに接続できる場合は、[<strong>確認</strong>]ボタンが表示されます。
+5.  [**確認**]をクリックすると、しばらくするとシンクが動作を開始し、シンクのステータスが[<strong>生産</strong>中]に変わります。
 
-1. Navigate to the **Changefeed** tab of a cluster.
-2. Click the trash button of **Sink to Apache Kafka**
+## シンクを削除する {#delete-a-sink}
 
-## Restrictions
+1.  クラスタの[**チェンジフィード**]タブに移動します。
+2.  **Sink toApacheKafka**のゴミ箱ボタンをクリックします
 
-Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+## 制限 {#restrictions}
+
+TiDBクラウドはTiCDCを使用してチェンジフィードを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。

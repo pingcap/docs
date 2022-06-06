@@ -5,102 +5,103 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 
 <!-- markdownlint-disable MD007 -->
 
-# Data Migration Overview
+# データ移行の概要 {#data-migration-overview}
 
-[TiDB Data Migration](https://github.com/pingcap/dm) (DM) is an integrated data migration task management platform, which supports the full data migration and the incremental data replication from MySQL-compatible databases (such as MySQL, MariaDB, and Aurora MySQL) into TiDB. It can help to reduce the operation cost of data migration and simplify the troubleshooting process. When using DM for data migration, you need to perform the following operations:
+[TiDBデータ移行](https://github.com/pingcap/dm) （DM）は統合データ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへの完全なデータ移行と増分データレプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。データ移行にDMを使用する場合は、次の操作を実行する必要があります。
 
-- Deploy a DM Cluster
-- Create upstream data source and save data source access information
-- Create data migration tasks to migrate data from data sources to TiDB
+-   DMクラスターをデプロイする
+-   アップストリームデータソースを作成し、データソースアクセス情報を保存します
+-   データ移行タスクを作成して、データをデータソースからTiDBに移行します
 
-The data migration task includes two stages: full data migration and incremental data replication:
+データ移行タスクには、完全なデータ移行と増分データレプリケーションの2つの段階があります。
 
-- Full data migration: Migrate the table structure of the corresponding table from the data source to TiDB, and then read the data stored in the data source and write it to the TiDB cluster.
-- Incremental data replication: After the full data migration is completed, the corresponding table changes from the data source are read and then written to the TiDB cluster.
+-   完全なデータ移行：対応するテーブルのテーブル構造をデータソースからTiDBに移行してから、データソースに格納されているデータを読み取り、TiDBクラスタに書き込みます。
+-   インクリメンタルデータレプリケーション：完全なデータ移行が完了すると、データソースからの対応するテーブルの変更が読み取られ、TiDBクラスタに書き込まれます。
 
-## DM versions
+## DMバージョン {#dm-versions}
 
-This document is applicable to DM v5.4, the latest stable version of DM.
+このドキュメントは、DMの最新の安定バージョンであるDMv5.4に適用されます。
 
-Before v5.4, the DM documentation is independent of the TiDB documentation. To access these earlier versions of the DM documentation, click one of the following links:
+v5.4より前では、DMドキュメントはTiDBドキュメントから独立しています。これらの以前のバージョンのDMドキュメントにアクセスするには、次のリンクのいずれかをクリックします。
 
-- [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
-- [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) (Not recommended, because it the earliest stable version of DM)
+-   [DMv5.3のドキュメント](https://docs.pingcap.com/tidb-data-migration/v5.3)
+-   [DMv2.0のドキュメント](https://docs.pingcap.com/tidb-data-migration/v2.0/)
+-   [DMv1.0のドキュメント](https://docs.pingcap.com/tidb-data-migration/v1.0/) （DMの最も初期の安定バージョンであるため、お勧めしません）
 
-> **Note:**
+> **ノート：**
 >
-> - Since October 2021, DM's GitHub repository has been moved to [pingcap/tiflow](https://github.com/pingcap/tiflow/tree/master/dm). If you see any issues with DM, submit your issue to the `pingcap/tiflow` repository for feedback.
-> - In earlier versions (v1.0 and v2.0), DM uses version numbers that are independent of TiDB. Since v5.3, DM uses the same version number as TiDB. The next version of DM v2.0 is DM v5.3. There are no compatibility changes from DM v2.0 to v5.3, and the upgrade process is no different from a normal upgrade, only an increase in version number.
+> -   2021年10月以降、DMのGitHubリポジトリは[pingcap / tiflow](https://github.com/pingcap/tiflow/tree/master/dm)に移動されました。 DMに問題がある場合は、フィードバックのために`pingcap/tiflow`リポジトリに問題を送信してください。
+> -   以前のバージョン（v1.0およびv2.0）では、DMはTiDBに依存しないバージョン番号を使用します。 v5.3以降、DMはTiDBと同じバージョン番号を使用します。 DMv2.0の次のバージョンはDMv5.3です。 DM v2.0からv5.3への互換性の変更はなく、アップグレードプロセスは通常のアップグレードと同じで、バージョン番号が増えるだけです。
 
-## Basic features
+## 基本的な機能 {#basic-features}
 
-This section describes the basic data migration features provided by DM.
+このセクションでは、DMが提供する基本的なデータ移行機能について説明します。
 
 ![DM Core Features](/media/dm/dm-core-features.png)
 
-### Block and allow lists migration at the schema and table levels
+### スキーマおよびテーブルレベルでのリストの移行をブロックおよび許可する {#block-and-allow-lists-migration-at-the-schema-and-table-levels}
 
-The [block and allow lists filtering rule](/dm/dm-key-features.md#block-and-allow-table-lists) is similar to the `replication-rules-db`/`replication-rules-table` feature of MySQL, which can be used to filter or replicate all operations of some databases only or some tables only.
+[リストのフィルタリングルールをブロックして許可する](/dm/dm-key-features.md#block-and-allow-table-lists)は、MySQLの`replication-rules-db`機能に似ており、一部のデータベースのみまたは一部のテーブルのみのすべての操作をフィルタリングまたは複製するために使用でき`replication-rules-table` 。
 
-### Binlog event filtering
+### Binlogイベントフィルタリング {#binlog-event-filtering}
 
-The [binlog event filtering](/dm/dm-key-features.md#binlog-event-filter) feature means that DM can filter certain types of SQL statements from certain tables in the source database. For example, you can filter all `INSERT` statements in the table `test`.`sbtest` or filter all `TRUNCATE TABLE` statements in the schema `test`.
+[binlogイベントフィルタリング](/dm/dm-key-features.md#binlog-event-filter)つの機能は、DMがソースデータベース内の特定のテーブルから特定のタイプのSQLステートメントをフィルタリングできることを意味します。たとえば、表`test`の`INSERT`のステートメントすべてをフィルタリングできます。 `sbtest`または、スキーマ`test`の`TRUNCATE TABLE`のステートメントすべてをフィルタリングします。
 
-### Schema and table routing
+### スキーマとテーブルのルーティング {#schema-and-table-routing}
 
-The [schema and table routing](/dm/dm-key-features.md#table-routing) feature means that DM can migrate a certain table of the source database to the specified table in the downstream. For example, you can migrate the table structure and data from the table `test`.`sbtest1` in the source database to the table `test`.`sbtest2` in TiDB. This is also a core feature for merging and migrating sharded databases and tables.
+[スキーマとテーブルのルーティング](/dm/dm-key-features.md#table-routing)の機能は、DMがソースデータベースの特定のテーブルをダウンストリームの指定されたテーブルに移行できることを意味します。たとえば、テーブル構造とデータをテーブル`test`から移行できます。ソースデータベースの`sbtest1`を表`test`に追加します。 TiDBでは`sbtest2` 。これは、シャーディングされたデータベースとテーブルをマージおよび移行するためのコア機能でもあります。
 
-## Advanced features
+## 高度な機能 {#advanced-features}
 
-### Shard merge and migration
+### シャードのマージと移行 {#shard-merge-and-migration}
 
-DM supports merging and migrating the original sharded instances and tables from the source databases into TiDB, but with some restrictions. For details, see [Sharding DDL usage restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
+DMは、元のシャーディングされたインスタンスとテーブルをソースデータベースからTiDBにマージおよび移行することをサポートしていますが、いくつかの制限があります。詳細については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)および[楽観的モードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
-### Optimization for third-party online-schema-change tools in the migration process
+### 移行プロセスにおけるサードパーティのオンラインスキーマ変更ツールの最適化 {#optimization-for-third-party-online-schema-change-tools-in-the-migration-process}
 
-In the MySQL ecosystem, tools such as gh-ost and pt-osc are widely used. DM provides support for these tools to avoid migrating unnecessary intermediate data. For details, see [Online DDL Tools](/dm/dm-key-features.md#online-ddl-tools)
+MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用されています。 DMは、これらのツールをサポートして、不要な中間データの移行を回避します。詳しくは[オンラインDDLツール](/dm/dm-key-features.md#online-ddl-tools)をご覧ください
 
-### Filter certain row changes using SQL expressions
+### SQL式を使用して特定の行の変更をフィルタリングする {#filter-certain-row-changes-using-sql-expressions}
 
-In the phase of incremental replication, DM supports the configuration of SQL expressions to filter out certain row changes, which lets you replicate the data with a greater granularity. For more information, refer to [Filter Certain Row Changes Using SQL Expressions](/dm/feature-expression-filter.md).
+インクリメンタルレプリケーションのフェーズでは、DMはSQL式の構成をサポートして、特定の行の変更を除外します。これにより、データをより詳細にレプリケートできます。詳細については、 [SQL式を使用して特定の行の変更をフィルタリングする](/dm/feature-expression-filter.md)を参照してください。
 
-## Usage restrictions
+## 使用制限 {#usage-restrictions}
 
-Before using the DM tool, note the following restrictions:
+DMツールを使用する前に、次の制限に注意してください。
 
-+ Database version requirements
+-   データベースのバージョン要件
 
-    - MySQL version > 5.5
-    - MariaDB version >= 10.1.2
+    -   MySQLバージョン&gt;5.5
 
-    > **Note:**
+    -   MariaDBバージョン&gt;=10.1.2
+
+    > **ノート：**
     >
-    > If there is a primary-secondary migration structure between the upstream MySQL/MariaDB servers, then choose the following version.
+    > アップストリームのMySQL/MariaDBサーバー間にプライマリ-セカンダリ移行構造がある場合は、次のバージョンを選択します。
     >
-    > - MySQL version > 5.7.1
-    > - MariaDB version >= 10.1.3
+    > -   MySQLバージョン&gt;5.7.1
+    > -   MariaDBバージョン&gt;=10.1.3
 
-    > **Warning:**
+    > **警告：**
     >
-    > Migrating data from MySQL 8.0 to TiDB using DM is an experimental feature (introduced since DM v2.0). It is **NOT** recommended that you use it in a production environment.
+    > DMを使用してMySQL8.0からTiDBにデータを移行することは、実験的機能です（DM v2.0以降に導入されました）。実稼働環境で使用することはお勧めし**ません**。
 
-+ DDL syntax compatibility
+-   DDL構文の互換性
 
-    - Currently, TiDB is not compatible with all the DDL statements that MySQL supports. Because DM uses the TiDB parser to process DDL statements, it only supports the DDL syntax supported by the TiDB parser. For details, see [MySQL Compatibility](/mysql-compatibility.md#ddl).
+    -   現在、TiDBはMySQLがサポートするすべてのDDLステートメントと互換性があるわけではありません。 DMはTiDBパーサーを使用してDDLステートメントを処理するため、TiDBパーサーでサポートされているDDL構文のみをサポートします。詳細については、 [MySQLの互換性](/mysql-compatibility.md#ddl)を参照してください。
 
-    - DM reports an error when it encounters an incompatible DDL statement. To solve this error, you need to manually handle it using dmctl, either skipping this DDL statement or replacing it with a specified DDL statement(s). For details, see [Skip or replace abnormal SQL statements](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements).
+    -   DMは、互換性のないDDLステートメントを検出すると、エラーを報告します。このエラーを解決するには、このDDLステートメントをスキップするか、指定されたDDLステートメントに置き換えることにより、dmctlを使用して手動で処理する必要があります。詳細については、 [異常なSQLステートメントをスキップまたは置換します](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。
 
-+ Sharding merge with conflicts
+-   シャーディングは競合とマージします
 
-    - If conflict exists between sharded tables, solve the conflict by referring to [handling conflicts of auto-increment primary key](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key). Otherwise, data migration is not supported. Conflicting data can cover each other and cause data loss.
+    -   シャーディングされたテーブル間に競合が存在する場合は、 [自動インクリメント主キーの競合の処理](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して競合を解決します。それ以外の場合、データ移行はサポートされていません。競合するデータは互いにカバーし合い、データの損失を引き起こす可能性があります。
 
-    - For other sharding DDL migration restrictions, see [Sharding DDL usage restrictions in the pessimistic mode](/dm/feature-shard-merge-pessimistic.md#restrictions) and [Sharding DDL usage restrictions in the optimistic mode](/dm/feature-shard-merge-optimistic.md#restrictions).
+    -   その他のシャーディングDDL移行の制限については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)および[楽観的モードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
-+ Switch of MySQL instances for data sources
+-   データソースのMySQLインスタンスの切り替え
 
-    When DM-worker connects the upstream MySQL instance via a virtual IP (VIP), if you switch the VIP connection to another MySQL instance, DM might connect to the new and old MySQL instances at the same time in different connections. In this situation, the binlog migrated to DM is not consistent with other upstream status that DM receives, causing unpredictable anomalies and even data damage. To make necessary changes to DM manually, see [Switch DM-worker connection via virtual IP](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip).
+    DM-workerが仮想IP（VIP）を介してアップストリームMySQLインスタンスに接続する場合、VIP接続を別のMySQLインスタンスに切り替えると、DMは異なる接続で同時に新しいMySQLインスタンスと古いMySQLインスタンスに接続する可能性があります。この状況では、DMに移行されたbinlogは、DMが受け取る他のアップストリームステータスと一致しないため、予測できない異常やデータの損傷が発生します。 DMに必要な変更を手動で行うには、 [仮想IPを介したDM-worker接続の切り替え](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip)を参照してください。
 
-+ GBK character set compatibility
+-   GBK文字セットの互換性
 
-    - DM does not support migrating `charset=GBK` tables to TiDB clusters earlier than v5.4.0.
+    -   DMは、v5.4.0より前のTiDBクラスターへの`charset=GBK`のテーブルの移行をサポートしていません。

@@ -3,89 +3,89 @@ title: Use BR Command-line for Backup and Restoration
 summary: Learn how to use the BR command line to backup and restore cluster data.
 ---
 
-# Use BR Command-line for Backup and Restoration
+# バックアップと復元にBRコマンドラインを使用する {#use-br-command-line-for-backup-and-restoration}
 
-This document describes how to back up and restore TiDB cluster data using the BR command line.
+このドキュメントでは、BRコマンドラインを使用してTiDBクラスタデータをバックアップおよび復元する方法について説明します。
 
-Make sure you have read [BR Tool Overview](/br/backup-and-restore-tool.md), especially [Usage Restrictions](/br/backup-and-restore-tool.md#usage-restrictions) and [Best Practices](/br/backup-and-restore-tool.md#best-practices).
+[BRツールの概要](/br/backup-and-restore-tool.md) 、特に[使用制限](/br/backup-and-restore-tool.md#usage-restrictions)と[ベストプラクティス](/br/backup-and-restore-tool.md#best-practices)を読んだことを確認してください。
 
-## BR command-line description
+## BRコマンドラインの説明 {#br-command-line-description}
 
-A `br` command consists of sub-commands, options, and parameters.
+`br`コマンドは、サブコマンド、オプション、およびパラメーターで構成されます。
 
-* Sub-command: the characters without `-` or `--`.
-* Option: the characters that start with `-` or `--`.
-* Parameter: the characters that immediately follow behind and are passed to the sub-command or the option.
+-   サブコマンド： `-`または`--`のない文字。
+-   オプション： `-`または`--`で始まる文字。
+-   パラメーター：直後に続き、サブコマンドまたはオプションに渡される文字。
 
-This is a complete `br` command:
+これは完全な`br`のコマンドです。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full --pd "${PDIP}:2379" -s "local:///tmp/backup"
 ```
 
-Explanations for the above command are as follows:
+上記のコマンドの説明は次のとおりです。
 
-* `backup`: the sub-command of `br`.
-* `full`: the sub-command of `backup`.
-* `-s` (or `--storage`): the option that specifies the path where the backup files are stored.
-* `"local:///tmp/backup"`: the parameter of `-s`. `/tmp/backup` is the path in the local disk where the backed up files of each TiKV node are stored.
-* `--pd`: the option that specifies the Placement Driver (PD) service address.
-* `"${PDIP}:2379"`: the parameter of `--pd`.
+-   `backup` ： `br`のサブコマンド。
+-   `full` ： `backup`のサブコマンド。
+-   `-s` （または`--storage` ）：バックアップファイルが保存されるパスを指定するオプション。
+-   `"local:///tmp/backup"` ： `-s`のパラメータ。 `/tmp/backup`は、各TiKVノードのバックアップファイルが保存されているローカルディスク内のパスです。
+-   `--pd` ：配置ドライバー（PD）サービスアドレスを指定するオプション。
+-   `"${PDIP}:2379"` ： `--pd`のパラメータ。
 
-> **Note:**
+> **ノート：**
 >
-> - When the `local` storage is used, the backup data are scattered in the local file system of each node.
+> -   `local`のストレージを使用すると、バックアップデータは各ノードのローカルファイルシステムに分散されます。
 >
-> - It is **not recommended** to back up to a local disk in the production environment because you **have to** manually aggregate these data to complete the data restoration. For more information, see [Restore Cluster Data](#use-br-command-line-to-restore-cluster-data).
+> -   データの復元を完了するには、これらのデータを手動で集約する必要**が**あるため、実稼働環境でローカルディスクにバックアップすることは<strong>お勧め</strong>しません。詳細については、 [クラスターデータの復元](#use-br-command-line-to-restore-cluster-data)を参照してください。
 >
-> - Aggregating these backup data might cause redundancy and bring troubles to operation and maintenance. Even worse, if restoring data without aggregating these data, you can receive a rather confusing error message `SST file not found`.
+> -   これらのバックアップデータを集約すると、冗長性が生じ、運用や保守に支障をきたす可能性があります。さらに悪いことに、これらのデータを集約せずにデータを復元すると、かなり紛らわしいエラーメッセージ`SST file not found`を受け取る可能性があります。
 >
-> - It is recommended to mount the NFS disk on each node, or back up to the `S3` object storage.
+> -   各ノードにNFSディスクをマウントするか、 `S3`のオブジェクトストレージにバックアップすることをお勧めします。
 
-### Sub-commands
+### サブコマンド {#sub-commands}
 
-A `br` command consists of multiple layers of sub-commands. Currently, BR has the following three sub-commands:
+`br`のコマンドは、サブコマンドの複数のレイヤーで構成されます。現在、BRには次の3つのサブコマンドがあります。
 
-* `br backup`: used to back up the data of the TiDB cluster.
-* `br restore`: used to restore the data of the TiDB cluster.
+-   `br backup` ：TiDBクラスタのデータをバックアップするために使用されます。
+-   `br restore` ：TiDBクラスタのデータを復元するために使用されます。
 
-Each of the above three sub-commands might still include the following three sub-commands to specify the scope of an operation:
+上記の3つのサブコマンドのそれぞれに、操作の範囲を指定するための次の3つのサブコマンドが含まれている場合があります。
 
-* `full`: used to back up or restore all the cluster data.
-* `db`: used to back up or restore the specified database of the cluster.
-* `table`: used to back up or restore a single table in the specified database of the cluster.
+-   `full` ：すべてのクラスタデータをバックアップまたは復元するために使用されます。
+-   `db` ：クラスタの指定されたデータベースをバックアップまたは復元するために使用されます。
+-   `table` ：クラスタの指定されたデータベース内の単一のテーブルをバックアップまたは復元するために使用されます。
 
-### Common options
+### 一般的なオプション {#common-options}
 
-* `--pd`: used for connection, specifying the PD server address. For example, `"${PDIP}:2379"`.
-* `-h` (or `--help`): used to get help on all sub-commands. For example, `br backup --help`.
-* `-V` (or `--version`): used to check the version of BR.
-* `--ca`: specifies the path to the trusted CA certificate in the PEM format.
-* `--cert`: specifies the path to the SSL certificate in the PEM format.
-* `--key`: specifies the path to the SSL certificate key in the PEM format.
-* `--status-addr`: specifies the listening address through which BR provides statistics to Prometheus.
+-   `--pd` ：接続に使用され、PDサーバーアドレスを指定します。たとえば、 `"${PDIP}:2379"` 。
+-   `-h` （または`--help` ）：すべてのサブコマンドのヘルプを取得するために使用されます。たとえば、 `br backup --help` 。
+-   `-V` （または`--version` ）：BRのバージョンを確認するために使用されます。
+-   `--ca` ：信頼できるCA証明書へのパスをPEM形式で指定します。
+-   `--cert` ：SSL証明書へのパスをPEM形式で指定します。
+-   `--key` ：SSL証明書キーへのパスをPEM形式で指定します。
+-   `--status-addr` ：BRがPrometheusに統計を提供するためのリスニングアドレスを指定します。
 
-## Use BR command-line to back up cluster data
+## BRコマンドラインを使用してクラスタデータをバックアップする {#use-br-command-line-to-back-up-cluster-data}
 
-To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
+クラスタデータをバックアップするには、 `br backup`コマンドを使用します。 `full`または`table`サブコマンドを追加して、バックアップ操作の範囲（クラスタ全体または単一のテーブル）を指定できます。
 
-### Back up all the cluster data
+### すべてのクラスタデータをバックアップします {#back-up-all-the-cluster-data}
 
-To back up all the cluster data, execute the `br backup full` command. To get help on this command, execute `br backup full -h` or `br backup full --help`.
+すべてのクラスタデータをバックアップするには、 `br backup full`コマンドを実行します。このコマンドのヘルプを表示するには、 `br backup full -h`または`br backup full --help`を実行します。
 
-**Usage example:**
+**使用例：**
 
-Back up all the cluster data to the `/tmp/backup` path of each TiKV node and write the `backupmeta` file to this path.
+すべてのクラスタデータを各TiKVノードの`/tmp/backup`のパスにバックアップし、このパスに`backupmeta`のファイルを書き込みます。
 
-> **Note:**
+> **ノート：**
 >
-> + If the backup disk and the service disk are different, it has been tested that online backup reduces QPS of the read-only online service by about 15%-25% in case of full-speed backup. If you want to reduce the impact on QPS, use `--ratelimit` to limit the rate.
+> -   バックアップディスクとサービスディスクが異なる場合、フルスピードバックアップの場合、オンラインバックアップによって読み取り専用オンラインサービスのQPSが約15％〜25％低下することがテストされています。 QPSへの影響を減らしたい場合は、 `--ratelimit`を使用してレートを制限します。
 >
-> + If the backup disk and the service disk are the same, the backup competes with the service for I/O resources. This might decrease the QPS of the read-only online service by more than half. Therefore, it is **highly not recommended** to back up the online service data to the TiKV data disk.
+> -   バックアップディスクとサービスディスクが同じである場合、バックアップはI/Oリソースを求めてサービスと競合します。これにより、読み取り専用オンラインサービスのQPSが半分以上低下する可能性があります。したがって、オンラインサービスデータをTiKVデータディスクにバックアップすることは**強くお勧め**しません。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full \
@@ -95,12 +95,12 @@ br backup full \
     --log-file backupfull.log
 ```
 
-Explanations for some options in the above command are as follows:
+上記のコマンドのいくつかのオプションの説明は次のとおりです。
 
-* `--ratelimit`: specifies the maximum speed at which a backup operation is performed (MiB/s) on each TiKV node.
-* `--log-file`: specifies writing the BR log to the `backupfull.log` file.
+-   `--ratelimit` ：各TiKVノードでバックアップ操作が実行される最大速度（MiB / s）を指定します。
+-   `--log-file` ：BRログを`backupfull.log`ファイルに書き込むことを指定します。
 
-A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety. The progress bar is displayed as follows:
+バックアップ中は、端末にプログレスバーが表示されます。プログレスバーが100％に進むと、バックアップが完了します。次に、BRはバックアップデータもチェックして、データの安全性を確保します。プログレスバーは次のように表示されます。
 
 ```shell
 br backup full \
@@ -111,15 +111,15 @@ br backup full \
 Full Backup <---------/................................................> 17.12%.
 ```
 
-### Back up a database
+### データベースをバックアップする {#back-up-a-database}
 
-To back up a database in the cluster, execute the `br backup db` command. To get help on this command, execute `br backup db -h` or `br backup db --help`.
+クラスタのデータベースをバックアップするには、 `br backup db`コマンドを実行します。このコマンドのヘルプを表示するには、 `br backup db -h`または`br backup db --help`を実行します。
 
-**Usage example:**
+**使用例：**
 
-Back up the data of the `test` database to the `/tmp/backup` path on each TiKV node and write the `backupmeta` file to this path.
+`test`のデータベースのデータを各TiKVノードの`/tmp/backup`のパスにバックアップし、 `backupmeta`のファイルをこのパスに書き込みます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup db \
@@ -130,19 +130,19 @@ br backup db \
     --log-file backupdb.log
 ```
 
-In the above command, `--db` specifies the name of the database to be backed up. For descriptions of other options, see [Back up all the cluster data](#use-br-command-line-to-back-up-cluster-data).
+上記のコマンドで、 `--db`はバックアップするデータベースの名前を指定します。その他のオプションの説明については、 [すべてのクラスタデータをバックアップします](#use-br-command-line-to-back-up-cluster-data)を参照してください。
 
-A progress bar is displayed in the terminal during the backup. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
+バックアップ中は、端末にプログレスバーが表示されます。プログレスバーが100％に進むと、バックアップが完了します。次に、BRはバックアップデータもチェックして、データの安全性を確保します。
 
-### Back up a table
+### テーブルをバックアップする {#back-up-a-table}
 
-To back up the data of a single table in the cluster, execute the `br backup table` command. To get help on this command, execute `br backup table -h` or `br backup table --help`.
+クラスタの単一のテーブルのデータをバックアップするには、 `br backup table`コマンドを実行します。このコマンドのヘルプを表示するには、 `br backup table -h`または`br backup table --help`を実行します。
 
-**Usage example:**
+**使用例：**
 
-Back up the data of the `test.usertable` table to the `/tmp/backup` path on each TiKV node and write the `backupmeta` file to this path.
+`test.usertable`のテーブルのデータを各TiKVノードの`/tmp/backup`のパスにバックアップし、 `backupmeta`のファイルをこのパスに書き込みます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup table \
@@ -154,24 +154,24 @@ br backup table \
     --log-file backuptable.log
 ```
 
-The `table` sub-command has two options:
+`table`サブコマンドには2つのオプションがあります。
 
-* `--db`: specifies the database name
-* `--table`: specifies the table name.
+-   `--db` ：データベース名を指定します
+-   `--table` ：テーブル名を指定します。
 
-For descriptions of other options, see [Back up all cluster data](#use-br-command-line-to-back-up-cluster-data).
+その他のオプションの説明については、 [すべてのクラスタデータをバックアップします](#use-br-command-line-to-back-up-cluster-data)を参照してください。
 
-A progress bar is displayed in the terminal during the backup operation. When the progress bar advances to 100%, the backup is complete. Then the BR also checks the backup data to ensure data safety.
+バックアップ操作中は、端末にプログレスバーが表示されます。プログレスバーが100％に進むと、バックアップが完了します。次に、BRはバックアップデータもチェックして、データの安全性を確保します。
 
-### Back up with table filter
+### テーブルフィルターでバックアップする {#back-up-with-table-filter}
 
-To back up multiple tables with more complex criteria, execute the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+より複雑な基準で複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[テーブルフィルター](/table-filter.md)を指定します。
 
-**Usage example:**
+**使用例：**
 
-The following command backs up the data of all tables in the form `db*.tbl*` to the `/tmp/backup` path on each TiKV node and writes the `backupmeta` file to this path.
+次のコマンドは、フォーム`db*.tbl*`のすべてのテーブルのデータを各TiKVノードの`/tmp/backup`パスにバックアップし、 `backupmeta`ファイルをこのパスに書き込みます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full \
@@ -182,28 +182,28 @@ br backup full \
     --log-file backupfull.log
 ```
 
-### Back up data to Amazon S3 backend
+### データをAmazonS3バックエンドにバックアップします {#back-up-data-to-amazon-s3-backend}
 
-If you back up the data to the Amazon S3 backend, instead of `local` storage, you need to specify the S3 storage path in the `storage` sub-command, and allow the BR node and the TiKV node to access Amazon S3.
+データを`local`のストレージではなくAmazonS3バックエンドにバックアップする場合は、 `storage`サブコマンドでS3ストレージパスを指定し、BRノードとTiKVノードがAmazonS3にアクセスできるようにする必要があります。
 
-You can refer to the [AWS Official Document](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html) to create an S3 `Bucket` in the specified `Region`. You can also refer to another [AWS Official Document](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html) to create a `Folder` in the `Bucket`.
+[AWS公式ドキュメント](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照して、指定した`Bucket`にS33を作成でき`Region` 。別の[AWS公式ドキュメント](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照して、 `Bucket`に`Folder`を作成することもできます。
 
-> **Note:**
+> **ノート：**
 >
-> To complete one backup, TiKV and BR usually require the minimum privileges of `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload`.
+> 1つのバックアップを完了するには、TiKVとBRは通常、 `s3:ListBucket` 、および`s3:PutObject`の最小特権を必要とし`s3:AbortMultipartUpload` 。
 
-Pass `SecretKey` and `AccessKey` of the account that has privilege to access the S3 backend to the BR node. Here `SecretKey` and `AccessKey` are passed as environment variables. Then pass the privilege to the TiKV node through BR.
+S3バックエンドにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`をBRノードに渡します。ここでは、 `SecretKey`と`AccessKey`が環境変数として渡されます。次に、BRを介して特権をTiKVノードに渡します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-When backing up using BR, explicitly specify the parameters `--s3.region` and `--send-credentials-to-tikv`. `--s3.region` indicates the region where S3 is located, and `--send-credentials-to-tikv` means passing the privilege to access S3 to the TiKV node.
+BRを使用してバックアップする場合は、パラメーター`--s3.region`と`--send-credentials-to-tikv`を明示的に指定してください。 `--s3.region`はS3が配置されている領域を示し、 `--send-credentials-to-tikv`はS3にアクセスする特権をTiKVノードに渡すことを意味します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full \
@@ -215,18 +215,18 @@ br backup full \
     --log-file backupfull.log
 ```
 
-### Back up incremental data
+### インクリメンタルデータをバックアップする {#back-up-incremental-data}
 
-If you want to back up incrementally, you only need to specify the **last backup timestamp** `--lastbackupts`.
+増分バックアップする場合は、**最後のバックアップタイムスタンプ**`--lastbackupts`を指定するだけで済みます。
 
-The incremental backup has two limitations:
+増分バックアップには2つの制限があります。
 
-- The incremental backup needs to be under a different path from the previous full backup.
-- GC (Garbage Collection) safepoint must be before the `lastbackupts`.
+-   増分バックアップは、前の完全バックアップとは異なるパスの下にある必要があります。
+-   GC（ガベージコレクション）セーフポイントは、 `lastbackupts`の前にある必要があります。
 
-To back up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]`, execute the following command:
+`(LAST_BACKUP_TS, current PD timestamp]`の間の増分データをバックアップするには、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full\
@@ -236,33 +236,33 @@ br backup full\
     --lastbackupts ${LAST_BACKUP_TS}
 ```
 
-To get the timestamp of the last backup, execute the `validate` command. For example:
+最後のバックアップのタイムスタンプを取得するには、 `validate`コマンドを実行します。例えば：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 LAST_BACKUP_TS=`br validate decode --field="end-version" -s local:///home/tidb/backupdata | tail -n1`
 ```
 
-In the above example, for the incremental backup data, BR records the data changes and the DDL operations during `(LAST_BACKUP_TS, current PD timestamp]`. When restoring data, BR first restores DDL operations and then the data.
+上記の例では、増分バックアップデータの場合、BRは`(LAST_BACKUP_TS, current PD timestamp]`の間のデータ変更とDDL操作を記録します。データを復元する場合、BRは最初にDDL操作を復元し、次にデータを復元します。
 
-### Encrypt data during backup (experimental feature)
+### バックアップ中にデータを暗号化する（実験的機能） {#encrypt-data-during-backup-experimental-feature}
 
-Since TiDB v5.3.0, TiDB supports backup encryption. You can configure the following parameters to encrypt data during backup:
+TiDB v5.3.0以降、TiDBはバックアップ暗号化をサポートしています。バックアップ中にデータを暗号化するには、次のパラメーターを構成できます。
 
-* `--crypter.method`: Encryption algorithm. Supports three algorithms `aes128-ctr/aes192-ctr/aes256-ctr`. The default value is `plaintext` and indicates no encryption.
-* `--crypter.key`: Encryption key in hexadecimal string format. `aes128-ctr` means 128 bit (16 bytes) key length, `aes192-ctr` means 24 bytes and `aes256-ctr` means 32 bytes.
-* `--crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in "crypter.key"
+-   `--crypter.method` ：暗号化アルゴリズム。 3つのアルゴリズムをサポートします`aes128-ctr/aes192-ctr/aes256-ctr` 。デフォルト値は`plaintext`で、暗号化されていないことを示します。
+-   `--crypter.key`進文字列形式の暗号化キー。 `aes128-ctr`は128ビット（16バイト）のキー長を意味し、 `aes192-ctr`は24バイトを意味し、 `aes256-ctr`は32バイトを意味します。
+-   `--crypter.key-file` ：キーファイル。 「crypter.key」を渡さなくても、キーがパラメータとして保存されているファイルパスを直接渡すことができます。
 
-> **Warning:**
+> **警告：**
 >
-> - This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
-> - If the key is lost, the backup data cannot be restored to the cluster.
-> - The encryption feature needs to be used on BR tools and TiDB clusters v5.3.0 or later versions, and the encrypted backup data cannot be restored on clusters ealier than v5.3.0.
+> -   これはまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
+> -   キーを紛失した場合、バックアップデータをクラスタに復元できません。
+> -   暗号化機能は、BRツールおよびTiDBクラスターv5.3.0以降のバージョンで使用する必要があり、暗号化されたバックアップデータはv5.3.0より前のクラスターでは復元できません。
 
-The configuration example for backup encryption is as follows:
+バックアップ暗号化の設定例は次のとおりです。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full\
@@ -272,17 +272,17 @@ br backup full\
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-### Back up Raw KV (experimental feature)
+### Raw KVのバックアップ（実験的機能） {#back-up-raw-kv-experimental-feature}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is experimental and not thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
+> この機能は実験的であり、完全にはテストされていません。この機能を実稼働環境で使用することは強く**お勧め**しません。
 
-In some scenarios, TiKV might run independently of TiDB. Given that, BR also supports bypassing the TiDB layer and backing up data in TiKV.
+一部のシナリオでは、TiKVはTiDBとは独立して実行される場合があります。そのため、BRはTiDBレイヤーのバイパスとTiKVでのデータのバックアップもサポートしています。
 
-For example, you can execute the following command to back up all keys between `[0x31, 0x3130303030303030)` in the default CF to `$BACKUP_DIR`:
+たとえば、次のコマンドを実行して、デフォルトCFの`[0x31, 0x3130303030303030)`から`$BACKUP_DIR`までのすべてのキーをバックアップできます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup raw --pd $PD_ADDR \
@@ -294,38 +294,38 @@ br backup raw --pd $PD_ADDR \
     --cf default
 ```
 
-Here, the parameters of `--start`  and `--end` are decoded using the method specified by `--format` before being sent to TiKV. Currently, the following methods are available:
+ここで、 `--start`と`--end`のパラメータは、TiKVに送信される前に、 `--format`で指定された方法を使用してデコードされます。現在、次の方法を使用できます。
 
-- "raw": The input string is directly encoded as a key in binary format.
-- "hex": The default encoding method. The input string is treated as a hexadecimal number.
-- "escape": First escape the input string, and then encode it into binary format.
+-   &quot;raw&quot;：入力文字列はバイナリ形式のキーとして直接エンコードされます。
+-   「hex」：デフォルトのエンコード方法。入力文字列は16進数として扱われます。
+-   「エスケープ」：最初に入力文字列をエスケープしてから、バイナリ形式にエンコードします。
 
-## Use BR command-line to restore cluster data
+## BRコマンドラインを使用してクラスタデータを復元する {#use-br-command-line-to-restore-cluster-data}
 
-To restore the cluster data, use the `br restore` command. You can add the `full`, `db` or `table` sub-command to specify the scope of your restoration: the whole cluster, a database or a single table.
+クラスタデータを復元するには、 `br restore`コマンドを使用します。 `full` 、または`db`サブコマンドを追加して、復元の範囲（クラスタ全体、データベース、または単一のテーブル）を指定でき`table` 。
 
-> **Note:**
+> **ノート：**
 >
-> If you use the local storage, you **must** copy all back up SST files to every TiKV node in the path specified by `--storage`.
+> ローカルストレージを使用する場合は、すべてのバックアップSSTファイルを`--storage`で指定されたパスのすべてのTiKVノードにコピーする**必要**があります。
 >
-> Even if each TiKV node eventually only need to read a part of the all SST files, they all need full access to the complete archive because:
+> 各TiKVノードが最終的にすべてのSSTファイルの一部を読み取るだけでよい場合でも、次の理由により、すべてのノードが完全なアーカイブに完全にアクセスできる必要があります。
 >
-> - Data are replicated into multiple peers. When ingesting SSTs, these files have to be present on *all* peers. This is unlike back up where reading from a single node is enough.
-> - Where each peer is scattered to during restore is random. We don't know in advance which node will read which file.
+> -   データは複数のピアに複製されます。 SSTを取り込む場合、これらのファイルは*すべての*ピアに存在する必要があります。これは、単一ノードからの読み取りで十分なバックアップとは異なります。
+> -   復元中に各ピアが分散する場所はランダムです。どのノードがどのファイルを読み取るかは事前にわかりません。
 >
-> These can be avoided using shared storage, for example mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file, so these caveats no longer apply.
+> これらは、共有ストレージを使用して回避できます。たとえば、ローカルパスにNFSをマウントしたり、S3を使用したりできます。ネットワークストレージを使用すると、すべてのノードがすべてのSSTファイルを自動的に読み取ることができるため、これらの警告は適用されなくなります。
 >
-> Also, note that you can only run one restore operation for a single cluster at the same time. Otherwise, unexpected behaviors might occur. For details, see [FAQ](/br/backup-and-restore-faq.md#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster).
+> また、1つのクラスタに対して同時に実行できる復元操作は1つだけであることに注意してください。そうしないと、予期しない動作が発生する可能性があります。詳細については、 [FAQ](/br/backup-and-restore-faq.md#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster)を参照してください。
 
-### Restore all the backup data
+### すべてのバックアップデータを復元する {#restore-all-the-backup-data}
 
-To restore all the backup data to the cluster, execute the `br restore full` command. To get help on this command, execute `br restore full -h` or `br restore full --help`.
+すべてのバックアップデータをクラスタに復元するには、 `br restore full`コマンドを実行します。このコマンドのヘルプを表示するには、 `br restore full -h`または`br restore full --help`を実行します。
 
-**Usage example:**
+**使用例：**
 
-Restore all the backup data in the `/tmp/backup` path to the cluster.
+クラスタへの`/tmp/backup`のパスにあるすべてのバックアップデータを復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full \
@@ -335,12 +335,12 @@ br restore full \
     --log-file restorefull.log
 ```
 
-Explanations for some options in the above command are as follows:
+上記のコマンドのいくつかのオプションの説明は次のとおりです。
 
-* `--ratelimit`: specifies the maximum speed at which a restoration operation is performed (MiB/s) on each TiKV node.
-* `--log-file`: specifies writing the BR log to the `restorefull.log` file.
+-   `--ratelimit` ：各TiKVノードで復元操作が実行される最大速度（MiB / s）を指定します。
+-   `--log-file` ：BRログを`restorefull.log`ファイルに書き込むことを指定します。
 
-A progress bar is displayed in the terminal during the restoration. When the progress bar advances to 100%, the restoration is complete. Then the BR also checks the backup data to ensure data safety.
+復元中は、ターミナルにプログレスバーが表示されます。プログレスバーが100％に進むと、復元が完了します。次に、BRはバックアップデータもチェックして、データの安全性を確保します。
 
 ```shell
 br restore full \
@@ -351,15 +351,15 @@ br restore full \
 Full Restore <---------/...............................................> 17.12%.
 ```
 
-### Restore a database
+### データベースを復元する {#restore-a-database}
 
-To restore a database to the cluster, execute the `br restore db` command. To get help on this command, execute `br restore db -h` or `br restore db --help`.
+データベースをクラスタに復元するには、 `br restore db`コマンドを実行します。このコマンドのヘルプを表示するには、 `br restore db -h`または`br restore db --help`を実行します。
 
-**Usage example:**
+**使用例：**
 
-Restore a database backed up in the `/tmp/backup` path to the cluster.
+クラスタへの`/tmp/backup`のパスでバックアップされたデータベースを復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore db \
@@ -370,21 +370,21 @@ br restore db \
     --log-file restoredb.log
 ```
 
-In the above command, `--db` specifies the name of the database to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data)).
+上記のコマンドで、 `--db`は復元するデータベースの名前を指定します。その他のオプションの説明については、 [すべてのバックアップデータを復元する](#restore-all-the-backup-data) ）を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> When you restore the backup data, the name of the database specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restore fails. This is because the metafile of the backup data ( `backupmeta` file) records the database name, you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
+> バックアップデータを復元する場合、 `--db`で指定されたデータベースの名前は、backupコマンドで`-- db`で指定された名前と同じである必要があります。それ以外の場合、復元は失敗します。これは、バックアップデータのメタファイル（ `backupmeta`ファイル）にデータベース名が記録されているため、同じ名前のデータベースにしかデータを復元できないためです。推奨される方法は、バックアップデータを別のクラスタの同じ名前のデータベースに復元することです。
 
-### Restore a table
+### テーブルを復元する {#restore-a-table}
 
-To restore a single table to the cluster, execute the `br restore table` command. To get help on this command, execute `br restore table -h` or `br restore table --help`.
+単一のテーブルをクラスタに復元するには、 `br restore table`コマンドを実行します。このコマンドのヘルプを表示するには、 `br restore table -h`または`br restore table --help`を実行します。
 
-**Usage example:**
+**使用例：**
 
-Restore a table backed up in the `/tmp/backup` path to the cluster.
+クラスタへの`/tmp/backup`のパスでバックアップされたテーブルを復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore table \
@@ -396,17 +396,17 @@ br restore table \
     --log-file restoretable.log
 ```
 
-In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore all backup data](#restore-all-the-backup-data) and [Restore a database](#restore-a-database).
+上記のコマンドで、 `--table`は復元するテーブルの名前を指定します。その他のオプションの説明については、 [すべてのバックアップデータを復元する](#restore-all-the-backup-data)および[データベースを復元する](#restore-a-database)を参照してください。
 
-### Restore with table filter
+### テーブルフィルターで復元 {#restore-with-table-filter}
 
-To restore multiple tables with more complex criteria, execute the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+より複雑な基準で複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 `--filter`または`-f`で[テーブルフィルター](/table-filter.md)を指定します。
 
-**Usage example:**
+**使用例：**
 
-The following command restores a subset of tables backed up in the `/tmp/backup` path to the cluster.
+次のコマンドは、クラスタへの`/tmp/backup`のパスでバックアップされたテーブルのサブセットを復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full \
@@ -416,28 +416,28 @@ br restore full \
     --log-file restorefull.log
 ```
 
-### Restore data from Amazon S3 backend
+### AmazonS3バックエンドからデータを復元する {#restore-data-from-amazon-s3-backend}
 
-If you restore data from the Amazon S3 backend, instead of `local` storage, you need to specify the S3 storage path in the `storage` sub-command, and allow the BR node and the TiKV node to access Amazon S3.
+`local`のストレージではなくAmazonS3バックエンドからデータを復元する場合は、 `storage`サブコマンドでS3ストレージパスを指定し、BRノードとTiKVノードがAmazonS3にアクセスできるようにする必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> To complete one restore, TiKV and BR usually require the minimum privileges of `s3:ListBucket` and `s3:GetObject`.
+> 1回の復元を完了するには、通常、TiKVとBRに`s3:ListBucket`と`s3:GetObject`の最小特権が必要です。
 
-Pass `SecretKey` and `AccessKey` of the account that has privilege to access the S3 backend to the BR node. Here `SecretKey` and `AccessKey` are passed as environment variables. Then pass the privilege to the TiKV node through BR.
+S3バックエンドにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`をBRノードに渡します。ここでは、 `SecretKey`と`AccessKey`が環境変数として渡されます。次に、BRを介して特権をTiKVノードに渡します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-When restoring data using BR, explicitly specify the parameters `--s3.region` and `--send-credentials-to-tikv`. `--s3.region` indicates the region where S3 is located, and `--send-credentials-to-tikv` means passing the privilege to access S3 to the TiKV node.
+BRを使用してデータを復元する場合は、パラメータ`--s3.region`と`--send-credentials-to-tikv`を明示的に指定してください。 `--s3.region`はS3が配置されている領域を示し、 `--send-credentials-to-tikv`はS3にアクセスする特権をTiKVノードに渡すことを意味します。
 
-`Bucket` and `Folder` in the `--storage` parameter represent the S3 bucket and the folder where the data to be restored is located.
+`--storage`パラメーターの`Bucket`と`Folder`は、S3バケットと、復元するデータが配置されているフォルダーを表します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full \
@@ -449,54 +449,54 @@ br restore full \
     --log-file restorefull.log
 ```
 
-In the above command, `--table` specifies the name of the table to be restored. For descriptions of other options, see [Restore a database](#restore-a-database).
+上記のコマンドで、 `--table`は復元するテーブルの名前を指定します。その他のオプションの説明については、 [データベースを復元する](#restore-a-database)を参照してください。
 
-### Restore incremental data
+### 増分データを復元する {#restore-incremental-data}
 
-Restoring incremental data is similar to [restoring full data using BR](#restore-all-the-backup-data). Note that when restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster.
+インクリメンタルデータの復元は[BRを使用して完全なデータを復元する](#restore-all-the-backup-data)に似ています。インクリメンタルデータを復元するときは、 `last backup ts`より前にバックアップされたすべてのデータがターゲットクラスタに復元されていることを確認してください。
 
-### Restore tables created in the `mysql` schema (experimental feature)
+### <code>mysql</code>スキーマで作成されたテーブルを復元する（実験的機能） {#restore-tables-created-in-the-code-mysql-code-schema-experimental-feature}
 
-BR backs up tables created in the `mysql` schema by default.
+BRは、デフォルトで`mysql`スキーマで作成されたテーブルをバックアップします。
 
-When you restore data using BR, the tables created in the `mysql` schema are not restored by default. If you need to restore these tables, you can explicitly include them using the [table filter](/table-filter.md#syntax). The following example restores `mysql.usertable` created in `mysql` schema. The command restores `mysql.usertable` along with other data.
+BRを使用してデータを復元する場合、 `mysql`スキーマで作成されたテーブルはデフォルトでは復元されません。これらのテーブルを復元する必要がある場合は、 [テーブルフィルター](/table-filter.md#syntax)を使用して明示的に含めることができます。次の例では、 `mysql`スキーマで作成された`mysql.usertable`を復元します。このコマンドは、他のデータとともに`mysql.usertable`を復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 ```
 
-In the above command, `-f '*.*'` is used to override the default rules and `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated. `-f 'mysql.usertable'` indicates that `mysql.usertable` is required for restore. For detailed implementation, refer to the [table filter document](/table-filter.md#syntax).
+上記のコマンドでは、 `-f '*.*'`はデフォルトのルールをオーバーライドするために使用され、 `-f '!mysql.*'`は特に明記されていない限り`mysql`のテーブルを復元しないようにBRに指示します。 `-f 'mysql.usertable'`は、復元に`mysql.usertable`が必要であることを示します。詳細な実装については、 [テーブルフィルタードキュメント](/table-filter.md#syntax)を参照してください。
 
-If you only need to restore `mysql.usertable`, use the following command:
+`mysql.usertable`のみを復元する必要がある場合は、次のコマンドを使用します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 ```
 
-> **Warning:**
+> **警告：**
 >
-> Although you can back up system tables (such as `mysql.tidb`) using the BR tool, BR ignores the following system tables even if you use the `--filter` setting to perform the restoration:
+> BRツールを使用してシステムテーブル（ `mysql.tidb`など）をバックアップできますが、復元を実行するために`--filter`設定を使用した場合でも、BRは次のシステムテーブルを無視します。
 >
-> - Statistical information tables (`mysql.stat_*`)
-> - System variable tables (`mysql.tidb`，`mysql.global_variables`)
-> - User information tables (such as `mysql.user` and `mysql.columns_priv`)
-> - [Other system tables](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/systable_restore.go#L31)
+> -   統計情報表（ `mysql.stat_*` ）
+> -   システム変数`mysql.global_variables` `mysql.tidb`
+> -   ユーザー情報テーブル（ `mysql.user`や`mysql.columns_priv`など）
+> -   [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/v5.4.0/br/pkg/restore/systable_restore.go#L31)
 
-### Decrypt data during restore (experimental feature)
+### 復元中にデータを復号化する（実験的機能） {#decrypt-data-during-restore-experimental-feature}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> これはまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
 
-After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. You need to ensure that the decryption parameters and encryption parameters are consistent. If the decryption algorithm or key is incorrect, the data cannot be restored.
+バックアップデータを暗号化した後、対応する復号化パラメータを渡してデータを復元する必要があります。復号化パラメーターと暗号化パラメーターが一貫していることを確認する必要があります。復号化アルゴリズムまたはキーが正しくない場合、データを復元できません。
 
-The following is an example of decrypting the backup data:
+以下は、バックアップデータを復号化する例です。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full\
@@ -506,15 +506,15 @@ br restore full\
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-### Restore Raw KV (experimental feature)
+### Raw KVの復元（実験的機能） {#restore-raw-kv-experimental-feature}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is in the experiment, without being thoroughly tested. It is highly **not recommended** to use this feature in the production environment.
+> この機能は、徹底的にテストされていないが、実験中です。この機能を実稼働環境で使用することは強く**お勧め**しません。
 
-Similar to [backing up Raw KV](#back-up-raw-kv-experimental-feature), you can execute the following command to restore Raw KV:
+[RawKVのバックアップ](#back-up-raw-kv-experimental-feature)と同様に、次のコマンドを実行してRawKVを復元できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore raw --pd $PD_ADDR \
@@ -526,25 +526,25 @@ br restore raw --pd $PD_ADDR \
     --cf default
 ```
 
-In the above example, all the backed up keys in the range `[0x31, 0x3130303030303030)` are restored to the TiKV cluster. The coding methods of these keys are identical to that of [keys during the backup process](#back-up-raw-kv-experimental-feature)
+上記の例では、範囲`[0x31, 0x3130303030303030)`のすべてのバックアップされたキーがTiKVクラスタに復元されます。これらのキーのコーディング方法は、 [バックアッププロセス中のキー](#back-up-raw-kv-experimental-feature)のコーディング方法と同じです。
 
-### Online restore (experimental feature)
+### オンライン復元（実験的機能） {#online-restore-experimental-feature}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is in the experiment, without being thoroughly tested. It also relies on the unstable `Placement Rules` feature of PD. It is highly **not recommended** to use this feature in the production environment.
+> この機能は、徹底的にテストされていないが、実験中です。また、PDの不安定な`Placement Rules`機能に依存しています。この機能を実稼働環境で使用することは強く**お勧め**しません。
 
-During data restoration, writing too much data affects the performance of the online cluster. To avoid this effect as much as possible, BR supports [Placement rules](/configure-placement-rules.md) to isolate resources. In this case, downloading and importing SST are only performed on a few specified nodes (or "restore nodes" for short). To complete the online restore, take the following steps.
+データの復元中に、書き込みが多すぎると、オンラインクラスタのパフォーマンスに影響します。この影響を可能な限り回避するために、BRはリソースを分離するために[配置ルール](/configure-placement-rules.md)をサポートします。この場合、SSTのダウンロードとインポートは、指定されたいくつかのノード（または略して「ノードの復元」）でのみ実行されます。オンライン復元を完了するには、次の手順を実行します。
 
-1. Configure PD, and start Placement rules:
+1.  PDを構成し、配置ルールを開始します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     echo "config set enable-placement-rules true" | pd-ctl
     ```
 
-2. Edit the configuration file of the "restore node" in TiKV, and specify "restore" to the `server` configuration item:
+2.  TiKVの「復元ノード」の設定ファイルを編集し、 `server`の設定項目に「復元」を指定します。
 
     {{< copyable "" >}}
 
@@ -553,9 +553,9 @@ During data restoration, writing too much data affects the performance of the on
     labels = { exclusive = "restore" }
     ```
 
-3. Start TiKV of the "restore node" and restore the backed up files using BR. Compared with the offline restore, you only need to add the `--online` flag:
+3.  「復元ノード」のTiKVを起動し、BRを使用してバックアップファイルを復元します。オフライン復元と比較すると、 `--online`のフラグを追加するだけで済みます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```
     br restore full \

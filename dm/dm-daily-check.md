@@ -3,15 +3,15 @@ title: Daily Check
 summary: Learn about the daily check of TiDB Data Migration (DM).
 ---
 
-# Daily Check
+# デイリーチェック {#daily-check}
 
-This document summarizes how to perform a daily check on TiDB Data Migration (DM).
+このドキュメントは、TiDBデータ移行（DM）の毎日のチェックを実行する方法をまとめたものです。
 
-+ Method 1: Execute the `query-status` command to check the running status of the task and the error output (if any). For details, see [Query Status](/dm/dm-query-status.md).
+-   方法1： `query-status`コマンドを実行して、タスクの実行ステータスとエラー出力（存在する場合）を確認します。詳細については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
 
-+ Method 2: If Prometheus and Grafana are correctly deployed when you deploy the DM cluster using TiUP, you can view DM monitoring metrics in Grafana. For example, suppose that the Grafana's address is `172.16.10.71`, go to <http://172.16.10.71:3000>, enter the Grafana dashboard, and select the DM Dashboard to check monitoring metrics of DM. For more information of these metrics, see [DM Monitoring Metrics](/dm/monitor-a-dm-cluster.md).
+-   方法2：TiUPを使用してDMクラスタをデプロイするときにPrometheusとGrafanaが正しくデプロイされている場合、GrafanaでDMモニタリングメトリックを表示できます。たとえば、Grafanaのアドレスが`172.16.10.71`で、 [http://172.16.10.71：3000](http://172.16.10.71:3000)に移動し、Grafanaダッシュボードに入り、DMダッシュボードを選択してDMのモニタリングメトリックを確認するとします。これらのメトリックの詳細については、 [DMモニタリングメトリクス](/dm/monitor-a-dm-cluster.md)を参照してください。
 
-+ Method 3: Check the running status of DM and the error (if any) using the log file.
+-   方法3：ログファイルを使用して、DMの実行ステータスとエラー（存在する場合）を確認します。
 
-    - DM-master log directory: It is specified by the `--log-file` DM-master process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-master node.
-    - DM-worker log directory: It is specified by the `--log-file` DM-worker process parameter. If DM is deployed using TiUP, the log directory is `{log_dir}` in the DM-worker node.
+    -   DM-masterログディレクトリ： `--log-file`のDM-masterプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDMマスターノードで`{log_dir}`です。
+    -   DM-workerログディレクトリ： `--log-file` -workerプロセスパラメータで指定されます。 DMがTiUPを使用してデプロイされている場合、ログディレクトリはDM-workerノードで`{log_dir}`です。

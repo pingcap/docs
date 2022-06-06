@@ -3,11 +3,11 @@ title: TABLE_STORAGE_STATS
 summary: Learn the `TABLE_STORAGE_STATS` information_schema table.
 ---
 
-# TABLE_STORAGE_STATS
+# TABLE_STORAGE_STATS {#table-storage-stats}
 
-The `TABLE_STORAGE_STATS` table provides information about table sizes as stored by the storage engine (TiKV).
+`TABLE_STORAGE_STATS`のテーブルは、ストレージエンジン（TiKV）によって格納されたテーブルサイズに関する情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -30,7 +30,7 @@ DESC table_storage_stats;
 8 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE test.t1 (id INT);

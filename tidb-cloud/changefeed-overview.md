@@ -2,11 +2,11 @@
 title: Changefeed
 ---
 
-# Changefeed
+# チェンジフィード {#changefeed}
 
-TiDB Cloud provides the following changefeeds to help you stream data from TiDB Cloud:
+TiDB Cloudは、TiDBCloudからデータをストリーミングするのに役立つ次のチェンジフィードを提供します。
 
-- [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-- [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+-   [ApacheKafkaにシンクします](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+-   [MySQLにシンク](/tidb-cloud/changefeed-sink-to-mysql.md)
 
-To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-tcu.md).
+TiDB Cloudでのチェンジフィードの請求については、 [チェンジフィード請求](/tidb-cloud/tidb-cloud-billing-tcu.md)を参照してください。

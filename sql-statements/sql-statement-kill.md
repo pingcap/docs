@@ -3,11 +3,11 @@ title: KILL [TIDB] | TiDB SQL Statement Reference
 summary: An overview of the usage of KILL [TIDB] for the TiDB database.
 ---
 
-# KILL [TIDB]
+# キル[TIDB] {#kill-tidb}
 
-The statement `KILL TIDB` is used to terminate connections in TiDB.
+ステートメント`KILL TIDB`は、TiDBの接続を終了するために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 KillStmt ::= KillOrKillTiDB ( 'CONNECTION' | 'QUERY' )? NUM
@@ -15,7 +15,7 @@ KillStmt ::= KillOrKillTiDB ( 'CONNECTION' | 'QUERY' )? NUM
 KillOrKillTiDB ::= 'KILL' 'TIDB'?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW PROCESSLIST;
@@ -31,13 +31,13 @@ KILL TIDB 2;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* By design, `KILL` is not compatible with MySQL by default. This helps prevent against a case of a connection being terminated on the wrong TiDB server, because it is common to place multiple TiDB servers behind a load balancer.
-* DO NOT set [`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query) in your configuration file UNLESS you are certain that clients will be always connected to the same TiDB node. This is because pressing <kbd>ctrl</kbd>+<kbd>c</kbd> in the default MySQL client opens a new connection in which `KILL` is executed. If there are proxies in between, the new connection might be routed to a different TiDB node, which possibly kills a different session.
-* The `KILL TIDB` statement is a TiDB extension. The feature of this statement is similar to the MySQL `KILL [CONNECTION|QUERY]` command and the MySQL command-line <kbd>ctrl</kbd>+<kbd>c</kbd> feature. It is safe to use `KILL TIDB` on the same TiDB node.
+-   設計上、 `KILL`はデフォルトでMySQLと互換性がありません。これは、ロードバランサーの背後に複数のTiDBサーバーを配置するのが一般的であるため、間違ったTiDBサーバーで接続が終了するケースを防ぐのに役立ちます。
+-   クライアントが常に同じTiDBノードに接続されることが確実でない限り、構成ファイルに[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定しないでください。これは、デフォルトのMySQLクライアントで<kbd>ctrl</kbd> + <kbd>c</kbd>を押すと、 `KILL`が実行される新しい接続が開くためです。間にプロキシがある場合、新しい接続が別のTiDBノードにルーティングされる可能性があり、これにより別のセッションが強制終了される可能性があります。
+-   `KILL TIDB`ステートメントはTiDB拡張です。このステートメントの機能は、 `KILL [CONNECTION|QUERY]`コマンドおよびMySQLコマンドラインの<kbd>ctrl</kbd> + <kbd>c</kbd>機能に似ています。同じTiDBノードで`KILL TIDB`を使用しても安全です。
 
-## See also
+## も参照してください {#see-also}
 
-* [SHOW \[FULL\] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
-* [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)
+-   [[完全な]プロセスリストを表示する](/sql-statements/sql-statement-show-processlist.md)
+-   [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)

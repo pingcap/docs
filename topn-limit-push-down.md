@@ -3,23 +3,23 @@ title: TopN and Limit Operator Push Down
 summary: Learn the implementation of TopN and Limit operator pushdown.
 ---
 
-# TopN and Limit Operator Push Down
+# TopNおよびLimitOperatorプッシュダウン {#topn-and-limit-operator-push-down}
 
-This document describes the implementation of TopN and Limit operator pushdown.
+このドキュメントでは、TopNおよびLimit演算子のプッシュダウンの実装について説明します。
 
-In the TiDB execution plan tree, the `LIMIT` clause in SQL corresponds to the Limit operator node, and the `ORDER BY` clause corresponds to the Sort operator node. The adjacent Limit operator and Sort operator are combined as the TopN operator node, which means that the top N records are returned according to a certain sorting rule. That is to say, a Limit operator is equivalent to a TopN operator node with a null sorting rule.
+TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子は、TopN演算子ノードとして結合されます。これは、特定の並べ替えルールに従って、上位N個のレコードが返されることを意味します。つまり、Limit演算子は、nullの並べ替えルールを持つTopN演算子ノードと同等です。
 
-Similar to predicate pushdown, TopN and Limit are pushed down in the execution plan tree to a position as close to the data source as possible so that the required data is filtered at an early stage. In this way, the pushdown significantly reduces the overhead of data transmission and calculation.
+述語のプッシュダウンと同様に、TopNとLimitは、実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされるため、必要なデータが早期にフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
 
-To disable this rule, refer to [Optimization Rules and Blocklist for Expression Pushdown](/blocklist-control-plan.md).
+このルールを無効にするには、 [式プッシュダウンの最適化ルールとブロックリスト](/blocklist-control-plan.md)を参照してください。
 
-## Examples
+## 例 {#examples}
 
-This section illustrates TopN pushdown through some examples.
+このセクションでは、いくつかの例を通じてTopNプッシュダウンについて説明します。
 
-### Example 1: Push down to the Coprocessors in the storage layer
+### 例1：ストレージレイヤーのコプロセッサーにプッシュダウン {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -38,11 +38,11 @@ explain select * from t order by a limit 10;
 4 rows in set (0.00 sec)
 ```
 
-In this query, the TopN operator node is pushed down to TiKV for data filtering, and each Coprocessor returns only 10 records to TiDB. After TiDB aggregates the data, the final filtering is performed.
+このクエリでは、TopNオペレーターノードはデータフィルタリングのためにTiKVにプッシュダウンされ、各コプロセッサーは10レコードのみをTiDBに返します。 TiDBがデータを集約した後、最終的なフィルタリングが実行されます。
 
-### Example 2: TopN can be pushed down into Join (the sorting rule only depends on the columns in the outer table)
+### 例2：TopNをJoinにプッシュダウンできます（並べ替えルールは外部テーブルの列にのみ依存します） {#example-2-topn-can-be-pushed-down-into-join-the-sorting-rule-only-depends-on-the-columns-in-the-outer-table}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -66,11 +66,11 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-In this query, the sorting rule of the TopN operator only depends on the columns in the outer table `t`, so a calculation can be performed before pushing down TopN to Join, to reduce the calculation cost of the Join operation. Besides, TiDB also pushes TopN down to the storage layer.
+このクエリでは、TopN演算子の並べ替えルールは、外側のテーブル`t`の列にのみ依存するため、TopNをJoinにプッシュダウンする前に計算を実行して、Join操作の計算コストを削減できます。さらに、TiDBはTopNをストレージレイヤーにプッシュダウンします。
 
-### Example 3: TopN cannot be pushed down before Join
+### 例3：参加する前にTopNをプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -92,13 +92,13 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 6 rows in set (0.00 sec)
 ```
 
-TopN cannot be pushed down before `Inner Join`. Taking the query above as an example, if you get 100 records after Join, then you can have 10 records left after TopN. However, if TopN is performed first to get 10 records, only 5 records are left after Join. In such cases, the pushdown results in different results. 
+TopNは`Inner Join`より前にプッシュダウンすることはできません。上記のクエリを例にとると、Join後に100レコードを取得した場合、TopNの後に10レコードを残すことができます。ただし、最初にTopNを実行して10レコードを取得すると、Join後に5レコードしか残りません。このような場合、プッシュダウンの結果は異なります。
 
-Similarly, TopN can neither be pushed down to the inner table of Outer Join, nor can it be pushed down when its sorting rule is related to columns on multiple tables, such as `t.a+s.a`. Only when the sorting rule of TopN exclusively depends on columns on the outer table, can TopN be pushed down. 
+同様に、TopNは、外部結合の内部テーブルにプッシュダウンすることも、ソート規則が`t.a+s.a`などの複数のテーブルの列に関連している場合にプッシュダウンすることもできません。 TopNのソート規則が外部テーブルの列のみに依存している場合にのみ、TopNをプッシュダウンできます。
 
-### Example 4: Convert TopN to Limit
+### 例4：TopNを制限に変換する {#example-4-convert-topn-to-limit}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(id int primary key, a int not null);
@@ -123,4 +123,4 @@ explain select * from t left join s on t.a = s.a order by t.id limit 10;
 
 ```
 
-In the query above, TopN is first pushed to the outer table `t`. TopN needs to sort by `t.id`, which is the primary key and can be directly read in order  (`keep order: true`) without extra sorting in TopN. Therefore, TopN is simplified as Limit.
+上記のクエリでは、TopNは最初に外部テーブル`t`にプッシュされます。 TopNは、主キーである`t.id`で並べ替える必要があり、TopNで追加の並べ替えを行わなくても、順番に直接読み取ることができます（ `keep order: true` ）。したがって、TopNはLimitとして簡略化されます。

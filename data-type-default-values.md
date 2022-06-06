@@ -3,24 +3,24 @@ title: TiDB Data Type
 summary: Learn about default values for data types in TiDB.
 ---
 
-# Default Values
+# デフォルト値 {#default-values}
 
-The `DEFAULT` value clause in a data type specification indicates a default value for a column. The default value must be a constant and cannot be a function or an expression. But for the time type, you can specify the `NOW`, `CURRENT_TIMESTAMP`, `LOCALTIME`, and `LOCALTIMESTAMP` functions as the default for `TIMESTAMP` and `DATETIME` columns.
+データ型指定の`DEFAULT`値句は、列のデフォルト値を示します。デフォルト値は定数である必要があり、関数または式にすることはできません。ただし、時間タイプの場合、 `LOCALTIME`列と`TIMESTAMP`列のデフォルトとして、 `NOW` 、および`LOCALTIMESTAMP`関数を指定`DATETIME` `CURRENT_TIMESTAMP` 。
 
-The `BLOB`, `TEXT`, and `JSON` columns __cannot__ be assigned a default value.
+`BLOB` 、および`TEXT`列にデフォルト値を割り当てる**ことはできません**`JSON`
 
-If a column definition includes no explicit `DEFAULT` value, TiDB determines the default value as follows:
+列定義に明示的な`DEFAULT`値が含まれていない場合、TiDBはデフォルト値を次のように決定します。
 
-- If the column can take `NULL` as a value, the column is defined with an explicit `DEFAULT NULL` clause.
-- If the column cannot take `NULL` as the value, TiDB defines the column with no explicit `DEFAULT` clause.
+-   列が値として`NULL`を取ることができる場合、列は明示的な`DEFAULT NULL`節で定義されます。
+-   列が値として`NULL`をとることができない場合、TiDBは明示的な`DEFAULT`句なしで列を定義します。
 
-For data entry into a `NOT NULL` column that has no explicit `DEFAULT` clause, if an `INSERT` or `REPLACE` statement includes no value for the column, TiDB handles the column according to the SQL mode in effect at the time:
+明示的な`DEFAULT`句がない`NOT NULL`列へのデータ入力の場合、 `INSERT`または`REPLACE`ステートメントに列の値が含まれていない場合、TiDBはその時点で有効なSQLモードに従って列を処理します。
 
-- If strict SQL mode is enabled, an error occurs for transactional tables, and the statement is rolled back. For nontransactional tables, an error occurs.
-- If strict mode is not enabled, TiDB sets the column to the implicit default value for the column data type.
+-   厳密なSQLモードが有効になっている場合、トランザクションテーブルでエラーが発生し、ステートメントがロールバックされます。非トランザクションテーブルの場合、エラーが発生します。
+-   strictモードが有効になっていない場合、TiDBは列を列データ型の暗黙的なデフォルト値に設定します。
 
-Implicit defaults are defined as follows:
+暗黙のデフォルトは次のように定義されます。
 
-- For numeric types, the default is 0. If declared with the `AUTO_INCREMENT` attribute, the default is the next value in the sequence.
-- For date and time types other than `TIMESTAMP`, the default is the appropriate "zero" value for the type. For `TIMESTAMP`, the default value is the current date and time.
-- For string types other than `ENUM`, the default value is the empty string. For `ENUM`, the default is the first enumeration value.
+-   数値タイプの場合、デフォルトは0です`AUTO_INCREMENT`属性で宣言されている場合、デフォルトはシーケンスの次の値です。
+-   `TIMESTAMP`以外の日付と時刻のタイプの場合、デフォルトはタイプに適切な「ゼロ」値です。 `TIMESTAMP`の場合、デフォルト値は現在の日付と時刻です。
+-   `ENUM`以外の文字列タイプの場合、デフォルト値は空の文字列です。 `ENUM`の場合、デフォルトは最初の列挙値です。

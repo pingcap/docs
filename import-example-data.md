@@ -3,13 +3,13 @@ title: Import Example Database
 summary: Install the Bikeshare example database.
 ---
 
-# Import Example Database
+# サンプルデータベースのインポート {#import-example-database}
 
-Examples used in the TiDB manual use [System Data](https://www.capitalbikeshare.com/system-data) from Capital Bikeshare, released under the [Capital Bikeshare Data License Agreement](https://www.capitalbikeshare.com/data-license-agreement).
+TiDBマニュアルで使用されている例は、 [CapitalBikeshareデータライセンス契約](https://www.capitalbikeshare.com/data-license-agreement)の下でリリースされたCapitalBikeshareの[システムデータ](https://www.capitalbikeshare.com/system-data)を使用しています。
 
-## Download all data files
+## すべてのデータファイルをダウンロードする {#download-all-data-files}
 
-The system data is available [for download in .zip files](https://s3.amazonaws.com/capitalbikeshare-data/index.html) organized per year. Downloading and extracting all files requires approximately 3GB of disk space. To download all files for years 2010-2017 using a bash script:
+システムデータは、1年に[.zipファイルでダウンロードする](https://s3.amazonaws.com/capitalbikeshare-data/index.html)整理して入手できます。すべてのファイルをダウンロードして抽出するには、約3GBのディスク容量が必要です。 bashスクリプトを使用して2010〜2017年のすべてのファイルをダウンロードするには：
 
 ```bash
 mkdir -p bikeshare-data && cd bikeshare-data
@@ -18,9 +18,9 @@ curl -L --remote-name-all https://s3.amazonaws.com/capitalbikeshare-data/{2010..
 unzip \*-tripdata.zip
 ```
 
-## Load data into TiDB
+## TiDBにデータをロードする {#load-data-into-tidb}
 
-The system data can be imported into TiDB using the following schema:
+システムデータは、次のスキーマを使用してTiDBにインポートできます。
 
 ```sql
 CREATE DATABASE bikeshare;
@@ -40,7 +40,7 @@ CREATE TABLE trips (
 );
 ```
 
-You can import files individually using the example `LOAD DATA` command here, or import all files using the bash loop below:
+ここで例`LOAD DATA`のコマンドを使用してファイルを個別にインポートするか、以下のbashループを使用してすべてのファイルをインポートできます。
 
 ```sql
 SET tidb_dml_batch_size = 20000;
@@ -52,13 +52,13 @@ LOAD DATA LOCAL INFILE '2017Q1-capitalbikeshare-tripdata.csv' INTO TABLE trips
 end_station_number, end_station, bike_number, member_type);
 ```
 
-### Import all files
+### すべてのファイルをインポートする {#import-all-files}
 
-> **Note:**
+> **ノート：**
 >
-> When you start the MySQL client, use the `--local-infile=1` option.
+> MySQLクライアントを起動するときは、 `--local-infile=1`オプションを使用します。
 
-To import all `*.csv` files into TiDB in a bash loop:
+`*.csv`のファイルすべてをbashループでTiDBにインポートするには：
 
 ```bash
 for FILE in *.csv; do

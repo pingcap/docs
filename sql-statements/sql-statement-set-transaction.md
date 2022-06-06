@@ -3,11 +3,11 @@ title: SET TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of SET TRANSACTION for the TiDB database.
 ---
 
-# SET TRANSACTION
+# トランザクションの設定 {#set-transaction}
 
-The `SET TRANSACTION` statement can be used to change the current isolation level on a `GLOBAL` or `SESSION` basis. This syntax is an alternative to `SET transaction_isolation='new-value'` and is included for compatibility with both MySQL, and the SQL standards.
+`SET TRANSACTION`ステートメントを使用して、現在の分離レベルを`GLOBAL`または`SESSION`ベースで変更できます。この構文は`SET transaction_isolation='new-value'`の代替であり、MySQLとSQL標準の両方との互換性のために含まれています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 SetStmt ::=
@@ -26,7 +26,7 @@ AsOfClause ::=
     ( 'AS' 'OF' 'TIMESTAMP' Expression)
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
@@ -60,14 +60,14 @@ mysql> SHOW SESSION VARIABLES LIKE 'transaction_isolation';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* TiDB supports the ability to set a transaction as read-only in syntax only.
-* The isolation levels `READ-UNCOMMITTED` and `SERIALIZABLE` are not supported.
-* The `REPEATABLE-READ` isolation level is achieved through using the snapshot isolation technology, which is partly compatible with MySQL.
-* In pessimistic transactions, TiDB supports two isolation levels compatible with MySQL: `REPEATABLE-READ` and `READ-COMMITTED`. For a detailed description, see [Isolation Levels](/transaction-isolation-levels.md).
+-   TiDBは、構文のみでトランザクションを読み取り専用として設定する機能をサポートしています。
+-   分離レベル`READ-UNCOMMITTED`および`SERIALIZABLE`はサポートされていません。
+-   `REPEATABLE-READ`の分離レベルは、MySQLと部分的に互換性のあるスナップショット分離テクノロジを使用して実現されます。
+-   悲観的なトランザクションでは、TiDBはMySQLと互換性のある2つの分離レベル（ `REPEATABLE-READ`と`READ-COMMITTED` ）をサポートします。詳細な説明については、 [分離レベル](/transaction-isolation-levels.md)を参照してください。
 
-## See also
+## も参照してください {#see-also}
 
-* [`SET [GLOBAL|SESSION] <variable>`](/sql-statements/sql-statement-set-variable.md)
-* [Isolation Levels](/transaction-isolation-levels.md)
+-   [`SET [GLOBAL|SESSION] &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [分離レベル](/transaction-isolation-levels.md)

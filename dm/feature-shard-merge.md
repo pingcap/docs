@@ -3,33 +3,33 @@ title: Merge and Migrate Data from Sharded Tables
 summary: Learn how DM merges and migrates data from sharded tables.
 ---
 
-# Merge and Migrate Data from Sharded Tables
+# シャーディングされたテーブルからのデータのマージと移行 {#merge-and-migrate-data-from-sharded-tables}
 
-This document introduces the sharding support feature provided by Data Migration (DM). This feature allows you to merge and migrate the data of tables with the same or different table schemas in the upstream MySQL or MariaDB instances into one same table in the downstream TiDB. It supports not only migrating the upstream DML statements, but also coordinating to migrate the table schema change using DDL statements in multiple upstream sharded tables.
+このドキュメントでは、データ移行（DM）によって提供されるシャーディングサポート機能を紹介します。この機能を使用すると、アップストリームのMySQLまたはMariaDBインスタンスの同じまたは異なるテーブルスキーマを持つテーブルのデータを、ダウンストリームのTiDBの1つの同じテーブルにマージして移行できます。アップストリームDMLステートメントの移行をサポートするだけでなく、複数のアップストリームシャードテーブルでDDLステートメントを使用してテーブルスキーマの変更を移行するための調整もサポートします。
 
-## Overview
+## 概要 {#overview}
 
-DM supports merging and migrating the data of multiple upstream sharded tables into one table in TiDB. During the migration, the DDL of each sharded table, and the DML before and after the DDL need to be coordinated. For the usage scenarios, DM supports two different modes: pessimistic mode and optimistic mode.
+DMは、複数のアップストリームシャーディングテーブルのデータをTiDBの1つのテーブルにマージおよび移行することをサポートします。移行中は、各シャーディングテーブルのDDLと、DDLの前後のDMLを調整する必要があります。使用シナリオでは、DMは悲観的モードと楽観的モードの2つの異なるモードをサポートします。
 
-> **Note:**
+> **ノート：**
 >
-> - To merge and migrate data from sharded tables,  you must set `shard-mode` in the task configuration file. 
-> - DM uses the pessimistic mode by default for the merge of the sharding support feature. (If there is no special description in the document, use the pessimistic mode by default.)
-> - It is not recommended to use this mode if you do not understand the principles and restrictions of the optimistic mode. Otherwise, it may cause serious consequences such as migration interruption and even data inconsistency.
+> -   シャーディングされたテーブルからデータをマージおよび移行するには、タスク構成ファイルで`shard-mode`を設定する必要があります。
+> -   DMは、シャーディングサポート機能のマージにデフォルトでペシミスティックモードを使用します。 （ドキュメントに特別な説明がない場合は、デフォルトで悲観的モードを使用します。）
+> -   楽観的モードの原則と制限を理解していない場合は、このモードを使用することはお勧めしません。そうしないと、移行の中断やデータの不整合などの深刻な結果を引き起こす可能性があります。
 
-### The pessimistic mode
+### 悲観的なモード {#the-pessimistic-mode}
 
-When an upstream sharded table executes a DDL statement, the migration of this sharded table will be suspended. After all other sharded tables execute the same DDL, the DDL will be executed in the downstream and the data migration task will restart. The advantage of this mode is that it can ensure that the data migrated to the downstream will not go wrong. For details, refer to [shard merge in pessimistic mode](/dm/feature-shard-merge-pessimistic.md).
- 
-### The optimistic mode
+アップストリームのシャードテーブルがDDLステートメントを実行すると、このシャードテーブルの移行は一時停止されます。他のすべてのシャードテーブルが同じDDLを実行した後、DDLはダウンストリームで実行され、データ移行タスクが再開されます。このモードの利点は、ダウンストリームに移行されたデータが正しく機能しないことを保証できることです。詳しくは[悲観的なモードでのシャードマージ](/dm/feature-shard-merge-pessimistic.md)をご覧ください。
 
-DM will automatically modify the DDL executed on a sharded table into a statement compatible with other sharded tables, and then migrate to the downstream. This will not block the DML migration of any sharded tables. The advantage of this mode is that it will not block data migration when processing DDL. However, improper use will cause migration interruption or even data inconsistency. For details, refer to [shard merge in optimistic mode](/dm/feature-shard-merge-optimistic.md).
+### 楽観的なモード {#the-optimistic-mode}
 
-### Contrast
+DMは、シャードテーブルで実行されたDDLを、他のシャードテーブルと互換性のあるステートメントに自動的に変更してから、ダウンストリームに移行します。これにより、シャードテーブルのDML移行がブロックされることはありません。このモードの利点は、DDLの処理時にデータ移行をブロックしないことです。ただし、不適切な使用は、移行の中断やデータの不整合を引き起こす可能性があります。詳しくは[楽観的モードでのシャードマージ](/dm/feature-shard-merge-optimistic.md)をご覧ください。
 
-| Pessimistic mode   | Optimistic mode   |
-| :----------- | :----------- |
-| Sharded tables that executes DDL suspend DML migration | Sharded tables that executes DDL continue DML migration |
-| The DDL execution order and statements of each sharded table must be the same | Each sharded table only needs to keep the table schema compatible with each other  |
-| The DDL is migrated to the downstream after the entire shard group is consistent | The DDL of each sharded table immediately affects the downstream |
-| Wrong DDL operations can be intercepted after the detection | Wrong DDL operations will be migrated to the downstream, which may cause inconsistency between the upstream and downstream data before the detection  |
+### 対比 {#contrast}
+
+| 悲観的なモード                                    | 楽観的モード                                                                   |
+| :----------------------------------------- | :----------------------------------------------------------------------- |
+| DDLを実行するシャードテーブルはDML移行を一時停止します             | DDLを実行するシャードテーブルはDML移行を続行します                                             |
+| DDLの実行順序と各シャーディングテーブルのステートメントは同じである必要があります | 各シャーディングテーブルは、テーブルスキーマの相互互換性を維持する必要があるだけです。                              |
+| シャードグループ全体が一貫した後、DDLはダウンストリームに移行されます       | 各シャーディングテーブルのDDLは、すぐにダウンストリームに影響します                                      |
+| 検出後に誤ったDDL操作が傍受される可能性があります                 | 間違ったDDL操作がダウンストリームに移行されるため、検出前にアップストリームデータとダウンストリームデータの間に不整合が生じる可能性があります |

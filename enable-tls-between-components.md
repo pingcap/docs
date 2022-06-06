@@ -3,34 +3,34 @@ title: Enable TLS Between TiDB Components
 summary: Learn how to enable TLS authentication between TiDB components.
 ---
 
-# Enable TLS Between TiDB Components
+# TiDBコンポーネント間のTLSを有効にする {#enable-tls-between-tidb-components}
 
-This document describes how to enable encrypted data transmission between components within a TiDB cluster. Once enabled, encrypted transmission is used between the following components:
+このドキュメントでは、TiDBクラスタ内のコンポーネント間で暗号化されたデータ送信を有効にする方法について説明します。有効にすると、暗号化された送信が次のコンポーネント間で使用されます。
 
-- TiDB and TiKV; TiDB and PD
-- TiKV and PD
-- TiDB Control and TiDB; TiKV Control and TiKV; PD Control and PD
-- Internal communication within each TiKV, PD, TiDB cluster
+-   TiDBおよびTiKV; TiDBとPD
+-   TiKVとPD
+-   TiDBコントロールとTiDB; TiKVコントロールとTiKV; PD制御とPD
+-   各TiKV、PD、TiDBクラスタ内の内部通信
 
-Currently, it is not supported to only enable encrypted transmission of some specific components.
+現在、一部の特定のコンポーネントの暗号化された送信のみを有効にすることはサポートされていません。
 
-## Configure and enable encrypted data transmission
+## 暗号化されたデータ送信を構成して有効にする {#configure-and-enable-encrypted-data-transmission}
 
-1. Prepare certificates.
+1.  証明書を準備します。
 
-    It is recommended to prepare a server certificate for TiDB, TiKV, and PD separately. Make sure that these components can authenticate each other. The Control tools of TiDB, TiKV, and PD can choose to share one client certificate.
+    TiDB、TiKV、およびPDのサーバー証明書を個別に準備することをお勧めします。これらのコンポーネントが相互に認証できることを確認してください。 TiDB、TiKV、およびPDの制御ツールは、1つのクライアント証明書を共有することを選択できます。
 
-    You can use tools like `openssl`, `easy-rsa` and `cfssl` to generate self-signed certificates.
+    `openssl`などのツールを使用して、自己署名証明`cfssl`を生成でき`easy-rsa` 。
 
-    If you choose `openssl`, you can refer to [generating self-signed certificates](/generate-self-signed-certificates.md).
+    `openssl`を選択すると、 [自己署名証明書の生成](/generate-self-signed-certificates.md)を参照できます。
 
-2. Configure certificates.
+2.  証明書を構成します。
 
-    To enable mutual authentication among TiDB components, configure the certificates of TiDB, TiKV, and PD as follows.
+    TiDBコンポーネント間の相互認証を有効にするには、TiDB、TiKV、およびPDの証明書を次のように構成します。
 
-    - TiDB
+    -   TiDB
 
-        Configure in the configuration file or command-line arguments:
+        構成ファイルまたはコマンドライン引数で構成します。
 
         ```toml
         [security]
@@ -42,9 +42,9 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         cluster-ssl-key = "/path/to/tidb-server-key.pem"
         ```
 
-    - TiKV
+    -   TiKV
 
-        Configure in the configuration file or command-line arguments, and set the corresponding URL to `https`:
+        構成ファイルまたはコマンドライン引数で構成し、対応するURLを`https`に設定します。
 
         ```toml
         [security]
@@ -57,9 +57,9 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         key-path = "/path/to/tikv-server-key.pem"
         ```
 
-    - PD
+    -   PD
 
-        Configure in the configuration file or command-line arguments, and set the corresponding URL to `https`:
+        構成ファイルまたはコマンドライン引数で構成し、対応するURLを`https`に設定します。
 
         ```toml
         [security]
@@ -72,11 +72,11 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         key-path = "/path/to/pd-server-key.pem"
         ```
 
-    - TiFlash (New in v4.0.5)
+    -   TiFlash（v4.0.5の新機能）
 
-        Configure in the `tiflash.toml` file, and change the `http_port` item to `https_port`:
+        `tiflash.toml`のファイルで構成し、 `http_port`の項目を`https_port`に変更します。
 
-         ```toml
+        ```toml
         [security]
         ## The path for certificates. An empty string means that secure connections are disabled.
         # Path of the file that contains a list of trusted SSL CAs. If it is set, the following settings `cert_path` and `key_path` are also needed.
@@ -87,7 +87,7 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         key_path = "/path/to/tiflash-server-key.pem"
         ```
 
-        Configure in the `tiflash-learner.toml` file:
+        `tiflash-learner.toml`のファイルで構成します。
 
         ```toml
         [security]
@@ -99,49 +99,49 @@ Currently, it is not supported to only enable encrypted transmission of some spe
         key-path = "/path/to/tiflash-server-key.pem"
         ```
 
-    - TiCDC
+    -   TiCDC
 
-        Configure in the command-line arguments and set the corresponding URL to `https`:
+        コマンドライン引数で構成し、対応するURLを`https`に設定します。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```bash
         cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem
         ```
 
-        Now, encrypted transmission among TiDB components is enabled.
+        これで、TiDBコンポーネント間の暗号化された送信が有効になります。
 
-    > **Note:**
+    > **ノート：**
     >
-    > After enabling encrypted transmission in a TiDB cluster, if you need to connect to the cluster using tidb-ctl, tikv-ctl, or pd-ctl, specify the client certificate. For example:
+    > TiDBクラスタで暗号化された送信を有効にした後、tidb-ctl、tikv-ctl、またはpd-ctlを使用してクラスタに接続する必要がある場合は、クライアント証明書を指定します。例えば：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     ./tidb-ctl -u https://127.0.0.1:10080 --ca /path/to/ca.pem --ssl-cert /path/to/client.pem --ssl-key /path/to/client-key.pem
     ```
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     tiup ctl pd -u https://127.0.0.1:2379 --cacert /path/to/ca.pem --cert /path/to/client.pem --key /path/to/client-key.pem
     ```
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     ./tikv-ctl --host="127.0.0.1:20160" --ca-path="/path/to/ca.pem" --cert-path="/path/to/client.pem" --key-path="/path/to/clinet-key.pem"
     ```
 
-### Verify component caller's identity
+### コンポーネントの呼び出し元のIDを確認する {#verify-component-caller-s-identity}
 
-The Common Name is used for caller verification. In general, the callee needs to verify the caller's identity, in addition to verifying the key, the certificates, and the CA provided by the caller. For example, TiKV can only be accessed by TiDB, and other visitors are blocked even though they have legitimate certificates.
+共通名は、発信者の確認に使用されます。一般に、呼び出し先は、呼び出し元から提供されたキー、証明書、およびCAの確認に加えて、呼び出し元のIDを確認する必要があります。たとえば、TiKVにはTiDBからのみアクセスでき、他の訪問者は正当な証明書を持っていてもブロックされます。
 
-To verify component caller's identity, you need to mark the certificate user identity using `Common Name` when generating the certificate, and to check the caller's identity by configuring the `Common Name` list for the callee.
+コンポーネントの呼び出し元のIDを確認するには、証明書の生成時に`Common Name`を使用して証明書のユーザーIDをマークし、呼び出し先の`Common Name`リストを構成して呼び出し元のIDを確認する必要があります。
 
-- TiDB
+-   TiDB
 
-    Configure in the configuration file or command-line arguments:
+    構成ファイルまたはコマンドライン引数で構成します。
 
     ```toml
     [security]
@@ -151,9 +151,9 @@ To verify component caller's identity, you need to mark the certificate user ide
     ]
     ```
 
-- TiKV
+-   TiKV
 
-    Configure in the configuration file or command-line arguments:
+    構成ファイルまたはコマンドライン引数で構成します。
 
     ```toml
     [security]
@@ -162,45 +162,45 @@ To verify component caller's identity, you need to mark the certificate user ide
     ]
     ```
 
-- PD
+-   PD
 
-    Configure in the configuration file or command-line arguments:
+    構成ファイルまたはコマンドライン引数で構成します。
 
     ```toml
     [security]
     cert-allowed-cn = ["TiKV-Server", "TiDB-Server", "PD-Control"]
     ```
 
-- TiCDC
+-   TiCDC
 
-    Configure in the command-line arguments:
+    コマンドライン引数で構成します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     cdc server --pd=https://127.0.0.1:2379 --log-file=ticdc.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301 --ca=/path/to/ca.pem --cert=/path/to/ticdc-cert.pem --key=/path/to/ticdc-key.pem --cert-allowed-cn="client1,client2"
     ```
 
-- TiFlash (New in v4.0.5)
+-   TiFlash（v4.0.5の新機能）
 
-    Configure in the `tiflash.toml` file or command-line arguments:
+    `tiflash.toml`のファイルまたはコマンドライン引数で構成します。
 
     ```toml
     [security]
     cert_allowed_cn = ["TiKV-Server", "TiDB-Server"]
     ```
 
-    Configure in the `tiflash-learner.toml` file:
+    `tiflash-learner.toml`のファイルで構成します。
 
     ```toml
     [security]
     cert-allowed-cn = ["PD-Server", "TiKV-Server", "TiFlash-Server"]
     ```
-    
-### Reload certificates
 
-To reload the certificates and the keys, TiDB, PD, TiKV, and all kinds of clients reread the current certificates and the key files each time a new connection is created. Currently, you cannot reload the CA certificate.
+### 証明書をリロードします {#reload-certificates}
 
-## See also
+証明書とキーをリロードするには、TiDB、PD、TiKV、およびすべての種類のクライアントが、新しい接続が作成されるたびに現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
 
-- [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md)
+## も参照してください {#see-also}
+
+-   [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)

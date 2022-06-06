@@ -3,231 +3,231 @@ title: Cluster Management FAQs
 summary: Learn about the FAQs related to TiDB cluster management.
 ---
 
-# Cluster Management FAQs
+# クラスタ管理に関するFAQ {#cluster-management-faqs}
 
-This document summarizes the FAQs related to TiDB cluster management.
+このドキュメントは、TiDBクラスタ管理に関連するFAQをまとめたものです。
 
-## Daily management
+## 日常の管理 {#daily-management}
 
-This section describes common problems you might encounter during daily cluster management, their causes, and solutions.
+このセクションでは、日常のクラスタ管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### How to log into TiDB?
+### TiDBにログインする方法は？ {#how-to-log-into-tidb}
 
-You can log into TiDB like logging into MySQL. For example:
+MySQLにログインするのと同じようにTiDBにログインできます。例えば：
 
 ```bash
 mysql -h 127.0.0.1 -uroot -P4000
 ```
 
-### How to modify the system variables in TiDB?
+### TiDBでシステム変数を変更するにはどうすればよいですか？ {#how-to-modify-the-system-variables-in-tidb}
 
-Similar to MySQL, TiDB includes static and solid parameters. You can directly modify static parameters using `set global xxx = n`, but the new value of a parameter is only effective within the life cycle in this instance.
+MySQLと同様に、TiDBには静的パラメータとソリッドパラメータが含まれています。 `set global xxx = n`を使用して静的パラメーターを直接変更できますが、パラメーターの新しい値は、この場合のライフサイクル内でのみ有効です。
 
-### Where and what are the data directories in TiDB (TiKV)?
+### TiDB（TiKV）のデータディレクトリはどこにありますか？ {#where-and-what-are-the-data-directories-in-tidb-tikv}
 
-TiKV data is located in the [`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir), which include four directories of backup, db, raft, and snap, used to store backup, data, Raft data, and mirror data respectively.
+TiKVデータは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、データベース、ラフト、スナップの4つのディレクトリが含まれ、それぞれバックアップ、データ、ラフトデータ、ミラーデータを格納するために使用されます。
 
-### What are the system tables in TiDB?
+### TiDBのシステムテーブルは何ですか？ {#what-are-the-system-tables-in-tidb}
 
-Similar to MySQL, TiDB includes system tables as well, used to store the information required by the server when it runs. See [TiDB system table](/mysql-schema.md).
+MySQLと同様に、TiDBにはシステムテーブルも含まれており、サーバーの実行時にサーバーに必要な情報を格納するために使用されます。 [TiDBシステムテーブル](/mysql-schema.md)を参照してください。
 
-### Where are the TiDB/PD/TiKV logs?
+### TiDB / PD / TiKVログはどこにありますか？ {#where-are-the-tidb-pd-tikv-logs}
 
-By default, TiDB/PD/TiKV outputs standard error in the logs. If a log file is specified by `--log-file` during the startup, the log is output to the specified file and executes rotation daily.
+デフォルトでは、TiDB / PD/TiKVはログに標準エラーを出力します。起動時にログファイルを`--log-file`で指定すると、指定したファイルにログが出力され、毎日ローテーションが実行されます。
 
-### How to safely stop TiDB?
+### TiDBを安全に停止する方法は？ {#how-to-safely-stop-tidb}
 
-- If a load balancer is running (recommended): Stop the load balancer and execute the SQL statement `SHUTDOWN`. Then TiDB waits for a period as specified by [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50) until all sessions are terminated. Then TiDB stops running.
+-   ロードバランサーが実行されている場合（推奨）：ロードバランサーを停止し、SQLステートメント`SHUTDOWN`を実行します。次に、TiDBは、すべてのセッションが終了するまで、 [`graceful-wait-before-shutdown`](/tidb-configuration-file.md#graceful-wait-before-shutdown-new-in-v50)で指定された期間待機します。その後、TiDBは実行を停止します。
 
-- If no load balancer is running: Execute the `SHUTDOWN` statement. Then TiDB components are gracefully stopped.
+-   ロードバランサーが実行されていない場合： `SHUTDOWN`ステートメントを実行します。その後、TiDBコンポーネントは正常に停止します。
 
-### Can `kill` be executed in TiDB?
+### <code>kill</code>はTiDBで実行できますか？ {#can-code-kill-code-be-executed-in-tidb}
 
-- Kill DML statements:
+-   DMLステートメントを強制終了します。
 
-    First use `information_schema.cluster_processlist` to find TiDB instance address and session ID. Connect the client directly to the TiDB instance that is executing the DML statement. Then run the `kill tidb session_id` statement.
+    最初に`information_schema.cluster_processlist`を使用して、TiDBインスタンスアドレスとセッションIDを見つけます。 DMLステートメントを実行しているTiDBインスタンスにクライアントを直接接続します。次に、 `kill tidb session_id`ステートメントを実行します。
 
-    If the client connects to another TiDB instance or there is a proxy between the client and the TiDB cluster, the `kill tidb session_id` statement might be routed to another TiDB instance, which might incorrectly terminate another session. For details, see [`KILL`](/sql-statements/sql-statement-kill.md).
+    クライアントが別のTiDBインスタンスに接続するか、クライアントとTiDBクラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別のTiDBインスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
-- Kill DDL statements: First use `admin show ddl jobs` to find the ID of the DDL job you need to terminate, and then run `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`. For more details, see the [`ADMIN` statement](/sql-statements/sql-statement-admin.md).
+-   DDLステートメントを強制終了します。最初に`admin show ddl jobs`を使用して終了する必要のあるDDLジョブのIDを見つけてから、 `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
 
-### Does TiDB support session timeout?
+### TiDBはセッションタイムアウトをサポートしていますか？ {#does-tidb-support-session-timeout}
 
-TiDB currently supports two timeouts, [`wait_timeout`](/system-variables.md#wait_timeout) and [`interactive_timeout`](/system-variables.md#interactive_timeout).
+TiDBは現在、 [`wait_timeout`](/system-variables.md#wait_timeout)と[`interactive_timeout`](/system-variables.md#interactive_timeout)の2つのタイムアウトをサポートしています。
 
-### What is the TiDB version management strategy for production environment? How to avoid frequent upgrade?
+### 本番環境のTiDBバージョン管理戦略は何ですか？頻繁なアップグレードを回避する方法は？ {#what-is-the-tidb-version-management-strategy-for-production-environment-how-to-avoid-frequent-upgrade}
 
-Currently, TiDB has a standard management of various versions. Each release contains a detailed change log and [release notes](/releases/release-notes.md). Whether it is necessary to upgrade in the production environment depends on the application system. It is recommended to learn the details about the functional differences between the previous and later versions before upgrading.
+現在、TiDBにはさまざまなバージョンの標準管理があります。各リリースには、詳細な変更ログと[リリースノート](/releases/release-notes.md)が含まれています。実稼働環境でアップグレードする必要があるかどうかは、アプリケーションシステムによって異なります。アップグレードする前に、以前のバージョンと新しいバージョンの機能の違いについて詳しく知ることをお勧めします。
 
-Take `Release Version: v1.0.3-1-ga80e796` as an example of version number description:
+バージョン番号の説明の例として`Release Version: v1.0.3-1-ga80e796`を取り上げます。
 
-- `v1.0.3` indicates the standard GA version.
-- `-1` indicates the current version has one commit.
-- `ga80e796` indicates the version `git-hash`.
+-   `v1.0.3`は標準GAバージョンを示します。
+-   `-1`は、現在のバージョンに1つのコミットがあることを示します。
+-   `ga80e796`はバージョン`git-hash`を示します。
 
-### What's the difference between various TiDB master versions?
+### さまざまなTiDBマスターバージョンの違いは何ですか？ {#what-s-the-difference-between-various-tidb-master-versions}
 
-The TiDB community is highly active. After the 1.0 GA release, the engineers have been keeping optimizing and fixing bugs. Therefore, the TiDB version is updated quite fast. If you want to keep informed of the latest version, see [TiDB Weekly update](https://pingcap.com/weekly/).
+TiDBコミュニティは非常に活発です。 1.0 GAのリリース後、エンジニアはバグの最適化と修正を続けています。したがって、TiDBバージョンは非常に高速に更新されます。最新バージョンの情報を常に入手したい場合は、 [TiDBウィークリーアップデート](https://pingcap.com/weekly/)を参照してください。
 
-It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup.md). TiDB has a unified management of the version number after the 1.0 GA release. You can view the version number using the following two methods:
+[TiUPを使用してTiDBをデプロイする](/production-deployment-using-tiup.md)に推奨されます。 TiDBは、1.0GAリリース以降のバージョン番号を一元管理しています。次の2つの方法を使用して、バージョン番号を表示できます。
 
-- `select tidb_version()`
-- `tidb-server -V`
+-   `select tidb_version()`
+-   `tidb-server -V`
 
-### Is there a graphical deployment tool for TiDB?
+### TiDB用のグラフィカルな展開ツールはありますか？ {#is-there-a-graphical-deployment-tool-for-tidb}
 
-Currently no.
+現在はありません。
 
-### How to scale TiDB horizontally?
+### TiDBを水平方向にスケーリングする方法は？ {#how-to-scale-tidb-horizontally}
 
-As your business grows, your database might face the following three bottlenecks:
+ビジネスが成長するにつれて、データベースは次の3つのボトルネックに直面する可能性があります。
 
-- Lack of storage resources which means that the disk space is not enough.
+-   ストレージリソースの不足。これは、ディスク容量が十分でないことを意味します。
 
-- Lack of computing resources such as high CPU occupancy.
+-   CPU占有率が高いなどのコンピューティングリソースの不足。
 
-- Not enough write and read capacity.
+-   書き込みおよび読み取りの容量が不足しています。
 
-You can scale TiDB as your business grows.
+ビジネスの成長に合わせてTiDBを拡張できます。
 
-- If the disk space is not enough, you can increase the capacity simply by adding more TiKV nodes. When the new node is started, PD will migrate the data from other nodes to the new node automatically.
+-   ディスク容量が足りない場合は、TiKVノードを追加するだけで容量を増やすことができます。新しいノードが開始されると、PDはデータを他のノードから新しいノードに自動的に移行します。
 
-- If the computing resources are not enough, check the CPU consumption situation first before adding more TiDB nodes or TiKV nodes. When a TiDB node is added, you can configure it in the Load Balancer.
+-   コンピューティングリソースが十分でない場合は、TiDBノードまたはTiKVノードを追加する前に、まずCPU消費状況を確認してください。 TiDBノードが追加されると、ロードバランサーで構成できます。
 
-- If the capacity is not enough, you can add both TiDB nodes and TiKV nodes.
+-   容量が足りない場合は、TiDBノードとTiKVノードの両方を追加できます。
 
-### If Percolator uses distributed locks and the crash client keeps the lock, will the lock not be released?
+### Percolatorが分散ロックを使用し、クラッシュクライアントがロックを保持している場合、ロックは解放されませんか？ {#if-percolator-uses-distributed-locks-and-the-crash-client-keeps-the-lock-will-the-lock-not-be-released}
 
-For more details, see [Percolator and TiDB Transaction Algorithm](https://pingcap.com/blog-cn/percolator-and-txn/) in Chinese.
+詳細については、中国語の[パーコレーターとTiDBトランザクションアルゴリズム](https://pingcap.com/blog-cn/percolator-and-txn/)を参照してください。
 
-### Why does TiDB use gRPC instead of Thrift? Is it because Google uses it?
+### TiDBがThriftの代わりにgRPCを使用するのはなぜですか？グーグルが使っているからですか？ {#why-does-tidb-use-grpc-instead-of-thrift-is-it-because-google-uses-it}
 
-Not really. We need some good features of gRPC, such as flow control, encryption and streaming.
+あまり。フロー制御、暗号化、ストリーミングなど、gRPCの優れた機能が必要です。
 
-### What does the 92 indicate in `like(bindo.customers.name, jason%, 92)`?
+### 92は<code>like(bindo.customers.name, jason%, 92)</code>何を示していますか？ {#what-does-the-92-indicate-in-code-like-bindo-customers-name-jason-92-code}
 
-The 92 indicates the escape character, which is ASCII 92 by default.
+92はエスケープ文字を示し、デフォルトではASCII92です。
 
-### Why does the data length shown by `information_schema.tables.data_length` differ from the store size on the TiKV monitoring panel?
+### <code>information_schema.tables.data_length</code>で表示されるデータ長がTiKV監視パネルのストアサイズと異なるのはなぜですか？ {#why-does-the-data-length-shown-by-code-information-schema-tables-data-length-code-differ-from-the-store-size-on-the-tikv-monitoring-panel}
 
-Two reasons:
+2つの理由：
 
-- The two results are calculated in different ways. `information_schema.tables.data_length` is an estimated value by calculating the averaged length of each row, while the store size on the TiKV monitoring panel sums up the length of the data files (the SST files of RocksDB) in a single TiKV instance.
-- `information_schema.tables.data_length` is a logical value, while the store size is a physical value. The redundant data generated by multiple versions of the transaction is not included in the logical value, while the redundant data is compressed by TiKV in the physical value.
+-   2つの結果は異なる方法で計算されます。 `information_schema.tables.data_length`は、各行の平均の長さを計算することによる推定値です。一方、TiKV監視パネルのストアサイズは、単一のTiKVインスタンス内のデータファイル（RocksDBのSSTファイル）の長さを合計します。
+-   `information_schema.tables.data_length`は論理値であり、ストアサイズは物理値です。トランザクションの複数のバージョンによって生成された冗長データは論理値に含まれませんが、冗長データは物理値のTiKVによって圧縮されます。
 
-### Why does the transaction not use the Async Commit or the one-phase commit feature?
+### トランザクションが非同期コミットまたは1フェーズコミット機能を使用しないのはなぜですか？ {#why-does-the-transaction-not-use-the-async-commit-or-the-one-phase-commit-feature}
 
-In the following situations, even you have enabled the [Async Commit](/system-variables.md#tidb_enable_async_commit-new-in-v50) feature and the [one-phase commit](/system-variables.md#tidb_enable_1pc-new-in-v50) feature using the system variables, TiDB will not use these features:
+次の状況では、システム変数を使用して[非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)つの機能と[ワンフェーズコミット](/system-variables.md#tidb_enable_1pc-new-in-v50)の機能を有効にした場合でも、TiDBはこれらの機能を使用しません。
 
-- If you have enabled TiDB Binlog, restricted by the implementation of TiDB Binlog, TiDB does not use the Async Commit or one-phase commit feature.
-- TiDB uses the Async Commit or one-phase commit features only when no more than 256 key-value pairs are written in the transaction and the total size of keys is no more than 4 KB. This is because, for transactions with a large amount of data to write, using Async Commit cannot greatly improve the performance.
+-   TiDB Binlogの実装によって制限されている、TiDB Binlogを有効にしている場合、TiDBは非同期コミットまたは1フェーズコミット機能を使用しません。
+-   TiDBは、トランザクションに256以下のキーと値のペアが書き込まれ、キーの合計サイズが4 KB以下の場合にのみ、非同期コミットまたは1フェーズコミット機能を使用します。これは、書き込むデータが大量のトランザクションの場合、非同期コミットを使用してもパフォーマンスを大幅に向上させることができないためです。
 
-## PD management
+## PD管理 {#pd-management}
 
-This section describes common problems you may encounter during PD management, their causes, and solutions.
+このセクションでは、PD管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### The `TiKV cluster is not bootstrapped` message is displayed when I access PD
+### PDにアクセスすると、 <code>TiKV cluster is not bootstrapped</code>というメッセージが表示されます {#the-code-tikv-cluster-is-not-bootstrapped-code-message-is-displayed-when-i-access-pd}
 
-Most of the APIs of PD are available only when the TiKV cluster is initialized. This message is displayed if PD is accessed when PD is started while TiKV is not started when a new cluster is deployed. If this message is displayed, start the TiKV cluster. When TiKV is initialized, PD is accessible.
+PDのほとんどのAPIは、TiKVクラスタが初期化されている場合にのみ使用できます。このメッセージは、新しいクラスタがデプロイされたときにTiKVが開始されていないときに、PDが開始されたときにPDにアクセスした場合に表示されます。このメッセージが表示された場合は、TiKVクラスタを起動してください。 TiKVが初期化されると、PDにアクセスできます。
 
-### The `etcd cluster ID mismatch` message is displayed when starting PD
+### PDの開始時に<code>etcd cluster ID mismatch</code>メッセージが表示されます {#the-code-etcd-cluster-id-mismatch-code-message-is-displayed-when-starting-pd}
 
-This is because the `--initial-cluster` in the PD startup parameter contains a member that doesn't belong to this cluster. To solve this problem, check the corresponding cluster of each member, remove the wrong member, and then restart PD.
+これは、PDスタートアップパラメータの`--initial-cluster`に、このクラスタに属していないメンバーが含まれているためです。この問題を解決するには、各メンバーの対応するクラスタを確認し、間違ったメンバーを削除してから、PDを再起動します。
 
-### What's the maximum tolerance for time synchronization error of PD?
+### PDの時刻同期誤差の最大許容値はどれくらいですか？ {#what-s-the-maximum-tolerance-for-time-synchronization-error-of-pd}
 
-PD can tolerate any synchronization error, but a larger error value means a larger gap between the timestamp allocated by the PD and the physical time, which will affect functions such as read of historical versions.
+PDは同期エラーを許容できますが、エラー値が大きいほど、PDによって割り当てられたタイムスタンプと物理時間の間のギャップが大きくなり、履歴バージョンの読み取りなどの機能に影響します。
 
-### How does the client connection find PD?
+### クライアント接続はどのようにしてPDを見つけますか？ {#how-does-the-client-connection-find-pd}
 
-The client connection can only access the cluster through TiDB. TiDB connects PD and TiKV. PD and TiKV are transparent to the client. When TiDB connects to any PD, the PD tells TiDB who is the current leader. If this PD is not the leader, TiDB reconnects to the leader PD.
+クライアント接続は、TiDBを介してのみクラスタにアクセスできます。 TiDBはPDとTiKVを接続します。 PDとTiKVはクライアントに対して透過的です。 TiDBがPDに接続すると、PDはTiDBに現在のリーダーを通知します。このPDがリーダーでない場合、TiDBはリーダーPDに再接続します。
 
-### What is the relationship between each status (Up, Disconnect, Offline, Down, Tombstone) of a TiKV store?
+### TiKVストアの各ステータス（アップ、切断、オフライン、ダウン、トゥームストーン）の間にはどのような関係がありますか？ {#what-is-the-relationship-between-each-status-up-disconnect-offline-down-tombstone-of-a-tikv-store}
 
-For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+各ステータスの関係については、 [TiKVストアの各ステータス間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
-You can use PD Control to check the status information of a TiKV store. 
+PD制御を使用して、TiKVストアのステータス情報を確認できます。
 
-### What is the difference between the `leader-schedule-limit` and `region-schedule-limit` scheduling parameters in PD?
+### PDの<code>leader-schedule-limit</code>と<code>region-schedule-limit</code>スケジューリングパラメータの違いは何ですか？ {#what-is-the-difference-between-the-code-leader-schedule-limit-code-and-code-region-schedule-limit-code-scheduling-parameters-in-pd}
 
-- The `leader-schedule-limit` scheduling parameter is used to balance the Leader number of different TiKV servers, affecting the load of query processing.
-- The `region-schedule-limit` scheduling parameter is used to balance the replica number of different TiKV servers, affecting the data amount of different nodes.
+-   `leader-schedule-limit`スケジューリングパラメータは、さまざまなTiKVサーバーのリーダー数のバランスを取るために使用され、クエリ処理の負荷に影響を与えます。
+-   `region-schedule-limit`スケジューリングパラメータは、さまざまなTiKVサーバーのレプリカ数のバランスを取るために使用され、さまざまなノードのデータ量に影響を与えます。
 
-### Is the number of replicas in each region configurable? If yes, how to configure it?
+### 各リージョンのレプリカの数は構成可能ですか？はいの場合、それを構成する方法は？ {#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it}
 
-Yes. Currently, you can only update the global number of replicas. When started for the first time, PD reads the configuration file (conf/pd.yml) and uses the max-replicas configuration in it. If you want to update the number later, use the pd-ctl configuration command `config set max-replicas $num` and view the enabled configuration using `config show all`. The updating does not affect the applications and is configured in the background.
+はい。現在、更新できるのはグローバル数のレプリカのみです。初めて起動すると、PDは構成ファイル（conf / pd.yml）を読み取り、その中のmax-replicas構成を使用します。後で番号を更新する場合は、pd-ctl設定コマンド`config set max-replicas $num`を使用し、 `config show all`を使用して有効な設定を表示します。更新はアプリケーションに影響を与えず、バックグラウンドで構成されます。
 
-Make sure that the total number of TiKV instances is always greater than or equal to the number of replicas you set. For example, 3 replicas need 3 TiKV instances at least. Additional storage requirements need to be estimated before increasing the number of replicas. For more information about pd-ctl, see [PD Control User Guide](/pd-control.md).
+TiKVインスタンスの総数が、設定したレプリカの数以上であることを常に確認してください。たとえば、3つのレプリカには少なくとも3つのTiKVインスタンスが必要です。レプリカの数を増やす前に、追加のストレージ要件を見積もる必要があります。 pd-ctlの詳細については、 [PD制御ユーザーガイド](/pd-control.md)を参照してください。
 
-### How to check the health status of the whole cluster when lacking command line cluster management tools?
+### コマンドラインクラスタ管理ツールがない場合にクラスタ全体のヘルスステータスを確認するにはどうすればよいですか？ {#how-to-check-the-health-status-of-the-whole-cluster-when-lacking-command-line-cluster-management-tools}
 
-You can determine the general status of the cluster using the pd-ctl tool. For detailed cluster status, you need to use the monitor to determine.
+pd-ctlツールを使用して、クラスタの一般的なステータスを判別できます。クラスタのステータスの詳細については、モニターを使用して判別する必要があります。
 
-### How to delete the monitoring data of a cluster node that is offline?
+### オフラインのクラスタノードの監視データを削除するにはどうすればよいですか？ {#how-to-delete-the-monitoring-data-of-a-cluster-node-that-is-offline}
 
-The offline node usually indicates the TiKV node. You can determine whether the offline process is finished by the pd-ctl or the monitor. After the node is offline, perform the following steps:
+オフラインノードは通常、TiKVノードを示します。オフラインプロセスがpd-ctlまたはモニターのどちらで終了したかを判別できます。ノードがオフラインになったら、次の手順を実行します。
 
-1. Manually stop the relevant services on the offline node.
-2. Delete the `node_exporter` data of the corresponding node from the Prometheus configuration file.
+1.  オフラインノードで関連するサービスを手動で停止します。
+2.  Prometheus構成ファイルから対応するノードの`node_exporter`のデータを削除します。
 
-## TiDB server management
+## TiDBサーバー管理 {#tidb-server-management}
 
-This section describes common problems you may encounter during TiDB server management, their causes, and solutions.
+このセクションでは、TiDBサーバーの管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### How to set the `lease` parameter in TiDB?
+### TiDBで<code>lease</code>パラメータを設定するにはどうすればよいですか？ {#how-to-set-the-code-lease-code-parameter-in-tidb}
 
-The lease parameter (`--lease=60`) is set from the command line when starting a TiDB server. The value of the lease parameter impacts the Database Schema Changes (DDL) speed of the current session. In the testing environments, you can set the value to 1s for to speed up the testing cycle. But in the production environments, it is recommended to set the value to minutes (for example, 60) to ensure the DDL safety.
+リースパラメータ（ `--lease=60` ）は、TiDBサーバーの起動時にコマンドラインから設定されます。リースパラメータの値は、現在のセッションのデータベーススキーマ変更（DDL）速度に影響を与えます。テスト環境では、テストサイクルを高速化するために値を1に設定できます。ただし、実稼働環境では、DDLの安全性を確保するために、値を分（たとえば、60）に設定することをお勧めします。
 
-### What is the processing time of a DDL operation?
+### DDL操作の処理時間はどのくらいですか？ {#what-is-the-processing-time-of-a-ddl-operation}
 
-The processing time is different for different scenarios. Generally, you can consider the following three scenarios:
+処理時間はシナリオによって異なります。一般に、次の3つのシナリオを検討できます。
 
-1. The `Add Index` operation with a relatively small number of rows in the corresponding data table: about 3s
-2. The `Add Index` operation with a relatively large number of rows in the corresponding data table: the processing time depends on the specific number of rows and the QPS at that time (the `Add Index` operation has a lower priority than ordinary SQL operations)
-3. Other DDL operations: about 1s
+1.  対応するデータテーブルの行数が比較的少ない`Add Index`の操作：約3秒
+2.  対応するデータテーブルの行数が比較的多い`Add Index`の操作：処理時間は、特定の行数とそのときのQPSによって異なります（ `Add Index`の操作の優先度は通常のSQL操作よりも低くなります）。
+3.  その他のDDL操作：約1秒
 
-If the TiDB server instance that receives the DDL request is the same TiDB server instance that the DDL owner is in, the first and third scenarios above may cost only dozens to hundreds of milliseconds.
+DDL要求を受信するTiDBサーバーインスタンスが、DDL所有者がいるTiDBサーバーインスタンスと同じである場合、上記の最初と3番目のシナリオのコストは数十から数百ミリ秒にすぎない可能性があります。
 
-### Why it is very slow to run DDL statements sometimes?
+### DDLステートメントの実行が非常に遅い場合があるのはなぜですか？ {#why-it-is-very-slow-to-run-ddl-statements-sometimes}
 
-Possible reasons:
+考えられる理由：
 
-- If you run multiple DDL statements together, the last few DDL statements might run slowly. This is because the DDL statements are executed serially in the TiDB cluster.
-- After you start the cluster successfully, the first DDL operation may take a longer time to run, usually around 30s. This is because the TiDB cluster is electing the leader that processes DDL statements.
-- The processing time of DDL statements in the first ten minutes after starting TiDB would be much longer than the normal case if you meet the following conditions: 1) TiDB cannot communicate with PD as usual when you are stopping TiDB (including the case of power failure); 2) TiDB fails to clean up the registration data from PD in time because TiDB is stopped by the `kill -9` command. If you run DDL statements during this period, for the state change of each DDL, you need to wait for 2 * lease (lease = 45s).
-- If a communication issue occurs between a TiDB server and a PD server in the cluster, the TiDB server cannot get or update the version information from the PD server in time. In this case, you need to wait for 2 * lease for the state processing of each DDL.
+-   複数のDDLステートメントを一緒に実行すると、最後のいくつかのDDLステートメントの実行が遅くなる可能性があります。これは、DDLステートメントがTiDBクラスタでシリアルに実行されるためです。
+-   クラスタを正常に開始した後、最初のDDL操作の実行に時間がかかる場合があります（通常は約30秒）。これは、TiDBクラスタがDDLステートメントを処理するリーダーを選択しているためです。
+-   以下の条件を満たした場合、TiDB開始後の最初の10分間のDDLステートメントの処理時間は通常の場合よりもはるかに長くなります。1）TiDBを停止しているとき（停電の場合を含む）、TiDBは通常どおりPDと通信できません。 ）; 2）TiDBは`kill -9`コマンドで停止しているため、PDからの登録データのクリーンアップに間に合いません。この期間中にDDLステートメントを実行する場合、各DDLの状態変化のために、2 *リース（リース= 45秒）を待つ必要があります。
+-   クラスタのTiDBサーバーとPDサーバーの間で通信の問題が発生した場合、TiDBサーバーはPDサーバーからバージョン情報を時間内に取得または更新できません。この場合、各DDLの状態処理のために2*リースを待つ必要があります。
 
-### Can I use S3 as the backend storage engine in TiDB?
+### TiDBのバックエンドストレージエンジンとしてS3を使用できますか？ {#can-i-use-s3-as-the-backend-storage-engine-in-tidb}
 
-No. Currently, TiDB only supports the distributed storage engine and the Goleveldb/RocksDB/BoltDB engine.
+いいえ。現在、TiDBは分散ストレージエンジンとGoleveldb / RocksDB/BoltDBエンジンのみをサポートしています。
 
-### Can the `Information_schema` support more real information?
+### Information_schemaはより現実的な<code>Information_schema</code>をサポートできますか？ {#can-the-code-information-schema-code-support-more-real-information}
 
-As part of MySQL compatibility, TiDB supports a number of `INFORMATION_SCHEMA` tables. Many of these tables also have a corresponding SHOW command. For more information, see [Information Schema](/information-schema/information-schema.md).
+MySQL互換性の一部として、TiDBは多数の`INFORMATION_SCHEMA`テーブルをサポートしています。これらのテーブルの多くには、対応するSHOWコマンドもあります。詳細については、 [情報スキーマ](/information-schema/information-schema.md)を参照してください。
 
-### What's the explanation of the TiDB Backoff type scenario?
+### TiDBバックオフタイプのシナリオの説明は何ですか？ {#what-s-the-explanation-of-the-tidb-backoff-type-scenario}
 
-In the communication process between the TiDB server and the TiKV server, the `Server is busy` or `backoff.maxsleep 20000ms` log message is displayed when processing a large volume of data. This is because the system is busy while the TiKV server processes data. At this time, usually you can view that the TiKV host resources usage rate is high. If this occurs, you can increase the server capacity according to the resources usage.
+TiDBサーバーとTiKVサーバー間の通信処理では、大量のデータを処理するときに`Server is busy`または`backoff.maxsleep 20000ms`のログメッセージが表示されます。これは、TiKVサーバーがデータを処理している間、システムがビジーであるためです。このとき、通常、TiKVホストリソースの使用率が高いことがわかります。これが発生した場合は、リソースの使用量に応じてサーバーの容量を増やすことができます。
 
-### What is the main reason of TiDB TiClient type?
+### TiDB TiClientタイプの主な理由は何ですか？ {#what-is-the-main-reason-of-tidb-ticlient-type}
 
-The TiClient Region Error indicator describes the error types and metrics that appear when the TiDB server as a client accesses the TiKV server through the KV interface to perform data operations. The error types include `not_leader` and `stale_epoch`. These errors occur when the TiDB server manipulates the Region leader data according to its own cache information, the Region leader has migrated, or the current TiKV Region information and the routing information of the TiDB cache are inconsistent. Generally, in this case, the TiDB server will automatically retrieve the latest routing data from PD and redo the previous operation.
+TiClientリージョンエラーインジケータは、クライアントとしてのTiDBサーバーがKVインターフェイスを介してTiKVサーバーにアクセスしてデータ操作を実行するときに表示されるエラータイプとメトリックを示します。エラータイプには`not_leader`と`stale_epoch`が含まれます。これらのエラーは、TiDBサーバーが自身のキャッシュ情報に従ってリージョンリーダーデータを操作する場合、リージョンリーダーが移行した場合、または現在のTiKVリージョン情報とTiDBキャッシュのルーティング情報に一貫性がない場合に発生します。通常、この場合、TiDBサーバーはPDから最新のルーティングデータを自動的に取得し、前の操作をやり直します。
 
-### What's the maximum number of concurrent connections that TiDB supports?
+### TiDBがサポートする同時接続の最大数はいくつですか？ {#what-s-the-maximum-number-of-concurrent-connections-that-tidb-supports}
 
-By default, there is no limit on the maximum number of connections per TiDB server. If too large concurrency leads to an increase of response time, it is recommended to increase the capacity by adding TiDB nodes.
+デフォルトでは、TiDBサーバーあたりの最大接続数に制限はありません。同時実行性が大きすぎると応答時間が長くなる場合は、TiDBノードを追加して容量を増やすことをお勧めします。
 
-### How to view the creation time of a table?
+### テーブルの作成時間を表示するにはどうすればよいですか？ {#how-to-view-the-creation-time-of-a-table}
 
-The `create_time` of tables in the `information_schema` is the creation time.
+`information_schema`のテーブルの`create_time`つが作成時間です。
 
-### What is the meaning of `EXPENSIVE_QUERY` in the TiDB log?
+### TiDBログの<code>EXPENSIVE_QUERY</code>の意味は何ですか？ {#what-is-the-meaning-of-code-expensive-query-code-in-the-tidb-log}
 
-When TiDB is executing a SQL statement, the query will be `EXPENSIVE_QUERY` if each operator is estimated to process over 10,000 rows. You can modify the `tidb-server` configuration parameter to adjust the threshold and then restart the `tidb-server`.
+TiDBがSQLステートメントを実行しているとき、各演算子が10,000を超える行を処理すると推定される場合、クエリは`EXPENSIVE_QUERY`になります。 `tidb-server`構成パラメーターを変更してしきい値を調整してから、 `tidb-server`を再起動できます。
 
-### How do I estimate the size of a table in TiDB?
+### TiDBのテーブルのサイズを見積もるにはどうすればよいですか？ {#how-do-i-estimate-the-size-of-a-table-in-tidb}
 
-To estimate the size of a table in TiDB, you can use the following query statement.
+TiDBのテーブルのサイズを見積もるには、次のクエリステートメントを使用できます。
 
 ```sql
 SELECT
@@ -270,161 +270,161 @@ GROUP BY
   table_name;
 ```
 
-When using the above statement, you need to fill in and replace the following fields in the statement as appropriate.
+上記のステートメントを使用する場合は、ステートメントの次のフィールドに必要に応じて入力して置き換える必要があります。
 
-- `@dbname`: the name of the database.
-- `@table_name`: the name of the target table.
+-   `@dbname` ：データベースの名前。
+-   `@table_name` ：ターゲットテーブルの名前。
 
-In addition, in the above statement:
+さらに、上記のステートメントでは：
 
-- `store_size_amplification` indicates the average of the cluster compression ratio. In addition to using `SELECT * FROM METRICS_SCHEMA.store_size_amplification;` to query this information, you can also check the **Size amplification** metric for each node on the **Grafana Monitoring PD - statistics balance** panel. The average of the cluster compression ratio is the average of the Size amplification for all nodes.
-- `Approximate_Size` indicates the size of the table in a replica before compression. Note that this is an approximate value, not an accurate one.
-- `Disk_Size` indicates the size of the table after compression. This is an approximate value and can be calculated according to `Approximate_Size` and `store_size_amplification`.
+-   `store_size_amplification`は、クラスタ圧縮率の平均を示します。 `SELECT * FROM METRICS_SCHEMA.store_size_amplification;`を使用してこの情報を照会することに加えて、 **GrafanaMonitoringPD-統計バランス**パネルで各ノードの<strong>サイズ増幅</strong>メトリックを確認することもできます。クラスタ圧縮率の平均は、すべてのノードのサイズ増幅の平均です。
+-   `Approximate_Size`は、圧縮前のレプリカ内のテーブルのサイズを示します。これは概算値であり、正確な値ではないことに注意してください。
+-   `Disk_Size`は、圧縮後のテーブルのサイズを示します。これは概算値であり、 `Approximate_Size`と`store_size_amplification`に従って計算できます。
 
-## TiKV server management
+## TiKVサーバー管理 {#tikv-server-management}
 
-This section describes common problems you might encounter during TiKV server management, their causes, and solutions.
+このセクションでは、TiKVサーバーの管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
+### TiKVクラスタのレプリカの推奨数はいくつですか？高可用性のために最小数を維持する方が良いですか？ {#what-is-the-recommended-number-of-replicas-in-the-tikv-cluster-is-it-better-to-keep-the-minimum-number-for-high-availability}
 
-3 replicas for each Region is sufficient for a testing environment. However, you should never operate a TiKV cluster with under 3 nodes in a production scenario. Depending on infrastructure, workload, and resiliency needs, you may wish to increase this number. It is worth noting that the higher the copy, the lower the performance, but the higher the security.
+テスト環境には、リージョンごとに3つのレプリカで十分です。ただし、実稼働シナリオでは、3ノード未満のTiKVクラスタを操作しないでください。インフラストラクチャ、ワークロード、および復元力のニーズに応じて、この数を増やすことをお勧めします。コピーが高いほどパフォーマンスは低下しますが、セキュリティは高くなることに注意してください。
 
-### The `cluster ID mismatch` message is displayed when starting TiKV
+### TiKVの起動時に、 <code>cluster ID mismatch</code>メッセージが表示されます {#the-code-cluster-id-mismatch-code-message-is-displayed-when-starting-tikv}
 
-This is because the cluster ID stored in local TiKV is different from the cluster ID specified by PD. When a new PD cluster is deployed, PD generates random cluster IDs. TiKV gets the cluster ID from PD and stores the cluster ID locally when it is initialized. The next time when TiKV is started, it checks the local cluster ID with the cluster ID in PD. If the cluster IDs don't match, the `cluster ID mismatch` message is displayed and TiKV exits.
+これは、ローカルTiKVに格納されているクラスタIDがPDで指定されているクラスタIDと異なるためです。新しいPDクラスタがデプロイされると、PDはランダムなクラスタIDを生成します。 TiKVはPDからクラスタIDを取得し、初期化時にクラスタIDをローカルに保存します。次回TiKVを起動すると、ローカルクラスタIDとPDのクラスタIDがチェックされます。クラスタIDが一致しない場合は、 `cluster ID mismatch`メッセージが表示され、TiKVが終了します。
 
-If you previously deploy a PD cluster, but then you remove the PD data and deploy a new PD cluster, this error occurs because TiKV uses the old data to connect to the new PD cluster.
+以前にPDクラスタをデプロイした後、PDデータを削除して新しいPDクラスタをデプロイした場合、TiKVが古いデータを使用して新しいPDクラスタに接続するため、このエラーが発生します。
 
-### The `duplicated store address` message is displayed when starting TiKV
+### TiKVを起動すると、 <code>duplicated store address</code>メッセージが表示されます {#the-code-duplicated-store-address-code-message-is-displayed-when-starting-tikv}
 
-This is because the address in the startup parameter has been registered in the PD cluster by other TiKVs. Common conditions that cause this error: There is no data folder in the path specified by TiKV `--data-dir` (no update --data-dir after deleting or moving), restart the TiKV with the previous parameters.Please try [store delete](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string) function of pd-ctl, delete the previous store, and then restart TiKV.
+これは、スタートアップパラメータのアドレスが他のTiKVによってPDクラスタに登録されているためです。このエラーの原因となる一般的な条件：TiKV `--data-dir`で指定されたパスにデータフォルダーがありません（削除または移動後に更新--data-dirがありません）、前のパラメーターでTiKVを再起動します.pd-ctlの[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)の機能を試してください。前のストアを削除してから、TiKVを再起動します。
 
-### TiKV primary node and secondary node use the same compression algorithm, why the results are different?
+### TiKVプライマリノードとセカンダリノードは同じ圧縮アルゴリズムを使用していますが、なぜ結果が異なるのですか？ {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
 
-Currently, some files of TiKV primary node have a higher compression rate, which depends on the underlying data distribution and RocksDB implementation. It is normal that the data size fluctuates occasionally. The underlying storage engine adjusts data as needed.
+現在、TiKVプライマリノードの一部のファイルの圧縮率は高く、これは基盤となるデータ分散とRocksDBの実装によって異なります。データサイズが時々変動するのは正常です。基盤となるストレージエンジンは、必要に応じてデータを調整します。
 
-### What are the features of TiKV block cache?
+### TiKVブロックキャッシュの機能は何ですか？ {#what-are-the-features-of-tikv-block-cache}
 
-TiKV implements the Column Family (CF) feature of RocksDB. By default, the KV data is eventually stored in the 3 CFs (default, write and lock) within RocksDB.
+TiKVは、RocksDBの列ファミリー（CF）機能を実装しています。デフォルトでは、KVデータは最終的にRocksDB内の3つのCF（デフォルト、書き込み、ロック）に保存されます。
 
-- The default CF stores real data and the corresponding parameter is in `[rocksdb.defaultcf]`.
-- The write CF stores the data version information (MVCC) and index-related data, and the corresponding parameter is in `[rocksdb.writecf]`.
-- The lock CF stores the lock information and the system uses the default parameter.
-- The Raft RocksDB instance stores Raft logs. The default CF mainly stores Raft logs and the corresponding parameter is in `[raftdb.defaultcf]`.
-- All CFs have a shared block-cache to cache data blocks and improve RocksDB read speed. The size of block-cache is controlled by the `block-cache-size` parameter. A larger value of the parameter means more hot data can be cached and is more favorable to read operation. At the same time, it consumes more system memory.
-- Each CF has an individual write-buffer and the size is controlled by the `write-buffer-size` parameter.
+-   デフォルトのCFは実際のデータを格納し、対応するパラメーターは`[rocksdb.defaultcf]`にあります。
+-   書き込みCFは、データバージョン情報（MVCC）とインデックス関連データを格納し、対応するパラメータは`[rocksdb.writecf]`にあります。
+-   ロックCFはロック情報を保存し、システムはデフォルトパラメータを使用します。
+-   RaftRocksDBインスタンスはRaftログを保存します。デフォルトのCFは主にRaftログを保存し、対応するパラメーターは`[raftdb.defaultcf]`にあります。
+-   すべてのCFには、データブロックをキャッシュし、RocksDBの読み取り速度を向上させるための共有ブロックキャッシュがあります。ブロックキャッシュのサイズは、 `block-cache-size`パラメーターによって制御されます。パラメータの値が大きいほど、より多くのホットデータをキャッシュでき、読み取り操作に適しています。同時に、より多くのシステムメモリを消費します。
+-   各CFには個別の書き込みバッファーがあり、サイズは`write-buffer-size`パラメーターによって制御されます。
 
-### Why is the TiKV channel full?
+### TiKVチャネルがいっぱいになるのはなぜですか？ {#why-is-the-tikv-channel-full}
 
-- The Raftstore thread is too slow or blocked by I/O. You can view the CPU usage status of Raftstore.
-- TiKV is too busy (CPU, disk I/O, etc.) and cannot manage to handle it.
+-   Raftstoreスレッドが遅すぎるか、I/Oによってブロックされています。 RaftstoreのCPU使用状況を確認できます。
+-   TiKVはビジー状態（CPU、ディスクI / Oなど）であり、処理できません。
 
-### Why does TiKV frequently switch Region leader?
+### TiKVがリージョンリーダーを頻繁に切り替えるのはなぜですか？ {#why-does-tikv-frequently-switch-region-leader}
 
-- Network problem results in the communication stuck among nodes. You can check Report failures monitoring.
-- The node of the original main Leader is stuck, resulting in failure to reach out to the Follower in time.
-- Raftstore thread stuck.
+-   ネットワークの問題により、ノード間の通信が停止します。レポート障害の監視を確認できます。
+-   元のメインリーダーのノードがスタックしているため、時間内にフォロワーに連絡できません。
+-   Raftstoreスレッドがスタックしました。
 
-### If a node is down, will the service be affected? If yes, how long?
+### ノードがダウンした場合、サービスは影響を受けますか？はいの場合、どのくらいですか？ {#if-a-node-is-down-will-the-service-be-affected-if-yes-how-long}
 
-TiKV uses Raft to replicate data among multiple replicas (by default 3 replicas for each Region). If one replica goes wrong, the other replicas can guarantee data safety. Based on the Raft protocol, if a single leader fails as the node goes down, a follower in another node is soon elected as the Region leader after a maximum of 2 * lease time (lease time is 10 seconds).
+TiKVは、Raftを使用して、複数のレプリカ間でデータを複製します（デフォルトでは、リージョンごとに3つのレプリカ）。 1つのレプリカで問題が発生した場合、他のレプリカでデータの安全性を保証できます。 Raftプロトコルに基づいて、ノードがダウンしたときに1つのリーダーに障害が発生した場合、最大2 *のリース時間（リース時間は10秒）の後、別のノードのフォロワーがすぐにリージョンリーダーとして選出されます。
 
-### What are the TiKV scenarios that take up high I/O, memory, CPU, and exceed the parameter configuration?
+### 高いI/O、メモリ、CPUを使用し、パラメータ構成を超えるTiKVシナリオは何ですか？ {#what-are-the-tikv-scenarios-that-take-up-high-i-o-memory-cpu-and-exceed-the-parameter-configuration}
 
-Writing or reading a large volume of data in TiKV takes up high I/O, memory and CPU. Executing very complex queries costs a lot of memory and CPU resources, such as the scenario that generates large intermediate result sets.
+TiKVで大量のデータを読み書きすると、高いI / O、メモリ、およびCPUが消費されます。非常に複雑なクエリを実行すると、大きな中間結果セットを生成するシナリオなど、多くのメモリとCPUリソースが消費されます。
 
-### Does TiKV support SAS/SATA disks or mixed deployment of SSD/SAS disks?
+### TiKVはSAS/SATAディスクまたはSSD/SASディスクの混合展開をサポートしていますか？ {#does-tikv-support-sas-sata-disks-or-mixed-deployment-of-ssd-sas-disks}
 
-No. For OLTP scenarios, TiDB requires high I/O disks for data access and operation. As a distributed database with strong consistency, TiDB has some write amplification such as replica replication and bottom layer storage compaction. Therefore, it is recommended to use NVMe SSD as the storage disks in TiDB best practices. Mixed deployment of TiKV and PD is not supported.
+いいえ。OLTPシナリオの場合、TiDBはデータアクセスと操作のために高I/Oディスクを必要とします。強一貫性のある分散データベースとして、TiDBには、レプリカレプリケーションや最下層ストレージの圧縮などの書き込み増幅機能があります。したがって、TiDBのベストプラクティスでは、ストレージディスクとしてNVMeSSDを使用することをお勧めします。 TiKVとPDの混合展開はサポートされていません。
 
-### Is the Range of the Key data table divided before data access?
+### キーデータテーブルの範囲は、データアクセスの前に分割されていますか？ {#is-the-range-of-the-key-data-table-divided-before-data-access}
 
-No. It differs from the table splitting rules of MySQL. In TiKV, the table Range is dynamically split based on the size of Region.
+いいえ。MySQLのテーブル分割ルールとは異なります。 TiKVでは、テーブルRangeはRegionのサイズに基づいて動的に分割されます。
 
-### How does Region split?
+### リージョンはどのように分割されますか？ {#how-does-region-split}
 
-Region is not divided in advance, but it follows a Region split mechanism. When the Region size exceeds the value of the `region-max-size` or `region-max-keys` parameters, split is triggered. After the split, the information is reported to PD.
+リージョンは事前に分割されていませんが、リージョン分割メカニズムに従います。リージョンサイズが`region-max-size`つまたは`region-max-keys`のパラメーターの値を超えると、分割がトリガーされます。分割後、情報はPDに報告されます。
 
-### Does TiKV have the `innodb_flush_log_trx_commit` parameter like MySQL, to guarantee the security of data?
+### TiKVには、データのセキュリティを保証するために、MySQLのような<code>innodb_flush_log_trx_commit</code>パラメーターがありますか？ {#does-tikv-have-the-code-innodb-flush-log-trx-commit-code-parameter-like-mysql-to-guarantee-the-security-of-data}
 
-Yes. Currently, the standalone storage engine uses two RocksDB instances. One instance is used to store the raft-log. When the `sync-log` parameter in TiKV is set to true, each commit is mandatorily flushed to the raft-log. If a crash occurs, you can restore the KV data using the raft-log.
+はい。現在、スタンドアロンストレージエンジンは2つのRocksDBインスタンスを使用しています。 1つのインスタンスは、raft-logを格納するために使用されます。 TiKVの`sync-log`パラメーターがtrueに設定されている場合、各コミットは強制的にraft-logにフラッシュされます。クラッシュが発生した場合は、raft-logを使用してKVデータを復元できます。
 
-### What is the recommended server configuration for WAL storage, such as SSD, RAID level, cache strategy of RAID card, NUMA configuration, file system, I/O scheduling strategy of the operating system?
+### SSD、RAIDレベル、RAIDカードのキャッシュ戦略、NUMA構成、ファイルシステム、オペレーティングシステムのI / Oスケジューリング戦略など、WALストレージに推奨されるサーバー構成は何ですか？ {#what-is-the-recommended-server-configuration-for-wal-storage-such-as-ssd-raid-level-cache-strategy-of-raid-card-numa-configuration-file-system-i-o-scheduling-strategy-of-the-operating-system}
 
-WAL belongs to ordered writing, and currently, we do not apply a unique configuration to it. Recommended configuration is as follows:
+WALは順序付き書き込みに属しており、現在、独自の構成を適用していません。推奨される構成は次のとおりです。
 
-- SSD
-- RAID 10 preferred
-- Cache strategy of RAID card and I/O scheduling strategy of the operating system: currently no specific best practices; you can use the default configuration in Linux 7 or later
-- NUMA: no specific suggestion; for memory allocation strategy, you can use `interleave = all`
-- File system: ext4
+-   SSD
+-   RAID10を推奨
+-   RAIDカードのキャッシュ戦略とオペレーティングシステムのI/Oスケジューリング戦略：現在、特定のベストプラクティスはありません。 Linux7以降ではデフォルト構成を使用できます
+-   NUMA：具体的な提案はありません。メモリ割り当て戦略には、 `interleave = all`を使用できます
+-   ファイルシステム：ext4
 
-### How is the write performance in the most strict data available mode (`sync-log = true`)?
+### 最も厳密なデータ使用可能モード（ <code>sync-log = true</code> ）での書き込みパフォーマンスはどうですか？ {#how-is-the-write-performance-in-the-most-strict-data-available-mode-code-sync-log-true-code}
 
-Generally, enabling `sync-log` reduces about 30% of the performance. For write performance when `sync-log` is set to `false`, see [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
+一般に、 `sync-log`を有効にすると、パフォーマンスが約30％低下します。 `sync-log`が`false`に設定されている場合の書き込みパフォーマンスについては、 [Sysbenchを使用したTiDBのパフォーマンステスト結果](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)を参照してください。
 
-### Can Raft + multiple replicas in the TiKV architecture achieve absolute data safety? Is it necessary to apply the most strict mode (`sync-log = true`) to a standalone storage?
+### Raft + TiKVアーキテクチャの複数のレプリカは、絶対的なデータの安全性を実現できますか？最も厳密なモード（ <code>sync-log = true</code> ）をスタンドアロンストレージに適用する必要がありますか？ {#can-raft-multiple-replicas-in-the-tikv-architecture-achieve-absolute-data-safety-is-it-necessary-to-apply-the-most-strict-mode-code-sync-log-true-code-to-a-standalone-storage}
 
-Data is redundantly replicated between TiKV nodes using the [Raft Consensus Algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur. Only when the data has been written into more than 50% of the replicas will the application return ACK (two out of three nodes). However, theoretically, two nodes might crash. Therefore, except for scenarios with less strict requirement on data safety but extreme requirement on performance, it is strongly recommended that you enable the `sync-log` mode.
+データは[いかだコンセンサスアルゴリズム](https://raft.github.io/)を使用してTiKVノード間で冗長に複製され、ノード障害が発生した場合の回復可能性を確保します。データがレプリカの50％以上に書き込まれた場合にのみ、アプリケーションはACK（3つのノードのうち2つ）を返します。ただし、理論的には、2つのノードがクラッシュする可能性があります。したがって、データの安全性に関する要件はそれほど厳しくなく、パフォーマンスに関する要件が極端なシナリオを除いて、 `sync-log`モードを有効にすることを強くお勧めします。
 
-As an alternative to using `sync-log`, you may also consider having five replicas instead of three in your Raft group. This would allow for the failure of two replicas, while still providing data safety.
+`sync-log`を使用する代わりに、Raftグループに3つではなく5つのレプリカを用意することを検討することもできます。これにより、データの安全性を維持しながら、2つのレプリカの障害が発生する可能性があります。
 
-For a standalone TiKV node, it is still recommended to enable the `sync-log` mode. Otherwise, the last write might be lost in case of a node failure.
+スタンドアロンのTiKVノードの場合でも、 `sync-log`モードを有効にすることをお勧めします。そうしないと、ノードに障害が発生した場合に最後の書き込みが失われる可能性があります。
 
-### Since TiKV uses the Raft protocol, multiple network roundtrips occur during data writing. What is the actual write delay?
+### TiKVはRaftプロトコルを使用するため、データの書き込み中に複数のネットワークラウンドトリップが発生します。実際の書き込み遅延はどれくらいですか？ {#since-tikv-uses-the-raft-protocol-multiple-network-roundtrips-occur-during-data-writing-what-is-the-actual-write-delay}
 
-Theoretically, TiDB has a write delay of 4 more network roundtrips than standalone databases.
+理論的には、TiDBには、スタンドアロンデータベースよりも4回多いネットワークラウンドトリップの書き込み遅延があります。
 
-### Does TiDB have an InnoDB memcached plugin like MySQL which can directly use the KV interface and does not need the independent cache?
+### TiDBには、KVインターフェイスを直接使用でき、独立したキャッシュを必要としないMySQLのようなInnoDB memcachedプラグインがありますか？ {#does-tidb-have-an-innodb-memcached-plugin-like-mysql-which-can-directly-use-the-kv-interface-and-does-not-need-the-independent-cache}
 
-TiKV supports calling the interface separately. Theoretically, you can take an instance as the cache. Because TiDB is a distributed relational database, we do not support TiKV separately.
+TiKVは、インターフェースの個別呼び出しをサポートしています。理論的には、インスタンスをキャッシュとして使用できます。 TiDBは分散型リレーショナルデータベースであるため、TiKVを個別にサポートすることはありません。
 
-### What is the Coprocessor component used for?
+### コプロセッサーコンポーネントは何に使用されますか？ {#what-is-the-coprocessor-component-used-for}
 
-- Reduce the data transmission between TiDB and TiKV
-- Make full use of the distributed computing resources of TiKV to execute computing pushdown.
+-   TiDBとTiKV間のデータ伝送を削減します
+-   TiKVの分散コンピューティングリソースを最大限に活用して、コンピューティングプッシュダウンを実行します。
 
-### The error message `IO error: No space left on device While appending to file` is displayed
+### エラーメッセージ<code>IO error: No space left on device While appending to file</code>が表示されます {#the-error-message-code-io-error-no-space-left-on-device-while-appending-to-file-code-is-displayed}
 
-This is because the disk space is not enough. You need to add nodes or enlarge the disk space.
+これは、ディスク容量が不足しているためです。ノードを追加するか、ディスクスペースを拡大する必要があります。
 
-### Why does the OOM (Out of Memory) error occur frequently in TiKV?
+### TiKVでOOM（メモリ不足）エラーが頻繁に発生するのはなぜですか？ {#why-does-the-oom-out-of-memory-error-occur-frequently-in-tikv}
 
-The memory usage of TiKV mainly comes from the block-cache of RocksDB, which is 40% of the system memory size by default. When the OOM error occurs frequently in TiKV, you should check whether the value of `block-cache-size` is set too high. In addition, when multiple TiKV instances are deployed on a single machine, you need to explicitly configure the parameter to prevent multiple instances from using too much system memory that results in the OOM error.
+TiKVのメモリ使用量は、主にRocksDBのブロックキャッシュから発生します。これは、デフォルトでシステムメモリサイズの40％です。 TiKVでOOMエラーが頻繁に発生する場合は、 `block-cache-size`の値が高すぎるかどうかを確認する必要があります。さらに、複数のTiKVインスタンスが単一のマシンにデプロイされている場合、複数のインスタンスがOOMエラーを引き起こすシステムメモリを使いすぎないように、パラメータを明示的に設定する必要があります。
 
-### Can both TiDB data and RawKV data be stored in the same TiKV cluster?
+### TiDBデータとRawKVデータの両方を同じTiKVクラスタに保存できますか？ {#can-both-tidb-data-and-rawkv-data-be-stored-in-the-same-tikv-cluster}
 
-No. TiDB (or data created from the transactional API) relies on a specific key format. It is not compatible with data created from RawKV API (or data from other RawKV-based services).
+いいえ。TiDB（またはトランザクションAPIから作成されたデータ）は特定のキー形式に依存しています。 RawKV APIから作成されたデータ（または他のRawKVベースのサービスからのデータ）とは互換性がありません。
 
-## TiDB testing
+## TiDBテスト {#tidb-testing}
 
-This section describes common problems you might encounter during TiDB testing, their causes, and solutions.
+このセクションでは、TiDBテスト中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### What is the performance test result for TiDB using Sysbench?
+### Sysbenchを使用したTiDBのパフォーマンステストの結果は何ですか？ {#what-is-the-performance-test-result-for-tidb-using-sysbench}
 
-At the beginning, many users tend to do a benchmark test or a comparison test between TiDB and MySQL. We have also done a similar official test and find the test result is consistent at large, although the test data has some bias. Because the architecture of TiDB differs greatly from MySQL, it is hard to find a benchmark point. The suggestions are as follows:
+最初は、多くのユーザーがベンチマークテストまたはTiDBとMySQLの比較テストを行う傾向があります。同様の公式テストを実施しましたが、テストデータには多少の偏りがありますが、テスト結果は全体的に一貫していることがわかりました。 TiDBのアーキテクチャはMySQLとは大きく異なるため、ベンチマークポイントを見つけるのは困難です。提案は次のとおりです。
 
-- Do not spend too much time on the benchmark test. Pay more attention to the difference of scenarios using TiDB.
-- See [Performance test result for TiDB using Sysbench](/benchmark/v3.0-performance-benchmarking-with-sysbench.md).
+-   ベンチマークテストに時間をかけすぎないでください。 TiDBを使用するシナリオの違いにもっと注意を払ってください。
+-   [Sysbenchを使用したTiDBのパフォーマンステスト結果](/benchmark/v3.0-performance-benchmarking-with-sysbench.md)を参照してください。
 
-### What's the relationship between the TiDB cluster capacity (QPS) and the number of nodes? How does TiDB compare to MySQL?
+### TiDBクラスタ容量（QPS）とノード数の関係は何ですか？ TiDBはMySQLとどのように比較されますか？ {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
 
-- Within 10 nodes, the relationship between TiDB write capacity (Insert TPS) and the number of nodes is roughly 40% linear increase. Because MySQL uses single-node write, its write capacity cannot be scaled.
-- In MySQL, the read capacity can be increased by adding secondary database, but the write capacity cannot be increased except using sharding, which has many problems.
-- In TiDB, both the read and write capacity can be easily increased by adding more nodes.
+-   10ノード内では、TiDB書き込み容量（TPSの挿入）とノード数の関係は約40％直線的に増加します。 MySQLはシングルノード書き込みを使用するため、その書き込み容量をスケーリングすることはできません。
+-   MySQLでは、セカンダリデータベースを追加することで読み取り容量を増やすことができますが、多くの問題があるシャーディングを使用しない限り、書き込み容量を増やすことはできません。
+-   TiDBでは、ノードを追加することで、読み取りと書き込みの両方の容量を簡単に増やすことができます。
 
-### The performance test of MySQL and TiDB by our DBA shows that the performance of a standalone TiDB is not as good as MySQL
+### DBAによるMySQLとTiDBのパフォーマンステストは、スタンドアロンTiDBのパフォーマンスがMySQLほど良くないことを示しています {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
 
-TiDB is designed for scenarios where sharding is used because the capacity of a MySQL standalone is limited, and where strong consistency and complete distributed transactions are required. One of the advantages of TiDB is pushing down computing to the storage nodes to execute concurrent computing.
+TiDBは、MySQLスタンドアロンの容量が制限されているためにシャーディングが使用され、強力な一貫性と完全な分散トランザクションが必要なシナリオ向けに設計されています。 TiDBの利点の1つは、同時コンピューティングを実行するためにコンピューティングをストレージノードにプッシュダウンすることです。
 
-TiDB is not suitable for tables of small size (such as below ten million level), because its strength in concurrency cannot be shown with a small size of data and limited Regions. A typical example is the counter table, in which records of a few lines are updated high frequently. In TiDB, these lines become several Key-Value pairs in the storage engine, and then settle into a Region located on a single node. The overhead of background replication to guarantee strong consistency and operations from TiDB to TiKV leads to a poorer performance than a MySQL standalone.
+TiDBは、小さなサイズのデータと限られたリージョンでは同時実行性の強さを示すことができないため、小さなサイズ（1,000万レベル未満など）のテーブルには適していません。典型的な例は、数行のレコードが頻繁に更新されるカウンターテーブルです。 TiDBでは、これらの行はストレージエンジンでいくつかのキーと値のペアになり、単一のノードにあるリージョンに落ち着きます。 TiDBからTiKVへの強力な一貫性と操作を保証するためのバックグラウンドレプリケーションのオーバーヘッドにより、MySQLスタンドアロンよりもパフォーマンスが低下します。
 
-## Backup and restoration
+## バックアップと復元 {#backup-and-restoration}
 
-This section describes common problems you may encounter during backup and restoration, their causes, and solutions.
+このセクションでは、バックアップと復元中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### How to back up data in TiDB?
+### TiDBでデータをバックアップする方法は？ {#how-to-back-up-data-in-tidb}
 
-Currently, for the backup of a large volume of data, the preferred method is using [BR](/br/backup-and-restore-tool.md). Otherwise, the recommended tool is [Dumpling](/dumpling-overview.md). Although the official MySQL tool `mysqldump` is also supported in TiDB to back up and restore data, its performance is worse than [BR](/br/backup-and-restore-tool.md) and it needs much more time to back up and restore large volumes of data.
+現在、大量のデータのバックアップには、 [BR](/br/backup-and-restore-tool.md)を使用することをお勧めします。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式のMySQLツール`mysqldump`はデータのバックアップと復元のためにTiDBでもサポートされていますが、そのパフォーマンスは[BR](/br/backup-and-restore-tool.md)よりも悪く、大量のデータのバックアップと復元にははるかに長い時間が必要です。
 
-For more FAQs about BR, see [BR FAQs](/br/backup-and-restore-faq.md).
+BRに関するその他のFAQについては、 [BRのよくある質問](/br/backup-and-restore-faq.md)を参照してください。

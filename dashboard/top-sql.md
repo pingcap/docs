@@ -3,41 +3,41 @@ title: Top SQL
 summary: This document describes how to use Top SQL to locate SQL queries that contribute to a high load.
 ---
 
-# Top SQL
+# Top SQL {#top-sql}
 
-> **Warning:**
+> **警告：**
 >
-> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
+> 現在、 Top SQLは実験的機能です。実稼働環境での使用はお勧めしません。
 
-This document describes how to use Top SQL to locate SQL queries that contribute to a high load of a TiDB or TiKV node in a specified time range. For example, you can use Top SQL to locate an analytic query that consumes 99% of the load for a low-load database.
+このドキュメントでは、Top SQLを使用して、指定した時間範囲でTiDBまたはTiKVノードの高負荷に寄与するSQLクエリを見つける方法について説明します。たとえば、 Top SQLを使用して、低負荷データベースの負荷の99％を消費する分析クエリを見つけることができます。
 
-For a specified TiDB or TiKV node, Top SQL provides the following features:
+指定されたTiDBまたはTiKVノードに対して、 Top SQLは次の機能を提供します。
 
-* Show the top 5 types of SQL queries that contribute the most to the load in a specified time range.
-* Show information such as CPU usage, requests per second, average latency, and query plan of a particular query, which can be used for potential performance optimization to improve your business.
+-   指定された時間範囲で負荷に最も寄与する上位5種類のSQLクエリを表示します。
+-   特定のクエリのCPU使用率、1秒あたりのリクエスト数、平均レイテンシ、クエリプランなどの情報を表示します。これらの情報は、ビジネスを改善するための潜在的なパフォーマンスの最適化に使用できます。
 
-## Enable Top SQL
+## Top SQLを有効にする {#enable-top-sql}
 
-The Top SQL feature is disabled by default. You can enable the feature for the entire cluster using either of the following methods:
+Top SQL機能はデフォルトで無効になっています。次のいずれかの方法を使用して、クラスタ全体でこの機能を有効にできます。
 
-- Method 1: Log in to TiDB Dashboard, click **Top SQL** in the left pane, click the gear button in the upper-right corner of the page, and then enable the Top SQL feature.
-- Method 2: Set the value of the TiDB system variable [`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540) to `ON`.
+-   方法1：TiDBダッシュボードにログインし、左側のペインで[**Top SQL** ]をクリックし、ページの右上隅にある歯車ボタンをクリックして、[トップTop SQL ]機能を有効にします。
+-   方法2：TiDBシステム変数[`tidb_enable_top_sql`](/system-variables.md#tidb_enable_top_sql-new-in-v540)の値を`ON`に設定します。
 
-> **Note:**
+> **ノート：**
 >
-> Enabling Top SQL has a slight impact on the performance of your cluster.
+> Top SQLを有効にすると、クラスタのパフォーマンスにわずかな影響があります。
 
-## Use Top SQL
+## Top SQLを使用する {#use-top-sql}
 
-Once Top SQL is enabled, you can log into TiDB Dashboard, and then click **Top SQL** in the left pane to use it.
+Top SQLを有効にしたら、TiDBダッシュボードにログインし、左側のペインで[**Top SQL** ]をクリックして使用できます。
 
 ![Top SQL](/media/dashboard/top-sql-overview.png)
 
-Usage tips：
+使用上のヒント：
 
-* You can select the target node and time range in the drop-down lists at the top of the page, or you can select the time range in the chart.
-* If the data in the chart is out of date, you can click **Refresh**, or select auto-refresh and specify the auto-refresh interval in the **Refresh** drop-down list.
-* The chart shows the top 5 types of queries that contribute the most to the load of the selected node in the selected time range.
-* You can select a query type in the list to view the execution plan of that query type on this node and the execution details such as the Call/sec, Scan Rows/sec, Scan Indexes/sec, and Latency/call.
+-   ページ上部のドロップダウンリストでターゲットノードと時間範囲を選択するか、グラフで時間範囲を選択できます。
+-   グラフのデータが古くなっている場合は、[**更新**]をクリックするか、[自動更新]を選択して、[更新]ドロップダウンリストで自動<strong>更新</strong>間隔を指定できます。
+-   グラフには、選択した時間範囲で選択したノードの負荷に最も寄与する上位5種類のクエリが表示されます。
+-   リストでクエリタイプを選択すると、このノードでのそのクエリタイプの実行プランと、呼び出し/秒、スキャン行/秒、スキャンインデックス/秒、待機時間/呼び出しなどの実行の詳細を表示できます。
 
 ![Top SQL Details](/media/dashboard/top-sql-details.png)

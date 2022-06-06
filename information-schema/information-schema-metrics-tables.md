@@ -3,11 +3,11 @@ title: METRICS_TABLES
 summary: Learn the `METRICS_TABLES` system table.
 ---
 
-# METRICS_TABLES
+# METRICS_TABLES {#metrics-tables}
 
-The `METRICS_TABLES` table provides the PromQL (Prometheus Query Language) definition for each of the views in the [metrics_schema](/metrics-schema.md) database.
+`METRICS_TABLES`の表は、 [メトリックススキーマ](/metrics-schema.md)のデータベースの各ビューのPromQL（Prometheusクエリ言語）定義を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -26,15 +26,15 @@ DESC metrics_tables;
 +------------+--------------+------+------+---------+-------+
 ```
 
-Field description:
+フィールドの説明：
 
-* `TABLE_NAME`: Corresponds to the table name in `metrics_schema`.
-* `PROMQL`: The working principle of the monitoring table is to map SQL statements to `PromQL` and convert Prometheus results into SQL query results. This field is the expression template of `PromQL`. When you query the data of the monitoring table, the query conditions are used to rewrite the variables in this template to generate the final query expression.
-* `LABELS`: The label for the monitoring item. Each label corresponds to a column in the monitoring table. If the SQL statement contains the filter of the corresponding column, the corresponding `PromQL` changes accordingly.
-* `QUANTILE`: The percentile. For monitoring data of the histogram type, a default percentile is specified. If the value of this field is `0`, it means that the monitoring item corresponding to the monitoring table is not a histogram.
-* `COMMENT`: The comment about the monitoring table.
+-   `TABLE_NAME` ： `metrics_schema`のテーブル名に対応します。
+-   `PROMQL` ：監視テーブルの動作原理は、SQLステートメントを`PromQL`にマップし、Prometheusの結果をSQLクエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリする場合、クエリ条件を使用してこのテンプレートの変数を書き換え、最終的なクエリ式を生成します。
+-   `LABELS` ：監視項目のラベル。各ラベルは、監視テーブルの列に対応しています。 SQLステートメントに対応する列のフィルターが含まれている場合、対応する`PromQL`はそれに応じて変更されます。
+-   `QUANTILE` ：パーセンタイル。ヒストグラムタイプのデータを監視するために、デフォルトのパーセンタイルが指定されています。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
+-   `COMMENT` ：監視テーブルに関するコメント。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM metrics_tables LIMIT 5\G

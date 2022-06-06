@@ -3,96 +3,96 @@ title: The Blocklist of Optimization Rules and Expression Pushdown
 summary: Learn about the blocklist to control the optimization rules and the behavior of expression pushdown.
 ---
 
-# The Blocklist of Optimization Rules and Expression Pushdown
+# 最適化ルールと式のプッシュダウンのブロックリスト {#the-blocklist-of-optimization-rules-and-expression-pushdown}
 
-This document introduces how to use the blocklist of optimization rules and the blocklist of expression pushdown to control the behavior of TiDB.
+このドキュメントでは、最適化ルールのブロックリストと式プッシュダウンのブロックリストを使用して、TiDBの動作を制御する方法を紹介します。
 
-## The blocklist of optimization rules
+## 最適化ルールのブロックリスト {#the-blocklist-of-optimization-rules}
 
-The blocklist of optimization rules is one way to tune optimization rules, mainly used to manually disable some optimization rules.
+最適化ルールのブロックリストは、最適化ルールを調整する1つの方法であり、主に一部の最適化ルールを手動で無効にするために使用されます。
 
-### Important optimization rules
+### 重要な最適化ルール {#important-optimization-rules}
 
-|**Optimization Rule**|**Rule Name**|**Description**|
-| :--- | :--- | :--- |
-| Column pruning | column_prune | One operator will prune the column if it is not needed by the upper executor. |
-| Decorrelate subquery | decorrelate | Tries to rewrite the correlated subquery to non-correlated join or aggregation. |
-| Aggregation elimination | aggregation_eliminate | Tries to remove unnecessary aggregation operators from the execution plan. |
-| Projection elimination | projection_eliminate | Removes unnecessary projection operators from the execution plan. |
-| Max/Min elimination | max_min_eliminate | Rewrites some max/min functions in aggregation to the `order by` + `limit 1` form. |
-| Predicate pushdown | predicate_push_down | Tries to push predicates down to the operator that is closer to the data source. |
-| Outer join elimination | outer_join_eliminate | Tries to remove the unnecessary left join or right join from the execution plan. |
-| Partition pruning | partition_processor | Prunes partitions which are rejected by the predicates and rewrite partitioned table query to the `UnionAll + Partition Datasource` form. |
-| Aggregation pushdown | aggregation_push_down | Tries to push aggregations down to their children. |
-| TopN pushdown | topn_push_down | Tries to push the TopN operator to the place closer to the data source. |
-| Join reorder | join_reorder | Decides the order of multi-table joins. |
+| **最適化ルール**  | **ルール名**                | **説明**                                                                            |
+| :---------- | :---------------------- | :-------------------------------------------------------------------------------- |
+| 列の剪定        | column_prune            | 上位のエグゼキュータが必要としない場合は、1人のオペレータが列を整理します。                                            |
+| サブクエリを非相関化  | デコレレート                  | 相関サブクエリを非相関結合または集約に書き直そうとします。                                                     |
+| 集計の除去       | Aggregation_eliminate   | 実行プランから不要な集計演算子を削除しようとします。                                                        |
+| 突起物の除去      | Projection_eliminate    | 実行プランから不要な射影演算子を削除します。                                                            |
+| 最大/最小除去     | max_min_eliminate       | 一部のmax/min関数を集約して`order by` + `limit 1`形式に書き換えます。                                 |
+| 述語プッシュダウン   | predicate_push_down     | データソースに近い演算子に述語をプッシュしようとします。                                                      |
+| アウタージョインの排除 | external_join_eliminate | 実行プランから不要な左結合または右結合を削除しようとします。                                                    |
+| パーティションの剪定  | partition_processor     | 述部によって拒否されたパーティションを削除し、パーティションテーブルクエリを`UnionAll + Partition Datasource`形式に書き換えます。 |
+| 集計プッシュダウン   | Aggregation_push_down   | アグリゲーションを子にプッシュしようとします。                                                           |
+| TopNプッシュダウン | topn_push_down          | TopN演算子をデータソースに近い場所にプッシュしようとします。                                                  |
+| 再注文に参加      | join_reorder            | マルチテーブル結合の順序を決定します。                                                               |
 
-### Disable optimization rules
+### 最適化ルールを無効にする {#disable-optimization-rules}
 
-You can use the blocklist of optimization rules to disable some of them if some rules lead to a sub-optimal execution plan for special queries.
+一部のルールが特別なクエリの最適ではない実行プランにつながる場合は、最適化ルールのブロックリストを使用して、それらの一部を無効にすることができます。
 
-#### Usage
+#### 使用法 {#usage}
 
-> **Note:**
+> **ノート：**
 >
-> All the following operations need the `super privilege` privilege of the database. Each optimization rule has a name. For example, the name of column pruning is `column_prune`. The names of all optimization rules can be found in the second column of the table [Important Optimization Rules](#important-optimization-rules).
+> 以下のすべての操作には、データベースの`super privilege`の特権が必要です。各最適化ルールには名前があります。たとえば、列プルーニングの名前は`column_prune`です。すべての最適化ルールの名前は、表[重要な最適化ルール](#important-optimization-rules)の2番目の列にあります。
 
-- If you want to disable some rules, write its name to the `mysql.opt_rule_blacklist` table. For example:
+-   一部のルールを無効にする場合は、その名前を`mysql.opt_rule_blacklist`テーブルに書き込みます。例えば：
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT INTO mysql.opt_rule_blacklist VALUES("join_reorder"), ("topn_push_down");
     ```
 
-    Executing the following SQL statement can make the above operation take effect immediately. The effective range includes all old connections of the corresponding TiDB server:
+    次のSQLステートメントを実行すると、上記の操作をすぐに有効にすることができます。有効範囲には、対応するTiDBサーバーのすべての古い接続が含まれます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     admin reload opt_rule_blacklist;
     ```
 
-    > **Note:**
+    > **ノート：**
     >
-    > `admin reload opt_rule_blacklist` only takes effect on the TiDB server where the above statement has been run. If you want all TiDB servers of the cluster to take effect, run this command on each TiDB server.
+    > `admin reload opt_rule_blacklist`は、上記のステートメントが実行されたTiDBサーバーでのみ有効です。クラスタのすべてのTiDBサーバーを有効にする場合は、各TiDBサーバーでこのコマンドを実行します。
 
-- If you want to re-enable a rule, delete the corresponding data in the table, and then run the `admin reload` statement:
+-   ルールを再度有効にする場合は、テーブル内の対応するデータを削除してから、次の`admin reload`のステートメントを実行します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     DELETE FROM mysql.opt_rule_blacklist WHERE name IN ("join_reorder", "topn_push_down");
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     admin reload opt_rule_blacklist;
     ```
 
-## The blocklist of expression pushdown
+## 式プッシュダウンのブロックリスト {#the-blocklist-of-expression-pushdown}
 
-The blocklist of expression pushdown is one way to tune the expression pushdown, mainly used to manually disable some expressions of some specific data types.
+式のプッシュダウンのブロックリストは、式のプッシュダウンを調整する1つの方法であり、主に特定のデータ型の一部の式を手動で無効にするために使用されます。
 
-### Expressions which are supported to be pushed down
+### プッシュダウンがサポートされている式 {#expressions-which-are-supported-to-be-pushed-down}
 
-| Expression Classification | Concrete Operations |
-| :-------------- | :------------------------------------- |
-| [Logical operations](/functions-and-operators/operators.md#logical-operators) | AND (&&), OR (&#124;&#124;), NOT (!) |
-| [Comparison functions and operators](/functions-and-operators/operators.md#comparison-functions-and-operators) | <, <=, =, != (`<>`), >, >=, [`<=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to), [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in), IS NULL, LIKE, IS TRUE, IS FALSE, [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) |
-| [Numeric functions and operators](/functions-and-operators/numeric-functions-and-operators.md) | +, -, *, /, [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs), [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil), [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling), [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) |
-| [Control flow functions](/functions-and-operators/control-flow-functions.md) | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#operator_case), [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_if), [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_ifnull) |
-| [JSON functions](/functions-and-operators/json-functions.md) | [JSON_TYPE(json_val)](https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-type),<br/> [JSON_EXTRACT(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract),<br/> [JSON_UNQUOTE(json_val)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-unquote),<br/> [JSON_OBJECT(key, val[, key, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-object),<br/> [JSON_ARRAY([val[, val] ...])](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array),<br/> [JSON_MERGE(json_doc, json_doc[, json_doc] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge),<br/> [JSON_SET(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-set),<br/> [JSON_INSERT(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-insert),<br/> [JSON_REPLACE(json_doc, path, val[, path, val] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-replace),<br/> [JSON_REMOVE(json_doc, path[, path] ...)](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove) |
-| [Date and time functions](/functions-and-operators/date-and-time-functions.md) | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)  |
+| 式の分類                                                                                 | 具体的な操作                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :----------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [論理演算](/functions-and-operators/operators.md#logical-operators)                      | AND（&amp;&amp;）、OR（||）、NOT（！）                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [比較関数と演算子](/functions-and-operators/operators.md#comparison-functions-and-operators) | &lt;、&lt;=、=、！=（ `<>` ）、&gt;、&gt; =、 [`&#x3C;=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to) 、IS NULL、LIKE、IS TRUE、IS [`COALESCE()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_coalesce) 、 [`IN()`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)              | [`FLOOR()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_floor) 、-、 [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil) 、 [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling) 、 [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| [制御フロー機能](/functions-and-operators/control-flow-functions.md)                        | [`CASE`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#operator_case) [`IF()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_if) [`IFNULL()`](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html#function_ifnull)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [JSON関数](/functions-and-operators/json-functions.md)                                 | [JSON_TYPE（json_val）](https://dev.mysql.com/doc/refman/5.7/en/json-attribute-functions.html#function_json-type) 、<br/> [JSON_EXTRACT（json_doc、path [、path] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html#function_json-extract) 、<br/> [JSON_UNQUOTE（json_val）](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-unquote) 、<br/> [JSON_OBJECT（key、val [、key、val] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-object) 、<br/> [JSON_ARRAY（[val [、val] ...]）](https://dev.mysql.com/doc/refman/5.7/en/json-creation-functions.html#function_json-array) 、<br/> [JSON_MERGE（json_doc、json_doc [、json_doc] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge) 、<br/> [JSON_SET（json_doc、path、val [、path、val] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-set) 、<br/> [JSON_INSERT（json_doc、path、val [、path、val] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-insert) 、<br/> [JSON_REPLACE（json_doc、path、val [、path、val] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-replace) 、<br/> [JSON_REMOVE（json_doc、path [、path] ...）](https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove) |
+| [日付と時刻の関数](/functions-and-operators/date-and-time-functions.md)                      | [`DATE_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_date-format)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
-### Disable the pushdown of specific expressions
+### 特定の式のプッシュダウンを無効にする {#disable-the-pushdown-of-specific-expressions}
 
-When you get wrong results due to the expression pushdown, you can use the blocklist to make a quick recovery for the application. More specifically, you can add some of the supported functions or operators to the `mysql.expr_pushdown_blacklist` table to disable the pushdown of specific expressions.
+式のプッシュダウンが原因で間違った結果が得られた場合は、ブロックリストを使用してアプリケーションをすばやく回復できます。具体的には、サポートされている関数または演算子の一部を`mysql.expr_pushdown_blacklist`テーブルに追加して、特定の式のプッシュダウンを無効にすることができます。
 
-The schema of `mysql.expr_pushdown_blacklist` is shown as follows:
+`mysql.expr_pushdown_blacklist`のスキーマは次のように表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DESC mysql.expr_pushdown_blacklist;
@@ -109,48 +109,48 @@ DESC mysql.expr_pushdown_blacklist;
 3 rows in set (0.00 sec)
 ```
 
-Here is the description of each field above:
+上記の各フィールドの説明は次のとおりです。
 
-+ `name`: The name of the function that is disabled to be pushed down.
-+ `store_type`: To specify the component that you want to prevent the function from being pushed down to for computing. Available components are `tidb`, `tikv`, and `tiflash`. The `store_type` is case-insensitive. If you need to specify multiple components, use a comma to separate each component.
-    - When `store_type` is `tidb`, it indicates whether the function can be executed in other TiDB servers while the TiDB memory table is being read.
-    - When `store_type` is `tikv`, it indicates whether the function can be executed in TiKV server's Coprocessor component.
-    - When `store_type` is `tiflash`, it indicates whether the function can be executed in TiFlash Server's Coprocessor component.
-+ `reason`: To record the reason why this function is added to the blocklist.
+-   `name` ：プッシュダウンが無効になっている関数の名前。
+-   `store_type` ：計算のために関数がプッシュダウンされないようにするコンポーネントを指定します。使用可能なコンポーネントは`tidb` 、および`tikv` `tiflash` 。 `store_type`では大文字と小文字は区別されません。複数のコンポーネントを指定する必要がある場合は、コンマを使用して各コンポーネントを区切ります。
+    -   `store_type`が`tidb`の場合、TiDBメモリテーブルの読み込み中に他のTiDBサーバーで機能を実行できるかどうかを示します。
+    -   `store_type`が`tikv`の場合、TiKVサーバーのコプロセッサーコンポーネントで機能を実行できるかどうかを示します。
+    -   `store_type`が`tiflash`の場合、TiFlashサーバーのコプロセッサーコンポーネントで機能を実行できるかどうかを示します。
+-   `reason` ：この機能がブロックリストに追加された理由を記録します。
 
-### Usage
+### 使用法 {#usage}
 
-This section describes how to use the blocklist of expression pushdown.
+このセクションでは、式プッシュダウンのブロックリストの使用方法について説明します。
 
-#### Add to the blocklist
+#### ブロックリストに追加 {#add-to-the-blocklist}
 
-To add one or more expressions (functions or operators) to the blocklist, perform the following steps:
+1つ以上の式（関数または演算子）をブロックリストに追加するには、次の手順を実行します。
 
-1. Insert the corresponding function name or operator name, and the set of components you want to disable the pushdown, to the `mysql.expr_pushdown_blacklist` table.
+1.  対応する関数名または演算子名、およびプッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`のテーブルに挿入します。
 
-2. Execute `admin reload expr_pushdown_blacklist`.
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
-### Remove from the blocklist
+### ブロックリストから削除する {#remove-from-the-blocklist}
 
-To remove one or more expressions from the blocklist, perform the following steps:
+ブロックリストから1つ以上の式を削除するには、次の手順を実行します。
 
-1. Delete the corresponding function name or operator name, and the set of components you want to disable the pushdown, from the `mysql.expr_pushdown_blacklist` table.
+1.  対応する関数名または演算子名、およびプッシュダウンを無効にするコンポーネントのセットを`mysql.expr_pushdown_blacklist`のテーブルから削除します。
 
-2. Execute `admin reload expr_pushdown_blacklist`.
+2.  `admin reload expr_pushdown_blacklist`を実行します。
 
-> **Note:**
+> **ノート：**
 >
-> `admin reload expr_pushdown_blacklist` only takes effect on the TiDB server where this statement is run. If you want all TiDB servers of the cluster to take effect, run this command on each TiDB server.
+> `admin reload expr_pushdown_blacklist`は、このステートメントが実行されるTiDBサーバーでのみ有効です。クラスタのすべてのTiDBサーバーを有効にする場合は、各TiDBサーバーでこのコマンドを実行します。
 
-## Expression blocklist usage example
+## 式ブロックリストの使用例 {#expression-blocklist-usage-example}
 
-In the following example, the `<` and `>` operators are added to the blocklist, and then the `>` operator is removed from the blocklist.
+次の例では、 `<`と`>`の演算子がブロックリストに追加され、次に`>`の演算子がブロックリストから削除されます。
 
-To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (See [TiDB Query Execution Plan Overview](/explain-overview.md)).
+ブロックリストが有効かどうかを判断するには、 `EXPLAIN`の結果を観察します（ [TiDBクエリ実行プランの概要](/explain-overview.md)を参照）。
 
-1. The predicates `a < 2` and `a > 2` in the `WHERE` clause of the following SQL statement can be pushed down to TiKV.
+1.  次のSQLステートメントの`WHERE`節の述語`a < 2`と`a > 2`は、TiKVにプッシュダウンできます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;
@@ -167,9 +167,9 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     3 rows in set (0.00 sec)
     ```
 
-2. Insert the expression to the `mysql.expr_pushdown_blacklist` table and execute `admin reload expr_pushdown_blacklist`.
+2.  式を`mysql.expr_pushdown_blacklist`テーブルに挿入し、 `admin reload expr_pushdown_blacklist`を実行します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     INSERT INTO mysql.expr_pushdown_blacklist VALUES('<','tikv',''), ('>','tikv','');
@@ -180,7 +180,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Records: 2  Duplicates: 0  Warnings: 0
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     admin reload expr_pushdown_blacklist;
@@ -190,9 +190,9 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-3. Observe the execution plan again and you will find that both the `<` and `>` operators are not pushed down to TiKV Coprocessor.
+3.  実行プランをもう一度観察すると、 `<`と`>`の両方のオペレーターがTiKVコプロセッサーにプッシュダウンされていないことがわかります。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 and a > 2;
@@ -209,9 +209,9 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     3 rows in set (0.00 sec)
     ```
 
-4. Remove one expression (here is `>`) from the blocklist and execute `admin reload expr_pushdown_blacklist`.
+4.  ブロックリストから1つの式（ここでは`>` ）を削除し、 `admin reload expr_pushdown_blacklist`を実行します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     DELETE FROM mysql.expr_pushdown_blacklist WHERE name = '>';
@@ -221,7 +221,7 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 1 row affected (0.01 sec)
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     admin reload expr_pushdown_blacklist;
@@ -231,9 +231,9 @@ To judge whether the blocklist takes effect, observe the results of `EXPLAIN` (S
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-5. Observe the execution plan again and you will find that `<` is not pushed down while `>` is pushed down to TiKV Coprocessor.
+5.  実行プランをもう一度観察すると、 `>`がTiKVコプロセッサーにプッシュダウンされている間、 `<`はプッシュダウンされていないことがわかります。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     EXPLAIN SELECT * FROM t WHERE a < 2 AND a > 2;

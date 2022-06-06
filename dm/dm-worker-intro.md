@@ -3,93 +3,93 @@ title: DM-worker Introduction
 summary: Learn the features of DM-worker.
 ---
 
-# DM-worker Introduction
+# DMワーカーの紹介 {#dm-worker-introduction}
 
-DM-worker is a tool used to migrate data from MySQL/MariaDB to TiDB.
+DM-workerは、MySQL/MariaDBからTiDBにデータを移行するために使用されるツールです。
 
-It has the following features:
+次の機能があります。
 
-- Acts as a secondary database of any MySQL or MariaDB instance
-- Reads the binlog events from MySQL/MariaDB and persists them to the local storage
-- A single DM-worker supports migrating the data of one MySQL/MariaDB instance to multiple TiDB instances
-- Multiple DM-workers support migrating the data of multiple MySQL/MariaDB instances to one TiDB instance
+-   MySQLまたはMariaDBインスタンスのセカンダリデータベースとして機能します
+-   MySQL / MariaDBからbinlogイベントを読み取り、ローカルストレージに保持します
+-   1人のDMワーカーが、1つのMySQL/MariaDBインスタンスのデータを複数のTiDBインスタンスに移行することをサポートします
+-   複数のDMワーカーは、複数のMySQL/MariaDBインスタンスのデータを1つのTiDBインスタンスに移行することをサポートします
 
-## DM-worker processing unit
+## DMワーカー処理ユニット {#dm-worker-processing-unit}
 
-A DM-worker task contains multiple logic units, including relay log, the dump processing unit, the load processing unit, and binlog replication.
+DM-workerタスクには、リレーログ、ダンプ処理ユニット、ロード処理ユニット、binlogレプリケーションなどの複数のロジックユニットが含まれています。
 
-### Relay log
+### リレーログ {#relay-log}
 
-The relay log persistently stores the binlog data from the upstream MySQL/MariaDB and provides the feature of accessing binlog events for the binlog replication.
+リレーログは、アップストリームのMySQL / MariaDBからのbinlogデータを永続的に保存し、binlogレプリケーションのbinlogイベントにアクセスする機能を提供します。
 
-Its rationale and features are similar to the relay log of MySQL. For details, see [MySQL Relay Log](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html).
+その理論的根拠と機能は、MySQLのリレーログに似ています。詳細については、 [MySQLリレーログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)を参照してください。
 
-### Dump processing unit
+### ダンプ処理ユニット {#dump-processing-unit}
 
-The dump processing unit dumps the full data from the upstream MySQL/MariaDB to the local disk.
+ダンプ処理ユニットは、アップストリームのMySQL/MariaDBからローカルディスクに完全なデータをダンプします。
 
-### Load processing unit
+### 負荷処理ユニット {#load-processing-unit}
 
-The load processing unit reads the dumped files of the dump processing unit and then loads these files to the downstream TiDB.
+ロード処理ユニットは、ダンプ処理ユニットのダンプされたファイルを読み取り、これらのファイルをダウンストリームTiDBにロードします。
 
-### Binlog replication/sync processing unit
+### Binlogレプリケーション/同期処理ユニット {#binlog-replication-sync-processing-unit}
 
-Binlog replication/sync processing unit reads the binlog events of the upstream MySQL/MariaDB or the binlog events of the relay log, transforms these events to SQL statements, and then applies these statements to the downstream TiDB.
+Binlogレプリケーション/同期処理ユニットは、アップストリームのMySQL / MariaDBのbinlogイベントまたはリレーログのbinlogイベントを読み取り、これらのイベントをSQLステートメントに変換してから、これらのステートメントをダウンストリームのTiDBに適用します。
 
-## Privileges required by DM-worker
+## DM-workerに必要な権限 {#privileges-required-by-dm-worker}
 
-This section describes the upstream and downstream database users' privileges required by DM-worker, and the user privileges required by the respective processing unit.
+このセクションでは、DM-workerに必要なアップストリームおよびダウンストリームのデータベースユーザーの特権と、それぞれの処理装置に必要なユーザー特権について説明します。
 
-### Upstream database user privileges
+### アップストリームデータベースのユーザー権限 {#upstream-database-user-privileges}
 
-The upstream database (MySQL/MariaDB) user must have the following privileges:
+アップストリームデータベース（MySQL / MariaDB）ユーザーには、次の権限が必要です。
 
-| Privilege | Scope |
-|:----|:----|
-| `SELECT` | Tables |
-| `RELOAD` | Global |
-| `REPLICATION SLAVE` | Global |
-| `REPLICATION CLIENT` | Global |
+| 特権                   | 範囲    |
+| :------------------- | :---- |
+| `SELECT`             | テーブル  |
+| `RELOAD`             | グローバル |
+| `REPLICATION SLAVE`  | グローバル |
+| `REPLICATION CLIENT` | グローバル |
 
-If you need to migrate the data from `db1` to TiDB, execute the following `GRANT` statement:
+データを`db1`からTiDBに移行する必要がある場合は、次の`GRANT`のステートメントを実行します。
 
 ```sql
 GRANT RELOAD,REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'your_user'@'your_wildcard_of_host'
 GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 ```
 
-If you also need to migrate the data from other databases into TiDB, make sure the same privileges are granted to the user of the respective databases.
+他のデータベースからTiDBにデータを移行する必要がある場合は、それぞれのデータベースのユーザーに同じ権限が付与されていることを確認してください。
 
-### Downstream database user privileges
+### ダウンストリームデータベースのユーザー権限 {#downstream-database-user-privileges}
 
-The downstream database (TiDB) user must have the following privileges:
+ダウンストリームデータベース（TiDB）ユーザーには、次の権限が必要です。
 
-| Privilege | Scope |
-|:----|:----|
-| `SELECT` | Tables |
-| `INSERT` | Tables |
-| `UPDATE` | Tables |
-| `DELETE` | Tables |
-| `CREATE` | Databases, tables |
-| `DROP` | Databases, tables |
-| `ALTER` | Tables |
-| `INDEX` | Tables |
+| 特権       | 範囲          |
+| :------- | :---------- |
+| `SELECT` | テーブル        |
+| `INSERT` | テーブル        |
+| `UPDATE` | テーブル        |
+| `DELETE` | テーブル        |
+| `CREATE` | データベース、テーブル |
+| `DROP`   | データベース、テーブル |
+| `ALTER`  | テーブル        |
+| `INDEX`  | テーブル        |
 
-Execute the following `GRANT` statement for the databases or tables that you need to migrate:
+移行する必要のあるデータベースまたはテーブルに対して、次の`GRANT`のステートメントを実行します。
 
 ```sql
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX  ON db.table TO 'your_user'@'your_wildcard_of_host';
 ```
 
-### Minimal privilege required by each processing unit
+### 各処理ユニットに必要な最小限の特権 {#minimal-privilege-required-by-each-processing-unit}
 
-| Processing unit | Minimal upstream (MySQL/MariaDB) privilege | Minimal downstream (TiDB) privilege | Minimal system privilege |
-|:----|:--------------------|:------------|:----|
-| Relay log | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`show master status`, `show slave status`) | NULL | Read/Write local files |
-| Dump | `SELECT`<br/>`RELOAD` (flushes tables with Read lock and unlocks tables）| NULL | Write local files |
-| Load | NULL | `SELECT` (Query the checkpoint history)<br/>`CREATE` (creates a database/table)<br/>`DELETE` (deletes checkpoint)<br/>`INSERT` (Inserts the Dump data) | Read/Write local files |
-| Binlog replication | `REPLICATION SLAVE` (reads the binlog)<br/>`REPLICATION CLIENT` (`show master status`, `show slave status`) | `SELECT` (shows the index and column)<br/>`INSERT` (DML)<br/>`UPDATE` (DML)<br/>`DELETE` (DML)<br/>`CREATE` (creates a database/table)<br/>`DROP` (drops databases/tables)<br/>`ALTER` (alters a table)<br/>`INDEX` (creates/drops an index)| Read/Write local files |
+| 処理ユニット         | 最小限のアップストリーム（MySQL / MariaDB）特権                                                                          | 最小限のダウンストリーム（TiDB）特権                                                                                                                                                                                          | 最小限のシステム特権         |
+| :------------- | :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------- |
+| リレーログ          | `REPLICATION SLAVE` （binlogを読み取ります）<br/> `REPLICATION CLIENT` （ `show master status` `show slave status` | ヌル                                                                                                                                                                                                            | ローカルファイルの読み取り/書き込み |
+| ごみ             | `SELECT`<br/> `RELOAD` （読み取りロックを使用してテーブルをフラッシュし、テーブルのロックを解除します）                                          | ヌル                                                                                                                                                                                                            | ローカルファイルを書き込む      |
+| ロード            | ヌル                                                                                                       | `SELECT` （チェックポイント履歴を照会する）<br/> `CREATE` （データベース/テーブルを作成します）<br/> `DELETE` （チェックポイントを削除します）<br/> `INSERT` （ダンプデータを挿入します）                                                                                      | ローカルファイルの読み取り/書き込み |
+| Binlogレプリケーション | `REPLICATION SLAVE` （binlogを読み取ります）<br/> `REPLICATION CLIENT` （ `show master status` `show slave status` | `SELECT` （インデックスと列を表示します）<br/> `INSERT` （DML）<br/> `UPDATE` （DML）<br/> `DELETE` （DML）<br/> `CREATE` （データベース/テーブルを作成します）<br/> `DROP` （データベース/テーブルを削除します）<br/> `ALTER` （テーブルを変更します）<br/> `INDEX` （インデックスを作成/削除） | ローカルファイルの読み取り/書き込み |
 
-> **Note:**
+> **ノート：**
 >
-> These privileges are not immutable and they change as the request changes.
+> これらの特権は不変ではなく、要求が変更されると変更されます。

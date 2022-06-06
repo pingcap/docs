@@ -4,54 +4,54 @@ summary: Learn how to select your cluster tier on TiDB Cloud.
 aliases: ['/tidbcloud/public-preview/developer-tier-cluster']
 ---
 
-# Select Your Cluster Tier
+# クラスタ層を選択してください {#select-your-cluster-tier}
 
-The cluster tier determines the throughput and performance of your cluster.
+クラスタ層は、クラスタのスループットとパフォーマンスを決定します。
 
-TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
+TiDBクラウドは、クラスタ層の次の2つのオプションを提供します。クラスタを作成する前に、どのオプションがニーズに適しているかを検討する必要があります。
 
-- [Developer Tier](#developer-tier)
-- [Dedicated Tier](#dedicated-tier)
+-   [開発者層](#developer-tier)
+-   [専用層](#dedicated-tier)
 
-## Developer Tier
+## 開発者層 {#developer-tier}
 
-The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
+TiDBクラウド開発者層は、TiDBのフルマネージドサービスである1の[TiDBクラウド](https://pingcap.com/products/tidbcloud)年間の無料トライアルです。開発者層クラスターは、プロトタイプアプリケーション、ハッカソン、アカデミックコースなどの非本番ワークロードに使用したり、非商用データセットに一時的なデータサービスを提供したりするために使用できます。
 
-Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
+各開発者層クラスタはフル機能のTiDBクラスタであり、次のものが付属しています。
 
-- 1 TiDB shared node
-- 1 TiKV shared node (with 10 GiB of OLTP storage)
-- 1 TiFlash<sup>beta</sup> shared node (with 10 GiB of OLAP storage)
+-   1TiDB共有ノード
+-   1つのTiKV共有ノード（10 GiBのOLTPストレージを使用）
+-   1つのTiFlash<sup>ベータ</sup>共有ノード（10 GiBのOLAPストレージを使用）
 
-Developer Tier clusters run on shared nodes. Although each node is run in its own container on a virtual machine (VM), that VM is also running other TiDB, TiKV, or TiFlash<sup>beta</sup> nodes. As a result, shared nodes will have reduced performance when compared to standard, dedicated TiDB Cloud nodes. However, as all nodes are running in separate containers and have dedicated cloud disks, data stored in a Developer Tier cluster is isolated and will never be exposed to other TiDB clusters.
+開発者層クラスターは共有ノードで実行されます。各ノードは仮想マシン（VM）上の独自のコンテナーで実行されますが、そのVMは他のTiDB、TiKV、またはTiFlash<sup>ベータ</sup>ノードも実行しています。その結果、共有ノードは、標準の専用TiDBクラウドノードと比較してパフォーマンスが低下します。ただし、すべてのノードが別々のコンテナーで実行され、専用のクラウドディスクがあるため、開発者層クラスタに格納されたデータは分離され、他のTiDBクラスターに公開されることはありません。
 
-For each TiDB Cloud account, you can use one complimentary Developer Tier cluster to use for one year. Although you can only run one Developer Tier cluster at a time, you can delete and recreate the cluster as many times as you wish.
+TiDBクラウドアカウントごとに、1つの無料の開発者層クラスタを使用して1年間使用できます。一度に実行できる開発者層クラスタは1つだけですが、クラスタの削除と再作成は何度でも実行できます。
 
-The one-year free trial begins the day the first Developer Tier cluster is created.
+1年間の無料トライアルは、最初の開発者層クラスタが作成された日から始まります。
 
-### Developer Tier special terms and conditions
+### 開発者層の特別利用規約 {#developer-tier-special-terms-and-conditions}
 
-- No uptime SLA guarantee.
-- No high availability or automatic failover.
-- Upgrades to clusters might incur significant downtimes.
-- Each cluster allows one automatic daily backup and two manual backups.
-- The maximum number of connections to the Dev Tier cluster is 50.
-- You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
-- You cannot use VPC Peering to connect to clusters.
-- You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
-- You cannot use a third-party monitoring service.
-- You cannot customize the port number of a TiDB cluster.
-- The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
-- The cluster will be backed up and shut down after 7 days of inactivity. To use the cluster again, you can restore it from previous backups.
+-   稼働時間のSLA保証はありません。
+-   高可用性や自動フェイルオーバーはありません。
+-   クラスタへのアップグレードでは、大幅なダウンタイムが発生する可能性があります。
+-   各クラスタでは、1日1回の自動バックアップと2回の手動バックアップが可能です。
+-   開発層クラスタへの接続の最大数は50です。
+-   チェンジフィード（Apache KafkaSinkおよびMySQLSink）を作成したり、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用して増分データを複製したりすることはできません。
+-   VPCピアリングを使用してクラスタに接続することはできません。
+-   クラスタをより大きなストレージや標準ノードに拡張したり、ノードの数を増やしたりすることはできません。
+-   サードパーティの監視サービスを使用することはできません。
+-   TiDBクラスタのポート番号をカスタマイズすることはできません。
+-   データ転送は、1週間に合計20GiBの入出力に制限されています。 20 GiBの制限に達すると、ネットワークトラフィックは10 KB/sに抑制されます。
+-   クラスタは、7日間非アクティブになった後、バックアップおよびシャットダウンされます。クラスタを再度使用するには、以前のバックアップからクラスタを復元できます。
 
-## Dedicated Tier
+## 専用層 {#dedicated-tier}
 
-The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、本番環境専用です。
 
-For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash<sup>beta</sup> easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
+専用層クラスターの場合、ビジネスニーズに応じて、TiDB、TiKV、およびTiFlash<sup>ベータ</sup>のクラスタサイズを簡単にカスタマイズできます。 TiKVノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)の異なるアベイラビリティーゾーンに分散されます。
 
-To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
+専用層クラスタを作成するには、 [お支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証（PoC）トライアルを申請する](/tidb-cloud/tidb-cloud-poc.md)にする必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> You cannot change the cluster storage size after your cluster is created.
+> クラスタの作成後にクラスタストレージサイズを変更することはできません。

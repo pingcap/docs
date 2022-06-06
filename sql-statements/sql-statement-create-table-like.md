@@ -3,11 +3,11 @@ title: CREATE TABLE LIKE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE LIKE for the TiDB database.
 ---
 
-# CREATE TABLE LIKE
+# テーブルのようなものを作成 {#create-table-like}
 
-This statement copies the definition of an existing table, without copying any data.
+このステートメントは、データをコピーせずに、既存のテーブルの定義をコピーします。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 CreateTableLikeStmt ::=
@@ -24,7 +24,7 @@ OnCommitOpt ::=
     ('ON' 'COMMIT' 'DELETE' 'ROWS')?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT NOT NULL);
@@ -53,15 +53,15 @@ mysql> SELECT * FROM t2;
 Empty set (0.00 sec)
 ```
 
-## Pre-split region
+## 事前分割領域 {#pre-split-region}
 
-If the table to be copied is defined with the `PRE_SPLIT_REGIONS` attribute, the table created using the `CREATE TABLE LIKE` statement inherits this attribute, and the Region on the new table will be split. For details of `PRE_SPLIT_REGIONS`, see [`CREATE TABLE` Statement](/sql-statements/sql-statement-create-table.md).
+コピーするテーブルが`PRE_SPLIT_REGIONS`属性で定義されている場合、 `CREATE TABLE LIKE`ステートメントを使用して作成されたテーブルはこの属性を継承し、新しいテーブルのリージョンが分割されます。 `PRE_SPLIT_REGIONS`の詳細については、 [`CREATE TABLE`ステートメント](/sql-statements/sql-statement-create-table.md)を参照してください。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)

@@ -3,100 +3,100 @@ title: TiDB Lightning Deployment
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 ---
 
-# TiDB Lightning Deployment
+# TiDBLightningの導入 {#tidb-lightning-deployment}
 
-This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
+このドキュメントでは、ローカルバックエンドを使用したTiDB Lightningのハードウェア要件と、手動でデプロイする方法について説明します。
 
-If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
+ローカルバックエンドがデータのインポートに使用されている場合、インポートプロセス中**、クラスタはサービスを提供できません**。 TiDBサービスに影響を与えたくない場合は、 [TiDBLightningTiDB-バックエンド](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend)に従ってデータのインポートを実行します。
 
-## Notes
+## ノート {#notes}
 
-Before starting TiDB Lightning, note that:
+TiDB Lightningを開始する前に、次の点に注意してください。
 
-- If `tidb-lightning` crashes, the cluster is left in "import mode". Forgetting to switch back to "normal mode" can lead to a high amount of uncompacted data on the TiKV cluster, and cause abnormally high CPU usage and stall. You can manually switch the cluster back to "normal mode" via the `tidb-lightning-ctl` tool:
+-   `tidb-lightning`がクラッシュした場合、クラスタは「インポートモード」のままになります。 「通常モード」に戻すのを忘れると、TiKVクラスタ上に大量の圧縮されていないデータが発生し、異常に高いCPU使用率とストールが発生する可能性があります。 `tidb-lightning-ctl`のツールを使用して、クラスタを手動で「通常モード」に戻すことができます。
 
     ```sh
     bin/tidb-lightning-ctl --switch-mode=normal
     ```
 
-- TiDB Lightning is required to have the following privileges in the downstream TiDB:
+-   TiDB Lightningには、ダウンストリームTiDBで次の権限が必要です。
 
-    | Privilege | Scope |
-    |----:|:------|
-    | SELECT | Tables |
-    | INSERT | Tables |
-    | UPDATE | Tables |
-    | DELETE | Tables |
-    | CREATE | Databases, tables |
-    | DROP | Databases, tables |
-    | ALTER | Tables |
+    |     特権 | 範囲          |
+    | -----: | :---------- |
+    |   選択する | テーブル        |
+    |    入れる | テーブル        |
+    | アップデート | テーブル        |
+    |     消去 | テーブル        |
+    |     作成 | データベース、テーブル |
+    |    落とす | データベース、テーブル |
+    |  ALTER | テーブル        |
 
-    If the `checksum` configuration item of TiDB Lightning is set to `true`, then the admin user privileges in the downstream TiDB need to be granted to TiDB Lightning.
+    TiDB Lightningの`checksum`構成項目が`true`に設定されている場合、ダウンストリームTiDBの管理者ユーザー権限をTiDBLightningに付与する必要があります。
 
-## Hardware requirements
+## ハードウェア要件 {#hardware-requirements}
 
-`tidb-lightning` is a resource-intensive program. It is recommended to deploy it as follows.
+`tidb-lightning`はリソースを大量に消費するプログラムです。次のように展開することをお勧めします。
 
-- 32+ logical cores CPU
-- 20GB+ memory
-- An SSD large enough to store the entire data source, preferring higher read speed
-- 10 Gigabit network card (capable of transferring at ≥1 GB/s)
-- `tidb-lightning` fully consumes all CPU cores when running, and deploying on a dedicated machine is highly recommended. If not possible, `tidb-lightning` could be deployed together with other components like `tidb-server`, and the CPU usage could be limited via the `region-concurrency` setting.
+-   32以上の論理コアCPU
+-   20GB以上のメモリ
+-   データソース全体を保存するのに十分な大きさのSSDで、より高速な読み取り速度を優先します
+-   10ギガビットネットワークカード（1GB /秒以上で転送可能）
+-   `tidb-lightning`は、実行時にすべてのCPUコアを完全に消費するため、専用マシンにデプロイすることを強くお勧めします。不可能な場合は、 `tidb-lightning`を`tidb-server`などの他のコンポーネントと一緒にデプロイし、CPU使用率を`region-concurrency`設定で制限することができます。
 
-> **Note:**
+> **ノート：**
 >
-> - `tidb-lightning` is a CPU intensive program. In an environment with mixed components, the resources allocated to `tidb-lightning` must be limited. Otherwise, other components might not be able to run. It is recommended to set the `region-concurrency` to 75% of CPU logical cores. For instance, if the CPU has 32 logical cores, you can set the `region-concurrency` to 24.
+> -   `tidb-lightning`はCPUを集中的に使用するプログラムです。コンポーネントが混在する環境では、 `tidb-lightning`に割り当てられるリソースを制限する必要があります。そうしないと、他のコンポーネントを実行できない可能性があります。 CPU論理コアの`region-concurrency` ％を設定することをお勧めします。たとえば、CPUに32個の論理コアがある場合、 `region-concurrency`を24に設定できます。
 
-Additionally, the target TiKV cluster should have enough space to absorb the new data. Besides [the standard requirements](/hardware-and-software-requirements.md), the total free space of the target TiKV cluster should be larger than **Size of data source × [Number of replicas](/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it) × 2**.
+さらに、ターゲットTiKVクラスタには、新しいデータを吸収するのに十分なスペースが必要です。 [標準要件](/hardware-and-software-requirements.md)に加えて、ターゲットTiKVクラスタの合計空き領域は、**データソースのサイズ× <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>×2**よりも大きくする必要があります。
 
-With the default replica count of 3, this means the total free space should be at least 6 times the size of data source.
+デフォルトのレプリカ数が3の場合、これは、合計空き領域がデータソースのサイズの少なくとも6倍であることを意味します。
 
-## Export data
+## データのエクスポート {#export-data}
 
-Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
+次のコマンドを使用してMySQLからデータをエクスポートするには、 [`dumpling`ツール](/dumpling-overview.md)を使用します。
 
 ```sh
 ./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
-In this command,
+このコマンドでは、
 
-- `-B test`: means the data is exported from the `test` database.
-- `-f test.t[12]`: means only the `test.t1` and `test.t2` tables are exported.
-- `-t 16`: means 16 threads are used to export the data.
-- `-F 256MB`: means a table is partitioned into chunks and one chunk is 256 MB.
+-   `-B test` ：データが`test`データベースからエクスポートされることを意味します。
+-   `-f test.t[12]` ： `test.t1`つと`test.t2`のテーブルのみがエクスポートされることを意味します。
+-   `-t 16` ：データのエクスポートに16スレッドが使用されることを意味します。
+-   `-F 256MB` ：テーブルがチャンクに分割され、1つのチャンクが256MBであることを意味します。
 
-If the data source consists of CSV files, see [CSV support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md) for configuration.
+データソースがCSVファイルで構成されている場合、構成については[CSVサポート](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)を参照してください。
 
-## Deploy TiDB Lightning
+## TiDBLightningをデプロイ {#deploy-tidb-lightning}
 
-This section describes how to [deploy TiDB Lightning manually](#deploy-tidb-lightning-manually).
+このセクションでは、 [TiDBLightningを手動でデプロイする](#deploy-tidb-lightning-manually)の方法について説明します。
 
-### Deploy TiDB Lightning manually
+### TiDBLightningを手動でデプロイ {#deploy-tidb-lightning-manually}
 
-#### Step 1: Deploy a TiDB cluster
+#### ステップ1：TiDBクラスタをデプロイする {#step-1-deploy-a-tidb-cluster}
 
-Before importing data, you need to have a deployed TiDB cluster. It is highly recommended to use the latest stable version.
+データをインポートする前に、TiDBクラスタをデプロイする必要があります。最新の安定バージョンを使用することを強くお勧めします。
 
-You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-with-tidb.md).
+展開手順は[TiDBクイックスタートガイド](/quick-start-with-tidb.md)にあります。
 
-#### Step 2: Download the TiDB Lightning installation package
+#### 手順2：TiDBLightningインストールパッケージをダウンロードする {#step-2-download-the-tidb-lightning-installation-package}
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
+TiDB Lightningパッケージをダウンロードするには、 [TiDBエンタープライズツールのダウンロードページ](/download-ecosystem-tools.md#tidb-lightning)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> TiDB Lightning is compatible with TiDB clusters of earlier versions. It is recommended that you download the latest stable version of the TiDB Lightning installation package.
+> TiDB Lightningは、以前のバージョンのTiDBクラスターと互換性があります。 TiDBLightningインストールパッケージの最新の安定バージョンをダウンロードすることをお勧めします。
 
-#### Step 3: Start `tidb-lightning`
+#### ステップ3： <code>tidb-lightning</code>を開始します {#step-3-start-code-tidb-lightning-code}
 
-1. Upload `bin/tidb-lightning` and `bin/tidb-lightning-ctl` from the tool set.
+1.  ツールセットから`bin/tidb-lightning`と`bin/tidb-lightning-ctl`をアップロードします。
 
-2. Mount the data source onto the same machine.
+2.  データソースを同じマシンにマウントします。
 
-3. Configure `tidb-lightning.toml`. For configurations that do not appear in the template below, TiDB Lightning writes a configuration error to the log file and exits.
+3.  `tidb-lightning.toml`を構成します。以下のテンプレートに表示されない構成の場合、TiDBLightningは構成エラーをログファイルに書き込んで終了します。
 
-    `sorted-kv-dir` sets the temporary storage directory for the sorted Key-Value files. The directory must be empty, and the storage space **must be greater than the size of the dataset to be imported**.
+    `sorted-kv-dir`は、ソートされたKey-Valueファイルの一時ストレージディレクトリを設定します。ディレクトリは空である必要があり、ストレージスペース**はインポートするデータセットのサイズよりも大きい必要があります**。
 
     ```toml
     [lightning]
@@ -131,16 +131,16 @@ Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#
     pd-addr = "172.16.31.4:2379"
     ```
 
-    The above only shows the essential settings. See the [Configuration](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global) section for the full list of settings.
+    上記は基本的な設定のみを示しています。設定の完全なリストについては、 [Configuration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)セクションを参照してください。
 
-4. Run `tidb-lightning`.
+4.  `tidb-lightning`を実行します。
 
     ```sh
     nohup ./tidb-lightning -config tidb-lightning.toml > nohup.out &
     ```
 
-## Upgrading TiDB Lightning
+## TiDBLightningのアップグレード {#upgrading-tidb-lightning}
 
-You can upgrade TiDB Lightning by replacing the binaries alone. No further configuration is needed. See [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) for the detailed instructions of restarting TiDB Lightning.
+バイナリのみを置き換えることで、TiDBLightningをアップグレードできます。これ以上の構成は必要ありません。 TiDB Lightningを再起動する詳細な手順については、 [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
 
-If an import task is running, we recommend you to wait until it finishes before upgrading TiDB Lightning. Otherwise, there might be chances that you need to reimport from scratch, because there is no guarantee that checkpoints work across versions.
+インポートタスクが実行されている場合は、TiDBLightningをアップグレードする前にタスクが完了するまで待つことをお勧めします。そうしないと、チェックポイントがバージョン間で機能する保証がないため、最初から再インポートする必要がある可能性があります。

@@ -3,54 +3,54 @@ title: Replicate Incremental Data between TiDB Clusters in Real Time
 summary: Learns how to replicate incremental data from one TiDB cluster to another cluster in real time
 ---
 
-# Replicate Incremental Data between TiDB Clusters in Real Time
+# TiDBクラスター間でインクリメンタルデータをリアルタイムで複製する {#replicate-incremental-data-between-tidb-clusters-in-real-time}
 
-This document describes how to configure a TiDB cluster and its secondary MySQL or TiDB cluster, and how to replicate the incremental data from the primary cluster to the secondary cluster in real time.
+このドキュメントでは、TiDBクラスタとそのセカンダリMySQLまたはTiDBクラスタを構成する方法、およびプライマリクラスタからセカンダリクラスタに増分データをリアルタイムで複製する方法について説明します。
 
-If you need to configure a running TiDB cluster and its secondary cluster for replicating incremental data in real time, use the [Backup & Restore (BR)](/br/backup-and-restore-tool.md), [Dumpling](/dumpling-overview.md) and [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md).
+増分データをリアルタイムで複製するために実行中のTiDBクラスタとそのセカンダリクラスタを構成する必要がある場合は、 [バックアップと復元（BR）](/br/backup-and-restore-tool.md) 、および[Dumpling](/dumpling-overview.md)を使用し[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) 。
 
-## Implementation principles
+## 実装の原則 {#implementation-principles}
 
-Each transaction written to TiDB is allocated a unique commit timestamp (commit TS). Through this TS, you can get the global consistency status of a TiDB cluster.
+TiDBに書き込まれる各トランザクションには、一意のコミットタイムスタンプ（コミットTS）が割り当てられます。このTSを介して、TiDBクラスタのグローバル整合性ステータスを取得できます。
 
-The cluster data is exported using BR or Dumpling at a globally consistent point in time. Then starting from this point in time, TiDB Binlog is used to replicate incremental data. That is, the replication process is divided into two stages: full replication and incremental replication.
+クラスタデータは、グローバルに一貫した時点でBRまたはDumplingを使用してエクスポートされます。次に、この時点から、TiDBBinlogを使用して増分データを複製します。つまり、レプリケーションプロセスは、完全レプリケーションと増分レプリケーションの2つの段階に分けられます。
 
-1. Perform a full backup and get the commit TS of the backup data.
-2. Perform incremental replication. Make sure that the start time of incremental replication is the commit TS of the backup data.
+1.  フルバックアップを実行し、バックアップデータのコミットTSを取得します。
+2.  インクリメンタルレプリケーションを実行します。インクリメンタルレプリケーションの開始時刻がバックアップデータのコミットTSであることを確認してください。
 
-> **Note:**
+> **ノート：**
 >
-> The commit TS obtained after exporting the backup data is a closed interval. The initial-commit-ts obtained after starting the replication process using TiDB Binlog is an open interval.
+> バックアップデータのエクスポート後に取得されるコミットTSは、閉じた間隔です。 TiDB Binlogを使用してレプリケーションプロセスを開始した後に取得されるinitial-commit-tsは、オープンインターバルです。
 
-## Replication process
+## レプリケーションプロセス {#replication-process}
 
-Suppose that the existing cluster A works properly. First, you need to create a new cluster B as the secondary cluster of cluster A and then replicate the incremental data in cluster A to cluster B in real time. See the following steps for instruction.
+既存のクラスタAが正しく機能するとします。まず、クラスタAのセカンダリクラスタとして新しいクラスタBを作成してから、クラスタAの増分データをクラスタBにリアルタイムで複製する必要があります。手順については、次の手順を参照してください。
 
-### Step 1. Enable TiDB Binlog
+### 手順1.TiDBBinlogを有効にする {#step-1-enable-tidb-binlog}
 
-Make sure that TiDB Binlog has been deployed and enabled in cluster A.
+TiDB BinlogがクラスタAにデプロイされ、有効になっていることを確認してください。
 
-### Step 2. Export all cluster data
+### ステップ2.すべてのクラスタデータをエクスポートする {#step-2-export-all-cluster-data}
 
-1. Export the data in cluster A (with global consistency ensured) to the specified path by using any of the following tools:
+1.  次のツールのいずれかを使用して、クラスタAのデータを（グローバル整合性が確保された状態で）指定されたパスにエクスポートします。
 
-    - Use [BR for full backup](/br/use-br-command-line-tool.md#back-up-all-the-cluster-data)
+    -   使用[フルバックアップ用のBR](/br/use-br-command-line-tool.md#back-up-all-the-cluster-data)
 
-    - Use [Dumpling to import full data](/dumpling-overview.md)
+    -   使用[完全なデータをインポートするためのDumpling](/dumpling-overview.md)
 
-2. Obtain a globally consistent timestamp `COMMIT_TS`:
+2.  グローバルに一貫したタイムスタンプを取得する`COMMIT_TS` ：
 
-    - Use the BR `validate` command to obtain the backup timestamp. For example:
+    -   BR `validate`コマンドを使用して、バックアップタイムスタンプを取得します。例えば：
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         COMMIT_TS=`br validate decode --field="end-version" -s local:///home/tidb/backupdata | tail -n1`
         ```
 
-    - Or check the Dumpling metadata and obtain Pos (`COMMIT_TS`).
+    -   または、 Dumplingメタデータを確認して、Pos（ `COMMIT_TS` ）を取得します。
 
-        {{< copyable "shell-regular" >}}
+        {{< copyable "" >}}
 
         ```shell
         cat metadata
@@ -65,11 +65,11 @@ Make sure that TiDB Binlog has been deployed and enabled in cluster A.
         Finished dump at: 2020-11-10 10:40:20
         ```
 
-3. Export the data in cluster A to cluster B.
+3.  クラスタAのデータをクラスタBにエクスポートします。
 
-### Step 3. Replicate incremental data
+### ステップ3.増分データを複製する {#step-3-replicate-incremental-data}
 
-Modify the `drainer.toml` configuration file of TiDB Binlog by adding the following configuration to specify the `COMMIT_TS` from which TiDB Binlog starts replicating data to cluster B.
+次の構成を追加して、TiDB Binlogの`drainer.toml`の構成ファイルを変更し、TiDBBinlogがクラスタBへのデータの複製を開始する`COMMIT_TS`を指定します。
 
 {{< copyable "" >}}
 

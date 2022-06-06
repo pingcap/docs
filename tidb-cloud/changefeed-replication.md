@@ -3,114 +3,115 @@ title: TiDB Cloud Replication
 summary: Learn how to create a replica to stream data from a primary TiDB cluster to a secondary TiDB cluster.
 ---
 
-# TiDB Cloud Replication
+# TiDBクラウドレプリケーション {#tidb-cloud-replication}
 
-TiDB Cloud Replication is a feature that allows you to create a continuously replicated readable secondary TiDB cluster for a primary TiDB cluster in TiDB Cloud. This readable secondary cluster (also known as cross-region replication, secondary replication, or geo-replication) can be in the same region as the primary TiDB cluster, or more commonly, in a different region.
+TiDBクラウドレプリケーションは、TiDBクラウドのプライマリTiDBクラスタ用に継続的にレプリケートされる読み取り可能なセカンダリTiDBクラスタを作成できるようにする機能です。この読み取り可能なセカンダリクラスタ（クロスリージョンレプリケーション、セカンダリレプリケーション、またはジオレプリケーションとも呼ばれます）は、プライマリTiDBクラスタと同じリージョンに配置することも、より一般的には別のリージョンに配置することもできます。
 
-With TiDB Cloud Replication, you can perform quick disaster recovery of a database in the event of a regional disaster or large-scale failure, which helps achieve business continuity. Once a secondary cluster is set up, you can manually initiate geographic failover to the secondary cluster in a different region.
+TiDB Cloud Replicationを使用すると、地域の災害や大規模な障害が発生した場合にデータベースの迅速なディザスタリカバリを実行でき、ビジネスの継続性を実現できます。セカンダリクラスタが設定されると、別のリージョンのセカンダリクラスタへの地理的なフェールオーバーを手動で開始できます。
 
-> **Warning:**
+> **警告：**
 >
-> Currently, the **TiDB Cloud Replication** feature is in **Public Preview** with the following limitations:
+> 現在、 **TiDBクラウドレプリケーション**機能は<strong>パブリックプレビュー</strong>にあり、次の制限があります。
 >
-> * One primary cluster can only have one replication.
-> * You cannot use a secondary cluster as a source of **TiDB Cloud Replication** to another cluster.
-> * **TiDB Cloud Replication** contradicts [**Sink to Apache Kafka**](/tidb-cloud/changefeed-sink-to-apache-kafka.md) and [**Sink to MySQL**](/tidb-cloud/changefeed-sink-to-mysql.md). When **TiDB Cloud Replication** is enabled, neither the primary nor the secondary cluster can use the **Sink to Apache Kafka** or **Sink to MySQL** changefeed and vice versa.
-> * Because TiDB Cloud uses TiCDC to establish replication, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+> -   1つのプライマリクラスタは1つのレプリケーションのみを持つことができます。
+> -   別のクラスタへの**TiDBクラウドレプリケーション**のソースとしてセカンダリクラスタを使用することはできません。
+> -   **TiDBクラウドレプリケーション**は[**ApacheKafkaにシンクします**](/tidb-cloud/changefeed-sink-to-apache-kafka.md)と[**MySQLにシンク**](/tidb-cloud/changefeed-sink-to-mysql.md)と矛盾します。 <strong>TiDBクラウドレプリケーション</strong>が有効になっている場合、プライマリクラスターもセカンダリクラスタも<strong>Sink</strong> <strong>toApacheKafka</strong>またはSinktoMySQLチェンジフィードを使用できず、その逆も可能です。
+> -   TiDBクラウドはTiCDCを使用してレプリケーションを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。
 
-To support application replication, you must deploy your applications in both primary and secondary regions, and ensure that each application is connected to the TiDB cluster in the same region. The applications in the secondary region are on standby. When the primary region fails, you can initiate a "Detach" operation to make the TiDB cluster in the secondary region active, and then transfer all data traffic to the applications in the secondary region.
+アプリケーションのレプリケーションをサポートするには、アプリケーションをプライマリリージョンとセカンダリリージョンの両方にデプロイし、各アプリケーションが同じリージョンのTiDBクラスタに接続されていることを確認する必要があります。セカンダリリージョンのアプリケーションはスタンバイ状態です。プライマリリージョンに障害が発生した場合、「デタッチ」操作を開始してセカンダリリージョンのTiDBクラスタをアクティブにし、すべてのデータトラフィックをセカンダリリージョンのアプリケーションに転送できます。
 
-The following diagram illustrates a typical deployment of a geo-redundant cloud application using TiDB Cloud Replication:
+次の図は、TiDBクラウドレプリケーションを使用した地理冗長クラウドアプリケーションの一般的な展開を示しています。
 
 <!-- https://www.figma.com/file/DaevXzW4aq35QodwZEkcTS/DBaaS-Architecture-Chart-(high-level)-(Copy)?node-id=0%3A1 -->
+
 ![TiDB Cloud Replication](/media/tidb-cloud/changefeed-replication-deployment.png)
 
-Creating a secondary TiDB cluster is only a part of the business continuity solution. To recover an application (or service) end-to-end after a catastrophic failure, you also need to ensure that all components and dependent services of the application can be restored.
+セカンダリTiDBクラスタの作成は、ビジネス継続性ソリューションの一部にすぎません。壊滅的な障害の後にアプリケーション（またはサービス）をエンドツーエンドで回復するには、アプリケーションのすべてのコンポーネントと依存サービスを復元できることも確認する必要があります。
 
-- Check whether each component of the application is resilient to the same failures and become available within recovery time objective (RTO) of your application. The typical components of an application include client software (such as browsers with custom JavaScript), web front ends, storage, and DNS.
-- Identify all dependent services, check the guarantees and capabilities of these services, and ensure that your application is operational during a failover of these services.
+-   アプリケーションの各コンポーネントが同じ障害に対して回復力があり、アプリケーションの目標復旧時間（RTO）内に利用可能になるかどうかを確認します。アプリケーションの一般的なコンポーネントには、クライアントソフトウェア（カスタムJavaScriptを備えたブラウザーなど）、Webフロントエンド、ストレージ、およびDNSが含まれます。
+-   依存するすべてのサービスを特定し、これらのサービスの保証と機能を確認し、これらのサービスのフェイルオーバー中にアプリケーションが動作していることを確認します。
 
-## Terminology and capabilities of TiDB Cloud Replication
+## TiDBクラウドレプリケーションの用語と機能 {#terminology-and-capabilities-of-tidb-cloud-replication}
 
-### Automatic asynchronous replication
+### 自動非同期レプリケーション {#automatic-asynchronous-replication}
 
-For each primary TiDB cluster, only one secondary cluster can be created. TiDB Cloud makes a full backup of the primary TiDB cluster and then restores the backup to the newly created secondary cluster, which makes sure that the secondary cluster has all the existing data. After the secondary cluster is created, all data changes on the primary cluster will be replicated asynchronously to the secondary cluster.
+プライマリTiDBクラスタごとに、作成できるセカンダリクラスタは1つだけです。 TiDB Cloudは、プライマリTiDBクラスタの完全バックアップを作成してから、新しく作成されたセカンダリクラスタにバックアップを復元します。これにより、セカンダリクラスタに既存のデータがすべて含まれるようになります。セカンダリクラスタが作成されると、プライマリクラスタでのすべてのデータ変更がセカンダリクラスタに非同期で複製されます。
 
-### Readable secondary cluster
+### 読み取り可能なセカンダリクラスタ {#readable-secondary-cluster}
 
-The secondary cluster is in the read-only mode. If you have any read-only workload with low real-time data requirements, you can distribute it to the secondary cluster.
+セカンダリクラスタは読み取り専用モードです。リアルタイムデータ要件が低い読み取り専用ワークロードがある場合は、それをセカンダリクラスタに分散できます。
 
-To satisfy read-intensive scenarios in the same region, you can use **TiDB Cloud Replication** to create a readable secondary cluster in the same region as the primary cluster. However, because a secondary cluster in the same region does not provide additional resiliency for large-scale outages or catastrophic failures, do not use it as a failover target for regional disaster recovery purposes.
+同じリージョンで読み取りが集中するシナリオを満たすために、 **TiDB Cloud Replication**を使用して、プライマリクラスタと同じリージョンに読み取り可能なセカンダリクラスタを作成できます。ただし、同じリージョン内のセカンダリクラスタは、大規模な停止や壊滅的な障害に対する追加の復元力を提供しないため、リージョンのディザスタリカバリの目的でフェールオーバーターゲットとして使用しないでください。
 
-### Planned Detach
+### 計画されたデタッチ {#planned-detach}
 
-**Planned Detach** can be triggered by you manually. It is used for planned maintenance in most cases, such as disaster recovery drills. **Planned detach** makes sure that all data changes are replicated to the secondary cluster without data loss (RPO=0). For RTO, it depends on the replication lag between primary and secondary clusters. In most cases, the RTO is at a level of minutes.
+**Planned Detach**は、手動でトリガーできます。災害復旧訓練など、ほとんどの場合、計画的なメンテナンスに使用されます。<strong>計画されたデタッチ</strong>により、すべてのデータ変更がデータ損失なしにセカンダリクラスタに複製されます（RPO = 0）。 RTOの場合、プライマリクラスターとセカンダリクラスター間のレプリケーションラグに依存します。ほとんどの場合、RTOは数分のレベルです。
 
-**Planned Detach** detaches the secondary cluster from the primary cluster into an individual cluster. When **Planned Detach** is triggered, it performs the following steps:
+**Planned Detach**は、セカンダリクラスタをプライマリクラスタから個々のクラスタにデタッチします。 <strong>Planned Detach</strong>がトリガーされると、次の手順が実行されます。
 
-1. Sets the primary cluster as read-only, to prevent any new transaction from being committed to the primary cluster.
-2. Waits until the secondary cluster is fully synced with the primary cluster.
-3. Stops the replication from the primary to the secondary cluster.
-4. Sets the original secondary cluster as writable, which makes it available to serve your business.
+1.  プライマリクラスタを読み取り専用に設定して、新しいトランザクションがプライマリクラスタにコミットされないようにします。
+2.  セカンダリクラスタがプライマリクラスタと完全に同期されるまで待機します。
+3.  プライマリクラスターからセカンダリクラスタへのレプリケーションを停止します。
+4.  元のセカンダリクラスタを書き込み可能として設定します。これにより、ビジネスにサービスを提供できるようになります。
 
-After **Planned Detach** is finished, the original primary cluster is set as read-only. If you still need to write to the original primary cluster, you can do one of the following to set the cluster as writable explicitly:
+**Planned Detach**が終了すると、元のプライマリクラスタが読み取り専用に設定されます。それでも元のプライマリクラスタに書き込む必要がある場合は、次のいずれかを実行して、クラスタを明示的に書き込み可能として設定できます。
 
-- Go to the cluster details page, click **Settings**, and then click the **Make Writable** drop-down button.
-- Connect to the SQL port of the original primary cluster and execute the following statement:
+-   クラスタの詳細ページに移動し、[**設定]**をクリックして、[<strong>書き込み可能</strong>にする]ドロップダウンボタンをクリックします。
+-   元のプライマリクラスタのSQLポートに接続し、次のステートメントを実行します。
 
-    {{< copyable "sql" >}}
-
-    ```sql
-    set global tidb_super_read_only=OFF;
-    ```
-
-### Force Detach
-
-To recover from an unplanned outage, use **Force Detach**. In the event of a catastrophic failure in the region where the primary cluster is located, you should use **Force Detach** so that the secondary cluster can serve the business as quickly as possible, ensuring business continuity. Because this operation makes the secondary cluster serve as an individual cluster immediately and does not wait for any unreplicated data, the RPO depends on the Primary-Secondary replication lag, while the RTO depends on how quickly **Force Detach** is triggered by you.
-
-**Force Detach** detaches the secondary cluster from the primary cluster into an individual cluster. When **Force Detach** is triggered, it performs the following steps：
-
-1. Stops data replication from the primary to the secondary cluster immediately.
-2. Sets the original secondary cluster as writable so that it can start serving your workload.
-3. If the original primary cluster is still accessible, or when the original primary cluster recovers, TiDB Cloud sets it as read-only to avoid any new transaction being committed to it.
-
-Once the original primary cluster is recovered from the outage, you still have the opportunity to review transactions that have been executed in the original primary cluster but not in the original secondary cluster by comparing the data in the two clusters, and decide whether to manually replicate these unsynchronized transactions to the original secondary cluster based on your business situation.
-
-The data replication topology between primary and secondary clusters does not exist anymore after you detach the secondary cluster. The original primary cluster is set to the read-only mode and the original secondary cluster becomes writable. If any DML or DDL is planned on the original primary cluster, you need to disable the read-only mode manually on it by doing one of the following:
-
-- Go to the cluster details page, click **Settings**, and then click the **Make Writable** drop-down button.
-- Connect to the SQL port of the original primary cluster and execute the following statement:
-
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set global tidb_super_read_only=OFF;
     ```
 
-## Configure TiDB Cloud Replication
+### 強制デタッチ {#force-detach}
 
-To configure TiDB Cloud Replication, do the following:
+計画外の停止から回復するには、 **ForceDetach**を使用します。プライマリクラスタが配置されているリージョンで壊滅的な障害が発生した場合は、 <strong>Force Detach</strong>を使用して、セカンダリクラスタができるだけ早くビジネスにサービスを提供し、ビジネスの継続性を確保できるようにする必要があります。この操作により、セカンダリクラスタがすぐに個別のクラスタとして機能し、複製されていないデータを待機しないため、RPOはプライマリ-セカンダリ複製ラグに依存し、RTOは<strong>強制デタッチ</strong>がトリガーされる速度に依存します。
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
-2. Click **Create a replica of your TiDB Cluster**.
-3. Fill in the username and password of your database.
-4. Choose the region of the secondary cluster.
-5. Click **Create**. After a while, the sink will begin its work, and the status of the sink will be changed to "**Producing**".
+**Force Detach**は、セカンダリクラスタをプライマリクラスタから個々のクラスタにデタッチします。 <strong>Force Detach</strong>がトリガーされると、次の手順が実行されます。
 
-To trigger a **Planned Detach** or **Force Detach**, do the following:
+1.  プライマリクラスターからセカンダリクラスタへのデータレプリケーションをすぐに停止します。
+2.  元のセカンダリクラスタを書き込み可能として設定して、ワークロードの提供を開始できるようにします。
+3.  元のプライマリクラスタに引き続きアクセスできる場合、または元のプライマリクラスタが回復した場合、TiDBクラウドはそれを読み取り専用に設定して、新しいトランザクションがコミットされないようにします。
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
-2. Click **Create a replica of your TiDB Cluster**.
-3. Click **Planned Detach** or **Force Detach**.
+元のプライマリクラスタが停止から回復した後も、2つのクラスターのデータを比較することにより、元のプライマリクラスタで実行されたが、元のセカンダリクラスタでは実行されなかったトランザクションを確認し、手動でレプリケートするかどうかを決定する機会があります。これらの非同期トランザクションは、ビジネスの状況に基づいて元のセカンダリクラスタに送信されます。
 
-## Scale the primary cluster
+セカンダリクラスターをデタッチすると、プライマリクラスターとセカンダリクラスター間のデータレプリケーショントポロジは存在しなくなりクラスタ。元のプライマリクラスタは読み取り専用モードに設定され、元のセカンダリクラスタは書き込み可能になります。元のプライマリクラスタでDMLまたはDDLが計画されている場合は、次のいずれかを実行して、読み取り専用モードを手動で無効にする必要があります。
 
-You can scale out or scale in the primary cluster without disconnecting the secondary cluster. When the primary cluster is scaled, the secondary cluster follows the same scaling automatically.
+-   クラスタの詳細ページに移動し、[**設定]**をクリックして、[<strong>書き込み可能</strong>にする]ドロップダウンボタンをクリックします。
+-   元のプライマリクラスタのSQLポートに接続し、次のステートメントを実行します。
 
-## Monitor the primary-secondary lag
+    {{< copyable "" >}}
 
-To monitor lag concerning the RPO, do the following:
+    ```sql
+    set global tidb_super_read_only=OFF;
+    ```
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
-2. Click **Create a replica of your TiDB Cluster**.
-3. You can see the lag of the primary-secondary cluster.
+## TiDBクラウドレプリケーションを構成する {#configure-tidb-cloud-replication}
+
+TiDBクラウドレプリケーションを構成するには、次の手順を実行します。
+
+1.  **TiDB**クラスタの[チェンジフィード]タブに移動します。
+2.  [ **TiDBクラスターのレプリカを作成する]を**クリックします。
+3.  データベースのユーザー名とパスワードを入力します。
+4.  セカンダリクラスタのリージョンを選択します。
+5.  [**作成]**をクリックします。しばらくすると、シンクが動作を開始し、シンクのステータスが「<strong>生産</strong>中」に変わります。
+
+**PlannedDetach**または<strong>ForceDetach</strong>をトリガーするには、次の手順を実行します。
+
+1.  **TiDB**クラスタの[チェンジフィード]タブに移動します。
+2.  [ **TiDBクラスターのレプリカを作成する]を**クリックします。
+3.  [**計画されたデタッチ]**または[<strong>強制デタッチ</strong>]をクリックします。
+
+## プライマリクラスタをスケーリングする {#scale-the-primary-cluster}
+
+セカンダリクラスタを切断せずに、プライマリクラスタでスケールアウトまたはスケールアウトできます。プライマリクラスタがスケーリングされると、セカンダリクラスタは自動的に同じスケーリングに従います。
+
+## プライマリ-セカンダリラグを監視します {#monitor-the-primary-secondary-lag}
+
+RPOに関するラグを監視するには、次の手順を実行します。
+
+1.  **TiDB**クラスタの[チェンジフィード]タブに移動します。
+2.  [ **TiDBクラスターのレプリカを作成する]を**クリックします。
+3.  プライマリ-セカンダリクラスタのラグを確認できます。

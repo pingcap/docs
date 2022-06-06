@@ -3,23 +3,23 @@ title: TRACE | TiDB SQL Statement Reference
 summary: An overview of the usage of TRACE for the TiDB database.
 ---
 
-# TRACE
+# 痕跡 {#trace}
 
-The `TRACE` statement provides detailed information about query execution. It is intended to be viewed through a Graphical interface exposed by the TiDB server's status port.
+`TRACE`ステートメントは、クエリの実行に関する詳細情報を提供します。これは、TiDBサーバーのステータスポートによって公開されるグラフィカルインターフェイスを介して表示することを目的としています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**TraceStmt:**
+**TraceStmt：**
 
 ![TraceStmt](/media/sqlgram/TraceStmt.png)
 
-**TraceableStmt:**
+**TraceableStmt：**
 
 ![TraceableStmt](/media/sqlgram/TraceableStmt.png)
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 trace format='row' select * from mysql.user;
@@ -46,22 +46,22 @@ trace format='row' select * from mysql.user;
 13 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 trace format='json' select * from mysql.user;
 ```
 
-The JSON formatted trace can be pasted into the trace viewer, which is accessed via the TiDB status port:
+JSON形式のトレースは、TiDBステータスポートを介してアクセスされるトレースビューアに貼り付けることができます。
 
 ![TiDB Trace Viewer-1](/media/trace-paste.png)
 
 ![TiDB Trace Viewer-2](/media/trace-view.png)
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
+-   [説明分析](/sql-statements/sql-statement-explain-analyze.md)

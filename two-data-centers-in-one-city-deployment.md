@@ -3,37 +3,37 @@ title: Two Data Centers in One City Deployment
 summary: Learn the deployment solution of two data centers in one city.
 ---
 
-# Two Data Centers in One City Deployment
+# 1つの都市展開における2つのデータセンター {#two-data-centers-in-one-city-deployment}
 
-This document introduces the deployment mode of two data centers (DCs) in one city, including the architecture, configuration, how to enable this deployment mode, and how to use replicas in this mode.
+このドキュメントでは、アーキテクチャ、構成、この展開モードを有効にする方法、このモードでレプリカを使用する方法など、1つの都市にある2つのデータセンター（DC）の展開モードを紹介します。
 
-In an on-premises environment, TiDB usually adopts the multi-data-center deployment solution to ensure high availability and disaster recovery capability. The multi-data-center deployment solution includes multiple deployment modes, such as three data centers in two cities and three data centers in one city. This document introduces the deployment mode of two data centers in one city. Deployed in this mode, TiDB can also meet the requirements of high availability and disaster recovery, with a lower cost. This deployment solution adopts Data Replication Auto Synchronous mode, or the DR Auto-Sync mode.
+オンプレミス環境では、TiDBは通常、高可用性とディザスタリカバリ機能を確保するためにマルチデータセンター展開ソリューションを採用しています。マルチデータセンター展開ソリューションには、2つの都市に3つのデータセンター、1つの都市に3つのデータセンターなど、複数の展開モードが含まれます。このドキュメントでは、1つの都市にある2つのデータセンターの展開モードを紹介します。このモードで展開されたTiDBは、低コストで高可用性とディザスタリカバリの要件を満たすこともできます。このデプロイメントソリューションは、データレプリケーション自動同期モードまたはDR自動同期モードを採用しています。
 
-Under the mode of two data centers in one city, the two data centers are less than 50 kilometers apart. They are usually located in the same city or in two adjacent cities. The network latency between the two data centers is lower than 1.5 milliseconds and the bandwidth is higher than 10 Gbps.
+1つの都市に2つのデータセンターがあるというモードでは、2つのデータセンターの距離は50km未満です。それらは通常、同じ都市または2つの隣接する都市にあります。 2つのデータセンター間のネットワーク遅延は1.5ミリ秒未満であり、帯域幅は10Gbpsを超えています。
 
-## Deployment architecture
+## デプロイメントアーキテクチャ {#deployment-architecture}
 
-This section takes the example of a city where two data centers IDC1 and IDC2 are located respectively in the east and west.
+このセクションでは、2つのデータセンターIDC1とIDC2がそれぞれ東と西に配置されている都市の例を取り上げます。
 
-The architecture of the cluster deployment is as follows:
+クラスタ展開のアーキテクチャーは次のとおりです。
 
-- The TiDB cluster is deployed to two DCs in one city: the primary IDC1 in the east, and the disaster recovery (DR) IDC2 in the west.
-- The cluster has 4 replicas: 2 Voter replicas in IDC1, 1 Voter replica and 1 Learner replica in IDC2. For the TiKV component, each rack has a proper label.
-- The Raft protocol is adopted to ensure consistency and high availability of data, which is transparent to users.
+-   TiDBクラスタは、1つの都市の2つのDCに展開されます。東のプライマリIDC1と西のディザスタリカバリ（DR）IDC2です。
+-   クラスタには4つのレプリカがあります。IDC1に2つの投票者レプリカ、IDC2に1つの投票者レプリカと1つの学習者レプリカです。 TiKVコンポーネントの場合、各ラックには適切なラベルが付いています。
+-   Raftプロトコルは、データの一貫性と高可用性を確保するために採用されており、ユーザーには透過的です。
 
 ![2-DC-in-1-city architecture](/media/two-dc-replication-1.png)
 
-This deployment solution defines three statuses to control and identify the replication status of the cluster, which restricts the replication mode of TiKV. The replication mode of the cluster can automatically and adaptively switch between the three statuses. For details, see the [Status switch](#status-switch) section.
+このデプロイメントソリューションは、クラスタのレプリケーションステータスを制御および識別するための3つのステータスを定義します。これにより、TiKVのレプリケーションモードが制限されます。クラスタのレプリケーションモードは、3つのステータスを自動的かつ適応的に切り替えることができます。詳細については、 [ステータススイッチ](#status-switch)セクションを参照してください。
 
-- **sync**: Synchronous replication mode. In this mode, at least one replica in the disaster recovery (DR) data center synchronizes with the primary data center. The Raft algorithm ensures that each log is replicated to the DR based on the label.
-- **async**: Asynchronous replication mode. In this mode, the DR data center is not fully synchronized with the primary data center. The Raft algorithm follows the majority protocol to replicate logs.
-- **sync-recover**: Synchronous recovery mode. In this mode, the DR data center is not fully synchronized with the primary data center. Raft gradually switches to the label replication mode and then reports the label information to PD.
+-   **sync** ：同期レプリケーションモード。このモードでは、ディザスタリカバリ（DR）データセンターの少なくとも1つのレプリカがプライマリデータセンターと同期します。 Raftアルゴリズムは、各ログがラベルに基づいてDRに複製されることを保証します。
+-   **async** ：非同期レプリケーションモード。このモードでは、DRデータセンターはプライマリデータセンターと完全に同期されていません。 Raftアルゴリズムは、大多数のプロトコルに従ってログを複製します。
+-   **sync-recover** ：同期リカバリモード。このモードでは、DRデータセンターはプライマリデータセンターと完全に同期されていません。 Raftは徐々にラベル複製モードに切り替わり、ラベル情報をPDに報告します。
 
-## Configuration
+## Configuration / コンフィグレーション {#configuration}
 
-### Example
+### 例 {#example}
 
-The following `tiup topology.yaml` example file is a typical topology configuration for the two data centers in one city deployment mode:
+次の`tiup topology.yaml`つのファイル例は、1つの都市展開モードでの2つのデータセンターの一般的なトポロジ構成です。
 
 ```
 # # Global variables are applied to all deployments and used as the default value of
@@ -78,9 +78,9 @@ alertmanager_servers:
   - host: 10.63.10.60
 ```
 
-### Placement Rules
+### 配置ルール {#placement-rules}
 
-To deploy a cluster based on the planned topology, you need to use [Placement Rules](/configure-placement-rules.md) to determine the locations of the cluster replicas. Taking the deployment of 4 replicas (2 Voter replicas are at the primary center, 1 Voter replica and 1 Learner replica are at the DR center) as an example, you can use the Placement Rules to configure the replicas as follows:
+計画されたトポロジーに基づいてクラスタをデプロイするには、 [配置ルール](/configure-placement-rules.md)を使用してクラスタレプリカの場所を判別する必要があります。例として、4つのレプリカ（2つの投票者レプリカがプライマリセンターにあり、1つの投票者レプリカと1つの学習者レプリカがDRセンターにあります）の展開を例にとると、配置ルールを使用してレプリカを次のように構成できます。
 
 ```
 cat rule.json
@@ -161,16 +161,16 @@ cat rule.json
 ]
 ```
 
-To use the configurations in `rule.json`, run the following command to back up the existing configuration to the `default.json` file and overwrite the existing configuration with `rule.json`:
+`rule.json`の構成を使用するには、次のコマンドを実行して既存の構成を`default.json`ファイルにバックアップし、既存の構成を`rule.json`で上書きします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 pd-ctl config placement-rules rule-bundle load --out="default.json"
 pd-ctl config placement-rules rule-bundle save --in="rule.json"
 ```
 
-If you need to roll back to the previous configuration, you can restore the backup file `default.json` or write the following JSON file manually and overwrite the current configuration with this JSON file:
+以前の構成にロールバックする必要がある場合は、バックアップファイル`default.json`を復元するか、次のJSONファイルを手動で書き込んで、現在の構成をこのJSONファイルで上書きできます。
 
 ```
 cat default.json
@@ -193,11 +193,11 @@ cat default.json
 ]
 ```
 
-### Enable the DR Auto-Sync mode
+### DR自動同期モードを有効にします {#enable-the-dr-auto-sync-mode}
 
-The replication mode is controlled by PD. You can configure the replication mode in the PD configuration file using one of the following methods:
+レプリケーションモードはPDによって制御されます。次のいずれかの方法を使用して、PD構成ファイルで複製モードを構成できます。
 
-- Method 1: Configure the PD configuration file, and then deploy a cluster.
+-   方法1：PD構成ファイルを構成してから、クラスタをデプロイします。
 
     {{< copyable "" >}}
 
@@ -214,7 +214,7 @@ The replication mode is controlled by PD. You can configure the replication mode
     wait-sync-timeout = "1m"
     ```
 
-- Method 2: If you have deployed a cluster, use pd-ctl commands to modify the configurations of PD.
+-   方法2：クラスタをデプロイした場合は、pd-ctlコマンドを使用してPDの構成を変更します。
 
     {{< copyable "" >}}
 
@@ -227,23 +227,23 @@ The replication mode is controlled by PD. You can configure the replication mode
     config set replication-mode dr-auto-sync dr-replicas 1
     ```
 
-Descriptions of configuration items:
+構成アイテムの説明：
 
-+ `replication-mode` is the replication mode to be enabled. In the above example, it is set to `dr-auto-sync`. By default, the majority protocol is used.
-+ `label-key` is used to distinguish different data centers and needs to match Placement Rules. In this example, the primary data center is "east" and the DR data center is "west".
-+ `primary-replicas` is the number of Voter replicas in the primary data center.
-+ `dr-replicas` is the number of Voter replicas in the DR data center.
-+ `wait-store-timeout` is the waiting time for switching to asynchronous replication mode when network isolation or failure occurs. If the time of network failure exceeds the waiting time, asynchronous replication mode is enabled. The default waiting time is 60 seconds.
+-   `replication-mode`は、有効にするレプリケーションモードです。上記の例では、 `dr-auto-sync`に設定されています。デフォルトでは、多数決プロトコルが使用されます。
+-   `label-key`は、さまざまなデータセンターを区別するために使用され、配置ルールに一致する必要があります。この例では、プライマリデータセンターは「東」であり、DRデータセンターは「西」です。
+-   `primary-replicas`は、プライマリデータセンターの投票者レプリカの数です。
+-   `dr-replicas`は、DRデータセンター内の投票者レプリカの数です。
+-   `wait-store-timeout`は、ネットワークの分離または障害が発生したときに非同期レプリケーションモードに切り替わるまでの待機時間です。ネットワーク障害の時間が待機時間を超えると、非同期レプリケーションモードが有効になります。デフォルトの待機時間は60秒です。
 
-To check the current replication status of the cluster, use the following API:
+クラスタの現在のレプリケーションステータスを確認するには、次のAPIを使用します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 curl http://pd_ip:pd_port/pd/api/v1/replication_mode/status
 ```
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 {
@@ -255,32 +255,32 @@ curl http://pd_ip:pd_port/pd/api/v1/replication_mode/status
 }
 ```
 
-#### Status switch
+#### ステータススイッチ {#status-switch}
 
-The replication mode of a cluster can automatically and adaptively switch between three statuses:
+クラスタのレプリケーションモードでは、次の3つのステータスを自動的かつ適応的に切り替えることができます。
 
-- When the cluster is normal, the synchronous replication mode is enabled to maximize the data integrity of the disaster recovery data center.
-- When the network connection between the two data centers fails or the DR data center breaks down, after a pre-set protective interval, the cluster enables the asynchronous replication mode to ensure the availability of the application.
-- When the network reconnects or the DR data center recovers, the TiKV node joins the cluster again and gradually replicates the data. Finally, the cluster switches to the synchronous replication mode.
+-   クラスタが正常な場合、同期レプリケーションモードが有効になり、ディザスタリカバリデータセンターのデータ整合性が最大化されます。
+-   2つのデータセンター間のネットワーク接続に障害が発生した場合、またはDRデータセンターが故障した場合、事前に設定された保護間隔の後、クラスタは非同期レプリケーションモードを有効にして、アプリケーションの可用性を確保します。
+-   ネットワークが再接続するか、DRデータセンターが回復すると、TiKVノードは再びクラスタに参加し、データを徐々に複製します。最後に、クラスタは同期レプリケーションモードに切り替わります。
 
-The details for the status switch are as follows:
+ステータススイッチの詳細は次のとおりです。
 
-1. **Initialization**: At the initialization stage, the cluster is in the synchronous replication mode. PD sends the status information to TiKV, and all TiKV nodes strictly follow the synchronous replication mode to work.
+1.  **初期化**：初期化段階では、クラスタは同期レプリケーションモードになっています。 PDはステータス情報をTiKVに送信し、すべてのTiKVノードは厳密に同期レプリケーションモードに従って動作します。
 
-2. **Switch from sync to async**: PD regularly checks the heartbeat information of TiKV to judge whether the TiKV node fails or is disconnected. If the number of failed nodes exceeds the number of replicas of the primary data center (`primary-replicas`) and the DR data center (`dr-replicas`), the synchronous replication mode can no longer serve the data replication and it is necessary to switch the status. When the failure or disconnect time exceeds the time set by `wait-store-timeout`, PD switches the status of the cluster to the async mode. Then PD sends the status of async to all TiKV nodes, and the replication mode for TiKV switches from two-center replication to the native Raft majority.
+2.  **同期から非同期へ**の切り替え：PDは、TiKVのハートビート情報を定期的にチェックして、TiKVノードに障害が発生したか切断されたかを判断します。障害が発生したノードの数がプライマリデータセンターのレプリカの数（ `primary-replicas` ）とDRデータセンターのレプリカの数（ `dr-replicas` ）を超えると、同期レプリケーションモードでデータレプリケーションを実行できなくなり、ステータスを切り替える必要があります。障害または切断時間が`wait-store-timeout`で設定された時間を超えると、PDはクラスタのステータスを非同期モードに切り替えます。次に、PDは非同期のステータスをすべてのTiKVノードに送信し、TiKVのレプリケーションモードは2センターレプリケーションからネイティブRaftマジョリティに切り替わります。
 
-3. **Switch from async to sync**: PD regularly checks the heartbeat information of TiKV to judge whether the TiKV node is reconnected. If the number of failed nodes is less than the number of replicas of the primary data center (`primary-replicas`) and the DR data center (`dr-replicas`), the synchronous replication mode can be enabled again. PD first switches the status of the cluster to sync-recover and sends the status information to all TiKV nodes. All Regions of TiKV gradually switch to the two-data-center synchronous replication mode and then report the heartbeat information to PD. PD records the status of TiKV Regions and calculates the recovery progress. When all TiKV Regions finish the switching, PD switches the replication mode to sync.
+3.  **非同期から同期へ**の切り替え：PDは、TiKVのハートビート情報を定期的にチェックして、TiKVノードが再接続されているかどうかを判断します。障害が発生したノードの数がプライマリデータセンター（ `primary-replicas` ）およびDRデータセンター（ `dr-replicas` ）のレプリカの数より少ない場合は、同期レプリケーションモードを再度有効にすることができます。 PDは、最初にクラスタのステータスをsync-recoverに切り替え、ステータス情報をすべてのTiKVノードに送信します。 TiKVのすべてのリージョンは、徐々に2データセンターの同期レプリケーションモードに切り替わり、ハートビート情報をPDに報告します。 PDは、TiKVリージョンのステータスを記録し、リカバリの進行状況を計算します。すべてのTiKVリージョンが切り替えを完了すると、PDはレプリケーションモードを同期に切り替えます。
 
-### Disaster recovery
+### 災害からの回復 {#disaster-recovery}
 
-This section introduces the disaster recovery solution of the two data centers in one city deployment.
+このセクションでは、1つの都市展開における2つのデータセンターのディザスタリカバリソリューションを紹介します。
 
-When a disaster occurs to a cluster in the synchronous replication mode, you can perform data recovery with `RPO = 0`:
+同期レプリケーションモードでクラスタに災害が発生した場合、 `RPO = 0`でデータリカバリを実行できます。
 
-- If the primary data center fails and most of the Voter replicas are lost, but complete data exists in the DR data center, the lost data can be recovered from the DR data center. At this time, manual intervention is required with professional tools. You can contact the TiDB team for a recovery solution.
+-   プライマリデータセンターに障害が発生し、投票者のレプリカのほとんどが失われたが、DRデータセンターに完全なデータが存在する場合、失われたデータをDRデータセンターから回復できます。現時点では、専門のツールを使用して手動で介入する必要があります。リカバリソリューションについては、TiDBチームにお問い合わせください。
 
-- If the DR center fails and a few Voter replicas are lost, the cluster automatically switches to the asynchronous replication mode.
+-   DRセンターに障害が発生し、Voterレプリカがいくつか失われた場合、クラスタは自動的に非同期レプリケーションモードに切り替わります。
 
-When a disaster occurs to a cluster that is not in the synchronous replication mode and you cannot perform data recovery with `RPO = 0`:
+同期レプリケーションモードではないクラスタに災害が発生し、 `RPO = 0`でデータ回復を実行できない場合：
 
-- If most of the Voter replicas are lost, manual intervention is required with professional tools. You can contact the TiDB team for a recovery solution.
+-   投票者のレプリカのほとんどが失われた場合は、専門のツールを使用して手動で介入する必要があります。リカバリソリューションについては、TiDBチームにお問い合わせください。

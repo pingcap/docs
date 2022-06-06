@@ -3,193 +3,193 @@ title: Configuration Options
 summary: Learn the configuration options in TiDB.
 ---
 
-# Configuration Options
+# Configuration / コンフィグレーションオプション {#configuration-options}
 
-When you start the TiDB cluster, you can use command-line options or environment variables to configure it. This document introduces TiDB's command options. The default TiDB ports are `4000` for client requests and `10080` for status report.
+TiDBクラスタを起動すると、コマンドラインオプションまたは環境変数を使用してクラスターを構成できます。このドキュメントでは、TiDBのコマンドオプションを紹介します。デフォルトのTiDBポートは、クライアント要求用に`4000`つ、ステータスレポート用に`10080`です。
 
-## `--advertise-address`
+## <code>--advertise-address</code> {#code-advertise-address-code}
 
-- The IP address through which to log into the TiDB server
-- Default: `""`
-- This address must be accessible by the rest of the TiDB cluster and the user.
+-   TiDBサーバーにログインするためのIPアドレス
+-   デフォルト： `""`
+-   このアドレスには、残りのTiDBクラスタとユーザーがアクセスできる必要があります。
 
-## `--config`
+## <code>--config</code> {#code-config-code}
 
-- The configuration file
-- Default: `""`
-- If you have specified the configuration file, TiDB reads the configuration file. If the corresponding configuration also exists in the command line options, TiDB uses the configuration in the command line options to overwrite that in the configuration file. For detailed configuration information, see [TiDB Configuration File Description](/tidb-configuration-file.md).
+-   構成ファイル
+-   デフォルト： `""`
+-   構成ファイルを指定した場合、TiDBは構成ファイルを読み取ります。対応する構成がコマンドラインオプションにも存在する場合、TiDBはコマンドラインオプションの構成を使用して、構成ファイルの構成を上書きします。構成の詳細については、 [TiDBConfiguration / コンフィグレーションファイルの説明](/tidb-configuration-file.md)を参照してください。
 
-## `--config-check`
+## <code>--config-check</code> {#code-config-check-code}
 
-- Checks the validity of the configuration file and exits
-- Default: `false`
+-   構成ファイルの有効性を確認して終了します
+-   デフォルト： `false`
 
-## `--config-strict`
+## <code>--config-strict</code> {#code-config-strict-code}
 
-- Enforces the validity of the configuration file
-- Default: `false`
+-   構成ファイルの有効性を強制します
+-   デフォルト： `false`
 
-## `--cors`
+## <code>--cors</code> {#code-cors-code}
 
-- Specifies the `Access-Control-Allow-Origin` value for Cross-Origin Request Sharing (CORS) request of the TiDB HTTP status service
-- Default: `""`
+-   TiDB HTTPステータスサービスのクロスオリジンリクエストシェアリング（CORS）リクエストに`Access-Control-Allow-Origin`の値を指定します
+-   デフォルト： `""`
 
-## `--host`
+## <code>--host</code> {#code-host-code}
 
-- The host address that the TiDB server monitors
-- Default: `"0.0.0.0"`
-- The TiDB server monitors this address.
-- The `"0.0.0.0"` address monitors all network cards by default. If you have multiple network cards, specify the network card that provides service, such as `192.168.100.113`.
+-   TiDBサーバーが監視するホストアドレス
+-   デフォルト： `"0.0.0.0"`
+-   TiDBサーバーはこのアドレスを監視します。
+-   `"0.0.0.0"`アドレスは、デフォルトですべてのネットワークカードを監視します。複数のネットワークカードがある場合は、 `192.168.100.113`などのサービスを提供するネットワークカードを指定します。
 
-## `--enable-binlog`
+## <code>--enable-binlog</code> {#code-enable-binlog-code}
 
-+ Enables or disables TiDB binlog generation
-+ Default: `false`
+-   TiDBbinlog生成を有効または無効にします
+-   デフォルト： `false`
 
-## `-L`
+## <code>-L</code> {#code-l-code}
 
-- The log level
-- Default: `"info"`
-- Optional values: `"debug"`, `"info"`, `"warn"`, `"error"`, `"fatal"`
+-   ログレベル
+-   デフォルト： `"info"`
+-   `"error"` `"fatal"` `"info"` `"warn"` `"debug"`
 
-## `--lease`
+## <code>--lease</code> {#code-lease-code}
 
-- The duration of the schema lease. It is **dangerous** to change the value unless you know what you do.
-- Default: `45s`
+-   スキーマリースの期間。自分が何をしているのかわからない限り、値を変更するのは**危険**です。
+-   デフォルト： `45s`
 
-## `--log-file`
+## <code>--log-file</code> {#code-log-file-code}
 
-- The log file
-- Default: `""`
-- If this option is not set, logs are output to "stderr". If this option is set, logs are output to the corresponding file.
+-   ログファイル
+-   デフォルト： `""`
+-   このオプションが設定されていない場合、ログは「stderr」に出力されます。このオプションが設定されている場合、ログは対応するファイルに出力されます。
 
-## `--log-slow-query`
+## <code>--log-slow-query</code> {#code-log-slow-query-code}
 
-- The directory for the slow query log
-- Default: `""`
-- If this option is not set, logs are output to the file specified by `--log-file` by default.
+-   低速クエリログのディレクトリ
+-   デフォルト： `""`
+-   このオプションが設定されていない場合、ログはデフォルトで`--log-file`で指定されたファイルに出力されます。
 
-## `--metrics-addr`
+## <code>--metrics-addr</code> {#code-metrics-addr-code}
 
-- The Prometheus Pushgateway address
-- Default: `""`
-- Leaving it empty stops the Prometheus client from pushing.
-- The format is `--metrics-addr=192.168.100.115:9091`.
+-   プロメテウスプッシュゲートウェイの住所
+-   デフォルト： `""`
+-   空のままにすると、Prometheusクライアントはプッシュを停止します。
+-   形式は`--metrics-addr=192.168.100.115:9091`です。
 
-## `--metrics-interval`
+## <code>--metrics-interval</code> {#code-metrics-interval-code}
 
-- The Prometheus client push interval in seconds
-- Default: `15s`
-- Setting the value to 0 stops the Prometheus client from pushing.
+-   Prometheusクライアントのプッシュ間隔（秒単位）
+-   デフォルト： `15s`
+-   値を0に設定すると、Prometheusクライアントはプッシュを停止します。
 
-## `-P`
+## <code>-P</code> {#code-p-code}
 
-- The monitoring port of TiDB services
-- Default: `"4000"`
-- The TiDB server accepts MySQL client requests from this port.
+-   TiDBサービスの監視ポート
+-   デフォルト： `"4000"`
+-   TiDBサーバーは、このポートからのMySQLクライアント要求を受け入れます。
 
-## `--path`
+## <code>--path</code> {#code-path-code}
 
-- The path to the data directory for local storage engine like "unistore"
-- For `--store = tikv`, you must specify the path; for `--store = unistore`, the default value is used if you do not specify the path.
-- For the distributed storage engine like TiKV, `--path` specifies the actual PD address. Assuming that you deploy the PD server on 192.168.100.113:2379, 192.168.100.114:2379 and 192.168.100.115:2379, the value of `--path` is "192.168.100.113:2379, 192.168.100.114:2379, 192.168.100.115:2379".
-- Default: `"/tmp/tidb"`
-- You can use `tidb-server --store=unistore --path=""` to enable a pure in-memory TiDB.
+-   「unistore」などのローカルストレージエンジンのデータディレクトリへのパス
+-   `--store = tikv`の場合、パスを指定する必要があります。 `--store = unistore`の場合、パスを指定しないとデフォルト値が使用されます。
+-   TiKVのような分散ストレージエンジンの場合、 `--path`は実際のPDアドレスを指定します。 PDサーバーを192.168.100.113:2379、192.168.100.114:2379、および192.168.100.115:2379にデプロイするとすると、 `--path`の値は「192.168.100.113:2379,192.168.100.114:2379,192.168.100.115:2379」になります。 。
+-   デフォルト： `"/tmp/tidb"`
+-   `tidb-server --store=unistore --path=""`を使用して、純粋なメモリ内TiDBを有効にすることができます。
 
-## `--proxy-protocol-networks`
+## <code>--proxy-protocol-networks</code> {#code-proxy-protocol-networks-code}
 
-- The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt).
-- Default: `""`
-- In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol such as HAProxy can pass the real client IP address to TiDB.
-- After configuring this flag, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this flag is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be the IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+-   [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用してTiDBに接続できるプロキシサーバーのIPアドレスのリスト。
+-   デフォルト： `""`
+-   通常、リバースプロキシの背後でTiDBにアクセスすると、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして使用します。 PROXYプロトコルを有効にすることにより、HAProxyなどのこのプロトコルをサポートするリバースプロキシは、実際のクライアントIPアドレスをTiDBに渡すことができます。
+-   このフラグを設定した後、TiDBは、設定された送信元IPアドレスがPROXYプロトコルを使用してTiDBに接続できるようにします。 PROXY以外のプロトコルが使用されている場合、この接続は拒否されます。このフラグを空のままにすると、PROXYプロトコルを使用してIPアドレスをTiDBに接続できなくなります。値は、IPアドレス（192.168.1.50）またはCIDR（192.168.1.0/24）で、区切り文字として`,`を使用できます。 `*`は任意のIPアドレスを意味します。
 
-> **Warning:**
+> **警告：**
 >
-> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
+> `*`は、任意のIPアドレスのクライアントがそのIPアドレスを報告できるようにすることでセキュリティリスクをもたらす可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDBに直接接続する内部コンポーネント（TiDBダッシュボードなど）が使用できなくなる可能性もあります。
 
-## `--proxy-protocol-header-timeout`
+## <code>--proxy-protocol-header-timeout</code> {#code-proxy-protocol-header-timeout-code}
 
-- Timeout for the PROXY protocol header read
-- Default: `5` (seconds)
+-   PROXYプロトコルヘッダー読み取りのタイムアウト
+-   デフォルト： `5` （秒）
 
-    > **Note:**
+    > **ノート：**
     >
-    > Do not set the value to `0`. Use the default value except for special situations.
+    > 値を`0`に設定しないでください。特別な状況を除いて、デフォルト値を使用してください。
 
-## `--report-status`
+## <code>--report-status</code> {#code-report-status-code}
 
-- Enables (`true`) or disables (`false`) the status report and pprof tool
-- Default: `true`
-- When set to `true`, this parameter enables metrics and pprof. When set to `false`, this parameter disables metrics and pprof.
+-   ステータスレポートとpprofツールを有効（ `true` ）または無効（ `false` ）にします
+-   デフォルト： `true`
+-   `true`に設定すると、このパラメーターはメトリックとpprofを有効にします。 `false`に設定すると、このパラメーターはメトリックとpprofを無効にします。
 
-## `--run-ddl`
+## <code>--run-ddl</code> {#code-run-ddl-code}
 
-- To see whether the `tidb-server` runs DDL statements, and set when the number of `tidb-server` is over two in the cluster
-- Default: `true`
-- The value can be (true) or (false). (true) indicates the `tidb-server` runs DDL itself. (false) indicates the `tidb-server` does not run DDL itself.
+-   `tidb-server`がDDLステートメントを実行するかどうかを確認し、クラスタで`tidb-server`の数が2を超える場合に設定します
+-   デフォルト： `true`
+-   値は（true）または（false）になります。 （true）は、 `tidb-server`がDDL自体を実行することを示します。 （false）は、 `tidb-server`がDDL自体を実行しないことを示します。
 
-## `--socket string`
+## <code>--socket string</code> {#code-socket-string-code}
 
-- The TiDB services use the unix socket file for external connections.
-- Default: `""`
-- Use `/tmp/tidb.sock` to open the unix socket file.
+-   TiDBサービスは、外部接続にunixソケットファイルを使用します。
+-   デフォルト： `""`
+-   `/tmp/tidb.sock`を使用してUNIXソケットファイルを開きます。
 
-## `--status`
+## <code>--status</code> {#code-status-code}
 
-- The status report port for TiDB server
-- Default: `"10080"`
-- This port is used to get server internal data. The data includes [Prometheus metrics](https://prometheus.io/) and [pprof](https://golang.org/pkg/net/http/pprof/).
-- Prometheus metrics can be accessed by `"http://host:status_port/metrics"`.
-- pprof data can be accessed by `"http://host:status_port/debug/pprof"`.
+-   TiDBサーバーのステータスレポートポート
+-   デフォルト： `"10080"`
+-   このポートは、サーバーの内部データを取得するために使用されます。データには[プロメテウスメトリクス](https://prometheus.io/)と[pprof](https://golang.org/pkg/net/http/pprof/)が含まれます。
+-   Prometheusメトリックには`"http://host:status_port/metrics"`でアクセスできます。
+-   pprofデータには`"http://host:status_port/debug/pprof"`でアクセスできます。
 
-## `--status-host`
+## <code>--status-host</code> {#code-status-host-code}
 
-- The `HOST` used to monitor the status of TiDB service
-- Default: `0.0.0.0`
+-   TiDBサービスのステータスを監視するために使用される`HOST`
+-   デフォルト： `0.0.0.0`
 
-## `--store`
+## <code>--store</code> {#code-store-code}
 
-- Specifies the storage engine used by TiDB in the bottom layer
-- Default: `"unistore"`
-- You can choose "unistore" or "tikv". ("unistore" is the local storage engine; "tikv" is a distributed storage engine)
+-   最下層でTiDBが使用するストレージエンジンを指定します
+-   デフォルト： `"unistore"`
+-   「unistore」または「tikv」を選択できます。 （「unistore」はローカルストレージエンジン、「tikv」は分散ストレージエンジンです）
 
-## `--token-limit`
+## <code>--token-limit</code> {#code-token-limit-code}
 
-- The number of sessions allowed to run concurrently in TiDB. It is used for traffic control.
-- Default: `1000`
-- If the number of the concurrent sessions is larger than `token-limit`, the request is blocked and waiting for the operations which have been finished to release tokens.
+-   TiDBで同時に実行できるセッションの数。交通管制に使用されます。
+-   デフォルト： `1000`
+-   同時セッションの数が`token-limit`より大きい場合、要求はブロックされ、終了した操作がトークンを解放するのを待機します。
 
-## `-V`
+## <code>-V</code> {#code-v-code}
 
-- Outputs the version of TiDB
-- Default: `""`
+-   TiDBのバージョンを出力します
+-   デフォルト： `""`
 
-## `--plugin-dir`
+## <code>--plugin-dir</code> {#code-plugin-dir-code}
 
-+ The storage directory for plugins.
-+ Default: `"/data/deploy/plugin"`
+-   プラグインのストレージディレクトリ。
+-   デフォルト： `"/data/deploy/plugin"`
 
-## `--plugin-load`
+## <code>--plugin-load</code> {#code-plugin-load-code}
 
-+ The names of the plugins to be loaded, each separated by a comma.
-+ Default: `""`
+-   ロードするプラグインの名前。それぞれがコンマで区切られています。
+-   デフォルト： `""`
 
-## `--affinity-cpus`
+## <code>--affinity-cpus</code> {#code-affinity-cpus-code}
 
-+ Sets the CPU affinity of TiDB servers, which is separated by commas. For example, "1,2,3".
-+ Default: `""`
+-   TiDBサーバーのCPUアフィニティをコンマで区切って設定します。たとえば、「1,2,3」。
+-   デフォルト： `""`
 
-## `--repair-mode`
+## <code>--repair-mode</code> {#code-repair-mode-code}
 
-+ Determines whether to enable the repair mode, which is only used in the data repair scenario.
-+ Default: `false`
+-   データ修復シナリオでのみ使用される修復モードを有効にするかどうかを決定します。
+-   デフォルト： `false`
 
-## `--repair-list`
+## <code>--repair-list</code> {#code-repair-list-code}
 
-+ The names of the tables to be repaired in the repair mode.
-+ Default: `""`
+-   修復モードで修復されるテーブルの名前。
+-   デフォルト： `""`
 
-## `--require-secure-transport`
+## <code>--require-secure-transport</code> {#code-require-secure-transport-code}
 
-+ Determines whether to require the client to use the secure mode for data transport.
-+ Default: `false`
+-   クライアントがデータ転送にセキュアモードを使用することを要求するかどうかを決定します。
+-   デフォルト： `false`

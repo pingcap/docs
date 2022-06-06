@@ -3,58 +3,58 @@ title: TiDB Computing
 summary: Understand the computing layer of the TiDB database.
 ---
 
-# TiDB Computing
+# TiDBコンピューティング {#tidb-computing}
 
-Based on the distributed storage provided by TiKV, TiDB builds the computing engine that combines great capability of transactional processing with that of data analysis. This document starts by introducing a data mapping algorithm that maps data from TiDB database tables to (Key, Value) key-value pairs in TiKV, then introduces how TiDB manages metadata, and finally illustrates the architecture of the TiDB SQL layer.
+TiKVが提供する分散ストレージに基づいて、TiDBは、トランザクション処理の優れた機能とデータ分析の優れた機能を組み合わせたコンピューティングエンジンを構築します。このドキュメントでは、TiDBデータベーステーブルのデータをTiKVの（キー、値）キーと値のペアにマッピングするデータマッピングアルゴリズムを紹介し、次にTiDBがメタデータを管理する方法を紹介し、最後にTiDBSQLレイヤーのアーキテクチャを示します。
 
-For the storage solution on which the computing layer is dependent, this document only introduces the row-based storage structure of TiKV. For OLAP services, TiDB introduces a column-based storage solution [TiFlash](/tiflash/tiflash-overview.md) as a TiKV extension.
+コンピューティングレイヤーが依存するストレージソリューションの場合、このドキュメントでは、TiKVの行ベースのストレージ構造のみを紹介します。 OLAPサービスの場合、TiDBは列ベースのストレージソリューション[TiFlash](/tiflash/tiflash-overview.md)をTiKV拡張機能として導入します。
 
-## Mapping table data to Key-Value
+## テーブルデータのキー値へのマッピング {#mapping-table-data-to-key-value}
 
-This section describes the scheme for mapping data to (Key, Value) key-value pairs in TiDB. Data to be mapped here includes the following two types:
+このセクションでは、TiDBの（キー、値）キーと値のペアにデータをマッピングするためのスキームについて説明します。ここでマッピングされるデータには、次の2つのタイプが含まれます。
 
-- Data of each row in the table, hereinafter referred to as table data.
-- Data of all indexes in the table, hereinafter referred to as index data.
+-   表の各行のデータ。以降、表データと呼びます。
+-   表内のすべてのインデックスのデータ。以下、インデックスデータと呼びます。
 
-### Mapping of table data to Key-Value
+### テーブルデータのキー値へのマッピング {#mapping-of-table-data-to-key-value}
 
-In a relational database, a table might have many columns. To map the data of each column in a row to a (Key, Value) key-value pair, you need to consider how to construct the Key. First of all, in OLTP scenarios, there are many operations such as adding, deleting, changing, and searching for data on a single or multiple rows, which needs the database to read a row of data quickly. Therefore, each key should have a unique ID (either explicit or implicit) to make it quick to locate. Then, many OLAP queries require a full table scan. If you can encode the keys of all rows in a table into a range, the whole table can be efficiently scanned by range queries.
+リレーショナルデータベースでは、テーブルに多くの列が含まれる場合があります。行の各列のデータを（キー、値）キーと値のペアにマップするには、キーの作成方法を検討する必要があります。まず、OLTPシナリオでは、単一または複数の行のデータの追加、削除、変更、検索などの多くの操作があり、データベースがデータの行をすばやく読み取る必要があります。したがって、すばやく見つけられるように、各キーには一意のID（明示的または暗黙的）が必要です。次に、多くのOLAPクエリで全表スキャンが必要になります。テーブル内のすべての行のキーを範囲にエンコードできる場合は、範囲クエリによってテーブル全体を効率的にスキャンできます。
 
-Based on the considerations above, the mapping of table data to Key-Value in TiDB is designed as follows:
+上記の考慮事項に基づいて、TiDBのキー値へのテーブルデータのマッピングは次のように設計されています。
 
-- To ensure that data from the same table is kept together for easy searching, TiDB assigns a table ID to each table represented by `TableID`. Table ID is an integer that is unique throughout the cluster.
-- TiDB assigns a row ID, represented by `RowID`, to each row of data in the table. The row ID is also an integer, unique within the table. For row ID, TiDB has made a small optimization: if a table has an integer type primary key, TiDB uses the value of this primary key as the row ID.
+-   同じテーブルのデータをまとめて検索しやすくするために、TiDBは`TableID`で表される各テーブルにテーブルIDを割り当てます。テーブルIDは、クラスタ全体で一意の整数です。
+-   TiDBは、テーブル内のデータの各行に`RowID`で表される行IDを割り当てます。行IDも整数であり、テーブル内で一意です。行IDについては、TiDBが小さな最適化を行いました。テーブルに整数型の主キーがある場合、TiDBはこの主キーの値を行IDとして使用します。
 
-Each row of data is encoded as a (Key, Value) key-value pair according to the following rule:
+データの各行は、次のルールに従って（キー、値）キーと値のペアとしてエンコードされます。
 
 ```
 Key:   tablePrefix{TableID}_recordPrefixSep{RowID}
 Value: [col1, col2, col3, col4]
 ```
 
-`tablePrefix` and `recordPrefixSep` are both special string constants used to distinguish other data in Key space. The exact values of the string constants are introduced in [Summary of mapping relationships](#summary-of-mapping-relationships).
+`tablePrefix`と`recordPrefixSep`はどちらも、キースペース内の他のデータを区別するために使用される特別な文字列定数です。文字列定数の正確な値は[マッピング関係の要約](#summary-of-mapping-relationships)で紹介されています。
 
-### Mapping of indexed data to Key-Value
+### インデックス付きデータのキー値へのマッピング {#mapping-of-indexed-data-to-key-value}
 
-TiDB supports both primary keys and secondary indexes (both unique and non-unique indexes). Similar to the table data mapping scheme, TiDB assigns an index ID to each index of the table represented by `IndexID`.
+TiDBは、主キーとセカンダリインデックス（一意のインデックスと一意でないインデックスの両方）の両方をサポートします。テーブルデータマッピングスキームと同様に、TiDBは`IndexID`で表されるテーブルの各インデックスにインデックスIDを割り当てます。
 
-For primary keys and unique indexes, it is needed to quickly locate the corresponding `RowID` based on the key-value pair, so such a key-value pair is encoded as follows.
+主キーと一意のインデックスの場合、キーと値のペアに基づいて対応する`RowID`をすばやく見つける必要があるため、このようなキーと値のペアは次のようにエンコードされます。
 
 ```
 Key:   tablePrefix{tableID}_indexPrefixSep{indexID}_indexedColumnsValue
 Value: RowID
 ```
 
-For ordinary secondary indexes that do not need to satisfy the uniqueness constraint, a single key might correspond to multiple rows. It needs to query corresponding `RowID` according to the range of keys. Therefore, the key-value pair must be encoded according to the following rule:
+一意性の制約を満たす必要のない通常のセカンダリインデックスの場合、単一のキーが複数の行に対応する場合があります。キーの範囲に応じて、対応する`RowID`を照会する必要があります。したがって、キーと値のペアは、次のルールに従ってエンコードする必要があります。
 
 ```
 Key:   tablePrefix{TableID}_indexPrefixSep{IndexID}_indexedColumnsValue_{RowID}
 Value: null
 ```
 
-### Summary of mapping relationships
+### マッピング関係の要約 {#summary-of-mapping-relationships}
 
-`tablePrefix`, `recordPrefixSep`, and `indexPrefixSep` in all of the above encoding rules are string constants that are used to distinguish a KV from other data in the Key space, which are defined as follows:
+上記のすべてのエンコード規則の`tablePrefix` 、および`recordPrefixSep`は、KVをキースペース内の他のデータと区別するために使用される文字列定数であり、次のように定義され`indexPrefixSep` 。
 
 ```
 tablePrefix     = []byte{'t'}
@@ -62,11 +62,11 @@ recordPrefixSep = []byte{'r'}
 indexPrefixSep  = []byte{'i'}
 ```
 
-Also note that in the above encoding schemes, no matter table data or index data key encoding scheme, all rows in a table have the same key prefix, and all data of an index also has the same prefix. Data with the same prefixes are thus arranged together in TiKV's key space. Therefore, by carefully designing the encoding scheme of the suffix part to ensure that the pre-encoding and post-encoding comparisons remain the same, the table data or index data can be stored in TiKV in an ordered manner. Using this encoding scheme, all row data in a table is arranged orderly by `RowID` in the TiKV's key space, and the data of a particular index is also arranged sequentially in the key space according to the specific value of the index data (`indexedColumnsValue`).
+また、上記のエンコーディングスキームでは、テーブルデータまたはインデックスデータのキーエンコーディングスキームに関係なく、テーブル内のすべての行に同じキープレフィックスがあり、インデックスのすべてのデータにも同じプレフィックスがあることに注意してください。したがって、同じプレフィックスを持つデータは、TiKVのキースペースに一緒に配置されます。したがって、サフィックス部分のエンコード方式を注意深く設計して、エンコード前とエンコード後の比較が同じになるようにすることで、テーブルデータまたはインデックスデータを順序付けられた方法でTiKVに格納できます。このエンコード方式を使用すると、テーブル内のすべての行データがTiKVのキースペースに`RowID`ずつ順番に配置され、特定のインデックスのデータも、インデックスデータの特定の値に従ってキースペースに順番に配置されます（ `indexedColumnsValue` ）。
 
-### Example of Key-Value mapping relationship
+### キーと値のマッピング関係の例 {#example-of-key-value-mapping-relationship}
 
-This section shows a simple example for you to understand the Key-Value mapping relationship of TiDB. Suppose the following table exists in TiDB.
+このセクションでは、TiDBのキーと値のマッピング関係を理解するための簡単な例を示します。次のテーブルがTiDBに存在するとします。
 
 ```sql
 CREATE TABLE User (
@@ -79,7 +79,7 @@ CREATE TABLE User (
 );
 ```
 
-Suppose there are 3 rows of data in the table.
+テーブルに3行のデータがあるとします。
 
 ```
 1, "TiDB", "SQL Layer", 10
@@ -87,7 +87,7 @@ Suppose there are 3 rows of data in the table.
 3, "PD", "Manager", 30
 ```
 
-Each row of data is mapped to a (Key, Value) key-value pair, and the table has an `int` type primary key, so the value of `RowID` is the value of this primary key. Suppose the table's `TableID` is `10`, and then its table data stored on TiKV is:
+データの各行は（キー、値）キーと値のペアにマップされ、テーブルには`int`タイプの主キーがあるため、値`RowID`がこの主キーの値になります。テーブルの`TableID`が`10`であり、TiKVに格納されているテーブルデータが次のようになっているとします。
 
 ```
 t10_r1 --> ["TiDB", "SQL  Layer", 10]
@@ -95,7 +95,7 @@ t10_r2 --> ["TiKV", "KV  Engine", 20]
 t10_r3 --> ["PD", " Manager", 30]
 ```
 
-In addition to the primary key, the table has a non-unique ordinary secondary index, `idxAge`. Suppose the `IndexID` is `1`, and then its index data stored on TiKV is:
+主キーに加えて、テーブルには一意ではない通常の二次インデックス`idxAge`があります。 `IndexID`が`1`で、TiKVに保存されているインデックスデータが次のようになっているとします。
 
 ```
 t10_i1_10_1 --> null
@@ -103,55 +103,55 @@ t10_i1_20_2 --> null
 t10_i1_30_3 --> null
 ```
 
-The above example shows the mapping rule from a relational model to a Key-Value model in TiDB, and the consideration behind this mapping scheme.
+上記の例は、TiDBのリレーショナルモデルからキー値モデルへのマッピングルールと、このマッピングスキームの背後にある考慮事項を示しています。
 
-## Metadata management
+## メタデータ管理 {#metadata-management}
 
-Each database and table in TiDB has metadata that indicates its definition and various attributes. This information also needs to be persisted, and TiDB stores this information in TiKV as well.
+TiDBの各データベースとテーブルには、その定義とさまざまな属性を示すメタデータがあります。この情報も永続化する必要があり、TiDBはこの情報をTiKVにも保存します。
 
-Each database or table is assigned a unique ID. As the unique identifier, when table data is encoded to Key-Value, this ID is encoded in the Key with the `m_` prefix. This constructs a key-value pair with the serialized metadata stored in it.
+各データベースまたはテーブルには、一意のIDが割り当てられます。一意の識別子として、テーブルデータがKey-Valueにエンコードされる場合、このIDはプレフィックスが`m_`のKeyにエンコードされます。これにより、シリアル化されたメタデータが格納されたキーと値のペアが構築されます。
 
-In addition, TiDB also uses a dedicated (Key, Value) key-value pair to store the latest version number of structure information of all tables. This key-value pair is global, and its version number is increased by `1` each time the state of the DDL operation changes. TiDB stores this key-value pair persistently in the PD server with the key of `/tidb/ddl/global_schema_version`, and Value is the version number value of the `int64` type. Meanwhile, because TiDB applies schema changes online, it keeps a background thread that constantly checks whether the version number of the table structure information stored in the PD server changes. This thread also ensures that the changes of version can be obtained within a certain period of time.
+さらに、TiDBは、専用の（Key、Value）キーと値のペアを使用して、すべてのテーブルの構造情報の最新バージョン番号を格納します。このキーと値のペアはグローバルであり、そのバージョン番号は、DDL操作の状態が変化するたびに`1`ずつ増加します。 TiDBは、このキーと値のペアを`/tidb/ddl/global_schema_version`のキーでPDサーバーに永続的に保存し、Valueは`int64`タイプのバージョン番号の値です。一方、TiDBはスキーマの変更をオンラインで適用するため、PDサーバーに格納されているテーブル構造情報のバージョン番号が変更されているかどうかを常にチェックするバックグラウンドスレッドを保持します。このスレッドはまた、バージョンの変更が一定期間内に取得できることを保証します。
 
-## SQL layer overview
+## SQLレイヤーの概要 {#sql-layer-overview}
 
-TiDB's SQL layer, TiDB Server, translates SQL statements into Key-Value operations, forwards the operations to TiKV, the distributed Key-Value storage layer, assembles the results returned by TiKV, and finally returns the query results to the client.
+TiDBのSQLレイヤーであるTiDBサーバーは、SQLステートメントをKey-Value操作に変換し、操作を分散Key-ValueストレージレイヤーであるTiKVに転送し、TiKVから返された結果をアセンブルし、最後にクエリ結果をクライアントに返します。
 
-The nodes at this layer are stateless. These nodes themselves do not store data and are completely equivalent.
+このレイヤーのノードはステートレスです。これらのノード自体はデータを格納せず、完全に同等です。
 
-### SQL computing
+### SQLコンピューティング {#sql-computing}
 
-The simplest solution to SQL computing is the [mapping of table data to Key-Value](#mapping-of-table-data-to-key-value) as described in the previous section, which maps SQL queries to KV queries, acquires the corresponding data through the KV interface, and performs various computations.
+SQLコンピューティングの最も簡単なソリューションは、前のセクションで説明した[テーブルデータのキー値へのマッピング](#mapping-of-table-data-to-key-value)です。これは、SQLクエリをKVクエリにマップし、KVインターフェイスを介して対応するデータを取得し、さまざまな計算を実行します。
 
-For example, to execute the `select count(*) from user where name = "TiDB"` SQL statement, TiDB needs to read all data in the table, then checks whether the `name` field is `TiDB`, and if so, returns this row. The process is as follows:
+たとえば、 `select count(*) from user where name = "TiDB"` SQLステートメントを実行するには、TiDBはテーブル内のすべてのデータを読み取り、 `name`フィールドが`TiDB`であるかどうかを確認し、そうである場合はこの行を返す必要があります。プロセスは次のとおりです。
 
-1. Construct the Key Range: all `RowID` in a table are in `[0,  MaxInt64)` range. According to the row data `Key` encoding rule, using `0` and `MaxInt64` can construct a `[StartKey, EndKey)` range that is left-closed and right-open.
-2. Scan Key Range: read the data in TiKV according to the key range constructed above.
-3. Filter data: for each row of data read, calculate the `name = "TiDB"` expression. If the result is `true`, return to this row. If not, skip this row.
-4. Calculate `Count(*)`: for each row that meets the requirements, add up to the result of `Count(*)`.
+1.  キー範囲を作成します。テーブル内の`RowID`すべてが`[0,  MaxInt64)`の範囲にあります。行データ`Key`のエンコード規則によれば、 `0`と`MaxInt64`を使用すると、左閉と右開の`[StartKey, EndKey)`範囲を作成できます。
+2.  キー範囲のスキャン：上記で作成したキー範囲に従ってTiKVのデータを読み取ります。
+3.  データのフィルター処理：読み取られたデータの各行について、 `name = "TiDB"`の式を計算します。結果が`true`の場合は、この行に戻ります。そうでない場合は、この行をスキップしてください。
+4.  `Count(*)`を計算します。要件を満たす行ごとに、 `Count(*)`の結果を合計します。
 
-**The entire process is illustrated as follows:**
+**プロセス全体を次のように示します。**
 
 ![naive sql flow](/media/tidb-computing-native-sql-flow.jpeg)
 
-This solution is intuitive and feasible, but has some obvious problems in a distributed database scenario:
+このソリューションは直感的で実行可能ですが、分散データベースのシナリオでは明らかな問題がいくつかあります。
 
-- As the data is being scanned, each row is read from TiKV via a KV operation with at least one RPC overhead, which can be very high if there is a large amount of data to be scanned.
-- It is not applicable to all rows. Data that does not meet the conditions does not need to be read.
-- From the returned result of this query, only the number of rows that match the requirements is needed, not the value of those rows.
+-   データがスキャンされている間、各行は、少なくとも1つのRPCオーバーヘッドを伴うKV操作を介してTiKVから読み取られます。これは、スキャンするデータが大量にある場合に非常に高くなる可能性があります。
+-   すべての行に適用できるわけではありません。条件を満たさないデータを読み取る必要はありません。
+-   このクエリの返された結果から、要件に一致する行の数だけが必要であり、それらの行の値は必要ありません。
 
-### Distributed SQL operations
+### 分散SQL操作 {#distributed-sql-operations}
 
-To solve the problems above, the computation should be as close to the storage node as possible to avoid a large number of RPC callings. First of all, the SQL predicate condition `name = "TiDB"` should be pushed down to the storage node for computation, so that only valid rows are returned, which avoids meaningless network transfers. Then, the aggregation function `Count(*)` can also be pushed down to the storage nodes for pre-aggregation, and each node only has to return a result of `Count(*)`. The SQL layer will sum up the `Count(*)` results returned by each node.
+上記の問題を解決するには、RPC呼び出しの数が多くなるのを避けるために、計算をストレージノードにできるだけ近づける必要があります。まず、SQL述語条件`name = "TiDB"`を計算のためにストレージノードにプッシュダウンして、有効な行のみが返されるようにする必要があります。これにより、意味のないネットワーク転送が回避されます。次に、集計関数`Count(*)`を事前集計のためにストレージノードにプッシュダウンすることもでき、各ノードは`Count(*)`の結果を返すだけで済みます。 SQLレイヤーは、各ノードから返された`Count(*)`の結果を合計します。
 
-The following image shows how data returns layer by layer:
+次の画像は、データがレイヤーごとにどのように返されるかを示しています。
 
 ![dist sql flow](/media/tidb-computing-dist-sql-flow.png)
 
-### Architecture of SQL layer
+### SQLレイヤーのアーキテクチャ {#architecture-of-sql-layer}
 
-The previous sections introduce some functions of the SQL layer and I hope you have a basic understanding of how SQL statements are handled. In fact, TiDB's SQL layer is much more complicated, with many modules and layers. The following diagram lists the important modules and calling relationships:
+前のセクションではSQLレイヤーのいくつかの機能を紹介しましたが、SQLステートメントの処理方法について基本的な知識を持っていることを願っています。実際、TiDBのSQLレイヤーははるかに複雑で、多くのモジュールとレイヤーがあります。次の図は、重要なモジュールと呼び出し関係を示しています。
 
 ![tidb sql layer](/media/tidb-computing-tidb-sql-layer.png)
 
-The user's SQL request is sent to TiDB Server either directly or via `Load Balancer`. TiDB Server will parse `MySQL Protocol Packet`, get the content of requests, parse the SQL request syntactically and semantically, develop and optimize query plans, execute a query plan, get and process the data. All data is stored in the TiKV cluster, so in this process, TiDB Server needs to interact with TiKV and get the data. Finally, TiDB Server needs to return the query results to the user.
+ユーザーのSQL要求は、直接または`Load Balancer`を介してTiDBサーバーに送信されます。 TiDBサーバーは`MySQL Protocol Packet`を解析し、リクエストのコンテンツを取得し、SQLリクエストを構文的および意味的に解析し、クエリプランを開発および最適化し、クエリプランを実行し、データを取得および処理します。すべてのデータはTiKVクラスタに保存されるため、このプロセスでは、TiDBサーバーがTiKVと対話してデータを取得する必要があります。最後に、TiDBサーバーはクエリ結果をユーザーに返す必要があります。

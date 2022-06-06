@@ -3,79 +3,79 @@ title: TiDB Cloud Release Notes in 2020
 summary: Learn about the release notes of TiDB Cloud in 2020.
 ---
 
-# TiDB Cloud Release Notes in 2020
+# 2020年のTiDBクラウドリリースノート {#tidb-cloud-release-notes-in-2020}
 
-This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2020.
+このページには、2020年の[TiDBクラウド](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
-## December 30, 2020
+## 2020年12月30日 {#december-30-2020}
 
-* Upgrade the default TiDB version to v4.0.9
-* Support upgrading and scaling in TiDB gracefully to achieve zero client failures
-* Recover cluster configuration after restoring a new cluster from backup
+-   デフォルトのTiDBバージョンをv4.0.9にアップグレードします
+-   TiDBでのアップグレードとスケーリングを適切にサポートして、クライアント障害をゼロにします
+-   バックアップから新しいクラスタを復元した後、クラスタ構成を回復する
 
-## December 16, 2020
+## 2020年12月16日 {#december-16-2020}
 
-* Adjust the minimum number of TiDB nodes to one for all cluster tiers
-* Prohibit executing system command on the SQL web shell
-* Enable redact-log for TiDB clusters by default
+-   すべてのクラスタ層でTiDBノードの最小数を1つに調整します
+-   SQLWebシェルでのシステムコマンドの実行を禁止する
+-   デフォルトでTiDBクラスターの編集ログを有効にする
 
-## November 24, 2020
+## 2020年11月24日 {#november-24-2020}
 
-* Allow the traffic filter IP list of a TiDB cluster's public endpoint to be empty to disable public access
-* Improve the delivery rate of invitation emails sent to customers with Outlook or Hotmail
-* Polish the error notification message for sign-up
-* New clusters will run on CentOS VM instead of Ubuntu
-* Fix the issue that the cluster does not show in the recycle bin when the corresponding backup still exists
+-   TiDBクラスターのパブリックエンドポイントのトラフィックフィルターIPリストを空にして、パブリックアクセスを無効にします
+-   OutlookまたはHotmailを使用して顧客に送信される招待メールの配信率を向上させる
+-   サインアップのためのエラー通知メッセージを磨く
+-   新しいクラスターはUbuntuではなくCentOSVMで実行されます
+-   対応するバックアップがまだ存在する場合に、クラスタがごみ箱に表示されない問題を修正します
 
-## November 4, 2020
+## 2020年11月4日 {#november-4-2020}
 
-* Implement the function of changing the organization name
-* Prevent users from accessing TiDB during data restoring
-* Update Terms of Service and Privacy location in the Sign Up page
-* Add a feedback form entrance widget
-* Prevent Members from deleting owner(s) in the Preference tab
-* Change TiFlash<sup>beta</sup> and TiKV storage chart metrics
-* Upgrade the default TiDB cluster version to 4.0.8
+-   組織名を変更する機能を実装する
+-   データの復元中にユーザーがTiDBにアクセスできないようにする
+-   サインアップページで利用規約とプライバシーの場所を更新する
+-   フィードバックフォームの入り口ウィジェットを追加する
+-   [設定]タブでメンバーが所有者を削除できないようにする
+-   TiFlash<sup>ベータ</sup>およびTiKVストレージチャートメトリックを変更します
+-   デフォルトのTiDBクラスタバージョンを4.0.8にアップグレードします
 
-## October 12, 2020
+## 2020年10月12日 {#october-12-2020}
 
-* Change the SQL webshell client from Oracle MySQL client to `usql` client
-* Upgrade the default TiDB version to 4.0.7
-* Extend the manual backup retention period from 7 days to 30 days
+-   SQLWebshellクライアントをOracleMySQLクライアントから`usql`クライアントに変更します
+-   デフォルトのTiDBバージョンを4.0.7にアップグレードします
+-   手動バックアップの保存期間を7日から30日に延長します
 
-## October 2, 2020
+## 2020年10月2日 {#october-2-2020}
 
-* Fix TiFlash<sup>beta</sup> disk storage configuration
+-   TiFlash<sup>ベータ</sup>ディスクストレージ構成を修正
 
-## September 14, 2020
+## 2020年9月14日 {#september-14-2020}
 
-* Fix monitoring metrics by adding the `region` label
-* Fix the issue that non-HTAP clusters cannot be scaled
+-   `region`のラベルを追加して、監視メトリックを修正します
+-   非HTAPクラスターをスケーリングできない問題を修正します
 
-## September 11, 2020
+## 2020年9月11日 {#september-11-2020}
 
-* Customers now can access TiDB using a public endpoint with traffic filters
-* Add the time zone indicator at the auto backup settings dialog
-* Fix the broken invitation link when registration is not finished
+-   お客様は、トラフィックフィルターを備えたパブリックエンドポイントを使用してTiDBにアクセスできるようになりました
+-   自動バックアップ設定ダイアログでタイムゾーンインジケーターを追加します
+-   登録が完了していないときに壊れた招待リンクを修正する
 
-## September 4, 2020
+## 2020年9月4日 {#september-4-2020}
 
-* Fix an incorrect URL in invitation Email
+-   招待メールの誤ったURLを修正する
 
-## August 6, 2020
+## 2020年8月6日 {#august-6-2020}
 
-* Change email support to visiting TiDB Cloud Customer Support
-* Add the simple 2fa feature for custom email login
-* Add the feature of setting up VPC peering
-* Add custom email support for signup/login
+-   メールサポートをTiDBクラウドカスタマーサポートにアクセスするように変更します
+-   カスタム電子メールログイン用のシンプルな2FA機能を追加します
+-   VPCピアリングを設定する機能を追加します
+-   サインアップ/ログイン用のカスタム電子メールサポートを追加します
 
-## July 17, 2020
+## 2020年7月17日 {#july-17-2020}
 
-* Adjust the default retention of automated daily backup to 7 days
-* Add reasons at tooltip for clusters in unhealthy status
-* Fix the issue that when the initial credit is 0, users can still create a cluster
-* Optimize the integration of Dashboard
-* Send emails when adding credits for customers
-* Add the tenant ID in the tenant preference page
-* Optimize the reasonable notice message for user's quota limit
-* Fix backup/restore metrics
+-   自動化された毎日のバックアップのデフォルトの保持を7日間に調整します
+-   異常な状態のクラスターのツールチップに理由を追加する
+-   初期クレジットが0の場合でも、ユーザーがクラスタを作成できる問題を修正します
+-   ダッシュボードの統合を最適化する
+-   顧客のクレジットを追加するときにメールを送信する
+-   テナント設定ページにテナントIDを追加します
+-   ユーザーの割り当て制限に合わせて合理的な通知メッセージを最適化する
+-   バックアップ/復元の指標を修正する

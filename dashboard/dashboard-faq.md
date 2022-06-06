@@ -4,102 +4,102 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 aliases: ['/docs/dev/dashboard/dashboard-faq/']
 ---
 
-# TiDB Dashboard FAQ
+# TiDBダッシュボードFAQ {#tidb-dashboard-faq}
 
-This document summarizes the frequently asked questions (FAQs) and answers about TiDB Dashboard. If a problem cannot be located or persists after you perform as instructed, contact PingCAP technical support for help.
+このドキュメントでは、TiDBダッシュボードに関するよくある質問（FAQ）と回答をまとめています。指示どおりに実行しても問題が見つからない、または解決しない場合は、PingCAPテクニカルサポートに連絡してください。
 
-## Access-related FAQ
+## アクセス関連のFAQ {#access-related-faq}
 
-### When the firewall or reverse proxy is configured, I am redirected to an internal address other than TiDB Dashboard
+### ファイアウォールまたはリバースプロキシが構成されている場合、TiDBダッシュボード以外の内部アドレスにリダイレクトされます {#when-the-firewall-or-reverse-proxy-is-configured-i-am-redirected-to-an-internal-address-other-than-tidb-dashboard}
 
-When multiple Placement Driver (PD) instances are deployed in a cluster, only one of the PD instances actually runs the TiDB Dashboard service. If you access other PD instances instead of this one, your browser redirects you to another address. If the firewall or reverse proxy is not properly configured for accessing TiDB Dashboard, when you visit the Dashboard, you might be redirected to an internal address that is protected by the firewall or reverse proxy.
+複数のPlacementDriver（PD）インスタンスがクラスタにデプロイされている場合、実際にTiDBダッシュボードサービスを実行しているのはPDインスタンスの1つだけです。これの代わりに他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。ファイアウォールまたはリバースプロキシがTiDBダッシュボードにアクセスするように適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
-- See [TiDB Dashboard Multi-PD Instance Deployment](/dashboard/dashboard-ops-deploy.md) to learn the working principle of TiDB Dashboard with multiple PD instances.
-- See [Use TiDB Dashboard through a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md) to learn how to correctly configure a reverse proxy.
-- See [Secure TiDB Dashboard](/dashboard/dashboard-ops-security.md) to learn how to correctly configure the firewall.
+-   複数のPDインスタンスを使用するTiDBダッシュボードの動作原理については、 [TiDBダッシュボードマルチPDインスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
+-   リバースプロキシを正しく構成する方法については、 [リバースプロキシを介してTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
+-   ファイアウォールを正しく構成する方法については、 [セキュリティTiDBダッシュボード](/dashboard/dashboard-ops-security.md)を参照してください。
 
-### When TiDB Dashboard is deployed with dual network interface cards (NICs), TiDB Dashboard cannot be accessed using another NIC
+### TiDBダッシュボードがデュアルネットワークインターフェイスカード（NIC）で展開されている場合、別のNICを使用してTiDBダッシュボードにアクセスすることはできません {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}
 
-For security reasons, TiDB Dashboard on PD only monitors the IP addresses specified during deployment (that is, it only listens on one NIC), not on `0.0.0.0`. Therefore, when multiple NICs are installed on the host, you cannot access TiDB Dashboard using another NIC.
+セキュリティ上の理由から、PD上のTiDBダッシュボードは、展開中に指定されたIPアドレスのみを監視します（つまり、1つのNICでのみリッスンします） `0.0.0.0`では監視しません。したがって、ホストに複数のNICがインストールされている場合、別のNICを使用してTiDBダッシュボードにアクセスすることはできません。
 
-If you have deployed TiDB using the `tiup cluster` or `tiup playground` command, currently this problem cannot be solved. It is recommended that you use a reverse proxy to safely expose TiDB Dashboard to another NIC. For details, see [Use TiDB Dashboard behind a Reverse Proxy](/dashboard/dashboard-ops-reverse-proxy.md).
+`tiup cluster`または`tiup playground`コマンドを使用してTiDBを展開した場合、現在この問題は解決できません。 TiDBダッシュボードを別のNICに安全に公開するには、リバースプロキシを使用することをお勧めします。詳細については、 [リバースプロキシの背後でTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 
-## UI-related FAQ
+## UI関連のFAQ {#ui-related-faq}
 
-### A `prometheus_not_found` error is shown in **QPS** and **Latency** sections on the Overview page
+### <code>prometheus_not_found</code>エラーは、[概要]ページの[ <strong>QPS</strong> ]セクションと[<strong>レイテンシ</strong>]セクションに表示されます {#a-code-prometheus-not-found-code-error-is-shown-in-strong-qps-strong-and-strong-latency-strong-sections-on-the-overview-page}
 
-The **QPS** and **Latency** sections on the **Overview** page require a cluster with Prometheus deployed. Otherwise, the error is shown. You can solve this problem by deploying a Prometheus instance in the cluster.
+[**概要]**ページの[ <strong>QPS</strong> ]セクションと[<strong>レイテンシ]</strong>セクションには、Prometheusがデプロイされたクラスタが必要です。それ以外の場合は、エラーが表示されます。この問題は、Prometheusインスタンスをクラスタにデプロイすることで解決できます。
 
-If you still encounter this problem when the Prometheus instance has been deployed, the possible reason is that your deployment tool is out of date (TiUP or TiDB Operator), and your tool does not automatically report metrics addresses, which makes TiDB Dashboard unable to query metrics. You can upgrade you deployment tool to the latest version and try again.
+Prometheusインスタンスがデプロイされたときにこの問題が引き続き発生する場合は、デプロイメントツールが古く（TiUPまたはTiDB Operator）、ツールがメトリックアドレスを自動的に報告しないため、TiDBダッシュボードがクエリを実行できないことが考えられます。メトリック。デプロイメントツールを最新バージョンにアップグレードして、再試行できます。
 
-If your deployment tool is TiUP, take the following steps to solve this problem. For other deployment tools, refer to the corresponding documents of those tools.
+展開ツールがTiUPの場合は、次の手順を実行してこの問題を解決してください。その他の展開ツールについては、それらのツールの対応するドキュメントを参照してください。
 
-1. Upgrade TiUP and TiUP Cluster:
+1.  TiUPおよびTiUPクラスターのアップグレード：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     tiup update --self
     tiup update cluster --force
     ```
 
-2. After the upgrade, when a new cluster is deployed with Prometheus instances, the metrics can be displayed normally.
+2.  アップグレード後、Prometheusインスタンスを使用して新しいクラスタをデプロイすると、メトリックを正常に表示できます。
 
-3. After the upgrade, for an existing cluster, you can restart this cluster to report the metrics addresses. Replace `CLUSTER_NAME` with the actual cluster name:
+3.  アップグレード後、既存のクラスタの場合、このクラスタを再起動してメトリックアドレスをレポートできます。 `CLUSTER_NAME`を実際のクラスタ名に置き換えます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     tiup cluster start CLUSTER_NAME
     ```
 
-   Even if the cluster has been started, still execute this command. This command does not affect the normal application in the cluster, but refreshes and reports the metrics addresses, so that the monitoring metrics can be displayed normally in TiDB Dashboard.
+    クラスタが起動している場合でも、このコマンドを実行してください。このコマンドは、クラスタの通常のアプリケーションには影響しませんが、メトリックアドレスを更新して報告するため、監視メトリックをTiDBダッシュボードに通常どおり表示できます。
 
-### An `invalid connection` error is shown in **Top SQL Statements** and **Recent Slow Queries** on the Overview page
+### <code>invalid connection</code>エラーは、[概要]ページの[<strong>Top SQLステートメント</strong>と<strong>最近の低速クエリ]</strong>に表示されます。 {#an-code-invalid-connection-code-error-is-shown-in-strong-top-sql-statements-strong-and-strong-recent-slow-queries-strong-on-the-overview-page}
 
-The possible reason is that you have enabled the `prepared-plan-cache` feature of TiDB. As an experimental feature, when enabled, `prepared-plan-cache` might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache) to solve this problem.
+考えられる理由は、TiDBの`prepared-plan-cache`つの機能を有効にしたことです。実験的機能として、有効にすると、 `prepared-plan-cache`は特定のTiDBバージョンで正しく機能しない可能性があり、TiDBダッシュボード（および他のアプリケーション）でこの問題を引き起こす可能性があります。この問題を解決するために[TiDBConfiguration / コンフィグレーションファイル](/tidb-configuration-file.md#prepared-plan-cache)を更新することにより、 `prepared-plan-cache`を無効にすることができます。
 
-### An `unknown field` error is shown in **Slow Queries** page
+### <code>unknown field</code>エラーが<strong>[低速クエリ]</strong>ページに表示されます {#an-code-unknown-field-code-error-is-shown-in-strong-slow-queries-strong-page}
 
-If the `unknown field` error appears on the **Slow Queries** page after the cluster upgrade, the error is related to a compatibility issue caused by the difference between TiDB Dashboard server fields (which might be updated) and user preferences fields (which are in the browser cache). This issue has been fixed. If your cluster is earlier than v5.0.3 or v4.0.14, perform the following steps to resolve the issue:
+クラスタのアップグレード後に[**低速クエリ**]ページに`unknown field`のエラーが表示される場合、エラーは、TiDBダッシュボードサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザーキャッシュにある）の違いによって引き起こされる互換性の問題に関連しています。 。この問題は修正されました。クラスタがv5.0.3またはv4.0.14より前の場合は、次の手順を実行して問題を解決します。
 
-To clear your browser cache, take the following steps:
+ブラウザのキャッシュをクリアするには、次の手順を実行します。
 
-1. Open TiDB Dashboard page.
+1.  TiDBダッシュボードページを開きます。
 
-2. Open Developer Tools. Different browsers have different ways of opening Developer Tools. After clicking the **Menu Bar**:
+2.  開発者ツールを開きます。ブラウザが異なれば、開発者ツールを開く方法も異なります。**メニューバー**をクリックした後：
 
-    - Firefox: **Menu** > **Web Developer** > **Toggle Tools**, or **Tools** > **Web Developer** > **Toggle Tools**.
-    - Chrome: **More tools** > **Developer tools**.
-    - Safari: **Develop** > **Show Web Inspector**. If you can't see the **Develop** menu, go to **Safari** > **Preferences** > **Advanced**, and check the **Show Develop** menu in menu bar checkbox.
+    -   Firefox： **[メニュー]** &gt;[ <strong>Web開発者</strong>]&gt;[<strong>ツールの切り替え</strong>]、または[<strong>ツール</strong>]&gt;[ <strong>Web</strong>開発者]&gt;[ツールの<strong>切り替え</strong>]。
+    -   Chrome：**その他のツール**&gt;<strong>開発者ツール</strong>。
+    -   Safari：[**開発**]&gt;[ <strong>Webインスペクターを表示</strong>]。 [<strong>開発</strong>]メニューが表示されない場合は、[ <strong>Safari</strong> ]&gt;[<strong>設定]</strong> &gt;[<strong>詳細</strong>設定]に移動し、[メニューバーに[<strong>開発]メニューを表示する</strong>]チェックボックスをオンにします。
 
-    In the following example, Chrome is used.
+    次の例では、Chromeが使用されています。
 
     ![Opening DevTools from Chrome's main menu](/media/dashboard/dashboard-faq-devtools.png)
 
-3. Select the **Application** panel, expand the **Local Storage** menu and select the **TiDB Dashboard page domain**. Click the **Clear All** button.
+3.  [**アプリケーション**]パネルを選択し、[<strong>ローカルストレージ</strong>]メニューを展開して、[ <strong>TiDBダッシュボード]ページのドメイン</strong>を選択します。 [<strong>すべてクリア</strong>]ボタンをクリックします。
 
     ![Clear the Local Storage](/media/dashboard/dashboard-faq-devtools-application.png)
 
-### A `required component NgMonitoring is not started` error is shown
+### <code>required component NgMonitoring is not started</code>エラーが表示されます {#a-code-required-component-ngmonitoring-is-not-started-code-error-is-shown}
 
-NgMonitoring is an advanced monitoring component built in TiDB clusters of v5.4.0 and later versions. It supports such features as **Continuous Profiling** and **Top SQL**. In a TiDB cluster deployed using TiUP, NgMonitoring is deployed automatically. In a TiDB cluster deployed using TiDB Operator, you need to deploy NgMonitoring manually by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
+NgMonitoringは、v5.4.0以降のバージョンのTiDBクラスターに組み込まれている高度な監視コンポーネントです。**連続プロファイリング**や<strong>Top SQL</strong>などの機能をサポートしています。 TiUPを使用してデプロイされたTiDBクラスタでは、NgMonitoringが自動的にデプロイされます。 TiDB Operatorを使用してデプロイされたTiDBクラスタでは、 [継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringを手動でデプロイする必要があります。
 
-If the **Continuous Profiling** page shows `required component NgMonitoring is not started`, address the problem based on the deployment method of the TiDB cluster.
+[**継続的なプロファイリング**]ページに`required component NgMonitoring is not started`が表示されている場合は、TiDBクラスタの展開方法に基づいて問題に対処します。
 
-#### Clusters deployed using TiUP
+#### TiUPを使用してデプロイされたクラスター {#clusters-deployed-using-tiup}
 
-Step 1. Check versions
+手順1.バージョンを確認する
 
-1. Check the TiUP cluster version. NgMonitoring is available only when TiUP is v1.9.0 or later.
+1.  TiUPクラスタのバージョンを確認してください。 NgMonitoringは、TiUPがv1.9.0以降の場合にのみ使用できます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup cluster --version
     ```
 
-    The command output shows the TiUP version. For example:
+    コマンド出力には、TiUPのバージョンが表示されます。例えば：
 
     ```
     tiup version 1.9.0 tiup
@@ -107,25 +107,25 @@ Step 1. Check versions
     Git Ref: v1.9.0
     ```
 
-2. If the TiUP cluster version is earlier than v1.9.0, upgrade TiUP and TiUP cluster to the latest version:
+2.  TiUPクラスタのバージョンがv1.9.0より前の場合は、TiUPおよびTiUPクラスタを最新バージョンにアップグレードします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup update --all
     ```
 
-Step 2. Add the ng_port configuration item on the control machine by using TiUP. Then reload Prometheus.
+手順2.TiUPを使用して、制御マシンにng_port構成項目を追加します。次に、Prometheusをリロードします。
 
-1. Open the cluster configuration file in editing mode:
+1.  クラスタ構成ファイルを編集モードで開きます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. Under `monitoring_servers`, add the `ng_port:${port}` parameter:
+2.  `monitoring_servers`の下に、 `ng_port:${port}`のパラメーターを追加します。
 
     ```
     monitoring_servers:
@@ -133,16 +133,16 @@ Step 2. Add the ng_port configuration item on the control machine by using TiUP.
       ng_port: ${port}
     ```
 
-3. Reload Prometheus:
+3.  プロメテウスをリロード：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup cluster reload ${cluster-name} --role prometheus
     ```
 
-After performing the preceding steps, enable Continuous Profiling on TiDB Dashboard. If NgMonitoring still fails to be started, contact PingCAP technical support for help.
+上記の手順を実行した後、TiDBダッシュボードで継続的プロファイリングを有効にします。それでもNgMonitoringを開始できない場合は、PingCAPテクニカルサポートに問い合わせてください。
 
-#### Clusters deployed using TiDB Operator
+#### TiDB Operatorを使用してデプロイされたクラスター {#clusters-deployed-using-tidb-operator}
 
-Deploy NgMonitoring by referring to [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling).
+[継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringをデプロイします。

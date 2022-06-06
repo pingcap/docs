@@ -2,153 +2,153 @@
 title: TiDB 2.1 RC1 Release Notes
 ---
 
-# TiDB 2.1 RC1 Release Notes
+# TiDB2.1RC1リリースノート {#tidb-2-1-rc1-release-notes}
 
-On August 24, 2018, TiDB 2.1 RC1 is released! Compared with TiDB 2.1 Beta, this release has great improvement in stability, SQL optimizer, statistics information, and execution engine.
+2018年8月24日、TiDB 2.1 RC1がリリースされました！ TiDB 2.1ベータ版と比較して、このリリースでは、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
 
-## TiDB
+## TiDB {#tidb}
 
-- SQL Optimizer
-    - Fix the issue that a wrong result is returned after the correlated subquery is decorrelated in some cases [#6972](https://github.com/pingcap/tidb/pull/6972)
-    - Optimize the output result of `Explain` [#7011](https://github.com/pingcap/tidb/pull/7011)[#7041](https://github.com/pingcap/tidb/pull/7041)
-    - Optimize the choosing strategy of the outer table for `IndexJoin` [#7019](https://github.com/pingcap/tidb/pull/7019)
-    - Remove the Plan Cache of the non-`PREPARE` statement [#7040](https://github.com/pingcap/tidb/pull/7040)
-    - Fix the issue that the `INSERT` statement is not parsed and executed correctly in some cases [#7068](https://github.com/pingcap/tidb/pull/7068)
-    - Fix the issue that the `IndexJoin` result is not correct in some cases [#7150](https://github.com/pingcap/tidb/pull/7150)
-    - Fix the issue that the `NULL` value cannot be found using the unique index in some cases [#7163](https://github.com/pingcap/tidb/pull/7163)
-    - Fix the range computing issue of the prefix index in UTF-8 [#7194](https://github.com/pingcap/tidb/pull/7194)
-    - Fix the issue that result is not correct caused by eliminating the `Project` operator in some cases [#7257](https://github.com/pingcap/tidb/pull/7257)
-    - Fix the issue that `USE INDEX(PRIMARY)` cannot be used when the primary key is an integer [#7316](https://github.com/pingcap/tidb/pull/7316)
-    - Fix the issue that the index range cannot be computed using the correlated column in some cases [#7357](https://github.com/pingcap/tidb/pull/7357)
-- SQL Execution Engine
-    - Fix the issue that the daylight saving time is not computed correctly in some cases [#6823](https://github.com/pingcap/tidb/pull/6823)
-    - Refactor the aggregation function framework to improve the execution efficiency of the `Stream` and `Hash` aggregation operators [#6852](https://github.com/pingcap/tidb/pull/6852)
-    - Fix the issue that the `Hash` aggregation operator cannot exit normally in some cases [#6982](https://github.com/pingcap/tidb/pull/6982)
-    - Fix the issue that `BIT_AND`/`BIT_OR`/`BIT_XOR` does not handle the non-integer data correctly [#6994](https://github.com/pingcap/tidb/pull/6994)
-    - Optimize the execution speed of the `REPLACE INTO` statement and increase the performance nearly 10 times [#7027](https://github.com/pingcap/tidb/pull/7027)
-    - Optimize the memory usage of time type data and decrease the memory usage of the time type data by fifty percent [#7043](https://github.com/pingcap/tidb/pull/7043)
-    - Fix the issue that the returned result is mixed with signed and unsigned integers in the `UNION` statement is not compatible with MySQL [#7112](https://github.com/pingcap/tidb/pull/7112)
-    - Fix the panic issue caused by the too much memory applied by `LPAD`/`RPAD`/`TO_BASE64`/`FROM_BASE64`/`REPEAT` [#7171](https://github.com/pingcap/tidb/pull/7171) [#7266](https://github.com/pingcap/tidb/pull/7266) [#7409](https://github.com/pingcap/tidb/pull/7409) [#7431](https://github.com/pingcap/tidb/pull/7431)
-    - Fix the incorrect result when `MergeJoin`/`IndexJoin` handles the `NULL` value [#7255](https://github.com/pingcap/tidb/pull/7255)
-    - Fix the incorrect result of `Outer Join` in some cases [#7288](https://github.com/pingcap/tidb/pull/7288)
-    - Improve the error message of `Data Truncated` to facilitate locating the wrong data and the corresponding field in the table [#7401](https://github.com/pingcap/tidb/pull/7401)
-    - Fix the incorrect result for `decimal` in some cases [#7001](https://github.com/pingcap/tidb/pull/7001) [#7113](https://github.com/pingcap/tidb/pull/7113) [#7202](https://github.com/pingcap/tidb/pull/7202) [#7208](https://github.com/pingcap/tidb/pull/7208)
-    - Optimize the point select performance [#6937](https://github.com/pingcap/tidb/pull/6937)
-    - Prohibit the isolation level of `Read Committed` to avoid the underlying problem [#7211](https://github.com/pingcap/tidb/pull/7211)
-    - Fix the incorrect result of `LTRIM`/`RTRIM`/`TRIM` in some cases [#7291](https://github.com/pingcap/tidb/pull/7291)
-    - Fix the issue that the `MaxOneRow` operator cannot guarantee that the returned result does not exceed one row [#7375](https://github.com/pingcap/tidb/pull/7375)
-    - Divide the Coprocessor requests with too many ranges [#7454](https://github.com/pingcap/tidb/pull/7454)
-- Statistics
-    - Optimize the mechanism of statistics dynamic collection [#6796](https://github.com/pingcap/tidb/pull/6796)
-    - Fix the issue that `Auto Analyze` does not work when data is updated frequently [#7022](https://github.com/pingcap/tidb/pull/7022)
-    - Decrease the Write conflicts during the statistics dynamic update process [#7124](https://github.com/pingcap/tidb/pull/7124)
-    - Optimize the cost estimation when the statistics is incorrect [#7175](https://github.com/pingcap/tidb/pull/7175)
-    - Optimize the `AccessPath` cost estimation strategy [#7233](https://github.com/pingcap/tidb/pull/7233)
-- Server
-    - Fix the bug in loading privilege information [#6976](https://github.com/pingcap/tidb/pull/6976)
-    - Fix the issue that the `Kill` command is too strict with privilege check [#6954](https://github.com/pingcap/tidb/pull/6954)
-    - Fix the issue of removing some binary numeric types [#6922](https://github.com/pingcap/tidb/pull/6922)
-    - Shorten the output log [#7029](https://github.com/pingcap/tidb/pull/7029)
-    - Handle the `mismatchClusterID` issue [#7053](https://github.com/pingcap/tidb/pull/7053)
-    - Add the `advertise-address` configuration item [#7078](https://github.com/pingcap/tidb/pull/7078)
-    - Add the `GrpcKeepAlive` option [#7100](https://github.com/pingcap/tidb/pull/7100)
-    - Add the connection or `Token` time monitor [#7110](https://github.com/pingcap/tidb/pull/7110)
-    - Optimize the data decoding performance [#7149](https://github.com/pingcap/tidb/pull/7149)
-    - Add the `PROCESSLIST` table in `INFORMMATION_SCHEMA` [#7236](https://github.com/pingcap/tidb/pull/7236)
-    - Fix the order issue when multiple rules are hit in verifying the privilege [#7211](https://github.com/pingcap/tidb/pull/7211)
-    - Change some default values of encoding related system variables to UTF-8 [#7198](https://github.com/pingcap/tidb/pull/7198)
-    - Make the slow query log show more detailed information [#7302](https://github.com/pingcap/tidb/pull/7302)
-    - Support registering tidb-server related information in PD and obtaining this information by HTTP API [#7082](https://github.com/pingcap/tidb/pull/7082)
-- Compatibility
-    - Support Session variables `warning_count` and `error_count` [#6945](https://github.com/pingcap/tidb/pull/6945)
-    - Add `Scope` check when reading the system variables [#6958](https://github.com/pingcap/tidb/pull/6958)
-    - Support the `MAX_EXECUTION_TIME` syntax [#7012](https://github.com/pingcap/tidb/pull/7012)
-    - Support more statements of the `SET` syntax [#7020](https://github.com/pingcap/tidb/pull/7020)
-    - Add validity check when setting system variables [#7117](https://github.com/pingcap/tidb/pull/7117)
-    - Add the verification of the number of `PlaceHolder`s in the `Prepare` statement [#7162](https://github.com/pingcap/tidb/pull/7162)
-    - Support `set character_set_results = null` [#7353](https://github.com/pingcap/tidb/pull/7353)
-    - Support the `flush status` syntax [#7369](https://github.com/pingcap/tidb/pull/7369)
-    - Fix the column size of `SET` and  `ENUM` types in `information_schema` [#7347](https://github.com/pingcap/tidb/pull/7347)
-    - Support the `NATIONAL CHARACTER` syntax of statements for creating a table [#7378](https://github.com/pingcap/tidb/pull/7378)
-    - Support the `CHARACTER SET` syntax in the `LOAD DATA` statement [#7391](https://github.com/pingcap/tidb/pull/7391)
-    - Fix the column information of the `SET` and `ENUM` types [#7417](https://github.com/pingcap/tidb/pull/7417)
-    - Support the `IDENTIFIED WITH` syntax in the `CREATE USER` statement [#7402](https://github.com/pingcap/tidb/pull/7402)
-    - Fix the precision losing issue during `TIMESTAMP` computing process [#7418](https://github.com/pingcap/tidb/pull/7418)
-    - Support the validity verification of more `SYSTEM` variables [#7196](https://github.com/pingcap/tidb/pull/7196)
-    - Fix the incorrect result when the `CHAR_LENGTH` function computes the binary string [#7410](https://github.com/pingcap/tidb/pull/7410)
-    - Fix the incorrect `CONCAT` result in a statement involving `GROUP BY` [#7448](https://github.com/pingcap/tidb/pull/7448)
-    - Fix the imprecise type length issue when casting the `DECIMAL` type to the `STRING` type [#7451](https://github.com/pingcap/tidb/pull/7451)
-- DML
-    - Fix the stability issue of the `Load Data` statement [#6927](https://github.com/pingcap/tidb/pull/6927)
-    - Fix the memory usage issue when performing some `Batch` operations [#7086](https://github.com/pingcap/tidb/pull/7086)
-    - Improve the performance of the `Replace Into` statement [#7027](https://github.com/pingcap/tidb/pull/7027)
-    - Fix the inconsistent precision issue when writing `CURRENT_TIMESTAMP` [#7355](https://github.com/pingcap/tidb/pull/7355)
-- DDL
-    - Improve the method of DDL judging whether `Schema` is replicated to avoid misjudgement in some cases [#7319](https://github.com/pingcap/tidb/pull/7319)
-    - Fix the `SHOW CREATE TABLE` result in adding index process [#6993](https://github.com/pingcap/tidb/pull/6993)
-    - Allow the default value of `text`/`blob`/`json` to be NULL in non-restrict `sql-mode` [#7230](https://github.com/pingcap/tidb/pull/7230)
-    - Fix the `ADD INDEX` issue in some cases [#7142](https://github.com/pingcap/tidb/pull/7142)
-    - Increase the speed of adding `UNIQUE-KEY` index operation largely [#7132](https://github.com/pingcap/tidb/pull/7132)
-    - Fix the truncating issue of the prefix index in UTF-8 character set [#7109](https://github.com/pingcap/tidb/pull/7109)
-    - Add the environment variable  `tidb_ddl_reorg_priority` to control the priority of the `add-index` operation [#7116](https://github.com/pingcap/tidb/pull/7116)
-    - Fix the display issue of `AUTO-INCREMENT` in `information_schema.tables` [#7037](https://github.com/pingcap/tidb/pull/7037)
-    - Support the `admin show ddl jobs <number>` command and support output specified number of DDL jobs [#7028](https://github.com/pingcap/tidb/pull/7028)
-    - Support parallel DDL job execution [#6955](https://github.com/pingcap/tidb/pull/6955)
-- [Table Partition](https://github.com/pingcap/tidb/projects/6) (Experimental)
-    - Support top level partition
-    - Support `Range Partition`
+-   SQLオプティマイザー
+    -   相関サブクエリが非相関化された後に間違った結果が返される問題を修正します[＃6972](https://github.com/pingcap/tidb/pull/6972)
+    -   [＃7011](https://github.com/pingcap/tidb/pull/7011)の`Explain`結果を[＃7041](https://github.com/pingcap/tidb/pull/7041)化する
+    -   `IndexJoin`の外部テーブルの選択戦略を[＃7019](https://github.com/pingcap/tidb/pull/7019)化する
+    -   `PREPARE`以外のステートメントのプランキャッシュを削除します[＃7040](https://github.com/pingcap/tidb/pull/7040)
+    -   `INSERT`ステートメントが解析および実行されない場合があるという問題を修正します[＃7068](https://github.com/pingcap/tidb/pull/7068)
+    -   `IndexJoin`の結果が正しくない場合があるという問題を修正します[＃7150](https://github.com/pingcap/tidb/pull/7150)
+    -   場合によっては、一意のインデックスを使用して`NULL`の値が見つからないという問題を修正します[＃7163](https://github.com/pingcap/tidb/pull/7163)
+    -   UTF [＃7194](https://github.com/pingcap/tidb/pull/7194) 81のプレフィックスインデックスの範囲計算の問題を修正します。
+    -   場合によっては`Project`演算子を削除することにより、結果が正しくないという問題を修正します[＃7257](https://github.com/pingcap/tidb/pull/7257)
+    -   主キーが整数[＃7316](https://github.com/pingcap/tidb/pull/7316)の場合に`USE INDEX(PRIMARY)`を使用できない問題を修正します
+    -   場合によっては、相関列を使用してインデックス範囲を計算できない問題を修正します[＃7357](https://github.com/pingcap/tidb/pull/7357)
+-   SQL実行エンジン
+    -   夏時間が正しく計算されない場合があるという問題を修正します[＃6823](https://github.com/pingcap/tidb/pull/6823)
+    -   集計関数フレームワークをリファクタリングして、 `Stream`および`Hash`の集計演算子の実行効率を向上させます[＃6852](https://github.com/pingcap/tidb/pull/6852)
+    -   `Hash`集計演算子が正常に終了できない場合があるという問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
+    -   `BIT_OR`が非整数データを正しく[＃6994](https://github.com/pingcap/tidb/pull/6994)しない問題を修正し`BIT_AND` `BIT_XOR`
+    -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスをほぼ10倍に向上させます[＃7027](https://github.com/pingcap/tidb/pull/7027)
+    -   時間タイプデータのメモリ使用量を最適化し、時間タイプデータのメモリ使用量を50％削減します[＃7043](https://github.com/pingcap/tidb/pull/7043)
+    -   `UNION`ステートメントで返された結果が符号付き整数および符号なし整数と混合される問題を修正します[＃7112](https://github.com/pingcap/tidb/pull/7112)と互換性がありません。
+    -   `FROM_BASE64` `RPAD` `LPAD` [＃7171](https://github.com/pingcap/tidb/pull/7171) `REPEAT`された[＃7409](https://github.com/pingcap/tidb/pull/7409)が多[＃7266](https://github.com/pingcap/tidb/pull/7266)ことによって引き起こされる[＃7431](https://github.com/pingcap/tidb/pull/7431)の問題を修正し`TO_BASE64`
+    -   `MergeJoin`が`IndexJoin`の値を処理するときの誤った結果を修正し`NULL` [＃7255](https://github.com/pingcap/tidb/pull/7255)
+    -   場合によっては`Outer Join`の誤った結果を修正します[＃7288](https://github.com/pingcap/tidb/pull/7288)
+    -   `Data Truncated`のエラーメッセージを改善して、表[＃7401](https://github.com/pingcap/tidb/pull/7401)の間違ったデータと対応するフィールドを見つけやすくします。
+    -   場合によっては`decimal`の[＃7208](https://github.com/pingcap/tidb/pull/7208)た結果を修正し[＃7001](https://github.com/pingcap/tidb/pull/7001) [＃7113](https://github.com/pingcap/tidb/pull/7113) [＃7202](https://github.com/pingcap/tidb/pull/7202)
+    -   ポイント選択のパフォーマンスを最適化する[＃6937](https://github.com/pingcap/tidb/pull/6937)
+    -   根本的な問題を回避するために、分離レベル`Read Committed`を禁止します[＃7211](https://github.com/pingcap/tidb/pull/7211)
+    -   場合[＃7291](https://github.com/pingcap/tidb/pull/7291)は`LTRIM`の誤った結果を修正し`RTRIM` `TRIM`
+    -   `MaxOneRow`演算子は、返された結果が1行を超えないことを保証できないという問題を修正します[＃7375](https://github.com/pingcap/tidb/pull/7375)
+    -   範囲が多すぎるコプロセッサー要求を分割する[＃7454](https://github.com/pingcap/tidb/pull/7454)
+-   統計
+    -   統計動的収集のメカニズムを最適化する[＃6796](https://github.com/pingcap/tidb/pull/6796)
+    -   データが頻繁に更新されるときに`Auto Analyze`が機能しないという問題を修正します[＃7022](https://github.com/pingcap/tidb/pull/7022)
+    -   統計の動的更新プロセス中の書き込みの競合を減らす[＃7124](https://github.com/pingcap/tidb/pull/7124)
+    -   統計が正しくない場合のコスト見積もりを最適化する[＃7175](https://github.com/pingcap/tidb/pull/7175)
+    -   `AccessPath`コスト見積もり戦略を最適化する[＃7233](https://github.com/pingcap/tidb/pull/7233)
+-   サーバ
+    -   特権情報をロードする際のバグを修正する[＃6976](https://github.com/pingcap/tidb/pull/6976)
+    -   特権チェック[＃6954](https://github.com/pingcap/tidb/pull/6954)で`Kill`コマンドが厳しすぎる問題を修正します
+    -   一部のバイナリ数値タイプを削除する問題を修正します[＃6922](https://github.com/pingcap/tidb/pull/6922)
+    -   出力ログを短くする[＃7029](https://github.com/pingcap/tidb/pull/7029)
+    -   `mismatchClusterID`の問題を処理する[＃7053](https://github.com/pingcap/tidb/pull/7053)
+    -   `advertise-address`の構成アイテム[＃7078](https://github.com/pingcap/tidb/pull/7078)を追加します
+    -   `GrpcKeepAlive`オプション[＃7100](https://github.com/pingcap/tidb/pull/7100)を追加します
+    -   接続または`Token`回のモニターを追加します[＃7110](https://github.com/pingcap/tidb/pull/7110)
+    -   データデコードパフォーマンスを最適化する[＃7149](https://github.com/pingcap/tidb/pull/7149)
+    -   35に`PROCESSLIST` [＃7236](https://github.com/pingcap/tidb/pull/7236)テーブルを追加し`INFORMMATION_SCHEMA`
+    -   特権の検証で複数のルールがヒットした場合の順序の問題を修正します[＃7211](https://github.com/pingcap/tidb/pull/7211)
+    -   エンコーディング関連のシステム変数のいくつかのデフォルト値をUTF-81に変更し[＃7198](https://github.com/pingcap/tidb/pull/7198)
+    -   遅いクエリログに詳細情報を表示させる[＃7302](https://github.com/pingcap/tidb/pull/7302)
+    -   PDへのtidb-server関連情報の登録と[＃7082](https://github.com/pingcap/tidb/pull/7082)によるこの情報の取得をサポートします。
+-   互換性
+    -   セッション変数`warning_count`および[＃6945](https://github.com/pingcap/tidb/pull/6945)をサポートし`error_count` 。
+    -   システム変数を読み取るときに`Scope`のチェックを追加します[＃6958](https://github.com/pingcap/tidb/pull/6958)
+    -   `MAX_EXECUTION_TIME`構文[＃7012](https://github.com/pingcap/tidb/pull/7012)をサポートします
+    -   `SET`構文[＃7020](https://github.com/pingcap/tidb/pull/7020)のより多くのステートメントをサポートする
+    -   システム変数を設定するときに妥当性チェックを追加する[＃7117](https://github.com/pingcap/tidb/pull/7117)
+    -   `Prepare`ステートメント[＃7162](https://github.com/pingcap/tidb/pull/7162)に`PlaceHolder`の数の検証を追加します。
+    -   [＃7353](https://github.com/pingcap/tidb/pull/7353) `set character_set_results = null`
+    -   `flush status`構文[＃7369](https://github.com/pingcap/tidb/pull/7369)をサポートします
+    -   `information_schema`で`SET`タイプと`ENUM`タイプの列サイズを[＃7347](https://github.com/pingcap/tidb/pull/7347)
+    -   テーブルを作成するためのステートメントの`NATIONAL CHARACTER`構文をサポートする[＃7378](https://github.com/pingcap/tidb/pull/7378)
+    -   `LOAD DATA`ステートメント[＃7391](https://github.com/pingcap/tidb/pull/7391)で`CHARACTER SET`構文をサポートします。
+    -   `SET`および`ENUM`タイプの列情報を修正します[＃7417](https://github.com/pingcap/tidb/pull/7417)
+    -   `CREATE USER`ステートメント[＃7402](https://github.com/pingcap/tidb/pull/7402)で`IDENTIFIED WITH`構文をサポートします。
+    -   `TIMESTAMP`の計算プロセス[＃7418](https://github.com/pingcap/tidb/pull/7418)での精度低下の問題を修正
+    -   より多くの`SYSTEM`変数の妥当性検証をサポートします[＃7196](https://github.com/pingcap/tidb/pull/7196)
+    -   `CHAR_LENGTH`関数がバイナリ文字列[＃7410](https://github.com/pingcap/tidb/pull/7410)を計算するときの誤った結果を修正します
+    -   [＃7448](https://github.com/pingcap/tidb/pull/7448)を含むステートメントの誤った`CONCAT`の結果を修正し`GROUP BY`
+    -   `DECIMAL`タイプを`STRING`タイプ[＃7451](https://github.com/pingcap/tidb/pull/7451)にキャストするときの不正確なタイプの長さの問題を修正します
+-   DML
+    -   `Load Data`ステートメント[＃6927](https://github.com/pingcap/tidb/pull/6927)の安定性の問題を修正します
+    -   いくつかの`Batch`の操作を実行するときのメモリ使用量の問題を修正します[＃7086](https://github.com/pingcap/tidb/pull/7086)
+    -   `Replace Into`ステートメント[＃7027](https://github.com/pingcap/tidb/pull/7027)のパフォーマンスを向上させる
+    -   `CURRENT_TIMESTAMP`を書くときの一貫性のない精度の問題を修正し[＃7355](https://github.com/pingcap/tidb/pull/7355)
+-   DDL
+    -   場合によっては誤判断を避けるために、 `Schema`が複製されているかどうかを判断するDDLの方法を改善します[＃7319](https://github.com/pingcap/tidb/pull/7319)
+    -   インデックスプロセス[＃6993](https://github.com/pingcap/tidb/pull/6993)を追加する際の`SHOW CREATE TABLE`の結果を修正します
+    -   制限なし`sql-mode`では、デフォルト`blob`の`text`を[＃7230](https://github.com/pingcap/tidb/pull/7230)にすることができ`json` 。
+    -   `ADD INDEX`の問題を修正する場合があります[＃7142](https://github.com/pingcap/tidb/pull/7142)
+    -   `UNIQUE-KEY`のインデックス操作を追加する速度を大幅に向上させます[＃7132](https://github.com/pingcap/tidb/pull/7132)
+    -   UTF-8文字セット[＃7109](https://github.com/pingcap/tidb/pull/7109)のプレフィックスインデックスの切り捨ての問題を修正しました
+    -   環境変数`tidb_ddl_reorg_priority`を追加して、 `add-index`の操作の優先度を制御します[＃7116](https://github.com/pingcap/tidb/pull/7116)
+    -   `information_schema.tables`分の`AUTO-INCREMENT`の表示の問題を修正します[＃7037](https://github.com/pingcap/tidb/pull/7037)
+    -   `admin show ddl jobs <number>`コマンドをサポートし、指定された数のDDLジョブの出力をサポートします[＃7028](https://github.com/pingcap/tidb/pull/7028)
+    -   並列DDLジョブ実行のサポート[＃6955](https://github.com/pingcap/tidb/pull/6955)
+-   [テーブルパーティション](https://github.com/pingcap/tidb/projects/6) （実験的）
+    -   トップレベルのパーティションをサポートする
+    -   サポート`Range Partition`
 
-## PD
+## PD {#pd}
 
-- Features
-    - Introduce the version control mechanism and support rolling update of the cluster with compatibility
-    - Enable the `region merge` feature
-    - Support the `GetPrevRegion` interface
-    - Support splitting Regions in batch
-    - Support storing the GC safepoint
-- Improvements
-    - Optimize the issue that TSO allocation is affected by the system clock going backwards
-    - Optimize the performance of handling Region heartbeats
-    - Optimize the Region tree performance
-    - Optimize the performance of computing hotspot statistics
-    - Optimize returning the error code of API interface
-    - Add options of controlling scheduling strategies
-    - Prohibit using special characters in `label`
-    - Improve the scheduling simulator
-    - Support splitting Regions using statistics in pd-ctl
-    - Support formatting JSON output by calling `jq` in pd-ctl
-    - Add metrics about etcd Raft state machine
-- Bug fixes
-    - Fix the issue that the namespace is not reloaded after switching Leader
-    - Fix the issue that namespace scheduling exceeds the schedule limit
-    - Fix the issue that hotspot scheduling exceeds the schedule limit
-    - Fix the issue that wrong logs are output when the PD client closes
-    - Fix the wrong statistics of Region heartbeat latency
+-   特徴
+    -   バージョン管理メカニズムを導入し、互換性のあるクラスタのローリング更新をサポートします
+    -   `region merge`つの機能を有効にする
+    -   `GetPrevRegion`のインターフェースをサポート
+    -   リージョンのバッチ分割をサポート
+    -   GCセーフポイントの保存をサポート
+-   改善
+    -   TSO割り当てがシステムクロックの逆方向に影響を受けるという問題を最適化します
+    -   リージョンハートビートの処理のパフォーマンスを最適化する
+    -   リージョンツリーのパフォーマンスを最適化する
+    -   ホットスポット統計の計算のパフォーマンスを最適化する
+    -   APIインターフェースのエラーコードを返すように最適化する
+    -   スケジューリング戦略を制御するオプションを追加する
+    -   `label`で特殊文字を使用することを禁止する
+    -   スケジューリングシミュレーターを改善する
+    -   pd-ctlの統計を使用したリージョンの分割をサポート
+    -   pd-ctlで`jq`を呼び出すことにより、JSON出力のフォーマットをサポートします
+    -   etcdRaftステートマシンに関するメトリックを追加します
+-   バグの修正
+    -   リーダーを切り替えた後に名前空間が再ロードされない問題を修正します
+    -   名前空間のスケジューリングがスケジュールの制限を超える問題を修正します
+    -   ホットスポットのスケジュールがスケジュールの制限を超える問題を修正します
+    -   PDクライアントを閉じたときに間違ったログが出力される問題を修正します
+    -   リージョンハートビートレイテンシの誤った統計を修正
 
-## TiKV
+## TiKV {#tikv}
 
-- Features
-    - Support `batch split` to avoid too large Regions caused by the Write operation on hot Regions
-    - Support splitting Regions based on the number of rows to improve the index scan efficiency
-- Performance
-    - Use `LocalReader` to separate the Read operation from the raftstore thread to lower the Read latency
-    - Refactor the MVCC framework, optimize the memory usage and improve the scan Read performance
-    - Support splitting Regions based on statistics estimation to reduce the I/O usage
-    - Optimize the issue that the Read performance is affected by continuous Write operations on the rollback record
-    - Reduce the memory usage of pushdown aggregation computing
-- Improvements
-    - Add the pushdown support for a large number of built-in functions and better charset support
-    - Optimize the GC workflow, improve the GC speed and decrease the impact of GC on the system
-    - Enable `prevote` to speed up service recovery when the network is abnormal
-    - Add the related configuration items of RocksDB log files
-    - Adjust the default configuration of `scheduler_latch`
-    - Support setting whether to compact the data in the bottom layer of RocksDB when using tikv-ctl to compact data manually
-    - Add the check for environment variables when starting TiKV
-    - Support dynamically configuring the `dynamic_level_bytes` parameter based on the existing data
-    - Support customizing the log format
-    - Integrate tikv-fail in tikv-ctl
-    - Add I/O metrics of threads
-- Bug fixes
-    - Fix decimal related issues
-    - Fix the issue that `gRPC max_send_message_len` is set mistakenly
-    - Fix the issue caused by misconfiguration of `region_size`
+-   特徴
+    -   ホットリージョンでの書き込み操作によって引き起こされる大きすぎるリージョンを回避するために`batch split`をサポートします
+    -   行数に基づくリージョンの分割をサポートして、インデックススキャンの効率を向上させます
+-   パフォーマンス
+    -   `LocalReader`を使用して、読み取り操作をraftstoreスレッドから分離し、読み取り待ち時間を短縮します
+    -   MVCCフレームワークをリファクタリングし、メモリ使用量を最適化し、スキャン読み取りパフォーマンスを向上させます
+    -   統計推定に基づくリージョンの分割をサポートして、I/Oの使用量を削減します
+    -   ロールバックレコードに対する継続的な書き込み操作によって読み取りパフォーマンスが影響を受けるという問題を最適化します
+    -   プッシュダウンアグリゲーションコンピューティングのメモリ使用量を削減します
+-   改善
+    -   多数の組み込み関数のプッシュダウンサポートとより優れた文字セットサポートを追加します
+    -   GCワークフローを最適化し、GC速度を向上させ、システムへのGCの影響を減らします
+    -   ネットワークが異常な場合にサービスリカバリを高速化するには、 `prevote`を有効にします
+    -   RocksDBログファイルの関連する構成アイテムを追加します
+    -   `scheduler_latch`のデフォルト構成を調整します
+    -   tikv-ctlを使用してデータを手動で圧縮するときにRocksDBの最下層のデータを圧縮するかどうかの設定をサポート
+    -   TiKVを開始するときに環境変数のチェックを追加します
+    -   既存のデータに基づいて`dynamic_level_bytes`つのパラメーターを動的に構成することをサポートします
+    -   ログ形式のカスタマイズをサポート
+    -   tikv-ctlにtikv-failを統合する
+    -   スレッドのI/Oメトリックを追加する
+-   バグの修正
+    -   10進数関連の問題を修正
+    -   `gRPC max_send_message_len`が誤って設定される問題を修正します
+    -   `region_size`の設定ミスによって引き起こされる問題を修正します

@@ -2,45 +2,45 @@
 title: TiDB RC1 Release Notes
 ---
 
-# TiDB RC1 Release Notes
+# TiDBRC1リリースノート {#tidb-rc1-release-notes}
 
-On December 23, 2016, TiDB RC1 is released. See the following updates in this release:
+2016年12月23日、TiDBRC1がリリースされました。このリリースの次の更新を参照してください。
 
-## TiKV
+## TiKV {#tikv}
 
-+ The write speed has been improved.
-+ The disk space usage is reduced.
-+ Hundreds of TBs of data can be supported.
-+ The stability is improved and TiKV can support a cluster with 200 nodes.
-+ Supports the Raw KV API and the Golang client.
+-   書き込み速度が向上しました。
+-   ディスクスペースの使用量が削減されます。
+-   数百TBのデータをサポートできます。
+-   安定性が向上し、TiKVは200ノードのクラスタをサポートできます。
+-   RawKVAPIとGolangクライアントをサポートします。
 
-## Placement Driver (PD)
+## 配置ドライバー（PD） {#placement-driver-pd}
 
-+ The scheduling strategy framework is optimized and now the strategy is more flexible and reasonable.
-+ The support for `label` is added to support Cross Data Center scheduling.
-+ PD Controller is provided to operate the PD cluster more easily.
+-   スケジューリング戦略フレームワークが最適化され、戦略がより柔軟で合理的になりました。
+-   クロスデータセンターのスケジューリングをサポートするために、 `label`のサポートが追加されました。
+-   PDコントローラーは、PDクラスタをより簡単に操作するために提供されています。
 
-## TiDB
+## TiDB {#tidb}
 
-+ The following features are added or improved in the SQL query optimizer:
-    - Eager aggregation
-    - More detailed `EXPLAIN` information
-    - Parallelization of the `UNION` operator
-    - Optimization of the subquery performance
-    - Optimization of the conditional push-down
-    - Optimization of the Cost Based Optimizer (CBO) framework
-+ The implementation of the time related data types are refactored to improve the compatibility with MySQL.
-+ More built-in functions in MySQL are supported.
-+ The speed of the `add index` statement is enhanced.
-+ The following statements are supported:
-    - Use the `CHANGE COLUMN` statement to change the name of a column.
-    - Use `MODIFY COLUMN` and `CHANGE COLUMN` of the `ALTER TABLE` statement for some of the column type transfer.
+-   SQLクエリオプティマイザでは、次の機能が追加または改善されています。
+    -   熱心な集約
+    -   より詳細な`EXPLAIN`情報
+    -   `UNION`演算子の並列化
+    -   サブクエリのパフォーマンスの最適化
+    -   条件付きプッシュダウンの最適化
+    -   コストベースオプティマイザー（CBO）フレームワークの最適化
+-   時間関連のデータ型の実装は、MySQLとの互換性を向上させるためにリファクタリングされています。
+-   MySQLのより多くの組み込み関数がサポートされています。
+-   `add index`ステートメントの速度が向上します。
+-   次のステートメントがサポートされています。
+    -   `CHANGE COLUMN`ステートメントを使用して、列の名前を変更します。
+    -   一部の列タイプの転送には、 `ALTER TABLE`のステートメントの`MODIFY COLUMN`と`CHANGE COLUMN`を使用します。
 
-## New tools
+## 新しいツール {#new-tools}
 
-+ `Loader` is added to be compatible with the `mydumper` data format in Percona and provides the following functions:
-    - Multi-thread import
-    - Retry if error occurs
-    - Breakpoint resume
-    - Targeted optimization for TiDB
-+ The tool for one-click deployment is added.
+-   `Loader`は、Perconaの`mydumper`データ形式と互換性があるように追加され、次の機能を提供します。
+    -   マルチスレッドインポート
+    -   エラーが発生した場合は再試行してください
+    -   ブレークポイント履歴書
+    -   TiDBのターゲットを絞った最適化
+-   ワンクリック展開用のツールが追加されました。

@@ -2,45 +2,45 @@
 title: tiup list
 ---
 
-# tiup list
+# tiupリスト {#tiup-list}
 
-The command `tiup list` is used to get the list of available components of a mirror.
+コマンド`tiup list`は、ミラーの使用可能なコンポーネントのリストを取得するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup list [component] [flags]
 ```
 
-`[component]` is an optional parameter used to specify a certain component. If `[component]` is set, TiUP lists all versions of the specified component; if not, TiUP lists all components.
+`[component]`は、特定のコンポーネントを指定するために使用されるオプションのパラメーターです。 `[component]`が設定されている場合、TiUPは指定されたコンポーネントのすべてのバージョンを一覧表示します。そうでない場合、TiUPはすべてのコンポーネントを一覧表示します。
 
-## Options
+## オプション {#options}
 
-### --all
+### - 全て {#all}
 
-- Displays all components. By default, TiUP does not show hidden components.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   すべてのコンポーネントを表示します。デフォルトでは、TiUPは非表示のコンポーネントを表示しません。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-### --installed
+### --インストール済み {#installed}
 
-- Only displays components and versions that have been installed.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   インストールされているコンポーネントとバージョンのみが表示されます。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-### --verbose
+### --verbose {#verbose}
 
-- Displays installed component versions in the components list.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   インストールされているコンポーネントのバージョンをコンポーネントリストに表示します。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-- If `[component]` is not set:
-    - If `--verbose` is specified: TiUP outputs a component information list consisting of `Name` (component name), `Installed` (installed versions), `Owner` (component owner), and `Description` (component description).
-    - If `--verbose` is not specified: TiUP outputs a component information list consisting of `Name` (component name), `Owner` (component owner), and `Description` (component description).
-- If `[component]` is set:
-    - If the specified component exists: TiUP outputs a version information list of the specified component, consisting of `Version` (version number), `Installed` (installation status), `Release` (release date), and `Platforms` (supported platforms).
-    - If the specified component does not exist: TiUP reports the error `failed to fetch component: unknown component`.
+-   `[component]`が設定されていない場合：
+    -   `--verbose`を指定した場合：TiUPは、 `Name` （コンポーネント名）、 `Installed` （インストール済みバージョン）、 `Owner` （コンポーネント所有者）、および`Description` （コンポーネントの説明）で構成されるコンポーネント情報リストを出力します。
+    -   `--verbose`が指定されていない場合：TiUPは、 `Name` （コンポーネント名）、 `Owner` （コンポーネント所有者）、および`Description` （コンポーネントの説明）で構成されるコンポーネント情報リストを出力します。
+-   `[component]`が設定されている場合：
+    -   指定されたコンポーネントが存在する場合：TiUPは、 `Version` （バージョン番号）、 `Installed` （インストール状況）、 `Release` （リリース日）、および`Platforms` （サポートされているプラットフォーム）で構成される、指定されたコンポーネントのバージョン情報リストを出力します。
+    -   指定されたコンポーネントが存在しない場合：TiUPはエラー`failed to fetch component: unknown component`を報告します。
 
-[<< Back to the previous page - TiUP Reference command list](/tiup/tiup-reference.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

@@ -2,31 +2,31 @@
 title: TiDB 1.0.5 Release Notes
 ---
 
-# TiDB 1.0.5 Release Notes
+# TiDB1.0.5リリースノート {#tidb-1-0-5-release-notes}
 
-On December 26, 2017, TiDB 1.0.5 is released with the following updates:
+2017年12月26日に、TiDB1.0.5が次のアップデートでリリースされます。
 
-## TiDB
+## TiDB {#tidb}
 
-- [Add the max value for the current Auto_Increment ID in the `Show Create Table` statement.](https://github.com/pingcap/tidb/pull/5489)
-- [Fix a potential goroutine leak.](https://github.com/pingcap/tidb/pull/5486)
-- [Support outputting slow queries into a separate file.](https://github.com/pingcap/tidb/pull/5484)
-- [Load the `TimeZone` variable from TiKV when creating a new session.](https://github.com/pingcap/tidb/pull/5479)
-- [Support the schema state check so that the `Show Create Table`and `Analyze` statements process the public table/index only.](https://github.com/pingcap/tidb/pull/5474)
-- [The `set transaction read only` should affect the `tx_read_only` variable.](https://github.com/pingcap/tidb/pull/5491)
-- [Clean up incremental statistic data when rolling back.](https://github.com/pingcap/tidb/pull/5391)
-- [Fix the issue of missing index length in the `Show Create Table` statement.](https://github.com/pingcap/tidb/pull/5421)
+-   [`Show Create Table`ステートメントに現在のAuto_IncrementIDの最大値を追加します。](https://github.com/pingcap/tidb/pull/5489)
+-   [潜在的なゴルーチンリークを修正します。](https://github.com/pingcap/tidb/pull/5486)
+-   [遅いクエリを別のファイルに出力することをサポートします。](https://github.com/pingcap/tidb/pull/5484)
+-   [新しいセッションを作成するときに、TiKVから`TimeZone`変数をロードします。](https://github.com/pingcap/tidb/pull/5479)
+-   [`Show Create Table`および<code>Analyze</code>ステートメントがパブリックテーブル/インデックスのみを処理するように、スキーマ状態チェックをサポートします。](https://github.com/pingcap/tidb/pull/5474)
+-   [`set transaction read only`は、 <code>tx_read_only</code>変数に影響を与えるはずです。](https://github.com/pingcap/tidb/pull/5491)
+-   [ロールバック時に増分統計データをクリーンアップします。](https://github.com/pingcap/tidb/pull/5391)
+-   [`Show Create Table`ステートメントでインデックスの長さが欠落する問題を修正します。](https://github.com/pingcap/tidb/pull/5421)
 
-## PD
+## PD {#pd}
 
-- Fix the issue that the leaders stop balancing under some circumstances.
-    - [869](https://github.com/pingcap/pd/pull/869)
-    - [874](https://github.com/pingcap/pd/pull/874)
-- [Fix potential panic during bootstrapping.](https://github.com/pingcap/pd/pull/889)
+-   ある状況下でリーダーがバランスをとるのをやめる問題を修正します。
+    -   [869](https://github.com/pingcap/pd/pull/869)
+    -   [874](https://github.com/pingcap/pd/pull/874)
+-   [ブートストラップ中の潜在的なパニックを修正します。](https://github.com/pingcap/pd/pull/889)
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that it is slow to get the CPU ID using the [`get_cpuid`](https://github.com/pingcap/tikv/pull/2611) function.
-- Support the [`dynamic-level-bytes`](https://github.com/pingcap/tikv/pull/2605) parameter to improve the space collection situation.
+-   [`get_cpuid`](https://github.com/pingcap/tikv/pull/2611)関数を使用してCPUIDを取得するのが遅いという問題を修正します。
+-   スペース収集状況を改善するために[`dynamic-level-bytes`](https://github.com/pingcap/tikv/pull/2605)パラメーターをサポートします。
 
-To upgrade from 1.0.4 to 1.0.5, follow the rolling upgrade order of PD -> TiKV -> TiDB.
+1.0.4から1.0.5にアップグレードするには、PD-&gt;TiKV-&gt;TiDBのローリングアップグレードの順序に従います。

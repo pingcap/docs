@@ -3,11 +3,11 @@ title: ANALYZE_STATUS
 summary: Learn the `ANALYZE_STATUS` information_schema table.
 ---
 
-# ANALYZE_STATUS
+# ANALYZE_STATUS {#analyze-status}
 
-The `ANALYZE_STATUS` table provides information about the running tasks that collect statistics and a limited number of history tasks.
+`ANALYZE_STATUS`の表は、統計を収集する実行中のタスクと限られた数の履歴タスクに関する情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -29,7 +29,7 @@ DESC analyze_status;
 7 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM `ANALYZE_STATUS`;
@@ -49,12 +49,12 @@ SELECT * FROM `ANALYZE_STATUS`;
 6 rows in set
 ```
 
-Fields in the `ANALYZE_STATUS` table are described as follows:
+`ANALYZE_STATUS`表のフィールドは次のように説明されています。
 
-* `TABLE_SCHEMA`: The name of the database to which the table belongs.
-* `TABLE_NAME`: The name of the table.
-* `PARTITION_NAME`: The name of the partitioned table.
-* `JOB_INFO`: The information of the `ANALYZE` task.
-* `PROCESSED_ROWS`: The number of rows that have been processed.
-* `START_TIME`: The start time of the `ANALYZE` task.
-* `STATE`: The execution status of the `ANALYZE` task. Its value can be `pending`, `running`,`finished` or `failed`.
+-   `TABLE_SCHEMA` ：テーブルが属するデータベースの名前。
+-   `TABLE_NAME` ：テーブルの名前。
+-   `PARTITION_NAME` ：パーティションテーブルの名前。
+-   `JOB_INFO` ： `ANALYZE`のタスクの情報。
+-   `PROCESSED_ROWS` ：処理された行の数。
+-   `START_TIME` ： `ANALYZE`のタスクの開始時刻。
+-   `STATE` ： `ANALYZE`タスクの実行状況。その値は、 `pending` 、または`running`にすることが`failed` `finished` 。

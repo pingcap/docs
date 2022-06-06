@@ -2,50 +2,50 @@
 title: tiup cluster destroy
 ---
 
-# tiup cluster destroy
+# tiupクラスタ破棄 {#tiup-cluster-destroy}
 
-After an application goes offline, if you want to release the machines occupied by the cluster for use by other applications, you need to clean up the data on the cluster and the deployed binary files. To destroy the cluster, the `tiup cluster destroy` command performs the following operations:
+アプリケーションがオフラインになった後、他のアプリケーションで使用するためにクラスタによって占有されているマシンを解放する場合は、クラスタ上のデータとデプロイされたバイナリファイルをクリーンアップする必要があります。クラスタを破棄するために、 `tiup cluster destroy`コマンドは次の操作を実行します。
 
-- Stops the cluster.
-- For each service, delete its log directory, deployment directory, and data directory.
-- If the parent directory of the data directory or deployment directory of each service is created by tiup-cluster, also delete the parent directory.
+-   クラスタを停止します。
+-   サービスごとに、ログディレクトリ、展開ディレクトリ、およびデータディレクトリを削除します。
+-   各サービスのデータディレクトリまたはデプロイメントディレクトリの親ディレクトリがtiup-clusterによって作成されている場合は、親ディレクトリも削除します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster destroy <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to destroy.
+`<cluster-name>` ：破棄するクラスタの名前。
 
-## Options
+## オプション {#options}
 
-### --force
+### - 力 {#force}
 
-- In some cases, some nodes in the cluster have been down, making it impossible to connect to the node through SSH for operation. At this time, you can use the `--force` option to ignore these errors.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   場合によっては、クラスタの一部のノードがダウンしており、SSHを介してノードに接続して操作することができません。現時点では、 `--force`オプションを使用してこれらのエラーを無視できます。
+-   データ型： `Boolean`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-### --retain-node-data
+### --retain-node-data {#retain-node-data}
 
-- Specifies the nodes that need to retain data. If you need to specify more than one node, use this option multiple times: `--retain-node-data <node-A> --retain-node-data <node-B>`.
-- Data type: `StringArray`
-- Default: empty
+-   データを保持する必要があるノードを指定します。複数のノードを指定する必要がある場合は、このオプションを複数回使用します： `--retain-node-data <node-A> --retain-node-data <node-B>` 。
+-   データ型： `StringArray`
+-   デフォルト：空
 
-### --retain-role-data
+### --retain-role-data {#retain-role-data}
 
-- Specifies the role that needs to retain data. If you need to specify more than one role, use this option multiple times: `--retain-role-data <role-A> --retain-role-data <role-B>`.
-- Data type: `StringArray`
-- Default: empty
+-   データを保持する必要がある役割を指定します。複数の役割を指定する必要がある場合は、このオプションを複数回使用します： `--retain-role-data <role-A> --retain-role-data <role-B>` 。
+-   データ型： `StringArray`
+-   デフォルト：空
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `Boolean`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型： `Boolean`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-## Output
+## 出力 {#output}
 
-The execution log of the tiup-cluster.
+tiup-clusterの実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

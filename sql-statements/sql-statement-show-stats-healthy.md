@@ -3,13 +3,13 @@ title: SHOW STATS_HEALTHY
 summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 ---
 
-# SHOW STATS_HEALTHY
+# SHOW STATS_HEALTHY {#show-stats-healthy}
 
-The `SHOW STATS_HEALTHY` statement shows an estimation of how accurate statistics are believed to be. Tables with a low percentage health may generate sub-optimal query execution plans.
+`SHOW STATS_HEALTHY`のステートメントは、統計がどれほど正確であると信じられているかの推定を示しています。正常性のパーセンテージが低いテーブルは、最適ではないクエリ実行計画を生成する可能性があります。
 
-The health of a table can be improved by running the `ANALYZE` table command. `ANALYZE` runs automatically when the health drops below the [`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio) threshold.
+`ANALYZE` tableコマンドを実行すると、テーブルの状態を改善できます。ヘルスが[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)のしきい値を下回ると、 `ANALYZE`が自動的に実行されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **ShowStmt**
 
@@ -23,11 +23,11 @@ The health of a table can be improved by running the `ANALYZE` table command. `A
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
-Load example data and run `ANALYZE`:
+サンプルデータをロードして`ANALYZE`を実行します：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -60,9 +60,9 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-Perform a bulk update deleting approximately 30% of the records. Check the health of the statistics:
+一括更新を実行して、レコードの約30％を削除します。統計の状態を確認します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DELETE FROM t1 WHERE id BETWEEN 101010 AND 201010; # delete about 30% of records
@@ -79,11 +79,11 @@ mysql> SHOW STATS_HEALTHY;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [ANALYZE](/sql-statements/sql-statement-analyze-table.md)
-* [Introduction to Statistics](/statistics.md)
+-   [分析する](/sql-statements/sql-statement-analyze-table.md)
+-   [統計入門](/statistics.md)

@@ -2,57 +2,57 @@
 title: TiDB 3.0.9 Release Notes
 ---
 
-# TiDB 3.0.9 Release Notes
+# TiDB3.0.9リリースノート {#tidb-3-0-9-release-notes}
 
-Release date: January 14, 2020
+発売日：2020年1月14日
 
-TiDB version: 3.0.9
+TiDBバージョン：3.0.9
 
-TiDB Ansible version: 3.0.9
+TiDB Ansibleバージョン：3.0.9
 
-> **Warning:**
+> **警告：**
 >
-> Some known issues are found in this version, and these issues are fixed in new versions. It is recommended that you use the latest 3.0.x version.
+> このバージョンにはいくつかの既知の問題があり、これらの問題は新しいバージョンで修正されています。最新の3.0.xバージョンを使用することをお勧めします。
 
-## TiDB
+## TiDB {#tidb}
 
-+ Executor
-    - Fix the incorrect result when the aggregate function is applied to the `ENUM` column and the collection column [#14364](https://github.com/pingcap/tidb/pull/14364)
-+ Server
-    - Support the `auto_increment_increment` and `auto_increment_offset` system variables [#14396](https://github.com/pingcap/tidb/pull/14396)
-    - Add the `tidb_tikvclient_ttl_lifetime_reach_total` monitoring metric to monitor the number of pessimistic transactions with a TTL of 10 minutes [#14300](https://github.com/pingcap/tidb/pull/14300)
-    - Output the SQL information in the log when the SQL query causes a panic during its execution [#14322](https://github.com/pingcap/tidb/pull/14322)
-    - Add the `plan` and `plan_digest` fields in the statement summary table to record the `plan` that is being executed and the `plan` signature [#14285](https://github.com/pingcap/tidb/pull/14285)
-    - Adjust the default value of the `stmt-summary.max-stmt-count` configuration item from `100` to `200` [#14285](https://github.com/pingcap/tidb/pull/14285)
-    - Add the `plan_digest` field in the slow query table to record the `plan` signature [#14292](https://github.com/pingcap/tidb/pull/14292)
-+ DDL
-    - Fix the issue that the results of anonymous indexes created using `alter table ... add index` on the `primary` column is inconsistent with MySQL [#14310](https://github.com/pingcap/tidb/pull/14310)
-    - Fix the issue that `VIEW`s are mistakenly dropped by the  `drop table` syntax [#14052](https://github.com/pingcap/tidb/pull/14052)
-+ Planner
-    - Optimize the performance of statements such as `select max(a), min(a) from t`. If an index exists in the `a` column, the statement is optimized to `select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2` to avoid full table scan [#14410](https://github.com/pingcap/tidb/pull/14410)
+-   エグゼキュータ
+    -   集計関数が`ENUM`列とコレクション列[＃14364](https://github.com/pingcap/tidb/pull/14364)に適用されたときの誤った結果を修正します
+-   サーバ
+    -   `auto_increment_increment`および`auto_increment_offset`のシステム変数をサポートする[＃14396](https://github.com/pingcap/tidb/pull/14396)
+    -   `tidb_tikvclient_ttl_lifetime_reach_total`の監視メトリックを追加して、TTLが10分の悲観的なトランザクションの数を監視します[＃14300](https://github.com/pingcap/tidb/pull/14300)
+    -   SQLクエリの実行中にパニックが発生した場合にSQL情報をログに出力する[＃14322](https://github.com/pingcap/tidb/pull/14322)
+    -   ステートメントサマリーテーブルに`plan`フィールドと`plan_digest`フィールドを追加して、実行中の`plan`フィールドと`plan`シグニチャ[＃14285](https://github.com/pingcap/tidb/pull/14285)を記録します。
+    -   `stmt-summary.max-stmt-count`構成項目のデフォルト値を`100`から[＃14285](https://github.com/pingcap/tidb/pull/14285)に調整し`200` 。
+    -   低速クエリテーブルに`plan_digest`フィールドを追加して、 `plan`シグニチャを記録します[＃14292](https://github.com/pingcap/tidb/pull/14292)
+-   DDL
+    -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果が[＃14310](https://github.com/pingcap/tidb/pull/14310)と矛盾する問題を修正します
+    -   `drop table`構文[＃14052](https://github.com/pingcap/tidb/pull/14052)によって`VIEW`が誤ってドロップされる問題を修正します。
+-   プランナー
+    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。 `a`列にインデックスが存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、全表スキャンを回避します[＃14410](https://github.com/pingcap/tidb/pull/14410)
 
-## TiKV
+## TiKV {#tikv}
 
-+ Raftstore
-    - Speed up the configuration change to speed up the Region scattering [#6421](https://github.com/tikv/tikv/pull/6421)
-+ Transaction
-    - Add the `tikv_lock_manager_waiter_lifetime_duration`, `tikv_lock_manager_detect_duration`, and `tikv_lock_manager_detect_duration`  monitoring metrics to monitor `waiter`s’ lifetime, the time cost of detecting deadlocks, and the status of `Wait` table [#6392](https://github.com/tikv/tikv/pull/6392)
-    - Optimize the following configuration items to reduce transaction execution latency caused by changing Region leader or the leader of deadlock detector in extreme situations [#6429](https://github.com/tikv/tikv/pull/6429)
-        - Change the default value of `wait-for-lock-time` from `3s` to `1s`
-        - Change the default value of `wake-up-delay-duration` from `100ms` to `20ms`
-    - Fix the issue that the leader of the deadlock detector might be incorrect during the Region Merge process [#6431](https://github.com/tikv/tikv/pull/6431)
+-   ラフトストア
+    -   構成変更を高速化して、領域散乱を高速化します[＃6421](https://github.com/tikv/tikv/pull/6421)
+-   取引
+    -   `tikv_lock_manager_waiter_lifetime_duration` 、および`tikv_lock_manager_detect_duration`の監視メトリックを追加して、 `tikv_lock_manager_detect_duration`の存続期間、デッドロックの検出にかかる時間コスト、および`Wait` `waiter`テーブル[＃6392](https://github.com/tikv/tikv/pull/6392)のステータスを監視します。
+    -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック検出器のリーダーを変更することによって発生するトランザクション実行の待機時間を短縮します[＃6429](https://github.com/tikv/tikv/pull/6429)
+        -   デフォルト値の`wait-for-lock-time`を`3s`から`1s`に変更します
+        -   デフォルト値の`wake-up-delay-duration`を`100ms`から`20ms`に変更します
+    -   リージョンマージプロセス中にデッドロック検出器のリーダーが正しくない可能性がある問題を修正します[＃6431](https://github.com/tikv/tikv/pull/6431)
 
-## PD
+## PD {#pd}
 
-+ Support using backlash `/` in the location label name [#2083](https://github.com/pingcap/pd/pull/2083)
-+ Fix the incorrect statistics because the tombstone store is mistakenly included by the label counter [#2067](https://github.com/pingcap/pd/pull/2067)
+-   ロケーションラベル名[＃2083](https://github.com/pingcap/pd/pull/2083)でのバックラッシュ`/`の使用をサポート
+-   トゥームストーンストアが誤ってラベルカウンターに含まれているため、誤った統計を修正します[＃2067](https://github.com/pingcap/pd/pull/2067)
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Binlog
-    - Add the unique key information in the binlog protocol output by Drainer [#862](https://github.com/pingcap/tidb-binlog/pull/862)
-    - Support using the encrypted password for database connection for Drainer [#868](https://github.com/pingcap/tidb-binlog/pull/868)
+-   TiDB Binlog
+    -   Drainer1によって出力されたbinlogプロトコルに一意のキー情報を追加し[＃862](https://github.com/pingcap/tidb-binlog/pull/862)
+    -   [＃868](https://github.com/pingcap/tidb-binlog/pull/868)のデータベース接続に暗号化されたパスワードを使用することをサポート
 
-## TiDB Ansible
+## TiDB Ansible {#tidb-ansible}
 
-+ Support automatically creating directories to optimize the deployment of TiDB Lightning [#1105](https://github.com/pingcap/tidb-ansible/pull/1105)
+-   [＃1105](https://github.com/pingcap/tidb-ansible/pull/1105)の展開を最適化するためのディレクトリの自動作成をサポート

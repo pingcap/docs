@@ -3,63 +3,63 @@ title: TiDB Binlog Cluster Operations
 summary: Learn how to operate the cluster version of TiDB Binlog.
 ---
 
-# TiDB Binlog Cluster Operations
+# TiDBBinlogクラスターの操作 {#tidb-binlog-cluster-operations}
 
-This document introduces the following TiDB Binlog cluster operations:
+このドキュメントでは、次のTiDBBinlogクラスタ操作を紹介します。
 
-+ The state of a Pump and Drainer nodes
-+ Starting or exiting a Pump or Drainer process
-+ Managing the TiDB Binlog cluster by using the binlogctl tool or by directly performing SQL operations in TiDB
+-   ポンプノードとドレイナーノードの状態
+-   ポンプまたはドレイナープロセスの開始または終了
+-   binlogctlツールを使用するか、TiDBでSQL操作を直接実行することによるTiDBBinlogクラスタの管理
 
-## Pump or Drainer state
+## ポンプまたはドレイナーの状態 {#pump-or-drainer-state}
 
-Pump or Drainer state description:
+ポンプまたはドレイナーの状態の説明：
 
-* `online`: running normally
-* `pausing`: in the pausing process
-* `paused`: has been stopped
-* `closing`: in the offline process
-* `offline`: has been offline
+-   `online` ：正常に動作しています
+-   `pausing` ：一時停止中
+-   `paused` ：停止しました
+-   `closing` ：オフラインプロセス中
+-   `offline` ：オフラインになっています
 
-> **Note:**
+> **ノート：**
 >
-> The state information of a Pump or Drainer node is maintained by the service itself and is regularly updated to the Placement Driver (PD).
+> ポンプノードまたはドレイナーノードの状態情報は、サービス自体によって維持され、配置ドライバー（PD）に定期的に更新されます。
 
-## Starting and exiting a Pump or Drainer process
+## ポンプまたはドレイナープロセスの開始と終了 {#starting-and-exiting-a-pump-or-drainer-process}
 
-### Pump
+### ポンプ {#pump}
 
-* Starting: When started, the Pump node notifies all Drainer nodes in the `online` state. If the notification is successful, the Pump node sets its state to `online`. Otherwise, the Pump node reports an error, sets its state to `paused` and exits the process.
-* Exiting: The Pump node enters the `paused` or `offline` state before the process is exited normally; if the process is exited abnormally (caused by the `kill -9` command, process panic, crash), the node is still in the `online` state.
-    * Pause: You can pause a Pump process by using the `kill` command (not `kill -9`), pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> or using the `pause-pump` command in the binlogctl tool. After receiving the pause instruction, the Pump node sets its state to `pausing`, stops receiving binlog write requests and stops providing binlog data to Drainer nodes. After all threads are safely exited, the Pump node updates its state to `paused` and exits the process.
-    * Offline: You can close a Pump process only by using the `offline-pump` command in the binlogctl tool. After receiving the offline instruction, the Pump node sets its state to `closing` and stops receiving the binlog write requests. The Pump node continues providing binlog to Drainer nodes until all binlog data is consumed by Drainer nodes. Then, the Pump node sets its state to `offline` and exits the process.
+-   開始：開始すると、ポンプノードは`online`状態のすべてのドレイナーノードに通知します。通知が成功すると、Pumpノードはその状態を`online`に設定します。それ以外の場合、Pumpノードはエラーを報告し、その状態を`paused`に設定して、プロセスを終了します。
+-   終了：プロセスが正常に終了する前に、ポンプノードは`paused`または`offline`の状態になります。プロセスが異常終了した場合（ `kill -9`コマンド、プロセスパニック、クラッシュが原因）、ノードは`online`状態のままです。
+    -   一時停止： `kill`コマンド（ `kill -9`ではなく）を使用するか、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押すか、binlogctlツールの`pause-pump`コマンドを使用して、Pumpプロセスを一時停止できます。一時停止命令を受信した後、Pumpノードはその状態を`pausing`に設定し、binlog書き込み要求の受信を停止し、Drainerノードへのbinlogデータの提供を停止します。すべてのスレッドが安全に終了した後、Pumpノードはその状態を`paused`に更新し、プロセスを終了します。
+    -   オフライン：binlogctlツールの`offline-pump`コマンドを使用することによってのみ、Pumpプロセスを閉じることができます。オフライン命令を受信した後、Pumpノードはその状態を`closing`に設定し、binlog書き込み要求の受信を停止します。 Pumpノードは、すべてのbinlogデータがDrainerノードによって消費されるまで、Drainerノードにbinlogを提供し続けます。次に、Pumpノードはその状態を`offline`に設定し、プロセスを終了します。
 
-### Drainer
+### ドレイナー {#drainer}
 
-* Starting: When started, the Drainer node sets its state to `online` and tries to pull binlogs from all Pump nodes which are not in the `offline` state. If it fails to get the binlogs, it keeps trying.
-* Exiting: The Drainer node enters the `paused` or `offline` state before the process is exited normally; if the process is exited abnormally (caused by `kill -9`, process panic, crash), the Drainer node is still in the `online` state.
-    * Pause: You can pause a Drainer process by using the `kill` command (not `kill -9`), pressing <kbd>Ctrl</kbd>+<kbd>C</kbd> or using the `pause-drainer` command in the binlogctl tool. After receiving the pause instruction, the Drainer node sets its state to `pausing` and stops pulling binlogs from Pump nodes. After all threads are safely exited, the Drainer node sets its state to `paused` and exits the process.
-    * Offline: You can close a Drainer process only by using the `offline-drainer` command in the binlogctl tool. After receiving the offline instruction, the Drainer node sets its state to `closing` and stops pulling binlogs from Pump nodes. After all threads are safely exited, the Drainer node updates its state to `offline` and exits the process.
+-   開始：開始すると、Drainerノードはその状態を`online`に設定し、 `offline`状態ではないすべてのPumpノードからbinlogをプルしようとします。 binlogの取得に失敗した場合は、試行を続けます。
+-   終了：プロセスが正常に終了する前に、Drainerノードは`paused`または`offline`の状態になります。プロセスが異常終了した場合（ `kill -9` 、プロセスパニック、クラッシュが原因）、Drainerノードは`online`状態のままです。
+    -   一時停止： `kill`コマンド（ `kill -9`ではなく）を使用するか、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押すか、binlogctlツールの`pause-drainer`コマンドを使用して、Drainerプロセスを一時停止できます。一時停止命令を受け取った後、Drainerノードはその状態を`pausing`に設定し、Pumpノードからのbinlogのプルを停止します。すべてのスレッドが安全に終了した後、Drainerノードはその状態を`paused`に設定し、プロセスを終了します。
+    -   オフライン：binlogctlツールの`offline-drainer`コマンドを使用することによってのみ、Drainerプロセスを閉じることができます。オフライン命令を受け取った後、Drainerノードはその状態を`closing`に設定し、Pumpノードからのbinlogのプルを停止します。すべてのスレッドが安全に終了した後、Drainerノードはその状態を`offline`に更新し、プロセスを終了します。
 
-For how to pause, close, check, and modify the state of Drainer, see the [binlogctl guide](/tidb-binlog/binlog-control.md).
+Drainerの状態を一時停止、閉じる、確認、および変更する方法については、 [binlogctlガイド](/tidb-binlog/binlog-control.md)を参照してください。
 
-## Use `binlogctl` to manage Pump/Drainer
+## binlogctlを使用してPump/ <code>binlogctl</code>を管理します {#use-code-binlogctl-code-to-manage-pump-drainer}
 
-[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) is an operations tool for TiDB Binlog with the following features:
+[`binlogctl`](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl)は、次の機能を備えたTiDBBinlogの操作ツールです。
 
-* Checking the state of Pump or Drainer
-* Pausing or closing Pump or Drainer
-* Handling the abnormal state of Pump or Drainer
+-   ポンプまたはドレイナーの状態を確認する
+-   ポンプまたはドレイナーの一時停止または閉鎖
+-   ポンプまたはドレイナーの異常状態への対応
 
-For detailed usage of `binlogctl`, refer to [binlogctl overview](/tidb-binlog/binlog-control.md).
+`binlogctl`の詳細な使用法については、 [binlogctlの概要](/tidb-binlog/binlog-control.md)を参照してください。
 
-## Use SQL statements to manage Pump or Drainer
+## SQLステートメントを使用してPumpまたはDrainerを管理する {#use-sql-statements-to-manage-pump-or-drainer}
 
-To view or modify binlog related states, execute corresponding SQL statements in TiDB.
+binlog関連の状態を表示または変更するには、TiDBで対応するSQLステートメントを実行します。
 
-- Check whether binlog is enabled:
+-   binlogが有効になっているかどうかを確認します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     show variables like "log_bin";
@@ -72,12 +72,12 @@ To view or modify binlog related states, execute corresponding SQL statements in
     | log_bin       |  0   |
     +---------------+-------+
     ```
-    
-    When the Value is `0`, binlog is enabled. When the Value is `1`, binlog is disabled.
 
-- Check the status of all the Pump or Drainer nodes:
+    値が`0`の場合、binlogが有効になります。値が`1`の場合、binlogは無効になります。
 
-    {{< copyable "sql" >}}
+-   すべてのポンプノードまたはドレイナーノードのステータスを確認します。
+
+    {{< copyable "" >}}
 
     ```sql
     show pump status;
@@ -93,7 +93,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     +--------|----------------|--------|--------------------|---------------------|
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     show drainer status;
@@ -109,9 +109,9 @@ To view or modify binlog related states, execute corresponding SQL statements in
     +----------|----------------|--------|--------------------|---------------------|
     ```
 
-- Modify the state of a Pump or Drainer node in abnormal situations
+-   異常な状況でポンプまたはドレイナーノードの状態を変更します
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     change pump to node_state ='paused' for node_id 'pump1';
@@ -121,7 +121,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     Query OK, 0 rows affected (0.01 sec)
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     change drainer to node_state ='paused' for node_id 'drainer1';
@@ -131,9 +131,9 @@ To view or modify binlog related states, execute corresponding SQL statements in
     Query OK, 0 rows affected (0.01 sec)
     ```
 
-    Executing the above SQL statements works the same as the `update-pump` or `update-drainer` commands in binlogctl. Use the above SQL statements **only** when the Pump or Drainer node is in abnormal situations.
+    上記のSQLステートメントの実行は、binlogctlの`update-pump`または`update-drainer`コマンドと同じように機能します。上記のSQLステートメント**は、PumpノードまたはDrainerノードが異常な状況にある場合にのみ**使用してください。
 
-> **Note:**
+> **ノート：**
 >
-> - Checking whether binlog is enabled and the running status of Pump or Drainer is supported in TiDB v2.1.7 and later versions.
-> - Modifying the status of Pump or Drainer is supported in TiDB v3.0.0-rc.1 and later versions. This feature only supports modifying the status of Pump or Drainer nodes stored in PD. To pause or close the node, use the `binlogctl` tool.
+> -   binlogが有効になっているかどうか、およびポンプまたはドレイナーの実行ステータスがTiDBv2.1.7以降のバージョンでサポートされているかどうかを確認します。
+> -   ポンプまたはドレイナーのステータスの変更は、TiDBv3.0.0-rc.1以降のバージョンでサポートされています。この機能は、PDに保存されているポンプノードまたはドレイナーノードのステータスの変更のみをサポートします。ノードを一時停止または閉じるには、 `binlogctl`ツールを使用します。

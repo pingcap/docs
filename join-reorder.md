@@ -3,52 +3,52 @@ title: Introduction to Join Reorder
 summary: Use the Join Reorder algorithm to join multiple tables in TiDB.
 ---
 
-# Introduction to Join Reorder
+# 再注文に結合したテーブルの再配置ための概要 {#introduction-to-join-reorder}
 
-In real application scenarios, it is common to join multiple tables. The execution efficiency of join is associated with the order in which each table joins.
+実際のアプリケーションシナリオでは、複数のテーブルを結合するのが一般的です。結合の実行効率は、各テーブルが結合する順序に関連しています。
 
-For example:
+例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM t1, t2, t3 WHERE t1.a=t2.a AND t3.a=t2.a;
 ```
 
-In this query, tables can be joined in the following two orders:
+このクエリでは、テーブルを次の2つの順序で結合できます。
 
-- t1 joins t2, and then joins t3
-- t2 joins t3, and then joins t1
+-   t1はt2に結合し、次にt3に結合します
+-   t2はt3に参加し、次にt1に参加します
 
-As t1 and t3 have different data volumes and distribution, these two execution orders might show different performances.
+t1とt3のデータ量と分散は異なるため、これら2つの実行順序は異なるパフォーマンスを示す可能性があります。
 
-Therefore, the optimizer needs an algorithm to determine the join order. Currently, TiDB uses the Join Reorder algorithm, also known as the greedy algorithm.
+したがって、オプティマイザには、結合順序を決定するためのアルゴリズムが必要です。現在、TiDBは、欲張りアルゴリズムとも呼ばれる結合したテーブルの再配置アルゴリズムを使用しています。
 
-## Instance of Join Reorder algorithm
+## 結合したテーブルの再配置アルゴリズムのインスタンス {#instance-of-join-reorder-algorithm}
 
-Take the three tables above (t1, t2, and t3) as an example.
+上記の3つの表（t1、t2、およびt3）を例として取り上げます。
 
-First, TiDB obtains all the nodes that participates in the join operation, and sorts the nodes in the ascending order of row numbers.
+まず、TiDBは結合操作に参加するすべてのノードを取得し、行番号の昇順でノードをソートします。
 
 ![join-reorder-1](/media/join-reorder-1.png)
 
-After that, the table with the least rows is selected and joined with other two tables respectively. By comparing the sizes of the output result sets, TiDB selects the pair with a smaller result set.
+その後、行が最も少ないテーブルが選択され、他の2つのテーブルとそれぞれ結合されます。 TiDBは、出力結果セットのサイズを比較することにより、結果セットが小さいペアを選択します。
 
 ![join-reorder-2](/media/join-reorder-2.png)
 
-Then TiDB enters the next round of selection. If you try to join four tables, TiDB continues to compare the sizes of the output result sets and selects the pair with a smaller result set.
+次に、TiDBは次の選択ラウンドに入ります。 4つのテーブルを結合しようとすると、TiDBは引き続き出力結果セットのサイズを比較し、結果セットが小さいペアを選択します。
 
-In this case only three tables are joined, so TiDB gets the final join result.
+この場合、3つのテーブルのみが結合されるため、TiDBは最終的な結合結果を取得します。
 
 ![join-reorder-3](/media/join-reorder-3.png)
 
-The above process is the Join Reorder algorithm currently used in TiDB.
+上記のプロセスは、現在TiDBで使用されている結合したテーブルの再配置アルゴリズムです。
 
-## Limitations of Join Reorder algorithm
+## 結合したテーブルの再配置アルゴリズムの制限 {#limitations-of-join-reorder-algorithm}
 
-The current Join Reorder algorithm has the following limitations:
+現在の結合したテーブルの再配置アルゴリズムには、次の制限があります。
 
-- The Join Reorder for Outer Join is not supported
-- Limited by the calculation methods of the result sets, the algorithm cannot ensure it selects the optimum join order.
+-   外部結合の結合したテーブルの再配置はサポートされていません
+-   結果セットの計算方法によって制限されるため、アルゴリズムは最適な結合順序を選択することを保証できません。
 
-Currently, the `STRAIGHT_JOIN` syntax is supported in TiDB to force a join order. For more information, refer to [Description of the syntax elements](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements).
+現在、結合順序を強制するために`STRAIGHT_JOIN`構文がTiDBでサポートされています。詳細については、 [構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。

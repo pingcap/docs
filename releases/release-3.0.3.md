@@ -2,77 +2,77 @@
 title: TiDB 3.0.3 Release Notes
 ---
 
-# TiDB 3.0.3 Release Notes
+# TiDB3.0.3リリースノート {#tidb-3-0-3-release-notes}
 
-Release date: August 29, 2019
+発売日：2019年8月29日
 
-TiDB version: 3.0.3
+TiDBバージョン：3.0.3
 
-TiDB Ansible version: 3.0.3
+TiDB Ansibleバージョン：3.0.3
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Add the `opt_rule_blacklist` table to disable logic optimization rules such as `aggregation_eliminate` and `column_prune` [#11658](https://github.com/pingcap/tidb/pull/11658)
-    - Fix the issue that incorrect results might be returned for `Index Join` when the join key uses a prefix index or an unsigned index column that is equal to a negative value [#11759](https://github.com/pingcap/tidb/pull/11759)
-    - Fix the issue that `”` or `\` in the `SELECT` statements of `create … binding ...` might result in parsing errors [#11726](https://github.com/pingcap/tidb/pull/11726)
-+ SQL Execution Engine
-    - Fix the issue that type errors in the return value might occur when the Quote function handles a null value [#11619](https://github.com/pingcap/tidb/pull/11619)
-    - Fix the issue that incorrect results for `ifnull` might be returned when Max/Min is used for type inferring with `NotNullFlag` retained [#11641](https://github.com/pingcap/tidb/pull/11641)
-    - Fix the potential error that occurs when comparing bit type data in string form [#11660](https://github.com/pingcap/tidb/pull/11660)
-    - Decrease the concurrency for data that requires sequential read to lower the possibility of OOM [#11679](https://github.com/pingcap/tidb/pull/11679)
-    - Fix the issue that incorrect type inferring might be caused when multiple parameters are unsigned for some built-in functions (for example, `if` and `coalesce`) [#11621](https://github.com/pingcap/tidb/pull/11621)
-    - Fix the incompatibility with MySQL when the `Div` function handles unsigned decimal types [#11813](https://github.com/pingcap/tidb/pull/11813)
-    - Fix the issue that panic might occur when executing SQL statements that modify the status of Pump/Drainer [#11827](https://github.com/pingcap/tidb/pull/11827)
-    - Fix the issue that panic might occur for `select ... for update` when Autocommit = 1 and there is no `begin` statement [#11736](https://github.com/pingcap/tidb/pull/11736)
-    - Fix the permission check error that might occur when the `set default role` statement is executed [#11777](https://github.com/pingcap/tidb/pull/11777)
-    - Fix the permission check error that might occur when `create user` or `drop user` is executed [#11814](https://github.com/pingcap/tidb/pull/11814)
-    - Fix the issue that the `select ... for update` statement might auto retry when it is constructed into the `PointGetExecutor` function [#11718](https://github.com/pingcap/tidb/pull/11718)
-    - Fix the boundary error that might occur when the Window function handles partition [#11825](https://github.com/pingcap/tidb/pull/11825)
-    - Fix the issue that the `time` function hits EOF errors when handling an incorrectly formatted argument [#11893](https://github.com/pingcap/tidb/pull/11893)
-    - Fix the issue that the Window function does not check the passed-in parameters [#11705](https://github.com/pingcap/tidb/pull/11705)
-    - Fix the issue that the plan result viewed via `Explain` is inconsistent with the actually executed plan [#11186](https://github.com/pingcap/tidb/pull/11186)
-    - Fix the issue that duplicate memory referenced by the Window function might result in a crash or incorrect results [#11823](https://github.com/pingcap/tidb/pull/11823)
-    - Update the incorrect information in the `Succ` field in the slow log [#11887](https://github.com/pingcap/tidb/pull/11887)
-+ Server
-    - Rename the `tidb_back_off_wexight` variable to `tidb_backoff_weight` [#11665](https://github.com/pingcap/tidb/pull/11665)
-    - Update the minimum TiKV version compatible with the current TiDB to v3.0.0 [#11618](https://github.com/pingcap/tidb/pull/11618)
-    - Support `make testSuite` to ensure the suites in the test are correctly used [#11685](https://github.com/pingcap/tidb/pull/11685)
-+ DDL
-    - Skip the execution of unsupported partition-related DDL statements, including statements that modify the partition type while deleting multiple partitions [#11373](https://github.com/pingcap/tidb/pull/11373)
-    - Disallow a Generated Column to be placed before its dependent columns [#11686](https://github.com/pingcap/tidb/pull/11686)
-    - Modify the default values of `tidb_ddl_reorg_worker_cnt` and `tidb_ddl_reorg_batch_size` [#11874](https://github.com/pingcap/tidb/pull/11874)
-+ Monitor
-    - Add new backoff monitoring types to record duration for each backoff type; add more backoff metrics to cover previously uncounted types such as commit backoff [#11728](https://github.com/pingcap/tidb/pull/11728)
+-   SQLオプティマイザー
+    -   `opt_rule_blacklist`テーブルを追加して、 `aggregation_eliminate`や[＃11658](https://github.com/pingcap/tidb/pull/11658)などのロジック最適化ルールを無効にし`column_prune` 。
+    -   結合キーが負の値[＃11759](https://github.com/pingcap/tidb/pull/11759)に等しいプレフィックスインデックスまたは符号なしインデックス列を使用すると、 `Index Join`に対して誤った結果が返される可能性がある問題を修正します。
+    -   `create … binding ...`の`SELECT`のステートメントの`”`つまたは`\`が解析エラーになる可能性があるという問題を修正します[＃11726](https://github.com/pingcap/tidb/pull/11726)
+-   SQL実行エンジン
+    -   Quote関数がnull値を処理するときに戻り値のタイプエラーが発生する可能性がある問題を修正します[＃11619](https://github.com/pingcap/tidb/pull/11619)
+    -   `NotNullFlag`が保持されたタイプ推論に最大/最小が使用された場合に`ifnull`の誤った結果が返される可能性がある問題を修正します[＃11641](https://github.com/pingcap/tidb/pull/11641)
+    -   文字列形式[＃11660](https://github.com/pingcap/tidb/pull/11660)のビットタイプデータを比較するときに発生する可能性のあるエラーを修正します
+    -   シーケンシャル読み取りが必要なデータの同時実行性を減らして、 [＃11679](https://github.com/pingcap/tidb/pull/11679)の可能性を減らします。
+    -   一部の組み込み関数（ `if`や`coalesce`など）で複数のパラメーターが署名されていない場合に、誤った型の推測が発生する可能性がある問題を修正します[＃11621](https://github.com/pingcap/tidb/pull/11621)
+    -   `Div`関数が符号なし10進型を処理する場合のMySQLとの非互換性を修正します[＃11813](https://github.com/pingcap/tidb/pull/11813)
+    -   ポンプ/ドレイナー[＃11827](https://github.com/pingcap/tidb/pull/11827)のステータスを変更するSQLステートメントを実行するときにパニックが発生する可能性がある問題を修正します
+    -   Autocommit = 1で、 `begin`のステートメントがない場合に`select ... for update`でパニックが発生する可能性がある問題を修正します[＃11736](https://github.com/pingcap/tidb/pull/11736)
+    -   `set default role`ステートメントの実行時に発生する可能性のある権限チェックエラーを修正します[＃11777](https://github.com/pingcap/tidb/pull/11777)
+    -   `create user`または`drop user`を実行したときに発生する可能性のある権限チェックエラーを修正します[＃11814](https://github.com/pingcap/tidb/pull/11814)
+    -   `select ... for update`ステートメントが`PointGetExecutor`関数[＃11718](https://github.com/pingcap/tidb/pull/11718)に組み込まれると、自動再試行される可能性がある問題を修正します。
+    -   Window関数がパーティション[＃11825](https://github.com/pingcap/tidb/pull/11825)を処理するときに発生する可能性のある境界エラーを修正します
+    -   誤ってフォーマットされた引数を処理するときに`time`関数がEOFエラーに遭遇する問題を修正します[＃11893](https://github.com/pingcap/tidb/pull/11893)
+    -   Window関数が渡されたパラメーターをチェックしない問題を修正します[＃11705](https://github.com/pingcap/tidb/pull/11705)
+    -   `Explain`で表示されたプランの結果が、実際に実行されたプラン[＃11186](https://github.com/pingcap/tidb/pull/11186)と矛盾する問題を修正します。
+    -   Window関数によって参照される重複メモリがクラッシュまたは誤った結果をもたらす可能性がある問題を修正します[＃11823](https://github.com/pingcap/tidb/pull/11823)
+    -   スローログ[＃11887](https://github.com/pingcap/tidb/pull/11887)の`Succ`フィールドの誤った情報を更新します
+-   サーバ
+    -   `tidb_back_off_wexight`変数の名前を[＃11665](https://github.com/pingcap/tidb/pull/11665)に変更し`tidb_backoff_weight`
+    -   現在のTiDBと互換性のある最小TiKVバージョンを[＃11618](https://github.com/pingcap/tidb/pull/11618)に更新します。
+    -   テストの[＃11685](https://github.com/pingcap/tidb/pull/11685)が正しく使用されていることを確認するためのサポート`make testSuite`
+-   DDL
+    -   複数のパーティションを削除するときにパーティションタイプを変更するステートメントを含む、サポートされていないパーティション関連のDDLステートメントの実行をスキップします[＃11373](https://github.com/pingcap/tidb/pull/11373)
+    -   生成された列をその依存列の前に配置することを禁止する[＃11686](https://github.com/pingcap/tidb/pull/11686)
+    -   `tidb_ddl_reorg_worker_cnt`と[＃11874](https://github.com/pingcap/tidb/pull/11874)のデフォルト値を変更し`tidb_ddl_reorg_batch_size`
+-   モニター
+    -   新しいバックオフ監視タイプを追加して、各バックオフタイプの期間を記録します。コミットバックオフ[＃11728](https://github.com/pingcap/tidb/pull/11728)など、以前はカウントされていなかったタイプをカバーするために、バックオフメトリックを追加します。
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that ReadIndex might fail to respond to requests because of duplicate context [#5256](https://github.com/tikv/tikv/pull/5256)
-- Fix potential scheduling jitters caused by premature `PutStore` [#5277](https://github.com/tikv/tikv/pull/5277)
-- Fix incorrect timestamps reported from Region heartbeats [#5296](https://github.com/tikv/tikv/pull/5296)
-- Reduce the size of core dump by excluding the shared block cache from it [#5322](https://github.com/tikv/tikv/pull/5322)
-- Fix potential TiKV panics during region merge [#5291](https://github.com/tikv/tikv/pull/5291)
-- Speed up leader change check for the dead lock detector [#5317](https://github.com/tikv/tikv/pull/5317)
-- Support using `grpc env` to create deadlock clients [#5346](https://github.com/tikv/tikv/pull/5346)
-- Add `config-check` to check whether the configuration is correct [#5349](https://github.com/tikv/tikv/pull/5349)
-- Fix the issue that ReadIndex does not return anything when there is no leader [#5351](https://github.com/tikv/tikv/pull/5351)
+-   コンテキスト[＃5256](https://github.com/tikv/tikv/pull/5256)が重複しているためにReadIndexがリクエストに応答できない可能性がある問題を修正します
+-   時期尚早の`PutStore`によって引き起こされる潜在的なスケジューリングジッターを修正し[＃5277](https://github.com/tikv/tikv/pull/5277)
+-   リージョンハートビートから報告された誤ったタイムスタンプを修正[＃5296](https://github.com/tikv/tikv/pull/5296)
+-   共有ブロックキャッシュをコアダンプから除外して、コアダンプのサイズを縮小します[＃5322](https://github.com/tikv/tikv/pull/5322)
+-   リージョンマージ中の潜在的なTiKVパニックを修正[＃5291](https://github.com/tikv/tikv/pull/5291)
+-   デッドロック検出器のリーダー変更チェックを高速化[＃5317](https://github.com/tikv/tikv/pull/5317)
+-   `grpc env`を使用したデッドロッククライアントの作成のサポート[＃5346](https://github.com/tikv/tikv/pull/5346)
+-   `config-check`を追加して、構成が正しいかどうかを確認します[＃5349](https://github.com/tikv/tikv/pull/5349)
+-   リーダーがない場合にReadIndexが何も返さない問題を修正します[＃5351](https://github.com/tikv/tikv/pull/5351)
 
-## PD
+## PD {#pd}
 
-- Return success message for `pdctl` [#1685](https://github.com/pingcap/pd/pull/1685)
+-   [＃1685](https://github.com/pingcap/pd/pull/1685)の成功メッセージを返し`pdctl`
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Binlog
-    - Modify the default value of `defaultBinlogItemCount` in Drainer from 65536 to 512 to reduce the chance of OOM on Drainer startup [#721](https://github.com/pingcap/tidb-binlog/pull/721)
-    - Optimize the offline logic for pump server to avoid potential offline congestions [#701](https://github.com/pingcap/tidb-binlog/pull/701)
-+ TiDB Lightning:
-    - Skip the system databases `mysql`, `information_schema`, `performance_schema`, and `sys` by default when importing [#225](https://github.com/pingcap/tidb-lightning/pull/225)
+-   TiDB Binlog
+    -   Drainerのデフォルト値`defaultBinlogItemCount`を65536から512に変更して、Drainerの起動時にOOMが発生する可能性を減らします[＃721](https://github.com/pingcap/tidb-binlog/pull/721)
+    -   潜在的なオフライン輻輳を回避するために、ポンプサーバーのオフラインロジックを最適化する[＃701](https://github.com/pingcap/tidb-binlog/pull/701)
+-   TiDB Lightning：
+    -   `information_schema`をインポートする場合、デフォルトでシステムデータベース`mysql` 、および`performance_schema`をスキップし`sys` [＃225](https://github.com/pingcap/tidb-lightning/pull/225)
 
-## TiDB Ansible
+## TiDB Ansible {#tidb-ansible}
 
-- Optimize PD operations for rolling update to improve stability [#894](https://github.com/pingcap/tidb-ansible/pull/894)
-- Remove the Grafana Collector components that are not supported by the current Grafana version [#892](https://github.com/pingcap/tidb-ansible/pull/892)
-- Update TiKV alerting rules [#898](https://github.com/pingcap/tidb-ansible/pull/898)
-- Fix the issue that the generated TiKV configuration misses the `pessimistic-txn` parameter [#911](https://github.com/pingcap/tidb-ansible/pull/911)
-- Update Spark to V2.4.3, and update TiSpark to V2.1.4 that is compatible with Spark V2.4.3 [#913](https://github.com/pingcap/tidb-ansible/pull/913), [#918](https://github.com/pingcap/tidb-ansible/pull/918)
+-   安定性を向上させるためにローリングアップデートのためにPD操作を最適化する[＃894](https://github.com/pingcap/tidb-ansible/pull/894)
+-   現在のGrafanaバージョン[＃892](https://github.com/pingcap/tidb-ansible/pull/892)でサポートされていないGrafanaCollectorコンポーネントを削除します
+-   TiKVアラートルールを更新する[＃898](https://github.com/pingcap/tidb-ansible/pull/898)
+-   生成されたTiKV構成が`pessimistic-txn`パラメーター[＃911](https://github.com/pingcap/tidb-ansible/pull/911)を見逃す問題を修正します
+-   SparkをV2.4.3に更新し、 [＃918](https://github.com/pingcap/tidb-ansible/pull/918)をSpark V2.4.3 [＃913](https://github.com/pingcap/tidb-ansible/pull/913)と互換性のあるV2.1.4に更新します。

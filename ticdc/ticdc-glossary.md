@@ -3,34 +3,34 @@ title: TiCDC Glossary
 summary: Learn the terms about TiCDC and their definitions.
 ---
 
-# TiCDC Glossary
+# TiCDC用語集 {#ticdc-glossary}
 
-This glossary provides TiCDC-related terms and definitions. These terms appears in TiCDC logs, monitoring metrics, configurations, and documents.
+この用語集は、TiCDC関連の用語と定義を提供します。これらの用語は、TiCDCログ、監視メトリック、構成、およびドキュメントに表示されます。
 
-For TiDB-related terms and definitions, refer to [TiDB glossary](/glossary.md).
+TiDB関連の用語と定義については、 [TiDB用語集](/glossary.md)を参照してください。
 
-## C
+## C {#c}
 
-### Capture
+### 捕獲 {#capture}
 
-A single TiCDC instance on which the replication task of the cluster runs. Multiple captures form a TiCDC cluster.
+クラスタのレプリケーションタスクが実行される単一のTiCDCインスタンス。複数のキャプチャがTiCDCクラスタを形成します。
 
-### Changed data
+### 変更されたデータ {#changed-data}
 
-The data to be written to TiCDC from the upstream TiDB cluster, including the DML-caused data changes and the DDL-caused table schema changes.
+DMLによるデータの変更やDDLによるテーブルスキーマの変更など、アップストリームTiDBクラスタからTiCDCに書き込まれるデータ。
 
-### Changefeed
+### チェンジフィード {#changefeed}
 
-An incremental replication task in TiCDC, which outputs the data change logs of several tables in a TiDB cluster to the designated downstream.
+TiCDCのインクリメンタルレプリケーションタスク。TiDBクラスタの複数のテーブルのデータ変更ログを指定されたダウンストリームに出力します。
 
-## O
+## O {#o}
 
-### Owner
+### オーナー {#owner}
 
-A [capture](#capture) of a special role that manages the TiCDC cluster and schedules replication tasks of the cluster. An owner is elected by captures and there is at most one owner at any time.
+TiCDCクラスタを管理し、クラスタのレプリケーションタスクをスケジュールする特別な役割の[捕獲](#capture) 。所有者はキャプチャによって選出され、いつでも最大で1人の所有者がいます。
 
-## P
+## P {#p}
 
-### Processor
+### プロセッサー {#processor}
 
-TiCDC replication tasks allocate data tables on TiCDC instances, and the processor refers to the replication processing unit of these tables. Processor tasks include pulling, sorting, restoring, and distributing changed data.
+TiCDCレプリケーションタスクはTiCDCインスタンスにデータテーブルを割り当て、プロセッサはこれらのテーブルのレプリケーション処理ユニットを参照します。プロセッサのタスクには、変更されたデータのプル、並べ替え、復元、および配布が含まれます。

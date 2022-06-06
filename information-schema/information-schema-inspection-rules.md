@@ -3,11 +3,11 @@ title: INSPECTION_RULES
 summary: Learn the `INSPECTION_RULES` information_schema table.
 ---
 
-# INSPECTION_RULES
+# INSPECTION_RULES {#inspection-rules}
 
-The `INSPECTION_RULES` table provides information about which diagnostic tests are run in an inspection result. See [inspection result](/information-schema/information-schema-inspection-result.md) for example usage.
+`INSPECTION_RULES`の表は、検査結果で実行される診断テストに関する情報を提供します。使用例については、 [検査結果](/information-schema/information-schema-inspection-result.md)を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -25,7 +25,7 @@ DESC inspection_rules;
 3 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM inspection_rules;

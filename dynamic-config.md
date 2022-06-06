@@ -3,25 +3,25 @@ title: Modify Configuration Online
 summary: Learn how to change the cluster configuration online.
 ---
 
-# Modify Configuration Online
+# オンラインでConfiguration / コンフィグレーションを変更する {#modify-configuration-online}
 
-This document describes how to modify the cluster configuration online.
+このドキュメントでは、クラスタ構成をオンラインで変更する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> This feature is experimental. It is **NOT** recommended to use this feature in the production environment.
+> この機能は実験的です。この機能を実稼働環境で使用することはお勧めし**ません**。
 
-You can update the configuration of components (including TiDB, TiKV, and PD) online using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such TiKV and PD).
+クラスタコンポーネントを再起動せずに、SQLステートメントを使用してコンポーネント（TiDB、TiKV、およびPDを含む）の構成をオンラインで更新できます。現在、TiDBインスタンスの構成を変更する方法は、他のコンポーネント（TiKVやPDなど）の構成を変更する方法とは異なります。
 
-## Common Operations
+## 一般的な操作 {#common-operations}
 
-This section describes the common operations of modifying configuration online.
+このセクションでは、構成をオンラインで変更する一般的な操作について説明します。
 
-### View instance configuration
+### インスタンス構成の表示 {#view-instance-configuration}
 
-To view the configuration of all instances in the cluster, use the `show config` statement. The result is as follows:
+クラスタのすべてのインスタンスの構成を表示するには、 `show config`ステートメントを使用します。結果は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 show config;
@@ -42,9 +42,9 @@ show config;
 ...
 ```
 
-You can filter the result by fields. For example:
+結果をフィールドでフィルタリングできます。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 show config where type='tidb'
@@ -53,44 +53,44 @@ show config where name like '%log%'
 show config where type='tikv' and name='log.level'
 ```
 
-### Modify TiKV configuration online
+### TiKV構成をオンラインで変更する {#modify-tikv-configuration-online}
 
-> **Note:**
+> **ノート：**
 >
-> - After changing TiKV configuration items online, the TiKV configuration file is automatically updated. However, you also need to modify the corresponding configuration items by executing `tiup edit-config`; otherwise, operations such as `upgrade` and `reload` will overwrite your changes. For details of modifying configuration items, refer to [Modify configuration using TiUP](/maintain-tidb-using-tiup.md#modify-the-configuration).
-> - After executing `tiup edit-config`, you do not need to execute `tiup reload`.
+> -   TiKV構成アイテムをオンラインで変更すると、TiKV構成ファイルが自動的に更新されます。ただし、 `tiup edit-config`を実行して、対応する構成アイテムも変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作で変更が上書きされます。構成項目の変更の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
+> -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
-When using the `set config` statement, you can modify the configuration of a single instance or of all instances according to the instance address or the component type.
+`set config`ステートメントを使用する場合、インスタンスアドレスまたはコンポーネントタイプに応じて、単一のインスタンスまたはすべてのインスタンスの構成を変更できます。
 
-- Modify the configuration of all TiKV instances:
+-   すべてのTiKVインスタンスの構成を変更します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to wrap variable names in backticks.
+> 変数名をバッククォートでラップすることをお勧めします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set config tikv `split.qps-threshold`=1000
 ```
 
-- Modify the configuration of a single TiKV instance:
+-   単一のTiKVインスタンスの構成を変更します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set config "127.0.0.1:20180" `split.qps-threshold`=1000
     ```
 
-If the modification is successful, `Query OK` is returned:
+変更が成功すると、 `Query OK`が返されます。
 
 ```sql
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-If an error occurs during the batch modification, a warning is returned:
+バッチ変更中にエラーが発生した場合、警告が返されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set config tikv `log-level`='warn';
@@ -100,7 +100,7 @@ set config tikv `log-level`='warn';
 Query OK, 0 rows affected, 1 warning (0.04 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 show warnings;
@@ -115,174 +115,174 @@ show warnings;
 1 row in set (0.00 sec)
 ```
 
-The batch modification does not guarantee atomicity. The modification might succeed on some instances, while failing on others. If you modify the configuration of the entire TiKV cluster using `set tikv key=val`, your modification might fail on some instances. You can use `show warnings` to check the result.
+バッチ変更は原子性を保証するものではありません。変更は、一部のインスタンスでは成功し、他のインスタンスでは失敗する場合があります。 `set tikv key=val`を使用してTiKVクラスタ全体の構成を変更すると、一部のインスタンスで変更が失敗する場合があります。 `show warnings`を使用して結果を確認できます。
 
-If some modifications fail, you need to re-execute the corresponding statement or modify each failed instance. If some TiKV instances cannot be accessed due to network issues or machine failure, modify these instances after they are recovered.
+一部の変更が失敗した場合は、対応するステートメントを再実行するか、失敗した各インスタンスを変更する必要があります。ネットワークの問題やマシンの障害が原因で一部のTiKVインスタンスにアクセスできない場合は、回復後にこれらのインスタンスを変更してください。
 
-If a configuration item is successfully modified, the result is persisted in the configuration file, which will prevail in the subsequent operations. The names of some configuration items might conflict with TiDB reserved words, such as `limit` and `key`. For these configuration items, use backtick `` ` `` to enclose them. For example, `` `raftstore.raft-log-gc-size-limit` ``.
+構成アイテムが正常に変更されると、結果は構成ファイルに保持され、後続の操作で優先されます。一部の構成アイテムの名前は、 `limit`や`key`などのTiDB予約語と競合する可能性があります。これらの構成アイテムについては、バックティック`` ` ``を使用して囲みます。たとえば、 `` `raftstore.raft-log-gc-size-limit` `` 。
 
-The following TiKV configuration items can be modified online:
+次のTiKV構成アイテムはオンラインで変更できます。
 
-| Configuration item | Description |
-| :--- | :--- |
-| `raftstore.raft-entry-max-size` | The maximum size of a single log |
-| `raftstore.raft-log-gc-tick-interval` | The time interval at which the polling task of deleting Raft logs is scheduled |
-| `raftstore.raft-log-gc-threshold` | The soft limit on the maximum allowable number of residual Raft logs |
-| `raftstore.raft-log-gc-count-limit` | The hard limit on the allowable number of residual Raft logs |
-| `raftstore.raft-log-gc-size-limit` | The hard limit on the allowable size of residual Raft logs |
-| `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
-| `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
-| `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
-| `raftstore.region-compact-check-interval` | The time interval at which to check whether it is necessary to manually trigger RocksDB compaction |
-| `raftstore.region-compact-check-step` | The number of Regions checked at one time for each round of manual compaction |
-| `raftstore.region-compact-min-tombstones` | The number of tombstones required to trigger RocksDB compaction |
-| `raftstore.region-compact-tombstones-percent` | The proportion of tombstone required to trigger RocksDB compaction |
-| `raftstore.pd-heartbeat-tick-interval` | The time interval at which a Region's heartbeat to PD is triggered |
-| `raftstore.pd-store-heartbeat-tick-interval` | The time interval at which a store's heartbeat to PD is triggered |
-| `raftstore.snap-mgr-gc-tick-interval` | The time interval at which the recycle of expired snapshot files is triggered |
-| `raftstore.snap-gc-timeout` | The longest time for which a snapshot file is saved |
-| `raftstore.lock-cf-compact-interval` | The time interval at which TiKV triggers a manual compaction for the Lock Column Family |
-| `raftstore.lock-cf-compact-bytes-threshold` | The size at which TiKV triggers a manual compaction for the Lock Column Family |
-| `raftstore.messages-per-tick` | The maximum number of messages processed per batch |
-| `raftstore.max-peer-down-duration` | The longest inactive duration allowed for a peer |
-| `raftstore.max-leader-missing-duration` | The longest duration allowed for a peer to be without a leader. If this value is exceeded, the peer verifies with PD whether it has been deleted. |
-| `raftstore.abnormal-leader-missing-duration` | The normal duration allowed for a peer to be without a leader. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs. |
-| `raftstore.peer-stale-state-check-interval` | The time interval to check whether a peer is without a leader |
-| `raftstore.consistency-check-interval` | The time interval to check consistency (**NOT** recommended because it is not compatible with the garbage collection in TiDB) |
-| `raftstore.raft-store-max-leader-lease` | The longest trusted period of a Raft leader |
-| `raftstore.merge-check-tick-interval` | The time interval for merge check |
-| `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
-| `raftstore.local-read-batch-size` | The maximum number of read requests processed in one batch |
-| `raftstore.hibernate-timeout` | The shortest wait duration before entering hibernation upon start. Within this duration, TiKV does not hibernate (not released). |
-| `raftstore.apply-pool-size` | The number of apply thread pool size |
-| `raftstore.store-pool-size` | The number of store thread pool size |
-| `coprocessor.split-region-on-table` | Enables to split Region by table |
-| `coprocessor.batch-split-limit` | The threshold of Region split in batches |
-| `coprocessor.region-max-size` | The maximum size of a Region |
-| `coprocessor.region-split-size` | The size of the newly split Region |
-| `coprocessor.region-max-keys` | The maximum number of keys allowed in a Region |
-| `coprocessor.region-split-keys` | The number of keys in the newly split Region |
-| `pessimistic-txn.wait-for-lock-timeout` | The longest duration that a pessimistic transaction waits for the lock |
-| `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
-| `pessimistic-txn.pipelined` | Whether to enable the pipelined pessimistic locking process |
-| `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
-| `gc.batch-keys` | The number of keys processed in one batch |
-| `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
-| `gc.enable-compaction-filter` | Whether to enable compaction filter |
-| `gc.compaction-filter-skip-version-check` | Whether to skip the cluster version check of compaction filter (not released) |
-| `{db-name}.max-total-wal-size` | The maximum size of total WAL |
-| `{db-name}.max-background-jobs` | The number of background threads in RocksDB |
-| `{db-name}.max-background-flushes` | The maximum number of flush threads in RocksDB |
-| `{db-name}.max-open-files` | The total number of files that RocksDB can open |
-| `{db-name}.compaction-readahead-size` | The size of `readahead` during compaction |
-| `{db-name}.bytes-per-sync` | The rate at which OS incrementally synchronizes files to disk while these files are being written asynchronously |
-| `{db-name}.wal-bytes-per-sync` | The rate at which OS incrementally synchronizes WAL files to disk while the WAL files are being written |
-| `{db-name}.writable-file-max-buffer-size` | The maximum buffer size used in WritableFileWrite |
-| `{db-name}.{cf-name}.block-cache-size` | The cache size of a block |
-| `{db-name}.{cf-name}.write-buffer-size` | The size of a memtable |
-| `{db-name}.{cf-name}.max-write-buffer-number` | The maximum number of memtables |
-| `{db-name}.{cf-name}.max-bytes-for-level-base` | The maximum number of bytes at base level (L1) |
-| `{db-name}.{cf-name}.target-file-size-base` | The size of the target file at base level |
-| `{db-name}.{cf-name}.level0-file-num-compaction-trigger` | The maximum number of files at L0 that trigger compaction |
-| `{db-name}.{cf-name}.level0-slowdown-writes-trigger` | The maximum number of files at L0 that trigger write stall |
-| `{db-name}.{cf-name}.level0-stop-writes-trigger` | The maximum number of files at L0 that completely block write |
-| `{db-name}.{cf-name}.max-compaction-bytes` | The maximum number of bytes written into disk per compaction |
-| `{db-name}.{cf-name}.max-bytes-for-level-multiplier` | The default amplification multiple for each layer |
-| `{db-name}.{cf-name}.disable-auto-compactions` | Enables or disables automatic compaction |
-| `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
-| `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
-| `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
-| `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
-| `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
-| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
-| `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for a consecutive period of time, this Region should be split. |
-| `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible. The smaller the value is, the more balanced the load is. But setting it too small might cause split failure. |
-| `split.split-contained-score` | The parameter of `load-base-split`. The smaller the value, the fewer cross-Region visits after Region split. |
-| `cdc.min-ts-interval` | The time interval at which Resolved TS is forwarded  |
-| `cdc.old-value-cache-memory-quota` | The upper limit of memory occupied by the TiCDC Old Value entries |
-| `cdc.sink-memory-quota` | The upper limit of memory occupied by TiCDC data change events |
-| `cdc.incremental-scan-speed-limit` | The upper limit on the speed of incremental scanning for historical data |
-| `cdc.incremental-scan-concurrency` | The maximum number of concurrent incremental scanning tasks for historical data |
+| Configuration / コンフィグレーション項目                              | 説明                                                                                                                    |
+| :-------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `raftstore.raft-entry-max-size`                           | 単一ログの最大サイズ                                                                                                            |
+| `raftstore.raft-log-gc-tick-interval`                     | Raftログを削除するポーリングタスクがスケジュールされる時間間隔                                                                                     |
+| `raftstore.raft-log-gc-threshold`                         | 残りのRaftログの最大許容数のソフト制限                                                                                                 |
+| `raftstore.raft-log-gc-count-limit`                       | 残りのRaftログの許容数の厳しい制限                                                                                                   |
+| `raftstore.raft-log-gc-size-limit`                        | 残りのRaftログの許容サイズの厳しい制限                                                                                                 |
+| `raftstore.raft-entry-cache-life-time`                    | メモリ内のログキャッシュに許可される最大残り時間                                                                                              |
+| `raftstore.split-region-check-tick-interval`              | リージョン分割が必要かどうかを確認する時間間隔                                                                                               |
+| `raftstore.region-split-check-diff`                       | リージョン分割前にリージョンデータが超過できる最大値                                                                                            |
+| `raftstore.region-compact-check-interval`                 | RocksDB圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔                                                                                 |
+| `raftstore.region-compact-check-step`                     | 手動圧縮の各ラウンドで一度にチェックされるリージョンの数                                                                                          |
+| `raftstore.region-compact-min-tombstones`                 | RocksDBの圧縮をトリガーするために必要なトゥームストーンの数                                                                                     |
+| `raftstore.region-compact-tombstones-percent`             | RocksDBの圧縮をトリガーするために必要なトゥームストーンの割合                                                                                    |
+| `raftstore.pd-heartbeat-tick-interval`                    | リージョンのPDへのハートビートがトリガーされる時間間隔                                                                                          |
+| `raftstore.pd-store-heartbeat-tick-interval`              | 店舗のPDへのハートビートがトリガーされる時間間隔                                                                                             |
+| `raftstore.snap-mgr-gc-tick-interval`                     | 期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔                                                                                   |
+| `raftstore.snap-gc-timeout`                               | スナップショットファイルが保存される最長時間                                                                                                |
+| `raftstore.lock-cf-compact-interval`                      | TiKVがロックカラムファミリの手動圧縮をトリガーする時間間隔                                                                                       |
+| `raftstore.lock-cf-compact-bytes-threshold`               | TiKVがロックカラムファミリの手動圧縮をトリガーするサイズ                                                                                        |
+| `raftstore.messages-per-tick`                             | バッチごとに処理されるメッセージの最大数                                                                                                  |
+| `raftstore.max-peer-down-duration`                        | ピアに許可されている最長の非アクティブ期間                                                                                                 |
+| `raftstore.max-leader-missing-duration`                   | ピアがリーダーなしでいることができる最長の期間。この値を超えると、ピアはPDで値が削除されたかどうかを確認します。                                                             |
+| `raftstore.abnormal-leader-missing-duration`              | 通常の期間では、ピアがリーダーなしでいることができました。この値を超えると、ピアは異常と見なされ、メトリックとログにマークされます。                                                    |
+| `raftstore.peer-stale-state-check-interval`               | ピアにリーダーがいないかどうかを確認するための時間間隔                                                                                           |
+| `raftstore.consistency-check-interval`                    | 整合性をチェックする時間間隔（TiDBのガベージコレクションと互換性がないため、お勧めし**ません**）                                                                  |
+| `raftstore.raft-store-max-leader-lease`                   | ラフトリーダーの最長の信頼できる期間                                                                                                    |
+| `raftstore.merge-check-tick-interval`                     | マージチェックの時間間隔                                                                                                          |
+| `raftstore.cleanup-import-sst-interval`                   | 期限切れのSSTファイルをチェックする時間間隔                                                                                               |
+| `raftstore.local-read-batch-size`                         | 1つのバッチで処理される読み取り要求の最大数                                                                                                |
+| `raftstore.hibernate-timeout`                             | 開始時に休止状態に入るまでの最短待機時間。この期間内、TiKVは休止状態になりません（解放されません）。                                                                  |
+| `raftstore.apply-pool-size`                               | 適用スレッドプールサイズの数                                                                                                        |
+| `raftstore.store-pool-size`                               | ストアスレッドプールサイズの数                                                                                                       |
+| `coprocessor.split-region-on-table`                       | テーブルごとにリージョンを分割できます                                                                                                   |
+| `coprocessor.batch-split-limit`                           | バッチで分割されたリージョンのしきい値                                                                                                   |
+| `coprocessor.region-max-size`                             | リージョンの最大サイズ                                                                                                           |
+| `coprocessor.region-split-size`                           | 新しく分割されたリージョンのサイズ                                                                                                     |
+| `coprocessor.region-max-keys`                             | リージョンで許可されるキーの最大数                                                                                                     |
+| `coprocessor.region-split-keys`                           | 新しく分割されたリージョンのキーの数                                                                                                    |
+| `pessimistic-txn.wait-for-lock-timeout`                   | 悲観的なトランザクションがロックを待機する最長の期間                                                                                            |
+| `pessimistic-txn.wake-up-delay-duration`                  | 悲観的なトランザクションが起こされるまでの期間                                                                                               |
+| `pessimistic-txn.pipelined`                               | パイプライン化された悲観的ロックプロセスを有効にするかどうか                                                                                        |
+| `gc.ratio-threshold`                                      | リージョンGCがスキップされるしきい値（GCバージョンの数/キーの数）                                                                                   |
+| `gc.batch-keys`                                           | 1つのバッチで処理されるキーの数                                                                                                      |
+| `gc.max-write-bytes-per-sec`                              | 1秒あたりにRocksDBに書き込むことができる最大バイト数                                                                                        |
+| `gc.enable-compaction-filter`                             | 圧縮フィルターを有効にするかどうか                                                                                                     |
+| `gc.compaction-filter-skip-version-check`                 | 圧縮フィルターのクラスタバージョンチェックをスキップするかどうか（リリースされていません）                                                                         |
+| `{db-name}.max-total-wal-size`                            | 合計WALの最大サイズ                                                                                                           |
+| `{db-name}.max-background-jobs`                           | RocksDBのバックグラウンドスレッドの数                                                                                                |
+| `{db-name}.max-background-flushes`                        | RocksDBのフラッシュスレッドの最大数                                                                                                 |
+| `{db-name}.max-open-files`                                | RocksDBが開くことができるファイルの総数                                                                                               |
+| `{db-name}.compaction-readahead-size`                     | 圧縮時のサイズは`readahead`                                                                                                   |
+| `{db-name}.bytes-per-sync`                                | これらのファイルが非同期で書き込まれている間に、OSがファイルをディスクに段階的に同期する速度                                                                       |
+| `{db-name}.wal-bytes-per-sync`                            | WALファイルの書き込み中にOSがWALファイルをディスクに段階的に同期する速度                                                                              |
+| `{db-name}.writable-file-max-buffer-size`                 | WritableFileWriteで使用される最大バッファサイズ                                                                                      |
+| `{db-name}.{cf-name}.block-cache-size`                    | ブロックのキャッシュサイズ                                                                                                         |
+| `{db-name}.{cf-name}.write-buffer-size`                   | memtableのサイズ                                                                                                          |
+| `{db-name}.{cf-name}.max-write-buffer-number`             | memtableの最大数                                                                                                          |
+| `{db-name}.{cf-name}.max-bytes-for-level-base`            | 基本レベル（L1）での最大バイト数                                                                                                     |
+| `{db-name}.{cf-name}.target-file-size-base`               | 基本レベルでのターゲットファイルのサイズ                                                                                                  |
+| `{db-name}.{cf-name}.level0-file-num-compaction-trigger`  | 圧縮をトリガーするL0でのファイルの最大数                                                                                                 |
+| `{db-name}.{cf-name}.level0-slowdown-writes-trigger`      | 書き込みストールをトリガーするL0でのファイルの最大数                                                                                           |
+| `{db-name}.{cf-name}.level0-stop-writes-trigger`          | 書き込みを完全にブロックするL0でのファイルの最大数                                                                                            |
+| `{db-name}.{cf-name}.max-compaction-bytes`                | 圧縮ごとにディスクに書き込まれる最大バイト数                                                                                                |
+| `{db-name}.{cf-name}.max-bytes-for-level-multiplier`      | 各レイヤーのデフォルトの増幅倍数                                                                                                      |
+| `{db-name}.{cf-name}.disable-auto-compactions`            | 自動圧縮を有効または無効にします                                                                                                      |
+| `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | 保留中の圧縮バイトのソフト制限                                                                                                       |
+| `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | 保留中の圧縮バイトのハード制限                                                                                                       |
+| `{db-name}.{cf-name}.titan.blob-run-mode`                 | BLOBファイルを処理するモード                                                                                                      |
+| `storage.block-cache.capacity`                            | 共有ブロックキャッシュのサイズ（v4.0.3以降でサポート）                                                                                        |
+| `backup.num-threads`                                      | バックアップスレッドの数（v4.0.3以降でサポート）                                                                                           |
+| `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取り要求のQPSが連続して`qps-threshold`を超える場合、このリージョンを分割する必要があります。                   |
+| `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取り要求のトラフィックが連続して`byte-threshold`を超える場合、このリージョンを分割する必要があります。               |
+| `split.split-balance-score`                               | 2つの分割されたリージョンの負荷が可能な限りバランスが取れていることを保証する`load-base-split`のパラメーター。値が小さいほど、負荷のバランスが取れています。ただし、設定が小さすぎると、分割が失敗する可能性があります。 |
+| `split.split-contained-score`                             | `load-base-split`のパラメータ。値が小さいほど、リージョン分割後のリージョン間の訪問は少なくなります。                                                           |
+| `cdc.min-ts-interval`                                     | 解決済みTSが転送される時間間隔                                                                                                      |
+| `cdc.old-value-cache-memory-quota`                        | TiCDCOldValueエントリが占有するメモリの上限                                                                                          |
+| `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占めるメモリの上限                                                                                              |
+| `cdc.incremental-scan-speed-limit`                        | 履歴データの増分スキャンの速度の上限                                                                                                    |
+| `cdc.incremental-scan-concurrency`                        | 履歴データの同時増分スキャンタスクの最大数                                                                                                 |
 
-In the table above, parameters with the `{db-name}` or `{db-name}.{cf-name}` prefix are configurations related to RocksDB. The optional values of `db-name` are `rocksdb` and `raftdb`.
+上記の表で、プレフィックスが`{db-name}`または`{db-name}.{cf-name}`のパラメーターは、RocksDBに関連する構成です。 `db-name`のオプション値は`rocksdb`と`raftdb`です。
 
-- When `db-name` is `rocksdb`, the optional values of `cf-name` are `defaultcf`, `writecf`, `lockcf`, and `raftcf`.
-- When `db-name` is `raftdb`, the value of `cf-name` can be `defaultcf`.
+-   `db-name`が`rocksdb`の場合、 `cf-name`のオプション値は`defaultcf` 、 `writecf` `lockcf` `raftcf` 。
+-   `db-name`が`raftdb`の場合、 `cf-name`の値は`defaultcf`になります。
 
-For detailed parameter description, refer to [TiKV Configuration File](/tikv-configuration-file.md).
+パラメータの詳細については、 [TiKVConfiguration / コンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
 
-### Modify PD configuration online
+### PD構成をオンラインで変更する {#modify-pd-configuration-online}
 
-Currently, PD does not support the separate configuration for each instance. All PD instances share the same configuration.
+現在、PDはインスタンスごとに個別の構成をサポートしていません。すべてのPDインスタンスは同じ構成を共有します。
 
-You can modify the PD configurations using the following statement:
+次のステートメントを使用して、PD構成を変更できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set config pd `log.level`='info'
 ```
 
-If the modification is successful, `Query OK` is returned:
+変更が成功すると、 `Query OK`が返されます。
 
 ```sql
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-If a configuration item is successfully modified, the result is persisted in etcd instead of in the configuration file; the configuration in etcd will prevail in the subsequent operations. The names of some configuration items might conflict with TiDB reserved words. For these configuration items, use backtick `` ` `` to enclose them. For example, `` `schedule.leader-schedule-limit` ``.
+構成アイテムが正常に変更された場合、結果は構成ファイルではなくetcdに保持されます。 etcdの構成は、後続の操作で優先されます。一部の構成アイテムの名前は、TiDBの予約語と競合する可能性があります。これらの構成アイテムについては、バックティック`` ` ``を使用して囲みます。たとえば、 `` `schedule.leader-schedule-limit` `` 。
 
-The following PD configuration items can be modified online:
+次のPD構成アイテムはオンラインで変更できます。
 
-| Configuration item | Description |
-| :--- | :--- |
-| `log.level` | The log level |
-| `cluster-version` | The cluster version |
-| `schedule.max-merge-region-size` | Controls the size limit of `Region Merge` (in MB) |
-| `schedule.max-merge-region-keys` | Specifies the maximum numbers of the `Region Merge` keys |
-| `schedule.patrol-region-interval` | Determines the frequency at which `replicaChecker` checks the health state of a Region |
-| `schedule.split-merge-interval` | Determines the time interval of performing split and merge operations on the same Region |
-| `schedule.max-snapshot-count` | Determines the maximum number of snapshots that a single store can send or receive at the same time |
-| `schedule.max-pending-peer-count` | Determines the maximum number of pending peers in a single store |
-| `schedule.max-store-down-time` | The downtime after which PD judges that the disconnected store can not be recovered |
-| `schedule.leader-schedule-policy` | Determines the policy of Leader scheduling |
-| `schedule.leader-schedule-limit` | The number of Leader scheduling tasks performed at the same time |
-| `schedule.region-schedule-limit` | The number of Region scheduling tasks performed at the same time |
-| `schedule.replica-schedule-limit` | The number of Replica scheduling tasks performed at the same time |
-| `schedule.merge-schedule-limit` | The number of the `Region Merge` scheduling tasks performed at the same time |
-| `schedule.hot-region-schedule-limit` | The number of hot Region scheduling tasks performed at the same time |
-| `schedule.hot-region-cache-hits-threshold` | Determines the threshold at which a Region is considered a hot spot |
-| `schedule.high-space-ratio` | The threshold ratio below which the capacity of the store is sufficient |
-| `schedule.low-space-ratio` | The threshold ratio above which the capacity of the store is insufficient |
-| `schedule.tolerant-size-ratio` | Controls the `balance` buffer size|
-| `schedule.enable-remove-down-replica` | Determines whether to enable the feature that automatically removes `DownReplica` |
-| `schedule.enable-replace-offline-replica` | Determines whether to enable the feature that migrates `OfflineReplica` |
-| `schedule.enable-make-up-replica` | Determines whether to enable the feature that automatically supplements replicas |
-| `schedule.enable-remove-extra-replica` | Determines whether to enable the feature that removes extra replicas |
-| `schedule.enable-location-replacement` | Determines whether to enable isolation level check |
-| `schedule.enable-cross-table-merge` | Determines whether to enable cross-table merge |
-| `schedule.enable-one-way-merge` | Enables one-way merge, which only allows merging with the next adjacent Region |
-| `replication.max-replicas` | Sets the maximum number of replicas |
-| `replication.location-labels` | The topology information of a TiKV cluster |
-| `replication.enable-placement-rules` | Enables Placement Rules |
-| `replication.strictly-match-label` | Enables the label check |
-| `pd-server.use-region-storage` | Enables independent Region storage |
-| `pd-server.max-gap-reset-ts` | Sets the maximum interval of resetting timestamp (BR) |
-| `pd-server.key-type` | Sets the cluster key type |
-| `pd-server.metric-storage` | Sets the storage address of the cluster metrics |
-| `pd-server.dashboard-address` | Sets the dashboard address |
-| `replication-mode.replication-mode` | Sets the backup mode |
+| Configuration / コンフィグレーション項目               | 説明                                              |
+| :----------------------------------------- | :---------------------------------------------- |
+| `log.level`                                | ログレベル                                           |
+| `cluster-version`                          | クラスタバージョン                                       |
+| `schedule.max-merge-region-size`           | `Region Merge`のサイズ制限を制御します（MB単位）                |
+| `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します                      |
+| `schedule.patrol-region-interval`          | `replicaChecker`がリージョンのヘルス状態をチェックする頻度を決定します     |
+| `schedule.split-merge-interval`            | 同じリージョンで分割およびマージ操作を実行する時間間隔を決定します               |
+| `schedule.max-snapshot-count`              | 1つのストアが同時に送信または受信できるスナップショットの最大数を決定します          |
+| `schedule.max-pending-peer-count`          | 1つのストアで保留中のピアの最大数を決定します                         |
+| `schedule.max-store-down-time`             | 切断されたストアを回復できないとPDが判断するまでのダウンタイム                |
+| `schedule.leader-schedule-policy`          | リーダースケジューリングのポリシーを決定します                         |
+| `schedule.leader-schedule-limit`           | 同時に実行されたリーダースケジューリングタスクの数                       |
+| `schedule.region-schedule-limit`           | 同時に実行されたリージョンスケジューリングタスクの数                      |
+| `schedule.replica-schedule-limit`          | 同時に実行されたレプリカスケジューリングタスクの数                       |
+| `schedule.merge-schedule-limit`            | 同時に実行された`Region Merge`のスケジューリングタスクの数            |
+| `schedule.hot-region-schedule-limit`       | 同時に実行されたホットリージョンスケジューリングタスクの数                   |
+| `schedule.hot-region-cache-hits-threshold` | リージョンがホットスポットと見なされるしきい値を決定します                   |
+| `schedule.high-space-ratio`                | それを下回るとストアの容量が十分になるしきい値比率                       |
+| `schedule.low-space-ratio`                 | それを超えると店舗の容量が不足するしきい値比率                         |
+| `schedule.tolerant-size-ratio`             | `balance`のバッファサイズを制御します                         |
+| `schedule.enable-remove-down-replica`      | `DownReplica`を自動的に削除する機能を有効にするかどうかを決定します        |
+| `schedule.enable-replace-offline-replica`  | 移行する機能を有効にするかどうかを決定します`OfflineReplica`          |
+| `schedule.enable-make-up-replica`          | レプリカを自動的に補足する機能を有効にするかどうかを決定します                 |
+| `schedule.enable-remove-extra-replica`     | 余分なレプリカを削除する機能を有効にするかどうかを決定します                  |
+| `schedule.enable-location-replacement`     | 分離レベルチェックを有効にするかどうかを決定します                       |
+| `schedule.enable-cross-table-merge`        | クロステーブルマージを有効にするかどうかを決定します                      |
+| `schedule.enable-one-way-merge`            | 一方向のマージを有効にします。これにより、次の隣接するリージョンとのマージのみが可能になります |
+| `replication.max-replicas`                 | レプリカの最大数を設定します                                  |
+| `replication.location-labels`              | TiKVクラスタのトポロジー情報                                |
+| `replication.enable-placement-rules`       | 配置ルールを有効にします                                    |
+| `replication.strictly-match-label`         | ラベルチェックを有効にします                                  |
+| `pd-server.use-region-storage`             | 独立したリージョンストレージを有効にします                           |
+| `pd-server.max-gap-reset-ts`               | タイムスタンプ（BR）をリセットする最大間隔を設定します                    |
+| `pd-server.key-type`                       | クラスタキータイプを設定します                                 |
+| `pd-server.metric-storage`                 | クラスタメトリックのストレージアドレスを設定します                       |
+| `pd-server.dashboard-address`              | ダッシュボードアドレスを設定します                               |
+| `replication-mode.replication-mode`        | バックアップモードを設定します                                 |
 
-For detailed parameter description, refer to [PD Configuration File](/pd-configuration-file.md).
+パラメータの詳細については、 [PDConfiguration / コンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 
-### Modify TiDB configuration online
+### TiDB構成をオンラインで変更する {#modify-tidb-configuration-online}
 
-Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [system variables](/system-variables.md).
+現在、TiDB構成を変更する方法は、TiKVおよびPD構成を変更する方法とは異なります。 [システム変数](/system-variables.md)を使用してTiDB構成を変更できます。
 
-The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. 
+次の例は、 `tidb_slow_log_threshold`変数を使用して`slow-threshold`をオンラインで変更する方法を示しています。
 
-The default value of `slow-threshold` is 300 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
+デフォルト値の`slow-threshold`は300ミリ秒です。 `tidb_slow_log_threshold`を使用して200ミリ秒に設定できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set tidb_slow_log_threshold = 200;
@@ -292,7 +292,7 @@ set tidb_slow_log_threshold = 200;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select @@tidb_slow_log_threshold;
@@ -307,11 +307,6 @@ select @@tidb_slow_log_threshold;
 1 row in set (0.00 sec)
 ```
 
-The following TiDB configuration items can be modified online:
+次のTiDB構成アイテムはオンラインで変更できます。
 
-| Configuration item | SQL variable | Description |
-| :--- | :--- |
-| `mem-quota-query` | `tidb_mem_quota_query` | The memory usage limit of a query |
-| `log.enable-slow-log` | `tidb_enable_slow_log` | Whether to enable slow log |
-| `log.slow-threshold` | `tidb_slow_log_threshold` | The threshold of slow log |
-| `log.expensive-threshold` | `tidb_expensive_query_time_threshold` | The threshold of a expensive query |
+|Configuration / コンフィグレーション項目| SQL変数|説明| | ：--- | ：--- | | `mem-quota-query` | `tidb_mem_quota_query` |クエリのメモリ使用制限| | `log.enable-slow-log` | `tidb_enable_slow_log` |スローログを有効にするかどうか| | `log.slow-threshold` | `tidb_slow_log_threshold` |遅いログのしきい値| | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` |高価なクエリのしきい値|

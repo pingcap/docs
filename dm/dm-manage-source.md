@@ -3,15 +3,15 @@ title: Manage Data Source Configurations
 summary: Learn how to manage upstream MySQL instances in TiDB Data Migration.
 ---
 
-# Manage Data Source Configurations
+# データソース構成の管理 {#manage-data-source-configurations}
 
-This document introduces how to manage data source configurations, including encrypting the MySQL password, operating the data source, and changing the bindings between upstream MySQL instances and DM-workers using [dmctl](/dm/dmctl-introduction.md).
+このドキュメントでは、MySQLパスワードの暗号化、データソースの操作、 [dmctl](/dm/dmctl-introduction.md)を使用したアップストリームMySQLインスタンスとDMワーカー間のバインディングの変更など、データソース構成を管理する方法を紹介します。
 
-## Encrypt the database password
+## データベースのパスワードを暗号化する {#encrypt-the-database-password}
 
-In DM configuration files, it is recommended to use the password encrypted with dmctl. For one original password, the encrypted password is different after each encryption.
+DM構成ファイルでは、dmctlで暗号化されたパスワードを使用することをお勧めします。 1つの元のパスワードの場合、暗号化されたパスワードは暗号化ごとに異なります。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./dmctl -encrypt 'abc!@#123'
@@ -21,9 +21,9 @@ In DM configuration files, it is recommended to use the password encrypted with 
 MKxn0Qo3m3XOyjCnhEMtsUCm83EhGQDZ/T4=
 ```
 
-## Operate data source
+## データソースを操作する {#operate-data-source}
 
-You can use the `operate-source` command to load, list or remove the data source configurations to the DM cluster.
+`operate-source`コマンドを使用して、データソース構成をDMクラスタにロード、リスト、または削除できます。
 
 {{< copyable "" >}}
 
@@ -45,23 +45,23 @@ Global Flags:
   -s, --source strings   MySQL Source ID
 ```
 
-### Flags description
+### フラグの説明 {#flags-description}
 
-+ `create`: Creates one or more upstream database source(s). When creating multiple data sources fails, DM rolls back to the state where the command was not executed.
+-   `create` ：1つ以上のアップストリームデータベースソースを作成します。複数のデータソースの作成に失敗すると、DMはコマンドが実行されなかった状態にロールバックします。
 
-+ `update`: Updates an upstream database source.
+-   `update` ：アップストリームデータベースソースを更新します。
 
-+ `stop`: Stops one or more upstream database source(s). When stopping multiple data sources fails, some data sources might be stopped.
+-   `stop` ：1つ以上のアップストリームデータベースソースを停止します。複数のデータソースの停止に失敗すると、一部のデータソースが停止する場合があります。
 
-+ `show`: Shows the added data source and the corresponding DM-worker.
+-   `show` ：追加されたデータソースと対応するDMワーカーを表示します。
 
-+ `config-file`: Specifies the file path of `source.yaml` and can pass multiple file paths.
+-   `config-file` ： `source.yaml`のファイルパスを指定し、複数のファイルパスを渡すことができます。
 
-+ `--print-sample-config`: Prints the sample configuration file. This parameter ignores other parameters.
+-   `--print-sample-config` ：サンプル設定ファイルを出力します。このパラメーターは他のパラメーターを無視します。
 
-### Usage example
+### 使用例 {#usage-example}
 
-Use the following `operate-source` command to create a source configuration file:
+次の`operate-source`のコマンドを使用して、ソース構成ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -69,9 +69,9 @@ Use the following `operate-source` command to create a source configuration file
 operate-source create ./source.yaml
 ```
 
-For the configuration of `source.yaml`, refer to [Upstream Database Configuration File Introduction](/dm/dm-source-configuration-file.md).
+`source.yaml`の構成については、 [アップストリームデータベースConfiguration / コンフィグレーションファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
 
-The following is an example of the returned result:
+返される結果の例を次に示します。
 
 {{< copyable "" >}}
 
@@ -90,13 +90,13 @@ The following is an example of the returned result:
 }
 ```
 
-### Check data source configurations
+### データソース構成を確認する {#check-data-source-configurations}
 
-> **Note:**
+> **ノート：**
 >
-> The `get-config` command is only supported in DM v2.0.1 and later versions.
+> `get-config`コマンドは、DMv2.0.1以降のバージョンでのみサポートされます。
 
-If you know the `source-id`, you can run `dmctl --master-addr <master-addr> get-config source <source-id>` to get the data source configuration.
+`source-id`がわかっている場合は、 `dmctl --master-addr <master-addr> get-config source <source-id>`を実行してデータソース構成を取得できます。
 
 {{< copyable "" >}}
 
@@ -119,7 +119,7 @@ get-config source mysql-replica-01
 }
 ```
 
-If you don't know the `source-id`, you can run `dmctl --master-addr <master-addr> operate-source show` to list all data sources first.
+`source-id`がわからない場合は、 `dmctl --master-addr <master-addr> operate-source show`を実行して、最初にすべてのデータソースを一覧表示できます。
 
 {{< copyable "" >}}
 
@@ -148,9 +148,9 @@ operate-source show
 }
 ```
 
-## Change the bindings between upstream MySQL instances and DM-workers
+## アップストリームのMySQLインスタンスとDMワーカー間のバインディングを変更します {#change-the-bindings-between-upstream-mysql-instances-and-dm-workers}
 
-You can use the `transfer-source` command to change the bindings between upstream MySQL instances and DM-workers.
+`transfer-source`コマンドを使用して、アップストリームのMySQLインスタンスとDMワーカー間のバインディングを変更できます。
 
 {{< copyable "" >}}
 
@@ -168,11 +168,11 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-Before transferring, DM checks whether the worker to be unbound still has running tasks. If the worker has any running tasks, you need to [pause the tasks](/dm/dm-pause-task.md) first, change the binding, and then [resume the tasks](/dm/dm-resume-task.md).
+転送する前に、DMは、バインド解除されるワーカーにまだ実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、最初に[タスクを一時停止します](/dm/dm-pause-task.md)を実行し、バインディングを変更してから[タスクを再開する](/dm/dm-resume-task.md)を実行する必要があります。
 
-### Usage example
+### 使用例 {#usage-example}
 
-If you do not know the bindings of DM-workers, you can run `dmctl --master-addr <master-addr> list-member --worker` to list the current bindings of all workers.
+DMワーカーのバインディングがわからない場合は、 `dmctl --master-addr <master-addr> list-member --worker`を実行して、すべてのワーカーの現在のバインディングを一覧表示できます。
 
 {{< copyable "" >}}
 
@@ -208,7 +208,7 @@ list-member --worker
 }
 ```
 
-In the above example, `mysql-replica-01` is bound to `dm-worker-1`. The below command transfers the binding worker of `mysql-replica-01` to `dm-worker-2`.
+上記の例では、 `mysql-replica-01`は`dm-worker-1`にバインドされています。次のコマンドは、 `mysql-replica-01`から`dm-worker-2`のバインディングワーカーを転送します。
 
 {{< copyable "" >}}
 
@@ -223,7 +223,7 @@ transfer-source mysql-replica-01 dm-worker-2
 }
 ```
 
-Check whether the command takes effect by running `dmctl --master-addr <master-addr> list-member --worker`.
+`dmctl --master-addr <master-addr> list-member --worker`を実行して、コマンドが有効になるかどうかを確認します。
 
 {{< copyable "" >}}
 

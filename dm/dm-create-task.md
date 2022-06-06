@@ -3,9 +3,9 @@ title: Create a Data Migration Task
 summary: Learn how to create a data migration task in TiDB Data Migration.
 ---
 
-# Create a Data Migration Task
+# データ移行タスクを作成する {#create-a-data-migration-task}
 
-You can use the `start-task` command to create a data migration task. When the data migration task is started, DM [prechecks privileges and configurations](/dm/dm-precheck.md).
+`start-task`コマンドを使用して、データ移行タスクを作成できます。データ移行タスクが開始されると、 [特権と構成を事前にチェックします](/dm/dm-precheck.md) 。
 
 {{< copyable "" >}}
 
@@ -24,7 +24,7 @@ Global Flags:
   -s, --source strings   MySQL Source ID
 ```
 
-## Usage example
+## 使用例 {#usage-example}
 
 {{< copyable "" >}}
 
@@ -32,13 +32,13 @@ Global Flags:
 start-task [ -s "mysql-replica-01"] ./task.yaml
 ```
 
-## Flags description
+## フラグの説明 {#flags-description}
 
-- `-s`: (Optional) Specifies the MySQL source to execute `task.yaml`. If it is set, the command only starts the subtasks of the specified task on the MySQL source.
-- `config-file`: (Required) Specifies the file path of `task.yaml`.
-- `remove-meta`: (Optional) Specifies whether to remove the task's previous metadata when starting the task.
+-   `-s` :(オプション）実行するMySQLソースを指定します`task.yaml` 。設定されている場合、コマンドはMySQLソースで指定されたタスクのサブタスクのみを開始します。
+-   `config-file` :(必須） `task.yaml`のファイルパスを指定します。
+-   `remove-meta` :(オプション）タスクの開始時にタスクの以前のメタデータを削除するかどうかを指定します。
 
-## Returned results
+## 返された結果 {#returned-results}
 
 {{< copyable "" >}}
 

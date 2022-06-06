@@ -3,59 +3,59 @@ title: TiDB Ecosystem Tools Overview
 summary: Learn an overview of the TiDB ecosystem tools.
 ---
 
-# TiDB Ecosystem Tools Overview
+# TiDBエコシステムツールの概要 {#tidb-ecosystem-tools-overview}
 
-TiDB provides multiple data migration tools for different scenarios such as full data migration, incremental data migration, backup and restore, and data replication.
+TiDBは、完全なデータ移行、増分データ移行、バックアップと復元、データ複製など、さまざまなシナリオに対応する複数のデータ移行ツールを提供します。
 
-This document introduces the user scenarios, advantages, and limitations of these tools. You can choose the right tool according to your needs.
+このドキュメントでは、これらのツールのユーザーシナリオ、利点、および制限を紹介します。必要に応じて適切なツールを選択できます。
 
 <!--The following diagram shows the user scenario of each migration tool.
 
 !TiDB Migration Tools media/migration-tools.png-->
 
-The following table introduces the user scenarios, the supported upstreams and downstreams of migration tools.
+次の表は、ユーザーシナリオ、サポートされている移行ツールのアップストリームおよびダウンストリームを示しています。
 
-| Tool name | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
-|:---|:---|:---|:---|:---|:---|
-|  [TiDB Data Migration (DM)](/dm/dm-overview.md)| Data migration from MySQL-compatible databases to TiDB |  MySQL, MariaDB, Aurora, MySQL| TiDB   | <ul><li>A convenient and unified data migration task management tool that supports full data migration and incremental replication</li><li>Support filtering tables and operations</li><li>Support shard merge and migration</li></ul>  | Data import speed is roughly the same as that of TiDB Lighting's TiDB-backend, and much lower than that of TiDB Lighting's Local-backend. So it is recommended to use DM to migrate full data with a size of less than 1 TiB. |
-| [Dumpling](/dumpling-overview.md) | Full data export from MySQL or TiDB | MySQL, TiDB| SQL, CSV  | <ul><li>Support the table-filter feature that enables you to filter data easier</li><li>Support exporting data to Amazon S3</li></ul>|<ul><li>If you want to restore the exported data to a database other than TiDB, it is recommended to use Dumpling.</li><li>If you want to restore the exported data to another TiDB cluster, it is recommended to use Backup & Restore (BR).</li></ul> |
-| [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)| Full data import into TiDB | <ul><li>Files exported from Dumpling</li><li>CSV files</li><li>Data read from local disks or Amazon S3</li></ul> | TiDB | <ul><li>Support quickly importing a large amount of data and quickly initializing a specific table in a TiDB cluster </li><li>Support checkpoints to store the import progress, so that `tidb-lightning` continues importing from where it lefts off after restarting</li><li>Support data filtering</li></ul> | <ul><li>If Local-backend is used for data import, during the import process, the TiDB cluster cannot provide services.</li><li> If you do not want the TiDB services to be impacted, perform the data import according to TiDB Lightning TiDB-backend.</li></ul> |
-|[Backup & Restore (BR)](/br/backup-and-restore-tool.md) | Backup and restore for TiDB clusters with a huge data size | TiDB| SST, backup.meta files, backup.lock files|<ul><li>Suitable for restoring data to another TiDB cluster</li><li>Support backing up data to an external storage for disaster recovery</li></ul> | <ul><li>When BR restores data to the upstream cluster of TiCDC or Drainer, the restored data cannot be replicated to the downstream by TiCDC or Drainer.</li><li>BR supports operations only between clusters that have the same `new_collations_enabled_on_first_bootstrap` value.</li></ul> |
-| [TiCDC](/ticdc/ticdc-overview.md)| This tool is implemented by pulling TiKV change logs. It can restore data to a consistent state with any upstream TSO, and support other systems to subscribe to data changes.|TiDB | TiDB, MySQL, Apache Pulsar, Kafka, Confluent| Provide TiCDC Open Protocol  | TiCDC only replicates tables that have at least one valid index. The following scenarios are not supported:<ul><li>the TiKV cluster that uses RawKV alone.</li><li>the DDL operation `CREATE SEQUENCE` and the `SEQUENCE` function in TiDB.</li></ul>|
-|[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) | Incremental replication between TiDB clusters, such as using one TiDB cluster as the secondary cluster of another TiDB cluster | TiDB | TiDB, MySQL, Kafka, incremental backup files | Support real-time backup and restore. Back up TiDB cluster data to be restored for disaster recovery | Incompatible with some TiDB versions |
-|[sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) | Comparing data stored in the databases with the MySQL protocol |TiDB, MySQL | TiDB, MySQL| Can be used to repair data in the scenario where a small amount of data is inconsistent | <ul><li>Online check is not supported for data migration between MySQL and TiDB.</li><li>JSON, BIT, BINARY, BLOB and other types of data are not supported.</li></ul> |
+| ツール名                                                                        | ユーザーシナリオ                                                                                         | アップストリーム（またはインポートされたソースファイル）                                                            | ダウンストリーム（または出力ファイル）                      | 利点                                                                                                                                                                    | 制限                                                                                                                                                                                        |
+| :-------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [TiDBデータ移行（DM）](/dm/dm-overview.md)                                         | MySQL互換データベースからTiDBへのデータ移行                                                                       | MySQL、MariaDB、 Aurora、MySQL                                                             | TiDB                                     | <li>完全なデータ移行と増分レプリケーションをサポートする便利で統合されたデータ移行タスク管理ツール</li><li>フィルタリングテーブルと操作をサポートする</li><li>シャードのマージと移行をサポートする</li>                                                     | データのインポート速度は、TiDB LightingのTiDBバックエンドとほぼ同じであり、TiDBLightingのローカルバックエンドよりもはるかに低速です。したがって、DMを使用して、1TiB未満のサイズの完全なデータを移行することをお勧めします。                                                           |
+| [Dumpling](/dumpling-overview.md)                                           | MySQLまたはTiDBからの完全なデータエクスポート                                                                      | MySQL、TiDB                                                                              | SQL、CSV                                  | <li>データをより簡単にフィルタリングできるテーブルフィルター機能をサポートする</li><li>AmazonS3へのデータのエクスポートをサポート</li>                                                                                      | <li>エクスポートしたデータをTiDB以外のデータベースに復元する場合は、 Dumplingを使用することをお勧めします。</li><li>エクスポートしたデータを別のTiDBクラスタに復元する場合は、バックアップと復元（BR）を使用することをお勧めします。</li>                                                   |
+| [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)                | TiDBへの完全なデータインポート                                                                                | <li>Dumplingからエクスポートされたファイル</li><li>CSVファイル</li><li>ローカルディスクまたはAmazonS3から読み取られたデータ</li> | TiDB                                     | <li>大量のデータの迅速なインポートとTiDBクラスタの特定のテーブルの迅速な初期化をサポート</li><li>インポートの進行状況を保存するチェックポイントをサポートし、 `tidb-lightning`が再起動後に中断したところからインポートを続行できるようにします</li><li>データフィルタリングをサポート</li> | <li>ローカルバックエンドがデータのインポートに使用されている場合、インポートプロセス中、TiDBクラスタはサービスを提供できません。</li><li> TiDBサービスに影響を与えたくない場合は、TiDBLightningTiDBバックエンドに従ってデータのインポートを実行します。</li>                                      |
+| [バックアップと復元（BR）](/br/backup-and-restore-tool.md)                             | 巨大なデータサイズのTiDBクラスターのバックアップと復元                                                                    | TiDB                                                                                    | SST、backup.metaファイル、backup.lockファイル      | <li>別のTiDBクラスタにデータを復元するのに適しています</li><li>災害復旧のための外部ストレージへのデータのバックアップをサポート</li>                                                                                         | <li>BRがTiCDCまたはDrainerのアップストリームクラスタにデータを復元する場合、復元されたデータをTiCDCまたはDrainerによってダウンストリームに複製することはできません。</li><li> BRは、同じ`new_collations_enabled_on_first_bootstrap`値を持つクラスター間の操作のみをサポートします。</li> |
+| [TiCDC](/ticdc/ticdc-overview.md)                                           | このツールは、TiKV変更ログをプルすることによって実装されます。データをアップストリームTSOとの整合性のある状態に復元し、他のシステムがデータ変更をサブスクライブするのをサポートできます。 | TiDB                                                                                    | TiDB、MySQL、Apache Pulsar、Kafka、Confluent | TiCDCオープンプロトコルを提供する                                                                                                                                                   | TiCDCは、少なくとも1つの有効なインデックスを持つテーブルのみを複製します。次のシナリオはサポートされていません。<ul><li> RawKVのみを使用するTiKVクラスタ。</li><li> TiDBのDDL操作`CREATE SEQUENCE`および`SEQUENCE`関数。</li></ul>                                  |
+| [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                         | 1つのTiDBクラスタを別のTiDBクラスタのセカンダリクラスタとして使用するなど、TiDBクラスター間の増分レプリケーション                                  | TiDB                                                                                    | TiDB、MySQL、Kafka、増分バックアップファイル            | リアルタイムのバックアップと復元をサポートします。災害復旧のために復元するTiDBクラスタデータをバックアップします                                                                                                            | 一部のTiDBバージョンと互換性がありません                                                                                                                                                                    |
+| [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) | データベースに保存されているデータをMySQLプロトコルと比較する                                                                | TiDB、MySQL                                                                              | TiDB、MySQL                               | 少量のデータに一貫性がないシナリオでデータを修復するために使用できます                                                                                                                                   | <li>MySQLとTiDB間のデータ移行では、オンラインチェックはサポートされていません。</li><li> JSON、BIT、BINARY、BLOBおよびその他のタイプのデータはサポートされていません。</li>                                                                              |
 
-## Install tools using TiUP
+## TiUPを使用してツールをインストールする {#install-tools-using-tiup}
 
-Since TiDB v4.0, TiUP acts as a package manager that helps you manage different cluster components in the TiDB ecosystem. Now you can manage any cluster component using a single command.
+TiDB v4.0以降、TiUPは、TiDBエコシステム内のさまざまなクラスタコンポーネントの管理を支援するパッケージマネージャーとして機能します。これで、1つのコマンドを使用して任意のクラスタコンポーネントを管理できます。
 
-### Step 1. Install TiUP
+### 手順1.TiUPをインストールします {#step-1-install-tiup}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
 ```
 
-Redeclare the global environment variable:
+グローバル環境変数を再宣言します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 source ~/.bash_profile
 ```
 
-### Step 2. Install components
+### ステップ2.コンポーネントをインストールします {#step-2-install-components}
 
-You can use the following command to see all the available components:
+次のコマンドを使用して、使用可能なすべてのコンポーネントを表示できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup list
 ```
 
-The command output lists all the available components:
+コマンド出力には、使用可能なすべてのコンポーネントが一覧表示されます。
 
 ```bash
 Available components:
@@ -77,29 +77,29 @@ tidb-lightning  pingcap  TiDB Lightning is a tool used for fast full import of l
 tiup            pingcap  TiUP is a command-line component management tool that can help to download and install TiDB platform components to the local system
 ```
 
-Choose the components to install:
+インストールするコンポーネントを選択します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup install dumpling tidb-lightning
 ```
 
-> **Note:**
+> **ノート：**
 >
-> To install a component of a specific version, use the `tiup install <component>[:version]` command.
+> 特定のバージョンのコンポーネントをインストールするには、 `tiup install <component>[:version]`コマンドを使用します。
 
-### Step 3. Update TiUP and its components (optional)
+### 手順3.TiUPとそのコンポーネントを更新する（オプション） {#step-3-update-tiup-and-its-components-optional}
 
-It is recommended to see the release log and compatibility notes of the new version.
+新しいバージョンのリリースログと互換性に関する注意事項を確認することをお勧めします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup update --self && tiup update dm
 ```
 
-## See also
+## も参照してください {#see-also}
 
-- [Deploy TiUP offline](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline)
-- [Download and install tools in binary](/download-ecosystem-tools.md)
+-   [TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline)
+-   [ツールをバイナリでダウンロードしてインストールする](/download-ecosystem-tools.md)
