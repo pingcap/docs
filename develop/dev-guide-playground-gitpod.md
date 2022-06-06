@@ -14,7 +14,7 @@ Gitpod is an open-source Kubernetes application (GitHub repository address: <htt
 
 1. Fork the example code repository [pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java) for TiDB application development .
 
-2. Start your gitpod workspace by prefixing the URL of the sample code repository with `https://gitpod.io/#` from the browser's address bar.
+2. Start your Gitpod workspace by prefixing the URL of the sample code repository with `https://gitpod.io/#` in the address bar of your browser.
 
    - E.g, `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java`。
 
