@@ -12,7 +12,7 @@ Garbage collection is configured via the following system variables:
 * [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
 * [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
 * [`tidb_gc_scan_lock_mode`](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50)
-* [`tidb_gc_max_wait_time`](system-variables.md#tidb_gc_max_wait_time-new-in-v610)
+* [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)
 
 ## GC I/O limit
 
