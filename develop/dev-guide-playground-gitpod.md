@@ -162,7 +162,7 @@ Visit `https://gitpod.io/#<YOUR_REPO_URL>` to create a new Gitpod workspace with
 
 Visit `https://gitpod.io/workspaces` for all established workspaces.
 
-## Summarize
+## Summary
 
 Gitpod provides a complete, automated, pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configuration,.
 
