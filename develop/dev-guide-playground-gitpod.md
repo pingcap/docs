@@ -164,6 +164,6 @@ Visit `https://gitpod.io/workspaces` for all established workspaces.
 
 ## Summary
 
-Gitpod provides a complete, automated, pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configuration,.
+Gitpod provides a complete, automated, and pre-configured cloud-native development environment. You can develop, run, and test code directly in the browser without any local configurations.
 
 ![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
