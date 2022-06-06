@@ -156,7 +156,7 @@ ports:
 
 ### Apply changes
 
-After completing the configuration of the `.gitpod.yml` file, please ensure that the latest code is available in your corresponding GitHub repository.
+After completing the configuration of the `.gitpod.yml` file, make sure that the latest code is available in your corresponding GitHub repository.
 
 Visit `https://gitpod.io/#<YOUR_REPO_URL>` to create a new Gitpod workspace with the latest code applied.
 
