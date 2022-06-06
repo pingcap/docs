@@ -44,7 +44,7 @@ You can test the API by [sending an HTTP request](/develop/dev-guide-sample-appl
 
 ## Using custom Gitpod configuration and Docker image
 
-### Custom Gitpod configuration
+### Customize Gitpod configurations
 
 Referring to [example.gitpod.yml](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.yml), create a `.gitpod. yml` file in the root directory of your project to configure the Gitpod workspace.
 
