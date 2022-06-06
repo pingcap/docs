@@ -74,7 +74,7 @@ If you are the owner or billing administrator of your organization, you can mana
 
 > **Note:**
 >
-> If you sign up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
 After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, and data transmission costs in your organization.
 
@@ -122,7 +122,7 @@ If you are the owner or billing administrator of your organization, you can mana
 
 > **Note:**
 >
-> If you sign up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
