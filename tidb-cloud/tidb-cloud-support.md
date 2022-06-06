@@ -25,7 +25,7 @@ TiDB Cloud offers support services to your organization. To contact our support 
 
 2. Click **Support** on the upper right of the top navigation bar, and click **Request Support**. Or directly click the **Help** icon on the lower right.
 
-3. In the **Leave us a message** dialog, fill in the ticket.
+3. In the **Leave us a message** dialog, fill in the ticket with the background information you collected.
 
 4. Click **Send** to submit your ticket. After the support team receives your ticket, they will reply to you via email.
 
