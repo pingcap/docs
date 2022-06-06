@@ -98,7 +98,7 @@ By default, Gitpod uses a standard Docker image named Workspace-Full as the basi
 
 You can provide a public Docker image or a Dockerfile. and install any required dependencies for your project.
 
-Here is an example Dockerfile: [Example .gitpod.Dockerfile](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)
+For example, you can use a Dockerfile (see also [Example .gitpod.Dockerfile](https://github.com/pingcap-inc/tidb-example-java/blob/main/.gitpod.Dockerfile)) as follows:
 
 ```dockerfile
 FROM gitpod/workspace-java-17
