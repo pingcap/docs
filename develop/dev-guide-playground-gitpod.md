@@ -40,7 +40,7 @@ After all these tasks are finished, you will see a page similar to the following
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 
-You can test the API by following [the guide](/develop/dev-guide-sample-application-spring-boot.md#step-6-http-request). Do remember to replace the URL `http://localhost:8080` with the one you found in `REMOTE EXPLORER`.
+You can test the API by [sending an HTTP request](/develop/dev-guide-sample-application-spring-boot.md#step-6-http-requests). Make sure to replace the `http://localhost:8080` URL with the one you found in the `REMOTE EXPLORER` area.
 
 ## Using custom Gitpod configuration and Docker image
 
