@@ -7,7 +7,7 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
 
 This document describes the usage scenarios, usage methods, and restrictions of non-transactional DML statements in TiDB. In addition, the implementation principle and common issues are also explained.
 
-A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence, which enhances the performance and ease of use in the scenarios of batch data processing, at the expense of transactional atomicity and isolation.
+A non-transactional DML statement is a DML statement split into multiple SQL statements (which is, multiple batches) to be executed in sequence. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
 
 Non-transactional DML statements include `INSERT`, `UPDATE`, and `DELETE`, of which TiDB currently only supports `DELETE`. For detailed syntax, see [`BATCH`](/sql-statements/sql-statement-batch.md).
 
