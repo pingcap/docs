@@ -1616,7 +1616,7 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 ## causal-ts <span class="version-mark">New in v6.1.0</span>
 
-> **Note:**
+> **Warning:**
 >
 > TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
 
