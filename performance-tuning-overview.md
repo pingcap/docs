@@ -24,7 +24,7 @@ To get a total user response time within a specified time range (`ΔT`), you can
 
 Total user response time in `ΔT` = Average TPS (Transactions Per Second) x Average user response time x `ΔT`.
 
-![user_response_time](/media/performance/user_response_time_cn.png)
+![user_response_time](/media/performance/user_response_time_en.png)
 
 ### Database time
 
