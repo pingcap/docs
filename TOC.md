@@ -3,7 +3,7 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
+  - [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
@@ -32,7 +32,7 @@
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-  - Design Database Schema 
+  - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
     - [Create a Table](/develop/dev-guide-create-table.md)
@@ -827,6 +827,8 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - v6.1
+    - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
