@@ -80,7 +80,7 @@ The recovery process has multiple possible stages:
 - `force leader for commit merge`: A special stage. When there is an uncompleted commit merge, `force leader` is first performed on the Regions with commit merge, in case of extreme situations.
 - `force leader`: Forces unhealthy Regions to assign a Raft leader among the remaining healthy peers.
 - `demote failed voter`: Demotes the Region's failed voters to learners, and then the Regions can select a Raft leader as normal.
-- `create empty region`: Creates an empty Region to fill in the space in the key range. This is to resolve the issue that the stores with all replicas of some Regions have been damaged.
+- `create empty region`: Creates an empty Region to fill in the space in the key range. This is to resolve the case that the stores with all replicas of some Regions have been damaged.
 
 Each of the above stages is output in the JSON format, including information, time, and a detailed recovery plan. For example:
 
