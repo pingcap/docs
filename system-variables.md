@@ -941,7 +941,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
@@ -1265,6 +1265,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >     - Larger storage use
 >     - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
 > - If there is any transaction that has been running longer than `tidb_gc_life_time`, during GC, the data since `start_ts` is retained for this transaction to continue execution. For example, if `tidb_gc_life_time` is configured to 10 minutes, among all transactions being executed, the transaction that starts earliest has been running for 15 minutes, GC will retain data of the recent 15 minutes.
+
+### tidb_gc_max_wait_time <span class="version-mark">New in v6.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `86400`
+- Range: `[600, 31536000]`
+- Unit: Seconds
+- This variable is used to set the maximum time that active transactions block the GC safe point. During each time of GC, the safe point does not exceed the start time of the ongoing transactions by default. If the runtime of active transactions does not exceed this variable value, the GC safe point will be blocked until the runtime exceeds this value. This variable value is an integer type.
 
 ### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
 
@@ -1777,7 +1786,7 @@ explain select * from t where age=5;
 - Type: Float
 - Default value: `0.1`
 - Range: `[0, 1]`
-- This setting is used to prevent the tidb.toml option `performance.max-memory` from being exceeded. When `max-memory` * (1 - `tidb_prepared_plan_cache_memory_guard_ratio`) is exceeded, the elements in the LRU are removed.
+- The threshold at which the prepared plan cache triggers a memory protection mechanism. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0.
 
 ### tidb_prepared_plan_cache_size <span class="version-mark">New in v6.1.0</span>
@@ -1787,7 +1796,7 @@ explain select * from t where age=5;
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 100000]`
-- The maximum number of statements that can be cached in the prepared plan cache.
+- The maximum number of plans that can be cached in a session. For details, see [Memory management of Prepared Plan Cache](/sql-prepared-plan-cache.md).
 - This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB v6.1.0.
 
 ### tidb_projection_concurrency
