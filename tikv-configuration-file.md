@@ -402,7 +402,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 > **Note:**
 >
-> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
+
 
 + The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
 + Value options:
@@ -415,7 +415,8 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + Default value: `1`
 
 > **Warning:**
->
+
+> - TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
 > - You can set the value of `api-version` to `2` **only when** deploying a new TiKV cluster. **Do not** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `api-version` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats and causes data corruption. It will raise the "unable to switch storage.api_version" error when you start the TiKV cluster.
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
 
