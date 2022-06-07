@@ -256,7 +256,7 @@ This hint takes effect on strict conditions, including:
 
 ### LEADING(t1_name [, tl_name ...])
 
-The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when generating the execution plan, to determine the order of multiple table joins according to the order of table names specified in the hint. For example:
+The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when generating the execution plan, to determine the order of multi-table joins according to the order of table names specified in the hint. For example:
 
 {{< copyable "sql" >}}
 
@@ -264,19 +264,19 @@ The `LEADING(t1_name [, tl_name ...])` hint reminds the optimizer that, when gen
 SELECT /*+ LEADING(t1, t2) */ * FROM t1, t2, t3 WHERE t1.id = t2.id and t2.id = t3.id;
 ```
 
-In the above query with multiple table joins, the order of joins is determined by the order of table names specified in the `LEADING()` hint. The optimizer will first join `t1` and `t2` and then join the result with `t3`. This hint is more general than [`STRAIGHT_JOIN`](#straight_join).
+In the above query with multi-table joins, the order of joins is determined by the order of table names specified in the `LEADING()` hint. The optimizer will first join `t1` and `t2` and then join the result with `t3`. This hint is more general than [`STRAIGHT_JOIN`](#straight_join).
 
-The `LEADING` hint does not take effect on the following situations:
+The `LEADING` hint does not take effect in the following situations:
 
 + Multiple `LEADING` hints are specified.
 + The table name specified in the `LEADING` hint does not exist.
-+ A duplicated table name is specified in `LEADING` hint.
-+ The optimizer cannot perform table join according to the order as specified by the `LEADING` hint.
++ A duplicated table name is specified in the `LEADING` hint.
++ The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
 + The `straight_join()` hint already exists.
-+ The query contains outer join.
++ The query contains an outer join.
 + Any of the `MERGE_JOIN`, `INL_JOIN`, `INL_HASH_JOIN`, and `HASH_JOIN` hints is used at the same time.
 
-In the above situations, a warning is output.
+In the above situations, a warning is generated.
 
 ```sql
 -- Multiple `LEADING` hints are specified.
