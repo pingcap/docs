@@ -18,7 +18,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 <SimpleTab>
 <div label="Developer Tier">
 
-1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
+1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
     - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
     - For GitHub users, you can also sign up with GitHub. To do that, click **Sign up with GitHub** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by GitHub and cannot be changed using TiDB Cloud console.
@@ -51,11 +51,11 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
     The plan selection page is displayed by default.
 
-3. On the plan selection page, click **Get Full Access Today** in the **On Demand** plan.
+3. On the plan selection page, click **Get Full Access Today** in the **Dedicated Tier** plan.
 
     > **Note:**
     >
-    > If you want to get a 14-day free trial of TiDB Cloud first, click **Apply for a PoC Trial** in the **Proof of Concept** plan, fill in the application form, and then click **OK**. The PingCAP support team will get back to you in 48 hours. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+    > If you want to get a 14-day free trial of TiDB Cloud Dedicated Tier first, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
 4. On the **Create a Cluster** page, set up your cluster name and root password, and then update the default port number `4000` if you cannot use `4000` for connection.
 
