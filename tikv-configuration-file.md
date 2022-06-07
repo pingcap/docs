@@ -849,7 +849,7 @@ Configuration items related to Coprocessor.
 ### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
 
 + The size of a bucket when `enable-region-bucket` is true.
-+ Default value: 96MiB
++ Default value: `96MiB`
 
 ## RocksDB
 
