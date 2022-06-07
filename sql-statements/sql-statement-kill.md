@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: KILL [TIDB] | TiDB SQL Statement Reference
-summary: An overview of the usage of KILL [TIDB] for the TiDB database.
-=======
 title: KILL
 summary: An overview of the usage of KILL for the TiDB database.
-aliases: ['/docs/dev/sql-statements/sql-statement-kill/','/docs/dev/reference/sql/statements/kill/']
->>>>>>> ee45982e0 (update docs about global kill #9499 (#8773))
 ---
 
 # KILL
