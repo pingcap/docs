@@ -255,7 +255,7 @@ The `TIDB_SHARD` function can be used to create a shard index to scatter the ind
     - Cannot be used in the `ORDER BY` clause.
     - Cannot be used in the `ON` clause.
     - Cannot be used in the `WHERE` subquery.
-    - Can only be used to scatter unique indexes of integer fields.
+    - Can be used to scatter unique indexes of only the integer fields.
     - Might not take effect in composite indexes.
     - Cannot go through FastPlan process, which affects optimizer performance.
     - Cannot be used to prepare the execution plan cache.
