@@ -274,6 +274,8 @@ In 6.1.0, the key new features or improvements are as follows:
 | TiKV | [`raft-engine.enable`](/tikv-configuration-file.md#enable-1) | Modified | The default value is changed from `FALSE` to `TRUE`. |
 | TiKV | [`region-max-keys`](/tikv-configuration-file.md#region-max-keys) | Modified | The default value is changed from 1440000 to `region-split-keys / 2 * 3`. |
 | TiKV | [`region-max-size`](/tikv-configuration-file.md#region-max-size) | Modified | The default value is changed from 144 MB to `region-split-size / 2 * 3`. |
+| TiKV | [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610) | Newly added | Determines whether to divide a Region into smaller ranges called buckets. |
+| TiKV | [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610) | Newly added | The size of a bucket when `enable-region-bucket` is true. |
 | TiKV | [`causal-ts.renew-batch-min-size`](/tikv-configuration-file.md#renew-batch-min-size) | Newly added | The minimum number of locally cached timestamps. |
 | TiKV | [`causal-ts.renew-interval`](/tikv-configuration-file.md#renew-interval) | Newly added | The interval at which the locally cached timestamps are refreshed. |
 | TiKV | [`max-snapshot-file-raw-size`](/tikv-configuration-file.md#max-snapshot-file-raw-size-new-in-v610) | Newly added | The snapshot file will split to multiple files when the snapshot file size exceeds this value. |
