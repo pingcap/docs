@@ -9,24 +9,26 @@ This document introduces how to tune Region performance by adjusting the Region 
 
 ## Overview
 
-TiKV automatically [shards bottom-layered data](/best-practices/tidb-best-practices.md#data-sharding), data is split into multiple Regions, each storing data for a specific key range. When the size of a Region exceeds a threshold, TiKV splits it into two or more Regions.
+TiKV automatically [shards bottom-layered data](/best-practices/tidb-best-practices.md#data-sharding). Data is split into multiple Regions based on the key ranges. When the size of a Region exceeds a threshold, TiKV splits it into two or more Regions.
 
-When processing a large amount of data, TiKV might split too many Regions, resulting in more resources for consumption and [performance regression](/best-practices/massive-regions-best-practices.md#performance-problem). For a fixed amount of data, the largest the Region, the smaller the number of Regions. Since v6.1.0, TiDB supports setting custom Region size. The default size of the Region is 96 MiB, you can reduce the Region number by adjusting it to a larger value.
+When processing a large amount of data, TiKV might split too many Regions, which causes more resource consumption and [performance regression](/best-practices/massive-regions-best-practices.md#performance-problem). For a certain amount of data, the larger the Region size, the fewer the Regions. Since v6.1.0, TiDB supports setting customizing Region size. The default size of a Region is 96 MiB. To reduce the number of Regions, you can adjust Regions to a larger size.
 
-Enable [Hibernate Region](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances) or [`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval) can also reduce the performance overhead of too many Regions.
+To reduce the performance overhead of many Regions, you can also enable [Hibernate Region](/best-practices/massive-regions-best-practices.md#method-4-increase-the-number-of-tikv-instances) or [`Region Merge`](/best-practices/massive-regions-best-practices.md#method-5-adjust-raft-base-tick-interval).
 
 ## Use `region-split-size` to adjust Region size
 
 > **Warning:**
 >
-> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are:
+> Currently, customized Region size is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments. The risks are as follows:
 >
-> + More prone to performance jitter.
-> + Query performance regression, especially when querying a large amount of data.
-> + The schedule operator slows down.
+> + Performance jitter might be caused.
+> + The query performance, especially for queries that deal with a large range of data, might decrease.
+> + The Region scheduling slows down.
 
-You can adjust the Region size with [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size). It is recommended to set it to 96 MiB, 128 MiB, 256 MiB. The larger the `region-split-size`, the more jittery the performance will be. It is not recommended to set the Region size over 1 GiB and strongly recommend setting it below 10 GiB. When using TiFlash, the Region size should not exceed 256 MiB. When using the Dumpling tool, the Region size should not exceed 1 GiB and you need to reduce the concurrency after increasing the Region size, otherwise, TiDB might OOM.
+To adjust the Region size, you can use the [`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size) configuration item. The recommended sizes are 96 MiB, 128 MiB, or 256 MiB. The larger the `region-split-size` value, the more jittery the performance will be. It is NOT recommended to set the Region size over 1 GiB. Avoid setting the size to more than 10 GiB. When TiFlash is used, the Region size should not exceed 256 MiB.
+
+When the Dumpling tool is used, the Region size should not exceed 1 GiB. In this case, you need to reduce the concurrency after increasing the Region size; otherwise, TiDB might run out of memory.
 
 ## Use bucket to increase concurrency
 
-When the Region size is large, you can set [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610) to `true` to increase the query concurrency. This config divides a Region into several buckets, which is smaller ranges within a Region. The bucket is used as the unit of concurrency query to improve the scan concurrency. You can control the bucket size with [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610), the default value is `96MiB`.
+When the Region size is set larger, you need to set [`coprocessor.enable-region-bucket`](/tikv-configuration-file.md#enable-region-bucket-new-in-v610) to `true` to increase the query concurrency. When you use this configuration, Regions are divided into buckets. Buckets are smaller ranges within a Region and used as the unit of concurrent query to improve the scan concurrency. You can control the bucket size using [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610), the default value is `96MiB`.
