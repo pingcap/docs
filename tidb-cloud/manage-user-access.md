@@ -25,6 +25,26 @@ After you have signed into TiDB Cloud, if you need to sign out, perform the foll
 
 2. Click **Logout**.
 
+## Manage user passwords
+
+> **Note:**
+>
+> The content in this section is only applicable to TiDB Cloud registration with email and password. If you sign up for TiDB Cloud with Google or GitHub, your password is managed by Google or GitHub and you cannot change it using the TiDB Cloud console.
+
+To improve your system security, if you sign up for TiDB Cloud with email and password, you must reset the password every 90 days.
+
+To change the password, take the following steps:
+
+1. Click the account name in the upper-right corner of the window.
+
+2. Click **Account**.
+
+3. Click the **Change Password** tab.
+
+4. Click **Change Password**, and then check your mail box for the link to reset the password.
+
+If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. In this case, you need to follow the prompt to reset the password.
+
 ## View the organization and project
 
 TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. In the hierarchy of organizations and projects, an organization can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
