@@ -1616,13 +1616,13 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 ## causal-ts <span class="version-mark">New in v6.1.0</span>
 
-> **Warning:**
->
-> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
-
 Configuration items related to getting the timestamp when TiKV API V2 is enabled (`storage.api-version = 2`).
 
 To reduce write latency and avoid frequent access to PD, TiKV periodically fetches and caches a batch of timestamps in the local. When the locally cached timestamps are exhausted, TiKV immediately makes a timestamp request. In this situation, the latency of some write requests are increased. To reduce the occurrence of this situation, TiKV dynamically adjusts the size of the locally cached timestamps according to the workload. For most of the time, you do not need to adjust the following parameters.
+
+> **Warning:**
+>
+> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
 
 ### `renew-interval`
 
