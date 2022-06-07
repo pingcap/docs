@@ -91,13 +91,13 @@ In 6.1.0, the key new features or improvements are as follows:
     * `TO_SECONDS`
     * `WEEKOFYEAR`
 
-    [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#4679]([https://github.com/pingcap/tiflash/issues/4679](https://github.com/pingcap/tiflash/issues/4679)), [#4678]([https://github.com/pingcap/tiflash/issues/4678](https://github.com/pingcap/tiflash/issues/4678)), [#4677]([https://github.com/pingcap/tiflash/issues/4677](https://github.com/pingcap/tiflash/issues/4677))
+    [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#4679](https://github.com/pingcap/tiflash/issues/4679), [#4678](https://github.com/pingcap/tiflash/issues/4678), [#4677](https://github.com/pingcap/tiflash/issues/4677)
 
 * TiFlash supports partitioned tables in dynamic pruning mode.
 
     To enhance performance in OLAP scenarios, dynamic pruning mode is enabled by default for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0). If you have been using partitioned tables and want to upgrade your cluster to v6.1.0, refer to [TiFlash v6.1.0 Upgrade Guide](/tiflash-610-upgrade.md) to learn about the upgrade precautions.
 
-    [User document: Access partitioned tables in the MPP mode](tiflash/use-tiflash#access-partitioned-tables-in-the-mpp-mode), [User document: Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
+    [User document: Access partitioned tables in the MPP mode](/tiflash/use-tiflash#access-partitioned-tables-in-the-mpp-mode), [User document: Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
 * TiFlash supports a new storage format to enhance performance and stability
 
@@ -105,7 +105,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Note that TiFlash does not support in-place downgrade, because earlier TiFlash versions cannot recognize the new storage format. Therefore, plan your upgrade with full considerations. If you still need to downgrade your cluster, see [TiFlash v6.1.0 Upgrade Guide](/tiflash-610-upgrade.md).
 
-    [User document](/tiflash-configuration.md#configure-the-tiflashtoml-file)
+    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
 ### Stability
 
@@ -147,7 +147,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     You can use the `SHOW ANALYZE STATUS` statement to show cluster-level statistics collection tasks. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement shows instance-level tasks only, and history task records are cleared after a TiDB restart. Therefore, you cannot view history statistics collection time and details. Starting from TiDB v6.1.0, history records of statistics collection tasks are persisted and can be queried after a cluster restart, which provides a reference for troubleshooting query performance issues caused by statistics anomalies.
 
-    [User document](sql-statements/sql-statement-show-analyze-status.md)
+    [User document](/sql-statements/sql-statement-show-analyze-status.md)
 
 * Support modifying TiDB, TiKV, and TiFlash configurations online
 
@@ -223,7 +223,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     * TiCDC supports SASL GSSAPI authentication types and adds SASL authentication examples using Kafka.
 
-        [User document](/ticdc/manage-ticdc.md#ticdc-uses-the-authentication-and-authorization-of-kafka)，[#4423](https://github.com/pingcap/tiflow/issues/4423)
+        [User document](/ticdc/manage-ticdc.md#ticdc-uses-the-authentication-and-authorization-of-kafka), [#4423](https://github.com/pingcap/tiflow/issues/4423)
 
 * TiCDC supports replicating `charset=GBK` tables.
 
