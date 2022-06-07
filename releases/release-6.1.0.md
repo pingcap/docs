@@ -375,22 +375,20 @@ In 6.1.0, the key new features or improvements are as follows:
 
     - Fix the issue of possible panic that might occur when the `in` function processes the `bit` type data [#33070](https://github.com/pingcap/tidb/issues/33070)
     - Fix the issue of wrong query result because the `UnionScan` operator cannot maintain the order  [#33175](https://github.com/pingcap/tidb/issues/33175)
-    - (dup: release-5.4.1.md > Bug 修复> TiDB)Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
+    - Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
     - Fix the issue that the `index join` result might be wrong in the dynamic pruning mode [#33231](https://github.com/pingcap/tidb/issues/33231)
     - Fix the issue that data might not be garbage-collected when some partitions of a partitioned table is dropped [#33620](https://github.com/pingcap/tidb/issues/33620)
     - Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
-    - (dup: release-5.4.1.md > Bug 修复> TiDB)Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
-    - (dup: release-5.2.4.md > Bug 修复> TiDB)Fix the issue that the system variable `max_allowed_packet` does not take effect  [#31422](https://github.com/pingcap/tidb/issues/31422)
+    - Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
+    - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue of memory leak in the TopSQL module [#34525](https://github.com/pingcap/tidb/issues/34525) [#34502](https://github.com/pingcap/tidb/issues/34502)
     - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#3237](https://github.com/pingcap/tidb/issues/3237)
     - Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
 
 + TiKV
 
-    - (dup: release-5.4.1.md > Bug 修复> TiKV)Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
-    - (dup: release-5.4.1.md > Bug 修复> TiKV)Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
     - Fix the issue that the Raft log lag is increasing when a TiKV instance is taken offline [#12161](https://github.com/tikv/tikv/issues/12161)
-    - (dup: release-5.4.1.md > Bug 修复> TiKV)Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
+    - Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
     - Fix the issue that TiKV reports the `failed to load_latest_options` error when upgrading from v5.3.1 or v5.4.0 to v6.0.0 [#12269](https://github.com/tikv/tikv/issues/12269)
     - Fix the issue of OOM caused by appending Raft logs when the memory resource is insufficient [#11379](https://github.com/tikv/tikv/issues/11379)
     - Fix the issue ofTiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
@@ -425,17 +423,17 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the `start-time` time zone issue and change DM behavior from using the downstream time zone to using the upstream time zone [#5271](https://github.com/pingcap/tiflow/issues/5471)
     - Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
     - Fix the problem that checkpoint flush may cause the data of failed rows to be skipped [#5279](https://github.com/pingcap/tiflow/issues/5279)
-    - (dup: release-5.4.1.md > Bug 修复> Tools> TiDB Data Migration (DM))Fix an issue that after the DDL event was skipped and the downstream schema was manually restored, the schema tracker could not track the latest table schema [#5272](https://github.com/pingcap/tiflow/issues/5272)
+    - Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
     - Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
-    - (dup: release-5.4.1.md > Bug 修复> Tools> TiDB Data Migration (DM))修复极端情况下索引、主键数量和顺序可能导致 Schema Tracker Panic 的问题 https://github.com/pingcap/tiflow/issues/5159
-    - (dup: release-5.4.1.md > Bug 修复> Tools> TiDB Data Migration (DM))修复 DM 可能大量打印 Checkpoint 日志的问题https://github.com/pingcap/tiflow/issues/5063
+    - Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
+    - Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
     - Fix the offline option and other usage issues in DM WebUI [#4993](https://github.com/pingcap/tiflow/issues/4993)
     - Fix the issue that incremental tasks fail to start when GTID is empty in the upstream  [#3731](https://github.com/pingcap/tiflow/issues/3731)
     - Fix the issue that empty configurations may cause dm-master to panic [#3732](https://github.com/pingcap/tiflow/issues/3732)
 
 + TiDB Lightning
 
-    - (dup: release-5.4.1.md > Bug 修复> Tools> TiDB Lightning)修复 precheck 未检查磁盘空间及集群是否可用的问题 https://github.com/pingcap/tidb/issues/34213
+    - Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
     - Fix the issue of incorrect routing for schemas [#33381](https://github.com/pingcap/tidb/issues/33381)
     - Fix the issue that the PD configuration is not restored correctly when TiDB Lightning panics [#31733](https://github.com/pingcap/tidb/issues/31733)
     - Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#29737](https://github.com/pingcap/tidb/issues/27937)
