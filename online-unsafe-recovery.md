@@ -7,8 +7,7 @@ summary: Learn how to use Online Unsafe Recovery.
 
 > **Warning:**
 >
-> - Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed.
-> - It is recommended to perform the feature-related operations with the support from the TiDB team. If any misoperation is performed, it might be hard to recover the cluster.
+> Online Unsafe Recovery is a type of lossy recovery. If you use this feature, the integrity of data and data indexes cannot be guaranteed.
 
 When permanently damaged replicas cause part of data on TiKV to be unreadable and unwritable, you can use the Online Unsafe Recovery feature to perform a lossy recovery operation.
 
@@ -41,11 +40,17 @@ Before using Online Unsafe Recovery, make sure that the following requirements a
 
 Use PD Control to specify the TiKV nodes that cannot be recovered and trigger the automatic recovery by running [`unsafe remove-failed-stores <store_id>[,<store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show).
 
-If the command returns `Success`, PD Control has successfully registered the task to PD. This only means that the request has been accepted, not that the recovery has been successful performed. The recovery task is actually performed in the background. To see the recovery progress, use [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion).
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
+```
+
+If the command returns `Success`, PD Control has successfully registered the task to PD. This only means that the request has been accepted, not that the recovery has been successfully performed. The recovery task is performed in the background. To see the recovery progress, use [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion).
 
 If the command returns `Failed`, PD Control has failed to register the task to PD. The possible errors are as follows:
 
-- `unsafe recovery is running`: There is already an on-going recovery task.
+- `unsafe recovery is running`: There is already an ongoing recovery task.
 - `invalid input store x doesn't exist`: The specified store ID does not exist.
 - `invalid input store x is up and connected`: The specified store with the ID is still healthy and should not be recovered.
 
@@ -54,13 +59,19 @@ To specify the longest allowable duration of a recovery task, use the `--timeout
 > **Note:**
 >
 > - Because this command needs to collect information from all peers, it might cause an increase in memory usage (100,000 peers are estimated to use 500 MiB of memory).
-> - If PD restarts when the command is running, the recovery is interrupted and you need trigger the task again.
+> - If PD restarts when the command is running, the recovery is interrupted and you need to trigger the task again.
 > - Once the command is running, the specified stores will be set to the Tombstone status, and you cannot restart these stores.
 > - When the command is running, all scheduling tasks and split/merge are paused and will be resumed automatically after the recovery is successful or fails.
 
 ### Step 2. Check the recovery progress and wait for the completion
 
 When the above store removal command runs successfully, you can use PD Control to check the removal progress by running [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules).
+
+{{< copyable "shell-regular" >}}
+
+```bash
+pd-ctl -u <pd_addr> unsafe remove-failed-stores show
+```
 
 The recovery process has multiple possible stages:
 
@@ -69,9 +80,9 @@ The recovery process has multiple possible stages:
 - `force leader for commit merge`: A special stage. When there is an uncompleted commit merge, `force leader` is first performed on the Regions with commit merge, in case of extreme situations.
 - `force leader`: Forces unhealthy Regions to assign a Raft leader among the remaining healthy peers.
 - `demote failed voter`: Demotes the Region's failed voters to learners, and then the Regions can select a Raft leader as normal.
-- `create empty region`: Creates an empty Region to fill in the empty space in the key range. This is to resolve the issue that the stores with all replicas of some Regions have been damaged.
+- `create empty region`: Creates an empty Region to fill in the space in the key range. This is to resolve the issue that the stores with all replicas of some Regions have been damaged.
 
-Each of the above stages is output in the JSON format, including information, time, and the detailed recovery plan. For example:
+Each of the above stages is output in the JSON format, including information, time, and a detailed recovery plan. For example:
 
 ```json
 [
@@ -116,9 +127,9 @@ Each of the above stages is output in the JSON format, including information, ti
 ]
 ```
 
-After PD has successfully dispatched the recovery plan, it waits for TiKV to report the execution results. As you can see in `Collecting reports from alive stores`, the last stage of the above output, this part of output shows the detailed statuses of PD dispatching recovery plan and receiving reports from TiKV.
+After PD has successfully dispatched the recovery plan, it waits for TiKV to report the execution results. As you can see in `Collecting reports from alive stores`, the last stage of the above output, this part of the output shows the detailed statuses of PD dispatching recovery plan and receiving reports from TiKV.
 
-The whole recovery process takes multiple stages and one stage might be retried for multiple times. Usually, the estimated duration is 3 to 10 periods of store heartbeat (one period of store heartbeat is 10 seconds by default). After the recovery is completed, the last stage in the command output shows `"Unsafe recovery finished"`, the table IDs to which the affected Regions belong (if there is none or RawKV is used, the output does not show the table IDs), and the affected SQL meta Regions. For example:
+The whole recovery process takes multiple stages and one stage might be retried multiple times. Usually, the estimated duration is 3 to 10 periods of store heartbeat (one period of store heartbeat is 10 seconds by default). After the recovery is completed, the last stage in the command output shows `"Unsafe recovery finished"`, the table IDs to which the affected Regions belong (if there is none or RawKV is used, the output does not show the table IDs), and the affected SQL meta Regions. For example:
 
 ```json
 {
@@ -131,6 +142,11 @@ The whole recovery process takes multiple stages and one stage might be retried 
 }
 ```
 
+> **Note:**
+>
+> - The recovery operation has turned some failed voters to failed learners. Then PD scheduling needs some time to remove these failed learners.
+> - It is recommended to add new stores in time.
+
 If an error occurs during the task, the last stage in the output shows `"Unsafe recovery failed"` and the error message. For example:
 
 ```json
@@ -142,7 +158,7 @@ If an error occurs during the task, the last stage in the output shows `"Unsafe 
 
 ### Step 3. Check the consistency of data and index (not required for RawKV)
 
-After the recovery is completed, the data and index might be inconsistent. Use the SQL commands `ADMIN CHECK`, `ADMIN RECOVER`, and `ADMIN CLEANUP` to check the consistency of the affected tables (from the output of `"Unsafe recovery finished"`, you can learn the affected table IDs)for data consistency and index consistency, and to recover the tables.
+After the recovery is completed, the data and index might be inconsistent. Use the SQL commands `ADMIN CHECK`, `ADMIN RECOVER`, and `ADMIN CLEANUP` to check the consistency of the affected tables (you can get IDs from the output of `"Unsafe recovery finished"`) for data consistency and index consistency, and to recover the tables.
 
 > **Note:**
 >
