@@ -23,7 +23,7 @@ ApacheKafkaサービスがインターネットにアクセスできないAWSVPC
 
 2.  ApacheKafkaサービスが関連付けられているセキュリティグループのインバウンドルールを変更します。
 
-    TiDBクラウドクラスタが配置されているリージョンのCIDRをインバウンドルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
+    TiDB Cloudクラスタが配置されているリージョンのCIDRをインバウンドルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
 
 3.  Apache Kafka URLにホスト名が含まれている場合は、TiDBCloudがApacheKafkaブローカーのDNSホスト名を解決できるようにする必要があります。
 
@@ -35,7 +35,7 @@ ApacheKafkaサービスがインターネットにアクセスできないGCPVPC
 1.  ApacheKafkaサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 2.  ApacheKafkaが配置されているVPCの入力ファイアウォールルールを変更します。
 
-    TiDBクラウドクラスタが配置されているリージョンのCIDRを入力ファイアウォールルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
+    TiDB Cloudクラスタが配置されているリージョンのCIDRを入力ファイアウォールルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
 
 ### トピック {#topic}
 
@@ -58,4 +58,4 @@ Apache Kafka Sinkを作成する前に、トピックを準備する必要があ
 
 ## 制限 {#restrictions}
 
-TiDBクラウドはTiCDCを使用してチェンジフィードを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。
+TiDB CloudはTiCDCを使用してチェンジフィードを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。

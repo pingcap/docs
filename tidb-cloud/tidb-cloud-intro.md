@@ -4,11 +4,11 @@ summary: Learn about TiDB Cloud and its architecture.
 category: intro
 ---
 
-# TiDBクラウドの紹介 {#tidb-cloud-introduction}
+# TiDB Cloudの紹介 {#tidb-cloud-introduction}
 
-[TiDBクラウド](https://pingcap.com/products/tidbcloud)は、フルマネージドのサービスとしてのデータベース（DBaaS）であり、TiDBの優れた機能をすべてクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
+[TiDB Cloud](https://pingcap.com/products/tidbcloud)は、フルマネージドのサービスとしてのデータベース（DBaaS）であり、TiDBの優れた機能をすべてクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
-## TiDBクラウドが選ばれる理由 {#why-tidb-cloud}
+## TiDB Cloudが選ばれる理由 {#why-tidb-cloud}
 
 -   フルマネージドTiDBサービス
 
@@ -24,7 +24,7 @@ category: intro
 
 -   生産性の向上
 
-    数回クリックするだけで、TiDBクラウドへの簡単な導入、運用、監視により生産性を向上させます。
+    数回クリックするだけで、TiDB Cloudへの簡単な導入、運用、監視により生産性を向上させます。
 
 -   エンタープライズグレードのセキュリティ
 
@@ -44,9 +44,9 @@ category: intro
 
 -   TiDB VPC（仮想プライベートクラウド）
 
-    TiDBクラウドクラスタごとに、 TiDB Operatorノード、ロギングノードなどを含むすべてのTiDBノードと補助ノードが独立したVPCにデプロイされます。
+    TiDB Cloudクラスタごとに、 TiDB Operatorノード、ロギングノードなどを含むすべてのTiDBノードと補助ノードが独立したVPCにデプロイされます。
 
--   TiDBクラウドセントラルサービス
+-   TiDB Cloudセントラルサービス
 
     請求、アラート、メタストレージ、ダッシュボードUIなどの中央サービスは独立して展開されます。ダッシュボードUIにアクセスして、インターネット経由でTiDBクラスタを操作できます。
 

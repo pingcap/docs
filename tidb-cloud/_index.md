@@ -6,15 +6,15 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 <!-- markdownlint-disable MD046 -->
 
-# TiDBクラウドドキュメント {#tidb-cloud-documentation}
+# TiDB Cloudドキュメント {#tidb-cloud-documentation}
 
-[TiDBクラウド](https://pingcap.com/products/tidbcloud)は、フルマネージドのサービスとしてのデータベース（DBaaS）であり、TiDBの優れた機能をすべてクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
+[TiDB Cloud](https://pingcap.com/products/tidbcloud)は、フルマネージドのサービスとしてのデータベース（DBaaS）であり、TiDBの優れた機能をすべてクラウドにもたらし、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
 <NavColumns><NavColumn><ColumnTitle>クイックスタート</ColumnTitle>
 
 -   [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)
 -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
--   [TiDBクラウドが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
+-   [TiDB Cloudが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
 -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
 -   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
 
@@ -37,9 +37,9 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
 -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
 -   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
--   [AmazonS3またはGCSからTiDBクラウドへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+-   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 -   [データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
--   [TiDBクラウドからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
+-   [TiDB Cloudからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
 
 </NavColumn>
 

@@ -3,9 +3,9 @@ title: Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk
 summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk.
 ---
 
-# AuroraからTiDBクラウドに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
+# AuroraからTiDB Cloudに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-このドキュメントでは、TiDBクラウドコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraクラウドにデータを一括で移行する方法について説明します。
+このドキュメントでは、TiDB Cloudコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraクラウドにデータを一括で移行する方法について説明します。
 
 ## TiDBCloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
 
@@ -129,7 +129,7 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
 
 ### オプション2： Auroraスナップショットを使用してソースデータファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
 
-#### データベースのスキーマをバックアップし、TiDBクラウドで復元します {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
+#### データベースのスキーマをバックアップし、TiDB Cloudで復元します {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
 
 Auroraからデータを移行するには、データベースのスキーマをバックアップする必要があります。
 
@@ -153,7 +153,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
     mysqldump -h ${export_endpoint} -u ${export_username} -p --ssl-mode=DISABLED -d${export_database} >db.sql
     ```
 
-3.  データベースのスキーマをTiDBクラウドにインポートします。
+3.  データベースのスキーマをTiDB Cloudにインポートします。
 
     {{< copyable "" >}}
 
@@ -191,7 +191,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 ## クロスアカウントアクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
 
-TiDBクラウドクラスタとS3バケットは異なるAWSアカウントにあります。 TiDBクラウドクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
+TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
 
 完了すると、クロスアカウントのポリシーと役割が作成されます。その後、TiDBCloudのデータインポートタスクパネルで設定を続行できます。
 

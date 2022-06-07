@@ -3,19 +3,19 @@ title: TiDB Cloud Release Notes in 2021
 summary: Learn about the release notes of TiDB Cloud in 2021.
 ---
 
-# 2021年のTiDBクラウドリリースノート {#tidb-cloud-release-notes-in-2021}
+# 2021年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2021}
 
-このページには、2021年の[TiDBクラウド](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
+このページには、2021年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
 ## 2021年12月28日 {#december-28-2021}
 
 新機能：
 
--   サポート[AmazonS3またはGCSからTiDBクラウドへのApacheParquetファイルのインポート](/tidb-cloud/import-parquet-files.md)
+-   サポート[AmazonS3またはGCSからTiDB CloudへのApacheParquetファイルのインポート](/tidb-cloud/import-parquet-files.md)
 
 バグの修正：
 
--   1000を超えるファイルをTiDBクラウドにインポートするときに発生するインポートエラーを修正します
+-   1000を超えるファイルをTiDB Cloudにインポートするときに発生するインポートエラーを修正します
 -   TiDBCloudがすでにデータを持っている既存のテーブルにデータをインポートすることを許可する問題を修正します
 
 ## 2021年11月30日 {#november-30-2021}
@@ -26,7 +26,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 新機能：
 
--   サポート[TiDBクラウドプロジェクトにVPCCIDRを追加する](/tidb-cloud/set-up-vpc-peering-connections.md)
+-   サポート[TiDB CloudプロジェクトにVPCCIDRを追加する](/tidb-cloud/set-up-vpc-peering-connections.md)
 
 改善点：
 
@@ -53,7 +53,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 ## 2021年10月21日 {#october-21-2021}
 
 -   個人の電子メールアカウントへのユーザー登録を開く
--   サポート[AmazonS3またはGCSからTiDBクラウドへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+-   サポート[AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 
 ## 2021年10月11日 {#october-11-2021}
 
@@ -91,7 +91,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年6月25日 {#june-25-2021}
 
--   [TiDBクラウドの価格](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**地域の選択**が機能しない問題を修正
+-   [TiDB Cloudの価格](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**地域の選択**が機能しない問題を修正
 
 ## 2021年6月24日 {#june-24-2021}
 
@@ -119,9 +119,9 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 管理コンソール
 
 -   電子メールの確認とロボット対策のreCAPTCHAがサインアッププロセスに追加されました
--   [TiDBクラウドサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAPプライバシーポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
+-   [TiDB Cloudサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAPプライバシーポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
 -   コンソールで申し込みフォームに記入することで、 [PoC](/tidb-cloud/tidb-cloud-poc.md)を申し込むことができます
--   UIを介してサンプルデータをTiDBクラウドクラスタにインポートできます
+-   UIを介してサンプルデータをTiDB Cloudクラスタにインポートできます
 -   同じ名前のクラスターは、混乱を避けるために許可されていません
 -   [**サポート**]メニューの[<strong>フィードバック</strong>を送信]をクリックすると、フィードバックを送信できます
 -   データのバックアップおよび復元機能は、PoCおよびオンデマンドの試用オプションで利用できます

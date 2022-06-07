@@ -2,8 +2,8 @@
 
 <!-- markdownlint-disable MD041 -->
 
--   TiDBクラウドについて
-    -   [TiDBクラウドが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
+-   TiDB Cloudについて
+    -   [TiDB Cloudが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
     -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
     -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
     -   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
@@ -31,9 +31,9 @@
     -   データをTiDBに移行する
         -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
         -   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-        -   [AmazonS3またはGCSからTiDBクラウドへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-        -   [AmazonS3またはGCSからTiDBクラウドにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
-        -   [AmazonS3またはGCSからTiDBクラウドにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
+        -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+        -   [AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
+        -   [AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
     -   データのバックアップと復元
         -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
         -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)

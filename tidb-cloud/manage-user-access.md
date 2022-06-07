@@ -5,13 +5,13 @@ summary: Learn how to manage the user access in your TiDB Cloud cluster.
 
 # ユーザーアクセスの管理 {#manage-user-access}
 
-このドキュメントでは、TiDBクラウドクラスタでユーザーアクセスを管理する方法について説明します。
+このドキュメントでは、TiDB Cloudクラスタでユーザーアクセスを管理する方法について説明します。
 
 ## ログイン {#sign-in}
 
 1.  TiDB Cloudログインページに移動します： [https://tidbcloud.com](https://tidbcloud.com) 。
 
-2.  TiDBクラウドへのサインアップ方法に応じて、次のいずれかを実行します。
+2.  TiDB Cloudへのサインアップ方法に応じて、次のいずれかを実行します。
 
     -   Googleアカウントでサインアップした場合は、[Google**でサインイン**]をクリックします。
     -   GitHubアカウントでサインアップした場合は、[GitHub**でサインイン**]をクリックします。

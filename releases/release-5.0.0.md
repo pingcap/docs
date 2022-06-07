@@ -391,9 +391,9 @@ TiDBデータ移行ツールは、データ移行の中間としてAmazon S3（�
 -   [AmazonS3クラウドストレージにデータをエクスポートする](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) [＃8](https://github.com/pingcap/dumpling/issues/8)
 -   [Auroraを使用してAmazonAuroraMySQLから移行する](/migrate-aurora-to-tidb.md) [＃266](https://github.com/pingcap/tidb-lightning/issues/266)
 
-### TiDBクラウドのデータインポートパフォーマンスを最適化する {#optimize-the-data-import-performance-of-tidb-cloud}
+### TiDB Cloudのデータインポートパフォーマンスを最適化する {#optimize-the-data-import-performance-of-tidb-cloud}
 
-TiDB Lightningは、特にAWS T1.standard構成（または同等のTiDBクラウド）向けにデータインポートパフォーマンスを最適化します。テスト結果は、TiDBLightningが1TBのTPC-CデータをTiDBにインポートする速度を254GiB/hから366GiB/ hに40％向上させることを示しています。
+TiDB Lightningは、特にAWS T1.standard構成（または同等のTiDB Cloud）向けにデータインポートパフォーマンスを最適化します。テスト結果は、TiDBLightningが1TBのTPC-CデータをTiDBにインポートする速度を254GiB/hから366GiB/ hに40％向上させることを示しています。
 
 ## データ共有とサブスクリプション {#data-sharing-and-subscription}
 

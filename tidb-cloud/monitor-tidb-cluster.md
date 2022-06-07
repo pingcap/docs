@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster.
 
 # TiDBクラスターを監視する {#monitor-a-tidb-cluster}
 
-このドキュメントでは、TiDBクラウドでTiDBクラスタを監視する方法について説明します。
+このドキュメントでは、TiDB CloudでTiDBクラスタを監視する方法について説明します。
 
 ## クラスタステータスとノードステータス {#cluster-status-and-node-status}
 
@@ -20,7 +20,7 @@ summary: Learn how to monitor your TiDB cluster.
 | **インポート**   | クラスタはデータをインポートしています                          |
 | **スケーリング**  | TiDB、TiKV、またはTiFlash<sup>ベータ</sup>ノードのスケーリング |
 | **アップグレード** | TiDBバージョンのアップグレード                            |
-| **利用できません** | TiDBクラウドサービスは利用できません                         |
+| **利用できません** | TiDB Cloudサービスは利用できません                         |
 | **不健康**     | ノードの一部が利用できない、レプリカが不足しているなど                  |
 | **回復**      | バックアップリカバリ                                   |
 
@@ -74,5 +74,5 @@ TiDB Cloudには、いくつかのアラート条件が組み込まれていま�
 
 | サードパーティのサービス              | Configuration / コンフィグレーションの詳細                                                                                                                                                                                                                         |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Datadogの統合**            | TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDBクラウドを構成します。これらのメトリックは、Datadogダッシュボードで表示できます。 Datadogが追跡するすべてのメトリックの詳細なリストを取得するには、 [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)を参照してください。                            |
+| **Datadogの統合**            | TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成します。これらのメトリックは、Datadogダッシュボードで表示できます。 Datadogが追跡するすべてのメトリックの詳細なリストを取得するには、 [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)を参照してください。                            |
 | **PrometheusとGrafanaの統合** | TiDB CloudからPrometheusのscrape_configファイルを取得し、そのファイルのコンテンツを使用してPrometheusを構成します。これらのメトリックは、Grafanaダッシュボードで表示できます。 Prometheusが追跡するすべてのメトリックの詳細なリストを取得するには、 [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。 |

@@ -27,7 +27,7 @@ TiDBのvCPUサイズとノード数の両方を構成できます。
 
 ### TiDBノードの数量 {#tidb-node-quantity}
 
-高可用性を実現するには、TiDBクラウドクラスタごとに少なくとも2つのTiDBノードを構成することをお勧めします。
+高可用性を実現するには、TiDB Cloudクラスタごとに少なくとも2つのTiDBノードを構成することをお勧めします。
 
 ## サイズTiKV {#size-tikv}
 
@@ -83,7 +83,7 @@ TiDBまたはTiKVのvCPUサイズが**4vCPU（ベータ）**に設定されて�
 
 ### TiFlash<sup>ベータ</sup>ノードの数量 {#tiflash-sup-beta-sup-node-quantity}
 
-TiDB Cloudは、TiFlash<sup>ベータ</sup>ノードをリージョン内のさまざまなアベイラビリティーゾーンに均等にデプロイします。各TiDBクラウドクラスタに少なくとも2つのTiFlash<sup>ベータ</sup>ノードを構成し、実稼働環境で高可用性を実現するためにデータのレプリカを少なくとも2つ作成することをお勧めします。
+TiDB Cloudは、TiFlash<sup>ベータ</sup>ノードをリージョン内のさまざまなアベイラビリティーゾーンに均等にデプロイします。各TiDB Cloudクラスタに少なくとも2つのTiFlash<sup>ベータ</sup>ノードを構成し、実稼働環境で高可用性を実現するためにデータのレプリカを少なくとも2つ作成することをお勧めします。
 
 TiFlash<sup>ベータ</sup>ノードの最小数は、特定のテーブルのTiFlash<sup>ベータ</sup>レプリカ数によって異なります。
 

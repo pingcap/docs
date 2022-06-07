@@ -3,13 +3,13 @@ title: Limitations and Quotas in TiDB Cloud
 summary: Learn the limitations and quotas in TiDB Cloud.
 ---
 
-# TiDBクラウドの制限と割り当て {#limitations-and-quotas-in-tidb-cloud}
+# TiDB Cloudの制限と割り当て {#limitations-and-quotas-in-tidb-cloud}
 
 TiDB Cloudは、作成できる各種類のコンポーネントの数と、TiDBの一般的な使用制限を制限します。さらに、実際に必要な数よりも多くのリソースが作成されないように、ユーザーが作成するリソースの量を制限するための組織レベルの割り当てがいくつかあります。これらの表は、制限と割り当ての概要を示しています。
 
 > **ノート：**
 >
-> これらの制限または割り当てのいずれかが組織に問題をもたらす場合は、 [TiDBクラウドのサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してください。
+> これらの制限または割り当てのいずれかが組織に問題をもたらす場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してください。
 
 ## クラスターの制限 {#cluster-limits}
 

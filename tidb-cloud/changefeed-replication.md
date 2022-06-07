@@ -3,24 +3,24 @@ title: TiDB Cloud Replication
 summary: Learn how to create a replica to stream data from a primary TiDB cluster to a secondary TiDB cluster.
 ---
 
-# TiDBクラウドレプリケーション {#tidb-cloud-replication}
+# TiDB Cloudレプリケーション {#tidb-cloud-replication}
 
-TiDBクラウドレプリケーションは、TiDBクラウドのプライマリTiDBクラスタ用に継続的にレプリケートされる読み取り可能なセカンダリTiDBクラスタを作成できるようにする機能です。この読み取り可能なセカンダリクラスタ（クロスリージョンレプリケーション、セカンダリレプリケーション、またはジオレプリケーションとも呼ばれます）は、プライマリTiDBクラスタと同じリージョンに配置することも、より一般的には別のリージョンに配置することもできます。
+TiDB Cloudレプリケーションは、TiDB CloudのプライマリTiDBクラスタ用に継続的にレプリケートされる読み取り可能なセカンダリTiDBクラスタを作成できるようにする機能です。この読み取り可能なセカンダリクラスタ（クロスリージョンレプリケーション、セカンダリレプリケーション、またはジオレプリケーションとも呼ばれます）は、プライマリTiDBクラスタと同じリージョンに配置することも、より一般的には別のリージョンに配置することもできます。
 
 TiDB Cloud Replicationを使用すると、地域の災害や大規模な障害が発生した場合にデータベースの迅速なディザスタリカバリを実行でき、ビジネスの継続性を実現できます。セカンダリクラスタが設定されると、別のリージョンのセカンダリクラスタへの地理的なフェールオーバーを手動で開始できます。
 
 > **警告：**
 >
-> 現在、 **TiDBクラウドレプリケーション**機能は<strong>パブリックプレビュー</strong>にあり、次の制限があります。
+> 現在、 **TiDB Cloudレプリケーション**機能は<strong>パブリックプレビュー</strong>にあり、次の制限があります。
 >
 > -   1つのプライマリクラスタは1つのレプリケーションのみを持つことができます。
-> -   別のクラスタへの**TiDBクラウドレプリケーション**のソースとしてセカンダリクラスタを使用することはできません。
-> -   **TiDBクラウドレプリケーション**は[**ApacheKafkaにシンクします**](/tidb-cloud/changefeed-sink-to-apache-kafka.md)と[**MySQLにシンク**](/tidb-cloud/changefeed-sink-to-mysql.md)と矛盾します。 <strong>TiDBクラウドレプリケーション</strong>が有効になっている場合、プライマリクラスターもセカンダリクラスタも<strong>Sink</strong> <strong>toApacheKafka</strong>またはSinktoMySQLチェンジフィードを使用できず、その逆も可能です。
-> -   TiDBクラウドはTiCDCを使用してレプリケーションを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。
+> -   別のクラスタへの**TiDB Cloudレプリケーション**のソースとしてセカンダリクラスタを使用することはできません。
+> -   **TiDB Cloudレプリケーション**は[**ApacheKafkaにシンクします**](/tidb-cloud/changefeed-sink-to-apache-kafka.md)と[**MySQLにシンク**](/tidb-cloud/changefeed-sink-to-mysql.md)と矛盾します。 <strong>TiDB Cloudレプリケーション</strong>が有効になっている場合、プライマリクラスターもセカンダリクラスタも<strong>Sink</strong> <strong>toApacheKafka</strong>またはSinktoMySQLチェンジフィードを使用できず、その逆も可能です。
+> -   TiDB CloudはTiCDCを使用してレプリケーションを確立するため、同じ[TiCDCとしての制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions)があります。
 
 アプリケーションのレプリケーションをサポートするには、アプリケーションをプライマリリージョンとセカンダリリージョンの両方にデプロイし、各アプリケーションが同じリージョンのTiDBクラスタに接続されていることを確認する必要があります。セカンダリリージョンのアプリケーションはスタンバイ状態です。プライマリリージョンに障害が発生した場合、「デタッチ」操作を開始してセカンダリリージョンのTiDBクラスタをアクティブにし、すべてのデータトラフィックをセカンダリリージョンのアプリケーションに転送できます。
 
-次の図は、TiDBクラウドレプリケーションを使用した地理冗長クラウドアプリケーションの一般的な展開を示しています。
+次の図は、TiDB Cloudレプリケーションを使用した地理冗長クラウドアプリケーションの一般的な展開を示しています。
 
 <!-- https://www.figma.com/file/DaevXzW4aq35QodwZEkcTS/DBaaS-Architecture-Chart-(high-level)-(Copy)?node-id=0%3A1 -->
 
@@ -31,7 +31,7 @@ TiDB Cloud Replicationを使用すると、地域の災害や大規模な障害�
 -   アプリケーションの各コンポーネントが同じ障害に対して回復力があり、アプリケーションの目標復旧時間（RTO）内に利用可能になるかどうかを確認します。アプリケーションの一般的なコンポーネントには、クライアントソフトウェア（カスタムJavaScriptを備えたブラウザーなど）、Webフロントエンド、ストレージ、およびDNSが含まれます。
 -   依存するすべてのサービスを特定し、これらのサービスの保証と機能を確認し、これらのサービスのフェイルオーバー中にアプリケーションが動作していることを確認します。
 
-## TiDBクラウドレプリケーションの用語と機能 {#terminology-and-capabilities-of-tidb-cloud-replication}
+## TiDB Cloudレプリケーションの用語と機能 {#terminology-and-capabilities-of-tidb-cloud-replication}
 
 ### 自動非同期レプリケーション {#automatic-asynchronous-replication}
 
@@ -73,7 +73,7 @@ TiDB Cloud Replicationを使用すると、地域の災害や大規模な障害�
 
 1.  プライマリクラスターからセカンダリクラスタへのデータレプリケーションをすぐに停止します。
 2.  元のセカンダリクラスタを書き込み可能として設定して、ワークロードの提供を開始できるようにします。
-3.  元のプライマリクラスタに引き続きアクセスできる場合、または元のプライマリクラスタが回復した場合、TiDBクラウドはそれを読み取り専用に設定して、新しいトランザクションがコミットされないようにします。
+3.  元のプライマリクラスタに引き続きアクセスできる場合、または元のプライマリクラスタが回復した場合、TiDB Cloudはそれを読み取り専用に設定して、新しいトランザクションがコミットされないようにします。
 
 元のプライマリクラスタが停止から回復した後も、2つのクラスターのデータを比較することにより、元のプライマリクラスタで実行されたが、元のセカンダリクラスタでは実行されなかったトランザクションを確認し、手動でレプリケートするかどうかを決定する機会があります。これらの非同期トランザクションは、ビジネスの状況に基づいて元のセカンダリクラスタに送信されます。
 
@@ -88,9 +88,9 @@ TiDB Cloud Replicationを使用すると、地域の災害や大規模な障害�
     set global tidb_super_read_only=OFF;
     ```
 
-## TiDBクラウドレプリケーションを構成する {#configure-tidb-cloud-replication}
+## TiDB Cloudレプリケーションを構成する {#configure-tidb-cloud-replication}
 
-TiDBクラウドレプリケーションを構成するには、次の手順を実行します。
+TiDB Cloudレプリケーションを構成するには、次の手順を実行します。
 
 1.  **TiDB**クラスタの[チェンジフィード]タブに移動します。
 2.  [ **TiDBクラスターのレプリカを作成する]を**クリックします。

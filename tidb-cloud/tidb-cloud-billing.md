@@ -3,13 +3,13 @@ title: TiDB Cloud Billing
 summary: Learn about TiDB Cloud billing.
 ---
 
-# TiDBクラウド請求 {#tidb-cloud-billing}
+# TiDB Cloud請求 {#tidb-cloud-billing}
 
 > **ノート：**
 >
-> [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)は最長1年間無料で使用できます。開発者層クラスタの使用に対して料金が請求されることはなく、TiDBクラウドの請求書に開発者層の料金が表示されることもありません。
+> [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)は最長1年間無料で使用できます。開発者層クラスタの使用に対して料金が請求されることはなく、TiDB Cloudの請求書に開発者層の料金が表示されることもありません。
 
-TiDBクラウドは、消費するリソースに応じて課金されます。これには次のものが含まれます。
+TiDB Cloudは、消費するリソースに応じて課金されます。これには次のものが含まれます。
 
 -   クラスターノードの計算
 -   一次データストレージ
@@ -22,17 +22,17 @@ TiDBクラウドは、消費するリソースに応じて課金されます。�
 
 TiDB Cloudを使用すると、データベースクラスタのコンピューティングリソースの料金を時間単位で支払うことができます。これは、動的なワークロードに最適です。
 
-TiDBクラウドでは、TiDB、TiKV、TiFlash<sup>ベータ版</sup>のノード数とvCPUサイズを指定することで、クラスタサイズを簡単に制御できます。
+TiDB Cloudでは、TiDB、TiKV、TiFlash<sup>ベータ版</sup>のノード数とvCPUサイズを指定することで、クラスタサイズを簡単に制御できます。
 
 指定されたノード数と関連するvCPUによって、1時間あたりの計算コストが決まります。
 
-TiDB、TiKV、およびTiFlash<sup>ベータ</sup>ノードの計算コストは、クラウドプロバイダーや地域によって異なる場合があることに注意してください。詳細については、 [TiDBクラウドの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
+TiDB、TiKV、およびTiFlash<sup>ベータ</sup>ノードの計算コストは、クラウドプロバイダーや地域によって異なる場合があることに注意してください。詳細については、 [TiDB Cloudの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 
 ## ストレージコスト {#storage-cost}
 
 TiKVとTiFlashの両方の<sup>ベータ</sup>ノードは、データを永続的なブロックストレージに保存します。ストレージコストは、クラスタのすべてのTiKVおよびTiFlash<sup>ベータ</sup>ノードが消費するストレージの総量に応じて生成されます。
 
-TiDB Cloudは、発生したコストを顧客に渡します。詳細については、 [TiDBクラウドの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
+TiDB Cloudは、発生したコストを顧客に渡します。詳細については、 [TiDB Cloudの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 
 ## バックアップストレージのコスト {#backup-storage-cost}
 
@@ -60,9 +60,9 @@ AWSとGCPはどちらも、データがクラウド内を移動したりクラ�
 
 TiDB Cloudは、これらの料金が発生したときに、公開されている[AWS](https://aws.amazon.com/ec2/pricing/on-demand/)および[GCP](https://cloud.google.com/vpc/network-pricing)の価格表を使用して計算され、追加料金なしで顧客に渡します。
 
-このコストポリシーは、クラスターのライセンス方法に関係なく、クラスターが[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)つあるすべてのTiDBクラウドのお客様に適用されます。
+このコストポリシーは、クラスターのライセンス方法に関係なく、クラスターが[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)つあるすべてのTiDB Cloudのお客様に適用されます。
 
-これらの料金を表示しやすくするために、TiDBクラウドの請求書と請求書は、すべてのデータ転送料金を次のカテゴリに集約して整理します。
+これらの料金を表示しやすくするために、TiDB Cloudの請求書と請求書は、すべてのデータ転送料金を次のカテゴリに集約して整理します。
 
 -   データ転送–同じ地域
 -   データ転送–クロスリージョン
@@ -118,7 +118,7 @@ TiDB Cloudは、これらの料金が発生したときに、公開されてい�
 
 ## 支払方法 {#payment-method}
 
-組織の所有者または請求管理者であれば、TiDBクラウドの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
+組織の所有者または請求管理者であれば、TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
 > **ノート：**
 >

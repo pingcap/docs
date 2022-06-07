@@ -3,9 +3,9 @@ title: TiDB Cloud Release Notes in 2020
 summary: Learn about the release notes of TiDB Cloud in 2020.
 ---
 
-# 2020年のTiDBクラウドリリースノート {#tidb-cloud-release-notes-in-2020}
+# 2020年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2020}
 
-このページには、2020年の[TiDBクラウド](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
+このページには、2020年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
 ## 2020年12月30日 {#december-30-2020}
 
@@ -64,7 +64,7 @@ summary: Learn about the release notes of TiDB Cloud in 2020.
 
 ## 2020年8月6日 {#august-6-2020}
 
--   メールサポートをTiDBクラウドカスタマーサポートにアクセスするように変更します
+-   メールサポートをTiDB Cloudカスタマーサポートにアクセスするように変更します
 -   カスタム電子メールログイン用のシンプルな2FA機能を追加します
 -   VPCピアリングを設定する機能を追加します
 -   サインアップ/ログイン用のカスタム電子メールサポートを追加します

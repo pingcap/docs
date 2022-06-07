@@ -3,7 +3,7 @@ title: TiDB Cloud Support
 summary: Learn how to contact the support team of TiDB Cloud.
 ---
 
-# TiDBクラウドサポート {#tidb-cloud-support}
+# TiDB Cloudサポート {#tidb-cloud-support}
 
 TiDB Cloudは、組織にサポートサービスを提供します。サポートチームに連絡するには、次の手順を実行します。
 
