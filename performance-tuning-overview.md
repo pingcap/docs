@@ -24,7 +24,7 @@ To get a total user response time within a specified time range (`ΔT`), you can
 
 Total user response time in `ΔT` = Average TPS (Transactions Per Second) x Average user response time x `ΔT`.
 
-![user_response_time](/media/performance/user_response_time_cn.png)
+![user_response_time](/media/performance/user_response_time_en.png)
 
 ### Database time
 
@@ -60,8 +60,8 @@ The performance tuning process consists of the following 6 steps:
 2. Establish a performance baseline.
 3. Identify bottlenecks in user response time.
 4. Propose tuning solutions, and evaluate the benefits, risks, and costs of each solution.
-5. Implement the tuning solution.
-6. Evaluate the tuning results.
+5. Implement tuning solutions.
+6. Evaluate tuning results.
 
 To achieve the tuning objective of a performance tuning project, you usually need to repeat Step 2 to Step 6 multiple times.
 
@@ -112,13 +112,13 @@ Note that even if a solution can bring the greatest potential benefits by tunnin
 - The most straightforward tuning objective solution for a resource-overloaded system is to expand its capacity, but in practice, the expansion solution might be too costly to be adopted.
 - When a slow query in a business module causes a slow response of the entire module, upgrading to a new version of the database can solve the slow query issue, but it might also affect modules that did not have this issue. Therefore, this solution might have a potentially high risk. A low-risk solution is to skip the database version upgrade and rewrite the existing slow queries for the current database version.
 
-### Step 5. Implement the tuning solutions
+### Step 5. Implement tuning solutions
 
 Considering the benefits, risks, and costs, choose one or more tuning solutions for implementation. In the implementation process, you need to make thorough preparation for changes to the production system and record the changes in detail.
 
 To mitigate risks and validate the benefits of a tuning solution, it is recommended that you perform validation and complete regression of changes in both test and staging environments. For example, if the selected tuning solution of a slow query is to create a new index to optimize the query access path, you need to ensure that the new index does not introduce any obvious write hotspots to the existing data insertion workload and slows down other modules.
 
-### Step 6. Evaluate the tuning results
+### Step 6. Evaluate tuning results
 
 After applying the tuning solution, you need to evaluate the results:
 
