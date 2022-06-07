@@ -402,7 +402,7 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 > **Note:**
 >
-> TiKV API V2 is still an experimental feature. It is not recommended to use it production environments.
+> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
 
 + The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
 + Value options:
@@ -1613,6 +1613,10 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 + Default value: `500ms`
 
 ## causal-ts <span class="version-mark">New in v6.1.0</span>
+
+> **Note:**
+>
+> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
 
 Configuration items related to getting the timestamp when TiKV API V2 is enabled (`storage.api-version = 2`).
 
