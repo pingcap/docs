@@ -868,7 +868,7 @@ Configuration items related to Coprocessor.
 >
 > - `enable-region-bucket` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
 > - This configuration makes sense only when `region-split-size` is twice of `region-bucket-size` or above; otherwise, no bucket is actually generated.
-> Adjusting `region-split-size` to a larger value might have the risk of performance regression and slow scheduling.
+> - Adjusting `region-split-size` to a larger value might have the risk of performance regression and slow scheduling.
 
 ### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
 
