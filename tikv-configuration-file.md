@@ -399,6 +399,10 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 
 ### `api-version` <span class="version-mark">New in v6.1.0</span>
 
+> **Note:**
+>
+> TiKV API V2 is still an experimental feature. It is not recommended to use it production environments.
+
 + The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
 + Value options:
     + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
