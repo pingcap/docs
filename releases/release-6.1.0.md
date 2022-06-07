@@ -16,11 +16,8 @@ In 6.1.0, the key new features or improvements are as follows:
 * Support non-transactional DML statements (only support `DELETE`)
 * TiFlash supports on-demand data compaction
 * MPP introduces the window function framework
-* TiFlash updates the storage format to deliver stronger performance and stability
 * TiCDC supports replicating changelogs to Kafka via Avro
 * The optimistic mode for merging and migrating sharded tables becomes GA
-
-*Note: TiFlash 6.1 has introduced many new features. To upgrade smoothly, please refer to [TiFlash v6.1.0 Upgrade Guide](/tiflash-610-upgrade.md).*
 
 ## New Features
 
@@ -36,7 +33,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     [User document](/sql-statements/sql-statement-alter-table-compact.md), [#4145](https://github.com/pingcap/tiflash/issues/4145)
 
-* TiFlash implements the window function framework and supports the following window functions：[FD-311 [TCE] Support window function row number for MPP](https://internal.pingcap.net/jira/browse/FD-311)
+* TiFlash implements the window function framework and supports the following window functions:
 
     * `RANK()`
     * `DENSE_RANK()`
@@ -99,14 +96,6 @@ In 6.1.0, the key new features or improvements are as follows:
 
     [User document: Access partitioned tables in the MPP mode](/tiflash/use-tiflash#access-partitioned-tables-in-the-mpp-mode), [User document: Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
-* TiFlash supports a new storage format to enhance performance and stability
-
-    The new storage format reduces IO and CPU consumed by background tasks, which boosts stability under heavy load.
-
-    Note that TiFlash does not support in-place downgrade, because earlier TiFlash versions cannot recognize the new storage format. Therefore, plan your upgrade with full considerations. If you still need to downgrade your cluster, see [TiFlash v6.1.0 Upgrade Guide](/tiflash-610-upgrade.md).
-
-    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
-
 ### Stability
 
 * Automatic recovery from SST corruption
@@ -157,7 +146,7 @@ In 6.1.0, the key new features or improvements are as follows:
     * Support configuring some TiKV parameters online. For a detailed list of the parameters, see [Others](#others).
     * Transform the TiFlash configuration item `max_threads` to a system variable `tidb_max_tiflash_threads`, so that the configuration can be modified online and persisted. Note that the original configuration item remains after transformation.
 
-    For v6.1.0 clusters upgraded (including online and offline upgrades ) from earlier versions, note that:
+    For v6.1.0 clusters upgraded (including online and offline upgrades) from earlier versions, note that:
 
     * If the configuration  items specified in the configuration file before the upgrade already exist, TiDB will automatically update the values of the configured items to those of the corresponding system variables during the upgrade process. In this way, after the upgrade, the system behavior is not affected by parameter optimization.
     * The automatic update mentioned above occurs only once during the upgrade. After the upgrade, the deprecated configuration items are no longer effective.
@@ -283,7 +272,6 @@ In 6.1.0, the key new features or improvements are as follows:
 | TiKV | [`storage.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) | Newly added | The maximum recovery time is allowed after RocksDB detects a recoverable background error. |
 | TiKV | [`storage.block-cache.api-version`](/tikv-configuration-file.md#api-version-new-in-v610) | Newly added | The storage format and interface version used by TiKV when TiKV serves as the raw key-value store. |
 | PD | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610) | Newly added | Controls the maximum waiting time for the store to go online. |
-| TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters) | Modified | The default value is changed from 3 to 4, which provides lower write amplification and lower background task resource consumption. |
 | TiCDC | [`enable-tls`](/ticdc/manage-ticdc.md#configure-sink-uri-with-kafka) | Newly added | Whether to use TLS to connect to the downstream Kafka instance. |
 | TiCDC | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | Newly added | Used to support SASL/GSSAPI authentication for Kafka. For details, see [Configure sink URI with `kafka`](/ticdc/manage-ticdc.md#configure-sink-uri-with-kafka). |
 | TiCDC | [`avro-decimal-handling-mode`](/ticdc/manage-ticdc.md#configure-sink-uri-with-kafka)<br/>[`avro-bigint-unsigned-handling-mode`](/ticdc/manage-ticdc.md#configure-sink-uri-with-kafka) | Newly added | Determines the output details of Avro format. |
@@ -321,8 +309,6 @@ In 6.1.0, the key new features or improvements are as follows:
 
     * If the configuration items specified in the configuration file before the upgrade already exist, TiDB will automatically update the values of the configured items to those of the corresponding system variables during the upgrade process. In this way, after the upgrade, the system behavior does not change thanks to parameter optimization.
     * The automatic update mentioned above occurs only once during the upgrade. After the upgrade, the deprecated configuration items are no longer effective.
-
-* TiFlash's new storage format cannot be directly downgraded from v3 to v2. For details, refer to the [TiFlash Upgrade Guide](/tiflash-610-upgrade.md).
 
 * The Dashboard page is removed from DM WebUI.
 
@@ -404,10 +390,6 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
     - Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
 
-+ TiDB Dashboard
-
-    - Fix a bug that Top SQL cannot collect the CPU overhead of the SQL statements that were running before the Top SQL feature is enabled [#33859](https://github.com/pingcap/tidb/issues/33859)
-
 + TiFlash
 
     - Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
@@ -420,23 +402,27 @@ In 6.1.0, the key new features or improvements are as follows:
         - Fix OOM caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
         - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
 
-+ TiDB Data Migration (DM)
+    + TiDB Dashboard
 
-    - Fix the `start-time` time zone issue and change DM behavior from using the downstream time zone to using the upstream time zone [#5271](https://github.com/pingcap/tiflow/issues/5471)
-    - Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
-    - Fix the problem that checkpoint flush may cause the data of failed rows to be skipped [#5279](https://github.com/pingcap/tiflow/issues/5279)
-    - Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
-    - Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
-    - Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
-    - Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
-    - Fix the offline option and other usage issues in DM WebUI [#4993](https://github.com/pingcap/tiflow/issues/4993)
-    - Fix the issue that incremental tasks fail to start when GTID is empty in the upstream  [#3731](https://github.com/pingcap/tiflow/issues/3731)
-    - Fix the issue that empty configurations may cause dm-master to panic [#3732](https://github.com/pingcap/tiflow/issues/3732)
+        - Fix a bug that Top SQL cannot collect the CPU overhead of the SQL statements that were running before the Top SQL feature is enabled [#33859](https://github.com/pingcap/tidb/issues/33859)
 
-+ TiDB Lightning
+    + TiDB Data Migration (DM)
 
-    - Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
-    - Fix the issue of incorrect routing for schemas [#33381](https://github.com/pingcap/tidb/issues/33381)
-    - Fix the issue that the PD configuration is not restored correctly when TiDB Lightning panics [#31733](https://github.com/pingcap/tidb/issues/31733)
-    - Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#29737](https://github.com/pingcap/tidb/issues/27937)
-    - Fix the issue of local backend import failure when the `auto_random` or `auto_increment` column is null [#34208](https://github.com/pingcap/tidb/issues/34208)
+        - Fix the `start-time` time zone issue and change DM behavior from using the downstream time zone to using the upstream time zone [#5271](https://github.com/pingcap/tiflow/issues/5471)
+        - Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
+        - Fix the problem that checkpoint flush may cause the data of failed rows to be skipped [#5279](https://github.com/pingcap/tiflow/issues/5279)
+        - Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
+        - Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
+        - Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
+        - Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
+        - Fix the offline option and other usage issues in DM WebUI [#4993](https://github.com/pingcap/tiflow/issues/4993)
+        - Fix the issue that incremental tasks fail to start when GTID is empty in the upstream  [#3731](https://github.com/pingcap/tiflow/issues/3731)
+        - Fix the issue that empty configurations may cause dm-master to panic [#3732](https://github.com/pingcap/tiflow/issues/3732)
+
+    + TiDB Lightning
+
+        - Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
+        - Fix the issue of incorrect routing for schemas [#33381](https://github.com/pingcap/tidb/issues/33381)
+        - Fix the issue that the PD configuration is not restored correctly when TiDB Lightning panics [#31733](https://github.com/pingcap/tidb/issues/31733)
+        - Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#29737](https://github.com/pingcap/tidb/issues/27937)
+        - Fix the issue of local backend import failure when the `auto_random` or `auto_increment` column is null [#34208](https://github.com/pingcap/tidb/issues/34208)
