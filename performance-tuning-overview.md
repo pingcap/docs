@@ -37,7 +37,7 @@ User response time consists of service time, queuing time, and concurrent waitin
 User Response time = Service time + Queuing delay + Coherency delay
 ```
 
-- Service Time: the time a system consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
+- Service time: the time a system consumes on certain resources when processing a request, for example, the CPU time that a database consumes to complete a SQL request.
 - Queuing delay: the time a system waits in a queue for service of certain resources when processing a request.
 - Coherency delay: the time a system communicates and collaborates with other concurrent tasks, so that it can access shared resources when processing a request.
 
@@ -45,14 +45,14 @@ System throughput indicates the number of requests that can be completed by a sy
 
 For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different users might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
 
-## performance tuning process
+## Performance tuning process
 
 The performance tuning process consists of the following 6 steps:
 
 1. Define a tuning objective.
 2. Establish a performance baseline.
 3. Identify bottlenecks in user response time.
-4. Propose tuning solutions, evaluate the benefits, risks, and costs of each solution
+4. Propose tuning solutions, and evaluate the benefits, risks, and costs of each solution.
 5. Implement the tuning solution.
 6. Evaluate the tuning results.
 
@@ -94,7 +94,7 @@ In contrast, databases have a complete record of performance metrics such as que
 
 For more information about the analysis and diagnostic methods and tools, see [Performance Tuning Methods](/performance-tuning-methods.md).
 
-### Step 4. Propose tuning solutions, evaluate the benefits, risks, and costs of each solution
+### Step 4. Propose tuning solutions, and evaluate the benefits, risks, and costs of each solution
 
 After identifying the bottleneck of a system through performance analysis, you can propose a tuning solution that is cost-effective, has low risks, and provides the maximum benefit based on the actual situation.
 

@@ -176,7 +176,7 @@
         - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
         - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
         - [TiKV Follower Read](/follower-read.md)
-        - [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
+        - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
       - [Coprocessor Cache](/coprocessor-cache.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
