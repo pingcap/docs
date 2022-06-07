@@ -398,7 +398,6 @@ After disabling the `ANALYZE` configuration persistence feature, TiDB does not c
 >
 > When you enable the `ANALYZE` configuration persistence feature again, if the previously recorded persistence configurations are no longer applicable to the latest data, you need to execute the `ANALYZE` statement manually and specify the new persistence configurations.
 
-
 ### The memory quota for collecting statistics
 
 > **Warning:**
