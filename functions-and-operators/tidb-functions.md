@@ -240,7 +240,7 @@ The `TIDB_SHARD` function can be used to create a shard index to scatter the ind
 
 - Creation:
 
-    You can use `uk((tidb_shard(a)), a))` to create a shard index for the index `a`. When there is a hotspot caused by monotonically increasing or decreasing data on the index field `a` in the unique secondary index `uk((tidb_shard(a)), a))`, the index's prefix `tidb_shard(a)` can scatter the hotspot to improve the cluster's scalability.
+    You can use `uk((tidb_shard(a)), a))` to create a shard index for the field `a`. When there is a hotspot caused by monotonically increasing or decreasing data on the index field `a` in the unique secondary index `uk((tidb_shard(a)), a))`, the index's prefix `tidb_shard(a)` can scatter the hotspot to improve the cluster's scalability.
 
 - Scenarios:
 
