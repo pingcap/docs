@@ -32,7 +32,7 @@
     - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
     - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
-  - Design Database Schema 
+  - Design Database Schema
     - [Overview](/develop/dev-guide-schema-design-overview.md)
     - [Create a Database](/develop/dev-guide-create-database.md)
     - [Create a Table](/develop/dev-guide-create-table.md)
@@ -76,6 +76,14 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+    - Outdated
+        - [For Hibernate ORM](/develop/dev-guide-outdated-for-hibernate-orm.md)
+        - [For Django](/develop/dev-guide-outdated-for-django.md)
+        - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
+        - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
+        - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
+        - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+        - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
