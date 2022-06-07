@@ -391,7 +391,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
     - Fix the issue that TiKV reports the `failed to load_latest_options` error when upgrading from v5.3.1 or v5.4.0 to v6.0.0 [#12269](https://github.com/tikv/tikv/issues/12269)
     - Fix the issue of OOM caused by appending Raft logs when the memory resource is insufficient [#11379](https://github.com/tikv/tikv/issues/11379)
-    - Fix the issue ofTiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
+    - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
     - Fix the issue of TiKV memory usage spike in a short time after `stats_monitor` falls into a dead loop [#12416](https://github.com/tikv/tikv/issues/12416)
     - Fix the issue that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
 
