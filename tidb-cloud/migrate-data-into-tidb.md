@@ -15,10 +15,19 @@ This document describes how to use [Dumpling](https://docs.pingcap.com/tidb/stab
 
 ## Prerequisites
 
-TiDB currently only supports the following CI collations. Before migrating data from MySQL-compatible databases into TiDB, ensure that the supported collations can meet your requirements.
+Before migrating data from MySQL-compatible databases into TiDB, ensure that the supported collations of TiDB can meet your requirements.
 
+By default, TiDB supports the following CI collations:
+
+- ascii_bin
+- binary
+- latin1_bin
+- utf8_bin
 - utf8_general_ci
+- utf8_unicode_ci
+- utf8mb4_bin
 - utf8mb4_general_ci
+- utf8mb4_unicode_ci
 
 ## Step 1. Install TiUP
 
