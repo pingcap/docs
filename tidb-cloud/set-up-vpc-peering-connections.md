@@ -186,7 +186,7 @@ AWSダッシュボードを使用して、VPCピアリング接続を設定す�
 
     5.  [設定]ドロップダウンリストから、[ **DNS解決の編集**]をクリックします。 DNS解決を有効にして、[<strong>保存</strong>]をクリックします。
 
-### ステップ3：TiDBクラウド上のTiDBクラスタに接続する {#step-3-connect-to-the-tidb-cluster-on-tidb-cloud}
+### ステップ3：TiDB Cloud上のTiDBクラスタに接続する {#step-3-connect-to-the-tidb-cluster-on-tidb-cloud}
 
 1.  [ **TiDBクラスター]**ページに移動して、クラスタを見つけます。
 

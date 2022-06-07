@@ -3,9 +3,9 @@ title:  Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud
 summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud.
 ---
 
-# AmazonS3またはGCSからTiDBクラウドにApacheParquetファイルをインポートします {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}
+# AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
-非圧縮データファイルとSnappy圧縮[アパッチパーケット](https://parquet.apache.org/)形式データファイルの両方をTiDBクラウドにインポートできます。このドキュメントでは、ParquetファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDBCloudにインポートする方法について説明します。
+非圧縮データファイルとSnappy圧縮[アパッチパーケット](https://parquet.apache.org/)形式データファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、ParquetファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDBCloudにインポートする方法について説明します。
 
 > **ノート：**
 >
@@ -25,7 +25,7 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 
 1.  Parquetファイルが256MBより大きい場合は、ファイルをそれぞれ約256MBの小さなファイルに分割することを検討してください。
 
-    TiDB Cloudは、非常に大きなParquetファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、TiDBクラウドが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
+    TiDB Cloudは、非常に大きなParquetファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
 
 2.  バケット内の既存のオブジェクトの命名規則に従って、インポートする寄木細工の床のファイルの名前と一致するテキストパターンを特定します。
 
@@ -66,13 +66,13 @@ ParquetファイルをTiDBCloudにインポートする前に、ターゲット�
 
 TiDBCloudがAmazonS3またはGCSバケット内のParquetファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   組織がAWSでサービスとしてTiDBクラウドを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   組織がAWSでサービスとしてTiDB Cloudを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、ロールARN値をメモします。
 
 -   組織でTiDBCloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
-## ステップ4.ParquetファイルをTiDBクラウドにインポートします {#step-4-import-parquet-files-to-tidb-cloud}
+## ステップ4.ParquetファイルをTiDB Cloudにインポートします {#step-4-import-parquet-files-to-tidb-cloud}
 
 ParquetファイルをTiDBCloudにインポートするには、次の手順を実行します。
 

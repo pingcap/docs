@@ -3,7 +3,7 @@ title:  Import CSV Files from Amazon S3 or GCS into TiDB Cloud
 summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 ---
 
-# AmazonS3またはGCSからTiDBクラウドにCSVファイルをインポートする {#import-csv-files-from-amazon-s3-or-gcs-into-tidb-cloud}
+# AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする {#import-csv-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
 このドキュメントでは、非圧縮のCSVファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDBCloudにインポートする方法について説明します。
 
@@ -16,7 +16,7 @@ summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 
 1.  CSVファイルが256MBより大きい場合は、ファイルをそれぞれ256MB程度の小さなファイルに分割することを検討してください。
 
-    TiDB Cloudは、非常に大きなCSVファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、TiDBクラウドが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
+    TiDB Cloudは、非常に大きなCSVファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
 
 2.  バケット内の既存のオブジェクトの命名規則に従って、インポートするCSVファイルの名前と一致するテキストパターンを特定します。
 
@@ -57,13 +57,13 @@ CSVファイルをTiDBCloudにインポートする前に、ターゲットデ�
 
 TiDBCloudがAmazonS3またはGCSバケット内のCSVファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   組織がAWSでサービスとしてTiDBクラウドを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   組織がAWSでサービスとしてTiDB Cloudを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、ロールARN値をメモします。
 
 -   組織でTiDBCloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
-## ステップ4.CSVファイルをTiDBクラウドにインポートする {#step-4-import-csv-files-to-tidb-cloud}
+## ステップ4.CSVファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
 
 CSVファイルをTiDBCloudにインポートするには、次の手順を実行します。
 

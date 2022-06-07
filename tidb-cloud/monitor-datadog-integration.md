@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster with the Datadog integration.
 
 # Datadog統合 {#datadog-integration}
 
-TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDBクラウドを構成できます。その後、これらのメトリックをDatadogダッシュボードで直接表示できます。
+TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成できます。その後、これらのメトリックをDatadogダッシュボードで直接表示できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -38,7 +38,7 @@ TiDBクラスターに関するメトリックデータを[Datadog](https://www.
 
 6.  [**確認]**をクリックして統合を完了します。
 
-### ステップ2.DatadogにTiDBクラウド統合をインストールする {#step-2-install-tidb-cloud-integration-in-datadog}
+### ステップ2.DatadogにTiDB Cloud統合をインストールする {#step-2-install-tidb-cloud-integration-in-datadog}
 
 1.  [Datadog](https://app.datadoghq.com)にログインします。
 2.  Datadogの**TiDBCloudIntegration**ページ（ [https://app.datadoghq.com/account/settings#integrations/tidb-cloud](https://app.datadoghq.com/account/settings#integrations/tidb-cloud) ）に移動します。

@@ -5,11 +5,11 @@ category: quick start
 aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 ---
 
-# TiDBクラウドクイックスタート {#tidb-cloud-quick-start}
+# TiDB Cloudクイックスタート {#tidb-cloud-quick-start}
 
 *推定完了時間：20分*
 
-このチュートリアルでは、TiDBクラウドを簡単に使い始める方法について説明します。コンテンツには、クラスタの作成方法、クラスタへの接続方法、データのインポート方法、およびクエリの実行方法が含まれます。
+このチュートリアルでは、TiDB Cloudを簡単に使い始める方法について説明します。コンテンツには、クラスタの作成方法、クラスタへの接続方法、データのインポート方法、およびクエリの実行方法が含まれます。
 
 ## 手順1.TiDBクラスタを作成する {#step-1-create-a-tidb-cluster}
 
@@ -20,8 +20,8 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップしてください。
 
-    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDBクラウドコンソールを使用して変更することはできません。
-    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDBクラウドコンソールを使用して変更することはできません。
+    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
 
 2.  TiDBCloudアカウントに[ログイン](https://tidbcloud.com/) 。
 
@@ -43,8 +43,8 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップしてください。
 
-    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDBクラウドコンソールを使用して変更することはできません。
-    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDBクラウドコンソールを使用して変更することはできません。
+    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
     -   AWS Marketplaceユーザーの場合、AWSMarketplaceからサインアップすることもできます。これを行うには、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)分の`TiDB Cloud`を検索し、TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDBCloudアカウントを設定します。
 
 2.  TiDBCloudアカウントに[ログイン](https://tidbcloud.com/) 。
@@ -116,7 +116,7 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
     SELECT TiDB_version();
     ```
 
-    リリースバージョン情報が表示されたら、TiDBクラウドクラスタでMySQLクライアントを試す準備ができています。
+    リリースバージョン情報が表示されたら、TiDB CloudクラスタでMySQLクライアントを試す準備ができています。
 
 ## ステップ3.サンプルデータをインポートします {#step-3-import-the-sample-data}
 

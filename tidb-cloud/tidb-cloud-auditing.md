@@ -21,8 +21,8 @@ TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステー�
 
 ## 前提条件 {#prerequisites}
 
--   TiDBCloudDedicated層またはPOC層を使用しています。監査ログは、TiDBクラウド開発者層クラスターでは使用できません。
--   あなたはTiDBCloudの組織の監査管理者です。そうしないと、TiDBクラウドコンソールに監査関連のオプションが表示されません。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
+-   TiDBCloudDedicated層またはPOC層を使用しています。監査ログは、TiDB Cloud開発者層クラスターでは使用できません。
+-   あなたはTiDBCloudの組織の監査管理者です。そうしないと、TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
 
 ## AWSまたはGCPの監査ログを有効にする {#enable-audit-logging-for-aws-or-gcp}
 
@@ -47,12 +47,12 @@ TiDBCloudが監査ログを書き込む宛先として企業所有のAWSアカ�
 >
 > プロジェクト内の1つのクラスタに対してAmazonS3アクセス設定が実行されると、同じプロジェクト内のすべてのクラスターからの監査ログの宛先として同じバケットを使用できます。
 
-1.  監査ログを有効にするTiDBクラウドアカウントIDとTiDBクラスタの外部IDを取得します。
+1.  監査ログを有効にするTiDB CloudアカウントIDとTiDBクラスタの外部IDを取得します。
 
     1.  TiDB Cloudコンソールで、AWSにデプロイされたプロジェクトとクラスタを選択します。
     2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>ログの監査</strong>]ダイアログボックスが表示されます。
-    3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>ShowAWSIAMポリシー設定</strong>]をクリックします。対応するTiDBクラウドアカウントIDとTiDBクラスタのTiDBクラウド外部IDが表示されます。
-    4.  後で使用するために、TiDBクラウドアカウントIDと外部IDを記録します。
+    3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>ShowAWSIAMポリシー設定</strong>]をクリックします。対応するTiDB CloudアカウントIDとTiDBクラスタのTiDB Cloud外部IDが表示されます。
+    4.  後で使用するために、TiDB CloudアカウントIDと外部IDを記録します。
 
 2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、 `s3:PutObject`の書き込み専用アクセス許可を持つストレージバケットポリシーが存在するかどうかを確認します。
 
@@ -76,10 +76,10 @@ TiDBCloudが監査ログを書き込む宛先として企業所有のAWSアカ�
 
         テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれるS3バケットのAmazonリソース名（ARN）です。 S3バケットの[**プロパティ**]タブに移動し、[<strong>バケットの概要</strong>]領域でAmazonリソース名（ARN）の値を取得できます。 `"Resource"`フィールドでは、ARNの後に`/*`を追加する必要があります。たとえば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`として構成する必要があります。
 
-3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがTiDBクラウドアカウントIDと以前に記録した外部IDに対応するロールが既に存在するかどうかを確認します。
+3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがTiDB CloudアカウントIDと以前に記録した外部IDに対応するロールが既に存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために一致した役割を記録します。
-    -   そうでない場合は、[**ロールの作成**]をクリックし、信頼エンティティタイプとして[<strong>別のAWSアカウント</strong>]を選択してから、[<strong>アカウントID]</strong>フィールドにTiDBクラウドアカウントIDの値を入力します。次に、[<strong>外部IDが必要</strong>]オプションを選択し、[外部ID]フィールドにTiDBクラウドの<strong>外部</strong>ID値を入力します。
+    -   そうでない場合は、[**ロールの作成**]をクリックし、信頼エンティティタイプとして[<strong>別のAWSアカウント</strong>]を選択してから、[<strong>アカウントID]</strong>フィールドにTiDB CloudアカウントIDの値を入力します。次に、[<strong>外部IDが必要</strong>]オプションを選択し、[外部ID]フィールドにTiDB Cloudの<strong>外部</strong>ID値を入力します。
 
 4.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]で、前の手順のロール名をクリックして<strong>[概要</strong>]ページに移動し、次の手順を実行します。
 
@@ -96,7 +96,7 @@ TiDB Cloudコンソールで、TiDB CloudアカウントIDと外部ID値を取�
 
 3.  [**役割ARN]**フィールドに、 [ステップ2.AmazonS3アクセスを設定します](#step-2-configure-amazon-s3-access)でコピーした役割ARN値を入力します。
 
-4.  [**接続のテスト**]をクリックして、TiDBクラウドがバケットにアクセスして書き込むことができるかどうかを確認します。
+4.  [**接続のテスト**]をクリックして、TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
 
     成功すると、**パス**が表示されます。それ以外の場合は、アクセス構成を確認してください。
 
@@ -107,7 +107,7 @@ TiDB Cloudコンソールで、TiDB CloudアカウントIDと外部ID値を取�
 > **ノート：**
 >
 > -   監査ログを有効にした後、バケットのURL、場所、またはARNに新しい変更を加えた場合は、[**再起動**]をクリックして変更をロードし、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
-> -   TiDBクラウドからAmazonS3アクセスを削除するには、追加した信頼ポリシーを削除するだけです。
+> -   TiDB CloudからAmazonS3アクセスを削除するには、追加した信頼ポリシーを削除するだけです。
 
 </div>
 
@@ -164,7 +164,7 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[Au
 
 2.  [**バケット領域**]フィールドで、バケットが配置されているGCS領域を選択します。
 
-3.  [**接続のテスト**]をクリックして、TiDBクラウドがバケットにアクセスして書き込むことができるかどうかを確認します。
+3.  [**接続のテスト**]をクリックして、TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
 
     成功すると、**パス**が表示されます。それ以外の場合は、アクセス構成を確認してください。
 

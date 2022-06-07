@@ -4,9 +4,9 @@ summary: Learn about the release notes of TiDB Cloud in 2022.
 aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ---
 
-# 2022年のTiDBクラウドリリースノート {#tidb-cloud-release-notes-in-2022}
+# 2022年のTiDB Cloudリリースノート {#tidb-cloud-release-notes-in-2022}
 
-このページには、2022年の[TiDBクラウド](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
+このページには、2022年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
 ## 2022年5月24日 {#may-24-2022}
 
@@ -18,17 +18,17 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022年5月18日 {#may-18-2022}
 
--   GitHubアカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDBクラウドをサポートする
+-   GitHubアカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDB Cloudをサポートする
 
 ## 2022年5月13日 {#may-13-2022}
 
--   Googleアカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDBクラウドをサポートする
+-   Googleアカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDB Cloudをサポートする
 
 ## 2022年5月1日 {#may-1-2022}
 
 -   クラスタを作成または復元するときに、TiDB、TiKV、およびTiFlash<sup>ベータ</sup>のvCPUサイズの構成をサポートする
 -   クラスタ作成のためのAWSリージョン`Mumbai`のサポートを追加します
--   コンピューティング、ストレージ、およびデータ転送のコストを[TiDBクラウド課金](/tidb-cloud/tidb-cloud-billing.md)に更新します
+-   コンピューティング、ストレージ、およびデータ転送のコストを[TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md)に更新します
 
 ## 2022年4月7日 {#april-7-2022}
 
@@ -46,7 +46,7 @@ TiDBCloudが一般提供になりました。 [サインアップ](https://tidbc
 
 新機能：
 
--   サポート[TiDBクラウドの組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
+-   サポート[TiDB Cloudの組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
 
     TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDBCloudクラスタがTiDBCloudの組み込みアラート条件の1つをトリガーするたびに、電子メールで通知を受けることができます。
 
@@ -66,7 +66,7 @@ TiDBCloudが一般提供になりました。 [サインアップ](https://tidbc
 
 -   サポート[PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
-    PrometheusとGrafanaの統合により、TiDBクラウドエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)を使用してメトリックを表示するように[プロメテウス](https://prometheus.io/)のサービスを構成できます。
+    PrometheusとGrafanaの統合により、TiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)を使用してメトリックを表示するように[プロメテウス](https://prometheus.io/)のサービスを構成できます。
 
 -   新しいクラスタの選択したリージョンに基づいたデフォルトのバックアップ時間の割り当てをサポート
 
@@ -78,7 +78,7 @@ TiDBCloudが一般提供になりました。 [サインアップ](https://tidbc
 
 -   サポート[Datadogの統合](/tidb-cloud/monitor-datadog-integration.md)
 
-    Datadog統合を使用すると、TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDBクラウドを構成できます。その後、これらのメトリックをDatadogダッシュボードで直接表示できます。
+    Datadog統合を使用すると、TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成できます。その後、これらのメトリックをDatadogダッシュボードで直接表示できます。
 
 ## 2022年2月15日 {#february-15-2022}
 

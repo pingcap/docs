@@ -25,7 +25,7 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 -   **クラウドネイティブの分散データベース**
 
-    TiDBは、クラウド向けに設計された分散データベースであり、クラウドプラットフォームに柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすためにTiDBを柔軟にスケーリングできます。 TiDBでは、各データに少なくとも3つのレプリカがあり、データセンター全体の停止を許容するために、異なるクラウドアベイラビリティーゾーンでスケジュールすることができます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview)は、KubernetesでのTiDBの管理を支援し、TiDBクラスタの運用に関連するタスクを自動化します。これにより、管理対象のKubernetesを提供するクラウドにTiDBを簡単にデプロイできます。フルマネージドのTiDBサービスである[TiDBクラウド](https://pingcap.com/tidb-cloud/)は、 [クラウド内のTiDB](https://docs.pingcap.com/tidbcloud/)のフルパワーをアンロックするための最も簡単で、最も経済的で、最も回復力のある方法であり、数回クリックするだけでTiDBクラスターを展開および実行できます。
+    TiDBは、クラウド向けに設計された分散データベースであり、クラウドプラットフォームに柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすためにTiDBを柔軟にスケーリングできます。 TiDBでは、各データに少なくとも3つのレプリカがあり、データセンター全体の停止を許容するために、異なるクラウドアベイラビリティーゾーンでスケジュールすることができます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview)は、KubernetesでのTiDBの管理を支援し、TiDBクラスタの運用に関連するタスクを自動化します。これにより、管理対象のKubernetesを提供するクラウドにTiDBを簡単にデプロイできます。フルマネージドのTiDBサービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド内のTiDB](https://docs.pingcap.com/tidbcloud/)のフルパワーをアンロックするための最も簡単で、最も経済的で、最も回復力のある方法であり、数回クリックするだけでTiDBクラスターを展開および実行できます。
 
 -   **MySQL5.7プロトコルおよびMySQLエコシステムと互換性があります**
 

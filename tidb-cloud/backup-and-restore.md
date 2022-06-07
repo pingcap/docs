@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # TiDBクラスターデータのバックアップと復元 {#back-up-and-restore-tidb-cluster-data}
 
-このドキュメントでは、TiDBクラウドでTiDBクラスタデータをバックアップおよび復元する方法について説明します。
+このドキュメントでは、TiDB CloudでTiDBクラスタデータをバックアップおよび復元する方法について説明します。
 
 ## バックアップ {#backup}
 

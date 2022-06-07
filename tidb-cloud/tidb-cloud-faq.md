@@ -3,13 +3,13 @@ title: TiDB Cloud FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB Cloud.
 ---
 
-# TiDBクラウドに関するFAQ {#tidb-cloud-faqs}
+# TiDB Cloudに関するFAQ {#tidb-cloud-faqs}
 
 <!-- markdownlint-disable MD026 -->
 
 このドキュメントには、TiDBCloudに関して最もよくある質問がリストされています。
 
-## TiDBクラウドとは何ですか？ {#what-is-tidb-cloud}
+## TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
 TiDB Cloudは、直感的なコンソールを介して制御するフルマネージドクラウドインスタンスを使用して、TiDBクラスターの展開、管理、および保守をさらに簡単にします。アマゾンウェブサービスまたはGoogleCloudに簡単にデプロイして、ミッションクリティカルなアプリケーションをすばやく構築できます。
 
@@ -35,13 +35,13 @@ TiDB Cloudは現在、AmazonWebServicesとGoogleCloudで利用できます。
 
 ## TiDB CloudでサポートされているTiDBのバージョンは何ですか？ {#what-versions-of-tidb-are-supported-on-tidb-cloud}
 
-現在サポートされているTiDBバージョンについては、 [TiDBクラウドリリースノート](/tidb-cloud/release-notes-2022.md)を参照してください。
+現在サポートされているTiDBバージョンについては、 [TiDB Cloudリリースノート](/tidb-cloud/release-notes-2022.md)を参照してください。
 
 ## TiDB Cloudについて詳しく知るにはどうすればよいですか？ {#how-can-i-learn-more-about-tidb-cloud}
 
 TiDB Cloudについて学ぶ最良の方法は、ステップバイステップのチュートリアルに従うことです。開始するには、次のトピックを確認してください。
 
--   [TiDBクラウドの紹介](/tidb-cloud/tidb-cloud-intro.md)
+-   [TiDB Cloudの紹介](/tidb-cloud/tidb-cloud-intro.md)
 -   [はじめに](/tidb-cloud/tidb-cloud-quickstart.md)
 -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
@@ -49,7 +49,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 
 TiDBは、金融サービス、ゲーム、eコマースなどのさまざまな業界の1500を超えるグローバル企業から信頼されています。ユーザーには、Square（米国）、PayPay（日本）、Shopee（シンガポール）、China UnionPay（中国）が含まれます。具体的な詳細については、 [ケーススタディ](https://en.pingcap.com/customers/)を参照してください。
 
-## TiDBクラウドはどのようにして高可用性を保証しますか？ {#how-does-tidb-cloud-ensure-high-availability}
+## TiDB Cloudはどのようにして高可用性を保証しますか？ {#how-does-tidb-cloud-ensure-high-availability}
 
 TiDBは、Raftコンセンサスアルゴリズムを使用して、データの可用性が高く、Raftグループのストレージ全体に安全に複製されるようにします。データはTiKVノード間で冗長的にコピーされ、マシンまたはデータセンターの障害から保護するために異なるアベイラビリティーゾーンに配置されます。自動フェイルオーバーにより、TiDBはサービスが常にオンになっていることを保証します。
 

@@ -3,7 +3,7 @@ title: TiDB Cloud Built-in Alerting
 summary: Learn how to monitor your TiDB cluster by getting alert notification emails from TiDB Cloud.
 ---
 
-# TiDBクラウドビルトインアラート {#tidb-cloud-built-in-alerting}
+# TiDB Cloudビルトインアラート {#tidb-cloud-built-in-alerting}
 
 TiDB Cloudの組み込みアラート機能は、プロジェクト内のTiDBCloudクラスタがTiDBCloudの組み込みアラート条件の1つをトリガーするたびに、電子メールで通知される簡単な方法を提供します。
 
@@ -35,7 +35,7 @@ TiDBCloudの組み込みアラートをカスタマイズすることはでき�
 
 ## TiDBCloudの組み込みアラート条件 {#tidb-cloud-built-in-alert-conditions}
 
-次の表に、TiDBクラウドの組み込みアラート条件と対応する推奨アクションを示します。
+次の表に、TiDB Cloudの組み込みアラート条件と対応する推奨アクションを示します。
 
 > **ノート：**
 >
@@ -52,7 +52,7 @@ TiDBCloudの組み込みアラートをカスタマイズすることはでき�
 | TiFlash<sup>ベータ</sup>ノードの合計CPU使用率が10分間で80％を超えました        | プロジェクトXYZのクラスタABCの合計TiFlash<sup>ベータ</sup>ノードCPU使用率は、10分間で80％を超えました。これが続くと予想される場合は、TiFlash<sup>ベータ</sup>ノードを追加することをお勧めします。ノードのCPU使用率を監視するには、 [モニタリング指標](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                         |
 | `*` TiKVストレージ使用率が80％を超える                                | プロジェクトXYZのクラスタABCの合計TiKVストレージ使用率が80％を超えています。ストレージ容量を増やすために、TiKVノードを追加することをお勧めします。ストレージ使用率を監視するには、 [モニタリング指標](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                                                   |
 | `*` TiFlash<sup>ベータ</sup>ストレージの使用率が80％を超えています           | プロジェクトXYZのクラスタABCの合計TiFlash<sup>ベータ</sup>ストレージ使用率は80％を超えています。ストレージ容量を増やすために、TiFlash<sup>ベータ</sup>ノードを追加することをお勧めします。ストレージ使用率を監視するには、 [モニタリング指標](/tidb-cloud/monitor-tidb-cluster.md#monitoring-metrics)を参照してください。                                                 |
-| クラスタノードはオフラインです                                         | プロジェクトXYZのクラスタABCの一部またはすべてのノードがオフラインです。 TiDBクラウドオペレーションチームは、問題を認識して解決に取り組んでいます。最新情報は[TiDBクラウドステータス](https://status.tidbcloud.com/)を参照してください。ノードのステータスを監視するには、 [クラスタステータスとノードステータス](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status)を参照してください。 |
+| クラスタノードはオフラインです                                         | プロジェクトXYZのクラスタABCの一部またはすべてのノードがオフラインです。 TiDB Cloudオペレーションチームは、問題を認識して解決に取り組んでいます。最新情報は[TiDB Cloudステータス](https://status.tidbcloud.com/)を参照してください。ノードのステータスを監視するには、 [クラスタステータスとノードステータス](/tidb-cloud/monitor-tidb-cluster.md#cluster-status-and-node-status)を参照してください。 |
 
 > **ノート：**
 >

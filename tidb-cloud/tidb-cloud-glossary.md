@@ -5,7 +5,7 @@ category: glossary
 aliases: ['/tidbcloud/glossary']
 ---
 
-# TiDBクラウド用語集 {#tidb-cloud-glossary}
+# TiDB Cloud用語集 {#tidb-cloud-glossary}
 
 ## C {#c}
 
@@ -29,7 +29,7 @@ aliases: ['/tidbcloud/glossary']
 
 ### 組織 {#organization}
 
-TiDBクラウドアカウントを管理するために作成するエンティティ。これには、任意の数の複数のメンバーアカウントを持つ管理アカウントが含まれます。
+TiDB Cloudアカウントを管理するために作成するエンティティ。これには、任意の数の複数のメンバーアカウントを持つ管理アカウントが含まれます。
 
 ### 組織のメンバー {#organization-members}
 
@@ -57,7 +57,7 @@ TiDBクラウドアカウントを管理するために作成するエンティ�
 
 ### 領域 {#region}
 
--   TiDBクラウドリージョン
+-   TiDB Cloudリージョン
 
     同じ地理的領域に配置された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
 
@@ -89,7 +89,7 @@ TiKVからのデータをリアルタイムで複製し、リアルタイムの�
 
 ### トラフィックフィルター {#traffic-filter}
 
-SQLクライアントを介してTiDBクラウドクラスタにアクセスできるIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルターはデフォルトで空です。
+SQLクライアントを介してTiDB CloudクラスタにアクセスできるIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルターはデフォルトで空です。
 
 ## V {#v}
 

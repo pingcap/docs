@@ -18,7 +18,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 >
 >     -   オンプレミスの本番クラスタをデプロイするには、 [本番インストールガイド](/production-deployment-using-tiup.md)を参照してください。
 >     -   KubernetesにTiDBをデプロイするには、 [KubernetesでTiDBを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
->     -   クラウドでTiDBを管理するには、 [TiDBクラウドクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
+>     -   クラウドでTiDBを管理するには、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)を参照してください。
 
 ## ローカルテストクラスタをデプロイする {#deploy-a-local-test-cluster}
 

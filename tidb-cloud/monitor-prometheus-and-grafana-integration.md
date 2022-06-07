@@ -5,7 +5,7 @@ summary: Learn how to monitor your TiDB cluster with the Prometheus and Grafana 
 
 # PrometheusとGrafanaの統合 {#prometheus-and-grafana-integration}
 
-TiDBクラウドは[プロメテウス](https://prometheus.io/)のAPIエンドポイントを提供します。 Prometheusサービスを使用している場合は、エンドポイントからTiDBCloudの主要なメトリックを簡単に監視できます。
+TiDB Cloudは[プロメテウス](https://prometheus.io/)のAPIエンドポイントを提供します。 Prometheusサービスを使用している場合は、エンドポイントからTiDBCloudの主要なメトリックを簡単に監視できます。
 
 このドキュメントでは、TiDB Cloudエンドポイントから主要なメトリックを読み取るようにPrometheusサービスを構成する方法と、 [Grafana](https://grafana.com/)を使用してメトリックを表示する方法について説明します。
 
