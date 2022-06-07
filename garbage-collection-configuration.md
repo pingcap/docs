@@ -39,7 +39,7 @@ For information on changes in previous releases, refer to earlier versions of th
 
 ## Changes in TiDB 6.1.0
 
-Before TiDB v6.1.0, the transaction in TiDB does not affect the GC safe point. Since v6.1.0,  TiDB considers the startTS of the transaction when calculating the GC safe point, to resolve the problem that the data to be accessed has been cleared. If the transaction is too long, the safe point will be blocked for a long time, which affects the application peformance.
+Before TiDB v6.1.0, the transaction in TiDB does not affect the GC safe point. Since v6.1.0, TiDB considers the startTS of the transaction when calculating the GC safe point, to resolve the problem that the data to be accessed has been cleared. If the transaction is too long, the safe point will be blocked for a long time, which affects the application performance.
 
 In TiDB v6.1.0, the system variable [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610) is introduced to control the maximum time that active transactions block the GC safe point. After the value is exceeded, the GC safe point is forwarded forcefully.
 
