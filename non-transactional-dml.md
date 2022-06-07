@@ -17,7 +17,7 @@ Non-transactional DML statements include `INSERT`, `UPDATE`, and `DELETE`, of wh
 
 ## Usage scenarios
 
-In the scenarios of large data processing, you might often need to perform the same operation on a large batch of data. If you perform the operations directly using one SQL statement, the transaction size might exceed the limit and affect the execution performance.
+In the scenarios of large data processing, you might often need to perform same operations on a large batch of data. If the operation is performed directly using a single SQL statement, the transaction size might exceed the limit and affect the execution performance.
 
 Batch data processing often has no overlap of time or data with the online application operations. Isolation (I in ACID) is unnecessary when no concurrent operations exist. Atomicity is also unnecessary if bulk data operations are idempotent or easily retryable. If your application needs neither data isolation nor atomicity, you can consider using non-transactional DML statements.
 
@@ -31,10 +31,10 @@ Before using non-transactional DML statements, make sure that the following cond
 
 - The statement does not require atomicity, which permits some rows to be modified and some rows to remain unmodified in the execution result.
 - The statement is idempotent, or you are prepared to retry on a part of the data according to the error message. If the system variables are set to `tidb_redact_log = 1` and `tidb_nontransactional_ignore_error = 1`, this statement must be idempotent. Otherwise, when the statement partially fails, the failed part cannot be accurately located.
-- The data to be operated on by the statement has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing deletions and wrong deletions might occur.
+- The data to be operated on has no other concurrent writes, which means it is not updated by other statements at the same time. Otherwise, unexpected results such as missing deletions and wrong deletions might occur.
 - The statement does not modify the data to be read by the statement itself. Otherwise, the following batch will read the data written by the previous batch and easily causes unexpected results.
 - The statement meets the [restrictions](#restrictions).
-- It is not recommended to perform concurrent DDL operations on the table to be read and written by this DML statement.
+- It is not recommended to perform concurrent DDL operations on the table to be read or written by this DML statement.
 
 > **WARNING:**
 >
@@ -51,7 +51,7 @@ Create a table `t` with the following schema:
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t(id int, v int, key(id));
+CREATE TABLE t (id INT, v INT, KEY(id));
 ```
 
 ```sql
@@ -63,7 +63,7 @@ Insert some data into table `t`.
 {{< copyable "sql" >}}
 
 ```sql
-INSERT INTO t VALUES (1,2),(2,3),(3,4),(4,5),(5,6);
+INSERT INTO t VALUES (1, 2), (2, 3), (3, 4), (4, 5), (5, 6);
 ```
 
 ```sql
@@ -106,7 +106,7 @@ SELECT * FROM t;
 
 ### Check the execution progress
 
-During the execution of a non-transactional DML statement, you can view the execution progress using `SHOW PROCESSLIST`. The `Time` field in the returned result indicates the time consumption of the current batch execution. Logs and slow logs also record the progress of each split statement throughout the non-transactional DML execution. For example:
+During the execution of a non-transactional DML statement, you can view the progress using `SHOW PROCESSLIST`. The `Time` field in the returned result indicates the time consumption of the current batch execution. Logs and slow logs also record the progress of each split statement throughout the non-transactional DML execution. For example:
 
 {{< copyable "sql" >}}
 
@@ -150,7 +150,7 @@ BATCH ON id LIMIT 2 DRY RUN QUERY DELETE FROM t WHERE v < 6;
 
 ### Query the statements corresponding to the first and the last batches
 
-To query the actual DML statements corresponding to the first and last batches in a non-transactional DML statement, you can add `DRY RUN` to this non-transactional DML statement. Then, TiDB only divides batches and does not execute these SQL statements. Because there might be many batches, not all batches are displayed, and only the first one and the last one are displayed.
+To query the actual DML statements corresponding to the first and the last batches in a non-transactional DML statement, you can add `DRY RUN` to this non-transactional DML statement. Then, TiDB only divides batches and does not execute these SQL statements. Because there might be many batches, not all batches are displayed, and only the first one and the last one are displayed.
 
 {{< copyable "sql" >}}
 
@@ -192,8 +192,8 @@ To use a non-transactional DML statement, the following steps are recommended:
 
 | Parameter | Description | Default value | Required or not | Recommended value |
 | :-- | :-- | :-- | :-- | :-- |
-| Dividing column | The column used to batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a dividing column. | No | Select a column that can meet the `WHERE` condition in the most efficient way. |
-| Batch size | Used to control the size of each batch. The number of batches is the number of SQL statements into which DML operations are split, such as `LIMIT 2` in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6` 2`. The more batches, the smaller the batch size. | N/A | Yes | 1000-1000000. Too small or too large a batch will lead to performance degradation. |
+| Dividing column | The column used to divide batches, such as the `id` column in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. | TiDB tries to automatically select a dividing column. | No | Select a column that can meet the `WHERE` condition in the most efficient way. |
+| Batch size | Used to control the size of each batch. The number of batches is the number of SQL statements into which DML operations are split, such as `LIMIT 2` in the above non-transactional DML statement `BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`. The more batches, the smaller the batch size. | N/A | Yes | 1000-1000000. Too small or too large a batch will lead to performance degradation. |
 
 ### How to select a dividing column
 
@@ -209,9 +209,9 @@ You can also choose not to specify a dividing column. Then, TiDB will use the fi
 
 ### How to set batch size
 
-In non-transactional DML statements, the larger the batch size, the fewer SQL statements are split and the slower each SQL statement is executed. The optimal batch size depends on the workload. It is recommended to start from 50000. Both too small and too large batch sizes will cause decreased execution efficiency.
+In non-transactional DML statements, the larger the batch size, the fewer SQL statements are split and the slower each SQL statement is executed. The optimal batch size depends on the workload. It is recommended to start from 50000. Either too small or too large batch sizes will cause decreased execution efficiency.
 
-The information of each batch is stored in memory, so too many batches can significantly increase memory consumption. This explains why the batch size cannot be too small. The upper limit of memory consumed by non-transactional statements for storing batch information is the same as [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), and the action triggered when this limit is exceeded is determined by the configuration item [`oom-action`](/tidb-configuration -file.md#oom-action).
+The information of each batch is stored in memory, so too many batches can significantly increase memory consumption. This explains why the batch size cannot be too small. The upper limit of memory consumed by non-transactional statements for storing batch information is the same as [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), and the action triggered when this limit is exceeded is determined by the configuration item [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610).
 
 ## Restrictions
 
@@ -273,7 +273,7 @@ In addition, when other concurrent writes occur, the number of rows processed in
 
 The dividing column does not support `ENUM`, `BIT`, `SET`, `JSON` types. Try to specify a new dividing column. It is recommended to use an integer or string type column.
 
-If the error occurs when the dividing column you have selected is not one of these unsupported types, contact PingCAP technical support.
+If the error occurs when the selected dividing column is not one of these unsupported types, contact PingCAP technical support.
 
 ### Non-transactional `DELETE` has "exceptional" behavior that is not equivalent to ordinary `DELETE`
 
@@ -281,7 +281,7 @@ A non-transactional DML statement is not equivalent to the original form of this
 
 - There are other concurrent writes.
 - The non-transactional DML statement modifies a value that the statement itself will read.
-- The SQL statement actually executed in each batch might cause a different execution plan and expression calculation order because the `WHERE` condition is changed. Therefore, the execution result might be different from the original statement.
+- The SQL statement executed in each batch might cause a different execution plan and expression calculation order because the `WHERE` condition is changed. Therefore, the execution result might be different from the original statement.
 - The DML statements contain non-deterministic operations.
 
 ## MySQL compatibility
