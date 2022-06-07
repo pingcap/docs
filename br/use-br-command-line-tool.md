@@ -69,7 +69,7 @@ To back up cluster data, run the `br backup` command. You can add the `full` or 
 - [Back up data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
 - [Back up data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
 - [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data)
-- [Encrypt data during backup](/br/br-usage-backup.md#encrypte-backup-data-at-the-backup-end)
+- [Encrypt data during backup](/br/br-usage-backup.md#encrypt-backup-data-at-the-backup-end)
 
 ## Examples of using BR command-line to restore cluster data
 
