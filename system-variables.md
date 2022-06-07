@@ -1511,7 +1511,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Warning:**
 >
-> Currently, the ANALYZE memory quota is an experimental feature, and the memory statistics might be incorrect in production environments.
+> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be incorrect in production environments.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes

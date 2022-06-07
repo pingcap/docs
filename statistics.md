@@ -402,11 +402,11 @@ After disabling the `ANALYZE` configuration persistence feature, TiDB does not c
 
 > **Warning:**
 >
-> Currently, the ANALYZE memory quota is an experimental feature, and the memory statistics might be incorrect in production environments.
+> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be incorrect in production environments.
 
 In TiDB v6.1.0, the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is introduced to control the memory quota for collecting statistics.
 
-To pick a proper value of `tidb_mem_quota_analyze`, you should consider the data volume of cluster. When the default sampling rate is used, the main considerations are the number of columns, the size of the column values, and the memory configuration of TiDB. The following is the suggested configuration of maximum and minimum value:
+To pick a proper value of `tidb_mem_quota_analyze`, you should consider the data volume of the cluster. When the default sampling rate is used, the main considerations are the number of columns, the size of the column values, and the memory configuration of TiDB. The following is the suggested configuration of maximum and minimum values:
 
 > **Note:**
 >
