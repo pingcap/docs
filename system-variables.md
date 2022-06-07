@@ -1378,6 +1378,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_mem_quota_analyze <span class="version-mark">New in v6.1.0</span>
 
+> **Warning:**
+>
+> Currently, the ANALYZE memory quota is an experimental feature, and the memory statistics might be incorrect in production environment.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `0`
