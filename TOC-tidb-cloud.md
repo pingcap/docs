@@ -5,7 +5,6 @@
   - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
-  - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Get Started
   - [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
@@ -65,6 +64,7 @@
 - Reference
     - [Support](/tidb-cloud/tidb-cloud-support.md)
     - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+- [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
