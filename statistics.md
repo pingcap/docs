@@ -412,7 +412,7 @@ To pick a proper value of `tidb_mem_quota_analyze`, the data volume of cluster s
 >
 > The following suggestions are for reference only. The actual configuration needs to be tested in the real scenario.
 
-- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics on the most columns table. An approximate reference is that on the test set, a table with 20 columns collects statistics on the default configuration, the maximum memory usage is about 800 MiB; a table with 16 columns collects statistics on the default configuration, the maximum memory usage is about 5 GiB.
+- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics on the table with the most columns. An approximate reference is that on the test set, a table with 20 columns collects statistics on the default configuration, the maximum memory usage is about 800 MiB; a table with 16 columns collects statistics on the default configuration, the maximum memory usage is about 5 GiB.
 - Maximum value: should be less than the memory available when collecting statistics without collecting statistics.
 
 ### View `ANALYZE` state
