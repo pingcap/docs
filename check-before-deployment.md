@@ -682,15 +682,27 @@ This section describes how to install the NUMA tool. In online environments, bec
 > - Binding cores using NUMA is a method to isolate CPU resources and is suitable for deploying multiple instances on highly configured physical machines.
 > - After completing deployment using `tiup cluster deploy`, you can use the `exec` command to perform cluster level management operations.
 
-1. Log in to the target node to install. Take CentOS Linux release 7.7.1908 (Core) as an example.
+To install the NUMA tool, take either of the following two methods:
+
+**Method 1**: Log in to the target node to install. Take CentOS Linux release 7.7.1908 (Core) as an example.
+
+{{< copyable "shell-regular" >}}
+
+```bash
+sudo yum -y install numactl
+```
+
+**Method 2**: Install on an exist cluster in batches using `tiup cluster exec`.
+
+- If the TiDB cluster is not deployed, you can see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`.
 
     {{< copyable "shell-regular" >}}
 
     ```bash
-    sudo yum -y install numactl
+    tiup cluster deploy tidb-test v6.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2. Run the `exec` command using `tiup cluster` to install in batches.
+- The following is the description of `tiup cluster exec`:
 
     {{< copyable "shell-regular" >}}
 
@@ -708,7 +720,7 @@ This section describes how to install the NUMA tool. In online environments, bec
         --sudo             use root permissions (default false)
     ```
 
-    To use the sudo privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
+- To use the `sudo` privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
 
     {{< copyable "shell-regular" >}}
 
