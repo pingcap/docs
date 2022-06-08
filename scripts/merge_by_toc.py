@@ -24,10 +24,10 @@ heading_patthern = re.compile(r"(^#+|\n#+)\s")
 # match copyable snippet code
 copyable_snippet_pattern = re.compile(r"{{< copyable .* >}}")
 custom_content_tidb = re.compile(
-    r"""<CustomContent platform=["']tidb["']>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent +platform=["']tidb["'] *>(.|\n)*?</CustomContent>\n"""
 )
 custom_content_tidb_cloud = re.compile(
-    r"""<CustomContent platform=["']tidb-cloud["']>(.|\n)*?</CustomContent>\n"""
+    r"""<CustomContent +platform=["']tidb-cloud["'] *>(.|\n)*?</CustomContent>\n"""
 )
 
 sysArgvList = sys.argv
@@ -154,16 +154,19 @@ for type_, level, name in followups:
                 chapter = replace_link_wrap(chapter, name)
                 chapter = copyable_snippet_pattern.sub(remove_copyable, chapter)
 
+                # This block is to filter <CustomContent paltform="xxx"> xxx </CustomContent>
                 try:
                     custom_content_platform = sys.argv[3]
                 except IndexError:
                     custom_content_platform = "tidb"
-                print("platform: ", custom_content_platform)
+                # print("platform: ", custom_content_platform)
                 if custom_content_platform == "tidb":
-                    print("removing custom content: tidb-cloud")
+                    # print("removing custom content: tidb-cloud")
+                    # Cloud specified content should not render in tidb pdf
                     chapter = custom_content_tidb_cloud.sub(lambda x: "", chapter)
                 elif custom_content_platform == "tidb-cloud":
-                    print("removing custom content: tidb")
+                    # print("removing custom content: tidb")
+                    # Tidb Specified content should not render in tidb-cloud pdf
                     chapter = custom_content_tidb.sub(lambda x: "", chapter)
 
                 # fix heading level
