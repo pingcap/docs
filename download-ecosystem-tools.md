@@ -33,7 +33,7 @@ https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 
 Depending on which tools you want to use, you can install the corresponding offline packages as follows:
 
-| Tools | Offline Package Name |
+| Tool | Offline package name |
 |:------|:----------|
 | [TiUP](/tiup/tiup-overview.md)  | `tiup-linux-amd64.tar.gz` <br/>`tiup-{tiup-version}-linux-amd64.tar.gz` <br/>`dm-{tiup-version}-linux-amd64.tar.gz`  |
 | [Dumpling](/dumpling-overview.md)  | `dumpling-{version}-linux-amd64.tar.gz`  |
