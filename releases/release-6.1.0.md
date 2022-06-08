@@ -248,16 +248,16 @@ In 6.1.0, the key new features or improvements are as follows:
 
 | Configuration file | Configuration | Change type | Description |
 |---|---|---|---|
-| TiDB | `committer-concurrency` | Deleted | Replaced by the system variable `tidb_committer_concurrency`. |
-| TiDB | `enable-batch-dml` | Deleted | Replaced by the system variable `tidb_enable_batch_dml`. |
+| TiDB | `committer-concurrency` | Deleted | Replaced by the system variable `tidb_committer_concurrency`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `enable-batch-dml` | Deleted | Replaced by the system variable `tidb_enable_batch_dml`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `lower-case-table-names` | Deleted | Currently TiDB only supports `lower_case_table_name=2`. If another value is set, after the cluster is upgraded to v6.1.0, the value is lost.  |
-| TiDB | `mem-quota-query` | Deleted | Replaced by the system variable `tidb_mem_quota_query`. |
-| TiDB | `oom-action` | Deleted | Replaced by the system variable `tidb_mem_oom_action`. |
-| TiDB | `prepared-plan-cache.capacity` | Deleted | Replaced by the system variable  `tidb_prepared_plan_cache_size`. |
-| TiDB | `prepared-plan-cache.enabled` | Deleted | Replaced by the system variable `tidb_enable_prepared_plan_cache`. |
-| TiDB | `query-log-max-len` | Deleted | Replaced by the system variable `tidb_query_log_max_len`. |
-| TiDB | `require-secure-transport` | Deleted | Replaced by the system variable `require_secure_transport`. |
-| TiDB | `run-auto-analyze` | Deleted | Replaced by the system variable `tidb_enable_auto_analyze`. |
+| TiDB | `mem-quota-query` | Deleted | Replaced by the system variable `tidb_mem_quota_query`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `oom-action` | Deleted | Replaced by the system variable `tidb_mem_oom_action`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `prepared-plan-cache.capacity` | Deleted | Replaced by the system variable  `tidb_prepared_plan_cache_size`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `prepared-plan-cache.enabled` | Deleted | Replaced by the system variable `tidb_enable_prepared_plan_cache`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `query-log-max-len` | Deleted | Replaced by the system variable `tidb_query_log_max_len`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `require-secure-transport` | Deleted | Replaced by the system variable `require_secure_transport`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `run-auto-analyze` | Deleted | Replaced by the system variable `tidb_enable_auto_analyze`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) | Newly added | Controls whether to enable the Global Kill (terminating queries or connections across instances) feature. When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. |
 | TiDB | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610) | Newly added | Controls whether to enable the memory quota for the statistics cache. |
 | TiKV | [`raft-engine.enable`](/tikv-configuration-file.md#enable-1) | Modified | The default value is changed from `FALSE` to `TRUE`. |
