@@ -163,16 +163,16 @@ In 6.1.0, the key new features or improvements are as follows:
 
     [User document](/tidb-configuration-file.md#enable-global-kill-introduced-from-v610-version), [#8854](https://github.com/pingcap/tidb/issues/8854)
 
-* TiKV API v2 (experimental)
+* TiKV API V2 (experimental)
 
     Before v6.1.0, when TiKV is used as Raw Key Value storage, TiKV only provides basic Key Value read and write capability because it only stores the raw data passed in by the client.
 
-    TiKV API v2 provides a new Raw Key Value storage format and access interface, including:
+    TiKV API V2 provides a new Raw Key Value storage format and access interface, including:
 
-    * The data is stored in MVCC (Multi Version Concurrency Control) and the change timestamp of the data is recorded. This feature will lay the foundation for implementing Change Data Capture and incremental backup and restore.
-    * Data is scoped according to different usage and supports co-existence of a single TiDB cluster / Transactional KV / RawKV applications.
+    * The data is stored in MVCC (Multi-Version Concurrency Control) and the change timestamp of the data is recorded. This feature will lay the foundation for implementing Change Data Capture and incremental backup and restore.
+    * Data is scoped according to different usage and supports co-existence of a single TiDB cluster, Transactional KV, RawKV applications.
 
-    Note: Due to significant changes in the underlying storage format, after enabling API v2, you cannot roll back a TiKV cluster to a version earlier than v6.1.0. Downgrading TiKV might result in data corruption..
+    Note: Due to significant changes in the underlying storage format, after enabling API V2, you cannot roll back a TiKV cluster to a version earlier than v6.1.0. Downgrading TiKV might result in data corruption.
 
     [User document](/tikv-configuration-file.md#api-version-new-in-v610), [#11745](https://github.com/tikv/tikv/issues/11745)
 
