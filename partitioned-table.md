@@ -1306,14 +1306,16 @@ Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mo
 
 In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level statistics, or GlobalStats. For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
-When switching from the `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
 
 {{< copyable "sql" >}}
 
 ```sql
-mysql> set session tidb_partition_prune_mode = 'dynamic';
+set session tidb_partition_prune_mode = 'dynamic';
+show stats_meta where table_name like "t";
+```
 
-mysql> show stats_meta where table_name like "t";
+```
 +---------+------------+----------------+---------------------+--------------+-----------+
 | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
 +---------+------------+----------------+---------------------+--------------+-----------+
@@ -1324,15 +1326,16 @@ mysql> show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To get GlobalStats, you need to manually trigger `analyze` on the table or on a partition of the table.
+To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain GlobalStats.
 
 {{< copyable "sql" >}}
 
 ```sql
-mysql> analyze table t partition p1;
-Query OK, 0 rows affected, 1 warning (0.06 sec)
+analyze table t partition p1;
+show stats_meta where table_name like "t";
+```
 
-mysql> show stats_meta where table_name like "t";
+```
 +---------+------------+----------------+---------------------+--------------+-----------+
 | Db_name | Table_name | Partition_name | Update_time         | Modify_count | Row_count |
 +---------+------------+----------------+---------------------+--------------+-----------+
@@ -1373,6 +1376,9 @@ mysql> create table t1(id int, age int, key(id)) partition by range(id) (
 Query OK, 0 rows affected (0.01 sec)
 
 mysql> explain select * from t1 where id < 150;
+```
+
+```
 +------------------------------+----------+-----------+------------------------+--------------------------------+
 | id                           | estRows  | task      | access object          | operator info                  |
 +------------------------------+----------+-----------+------------------------+--------------------------------+
@@ -1498,9 +1504,12 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
     {{< copyable "sql" >}}
 
     ```sql
-    mysql> select distinct concat(TABLE_SCHEMA,'.',TABLE_NAME)
+    select distinct concat(TABLE_SCHEMA,'.',TABLE_NAME)
         from information_schema.PARTITIONS
-        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+        where TABLE_SCHEMA not in('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
+    ```
+
+    ```
     +-------------------------------------+
     | concat(TABLE_SCHEMA,'.',TABLE_NAME) |
     +-------------------------------------+
@@ -1514,7 +1523,7 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
     {{< copyable "sql" >}}
 
     ```sql
-    mysql> select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
+    select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
         from information_schema.PARTITIONS
         where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');
     +----------------------------------------------------------------------+
@@ -1531,17 +1540,28 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
     {{< copyable "sql" >}}
 
-    ```
-    $ mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
-         from information_schema.PARTITIONS \
-         where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
+    ```sql
+    mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
+        from information_schema.PARTITIONS \
+        where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
 4. Execute a batch update:
 
+    Process SQL statements before executing the `source` statement:
+
+    ```
+    sed -i "" '1d' gatherGlobalStats.sql --- mac
+    sed -i '1d' gatherGlobalStats.sql --- linux
+    ```
+
     {{< copyable "sql" >}}
 
     ```sql
-    mysql> SET session tidb_partition_prune_mode = dynamic;
-    mysql> source gatherGlobalStats.sql
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    SET session tidb_partition_prune_mode = dynamic;
+    source gatherGlobalStats.sql
     ```
