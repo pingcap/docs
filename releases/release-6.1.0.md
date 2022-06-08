@@ -94,7 +94,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     To enhance performance in OLAP scenarios, dynamic pruning mode is enabled by default for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
 
-    [User document: Access partitioned tables in the MPP mode](/tiflash/use-tiflash#access-partitioned-tables-in-the-mpp-mode), [User document: Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
+    [User document: Access partitioned tables in the MPP mode](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode), [User document: Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
 ### Stability
 
