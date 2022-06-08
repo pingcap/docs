@@ -27,7 +27,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     [User document: List partitioning](/partitioned-table.md#list-partitioning), [User document: List COLUMNS partitioning](/partitioned-table.md#list-columns-partitioning)
 
-* TiFlash supports initiating a compact command.
+* TiFlash supports initiating a compact command. (experimental)
 
     TiFlash v6.1.0 introduces the `ALTER TABLE ... COMPACT` statement, which provides a manual way to compact physical data based on the existing background compaction mechanism. With this statement, you can update data in earlier formats and improve read/write performance any time as appropriate. It is recommended that you execute this statement to compact data after upgrading your cluster to v6.1.0. This statement is an extension of the standard SQL syntax and therefore is compatible with MySQL clients. For scenarios other than TiFlash upgrade, usually  there is no need to use this statement.
 
@@ -163,7 +163,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     [User document](/tidb-configuration-file.md#enable-global-kill-introduced-from-v610-version), [#8854](https://github.com/pingcap/tidb/issues/8854)
 
-* TiKV API v2
+* TiKV API v2 (experimental)
 
     Before v6.1.0, when TiKV is used as Raw Key Value storage, TiKV only provides basic Key Value read and write capability because it only stores the raw data passed in by the client.
 
