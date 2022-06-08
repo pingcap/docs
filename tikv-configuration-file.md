@@ -383,6 +383,13 @@ Configuration items related to storage.
 + Default value: `"12h"`
 + Minimum value: `"0s"`
 
+### `background-error-recovery-window` <span class="version-mark">New in v6.1.0</span>
+
++ The maximum allowable time for TiKV to recover after RocksDB detects a recoverable background error. If some background SST files are damaged, RocksDB will report to PD via heartbeat after locating the Peer to which the damaged SST files belong. PD then performs scheduling operations to remove this Peer. Finally, the damaged SST files are deleted directly, and the TiKV background will work as normal again.
++ The damaged SST files still exist before the recovery finishes. During such a period, RocksDB can continue writing data, but an error will be reported when the damaged part of the data is read.
++ If the recovery fails to finish within this time window, TiKV will panic.
++ Default value: 1h
+
 ## storage.block-cache
 
 Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
@@ -397,6 +404,24 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 + The size of the shared block cache.
 + Default value: 45% of the size of total system memory
 + Unit: KB|MB|GB
+
+### `api-version` <span class="version-mark">New in v6.1.0</span>
+
++ The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
++ Value options:
+    + `1`: Uses API V1, does not encode the data passed from the client, and stores data as it is. In versions earlier than v6.1.0, TiKV uses API V1 by default.
+    + `2`: Uses API V2:
+        + The data is stored in the MVCC (Multi-Version Concurrency Control) format, where the timestamp is obtained from PD (which is TSO) by tikv-server.
+        + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
+        + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim expired data. Note that this tidb-server instance cannot provide read or write services. To ensure high availability, you can deploy multiple tidb-server instances.
+        + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
++ Default value: `1`
+
+> **Warning:**
+
+> - TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
+> - You can set the value of `api-version` to `2` **only when** deploying a new TiKV cluster. **Do not** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `api-version` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats and causes data corruption. It will raise the "unable to switch storage.api_version" error when you start the TiKV cluster.
+> - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
 
 ## storage.flow-control
 
@@ -684,6 +709,12 @@ Configuration items related to Raftstore.
 + Default value: `128`
 + Minimum value: `10`
 
+### `max-snapshot-file-raw-size` <span class="version-mark">New in v6.1.0</span>
+
++ When the size of a snapshot file exceeds this configuration value, this file will be split into multiple files.
++ Default value: `100MiB`
++ Minimum value: `100MiB`
+
 ### `snap-apply-batch-size`
 
 + The memory cache size required when the imported snapshot file is written into the disk
@@ -810,24 +841,40 @@ Configuration items related to Coprocessor.
 ### `region-max-size`
 
 + The maximum size of a Region. When the value is exceeded, the Region splits into many.
-+ Default value: `"144MB"`
-+ Unit: KB|MB|GB
++ Default value: `region-split-size / 2 * 3`
++ Unit: KiB|MiB|GiB
 
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MB"`
-+ Unit: KB|MB|GB
++ Default value: `"96MiB"`
++ Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
 
 + The maximum allowable number of keys in a Region. When this value is exceeded, the Region splits into many.
-+ Default value: `1440000`
++ Default value: `region-split-keys / 2 * 3`
 
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
+
+### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
+
++ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
++ Default value: false
+
+> **Warning:**
+>
+> - `enable-region-bucket` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
+> - This configuration makes sense only when `region-split-size` is twice of `region-bucket-size` or above; otherwise, no bucket is actually generated.
+> - Adjusting `region-split-size` to a larger value might have the risk of performance regression and slow scheduling.
+
+### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
+
++ The size of a bucket when `enable-region-bucket` is true.
++ Default value: `96MiB`
 
 ## RocksDB
 
@@ -1596,3 +1643,26 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 + The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
 + Default value: `500ms`
+
+## causal-ts <span class="version-mark">New in v6.1.0</span>
+
+Configuration items related to getting the timestamp when TiKV API V2 is enabled (`storage.api-version = 2`).
+
+To reduce write latency and avoid frequent access to PD, TiKV periodically fetches and caches a batch of timestamps in the local. When the locally cached timestamps are exhausted, TiKV immediately makes a timestamp request. In this situation, the latency of some write requests are increased. To reduce the occurrence of this situation, TiKV dynamically adjusts the size of the locally cached timestamps according to the workload. For most of the time, you do not need to adjust the following parameters.
+
+> **Warning:**
+>
+> TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
+
+### `renew-interval`
+
++ The interval at which the locally cached timestamps are refreshed.
++ At an interval of `renew-interval`, TiKV starts a batch of timestamp refresh and adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If you set this parameter to too large a value, the latest TiKV workload changes are not reflected in time. If you set this parameter to too small a value, the load of PD increases. If the write traffic is strongly fluctuating, if timestamps are frequently exhausted, and if write latency increases, you can set this parameter to a smaller value. At the same time, you should also consider the load of PD.
++ Default value: `"100ms"`
+
+### `renew-batch-min-size`
+
++ The minimum number of locally cached timestamps.
++ TiKV adjusts the number of cached timestamps according to the timestamp consumption in the previous period. If the usage of locally cached timestamps is low, TiKV gradually reduces the number of cached timestamps until it reaches `renew-batch-min-size`. If large bursty write traffic often occurs in your application, you can set this parameter to a larger value as appropriate. Note that this parameter is the cache size for a single tikv-server. If you set the parameter to too large a value and the cluster contains many tikv-servers, the TSO consumption will be too fast.
++ In the **TiKV-RAW** \> **Causal timestamp** panel in Grafana, **TSO batch size** is the number of locally cached timestamps that has been dynamically adjusted according to the application workload. You can refer to this metric to adjust `renew-batch-min-size`.
++ Default value: `100`
