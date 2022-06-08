@@ -554,7 +554,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Default value: `43200`
 - Range: `[0, 2147483647]`
 - Unit: seconds
-- This variable is used to specify the maximum execution time of auto ANALYZE tasks. When the execution time of an auto ANALYZE task exceeds the specified time, the task will be terminated. When the value of this variable is `0`, there is no limit to the maximum execution time of Auto ANALYZE tasks.
+- This variable is used to specify the maximum execution time of automatic `ANALYZE` tasks. When the execution time of an automatic `ANALYZE` task exceeds the specified time, the task will be terminated. When the value of this variable is `0`, there is no limit to the maximum execution time of automatic `ANALYZE` tasks.
 
 ### tidb_backoff_lock_fast
 
