@@ -170,7 +170,7 @@ SPLIT TABLE TEST_HOTSPOT BETWEEN (0) AND (9223372036854775807) REGIONS 128;
 
 After the pre-split operation, execute the `SHOW TABLE test_hotspot REGIONS;` statement to check the status of Region scattering. If the values of the `SCATTERING` column are all `0`, the scheduling is successful.
 
-You can also check the Region leader distribution by using the following SQL statement. You need to replace `table_name` with the actual table name.
+You can also check the Region leader distribution using the following SQL statement. You need to replace `table_name` with the actual table name.
 
 {{< copyable "sql" >}}
 
