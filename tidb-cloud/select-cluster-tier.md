@@ -20,8 +20,8 @@ The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://p
 Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 
 - 1 TiDB shared node
-- 1 TiKV shared node (with 10 GiB of OLTP storage)
-- 1 TiFlash<sup>beta</sup> shared node (with 10 GiB of OLAP storage)
+- 1 TiKV shared node (with 500 MiB of OLTP storage)
+- 1 TiFlash<sup>beta</sup> shared node (with 500 MiB of OLAP storage)
 
 Developer Tier clusters run on shared nodes. Although each node is run in its own container on a virtual machine (VM), that VM is also running other TiDB, TiKV, or TiFlash<sup>beta</sup> nodes. As a result, shared nodes will have reduced performance when compared to standard, dedicated TiDB Cloud nodes. However, as all nodes are running in separate containers and have dedicated cloud disks, data stored in a Developer Tier cluster is isolated and will never be exposed to other TiDB clusters.
 
