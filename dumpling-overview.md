@@ -37,7 +37,7 @@ When using Dumpling, you need to execute the export command on a running cluster
 
 You can get Dumpling using [TiUP](/tiup/tiup-overview.md) by running `tiup install dumpling`. Afterwards, you can use `tiup dumpling ...` to run Dumpling.
 
-Dumpling is also included in the TiDB Toolkit installation package and can be [downloaded here](/download-ecosystem-tools.md).
+The Dumpling installation package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 ## Export data from TiDB/MySQL
 
