@@ -6,14 +6,14 @@ aliases: ['/docs/dev/download-ecosystem-tools/','/docs/dev/reference/tools/downl
 
 # Download TiDB Tools
 
-This document provides where to download the TiDB toolkit.
+This document describes how to download the TiDB Toolkit.
 
-TiDB toolkit contains frequently used TiDB tools, such as data export tool Dumpling, data import tool TiDB Lightning, and backup and restore tool BR.
+TiDB Toolkit contains frequently used TiDB tools, such as data export tool Dumpling, data import tool TiDB Lightning, and backup and restore tool BR.
 
 > **Tip:**
 >
-> - If your deployment environment has internet access, you can deploy a TiDB tool using a single [TiUP command](/tiup/tiup-component-management.md), so there is no need to download the TiDB toolkit separately.
-> - If you need to deploy and maintain TiDB on Kubernetes, instead of downloading the TiDB toolkit, follow the steps in [TiDB Operator offline installation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation).
+> - If your deployment environment has internet access, you can deploy a TiDB tool using a single [TiUP command](/tiup/tiup-component-management.md), so there is no need to download the TiDB Toolkit separately.
+> - If you need to deploy and maintain TiDB on Kubernetes, instead of downloading the TiDB Toolkit, follow the steps in [TiDB Operator offline installation](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator#offline-installation).
 
 ## Environment requirements
 
@@ -22,7 +22,7 @@ TiDB toolkit contains frequently used TiDB tools, such as data export tool Dumpl
 
 ## Download link
 
-You can download TiDB toolkit from the following link:
+You can download TiDB Toolkit from the following link:
 
 ```
 https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
@@ -30,7 +30,7 @@ https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 
 `{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.0.0` is `https://download.pingcap.org/tidb-community-toolkit-v6.0.0-linux-amd64.tar.gz`.
 
-## TiDB toolkit description
+## TiDB Toolkit description
 
 Depending on which tools you want to use, you can install the corresponding offline packages as follows:
 
