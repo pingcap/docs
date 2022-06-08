@@ -5,7 +5,7 @@ summary: Learn about Lightning and the whole architecture.
 
 # TiDB Lightning Overview
 
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning) is a tool used for fast full import of large amounts of data into a TiDB cluster. You can download TiDB Lightning from [here](/download-ecosystem-tools.md#tidb-lightning).
+[TiDB Lightning](https://github.com/pingcap/tidb-lightning) is a tool used for fast full import of large amounts of data into a TiDB cluster. You can download TiDB Lightning from [here](/download-ecosystem-tools.md).
 
 Currently, TiDB Lightning can mainly be used in the following two scenarios:
 
