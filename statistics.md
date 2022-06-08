@@ -410,18 +410,18 @@ After disabling the `ANALYZE` configuration persistence feature, TiDB does not c
 
 > **Warning:**
 >
-> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be incorrect in production environments.
+> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be inaccurate in production environments.
 
-In TiDB v6.1.0, the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) is introduced to control the memory quota for collecting statistics.
+Since TiDB v6.1.0, you can use the system variable [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) to control the memory quota for collecting statistics in TiDB.
 
-To pick a proper value of `tidb_mem_quota_analyze`, you should consider the data volume of the cluster. When the default sampling rate is used, the main considerations are the number of columns, the size of the column values, and the memory configuration of TiDB. The following is the suggested configuration of maximum and minimum values:
+To set a proper value of `tidb_mem_quota_analyze`, consider the data size of the cluster. When the default sampling rate is used, the main considerations are the number of columns, the size of column values, and the memory configuration of TiDB. Consider the following suggestions when you configure the maximum and minimum values:
 
 > **Note:**
 >
-> The following suggestions are for reference only. The actual configuration needs to be tested in the real scenario.
+> The following suggestions are for reference only. You need to configure the values based on the real scenario.
 
-- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics on the table with the most columns. An approximate reference in the test set is that, a table with 20 columns collects statistics on the default configuration, the maximum memory usage is about 800 MiB; a table with 16 columns collects statistics on the default configuration, the maximum memory usage is about 5 GiB.
-- Maximum value: should be less than the available memory without collecting statistics.
+- Minimum value: should be greater than the maximum memory usage when TiDB collects statistics from the table with the most columns. An approximate reference: when TiDB collects statistics from a table with 20 columns using the default configuration, the maximum memory usage is about 800 MiB; when TiDB collects statistics from a table with 160 columns using the default configuration, the maximum memory usage is about 5 GiB.
+- Maximum value: should be less than the available memory when TiDB is not collecting statistics.
 
 ### View `ANALYZE` state
 
