@@ -16,40 +16,18 @@ import { toMarkdown } from "mdast-util-to-markdown";
 
 import { visit } from "unist-util-visit";
 
+import {
+  copySingleFileSync,
+  writeFileSync,
+  getMdFileList,
+  // generateMdAstFromFile,
+  astNode2mdStr,
+} from "./utils.js";
+
 const myArgs = process.argv.slice(2);
 
 const currentPlatform = myArgs[0] || "tidb";
 const outputPath = myArgs[1] || "tmp";
-
-const copySingleFileSync = (srcPath, destPath) => {
-  const dir = path.dirname(destPath);
-
-  if (!fs.existsSync(dir)) {
-    // console.info(`Create empty dir: ${dir}`);
-    fs.mkdirSync(dir, { recursive: true });
-  }
-
-  fs.copyFileSync(srcPath, destPath);
-};
-
-const writeFileSync = (destPath, fileContent) => {
-  const dir = path.dirname(destPath);
-
-  if (!fs.existsSync(dir)) {
-    // console.info(`Create empty dir: ${dir}`);
-    fs.mkdirSync(dir, { recursive: true });
-  }
-
-  fs.writeFileSync(destPath, fileContent);
-};
-
-const getMds = (src) => {
-  return glob.sync(src + "/**/*.md");
-};
-
-export const getMdFileList = (prefix) => {
-  return getMds(prefix);
-};
 
 const generateMdAstFromFile = (fileContent) => {
   const mdAst = fromMarkdown(fileContent, {
@@ -61,18 +39,6 @@ const generateMdAstFromFile = (fileContent) => {
     ],
   });
   return mdAst;
-};
-
-const astNode2mdStr = (astNode) => {
-  const result = toMarkdown(astNode, {
-    bullet: "-",
-    extensions: [
-      mdxToMarkdown(),
-      frontmatterToMarkdown(["yaml", "toml"]),
-      gfmToMarkdown(),
-    ],
-  });
-  return result;
 };
 
 const handleCustomContentNode = (mdAst) => {
