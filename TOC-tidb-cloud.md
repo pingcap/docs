@@ -6,6 +6,7 @@
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
 - Get Started
+  - [Explore SQL with TiDB](/basic-sql-operations.md)
   - [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Manage Cluster
