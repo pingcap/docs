@@ -3,7 +3,7 @@ title: Character Set and Collation
 summary: Learn about the supported character sets and collations in TiDB.
 ---
 
-# キャラクターセットと照合 {#character-set-and-collation}
+# 文字セットと照合 {#character-set-and-collation}
 
 このドキュメントでは、TiDBでサポートされている文字セットと照合を紹介します。
 
@@ -117,7 +117,7 @@ GBK文字セットのTiDBサポートの詳細については、 [GBK](/characte
 
 ## <code>utf8mb4</code>の<code>utf8</code>とutf8mb4 {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
-MySQLでは、文字セット`utf8`は最大3バイトに制限されています。これは、基本多言語面（BMP）に文字を格納するには十分ですが、絵文字などの文字を格納するには十分ではありません。このため、代わりに文字セット`utf8mb4`を使用することをお勧めします。
+MySQLでは、文字セット`utf8`は最大3バイトに制限されています。これは、Basic Multilingual Plane（BMP）に文字を格納するには十分ですが、絵文字などの文字を格納するには十分ではありません。このため、代わりに文字セット`utf8mb4`を使用することをお勧めします。
 
 デフォルトでは、TiDBで作成されたデータをMySQLで安全に復元できるように、TiDBは`utf8`に同じ3バイトの制限を提供します。これは、TiDB構成ファイルの値を`check-mb4-value-in-utf8`から`FALSE`に変更することで無効にできます。
 
@@ -169,7 +169,7 @@ ALTER DATABASE db_name
     [[DEFAULT] COLLATE collation_name]
 ```
 
-ここでは`DATABASE`を`SCHEMA`に置き換えることができます。
+ここでは、 `DATABASE`を`SCHEMA`に置き換えることができます。
 
 異なるデータベースは、異なる文字セットと照合を使用できます。 `character_set_database`と`collation_database`を使用して、現在のデータベースの文字セットと照合順序を確認します。
 

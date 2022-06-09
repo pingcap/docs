@@ -29,7 +29,7 @@ TiDB Ansibleバージョン：3.0.9
     -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果が[＃14310](https://github.com/pingcap/tidb/pull/14310)と矛盾する問題を修正します
     -   `drop table`構文[＃14052](https://github.com/pingcap/tidb/pull/14052)によって`VIEW`が誤ってドロップされる問題を修正します。
 -   プランナー
-    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。 `a`列にインデックスが存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、全表スキャンを回避します[＃14410](https://github.com/pingcap/tidb/pull/14410)
+    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。インデックスが`a`列に存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、全表スキャンを回避します[＃14410](https://github.com/pingcap/tidb/pull/14410)
 
 ## TiKV {#tikv}
 
@@ -45,7 +45,7 @@ TiDB Ansibleバージョン：3.0.9
 ## PD {#pd}
 
 -   ロケーションラベル名[＃2083](https://github.com/pingcap/pd/pull/2083)でのバックラッシュ`/`の使用をサポート
--   トゥームストーンストアが誤ってラベルカウンターに含まれているため、誤った統計を修正します[＃2067](https://github.com/pingcap/pd/pull/2067)
+-   トゥームストーンストアがラベルカウンター[＃2067](https://github.com/pingcap/pd/pull/2067)に誤って含まれているため、誤った統計を修正します
 
 ## ツール {#tools}
 

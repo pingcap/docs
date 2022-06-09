@@ -10,17 +10,17 @@ TiDBは、展開操作、データ管理（インポートとエクスポート�
 
 さまざまなシステム環境での展開と運用のニーズを満たすために、TiDBには、TiUPとTiDB Operatorの2つの導入および運用ツールが用意されています。
 
-### 物理マシンまたは仮想マシンにTiDBをデプロイして運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
+### 物理マシンまたは仮想マシンにデプロイを導入して運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
-[TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上のTiDBパッケージマネージャーです。 TiUPは、TiDB、PD、TiKVなどの複数のTiDBコンポーネントを管理できます。 TiDBエコシステムのコンポーネントを開始するには、1つのTiUPコマンドを実行するだけです。
+[TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上のTiDBパッケージマネージャーです。 TiUPは、TiDB、PD、TiKVなどの複数のTiDBコンポーネントを管理できます。 TiDBエコシステムのコンポーネントを起動するには、1つのTiUPコマンドを実行するだけです。
 
-TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUPクラスタ](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスタを使用すると、TiDBクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなどの日常的なデータベース操作を簡単に実行し、TiDBクラスタパラメーターを管理できクラスタ。
+TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUPクラスタ](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスタを使用することにより、TiDBクラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの日常のデータベース操作を簡単に実行し、TiDBクラスタパラメーターを管理できクラスタ。
 
 TiUPの基本は次のとおりです。
 
 -   [用語と概念](/tiup/tiup-terminology-and-concepts.md)
 -   [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)
--   [TiUPコマンドを使用したTiUPコンポーネントの管理](/tiup/tiup-component-management.md)
+-   [TiUPコマンドでTiUPコンポーネントを管理する](/tiup/tiup-component-management.md)
 -   該当するTiDBバージョン：v4.0以降
 
 ### KubernetesでTiDBをデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
@@ -121,7 +121,7 @@ DMの基本は次のとおりです。
 
 ## OLAPクエリツール {#olap-query-tool}
 
-TiDBは、OLAPクエリツールTiSparkを提供します。これにより、ネイティブSparkを使用しているかのようにTiDBテーブルをクエリできます。
+TiDBはOLAPクエリツールTiSparkを提供します。これにより、ネイティブSparkを使用しているかのようにTiDBテーブルをクエリできます。
 
 ### Sparkを使用してTiKVデータソースをクエリする {#query-tikv-data-source-using-spark}
 

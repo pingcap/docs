@@ -23,7 +23,7 @@ TiDBバージョン：4.0.2
 
 ## 新しい変更 {#new-change}
 
--   デフォルトでは、TiDBとTiDBダッシュボードは使用法の詳細をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます[＃18180](https://github.com/pingcap/tidb/pull/18180) 。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
+-   デフォルトでは、TiDBおよびTiDBダッシュボードは使用法の詳細をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます[＃18180](https://github.com/pingcap/tidb/pull/18180) 。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
 
 ## 新機能 {#new-features}
 
@@ -37,8 +37,8 @@ TiDBバージョン：4.0.2
     -   `BITXOR()`機能の`IF()` `BITNEG()` `JSON_LENGTH()`への[＃17592](https://github.com/pingcap/tidb/pull/17592)をサポート[＃17651](https://github.com/pingcap/tidb/pull/17651)
     -   `COUNT(DISTINCT)` [＃18120](https://github.com/pingcap/tidb/pull/18120)の近似結果を計算するために、新しい集計関数`APPROX_COUNT_DISTINCT()`をサポートします。
     -   TiFlashでの照合順序をサポートし、照合関連機能を[＃17705](https://github.com/pingcap/tidb/pull/17705)にプッシュします。
-    -   `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバー[＃17695](https://github.com/pingcap/tidb/pull/17695)のステータスアドレスを示します。
-    -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングの作成方法を示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
+    -   サーバー[＃17695](https://github.com/pingcap/tidb/pull/17695)のステータスアドレスを示すために、 `INFORMATION_SCHEMA.INSPECTION_RESULT`のテーブルに`STATUS_ADDRESS`の列を追加します。
+    -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングがどのように作成されるかを示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
     -   `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`テーブルに`PLAN_IN_CACHE`列と`PLAN_CACHE_HITS`列を追加して、SQLステートメントのプランキャッシュ使用量を示します[＃17493](https://github.com/pingcap/tidb/pull/17493)
     -   `enable-collect-execution-info`の構成アイテムと`tidb_enable_collect_execution_info`のセッション変数を追加して、各オペレーターの実行情報を収集し、その情報を低速クエリログに記録するかどうかを制御します[＃18073](https://github.com/pingcap/tidb/pull/18073) [＃18072](https://github.com/pingcap/tidb/pull/18072)
     -   `tidb_slow_log_masking`のグローバル変数を追加して、遅いクエリログ[＃17694](https://github.com/pingcap/tidb/pull/17694)のクエリの感度を下げるかどうかを制御します
@@ -52,7 +52,7 @@ TiDBバージョン：4.0.2
 
 -   PD
 
-    -   リーダーピアを削除しようとしたときにオペレーターがすぐに失敗するようにサポートする[＃2551](https://github.com/pingcap/pd/pull/2551)
+    -   リーダーピア[＃2551](https://github.com/pingcap/pd/pull/2551)を削除しようとしたときに、オペレーターがすぐに失敗するようにサポートします。
     -   TiFlashストアに適切なデフォルトのストア制限を設定する[＃2559](https://github.com/pingcap/pd/pull/2559)
 
 -   TiFlash
@@ -68,7 +68,7 @@ TiDBバージョン：4.0.2
 
         -   サブタスクの新しい`capture`秒[＃665](https://github.com/pingcap/tiflow/pull/665)への移行をサポート
         -   `cli`コマンドを追加して、TiCDC [＃652](https://github.com/pingcap/tiflow/pull/652)を削除します。
-        -   MQシンク[＃649](https://github.com/pingcap/tiflow/pull/649)で運河プロトコルをサポートする
+        -   MQシンク[＃649](https://github.com/pingcap/tiflow/pull/649)で運河プロトコルをサポート
 
 ## 改善 {#improvements}
 
@@ -124,7 +124,7 @@ TiDBバージョン：4.0.2
     -   `ALTER USER`ステートメントがユーザー情報を更新するために使用するハッシュパスワードが予期しないものであるという問題を修正します[＃17646](https://github.com/pingcap/tidb/pull/17646)
     -   `ENUM`と`SET`の値の照合順序をサポート[＃17701](https://github.com/pingcap/tidb/pull/17701)
     -   テーブル[＃17619](https://github.com/pingcap/tidb/pull/17619)を作成するときに、リージョンを事前分割するためのタイムアウトメカニズムが機能しない問題を修正します。
-    -   DDLジョブが再試行されたときにスキーマが予期せず更新され、DDLジョブのアトミック性が損なわれる可能性がある問題を修正します[＃17608](https://github.com/pingcap/tidb/pull/17608)
+    -   DDLジョブが再試行されたときにスキーマが予期せず更新され、DDLジョブのアトミック性が損なわれる可能性があるという問題を修正します[＃17608](https://github.com/pingcap/tidb/pull/17608)
     -   引数に列[＃17562](https://github.com/pingcap/tidb/pull/17562)が含まれている場合の`FIELD()`関数の誤った結果を修正します
     -   `max_execution_time`ヒントがときどき機能しない問題を修正します[＃17536](https://github.com/pingcap/tidb/pull/17536)
     -   13の結果で同時実行情報が冗長に`EXPLAIN ANALYZE`される問題を修正し[＃17350](https://github.com/pingcap/tidb/pull/17350)

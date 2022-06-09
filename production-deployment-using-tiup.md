@@ -5,7 +5,7 @@ summary: Learn how to easily deploy a TiDB cluster using TiUP.
 
 # TiUPを使用してTiDBクラスターをデプロイする {#deploy-a-tidb-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタ操作および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUPクラスタ](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスタを使用すると、TiDBクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなどの日常的なデータベース操作を簡単に実行し、TiDBクラスタパラメーターを管理できクラスタ。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタの運用および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUPクラスタ](https://github.com/pingcap/tiup/tree/master/components/cluster)を提供します。 TiUPクラスタを使用することにより、TiDBクラスターのデプロイ、開始、停止、破棄、スケーリング、アップグレードなどの日常のデータベース操作を簡単に実行し、TiDBクラスタパラメーターを管理できクラスタ。
 
 TiUPは、TiDB、TiFlash、TiDB Binlog、TiCDC、および監視システムの展開をサポートします。このドキュメントでは、さまざまなトポロジのTiDBクラスターを展開する方法を紹介します。
 
@@ -114,7 +114,7 @@ TiUPオフラインコンポーネントパッケージを準備するには、 
         which tiup
         ```
 
-2.  TiUPを使用してミラーを引き出します。
+2.  TiUPを使用してミラーを引きます。
 
     1.  インターネットにアクセスできるマシンで必要なコンポーネントをプルします。
 
@@ -152,7 +152,7 @@ TiUPオフラインコンポーネントパッケージを準備するには、 
 
     2.  「TiUPを使用してミラーをプルする」のステップ2を参照し、この不完全なオフラインミラーを隔離された環境の制御マシンに送信します。
 
-    3.  隔離された環境の制御マシン上の現在のオフラインミラーのパスを確認します。 TiUPツールが最新バージョンの場合は、次のコマンドを実行して現在のミラーアドレスを取得できます。
+    3.  隔離された環境の制御マシンで現在のオフラインミラーのパスを確認します。 TiUPツールが最新バージョンの場合は、次のコマンドを実行して現在のミラーアドレスを取得できます。
 
         {{< copyable "" >}}
 
@@ -251,7 +251,7 @@ alertmanager_servers:
 
 -   [TiFlash展開トポロジ](/tiflash-deployment-topology.md)
 
-    これは、最小限のクラスタトポロジとともにTiFlashを展開するためです。 TiFlashはカラム型ストレージエンジンであり、徐々に標準のクラスタトポロジになります。リアルタイムHTAPアプリケーションに適しています。
+    これは、最小限のクラスタトポロジとともにTiFlashを展開するためです。 TiFlashは列指向ストレージエンジンであり、徐々に標準のクラスタトポロジになります。リアルタイムHTAPアプリケーションに適しています。
 
 -   [TiCDC展開トポロジ](/ticdc-deployment-topology.md)
 
@@ -269,7 +269,7 @@ alertmanager_servers:
 
     これは、1台のマシンに複数のインスタンスをデプロイするためのものです。ディレクトリ、ポート、リソース比率、およびラベルの構成を追加する必要があります。
 
--   [地理的に分散された展開トポロジ](/geo-distributed-deployment-topology.md)
+-   [地理分散型デプロイメントトポロジ](/geo-distributed-deployment-topology.md)
 
     このトポロジでは、2つの都市にある3つのデータセンターの一般的なアーキテクチャを例として取り上げます。地理的に分散された展開アーキテクチャと、注意が必要な主要な構成を紹介します。
 
@@ -321,7 +321,7 @@ tiup cluster deploy tidb-test v5.4.1 ./topology.yaml --user root [-p] [-i /home/
 -   `[-i]`および`[-p]` ：オプション。パスワードなしでターゲットマシンへのログインを設定した場合、これらのパラメータは必要ありません。そうでない場合は、2つのパラメーターのいずれかを選択してください。 `[-i]`は、ターゲットマシンにアクセスできる`root`のユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。 `[-p]`は、ユーザーパスワードをインタラクティブに入力するために使用されます。
 -   ターゲットマシンで作成するユーザーグループ名を指定する必要がある場合は、 [この例](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml#L7)を参照してください。
 
-出力ログの最後に、 ``Deployed cluster `tidb-test` successfully``が表示されます。これは、展開が成功したことを示しています。
+出力ログの最後に、 ``Deployed cluster `tidb-test` successfully``が表示されます。これは、展開が成功したことを示します。
 
 ## ステップ5：TiUPによって管理されているクラスターを確認します {#step-5-check-the-clusters-managed-by-tiup}
 
@@ -331,7 +331,7 @@ tiup cluster deploy tidb-test v5.4.1 ./topology.yaml --user root [-p] [-i /home/
 tiup cluster list
 ```
 
-TiUPは、複数のTiDBクラスターの管理をサポートしています。上記のコマンドは、名前、デプロイメントユーザー、バージョン、シークレットキー情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
+TiUPは、複数のTiDBクラスターの管理をサポートしています。上記のコマンドは、名前、展開ユーザー、バージョン、秘密鍵情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
 
 ```log
 Starting /home/tidb/.tiup/components/cluster/v1.5.0/cluster list
@@ -396,7 +396,7 @@ tiup cluster start tidb-test
 
 ## 手順8：TiDBクラスタの実行ステータスを確認する {#step-8-verify-the-running-status-of-the-tidb-cluster}
 
-具体的な操作については、 [クラスターステータスの確認](/post-installation-check.md)を参照してください。
+具体的な操作については、 [クラスタステータスの確認](/post-installation-check.md)を参照してください。
 
 ## 次は何ですか {#what-s-next}
 

@@ -77,7 +77,7 @@ insert into t select * from t;
 -   `Get_commit_ts_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）中に`commit_ts`を取得するために費やされた時間。
 -   `Local_latch_wait_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）の前にTiDBがロックの待機に費やす時間。
 -   `Write_keys` ：トランザクションがTiKVの書き込みCFに書き込むキーの数。
--   `Write_size` ：トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
+-   `Write_size` ：トランザクションがコミットするときに書き込まれるキーまたは値の合計サイズ。
 -   `Prewrite_region` ：2フェーズトランザクションコミットの最初のフェーズ（プリライト）に関与するTiKVリージョンの数。各リージョンは、リモートプロシージャコールをトリガーします。
 
 メモリ使用量フィールド：
@@ -110,18 +110,18 @@ TiKVコプロセッサータスクフィールド：
 -   `Cop_wait_max` ：cop-tasksの最大待機時間。
 -   `Cop_wait_addr` ：待ち時間が最も長い警官タスクのアドレス。
 -   `Cop_backoff_{backoff-type}_total_times` ：エラーによって発生したバックオフの合計時間。
--   `Cop_backoff_{backoff-type}_total_time` ：エラーによって発生したバックオフの合計時間。
+-   `Cop_backoff_{backoff-type}_total_time` ：エラーによるバックオフの合計時間。
 -   `Cop_backoff_{backoff-type}_max_time` ：エラーによるバックオフの最長時間。
 -   `Cop_backoff_{backoff-type}_max_addr` ：エラーによるバックオフ時間が最も長いcop-taskのアドレス。
--   `Cop_backoff_{backoff-type}_avg_time` ：エラーによって発生したバックオフの平均時間。
--   `Cop_backoff_{backoff-type}_p90_time` ：エラーが原因のP90パーセンタイルバックオフ時間。
+-   `Cop_backoff_{backoff-type}_avg_time` ：エラーによるバックオフの平均時間。
+-   `Cop_backoff_{backoff-type}_p90_time` ：エラーによるP90パーセンタイルバックオフ時間。
 
 ## 関連するシステム変数 {#related-system-variables}
 
 -   [`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold) ：低速ログのしきい値を設定します。実行時間がこのしきい値を超えるSQLステートメントは、低速ログに記録されます。デフォルト値は300（ms）です。
 -   [`tidb_query_log_max_len`](/system-variables.md#tidb_query_log_max_len) ：スローログに記録されるSQLステートメントの最大長を設定します。デフォルト値は4096（バイト）です。
 -   [tidb_redact_log](/system-variables.md#tidb_redact_log) ：低速ログに記録されたSQLステートメントで`?`を使用してユーザーデータの感度を下げるかどうかを決定します。デフォルト値は`0`で、これは機能を無効にすることを意味します。
--   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) ：各オペレーターの物理実行情報を実行プランに記録するかどうかを決定します。デフォルト値は`1`です。この機能は、パフォーマンスに約3％の影響を与えます。この機能を有効にすると、次の`Plan`の情報を表示できます。
+-   [`tidb_enable_collect_execution_info`](/system-variables.md#tidb_enable_collect_execution_info) ：各オペレーターの物理実行情報を実行計画に記録するかどうかを決定します。デフォルト値は`1`です。この機能は、パフォーマンスに約3％の影響を与えます。この機能を有効にすると、次の`Plan`の情報を表示できます。
 
     ```sql
     > select tidb_decode_plan('jAOIMAk1XzE3CTAJMQlmdW5jczpjb3VudChDb2x1bW4jNyktPkMJC/BMNQkxCXRpbWU6MTAuOTMxNTA1bXMsIGxvb3BzOjIJMzcyIEJ5dGVzCU4vQQoxCTMyXzE4CTAJMQlpbmRleDpTdHJlYW1BZ2dfOQkxCXQRSAwyNzY4LkgALCwgcnBjIG51bTogMQkMEXMQODg0MzUFK0hwcm9jIGtleXM6MjUwMDcJMjA2HXsIMgk1BWM2zwAAMRnIADcVyAAxHcEQNQlOL0EBBPBbCjMJMTNfMTYJMQkzMTI4MS44NTc4MTk5MDUyMTcJdGFibGU6dCwgaW5kZXg6aWR4KGEpLCByYW5nZTpbLWluZiw1MDAwMCksIGtlZXAgb3JkZXI6ZmFsc2UJMjUBrgnQVnsA');
@@ -150,7 +150,7 @@ set @@tidb_enable_collect_execution_info=0;
 
 ## 遅いログのメモリマッピング {#memory-mapping-in-slow-log}
 
-`INFORMATION_SCHEMA.SLOW_QUERY`のテーブルを照会することにより、低速照会ログの内容を照会できます。表の各列名は、低速ログの1つのフィールド名に対応しています。テーブル構造については、 [情報スキーマ](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
+`INFORMATION_SCHEMA.SLOW_QUERY`のテーブルをクエリすることにより、低速クエリログの内容をクエリできます。表の各列名は、低速ログの1つのフィールド名に対応しています。テーブルの構造については、 [情報スキーマ](/information-schema/information-schema-slow-query.md)の`SLOW_QUERY`テーブルの概要を参照してください。
 
 > **ノート：**
 >

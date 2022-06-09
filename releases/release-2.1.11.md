@@ -33,7 +33,7 @@ TiDB Ansibleバージョン：2.1.11
 ## TiKV {#tikv}
 
 -   リーダーと学習者が1人だけの場合に学習者が空のインデックスを読み取る問題を修正します[＃4751](https://github.com/tikv/tikv/pull/4751)
--   通常の優先度[＃4791](https://github.com/tikv/tikv/pull/4791)のコマンドへの影響を減らすために、優先度の高いスレッドプールでプロセス`ScanLock`と`ResolveLock`
+-   通常の優先度[＃4791](https://github.com/tikv/tikv/pull/4791)のコマンドへの影響を減らすために、優先度の高いスレッドプールでプロセス`ScanLock`と`ResolveLock`を実行します。
 -   受信したスナップショットのすべてのファイルを同期する[＃4811](https://github.com/tikv/tikv/pull/4811)
 
 ## ツール {#tools}

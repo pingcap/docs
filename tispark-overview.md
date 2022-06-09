@@ -11,7 +11,7 @@ summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution
 
 [TiFlash](/tiflash/tiflash-overview.md)は、HTAPを有効にするもう1つのツールです。 TiFlashとTiSparkはどちらも、複数のホストを使用してOLTPデータに対してOLAPクエリを実行できます。 TiFlashはデータを列形式で保存するため、より効率的な分析クエリが可能になります。 TiFlashとTiSparkは一緒に使用できます。
 
-TiSparkは、TiKVクラスタとPDクラスタに依存しています。また、Sparkクラスタを設定する必要があります。このドキュメントでは、TiSparkのセットアップと使用方法について簡単に紹介します。 ApacheSparkの基本的な知識が必要です。詳細については、 [ApacheSparkのWebサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
+TiSparkは、TiKVクラスタとPDクラスタに依存しています。また、Sparkクラスタをセットアップする必要があります。このドキュメントでは、TiSparkのセットアップと使用方法について簡単に紹介します。 ApacheSparkの基本的な知識が必要です。詳細については、 [ApacheSparkのWebサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
 
 Spark Catalyst Engineと緊密に統合されたTiSparkは、コンピューティングを正確に制御します。これにより、SparkはTiKVからデータを効率的に読み取ることができます。 TiSparkは、高速ポイントクエリを可能にするインデックスシークもサポートしています。
 
@@ -47,7 +47,7 @@ TiSparkは、YARN、Mesos、Standaloneなどの任意のSparkモードで実行�
 
 このセクションでは、TiKVとTiSparkの独立した展開、SparkとTiSparkの独立した展開、およびTiKVとTiSparkの同時展開の推奨構成について説明します。
 
-TiUPを使用してTiSparkをデプロイする方法の詳細については、 [TiSparkデプロイメントトポロジ](/tispark-deployment-topology.md)も参照してください。
+TiUPを使用してTiSparkを展開する方法の詳細については、 [TiSpark展開トポロジ](/tispark-deployment-topology.md)も参照してください。
 
 ### TiKVとTiSparkの独立した展開のConfiguration / コンフィグレーション {#configuration-of-independent-deployment-of-tikv-and-tispark}
 
@@ -107,7 +107,7 @@ spark.sql.extensions org.apache.spark.sql.TiExtensions
 >
 > TiSparkが正しく通信できなかった場合は、ファイアウォールの構成を確認してください。ファイアウォールルールを調整するか、必要に応じて無効にすることができます。
 
-### 既存のSparkクラスタにTiSparkをデプロイします {#deploy-tispark-on-an-existing-spark-cluster}
+### 既存のSparkクラスタにTiSparkをデプロイ {#deploy-tispark-on-an-existing-spark-cluster}
 
 既存のSparkクラスタでTiSparkを実行する場合、クラスタを再起動する必要はありません。 Sparkの`--jars`パラメーターを使用して、依存関係としてTiSparkを導入できます。
 
@@ -335,7 +335,7 @@ TiSpark 2.0以降、統計情報はデフォルトで自動ロードされます
 
 TiSpark v2.5.0以降のバージョンを使用している場合は、TiDBを使用してTiSparkユーザーを認証および承認できます。
 
-認証および承認機能はデフォルトで無効になっています。これを有効にするには、Spark構成ファイル`spark-defaults.conf`に次の構成を追加します。
+認証および承認機能はデフォルトで無効になっています。これを有効にするには、次の構成をSpark構成ファイル`spark-defaults.conf`に追加します。
 
 ```
 // Enable authentication and authorization
@@ -358,11 +358,11 @@ spark.sql.tidb.password $your_tidb_server_password
 
 Q：既存のSpark / Hadoopクラスタとの共有リソースとは対照的に、独立したデプロイメントの長所/短所は何ですか？
 
-A：既存のSparkクラスタは個別に展開せずに使用できますが、既存のクラスタがビジー状態の場合、TiSparkは目的の速度を達成できません。
+A：個別のデプロイなしで既存のSparkクラスタを使用できますが、既存のクラスタがビジーの場合、TiSparkは目的の速度を達成できません。
 
 Q：SparkをTiKVと混合できますか？
 
-A：TiDBとTiKVが過負荷になり、重要なオンラインタスクを実行する場合は、TiSparkを個別に展開することを検討してください。また、OLTPのネットワークリソースが危険にさらされてオンラインビジネスに影響を与えないように、さまざまなNICの使用を検討する必要があります。オンラインビジネスの要件が高くない場合、または負荷が十分に大きくない場合は、TiSparkとTiKVの展開を混在させることを検討できます。
+A：TiDBとTiKVが過負荷になり、重要なオンラインタスクを実行する場合は、TiSparkを個別にデプロイすることを検討してください。また、OLTPのネットワークリソースが危険にさらされてオンラインビジネスに影響を与えないように、さまざまなNICの使用を検討する必要があります。オンラインビジネスの要件が高くない場合、または負荷が十分に大きくない場合は、TiSparkとTiKVの展開を混在させることを検討できます。
 
 Q：TiSparkを使用してSQLステートメントを実行するときに`warning：WARN ObjectStore:568 - Failed to get database`が返された場合、どうすればよいですか？
 
@@ -380,4 +380,4 @@ A：デフォルトでは、TiSparkはhive-siteのHiveメタデータを読み�
 
 Q：TiSparkがSparkタスクを実行しているときに`Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...`が返された場合、どうすればよいですか？
 
-A：エラーメッセージは`serialVersionUID`の競合を示しています。これは、 `class`つと`TiRegion`の異なるバージョンを使用したために発生します。 `TiRegion`はTiSparkにのみ存在するため、TiSparkパッケージの複数のバージョンが使用される可能性があります。このエラーを修正するには、TiSparkの依存関係のバージョンがクラスタのすべてのノード間で一貫していることを確認する必要があります。
+A：エラーメッセージは`serialVersionUID`の競合を示しています。これは、 `class`つと`TiRegion`の異なるバージョンを使用したために発生します。 `TiRegion`はTiSparkにのみ存在するため、TiSparkパッケージの複数のバージョンが使用される可能性があります。このエラーを修正するには、TiSpark依存関係のバージョンがクラスタのすべてのノード間で一貫していることを確認する必要があります。

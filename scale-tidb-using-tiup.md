@@ -249,7 +249,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
 > **ノート：**
 >
 > -   同様の手順を実行して、TiDBおよびPDノードを削除できます。
-> -   TiKV、TiFlash、およびTiDB Binlogコンポーネントは非同期でオフラインになり、停止プロセスに長い時間がかかるため、TiUPはさまざまな方法でそれらをオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特定の処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
+> -   TiKV、TiFlash、およびTiDB Binlogコンポーネントは非同期でオフラインになり、停止プロセスに時間がかかるため、TiUPはさまざまな方法でそれらをオフラインにします。詳細については、 [コンポーネントのオフラインプロセスの特定の処理](/tiup/tiup-component-cluster-scale-in.md#particular-handling-of-components-offline-process)を参照してください。
 
 > **ノート：**
 >
@@ -337,7 +337,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
     alter table <db-name>.<table-name> set tiflash replica 0;
     ```
 
-2.  関連するテーブルのTiFlashレプリカが削除されるのを待ちます。 [テーブルの複製の進行状況を確認する](/tiflash/use-tiflash.md#check-replication-progress)であり、関連するテーブルのレプリケーション情報が見つからない場合、レプリカは削除されます。
+2.  関連するテーブルのTiFlashレプリカが削除されるのを待ちます。 [テーブルのレプリケーションの進行状況を確認する](/tiflash/use-tiflash.md#check-replication-progress)であり、関連するテーブルのレプリケーション情報が見つからない場合、レプリカは削除されます。
 
 ### 2.スケールイン操作を実行します {#2-perform-the-scale-in-operation}
 

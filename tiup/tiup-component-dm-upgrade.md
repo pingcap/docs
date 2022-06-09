@@ -2,7 +2,7 @@
 title: tiup dm upgrade
 ---
 
-# tiupdmアップグレード {#tiup-dm-upgrade}
+# tiup dm upgrade {#tiup-dm-upgrade}
 
 `tiup dm upgrade`コマンドは、指定されたクラスタを特定のバージョンにアップグレードするために使用されます。
 

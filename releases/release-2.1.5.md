@@ -16,9 +16,9 @@ title: TiDB 2.1.5 Release Notes
     -   ターゲットバイナリの長さが`NULL` [＃9349](https://github.com/pingcap/tidb/pull/9349) `cast_as_binary`し`max_allowed_packet` 。
     -   `IF`と`IFNULL`の[＃9351](https://github.com/pingcap/tidb/pull/9351)プロセスを最適化する
     -   スカイラインプルーニングを使用してTiDBのインデックス選択を最適化し、単純なクエリの安定性を向上させます[＃9356](https://github.com/pingcap/tidb/pull/9356)
-    -   `DNF`式[＃9405](https://github.com/pingcap/tidb/pull/9405)の選択性の計算をサポート
+    -   `DNF`式[＃9405](https://github.com/pingcap/tidb/pull/9405)の選択性の計算をサポートします
     -   `!=ANY()`と`=ALL()`の間違ったSQLクエリ結果を修正する場合があります[＃9403](https://github.com/pingcap/tidb/pull/9403)
-    -   `Merge Join`操作が実行される2つのテーブルの結合キータイプが異なる場合のパニックまたは間違った結果を修正します[＃9438](https://github.com/pingcap/tidb/pull/9438)
+    -   `Merge Join`操作が実行される2つのテーブルの結合キータイプが異なる場合のパニックまたは誤った結果を修正します[＃9438](https://github.com/pingcap/tidb/pull/9438)
     -   `RAND()`関数の結果がMySQL3と互換性がないという問題を修正し[＃9446](https://github.com/pingcap/tidb/pull/9446)
     -   `Semi Join`処理`NULL`のロジックと空の結果セットをリファクタリングして、正しい結果を取得し、 [＃9449](https://github.com/pingcap/tidb/pull/9449)との互換性を向上させます
 -   サーバ
@@ -30,7 +30,7 @@ title: TiDB 2.1.5 Release Notes
     -   MySQLクライアントとTiDB間の接続を構築するのに時間がかかる場合があるという問題を修正します[＃9451](https://github.com/pingcap/tidb/pull/9451)
 -   DDL
     -   `DROP COLUMN`の操作をキャンセルするときのいくつかの問題を修正します[＃9352](https://github.com/pingcap/tidb/pull/9352)
-    -   `DROP`つまたは`ADD`のパーティションテーブル操作をキャンセルするときのいくつかの問題を修正します[＃9376](https://github.com/pingcap/tidb/pull/9376)
+    -   `DROP`つまたは`ADD`のパーティション表操作をキャンセルするときのいくつかの問題を修正します[＃9376](https://github.com/pingcap/tidb/pull/9376)
     -   `ADMIN CHECK TABLE`がデータインデックスの不整合を誤って報告する場合があるという問題を修正します[＃9399](https://github.com/pingcap/tidb/pull/9399)
     -   `TIMESTAMP`デフォルト値[＃9108](https://github.com/pingcap/tidb/pull/9108)のタイムゾーンの問題を修正します
 
@@ -48,6 +48,6 @@ title: TiDB 2.1.5 Release Notes
 ## ツール {#tools}
 
 -   雷
-    -   トゥームストーンストアがクラスタ[＃4223](https://github.com/tikv/tikv/pull/4223)に存在する場合は、エラーを報告したり終了したりしないでください。
+    -   トゥームストーンストアがクラスタ[＃4223](https://github.com/tikv/tikv/pull/4223)に存在する場合、エラーを報告したり終了したりしないでください
 -   TiDB Binlog
     -   DDLイベントレプリケーションの正確性を保証するために、DDLbinlogレプリケーションプランを更新します[＃9304](https://github.com/pingcap/tidb/issues/9304)

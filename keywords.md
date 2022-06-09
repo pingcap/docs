@@ -341,7 +341,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   以下
 -   レベル
 -   いいね（R）
--   限界（R）
+-   LIMIT（R）
 -   リニア（R）
 -   LINES（R）
 -   リスト
@@ -422,7 +422,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   それだけ
 -   ON_DUPLICATE
 -   開いた
--   オプティミスティック（R）
+-   楽観的（R）
 -   最適化（R）
 -   オプション（R）
 -   オプションで（R）
@@ -445,7 +445,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   PERCENT_RANK（Rウィンドウ）
 -   PER_DB
 -   PER_TABLE
--   ペシミスティック（R）
+-   悲観的（R）
 -   プラグイン
 -   先行
 -   プレシジョン（R）
@@ -488,7 +488,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   再編成
 -   修理
 -   リピート（R）
--   再現可能
+-   再現性
 -   交換（R）
 -   レプリカ
 -   複製

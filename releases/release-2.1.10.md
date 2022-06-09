@@ -24,7 +24,7 @@ TiDB Ansibleバージョン：2.1.10
 -   `Update`ステートメント[＃10439](https://github.com/pingcap/tidb/pull/10439)の特権チェック中にエラーが発生する問題を修正します。
 -   `RANGE`の計算が間違っていると、場合によっては`CHAR`列に間違った結果が生じるという問題を修正します[＃10455](https://github.com/pingcap/tidb/pull/10455)
 -   `SHARD_ROW_ID_BITS`を減らした後にデータが上書きされる可能性がある問題を修正し[＃9868](https://github.com/pingcap/tidb/pull/9868)
--   `ORDER BY RAND()`がランダムな数値[＃10064](https://github.com/pingcap/tidb/pull/10064)を返さない問題を修正します
+-   `ORDER BY RAND()`が乱数[＃10064](https://github.com/pingcap/tidb/pull/10064)を返さない問題を修正します
 -   小数の精度を変更する`ALTER`ステートメントを禁止する[＃10458](https://github.com/pingcap/tidb/pull/10458)
 -   MySQL3との`TIME_FORMAT`関数の互換性の問題を修正し[＃10474](https://github.com/pingcap/tidb/pull/10474)
 -   `PERIOD_ADD`のパラメータの有効性を確認して[＃10430](https://github.com/pingcap/tidb/pull/10430)
@@ -42,7 +42,7 @@ TiDB Ansibleバージョン：2.1.10
 ## TiKV {#tikv}
 
 -   転送の失敗を回避するために、最近構成が変更されたリージョンでリーダーの転送を拒否する[＃4684](https://github.com/tikv/tikv/pull/4684)
--   コプロセッサーメトリックス[＃4643](https://github.com/tikv/tikv/pull/4643)の優先順位ラベルを追加します。
+-   コプロセッサーメトリックス[＃4643](https://github.com/tikv/tikv/pull/4643)の優先ラベルを追加します
 -   リーダー[＃4724](https://github.com/tikv/tikv/pull/4724)の転送中に発生する可能性があったダーティリードの問題を修正します
 -   `CommitMerge`が場合によってはTiKVの再起動エラーを引き起こすという問題を修正します[＃4615](https://github.com/tikv/tikv/pull/4615)
 -   不明なログを修正する[＃4730](https://github.com/tikv/tikv/pull/4730)

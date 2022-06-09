@@ -70,7 +70,7 @@ tiup cluster edit-config <cluster-name>
 >
 > PDがリッスンするIPアドレスとポートは、 `pd-server`の起動時に指定された`advertise-client-urls`つのパラメーターに対応します。複数の`pd-server`には複数の`advertise-client-urls`のパラメーターがあり、1つまたは複数のパラメーターを指定できます。たとえば、 `--pd=http://10.0.10.25:2379`または`--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379` 。
 
-TiUPを使用してTiCDCをデプロイする場合は、次のコマンドの`cdc cli`を`tiup ctl cdc`に置き換えます。
+TiUPを使用してTiCDCを展開する場合は、次のコマンドの`cdc cli`を`tiup ctl cdc`に置き換えます。
 
 ### TiCDCサービスの進捗状況を管理する（ <code>capture</code> ） {#manage-ticdc-service-progress-code-capture-code}
 
@@ -166,7 +166,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
     -   `memory` ：メモリ内のデータ変更を並べ替えます。大量のデータを複製するとOOMが簡単にトリガーされるため、この並べ替えエンジンの使用は**お勧めしません**。
     -   `file` ：ディスクを完全に使用して一時データを保存します。この機能は**廃止され**ました。<strong>いかなる</strong>状況でも使用することは<strong>お勧めしません</strong>。
 
--   `--config` ： `changefeed`の設定ファイルを指定します。
+-   `--config` ： `changefeed`の構成ファイルを指定します。
 
 -   `sort-dir` ：ソートエンジンが使用する一時ファイルディレクトリを指定します。 **TiDB v4.0.13、v5.0.3、およびv5.1.0以降、このオプションはサポートされていないことに注意してください。もう使用しないでください**。
 
@@ -182,18 +182,18 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 以下は、 `mysql` / `tidb`のシンクURIに設定できるパラメータとパラメータ値の説明です。
 
-| パラメータ/パラメータ値   | 説明                                                                                                                                                                                                                          |
-| :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `root`         | ダウンストリームデータベースのユーザー名                                                                                                                                                                                                        |
-| `123456`       | ダウンストリームデータベースのパスワード                                                                                                                                                                                                        |
-| `127.0.0.1`    | ダウンストリームデータベースのIPアドレス                                                                                                                                                                                                       |
-| `3306`         | ダウンストリームデータのポート                                                                                                                                                                                                             |
-| `worker-count` | ダウンストリームに対して同時に実行できるSQLステートメントの数（オプション、デフォルトでは`16` ）                                                                                                                                                                        |
-| `max-txn-row`  | ダウンストリームで実行できるトランザクションバッチのサイズ（オプション、デフォルトで`256` ）                                                                                                                                                                           |
-| `ssl-ca`       | ダウンストリームMySQLインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                                                                                                           |
-| `ssl-cert`     | ダウンストリームのMySQLインスタンスに接続するために必要な証明書ファイルのパス（オプション）                                                                                                                                                                            |
-| `ssl-key`      | ダウンストリームのMySQLインスタンスに接続するために必要な証明書キーファイルのパス（オプション）                                                                                                                                                                          |
-| `time-zone`    | ダウンストリームのMySQLインスタンスに接続するときに使用されるタイムゾーン。v4.0.8以降で有効です。これはオプションのパラメーターです。このパラメーターが指定されていない場合、TiCDCサービスプロセスのタイムゾーンが使用されます。このパラメーターが空の値に設定されている場合、TiCDCがダウンストリームのMySQLインスタンスに接続するときにタイムゾーンが指定されず、ダウンストリームのデフォルトのタイムゾーンが使用されます。 |
+| パラメータ/パラメータ値   | 説明                                                                                                                                                                                                                         |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | ダウンストリームデータベースのユーザー名                                                                                                                                                                                                       |
+| `123456`       | ダウンストリームデータベースのパスワード                                                                                                                                                                                                       |
+| `127.0.0.1`    | ダウンストリームデータベースのIPアドレス                                                                                                                                                                                                      |
+| `3306`         | ダウンストリームデータのポート                                                                                                                                                                                                            |
+| `worker-count` | ダウンストリームに対して同時に実行できるSQLステートメントの数（オプション、デフォルトでは`16` ）                                                                                                                                                                       |
+| `max-txn-row`  | ダウンストリームで実行できるトランザクションバッチのサイズ（オプション、デフォルトで`256` ）                                                                                                                                                                          |
+| `ssl-ca`       | ダウンストリームのMySQLインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                                                                                                         |
+| `ssl-cert`     | ダウンストリームのMySQLインスタンスに接続するために必要な証明書ファイルのパス（オプション）                                                                                                                                                                           |
+| `ssl-key`      | ダウンストリームのMySQLインスタンスに接続するために必要な証明書キーファイルのパス（オプション）                                                                                                                                                                         |
+| `time-zone`    | ダウンストリームのMySQLインスタンスに接続するときに使用されるタイムゾーン。v4.0.8以降で有効です。これはオプションのパラメータです。このパラメーターが指定されていない場合、TiCDCサービスプロセスのタイムゾーンが使用されます。このパラメーターが空の値に設定されている場合、TiCDCがダウンストリームのMySQLインスタンスに接続するときにタイムゾーンが指定されず、ダウンストリームのデフォルトのタイムゾーンが使用されます。 |
 
 #### <code>kafka</code>を使用してシンクURIを構成する {#configure-sink-uri-with-code-kafka-code}
 
@@ -253,7 +253,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 --opts registry="http://127.0.0.1:8081"
 ```
 
-Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用して、データをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `opts`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。 `avro`プロトコルとConfluent統合は**実験的**ものであることに注意してください。
+Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してデータをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `opts`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。 `avro`プロトコルとConfluent統合は**実験的**ものであることに注意してください。
 
 詳細な統合ガイドについては、 [TiDBとConfluentプラットフォームの統合に関するクイックスタートガイド](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
@@ -279,12 +279,12 @@ Confluentが提供する[データコネクタ](https://docs.confluent.io/curren
 | `operationTimeout`           | ダウンストリームパルサーで操作を実行するためのタイムアウト。これはオプションで、デフォルトは30（秒）です。                                                                                  |
 | `tlsTrustCertsFilePath`      | ダウンストリームPulsarインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                      |
 | `tlsAllowInsecureConnection` | TLSを有効にした後に暗号化されていない接続を許可するかどうかを決定します（オプション）                                                                                            |
-| `tlsValidateHostname`        | ダウンストリームPulsarからの証明書のホスト名を確認するかどうかを決定します（オプション）                                                                                         |
+| `tlsValidateHostname`        | ダウンストリームパルサーからの証明書のホスト名を確認するかどうかを決定します（オプション）                                                                                           |
 | `maxConnectionsPerBroker`    | 単一のダウンストリームPulsarブローカーに許可される接続の最大数。これはオプションであり、デフォルトは1です。                                                                               |
 | `auth.tls`                   | TLSモードを使用して、ダウンストリームのパルサーを検証します（オプション）。たとえば、 `auth=tls&auth.tlsCertFile=/path/to/cert&auth.tlsKeyFile=/path/to/key` 。                   |
 | `auth.token`                 | トークンモードを使用して、ダウンストリームのパルサーを検証します（オプション）。たとえば、 `auth=token&auth.token=secret-token`または`auth=token&auth.file=path/to/secret-token-file` 。 |
-| `name`                       | TiCDCでのパルサープロデューサーの名前（オプション）                                                                                                            |
-| `protocol`                   | メッセージがPulsarに出力されるプロトコル。値の`maxwell`は、 `canal-json` 、 `avro` `canal` `open-protocol` 。                                                   |
+| `name`                       | TiCDCのパルサープロデューサーの名前（オプション）                                                                                                             |
+| `protocol`                   | メッセージがパルサーに出力されるプロトコル。値の`maxwell`は、 `canal-json` 、 `avro` `canal` `open-protocol` 。                                                     |
 | `maxPendingMessages`         | 保留中のメッセージキューの最大サイズを設定します。これはオプションで、デフォルトは1000です。たとえば、Pulsarからの確認メッセージの保留中です。                                                            |
 | `disableBatching`            | メッセージをバッチで自動的に送信することを無効にします（オプション）                                                                                                      |
 | `batchingMaxPublishDelay`    | 送信されたメッセージがバッチ処理される期間を設定します（デフォルト：10ms）                                                                                                 |
@@ -292,7 +292,7 @@ Confluentが提供する[データコネクタ](https://docs.confluent.io/curren
 | `hashingScheme`              | メッセージの送信先のパーティションを選択するために使用されるハッシュアルゴリズム（オプション）。値のオプションは`JavaStringHash` （デフォルト）と`Murmur3`です。                                           |
 | `properties.*`               | TiCDCのパルサープロデューサーに追加されたカスタマイズされたプロパティ（オプション）。たとえば、 `properties.location=Hangzhou` 。                                                     |
 
-Pulsarのその他のパラメーターについては、 [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions)および[pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions)を参照してください。
+パルサーのその他のパラメーターについては、 [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions)および[pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions)を参照してください。
 
 #### タスク構成ファイルを使用する {#use-the-task-configuration-file}
 
@@ -360,7 +360,7 @@ cdc cli changefeed query -s --pd=http://10.0.10.25:2379 --changefeed-id=simple-r
 上記のコマンドと結果では、次のようになります。
 
 -   `state`は、現在の`changefeed`の複製状態です。各状態は、 `changefeed list`の状態と一致している必要があります。
--   `tso`は、ダウンストリームに正常に複製された、現在の`changefeed`の最大のトランザクションTSOを表します。
+-   `tso`は、ダウンストリームに正常に複製された現在の`changefeed`の最大のトランザクションTSOを表します。
 -   `checkpoint`は、ダウンストリームに正常に複製された、現在の`changefeed`の最大のトランザクションTSOの対応する時間を表します。
 -   `error`は、現在の`changefeed`でエラーが発生したかどうかを記録します。
 
@@ -437,9 +437,9 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-repl
     -   `checkpoint-ts` ：現在の`changefeed`で最大のトランザクション`TS` 。この`TS`はダウンストリームに正常に書き込まれていることに注意してください。
     -   `admin-job-type` ： `changefeed`のステータス：
         -   `0` ：状態は正常です。
-        -   `1` ：タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成と複製ステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
+        -   `1` ：タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
         -   `2` ：タスクが再開されます。レプリケーションタスクは`checkpoint-ts`から再開します。
-        -   `3` ：タスクが削除されます。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスのみが、後のクエリのために保持されます。
+        -   `3` ：タスクは削除されます。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスのみが、後のクエリのために保持されます。
 -   `task-status`は、照会された`changefeed`の各レプリケーションサブタスクの状態を示します。
 
 #### レプリケーションタスクを一時停止します {#pause-a-replication-task}
@@ -605,7 +605,7 @@ protocol = "canal-json"
 -   TiCDC v4.0.0では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加されます。これは、start_tsを使用してトランザクションをフィルタリングします。
 -   TiCDC v4.0.2では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、 `rules`が追加されました。これは、データベースとテーブルに新しいフィルタールールを使用します。フィルタ構文の詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。
 
-## <span class="version-mark">v4.0.5の新しい</span>行変更イベントの履歴値を出力します {#output-the-historical-value-of-a-row-changed-event-span-class-version-mark-new-in-v4-0-5-span}
+## 行変更イベントの履歴値を出力する<span class="version-mark">v4.0.5の新機能</span> {#output-the-historical-value-of-a-row-changed-event-span-class-version-mark-new-in-v4-0-5-span}
 
 デフォルトの構成では、レプリケーションタスクで出力されるTiCDC Open Protocolの行変更イベントには変更された値のみが含まれ、変更前の値は含まれません。したがって、出力値は、行変更イベントの履歴値としてTiCDCOpenProtocolのコンシューマー側で使用することはできません。
 
@@ -666,17 +666,17 @@ cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-re
 
 ## 災害シナリオでの結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
-v5.3.0以降、TiCDCは、アップストリームTiDBクラスタからS3ストレージまたはダウンストリームクラスタのNFSファイルシステムへのインクリメンタルデータのバックアップをサポートします。アップストリームクラスタで災害が発生して使用できなくなった場合、TiCDCはダウンストリームデータを結果整合性のある最近の状態に復元できます。これは、TiCDCによって提供される結果整合性のある複製機能です。この機能を使用すると、アプリケーションをダウンストリームクラスタにすばやく切り替えることができ、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
+v5.3.0以降、TiCDCは、アップストリームTiDBクラスタからS3ストレージまたはダウンストリームクラスタのNFSファイルシステムへのインクリメンタルデータのバックアップをサポートします。アップストリームクラスタで災害が発生して使用できなくなった場合、TiCDCはダウンストリームデータを結果整合性のある最近の状態に復元できます。これは、TiCDCによって提供される結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリームクラスタにすばやく切り替えることができ、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
 現在、TiCDCは、増分データをTiDBクラスタから別のTiDBクラスタまたはMySQL互換データベースシステム（ Aurora、MySQL、MariaDBを含む）に複製できます。アップストリームクラスタがクラッシュした場合、災害前のTiCDCのレプリケーションステータスは正常であり、レプリケーションラグが小さいという条件で、TiCDCは5分以内にダウンストリームクラスタのデータを復元できます。これにより、最大で10秒のデータ損失が可能になります。つまり、RTO &lt;= 5分、P95 RPO&lt;=10秒です。
 
-TiCDCレプリケーションラグは、次のシナリオで増加します。
+TiCDCレプリケーションの遅延は、次のシナリオで増加します。
 
 -   TPSは短時間で大幅に増加します
 -   大規模または長いトランザクションがアップストリームで発生します
 -   アップストリームのTiKVまたはTiCDCクラスタがリロードまたはアップグレードされます
 -   `add index`などの時間のかかるDDLステートメントはアップストリームで実行されます
--   PDは積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンのマージや分割が頻繁に行われたりします。
+-   PDは積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンのマージやリージョンの分割が頻繁に行われたりします。
 
 ### 前提条件 {#prerequisites}
 
@@ -704,7 +704,7 @@ storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 
 プライマリクラスタで災害が発生した場合は、 `cdc redo`コマンドを実行してセカンダリクラスタで手動で回復する必要があります。復旧プロセスは以下のとおりです。
 
-1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データ回復中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
+1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データリカバリ中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
 2.  データ回復にはcdcバイナリを使用します。次のコマンドを実行します。
 
 ```shell
@@ -713,7 +713,7 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
     --sink-uri="mysql://normal:123456@10.0.10.55:3306/"
 ```
 
-このコマンドでは：
+このコマンドの場合：
 
 -   `tmp-dir` ：TiCDCインクリメンタルデータバックアップファイルをダウンロードするための一時ディレクトリを指定します。
 -   `storage` ：AmazonS3ストレージまたはNFSディレクトリのいずれかのTiCDCインクリメンタルデータバックアップファイルを保存するためのアドレスを指定します。

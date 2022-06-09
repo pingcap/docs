@@ -40,7 +40,7 @@ TiDBバージョン：4.0.13
 
     -   バックアップと復元（BR）
 
-        -   `mysql`スキーマ[＃1077](https://github.com/pingcap/br/pull/1077)で作成されたユーザーテーブルのバックアップをサポートします
+        -   `mysql`スキーマ[＃1077](https://github.com/pingcap/br/pull/1077)で作成されたユーザーテーブルのバックアップをサポートする
         -   `checkVersion`を更新して、クラスタデータとバックアップデータを確認します[＃1090](https://github.com/pingcap/br/pull/1090)
         -   バックアップ中の少数のTiKVノード障害を許容する[＃1062](https://github.com/pingcap/br/pull/1062)
 
@@ -80,9 +80,9 @@ TiDBバージョン：4.0.13
     -   `DECIMAL`タイプの列にデータを挿入するときに発生した解析エラーの問題を修正します[＃23152](https://github.com/pingcap/tidb/pull/23152)
     -   `USE_INDEX_MERGE`ヒントが有効にならない問題を修正します[＃22924](https://github.com/pingcap/tidb/pull/22924)
     -   `WHERE`句の`ENUM`列または`SET`列をフィルターとして使用すると、クエリが誤った結果を返すバグを修正します[＃22814](https://github.com/pingcap/tidb/pull/22814)
-    -   クラスタ化されたインデックスと新しい照合順序を同時に使用すると、クエリが間違った結果を返すバグを修正します[＃21408](https://github.com/pingcap/tidb/pull/21408)
+    -   クラスタ化インデックスと新しい照合順序を同時に使用すると、クエリが間違った結果を返すバグを修正します[＃21408](https://github.com/pingcap/tidb/pull/21408)
     -   `enable_new_collation`を有効にして`ANALYZE`を実行したときに発生するパニックを修正します[＃21299](https://github.com/pingcap/tidb/pull/21299)
-    -   SQLビューが[＃24531](https://github.com/pingcap/tidb/pull/24531)に関連付けられたデフォルトの役割を正しく処理しない問題を修正します。
+    -   SQLビューが[＃24531](https://github.com/pingcap/tidb/pull/24531)に関連付けられたデフォルトのロールを正しく処理しない問題を修正します。
     -   DDLジョブのキャンセルがスタックする問題を修正します[＃24445](https://github.com/pingcap/tidb/pull/24445)
     -   `concat`関数が照合順序[＃24300](https://github.com/pingcap/tidb/pull/24300)を誤って処理する問題を修正します
     -   `SELECT`フィールドに`IN`のサブクエリがあり、サブクエリの外側に`NULL`のタプルが含まれている場合にクエリが誤った結果を返すバグを修正します[＃24022](https://github.com/pingcap/tidb/pull/24022)
@@ -92,7 +92,7 @@ TiDBバージョン：4.0.13
     -   テーブルに対する`INSERT`と`DELETE`の特権を同時に持たないユーザーが`REPLACE`の操作を実行できるというバグを修正します[＃23938](https://github.com/pingcap/tidb/pull/23938)
     -   照合順序が正しく処理されないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正します[＃23878](https://github.com/pingcap/tidb/pull/23878)
     -   `RANGE`つのパーティションを持つテーブルでクエリを実行するときに発生するパニックを修正します[＃23689](https://github.com/pingcap/tidb/pull/23689)
-    -   問題を修正します。以前のバージョンのクラスタでは、 `tidb_enable_table_partition`変数が`false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして処理されます。クラスタが新しいバージョンにアップグレードされたときに、このテーブルで`batch point get`のクエリを実行すると、接続パニックが発生します。 [＃23682](https://github.com/pingcap/tidb/pull/23682)
+    -   問題の修正：以前のバージョンのクラスタでは、 `tidb_enable_table_partition`変数が`false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして処理されます。クラスタが新しいバージョンにアップグレードされたときに、このテーブルで`batch point get`のクエリを実行すると、接続パニックが発生します。 [＃23682](https://github.com/pingcap/tidb/pull/23682)
     -   TiDBがTCPおよびUNIXソケットでリッスンするように構成されている場合、TCP接続を介したリモートホストが接続[＃23513](https://github.com/pingcap/tidb/pull/23513)に対して正しく検証されない問題を修正します。
     -   デフォルト以外の照合順序が誤ったクエリ結果を引き起こすバグを修正します[＃22923](https://github.com/pingcap/tidb/pull/22923)
     -   Grafanaの**コプロセッサーキャッシュ**パネルが機能しないバグを修正します[＃22617](https://github.com/pingcap/tidb/pull/22617)
@@ -106,7 +106,7 @@ TiDBバージョン：4.0.13
     -   TiCDCのスキャン速度[＃10142](https://github.com/tikv/tikv/pull/10142)の背圧をサポートする
     -   TiCDCの古い値を取得するための不要な読み取りを回避することにより、潜在的なOOMの問題を修正します[＃10031](https://github.com/tikv/tikv/pull/10031)
     -   古い値の読み取りによって引き起こされるTiCDCOOMの問題を修正します[＃10197](https://github.com/tikv/tikv/pull/10197)
-    -   S3ストレージのタイムアウトメカニズムを追加して、クライアントが応答なしでハングするのを防ぎます[＃10132](https://github.com/tikv/tikv/pull/10132)
+    -   クライアントが応答なしでハングするのを防ぐために、S3ストレージのタイムアウトメカニズムを追加します[＃10132](https://github.com/tikv/tikv/pull/10132)
 
 -   TiFlash
 

@@ -15,7 +15,7 @@ summary: Learn how to enable encryption at rest to protect sensitive data.
 
 TiDBクラスタでは、コンポーネントごとに異なる暗号化方式が使用されます。このセクションでは、TiKV、TiFlash、PD、バックアップと復元（BR）などのさまざまなTiDBコンポーネントでの暗号化サポートを紹介します。
 
-TiDBクラスタが展開されると、ユーザーデータの大部分はTiKVおよびTiFlashノードに保存されます。一部のメタデータはPDノードに保存されます（たとえば、TiKV領域の境界として使用されるセカンダリインデックスキー）。保管時に暗号化のメリットを最大限に活用するには、すべてのコンポーネントで暗号化を有効にする必要があります。暗号化を実装するときは、ネットワークを介して送信されるバックアップ、ログファイル、およびデータも考慮する必要があります。
+TiDBクラスタが展開されると、ユーザーデータの大部分はTiKVノードとTiFlashノードに保存されます。一部のメタデータはPDノードに保存されます（たとえば、TiKV領域の境界として使用されるセカンダリインデックスキー）。保管時に暗号化のメリットを最大限に活用するには、すべてのコンポーネントで暗号化を有効にする必要があります。暗号化を実装するときは、バックアップ、ログファイル、およびネットワークを介して送信されるデータも考慮する必要があります。
 
 ### TiKV {#tikv}
 
@@ -23,13 +23,13 @@ TiKVは、保存時の暗号化をサポートしています。この機能に�
 
 オプションで、クラウドとオンプレミスの両方のデプロイにAWSKMSを使用できます。プレーンテキストのマスターキーをファイルで指定することもできます。
 
-TiKVは現在、暗号化キーとユーザーデータをコアダンプから除外していません。保管時に暗号化を使用する場合は、TiKVプロセスのコアダンプを無効にすることをお勧めします。これは現在、TiKV自体では処理されていません。
+TiKVは現在、コアダンプから暗号化キーとユーザーデータを除外していません。保管時に暗号化を使用する場合は、TiKVプロセスのコアダンプを無効にすることをお勧めします。これは現在、TiKV自体では処理されていません。
 
 TiKVは、ファイルの絶対パスを使用して暗号化されたデータファイルを追跡します。その結果、 `raftstore.raftdb-path`ノードの暗号化がオンになったら、ユーザーは`storage.data-dir`などのデータファイル`raftdb.wal-dir`の構成を変更しないで`rocksdb.wal-dir` 。
 
 ### TiFlash {#tiflash}
 
-TiFlashは、保存時の暗号化をサポートしています。データキーはTiFlashによって生成されます。 TiFlash（TiFlashプロキシを含む）に書き込まれるすべてのファイル（データファイル、スキーマファイル、一時ファイルを含む）は、現在のデータキーを使用して暗号化されます。暗号化アルゴリズム、TiFlashでサポートされている暗号化構成（ `tiflash-learner.toml`ファイル内）、および監視メトリックの意味は、TiKVのものと一致しています。
+TiFlashは、保存時の暗号化をサポートしています。データキーはTiFlashによって生成されます。 TiFlash（TiFlashプロキシを含む）に書き込まれるすべてのファイル（データファイル、スキーマファイル、および一時ファイルを含む）は、現在のデータキーを使用して暗号化されます。暗号化アルゴリズム、TiFlashでサポートされている暗号化構成（ `tiflash-learner.toml`ファイル内）、および監視メトリックの意味は、TiKVのものと一致しています。
 
 Grafanaを使用してTiFlashをデプロイした場合は、 **TiFlash-Proxy-Details-** &gt; <strong>Encryption</strong>パネルを確認できます。
 
@@ -54,7 +54,7 @@ TiKVは現在、CTRモードでAES128、AES192、またはAES256を使用した�
 -   マスターキー。マスターキーはユーザーによって提供され、TiKVが生成するデータキーを暗号化するために使用されます。マスターキーの管理はTiKVの外部にあります。
 -   データキー。データキーはTiKVによって生成され、データの暗号化に実際に使用されるキーです。
 
-同じマスターキーをTiKVの複数のインスタンスで共有できます。本番環境でマスターキーを提供するための推奨される方法は、AWSKMSを使用することです。 AWS KMSを使用してカスタマーマスターキー（CMK）を作成し、CMKキーIDを設定ファイルでTiKVに提供します。 TiKVプロセスは、実行中にKMS CMKにアクセスする必要があります。これは、 [IAMの役割](https://aws.amazon.com/iam/)を使用して実行できます。 TiKVがKMSCMKにアクセスできない場合、起動または再起動に失敗します。 [KMS](https://docs.aws.amazon.com/kms/index.html)および[わたし](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用法については、AWSのドキュメントを参照してください。
+同じマスターキーをTiKVの複数のインスタンスで共有できます。本番環境でマスターキーを提供するための推奨される方法は、AWSKMSを使用することです。 AWS KMSを使用してカスタマーマスターキー（CMK）を作成し、CMKキーIDを設定ファイルのTiKVに提供します。 TiKVプロセスは、実行中にKMS CMKにアクセスする必要があります。これは、 [IAMの役割](https://aws.amazon.com/iam/)を使用して実行できます。 TiKVがKMSCMKにアクセスできない場合、起動または再起動に失敗します。 [KMS](https://docs.aws.amazon.com/kms/index.html)および[わたし](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html)の使用法については、AWSのドキュメントを参照してください。
 
 または、カスタムキーを使用する必要がある場合は、ファイルを介したマスターキーの提供もサポートされています。ファイルには、16進文字列としてエンコードされた256ビット（または32バイト）のキーが含まれ、改行（つまり、 `\n` ）で終わり、他には何も含まれていない必要があります。ただし、キーをディスクに保持するとキーがリークするため、キーファイルはRAMの`tempfs`に保存する場合にのみ適しています。
 
@@ -90,7 +90,7 @@ data-encryption-method = "aes128-ctr"
 data-key-rotation-period = "168h" # 7 days
 ```
 
-`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、および「plaintext」です。デフォルト値は「plaintext」です。これは、暗号化がオンになっていないことを意味します。 `data-key-rotation-period`は、TiKVがデータキーを回転させる頻度を定義します。新しいTiKVクラスタまたは既存のTiKVクラスタに対して暗号化をオンにすることができますが、暗号化を有効にした後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、構成ファイルの`data-encryption-method`を削除するか、「plaintext」にリセットして、TiKVを再起動します。暗号化方式を変更するには、構成ファイルの`data-encryption-method`を更新し、TiKVを再起動します。
+`data-encryption-method`に指定できる値は、「aes128-ctr」、「aes192-ctr」、「aes256-ctr」、および「plaintext」です。デフォルト値は「plaintext」です。これは、暗号化がオンになっていないことを意味します。 `data-key-rotation-period`は、TiKVがデータキーをローテーションする頻度を定義します。新しいTiKVクラスタまたは既存のTiKVクラスタに対して暗号化をオンにすることができますが、暗号化を有効にした後に書き込まれたデータのみが暗号化されることが保証されます。暗号化を無効にするには、設定ファイルの`data-encryption-method`を削除するか、「plaintext」にリセットして、TiKVを再起動します。暗号化方式を変更するには、構成ファイルの`data-encryption-method`を更新し、TiKVを再起動します。
 
 暗号化が有効になっている場合（つまり、 `data-encryption-method`は「プレーンテキスト」ではない場合）、マスターキーを指定する必要があります。 AWS KMS CMKをマスターキーとして指定するには、 `encryption`セクションの後に`encryption.master-key`セクションを追加します。
 
@@ -122,11 +122,11 @@ path = "/path/to/key/file"
 
 ### マスターキーを回転させます {#rotate-the-master-key}
 
-マスターキーをローテーションするには、構成で新しいマスターキーと古いマスターキーの両方を指定し、TiKVを再起動する必要があります。 `security.encryption.master-key`を使用して新しいマスターキーを指定し、 `security.encryption.previous-master-key`を使用して古いマスターキーを指定します。 `security.encryption.previous-master-key`の構成形式は`encryption.master-key`と同じです。再起動時に、TiKVは古いマスターキーと新しいマスターキーの両方にアクセスする必要がありますが、TiKVが起動して実行されると、TiKVは新しいキーにのみアクセスする必要があります。それ以降、構成ファイルに`encryption.previous-master-key`の構成を残しておいてもかまいません。再起動しても、TiKVは、新しいマスターキーを使用して既存のデータを復号化できない場合にのみ、古いキーを使用しようとします。
+マスターキーをローテーションするには、構成で新しいマスターキーと古いマスターキーの両方を指定し、TiKVを再起動する必要があります。 `security.encryption.master-key`を使用して新しいマスターキーを指定し、 `security.encryption.previous-master-key`を使用して古いマスターキーを指定します。 `security.encryption.previous-master-key`の構成フォーマットは`encryption.master-key`と同じです。再起動時に、TiKVは古いマスターキーと新しいマスターキーの両方にアクセスする必要がありますが、TiKVが起動して実行されると、TiKVは新しいキーにのみアクセスする必要があります。それ以降、構成ファイルに`encryption.previous-master-key`の構成を残しておいてもかまいません。再起動しても、TiKVは、新しいマスターキーを使用して既存のデータを復号化できない場合にのみ、古いキーを使用しようとします。
 
 現在、オンラインマスターキーローテーションはサポートされていないため、TiKVを再起動する必要があります。オンラインクエリを提供する実行中のTiKVクラスタに対してローリングリスタートを実行することをお勧めします。
 
-KMSCMKを回転させるための構成例を次に示します。
+KMSCMKをローテーションするための設定例を次に示します。
 
 ```
 [security.encryption.master-key]

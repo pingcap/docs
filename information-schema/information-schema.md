@@ -65,13 +65,13 @@ summary: TiDB implements the ANSI-standard information_schema for viewing system
 | `CLUSTER_STATEMENTS_SUMMARY`                                                                     | `STATEMENTS_SUMMARY`のテーブルのクラスターレベルのビューを提供します。         |
 | `CLUSTER_STATEMENTS_SUMMARY_HISTORY`                                                             | `STATEMENTS_SUMMARY_HISTORY`のテーブルのクラスターレベルのビューを提供します。 |
 | `CLUSTER_TIDB_TRX`                                                                               | `TIDB_TRX`のテーブルのクラスターレベルのビューを提供します。                   |
-| [`CLUSTER_SYSTEMINFO`](/information-schema/information-schema-cluster-systeminfo.md)             | クラスタのサーバーのカーネルパラメータ構成に関する詳細を提供します。                    |
+| [`CLUSTER_SYSTEMINFO`](/information-schema/information-schema-cluster-systeminfo.md)             | クラスタのサーバーのカーネルパラメーター構成に関する詳細を提供します。                   |
 | [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)                   | TiKVサーバーのロック待機情報を提供します。                               |
 | [`DDL_JOBS`](/information-schema/information-schema-ddl-jobs.md)                                 | `ADMIN SHOW DDL JOBS`と同様の出力を提供します                     |
 | [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)                               | 最近発生したいくつかのデッドロックエラーの情報を提供します。                        |
 | [`INSPECTION_RESULT`](/information-schema/information-schema-inspection-result.md)               | 内部診断チェックをトリガーします。                                     |
 | [`INSPECTION_RULES`](/information-schema/information-schema-inspection-rules.md)                 | 実行された内部診断チェックのリスト。                                    |
-| [`INSPECTION_SUMMARY`](/information-schema/information-schema-inspection-summary.md)             | 重要な監視指標の要約レポート。                                       |
+| [`INSPECTION_SUMMARY`](/information-schema/information-schema-inspection-summary.md)             | 重要な監視メトリックの要約レポート。                                    |
 | [`METRICS_SUMMARY`](/information-schema/information-schema-metrics-summary.md)                   | Prometheusから抽出されたメトリックの要約。                            |
 | `METRICS_SUMMARY_BY_LABEL`                                                                       | `METRICS_SUMMARY`の表を参照してください。                         |
 | [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)                     | `METRICS_SCHEMA`のテーブルのPromQL定義を提供します。                 |

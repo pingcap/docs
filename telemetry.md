@@ -22,7 +22,7 @@ TiDBでテレメトリ収集機能が有効になっている場合、TiDBクラ
 -   ランダムに生成されたテレメトリID。
 -   ハードウェアのサイズ（CPU、メモリ、ディスク）、TiDBコンポーネントのバージョン、OS名などの展開特性。
 -   クエリ要求の数や期間など、システム内のクエリ要求のステータス。
--   コンポーネントの使用法。たとえば、非同期コミット機能が使用されているかどうか。
+-   コンポーネントの使用法、たとえば、非同期コミット機能が使用されているかどうか。
 
 PingCAPに共有される使用情報の全内容を表示するには、次のSQLステートメントを実行します。
 
@@ -40,7 +40,7 @@ ADMIN SHOW TELEMETRY;
 -   ユーザーがアクセスしたTiDBダッシュボードWebページの名前などのユーザー操作情報。
 -   ブラウザ名、OS名、画面解像度などのブラウザとOSの情報。
 
-PingCAPに共有される使用情報の全内容を表示するには、 [ChromeDevToolsのネットワークアクティビティインスペクター](https://developers.google.com/web/tools/chrome-devtools/network)または[Firefox開発者ツールのネットワークモニター](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor)を使用します。
+PingCAPに共有される使用情報の全内容を表示するには、 [ChromeDevToolsのネットワークアクティビティインスペクター](https://developers.google.com/web/tools/chrome-devtools/network)または[Firefox開発ツールのネットワークモニター](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor)を使用します。
 
 ### TiUP {#tiup}
 
@@ -122,7 +122,7 @@ server_configs:
 
 `tidb-cluster.yaml`分の`spec.tidb.config.enable-telemetry: false`またはTidbClusterカスタムリソースを構成します。
 
-詳細については、 [TiDB OperatorをKubernetesにデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator)を参照してください。
+詳細については、 [KubernetesにTiDB Operatorをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator)を参照してください。
 
 > **ノート：**
 >
@@ -208,7 +208,7 @@ server_configs:
 
 `tidb-cluster.yaml`分の`spec.pd.config.dashboard.enable-telemetry: false`またはTidbClusterカスタムリソースを構成します。
 
-詳細については、 [TiDB OperatorをKubernetesにデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator)を参照してください。
+詳細については、 [KubernetesにTiDB Operatorをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-operator)を参照してください。
 
 > **ノート：**
 >
@@ -250,7 +250,7 @@ tiup telemetry status
 
 さまざまな国または地域のコンプライアンス要件を満たすために、使用情報は送信者のマシンのIPアドレスに従ってさまざまな国にあるサーバーに送信されます。
 
--   中国本土のIPアドレスの場合、使用情報は中国本土のクラウドサーバーに送信されて保存されます。
+-   中国本土からのIPアドレスの場合、使用情報は中国本土のクラウドサーバーに送信されて保存されます。
 -   中国本土以外のIPアドレスの場合、使用情報は米国のクラウドサーバーに送信されて保存されます。
 
 詳細については、 [PingCAPプライバシーポリシー](https://en.pingcap.com/privacy-policy/)を参照してください。

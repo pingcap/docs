@@ -20,7 +20,7 @@ TiDB Ansibleバージョン：3.0.2
     -   `SHOW COLUMNS FROM tbl WHERE FIELDS IN (SELECT 'a')`のような`SHOW`ステートメントの[＃11459](https://github.com/pingcap/tidb/pull/11459)をサポートする
     -   集計関数の関連する列が見つからず、 `outerJoinElimination`の最適化ルールが列エイリアスを正しく処理しないためにエラーが報告される問題を修正します。最適化プロセスでのエイリアス解析を改善して、最適化がより多くのクエリタイプをカバーできるようにします[＃11377](https://github.com/pingcap/tidb/pull/11377)
     -   Window関数で構文制限に違反した場合にエラーが報告されない問題を修正します（たとえば、フレーム定義の最後に`UNBOUNDED PRECEDING`を表示することは許可されていません） [＃11543](https://github.com/pingcap/tidb/pull/11543)
-    -   [＃11535](https://github.com/pingcap/tidb/pull/11535)との非互換性を引き起こす`ERROR 3593 (HY000): You cannot use the window function FUNCTION_NAME in this context`エラーメッセージの`FUNCTION_NAME`が大文字であるという問題を修正します。
+    -   [＃11535](https://github.com/pingcap/tidb/pull/11535)との非互換性を引き起こす`ERROR 3593 (HY000): You cannot use the window function FUNCTION_NAME in this context`エラーメッセージで`FUNCTION_NAME`が大文字であるという問題を修正します。
     -   Window関数で実装されていない`IGNORE NULLS`構文が使用されているが、エラーが報告されないという問題を修正します[＃11593](https://github.com/pingcap/tidb/pull/11593)
     -   オプティマイザーが時間等しい条件を正しく推定しない問題を修正します[＃11512](https://github.com/pingcap/tidb/pull/11512)
     -   フィードバック情報に基づくTop-N統計の更新をサポート[＃11507](https://github.com/pingcap/tidb/pull/11507)
@@ -106,7 +106,7 @@ TiDB Ansibleバージョン：3.0.2
 
 ## PD {#pd}
 
--   ScatterRegionスケジューラが機能しないバグを修正します[＃1642](https://github.com/pingcap/pd/pull/1642)
+-   スキャッターリージョンスケジューラが機能しないバグを修正します[＃1642](https://github.com/pingcap/pd/pull/1642)
 -   pd- [＃1653](https://github.com/pingcap/pd/pull/1653)でリージョンのマージ操作を実行できないバグを修正します。
 -   pd- [＃1651](https://github.com/pingcap/pd/pull/1651)でtombstoneの削除操作を実行できないバグを修正します。
 -   領域のスキャン操作を実行すると、キースコープと重複する領域が見つからない問題を修正します[＃1648](https://github.com/pingcap/pd/pull/1648)
@@ -126,18 +126,18 @@ TiDB Lightning
 
 ## TiDB Ansible {#tidb-ansible}
 
--   ディスクパフォーマンスモニターが秒をミリ秒として処理する単位エラーを修正します[＃840](https://github.com/pingcap/tidb-ansible/pull/840)
+-   ディスクパフォーマンスモニターが秒をミリ秒として処理するユニットエラーを修正します[＃840](https://github.com/pingcap/tidb-ansible/pull/840)
 -   Spark3に`log4j`の構成ファイルを追加し[＃841](https://github.com/pingcap/tidb-ansible/pull/841)
 -   Binlogが有効で、KafkaまたはZooKeeperが構成されている場合に、Prometheus構成ファイルが間違った形式で生成される問題を修正します[＃844](https://github.com/pingcap/tidb-ansible/pull/844)
 -   生成されたTiDB構成ファイル[＃850](https://github.com/pingcap/tidb-ansible/pull/850)で`pessimistic-txn`の構成パラメーターが省略される問題を修正します。
 -   TiDBダッシュボード[＃853](https://github.com/pingcap/tidb-ansible/pull/853)でメトリックを追加および最適化する
 -   TiDBダッシュボード[＃854](https://github.com/pingcap/tidb-ansible/pull/854)に各監視項目の説明を追加します
 -   TiDBサマリーダッシュボードを追加して、クラスタのステータスをより適切に表示し、問題のトラブルシューティングを行います[＃855](https://github.com/pingcap/tidb-ansible/pull/855)
--   TiKVダッシュボード[＃857](https://github.com/pingcap/tidb-ansible/pull/857)のアロケータ統計監視項目を更新します
+-   TiKVダッシュボード[＃857](https://github.com/pingcap/tidb-ansible/pull/857)のアロケータ統計監視項目を更新します。
 -   ノードエクスポータのアラート式[＃860](https://github.com/pingcap/tidb-ansible/pull/860)のユニットエラーを修正します。
 -   TiSparkjarパッケージを[＃862](https://github.com/pingcap/tidb-ansible/pull/862)にアップグレードします。
 -   Ansibleタスク機能の説明を更新する[＃867](https://github.com/pingcap/tidb-ansible/pull/867)
 -   TiDBダッシュボード[＃874](https://github.com/pingcap/tidb-ansible/pull/874)のローカルリーダーリクエスト監視項目の式を更新します。
 -   概要ダッシュボードのTiKVメモリ監視項目の表現を更新し、監視が誤って表示される問題を修正します[＃879](https://github.com/pingcap/tidb-ansible/pull/879)
 -   Kafkaモード[＃878](https://github.com/pingcap/tidb-ansible/pull/878)でBinlogサポートを削除します
--   `rolling_update.yml`操作の実行時にPDがリーダーの転送に失敗する問題を修正します[＃887](https://github.com/pingcap/tidb-ansible/pull/887)
+-   `rolling_update.yml`の操作を実行するときにPDがリーダーを転送できない問題を修正します[＃887](https://github.com/pingcap/tidb-ansible/pull/887)

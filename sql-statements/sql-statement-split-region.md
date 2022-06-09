@@ -246,9 +246,9 @@ region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
 region4  [("c", "")                    , maxIndexValue               )
 ```
 
-### パーティション化されたテーブルの分割領域 {#split-regions-for-partitioned-tables}
+### パーティションテーブルの分割領域 {#split-regions-for-partitioned-tables}
 
-パーティション化されたテーブルのリージョンの分割は、通常のテーブルのリージョンの分割と同じです。唯一の違いは、すべてのパーティションに対して同じ分割操作が実行されることです。
+パーティションテーブルのリージョンの分割は、通常のテーブルのリージョンの分割と同じです。唯一の違いは、すべてのパーティションに対して同じ分割操作が実行されることです。
 
 -   偶数分割の構文：
 
@@ -266,7 +266,7 @@ region4  [("c", "")                    , maxIndexValue               )
     SPLIT [PARTITION] TABLE table_name [PARTITION (partition_name_list...)] [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-#### パーティション化されたテーブルの分割領域の例 {#examples-of-split-regions-for-partitioned-tables}
+#### パーティションテーブルの分割領域の例 {#examples-of-split-regions-for-partitioned-tables}
 
 1.  パーティションテーブルを作成します`t` 。 2つのパーティションに分割されたハッシュテーブルを作成するとします。ステートメントの例は次のとおりです。
 
@@ -276,7 +276,7 @@ region4  [("c", "")                    , maxIndexValue               )
     create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
     ```
 
-    テーブル`t`を作成した後、リージョンはパーティションごとに分割されます。次の`SHOW TABLE REGIONS`の構文を使用して、このテーブルのリージョンを表示します。
+    テーブル`t`を作成した後、リージョンはパーティションごとに分割されます。このテーブルのリージョンを表示するには、次の`SHOW TABLE REGIONS`の構文を使用します。
 
     {{< copyable "" >}}
 
@@ -305,7 +305,7 @@ region4  [("c", "")                    , maxIndexValue               )
 
     > **ノート：**
     >
-    > この例は、ホットスポットデータが均等に分散されているシナリオにのみ適用されます。ホットスポットデータが指定されたデータ範囲に不均一に分散している場合は、 [パーティション化されたテーブルの分割領域](#split-regions-for-partitioned-tables)の不均一な分割の構文を参照してください。
+    > この例は、ホットスポットデータが均等に分散されているシナリオにのみ適用されます。ホットスポットデータが指定されたデータ範囲に不均一に分散している場合は、 [パーティションテーブルの分割領域](#split-regions-for-partitioned-tables)の不均一な分割の構文を参照してください。
 
 3.  `SHOW TABLE REGIONS`構文を使用して、このテーブルのリージョンを再度表示します。このテーブルには10個のリージョンがあり、各パーティションには5つのリージョンがあり、そのうち4つは行データで、1つはインデックスデータであることがわかります。
 
@@ -439,4 +439,4 @@ Split Regionステートメントによって分割されたRegionは、PDの[�
 ## も参照してください {#see-also}
 
 -   [テーブルの地域を表示する](/sql-statements/sql-statement-show-table-regions.md)
--   セッション変数[`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、および[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 。
+-   セッション[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 。

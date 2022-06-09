@@ -2,7 +2,7 @@
 title: tiup cluster list
 ---
 
-# tiupクラスタリスト {#tiup-cluster-list}
+# tiup cluster list {#tiup-cluster-list}
 
 tiup-clusterは、同じ制御マシンを使用した複数のクラスターのデプロイをサポートします。 `tiup cluster list`コマンドは、このコントロールマシンを使用して現在ログインしているユーザーによって展開されたすべてのクラスターを出力します。
 
@@ -34,4 +34,4 @@ tiup cluster list [flags]
 -   パス：コントロールマシン上のクラスタ展開データのパス
 -   PrivateKey：クラスタの接続に使用される秘密鍵のパス
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -17,7 +17,7 @@ summary: Learn best practices for highly-concurrent write-intensive workloads in
 
 ## 非常に同時の書き込み集約型シナリオ {#highly-concurrent-write-intensive-scenario}
 
-非常に同時の書き込みシナリオは、決済や決済などのアプリケーションでバッチタスクを実行するときによく発生します。このシナリオには、次の機能があります。
+高度な同時書き込みシナリオは、決済や決済などのアプリケーションでバッチタスクを実行するときによく発生します。このシナリオには、次の機能があります。
 
 -   膨大な量のデータ
 -   履歴データを短時間でデータベースにインポートする必要性
@@ -25,7 +25,7 @@ summary: Learn best practices for highly-concurrent write-intensive workloads in
 
 これらの機能は、TiDBに次の課題をもたらします。
 
--   書き込みまたは読み取り容量は、線形にスケーラブルである必要があります。
+-   書き込みまたは読み取りの容量は、線形にスケーラブルである必要があります。
 -   データベースのパフォーマンスは安定しており、大量のデータが同時に書き込まれるため、データベースのパフォーマンスが低下することはありません。
 
 分散データベースの場合、すべてのノードの容量を最大限に活用し、単一のノードがボトルネックにならないようにすることが重要です。
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS TEST_HOTSPOT(
 )
 ```
 
-このテーブルは構造が単純です。主キーとしての`id`に加えて、二次インデックスは存在しません。次のステートメントを実行して、このテーブルにデータを書き込みます。 `id`はランダムな数として離散的に生成されます。
+このテーブルは構造が単純です。主キーとしての`id`に加えて、副次インデックスは存在しません。次のステートメントを実行して、このテーブルにデータを書き込みます。 `id`は乱数として離散的に生成されます。
 
 {{< copyable "" >}}
 
@@ -71,7 +71,7 @@ INSERT INTO TEST_HOTSPOT(id, age, user_name, email) values(%v, %v, '%v', '%v');
 
 負荷は、上記のステートメントを短時間で集中的に実行することから発生します。
 
-理論的には、上記の操作はTiDBのベストプラクティスに準拠しているようであり、アプリケーションでホットスポットは発生しません。 TiDBの分散容量は、適切なマシンで十分に使用できます。それが本当にベストプラクティスに沿っているかどうかを検証するために、次のように説明されているテストが実験的環境で実行されます。
+理論的には、上記の操作はTiDBのベストプラクティスに準拠しているようであり、アプリケーションでホットスポットは発生しません。 TiDBの分散容量は、適切なマシンで十分に使用できます。それが本当にベストプラクティスに沿っているかどうかを検証するために、次のように説明される実験的環境でテストが実行されます。
 
 クラスタトポロジでは、2つのTiDBノード、3つのPDノード、および6つのTiKVノードが展開されます。このテストはベンチマークではなく原理を明確にするためのものであるため、QPSのパフォーマンスは無視してください。
 
@@ -103,7 +103,7 @@ PDの監視メトリックは、ホットスポットが発生したことも確
 
 上の図は、リージョン分割プロセスを示しています。データは継続的にTiKVに書き込まれるため、TiKVはリージョンを複数のリージョンに分割します。リーダー選挙は、分割されるリージョンリーダーが配置されている元のストアで開始されるため、新しく分割された2つのリージョンのリーダーが同じストアに残っている可能性があります。この分割プロセスは、新しく分割されたリージョン2とリージョン3でも発生する可能性があります。このように、書き込み圧力はTiKVノード1に集中します。
 
-連続書き込みプロセス中に、ホットスポットがノード1で発生していることを検出した後、PDは集中したリーダーを他のノードに均等に分散します。 TiKVノードの数がリージョンレプリカの数よりも多い場合、TiKVはこれらのリージョンをアイドル状態のノードに移行しようとします。書き込みプロセス中のこれら2つの操作は、PDの監視メトリックにも反映されます。
+連続書き込みプロセス中に、ノード1でホットスポットが発生していることを検出した後、PDは集中したリーダーを他のノードに均等に分散します。 TiKVノードの数がリージョンレプリカの数よりも多い場合、TiKVはこれらのリージョンをアイドル状態のノードに移行しようとします。書き込みプロセス中のこれら2つの操作は、PDの監視メトリックにも反映されます。
 
 ![QPS5](/media/best-practices/QPS5.png)
 
@@ -151,18 +151,24 @@ SPLIT TABLE TEST_HOTSPOT BETWEEN (0) AND (9223372036854775807) REGIONS 128;
 
 事前分割操作の後、 `SHOW TABLE test_hotspot REGIONS;`ステートメントを実行して、領域散乱のステータスを確認します。 `SCATTERING`列の値がすべて`0`の場合、スケジューリングは成功しています。
 
-[table-regions.py](https://github.com/pingcap/tidb-ansible/blob/dabf60baba5e740a4bee9faf95e77563d8084be1/scripts/table-regions.py)スクリプトを使用してリージョンの分布を確認することもできます。現在、地域の分布は比較的均一です。
+次のSQLステートメントを使用して、リージョンリーダーの分布を確認することもできます。 `table_name`を実際のテーブル名に置き換える必要があります。
 
-```
-[root@172.16.4.4 scripts]# python table-regions.py --host 172.16.4.3 --port 31453 test test_hotspot
-[RECORD - test.test_hotspot] - Leaders Distribution:
-  total leader count: 127
-  store: 1, num_leaders: 21, percentage: 16.54%
-  store: 4, num_leaders: 20, percentage: 15.75%
-  store: 6, num_leaders: 21, percentage: 16.54%
-  store: 46, num_leaders: 21, percentage: 16.54%
-  store: 82, num_leaders: 23, percentage: 18.11%
-  store: 62, num_leaders: 21, percentage: 16.54%
+{{< copyable "" >}}
+
+```sql
+SELECT
+    p.STORE_ID,
+    COUNT(s.REGION_ID) PEER_COUNT
+FROM
+    INFORMATION_SCHEMA.TIKV_REGION_STATUS s
+    JOIN INFORMATION_SCHEMA.TIKV_REGION_PEERS p ON s.REGION_ID = p.REGION_ID
+WHERE
+    TABLE_NAME = 'table_name'
+    AND p.is_leader = 1
+GROUP BY
+    p.STORE_ID
+ORDER BY
+    PEER_COUNT DESC;
 ```
 
 次に、書き込みロードを再度操作します。
@@ -212,7 +218,7 @@ create table t (a int, b int) SHARD_ROW_ID_BITS = 4 PRE_SPLIT_REGIONS=3;
 
 **問題2：**
 
-テーブルの主キーが整数型であり、テーブルが`AUTO_INCREMENT`を使用して主キーの一意性を保証する場合（必ずしも連続または増分である必要はありません）、TiDBは行の値を直接使用するため、 `SHARD_ROW_ID_BITS`を使用してこのテーブルのホットスポットを分散させることはできません。主キーの`_tidb_rowid`として。
+テーブルの主キーが整数型であり、テーブルが主キーの一意性を確保するために`AUTO_INCREMENT`を使用する場合（必ずしも連続または増分である必要はありません）、TiDBは行の値を直接使用するため、 `SHARD_ROW_ID_BITS`を使用してこのテーブルのホットスポットを分散させることはできません。主キーの`_tidb_rowid`として。
 
 このシナリオの問題に対処するために、データを挿入するときに`AUTO_INCREMENT`を[`AUTO_RANDOM`](/auto-random.md) （列属性）に置き換えることができます。次に、TiDBは整数の主キー列に値を自動的に割り当てます。これにより、行IDの連続性が排除され、ホットスポットが分散されます。
 

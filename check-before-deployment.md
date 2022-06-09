@@ -5,7 +5,7 @@ summary: Learn the environment check operations before deploying TiDB.
 
 # TiDB環境とシステムConfiguration / コンフィグレーションのチェック {#tidb-environment-and-system-configuration-check}
 
-このドキュメントでは、TiDBを展開する前の環境チェック操作について説明します。次の手順は優先順位順に並べられています。
+このドキュメントでは、TiDBをデプロイする前の環境チェック操作について説明します。次の手順は優先順位順に並べられています。
 
 ## TiKVをデプロイするターゲットマシンにオプションを使用してデータディスクext4ファイルシステムをマウントします {#mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv}
 

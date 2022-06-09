@@ -2,7 +2,7 @@
 title: tiup cluster scale-in
 ---
 
-# tiupクラスタのスケールイン {#tiup-cluster-scale-in}
+# tiup cluster scale-in {#tiup-cluster-scale-in}
 
 `tiup cluster scale-in`コマンドは、クラスタでスケーリングするために使用されます。これにより、指定されたノードのサービスがオフラインになり、指定されたノードがクラスタから削除され、残りのファイルがそれらのノードから削除されます。
 
@@ -49,7 +49,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 > **警告：**
 >
-> このオプションを使用して、稼働中またはオフラインで保留中のTiKVまたはTiFlashノードを強制的に削除すると、これらのノードは、データの移行を待たずにすぐに削除されます。これにより、データが失われるリスクが高くなります。したがって、このオプションはダウンノードでのみ使用することをお勧めします。
+> このオプションを使用して、稼働中またはオフラインで保留中のTiKVまたはTiFlashノードを強制的に削除すると、これらのノードはデータの移行を待たずにすぐに削除されます。これにより、データが失われるリスクが高くなります。したがって、このオプションはダウンノードでのみ使用することをお勧めします。
 
 ### --転送タイムアウト {#transfer-timeout}
 
@@ -71,4 +71,4 @@ tiup cluster scale-in <cluster-name> [flags]
 
 スケールインプロセスのログを表示します。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

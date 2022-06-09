@@ -18,7 +18,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 | TiDB           | 6    | 32 VCore 64GB              | 10.0.1.1<br/> 10.0.1.2<br/> 10.0.1.3 | CPUコアをバインドするようにNUMAを構成する                                                                                                                                              |
 | PD             | 3    | 16 VCore 32 GB             | 10.0.1.4<br/> 10.0.1.5<br/> 10.0.1.6 | `location_labels`つのパラメーターを構成します                                                                                                                                       |
 | TiKV           | 6    | 32 VCore 64GB              | 10.0.1.7<br/> 10.0.1.8<br/> 10.0.1.9 | <li>インスタンスレベルのポートとstatus_portを分離します。<br/> 2.グローバルパラメータ`readpool` 、および`raftstore`を設定し`storage` 。<br/> 3.インスタンスレベルのホストのラベルを構成します。<br/> 4.CPUコアをバインドするようにNUMAを構成します</li> |
-| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB（ssd） | 10.0.1.10                            | デフォルト構成                                                                                                                                                               |
+| モニタリングとGrafana | 1    | 4 VCore 8GB * 1 500GB（ssd） | 10.0.1.10                            | デフォルト設定                                                                                                                                                               |
 
 ### トポロジテンプレート {#topology-templates}
 
@@ -33,7 +33,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 -   TiKVの構成を最適化する
 
-    -   `readpool`をスレッドプールに自己適応するように構成します。 `readpool.unified.max-thread-count`パラメーターを構成することにより、 `readpool.storage`と`readpool.coprocessor`が統合スレッドプールを共有し、それぞれ自己適応型スイッチを設定できます。
+    -   `readpool`をスレッドプールに自己適応するように構成します。 `readpool.unified.max-thread-count`パラメータを設定することにより、 `readpool.storage`と`readpool.coprocessor`でユニファイドスレッドプールを共有し、それぞれ自己適応型スイッチを設定できます。
 
         -   `readpool.storage`と`readpool.coprocessor`を有効にする：
 
@@ -62,7 +62,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
             storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
             ```
 
-    -   複数のTiKVインスタンスが同じ物理ディスクにデプロイされている場合は、TiKV構成に`capacity`つのパラメーターを追加します。
+    -   複数のTiKVインスタンスが同じ物理ディスクに展開されている場合は、TiKV構成に`capacity`つのパラメーターを追加します。
 
         ```
         raftstore.capacity = disk total capacity / the number of TiKV instances
@@ -74,7 +74,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
     -   TiKV構成
 
-        同じ物理マシンに対して、同じホストレベルのラベル情報が構成されています。
+        同じホストレベルのラベル情報が同じ物理マシンに設定されています。
 
         ```yml
         config:

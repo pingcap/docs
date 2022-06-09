@@ -46,12 +46,12 @@ TiDBバージョン：5.0.2
     -   TiCDC
 
         -   テーブルのメモリ消費量の監視メトリックを追加する[＃1885](https://github.com/pingcap/tiflow/pull/1885)
-        -   ソート段階[＃1863](https://github.com/pingcap/tiflow/pull/1863)でメモリとCPUの使用量を最適化する
+        -   並べ替え段階[＃1863](https://github.com/pingcap/tiflow/pull/1863)でメモリとCPUの使用量を最適化する
         -   ユーザーの混乱を引き起こす可能性のある不要なログ情報を削除する[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
     -   バックアップと復元（BR）
 
-        -   いくつかのあいまいなエラーメッセージを明確にする[＃1132](https://github.com/pingcap/br/pull/1132)
+        -   あいまいなエラーメッセージを明確にする[＃1132](https://github.com/pingcap/br/pull/1132)
         -   バックアップのクラスタバージョンのチェックをサポート[＃1091](https://github.com/pingcap/br/pull/1091)
         -   `mysql` [＃1078](https://github.com/pingcap/br/pull/1078) [＃1143](https://github.com/pingcap/br/pull/1143)でのシステムテーブルのバックアップと復元のサポート
 
@@ -67,9 +67,9 @@ TiDBバージョン：5.0.2
     -   準備されたプランキャッシュ`point get`がトランザクション[＃24741](https://github.com/pingcap/tidb/issues/24741)の`point get`ステートメントによって誤って使用される問題を修正します。
     -   照合順序が`ascii_bin`または[＃24569](https://github.com/pingcap/tidb/issues/24569)の場合に間違ったプレフィックスインデックス値を書き込む問題を修正し`latin1_bin`
     -   進行中のトランザクションがGCワーカーによって中断される可能性があるという問題を修正します[＃24591](https://github.com/pingcap/tidb/issues/24591)
-    -   `new-collation`が有効になっているが、 `new-row-format`が無効になっている場合に、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
-    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングします
-    -   `HAVING`節[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリの計画を作成するときに発生するパニックの問題を修正します
+    -   `new-collation`が有効で、 `new-row-format`が無効の場合、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
+    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングする
+    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するパニックの問題を修正します
     -   列プルーニングの改善により、 `Apply`および`Join`オペレーターの結果が正しくなくなる問題を修正します[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックされたプライマリロックを解決できないバグを修正します[＃24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketchレコードの重複を引き起こす可能性のある統計のGCの問題を修正します[＃24357](https://github.com/pingcap/tidb/pull/24357)

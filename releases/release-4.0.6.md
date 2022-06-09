@@ -51,7 +51,7 @@ TiDBバージョン：4.0.6
 
     -   `DropTable`または`TruncateTable`が実行されているときのQPSドロップを減らします[＃8627](https://github.com/tikv/tikv/pull/8627)
     -   エラーコードのメタファイルの生成をサポート[＃8619](https://github.com/tikv/tikv/pull/8619)
-    -   cfスキャン詳細のパフォーマンス統計を追加する[＃8618](https://github.com/tikv/tikv/pull/8618)
+    -   cfスキャンの詳細のパフォーマンス統計を追加する[＃8618](https://github.com/tikv/tikv/pull/8618)
     -   Grafanaのデフォルトテンプレート[＃8467](https://github.com/tikv/tikv/pull/8467)に`rocksdb perf context`のパネルを追加します
 
 -   PD
@@ -117,7 +117,7 @@ TiDBバージョン：4.0.6
     -   `Real`を[＃19594](https://github.com/pingcap/tidb/pull/19594)としてキャストするベクトル化の誤った結果を修正し`Time`
     -   `SHOW GRANTS`ステートメントが存在しないユーザーへの付与を示すバグを修正します[＃19588](https://github.com/pingcap/tidb/pull/19588)
     -   35に`Apply` [＃19566](https://github.com/pingcap/tidb/pull/19566)エグゼキュータがある場合のクエリエラーを修正し`IndexLookupJoin`
-    -   パーティションテーブル[＃19546](https://github.com/pingcap/tidb/pull/19546)で`Apply`を`HashJoin`に変換するときの間違った結果を修正します
+    -   パーティション表[＃19546](https://github.com/pingcap/tidb/pull/19546)で`Apply`を`HashJoin`に変換するときの誤った結果を修正します。
     -   [＃19508](https://github.com/pingcap/tidb/pull/19508)の内側に`IndexLookUp` `Apply`エグゼキュータがある場合の誤った結果を修正
     -   ビュー[＃19491](https://github.com/pingcap/tidb/pull/19491)を使用する際の予期しないパニックを修正
     -   `anti-semi-join`クエリ[＃19477](https://github.com/pingcap/tidb/pull/19477)の誤った結果を修正します
@@ -137,10 +137,10 @@ TiDBバージョン：4.0.6
     -   一部のTiFlashノードがオフラインの場合の`tiflash_segments`および`tiflash_tables`システムテーブルからの読み取りエラーを修正します[＃19748](https://github.com/pingcap/tidb/pull/19748)
     -   `Count(col)`集計関数[＃19628](https://github.com/pingcap/tidb/pull/19628)の間違った結果を修正します
     -   `TRUNCATE`操作の実行時エラーを修正します[＃19445](https://github.com/pingcap/tidb/pull/19445)
-    -   `Var`に大文字の文字が含まれていると`PREPARE statement FROM @Var`が失敗する問題を修正します[＃19378](https://github.com/pingcap/tidb/pull/19378)
+    -   `Var`に大文字の文字が含まれている場合に`PREPARE statement FROM @Var`が失敗する問題を修正します[＃19378](https://github.com/pingcap/tidb/pull/19378)
     -   大文字のスキーマでスキーマ文字セットを変更するとパニックが発生するバグを修正します[＃19302](https://github.com/pingcap/tidb/pull/19302)
     -   情報に[＃19159](https://github.com/pingcap/tidb/pull/19159)が含まれている場合に、 `information_schema.statements_summary`と`explain`の間の計画の不整合を修正し`tikv/tiflash` 。
-    -   `select into outfile`のファイルが存在しないというテストのエラーを修正し[＃19725](https://github.com/pingcap/tidb/pull/19725)
+    -   ファイルが[＃19725](https://github.com/pingcap/tidb/pull/19725)の間存在しないというテストのエラーを修正し`select into outfile`
     -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE`にRAIDデバイス情報がないという問題を修正します[＃19457](https://github.com/pingcap/tidb/pull/19457)
     -   `case-when`式で生成された列を持つ`add index`操作を、解析エラー[＃19395](https://github.com/pingcap/tidb/pull/19395)が発生したときに正常に終了できるようにします。
     -   DDL操作が再試行に時間がかかりすぎるというバグを修正します[＃19488](https://github.com/pingcap/tidb/pull/19488)
@@ -149,7 +149,7 @@ TiDBバージョン：4.0.6
 
 -   TiKV
 
-    -   照合順序が有効になっている場合の非インデックス列の推定エラーを修正[＃8620](https://github.com/tikv/tikv/pull/8620)
+    -   照合順序が有効になっている場合の非インデックス列の推定エラーを修正します[＃8620](https://github.com/tikv/tikv/pull/8620)
     -   リージョン転送[＃8460](https://github.com/tikv/tikv/pull/8460)のプロセス中にGreenGCがロックを見逃す可能性がある問題を修正します
     -   Raftメンバーシップの変更中にTiKVの実行が非常に遅い場合に発生するパニックの問題を修正します[＃8497](https://github.com/tikv/tikv/pull/8497)
     -   PD同期要求を呼び出すときにPDクライアントスレッドと他のスレッドの間で発生するデッドロックの問題を修正します[＃8612](https://github.com/tikv/tikv/pull/8612)
@@ -159,7 +159,7 @@ TiDBバージョン：4.0.6
 -   PD
 
     -   `initial-cluster-token`の構成を追加して、ブートストラップ[＃2922](https://github.com/pingcap/pd/pull/2922)中に異なるクラスターが相互に通信しないようにします。
-    -   [＃2826](https://github.com/pingcap/pd/pull/2826)が`auto`の場合の店舗制限率の単位を修正する
+    -   [＃2826](https://github.com/pingcap/pd/pull/2826)が`auto`の場合の店舗制限率の単位を修正
     -   一部のスケジューラーがエラーを解決せずに構成を保持する問題を修正します[＃2818](https://github.com/tikv/pd/pull/2818)
     -   スケジューラー[＃2871](https://github.com/tikv/pd/pull/2871)の空のHTTP応答を修正します[＃2874](https://github.com/tikv/pd/pull/2874)
 
@@ -179,7 +179,7 @@ TiDBバージョン：4.0.6
 
         -   場合によってはTiCDCがメモリをリークする問題を修正します[＃942](https://github.com/pingcap/tiflow/pull/942)
         -   TiCDCがKafkaシンク[＃912](https://github.com/pingcap/tiflow/pull/912)でパニックになる可能性がある問題を修正します
-        -   プーラー[＃927](https://github.com/pingcap/tiflow/pull/927)でCommitTまたはResolvedT（CRT）が`resolvedTs`未満になる可能性がある問題を修正します
+        -   プーラー[＃927](https://github.com/pingcap/tiflow/pull/927)でCommitTまたはResolvedT（CRT）が`resolvedTs`未満になる可能性がある問題を修正します。
         -   `changefeed`がMySQLドライバー[＃936](https://github.com/pingcap/tiflow/pull/936)によってブロックされる可能性がある問題を修正します
         -   TiCDC1の誤った解決済みTs間隔を修正し[＃8573](https://github.com/tikv/tikv/pull/8573)
 

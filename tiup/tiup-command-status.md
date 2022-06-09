@@ -2,7 +2,7 @@
 title: tiup status
 ---
 
-# tiupステータス {#tiup-status}
+# tiup status {#tiup-status}
 
 `tiup status`コマンドは、 `tiup [flags] <component> [args...]`コマンドを使用してコンポーネントを実行した後、コンポーネントの動作情報を表示するために使用されます。
 
@@ -28,7 +28,7 @@ tiup status [flags]
 次のフィールドで構成されるテーブル：
 
 -   `Name` ： `-T/--tag`で指定されたタグ名。指定しない場合は、ランダムな文字列です。
--   `Component` ：オペレーティングコンポーネント。
+-   `Component` ：操作コンポーネント。
 -   `PID` ：オペレーティングコンポーネントの対応するプロセスID。
 -   `Status` ：動作中のコンポーネントのステータス。
 -   `Created Time` ：コンポーネントの開始時刻。

@@ -21,7 +21,7 @@ summary: Learn how to test the performance of DM clusters.
 
 ### テーブルスキーマ {#table-schema}
 
-パフォーマンステストには、次のスキーマのテーブルを使用します。
+パフォーマンステストには、次のスキーマを持つテーブルを使用します。
 
 {{< copyable "" >}}
 
@@ -164,4 +164,4 @@ sysbench --test=oltp_insert --tables=4 --num-threads=32 --mysql-host=172.17.4.40
 
 #### テスト結果を取得する {#get-test-results}
 
-DMの移行ステータスを監視するには、 `query-status`コマンドを実行します。 DMの監視メトリックを監視するには、Grafanaを使用できます。ここで、監視メトリックは`finished sqls jobs` （単位時間あたりに完了したジョブの数）などを参照します。詳細については、 [Binlog Migration Monitoring Metrics](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。
+DMの移行ステータスを監視するには、 `query-status`コマンドを実行します。 DMの監視メトリックを監視するには、Grafanaを使用できます。ここで、監視メトリックは`finished sqls jobs` （単位時間あたりに完了したジョブの数）などを参照します。詳細については、 [Binlog移行監視メトリック](/dm/monitor-a-dm-cluster.md#binlog-replication)を参照してください。

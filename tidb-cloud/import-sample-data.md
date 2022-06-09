@@ -5,7 +5,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 # サンプルデータのインポート {#import-sample-data}
 
-このドキュメントでは、UIを介してサンプルデータをTiDBCloudにインポートする方法について説明します。使用されているサンプルデータは、Capital Bikeshare DataLicenseAgreementに基づいてリリースされたCapitalBikeshareのシステムデータです。サンプルデータをインポートする前に、1つのTiDBクラスタが必要です。
+このドキュメントでは、UIを介してサンプルデータをTiDB Cloudにインポートする方法について説明します。使用されているサンプルデータは、Capital Bikeshare DataLicenseAgreementに基づいてリリースされたCapitalBikeshareのシステムデータです。サンプルデータをインポートする前に、1つのTiDBクラスタが必要です。
 
 1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
 

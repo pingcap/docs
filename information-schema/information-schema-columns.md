@@ -87,9 +87,9 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 -   `IS_NULLABLE` ：列がNULL可能かどうか。列にnull値を格納できる場合、この値は`YES`です。それ以外の場合は`NO`です。
 -   `DATA_TYPE` ：列のデータのタイプ。
 -   `CHARACTER_MAXIMUM_LENGTH` ：文字列列の場合、文字の最大長。
--   `CHARACTER_OCTET_LENGTH` ：文字列列の場合、最大長（バイト単位）。
--   `NUMERIC_PRECISION` ：数値タイプの列の数値精度。
--   `NUMERIC_SCALE` ：数値タイプの列の数値スケール。
+-   `CHARACTER_OCTET_LENGTH` ：文字列列の場合、バイト単位の最大長。
+-   `NUMERIC_PRECISION` ：数値型列の数値精度。
+-   `NUMERIC_SCALE` ：数値型列の数値スケール。
 -   `DATETIME_PRECISION` ：時間タイプの列の場合、小数秒の精度。
 -   `CHARACTER_SET_NAME` ：文字列列の文字セットの名前。
 -   `COLLATION_NAME` ：文字列列の照合順序の名前。

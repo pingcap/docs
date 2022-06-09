@@ -2,7 +2,7 @@
 title: tiup cluster deploy
 ---
 
-# tiupクラスタデプロイ {#tiup-cluster-deploy}
+# tiup cluster deploy {#tiup-cluster-deploy}
 
 `tiup cluster deploy`コマンドは、新しいクラスタをデプロイするために使用されます。
 
@@ -45,7 +45,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ### --ラベルなし {#no-labels}
 
 -   このオプションは、ラベルチェックをスキップするために使用されます。
--   2つ以上のTiKVノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PDはクラスタトポロジを学習できないため、PDはリージョンの複数のレプリカを1つの物理マシン上の異なるTiKVノードにスケジュールし、この物理マシンを単一にします。点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないようにPDに指示できます。ラベルの構成については、 [トポロジラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
+-   2つ以上のTiKVノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PDはクラスタトポロジを学習できないため、PDはリージョンの複数のレプリカを1つの物理マシン上の異なるTiKVノードにスケジュールし、この物理マシンを単一にします。点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないようにPDに指示できます。ラベルの設定については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
 -   テスト環境では、このリスクが問題になる可能性があり、 `--no-labels`を使用してチェックをスキップできます。
 -   データ型： `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
@@ -66,4 +66,4 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 展開ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

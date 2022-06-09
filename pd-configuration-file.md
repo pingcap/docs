@@ -90,7 +90,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 ### <code>auto-compaction-retention</code> {#code-auto-compaction-retention-code}
 
 -   `auto-compaction-retention`が`periodic`の場合のメタ情報データベースの自動圧縮の時間間隔。圧縮モードが`revision`に設定されている場合、このパラメーターは自動圧縮のバージョン番号を示します。
--   デフォルト値：1時間
+-   デフォルト値：1h
 
 ### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
@@ -224,7 +224,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ### <code>hot-region-schedule-limit</code> {#code-hot-region-schedule-limit-code}
 
--   同時に実行されているホットリージョンスケジューリングタスクを制御します。リージョンのスケジュールとは無関係です。
+-   同時に実行されているホットリージョンスケジューリングタスクを制御します。これは、リージョンのスケジューリングとは無関係です。
 -   デフォルト値： `4`
 
 ### <code>hot-region-cache-hits-threshold</code> {#code-hot-region-cache-hits-threshold-code}

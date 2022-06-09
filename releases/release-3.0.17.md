@@ -26,7 +26,7 @@ TiDBバージョン：3.0.17
 
     -   TiDB Lightning
 
-        -   `[black-white-list]`は、より新しく、理解しやすいフィルター形式[＃332](https://github.com/pingcap/tidb-lightning/pull/332)で廃止されました。
+        -   `[black-white-list]`は、より新しく、理解しやすいフィルター形式[＃332](https://github.com/pingcap/tidb-lightning/pull/332)で非推奨になりました。
 
 ## バグの修正 {#bug-fixes}
 

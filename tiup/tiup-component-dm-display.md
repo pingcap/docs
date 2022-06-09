@@ -2,7 +2,7 @@
 title: tiup dm display
 ---
 
-# tiupdmディスプレイ {#tiup-dm-display}
+# tiup dm display {#tiup-dm-display}
 
 DMクラスタの各コンポーネントの動作状態を確認したい場合は、各マシンに1つずつログインするのは非効率的です。したがって、tiup-dmは、このジョブを効率的に実行するための`tiup dm display`のコマンドを提供します。
 

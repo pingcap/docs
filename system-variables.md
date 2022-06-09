@@ -5,7 +5,7 @@ summary: Use system variables to optimize performance or alter running behavior.
 
 # システム変数 {#system-variables}
 
-`GLOBAL` `INSTANCE` `SESSION` `INSTANCE` `SESSION` `GLOBAL`適用される場合があるという点でいくつかの違いがあります。
+`GLOBAL` `INSTANCE` `SESSION` `INSTANCE` `SESSION` `GLOBAL`適用される可能性があるという点でいくつかの違いがあります。
 
 -   `GLOBAL`スコープ変数への変更は**、TiDBとの新しい接続セッションにのみ適用されます**。現在アクティブな接続セッションは影響を受けません。これらの変更は永続化され、再起動後も有効です。
 -   `INSTANCE`スコープ変数への変更は、変更が行われた直後に、現在のTiDBインスタンスとのすべてのアクティブまたは新しい接続セッションに適用されます。他のTiDBインスタンスは影響を受けません。これらの変更は永続化されず、TiDBの再起動後に無効になります。
@@ -27,7 +27,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > `SET GLOBAL`を実行すると、ステートメントが発行されたTiDBサーバーにすぐに適用されます。次に、通知がすべてのTiDBサーバーに送信され、システム変数キャッシュが更新されます。これは、バックグラウンド操作としてすぐに開始されます。一部のTiDBサーバーは通知を見逃す可能性があるため、システム変数キャッシュも30秒ごとに自動的に更新されます。これにより、すべてのサーバーが同じ構成で動作していることを確認できます。
 >
-> TiDBはMySQLとは異なり、 `GLOBAL`のスコープ変数がTiDBサーバーの再起動を通じて**存続**します。さらに、TiDBはいくつかのMySQL変数を読み取り可能かつ設定可能として提供します。これは互換性のために必要です。アプリケーションとコネクタの両方がMySQL変数を読み取るのが一般的だからです。たとえば、JDBCコネクタは、動作に依存していなくても、クエリキャッシュ設定の読み取りと設定の両方を行います。
+> TiDBはMySQLとは異なり、 `GLOBAL`のスコープ変数がTiDBサーバーの再起動を通じて**存続**します。さらに、TiDBはいくつかのMySQL変数を読み取り可能で設定可能として提供します。これは、アプリケーションとコネクタの両方がMySQL変数を読み取ることが一般的であるため、互換性のために必要です。たとえば、JDBCコネクタは、動作に依存していなくても、クエリキャッシュ設定の読み取りと設定の両方を行います。
 
 > **ノート：**
 >
@@ -54,7 +54,7 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 -   スコープ：セッション|グローバル
 -   デフォルト値： `1`
 -   範囲： `[1, 65535]`
--   列に割り当てる`AUTO_INCREMENT`の値のステップサイズを制御します。多くの場合、 `auto_increment_offset`と組み合わせて使用されます。
+-   列に割り当てられる`AUTO_INCREMENT`の値のステップサイズを制御します。多くの場合、 `auto_increment_offset`と組み合わせて使用されます。
 
 ### auto_increment_offset {#auto-increment-offset}
 
@@ -105,7 +105,7 @@ mysql> SELECT * FROM t1;
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `utf8mb4`
--   クライアントから送信されるデータの文字セット。 TiDBでの文字セットと照合の使用の詳細については、 [キャラクターセットと照合](/character-set-and-collation.md)を参照してください。必要に応じて、 [`SET NAMES`](/sql-statements/sql-statement-set-names.md)を使用して文字セットを変更することをお勧めします。
+-   クライアントから送信されるデータの文字セット。 TiDBでの文字セットと照合の使用の詳細については、 [文字セットと照合](/character-set-and-collation.md)を参照してください。必要に応じて、 [`SET NAMES`](/sql-statements/sql-statement-set-names.md)を使用して文字セットを変更することをお勧めします。
 
 ### character_set_connection {#character-set-connection}
 
@@ -158,7 +158,7 @@ mysql> SELECT * FROM t1;
 
 ### datadir {#datadir}
 
--   範囲：なし
+-   スコープ：なし
 -   デフォルト値：/ tmp / tidb
 -   この変数は、データが保存される場所を示します。データがTiKVに保存されている場合、この場所はローカルパスにすることも、PDサーバーを指すこともできます。
 -   `ip_address:port`の形式の値は、起動時にTiDBが接続するPDサーバーを示します。
@@ -437,7 +437,7 @@ mysql> SELECT * FROM t1;
     -   `0`または`OFF`これは、MPPモードが使用されないことを意味します。
     -   `1`または`ON`これは、オプティマイザがコスト見積もりに基づいてMPPモードを使用するかどうかを決定することを意味します（デフォルト）。
 
-MPPは、TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットのSQLアルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)を参照してください。
+MPPは、TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットのSQLアルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御します](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
 ### tidb_allow_remove_auto_incv2.1.18<span class="version-mark">およびv3.0.4の新機能</span> {#tidb-allow-remove-auto-inc-span-class-version-mark-new-in-v2-1-18-and-v3-0-4-span}
 
@@ -487,7 +487,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   スコープ：セッション|グローバル
 -   デフォルト値： `2`
 -   範囲： `[1, 2147483647]`
--   この変数は、TiDB `backoff`の最大時間、つまり、内部ネットワークまたは他のコンポーネント（TiKV、PD）に障害が発生したときに再試行要求を送信するための最大再試行時間の重みを増やすために使用されます。この変数は、最大再試行時間を調整するために使用でき、最小値は1です。
+-   この変数は、TiDB `backoff`の最大時間、つまり、内部ネットワークまたは他のコンポーネント（TiKV、PD）の障害が発生したときに再試行要求を送信するための最大再試行時間の重みを増やすために使用されます。この変数は、最大再試行時間を調整するために使用でき、最小値は1です。
 
     たとえば、TiDBがPDからTSOを取得するための基本タイムアウトは15秒です。 `tidb_backoff_weight = 2`の場合、TSOを取得するための最大タイムアウトは次のとおりです。*基本時間* 2=30秒*。
 
@@ -506,7 +506,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   デフォルト値： `10240`
 -   範囲： `[0, 9223372036854775807]`
 -   単位：行
--   結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを推定できません。この状況では、サイズは結果セットの行数によって決まります。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+-   結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを見積もることができません。この状況では、サイズは結果セットの行数によって決まります。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
 ### tidb_broadcast_join_threshold_sizev5.0<span class="version-mark">の新</span>機能 {#tidb-broadcast-join-threshold-size-span-class-version-mark-new-in-v5-0-span}
 
@@ -529,13 +529,13 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
 -   この変数は、 [ベースラインキャプチャ](/sql-plan-management.md#baseline-capturing)機能を有効にするかどうかを制御するために使用されます。この機能はステートメントの要約に依存するため、ベースラインキャプチャを使用する前に、ステートメントの要約を有効にする必要があります。
--   この機能を有効にすると、ステートメントの概要内の履歴SQLステートメントが定期的にトラバースされ、少なくとも2回表示されるSQLステートメントのバインディングが自動的に作成されます。
+-   この機能を有効にすると、ステートメントの要約内の履歴SQLステートメントが定期的にトラバースされ、少なくとも2回出現するSQLステートメントのバインディングが自動的に作成されます。
 
 ### tidb_check_mb4_value_in_utf8 {#tidb-check-mb4-value-in-utf8}
 
 -   スコープ：インスタンス
 -   デフォルト値： `ON`
--   この変数は、 `utf8`文字セットが[基本多言語面（BMP）](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane)からの値のみを格納するように強制するために使用されます。 BMPの外部に文字を格納するには、 `utf8mb4`文字セットを使用することをお勧めします。
+-   この変数は、 `utf8`文字セットが[基本的な多言語平面（BMP）](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane)からの値のみを格納するように強制するために使用されます。 BMPの外部に文字を格納するには、 `utf8mb4`文字セットを使用することをお勧めします。
 -   `utf8`のチェックがより緩和された以前のバージョンのTiDBからクラスタをアップグレードする場合は、このオプションを無効にする必要がある場合があります。詳細については、 [アップグレード後のよくある質問](/faq/upgrade-faq.md)を参照してください。
 
 ### tidb_checksum_table_concurrency {#tidb-checksum-table-concurrency}
@@ -623,11 +623,11 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `ON`
--   この変数は、明示的な楽観的トランザクションの自動再試行を無効にするかどうかを設定するために使用されます。デフォルト値の`ON`は、トランザクションがTiDBで自動的に再試行せず、 `COMMIT`のステートメントがアプリケーション層で処理する必要のあるエラーを返す可能性があることを意味します。
+-   この変数は、明示的なオプティミスティックトランザクションの自動再試行を無効にするかどうかを設定するために使用されます。デフォルト値の`ON`は、トランザクションがTiDBで自動的に再試行せず、 `COMMIT`のステートメントがアプリケーション層で処理する必要のあるエラーを返す可能性があることを意味します。
 
     値を`OFF`に設定すると、TiDBが自動的にトランザクションを再試行し、 `COMMIT`のステートメントからのエラーが少なくなります。この変更を行うときは、更新が失われる可能性があるため、注意してください。
 
-    この変数は、TiDBで自動的にコミットされた暗黙のトランザクションおよび内部で実行されたトランザクションには影響しません。これらのトランザクションの最大再試行回数は、値`tidb_retry_limit`によって決定されます。
+    この変数は、TiDBで自動的にコミットされた暗黙のトランザクションおよび内部で実行されたトランザクションには影響しません。これらのトランザクションの最大再試行回数は、値`tidb_retry_limit`によって決まります。
 
     詳細については、 [再試行の制限](/optimistic-transaction.md#limits-of-retry)を参照してください。
 
@@ -642,7 +642,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   この変数は、 `scan`操作の同時実行性を設定するために使用されます。
 -   OLAPシナリオでは大きな値を使用し、OLTPシナリオでは小さな値を使用します。
 -   OLAPシナリオの場合、最大値はすべてのTiKVノードのCPUコアの数を超えてはなりません。
--   テーブルに多数のパーティションがある場合は、変数の値を適切に減らして、TiKVがメモリ不足（OOM）になるのを防ぐことができます。
+-   テーブルに多数のパーティションがある場合は、変数値を適切に減らして、TiKVがメモリ不足（OOM）になるのを防ぐことができます。
 
 ### tidb_dml_batch_size {#tidb-dml-batch-size}
 
@@ -680,7 +680,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
--   この変数は、 `AMEND TRANSACTION`機能を有効にするかどうかを制御するために使用されます。悲観的トランザクションで`AMEND TRANSACTION`の機能を有効にすると、このトランザクションに関連付けられたテーブルにDDL操作とSCHEMA VERSIONの変更が同時に存在する場合、TiDBはトランザクションを修正しようとします。 TiDBは、トランザクションのコミットを修正して、コミットを最新の有効なSCHEMA VERSIONと一致させ、 `Information schema is changed`エラーが発生することなくトランザクションを正常にコミットできるようにします。この機能は、次の同時DDL操作で有効です。
+-   この変数は、 `AMEND TRANSACTION`機能を有効にするかどうかを制御するために使用されます。悲観的トランザクションで`AMEND TRANSACTION`の機能を有効にすると、このトランザクションに関連付けられたテーブルに同時DDL操作とスキーマバージョンの変更が存在する場合、TiDBはトランザクションを修正しようとします。 TiDBは、トランザクションのコミットを修正して、コミットを最新の有効なスキーマバージョンと一致させ、 `Information schema is changed`エラーが発生することなくトランザクションを正常にコミットできるようにします。この機能は、次の同時DDL操作で有効です。
 
     -   `ADD COLUMN`または`DROP COLUMN`の操作。
     -   フィールドの長さを増やす`MODIFY COLUMN`または`CHANGE COLUMN`の操作。
@@ -694,7 +694,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `ON`
--   この変数は、2フェーズトランザクションコミットの第2フェーズの非同期コミット機能を有効にしてバックグラウンドで非同期に実行するかどうかを制御します。この機能を有効にすると、トランザクションコミットの待ち時間を短縮できます。
+-   この変数は、2フェーズトランザクションコミットの第2フェーズで非同期コミット機能を有効にしてバックグラウンドで非同期に実行するかどうかを制御します。この機能を有効にすると、トランザクションコミットの待ち時間を短縮できます。
 
 > **ノート：**
 >
@@ -752,14 +752,14 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 ### tidb_enable_enhanced_security {#tidb-enable-enhanced-security}
 
--   範囲：なし
+-   スコープ：なし
 -   デフォルト値： `OFF`
 -   この変数は、接続しているTiDBサーバーでセキュリティ拡張モード（SEM）が有効になっているかどうかを示します。その値を変更するには、TiDBサーバー構成ファイルの値`enable-sem`を変更し、TiDBサーバーを再起動する必要があります。
 -   SEMは、 [セキュリティが強化されたLinux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux)などのシステムの設計に触発されています。これにより、MySQL `SUPER`特権を持つユーザーの能力が低下し、代わりに`RESTRICTED`つのきめ細かい特権を付与する必要があります。これらのきめ細かい特権には、次のものが含まれます。
     -   `RESTRICTED_TABLES_ADMIN` ： `mysql`のスキーマのシステムテーブルにデータを書き込み、 `information_schema`のテーブルの機密列を表示する機能。
     -   `RESTRICTED_STATUS_ADMIN` ：コマンド`SHOW STATUS`で機密変数を表示する機能。
     -   `RESTRICTED_VARIABLES_ADMIN` ： `SHOW [GLOBAL] VARIABLES`と`SET`の機密変数を表示および設定する機能。
-    -   `RESTRICTED_USER_ADMIN` ：他のユーザーが変更を加えたりユーザーアカウントを削除したりするのを防ぐ機能。
+    -   `RESTRICTED_USER_ADMIN` ：他のユーザーがユーザーアカウントを変更または削除できないようにする機能。
 
 ### tidb_enable_fast_analyze {#tidb-enable-fast-analyze}
 
@@ -780,7 +780,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 > **ノート：**
 >
-> -   TiDBクラスタをv4.0.0より前のバージョンからv5.4.0以降にアップグレードした後、実行計画の変更によるパフォーマンスの低下を防ぐために、この変数はデフォルトで無効になっています。
+> -   TiDBクラスタをv4.0.0より前のバージョンからv5.4.0以降にアップグレードした後、実行プランの変更によるパフォーマンスの低下を防ぐために、この変数はデフォルトで無効になっています。
 >
 > -   TiDBクラスタをv4.0.0以降からv5.4.0以降にアップグレードした後、この変数はアップグレード前の設定のままです。
 >
@@ -803,7 +803,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   可能な`ON` `WARN` `OFF`
 -   デフォルトでは、まだ実装されていない機能の構文を使用しようとすると、TiDBはエラーを返します。変数値が`ON`に設定されている場合、TiDBはこのような機能が利用できない場合を黙って無視します。これは、SQLコードを変更できない場合に役立ちます。
 -   `noop`の機能を有効にすると、次の動作が制御されます。
-    -   `get_lock`と`release_lock`の機能
+    -   `get_lock`および`release_lock`関数
     -   `LOCK IN SHARE MODE`構文
     -   `SQL_CALC_FOUND_ROWS`構文
     -   `START TRANSACTION READ ONLY`および`SET TRANSACTION READ ONLY`構文
@@ -811,7 +811,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 > **警告：**
 >
-> 安全と見なすことができるのは、デフォルト値の`OFF`のみです。 `tidb_enable_noop_functions=1`を設定すると、TiDBがエラーを提供せずに特定の構文を無視できるため、アプリケーションで予期しない動作が発生する可能性があります。たとえば、構文`START TRANSACTION READ ONLY`は許可されていますが、トランザクションは読み取り/書き込みモードのままです。
+> 安全と見なすことができるのは、デフォルト値の`OFF`のみです。 `tidb_enable_noop_functions=1`を設定すると、TiDBがエラーを提供せずに特定の構文を無視できるため、アプリケーションで予期しない動作が発生する可能性があります。たとえば、構文`START TRANSACTION READ ONLY`は許可されますが、トランザクションは読み取り/書き込みモードのままです。
 
 ### tidb_enable_pagingv5.4.0<span class="version-mark">の新機能</span> {#tidb-enable-paging-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -834,7 +834,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   この変数は、統計が古くなったときにテーブルの統計を使用する際のオプティマイザーの動作を制御します。
 -   オプティマイザは、この方法でテーブルの統計が古くなっているかどうかを判断します。統計を取得するためにテーブルで最後に`ANALYZE`が実行されてから、テーブルの行の80％が変更された場合（変更された行数を合計行数で割ったもの） ）、オプティマイザは、このテーブルの統計が古くなっていると判断します。この比率は、 [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)の構成を使用して変更できます。
 -   デフォルト（変数値`ON` ）では、テーブルの統計が古くなっている場合、オプティマイザーは、合計行数を除いて、テーブルの統計が信頼できなくなったと判断します。次に、オプティマイザは疑似統計を使用します。変数値を`OFF`に設定すると、テーブルの統計が古くなっていても、オプティマイザーは統計を使用し続けます。
--   テーブルのデータが、このテーブルで`ANALYZE`を時間内に実行せずに頻繁に変更される場合は、実行プランを安定させるために、変数値を`OFF`に設定できます。
+-   テーブルのデータが、このテーブルで`ANALYZE`を実行せずに頻繁に変更される場合は、実行プランを安定させるために、変数値を`OFF`に設定できます。
 
 ### tidb_enable_rate_limit_action {#tidb-enable-rate-limit-action}
 
@@ -847,7 +847,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 -   スコープ：インスタンス
 -   デフォルト値： `ON`
--   この変数は、低速ログ機能を有効にするかどうかを制御するために使用されます。
+-   この変数は、スローログ機能を有効にするかどうかを制御するために使用されます。
 
 ### tidb_enable_stmt_summaryv3.0.4<span class="version-mark">の新機能</span> {#tidb-enable-stmt-summary-span-class-version-mark-new-in-v3-0-4-span}
 
@@ -925,18 +925,18 @@ Query OK, 0 rows affected (0.09 sec)
 -   スコープ：セッション
 -   デフォルト値： `OFF`
 -   このデフォルト値を変更するには、 [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値を変更します。
--   オプティマイザのコスト見積もりを無視するかどうか、およびクエリの実行にTiFlashのMPPモードを強制的に使用するかどうかを制御します。値のオプションは次のとおりです。
+-   オプティマイザのコスト見積もりを無視するかどうか、およびクエリ実行にTiFlashのMPPモードを強制的に使用するかどうかを制御します。値のオプションは次のとおりです。
     -   `0`または`OFF`これは、MPPモードが強制的に使用されないことを意味します（デフォルト）。
     -   `1`または`ON`は、コスト見積もりが無視され、MPPモードが強制的に使用されることを意味します。この設定は、 `tidb_allow_mpp=true`の場合にのみ有効になることに注意してください。
 
-MPPは、TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットのSQLアルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)を参照してください。
+MPPは、TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットのSQLアルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御します](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
 ### tidb_evolve_plan_baselinesv4.0<span class="version-mark">の新</span>機能 {#tidb-evolve-plan-baselines-span-class-version-mark-new-in-v4-0-span}
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
 -   この変数は、ベースライン進化機能を有効にするかどうかを制御するために使用されます。詳細な紹介または使用法については、 [ベースラインの進化](/sql-plan-management.md#baseline-evolution)を参照してください。
--   ベースラインの進化がクラスタに与える影響を減らすには、次の構成を使用します。
+-   クラスタに対するベースラインの進化の影響を減らすには、次の構成を使用します。
     -   各実行プランの最大実行時間を制限するには、 `tidb_evolve_plan_task_max_time`を設定します。デフォルト値は600秒です。
     -   時間枠を制限するには、 `tidb_evolve_plan_task_start_time`と`tidb_evolve_plan_task_end_time`を設定します。デフォルト値はそれぞれ`00:00 +0000`と`23:59 +0000`です。
 
@@ -986,9 +986,9 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   `tidb_projection_concurrency`
 -   `tidb_window_concurrency`
 
-v5.0以降でも、上記のシステム変数を個別に変更でき（非推奨の警告が返されます）、変更は対応する単一の演算子にのみ影響します。その後、 `tidb_executor_concurrency`を使用して演算子の同時実行性を変更しても、個別に変更された演算子は影響を受けません。 `tidb_executor_concurrency`を使用してすべての演算子の並行性を変更する場合は、上記のすべての変数の値を`-1`に設定できます。
+v5.0以降でも、上記のシステム変数を個別に変更でき（非推奨の警告が返されます）、変更は対応する単一の演算子にのみ影響します。その後、 `tidb_executor_concurrency`を使用して演算子の同時実行性を変更しても、個別に変更された演算子は影響を受けません。 `tidb_executor_concurrency`を使用してすべての演算子の同時実行性を変更する場合は、上記のすべての変数の値を`-1`に設定できます。
 
-以前のバージョンからv5.0にアップグレードされたシステムの場合、上記の変数の値を変更していない場合（つまり、 `tidb_hash_join_concurrency`の値が`5`で、残りの値が`4`である）、オペレーターの並行性は以前はこれらの変数は自動的に`tidb_executor_concurrency`によって管理されます。これらの変数のいずれかを変更した場合でも、対応する演算子の並行性は変更された変数によって制御されます。
+以前のバージョンからv5.0にアップグレードされたシステムの場合、上記の変数の値を変更していない場合（つまり、 `tidb_hash_join_concurrency`の値が`5`で、残りの値が`4` ）、オペレーターの同時実行性は以前にこれらの変数は自動的に`tidb_executor_concurrency`によって管理されます。これらの変数のいずれかを変更した場合でも、対応する演算子の同時実行性は変更された変数によって制御されます。
 
 ### tidb_expensive_query_time_threshold {#tidb-expensive-query-time-threshold}
 
@@ -1118,7 +1118,7 @@ v5.0以降でも、上記のシステム変数を個別に変更でき（非推�
 -   デフォルト値： `25000`
 -   範囲： `[1, 2147483647]`
 -   単位：行
--   この変数は、 `index lookup join`操作のバッチサイズを設定するために使用されます。
+-   この変数は、 `index lookup join`の操作のバッチサイズを設定するために使用されます。
 -   OLAPシナリオでは大きな値を使用し、OLTPシナリオでは小さな値を使用します。
 
 ### tidb_index_lookup_concurrency {#tidb-index-lookup-concurrency}
@@ -1154,7 +1154,7 @@ v5.0以降でも、上記のシステム変数を個別に変更でき（非推�
 -   デフォルト値： `20000`
 -   範囲： `[1, 2147483647]`
 -   単位：行
--   この変数は、 `index lookup`操作のバッチサイズを設定するために使用されます。
+-   この変数は、 `index lookup`の操作のバッチサイズを設定するために使用されます。
 -   OLAPシナリオでは大きな値を使用し、OLTPシナリオでは小さな値を使用します。
 
 ### tidb_index_serial_scan_concurrency {#tidb-index-serial-scan-concurrency}
@@ -1240,7 +1240,7 @@ v5.0以降でも、上記のシステム変数を個別に変更でき（非推�
 -   デフォルト値： `60`
 -   範囲： `[10, 216000]`
 -   単位：秒
--   この変数は、 `METRICS_SCHEMA`をクエリするときに生成されるPrometheusステートメントの範囲期間を設定するために使用されます。
+-   この変数は、 `METRICS_SCHEMA`を照会するときに生成されるPrometheusステートメントの範囲期間を設定するために使用されます。
 
 ### tidb_metric_query_stepv4.0<span class="version-mark">の新</span>機能 {#tidb-metric-query-step-span-class-version-mark-new-in-v4-0-span}
 
@@ -1288,7 +1288,7 @@ v5.0以降でも、上記のシステム変数を個別に変更でき（非推�
 -   デフォルト値： `1`
 -   範囲： `[0, 2147483647]`
 -   列の順序の相関に基づいて行数を推定する方法が利用できない場合は、ヒューリスティックな推定方法が使用されます。この変数は、ヒューリスティックメソッドの動作を制御するために使用されます。
-    -   値が0の場合、ヒューリスティック手法は使用されません。
+    -   値が0の場合、ヒューリスティックな方法は使用されません。
     -   値が0より大きい場合：
         -   値が大きいほど、ヒューリスティック手法でインデックススキャンが使用される可能性があることを示します。
         -   値が小さいほど、ヒューリスティック手法でテーブルスキャンが使用される可能性があります。
@@ -1412,11 +1412,11 @@ explain select * from t where age=5;
 
 > **警告：**
 
-> 現在、パーティション化されたテーブルの動的プルーニングモードは実験的機能です。実稼働環境で使用することはお勧めしません。
+> 現在、パーティションテーブルの動的プルーニングモードは実験的機能です。実稼働環境で使用することはお勧めしません。
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `static`
--   パーティションテーブルに対して`dynamic`モードを有効にするかどうかを指定します。動的プルーニングモードの詳細については、 [パーティション化されたテーブルの動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を参照してください。
+-   パーティション表に対して`dynamic`モードを有効にするかどうかを指定します。動的プルーニングモードの詳細については、 [パーティションテーブルの動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を参照してください。
 
 ### tidb_persist_analyze_optionsv5.4.0<span class="version-mark">の新機能</span> {#tidb-persist-analyze-options-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -1474,7 +1474,7 @@ SET tidb_query_log_max_len = 20
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
--   この変数は、TiDBログおよび低速ログに記録されているSQLステートメントのユーザー情報を非表示にするかどうかを制御します。
+-   この変数は、TiDBログと低速ログに記録されているSQLステートメントのユーザー情報を非表示にするかどうかを制御します。
 -   変数を`1`に設定すると、ユーザー情報は非表示になります。たとえば、実行されたSQLステートメントが`insert into t values (1,2)`の場合、ステートメントはログに`insert into t values (?,?)`として記録されます。
 
 ### tidb_regard_null_as_pointv5.4.0<span class="version-mark">の新機能</span> {#tidb-regard-null-as-point-span-class-version-mark-new-in-v5-4-0-span}
@@ -1492,7 +1492,7 @@ SET tidb_query_log_max_len = 20
 -   この変数は、TiDBがデータを読み取る場所を制御するために使用されます。 3つのオプションがあります。
     -   リーダー：リーダーノードからのみ読み取り
     -   フォロワー：フォロワーノードからの読み取り専用
-    -   リーダーとフォロワー：リーダーまたはフォロワーノードから読み取る
+    -   リーダーとフォロワー：リーダーまたはフォロワーノードから読み取ります
 -   詳細については、 [フォロワーは読む](/follower-read.md)を参照してください。
 
 ### tidb_restricted_read_onlyv5.2.0<span class="version-mark">の新機能</span> {#tidb-restricted-read-only-span-class-version-mark-new-in-v5-2-0-span}
@@ -1514,7 +1514,7 @@ SET tidb_query_log_max_len = 20
 -   スコープ：セッション|グローバル
 -   デフォルト値： `10`
 -   範囲： `[-1, 9223372036854775807]`
--   この変数は、楽観的なトランザクションの再試行の最大数を設定するために使用されます。トランザクションで再試行可能なエラー（トランザクションの競合、非常に遅いトランザクションコミット、テーブルスキーマの変更など）が発生すると、このトランザクションはこの変数に従って再実行されます。 `tidb_retry_limit`から`0`に設定すると、自動再試行が無効になることに注意してください。この変数は楽観的なトランザクションにのみ適用され、悲観的なトランザクションには適用されません。
+-   この変数は、楽観的なトランザクションの再試行の最大数を設定するために使用されます。トランザクションで再試行可能なエラー（トランザクションの競合、非常に遅いトランザクションコミット、テーブルスキーマの変更など）が発生すると、この変数に従ってこのトランザクションが再実行されます。 `tidb_retry_limit`から`0`に設定すると、自動再試行が無効になることに注意してください。この変数は楽観的なトランザクションにのみ適用され、悲観的なトランザクションには適用されません。
 
 ### tidb_row_format_version {#tidb-row-format-version}
 
@@ -1615,27 +1615,27 @@ SET tidb_slow_log_threshold = 200;
 -   スコープ：セッション|グローバル
 -   デフォルト値： `24`
 -   範囲： `[0, 255]`
--   この変数は、履歴容量を[ステートメント要約テーブル](/statement-summary-tables.md)に設定するために使用されます。
+-   この変数は、履歴容量を[ステートメント要約表](/statement-summary-tables.md)に設定するために使用されます。
 
 ### tidb_stmt_summary_internal_queryv4.0<span class="version-mark">の新</span>機能 {#tidb-stmt-summary-internal-query-span-class-version-mark-new-in-v4-0-span}
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
--   この変数は、TiDBのSQL情報を[ステートメント要約テーブル](/statement-summary-tables.md)に含めるかどうかを制御するために使用されます。
+-   この変数は、TiDBのSQL情報を[ステートメント要約表](/statement-summary-tables.md)に含めるかどうかを制御するために使用されます。
 
 ### tidb_stmt_summary_max_sql_lengthv4.0<span class="version-mark">の新</span>機能 {#tidb-stmt-summary-max-sql-length-span-class-version-mark-new-in-v4-0-span}
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `4096`
 -   範囲： `[0, 2147483647]`
--   この変数は、 [ステートメント要約テーブル](/statement-summary-tables.md)のSQL文字列の長さを制御するために使用されます。
+-   この変数は、 [ステートメント要約表](/statement-summary-tables.md)のSQL文字列の長さを制御するために使用されます。
 
 ### tidb_stmt_summary_max_stmt_countv4.0<span class="version-mark">の新</span>機能 {#tidb-stmt-summary-max-stmt-count-span-class-version-mark-new-in-v4-0-span}
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `3000`
 -   範囲： `[1, 32767]`
--   この変数は、 [ステートメント要約テーブル](/statement-summary-tables.md)がメモリに格納するステートメントの最大数を設定するために使用されます。
+-   この変数は、 [ステートメント要約表](/statement-summary-tables.md)がメモリに格納するステートメントの最大数を設定するために使用されます。
 
 ### tidb_stmt_summary_refresh_intervalv4.0<span class="version-mark">の新</span>機能 {#tidb-stmt-summary-refresh-interval-span-class-version-mark-new-in-v4-0-span}
 
@@ -1643,7 +1643,7 @@ SET tidb_slow_log_threshold = 200;
 -   デフォルト値： `1800`
 -   範囲： `[1, 2147483647]`
 -   単位：秒
--   この変数は、リフレッシュ時間を[ステートメント要約テーブル](/statement-summary-tables.md)に設定するために使用されます。
+-   この変数は、リフレッシュ時間を[ステートメント要約表](/statement-summary-tables.md)に設定するために使用されます。
 
 ### <code>tidb_enable_top_sql</code><span class="version-mark">の新機能</span> {#code-tidb-enable-top-sql-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -1701,7 +1701,7 @@ SET tidb_slow_log_threshold = 200;
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `ON`
--   この変数は、実行プランバインディング機能を有効にするかどうかを制御するために使用されます。デフォルトで有効になっていますが、 `OFF`の値を割り当てることで無効にできます。実行プランバインディングの使用については、 [実行プランのバインド](/sql-plan-management.md#create-a-binding)を参照してください。
+-   この変数は、実行プランのバインド機能を有効にするかどうかを制御するために使用されます。デフォルトで有効になっていますが、 `OFF`の値を割り当てることで無効にできます。実行プランバインディングの使用については、 [実行プランのバインド](/sql-plan-management.md#create-a-binding)を参照してください。
 
 ### tidb_wait_split_region_finish {#tidb-wait-split-region-finish}
 

@@ -5,7 +5,7 @@ summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration
 
 # TiDBデータ移行FAQ {#tidb-data-migration-faq}
 
-このドキュメントは、TiDBデータ移行（DM）に関するよくある質問（FAQ）をまとめたものです。
+このドキュメントは、TiDBデータ移行（DM）に関するよくある質問（FAQ）を集めたものです。
 
 ## DMは、Alibaba RDSまたは他のクラウドデータベースからのデータの移行をサポートしていますか？ {#does-dm-support-migrating-data-from-alibaba-rds-or-other-cloud-databases}
 
@@ -22,7 +22,7 @@ Alibaba Cloud RDSに主キーがないアップストリームテーブルの場
 
 現在、DMはそれをサポートしておらず、Golang標準ライブラリの正規表現のみをサポートしています。 [re2-構文](https://github.com/google/re2/wiki/Syntax)を介してGolangでサポートされている正規表現を参照してください。
 
-## アップストリームで実行されるステートメントに複数のDDL操作が含まれている場合、DMはそのような移行をサポートしていますか？ {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
+## アップストリームで実行されるステートメントに複数のDDL操作が含まれている場合、DMはそのような移行をサポートしますか？ {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
 DMは、複数のDDL変更操作を含む単一のステートメントを1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーするわけではありません。アップストリームで実行されるステートメントにDDL操作を1つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、DMリポジトリに[問題](https://github.com/pingcap/dm/issues)をファイルできます。
 
@@ -90,7 +90,7 @@ MySQLはエクスポート用のスナップショットを指定できないた
 
 ### <code>Load</code>段階で {#in-the-code-load-code-stage}
 
-エクスポート中、複数のデータ移行タスクは通常、異なるbinlog位置を持ちます。 `Load`のステージでタスクをマージすると、binlogの位置についてコンセンサスに到達できない可能性があります。したがって、 `Load`段階のデータ移行タスクにテーブルを追加することはお勧めしません。
+エクスポート中、複数のデータ移行タスクは通常、異なるbinlog位置を持ちます。 `Load`段階でタスクをマージすると、binlogの位置について合意に達することができない場合があります。したがって、 `Load`段階のデータ移行タスクにテーブルを追加することはお勧めしません。
 
 ### <code>Sync</code>段階 {#in-the-code-sync-code-stage}
 
@@ -129,7 +129,7 @@ DM v2.0以降、DM 1.0クラスタのタスク構成ファイルを使用して`
 
 このエラーは[DM1.0クラスタのDM移行タスクをDM2.0クラスタに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
-## TiUPがDMの一部のバージョン（v2.0.0-hotfixなど）のデプロイに失敗するのはなぜですか？ {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
+## TiUPがDMの一部のバージョン（v2.0.0-hotfixなど）の展開に失敗するのはなぜですか？ {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
 
 `tiup list dm-master`コマンドを使用して、TiUPが展開をサポートするDMバージョンを表示できます。 TiUPは、このコマンドで表示されないDMバージョンを管理しません。
 
@@ -150,7 +150,7 @@ DM 1.0では、モニターデータを生成するために`enable-heartbeat`�
 
 ## DMがタスクを開始しているとき<code>fail to initial unit Sync of subtask</code>たエラーを処理する方法。エラーメッセージの<code>RawCause</code>は、 <code>context deadline exceeded</code>たことを示していますか？ {#how-to-handle-the-error-code-fail-to-initial-unit-sync-of-subtask-code-when-dm-is-starting-a-task-with-the-code-rawcause-code-in-the-error-message-showing-code-context-deadline-exceeded-code}
 
-これはDM2.0.0バージョンの既知の問題であり、DM2.0.1バージョンで修正される予定です。レプリケーションタスクに処理するテーブルが多数ある場合にトリガーされる可能性があります。 TiUPを使用してDMをデプロイする場合は、DMをナイトリーバージョンにアップグレードしてこの問題を修正できます。または、GitHubで[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から2.0.0-hotfixバージョンをダウンロードして、実行可能ファイルを手動で置き換えることができます。
+これはDM2.0.0バージョンの既知の問題であり、DM2.0.1バージョンで修正される予定です。レプリケーションタスクに処理するテーブルが多数ある場合にトリガーされる可能性があります。 TiUPを使用してDMを展開する場合は、DMをナイトリーバージョンにアップグレードしてこの問題を修正できます。または、GitHubで[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から2.0.0-hotfixバージョンをダウンロードして、実行可能ファイルを手動で置き換えることができます。
 
 ## DMがデータを複製しているときにエラー<code>duplicate entry</code>を処理するにはどうすればよいですか？ {#how-to-handle-the-error-code-duplicate-entry-code-when-dm-is-replicating-data}
 
@@ -160,7 +160,7 @@ DM 1.0では、モニターデータを生成するために`enable-heartbeat`�
 -   データは手動または他のレプリケーションプログラムによって挿入されません。
 -   このテーブルに関連付けられたDMLフィルターは構成されていません。
 
-トラブルシューティングを容易にするために、最初にダウンストリームTiDBインスタンスの一般的なログファイルを収集してから、 [TiDBコミュニティのSlackチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカルサポートを依頼できます。次の例は、一般的なログファイルを収集する方法を示しています。
+トラブルシューティングを容易にするために、最初にダウンストリームTiDBインスタンスの一般的なログファイルを収集してから、 [TiDBコミュニティのスラックチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカルサポートを依頼できます。次の例は、一般的なログファイルを収集する方法を示しています。
 
 ```bash
 # Enable general log collection
@@ -191,7 +191,7 @@ DM v2.0以降、 `handle-error`が`sql-skip`に置き換わります。この問
 
 ## DMが複製しているときに、 <code>REPLACE</code>ステートメントがダウンストリームに表示され続けるのはなぜですか？ {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
-[セーフモード](/dm/dm-glossary.md#safe-mode)がタスクに対して自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジュールがある場合は、タスクが開始または再開されてから1分以内であるため、セーフモードが有効になります。
+[セーフモード](/dm/dm-glossary.md#safe-mode)がタスクに対して自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジューリングがある場合、タスクが開始または再開されてから1分以内であるため、セーフモードが有効になります。
 
 DM-workerログファイルを確認して、 `change count`を含む行を検索できます。行の`new count`がゼロでない場合、セーフモードが有効になります。有効になっている理由を確認するには、いつ発生するか、以前にエラーが報告されていないかどうかを確認してください。
 
@@ -220,13 +220,13 @@ DM v2.0.1以前のバージョンでは、完全なインポートが完了す�
 
 ## DMがエラーを報告する理由<code>ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.</code>インクリメンタルタスク中に再起動した場合はどうなりますか？ {#why-does-dm-report-the-error-code-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master-auto-position-1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-code-if-it-restarts-during-an-incremental-task}
 
-このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlog位置が、完全な移行中にパージされたことを示します。
+このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中にパージされたことを示します。
 
 この問題が発生した場合は、タスクを一時停止し、ダウンストリームデータベース内の移行されたすべてのデータを削除して、 `--remove-meta`オプションで新しいタスクを開始する必要があります。
 
 次の方法で構成することにより、この問題を事前に回避できます。
 
-1.  完全な移行タスクが完了する前に必要なbinlogファイルを誤ってパージしないように、アップストリームMySQLデータベースの値を`expire_logs_days`に増やします。データ量が多い場合は、餃子とTiDB-Lightningを同時に使用してタスクを高速化することをお勧めします。
+1.  完全な移行タスクが完了する前に必要なbinlogファイルを誤ってパージしないように、アップストリームのMySQLデータベースの値を`expire_logs_days`に増やします。データ量が多い場合は、餃子とTiDB-Lightningを同時に使用してタスクを高速化することをお勧めします。
 2.  このタスクのリレーログ機能を有効にして、binlogの位置が削除されてもDMがリレーログからデータを読み取れるようにします。
 
 ## クラスタがTiUPv1.3.0またはv1.3.1を使用してデプロイされている場合、DMクラスタディスプレイのGrafanaダッシュボードがダッシュボードの<code>failed to fetch dashboard</code>たのはなぜですか？ {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-code-failed-to-fetch-dashboard-code-if-the-cluster-is-deployed-using-tiup-v1-3-0-or-v1-3-1}
@@ -247,7 +247,7 @@ DM v2.0.1以前のバージョンでは、完全なインポートが完了す�
 
 これはDMの既知のバグであり、DMv2.0.2で修正されています。このバグは、次の2つの条件が同時に完全に満たされたときにトリガーされます。
 
-1.  ソース構成ファイルでは、パラメーター`enable-relay`と`enable-gtid`が`true`に設定されています。
+1.  ソース設定ファイルでは、パラメータ`enable-relay`と`enable-gtid`が`true`に設定されています。
 2.  アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`を照会すると、次の例のように、結果は連続しません。
 
 ```

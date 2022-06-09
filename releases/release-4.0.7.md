@@ -40,7 +40,7 @@ TiDBバージョン：4.0.7
 
 -   TiFlash
 
-    -   読み取り中に発生するリージョンメタ変更のエラー処理を改善します
+    -   読み取り中に発生するRegionメタ変更のエラー処理を改善します
 
 -   ツール
 
@@ -61,7 +61,7 @@ TiDBバージョン：4.0.7
 -   TiDB
 
     -   [＃20092](https://github.com/pingcap/tidb/pull/20092) `COALESCE`引き起こされる`and`からのベクトル化のバグを修正し`or`
-    -   警官のタスクストアが異なるタイプの場合にプランダイジェストが同じであるという問題を修正します[＃20076](https://github.com/pingcap/tidb/pull/20076)
+    -   警官のタスクストアが異なるタイプの場合、プランダイジェストが同じであるという問題を修正します[＃20076](https://github.com/pingcap/tidb/pull/20076)
     -   `!= any()`関数[＃20062](https://github.com/pingcap/tidb/pull/20062)の間違った動作を修正します
     -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正します[＃20051](https://github.com/pingcap/tidb/pull/20051)
     -   コンテキストがキャンセルされたときにリージョンリクエストが再試行し続ける問題を修正します[＃20031](https://github.com/pingcap/tidb/pull/20031)

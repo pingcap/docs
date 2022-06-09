@@ -5,7 +5,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
 
 # TiFlashクラスターのトラブルシューティング {#troubleshoot-a-tiflash-cluster}
 
-このセクションでは、TiFlashを使用するときによく発生する問題、その理由、および解決策について説明します。
+このセクションでは、TiFlashを使用するときによく発生する問題、理由、および解決策について説明します。
 
 ## TiFlashの起動に失敗する {#tiflash-fails-to-start}
 
@@ -125,7 +125,7 @@ show warnings;
 
 ## データはTiFlashに複製されません {#data-is-not-replicated-to-tiflash}
 
-TiFlashノードをデプロイしてレプリケーションを開始した後（ALTER操作を実行することにより）、データはそのノードにレプリケートされません。この場合、以下の手順に従って問題を特定して対処できます。
+TiFlashノードをデプロイしてレプリケーションを開始した後（ALTER操作を実行して）、データはレプリケートされません。この場合、以下の手順に従って問題を特定して対処できます。
 
 1.  `ALTER table <tbl_name> set tiflash replica <num>`コマンドを実行してレプリケーションが成功したかどうかを確認し、出力を確認します。
 
@@ -154,7 +154,7 @@ TiFlashノードをデプロイしてレプリケーションを開始した後�
 
     -   `max-replicas`の値がクラスタのTiKVノードの数を超えない場合は、次の手順に進みます。
 
-    -   `max-replicas`の値がクラスタのTiKVノードの数よりも大きい場合、PDはデータをTiFlashノードに複製しません。この問題に対処するには、 `max-replicas`をクラスタのTiKVノードの数以下の整数に変更します。
+    -   `max-replicas`の値がクラスタのTiKVノードの数より大きい場合、PDはデータをTiFlashノードに複製しません。この問題に対処するには、 `max-replicas`をクラスタのTiKVノードの数以下の整数に変更します。
 
     > **ノート：**
     >
@@ -185,7 +185,7 @@ TiFlashノードをデプロイしてレプリケーションを開始した後�
 
         -   ログにPDキーワードが記録されているかどうかを確認します。
 
-            PDキーワードが見つかった場合は、TiFlash構成ファイルの`raft.pd_addr`が有効かどうかを確認してください。具体的には、 `curl '{pd-addr}/pd/api/v1/config/rules'`コマンドを実行し、5秒以内に出力があるかどうかを確認します。
+            PDキーワードが見つかった場合は、TiFlash設定ファイルの`raft.pd_addr`が有効かどうかを確認してください。具体的には、 `curl '{pd-addr}/pd/api/v1/config/rules'`コマンドを実行し、5秒以内に出力があるかどうかを確認します。
 
         -   ログにTiDB関連のキーワードが記録されているかどうかを確認します。
 
@@ -221,17 +221,17 @@ TiFlashでのデータ複製は正常に開始されますが、一定期間後�
 
 1.  ディスク容量を確認してください。
 
-    ディスクスペース率が値`low-space-ratio` （デフォルトは0.8）より大きいかどうかを確認します。ノードのスペース使用量が80％を超えると、PDはディスクスペースの枯渇を防ぐためにこのノードへのデータの移行を停止します。
+    ディスクスペースの比率が値`low-space-ratio` （デフォルトは0.8。ノードのスペース使用量が80％を超えると、ディスクスペースの枯渇を防ぐためにPDはこのノードへのデータの移行を停止します）より大きいかどうかを確認します。
 
     -   ディスク使用率が`low-space-ratio`以上の場合、ディスク容量が不足しています。ディスク容量を減らすには、 `${data}/flash/`フォルダの下にある`space_placeholder_file`などの不要なファイルを削除します（必要に応じて、ファイルを削除した後、 `reserve-space`を0MBに設定します）。
-    -   ディスク使用率が`low-space-ratio`未満の場合は、ディスク容量で十分です。次のステップに進みます。
+    -   ディスク使用率が`low-space-ratio`の値よりも小さい場合、ディスク容量は十分です。次のステップに進みます。
 
 2.  TiKV、TiFlash、PD間のネットワーク接続を確認してください。
 
     `flash_cluster_manager.log`で、スタックしたテーブルに対応する`flash_region_count`への新しい更新があるかどうかを確認します。
 
     -   いいえの場合は、次の手順に進みます。
-    -   はいの場合、 `down peer`を検索します（ダウンしているピアがある場合、レプリケーションがスタックします）。
+    -   はいの場合、 `down peer`を検索します（ダウンしているピアがある場合、レプリケーションはスタックします）。
 
         -   `pd-ctl region check-down-peer`を実行して`down peer`を検索します。
         -   `down peer`が見つかった場合は、 `pd-ctl operator add remove-peer\<region-id> \<tiflash-store-id>`を実行して削除します。
@@ -248,7 +248,7 @@ TiFlashでのデータ複製は正常に開始されますが、一定期間後�
 
 1.  スケジューリングパラメータの値を調整します。
 
-    -   [`store limit`](/configure-store-limit.md#usage)を増やすと、複製が高速化されます。
+    -   [`store limit`](/configure-store-limit.md#usage)を増やすと、レプリケーションが高速化されます。
     -   [`config set patrol-region-interval 10ms`](/pd-control.md#command)を減らすと、TiKVでリージョンのチェッカースキャンがより頻繁になります。
     -   [`region merge`](/pd-control.md#command)を増やすと、リージョンの数が減ります。つまり、スキャンが少なくなり、チェック頻度が高くなります。
 

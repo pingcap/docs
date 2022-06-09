@@ -15,8 +15,8 @@ title: TiDB 3.0 Beta Release Notes
     -   ハッシュ分割をサポートする
 -   SQLオプティマイザー
     -   [＃7676](https://github.com/pingcap/tidb/pull/7676)の最適化ルールを再サポートし`AggregationElimination`
-    -   `NOT EXISTS`のサブクエリを最適化し、それをAnti SemiJoin3に変換し[＃7842](https://github.com/pingcap/tidb/pull/7842)
-    -   新しいカスケードオプティマイザをサポートするために`tidb_enable_cascades_planner`の変数を追加します。現在、Cascadesオプティマイザはまだ完全には実装されておらず、デフォルトでオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
+    -   `NOT EXISTS`のサブクエリを最適化し、それをアンチセミジョイン[＃7842](https://github.com/pingcap/tidb/pull/7842)に変換します
+    -   新しいCascadesオプティマイザーをサポートするために`tidb_enable_cascades_planner`の変数を追加します。現在、Cascadesオプティマイザはまだ完全には実装されておらず、デフォルトでオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
     -   トランザクションでのインデックス結合の使用のサポート[＃7877](https://github.com/pingcap/tidb/pull/7877)
     -   外部結合での定数伝播を最適化して、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにします。これにより、外部結合の無駄な計算が減り、実行パフォーマンスが向上します[＃7794](https://github.com/pingcap/tidb/pull/7794) 。
     -   冗長な`Project`演算子を避けるために、射影除去の最適化ルールを集計除去後の位置に調整します[＃7909](https://github.com/pingcap/tidb/pull/7909)
@@ -44,8 +44,8 @@ title: TiDB 3.0 Beta Release Notes
     -   `shard_row_id_bits`を改善し、自動インクリメント[＃8936](https://github.com/pingcap/tidb/pull/8936)をクロスチェックします
 -   `Prepare`ステートメント
     -   異なるユーザー変数が入力されたときにクエリプランが正しいことを保証するために、サブクエリを含む`Prepare`ステートメントをクエリプランキャッシュに追加することを禁止します[＃8064](https://github.com/pingcap/tidb/pull/8064)
-    -   クエリプランのキャッシュを最適化して、ステートメントに非決定的な関数が含まれている場合にプランをキャッシュできるようにします[＃8105](https://github.com/pingcap/tidb/pull/8105)
-    -   クエリプランキャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリプランをキャッシュできるようにします[＃8107](https://github.com/pingcap/tidb/pull/8107)
+    -   クエリプランキャッシュを最適化して、ステートメントに非決定論的関数が含まれている場合にプランをキャッシュできるようにします[＃8105](https://github.com/pingcap/tidb/pull/8105)
+    -   クエリプランのキャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリプランをキャッシュできるようにします[＃8107](https://github.com/pingcap/tidb/pull/8107)
     -   クエリプランキャッシュを最適化して、 `DEALLOCATE`ステートメントを実行するときに対応するプランを削除します[＃8332](https://github.com/pingcap/tidb/pull/8332)
     -   クエリプランのキャッシュを最適化して、メモリ使用量を制限することにより、あまりにも多くのプランをキャッシュすることによって引き起こされるTiDBOOMの問題を回避します[＃8339](https://github.com/pingcap/tidb/pull/8339)
     -   `Prepare`ステートメントを最適化して`ORDER BY`節`GROUP BY`の`?` [＃8206](https://github.com/pingcap/tidb/pull/8206)ホルダーの使用をサポートし`LIMIT`
@@ -61,7 +61,7 @@ title: TiDB 3.0 Beta Release Notes
     -   `interactive_timeout`のシステム変数[＃8573](https://github.com/pingcap/tidb/pull/8573)をサポートします
     -   `wait_timeout`のシステム変数[＃8346](https://github.com/pingcap/tidb/pull/8346)をサポートします
     -   `tidb_batch_commit`の変数[＃8293](https://github.com/pingcap/tidb/pull/8293)を使用して、ステートメントの数に基づいてトランザクションを複数のトランザクションに分割することをサポートします。
-    -   遅いログをチェックするために`ADMIN SHOW SLOW`ステートメントを使用することをサポートします[＃7785](https://github.com/pingcap/tidb/pull/7785)
+    -   遅いログをチェックするための`ADMIN SHOW SLOW`ステートメントの使用をサポート[＃7785](https://github.com/pingcap/tidb/pull/7785)
 -   互換性
     -   `ALLOW_INVALID_DATES`モード[＃9027](https://github.com/pingcap/tidb/pull/9027)をサポートする
     -   CSVファイルの`LoadData`のフォールトトレランスを改善[＃9005](https://github.com/pingcap/tidb/pull/9005)

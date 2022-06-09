@@ -73,13 +73,13 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     > **ノート：**
     >
-    > `--full`フラグ、およびコンポーネントバージョンが指定されていない場合、一部のメタ情報のみがクローン化され`global-version` 。
+    > `--full`フラグ、およびコンポーネントバージョンが指定されていない場合、一部のメタ情報のみが複製され`global-version` 。
 
 -   特定のプラットフォームからパッケージを複製するかどうかを決定します
 
     特定のプラットフォームのパッケージのみを複製する場合は、 `-os`と`-arch`を使用してプラットフォームを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行して、Linux用にクローンを作成します。
+    -   `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行して、Linuxのクローンを作成します。
     -   `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行して、amd64のクローンを作成します。
     -   `tiup mirror clone <target-dir> [global-version] --os=linux --arch=amd64`コマンドを実行して、linux/amd64のクローンを作成します。
 
@@ -89,7 +89,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     -   `tiup mirror clone <target-dir> --tidb v5.4.1`コマンドを実行して、TiDBコンポーネントのv5.4.1バージョンのクローンを作成します。
     -   `tiup mirror clone <target-dir> --tidb v5.4.1 --tikv all`コマンドを実行して、v5.4.1バージョンのTiDBコンポーネントとすべてのバージョンのTiKVコンポーネントのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v5.4.1`コマンドを実行して、クラスタのすべてのコンポーネントのv5.4.1バージョンを複製します。
+    -   `tiup mirror clone <target-dir> v5.4.1`コマンドを実行して、クラスタのすべてのコンポーネントのv5.4.1バージョンのクローンを作成します。
 
 クローン作成後、署名キーが自動的に設定されます。
 

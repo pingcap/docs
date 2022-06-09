@@ -75,7 +75,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 
 ### データエンジン {#data-engine}
 
-実際の行データを並べ替えるための[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine) 。
+実際の行データをソートするための[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine) 。
 
 テーブルが非常に大きい場合、そのデータは複数のデータエンジンに配置され、タスクのパイプライン化を改善し、TiKVImporterのスペースを節約します。デフォルトでは、100 GBのSQLデータごとに新しいデータエンジンが開かれます。これは、 `mydumper.batch-size`の設定で構成できます。
 

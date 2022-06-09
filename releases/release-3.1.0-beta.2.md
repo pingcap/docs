@@ -18,7 +18,7 @@ TiDB Ansibleバージョン：3.1.0-beta.2
 
 -   ツール
     -   TiDB Lightning
-        -   構成ファイル[＃255](https://github.com/pingcap/tidb-lightning/pull/255)で構成されていない特定の項目には、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト構成を使用します。
+        -   構成ファイル[＃255](https://github.com/pingcap/tidb-lightning/pull/255)で構成されていない特定の項目については、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト構成を使用します。
         -   `--tidb-password` CLIパラメーターを追加して、TiDBパスワードを設定します[＃253](https://github.com/pingcap/tidb-lightning/pull/253)
 
 ## 新機能 {#new-features}
@@ -50,8 +50,8 @@ TiDB Ansibleバージョン：3.1.0-beta.2
 
 -   TiKV
     -   ラフトストア
-        -   Hibernate Regions [＃6450](https://github.com/tikv/tikv/pull/6450)からデータが適切に読み取られないために、読み取り要求を処理できない問題を修正します。
-        -   リーダー転送プロセス中の`ReadIndex`の要求によって引き起こされるパニックの問題を修正します[＃6613](https://github.com/tikv/tikv/pull/6613)
+        -   Hibernateリージョンからデータが適切に読み取られないために読み取り要求を処理できない問題を修正します[＃6450](https://github.com/tikv/tikv/pull/6450)
+        -   リーダーの転送プロセス中に`ReadIndex`のリクエストによって引き起こされるパニックの問題を修正します[＃6613](https://github.com/tikv/tikv/pull/6613)
         -   いくつかの特別な条件で休止状態の領域が正しく[＃6972](https://github.com/tikv/tikv/pull/6972)ないという問題を修正し[＃6730](https://github.com/tikv/tikv/pull/6730) [＃6737](https://github.com/tikv/tikv/pull/6737)
     -   バックアップ
         -   余分なデータのバックアップによって引き起こされた復元中の一貫性のないデータインデックスを修正します[＃6659](https://github.com/tikv/tikv/pull/6659)

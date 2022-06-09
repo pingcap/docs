@@ -13,7 +13,7 @@ title: TiDB 2.0.7 Release Notes
 -   改善
     -   SQLステートメントの実行に関する詳細を収集し、その情報を`SLOW QUERY`ログ[＃7364](https://github.com/pingcap/tidb/pull/7364)に出力します。
     -   [＃7388](https://github.com/pingcap/tidb/pull/7388)にパーティション情報をドロップし`SHOW CREATE TABLE`
-    -   RC分離レベルと低優先度[＃7500](https://github.com/pingcap/tidb/pull/7500)に設定することにより、 `ANALYZE`ステートメントの実行効率を向上させます。
+    -   `ANALYZE`ステートメントをRC分離レベルおよび低優先度[＃7500](https://github.com/pingcap/tidb/pull/7500)に設定することにより、実行効率を向上させます。
     -   一意のインデックスの追加を高速化[＃7562](https://github.com/pingcap/tidb/pull/7562)
     -   DDL同時実行を制御するオプションを追加する[＃7563](https://github.com/pingcap/tidb/pull/7563)
 -   バグの修正

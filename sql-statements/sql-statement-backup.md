@@ -164,7 +164,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 -   日
 -   週
 
-SQL標準に従って、単位は常に特異であることに注意してください。
+SQL標準に従って、単位は常に単数であることに注意してください。
 
 ### 増分バックアップ {#incremental-backup}
 

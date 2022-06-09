@@ -13,5 +13,5 @@ summary: Learn about the daily check of TiDB Data Migration (DM).
 
 -   方法3：ログファイルを使用して、DMの実行ステータスとエラー（存在する場合）を確認します。
 
-    -   DM-masterログディレクトリ： `--log-file`のDM-masterプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDMマスターノードで`{log_dir}`です。
-    -   DM-workerログディレクトリ： `--log-file` -workerプロセスパラメータで指定されます。 DMがTiUPを使用してデプロイされている場合、ログディレクトリはDM-workerノードで`{log_dir}`です。
+    -   DM-masterログディレクトリ： `--log-file`のDM-masterプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDMマスターノードの`{log_dir}`です。
+    -   DM-workerログディレクトリ： `--log-file` -workerプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDM-workerノードで`{log_dir}`です。

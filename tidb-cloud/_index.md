@@ -22,7 +22,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 <NavColumn><ColumnTitle>クラスターの管理</ColumnTitle>
 
--   [クラスタ層を選択してください](/tidb-cloud/select-cluster-tier.md)
+-   [クラスタ層を選択する](/tidb-cloud/select-cluster-tier.md)
 -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
 -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 -   [TiDBクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)
@@ -46,7 +46,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 <NavColumn><ColumnTitle>モニタークラスター</ColumnTitle>
 
 -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
--   [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)
+-   [Datadogの統合](/tidb-cloud/monitor-datadog-integration.md)
 -   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
 </NavColumn>

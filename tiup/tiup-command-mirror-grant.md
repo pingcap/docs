@@ -2,7 +2,7 @@
 title: tiup mirror grant
 ---
 
-# tiupミラーグラント {#tiup-mirror-grant}
+# tiup mirror grant {#tiup-mirror-grant}
 
 `tiup mirror grant`コマンドは、コンポーネントの所有者に現在のミラーを紹介するために使用されます。
 

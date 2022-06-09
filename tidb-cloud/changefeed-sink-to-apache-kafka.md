@@ -9,7 +9,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apac
 >
 > 現在、 **Sink toApacheKafka**は実験的機能です。実稼働環境での使用はお勧めしません。
 
-このドキュメントでは、 **Sink** toApacheKafkaチェンジフィードを使用してTiDBCloudからApacheKafkaにデータをストリーミングする方法について説明します。
+このドキュメントでは、 **Sink** toApacheKafkaチェンジフィードを使用してTiDBCloudからTiDB Cloudにデータをストリーミングする方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
@@ -25,7 +25,7 @@ ApacheKafkaサービスがインターネットにアクセスできないAWSVPC
 
     TiDB Cloudクラスタが配置されているリージョンのCIDRをインバウンドルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。
 
-3.  Apache Kafka URLにホスト名が含まれている場合は、TiDBCloudがApacheKafkaブローカーのDNSホスト名を解決できるようにする必要があります。
+3.  Apache Kafka URLにホスト名が含まれている場合は、TiDBCloudがTiDB CloudブローカーのDNSホスト名を解決できるようにする必要があります。
 
     1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **AccepterDNS解決**オプションを有効にします。
@@ -39,7 +39,7 @@ ApacheKafkaサービスがインターネットにアクセスできないGCPVPC
 
 ### トピック {#topic}
 
-Apache Kafka Sinkを作成する前に、トピックを準備する必要があります。テーブルに基づいて、シンクはトピックのさまざまなパーティションにデータを配布します。
+Apache Kafkaシンクを作成する前に、トピックを準備する必要があります。テーブルに基づいて、シンクはトピックのさまざまなパーティションにデータを配布します。
 
 ## シンクを作成する {#create-a-sink}
 

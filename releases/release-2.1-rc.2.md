@@ -65,7 +65,7 @@ title: TiDB 2.1 RC2 Release Notes
     -   組み込み機能をサポートする`encode/decode` [＃7622](https://github.com/pingcap/tidb/pull/7622)
     -   一部の時間関連関数がMySQLの動作と互換性がない場合があるという問題を修正します[＃7636](https://github.com/pingcap/tidb/pull/7636)
     -   文字列[＃7654](https://github.com/pingcap/tidb/pull/7654)のデータの時間タイプを解析する互換性の問題を修正します
-    -   `DateTime`データのデフォルト値を計算するときにタイムゾーンが考慮されないという問題を修正します[＃7655](https://github.com/pingcap/tidb/pull/7655)
+    -   `DateTime`データのデフォルト値を計算するときにタイムゾーンが考慮されない問題を修正します[＃7655](https://github.com/pingcap/tidb/pull/7655)
 -   DML
     -   `InsertOnDuplicateUpdate`ステートメント[＃7534](https://github.com/pingcap/tidb/pull/7534)に正しい`last_insert_id`を設定します
     -   `auto_increment_id`カウンター[＃7515](https://github.com/pingcap/tidb/pull/7515)を更新するケースを減らします
@@ -76,14 +76,14 @@ title: TiDB 2.1 RC2 Release Notes
     -   モニターにDDLジョブタイプと現在のスキーマバージョン情報を追加します[＃7472](https://github.com/pingcap/tidb/pull/7472)
     -   `Admin Restore Table`つの機能の設計を完了します[＃7383](https://github.com/pingcap/tidb/pull/7383)
     -   `Bit`タイプのデフォルト値が128を超える問題を修正します[＃7249](https://github.com/pingcap/tidb/pull/7249)
-    -   `Bit`タイプのデフォルト値を[＃7604](https://github.com/pingcap/tidb/pull/7604)にできない問題を修正し`NULL` 。
+    -   `Bit`タイプのデフォルト値を[＃7604](https://github.com/pingcap/tidb/pull/7604)にできない問題を修正し`NULL`
     -   DDLキュー[＃7608](https://github.com/pingcap/tidb/pull/7608)のチェック`CREATE TABLE/DATABASE`の間隔を短くします。
     -   `ddl/owner/resign` HTTPインターフェースを使用して、DDL所有者を解放し、新しい所有者の選出を開始します[＃7649](https://github.com/pingcap/tidb/pull/7649)
 -   TiKVGoクライアント
     -   `Seek` [＃7419](https://github.com/pingcap/tidb/pull/7419)操作で35しか得られないという問題をサポートし`Key`
 -   [テーブルパーティション](https://github.com/pingcap/tidb/projects/6) （実験的）
     -   `Bigint`タイプがパーティションキー[＃7520](https://github.com/pingcap/tidb/pull/7520)として使用できない問題を修正します
-    -   パーティションテーブルにインデックスを追加する際に問題が発生した場合のロールバック操作をサポートする[＃7437](https://github.com/pingcap/tidb/pull/7437)
+    -   パーティションテーブルにインデックスを追加するときに問題が発生した場合のロールバック操作をサポートする[＃7437](https://github.com/pingcap/tidb/pull/7437)
 
 ## PD {#pd}
 
@@ -92,10 +92,10 @@ title: TiDB 2.1 RC2 Release Notes
     -   シミュレーター[＃1218](https://github.com/pingcap/pd/pull/1218)にスケジューリング見積もりの統計を追加します
 -   改善
     -   ダウンストアの処理プロセスを最適化して、できるだけ早くレプリカを作成します[＃1222](https://github.com/pingcap/pd/pull/1222)
-    -   コーディネーターの開始を最適化して、PD1の再起動によって引き起こされる不要なスケジューリングを減らし[＃1225](https://github.com/pingcap/pd/pull/1225)
+    -   コーディネーターの開始を最適化して、PD1の再起動によって発生する不要なスケジューリングを減らし[＃1225](https://github.com/pingcap/pd/pull/1225) 。
     -   メモリ使用量を最適化して、ハートビートによって引き起こされるオーバーヘッドを削減します[＃1195](https://github.com/pingcap/pd/pull/1195)
     -   エラー処理を最適化し、ログ情報を改善する[＃1227](https://github.com/pingcap/pd/pull/1227)
-    -   pd- [＃1231](https://github.com/pingcap/pd/pull/1231)の特定のストアのリージョン情報のクエリをサポート
+    -   pd-ctl1の特定のストアのリージョン情報のクエリをサポートし[＃1231](https://github.com/pingcap/pd/pull/1231)
     -   pd- [＃1233](https://github.com/pingcap/pd/pull/1233)のバージョン比較に基づくtopNリージョン情報のクエリをサポート
     -   pd- [＃1242](https://github.com/pingcap/pd/pull/1242)でより正確なTSOデコードをサポートする
 -   バグ修正
@@ -113,6 +113,6 @@ title: TiDB 2.1 RC2 Release Notes
     -   `snapshot apply` [＃3547](https://github.com/tikv/tikv/pull/3547)への影響を減らすために、ガベージデータのクリーンアップ速度を制限します。
     -   重要なRaftメッセージのコミットメッセージをブロードキャストして、不要な遅延を回避します[＃3592](https://github.com/tikv/tikv/pull/3592)
 -   バグの修正
-    -   新しく分割されたリージョン[＃3557](https://github.com/tikv/tikv/pull/3557)の`PreVote`のメッセージを破棄することによって引き起こされるリーダー選出の問題を修正します
+    -   新しく分割されたリージョン[＃3557](https://github.com/tikv/tikv/pull/3557)の`PreVote`のメッセージを破棄することによって引き起こされるリーダー選挙の問題を修正します
     -   リージョン[＃3573](https://github.com/tikv/tikv/pull/3573)をマージした後のフォロワー関連の統計を修正
     -   ローカルリーダーが廃止されたリージョン情報を使用する問題を修正します[＃3565](https://github.com/tikv/tikv/pull/3565)

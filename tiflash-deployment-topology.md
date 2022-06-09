@@ -7,7 +7,7 @@ summary: Learn the deployment topology of TiFlash based on the minimal TiDB topo
 
 このドキュメントでは、最小のTiDBトポロジに基づく[TiFlash](/tiflash/tiflash-overview.md)の展開トポロジについて説明します。
 
-TiFlashはカラム型ストレージエンジンであり、徐々に標準のクラスタトポロジになります。リアルタイムHTAPアプリケーションに適しています。
+TiFlashは列指向ストレージエンジンであり、徐々に標準のクラスタトポロジになります。リアルタイムHTAPアプリケーションに適しています。
 
 ## トポロジー情報 {#topology-information}
 

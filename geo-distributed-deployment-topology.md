@@ -3,9 +3,9 @@ title: Geo-distributed Deployment topology
 summary: Learn the geo-distributed deployment topology of TiDB.
 ---
 
-# 地理的に分散された展開トポロジ {#geo-distributed-deployment-topology}
+# 地理的分散展開トポロジ {#geo-distributed-deployment-topology}
 
-このドキュメントでは、2つの都市にある3つのデータセンター（DC）の一般的なアーキテクチャを例として取り上げ、地理的に分散した展開アーキテクチャと主要な構成を紹介します。この例で使用されている都市は、上海（ `sha`と呼ばれる）と北京（ `bja`と`bjb`と呼ばれる）です。
+このドキュメントでは、2つの都市にある3つのデータセンター（DC）の一般的なアーキテクチャを例として取り上げ、地理的に分散された展開アーキテクチャと主要な構成を紹介します。この例で使用されている都市は、上海（ `sha`と呼ばれる）と北京（ `bja`と`bjb`と呼ばれる）です。
 
 ## トポロジー情報 {#topology-information}
 
@@ -87,7 +87,7 @@ summary: Learn the geo-distributed deployment topology of TiDB.
     >
     > TiDB 5.2以降、 `label-property`構成はデフォルトでサポートされていません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用します。
 
-ラベルとRaftGroupレプリカの数の詳細については、 [トポロジラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)を参照してください。
+ラベルとRaftGroupレプリカの数の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 > **ノート：**
 >

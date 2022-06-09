@@ -2,7 +2,7 @@
 title: tiup dm template
 ---
 
-# tiupdmテンプレート {#tiup-dm-template}
+# tiup dm template {#tiup-dm-template}
 
 クラスタの[トポロジーファイル](/tiup/tiup-dm-topology-reference.md)を準備する必要があります。 TiUPにはトポロジファイルテンプレートが組み込まれており、このテンプレートを変更して最終的なトポロジファイルを作成できます。組み込みのテンプレートコンテンツを出力するには、 `tiup dm template`コマンドを使用できます。
 

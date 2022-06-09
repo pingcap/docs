@@ -97,7 +97,7 @@ SHOW TABLES;
 
 ## その他の例 {#additional-examples}
 
-このセクションでは、 `metrics_schema`の`tidb_query_duration`の監視テーブルを例として、この監視テーブルの使用方法とその動作について説明します。他の監視テーブルの動作原理は`tidb_query_duration`に似ています。
+このセクションでは、 `metrics_schema`のうち`tidb_query_duration`の監視テーブルを例として取り上げ、この監視テーブルの使用方法とその動作について説明します。他の監視テーブルの動作原理は`tidb_query_duration`に似ています。
 
 `information_schema.metrics_tables`の`tidb_query_duration`テーブルに関連する情報を照会します。
 
@@ -203,7 +203,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
 -   `tidb_metric_query_step` ：クエリ解決のステップ幅。 Prometheusから`query_range`のデータを取得するには、 `start_time` 、および`end_time`を指定する必要があり`step` 。 `step`はこの変数の値を使用します。
 -   `tidb_metric_query_range_duration` ：監視データを照会すると、 `PROMQL`の`$ RANGE_DURATION`フィールドの値がこの変数の値に置き換えられます。デフォルト値は60秒です。
 
-さまざまな粒度で監視項目の値を表示するには、監視テーブルを照会する前に、上記の2つのセッション変数を変更できます。例えば：
+さまざまな粒度で監視項目の値を表示するには、監視テーブルにクエリを実行する前に、上記の2つのセッション変数を変更できます。例えば：
 
 1.  2つのセッション変数の値を変更し、時間の粒度を30秒に設定します。
 
@@ -248,7 +248,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行プランを表示します。この結果から、実行プランの`PromQL`と`step`の値が30秒に変更されていることもわかります。
+3.  実行計画を表示します。この結果から、実行プランの`PromQL`と`step`の値が30秒に変更されていることもわかります。
 
     {{< copyable "" >}}
 

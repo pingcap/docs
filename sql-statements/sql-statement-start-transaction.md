@@ -42,7 +42,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 -   `START TRANSACTION`は、TiDB内ですぐにトランザクションを開始します。これは、 `START TRANSACTION`が遅延してトランザクションを作成するMySQLとは異なります。ただし、TiDBの`START TRANSACTION`はMySQLの`START TRANSACTION WITH CONSISTENT SNAPSHOT`と同等です。
 
--   ステートメント`START TRANSACTION READ ONLY`は、MySQLとの互換性のために解析されますが、それでも書き込み操作は許可されます。
+-   ステートメント`START TRANSACTION READ ONLY`は、MySQLとの互換性のために解析されますが、書き込み操作は引き続き許可されます。
 
 ## も参照してください {#see-also}
 

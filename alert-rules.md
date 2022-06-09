@@ -7,7 +7,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 # TiDBクラスターアラートルール {#tidb-cluster-alert-rules}
 
-このドキュメントでは、TiDB、TiKV、PD、TiFlash、TiDB Binlog、TiCDC、Node_exporter、Blackbox_exporterのアラート項目のルールの説明と解決策など、TiDBクラスタのさまざまなコンポーネントのアラートルールについて説明します。
+このドキュメントでは、TiDB、TiKV、PD、TiFlash、TiDB Binlog、TiCDC、Node_exporter、Blackbox_exporterのアラート項目のルールの説明と解決策を含め、TiDBクラスタのさまざまなコンポーネントのアラートルールについて説明します。
 
 重大度レベルに応じて、アラートルールは、緊急レベル、クリティカルレベル、および警告レベルの3つのカテゴリ（高から低）に分類されます。この重大度レベルの区分は、以下の各コンポーネントのすべてのアラート項目に適用されます。
 
@@ -137,7 +137,7 @@ summary: Learn the alert rules in a TiDB cluster.
     TiDBサービスで発生するイベントの数。次のイベントが発生すると、アラートがトリガーされます。
 
     1.  start：TiDBサービスが開始されます。
-    2.  ハング：クリティカルレベルのイベント（現在、シナリオは1つだけです：TiDBはbinlogを書き込めません）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
+    2.  ハング：クリティカルレベルのイベント（現在、TiDBがbinlogを書き込めないというシナリオは1つだけです）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
 
 -   解決：
 
@@ -217,13 +217,13 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    fsync操作の待ち時間が1秒を超える場合は、etcdが通常よりも低速でデータをディスクに書き込んでいることを示しています。 PDリーダーがタイムアウトしたり、TSOを時間内にディスクに保存できなかったりして、クラスタ全体のサービスがシャットダウンする可能性があります。
+    fsync操作の待ち時間が1秒を超える場合は、etcdが通常よりも低速でデータをディスクに書き込んでいることを示しています。 PDリーダーのタイムアウトが発生したり、TSOを時間内にディスクに保存できなかったりして、クラスタ全体のサービスがシャットダウンする可能性があります。
 
 -   解決：
 
     -   書き込みが遅い原因を見つけます。システムに過負荷をかけるのは他のサービスである可能性があります。 PD自体が大量のCPUまたはI/Oリソースを占有しているかどうかを確認できます。
     -   PDを再起動するか、リーダーを別のPDに手動で転送して、サービスを回復してみてください。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
 #### <code>PD_miss_peer_region_count</code> {#code-pd-miss-peer-region-count-code}
 
@@ -256,7 +256,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
     -   TiKV/TiFlashインスタンスが再起動されているかどうかを確認します。
     -   TiKV / TiFlashプロセスが正常であり、ネットワークが分離されており、負荷が高すぎるかどうかを確認し、可能な限りサービスを回復します。
-    -   TiKV / TiFlashインスタンスを回復できないことを確認したら、オフラインにすることができます。
+    -   TiKV / TiFlashインスタンスを復元できないことを確認した場合は、オフラインにすることができます。
     -   TiKV / TiFlashインスタンスを回復できるが、短期的には回復できないことを確認した場合は、 `max-down-time`の値を増やすことを検討できます。これにより、TiKV / TiFlashインスタンスが回復不能と見なされたり、データがTiKV/TiFlashから削除されたりするのを防ぐことができます。
 
 #### <code>PD_cluster_low_space</code> {#code-pd-cluster-low-space-code}
@@ -275,7 +275,7 @@ summary: Learn the alert rules in a TiDB cluster.
     -   リージョンバランスのスケジューリングに問題がないかどうかを確認します。その場合、データの分散が不均一になります。
     -   ログ、スナップショット、コアダンプなど、大量のディスク容量を占めるファイルがないか確認してください。
     -   ノードのリージョンの重みを下げて、データ量を減らします。
-    -   スペースを解放できない場合は、ノードを積極的にオフラインにすることを検討してください。これにより、ダウンタイムにつながる不十分なディスクスペースを防ぎます。
+    -   スペースを解放できない場合は、ノードを事前にオフラインにすることを検討してください。これにより、ダウンタイムにつながるディスク容量の不足を防ぎます。
 
 #### <code>PD_etcd_network_peer_latency</code> {#code-pd-etcd-network-peer-latency-code}
 
@@ -289,8 +289,8 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    -   ネットワークとシステムの負荷状態を確認してください。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
+    -   ネットワークとシステムの負荷状況を確認してください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
 #### <code>PD_tidb_handle_requests_duration</code> {#code-pd-tidb-handle-requests-duration-code}
 
@@ -307,7 +307,7 @@ summary: Learn the alert rules in a TiDB cluster.
     -   サーバーのロードステータスを確認してください。
     -   pprofを使用して、PDのCPUプロファイルを分析します。
     -   PDリーダーを手動で切り替えます。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
 #### <code>PD_down_peer_region_nums</code> {#code-pd-down-peer-region-nums-code}
 
@@ -353,8 +353,8 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     -   PDの再起動、リーダーの手動転送、リーダーの優先度の調整などの人的要因を除外します。
-    -   ネットワークとシステムの負荷状態を確認してください。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
+    -   ネットワークとシステムの負荷状況を確認してください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
 #### <code>TiKV_space_used_more_than_80%</code> {#code-tikv-space-used-more-than-80-code}
 
@@ -467,8 +467,8 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     1.  Raft Proposeモニターを見て、アラートされたTiKVノードが他のTiKVノードよりもはるかに高いRaft提案を持っているかどうかを確認します。もしそうなら、それはこのTiKVに1つ以上のホットスポットがあることを意味します。ホットスポットのスケジューリングが正しく機能するかどうかを確認する必要があります。
-    2.  Raft I / Oモニターを見て、レイテンシーが増加するかどうかを確認します。待ち時間が長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。実行可能であるが安全でない解決策の1つは、 `sync-log`を`false`に設定することです。
-    3.  Raft Processモニターを見て、ティック期間が長いかどうかを確認します。その場合、 `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加する必要があります。
+    2.  Raft I / Oモニターを監視し、レイテンシーが増加するかどうかを確認します。待ち時間が長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。実行可能であるが安全でない解決策の1つは、 `sync-log`を`false`に設定することです。
+    3.  Raft Processモニターを監視し、ティック期間が長いかどうかを確認します。その場合、 `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加する必要があります。
 
 #### <code>TiKV_write_stall</code> {#code-tikv-write-stall-code}
 
@@ -599,7 +599,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    アプライラフトログスレッドは大きな圧力を受けており、限界に近づいているか、限界を超えています。これは多くの場合、書き込みのバーストによって引き起こされます。
+    アプライラフトログスレッドは大きな圧力を受けており、制限に近づいているか、制限を超えています。これは多くの場合、書き込みのバーストによって引き起こされます。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -782,7 +782,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
 -   解決：
 
-    -   マシンにログインし、 `df -h`コマンドを実行してディスクスペースの使用状況を確認します。
+    -   マシンにログインし、 `df -h`コマンドを実行してディスク容量の使用状況を確認します。
     -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスタノードを増やす計画を立てます。
 
 #### <code>NODE_disk_inode_more_than_80%</code> {#code-node-disk-inode-more-than-80-code}
@@ -1027,7 +1027,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
     -   Node_exporterサービスを提供するマシンがダウンしていないか確認してください。
     -   Node_exporterプロセスが存在するかどうかを確認します。
-    -   監視マシンとNode_exporterマシン間のネットワークが正常かどうかを確認してください。
+    -   監視マシンとNode_exporterマシン間のネットワークが正常かどうかを確認します。
 
 #### <code>Blackbox_exporter_server_is_down</code> {#code-blackbox-exporter-server-is-down-code}
 

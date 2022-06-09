@@ -123,7 +123,7 @@ summary: Learn about the command-line flags in DM.
 
 ### <code>--config</code> {#code-config-code}
 
--   dmctlの設定ファイルパス
+-   dmctlの構成ファイルパス
 -   デフォルト値は`""`です
 -   オプションのフラグ
 

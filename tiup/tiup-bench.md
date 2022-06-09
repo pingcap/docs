@@ -52,7 +52,7 @@ Flags:
 
 ## TiUPを使用してTPC-Cテストを実行します {#run-tpc-c-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-Cテストを実行するために次のコマンドとフラグをサポートします。
+TiUPベンチコンポーネントは、TPC-Cテストを実行するために次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -130,7 +130,7 @@ Flags:
 
 ## TiUPを使用してTPC-Hテストを実行します {#run-tpc-h-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-Hテストを実行するために次のコマンドとパラメーターをサポートします。
+TiUPベンチコンポーネントは、TPC-Hテストを実行するために次のコマンドとパラメータをサポートしています。
 
 ```bash
 Available Commands:

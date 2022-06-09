@@ -39,7 +39,7 @@ TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prome
 
 上記の構成が完了した後、TiDBクラスタを展開、スケールアウト、スケールイン、またはリロードすると、TiUPはカスタマイズされたルール構成を`rule_dir` （たとえば、 `/home/tidb/prometheus_rule` ）からロードし、それらをPrometheusサーバーに送信してデフォルトのルール構成を置き換えます。 。
 
-### Prometheusスクレイプ構成をカスタマイズする {#customize-prometheus-scrape-configuration}
+### Prometheusスクレイピング構成をカスタマイズする {#customize-prometheus-scrape-configuration}
 
 1.  TiDBクラスタのtopology.yamlファイルを開きます。
 
@@ -70,7 +70,7 @@ TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prome
             action: drop
     ```
 
-上記の構成が完了した後、TiDBクラスタをデプロイ、スケールアウト、スケールイン、またはリロードすると、TiUPはPrometheus構成ファイルの対応するパラメーターに`additional_scrape_conf`フィールドを追加します。
+上記の構成が完了した後、TiDBクラスタを展開、スケールアウト、スケールイン、またはリロードすると、TiUPはPrometheus構成ファイルの対応するパラメーターに`additional_scrape_conf`フィールドを追加します。
 
 ## Grafana構成をカスタマイズする {#customize-grafana-configurations}
 

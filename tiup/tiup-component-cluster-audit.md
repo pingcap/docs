@@ -2,7 +2,7 @@
 title: tiup cluster audit
 ---
 
-# tiupクラスタ監査 {#tiup-cluster-audit}
+# tiup cluster audit {#tiup-cluster-audit}
 
 `tiup cluster audit`コマンドは、履歴内のすべてのクラスターで実行されたコマンドと、各コマンドの実行ログを表示するために使用されます。
 
@@ -31,4 +31,4 @@ tiup cluster audit [audit-id] [flags]
     -   時間：レコードに対応するコマンドの実行時間
     -   コマンド：レコードに対応するコマンド
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -86,7 +86,7 @@
 1.  プロジェクトにアクセス： [https://github.com/pingcap/docs](https://github.com/pingcap/docs)
 2.  右上の[**フォーク**]ボタンをクリックして、完了するまで待ちます。
 
-### ステップ2：フォークされたリポジトリをローカルストレージにクローンする {#step-2-clone-the-forked-repository-to-local-storage}
+### ステップ2：フォークされたリポジトリをローカルストレージに複製する {#step-2-clone-the-forked-repository-to-local-storage}
 
 ```
 cd $working_dir # Comes to the directory that you want put the fork in, for example, "cd ~/Documents/GitHub"

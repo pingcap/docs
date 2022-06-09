@@ -3,7 +3,7 @@ title: Temporary Tables
 summary: Learn the temporary tables feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
 ---
 
-# 一時的なテーブル {#temporary-tables}
+# 一時テーブル {#temporary-tables}
 
 一時テーブル機能は、TiDBv5.3.0で導入されました。この機能は、アプリケーションの中間結果を一時的に保存する問題を解決します。これにより、テーブルを頻繁に作成および削除する必要がなくなります。中間計算データを一時テーブルに保存できます。中間データが不要になると、TiDBは一時テーブルを自動的にクリーンアップしてリサイクルします。これにより、ユーザーアプリケーションが複雑になりすぎるのを防ぎ、テーブル管理のオーバーヘッドを減らし、パフォーマンスを向上させます。
 
@@ -151,7 +151,7 @@ SELECT * FROM users;
 TiDBローカル一時テーブルの次の機能と制限は、MySQL一時テーブルと同じです。
 
 -   ローカル一時テーブルを作成または削除しても、現在のトランザクションは自動的にコミットされません。
--   ローカル一時テーブルが配置されているスキーマを削除した後も、一時テーブルは削除されず、読み取りと書き込みが可能です。
+-   ローカル一時テーブルが配置されているスキーマを削除した後、一時テーブルは削除されず、読み取りと書き込みが可能です。
 -   ローカル一時テーブルを作成するには、 `CREATE TEMPORARY TABLES`の権限が必要です。テーブルに対する後続のすべての操作には、許可は必要ありません。
 -   ローカル一時テーブルは、外部キーとパーティションテーブルをサポートしていません。
 -   ローカル一時テーブルに基づくビューの作成はサポートされていません。
@@ -161,7 +161,7 @@ TiDBのローカル一時テーブルは、次の点でMySQL一時テーブル�
 
 -   TiDBローカル一時テーブルは`ALTER TABLE`をサポートしていません。
 -   TiDBローカル一時テーブルは`ENGINE`テーブルオプションを無視し、一時テーブルデータを常に[メモリ制限](#limit-the-memory-usage-of-temporary-tables)でTiDBメモリに保存します。
--   `MEMORY`がストレージエンジンとして宣言されている場合、TiDBローカル一時テーブルは`MEMORY`ストレージエンジンによって制限されません。
+-   ストレージエンジンとして`MEMORY`が宣言されている場合、TiDBローカル一時テーブルは`MEMORY`ストレージエンジンによって制限されません。
 -   `INNODB`または`MYISAM`がストレージエンジンとして宣言されている場合、TiDBローカル一時テーブルはInnoDB一時テーブルに固有のシステム変数を無視します。
 -   MySQLは、同じSQLステートメントで同じ一時テーブルを複数回参照することを許可していません。 TiDBローカル一時テーブルにはこの制限はありません。
 -   MySQLの一時テーブルを示すシステムテーブル`information_schema.INNODB_TEMP_TABLE_INFO`はTiDBに存在しません。現在、TiDBにはローカル一時テーブルを表示するシステムテーブルがありません。
@@ -296,7 +296,7 @@ TiDBのローカル一時テーブルとグローバル一時テーブルは、�
 
 -   `AUTO_RANDOM`列
 -   `SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`テーブルオプション
--   パーティション化されたテーブル
+-   パーティションテーブル
 -   `SPLIT REGION`ステートメント
 -   `ADMIN CHECK TABLE`および`ADMIN CHECKSUM TABLE`ステートメント
 -   `FLASHBACK TABLE`および`RECOVER TABLE`ステートメント

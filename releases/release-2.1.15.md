@@ -20,7 +20,7 @@ TiDB Ansibleバージョン：2.1.15
 -   `SELECT`のサブクエリのルールを最適化するために射影除去が使用されるため、 `UPDATE … SELECT`のステートメントを使用するとエラーが報告される問題を修正します[＃11254](https://github.com/pingcap/tidb/pull/11254)
 -   プラグインを動的に有効または無効にするには、 `ADMIN PLUGINS ENABLE` / `ADMIN PLUGINS DISABLE`ステートメントを追加します[＃11189](https://github.com/pingcap/tidb/pull/11189)
 -   監査プラグイン[＃11189](https://github.com/pingcap/tidb/pull/11189)にセッション接続情報を追加します
--   列が複数回クエリされ、ポイントクエリ中に返される結果が`NULL`である場合に発生するパニックの問題を修正します[＃11227](https://github.com/pingcap/tidb/pull/11227)
+-   列が複数回クエリされ、ポイントクエリ中に返された結果が`NULL`である場合に発生するパニックの問題を修正します[＃11227](https://github.com/pingcap/tidb/pull/11227)
 -   テーブルを作成するときに、 `tidb_scatter_region`の構成アイテムをスキャッターテーブルリージョンに追加します[＃11213](https://github.com/pingcap/tidb/pull/11213)
 -   `RAND`関数[＃11170](https://github.com/pingcap/tidb/pull/11170)を使用するときに非スレッドセーフ`rand.Rand`によって引き起こされるデータ競合の問題を修正します
 -   整数と非整数の比較結果が正しくない場合がある問題を修正します[＃11191](https://github.com/pingcap/tidb/pull/11191)

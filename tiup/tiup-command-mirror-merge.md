@@ -2,7 +2,7 @@
 title: tiup mirror merge
 ---
 
-# tiupミラーマージ {#tiup-mirror-merge}
+# tiup mirror merge {#tiup-mirror-merge}
 
 `tiup mirror merge`コマンドは、1つ以上のミラーを現在のミラーにマージするために使用されます。
 

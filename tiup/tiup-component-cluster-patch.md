@@ -2,7 +2,7 @@
 title: tiup cluster patch
 ---
 
-# tiupクラスタパッチ {#tiup-cluster-patch}
+# tiup cluster patch {#tiup-cluster-patch}
 
 クラスタの実行中にサービスのバイナリを動的に置換する必要がある場合（つまり、置換プロセス中にクラスタを使用可能な状態に保つ必要がある場合）、 `tiup cluster patch`コマンドを使用できます。コマンドが実行された後、TiUPは次のことを行います。
 
@@ -25,7 +25,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 次の手順に従って、このコマンドに必要なバイナリパッケージを事前にパックする必要があります。
 
--   交換するコンポーネントの名前`${component}` （tidb、tikv、pd ...）、コンポーネントの`${version}` （v4.0.0、v4.0.1 ...）、およびオペレーティングシステム`${os}` （ `linux` ）とプラットフォーム`${arch}`を決定します。コンポーネントが実行される場所。
+-   置き換えるコンポーネントの名前`${component}` （tidb、tikv、pd ...）、コンポーネントの`${version}` （v4.0.0、v4.0.1 ...）、およびオペレーティングシステム`${os}` （ `linux` ）とプラットフォーム`${arch}`を決定します。コンポーネントが実行される場所。
 -   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネントパッケージをダウンロードします。
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
 -   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリパッケージを解凍します。
@@ -88,4 +88,4 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -33,7 +33,7 @@ summary: Understand how to deal with the alert information in DM.
     アラートを処理するには、次の手順を実行できます。
 
     1.  対応するDM-workerノードの動作ステータスを表示します。
-    2.  ノードが接続されているかどうかを確認します。
+    2.  ノードが接続されているか確認してください。
     3.  ログを介してエラーをトラブルシューティングします。
 
 ### <code>DM_DDL_error</code> {#code-dm-ddl-error-code}
@@ -74,7 +74,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    リレーログ処理ユニットでエラーが発生すると、このユニットは`Paused`状態に移行し、すぐにアラートがトリガーされます。
+    リレーログ処理ユニットがエラーに遭遇すると、このユニットは`Paused`状態に移行し、アラートが即座にトリガーされます。
 
 -   解決：
 
@@ -90,7 +90,7 @@ summary: Understand how to deal with the alert information in DM.
 
     アラートを処理するには、次の方法を使用できます。
 
-    -   不要なデータを手動で削除して、ディスクの空き容量を増やしてください。
+    -   不要なデータを手動で削除して、空きディスク容量を増やします。
     -   [リレーログの自動データパージ戦略](/dm/relay-log.md#automatic-data-purge)または[データを手動でパージする](/dm/relay-log.md#manual-data-purge)を再構成します。
     -   コマンド`pause-relay`を実行して、リレーログプルプロセスを一時停止します。十分な空きディスク容量ができたら、コマンド`resume-relay`を実行してプロセスを再開します。リレーログプルプロセスが一時停止した後、プルされていないアップストリームbinlogファイルをパージしてはならないことに注意してください。
 
@@ -140,7 +140,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    ダンプ処理ユニットでエラーが発生すると、このユニットは`Paused`状態に移行し、すぐにアラートがトリガーされます。
+    ダンプ処理装置でエラーが発生すると、本装置は`Paused`状態に移行し、直ちにアラートがトリガーされます。
 
 -   解決：
 
@@ -150,7 +150,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    負荷処理ユニットでエラーが発生すると、このユニットは`Paused`状態に移行し、すぐにアラートがトリガーされます。
+    負荷処理装置でエラーが発生すると、本装置は`Paused`状態に移行し、直ちにアラートがトリガーされます。
 
 -   解決：
 
@@ -182,7 +182,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    現在のリレーログ処理ユニット内のbinlogファイルの数がbinlog複製処理ユニットによって処理された最新のbinlogファイルの数を10分間1**以上超える**と、アラートがトリガーされます。
+    現在のリレーログ処理装置内のbinlogファイルの数が、binlog複製処理装置によって処理された最新のbinlogファイルの数を10分間1**以上超える**と、アラートがトリガーされます。
 
 -   解決：
 

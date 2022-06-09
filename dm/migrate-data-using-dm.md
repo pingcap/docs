@@ -64,7 +64,7 @@ MySQLホストに必要な特権のリストは、 [事前チェック](/dm/dm-p
     tiup dmctl --master-addr 172.16.10.71:8261 operate-source create conf/source1.yaml
     ```
 
-3.  MySQL-2の場合、構成ファイルの関連情報を変更して、同じ`dmctl`コマンドを実行します。
+3.  MySQL-2の場合、構成ファイルの関連情報を変更し、同じ`dmctl`コマンドを実行します。
 
 ## ステップ4：データ移行タスクを構成する {#step-4-configure-the-data-migration-task}
 
@@ -186,5 +186,5 @@ Prometheus、Alertmanager、およびGrafanaが、TiUPを使用したDMクラス
 
 DMクラスタの実行中、DM-master、DM-worker、およびdmctlは、ログを介して監視メトリック情報を出力します。各コンポーネントのログディレクトリは次のとおりです。
 
--   DM-masterログディレクトリ： `--log-file`のDM-masterプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDMマスターノードで`{log_dir}`です。
--   DM-workerログディレクトリ： `--log-file` -workerプロセスパラメータで指定されます。 DMがTiUPを使用してデプロイされている場合、ログディレクトリはDM-workerノードで`{log_dir}`です。
+-   DM-masterログディレクトリ： `--log-file`のDM-masterプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDMマスターノードの`{log_dir}`です。
+-   DM-workerログディレクトリ： `--log-file` -workerプロセスパラメータで指定されます。 DMがTiUPを使用して展開されている場合、ログディレクトリはDM-workerノードで`{log_dir}`です。

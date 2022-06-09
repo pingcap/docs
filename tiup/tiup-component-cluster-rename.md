@@ -2,9 +2,9 @@
 title: tiup cluster rename
 ---
 
-# クラスタの名前変更 {#tiup-cluster-rename}
+# tiup cluster rename {#tiup-cluster-rename}
 
-クラスタ名は[クラスタがデプロイされます](/tiup/tiup-component-cluster-deploy.md)の場合に指定されます。クラスタのデプロイ後にクラスタ名を変更する場合は、コマンド`tiup cluster rename`を使用できます。
+クラスタ名は[クラスタがデプロイされます](/tiup/tiup-component-cluster-deploy.md)のときに指定されます。クラスタのデプロイ後にクラスタ名を変更する場合は、コマンド`tiup cluster rename`を使用できます。
 
 > **ノート：**
 >
@@ -34,4 +34,4 @@ tiup cluster rename <old-cluster-name> <new-cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

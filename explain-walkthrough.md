@@ -65,7 +65,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 上記のクエリ例は、実行に`1.03`秒かかります。これは、理想的なパフォーマンスです。
 
-上記の`EXPLAIN ANALYZE`の結果から、 `actRows`は、推定値（ `estRows` ）の一部が不正確であることを示しています（1万行を期待していますが、1900万行が見つかります）。これは、 `└─TableFullScan_18`の`operator info` （ `stats:pseudo` ）ですでに示されています。最初に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行し、次に`EXPLAIN ANALYZE`を再度実行すると、見積もりがはるかに近いことがわかります。
+上記の`EXPLAIN ANALYZE`の結果から、 `actRows`は、推定値（ `estRows` ）の一部が不正確であることを示します（1万行を期待しますが、1900万行を検出します）。これは、 `└─TableFullScan_18`の`operator info` （ `stats:pseudo` ）ですでに示されています。最初に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を実行し、次に`EXPLAIN ANALYZE`を再度実行すると、見積もりがはるかに近いことがわかります。
 
 {{< copyable "" >}}
 
@@ -89,7 +89,7 @@ Query OK, 0 rows affected (10.22 sec)
 5 rows in set (0.93 sec)
 ```
 
-`ANALYZE TABLE`が実行された後、 `└─TableFullScan_18`演算子の推定行が正確であり、 `└─Selection_19`の推定もはるかに近いことがわかります。上記の2つのケースでは、実行プラン（TiDBがこのクエリを実行するために使用する一連の演算子）は変更されていませんが、統計が古くなっているために最適ではないプランが発生することがよくあります。
+`ANALYZE TABLE`が実行された後、 `└─TableFullScan_18`演算子の推定行が正確であり、 `└─Selection_19`の推定もはるかに近いことがわかります。上記の2つのケースでは、実行プラン（TiDBがこのクエリを実行するために使用する演算子のセット）は変更されていませんが、統計が古くなっているために最適ではないプランが発生することがよくあります。
 
 `ANALYZE TABLE`に加えて、TiDBは、しきい値[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)に達した後、バックグラウンド操作として統計を自動的に再生成します。 [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md)ステートメントを実行すると、TiDBがこのしきい値にどれだけ近いか（TiDBが統計をどの程度健全であると見なすか）を確認できます。
 

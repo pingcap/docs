@@ -2,7 +2,7 @@
 title: tiup dm list
 ---
 
-# tiupdmリスト {#tiup-dm-list}
+# tiup dm list {#tiup-dm-list}
 
 `tiup-dm`は、同じ制御マシンを使用した複数のクラスターのデプロイをサポートします。 `tiup dm list`コマンドを使用して、現在ログインしているユーザーがコントロールマシンを使用して展開されているクラスターを確認できます。
 

@@ -19,10 +19,10 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 -   SQLオプティマイザー
     -   より多くのシナリオに参加するインデックスをサポートする[＃10540](https://github.com/pingcap/tidb/pull/10540)
     -   履歴統計のエクスポートをサポート[＃10291](https://github.com/pingcap/tidb/pull/10291)
-    -   単調に増加するインデックス列[＃10355](https://github.com/pingcap/tidb/pull/10355)でインクリメンタル`Analyze`操作をサポートします。
+    -   単調に増加するインデックス列[＃10355](https://github.com/pingcap/tidb/pull/10355)でインクリメンタル`Analyze`操作をサポートします
     -   `Order By`節[＃10488](https://github.com/pingcap/tidb/pull/10488)のNULL値を無視します
     -   列情報を単純化するときの`UnionAll`論理演算子の誤ったスキーマ情報計算を修正します[＃10384](https://github.com/pingcap/tidb/pull/10384)
-    -   `Not`演算子[＃10363](https://github.com/pingcap/tidb/pull/10363/files)を押し下げるときは、元の式を変更しないでください。
+    -   `Not`演算子[＃10363](https://github.com/pingcap/tidb/pull/10363/files)を押すときは、元の式を変更しないでください。
     -   ヒストグラムの`dump`相関を[＃10573](https://github.com/pingcap/tidb/pull/10573) `load`
 
 -   実行エンジン
@@ -36,21 +36,21 @@ TiDB Ansibleバージョン：3.0.0-rc.2
     -   TiKV [＃10301](https://github.com/pingcap/tidb/pull/10301)で障害が発生したときに、TiDBがTiKVへの新しい接続を継続的に作成する問題を修正します。
     -   書き込み競合エラーだけでなく、 `tidb_disable_txn_auto_retry`をすべての再試行可能なエラーに影響させる[＃10339](https://github.com/pingcap/tidb/pull/10339)
     -   パラメータなしの`execute` [＃10144](https://github.com/pingcap/tidb/pull/10144)を`prepare`を使用して実行できるようにする
-    -   `tidb_back_off_weight`変数を追加して、バックオフ時間を制御します[＃10266](https://github.com/pingcap/tidb/pull/10266)
+    -   `tidb_back_off_weight`の変数を追加して、バックオフ時間を制御します[＃10266](https://github.com/pingcap/tidb/pull/10266)
     -   デフォルト値の`tidb_disable_txn_auto_retry`から35を設定することにより、 `on`がデフォルト条件で自動コミットされていないトランザクションを再試行することを禁止し[＃10266](https://github.com/pingcap/tidb/pull/10266) 。
     -   `RBAC`分の`role`のデータベース特権判断を修正[＃10261](https://github.com/pingcap/tidb/pull/10261)
     -   悲観的なトランザクションモードをサポートする（実験的） [＃10297](https://github.com/pingcap/tidb/pull/10297)
     -   場合によっては、ロックの競合を処理するための待機時間を短縮します[＃10006](https://github.com/pingcap/tidb/pull/10006)
     -   リーダーノード[＃10256](https://github.com/pingcap/tidb/pull/10256)で障害が発生したときに、リージョンキャッシュがフォロワーノードにアクセスできるようにします。
-    -   `tidb_low_resolution_tso`変数を追加して、バッチで取得されるTSOの数を制御し、TSOを取得するトランザクションの時間を短縮して、データの一貫性がそれほど厳密に要求されないシナリオに適応させます[＃10428](https://github.com/pingcap/tidb/pull/10428)
+    -   `tidb_low_resolution_tso`の変数を追加して、バッチで取得されるTSOの数を制御し、TSOを取得するトランザクションの時間を短縮して、データの整合性がそれほど厳密に要求されないシナリオに適応させます[＃10428](https://github.com/pingcap/tidb/pull/10428)
 
 -   DDL
     -   古いバージョンの[＃10272](https://github.com/pingcap/tidb/pull/10272)のストレージにある文字セット名の大文字の問題を修正しました
-    -   テーブルパーティションの`preSplit`をサポートします。これは、テーブルの作成時にテーブルリージョンを事前に割り当てて、テーブルの作成後にホットスポットを書き込まないようにします[＃10221](https://github.com/pingcap/tidb/pull/10221)
+    -   テーブルの作成時にホットスポットの書き込みを回避するために、テーブルの作成時にテーブル領域を事前に割り当てるテーブルパーティションの`preSplit`をサポートします[＃10221](https://github.com/pingcap/tidb/pull/10221)
     -   TiDBがPDのバージョン情報を誤って更新する場合がある問題を修正します[＃10324](https://github.com/pingcap/tidb/pull/10324)
     -   `ALTER DATABASE`ステートメント[＃10393](https://github.com/pingcap/tidb/pull/10393)を使用した文字セットと照合順序の変更をサポートします。
     -   ホットスポットの問題を軽減するために、指定されたテーブルのインデックスと範囲に基づいてリージョンを分割することをサポートします[＃10203](https://github.com/pingcap/tidb/pull/10203)
-    -   `alter table`ステートメントを使用して10進列の精度を変更することを禁止する[＃10433](https://github.com/pingcap/tidb/pull/10433)
+    -   `alter table`ステートメント[＃10433](https://github.com/pingcap/tidb/pull/10433)を使用して、10進列の精度を変更することを禁止します。
     -   ハッシュパーティション[＃10273](https://github.com/pingcap/tidb/pull/10273)の式と関数の制限を修正しました
     -   パーティションを含むテーブルにインデックスを追加すると、場合によってはTiDBパニックが発生する問題を修正します[＃10475](https://github.com/pingcap/tidb/pull/10475)
     -   無効なテーブルスキーマを回避するために、DDLを実行する前にテーブル情報を検証します[＃10464](https://github.com/pingcap/tidb/pull/10464)

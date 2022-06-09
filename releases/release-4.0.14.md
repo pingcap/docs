@@ -81,8 +81,8 @@ TiDBバージョン：4.0.14
 -   TiDB
 
     -   [＃24865](https://github.com/pingcap/tidb/issues/24865)と評価された`WHERE`句でサブクエリを結合するときに`SELECT`の結果がMySQLと互換性がないという問題を修正し`false`
-    -   引数が`ENUM`または`SET`タイプ[＃24944](https://github.com/pingcap/tidb/issues/24944)の場合に発生する`ifnull`関数の計算エラーを修正します
-    -   場合によっては、間違った集約プルーニングを修正します[＃25202](https://github.com/pingcap/tidb/issues/25202)
+    -   引数が`ENUM`または`SET`タイプ[＃24944](https://github.com/pingcap/tidb/issues/24944)の場合に発生する`ifnull`関数の計算エラーを修正しました
+    -   場合によっては、間違った集計プルーニングを修正します[＃25202](https://github.com/pingcap/tidb/issues/25202)
     -   列が`SET`タイプ[＃25669](https://github.com/pingcap/tidb/issues/25669)の場合に発生する可能性があるマージ結合操作の誤った結果を修正します
     -   TiDBがデカルト結合[＃25591](https://github.com/pingcap/tidb/issues/25591)に対して誤った結果を返す問題を修正します
     -   `SELECT ... FOR UPDATE`が結合操作で機能し、結合がパーティションテーブル[＃20028](https://github.com/pingcap/tidb/issues/20028)を使用する場合に発生するパニックの問題を修正します。
@@ -94,7 +94,7 @@ TiDBバージョン：4.0.14
     -   `DateTime`を解析するときに無効な文字列が切り捨てられない問題を修正し[＃22231](https://github.com/pingcap/tidb/issues/22231)
     -   列タイプが[＃22159](https://github.com/pingcap/tidb/issues/22159)の場合、 `select into outfile`ステートメントで結果が得られない可能性がある問題を修正し`YEAR` 。
     -   `NULL`が`UNION`サブクエリ[＃26532](https://github.com/pingcap/tidb/issues/26532)にある場合、クエリ結果が間違っている可能性がある問題を修正します。
-    -   実行中のプロジェクションオペレーターが場合によってはパニックを引き起こす可能性がある問題を修正します[＃26534](https://github.com/pingcap/tidb/pull/26534)
+    -   実行中の射影演算子が場合によってはパニックを引き起こす可能性がある問題を修正します[＃26534](https://github.com/pingcap/tidb/pull/26534)
 
 -   TiKV
 
@@ -103,7 +103,7 @@ TiDBバージョン：4.0.14
     -   非同期ロガーを使用するとパニックログが失われる可能性がある問題を修正します[＃8998](https://github.com/tikv/tikv/issues/8998)
     -   暗号化が有効になっている場合にスナップショットを2回作成するときに発生するパニックの問題を修正し[＃10407](https://github.com/tikv/tikv/issues/10407) [＃9786](https://github.com/tikv/tikv/issues/9786)
     -   コプロセッサー[＃10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数タイプを修正してください
-    -   シャットダウン中の疑わしい警告と[＃10307](https://github.com/tikv/tikv/issues/10307)からの非決定的な応答の問題を修正します[＃10353](https://github.com/tikv/tikv/issues/10353)
+    -   シャットダウン中の疑わしい警告と[＃10307](https://github.com/tikv/tikv/issues/10307)からの非決定論的応答の問題を修正します[＃10353](https://github.com/tikv/tikv/issues/10353)
     -   バックアップスレッドリークの問題を修正[＃10287](https://github.com/tikv/tikv/issues/10287)
     -   分割プロセスが遅すぎてリージョンのマージが進行中の場合、リージョンの分割がパニックになり、メタデータが破損する可能性がある問題を修正します[＃8456](https://github.com/tikv/tikv/issues/8456) [＃8783](https://github.com/tikv/tikv/issues/8783)
     -   リージョンのハートビートにより、状況によってはTiKVが大きなリージョンを分割できない問題を修正します[＃10111](https://github.com/tikv/tikv/issues/10111)
@@ -116,7 +116,7 @@ TiDBバージョン：4.0.14
     -   削除操作の実行後にスケジューラーが再表示される可能性があるバグを修正します[＃2572](https://github.com/tikv/pd/issues/2572)
     -   一時構成がロードされる前にスケジューラーが開始されたときに発生する可能性のあるデータ競合の問題を修正します[＃3771](https://github.com/tikv/pd/issues/3771)
     -   領域散乱操作中に発生する可能性のあるPDパニックの問題を修正します[＃3761](https://github.com/pingcap/pd/pull/3761)
-    -   一部のオペレーターの優先度が正しく設定されていない問題を修正します[＃3703](https://github.com/pingcap/pd/pull/3703)
+    -   一部の演算子の優先度が正しく設定されていない問題を修正します[＃3703](https://github.com/pingcap/pd/pull/3703)
     -   存在しないストアから`evict-leader`のスケジューラーを削除するときに発生する可能性のあるPDパニックの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
     -   店舗が多い場合にPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
 
@@ -148,7 +148,7 @@ TiDBバージョン：4.0.14
 
         -   TiDBLightningがParquetファイルの`DECIMAL`タイプのデータの解析に失敗する問題を修正します[＃1276](https://github.com/pingcap/br/pull/1276)
         -   TiDBLightningがインポートされた大きなCSVファイルを分割するときに報告されるEOFエラーを修正します[＃1133](https://github.com/pingcap/br/issues/1133)
-        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプ[＃1185](https://github.com/pingcap/br/pull/1185)の`auto_increment`列のテーブルをインポートすると、非常に大きな基本値が生成されるバグを修正します。
+        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプ[＃1185](https://github.com/pingcap/br/pull/1185)の`auto_increment`列のテーブルをインポートすると、非常に大きなベース値が生成されるバグを修正します。
         -   4GBを超えるKVデータを生成するときに発生するTiDBLightningパニックの問題を修正します[＃1128](https://github.com/pingcap/br/pull/1128)
 
     -   Dumpling

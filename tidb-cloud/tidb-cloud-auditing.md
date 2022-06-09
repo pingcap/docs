@@ -21,8 +21,8 @@ TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステー�
 
 ## 前提条件 {#prerequisites}
 
--   TiDBCloudDedicated層またはPOC層を使用しています。監査ログは、TiDB Cloud開発者層クラスターでは使用できません。
--   あなたはTiDBCloudの組織の監査管理者です。そうしないと、TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
+-   TiDB Cloud専用層またはPOC層を使用しています。監査ログは、 TiDB Cloud開発者層クラスターでは使用できません。
+-   あなたはTiDB Cloudの組織の監査管理者です。そうしないと、 TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
 
 ## AWSまたはGCPの監査ログを有効にする {#enable-audit-logging-for-aws-or-gcp}
 
@@ -37,7 +37,7 @@ AWSの監査ログを有効にするには、次の手順を実行します。
 
 #### ステップ1.AmazonS3バケットを作成します {#step-1-create-an-amazon-s3-bucket}
 
-TiDBCloudが監査ログを書き込む宛先として企業所有のAWSアカウントでAmazonS3バケットを指定します。
+TiDB Cloudバケットを指定します。
 
 詳細については、AWSユーザーガイドの[バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
@@ -52,7 +52,7 @@ TiDBCloudが監査ログを書き込む宛先として企業所有のAWSアカ�
     1.  TiDB Cloudコンソールで、AWSにデプロイされたプロジェクトとクラスタを選択します。
     2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>ログの監査</strong>]ダイアログボックスが表示されます。
     3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>ShowAWSIAMポリシー設定</strong>]をクリックします。対応するTiDB CloudアカウントIDとTiDBクラスタのTiDB Cloud外部IDが表示されます。
-    4.  後で使用するために、TiDB CloudアカウントIDと外部IDを記録します。
+    4.  後で使用するために、 TiDB CloudアカウントIDと外部IDを記録します。
 
 2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、 `s3:PutObject`の書き込み専用アクセス許可を持つストレージバケットポリシーが存在するかどうかを確認します。
 
@@ -88,7 +88,7 @@ TiDBCloudが監査ログを書き込む宛先として企業所有のAWSアカ�
 
 #### 手順3.監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、TiDB CloudアカウントIDと外部ID値を取得した[**ログの監査**]ダイアログボックスに戻り、次の手順を実行します。
+TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部ID値を取得した[**ログの監査**]ダイアログボックスに戻り、次の手順を実行します。
 
 1.  [**バケットURL]**フィールドに、監査ログファイルが書き込まれるS3バケットのURLを入力します。
 
@@ -96,7 +96,7 @@ TiDB Cloudコンソールで、TiDB CloudアカウントIDと外部ID値を取�
 
 3.  [**役割ARN]**フィールドに、 [ステップ2.AmazonS3アクセスを設定します](#step-2-configure-amazon-s3-access)でコピーした役割ARN値を入力します。
 
-4.  [**接続のテスト**]をクリックして、TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
+4.  [**接続のテスト**]をクリックして、 TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
 
     成功すると、**パス**が表示されます。それ以外の場合は、アクセス構成を確認してください。
 
@@ -123,7 +123,7 @@ TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPア�
 
 詳細については、GoogleCloudStorageのドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)をご覧ください。
 
-#### 手順2.GCSアクセスを構成する {#step-2-configure-gcs-access}
+#### ステップ2.GCSアクセスを構成する {#step-2-configure-gcs-access}
 
 > **ノート：**
 >
@@ -142,7 +142,7 @@ TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPア�
 
     はいの場合、後で使用するためにTiDBクラスタの一致した役割を記録します。そうでない場合は、[ **IAMと管理**]&gt;[<strong>ロール</strong>]&gt;[ <strong>CREATE ROLE</strong> ]に移動して、TiDBクラスタのロールを定義します。
 
-3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、TiDB CloudがアクセスするGCSバケットを選択して、 <strong>SHOWINFOPANEL</strong>をクリックします。
+3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、 TiDB CloudがアクセスするGCSバケットを選択して、 <strong>SHOWINFOPANEL</strong>をクリックします。
 
     パネルが表示されます。
 
@@ -158,13 +158,13 @@ TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPア�
 
 #### 手順3.監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[AuditLogging]ダイアログボックスに戻り、次の手順を実行します。
+TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[TiDB Cloud ]ダイアログボックスに戻り、次の手順を実行します。
 
 1.  [**バケットURL]**フィールドに、完全なGCSバケット名を入力します。
 
 2.  [**バケット領域**]フィールドで、バケットが配置されているGCS領域を選択します。
 
-3.  [**接続のテスト**]をクリックして、TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
+3.  [**接続のテスト**]をクリックして、 TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
 
     成功すると、**パス**が表示されます。それ以外の場合は、アクセス構成を確認してください。
 
@@ -182,7 +182,7 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[Au
 
 ## 監査フィルタールールを指定する {#specify-auditing-filter-rules}
 
-監査ログを有効にした後、監査フィルタールールを指定して、どのユーザーアクセスイベントをキャプチャして監査ログに書き込むか、どのイベントを無視するかを制御する必要があります。フィルタルールが指定されていない場合、TiDBCloudは何もログに記録しません。
+監査ログを有効にした後、監査フィルタールールを指定して、どのユーザーアクセスイベントをキャプチャして監査ログに書き込むか、どのイベントを無視するかを制御する必要があります。フィルタルールが指定されていない場合、 TiDB Cloudは何もログに記録しません。
 
 クラスタの監査フィルタルールを指定するには、次の手順を実行します。
 

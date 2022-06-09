@@ -58,9 +58,9 @@ MySQL [test]> select * from tbl;
 
 -   `schema` ：一致するアップストリームスキーマの名前。ワイルドカードマッチングまたは通常のマッチングはサポートされていません。
 -   `table` ：照合するアップストリームテーブルの名前。ワイルドカードマッチングまたは通常のマッチングはサポートされていません。
--   `insert-value-expr` ： `INSERT`のタイプのbinlogイベント（WRITE_ROWS_EVENT）によって運ばれる値に影響を与える式を構成します。この式を同じ構成`delete-value-expr`の`update-old-value-expr` 、または`update-new-value-expr`と一緒に使用することはできません。
--   `update-old-value-expr` ： `UPDATE`のタイプのbinlogイベント（UPDATE_ROWS_EVENT）によって運ばれる古い値を有効にする式を構成します。この式を同じ構成アイテムで`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
--   `update-new-value-expr` ： `UPDATE`のタイプのbinlogイベント（UPDATE_ROWS_EVENT）によって運ばれる新しい値に影響を与える式を構成します。この式を同じ構成アイテムで`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
+-   `insert-value-expr` ： `INSERT`のタイプのbinlogイベント（WRITE_ROWS_EVENT）によって運ばれる値に影響を与える式を構成します。この式を同じ構成`delete-value-expr`で`update-old-value-expr` 、または`update-new-value-expr`と一緒に使用することはできません。
+-   `update-old-value-expr` ： `UPDATE`のタイプのbinlogイベント（UPDATE_ROWS_EVENT）によって運ばれる古い値を有効にする式を構成します。この式を同じ構成項目で`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
+-   `update-new-value-expr` ： `UPDATE`のタイプのbinlogイベント（UPDATE_ROWS_EVENT）によって運ばれる新しい値に影響を与える式を構成します。この式を同じ構成項目で`insert-value-expr`または`delete-value-expr`と一緒に使用することはできません。
 -   `delete-value-expr` ： `DELETE`のタイプのbinlogイベント（DELETE_ROWS_EVENT）によって運ばれる値に影響を与える式を構成します。この式を`insert-value-expr` 、または`update-old-value-expr`と一緒に使用することはできませ`update-new-value-expr` 。
 
 > **ノート：**

@@ -71,19 +71,19 @@ TiDBバージョン：4.0.11
 
     -   異常な`unicode_ci`定数伝播[＃22614](https://github.com/pingcap/tidb/pull/22614)の問題を修正します
     -   間違った照合順序と強制性を引き起こす可能性のある問題を修正します[＃22602](https://github.com/pingcap/tidb/pull/22602)
-    -   誤った照合順序結果を引き起こす可能性のある問題を修正する[＃22599](https://github.com/pingcap/tidb/pull/22599)
+    -   間違った照合順序結果を引き起こす可能性のある問題を修正します[＃22599](https://github.com/pingcap/tidb/pull/22599)
     -   さまざまな照合の定数置換の問題を修正します[＃22582](https://github.com/pingcap/tidb/pull/22582)
-    -   照合順序[＃22531](https://github.com/pingcap/tidb/pull/22531)を使用すると、 `like`関数が間違った結果を返す可能性があるバグを修正します
-    -   `least`および`greatest`関数[＃22580](https://github.com/pingcap/tidb/pull/22580)での誤った`duration`型推論の問題を修正します。
+    -   照合順序[＃22531](https://github.com/pingcap/tidb/pull/22531)を使用すると、 `like`関数が間違った結果を返す可能性があるバグを修正します。
+    -   `least`および`greatest`関数での誤った`duration`型推論の問題を修正します[＃22580](https://github.com/pingcap/tidb/pull/22580)
     -   `like`関数が単一文字のワイルドカード（ `_` ）とそれに続く複数文字のワイルドカード（ `%` ）を処理するときに発生するバグを修正します[＃22575](https://github.com/pingcap/tidb/pull/22575)
     -   TiDBの組み込み関数（ `least`および`greatest` ）の型推論エラーを修正します[＃22562](https://github.com/pingcap/tidb/pull/22562)
     -   パターン文字列がUnicode文字列[＃22529](https://github.com/pingcap/tidb/pull/22529)の場合、 `like`関数が間違った結果を取得するバグを修正します。
-    -   `@@tidb_snapshot`変数が設定されている場合にポイント取得クエリがスナップショットデータを取得しないバグを修正します[＃22527](https://github.com/pingcap/tidb/pull/22527)
+    -   `@@tidb_snapshot`変数が[＃22527](https://github.com/pingcap/tidb/pull/22527)に設定されている場合、ポイント取得クエリがスナップショットデータを取得しないバグを修正します。
     -   結合からヒントを生成するときに発生する可能性のあるパニックを修正する[＃22518](https://github.com/pingcap/tidb/pull/22518)
     -   文字列が誤って`BIT`タイプ[＃22420](https://github.com/pingcap/tidb/pull/22420)に変換される問題を修正します
     -   `tidb_rowid`列に値を挿入するときに発生する`index out of range`エラーを修正します[＃22359](https://github.com/pingcap/tidb/pull/22359)
     -   キャッシュされたプランが誤って使用されるバグを修正します[＃22353](https://github.com/pingcap/tidb/pull/22353)
-    -   binary/char文字列の長さが長すぎる場合の`WEIGHT_STRING`関数の実行時パニックを修正します[＃22332](https://github.com/pingcap/tidb/pull/22332)
+    -   バイナリ/文字列の長さが長すぎる場合の`WEIGHT_STRING`関数の実行時のパニックを修正します[＃22332](https://github.com/pingcap/tidb/pull/22332)
     -   関数パラメーターの数が無効な場合に生成された列の使用を禁止する[＃22174](https://github.com/pingcap/tidb/pull/22174)
     -   実行計画を作成する前に、プロセス情報を正しく設定する[＃22148](https://github.com/pingcap/tidb/pull/22148)
     -   [＃22136](https://github.com/pingcap/tidb/pull/22136)の不正確な実行時統計の問題を修正し`IndexLookUp`
@@ -101,14 +101,14 @@ TiDBバージョン：4.0.11
     -   `dyname`関数がMySQL3と互換性がないという問題を修正し[＃21850](https://github.com/pingcap/tidb/pull/21850)
     -   入力データが長すぎる場合に`to_base64`関数が`NULL`を返す問題を修正します[＃21813](https://github.com/pingcap/tidb/pull/21813)
     -   サブクエリ[＃21808](https://github.com/pingcap/tidb/pull/21808)の複数のフィールドを比較できない問題を修正しました
-    -   JSON1でfloatタイプを比較するときに発生する問題を修正し[＃21785](https://github.com/pingcap/tidb/pull/21785)
+    -   JSON1でfloat型を比較するときに発生する問題を修正し[＃21785](https://github.com/pingcap/tidb/pull/21785)
     -   JSONオブジェクトのタイプを比較するときに発生する問題を修正します[＃21718](https://github.com/pingcap/tidb/pull/21718)
     -   `cast`関数の強制力の値が誤って設定されている問題を修正します[＃21714](https://github.com/pingcap/tidb/pull/21714)
     -   `IF`関数[＃21711](https://github.com/pingcap/tidb/pull/21711)を使用するときの予期しないパニックを修正します
     -   JSON検索から返される`NULL`の結果がMySQL3と互換性がないという問題を修正し[＃21700](https://github.com/pingcap/tidb/pull/21700)
     -   `ORDER BY`と[＃21697](https://github.com/pingcap/tidb/pull/21697)を使用して`only_full_group_by`モードをチェックするときに発生する問題を修正し`HAVING`
     -   `Day`と`Time`のユニットが[＃21676](https://github.com/pingcap/tidb/pull/21676)と互換性がないという問題を修正します
-    -   デフォルト値の`LEAD`と`LAG`がフィールドタイプ[＃21665](https://github.com/pingcap/tidb/pull/21665)に適応できない問題を修正します
+    -   デフォルト値の`LEAD`と`LAG`がフィールドタイプ[＃21665](https://github.com/pingcap/tidb/pull/21665)に適応できない問題を修正します。
     -   チェックを実行して、 `LOAD DATA`ステートメントがデータをベーステーブル[＃21638](https://github.com/pingcap/tidb/pull/21638)にのみロードできることを確認します。
     -   `addtime`と`subtime`の関数が無効な引数を処理するときに発生する問題を修正します[＃21635](https://github.com/pingcap/tidb/pull/21635)
     -   概算値の丸め規則を「最も近い偶数に丸める」に変更します[＃21628](https://github.com/pingcap/tidb/pull/21628)
@@ -135,18 +135,18 @@ TiDBバージョン：4.0.11
 
 -   TiFlash
 
-    -   `min`の結果が10進数タイプで間違っているバグを修正し`max`
+    -   `min`の結果が10進`max`で間違っているバグを修正します
     -   データの読み取り時にTiFlashがクラッシュする可能性があるバグを修正
     -   DDL操作後に書き込まれた一部のデータがデータ圧縮後に失われる可能性がある問題を修正します
     -   TiFlashがコプロセッサーで10進定数を誤って処理する問題を修正します
-    -   学習者の読み取りプロセス中に発生する可能性のあるクラッシュを修正します
+    -   学習者の読み取りプロセス中に発生する可能性のあるクラッシュを修正
     -   TiDBとTiFlashの間で`0`または`NULL`で除算する際の一貫性のない動作を修正します
 
 -   ツール
 
     -   TiCDC
 
-        -   `ErrTaskStatusNotExists`セッションと`capture`セッションの終了が同時に発生した場合にTiCDCサービスが予期せず終了する可能性があるバグを修正します[＃1240](https://github.com/pingcap/tiflow/pull/1240)
+        -   `ErrTaskStatusNotExists`と`capture`のセッションの終了が同時に発生したときにTiCDCサービスが予期せず終了する可能性があるバグを修正します[＃1240](https://github.com/pingcap/tiflow/pull/1240)
         -   `changefeed`が別の[＃1347](https://github.com/pingcap/tiflow/pull/1347)の影響を受ける可能性があるという古い値スイッチの問題を修正し`changefeed`
         -   無効な`sort-engine`パラメータ[＃1309](https://github.com/pingcap/tiflow/pull/1309)を使用して新しい`changefeed`を処理するときにTiCDCサービスがハングする可能性があるバグを修正します。
         -   非所有者ノードでデバッグ情報を取得するときに発生するパニックの問題を修正します[＃1349](https://github.com/pingcap/tiflow/pull/1349)

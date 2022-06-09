@@ -7,10 +7,10 @@ summary: Learn how to deploy TiDB Dashboard.
 
 TiDBダッシュボードUIは、v4.0以降のバージョンのPDコンポーネントに組み込まれており、追加の展開は必要ありません。標準のTiDBクラスタをデプロイするだけで、TiDBダッシュボードが表示されます。
 
-標準のTiDBクラスタを展開する方法については、次のドキュメントを参照してください。
+標準のTiDBクラスタをデプロイする方法については、次のドキュメントを参照してください。
 
 -   [TiDBデータベースプラットフォームのクイックスタートガイド](/quick-start-with-tidb.md)
--   [TiDBを本番環境にデプロイ](/production-deployment-using-tiup.md)
+-   [実稼働環境にTiDBをデプロイ](/production-deployment-using-tiup.md)
 -   [Kubernetes環境のデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable/access-dashboard)
 
 > **ノート：**

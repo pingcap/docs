@@ -5,7 +5,7 @@ summary: Learn how to filter binlog events when migrating data.
 
 # Binlogイベントをフィルタリングする {#filter-binlog-events}
 
-このドキュメントでは、DMを使用して継続的な増分データレプリケーションを実行するときにbinlogイベントをフィルタリングする方法について説明します。複製手順の詳細については、シナリオごとに次のドキュメントを参照してください。
+このドキュメントでは、DMを使用して継続的な増分データレプリケーションを実行するときにbinlogイベントをフィルタリングする方法について説明します。詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 
 -   [小さなデータセットのMySQLをTiDBに移行する](/migrate-small-mysql-to-tidb.md)
 -   [大規模なデータセットのMySQLをTiDBに移行する](/migrate-large-mysql-to-tidb.md)

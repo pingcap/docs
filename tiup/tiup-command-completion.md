@@ -2,9 +2,9 @@
 title: tiup completion
 ---
 
-# tiup完了 {#tiup-completion}
+# tiup completion {#tiup-completion}
 
-ユーザーコストを削減するために、TiUPは自動コマンドライン補完用の構成ファイルを生成する`tiup completion`のコマンドを提供します。現在、TiUPは`bash`および`zsh`のコマンドの完了をサポートしています。
+ユーザーのコストを削減するために、TiUPは自動コマンドライン補完用の構成ファイルを生成する`tiup completion`のコマンドを提供します。現在、TiUPは`bash`および`zsh`のコマンドの完了をサポートしています。
 
 `bash`のコマンドを完了する場合は、最初に`bash-completion`をインストールする必要があります。次の手順を参照してください。
 
@@ -21,7 +21,7 @@ tiup completion <shell>
 
 ## 使用法 {#usage}
 
-### バッシュ {#bash}
+### bash {#bash}
 
 `tiup completion bash`コマンドをファイルに書き込み、 `.bash_profile`でファイルを調達します。次の例を参照してください。
 

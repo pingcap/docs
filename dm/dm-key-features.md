@@ -9,8 +9,8 @@ summary: Learn about the key features of DM and appropriate parameter configurat
 
 異なるDMバージョンの場合、テーブルルーティング、ブロックおよび許可リスト、およびbinlogイベントフィルター機能のスキーマ名またはテーブル名の異なる一致ルールに注意してください。
 
--   DM v1.0.5以降のバージョンでは、上記のすべての機能が[ワイルドカード一致](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートします。 DMのすべてのバージョンで、ワイルドカード式に含めることができる`*`は**1つだけ**であり、 `*`<strong>を最後に配置する必要が</strong>あることに注意してください。
--   v1.0.5より前のDMバージョンの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
+-   DM v1.0.5以降のバージョンでは、上記のすべての機能が[ワイルドカード一致](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートします。 DMのすべてのバージョンで、ワイルドカード式には`*`を**1つしか**含めることができず<strong>、最後に</strong>`*`を配置する必要があることに注意してください。
+-   v1.0.5より前のバージョンのDMの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
 
 単純なシナリオでの照合には、ワイルドカードを使用することをお勧めします。
 
@@ -135,7 +135,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 -   `do-tables` ：MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table)と同様に、テーブルのリストを移行できるようにします。 `db-name`と`tbl-name`の両方を指定する必要があります
 -   `ignore-tables` ：MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)と同様に、移行するテーブルのブロックリスト。 `db-name`と`tbl-name`の両方を指定する必要があります
 
-上記のパラメーターの値が`~`文字で始まる場合、この値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターを使用して、スキーマ名またはテーブル名を照合できます。
+上記のパラメータの値が`~`文字で始まる場合、この値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターを使用して、スキーマ名またはテーブル名を照合できます。
 
 ### フィルタリングプロセス {#filtering-process}
 
@@ -151,7 +151,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 フィルタリングプロセスは次のとおりです。
 
-1.  スキーマレベルでのフィルタリング：
+1.  スキーマレベルでのフィルター：
 
     -   `do-dbs`が空でない場合は、一致するスキーマが`do-dbs`に存在するかどうかを判断します。
 
@@ -421,7 +421,7 @@ DMは、アップストリームのMySQL / MariaDBシャードテーブルのDML
 
 ### 制限 {#restrictions}
 
-現在、シャードマージ機能は、限られたシナリオでのみサポートされています。詳細については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)と[オプティミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
+現在、シャードマージ機能は限られたシナリオでのみサポートされています。詳細については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)と[オプティミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
 ### パラメータ設定 {#parameter-configuration}
 

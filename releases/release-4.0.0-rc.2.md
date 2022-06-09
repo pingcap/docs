@@ -39,7 +39,7 @@ TiDBバージョン：4.0.0-rc.2
     -   TiKVの応答が遅いがダウンしていない場合は、不要なRegionMissの再試行を避けてください[＃16956](https://github.com/pingcap/tidb/pull/16956)
     -   MySQLプロトコルのハンドシェイクフェーズでクライアントのログレベルを`DEBUG`に変更して、ログ出力[＃16881](https://github.com/pingcap/tidb/pull/16881)に干渉する問題を解決します。
     -   `TRUNCATE`の操作の後にテーブルで定義された`PRE_SPLIT_REGIONS`の情報に従ってリージョンが事前に分割されないという問題を修正します[＃16776](https://github.com/pingcap/tidb/pull/16776)
-    -   2フェーズコミット[＃16876](https://github.com/pingcap/tidb/pull/16876)の第2フェーズでTiKVが使用できない場合に、再試行によって発生するゴルーチンの急上昇の問題を修正します。
+    -   2フェーズコミットの第2フェーズでTiKVが使用できない場合に、再試行によって発生するゴルーチンの急上昇の問題を修正します[＃16876](https://github.com/pingcap/tidb/pull/16876)
     -   一部の式をプッシュダウンできない場合のステートメント実行のパニック問題を修正[＃16869](https://github.com/pingcap/tidb/pull/16869)
     -   パーティションテーブル[＃17124](https://github.com/pingcap/tidb/pull/17124)でのIndexMerge操作の誤った実行結果を修正します
     -   メモリトラッカー[＃17234](https://github.com/pingcap/tidb/pull/17234)のミューテックス競合によって引き起こされる`wide_table`のパフォーマンス低下を修正しました
@@ -57,9 +57,9 @@ TiDBバージョン：4.0.0-rc.2
     -   最後に実行されたステートメントがプランキャッシュにヒットするかどうかを示すために、スコープが`Session`の新しい`LAST_PLAN_FROM_CACHE`変数を追加します[＃16830](https://github.com/pingcap/tidb/pull/16830)
     -   `Cop_time`の情報を低速ログに記録し、 `SLOW_LOG`の表を[＃16904](https://github.com/pingcap/tidb/pull/16904)に記録することをサポートします。
     -   GoRuntime1のメモリステータスを監視するメトリックをGrafanaに追加し[＃16928](https://github.com/pingcap/tidb/pull/16928)
-    -   一般ログ[＃16946](https://github.com/pingcap/tidb/pull/16946)での`forUpdateTS`および`Read Consistency`の分離レベル情報の出力をサポートします。
+    -   一般ログ[＃16946](https://github.com/pingcap/tidb/pull/16946)での`forUpdateTS`および`Read Consistency`の分離レベル情報の出力をサポートします
     -   TiKVリージョン[＃16925](https://github.com/pingcap/tidb/pull/16925)でロックを解決する重複リクエストの折りたたみをサポート
-    -   `SET CONFIG`ステートメントを使用してPD/TiKVノードの構成を変更することをサポートします[＃16853](https://github.com/pingcap/tidb/pull/16853)
+    -   `SET CONFIG`ステートメントを使用してPD/TiKVノードの構成を変更することをサポート[＃16853](https://github.com/pingcap/tidb/pull/16853)
     -   `CREATE TABLE`ステートメント[＃16813](https://github.com/pingcap/tidb/pull/16813)で`auto_random`オプションをサポートする
     -   DistSQLリクエストにTaskIDを割り当てて、TiKVがリクエストをより適切にスケジュールおよび処理できるようにします[＃17155](https://github.com/pingcap/tidb/pull/17155)
     -   MySQLクライアントにログインした後のTiDBサーバーのバージョン情報の表示をサポート[＃17187](https://github.com/pingcap/tidb/pull/17187)
@@ -86,7 +86,7 @@ TiDBバージョン：4.0.0-rc.2
 
 -   TiFlash
 
-    -   **Grafana**のReadIndexのカウントグラフの名前を<strong>Ops</strong>に変更します
+    -   Grafanaの**読み取りインデックス**のカウントグラフの名前を<strong>Ops</strong>に変更します
     -   システム負荷が低いときにファイル記述子を開くためにデータを最適化して、システムリソースの消費を削減します
     -   容量関連の構成パラメーターを追加して、データストレージ容量を制限します
 
@@ -120,7 +120,7 @@ TiDBバージョン：4.0.0-rc.2
     -   `Plan Cache`ステートメントがトリガーされた後に`@@LAST_PLAN_FROM_CACHE`を実行すると、間違った値が返される問題を修正します[＃16831](https://github.com/pingcap/tidb/pull/16831)
     -   `IndexMerge` [＃16947](https://github.com/pingcap/tidb/pull/16947)の候補パスを計算するときに、インデックスの`TableFilter`が失われる問題を修正します。
     -   `MergeJoin`ヒントを使用し、 `TableDual`演算子が存在する場合、物理クエリプランを生成できない問題を修正します[＃17016](https://github.com/pingcap/tidb/pull/17016)
-    -   ステートメント要約表[＃17018](https://github.com/pingcap/tidb/pull/17018)の`Stmt_Type`列の値の誤った大文字化を修正します。
+    -   ステートメントの要約表[＃17018](https://github.com/pingcap/tidb/pull/17018)の`Stmt_Type`列の値の誤った大文字化を修正します。
     -   異なるユーザーが同じ[＃16996](https://github.com/pingcap/tidb/pull/16996)を使用するとサービスを開始できないため、 `Permission Denied`エラーが報告される問題を修正し`tmp-storage-path` 。
     -   結果タイプが[＃16995](https://github.com/pingcap/tidb/pull/16995)などの複数の入力列によって決定される式に対して、 `NotNullFlag`の結果タイプが誤って設定される問題を修正し`CASE WHEN` 。
     -   ダーティストアが存在する場合、緑色のGCが未解決のロックを残す可能性がある問題を修正します[＃16949](https://github.com/pingcap/tidb/pull/16949)
@@ -129,7 +129,7 @@ TiDBバージョン：4.0.0-rc.2
     -   `Float`の値[＃16666](https://github.com/pingcap/tidb/pull/16666)で`AND`演算子を使用した場合の誤った結果の問題を修正します
     -   高価なログ[＃16907](https://github.com/pingcap/tidb/pull/16907)の`WAIT_TIME`フィールドの間違った情報を修正します
     -   悲観的トランザクションモード[＃16897](https://github.com/pingcap/tidb/pull/16897)では、 `SELECT FOR UPDATE`のステートメントを低速ログに記録できない問題を修正します。
-    -   `Enum`または`Set`タイプ[＃16892](https://github.com/pingcap/tidb/pull/16892)の列で`SELECT DISTINCT`を実行したときに発生する間違った結果を修正します
+    -   `Enum`または`Set`タイプ[＃16892](https://github.com/pingcap/tidb/pull/16892)の列で`SELECT DISTINCT`を実行したときに発生する誤った結果を修正します
     -   `SHOW CREATE  TABLE`ステートメント[＃16864](https://github.com/pingcap/tidb/pull/16864)の`auto_random_base`の表示エラーを修正します。
     -   `WHERE`節[＃16559](https://github.com/pingcap/tidb/pull/16559)の誤った値`string_value`を修正します
     -   `GROUP BY`ウィンドウ関数のエラーメッセージがMySQL3のエラーメッセージと矛盾する問題を修正し[＃16165](https://github.com/pingcap/tidb/pull/16165)
@@ -150,7 +150,7 @@ TiDBバージョン：4.0.0-rc.2
 -   TiKV
 
     -   復元後に多くの空のリージョンが生成される問題を修正します[＃7632](https://github.com/tikv/tikv/pull/7632)
-    -   順序が正しくない読み取りインデックス応答を受信したときのRaftstoreのパニック問題を修正します[＃7370](https://github.com/tikv/tikv/pull/7370)
+    -   順不同の読み取りインデックス応答を受信したときのRaftstoreのパニック問題を修正します[＃7370](https://github.com/tikv/tikv/pull/7370)
     -   統合スレッドプールが有効になっている場合に、無効なストレージまたはコプロセッサーの読み取りプール構成が拒否されない可能性がある問題を修正します[＃7513](https://github.com/tikv/tikv/pull/7513)
     -   TiKVサーバーがシャットダウンされたときの`join`操作のパニック問題を修正します[＃7713](https://github.com/tikv/tikv/pull/7713)
     -   診断API1を介してTiKV低速ログを検索すると結果が返されない問題を修正し[＃7776](https://github.com/tikv/tikv/pull/7776)

@@ -54,13 +54,13 @@ TiDB Ansibleバージョン：3.0.0-beta.1
     -   [＃9616](https://github.com/pingcap/tidb/pull/9616) `DROP ROLE`
     -   [＃9461](https://github.com/pingcap/tidb/pull/9461) `CREATE ROLE`
 -   サーバ
-    -   `/debug/zip`のHTTPインターフェースを追加して、現在のTiDBインスタンス[＃9651](https://github.com/pingcap/tidb/pull/9651)の情報を取得します。
+    -   `/debug/zip`のHTTPインターフェースを追加して、現在のTiDBインスタンスの情報を取得します[＃9651](https://github.com/pingcap/tidb/pull/9651)
     -   `show pump status`および`show drainer status`のSQLステートメントをサポートして、ポンプまたはドレイナーのステータスを確認します[9456](https://github.com/pingcap/tidb/pull/9456)
     -   SQLステートメントを使用したPumpまたはDrainerステータスの変更のサポート[＃9789](https://github.com/pingcap/tidb/pull/9789)
     -   遅いSQLステートメントを簡単に追跡できるようにSQLテキストへのHASHフィンガープリントの追加をサポート[＃9662](https://github.com/pingcap/tidb/pull/9662)
     -   `log_bin`のシステム変数（デフォルトでは「0」）を追加して、binlogの有効化状態を制御します。現在の状態のチェックのみをサポート[＃9343](https://github.com/pingcap/tidb/pull/9343)
     -   構成ファイルを使用したbinlog送信戦略の管理のサポート[＃9864](https://github.com/pingcap/tidb/pull/9864)
-    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブルを使用した低速ログのクエリのサポート[＃9290](https://github.com/pingcap/tidb/pull/9290)
+    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブル[＃9290](https://github.com/pingcap/tidb/pull/9290)を使用した低速ログのクエリのサポート
     -   TiDBに表示されるMySQLのバージョンを5.7.10から[＃9553](https://github.com/pingcap/tidb/pull/9553)に変更します。
     -   ツールによる収集と分析を容易にするために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md)を統合します
     -   `high_error_rate_feedback_total`の監視項目を追加して、統計に基づいて実際のデータ量と推定データ量の差を記録します[＃9209](https://github.com/pingcap/tidb/pull/9209)
@@ -75,11 +75,11 @@ TiDB Ansibleバージョン：3.0.0-beta.1
 
 -   ツールによる収集と分析を容易にするために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md)を統合します
 -   シミュレーター
-    -   さまざまな店舗でさまざまなハートビート間隔をサポートする[＃1418](https://github.com/pingcap/pd/pull/1418)
+    -   さまざまな店舗でさまざまな心拍間隔をサポートする[＃1418](https://github.com/pingcap/pd/pull/1418)
     -   データのインポートに関するケースを追加する[＃1263](https://github.com/pingcap/pd/pull/1263)
--   ホットスポットスケジューリングを構成可能にする[＃1412](https://github.com/pingcap/pd/pull/1412)
+-   ホットスポットのスケジューリングを構成可能にする[＃1412](https://github.com/pingcap/pd/pull/1412)
 -   以前のストア[＃1429](https://github.com/pingcap/pd/pull/1429)を置き換えるために、ディメンション監視アイテムとしてストアアドレスを追加します
--   `GetStores`のオーバーヘッドを最適化して、地域の検査サイクル[＃1410](https://github.com/pingcap/pd/pull/1410)をスピードアップします。
+-   `GetStores`のオーバーヘッドを最適化して、リージョンの検査サイクル[＃1410](https://github.com/pingcap/pd/pull/1410)をスピードアップします。
 -   トゥームストーンストアを削除するためのインターフェイスを追加する[＃1472](https://github.com/pingcap/pd/pull/1472)
 
 ## TiKV {#tikv}
@@ -89,7 +89,7 @@ TiDB Ansibleバージョン：3.0.0-beta.1
     -   同じ方法でエンコードおよびデコードされたデータへのアクセスをサポートするために`VectorLike`を実装します[＃4242](https://github.com/tikv/tikv/pull/4242)
     -   インターフェースに`BatchExecutor`を定義し、リクエストを[＃4243](https://github.com/tikv/tikv/pull/4243)に変換する方法を実装し`BatchExecutor`
     -   式ツリーをRPN形式に変換する実装[＃4329](https://github.com/tikv/tikv/pull/4329)
-    -   計算を高速化するために`BatchTableScanExecutor`ベクトル化演算子を実装します[＃4351](https://github.com/tikv/tikv/pull/4351)
+    -   計算を高速化するために`BatchTableScanExecutor`のベクトル化演算子を実装します[＃4351](https://github.com/tikv/tikv/pull/4351)
 -   ツールによる収集と分析を容易にするために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md)を統合します
 -   ローカルリーダーを使用したRawReadインターフェイスでの読み取りのサポート[＃4222](https://github.com/tikv/tikv/pull/4222)
 -   構成情報に関するメトリックを追加する[＃4206](https://github.com/tikv/tikv/pull/4206)
@@ -107,7 +107,7 @@ TiDB Ansibleバージョン：3.0.0-beta.1
     -   生成された列の複製をサポート
 -   雷
     -   TiKVの定期的なレベル1圧縮の無効化をサポートし、TiKVクラスタのバージョンが2.1.4以降の場合、レベル1の圧縮はインポートモード[＃119](https://github.com/pingcap/tidb-lightning/pull/119)で自動的に実行され[＃4199](https://github.com/tikv/tikv/pull/4199) 。
-    -   `table_concurrency`の構成アイテムを追加して、インポートエンジンの数（デフォルトでは「16」）を制限し、インポーターのディスクスペースを使いすぎないようにします[＃119](https://github.com/pingcap/tidb-lightning/pull/119)
+    -   `table_concurrency`の構成アイテムを追加して、インポートエンジンの数（デフォルトでは「16」）を制限し、インポーターのディスク領域を使いすぎないようにします[＃119](https://github.com/pingcap/tidb-lightning/pull/119)
     -   メモリ使用量を削減するために、中間状態のSSTをディスクに保存することをサポートします[＃4369](https://github.com/tikv/tikv/pull/4369)
     -   TiKV-Importerのインポートパフォーマンスを最適化し、大きなテーブルのデータとインデックスの個別のインポートをサポートします[＃132](https://github.com/pingcap/tidb-lightning/pull/132)
     -   CSVファイルのインポートをサポート[＃111](https://github.com/pingcap/tidb-lightning/pull/111)

@@ -5,7 +5,7 @@ summary: This document describes the checks that TiDB Lightning performs before 
 
 # TiDBLightningの事前チェック {#tidb-lightning-prechecks}
 
-TiDB 5.3.0以降、TiDB Lightningには、移行タスクを実行する前に構成を確認する機能があります。デフォルトで有効になっています。この機能は、ディスクスペースと実行構成の定期的なチェックを自動的に実行します。主な目的は、後続のインポートプロセス全体がスムーズに行われるようにすることです。
+TiDB 5.3.0以降、TiDB Lightningには、移行タスクを実行する前に構成を確認する機能があります。デフォルトで有効になっています。この機能は、ディスク容量と実行構成の定期的なチェックを自動的に実行します。主な目的は、後続のインポートプロセス全体がスムーズに行われるようにすることです。
 
 次の表に、各チェック項目と詳細な説明を示します。
 

@@ -5,7 +5,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 # 大規模なデータセットのMySQLをTiDBに移行する {#migrate-mysql-of-large-datasets-to-tidb}
 
-移行するデータ量が少ない場合は、完全移行と増分レプリケーションの両方で簡単に[DMを使用してデータを移行する](/migrate-small-mysql-to-tidb.md)を実行できます。ただし、DMは低速（30〜50 GiB / h）でデータをインポートするため、データ量が多い場合は移行に時間がかかる場合があります。このドキュメントの「大規模なデータセット」とは、通常、1TiB以上のデータを意味します。
+移行するデータ量が少ない場合は、完全移行とインクリメンタルレプリケーションの両方で簡単に[DMを使用してデータを移行する](/migrate-small-mysql-to-tidb.md)を実行できます。ただし、DMは低速（30〜50 GiB / h）でデータをインポートするため、データ量が多い場合は移行に時間がかかる場合があります。このドキュメントの「大規模なデータセット」とは、通常、1TiB以上のデータを意味します。
 
 このドキュメントでは、大規模なデータセットをMySQLからTiDBに移行する方法について説明します。移行全体には2つのプロセスがあります。
 
@@ -80,7 +80,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     `${data-path}`に、エクスポートされたデータを格納するのに十分なスペースがあることを確認してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されないようにするには、 `-F`オプションを使用して単一ファイルのサイズを制限することを強くお勧めします。
 
-2.  `${data-path}`ディレクトリの`metadata`ファイルを表示します。これは、餃子で生成されたメタデータファイルです。手順3の増分複製に必要なbinlog位置情報を記録します。
+2.  `${data-path}`ディレクトリの`metadata`ファイルを表示します。これは、餃子で生成されたメタデータファイルです。手順3の増分レプリケーションに必要なbinlog位置情報を記録します。
 
     ```
     SHOW MASTER STATUS:
@@ -226,7 +226,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     #     safe-mode: true # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
     ```
 
-    上記のYAMLは、移行タスクに必要な最小限の構成です。その他の設定項目については、 [DM高度なタスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+    上記のYAMLは、移行タスクに必要な最小構成です。その他の設定項目については、 [DM高度なタスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
 
     移行タスクを開始する前に、エラーの可能性を減らすために、次の`check-task`コマンドを実行して、構成がDMの要件を満たしていることを確認することをお勧めします。
 
@@ -271,7 +271,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスおよびその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUPを使用してDMをデプロイしたときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合は、デプロイメント中に指定されたIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
+TiUPを使用してDMをデプロイしたときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合は、デプロイメント中に指定したIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
 
 DMの実行中、DM-worker、DM-master、およびdmctlは、関連情報をログに出力します。これらのコンポーネントのログディレクトリは次のとおりです。
 

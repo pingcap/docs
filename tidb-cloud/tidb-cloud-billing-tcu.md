@@ -5,7 +5,7 @@ summary: Learn about billing for changefeeds in TiDB Cloud.
 
 # チェンジフィード請求 {#changefeed-billing}
 
-TiDB Cloudは、TiCDCキャパシティユニット（TCU）でチェンジフィードのキャパシティを測定します。クラスタの最初のチェンジフィードを作成すると、TiDB Cloudは自動的にTiCDCキャパシティーユニット（TCU）をセットアップし、これらのTiCDCキャパシティーユニットの料金が請求されます。単一のクラスタで作成されたすべてのチェンジフィードは、同じTiCDCキャパシティーユニットを共有します。
+TiDB Cloudは、TiCDCキャパシティユニット（TCU）でチェンジフィードのキャパシティを測定します。クラスタの最初のチェンジフィードを作成すると、 TiDB Cloudは自動的にTiCDCキャパシティーユニット（TCU）をセットアップし、これらのTiCDCキャパシティーユニットの料金が請求されます。単一のクラスタで作成されたすべてのチェンジフィードは、同じTiCDCキャパシティーユニットを共有します。
 
 ## TiCDC容量ユニットの数 {#number-of-ticdc-capacity-units}
 

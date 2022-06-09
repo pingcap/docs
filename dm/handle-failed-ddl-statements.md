@@ -455,7 +455,7 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 
 このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
 
-1.  間違ったDDLステートメントを次のコマンドで置き換えます。
+1.  間違ったDDLステートメントを次のコマンドに置き換えます。
 
     {{< copyable "" >}}
 
@@ -587,7 +587,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 
 このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
 
-1.  次のコマンドで、MySQLインスタンス1とMySQLインスタンス2のそれぞれ間違ったDDLステートメントを置き換えます。
+1.  MySQLインスタンス1とMySQLインスタンス2のそれぞれ間違ったDDLステートメントを次のコマンドで置き換えます。
 
     {{< copyable "" >}}
 

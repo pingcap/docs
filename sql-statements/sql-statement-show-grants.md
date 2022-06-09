@@ -64,5 +64,5 @@ mysql> SHOW GRANTS FOR u1;
 
 ## も参照してください {#see-also}
 
--   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
 -   [許す](/sql-statements/sql-statement-grant-privileges.md)

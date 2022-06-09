@@ -5,7 +5,7 @@ summary: Learn the API of TiDB monitoring services.
 
 # TiDBモニタリングAPI {#tidb-monitoring-api}
 
-次のタイプのインターフェースを使用して、TiDBクラスタのステータスをモニターできます。
+次のタイプのインターフェイスを使用して、TiDBクラスタのステータスを監視できます。
 
 -   [ステータスインターフェイス](#use-the-status-interface) ：このインターフェースはHTTPインターフェースを使用してコンポーネント情報を取得します。このインターフェイスを使用すると、現在のTiDBサーバーの[実行ステータス](#running-status)つとテーブルの[ストレージ情報](#storage-information)を取得できます。
 -   [メトリックインターフェイス](#use-the-metrics-interface) ：このインターフェースはPrometheusを使用してコンポーネントのさまざまな操作の詳細情報を記録し、Grafanaを使用してこれらのメトリックを表示します。

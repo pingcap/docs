@@ -45,7 +45,7 @@ SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 -   `LEADER_STORE_ID` ：リージョンリーダーが配置されているストア（TiKV）のID。
 -   `PEERS` ：すべてのリージョンレプリカのID。
 -   `SCATTERING` ：リージョンがスケジュールされているかどうか。 `1`は真を意味します。
--   `WRITTEN_BYTES` ：1心拍サイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
+-   `WRITTEN_BYTES` ：1つのハートビートサイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
 -   `READ_BYTES` ：1心拍サイクル内にリージョンから読み取られたデータの推定量。単位はバイトです。
 -   `APPROXIMATE_SIZE(MB)` ：リージョン内の推定データ量。単位はメガバイト（MB）です。
 -   `APPROXIMATE_KEYS` ：リージョン内のキーの推定数。

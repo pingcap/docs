@@ -4,7 +4,7 @@ title: tiup dm restart
 
 # tiup dm restart {#tiup-dm-restart}
 
-コマンド`tiup dm restart`は、指定されたクラスタのすべてまたは一部のサービスを再起動するために使用されます。
+コマンド`tiup dm restart`は、指定されたクラスタのすべてまたは一部のサービスを再始動するために使用されます。
 
 > **ノート：**
 >
@@ -22,7 +22,7 @@ tiup dm restart <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   再起動するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   再起動するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
 -   データ型： `STRING`
 -   このオプションが指定されていない場合、TiUPはデフォルトですべてのノードを再起動します。
 

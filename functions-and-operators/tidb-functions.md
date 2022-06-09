@@ -10,7 +10,7 @@ summary: Learn about the usage of TiDB specific functions.
 | 関数名                                                                                | 機能の説明                                                                                                                             |
 | :--------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
 | `TIDB_BOUNDED_STALENESS()`                                                         | `TIDB_BOUNDED_STALENESS`関数は、時間範囲内で可能な限り新しいデータを読み取るようにTiDBに指示します。参照： [`AS OF TIMESTAMP`句を使用して履歴データを読み取る](/as-of-timestamp.md)      |
-| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                         | `TIDB_DECODE_KEY`関数を使用して、TiDBでエンコードされたキーエントリを`_tidb_rowid`と`table_id`を含むJSON構造にデコードできます。これらのエンコードされたキーは、一部のシステムテーブルおよびログ出力にあります。  |
+| [`TIDB_DECODE_KEY(str)`](#tidb_decode_key)                                         | `TIDB_DECODE_KEY`関数を使用して、TiDBでエンコードされたキーエントリを`_tidb_rowid`と`table_id`を含むJSON構造にデコードできます。これらのエンコードされたキーは、一部のシステムテーブルとログ出力にあります。    |
 | [`TIDB_DECODE_PLAN(str)`](#tidb_decode_plan)                                       | `TIDB_DECODE_PLAN`関数は、TiDB実行プランをデコードするために使用できます。                                                                                  |
 | `TIDB_IS_DDL_OWNER()`                                                              | `TIDB_IS_DDL_OWNER`関数を使用して、接続しているTiDBインスタンスがDDL所有者であるかどうかを確認できます。 DDL所有者は、クラスタの他のすべてのノードに代わってDDLステートメントを実行するタスクを実行するTiDBインスタンスです。 |
 | [`TIDB_PARSE_TSO(num)`](#tidb_parse_tso)                                           | `TIDB_PARSE_TSO`関数を使用して、TiDBTSOタイムスタンプから物理タイムスタンプを抽出できます。参照： [`tidb_current_ts`](/system-variables.md#tidb_current_ts) 。          |
@@ -148,7 +148,7 @@ ROLLBACK;
 1 row in set (0.0012 sec)
 ```
 
-ここで、 `TIDB_PARSE_TSO`は、 `tidb_current_ts`セッション変数で使用可能なタイムスタンプ番号から物理タイムスタンプを抽出するために使用されます。タイムスタンプはトランザクションごとに与えられるため、この関数はトランザクションで実行されます。
+ここで`TIDB_PARSE_TSO`は、 `tidb_current_ts`セッション変数で使用可能なタイムスタンプ番号から物理タイムスタンプを抽出するために使用されます。タイムスタンプはトランザクションごとに与えられるため、この関数はトランザクションで実行されます。
 
 ### TIDB_VERSION {#tidb-version}
 

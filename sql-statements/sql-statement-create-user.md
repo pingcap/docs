@@ -73,6 +73,6 @@ Query OK, 1 row affected (0.02 sec)
 
 -   [MySQLとのセキュリティの互換性](/security-compatibility-with-mysql.md)
 -   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
--   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
 -   [ALTER USER](/sql-statements/sql-statement-alter-user.md)
 -   [権限管理](/privilege-management.md)

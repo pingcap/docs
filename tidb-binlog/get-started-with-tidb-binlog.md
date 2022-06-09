@@ -7,7 +7,7 @@ summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
 
 このチュートリアルは、各コンポーネント（Placement Driver、TiKV Server、TiDB Server、Pump、およびDrainer）の単一ノードを使用して、MariaDBServerインスタンスにデータをプッシュするように設定された単純なTiDBBinlogデプロイメントから始まります。
 
-このチュートリアルは、 [TiDBアーキテクチャ](/tidb-architecture.md)にある程度精通しているユーザー、すでにTiDBクラスタをセットアップしている可能性がある（必須ではない）ユーザー、およびTiDBBinlogを実際に体験したいユーザーを対象としています。このチュートリアルは、TiDB Binlogの「タイヤを蹴る」ための良い方法であり、そのアーキテクチャの概念に慣れることができます。
+このチュートリアルは、 [TiDBアーキテクチャ](/tidb-architecture.md)にある程度精通しているユーザー、すでにTiDBクラスタをセットアップしている可能性がある（必須ではない）ユーザー、およびTiDBBinlogを実際に体験したいユーザーを対象としています。このチュートリアルは、TiDB Binlogの「タイヤを蹴る」ための良い方法であり、そのアーキテクチャの概念に慣れるための良い方法です。
 
 > **警告：**
 >
@@ -31,11 +31,11 @@ TiDB Binlogは、**ポンプ**と<strong>ドレイナー</strong>の2つのコ�
 
 ![TiDB-Binlog architecture](/media/tidb-binlog-cluster-architecture.png)
 
-Pumpのクラスター化されたアーキテクチャーにより、新しいTiDBサーバーインスタンスがTiDBクラスターに参加または離脱したり、PumpノードがPumpクラスタに参加または離脱したりしても、更新が失われることはありません。
+Pumpのクラスター化されたアーキテクチャにより、新しいTiDBサーバーインスタンスがTiDBクラスターに参加または離脱したり、PumpノードがPumpクラスタに参加または離脱したりしても、更新が失われることはありません。
 
 ## インストール {#installation}
 
-この場合、MySQLサーバーの代わりにMariaDBサーバーを使用しています。これは、RHEL /CentOS7のデフォルトのパッケージリポジトリにMariaDBサーバーが含まれているためです。後で使用するために、クライアントとサーバーが必要になります。今すぐインストールしましょう：
+この場合、MySQLServerの代わりにMariaDBServerを使用しています。これは、RHEL /CentOS7のデフォルトのパッケージリポジトリにMariaDBServerが含まれているためです。後で使用するために、クライアントとサーバーが必要になります。今すぐインストールしましょう：
 
 ```bash
 sudo yum install -y mariadb-server
@@ -159,7 +159,7 @@ sleep 3
 [4]+  Running                 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
-サービスの1つが開始に失敗した場合（たとえば、「 `Running` 」ではなく「 `Exit 1` 」が表示されている場合）、その個々のサービスを再起動してみてください。
+サービスの1つが開始に失敗した場合（たとえば、「 `Running` 」ではなく「 `Exit 1` 」が表示された場合）、その個々のサービスを再起動してみてください。
 
 ## 接続する {#connecting}
 
@@ -325,7 +325,7 @@ MariaDBサーバーにクエリを実行するときにTiDBに挿入したのと
 
 ## binlogctl {#binlogctl}
 
-クラスタに加わったポンプとドレイナーに関する情報はPDに保存されます。 binlogctlツールクエリを使用して、それらの状態に関する情報を操作できます。詳細については、 [binlogctlガイド](/tidb-binlog/binlog-control.md)を参照してください。
+クラスタに参加したポンプとドレイナーに関する情報は、PDに保存されます。 binlogctlツールクエリを使用して、それらの状態に関する情報を操作できます。詳細については、 [binlogctlガイド](/tidb-binlog/binlog-control.md)を参照してください。
 
 `binlogctl`を使用して、クラスタのポンプとドレイナーの現在のステータスを表示します。
 
@@ -359,7 +359,7 @@ pkill drainer
 [2019/04/11 17:44:22.640 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: paused, MaxCommitTS: 407638915597467649, UpdateTime: 2019-04-11 17:44:18 -0400 EDT}"]
 ```
 
-`binlogctl`で「NodeIDs」を使用して個々のノードを制御できます。この場合、ドレイナーのNodeIDは「localhost.localdomain：8249」であり、ポンプのNodeIDは「localhost.localdomain：8250」です。
+「NodeIDs」を`binlogctl`とすると、個々のノードを制御できます。この場合、ドレイナーのNodeIDは「localhost.localdomain：8249」であり、ポンプのNodeIDは「localhost.localdomain：8250」です。
 
 このチュートリアルでの`binlogctl`の主な使用法は、クラスタの再起動の場合である可能性があります。 TiDBクラスタのすべてのプロセスを終了して再起動しようとすると（ダウンストリームのMySQL / MariaDBサーバーまたはDrainerを除く）、PumpはDrainerに接続できず、Drainerがまだ「オンライン」であると信じているため、起動を拒否します。
 
@@ -399,7 +399,7 @@ kolbe@localhost tidb-latest-linux-amd64]$ for p in tidb-server drainer pump tikv
 [1]+  Done                    ./bin/pd-server --config=pd.toml &>pd.out
 ```
 
-すべてのサービスが終了した後にクラスタを再起動する場合は、最初に実行したのと同じコマンドを使用してサービスを開始します。上記の[`binlogctl`](#binlogctl)セクションで説明したように、 `pump`の前に`drainer`を開始し、 `tidb-server`の前に`pump`を開始する必要があります。
+すべてのサービスが終了した後にクラスタを再始動する場合は、最初に実行したのと同じコマンドを使用してサービスを開始します。上記の[`binlogctl`](#binlogctl)セクションで説明したように、 `pump`の前に`drainer`を開始し、 `tidb-server`の前に`pump`を開始する必要があります。
 
 ```bash
 ./bin/pd-server --config=pd.toml &>pd.out &
@@ -417,4 +417,4 @@ sleep 3
 
 このチュートリアルでは、単一のポンプと単一のドレイナーを備えたクラスタを使用して、TiDBクラスタからダウンストリームのMariaDBサーバーに複製するようにTiDBBinlogを設定しました。これまで見てきたように、TiDB Binlogは、TiDBクラスタへの変更をキャプチャして処理するための包括的なプラットフォームです。
 
-より堅牢な開発、テスト、または実稼働展開では、高可用性とスケーリングの目的で複数のTiDBサーバーを使用し、複数のPumpインスタンスを使用して、TiDBサーバーインスタンスへのアプリケーショントラフィックがPumpの問題の影響を受けないようにします。クラスタ。追加のDrainerインスタンスを使用して、更新をさまざまなダウンストリームプラットフォームにプッシュしたり、増分バックアップを実装したりすることもできます。
+より堅牢な開発、テスト、または本番デプロイメントでは、高可用性とスケーリングの目的で複数のTiDBサーバーを使用し、複数のPumpインスタンスを使用して、TiDBサーバーインスタンスへのアプリケーショントラフィックがPumpの問題の影響を受けないようにします。クラスタ。追加のDrainerインスタンスを使用して、更新をさまざまなダウンストリームプラットフォームにプッシュしたり、増分バックアップを実装したりすることもできます。

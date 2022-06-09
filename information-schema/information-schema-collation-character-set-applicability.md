@@ -5,7 +5,7 @@ summary: Learn the `COLLATION_CHARACTER_SET_APPLICABILITY` information_schema ta
 
 # COLLATION_CHARACTER_SET_APPLICABILITY {#collation-character-set-applicability}
 
-`COLLATION_CHARACTER_SET_APPLICABILITY`の表は、照合を該当する文字セット名にマップします。 `COLLATIONS`の表と同様に、MySQLとの互換性のためにのみ含まれています。
+`COLLATION_CHARACTER_SET_APPLICABILITY`の表は、照合を適切な文字セット名にマップします。 `COLLATIONS`の表と同様に、MySQLとの互換性のためにのみ含まれています。
 
 {{< copyable "" >}}
 

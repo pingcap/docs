@@ -35,7 +35,7 @@ TiDB HTAPの使用例の詳細については、 [PingCAPWebサイトのHTAPに�
 
 TiDBでは、オンライントランザクション処理（OLTP）用の行ベースのストレージエンジン[TiKV](/tikv-overview.md)とオンライン分析処理（OLAP）用の列型ストレージエンジン[TiFlash](/tiflash/tiflash-overview.md)が共存し、データを自動的に複製し、強力な一貫性を維持します。
 
-アーキテクチャの詳細については、 [TiDBHTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)を参照してください。
+アーキテクチャの詳細については、 [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)を参照してください。
 
 ## 環境の準備 {#environment-preparation}
 
@@ -60,7 +60,7 @@ TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応す�
 
 ## データの準備 {#data-preparation}
 
-TiFlashがデプロイされた後、TiKVはデータをTiFlashに自動的に複製しません。 TiFlashに複製する必要があるテーブルを手動で指定する必要があります。その後、TiDBは対応するTiFlashレプリカを作成します。
+TiFlashがデプロイされた後、TiKVはデータをTiFlashに自動的に複製しません。 TiFlashに複製する必要のあるテーブルを手動で指定する必要があります。その後、TiDBは対応するTiFlashレプリカを作成します。
 
 -   TiDBクラスターにデータがない場合は、最初にデータをTiDBに移行します。詳細については、 [データ移行](/migration-overview.md)を参照してください。
 -   TiDBクラスタにアップストリームからレプリケートされたデータが既にある場合、TiFlashがデプロイされた後、データレプリケーションは自動的に開始されません。 TiFlashに複製するテーブルを手動で指定する必要があります。詳細については、 [TiFlashを使用する](/tiflash/use-tiflash.md)を参照してください。
@@ -75,7 +75,7 @@ TiDBを使用すると、クエリまたは書き込み要求のSQLステート�
 >
 > -   TiFlashのMPPモードを無効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)システム変数の値を`OFF`に設定します。
 > -   クエリ実行でTiFlashのMPPモードを強制的に有効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)と[tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
-> -   TiDBが特定のクエリを実行するためにMPPモードを選択するかどうかを確認するには、 [MPPモードでのステートメントの説明](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`演算子が含まれている場合、MPPモードが使用されています。
+> -   TiDBが特定のクエリを実行するためにMPPモードを選択するかどうかを確認するには、 [MPPモードでのステートメントの説明](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`オペレーターが含まれている場合、MPPモードが使用されています。
 
 ## パフォーマンス監視 {#performance-monitoring}
 

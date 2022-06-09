@@ -39,7 +39,7 @@ TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関�
 | [JSON\_ARRAY\_APPEND(json\_doc, path, value)][json_array_append]                      | 指定されたパスのJSON配列の最後に値を追加します            |
 | [JSON\_ARRAY\_INSERT(json\_doc, path, val\[, path, val\] ...)][json_array_insert]     | jsonドキュメントに配列を挿入し、変更されたドキュメントを返します   |
 | [JSON\_INSERT(json\_doc, path, val\[, path, val\] ...)][json_insert]                  | JSONドキュメントにデータを挿入し、結果を返します           |
-| [JSON\_MERGE(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge]                    | `JSON_MERGE_PRESERVE`の非推奨エイリアス       |
+| [JSON\_MERGE(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge]                    | `JSON_MERGE_PRESERVE`の非推奨のエイリアス      |
 | [JSON\_MERGE\_PRESERVE(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge_preserve] | 2つ以上のJSONドキュメントをマージし、マージされた結果を返します   |
 | [JSON\_REMOVE(json\_doc, path\[, path\] ...)][json_remove]                            | JSONドキュメントからデータを削除し、結果を返します          |
 | [JSON\_REPLACE(json\_doc, path, val\[, path, val\] ...)][json_replace]                | JSONドキュメントの既存の値を置き換えて、結果を返します        |

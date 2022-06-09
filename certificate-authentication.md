@@ -191,7 +191,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
     > **ノート：**
     >
-    > 上記の出力の`subject`セクションの情報は、 `require`セクションの[ログイン検証のための証明書構成](#configure-the-user-certificate-information-for-login-verification)に使用されます。
+    > 上記の出力の`subject`セクションの情報は、 `require`セクションの[ログイン検証用の証明書構成](#configure-the-user-certificate-information-for-login-verification)に使用されます。
 
 ### 証明書を確認する {#verify-certificate}
 

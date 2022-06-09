@@ -5,13 +5,13 @@ summary: Use PD Control to obtain the state information of a cluster and tune a 
 
 # PD制御ユーザーガイド {#pd-control-user-guide}
 
-PDのコマンドラインツールとして、PD制御はクラスターの状態情報を取得し、クラスタを調整しクラスタ。
+PDのコマンドラインツールとして、PD Controlはクラスターの状態情報を取得し、クラスタを調整しクラスタ。
 
 ## PD制御をインストールします {#install-pd-control}
 
 > **ノート：**
 >
-> 使用する制御ツールのバージョンは、クラスタのバージョンと一致していることをお勧めします。
+> 使用するコントロールツールのバージョンは、クラスタのバージョンと一致していることをお勧めします。
 
 ### TiUPコマンドを使用する {#use-tiup-command}
 
@@ -312,9 +312,9 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 
 -   `enable-make-up-replica`は、レプリカを作成する機能を有効にするために使用されます。 `false`に設定すると、PDは十分なレプリカがないリージョンのレプリカを追加しません。
 
--   `enable-remove-extra-replica`は、余分なレプリカを削除する機能を有効にするために使用されます。 `false`に設定すると、PDは、冗長レプリカを持つリージョンの余分なレプリカを削除しません。
+-   `enable-remove-extra-replica`は、余分なレプリカを削除する機能を有効にするために使用されます。 `false`に設定すると、PDは冗長レプリカを持つリージョンの余分なレプリカを削除しません。
 
--   `enable-location-replacement`は、分離レベルのチェックを有効にするために使用されます。 `false`に設定すると、PDはスケジューリングによってリージョンレプリカの分離レベルを上げません。
+-   `enable-location-replacement`は、分離レベルチェックを有効にするために使用されます。 `false`に設定すると、PDはスケジューリングによってリージョンレプリカの分離レベルを上げません。
 
 -   `enable-debug-metrics`は、デバッグ用のメトリックを有効にするために使用されます。 `true`に設定すると、PDは`balance-tolerant-size`などのいくつかのメトリックを有効にします。
 
@@ -478,7 +478,7 @@ Success!
 >> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
-リージョンの分割は、可能な限り中央に近い位置から開始されます。この位置は、「スキャン」と「概算」の2つの戦略を使用して見つけることができます。それらの違いは、前者はリージョンをスキャンして中央のキーを決定し、後者はSSTファイルに記録された統計をチェックしておおよその位置を取得することです。一般に、前者の方が正確ですが、後者の方がI / Oの消費量が少なく、より速く完了することができます。
+リージョンの分割は、可能な限り中央に近い位置から開始されます。この位置は、「スキャン」と「概算」の2つの戦略を使用して見つけることができます。違いは、前者はリージョンをスキャンして中央のキーを決定し、後者はSSTファイルに記録されている統計をチェックしておおよその位置を取得することです。一般に、前者の方が正確ですが、後者の方がI / Oの消費量が少なく、より速く完了することができます。
 
 ### <code>ping</code> {#code-ping-code}
 
@@ -819,7 +819,7 @@ time: 43.12698ms
     >> scheduler config balance-hot-region-scheduler set min-hot-query-rate 10
     ```
 
--   `max-zombie-rounds`は、オペレーターが保留中の影響と見なすことができるハートビートの最大数を意味します。より大きな値に設定すると、保留中の影響に含まれる演算子が増える可能性があります。通常、その値を調整する必要はありません。保留中の影響とは、スケジューリング中に生成されるが、それでも影響を与えるオペレーターの影響を指します。
+-   `max-zombie-rounds`は、オペレーターが保留中の影響と見なすことができるハートビートの最大数を意味します。これをより大きな値に設定すると、保留中の影響に含まれる演算子が増える可能性があります。通常、その値を調整する必要はありません。保留中の影響とは、スケジューリング中に生成されるが、それでも影響を与えるオペレーターの影響を指します。
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
@@ -843,7 +843,7 @@ time: 43.12698ms
     >> scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
--   `read-priorities` 、および`write-leader-priorities`は、スケジューラーがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つのディメンションがサポートされています。
+-   `read-priorities` 、および`write-leader-priorities`は、スケジューラがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つの次元がサポートされています。
 
     -   `read-priorities`および`write-leader-priorities`は、読み取りおよび書き込みリーダータイプのホットリージョンをスケジュールするためにスケジューラーが優先するディメンションを制御します。寸法オプションは`query` 、および`byte` `key` 。
 
@@ -851,7 +851,7 @@ time: 43.12698ms
 
     > **ノート：**
     >
-    > クラスタコンポーネントがv5.2より前の場合、 `query`次元の構成は有効になりません。一部のコンポーネントがv5.2以降にアップグレードされた場合でも、デフォルトでは`byte`ディメンションと`key`ディメンションがホットリージョンスケジューリングの優先順位を持ちます。クラスタのすべてのコンポーネントがv5.2以降にアップグレードされた後も、互換性のためにそのような構成が有効になります。 `pd-ctl`コマンドを使用して、リアルタイム構成を表示できます。通常、これらの構成を変更する必要はありません。
+    > クラスタコンポーネントがv5.2より前の場合、 `query`次元の構成は有効になりません。一部のコンポーネントがv5.2以降にアップグレードされた場合でも、デフォルトでは`byte`次元と`key`次元がホットリージョンスケジューリングの優先順位を持ちます。クラスタのすべてのコンポーネントがv5.2以降にアップグレードされた後も、互換性のためにそのような構成が有効になります。 `pd-ctl`コマンドを使用して、リアルタイム構成を表示できます。通常、これらの構成を変更する必要はありません。
 
     ```bash
     >> scheduler config balance-hot-region-scheduler set read-priorities query,byte
@@ -946,7 +946,7 @@ Online Unsafe Recoveryを実行して、恒久的に損傷したストアを削�
 Success!
 ```
 
-OnlineUnsafeRecoveryの現在または過去の状態を表示します。
+オンラインの安全でないリカバリの現在または過去の状態を表示します。
 
 ```bash
 >> unsafe remove-failed-stores show
@@ -1069,7 +1069,7 @@ OnlineUnsafeRecoveryの現在または過去の状態を表示します。
 ...
 ```
 
-### データを復元するときに関連する地域を探す {#look-for-relevant-regions-when-restoring-data}
+### データを復元するときに関連するリージョンを探す {#look-for-relevant-regions-when-restoring-data}
 
 たとえば、[store1、store30、store31]がダウンタイムで利用できない場合、ダウンレプリカが通常のレプリカよりも多いすべてのリージョンを見つけることができます。
 

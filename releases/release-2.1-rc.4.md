@@ -27,7 +27,7 @@ title: TiDB 2.1 RC4 Release Notes
     -   ラッチをリファクタリングして、トランザクションの競合の誤判断を回避し、同時トランザクションの実行パフォーマンスを向上させます[＃7711](https://github.com/pingcap/tidb/pull/7711)
     -   場合によっては遅いクエリを収集することによって引き起こされるパニックの問題を修正します[＃7874](https://github.com/pingcap/tidb/pull/7847)
     -   `LOAD DATA`ステートメント[＃8005](https://github.com/pingcap/tidb/pull/8005)で`ESCAPED BY`が空の文字列である場合のパニックの問題を修正します。
-    -   「コプロセッサー・エラー」ログ情報を完成させる[＃8006](https://github.com/pingcap/tidb/pull/8006)
+    -   「コプロセッサー・エラー」ログ情報を完成させます[＃8006](https://github.com/pingcap/tidb/pull/8006)
 -   互換性
     -   クエリが空の場合は、 `SHOW PROCESSLIST`の結果の`Command`のフィールドを`Sleep`に設定します[＃7839](https://github.com/pingcap/tidb/pull/7839)
 -   式

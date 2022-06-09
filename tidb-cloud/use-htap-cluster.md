@@ -7,7 +7,7 @@ summary: Learn how to use HTAP cluster in TiDB Cloud.
 
 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)は、ハイブリッドトランザクション/分析処理を意味します。 TiDB CloudのHTAPクラスタは、トランザクション処理用に設計された行ベースのストレージエンジンである[TiKV](https://tikv.org)と、分析処理用に設計された列型ストレージである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>ベータ</sup>で構成されています。アプリケーションデータは最初にTiKVに保存され、次にRaftコンセンサスアルゴリズムを介してTiFlash<sup>ベータ</sup>に複製されます。つまり、行ストアから列ストアへのリアルタイムレプリケーションです。
 
-TiDB Cloudでは、HTAPワークロードに応じて1つ以上のTiFlash<sup>ベータ</sup>ノードを指定することで、HTAPクラスタを簡単に作成できます。クラスタの作成時にTiFlash<sup>ベータ</sup>ノード数が指定されていない場合、またはTiFlash<sup>ベータ</sup>ノードをさらに追加する場合は、ノード数を[クラスタのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
+TiDB Cloudを使用すると、HTAPワークロードに応じて1つ以上のTiFlash<sup>ベータ</sup>ノードを指定することで、HTAPクラスタを簡単に作成できます。クラスタの作成時にTiFlash<sup>ベータ</sup>ノード数が指定されていない場合、またはTiFlash<sup>ベータ</sup>ノードをさらに追加する場合は、ノード数を[クラスタのスケーリング](/tidb-cloud/scale-tidb-cluster.md)ずつ変更できます。
 
 > **ノート：**
 >

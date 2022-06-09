@@ -48,7 +48,7 @@ TiDBバージョン：5.2.4
         -   チェンジフィードを再開するための指数バックオフメカニズムを追加する[＃3329](https://github.com/pingcap/tiflow/issues/3329)
         -   「EventFeed再試行率制限」ログの数を減らす[＃4006](https://github.com/pingcap/tiflow/issues/4006)
         -   デフォルト値の`max-message-bytes`を設定します[＃4041](https://github.com/pingcap/tiflow/issues/4041)
-        -   `no owner alert` `buffer sink total row` [＃4054](https://github.com/pingcap/tiflow/issues/4054)など、 [＃1606](https://github.com/pingcap/tiflow/issues/1606)と`mounter row`のモニタリング指標とアラートをさらに追加し`table sink total row`
+        -   `no owner alert` `buffer sink total row` [＃4054](https://github.com/pingcap/tiflow/issues/4054)など、 [＃1606](https://github.com/pingcap/tiflow/issues/1606)と`mounter row`の監視メトリックとアラートをさらに追加し`table sink total row`
         -   Grafanaダッシュボードで複数のKubernetesクラスターをサポートする[＃4665](https://github.com/pingcap/tiflow/issues/4665)
         -   キャッチアップETA（到着予定時刻）を`changefeed checkpoint`の監視メトリックに追加します[＃5232](https://github.com/pingcap/tiflow/issues/5232)
 
@@ -59,7 +59,7 @@ TiDBバージョン：5.2.4
     -   列挙値[＃32428](https://github.com/pingcap/tidb/issues/32428)のNulleq関数の誤った範囲計算結果を修正しました
     -   INDEXHASHJOINが`send on closed channel`エラー[＃31129](https://github.com/pingcap/tidb/issues/31129)を返す問題を修正します
     -   列タイプを同時に変更すると、スキーマとデータの間に不整合が生じる問題を修正します[＃31048](https://github.com/pingcap/tidb/issues/31048)
-    -   楽観的トランザクションモード[＃30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータインデックスの不整合の問題を修正します
+    -   楽観的なトランザクションモード[＃30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータインデックスの不整合の問題を修正します
     -   JSON型の列が`CHAR`型の列に結合するとSQL操作がキャンセルされる問題を修正します[＃29401](https://github.com/pingcap/tidb/issues/29401)
     -   トランザクションを使用するかどうかにかかわらず、ウィンドウ関数が異なる結果を返す可能性がある問題を修正します[＃29947](https://github.com/pingcap/tidb/issues/29947)
     -   SQLステートメントに自然結合[＃25041](https://github.com/pingcap/tidb/issues/25041)が含まれている場合に`Column 'col_name' in field list is ambiguous`エラーが予期せず報告される問題を修正します
@@ -68,14 +68,14 @@ TiDBバージョン：5.2.4
     -   `left join`を使用して複数のテーブルのデータを削除した誤った結果を[＃31321](https://github.com/pingcap/tidb/issues/31321)
     -   TiDBが重複タスクをTiFlash1にディスパッチする可能性があるバグを修正し[＃32814](https://github.com/pingcap/tidb/issues/32814)
     -   クエリ実行時のMPPタスクリストの空のエラーを修正[＃31636](https://github.com/pingcap/tidb/issues/31636)
-    -   innerWorkerパニックによって引き起こされたインデックス結合の誤った結果を修正します[＃31494](https://github.com/pingcap/tidb/issues/31494)
+    -   innerWorkerパニックによって引き起こされるインデックス結合の誤った結果を修正します[＃31494](https://github.com/pingcap/tidb/issues/31494)
     -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとパニックになる問題を修正します[＃28078](https://github.com/pingcap/tidb/issues/28078)
     -   `Order By`の最適化による誤ったクエリ結果を[＃30271](https://github.com/pingcap/tidb/issues/30271)
     -   `ENUM`のタイプの列で`JOIN`を実行するときに発生する可能性のある間違った結果を修正します[＃27831](https://github.com/pingcap/tidb/issues/27831)
     -   `ENUM`データ型[＃29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用するときのパニックを修正します
     -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の`microsecond`関数の誤った結果を修正します
     -   ウィンドウ関数がエラーを報告する代わりにTiDBをパニックにする問題を修正します[＃30326](https://github.com/pingcap/tidb/issues/30326)
-    -   マージ結合演算子が特定の場合に間違った結果を取得する問題を修正します[＃33042](https://github.com/pingcap/tidb/issues/33042)
+    -   マージ結合演算子が特定の場合に間違った結果を得る問題を修正します[＃33042](https://github.com/pingcap/tidb/issues/33042)
     -   相関サブクエリが定数[＃32089](https://github.com/pingcap/tidb/issues/32089)を返すときにTiDBが間違った結果を取得する問題を修正します
     -   `ENUM`列または`SET`列のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正します[＃32302](https://github.com/pingcap/tidb/issues/32302)
     -   TiDB [＃31638](https://github.com/pingcap/tidb/issues/31638)で新しい照合順序が有効になっている場合、 `ENUM`列または`SET`列の`MAX`または`MIN`関数が間違った結果を返す問題を修正します。
@@ -87,10 +87,10 @@ TiDBバージョン：5.2.4
     -   TiDBが失敗した認証の多くのログを予期せず出力する可能性がある問題を修正します[＃29709](https://github.com/pingcap/tidb/issues/29709)
     -   システム変数`max_allowed_packet`が有効にならない問題を修正します[＃31422](https://github.com/pingcap/tidb/issues/31422)
     -   自動IDが範囲[＃29483](https://github.com/pingcap/tidb/issues/29483)から外れると、 `REPLACE`ステートメントが他の行を誤って変更する問題を修正します。
-    -   遅いクエリログがログを正常に出力できず、メモリを大量に消費する可能性があるという問題を修正します[＃32656](https://github.com/pingcap/tidb/issues/32656)
+    -   遅いクエリログがログを正常に出力できず、メモリを過剰に消費する可能性があるという問題を修正します[＃32656](https://github.com/pingcap/tidb/issues/32656)
     -   NATURALJOINの結果に予期しない列が含まれる可能性がある問題を修正します[＃24981](https://github.com/pingcap/tidb/issues/29481)
     -   1つのステートメントで`ORDER BY`と`LIMIT`を一緒に使用すると、データのクエリにプレフィックス列インデックスが使用されている場合に誤った結果が出力される可能性がある問題を修正します[＃29711](https://github.com/pingcap/tidb/issues/29711)
-    -   楽観的なトランザクションを再試行すると、DOUBLEタイプの自動インクリメント列が変更される可能性がある問題を修正します[＃29892](https://github.com/pingcap/tidb/issues/29892)
+    -   楽観的なトランザクションが再試行すると、DOUBLEタイプの自動インクリメント列が変更される可能性がある問題を修正します[＃29892](https://github.com/pingcap/tidb/issues/29892)
     -   STR_TO_DATE関数がマイクロ秒部分の先行ゼロを正しく処理できない問題を修正します[＃30078](https://github.com/pingcap/tidb/issues/30078)
     -   TiFlashはまだ空の範囲のテーブルの読み取りをサポートしていませんが、TiFlashを使用して空の範囲のテーブルをスキャンするとTiDBが間違った結果を取得する問題を修正します[＃33083](https://github.com/pingcap/tidb/issues/33083)
 
@@ -154,7 +154,7 @@ TiDBバージョン：5.2.4
     -   [＃3351](https://github.com/pingcap/tiflash/issues/3351)の予期しないエラーを修正し`Unexpected type of column: Nullable(Nothing)`
     -   遅れているリージョンピア[＃4437](https://github.com/pingcap/tiflash/issues/4437)でのリージョンマージによって引き起こされる可能性のあるメタデータの破損を修正します
     -   エラーが発生した場合に`JOIN`を含むクエリがハングする可能性がある問題を修正します[＃4195](https://github.com/pingcap/tiflash/issues/4195)
-    -   誤った実行計画が原因でMPPクエリに対して返される可能性のある誤った結果を修正します[＃3389](https://github.com/pingcap/tiflash/issues/3389)
+    -   誤った実行プランが原因でMPPクエリに対して返される可能性のある誤った結果を修正する[＃3389](https://github.com/pingcap/tiflash/issues/3389)
 
 -   ツール
 

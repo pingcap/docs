@@ -9,7 +9,7 @@ summary: Download the most officially maintained versions of TiDB tools.
 
 ## TiUP {#tiup}
 
-ダーウィンとLinuxの両方のオペレーティングシステムに、1つのコマンドでTiUPをインストールできます。詳細については、 [TiUPをインストールします](/tiup/tiup-overview.md#install-tiup)を参照してください。
+ダーウィンとLinuxの両方のオペレーティングシステムに1つのコマンドでTiUPをインストールできます。詳細については、 [TiUPをインストールします](/tiup/tiup-overview.md#install-tiup)を参照してください。
 
 ## TiDB Operator {#tidb-operator}
 

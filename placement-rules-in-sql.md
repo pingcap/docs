@@ -93,7 +93,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 クォーラムを達成できるように十分なフォロワーがプライマリリージョン（ `us-east-1` ）に配置されるようにするには、 `MAJORITY_IN_PRIMARY`のスケジュールを使用できます。このスケジュールは、可用性をいくらか犠牲にして、待ち時間の短いトランザクションを提供するのに役立ちます。プライマリリージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`は自動フェイルオーバーを提供できません。
 
-### パーティションテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
+### パーティションテーブルに配置を割り当てます {#assign-placement-to-a-partitioned-table}
 
 > **ノート：**
 >
@@ -115,7 +115,7 @@ CREATE TABLE t1 (
 );
 ```
 
-### スキーマのデフォルトの配置を設定します {#set-the-default-placement-for-a-schema}
+### スキーマのデフォルトの配置を設定する {#set-the-default-placement-for-a-schema}
 
 デフォルトの配置オプションをデータベーススキーマに直接アタッチできます。これは、スキーマのデフォルトの文字セットまたは照合順序を設定するのと同様に機能します。指定した配置オプションは、他のオプションが指定されていない場合に適用されます。例えば：
 
@@ -175,5 +175,5 @@ SQLの配置ルールの実験的リリースには、次の既知の制限が�
 -   Backup＆Restore（BR）、TiCDC、TiDB Lightning、TiDB Data Migration（DM）などのTiDBツールは、配置ルールをまだサポートしていません。
 -   一時テーブルは、配置オプションをサポートしていません（直接配置または配置ポリシーのいずれかを介して）。
 -   設定`PRIMARY_REGION`および`REGIONS`には、構文糖衣規則が許可されています。将来的には、 `PRIMARY_RACK`の`PRIMARY_ZONE`を追加する予定`PRIMARY_HOST` 。 [号18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
--   TiFlash学習者は、配置ルール構文を使用して構成することはできません。
+-   TiFlashラーナーは、配置ルール構文では構成できません。
 -   配置ルールは、保存されているデータが正しいTiKVストアに存在することのみを保証します。このルールは、転送中のデータ（ユーザークエリまたは内部操作のいずれかを介して）が特定のリージョンでのみ発生することを保証するものではありません。

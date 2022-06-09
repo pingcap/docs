@@ -31,10 +31,10 @@ summary: Learn how to troubleshoot the issue of increased read and write latency
         -   `set global tidb_auto_analyze_ratio=0.2;`
         -   `set global tidb_auto_analyze_start_time='00:00 +0800';`
         -   `set global tidb_auto_analyze_end_time='06:00 +0800';`
--   実行プランをバインドする
+-   実行計画をバインドする
     -   アプリケーションのSQLステートメントを変更し、 `use index`を実行して、列のインデックスを一貫して使用します。
     -   3.0バージョンでは、アプリケーションのSQLステートメントを変更する必要はありません。 `create global binding`を使用して、 `force index`のバインディングSQLステートメントを作成します。
-    -   4.0バージョンでは、 [SQL計画管理](/sql-plan-management.md)がサポートされており、不安定な実行計画によって引き起こされるパフォーマンスの低下を回避します。
+    -   4.0バージョンでは、 [SQL計画管理](/sql-plan-management.md)がサポートされており、不安定な実行プランによって引き起こされるパフォーマンスの低下を回避します。
 
 ### PDの異常 {#pd-anomalies}
 

@@ -369,9 +369,9 @@ update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 
 ### <code>mysqlType</code>フィールド {#code-mysqltype-code-field}
 
-`mysqlType`フィールドの場合、タイプにパラメーターが含まれていると、公式の運河にタイプパラメーターの完全な情報が含まれます。 TiCDCにはそのような情報は含まれていません。
+`mysqlType`フィールドの場合、タイプにパラメーターが含まれている場合、公式の運河にはタイプパラメーターの完全な情報が含まれます。 TiCDCにはそのような情報は含まれていません。
 
-次の例では、テーブルを定義するSQLステートメントに、 `decimal` 、および`char`のパラメーターなど、各列のパラメーターが含まれて`varchar` `enum` 。 TiCDCによって生成されたCanal-JSON形式と公式のCanalを比較すると、TiCDCには`mysqlType`フィールドの基本的なMySQL情報のみが含まれていることがわかります。 typeパラメーターの完全な情報が必要な場合は、他の方法で実装する必要があります。
+次の例では、テーブルを定義するSQLステートメントに、 `decimal` 、および`char`のパラメーターなど、各列のパラメーターが含まれて`varchar` `enum` 。 TiCDCによって生成されたCanal-JSON形式と公式のCanalを比較すると、TiCDCには`mysqlType`フィールドの基本的なMySQL情報のみが含まれていることがわかります。 typeパラメータの完全な情報が必要な場合は、他の方法で実装する必要があります。
 
 次のSQLステートメントがアップストリームTiDBで順番に実行されると想定します。
 

@@ -5,7 +5,7 @@ summary: Learn TiDB's security compatibilities with MySQL.
 
 # MySQLとのセキュリティの互換性 {#security-compatibility-with-mysql}
 
-TiDBは、次の例外を除いて、MySQL5.7と同様のセキュリティ機能をサポートします。
+TiDBは、次の例外を除いて、MySQL5.7と同様のセキュリティ機能をサポートしています。
 
 -   列レベルの権限はサポートされていません
 -   パスワードの有効期限、およびパスワードの最終変更された追跡とパスワードの有効期間はサポートされていません[＃9709](https://github.com/pingcap/tidb/issues/9709)

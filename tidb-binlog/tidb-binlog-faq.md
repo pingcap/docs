@@ -59,11 +59,11 @@ binlogctl -cmd pumps
 
 次の監視項目を確認してください。
 
--   **Drainer Event**モニタリングメトリックについては、Drainerが`DELETE`秒あたり`INSERT` 、および`UPDATE`トランザクションをダウンストリームに複製する速度を確認してください。
+-   **Drainerイベント**の監視メトリックについては、Drainerが`DELETE`秒あたり`INSERT` 、および`UPDATE`のトランザクションをダウンストリームに複製する速度を確認してください。
 
 -   **SQLクエリ時間**の監視メトリックについては、DrainerがダウンストリームでSQLステートメントを実行するのにかかる時間を確認してください。
 
-複製が遅い場合の考えられる原因と解決策：
+レプリケーションが遅い場合の考えられる原因と解決策：
 
 -   レプリケートされたデータベースに主キーまたは一意のインデックスのないテーブルが含まれている場合は、テーブルに主キーを追加します。
 
@@ -149,7 +149,7 @@ kafka / fileのデータには`commit-ts`が含まれているため、チェッ
 
 -   バージョンアップグレード
 
-    プロセスが停止した後、新しいバイナリを使用してサービスを再開します。
+    プロセスが停止した後、新しいバイナリを使用してサービスを再起動します。
 
 -   サーバのメンテナンス
 
@@ -189,7 +189,7 @@ kafka / fileのデータには`commit-ts`が含まれているため、チェッ
 
 いいえ`update-pump`または`update-drainer`コマンドは、対応する操作を実行するようにポンプまたはドレイナーに通知することなく、PDに保存されている状態情報を直接変更します。 2つのコマンドを誤用すると、データレプリケーションが中断され、データの不整合が発生する可能性があります。例えば：
 
--   Pumpノードが正常に実行されているか`paused`状態にある場合、 `update-pump`コマンドを使用してPump状態を`offline`に設定すると、Drainerノードは7Pumpからの`offline`データのプルを停止します。この状況では、最新のbinlogをDrainerノードに複製できず、アップストリームとダウンストリームの間でデータの不整合が発生します。
+-   Pumpノードが正常に実行されているか`paused`状態にある場合、 `update-pump`コマンドを使用してPump状態を`offline`に設定すると、Drainerノードは7Pumpからの`offline`データのプルを停止します。この状況では、最新のbinlogをDrainerノードに複製できないため、アップストリームとダウンストリームの間でデータの不整合が発生します。
 -   Drainerノードが正常に実行されているときに、 `update-drainer`コマンドを使用してDrainer状態を`offline`に設定すると、新しく開始されたPumpノードは`online`状態のDrainerノードにのみ通知します。この状況では、 `offline` DrainerはPumpノードからbinlogデータを時間内にプルできず、アップストリームとダウンストリームの間でデータの不整合が発生します。
 
 ## binlogctlの<code>update-pump</code>コマンドを使用して、ポンプの状態を<code>paused</code>に設定できるのはいつですか。 {#when-can-i-use-the-code-update-pump-code-command-in-binlogctl-to-set-the-pump-state-to-code-paused-code}
@@ -227,7 +227,7 @@ Pumpプロセスが終了し、ノードが`paused`状態の場合、ノード�
 
 ## binlogctlの<code>update-drainer</code> drainerコマンドを使用して、Drainerの状態を<code>offline</code>に設定できるのはいつですか。 {#when-can-i-use-the-code-update-drainer-code-command-in-binlogctl-to-set-the-drainer-state-to-code-offline-code}
 
-いくつかの古いDrainerノードは、履歴タスクから残されています。それらのプロセスは終了し、それらのサービスはもはや必要ありません。次に、 `update-drainer`コマンドを使用して状態を`offline`に設定します。
+一部の古いDrainerノードは、履歴タスクから残されています。それらのプロセスは終了し、それらのサービスはもはや必要ありません。次に、 `update-drainer`コマンドを使用して状態を`offline`に設定します。
 
 ## <code>change pump</code>の<code>change drainer</code>やドレイナーの変更などのSQL操作を使用して、ポンプまたはドレイナーサービスを一時停止または閉じることはできますか？ {#can-i-use-sql-operations-such-as-code-change-pump-code-and-code-change-drainer-code-to-pause-or-close-the-pump-or-drainer-service}
 
@@ -251,11 +251,11 @@ Pumpプロセスが終了し、ノードが`paused`状態の場合、ノード�
 
 4.  `drainer.toml`の構成ファイルを変更します。 `ignore-txn-commit-ts`項目に`commit-ts`を追加し、Drainerノードを再起動します。
 
-## TiDBはbinlogへの書き込みに失敗してスタックし、 <code>listener stopped, waiting for manual stop</code>ていることがログに表示されます {#tidb-fails-to-write-to-binlog-and-gets-stuck-and-code-listener-stopped-waiting-for-manual-stop-code-appears-in-the-log}
+## TiDBがbinlogへの書き込みに失敗してスタックし、 <code>listener stopped, waiting for manual stop</code>ていることがログに表示されます {#tidb-fails-to-write-to-binlog-and-gets-stuck-and-code-listener-stopped-waiting-for-manual-stop-code-appears-in-the-log}
 
-TiDB v3.0.12以前のバージョンでは、binlogの書き込みに失敗すると、TiDBは致命的なエラーを報告します。 TiDBは自動的に終了せず、サービスを停止するだけで、スタックしているように見えます。ログに`listener stopped, waiting for manual stop`のエラーが表示されます。
+TiDB v3.0.12以前のバージョンでは、binlogの書き込みに失敗すると、TiDBが致命的なエラーを報告します。 TiDBは自動的に終了せず、サービスを停止するだけで、スタックしているように見えます。ログに`listener stopped, waiting for manual stop`のエラーが表示されます。
 
-binlog書き込みの失敗の具体的な原因を特定する必要があります。 binlogがダウンストリームにゆっくりと書き込まれるために障害が発生した場合は、Pumpをスケールアウトするか、binlogを書き込むためのタイムアウト時間を増やすことを検討できます。
+binlog書き込み失敗の具体的な原因を特定する必要があります。 binlogがダウンストリームにゆっくりと書き込まれるために障害が発生した場合は、Pumpをスケールアウトするか、binlogを書き込むためのタイムアウト時間を増やすことを検討できます。
 
 v3.0.13以降、エラー報告ロジックが最適化されています。 binlogの書き込みに失敗すると、トランザクションの実行が失敗し、TiDB Binlogはエラーを返しますが、TiDBがスタックすることはありません。
 

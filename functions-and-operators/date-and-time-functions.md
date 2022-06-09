@@ -37,7 +37,7 @@ TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql
 | [`EXTRACT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_extract)                                                      | 日付の一部を抽出する                                     |
 | [`FROM_DAYS()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_from-days)                                                  | 日番号を日付に変換する                                    |
 | [`FROM_UNIXTIME()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_from-unixtime)                                          | Unixタイムスタンプを日付としてフォーマットする                      |
-| [`GET_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_get-format)                                                | 日付形式の文字列を返す                                    |
+| [`GET_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_get-format)                                                | 日付形式の文字列を返します                                  |
 | [`HOUR()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_hour)                                                            | 時間を抽出する                                        |
 | [`LAST_DAY`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_last-day)                                                      | 引数の月末日を返す                                      |
 | [`LOCALTIME()` 、 <code>LOCALTIME</code>](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_localtime)                         | NOW（）の同義語                                      |
@@ -48,7 +48,7 @@ TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql
 | [`MINUTE()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_minute)                                                        | 引数から分を返す                                       |
 | [`MONTH()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_month)                                                          | 渡された日付から月を返します                                 |
 | [`MONTHNAME()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_monthname)                                                  | 月の名前を返します                                      |
-| [`NOW()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now)                                                              | 現在の日時を返す                                       |
+| [`NOW()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_now)                                                              | 現在の日付と時刻を返す                                    |
 | [`PERIOD_ADD()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_period-add)                                                | 年月に期間を追加する                                     |
 | [`PERIOD_DIFF()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_period-diff)                                              | 期間間の月数を返します                                    |
 | [`QUARTER()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_quarter)                                                      | 日付引数から四半期を返す                                   |
@@ -64,7 +64,7 @@ TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql
 | [`TIMEDIFF()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timediff)                                                    | 減算時間                                           |
 | [`TIMESTAMP()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timestamp)                                                  | 引数が1つの場合、この関数は日付または日時の式を返します。 2つの引数を使用して、引数の合計 |
 | [`TIMESTAMPADD()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timestampadd)                                            | 日時式に間隔を追加する                                    |
-| [`TIMESTAMPDIFF()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timestampdiff)                                          | 日時式から間隔を引く                                     |
+| [`TIMESTAMPDIFF()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timestampdiff)                                          | 日時式から間隔を減算します                                  |
 | [`TO_DAYS()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_to-days)                                                      | 日に変換された日付引数を返します                               |
 | [`TO_SECONDS()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_to-seconds)                                                | 0年以降の秒に変換された日付または日時引数を返します                     |
 | [`UNIX_TIMESTAMP()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_unix-timestamp)                                        | Unixタイムスタンプを返す                                 |
@@ -86,7 +86,7 @@ TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql
 | フォーマット          | 説明                                           |
 | --------------- | -------------------------------------------- |
 | &quot;％a&quot;  | 平日の略称（日・土）                                   |
-| &quot;％D&quot;  | 英語の接尾辞が付いた月の日（0、1、2、3）                       |
+| &quot;％D&quot;  | 英語の接尾辞が付いた月の日（0日、1日、2日、3日）                   |
 | &quot;％U&quot;  | 週（00..53）、ここで日曜日は週の最初の日です。 WEEK（）モード0        |
 | 「％u」            | 週（00..53）。月曜日が週の最初の日です。 WEEK（）モード1           |
 | &quot;％V&quot;  | 週（01..53）、ここで日曜日は週の最初の日です。 WEEK（）モード2; ％Xで使用 |

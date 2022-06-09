@@ -9,7 +9,7 @@ summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 
 ## Configuration / コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造があります。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
+TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
 
 ### TiDB Lightning（グローバル） {#tidb-lightning-global}
 
@@ -428,7 +428,7 @@ min-available-ratio = 0.05
 | --tidb-ステータス*ポート*           | TiDBステータスポート（デフォルト= 10080）                                                                          | `tidb.status-port`             |
 | --tidb-ユーザー*ユーザー*           | TiDBに接続するためのユーザー名                                                                                   | `tidb.user`                    |
 | --tidb-パスワード*パスワード*         | TiDBに接続するためのパスワード                                                                                   | `tidb.password`                |
-| -スキーマなし                     | スキーマファイルを無視し、TiDBから直接スキーマを取得します                                                                     | `mydumper.no-schema`           |
+| --スキーマなし                    | スキーマファイルを無視し、TiDBから直接スキーマを取得します                                                                     | `mydumper.no-schema`           |
 | --enable-checkpoint *bool*  | チェックポイントを有効にするかどうか（デフォルト= true）                                                                     | `checkpoint.enable`            |
 | -*レベル*を分析する                 | インポート後にテーブルを分析します。使用可能な値は、「必須」、「オプション」（デフォルト値）、および「オフ」です。                                           | `post-restore.analyze`         |
 | -チェックサム*レベル*                | インポート後のチェックサムを比較します。使用可能な値は、「必須」（デフォルト値）、「オプション」、および「オフ」です。                                         | `post-restore.checksum`        |

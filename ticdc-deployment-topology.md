@@ -7,7 +7,7 @@ summary: Learn the deployment topology of TiCDC based on the minimal TiDB topolo
 
 > **ノート：**
 >
-> TiCDCは、v4.0.6以降の一般提供（GA）の機能です。実稼働環境で使用できます。
+> TiCDCは、v4.0.6以降の一般可用性（GA）の機能です。実稼働環境で使用できます。
 
 このドキュメントでは、最小クラスタトポロジに基づく[TiCDC](/ticdc/ticdc-overview.md)の展開トポロジについて説明します。
 

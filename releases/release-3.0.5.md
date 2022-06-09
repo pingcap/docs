@@ -13,11 +13,11 @@ TiDB Ansibleバージョン：3.0.5
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   ウィンドウ関数[＃12404](https://github.com/pingcap/tidb/pull/12404)の境界チェックをサポート
+    -   ウィンドウ関数の境界チェックをサポート[＃12404](https://github.com/pingcap/tidb/pull/12404)
     -   パーティションテーブルの`IndexJoin`が誤った結果を返す問題を修正します[＃12712](https://github.com/pingcap/tidb/pull/12712)
     -   外部結合`Apply`演算子の上部にある`ifnull`関数が誤った結果を返す問題を修正します[＃12694](https://github.com/pingcap/tidb/pull/12694)
     -   サブクエリが[＃12597](https://github.com/pingcap/tidb/pull/12597)の`where`条件に含まれている場合の更新失敗の問題を修正し`UPDATE`
-    -   `cast`関数がクエリ条件[＃12790](https://github.com/pingcap/tidb/pull/12790)に含まれている場合に、外部結合が誤って内部結合に変換される問題を修正します。
+    -   `cast`の関数がクエリ条件[＃12790](https://github.com/pingcap/tidb/pull/12790)に含まれている場合に、外部結合が誤って内部結合に変換される問題を修正します。
     -   [＃12799](https://github.com/pingcap/tidb/pull/12799)の結合条件で渡される誤った`AntiSemiJoin`を修正しました
     -   統計を初期化するときに浅いコピーによって引き起こされる統計エラーを修正します[＃12817](https://github.com/pingcap/tidb/pull/12817)
     -   日付文字列とフォーマット文字列が[＃12725](https://github.com/pingcap/tidb/pull/12725)と一致しない場合、TiDBの`str_to_date`関数がMySQLとは異なる結果を返す問題を修正します。
@@ -29,7 +29,7 @@ TiDB Ansibleバージョン：3.0.5
     -   `HashAgg`が[＃12766](https://github.com/pingcap/tidb/pull/12766)の子ノードとして機能するときにクエリがハングする問題を修正し`Apply`
     -   型変換[＃12811](https://github.com/pingcap/tidb/pull/12811)に関して、 `AND`と`OR`の論理式が誤った結果を返す問題を修正します。
 -   サーバ
-    -   後で大規模なトランザクションをサポートできるようにトランザクションTTLを変更するインターフェイス機能を実装する[＃12397](https://github.com/pingcap/tidb/pull/12397)
+    -   トランザクションTTLを変更するインターフェース機能を実装して、後で大規模なトランザクションをサポートできるようにします[＃12397](https://github.com/pingcap/tidb/pull/12397)
     -   悲観的なトランザクションをサポートするために、必要に応じてトランザクションTTLの拡張をサポートします（最大10分） [＃12579](https://github.com/pingcap/tidb/pull/12579)
     -   TiDBがスキーマの変更と対応する変更されたテーブル情報を100から1024にキャッシュする回数を調整し、 `tidb_max_delta_schema_count`のシステム変数[＃12502](https://github.com/pingcap/tidb/pull/12502)を使用して変更をサポートします。
     -   `kvrpc.Cleanup`プロトコルの動作を更新して、時間外でないトランザクションのロックをクリーンアップしないようにします[＃12417](https://github.com/pingcap/tidb/pull/12417)
@@ -64,7 +64,7 @@ TiDB Ansibleバージョン：3.0.5
 -   エンジン
     -   `force_consistency_checks`を有効にしてデータの安全性を向上させる[＃5662](https://github.com/tikv/tikv/pull/5662)
     -   Titanでの同時フラッシュ操作がデータ損失を引き起こす可能性がある問題を修正します[＃5672](https://github.com/tikv/tikv/pull/5672)
-    -   rust-rocksdbバージョンを更新して、L0内の圧縮によって引き起こされるTiKVのクラッシュと再起動の問題を回避します[＃5710](https://github.com/tikv/tikv/pull/5710)
+    -   L0内圧縮によって引き起こされるTiKVのクラッシュと再起動の問題を回避するために、rust-rocksdbバージョンを更新します[＃5710](https://github.com/tikv/tikv/pull/5710)
 
 ## PD {#pd}
 

@@ -11,9 +11,9 @@ title: TiDB 2.0.8 Release Notes
 -   改善
     -   `Update`ステートメントが対応するAUTO-INCREMENT列[＃7846](https://github.com/pingcap/tidb/pull/7846)を変更しない場合は、AUTO-IDの増加速度を遅くします。
 -   バグの修正
-    -   PDリーダーがダウンしたときにサービスを回復するための新しいetcdセッションをすばやく作成します[＃7810](https://github.com/pingcap/tidb/pull/7810)
+    -   新しいetcdセッションをすばやく作成して、PDリーダーがダウンしたときにサービスを回復します[＃7810](https://github.com/pingcap/tidb/pull/7810)
     -   `DateTime`タイプのデフォルト値が計算されるときにタイムゾーンが考慮されない問題を修正します[＃7672](https://github.com/pingcap/tidb/pull/7672)
-    -   `duplicate key update`特定の条件で値が正しく挿入されない問題を修正します[＃7685](https://github.com/pingcap/tidb/pull/7685)
+    -   `duplicate key update`が特定の条件で値を誤って挿入する問題を修正します[＃7685](https://github.com/pingcap/tidb/pull/7685)
     -   `UnionScan`の述語条件がプッシュダウンされない問題を修正します[＃7726](https://github.com/pingcap/tidb/pull/7726)
     -   `TIMESTAMP`インデックス[＃7812](https://github.com/pingcap/tidb/pull/7812)を追加すると、タイムゾーンが正しく処理されない問題を修正します。
     -   一部の条件で統計モジュールによって引き起こされるメモリリークの問題を修正します[＃7864](https://github.com/pingcap/tidb/pull/7864)

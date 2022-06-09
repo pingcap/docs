@@ -13,7 +13,7 @@ TiDB Ansibleバージョン：2.1.18
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   フィードバック[＃12172](https://github.com/pingcap/tidb/pull/12172)で分割すると、無効なクエリ範囲が表示される可能性がある問題を修正します。
+    -   フィードバックによって分割されたときに無効なクエリ範囲が表示される可能性がある問題を修正します[＃12172](https://github.com/pingcap/tidb/pull/12172)
     -   ポイント取得プラン[＃12341](https://github.com/pingcap/tidb/pull/12341)で特権チェックが正しくない問題を修正します
     -   Limit演算子を`IndexLookUpReader`実行ロジック[＃12380](https://github.com/pingcap/tidb/pull/12380)にプッシュすることにより、 `select ... limit ... offset …`ステートメントの実行パフォーマンスを最適化します。
     -   `ORDER BY` 、および`GROUP BY`での[＃12514](https://github.com/pingcap/tidb/pull/12514)の使用の`LIMIT OFFSET`
@@ -47,7 +47,7 @@ TiDB Ansibleバージョン：2.1.18
     -   遅いクエリログの`COM_STMT_FETCH`回のレコードがMySQL3のレコードと矛盾する問題を修正し[＃12953](https://github.com/pingcap/tidb/pull/12953)
     -   書き込みの競合のエラーメッセージにエラーコードを追加して、原因をすばやく特定します[＃12878](https://github.com/pingcap/tidb/pull/12878)
 -   DDL
-    -   デフォルトでは、列の`AUTO INCREMENT`属性の削除を許可しません。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`変数の値を変更してください。詳細については、 [システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)を参照してください。 [＃12146](https://github.com/pingcap/tidb/pull/12146)
+    -   デフォルトでは、列の`AUTO INCREMENT`属性の削除を禁止します。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`変数の値を変更してください。詳細については、 [システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)を参照してください。 [＃12146](https://github.com/pingcap/tidb/pull/12146)
     -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートする[＃12469](https://github.com/pingcap/tidb/pull/12469)
     -   `CREATE TABLE`ステートメントの外部キー制約にスキーマがない場合、 `No Database selected`エラー[＃12678](https://github.com/pingcap/tidb/pull/12678)を返す代わりに、作成されたテーブルのスキーマを使用する必要があるという互換性の問題を修正します。
     -   [＃12681](https://github.com/pingcap/tidb/pull/12681)の実行時に`invalid list index`エラーが報告される問題を修正し`ADMIN CANCEL DDL JOBS`

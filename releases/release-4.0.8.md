@@ -85,7 +85,7 @@ TiDBバージョン：4.0.8
 
     -   TiDB Lightning
 
-        -   マルチバイトのCSV区切り文字と区切り文字をサポート[＃406](https://github.com/pingcap/tidb-lightning/pull/406)
+        -   マルチバイトのCSV区切り文字と区切り文字をサポートする[＃406](https://github.com/pingcap/tidb-lightning/pull/406)
         -   一部のPDスケジューラーを無効にすることにより、復元プロセスを高速化します[＃408](https://github.com/pingcap/tidb-lightning/pull/408)
         -   GCエラーを回避するためにv4.0クラスタのチェックサムGCセーフポイントにGC-TTLAPIを使用する[＃396](https://github.com/pingcap/tidb-lightning/pull/396)
 
@@ -98,9 +98,9 @@ TiDBバージョン：4.0.8
     -   データが長すぎる場合にデータを`BIT`タイプに変換すると、 `NULL`の値が返される問題を修正します[＃20363](https://github.com/pingcap/tidb/pull/20363)
     -   `BIT`タイプの列[＃20340](https://github.com/pingcap/tidb/pull/20340)の破損したデフォルト値を修正します
     -   `BIT`タイプを`INT64`タイプ[＃20312](https://github.com/pingcap/tidb/pull/20312)に変換するときに発生する可能性があるオーバーフローエラーを修正します
-    -   ハイブリッドタイプのカラム[＃20297](https://github.com/pingcap/tidb/pull/20297)の伝搬カラム最適化の誤った結果の可能性を修正
+    -   ハイブリッドタイプの列[＃20297](https://github.com/pingcap/tidb/pull/20297)の伝播列の最適化で発生する可能性のある誤った結果を修正します。
     -   プランキャッシュから古いプランを保存するときに発生する可能性のあるパニックを修正する[＃20246](https://github.com/pingcap/tidb/pull/20246)
-    -   `FROM_UNIXTIME`と`UNION ALL`を一緒に使用すると、返された結果が誤って切り捨てられるバグを修正します[＃20240](https://github.com/pingcap/tidb/pull/20240)
+    -   `FROM_UNIXTIME`と`UNION ALL`を一緒に使用すると、返される結果が誤って切り捨てられるバグを修正します[＃20240](https://github.com/pingcap/tidb/pull/20240)
     -   `Enum`タイプの値を`Float`タイプ[＃20235](https://github.com/pingcap/tidb/pull/20235)に変換すると、間違った結果が返される可能性がある問題を修正します。
     -   [＃20210](https://github.com/pingcap/tidb/pull/20210)の起こりうるパニックを修正し`RegionStore.accessStore`
     -   最大符号なし整数を`BatchPointGet`でソートしたときに返される間違った結果を修正し[＃20205](https://github.com/pingcap/tidb/pull/20205)
@@ -112,9 +112,9 @@ TiDBバージョン：4.0.8
     -   範囲[＃20170](https://github.com/pingcap/tidb/pull/20170)外の`YEAR`タイプのデータの不正確なエラー情報を修正します
     -   悲観的なトランザクションの再試行中に発生する可能性のある予期しない`invalid auto-id`エラーを修正します[＃20134](https://github.com/pingcap/tidb/pull/20134)
     -   `ALTER TABLE`を使用して`Enum`タイプ`Set`を変更すると、制約がチェックされない問題を修正し[＃20046](https://github.com/pingcap/tidb/pull/20046) 。
-    -   複数のオペレーターが並行性[＃19947](https://github.com/pingcap/tidb/pull/19947)に使用されたときに記録された`cop`のタスクの誤ったランタイム情報を修正します
+    -   複数の演算子が同時実行[＃19947](https://github.com/pingcap/tidb/pull/19947)に使用されたときに記録された`cop`のタスクの誤った実行時情報を修正します
     -   読み取り専用のシステム変数をセッション変数として明示的に選択できない問題を修正します[＃19944](https://github.com/pingcap/tidb/pull/19944)
-    -   重複`ORDER BY`条件が次善の実行計画[＃20333](https://github.com/pingcap/tidb/pull/20333)を引き起こす可能性があるという問題を修正します
+    -   重複`ORDER BY`条件が次善の実行プラン[＃20333](https://github.com/pingcap/tidb/pull/20333)を引き起こす可能性があるという問題を修正します
     -   フォントサイズが最大許容値を超えると、生成されたメトリックプロファイルが失敗する可能性がある問題を修正します[＃20637](https://github.com/pingcap/tidb/pull/20637)
 
 -   TiKV

@@ -75,7 +75,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 ### その他のMySQL互換性 {#other-mysql-compatibility}
 
--   現在、TiDBは、 `ALTER TABLE`ステートメントを使用して他の文字セットタイプを`gbk`に、または`gbk`から他の文字セットタイプに変換することをサポートしていません。
+-   現在、TiDBは、 `ALTER TABLE`ステートメントを使用して他の文字セットタイプを`gbk`に変換したり、 `gbk`から他の文字セットタイプに変換したりすることをサポートしていません。
 
 -   TiDBは`_gbk`の使用をサポートしていません。例えば：
 
@@ -96,4 +96,4 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 -   TiDB Lightningは、v5.4.0より前のTiDBクラスターへの`charset=GBK`のテーブルのインポートをサポートしていません。
 
--   v5.4.0より前のバージョンのバックアップと復元（BR）は、 `charset=GBK`のテーブルのリカバリをサポートしていません。 BRのどのバージョンも、v5.4.0より前のTiDBクラスターへの`charset=GBK`のテーブルのリカバリーをサポートしていません。
+-   v5.4.0より前のバージョンのバックアップと復元（BR）は、 `charset=GBK`のテーブルのリカバリーをサポートしていません。 BRのどのバージョンも、v5.4.0より前のTiDBクラスターへの`charset=GBK`のテーブルのリカバリーをサポートしていません。

@@ -33,7 +33,7 @@ title: TiDB 2.1.3 Release Notes
     -   場合によってはテーブルパーティションを同時に作成する問題を修正します[＃8902](https://github.com/pingcap/tidb/pull/8902)
     -   `utf8` [＃9152](https://github.com/pingcap/tidb/pull/9152)セットの`utf8mb4`への変換を[＃8951](https://github.com/pingcap/tidb/pull/8951)
     -   シャードビットオーバーフローの問題を修正[＃8976](https://github.com/pingcap/tidb/pull/8976)
-    -   [＃9053](https://github.com/pingcap/tidb/pull/9053)の列文字セットの`SHOW CREATE TABLE`をサポート
+    -   13の列文字セットの`SHOW CREATE TABLE`をサポートし[＃9053](https://github.com/pingcap/tidb/pull/9053)
     -   [＃8818](https://github.com/pingcap/tidb/pull/8818)のvarcharタイプ列の最大長制限の問題を修正し`utf8mb4`
     -   [＃9093](https://github.com/pingcap/tidb/pull/9093) `ALTER TABLE TRUNCATE TABLE PARTITION`
     -   文字セットが提供されていない場合は、文字セットを解決します[＃9147](https://github.com/pingcap/tidb/pull/9147)
@@ -46,7 +46,7 @@ title: TiDB 2.1.3 Release Notes
 
 -   HTTPメソッド[＃3855](https://github.com/tikv/tikv/pull/3855)を使用した監視情報の取得のサポート
 -   [＃4075](https://github.com/tikv/tikv/pull/4075)のNULLの問題を修正し`data_format`
--   スキャン要求の範囲の確認を追加[＃4124](https://github.com/tikv/tikv/pull/4124)
+-   スキャンリクエストの範囲の確認を追加[＃4124](https://github.com/tikv/tikv/pull/4124)
 
 ## ツール {#tools}
 

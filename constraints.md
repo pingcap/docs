@@ -108,7 +108,7 @@ INSERT INTO users (username) VALUES ('jane'), ('chris'), ('bill');
 ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 ```
 
-楽観的なロックと`tidb_constraint_check_in_place=0` ：
+楽観的ロックと`tidb_constraint_check_in_place=0` ：
 
 {{< copyable "" >}}
 
@@ -274,7 +274,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 > **ノート：**
 >
-> TiDBは、外部キー制約のサポートが制限されています。
+> TiDBは、外部キー制約のサポートを制限しています。
 
 TiDBは、DDLコマンドでの`FOREIGN KEY`の制約の作成をサポートしています。
 

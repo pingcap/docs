@@ -94,12 +94,12 @@ BRツールはすでにGCへの自己適応をサポートしています。 `ba
 
 ### 単一のテーブルをネットワークディスクにバックアップします（実稼働環境で推奨） {#back-up-a-single-table-to-a-network-disk-recommended-in-production-environment}
 
-`br backup`コマンドを使用して、単一テーブルのデータ`--db batchmark --table order_line`をネットワークディスク内の指定されたパス`local:///br_data`にバックアップします。
+`br backup`コマンドを使用して、単一のテーブルデータ`--db batchmark --table order_line`をネットワークディスク内の指定されたパス`local:///br_data`にバックアップします。
 
 #### バックアップの前提条件 {#backup-prerequisites}
 
 -   [バックアップの準備](#preparation-for-backup)
--   高性能SSDハードディスクホストをデータを保存するNFSサーバーとして構成し、すべてのBRノード、TiKVノード、およびTiFlashノードをNFSクライアントとして構成します。 NFSクライアントがサーバーにアクセスできるように、同じパス（たとえば、 `/br_data` ）をNFSサーバーにマウントします。
+-   高性能SSDハードディスクホストをデータを格納するNFSサーバーとして構成し、すべてのBRノード、TiKVノード、およびTiFlashノードをNFSクライアントとして構成します。 NFSクライアントがサーバーにアクセスできるように、同じパス（たとえば、 `/br_data` ）をNFSサーバーにマウントします。
 -   NFSサーバーとすべてのNFSクライアント間の合計転送速度は、少なくとも`the number of TiKV instances * 150MB/s`に達する必要があります。そうしないと、ネットワークI/Oがパフォーマンスのボトルネックになる可能性があります。
 
 > **ノート：**
@@ -227,7 +227,7 @@ bin/br backup table \
 
 ![img](/media/br/backup-diff2.png)
 
-調整されたパフォーマンス結果は次のとおりです（同じデータサイズで）：
+調整されたパフォーマンス結果は次のとおりです（同じデータサイズで）。
 
 -   バックアップ期間： `total take(s)`が`986.43`から`535.53`に減少
 -   バックアップスループット： `avg speed(MB/s)`が`358.09`から`659.59`に増加
@@ -275,7 +275,7 @@ bin/br restore table --db batchmark --table order_line -s local:///br_data --pd 
 
 ![img](/media/br/restore-region.png)
 
-SSTの処理**期間**：SSTファイルの処理の遅延。テーブルを復元するときに、 `tableID`が変更された場合は、 `tableID`を書き直す必要があります。それ以外の場合、 `tableID`は名前が変更されます。一般的に、書き換えの遅延は名前変更の遅延よりも長くなります。
+SSTの処理**時間**：SSTファイルの処理の遅延。テーブルを復元するときに、 `tableID`が変更された場合は、 `tableID`を書き直す必要があります。それ以外の場合、 `tableID`は名前が変更されます。一般的に、書き換えの遅延は名前変更の遅延よりも長くなります。
 
 ![img](/media/br/restore-process-sst.png)
 
@@ -318,7 +318,7 @@ SSTの処理**期間**：SSTファイルの処理の遅延。テーブルを復�
 -   アプリケーションの合計実行時間： `total take(real time): 16m1.371611365s`
 -   復元データサイズ： `total size(MB): 353227.18`
 -   KVペア番号を復元： `total kv: 5659888624`
--   復元スループット： `avg speed(MB/s): 367.42`
+-   スループットの復元： `avg speed(MB/s): 367.42`
 -   `Region Split`期間： `take=49.049182743s`
 -   チェックサム期間の復元： `restore checksum=6m34.879439498s`
 -   ディスクに復元されたデータの実際のサイズ： `[Size=48693068713]`
@@ -338,7 +338,7 @@ SSTの処理**期間**：SSTファイルの処理の遅延。テーブルを復�
 bin/br restore table --db batchmark --table order_line -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore-concurrency.log --concurrency 1024
 ```
 
-調整されたパフォーマンス結果は次のとおりです（同じデータサイズで）：
+調整されたパフォーマンス結果は次のとおりです（同じデータサイズで）。
 
 -   復元期間： `total take(s)`が`961.37`から`443.49`に減少
 -   復元スループット： `avg speed(MB/s)`が`367.42`から`796.47`に増加
@@ -407,7 +407,7 @@ bin/br backup table \
 #### 復元の前提条件 {#restoration-prerequisites}
 
 -   [修復の準備](#preparation-for-restoration)
--   TiKVクラスタとバックアップデータに重複するデータベースまたはテーブルはありません。現在、BRはテーブルルートをサポートしていません。
+-   TiKVクラスタとバックアップデータに重複するデータベースまたはテーブルがありません。現在、BRはテーブルルートをサポートしていません。
 -   各TiKVノードには、backupSSTファイルを保存するための個別のディスクがあります。
 -   `restore_endpoint`ノードには、 `backupmeta`ファイルを保存するための個別のディスクがあります。
 -   TiKVと`restore_endpoint`ノードは、復元のために同じディレクトリ（たとえば、 `/home/tidb/backup_local/` ）を持っている必要があります。

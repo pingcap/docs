@@ -40,4 +40,4 @@ mysql> SHOW CHARACTER SET;
 ## も参照してください {#see-also}
 
 -   [照合を表示](/sql-statements/sql-statement-show-collation.md)
--   [キャラクターセットと照合](/character-set-and-collation.md)
+-   [文字セットと照合](/character-set-and-collation.md)

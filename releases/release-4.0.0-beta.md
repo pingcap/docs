@@ -6,7 +6,7 @@ title: TiDB 4.0 Beta Release Notes
 
 発売日：2020年1月17日
 
-TiDBバージョン：4.0.0-ベータ
+TiDBバージョン：4.0.0-ベータ版
 
 TiDB Ansibleバージョン：4.0.0-ベータ版
 
@@ -39,8 +39,8 @@ TiDB Ansibleバージョン：4.0.0-ベータ版
 -   SQL [＃12434](https://github.com/pingcap/tidb/pull/12434)の自動キャプチャと進化をサポート[＃13199](https://github.com/pingcap/tidb/pull/13199)
 -   `Chunk`を使用してTiKVとの通信のエンコード形式を最適化し、通信パフォーマンスを向上させます[＃12023](https://github.com/pingcap/tidb/pull/12023) [＃12536](https://github.com/pingcap/tidb/pull/12536) [＃12613](https://github.com/pingcap/tidb/pull/12613) [＃12621](https://github.com/pingcap/tidb/pull/12621) [＃12899](https://github.com/pingcap/tidb/pull/12899) [＃13060](https://github.com/pingcap/tidb/pull/13060) [＃13349](https://github.com/pingcap/tidb/pull/13349)
 -   ワイドテーブル[＃12634](https://github.com/pingcap/tidb/pull/12634)のパフォーマンスを向上させるために、新しい行ストア形式をサポートします。
--   `Recover Binlog`のインターフェイスを最適化して、すべてのトランザクションがコミットされるのを待ってからクライアントに戻るようにします[＃13740](https://github.com/pingcap/tidb/pull/13740)
--   `info/all`インターフェイスを介してクラスタのTiDBサーバーによって有効にされたbinlogステータスのクエリをサポートします[＃13025](https://github.com/pingcap/tidb/pull/13025)
+-   `Recover Binlog`のインターフェースを最適化して、すべてのトランザクションがコミットされるのを待ってからクライアントに戻るようにします[＃13740](https://github.com/pingcap/tidb/pull/13740)
+-   `info/all`インターフェースを介したクラスタのTiDBサーバーによって有効化されたbinlogステータスのクエリをサポートします[＃13025](https://github.com/pingcap/tidb/pull/13025)
 -   悲観的トランザクションモード[＃14087](https://github.com/pingcap/tidb/pull/14087)を使用する場合は、MySQL互換の`Read Committed`トランザクション分離レベルをサポートします。
 -   大規模なトランザクションをサポートします。トランザクションサイズは、物理メモリのサイズによって制限されます。
     -   [＃11999](https://github.com/pingcap/tidb/pull/11999) [＃11986](https://github.com/pingcap/tidb/pull/11986) [＃11974](https://github.com/pingcap/tidb/pull/11974) [＃11817](https://github.com/pingcap/tidb/pull/11817) [＃11807](https://github.com/pingcap/tidb/pull/11807)
@@ -65,7 +65,7 @@ TiDB Ansibleバージョン：4.0.0-ベータ版
 ## TiKV {#tikv}
 
 -   RocksDBバージョンを6.4.6にアップグレードします
--   TiKVの起動時に2GBの空のファイルを自動的に作成することにより、ディスクスペースが使い果たされたときにシステムが圧縮タスクを正常に実行できない問題を修正します[＃6321](https://github.com/tikv/tikv/pull/6321)
+-   TiKVの起動時に2GBの空のファイルを自動的に作成することにより、ディスク容量が使い果たされたときにシステムが圧縮タスクを正常に実行できない問題を修正します[＃6321](https://github.com/tikv/tikv/pull/6321)
 -   迅速なバックアップと復元をサポート
     -   [＃6462](https://github.com/tikv/tikv/pull/6462) [＃6395](https://github.com/tikv/tikv/pull/6395) [＃6378](https://github.com/tikv/tikv/pull/6378) [＃6374](https://github.com/tikv/tikv/pull/6374) [＃6349](https://github.com/tikv/tikv/pull/6349)
     -   [＃6339](https://github.com/tikv/tikv/pull/6339) [＃6308](https://github.com/tikv/tikv/pull/6308) [＃6295](https://github.com/tikv/tikv/pull/6295) [＃6286](https://github.com/tikv/tikv/pull/6286) [＃6283](https://github.com/tikv/tikv/pull/6283)
@@ -109,5 +109,5 @@ TiDB Ansibleバージョン：4.0.0-ベータ版
 -   ダウンロードしたパッケージが不完全な場合に備えて、パッケージにチェックサムチェックを追加します[＃1002](https://github.com/pingcap/tidb-ansible/pull/1002)
 -   `systemd-219-52`以降である必要がある[＃1074](https://github.com/pingcap/tidb-ansible/pull/1074)バージョンのチェックをサポート[＃1020](https://github.com/pingcap/tidb-ansible/pull/1020)
 -   TiDBLightningの起動時にログディレクトリが正しく作成されない問題を修正します[＃1103](https://github.com/pingcap/tidb-ansible/pull/1103)
--   TiDBLightningのカスタマイズされたポートが無効である問題を修正します[＃1107](https://github.com/pingcap/tidb-ansible/pull/1107)
+-   TiDBLightningのカスタマイズされたポートが無効であるという問題を修正します[＃1107](https://github.com/pingcap/tidb-ansible/pull/1107)
 -   [＃1119](https://github.com/pingcap/tidb-ansible/pull/1119)の展開と保守をサポートする

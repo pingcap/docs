@@ -53,7 +53,7 @@ TiDBバージョン：5.1.4
         -   多くのテーブルを複製するときの複製待ち時間を短縮する[＃3900](https://github.com/pingcap/tiflow/issues/3900)
         -   インクリメンタルスキャンの残り時間を監視するためのメトリックを追加する[＃2985](https://github.com/pingcap/tiflow/issues/2985)
         -   「EventFeed再試行率制限」ログの数を減らす[＃4006](https://github.com/pingcap/tiflow/issues/4006)
-        -   `no owner alert` `buffer sink total row` [＃4054](https://github.com/pingcap/tiflow/issues/4054)など、 [＃1606](https://github.com/pingcap/tiflow/issues/1606)と`mounter row`のモニタリング指標とアラートをさらに追加し`table sink total row`
+        -   `no owner alert` `buffer sink total row` [＃4054](https://github.com/pingcap/tiflow/issues/4054)など、 [＃1606](https://github.com/pingcap/tiflow/issues/1606)と`mounter row`の監視メトリックとアラートをさらに追加し`table sink total row`
         -   TiKVリロードのレート制限制御を最適化して、チェンジフィード初期化中のgPRC輻輳を低減します[＃3110](https://github.com/pingcap/ticdc/issues/3110)
         -   TiKVストアがダウンしたときにKVクライアントが回復する時間を短縮する[＃3191](https://github.com/pingcap/tiflow/issues/3191)
 
@@ -67,7 +67,7 @@ TiDBバージョン：5.1.4
     -   `ENUM`のタイプの列で`JOIN`を実行するときに発生する可能性のある間違った結果を修正します[＃27831](https://github.com/pingcap/tidb/issues/27831)
     -   INDEXHASHJOINが`send on closed channel`エラー[＃31129](https://github.com/pingcap/tidb/issues/31129)を返す問題を修正します
     -   [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) APIを使用すると、まれにTiKVへのTiDBリクエストの送信がブロックされる可能性がある問題を修正します[＃32500](https://github.com/pingcap/tidb/issues/32500)
-    -   楽観的トランザクションモード[＃30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータインデックスの不整合の問題を修正します
+    -   楽観的なトランザクションモード[＃30410](https://github.com/pingcap/tidb/issues/30410)での潜在的なデータインデックスの不整合の問題を修正します
     -   トランザクションを使用するかどうかにかかわらず、ウィンドウ関数が異なる結果を返す可能性がある問題を修正します[＃29947](https://github.com/pingcap/tidb/issues/29947)
     -   `Decimal`から[＃29417](https://github.com/pingcap/tidb/issues/29417)をキャストするときに長さ情報が間違っている問題を修正し`String`
     -   `tidb_enable_vectorized_expression`ベクトル化された式を[＃29434](https://github.com/pingcap/tidb/issues/29434)に設定すると、 `GREATEST`関数が誤った結果を返す問題を修正し`off` 。
@@ -78,13 +78,13 @@ TiDBバージョン：5.1.4
     -   35を割り当てるときの`DATA RACE` [＃27952](https://github.com/pingcap/tidb/issues/27952)問題を修正し`MPP task ID`
     -   空の[＃28250](https://github.com/pingcap/tidb/issues/28250)を削除した後のMPPクエリの`INDEX OUT OF RANGE`エラーを修正し`dual table`
     -   MPPクエリ[＃1791](https://github.com/pingcap/tics/issues/1791)の誤検知エラーログ`invalid cop task execution summaries length`の問題を修正します
-    -   SET GLOBAL tidb_skip_isolation_level_check=1が新しいセッション設定に影響しない問題を修正します[＃27897](https://github.com/pingcap/tidb/issues/27897)
+    -   SET GLOBAL tidb_skip_isolation_level_check=1が新しいセッション設定に影響を与えない問題を修正します[＃27897](https://github.com/pingcap/tidb/issues/27897)
 
 -   TiKV
 
     -   GCワーカーがビジー状態のときにTiKVがデータの範囲を削除できない（ `unsafe_destroy_range`は実行できない）バグを修正します[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   ピアを破棄すると待ち時間が長くなる可能性があるという問題を修正します[＃10210](https://github.com/tikv/tikv/issues/10210)
-    -   リージョンが空の場合に`any_value`関数が間違った結果を返すバグを修正します[＃11735](https://github.com/tikv/tikv/issues/11735)
+    -   領域が空の場合に`any_value`関数が間違った結果を返すバグを修正します[＃11735](https://github.com/tikv/tikv/issues/11735)
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性がある問題を修正します[＃10533](https://github.com/tikv/tikv/issues/10533)
     -   新しい選択が終了した後に`Prepare Merge`がトリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正します[＃11526](https://github.com/tikv/tikv/issues/11526)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正します[＃11549](https://github.com/tikv/tikv/issues/11549)
@@ -100,8 +100,8 @@ TiDBバージョン：5.1.4
     -   10進数の除算結果がゼロの場合の負の符号の問題を修正します[＃29586](https://github.com/pingcap/tidb/issues/29586)
     -   統計スレッド[＃11195](https://github.com/tikv/tikv/issues/11195)の監視データによって引き起こされるメモリリークを修正します
     -   ダウンストリームデータベースが欠落しているときに発生するTiCDCパニックの問題を修正します[＃11123](https://github.com/tikv/tikv/issues/11123)
-    -   輻輳エラー[＃11082](https://github.com/tikv/tikv/issues/11082)が原因でTiCDCがスキャン再試行を頻繁に追加する問題を修正します
-    -   Raftクライアントの実装でバッチメッセージが大きすぎる問題を修正します[＃9714](https://github.com/tikv/tikv/issues/9714)
+    -   輻輳エラー[＃11082](https://github.com/tikv/tikv/issues/11082)が原因でTiCDCがスキャンの再試行を頻繁に追加する問題を修正します
+    -   Raftクライアントの実装でバッチメッセージが大きすぎるという問題を修正します[＃9714](https://github.com/tikv/tikv/issues/9714)
     -   Grafanaダッシュボード[＃11681](https://github.com/tikv/tikv/issues/11681)でいくつかの一般的でないストレージ関連のメトリックを折りたたむ
 
 -   PD
@@ -155,7 +155,7 @@ TiDBバージョン：5.1.4
         -   AvroシンクがJSONタイプの列の解析をサポートしていない問題を修正します[＃3624](https://github.com/pingcap/tiflow/issues/3624)
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/ticdc/issues/3010)の負の値のエラーを修正します
         -   コンテナ環境でのOOMの問題を修正する[＃1798](https://github.com/pingcap/tiflow/issues/1798)
-        -   複数のTiKVがクラッシュした場合、または強制的に再起動した場合のTiCDCレプリケーションの中断の問題を修正します[＃3288](https://github.com/pingcap/ticdc/issues/3288)
+        -   複数のTiKVがクラッシュしたとき、または強制的に再起動したときのTiCDCレプリケーションの中断の問題を修正します[＃3288](https://github.com/pingcap/ticdc/issues/3288)
         -   [＃3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリリークの問題を修正
         -   ErrGCTTLExceededエラーが発生したときにchangefeedが十分に速く失敗しない問題を修正します[＃3111](https://github.com/pingcap/ticdc/issues/3111)
         -   アップストリームTiDBインスタンスが予期せず終了したときにTiCDCレプリケーションタスクが終了する可能性がある問題を修正します[＃3061](https://github.com/pingcap/tiflow/issues/3061)

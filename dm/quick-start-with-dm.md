@@ -7,7 +7,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 このドキュメントでは、 [TiDBデータ移行](https://github.com/pingcap/dm) （DM）を使用してMySQLからTiDBにデータを移行する方法について説明します。
 
-DMを実稼働環境にデプロイする必要がある場合は、次のドキュメントを参照してください。
+DMを実稼働環境にデプロイする必要がある場合は、以下のドキュメントを参照してください。
 
 -   [TiUPを使用してDMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
 -   [データソースを作成する](/dm/quick-start-create-source.md)

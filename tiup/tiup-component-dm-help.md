@@ -2,7 +2,7 @@
 title: tiup dm help
 ---
 
-# tiupdmヘルプ {#tiup-dm-help}
+# tiup dm help {#tiup-dm-help}
 
 tiup-dmコマンドラインインターフェイスは、ユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで表示できます。基本的に、 `tiup dm help <command>`は`tiup dm <command> --help`に相当します。
 

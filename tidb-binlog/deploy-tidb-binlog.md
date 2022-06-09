@@ -9,7 +9,7 @@ summary: Learn how to deploy TiDB Binlog cluster.
 
 ## ハードウェア要件 {#hardware-requirements}
 
-Pump and Drainerは、Intelx86-64アーキテクチャを備えた64ビットユニバーサルハードウェアサーバープラットフォームで展開および動作します。
+Pump and Drainerは、Intelx86-64アーキテクチャを備えた64ビットユニバーサルハードウェアサーバープラットフォームにデプロイされて動作します。
 
 開発、テスト、および実稼働の環境では、サーバーハードウェアの要件は次のとおりです。
 
@@ -413,5 +413,5 @@ sha256sum -c tidb-binlog-$version-linux-amd64.sha256
 > -   同じクラスタのすべてのTiDBインスタンスでTiDBBinlogサービスが有効になっていることを確認してください。有効になっていないと、データレプリケーション中にアップストリームとダウンストリームのデータの不整合が発生する可能性があります。 TiDB Binlogサービスが有効になっていないTiDBインスタンスを一時的に実行する場合は、TiDB構成ファイルに`run_ddl=false`を設定します。
 > -   Drainerは、 `ignore schemas`のテーブル（フィルターリスト内のスキーマ）での`rename`操作をサポートしていません。
 > -   既存のTiDBクラスタでDrainerを起動する場合は、通常、クラスタデータの完全バックアップを作成し、**スナップショットタイムスタンプ**を取得し、データをターゲットデータベースにインポートしてから、Drainerを起動して、対応する<strong>スナップショット</strong>から増分データを複製する必要があります。<strong>タイムスタンプ</strong>。
-> -   ダウンストリームデータベースがTiDBまたはMySQLの場合、アップストリームデータベースとダウンストリームデータベースの`sql_mode`が一致していることを確認してください。つまり、各SQLステートメントがアップストリームで実行され、ダウンストリームに複製される場合、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して、 `sql_mode`を比較できます。
+> -   ダウンストリームデータベースがTiDBまたはMySQLの場合、アップストリームデータベースとダウンストリームデータベースの`sql_mode`が一致していることを確認してください。つまり、各SQLステートメントがアップストリームで実行され、ダウンストリームにレプリケートされる場合、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して、 `sql_mode`を比較できます。
 > -   DDLステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、Drainerはデータの複製に失敗します。例として、ダウンストリームデータベースMySQLがInnoDBエンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製します。この場合、Drainerで[トランザクションをスキップする](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)を構成し、ダウンストリームデータベースで互換性のあるステートメントを手動で実行できます。

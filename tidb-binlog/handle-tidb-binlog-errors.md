@@ -23,9 +23,9 @@ fetch.message.max.bytes=1073741824
 
 ## ポンプは<code>no space left on device</code> {#pump-returns-code-no-space-left-on-device-code-error}
 
-原因：Pumpがbinlogデータを正常に書き込むには、ローカルディスク領域が不十分です。
+原因：Pumpがbinlogデータを正常に書き込むには、ローカルディスク容量が不足しています。
 
-解決策：ディスクスペースをクリーンアップしてから、Pumpを再起動します。
+解決策：ディスク領域をクリーンアップしてから、Pumpを再起動します。
 
 ## ポンプの始動時に、 <code>fail to notify all living drainer</code> {#code-fail-to-notify-all-living-drainer-code-is-returned-when-pump-is-started}
 

@@ -14,7 +14,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 >
 > -   TiDB、TiUP、およびTiDBダッシュボードは、使用法の詳細をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
 >
-> -   このガイドで提供されている展開方法は、クイックスタート**のみ**を目的としており、本番環境を対象としてい<strong>ません</strong>。
+> -   このガイドで提供されている展開方法は、クイックスタート**のみ**を目的としており、本番環境向けではあり<strong>ません</strong>。
 >
 >     -   オンプレミスの本番クラスタをデプロイするには、 [本番インストールガイド](/production-deployment-using-tiup.md)を参照してください。
 >     -   KubernetesにTiDBをデプロイするには、 [KubernetesでTiDBを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started)を参照してください。
@@ -22,7 +22,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 ## ローカルテストクラスタをデプロイする {#deploy-a-local-test-cluster}
 
--   シナリオ：単一のmacOSまたはLinuxサーバーを使用してテストするためにローカルTiDBクラスタをすばやく展開します。このようなクラスタをデプロイすることにより、TiDBの基本アーキテクチャーと、TiDB、TiKV、PD、および監視コンポーネントなどのコンポーネントの操作を学習できます。
+-   シナリオ：単一のmacOSまたはLinuxサーバーを使用してテストするために、ローカルTiDBクラスタをすばやくデプロイします。このようなクラスタをデプロイすることにより、TiDBの基本アーキテクチャと、TiDB、TiKV、PD、および監視コンポーネントなどのコンポーネントの操作を学習できます。
 
 <SimpleTab>
 <div label="macOS">
@@ -99,7 +99,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
         > **ノート：**
         >
-        > -   v5.2.0以降、TiDBはAppleM1チップを使用するマシンでの`tiup playground`の実行をサポートしています。
+        > -   v5.2.0以降、TiDBはAppleM1チップを使用するマシンでの`tiup playground`の実行をサポートします。
         > -   このように操作された遊び場の場合、テスト展開が終了した後、TiUPは元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。
         > -   データをストレージに永続化する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳しくは[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)をご覧ください。
 
@@ -268,7 +268,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 ## 単一のマシンでの実稼働展開をシミュレートする {#simulate-production-deployment-on-a-single-machine}
 
--   シナリオ：完全なトポロジーを備えた最小のTiDBクラスタを体験し、単一のLinuxサーバーで実稼働展開手順をシミュレートします。
+-   シナリオ：完全なトポロジーを備えた最小のTiDBクラスタを体験し、単一のLinuxサーバーで本番デプロイメントの手順をシミュレートします。
 
 このセクションでは、TiUPで最小のトポロジのYAMLファイルを使用してTiDBクラスタをデプロイする方法について説明します。
 

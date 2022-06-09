@@ -67,7 +67,7 @@ PD制御を使用して、 [`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;
 
 ### ステップ4.読み取りおよび書き込みタスクをテストする {#step-4-test-read-and-write-tasks}
 
-progressコマンドで回復タスクが完了したことが示された後、次の例のようないくつかの単純なSQLクエリを実行するか、書き込みタスクを実行して、データの読み取りと書き込みが可能であることを確認できます。
+progressコマンドが回復タスクの完了を示したら、次の例のようないくつかの単純なSQLクエリを実行するか、書き込みタスクを実行して、データの読み取りと書き込みが可能であることを確認できます。
 
 ```sql
 select count(*) from table_that_suffered_from_group_majority_failure;

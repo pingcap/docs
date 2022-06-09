@@ -2,7 +2,7 @@
 title: tiup cluster enable
 ---
 
-# tiup クラスタ enable {#tiup-cluster-enable}
+# tiup cluster enable {#tiup-cluster-enable}
 
 `tiup cluster enable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を設定するために使用されます。このコマンドは、指定されたノードで`systemctl enable <service>`を実行することにより、サービスの自動有効化を有効にします。
 
@@ -22,9 +22,9 @@ tiup cluster enable <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   サービスの自動有効化を有効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
 -   データ型： `STRINGS`
--   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化がデフォルトで有効になっています。
+-   コマンドでこのオプションが指定されていない場合、すべてのノードの自動有効化がデフォルトで有効になっています。
 
 > **ノート：**
 >
@@ -50,4 +50,4 @@ tiup cluster enable <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

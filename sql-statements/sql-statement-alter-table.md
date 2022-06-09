@@ -81,7 +81,7 @@ EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 3 rows in set (0.00 sec)
 ```
 
-ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)を使用して、テーブルt1にインデックスを追加できます。 `EXPLAIN`は、元のクエリがインデックス範囲スキャンを使用することを確認します。これはより効率的です。
+ステートメント[`ALTER TABLE .. ADD INDEX`](/sql-statements/sql-statement-add-index.md)を使用して、テーブルt1にインデックスを追加できます。 `EXPLAIN`は、元のクエリがインデックス範囲スキャンを使用していることを確認します。これはより効率的です。
 
 {{< copyable "" >}}
 
@@ -154,7 +154,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 -   主キー列の[Reorg-データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
 
--   パーティションテーブルの列タイプの変更はサポートされていません。
+-   パーティション表の列タイプの変更はサポートされていません。
 
 -   生成された列の列タイプの変更はサポートされていません。
 

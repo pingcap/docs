@@ -30,7 +30,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
 
     詳細なコマンドについては、 [TiUPを使用して構成を変更します](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
--   方法2：TiKV構成ファイルを直接編集して、Titanを有効にします（実稼働環境では推奨され**ません**）。
+-   方法2：TiKV構成ファイルを直接編集して、Titanを有効にします（実稼働環境には推奨され**ません**）。
 
     {{< copyable "" >}}
 
@@ -45,7 +45,7 @@ Titanを有効にした後、RocksDBに保存されている既存のデータ�
 
 > **ノート：**
 >
-> Titanが無効になっている場合、RocksDBはTitanに移行されたデータを読み取ることができません。 Titanがすでに有効になっているTiKVインスタンスでTitanが誤って無効にされている場合（誤って`rocksdb.titan.enabled`から`false`に設定されている場合）、TiKVは開始に失敗し、 `You have disabled titan when its data directory is not empty`エラーがTiKVログに表示されます。 Titanを正しく無効にするには、 [タイタンを無効にする](#disable-titan-experimental)を参照してください。
+> Titanが無効になっている場合、RocksDBはTitanに移行されたデータを読み取ることができません。 Titanがすでに有効になっているTiKVインスタンスでTitanが誤って無効にされている場合（誤って`rocksdb.titan.enabled`から`false`に設定されている場合）、TiKVは起動に失敗し、 `You have disabled titan when its data directory is not empty`エラーがTiKVログに表示されます。 Titanを正しく無効にするには、 [タイタンを無効にする](#disable-titan-experimental)を参照してください。
 
 ## パラメーター {#parameters}
 
@@ -71,7 +71,7 @@ TiUPを使用してTitan関連のパラメータを調整するには、 [構成
     min-blob-size = "1KB"
     ```
 
--   Titanで値を圧縮するために使用されるアルゴリズム。値を単位とします。
+-   Titanで値を圧縮するために使用されるアルゴリズムで、値を単位とします。
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -122,7 +122,7 @@ Titanを無効にするには、 `blob-run-mode = "fallback"`を設定し、tikv
 
 > **警告：**
 >
-> Titanを無効にすることは実験的機能です。必要が**ない**場合は使用しないでください。
+> Titanを無効にすることは、実験的機能です。必要が**ない**場合は使用しないでください。
 
 ## レベルマージ（実験的） {#level-merge-experimental}
 

@@ -5,7 +5,7 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 # TiDBLightningの導入 {#tidb-lightning-deployment}
 
-このドキュメントでは、ローカルバックエンドを使用したTiDB Lightningのハードウェア要件と、手動でデプロイする方法について説明します。
+このドキュメントでは、ローカルバックエンドを使用したTiDB Lightningのハードウェア要件と、それを手動で展開する方法について説明します。
 
 ローカルバックエンドがデータのインポートに使用されている場合、インポートプロセス中**、クラスタはサービスを提供できません**。 TiDBサービスに影響を与えたくない場合は、 [TiDBLightningTiDB-バックエンド](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend)に従ってデータのインポートを実行します。
 
@@ -31,7 +31,7 @@ TiDB Lightningを開始する前に、次の点に注意してください。
     |    落とす | データベース、テーブル |
     |  ALTER | テーブル        |
 
-    TiDB Lightningの`checksum`構成項目が`true`に設定されている場合、ダウンストリームTiDBの管理者ユーザー権限をTiDBLightningに付与する必要があります。
+    TiDB Lightningの`checksum`構成項目が`true`に設定されている場合、ダウンストリームTiDBの管理ユーザー権限をTiDBLightningに付与する必要があります。
 
 ## ハードウェア要件 {#hardware-requirements}
 

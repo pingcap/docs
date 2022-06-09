@@ -7,9 +7,9 @@ summary: Use Prometheus and Grafana to build the TiDB monitoring framework.
 
 TiDB監視フレームワークは、PrometheusとGrafanaの2つのオープンソースプロジェクトを採用しています。 TiDBは、 [プロメテウス](https://prometheus.io)を使用して監視とパフォーマンスのメトリックを保存し、 [Grafana](https://grafana.com/grafana)を使用してこれらのメトリックを視覚化します。
 
-## TiDBのPrometheusについて {#about-prometheus-in-tidb}
+## TiDBのプロメテウスについて {#about-prometheus-in-tidb}
 
-時系列データベースとして、Prometheusは多次元データモデルと柔軟なクエリ言語を備えています。最も人気のあるオープンソースプロジェクトの1つとして、Prometheusは多くの企業や組織に採用されており、非常に活発なコミュニティがあります。 PingCAPは、TiDB、TiKV、およびPDでの監視とアラートのためのPrometheusのアクティブな開発者および採用者の1つです。
+時系列データベースとして、Prometheusは多次元データモデルと柔軟なクエリ言語を備えています。最も人気のあるオープンソースプロジェクトの1つとして、Prometheusは多くの企業や組織に採用されており、非常に活発なコミュニティがあります。 PingCAPは、TiDB、TiKV、およびPDでの監視とアラートのためのPrometheusの積極的な開発者および採用者の1人です。
 
 Prometheusは複数のコンポーネントで構成されています。現在、TiDBは次のものを使用しています。
 

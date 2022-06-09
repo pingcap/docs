@@ -5,17 +5,17 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 
 # AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
-非圧縮データファイルとSnappy圧縮[アパッチパーケット](https://parquet.apache.org/)形式データファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、ParquetファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDBCloudにインポートする方法について説明します。
+非圧縮データファイルとSnappy圧縮[アパッチパーケット](https://parquet.apache.org/)形式データファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、ParquetファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDB Cloudにインポートする方法について説明します。
 
 > **ノート：**
 >
-> TiDB Cloudは、Parquetファイルの空のテーブルへのインポートのみをサポートします。すでにデータが含まれている既存のテーブルにデータをインポートするには、TiDB Cloudを使用して、このドキュメントに従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
+> TiDB Cloudは、Parquetファイルの空のテーブルへのインポートのみをサポートします。すでにデータが含まれている既存のテーブルにデータをインポートするには、 TiDB Cloudを使用して、このドキュメントに従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
 
-## ステップ1.寄木細工の床のファイルを準備します {#step-1-prepare-the-parquet-files}
+## ステップ1.寄木細工のファイルを準備します {#step-1-prepare-the-parquet-files}
 
 > **ノート：**
 >
-> 現在、TiDB Cloudは、次のデータ型のいずれかを含むParquetファイルのインポートをサポートしていません。インポートするParquetファイルにそのようなデータ型が含まれている場合は、最初に[サポートされているデータ型](#supported-data-types) （たとえば、 `STRING` ）を使用してParquetファイルを再生成する必要があります。または、AWS Glueなどのサービスを使用して、データ型を簡単に変換することもできます。
+> 現在、 TiDB Cloudは、次のデータ型のいずれかを含むParquetファイルのインポートをサポートしていません。インポートするParquetファイルにそのようなデータ型が含まれている場合は、最初に[サポートされているデータ型](#supported-data-types) （たとえば、 `STRING` ）を使用してParquetファイルを再生成する必要があります。または、AWS Glueなどのサービスを使用して、データ型を簡単に変換することもできます。
 >
 > -   `LIST`
 > -   `NEST STRUCT`
@@ -25,17 +25,17 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 
 1.  Parquetファイルが256MBより大きい場合は、ファイルをそれぞれ約256MBの小さなファイルに分割することを検討してください。
 
-    TiDB Cloudは、非常に大きなParquetファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
+    TiDB Cloudは、非常に大きなParquetファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
 
-2.  バケット内の既存のオブジェクトの命名規則に従って、インポートする寄木細工の床のファイルの名前と一致するテキストパターンを特定します。
+2.  バケット内の既存のオブジェクトの命名規則に従って、インポートする寄木細工のファイルの名前と一致するテキストパターンを特定します。
 
-    たとえば、バケット内のすべてのデータファイルをインポートするには、ワイルドカード記号`*`または`*.parquet`をパターンとして使用できます。同様に、パーティション`station=402260`のデータファイルのサブセットをインポートするには、 `*station=402260*`をパターンとして使用できます。 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)でTiDBCloudに提供する必要があるため、このパターンをメモしてください。
+    たとえば、バケット内のすべてのデータファイルをインポートするには、ワイルドカード記号`*`または`*.parquet`をパターンとして使用できます。同様に、パーティション`station=402260`のデータファイルのサブセットをインポートするには、 `*station=402260*`をパターンとして使用できます。 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)でTiDB Cloudに提供する必要があるため、このパターンをメモしてください。
 
 ## ステップ2.ターゲットデータベースとテーブルスキーマを作成します {#step-2-create-the-target-database-and-table-schema}
 
-ParquetファイルをTiDBCloudにインポートする前に、ターゲットデータベースとテーブルを作成する必要があります。または、次のようにターゲットデータベースとテーブルスキーマを指定すると、TiDBCloudはインポートプロセスの一部としてこれらのオブジェクトを作成できます。
+ParquetファイルをTiDB Cloudにインポートする前に、ターゲットデータベースとテーブルを作成する必要があります。または、次のようにターゲットデータベースとテーブルスキーマを指定すると、 TiDB Cloudはインポートプロセスの一部としてこれらのオブジェクトを作成できます。
 
-1.  寄木細工の床のファイルが配置されているAmazonS3またはGCSディレクトリに、 `CREATE DATABASE`ステートメントを含む`${db_name}-schema-create.sql`ファイルを作成します。
+1.  寄木細工のファイルが配置されているAmazonS3またはGCSディレクトリに、 `CREATE DATABASE`ステートメントを含む`${db_name}-schema-create.sql`ファイルを作成します。
 
     たとえば、次のステートメントを含む`mydb-scehma-create.sql`のファイルを作成できます。
 
@@ -45,7 +45,7 @@ ParquetファイルをTiDBCloudにインポートする前に、ターゲット�
     CREATE DATABASE mydb;
     ```
 
-2.  寄木細工の床のファイルが配置されているAmazonS3またはGCSディレクトリに、 `CREATE TABLE`ステートメントを含む`${db_name}.${table_name}-schema.sql`ファイルを作成します。
+2.  寄木細工のファイルが配置されているAmazonS3またはGCSディレクトリに、 `CREATE TABLE`ステートメントを含む`${db_name}.${table_name}-schema.sql`ファイルを作成します。
 
     たとえば、次のステートメントを含む`mydb.mytable-schema.sql`のファイルを作成できます。
 
@@ -64,17 +64,17 @@ ParquetファイルをTiDBCloudにインポートする前に、ターゲット�
 
 ## 手順3.クロスアカウントアクセスを構成する {#step-3-configure-cross-account-access}
 
-TiDBCloudがAmazonS3またはGCSバケット内のParquetファイルにアクセスできるようにするには、次のいずれかを実行します。
+TiDBCloudがTiDB CloudまたはGCSバケット内のParquetファイルにアクセスできるようにするには、次のいずれかを実行します。
 
 -   組織がAWSでサービスとしてTiDB Cloudを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、ロールARN値をメモします。
 
--   組織でTiDBCloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
+-   組織でTiDB CloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
 ## ステップ4.ParquetファイルをTiDB Cloudにインポートします {#step-4-import-parquet-files-to-tidb-cloud}
 
-ParquetファイルをTiDBCloudにインポートするには、次の手順を実行します。
+ParquetファイルをTiDB Cloudにインポートするには、次の手順を実行します。
 
 1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
 
@@ -88,17 +88,17 @@ ParquetファイルをTiDBCloudにインポートするには、次の手順を�
     -   **データ形式**：<strong>寄木細工</strong>を選択します。
     -   **クレデンシャルのセットアップ**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
     -   **ターゲットデータベース**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
-    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。現在、TiDBCloudは1つのテーブルフィルタールールのみをサポートしています。
-    -   **オブジェクト名パターン**：インポートする寄木細工の床ファイルの名前と一致するパターンを入力します。たとえば、 `my-data.parquet` 。
+    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
+    -   **オブジェクト名パターン**：インポートするParquetファイルの名前と一致するパターンを入力します。たとえば、 `my-data.parquet` 。
     -   **ターゲットテーブル名**：ターゲットテーブルの名前を入力します。たとえば、 `mydb.mytable` 。
 
 4.  [**インポート]**をクリックして、インポートタスクを開始します。
 
-5.  インポートの進行状況が成功を示したら、TotalFilesの後の数を確認し**ます**。
+5.  インポートの進行状況が成功を示したら、[**ファイルの総数]**の後の数を確認します。
 
     数値がゼロの場合は、[**オブジェクト名パターン]**フィールドに入力した値と一致するデータファイルがないことを意味します。この場合、「<strong>オブジェクト名パターン」</strong>フィールドにタイプミスがあるかどうかを確認して、再試行してください。
 
-インポートタスクの実行時に、サポートされていない、または無効な変換が検出されると、TiDB Cloudはインポートジョブを自動的に終了し、インポートエラーを報告します。
+インポートタスクの実行時に、サポートされていない、または無効な変換が検出されると、 TiDB Cloudはインポートジョブを自動的に終了し、インポートエラーを報告します。
 
 インポートエラーが発生した場合は、次の手順を実行してください。
 
@@ -114,7 +114,7 @@ ParquetファイルをTiDBCloudにインポートするには、次の手順を�
 
 ## サポートされているデータ型 {#supported-data-types}
 
-次の表に、TiDBCloudにインポートできるサポートされているParquetデータ型を示します。
+次の表に、TiDBCloudにインポートできるサポートされているTiDB Cloudデータ型を示します。
 
 | 寄木細工のプリミティブ型            | 寄木細工の論理型         | TiDBまたはMySQLのタイプ                                                                                                                                                                                     |
 | ----------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

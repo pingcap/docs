@@ -57,7 +57,7 @@ DESC tikv_store_status;
 -   `LEADER_SIZE` ：ストア上のすべてのリーダーのおおよその合計データサイズ（MB）。
 -   `REGION_COUNT` ：ストア上のリージョンの数。
 -   `REGION_WEIGHT` ：ストアのリージョンの重み。
--   `REGION_SCORE` ：ストアのリージョンスコア。
+-   `REGION_SCORE` ：ストアの地域スコア。
 -   `REGION_SIZE` ：ストア上のすべてのリージョンのおおよその合計データサイズ（MB）。
 -   `START_TS` ：ストアが開始されたときのタイムスタンプ。
 -   `LAST_HEARTBEAT_TS` ：ストアから送信された最後のハートビートのタイムスタンプ。

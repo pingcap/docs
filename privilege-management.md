@@ -162,7 +162,7 @@ SHOW GRANTS; -- show grants for the current user
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
-たとえば、ユーザー`rw_user@192.168.%`を作成し、そのユーザーに`test.write_table`テーブルへの書き込み権限とグローバル読み取り権限を付与します。
+たとえば、ユーザー`rw_user@192.168.%`を作成し、 `test.write_table`テーブルに対する書き込み権限とグローバル読み取り権限をユーザーに付与します。
 
 ```sql
 CREATE USER `rw_user`@`192.168.%`;

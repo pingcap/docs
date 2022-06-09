@@ -64,7 +64,7 @@ TiDB Lightningを使用して共有データベースとテーブルを並行し
 
 ### 制限 {#restrictions}
 
-TiDB Lightningは、実行時に一部のリソースを排他的に使用します。 1台のマシン（実稼働環境では推奨されません）または複数のマシンで共有されるディスクに複数のTiDB Lightningインスタンスをデプロイする必要がある場合は、次の使用制限に注意してください。
+TiDB Lightningは、実行時に一部のリソースを排他的に使用します。複数のTiDBLightningインスタンスを単一のマシン（実稼働環境では推奨されません）または複数のマシンで共有されるディスクにデプロイする必要がある場合は、次の使用制限に注意してください。
 
 -   各TiDBLightningインスタンスの一意のパスに`tikv-importer.sorted-kv-dir`を設定します。同じパスを共有する複数のインスタンスは、意図しない動作を引き起こし、インポートの失敗やデータエラーを引き起こす可能性があります。
 -   各TiDBLightningチェックポイントを個別に保存します。チェックポイント構成の詳細については、 [TiDBLightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
@@ -75,16 +75,16 @@ TiDB Lightningは、実行時に一部のリソースを排他的に使用しま
 
 ## 例1： Dumpling + TiDB Lightningを使用して、シャーディングされたデータベースとテーブルをTiDBに並行してインポートする {#example-1-use-dumpling-tidb-lightning-to-import-sharded-databases-and-tables-into-tidb-in-parallel}
 
-この例では、アップストリームが10個のシャードテーブルを持つMySQLクラスタであり、合計サイズが10TiBであると想定しています。 5つのTiDBLightningインスタンスを使用して並列インポートを実行でき、各インスタンスは2つのTiBをインポートします。総輸入時間（Dumplingの輸出にかかる時間を除く）は、約40時間から約10時間に短縮できると見込まれます。
+この例では、アップストリームが10個のシャードテーブルを持ち、合計サイズが10TiBのMySQLクラスタであると想定しています。 5つのTiDBLightningインスタンスを使用して並列インポートを実行でき、各インスタンスは2つのTiBをインポートします。総輸入時間（Dumplingの輸出にかかる時間を除く）は、約40時間から約10時間に短縮できると見込まれます。
 
 アップストリームライブラリの名前が`my_db`で、各シャーディングテーブルの名前が`my_table_01`であると想定し`my_table_10` 。それらをマージして、ダウンストリーム`my_db.my_table`テーブルにインポートします。特定の手順については、次のセクションで説明します。
 
 ### ステップ1：Dumplingを使用してデータをエクスポートする {#step-1-use-dumpling-to-export-data}
 
-TiDBLightningがデプロイされている5つのノードに2つのシャーディングされたテーブルをエクスポートします。
+TiDBLightningがデプロイされている5つのノードに2つのシャードテーブルをエクスポートします。
 
 -   2つのシャードテーブルが同じMySQLインスタンスにある場合は、 Dumplingの`--filter`パラメーターを使用してそれらを直接エクスポートできます。 TiDB Lightningを使用してインポートする場合、 Dumplingがデータをエクスポートするディレクトリとして`data-source-dir`を指定できます。
--   2つのシャーディングされたテーブルのデータが異なるMySQLノードに分散されている場合は、 Dumplingを使用してそれらを個別にエクスポートする必要があります。エクスポートされたデータは、同じ親ディレクトリに配置する必要があります<b>が、サブディレクトリは異なり</b>ます。 TiDB Lightningを使用して並列インポートを実行する場合、親ディレクトリとして`data-source-dir`を指定する必要があります。
+-   2つのシャードテーブルのデータが異なるMySQLノードに分散されている場合は、 Dumplingを使用してそれらを個別にエクスポートする必要があります。エクスポートされたデータは、同じ親ディレクトリに配置する必要があります<b>が、サブディレクトリは異なり</b>ます。 TiDB Lightningを使用して並列インポートを実行する場合、親ディレクトリとして`data-source-dir`を指定する必要があります。
 
 Dumplingを使用してデータをエクスポートする方法の詳細については、 [Dumpling](/dumpling-overview.md)を参照してください。
 
@@ -121,9 +121,9 @@ target-table = "my_table"
 
 データソースがAmazonS3やGCSなどの外部ストレージに保存されている場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。
 
-### ステップ3：TiDBLightningを起動してデータをインポートする {#step-3-start-tidb-lightning-to-import-data}
+### 手順3：TiDBLightningを起動してデータをインポートする {#step-3-start-tidb-lightning-to-import-data}
 
-並列インポート中、各TiDB Lightningノードのサーバー構成要件は、非並列インポートモードと同じです。各TiDBLightningノードは同じリソースを消費する必要があります。それらを別のサーバーにデプロイすることをお勧めします。詳細な展開手順については、 [TiDBLightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)を参照してください。
+並列インポート中、各TiDB Lightningノードのサーバー構成要件は、非並列インポートモードと同じです。各TiDBLightningノードは同じリソースを消費する必要があります。それらを別のサーバーに展開することをお勧めします。展開手順の詳細については、 [TiDBLightningをデプロイ](/tidb-lightning/deploy-tidb-lightning.md)を参照してください。
 
 各サーバーでTiDBLightningを順番に起動します。 `nohup`を使用してコマンドラインから直接起動すると、SIGHUP信号が原因で終了する場合があります。したがって、スクリプトに`nohup`を含めることをお勧めします。次に例を示します。
 

@@ -29,7 +29,7 @@ TiDBバージョン：4.0.16
 
 -   TiKV
 
-    -   バックアップと復元を使用してデータを復元するとき、またはTiDB Lightning [＃11469](https://github.com/tikv/tikv/issues/11469)のローカルバックエンドを使用してデータをインポートするときに、zstdアルゴリズムを採用してSSTファイルを圧縮することにより、ディスク領域の消費を削減します。
+    -   バックアップと復元を使用してデータを復元するとき、またはTiDB Lightning [＃11469](https://github.com/tikv/tikv/issues/11469)のローカルバックエンドを使用してデータをインポートするときに、zstdアルゴリズムを採用してSSTファイルを圧縮することにより、ディスク容量の消費を削減します。
 
 -   ツール
 
@@ -47,7 +47,7 @@ TiDBバージョン：4.0.16
 -   TiDB
 
     -   コスト見積もりのために範囲をポイントに変換するときに統計モジュールのオーバーフローによって引き起こされるクエリパニックを修正します[＃23625](https://github.com/pingcap/tidb/issues/23625)
-    -   `ENUM`型データをそのような関数のパラメーターとして使用する場合の制御関数（ `IF`や`CASE WHEN`など）の誤った結果を修正します[＃23114](https://github.com/pingcap/tidb/issues/23114)
+    -   `ENUM`種類のデータをそのような関数のパラメーターとして使用する場合の制御関数（ `IF`や`CASE WHEN`など）の誤った結果を修正します[＃23114](https://github.com/pingcap/tidb/issues/23114)
     -   `tidb_enable_vectorized_expression` （ `on`または`off` ） [＃29434](https://github.com/pingcap/tidb/issues/29434)の値が異なるために、 `GREATEST`関数が一貫性のない結果を返す問題を修正します。
     -   場合によってはプレフィックスインデックスにインデックス結合を適用するときのパニックを修正します[＃24547](https://github.com/pingcap/tidb/issues/24547)
     -   プランナーが`join` 、場合によっては[＃28087](https://github.com/pingcap/tidb/issues/28087)の無効なプランをキャッシュする可能性がある問題を修正します
@@ -97,7 +97,7 @@ TiDBバージョン：4.0.16
 
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)の負の値のエラーを修正します
         -   コンテナ環境でのOOMの修正[＃1798](https://github.com/pingcap/tiflow/issues/1798)
-        -   複数のTiKVがクラッシュした場合、または強制的に再起動した場合のTiCDCレプリケーションの中断の問題を修正します[＃3288](https://github.com/pingcap/tiflow/issues/3288)
+        -   複数のTiKVがクラッシュしたとき、または強制的に再起動したときのTiCDCレプリケーションの中断の問題を修正します[＃3288](https://github.com/pingcap/tiflow/issues/3288)
         -   [＃3174](https://github.com/pingcap/tiflow/issues/3174)の処理後のメモリリークの問題を修正
         -   ErrGCTTLExceededエラーが発生したときにchangefeedが十分に速く失敗しない問題を修正します[＃3111](https://github.com/pingcap/tiflow/issues/3111)
         -   アップストリームTiDBインスタンスが予期せず終了したときにTiCDCレプリケーションタスクが終了する可能性がある問題を修正します[＃3061](https://github.com/pingcap/tiflow/issues/3061)

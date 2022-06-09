@@ -14,7 +14,7 @@ DM-workerは、MySQL/MariaDBからTiDBにデータを移行するために使用
 -   1人のDMワーカーが、1つのMySQL/MariaDBインスタンスのデータを複数のTiDBインスタンスに移行することをサポートします
 -   複数のDMワーカーは、複数のMySQL/MariaDBインスタンスのデータを1つのTiDBインスタンスに移行することをサポートします
 
-## DMワーカー処理ユニット {#dm-worker-processing-unit}
+## DM-workerプロセッシングユニット {#dm-worker-processing-unit}
 
 DM-workerタスクには、リレーログ、ダンプ処理ユニット、ロード処理ユニット、binlogレプリケーションなどの複数のロジックユニットが含まれています。
 
@@ -24,13 +24,13 @@ DM-workerタスクには、リレーログ、ダンプ処理ユニット、ロ�
 
 その理論的根拠と機能は、MySQLのリレーログに似ています。詳細については、 [MySQLリレーログ](https://dev.mysql.com/doc/refman/5.7/en/replica-logs-relaylog.html)を参照してください。
 
-### ダンプ処理ユニット {#dump-processing-unit}
+### ダンプ処理装置 {#dump-processing-unit}
 
 ダンプ処理ユニットは、アップストリームのMySQL/MariaDBからローカルディスクに完全なデータをダンプします。
 
-### 負荷処理ユニット {#load-processing-unit}
+### 負荷処理装置 {#load-processing-unit}
 
-ロード処理ユニットは、ダンプ処理ユニットのダンプされたファイルを読み取り、これらのファイルをダウンストリームTiDBにロードします。
+ロード処理装置は、ダンプ処理装置のダンプされたファイルを読み取り、これらのファイルをダウンストリームのTiDBにロードします。
 
 ### Binlogレプリケーション/同期処理ユニット {#binlog-replication-sync-processing-unit}
 
@@ -81,14 +81,14 @@ GRANT SELECT ON db1.* TO 'your_user'@'your_wildcard_of_host';
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER,INDEX  ON db.table TO 'your_user'@'your_wildcard_of_host';
 ```
 
-### 各処理ユニットに必要な最小限の特権 {#minimal-privilege-required-by-each-processing-unit}
+### 各処理装置に必要な最小限の特権 {#minimal-privilege-required-by-each-processing-unit}
 
-| 処理ユニット         | 最小限のアップストリーム（MySQL / MariaDB）特権                                                                          | 最小限のダウンストリーム（TiDB）特権                                                                                                                                                                                          | 最小限のシステム特権         |
-| :------------- | :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------- |
-| リレーログ          | `REPLICATION SLAVE` （binlogを読み取ります）<br/> `REPLICATION CLIENT` （ `show master status` `show slave status` | ヌル                                                                                                                                                                                                            | ローカルファイルの読み取り/書き込み |
-| ごみ             | `SELECT`<br/> `RELOAD` （読み取りロックを使用してテーブルをフラッシュし、テーブルのロックを解除します）                                          | ヌル                                                                                                                                                                                                            | ローカルファイルを書き込む      |
-| ロード            | ヌル                                                                                                       | `SELECT` （チェックポイント履歴を照会する）<br/> `CREATE` （データベース/テーブルを作成します）<br/> `DELETE` （チェックポイントを削除します）<br/> `INSERT` （ダンプデータを挿入します）                                                                                      | ローカルファイルの読み取り/書き込み |
-| Binlogレプリケーション | `REPLICATION SLAVE` （binlogを読み取ります）<br/> `REPLICATION CLIENT` （ `show master status` `show slave status` | `SELECT` （インデックスと列を表示します）<br/> `INSERT` （DML）<br/> `UPDATE` （DML）<br/> `DELETE` （DML）<br/> `CREATE` （データベース/テーブルを作成します）<br/> `DROP` （データベース/テーブルを削除します）<br/> `ALTER` （テーブルを変更します）<br/> `INDEX` （インデックスを作成/削除） | ローカルファイルの読み取り/書き込み |
+| 処理装置           | 最小限のアップストリーム（MySQL / MariaDB）特権                                                                          | 最小限のダウンストリーム（TiDB）特権                                                                                                                                                                                       | 最小限のシステム特権         |
+| :------------- | :------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------- |
+| リレーログ          | `REPLICATION SLAVE` （binlogを読み取ります）<br/> `REPLICATION CLIENT` （ `show master status` `show slave status` | ヌル                                                                                                                                                                                                         | ローカルファイルの読み取り/書き込み |
+| ごみ             | `SELECT`<br/> `RELOAD` （読み取りロックを使用してテーブルをフラッシュし、テーブルのロックを解除します）                                          | ヌル                                                                                                                                                                                                         | ローカルファイルを書き込む      |
+| ロード            | ヌル                                                                                                       | `SELECT` （チェックポイント履歴を照会する）<br/> `CREATE` （データベース/テーブルを作成します）<br/> `DELETE` （チェックポイントを削除します）<br/> `INSERT` （ダンプデータを挿入します）                                                                                   | ローカルファイルの読み取り/書き込み |
+| Binlogレプリケーション | `REPLICATION SLAVE` （binlogを読み取ります）<br/> `REPLICATION CLIENT` （ `show master status` `show slave status` | `SELECT` （インデックスと列を表示）<br/> `INSERT` （DML）<br/> `UPDATE` （DML）<br/> `DELETE` （DML）<br/> `CREATE` （データベース/テーブルを作成します）<br/> `DROP` （データベース/テーブルを削除します）<br/> `ALTER` （テーブルを変更します）<br/> `INDEX` （インデックスを作成/削除） | ローカルファイルの読み取り/書き込み |
 
 > **ノート：**
 >

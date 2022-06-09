@@ -2,7 +2,7 @@
 title: tiup help
 ---
 
-# tiupヘルプ {#tiup-help}
+# tiup help {#tiup-help}
 
 TiUPコマンドラインインターフェイスは、ユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで表示できます。
 

@@ -5,7 +5,7 @@ summary: Introduce TiDB Dashboard.
 
 # TiDBダッシュボードの紹介 {#tidb-dashboard-introduction}
 
-TiDBダッシュボードは、TiDBクラスタを監視、診断、および管理するためのWeb UIであり、v4.0以降で使用できます。 PDコンポーネントに組み込まれており、独立した展開は必要ありません。
+TiDBダッシュボードは、TiDBクラスタを監視、診断、および管理するためのWeb UIであり、v4.0以降で使用できます。これはPDコンポーネントに組み込まれており、独立した展開を必要としません。
 
 ![TiDB Dashboard interface](/media/dashboard/dashboard-intro.gif)
 
@@ -31,7 +31,7 @@ TiDBダッシュボードのキービジュアライザー機能は、クラス�
 
 詳細については、 [キービジュアライザーページ](/dashboard/dashboard-key-visualizer.md)を参照してください。
 
-## すべてのSQLステートメントの実行情報のリストを表示する {#show-a-list-of-execution-information-of-all-sql-statements}
+## すべてのSQLステートメントの実行情報のリストを表示します {#show-a-list-of-execution-information-of-all-sql-statements}
 
 すべてのSQLステートメントの実行情報は、[SQLステートメント]ページに一覧表示されます。このページを使用して、すべての段階での実行時間と合計実行を学習できます。これは、最も多くのリソースを消費し、クラスタ全体のパフォーマンスを向上させるSQLクエリを分析および特定するのに役立ちます。
 

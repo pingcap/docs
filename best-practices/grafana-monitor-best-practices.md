@@ -86,7 +86,7 @@ Prometheusは、多くのクエリ式と関数をサポートしています。�
 
 もちろん、線形スケールはすべての状況に適しているわけではありません。たとえば、1か月間のパフォーマンスの傾向を観察すると、線形スケールのノイズが発生し、観察が困難になる可能性があります。
 
-Y軸は、デフォルトでバイナリ対数スケールを使用します。
+Y軸は、デフォルトで2進の対数目盛を使用します。
 
 ![The Y-axis uses a binary logarithmic scale](/media/best-practices/default-axes-scale.jpg)
 
@@ -112,7 +112,7 @@ Y軸を線形スケールに切り替えます。
 
 ### ヒント4：共有十字線またはツールチップを使用する {#tip-4-use-shared-crosshair-or-tooltip}
 
-**[設定]**パネルには、デフォルトで[<strong>デフォルト</strong>]になっている<strong>グラフツールチップ</strong>パネルオプションがあります。
+**[設定]**パネルには、デフォルトで[<strong>デフォルト</strong>]に設定されている<strong>グラフツールチップ</strong>パネルオプションがあります。
 
 ![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
 
@@ -122,13 +122,13 @@ Y軸を線形スケールに切り替えます。
 
 ![Set the graphical presentation tool to Shared crosshair](/media/best-practices/graph-tooltip-shared-crosshair.jpeg)
 
-グラフィカルプレゼンテーションツールを**共有ツールチップ**に設定します。
+グラフィックプレゼンテーションツールを**共有ツールチップ**に設定します。
 
 ![Set the graphic presentation tool to Shared Tooltip](/media/best-practices/graph-tooltip-shared-tooltip.jpg)
 
 ### ヒント5： <code>IP address:port number</code>を入力して、履歴のメトリックを確認します {#tip-5-enter-code-ip-address-port-number-code-to-check-the-metrics-in-history}
 
-PDのダッシュボードには、現在のリーダーのメトリックのみが表示されます。履歴内のPDリーダーのステータスを確認したいが、 `instance`フィールドのドロップダウンリストに存在しなくなった場合は、手動で`IP address:2379`を入力して、リーダーのデータを確認できます。
+PDのダッシュボードには、現在のリーダーの指標のみが表示されます。履歴内のPDリーダーのステータスを確認したいが、 `instance`フィールドのドロップダウンリストに存在しなくなった場合は、手動で`IP address:2379`を入力して、リーダーのデータを確認できます。
 
 ![Check the metrics in history](/media/best-practices/manually-input-check-metric.jpeg)
 
@@ -202,4 +202,4 @@ curl -u user:pass 'http://__grafana_ip__:3000/api/datasources/proxy/1/api/v1/que
 
 ## 概要 {#summary}
 
-Grafana+Prometheusモニタリングプラットフォームは非常に強力なツールです。これをうまく利用すると、効率が向上し、TiDBクラスタのステータスを分析する時間を大幅に節約できます。さらに重要なことに、問題の診断に役立ちます。このツールは、特に大量のデータがある場合に、TiDBクラスターの運用と保守に非常に役立ちます。
+Grafana+Prometheusモニタリングプラットフォームは非常に強力なツールです。これをうまく利用すると、効率が向上し、TiDBクラスタのステータスを分析する時間を大幅に節約できます。さらに重要なことに、問題の診断に役立ちます。このツールは、特に大量のデータがある場合に、TiDBクラスターの操作と保守に非常に役立ちます。

@@ -17,7 +17,7 @@ TiDBバージョン：5.1.2
         -   `greatest(datetime) union null`が空の文字列[＃26532](https://github.com/pingcap/tidb/issues/26532)を返す問題を修正します
         -   `having`句が正しく機能しない可能性がある問題を修正します[＃26496](https://github.com/pingcap/tidb/issues/26496)
         -   `between`式の周りの照合が異なる場合に発生する誤った実行結果を修正します[＃27146](https://github.com/pingcap/tidb/issues/27146)
-        -   `group_concat`関数の列に非ビン照合順序がある場合に発生する誤った実行結果を修正します[＃27429](https://github.com/pingcap/tidb/issues/27429)
+        -   `group_concat`関数の列に非ビン照合順序[＃27429](https://github.com/pingcap/tidb/issues/27429)がある場合に発生する誤った実行結果を修正します
         -   複数の列で`count(distinct)`式を使用すると、新しい照合順序が有効になっているときに誤った結果が返される問題を修正します[＃27091](https://github.com/pingcap/tidb/issues/27091)
         -   `extract`関数の引数が負の期間[＃27236](https://github.com/pingcap/tidb/issues/27236)である場合に発生する誤った結果を修正します
         -   `SQL_MODE`が&#39; [＃26762](https://github.com/pingcap/tidb/issues/26762)の場合、無効な日付を挿入してもエラーが報告されない問題を修正します。
@@ -50,7 +50,7 @@ TiDBバージョン：5.1.2
 -   TiFlash
 
     -   `DATE()`機能をサポート
-    -   インスタンスごとの書き込みスループットのためにGrafanaパネルを追加する
+    -   インスタンスごとの書き込みスループットのためにGrafanaパネルを追加します
     -   `leader-read`のプロセスのパフォーマンスを最適化する
     -   MPPタスクをキャンセルするプロセスを加速します
 
@@ -82,9 +82,9 @@ TiDBバージョン：5.1.2
     -   `enum like 'x%'`を使用することによって引き起こされる間違った範囲の問題を修正し[＃27130](https://github.com/pingcap/tidb/issues/27130)
     -   IndexLookupJoin [＃27410](https://github.com/pingcap/tidb/issues/27410)で使用した場合の、共通テーブル式（CTE）のデッドロックの問題を修正します。
     -   再試行可能なデッドロックが`INFORMATION_SCHEMA.DEADLOCKS`テーブル[＃27400](https://github.com/pingcap/tidb/issues/27400)に誤って記録されるバグを修正します。
-    -   パーティション化されたテーブルからの`TABLESAMPLE`のクエリ結果が期待どおりに並べ替えられない問題を修正します[＃27349](https://github.com/pingcap/tidb/issues/27349)
+    -   パーティション化されたテーブルからの`TABLESAMPLE`のクエリ結果が期待どおりにソートされない問題を修正します[＃27349](https://github.com/pingcap/tidb/issues/27349)
     -   未使用の`/debug/sub-optimal-plan`を削除し[＃27265](https://github.com/pingcap/tidb/pull/27265)
-    -   ハッシュパーティションテーブルが署名されていないデータを処理するときにクエリが間違った結果を返す可能性があるバグを修正します[＃26569](https://github.com/pingcap/tidb/issues/26569)
+    -   ハッシュ分割テーブルが署名されていないデータを処理するときにクエリが間違った結果を返す可能性があるバグを修正します[＃26569](https://github.com/pingcap/tidb/issues/26569)
     -   `NO_UNSIGNED_SUBTRACTION`が設定されている場合にパーティションの作成が失敗するバグを修正します[＃26765](https://github.com/pingcap/tidb/issues/26765)
     -   `Apply`が[＃26958](https://github.com/pingcap/tidb/issues/26958)に変換されるときに`distinct`フラグが欠落する問題を修正し`Join`
     -   新しく回復されたTiFlashノードのブロック期間を設定して、この期間中にクエリがブロックされないようにします[＃26897](https://github.com/pingcap/tidb/pull/26897)

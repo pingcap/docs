@@ -7,7 +7,7 @@ summary: Learn the implementation of TopN and Limit operator pushdown.
 
 このドキュメントでは、TopNおよびLimit演算子のプッシュダウンの実装について説明します。
 
-TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子は、TopN演算子ノードとして結合されます。これは、特定の並べ替えルールに従って、上位N個のレコードが返されることを意味します。つまり、Limit演算子は、nullの並べ替えルールを持つTopN演算子ノードと同等です。
+TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子は、TopN演算子ノードとして結合されます。これは、特定の並べ替え規則に従って、上位N個のレコードが返されることを意味します。つまり、Limit演算子は、nullの並べ替えルールを持つTopN演算子ノードと同等です。
 
 述語のプッシュダウンと同様に、TopNとLimitは、実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされるため、必要なデータが早期にフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
 
@@ -17,7 +17,7 @@ TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノード�
 
 このセクションでは、いくつかの例を通じてTopNプッシュダウンについて説明します。
 
-### 例1：ストレージレイヤーのコプロセッサーにプッシュダウン {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
+### 例1：ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
 {{< copyable "" >}}
 
@@ -38,7 +38,7 @@ explain select * from t order by a limit 10;
 4 rows in set (0.00 sec)
 ```
 
-このクエリでは、TopNオペレーターノードはデータフィルタリングのためにTiKVにプッシュダウンされ、各コプロセッサーは10レコードのみをTiDBに返します。 TiDBがデータを集約した後、最終的なフィルタリングが実行されます。
+このクエリでは、TopNオペレーターノードがデータフィルタリングのためにTiKVにプッシュダウンされ、各コプロセッサーは10レコードのみをTiDBに返します。 TiDBがデータを集約した後、最終的なフィルタリングが実行されます。
 
 ### 例2：TopNをJoinにプッシュダウンできます（並べ替えルールは外部テーブルの列にのみ依存します） {#example-2-topn-can-be-pushed-down-into-join-the-sorting-rule-only-depends-on-the-columns-in-the-outer-table}
 
@@ -94,7 +94,7 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 
 TopNは`Inner Join`より前にプッシュダウンすることはできません。上記のクエリを例にとると、Join後に100レコードを取得した場合、TopNの後に10レコードを残すことができます。ただし、最初にTopNを実行して10レコードを取得すると、Join後に5レコードしか残りません。このような場合、プッシュダウンの結果は異なります。
 
-同様に、TopNは、外部結合の内部テーブルにプッシュダウンすることも、ソート規則が`t.a+s.a`などの複数のテーブルの列に関連している場合にプッシュダウンすることもできません。 TopNのソート規則が外部テーブルの列のみに依存している場合にのみ、TopNをプッシュダウンできます。
+同様に、TopNは、外部結合の内部テーブルにプッシュダウンすることも、ソート規則が`t.a+s.a`などの複数のテーブルの列に関連している場合にプッシュダウンすることもできません。 TopNの並べ替えルールが外部テーブルの列のみに依存している場合にのみ、TopNをプッシュダウンできます。
 
 ### 例4：TopNを制限に変換する {#example-4-convert-topn-to-limit}
 

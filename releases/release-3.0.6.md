@@ -22,10 +22,10 @@ TiDB Ansibleバージョン：3.0.6
     -   ポイントクエリ[＃13416](https://github.com/pingcap/tidb/pull/13416)のサポート`_tidb_rowid`
     -   パーティションテーブル統計の誤った使用が原因で、生成されたクエリ実行プランが正しくないという問題を修正します[＃13628](https://github.com/pingcap/tidb/pull/13628)
 -   SQL実行エンジン
-    -   年タイプ[＃12745](https://github.com/pingcap/tidb/pull/12745)の無効な値を処理するときに、TiDBがMySQLと互換性がないという問題を修正します
+    -   年タイプ[＃12745](https://github.com/pingcap/tidb/pull/12745)の無効な値を処理するときに、TiDBがMySQLと互換性がないという問題を修正します。
     -   `INSERT ON DUPLICATE UPDATE`ステートメントで`Chunk`を再利用して、メモリオーバーヘッドを削減します[＃12998](https://github.com/pingcap/tidb/pull/12998)
     -   `JSON_VALID`組み込み関数[＃13133](https://github.com/pingcap/tidb/pull/13133)のサポートを追加します
-    -   パーティションテーブル[＃13140](https://github.com/pingcap/tidb/pull/13140)での`ADMIN CHECK TABLE`の実行をサポート
+    -   パーティション表[＃13140](https://github.com/pingcap/tidb/pull/13140)での`ADMIN CHECK TABLE`の実行をサポート
     -   空のテーブルで`FAST ANALYZE`が実行されたときのパニックの問題を修正します[＃13343](https://github.com/pingcap/tidb/pull/13343)
     -   複数列のインデックスを含む空のテーブルで`FAST ANALYZE`を実行するときのパニックの問題を修正します[＃13394](https://github.com/pingcap/tidb/pull/13394)
     -   `WHERE`句に一意キー[＃13382](https://github.com/pingcap/tidb/pull/13382)の等しい条件が含まれている場合に、推定行数が1より大きい問題を修正します。
@@ -46,7 +46,7 @@ TiDB Ansibleバージョン：3.0.6
     -   `/info/all`のインターフェース[＃13187](https://github.com/pingcap/tidb/pull/13187)を介したすべてのTiDBノードのbinlogステータスの取得をサポートします。
     -   TiDBが接続を切断したときにゴルーチンがリークする可能性がある問題を修正します[＃13251](https://github.com/pingcap/tidb/pull/13251)
     -   `innodb_lock_wait_timeout`パラメーターをペシミスティックトランザクションで機能させて、ペシミスティックロックのロック待機タイムアウトを制御します[＃13165](https://github.com/pingcap/tidb/pull/13165)
-    -   他のトランザクションが不必要に待機するのを防ぐために、悲観的なトランザクションクエリが強制終了されたときに、悲観的なトランザクションTTLの更新を停止します[＃13046](https://github.com/pingcap/tidb/pull/13046)
+    -   他のトランザクションが不必要に待機するのを防ぐために、ペシミスティックトランザクションクエリが強制終了されたときにペシミスティックトランザクションTTLの更新を停止します[＃13046](https://github.com/pingcap/tidb/pull/13046)
 -   DDL
     -   TiDBでの`SHOW CREATE VIEW`の実行結果がMySQL3での実行結果と矛盾する問題を修正し[＃12912](https://github.com/pingcap/tidb/pull/12912)
     -   `union`に基づく`View`の作成をサポートします（例： `create view v as select * from t1 union select * from t2` [＃12955](https://github.com/pingcap/tidb/pull/12955) ）
@@ -84,7 +84,7 @@ TiDB Ansibleバージョン：3.0.6
 
 -   各フィルターに`ActOn`次元を追加して、各スケジューラーとチェッカーがフィルターの影響を受けることを示し、2つの未使用のフィルター（ `disconnectFilter`と`rejectLeaderFilter` [＃1911](https://github.com/pingcap/pd/pull/1911) ）を削除します。
 -   PD [＃1867](https://github.com/pingcap/pd/pull/1867)でタイムスタンプを生成するのに5ミリ秒以上かかる場合は、警告ログを印刷します
--   使用できないエンドポイントをクライアントに渡すときに、クライアントのログレベルを下げる[＃1856](https://github.com/pingcap/pd/pull/1856)
+-   使用できないエンドポイントをクライアントに渡すときにクライアントログレベルを下げる[＃1856](https://github.com/pingcap/pd/pull/1856)
 -   gRPCメッセージパッケージが`region_syncer`レプリケーションプロセスで最大サイズを超える可能性があるという問題を修正します[＃1952](https://github.com/pingcap/pd/pull/1952)
 
 ## ツール {#tools}

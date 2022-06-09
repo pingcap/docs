@@ -2,7 +2,7 @@
 title: tiup cluster start
 ---
 
-# tiupクラスタ開始 {#tiup-cluster-start}
+# tiup cluster start {#tiup-cluster-start}
 
 `tiup cluster start`コマンドは、指定されたクラスタのすべてのサービスまたは一部のサービスを開始するために使用されます。
 
@@ -24,7 +24,7 @@ tiup cluster start <cluster-name> [flags]
 
 > **ノート：**
 >
-> `-R, --role`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが起動します。
+> `-R, --role`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが開始されます。
 
 ### -R、-role {#r-role}
 
@@ -34,7 +34,7 @@ tiup cluster start <cluster-name> [flags]
 
 > **ノート：**
 >
-> `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが起動します。
+> `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが開始されます。
 
 ### -h、-help {#h-help}
 
@@ -46,4 +46,4 @@ tiup cluster start <cluster-name> [flags]
 
 サービス開始のログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

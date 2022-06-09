@@ -5,7 +5,7 @@ summary: An overview of the usage of ADMIN for the TiDB database.
 
 # ADMIN SHOW DDL [JOBS | QUERIES] {#admin-show-ddl-jobs-queries}
 
-`ADMIN SHOW DDL [JOBS|QUERIES]`ステートメントは、実行中および最近完了したDDLジョブに関する情報を示します。
+`ADMIN SHOW DDL [JOBS|QUERIES]`ステートメントは、実行中および最近完了したDDLジョブに関する情報を示しています。
 
 ## あらすじ {#synopsis}
 
@@ -75,7 +75,7 @@ mysql> ADMIN SHOW DDL JOBS;
 
 上記の出力から：
 
--   ジョブ59は現在進行中`running` `STATE` 。スキーマの状態は現在`write reorganization`ですが、タスクが完了すると`public`に切り替わり、ユーザーセッションで変更を公開して確認できることに注意してください。 `end_time`列も`NULL`であり、ジョブの完了時刻が現在不明であることを示しています。
+-   ジョブ59は現在進行中`running` `STATE` 。スキーマの状態は現在`write reorganization`ですが、タスクが完了すると`public`に切り替わり、ユーザーセッションによって変更を公に観察できることに注意してください。 `end_time`列も`NULL`であり、ジョブの完了時刻が現在不明であることを示しています。
 
 -   ジョブ60は`add index`のジョブであり、現在、ジョブ59が完了するのを待ってキューに入れられています。ジョブ59が完了すると、ジョブ60の`STATE`が`running`に切り替わります。
 

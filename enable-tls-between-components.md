@@ -199,7 +199,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
 ### 証明書をリロードします {#reload-certificates}
 
-証明書とキーをリロードするには、TiDB、PD、TiKV、およびすべての種類のクライアントが、新しい接続が作成されるたびに現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
+証明書とキーをリロードするために、TiDB、PD、TiKV、およびすべての種類のクライアントは、新しい接続が作成されるたびに、現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
 
 ## も参照してください {#see-also}
 

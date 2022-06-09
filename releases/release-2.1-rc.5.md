@@ -33,13 +33,13 @@ title: TiDB 2.1 RC5 Release Notes
 
     -   [＃8096](https://github.com/pingcap/tidb/pull/8096)のテーブルデータを取得するときに発生したエラーを修正し`infoschema.profiling`
     -   UNIXソケットをpumpsクライアントに置き換えて、 [＃8098](https://github.com/pingcap/tidb/pull/8098)を書き込みます。
-    -   遅いログ[＃8094](https://github.com/pingcap/tidb/pull/8094)を動的に設定する`tidb_slow_log_threshold`の環境変数のしきい値を追加します
+    -   `tidb_slow_log_threshold`の環境変数のしきい値を追加します。これにより、低速ログ[＃8094](https://github.com/pingcap/tidb/pull/8094)が動的に設定されます。
     -   `tidb_query_log_max_len`環境変数がログを動的に設定している間に切り捨てられたSQLステートメントの元の長さを追加します[＃8200](https://github.com/pingcap/tidb/pull/8200)
     -   `tidb_opt_write_row_id`の環境変数を追加して、書き込みを許可するかどうかを制御し`_tidb_rowid` [＃8218](https://github.com/pingcap/tidb/pull/8218)
     -   オーバーバウンドスキャンを回避するために、ticlientの`Scan`コマンドに上限を追加し[＃8247](https://github.com/pingcap/tidb/pull/8247) [＃8081](https://github.com/pingcap/tidb/pull/8081)
 -   DDL
     -   トランザクションでDDLステートメントを実行するとエラーが発生する場合がある問題を修正します[＃8056](https://github.com/pingcap/tidb/pull/8056)
-    -   パーティションテーブルで`truncate table`を実行しても[＃8103](https://github.com/pingcap/tidb/pull/8103)が有効にならない問題を修正します
+    -   パーティションテーブルで`truncate table`を実行しても[＃8103](https://github.com/pingcap/tidb/pull/8103)が有効にならない問題を修正します。
     -   場合によってはキャンセルされた後、DDL操作が正しくロールバックされない問題を修正します[＃8057](https://github.com/pingcap/tidb/pull/8057)
     -   `admin show next_row_id`コマンドを追加して、次に使用可能な行[＃8268](https://github.com/pingcap/tidb/pull/8268)を返します。
 

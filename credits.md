@@ -5,7 +5,7 @@ summary: Learn about the list and roles of contributors to the TiDB community.
 
 # クレジット {#credits}
 
-各貢献者は、TiDBの強力な開発を促進する上で重要な役割を果たしてきました。 TiDBのコードを提出し、ドキュメントを作成および翻訳してくださったすべての貢献者に心から感謝します。
+各貢献者は、TiDBの強力な開発を促進する上で重要な役割を果たしてきました。 TiDBのコードを提出し、文書を作成および翻訳してくださったすべての貢献者に心から感謝します。
 
 ## TiDB開発者 {#tidb-developers}
 

@@ -2,7 +2,7 @@
 title: tiup mirror
 ---
 
-# tiupミラー {#tiup-mirror}
+# tiup mirror {#tiup-mirror}
 
 TiUPでは、 [鏡](/tiup/tiup-mirror-reference.md)は重要な概念です。 TiUPは現在、次の2つの形式のミラーリングをサポートしています。
 

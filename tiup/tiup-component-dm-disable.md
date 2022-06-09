@@ -18,7 +18,7 @@ tiup dm disable <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になっています。
 
