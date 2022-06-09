@@ -26,7 +26,7 @@ jobs:
           node-version: 16
 
       - run: |
-          apt install tree
+          sudo apt install tree -y
 
       - name: Download files by comparing commits
         run: |
@@ -42,10 +42,11 @@ jobs:
       - name: Config and translate
         run: |
           cd markdown-translator
-          echo ${{GCP_KEY}} >> key.json
+          echo ${{secrets.GCP_KEY}} | base64 --decode >> key.json
           export GOOGLE_APPLICATION_CREDENTIALS=key.json
-          export PROJECT_ID=${{GCP_PROJECT_ID}}
-          export GLOSSARY_ID=${{GCP_GLOSSARY_ID}}
+          export PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}
+          export GLOSSARY_ID=${{ secrets.GCP_GLOSSARY_ID }}
+          yarn
           node src/index.js
           cd ..
       - name: Copy translated files to docs repo
