@@ -1,14 +1,14 @@
 ---
 title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-aliases: ['/tidb/v5.4/adopters']
+aliases: ['/tidb/v5.4/adopters','/tidb/stable/adopters']
 ---
 
 # TiDBの紹介 {#tidb-introduction}
 
 [TiDB](https://github.com/pingcap/tidb) （/&#39;taɪdiːbi：/、「Ti」はTitaniumの略）は、Hybrid Transactional and Analytical Processing（HTAP）ワークロードをサポートするオープンソースの分散型NewSQLデータベースです。 MySQLと互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDBは、オンプレミスまたはクラウド内にデプロイできます。
 
-クラウド向けに設計されたTiDBは、クラウドプラットフォームに柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすためにTiDBを柔軟にスケーリングできます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview)は、KubernetesでのTiDBの管理を支援し、運用タスクを自動化します。これにより、管理対象のKubernetesを提供するクラウドへのTiDBのデプロイが容易になります。フルマネージドのTiDBサービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド内のTiDB](https://docs.pingcap.com/tidbcloud/)のフルパワーをアンロックするための最も簡単で、最も経済的で、最も回復力のある方法であり、数回クリックするだけでTiDBクラスターを展開および実行できます。
+クラウド向けに設計されたTiDBは、クラウドプラットフォームで柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすためにTiDBを柔軟にスケーリングできます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview)は、KubernetesでのTiDBの管理を支援し、運用タスクを自動化します。これにより、管理対象のKubernetesを提供するクラウドへのTiDBのデプロイが容易になります。フルマネージドのTiDBサービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド内のTiDB](https://docs.pingcap.com/tidbcloud/)の全力を解き放つ最も簡単で、最も経済的で、最も回復力のある方法であり、数回クリックするだけでTiDBクラスターを展開および実行できます。
 
 <NavColumns><NavColumn><ColumnTitle>TiDBについて</ColumnTitle>
 
@@ -54,7 +54,7 @@ aliases: ['/tidb/v5.4/adopters']
 -   [TiUPを使用してTiDBをアップグレードする](/upgrade-tidb-using-tiup.md)
 -   [TiUPを使用してTiDBをスケーリングする](/scale-tidb-using-tiup.md)
 -   [データのバックアップと復元](/br/backup-and-restore-tool.md)
--   [TiCDCのデプロイと管理](/ticdc/manage-ticdc.md)
+-   [デプロイの導入と管理](/ticdc/manage-ticdc.md)
 -   [TiUPを使用してTiDBを管理する](/maintain-tidb-using-tiup.md)
 -   [TiFlashを管理する](/tiflash/maintain-tiflash.md)
 
@@ -62,7 +62,7 @@ aliases: ['/tidb/v5.4/adopters']
 
 <NavColumn><ColumnTitle>監視と警告</ColumnTitle>
 
--   [監視フレームワーク](/tidb-monitoring-framework.md)
+-   [モニタリングフレームワーク](/tidb-monitoring-framework.md)
 -   [モニタリングAPI](/tidb-monitoring-api.md)
 -   [監視サービスのデプロイ](/deploy-monitoring-services.md)
 -   [Grafanaスナップショットのエクスポート](/exporting-grafana-snapshots.md)
@@ -99,7 +99,7 @@ aliases: ['/tidb/v5.4/adopters']
 
 -   [製品に関するよくある質問](/faq/tidb-faq.md)
 -   [高可用性に関するFAQ](/faq/high-availability-faq.md)
--   [SQLのFAQ](/faq/sql-faq.md)
+-   [SQLに関するFAQ](/faq/sql-faq.md)
 -   [FAQのデプロイと管理](/faq/deploy-and-maintain-faq.md)
 -   [アップグレードおよびアップグレード後のFAQ](/faq/upgrade-faq.md)
 -   [移行に関するよくある質問](/faq/migration-tidb-faq.md)

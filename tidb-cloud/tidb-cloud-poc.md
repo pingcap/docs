@@ -7,9 +7,9 @@ summary: Learn about how to perform a Proof of Concept (PoC) with TiDB Cloud.
 
 TiDB Cloudは、フルマネージドクラウドデータベースでTiDBの優れた機能をすべて提供するサービスとしてのデータベース（DBaaS）製品です。これは、データベースの複雑さではなく、アプリケーションに集中するのに役立ちます。 TiDB Cloudは現在、Amazon Web Services（AWS）とGoogle Cloud Platform（GCP）の両方で利用できます。
 
-概念実証（PoC）を開始することは、TiDB Cloudがビジネスニーズに最適であるかどうかを判断するための最良の方法です。また、TiDBCloudの主要な機能を短時間で理解できるようになります。パフォーマンステストを実行することで、ワークロードがTiDBCloudで効率的に実行できるかどうかを確認できます。また、データを移行して構成を適応させるために必要な作業を評価することもできます。
+概念実証（PoC）を開始することは、 TiDB Cloudがビジネスニーズに最適であるかどうかを判断するための最良の方法です。また、 TiDB Cloudの主要な機能を短時間で理解できるようになります。パフォーマンステストを実行することで、ワークロードがTiDB Cloudで効率的に実行できるかどうかを確認できます。また、データを移行して構成を適応させるために必要な作業を評価することもできます。
 
-このドキュメントでは、一般的なPoC手順について説明し、TiDBCloudPoCをすばやく完了するのに役立つことを目的としています。これは、TiDBの専門家と大規模な顧客ベースによって検証されたベストプラクティスです。
+このドキュメントでは、一般的なPoC手順について説明し、 TiDB CloudPoCをすばやく完了するのに役立つことを目的としています。これは、TiDBの専門家と大規模な顧客ベースによって検証されたベストプラクティスです。
 
 PoCの実行に興味がある場合は、開始する前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>に連絡してください。サポートチームは、テストプランの作成を支援し、PoC手順をスムーズにガイドします。
 
@@ -17,9 +17,9 @@ PoCの実行に興味がある場合は、開始する前に<a href="mailto:tidb
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
-PoCの目的は、TiDBCloudがビジネス要件を満たしているかどうかをテストすることです。通常のPoCは通常14日間続き、その間、PoCの完了に集中することが期待されます。
+PoCの目的は、 TiDB Cloudがビジネス要件を満たしているかどうかをテストすることです。通常のPoCは通常14日間続き、その間、PoCの完了に集中することが期待されます。
 
-一般的なTiDBCloudPoCは、次の手順で構成されています。
+一般的なTiDB Cloudは、次の手順で構成されています。
 
 1.  成功基準を定義し、テスト計画を作成します
 2.  ワークロードの特性を特定する
@@ -54,17 +54,20 @@ TiDB Cloudは、高可用性と大量のデータとの強力な一貫性を必�
 -   リアルタイムHTAP
 -   MySQL5.7プロトコルおよびMySQLエコシステムと互換性があります
 
-また、分析処理の高速化に役立つ柱状ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>ベータ</sup>の使用にも興味があるかもしれません。 PoC中は、いつでもTiFlash<sup>ベータ</sup>機能を使用できます。
+また、分析処理の高速化に役立つ列型ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>ベータ</sup>の使用にも興味があるかもしれません。 PoC中は、いつでもTiFlash<sup>ベータ</sup>機能を使用できます。
 
 ## ステップ3.サインアップして、PoC専用のクラスタを作成します {#step-3-sign-up-and-create-a-dedicated-cluster-for-the-poc}
 
-TiDB Cloudの使用を開始するには、次の手順を実行します。
+PoC専用のクラスタを作成するには、次の手順を実行します。
 
-1.  TiDB Cloudアカウントの場合は[サインアップ](https://tidbcloud.com/signup)で、メールの確認を完了します。
-2.  [TiDB Cloud](http://tidbcloud.com)のアカウントにログインします。デフォルトでは、プラン選択ページが表示されます。
-3.  [ **PoCトライアルに適用]を**クリックし、 [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)を参照してPoCの[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタを作成します。
+1.  次のいずれかを実行して、PoCアプリケーションフォームに入力します。
 
-**概念実証プラン**は、PoCの目的のために特別に設計された14日間の無料トライアルオプションです。このプランを選択すると、PoC申請フォームが表示されます。フォームを送信すると、TiDB Cloudサポートチームがアプリケーションを確認して連絡し、アプリケーションが承認されるとトライアルポイントをアカウントに転送します。また、PingCAPサポートエンジニアに連絡して、PoCの手順を支援し、PoCが可能な限りスムーズに実行されるようにすることもできます。
+    -   すでに[開発者層を作成しました](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)つ（1年間の無料トライアル）をお持ちの場合は、PoCアプリケーションの送信に関するプロンプトバーがTiDB Cloudコンソールに表示されます。バーのPoCアプリケーションリンクをクリックして、PoCアプリケーションフォームに入力できます。
+    -   開発者層をまだ作成していない場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページに移動してPoCアプリケーションフォームに記入してください。
+
+    フォームを送信すると、 TiDB Cloudサポートチームがアプリケーションを確認して連絡し、アプリケーションが承認されるとトライアルポイントをアカウントに転送します。また、PingCAPサポートエンジニアに連絡して、PoCの手順を支援し、PoCが可能な限りスムーズに実行されるようにすることもできます。
+
+2.  PoCの[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタを作成するには、 [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)を参照してください。
 
 クラスタを作成する前に、クラスタのサイズ設定に容量計画を立てることをお勧めします。 TiDB、TiKV、またはTiFlash<sup>ベータ</sup>ノードの推定数から始めて、パフォーマンス要件を満たすために後でクラスタをスケールアウトすることができます。詳細については、次のドキュメントを参照するか、サポートチームにご相談ください。
 
@@ -84,9 +87,9 @@ TiDB Cloudの使用を開始するには、次の手順を実行します。
 
 次に、テーブルとインデックスを含むデータベーススキーマをTiDBクラスタにロードできます。
 
-PoCトライアルポイントの数には限りがあるため、トライアルポイントの価値を最大化するには、TiDB Cloudでの互換性テストと予備分析用に[開発者層クラスタ](/tidb-cloud/select-cluster-tier.md#developer-tier) （1年間の無料トライアル）を作成することをお勧めします。
+PoCトライアルポイントの数には限りがあるため、トライアルポイントの価値を最大化するには、 TiDB Cloudでの互換性テストと予備分析のために[開発者層クラスタ](/tidb-cloud/select-cluster-tier.md#developer-tier) （1年間の無料トライアル）を作成することをお勧めします。
 
-TiDBCloudはMySQL5.7と高い互換性があります。データがMySQLと互換性がある場合、またはMySQLと互換性があるように適合できる場合は、データをTiDBに直接インポートできます。
+TiDB CloudはMySQL5.7と高い互換性があります。データがMySQLと互換性がある場合、またはMySQLと互換性があるように適合できる場合は、データをTiDBに直接インポートできます。
 
 互換性の詳細については、次のドキュメントを参照してください。
 
@@ -97,13 +100,13 @@ TiDBCloudはMySQL5.7と高い互換性があります。データがMySQLと互�
 
 ここにいくつかのベストプラクティスがあります：
 
--   スキーマの設定に非効率性がないか確認してください。
+-   スキーマのセットアップに非効率性があるかどうかを確認してください。
 -   不要なインデックスを削除します。
 -   効果的なパーティショニングのためのパーティショニングポリシーを計画します。
 -   タイムスタンプのインデックスなど、右側のインデックスの増加によって引き起こされる[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)は避けてください。
 -   [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random)を使用して[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を避けます。
 
-SQLステートメントの場合、データソースとTiDBとの互換性のレベルに応じて、SQLステートメントを調整する必要がある場合があります。
+SQLステートメントの場合、データソースとTiDBとの互換性のレベルに応じて、それらを適合させる必要がある場合があります。
 
 ご不明な点がございましたら、 [PingCAP](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
 
@@ -113,7 +116,7 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 
 さまざまな形式のデータをTiDB Cloudにインポートできます。
 
--   [サンプルデータをTiDBDumpling形式でインポートする](/tidb-cloud/import-sample-data.md)
+-   [TiDBDumpling形式でサンプルデータをインポートする](/tidb-cloud/import-sample-data.md)
 -   [Auroraから移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 -   [AmazonS3またはGCSからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
 -   [ApacheParquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)
@@ -132,13 +135,13 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 ワークロードを開始した後、次の方法を使用してシステムを監視できます。
 
 -   クラスタの一般的に使用されるメトリックは、[**概要**]ページにあります。これには、合計QPS、レイテンシー、接続、TiFlash<sup>ベータ</sup>リクエストQPS、TiFlash<sup>ベータ</sup>リクエスト期間、TiFlash<sup>ベータ</sup>ストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKVIOが含まれます。読み取り、およびTiKVIO書き込み。 [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
--   **[診断]&gt;[ステートメント]**に移動します。ここで、SQLの実行を監視し、システムテーブルを照会せずにパフォーマンスの問題を簡単に見つけることができます。 [ステートメント分析](/tidb-cloud/tune-performance.md)を参照してください。
+-   **[診断]&gt;[ステートメント]**に移動します。ここで、SQLの実行を監視し、システムテーブルにクエリを実行せずにパフォーマンスの問題を簡単に見つけることができます。 [ステートメント分析](/tidb-cloud/tune-performance.md)を参照してください。
 -   **[診断]&gt;[キービジュア**ライザー]に移動します。ここで、TiDBデータアクセスパターンとデータホットスポットを表示できます。 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
 -   これらのメトリックを独自のDatadogおよびPrometheusに統合することもできます。 [サードパーティの統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を参照してください。
 
 次に、テスト結果を評価します。
 
-より正確な評価を取得するには、テストの前にメトリックベースラインを決定し、実行ごとにテスト結果を適切に記録します。結果を分析することで、TiDBCloudがアプリケーションに適しているかどうかを判断できます。一方、これらの結果はシステムの実行ステータスを示しており、メトリックに従ってシステムを調整できます。例えば：
+より正確な評価を取得するには、テストの前にメトリックベースラインを決定し、実行ごとにテスト結果を適切に記録します。結果を分析することで、 TiDB Cloudがアプリケーションに適しているかどうかを判断できます。一方、これらの結果はシステムの実行ステータスを示しており、メトリックに従ってシステムを調整できます。例えば：
 
 -   システムパフォーマンスが要件を満たしているかどうかを評価します。合計QPSとレイテンシーを確認してください。システムパフォーマンスが不十分な場合は、次のようにパフォーマンスを調整できます。
 
@@ -176,15 +179,15 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 
 ## ステップ8.環境をクリーンアップし、PoCを終了します {#step-8-clean-up-the-environment-and-finish-the-poc}
 
-実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得した後、PoCの全サイクルを完了しました。これらの結果は、TiDBCloudが期待を満たしているかどうかを判断するのに役立ちます。その間、TiDBCloudを使用するためのベストプラクティスを蓄積しました。
+実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得した後、PoCの全サイクルを完了しました。これらの結果は、 TiDB Cloudが期待を満たしているかどうかを判断するのに役立ちます。その間、 TiDB Cloudを使用するためのベストプラクティスを蓄積しました。
 
-TiDB Cloudをより大規模に試してみたい場合は、TiDB Cloudが提供する他のストレージサイズでの展開など、新しいラウンドの展開とテストのために、 [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)を作成してTiDBCloudへのフルアクセスを取得します。
+TiDB Cloudをより大規模に試してみたい場合は、 TiDB Cloudが提供する他のストレージサイズでの展開など、新しいラウンドの展開とテストのために、 [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)を作成してTiDB Cloudへのフルアクセスを取得します。
 
 トライアルポイントが不足していて、PoCを続行したい場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡して相談してください。
 
 PoCを終了し、いつでもテスト環境を削除できます。詳細については、 [TiDBクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)を参照してください。
 
-サポートチームへのフィードバックは、PoCプロセス、機能のリクエスト、製品の改善方法など、 [TiDB Cloudフィードバックフォーム](https://www.surveymonkey.com/r/L3VVW8R)に記入することで高く評価されます。
+PoCプロセス、機能のリクエスト、製品の改善方法など、 [TiDB Cloudフィードバックフォーム](https://www.surveymonkey.com/r/L3VVW8R)を入力することで、サポートチームへのフィードバックを高く評価しています。
 
 ## FAQ {#faq}
 
@@ -200,8 +203,8 @@ TiDB Cloudは、自動バックアップと手動バックアップの2種類の
 
 スケーリングに関する考慮事項は次のとおりです。
 
--   ピーク時またはデータのインポート中に、ダッシュボードの容量メトリックが上限に達していることに気付いた場合（ [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照）、クラスタをスケールアウトする必要がある場合があります。
--   リソース使用量が永続的に低い場合（たとえば、CPU使用率の10％〜20％のみ）、クラスタを拡張してリソースを節約できます。
+-   ピーク時またはデータのインポート中に、ダッシュボードの容量メトリックが上限に達していることを確認した場合（ [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照）、クラスタをスケールアウトする必要がある場合があります。
+-   リソース使用率が永続的に低い場合（たとえば、CPU使用率の10％〜20％のみ）、クラスタを拡張してリソースを節約できます。
 
 コンソールでクラスターを自分でスケールアウトできます。クラスタでスケーリングする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してサポートを受ける必要があります。スケーリングの詳細については、 [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。正確な進捗状況を追跡するために、サポートチームと連絡を取り合うことができます。データのリバランスによりパフォーマンスに影響を与える可能性があるため、テストを開始する前にスケーリング操作が終了するのを待つ必要があります。
 

@@ -4,7 +4,7 @@ summary: Learn how to select your cluster tier on TiDB Cloud.
 aliases: ['/tidbcloud/public-preview/developer-tier-cluster']
 ---
 
-# クラスタ層を選択してください {#select-your-cluster-tier}
+# クラスタ層を選択する {#select-your-cluster-tier}
 
 クラスタ層は、クラスタのスループットとパフォーマンスを決定します。
 
@@ -20,8 +20,8 @@ TiDB Cloud開発者層は、TiDBのフルマネージドサービスである1�
 各開発者層クラスタはフル機能のTiDBクラスタであり、次のものが付属しています。
 
 -   1TiDB共有ノード
--   1つのTiKV共有ノード（10 GiBのOLTPストレージを使用）
--   1つのTiFlash<sup>ベータ</sup>共有ノード（10 GiBのOLAPストレージを使用）
+-   1つのTiKV共有ノード（500 MiBのOLTPストレージを使用）
+-   1つのTiFlash<sup>ベータ</sup>共有ノード（500 MiBのOLAPストレージを使用）
 
 開発者層クラスターは共有ノードで実行されます。各ノードは仮想マシン（VM）上の独自のコンテナーで実行されますが、そのVMは他のTiDB、TiKV、またはTiFlash<sup>ベータ</sup>ノードも実行しています。その結果、共有ノードは、標準の専用TiDB Cloudノードと比較してパフォーマンスが低下します。ただし、すべてのノードが別々のコンテナーで実行され、専用のクラウドディスクがあるため、開発者層クラスタに格納されたデータは分離され、他のTiDBクラスターに公開されることはありません。
 
@@ -29,7 +29,7 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 
 1年間の無料トライアルは、最初の開発者層クラスタが作成された日から始まります。
 
-### 開発者層の特別利用規約 {#developer-tier-special-terms-and-conditions}
+### 開発者層の特別な利用規約 {#developer-tier-special-terms-and-conditions}
 
 -   稼働時間のSLA保証はありません。
 -   高可用性や自動フェイルオーバーはありません。
@@ -37,7 +37,7 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 -   各クラスタでは、1日1回の自動バックアップと2回の手動バックアップが可能です。
 -   開発層クラスタへの接続の最大数は50です。
 -   チェンジフィード（Apache KafkaSinkおよびMySQLSink）を作成したり、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用して増分データを複製したりすることはできません。
--   VPCピアリングを使用してクラスタに接続することはできません。
+-   VPCピアリングを使用してクラスターに接続することはできません。
 -   クラスタをより大きなストレージや標準ノードに拡張したり、ノードの数を増やしたりすることはできません。
 -   サードパーティの監視サービスを使用することはできません。
 -   TiDBクラスタのポート番号をカスタマイズすることはできません。
@@ -46,7 +46,7 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 
 ## 専用層 {#dedicated-tier}
 
-TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、本番環境専用です。
+TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、本番環境での使用専用です。
 
 専用層クラスターの場合、ビジネスニーズに応じて、TiDB、TiKV、およびTiFlash<sup>ベータ</sup>のクラスタサイズを簡単にカスタマイズできます。 TiKVノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)の異なるアベイラビリティーゾーンに分散されます。
 

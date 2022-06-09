@@ -6,13 +6,12 @@
     -   [TiDB Cloudが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
     -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
     -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
-    -   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
 -   はじめに
     -   [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)
     -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
 -   クラスターの管理
     -   クラスターを計画する
-        -   [クラスタ層を選択してください](/tidb-cloud/select-cluster-tier.md)
+        -   [クラスタ層を選択する](/tidb-cloud/select-cluster-tier.md)
         -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
     -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
     -   TiDBクラスターに接続する
@@ -43,7 +42,7 @@
     -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
     -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
     -   サードパーティの監視統合
-        -   [Datadog統合](/tidb-cloud/monitor-datadog-integration.md)
+        -   [Datadogの統合](/tidb-cloud/monitor-datadog-integration.md)
         -   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 -   ユーザーアクセスの管理
     -   [ログイン](/tidb-cloud/manage-user-access.md)
@@ -64,8 +63,10 @@
     -   [トライアルポイント](/tidb-cloud/tidb-cloud-billing.md#trial-points)
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 -   参照
+    -   [TiDBでSQLを探索する](/basic-sql-operations.md)
     -   [サポート](/tidb-cloud/tidb-cloud-support.md)
     -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
+-   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
 -   リリースノート
     -   [2022年](/tidb-cloud/release-notes-2022.md)
     -   [2021年](/tidb-cloud/release-notes-2021.md)

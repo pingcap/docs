@@ -16,17 +16,17 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 バグの修正：
 
 -   1000を超えるファイルをTiDB Cloudにインポートするときに発生するインポートエラーを修正します
--   TiDBCloudがすでにデータを持っている既存のテーブルにデータをインポートすることを許可する問題を修正します
+-   TiDB Cloudがすでにデータを持っている既存のテーブルにデータをインポートすることを許可する問題を修正します
 
 ## 2021年11月30日 {#november-30-2021}
 
 一般的な変更：
 
--   開発者層向けにTiDBCloudを[TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレードします
+-   開発者層向けにTiDB Cloudを[TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレード
 
 新機能：
 
--   サポート[TiDB CloudプロジェクトにVPCCIDRを追加する](/tidb-cloud/set-up-vpc-peering-connections.md)
+-   サポート[TiDBクラウドプロジェクトにVPCCIDRを追加する](/tidb-cloud/set-up-vpc-peering-connections.md)
 
 改善点：
 
@@ -40,13 +40,13 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年11月8日 {#november-8-2021}
 
--   Launch [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)は、TiDBCloudの1年間の無料トライアルを提供します
+-   Launch [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)は、 TiDB Cloudの1年間の無料トライアルを提供します
 
     各開発者層クラスタはフル機能のTiDBクラスタであり、次のものが付属しています。
 
     -   1つのTiDB共有ノード
-    -   1つのTiKV共有ノード（10 GiBのOLTPストレージを使用）
-    -   1つのTiFlash<sup>ベータ</sup>共有ノード（10 GiBのOLAPストレージを使用）
+    -   1つのTiKV共有ノード（500 MiBのOLTPストレージを使用）
+    -   1つのTiFlash<sup>ベータ</sup>共有ノード（500 MiBのOLAPストレージを使用）
 
     はじめに[ここ](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
@@ -57,8 +57,8 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年10月11日 {#october-11-2021}
 
--   各サービスおよび各プロジェクトのコストを含むサポート[TiDBCloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details)
--   TiDBCloudの内部機能のいくつかの問題を修正します
+-   各サービスおよび各プロジェクトのコストを含むサポート[TiDB Cloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+-   TiDB Cloudの内部機能のいくつかの問題を修正します
 
 ## 2021年9月16日 {#september-16-2021}
 
@@ -67,11 +67,11 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 ## 2021年9月2日 {#september-2-2021}
 
 -   新しくデプロイされたクラスターのデフォルトのTiDBバージョンを5.0.2から5.2.0にアップグレードします。 TiDB 5.1.0および5.2.0の機能の詳細については、 [5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)のリリースノートを参照してください。
--   TiDBCloudの内部機能のいくつかの問題を修正します。
+-   TiDB Cloudの内部機能のいくつかの問題を修正します。
 
 ## 2021年8月19日 {#august-19-2021}
 
--   TiDBCloudの内部機能のいくつかの問題を修正します。このリリースでは、ユーザーの動作に変更はありません。
+-   TiDB Cloudの内部機能のいくつかの問題を修正します。このリリースでは、ユーザーの動作に変更はありません。
 
 ## 2021年8月5日 {#august-5-2021}
 
@@ -95,7 +95,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年6月24日 {#june-24-2021}
 
--   AuroraスナップショットをTiDBインスタンスにインポートするときの寄木細工の床ファイルの解析エラーを修正しました
+-   AuroraスナップショットをTiDBインスタンスにインポートするときの寄木細工のファイルの解析エラーを修正します
 -   PoCユーザーがクラスターを作成し、クラスタ構成を変更したときに推定時間が更新されない問題を修正しクラスタ
 
 ## 2021年6月16日 {#june-16-2021}
@@ -104,13 +104,13 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年6月14日 {#june-14-2021}
 
--   AuroraスナップショットをTiDBインスタンスにインポートするときのマウントEBSエラーを修正します
+-   AuroraスナップショットをTiDBインスタンスにインポートする際のEBSのマウントエラーを修正しました
 
 ## 2021年5月10日 {#may-10-2021}
 
 全般的
 
--   TiDBCloudは現在パブリックプレビューになっています。 1して、試用オプションの[サインアップ](https://tidbcloud.com/signup)つを選択できます。
+-   TiDB Cloudは現在パブリックプレビューになっています。 1して、試用オプションの[サインアップ](https://tidbcloud.com/signup)つを選択できます。
 
     -   48時間無料トライアル
     -   2週間のPoC無料トライアル

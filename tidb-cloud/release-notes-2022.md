@@ -8,6 +8,12 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2022年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
+## 2022年6月7日 {#june-7-2022}
+
+-   [無料でお試しください](https://tidbcloud.com/free-trial)の登録ページを追加して、 TiDB Cloudにすばやくサインアップします。
+-   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間のPoCトライアルを無料で申請する場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページにアクセスしてください。詳細については、 [TiDB Cloudで概念実証（PoC）を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+-   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90日ごとにパスワードをリセットするように要求することにより、システムのセキュリティを向上させます。
+
 ## 2022年5月24日 {#may-24-2022}
 
 -   専用層クラスタを作成または復元するときに、TiDBポート番号のカスタマイズをサポートする
@@ -32,11 +38,11 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022年4月7日 {#april-7-2022}
 
--   開発者層向けにTiDBCloudを[TiDB v6.0.0](https://docs.pingcap.com/tidb/v6.0/release-6.0.0-dmr)にアップグレードします
+-   開発者層向けにTiDB Cloudを[TiDB v6.0.0](https://docs.pingcap.com/tidb/v6.0/release-6.0.0-dmr)にアップグレード
 
 ## 2022年3月31日 {#march-31-2022}
 
-TiDBCloudが一般提供になりました。 [サインアップ](https://tidbcloud.com/signup)を選択して、次のいずれかのオプションを選択できます。
+TiDB Cloudが一般提供になりました。 [サインアップ](https://tidbcloud.com/signup)を選択して、次のいずれかのオプションを選択できます。
 
 -   開発者層を無料で始めましょう
 -   14日間のPoCトライアルを無料で申し込む
@@ -48,7 +54,7 @@ TiDBCloudが一般提供になりました。 [サインアップ](https://tidbc
 
 -   サポート[TiDB Cloudの組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
 
-    TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDBCloudクラスタがTiDBCloudの組み込みアラート条件の1つをトリガーするたびに、電子メールで通知を受けることができます。
+    TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスタがTiDB Cloudの組み込みアラート条件の1つをトリガーするたびに、電子メールで通知を受けることができます。
 
 ## 2022年3月15日 {#march-15-2022}
 
@@ -66,7 +72,7 @@ TiDBCloudが一般提供になりました。 [サインアップ](https://tidbc
 
 -   サポート[PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 
-    PrometheusとGrafanaの統合により、TiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)を使用してメトリックを表示するように[プロメテウス](https://prometheus.io/)のサービスを構成できます。
+    PrometheusとGrafanaの統合により、 TiDB Cloudエンドポイントから主要なメトリックを読み取り、 [Grafana](https://grafana.com/)を使用してメトリックを表示するように[プロメテウス](https://prometheus.io/)のサービスを構成できます。
 
 -   新しいクラスタの選択したリージョンに基づいたデフォルトのバックアップ時間の割り当てをサポート
 
@@ -84,11 +90,11 @@ TiDBCloudが一般提供になりました。 [サインアップ](https://tidbc
 
 一般的な変更：
 
--   開発者層向けにTiDBCloudを[TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0)にアップグレードします
+-   開発者層向けにTiDB Cloudを[TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0)にアップグレード
 
 改善：
 
--   [CSVファイル](/tidb-cloud/import-csv-files.md)または[ApacheParquetファイル](/tidb-cloud/import-parquet-files.md)をTiDBCloudにインポートする際のカスタムファイル名の使用をサポート
+-   [CSVファイル](/tidb-cloud/import-csv-files.md)または[ApacheParquetファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタムファイル名の使用をサポート
 
 ## 2022年1月11日 {#january-11-2022}
 

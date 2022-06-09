@@ -9,7 +9,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 *推定完了時間：20分*
 
-このチュートリアルでは、TiDB Cloudを簡単に使い始める方法について説明します。コンテンツには、クラスタの作成方法、クラスタへの接続方法、データのインポート方法、およびクエリの実行方法が含まれます。
+このチュートリアルでは、 TiDB Cloudを簡単に使い始める方法について説明します。コンテンツには、クラスタの作成方法、クラスタへの接続方法、データのインポート方法、およびクエリの実行方法が含まれます。
 
 ## 手順1.TiDBクラスタを作成する {#step-1-create-a-tidb-cluster}
 
@@ -18,14 +18,14 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 <SimpleTab>
 <div label="Developer Tier">
 
-1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップしてください。
+1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップしてください。
 
-    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
-    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
+    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
 
-2.  TiDBCloudアカウントに[ログイン](https://tidbcloud.com/) 。
+2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/) 。
 
-    デフォルトでは、プラン選択ページが表示されます。
+    プラン選択ページはデフォルトで表示されます。
 
 3.  プランの選択ページで、**開発者層**プランの[<strong>無料で開始</strong>]をクリックします。
 
@@ -35,7 +35,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 6.  開発者層のクラスタサイズを表示し、[**作成**]をクリックします。
 
-TiDB Cloudクラスタは、約5〜15分で作成されます。
+TiDB Cloudクラスタは約5〜15分で作成されます。
 
 </div>
 
@@ -43,19 +43,19 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップしてください。
 
-    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
-    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
-    -   AWS Marketplaceユーザーの場合、AWSMarketplaceからサインアップすることもできます。これを行うには、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)分の`TiDB Cloud`を検索し、TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDBCloudアカウントを設定します。
+    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   AWS Marketplaceユーザーの場合、AWSMarketplaceからサインアップすることもできます。これを行うには、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)分の`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントを設定します。
 
-2.  TiDBCloudアカウントに[ログイン](https://tidbcloud.com/) 。
+2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/) 。
 
-    デフォルトでは、プラン選択ページが表示されます。
+    プラン選択ページはデフォルトで表示されます。
 
-3.  プランの選択ページで、**オンデマンド**プランの[<strong>今すぐフルアクセスを取得</strong>]をクリックします。
+3.  プランの選択ページで、**専用階層**プランの[<strong>今すぐフルアクセスを取得</strong>]をクリックします。
 
     > **ノート：**
     >
-    > 最初にTiDBCloudの14日間の無料トライアルを取得する場合は**、概念実証**プランの[ <strong>PoCトライアルの申請</strong>]をクリックし、申請フォームに記入して、[ <strong>OK</strong> ]をクリックします。 PingCAPサポートチームは48時間以内にご連絡いたします。詳細については、 [TiDB Cloudで概念実証（PoC）を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+    > 最初にTiDB Cloud Tierの14日間の無料試用版を入手したい場合は、 [TiDB Cloudで概念実証（PoC）を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
 
 4.  [クラスターの**作成]**ページで、クラスタ名とルートパスワードを設定し、接続に`4000`を使用できない場合は、デフォルトのポート番号`4000`を更新します。
 
@@ -75,7 +75,7 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
 10. [**作成]**をクリックします。
 
-TiDB Cloudクラスタは、約5〜15分で作成されます。
+TiDB Cloudクラスタは約5〜15分で作成されます。
 
 </div>
 </SimpleTab>
@@ -90,7 +90,7 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
 3.  **手順1：トラフィックフィルターの作成**で、[<strong>現在のIPアドレスの追加</strong>]をクリックし、[<strong>フィルターの作成</strong>]をクリックします。
 
-    この手順の目的は、トラフィックフィルターを設定することです。これにより、クラスタが信頼できるIPアドレスからの接続のみを受け入れるようになります。
+    この手順の目的は、トラフィックフィルタを設定することです。これにより、クラスタが信頼できるIPアドレスからの接続のみを受け入れるようになります。
 
 4.  **手順2：** SQLクライアントに接続するで、SQLクライアントを使用してクラスタに接続します。
 
@@ -116,7 +116,7 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
     SELECT TiDB_version();
     ```
 
-    リリースバージョン情報が表示されたら、TiDB CloudクラスタでMySQLクライアントを試す準備ができています。
+    リリースバージョン情報が表示されたら、 TiDB CloudクラスタでMySQLクライアントを試す準備ができています。
 
 ## ステップ3.サンプルデータをインポートします {#step-3-import-the-sample-data}
 
