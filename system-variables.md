@@ -1748,14 +1748,6 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[-1, 256]`
 - This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
 
-Usage example:
-
-{{< copyable "sql" >}}
-
-```sql
-set tidb_max_tiflash_threads = 10;
-```
-
 ### tidb_slow_query_file
 
 - Scope: SESSION
