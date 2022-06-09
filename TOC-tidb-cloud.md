@@ -6,7 +6,6 @@
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
 - Get Started
-  - [Explore SQL with TiDB](/basic-sql-operations.md)
   - [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Manage Cluster
@@ -63,6 +62,7 @@
   - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 - Reference
+    - [Explore SQL with TiDB](/basic-sql-operations.md)
     - [Support](/tidb-cloud/tidb-cloud-support.md)
     - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
