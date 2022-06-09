@@ -83,12 +83,14 @@ global                                     # Global configuration.
    group       haproxy                     # The same with the GID parameter. A dedicated user group is recommended.
    nbproc      64                          # The number of processes created when going daemon. When starting multiple processes to forward requests, ensure that the value is large enough so that HAProxy does not block processes.
    daemon                                  # Makes the process fork into background. It is equivalent to the command line "-D" argument. It can be disabled by the command line "-db" argument.
+
 defaults                                   # Default configuration.
    log global                              # Inherits the settings of the global configuration.
    retries 2                               # The maximum number of retries to connect to an upstream server. If the number of connection attempts exceeds the value, the backend server is considered unavailable.
    timeout connect  2s                     # The maximum time to wait for a connection attempt to a backend server to succeed. It should be set to a shorter time if the server is located on the same LAN as HAProxy.
    timeout client 30000s                   # The maximum inactivity time on the client side.
    timeout server 30000s                   # The maximum inactivity time on the server side.
+
 listen tidb-cluster                        # Database load balancing.
    bind 0.0.0.0:3390                       # The Floating IP address and listening port.
    mode tcp                                # HAProxy uses layer 4, the transport layer.
@@ -155,7 +157,7 @@ sysbench $testname \
 |600|365217.96|358976.94|2.57|2.66|-1.71|
 |900|420799.64|407625.11|3.68|3.82|-3.13|
 
-Compared with v6.0.0, the Point Select performance of v6.1.0 is slightly dropped by 2.1%.
+Compared with v6.0.0, the Point Select performance of v6.1.0 slightly drops by 2.1%.
 
 ![Point Select](/media/sysbench_v600vsv610_point_select.png)
 
