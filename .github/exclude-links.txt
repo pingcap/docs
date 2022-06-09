@@ -41,3 +41,4 @@ https://s3.amazonaws.com/
 https://translate.google.com/*
 https://www.crunchbase.com/organization/
 https:/%7BnodeIP%7D:%7BnodePort%7D/dashboard
+http://${host}:${port}/api/v1/data/*
