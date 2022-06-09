@@ -175,7 +175,19 @@ You can also check the Region leader distribution using the following SQL statem
 {{< copyable "sql" >}}
 
 ```sql
-SELECT p.STORE_ID, COUNT(s.REGION_ID) PEER_COUNT FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS s JOIN INFORMATION_SCHEMA.TIKV_REGION_PEERS p on s.REGION_ID = p.REGION_ID WHERE TABLE_NAME = 'table_name' and p.is_leader = 1 GROUP BY p.STORE_ID ORDER BY PEER_COUNT DESC;
+SELECT
+    p.STORE_ID,
+    COUNT(s.REGION_ID) PEER_COUNT
+FROM
+    INFORMATION_SCHEMA.TIKV_REGION_STATUS s
+    JOIN INFORMATION_SCHEMA.TIKV_REGION_PEERS p ON s.REGION_ID = p.REGION_ID
+WHERE
+    TABLE_NAME = 'table_name'
+    AND p.is_leader = 1
+GROUP BY
+    p.STORE_ID
+ORDER BY
+    PEER_COUNT DESC;
 ```
 
 Then operate the write load again:
