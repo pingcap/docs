@@ -172,6 +172,7 @@
       - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
       - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
       - [TiKV Follower Read](/follower-read.md)
+      - [Tune Region Performance](/tune-region-performance.md)
       - [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
   - SQL Tuning
@@ -542,6 +543,7 @@
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
+      - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -691,6 +693,7 @@
       - [Isolation Levels](/transaction-isolation-levels.md)
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
+      - [Non-Transactional DML Statements](/non-transactional-dml.md)
     - Garbage Collection (GC)
       - [Overview](/garbage-collection-overview.md)
       - [Configuration](/garbage-collection-configuration.md)
