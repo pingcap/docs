@@ -6,6 +6,8 @@ http://__grafana_ip__:3000
 http://__tidb_ip__:10080
 http://__tidb_ip__:10080/metrics
 http://\$ip:10080/
+http://${host}/dashboard
+http://${remote-server-ip}:3000/
 http://172.16.x.xxx:2379/pd/api/v1/config/rule
 http://9.9.9.9:2379/
 http://example.com:8033/dashboard/
@@ -18,6 +20,7 @@ http://oss-cn-hangzhou-internal.aliyuncs.com/
 http://prometheus-k8s.monitoring:9090/
 http://spark-master-hostname:8080/
 http://thanos-receiver:19291/api/v1/receive
+http://xn--${ip}-m86ht9t5l1bhz9ayu7b:3000/
 http:/\$%7BPD_IP%7D:\$%7BPD_PORT%7D
 http:/\$%7Btidb-server-ip%7D:\$%7Btidb-server-status-port%7D/
 http:/%7Bport%7D/api/v1/data/*
@@ -31,6 +34,7 @@ http:/pd_ip:pd_port/
 http:/pd1_addr:port
 http:/pd2_addr:port
 http:/pd3_addr:port
+https://{host}/dashboard
 https://charts.pingcap.org
 https://clinic.pingcap.com:4433/*
 https://download.pingcap.org
