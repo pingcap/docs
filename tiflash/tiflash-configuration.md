@@ -14,15 +14,15 @@ You can adjust the PD scheduling parameters using [pd-ctl](/pd-control.md). Note
 
 - [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit): determines the rate at which the replica-related operator is generated. The parameter affects operations such as making nodes offline and add replicas.
 
-    > **Notes:**
-    >
-    > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
+  > **Notes:**
+  >
+  > The value of this parameter should be less than that of `region-schedule-limit`. Otherwise, the normal Region scheduling among TiKV nodes is affected.
 
 - `store-balance-rate`: limits the rate at which Regions of each TiKV/TiFlash store are scheduled. Note that this parameter takes effect only when the stores have newly joined the cluster. If you want to change the setting for existing stores, use the following command.
 
-    > **Note:**
-    >
-    > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
+  > **Note:**
+  >
+  > Since v4.0.2, the `store-balance-rate` parameter has been deprecated and changes have been made to the `store limit` command. See [store-limit](/configure-store-limit.md) for details.
 
     - Execute the `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>` command to set the scheduling rate of a specified store. (To get `store_id`, you can execute the `pd-ctl -u <pd_ip:pd_port> store` command.
     - If you do not set the scheduling rate for Regions of a specified store, this store inherits the setting of `store-balance-rate`.
@@ -76,9 +76,8 @@ delta_index_cache_size = 0
     ## DTFile format
     ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format for versions < v6.0.0.
-    ## * format_version = 3, the default format for v6.0.0, which provides more data validation features.
-    ## * format_version = 4, the default format for v6.1.0 and later versions, which provides lower write amplification and lower background task resource consumption
-    # format_version = 4
+    ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
+    # format_version = 3
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -192,7 +191,10 @@ delta_index_cache_size = 0
     cop_pool_size = 0
     ## New in v5.0. This item specifies the maximum number of batch requests that TiFlash Coprocessor executes at the same time. If the number of requests exceeds the specified value, the exceeded requests will queue. If the configuration value is set to 0 or not set, the default value is used, which is twice the number of physical cores.
     batch_cop_pool_size = 0
-    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true. 
+    ## New in v6.1.0. This item specifies the number of requests that TiFlash can concurrently process when it receives ALTER TABLE ... COMPACT from TiDB.
+    ## If the value is set to 0, the default value 1 prevails.
+    manual_compact_pool_size = 1
+    ## New in v5.4.0. This item enables or disables the elastic thread pool feature, which significantly improves CPU utilization in high concurrency scenarios of TiFlash. The default value is true.
     enable_elastic_threadpool = true
     # Compression algorithm of the TiFlash storage engine. The value can be LZ4, zstd, or LZ4HC, and is case-insensitive. By default, LZ4 is used.
     dt_compression_method = "LZ4"
@@ -270,5 +272,5 @@ If there are multiple disks with different I/O metrics on your TiFlash node, it 
 
 > **Warning:**
 >
-> * The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
-> * After using the [storage] configurations, downgrading your cluster to a version earlier than v4.0.9 might cause **data loss** on TiFlash..
+> - The `[storage]` configuration is supported in TiUP since v1.2.5. If your TiDB cluster version is v4.0.9 or later, make sure that your TiUP version is v1.2.5 or later. Otherwise, the data directories defined in `[storage]` will not be managed by TiUP.
+> - After using the [storage] configurations, downgrading your cluster to a version earlier than v4.0.9 might cause **data loss** on TiFlash..
