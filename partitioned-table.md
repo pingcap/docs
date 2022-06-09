@@ -1355,7 +1355,7 @@ If the following warning is displayed during the `analyze` process, partition st
 
 You can also use scripts to update statistics of all partitioned tables. For details, see [Update statistics of partitioned tables in dynamic pruning mode](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
 
-After table-level statistics are ready, you can enable the global dynamic pruning mode, which is effective to all SQL statements and auto analyze operations.
+After table-level statistics are ready, you can enable the global dynamic pruning mode, which is effective to all SQL statements and `auto-analyze` operations.
 
 {{< copyable "sql" >}}
 
@@ -1548,16 +1548,12 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
 
 4. Execute a batch update:
 
-    Process SQL statements before executing the `source` statement:
+    Process SQL statements before executing the `source` command:
 
     ```
     sed -i "" '1d' gatherGlobalStats.sql --- mac
     sed -i '1d' gatherGlobalStats.sql --- linux
     ```
-
-    {{< copyable "sql" >}}
-
-    ```sql
 
     {{< copyable "sql" >}}
 
