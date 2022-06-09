@@ -3,15 +3,15 @@ title: String types
 summary: Learn about the string types supported in TiDB.
 ---
 
-# 文字列タイプ {#string-types}
+# 文字列型 {#string-types}
 
-`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列タイプを`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列タイプ](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
+`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列型を`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列型](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
 
 ## サポートされているタイプ {#supported-types}
 
 ### <code>CHAR</code>タイプ {#code-char-code-type}
 
-`CHAR`は固定長の文字列です。 Mは、列の長さを文字（バイトではなく）で表します。 Mの範囲は0〜255です`VARCHAR`タイプとは異なり、データが`CHAR`列に挿入されると、末尾のスペースが切り捨てられます。
+`CHAR`は固定長の文字列です。 Mは、列の長さを文字数（バイトではなく）で表します。 Mの範囲は0〜255です`VARCHAR`タイプとは異なり、データが`CHAR`列に挿入されると、末尾のスペースが切り捨てられます。
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -19,7 +19,7 @@ summary: Learn about the string types supported in TiDB.
 
 ### <code>VARCHAR</code>タイプ {#code-varchar-code-type}
 
-`VARCHAR`は可変長の文字列です。 Mは、列の最大長を文字数（バイトではなく）で表します。 `VARCHAR`の最大サイズは65,535バイトを超えることはできません。最大行長と使用される文字セットによって、 `VARCHAR`の長さが決まります。
+`VARCHAR`は可変長の文字列です。 Mは、列の最大長を文字数（バイトではなく）で表します。 `VARCHAR`の最大サイズは65,535バイトを超えることはできません。行の最大長と使用されている文字セットによって、 `VARCHAR`の長さが決まります。
 
 1つの文字が占めるスペースは、文字セットによって異なる場合があります。次の表は、1文字で消費されるバイト数と、各文字セットの`VARCHAR`列の長さの範囲を示しています。
 
@@ -117,7 +117,7 @@ LONGBLOB
 
 ### <code>ENUM</code>タイプ {#code-enum-code-type}
 
-`ENUM`は、テーブルの作成時に列指定で明示的に列挙される許可された値のリストから選択された値を持つ文字列オブジェクトです。構文は次のとおりです。
+`ENUM`は、テーブルの作成時に列仕様に明示的に列挙される許可された値のリストから選択された値を持つ文字列オブジェクトです。構文は次のとおりです。
 
 ```sql
 ENUM('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]

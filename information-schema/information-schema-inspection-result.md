@@ -39,7 +39,7 @@ DESC inspection_result;
 
 -   `RULE` ：診断ルールの名前。現在、次のルールを使用できます。
     -   `config` ：構成が一貫していて適切かどうかを確認します。同じ構成が異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
-    -   `version` ：バージョンの整合性チェック。同じバージョンが異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
+    -   `version` ：バージョンの整合性チェック。同じバージョンが異なるインスタンスで一貫していない場合、 `warning`の診断結果が生成されます。
     -   `node-load` ：サーバーの負荷を確認します。現在のシステム負荷が高すぎる場合、対応する`warning`の診断結果が生成されます。
     -   `critical-error` ：システムの各モジュールは重大なエラーを定義します。対応する期間内に重大なエラーがしきい値を超えると、警告診断結果が生成されます。
     -   `threshold-check` ：診断システムは主要なメトリックのしきい値をチェックします。しきい値を超えると、対応する診断情報が生成されます。
@@ -50,7 +50,7 @@ DESC inspection_result;
 -   `VALUE` ：特定の診断項目の値。
 -   `REFERENCE` ：この診断項目の基準値（しきい値）。 `VALUE`がしきい値を超えると、対応する診断情報が生成されます。
 -   `SEVERITY` ：重大度レベル。オプションの値は`warning`と`critical`です。
--   `DETAILS` ：診断の詳細。SQLステートメントまたはさらなる診断のためのドキュメントリンクも含まれる場合があります。
+-   `DETAILS` ：診断の詳細。さらに診断するためのSQLステートメントまたはドキュメントリンクが含まれている場合があります。
 
 ## 診断例 {#diagnostics-example}
 
@@ -159,7 +159,7 @@ select * from information_schema.inspection_result where rule='critical-error';
 
 ## 診断ルール {#diagnostic-rules}
 
-診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えると、 `warning`または`critical`の診断が生成され、対応する情報が`details`列に表示されます。
+診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルにクエリを実行した後、結果をしきい値と比較します。結果がしきい値を超えると、 `warning`または`critical`の診断が生成され、対応する情報が`details`列に表示されます。
 
 `inspection_rules`のシステムテーブルをクエリすることにより、既存の診断ルールをクエリできます。
 
@@ -229,7 +229,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 ### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
 
-`version`診断ルールは、 `CLUSTER_INFO`システムテーブルを照会することにより、同じコンポーネントのバージョンハッシュが一貫しているかどうかをチェックします。次の例を参照してください。
+`version`診断ルールは、 `CLUSTER_INFO`システムテーブルをクエリすることにより、同じコンポーネントのバージョンハッシュが一貫しているかどうかをチェックします。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -288,7 +288,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | filter-block-cache-hit | tikv_block_filter_cache_hit         | 0.95      | TiKVのフィルターブロックキャッシュのヒット率。                                                                                          |
 | TiKV | data-block-cache-hit   | tikv_block_data_cache_hit           | 0.80      | TiKVのデータブロックキャッシュのヒット率。                                                                                            |
 | TiKV | リーダー-スコア-バランス          | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのリーダースコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                   |
-| TiKV | リージョンスコアバランス           | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのリージョンスコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                  |
+| TiKV | リージョンスコアバランス           | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのRegionスコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                 |
 | TiKV | 店舗利用可能残高               | pd_scheduler_store_status           | &lt;0.2   | 各TiKVインスタンスの使用可能なストレージのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は20％未満です。                                               |
 | TiKV | リージョンカウント              | pd_scheduler_store_status           | &lt;20000 | 各TiKVインスタンスのリージョン数を確認します。 1つのインスタンスで予想されるリージョンの数は20,000未満です。                                                       |
 | PD   | 地域の健康                  | pd_region_health                    | &lt;100   | クラスタでスケジューリング中のリージョンの数を検出します。予想される数は合計で100未満です。                                                                    |

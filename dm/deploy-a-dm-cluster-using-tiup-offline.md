@@ -117,7 +117,7 @@ alertmanager_servers:
 
 > **ノート：**
 >
-> -   DMクラスタの高可用性を確保する必要がない場合は、DMマスターノードを1つだけデプロイし、デプロイされるDMワーカーノードの数は、移行するアップストリームのMySQL/MariaDBインスタンスの数以上である必要があります。
+> -   DMクラスタの高可用性を確保する必要がない場合は、DM-masterノードを1つだけデプロイし、デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL/MariaDBインスタンスの数以上である必要があります。
 >
 > -   DMクラスタの高可用性を確保するには、3つのDM-masterノードをデプロイすることをお勧めします。デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL / MariaDBインスタンスの数（たとえば、 DMワーカーノードの数は、アップストリームインスタンスの数より2つ多くなります）。
 >
@@ -161,7 +161,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 -   `[-i]`および`[-p]` ：オプション。パスワードなしでターゲットマシンへのログインを設定した場合、これらのパラメータは必要ありません。そうでない場合は、2つのパラメーターのいずれかを選択してください。 `[-i]`は、ターゲットマシンにアクセスできる`root`のユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。 `[-p]`は、ユーザーパスワードをインタラクティブに入力するために使用されます。
 -   TiUP DMは、組み込みSSHクライアントを使用します。制御マシンシステムにネイティブなSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスタに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って構成を編集します。
 
-出力ログの最後に、 ``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示しています。
+出力ログの最後に、 ``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示します。
 
 ## ステップ5：TiUPによって管理されているクラスターを確認します {#step-5-check-the-clusters-managed-by-tiup}
 
@@ -171,7 +171,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 tiup dm list
 ```
 
-TiUPは、複数のDMクラスターの管理をサポートしています。上記のコマンドは、名前、デプロイメントユーザー、バージョン、シークレットキー情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
+TiUPは、複数のDMクラスターの管理をサポートしています。上記のコマンドは、名前、展開ユーザー、バージョン、秘密鍵情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
 
 ```log
 Name  User  Version  Path                                  PrivateKey

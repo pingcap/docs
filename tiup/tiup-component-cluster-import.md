@@ -2,7 +2,7 @@
 title: tiup cluster import
 ---
 
-# tiupクラスタのインポート {#tiup-cluster-import}
+# tiup cluster import {#tiup-cluster-import}
 
 TiDB v4.0より前は、TiDBクラスターは主にTiDBAnsibleを使用してデプロイされていました。 TiDB v4.0以降のリリースでは、TiUP Clusterは、管理のためにクラスターをtiup-clusterコンポーネントに転送するための`import`のコマンドを提供します。
 
@@ -53,9 +53,9 @@ tiup cluster import [flags]
 
 ### --名前を変更 {#rename}
 
--   インポートしたクラスタの名前を変更します。
+-   インポートされたクラスタの名前を変更します。
 -   データ型： `STRING`
--   デフォルト：NULL。このオプションがコマンドで指定されていない場合、inventoryで指定されたcluster_nameがクラスタ名として使用されます。
+-   デフォルト：NULL。コマンドでこのオプションが指定されていない場合、inventoryで指定されたcluster_nameがクラスタ名として使用されます。
 
 ### -h、-help {#h-help}
 
@@ -67,4 +67,4 @@ tiup cluster import [flags]
 
 インポートプロセスのログを表示します。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

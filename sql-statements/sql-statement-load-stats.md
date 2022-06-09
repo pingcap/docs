@@ -3,7 +3,7 @@ title: LOAD STATS
 summary: An overview of the usage of LOAD STATS for the TiDB database.
 ---
 
-# 統計の読み込み {#load-stats}
+# 統計のロード {#load-stats}
 
 `LOAD STATS`ステートメントは、統計をTiDBにロードするために使用されます。
 

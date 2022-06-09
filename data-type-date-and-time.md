@@ -7,7 +7,7 @@ summary: Learn about the supported date and time types.
 
 TiDBは、時間値を格納するためにすべてのMySQL [`YEAR`](#year-type)および時刻データ型をサポートし[`TIME`](#time-type) [`DATETIME`](#datetime-type) [`DATE`](#date-type) 、および[`TIMESTAMP`](#timestamp-type) 。詳細については、 [MySQLの日付と時刻のデータ型](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html)を参照してください。
 
-これらの各タイプには有効な値の範囲があり、ゼロ値を使用して無効な値であることを示します。さらに、 `TIMESTAMP`タイプと`DATETIME`タイプは、変更時に新しい時間値を自動的に生成できます。
+これらの各タイプには有効な値の範囲があり、ゼロ値を使用して無効な値であることを示します。さらに、 `TIMESTAMP`および`DATETIME`タイプは、変更時に新しい時間値を自動的に生成できます。
 
 日付と時刻の値の型を扱うときは、次の点に注意してください。
 
@@ -65,7 +65,7 @@ TiDBは、時間値を格納するためにすべてのMySQL [`YEAR`](#year-type
 
 -   さまざまなSQLモードを設定すると、TiDBの動作が変わる可能性があります。
 
--   SQLモード`NO_ZERO_DATE`が有効になっていない場合、TiDBでは、 `DATE`列と`DATETIME`列の月または日をゼロ値にすることができます（例：「2009-00-00」または「2009-01-00」）。この日付タイプを関数で計算する場合、たとえば`DATE_SUB()`または`DATE_ADD()`の場合、結果が正しくない可能性があります。
+-   SQLモード`NO_ZERO_DATE`が有効になっていない場合、TiDBでは、 `DATE`列と`DATETIME`列の月または日をゼロ値にすることができます（例：「2009-00-00」または「2009-01-00」）。この日付型を関数で計算する場合、たとえば`DATE_SUB()`または`DATE_ADD()`の場合、結果が正しくない可能性があります。
 
 -   デフォルトでは、TiDBはSQLモード`NO_ZERO_DATE`を有効にします。このモードは、「0000-00-00」などのゼロ値の保存を防ぎます。
 
@@ -101,7 +101,7 @@ TIME[(fsp)]
 
 > **ノート：**
 >
-> `TIME`の省略形に注意してください。たとえば、「11:12」は「00:11:12」ではなく「11:12:00」を意味します。ただし、「1112」は「00:11:12」を意味します。これらの違いは、 `:`文字の有無によって引き起こされます。
+> `TIME`の省略形に注意してください。たとえば、「11:12」は「00:11:12」ではなく「11:12:00」を意味します。ただし、「1112」は「00:11:12」を意味します。これらの違いは、 `:`文字の有無によって発生します。
 
 ### <code>DATETIME</code>タイプ {#code-datetime-code-type}
 
@@ -125,7 +125,7 @@ TIMESTAMP[(fsp)]
 
 #### タイムゾーンの処理 {#timezone-handling}
 
-`TIMESTAMP`を格納する場合、TiDBは`TIMESTAMP`の値を現在のタイムゾーンからUTCタイムゾーンに変換します。 `TIMESTAMP`を取得する場合、TiDBは保存されている`TIMESTAMP`の値をUTCタイムゾーンから現在のタイムゾーンに変換します（注： `DATETIME`はこの方法では処理されません）。各接続のデフォルトのタイムゾーンはサーバーのローカルタイムゾーンであり、環境変数`time_zone`で変更できます。
+`TIMESTAMP`が格納される場合、TiDBは`TIMESTAMP`の値を現在のタイムゾーンからUTCタイムゾーンに変換します。 `TIMESTAMP`を取得する場合、TiDBは保存されている`TIMESTAMP`の値をUTCタイムゾーンから現在のタイムゾーンに変換します（注： `DATETIME`はこの方法では処理されません）。各接続のデフォルトのタイムゾーンはサーバーのローカルタイムゾーンであり、環境変数`time_zone`で変更できます。
 
 > **警告：**
 >
@@ -155,7 +155,7 @@ YEAR[(4)]
 
 テーブル内の値タイプが`TIMESTAMP`または`DATETIME`の列の場合、デフォルト値または自動更新値を現在のタイムスタンプとして設定できます。
 
-これらのプロパティは、列を定義するときに`DEFAULT CURRENT_TIMESTAMP`と`ON UPDATE CURRENT_TIMESTAMP`を設定することで設定できます。 DEFAULTは、 `DEFAULT 0`や`DEFAULT '2000-01-01 00:00:00'`などの特定の値として設定することもできます。
+これらのプロパティは、列の定義時に`DEFAULT CURRENT_TIMESTAMP`と`ON UPDATE CURRENT_TIMESTAMP`を設定することで設定できます。 DEFAULTは、 `DEFAULT 0`や`DEFAULT '2000-01-01 00:00:00'`などの特定の値として設定することもできます。
 
 ```sql
 CREATE TABLE t1 (
@@ -175,9 +175,9 @@ CREATE TABLE t1 (
 
 ## 時間値の小数部分 {#decimal-part-of-time-value}
 
-`DATETIME`および`TIMESTAMP`の値には、ミリ秒単位で正確な最大6桁の小数部分を含めることができます。 `DATETIME`または`TIMESTAMP`タイプの列では、小数部分が破棄されるのではなく保存されます。小数部の場合、値は「YYYY-MM-DD HH：MM：SS [.fraction]」の形式で、小数部の範囲は000000〜999999です。小数部をから分離するには小数点を使用する必要があります。休み。
+`DATETIME`と`TIMESTAMP`の値には、ミリ秒単位で正確な最大6桁の小数部分を含めることができます。 `DATETIME`または`TIMESTAMP`タイプの列では、小数部分が破棄されるのではなく保存されます。小数部の場合、値は「YYYY-MM-DD HH：MM：SS [.fraction]」の形式で、小数部の範囲は000000〜999999です。小数部と小数部を区切るには小数点を使用する必要があります。休み。
 
--   `type_name(fsp)`を使用して、分数精度をサポートする列を定義し`TIMESTAMP` 。ここで、 `type_name`は`TIME` 、または`DATETIME`です。例えば、
+-   `type_name(fsp)`を使用して、小数精度をサポートする列を定義し`TIMESTAMP` `type_name`は`TIME` 、または`DATETIME`です。例えば、
 
     ```sql
     CREATE TABLE t1 (t TIME(3), dt DATETIME(6));
@@ -185,7 +185,7 @@ CREATE TABLE t1 (
 
     `fsp`は0から6の範囲でなければなりません。
 
-    `0`は、小数部分がないことを意味します。 `fsp`を省略した場合、デフォルトは0です。
+    `0`は、小数部がないことを意味します。 `fsp`を省略した場合、デフォルトは0です。
 
 -   小数`TIMESTAMP` `TIME` `DATETIME`するときに、小数部の桁数が少なすぎる、または多すぎる場合は、状況に応じて丸めが必要になることがあります。例えば：
 
@@ -249,7 +249,7 @@ mysql> SELECT NOW(), NOW()+0, NOW(3)+0;
 
 ## 日付に含まれる2桁の年の部分 {#two-digit-year-portion-contained-in-the-date}
 
-日付に含まれる2桁の年の部分は、実際の年を明示的に示しておらず、あいまいです。
+日付に含まれる2桁の年の部分は、実際の年を明示的に示すものではなく、あいまいです。
 
 `DATETIME` 、および`DATE`タイプの場合、 `TIMESTAMP`は次のルールに従って、あいまいさを排除します。
 

@@ -193,7 +193,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
 -   `JOB_TYPE` ：DDL操作のタイプ。
 -   `SCHEMA_STATE` ：スキーマの現在の状態。 `JOB_TYPE`が`add index`の場合、それはインデックスの状態です。 `JOB_TYPE`が`add column`の場合、それは列の状態です。 `JOB_TYPE`が`create table`の場合、それはテーブルの状態です。一般的な状態は次のとおりです。
     -   `none` ：存在しないことを示します。 `drop`または`create`の操作が失敗してロールバックすると、通常は`none`の状態になります。
-    -   `delete only` ：これらの`write only` `delete reorganization`の`write reorganization`は中間状態です。中間状態からの変換が非常に速いため、これらの状態は一般的な操作では表示されません。 `write reorganization`の状態は`add index`の操作でのみ確認できます。これは、インデックスデータが追加されていることを意味します。
+    -   `delete only` ：これらの`write only` `delete reorganization`の`write reorganization`は中間状態です。中間状態からの変換は非常に高速であるため、これらの状態は一般的な操作では表示されません。 `write reorganization`の状態は`add index`の操作でのみ確認できます。これは、インデックスデータが追加されていることを意味します。
     -   `public` ：既存で使用可能であることを示します。 `create table`や`add index/column`のような操作が終了すると、通常は`public`の状態になります。つまり、作成されたテーブル/列/インデックスは通常、読み取りと書き込みが可能になります。
 -   `SCHEMA_ID` ：DDL操作が実行されるデータベースのID。
 -   `TABLE_ID` ：DDL操作が実行されるテーブルのID。

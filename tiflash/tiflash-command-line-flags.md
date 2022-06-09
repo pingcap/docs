@@ -73,7 +73,7 @@ summary: Learn the command-line startup flags of TiFlash.
 
 -   パラメーター：
 
-    -   `--config-file` ： `dttool bench`の設定ファイル。 [`--config-file` <code>dttool migrate</code>します](#dttool-migrate)を参照してください。
+    -   `--config-file` ： `dttool bench`の構成ファイル。 [`--config-file` <code>dttool migrate</code>します](#dttool-migrate)を参照してください。
     -   `--check` ：ハッシュ検証を実行します。
     -   `--file-id` ：DTFileのID。 [`dttool migrate` <code>--file-id</code>](#dttool-migrate)を参照してください。
     -   `--imitative` ：データベースコンテキストを模倣します。 [`--imitative`の<code>dttool migrate</code>](#dttool-migrate)を参照してください。

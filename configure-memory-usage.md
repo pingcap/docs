@@ -13,7 +13,7 @@ oom-action = "cancel"
 ```
 
 -   上記の構成アイテムが「ログ」を使用している場合、単一のSQLクエリのメモリクォータが`tidb_mem_quota_query`変数によって制御されるしきい値を超えると、TiDBはログのエントリを出力します。その後、SQLクエリは引き続き実行されます。 OOMが発生した場合、対応するSQLクエリをログで見つけることができます。
--   上記の構成項目で「キャンセル」を使用している場合、単一のSQLクエリのメモリクォータがしきい値を超えると、TiDBはSQLクエリの実行をすぐに停止し、クライアントにエラーを返します。エラー情報は、SQL実行プロセスで多くのメモリを消費する各物理実行演算子のメモリ使用量を明確に示しています。
+-   上記の構成項目で「キャンセル」を使用している場合、1つのSQLクエリのメモリクォータがしきい値を超えると、TiDBはSQLクエリの実行をすぐに停止し、クライアントにエラーを返します。エラー情報は、SQL実行プロセスで多くのメモリを消費する各物理実行演算子のメモリ使用量を明確に示しています。
 
 ## クエリのメモリクォータを構成する {#configure-the-memory-quota-of-a-query}
 
@@ -116,7 +116,7 @@ server-memory-quota = 34359738368
     -   `memory-usage-alarm-ratio`は[`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の値を示します。
     -   `record path`はステータスファイルのディレクトリを示します。
 
-5.  ステータスファイルのディレクトリ（上記の例では、ディレクトリは`/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record` ）に、 `goroutinue` 、および`heap`を含む一連のファイルが表示され`running_sql` 。これらの3つのファイルには、ステータスファイルがログに記録される時刻の接尾辞が付いています。それぞれ、ゴルーチンスタック情報、ヒープメモリの使用状況、およびアラームがトリガーされたときの実行中のSQL情報を記録します。 `running_sql`のログコンテンツの形式については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
+5.  ステータスファイルのディレクトリ（上記の例では、ディレクトリは`/tmp/1000_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage/record` ）に、 `goroutinue` 、および`heap`を含む一連のファイルが表示され`running_sql` 。これらの3つのファイルには、ステータスファイルがログに記録される時刻の接尾辞が付いています。これらはそれぞれ、ゴルーチンスタック情報、ヒープメモリの使用状況、およびアラームがトリガーされたときの実行中のSQL情報を記録します。 `running_sql`のログ内容の形式については、 [`expensive-queries`](/identify-expensive-queries.md)を参照してください。
 
 ## tidb-serverの他のメモリ制御動作 {#other-memory-control-behaviors-of-tidb-server}
 
@@ -130,11 +130,11 @@ server-memory-quota = 34359738368
 
 ### ディスクの流出 {#disk-spill}
 
-TiDBは、実行オペレーターのディスクスピルをサポートします。 SQL実行のメモリ使用量がメモリクォータを超えると、tidb-serverは実行オペレータの中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスクスピルをサポートするオペレーターには、Sort、MergeJoin、HashJoin、およびHashAggが含まれます。
+TiDBは、実行オペレーターのディスクスピルをサポートしています。 SQL実行のメモリ使用量がメモリクォータを超えると、tidb-serverは実行演算子の中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスクスピルをサポートする演算子には、Sort、MergeJoin、HashJoin、およびHashAggが含まれます。
 
--   ディスクの流出動作は、 [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query) 、および[`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)のパラメーターによって共同で制御さ[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 。
+-   ディスク[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query) [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)によって共同で制御され[`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 。
 -   ディスクスピルがトリガーされると、TiDBはキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
--   Sort、MergeJoin、およびHashJoinオペレーターのディスクスピルはv4.0.0で導入されました。 HashAggオペレーターのディスクスピルはv5.2.0で導入されました。
+-   Sort、MergeJoin、およびHashJoin演算子のディスクスピルはv4.0.0で導入されました。 HashAggオペレーターのディスクスピルはv5.2.0で導入されました。
 -   Sort、MergeJoin、またはHashJoinを含むSQL実行によってOOMが発生すると、TiDBはデフォルトでディスクスピルをトリガーします。 HashAggを含むSQL実行がOOMを引き起こす場合、TiDBはデフォルトでディスクスピルをトリガーしません。 HashAggのディスクスピルをトリガーするようにシステム変数`tidb_executor_concurrency = 1`を構成できます。
 
 > **ノート：**

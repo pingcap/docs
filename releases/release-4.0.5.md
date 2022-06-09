@@ -43,7 +43,7 @@ TiDBバージョン：4.0.5
     -   統計的フィードバックがクラスタのパフォーマンスに与える影響を緩和する[＃18772](https://github.com/pingcap/tidb/pull/18772)
     -   RPC応答が返される前のキャンセル操作をサポート[＃18580](https://github.com/pingcap/tidb/pull/18580)
     -   HTTP APIを追加して、TiDBメトリックプロファイルを生成します[＃18531](https://github.com/pingcap/tidb/pull/18531)
-    -   分割されたテーブルの分散をサポートする[＃17863](https://github.com/pingcap/tidb/pull/17863)
+    -   分割テーブルの分散をサポート[＃17863](https://github.com/pingcap/tidb/pull/17863)
     -   Grafana1の各インスタンスの詳細なメモリ使用量を追加し[＃18679](https://github.com/pingcap/tidb/pull/18679)
     -   [＃18892](https://github.com/pingcap/tidb/pull/18892)の結果に`BatchPointGet`演算子の詳細な実行時情報を表示し`EXPLAIN`
     -   [＃18817](https://github.com/pingcap/tidb/pull/18817)の結果に`PointGet`演算子の詳細な実行時情報を表示し`EXPLAIN`
@@ -64,7 +64,7 @@ TiDBバージョン：4.0.5
     -   リージョンのリーダーが変更された後の無効なキャッシュ更新を回避する[＃2672](https://github.com/tikv/pd/pull/2672)
     -   `store.GetLimit`がトゥームストーンストアを返すことを許可するオプションを追加します[＃2743](https://github.com/tikv/pd/pull/2743)
     -   PDリーダーとフォロワーの間でリージョンリーダーの変更を同期することをサポートする[＃2795](https://github.com/tikv/pd/pull/2795)
-    -   GCセーフポイントサービスを照会するためのコマンドを追加する[＃2797](https://github.com/tikv/pd/pull/2797)
+    -   GCセーフポイントサービスをクエリするためのコマンドを追加する[＃2797](https://github.com/tikv/pd/pull/2797)
     -   パフォーマンスを向上させるために、フィルターの`region.Clone`の呼び出しを置き換えます[＃2801](https://github.com/tikv/pd/pull/2801)
     -   大規模クラスタのパフォーマンスを向上させるために、リージョンフローキャッシュの更新を無効にするオプションを追加します[＃2848](https://github.com/tikv/pd/pull/2848)
 
@@ -127,18 +127,18 @@ TiDBバージョン：4.0.5
     -   インデックス列[＃19358](https://github.com/pingcap/tidb/pull/19358)に`NULL`の値が存在する場合、クエリ範囲を構築できない問題を修正します。
     -   グローバル構成の更新によって引き起こされるデータ競合の問題を修正します[＃17964](https://github.com/pingcap/tidb/pull/17964)
     -   大文字スキーマ[＃19286](https://github.com/pingcap/tidb/pull/19286)の文字セットを変更するときに発生するパニックの問題を修正します
-    -   ディスクスピルアクション中に一時ディレクトリを変更することによって発生する予期しないエラーを修正します[＃18970](https://github.com/pingcap/tidb/pull/18970)
+    -   ディスクスピルアクション中に一時ディレクトリを変更することによって引き起こされる予期しないエラーを修正します[＃18970](https://github.com/pingcap/tidb/pull/18970)
     -   10進タイプ[＃19131](https://github.com/pingcap/tidb/pull/19131)の間違ったハッシュキーを修正します
     -   `PointGet`および`BatchPointGet`演算子がパーティション選択構文を考慮せず、誤った結果を取得する問題を修正します[＃19141](https://github.com/pingcap/tidb/issues/19141)
     -   `Apply`演算子を`UnionScan`演算子と一緒に使用した場合の誤った結果を修正します[＃19104](https://github.com/pingcap/tidb/issues/19104)
-    -   インデックス付けされた仮想生成列が間違った値を返す原因となるバグを修正します[＃17989](https://github.com/pingcap/tidb/issues/17989)
+    -   インデックス付きの仮想生成列が間違った値を返す原因となるバグを修正します[＃17989](https://github.com/pingcap/tidb/issues/17989)
     -   実行時統計のロックを追加して、同時実行によって引き起こされるパニックを修正します[＃18983](https://github.com/pingcap/tidb/pull/18983)
 
 -   TiKV
 
     -   Hibernateリージョンが有効になっている場合のリーダー選挙のスピードアップ[＃8292](https://github.com/tikv/tikv/pull/8292)
     -   スケジューリング中のメモリリークの問題を修正[＃8357](https://github.com/tikv/tikv/pull/8357)
-    -   リーダーがあまりにも速く休止状態になるのを防ぐために、 `hibernate-timeout`の構成アイテムを追加します[＃8208](https://github.com/tikv/tikv/pull/8208)
+    -   リーダーが急速に休止状態になるのを防ぐために、 `hibernate-timeout`の構成アイテムを追加します[＃8208](https://github.com/tikv/tikv/pull/8208)
 
 -   PD
 
@@ -173,4 +173,4 @@ TiDBバージョン：4.0.5
 
     -   TiDB Lightning
 
-        -   TiDBバックエンド[＃357](https://github.com/pingcap/tidb-lightning/pull/357)を使用する場合の空のバイナリ/16進リテラルの構文エラーを修正します
+        -   TiDBバックエンド[＃357](https://github.com/pingcap/tidb-lightning/pull/357)を使用する場合の空のバイナリ/16進リテラルの構文エラーを修正しました

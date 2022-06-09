@@ -10,7 +10,7 @@ title: TiDB 2.1 GA Release Notes
 
 -   SQLオプティマイザー
 
-    -   選択範囲`Index Join`を最適化して、実行パフォーマンスを向上させます
+    -   `Index Join`の選択範囲を最適化して、実行パフォーマンスを向上させます
 
     -   `Index Join`の外部テーブルの選択を最適化し、行カウントの推定値が小さいテーブルを外部テーブルとして使用します
 
@@ -88,7 +88,7 @@ title: TiDB 2.1 GA Release Notes
 
         -   オンラインでのログレベルの変更をサポート
 
-        -   TiDBクラスタ情報を確認する
+        -   TiDBクラスタ情報を確認してください
 
     <!---->
 
@@ -134,7 +134,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `LOAD DATA IGNORE LINES`のステートメントをサポートする
 
-    -   `Show ProcessList`ステートメントはより正確な情報を返します
+    -   `Show ProcessList`ステートメントは、より正確な情報を返します
 
 ## 配置ドライバー（PD） {#placement-driver-pd}
 
@@ -142,7 +142,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   バージョン管理メカニズムを導入し、互換性のあるクラスタのローリング更新をサポートします
 
-    -   ネットワークの分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間で[`Raft PreVote`有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
+    -   ネットワーク分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間で[`Raft PreVote`有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
 
     -   デフォルトで`raft learner`を有効にすると、スケジューリング中のマシン障害によってデータが利用できなくなるリスクが低くなります。
 
@@ -156,7 +156,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   ホットスポットスケジューラを最適化して、トラフィック統計情報がジッターするときの適応性を向上させます
 
-    -   コーディネーターの開始を最適化して、PDの再起動によって発生する不要なスケジューリングを減らします
+    -   コーディネーターの開始を最適化して、PDの再起動によって引き起こされる不要なスケジューリングを減らします
 
     -   BalanceSchedulerが小さなリージョンを頻繁にスケジュールする問題を最適化します
 
@@ -170,7 +170,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `TiDB reverse scan`機能をサポートするために[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
 
-    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加して、TiKV領域の分割を高速化します
+    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると、TiKVリージョンの分割が高速化されます
 
     -   TiDBで分散GCをサポートするために[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します
 
@@ -227,7 +227,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   連続ロールバックレコードを折りたたんで、読み取りパフォーマンスを確保します
 
-    -   [`UnsafeDestroyRange` APIを追加して、ドロップするテーブル/インデックス用のスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/2018-08-29-unsafe-destroy-range.md)
+    -   [`UnsafeDestroyRange` APIを追加して、ドロップするテーブル/インデックスのスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/2018-08-29-unsafe-destroy-range.md)
 
     -   書き込みへの影響を減らすためにGCモジュールを分離します
 

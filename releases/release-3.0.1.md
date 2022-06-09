@@ -18,7 +18,7 @@ TiDB Ansibleバージョン：3.0.1
 -   プラグインを動的に有効または無効にするには、 `ADMIN PLUGINS ENABLE` / `ADMIN PLUGINS DISABLE`ステートメントを追加します[＃11157](https://github.com/pingcap/tidb/pull/11157)
 -   監査プラグイン[＃11013](https://github.com/pingcap/tidb/pull/11013)にセッション接続情報を追加します
 -   リージョンを分割する期間中のデフォルトの動作を変更して、PDがスケジューリングを終了するのを待ちます[＃11166](https://github.com/pingcap/tidb/pull/11166)
--   場合によっては誤った結果を回避するために、ウィンドウ関数がPreparePlanCacheにキャッシュされないようにします[＃11048](https://github.com/pingcap/tidb/pull/11048)
+-   場合によっては誤った結果を回避するために、ウィンドウ関数がプランキャッシュの準備にキャッシュされないようにします[＃11048](https://github.com/pingcap/tidb/pull/11048)
 -   保存された生成列の定義を変更することから`ALTER`ステートメントを禁止する[＃11068](https://github.com/pingcap/tidb/pull/11068)
 -   仮想生成列を保存された生成列に変更することを禁止する[＃11068](https://github.com/pingcap/tidb/pull/11068)
 -   生成された列式をインデックス[＃11068](https://github.com/pingcap/tidb/pull/11068)で変更することを禁止します
@@ -35,13 +35,13 @@ TiDB Ansibleバージョン：3.0.1
 -   クエリされた列がサブクエリで参照されておらず、ネストされた集計クエリを実行すると誤ってプルーニングされるため、クエリ結果が正しくない問題を修正します[＃11020](https://github.com/pingcap/tidb/pull/11020)
 -   `Sleep`関数が時間[＃11028](https://github.com/pingcap/tidb/pull/11028)の`KILL`ステートメントに応答しない問題を修正します。
 -   `SHOW PROCESSLIST`コマンドで表示される`DB`列と`INFO`列がMySQL7と互換性がないという問題を修正し[＃11003](https://github.com/pingcap/tidb/pull/11003)
--   `skip-grant-table=true`が構成されているときに`FLUSH PRIVILEGES`ステートメントによって引き起こされるシステムパニックの問題を修正します[＃11027](https://github.com/pingcap/tidb/pull/11027)
+-   `skip-grant-table=true`が構成されている場合に`FLUSH PRIVILEGES`ステートメントによって引き起こされるシステムパニックの問題を修正します[＃11027](https://github.com/pingcap/tidb/pull/11027)
 -   テーブルの主キーが`UNSIGNED`整数[＃11099](https://github.com/pingcap/tidb/pull/11099)の場合、 `FAST ANALYZE`によって収集された主キーの統計が正しくない問題を修正します。
 -   「無効なキー」エラーが`FAST ANALYZE`ステートメントによって報告される場合があるという問題を修正します[＃11098](https://github.com/pingcap/tidb/pull/11098)
 -   列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントによって示される精度が不完全であるという問題を修正します[＃11088](https://github.com/pingcap/tidb/pull/11088)
 -   ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正して、 [＃11118](https://github.com/pingcap/tidb/pull/11118)と互換性を持たせる
 -   TiDBがTiKVに接続できず、TiKVクライアントバッチgRPCのバックグラウンドスレッドがパニックになった後、サービスを提供できないという問題を修正します[＃11101](https://github.com/pingcap/tidb/pull/11101)
--   文字列[＃11044](https://github.com/pingcap/tidb/pull/11044)のコピーが浅いために、変数が`SetVar`だけ正しく設定されない問題を修正します。
+-   文字列[＃11044](https://github.com/pingcap/tidb/pull/11044)のコピーが浅いため、変数が`SetVar`だけ正しく設定されない問題を修正します。
 -   `INSERT … ON DUPLICATE`ステートメントがテーブルパーティション[＃11231](https://github.com/pingcap/tidb/pull/11231)に適用されると、実行が失敗し、エラーが報告される問題を修正します。
 -   悲観的ロック（実験的機能）
     -   悲観的ロックを使用してポイントクエリが実行され、返されたデータが空の場合に、行のロックが無効であるために誤った結果が返される問題を修正します[＃10976](https://github.com/pingcap/tidb/pull/10976)
@@ -84,7 +84,7 @@ TiDB Lightning
 ## TiDB Ansible {#tidb-ansible}
 
 -   ansibleコマンドとその`jmespath`および`jinja2`依存関係パッケージ[＃803](https://github.com/pingcap/tidb-ansible/pull/803)の事前チェック機能を追加し[＃813](https://github.com/pingcap/tidb-ansible/pull/813)
--   Pumpに`stop-write-at-available-space`パラメーター（デフォルトでは10 GiB）を追加して、使用可能なディスク容量がパラメーター値[＃806](https://github.com/pingcap/tidb-ansible/pull/806)未満の場合に、Pumpでのbinlogファイルの書き込みを停止します。
+-   使用可能なディスク容量がパラメーター値[＃806](https://github.com/pingcap/tidb-ansible/pull/806)未満の場合に、Pumpに`stop-write-at-available-space`パラメーター（デフォルトでは10 GiB）を追加して、Pumpでのbinlogファイルの書き込みを停止します。
 -   TiKV監視情報のI/O監視項目を更新し、新しいバージョン[＃820](https://github.com/pingcap/tidb-ansible/pull/820)の監視コンポーネントと互換性を持たせる
--   PD監視情報を更新し、ディスクパフォーマンスダッシュボードでディスクレイテンシーが空であるという異常を修正します[＃817](https://github.com/pingcap/tidb-ansible/pull/817)
+-   PD監視情報を更新し、ディスクパフォーマンスダッシュボード[＃817](https://github.com/pingcap/tidb-ansible/pull/817)でディスクレイテンシが空であるという異常を修正します。
 -   TiKV詳細ダッシュボードにTitanの監視項目を追加する[＃824](https://github.com/pingcap/tidb-ansible/pull/824)

@@ -43,7 +43,7 @@ IndexInvisible ::=
 
 ## 例 {#examples}
 
-`ALTER TABLE ... ALTER INDEX ...`ステートメントを使用して、インデックスの表示を変更できます。
+`ALTER TABLE ... ALTER INDEX ...`ステートメントを使用して、インデックスの可視性を変更できます。
 
 {{< copyable "" >}}
 

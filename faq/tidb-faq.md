@@ -28,7 +28,7 @@ TiDBクラスタには、TiDBサーバー、PD（配置ドライバー）サー�
 #### TiDB、TiKV、PD（プレースメントドライバー）のそれぞれの責任は何ですか？ {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
 -   TiDBはSQLコンピューティング層として機能し、主にSQLの解析、クエリプランの指定、およびエグゼキュータの生成を担当します。
--   TiKVは、実際のデータを格納するために使用される分散キー値ストレージエンジンとして機能します。つまり、TiKVはTiDBのストレージエンジンです。
+-   TiKVは、実際のデータを格納するために使用される分散型Key-Valueストレージエンジンとして機能します。つまり、TiKVはTiDBのストレージエンジンです。
 -   PDは、TiKVメタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散を決定するTiDBのクラスタマネージャーとして機能します。
 
 #### TiDBは使いやすいですか？ {#is-it-easy-to-use-tidb}
@@ -43,7 +43,7 @@ TiDBクラスタには、TiDBサーバー、PD（配置ドライバー）サー�
 
 はい。 TiDBは、単一の場所にある少数のノードであろうと多数の[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md)であろうと、クラスタ全体にトランザクションを分散します。
 
-Googleのパーコレーターに触発されたTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルであり、いくつかの実用的な最適化が施されています。このモデルは、タイムスタンプアロケータに依存して、トランザクションごとに単調な増加タイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタのタイムスタンプアロケータとして機能します。
+Googleのパーコレーターに触発されたTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルであり、いくつかの実用的な最適化が施されています。このモデルは、タイムスタンプアロケータに依存して、トランザクションごとに単調増加タイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタのタイムスタンプアロケータとして機能します。
 
 #### TiDBを操作するために使用できるプログラミング言語は何ですか？ {#what-programming-language-can-i-use-to-work-with-tidb}
 
@@ -106,7 +106,7 @@ Atomikosの2つのデータソースを構成した後、JDBCドライブをXA�
 
 [TiDB内部（III）-スケジューリング](https://en.pingcap.com/blog/tidb-internal-scheduling/)を参照してください。
 
-## クラウドでの展開 {#deployment-on-the-cloud}
+## クラウドへの導入 {#deployment-on-the-cloud}
 
 ### パブリッククラウド {#public-cloud}
 
@@ -180,7 +180,7 @@ SET GLOBAL tidb_gc_life_time = '30m';
 
 このエラーは通常、TiDBのバージョンがTiKVのバージョンと一致しない場合に発生します。バージョンの不一致を回避するには、バージョンをアップグレードするときにすべてのコンポーネントをアップグレードします。
 
-#### エラー1148（42000）：使用されたコマンドはこのTiDBバージョンでは許可されていません {#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version}
+#### エラー1148（42000）：使用されているコマンドはこのTiDBバージョンでは許可されていません {#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version}
 
 `LOAD DATA LOCAL`ステートメントを実行したが、MySQLクライアントがこのステートメントの実行を許可していない場合（ `local_infile`オプションの値は0）、このエラーが発生します。
 
@@ -188,7 +188,7 @@ SET GLOBAL tidb_gc_life_time = '30m';
 
 #### エラー9001（HY000）：PDサーバーのタイムアウト開始タイムスタンプが安全ポイントより遅れる可能性があります {#error-9001-hy000-pd-server-timeout-start-timestamp-may-fall-behind-safe-point}
 
-このエラーは、TiDBがPDにアクセスできない場合に発生します。 TiDBバックグラウンドのワーカーは、PDからセーフポイントを継続的にクエリします。このエラーは、100秒以内にクエリに失敗した場合に発生します。一般に、PDのディスクが低速でビジーであるか、TiDBとPD間のネットワークに障害が発生したことが原因です。一般的なエラーの詳細については、 [エラー番号と障害診断](/error-codes.md)を参照してください。
+このエラーは、TiDBがPDにアクセスできない場合に発生します。 TiDBバックグラウンドのワーカーは、PDからセーフポイントを継続的に照会します。このエラーは、100秒以内に照会に失敗した場合に発生します。一般に、PDのディスクが低速でビジーであるか、TiDBとPDの間のネットワークに障害が発生したことが原因です。一般的なエラーの詳細については、 [エラー番号と障害診断](/error-codes.md)を参照してください。
 
 ### TiDBログのエラーメッセージ {#tidb-log-error-messages}
 

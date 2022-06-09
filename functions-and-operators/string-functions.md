@@ -63,7 +63,7 @@ TiDBは、MySQL 5.7で使用可能な[文字列関数](https://dev.mysql.com/doc
 | [`TRIM()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_trim)                                                       | 先頭と末尾のスペースを削除します                                                        |
 | [`UCASE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ucase)                                                     | `UPPER()`の同義語                                                           |
 | [`UNHEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_unhex)                                                     | 数値の16進表現を含む文字列を返します                                                     |
-| [`UPPER()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_upper)                                                     | 大文字に変換                                                                  |
+| [`UPPER()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_upper)                                                     | 大文字に変換する                                                                |
 
 ## サポートされていない機能 {#unsupported-functions}
 

@@ -9,7 +9,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` information_schema table
 
 -   不正な形式のSQLステートメント。
 -   ゼロ除算エラー。
--   範囲外の重複キー値を挿入しようとしました。
+-   重複するキー値の範囲外を挿入しようとしました。
 -   許可エラー。
 -   テーブルが存在しません。
 

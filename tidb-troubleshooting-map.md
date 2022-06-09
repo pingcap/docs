@@ -17,7 +17,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   1.1.3 TiKVは`TiKV server is busy`を報告し、 `backoff`回を超えています。詳細については、 [4.3](#43-the-client-reports-the-server-is-busy-error)を参照してください。 `TiKV server is busy`は内部フロー制御メカニズムの結果であり、 `backoff`回でカウントされるべきではありません。この問題は修正されます。
 
--   1.1.4複数のTiKVインスタンスの開始に失敗したため、リージョン内にリーダーがありません。複数のTiKVインスタンスが物理マシンに展開されている場合、ラベルが適切に構成されていないと、物理マシンに障害が発生すると、リージョン内にリーダーが発生しなくなる可能性があります。中国語の[ケース-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
+-   1.1.4複数のTiKVインスタンスを開始できなかったため、リージョンにリーダーがいません。複数のTiKVインスタンスが物理マシンに展開されている場合、ラベルが適切に構成されていないと、物理マシンに障害が発生すると、リージョン内にリーダーが存在しなくなる可能性があります。中国語の[ケース-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
 
 -   1.1.5フォロワーの適用が前のエポックで遅れている場合、フォロワーがリーダーになった後、 `epoch not match`でリクエストを拒否します。中国語の[ケース-958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md)を参照してください（TiKVはそのメカニズムを最適化する必要があります）。
 
@@ -30,7 +30,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 ### 2.1一時的な増加 {#2-1-transient-increase}
 
 -   2.1.1 TiDB実行プランが間違っていると、遅延が増加します。 [3.3](#33-wrong-execution-plan)を参照してください。
--   2.1.2PDリーダー選出問題またはOOM。 [5.2](#52-pd-election)と[5.3](#53-pd-oom)を参照してください。
+-   2.1.2PDリーダー選挙問題またはOOM。 [5.2](#52-pd-election)と[5.3](#53-pd-oom)を参照してください。
 -   2.1.3一部のTiKVインスタンスでは、かなりの数のリーダーがドロップします。 [4.4](#44-some-tikv-nodes-drop-leader-frequently)を参照してください。
 
 ### 2.2持続的かつ大幅な増加 {#2-2-persistent-and-significant-increase}
@@ -80,7 +80,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   原因2：現在のDML操作の実行時間が長すぎます。この間、多くのDDL操作が実行されるため、 `schema version`の変更が1024を超えます。新しいバージョン`lock table`でも、スキーマのバージョンが変更される可能性があります。
 
-    -   原因3：現在DMLステートメントを実行しているTiDBインスタンスが新しい`schema information`をロードできません（PDまたはTiKVのネットワークの問題が原因である可能性があります）。この間、多くのDDLステートメント（ `lock table`を含む）が実行されるため、 `schema version`の変更が1024を超えます。
+    -   原因3：現在DMLステートメントを実行しているTiDBインスタンスが新しい`schema information`をロードできません（PDまたはTiKVのネットワークの問題が原因である可能性があります）。この間、多くのDDLステートメントが実行され（ `lock table`を含む）、 `schema version`の変更が1024を超えます。
 
     -   解決策：最初の2つの原因は、関連するDML操作が失敗後に再試行されるため、アプリケーションに影響を与えません。原因3については、TiDBとTiKV/PD間のネットワークを確認する必要があります。
 
@@ -172,7 +172,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         MySQLでは、2つの高精度`Decimal`が分割され、結果が最大10進精度（ `30` ）を超える場合、 `30`桁のみが予約され、エラーは報告されません。
 
-        TiDBでは、計算結果はMySQLと同じですが、 `Decimal`を表すデータ構造内では、10進精度のフィールドは実際の精度を保持します。
+        TiDBでは、計算結果はMySQLの場合と同じですが、 `Decimal`を表すデータ構造内では、10進精度のフィールドは実際の精度を保持します。
 
         例として`(0.1^30) / 10`を取り上げます。精度が最大で`30`であるため、TiDBとMySQLの結果は両方とも`0`です。ただし、TiDBでは、小数精度のフィールドは`31`のままです。
 
@@ -315,7 +315,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   5.1.1マージ
 
-    -   テーブル全体の空のリージョンはマージできません。 TiKVの`[coprocessor] split-region-on-table`パラメーターを変更する必要があります。これは、デフォルトでv4.xでは`false`に設定されています。中国語の[ケース-896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)を参照してください。
+    -   テーブル全体の空のリージョンはマージできません。 TiKVの`[coprocessor] split-region-on-table`パラメータを変更する必要があります。これは、デフォルトでv4.xでは`false`に設定されています。中国語の[ケース-896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)を参照してください。
 
     -   リージョンのマージは遅いです。マージされた演算子が生成されているかどうかは、 **Grafana-** &gt; <strong>PD-</strong> &gt; <strong>operator</strong>のモニターダッシュボードにアクセスして確認できます。マージを高速化するには、 `merge-schedule-limit`の値を増やします。
 
@@ -371,7 +371,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 5.4Grafanaディスプレイ {#5-4-grafana-display}
 
--   **5.4.1Grafana-** &gt; <strong>PD-</strong> &gt;<strong>クラスタ</strong>-&gt;<strong>ロール</strong>のモニターにフォロワーが表示されます。 Grafana式の問題はv3.0.8（ [＃1065](https://github.com/pingcap/tidb-ansible/pull/1065) ）で修正されています。詳細については、 [ケース-1022](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1022.md)を参照してください。
+-   **5.4.1Grafana-** &gt; <strong>PD-</strong> &gt;<strong>クラスタ</strong>-&gt;<strong>ロール</strong>のモニターにフォロワーが表示されます。 Grafana式の問題はv3.0.8で修正されています。
 
 ## 6.エコシステムツール {#6-ecosystem-tools}
 
@@ -403,7 +403,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   一部のTiDBノードはbinlogを有効にしません。 v3.0.6以降のバージョンでは、 [http://127.0.0.1:10080/info/all](http://127.0.0.1:10080/info/all)のインターフェースにアクセスすることにより、すべてのノードのbinlogステータスを確認できます。 v3.0.6より前のバージョンの場合、構成ファイルを表示してbinlogステータスを確認できます。
 
-    -   一部のTiDBノードは`ignore binlog`ステータスになります。 v3.0.6以降のバージョンでは、 [http://127.0.0.1:10080/info/all](http://127.0.0.1:10080/info/all)インターフェースにアクセスして、すべてのノードのbinlogステータスを確認できます。 v3.0.6より前のバージョンの場合は、TiDBログをチェックして、 `ignore binlog`キーワードが含まれているかどうかを確認してください。
+    -   一部のTiDBノードは`ignore binlog`ステータスになります。 v3.0.6以降のバージョンでは、 [http://127.0.0.1:10080/info/all](http://127.0.0.1:10080/info/all)インターフェースにアクセスして、すべてのノードのbinlogステータスを確認できます。 v3.0.6より前のバージョンの場合は、TiDBログをチェックして、 `ignore binlog`キーワードが含まれているかどうかを確認します。
 
     -   タイムスタンプ列の値は、アップストリームとダウンストリームで一貫していません。
 
@@ -413,19 +413,19 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   その他の状況では、 [バグを報告](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&#x26;template=bug-report.md) 。
 
--   6.1.6遅い複製
+-   6.1.6遅いレプリケーション
 
     -   ダウンストリームはTiDB/MySQLであり、アップストリームは頻繁にDDL操作を実行します。中国語の[ケース-1023](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1023.md)を参照してください。
 
-    -   ダウンストリームはTiDB/MySQLであり、複製されるテーブルには主キーと一意のインデックスがないため、binlogのパフォーマンスが低下します。主キーまたは一意のインデックスを追加することをお勧めします。
+    -   ダウンストリームはTiDB/MySQLであり、レプリケートされるテーブルには主キーと一意のインデックスがないため、binlogのパフォーマンスが低下します。主キーまたは一意のインデックスを追加することをお勧めします。
 
     -   ダウンストリームがファイルに出力する場合は、出力ディスクまたはネットワークディスクの速度が遅いかどうかを確認してください。
 
     -   その他の状況では、 [バグを報告](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&#x26;template=bug-report.md) 。
 
--   6.1.7 Pumpはbinlogを書き込めず、 `no space left on device`のエラーを報告します。
+-   6.1.7 Pumpはbinlogを書き込めず、 `no space left on device`エラーを報告します。
 
-    -   ローカルディスクスペースは、Pumpがbinlogデータを正常に書き込むには不十分です。ディスクスペースをクリーンアップしてから、Pumpを再起動する必要があります。
+    -   ローカルディスク容量は、Pumpがbinlogデータを正常に書き込むには不十分です。ディスクスペースをクリーンアップしてから、Pumpを再起動する必要があります。
 
 -   6.1.8ポンプは、起動時に`fail to notify all living drainer`のエラーを報告します。
 
@@ -457,7 +457,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.2.3レプリケーションタスクが中断され、 `driver: bad connection`のエラーが返されます。
 
-    -   `driver: bad connection`エラーは、DMとダウンストリームTiDBデータベース間の接続に異常が発生したこと（ネットワーク障害、TiDB再起動など）、および現在の要求のデータがまだTiDBに送信されていないことを示します。
+    -   `driver: bad connection`エラーは、DMとダウンストリームTiDBデータベース間の接続に異常が発生し（ネットワーク障害、TiDB再起動など）、現在の要求のデータがまだTiDBに送信されていないことを示します。
 
         -   DM 1.0.0 GAより前のバージョンの場合は、 `stop-task`を実行してタスクを停止し、 `start-task`を実行してタスクを再開します。
         -   DM 1.0.0 GA以降のバージョンでは、このタイプのエラーに対する自動再試行メカニズムが追加されています。 [＃265](https://github.com/pingcap/dm/pull/265)を参照してください。
@@ -477,8 +477,8 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   解決：
 
-        -   リレー処理ユニットの場合、 [レプリケーションを手動で回復する](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned) 。
-        -   binlogレプリケーション処理ユニットの場合、 [レプリケーションを手動で回復する](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned) 。
+        -   リレー処理装置の場合、 [レプリケーションを手動で回復する](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned) 。
+        -   binlogレプリケーション処理装置の場合、 [レプリケーションを手動で回復する](https://pingcap.com/docs/tidb-data-migration/dev/error-handling/#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-replication-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned) 。
 
 -   6.2.6 DMレプリケーションが中断され、ログが`ERROR 1236 (HY000) The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`を返します
 
@@ -596,7 +596,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   `write conflict` 。
 
-    これは、楽観的なトランザクションでの書き込みと書き込みの競合です。複数のトランザクションが同じキーを変更した場合、1つのトランザクションのみが成功し、他のトランザクションは自動的にタイムスタンプを再取得して操作を再試行しますが、ビジネスに影響はありません。
+    これは、楽観的なトランザクションにおける書き込みと書き込みの競合です。複数のトランザクションが同じキーを変更した場合、1つのトランザクションのみが成功し、他のトランザクションは自動的にタイムスタンプを再取得して操作を再試行しますが、ビジネスに影響はありません。
 
     競合が深刻な場合、複数回の再試行後にトランザクションが失敗する可能性があります。この場合、ペシミスティックロックを使用することをお勧めします。
 

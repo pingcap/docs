@@ -7,7 +7,7 @@ summary: Learn about the FAQs related to TiDB Monitoring.
 
 このドキュメントは、TiDBモニタリングに関連するFAQをまとめたものです。
 
--   Prometheusモニタリングフレームワークの詳細については、 [監視フレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+-   Prometheusモニタリングフレームワークの詳細については、 [モニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 -   監視の主要なメトリックの詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
 
 ## 主要な指標を監視するためのより良い方法はありますか？ {#is-there-a-better-way-of-monitoring-the-key-metrics}
@@ -34,4 +34,4 @@ TiDB 2.0では、リージョンの状態はPDメトリック監視ページで�
 
 `QPS`の`begin`は、 `use database` 、 `show` `load data`を`insert`すべてのSQLステートメント`select` `set` `commit` 。
 
-`Statement OPS`の統計は、 `select` 、および`insert`を含むアプリケーション関連のSQLステートメントに関するものであるため、 `Statement OPS` `update`統計はアプリケーションとの一致度が高くなります。
+`Statement OPS`の統計は、 `select` 、および`insert`を含むアプリケーション関連のSQLステートメントに関するものであるため、 `Statement OPS` `update`統計はアプリケーションとよりよく一致します。

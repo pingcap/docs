@@ -36,9 +36,9 @@ DESC inspection_summary;
 フィールドの説明：
 
 -   `RULE` ：要約ルール。新しいルールが継続的に追加されているため、 `select * from inspection_rules where type='summary'`ステートメントを実行して最新のルールリストを照会できます。
--   `INSTANCE` ：監視対象インスタンス。
+-   `INSTANCE` ：監視対象のインスタンス。
 -   `METRICS_NAME` ：監視メトリック名。
--   `QUANTILE` ： `QUANTILE`を含む監視テーブルに有効になります。述部を押し下げることにより、複数のパーセンタイルを指定できます。たとえば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行して、DDL関連の監視メトリックを要約し、P80 / P90 / P99/P999の結果を照会できます。 `AVG_VALUE` 、および`MIN_VALUE`はそれぞれ、集計の`MAX_VALUE`値、最小値、および最大値を示します。
+-   `QUANTILE` ： `QUANTILE`を含む監視テーブルで有効になります。述部を押し下げることにより、複数のパーセンタイルを指定できます。たとえば、 `select * from inspection_summary where rule='ddl' and quantile in (0.80, 0.90, 0.99, 0.999)`を実行して、DDL関連の監視メトリックを要約し、P80 / P90 / P99/P999の結果を照会できます。 `AVG_VALUE` 、および`MIN_VALUE`はそれぞれ、集計の`MAX_VALUE`値、最小値、および最大値を示します。
 -   `COMMENT` ：対応する監視メトリックに関するコメント。
 
 > **ノート：**

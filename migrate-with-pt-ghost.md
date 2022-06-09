@@ -9,7 +9,7 @@ summary: Learn how to use DM to replicate incremental data from databases that u
 
 DMを使用してMySQLからTiDBにデータを移行する場合、DMとgh-ostまたはpt-oscのコラボレーションを可能にするために`online-ddl`をエンベールできます。
 
-複製手順の詳細については、シナリオごとに次のドキュメントを参照してください。
+詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 
 -   [小さなデータセットのMySQLをTiDBに移行する](/migrate-small-mysql-to-tidb.md)
 -   [大規模なデータセットのMySQLをTiDBに移行する](/migrate-large-mysql-to-tidb.md)
@@ -46,7 +46,7 @@ gh-ostまたはpt-oscのワークフロー：
 
 DMのワークフロー：
 
--   ゴーストテーブルのダウンストリームの作成をスキップします。
+-   ダウンストリームのゴーストテーブルの作成をスキップします。
 
 -   ゴーストテーブルに適用されたDDLを記録します。
 

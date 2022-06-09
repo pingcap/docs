@@ -38,7 +38,7 @@ TiDB Ansibleバージョン：3.0.0-rc.3
     -   ブロックリストを追加して、式をコプロセッサー[＃10791](https://github.com/pingcap/tidb/pull/10791)にプッシュダウンすることを禁止します。
     -   クエリがメモリ構成の制限を超えたときに`expensive query`ログを出力する機能を追加します[＃10849](https://github.com/pingcap/tidb/pull/10849)
     -   `bind-info-lease`の構成アイテムを追加して、変更されたバインディング実行プラン[＃10727](https://github.com/pingcap/tidb/pull/10727)の更新時間を制御します。
-    -   `execdetails.ExecDetails`ポインター[＃10832](https://github.com/pingcap/tidb/pull/10832)に起因する、コプロセッサー・リソースの迅速な解放の失敗によって引き起こされる、同時発生率の高いシナリオでのOOMの問題を修正します。
+    -   `execdetails.ExecDetails`ポインター[＃10832](https://github.com/pingcap/tidb/pull/10832)が原因で、コプロセッサー・リソースを迅速に解放できなかったために発生した、同時発生率の高いシナリオでのOOMの問題を修正します。
     -   場合によっては`kill`ステートメントによって引き起こされるパニックの問題を修正します[＃10876](https://github.com/pingcap/tidb/pull/10876)
 
 -   サーバ
@@ -69,7 +69,7 @@ TiDB Ansibleバージョン：3.0.0-rc.3
 
 -   エンジン
     -   イテレータがステータスをチェックしないためにシステムで不完全なスナップショットが生成される問題を修正します[＃4936](https://github.com/tikv/tikv/pull/4936)
-    -   異常状態での停電後にスナップショットを受信するときにディスクへのデータのフラッシュが遅れることによって引き起こされるデータ損失の問題を修正します[＃4850](https://github.com/tikv/tikv/pull/4850)
+    -   異常状態での電源障害後にスナップショットを受信するときにディスクへのデータのフラッシュが遅れることによって引き起こされるデータ損失の問題を修正します[＃4850](https://github.com/tikv/tikv/pull/4850)
 
 -   サーバ
     -   `block-size`構成の有効性を確認する機能を追加します[＃4928](https://github.com/tikv/tikv/pull/4928)
@@ -78,7 +78,7 @@ TiDB Ansibleバージョン：3.0.0-rc.3
 
 -   ラフトストア
     -   ローカルリーダーのキャッシュが正しくクリアされない問題を修正します[＃4778](https://github.com/tikv/tikv/pull/4778)
-    -   リーダーを転送して`conf`を変更すると、リクエストの遅延が増える可能性がある問題を修正し[＃4734](https://github.com/tikv/tikv/pull/4734) 。
+    -   リーダーを転送して`conf`を変更すると、リクエストの遅延が増える可能性があるという問題を修正し[＃4734](https://github.com/tikv/tikv/pull/4734) 。
     -   古いコマンドが誤って報告される問題を修正します[＃4682](https://github.com/tikv/tikv/pull/4682)
     -   コマンドが長時間保留される可能性がある問題を修正します[＃4810](https://github.com/tikv/tikv/pull/4810)
     -   スナップショットファイルのディスクへの同期の遅延が原因で発生する停電後にファイルが破損する問題を修正し[＃4850](https://github.com/tikv/tikv/pull/4850) [＃4807](https://github.com/tikv/tikv/pull/4807)
@@ -107,7 +107,7 @@ TiDB Ansibleバージョン：3.0.0-rc.3
     -   `tombstone`コマンドを強制実行する機能を追加[＃4862](https://github.com/tikv/tikv/pull/4862)
 
 -   その他
-    -   `dist_release`コンパイルコマンド[＃4841](https://github.com/tikv/tikv/pull/4841)を追加します
+    -   `dist_release`のコンパイルコマンドを追加します[＃4841](https://github.com/tikv/tikv/pull/4841)
 
 ## ツール {#tools}
 

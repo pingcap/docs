@@ -16,7 +16,7 @@ summary: Learn how to use the table attribute feature of TiDB.
 
 ## 使用法 {#usage}
 
-table属性は`key=value`の形式です。複数の属性はコンマで区切られます。次の例では、 `t`は変更するテーブルの名前、 `p`は変更するパーティションの名前です。 `[]`の項目はオプションです。
+テーブル属性は`key=value`の形式です。複数の属性はコンマで区切られます。次の例では、 `t`は変更するテーブルの名前、 `p`は変更するパーティションの名前です。 `[]`の項目はオプションです。
 
 -   テーブルまたはパーティションの属性を設定します。
 
@@ -105,7 +105,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
     ```
 
--   `merge_option`の属性を構成するすべてのテーブルまたはパーティションを表示します。
+-   `merge_option`アトリビューションを構成したすべてのテーブルまたはパーティションを表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';

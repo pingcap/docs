@@ -31,7 +31,7 @@ TiDB Ansibleバージョン：3.0.3
     -   Window関数がパーティション[＃11825](https://github.com/pingcap/tidb/pull/11825)を処理するときに発生する可能性のある境界エラーを修正します
     -   誤ってフォーマットされた引数を処理するときに`time`関数がEOFエラーに遭遇する問題を修正します[＃11893](https://github.com/pingcap/tidb/pull/11893)
     -   Window関数が渡されたパラメーターをチェックしない問題を修正します[＃11705](https://github.com/pingcap/tidb/pull/11705)
-    -   `Explain`で表示されたプランの結果が、実際に実行されたプラン[＃11186](https://github.com/pingcap/tidb/pull/11186)と矛盾する問題を修正します。
+    -   `Explain`を介して表示された計画結果が、実際に実行された計画[＃11186](https://github.com/pingcap/tidb/pull/11186)と矛盾する問題を修正します。
     -   Window関数によって参照される重複メモリがクラッシュまたは誤った結果をもたらす可能性がある問題を修正します[＃11823](https://github.com/pingcap/tidb/pull/11823)
     -   スローログ[＃11887](https://github.com/pingcap/tidb/pull/11887)の`Succ`フィールドの誤った情報を更新します
 -   サーバ
@@ -48,7 +48,7 @@ TiDB Ansibleバージョン：3.0.3
 ## TiKV {#tikv}
 
 -   コンテキスト[＃5256](https://github.com/tikv/tikv/pull/5256)が重複しているためにReadIndexがリクエストに応答できない可能性がある問題を修正します
--   時期尚早の`PutStore`によって引き起こされる潜在的なスケジューリングジッターを修正し[＃5277](https://github.com/tikv/tikv/pull/5277)
+-   時期[＃5277](https://github.com/tikv/tikv/pull/5277)の`PutStore`によって引き起こされる潜在的なスケジューリングジッターを修正する
 -   リージョンハートビートから報告された誤ったタイムスタンプを修正[＃5296](https://github.com/tikv/tikv/pull/5296)
 -   共有ブロックキャッシュをコアダンプから除外して、コアダンプのサイズを縮小します[＃5322](https://github.com/tikv/tikv/pull/5322)
 -   リージョンマージ中の潜在的なTiKVパニックを修正[＃5291](https://github.com/tikv/tikv/pull/5291)

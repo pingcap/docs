@@ -46,7 +46,7 @@ TiUPバージョン：0.0.3
 -   TiDB
 
     -   大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスタ[＃33](https://github.com/pingcap/tidb/projects/33)で`utf8mb4_general_ci`と`utf8_general_ci`を有効にできるようにします。
-    -   `RECOVER TABLE`構文を拡張して、切り捨てられたテーブルの回復をサポートします[＃15398](https://github.com/pingcap/tidb/pull/15398)
+    -   切り捨てられたテーブルの回復をサポートするために`RECOVER TABLE`構文を拡張します[＃15398](https://github.com/pingcap/tidb/pull/15398)
     -   tidb-serverステータスポートが占有されているときにアラートログを返す代わりに開始を拒否する[＃15177](https://github.com/pingcap/tidb/pull/15177)
     -   シーケンスをデフォルトの列値として使用する書き込みパフォーマンスを最適化する[＃15216](https://github.com/pingcap/tidb/pull/15216)
     -   `DDLJobs`システムテーブルを追加して、DDLジョブの詳細をクエリします[＃14837](https://github.com/pingcap/tidb/pull/14837)
@@ -93,11 +93,11 @@ TiUPバージョン：0.0.3
 
     -   TiDB Lightning
 
-        -   バックエンドがTiDB1の場合の文字変換のエラーによって引き起こされるデータエラーの問題を修正し[＃283](https://github.com/pingcap/tidb-lightning/pull/283)
+        -   バックエンドが[＃283](https://github.com/pingcap/tidb-lightning/pull/283)の場合の文字変換エラーによるデータエラーの問題を修正
 
     -   TiCDC
 
         -   MySQLシンクがDDLステートメント[＃353](https://github.com/pingcap/tiflow/pull/353)を実行しているときに、 `test`のスキーマがダウンストリームに存在しない場合にエラーが返される問題を修正します。
         -   [＃351](https://github.com/pingcap/tiflow/pull/351)でリアルタイムインタラクティブモードをサポートする
-        -   データレプリケーション中にアップストリームのテーブルをレプリケートできるかどうかのチェックをサポート[＃368](https://github.com/pingcap/tiflow/pull/368)
+        -   データ複製中にアップストリームのテーブルを複製できるかどうかのチェックをサポート[＃368](https://github.com/pingcap/tiflow/pull/368)
         -   [＃344](https://github.com/pingcap/tiflow/pull/344)への非同期書き込みをサポート

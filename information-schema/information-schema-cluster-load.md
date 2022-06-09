@@ -30,7 +30,7 @@ DESC cluster_load;
 
 フィールドの説明：
 
--   `TYPE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `TYPE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は、 `tidb` 、および`pd` `tikv` 。
 -   `INSTANCE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
 -   `DEVICE_TYPE` ：ハードウェアタイプ。現在、 `cpu` 、および`memory`タイプを`net`でき`disk` 。
 -   `DEVICE_NAME` ：ハードウェア名。 `DEVICE_NAME`の値は`DEVICE_TYPE`によって異なります。
@@ -38,7 +38,7 @@ DESC cluster_load;
     -   `disk` ：ディスク名。
     -   `net` ：ネットワークカード名。
     -   `memory` ：ハードウェア名はメモリです。
--   `NAME` ：さまざまな負荷タイプ。たとえば、cpuには`load1` 、および`load15`の`load5`つの負荷タイプがあり、それぞれ1分、5分、および15分以内のcpuの平均負荷を意味します。
+-   `NAME` ：さまざまな荷重タイプ。たとえば、cpuには`load1` 、および`load15`の`load5`つの負荷タイプがあり、それぞれ1分、5分、および15分以内のcpuの平均負荷を意味します。
 -   `VALUE` ：ハードウェア負荷の値。たとえば、 `1min` 、および`5min`は、それぞれ`15min`分、5分、および15分以内のハードウェアの平均負荷を意味します。
 
 次の例は、 `CLUSTER_LOAD`テーブルを使用してCPUの現在の負荷情報を照会する方法を示しています。

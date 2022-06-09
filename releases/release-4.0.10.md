@@ -22,7 +22,7 @@ TiDBバージョン：4.0.10
 
 -   TiDB
 
-    -   `txn-entry-size-limit` [＃21843](https://github.com/pingcap/tidb/pull/21843)を使用して、トランザクションのキー値エントリのサイズ制限を構成可能にします。
+    -   `txn-entry-size-limit` [＃21843](https://github.com/pingcap/tidb/pull/21843)を使用して、トランザクションのKey-Valueエントリのサイズ制限を構成可能にします。
 
 -   PD
 
@@ -63,7 +63,7 @@ TiDBバージョン：4.0.10
 -   TiKV
 
     -   レディとピア[＃9409](https://github.com/tikv/tikv/pull/9409)の間の間違ったマッピングを修正
-    -   `security.redact-info-log`を[＃9314](https://github.com/tikv/tikv/pull/9314)に設定すると、一部のログが編集されない問題を修正し`true` 。
+    -   `security.redact-info-log`が[＃9314](https://github.com/tikv/tikv/pull/9314)に設定されている場合、一部のログが編集されない問題を修正し`true` 。
 
 -   PD
 
@@ -85,7 +85,7 @@ TiDBバージョン：4.0.10
         -   `base64`のデータ出力の問題やUNIXタイムスタンプ[＃1173](https://github.com/pingcap/tiflow/pull/1173)へのTSOの出力の問題など、 `maxwell`のプロトコルの問題を修正します。
         -   古いメタデータが新しく作成されたチェンジフィードの異常を引き起こす可能性があるバグを修正します[＃1184](https://github.com/pingcap/tiflow/pull/1184)
         -   閉じた通知機能[＃1199](https://github.com/pingcap/tiflow/pull/1199)でレシーバーを作成する問題を修正します
-        -   TiCDC所有者がetcdウォッチクライアントでメモリを過剰に消費する可能性があるバグを修正します[＃1227](https://github.com/pingcap/tiflow/pull/1227)
+        -   TiCDC所有者がetcdウォッチクライアントで大量のメモリを消費する可能性があるバグを修正します[＃1227](https://github.com/pingcap/tiflow/pull/1227)
         -   `max-batch-size`が有効にならない問題を修正します[＃1253](https://github.com/pingcap/tiflow/pull/1253)
         -   キャプチャ情報が構築される前に古いタスクをクリーンアップする問題を修正します[＃1280](https://github.com/pingcap/tiflow/pull/1280)
         -   MySQLシンク[＃1285](https://github.com/pingcap/tiflow/pull/1285)で`rollback`が呼び出されないため、dbconnのリサイクルがブロックされる問題を修正します。

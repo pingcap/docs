@@ -15,7 +15,7 @@ summary: Learn about GC configuration parameters.
 
 ## GC I/O制限 {#gc-i-o-limit}
 
-TiKVはGCI/O制限をサポートします。 `gc.max-write-bytes-per-sec`を構成して、1秒あたりのGCワーカーの書き込みを制限し、通常の要求への影響を減らすことができます。
+TiKVはGCI/O制限をサポートします。 `gc.max-write-bytes-per-sec`を設定して、1秒あたりのGCワーカーの書き込みを制限し、通常のリクエストへの影響を減らすことができます。
 
 `0`は、この機能を無効にすることを示します。
 
@@ -29,7 +29,7 @@ tikv-ctl --host=ip:port modify-tikv-config -n gc.max-write-bytes-per-sec -v 10MB
 
 ## TiDB5.0での変更 {#changes-in-tidb-5-0}
 
-TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`システムテーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を確実に検証し、予期しない動作を防ぐことができます（ [＃20655](https://github.com/pingcap/tidb/issues/20655) ）。
+TiDBの以前のリリースでは、ガベージコレクションは`mysql.tidb`のシステムテーブルを介して構成されていました。このテーブルへの変更は引き続きサポートされますが、提供されているシステム変数を使用することをお勧めします。これにより、構成への変更を確実に検証し、予期しない動作を防ぐことができます（ [＃20655](https://github.com/pingcap/tidb/issues/20655) ）。
 
 `CENTRAL`ガベージコレクションモードはサポートされなくなりました。 `DISTRIBUTED` GCモード（TiDB 3.0以降のデフォルト）が代わりに自動的に使用されます。 TiDBがガベージコレクションをトリガーするために各TiKVリージョンにリクエストを送信する必要がなくなるため、このモードはより効率的です。
 

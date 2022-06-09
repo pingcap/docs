@@ -14,7 +14,7 @@ TiDBバージョン：3.0.15
 
     -   プランキャッシュ機能を使用するためにパーティションテーブルでのクエリを禁止する[＃16759](https://github.com/pingcap/tidb/pull/16759)
     -   パーティションテーブルで`admin recover index`および`admin check index` [＃17390](https://github.com/pingcap/tidb/pull/17390)をサポートする[＃17315](https://github.com/pingcap/tidb/pull/17315)
-    -   Rangeパーティションテーブル[＃17318](https://github.com/pingcap/tidb/pull/17318)の`in`条件のパーティションプルーニングをサポートします。
+    -   Rangeパーティション表[＃17318](https://github.com/pingcap/tidb/pull/17318)の`in`条件のパーティションプルーニングをサポートします。
     -   `SHOW CREATE TABLE`の出力を最適化し、パーティション名[＃16315](https://github.com/pingcap/tidb/pull/16315)に引用符を追加します。
     -   `GROUP_CONCAT`関数[＃16988](https://github.com/pingcap/tidb/pull/16988)の`ORDER BY`節をサポートします。
     -   `CMSketch`統計のメモリ割り当てメカニズムを最適化して、パフォーマンス[＃17543](https://github.com/pingcap/tidb/pull/17543)に対するガベージコレクション（GC）の影響を減らします。
@@ -32,7 +32,7 @@ TiDBバージョン：3.0.15
     -   クエリ述語[＃16557](https://github.com/pingcap/tidb/pull/16557)で`CHAR()`関数が使用されている場合に、誤った処理ロジックによって引き起こされる誤った結果の問題を修正します。
     -   `IsTrue`および`IsFalse`関数のストレージレイヤーと計算レイヤーでの一貫性のない結果の問題を修正します[＃16627](https://github.com/pingcap/tidb/pull/16627)
     -   [＃16993](https://github.com/pingcap/tidb/pull/16993)などの一部の式の誤った`NotNull`フラグを修正し`case when`
-    -   一部のシナリオでオプティマイザが`TableDual`の物理プランを見つけられないという問題を修正します[＃17014](https://github.com/pingcap/tidb/pull/17014)
+    -   一部のシナリオでオプティマイザーが`TableDual`の物理計画を見つけられないという問題を修正します[＃17014](https://github.com/pingcap/tidb/pull/17014)
     -   パーティション選択の構文がハッシュパーティションテーブル[＃17051](https://github.com/pingcap/tidb/pull/17051)で正しく有効にならない問題を修正します。
     -   XORが浮動小数点数[＃16976](https://github.com/pingcap/tidb/pull/16976)で動作する場合の、TiDBとMySQL間の一貫性のない結果を修正します。
     -   準備された方法でDDLステートメントを実行するときに発生するエラーを修正します[＃17415](https://github.com/pingcap/tidb/pull/17415)

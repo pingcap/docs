@@ -7,15 +7,15 @@ summary: Learn how to create your TiDB cluster.
 
 このチュートリアルでは、TiDBクラスタのサインアップと作成について説明します。
 
-## 手順1.TiDBCloudアカウントを作成します {#step-1-create-a-tidb-cloud-account}
+## ステップTiDB Cloudアカウントを作成します {#step-1-create-a-tidb-cloud-account}
 
 1.  TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップしてください。
 
-    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
-    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、TiDB Cloudコンソールを使用して変更することはできません。
-    -   AWS Marketplaceユーザーの場合、AWSMarketplaceからサインアップすることもできます。これを行うには、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)分の`TiDB Cloud`を検索し、TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDBCloudアカウントを設定します。
+    -   Googleユーザーの場合、Googleにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **Googleにサインアップ**]をクリックします。メールアドレスとパスワードはGoogleによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHubユーザーの場合は、GitHubにサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページの[ **GitHubにサインアップ**]をクリックします。メールアドレスとパスワードはGitHubによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   AWS Marketplaceユーザーの場合、AWSMarketplaceからサインアップすることもできます。これを行うには、 [AWSマーケットプレイス](https://aws.amazon.com/marketplace)分の`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントを設定します。
 
-2.  TiDBCloudアカウントに[ログイン](https://tidbcloud.com/) 。
+2.  TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/) 。
 
 ## ステップ2.クラスタ層を選択します {#step-2-select-a-cluster-tier}
 
@@ -27,13 +27,13 @@ TiDB Cloudは、次の2つのクラスタ層オプションを提供します。
 
 -   専用層
 
-    TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、本番環境専用です。
+    TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番環境専用です。
 
-2つのオプションの詳細については、 [クラスタ層を選択してください](/tidb-cloud/select-cluster-tier.md)を参照してください。
+2つのオプションの詳細については、 [クラスタ層を選択する](/tidb-cloud/select-cluster-tier.md)を参照してください。
 
 ## ステップ3.デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成します {#step-3-use-your-default-project-or-create-a-new-project}
 
-組織の所有者の場合、TiDB Cloudにログインすると、デフォルトのプロジェクトが作成されます。デフォルトのプロジェクトを使用したくない場合は、次の手順で新しいプロジェクトを作成できます。
+組織の所有者の場合、 TiDB Cloudにログインすると、デフォルトのプロジェクトが作成されます。デフォルトのプロジェクトを使用したくない場合は、次の手順で新しいプロジェクトを作成できます。
 
 1.  ウィンドウの右上隅にあるアカウント名をクリックします。
 
@@ -45,7 +45,7 @@ TiDB Cloudは、次の2つのクラスタ層オプションを提供します。
 
 4.  プロジェクトの名前を入力し、[**確認**]をクリックします。
 
-5.  クラスタページに戻るには、ウィンドウの左上隅にあるTiDBCloudロゴをクリックします。
+5.  クラスタページに戻るには、ウィンドウの左上隅にあるTiDB Cloudロゴをクリックします。
 
 プロジェクトメンバーの場合は、組織の所有者から招待された特定のプロジェクトにのみアクセスでき、新しいプロジェクトを作成することはできません。所属しているプロジェクトを確認するには、次の手順を実行します。
 
@@ -55,7 +55,7 @@ TiDB Cloudは、次の2つのクラスタ層オプションを提供します。
 
     デフォルトでは、[**プロジェクト**]タブが表示されます。
 
-3.  クラスタページに戻るには、ウィンドウの左上隅にあるTiDBCloudロゴをクリックします。
+3.  クラスタページに戻るには、ウィンドウの左上隅にあるTiDB Cloudロゴをクリックします。
 
 ## ステップ4.TiDBクラスタを作成する {#step-4-create-a-tidb-cluster}
 
@@ -64,7 +64,7 @@ TiDB Cloudは、次の2つのクラスタ層オプションを提供します。
 
 開発者層クラスタを作成するには、次の手順を実行します。
 
-1.  [TiDB Cloudクラスタ]ページで、[**クラスターの作成**]をクリックし、[<strong>開発者層</strong>]をクリックします。
+1.  [ TiDB Cloudクラスタ]ページで、[**クラスターの作成**]をクリックし、[<strong>開発者層</strong>]をクリックします。
 
 2.  [クラスターの**作成]**ページで、クラスタ名とルートパスワードを設定します。
 
@@ -72,7 +72,7 @@ TiDB Cloudは、次の2つのクラスタ層オプションを提供します。
 
 4.  開発者層のクラスタサイズを表示し、[**作成**]をクリックします。
 
-TiDB Cloudクラスタは、約5〜15分で作成されます。
+TiDB Cloudクラスタは約5〜15分で作成されます。
 
 </div>
 
@@ -80,7 +80,7 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
 専用層クラスタを作成するには、次の手順を実行します。
 
-1.  [TiDB Cloudクラスタ]ページで、[**クラスターの作成**]をクリックし、[<strong>専用層</strong>]をクリックします。
+1.  [ TiDB Cloudクラスタ]ページで、[**クラスターの作成**]をクリックし、[<strong>専用層</strong>]をクリックします。
 
 2.  [クラスターの**作成]**ページで、クラスタ名とルートパスワードを設定し、接続に`4000`を使用できない場合は、デフォルトのポート番号`4000`を更新します。
 
@@ -88,7 +88,7 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
     > **ノート：**
     >
-    > [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を介してTiDBCloudにサインアップした場合、クラウドプロバイダーはAWSであり、TiDBCloudで変更することはできません。
+    > [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を介してTiDB Cloudにサインアップした場合、クラウドプロバイダーはAWSであり、 TiDB Cloudで変更することはできません。
 
 4.  これが現在のプロジェクトの最初のクラスタであり、このプロジェクトに対してCIDRが構成されていない場合は、プロジェクトCIDRを設定してから、[**次へ**]をクリックする必要があります。<strong>プロジェクトのCIDR</strong>フィールドが表示されない場合は、CIDRがこのプロジェクト用に既に構成されていることを意味します。
 
@@ -104,11 +104,11 @@ TiDB Cloudクラスタは、約5〜15分で作成されます。
 
     > **ノート：**
     >
-    > [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を介してTiDBCloudにサインアップした場合、AWSアカウントを介して直接支払うことはできますが、TiDBCloudポータルで支払い方法を追加したり請求書をダウンロードしたりすることはできません。
+    > [AWSマーケットプレイス](https://aws.amazon.com/marketplace)を介してTiDB Cloudにサインアップした場合、AWSアカウントを介して直接支払うことはできますが、 TiDB Cloudポータルで支払い方法を追加したり請求書をダウンロードしたりすることはできません。
 
 8.  [**作成]**をクリックします。
 
-TiDB Cloudクラスタは、約5〜15分で作成されます。
+TiDB Cloudクラスタは約5〜15分で作成されます。
 
 </div>
 </SimpleTab>

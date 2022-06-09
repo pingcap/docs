@@ -3,7 +3,7 @@ title: TiSpark Deployment Topology
 summary: Learn the deployment topology of TiSpark using TiUP based on the minimal TiDB topology.
 ---
 
-# TiSparkデプロイメントトポロジ {#tispark-deployment-topology}
+# TiSpark展開トポロジ {#tispark-deployment-topology}
 
 > **警告：**
 >
@@ -11,7 +11,7 @@ summary: Learn the deployment topology of TiSpark using TiUP based on the minima
 
 このドキュメントでは、TiSparkの展開トポロジと、最小クラスタトポロジに基づいてTiSparkを展開する方法を紹介します。
 
-TiSparkは、TiDB /TiKV上でApacheSparkを実行して、複雑なOLAPクエリに応答するために構築されたコンポーネントです。 Sparkプラットフォームと分散TiKVクラスタの両方の利点をTiDBにもたらし、TiDBをオンライントランザクションと分析の両方のワンストップソリューションにします。
+TiSparkは、TiDB /TiKV上でApacheSparkを実行して、複雑なOLAPクエリに応答するために構築されたコンポーネントです。 Sparkプラットフォームと分散TiKVクラスタの両方のメリットをTiDBにもたらし、TiDBをオンライントランザクションと分析の両方のワンストップソリューションにします。
 
 TiSparkアーキテクチャとその使用方法の詳細については、 [TiSparkユーザーガイド](/tispark-overview.md)を参照してください。
 

@@ -31,7 +31,7 @@ TiDB Ansibleバージョン：3.1.0 GA
 
 -   配置ドライバー（PD）
 
-    -   ホットリージョンスケジューリングを最適化する[＃2342](https://github.com/pingcap/pd/pull/2342)
+    -   ホットリージョンのスケジューリングを最適化する[＃2342](https://github.com/pingcap/pd/pull/2342)
 
 -   TiFlash
 
@@ -58,11 +58,11 @@ TiDB Ansibleバージョン：3.1.0 GA
     -   `current_role`印刷結果[＃16084](https://github.com/pingcap/tidb/pull/16084)の誤った文字セットを修正します
     -   MySQL接続ハンドシェイクエラー[＃15799](https://github.com/pingcap/tidb/pull/15799)のログを調整します
     -   監査プラグインがロードされた後のポートプロービングによって引き起こされるパニックの問題を修正します[＃16065](https://github.com/pingcap/tidb/pull/16065)
-    -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のパニック問題を修正します。
+    -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のパニックの問題を修正します。
     -   監視セッションの再試行エラーのカウントが不正確になる問題を修正します[＃16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[＃16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の誤った結果の問題を修正します
     -   クラスタにTiFlashノードがある場合にガベージコレクション（GC）が正常に機能しない可能性がある問題を修正します[＃15761](https://github.com/pingcap/tidb/pull/15761)
-    -   ユーザーがハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成するときに大きなパーティションカウントを設定すると、TiDBがメモリ（OOM）を使い果たす問題を修正します。
+    -   ハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成するときに、ユーザーが大きなパーティションカウントを設定すると、TiDBがメモリ（OOM）を使い果たす問題を修正します。
     -   警告がエラーと誤解される問題を修正し、 `UNION`ステートメントが`SELECT`ステートメントと同じ動作をするようにします[＃16138](https://github.com/pingcap/tidb/pull/16138)
     -   `TopN`がmocktikv3にプッシュダウンされたときの実行エラーを修正し[＃16200](https://github.com/pingcap/tidb/pull/16200)
     -   `runtime.growslice` [＃16142](https://github.com/pingcap/tidb/pull/16142)の不要なオーバーヘッドを回避するために、初期長を`chunk.column.nullBitMap`に増やします。

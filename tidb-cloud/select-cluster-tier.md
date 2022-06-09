@@ -46,7 +46,7 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 
 ## 専用層 {#dedicated-tier}
 
-TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、本番環境での使用専用です。
+TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番環境専用です。
 
 専用層クラスターの場合、ビジネスニーズに応じて、TiDB、TiKV、およびTiFlash<sup>ベータ</sup>のクラスタサイズを簡単にカスタマイズできます。 TiKVノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)の異なるアベイラビリティーゾーンに分散されます。
 

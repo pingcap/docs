@@ -70,7 +70,7 @@ SELECT * FROM user_privileges;
 
 `USER_PRIVILEGES`表のフィールドは次のように説明されています。
 
--   `GRANTEE` ：付与されたユーザーの名前`'user_name'@'host_name'`の形式です。
+-   `GRANTEE` ：許可されたユーザーの名前`'user_name'@'host_name'`の形式です。
 -   `TABLE_CATALOG` ：テーブルが属するカタログの名前。この値は常に`def`です。
--   `PRIVILEGE_TYPE` ：付与する特権タイプ。各行には1つの特権タイプのみが表示されます。
+-   `PRIVILEGE_TYPE` ：付与する特権の種類。各行には1つの特権タイプのみが表示されます。
 -   `IS_GRANTABLE` ： `GRANT OPTION`特権を持っている場合、値は`YES`です。それ以外の場合、値は`NO`です。

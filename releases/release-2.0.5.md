@@ -23,14 +23,14 @@ title: TiDB 2.0.5 Release Notes
     -   `KILL QUERY`には常にSUPER特権[＃7003](https://github.com/pingcap/tidb/pull/7003)が必要であるという問題を修正します
     -   ユーザー数が1024を超えるとユーザーがログインに失敗する可能性がある問題を修正します[＃6986](https://github.com/pingcap/tidb/pull/6986)
     -   署名されて[＃6940](https://github.com/pingcap/tidb/pull/6940)ない`float`データの挿入に関する問題を修正する`double`
-    -   `COM_FIELD_LIST`コマンドの互換性を修正して、一部のMariaDBクライアントのパニック問題を解決します[＃6929](https://github.com/pingcap/tidb/pull/6929)
+    -   `COM_FIELD_LIST`コマンドの互換性を修正して、一部のMariaDBクライアントのパニックの問題を解決します[＃6929](https://github.com/pingcap/tidb/pull/6929)
     -   `CREATE TABLE IF NOT EXISTS LIKE`の動作を修正[＃6928](https://github.com/pingcap/tidb/pull/6928)
     -   TopNプッシュダウン[＃6923](https://github.com/pingcap/tidb/pull/6923)のプロセスの問題を修正します
     -   `Add Index` [＃6903](https://github.com/pingcap/tidb/pull/6903)の実行中にエラーが発生した場合に、現在処理中の行のIDレコードの問題を修正します。
 
 ## PD {#pd}
 
--   一部のシナリオでレプリカの移行がTiKVディスクスペースを消費する問題を修正します
+-   一部のシナリオで、レプリカの移行によってTiKVディスクスペースが消費される問題を修正します
 -   `AdjacentRegionScheduler`によって引き起こされるクラッシュの問題を修正します
 
 ## TiKV {#tikv}

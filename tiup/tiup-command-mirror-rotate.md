@@ -2,17 +2,17 @@
 title: tiup mirror rotate
 ---
 
-# tiupミラーが回転します {#tiup-mirror-rotate}
+# tiup mirror rotate {#tiup-mirror-rotate}
 
-`root.json`はTiUPミラーの重要なファイルです。システム全体に必要な公開鍵を保存し、TiUPの信頼の鎖の基礎となります。主に次の部分が含まれています。
+`root.json`はTiUPミラーの重要なファイルです。システム全体に必要な公開鍵を格納し、TiUPの信頼の鎖の基礎となります。主に次の部分が含まれています。
 
 -   ミラー管理者の署名。公式ミラーには、5つの署名があります。初期化されたミラーの場合、デフォルトで3つのシグニチャがあります。
--   次のファイルの検証に使用される公開キー：
+-   次のファイルを検証するために使用される公開鍵：
     -   root.json
     -   index.json
     -   snapshot.json
     -   timestamp.json
--   有効期限は`root.json`です。オフィシャルミラーの場合、有効期限は作成日`root.json`より1年遅れています。
+-   有効期限は`root.json`です。オフィシャルミラーの場合、有効期限は作成日`root.json`より1年遅くなります。
 
 TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 

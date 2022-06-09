@@ -7,7 +7,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 
 # データ移行の概要 {#data-migration-overview}
 
-[TiDBデータ移行](https://github.com/pingcap/dm) （DM）は統合データ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへの完全なデータ移行と増分データレプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。データ移行にDMを使用する場合は、次の操作を実行する必要があります。
+[TiDBデータ移行](https://github.com/pingcap/dm) （DM）は統合データ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへの完全なデータ移行と増分データ複製をサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。データ移行にDMを使用する場合は、次の操作を実行する必要があります。
 
 -   DMクラスターをデプロイする
 -   アップストリームデータソースを作成し、データソースアクセス情報を保存します
@@ -55,7 +55,7 @@ v5.4より前では、DMドキュメントはTiDBドキュメントから独立�
 
 ### シャードのマージと移行 {#shard-merge-and-migration}
 
-DMは、元のシャーディングされたインスタンスとテーブルをソースデータベースからTiDBにマージおよび移行することをサポートしていますが、いくつかの制限があります。詳細については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)および[楽観的モードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
+DMは、元のシャーディングされたインスタンスとテーブルをソースデータベースからTiDBにマージおよび移行することをサポートしていますが、いくつかの制限があります。詳細については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)および[オプティミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
 ### 移行プロセスにおけるサードパーティのオンラインスキーマ変更ツールの最適化 {#optimization-for-third-party-online-schema-change-tools-in-the-migration-process}
 
@@ -96,7 +96,7 @@ DMツールを使用する前に、次の制限に注意してください。
 
     -   シャーディングされたテーブル間に競合が存在する場合は、 [自動インクリメント主キーの競合の処理](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して競合を解決します。それ以外の場合、データ移行はサポートされていません。競合するデータは互いにカバーし合い、データの損失を引き起こす可能性があります。
 
-    -   その他のシャーディングDDL移行の制限については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)および[楽観的モードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
+    -   その他のシャーディングDDL移行の制限については、 [ペシミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-pessimistic.md#restrictions)および[オプティミスティックモードでのDDL使用制限のシャーディング](/dm/feature-shard-merge-optimistic.md#restrictions)を参照してください。
 
 -   データソースのMySQLインスタンスの切り替え
 

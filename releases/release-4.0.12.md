@@ -23,9 +23,9 @@ TiDBバージョン：4.0.12
     -   DDLパッケージコードの一部を`Execute`から安全なAPIに移行し[＃22935](https://github.com/pingcap/tidb/pull/22935) （2） `ExecRestricted`
     -   DDLパッケージコードの一部を`Execute`から安全なAPIに移行し[＃22929](https://github.com/pingcap/tidb/pull/22929) （1） `ExecRestricted`
     -   遅いログ[＃22918](https://github.com/pingcap/tidb/pull/22918)に`optimization-time`と`wait-TS-time`を追加します
-    -   `infoschema.partitions`の表[＃22489](https://github.com/pingcap/tidb/pull/22489)から`partition_id`を照会することをサポートします。
+    -   `infoschema.partitions`の表[＃22489](https://github.com/pingcap/tidb/pull/22489)から`partition_id`のクエリをサポート
     -   `last_plan_from_binding`を追加して、SQLステートメントの実行プランがバインディング[＃21430](https://github.com/pingcap/tidb/pull/21430)のヒントと一致するかどうかをユーザーが認識できるようにします。
-    -   `pre-split`のオプションなしで切り捨てられたテーブルを分散する[＃22872](https://github.com/pingcap/tidb/pull/22872)
+    -   `pre-split`オプションなしで切り捨てられたテーブルを分散する[＃22872](https://github.com/pingcap/tidb/pull/22872)
     -   `str_to_date`式[＃22812](https://github.com/pingcap/tidb/pull/22812)に3つのフォーマット指定子を追加します
     -   `PREPARE`の実行失敗をメトリックモニター[＃22672](https://github.com/pingcap/tidb/pull/22672)に`Failed Query OPM`として記録します。
     -   `tidb_snapshot`が設定されている場合は`PREPARE`の実行でエラーを報告しない[＃22641](https://github.com/pingcap/tidb/pull/22641)
@@ -34,7 +34,7 @@ TiDBバージョン：4.0.12
 
     -   短時間で大量の再接続を防ぐ[＃9879](https://github.com/tikv/tikv/pull/9879)
     -   多くのトゥームストーンのシナリオで書き込み操作とバッチ取得を最適化する[＃9729](https://github.com/tikv/tikv/pull/9729)
-    -   リーダー転送の成功率を上げるには、デフォルト値の`leader-transfer-max-log-lag`を`128`に変更します[＃9605](https://github.com/tikv/tikv/pull/9605)
+    -   リーダーの異動の成功率を上げるには、デフォルト値の`leader-transfer-max-log-lag`を`128`に変更します[＃9605](https://github.com/tikv/tikv/pull/9605)
 
 -   PD
 
@@ -56,11 +56,11 @@ TiDBバージョン：4.0.12
 
     -   バックアップと復元（BR）
 
-        -   `HTTP_PROXY`と`HTTPS_PROXY`の環境変数をログに記録する[＃827](https://github.com/pingcap/br/pull/827)
+        -   `HTTP_PROXY`と`HTTPS_PROXY`の環境変数をログに記録します[＃827](https://github.com/pingcap/br/pull/827)
         -   テーブルが多い場合のバックアップパフォーマンスの向上[＃745](https://github.com/pingcap/br/pull/745)
         -   サービスセーフポイントチェックが失敗した場合にエラーを報告する[＃826](https://github.com/pingcap/br/pull/826)
         -   [＃803](https://github.com/pingcap/br/pull/803)に`cluster_version`と`br_version`の情報を追加し`backupmeta`
-        -   外部ストレージエラーの再試行を追加して、バックアップの成功率を高めます[＃851](https://github.com/pingcap/br/pull/851)
+        -   バックアップの成功率を上げるために、外部ストレージエラーの再試行を追加します[＃851](https://github.com/pingcap/br/pull/851)
         -   バックアップ中のメモリ使用量を削減[＃886](https://github.com/pingcap/br/pull/886)
 
     -   TiDB Lightning
@@ -68,7 +68,7 @@ TiDBバージョン：4.0.12
         -   予期しないエラーを回避するために、TiDBLightningを実行する前にTiDBクラスタのバージョンを確認してください[＃787](https://github.com/pingcap/br/pull/787)
         -   TiDB Lightningが`cancel`のエラー[＃867](https://github.com/pingcap/br/pull/867)に遭遇すると、すぐに失敗します
         -   `tikv-importer.engine-mem-cache-size`と`tikv-importer.local-writer-mem-cache-size`の構成項目を追加して、メモリ使用量とパフォーマンスのバランスを取ります[＃866](https://github.com/pingcap/br/pull/866)
-        -   TiDB Lightningのローカルバックエンドに対して`batch split region`を並行して実行して、インポート速度を上げます[＃868](https://github.com/pingcap/br/pull/868)
+        -   TiDB Lightningのローカルバックエンドに対して`batch split region`を並行して実行し、インポート速度を上げます[＃868](https://github.com/pingcap/br/pull/868)
         -   TiDB Lightningを使用してS3ストレージからデータをインポートする場合、TiDBLightningは`s3:ListBucket`パーミッション[＃919](https://github.com/pingcap/br/pull/919)を必要としなくなりました。
         -   チェックポイントから再開する場合、TiDBLightningは元のエンジンを使用し続けます[＃924](https://github.com/pingcap/br/pull/924)
 
@@ -82,7 +82,7 @@ TiDBバージョン：4.0.12
     -   自動分析が時間範囲外でトリガーされる問題を修正します[＃23219](https://github.com/pingcap/tidb/pull/23219)
     -   `CAST`関数が`point get`プラン[＃23211](https://github.com/pingcap/tidb/pull/23211)のエラーを無視する可能性がある問題を修正します
     -   `CurrentDB`が空のときにSPMが有効にならないバグを修正します[＃23209](https://github.com/pingcap/tidb/pull/23209)
-    -   IndexMergeプラン[＃23165](https://github.com/pingcap/tidb/pull/23165)で発生する可能性のある間違ったテーブルフィルターの問題を修正します
+    -   IndexMergeプラン[＃23165](https://github.com/pingcap/tidb/pull/23165)で発生する可能性のある誤ったテーブルフィルターの問題を修正します
     -   `NULL`定数[＃23135](https://github.com/pingcap/tidb/pull/23135)の戻り型で予期しない`NotNullFlag`の問題を修正します
     -   照合順序がテキストタイプ[＃23092](https://github.com/pingcap/tidb/pull/23092)で処理されない可能性があるバグを修正します
     -   範囲パーティションが`IN`式[＃23074](https://github.com/pingcap/tidb/pull/23074)を誤って処理する可能性がある問題を修正します

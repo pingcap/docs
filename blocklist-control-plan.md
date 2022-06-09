@@ -24,7 +24,7 @@ summary: Learn about the blocklist to control the optimization rules and the beh
 | アウタージョインの排除 | external_join_eliminate | 実行プランから不要な左結合または右結合を削除しようとします。                                                    |
 | パーティションの剪定  | partition_processor     | 述部によって拒否されたパーティションを削除し、パーティションテーブルクエリを`UnionAll + Partition Datasource`形式に書き換えます。 |
 | 集計プッシュダウン   | Aggregation_push_down   | アグリゲーションを子にプッシュしようとします。                                                           |
-| TopNプッシュダウン | topn_push_down          | TopN演算子をデータソースに近い場所にプッシュしようとします。                                                  |
+| TopNプッシュダウン | topn_push_down          | TopNオペレーターをデータソースに近い場所にプッシュしようとします。                                               |
 | 再注文に参加      | join_reorder            | マルチテーブル結合の順序を決定します。                                                               |
 
 ### 最適化ルールを無効にする {#disable-optimization-rules}
@@ -116,7 +116,7 @@ DESC mysql.expr_pushdown_blacklist;
     -   `store_type`が`tidb`の場合、TiDBメモリテーブルの読み込み中に他のTiDBサーバーで機能を実行できるかどうかを示します。
     -   `store_type`が`tikv`の場合、TiKVサーバーのコプロセッサーコンポーネントで機能を実行できるかどうかを示します。
     -   `store_type`が`tiflash`の場合、TiFlashサーバーのコプロセッサーコンポーネントで機能を実行できるかどうかを示します。
--   `reason` ：この機能がブロックリストに追加された理由を記録します。
+-   `reason` ：この関数がブロックリストに追加された理由を記録します。
 
 ### 使用法 {#usage}
 

@@ -40,7 +40,7 @@ title: TiDB TPC-H 50G Performance Test Report V2.0
 
 [tidb-bench / tpch](https://github.com/pingcap/tidb-bench/tree/master/tpch)
 
-### クラスタートポロジ {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP        | デプロイメントインスタンス |
 | ------------ | ------------- |

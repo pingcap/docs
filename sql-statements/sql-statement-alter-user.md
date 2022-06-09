@@ -61,4 +61,4 @@ mysql> SHOW CREATE USER 'newuser';
 -   [MySQLとのセキュリティの互換性](/security-compatibility-with-mysql.md)
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 -   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
--   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)

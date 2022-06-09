@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # MPPモードでのステートメントの説明 {#explain-statements-in-the-mpp-mode}
 
-TiDBは、 [MPPモード](/tiflash/use-tiflash.md#use-the-mpp-mode)を使用したクエリの実行をサポートしています。 MPPモードでは、TiDBオプティマイザがMPPの実行計画を生成します。 MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
+TiDBは、 [MPPモード](/tiflash/use-tiflash.md#use-the-mpp-mode)を使用したクエリの実行をサポートしています。 MPPモードでは、TiDBオプティマイザがMPPの実行プランを生成します。 MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプルデータに基づいています。
 
@@ -33,7 +33,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 
 ## 交換事業者 {#exchange-operators}
 
-`ExchangeReceiver`と`ExchangeSender`は、MPP実行計画に固有の2つの交換オペレーターです。 `ExchangeReceiver`演算子は、ダウンストリームクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は、ダウンストリームクエリフラグメントからアップストリームクエリフラグメントにデータを送信します。 MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。これは、クエリフラグメントが`ExchangeSender`演算子で区切られていることを意味します。
+`ExchangeReceiver`と`ExchangeSender`は、MPP実行プランに固有の2つの交換演算子です。 `ExchangeReceiver`演算子は、ダウンストリームクエリフラグメントからデータを読み取り、 `ExchangeSender`演算子は、ダウンストリームクエリフラグメントからアップストリームクエリフラグメントにデータを送信します。 MPPモードでは、各MPPクエリフラグメントのルート演算子は`ExchangeSender`です。これは、クエリフラグメントが`ExchangeSender`演算子で区切られていることを意味します。
 
 以下は、単純なMPP実行プランです。
 
@@ -107,7 +107,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 12 rows in set (0.00 sec)
 ```
 
-上記の実行プランでは、次のようになります。
+上記の実行計画では：
 
 -   クエリフラグメント`[TableFullScan_20, Selection_21, ExchangeSender_22]`は、テーブルbからデータを読み取り、データをアップストリームMPPタスクにシャッフルします。
 -   クエリフラグメント`[TableFullScan_16, Selection_17, ExchangeSender_18]`は、テーブルaからデータを読み取り、データをアップストリームMPPタスクにシャッフルします。
@@ -138,7 +138,7 @@ EXPLAIN SELECT COUNT(*) FROM t1 a JOIN t1 b ON a.id = b.id;
 +----------------------------------------+---------+--------------+---------------+------------------------------------------------+
 ```
 
-上記の実行プランでは、次のようになります。
+上記の実行計画では：
 
 -   クエリフラグメント`[TableFullScan_17, Selection_18, ExchangeSender_19]`は、小さなテーブル（テーブルa）からデータを読み取り、大きなテーブル（テーブルb）からのデータを含む各ノードにデータをブロードキャストします。
 -   クエリフラグメント`[TableFullScan_21, Selection_22, ExchangeReceiver_20, HashJoin_43, ExchangeSender_46]`はすべてのデータを結合し、それをTiDBに返します。
@@ -170,4 +170,4 @@ EXPLAIN ANALYZE SELECT COUNT(*) FROM t1 GROUP BY id;
 +------------------------------------+---------+---------+-------------------+---------------+---------------------------------------------------------------------------------------------+----------------------------------------------------------------+--------+------+
 ```
 
-`EXPLAIN`の出力と比較すると、演算子`ExchangeSender`の`operator info`列には`tasks`も表示されます。これは、クエリフラグメントがインスタンス化されるMPPタスクのIDを記録します。さらに、各MPPオペレーターには`execution info`列に`threads`フィールドがあり、TiDBがこのオペレーターを実行するときの操作の同時実行性を記録します。クラスタが複数のノードで構成されている場合、この同時実行性は、すべてのノードの同時実行性を合計した結果です。
+`EXPLAIN`の出力と比較して、演算子`ExchangeSender`の`operator info`列には`tasks`も表示されます。これは、クエリフラグメントがインスタンス化されるMPPタスクのIDを記録します。さらに、各MPPオペレーターには`execution info`列に`threads`フィールドがあり、TiDBがこのオペレーターを実行するときの操作の並行性を記録します。クラスタが複数のノードで構成されている場合、この同時実行性は、すべてのノードの同時実行性を合計した結果です。

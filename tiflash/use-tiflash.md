@@ -2,7 +2,7 @@
 title: Use TiFlash
 ---
 
-データのインポートからTPC-Hデータセットでのクエリまでのプロセス全体を体験するには、 [TiDBHTAPのクイックスタートガイド](/quick-start-with-htap.md)を参照してください。
+データのインポートからTPC-Hデータセットでのクエリまでのプロセス全体を体験するには、 [TiDB HTAPのクイックスタートガイド](/quick-start-with-htap.md)を参照してください。
 
 # TiFlashを使用する {#use-tiflash}
 
@@ -59,7 +59,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   TiDBとTiDBLightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、TiDBLightningを使用してそのテーブルにデータをインポートできます。これにより、TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
--   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製しないことをお勧めします。この制限は、以降のバージョンで削除される予定です。
+-   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製しないことをお勧めします。この制限は、今後のバージョンで削除される予定です。
 
 -   v5.1以降のバージョンでは、システムテーブルのレプリカの設定はサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。そうしないと、クラスタを新しいバージョンにアップグレードした後、システムテーブルのレプリカ設定を変更できません。
 
@@ -144,7 +144,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
         ...
     ```
 
-ラベルを使用したレプリカのスケジュールの詳細については、 [トポロジラベルごとにレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md) 、および[1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照して[2つの都市に配置された3つのデータセンター](/three-data-centers-in-two-cities-deployment.md) 。
+ラベルを使用したレプリカのスケジューリングの詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、および[1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照して[2つの都市に配置された3つのデータセンター](/three-data-centers-in-two-cities-deployment.md) 。
 
 ## TiDBを使用してTiFlashレプリカを読み取る {#use-tidb-to-read-tiflash-replicas}
 
@@ -304,7 +304,7 @@ TiFlashは、次の演算子のプッシュダウンをサポートしていま�
     -   オペレーターは[MPPモード](#use-the-mpp-mode)でのみ押し下げることができます。
     -   デカルト結合は、ブロードキャスト結合でのみサポートされます。
 
-TiDBでは、オペレーターはツリー構造で編成されています。オペレーターをTiFlashにプッシュダウンするには、次のすべての前提条件が満たされている必要があります。
+TiDBでは、演算子はツリー構造で編成されています。オペレーターをTiFlashにプッシュダウンするには、次のすべての前提条件が満たされている必要があります。
 
 -   その子演算子はすべてTiFlashにプッシュダウンできます。
 -   演算子に式が含まれている場合（ほとんどの演算子に式が含まれている場合）、演算子のすべての式をTiFlashにプッシュダウンできます。
@@ -317,7 +317,7 @@ TiDBでは、オペレーターはツリー構造で編成されています。�
 -   文字列関数： `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp`
 -   日付関数： `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter`
 -   JSON関数： `json_length`
--   変換関数： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
+-   変換機能： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
 -   集計関数： `min, max, sum, count, avg, approx_count_distinct, group_concat`
 -   その他の機能： `inetntoa, inetaton, inet6ntoa, inet6aton`
 
@@ -341,7 +341,7 @@ TiDBでは、オペレーターはツリー構造で編成されています。�
 
 TiFlashは、MPPモードを使用したクエリの実行をサポートします。これにより、ノード間のデータ交換（データシャッフルプロセス）が計算に導入されます。 TiDBは、オプティマイザのコスト見積もりを使用して、MPPモードを選択するかどうかを自動的に決定します。 [`tidb_allow_mpp`](/system-variables.md#tidb_allow_mpp-new-in-v50)と[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を変更することにより、選択戦略を変更できます。
 
-### MPPモードを選択するかどうかを制御する {#control-whether-to-select-the-mpp-mode}
+### MPPモードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
 
 `tidb_allow_mpp`変数は、TiDBがクエリを実行するためにMPPモードを選択できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視するかどうかを制御し、TiFlashのMPPモードを使用してクエリを強制的に実行します。
 
@@ -383,7 +383,7 @@ set @@session.tidb_enforce_mpp=1;
 
 > **ノート：**
 >
-> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完了の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
+> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完成の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
 >
 > コスト見積もり以外の理由でTiDBオプティマイザがMPPモードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行プランをチェックアウトすると、理由を説明する警告が返されます。例えば：
 >
@@ -406,7 +406,7 @@ set @@session.tidb_enforce_mpp=1;
 
 ### MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiverオペレーターが表示されている場合は、MPPモードが有効になっていることを示しています。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiver演算子が表示されている場合は、MPPモードが有効になっていることを示しています。
 
 次のステートメントは、TPC-Hテストセットのテーブル構造を例として取り上げています。
 
@@ -463,12 +463,12 @@ TiFlashは、自動データ検証と手動データ検証の両方をサポー�
 
 -   自動データ検証：
     -   TiFlashは、デフォルトでV2検証メカニズムを有効にします。
-    -   V3検証メカニズムを有効にするには、 [TiFlash設定ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。
+    -   V3検証メカニズムを有効にするには、 [TiFlash構成ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。
 -   手動データ検証。 [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
 
 > **警告：**
 >
-> V3検証メカニズムを有効にすると、新しく生成されたDTFileをv5.4.0より前のTiFlashで直接読み取ることはできません。 v5.4.0以降、TiFlashはV2とV3の両方をサポートし、バージョンを積極的にアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で[バージョンの切り替え](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を行う必要があります。
+> V3検証メカニズムを有効にすると、新しく生成されたDTFileをv5.4.0より前のTiFlashで直接読み取ることはできません。 v5.4.0以降、TiFlashはV2とV3の両方をサポートし、バージョンをアクティブにアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で[バージョンの切り替え](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を実行する必要があります。
 
 #### 検証ツール {#validation-tool}
 
@@ -507,4 +507,4 @@ TiFlashがデータを読み取るときに実行される自動データ検証�
         Empty set (0.01 sec)
         ```
 
-        上記の例では、コンパイルから推測される`a/b`の型は、TiDBとTiFlashの両方で`Decimal(7,4)`です。 `Decimal(7,4)`によって制約され、 `a/b`の返されるタイプは`0.0000`である必要があります。 TiDBでは、 `a/b`の実行時精度は`Decimal(7,4)`よりも高いため、元のテーブルデータは`where a/b`条件でフィルタリングされません。ただし、TiFlashでは、 `a/b`の計算では結果タイプとして`Decimal(7,4)`が使用されるため、元のテーブルデータは`where a/b`条件でフィルタリングされます。
+        上記の例では、コンパイルから推測される`a/b`の型は、TiDBとTiFlashの両方で`Decimal(7,4)`です。 `Decimal(7,4)`によって制約され、 `a/b`の返されるタイプは`0.0000`である必要があります。 TiDBでは、 `a/b`の実行時精度は`Decimal(7,4)`よりも高いため、元のテーブルデータは`where a/b`条件によってフィルタリングされません。ただし、TiFlashでは、 `a/b`の計算では結果タイプとして`Decimal(7,4)`が使用されるため、元のテーブルデータは`where a/b`条件でフィルタリングされます。

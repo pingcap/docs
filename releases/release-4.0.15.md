@@ -21,10 +21,10 @@ TiDBバージョン：4.0.15
         -   `having`句が正しく機能しない可能性がある問題を修正します[＃26496](https://github.com/pingcap/tidb/issues/26496)
         -   `between`式の周りの照合が異なる場合に発生する誤った実行結果を修正します[＃27146](https://github.com/pingcap/tidb/issues/27146)
         -   `extract`関数の引数が負の期間[＃27236](https://github.com/pingcap/tidb/issues/27236)である場合に発生する誤った結果を修正します
-        -   `group_concat`関数の列に非ビン照合順序がある場合に発生する誤った実行結果を修正します[＃27429](https://github.com/pingcap/tidb/issues/27429)
+        -   `group_concat`関数の列に非ビン照合順序[＃27429](https://github.com/pingcap/tidb/issues/27429)がある場合に発生する誤った実行結果を修正します
         -   `Apply`演算子を[＃27233](https://github.com/pingcap/tidb/issues/27233)に変換するときに列情報が失われる問題を修正し`Join`
         -   無効な文字列を`DATE`にキャストしたときの[＃26762](https://github.com/pingcap/tidb/issues/26762)しない動作の問題を修正しました
-        -   新しい照合順序が有効になっている場合、複数の列の`count distinct`の結果が間違っているというバグを修正します[＃27091](https://github.com/pingcap/tidb/issues/27091)
+        -   新しい照合順序を有効にすると、複数の列の`count distinct`の結果が間違っているというバグを修正します[＃27091](https://github.com/pingcap/tidb/issues/27091)
 
 ## 機能強化 {#feature-enhancement}
 
@@ -40,7 +40,7 @@ TiDBバージョン：4.0.15
 
 -   TiKV
 
-    -   読み取りの待ち時間を短縮するために、読み取り準備と書き込み準備を別々に処理する[＃10475](https://github.com/tikv/tikv/issues/10475)
+    -   読み取りの待ち時間を短縮するために、読み取り準備と書き込み準備を別々に処理します[＃10475](https://github.com/tikv/tikv/issues/10475)
     -   TiKVコプロセッサーの遅いログは、要求の処理に費やされた時間のみを考慮します。 [＃10841](https://github.com/tikv/tikv/issues/10841)
     -   sloggerスレッドが過負荷になり、キューがいっぱいになったときにスレッドをブロックする代わりにログをドロップする[＃10841](https://github.com/tikv/tikv/issues/10841)
     -   解決されたTSメッセージのサイズを減らして、ネットワーク帯域幅を節約します[＃2448](https://github.com/pingcap/tiflow/issues/2448)
@@ -55,7 +55,7 @@ TiDBバージョン：4.0.15
 
         -   リージョンを同時に分割および分散して、復元速度を向上させる[＃1363](https://github.com/pingcap/br/pull/1363)
         -   PD要求エラーまたはTiKVI/ Oタイムアウトエラーが発生した場合は、BRタスクを再試行してください[＃27787](https://github.com/pingcap/tidb/issues/27787)
-        -   多くの小さなテーブルを復元するときに空の領域を減らして、復元後のクラスタ操作に影響を与えないようにします[＃1374](https://github.com/pingcap/br/issues/1374)
+        -   復元後のクラスタ操作に影響を与えないように、多数の小さなテーブルを復元するときに空のリージョンを減らします[＃1374](https://github.com/pingcap/br/issues/1374)
         -   テーブルの作成中に`rebase auto id`の操作を実行すると、個別の`rebase auto id`のDDL操作が保存され、復元[＃1424](https://github.com/pingcap/br/pull/1424)が高速化されます。
 
     -   Dumpling
@@ -88,9 +88,9 @@ TiDBバージョン：4.0.15
 
 -   TiDB
 
-    -   範囲[＃23672](https://github.com/pingcap/tidb/issues/23672)を構築するときに、バイナリリテラルに対して照合順序が誤って設定されるバグを修正します。
+    -   範囲[＃23672](https://github.com/pingcap/tidb/issues/23672)を構築するときに、バイナリリテラルに対して照合順序が正しく設定されないバグを修正します。
 
-    -   クエリに`GROUP BY`と`UNION`の両方が含まれている場合に発生する「インデックスが範囲外」エラーを[＃26553](https://github.com/pingcap/tidb/pull/26553)
+    -   クエリに`GROUP BY`と[＃26553](https://github.com/pingcap/tidb/pull/26553)の両方が含まれている場合に発生する「インデックスが範囲外」エラーを修正し`UNION`
 
     -   TiKVにトゥームストーンストアがある場合、TiDBがリクエストを送信できない可能性がある問題を修正します[＃23676](https://github.com/pingcap/tidb/issues/23676) [＃24648](https://github.com/pingcap/tidb/issues/24648)
 

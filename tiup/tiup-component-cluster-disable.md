@@ -2,7 +2,7 @@
 title: tiup cluster disable
 ---
 
-# tiupクラスタの無効化 {#tiup-cluster-disable}
+# tiup cluster disable {#tiup-cluster-disable}
 
 クラスタサービスが配置されているマシンを再起動すると、クラスタサービスが自動的に有効になります。クラスタサービスの自動有効化を無効にするには、 `tiup cluster disable`コマンドを使用できます。このコマンドは、指定されたノードで`systemctl disable <service>`を実行して、サービスの自動有効化を無効にします。
 
@@ -18,7 +18,7 @@ tiup cluster disable <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になっています。
 
@@ -46,4 +46,4 @@ tiup cluster disable <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

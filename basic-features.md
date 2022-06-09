@@ -13,7 +13,7 @@ summary: Learn about the basic features of TiDB.
 | ------------------------------------------------------------------------------ | ------- | :-: | :-: | :-: | :-: | :-----: |
 | [数値タイプ](/data-type-numeric.md)                                                 | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [日付と時刻のタイプ](/data-type-date-and-time.md)                                       | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [文字列タイプ](/data-type-string.md)                                                 | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [文字列型](/data-type-string.md)                                                   | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [JSONタイプ](/data-type-json.md)                                                  | 実験的     | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
 | [制御フロー機能](/functions-and-operators/control-flow-functions.md)                  | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [文字列関数](/functions-and-operators/string-functions.md)                          | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
@@ -27,12 +27,12 @@ summary: Learn about the basic features of TiDB.
 | [集計関数](/functions-and-operators/aggregate-group-by-functions.md)               | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [ウィンドウ関数](/functions-and-operators/window-functions.md)                        | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [その他の機能](/functions-and-operators/miscellaneous-functions.md)                  | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [オペレーター](/functions-and-operators/operators.md)                                | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [^1] [キャラクターセットと照合](/character-set-and-collation.md)                           | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [演算子](/functions-and-operators/operators.md)                                   | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [^1] [文字セットと照合](/character-set-and-collation.md)                               | Y       |  Y  |  Y  |  Y  |  Y  |    Y    |
 
-## インデックス作成と制約 {#indexing-and-constraints}
+## 索引付けと制約 {#indexing-and-constraints}
 
-| インデックス作成と制約                                                               | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
+| 索引付けと制約                                                                   | **5.4** | **5.3** | **5.2** | **5.1** | **5.0** | **4.0 4.0** |
 | ------------------------------------------------------------------------- | ------- | :-----: | :-----: | :-----: | :-----: | :---------: |
 | [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index) | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
 | [列型ストレージ（TiFlash）](/tiflash/tiflash-overview.md)                          | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
@@ -41,7 +41,7 @@ summary: Learn about the basic features of TiDB.
 | [見えないインデックス](/sql-statements/sql-statement-add-index.md)                  | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
 | [複合`PRIMARY KEY`](/constraints.md)                                        | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 | [一意のインデックス](/constraints.md)                                              | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
-| [整数の`PRIMARY KEY`のクラスター化されたインデックス](/constraints.md)                       | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [整数の`PRIMARY KEY`のクラスター化インデックス](/constraints.md)                          | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 | [複合キーまたは非整数キーのクラスター化されたインデックス](/constraints.md)                           | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
 
 ## SQLステートメント {#sql-statements}
@@ -91,7 +91,7 @@ summary: Learn about the basic features of TiDB.
 | [DDLアルゴリズムアサーション](/sql-statements/sql-statement-alter-table.md) | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 | マルチスキーマの変更：列を追加                                                 | 実験的     |   実験的   |   実験的   |   実験的   |   実験的   |     実験的     |
 | [列タイプを変更する](/sql-statements/sql-statement-modify-column.md)     | Y       |    Y    |    Y    |    Y    |    N    |      N      |
-| [一時的なテーブル](/temporary-tables.md)                                | Y       |    Y    |    N    |    N    |    N    |      N      |
+| [一時テーブル](/temporary-tables.md)                                  | Y       |    Y    |    N    |    N    |    N    |      N      |
 
 ## トランザクション {#transactions}
 
@@ -100,10 +100,10 @@ summary: Learn about the basic features of TiDB.
 | [非同期コミット](/system-variables.md#tidb_enable_async_commit-new-in-v50)   | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
 | [1個](/system-variables.md#tidb_enable_1pc-new-in-v50)                 | Y       |    Y    |    Y    |    Y    |    Y    |      N      |
 | [大規模なトランザクション（10GB）](/transaction-overview.md#transaction-size-limit) | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
-| [悲観的な取引](/pessimistic-transaction.md)                                 | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [悲観的なトランザクション](/pessimistic-transaction.md)                           | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 | [楽観的な取引](/optimistic-transaction.md)                                  | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 | [繰り返し可能-読み取り分離（スナップショット分離）](/transaction-isolation-levels.md)         | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
-| [読み取り-コミットされた分離](/transaction-isolation-levels.md)                    | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
+| [読み取りコミットされた分離](/transaction-isolation-levels.md)                     | Y       |    Y    |    Y    |    Y    |    Y    |      Y      |
 
 ## パーティショニング {#partitioning}
 

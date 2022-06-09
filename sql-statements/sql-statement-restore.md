@@ -5,9 +5,9 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 # 戻す {#restore}
 
-このステートメントは、以前に[`BACKUP`ステートメント](/sql-statements/sql-statement-backup.md)によって作成されたバックアップアーカイブから分散リストアを実行します。
+このステートメントは、以前に[`BACKUP`ステートメント](/sql-statements/sql-statement-backup.md)によって作成されたバックアップアーカイブから分散復元を実行します。
 
-`RESTORE`ステートメントは[BRツール](/br/backup-and-restore-use-cases.md)と同じエンジンを使用しますが、復元プロセスが個別のBRツールではなくTiDB自体によって駆動される点が異なります。 BRのすべての利点と警告もここに適用されます。特に、 **`RESTORE`は現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
+`RESTORE`ステートメントは[BRツール](/br/backup-and-restore-use-cases.md)と同じエンジンを使用しますが、復元プロセスは個別のBRツールではなくTiDB自体によって駆動される点が異なります。 BRのすべての利点と警告もここに適用されます。特に、 **`RESTORE`は現在ACIDに準拠していません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 
 -   クラスタは「オフライン」であり、現在のTiDBセッションは、復元されるすべてのテーブルにアクセスするための唯一のアクティブなSQL接続です。
 -   完全な復元が実行されている場合、既存のデータが上書きされ、データとインデックスの間に不整合が生じる可能性があるため、復元されるテーブルはまだ存在していないはずです。

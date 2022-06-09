@@ -40,7 +40,7 @@ TiDBバージョン：5.0.1
     -   投影結果が空の場合、プロジェクト除去の実行結果が間違っている可能性がある問題を修正します[＃24093](https://github.com/pingcap/tidb/pull/24093)
     -   列に`NULL`の値が含まれている場合の誤ったクエリ結果の問題を修正します[＃24063](https://github.com/pingcap/tidb/pull/24063)
     -   スキャンに仮想列が含まれている場合にMPPプランの生成を禁止する[＃24058](https://github.com/pingcap/tidb/pull/24058)
-    -   [＃24043](https://github.com/pingcap/tidb/pull/24043)での`PointGet`と`TableDual`の誤った再利用を修正
+    -   プランキャッシュ[＃24043](https://github.com/pingcap/tidb/pull/24043)での`PointGet`と`TableDual`の誤った再利用を修正
     -   オプティマイザーがクラスター化インデックスの`IndexMerge`プランを作成するときに発生するエラーを修正します[＃24042](https://github.com/pingcap/tidb/pull/24042)
     -   BITタイプエラーのタイプ推論を修正します[＃24027](https://github.com/pingcap/tidb/pull/24027)
     -   `PointGet`演算子が存在する場合に一部のオプティマイザヒントが有効にならない問題を修正します[＃23685](https://github.com/pingcap/tidb/pull/23685)
@@ -49,7 +49,7 @@ TiDBバージョン：5.0.1
     -   場合によっては`IN`句の潜在的な誤った結果を修正します[＃24023](https://github.com/pingcap/tidb/pull/24023)
     -   一部の文字列関数の誤った結果を修正する[＃23879](https://github.com/pingcap/tidb/pull/23879)
     -   ユーザーは、 `REPLACE`の操作を実行するために、テーブルに対して`INSERT`と`DELETE`の両方の特権が必要になります[＃23939](https://github.com/pingcap/tidb/pull/23939)
-    -   ポイントクエリ[＃24070](https://github.com/pingcap/tidb/pull/24070)を実行するときのパフォーマンスの低下を修正する
+    -   ポイントクエリ[＃24070](https://github.com/pingcap/tidb/pull/24070)を実行する際のパフォーマンスの低下を修正する
     -   バイナリとバイト[＃23918](https://github.com/pingcap/tidb/pull/23918)を誤って比較することによって引き起こされた間違った`TableDual`プランを修正します
 
 -   TiKV

@@ -21,10 +21,10 @@ MySQLシャードのデータサイズが1TiB未満の場合は、 [小さなデ
 
 1.  完全なデータをエクスポートするには、Dumplingを使用します。この例では、2つのアップストリームデータベースからそれぞれ2つのテーブルをエクスポートします。
 
-    -   `my_db1`から`table1`と`table2`をエクスポートします
-    -   `my_db2`から`table3`と`table4`をエクスポートします
+    -   `my_db1`から`table1`と`table2`をエクスポート
+    -   `my_db2`から`table3`と`table4`をエクスポート
 
-2.  TiDB Lightningを起動して、TiDBの`mydb.table5`にデータを移行します。
+2.  TiDB Lightningを起動して、TiDBのデータを`mydb.table5`に移行します。
 
 3.  （オプション）TiDB DMを使用して、増分レプリケーションを実行します。
 
@@ -40,7 +40,7 @@ MySQLシャードのデータサイズが1TiB未満の場合は、 [小さなデ
 
 ### リソース要件 {#resource-requirements}
 
-**オペレーティングシステム**：このドキュメントの例では、新しいクリーンなCentOS7インスタンスを使用しています。仮想マシンは、ローカルの独自のホスト、またはベンダー提供のクラウドプラットフォームにデプロイできます。 TiDB Lightningは、デフォルトで必要なだけのCPUリソースを消費するため、専用マシンにTiDBLightningをデプロイすることをお勧めします。 TiDB Lightning専用のマシンがない場合は、他のコンポーネント（ `tikv-server`など）との共有マシンにTiDB Lightningをデプロイし、論理CPUの数の`region-concurrency` ％を構成することで、TiDBLightningのCPU使用率を制限できます。
+**オペレーティングシステム**：このドキュメントの例では、新しいクリーンなCentOS7インスタンスを使用しています。仮想マシンは、ローカルの独自のホスト、またはベンダー提供のクラウドプラットフォームに展開できます。 TiDB Lightningは、デフォルトで必要なだけのCPUリソースを消費するため、専用マシンにTiDBLightningをデプロイすることをお勧めします。 TiDB Lightning専用のマシンがない場合は、他のコンポーネント（ `tikv-server`など）との共有マシンにTiDB Lightningをデプロイし、論理CPUの数の`region-concurrency` ％を構成することで、TiDBLightningのCPU使用率を制限できます。
 
 **メモリとCPU** ：TiDB Lightningは大量のリソースを消費するため、64GBを超えるメモリと32コアCPUをTiDBLightningに割り当てることをお勧めします。最高のパフォーマンスを得るには、CPUコアとメモリ（GB）の比率が1：2以上であることを確認してください。
 
@@ -148,7 +148,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my
 
 インクリメンタルレプリケーションに必要な開始位置情報は、 `${data-path}`ディレクトリの`my_db1`および`my_db2`のサブディレクトリにある`metadata`のファイルにそれぞれあります。これらは、 Dumplingによって自動的に生成されるメタ情報ファイルです。インクリメンタルレプリケーションを実行するには、binlogの場所情報をこれらのファイルに記録する必要があります。
 
-## ステップ2.TiDBLightningを起動して、完全にエクスポートされたデータをインポートします {#step-2-start-tidb-lightning-to-import-full-exported-data}
+## 手順2.TiDBLightningを起動して、完全にエクスポートされたデータをインポートします {#step-2-start-tidb-lightning-to-import-full-exported-data}
 
 移行のためにTiDBLightningを開始する前に、チェックポイントの処理方法を理解し、必要に応じて適切な方法を選択することをお勧めします。
 
@@ -161,7 +161,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my
 回復不能なエラー（データの破損など）が原因でTiDB Lightningタスクがクラッシュした場合、チェックポイントからは取得されませんが、エラーが報告されてタスクが終了します。インポートされたデータの安全性を確保するには、他の手順に進む前に、 `tidb-lightning-ctl`コマンドを使用してこれらのエラーを解決する必要があります。オプションは次のとおりです。
 
 -   --checkpoint-error-destroy：このオプションを使用すると、失敗したターゲットテーブルの既存のデータをすべて最初に破棄することで、それらのテーブルへのデータのインポートを最初から再開できます。
--   --checkpoint-error-ignore：移行が失敗した場合、このオプションは、エラーが発生したことがないかのようにエラーステータスをクリアします。
+-   --checkpoint-error-ignore：移行が失敗した場合、このオプションは、エラーが発生しなかったかのようにエラーステータスをクリアします。
 -   --checkpoint-remove：このオプションは、エラーに関係なく、すべてのチェックポイントをクリアするだけです。
 
 詳細については、 [TiDBLightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。
@@ -400,7 +400,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 タスクの開始に失敗した場合は、最初に返された結果からのプロンプトメッセージに従って構成を変更してから、 `tiup dmctl`回に`start-task task.yaml`のサブコマンドを実行してタスクを再開します。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)および[TiDBデータ移行FAQ](/dm/dm-faq.md)を参照してください。
 
-### 移行状況を確認する {#check-the-migration-status}
+### 移行ステータスを確認する {#check-the-migration-status}
 
 `tiup dmctl`で`query-status`コマンドを実行することにより、DMクラスタで実行中の移行タスクがあるかどうかとそのステータスを確認できます。
 

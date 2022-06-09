@@ -5,7 +5,7 @@ summary: Learn the `TIKV_REGION_PEERS` information_schema table.
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
-`TIKV_REGION_PEERS`の表は、TiKVの単一のリージョンノードの詳細情報（学習者かリーダーかなど）を示しています。
+`TIKV_REGION_PEERS`の表は、学習者かリーダーかなど、TiKVの単一のリージョンノードの詳細情報を示しています。
 
 {{< copyable "" >}}
 

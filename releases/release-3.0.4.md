@@ -17,7 +17,7 @@ TiDB Ansibleバージョン：3.0.4
 -   改善
     -   分割パフォーマンスを向上させるために、TiKVでバッチ領域分割コマンドと空の分割コマンドをサポートする
     -   リバーススキャンのパフォーマンスを向上させるために、TiKVでRocksDBの二重リンクリストをサポートする
-    -   TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加して、クラスタの状態をより適切に診断します
+    -   TiDB Ansibleに2つのパフォーマンスツール`iosnoop`と`funcslower`を追加して、クラスタの状態をより適切に診断します
     -   冗長フィールドを削除して、TiDBの低速クエリログの出力を最適化します
 -   変更された動作
     -   デフォルト値の`txn-local-latches.enable`から`false`を更新して、TiDBでローカルトランザクションの競合をチェックするデフォルトの動作を無効にします
@@ -60,7 +60,7 @@ TiDB Ansibleバージョン：3.0.4
     -   `PREPARE`ステートメント[＃12351](https://github.com/pingcap/tidb/pull/12351)で`GROUPBY`解析ルールが正しくない問題を修正します。
     -   ポイントクエリで特権チェックが正しくない問題を修正します[＃12340](https://github.com/pingcap/tidb/pull/12340)
     -   `PREPARE`ステートメントの期間が`sql_type`だけ、監視レコード[＃12331](https://github.com/pingcap/tidb/pull/12331)に表示されない問題を修正します。
-    -   ポイントクエリでのテーブルのエイリアスの使用のサポート（たとえば、 `select * from t tmp where a = "aa"` ） [＃12282](https://github.com/pingcap/tidb/pull/12282)
+    -   ポイントクエリでのテーブルのエイリアスの使用をサポートします（たとえば、 `select * from t tmp where a = "aa"` ） [＃12282](https://github.com/pingcap/tidb/pull/12282)
     -   BITタイプの列に負の数を挿入するときに負の値を符号なしとして処理しないときに発生したエラーを修正します[＃12423](https://github.com/pingcap/tidb/pull/12423)
     -   時間の誤った丸めを修正します（たとえば、 `2019-09-11 11:17:47.999999666`は`2019-09-11 11:17:48`に丸める必要があります） [＃12258](https://github.com/pingcap/tidb/pull/12258)
     -   式ブロックリストの使用法を調整します（たとえば、 `<`は`It`に相当します） [＃11975](https://github.com/pingcap/tidb/pull/11975)
@@ -68,11 +68,11 @@ TiDB Ansibleバージョン：3.0.4
 -   サーバ
     -   最後のステートメントが[＃12180](https://github.com/pingcap/tidb/pull/12180)の場合に前のステートメントを出力するには、低速クエリログに`Prev_stmt`フィールドを追加し`COMMIT`
     -   冗長フィールドを削除して、低速のクエリログの出力を最適化する[＃12144](https://github.com/pingcap/tidb/pull/12144)
-    -   デフォルト値の`txn-local-latches.enable`から`false`を更新して、TiDB5でローカルトランザクションの競合をチェックするデフォルトの動作を無効にし[＃12095](https://github.com/pingcap/tidb/pull/12095) 。
+    -   デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB5でローカルトランザクションの競合をチェックするデフォルトの動作を無効にし[＃12095](https://github.com/pingcap/tidb/pull/12095) 。
     -   低速クエリログの使いやすさを向上させるために、TiDB低速クエリログの`Index_ids`フィールドを`Index_names`に置き換えます[＃12061](https://github.com/pingcap/tidb/pull/12061)
     -   TiDBにグローバルスコープの`tidb_txn_mode`のシステム変数を追加し、ペシミスティックロック[＃12049](https://github.com/pingcap/tidb/pull/12049)の使用を許可します
     -   低速クエリログに`Backoff`フィールドを追加して、 [＃12335](https://github.com/pingcap/tidb/pull/12335)のコミットフェーズでのバックオフ情報を記録します。
-    -   カーソル（たとえば、 `PREPARE stmt1FROM SELECT * FROM t WHERE a > ?; EXECUTE stmt1 USING @variable` ）を使用して`PREPARE` + `EXECUTE`の結果を取得するときに、遅いクエリログが正しくない問題を修正します[＃12392](https://github.com/pingcap/tidb/pull/12392)
+    -   カーソル（たとえば、 `PREPARE stmt1FROM SELECT * FROM t WHERE a > ?; EXECUTE stmt1 USING @variable` ）を使用して`PREPARE` + `EXECUTE`の結果を取得するときに、低速のクエリログが正しくない問題を修正します[＃12392](https://github.com/pingcap/tidb/pull/12392)
     -   サポート`tidb_enable_stmt_summary` 。この機能を有効にすると、 [＃12308](https://github.com/pingcap/tidb/pull/12308)はSQLステートメントをカウントし、システムテーブル35を使用して結果を照会でき`performance_schema.events_statements_summary_by_digest` 。
     -   tikv-clientの一部のログのレベルを調整します（たとえば、 `batchRecvLoop fails`のログレベルを`ERROR`から`INFO`に変更します） [＃12383](https://github.com/pingcap/tidb/pull/12383)
 -   DDL
@@ -82,7 +82,7 @@ TiDB Ansibleバージョン：3.0.4
     -   リージョンを複数のリージョンに分割することをサポートし、リージョンの分散中のタイムアウトの問題を修正します[＃12343](https://github.com/pingcap/tidb/pull/12343)
     -   2つのインデックスによって参照される`AUTO_INCREMENT`列を含むインデックスが[＃12344](https://github.com/pingcap/tidb/pull/12344)である場合に、 `drop index`ステートメントが失敗する問題を修正します。
 -   モニター
-    -   `connection_transient_failure_count`のモニタリングメトリックを追加して、35の[＃12093](https://github.com/pingcap/tidb/pull/12093)接続エラーの数をカウントし`tikvclient`
+    -   `connection_transient_failure_count`のモニタリングメトリックを追加して、35の[＃12093](https://github.com/pingcap/tidb/pull/12093)接続エラーの数をカウントし`tikvclient` 。
 
 ## TiKV {#tikv}
 
@@ -118,10 +118,10 @@ TiDB Ansibleバージョン：3.0.4
 
 ## TiDB Ansible {#tidb-ansible}
 
--   TiSparkをv2.2.0にアップグレードする[＃926](https://github.com/pingcap/tidb-ansible/pull/926)
+-   TiSparkをv2.2.0にアップグレードします[＃926](https://github.com/pingcap/tidb-ansible/pull/926)
 -   [＃933](https://github.com/pingcap/tidb-ansible/pull/933)構成項目`pessimistic_txn`のデフォルト値を35に更新し`true` 。
 -   システムレベルの監視メトリックを`node_exporter`に追加し[＃938](https://github.com/pingcap/tidb-ansible/pull/938)
--   TiDB Ansibleに2つのパフォーマンスツール`iosnoop`と`funcslower`を追加して、クラスタの状態をより適切に診断します[＃946](https://github.com/pingcap/tidb-ansible/pull/946)
+-   TiDB Ansibleに2つのパフォーマンスツール`iosnoop`と`funcslower`を追加して、クラスタの状態[＃946](https://github.com/pingcap/tidb-ansible/pull/946)をより適切に診断します。
 -   パスワードの有効期限が切れるなどの状況での長い待機時間に対処するために、rawモジュールをシェルモジュールに置き換えます[＃949](https://github.com/pingcap/tidb-ansible/pull/949)
 -   TiDB構成項目`txn_local_latches`のデフォルト値を`false`に更新します
 -   [＃962](https://github.com/pingcap/tidb-ansible/pull/962) [＃969](https://github.com/pingcap/tidb-ansible/pull/963)ボードのモニタリングメトリックとアラートルールを最適化する[＃963](https://github.com/pingcap/tidb-ansible/pull/963)

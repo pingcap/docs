@@ -2,9 +2,9 @@
 title: tiup cluster check
 ---
 
-# tiupクラスタチェック {#tiup-cluster-check}
+# tiup cluster check {#tiup-cluster-check}
 
-正式な実稼働環境の場合、環境を稼働させる前に、一連のチェックを実行して、クラスターが最高のパフォーマンスを発揮していることを確認する必要があります。手動チェック手順を簡素化するために、TiUP Clusterは、指定されたクラスタのターゲットマシンのハードウェアおよびソフトウェア環境が正常に動作するための要件を満たしているかどうかをチェックする`check`コマンドを提供します。
+正式な本番環境の場合、環境を稼働させる前に、一連のチェックを実行して、クラスターが最高のパフォーマンスを発揮していることを確認する必要があります。手動チェック手順を簡素化するために、TiUPクラスターは`check`コマンドを提供して、指定されたクラスタのターゲットマシンのハードウェアおよびソフトウェア環境が正常に動作するための要件を満たしているかどうかをチェックします。
 
 ## チェック項目一覧 {#list-of-check-items}
 
@@ -57,7 +57,7 @@ numactlがターゲットマシンにインストールされているかどう�
 <deploy-user> soft stack 10240
 ```
 
-`<deploy-user>`は、TiDBクラスタを展開して実行するユーザーであり、最後の列は、システムに必要な最小値です。
+`<deploy-user>`は、TiDBクラスタをデプロイして実行するユーザーであり、最後の列は、システムに必要な最小値です。
 
 ### SELinux {#selinux}
 
@@ -101,7 +101,7 @@ ext4パーティションのマウントオプションを確認してくださ�
 
 ### Fioディスクパフォーマンステスト {#fio-disk-performance-test}
 
-フレキシブルI/Oテスター（fio）を使用して、次の3つのテスト項目を含め、 `data_dir`が配置されているディスクのパフォーマンスをテストします。
+フレキシブルI/Oテスター（fio）を使用して、 `data_dir`が配置されているディスクのパフォーマンスをテストします。これには、次の3つのテスト項目が含まれます。
 
 -   fio_randread_write_latency
 -   fio_randread_write
@@ -109,7 +109,7 @@ ext4パーティションのマウントオプションを確認してくださ�
 
 > **ノート：**
 >
-> fioディスクパフォーマンステストはデフォルトでは実行されません。テストを実行するには、コマンドに`-enable-disk`オプションを追加する必要があります。
+> デフォルトでは、fioディスクのパフォーマンステストは実行されません。テストを実行するには、コマンドに`-enable-disk`オプションを追加する必要があります。
 
 ## 構文 {#syntax}
 
@@ -156,7 +156,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   チェックするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
+-   チェックするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup cluster display`](/tiup/tiup-component-cluster-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、デフォルトですべてのノードがチェックされます。
 
@@ -235,4 +235,4 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 -   `Result` ：チェック結果（合格、警告、または不合格）
 -   `Message` ：結果の説明
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

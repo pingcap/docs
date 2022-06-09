@@ -7,7 +7,7 @@ summary: Use the Dumpling tool to export data from TiDB.
 
 このドキュメントでは、データエクスポートツール[Dumpling](https://github.com/pingcap/dumpling)を紹介します。Dumplingは、TiDB / MySQLに保存されているデータをSQLまたはCSVデータファイルとしてエクスポートし、論理的な完全バックアップまたはエクスポートを行うために使用できます。
 
-SSTファイル（キーと値のペア）のバックアップ、またはレイテンシーの影響を受けない増分データのバックアップについては、 [BR](/br/backup-and-restore-tool.md)を参照してください。インクリメンタルデータのリアルタイムバックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
+SSTファイル（キーと値のペア）のバックアップ、または遅延の影響を受けない増分データのバックアップについては、 [BR](/br/backup-and-restore-tool.md)を参照してください。インクリメンタルデータのリアルタイムバックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
 
 > **ノート：**
 >
@@ -45,7 +45,7 @@ Dumplingもtidb-toolkitインストールパッケージに含まれており、
 -   選択する
 -   リロード
 -   ロックテーブル
--   複製クライアント
+-   レプリケーションクライアント
 -   処理する
 
 ### SQLファイルにエクスポート {#export-to-sql-files}
@@ -100,7 +100,7 @@ dumpling \
 
 上記のコマンドでは：
 
--   `--sql`オプションは、CSVファイルへのエクスポートにのみ使用できます。上記のコマンドは、エクスポートされるすべてのテーブルで`SELECT * FROM <table-name> WHERE id <100`ステートメントを実行します。テーブルに指定されたフィールドがない場合、エクスポートは失敗します。
+-   `--sql`オプションは、CSVファイルへのエクスポートにのみ使用できます。上記のコマンドは、エクスポートされるすべてのテーブルに対して`SELECT * FROM <table-name> WHERE id <100`ステートメントを実行します。テーブルに指定されたフィールドがない場合、エクスポートは失敗します。
 -   `--sql`オプションを使用すると、 Dumplingはエクスポートされたテーブルおよびスキーマ情報を取得できません。 `--output-filename-template`オプションを使用してCSVファイルのファイル名形式を指定できます。これにより、後で[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してデータファイルをインポートしやすくなります。たとえば、 `--output-filename-template='test.sbtest1.{{.Index}}'`は、エクスポートされたCSVファイルの名前が`test.sbtest1.000000000`または`test.sbtest1.000000001`であることを指定します。
 -   `--csv-separator`や`--csv-delimiter`などのオプションを使用して、CSVファイル形式を構成できます。詳しくは[Dumplingオプションリスト](#option-list-of-dumpling)をご覧ください。
 
@@ -172,7 +172,7 @@ dumpling \
 
 v4.0.8以降、 Dumplingはクラウドストレージへのデータのエクスポートをサポートしています。 AmazonのS3バックエンドストレージにデータをバックアップする必要がある場合は、 `-o`パラメーターでS3ストレージパスを指定する必要があります。
 
-指定したリージョンにS3バケットを作成する必要があります（ [Amazonのドキュメント-S3バケットを作成するにはどうすればよいですか](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照）。バケット内にフォルダも作成する必要がある場合は、 [Amazonドキュメント-フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
+指定したリージョンにS3バケットを作成する必要があります（ [Amazonドキュメント-S3バケットを作成するにはどうすればよいですか](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照）。バケット内にフォルダも作成する必要がある場合は、 [Amazonドキュメント-フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
 S3バックエンドストレージにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`を、環境変数としてDumplingノードに渡します。
 
@@ -220,7 +220,7 @@ Dumplingを使用してデータをバックアップする場合は、 `--s3.re
 
 #### <code>--filter</code>オプションを使用して、データをフィルタリングします {#use-the-code-filter-code-option-to-filter-data}
 
-Dumplingは、 `--filter`オプションでテーブルフィルターを指定することにより、特定のデータベースまたはテーブルをフィルター処理できます。テーブルフィルターの構文は、 `.gitignore`の構文と似ています。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。
+Dumplingは、 `--filter`オプションでテーブルフィルターを指定することにより、特定のデータベースまたはテーブルをフィルター処理できます。テーブルフィルターの構文は`.gitignore`の構文と似ています。詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。
 
 {{< copyable "" >}}
 
@@ -376,7 +376,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--csv-delimiter`            | CSVファイルの文字型変数の区切り文字                                                                                                                                                                                                                  | &#39;&quot;&#39;                                                                                                                                                       |             |
 | `--csv-separator`            | CSVファイルの各値のセパレータ。デフォルトの「、」を使用することはお勧めしません。 &#39;|+|&#39;の使用をお勧めしますまたは他の珍しい文字の組み合わせ                                                                                                                                                   | &#39;、&#39;                                                                                                                                                            | &#39;、&#39; |
 | `--csv-null-value`           | CSVファイルでのnull値の表現                                                                                                                                                                                                                    | &quot;\ N&quot;                                                                                                                                                        |             |
-| `--escape-backslash`         | エクスポートファイル内の特殊文字をエスケープするには、円記号（ `\` ）を使用します                                                                                                                                                                                          | 真実                                                                                                                                                                     |             |
+| `--escape-backslash`         | バックスラッシュ（ `\` ）を使用して、エクスポートファイル内の特殊文字をエスケープします                                                                                                                                                                                       | 真実                                                                                                                                                                     |             |
 | `--output-filename-template` | [golangテンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、および`{{.Table}}`の引数を`{{.Index}}`する<br/>3つの引数は、データファイルのデータベース名、テーブル名、およびチャンクIDを表します。                                             | &#39;{{。DB}}。{{。Table}}。{{。Index}}&#39;                                                                                                                                |             |
 | `--status-addr`              | Prometheusがメトリックとpprofデバッグをプルするためのアドレスを含む餃子のサービスアドレス                                                                                                                                                                                 | &quot;：8281&quot;                                                                                                                                                      |             |
 | `--tidb-mem-quota-query`     | 1行のDumplingコマンドでSQLステートメントをエクスポートする際のメモリ制限。単位はバイトです。 v4.0.10以降のバージョンでは、このパラメーターを設定しない場合、TiDBはデフォルトで`mem-quota-query`構成項目の値をメモリー制限値として使用します。 v4.0.10より前のバージョンの場合、パラメーター値のデフォルトは32GBです。                                                | 34359738368                                                                                                                                                            |             |

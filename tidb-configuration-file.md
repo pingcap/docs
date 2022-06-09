@@ -28,10 +28,10 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>mem-quota-query</code> {#code-mem-quota-query-code}
 
--   1つのSQLステートメントで使用可能な最大メモリ。
+-   1つのSQLステートメントで使用可能な最大メモリー。
 -   デフォルト値： `1073741824` （バイト単位）
 -   注：クラスタをv2.0.xまたはv3.0.xからv4.0.9以降のバージョンにアップグレードする場合、この構成のデフォルト値は`34359738368`です。
--   この値よりも多くのメモリを必要とする要求は、 `oom-action`で定義された動作に基づいて処理されます。
+-   この値よりも多くのメモリを必要とするリクエストは、 `oom-action`で定義された動作に基づいて処理されます。
 -   この値は、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の初期値です。
 
 ### <code>oom-use-tmp-storage</code> {#code-oom-use-tmp-storage-code}
@@ -201,7 +201,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 > **ノート：**
 >
-> 下位互換性を保つために、最初の`disable-timestamp`の構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に矛盾する場合（たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合）、TiDBは`disable-timestamp`の値を無視します。それ以降のバージョンでは、 `disable-timestamp`の構成が削除されます。
+> 下位互換性を保つために、最初の`disable-timestamp`の構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合（たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合）、TiDBは`disable-timestamp`の値を無視します。それ以降のバージョンでは、 `disable-timestamp`の構成が削除されます。
 >
 > `disable-timestamp`を破棄し、意味的に理解しやすい`enable-timestamp`を使用します。
 
@@ -382,20 +382,20 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 -   1つのTiDBトランザクションで許可されるステートメントの最大数。
 -   デフォルト値： `5000`
--   ステートメントの数が`stmt-count-limit`を超えた後、トランザクションがロールバックまたはコミットされない場合、TiDBは`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この構成は、再試行可能な楽観的トランザクションで**のみ**有効になります。ペシミスティックトランザクションを使用する場合、またはトランザクションの再試行を無効にした場合、トランザクション内のステートメントの数はこの構成によって制限されません。
+-   ステートメントの数が`stmt-count-limit`を超えた後、トランザクションがロールバックまたはコミットされない場合、TiDBは`statement count 5001 exceeds the transaction limitation, autocommit = false`エラーを返します。この構成は、再試行可能なオプティミスティックトランザクションで**のみ**有効になります。ペシミスティックトランザクションを使用する場合、またはトランザクションの再試行を無効にした場合、トランザクション内のステートメントの数はこの構成によって制限されません。
 
 ### <code>txn-entry-size-limit</code><span class="version-mark">新機能</span> {#code-txn-entry-size-limit-code-span-class-version-mark-new-in-v5-0-span}
 
 -   TiDBの単一行のデータのサイズ制限。
 -   デフォルト値： `6291456` （バイト単位）
--   トランザクション内の単一のキー値レコードのサイズ制限。サイズ制限を超えると、TiDBは`entry too large`エラーを返します。この構成アイテムの最大値は`125829120` （120 MB）を超えません。
+-   トランザクション内の単一のKey-Valueレコードのサイズ制限。サイズ制限を超えると、TiDBは`entry too large`エラーを返します。この構成アイテムの最大値は`125829120` （120 MB）を超えません。
 -   TiKVにも同様の制限があることに注意してください。単一の書き込み要求のデータサイズが[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) （デフォルトでは8 MB）を超える場合、TiKVはこの要求の処理を拒否します。テーブルに大きなサイズの行がある場合は、両方の構成を同時に変更する必要があります。
 
 ### <code>txn-total-size-limit</code> {#code-txn-total-size-limit-code}
 
 -   TiDBでの単一トランザクションのサイズ制限。
 -   デフォルト値： `104857600` （バイト単位）
--   単一のトランザクションでは、キー値レコードの合計サイズがこの値を超えることはできません。このパラメーターの最大値は`1099511627776` （1 TB）です。 binlogを使用してダウンストリームコンシューマーKafka（ `arbiter`クラスタなど）にサービスを提供した場合、このパラメーターの値は`1073741824` （1 GB）以下でなければならないことに注意してください。これは、Kafkaが処理できる単一のメッセージサイズの上限が1GBであるためです。それ以外の場合、この制限を超えるとエラーが返されます。
+-   1つのトランザクションでは、Key-Valueレコードの合計サイズがこの値を超えることはできません。このパラメーターの最大値は`1099511627776` （1 TB）です。 binlogを使用してダウンストリームコンシューマーKafka（ `arbiter`クラスタなど）にサービスを提供した場合、このパラメーターの値は`1073741824` （1 GB）以下でなければならないことに注意してください。これは、Kafkaが処理できる単一のメッセージサイズの上限が1GBであるためです。それ以外の場合、この制限を超えるとエラーが返されます。
 
 ### <code>tcp-keep-alive</code> {#code-tcp-keep-alive-code}
 
@@ -404,7 +404,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>tcp-no-delay</code> {#code-tcp-no-delay-code}
 
--   TCP層でTCP_NODELAYを有効にするかどうかを決定します。有効にした後、TiDBはTCP / IPプロトコルのNagleアルゴリズムを無効にし、小さなデータパケットを送信してネットワーク遅延を削減できるようにします。これは、データの送信量が少ない遅延の影響を受けやすいアプリケーションに適しています。
+-   TCP層でTCP_NODELAYを有効にするかどうかを決定します。有効にした後、TiDBはTCP / IPプロトコルのNagleアルゴリズムを無効にし、小さなデータパケットを送信してネットワーク遅延を削減できるようにします。これは、データの送信量が少ない、遅延の影響を受けやすいアプリケーションに適しています。
 -   デフォルト値： `true`
 
 ### <code>cross-join</code> {#code-cross-join-code}
@@ -419,7 +419,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
     -   `stats-lease`回の間隔で、TiDBは更新の統計をチェックし、更新が存在する場合はそれらをメモリに更新します。
     -   TiDBは、 `20 * stats-lease`回の間隔で、DMLによって生成された行の総数と変更された行の数をシステムテーブルに更新します。
     -   TiDBは、 `stats-lease`の間隔で、自動的に分析する必要のあるテーブルとインデックスをチェックします。
-    -   TiDBは、 `stats-lease`の間隔で、メモリにロードする必要のある列統計をチェックします。
+    -   `stats-lease`の間隔で、TiDBはメモリにロードする必要のある列統計をチェックします。
     -   `200 * stats-lease`の間隔で、TiDBはメモリにキャッシュされたフィードバックをシステムテーブルに書き込みます。
     -   `5 * stats-lease`の間隔で、TiDBはシステムテーブルのフィードバックを読み取り、メモリにキャッシュされている統計を更新します。
 -   `stats-lease`が0に設定されている場合、TiDBはシステムテーブルのフィードバックを定期的に読み取り、3秒ごとにメモリにキャッシュされている統計を更新します。ただし、TiDBは、次の統計関連のシステムテーブルを自動的に変更しなくなりました。
@@ -457,7 +457,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>distinct-agg-push-down</code> {#code-distinct-agg-push-down-code}
 
--   オプティマイザが、 `Distinct` （ `select count(distinct a) from t`など）の集計関数をコプロセッサにプッシュダウンする操作を実行するかどうかを決定します。
+-   オプティマイザーが、 `Distinct` （ `select count(distinct a) from t`など）の集計関数をコプロセッサーにプッシュダウンする操作を実行するかどうかを決定します。
 -   デフォルト： `false`
 -   この変数は、システム変数[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)の初期値です。
 
@@ -467,7 +467,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 -   デフォルト値： `false`
 -   この構成項目は、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の初期値を制御します。たとえば、この構成項目が`true`に設定されている場合、デフォルト値の`tidb_enforce_mpp`は`ON`です。
 
-## 準備済みプランキャッシュ {#prepared-plan-cache}
+## 準備された計画キャッシュ {#prepared-plan-cache}
 
 `PREPARE`ステートメントの[`plan cache`](/sql-prepared-plan-cache.md)構成。
 
@@ -516,9 +516,9 @@ opentracing.samplerに関連するConfiguration / コンフィグレーション
 
 -   オープントレースサンプラーのパラメーター。
     -   `const`タイプの場合、値は`0`または`1`になり、 `const`サンプラーを有効にするかどうかを示します。
-    -   `probabilistic`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`の浮動小数点数にすることができ`1` 。
+    -   `probabilistic`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`から`1`までの浮動小数点数にすることができます。
     -   `rateLimiting`タイプの場合、パラメーターは1秒あたりにサンプリングされるスパンの数を指定します。
-    -   `remote`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`の浮動小数点数にすることができ`1` 。
+    -   `remote`タイプの場合、パラメーターはサンプリング確率を指定します。これは、 `0`から`1`までの浮動小数点数にすることができます。
 -   デフォルト値： `1.0`
 
 ### <code>sampling-server-url</code> {#code-sampling-server-url-code}
@@ -533,7 +533,7 @@ opentracing.samplerに関連するConfiguration / コンフィグレーション
 
 ### <code>sampling-refresh-interval</code> {#code-sampling-refresh-interval-code}
 
--   jaeger-agentサンプリングポリシーをポーリングする頻度を制御します。
+-   jaeger-agentサンプリングポリシーのポーリングの頻度を制御します。
 -   デフォルト値： `0`
 
 ## opentracing.reporter {#opentracing-reporter}
@@ -542,12 +542,12 @@ opentracing.reporterに関連するConfiguration / コンフィグレーショ�
 
 ### <code>queue-size</code> {#code-queue-size-code}
 
--   レポーターが記録するキューのサイズは、メモリにまたがっています。
+-   レポーターがメモリ内で記録するキューサイズ。
 -   デフォルト値： `0`
 
 ### <code>buffer-flush-interval</code> {#code-buffer-flush-interval-code}
 
--   レポーターがメモリー内のスパンをストレージにフラッシュする間隔。
+-   レポーターがメモリ内のスパンをストレージにフラッシュする間隔。
 -   デフォルト値： `0`
 
 ### <code>log-spans</code> {#code-log-spans-code}
@@ -679,21 +679,21 @@ TiDBサービスのステータスに関連するConfiguration / コンフィグ
 
 ## stmt- <span class="version-mark">summaryv3.0.4の新機能</span> {#stmt-summary-span-class-version-mark-new-in-v3-0-4-span}
 
-[ステートメント要約テーブル](/statement-summary-tables.md)に関連する構成。
+[ステートメント要約表](/statement-summary-tables.md)に関連する構成。
 
 ### max-stmt-count {#max-stmt-count}
 
--   [ステートメント要約テーブル](/statement-summary-tables.md)に保存できるSQLカテゴリの最大数。
+-   [ステートメント要約表](/statement-summary-tables.md)に保存できるSQLカテゴリの最大数。
 -   デフォルト値： `3000`
 
 ### max-sql-length {#max-sql-length}
 
--   [ステートメント要約テーブル](/statement-summary-tables.md)の`DIGEST_TEXT`列と`QUERY_SAMPLE_TEXT`列の最長表示長。
+-   [ステートメント要約表](/statement-summary-tables.md)の`DIGEST_TEXT`列と`QUERY_SAMPLE_TEXT`列の最長表示長。
 -   デフォルト値： `4096`
 
 ## 悲観的-txn {#pessimistic-txn}
 
-悲観的なトランザクションの使用法については、 [TiDBペシミスティックトランザクションモード](/pessimistic-transaction.md)を参照してください。
+悲観的なトランザクションの使用法については、 [TiDB悲観的トランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ### max-retry-count {#max-retry-count}
 
@@ -718,7 +718,7 @@ v3.1.0で導入された`experimental`のセクションでは、TiDBの実験�
 
 ### <code>allow-expression-index</code> <span class="version-mark">indexv4.0.0の新機能</span> {#code-allow-expression-index-code-span-class-version-mark-new-in-v4-0-0-span}
 
--   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0以降、式の関数が安全であれば、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が存在する可能性があります。 `tidb_allow_function_for_expression_index`の変数を照会することにより、式の作成に直接使用しても安全な関数を取得できます。
+-   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0以降、式の関数が安全であれば、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が存在する可能性があります。 `tidb_allow_function_for_expression_index`の変数をクエリすることにより、式の作成に直接使用しても安全な関数を取得できます。
 -   デフォルト値： `false`
 
 ### <code>stats-load-concurrency</code><span class="version-mark">の新機能</span> {#code-stats-load-concurrency-code-span-class-version-mark-new-in-v5-4-0-span}

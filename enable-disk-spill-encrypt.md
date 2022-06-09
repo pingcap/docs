@@ -5,7 +5,7 @@ summary: Learn how to enable encryption for disk spill in TiDB.
 
 # ディスク流出時の暗号化機能を有効にする {#enable-encryption-for-disk-spill}
 
-`oom-use-tmp-storage`構成項目が`true`に設定されている場合、単一のSQLステートメントのメモリ使用量が`mem-quota-query`設定の制限を超えると、一部のオペレーターは実行中に中間結果を一時ファイルとしてディスクに保存し、クエリ後にファイルを削除できます。完了しました。
+`oom-use-tmp-storage`構成項目が`true`に設定されている場合、単一のSQLステートメントのメモリ使用量が`mem-quota-query`設定の制限を超えると、一部のオペレーターは実行中の中間結果を一時ファイルとしてディスクに保存し、クエリ後にファイルを削除できます。完了しました。
 
 ディスクスピルの暗号化を有効にして、攻撃者がこれらの一時ファイルを読み取ることでデータにアクセスするのを防ぐことができます。
 

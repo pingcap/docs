@@ -36,14 +36,14 @@ TiDB Ansibleバージョン：3.0.11
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
-    -   `Union`を使用するクエリは読み取り専用としてマークされていないため、楽観的なトランザクションを再試行するときのGoroutineリークの問題を修正します[＃15076](https://github.com/pingcap/tidb/pull/15076)
+    -   `Union`を使用するクエリは読み取り専用[＃15076](https://github.com/pingcap/tidb/pull/15076)とマークされていないため、楽観的なトランザクションを再試行するときのGoroutineリークの問題を修正します。
     -   `SET SESSION tidb_snapshot = 'xxx';`ステートメント[＃14391](https://github.com/pingcap/tidb/pull/14391)の実行時に`tidb_snapshot`パラメーターの値が正しく使用されないため、スナップショット時に`SHOW TABLE STATUS`がテーブルステータスを正しく出力できない問題を修正します。
     -   `Sort Merge Join`と`ORDER BY DESC`を同時に含むSQLステートメントによって引き起こされる誤った結果を修正します[＃14664](https://github.com/pingcap/tidb/pull/14664)
     -   サポートされていない式を使用してパーティションテーブルを作成するときのTiDBサーバーのパニックを修正します。このパニックを修正すると、エラー情報`This partition function is not allowed`が返されます。 [＃14769](https://github.com/pingcap/tidb/pull/14769)
     -   [＃14944](https://github.com/pingcap/tidb/pull/14944)を含むサブクエリで`select max() from subquery`ステートメントを実行したときに発生した誤った結果を修正し`Union`
     -   `DROP BINDING`を実行した後に`SHOW BINDINGS`ステートメントを実行するとエラーメッセージが返され、実行バインディング[＃14865](https://github.com/pingcap/tidb/pull/14865)がドロップされる問題を修正します。
     -   クエリのエイリアスの最大長がMySQLプロトコルで256文字であるために接続が切断される問題を修正しますが、このプロトコル[＃14940](https://github.com/pingcap/tidb/pull/14940)に従ってクエリ結果でTiDBが[エイリアスをカット](https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html)になりません
-    -   `DIV`で文字列タイプを使用するときに発生する可能性のある誤ったクエリ結果を修正します。たとえば、 `select 1 / '2007' div 1`ステートメント[＃14098](https://github.com/pingcap/tidb/pull/14098)を正しく実行できるようになりました。
+    -   `DIV`で文字列型を使用するときに発生する可能性のある誤ったクエリ結果を修正します。たとえば、 `select 1 / '2007' div 1`ステートメント[＃14098](https://github.com/pingcap/tidb/pull/14098)を正しく実行できるようになりました。
 
 -   TiKV
     -   不要なログを削除してログ出力を最適化する[＃6657](https://github.com/tikv/tikv/pull/6657)

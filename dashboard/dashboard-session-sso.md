@@ -130,7 +130,7 @@ TiDBダッシュボード用にSSOを構成したら、次の手順を実行し�
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-3.png)
 
-9.  組織内のどのタイプのユーザーにSSOサインインを許可するかを[**割り当て**]フィールドで構成し、[<strong>保存</strong>]をクリックして構成を保存します。
+9.  組織内でSSOサインインを許可するユーザーのタイプを[**割り当て**]フィールドで構成し、[<strong>保存</strong>]をクリックして構成を保存します。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-4.png)
 
@@ -154,7 +154,7 @@ TiDBダッシュボード用にSSOを構成したら、次の手順を実行し�
 
 Oktaと同様に、 [Auth0](https://auth0.com/)もOIDCSSOIDサービスを提供します。次の手順では、Auth0をTiDBダッシュボードSSOプロバイダーとして使用できるようにAuth0とTiDBダッシュボードを構成する方法について説明します。
 
-### ステップ1：Auth0を構成する {#step-1-configure-auth0}
+### 手順1：Auth0を構成する {#step-1-configure-auth0}
 
 1.  Auth0管理サイトにアクセスします。
 

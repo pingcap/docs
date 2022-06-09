@@ -72,7 +72,7 @@ block-cache-size = "60GB"
 block-cache-size = "20GB"
 ```
 
-### クラスタートポロジ {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 |     マシンIP    |       デプロイメントインスタンス      |
 | :----------: | :----------------------: |

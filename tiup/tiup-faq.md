@@ -16,11 +16,11 @@ TiUPは、 `TIUP_MIRRORS`の環境変数を介したミラーソースの指定�
 
 ## 自分のコンポーネントをTiUPミラーに入れるにはどうすればよいですか？ {#how-do-i-put-my-own-component-into-the-tiup-mirrors}
 
-TiUPは当面サードパーティのコンポーネントをサポートしていませんが、TiUPチームはTiUPコンポーネント開発仕様を開発し、tiup-publishコンポーネントを開発しています。すべての準備が整ったら、寄稿者は`tiup publish <comp> <version>`コマンドを使用して、独自のコンポーネントをTiUPの公式ミラーに公開できます。
+TiUPは当面サードパーティコンポーネントをサポートしていませんが、TiUPチームはTiUPコンポーネント開発仕様を開発し、tiup-publishコンポーネントを開発しています。すべての準備が整ったら、寄稿者は`tiup publish <comp> <version>`コマンドを使用して、独自のコンポーネントをTiUPの公式ミラーに公開できます。
 
 ## TiUPプレイグラウンドとTiUPクラスタコンポーネントの違いは何ですか？ {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
 
-TiUPプレイグラウンドコンポーネントは、主にLinuxまたはmacOSオペレーティングシステムでスタンドアロンの開発環境を構築するために使用されます。すばやく開始し、指定したバージョンのTiUPクラスタを簡単に実行するのに役立ちます。 TiUPクラスタコンポーネントは、主に本番環境クラスタ（通常は大規模クラスタ）の展開と保守に使用されます。
+TiUPプレイグラウンドコンポーネントは、主にLinuxまたはmacOSオペレーティングシステムでスタンドアロン開発環境を構築するために使用されます。すばやく開始し、指定したバージョンのTiUPクラスタを簡単に実行するのに役立ちます。 TiUPクラスタコンポーネントは、主に本番環境クラスタ（通常は大規模クラスタ）の展開と保守に使用されます。
 
 ## TiUPクラスタコンポーネントのトポロジファイルを作成するにはどうすればよいですか？ {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
@@ -42,11 +42,11 @@ TiUPクラスタコンポーネントを使用して、同じホストに複数�
 
 ## 異なるクラスター間でポートとディレクトリの競合が検出されていますか？ {#are-port-and-directory-conflicts-detected-among-different-clusters}
 
-複数の異なるクラスターが同じTiUP制御マシンによって展開されている場合、これらのクラスター間のポートとディレクトリの競合は、展開およびスケーリング中に検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
+複数の異なるクラスターが同じTiUP制御マシンによってデプロイされている場合、これらのクラスター間のポートとディレクトリーの競合は、デプロイメントおよびスケーリング中に検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
 
 ## クラスタの展開中に、TiUPは<code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code>ました {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
 
-TiUPのデフォルトの同時スレッド数がSSH接続のデフォルトの最大数を超えているため、エラーが発生する可能性があります。この問題を解決するには、SSH接続のデフォルト数を増やしてから、sshdサービスを再起動します。
+TiUPのデフォルトの同時スレッド数がデフォルトのSSH接続の最大数を超えているため、エラーが発生する可能性があります。この問題を解決するには、SSH接続のデフォルト数を増やしてから、sshdサービスを再起動します。
 
 {{< copyable "" >}}
 

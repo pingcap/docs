@@ -81,7 +81,7 @@ TiDBバージョン：5.2.2
 
     -   輻輳エラー[＃11082](https://github.com/tikv/tikv/issues/11082)が原因でCDCがスキャンの再試行を頻繁に追加する問題を修正します
     -   チャネルがいっぱいになるとラフト接続が切断される問題を修正します[＃11047](https://github.com/tikv/tikv/issues/11047)
-    -   Raftクライアントの実装でバッチメッセージが大きすぎる問題を修正します[＃9714](https://github.com/tikv/tikv/issues/9714)
+    -   Raftクライアントの実装でバッチメッセージが大きすぎるという問題を修正します[＃9714](https://github.com/tikv/tikv/issues/9714)
     -   一部のコルーチンが[＃10965](https://github.com/tikv/tikv/issues/10965)でリークする問題を修正し`resolved_ts`
     -   応答のサイズが[＃9012](https://github.com/tikv/tikv/issues/9012)を超えたときにコプロセッサーに発生するパニックの問題を修正します。
     -   スナップショットファイルをガベージコレクションできない場合に、スナップショットガベージコレクション（GC）がGCスナップショットファイルを見逃す問題を修正します[＃10813](https://github.com/tikv/tikv/issues/10813)
@@ -91,8 +91,8 @@ TiDBバージョン：5.2.2
 
     -   ピアの数が設定されたピアの数を超えているために、PDがデータを持ち保留状態のピアを誤って削除する問題を修正します[＃4045](https://github.com/tikv/pd/issues/4045)
     -   PDが時間内にピアを修正しないという問題を修正します[＃4077](https://github.com/tikv/pd/issues/4077)
-    -   スキャッターレンジスケジューラが空の領域をスケジュールできない問題を修正します[＃4118](https://github.com/tikv/pd/pull/4118)
-    -   キーマネージャーのCPUコストが高すぎるという問題を修正します[＃4071](https://github.com/tikv/pd/issues/4071)
+    -   散布範囲スケジューラが空の領域をスケジュールできない問題を修正します[＃4118](https://github.com/tikv/pd/pull/4118)
+    -   キーマネージャのCPUコストが高すぎるという問題を修正します[＃4071](https://github.com/tikv/pd/issues/4071)
     -   ホットリージョンスケジューラの構成を設定するときに発生する可能性のあるデータ競合の問題を修正します[＃4159](https://github.com/tikv/pd/issues/4159)
     -   スタックリージョンシンカー[＃3936](https://github.com/tikv/pd/issues/3936)によって引き起こされる遅いリーダー選出を修正
 

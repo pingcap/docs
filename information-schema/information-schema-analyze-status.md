@@ -57,4 +57,4 @@ SELECT * FROM `ANALYZE_STATUS`;
 -   `JOB_INFO` ： `ANALYZE`のタスクの情報。
 -   `PROCESSED_ROWS` ：処理された行の数。
 -   `START_TIME` ： `ANALYZE`のタスクの開始時刻。
--   `STATE` ： `ANALYZE`タスクの実行状況。その値は、 `pending` 、または`running`にすることが`failed` `finished` 。
+-   `STATE` ： `ANALYZE`タスクの実行状態。その値は、 `pending` 、または`running`にすることが`failed` `finished` 。

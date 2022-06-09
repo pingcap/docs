@@ -22,7 +22,7 @@ summary: Learn how to troubleshoot issues you might encounter when you use TiCDC
 
 ## TiCDCでタスクを作成すると、一部のテーブルを複製できないのはなぜですか？ {#why-can-t-some-tables-be-replicated-when-i-create-a-task-in-ticdc}
 
-`cdc cli changefeed create`を実行してレプリケーションタスクを作成すると、TiCDCはアップストリームテーブルが[複製の制限](/ticdc/ticdc-overview.md#restrictions)を満たしているかどうかを確認します。一部のテーブルが制限を満たしていない場合は、不適格なテーブルのリストとともに`some tables are not eligible to replicate`が返されます。 `Y`または`y`を選択してタスクの作成を続行でき、これらのテーブルのすべての更新はレプリケーション中に自動的に無視されます。 `Y`または`y`以外の入力を選択した場合、レプリケーションタスクは作成されません。
+`cdc cli changefeed create`を実行してレプリケーションタスクを作成すると、TiCDCはアップストリームテーブルが[レプリケーションの制限](/ticdc/ticdc-overview.md#restrictions)を満たしているかどうかを確認します。一部のテーブルが制限を満たしていない場合は、不適格なテーブルのリストとともに`some tables are not eligible to replicate`が返されます。 `Y`または`y`を選択してタスクの作成を続行でき、これらのテーブルのすべての更新はレプリケーション中に自動的に無視されます。 `Y`または`y`以外の入力を選択した場合、レプリケーションタスクは作成されません。
 
 ## TiCDCレプリケーションタスクの状態を表示するにはどうすればよいですか？ {#how-do-i-view-the-state-of-ticdc-replication-tasks}
 
@@ -52,7 +52,7 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 -   `state` ：このレプリケーションタスクの状態：
     -   `normal` ：タスクは正常に実行されます。
     -   `stopped` ：タスクが手動で停止されたか、エラーが発生しました。
-    -   `removed` ：タスクが削除されます。
+    -   `removed` ：タスクは削除されます。
 
 > **ノート：**
 >
@@ -62,7 +62,7 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 
 ### TiCDCレプリケーションタスクが中断されているかどうかを確認するにはどうすればよいですか？ {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
 
--   Grafanaダッシュボードでレプリケーションタスクの`changefeed checkpoint`のモニタリングメトリックを確認します（右の`changefeed id`を選択します）。メトリック値が変更されない場合、または`checkpoint lag`メトリックが増加し続ける場合は、レプリケーションタスクが中断される可能性があります。
+-   Grafanaダッシュボードでレプリケーションタスクの`changefeed checkpoint`の監視メトリックを確認します（右の`changefeed id`を選択します）。メトリック値が変更されない場合、または`checkpoint lag`メトリックが増加し続ける場合は、レプリケーションタスクが中断される可能性があります。
 -   `exit error count`の監視メトリックを確認します。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しています。
 -   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。 `stopped`はタスクが停止したことを意味し、 `error`項目は詳細なエラーメッセージを提供します。エラーが発生した後、TiCDCサーバーログで`error on running processor`を検索して、トラブルシューティングのためのエラースタックを確認できます。
 -   極端な場合には、TiCDCサービスが再起動されます。トラブルシューティングのために、TiCDCサーバーログで`FATAL`レベルのログを検索できます。
@@ -80,7 +80,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 上記のコマンドの出力で、 `admin-job-type`はこのレプリケーションタスクの状態を示しています。
 
 -   `0` ：進行中です。これは、タスクが手動で停止されていないことを意味します。
--   `1` ：一時停止。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成と複製ステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
+-   `1` ：一時停止。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
 -   `2` ：再開しました。レプリケーションタスクは`checkpoint-ts`から再開します。
 -   `3` ：削除されました。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスは、後のクエリのためにのみ保持されます。
 
@@ -138,9 +138,9 @@ cdc cli changefeed update -c <changefeed-id> --sort-engine="unified" --sort-dir=
 
 ## TiCDC <code>gc-ttl</code>とは何ですか？ {#what-is-code-gc-ttl-code-in-ticdc}
 
-v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントの設定で外部サービスをサポートします。どのサービスでも、GCセーフポイントを登録および更新できます。 PDは、このGCセーフポイントより後のキー値データがGCによってクリーンアップされないようにします。
+v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントを設定する際に外部サービスをサポートします。どのサービスでも、GCセーフポイントを登録および更新できます。 PDは、このGCセーフポイントより後のKey-ValueデータがGCによってクリーンアップされないようにします。
 
-レプリケーションタスクが使用できないか中断されている場合、この機能により、TiCDCによって消費されるデータがGCによってクリーンアップされることなくTiKVに保持されます。
+レプリケーションタスクが利用できないか中断されている場合、この機能により、TiCDCによって消費されるデータがGCによってクリーンアップされることなくTiKVに保持されます。
 
 TiCDCサーバーを起動するときに、 `gc-ttl`を構成することにより、GCセーフポイントの存続時間（TTL）期間を指定できます。 `gc-ttl`もでき[TiUPを使用して変更する](/ticdc/manage-ticdc.md#modify-ticdc-configuration-using-tiup) 。デフォルト値は24時間です。 TiCDCでは、この値は次のことを意味します。
 
@@ -213,7 +213,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
     > CSTは、次の4つの異なるタイムゾーンの略語である可能性があります。
     >
     > -   中部標準時（米国）UT-6:00
-    > -   中央標準時間（オーストラリア）UT + 9：30
+    > -   中部標準時（オーストラリア）UT + 9：30
     > -   中国標準時UT+8：00
     > -   キューバ標準時UT-4:00
     >
@@ -223,7 +223,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 |                              |                              上流のタイムゾーン                             |                                  TiCDCタイムゾーン                                 |                            下流のタイムゾーン                           |
 | :--------------------------: | :----------------------------------------------------------------: | :--------------------------------------------------------------------------: | :------------------------------------------------------------: |
-| Configuration / コンフィグレーション方法 |              [タイムゾーンのサポート](/configure-time-zone.md)を参照             |                       TiCDCサーバーの起動時に`--tz`パラメーターを使用して構成                      |               `sink-uri`の`time-zone`パラメータを使用して構成               |
+| Configuration / コンフィグレーション方法 |              [タイムゾーンのサポート](/configure-time-zone.md)を参照             |                       TiCDCサーバーの起動時に`--tz`パラメーターを使用して構成                      |               `sink-uri`の`time-zone`パラメータを使用して設定               |
 |              説明              | アップストリームTiDBのタイムゾーン。タイムスタンプタイプのDML操作とタイムスタンプタイプの列に関連するDDL操作に影響します。 | TiCDCは、アップストリームTiDBのタイムゾーンがTiCDCタイムゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリームMySQLは、ダウンストリームタイムゾーン設定に従って、DMLおよびDDL操作のタイムスタンプを処理します。 |
 
 > **ノート：**

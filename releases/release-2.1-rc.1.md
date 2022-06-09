@@ -4,7 +4,7 @@ title: TiDB 2.1 RC1 Release Notes
 
 # TiDB2.1RC1リリースノート {#tidb-2-1-rc1-release-notes}
 
-2018年8月24日、TiDB 2.1 RC1がリリースされました！ TiDB 2.1ベータ版と比較して、このリリースでは、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
+2018年8月24日、TiDB 2.1 RC1がリリースされました！このリリースでは、TiDB 2.1ベータ版と比較して、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
@@ -23,7 +23,7 @@ title: TiDB 2.1 RC1 Release Notes
 -   SQL実行エンジン
     -   夏時間が正しく計算されない場合があるという問題を修正します[＃6823](https://github.com/pingcap/tidb/pull/6823)
     -   集計関数フレームワークをリファクタリングして、 `Stream`および`Hash`の集計演算子の実行効率を向上させます[＃6852](https://github.com/pingcap/tidb/pull/6852)
-    -   `Hash`集計演算子が正常に終了できない場合があるという問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
+    -   `Hash`集計演算子が正常に終了できない場合がある問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
     -   `BIT_OR`が非整数データを正しく[＃6994](https://github.com/pingcap/tidb/pull/6994)しない問題を修正し`BIT_AND` `BIT_XOR`
     -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスをほぼ10倍に向上させます[＃7027](https://github.com/pingcap/tidb/pull/7027)
     -   時間タイプデータのメモリ使用量を最適化し、時間タイプデータのメモリ使用量を50％削減します[＃7043](https://github.com/pingcap/tidb/pull/7043)
@@ -47,7 +47,7 @@ title: TiDB 2.1 RC1 Release Notes
 -   サーバ
     -   特権情報をロードする際のバグを修正する[＃6976](https://github.com/pingcap/tidb/pull/6976)
     -   特権チェック[＃6954](https://github.com/pingcap/tidb/pull/6954)で`Kill`コマンドが厳しすぎる問題を修正します
-    -   一部のバイナリ数値タイプを削除する問題を修正します[＃6922](https://github.com/pingcap/tidb/pull/6922)
+    -   一部の2進数タイプを削除する問題を修正[＃6922](https://github.com/pingcap/tidb/pull/6922)
     -   出力ログを短くする[＃7029](https://github.com/pingcap/tidb/pull/7029)
     -   `mismatchClusterID`の問題を処理する[＃7053](https://github.com/pingcap/tidb/pull/7053)
     -   `advertise-address`の構成アイテム[＃7078](https://github.com/pingcap/tidb/pull/7078)を追加します
@@ -56,7 +56,7 @@ title: TiDB 2.1 RC1 Release Notes
     -   データデコードパフォーマンスを最適化する[＃7149](https://github.com/pingcap/tidb/pull/7149)
     -   35に`PROCESSLIST` [＃7236](https://github.com/pingcap/tidb/pull/7236)テーブルを追加し`INFORMMATION_SCHEMA`
     -   特権の検証で複数のルールがヒットした場合の順序の問題を修正します[＃7211](https://github.com/pingcap/tidb/pull/7211)
-    -   エンコーディング関連のシステム変数のいくつかのデフォルト値をUTF-81に変更し[＃7198](https://github.com/pingcap/tidb/pull/7198)
+    -   エンコーディング関連のシステム変数のデフォルト値をUTF [＃7198](https://github.com/pingcap/tidb/pull/7198) 81に変更します。
     -   遅いクエリログに詳細情報を表示させる[＃7302](https://github.com/pingcap/tidb/pull/7302)
     -   PDへのtidb-server関連情報の登録と[＃7082](https://github.com/pingcap/tidb/pull/7082)によるこの情報の取得をサポートします。
 -   互換性

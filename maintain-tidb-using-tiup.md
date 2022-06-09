@@ -8,7 +8,7 @@ summary: Learn the common operations to operate and maintain a TiDB cluster usin
 このドキュメントでは、TiUPを使用してTiDBクラスタを操作および保守する場合の次の一般的な操作について説明します。
 
 -   クラスタリストを表示する
--   クラスタを起動します
+-   クラスタを開始します
 -   クラスタステータスを表示する
 -   構成を変更する
 -   クラスタを停止します
@@ -26,7 +26,7 @@ TiUPクラスタコンポーネントを使用して、複数のTiDBクラスタ
 tiup cluster list
 ```
 
-## クラスタを起動します {#start-the-cluster}
+## クラスタを開始します {#start-the-cluster}
 
 TiDBクラスタのコンポーネントは、次の順序で開始されます。
 

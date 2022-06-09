@@ -77,7 +77,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### ssl-cert {#ssl-cert}
 
--   Privacy Enhanced Mail（PEM）形式でエンコードされたX509証明書ファイルのパスを指定します。たとえば、 `/path/to/pump.pem` 。
+-   プライバシー強化メール（PEM）形式でエンコードされたX509証明書ファイルのパスを指定します。たとえば、 `/path/to/pump.pem` 。
 -   デフォルト値： &quot;&quot;
 
 #### ssl-key {#ssl-key}
@@ -172,7 +172,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ### initial-commit-ts {#initial-commit-ts}
 
--   トランザクションのどのコミットタイムスタンプからレプリケーションプロセスを開始するかを指定します。この構成は、初めてレプリケーションプロセスにあるDrainerノードにのみ適用できます。チェックポイントがダウンストリームにすでに存在する場合、レプリケーションはチェックポイントに記録された時間に従って実行されます。
+-   トランザクションのどのコミットタイムスタンプからレプリケーションプロセスを開始するかを指定します。この構成は、初めてレプリケーションプロセスにあるDrainerノードにのみ適用されます。チェックポイントがダウンストリームにすでに存在する場合、レプリケーションはチェックポイントに記録された時間に従って実行されます。
 -   commit ts（コミットタイムスタンプ）は、TiDBでの[取引](/transaction-overview.md#transactions)のコミットの特定の時点です。これは、現在のトランザクションの一意のIDとして、グローバルに一意であり、PDから増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`の構成を取得できます。
     -   BRを使用する場合、BR（backupmeta）によってバックアップされたメタデータに記録されたバックアップTSから`initial-commit-ts`を取得できます。
     -   Dumplingを使用する場合、Dumpling（メタデータ）によってバックアップされたメタデータに記録されたPosから`initial-commit-ts`を取得できます。

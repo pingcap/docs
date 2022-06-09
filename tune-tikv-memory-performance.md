@@ -7,7 +7,7 @@ summary: Learn how to tune the TiKV parameters for optimal performance.
 
 このドキュメントでは、最適なパフォーマンスを得るためにTiKVパラメータを調整する方法について説明します。
 
-TiKVは、TiKVアーキテクチャの最下位レベルの永続ストレージにRocksDBを使用します。したがって、パフォーマンスパラメータの多くはRocksDBに関連しています。 TiKVは2つのRocksDBインスタンスを使用します。デフォルトのRocksDBインスタンスはKVデータを格納し、Raft RocksDBインスタンス（RaftDB）はRaftログを格納します。
+TiKVは、TiKVアーキテクチャの最下位レベルで永続ストレージにRocksDBを使用します。したがって、パフォーマンスパラメータの多くはRocksDBに関連しています。 TiKVは2つのRocksDBインスタンスを使用します。デフォルトのRocksDBインスタンスはKVデータを格納し、Raft RocksDBインスタンス（RaftDB）はRaftログを格納します。
 
 TiKVはRocksDBから`Column Families` （CF）を実装します。
 
@@ -15,7 +15,7 @@ TiKVはRocksDBから`Column Families` （CF）を実装します。
 
     -   `default`は実際のデータを保存します。対応するパラメータは`[rocksdb.defaultcf]`にあります。
     -   `write` CFは、バージョン情報をマルチバージョン同時実行制御（MVCC）およびインデックス関連データに格納します。対応するパラメータは`[rocksdb.writecf]`にあります。
-    -   `lock`はロック情報を格納します。システムはデフォルトのパラメータを使用します。
+    -   `lock` CFは、ロック情報を格納します。システムはデフォルトのパラメータを使用します。
 
 -   Raft RocksDB（RaftDB）インスタンスは、Raftログを保存します。
 

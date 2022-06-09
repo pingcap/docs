@@ -2,7 +2,7 @@
 title: tiup cluster display
 ---
 
-# tiupクラスタ表示 {#tiup-cluster-display}
+# tiup cluster display {#tiup-cluster-display}
 
 クラスタの各コンポーネントの動作ステータスを確認したい場合は、各マシンに1つずつログインするのは明らかに非効率的です。したがって、tiup-clusterは、このタスクを効率的に完了するための`tiup cluster display`のコマンドを提供します。
 
@@ -64,4 +64,4 @@ tiup cluster display <cluster-name> [flags]
     -   データディレクトリ：サービスのデータディレクトリ。 `-`はデータディレクトリがないことを意味します。
     -   デプロイ Dir：サービスのデプロイメントディレクトリ
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

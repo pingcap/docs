@@ -201,7 +201,7 @@ export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-BRを使用してバックアップする場合は、パラメーター`--s3.region`と`--send-credentials-to-tikv`を明示的に指定してください。 `--s3.region`はS3が配置されている領域を示し、 `--send-credentials-to-tikv`はS3にアクセスする特権をTiKVノードに渡すことを意味します。
+BRを使用してバックアップする場合は、パラメーター`--s3.region`と`--send-credentials-to-tikv`を明示的に指定してください。 `--s3.region`はS3が配置されているリージョンを示し、 `--send-credentials-to-tikv`はS3にアクセスする特権をTiKVノードに渡すことを意味します。
 
 {{< copyable "" >}}
 
@@ -308,7 +308,7 @@ br backup raw --pd $PD_ADDR \
 >
 > ローカルストレージを使用する場合は、すべてのバックアップSSTファイルを`--storage`で指定されたパスのすべてのTiKVノードにコピーする**必要**があります。
 >
-> 各TiKVノードが最終的にすべてのSSTファイルの一部を読み取るだけでよい場合でも、次の理由により、すべてのノードが完全なアーカイブに完全にアクセスできる必要があります。
+> 各TiKVノードが最終的にすべてのSSTファイルの一部を読み取るだけでよい場合でも、次の理由により、すべてのTiKVノードが完全なアーカイブへのフルアクセスを必要とします。
 >
 > -   データは複数のピアに複製されます。 SSTを取り込む場合、これらのファイルは*すべての*ピアに存在する必要があります。これは、単一ノードからの読み取りで十分なバックアップとは異なります。
 > -   復元中に各ピアが分散する場所はランダムです。どのノードがどのファイルを読み取るかは事前にわかりません。
@@ -422,7 +422,7 @@ br restore full \
 
 > **ノート：**
 >
-> 1回の復元を完了するには、通常、TiKVとBRに`s3:ListBucket`と`s3:GetObject`の最小特権が必要です。
+> 1つの復元を完了するには、通常、TiKVとBRに`s3:ListBucket`と`s3:GetObject`の最小特権が必要です。
 
 S3バックエンドにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`をBRノードに渡します。ここでは、 `SecretKey`と`AccessKey`が環境変数として渡されます。次に、BRを介して特権をTiKVノードに渡します。
 
@@ -433,7 +433,7 @@ export AWS_ACCESS_KEY_ID=${AccessKey}
 export AWS_SECRET_ACCESS_KEY=${SecretKey}
 ```
 
-BRを使用してデータを復元する場合は、パラメータ`--s3.region`と`--send-credentials-to-tikv`を明示的に指定してください。 `--s3.region`はS3が配置されている領域を示し、 `--send-credentials-to-tikv`はS3にアクセスする特権をTiKVノードに渡すことを意味します。
+BRを使用してデータを復元する場合は、パラメータ`--s3.region`と`--send-credentials-to-tikv`を明示的に指定してください。 `--s3.region`はS3が配置されているリージョンを示し、 `--send-credentials-to-tikv`はS3にアクセスする特権をTiKVノードに渡すことを意味します。
 
 `--storage`パラメーターの`Bucket`と`Folder`は、S3バケットと、復元するデータが配置されているフォルダーを表します。
 

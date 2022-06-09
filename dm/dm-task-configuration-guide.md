@@ -13,7 +13,7 @@ summary: Learn how to configure a data migration task in Data Migration (DM).
 
 -   データソースを表示するには、 [データソースの構成を確認してください](/dm/dm-manage-source.md#check-data-source-configurations)を参照してください。
 -   データソースを作成するには、 [データソースを作成する](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照できます。
--   データソース構成ファイルを生成するには、 [ソース設定ファイルの紹介](/dm/dm-source-configuration-file.md)を参照できます。
+-   データソース構成ファイルを生成するには、 [ソース構成ファイルの紹介](/dm/dm-source-configuration-file.md)を参照できます。
 
 次の`mysql-instances`の例は、データ移行タスクのために移行する必要があるデータソースを構成する方法を示しています。
 

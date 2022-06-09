@@ -3,7 +3,7 @@ title: PD Recover User Guide
 summary: Use PD Recover to recover a PD cluster which cannot start or provide services normally.
 ---
 
-# PDリカバリユーザーガイド {#pd-recover-user-guide}
+# PDRecoverユーザーガイド {#pd-recover-user-guide}
 
 PD Recoverは、PDのディザスタリカバリツールであり、サービスを正常に開始または提供できないPDクラスタをリカバリするために使用されます。
 
@@ -66,7 +66,7 @@ cat {{/path/to}}/tidb.log | grep "init cluster id"
 ...
 ```
 
-#### TiKVログからクラスタIDを取得します {#get-cluster-id-from-tikv-log}
+#### TiKVログからクラスタIDを取得する {#get-cluster-id-from-tikv-log}
 
 TiKVログからクラスタIDを取得するには、次のコマンドを実行します。
 
@@ -132,4 +132,4 @@ PDクラスタが作成されると、新しいクラスタIDが生成されま�
 
 ### エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code> <code>pd-recover</code>実行時に接続が拒否されました {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
 
-`pd-recover`を実行する場合はPDサービスが必要です。 PD Recoverを使用する前に、PDクラスタをデプロイして開始します。
+`pd-recover`を実行する場合はPDサービスが必要です。 PDリカバリを使用する前に、PDクラスタをデプロイして開始します。

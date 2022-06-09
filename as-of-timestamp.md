@@ -5,7 +5,7 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 
 # <code>AS OF TIMESTAMP</code>句を使用して履歴データを読み取る {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
 
-このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[古い読み取り](/stale-read.md)機能を実行し、TiDBの履歴データを読み取る方法について説明します。これには、履歴データを保存するための具体的な使用例と戦略が含まれます。
+このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[古い読み取り](/stale-read.md)機能を実行し、TiDBの履歴データを読み取る方法について説明します。これには、特定の使用例と履歴データを保存するための戦略が含まれます。
 
 > **警告：**
 >
@@ -45,7 +45,7 @@ TiDBは、特別なクライアントやドライバーを必要とせずに、 
 >
 > タイムスタンプの指定に加えて、 `AS OF TIMESTAMP`句の最も一般的な使用法は、数秒前のデータを読み取ることです。このアプローチを使用する場合は、5秒より古い履歴データを読み取ることをお勧めします。
 >
-> Stale Readを使用する場合は、TiDBノードとPDノードにNTPサービスを展開する必要があります。これにより、TiDBによって使用される指定されたタイムスタンプが最新のTSO割り当ての進行状況（数秒先のタイムスタンプなど）よりも進んだり、GCセーフポイントのタイムスタンプよりも遅れたりする状況を回避できます。指定されたタイムスタンプがサービススコープを超えると、TiDBはエラーを返します。
+> Stale Readを使用する場合は、TiDBノードとPDノードにNTPサービスを展開する必要があります。これにより、TiDBによって使用される指定されたタイムスタンプが最新のTSO割り当ての進行状況（数秒先のタイムスタンプなど）よりも進んだり、GCセーフポイントのタイムスタンプよりも遅くなったりする状況を回避できます。指定されたタイムスタンプがサービススコープを超えると、TiDBはエラーを返します。
 
 ## 使用例 {#usage-examples}
 
@@ -130,7 +130,7 @@ select * from t;
 3 rows in set (0.00 sec)
 ```
 
-### <code>SELECT</code>ステートメントを使用して履歴データを読み取ります {#read-historical-data-using-the-code-select-code-statement}
+### <code>SELECT</code>ステートメントを使用して履歴データを読み取る {#read-historical-data-using-the-code-select-code-statement}
 
 [`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用して、過去のある時点のデータを読み取ることができます。
 

@@ -13,11 +13,11 @@ summary: Learn how to import or migrate data from Amazon Simple Storage Service 
 
 ## AmazonS3からTiDB Cloudにインポートまたは移行します {#import-or-migrate-from-amazon-s3-to-tidb-cloud}
 
-組織がAWSでサービスとしてTiDBCloudを使用している場合は、データをTiDBCloudにインポートまたは移行するためのステージングエリアとしてAmazonS3を使用できます。
+組織がAWSでサービスとしてTiDB Cloudを使用している場合は、データをTiDB Cloudにインポートまたは移行するためのステージングエリアとしてAmazonS3を使用できます。
 
 ### 前提条件 {#prerequisites}
 
-AmazonS3からTiDBCloudにデータを移行する前に、次のことを確認してください。
+AmazonS3からTiDB Cloudにデータを移行する前に、次のことを確認してください。
 
 -   企業所有のAWSアカウントへの管理者アクセス権があります。
 -   管理者はTiDB Cloud管理ポータルにアクセスできます。
@@ -35,17 +35,17 @@ AmazonS3からTiDBCloudにデータを移行する前に、次のことを確認
 > **ノート：**
 >
 > -   ソースデータをTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、Dumpling、 Auroraバックアップスナップショットが含まれます。ソースファイルがCSV形式の場合は、 [TiDBでサポートされている命名規則](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
-> -   可能で適用可能な場合は、大きなソースファイルを最大サイズ256 MBの小さなファイルに分割することをお勧めします。これにより、TiDB Cloudがスレッド間でファイルを並列に読み取ることができ、インポートパフォーマンスが向上する可能性があります。
+> -   可能で適用可能な場合は、大きなソースファイルを最大サイズ256 MBの小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudがスレッド間でファイルを並列に読み取ることができ、インポートパフォーマンスが向上する可能性があります。
 
 ### ステップ2.AmazonS3アクセスを設定します {#step-2-configure-amazon-s3-access}
 
-TiDB CloudがAmazonS3バケットのソースデータにアクセスできるようにするには、各TiDB CloudのAmazonS3をAWSプロジェクトとAmazonS3バケットペアのサービスとして設定する必要があります。プロジェクト内の1つのクラスタの設定が完了すると、そのプロジェクト内のすべてのデータベースクラスターがAmazonS3バケットにアクセスできるようになります。
+TiDBクラウドがAmazonS3バケットのソースデータにアクセスできるようにするには、各TiDB CloudのAmazonS3をAWSプロジェクトとAmazonS3バケットペアのサービスとして設定する必要があります。プロジェクト内の1つのクラスタの設定が完了すると、そのプロジェクト内のすべてのデータベースクラスターがAmazonS3バケットにアクセスできるようになります。
 
 1.  ターゲットTiDBクラスタのTiDB CloudアカウントIDと外部IDを取得します。
 
     1.  TiDB Cloud管理コンソールで、AWSにデプロイされているターゲットプロジェクトとターゲットクラスタを選択し、[**インポート**]をクリックします。
     2.  [ **AWSIAMポリシー設定の表示]を**クリックします。ターゲットTiDBクラスタの対応するTiDB CloudアカウントIDとTiDB Cloud外部IDが表示されます。
-    3.  次の手順で使用されるため、TiDB CloudアカウントIDと外部IDをメモしてください。
+    3.  次の手順で使用されるため、 TiDB CloudアカウントIDと外部IDをメモしてください。
 
 2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、次の読み取り専用アクセス許可を持つストレージバケットポリシーが存在するかどうかを確認します。
 
@@ -88,7 +88,7 @@ TiDB CloudがAmazonS3バケットのソースデータにアクセスできる�
     テンプレートでは、次の2つのフィールドを独自のリソース値に更新する必要があります。
 
     -   `"Resource": "<Your S3 bucket ARN>"` ： `<Your S3 bucket ARN>`はS3バケットのARNです。 S3バケットの[**プロパティ**]タブに移動し、[<strong>バケットの概要</strong>]領域でAmazonリソース名（ARN）の値を取得できます。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test"` 。
-    -   `"Resource": "arn:aws:s3:::<Your customized directory>"` ： `<Your customized directory>`は、データストレージ用にS3バケットルートレベルでカスタマイズできるディレクトリです。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"` 。 S3バケットのルートディレクトリにデータを保存する場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`を使用します。
+    -   `"Resource": "arn:aws:s3:::<Your customized directory>"` ： `<Your customized directory>`は、データストレージ用にS3バケットルートレベルでカスタマイズできるディレクトリです。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"` 。データをS3バケットルートディレクトリに保存する場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`を使用します。
 
 3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがターゲットTiDBクラスタのTiDB CloudアカウントIDに対応するロールが存在するかどうかを確認します。
 
@@ -121,13 +121,13 @@ TiDB CloudがAmazonS3バケットのソースデータにアクセスできる�
 
 5.  TiDB Cloud管理コンソールで、ターゲットTiDBクラスタのTiDB CloudアカウントIDと外部IDを取得する画面に移動し、前の手順のロール値を使用して[**ロールARN** ]フィールドを更新します。
 
-これで、TiDB CloudクラスタがAmazonS3バケットにアクセスできるようになりました。
+これで、 TiDB CloudクラスタがAmazonS3バケットにアクセスできるようになりました。
 
 > **ノート：**
 >
 > TiDB Cloudへのアクセスを削除するには、追加した信頼ポリシーを削除するだけです。
 
-### ステップ3.ソースデータファイルをAmazonS3にコピーし、データをTiDBCloudにインポートします {#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud}
+### ステップ3.ソースデータファイルをAmazonS3にコピーし、データをTiDB Cloudにインポートします {#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud}
 
 1.  ソースデータファイルをAmazonS3バケットにコピーするには、AWSWebコンソールまたはAWSCLIのいずれかを使用してデータをAmazonS3バケットにアップロードできます。
 
@@ -154,13 +154,13 @@ TiDB CloudがAmazonS3バケットのソースデータにアクセスできる�
 >
 > 出力料金とレイテンシーを最小限に抑えるには、AmazonS3バケットとTiDB Cloudデータベースクラスタを同じリージョンに配置します。
 
-## GCSからTiDBCloudへのインポートまたは移行 {#import-or-migrate-from-gcs-to-tidb-cloud}
+## GCSからTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-gcs-to-tidb-cloud}
 
-組織でTiDBCloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、データをTiDBCloudにインポートまたは移行するためのステージング領域としてGoogleCloud Storage（GCS）を使用できます。
+組織でTiDB CloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、データをTiDB Cloudにインポートまたは移行するためのステージング領域としてGoogleCloud Storage（GCS）を使用できます。
 
 ### 前提条件 {#prerequisites}
 
-GCSからTiDBCloudにデータを移行する前に、次のことを確認してください。
+GCSからTiDB Cloudにデータを移行する前に、次のことを確認してください。
 
 -   管理者は、会社所有のGCPアカウントにアクセスできます。
 -   管理者はTiDB Cloud管理ポータルにアクセスできます。
@@ -178,16 +178,16 @@ GCSからTiDBCloudにデータを移行する前に、次のことを確認し�
 > **ノート：**
 >
 > -   ソースデータをTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、Dumpling、 Auroraバックアップスナップショットが含まれます。ソースファイルがCSV形式の場合は、 [TiDBでサポートされている命名規則](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
-> -   可能で適用可能な場合は、大きなソースファイルを最大サイズ256 MBの小さなファイルに分割することをお勧めします。これにより、TiDB Cloudがスレッド間でファイルを並列に読み取ることができ、インポートのパフォーマンスが向上します。
+> -   可能で適用可能な場合は、大きなソースファイルを最大サイズ256 MBの小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudがスレッド間でファイルを並列に読み取ることができ、インポートのパフォーマンスが向上します。
 
-### 手順2.GCSアクセスを構成する {#step-2-configure-gcs-access}
+### ステップ2.GCSアクセスを構成する {#step-2-configure-gcs-access}
 
-TiDB CloudがGCSバケット内のソースデータにアクセスできるようにするには、各TiDB CloudのGCSアクセスをGCPプロジェクトとGCSバケットペアのサービスとして構成する必要があります。プロジェクト内の1つのクラスタの構成が完了すると、そのプロジェクト内のすべてのデータベースクラスターがGCSバケットにアクセスできるようになります。
+TiDBクラウドがGCSバケット内のソースデータにアクセスできるようにするには、各TiDB CloudのGCSアクセスをGCPプロジェクトとGCSバケットペアのサービスとして構成する必要があります。プロジェクト内の1つのクラスタの構成が完了すると、そのプロジェクト内のすべてのデータベースクラスターがGCSバケットにアクセスできるようになります。
 
 1.  ターゲットTiDBクラスタのGoogleCloudServiceアカウントIDを取得します。
 
     1.  TiDB Cloud管理コンソールで、Google Cloud Platformにデプロイされているターゲットプロジェクトとターゲットクラスタを選択し、[**インポート**]をクリックします。
-    2.  [ **Google CloudサービスアカウントIDを表示]**をクリックして、サービスアカウントIDをコピーします。
+    2.  [ **Google Cloud ServiceアカウントIDを表示]**をクリックして、サービスアカウントIDをコピーします。
 
 2.  Google Cloud Platform（GCP）管理コンソールで、[ **IAMと管理**]&gt; [<strong>ロール</strong>]に移動し、ストレージコンテナの次の読み取り専用権限を持つロールが存在するかどうかを確認します。
 
@@ -197,7 +197,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     はいの場合、次の手順でターゲットTiDBクラスタに一致する役割を使用できます。そうでない場合は、[ **IAMと管理**]&gt;[<strong>ロール</strong>]&gt;[ <strong>CREATE ROLE</strong> ]に移動して、ターゲットTiDBクラスタのロールを定義します。
 
-3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、TiDB CloudがアクセスするGCSバケットを選択して、 <strong>SHOWINFOPANEL</strong>をクリックします。
+3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、 TiDB CloudがアクセスするGCSバケットを選択して、 <strong>SHOWINFOPANEL</strong>をクリックします。
 
     パネルが表示されます。
 
@@ -211,7 +211,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
     2.  [**役割**]ドロップダウンリストで、ターゲットTiDBクラスタの役割を選択します。
     3.  [**保存]**をクリックします。
 
-これで、TiDB CloudクラスタがGCSバケットにアクセスできるようになりました。
+これで、 TiDB CloudクラスタがGCSバケットにアクセスできるようになりました。
 
 > **ノート：**
 >

@@ -41,7 +41,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -d 's3://my-bucket/sql-backup?region=us-west-2'
     ```
 
--   TiDB Lightningを使用して、S3からデータをインポートします（リクエストモードでパススタイルを使用）。
+-   TiDB Lightningを使用してS3からデータをインポートします（リクエストモードでパススタイルを使用）。
 
     {{< copyable "" >}}
 
@@ -87,8 +87,8 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
 >
 > アクセスキーとシークレットアクセスキーはプレーンテキストで記録されるため、ストレージURLに直接渡すことはお勧めしません。移行ツールは、次の順序で環境からこれらのキーを推測しようとします。
 
-1.  `$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`の環境変数
-2.  `$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`の環境変数
+1.  `$AWS_ACCESS_KEY_ID`および`$AWS_SECRET_ACCESS_KEY`の環境変数
+2.  `$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`の環境変数
 3.  `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにあるツールノードの共有クレデンシャルファイル
 4.  `~/.aws/credentials`のツールノードにある共有クレデンシャルファイル
 5.  AmazonEC2コンテナの現在のIAMの役割
@@ -127,7 +127,7 @@ TiKVとBRが同じストレージアカウントを使用することを保証�
 
 > **ノート：**
 >
-> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true`を設定する必要があります（デフォルトで設定されています）。そうしないと、バックアップタスクが失敗します。
+> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true` （デフォルトで設定）を設定する必要があります。そうしないと、バックアップタスクが失敗します。
 
 ## コマンドラインパラメータ {#command-line-parameters}
 
@@ -206,9 +206,9 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
 
 ## BRがTiKVにクレデンシャルを送信 {#br-sending-credentials-to-tikv}
 
-デフォルトでは、S3、GCS、またはAzblobの宛先を使用する場合、BRはセットアップの複雑さを軽減するためにすべてのTiKVノードに資格情報を送信します。
+デフォルトでは、S3、GCS、またはAzblob宛先を使用する場合、BRはセットアップの複雑さを軽減するためにすべてのTiKVノードにクレデンシャルを送信します。
 
-ただし、これは、すべてのノードが独自の役割と権限を持っているクラウド環境には適していません。このような場合、 `--send-credentials-to-tikv=false` （または短縮形`-c=0` ）で送信する資格情報を無効にする必要があります。
+ただし、これは、すべてのノードが独自の役割と権限を持っているクラウド環境には適していません。このような場合、 `--send-credentials-to-tikv=false` （または短縮形`-c=0` ）で送信するクレデンシャルを無効にする必要があります。
 
 {{< copyable "" >}}
 

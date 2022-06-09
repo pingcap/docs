@@ -47,7 +47,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
     > **ノート：**
     >
-    > `read index`は、TiKVリーダーに送信されるkvproto要求です。 TiKVリージョンの再試行、ビジーストア、またはネットワークの問題により、要求時間が`read index`に長くなる可能性があります。
+    > `read index`は、TiKVリーダーに送信されるkvprotoリクエストです。 TiKVリージョンの再試行、ビジーストア、またはネットワークの問題により、要求時間が`read index`に長くなる可能性があります。
 
 -   解決：
 

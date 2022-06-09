@@ -25,7 +25,7 @@ summary: Learn how to configure TiFlash.
 
     -   `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>`コマンドを実行して、指定した店舗のスケジューリングレートを設定します。 （ `store_id`を取得するには、 `pd-ctl -u <pd_ip:pd_port> store`コマンドを実行できます。
     -   指定したストアのリージョンのスケジュールレートを設定しない場合、このストアは`store-balance-rate`の設定を継承します。
-    -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行して、現在の設定値`store-balance-rate`を表示できます。
+    -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行すると、現在の設定値`store-balance-rate`を表示できます。
 
 -   [`replication.location-labels`](/pd-configuration-file.md#location-labels) ：TiKVインスタンスのトポロジー関係を示します。キーの順序は、さまざまなラベルの階層関係を示しています。 TiFlashが有効になっている場合は、 [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules)を使用してデフォルト値を設定する必要があります。詳細については、 [geo-distributed-deployment-topology](/geo-distributed-deployment-topology.md)を参照してください。
 
@@ -241,13 +241,13 @@ tmp_path = "/tidb-data/tiflash-9000/tmp"
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
-TiFlashはマルチディスク展開をサポートします。 TiFlashノードに複数のディスクがある場合は、次のセクションで説明するパラメーターを構成することにより、それらのディスクを最大限に活用できます。 TiUPに使用されるTiFlashの構成テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
+TiFlashはマルチディスク展開をサポートしています。 TiFlashノードに複数のディスクがある場合は、次のセクションで説明するパラメーターを構成することにより、それらのディスクを最大限に活用できます。 TiUPに使用されるTiFlashの構成テンプレートについては、 [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 #### v4.0.9より前のバージョンのTiDBを使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-version-earlier-than-v4-0-9}
 
-v4.0.9より前のTiDBクラスターの場合、TiFlashはストレージエンジンのメインデータを複数のディスクに保存することのみをサポートします。 `path` （TiUPでは`data_dir` ）と`path_realtime_mode`の構成を指定することにより、複数のディスクにTiFlashノードをセットアップできます。
+v4.0.9より前のTiDBクラスターの場合、TiFlashはストレージエンジンのメインデータを複数のディスクに保存することのみをサポートします。 `path` （TiUPでは`data_dir` ）および`path_realtime_mode`構成を指定することにより、複数のディスクにTiFlashノードをセットアップできます。
 
-`path`に複数のデータストレージディレクトリがある場合は、それぞれをコンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash` 。環境に複数のディスクがある場合は、各ディレクトリが1つのディスクに対応し、すべてのディスクのパフォーマンスを最大化するために、最高のパフォーマンスのディスクを前面に配置することをお勧めします。
+`path`に複数のデータストレージディレクトリがある場合は、それぞれをコンマで区切ります。たとえば、 `/nvme_ssd_a/data/tiflash,/sata_ssd_b/data/tiflash,/sata_ssd_c/data/tiflash` 。環境に複数のディスクがある場合は、各ディレクトリが1つのディスクに対応し、すべてのディスクのパフォーマンスを最大化するために、パフォーマンスが最高のディスクを前面に配置することをお勧めします。
 
 TiFlashノードに同様のI/Oメトリックを持つディスクが複数ある場合は、 `path_realtime_mode`パラメーターをデフォルト値のままにすることができます（または明示的に`false`に設定することもできます）。これは、データがすべてのストレージディレクトリに均等に分散されることを意味します。ただし、最新のデータは最初のディレクトリにのみ書き込まれるため、対応するディスクは他のディスクよりもビジーです。
 
@@ -257,7 +257,7 @@ TiFlashノードに異なるI/Oメトリックを持つ複数のディスクが�
 
 v4.0.9以降のバージョンのTiDBクラスターの場合、TiFlashは、ストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートします。 TiFlashノードを複数のディスクに展開する場合は、ノードを最大限に活用するために、 `[storage]`セクションでストレージディレクトリを指定することをお勧めします。 v4.0.9より前の構成（ `path`および`path_realtime_mode` ）は引き続きサポートされることに注意してください。
 
-TiFlashノードに同様のI/Oメトリックを持つ複数のディスクがある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにしておくことをお勧めします。 TiFlashは、I/O圧力とデータをすべてのディレクトリに分散します。
+TiFlashノードに同様のI/Oメトリックを持つディスクが複数ある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにしておくことをお勧めします。 TiFlashは、I/O圧力とデータをすべてのディレクトリに分散します。
 
 TiFlashノードに異なるI/Oメトリックを持つ複数のディスクがある場合は、 `storage.latest.dir`のリストでメトリックの高いディレクトリを指定し、 `storage.main.dir`のリストでメトリックの低いディレクトリを指定することをお勧めします。たとえば、1つのNVMe-SSDと2つのSATA-SSDの場合、 `storage.latest.dir`から`["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir`から`["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`に設定できます。 TiFlashは、I/O圧力とデータをこれら2つのディレクトリリストにそれぞれ分散します。この場合、 `storage.latest.dir`の容量は、合計計画容量の10％として計画する必要があることに注意してください。
 

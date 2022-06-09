@@ -2,7 +2,7 @@
 title: tiup mirror init
 ---
 
-# tiupミラー初期化 {#tiup-mirror-init}
+# tiup mirror init {#tiup-mirror-init}
 
 コマンド`tiup mirror init`は、空のミラーを初期化するために使用されます。初期化されたミラーには、コンポーネントまたはコンポーネントの所有者は含まれていません。このコマンドは、初期化されたミラーに対して次のファイルのみを生成します。
 

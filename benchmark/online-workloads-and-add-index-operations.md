@@ -35,7 +35,7 @@ Sysbenchバージョン：1.0.17
 
 TiDB、TiKV、およびPDはすべて、デフォルトの[TiDB Operator](https://github.com/pingcap/tidb-operator)構成を使用します。
 
-### クラスタートポロジ {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP                                  | デプロイメントインスタンス |
 | :------------------------------------- | :------------ |
@@ -215,10 +215,10 @@ sysbench $testname \
 
 `ADD INDEX`ステートメントのターゲット列に対して頻繁に書き込み操作（このテストには`UPDATE` 、および`INSERT`の操作が含まれ`DELETE` ）を実行すると、デフォルトの`ADD INDEX`構成がシステムのオンラインワークロードに大きな影響を与えます。これは主に、 `ADD INDEX`操作と列更新によって引き起こされる書き込みの競合が原因です。システムのパフォーマンスは次のとおりです。
 
--   `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`のパラメータの値が増加すると、 `TiKV_prewrite_latch_wait_duration`の値が大幅に増加し、書き込み速度が低下します。
+-   `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`のパラメーターの値が増加すると、 `TiKV_prewrite_latch_wait_duration`の値が大幅に増加し、書き込み速度が低下します。
 -   `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`の値が非常に大きい場合は、 `admin show ddl`コマンドを実行して、 `Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`などのDDLジョブの複数回の再試行を確認できます。この状況では、 `ADD INDEX`操作が完了するまでに非常に長い時間がかかります。
 
-## テスト計画2： <code>ADD INDEX</code>ステートメントのターゲット列への書き込み操作を実行しない（クエリのみ） {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-code-add-index-code-statement-query-only}
+## テストプラン2： <code>ADD INDEX</code>ステートメントのターゲット列への書き込み操作を実行しない（クエリのみ） {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-code-add-index-code-statement-query-only}
 
 1.  `oltp_read_only`のテストを開始します。
 2.  手順1と同時に実行します`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
@@ -280,7 +280,7 @@ sysbench $testname \
 
 `ADD INDEX`のステートメントのターゲット列に対してのみクエリ操作を実行する場合、オンラインワークロードに対する`ADD INDEX`の操作の影響は明らかではありません。
 
-## テスト計画3： <code>ADD INDEX</code>ステートメントのターゲット列は、オンラインワークロードとは無関係です {#test-plan-3-the-target-column-of-the-code-add-index-code-statement-is-irrelevant-to-online-workloads}
+## テスト計画3： <code>ADD INDEX</code>ステートメントのターゲット列はオンラインワークロードとは無関係です {#test-plan-3-the-target-column-of-the-code-add-index-code-statement-is-irrelevant-to-online-workloads}
 
 1.  `oltp_read_write`のテストを開始します。
 2.  手順1と同時に実行します`alter table test add index pad_idx(pad)`を使用してインデックスを追加します。

@@ -2,9 +2,9 @@
 title: tiup cluster restart
 ---
 
-# tiupクラスタの再起動 {#tiup-cluster-restart}
+# tiup cluster restart {#tiup-cluster-restart}
 
-コマンド`tiup cluster restart`は、指定されたクラスタのすべてまたは一部のサービスを再起動するために使用されます。
+コマンド`tiup cluster restart`は、指定されたクラスタのすべてまたは一部のサービスを再始動するために使用されます。
 
 > **ノート：**
 >
@@ -50,4 +50,4 @@ tiup cluster restart <cluster-name> [flags]
 
 サービス再開プロセスのログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
 
 # CLUSTER_SYSTEMINFO {#cluster-systeminfo}
 
-`CLUSTER_SYSTEMINFO`カーネルパラメータテーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報をクエリできます。現在、 `sysctl`システムの情報を照会することができます。
+`CLUSTER_SYSTEMINFO`カーネルパラメータテーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報を照会できます。現在、 `sysctl`システムの情報を照会することができます。
 
 {{< copyable "" >}}
 
@@ -30,7 +30,7 @@ DESC cluster_systeminfo;
 
 フィールドの説明：
 
--   `TYPE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `TYPE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)テーブルの`TYPE`フィールドに対応します。オプションの値は、 `tidb` 、および`pd` `tikv` 。
 -   `INSTANCE` ： [`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)クラスタ情報テーブルの`INSTANCE`フィールドに対応します。
 -   `SYSTEM_TYPE` ：システムタイプ。現在、 `system`のシステムタイプを照会できます。
 -   `SYSTEM_NAME` ：システム名。現在、 `sysctl`のシステム名を照会できます。

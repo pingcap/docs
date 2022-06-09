@@ -66,7 +66,7 @@ IDCマシン
     use-delete-range: false
     ```
 
-### クラスタートポロジ {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP       | デプロイメントインスタンス              |
 | ----------- | -------------------------- |

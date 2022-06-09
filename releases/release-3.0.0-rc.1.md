@@ -12,7 +12,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
 
 ## 概要 {#overview}
 
-2019年5月10日、TiDB3.0.0-rc.1がリリースされました。対応するTiDBAnsibleのバージョンは3.0.0-rc.1です。 TiDB 3.0.0-beta.1と比較して、このリリースでは、安定性、使いやすさ、機能、SQLオプティマイザー、統計、および実行エンジンが大幅に改善されています。
+2019年5月10日、TiDB3.0.0-rc.1がリリースされました。対応するTiDBAnsibleのバージョンは3.0.0-rc.1です。このリリースでは、TiDB 3.0.0-beta.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザー、統計、および実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
@@ -29,7 +29,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   SQLステートメントの実行プランバインディングを実行することで実行の安定性を確保するSQLプラン管理をサポートします。この機能は現在ベータ版であり、SELECTステートメントのバインドされた実行プランのみをサポートします。実稼働環境での使用はお勧めしません。 [＃10284](https://github.com/pingcap/tidb/pull/10284)
 
 -   実行エンジン
-    -   `IndexReader` `TableReader`および`IndexLookupReader` [＃10003](https://github.com/pingcap/tidb/pull/10003) ）でのメモリ使用量の追跡と制御をサポートします。
+    -   `IndexReader` `TableReader`および`IndexLookupReader` [＃10003](https://github.com/pingcap/tidb/pull/10003) ）でのメモリー使用量の追跡と制御をサポートします。
     -   コプロセッサー内のタスクの数、実行/待機時間の平均/最長/ 90％、実行時間または待機時間が最も長いTiKVのアドレスなど、コプロセッサータスクに関する詳細情報を低速ログに表示することをサポートします[＃10165](https://github.com/pingcap/tidb/pull/10165)
     -   プレースホルダーなしで準備されたDDLステートメントをサポートする[＃10144](https://github.com/pingcap/tidb/pull/10144)
 
@@ -98,7 +98,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   評価パニックを引き起こす可能性のある無効な列オフセットを回避するために、RPN式を作成するときに最大列を確認してください[＃4481](https://github.com/tikv/tikv/pull/4481)
     -   `BatchLimitExecutor`を[＃4469](https://github.com/tikv/tikv/pull/4469)
     -   ReadPoolで元の`futures-cpupool`を`tokio-threadpool`に置き換えて、コンテキストスイッチ[＃4486](https://github.com/tikv/tikv/pull/4486)を減らします
-    -   バッチ集計フレームワークの追加[＃4533](https://github.com/tikv/tikv/pull/4533)
+    -   バッチ集約フレームワークの追加[＃4533](https://github.com/tikv/tikv/pull/4533)
     -   `BatchSelectionExecutor`を[＃4562](https://github.com/tikv/tikv/pull/4562)
     -   [＃4570](https://github.com/tikv/tikv/pull/4570)攻撃関数を追加する`AVG`
     -   [＃4575](https://github.com/tikv/tikv/pull/4575)機能を追加`LogicalAnd`

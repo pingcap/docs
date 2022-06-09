@@ -31,7 +31,7 @@ TiDBバージョン：3.0.14
 -   TiDB
 
     -   `admin show ddl jobs`ステートメントのクエリ結果にスキーマ名列とテーブル名列を追加します[＃16428](https://github.com/pingcap/tidb/pull/16428)
-    -   `RECOVER TABLE`構文を拡張して、切り捨てられたテーブルの回復をサポートします[＃15458](https://github.com/pingcap/tidb/pull/15458)
+    -   切り捨てられたテーブルの回復をサポートするために`RECOVER TABLE`構文を拡張します[＃15458](https://github.com/pingcap/tidb/pull/15458)
     -   `SHOW GRANTS`ステートメント[＃16168](https://github.com/pingcap/tidb/pull/16168)の特権チェックをサポートします。
     -   `LOAD DATA`ステートメント[＃16736](https://github.com/pingcap/tidb/pull/16736)の特権チェックをサポートします。
     -   日時に関連する機能をパーティションキーとして使用する場合のパーティションプルーニングのパフォーマンスを向上させる[＃15618](https://github.com/pingcap/tidb/pull/15618)
@@ -53,7 +53,7 @@ TiDBバージョン：3.0.14
 
 -   TiKV
 
-    -   楽観的なトランザクションに多くの競合と`BatchRollback`条件が存在する場合に、パフォーマンスを向上させます[＃7605](https://github.com/tikv/tikv/pull/7605)
+    -   多くの競合があり、 `BatchRollback`の条件が楽観的なトランザクションに存在する場合のパフォーマンスを向上させます[＃7605](https://github.com/tikv/tikv/pull/7605)
     -   ペシミスティックトランザクション[＃7584](https://github.com/tikv/tikv/pull/7584)に多くの競合が存在する場合、ペシミスティックロック`waiter`が頻繁にウェイクアップされるために発生するパフォーマンスの低下の問題を修正します。
 
 -   ツール
@@ -69,7 +69,7 @@ TiDBバージョン：3.0.14
     -   SQLモードが35の場合、 `WEEKEND` [＃16170](https://github.com/pingcap/tidb/pull/16170)関数がMySQLと互換性がないという問題を修正し`ALLOW_INVALID_DATES` 。
     -   インデックス列に自動インクリメントの主キー[＃16008](https://github.com/pingcap/tidb/pull/16008)が含まれている場合に、 `DROP INDEX`ステートメントが実行されない問題を修正します。
     -   ステートメントの概要[＃15231](https://github.com/pingcap/tidb/pull/15231)の`TABLE_NAMES`列の値が正しくない問題を修正します。
-    -   プランキャッシュが有効になっている場合、一部の式で誤った結果が生じる問題を修正します[＃16184](https://github.com/pingcap/tidb/pull/16184)
+    -   プランキャッシュが有効になっている場合、一部の式の結果が正しくない問題を修正します[＃16184](https://github.com/pingcap/tidb/pull/16184)
     -   `not`関数の結果が正しくない[＃15916](https://github.com/pingcap/tidb/pull/15916)を修正し`istrue` `isfalse`
     -   冗長インデックスを持つテーブルでの`MergeJoin`操作によって引き起こされるパニックを修正します[＃15919](https://github.com/pingcap/tidb/pull/15919)
     -   述部が外部テーブル[＃16492](https://github.com/pingcap/tidb/pull/16492)のみを参照している場合に、リンクを誤って単純化することによって引き起こされる問題を修正します。
@@ -88,7 +88,7 @@ TiDBバージョン：3.0.14
     -   監査プラグインが有効になっているときにポートプローブによって引き起こされる可能性のあるパニックを修正します[＃15967](https://github.com/pingcap/tidb/pull/15967)
     -   `fast analyze`がインデックスのみで機能する場合に発生するパニックを修正します[＃15967](https://github.com/pingcap/tidb/pull/15967)
     -   場合によっては`SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST`ステートメントの実行で発生する可能性のあるパニックを修正します[＃16309](https://github.com/pingcap/tidb/pull/16309)
-    -   メモリを割り当てる前にパーティション数をチェックせずにハッシュパーティションテーブルを作成するときに、多数のパーティション（たとえば、 `9999999999999` ）を指定することによって発生するTiDBOOMの問題を修正します[＃16218](https://github.com/pingcap/tidb/pull/16218)
+    -   メモリを割り当てる前にパーティションの数を確認せずにハッシュパーティションテーブルを作成するときに、多数のパーティション（たとえば、 `9999999999999` ）を指定することによって発生するTiDBOOMの問題を修正します[＃16218](https://github.com/pingcap/tidb/pull/16218)
     -   [＃16726](https://github.com/pingcap/tidb/pull/16726)のパーティションテーブルの誤った情報の問題を修正し`information_schema.tidb_hot_table`
     -   パーティション選択アルゴリズムがハッシュパーティションテーブル[＃16070](https://github.com/pingcap/tidb/pull/16070)で有効にならない問題を修正します
     -   MVCCシリーズのHTTPAPIがパーティションテーブルをサポートしない問題を修正します[＃16191](https://github.com/pingcap/tidb/pull/16191)
@@ -108,5 +108,5 @@ TiDBバージョン：3.0.14
     -   生のキーと値のペアのスキャン結果が順序どおりになっていない可能性がある問題を修正します[＃7597](https://github.com/tikv/tikv/pull/7597)
     -   Raftメッセージのバッチが大きすぎる場合の再接続の問題を修正します[＃7542](https://github.com/tikv/tikv/pull/7542)
     -   空のリクエストによって引き起こされるgRPCスレッドのデッドロックの問題を修正します[＃7538](https://github.com/tikv/tikv/pull/7538)
-    -   マージプロセス中にラーナーを再起動する処理ロジックが正しくないという問題を修正します[＃7457](https://github.com/tikv/tikv/pull/7457)
+    -   マージプロセス中に学習者を再起動する処理ロジックが正しくないという問題を修正します[＃7457](https://github.com/tikv/tikv/pull/7457)
     -   ロックのクリーンアップで繰り返し要求すると、トランザクションの原子性が破壊される可能性があるという問題を修正します[＃7388](https://github.com/tikv/tikv/pull/7388)

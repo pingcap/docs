@@ -2,12 +2,12 @@
 title: tiup cluster destroy
 ---
 
-# tiupクラスタ破棄 {#tiup-cluster-destroy}
+# tiup cluster destroy {#tiup-cluster-destroy}
 
-アプリケーションがオフラインになった後、他のアプリケーションで使用するためにクラスタによって占有されているマシンを解放する場合は、クラスタ上のデータとデプロイされたバイナリファイルをクリーンアップする必要があります。クラスタを破棄するために、 `tiup cluster destroy`コマンドは次の操作を実行します。
+アプリケーションがオフラインになった後、他のアプリケーションで使用するためにクラスタによって占有されているマシンを解放する場合は、クラスタ上のデータとデプロイされたバイナリファイルをクリーンアップする必要があります。クラスタを破棄するには、 `tiup cluster destroy`コマンドで次の操作を実行します。
 
 -   クラスタを停止します。
--   サービスごとに、ログディレクトリ、展開ディレクトリ、およびデータディレクトリを削除します。
+-   サービスごとに、ログディレクトリ、デプロイメントディレクトリ、およびデータディレクトリを削除します。
 -   各サービスのデータディレクトリまたはデプロイメントディレクトリの親ディレクトリがtiup-clusterによって作成されている場合は、親ディレクトリも削除します。
 
 ## 構文 {#syntax}
@@ -48,4 +48,4 @@ tiup cluster destroy <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

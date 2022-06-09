@@ -30,7 +30,7 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 
 ロールの命名形式とルールについては、 [TiDBユーザーアカウント管理](/user-account-management.md)を参照してください。
 
-ロールは`mysql.user`テーブルに格納され、ロール名のホスト名部分（省略されている場合）のデフォルトは`'%'`です。作成しようとしている役割の名前は一意である必要があります。それ以外の場合は、エラーが報告されます。
+ロールは`mysql.user`テーブルに格納され、ロール名のホスト名部分（省略されている場合）のデフォルトは`'%'`です。作成しようとしているロールの名前は一意である必要があります。それ以外の場合は、エラーが報告されます。
 
 ロールを作成するには、 `CREATE ROLE`または`CREATE USER`の特権が必要です。
 
@@ -64,7 +64,7 @@ GRANT ALL ON app_db.* TO 'app_developer';
 
 ### ユーザーに役割を付与する {#grant-a-role-to-a-user}
 
-ユーザー`dev1`が`app_db`のすべての特権を持つ開発者の役割を持っていると仮定します。 2人のユーザー`read_user1`と`read_user2`は、 `app_db`に対する読み取り専用特権を持っています。また、ユーザー`rw_user1`は`app_db`に対する読み取りおよび書き込み特権を持っています。
+ユーザー`dev1`が`app_db`のすべての特権を持つ開発者の役割を持っていると仮定します。 2人のユーザー`read_user1`と`read_user2`は、 `app_db`に対する読み取り専用特権を持っています。そして、ユーザ`rw_user1`は、 `app_db`に対する読み取りおよび書き込み特権を有する。
 
 `CREATE USER`を使用してユーザーを作成します。
 
@@ -182,7 +182,7 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 
 ### デフォルトの役割を設定する {#set-the-default-role}
 
-役割がユーザーに付与された後、それはすぐには有効になりません。ユーザーがこのロールを有効にした後でのみ、ユーザーはロールが所有する特権を使用できます。
+ロールがユーザーに付与された後、すぐには有効になりません。ユーザーがこのロールを有効にした後でのみ、ユーザーはロールが所有する特権を使用できます。
 
 ユーザーのデフォルトの役割を設定できます。ユーザーがログインすると、デフォルトの役割が自動的に有効になります。
 
@@ -332,7 +332,7 @@ SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 REVOKE 'app_read' FROM 'read_user1'@'localhost', 'read_user2'@'localhost';
 ```
 
-次のステートメントを使用して、 `rw_user1@localhost`のユーザーに付与された役割`app_read`および`app_write`を取り消すことができます。
+次のステートメントを使用して、 `rw_user1@localhost`のユーザーに付与されたロール`app_read`および`app_write`を取り消すことができます。
 
 {{< copyable "" >}}
 
@@ -364,7 +364,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`テーブルの`app_read`と`app_write`のロール・レコードおよび許可テーブルの関連レコードが削除され、2つのロールに関連する許可が終了します。
+この操作により、 `mysql.user`表の`app_read`と`app_write`の役割レコードと許可表の関連レコードが削除され、2つの役割に関連する許可が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`の権限が必要です。
 

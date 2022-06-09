@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW COLLATION for the TiDB database.
 
 > **ノート：**
 >
-> [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)を有効にすると、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [キャラクターセットと照合](/character-set-and-collation.md)を参照してください。
+> [「新しい照合順序フレームワーク」](/character-set-and-collation.md#new-framework-for-collations)を有効にすると、 `SHOW COLLATION`の結果は異なります。新しい照合順序フレームワークの詳細については、 [文字セットと照合](/character-set-and-collation.md)を参照してください。
 
 ## あらすじ {#synopsis}
 
@@ -35,7 +35,7 @@ mysql> SHOW COLLATION;
 5 rows in set (0.02 sec)
 ```
 
-新しい照合順序フレームワークを有効にすると、 `utf8_general_ci`と`utf8mb4_general_ci`が追加でサポートされます。
+新しい照合順序フレームワークが有効になると、 `utf8_general_ci`と`utf8mb4_general_ci`が追加でサポートされます。
 
 ```sql
 mysql> SHOW COLLATION;
@@ -60,4 +60,4 @@ mysql> SHOW COLLATION;
 ## も参照してください {#see-also}
 
 -   [文字セットを表示](/sql-statements/sql-statement-show-character-set.md)
--   [キャラクターセットと照合](/character-set-and-collation.md)
+-   [文字セットと照合](/character-set-and-collation.md)

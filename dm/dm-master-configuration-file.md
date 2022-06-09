@@ -9,7 +9,7 @@ summary: Learn the configuration file of DM-master.
 
 ## Configuration / コンフィグレーションファイルテンプレート {#configuration-file-template}
 
-以下はDM-masterの設定ファイルテンプレートです。
+以下は、DM-masterの構成ファイルテンプレートです。
 
 ```toml
 name = "dm-master"
@@ -51,7 +51,7 @@ cert-allowed-cn = ["dm"]
 | `advertise-addr`      | DMマスターが外部にアドバタイズするアドレスを指定します。                                                                                        |
 | `peer-urls`           | DMマスターノードのピアURLを指定します。                                                                                               |
 | `advertise-peer-urls` | DMマスターが外部にアドバタイズするピアURLを指定します。デフォルトの値`advertise-peer-urls`は、 `peer-urls`の値と同じです。                                     |
-| `initial-cluster`     | `initial-cluster`の値は、初期クラスタのすべてのDMマスターノードの`advertise-peer-urls`の値の組み合わせです。                                           |
+| `initial-cluster`     | 値`initial-cluster`は、初期クラスタのすべてのDMマスターノードの`advertise-peer-urls`の値の組み合わせです。                                            |
 | `join`                | 値`join`は、クラスタに存在するDMマスターノードの`advertise-peer-urls`の値の組み合わせです。 DMマスターノードが新しく追加された場合は、 `initial-cluster`を`join`に置き換えます。 |
 | `ssl-ca`              | DMマスターが他のコンポーネントと接続するための信頼できるSSLCAのリストを含むファイルのパス。                                                                    |
 | `ssl-cert`            | DMマスターが他のコンポーネントと接続するためのPEM形式のX509証明書を含むファイルのパス。                                                                     |

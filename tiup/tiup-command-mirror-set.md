@@ -2,7 +2,7 @@
 title: tiup mirror set
 ---
 
-# tiupミラーセット {#tiup-mirror-set}
+# tiup mirror set {#tiup-mirror-set}
 
 `tiup mirror set`コマンドは、現在のミラーを切り替えるために使用され、ローカルファイルシステムとリモートネットワークアドレスの2つの形式のミラーをサポートします。
 

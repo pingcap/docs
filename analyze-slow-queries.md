@@ -35,7 +35,7 @@ summary: Learn how to locate and analyze slow queries.
 
 次の方法を使用して、期間情報を取得できます。
 
--   [遅いログ](/identify-slow-queries.md) 。遅いログを[TiDBダッシュボード](/dashboard/dashboard-overview.md)で表示することをお勧めします。
+-   [遅いログ](/identify-slow-queries.md) 。 [TiDBダッシュボード](/dashboard/dashboard-overview.md)で遅いログインを表示することをお勧めします。
 -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md) 。
 
 上記の方法は、次の点で異なります。
@@ -86,7 +86,7 @@ TiKVのデータ処理が遅い場合は、 `EXPLAIN ANALYZE`の結果で簡単�
 
 TiKVがボトルネックであることを確認したら、次のセクションで説明するように原因を特定できます。
 
-#### TiKVインスタンスはビジーです {#tikv-instance-is-busy}
+#### TiKVインスタンスがビジーです {#tikv-instance-is-busy}
 
 SQLステートメントの実行中に、TiDBは複数のTiKVインスタンスからデータをフェッチする場合があります。 1つのTiKVインスタンスの応答が遅い場合、全体的なSQL実行速度が遅くなります。
 
@@ -149,7 +149,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 5 rows in set (7.77 sec)
 ```
 
-ただし、このタイプのサブクエリの実行は、低速ログで識別できます。
+ただし、このタイプのサブクエリの実行は、遅いログで識別できます。
 
 ```
 # Query_time: 7.770634843
@@ -163,11 +163,11 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 TiDBの実行プランは正しいが、実行が遅いと仮定します。このタイプの問題を解決するには、SQLステートメントの`EXPLAIN ANALYZE`の結果に応じて、パラメーターを調整するか、ヒントを使用できます。
 
-実行プランが正しくない場合は、 [オプティマイザの問題を分析する](#analyze-optimizer-issues)セクションを参照してください。
+実行計画が正しくない場合は、 [オプティマイザの問題を分析する](#analyze-optimizer-issues)セクションを参照してください。
 
 #### 同時実行性が低い {#low-concurrency}
 
-同時実行性のあるオペレーターにボトルネックがある場合は、同時実行性を調整して実行を高速化します。例えば：
+同時実行性のある演算子にボトルネックがある場合は、同時実行性を調整して実行を高速化します。例えば：
 
 ```sql
 mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
@@ -244,7 +244,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 4.  `select b from t where c=3` ：プレフィックス条件がないと、複数列のインデックスは使用できません。したがって、 `IndexFullScan`が使用されます。
 5.  ..。
 
-上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)を参照してください。
+上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [TiDB実行計画を理解する](/explain-overview.md)を参照してください。
 
 さらに、 [SQLチューニングの概要](/sql-tuning-overview.md)を読むと、TiDBオプティマイザーをよりよく理解し、実行プランが妥当かどうかを判断するのに役立ちます。
 

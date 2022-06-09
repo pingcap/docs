@@ -31,7 +31,7 @@ BRを使用すると、次の2つの方法で、AzureBlobStorage上のデータ�
 
 BRおよびTiKVの動作環境では、環境変数`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`を構成する必要があり`$AZURE_CLIENT_SECRET` 。これらの変数を構成すると、BRはAzureADを使用して`account-key`を構成せずにAzureBlobStorageにアクセスできます。この方法の方が安全であるため、お勧めします。 `$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`は、AzureアプリケーションのアプリケーションID `client_id` 、テナントID `tenant_id` 、およびクライアントパスワード`$AZURE_CLIENT_SECRET`を`client_secret`します。
 
-`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`が動作環境にあることを確認する方法、またはこれらの環境変数をパラメーターとして構成する場合は、 `$AZURE_CLIENT_SECRET`を参照して[環境変数をパラメーターとして構成する](#configure-environment-variables-as-parameters) 。
+`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`が操作環境にあることを確認する方法、またはこれらの環境変数をパラメーターとして構成する場合は、 `$AZURE_CLIENT_SECRET`を参照して[環境変数をパラメーターとして構成する](#configure-environment-variables-as-parameters) 。
 
 #### バックアップ {#back-up}
 
@@ -39,7 +39,7 @@ Azure ADを使用してデータをバックアップする場合は、 `account
 
 > **ノート：**
 >
-> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true`を設定する必要があります（デフォルトで設定されています）。そうしないと、バックアップタスクが失敗します。
+> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true` （デフォルトで設定）を設定する必要があります。そうしないと、バックアップタスクが失敗します。
 
 このセクションでは、データを`cool tier`にバックアップする方法を示します。つまり、アップロードされたオブジェクトのアクセス層は`Cool`です。 `account-name`と`access-tier`は、次の2つの方法で指定できます。
 
@@ -79,7 +79,7 @@ Azure ADを使用してデータを復元する場合は、 `account-name`を指
 
 > **ノート：**
 >
-> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true`を設定する必要があります（デフォルトで設定されています）。そうしないと、バックアップタスクが失敗します。
+> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true` （デフォルトで設定）を設定する必要があります。そうしないと、バックアップタスクが失敗します。
 
 このセクションでは、データを`cool tier`にバックアップする方法を示します。つまり、アップロードされたオブジェクトのアクセス層は`Cool`です。 `account-name` 、および`account-key`は、次の2 `access-tier`の方法で指定できます。
 

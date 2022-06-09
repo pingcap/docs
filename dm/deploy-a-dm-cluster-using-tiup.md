@@ -5,7 +5,7 @@ summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 
 # TiUPを使用してDMクラスターをデプロイする {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタ操作および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DMクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなど、毎日のTiDBデータ移行（DM）操作を簡単に実行し、DMクラスタパラメーターを管理できクラスタ。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタの運用および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DMクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなど、毎日のTiDBデータ移行（DM）操作を簡単に実行し、DMクラスタパラメーターを管理できクラスタ。
 
 TiUPは、DMv2.0以降のDMバージョンのデプロイをサポートします。このドキュメントでは、さまざまなトポロジのDMクラスターを展開する方法を紹介します。
 
@@ -167,12 +167,12 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | ------------------------ | --------------------------------------------------------------------- |
 | `${name}`                | DMクラスタの名前。例：dm-test                                                   |
 | `${version}`             | DMクラスタのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。    |
-| `./topology.yaml`        | トポロジ構成ファイルのパス。                                                        |
+| `./topology.yaml`        | トポロジー構成ファイルのパス。                                                       |
 | `-u`または`--user`          | rootユーザーまたはsshおよびsudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインし、クラスタの展開を完了します。 |
 | `-p`または`--password`      | ターゲットホストのパスワード。指定した場合、パスワード認証が使用されます。                                 |
 | `-i`または`--identity_file` | SSHIDファイルのパス。指定した場合、公開鍵認証が使用されます（デフォルトは「/root/.ssh/id_rsa」）。          |
 
-出力ログの最後に、 ``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示しています。
+出力ログの最後に、 ``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示します。
 
 ## ステップ4：TiUPによって管理されているクラスターを確認します {#step-4-check-the-clusters-managed-by-tiup}
 
@@ -182,7 +182,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 tiup dm list
 ```
 
-TiUPは、複数のDMクラスターの管理をサポートしています。上記のコマンドは、名前、デプロイメントユーザー、バージョン、シークレットキー情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
+TiUPは、複数のDMクラスターの管理をサポートしています。上記のコマンドは、名前、展開ユーザー、バージョン、秘密鍵情報など、現在TiUPによって管理されているすべてのクラスターの情報を出力します。
 
 ```log
 Name  User  Version  Path                                  PrivateKey

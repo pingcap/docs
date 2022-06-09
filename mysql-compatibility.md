@@ -137,11 +137,11 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 TiDBのビューは更新できません。 `UPDATE`などの`INSERT`操作はサポートして`DELETE`ません。
 
-### 一時的なテーブル {#temporary-tables}
+### 一時テーブル {#temporary-tables}
 
 詳細については、 [TiDBローカル一時テーブルとMySQL一時テーブル間の互換性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)を参照してください。
 
-### キャラクターセットと照合 {#character-sets-and-collations}
+### 文字セットと照合 {#character-sets-and-collations}
 
 -   TiDBでサポートされている文字セットと照合の詳細については、 [文字セットと照合の概要](/character-set-and-collation.md)を参照してください。
 
@@ -157,7 +157,7 @@ TiDBはMySQLと同様のストレージエンジンの抽象化をサポート�
 
 TiDBはほとんどの[SQLモード](/sql-mode.md)をサポートします：
 
--   `Oracle`や`PostgreSQL`などの互換性モードは解析されますが、無視されます。互換性モードはMySQL5.7で非推奨になり、MySQL8.0で削除されました。
+-   `Oracle`や`PostgreSQL`などの互換モードは解析されますが、無視されます。互換モードはMySQL5.7で非推奨になり、MySQL8.0で削除されました。
 -   `ONLY_FULL_GROUP_BY`モードには、MySQL5.7のマイナー[意味の違い](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql)があります。
 -   MySQLの`NO_DIR_IN_CREATE`および`NO_ENGINE_SUBSTITUTION`モードは互換性のために受け入れられていますが、TiDBには適用されません。
 
@@ -210,4 +210,4 @@ TiDBはほとんどの[SQLモード](/sql-mode.md)をサポートします：
 TiDBは、MySQLで非推奨としてマークされている特定の機能を実装していません。
 
 -   浮動小数点型の精度を指定します。 MySQL 8.0 [非推奨](https://dev.mysql.com/doc/refman/8.0/en/floating-point-types.html)この機能であり、代わりに`DECIMAL`タイプを使用することをお勧めします。
--   `ZEROFILL`属性。 MySQL 8.0 [非推奨](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html)この機能であり、代わりにアプリケーションに数値を埋め込むことをお勧めします。
+-   `ZEROFILL`属性。 MySQL 8.0 [非推奨](https://dev.mysql.com/doc/refman/8.0/en/numeric-type-attributes.html)この機能。代わりに、アプリケーションに数値を埋め込むことをお勧めします。

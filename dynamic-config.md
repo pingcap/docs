@@ -60,7 +60,7 @@ show config where type='tikv' and name='log.level'
 > -   TiKV構成アイテムをオンラインで変更すると、TiKV構成ファイルが自動的に更新されます。ただし、 `tiup edit-config`を実行して、対応する構成アイテムも変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作で変更が上書きされます。構成項目の変更の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 > -   `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
-`set config`ステートメントを使用する場合、インスタンスアドレスまたはコンポーネントタイプに応じて、単一のインスタンスまたはすべてのインスタンスの構成を変更できます。
+`set config`ステートメントを使用する場合、インスタンスアドレスまたはコンポーネントタイプに応じて、単一インスタンスまたはすべてのインスタンスの構成を変更できます。
 
 -   すべてのTiKVインスタンスの構成を変更します。
 
@@ -125,7 +125,7 @@ show warnings;
 
 | Configuration / コンフィグレーション項目                              | 説明                                                                                                                    |
 | :-------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| `raftstore.raft-entry-max-size`                           | 単一ログの最大サイズ                                                                                                            |
+| `raftstore.raft-entry-max-size`                           | 単一のログの最大サイズ                                                                                                           |
 | `raftstore.raft-log-gc-tick-interval`                     | Raftログを削除するポーリングタスクがスケジュールされる時間間隔                                                                                     |
 | `raftstore.raft-log-gc-threshold`                         | 残りのRaftログの最大許容数のソフト制限                                                                                                 |
 | `raftstore.raft-log-gc-count-limit`                       | 残りのRaftログの許容数の厳しい制限                                                                                                   |
@@ -167,7 +167,7 @@ show warnings;
 | `pessimistic-txn.pipelined`                               | パイプライン化された悲観的ロックプロセスを有効にするかどうか                                                                                        |
 | `gc.ratio-threshold`                                      | リージョンGCがスキップされるしきい値（GCバージョンの数/キーの数）                                                                                   |
 | `gc.batch-keys`                                           | 1つのバッチで処理されるキーの数                                                                                                      |
-| `gc.max-write-bytes-per-sec`                              | 1秒あたりにRocksDBに書き込むことができる最大バイト数                                                                                        |
+| `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたりに書き込むことができる最大バイト数                                                                                        |
 | `gc.enable-compaction-filter`                             | 圧縮フィルターを有効にするかどうか                                                                                                     |
 | `gc.compaction-filter-skip-version-check`                 | 圧縮フィルターのクラスタバージョンチェックをスキップするかどうか（リリースされていません）                                                                         |
 | `{db-name}.max-total-wal-size`                            | 合計WALの最大サイズ                                                                                                           |
@@ -187,7 +187,7 @@ show warnings;
 | `{db-name}.{cf-name}.level0-slowdown-writes-trigger`      | 書き込みストールをトリガーするL0でのファイルの最大数                                                                                           |
 | `{db-name}.{cf-name}.level0-stop-writes-trigger`          | 書き込みを完全にブロックするL0でのファイルの最大数                                                                                            |
 | `{db-name}.{cf-name}.max-compaction-bytes`                | 圧縮ごとにディスクに書き込まれる最大バイト数                                                                                                |
-| `{db-name}.{cf-name}.max-bytes-for-level-multiplier`      | 各レイヤーのデフォルトの増幅倍数                                                                                                      |
+| `{db-name}.{cf-name}.max-bytes-for-level-multiplier`      | 各層のデフォルトの増幅倍数                                                                                                         |
 | `{db-name}.{cf-name}.disable-auto-compactions`            | 自動圧縮を有効または無効にします                                                                                                      |
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | 保留中の圧縮バイトのソフト制限                                                                                                       |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | 保留中の圧縮バイトのハード制限                                                                                                       |
@@ -201,7 +201,7 @@ show warnings;
 | `cdc.min-ts-interval`                                     | 解決済みTSが転送される時間間隔                                                                                                      |
 | `cdc.old-value-cache-memory-quota`                        | TiCDCOldValueエントリが占有するメモリの上限                                                                                          |
 | `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占めるメモリの上限                                                                                              |
-| `cdc.incremental-scan-speed-limit`                        | 履歴データの増分スキャンの速度の上限                                                                                                    |
+| `cdc.incremental-scan-speed-limit`                        | 履歴データのインクリメンタルスキャンの速度の上限                                                                                              |
 | `cdc.incremental-scan-concurrency`                        | 履歴データの同時増分スキャンタスクの最大数                                                                                                 |
 
 上記の表で、プレフィックスが`{db-name}`または`{db-name}.{cf-name}`のパラメーターは、RocksDBに関連する構成です。 `db-name`のオプション値は`rocksdb`と`raftdb`です。

@@ -2,7 +2,7 @@
 title: tiup list
 ---
 
-# tiupリスト {#tiup-list}
+# tiup list {#tiup-list}
 
 コマンド`tiup list`は、ミラーの使用可能なコンポーネントのリストを取得するために使用されます。
 
@@ -40,7 +40,7 @@ tiup list [component] [flags]
     -   `--verbose`を指定した場合：TiUPは、 `Name` （コンポーネント名）、 `Installed` （インストール済みバージョン）、 `Owner` （コンポーネント所有者）、および`Description` （コンポーネントの説明）で構成されるコンポーネント情報リストを出力します。
     -   `--verbose`が指定されていない場合：TiUPは、 `Name` （コンポーネント名）、 `Owner` （コンポーネント所有者）、および`Description` （コンポーネントの説明）で構成されるコンポーネント情報リストを出力します。
 -   `[component]`が設定されている場合：
-    -   指定されたコンポーネントが存在する場合：TiUPは、 `Version` （バージョン番号）、 `Installed` （インストール状況）、 `Release` （リリース日）、および`Platforms` （サポートされているプラットフォーム）で構成される、指定されたコンポーネントのバージョン情報リストを出力します。
+    -   指定されたコンポーネントが存在する場合：TiUPは、 `Version` （バージョン番号）、 `Installed` （インストールステータス）、 `Release` （リリース日）、および`Platforms` （サポートされているプラットフォーム）で構成される、指定されたコンポーネントのバージョン情報リストを出力します。
     -   指定されたコンポーネントが存在しない場合：TiUPはエラー`failed to fetch component: unknown component`を報告します。
 
 [&lt;&lt;前のページに戻る-TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

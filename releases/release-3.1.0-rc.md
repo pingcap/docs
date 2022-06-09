@@ -29,14 +29,14 @@ TiDB Ansibleバージョン：3.1.0-rc
     -   TiDBが新しい接続を確立するたびに最新の証明書のロードをサポートするようにPDクライアントをアップグレードします[＃15425](https://github.com/pingcap/tidb/pull/15425)
     -   TiDBサーバーとPDサーバー間、または`cluster-ssl-*`が構成されている場合は2つのTiDBサーバー間で構成されたTLS証明書を使用してHTTPSプロトコルを強制的に使用します[＃15430](https://github.com/pingcap/tidb/pull/15430)
     -   MySQL互換の`--require-secure-transport`スタートアップオプションを追加して、構成中にクライアントにTLS認証を有効にするように強制します[＃15442](https://github.com/pingcap/tidb/pull/15442)
-    -   `cluster-verify-cn`の構成アイテムを追加します。構成後、ステータスサービスは、対応するCN証明書[＃15137](https://github.com/pingcap/tidb/pull/15137)がある場合にのみ使用できます。
+    -   `cluster-verify-cn`の構成アイテムを追加します。構成後、ステータスサービスは、対応するCN証明書[＃15137](https://github.com/pingcap/tidb/pull/15137)を使用している場合にのみ使用できます。
 
 -   TiKV
 
     -   Raw [＃7051](https://github.com/tikv/tikv/pull/7051)を使用したデータのバックアップをサポート
     -   ステータスサーバーのTLS認証をサポートする[＃7142](https://github.com/tikv/tikv/pull/7142)
     -   KVサーバーのTLS認証をサポートする[＃7305](https://github.com/tikv/tikv/pull/7305)
-    -   バックアップのパフォーマンスを向上させるために、ロックを保持する時間を最適化する[＃7202](https://github.com/tikv/tikv/pull/7202)
+    -   ロックを保持する時間を最適化して、バックアップ[＃7202](https://github.com/tikv/tikv/pull/7202)のパフォーマンスを向上させます
 
 -   PD
 
@@ -89,7 +89,7 @@ TiDB Ansibleバージョン：3.1.0-rc
     -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと、ログの追跡が遅くなり、クラスタがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいと、TiKVサーバー間で頻繁に再接続される可能性があるという問題[＃7087](https://github.com/tikv/tikv/pull/7087) [＃7078](https://github.com/tikv/tikv/pull/7078)
     -   レプリカに送信される保留中の読み取り要求が永続的にブロックされる可能性がある問題を修正します[＃6543](https://github.com/tikv/tikv/pull/6543)
     -   スナップショットを適用すると、レプリカの読み取りがブロックされる可能性がある問題を修正します[＃7249](https://github.com/tikv/tikv/pull/7249)
-    -   リーダーを転送するとTiKVがパニックになる可能性がある問題を修正します[＃7240](https://github.com/tikv/tikv/pull/7240)
+    -   リーダーの異動によりTiKVがパニックになる可能性がある問題を修正[＃7240](https://github.com/tikv/tikv/pull/7240)
     -   データをS31にバックアップするときに、すべてのSSTファイルがゼロで埋められる問題を修正し[＃6967](https://github.com/tikv/tikv/pull/6967) 。
     -   バックアップ中にSSTファイルのサイズが記録されず、復元後に多くの空のリージョンが発生する問題を修正します[＃6983](https://github.com/tikv/tikv/pull/6983)
     -   バックアップ[＃7297](https://github.com/tikv/tikv/pull/7297)でAWSIAMWebIDをサポートする
@@ -105,7 +105,7 @@ TiDB Ansibleバージョン：3.1.0-rc
 
     -   TiDB Lightning
 
-        -   TiDBバックエンド[＃283](https://github.com/pingcap/tidb-lightning/pull/283)で`&`文字が`EOF`文字に置き換えられるバグを修正
+        -   TiDBバックエンド[＃283](https://github.com/pingcap/tidb-lightning/pull/283)で`&`文字が`EOF`文字に置き換えられるバグを修正しました
 
     -   バックアップと復元（BR）
 

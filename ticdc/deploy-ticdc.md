@@ -36,7 +36,7 @@ TiUPを使用して、TiCDCコンポーネントを既存のTiDBクラスタに�
 
 ## バイナリを使用して既存のTiDBクラスタにTiCDCを追加します（非推奨） {#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended}
 
-PDクラスタにサービスを提供できるPDノード（クライアントURLは`10.0.10.25:2379` ）があるとします。 3つのTiCDCノードをデプロイする場合は、次のコマンドを実行してTiCDCクラスタを起動します。同じPDアドレスを指定するだけで、新しく開始されたノードが自動的にTiCDCクラスタに参加します。
+PDクラスタにサービスを提供できるPDノード（クライアントURLは`10.0.10.25:2379` ）があるとします。 3つのTiCDCノードを展開する場合は、次のコマンドを実行してTiCDCクラスタを起動します。同じPDアドレスを指定するだけで、新しく開始されたノードが自動的にTiCDCクラスタに参加します。
 
 {{< copyable "" >}}
 
@@ -53,11 +53,11 @@ cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:830
 -   `addr` ：TiCDCのリスニングアドレス、HTTP APIアドレス、およびTiCDCサービスのPrometheusアドレス。デフォルト値は`127.0.0.1:8300`です。
 -   `advertise-addr` ：クライアントがTiCDCにアクセスするためにアドバタイズされたアドレス。指定しない場合、値は`addr`の値と同じになります。
 -   `pd` ：PDエンドポイントのコンマ区切りのリスト。
--   `config` ：TiCDCが使用する構成ファイルのアドレス（オプション）。このオプションは、TiCDCv5.0.0以降でサポートされています。このオプションは、TiUPv1.4.0以降のTiCDCデプロイメントで使用できます。
--   `data-dir` ：TiCDCがファイルを保存するためにディスクを使用する必要があるときに使用するディレクトリを指定します。 Unified Sorterは、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク容量が500GiB以上であることを確認することをお勧めします。詳細については、 [ユニファイドソーター](/ticdc/manage-ticdc.md#unified-sorter)を参照してください。 TiUPを使用している場合は、 [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`を構成するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
+-   `config` ：TiCDCが使用する構成ファイルのアドレス（オプション）。このオプションは、TiCDCv5.0.0以降でサポートされています。このオプションは、TiUPv1.4.0以降のTiCDC展開で使用できます。
+-   `data-dir` ：ファイルを保存するためにディスクを使用する必要がある場合にTiCDCが使用するディレクトリを指定します。 Unified Sorterは、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク容量が500GiB以上であることを確認することをお勧めします。詳細については、 [ユニファイドソーター](/ticdc/manage-ticdc.md#unified-sorter)を参照してください。 TiUPを使用している場合は、 [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`を構成するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
 -   `gc-ttl` ：TiCDCによって設定されたPDのサービスレベル`GC safepoint`のTTL（Time To Live）、およびレプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは24時間を意味します。注：TiCDCレプリケーションタスクの一時停止は、TiCDC GCセーフポイントの進行に影響します。つまり、 [TiCDCGCセーフポイントの完全な動作](/ticdc/troubleshoot-ticdc.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳しく説明されているように、アップストリームTiDBGCの進行に影響します。
 -   `log-file` ：TiCDCプロセスの実行中にログが出力されるパス。このパラメーターが指定されていない場合、ログは標準出力（stdout）に書き込まれます。
--   `log-level` ：TiCDCプロセスが実行されているときのログレベル。デフォルト値は`"info"`です。
+-   `log-level` ：TiCDCプロセス実行時のログレベル。デフォルト値は`"info"`です。
 -   `ca` ：TLS接続用のCA証明書ファイルのパスをPEM形式で指定します（オプション）。
 -   `cert` ：TLS接続用の証明書ファイルのパスをPEM形式で指定します（オプション）。
 -   `cert-allowed-cn` ：TLS接続用のPEM形式の共通名のパスを指定します（オプション）。

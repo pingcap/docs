@@ -4,7 +4,7 @@ title: Changefeed
 
 # チェンジフィード {#changefeed}
 
-TiDB Cloudは、TiDBCloudからデータをストリーミングするのに役立つ次のチェンジフィードを提供します。
+TiDB Cloud TiDB Cloudは、TiDBCloudからデータをストリーミングするのに役立つ次のチェンジフィードを提供します。
 
 -   [ApacheKafkaにシンクします](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 -   [MySQLにシンク](/tidb-cloud/changefeed-sink-to-mysql.md)

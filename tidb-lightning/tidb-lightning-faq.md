@@ -7,7 +7,7 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 ## TiDBLightningでサポートされているTiDB/TiKV / PDクラスタの最小バージョンは何ですか？ {#what-is-the-minimum-tidb-tikv-pd-cluster-version-supported-by-tidb-lightning}
 
-TiDB Lightningのバージョンは、クラスタと同じである必要があります。ローカルバックエンドモードを使用する場合、使用可能な最も古いバージョンは4.0.0です。インポーターバックエンドモードまたはTiDBバックエンドモードを使用する場合、利用可能な最も古いバージョンは2.0.9ですが、3.0安定バージョンを使用することをお勧めします。
+TiDB Lightningのバージョンは、クラスタと同じである必要があります。ローカルバックエンドモードを使用する場合、使用可能な最も古いバージョンは4.0.0です。インポーターバックエンドモードまたはTiDBバックエンドモードを使用する場合、使用可能な最も古いバージョンは2.0.9ですが、3.0安定バージョンを使用することをお勧めします。
 
 ## TiDB Lightningは複数のスキーマ（データベース）のインポートをサポートしていますか？ {#does-tidb-lightning-support-importing-multiple-schemas-databases}
 
@@ -30,7 +30,7 @@ TiDB Lightningには、次の権限が必要です。
 
 ローカルバックエンドとインポーターバックエンドは、データがTiKVに直接取り込まれ、TiDB特権システム全体をバイパスするため、これら2つの特権を必要としません。これは、TiKV、TiKV Importer、およびTiDBLightningのポートがクラスタの外部に到達できない限り安全です。
 
-TiDB Lightningの`checksum`構成が`true`に設定されている場合、ダウンストリームTiDBの管理者ユーザー権限をTiDBLightningに付与する必要があります。
+TiDB Lightningの`checksum`構成が`true`に設定されている場合、ダウンストリームTiDBの管理ユーザー権限をTiDBLightningに付与する必要があります。
 
 ## 1つのテーブルをインポートするときにTiDBLightningでエラーが発生しました。他のテーブルに影響しますか？プロセスは終了しますか？ {#tidb-lightning-encountered-an-error-when-importing-one-table-will-it-affect-other-tables-will-the-process-be-terminated}
 
@@ -127,7 +127,7 @@ sql-mode = ""
 
 コマンドラインで`nohup`を直接使用して`tidb-lightning`を開始することはお勧めしません。スクリプトを実行することで[`tidb-lightning`開始します](/tidb-lightning/deploy-tidb-lightning.md#step-3-start-tidb-lightning)できます。
 
-さらに、TiDB Lightningの最後のログに、エラーが「コンテキストがキャンセルされました」と示されている場合は、最初の「ERROR」レベルのログを検索する必要があります。この「エラー」レベルのログの後には通常、「終了する信号を取得」が続きます。これは、TiDBLightningが割り込み信号を受信して終了したことを示します。
+さらに、TiDB Lightningの最後のログに、エラーが「コンテキストがキャンセルされました」と示されている場合は、最初の「エラー」レベルのログを検索する必要があります。この「エラー」レベルのログの後には通常、「終了する信号を取得」が続きます。これは、TiDBLightningが割り込み信号を受信して終了したことを示します。
 
 ## TiDBクラスタが大量のCPUリソースを使用していて、TiDB Lightningを使用した後、実行速度が非常に遅いのはなぜですか？ {#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning}
 
@@ -207,7 +207,7 @@ upload-speed-limit = "100MB"
 
 ## インポート速度が遅すぎる {#import-speed-is-too-slow}
 
-通常、256MBのデータファイルをインポートするには、TiDBLightningがスレッドごとに2分かかります。速度がこれよりはるかに遅い場合は、エラーが発生します。各データファイルにかかった時間は、 `restore chunk … takes`に記載されているログから確認できます。これは、Grafanaのメトリックからも確認できます。
+通常、256MBのデータファイルをインポートするのにTiDBLightningはスレッドごとに2分かかります。速度がこれよりはるかに遅い場合は、エラーが発生します。各データファイルにかかった時間は、 `restore chunk … takes`に記載されているログから確認できます。これは、Grafanaのメトリックからも確認できます。
 
 TiDBLightningが遅くなる理由はいくつかあります。
 
@@ -246,13 +246,13 @@ strict-format = true
     -   このテーブルはインポート前に空ではないため、データチェックサムに影響を与える可能性があります。 TiDB Lightningが以前に失敗してシャットダウンしたが、正しく再起動しなかった可能性もあります。
 -   `y`が大きい場合は、ローカルデータソースにKVペアが多いことを意味します。
     -   ターゲットデータベースのチェックサムがすべて0の場合、インポートが発生していないことを意味します。クラスタがビジー状態でデータを受信できない可能性があります。
-    -   エクスポートされたデータに、値が重複するUNIQUEキーやPRIMARY KEYなどの重複データが含まれている可能性があります。または、データの大文字と小文字が区別されるのに対し、ダウンストリームテーブル構造では大文字と小文字が区別されない可能性があります。
+    -   エクスポートされたデータに、値が重複するUNIQUEキーやPRIMARY KEYなどの重複データが含まれている可能性があります。または、データが大文字と小文字を区別する一方で、ダウンストリームテーブル構造は大文字と小文字を区別しない可能性があります。
 -   その他の考えられる理由
     -   データソースがマシンで生成され、 Dumplingによってバックアップされていない場合は、データがテーブルの制限に準拠していることを確認してください。たとえば、AUTO_INCREMENT列は0ではなく正である必要があります。
 
 **ソリューション**：
 
-1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブル構造とデータを確認してから、TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
+1.  `tidb-lightning-ctl`を使用して破損したデータを削除し、テーブルの構造とデータを確認してから、TiDB Lightningを再起動して、影響を受けるテーブルを再度インポートします。
 
     {{< copyable "" >}}
 
@@ -262,7 +262,7 @@ strict-format = true
 
 2.  ターゲットデータベースの負荷を軽減するために、外部データベースを使用してチェックポイントを格納することを検討してください（変更`[checkpoint] dsn` ）。
 
-3.  TiDB Lightningが正しく再起動されなかった場合は、 FAQの「 [TiDBLightningを正しく再起動する方法](#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
+3.  TiDB Lightningが不適切に再起動された場合は、 FAQの「 [TiDBLightningを正しく再起動する方法](#how-to-properly-restart-tidb-lightning) 」セクションも参照してください。
 
 ## <code>Checkpoint for … has invalid status:</code>エラーコード） {#code-checkpoint-for-has-invalid-status-code-error-code}
 
@@ -278,7 +278,7 @@ strict-format = true
 tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=all
 ```
 
-他のオプションについては、 [チェックポイント制御](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)セクションを参照してください。
+他のオプションについては、 [チェックポイント管理](/tidb-lightning/tidb-lightning-checkpoints.md#checkpoints-control)セクションを参照してください。
 
 ## <code>ResourceTemporarilyUnavailable("Too many open engines …: …")</code> {#code-resourcetemporarilyunavailable-too-many-open-engines-code}
 
@@ -306,7 +306,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 1.  ファイルが完全にUTF-8またはGB-18030になるようにスキーマを修正します。
 
-2.  ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE` 、次に`[mydumper] no-schema = true`を設定して自動テーブル作成をスキップします。
+2.  ターゲットデータベース内の影響を受けるテーブルを手動で`CREATE`にし、次に`[mydumper] no-schema = true`を設定して自動テーブル作成をスキップします。
 
 3.  チェックをスキップするには、 `[mydumper] character-set = "binary"`を設定します。これにより、ターゲットデータベースに文字化けが導入される可能性があることに注意してください。
 
@@ -333,7 +333,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ## <code>[Error 8025: entry too large, the max entry size is 6291456]</code> {#code-error-8025-entry-too-large-the-max-entry-size-is-6291456-code}
 
-**原因**：TiDB Lightningによって生成されたキーと値のペアの単一の行が、TiDBによって設定された制限を超えています。
+**原因**：TiDB Lightningによって生成されたキーと値のペアの単一行が、TiDBによって設定された制限を超えています。
 
 **解決策**：
 
@@ -341,7 +341,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ## Encounter <code>rpc error: code = Unimplemented ...</code> TiDBLightningがモードを切り替えたとき {#encounter-code-rpc-error-code-unimplemented-code-when-tidb-lightning-switches-the-mode}
 
-**原因**：クラスタの一部のノードは`switch-mode`をサポートしていません。たとえば、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)のバージョンが`v4.0.0-rc.2`より前の場合。
+**原因**：クラスタの一部のノードが`switch-mode`をサポートしていません。たとえば、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)のバージョンが`v4.0.0-rc.2`より前の場合。
 
 **ソリューション**：
 
@@ -365,7 +365,7 @@ header = false
 
 ## TiDBLightningのランタイムゴルーチン情報を取得する方法 {#how-to-get-the-runtime-goroutine-information-of-tidb-lightning}
 
-1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、USR1信号をTiDBLightningに送信して`status-port`を有効にする必要があります。
+1.  TiDB Lightningの設定ファイルで[`status-port`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-configuration)が指定されている場合は、この手順をスキップしてください。それ以外の場合は、USR1信号をTiDB Lightningに送信して、 `status-port`を有効にする必要があります。
 
     `ps`などのコマンドを使用してTiDBLightningのプロセスID（PID）を取得し、次のコマンドを実行します。
 

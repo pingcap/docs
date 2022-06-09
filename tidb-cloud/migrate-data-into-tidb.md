@@ -76,13 +76,13 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
         -   `LOCK TABLES`
         -   `REPLICATION CLIENT`
 
-## ステップ3.TiDB Cloudにデータをインポートする {#step-3-import-data-to-tidb-cloud}
+## ステップTiDB Cloudにデータをインポートする {#step-3-import-data-to-tidb-cloud}
 
 ソースデータの場所とサイズに応じて、インポート方法は異なります。
 
 -   ソースデータがAmazonS3クラウドストレージにある場合は、次の手順を実行します。
 
-    1.  TiDB CloudがAmazonS3バケット内のソースデータにアクセスできるようにAmazonS3アクセスを設定します。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
+    1.  TiDBクラウドがAmazonS3バケット内のソースデータにアクセスできるようにAmazonS3アクセスを設定します。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
     2.  TiDB Cloudコンソールから、[TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックして、独自の概要ページに移動します。左側のクラスタ情報ペインで、[**インポート**]をクリックし、[<strong>データインポートタスク</strong>]ページでインポート関連情報を入力します。
 
 -   ソースデータがローカルファイルにある場合は、次のいずれかを実行します。

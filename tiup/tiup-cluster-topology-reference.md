@@ -40,11 +40,11 @@ TiUPを使用したTiDB展開のトポロジ構成ファイルには、次のセ
 
 -   `enable_tls` ：クラスタのTLSを有効にするかどうかを指定します。 TLSを有効にした後、生成されたTLS証明書は、コンポーネント間またはクライアントとコンポーネント間の接続に使用する必要があります。**一度有効にすると、無効にすることはできません**。デフォルト値は`false`です。
 
--   `deploy_dir` ：各コンポーネントの展開ディレクトリ。デフォルト値は`"deployed"`です。その適用規則は次のとおりです。
+-   `deploy_dir` ：各コンポーネントのデプロイメントディレクトリ。デフォルト値は`"deployed"`です。その適用規則は次のとおりです。
 
     -   絶対パス`deploy_dir`がインスタンスレベルで構成されている場合、実際のデプロイメントディレクトリはインスタンス用に構成されてい`deploy_dir` 。
 
-    -   各インスタンスについて、 `deploy_dir`を構成しない場合、そのデフォルト値は相対パス`<component-name>-<component-port>`です。
+    -   インスタンスごとに、 `deploy_dir`を構成しない場合、そのデフォルト値は相対パス`<component-name>-<component-port>`です。
 
     -   `global.deploy_dir`が絶対パスの場合、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 
@@ -127,7 +127,7 @@ monitored:
 
 -   `pd` ：PDサービス関連の構成。完全な構成については、 [PD構成ファイル](/pd-configuration-file.md)を参照してください。
 
--   `tiflash` ：TiFlashサービス関連の構成。完全な構成については、 [TiFlash設定ファイル](/tiflash/tiflash-configuration.md)を参照してください。
+-   `tiflash` ：TiFlashサービス関連の構成。完全な構成については、 [TiFlash構成ファイル](/tiflash/tiflash-configuration.md)を参照してください。
 
 -   `tiflash_learner` ：各TiFlashノードには特別な組み込みTiKVがあります。この構成アイテムは、この特別なTiKVを構成するために使用されます。通常、この構成アイテムのコンテンツを変更することはお勧めしません。
 
@@ -175,7 +175,7 @@ server_configs:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config` ：このフィールドの構成ルールは、 `server_configs`の`pd`構成ルールと同じです。このフィールドが構成されている場合、フィールドのコンテンツは`server_configs`の`pd`のコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -229,7 +229,7 @@ pd_servers:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config` ：このフィールドの構成ルールは、 `server_configs`の`tidb`構成ルールと同じです。このフィールドが構成されている場合、フィールドのコンテンツは`server_configs`の`tidb`のコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -281,7 +281,7 @@ tidb_servers:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config` ：このフィールドの構成ルールは、 `server_configs`の`tikv`構成ルールと同じです。このフィールドが構成されている場合、フィールドのコンテンツは`server_configs`の`tikv`のコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -343,7 +343,7 @@ tikv_servers:
 
 -   `tmp_path` ：TiFlash一時ファイルのストレージパス。デフォルト値は[ `path`または`storage.latest.dir`の最初のディレクトリ]+&quot;/tmp&quot;です。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config` ：このフィールドの構成ルールは、 `server_configs`の`tiflash`構成ルールと同じです。このフィールドが構成されている場合、フィールドのコンテンツは`server_configs`の`tiflash`のコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -394,7 +394,7 @@ tiflash_servers:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config` ：このフィールドの構成ルールは、 `server_configs`の`pump`構成ルールと同じです。このフィールドが構成されている場合、フィールドのコンテンツは`server_configs`の`pump`のコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -442,7 +442,7 @@ pump_servers:
 
 -   `commit_ts` ：Drainerが起動すると、チェックポイントを読み取ります。 Drainerがチェックポイントを読み取れない場合、このフィールドを最初の起動のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です（Drainerは常にPDから最新のタイムスタンプをcommit_tsとして取得します）。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config` ：このフィールドの構成ルールは、 `server_configs`の`drainer`構成ルールと同じです。このフィールドが構成されている場合、フィールドのコンテンツは`server_configs`の`drainer`のコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
@@ -501,9 +501,9 @@ drainer_servers:
 
 -   `tz` ：TiCDCサービスが使用するタイムゾーン。 TiCDCは、タイムスタンプなどの時間データ型を内部で変換するとき、およびデータをダウンストリームに複製するときに、このタイムゾーンを使用します。デフォルト値は、プロセスが実行されるローカルタイムゾーンです。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
--   `config` ：フィールドコンテンツは`server_configs`の`cdc`つのコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
+-   `config` ：フィールドの内容は`server_configs`の`cdc`つの内容とマージされます（2つのフィールドが重なる場合、このフィールドの内容が有効になります）。次に、構成ファイルが生成され、 `host`で指定されたマシンに送信されます。
 
 -   `os` ： `host`で指定されたマシンのオペレーティングシステム。このフィールドが指定されていない場合、デフォルト値は`global`の`os`値です。
 
@@ -648,7 +648,7 @@ tispark_workers:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `storage_retention` ：プロメテウスモニタリングデータの保持時間。デフォルト値は`"30d"`です。
 
@@ -719,7 +719,7 @@ monitoring_servers:
 
 -   `password` ：Grafanaに対応するパスワード。
 
--   `dashboard_dir` ：完全な`dashboard(*.json)`のファイルを含むローカルディレクトリを指定します。これらのファイルは、クラスタ構成の初期化フェーズ中にGrafanaのダッシュボードとしてターゲットマシンに転送されます。
+-   `dashboard_dir` ：完全な`dashboard(*.json)`のファイルを含むローカルディレクトリを指定します。これらのファイルは、クラスタ構成の初期化フェーズ中に、Grafanaのダッシュボードとしてターゲットマシンに転送されます。
 
 -   `resource_control` ：サービスのリソース制御。このフィールドが構成されている場合、フィールドのコンテンツは`global`の`resource_control`つのコンテンツとマージされます（2つのフィールドが重複している場合、このフィールドのコンテンツが有効になります）。次に、systemd構成ファイルが生成され、 `host`で指定されたマシンに送信されます。 `resource_control`の構成ルールは、 `global`の`resource_control`のコンテンツと同じです。
 
@@ -764,7 +764,7 @@ grafana_servers:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列タイプです。フィールド値は、「0,1」などのNUMAノードのIDです。
+-   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
 -   `config_file` ：クラスタ構成の初期化段階でターゲットマシンに転送されるローカルファイルをAlertmanagerの構成として指定します。
 

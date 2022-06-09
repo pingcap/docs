@@ -16,7 +16,7 @@ summary: Learn how to migrate MySQL of small datasets to TiDB.
 -   [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
 -   [DMのソースデータベースとターゲットデータベースに必要な権限を付与します](/dm/dm-worker-intro.md)
 
-## 手順1.データソースを作成する {#step-1-create-the-data-source}
+## ステップ1.データソースを作成します {#step-1-create-the-data-source}
 
 まず、次のように`source1.yaml`のファイルを作成します。
 

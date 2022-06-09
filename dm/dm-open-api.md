@@ -5,7 +5,7 @@ summary: Learn about how to use OpenAPI interface to manage the cluster status a
 
 # OpenAPIを使用してDMクラスターを管理する {#maintain-dm-clusters-using-openapi}
 
-DMは、DMクラスタを簡単に照会および操作するためのOpenAPI機能を提供します。これは、 [dmctlツール](/dm/dmctl-introduction.md)の機能に似ています。この機能を有効にする必要がある場合は、DMマスター構成ファイルに次の構成を追加します。
+DMは、DMクラスタを簡単に照会および操作するためのOpenAPI機能を提供します。これは、 [dmctlツール](/dm/dmctl-introduction.md)の機能と同様です。この機能を有効にする必要がある場合は、DMマスター構成ファイルに次の構成を追加します。
 
 ```toml
 openapi = true
@@ -30,7 +30,7 @@ APIを使用して、DMクラスタで次のメンテナンス操作を実行で
 
 -   [データソースを作成する](#create-a-data-source)
 -   [データソースリストを取得する](#get-the-data-source-list)
--   [データソースを削除します](#delete-the-data-source)
+-   [データソースを削除する](#delete-the-data-source)
 -   [データソースの情報を取得する](#get-the-information-of-a-data-source)
 -   [データソースのリレーログ機能を開始します](#start-the-relay-log-feature-for-data-sources)
 -   [データソースのリレーログ機能を停止します](#stop-the-relay-log-feature-for-data-sources)
@@ -302,7 +302,7 @@ curl -X 'GET' \
 }
 ```
 
-## データソースを削除します {#delete-the-data-source}
+## データソースを削除する {#delete-the-data-source}
 
 このAPIは同期インターフェースです。リクエストが成功した場合、返される本文のステータスコードは204です。
 

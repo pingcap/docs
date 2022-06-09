@@ -55,6 +55,6 @@ mysql> SHOW DATABASES;
 
 ## も参照してください {#see-also}
 
--   [スキーマを表示](/sql-statements/sql-statement-show-schemas.md)
+-   [スキーマを表示する](/sql-statements/sql-statement-show-schemas.md)
 -   [ドロップデータベース](/sql-statements/sql-statement-drop-database.md)
 -   [データベースの作成](/sql-statements/sql-statement-create-database.md)

@@ -2,7 +2,7 @@
 title: tiup dm scale-in
 ---
 
-# tiupdmスケールイン {#tiup-dm-scale-in}
+# tiup dm scale-in {#tiup-dm-scale-in}
 
 `tiup dm scale-in`コマンドは、クラスタでスケーリングするために使用されます。クラスタでのスケーリングとは、サービスをオフラインにすることを意味します。これにより、最終的に指定されたノードがクラスタから削除され、残りの関連ファイルが削除されます。
 

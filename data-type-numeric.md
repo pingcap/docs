@@ -41,7 +41,7 @@ BITデータ型。 BIT（M）のタイプは、Mビット値の格納を可能�
 BIT[(M)]
 ```
 
-### <code>BOOLEAN</code>タイプ {#code-boolean-code-type}
+### <code>BOOLEAN</code>型 {#code-boolean-code-type}
 
 `BOOLEAN`タイプとそのエイリアス`BOOL`は`TINYINT(1)`と同等です。値が`0`の場合、 `False`と見なされます。それ以外の場合は、 `True`と見なされます。 MySQLと同様に、 `True`は`1`は`False` `0` 。
 
@@ -129,7 +129,7 @@ FLOAT(p) [UNSIGNED] [ZEROFILL]
 
 > **ノート：**
 >
-> MySQLと同様に、 `FLOAT`データ型は概算値を格納します。通貨などの値の場合は、代わりに`DECIMAL`タイプを使用することをお勧めします。 TiDBでは、 `FLOAT`データ型のデフォルトの精度は8ビットですが、MySQLでは、デフォルトの精度は6ビットです。たとえば、TiDBとMySQLの両方で`FLOAT`タイプの列に`123456789`と`1.23456789`を挿入すると、MySQLで対応する値をクエリすると、 `123457000`と`1.23457`が得られますが、TiDBでは`123456790`と`1.2345679`が得られます。
+> MySQLと同様に、 `FLOAT`データ型は概算値を格納します。通貨などの値については、代わりに`DECIMAL`タイプを使用することをお勧めします。 TiDBでは、 `FLOAT`データ型のデフォルトの精度は8ビットですが、MySQLでは、デフォルトの精度は6ビットです。たとえば、TiDBとMySQLの両方で`FLOAT`タイプの列に`123456789`と`1.23456789`を挿入すると、MySQLで対応する値をクエリすると、 `123457000`と`1.23457`が得られますが、TiDBでは`123456790`と`1.2345679`が得られます。
 
 ### <code>DOUBLE</code>タイプ {#code-double-code-type}
 
@@ -142,7 +142,7 @@ DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL
 
 > **警告：**
 >
-> MySQLと同様に、 `DOUBLE`データ型は概算値を格納します。通貨などの値の場合は、代わりに`DECIMAL`タイプを使用することをお勧めします。
+> MySQLと同様に、 `DOUBLE`データ型は概算値を格納します。通貨などの値については、代わりに`DECIMAL`タイプを使用することをお勧めします。
 
 ## 固定小数点タイプ {#fixed-point-types}
 

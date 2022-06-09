@@ -79,7 +79,7 @@ Query OK, 0 rows affected (0.14 sec)
 
 次の例では、 `LOAD DATA`を使用してデータをインポートします。区切り文字としてコンマを指定します。データを囲む二重引用符は無視されます。ファイルの最初の行は無視されます。
 
-エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されたコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
+エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されているコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
 
 {{< copyable "" >}}
 
@@ -104,7 +104,7 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、 `LOAD DATA...REPLACE INTO`構文[＃24515](https://github.com/pingcap/tidb/issues/24515)を除いて、MySQLと完全に互換性があると理解されています。その他の互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、 `LOAD DATA...REPLACE INTO`の構文[＃24515](https://github.com/pingcap/tidb/issues/24515)を除いて、MySQLと完全に互換性があると理解されています。その他の互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 > **ノート：**
 >

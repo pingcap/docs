@@ -17,7 +17,7 @@ title: TiDB 2.0.9 Release Notes
 -   `TRUNCATE`の組み込み関数が符号なし整数型[＃8069](https://github.com/pingcap/tidb/pull/8069)のパラメーターをサポートするようにします。
 -   場合によっては、統計モジュールの主キーの選択性推定の問題を修正します[＃8150](https://github.com/pingcap/tidb/pull/8150)
 -   `Session`変数を追加して、 `_tidb_rowid`を[＃8126](https://github.com/pingcap/tidb/pull/8126)に書き込むことができるかどうかを制御します
--   場合によっては`PhysicalProjection`のパニック問題を修正します[＃8154](https://github.com/pingcap/tidb/pull/8154)
+-   場合によっては`PhysicalProjection`のパニックの問題を修正します[＃8154](https://github.com/pingcap/tidb/pull/8154)
 -   場合によっては`Union`ステートメントの不安定な結果を修正します[＃8168](https://github.com/pingcap/tidb/pull/8168)
 -   `Insert`以外のステートメントで`NULL`が`values`によって返されない問題を修正します[＃8179](https://github.com/pingcap/tidb/pull/8179)
 -   統計モジュールが古いデータをクリアできない場合があるという問題を修正します[＃8184](https://github.com/pingcap/tidb/pull/8184)

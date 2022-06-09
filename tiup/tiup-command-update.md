@@ -2,7 +2,7 @@
 title: tiup update
 ---
 
-# tiupアップデート {#tiup-update}
+# tiup update {#tiup-update}
 
 `tiup update`コマンドは、インストールされているコンポーネントまたはTiUP自体を更新するために使用されます。
 

@@ -3,7 +3,7 @@ title: Operators
 summary: Learn about the operators precedence, comparison functions and operators, logical operators, and assignment operators.
 ---
 
-# オペレーター {#operators}
+# 演算子 {#operators}
 
 このドキュメントでは、演算子の優先順位、比較関数と演算子、論理演算子、および代入演算子について説明します。
 
@@ -29,7 +29,7 @@ summary: Learn about the operators precedence, comparison functions and operator
 | [=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal)                      | 等しい演算子                                                                                                                                                                            |
 | [`&#x3C;=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to)          | 演算子に等しいNULLセーフ                                                                                                                                                                    |
 | [&gt;&gt;](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than)        | 演算子より大きい                                                                                                                                                                          |
-| [&gt; =](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal) | 以上の演算子                                                                                                                                                                            |
+| [&gt; =](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal) | 大なり記号以上の演算子                                                                                                                                                                       |
 | [は](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is)                         | ブール値に対して値をテストします                                                                                                                                                                  |
 | [ではありません](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is-not)               | ブール値に対して値をテストします                                                                                                                                                                  |
 | [NULLではありません](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_is-not-null)      | NOTNULL値テスト                                                                                                                                                                       |
@@ -92,7 +92,7 @@ OR, ||
 | [=](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal)                      | 等しい演算子                    |
 | [`&#x3C;=>`](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_equal-to)          | 演算子に等しいNULLセーフ            |
 | [&gt;&gt;](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than)        | 演算子より大きい                  |
-| [&gt; =](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal) | 以上の演算子                    |
+| [&gt; =](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#operator_greater-than-or-equal) | 大なり記号以上の演算子               |
 | [最高の（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_greatest)               | 最大の引数を返す                  |
 | [の（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_in)                       | 値が値のセット内にあるかどうかを確認します     |
 | [間隔（）](https://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html#function_interval)                | 最初の引数よりも小さい引数のインデックスを返します |

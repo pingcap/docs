@@ -50,7 +50,7 @@ summary: Learn how to optimize the configuration of the data migration task to i
 
 ### <code>batch</code> {#code-batch-code}
 
-`batch`は、DMSyncユニット中にデータがダウンストリームデータベースに複製されるときに各トランザクションに含まれるDMLの数を決定します。デフォルト値は100です。通常、このオプションの値を変更する必要はありません。
+`batch`は、DM Syncユニット中にデータがダウンストリームデータベースに複製されるときに、各トランザクションに含まれるDMLの数を決定します。デフォルト値は100です。通常、このオプションの値を変更する必要はありません。
 
 > **ノート：**
 >

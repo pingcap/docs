@@ -32,13 +32,13 @@ TiDBバージョン：4.0.0
 -   TiDB
     -   `committer-concurrency`の構成アイテムを追加して、retry-commitフェーズ[＃16849](https://github.com/pingcap/tidb/pull/16849)で`goroutines`の数を制御します。
     -   `show table partition regions`構文[＃17294](https://github.com/pingcap/tidb/pull/17294)をサポートします
-    -   `tmp-storage-quota`の構成アイテムを追加して、TiDBサーバーが使用する一時ディスクスペースを制限します[＃15700](https://github.com/pingcap/tidb/pull/15700)
+    -   `tmp-storage-quota`の構成アイテムを追加して、TiDBサーバー[＃15700](https://github.com/pingcap/tidb/pull/15700)が使用する一時ディスク容量を制限します。
     -   テーブルを作成および変更するときに、パーティション化されたテーブルが一意のプレフィックスインデックスを使用するかどうかのチェックをサポートします[＃17213](https://github.com/pingcap/tidb/pull/17213)
     -   `insert/replace into tbl_name partition` （ `partition_name_list` ）ステートメント[＃17313](https://github.com/pingcap/tidb/pull/17313)をサポートする
     -   `Distinct`関数[＃17240](https://github.com/pingcap/tidb/pull/17240)を使用する場合の`collations`の値のチェックをサポートします。
     -   ハッシュパーティションプルーニング[＃17310](https://github.com/pingcap/tidb/pull/17310)中に`is null`フィルター条件をサポートします。
     -   パーティションテーブルで`admin check index` 、および`admin cleanup index`を[＃17317](https://github.com/pingcap/tidb/pull/17317) `admin recover index` [＃17392](https://github.com/pingcap/tidb/pull/17392) [＃17405](https://github.com/pingcap/tidb/pull/17405)
-    -   `in`式の範囲パーティションプルーニングをサポート[＃17320](https://github.com/pingcap/tidb/pull/17320)
+    -   `in`式[＃17320](https://github.com/pingcap/tidb/pull/17320)の範囲パーティションプルーニングをサポートします。
 
 -   TiFlash
     -   学習者がデータを読み取るときに、 `Lock CF`の修飾された`TSO`から`min commit ts`の値に対応するデータの除外をサポートします
@@ -50,7 +50,7 @@ TiDBバージョン：4.0.0
 
 -   PD
     -   組み込みのTiDBダッシュボード[＃2457](https://github.com/pingcap/pd/pull/2457)のリバースプロキシリソースプレフィックスの指定をサポート
-    -   PDクライアントリージョン[＃2443](https://github.com/pingcap/pd/pull/2443)のインターフェースで`pending peer`および`down peer`情報を返すことをサポートします。
+    -   PDクライアントリージョン[＃2443](https://github.com/pingcap/pd/pull/2443)のインターフェイスで`pending peer`および`down peer`情報を返すことをサポートします。
     -   `Direction of hotspot move leader`などの`Hot cache read entry number` [＃2448](https://github.com/pingcap/pd/pull/2448)を追加し`Direction of hotspot move peer`
 
 -   ツール
@@ -68,7 +68,7 @@ TiDBバージョン：4.0.0
 
     -   TiDBを無効にしてバッチコマンドを[＃17307](https://github.com/pingcap/tidb/pull/17307)に送信することにより、メッセージの送受信時に予期しないタイムアウトが発生する問題を修正します。
     -   パーティションプルーニング中に符号付き整数と符号なし整数を誤って区別する問題を修正しました。これにより、パフォーマンスが向上します[＃17230](https://github.com/pingcap/tidb/pull/17230)
-    -   互換性のない`mysql.user`テーブル[＃17300](https://github.com/pingcap/tidb/pull/17300)が原因でv3.1.1からv4.0にアップグレードが失敗する問題を修正します。
+    -   互換性のない`mysql.user`テーブル[＃17300](https://github.com/pingcap/tidb/pull/17300)が原因でv3.1.1からv4.0にアップグレードできない問題を修正します。
     -   `update`ステートメント[＃17305](https://github.com/pingcap/tidb/pull/17305)のパーティションの誤った選択の問題を修正します。
     -   [＃17380](https://github.com/pingcap/tidb/pull/17380)から不明なエラーメッセージを受信したときのシステムパニックを修正
     -   `key`パーティション化されたテーブルを作成するときの誤った処理ロジックによって引き起こされるシステムパニックを修正します[＃17242](https://github.com/pingcap/tidb/pull/17242)
@@ -79,7 +79,7 @@ TiDBバージョン：4.0.0
     -   `tidb_opt_agg_push_down`が有効で、集計関数がパーティションテーブル[＃17328](https://github.com/pingcap/tidb/pull/17328)をプッシュダウンするときに、誤った処理ロジックによって引き起こされるシステムパニックを修正します。
     -   場合によっては、失敗したTiKVノードにアクセスする問題を修正します[＃17342](https://github.com/pingcap/tidb/pull/17342)
     -   `tidb.toml`の`isolation-read`の構成アイテムが有効にならない問題を修正します[＃17322](https://github.com/pingcap/tidb/pull/17322)
-    -   ストリーム集約を強制するために`hint`が使用されている場合に、処理ロジックが正しくないために出力結果の順序が正しくない問題を修正します[＃17347](https://github.com/pingcap/tidb/pull/17347)
+    -   `hint`を使用してストリーム集約を強制する場合の処理ロジックが正しくないために出力結果の順序が正しくない問題を修正します[＃17347](https://github.com/pingcap/tidb/pull/17347)
     -   `insert`が異なる[＃17314](https://github.com/pingcap/tidb/pull/17314)でDIVを処理する動作を修正し`SQL_MODE`
 
 -   TiFlash
@@ -88,7 +88,7 @@ TiDBバージョン：4.0.0
     -   デフォルトで`Raft Compact Log Command`の遅延処理最適化を無効にすることにより、ノードが大量のデータを書き込む場合の過剰な再起動時間の問題を修正します。
     -   一部のシナリオでTiDBが`DROP DATABASE`ステートメントを誤って処理するためにシステムが起動しないという問題を修正します
     -   `Server_info`のCPU情報の収集方法が他のコンポーネントの方法と異なる問題を修正します
-    -   `batch coprocessor`が有効になっている場合に`Query`ステートメントを実行するとエラー`Too Many Pings`が報告される問題を修正します
+    -   `batch coprocessor`が有効になっている場合、 `Query`ステートメントの実行時にエラー`Too Many Pings`が報告される問題を修正します。
     -   TiFlashが関連情報を報告しないため、ダッシュボードが正しい`deploy path`情報を表示できない問題を修正します
 
 -   TiKV

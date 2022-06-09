@@ -2,7 +2,7 @@
 title: tiup dm import
 ---
 
-# tiupdmインポート {#tiup-dm-import}
+# tiup dm import {#tiup-dm-import}
 
 DM v1.0では、クラスタは基本的にTiDBAnsibleを使用してデプロイされます。 TiUP DMは、v1.0クラスターをインポートし、DMv2.0でクラスターを再デプロイするための`import`のコマンドを提供します。
 
@@ -45,7 +45,7 @@ tiup dm import [flags]
 
 ### --名前を変更 {#rename}
 
--   インポートしたクラスタの名前を変更します。
+-   インポートされたクラスタの名前を変更します。
 -   データ型： `STRING`
 -   このオプションがコマンドで指定されていない場合、デフォルトのクラスタ名はインベントリファイルで指定された`cluster_name`です。
 

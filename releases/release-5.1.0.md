@@ -26,35 +26,35 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                      | タイプを変更する   | 説明                                                                                                                                |
-| :--------------------------------------------------------------------------------------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------- |
-| [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新しく追加されました | 共通テーブル式の最大再帰深度を制御します。                                                                                                             |
-| [`init_connect`](/system-variables.md#init_connect)                                      | 新しく追加されました | TiDBサーバーへの初期接続を制御します。                                                                                                             |
-| [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)          | 新しく追加されました | TiDBが統計を収集する方法を制御します。この変数のデフォルト値は`2`です。これは実験的機能です。                                                                                |
-| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新しく追加されました | 接続しているTiDBサーバーでセキュリティ拡張モード（SEM）が有効になっているかどうかを示します。この変数設定は、TiDBサーバーを再起動せずに変更することはできません。                                            |
-| [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新しく追加されました | オプティマイザのコスト見積もりを無視するかどうか、およびクエリの実行にMPPモードを強制的に使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                                  |
-| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新しく追加されました | パーティションテーブルの動的プルーニングモードを有効にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`です。これは、パーティション化されたテーブルの動的プルーニングモードがデフォルトで無効になっていることを意味します。 |
+| 変数名                                                                                      | タイプを変更する   | 説明                                                                                                                          |
+| :--------------------------------------------------------------------------------------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新しく追加されました | 共通テーブル式の最大再帰深度を制御します。                                                                                                       |
+| [`init_connect`](/system-variables.md#init_connect)                                      | 新しく追加されました | TiDBサーバーへの初期接続を制御します。                                                                                                       |
+| [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)          | 新しく追加されました | TiDBが統計を収集する方法を制御します。この変数のデフォルト値は`2`です。これは実験的機能です。                                                                          |
+| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新しく追加されました | 接続しているTiDBサーバーでセキュリティ拡張モード（SEM）が有効になっているかどうかを示します。この変数設定は、TiDBサーバーを再起動せずに変更することはできません。                                      |
+| [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新しく追加されました | オプティマイザのコスト見積もりを無視するかどうか、およびクエリの実行にMPPモードを強制的に使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                            |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新しく追加されました | パーティション表の動的プルーニング・モードを使用可能にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`です。これは、パーティション表の動的プルーニング・モードがデフォルトで無効になっていることを意味します。 |
 
 ### Configuration / コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
-| Configuration / コンフィグレーションファイル | Configuration / コンフィグレーション項目                                                                             | タイプを変更する   | 説明                                                                                                                                                                         |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| TiDB構成ファイル                     | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)                                          | 新しく追加されました | セキュリティ拡張モード（SEM）を有効にするかどうかを制御します。この構成アイテムのデフォルト値は`false`です。これは、SEMが無効になっていることを意味します。                                                                                       |
-| TiDB構成ファイル                     | [`performance.committer-concurrency`](/tidb-configuration-file.md#committer-concurrency)                 | 変更         | 単一トランザクションのコミットフェーズでのコミット操作に関連する要求の同時実行数を制御します。デフォルト値は`16`から`128`に変更されます。                                                                                                  |
-| TiDB構成ファイル                     | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)                                   | 新しく追加されました | TCP層でTCP_NODELAYを有効にするかどうかを決定します。デフォルト値は`true`です。これは、TCP_NODELAYが有効になっていることを意味します。                                                                                         |
-| TiDB構成ファイル                     | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)                                     | 新しく追加されました | TiDBがインスタンスレベルでオプティマイザーのコスト見積もりを無視し、MPPモードを適用するかどうかを制御します。デフォルト値は`false`です。この構成項目は、システム変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の初期値を制御します。 |
-| TiDB構成ファイル                     | [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)     | 新しく追加されました | 単一のTiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)つのテーブルに記録できるデッドロックイベントの最大数を設定します。デフォルト値は`10`です。                           |
-| TiKV構成ファイル                     | [`abort-on-panic`](/tikv-configuration-file.md#abort-on-panic)                                           | 新しく追加されました | `abort`プロセスで、TiKVがパニックになったときにシステムがコアダンプファイルを生成できるようにするかどうかを設定します。デフォルト値は`false`です。これは、コアダンプファイルの生成が許可されていないことを意味します。                                                       |
-| TiKV構成ファイル                     | [`hibernate-regions`](/tikv-configuration-file.md#hibernate-regions)                                     | 変更         | デフォルト値は`false`から`true`に変更されます。リージョンが長時間アイドル状態の場合、自動的に休止状態に設定されます。                                                                                                          |
-| TiKV構成ファイル                     | [`old-value-cache-memory-quota`](/tikv-configuration-file.md#old-value-cache-memory-quota)               | 新しく追加されました | TiCDCの古い値によるメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                              |
-| TiKV構成ファイル                     | [`sink-memory-quota`](/tikv-configuration-file.md#sink-memory-quota)                                     | 新しく追加されました | TiCDCデータ変更イベントによるメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                         |
-| TiKV構成ファイル                     | [`incremental-scan-threads`](/tikv-configuration-file.md#incremental-scan-threads)                       | 新しく追加されました | 履歴データを段階的にスキャンするタスクのスレッド数を設定します。デフォルト値は`4`です。これは、タスクに4つのスレッドがあることを意味します。                                                                                                   |
-| TiKV構成ファイル                     | [`incremental-scan-concurrency`](/tikv-configuration-file.md#incremental-scan-concurrency)               | 新しく追加されました | 履歴データを段階的にスキャンするタスクの同時実行の最大数を設定します。デフォルト値は`6`です。これは、最大6つのタスクを同時に実行できることを意味します。                                                                                             |
-| TiKV構成ファイル                     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 変更         | 保留中の圧縮バイトのソフト制限。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                         |
-| TiKV構成ファイル                     | [`storage.io-rate-limit`](/tikv-configuration-file.md#storageio-rate-limit)                              | 新しく追加されました | TiKV書き込みのI/Oレートを制御します。デフォルト値の`storage.io-rate-limit.max-bytes-per-sec`は`"0MB"`です。                                                                                          |
-| TiKV構成ファイル                     | [`resolved-ts.enable`](/tikv-configuration-file.md#enable)                                               | 新しく追加されました | すべてのリージョンリーダーに対して`resolved-ts`を維持するかどうかを決定します。デフォルト値は`true`です。                                                                                                             |
-| TiKV構成ファイル                     | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                     | 新しく追加されました | `resolved-ts`が転送される間隔。デフォルト値は`"1s"`です。値は動的に変更できます。                                                                                                                         |
-| TiKV構成ファイル                     | [`resolved-ts.scan-lock-pool-size`](/tikv-configuration-file.md#scan-lock-pool-size)                     | 新しく追加されました | `resolved-ts`を初期化するときにTiKVがMVCC（マルチバージョン同時実行制御）ロックデータをスキャンするために使用するスレッドの数。デフォルト値は`2`です。                                                                                    |
+| Configuration / コンフィグレーションファイル | Configuration / コンフィグレーション項目                                                                             | タイプを変更する   | 説明                                                                                                                                                                          |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TiDB構成ファイル                     | [`security.enable-sem`](/tidb-configuration-file.md#enable-sem)                                          | 新しく追加されました | セキュリティ拡張モード（SEM）を有効にするかどうかを制御します。この構成アイテムのデフォルト値は`false`です。これは、SEMが無効になっていることを意味します。                                                                                        |
+| TiDB構成ファイル                     | [`performance.committer-concurrency`](/tidb-configuration-file.md#committer-concurrency)                 | 変更         | 単一トランザクションのコミットフェーズでのコミット操作に関連する要求の同時実行数を制御します。デフォルト値は`16`から`128`に変更されます。                                                                                                   |
+| TiDB構成ファイル                     | [`performance.tcp-no-delay`](/tidb-configuration-file.md#tcp-no-delay)                                   | 新しく追加されました | TCP層でTCP_NODELAYを有効にするかどうかを決定します。デフォルト値は`true`です。これは、TCP_NODELAYが有効になっていることを意味します。                                                                                          |
+| TiDB構成ファイル                     | [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)                                     | 新しく追加されました | TiDBがインスタンスレベルでOptimizerのコスト見積もりを無視し、MPPモードを適用するかどうかを制御します。デフォルト値は`false`です。この構成項目は、システム変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)の初期値を制御します。 |
+| TiDB構成ファイル                     | [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)     | 新しく追加されました | 単一のTiDBサーバーの[`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)つのテーブルに記録できるデッドロックイベントの最大数を設定します。デフォルト値は`10`です。                            |
+| TiKV構成ファイル                     | [`abort-on-panic`](/tikv-configuration-file.md#abort-on-panic)                                           | 新しく追加されました | `abort`プロセスで、TiKVがパニックになったときにシステムがコアダンプファイルを生成できるようにするかどうかを設定します。デフォルト値は`false`です。これは、コアダンプファイルの生成が許可されていないことを意味します。                                                        |
+| TiKV構成ファイル                     | [`hibernate-regions`](/tikv-configuration-file.md#hibernate-regions)                                     | 変更         | デフォルト値は`false`から`true`に変更されます。リージョンが長時間アイドル状態の場合、自動的に休止状態に設定されます。                                                                                                           |
+| TiKV構成ファイル                     | [`old-value-cache-memory-quota`](/tikv-configuration-file.md#old-value-cache-memory-quota)               | 新しく追加されました | TiCDCの古い値によるメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                               |
+| TiKV構成ファイル                     | [`sink-memory-quota`](/tikv-configuration-file.md#sink-memory-quota)                                     | 新しく追加されました | TiCDCデータ変更イベントによるメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                          |
+| TiKV構成ファイル                     | [`incremental-scan-threads`](/tikv-configuration-file.md#incremental-scan-threads)                       | 新しく追加されました | 履歴データを段階的にスキャンするタスクのスレッド数を設定します。デフォルト値は`4`です。これは、タスクに4つのスレッドがあることを意味します。                                                                                                    |
+| TiKV構成ファイル                     | [`incremental-scan-concurrency`](/tikv-configuration-file.md#incremental-scan-concurrency)               | 新しく追加されました | 履歴データを段階的にスキャンするタスクの同時実行の最大数を設定します。デフォルト値は`6`です。これは、最大6つのタスクを同時に実行できることを意味します。                                                                                              |
+| TiKV構成ファイル                     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 変更         | 保留中の圧縮バイトのソフト制限。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                          |
+| TiKV構成ファイル                     | [`storage.io-rate-limit`](/tikv-configuration-file.md#storageio-rate-limit)                              | 新しく追加されました | TiKV書き込みのI/Oレートを制御します。デフォルト値の`storage.io-rate-limit.max-bytes-per-sec`は`"0MB"`です。                                                                                           |
+| TiKV構成ファイル                     | [`resolved-ts.enable`](/tikv-configuration-file.md#enable)                                               | 新しく追加されました | すべてのリージョンリーダーに対して`resolved-ts`を維持するかどうかを決定します。デフォルト値は`true`です。                                                                                                              |
+| TiKV構成ファイル                     | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                     | 新しく追加されました | `resolved-ts`が転送される間隔。デフォルト値は`"1s"`です。値は動的に変更できます。                                                                                                                          |
+| TiKV構成ファイル                     | [`resolved-ts.scan-lock-pool-size`](/tikv-configuration-file.md#scan-lock-pool-size)                     | 新しく追加されました | `resolved-ts`を初期化するときにTiKVがMVCC（マルチバージョン同時実行制御）ロックデータをスキャンするために使用するスレッドの数。デフォルト値は`2`です。                                                                                     |
 
 ### その他 {#others}
 
@@ -72,7 +72,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 -   MySQL8.0のCommonTableExpression（CTE）機能をサポートします。
 
-    この機能は、階層データを再帰的または非再帰的にクエリする機能をTiDBに提供し、ツリークエリを使用して、人的資源、製造、金融市場、教育などの複数のセクターでアプリケーションロジックを実装するニーズを満たします。
+    この機能により、TiDBは階層データを再帰的または非再帰的にクエリすることができ、ツリークエリを使用して、人事、製造、金融市場、教育などの複数のセクターでアプリケーションロジックを実装する必要があります。
 
     TiDBでは、 `WITH`ステートメントを適用して共通テーブル式を使用できます。 [ユーザードキュメント](/sql-statements/sql-statement-with.md) [＃17472](https://github.com/pingcap/tidb/issues/17472)
 
@@ -128,7 +128,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
     ユーザードキュメント：
 
-    -   クラスタ内のすべてのTiKVノードで現在発生している悲観的ロックおよびその他のロックを表示します[`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    -   クラスター内のすべてのTiKVノードで現在発生している悲観的ロックおよびその他のロックを表示します[`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
     -   TiDBノードで最近発生したいくつかのデッドロックエラーを表示します[`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
     -   TiDBノードで現在実行されているトランザクション情報を表示します[`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
@@ -222,7 +222,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
 
         -   レプリカスナップショットの生成プロセスを最適化して、スケーリング中の遅いスケジューリングの問題を解決します[＃3563](https://github.com/tikv/pd/issues/3563) [＃10059](https://github.com/tikv/tikv/pull/10059) [＃10001](https://github.com/tikv/tikv/pull/10001)
         -   トラフィックの変化による[＃3751](https://github.com/tikv/pd/issues/3751)のプレッシャーによって引き起こされる遅いスケジューリングの問題を解決し[＃3693](https://github.com/tikv/pd/issues/3693) [＃3739](https://github.com/tikv/pd/issues/3739) [＃3728](https://github.com/tikv/pd/issues/3728)
-        -   スケジューリングによる大規模なクラスターのスペースの不一致を減らし、大規模な圧縮率の不一致によって引き起こされるバーストの問題（異種スペースクラスターと同様）を防ぐためにスケジューリング式を最適化します[＃3592](https://github.com/tikv/pd/issues/3592) [＃10005](https://github.com/tikv/tikv/pull/10005)
+        -   スケジューリングによる大規模なクラスターのスペースの不一致を減らし、大規模な圧縮率の不一致によって引き起こされるバーストの問題（異種のスペースクラスターと同様）を防ぐためにスケジューリング式を最適化します[＃3592](https://github.com/tikv/pd/issues/3592) [＃10005](https://github.com/tikv/tikv/pull/10005)
 
 -   ツール
 
@@ -248,7 +248,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
     -   TiDB Lightning
 
         -   データのインポート速度を向上させます。最適化の結果は、TPC-Cデータのインポート速度が30％向上し、より多くのインデックス（5インデックス）を持つ大きなテーブル（2TB +）のインポート速度が50％以上向上することを示しています。 [＃753](https://github.com/pingcap/br/pull/753)
-        -   インポートするデータと、インポートする前にターゲットクラスタに事前チェックを追加し、エラーを報告して、インポート要件を満たしていない場合にインポートプロセスを拒否します[＃999](https://github.com/pingcap/br/pull/999)
+        -   インポートするデータと、インポートする前のターゲットクラスタに事前チェックを追加し、エラーを報告して、インポート要件を満たしていない場合にインポートプロセスを拒否します[＃999](https://github.com/pingcap/br/pull/999)
         -   ローカルバックエンドでのチェックポイント更新のタイミングを最適化して、ブレークポイントからの再起動のパフォーマンスを向上させます[＃1080](https://github.com/pingcap/br/pull/1080)
 
 ## バグの修正 {#bug-fixes}
@@ -273,9 +273,9 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
     -   準備されたプランキャッシュ`point get`がトランザクション[＃24741](https://github.com/pingcap/tidb/issues/24741)の`point get`ステートメントによって誤って使用される問題を修正します。
     -   照合順序が`ascii_bin`または[＃24569](https://github.com/pingcap/tidb/issues/24569)の場合に間違ったプレフィックスインデックス値を書き込む問題を修正し`latin1_bin`
     -   進行中のトランザクションがGCワーカーによって中断される可能性があるという問題を修正します[＃24591](https://github.com/pingcap/tidb/issues/24591)
-    -   `new-collation`が有効になっているが、 `new-row-format`が無効になっている場合に、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
-    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングします
-    -   `HAVING`節[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリの計画を作成するときに発生するパニックの問題を修正します
+    -   `new-collation`が有効で、 `new-row-format`が無効の場合、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
+    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングする
+    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するパニックの問題を修正します
     -   列プルーニングの改善により、 `Apply`および`Join`オペレーターの結果が正しくなくなる問題を修正します[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックされたプライマリロックを解決できないバグを修正します[＃24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketchレコードの重複を引き起こす可能性のある統計のGCの問題を修正します[＃24357](https://github.com/pingcap/tidb/pull/24357)

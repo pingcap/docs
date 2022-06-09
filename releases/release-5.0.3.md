@@ -34,7 +34,7 @@ TiDBバージョン：5.0.3
     -   デュアルテーブルからのユニオンブランチの削除をサポート[＃25614](https://github.com/pingcap/tidb/pull/25614)
     -   内蔵機能`replace()`から[＃25565](https://github.com/pingcap/tidb/pull/25565)へのプッシュダウンをサポート
     -   `datediff()` `datesub()` `unix_timestamp()` 、および`day()`を`concat()`に[＃25564](https://github.com/pingcap/tidb/pull/25564)ダウンすることを`concat_ws()`し`year()`
-    -   集計オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
+    -   骨材オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
     -   `Limit`人のオペレーターを[＃25159](https://github.com/pingcap/tidb/pull/25159)にプッシュダウンすることをサポート
     -   内蔵機能`str_to_date`から[＃25148](https://github.com/pingcap/tidb/pull/25148)へのプッシュダウンをサポート
     -   MPP外部結合が、テーブルの行数[＃25142](https://github.com/pingcap/tidb/pull/25142)に基づいてビルドテーブルを選択できるようにします。
@@ -69,13 +69,13 @@ TiDBバージョン：5.0.3
     -   TiCDC
 
         -   gRPCの再接続ロジックを改良し、KVクライアントのスループットを向上させます[＃1586](https://github.com/pingcap/tiflow/issues/1586) [＃1501](https://github.com/pingcap/tiflow/issues/1501#issuecomment-820027078) [＃1682](https://github.com/pingcap/tiflow/pull/1682) [＃1393](https://github.com/pingcap/tiflow/issues/1393) [＃1847](https://github.com/pingcap/tiflow/pull/1847) [＃1905](https://github.com/pingcap/tiflow/issues/1905) [＃1904](https://github.com/pingcap/tiflow/issues/1904)
-        -   ソーターのI/Oエラーをよりユーザーフレンドリーにします
+        -   ソーターI/Oエラーをよりユーザーフレンドリーにします
 
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
 
-    -   `SET`型列[＃25669](https://github.com/pingcap/tidb/issues/25669)でマージ結合を使用すると誤った結果が返される問題を修正します
+    -   `SET`型列[＃25669](https://github.com/pingcap/tidb/issues/25669)でマージ結合を使用すると誤った結果が返される問題を修正します。
     -   `IN`式の引数[＃25591](https://github.com/pingcap/tidb/issues/25591)のデータ破損の問題を修正します
     -   GCのセッションがグローバル変数の影響を受けないようにする[＃24976](https://github.com/pingcap/tidb/issues/24976)
     -   ウィンドウ関数クエリ[＃25344](https://github.com/pingcap/tidb/issues/25344)で`limit`を使用するときに発生するパニックの問題を修正します
@@ -117,7 +117,7 @@ TiDBバージョン：5.0.3
     -   複雑な`GROUP BY`列の集計クエリを処理するときの誤った結果の問題を修正します
     -   書き込み圧力が高い場合に発生するTiFlashパニックの問題を修正します
     -   右のjonキーがnullalbeでなく、左のjoinキーがnull許容である場合に発生するパニックを修正します
-    -   `read-index`のリクエストに時間がかかる潜在的な問題を修正します
+    -   `read-index`のリクエストに時間がかかる可能性のある問題を修正します
     -   読み取り負荷が大きいときに発生するパニックの問題を修正します
     -   `Date_Format`の関数が`STRING`の型の引数と`NULL`の値で呼び出されたときに発生する可能性のあるパニックの問題を修正します
 
@@ -141,5 +141,5 @@ TiDBバージョン：5.0.3
 
         -   いくつかの特別なデータのTiDBLightningパニックの問題を修正します[＃1213](https://github.com/pingcap/br/issues/1213)
         -   TiDBLightningがインポートされた大きなCSVファイルを分割するときに報告されるEOFエラーを修正します[＃1133](https://github.com/pingcap/br/issues/1133)
-        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプ[＃1186](https://github.com/pingcap/br/pull/1186)の`auto_increment`列のテーブルをインポートすると、非常に大きな基本値が生成されるバグを修正します。
+        -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプ[＃1186](https://github.com/pingcap/br/pull/1186)の`auto_increment`列のテーブルをインポートすると、非常に大きなベース値が生成されるバグを修正します。
         -   TiDBがParquetファイル[＃1277](https://github.com/pingcap/br/pull/1277)の`DECIMAL`タイプのデータの解析に失敗する問題を修正します

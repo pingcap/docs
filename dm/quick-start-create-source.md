@@ -15,7 +15,7 @@ summary: Learn how to create a data source for Data Migration (DM).
 
 ## ステップ1：データソースを構成する {#step-1-configure-the-data-source}
 
-1.  （オプション）データソースパスワードを暗号化する
+1.  （オプション）データソースのパスワードを暗号化する
 
     DM構成ファイルでは、dmctlで暗号化されたパスワードを使用することをお勧めします。以下の例に従って、データソースの暗号化されたパスワードを取得できます。このパスワードは、後で構成ファイルを書き込むために使用できます。
 
@@ -80,7 +80,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 
 ## ステップ3：作成したデータソースをクエリする {#step-3-query-the-data-source-you-created}
 
-データソースを作成した後、次のコマンドを使用してデータソースをクエリできます。
+データソースを作成したら、次のコマンドを使用してデータソースをクエリできます。
 
 -   データソースの`source-id`を知っている場合は、 `dmctl get-config source <source-id>`コマンドを使用して、データソースの構成を直接確認できます。
 

@@ -3,7 +3,7 @@ title: Quick start with HTAP
 summary: Learn how to quickly get started with the TiDB HTAP.
 ---
 
-# TiDBHTAPのクイックスタートガイド {#quick-start-guide-for-tidb-htap}
+# TiDB HTAPのクイックスタートガイド {#quick-start-guide-for-tidb-htap}
 
 このガイドでは、TiDBのハイブリッドトランザクションおよび分析処理（HTAP）のワンストップソリューションを開始するための最も簡単な方法について説明します。
 
@@ -15,14 +15,14 @@ summary: Learn how to quickly get started with the TiDB HTAP.
 
 TiDB HTAPを使用する前に、TiDBオンライントランザクション処理（OLTP）用の行ベースのストレージエンジンである[TiKV](/tikv-overview.md) 、およびTiDBオンライン分析処理（OLAP）用の列型ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)に関する基本的な知識が必要です。
 
--   HTAPのストレージエンジン：HTAPでは、行ベースのストレージエンジンと列型ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を保つことができます。行ベースのストレージエンジンはOLTPパフォーマンスを最適化し、列型ストレージエンジンはOLAPパフォーマンスを最適化します。
--   HTAPのデータ整合性：分散型およびトランザクション型のKey-Valueデータベースとして、TiKVはACID準拠のトランザクション型インターフェースを提供し、 [いかだコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により、複数のレプリカ間のデータ整合性と高可用性を保証します。 TiKVの列型ストレージ拡張として、TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってリアルタイムでTiKVからデータを複製します。これにより、データがTiKVとTiFlashの間で強力に整合性が保たれます。
+-   HTAPのストレージエンジン：行ベースのストレージエンジンと列型ストレージエンジンがHTAPに共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を保つことができます。行ベースのストレージエンジンはOLTPパフォーマンスを最適化し、列型ストレージエンジンはOLAPパフォーマンスを最適化します。
+-   HTAPのデータ整合性：分散型およびトランザクション型のKey-Valueデータベースとして、TiKVはACID準拠のトランザクション型インターフェースを提供し、 [いかだコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により、複数のレプリカ間のデータ整合性と高可用性を保証します。 TiKVの列型ストレージ拡張として、TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってTiKVからのデータをリアルタイムで複製します。これにより、TiKVとTiFlashの間でデータの一貫性が確保されます。
 -   HTAPのデータ分離：TiKVとTiFlashは、HTAPリソース分離の問題を解決するために、必要に応じて異なるマシンに展開できます。
 -   MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降のTiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットのSQLアルゴリズムを提供します。 MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
 
 ## 手順 {#steps}
 
-このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)のデータセットのサンプルテーブルをクエリすることで、TiDBHTAPの便利さと高性能を体験できます。 TPC-Hは、大量のデータと高度な複雑さを備えた一連のビジネス指向のアドホッククエリで構成される一般的な意思決定支援ベンチマークです。 TPC-Hを使用して22の完全なSQLクエリを体験するには、クエリステートメントとデータを生成する方法について[tidb-ベンチリポジトリ](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries)または[TPC-H](http://www.tpc.org/tpch/)にアクセスしてください。
+このドキュメントでは、 [TPC-H](http://www.tpc.org/tpch/)のデータセットのサンプルテーブルをクエリすることで、 TiDB HTAPの便利さと高性能を体験できます。 TPC-Hは、大量のデータと高度な複雑さを備えた一連のビジネス指向のアドホッククエリで構成される一般的な意思決定支援ベンチマークです。 TPC-Hを使用して22の完全なSQLクエリを体験するには、クエリステートメントとデータを生成する方法について[tidb-ベンチリポジトリ](https://github.com/pingcap/tidb-bench/tree/master/tpch/queries)または[TPC-H](http://www.tpc.org/tpch/)にアクセスしてください。
 
 ### 手順1.ローカルテスト環境をデプロイする {#step-1-deploy-a-local-test-environment}
 
@@ -40,11 +40,11 @@ tiup playground
 
 ### ステップ2.テストデータを準備する {#step-2-prepare-test-data}
 
-次の手順では、TiDBHTAPを使用するためのテストデータとして[TPC-H](http://www.tpc.org/tpch/)のデータセットを作成できます。 TPC-Hに興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)を参照してください。
+次の手順では、 TiDB HTAPを使用するためのテストデータとして[TPC-H](http://www.tpc.org/tpch/)のデータセットを作成できます。 TPC-Hに興味がある場合は、 [一般的な実装ガイドライン](http://tpc.org/tpc_documents_current_versions/pdf/tpc-h_v3.0.0.pdf)を参照してください。
 
 > **ノート：**
 >
-> 既存のデータを分析クエリに使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQLステートメントを実行するか、関連するツールを使用して作成できます。
+> 分析クエリに既存のデータを使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQLステートメントを実行するか、関連するツールを使用してデータを作成できます。
 
 1.  次のコマンドを実行して、テストデータ生成ツールをインストールします。
 
@@ -137,7 +137,7 @@ limit 10;
 
 これは出荷優先度クエリであり、指定された日付より前に出荷されていない最高収益の注文の優先度と潜在的な収益を提供します。潜在的な収益は、 `l_extendedprice * (1-l_discount)`の合計として定義されます。注文は収益の降順で一覧表示されます。この例では、このクエリは、上位10に潜在的なクエリ収益がある未出荷の注文を一覧表示します。
 
-### ステップ4.テストデータを柱状ストレージエンジンに複製します {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
+### ステップ4.テストデータを列型ストレージエンジンに複製します {#step-4-replicate-the-test-data-to-the-columnar-storage-engine}
 
 TiFlashが展開された後、TiKVはデータをTiFlashにすぐに複製しません。 TiDBのMySQLクライアントで次のDDLステートメントを実行して、複製する必要のあるテーブルを指定する必要があります。その後、TiDBはそれに応じてTiFlashに指定されたレプリカを作成します。
 
@@ -166,7 +166,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'test' and
 
 ### ステップ5.HTAPを使用してデータをより高速に分析する {#step-5-analyze-data-faster-using-htap}
 
-[ステップ3](#step-3-query-data-with-the-row-based-storage-engine)でSQLステートメントを再度実行すると、TiDBHTAPのパフォーマンスを確認できます。
+[ステップ3](#step-3-query-data-with-the-row-based-storage-engine)でSQLステートメントを再度実行すると、 TiDB HTAPのパフォーマンスを確認できます。
 
 TiFlashレプリカを含むテーブルの場合、TiDBオプティマイザは、コスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。 TiFlashレプリカが選択されているかどうかを確認するには、 `desc`または`explain analyze`ステートメントを使用できます。例えば：
 
@@ -200,7 +200,7 @@ ORDER BY
 limit 10;
 ```
 
-`EXPLAIN`ステートメントの結果に`ExchangeSender`および`ExchangeReceiver`のオペレーターが示されている場合は、MPPモードが有効になっていることを示しています。
+`EXPLAIN`ステートメントの結果が`ExchangeSender`および`ExchangeReceiver`オペレーターを示している場合は、MPPモードが有効になっていることを示しています。
 
 さらに、クエリ全体の各部分がTiFlashエンジンのみを使用して計算されるように指定できます。詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas)を参照してください。
 
@@ -208,6 +208,6 @@ limit 10;
 
 ## 次は何ですか {#what-s-next}
 
--   [TiDBHTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)
+-   [TiDB HTAPのアーキテクチャ](/tiflash/tiflash-overview.md#architecture)
 -   [HTAPを探索する](/explore-htap.md)
 -   [TiFlashを使用する](/tiflash/use-tiflash.md#use-tiflash)

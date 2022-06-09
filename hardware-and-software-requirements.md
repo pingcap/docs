@@ -20,7 +20,7 @@ summary: Learn the software and hardware recommendations for deploying and runni
 >
 > -   Oracle Enterprise Linuxの場合、TiDBはRed Hat互換カーネル（RHCK）をサポートし、OracleEnterpriseLinuxが提供するUnbreakableEnterpriseカーネルをサポートしません。
 > -   多数のTiDBテストがCentOS7.3システムで実行されており、私たちのコミュニティには、LinuxオペレーティングシステムにTiDBをデプロイするための多くのベストプラクティスがあります。したがって、CentOS7.3以降にTiDBをデプロイすることをお勧めします。
-> -   上記のLinuxオペレーティングシステムのサポートには、物理サーバーだけでなく、VMware、KVM、XENなどの主要な仮想化環境での展開と運用が含まれます。
+> -   上記のLinuxオペレーティングシステムのサポートには、物理サーバーだけでなく、VMware、KVM、XENなどの主要な仮想化環境での展開と操作が含まれます。
 > -   Red Hat Enterprise Linux 8.0、CentOS 8 Stream、およびOracle Enterprise Linux 8.0は、これらのプラットフォームのテストが進行中であるため、まだサポートされていません。
 > -   CentOS 8 Linuxのサポートは、そのアップストリームサポートが2021年12月31日に終了するため、計画されていません。
 > -   Ubuntu 16.04のサポートは、TiDBの将来のバージョンで削除される予定です。 Ubuntu18.04以降にアップグレードすることを強くお勧めします。
@@ -45,7 +45,7 @@ DebianLinuxやFedoraLinuxなどの他のLinuxOSバージョンは動作する可
 | ソフトウェア  | バージョン    |
 | :------ | :------- |
 | sshpass | 1.06以降   |
-| 沼       | 2.0.12以降 |
+| numa    | 2.0.12以降 |
 | タール     | どれか      |
 
 ## サーバーの推奨事項 {#server-recommendations}
@@ -67,7 +67,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 > -   テスト環境では、TiDBインスタンスとPDインスタンスを同じサーバーにデプロイできます。
 > -   パフォーマンス関連のテストでは、テスト結果の正確性を保証するために、パフォーマンスの低いストレージおよびネットワークハードウェア構成を使用しないでください。
 > -   TiKVサーバーの場合、読み取りと書き込みを高速化するためにNVMeSSDを使用することをお勧めします。
-> -   機能のテストと検証のみを行う場合は、 [TiDBのクイックスタートガイド](/quick-start-with-tidb.md)に従ってTiDBを単一のマシンにデプロイします。
+> -   機能のテストと検証のみを行う場合は、 [TiDBのクイックスタートガイド](/quick-start-with-tidb.md)に従ってTiDBを単一のマシンに展開します。
 > -   TiDBサーバーはディスクを使用してサーバーログを保存するため、テスト環境でのディスクの種類と容量に関する特別な要件はありません。
 
 ### 本番環境 {#production-environment}
@@ -91,8 +91,8 @@ TiFlashを展開する前に、次の点に注意してください。
 
 -   TiFlashは[複数のディスクに展開](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
 -   TiKVデータのリアルタイムレプリケーションをバッファリングするために、TiFlashデータディレクトリの最初のディスクとして高性能SSDを使用することをお勧めします。このディスクのパフォーマンスは、PCI-ESSDなどのTiKVのパフォーマンスより低くすることはできません。ディスク容量は、合計容量の10％以上である必要があります。そうしないと、このノードのボトルネックになる可能性があります。通常のSSDを他のディスクに展開できますが、PCI-ESSDが優れているとパフォーマンスが向上することに注意してください。
--   TiKVとは異なるノードにTiFlashをデプロイすることをお勧めします。 TiFlashとTiKVを同じノードにデプロイする必要がある場合は、CPUコアとメモリの数を増やし、TiFlashとTiKVを異なるディスクにデプロイして、相互に干渉しないようにしてください。
--   TiFlashディスクの総容量は次のように計算されます： `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKVの全体的な計画容量が1 TB、TiKVレプリカの数が3、TiFlashレプリカの数が2の場合、TiFlashの推奨される合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。このような場合は、複製するテーブルのデータ量に応じて、TiFlashの容量を決定してください。
+-   TiKVとは異なるノードにTiFlashを展開することをお勧めします。 TiFlashとTiKVを同じノードにデプロイする必要がある場合は、CPUコアとメモリの数を増やし、TiFlashとTiKVを異なるディスクにデプロイして、相互に干渉しないようにしてください。
+-   TiFlashディスクの総容量は次のように計算されます： `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKVの全体的な計画容量が1 TB、TiKVレプリカの数が3、TiFlashレプリカの数が2の場合、TiFlashの推奨される合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。このような場合は、複製するテーブルのデータ量に応じてTiFlashの容量を決定してください。
 
 TiCDCを展開する前に、1TBを超えるPCIe-SSDディスクにTiCDCを展開することをお勧めします。
 
@@ -105,7 +105,7 @@ TiCDCを展開する前に、1TBを超えるPCIe-SSDディスクにTiCDCを展�
 |        TiDB       |   4000   | アプリケーションおよびDBAツールの通信ポート                         |
 |        TiDB       |   10080  | TiDBステータスを報告するための通信ポート                          |
 |        TiKV       |   20160  | TiKV通信ポート                                       |
-|        TiKV       |   20180  | TiKVステータスを報告する通信ポート                             |
+|        TiKV       |   20180  | TiKVステータスを報告するための通信ポート                          |
 |         PD        |   2379   | TiDBとPD間の通信ポート                                  |
 |         PD        |   2380   | PDクラスタ内のノード間通信ポート                               |
 |      TiFlash      |   9000   | TiFlashTCPサービスポート                               |

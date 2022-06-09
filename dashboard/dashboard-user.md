@@ -11,14 +11,14 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
 
 ## 必要な特権 {#required-privileges}
 
--   接続されたTiDBサーバーで[セキュリティ拡張モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていないときにTiDBダッシュボードにアクセスするには、SQLユーザーに次の**すべて**の権限が必要です。
+-   接続されたTiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていないときにTiDBダッシュボードにアクセスするには、SQLユーザーに次の**すべて**の権限が必要です。
 
     -   処理する
     -   データベースを表示する
     -   CONFIG
     -   DASHBOARD_CLIENT
 
--   接続されたTiDBサーバーで[セキュリティ拡張モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときにTiDBダッシュボードにアクセスするには、SQLユーザーに次の**すべて**の権限が必要です。
+-   接続されたTiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっているときにTiDBダッシュボードにアクセスするには、SQLユーザーに次の**すべて**の権限が必要です。
 
     -   処理する
     -   データベースを表示する
@@ -42,7 +42,7 @@ SQLユーザーが前述の特権要件を満たしていない場合、以下�
 
 ## 例：TiDBダッシュボードにアクセスするための最小特権SQLユーザーを作成します {#example-create-a-least-privileged-sql-user-to-access-tidb-dashboard}
 
--   接続されたTiDBサーバーで[セキュリティ拡張モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDBダッシュボードにサインインできるSQLユーザー`dashboardAdmin`を作成するには、次のSQLステートメントを実行します。
+-   接続されたTiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっていない場合、TiDBダッシュボードにサインインできるSQLユーザー`dashboardAdmin`を作成するには、次のSQLステートメントを実行します。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';
@@ -54,7 +54,7 @@ SQLユーザーが前述の特権要件を満たしていない場合、以下�
     GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'dashboardAdmin'@'%';
     ```
 
--   接続されたTiDBサーバーで[セキュリティ拡張モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、最初にSEMを無効にし、次のSQLステートメントを実行して、TiDBダッシュボードにサインインできるSQLユーザー`dashboardAdmin`を作成します。ユーザーを作成したら、SEMを再度有効にします。
+-   接続されたTiDBサーバーで[セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合は、最初にSEMを無効にし、次のSQLステートメントを実行して、TiDBダッシュボードにサインインできるSQLユーザー`dashboardAdmin`を作成します。ユーザーを作成したら、SEMを再度有効にします。
 
     ```sql
     CREATE USER 'dashboardAdmin'@'%' IDENTIFIED BY '<YOUR_PASSWORD>';

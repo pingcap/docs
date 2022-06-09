@@ -5,7 +5,7 @@ summary: Learn about Statement Summary Table in TiDB.
 
 # ステートメント要約表 {#statement-summary-tables}
 
-SQLのパフォーマンスの問題をより適切に処理するために、MySQLはSQLを統計で監視するために`performance_schema`の[ステートメント要約テーブル](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中で、 `events_statements_summary_by_digest`は、レイテンシ、実行時間、スキャンされた行、全表スキャンなどの豊富なフィールドでSQLの問題を見つけるのに非常に役立ちます。
+SQLのパフォーマンスの問題をより適切に処理するために、MySQLはSQLを統計で監視するために`performance_schema`の[ステートメント要約表](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中で、 `events_statements_summary_by_digest`は、レイテンシ、実行時間、スキャンされた行、全表スキャンなどの豊富なフィールドでSQLの問題を見つけるのに非常に役立ちます。
 
 したがって、v4.0.0-rc.1以降、TiDBは、機能の点で`events_statements_summary_by_digest`に類似したシステムテーブルを`information_schema` （ `performance_schema`では*なく*）で提供します。
 
@@ -38,7 +38,7 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 select * from employee where id in (...) and salary between ? and ?;
 ```
 
-ここでの「プランダイジェスト」とは、正規化された実行プランによって計算された一意の識別子を指します。正規化プロセスは定数を無視します。同じSQLステートメントの実行プランが異なる可能性があるため、同じSQLステートメントが異なるカテゴリにグループ化される場合があります。同じカテゴリのSQLステートメントには、同じ実行プランがあります。
+ここでの「プランダイジェスト」とは、正規化された実行プランによって計算された一意の識別子を指します。正規化プロセスは定数を無視します。同じSQLステートメントの実行プランが異なる可能性があるため、同じSQLステートメントが異なるカテゴリにグループ化される場合があります。同じカテゴリのSQLステートメントの実行プランは同じです。
 
 `statements_summary`は、SQL監視メトリックの集計結果を格納します。一般に、各監視メトリックには、最大値と平均値が含まれます。たとえば、実行待ち時間のメトリックは、 `AVG_LATENCY` （平均待ち時間）と`MAX_LATENCY` （最大待ち時間）の2つのフィールドに対応します。
 
@@ -91,7 +91,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## <code>statements_summary_evicted</code> {#code-statements-summary-evicted-code}
 
-`tidb_stmt_summary_max_stmt_count`変数は、 `statement_summary`のテーブルがメモリに格納するステートメントの最大数を制御します。 `statement_summary`テーブルはLRUアルゴリズムを使用します。 SQLステートメントの数が`tidb_stmt_summary_max_stmt_count`の値を超えると、最長の未使用レコードがテーブルから削除されます。各期間中に削除されたSQLステートメントの数は、 `statements_summary_evicted`の表に記録されます。
+`tidb_stmt_summary_max_stmt_count`変数は、 `statement_summary`のテーブルがメモリに格納するステートメントの最大数を制御します。 `statement_summary`テーブルはLRUアルゴリズムを使用します。 SQLステートメントの数が`tidb_stmt_summary_max_stmt_count`の値を超えると、最も長い未使用のレコードがテーブルから削除されます。各期間中に削除されたSQLステートメントの数は、 `statements_summary_evicted`の表に記録されます。
 
 `statements_summary_evicted`テーブルは、SQLレコードが`statement_summary`テーブルから削除された場合にのみ更新されます。 `statements_summary_evicted`は、削除が発生する期間と削除されたSQLステートメントの数のみを記録します。
 
@@ -126,7 +126,7 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-上記の設定が有効になると、30分ごとに`statements_summary`のテーブルがクリアされます。 `statements_summary_history`のテーブルには、過去12時間に生成されたデータが格納されます。
+上記の設定が有効になった後、30分ごとに`statements_summary`のテーブルがクリアされます。 `statements_summary_history`のテーブルには、過去12時間に生成されたデータが格納されます。
 
 `statements_summary_evicted`の表は、SQLステートメントがステートメントの要約から削除された最近の24期間を記録します。 `statements_summary_evicted`のテーブルは30分ごとに更新されます。
 
@@ -197,7 +197,7 @@ select * from information_schema.statements_summary_evicted;
 
 ### サーバー側が原因でSQLの待ち時間が長くなる可能性はありますか？ {#could-high-sql-latency-be-caused-by-the-server-end}
 
-この例では、クライアントは`employee`テーブルのポイントクエリでパフォーマンスが低下しています。 SQLテキストに対してあいまい検索を実行できます。
+この例では、クライアントは`employee`テーブルでのポイントクエリでパフォーマンスが低下しています。 SQLテキストに対してあいまい検索を実行できます。
 
 {{< copyable "" >}}
 
@@ -265,8 +265,8 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `TABLE_NAMES` ：SQLステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをコンマで区切ります。
 -   `INDEX_NAMES` ：SQLステートメントで使用されるすべてのSQLインデックス。複数のインデックスがある場合は、それぞれをコンマで区切ります。
 -   `SAMPLE_USER` ：このカテゴリのSQLステートメントを実行するユーザー。 1人のユーザーのみが取得されます。
--   `PLAN_DIGEST` ：実行プランのダイジェスト。
--   `PLAN` ：元の実行計画。複数のステートメントがある場合は、1つのステートメントのみの計画が採用されます。
+-   `PLAN_DIGEST` ：実行計画のダイジェスト。
+-   `PLAN` ：元の実行プラン。複数のステートメントがある場合は、1つのステートメントのみの計画が採用されます。
 -   `PLAN_CACHE_HITS` ：このカテゴリのSQLステートメントがプランキャッシュにヒットした合計回数。
 -   `PLAN_IN_CACHE` ：このカテゴリのSQLステートメントの前回の実行がプランキャッシュにヒットしたかどうかを示します。
 
@@ -300,7 +300,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `SUM_COP_TASK_NUM` ：送信されたコプロセッサー要求の総数。
 -   `MAX_COP_PROCESS_TIME` ：コプロセッサータスクの最大実行時間。
 -   `MAX_COP_PROCESS_ADDRESS` ：最大実行時間のコプロセッサータスクのアドレス。
--   `MAX_COP_WAIT_TIME` ：コプロセッサー・タスクの最大待機時間。
+-   `MAX_COP_WAIT_TIME` ：コプロセッサータスクの最大待機時間。
 -   `MAX_COP_WAIT_ADDRESS` ：最大待機時間のコプロセッサータスクのアドレス。
 -   `AVG_PROCESS_TIME` ：TiKVでのSQLステートメントの平均処理時間。
 -   `MAX_PROCESS_TIME` ：TiKVでのSQLステートメントの最大処理時間。

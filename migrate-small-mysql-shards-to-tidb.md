@@ -52,7 +52,7 @@ CREATE TABLE `sale_01` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-`id`列が主キーで、 `sid`列がシャーディングキーです。 `id`列は自動増分であり、複数のシャーディングされたテーブル範囲が重複すると、データの競合が発生します。 `sid`は、インデックスがグローバルに一意であることを保証できるため、 [自動インクリメント主キーの主キー属性を削除します](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)の手順に従って、 `id`列をバイパスできます。
+`id`列が主キーで、 `sid`列がシャーディングキーです。 `id`列は自動増分であり、複数のシャーディングテーブル範囲が重複すると、データの競合が発生します。 `sid`は、インデックスがグローバルに一意であることを保証できるため、 [自動インクリメント主キーの主キー属性を削除します](/dm/shard-merge-best-practices.md#remove-the-primary-key-attribute-from-the-column)の手順に従って、 `id`列をバイパスできます。
 
 {{< copyable "" >}}
 
@@ -200,7 +200,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 | --master-addr | dmctlが接続するクラスタのDMマスターノードの{advertise-addr}。例：172.16.10.71：8261 |
 | 開始タスク         | データ移行タスクを開始します。                                               |
 
-移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更してから、もう一度`start-task task.yaml`を実行して移行タスクを開始してください。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)および[FAQ](/dm/dm-faq.md)を参照してください。
+移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更してから、 `start-task task.yaml`を再度実行して移行タスクを開始します。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)および[FAQ](/dm/dm-faq.md)を参照してください。
 
 ## ステップ4.タスクを確認します {#step-4-check-the-task}
 

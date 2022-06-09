@@ -16,8 +16,8 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
 
 -   TiDB
 
-    -   `_tidb_rowid`列[＃31543](https://github.com/pingcap/tidb/issues/31543)を読み取るクエリでのPointGetプランの使用をサポートします。
-    -   `Apply`演算子のログとメトリックをさらに追加して、並列[＃33887](https://github.com/pingcap/tidb/issues/33887)かどうかを示します。
+    -   `_tidb_rowid`列[＃31543](https://github.com/pingcap/tidb/issues/31543)を読み取るクエリでのPointGetプランの使用をサポートする
+    -   `Apply`オペレーターのログとメトリックをさらに追加して、並列[＃33887](https://github.com/pingcap/tidb/issues/33887)であるかどうかを示します。
     -   統計の収集に使用されるAnalyzeバージョン2の`TopN`のプルーニングロジックを改善します[＃34256](https://github.com/pingcap/tidb/issues/34256)
     -   Grafanaダッシュボードでの複数のKubernetesクラスターの表示のサポート[＃32593](https://github.com/pingcap/tidb/issues/32593)
 
@@ -50,7 +50,7 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
 
     -   TiDBの`date_format`がMySQLと互換性のない方法で`'\n'`を処理する問題を修正します[＃32232](https://github.com/pingcap/tidb/issues/32232)
     -   `ENUM`列または`SET`列のエンコードが間違っているためにTiDBが間違ったデータを書き込む問題を修正します[＃32302](https://github.com/pingcap/tidb/issues/32302)
-    -   マージ結合演算子が特定の場合に間違った結果を取得する問題を修正します[＃33042](https://github.com/pingcap/tidb/issues/33042)
+    -   マージ結合演算子が特定の場合に間違った結果を得る問題を修正します[＃33042](https://github.com/pingcap/tidb/issues/33042)
     -   相関サブクエリが定数[＃32089](https://github.com/pingcap/tidb/issues/32089)を返すときにTiDBが間違った結果を取得する問題を修正します
     -   TiFlashはまだ空の範囲のテーブルの読み取りをサポートしていませんが、TiFlashを使用して空の範囲のテーブルをスキャンするとTiDBが間違った結果を取得する問題を修正します[＃33083](https://github.com/pingcap/tidb/issues/33083)
     -   TiDB [＃31638](https://github.com/pingcap/tidb/issues/31638)で新しい照合順序が有効になっている場合、 `ENUM`列または`SET`列の`MAX`または`MIN`関数が間違った結果を返す問題を修正します。
@@ -74,7 +74,7 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
     -   `sql_mode`が[＃34099](https://github.com/pingcap/tidb/issues/34099)に設定されている場合に`'0000-00-00 00:00:00'`が`datetime`列に挿入される可能性があるバグを修正し`NO_ZERO_DATE` 。
     -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`のテーブルが照会されたときにTiDBサーバーのメモリが不足する可能性がある問題を修正します。この問題は、Grafanaダッシュボード[＃33893](https://github.com/pingcap/tidb/issues/33893)で遅いクエリをチェックしたときに発生する可能性があります
     -   `NOWAIT`ステートメントで、実行中のトランザクションがロック[＃32754](https://github.com/pingcap/tidb/issues/32754)に遭遇したときにすぐに返されないというバグを修正します。
-    -   `GBK`文字セットと`gbk_bin`文字セットでテーブルを作成するときに失敗するバグを修正し照合順序[＃31308](https://github.com/pingcap/tidb/issues/31308)
+    -   `GBK`文字セットと`gbk_bin`照合順序[＃31308](https://github.com/pingcap/tidb/issues/31308)でテーブルを作成するときに失敗するバグを修正します
     -   `enable-new-charset`が`on`の場合、照合順序を使用した`GBK`文字セットテーブルの作成が「不明な文字セット」エラー[＃31297](https://github.com/pingcap/tidb/issues/31297)で失敗するバグを修正します。
 
 -   TiKV
@@ -92,8 +92,8 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
     -   リソースメータリング[＃12234](https://github.com/tikv/tikv/issues/12234)の無効なアサーションによって引き起こされるパニックの問題を修正します
     -   一部のコーナーケースでスコアの計算が不正確になる問題を修正します[＃12254](https://github.com/tikv/tikv/issues/12254)
     -   `resolved_ts`モジュールによって引き起こされたOOMの問題を修正し、メトリックを追加します[＃12159](https://github.com/tikv/tikv/issues/12159)
-    -   正常にコミットされた楽観的なトランザクションがネットワークが貧弱なときに`Write Conflict`エラーを報告する可能性がある問題を修正します[＃34066](https://github.com/pingcap/tidb/issues/34066)
-    -   貧弱なネットワークでレプリカ読み取りが有効になっている場合に発生するTiKVパニックの問題を修正します[＃12046](https://github.com/tikv/tikv/issues/12046)
+    -   ネットワークが貧弱な場合に、正常にコミットされた楽観的なトランザクションが`Write Conflict`エラーを報告する可能性がある問題を修正します[＃34066](https://github.com/pingcap/tidb/issues/34066)
+    -   貧弱なネットワークでレプリカの読み取りが有効になっている場合に発生するTiKVパニックの問題を修正します[＃12046](https://github.com/tikv/tikv/issues/12046)
 
 -   PD
 
@@ -109,7 +109,7 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
     -   MPPタスクがスレッドを永久にリークする可能性があるバグを修正します[＃4238](https://github.com/pingcap/tiflash/issues/4238)
     -   `FLOAT`から[＃3998](https://github.com/pingcap/tiflash/issues/3998)をキャストするときに発生するオーバーフローを修正し`DECIMAL`
     -   期限切れのデータがゆっくりとリサイクルされる問題を修正します[＃4146](https://github.com/pingcap/tiflash/issues/4146)
-    -   ローカルトンネルが有効になっている場合、MPPクエリをキャンセルすると、タスクが永久にハングする可能性があるバグを修正します[＃4229](https://github.com/pingcap/tiflash/issues/4229)
+    -   ローカルトンネルが有効になっている場合、MPPクエリをキャンセルするとタスクが永久にハングする可能性があるバグを修正します[＃4229](https://github.com/pingcap/tiflash/issues/4229)
     -   クエリがキャンセルされたときに発生するメモリリークの問題を修正します[＃4098](https://github.com/pingcap/tiflash/issues/4098)
     -   `DATETIME`から[＃4151](https://github.com/pingcap/tiflash/issues/4151)をキャストするときに発生する間違った結果を修正し`DECIMAL`
     -   `Snapshot`が複数のDDL操作と同時に適用された場合のTiFlashパニックの潜在的な問題を修正します[＃4072](https://github.com/pingcap/tiflash/issues/4072)
@@ -132,7 +132,7 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
 
         -   バックアップの再試行中に暗号化情報が失われた場合に復元操作が失敗するバグを修正します[＃32423](https://github.com/pingcap/tidb/issues/32423)
         -   BRがRawKV1のバックアップに失敗する問題を修正し[＃32607](https://github.com/pingcap/tidb/issues/32607)
-        -   インクリメンタル復元後にテーブルにレコードを挿入するときに重複する主キーを修正する[＃33596](https://github.com/pingcap/tidb/issues/33596)
+        -   インクリメンタル復元後にレコードをテーブルに挿入するときに重複する主キーを修正する[＃33596](https://github.com/pingcap/tidb/issues/33596)
         -   空のクエリ[＃33322](https://github.com/pingcap/tidb/issues/33322)を使用したDDLジョブが原因で、BRインクリメンタルリストアが誤ってエラーを返すバグを修正します。
         -   復元操作の終了後にリージョンが不均一に分散される可能性があるという潜在的な問題を修正します[＃31034](https://github.com/pingcap/tidb/issues/31034)
         -   復元中にリージョンに一貫性がない場合にBRが十分な回数再試行しない問題を修正します[＃33419](https://github.com/pingcap/tidb/issues/33419)

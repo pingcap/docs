@@ -116,7 +116,7 @@ from:
 
 ## ステップ4：データ移行タスクをアップグレードする {#step-4-upgrade-data-migration-task}
 
-1.  [`operate-source`](/dm/dm-manage-source.md#operate-data-source)コマンドを使用して、アップストリームデータベースソース構成を[ステップ1](#step-1-prepare-v20-configuration-file)からv2.0+クラスタにロードします。
+1.  [`operate-source`](/dm/dm-manage-source.md#operate-data-source)コマンドを使用して、アップストリームデータベースソース設定を[ステップ1](#step-1-prepare-v20-configuration-file)からv2.0+クラスタにロードします。
 
 2.  ダウンストリームTiDBクラスタで、v1.0.xデータ移行タスクのインクリメンタルチェックポイントテーブルから対応するグローバルチェックポイント情報を取得します。
 

@@ -7,7 +7,7 @@ summary: Learn how to use the OpenAPI interface to manage the cluster status and
 
 <!-- markdownlint-disable MD024 -->
 
-TiCDCは、TiCDCクラスタを照会および操作するためのOpenAPI機能を提供します。これは、 [`cdc cli`ツール](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)の機能に似ています。
+TiCDCは、TiCDCクラスタを照会および操作するためのOpenAPI機能を提供します。これは、 [`cdc cli`ツール](/ticdc/manage-ticdc.md#use-cdc-cli-to-manage-cluster-status-and-data-replication-task)の機能と同様です。
 
 APIを使用して、TiCDCクラスタで次のメンテナンス操作を実行できます。
 
@@ -83,7 +83,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/status
 
 ## TiCDCクラスタのヘルスステータスを確認します {#check-the-health-status-of-a-ticdc-cluster}
 
-このAPIは同期インターフェースです。クラスタが正常な場合、 `200 OK`が返されます。
+このAPIは同期インターフェースです。クラスタが正常である場合、 `200 OK`が返されます。
 
 ### URIをリクエストする {#request-uri}
 
@@ -366,7 +366,7 @@ curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/pause
 
 ## レプリケーションタスクを再開します {#resume-a-replication-task}
 
-このAPIは非同期インターフェースです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけであり、コマンドが正常に実行されることを保証するものではありません。
+このAPIは非同期インターフェースです。リクエストが成功すると、 `202 Accepted`が返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけであり、コマンドが正常に実行されることを保証するものではありません。
 
 ### URIをリクエストする {#request-uri}
 
@@ -394,7 +394,7 @@ curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/resume
 
 ## レプリケーションサブタスクリストをクエリします {#query-the-replication-subtask-list}
 
-このAPIは同期インターフェースです。リクエストが成功すると、すべてのレプリケーションサブタスク（ `processor` ）の基本情報が返されます。
+このAPIは同期インターフェースです。要求が成功すると、すべてのレプリケーションサブタスク（ `processor` ）の基本情報が返されます。
 
 ### URIをリクエストする {#request-uri}
 

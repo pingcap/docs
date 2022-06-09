@@ -75,7 +75,7 @@ Name  User  Version  Path                                  PrivateKey
 prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiup/storage/dm/clusters/test/ssh/id_rsa
 ```
 
-## クラスタを起動します {#start-the-cluster}
+## クラスタを開始します {#start-the-cluster}
 
 クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを起動します。
 
@@ -115,7 +115,7 @@ ID                 Role          Host          Ports      OS/Arch       Status  
 
 `Status`列は、サービスが正常に実行されているかどうかを示すために`Up`または`Down`を使用します。
 
-DMマスターコンポーネントの場合、ステータスに`|L`が追加される場合があります。これは、DMマスターノードがリーダーであることを示します。 DM-workerコンポーネントの場合、 `Free`は、現在のDM-workerノードがアップストリームにバインドされていないことを示します。
+DMマスターコンポーネントの場合、ステータスに`|L`が追加されることがあります。これは、DMマスターノードがリーダーであることを示します。 DM-workerコンポーネントの場合、 `Free`は、現在のDM-workerノードがアップストリームにバインドされていないことを示します。
 
 ## クラスタでのスケーリング {#scale-in-a-cluster}
 
@@ -127,7 +127,7 @@ DMマスターコンポーネントの場合、ステータスに`|L`が追加�
 2.  DMマスターのAPIを呼び出して、 `member`を削除します。
 3.  ノードに関連するデータファイルをクリーンアップします。
 
-scale-inコマンドの基本的な使用法：
+スケールインコマンドの基本的な使用法：
 
 ```bash
 tiup dm scale-in <cluster-name> -N <node-id>
@@ -181,7 +181,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 >
 > アップグレードする前に、 `config export`を使用してクラスターの構成ファイルをエクスポートできます。アップグレード後、以前のバージョンにダウングレードする必要がある場合は、最初に以前のクラスタを再デプロイしてから、 `config import`を使用して以前の構成ファイルをインポートできます。
 >
-> v2.0.5より前のクラスターの場合、dmctl v2.0.5以降を使用して、データソースとタスクの構成ファイルをエクスポートおよびインポートできます。
+> v2.0.5より前のクラスターの場合、dmctl v2.0.5以降を使用して、データソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
 >
 > v2.0.2以降のクラスターの場合、現在、リレーワーカーに関連する構成を自動的にインポートすることはサポートされていません。 `start-relay`のコマンドを使用して手動で[リレーログを開始](/dm/relay-log.md#start-and-stop-the-relay-log-feature)を実行できます。
 
@@ -293,7 +293,7 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 1.  TiUPは、DM-Ansibleを使用して以前にデプロイされたDMクラスタに基づいてトポロジファイル[`topology.yml`](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を生成します。
 2.  トポロジー・ファイルが生成されたことを確認した後、それを使用して、v2.0以降のバージョンのDMクラスタをデプロイできます。
 
-デプロイメントが完了したら、 `tiup dm start`コマンドを実行してクラスタを開始し、DMカーネルのアップグレードプロセスを開始できます。
+展開が完了したら、 `tiup dm start`コマンドを実行してクラスタを開始し、DMカーネルのアップグレードプロセスを開始できます。
 
 ## 操作ログを表示する {#view-the-operation-log}
 
@@ -323,7 +323,7 @@ ID      Time                  Command
 4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
 ```
 
-最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`引数を渡します。
+最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`の引数を渡します。
 
 {{< copyable "" >}}
 

@@ -137,7 +137,7 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 ## も参照してください {#see-also}
 
 -   [ドロップ[グローバル|セッション]バインディング](/sql-statements/sql-statement-drop-binding.md)
--   [[グローバル|セッション]のバインドを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
 -   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザーのヒント](/optimizer-hints.md)
 -   [SQL計画管理](/sql-plan-management.md)

@@ -2,7 +2,7 @@
 title: tiup uninstall
 ---
 
-# tiupアンインストール {#tiup-uninstall}
+# tiup uninstall {#tiup-uninstall}
 
 `tiup uninstall`コマンドは、インストールされているコンポーネントをアンインストールするために使用されます。
 

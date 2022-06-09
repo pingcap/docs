@@ -37,7 +37,7 @@ summary: Learn the manual instance profiling of TiDB Dashboard.
 
 プロファイリングはバックグラウンドで実行されます。現在のページを更新または終了しても、実行中のプロファイリングタスクは停止しません。
 
-## プロファイリング結果をダウンロードする {#download-profiling-result}
+## プロファイリング結果をダウンロード {#download-profiling-result}
 
 すべてのインスタンスのプロファイリングが完了したら、右上隅にある[**プロファイリング結果のダウンロード**]をクリックして、すべてのプロファイリング結果をダウンロードできます。
 

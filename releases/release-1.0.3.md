@@ -17,7 +17,7 @@ title: TiDB 1.0.3 Release Notes
 -   [Floatタイプの式をTiKVにプッシュダウンすることをサポート](https://github.com/pingcap/tidb/pull/5153)
 -   [離散整数プライマリインデックスを持つテーブルのインデックスを追加するのが遅いという問題を修正します](https://github.com/pingcap/tidb/pull/5155)
 -   [不要な統計の更新を減らす](https://github.com/pingcap/tidb/pull/5164)
--   [トランザクションの再試行中に発生する可能性のある問題を修正します](https://github.com/pingcap/tidb/pull/5219)
+-   [トランザクションの再試行中に発生する可能性のある問題を修正する](https://github.com/pingcap/tidb/pull/5219)
 
 ## PD {#pd}
 
@@ -26,7 +26,7 @@ title: TiDB 1.0.3 Release Notes
 ## TiKV {#tikv}
 
 -   PDクライアントのデッドロックの問題を修正します
--   間違ったリーダー値が`NotLeader`に対してプロンプトされる問題を修正します
+-   間違ったリーダー値が`NotLeader`に対して要求される問題を修正します
 -   コプロセッサーでチャンク・サイズが大きすぎるという問題を修正します
 
 1.0.2から1.0.3にアップグレードするには、PD-&gt;TiKV-&gt;TiDBのローリングアップグレードの順序に従います。

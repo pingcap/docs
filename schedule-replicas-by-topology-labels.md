@@ -3,7 +3,7 @@ title: Schedule Replicas by Topology Labels
 summary: Learn how to schedule replicas by topology labels.
 ---
 
-# トポロジラベルごとにレプリカをスケジュールする {#schedule-replicas-by-topology-labels}
+# トポロジラベルによるレプリカのスケジュール {#schedule-replicas-by-topology-labels}
 
 > **ノート：**
 >
@@ -13,7 +13,7 @@ TiDBクラスターの高可用性と障害復旧機能を向上させるため�
 
 このメカニズムを有効にするには、TiKVとPDを適切に構成して、クラスタのトポロジー情報、特にTiKVロケーション情報が展開中にPDに報告されるようにする必要があります。始める前に、まず[TiUPを使用してTiDBをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
-## クラスタトポロジに基づいて<code>labels</code>を構成します {#configure-code-labels-code-based-on-the-cluster-topology}
+## クラスタトポロジに基づいて<code>labels</code>を構成する {#configure-code-labels-code-based-on-the-cluster-topology}
 
 ### TiKVの<code>labels</code>を構成する {#configure-code-labels-code-for-tikv}
 
@@ -38,17 +38,17 @@ TiDBクラスターの高可用性と障害復旧機能を向上させるため�
     labels = "zone=<zone>,rack=<rack>,host=<host>"
     ```
 
-### PD <code>location-labels</code>を構成する {#configure-code-location-labels-code-for-pd}
+### PD <code>location-labels</code>を設定する {#configure-code-location-labels-code-for-pd}
 
 上記の説明によると、ラベルはTiKV属性を説明するために使用される任意のキーと値のペアにすることができます。ただし、PDは、場所に関連するラベルとこれらのラベルのレイヤー関係を識別できません。したがって、PDがTiKVノードトポロジを理解するには、次の構成を行う必要があります。
 
-文字列の配列として定義され、 `location-labels`はPDの構成です。この構成の各項目は、TiKV3のキーに対応してい`labels` 。さらに、各キーのシーケンスは、さまざまなラベルのレイヤー関係を表します（分離レベルは左から右に向かって減少します）。
+文字列の配列として定義され、 `location-labels`はPDの構成です。この構成の各項目は、TiKV3のキーに対応してい`labels` 。さらに、各キーのシーケンスは、異なるラベルのレイヤー関係を表します（分離レベルは左から右に向かって減少します）。
 
 構成にはデフォルト値がない`host` 、 `zone`などの`location-labels`の値をカスタマイズでき`rack` 。また、この構成では、TiKVサーバーのラベルと一致する限り、ラベルレベルの数に制限はあり**ませ**ん（3レベルでは必須ではありません）。
 
 > **ノート：**
 >
-> 構成を有効にするには、PD用に`location-labels`つ、TiKV用に`labels`を同時に構成する必要があります。それ以外の場合、PDはトポロジに従ってスケジューリングを実行しません。
+> 設定を有効にするには、PD用に`location-labels`つ、TiKV用に`labels`を同時に設定する必要があります。それ以外の場合、PDはトポロジに従ってスケジューリングを実行しません。
 
 `location-labels`を構成するには、クラスタの状況に応じて次のいずれかの方法を選択します。
 
@@ -69,7 +69,7 @@ TiDBクラスターの高可用性と障害復旧機能を向上させるため�
     pd-ctl config set location-labels zone,rack,host
     ```
 
-### PD <code>isolation-level</code>を構成します {#configure-code-isolation-level-code-for-pd}
+### PD <code>isolation-level</code>を構成する {#configure-code-isolation-level-code-for-pd}
 
 `location-labels`が構成されている場合は、PD構成ファイルで`isolation-level`を構成することにより、TiKVクラスターのトポロジー分離要件をさらに強化できます。
 
@@ -90,11 +90,11 @@ PDクラスタがすでに初期化されている場合は、pd-ctlツールを
 pd-ctl config set isolation-level zone
 ```
 
-`location-level`構成は文字列の配列であり、 `location-labels`のキーに対応する必要があります。このパラメーターは、TiKVトポロジー・クラスターの最小および必須の分離レベル要件を制限します。
+`location-level`構成は文字列の配列であり、 `location-labels`のキーに対応する必要があります。このパラメーターは、TiKVトポロジークラスターの最小および必須の分離レベル要件を制限します。
 
 > **ノート：**
 >
-> `isolation-level`はデフォルトで空です。これは、分離レベルに必須の制限がないことを意味します。これを設定するには、PD用に`location-labels`を構成し、 `isolation-level`の値が`location-labels`つの名前のいずれかであることを確認する必要があります。
+> デフォルトでは`isolation-level`は空です。これは、分離レベルに必須の制限がないことを意味します。これを設定するには、PD用に`location-labels`を構成し、 `isolation-level`の値が`location-labels`つの名前のいずれかであることを確認する必要があります。
 
 ### TiUPを使用してクラスタを構成する（推奨） {#configure-a-cluster-using-tiup-recommended}
 
@@ -153,13 +153,13 @@ tikv_servers:
         host: h2s
 ```
 
-詳細については、 [地理的に分散された展開トポロジ](/geo-distributed-deployment-topology.md)を参照してください。
+詳細については、 [地理分散型デプロイメントトポロジ](/geo-distributed-deployment-topology.md)を参照してください。
 
 ## トポロジーラベルに基づくPDスケジュール {#pd-schedules-based-on-topology-label}
 
 PDは、ラベルレイヤーに従ってレプリカをスケジュールし、同じデータの異なるレプリカが可能な限り分散されるようにします。
 
-前のセクションのトポロジを例として取り上げます。
+前のセクションのトポロジーを例として取り上げます。
 
 クラスタレプリカの数が3（ `max-replicas=3` ）であると想定します。合計で3つのゾーンがあるため、PDは、各リージョンの3つのレプリカがそれぞれz1、z2、およびz3に配置されるようにします。このようにして、1つのデータセンターに障害が発生した場合でも、TiDBクラスタを使用できます。
 

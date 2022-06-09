@@ -274,7 +274,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 問題が発生した場合は、 [DMエラー処理](/dm/dm-error-handling.md)と[DM FAQ](/dm/dm-faq.md)を参照してください。
 
-### 手順4.移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
+### 手順4.移行タスクのステータスを確認します {#step-4-check-the-migration-task-status}
 
 DMクラスタに進行中の移行タスクがあるかどうかとタスクのステータスを確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 

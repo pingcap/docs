@@ -7,7 +7,7 @@ summary: Learn how to deploy monitoring services for the TiDB cluster.
 
 このドキュメントは、TiDB監視およびアラートサービスを手動で展開するユーザーを対象としています。
 
-TiUPを使用してTiDBクラスタを展開する場合、監視およびアラートサービスは自動的に展開され、手動で展開する必要はありません。
+TiUPを使用してTiDBクラスタをデプロイする場合、監視およびアラートサービスは自動的にデプロイされ、手動でデプロイする必要はありません。
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
@@ -225,7 +225,7 @@ PDサーバー、TiKVサーバー、およびTiDBサーバーのGrafanaダッシ
 
 2.  サイドバーメニューで、[**ダッシュボード**]-&gt; [<strong>インポート</strong>]をクリックして、[ダッシュボードの<strong>インポート</strong>]ウィンドウを開きます。
 
-3.  [ **.jsonファイルのアップロード]**をクリックして、JSONファイルをアップロードします（ダウンロード[TiDBGrafana構成ファイル](https://github.com/pingcap/tidb-ansible/tree/master/scripts) ）。
+3.  [ **.jsonファイルのアップロード]**をクリックして、JSONファイルをアップロードし[tikv / tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) （ [pingcap / tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、および[tikv / pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からTiDB Grafana構成ファイルをダウンロードします）。
 
     > **ノート：**
     >
@@ -265,7 +265,7 @@ PDサーバー、TiKVサーバー、およびTiDBサーバーのGrafanaダッシ
     -   ガベージコレクション（GC）の監視
     -   TiKVコマンドが実行される合計回数
     -   スケジューラがコマンドを実行する期間
-    -   ラフトプロポーザルコマンドの合計回数
+    -   ラフト提案コマンドの合計回数
     -   Raftがコマンドを実行する期間
     -   Raftコマンドが失敗した合計回数
     -   Raftが準備完了状態を処理する合計回数

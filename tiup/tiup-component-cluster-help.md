@@ -2,7 +2,7 @@
 title: tiup cluster help
 ---
 
-# tiupクラスタヘルプ {#tiup-cluster-help}
+# tiup cluster help {#tiup-cluster-help}
 
 tiup-clusterは、コマンドラインインターフェイスでユーザーに豊富なヘルプ情報を提供します。 `help`コマンドまたは`--help`オプションで取得できます。 `tiup cluster help <command>`は基本的に`tiup cluster <command> --help`と同等です。
 
@@ -24,4 +24,4 @@ tiup cluster help [command] [flags]
 
 `[command]`またはtiup-clusterのヘルプ情報。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

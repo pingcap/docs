@@ -5,15 +5,15 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 # AuroraからTiDB Cloudに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-このドキュメントでは、TiDB Cloudコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraクラウドにデータを一括で移行する方法について説明します。
+このドキュメントでは、 TiDB Cloudコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraTiDB Cloudにデータを一括で移行する方法について説明します。
 
-## TiDBCloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
+## TiDB Cloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
 
 データをインポートするには、次の手順を実行します。
 
 1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
 2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
-3.  [AmazonS3バケットを作成してソースデータファイルを準備する方法を学ぶ](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。データの準備の部分で、さまざまな**データ形式**の長所と短所を確認できます。
+3.  [Amazon S3バケットを作成し、ソースデータファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。データの準備の部分で、さまざまな**データ形式**の長所と短所を確認できます。
 4.  ソースデータの仕様に従って、[**データソースタイプ**]、[<strong>バケット名]</strong> 、[<strong>地域</strong>]、および<strong>[データ形式]</strong>フィールドに入力します。
 5.  クラスタの接続設定に従って、**ターゲットデータベース**の<strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
 6.  [クロスアカウントアクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウントアクセスのバケットポリシーとロールを作成します。
@@ -23,7 +23,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 >
 > タスクが失敗した場合は、 [不完全なデータをクリーンアップする方法を学ぶ](#learn-how-to-clean-up-incomplete-data)を参照してください。
 
-## AmazonS3バケットを作成してソースデータファイルを準備する方法を学ぶ {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
+## Amazon S3バケットを作成し、ソースデータファイルを準備する方法を学びます {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
 データを準備するには、次の2つのオプションから1つを選択できます。
 
@@ -43,7 +43,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 >
 > 移行を開始する前に、次の事前チェックと準備を行う必要があります。
 
-#### 十分な空きスペースを確保する {#ensure-enough-free-space}
+#### 十分な空き容量を確保する {#ensure-enough-free-space}
 
 TiDBクラスタの空き領域がデータのサイズよりも大きいことを確認してください。各TiKVノードに600GBの空き領域を予約することをお勧めします。需要を満たすために、TiKVノードをさらに追加できます。
 
@@ -63,7 +63,7 @@ select * from ((select table_schema, table_name, column_name, collation_name fro
 Empty set (0.04 sec)
 ```
 
-TiDBが文字セットまたは照合順序をサポートしていない場合は、それらをサポートされているタイプに変換することを検討してください。詳細については、 [キャラクターセットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+TiDBが文字セットまたは照合順序をサポートしていない場合は、それらをサポートされているタイプに変換することを検討してください。詳細については、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 
 ### オプション1：Dumplingを使用してソースデータファイルを準備する {#option-1-prepare-source-data-files-using-dumpling}
 
@@ -98,7 +98,7 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
 
 3.  ソースデータベースをS3にバックアップします。
 
-    Dumplingを使用して、 Auroraからデータをエクスポートします。ご使用の環境に応じて、中括弧（&gt;）の内容を置き換えてから、次のコマンドを実行してください。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
+    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、中括弧（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
 
     {{< copyable "" >}}
 
@@ -129,7 +129,7 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
 
 ### オプション2： Auroraスナップショットを使用してソースデータファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
 
-#### データベースのスキーマをバックアップし、TiDB Cloudで復元します {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
+#### データベースのスキーマをバックアップし、 TiDB Cloudで復元します {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
 
 Auroraからデータを移行するには、データベースのスキーマをバックアップする必要があります。
 
@@ -181,9 +181,9 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 6.  スナップショットを保存するS3バケットを選択します。セキュリティ上の懸念からデータを保存するための新しいバケットを作成できます。 TiDBクラスタと同じリージョンでバケットを使用することをお勧めします。リージョン間でデータをダウンロードすると、追加のネットワークコストが発生する可能性があります。
 
-7.  適切なIAMロールを選択して、S3バケットへの書き込みアクセスを許可します。後でスナップショットをTiDBCloudにインポートするときに使用されるため、この役割をメモしてください。
+7.  適切なIAMロールを選択して、S3バケットへの書き込みアクセスを許可します。後でスナップショットをTiDB Cloudにインポートするときに使用されるため、この役割をメモしてください。
 
-8.  適切なAWSKMSキーを選択し、IAMロールがKMSキーユーザーにすでに追加されていることを確認します。役割を追加するには、KSMサービスを選択し、キーを選択して、[**追加**]をクリックします。
+8.  適切なAWSKMSキーを選択し、IAMロールがKMSキーユーザーにすでに追加されていることを確認します。ロールを追加するには、KSMサービスを選択し、キーを選択して、[**追加**]をクリックします。
 
 9.  [ **AmazonS3のエクスポート]**をクリックします。タスクテーブルで進行状況を確認できます。
 
@@ -193,11 +193,11 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
 
-完了すると、クロスアカウントのポリシーと役割が作成されます。その後、TiDBCloudのデータインポートタスクパネルで設定を続行できます。
+完了すると、クロスアカウントのポリシーと役割が作成されます。その後、 TiDB Cloudのデータインポートタスクパネルで設定を続行できます。
 
 ## フィルタルールを設定する方法を学ぶ {#learn-how-to-set-up-filter-rules}
 
-[テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)ドキュメントを参照してください。現在、TiDBCloudは1つのテーブルフィルタールールのみをサポートしています。
+[テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)ドキュメントを参照してください。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
 
 ## 不完全なデータをクリーンアップする方法を学ぶ {#learn-how-to-clean-up-incomplete-data}
 

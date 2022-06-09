@@ -40,7 +40,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 #### 診断時間範囲 {#diagnostics-time-range}
 
-診断レポートを生成するための時間範囲には、開始時間と終了時間が含まれます。
+診断レポートを生成するための時間範囲には、開始時刻と終了時刻が含まれます。
 
 ![Report time range](/media/dashboard/dashboard-diagnostics-report-time-range.png)
 
@@ -61,7 +61,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 #### クラスタートポロジ情報 {#cluster-topology-info}
 
-`Cluster Info`の表は、クラスタ・トポロジー情報を示しています。この表の情報は、 [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システム表からのものです。
+`Cluster Info`の表は、クラスタトポロジー情報を示しています。この表の情報は、 [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システム表からのものです。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
@@ -77,7 +77,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 ### 診断情報 {#diagnostic-information}
 
-TiDBには自動診断結果が組み込まれています。各フィールドの説明については、 [information_schema.inspection-結果](/information-schema/information-schema-inspection-result.md)のシステムテーブルを参照してください。
+TiDBには自動診断結果が組み込まれています。各フィールドの説明については、 [information_schema.inspection-結果](/information-schema/information-schema-inspection-result.md)のシステム表を参照してください。
 
 ### 情報を読み込む {#load-info}
 
@@ -89,7 +89,7 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 -   メモリ使用量
 -   ディスクI/Oの使用
 -   ディスク書き込みレイテンシ
--   ディスク読み取りレイテンシ
+-   ディスク読み取りの待ち時間
 -   1秒あたりのディスク読み取りバイト数
 -   1秒あたりのディスク書き込みバイト数
 -   1分あたりにノードネットワークが受信したバイト数
@@ -204,7 +204,7 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 >
 > Raft KVの書き込みは`tikv_raft_commit_log` `tikv_raft_apply_wait`のバッチで処理される可能性があるため、 `TOTAL_TIME`を使用して各モジュールで消費される時間を測定することは、Raft KVの書き込みに関連するメトリック（具体的には`tikv_raft_process` 、および`tikv_raft_append_log` ）の監視には適用でき`tikv_raft_apply_log`ん。この状況では、各モジュールの消費時間をP999およびP99の時間と比較する方が合理的です。
 >
-> その理由は、非同期書き込み要求が10個ある場合、Raft KVは内部で10個の要求をバッチ実行にパックし、実行時間は1秒であるためです。したがって、各リクエストの実行時間は1秒、10リクエストの合計時間は10秒ですが、RaftKV処理の合計時間は1秒です。 `TOTAL_TIME`を使用して消費時間を測定すると、残りの9秒がどこで費やされているかがわからない場合があります。また、リクエストの総数（ `TOTAL_COUNT` ）から、RaftKVの監視メトリックと他の以前の監視メトリックの違いを確認できます。
+> その理由は、非同期書き込み要求が10個ある場合、Raft KVは内部で10個の要求をバッチ実行にパックし、実行時間は1秒であるためです。したがって、各リクエストの実行時間は1秒、10リクエストの合計時間は10秒ですが、RaftKV処理の合計時間は1秒です。 `TOTAL_TIME`を使用して消費時間を測定すると、残りの9秒がどこで費やされているかがわからない場合があります。また、リクエストの総数から、Raft KVのモニタリングメトリックと他の以前のモニタリングメトリックの違いを確認できます（ `TOTAL_COUNT` ）。
 
 #### 各コンポーネントで発生したエラー {#errors-occurred-in-each-component}
 
@@ -220,7 +220,7 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 
 ##### TiDBコンポーネントにかかる時間 {#time-consumed-by-tidb-component}
 
-この表は、各TiDBモジュールで消費された時間と各時間の比率を示しています。これは、概要の`time consume`の表と同様ですが、この表のラベル情報はより詳細です。
+この表は、各TiDBモジュールで消費される時間と各時間消費の比率を示しています。これは、概要の`time consume`の表と同様ですが、この表のラベル情報はより詳細です。
 
 ##### TiDBサーバー接続 {#tidb-server-connections}
 
@@ -247,11 +247,11 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 
 ![TiDB DDL Owner Report](/media/dashboard/dashboard-diagnostics-tidb-ddl.png)
 
-上の表は、 `2020-05-21 14:40:00`から、クラスターの`DDL OWNER`が`10.0.1.13:10080`ノードにあることを示しています。所有者が変更された場合、上の表に複数行のデータが存在します`Min_Time`列は、対応する既知の所有者の最小時間を示します。
+上の表は、 `2020-05-21 14:40:00`から、クラスターの`DDL OWNER`が`10.0.1.13:10080`ノードにあることを示しています。所有者が変更された場合、上の表には複数行のデータが存在します`Min_Time`列は、対応する既知の所有者の最小時間を示します。
 
 > **ノート：**
 >
-> 所有者情報が空の場合は、この期間に所有者が存在しないことを意味するものではありません。この場合、 `ddl_worker`の監視情報に基づいてDDL所有者が決定されるため、この期間に`ddl_worker`がDDLジョブを実行しておらず、所有者情報が空になっている可能性があります。
+> 所有者情報が空の場合でも、この期間に所有者が存在しないことを意味するものではありません。この場合、 `ddl_worker`の監視情報に基づいてDDL所有者が決定されるため、この期間に`ddl_worker`がDDLジョブを実行しておらず、所有者情報が空になっている可能性があります。
 
 TiDBの他の監視テーブルは次のとおりです。
 
@@ -288,12 +288,12 @@ TiKVモジュールの監視情報に関する表は次のとおりです。
 
 構成情報では、一部のモジュールの構成値がレポート時間範囲内に表示されます。ただし、これらのモジュールの他の構成の履歴値は取得できないため、これらの構成の表示値は現在の（レポートが生成されたときの）値です。
 
-レポートの時間範囲内で、次の表には、レポートの時間範囲の開始時に値が構成されているアイテムが含まれています。
+レポートの時間範囲内で、次の表には、レポートの時間範囲の開始時に値が構成されている項目が含まれています。
 
 -   `Scheduler Initial Config` ：レポートの開始時のPDスケジューリング関連の構成の初期値。
 -   `TiDB GC Initial Config` ：レポート開始時のTiDBGC関連構成の初期値
 -   `TiKV RocksDB Initial Config` ：レポートの開始時のTiKVRocksDB関連の構成の初期値
--   `TiKV RaftStore Initial Config` ：レポートの開始時のTiKVRaftStore関連の構成の初期値
+-   `TiKV RaftStore Initial Config` ：レポート開始時のTiKVRaftStore関連の設定の初期値
 
 レポートの時間範囲内で、一部の構成が変更されている場合、次の表には、変更された一部の構成のレコードが含まれています。
 

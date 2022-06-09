@@ -2,7 +2,7 @@
 title: tiup mirror genkey
 ---
 
-# tiupミラーゲンキー {#tiup-mirror-genkey}
+# tiup mirror genkey {#tiup-mirror-genkey}
 
 TiUP [鏡](/tiup/tiup-mirror-reference.md)は、その定義によれば、ユーザーの3つの役割があります。
 

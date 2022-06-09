@@ -9,7 +9,7 @@ summary: Learn how to export and import data sources and task configuration of c
 
 > **ノート：**
 >
-> v2.0.5より前のクラスターの場合、dmctl v2.0.5以降を使用して、データソースとタスクの構成ファイルをエクスポートおよびインポートできます。
+> v2.0.5より前のクラスターの場合、dmctl v2.0.5以降を使用して、データソースおよびタスク構成ファイルをエクスポートおよびインポートできます。
 
 {{< copyable "" >}}
 

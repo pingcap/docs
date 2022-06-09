@@ -2,7 +2,7 @@
 title: tiup cluster stop
 ---
 
-# tiupクラスタ停止 {#tiup-cluster-stop}
+# tiup cluster stop {#tiup-cluster-stop}
 
 `tiup cluster stop`コマンドは、指定されたクラスタのすべてのサービスまたは一部のサービスを停止するために使用されます。
 
@@ -50,4 +50,4 @@ tiup cluster stop <cluster-name> [flags]
 
 サービス停止のログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

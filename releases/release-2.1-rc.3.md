@@ -14,11 +14,11 @@ title: TiDB 2.1 RC3 Release Notes
     -   `UnionScan`演算子[＃7695](https://github.com/pingcap/tidb/pull/7695)の述語プッシュダウンの最適化ルールを修正します。
     -   `Union`演算子の一意キープロパティが正しく設定されていない問題を修正します[＃7680](https://github.com/pingcap/tidb/pull/7680)
     -   定数畳み込みの最適化ルールを強化する[＃7696](https://github.com/pingcap/tidb/pull/7696)
-    -   テーブルデュアル[＃7756](https://github.com/pingcap/tidb/pull/7756)に伝播した後、フィルターがnullであるデータソースを最適化します
+    -   テーブルデュアル[＃7756](https://github.com/pingcap/tidb/pull/7756)に伝播した後、フィルターがnullであるデータソースを最適化します。
 -   SQL実行エンジン
     -   トランザクション[＃7717](https://github.com/pingcap/tidb/pull/7717)での読み取り要求のパフォーマンスを最適化する
     -   一部のエグゼキュータでチャンクメモリを割り当てるコストを最適化する[＃7540](https://github.com/pingcap/tidb/pull/7540)
-    -   ポイントクエリがすべてのNULL値を取得する列によって引き起こされる「範囲外のインデックス」パニックを修正します[＃7790](https://github.com/pingcap/tidb/pull/7790)
+    -   ポイントクエリがすべてのNULL値を取得する列によって引き起こされる「インデックスが範囲外」のパニックを修正します[＃7790](https://github.com/pingcap/tidb/pull/7790)
 -   サーバ
     -   構成ファイルのメモリクォータが有効にならない問題を修正します[＃7729](https://github.com/pingcap/tidb/pull/7729)
     -   `tidb_force_priority`のシステム変数を追加して、各ステートメントの実行優先度を設定します[＃7694](https://github.com/pingcap/tidb/pull/7694)
@@ -43,9 +43,9 @@ title: TiDB 2.1 RC3 Release Notes
 -   新機能
     -   APIを追加して、リージョンリストをサイズ別に逆順で取得します[＃1254](https://github.com/pingcap/pd/pull/1254)
 -   改善
-    -   [＃1252](https://github.com/pingcap/pd/pull/1252)でより詳細な情報を返す
+    -   リージョンAPI1でより詳細な情報を返し[＃1252](https://github.com/pingcap/pd/pull/1252)
 -   バグ修正
-    -   PDがリーダー[＃1250](https://github.com/pingcap/pd/pull/1250)を切り替えた後に`adjacent-region-scheduler`がクラッシュにつながる可能性がある問題を修正します
+    -   PDがリーダー[＃1250](https://github.com/pingcap/pd/pull/1250)を切り替えた後、 `adjacent-region-scheduler`がクラッシュにつながる可能性がある問題を修正します
 
 ## TiKV {#tikv}
 

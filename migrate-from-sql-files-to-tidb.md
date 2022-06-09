@@ -16,7 +16,7 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 すべてのSQLファイルを`/data/my_datasource/`や`s3://my-bucket/sql-backup?region=us-west-2`などの同じディレクトリに配置します。 TiDB Lightingは、このディレクトリとそのサブディレクトリ内の`.sql`のファイルすべてを再帰的に検索します。
 
-## 手順2.ターゲットテーブルスキーマを定義する {#step-2-define-the-target-table-schema}
+## ステップ2.ターゲットテーブルスキーマを定義する {#step-2-define-the-target-table-schema}
 
 データをTiDBにインポートするには、ターゲットデータベースのテーブルスキーマを作成する必要があります。
 

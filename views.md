@@ -49,7 +49,7 @@ show create view v;
 select * from information_schema.views;
 ```
 
-`TABLE_CATALOG` `CHECK_OPTION` 、 `DEFINER` `VIEW_DEFINITION`を`TABLE_NAME`すると、 `IS_UPDATABLE`の`CHARACTER_SET_CLIENT`する`SECURITY_TYPE`情報を`COLLATION_CONNECTION`でき`TABLE_SCHEMA` 。
+`TABLE_CATALOG` `CHECK_OPTION` 、 `IS_UPDATABLE` `VIEW_DEFINITION`に`TABLE_NAME`を`SECURITY_TYPE`することで、 `DEFINER`の関連する`CHARACTER_SET_CLIENT`情報を`COLLATION_CONNECTION`でき`TABLE_SCHEMA` 。
 
 ```sql
 +---------------+--------------+------------+------------------------------------------------------------------------+--------------+--------------+----------------+---------------+----------------------+----------------------+

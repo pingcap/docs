@@ -39,14 +39,14 @@ TiDB Ansibleバージョン：4.0.0-beta.1
         -   [＃14843](https://github.com/pingcap/tidb/pull/14843) [＃14810](https://github.com/pingcap/tidb/pull/14810) [＃14835](https://github.com/pingcap/tidb/pull/14835) [＃14801](https://github.com/pingcap/tidb/pull/14801) [＃14743](https://github.com/pingcap/tidb/pull/14743)
         -   [＃14718](https://github.com/pingcap/tidb/pull/14718) [＃14721](https://github.com/pingcap/tidb/pull/14721) [＃14670](https://github.com/pingcap/tidb/pull/14670) [＃14663](https://github.com/pingcap/tidb/pull/14663) [＃14668](https://github.com/pingcap/tidb/pull/14668)
         -   [＃14896](https://github.com/pingcap/tidb/pull/14896)
-    -   `Sequence`機能[＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303) [＃14731](https://github.com/pingcap/tidb/pull/14731) [＃14589](https://github.com/pingcap/tidb/pull/14589) [＃14442](https://github.com/pingcap/tidb/pull/14442) [＃14674](https://github.com/pingcap/tidb/pull/14674)
+    -   `Sequence`機能を[＃14830](https://github.com/pingcap/tidb/pull/14830) [＃14303](https://github.com/pingcap/tidb/pull/14303) [＃14731](https://github.com/pingcap/tidb/pull/14731) [＃14589](https://github.com/pingcap/tidb/pull/14589) [＃14442](https://github.com/pingcap/tidb/pull/14442) [＃14674](https://github.com/pingcap/tidb/pull/14674)
     -   [＃14830](https://github.com/pingcap/tidb/pull/14830)から[＃14303](https://github.com/pingcap/tidb/pull/14303)た構成アイテムの動的な変更または更新をサポート[＃14750](https://github.com/pingcap/tidb/pull/14750)
     -   負荷分散ポリシーに従ってさまざまな役割からデータを自動的に読み取る機能を追加し、この機能を有効にするために`leader-and-follower`のシステム変数を追加します[＃14761](https://github.com/pingcap/tidb/pull/14761)
     -   `Coercibility`の関数を追加します[＃14739](https://github.com/pingcap/tidb/pull/14739)
     -   パーティションテーブルでの[＃14735](https://github.com/pingcap/tidb/pull/14735) [＃14644](https://github.com/pingcap/tidb/pull/14644)の設定のサポート[＃14713](https://github.com/pingcap/tidb/pull/14713)
     -   `SLOW_QUERY`テーブル[＃14451](https://github.com/pingcap/tidb/pull/14451)の特権チェックを改善します。
     -   SQL結合を使用するときにメモリが不足している場合、サポートは中間結果をディスクファイルに自動的に書き込みます[＃14708](https://github.com/pingcap/tidb/pull/14708) [＃14279](https://github.com/pingcap/tidb/pull/14279)
-    -   `information_schema.PARTITIONS`のシステムテーブル[＃14347](https://github.com/pingcap/tidb/pull/14347)を照会することにより、テーブルパーティションのチェックをサポートします。
+    -   `information_schema.PARTITIONS`のシステムテーブル[＃14347](https://github.com/pingcap/tidb/pull/14347)をクエリすることにより、テーブルパーティションのチェックをサポートします。
     -   `json_objectagg`の集計関数を追加します[＃11154](https://github.com/pingcap/tidb/pull/11154)
     -   監査ログ[＃14594](https://github.com/pingcap/tidb/pull/14594)で拒否された接続試行のログ記録をサポートする
     -   `max-server-connections`の構成アイテム（デフォルトでは`4096` ）を追加して、単一サーバーへの接続数を制御します[＃14409](https://github.com/pingcap/tidb/pull/14409)

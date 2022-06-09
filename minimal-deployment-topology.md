@@ -5,7 +5,7 @@ summary: Learn the minimal deployment topology of TiDB clusters.
 
 # 最小限の展開トポロジ {#minimal-deployment-topology}
 
-このドキュメントでは、TiDBクラスタの最小限の展開トポロジについて説明します。
+このドキュメントでは、TiDBクラスターの最小限のデプロイメントトポロジについて説明します。
 
 ## トポロジー情報 {#topology-information}
 

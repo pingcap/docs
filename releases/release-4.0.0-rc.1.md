@@ -37,13 +37,13 @@ TiDBバージョン：4.0.0-rc.1
     -   マージされたリージョンからデータを読み取るときにエラーが発生する問題を修正します
     -   異常状態のリージョンからデータを読み取るときにエラーが発生する問題を修正します
     -   `recover table`を正しくサポートするように、TiFlashのテーブル名のマッピングを変更し`flashback table`
-    -   ストレージパスを変更して、テーブルの名前を変更するときに発生する可能性のあるデータ損失の問題を修正します
+    -   テーブルの名前を変更するときに発生する可能性のあるデータ損失の問題を修正するために、ストレージパスを変更します
     -   スーパーバッチが有効になっている場合のTiDBの潜在的なパニックを修正します
     -   オンライン更新シナリオで読み取りモードを変更して、読み取りパフォーマンスを向上させます
 
 -   TiCDC
 
-    -   TiCDCで内部的に維持されているスキーマが、読み取りおよび書き込み操作のタイミングの問題を正しく処理できないために発生するレプリケーションの失敗を修正します[＃438](https://github.com/pingcap/tiflow/pull/438) [＃450](https://github.com/pingcap/tiflow/pull/450) [＃478](https://github.com/pingcap/tiflow/pull/478) [＃496](https://github.com/pingcap/tiflow/pull/496)
+    -   [＃450](https://github.com/pingcap/tiflow/pull/450)で内部的に維持されているスキーマが読み取りおよび書き込み操作のタイミングの問題を正しく処理できないために発生するレプリケーションの失敗を修正し[＃438](https://github.com/pingcap/tiflow/pull/438) [＃496](https://github.com/pingcap/tiflow/pull/496) [＃478](https://github.com/pingcap/tiflow/pull/478)
     -   いくつかのTiKV異常が発生したときに、TiKVクライアントが内部リソースを正しく維持できないというバグを修正します[＃499](https://github.com/pingcap/tiflow/pull/499) [＃492](https://github.com/pingcap/tiflow/pull/492)
     -   メタデータが正しくクリーンアップされず、TiCDCノードに異常に残るというバグを修正します[＃488](https://github.com/pingcap/tiflow/pull/488) [＃504](https://github.com/pingcap/tiflow/pull/504)
     -   TiKVクライアントがプリライトイベントの繰り返し送信を正しく処理できない問題を修正します[＃446](https://github.com/pingcap/tiflow/pull/446)
@@ -95,7 +95,7 @@ TiDBバージョン：4.0.0-rc.1
 
 -   バックアップと復元（BR）
 
-    -   ストレージ[＃246](https://github.com/pingcap/br/pull/246)でのS3/GCSの構成のサポート
+    -   ストレージ[＃246](https://github.com/pingcap/br/pull/246)でのS3/GCSの設定のサポート
 
 ## バグの修正 {#bug-fixes}
 
@@ -129,7 +129,7 @@ TiDBバージョン：4.0.0-rc.1
     -   楽観的なトランザクションに多くの書き込み競合が存在する場合は、パフォーマンスを向上させるために`BatchRollback`で書き込まれたロールバックレコードを保護しないでください[＃7604](https://github.com/tikv/tikv/pull/7604)
     -   トランザクションの不必要なウェイクアップにより、重いロックレースワークロードで無駄な再試行とパフォーマンスの低下が発生する問題を修正します[＃7551](https://github.com/tikv/tikv/pull/7551)
     -   リージョンが複数回のマージでスタックする可能性がある問題を修正します[＃7518](https://github.com/tikv/tikv/pull/7518)
-    -   学習者を削除するときに学習者が削除されない問題を修正します[＃7518](https://github.com/tikv/tikv/pull/7518)
+    -   学習者[＃7518](https://github.com/tikv/tikv/pull/7518)を削除するときに学習者が削除されない問題を修正します
     -   フォロワーの読み取りがraft-rs1でパニックを引き起こす可能性がある問題を修正し[＃7408](https://github.com/tikv/tikv/pull/7408)
     -   `group by constant`エラー[＃7383](https://github.com/tikv/tikv/pull/7383)が原因でSQL操作が失敗する可能性があるバグを修正します
     -   対応するプライマリロックがペシミスティックロックの場合、オプティミスティックロックが読み取りをブロックする可能性がある問題を修正します[＃7328](https://github.com/tikv/tikv/pull/7328)

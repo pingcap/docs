@@ -36,7 +36,7 @@ TiDBバージョン：3.0.19
 
     -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正します[＃20050](https://github.com/pingcap/tidb/pull/20050)
     -   `SHOW STATS_META`と[＃19759](https://github.com/pingcap/tidb/pull/19759)の特権チェックを追加し`SHOW STATS_BUCKET`
-    -   10進数タイプを整数タイプ[＃19681](https://github.com/pingcap/tidb/pull/19681)に変更することを禁止します
+    -   10進数型を整数型[＃19681](https://github.com/pingcap/tidb/pull/19681)に変更することを禁止します
     -   `ENUM`タイプの列`SET`を変更するときに制約がチェックされない問題を修正し[＃20045](https://github.com/pingcap/tidb/pull/20045)
     -   パニック後にtidb-serverがテーブルロックを解放しないバグを修正します[＃20021](https://github.com/pingcap/tidb/pull/20021)
     -   `WHERE`節[＃19901](https://github.com/pingcap/tidb/pull/19901)で`OR`演算子が正しく処理されないバグを修正します。

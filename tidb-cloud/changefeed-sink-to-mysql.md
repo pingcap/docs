@@ -9,7 +9,7 @@ Summary: Learn how to create a changefeed to stream data from TiDB Cloud to MySQ
 >
 > 現在、 **SinktoMySQL**は実験的機能です。実稼働環境での使用はお勧めしません。
 
-このドキュメントでは、SinktoMySQLチェンジフィードを使用してTiDBCloud**から**MySQLにデータをストリーミングする方法について説明します。
+このドキュメントでは、SinktoMySQLチェンジフィードを使用してTiDB Cloud**から**MySQLにデータをストリーミングする方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
@@ -25,7 +25,7 @@ MySQLサービスがパブリックインターネットアクセスのないAWS
 
     TiDB Cloudクラスタが配置されているリージョンのCIDRをインバウンドルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスターからMySQLインスタンスに流れるようになります。
 
-3.  MySQL URLにホスト名が含まれている場合は、TiDBCloudがMySQLサービスのDNSホスト名を解決できるようにする必要があります。
+3.  MySQL URLにホスト名が含まれている場合は、 TiDB CloudがMySQLサービスのDNSホスト名を解決できるようにする必要があります。
 
     1.  [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns)の手順に従います。
     2.  **AccepterDNS解決**オプションを有効にします。
@@ -42,7 +42,7 @@ MySQLサービスがパブリックインターネットアクセスのないGCP
 
 **Sink to MySQL**コネクタは、特定のタイムスタンプの後にのみ、TiDBクラスタからMySQLに増分データをシンクできます。 TiDBクラスタにすでにデータがある場合は、 <strong>Sink to MySQL</strong>を有効にする前に、TiDBクラスタのフルロードデータをエクスポートしてMySQLにロードする必要があります。
 
-1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を次の2つの操作の合計時間より長くするように拡張して、その時間中の履歴データがTiDBによってガベージコレクションされないようにします。
+1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を次の2つの操作の合計時間より長くするように拡張して、その間の履歴データがTiDBによってガベージコレクションされないようにします。
 
     -   全負荷データをエクスポートおよびインポートする時間
     -   **SinktoMySQL**を作成する時間
@@ -57,7 +57,7 @@ MySQLサービスがパブリックインターネットアクセスのないGCP
 
 2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してTiDBクラスタからデータをエクスポートしてから、 [mydumper / myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してMySQLサービスにデータをロードします。
 
-3.  [Dumplingのエクスポートされたファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータファイルからTSOを取得します。
+3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータファイルからTSOを取得します。
 
     {{< copyable "" >}}
 

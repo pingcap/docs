@@ -17,7 +17,7 @@ title: TiDB 2.1.1 Release Notes
     -   JSON列[＃8660](https://github.com/pingcap/tidb/pull/8660)のデータ競合を修正します
 -   サーバ
     -   PDが故障したときにTSOを取得したトランザクションが正しくない問題を修正します[＃8567](https://github.com/pingcap/tidb/pull/8567)
-    -   ANSI規格に準拠していないステートメントによって引き起こされるブートストラップの失敗を修正します[＃8576](https://github.com/pingcap/tidb/pull/8576)
+    -   ANSI規格に準拠していないステートメントによって引き起こされたブートストラップの失敗を修正します[＃8576](https://github.com/pingcap/tidb/pull/8576)
     -   トランザクションの再試行で誤ったパラメーターが使用される問題を修正します[＃8638](https://github.com/pingcap/tidb/pull/8638)
 -   DDL
     -   デフォルトの文字セットとテーブルの照合順序を[＃8590](https://github.com/pingcap/tidb/pull/8590)に変更し`utf8mb4`

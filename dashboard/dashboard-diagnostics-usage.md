@@ -57,7 +57,7 @@ min(prev_stmt)     |
 digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8d03df
 ```
 
-上記の結果から、 `13:24:30`から、合計196回実行され、5,000行のデータを削除するたびに合計46.8秒のバッチ削除の大量の書き込みがあることがわかります。
+上記の結果から、 `13:24:30`から、バッチ削除の大量の書き込みがあり、合計196回実行され、毎回5,000行のデータが削除され、合計46.8秒であることがわかります。
 
 ### 例2 {#example-2}
 
@@ -77,7 +77,7 @@ digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8
 
 ![Comparison diagnostics](/media/dashboard/dashboard-diagnostics-usage4.png)
 
-診断結果は例1の結果と同様です。上の画像の最後の行は、クエリが遅い可能性があることを示し、SQLステートメントを使用してTiDBログの高価なクエリをクエリできることを示しています。 SQLステートメントの実行結果は次のとおりです。
+診断結果は例1の結果と同様です。上の画像の最後の行は、クエリが遅い可能性があることを示し、SQLステートメントを使用してTiDBログの高価なクエリをクエリできることを示しています。 SQL文の実行結果は以下のとおりです。
 
 ```sql
 > SELECT * FROM information_schema.cluster_log WHERE type='tidb' AND time >= '2020-03-08 01:46:30' AND time < '2020-03-08 01:51:30' AND level = 'warn' AND message LIKE '%expensive_query%'\G
@@ -104,7 +104,7 @@ MESSAGE  | [expensivequery.go:167] [expensive_query] [cost_time=60.085949605s] [
 
 `2020-05-22 22:17:00` ： `2020-05-22 22:14:00` 。この範囲で、QPSは減少し始めました。
 
-比較レポートを生成した後、 **Maxdiffアイテム**レポートを確認します。このレポートでは、上記の2つの時間範囲の監視項目を比較し、監視項目の違いに応じて並べ替えます。この表の結果は次のとおりです。
+比較レポートを生成した後、 **Maxdiffアイテム**レポートを確認してください。このレポートでは、上記の2つの時間範囲の監視項目を比較し、監視項目の違いに応じて並べ替えます。この表の結果は次のとおりです。
 
 ![Comparison results](/media/dashboard/dashboard-diagnostics-usage6.png)
 

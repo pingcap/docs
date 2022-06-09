@@ -2,7 +2,7 @@
 title: tiup dm audit
 ---
 
-# tiupdm監査 {#tiup-dm-audit}
+# tiup dm audit {#tiup-dm-audit}
 
 `tiup dm audit`コマンドは、すべてのクラスターで実行された履歴コマンドと各コマンドの実行ログを表示するために使用されます。
 
