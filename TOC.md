@@ -19,7 +19,7 @@
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
-- Develop Application
+- Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
     - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
@@ -62,18 +62,17 @@
   - Optimize
     - [Overview](/develop/dev-guide-optimize-sql-overview.md)
     - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
-    - [Best Practices](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
     - Other Optimization Methods
       - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
       - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
   - Troubleshoot
-    - [Overview](/develop/dev-guide-troubleshoot-overview.md)
-    - Others
-      - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
-      - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
+    - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
+    - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
+    - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
   - Reference
-    - SQL
-      - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+    - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
@@ -173,6 +172,7 @@
       - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
       - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
       - [TiKV Follower Read](/follower-read.md)
+      - [Tune Region Performance](/tune-region-performance.md)
       - [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
     - [Coprocessor Cache](/coprocessor-cache.md)
   - SQL Tuning
@@ -474,6 +474,7 @@
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+    - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
     - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
     - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
@@ -538,9 +539,11 @@
       - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
+        - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
+      - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -690,6 +693,7 @@
       - [Isolation Levels](/transaction-isolation-levels.md)
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
+      - [Non-Transactional DML Statements](/non-transactional-dml.md)
     - Garbage Collection (GC)
       - [Overview](/garbage-collection-overview.md)
       - [Configuration](/garbage-collection-configuration.md)

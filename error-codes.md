@@ -22,7 +22,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The memory used by the request exceeds the threshold limit for the TiDB memory usage.
 
-    Increase the memory limit for a single SQL statement by configuring `mem-quota-query`.
+    Increase the memory limit for a single SQL statement by configuring the system variable [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query).
 
 * Error Number: 8002
 
@@ -343,6 +343,10 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 * Error Number: 8141
 
     When a transaction is being committed, the existence assertion of a key fails. For more information,see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md#error-8141).
+
+* Error Number: 8143
+
+    During the execution of a non-transactional DML statement, if a batch fails, the statement is stopped. For more information, see [Non-transactional DML statements](/non-transactional-dml.md).
 
 * Error Number: 8200
 
