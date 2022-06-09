@@ -18,7 +18,7 @@ You cannot customize the TiDB Cloud built-in alerting. If you would like to conf
 If you are a member of a project and you want to get alert notification emails of clusters in your project, take the following steps:
 
 1. Log into TiDB Cloud console.
-2. On the TiDB Cloud console, choose the project on which you want to receive alert notification emails, and then click the gear icon in the upper left corner to open the project settings.
+2. On the TiDB Cloud console, choose a target project on which you want to receive alert notification emails, and then click the **Project Settings** tab.
 3. In the left pane, click **Alerts**.
 4. Enter your email address, and then click **Subscribe**.
 

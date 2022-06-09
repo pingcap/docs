@@ -27,7 +27,7 @@ Before configuring your Prometheus service to read metrics of TiDB Cloud, you ne
 
 To get the scrape_config file for Prometheus, do the following:
 
-1. On the TiDB Cloud console, choose a target project for Prometheus integration, and then click the gear icon in the upper left corner to open the project settings.
+1. On the TiDB Cloud console, choose a target project for Prometheus integration, and then click the **Project Settings** tab.
 2. In the left pane, click **Integrations**.
 3. Click **Integration to Prometheus**.
 4. Click **Add File** to generate and show the scrape_config file for the current project.

@@ -45,6 +45,16 @@ To change the password, take the following steps:
 
 If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. In this case, you need to follow the prompt to reset the password.
 
+## Manage user profiles
+
+In TiDB Cloud, you can easily mange your profile, including your first name, last time, company name, country, and phone number.
+
+1. Click the account name in the upper-right corner of the window.
+
+2. Click **Account**. The **Profile** tab is selected by default.
+
+3. Update the profile information, and then click **Save**.
+
 ## View the organization and project
 
 TiDB Cloud provides a hierarchical structure based on organizations and projects to facilitate the management of your TiDB cluster. In the hierarchy of organizations and projects, an organization can contain multiple projects and organization members, and a project can contain multiple clusters and project members.
