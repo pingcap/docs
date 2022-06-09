@@ -62,6 +62,7 @@
   - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 - Reference
+    - [Explore SQL with TiDB](/basic-sql-operations.md)
     - [Support](/tidb-cloud/tidb-cloud-support.md)
     - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
