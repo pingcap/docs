@@ -9,7 +9,7 @@ summary: Learn about the basic SQL statements for the TiDB database.
 TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](/mysql-compatibility.md#unsupported-features).
 <CustomContent>
 
-<CustomContent platform="cloud">
+<CustomContent platform="tidbcloud">
 TiDB is compatible with MySQL, you can use MySQL statements directly in most of the cases. For unsupported features, see [Compatibility with MySQL](https://docs.pingcap.com/tidb/stable/mysql-compatibility#unsupported-features).
 <CustomContent>
 
