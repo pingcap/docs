@@ -29,6 +29,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Miscellaneous functions](/functions-and-operators/miscellaneous-functions.md) | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Operators](/functions-and-operators/operators.md)           | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Character sets and collations](/character-set-and-collation.md) [^1]  | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| [User-level lock](/functions-and-operators/locking-functions.md) | Y | N | N | N | N | N | N | N |
 
 ## Indexing and constraints
 
@@ -62,6 +63,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [`EXPLAIN`](/sql-statements/sql-statement-explain.md)        | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [User-defined variables](/user-defined-variables.md)         | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [`BATCH [ON COLUMN] LIMIT INTEGER DELETE`](/sql-statements/sql-statement-batch.md) | Y | N | N | N | N | N | N | N |
 
 ## Advanced SQL features
 
@@ -125,6 +127,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Extended statistics (multiple columns)](/statistics.md)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
 | [Statistics Feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
 
 ## Security
 
