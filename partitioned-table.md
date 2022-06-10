@@ -1347,7 +1347,7 @@ show stats_meta where table_name like "t";
 4 rows in set (0.00 sec)
 ```
 
-If the following warning is displayed during the `analyze` process, partition statistics are inconsistent, and you need to collect statistics of all partitions or the entire table.
+If the following warning is displayed during the `analyze` process, partition statistics are inconsistent, and you need to collect statistics of these partitions or the entire table again.
 
 ```
 | Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
