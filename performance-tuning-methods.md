@@ -16,7 +16,7 @@ TiDB is constantly measuring and collecting SQL processing paths and database ti
 - Determine whether the bottleneck is in TiDB by comparing the average SQL processing latency with the idle time of a TiDB connection in a transaction.
 - If the bottleneck is in TiDB, further locate the exact module in the distributed system based on database time overview, color-based performance data, key metrics, resource utilization, and top-down latency breakdowns.
 
-### Does the bottleneck lie in TiDB?
+### Is TiDB the bottleneck?
 
 - If the average idle time of TiDB connections in transactions is higher than the average SQL processing latency, the database is not to blame for the transaction latency of applications. The database time takes only a small part of the user response time, indicating that the bottleneck does not lie in the database.
 
@@ -24,7 +24,7 @@ TiDB is constantly measuring and collecting SQL processing paths and database ti
 
 - If the average SQL processing latency is higher than the average idle time of TiDB connections in transactions, the bottleneck in transactions is in TiDB, and the database time takes a large percentage of the user response time.
 
-### If the bottleneck is inside TiDB, how to locate it?
+### If the bottleneck is in TiDB, how to locate it?
 
 The following figure shows a typical SQL process. You can see that most SQL processing paths are covered in TiDB performance metrics. The database time is broken down into different dimensions, which are colored accordingly. You can quickly understand the load characteristics and catch the bottlenecks inside the database if any.
 

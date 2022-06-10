@@ -167,7 +167,7 @@
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
-    - [Performance Tuning Methods](/performance-tuning-methods.md)
+    - [TiDB Performance Analysis and Tuning](/performance-tuning-methods.md)
   - Configuration Tuning
     - System Tuning
       - [Operating System Tuning](/tune-operating-system.md)
