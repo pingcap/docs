@@ -776,8 +776,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
-- Default value: `OFF`
+- Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
+- For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
 ### tidb_enable_mutation_checker (New in v6.0.0)
 
@@ -1755,6 +1756,8 @@ SET tidb_slow_log_threshold = 200;
     - `OFF`: Disable this check.
     - `FAST`: Enable most of the check items, with almost no impact on performance.
     - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
+
+- For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
 ### tidb_txn_mode
 
