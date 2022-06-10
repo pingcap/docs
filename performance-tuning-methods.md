@@ -1,9 +1,9 @@
 ---
-title: TiDB Performance Analysis and Tuning
+title: Performance Analysis and Tuning
 summary: Learn how to optimize database system based on database time and how to utilize the TiDB Performance Overview dashboard for performance analysis and tuning.
 ---
 
-# TiDB Performance Analysis and Tuning
+# Performance Analysis and Tuning
 
 This document describes a database time-based approach to system tuning and illustrates how to use the TiDB [Performance Overview dashboard](/grafana-performance-overview-dashboard.md) for performance analysis and tuning.
 
