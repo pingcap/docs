@@ -76,7 +76,7 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
-    - Outdated
+    - Archived Docs
       - [For Hibernate ORM](/develop/dev-guide-outdated-for-hibernate-orm.md)
       - [For Django](/develop/dev-guide-outdated-for-django.md)
       - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
