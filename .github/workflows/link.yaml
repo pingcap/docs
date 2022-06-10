@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Download Exclude Path
         run: |
-          curl https://raw.githubusercontent.com/pingcap/docs/master/.github/exclude-links.txt --output .lycheeignore
+          curl https://github.com/Oreoxmt/docs/blob/ci/add-lycheeignore/.github/exclude-links.txt --output .lycheeignore
 
       - name: Check Links Exclude GitHub
         uses: lycheeverse/lychee-action@v1.5.0
