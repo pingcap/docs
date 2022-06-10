@@ -6,6 +6,10 @@ aliases: ['/appdev/dev/for-python-mysql-connector']
 
 # App Development for the mysql-connector-python
 
+> **Note:**
+>
+> This document has been archived. This indicates that this document will not be updated thereafter. You can see [Developer Guide Overview](/develop/dev-guide-overview.md) for more details.
+
 This tutorial shows you how to build a simple Python application based on TiDB and mysql-connector-python. The sample application to build here is a simple CRM tool where you can add, query, and update customer and order information.
 
 ## Step 1. Start a TiDB cluster
