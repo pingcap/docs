@@ -161,7 +161,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Before TiDB v6.1.0, when an operation consumes a lot of resources and causes cluster stability issues, you have to connect to the target TiDB instance and then run the `KILL TIDB ${id};` command to terminate the target connection and operation. In the case of many TiDB instances, this method is not easy to use and prone to wrong operations. Starting from v6.1.0, the `enable-global-kill` configuration is introduced and enabled by default. You can run the kill command in any TiDB instance to terminate a specified connection and operation, without worrying about incorrectly terminating other queries or sessions by mistake when there is a proxy between the client and TiDB. Currently, TiDB does not support using Ctrl+C to terminate queries or sessions.
 
-    [User document](/tidb-configuration-file.md#enable-global-kill-introduced-from-v610-version), [#8854](https://github.com/pingcap/tidb/issues/8854)
+    [User document](/tidb-configuration-file.md#enable-global-kill-new-in-v610), [#8854](https://github.com/pingcap/tidb/issues/8854)
 
 * TiKV API V2 (experimental)
 
