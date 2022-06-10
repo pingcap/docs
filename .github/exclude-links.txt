@@ -13,7 +13,14 @@ http:/\$%7Btidb-server-ip%7D:\$%7Btidb-server-status-port%7D/
 http:/\$%7BPD_IP%7D:\$%7BPD_PORT%7D
 http://__tidb_ip__:10080
 https://s3.amazonaws.com/
+<<<<<<< HEAD
 http:/192.168.0.16:2379
 http:/192.168.0.15:2379
 http:/192.168.0.14:2379
 https://www.crunchbase.com/organization/
+=======
+https://translate.google.com/*
+https://www.crunchbase.com/organization/
+https:/%7BnodeIP%7D:%7BnodePort%7D/dashboard
+http://${host}:${port}/api/v1/data/*
+>>>>>>> a542304d8 (Fix broken link (#8851))
