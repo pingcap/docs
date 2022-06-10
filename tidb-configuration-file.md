@@ -429,6 +429,10 @@ Configuration items related to performance.
 
 ### `enable-stats-cache-mem-quota` <span class="version-mark">New in v6.1.0</span>
 
+> **Warning:**
+>
+> This variable is an experimental feature. It is not recommended to use it in production environments.
+
 + Controls whether to enable the memory quota for the statistics cache.
 + Default value: `false`
 
@@ -666,6 +670,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### deadlock-history-collect-retryable
 
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
++ Default value: `false`
 
 ### pessimistic-auto-commit (New in v6.0.0)
 
