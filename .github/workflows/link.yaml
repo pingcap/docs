@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Download Exclude Path
         run: |
           curl https://raw.githubusercontent.com/pingcap/docs/master/.lycheeignore --output .lycheeignore
@@ -33,10 +34,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Get Output
+      - name: Merge Output
         run: |
           cat exclude-out.md include-out.md > out.md
-          cat out.md
 
       - name: Create Issue From File
         uses: peter-evans/create-issue-from-file@v3
