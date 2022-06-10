@@ -776,8 +776,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > Currently, List partition and List COLUMNS partition are experimental features. It is not recommended that you use it in production environments.
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
 - Default value: `OFF`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
+=======
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
+- For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
+>>>>>>> a49a9bb68 (fix two sysvars' default values (#8821))
 
 ### tidb_enable_mutation_checker (New in v6.0.0)
 
@@ -1748,6 +1756,11 @@ SET tidb_slow_log_threshold = 200;
 ### tidb_txn_assertion_level (New in v6.0.0)
 
 - Scope: SESSION | GLOBAL
+<<<<<<< HEAD
+=======
+- Persists to cluster: Yes
+- Type: Enumeration
+>>>>>>> a49a9bb68 (fix two sysvars' default values (#8821))
 - Default value: `FAST`
 - Possible values: `OFF`, `FAST`, `STRICT`
 - This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
@@ -1755,6 +1768,8 @@ SET tidb_slow_log_threshold = 200;
     - `OFF`: Disable this check.
     - `FAST`: Enable most of the check items, with almost no impact on performance.
     - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
+
+- For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
 ### tidb_txn_mode
 
