@@ -26,7 +26,7 @@ TiDB is constantly measuring and collecting SQL processing paths and database ti
 
 ### If the bottleneck is in TiDB, how to locate it?
 
-The following figure shows a typical SQL process. You can see that most SQL processing paths are covered in TiDB performance metrics. The database time is broken down into different dimensions and colored accordingly, which helps you quickly understand the load characteristics and locate the bottlenecks inside the database if any.
+The following figure shows a typical SQL process. You can see that most SQL processing paths are covered in TiDB performance metrics. The database time is broken down into different dimensions and colored accordingly, which helps you quickly understand the workload characteristics and locate the bottlenecks inside the database if any.
 
 ![database time decomposition chart](/media/performance/dashboard-diagnostics-time-relation.png)
 
@@ -50,7 +50,7 @@ This section describes how to perform performance analysis and tuning based on d
 
 The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiKV, and presents each of them in the following sections:
 
-- Database time and SQL execution time overview: Use different colors to distinguish different SQL types, database time of different SQL execution phases, and database time of different requests, which helps you quickly identify database load characteristics and performance bottlenecks.
+- Database time and SQL execution time overview: Use different colors to distinguish different SQL types, database time of different SQL execution phases, and database time of different requests, which helps you quickly identify database workload characteristics and performance bottlenecks.
 - Key metrics and resource utilization: Contains database QPS, connection information and request command types of the applications and the database, database internal TSO and KV request OPS, and TiDB/TiKV resource usage.
 - Top-down latency breakdown: Contains a comparison of query latency and connection idle time, breakdown of query latency, latency of TSO requests and KV requests in SQL execution, and breakdown of TiKV internal write latency, etc.
 
@@ -66,7 +66,7 @@ The Performance Overview dashboard provides the following three stacked area gra
 
 #### Tune by color
 
-The diagrams of database time breakdown and execution time overview present both expected and unexpected time consumption intuitively. Therefore, you can quickly locate performance bottleneck and learn the load profile. Green and blue areas stand for normal time consumption and requests. If non-green or non-blue areas occupy a significant proportion in these two diagrams, the database time distribution is inappropriate.
+The diagrams of database time breakdown and execution time overview present both expected and unexpected time consumption intuitively. Therefore, you can quickly locate performance bottleneck and learn the workload profile. Green and blue areas stand for normal time consumption and requests. If non-green or non-blue areas occupy a significant proportion in these two diagrams, the database time distribution is inappropriate.
 
 - Database Time By SQL Type:
 
@@ -80,7 +80,7 @@ The diagrams of database time breakdown and execution time overview present both
     - If serious lock conflicts occur, the red area will take a large proportion.
     - If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion.
 
-**Example 1: TPC-C load**
+**Example 1: TPC-C workload**
 
 ![TPC-C](/media/performance/tpcc_db_time.png)
 
@@ -90,14 +90,14 @@ The diagrams of database time breakdown and execution time overview present both
 
     > **Note:**
     >
-    > It is normal that the total KV request time is greater than the `execute` time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the `execute` time. In the preceding TPC-C load, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit` and `PessimisticsLock` requests in this example is obviously longer than the `execute` time.
+    > It is normal that the total KV request time is greater than the `execute` time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the `execute` time. In the preceding TPC-C workload, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit` and `PessimisticsLock` requests in this example is obviously longer than the `execute` time.
     >
     > - The `execute` time may also be significantly greater than the total time of the KV request plus the `tso_wait` time. This means that the SQL execution time is spent mostly inside the TiDB executor. Here are two common examples:
     >
         > - Example 1: After TiDB executor reads a large volume of data from TiKV, it needs to do complex association and aggregation inside TiDB, which consumes a lot of time.
         > - Example 2: The application experiences serious write statement lock conflicts. Frequent lock retries result in long `Retried execution time`.
 
-**Example 2: OLTP read-heavy load**
+**Example 2: OLTP read-heavy workload**
 
 ![OLTP](/media/performance/oltp_normal_db_time.png)
 
@@ -105,7 +105,7 @@ The diagrams of database time breakdown and execution time overview present both
 - Database Time by SQL Phase: Most time is consumed in the `execute` phase in green.
 - SQL Execute Time Overview: In the SQL execution phase, `pd tso_wait` in dark brown, `KV Get` in blue, and `Prewrite` and `Commit` in green are time-consuming.
 
-**Example 3: Read-only OLTP load**
+**Example 3: Read-only OLTP workload**
 
 ![OLTP](/media/performance/oltp_long_compile_db_time.png)
 
@@ -117,7 +117,7 @@ The diagrams of database time breakdown and execution time overview present both
 >
 > In example 3, `SELECT` statements need to read thousands of rows concurrently from multiple TiKVs. Therefore, the total time of the `BatchGet` requests is much longer than the execution time.
 
-**Example 4: Lock contention load**
+**Example 4: Lock contention workload**
 
 ![OLTP](/media/performance/oltp_lock_contention_db_time.png)
 
@@ -139,15 +139,15 @@ By checking the following three panels in Performance Overview, you can learn th
     - All execution plan cache is hit: The number of hits per second is equal to the number of times the StmtExecute command is executed per second.
     - Some execution plan cache is hit: The number of hits per second is fewer than the number of executed StmtExecute commands per second. Execution plan cache has limitations. For example, it does not support subqueries and SQL execution plans of subqueries cannot be cached.
 
-**Example 1: TPC-C Load**
+**Example 1: TPC-C workload**
 
-The TPC-C load are mainly `UPDATE`, `SELECT`, and `INSERT` statements. The total QPS is equal to the number of StmtExecute per second and the latter is almost equal to Queries Using Plan Cache OPS. Ideally, the client caches the object of the prepared statement it executes. In this way, the cached statement is called directly when a SQL statement is executed. All SQL executions hit the execution plan cache, and there is no need to recompile to generate execution plans.
+The TPC-C workload are mainly `UPDATE`, `SELECT`, and `INSERT` statements. The total QPS is equal to the number of StmtExecute per second and the latter is almost equal to Queries Using Plan Cache OPS. Ideally, the client caches the object of the prepared statement it executes. In this way, the cached statement is called directly when a SQL statement is executed. All SQL executions hit the execution plan cache, and there is no need to recompile to generate execution plans.
 
 ![TPC-C](/media/performance/tpcc_qps.png)
 
-**Example 2: Execution plan cache unavailable for query commands in read-only OLTP load**
+**Example 2: Execution plan cache unavailable for query commands in read-only OLTP workload**
 
-In this load, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application has enabled auto-commit concurrency, and rollback is performed every time a connection is fetched from the connection pool. As a result, these three statements are executed the same number of times.
+In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application has enabled auto-commit concurrency, and rollback is performed every time a connection is fetched from the connection pool. As a result, these three statements are executed the same number of times.
 
 ![OLTP-Query](/media/performance/oltp_long_compile_qps.png)
 
@@ -155,7 +155,7 @@ In this load, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application has 
 - If the total QPS is equal to the number of queries in the CPS By Type panel, the query command has been executed in the application.
 - The Queries Using Plan Cache OPS panel has no data, because prepared plan cache is not enabled and TiDB execution plan cache is unavailable. This means that TiDB needs to parse every query of the application and generate an execution plan again. As a result, the compile time is longer with increasing CPU consumption by TiDB.
 
-**Example 3: Execution plan cache unavailable with prepared statement enabled for OLTP load**
+**Example 3: Execution plan cache unavailable with prepared statement enabled for OLTP workload**
 
 `StmtPreare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent data leak, many frameworks call `close` after the `execute` phase. This creates two problems.
 
@@ -170,24 +170,24 @@ In this load, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application has 
 
 #### KV/TSO Request OPS and connection information
 
-In the KV/TSO Request OPS panel, you can view the statistics of KV and TSO requests per second. Among the statistics, `kv request total` represents the sum of all requests from TiDB to TiKV. By observing the types of requests from TiDB to PD and TiKV, you can get an idea of the load profile within the cluster.
+In the KV/TSO Request OPS panel, you can view the statistics of KV and TSO requests per second. Among the statistics, `kv request total` represents the sum of all requests from TiDB to TiKV. By observing the types of requests from TiDB to PD and TiKV, you can get an idea of the workload profile within the cluster.
 
 In the Connection Count panel, you can view the total number of connections and the number of connections per TiDB. The counts help you determine whether the total number of connections is normal and the number of connections per TiDB is even. `active connections` records the number of active connections, which is equal to the database time per second.
 
-**Example 1: Busy load**
+**Example 1: Busy workload**
 
 ![TPC-C](/media/performance/tpcc_kv_conn.png)
 
-In this TPC-C load:
+In this TPC-C workload:
 
 - The total number of KV requests per second is 104,200. The top request types are `PessimisticsLock`, `Prewrite`, `Commit` and `BatchGet` in order of number of requests.
 - The total number of connections is 810, which are evenly distributed in three TiDB instances. The number of active connections is 787.1. Therefore, 97% of the connections are active, indicating that the database is the performance bottleneck for this application.
 
-**Example 2: Idle load**
+**Example 2: Idle workload**
 
 ![OLTP](/media/performance/cloud_long_idle_kv_conn.png)
 
-In this load:
+In this workload:
 
 - The total number of KV requests per second is 2600 and the number of TSO requests per second is 1100.
 - The total number of connections is 410, which are evenly distributed in three TiDB instances. The number of active connections is 2.5, indicating that the database system is relatively idle.
@@ -201,7 +201,7 @@ In the TiDB CPU and TiKV CPU/IO MBps panels, you can observe the logical CPU usa
 
 **Example 1: High resource usage in TiDB**
 
-In this load, each TiDB and TiKV is configured with 8 CPUs.
+In this workload, each TiDB and TiKV is configured with 8 CPUs.
 
 ![TPC-C](/media/performance/tidb_high_cpu.png)
 
@@ -212,7 +212,7 @@ Therefore, it can be determined that TiDB obviously consumes more CPU, which is 
 
 **Example 2: High TiKV resource usage**
 
-In the TPC-C load below, each TiDB and TiKV is configured with 16 CPUs.
+In the TPC-C workload below, each TiDB and TiKV is configured with 16 CPUs.
 
 ![TPC-C](/media/performance/tpcc_cpu_io.png)
 
@@ -234,13 +234,13 @@ The Duration panel contains the P99 latency of all statements and the average la
 
 An applications connects to the same database when performing transactions. By comparing the average query latency with the connection idle duration, you can determine if TiDB is the bottleneck for overall system performance or if user response time jitter is caused by TiDB.
 
-- If the application load is not read-only and contains transactions, by comparing the average query latency with `avg-in-txn`, you can determine the time proportion in processing transactions both inside and outside the database, based on which you can locate the bottleneck in user response time. metric, you can compare the average query latency with `avg-not-in-txn`.
+- If the application workload is not read-only and contains transactions, by comparing the average query latency with `avg-in-txn`, you can determine the time proportion in processing transactions both inside and outside the database, based on which you can locate the bottleneck in user response time. metric, you can compare the average query latency with `avg-not-in-txn`.
 
 In real customer scenarios, it is rare that the bottleneck is outside the database, for example:
 
 - The client server configuration is too low and the CPU resources are not enough.
 - HAProxy is used as a TiDB cluster proxy, and the HAProxy CPU resource is not enough.
-- HAProxy is used as a TiDB cluster proxy, and the network bandwidth of the HAProxy server is used up under high load.
+- HAProxy is used as a TiDB cluster proxy, and the network bandwidth of the HAProxy server is used up under high workload.
 - The latency from the application server to the database is high. For example, the latency is high between geographically separated public-cloud applications and the TiDB cluster, or between the database DNS equalizer and the TiDB cluster.
 - The bottleneck is in client applications. The application server's CPU cores and Numa resources cannot be fully utilized. For example, only one JVM is used to establish thousands of JDBC connections to TiDB.
 
@@ -248,7 +248,7 @@ In real customer scenarios, it is rare that the bottleneck is outside the databa
 
 ![TiDB is the Bottleneck](/media/performance/tpcc_duration_idle.png)
 
-In this TPC-C load:
+In this TPC-C workload:
 
 - The average latency and P99 latency of all SQL statements are 477 us and 3.13 ms, respectively. The average latencies of the commit statement, insert statement, and query statement are 2.02 ms, 609 ms, and 468 us, respectively.
 - The average connection idle time in transactions `avg-in-txn` is 171 us.
@@ -259,7 +259,7 @@ It can be determined that the average query latency is significantly greater tha
 
 ![TiDB is the Bottleneck](/media/performance/cloud_query_long_idle.png)
 
-In this load, the average query latency is 1.69 ms and `avg-in-txn` is 18 ms, indicating that TiDB spends 1.69 ms on average to process a SQL statement in transactions, and then needs to wait for 18 ms to receive the next statement.
+In this workload, the average query latency is 1.69 ms and `avg-in-txn` is 18 ms, indicating that TiDB spends 1.69 ms on average to process a SQL statement in transactions, and then needs to wait for 18 ms to receive the next statement.
 
 It can be determined that the bottleneck of user response time is not in TiDB. This example is in a public cloud environment, where high network latency between the application and the database results in extremely high connection idle time because the application and the database are not in the same region.
 
@@ -279,3 +279,179 @@ If the application uses the `query` or `StmtExecute` MySQL command interface glo
 ```
 avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration + avg Execute Duration
 ```
+
+Usually, the `execute` phase accounts for the most of the `query` latency. However, the `parse` and `compile` phases can also take a large part in the following cases:
+
+- Long latency in the `parse` phase: For example, when the `query` statement is long, much CPU will be consumed to parse the text.
+- Long latency in the `compile` phase: If the application does not use execution plan cache, each statement needs an execution plan to be generated. The latency in the `compile` phase can be several or tens of milliseconds. If no execution plan cache is hit, logical and physical optimization are done in the `compile` phase, which consumes a lot of CPU and memory, overburdens Go Runtime (TiDB is written in [`Go`](https://go.dev/)), and affects the performance of other TiDB components. This suggests that execution plan cache is important for efficient running of OLTP workload in TiDB.
+
+**Example 1: Database bottleneck in the `compile` phase**
+
+![Compile](/media/performance/long_compile.png)
+
+In the preceding figure, the average time of the `parse`, `compile`, and `execute` phases are 17.1 us, 729 us, and 681 us, respectively. The `compile` latency is high because the application uses the `query` command interface and cannot use execution plan cache.
+
+**Example 2: Database bottleneck in the `execute` phase**
+
+![Execute](/media/performance/long_execute.png)
+
+In this TPC-C workload, the average time of `parse`, `compile` and `execute` phases are 7.39 us, 38.1 us, and 12.8 ms, respectively. The `execute` phase constitutes the `query` latency bottleneck.
+
+#### KV and TSO Request Duration
+
+TiDB interacts with PD and TiKV in the `execute` phase. As shown in the following figure, when processing SQL request, TiDB generates TSOs as required before proceeding with `parse` and `compile`. The PD Client does not block the caller, but returns a `TSFuture` and asynchronously sends and receives the TSO requests in the background. Once the PD client finishes handling the TSO requests, it returns `TSFuture`. The holder of the `TSFuture` needs to call the Wait method to get the final TSOs. After TiDB finishes `parse` and `compile`, it enters the `execute` phase, where two situations might occur:
+
+- If the TSO request has completed, the Wait method immediately returns an available TSO or an error
+- If the TSO request has not yet completed, the Wait method is blocked until a TSO is available or an error appears (the gRPC request has been sent but no result is returned, and the network latency is high)
+
+The TSO wait time is recorded as `TSO WAIT` and the network time of the TSO request is recorded as `TSO RPC`. After the TSO wait is complete, TiDB exchanges read and write with TiKV.
+
+- Common KV read requests: `Get`, `BatchGet`, and `Cop`
+- Common KV write requests: `PessimisticLock`, `Prewrite` and `Commit` for two-stage commits
+
+![Execute](/media/performance/execute_phase.png)
+
+The indicators in this section correspond to the following three panels.
+
+- Avg TiDB KV Request Duration: The average latency of KV requests measured by TiDB
+- Avg TiKV GRPC Duration: The average latency in processing gPRC messages in TiKV
+- PD TSO Wait/RPC Duration: TiDB executor TSO wait time and network latency for TSO requests (RPC)
+
+The relationship between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duration` is as follows:
+
+```
+Avg TiDB KV Request Duration = Avg TiKV GRPC Duration + Network latency between TiDB and TiKV + TiKV gRPC processing time + TiDB gRPC processing time and scheduling latency
+```
+
+The difference between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duration` is closely related to the network traffic, latency, and resouce usage by TiDB and TiKV.
+
+- In the same data center: The difference is generally less than 2 ms.
+- In different availability zones in the same region: The difference is generally less than 5 ms.
+
+**Example 1: Low workload of clusters deployed on the same data center**
+
+![Same Data Center](/media/performance/oltp_kv_tso.png)
+
+In this workload, the average `Prewrite` latency on TiDB is 925 us, and the average `kv_prewrite` processing latency inside TiKV is 720 us. The difference is about 200 us, which is normal in the same data center. The average TSO wait latency is 206 us, and the RPC time is 144 us.
+
+**Example 2: Normal workload on public cloud clusters**
+
+![Cloud Env ](/media/performance/cloud_kv_tso.png)
+
+In this example, TiDB clusters are deployed in different data centers in the same region. The average `commit` latency on TiDB is 12.7 ms, and the average `kv_commit` processing latency inside TiKV is 10.2 ms, a difference of about 2.5 ms. The average TSO wait latency is 3.12 ms, and the RPC time is 693 us.
+
+**Example 3: Resource overloaded on public cloud clusters**
+
+![Cloud Env, TiDB Overloaded](/media/performance/cloud_kv_tso_overloaded.png)
+
+In this example, the TiDB clusters are deployed in different data centers in the same region, and TiDB network and CPU resources are severely overloaded. The average `BatchGet` latency on TiDB is 38.6 ms, and the average `kv_batch_get` processing latency inside TiKV is 6.15 ms. The difference is more than 32 ms, which is much higher than the normal value. The average TSO wait latency is 9.45 ms and the RPC time is 14.3 ms.
+
+#### Storage Async Write Duration, Store Duration, and Apply Duration
+
+TiKV processes a write request in the following procedure:
+
+- `scheduler worker` processes the write request, performs a transaction consistency check, and converts the write request into a key-value pair to be sent to the `raftstore` module.
+- The TiKV consensus module `raftstore` applies the Raft consensus algorithm to make the storage layer (composed of multiple TiKVs) fault-tolerant.
+
+    Raftstore consists of a `Store` thread and an `Apply` thread:
+
+    - The `Store` thread processes Raft messages and new `proposals`. When a new `proposals` is received, the `Store` thread of the leader node writes to the local Raft DB and copies the message to multiple follower nodes. When this `proposals` is successfully persisted in most instances, the `proposals` is successfully committed.
+    - The `Apply` thread writes the committed `proposals` to the KV DB. When the content is successfully written to the KV DB, the `Apply` thread notifies externally that the write request has completed.
+
+![TiKV Write](/media/performance/store_apply.png)
+
+The `Storage Async Write Duration` metric records the latency after a write request enters raftstore. The data is collected on a basis of per request.
+
+The `Storage Async Write Duration` metric contains two dimensions, `Store Duration` and `Apply Duration`. You can use the following formula to determine whether the bottleneck for write requests is in the `Store` or `Apply` step.
+
+```
+avg Storage Async Write Duration = avg Store Duration + avg Apply Duration
+```
+
+> **Note:**
+>
+> `Store Duration` and `Apply Duration` are supported since v5.3.0.
+
+**Example 1: Comparison of the same OLTP workload in v5.3.0 and v5.4.0**
+
+According to the preceding formula, the QPS of a write-heavy OLTP workload in v5.4.0 is 14% higher than that in v5.3.0:
+
+- v5.3.0: 24.4 ms ~= 17.7 ms + 6.59 ms
+- v5.4.0: 21.4 ms ~= 14.0 ms + 7.33 ms
+
+In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication, which reduces `Store Duration` compared with v5.3.0.
+
+v5.3.0:
+
+![v5.3.0](/media/performance/v5.3.0_store_apply.png)
+
+v5.4.0:
+
+![v5.4.0](/media/performance/v5.4.0_store_apply.png)
+
+**Example 2: Store Duration is a bottleneck**
+
+Apply the preceding formula: 10.1 ms ~= 9.81 ms + 0.304 ms. The result indicates that the latency bottleneck for write requests is in `Store Duration`.
+
+![Store](/media/performance/cloud_store_apply.png)
+
+#### Commit Log Duration, Append Log Duration, and Apply Log Duration
+
+`Commit Log Duration`, `Append Log Duration`, and `Apply Log Duration` are latency records for key operations within raftstore. These latencies are captured at the batch operation level, with each operation combines multiple write requests. Therefore, the latencies do not directly correspond to the `Store Duration` and `Apply Duration` mentioned above.
+
+- `Commit Log Duration` and `Append Log Duration` record time of operations performed in the `Store` thread. `Commit Log Duration` includes the time of copying Raft logs to other TiKV nodes (to ensure raft-log persistence). There are two `Append Log Duration` records, one for the leader and the other for the follower. `Commit Log Duration` is usually significantly higher than `Append Log Duration`, because the former includes the time of copying Raft logs to other TiKV nodes.
+- `Apply Log Duration` records the latency of `apply` Raft logs by the `Apply` thread.
+
+Common scenarios where `Commit Log Duration` is long:
+
+- There is a bottleneck in TiKV CPU resources and the scheduling latency is high
+- `raftstore.store-pool-size` is either excessively small or large (an excessively large value might also cause performance degradation)
+- The I/O latency is high, resulting in high `Append Log Duration` latency
+- The network latency between TiKV nodes is high
+- The gRPC thread count is set to an excessively small value or the CPU usage among multiple gRPCs are uneven
+
+Common scenarios where `Apply Log Duration` is long:
+
+- There is a bottleneck in TiKV CPU resources and the scheduling latency is high
+- `raftstore.apply-pool-size` is either excessively small or large (an excessively large value might also cause performance degradation)
+- The I/O latency is high
+
+**Example 1: Comparison of the same OLTP workload in v5.3.0 and v5.4.0**
+
+The QPS of a write-heavy OLTP workload in v5.4.0 is improved by 14% compared with that in v5.3.0. The following table compares the three key latencies.
+
+| Avg Duration | v5.3.0 (ms) | v5.4.0 (ms) |
+|:----------|:----------|:----------|
+| Append Log Duration | 0.27 | 0.303|
+| Commit Log Duration | 13 | 8.68 |
+| Apply Log Duration | 0.457|0.514 |
+
+In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication, which reduces `Log Duration` and `Store Duration` compared with v5.3.0.
+
+v5.3.0:
+
+![v5.3.0](/media/performance/v5.3.0_commit_append_apply.png)
+
+v5.4.0:
+
+![v5.4.0](/media/performance/v5.4.0_commit_append_apply.png)
+
+**Example 2: Commit Log Duration is a bottleneck**
+
+![Store](/media/performance/cloud_append_commit_apply.png)
+
+- Average `Append Log Duration` = 4.38 ms
+- Average `Commit Log Duration` = 7.92 ms
+- Average `Apply Log Duration` = 172 us
+
+For the `Store` thread, `Commit Log Duration` is obviously higher than `Apply Log Duration`. Meanwhile, `Append Log Duration` is significantly higher than `Apply Log Duration`, indicating that the `Store` thread might suffer from bottlenecks in both CPU and I/O. Possible ways to reduce `Commit Log Duration` and `Append Log Duration` are as follows:
+
+- If TiKV CPU resources are sufficient, consider adding `Store` threads by increasing the value of `raftstore.store-pool-size`.
+- If TiDB is v5.4.0 or later, consider enabling [`Raft Engine`](/tikv-configuration-file.md#raft-engine) by setting `raft-engine.enable: true`. Raft Engine has a light execution path. This helps reduce I/O writes and long-tail latency of writes in some scenarios. 
+- If TiKV CPU resources are sufficient and TiDB is v5.3.0 or later, consider enabling [`StoreWriter`](/tune-tikv-thread-performance.md#tikv-thread-pool-tuning) by setting `raftstore.store-io-pool-size: 1`.
+
+## What should I do to use the Performance Overview dashboard in TiDB clusters earlier than v6.1.0
+
+Starting from v6.1.0, Grafana has a built-in Performance Overview dashboard by default. This dashboard is compatible with TiDB v4.x and v5.x versions. If your TiDB is earlier than v6.0.0, you need to manually import [`performance_overview.json`](https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json), as shown in the following figure:
+
+![Store](/media/performance/import_dashboard.png)
