@@ -5,7 +5,7 @@ summary: Learn the concept, user scenarios, usages, limitations, and compatibili
 
 # クラスター化インデックス {#clustered-indexes}
 
-TiDBは、v5.0以降のクラスター化インデックス機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。これにより、TiDBは、特定のクエリのパフォーマンスを向上させる方法でテーブルを整理することができます。
+TiDBは、v5.0以降のクラスター化インデックス機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。 TiDBは、特定のクエリのパフォーマンスを向上させる方法でテーブルを整理する機能を提供します。
 
 このコンテキストでの*クラスター化*という用語<em>は、データの保存方法の編成を</em>指し、<em>一緒に動作するデータベースサーバーのグループでは</em>ありません。一部のデータベース管理システムでは、クラスター化インデックスを<em>インデックス編成テーブル</em>（IOT）と呼んでいます。
 
@@ -50,7 +50,7 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) CLUSTERED);
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) NONCLUSTERED);
 ```
 
-キーワード`KEY`と`PRIMARY KEY`は、列定義で同じ意味を持つことに注意してください。
+キーワード`KEY`と`PRIMARY KEY`は、列の定義で同じ意味を持つことに注意してください。
 
 TiDBの[コメント構文](/comment-syntax.md)を使用して、主キーのタイプを指定することもできます。例えば：
 
@@ -182,11 +182,11 @@ TiDB v5.0以降、クラスター化インデックス機能はすべてのタ�
 
 TiDB固有のコメント構文は、キーワード`CLUSTERED`と`NONCLUSTERED`をコメントでラップすることをサポートします。 `SHOW CREATE TABLE`の結果には、TiDB固有のSQLコメントも含まれています。以前のバージョンのMySQLデータベースおよびTiDBデータベースは、これらのコメントを無視します。
 
-### TiDBエコシステムツールとの互換性 {#compatibility-with-tidb-ecosystem-tools}
+### TiDB移行ツールとの互換性 {#compatibility-with-tidb-migration-tools}
 
-クラスター化インデックス機能は、v5.0以降のバージョンの次のエコシステムツールとのみ互換性があります。
+クラスタ化インデックス機能は、v5.0以降のバージョンの次の移行ツールとのみ互換性があります。
 
--   バックアップおよび復元ツール：BR、 Dumpling、およびTiDBLightning。
+-   バックアップと復元のツール：BR、Dumpling、TiDBLightning。
 -   データ移行およびレプリケーションツール：DMおよびTiCDC。
 
 ただし、v5.0 BRツールを使用してテーブルをバックアップおよび復元することによって、非クラスター化インデックスを持つテーブルをクラスター化インデックスを持つテーブルに変換することはできません。その逆も同様です。
