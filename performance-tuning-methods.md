@@ -7,18 +7,18 @@ summary: Learn how to optimize database system based on database time and how to
 
 This document describes a database time-based approach to system tuning and illustrates how to use the TiDB [Performance Overview dashboard](/grafana-performance-overview-dashboard.md) for performance analysis and tuning.
 
-With the methods described in this document, you can analyze user response time and database time from a global and top-down perspective to confirm whether the bottleneck in user response time is caused by database issues. If the bottleneck is in the database, you can use the database time overview and SQL latency breakdowns to locate the bottleneck and tune performance.
+With the methods described in this document, you can analyze user response time and database time from a global and top-down perspective to confirm whether a bottleneck in user response time is caused by database issues. If the bottleneck is in the database, you can use the database time overview and SQL latency breakdowns to locate the bottleneck and tune performance.
 
 ## Performance tuning based on database time
 
 TiDB is constantly measuring and collecting SQL processing paths and database time. Therefore, it is easy to locate database performance bottlenecks in TiDB. Based on database time metrics, you can achieve the following two goals even without data on user response time:
 
-- Determine whether the bottleneck is in TiDB by comparing the average SQL processing latency with the idle time of a TiDB connection in a transaction.
-- If the bottleneck is in TiDB, further locate the exact module in the distributed system based on database time overview, color-based performance data, key metrics, resource utilization, and top-down latency breakdowns.
+1. Determine whether a bottleneck is in TiDB by comparing the average SQL processing latency with the idle time of a TiDB connection in a transaction.
+2. If the bottleneck is in TiDB, further locate the exact module in the distributed system based on database time overview, color-based performance data, key metrics, resource utilization, and top-down latency breakdowns.
 
-### Is TiDB the bottleneck?
+### Is TiDB a bottleneck?
 
-- If the average idle time of TiDB connections in transactions is higher than the average SQL processing latency, the database is not to blame for the transaction latency of applications. The database time takes only a small part of the user response time, indicating that the bottleneck does not lie in the database.
+- If the average idle time of TiDB connections in transactions is higher than the average SQL processing latency, the major latency of application transactions is not caused by the database. The database time takes only a small part of the user response time, indicating that the bottleneck does not lie in the database.
 
     In this case, check the external components of the database. For example, determine whether there are sufficient hardware resources in the application server, and whether the network latency from the application to the database is excessively high.
 
@@ -26,13 +26,13 @@ TiDB is constantly measuring and collecting SQL processing paths and database ti
 
 ### If the bottleneck is in TiDB, how to locate it?
 
-The following figure shows a typical SQL process. You can see that most SQL processing paths are covered in TiDB performance metrics. The database time is broken down into different dimensions, which are colored accordingly. You can quickly understand the load characteristics and catch the bottlenecks inside the database if any.
+The following figure shows a typical SQL process. You can see that most SQL processing paths are covered in TiDB performance metrics. The database time is broken down into different dimensions and colored accordingly, which helps you quickly understand the load characteristics and locate the bottlenecks inside the database if any.
 
 ![database time decomposition chart](/media/performance/dashboard-diagnostics-time-relation.png)
 
 Database time is the sum of all SQL processing time. A breakdown of the database time into the following three dimensions helps you quickly locate bottlenecks in TiDB:
 
-- By SQL processing type: Determine which type of SQL statement consumes the most database time. The formula is:
+- By SQL processing type: Determine which type of SQL statements consumes the most database time. The formula is:
 
     `DB Time = Select Time + Insert Time + Update Time + Delete Time + Commit Time + ...`
 
@@ -40,7 +40,7 @@ Database time is the sum of all SQL processing time. A breakdown of the database
 
     `DB Time = Get Token Time + Parse Time + Compile Time + Execute Time`
 
-- By executor time, TSO wait time, KV request time, and execution retry time: Determine which execution step constitutes the bottleneck. The formula is:
+- By executor time, TSO wait time, KV request time, and execution retry time: Determine which execution step causes the bottleneck. The formula is:
 
     `Execute Time ~= TiDB Executor Time + KV Request Time + PD TSO Wait Time + Retried execution time`
 
@@ -50,7 +50,7 @@ This section describes how to perform performance analysis and tuning based on d
 
 The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiKV, and presents each of them in the following sections:
 
-- Database time and SQL execution time overview: Color-coded SQL types, database time by SQL execution phase, and database time of different requests help you quickly identify database load characteristics and performance bottlenecks.
+- Database time and SQL execution time overview: Use different colors to distinguish different SQL types, database time of different SQL execution phases, and database time of different requests, which helps you quickly identify database load characteristics and performance bottlenecks.
 - Key metrics and resource utilization: Contains database QPS, connection information and request command types of the applications and the database, database internal TSO and KV request OPS, and TiDB/TiKV resource usage.
 - Top-down latency breakdown: Contains a comparison of query latency and connection idle time, breakdown of query latency, latency of TSO requests and KV requests in SQL execution, and breakdown of TiKV internal write latency, etc.
 
@@ -58,7 +58,7 @@ The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiK
 
 The database time metric is the sum of the latency that TiDB processes SQL per second, which is also the total time that TiDB concurrently processes application SQL requests per second (equal to the number of active connections).
 
-The Performance Overview dashboard provides the following three stacked area graphs. They help you understand database load profile and quickly locate the bottleneck causes in terms of statements, execution phase, and TiKV or PD request type during SQL execution.
+The Performance Overview dashboard provides the following three stacked area graphs. By checking these graphs, you can quickly identify the workload type of your database and locate the bottleneck causes in terms of statements, execution phases, and TiKV or PD request type during SQL execution.
 
 - Database Time By SQL Type
 - Database Time By SQL Phase
@@ -74,8 +74,8 @@ The diagrams of database time breakdown and execution time overview present both
     - Green: `Update`, `Insert`, `Commit` and other DML statements
     - Red: General SQL types, including `StmtPrepare`, `StmtReset`, `StmtFetch`, and `StmtClose`
 
-- Database Time By SQL Phase: The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. A common scenario is that the compile phase shown in orange takes a large area due to unavailability of the execution plan cache feature.
-- SQL Execute Time Overview: Green metrics stand for common KV write requests (such as Prewrite and Commit), blue metrics stand for common KV read requests (such as Cop and Get), and metrics in other colors stand for unexpected situations which you need to pay attention. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. If non-blue or non-green areas are large, it means there is bottleneck during SQL execution. For example:
+- Database Time By SQL Phase: The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. A common scenario is that the compile phase shown in orange takes a large area due to unavailability of the execution plan cache.
+- SQL Execute Time Overview: Green metrics stand for common KV write requests (such as Prewrite and Commit), blue metrics stand for common KV read requests (such as Cop and Get), and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example:
 
     - If serious lock conflicts occur, the red area will take a large proportion.
     - If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion.
@@ -84,56 +84,56 @@ The diagrams of database time breakdown and execution time overview present both
 
 ![TPC-C](/media/performance/tpcc_db_time.png)
 
-- Database Time by SQL Type: Most time-consuming statements are commit, update, select and insert statements.
+- Database Time by SQL Type: Most time-consuming statements are `commit`, `update`, `select` and `insert` statements.
 - Database Time by SQL Phase: The most time-consuming phase is SQL execution in green.
-- SQL Execute Time Overview: The most time-consuming KV requests in SQL execution are Prewrite and Commit in green.
+- SQL Execute Time Overview: The most time-consuming KV requests in SQL execution are `Prewrite` and `Commit` in green.
 
     > **Note:**
     >
-    > It is normal that the total KV request time is greater than the execute time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the execute time. In the preceding TPC-C load, TiDB sends Prewrite and Commit requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for Prewrite, Commit and PessimisticsLock requests in this example is obviously longer than the execute time.
+    > It is normal that the total KV request time is greater than the `execute` time. Because the TiDB executor may send KV requests to multiple TiKVs concurrently, causing the total KV request wait time to be greater than the `execute` time. In the preceding TPC-C load, TiDB sends `Prewrite` and `Commit` requests concurrently to multiple TiKVs when a transaction is committed. Therefore, the total time for `Prewrite`, `Commit` and `PessimisticsLock` requests in this example is obviously longer than the `execute` time.
     >
-    > - The execute time may also be significantly greater than the total time of the KV request plus the tso_wait time. This means that the SQL execution time is spent mostly inside the TiDB executor. Here are two common examples:
+    > - The `execute` time may also be significantly greater than the total time of the KV request plus the `tso_wait` time. This means that the SQL execution time is spent mostly inside the TiDB executor. Here are two common examples:
     >
-        > - Example 1: After TiDB executor reads a large amount of data from TiKV, it needs to do complex association and aggregation inside TiDB, which consumes a lot of time.
+        > - Example 1: After TiDB executor reads a large volume of data from TiKV, it needs to do complex association and aggregation inside TiDB, which consumes a lot of time.
         > - Example 2: The application experiences serious write statement lock conflicts. Frequent lock retries result in long `Retried execution time`.
 
-**Example 2: OLTP read intensive load**
+**Example 2: OLTP read-heavy load**
 
 ![OLTP](/media/performance/oltp_normal_db_time.png)
 
 - Database Time by SQL Type: Major time-consuming statements are `SELECT`, `COMMIT`, `UPDATE`, and `INSERT`, among which `SELECT` consumes most database time.
-- Database Time by SQL Phase: Most time is consumed in the execute phase in green.
-- SQL Execute Time Overview: In SQL execution phase, pd tso_wait in dark brown, KV Get in blue, and Prewrite and Commit in green are time-consuming.
+- Database Time by SQL Phase: Most time is consumed in the `execute` phase in green.
+- SQL Execute Time Overview: In the SQL execution phase, `pd tso_wait` in dark brown, `KV Get` in blue, and `Prewrite` and `Commit` in green are time-consuming.
 
 **Example 3: Read-only OLTP load**
 
 ![OLTP](/media/performance/oltp_long_compile_db_time.png)
 
 - Database Time by SQL Type: Mainly are `SELECT` statements.
-- Database Time by SQL Phase: Major time-consuming phases are compile in orange and execute in green. Latency in the compile phase is the highest, indicating that TiDB is taking too long to generate execution plans and the root cause needs to be further determined based on the subsequent performance data.
-- SQL Execute Time Overview: The KV BatchGet requests in blue consume the most time during SQL execution.
+- Database Time by SQL Phase: Major time-consuming phases are `compile` in orange and `execute` in green. Latency in the `compile` phase is the highest, indicating that TiDB takes too long to generate execution plans and the root cause of the bottleneck needs to be further determined based on the subsequent performance data.
+- SQL Execute Time Overview: The KV `BatchGet` requests in blue consume the most time during SQL execution.
 
 > **Note:**
 >
-> In example 3, `SELECT` statements need to read thousands of rows concurrently from multiple TiKVs. Therefore, the total time of the BatchGet request is much longer than the execution time.
+> In example 3, `SELECT` statements need to read thousands of rows concurrently from multiple TiKVs. Therefore, the total time of the `BatchGet` requests is much longer than the execution time.
 
 **Example 4: Lock contention load**
 
 ![OLTP](/media/performance/oltp_lock_contention_db_time.png)
 
 - Database Time by SQL Type: Mainly are `UPDATE` statements.
-- Database Time by SQL Phase: Most time is consumed in the execute phase in green.
-- SQL Execute Time Overview: The KV request PessimisticLock shown in red consumes the most time during SQL execution, and the execution time is obviously longer than the total time of KV requests. This is caused by serious lock conflicts in write statements and frequent lock retries prolong `Retried execution time`. Currently, TiDB does not measure `Retried execution time`.
+- Database Time by SQL Phase: Most time is consumed in the `execute` phase in green.
+- SQL Execute Time Overview: The KV request `PessimisticLock` shown in red consumes the most time during SQL execution, and its execution time is obviously longer than the total time of KV requests. This is caused by serious lock conflicts in write statements and frequent lock retries prolong `Retried execution time`. Currently, TiDB does not measure `Retried execution time`.
 
 ### TiDB key metrics and cluster resource utilization
 
 #### Query Per Second, Command Per Second, and Prepared-Plan-Cache
 
-The following three panels in Performance Overview present the application load profile, how the application interacts with TiDB, and whether the application fully utilizes TiDB's [execution plan cache](/sql-prepared-plan-cache.md).
+By checking the following three panels in Performance Overview, you can learn the application workload type, how the application interacts with TiDB, and whether the application fully utilizes TiDB [execution plan cache](/sql-prepared-plan-cache.md).
 
 - QPS: Short for Query Per Second. It shows the count distribution of SQL statements executed by the application.
-- CPS By Type: CPS stands for Command Per Second. Command indicates MySQL protocol-specific commands. A query statement can be sent to TiDB either by a query command or a prepared statement.
-- Queries Using Plan Cache OPS: The count that the TiDB cluster hits the execution plan cache per second. Execution plan cache only supports the `prepared statement` command. When execution plan cache is enabled in TiDB, the following three scenarios will occur:
+- CPS By Type: Short for Command Per Second. Command indicates MySQL protocol-specific commands. A query statement can be sent to TiDB either by a query command or a prepared statement.
+- Queries Using Plan Cache OPS: The count that the TiDB cluster hits the execution plan cache per second. Execution plan cache only supports the `prepared statement` command. When the execution plan cache is enabled in TiDB, you will get one of the following three results:
 
     - No execution plan cache is hit: No execution plan is hit per second. This is because the cached execution plan is cleaned up by the application using the query command, or by calling the StmtClose command after each StmtExecute execution.
     - All execution plan cache is hit: The number of hits per second is equal to the number of times the StmtExecute command is executed per second.
