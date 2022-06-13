@@ -50,7 +50,7 @@ This section describes how to perform performance analysis and tuning based on d
 
 The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiKV, and presents each of them in the following sections:
 
-- Database time and SQL execution time overview: Use different colors to distinguish different SQL types, database time of different SQL execution phases, and database time of different requests, which helps you quickly identify database workload characteristics and performance bottlenecks.
+- Database time and SQL execution time overview: Uses different colors to distinguish different SQL types, database time of different SQL execution phases, and database time of different requests, which helps you quickly identify database workload characteristics and performance bottlenecks.
 - Key metrics and resource utilization: Contains database QPS, connection information and request command types of the applications and the database, database internal TSO and KV request OPS, and TiDB/TiKV resource usage.
 - Top-down latency breakdown: Contains a comparison of query latency and connection idle time, breakdown of query latency, latency of TSO requests and KV requests in SQL execution, and breakdown of TiKV internal write latency, etc.
 
@@ -153,18 +153,18 @@ In this workload, `Commit QPS` = `Rollback QPS` = `Select QPS`. The application 
 
 - The red bold line in the QPS panel stands for failed queries, and the Y-axis on the right shows the number of failed queries. A value other than 0 means the presence of failed queries.
 - If the total QPS is equal to the number of queries in the CPS By Type panel, the query command has been executed in the application.
-- The Queries Using Plan Cache OPS panel has no data, because prepared plan cache is not enabled and TiDB execution plan cache is unavailable. This means that TiDB needs to parse every query of the application and generate an execution plan again. As a result, the compile time is longer with increasing CPU consumption by TiDB.
+- The Queries Using Plan Cache OPS panel has no data, because prepared plan cache is not enabled and TiDB execution plan cache is unavailable. This means that TiDB needs to parse every query of the application and generate an execution plan again. As a result, the `compile` time is longer with increasing CPU consumption by TiDB.
 
 **Example 3: Execution plan cache unavailable with prepared statement enabled for OLTP workload**
 
-`StmtPreare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent data leak, many frameworks call `close` after the `execute` phase. This creates two problems.
+`StmtPreare` times = `StmtExecute` times = `StmtClose` times ~= `StmtFetch` times. The application uses the prepare > execute > fetch > close loop. To prevent data leak, many frameworks call `close` after the `execute` phase. This results in two problems:
 
 - A SQL execution requires four commands and four network round trips.
 - Queries Using Plan Cache OPS is 0, indicating zero hit of execution plan cache. The `StmtClose` command clears cached execution plans by default and the next `StmtPreare` command needs to generate the execution plan again.
 
 > **Note:**
 >
-> As of TiDB v6.0.0, you can prevent the `StmtClose` command from clearing cached execution plans via the global variable (`set global tidb_ignore_prepared_cache_close_stmt=on;`). In this way, there is no need to generate the execution plan again for the next SQL execution.
+> Starting from TiDB v6.0.0, you can prevent the `StmtClose` command from clearing cached execution plans via the global variable (`set global tidb_ignore_prepared_cache_close_stmt=on;`). In this way, there is no need to generate the execution plan again for the next SQL execution.
 
 ![OLTP-Prepared](/media/performance/oltp_prepared_statement_no_plan_cache.png)
 
@@ -219,7 +219,7 @@ In the TPC-C workload below, each TiDB and TiKV is configured with 16 CPUs.
 - The average, maximum, and delta CPU usage of TiDB are 883%, 962%, and 153%, respectively.
 - The average, maximum, and delta CPU usage of TiKV are 1288%, 1360%, and 126%, respectively. The average, maximum, and delta I/O throughput of TiKV are 130 MB/s, 153 MB/s, and 53.7 MB/s, respectively.
 
-Therefore, it can be determined that TiKV consumes more CPU, which is expected because TPC-C is a write-intensive scenario. It is recommended that you scale out the TiKV to improve performance.
+Therefore, it can be determined that TiKV consumes more CPU, which is expected because TPC-C is a write-heavy scenario. It is recommended that you scale out the TiKV to improve performance.
 
 ### Query latency breakdown and key latency metrics
 
@@ -229,14 +229,15 @@ The latency panel provides average values and 99th percentile. The average value
 
 The Duration panel contains the P99 latency of all statements and the average latency of each SQL type. The Connection Idle Duration panel contains the average latency and the P99 latency. Connection idle includes the following two states:
 
-- in-txn: The idle duration when the connection is within a transaction, i.e. the interval between processing the previous SQL and receiving the next SQL statement when the connection is within a transaction.
+- in-txn: The idle duration when the connection is within a transaction, that is, the interval between processing the previous SQL and receiving the next SQL statement when the connection is within a transaction.
 - not-in-txn: The interval between processing the previous SQL and receiving the next SQL statement when the connection is not within a transaction.
 
-An applications connects to the same database when performing transactions. By comparing the average query latency with the connection idle duration, you can determine if TiDB is the bottleneck for overall system performance or if user response time jitter is caused by TiDB.
+An application usually connects to the same database when performing transactions. By comparing the average query latency with the connection idle duration, you can determine if TiDB is the bottleneck for overall system performance or if user response time jitter is caused by TiDB.
 
-- If the application workload is not read-only and contains transactions, by comparing the average query latency with `avg-in-txn`, you can determine the time proportion in processing transactions both inside and outside the database, based on which you can locate the bottleneck in user response time. metric, you can compare the average query latency with `avg-not-in-txn`.
+- If the application workload is not read-only and contains transactions, by comparing the average query latency with `avg-in-txn`, you can determine the time proportion in processing transactions both inside and outside the database, based on which you can locate the bottleneck in user response time.
+- If the application workload is read-only, the `avg-in-txn` metric does not exist. In this case, you can compare the query average latency with the `avg-not-in-txn` metric.
 
-In real customer scenarios, it is rare that the bottleneck is outside the database, for example:
+In real customer scenarios, it is not a rare case that the bottleneck is outside the database. For example:
 
 - The client server configuration is too low and the CPU resources are not enough.
 - HAProxy is used as a TiDB cluster proxy, and the HAProxy CPU resource is not enough.
@@ -265,16 +266,16 @@ It can be determined that the bottleneck of user response time is not in TiDB. T
 
 #### Parse, Compile, and Execute Duration
 
-In TiDB, there is a [typical processing flow](/sql-tuning-concepts.md) from entering query statements to returning results.
+In TiDB, there is a [typical processing flow](/sql-tuning-concepts.md) from sending query statements to returning results.
 
-SQL processing in TiDB consists of four stages, `get token`, `parse`, `compile`, and `execute`.
+SQL processing in TiDB consists of four phases, `get token`, `parse`, `compile`, and `execute`.
 
 - `get token`: Usually only a few microseconds and can be ignored. The token is limited only when the number of connections to a single TiDB instance reaches the [token-limit](/tidb-configuration-file.md) limit.
 - `parse`: The query statements are parsed into abstract syntax tree (AST).
-- `compile`: Execution plans are compiled based on the AST and statistics of the `parse` phase. The `compile` phase contains logical optimization and physical optimization. Logical optimization optimizes query plans by rules, such as column pruning based on relational algebra. Physical optimization estimates the cost of the execution plans by statistical information and a cost-based optimizer, and selects the physical execution plan with the lowest cost.
-- `execute`: The time consumption depends on the situation. TiDB first waits for the globally unique timestamp TSO. Then the executor constructs the TiKV API request based on the Key range in the operator of the execution plan and distributes it to TiKV. `execute` time includes the TSO wait time, the KV request time, and the time spent by TiDB executor in processing data.
+- `compile`: Execution plans are compiled based on the AST and statistics of the `parse` phase. The `compile` phase contains logical optimization and physical optimization. Logical optimization optimizes query plans by rules, such as column pruning based on relational algebra. Physical optimization estimates the cost of the execution plans by statistics and a cost-based optimizer and selects a physical execution plan with the lowest cost.
+- `execute`: The time consumption depends on the situation. TiDB first waits for the globally unique timestamp TSO. Then the executor constructs the TiKV API request based on the Key range of the operator in the execution plan and distributes it to TiKV. `execute` time includes the TSO wait time, the KV request time, and the time spent by TiDB executor in processing data.
 
-If the application uses the `query` or `StmtExecute` MySQL command interface globally, you can use the following formula to locate the bottleneck in average latency.
+If an application uses the `query` or `StmtExecute` MySQL command interface globally, you can use the following formula to locate the bottleneck in average latency.
 
 ```
 avg Query Duration = avg Get Token + avg Parse Duration + avg Compile Duration + avg Execute Duration
@@ -397,7 +398,7 @@ Apply the preceding formula: 10.1 ms ~= 9.81 ms + 0.304 ms. The result indicates
 
 #### Commit Log Duration, Append Log Duration, and Apply Log Duration
 
-`Commit Log Duration`, `Append Log Duration`, and `Apply Log Duration` are latency records for key operations within raftstore. These latencies are captured at the batch operation level, with each operation combines multiple write requests. Therefore, the latencies do not directly correspond to the `Store Duration` and `Apply Duration` mentioned above.
+`Commit Log Duration`, `Append Log Duration`, and `Apply Log Duration` are latency records for key operations within raftstore. These latencies are captured at the batch operation level, with each operation combining multiple write requests. Therefore, the latencies do not directly correspond to the `Store Duration` and `Apply Duration` mentioned above.
 
 - `Commit Log Duration` and `Append Log Duration` record time of operations performed in the `Store` thread. `Commit Log Duration` includes the time of copying Raft logs to other TiKV nodes (to ensure raft-log persistence). There are two `Append Log Duration` records, one for the leader and the other for the follower. `Commit Log Duration` is usually significantly higher than `Append Log Duration`, because the former includes the time of copying Raft logs to other TiKV nodes.
 - `Apply Log Duration` records the latency of `apply` Raft logs by the `Apply` thread.
@@ -450,8 +451,8 @@ For the `Store` thread, `Commit Log Duration` is obviously higher than `Apply Lo
 - If TiDB is v5.4.0 or later, consider enabling [`Raft Engine`](/tikv-configuration-file.md#raft-engine) by setting `raft-engine.enable: true`. Raft Engine has a light execution path. This helps reduce I/O writes and long-tail latency of writes in some scenarios. 
 - If TiKV CPU resources are sufficient and TiDB is v5.3.0 or later, consider enabling [`StoreWriter`](/tune-tikv-thread-performance.md#tikv-thread-pool-tuning) by setting `raftstore.store-io-pool-size: 1`.
 
-## What should I do to use the Performance Overview dashboard in TiDB clusters earlier than v6.1.0
+## If my TiDB version is earlier than v6.1.0, what should I do to use the Performance Overview dashboard? 
 
-Starting from v6.1.0, Grafana has a built-in Performance Overview dashboard by default. This dashboard is compatible with TiDB v4.x and v5.x versions. If your TiDB is earlier than v6.0.0, you need to manually import [`performance_overview.json`](https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json), as shown in the following figure:
+Starting from v6.1.0, Grafana has a built-in Performance Overview dashboard by default. This dashboard is compatible with TiDB v4.x and v5.x versions. If your TiDB is earlier than v6.1.0, you need to manually import [`performance_overview.json`](https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json), as shown in the following figure:
 
 ![Store](/media/performance/import_dashboard.png)
