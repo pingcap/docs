@@ -74,7 +74,7 @@ The diagrams of database time breakdown and execution time overview present both
     - Green: `Update`, `Insert`, `Commit` and other DML statements
     - Red: General SQL types, including `StmtPrepare`, `StmtReset`, `StmtFetch`, and `StmtClose`
 
-- Database Time By SQL Phase: The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. A common scenario is that the compile phase shown in orange takes a large area due to unavailability of execution plan cache.
+- Database Time By SQL Phase: The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. A common scenario is that the compile phase shown in orange takes a large area due to unavailability of prepared plan cache.
 - SQL Execute Time Overview: Green metrics stand for common KV write requests (such as `Prewrite` and `Commit`), blue metrics stand for common KV read requests (such as Cop and Get), and metrics in other colors stand for unexpected situations which you need to pay attention. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. If non-blue or non-green areas are large, it means there is bottleneck during SQL execution. For example:
 
     - If serious lock conflicts occur, the red area will take a large proportion.
@@ -129,7 +129,7 @@ The diagrams of database time breakdown and execution time overview present both
 
 #### Query Per Second, Command Per Second, and Prepared-Plan-Cache
 
-By checking the following three panels in Performance Overview, you can learn the application workload type, how the application interacts with TiDB, and whether the application fully utilizes TiDB [execution plan cache](/sql-prepared-plan-cache.md).
+By checking the following three panels in Performance Overview, you can learn the application workload type, how the application interacts with TiDB, and whether the application fully utilizes TiDB [prepared plan cache](/sql-prepared-plan-cache.md).
 
 - QPS: Short for Query Per Second. It shows the count of SQL statements executed by the application.
 - CPS By Type: Short for Command Per Second. Command indicates MySQL protocol-specific commands. A query statement can be sent to TiDB either by a query command or a prepared statement.
@@ -409,7 +409,7 @@ Common scenarios where `Commit Log Duration` is long:
 - `raftstore.store-pool-size` is either excessively small or large (an excessively large value might also cause performance degradation)
 - The I/O latency is high, resulting in high `Append Log Duration` latency
 - The network latency between TiKV nodes is high
-- The gRPC thread are uneven in terms of CPU usage.
+- The number of the gRPC threads are too small,  CPU usage is uneven among the GRPC threads.
 
 Common scenarios where `Apply Log Duration` is long:
 
