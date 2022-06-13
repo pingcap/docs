@@ -409,7 +409,7 @@ Common scenarios where `Commit Log Duration` is long:
 - `raftstore.store-pool-size` is either excessively small or large (an excessively large value might also cause performance degradation)
 - The I/O latency is high, resulting in high `Append Log Duration` latency
 - The network latency between TiKV nodes is high
-- The gRPC thread are uneven in terms of cpu usage.
+- The gRPC thread are uneven in terms of CPU usage.
 
 Common scenarios where `Apply Log Duration` is long:
 
@@ -448,10 +448,10 @@ v5.4.0:
 For the `Store` thread, `Commit Log Duration` is obviously higher than `Apply Log Duration`. Meanwhile, `Append Log Duration` is significantly higher than `Apply Log Duration`, indicating that the `Store` thread might suffer from bottlenecks in both CPU and I/O. Possible ways to reduce `Commit Log Duration` and `Append Log Duration` are as follows:
 
 - If TiKV CPU resources are sufficient, consider adding `Store` threads by increasing the value of `raftstore.store-pool-size`.
-- If TiDB is v5.4.0 or later, consider enabling [`Raft Engine`](/tikv-configuration-file.md#raft-engine) by setting `raft-engine.enable: true`. Raft Engine has a light execution path. This helps reduce I/O writes and long-tail latency of writes in some scenarios. 
+- If TiDB is v5.4.0 or later, consider enabling [`Raft Engine`](/tikv-configuration-file.md#raft-engine) by setting `raft-engine.enable: true`. Raft Engine has a light execution path. This helps reduce I/O writes and long-tail latency of writes in some scenarios.
 - If TiKV CPU resources are sufficient and TiDB is v5.3.0 or later, consider enabling [`StoreWriter`](/tune-tikv-thread-performance.md#tikv-thread-pool-tuning) by setting `raftstore.store-io-pool-size: 1`.
 
-## If my TiDB version is earlier than v6.1.0, what should I do to use the Performance Overview dashboard? 
+## If my TiDB version is earlier than v6.1.0, what should I do to use the Performance Overview dashboard?
 
 Starting from v6.1.0, Grafana has a built-in Performance Overview dashboard by default. This dashboard is compatible with TiDB v4.x and v5.x versions. If your TiDB is earlier than v6.1.0, you need to manually import [`performance_overview.json`](https://github.com/pingcap/tidb/blob/master/metrics/grafana/performance_overview.json), as shown in the following figure:
 
