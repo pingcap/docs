@@ -123,7 +123,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 | Statistics                                               | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1   |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [CMSketch](/statistics.md)                                   | Deprecated | Deprecated | Deprecated   |  Deprecated  |  Deprecated  |  Deprecated  |  Deprecated  |      Y       |
+| [CMSketch](/statistics.md)                                   | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |      Y       |
 | [Histograms](/statistics.md)                                 | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Extended statistics (multiple columns)](/statistics.md)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
 | [Automatically update statistics](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
