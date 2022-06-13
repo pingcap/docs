@@ -592,20 +592,6 @@ This section introduces configuration items related to the Coprocessor Cache fea
 - Unit: MB
 - Type: Float
 
-## txn-local-latches
-
-Configuration related to the transaction latch. It is recommended to enable it when many local transaction conflicts occur.
-
-### `enabled`
-
-- Determines whether to enable the memory lock of transactions.
-- Default value: `false`
-
-### `capacity`
-
-- The number of slots corresponding to Hash, which automatically adjusts upward to an exponential multiple of 2. Each slot occupies 32 Bytes of memory. If set too small, it might result in slower running speed and poor performance in the scenario where data writing covers a relatively large range (such as importing data).
-- Default value: `2048000`
-
 ## binlog
 
 Configurations related to TiDB Binlog.

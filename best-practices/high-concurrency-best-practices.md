@@ -80,10 +80,10 @@ SELECT
     '@example.com'
   )
 FROM
-  (WITH RECURSIVE nr(n) AS 
+  (WITH RECURSIVE nr(n) AS
     (SELECT 1                              -- Start CTE at 1
       UNION ALL SELECT n + 1               -- increase n with 1 every loop
-      FROM nr WHERE n < 1000000            -- stop loop at 1_000_000 
+      FROM nr WHERE n < 1000000            -- stop loop at 1_000_000
     ) SELECT n FROM nr
   ) a;
 ```
@@ -243,7 +243,7 @@ To address the problem in this scenario, you can replace `AUTO_INCREMENT` with [
 
 ## Parameter configuration
 
-In v2.1, the [latch mechanism](/tidb-configuration-file.md#txn-local-latches) is introduced in TiDB to identify transaction conflicts in advance in scenarios where write conflicts frequently appear. The aim is to reduce the retry of transaction commits in TiDB and TiKV caused by write conflicts. Generally, batch tasks use the data already stored in TiDB, so the write conflicts of transaction do not exist. In this situation, you can disable the latch in TiDB to reduce memory allocation for small objects:
+In v2.1, the latch mechanism is introduced in TiDB to identify transaction conflicts in advance in scenarios where write conflicts frequently appear. The aim is to reduce the retry of transaction commits in TiDB and TiKV caused by write conflicts. Generally, batch tasks use the data already stored in TiDB, so the write conflicts of transaction do not exist. In this situation, you can disable the latch in TiDB to reduce memory allocation for small objects:
 
 ```
 [txn-local-latches]
