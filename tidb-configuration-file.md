@@ -401,7 +401,7 @@ Configuration items related to performance.
 ### `query-feedback-limit`
 
 - The maximum pieces of query feedback that can be cached in memory. Extra pieces of feedback that exceed this limit are discarded.
-- Default value: `1024`
+- Default value: `512`
 
 ### `pseudo-estimate-ratio`
 
