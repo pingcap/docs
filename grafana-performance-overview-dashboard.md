@@ -1,9 +1,9 @@
 ---
 title: Key Metrics on Performance Overview
-summary: Learn key metrics displayed on the Grafana Overview dashboard.
+summary: Learn key metrics displayed on the Performance Overview dashboard.
 ---
 
-# key Metrics on Performance Overview
+# Key Metrics on Performance Overview
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For more information, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
@@ -11,7 +11,7 @@ The Grafana dashboard is divided into a series of sub dashboards which include P
 
 The Performance Overview dashboard orchestrates the metrics of TiDB, PD, and TiKV, and presents each of them in the following sections:
 
-- Overview: Database time and SQL execution time summary. Tuning by color, you can quickly identify the database load profile and the performance bottleneck.
+- Overview: Database time and SQL execution time summary. By checking different colors in the overview, you can quickly identify the database load profile and the performance bottleneck.
 
 - Load profile: Key metrics and resource usage, including database QPS, connection information, the MySQL command types the application interactes with TiDB, database internal TSO and KV request OPS, and resource usage of the TiKV and TiDB.
 
@@ -29,7 +29,7 @@ The following sections illustrate the metrics on the Performance Overview dashbo
 ## Database Time by SQL Phase
 
 - database time: Total database time per second
-- get token/parse/compile/execute: Database time consumed in four SQL processing phaseses
+- get token/parse/compile/execute: Database time consumed in four SQL processing phases
 
 The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required.
 
@@ -39,9 +39,9 @@ The SQL execution phase is in green and other phases are in red on general. If n
 - tso_wait: Concurrent TSO waiting time per second during SQL execution
 - kv request type: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
 
-Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. 
+Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. 
 
-If non-blue or non-green areas are large, it means there is bottleneck during SQL execution. For example:
+If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example:
 
 - If serious lock conflicts occur, the red area will take a large proportion.
 - If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion.
@@ -106,7 +106,7 @@ Connection Idle Duration indicates the duration of a connection being idle.
 - avg-in-txn: Average connection idle duration when the connection is within a transaction
 - avg-not-in-txn: Average connection idle duration when the connection is not within a transaction
 - 99-in-txn: P99 connection idle duration when the connection is within a transaction
-- 99-not-in-txn: P99 connection idle duration when the connection is within a transaction
+- 99-not-in-txn: P99 connection idle duration when the connection is not within a transaction
 
 ## Parse Duration, Compile Duration, and Execute Duration
 
