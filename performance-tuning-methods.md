@@ -266,7 +266,7 @@ It can be determined that the bottleneck of user response time is not in TiDB. T
 
 #### Parse, Compile, and Execute Duration
 
-In TiDB, there is a [typical processing flow](/sql-tuning-concepts.md) from sending query statements to returning results.
+In TiDB, there is a [typical processing flow](/sql-optimization-concepts.md) from sending query statements to returning results.
 
 SQL processing in TiDB consists of four phases, `get token`, `parse`, `compile`, and `execute`.
 
