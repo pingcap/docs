@@ -50,7 +50,7 @@ You can set the project CIDR during creating the first Dedicated Tier of your pr
 
 1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Project Settings** tab.
 
-    The **VPC Peering** page is displayed by default.
+    The **VPC Peering** configuration is displayed by default.
 
 2. Click **Add**, choose the AWS icon, and then fill in the required information of your existing AWS VPC:
 
@@ -200,7 +200,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Project Settings** tab.
 
-    The **VPC Peering** page is displayed by default.
+    The **VPC Peering** configuration is displayed by default.
 
 2. Click **Add**, choose the Google Cloud icon, and then fill in the required information of your existing GCP VPC:
 
