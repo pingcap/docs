@@ -390,21 +390,6 @@ Configuration items related to storage.
 + If the recovery fails to finish within this time window, TiKV will panic.
 + Default value: 1h
 
-## storage.block-cache
-
-Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
-
-### `shared`
-
-+ Enables or disables the sharing of block cache.
-+ Default value: `true`
-
-### `capacity`
-
-+ The size of the shared block cache.
-+ Default value: 45% of the size of total system memory
-+ Unit: KB|MB|GB
-
 ### `api-version` <span class="version-mark">New in v6.1.0</span>
 
 + The storage format and interface version used by TiKV when TiKV serves as the raw key-value store.
@@ -422,6 +407,21 @@ Configuration items related to the sharing of block cache among multiple RocksDB
 > - TiKV API V2 is still an experimental feature. It is not recommended to use it in production environments.
 > - You can set the value of `api-version` to `2` **only when** deploying a new TiKV cluster. **Do not** modify the value of this configuration item in an existing TiKV cluster. TiKV clusters with different `api-version` values use different data formats. Therefore, if you modify the value of this item in an existing TiKV cluster, the cluster will store data in different formats and causes data corruption. It will raise the "unable to switch storage.api_version" error when you start the TiKV cluster.
 > - After API V2 is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.1.0. Otherwise, data corruption might occur.
+
+## storage.block-cache
+
+Configuration items related to the sharing of block cache among multiple RocksDB Column Families (CF). When these configuration items are enabled, block cache separately configured for each column family is disabled.
+
+### `shared`
+
++ Enables or disables the sharing of block cache.
++ Default value: `true`
+
+### `capacity`
+
++ The size of the shared block cache.
++ Default value: 45% of the size of total system memory
++ Unit: KB|MB|GB
 
 ## storage.flow-control
 
@@ -709,6 +709,12 @@ Configuration items related to Raftstore.
 + Default value: `128`
 + Minimum value: `10`
 
+### `max-snapshot-file-raw-size` <span class="version-mark">New in v6.1.0</span>
+
++ When the size of a snapshot file exceeds this configuration value, this file will be split into multiple files.
++ Default value: `100MiB`
++ Minimum value: `100MiB`
+
 ### `snap-apply-batch-size`
 
 + The memory cache size required when the imported snapshot file is written into the disk
@@ -835,24 +841,44 @@ Configuration items related to Coprocessor.
 ### `region-max-size`
 
 + The maximum size of a Region. When the value is exceeded, the Region splits into many.
-+ Default value: `"144MB"`
-+ Unit: KB|MB|GB
++ Default value: `region-split-size / 2 * 3`
++ Unit: KiB|MiB|GiB
 
 ### `region-split-size`
 
 + The size of the newly split Region. This value is an estimate.
-+ Default value: `"96MB"`
-+ Unit: KB|MB|GB
++ Default value: `"96MiB"`
++ Unit: KiB|MiB|GiB
 
 ### `region-max-keys`
 
 + The maximum allowable number of keys in a Region. When this value is exceeded, the Region splits into many.
-+ Default value: `1440000`
++ Default value: `region-split-keys / 2 * 3`
 
 ### `region-split-keys`
 
 + The number of keys in the newly split Region. This value is an estimate.
 + Default value: `960000`
+
+### `enable-region-bucket` <span class="version-mark">New in v6.1.0</span>
+
++ Determines whether to divide a Region into smaller ranges called buckets. The bucket is used as the unit of the concurrent query to improve the scan concurrency. For more about the design of the bucket, refer to [Dynamic size Region](https://github.com/tikv/rfcs/blob/master/text/0082-dynamic-size-region.md).
++ Default value: false
+
+> **Warning:**
+>
+> - `enable-region-bucket` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
+> - This configuration makes sense only when `region-split-size` is twice of `region-bucket-size` or above; otherwise, no bucket is actually generated.
+> - Adjusting `region-split-size` to a larger value might have the risk of performance regression and slow scheduling.
+
+### `region-bucket-size` <span class="version-mark">New in v6.1.0</span>
+
++ The size of a bucket when `enable-region-bucket` is true.
++ Default value: `96MiB`
+
+> **Warning:**
+>
+> `region-bucket-size` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
 
 ## RocksDB
 
