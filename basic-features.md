@@ -125,7 +125,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [CMSketch](/statistics.md)                                   | Deprecated | Deprecated | Deprecated   |  Deprecated  |  Deprecated  |  Deprecated  |  Deprecated  |      Y       |
 | [Histograms](/statistics.md)                                 | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Extended statistics (multiple columns)](/statistics.md)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
-| [Statistics Feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Automatically update statistics](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
 
