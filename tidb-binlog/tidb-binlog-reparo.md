@@ -8,7 +8,7 @@ aliases: ['/docs/dev/tidb-binlog/tidb-binlog-reparo/','/docs/dev/reference/tidb-
 
 Reparo is a TiDB Binlog tool, used to recover the incremental data. To back up the incremental data, you can use Drainer of TiDB Binlog to output the binlog data in the protobuf format to files. To restore the incremental data, you can use Reparo to parse the binlog data in the files and apply the binlog in TiDB/MySQL.
 
-The Reparo installation package (`reparo`) is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+The Reparo installation package (`reparo`) is included in the TiDB Toolkit.
 
 ## Reparo usage
 
