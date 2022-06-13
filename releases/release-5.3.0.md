@@ -41,7 +41,7 @@ In v5.3, the key new features or improvements are as follows:
 
 |  Configuration file    |  Configuration item  | Change type |  Description  |
 | :---------- | :----------- | :----------- | :----------- |
-| TiDB | [`prepared-plan-cache.capacity`](/tidb-configuration-file.md#capacity)  | Modified | Controls the number of cached statements. The default value is changed from `100` to `1000`.|
+| TiDB | `prepared-plan-cache.capacity` | Modified | Controls the number of cached statements. The default value is changed from `100` to `1000`.|
 | TiKV | [`storage.reserve-space`](/tikv-configuration-file.md#reserve-space) | Modified | Controls space reserved for disk protection when TiKV is started. Starting from v5.3.0, 80% of the reserved space is used as the extra disk space required for operations and maintenance when the disk space is insufficient, and the other 20% is used to store temporary files. |
 | TiKV | `memory-usage-limit` | Modified  | This configuration item is new in TiDB v5.3.0 and its value is calculated based on storage.block-cache.capacity. |
 | TiKV | [`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) | Newly added | The allowable number of threads that process Raft I/O tasks, which is the size of the StoreWriter thread pool. When you modify the size of this thread pool, refer to [Performance tuning for TiKV thread pools](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools). |
