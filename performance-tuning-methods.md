@@ -449,7 +449,7 @@ For the `Store` thread, `Commit Log Duration` is obviously higher than `Apply Lo
 
 - If TiKV CPU resources are sufficient, consider adding `Store` threads by increasing the value of `raftstore.store-pool-size`.
 - If TiDB is v5.4.0 or later, consider enabling [`Raft Engine`](/tikv-configuration-file.md#raft-engine) by setting `raft-engine.enable: true`. Raft Engine has a light execution path. This helps reduce I/O writes and long-tail latency of writes in some scenarios.
-- If TiKV CPU resources are sufficient and TiDB is v5.3.0 or later, consider enabling [`StoreWriter`](/tune-tikv-thread-performance.md#tikv-thread-pool-tuning) by setting `raftstore.store-io-pool-size: 1`.
+- If TiKV CPU resources are sufficient and TiDB is v5.3.0 or later, consider enabling [`StoreWriter`](/tune-tikv-thread-performance.md#performance-tuning-for-tikv-thread-pools) by setting `raftstore.store-io-pool-size: 1`.
 
 ## If my TiDB version is earlier than v6.1.0, what should I do to use the Performance Overview dashboard?
 
