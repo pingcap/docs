@@ -200,7 +200,7 @@ In the Avro protocol, two other `sink-uri` parameters might affect the Column da
 - `avro-bigint-unsigned-handling-mode` controls how Avro handles BIGINT UNSIGNED fields, including:
 
     - string: Avro handles BIGINT UNSIGNED fields as strings.
-    - long: Avro handles BIGINT UNSIGNED fields as 64-bit signed integers. When the value is greater than 9223372036854775807, overflow will occur.
+    - long: Avro handles BIGINT UNSIGNED fields as 64-bit signed integers. When the value is greater than `9223372036854775807`, overflow will occur.
 
 The following is a configuration example:
 
