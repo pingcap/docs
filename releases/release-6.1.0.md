@@ -25,7 +25,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * List partitioning and list COLUMNS partitioning become GA. Both are compatible with MySQL 5.7.
 
-    User document: [List partitioning](/partitioned-table.md#list-partitioning), [List COLUMNS partitioning](/partitioned-table.md#list-columns-partitioning)
+    User documents: [List partitioning](/partitioned-table.md#list-partitioning), [List COLUMNS partitioning](/partitioned-table.md#list-columns-partitioning)
 
 * TiFlash supports initiating a compact command. (experimental)
 
