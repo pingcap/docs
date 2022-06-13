@@ -147,11 +147,17 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `true`
 + When this configuration value is `true`, the maximum length of a single `ENUM` element and a single `SET` element is 255 characters, which is compatible with [MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/string-type-syntax.html). When this configuration value is `false`, there is no limit on the length of a single element, which is compatible with TiDB (earlier than v5.0).
 
-#### `graceful-wait-before-shutdown` <span class="version-mark">New in v5.0</span>
+### `graceful-wait-before-shutdown` <span class="version-mark">New in v5.0</span>
 
 - Specifies the number of seconds that TiDB waits when you shut down the server, which allows the clients to disconnect.
 - Default value: `0`
 - When TiDB is waiting for shutdown (in the grace period), the HTTP status will indicate a failure, which allows the load balancers to reroute traffic.
+
+### `enable-global-kill` <span class="version-mark">New in v6.1.0</span>
+
++ Controls whether to enable the Global Kill (terminating queries or connections across instances) feature.
++ Default value: `true`
++ When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
 
 ## Log
 
@@ -423,6 +429,10 @@ Configuration items related to performance.
 
 ### `enable-stats-cache-mem-quota` <span class="version-mark">New in v6.1.0</span>
 
+> **Warning:**
+>
+> This variable is an experimental feature. It is not recommended to use it in production environments.
+
 + Controls whether to enable the memory quota for the statistics cache.
 + Default value: `false`
 
@@ -660,6 +670,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 ### deadlock-history-collect-retryable
 
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
++ Default value: `false`
 
 ### pessimistic-auto-commit (New in v6.0.0)
 
