@@ -3,149 +3,149 @@ title: TiDB Scheduling
 summary: Introduces the PD scheduling component in a TiDB cluster.
 ---
 
-# TiDB Scheduling
+# TiDBスケジューリング {#tidb-scheduling}
 
-The Placement Driver ([PD](https://github.com/tikv/pd)) works as the manager in a TiDB cluster, and it also schedules Regions in the cluster. This article introduces the design and core concepts of the PD scheduling component.
+配置ドライバー（ [PD](https://github.com/tikv/pd) ）は、TiDBクラスタのマネージャーとして機能し、クラスタのリージョンもスケジュールします。この記事では、PDスケジューリングコンポーネントの設計とコアコンセプトを紹介します。
 
-## Scheduling situations
+## スケジュール状況 {#scheduling-situations}
 
-TiKV is the distributed key-value storage engine used by TiDB. In TiKV, data is organized as Regions, which are replicated on several stores. In all replicas, a leader is responsible for reading and writing, and followers are responsible for replicating Raft logs from the leader.
+TiKVは、TiDBで使用される分散型Key-Valueストレージエンジンです。 TiKVでは、データはリージョンとして編成され、複数のストアに複製されます。すべてのレプリカで、リーダーは読み取りと書き込みを担当し、フォロワーはリーダーからのRaftログを複製する責任があります。
 
-Now consider about the following situations:
+次に、次の状況について考えてみましょう。
 
-* To utilize storage space in a high-efficient way, multiple Replicas of the same Region need to be properly distributed on different nodes according to the Region size;
-* For multiple data center topologies, one data center failure only causes one replica to fail for all Regions;
-* When a new TiKV store is added, data can be rebalanced to it;
-* When a TiKV store fails, PD needs to consider:
-    * Recovery time of the failed store.
-        * If it's short (for example, the service is restarted), whether scheduling is necessary or not.
-        * If it's long (for example, disk fault, data is lost, etc.), how to do scheduling.
-    * Replicas of all Regions.
-        * If the number of replicas is not enough for some Regions, PD needs to complete them.
-        * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.
-* Read/Write operations are performed on leaders, which can not be distributed only on a few individual stores;
-* Not all Regions are hot, so loads of all TiKV stores need to be balanced;
-* When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
+-   ストレージスペースを高効率で利用するには、同じリージョンの複数のレプリカを、リージョンのサイズに応じて異なるノードに適切に分散させる必要があります。
+-   複数のデータセンタートポロジの場合、1つのデータセンターで障害が発生すると、すべてのリージョンで1つのレプリカのみが障害になります。
+-   新しいTiKVストアが追加されると、データをそのストアにリバランスできます。
+-   TiKVストアに障害が発生した場合、PDは次のことを考慮する必要があります。
+    -   失敗したストアの回復時間。
+        -   短い場合（たとえば、サービスが再開される場合）、スケジューリングが必要かどうか。
+        -   長い場合（たとえば、ディスク障害、データが失われるなど）、スケジューリングを行う方法。
+    -   すべての地域のレプリカ。
+        -   一部のリージョンでレプリカの数が十分でない場合、PDはそれらを完了する必要があります。
+        -   レプリカの数が予想よりも多い場合（たとえば、障害が発生したストアがリカバリ後にクラスタに再参加する場合）、PDはそれらを削除する必要があります。
+-   読み取り/書き込み操作はリーダーに対して実行されますが、これは少数の個別のストアにのみ配布することはできません。
+-   すべてのリージョンがホットであるとは限らないため、すべてのTiKVストアの負荷のバランスをとる必要があります。
+-   リージョンのバランスが取れている場合、データ転送は多くのネットワーク/ディスクトラフィックとCPU時間を利用し、オンラインサービスに影響を与える可能性があります。
 
-These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a scheduler is needed to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiDB cluster.
+これらの状況は同時に発生する可能性があり、解決が困難になります。また、システム全体が動的に変化しているため、クラスタに関するすべての情報を収集してからクラスタを調整するスケジューラーが必要です。そのため、PDはTiDBクラスタに導入されます。
 
-## Scheduling requirements
+## スケジュール要件 {#scheduling-requirements}
 
-The above situations can be classified into two types:
+上記の状況は、次の2つのタイプに分類できます。
 
-1. A distributed and highly available storage system must meet the following requirements:
+1.  分散型で可用性の高いストレージシステムは、次の要件を満たす必要があります。
 
-    * The right number of replicas.
-    * Replicas need to be distributed on different machines according to different topologies.
-    * The cluster can perform automatic disaster recovery from TiKV peers' failure.
+    -   適切な数のレプリカ。
+    -   レプリカは、さまざまなトポロジに従ってさまざまなマシンに配布する必要があります。
+    -   クラスタは、TiKVピアの障害からの自動ディザスタリカバリを実行できます。
 
-2. A good distributed system needs to have the following optimizations:
+2.  優れた分散システムには、次の最適化が必要です。
 
-    * All Region leaders are distributed evenly on stores;
-    * Storage capacity of all TiKV peers are balanced;
-    * Hot spots are balanced;
-    * Speed of load balancing for the Regions needs to be limited to ensure that online services are stable;
-    * Maintainers are able to take peers online/offline manually.
+    -   すべての地域のリーダーは店舗に均等に配置されます。
+    -   すべてのTiKVピアのストレージ容量はバランスが取れています。
+    -   ホットスポットはバランスが取れています。
+    -   オンラインサービスを安定させるには、リージョンの負荷分散の速度を制限する必要があります。
+    -   メンテナは、ピアを手動でオンライン/オフラインにすることができます。
 
-After the first type of requirements is satisfied, the system will be failure tolerable. After the second type of requirements is satisfied, resources will be utilized more efficiently and the system will have better scalability.
+最初のタイプの要件が満たされると、システムは障害に耐えられるようになります。 2番目のタイプの要件が満たされると、リソースがより効率的に利用され、システムのスケーラビリティが向上します。
 
-To achieve the goals, PD needs to collect information firstly, such as state of peers, information about Raft groups and the statistics of accessing the peers. Then we need to specify some strategies for PD, so that PD can make scheduling plans from these information and strategies. Finally, PD distributes some operators to TiKV peers to complete scheduling plans.
+目標を達成するために、PDはまず、ピアの状態、Raftグループに関する情報、ピアへのアクセスの統計などの情報を収集する必要があります。次に、PDがこれらの情報と戦略からスケジューリング計画を立てられるように、PDのいくつかの戦略を指定する必要があります。最後に、PDは、スケジューリング計画を完了するために、一部のオペレーターをTiKVピアに配布します。
 
-## Basic scheduling operators
+## 基本的なスケジューリング演算子 {#basic-scheduling-operators}
 
-All scheduling plans contain three basic operators:
+すべてのスケジューリング計画には、次の3つの基本的な演算子が含まれています。
 
-* Add a new replica
-* Remove a replica
-* Transfer a Region leader between replicas in a Raft group
+-   新しいレプリカを追加する
+-   レプリカを削除する
+-   ラフトグループ内のレプリカ間でリージョンリーダーを転送する
 
-They are implemented by the Raft commands `AddReplica`, `RemoveReplica`, and `TransferLeader`.
+これらは、Raftコマンド`AddReplica` 、および`RemoveReplica`によって実装され`TransferLeader` 。
 
-## Information collection
+## 情報収集 {#information-collection}
 
-Scheduling is based on information collection. In short, the PD scheduling component needs to know the states of all TiKV peers and all Regions. TiKV peers report the following information to PD:
+スケジューリングは情報収集に基づいています。つまり、PDスケジューリングコンポーネントは、すべてのTiKVピアとすべてのリージョンの状態を知る必要があります。 TiKVピアは、次の情報をPDに報告します。
 
-- State information reported by each TiKV peer:
+-   各TiKVピアによって報告された状態情報：
 
-    Each TiKV peer sends heartbeats to PD periodically. PD not only checks whether the store is alive, but also collects [`StoreState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473) in the heartbeat message. `StoreState` includes:
+    各TiKVピアは、定期的にハートビートをPDに送信します。 PDは、ストアが稼働しているかどうかを確認するだけでなく、ハートビートメッセージで[`StoreState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L473)を収集します。 `StoreState`が含まれます：
 
-    * Total disk space
-    * Available disk space
-    * The number of Regions
-    * Data read/write speed
-    * The number of snapshots that are sent/received (The data might be replicated between replicas through snapshots)
-    * Whether the store is overloaded
-    * Labels (See [Perception of Topology](/schedule-replicas-by-topology-labels.md))
+    -   総ディスク容量
+    -   使用可能なディスク容量
+    -   リージョンの数
+    -   データの読み取り/書き込み速度
+    -   送受信されたスナップショットの数（データはスナップショットを介してレプリカ間で複製される場合があります）
+    -   ストアが過負荷になっているかどうか
+    -   ラベル（ [トポロジーの認識](/schedule-replicas-by-topology-labels.md)を参照）
 
-    You can use PD control to check the status of a TiKV store, which can be Up, Disconnect, Offline, Down, or Tombstone. The following is a description of all statuses and their relationship.
+    PD制御を使用して、TiKVストアのステータスを確認できます。TiKVストアのステータスは、アップ、切断、オフライン、ダウン、またはトゥームストーンです。以下は、すべてのステータスとそれらの関係の説明です。
 
-    + **Up**: The TiKV store is in service.
-    + **Disconnect**: Heartbeat messages between the PD and the TiKV store are lost for more than 20 seconds. If the lost period exceeds the time specified by `max-store-down-time`, the status "Disconnect" changes to "Down".
-    + **Down**: Heartbeat messages between the PD and the TiKV store are lost for a time longer than `max-store-down-time` (30 minutes by default). In this status, the TiKV store starts replenishing replicas of each Region on the surviving store.
-    + **Offline**: A TiKV store is manually taken offline through PD Control. This is only an intermediate status for the store to go offline. The store in this status moves all its Regions to other "Up" stores that meet the relocation conditions. When `leader_count` and `region_count` (obtained through PD Control) both show `0`, the store status changes to "Tombstone" from "Offline". In the "Offline" status, **do not** disable the store service or the physical server where the store is located. During the process that the store goes offline, if the cluster does not have target stores to relocate the Regions (for example, inadequate stores to hold replicas in the cluster), the store is always in the "Offline" status.
-    + **Tombstone**: The TiKV store is completely offline. You can use the `remove-tombstone` interface to safely clean up TiKV in this status.
+    -   **上**：TiKVストアが稼働中です。
+    -   **切断**：PDとTiKVストア間のハートビートメッセージが20秒以上失われます。失われた期間が`max-store-down-time`で指定された時間を超えると、ステータス「切断」が「ダウン」に変わります。
+    -   **ダウン**：PDとTiKVストア間のハートビートメッセージが`max-store-down-time`時間以上失われます（デフォルトでは30分）。このステータスでは、TiKVストアは、存続しているストアの各リージョンのレプリカの補充を開始します。
+    -   **オフライン**：TiKVストアはPD制御を介して手動でオフラインになります。これは、ストアがオフラインになるための中間ステータスにすぎません。このステータスのストアは、すべてのリージョンを、移転条件を満たす他の「アップ」ストアに移動します。 `leader_count`と`region_count` （PD制御で取得）の両方に`0`が表示されると、ストアのステータスが「オフライン」から「トゥームストーン」に変わります。 「オフライン」状態では、ストアサービスまたはストアが配置されている物理サーバーを無効に<strong>しない</strong>でください。ストアがオフラインになるプロセス中に、リージョンを再配置するためのターゲットストアがクラスタにない場合（たとえば、クラスタにレプリカを保持するにはストアが不十分な場合）、ストアは常に「オフライン」ステータスになります。
+    -   **トゥームストーン**：TiKVストアは完全にオフラインです。 `remove-tombstone`のインターフェイスを使用して、このステータスのTiKVを安全にクリーンアップできます。
 
     ![TiKV store status relationship](/media/tikv-store-status-relationship.png)
 
-- Information reported by Region leaders:
+-   地域の指導者によって報告された情報：
 
-    Each Region leader sends heartbeats to PD periodically to report [`RegionState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312), including:
+    各リージョンリーダーは、以下を含む[`RegionState`](https://github.com/pingcap/kvproto/blob/master/proto/pdpb.proto#L312)を報告するために定期的にPDにハートビートを送信します。
 
-    * Position of the leader itself
-    * Positions of other replicas
-    * The number of offline replicas
-    * data read/write speed
+    -   リーダー自体の位置
+    -   他のレプリカの位置
+    -   オフラインレプリカの数
+    -   データの読み取り/書き込み速度
 
-PD collects cluster information by the two types of heartbeats and then makes decision based on it.
+PDは、2種類のハートビートによってクラスタ情報を収集し、それに基づいて決定を下します。
 
-Besides, PD can get more information from an expanded interface to make a more precise decision. For example, if a store's heartbeats are broken, PD can't know whether the peer steps down temporarily or forever. It just waits a while (by default 30min) and then treats the store as offline if there are still no heartbeats received. Then PD balances all regions on the store to other stores.
+さらに、PDは、拡張されたインターフェイスからより多くの情報を取得して、より正確な決定を下すことができます。たとえば、ストアのハートビートが壊れている場合、PDはピアが一時的にダウンするか永久にステップダウンするかを知ることができません。しばらく待機し（デフォルトでは30分）、ハートビートがまだ受信されていない場合は、ストアをオフラインとして扱います。次に、PDはストア上のすべてのリージョンを他のストアとバランスさせます。
 
-But sometimes stores are manually set offline by a maintainer, so the maintainer can tell PD this by the PD control interface. Then PD can balance all regions immediately.
+ただし、ストアがメンテナによって手動でオフラインに設定される場合があるため、メンテナはPD制御インターフェイスによってこれをPDに通知できます。その後、PDはすべてのリージョンのバランスをすぐにとることができます。
 
-## Scheduling strategies
+## スケジューリング戦略 {#scheduling-strategies}
 
-After collecting the information, PD needs some strategies to make scheduling plans.
+情報を収集した後、PDはスケジューリング計画を立てるためにいくつかの戦略を必要とします。
 
-**Strategy 1: The number of replicas of a Region needs to be correct**
+**戦略1：リージョンのレプリカの数は正しい必要があります**
 
-PD can know that the replica count of a Region is incorrect from the Region leader's heartbeat. If it happens, PD can adjust the replica count by adding/removing replica(s). The reason for incorrect replica count can be:
+PDは、リージョンリーダーのハートビートから、リージョンのレプリカ数が正しくないことを知ることができます。その場合、PDはレプリカを追加/削除することでレプリカ数を調整できます。レプリカ数が正しくない理由は次のとおりです。
 
-* Store failure, so some Region's replica count is less than expected;
-* Store recovery after failure, so some Region's replica count could be more than expected;
-* [`max-replicas`](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95) is changed.
+-   ストアに障害が発生したため、一部のリージョンのレプリカ数が予想より少なくなっています。
+-   障害後のストアのリカバリ。そのため、一部のリージョンのレプリカ数が予想よりも多くなる可能性があります。
+-   [`max-replicas`](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L95)が変更されます。
 
-**Strategy 2: Replicas of a Region need to be at different positions**
+**戦略2：リージョンのレプリカは異なる位置にある必要があります**
 
-Note that here "position" is different from "machine". Generally PD can only ensure that replicas of a Region are not at a same peer to avoid that the peer's failure causes more than one replicas to become lost. However in production, you might have the following requirements:
+ここで「位置」は「機械」とは異なることに注意してください。通常、PDは、ピアの障害によって複数のレプリカが失われることを回避するために、リージョンのレプリカが同じピアにないことを確認することしかできません。ただし、本番環境では、次の要件がある場合があります。
 
-* Multiple TiKV peers are on one machine;
-* TiKV peers are on multiple racks, and the system is expected to be available even if a rack fails;
-* TiKV peers are in multiple data centers, and the system is expected to be available even if a data center fails;
+-   1台のマシンに複数のTiKVピアがあります。
+-   TiKVピアは複数のラック上にあり、ラックに障害が発生した場合でもシステムは使用可能であることが期待されます。
+-   TiKVピアは複数のデータセンターにあり、データセンターに障害が発生した場合でもシステムは利用可能であることが期待されます。
 
-The key to these requirements is that peers can have the same "position", which is the smallest unit for failure toleration. Replicas of a Region must not be in one unit. So, we can configure [labels](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140) for the TiKV peers, and set [location-labels](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100) on PD to specify which labels are used for marking positions.
+これらの要件の鍵は、ピアが同じ「位置」を持つことができるということです。これは、障害許容度の最小単位です。リージョンのレプリカを1つのユニットに含めることはできません。したがって、TiKVピア用に[ラベル](https://github.com/tikv/tikv/blob/v4.0.0-beta/etc/config-template.toml#L140)を構成し、PDに[ロケーションラベル](https://github.com/pingcap/pd/blob/v4.0.0-beta/conf/config.toml#L100)を設定して、位置のマーキングに使用するラベルを指定できます。
 
-**Strategy 3: Replicas need to be balanced between stores**
+**戦略3：レプリカは店舗間でバランスを取る必要があります**
 
-The size limit of a Region replica is fixed, so keeping the replicas balanced between stores is helpful for data size balance.
+リージョンレプリカのサイズ制限は固定されているため、ストア間でレプリカのバランスを保つことは、データサイズのバランスに役立ちます。
 
-**Strategy 4: Leaders need to be balanced between stores**
+**戦略4：リーダーは店舗間でバランスを取る必要があります**
 
-Read and write operations are performed on leaders according to the Raft protocol, so that PD needs to distribute leaders into the whole cluster instead of several peers.
+読み取りおよび書き込み操作はRaftプロトコルに従ってリーダーに対して実行されるため、PDはリーダーを複数のピアではなくクラスタ全体に分散させる必要があります。
 
-**Strategy 5: Hot spots need to be balanced between stores**
+**戦略5：ホットスポットは店舗間でバランスを取る必要があります**
 
-PD can detect hot spots from store heartbeats and Region heartbeats, so that PD can distribute hot spots.
+PDは、ストアのハートビートとリージョンのハートビートからホットスポットを検出できるため、PDはホットスポットを分散できます。
 
-**Strategy 6: Storage size needs to be balanced between stores**
+**戦略6：ストレージサイズは店舗間でバランスを取る必要があります**
 
-When started up, a TiKV store reports `capacity` of storage, which indicates the store's space limit. PD will consider this when scheduling.
+起動すると、TiKVストアはストレージの`capacity`を報告します。これは、ストアのスペース制限を示します。 PDは、スケジューリング時にこれを考慮します。
 
-**Strategy 7: Adjust scheduling speed to stabilize online services**
+**戦略7：オンラインサービスを安定させるためにスケジューリング速度を調整する**
 
-Scheduling utilizes CPU, memory, network and I/O traffic. Too much resource utilization will influence online services. Therefore, PD needs to limit the number of the concurrent scheduling tasks. By default this strategy is conservative, while it can be changed if quicker scheduling is required.
+スケジューリングでは、CPU、メモリ、ネットワーク、およびI/Oトラフィックを利用します。リソースの使用率が高すぎると、オンラインサービスに影響します。したがって、PDは同時スケジューリングタスクの数を制限する必要があります。デフォルトでは、この戦略は保守的ですが、より迅速なスケジューリングが必要な場合は変更できます。
 
-## Scheduling implementation
+## スケジューリングの実装 {#scheduling-implementation}
 
-PD collects cluster information from store heartbeats and Region heartbeats, and then makes scheduling plans from the information and strategies. Scheduling plans are a sequence of basic operators. Every time PD receives a Region heartbeat from a Region leader, it checks whether there is a pending operator on the Region or not. If PD needs to dispatch a new operator to a Region, it puts the operator into heartbeat responses, and monitors the operator by checking follow-up Region heartbeats.
+PDは、ストアのハートビートとリージョンのハートビートからクラスタ情報を収集し、その情報と戦略からスケジューリング計画を作成します。スケジューリング計画は、一連の基本的なオペレーターです。 PDは、リージョンリーダーからリージョンハートビートを受信するたびに、リージョンに保留中のオペレーターがいるかどうかを確認します。 PDが新しいオペレーターをリージョンにディスパッチする必要がある場合、PDはオペレーターをハートビート応答に入れ、フォローアップリージョンのハートビートをチェックすることによってオペレーターを監視します。
 
-Note that here "operators" are only suggestions to the Region leader, which can be skipped by Regions. Leader of Regions can decide whether to skip a scheduling operator or not based on its current status.
+ここでの「演算子」は、リージョンリーダーへの提案にすぎず、リージョンはスキップできることに注意してください。リージョンのリーダーは、現在のステータスに基づいて、スケジューリングオペレーターをスキップするかどうかを決定できます。

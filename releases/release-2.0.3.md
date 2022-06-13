@@ -2,35 +2,35 @@
 title: TiDB 2.0.3 Release Notes
 ---
 
-# TiDB 2.0.3 Release Notes
+# TiDB2.0.3リリースノート {#tidb-2-0-3-release-notes}
 
-On June 1, 2018, TiDB 2.0.3 is released. Compared with TiDB 2.0.2, this release has great improvement in system compatibility and stability.
+2018年6月1日、TiDB2.0.3がリリースされました。 TiDB 2.0.2と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Support modifying the log level online
-- Support the `COM_CHANGE_USER` command
-- Support using the `TIME` type parameters under the binary protocol
-- Optimize the cost estimation of query conditions with the `BETWEEN` expression
-- Do not display the `FOREIGN KEY` information in the result of `SHOW CREATE TABLE`
-- Optimize the cost estimation for queries with the `LIMIT` clause
-- Fix the issue about the `YEAR` type as the unique index
-- Fix the issue about `ON DUPLICATE KEY UPDATE` in conditions without the unique index
-- Fix the compatibility issue of the `CEIL` function
-- Fix the accuracy issue of the `DIV` calculation in the `DECIMAL` type
-- Fix the false alarm of `ADMIN CHECK TABLE`
-- Fix the panic issue of `MAX`/`MIN` under specific expression parameters
-- Fix the issue that the result of `JOIN` is null in special conditions
-- Fix the `IN` expression issue when building and querying Range
-- Fix a Range calculation issue when using `Prepare` to query and `Plan Cache` is enabled
-- Fix the issue that the Schema information is frequently loaded in abnormal conditions
+-   オンラインでのログレベルの変更をサポート
+-   `COM_CHANGE_USER`コマンドをサポートする
+-   バイナリプロトコルでの`TIME`タイプパラメータの使用のサポート
+-   `BETWEEN`の式を使用してクエリ条件のコスト見積もりを最適化します
+-   `SHOW CREATE TABLE`の結果に`FOREIGN KEY`の情報を表示しないでください
+-   `LIMIT`句を使用してクエリのコスト見積もりを最適化する
+-   一意のインデックスとしての`YEAR`タイプに関する問題を修正します
+-   一意のインデックスがない条件での`ON DUPLICATE KEY UPDATE`に関する問題を修正します
+-   `CEIL`関数の互換性の問題を修正します
+-   `DECIMAL`タイプの`DIV`計算の精度の問題を修正します
+-   `ADMIN CHECK TABLE`の誤警報を修正
+-   特定の式パラメーターの下での`MAX`のパニックの問題を修正し`MIN`
+-   特別な条件で`JOIN`の結果がnullになる問題を修正します
+-   Rangeを構築およびクエリするときの`IN`の式の問題を修正します
+-   `Prepare`を使用してクエリを実行し、 `Plan Cache`が有効になっている場合の範囲計算の問題を修正します
+-   スキーマ情報が異常な状態で頻繁にロードされる問題を修正します
 
-## PD
+## PD {#pd}
 
-- Fix the panic issue when collecting hot-cache metrics in specific conditions
-- Fix the issue about scheduling of the obsolete Regions
+-   特定の条件でホットキャッシュメトリックを収集するときのパニックの問題を修正します
+-   廃止されたリージョンのスケジュールに関する問題を修正します
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the bug that the learner flag mistakenly reports to PD
-- Report an error instead of getting a result if `divisor/dividend` is 0 in `do_div_mod`
+-   学習者フラグが誤ってPDに報告するバグを修正します
+-   `divisor/dividend`が`do_div_mod`の0の場合、結果を取得する代わりにエラーを報告する

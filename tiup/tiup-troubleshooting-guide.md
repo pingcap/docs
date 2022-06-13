@@ -3,54 +3,54 @@ title: TiUP Troubleshooting Guide
 summary: Introduce the troubleshooting methods and solutions if you encounter issues when using TiUP.
 ---
 
-# TiUP Troubleshooting Guide
+# TiUPトラブルシューティングガイド {#tiup-troubleshooting-guide}
 
-This document introduces some common issues when you use TiUP and the troubleshooting methods. If this document does not include the issues you bump into, [file a new issue](https://github.com/pingcap/tiup/issues) in the Github TiUP repository.
+このドキュメントでは、TiUPを使用する際の一般的な問題とトラブルシューティング方法を紹介します。このドキュメントに遭遇した問題が含まれていない場合は、GithubTiUPリポジトリに[新しい問題を提出する](https://github.com/pingcap/tiup/issues)つ。
 
-## Troubleshoot TiUP commands
+## TiUPコマンドのトラブルシューティング {#troubleshoot-tiup-commands}
 
-### Can't see the latest component list using `tiup list`
+### <code>tiup list</code>を使用して最新のコンポーネントリストを表示できません {#can-t-see-the-latest-component-list-using-code-tiup-list-code}
 
-TiUP does not update the latest component list from the mirror server every time. You can forcibly refresh the component list by running `tiup list`.
+TiUPは、ミラーサーバーからの最新のコンポーネントリストを毎回更新するわけではありません。 `tiup list`を実行すると、コンポーネントリストを強制的に更新できます。
 
-### Can't see the latest version information of a component using `tiup list <component>`
+### <code>tiup list &lt;component&gt;</code>を使用してコンポーネントの最新バージョン情報を表示できません {#can-t-see-the-latest-version-information-of-a-component-using-code-tiup-list-x3c-component-code}
 
-Same as the previous issue, the component version information is only obtained from the mirror server when there is no local cache. You can refresh the component list by running `tiup list <component>`.
+前号と同様に、コンポーネントのバージョン情報は、ローカルキャッシュがない場合にのみミラーサーバーから取得されます。 `tiup list <component>`を実行すると、コンポーネントリストを更新できます。
 
-### Component downloading process is interrupted
+### コンポーネントのダウンロードプロセスが中断されました {#component-downloading-process-is-interrupted}
 
-Unstable network might result in an interrupted component downloading process. You can try to download the component again. If you cannot download it after trying multiple times, it might be caused by the CDN server and you can report the issue [here](https://github.com/pingcap/tiup/issues).
+ネットワークが不安定な場合、コンポーネントのダウンロードプロセスが中断される可能性があります。コンポーネントのダウンロードを再試行できます。複数回試してもダウンロードできない場合は、CDNサーバーが原因である可能性があり、問題[ここ](https://github.com/pingcap/tiup/issues)を報告できます。
 
-### A checksum error occurs during component downloading process
+### コンポーネントのダウンロードプロセス中にチェックサムエラーが発生する {#a-checksum-error-occurs-during-component-downloading-process}
 
-Because the CDN server has a short cache time, the new checksum file might not match the component package. Try to download again after 5 minutes. If the new checksum file still does not match the component package, report the issue [here](https://github.com/pingcap/tiup/issues).
+CDNサーバーのキャッシュ時間は短いため、新しいチェックサムファイルがコンポーネントパッケージと一致しない可能性があります。 5分後にもう一度ダウンロードしてみてください。それでも新しいチェックサムファイルがコンポーネントパッケージと一致しない場合は、問題[ここ](https://github.com/pingcap/tiup/issues)を報告してください。
 
-## Troubleshoot TiUP cluster component
+## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
-### `unable to authenticate, attempted methods [none publickey]` is prompted during deployment
+### <code>unable to authenticate, attempted methods [none publickey]</code>がプロンプトされます {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
 
-During deployment, component packages are uploaded to the remote host and the initialization is performed. This process requires connecting to the remote host. This error is caused by the failure to find the SSH private key to connect to the remote host.
+展開中に、コンポーネントパッケージがリモートホストにアップロードされ、初期化が実行されます。このプロセスでは、リモートホストに接続する必要があります。このエラーは、リモートホストに接続するためのSSH秘密鍵が見つからなかったことが原因で発生します。
 
-To solve this issue, confirm whether you have specified the private key by running `tiup cluster deploy -i identity_file`:
+この問題を解決するには、 `tiup cluster deploy -i identity_file`を実行して秘密鍵を指定したかどうかを確認します。
 
-- If the `-i` flag is not specified, it might be that TiUP does not automatically find the private key path. It is recommended to explicitly specify the private key path using `-i`.
-- If the `-i` flag is specified, it might be that TiUP cannot log in to the remote host using the specified private key. You can verify it by manually executing the `ssh -i identity_file user@remote` command.
-- If a password is used to log in to the remote host, make sure that you have specified the `-p` flag and entered the correct login password.
+-   `-i`フラグが指定されていない場合、TiUPが秘密鍵パスを自動的に検出しない可能性があります。 `-i`を使用して秘密鍵パスを明示的に指定することをお勧めします。
+-   `-i`フラグが指定されている場合、TiUPは指定された秘密鍵を使用してリモートホストにログインできない可能性があります。 `ssh -i identity_file user@remote`コマンドを手動で実行することで確認できます。
+-   リモートホストへのログインにパスワードを使用する場合は、 `-p`フラグを指定し、正しいログインパスワードを入力したことを確認してください。
 
-### The process of upgrading the cluster using the TiUP cluster component is interrupted
+### TiUPクラスタコンポーネントを使用してクラスタをアップグレードするプロセスが中断されます {#the-process-of-upgrading-the-cluster-using-the-tiup-cluster-component-is-interrupted}
 
-To avoid misuse cases, the TiUP cluster component does not support the upgrade of specified nodes, so after the upgrade fails, you need to perform the upgrade operations again, including idempotent operations during the upgrade process.
+誤用を避けるために、TiUPクラスタコンポーネントは指定されたノードのアップグレードをサポートしていません。そのため、アップグレードが失敗した後、アップグレードプロセス中のべき等操作を含むアップグレード操作を再度実行する必要があります。
 
-The upgrade process can be divided into the following steps:
+アップグレードプロセスは、次の手順に分けることができます。
 
-1. Back up the old version of components on all nodes
-2. Distribute new components to remote
-3. Perform a rolling restart to all components
+1.  すべてのノードで古いバージョンのコンポーネントをバックアップします
+2.  新しいコンポーネントをリモートに配布する
+3.  すべてのコンポーネントに対してローリングリスタートを実行します
 
-If the upgrade is interrupted during a rolling restart, instead of repeating the `tiup cluster upgrade` operation, you can use `tiup cluster restart -N <node1> -N <node2>` to restart the nodes that have not completed the restart.
+ローリング再起動中にアップグレードが中断された場合は、 `tiup cluster upgrade`の操作を繰り返す代わりに、 `tiup cluster restart -N <node1> -N <node2>`を使用して再起動を完了していないノードを再起動できます。
 
-If the number of un-restarted nodes of the same component is relatively large, you can also restart a certain type of component by running `tiup cluster restart -R <component>`.
+同じコンポーネントの再起動されていないノードの数が比較的多い場合は、 `tiup cluster restart -R <component>`を実行して特定のタイプのコンポーネントを再起動することもできます。
 
-### During the upgrade, you find that `node_exporter-9100.service/blackbox_exporter-9115.service` does not exist
+### アップグレード中に、 <code>node_exporter-9100.service/blackbox_exporter-9115.service</code>が存在しないことがわかります {#during-the-upgrade-you-find-that-code-node-exporter-9100-service-blackbox-exporter-9115-service-code-does-not-exist}
 
-If you previously migrated your cluster from TiDB Ansible and the exporter was not deployed in TiDB Ansible, this situation might happen. To solve it, you can manually copy the missing files from other nodes to the new node for the time being. The TiUP team will complete the missing components during the migration process.
+以前にクラスタをTiDBAnsibleから移行し、エクスポーターがTiDB Ansibleにデプロイされていなかった場合、この状況が発生する可能性があります。これを解決するには、当面の間、不足しているファイルを他のノードから新しいノードに手動でコピーします。 TiUPチームは、移行プロセス中に不足しているコンポーネントを完了します。

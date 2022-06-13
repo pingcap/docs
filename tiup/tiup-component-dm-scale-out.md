@@ -2,48 +2,48 @@
 title: tiup dm scale-out
 ---
 
-# tiup dm scale-out
+# tiup dm scale-out {#tiup-dm-scale-out}
 
-The `tiup dm scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The `tiup-dm` components first establish an SSH connection to the new node, create the necessary directories on the target node, then perform the deployment and start the service.
+`tiup dm scale-out`コマンドは、クラスタをスケールアウトするために使用されます。クラスタをスケールアウトする内部ロジックは、クラスタのデプロイメントに似ています。 `tiup-dm`のコンポーネントは、最初に新しいノードへのSSH接続を確立し、ターゲットノードに必要なディレクトリを作成してから、展開を実行してサービスを開始します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>` ：操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>`: the prepared [topology file](/tiup/tiup-dm-topology-reference.md). This topology file should only contain the new nodes that are to be added to the current cluster.
+`<topology.yaml>` ：準備された[トポロジーファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジファイルには、現在のクラスタに追加される新しいノードのみが含まれている必要があります。
 
-## Options
+## オプション {#options}
 
-### -u, --user
+### -u、-user {#u-user}
 
-- Specifies the user name used to connect to the target machine. This user must have the secret-free sudo root permission on the target machine.
-- Data type: `STRING`
-- Default: the current user who executes the command.
+-   ターゲットマシンへの接続に使用されるユーザー名を指定します。このユーザーは、ターゲットマシンに対するシークレットフリーのsudoroot権限を持っている必要があります。
+-   データ型： `STRING`
+-   デフォルト：コマンドを実行する現在のユーザー。
 
-### -i, --identity_file
+### -i、-identity_file {#i-identity-file}
 
-- Specifies the key file used to connect to the target machine.
-- Data type: `STRING`
-- If this option is not specified in the command, the `~/.ssh/id_rsa` file is used to connect to the target machine by default.
+-   ターゲットマシンへの接続に使用されるキーファイルを指定します。
+-   データ型： `STRING`
+-   コマンドでこのオプションが指定されていない場合、デフォルトでは`~/.ssh/id_rsa`ファイルがターゲットマシンへの接続に使用されます。
 
-### -p, --password
+### -p、-password {#p-password}
 
-- Specifies the password used to connect to the target machine. Do not use this option and `-i/--identity_file` at the same time.
-- Data type: `BOOLEAN`
-- Default: false
+-   ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`を同時に使用しないでください。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-The log of scaling out.
+スケールアウトのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

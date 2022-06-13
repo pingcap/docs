@@ -3,32 +3,32 @@ title: ALTER TABLE ... COMPACT
 summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB database.
 ---
 
-# ALTER TABLE ... COMPACT
+# ALTER TABLE ... COMPACT {#alter-table-compact}
 
-> **Warning:**
+> **警告：**
 >
-> This statement is still an experimental feature. It is NOT recommended that you use it in the production environment.
+> このステートメントはまだ実験的機能です。実稼働環境で使用することはお勧めしません。
 
-To enhance read performance and reduce disk usage, TiDB automatically schedules data compaction on storage nodes in the background. During the compaction, storage nodes rewrite physical data, including cleaning up deleted rows and merging multiple versions of data caused by updates. The `ALTER TABLE ... COMPACT` statement allows you to initiate compaction for a specific table immediately, without waiting until compaction is triggered in the background.
+読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDBはバックグラウンドのストレージノードでデータ圧縮を自動的にスケジュールします。圧縮中に、ストレージノードは物理データを再書き込みします。これには、削除された行のクリーンアップや、更新によって発生したデータの複数のバージョンのマージが含まれます。 `ALTER TABLE ... COMPACT`ステートメントを使用すると、バックグラウンドで圧縮がトリガーされるまで待たずに、特定のテーブルの圧縮をすぐに開始できます。
 
-The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. However, executing this statement consumes some IO and CPU resources, which might result in higher SQL execution latency.
+このステートメントの実行は、既存のSQLステートメントをブロックしたり、トランザクション、DDL、GCなどのTiDB機能に影響を与えたりすることはありません。 SQLステートメントで選択できるデータも変更されません。ただし、このステートメントを実行すると、IOおよびCPUリソースが消費されるため、SQL実行の待ち時間が長くなる可能性があります。
 
-The compaction statement will be finished and returned when all replicas of a table are compacted. During the execution process, you can safely interrupt the compaction by executing the [`KILL`](/sql-statements/sql-statement-kill.md) statement. Interrupting a compaction does not break data consistency or lead to data loss, nor does it affect subsequent manual or background compactions.
+テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントが終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することにより、圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データが失われたりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
 
-This data compaction statement is currently supported only for TiFlash replicas, not for TiKV replicas.
+このデータ圧縮ステートメントは現在、TiFlashレプリカでのみサポートされており、TiKVレプリカではサポートされていません。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableCompactStmt ::=
     'ALTER' 'TABLE' TableName 'COMPACT' 'TIFLASH' 'REPLICA'
 ```
 
-## Examples
+## 例 {#examples}
 
-### Compact TiFlash replicas in a table
+### テーブル内のコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
 
-The following takes an `employees` table as an example, which has 4 partitions with 2 TiFlash replicas:
+以下は、例として`employees`のテーブルを取ります。これには、2つのTiFlashレプリカを持つ4つのパーティションがあります。
 
 ```sql
 CREATE TABLE employees (
@@ -45,31 +45,31 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-You can execute the following statement to immediately initiate the compaction for the 2 TiFlash replicas for all partitions in the `employees` table:
+次のステートメントを実行して、 `employees`のテーブル内のすべてのパーティションの2つのTiFlashレプリカの圧縮をすぐに開始できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
-## Concurrency
+## 並行性 {#concurrency}
 
-The `ALTER TABLE ... COMPACT` statement compacts all replicas in a table simultaneously.
+`ALTER TABLE ... COMPACT`ステートメントは、テーブル内のすべてのレプリカを同時に圧縮します。
 
-To avoid a significant impact on online business, each TiFlash instance only compacts data in one table at a time by default (except for the compaction triggered in the background). This means that if you execute the `ALTER TABLE ... COMPACT` statement on multiple tables at the same time, their executions will be queued on the same TiFlash instance, rather than being executed simultaneously.
+オンラインビジネスへの重大な影響を回避するために、各TiFlashインスタンスは、デフォルトで一度に1つのテーブルのデータのみを圧縮します（バックグラウンドでトリガーされる圧縮を除く）。つまり、 `ALTER TABLE ... COMPACT`のステートメントを複数のテーブルで同時に実行すると、それらの実行は同時に実行されるのではなく、同じTiFlashインスタンスでキューに入れられます。
 
-To obtain greater table-level concurrency with higher resource usage, you can modify the TiFlash configuration [`manual_compact_pool_size`](/tiflash/tiflash-configuration.md). For example, when `manual_compact_pool_size` is set to 2, compaction for 2 tables can be processed simultaneously.
+より高いリソース使用量でより大きなテーブルレベルの同時実行性を取得するために、TiFlash構成を変更できます[`manual_compact_pool_size`](/tiflash/tiflash-configuration.md) 。たとえば、 `manual_compact_pool_size`が2に設定されている場合、2つのテーブルの圧縮を同時に処理できます。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `ALTER TABLE ... COMPACT` syntax is TiDB specific, which is an extension to the standard SQL syntax. Although there is no equivalent MySQL syntax, you can still execute this statement by using MySQL clients or various database drivers that comply with the MySQL protocol.
+`ALTER TABLE ... COMPACT`構文はTiDB固有であり、標準SQL構文の拡張です。同等のMySQL構文はありませんが、MySQLクライアントまたはMySQLプロトコルに準拠するさまざまなデータベースドライバーを使用して、このステートメントを実行できます。
 
-## TiDB Binlog and TiCDC compatibility
+## TiDBBinlogとTiCDCの互換性 {#tidb-binlog-and-ticdc-compatibility}
 
-The `ALTER TABLE ... COMPACT` statement does not result in logical data changes and are therefore not replicated to downstream by TiDB Binlog or TiCDC.
+`ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、TiDBBinlogまたはTiCDCによってダウンストリームに複製されません。
 
-## See also
+## も参照してください {#see-also}
 
-- [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
-- [KILL TIDB](/sql-statements/sql-statement-kill.md)
+-   [他の机](/sql-statements/sql-statement-alter-table.md)
+-   [TIDBを殺す](/sql-statements/sql-statement-kill.md)

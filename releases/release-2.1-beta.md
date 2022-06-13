@@ -2,82 +2,82 @@
 title: TiDB 2.1 Beta Release Notes
 ---
 
-# TiDB 2.1 Beta Release Notes
+# TiDB2.1ベータリリースノート {#tidb-2-1-beta-release-notes}
 
-On June 29, 2018, TiDB 2.1 Beta is released! Compared with TiDB 2.0, this release has great improvement in stability, SQL optimizer, statistics information, and execution engine.
+2018年6月29日、TiDB 2.1ベータ版がリリースされました！このリリースでは、TiDB 2.0と比較して、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
 
-## TiDB
+## TiDB {#tidb}
 
-- SQL Optimizer
-    - Optimize the selection range of `Index Join` to improve the execution performance
-    - Optimize correlated subquery, push down `Filter`, and extend the index range, to improve the efficiency of some queries by orders of magnitude
-    - Support `Index Hint` and `Join Hint` in the `UPDATE` and `DELETE` statements
-    - Validate Hint `TIDM_SMJ` when no available index exists
-    - Support pushdown of the `ABS`, `CEIL`, `FLOOR`, `IS TRUE`, and `IS FALSE` functions
-    - Handle the `IF` and `IFNULL` functions especially in the constant folding process
-- SQL Execution Engine
-    - Implement parallel `Hash Aggregate` operators and improve the computing performance of `Hash Aggregate` by 350% in some scenarios
-    - Implement parallel `Project` operators and improve the performance by 74% in some scenarios
-    - Read the data of the `Inner` table and `Outer` table of `Hash Join` concurrently to improve the execution performance
-    - Fix incorrect results of `INSERT … ON DUPLICATE KEY UPDATE …` in some scenarios
-    - Fix incorrect results of the `CONCAT_WS`, `FLOOR`, `CEIL`, and `DIV` built-in functions
-- Server
-    - Add the HTTP API to scatter the distribution of table Regions in the TiKV cluster
-    - Add the `auto_analyze_ratio` system variable to control the threshold value of automatic `Analyze`
-    - Add the HTTP API to control whether to open the general log
-    - Add the HTTP API to modify the log level online
-    - Add the user information in the general log and the slow query log
-    - Support the server side cursor
-- Compatibility
-    - Support more MySQL syntax
-    - Make the `bit` aggregate function support the `ALL` parameter
-    - Support the `SHOW PRIVILEGES` statement
-- DML
-    - Decrease the memory usage of the `INSERT INTO SELECT` statement
-    - Fix the performance issue of `PlanCache`
-    - Add the `tidb_retry_limit` system variable to control the automatic retry times of transactions
-    - Add the `tidb_disable_txn_auto_retry` system variable to control whether the transaction tries automatically
-    - Fix the accuracy issue of the written data of the `time` type
-    - Support the queue of locally conflicted transactions to optimize the conflicted transaction performance
-    - Fix `Affected Rows` of the `UPDATE` statement
-    - Optimize the statement performance of `insert ignore on duplicate key update`
-- DDL
-    - Optimize the execution speed of the `CreateTable` statement
-    - Optimize the execution speed of `ADD INDEX` and improve it greatly in some scenarios
-    - Fix the issue that the number of added columns by `Alter table add column` exceeds the limit of the number of table columns
-    - Fix the issue that DDL job retries lead to an increasing pressure on TiKV in abnormal conditions
-    - Fix the issue that TiDB continuously reloads the schema information in abnormal conditions
-    - Do not output the `FOREIGN KEY` related information in the result of `SHOW CREATE TABLE`
-    - Support the `select tidb_is_ddl_owner()` statement to facilitate judging whether TiDB is `DDL Owner`
-    - Fix the issue that the index is deleted in the `Year` type in some scenarios
-    - Fix the renaming table issue in the concurrent execution scenario
-    - Support the `AlterTableForce` syntax
-    - Support the `AlterTableRenameIndex` syntax with `FromKey` and `ToKey`
-    - Add the table name and database name in the output information of `admin show ddl jobs`
+-   SQLオプティマイザー
+    -   `Index Join`の選択範囲を最適化して、実行パフォーマンスを向上させます
+    -   相関サブクエリを最適化し、 `Filter`を押し下げ、インデックス範囲を拡張して、一部のクエリの効率を桁違いに向上させます
+    -   `UPDATE`および`DELETE`ステートメントで`Index Hint`および`Join Hint`をサポート
+    -   使用可能なインデックスが存在しない場合は、ヒント`TIDM_SMJ`を検証します
+    -   `ABS` 、および`FLOOR`関数の`IS TRUE`ダウンを`IS FALSE`し`CEIL`
+    -   特に定数畳み込みプロセスで`IF`と`IFNULL`の関数を処理します
+-   SQL実行エンジン
+    -   一部のシナリオでは、並列`Hash Aggregate`演算子を実装し、 `Hash Aggregate`のコンピューティングパフォーマンスを350％向上させます。
+    -   並列`Project`オペレーターを実装し、一部のシナリオでパフォーマンスを74％向上させる
+    -   実行パフォーマンスを向上させるために、 `Hash Join`の`Inner`テーブルと`Outer`テーブルのデータを同時に読み取ります
+    -   一部のシナリオで`INSERT … ON DUPLICATE KEY UPDATE …`の誤った結果を修正
+    -   `CONCAT_WS` 、および`CEIL`の`DIV`関数の誤った結果を修正し`FLOOR`
+-   サーバ
+    -   HTTP APIを追加して、TiKVクラスタのテーブルリージョンの分布を分散させます
+    -   自動`Analyze`のしきい値を制御するには、 `auto_analyze_ratio`のシステム変数を追加します
+    -   一般ログを開くかどうかを制御するHTTPAPIを追加します
+    -   HTTP APIを追加して、ログレベルをオンラインで変更します
+    -   一般ログと低速クエリログにユーザー情報を追加します
+    -   サーバー側カーソルをサポートする
+-   互換性
+    -   より多くのMySQL構文をサポートする
+    -   `bit`集計関数が`ALL`パラメーターをサポートするようにします
+    -   `SHOW PRIVILEGES`のステートメントをサポートする
+-   DML
+    -   `INSERT INTO SELECT`ステートメントのメモリ使用量を減らします
+    -   `PlanCache`のパフォーマンスの問題を修正します
+    -   `tidb_retry_limit`のシステム変数を追加して、トランザクションの自動再試行時間を制御します
+    -   `tidb_disable_txn_auto_retry`のシステム変数を追加して、トランザクションが自動的に試行されるかどうかを制御します
+    -   `time`種類の書き込みデータの精度の問題を修正
+    -   競合するトランザクションのパフォーマンスを最適化するために、ローカルで競合するトランザクションのキューをサポートする
+    -   `UPDATE`のステートメントの`Affected Rows`を修正
+    -   `insert ignore on duplicate key update`のステートメントパフォーマンスを最適化する
+-   DDL
+    -   `CreateTable`ステートメントの実行速度を最適化する
+    -   `ADD INDEX`の実行速度を最適化し、一部のシナリオでは大幅に改善します
+    -   追加された列の数がテーブル列の数の制限を`Alter table add column`超える問題を修正します
+    -   DDLジョブの再試行により、異常な状態でTiKVへの圧力が高まる問題を修正します
+    -   TiDBが異常な状態でスキーマ情報を継続的にリロードする問題を修正します
+    -   `SHOW CREATE TABLE`の結果に`FOREIGN KEY`の関連情報を出力しないでください
+    -   TiDBが`DDL Owner`であるかどうかの判断を容易にするために、 `select tidb_is_ddl_owner()`のステートメントをサポートします
+    -   一部のシナリオで`Year`タイプでインデックスが削除される問題を修正します
+    -   同時実行シナリオでのテーブルの名前変更の問題を修正
+    -   `AlterTableForce`構文をサポートする
+    -   `FromKey`と`ToKey`で`AlterTableRenameIndex`構文をサポートする
+    -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します。
 
-## PD
+## PD {#pd}
 
-- Enable Raft PreVote between PD nodes to avoid leader reelection when network recovers after network isolation
-- Optimize the issue that Balance Scheduler schedules small Regions frequently
-- Optimize the hotspot scheduler to improve its adaptability in traffic statistics information jitters
-- Skip the Regions with a large number of rows when scheduling `region merge`
-- Enable `raft learner` by default to lower the risk of unavailable data caused by machine failure during scheduling
-- Remove `max-replica` from `pd-recover`
-- Add `Filter` metrics
-- Fix the issue that Region information is not updated after tikv-ctl unsafe recovery
-- Fix the issue that TiKV disk space is used up caused by replica migration in some scenarios
-- Compatibility notes
-    - Do not support rolling back to v2.0.x or earlier due to update of the new version storage engine
-    - Enable `raft learner` by default in the new version of PD. If the cluster is upgraded from 1.x to 2.1, the machine should be stopped before upgrade or a rolling update should be first applied to TiKV and then PD
+-   ネットワーク分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間でRaftPreVoteを有効にします
+-   BalanceSchedulerが小さなリージョンを頻繁にスケジュールする問題を最適化します
+-   ホットスポットスケジューラを最適化して、交通統計情報のジッターへの適応性を向上させます
+-   `region merge`をスケジュールするときに、行数が多いリージョンをスキップします
+-   デフォルトで`raft learner`を有効にすると、スケジューリング中のマシン障害によってデータが利用できなくなるリスクが低くなります。
+-   `pd-recover`から`max-replica`を削除します
+-   `Filter`のメトリックを追加
+-   tikv-ctlの安全でないリカバリ後にリージョン情報が更新されない問題を修正します
+-   一部のシナリオでレプリカの移行が原因でTiKVディスクスペースが使い果たされる問題を修正します
+-   互換性に関する注意事項
+    -   新しいバージョンのストレージエンジンが更新されたため、v2.0.x以前へのロールバックはサポートされていません
+    -   新しいバージョンのPDでは、デフォルトで`raft learner`を有効にします。クラスタを1.xから2.1にアップグレードする場合は、アップグレードする前にマシンを停止するか、ローリングアップデートを最初にTiKVに適用してからPDに適用する必要があります。
 
-## TiKV
+## TiKV {#tikv}
 
-- Upgrade Rust to the `nightly-2018-06-14` version
-- Enable `Raft PreVote` to avoid leader reelection generated when network recovers after network isolation
-- Add a metric to display the number of files and `ingest` related information in each layer of RocksDB
-- Print `key` with too many versions when GC works
-- Use `static metric` to optimize multi-label metric performance (YCSB `raw get` is improved by 3%)
-- Remove `box` in multiple modules and use patterns to improve the operating performance (YCSB `raw get` is improved by 3%)
-- Use `asynchronous log` to improve the performance of writing logs
-- Add a metric to collect the thread status
-- Decease memory copy times by decreasing `box` used in the application to improve the performance
+-   Rustを`nightly-2018-06-14`バージョンにアップグレードする
+-   `Raft PreVote`を有効にすると、ネットワークの分離後にネットワークが回復したときに生成されるリーダーの再選出を回避できます
+-   RocksDBの各レイヤーのファイル数と`ingest`の関連情報を表示するメトリックを追加します
+-   GCが機能するときにバージョンが多すぎる`key`を印刷する
+-   `static metric`を使用して、マルチラベルメトリックのパフォーマンスを最適化します（YCSB `raw get`は3％向上します）
+-   複数のモジュールから`box`を削除し、パターンを使用して動作パフォーマンスを向上させます（YCSB `raw get`は3％向上します）
+-   `asynchronous log`を使用して、ログの書き込みのパフォーマンスを向上させます
+-   スレッドステータスを収集するためのメトリックを追加します
+-   アプリケーションで使用される`box`を減らしてメモリのコピー時間を減らし、パフォーマンスを向上させます

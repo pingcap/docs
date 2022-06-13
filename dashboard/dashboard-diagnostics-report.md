@@ -3,366 +3,366 @@ title: TiDB Dashboard Diagnostic Report
 summary: Learn the TiDB Dashboard diagnostic report.
 ---
 
-# TiDB Dashboard Diagnostic Report
+# TiDBダッシュボード診断レポート {#tidb-dashboard-diagnostic-report}
 
-This document introduces the content of the diagnostic report and viewing tips. To access the cluster diagnostic page and generate reports, see [TiDB Dashboard Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md).
+このドキュメントでは、診断レポートの内容と表示のヒントを紹介します。クラスタ診断ページにアクセスしてレポートを生成するには、 [TiDBダッシュボードクラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
-## View report
+## レポートを表示 {#view-report}
 
-The diagnostic report consists of the following parts:
+診断レポートは、次の部分で構成されています。
 
-* Basic information: Includes the time range of the diagnostic report, hardware information of the cluster, the version information of cluster topology.
-* Diagnostic information: Shows the results of automatic diagnostics.
-* Load information: Includes CPU, memory and other load information of the server, TiDB, PD, or TiKV.
-* Overview information: Includes the consumed time and error information of each TiDB, PD, or TiKV module.
-* TiDB/PD/TiKV monitoring information: Includes monitoring information of each component.
-* Configuration information: Includes configuration information of each component.
+-   基本情報：診断レポートの時間範囲、クラスタのハードウェア情報、クラスタトポロジのバージョン情報が含まれます。
+-   診断情報：自動診断の結果を表示します。
+-   負荷情報：サーバー、TiDB、PD、またはTiKVのCPU、メモリ、およびその他の負荷情報が含まれます。
+-   概要情報：各TiDB、PD、またはTiKVモジュールの消費時間とエラー情報が含まれます。
+-   TiDB / PD / TiKV監視情報：各コンポーネントの監視情報が含まれます。
+-   Configuration / コンフィグレーション情報：各コンポーネントの構成情報が含まれます。
 
-An example of the diagnostic report is as follows:
+診断レポートの例は次のとおりです。
 
 ![Sample report](/media/dashboard/dashboard-diagnostics-example-table.png)
 
-In the image above, **Total Time Consume** in the top blue box is the report name. The information in the red box below explains the content of this report and the meaning of each field in the report.
+上の画像では、上部の青いボックスの**合計時間消費**がレポート名です。下の赤いボックスの情報は、このレポートの内容とレポートの各フィールドの意味を説明しています。
 
-In this report, some small buttons are described as follows:
+このレポートでは、いくつかの小さなボタンについて次のように説明しています。
 
-* **i** icon: You can move your mouse to the **i** icon to see the explanatory note of the row.
-* **expand**: Click **expand** to see details about this monitoring metric. For example, the detailed information of `tidb_get_token` in the image above includes the monitoring information of each TiDB instance's latency.
-* **collapse**: Contrary to **expand**, the button is used to fold detailed monitoring information.
+-   **i**アイコン：マウスを<strong>i</strong>アイコンに移動すると、行の説明文が表示されます。
+-   **展開**：[<strong>展開</strong>]をクリックして、この監視メトリックの詳細を表示します。たとえば、上の画像の`tidb_get_token`の詳細情報には、各TiDBインスタンスのレイテンシの監視情報が含まれています。
+-   **折りたたみ**：<strong>展開</strong>とは逆に、ボタンは詳細な監視情報を折りたたむために使用されます。
 
-All monitoring metrics basically correspond to those on the TiDB Grafana monitoring dashboard. After a module is found to be abnormal, you can view more monitoring information on the TiDB Grafana.
+すべての監視メトリックは、基本的にTiDBGrafana監視ダッシュボードのメトリックに対応しています。モジュールが異常であることが判明した後、TiDBGrafanaでより多くの監視情報を表示できます。
 
-In addition, the `TOTAL_TIME` and `TOTAL_COUNT` metrics in this report are monitoring data read from Prometheus, so calculation inaccuracy might exits in their statistics.
+さらに、このレポートの`TOTAL_TIME`と`TOTAL_COUNT`のメトリックは、Prometheusから読み取られたデータを監視しているため、計算の不正確さが統計に存在する可能性があります。
 
-Each part of this report is introduced as follows.
+このレポートの各部分は、次のように紹介されています。
 
-### Basic information
+### 基本情報 {#basic-information}
 
-#### Diagnostics Time Range
+#### 診断時間範囲 {#diagnostics-time-range}
 
-The time range for generating the diagnostics report includes the start time and end time.
+診断レポートを生成するための時間範囲には、開始時刻と終了時刻が含まれます。
 
 ![Report time range](/media/dashboard/dashboard-diagnostics-report-time-range.png)
 
-#### Cluster Hardware Info
+#### クラスターハードウェア情報 {#cluster-hardware-info}
 
-Cluster Hardware Info includes information such as CPU, memory, and disk of each server in the cluster.
+クラスタハードウェア情報には、クラスタの各サーバーのCPU、メモリ、ディスクなどの情報が含まれます。
 
 ![Cluster hardware report](/media/dashboard/dashboard-diagnostics-cluster-hardware.png)
 
-The fields in the table above are described as follows:
+上記の表のフィールドは次のとおりです。
 
-* `HOST`: The IP address of the server.
-* `INSTANCE`: The number of instances deployed on the server. For example, `pd * 1` means that this server has 1 PD instance deployed; `tidb * 2 pd * 1` means that this server has 2 TiDB instances and 1 PD instance deployed.
-* `CPU_CORES`: Indicates the number of CPU cores (physical cores or logical cores) of the server.
-* `MEMORY`: Indicates the memory size of the server. The unit is GB.
-* `DISK`: Indicates the server disk size. The unit is GB.
-* `UPTIME`: The uptime of the server. The unit is day.
+-   `HOST` ：サーバーのIPアドレス。
+-   `INSTANCE` ：サーバーにデプロイされたインスタンスの数。たとえば、 `pd * 1`は、このサーバーに1つのPDインスタンスがデプロイされていることを意味します。 `tidb * 2 pd * 1`は、このサーバーに2つのTiDBインスタンスと1つのPDインスタンスがデプロイされていることを意味します。
+-   `CPU_CORES` ：サーバーのCPUコア（物理コアまたは論理コア）の数を示します。
+-   `MEMORY` ：サーバーのメモリサイズを示します。単位はGBです。
+-   `DISK` ：サーバーのディスクサイズを示します。単位はGBです。
+-   `UPTIME` ：サーバーの稼働時間。単位は日です。
 
-#### Cluster Topology Info
+#### クラスタートポロジ情報 {#cluster-topology-info}
 
-The `Cluster Info` table shows the cluster topology information. The information in this table are from TiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md) system table.
+`Cluster Info`の表は、クラスタトポロジー情報を示しています。この表の情報は、 [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システム表からのものです。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
-The fields in the table above are described as follows:
+上記の表のフィールドは次のとおりです。
 
-* `TYPE`: The node type.
-* `INSTANCE`: The instance address(es), which is a string in the `IP:PORT` format.
-* `STATUS_ADDRESS`: The HTTP API service address.
-* `VERSION`: The semantic version number of the corresponding node.
-* `GIT_HASH`: Git Commit Hash when compiling the node version, which is used to identify whether the two nodes are absolutely the consistent version.
-* `START_TIME`: The start time of the corresponding node.
-* `UPTIME`: The uptime of the corresponding node.
+-   `TYPE` ：ノードタイプ。
+-   `INSTANCE` ：インスタンスアドレス`IP:PORT`形式の文字列です。
+-   `STATUS_ADDRESS` ：HTTPAPIサービスアドレス。
+-   `VERSION` ：対応するノードのセマンティックバージョン番号。
+-   `GIT_HASH` ：ノードバージョンをコンパイルするときにGit Commit Hashを実行します。これは、2つのノードが完全に一貫したバージョンであるかどうかを識別するために使用されます。
+-   `START_TIME` ：対応するノードの開始時刻。
+-   `UPTIME` ：対応するノードの稼働時間。
 
-### Diagnostic information
+### 診断情報 {#diagnostic-information}
 
-TiDB has built-in automatic diagnostic results. For the description of each field, see [information_schema.inspection-result](/information-schema/information-schema-inspection-result.md) system table.
+TiDBには自動診断結果が組み込まれています。各フィールドの説明については、 [information_schema.inspection-結果](/information-schema/information-schema-inspection-result.md)のシステム表を参照してください。
 
-### Load Info
+### 情報を読み込む {#load-info}
 
-#### Node Load Info
+#### ノード負荷情報 {#node-load-info}
 
-The `Node Load Info` table shows the load information of the server node, including the average value (AVG), maximum value (MAX), minimum value (MIN) of the following metrics of the server within the time range:
+`Node Load Info`の表は、サーバーノードの負荷情報を示しています。これには、時間範囲内のサーバーの次のメトリックの平均値（AVG）、最大値（MAX）、最小値（MIN）が含まれます。
 
-* CPU usage (the maximum value is `100%`)
-* Memory usage
-* Disk I/O usage
-* Disk write latency
-* Disk read latency
-* Disk read bytes per second
-* Disk write bytes per second
-* The number of bytes received by the node network per minute
-* The number of bytes sent from the node network per minute
-* The number of TCP connections in use by the node
-* The number of all TCP connections of the node
+-   CPU使用率（最大値は`100%` ）
+-   メモリ使用量
+-   ディスクI/Oの使用
+-   ディスク書き込みレイテンシ
+-   ディスク読み取りの待ち時間
+-   1秒あたりのディスク読み取りバイト数
+-   1秒あたりのディスク書き込みバイト数
+-   1分あたりにノードネットワークが受信したバイト数
+-   1分あたりにノードネットワークから送信されたバイト数
+-   ノードで使用されているTCP接続の数
+-   ノードのすべてのTCP接続の数
 
 ![Server Load Info report](/media/dashboard/dashboard-diagnostics-node-load-info.png)
 
-#### Instance CPU Usage
+#### インスタンスのCPU使用率 {#instance-cpu-usage}
 
-The `Instance CPU Usage` table shows the average value (AVG), maximum value (MAX), and minimum value (MIN) of the CPU usage of each TiDB/PD/TiKV process. The maximum CPU usage of the process is `100% * the number of CPU logical cores`.
+`Instance CPU Usage`の表は、各TiDB / PD / TiKVプロセスのCPU使用率の平均値（AVG）、最大値（MAX）、および最小値（MIN）を示しています。プロセスの最大CPU使用率は`100% * the number of CPU logical cores`です。
 
 ![Instance CPU Usage report](/media/dashboard/dashboard-diagnostics-process-cpu-usage.png)
 
-#### Instance Memory Usage
+#### インスタンスのメモリ使用量 {#instance-memory-usage}
 
-The `Instance Memory Usage` table shows the average value (AVG), maximum value (MAX), and minimum value (MIN) of memory bytes occupied by each TiDB/PD/TiKV process.
+`Instance Memory Usage`の表は、各TiDB / PD / TiKVプロセスが占有するメモリバイトの平均値（AVG）、最大値（MAX）、および最小値（MIN）を示しています。
 
 ![Instance memory usage report](/media/dashboard/dashboard-diagnostics-process-memory-usage.png)
 
-#### TiKV Thread CPU Usage
+#### TiKVスレッドのCPU使用率 {#tikv-thread-cpu-usage}
 
-The `TiKV Thread CPU Usage` table shows the average value (AVG), maximum value (MAX) and minimum value (MIN) of CPU usage of each module thread in TiKV. The maximum CPU usage of the process is `100% * the thread count of the corresponding configuration`.
+`TiKV Thread CPU Usage`の表は、TiKVの各モジュールスレッドのCPU使用率の平均値（AVG）、最大値（MAX）、および最小値（MIN）を示しています。プロセスの最大CPU使用率は`100% * the thread count of the corresponding configuration`です。
 
 ![TiKV Thread CPU Usage report](/media/dashboard/dashboard-diagnostics-thread-cpu-usage.png)
 
-In the table above,
+上の表では、
 
-* `CONFIG_KEY`: The relevant thread configuration of the corresponding module.
-* `CURRENT_CONFIG_VALUE`: The current value of the configuration when the report is generated.
+-   `CONFIG_KEY` ：対応するモジュールの関連するスレッド構成。
+-   `CURRENT_CONFIG_VALUE` ：レポート生成時の構成の現在の値。
 
-> **Note:**
+> **ノート：**
 >
-> `CURRENT_CONFIG_VALUE` is the value when the report is generated, not the value within the time range of this report. Currently, some configuration values ​​of historical time cannot be obtained.
+> `CURRENT_CONFIG_VALUE`はレポートが生成されたときの値であり、このレポートの時間範囲内の値ではありません。現在、過去の時間の一部の構成値を取得できません。
 
-#### `TiDB/PD Goroutines Count`
+#### <code>TiDB/PD Goroutines Count</code> {#code-tidb-pd-goroutines-count-code}
 
-The `TiDB/PD Goroutines Count` table shows the average value (AVG), maximum value (MAX), and minimum value (MIN) of the number of TiDB or PD goroutines. If the number of goroutines exceeds 2,000, the concurrency of the process is too high, which affects the overall request latency.
+`TiDB/PD Goroutines Count`の表は、TiDBまたはPDゴルーチンの数の平均値（AVG）、最大値（MAX）、および最小値（MIN）を示しています。ゴルーチンの数が2,000を超える場合、プロセスの同時実行性が高すぎるため、全体的なリクエストのレイテンシーに影響します。
 
 ![TiDB/PD goroutines count report](/media/dashboard/dashboard-diagnostics-goroutines-count.png)
 
-### Overview information
+### 概要情報 {#overview-information}
 
-#### Time Consumed by Each Component
+#### 各コンポーネントにかかる時間 {#time-consumed-by-each-component}
 
-The `Time Consumed by Each Component` table shows the monitored consumed time and the time ratio of TiDB, PD, TiKV modules in the cluster. The default time unit is seconds. You can use this table to quickly locate which modules consume more time.
+`Time Consumed by Each Component`の表は、監視された消費時間と、クラスタのTiDB、PD、TiKVモジュールの時間比率を示しています。デフォルトの時間単位は秒です。この表を使用して、より多くの時間を消費するモジュールをすばやく見つけることができます。
 
 ![Time Consume report](/media/dashboard/dashboard-diagnostics-total-time-consume.png)
 
-The fields in columns of the table above are described as follows:
+上記の表の列のフィールドは、次のように説明されています。
 
-* `METRIC_NAME`: The name of the monitoring metric.
-* `Label`: The label information for the monitoring metric. Click **expand** to view more detailed monitoring information of each label for a metric.
-* `TIME_RATIO`: The ratio of the total time consumed by this monitoring metric to the total time of the monitoring row where `TIME_RATIO` is `1`. For example, the total consumed time by `kv_request` is `1.65` (namely, `38325.58`/`23223.86`) times that of `tidb_query`. Because KV requests are executed concurrently, the total time of all KV requests might exceed the total query (`tidb_query`) execution time.
-* `TOTAL_TIME`: The total time consumed by this monitoring metric.
-* `TOTAL_COUNT`: The total number of times this monitoring metric is executed.
-* `P999`: The maximum P999 time of this monitoring metric.
-* `P99`: The maximum P99 time of this monitoring metric.
-* `P90`: The maximum P90 time of this monitoring metric.
-* `P80`: The maximum P80 time of this monitoring metric.
+-   `METRIC_NAME` ：監視メトリックの名前。
+-   `Label` ：監視メトリックのラベル情報。 [**展開]**をクリックして、メトリックの各ラベルのより詳細な監視情報を表示します。
+-   `TIME_RATIO` ：この監視メトリックによって消費された合計時間と監視行の合計時間の比率（ `TIME_RATIO`は`1` ）。たとえば、 `kv_request`の合計消費時間は`tidb_query`の`1.65` （つまり、 `38325.58` / `23223.86` ）倍です。 KVリクエストは同時に実行されるため、すべてのKVリクエストの合計時間がクエリの合計（ `tidb_query` ）実行時間を超える可能性があります。
+-   `TOTAL_TIME` ：この監視メトリックによって消費された合計時間。
+-   `TOTAL_COUNT` ：この監視メトリックが実行された合計回数。
+-   `P999` ：この監視メトリックの最大P999時間。
+-   `P99` ：この監視メトリックの最大P99時間。
+-   `P90` ：この監視メトリックの最大P90時間。
+-   `P80` ：この監視メトリックの最大P80時間。
 
-The following image shows the relationship of time consumption of the related modules in the monitoring metrics above.
+次の画像は、上記の監視メトリックにおける関連モジュールの時間消費の関係を示しています。
 
 ![Time-consumption relationship of each module](/media/dashboard/dashboard-diagnostics-time-relation.png)
 
-In the image above, yellow boxes are the TiDB-related monitoring metrics.Blue boxes are TiKV-related monitoring metrics, and gray boxes temporarily do not correspond to specific monitoring metrics.
+上の画像で、黄色のボックスはTiDB関連の監視メトリックです。青いボックスはTiKV関連の監視メトリックであり、灰色のボックスは一時的に特定の監視メトリックに対応していません。
 
-In the image above, the time consumption of `tidb_query` includes the following four parts:
+上の画像では、 `tidb_query`の時間消費には次の4つの部分が含まれています。
 
-* `get_token`
-* `parse`
-* `compile`
-* `execute`
+-   `get_token`
+-   `parse`
+-   `compile`
+-   `execute`
 
-The `execute` time includes the following parts:
+`execute`回には、次の部分が含まれます。
 
-* `wait_start_tso`
-* The execution time at the TiDB layer, which is currently not monitored
-* KV request time
-* `KV_backoff` time, which is the time for backoff after the KV request fails
+-   `wait_start_tso`
+-   現在監視されていないTiDBレイヤーでの実行時間
+-   KVリクエスト時間
+-   `KV_backoff`時間。これは、KV要求が失敗した後のバックオフの時間です。
 
-Among the parts above, the KV request time includes the following parts:
+上記の部分のうち、KV要求時間には次の部分が含まれます。
 
-* The time consumed by the network sending and receiving of requests. Currently, there is no monitoring metric for this item. You can subtract the time of `tikv_grpc_message` from the KV request time to roughly estimate this item.
-* `tikv_grpc_message` time consumption.
+-   ネットワークがリクエストを送受信するのにかかる時間。現在、このアイテムの監視メトリックはありません。 KV要求時間から`tikv_grpc_message`の時間を差し引くと、このアイテムを概算できます。
+-   `tikv_grpc_message`時間の消費。
 
-Among the parts above, `tikv_grpc_message` time consumption includes the following parts:
+上記の部分のうち、 `tikv_grpc_message`回の消費には次の部分が含まれます。
 
-* Coprocessor request time consumption, which refers to processing the COP type requests. This time consumption includes the following parts:
-    * `tikv_cop_wait`: The time consumed by request queue.
-    * `Coprocessor handle`: The time consumed to process Coprocessor requests.
+-   コプロセッサー要求時間の消費。これは、COPタイプの要求の処理を指します。この時間の消費には、次の部分が含まれます。
+    -   `tikv_cop_wait` ：リクエストキューによって消費された時間。
+    -   `Coprocessor handle` ：コプロセッサー要求の処理に費やされた時間。
 
-* `tikv_scheduler_command` time consumption, which includes the following parts:
-    * `tikv_scheduler_processing_read`: The time consumed to process read requests.
-    * The time consumed to get snapshot in `tikv_storage_async_request` (snapshot is the label for this monitoring metric).
-    * Time consumed to process write requests. This time consumption includes the following parts:
-        * `tikv_scheduler_latch_wait`: The time consumed to wait for latch.
-        * The time consumption of writes in `tikv_storage_async_request` (write is the label for this monitoring metric).
+-   次の部分を含む`tikv_scheduler_command`時間の消費：
+    -   `tikv_scheduler_processing_read` ：読み取り要求の処理に費やされた時間。
+    -   `tikv_storage_async_request`でスナップショットを取得するのにかかった時間（スナップショットはこの監視メトリックのラベルです）。
+    -   書き込み要求の処理にかかる時間。この時間の消費には、次の部分が含まれます。
+        -   `tikv_scheduler_latch_wait` ：ラッチの待機にかかる時間。
+        -   `tikv_storage_async_request`での書き込みの時間消費（書き込みはこの監視メトリックのラベルです）。
 
-Among the above metrics, The time consumption of writes in `tikv_storage_async_request` refers to the time consumption of writing Raft KVs, including the following parts:
+上記のメトリックの中で、 `tikv_storage_async_request`での書き込みの時間消費は、次の部分を含むRaftKVの書き込みの時間消費を指します。
 
-* `tikv_raft_propose_wait`
-* `tikv_raft_process`, which mainly includes `tikv_raft_append_log`
-* `tikv_raft_commit_log`
-* `tikv_raft_apply_wait`
-* `tikv_raft_apply_log`
+-   `tikv_raft_propose_wait`
+-   `tikv_raft_process` 、主に`tikv_raft_append_log`を含む
+-   `tikv_raft_commit_log`
+-   `tikv_raft_apply_wait`
+-   `tikv_raft_apply_log`
 
-You can use `TOTAL_TIME`, the P999 time, and the P99 time to determine which modules consume longer time according to the relationship between the time consumptions described above, and then look at the related monitoring metrics.
+`TOTAL_TIME` 、P999時間、およびP99時間を使用して、上記の時間消費量の関係に従って、どのモジュールがより長い時間を消費するかを判別し、関連する監視メトリックを確認できます。
 
-> **Note:**
+> **ノート：**
 >
-> Because the Raft KVs writes might be processed in one batch, using `TOTAL_TIME` to measure the time consumed by each module is inapplicable to monitoring metrics related to Raft KV writes, specifically, `tikv_raft_process`, `tikv_raft_append_log`, `tikv_raft_commit_log`, `tikv_raft_apply_wait`, and `tikv_raft_apply_log`. In this situation, it is more reasonable to compare the time consumption of each module with the time of P999 and P99.
+> Raft KVの書き込みは`tikv_raft_commit_log` `tikv_raft_apply_wait`のバッチで処理される可能性があるため、 `TOTAL_TIME`を使用して各モジュールで消費される時間を測定することは、Raft KVの書き込みに関連するメトリック（具体的には`tikv_raft_process` 、および`tikv_raft_append_log` ）の監視には適用でき`tikv_raft_apply_log`ん。この状況では、各モジュールの消費時間をP999およびP99の時間と比較する方が合理的です。
 >
-> The reason is that if there are 10 asynchronous write requests, Raft KVs internally pack 10 requests into a batch execution, and the execution time is 1 second. Therefore, the execution time of each request is 1 second, and the total time of 10 requests is 10 seconds, but the total time for Raft KV processing is 1 second. If you use `TOTAL_TIME` to measure the consumed time, you might not understand where the remaining 9 seconds are spent. You can also see the difference between the monitoring metric of Raft KV and other previous monitoring metrics from the total number of requests (`TOTAL_COUNT`).
+> その理由は、非同期書き込み要求が10個ある場合、Raft KVは内部で10個の要求をバッチ実行にパックし、実行時間は1秒であるためです。したがって、各リクエストの実行時間は1秒、10リクエストの合計時間は10秒ですが、RaftKV処理の合計時間は1秒です。 `TOTAL_TIME`を使用して消費時間を測定すると、残りの9秒がどこで費やされているかがわからない場合があります。また、リクエストの総数（ `TOTAL_COUNT` ）から、RaftKVの監視メトリックと他の以前の監視メトリックの違いを確認できます。
 
-#### Errors Occurred in Each Component
+#### 各コンポーネントで発生したエラー {#errors-occurred-in-each-component}
 
-The `Errors Occurred in Each Component` table shows the total number of errors in TiDB and TiKV, such as the failure to write binlog, `tikv server is busy`, `TiKV channel full`, `tikv write stall`. You can see the row comments for the specific meaning of each error.
+`Errors Occurred in Each Component`の表は、binlogの書き込みの失敗、 `tikv server is busy`など、 `TiKV channel full`とTiKVのエラーの総数を示してい`tikv write stall` 。各エラーの特定の意味については、行のコメントを確認できます。
 
 ![Errors Occurred in Each Component report](/media/dashboard/dashboard-diagnostics-error.png)
 
-#### Specific TiDB/PD/TiKV monitoring information
+#### 特定のTiDB/PD/TiKV監視情報 {#specific-tidb-pd-tikv-monitoring-information}
 
-This part includes more specific monitoring information of TiDB, PD, or TiKV.
+このパートには、TiDB、PD、またはTiKVのより具体的な監視情報が含まれています。
 
-#### TiDB-related monitoring information
+#### TiDB関連の監視情報 {#tidb-related-monitoring-information}
 
-##### Time Consumed by TiDB Component
+##### TiDBコンポーネントにかかる時間 {#time-consumed-by-tidb-component}
 
-This table shows the time consumed by each TiDB module and the ratio of each time consumption, which is similar to the `time consume` table in the overview, but the label information of this table are more detailed.
+この表は、各TiDBモジュールで消費される時間と各時間消費の比率を示しています。これは、概要の`time consume`の表と同様ですが、この表のラベル情報はより詳細です。
 
-##### TiDB Server Connections
+##### TiDBサーバー接続 {#tidb-server-connections}
 
-This table shows the number of client connections for each TiDB instance.
+この表は、各TiDBインスタンスのクライアント接続の数を示しています。
 
-##### TiDB Transaction
+##### TiDBトランザクション {#tidb-transaction}
 
-This table shows transaction-related monitoring metrics.
+この表は、トランザクション関連の監視メトリックを示しています。
 
 ![Transaction report](/media/dashboard/dashboard-diagnostics-tidb-txn.png)
 
-* `TOTAL_VALUE`: The sum of all values ​​(SUM) during the report time range.
-* `TOTAL_COUNT`: The total number of occurrences of this monitoring metric.
-* `P999`: The maximum P999 value of this monitoring metric.
-* `P99`: The maximum P99 value of this monitoring metric.
-* `P90`: The maximum P90 value of this monitoring metric.
-* `P80`: The maximum P80 value of this monitoring metric.
+-   `TOTAL_VALUE` ：レポートの時間範囲内のすべての値の合計（SUM）。
+-   `TOTAL_COUNT` ：この監視メトリックの発生の総数。
+-   `P999` ：この監視メトリックの最大P999値。
+-   `P99` ：この監視メトリックの最大P99値。
+-   `P90` ：この監視メトリックの最大P90値。
+-   `P80` ：この監視メトリックの最大P80値。
 
-Example:
+例：
 
-In the table above, within the report time range, `tidb_txn_kv_write_size`: a total of about 181,296 transactions of KV writes, and the total KV write size is 266.772 MB, of which the maximum P999, P99, P90, P80 values for a single transaction of KV writes ​​are 116.913 KB, 1.996 KB, 1.905 KB, and 1.805 KB.
+上記の表では、レポートの時間範囲内で、 `tidb_txn_kv_write_size` ：KV書き込みの合計約181,296トランザクション、合計KV書き込みサイズは266.772 MBであり、そのうちの最大P999、P99、P90、P80値はKV書き込みは116.913KB、1.996 KB、1.905 KB、および1.805KBです。
 
-##### DDL Owner
+##### DDL所有者 {#ddl-owner}
 
 ![TiDB DDL Owner Report](/media/dashboard/dashboard-diagnostics-tidb-ddl.png)
 
-The table above shows that from `2020-05-21 14:40:00`, the cluster's `DDL OWNER` is at the `10.0.1.13:10080` node. If the owner changes, multiple rows of data exist in the table above, where the `Min_Time` column indicates the minimum time of the corresponding known owner.
+上の表は、 `2020-05-21 14:40:00`から、クラスターの`DDL OWNER`が`10.0.1.13:10080`ノードにあることを示しています。所有者が変更された場合、上の表には複数行のデータが存在します`Min_Time`列は、対応する既知の所有者の最小時間を示します。
 
-> **Note:**
+> **ノート：**
 >
-> If the owner information is empty, it does not mean that no owner exists in this period of time. Because in this situation, the DDL owner is determined based on the monitoring information of `ddl_worker`, it might be that `ddl_worker` has not done any DDL job in this period of time, causing the owner information to be empty.
+> 所有者情報が空の場合は、この期間に所有者が存在しないことを意味するものではありません。この場合、 `ddl_worker`の監視情報に基づいてDDL所有者が決定されるため、この期間に`ddl_worker`がDDLジョブを実行しておらず、所有者情報が空になっている可能性があります。
 
-Other monitoring tables in TiDB are as follows:
+TiDBの他の監視テーブルは次のとおりです。
 
-* Statistics Info: Shows related monitoring metrics of TiDB statistical information.
-* Top 10 Slow Query: Shows the Top 10 slow query information in the report time range.
-* Top 10 Slow Query Group By Digest: Shows the Top 10 slow query information in the report time range, which is aggregated according to the SQL fingerprint.
-* Slow Query With Diff Plan: The SQL statement whose execution plan changes within the report time range.
+-   統計情報：TiDB統計情報の関連する監視メトリックを表示します。
+-   トップ10スロークエリ：レポート時間範囲のトップ10スロークエリ情報を表示します。
+-   ダイジェスト別の上位10の低速クエリグループ：レポートの時間範囲内の上位10の低速クエリ情報を表示します。これはSQLフィンガープリントに従って集計されます。
+-   Diff Planを使用した低速クエリ：レポートの時間範囲内で実行プランが変更されるSQLステートメント。
 
-#### PD related monitoring information
+#### PD関連の監視情報 {#pd-related-monitoring-information}
 
-The tables related to the monitoring information of PD modules are as follows:
+PDモジュールの監視情報に関する表は以下のとおりです。
 
-* `Time Consumed by PD Component`: The time consumed by the monitoring metrics of related modules in PD.
-* `Blance Leader/Region`: The monitoring information of `balance-region` and `balance leader` occurred in the cluster within the report time range, such as the number of leaders that are scheduled out from `tikv_note_1` or the number of leaders that are scheduled in.
-* `Cluster Status`: The cluster status information, including total number of TiKV nodes, total cluster storage capacity, the number of Regions, and the number of offline TiKV nodes.
-* `Store Status`: Record the status information of each TiKV node, including Region score, leader score, and the number of Regions/leaders.
-* `Etcd Status`: etcd related information in PD.
+-   `Time Consumed by PD Component` ：PD内の関連モジュールの監視メトリックによって消費される時間。
+-   `Blance Leader/Region` ： `balance-region`と`balance leader`の監視情報は、 `tikv_note_1`からスケジュールされたリーダーの数やでスケジュールされたリーダーの数など、レポートの時間範囲内でクラスタ内で発生しました。
+-   `Cluster Status` ：TiKVノードの総数、クラスタの総ストレージ容量、リージョンの数、オフラインTiKVノードの数などのクラスタステータス情報。
+-   `Store Status` ：リージョンスコア、リーダースコア、リージョン/リーダーの数など、各TiKVノードのステータス情報を記録します。
+-   `Etcd Status` ：PDのetcd関連情報。
 
-#### TiKV related monitoring information
+#### TiKV関連の監視情報 {#tikv-related-monitoring-information}
 
-The tables related to the monitoring information of TiKV modules are as follows:
+TiKVモジュールの監視情報に関する表は次のとおりです。
 
-* `Time Consumed by TiKV Component`: The time consumed by related modules in TiKV.
-* `Time Consumed by RocksDB`: The time consumed by RocksDB in TiKV.
-* `TiKV Error`: The error information related to each module in TiKV.
-* `TiKV Engine Size`: The size of stored data of column families on each node in TiKV.
-* `Coprocessor Info`: Monitoring information related to the Coprocessor module in TiKV.
-* `Raft Info`: Monitoring information of the Raft module in TiKV.
-* `Snapshot Info`: Snapshot related monitoring information in TiKV.
-* `GC Info`: Garbage Collection (GC) related monitoring information in TiKV.
-* `Cache Hit`: The hit rate information of each cache of RocksDB in TiKV.
+-   `Time Consumed by TiKV Component` ：TiKVの関連モジュールが消費する時間。
+-   `Time Consumed by RocksDB` ：TiKVでRocksDBが消費する時間。
+-   `TiKV Error` ：TiKVの各モジュールに関連するエラー情報。
+-   `TiKV Engine Size` ：TiKVの各ノードに保存されている列ファミリーのデータのサイズ。
+-   `Coprocessor Info` ：TiKVのコプロセッサーモジュールに関連する監視情報。
+-   `Raft Info` ：TiKVのラフトモジュールの監視情報。
+-   `Snapshot Info` ：TiKVのスナップショット関連の監視情報。
+-   `GC Info` ：TiKVのガベージコレクション（GC）関連の監視情報。
+-   `Cache Hit` ：TiKVのRocksDBの各キャッシュのヒット率情報。
 
-### Configuration information
+### Configuration / コンフィグレーション情報 {#configuration-information}
 
-In the configuration information, the configuration values of some modules are shown within the report time range. But the historical values of some other configurations of these modules cannot be obtained, so the shown values of these configurations are the current (when the report is generated) values .
+構成情報では、一部のモジュールの構成値がレポート時間範囲内に表示されます。ただし、これらのモジュールの他のいくつかの構成の履歴値は取得できないため、これらの構成の表示値は現在の（レポートが生成されたときの）値です。
 
-Within the report time range, the following tables include items whose values are configured at the start time of the report time range:
+レポートの時間範囲内で、次の表には、レポートの時間範囲の開始時に値が構成されている項目が含まれています。
 
-* `Scheduler Initial Config`: The initial value of PD scheduling-related configuration at the report's start time.
-* `TiDB GC Initial Config`: The initial value of TiDB GC related-configuration at the report's start time
-* `TiKV RocksDB Initial Config`: The initial value of TiKV RocksDB-related configuration at the report's start time
-* `TiKV RaftStore Initial Config`: The initial value of TiKV RaftStore-related configuration at the report's start time
+-   `Scheduler Initial Config` ：レポートの開始時のPDスケジューリング関連の構成の初期値。
+-   `TiDB GC Initial Config` ：レポート開始時のTiDBGC関連構成の初期値
+-   `TiKV RocksDB Initial Config` ：レポートの開始時のTiKVRocksDB関連の構成の初期値
+-   `TiKV RaftStore Initial Config` ：レポート開始時のTiKVRaftStore関連の設定の初期値
 
-Within the report time range, if some configurations have been modified, the following tables include records of some configurations that have been modified:
+レポートの時間範囲内で、一部の構成が変更されている場合、次の表には、変更された一部の構成のレコードが含まれています。
 
-* `Scheduler Config Change History`
-* `TiDB GC Config Change History`
-* `TiKV RocksDB Config Change History`
-* `TiKV RaftStore Config Change History`
+-   `Scheduler Config Change History`
+-   `TiDB GC Config Change History`
+-   `TiKV RocksDB Config Change History`
+-   `TiKV RaftStore Config Change History`
 
-Example:
+例：
 
 ![Scheduler Config Change History report](/media/dashboard/dashboard-diagnostics-config-change.png)
 
-The table above shows that the `leader-schedule-limit` configuration parameter has been modified within the report time range:
+上記の表は、 `leader-schedule-limit`の構成パラメーターがレポートの時間範囲内で変更されたことを示しています。
 
-* `2020-05-22T20:00:00+08:00`: At the start time of the report, the configuration value of `leader-schedule-limit` is `4`, which does not mean that the configuration has been modified, but that at the start time in the report time range, its configuration value is `4`.
-* `2020-05-22T20:07:00+08:00`: The `leader-schedule-limit` configuration value is `8`, which indicates that the value of this configuration has been modified around `2020-05-22T20:07:00+08:00`.
+-   `2020-05-22T20:00:00+08:00` ：レポートの開始時に`leader-schedule-limit`の構成値は`4`です。これは、構成が変更されたことを意味するのではなく、レポートの時間範囲の開始時に、その構成値が`4`であることを意味します。
+-   `2020-05-22T20:07:00+08:00` ： `leader-schedule-limit`構成値は`8`です。これは、この構成の値が約`2020-05-22T20:07:00+08:00`に変更されたことを示します。
 
-The following tables show the current configuration of TiDB, PD, and TiKV at the time when the report is generated:
+次の表は、レポートが生成された時点でのTiDB、PD、およびTiKVの現在の構成を示しています。
 
-* `TiDB's Current Config`
-* `PD's Current Config`
-* `TiKV's Current Config`
+-   `TiDB's Current Config`
+-   `PD's Current Config`
+-   `TiKV's Current Config`
 
-## Comparison report
+## 比較レポート {#comparison-report}
 
-You can generate a comparison report for two time ranges. The report content is the same as the report for a single time range, except that a comparison column is added to show the difference between the two time ranges. The following sections introduce some unique tables in the comparison report and how to view the comparison report.
+2つの時間範囲の比較レポートを生成できます。レポートの内容は、2つの時間範囲の違いを示すために比較列が追加されていることを除いて、単一の時間範囲のレポートと同じです。次のセクションでは、比較レポートのいくつかの固有のテーブルと、比較レポートを表示する方法を紹介します。
 
-First, the `Compare Report Time Range` report in the basic information shows the two time ranges for comparison:
+まず、基本情報の`Compare Report Time Range`のレポートは、比較のために2つの時間範囲を示しています。
 
 ![Compare Report Time Range report](/media/dashboard/dashboard-diagnostics-compare-time.png)
 
-In the table above, `t1` is the normal time range, or the reference time range. `t2` is the abnormal time range.
+上記の表で、 `t1`は通常の時間範囲または参照時間範囲です。 `t2`は異常な時間範囲です。
 
-Tables related to slow queries are shown as follows:
+低速クエリに関連するテーブルを以下に示します。
 
-* `Slow Queries In Time Range t2`: Shows slow queries that only appear in `t2` but not during `t1`.
-* `Top 10 slow query in time range t1`: The Top 10 slow queries during `t1`.
-* `Top 10 slow query in time range t2`: The Top 10 slow queries during `t2`.
+-   `Slow Queries In Time Range t2` ： `t2`にのみ表示され、 `t1`には表示されない低速クエリを表示します。
+-   `Top 10 slow query in time range t1` ： `t1`の間のトップ10の遅いクエリ。
+-   `Top 10 slow query in time range t2` ： `t2`の間のトップ10の遅いクエリ。
 
-### DIFF_RATIO introduction
+### DIFF_RATIOの紹介 {#diff-ratio-introduction}
 
-This section introduces `DIFF_RATIO` using the `Instance CPU Usage` table as an example.
+このセクションでは、例として`Instance CPU Usage`テーブルを使用して`DIFF_RATIO`を紹介します。
 
 ![Compare Instance CPU Usage report](/media/dashboard/dashboard-diagnostics-compare-instance-cpu-usage.png)
 
-* `t1.AVG`, `t1.MAX`, `t1.Min` are the average value, maximum value, and minimum value of CPU usage in the `t1`.
-* `t2.AVG`, `t2.MAX`, and `t2.Min` are the average value, maximum value, and minimum value ​​of CPU usage during `t2`.
-* `AVG_DIFF_RATIO` is `DIFF_RATIO` of the average values during `t1` and `t2`.
-* `MAX_DIFF_RATIO` is `DIFF_RATIO` of the maximum values during `t1` and `t2`.
-* `MIN_DIFF_RATIO` is `DIFF_RATIO` of the minimum values during `t1` and `t2`.
+-   `t1.AVG`は、 `t1.MAX`の`t1.Min`使用率の平均値、最大値、および最小値`t1` 。
+-   `t2.AVG` 、および`t2.MAX`は、 `t2.Min`の間のCPU使用率の平均値、最大値、および最小値`t2` 。
+-   `AVG_DIFF_RATIO`は、 `t1`と`t2`の間の平均値の`DIFF_RATIO`です。
+-   `MAX_DIFF_RATIO`は、 `t1`と`t2`の間の最大値の`DIFF_RATIO`です。
+-   `MIN_DIFF_RATIO`は、 `t1`と`t2`の間の最小値の`DIFF_RATIO`です。
 
-`DIFF_RATIO`: Indicates the difference value between the two time ranges. It has the following values:
+`DIFF_RATIO` ：2つの時間範囲の差の値を示します。次の値があります。
 
-* If the monitoring metric has a value only within `t2` and has no value within `t1`, the value of `DIFF_RATIO` is `1`.
-* If the monitoring metric has a value only within `t1`, and has no value within `t2` time range, the value of `DIFF_RATIO` is `-1`.
-* If the value of `t2` is greater than that of `t1`, then `DIFF_RATIO` = `(t2.value / t1.value)-1`
-* If the value of `t2` is smaller than that of `t1`, then `DIFF_RATIO` = `1-(t1.value / t2.value)`
+-   監視メトリックの値が`t2`以内で、値が`t1`以内でない場合、 `DIFF_RATIO`の値は`1`です。
+-   監視メトリックの値が`t1`以内で、 `t2`時間範囲内に値がない場合、 `DIFF_RATIO`の値は`-1`です。
+-   `t2`の値が`t1`の値より大きい場合、 `DIFF_RATIO` = `(t2.value / t1.value)-1`
+-   `t2`の値が`t1`の値よりも小さい場合、 `DIFF_RATIO` = `1-(t1.value / t2.value)`
 
-For example, in the table above, the average CPU usage of the `tidb` node in `t2` is 2.02 times higher than that in `t1`, which is `2.02` = `1240/410-1`.
+たとえば、上の表では、 `t2`の`tidb`ノードの平均CPU使用率は`t1`のそれより2.02倍高く、 `2.02` = `1240/410-1`です。
 
-### Maximum Different Item table
+### 最大異なるアイテムテーブル {#maximum-different-item-table}
 
-The `Maximum Different Item` table compares the monitoring metrics of two time ranges, and sorts them according to the difference of the monitoring metrics. Using this table, you can quickly find out which monitoring metric has the biggest difference in the two time ranges. See the following example:
+`Maximum Different Item`の表は、2つの時間範囲の監視メトリックを比較し、監視メトリックの違いに従ってそれらをソートします。この表を使用すると、2つの時間範囲で最大の違いがある監視メトリックをすばやく見つけることができます。次の例を参照してください。
 
 ![Maximum Different Item table](/media/dashboard/dashboard-diagnostics-maximum-different-item.png)
 
-* `Table`: Indicates this monitoring metric comes from which table in the comparison report. For example, `TiKV, coprocessor_info` indicates the `coprocessor_info` table in the TiKV component.
-* `METRIC_NAME`: The monitoring metric name. Click `expand` to view the comparison of different labels of metrics.
-* `LABEL`: The label corresponding to the monitoring metric. For example, the monitoring metric of `TiKV Coprocessor scan` has 2 labels, namely `instance`, `req`, `tag`, `sql_type`, which are the TiKV address, request type, operation type and operation column family.
-* `MAX_DIFF`: Difference value, which is the `DIFF_RATIO` calculation of `t1.VALUE` and `t2.VALUE`.
+-   `Table` ：この監視メトリックが比較レポートのどのテーブルからのものであるかを示します。たとえば、 `TiKV, coprocessor_info`はTiKVコンポーネントの`coprocessor_info`テーブルを示します。
+-   `METRIC_NAME` ：監視メトリック名。 `expand`をクリックして、メトリックのさまざまなラベルの比較を表示します。
+-   `LABEL` ：監視メトリックに対応するラベル。たとえば、2の監視メトリックには`TiKV Coprocessor scan` `instance`のラベル、つまり`req`があり`sql_type` 。これらは、 `tag`アドレス、要求タイプ、操作タイプ、および操作列ファミリーです。
+-   `MAX_DIFF` ：差の値`t1.VALUE`と`t2.VALUE`の`DIFF_RATIO`の計算です。
 
-From the table above, you can see the `t2` time range has much more Coprocessor requests than the `t1` time range, and the SQL parsing time of TiDB in `t2` is much longer.
+上記の表から、 `t2`つの時間範囲には`t1`の時間範囲よりもはるかに多くのコプロセッサー要求があり、 `t2`のTiDBのSQL解析時間ははるかに長いことがわかります。

@@ -3,23 +3,23 @@ title: Replicate data from TiDB to Apache Kafka
 summary: Learn how to replicate data from TiDB to Apache Kafka
 ---
 
-# Replicate Data from TiDB to Apache Kafka
+# TiDBからApacheKafkaにデータを複製する {#replicate-data-from-tidb-to-apache-kafka}
 
-This document describes how to replicate data from TiDB to Apache Kafka by using [TiCDC](/ticdc/ticdc-overview.md), which includes the following steps:
+このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用してTiDBからApache Kafkaにデータを複製する方法について説明します。これには、次の手順が含まれます。
 
-- Deploy a TiCDC cluster and a Kafka cluster.
-- Create a changefeed with Kafka as the sink.
-- Write data to the TiDB cluster by using go-tpc. On Kafka console consumer, check that the data is replicated to a specified Kafka topic.
+-   TiCDCクラスタとKafkaクラスタをデプロイします。
+-   Kafkaをシンクとしてチェンジフィードを作成します。
+-   go-tpcを使用してTiDBクラスタにデータを書き込みます。 Kafkaコンソールコンシューマーで、データが指定されたKafkaトピックにレプリケートされていることを確認します。
 
-These steps are performed in a lab environment. You can also deploy a cluster for a production environment by referring to these steps.
+これらの手順は、ラボ環境で実行されます。これらの手順を参照して、実稼働環境にクラスタをデプロイすることもできます。
 
-## Step 1. Set up the environment
+## ステップ1.環境をセットアップします {#step-1-set-up-the-environment}
 
-1. Deploy a TiCDC cluster.
+1.  TiCDCクラスタをデプロイします。
 
-    You can deploy a TiCDC quickly by running the `tiup playground` command.
+    `tiup playground`コマンドを実行すると、TiCDCをすばやく展開できます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     tiup playground --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
@@ -28,62 +28,62 @@ These steps are performed in a lab environment. You can also deploy a cluster fo
     tiup status
     ```
 
-    In a production environment, you can deploy a TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md).
+    実稼働環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の指示に従ってTiCDCをデプロイできます。
 
-2. Deploy a Kafka cluster.
+2.  Kafkaクラスタをデプロイします。
 
-    - To quickly deploy a Kafka cluster, refer to [Apache Kakfa Quickstart](https://kafka.apache.org/quickstart).
-    - To deploy a Kafka cluster in production environments, refer to [Running Kafka in Production](https://docs.confluent.io/platform/current/kafka/deployment.html).
+    -   Kafkaクラスタをすばやくデプロイするには、 [ApacheKakfaクイックスタート](https://kafka.apache.org/quickstart)を参照してください。
+    -   Kafkaクラスタを実稼働環境にデプロイするには、 [Kafkaを本番環境で実行する](https://docs.confluent.io/platform/current/kafka/deployment.html)を参照してください。
 
-## Step 2. Create a changefeed
+## ステップ2.チェンジフィードを作成する {#step-2-create-a-changefeed}
 
-Use tiup ctl to create a changefeed with Kafka as the downstream node.
+tiup ctlを使用して、Kafkaをダウンストリームノードとして変更フィードを作成します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup ctl cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json" --changefeed-id="kafka-changefeed"
 ```
 
-If the command is executed successfully, information about the changefeed is displayed, such as the changefeed ID and the sink URI.
+コマンドが正常に実行されると、チェンジフィードIDやシンクURIなどのチェンジフィードに関する情報が表示されます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 Create changefeed successfully!
 ID: kafka-changefeed
 Info: {"sink-uri":"kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json","opts":{},"create-time":"2022-04-06T14:45:10.824475+08:00","start-ts":432335096583028737,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":"","config":{"case-sensitive":true,"enable-old-value":true,"force-replicate":false,"check-gc-safe-point":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null,"protocol":"canal-json","column-selectors":null},"cyclic-replication":{"enable":false,"replica-id":0,"filter-replica-ids":null,"id-buckets":0,"sync-ddl":false},"scheduler":{"type":"table-number","polling-time":-1},"consistent":{"level":"none","max-log-size":64,"flush-interval":1000,"storage":""}},"state":"normal","error":null,"sync-point-enabled":false,"sync-point-interval":600000000000,"creator-version":"v6.1.0-master"}
- ```
+```
 
-If the command does not return any information, you should check network connectivity from the server where the command is executed to the target Kafka cluster.
+コマンドが情報を返さない場合は、コマンドが実行されたサーバーからターゲットのKafkaクラスタへのネットワーク接続を確認する必要があります。
 
-In production environments, a Kafka cluster has multiple broker nodes. Therefore, you can add the addresses of multiple brokers to the sink UIR. This improves stable access to the Kafka cluster. When a Kafka cluster is faulty, the changefeed still works. Suppose that a Kafka cluster has three broker nodes, with IP addresses being 127.0.0.1:9092, 127.0.0.2:9092, and 127.0.0.3:9092, respectively. You can create a changefeed with the following sink URI.
+実稼働環境では、Kafkaクラスタには複数のブローカーノードがあります。したがって、複数のブローカーのアドレスをシンクUIRに追加できます。これにより、Kafkaクラスタへの安定したアクセスが向上します。 Kafkaクラスタに障害が発生した場合でも、チェンジフィードは機能します。 Kafkaクラスタに3つのブローカーノードがあり、IPアドレスがそれぞれ127.0.0.1:9092、127.0.0.2:9092、および127.0.0.3:9092であるとします。次のシンクURIを使用してチェンジフィードを作成できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup ctl cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://127.0.0.1:9092,127.0.0.2:9092,127.0.0.3:9092/kafka-topic-name?protocol=canal-json&partition-num=3&replication-factor=1&max-message-bytes=1048576"
 ```
 
-After executing the preceding command, run the following command to check the status of the changefeed.
+上記のコマンドを実行した後、次のコマンドを実行して、チェンジフィードのステータスを確認します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup ctl cdc changefeed list --pd="http://127.0.0.1:2379"
 ```
 
-You can manage the status of a changefeed as instructed in [Manage replication tasks (`changefeed`)](/ticdc/manage-ticdc.md#manage-replication-tasks-changefeed).
+[レプリケーションタスクの管理（ `changefeed` ）](/ticdc/manage-ticdc.md#manage-replication-tasks-changefeed)で指示されているように、チェンジフィードのステータスを管理できます。
 
-## Step 3. Generate data changes in the TiDB cluster
+## ステップ3.TiDBクラスタでデータ変更を生成する {#step-3-generate-data-changes-in-the-tidb-cluster}
 
-After a changefeed is created, once there is any event change in the TiDB cluster, such as an `INSERT`, `UPDATE`, or `DELETE` operation, data change is generated in TiCDC. Then TiCDC replicates the data change to the sink specified in the changefeed. In this document, the sink is Kafka and the data change is written to the specified Kafka topic.
+チェンジフィードが作成された後、 `DELETE`クラスタで`INSERT` 、または`UPDATE`操作などのイベント変更が発生すると、データ変更がTiCDCで生成されます。次に、TiCDCはデータ変更をチェンジフィードで指定されたシンクに複製します。このドキュメントでは、シンクはKafkaであり、データ変更は指定されたKafkaトピックに書き込まれます。
 
-1. Simulate service workload.
+1.  サービスのワークロードをシミュレートします。
 
-    In the lab environment, you can use `go-tpc` to write data to the TiDB cluster, which is used as the source of the changefeed. Specifically, run the following command to create a database `tpcc` in the upstream TiDB cluster. Then use `TiUP bench` to write data to this new database.
+    ラボ環境では、 `go-tpc`を使用して、チェンジフィードのソースとして使用されるTiDBクラスタにデータを書き込むことができます。具体的には、次のコマンドを実行して、アップストリームTiDBクラスタにデータベース`tpcc`を作成します。次に、 `TiUP bench`を使用してこの新しいデータベースにデータを書き込みます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     create database tpcc;
@@ -91,16 +91,16 @@ After a changefeed is created, once there is any event change in the TiDB cluste
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 run --time 300s
     ```
 
-    For more details about `go-tpc`, refer to [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
+    `go-tpc`の詳細については、 [TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
-2. Consume data change from Kafka.
+2.  Kafkaからのデータ変更を消費します。
 
-    When a changefeed works normally, it writes data to the Kafka topic. You can run `kafka-console-consumer.sh` to view the written data.
+    チェンジフィードが正常に機能すると、Kafkaトピックにデータが書き込まれます。 `kafka-console-consumer.sh`を実行して、書き込まれたデータを表示できます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     ./bin/kafka-console-consumer.sh --bootstrap-server 127.0.0.1:9092 --from-beginning --topic `${topic-name}`
     ```
 
-    In production environments, you need to develop Kafka Consumer to consume the data in the Kafka topic.
+    実稼働環境では、Kafkaトピックのデータを使用するためにKafkaコンシューマーを開発する必要があります。

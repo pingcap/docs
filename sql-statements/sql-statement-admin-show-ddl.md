@@ -3,11 +3,11 @@ title: ADMIN SHOW DDL [JOBS|QUERIES] | TiDB SQL Statement Reference
 summary: An overview of the usage of ADMIN for the TiDB database.
 ---
 
-# ADMIN SHOW DDL [JOBS|QUERIES]
+# ADMIN SHOW DDL [JOBS | QUERIES] {#admin-show-ddl-jobs-queries}
 
-The `ADMIN SHOW DDL [JOBS|QUERIES]` statement shows information about running and recently completed DDL jobs.
+`ADMIN SHOW DDL [JOBS|QUERIES]`ステートメントは、実行中および最近完了したDDLジョブに関する情報を示しています。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AdminStmt ::=
@@ -20,13 +20,13 @@ WhereClauseOptional ::=
     WhereClause?
 ```
 
-## Examples
+## 例 {#examples}
 
-### `ADMIN SHOW DDL`
+### <code>ADMIN SHOW DDL</code> {#code-admin-show-ddl-code}
 
-To view the currently running DDL jobs, use `ADMIN SHOW DDL`:
+現在実行中のDDLジョブを表示するには、 `ADMIN SHOW DDL`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW DDL;
@@ -42,11 +42,11 @@ mysql> ADMIN SHOW DDL;
 1 row in set (0.00 sec)
 ```
 
-### `ADMIN SHOW DDL JOBS`
+### <code>ADMIN SHOW DDL JOBS</code> {#code-admin-show-ddl-jobs-code}
 
-To view all the results in the current DDL job queue (including tasks that are running and waiting to be run) and the last ten results in the completed DDL job queue, use `ADMIN SHOW DDL JOBS`:
+現在のDDLジョブキュー内のすべての結果（実行中および実行待ちのタスクを含む）と、完了したDDLジョブキュー内の最後の10個の結果を表示するには、 `ADMIN SHOW DDL JOBS`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -73,28 +73,28 @@ mysql> ADMIN SHOW DDL JOBS;
 12 rows in set (0.00 sec)
 ```
 
-From the output above:
+上記の出力から：
 
-- Job 59 is currently in progress (`STATE` of `running`). The schema state is currently in `write reorganization`, but will switch to `public` once the task is completed to note that the change can be observed publicly by user sessions. The `end_time` column is also `NULL` indicating that the completion time for the job is currently not known.
+-   ジョブ59は現在進行中`running` `STATE` 。スキーマの状態は現在`write reorganization`ですが、タスクが完了すると`public`に切り替わり、ユーザーセッションによって変更を公に観察できることに注意してください。 `end_time`列も`NULL`であり、ジョブの完了時刻が現在不明であることを示しています。
 
-- Job 60 is an `add index` job, which is currently queued waiting for job 59 to complete. When job 59 completes, the `STATE` of job 60 will switch to `running`.
+-   ジョブ60は`add index`のジョブであり、現在、ジョブ59が完了するのを待ってキューに入れられています。ジョブ59が完了すると、ジョブ60の`STATE`が`running`に切り替わります。
 
-- For destructive changes such as dropping an index or dropping a table, the `SCHEMA_STATE` will change to `none` when the job is complete. For additive changes, the `SCHEMA_STATE` will change to `public`.
+-   インデックスの削除やテーブルの削除などの破壊的な変更の場合、ジョブが完了すると`SCHEMA_STATE`が`none`に変更されます。付加的な変更の場合、 `SCHEMA_STATE`は`public`に変更されます。
 
-To limit the number of rows shown, specify a number and a where condition:
+表示される行数を制限するには、数とwhere条件を指定します。
 
 ```sql
 ADMIN SHOW DDL JOBS [NUM] [WHERE where_condition];
 ```
 
-* `NUM`: to view the last `NUM` results in the completed DDL job queue. If not specified, `NUM` is by default 10.
-* `WHERE`: to add filter conditions.
+-   `NUM` ：完了したDDLジョブキューの最後の`NUM`の結果を表示します。指定しない場合、デフォルトでは`NUM`が10になります。
+-   `WHERE` ：フィルター条件を追加します。
 
-### `ADMIN SHOW DDL JOB QUERIES`
+### <code>ADMIN SHOW DDL JOB QUERIES</code> {#code-admin-show-ddl-job-queries-code}
 
-To view the original SQL statements of the DDL job corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES`:
+`job_id`に対応するDDLジョブの元のSQLステートメントを表示するには、 `ADMIN SHOW DDL JOB QUERIES`を使用します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ADMIN SHOW DDL JOBS;
@@ -111,12 +111,12 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 1 row in set (0.02 sec)
 ```
 
-You can only search the running DDL job corresponding to `job_id` within the last ten results in the DDL history job queue.
+DDL履歴ジョブキュー内の最後の10件の結果内の`job_id`に対応する実行中のDDLジョブのみを検索できます。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)
+-   [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)

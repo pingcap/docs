@@ -3,30 +3,30 @@ title: Paginate Results
 summary: Introduce paginate result feature in TiDB.
 ---
 
-# Paginate Results
+# 結果をページングする {#paginate-results}
 
-To page through a large query result, you can get your desired part in a "paginated" manner.
+大きなクエリ結果をページングするために、「ページ付けされた」方法で目的の部分を取得できます。
 
-## Paginate query results
+## クエリ結果のページ付け {#paginate-query-results}
 
-In TiDB, you can paginate query results using the `LIMIT` statement. For example:
+TiDBでは、 `LIMIT`ステートメントを使用してクエリ結果をページ分割できます。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 ```
 
-`offset` indicates the beginning number of records and `row_count` indicates the number of records per page. TiDB also supports `LIMIT row_count OFFSET offset` syntax.
+`offset`はレコードの開始数を示し、 `row_count`はページあたりのレコード数を示します。 TiDBは`LIMIT row_count OFFSET offset`の構文もサポートしています。
 
-When pagination is used, it is recommended that you sort query results with the `ORDER BY` statement unless there is a need to display data randomly.
+ページ付けを使用する場合、データをランダムに表示する必要がない限り、クエリ結果を`ORDER BY`ステートメントで並べ替えることをお勧めします。
 
 <SimpleTab>
 <div label="SQL" href="page-sql">
 
-For example, to let users of the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application view the latest published books in a paginated manner, you can use the `LIMIT 0, 10` statement, which returns the first page of the result list, with a maximum of 10 records per page. To get the second page, you can change the statement to `LIMIT 10, 10`, and so on.
+たとえば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーが最新の出版された本をページ付けされた方法で表示できるようにするには、 `LIMIT 0, 10`ステートメントを使用して、結果リストの最初のページを返し、ページあたり最大10レコードを返すことができます。 2番目のページを取得するには、ステートメントを`LIMIT 10, 10`に変更します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT *
@@ -38,9 +38,9 @@ LIMIT 0, 10;
 </div>
 <div label="Java" href="page-java">
 
-In application development, the backend program receives the `page_number` parameter (which means the number of the page being requested) and the `page_size` parameter (which controls how many records per page) from the frontend instead of the `offset` parameter. Therefore, some conversions needed to be done before querying.
+アプリケーション開発では、バックエンドプログラムは、 `offset`パラメーターではなく、フロントエンドから`page_number`パラメーター（要求されているページの数を意味します）と`page_size`パラメーター（ページあたりのレコード数を制御します）を受け取ります。したがって、クエリを実行する前に、いくつかの変換を行う必要がありました。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLException {
@@ -74,18 +74,18 @@ public List<Book> getLatestBooksPage(Long pageNumber, Long pageSize) throws SQLE
 </div>
 </SimpleTab>
 
-## Paging batches for single-field primary key tables
+## 単一フィールドの主キーテーブルのページングバッチ {#paging-batches-for-single-field-primary-key-tables}
 
-Usually, you can write a pagination SQL statement using a primary key or unique index to sort results and the `offset` keyword in the `LIMIT` clause to split pages by a specified row count. Then the pages are wrapped into independent transactions to achieve flexible paging updates. However, the disadvantage is also obvious. As the primary key or unique index needs to be sorted, a larger offset consumes more computing resources, especially in the case of a large volume of data.
+通常、主キーまたは一意のインデックスを使用してページ付けSQLステートメントを記述し、結果を並べ替え、 `LIMIT`句の`offset`キーワードを使用して、指定した行数でページを分割できます。次に、ページは独立したトランザクションにラップされ、柔軟なページング更新を実現します。ただし、欠点も明らかです。主キーまたは一意のインデックスを並べ替える必要があるため、特に大量のデータの場合、オフセットが大きいほど、より多くのコンピューティングリソースが消費されます。
 
-The following introduces a more efficient paging batching method:
+以下に、より効率的なページングバッチ処理方法を紹介します。
 
 <SimpleTab>
 <div label="SQL" href="offset-sql">
 
-First, sort the data by primary key and call the window function `row_number()` to generate a row number for each row. Then, call the aggregation function to group row numbers by the specified page size and calculate the minimum and maximum values of each page.
+まず、データを主キーで並べ替え、ウィンドウ関数`row_number()`を呼び出して、各行の行番号を生成します。次に、集計関数を呼び出して、指定されたページサイズで行番号をグループ化し、各ページの最小値と最大値を計算します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT
@@ -101,7 +101,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +----------+------------+------------+-----------+
@@ -118,11 +118,11 @@ The result is as follows:
 20 rows in set (0.01 sec)
 ```
 
-Next, use the `WHERE id BETWEEN start_key AND end_key` statement to query the data of each slice. To update data more efficiently, you can use the above slice information when modifying the data.
+次に、 `WHERE id BETWEEN start_key AND end_key`ステートメントを使用して、各スライスのデータを照会します。データをより効率的に更新するために、データを変更するときに上記のスライス情報を使用できます。
 
-To delete the basic information of all books on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
+1ページのすべての書籍の基本情報を削除するには、上記の結果の`start_key`と`end_key`を1ページの値に置き換えます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DELETE FROM books
@@ -134,9 +134,9 @@ ORDER BY id;
 </div>
 <div label="Java" href="offset-java">
 
-In Java, define a `PageMeta` class to store page meta information.
+Javaでは、ページのメタ情報を格納する`PageMeta`のクラスを定義します。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public class PageMeta<K> {
@@ -150,9 +150,9 @@ public class PageMeta<K> {
 }
 ```
 
-Define a `getPageMetaList()` method to get the page meta information list, and then define a `deleteBooksByPageMeta()` method to delete data in batches according to the page meta information.
+ページメタ情報リストを取得するための`getPageMetaList()`つのメソッドを定義してから、ページメタ情報に従ってバッチでデータを削除するための`deleteBooksByPageMeta()`のメソッドを定義します。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public class BookDAO {
@@ -196,9 +196,9 @@ public class BookDAO {
 }
 ```
 
-The following statement is to delete the data on page 1:
+次のステートメントは、1ページのデータを削除するためのものです。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 List<PageMeta<Long>> pageMetaList = bookDAO.getPageMetaList();
@@ -207,9 +207,9 @@ if (pageMetaList.size() > 0) {
 }
 ```
 
-The following statement is to delete all book data in batches by paging:
+次のステートメントは、ページングによってすべての書籍データをバッチで削除することです。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 List<PageMeta<Long>> pageMetaList = bookDAO.getPageMetaList();
@@ -225,21 +225,21 @@ pageMetaList.forEach((pageMeta) -> {
 </div>
 </SimpleTab>
 
-This method significantly improves the efficiency of batch processing by avoiding wasting computing resources caused by frequent data sorting operations.
+この方法は、頻繁なデータ並べ替え操作によって引き起こされるコンピューティングリソースの浪費を回避することにより、バッチ処理の効率を大幅に向上させます。
 
-## Paging batches for composite primary key tables
+## 複合主キーテーブルのページングバッチ {#paging-batches-for-composite-primary-key-tables}
 
-### Non-clustered index table
+### 非クラスター化インデックステーブル {#non-clustered-index-table}
 
-For non-clustered index tables (also known as "non-index-organized tables"), the internal field `_tidb_rowid` can be used as a pagination key, and the pagination method is the same as that of single-field primary key tables.
+非クラスタ化インデックステーブル（「非インデックス編成テーブル」とも呼ばれます）の場合、内部フィールド`_tidb_rowid`をページ付けキーとして使用でき、ページ付け方法は単一フィールドの主キーテーブルの場合と同じです。
 
-> **Tips:**
+> **チップ：**
 >
-> You can use the `SHOW CREATE TABLE users;` statement to check whether the table primary key uses [clustered index](/clustered-indexes.md).
+> `SHOW CREATE TABLE users;`ステートメントを使用して、テーブルの主キーが[クラスター化されたインデックス](/clustered-indexes.md)を使用しているかどうかを確認できます。
 
-For example:
+例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT
@@ -255,7 +255,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +----------+-----------+---------+-----------+
@@ -275,17 +275,17 @@ The result is as follows:
 10 rows in set (0.00 sec)
 ```
 
-### Clustered index table
+### クラスター化されたインデックステーブル {#clustered-index-table}
 
-For clustered index tables (also known as "index-organized tables"), you can use the `concat` function to concatenate values of multiple columns as a key, and then use a window function to query the paging information.
+クラスタ化インデックステーブル（「インデックス編成テーブル」とも呼ばれます）の場合、 `concat`関数を使用して複数の列の値をキーとして連結し、ウィンドウ関数を使用してページング情報をクエリできます。
 
-It should be noted that the key is a string at this time, and you must ensure that the length of the string is always the same, to obtain the correct `start_key` and `end_key` in the slice through the `min` and `max` aggregation function. If the length of the field for string concatenation is not fixed, you can use the `LPAD` function to pad it.
+この時点でキーは文字列であることに注意してください`min`と`max`の集計関数を使用してスライス内の正しい`start_key`と`end_key`を取得するには、文字列の長さが常に同じであることを確認する必要があります。文字列連結のフィールドの長さが固定されていない場合は、 `LPAD`関数を使用してそれを埋めることができます。
 
-For example, you can implement a paging batch for the data in the `ratings` table as follows:
+たとえば、次のように`ratings`テーブルのデータのページングバッチを実装できます。
 
-Create the meta information table by using the following statement. As the key concatenated by `book_id` and `user_id`, which are `bigint` types, is unable to convert to the same length, the `LPAD` function is used to pad the length with `0` according to the maximum bits 19 of `bigint`.
+次のステートメントを使用して、メタ情報テーブルを作成します。 `bigint`種類の`book_id`と`user_id`で連結されたキーは同じ長さに変換できないため、 `LPAD`関数を使用して、 `bigint`の最大ビット19に従って長さを`0`で埋めます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT
@@ -303,7 +303,7 @@ GROUP BY page_num
 ORDER BY page_num;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +----------+-------------------------------------------+-------------------------------------------+-----------+
@@ -321,9 +321,9 @@ The result is as follows:
 30 rows in set (0.28 sec)
 ```
 
-To delete all rating records on page 1, replace the `start_key` and `end_key` with values of page 1 in the above result:
+1ページのすべての評価レコードを削除するには、上記の結果の`start_key`と`end_key`を1ページの値に置き換えます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM ratings

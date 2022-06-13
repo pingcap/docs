@@ -2,44 +2,44 @@
 title: TiDB 2.0 RC5 Release Notes
 ---
 
-# TiDB 2.0 RC5 Release Notes
+# TiDB2.0RC5リリースノート {#tidb-2-0-rc5-release-notes}
 
-On April 17, 2018, TiDB 2.0 RC5 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018年4月17日、TiDB2.0RC5がリリースされました。このリリースでは、MySQLの互換性、SQLの最適化、および安定性が大幅に改善されています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Fix the issue about applying the `Top-N` pushdown rule
-- Fix the estimation of the number of rows for the columns that contain NULL values
-- Fix the zero value of the Binary type
-- Fix the `BatchGet` issue within a transaction
-- Clean up the written data while rolling back the `Add Index` operation, to reduce consumed space
-- Optimize the `insert on duplicate key update` statement to improve the performance by 10 times
-- Fix the issue about the type of the results returned by the `UNIX_TIMESTAMP` function
-- Fix the issue that the NULL value is inserted while adding NOT NULL columns
-- Support showing memory usage of the executing statements in the `Show Process List` statement
-- Fix the issue that `Alter Table Modify Column` reports an error in extreme conditions
-- Support setting the table comment using the `Alter` statement
+-   `Top-N`プッシュダウンルールの適用に関する問題を修正します
+-   NULL値を含む列の行数の見積もりを修正しました
+-   バイナリタイプのゼロ値を修正します
+-   トランザクション内の`BatchGet`の問題を修正します
+-   消費スペースを削減するために、 `Add Index`の操作をロールバックしながら書き込まれたデータをクリーンアップします
+-   `insert on duplicate key update`のステートメントを最適化して、パフォーマンスを10倍向上させます
+-   `UNIX_TIMESTAMP`関数によって返される結果のタイプに関する問題を修正します
+-   NOTNULL列の追加中にNULL値が挿入される問題を修正します
+-   `Show Process List`ステートメントで実行中のステートメントのメモリ使用量を表示するサポート
+-   `Alter Table Modify Column`が極端な条件でエラーを報告する問題を修正します
+-   `Alter`ステートメントを使用したテーブルコメントの設定をサポート
 
-## PD
+## PD {#pd}
 
-- Add support for Raft Learner
-- Optimize the Balance Region Scheduler to reduce scheduling overhead
-- Adjust the default value of `schedule-limit` configuration
-- Fix the issue of allocating ID frequently
-- Fix the compatibility issue when adding a new scheduler
+-   RaftLearnerのサポートを追加する
+-   バランス領域スケジューラを最適化して、スケジューリングのオーバーヘッドを削減します
+-   `schedule-limit`構成のデフォルト値を調整します
+-   IDを頻繁に割り当てる問題を修正します
+-   新しいスケジューラを追加するときの互換性の問題を修正します
 
-## TiKV
+## TiKV {#tikv}
 
-- Support the Region specified by `compact` in `tikv-ctl`
-- Support Batch Put, Batch Get, Batch Delete and Batch Scan in the RawKVClient
-- Fix the OOM issue caused by too many snapshots
-- Return more detailed error information in Coprocessor
-- Support dynamically modifying the `block-cache-size` in TiKV through `tikv-ctl`
-- Further improve `importer`
-- Simplify the `ImportSST::Upload` interface
-- Configure the `keepalive` property of gRPC
-- Split `tikv-importer` from TiKV as an independent binary
-- Provide statistics about the number of rows scanned by each `scan range` in Coprocessor
-- Fix the compilation issue on the macOS system
-- Fix the issue of misusing a RocksDB metric
-- Support the `overflow as warning` option in Coprocessor
+-   `tikv-ctl`の`compact`で指定された地域をサポートする
+-   RawKVClientでのバッチ書き込み、バッチ取得、バッチ削除、およびバッチスキャンのサポート
+-   スナップショットが多すぎるために発生するOOMの問題を修正します
+-   コプロセッサーでより詳細なエラー情報を返す
+-   TiKVの`block-cache-size`から`tikv-ctl`までの動的な変更をサポート
+-   さらに改善`importer`
+-   `ImportSST::Upload`のインターフェースを簡素化する
+-   gRPCの`keepalive`のプロパティを構成します
+-   独立したバイナリとしてTiKVから`tikv-importer`を分割
+-   コプロセッサーで各`scan range`によってスキャンされた行数に関する統計を提供します
+-   macOSシステムでのコンパイルの問題を修正します
+-   RocksDBメトリックの誤用の問題を修正します
+-   コプロセッサーで`overflow as warning`のオプションをサポートする

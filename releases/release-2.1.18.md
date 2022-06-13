@@ -2,74 +2,74 @@
 title: TiDB 2.1.18 Release Notes
 ---
 
-# TiDB 2.1.18 Release Notes
+# TiDB2.1.18リリースノート {#tidb-2-1-18-release-notes}
 
-Release date: November 4, 2019
+発売日：2019年11月4日
 
-TiDB version: 2.1.18
+TiDBバージョン：2.1.18
 
-TiDB Ansible version: 2.1.18
+TiDB Ansibleバージョン：2.1.18
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Fix the issue that invalid query ranges might appear when split by feedback [#12172](https://github.com/pingcap/tidb/pull/12172)
-    - Fix the issue that the privilege check is incorrect in point get plan [#12341](https://github.com/pingcap/tidb/pull/12341)
-    - Optimize execution performance of the `select ... limit ... offset …` statement by pushing the Limit operator down to the `IndexLookUpReader` execution logic [#12380](https://github.com/pingcap/tidb/pull/12380)
-    - Support using parameters in  `ORDER BY`, `GROUP BY` and `LIMIT OFFSET` [#12514](https://github.com/pingcap/tidb/pull/12514)
-    - Fix the issue that `IndexJoin` on the partition table returns incorrect results [#12713](https://github.com/pingcap/tidb/pull/12713)
-    - Fix the issue that the `str_to_date` function in TiDB returns a different result from MySQL when the date string and the format string do not match [#12757](https://github.com/pingcap/tidb/pull/12757)
-    - Fix the issue that outer join is incorrectly converted to inner join when the `cast` function is included in the query conditions [#12791](https://github.com/pingcap/tidb/pull/12791)
-    - Fix incorrect expression passing in the join condition of `AntiSemiJoin` [#12800](https://github.com/pingcap/tidb/pull/12800)
-+ SQL Engine
-    - Fix the incorrectly rounding of time (for example, `2019-09-11 11:17:47.999999666` should be rounded to `2019-09-11 11:17:48`) [#12259](https://github.com/pingcap/tidb/pull/12259)
-    - Fix the issue that the duration by `sql_type` for the `PREPARE` statement is not shown in the monitoring record [#12329](https://github.com/pingcap/tidb/pull/12329)
-    - Fix the panic issue when the `from_unixtime` function handles null [#12572](https://github.com/pingcap/tidb/pull/12572)
-    - Fix the compatibility issue that when an invalid value is inserted as the `YEAR` type, the result is `NULL` instead of `0000` [#12744](https://github.com/pingcap/tidb/pull/12744)
-    - Improve the behavior of the `AutoIncrement` column when it is implicitly allocated, to keep it consistent with the default mode of MySQL auto-increment locking (["consecutive" lock mode](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html)): for the implicit allocation of multiple `AutoIncrement` IDs in a single-line `Insert` statement, TiDB guarantees the continuity of the allocated values. This improvement ensures that the JDBC `getGeneratedKeys()` method will get the correct results in any scenario [#12619](https://github.com/pingcap/tidb/pull/12619)
-    - Fix the issue that the query is hanged when `HashAgg` serves as a child node of `Apply` [#12769](https://github.com/pingcap/tidb/pull/12769)
-    - Fix the issue that the `AND` and `OR` logical expressions return incorrect results when it comes to type conversion [#12813](https://github.com/pingcap/tidb/pull/12813)
-+ Server
-    - Fix the issue that the `SLEEP()` function is invalid for the `KILL TIDB QUERY` statements [#12159](https://github.com/pingcap/tidb/pull/12159)
-    - Fix the issue that no error is reported when `AUTO_INCREMENT` incorrectly allocates `MAX int64` and `MAX uint64` [#12210](https://github.com/pingcap/tidb/pull/12210)
-    - Fix the issue that the slow query logs are not recorded when the log level is `ERROR` [#12373](https://github.com/pingcap/tidb/pull/12373)
-    - Adjust the number of times that TiDB caches schema changes and corresponding changed table information from 100 to 1024, and support modification by using the `tidb_max_delta_schema_count` system variable [#12515](https://github.com/pingcap/tidb/pull/12515)
-    - Change the query start time from the point of "starting to execute" to “starting to compile” to make SQL statistics more accurate [#12638](https://github.com/pingcap/tidb/pull/12638)
-    - Add the record of `set session autocommit` in TiDB logs [#12568](https://github.com/pingcap/tidb/pull/12568)
-    - Record SQL query start time in `SessionVars`  to prevent it from being reset during plan execution [#12676](https://github.com/pingcap/tidb/pull/12676)
-    - Support `?` placeholder in  `ORDER BY`, `GROUP BY` and `LIMIT OFFSET` [#12514](https://github.com/pingcap/tidb/pull/12514)
-    - Add the `Prev_stmt` field in slow query logs to output the previous statement when the last statement is `COMMIT` [#12724](https://github.com/pingcap/tidb/pull/12724)
-    - Record the last statement before `COMMIT` into the log when the `COMMIT` fails in an explicitly committed transaction [#12747](https://github.com/pingcap/tidb/pull/12747)
-    - Optimize the saving method of the previous statement when the TiDB server executes a SQL statement to improve performance [#12751](https://github.com/pingcap/tidb/pull/12751)
-    - Fix the panic issue caused by `FLUSH PRIVILEGES` statements under the `skip-grant-table=true` configuration [#12816](https://github.com/pingcap/tidb/pull/12816)
-    - Increase the default minimum step of applying AutoID from `1000` to `30000` to avoid performance bottleneck when there are many write requests in a short time [#12891](https://github.com/pingcap/tidb/pull/12891)
-    - Fix the issue that the failed `Prepared` statement is not print in the error log when TiDB panics [#12954](https://github.com/pingcap/tidb/pull/12954)
-    - Fix the issue that the `COM_STMT_FETCH` time record in slow query logs is inconsistent with that in MySQL [#12953](https://github.com/pingcap/tidb/pull/12953)
-    - Add an error code in the error message for write conflicts to quickly locate the cause [#12878](https://github.com/pingcap/tidb/pull/12878)
-+ DDL
-    - Disallow dropping the `AUTO INCREMENT` attribute of a column by default. Modify the value of the `tidb_allow_remove_auto_inc` variable if you do need to drop this attribute. See [System Variables](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304) for more details. [#12146](https://github.com/pingcap/tidb/pull/12146)
-    - Support multiple `unique`s when creating a unique index in the `Create Table` statement [#12469](https://github.com/pingcap/tidb/pull/12469)
-    - Fix a compatibility issue that if the foreign key constraint in `CREATE TABLE` statement has no schema, schema of the created table should be used instead of returning a `No Database selected` error [#12678](https://github.com/pingcap/tidb/pull/12678)
-    - Fix the issue that the `invalid list index` error is reported when executing `ADMIN CANCEL DDL JOBS` [#12681](https://github.com/pingcap/tidb/pull/12681)
-+ Monitor
-    - Add types for backoff monitoring and supplement the backoff time that is not recorded before, such as the backoff time when committing [#12326](https://github.com/pingcap/tidb/pull/12326)
-    - Add a new metric to monitor `Add Index` operation progress [#12389](https://github.com/pingcap/tidb/pull/12389)
+-   SQLオプティマイザー
+    -   フィードバックによって分割されたときに無効なクエリ範囲が表示される可能性がある問題を修正します[＃12172](https://github.com/pingcap/tidb/pull/12172)
+    -   ポイント取得プラン[＃12341](https://github.com/pingcap/tidb/pull/12341)で特権チェックが正しくない問題を修正します
+    -   Limit演算子を`IndexLookUpReader`実行ロジック[＃12380](https://github.com/pingcap/tidb/pull/12380)にプッシュすることにより、 `select ... limit ... offset …`ステートメントの実行パフォーマンスを最適化します。
+    -   `ORDER BY` 、および`GROUP BY`での[＃12514](https://github.com/pingcap/tidb/pull/12514)の使用の`LIMIT OFFSET`
+    -   パーティションテーブルの`IndexJoin`が誤った結果を返す問題を修正します[＃12713](https://github.com/pingcap/tidb/pull/12713)
+    -   日付文字列とフォーマット文字列が[＃12757](https://github.com/pingcap/tidb/pull/12757)と一致しない場合、TiDBの`str_to_date`関数がMySQLとは異なる結果を返す問題を修正します。
+    -   `cast`関数がクエリ条件に含まれている場合に外部結合が誤って内部結合に変換される問題を修正します[＃12791](https://github.com/pingcap/tidb/pull/12791)
+    -   [＃12800](https://github.com/pingcap/tidb/pull/12800)の結合条件で渡される誤った`AntiSemiJoin`を修正しました
+-   SQLエンジン
+    -   時間の誤った丸めを修正します（たとえば、 `2019-09-11 11:17:47.999999666`を`2019-09-11 11:17:48`に丸める必要があります） [＃12259](https://github.com/pingcap/tidb/pull/12259)
+    -   `PREPARE`ステートメントの期間が`sql_type`だけ、監視レコード[＃12329](https://github.com/pingcap/tidb/pull/12329)に表示されない問題を修正します。
+    -   `from_unixtime`関数がnull3を処理するときのパニックの問題を修正し[＃12572](https://github.com/pingcap/tidb/pull/12572)
+    -   無効な値が`YEAR`タイプとして挿入された場合、結果が[＃12744](https://github.com/pingcap/tidb/pull/12744)ではなく`NULL`になるという互換性の問題を修正し`0000` 。
+    -   暗黙的に割り当てられたときの`AutoIncrement`列の動作を改善し、MySQL自動インクリメントロックのデフォルトモードとの一貫性を維持します（ [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）：単一行の`Insert`ステートメントで複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性。この改善により、 `getGeneratedKeys()`メソッドがどのシナリオでも正しい結果を得ることが保証されます[＃12619](https://github.com/pingcap/tidb/pull/12619)
+    -   `HashAgg`が[＃12769](https://github.com/pingcap/tidb/pull/12769)の子ノードとして機能するときにクエリがハングする問題を修正し`Apply`
+    -   型変換[＃12813](https://github.com/pingcap/tidb/pull/12813)に関して、 `AND`と`OR`の論理式が誤った結果を返す問題を修正します。
+-   サーバ
+    -   `SLEEP()`の関数が`KILL TIDB QUERY`のステートメントに対して無効であるという問題を修正します[＃12159](https://github.com/pingcap/tidb/pull/12159)
+    -   `AUTO_INCREMENT`が`MAX int64`と[＃12210](https://github.com/pingcap/tidb/pull/12210)を誤って割り当てたときにエラーが報告されない問題を修正し`MAX uint64` 。
+    -   ログレベルが`ERROR`の場合、低速クエリログが記録されない問題を修正し[＃12373](https://github.com/pingcap/tidb/pull/12373) 。
+    -   TiDBがスキーマの変更と対応する変更されたテーブル情報を100から1024にキャッシュする回数を調整し、 `tidb_max_delta_schema_count`のシステム変数[＃12515](https://github.com/pingcap/tidb/pull/12515)を使用して変更をサポートします。
+    -   SQL統計をより正確にするために、クエリの開始時刻を「実行の開始」から「コンパイルの開始」に変更します[＃12638](https://github.com/pingcap/tidb/pull/12638)
+    -   TiDBログ[＃12568](https://github.com/pingcap/tidb/pull/12568)に`set session autocommit`のレコードを追加します
+    -   SQLクエリの開始時刻を`SessionVars`に記録して、プランの実行中にリセットされないようにします[＃12676](https://github.com/pingcap/tidb/pull/12676)
+    -   `ORDER BY` 、および[＃12514](https://github.com/pingcap/tidb/pull/12514)で`?` `GROUP BY`プレースホルダーをサポートし`LIMIT OFFSET`
+    -   最後のステートメントが[＃12724](https://github.com/pingcap/tidb/pull/12724)の場合に前のステートメントを出力するには、低速クエリログに`Prev_stmt`フィールドを追加し`COMMIT`
+    -   明示的にコミットされたトランザクション[＃12747](https://github.com/pingcap/tidb/pull/12747)で`COMMIT`が失敗した場合、 `COMMIT`より前の最後のステートメントをログに記録します。
+    -   TiDBサーバーがSQLステートメントを実行するときに、前のステートメントの保存方法を最適化して、パフォーマンスを向上させます[＃12751](https://github.com/pingcap/tidb/pull/12751)
+    -   `skip-grant-table=true`の構成で`FLUSH PRIVILEGES`のステートメントによって引き起こされるパニックの問題を修正します[＃12816](https://github.com/pingcap/tidb/pull/12816)
+    -   AutoIDを適用するデフォルトの最小ステップを`1000`から`30000`に増やして、短時間に多数の書き込み要求がある場合のパフォーマンスのボトルネックを回避します[＃12891](https://github.com/pingcap/tidb/pull/12891)
+    -   TiDBがパニックになったときに失敗した`Prepared`ステートメントがエラーログに出力されない問題を修正します[＃12954](https://github.com/pingcap/tidb/pull/12954)
+    -   遅いクエリログの`COM_STMT_FETCH`回のレコードがMySQL3のレコードと矛盾する問題を修正し[＃12953](https://github.com/pingcap/tidb/pull/12953)
+    -   書き込みの競合のエラーメッセージにエラーコードを追加して、原因をすばやく特定します[＃12878](https://github.com/pingcap/tidb/pull/12878)
+-   DDL
+    -   デフォルトでは、列の`AUTO INCREMENT`属性の削除を禁止します。この属性を削除する必要がある場合は、 `tidb_allow_remove_auto_inc`変数の値を変更してください。詳細については、 [システム変数](/system-variables.md#tidb_allow_remove_auto_inc-new-in-v2118-and-v304)を参照してください。 [＃12146](https://github.com/pingcap/tidb/pull/12146)
+    -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートする[＃12469](https://github.com/pingcap/tidb/pull/12469)
+    -   `CREATE TABLE`ステートメントの外部キー制約にスキーマがない場合、 `No Database selected`エラー[＃12678](https://github.com/pingcap/tidb/pull/12678)を返す代わりに、作成されたテーブルのスキーマを使用する必要があるという互換性の問題を修正します。
+    -   [＃12681](https://github.com/pingcap/tidb/pull/12681)の実行時に`invalid list index`エラーが報告される問題を修正し`ADMIN CANCEL DDL JOBS`
+-   モニター
+    -   バックオフ監視のタイプを追加し、コミット時のバックオフ時間など、以前に記録されなかったバックオフ時間を補足します[＃12326](https://github.com/pingcap/tidb/pull/12326)
+    -   新しいメトリックを追加して、 `Add Index`の操作の進行状況を監視します[＃12389](https://github.com/pingcap/tidb/pull/12389)
 
-## PD
+## PD {#pd}
 
-- Improve the `--help` command output of pd-ctl [#1772](https://github.com/pingcap/pd/pull/1772)
+-   pd- [＃1772](https://github.com/pingcap/pd/pull/1772)の`--help`コマンド出力を改善
 
-## Tools
+## ツール {#tools}
 
-+ TiDB Binlog
-    - Fix the issue that `ALTER DATABASE` related DDL operations cause Drainer to exit abnormally [#770](https://github.com/pingcap/tidb-binlog/pull/770)
-    - Support querying the transaction status information for Commit binlog to improve replication efficiency [#761](https://github.com/pingcap/tidb-binlog/pull/761)
-    - Fix the issue that a Pump panic might occur when Drainer's `start_ts` is greater than Pump's largest `commit_ts` [#759](https://github.com/pingcap/tidb-binlog/pull/759)
+-   TiDB Binlog
+    -   `ALTER DATABASE`の関連するDDL操作によってDrainerが異常終了する問題を修正します[＃770](https://github.com/pingcap/tidb-binlog/pull/770)
+    -   レプリケーション効率を向上させるために、コミットbinlogのトランザクションステータス情報のクエリをサポートする[＃761](https://github.com/pingcap/tidb-binlog/pull/761)
+    -   [＃759](https://github.com/pingcap/tidb-binlog/pull/759)の`start_ts`がPumpの最大の35より大きい場合にPumpパニックが発生する可能性がある問題を修正し`commit_ts`
 
-## TiDB Ansible
+## TiDB Ansible {#tidb-ansible}
 
-- Add two monitoring items "queue size" and “query histogram” for TiDB Binlog [#952](https://github.com/pingcap/tidb-ansible/pull/952)
-- Update TiDB alerting rules [#961](https://github.com/pingcap/tidb-ansible/pull/961)
-- Check the configuration file before the deployment and upgrade [#973](https://github.com/pingcap/tidb-ansible/pull/973)
-- Add a new metric to monitor index speed in TiDB [#987](https://github.com/pingcap/tidb-ansible/pull/987)
-- Update TiDB Binlog monitoring dashboard to make it compatible with Grafana v4.6.3 [#993](https://github.com/pingcap/tidb-ansible/pull/993)
+-   TiDBBinlog1の[＃952](https://github.com/pingcap/tidb-ansible/pull/952)つの監視項目「キューサイズ」と「クエリヒストグラム」を追加します。
+-   TiDBアラートルールを更新する[＃961](https://github.com/pingcap/tidb-ansible/pull/961)
+-   展開とアップグレードの前に構成ファイルを確認してください[＃973](https://github.com/pingcap/tidb-ansible/pull/973)
+-   TiDB1のインデックス速度を監視するための新しいメトリックを追加し[＃987](https://github.com/pingcap/tidb-ansible/pull/987)
+-   TiDBBinlogモニタリングダッシュボードを更新して[＃993](https://github.com/pingcap/tidb-ansible/pull/993)と互換性を持たせる

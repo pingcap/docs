@@ -3,56 +3,56 @@ title: Deploy Data Migration Using DM Binary
 summary: Learn how to deploy a Data Migration cluster using DM binary.
 ---
 
-# Deploy Data Migration Using DM Binary
+# DMバイナリを使用したデータ移行のデプロイ {#deploy-data-migration-using-dm-binary}
 
-This document introduces how to quickly deploy the Data Migration (DM) cluster using DM binary.
+このドキュメントでは、DMバイナリを使用してデータ移行（DM）クラスタをすばやく展開する方法を紹介します。
 
-> **Note:**
+> **ノート：**
 >
-> In the production environment, it is recommended to [use TiUP to deploy a DM cluster](/dm/deploy-a-dm-cluster-using-tiup.md).
+> 実稼働環境では、 [TiUPを使用してDMクラスタをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)にすることをお勧めします。
 
-## Download DM binary
+## DMバイナリをダウンロード {#download-dm-binary}
 
-The DM binary is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+DMバイナリはTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
-## Sample scenario
+## サンプルシナリオ {#sample-scenario}
 
-Suppose that you deploy a DM cluster based on this sample scenario:
+このサンプルシナリオに基づいてDMクラスタを展開するとします。
 
-Two DM-worker nodes and three DM-master nodes are deployed on five servers.
+2つのDM-workerノードと3つのDM-masterノードが5つのサーバーにデプロイされます。
 
-Here is the address of each node:
+各ノードのアドレスは次のとおりです。
 
-| Instance | Server address | Port |
-| :---------- | :----------- | :-- |
+| 実例         | サーバーアドレス    | ポート  |
+| :--------- | :---------- | :--- |
 | DM-master1 | 192.168.0.4 | 8261 |
 | DM-master2 | 192.168.0.5 | 8261 |
 | DM-master3 | 192.168.0.6 | 8261 |
 | DM-worker1 | 192.168.0.7 | 8262 |
 | DM-worker2 | 192.168.0.8 | 8262 |
 
-Based on this scenario, the following sections describe how to deploy the DM cluster.
+このシナリオに基づいて、次のセクションでは、DMクラスタをデプロイする方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> - If you deploy multiple DM-master or DM-worker instances in a single server, the port and working directory of each instance must be unique.
+> -   複数のDM-masterまたはDM-workerインスタンスを単一のサーバーにデプロイする場合、各インスタンスのポートと作業ディレクトリは一意である必要があります。
 >
-> - If you do not need to ensure high availability of the DM cluster, deploy only one DM-master node, and the number of deployed DM-worker nodes must be no less than the number of upstream MySQL/MariaDB instances to be migrated.
+> -   DMクラスタの高可用性を確保する必要がない場合は、DM-masterノードを1つだけデプロイし、デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL/MariaDBインスタンスの数以上である必要があります。
 >
-> - To ensure high availability of the DM cluster, it is recommended to deploy three DM-master nodes, and the number of deployed DM-worker nodes must be greater than the number of upstream MySQL/MariaDB instances to be migrated (for example, the number of DM-worker nodes is two more than the number of upstream instances).
+> -   DMクラスタの高可用性を確保するには、3つのDM-masterノードをデプロイすることをお勧めします。デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL / MariaDBインスタンスの数（たとえば、 DMワーカーノードの数は、アップストリームインスタンスの数より2つ多くなります）。
 >
-> - Make sure that the ports among the following components are interconnected:
->     - The `8291` ports among the DM-master nodes are interconnected.
->     - Each DM-master node can connect to the `8262` ports of all DM-worker nodes.
->     - Each DM-worker node can connect to the `8261` port of all DM-master nodes.
+> -   次のコンポーネント間のポートが相互接続されていることを確認してください。
+>     -   DMマスターノード間の`8291`のポートは相互接続されています。
+>     -   各DMマスターノードは、すべてのDMワーカーノードの`8262`のポートに接続できます。
+>     -   各DM-workerノードは、すべてのDM-masterノードの`8261`のポートに接続できます。
 
-### Deploy DM-master
+### DMマスターをデプロイ {#deploy-dm-master}
 
-You can configure DM-master by using [command-line parameters](#dm-master-command-line-parameters) or [the configuration file](#dm-master-configuration-file).
+[コマンドラインパラメータ](#dm-master-command-line-parameters)または[構成ファイル](#dm-master-configuration-file)を使用してDMマスターを構成できます。
 
-#### DM-master command-line parameters
+#### DM-masterコマンドラインパラメーター {#dm-master-command-line-parameters}
 
-The following is the description of DM-master command-line parameters:
+以下は、DM-masterコマンドラインパラメーターの説明です。
 
 ```bash
 ./dm-master --help
@@ -87,57 +87,57 @@ Usage of dm-master:
         print sample config file of dm-worker
 ```
 
-> **Note:**
+> **ノート：**
 >
-> In some situations, you cannot use the above method to configure DM-master because some configurations are not exposed to the command line. In such cases, use the configuration file instead.
+> 一部の構成はコマンドラインに公開されていないため、状況によっては、上記の方法を使用してDMマスターを構成できない場合があります。このような場合は、代わりに構成ファイルを使用してください。
 
-#### DM-master configuration file
+#### DMマスター構成ファイル {#dm-master-configuration-file}
 
-The following is the configuration file of DM-master. It is recommended that you configure DM-master by using this method.
+以下はDM-masterの設定ファイルです。この方法を使用してDMマスターを構成することをお勧めします。
 
-1. Write the following configuration to `conf/dm-master1.toml`:
+1.  次の構成を`conf/dm-master1.toml`に書き込みます。
 
-      ```toml
-      # Master Configuration.
-      name = "master1"
+    ```toml
+    # Master Configuration.
+    name = "master1"
 
-      # Log configurations.
-      log-level = "info"
-      log-file = "dm-master.log"
+    # Log configurations.
+    log-level = "info"
+    log-file = "dm-master.log"
 
-      # The listening address of DM-master.
-      master-addr = "192.168.0.4:8261"
+    # The listening address of DM-master.
+    master-addr = "192.168.0.4:8261"
 
-      # The peer URLs of DM-master.
-      peer-urls = "192.168.0.4:8291"
+    # The peer URLs of DM-master.
+    peer-urls = "192.168.0.4:8291"
 
-      # The value of `initial-cluster` is the combination of the `advertise-peer-urls` value of all DM-master nodes in the initial cluster.
-      initial-cluster = "master1=http://192.168.0.4:8291,master2=http://192.168.0.5:8291,master3=http://192.168.0.6:8291"
-      ```
+    # The value of `initial-cluster` is the combination of the `advertise-peer-urls` value of all DM-master nodes in the initial cluster.
+    initial-cluster = "master1=http://192.168.0.4:8291,master2=http://192.168.0.5:8291,master3=http://192.168.0.6:8291"
+    ```
 
-2. Execute the following command in the terminal to run DM-master:
+2.  ターミナルで次のコマンドを実行して、DM-masterを実行します。
 
-      {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
-      ```bash
-      ./dm-master -config conf/dm-master1.toml
-      ```
+    ```bash
+    ./dm-master -config conf/dm-master1.toml
+    ```
 
-      > **Note:**
-      >
-      > The console does not output logs after this command is executed. If you want to view the runtime log, you can execute `tail -f dm-master.log`.
+    > **ノート：**
+    >
+    > このコマンドが実行された後、コンソールはログを出力しません。ランタイムログを表示したい場合は、 `tail -f dm-master.log`を実行できます。
 
-3. For DM-master2 and DM-master3, change `name` in the configuration file to `master2` and `master3` respectively, and change `peer-urls` to `192.168.0.5:8291` and `192.168.0.6:8291` respectively. Then repeat Step 2.
+3.  DM-master2とDM-master3の場合、構成ファイルの`name`をそれぞれ`master2`と`master3`に変更し、 `peer-urls`をそれぞれ`192.168.0.5:8291`と`192.168.0.6:8291`に変更します。次に、手順2を繰り返します。
 
-### Deploy DM-worker
+### DM-workerをデプロイ {#deploy-dm-worker}
 
-You can configure DM-worker by using [command-line parameters](#dm-worker-command-line-parameters) or [the configuration file](#dm-worker-configuration-file).
+[コマンドラインパラメータ](#dm-worker-command-line-parameters)または[構成ファイル](#dm-worker-configuration-file)を使用してDM-workerを構成できます。
 
-#### DM-worker command-line parameters
+#### DM-workerコマンドラインパラメーター {#dm-worker-command-line-parameters}
 
-The following is the description of the DM-worker command-line parameters:
+以下は、DM-workerコマンドラインパラメーターの説明です。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 ./dm-worker --help
@@ -166,39 +166,39 @@ Usage of worker:
         listen address for client traffic
 ```
 
-> **Note:**
+> **ノート：**
 >
-> In some situations, you cannot use the above method to configure DM-worker because some configurations are not exposed to the command line. In such cases, use the configuration file instead.
+> 一部の構成はコマンドラインに公開されていないため、状況によっては、上記の方法を使用してDM-workerを構成できない場合があります。このような場合は、代わりに構成ファイルを使用してください。
 
-#### DM-worker configuration file
+#### DM-worker構成ファイル {#dm-worker-configuration-file}
 
-The following is the DM-worker configuration file. It is recommended that you configure DM-worker by using this method.
+以下は、DM-worker構成ファイルです。この方法を使用してDM-workerを構成することをお勧めします。
 
-1. Write the following configuration to `conf/dm-worker1.toml`:
+1.  次の構成を`conf/dm-worker1.toml`に書き込みます。
 
-      ```toml
-      # Worker Configuration.
-      name = "worker1"
+    ```toml
+    # Worker Configuration.
+    name = "worker1"
 
-      # Log configuration.
-      log-level = "info"
-      log-file = "dm-worker.log"
+    # Log configuration.
+    log-level = "info"
+    log-file = "dm-worker.log"
 
-      # DM-worker address.
-      worker-addr = ":8262"
+    # DM-worker address.
+    worker-addr = ":8262"
 
-      # The master-addr configuration of the DM-master nodes in the cluster.
-      join = "192.168.0.4:8261,192.168.0.5:8261,192.168.0.6:8261"
-      ```
+    # The master-addr configuration of the DM-master nodes in the cluster.
+    join = "192.168.0.4:8261,192.168.0.5:8261,192.168.0.6:8261"
+    ```
 
-2. Execute the following command in the terminal to run DM-worker:
+2.  ターミナルで次のコマンドを実行して、DM-workerを実行します。
 
-      {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
-      ```bash
-      ./dm-worker -config conf/dm-worker1.toml
-      ```
+    ```bash
+    ./dm-worker -config conf/dm-worker1.toml
+    ```
 
-3. For DM-worker2, change `name` in the configuration file to `worker2`. Then repeat Step 2.
+3.  DM-worker2の場合、構成ファイルの`name`を`worker2`に変更します。次に、手順2を繰り返します。
 
-Now, a DM cluster is successfully deployed.
+これで、DMクラスタが正常にデプロイされました。

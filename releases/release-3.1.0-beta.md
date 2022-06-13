@@ -2,26 +2,26 @@
 title: TiDB 3.1 Beta Release Notes
 ---
 
-# TiDB 3.1 Beta Release Notes
+# TiDB3.1ベータリリースノート {#tidb-3-1-beta-release-notes}
 
-Release date: December 20, 2019
+発売日：2019年12月20日
 
-TiDB version: 3.1.0-beta
+TiDBバージョン：3.1.0-ベータ版
 
-TiDB Ansible version: 3.1.0-beta
+TiDB Ansibleバージョン：3.1.0-ベータ版
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Enrich SQL hints [#12192](https://github.com/pingcap/tidb/pull/12192)
-+ New feature
-    - Support the Follower Read feature [#12535](https://github.com/pingcap/tidb/pull/12535)
+-   SQLオプティマイザー
+    -   SQLヒントを強化する[＃12192](https://github.com/pingcap/tidb/pull/12192)
+-   新機能
+    -   フォロワー読み取り機能をサポートする[＃12535](https://github.com/pingcap/tidb/pull/12535)
 
-## TiKV
+## TiKV {#tikv}
 
-- Support the distributed backup and restore feature [#5532](https://github.com/tikv/tikv/pull/5532)
-- Support the Follower Read feature [#5562](https://github.com/tikv/tikv/pull/5562)
+-   分散バックアップおよび復元機能のサポート[＃5532](https://github.com/tikv/tikv/pull/5532)
+-   フォロワー読み取り機能をサポートする[＃5562](https://github.com/tikv/tikv/pull/5562)
 
-## PD
+## PD {#pd}
 
-- Support the distributed backup and restore feature [#1896](https://github.com/pingcap/pd/pull/1896)
+-   分散バックアップおよび復元機能のサポート[＃1896](https://github.com/pingcap/pd/pull/1896)

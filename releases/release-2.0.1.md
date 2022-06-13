@@ -2,47 +2,47 @@
 title: TiDB 2.0.1 Release Notes
 ---
 
-# TiDB 2.0.1 Release Notes
+# TiDB2.0.1リリースノート {#tidb-2-0-1-release-notes}
 
-On May 16, 2018, TiDB 2.0.1 is released. Compared with TiDB 2.0.0 (GA), this release has great improvement in MySQL compatibility and system stability.
+2018年5月16日、TiDB2.0.1がリリースされました。 TiDB 2.0.0（GA）と比較して、このリリースではMySQLの互換性とシステムの安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Update the progress of `Add Index` to the DDL job information in real time
-- Add the `tidb_auto_analyze_ratio` session variable to control the threshold value of automatic statistics update
-- Fix an issue that not all residual states are cleaned up when the transaction commit fails
-- Fix a bug about adding indexes in some conditions
-- Fix the correctness related issue when DDL modifies surface operations in some concurrent scenarios
-- Fix a bug that the result of `LIMIT` is incorrect in some conditions
-- Fix a capitalization issue of the `ADMIN CHECK INDEX` statement to make its index name case insensitive
-- Fix a compatibility issue of the `UNION` statement
-- Fix a compatibility issue when inserting data of `TIME` type
-- Fix a goroutine leak issue caused by `copIteratorTaskSender` in some conditions
-- Add an option for TiDB to control the behaviour of Binlog failure
-- Refactor the `Coprocessor` slow log to distinguish between the scenario of tasks with long processing time and long waiting time
-- Log nothing when meeting MySQL protocol handshake error, to avoid too many logs caused by the load balancer Keep Alive mechanism
-- Refine the “Out of range value for column” error message
-- Fix a bug when there is a subquery in an `Update` statement
-- Change the behaviour of handling `SIGTERM`, and do not wait for all queries to terminate anymore
+-   `Add Index`の進行状況をDDLジョブ情報にリアルタイムで更新します
+-   `tidb_auto_analyze_ratio`セッション変数を追加して、自動統計更新のしきい値を制御します
+-   トランザクションのコミットが失敗したときにすべての残りの状態がクリーンアップされないという問題を修正します
+-   一部の条件でのインデックスの追加に関するバグを修正
+-   一部の同時シナリオでDDLがサーフェス操作を変更する場合の正確性に関連する問題を修正します
+-   一部の条件で`LIMIT`の結果が正しくないバグを修正します
+-   `ADMIN CHECK INDEX`ステートメントの大文字と小文字の問題を修正して、インデックス名の大文字と小文字を区別しないようにします
+-   `UNION`ステートメントの互換性の問題を修正します
+-   `TIME`種類のデータを挿入する際の互換性の問題を修正
+-   いくつかの条件で`copIteratorTaskSender`によって引き起こされるゴルーチンリークの問題を修正します
+-   Binlog障害の動作を制御するためのTiDBのオプションを追加します
+-   `Coprocessor`の遅いログをリファクタリングして、処理時間が長いタスクと待機時間が長いタスクのシナリオを区別します。
+-   ロードバランサーのキープアライブメカニズムによって引き起こされるログが多すぎるのを避けるために、MySQLプロトコルハンドシェイクエラーに遭遇したときに何もログに記録しません
+-   「列の範囲外の値」エラーメッセージを調整する
+-   `Update`ステートメントにサブクエリがある場合のバグを修正します
+-   `SIGTERM`の処理の動作を変更し、すべてのクエリが終了するのを待たないでください
 
-## PD
+## PD {#pd}
 
-- Add the `Scatter Range` scheduler to balance Regions with the specified key range
-- Optimize the scheduling of Merge Region to prevent the newly split Region from being merged
-- Add Learner related metrics
-- Fix the issue that the scheduler is mistakenly deleted after restart
-- Fix the error that occurs when parsing the configuration file
-- Fix the issue that the etcd leader and the PD leader are not replicated
-- Fix the issue that Learner still appears after it is closed
-- Fix the issue that Regions fail to load because the packet size is too large
+-   `Scatter Range`のスケジューラーを追加して、指定されたキー範囲を持つリージョンのバランスを取ります
+-   新しく分割されたリージョンがマージされないように、マージリージョンのスケジュールを最適化します
+-   学習者関連の指標を追加する
+-   再起動後にスケジューラが誤って削除される問題を修正します
+-   構成ファイルの解析時に発生するエラーを修正します
+-   etcdリーダーとPDリーダーが複製されない問題を修正します
+-   学習者が閉じた後も表示される問題を修正します
+-   パケットサイズが大きすぎるためにリージョンがロードされない問題を修正します
 
-## TiKV
+## TiKV {#tikv}
 
-- Fix the issue that `SELECT FOR UPDATE` prevents others from reading
-- Optimize the slow query log
-- Reduce the number of `thread_yield` calls
-- Fix the bug that raftstore is accidentally blocked when generating the snapshot
-- Fix the issue that Learner cannot be successfully elected in special conditions
-- Fix the issue that split might cause dirty read in extreme conditions
-- Correct the default value of the read thread pool configuration
-- Speed up Delete Range
+-   `SELECT FOR UPDATE`が他の人が読むのを妨げる問題を修正します
+-   遅いクエリログを最適化する
+-   `thread_yield`の通話回数を減らす
+-   スナップショットの生成時にraftstoreが誤ってブロックされるバグを修正します
+-   特別な条件で学習者を正常に選出できない問題を修正します
+-   分割によって極端な条件でダーティリードが発生する可能性がある問題を修正します
+-   読み取りスレッドプール構成のデフォルト値を修正します
+-   削除範囲の高速化

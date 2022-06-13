@@ -2,63 +2,63 @@
 title: tiup mirror modify
 ---
 
-# tiup mirror modify
+# tiup mirror modify {#tiup-mirror-modify}
 
-The `tiup mirror modify` command is used to modify published components. Only valid component owners can modify the components that they have published on their own. For the method to publish a component, refer to the [`publish` command](/tiup/tiup-command-mirror-publish.md).
+`tiup mirror modify`コマンドは、公開されたコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、自分で公開したコンポーネントを変更できます。コンポーネントを公開する方法については、 [`publish`コマンド](/tiup/tiup-command-mirror-publish.md)を参照してください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror modify <component>[:version] [flags]
 ```
 
-Each parameter is explained as follows:
+各パラメータは次のように説明されます。
 
-- `<component>`: the component name
-- `[version]`: the component version to modify. If it is not specified, the entire component is modified.
+-   `<component>` ：コンポーネント名
+-   `[version]` ：変更するコンポーネントのバージョン。指定しない場合、コンポーネント全体が変更されます。
 
-## Options
+## オプション {#options}
 
-### -k, --key
+### -k、-key {#k-key}
 
-- Specifies the component owner's private key used for signing the component information (`{component}.json`).
-- Data type: `STRING`
-- If this option is not specified in the command, `"${TIUP_HOME}/keys/private.json"` is used by default to sign the component information.
+-   コンポーネント情報の署名に使用されるコンポーネント所有者の秘密鍵を指定します（ `{component}.json` ）。
+-   データ型： `STRING`
+-   このオプションがコマンドで指定されていない場合、コンポーネント情報に署名するためにデフォルトで`"${TIUP_HOME}/keys/private.json"`が使用されます。
 
-### --yank
+### - ヤンク {#yank}
 
-Marks a specified component or version as unavailable.
+指定されたコンポーネントまたはバージョンを使用不可としてマークします。
 
-- After the component is marked as unavailable, you can neither see it in the result list of `tiup list` nor install the new version of the component.
-- After a component version is marked as unavailable, you can neither see it in the result list of `tiup list <component>` nor install this version.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   コンポーネントが使用不可としてマークされた後は、結果リスト`tiup list`に表示されたり、新しいバージョンのコンポーネントをインストールしたりすることはできません。
+-   コンポーネントバージョンが使用不可としてマークされた後は、結果リスト`tiup list <component>`に表示されたり、このバージョンをインストールしたりすることはできません。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-### --hide
+### - 隠れる {#hide}
 
-- Specifies whether to hide the component. If a component is hidden, you cannot see it in the result list of `tiup list`. To see the hidden component, you can use `tiup list --all`.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   コンポーネントを非表示にするかどうかを指定します。コンポーネントが非表示になっている場合、 `tiup list`の結果リストには表示されません。非表示のコンポーネントを表示するには、 `tiup list --all`を使用できます。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-> **Note:**
+> **ノート：**
 >
-> This option can only be applied to the component, not to the component version.
+> このオプションはコンポーネントにのみ適用でき、コンポーネントのバージョンには適用できません。
 
-### --standalone
+### -スタンドアロン {#standalone}
 
-- Controls whether the component can run standalone. This option is currently **NOT available**.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   コンポーネントをスタンドアロンで実行できるかどうかを制御します。このオプションは現在**利用できません**。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-> **Note:**
+> **ノート：**
 >
-> This option can only be applied to the component, not to the component version.
+> このオプションはコンポーネントにのみ適用でき、コンポーネントのバージョンには適用できません。
 
-## Outputs
+## 出力 {#outputs}
 
-- If the command is executed successfully, there is no output.
-- If the component owner is not authorized to modify the target component:
-    - If the mirror is a remote mirror, TiUP reports the error `Error: The server refused, make sure you have access to this component`.
-    - If the mirror is a local mirror, TiUP reports the error `Error: the signature is not correct`.
+-   コマンドが正常に実行された場合、出力はありません。
+-   コンポーネントの所有者がターゲットコンポーネントを変更する権限を持っていない場合：
+    -   ミラーがリモートミラーの場合、TiUPはエラー`Error: The server refused, make sure you have access to this component`を報告します。
+    -   ミラーがローカルミラーの場合、TiUPはエラー`Error: the signature is not correct`を報告します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

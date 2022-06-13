@@ -5,36 +5,36 @@ summary: This document describes how to query data from a single table in a data
 
 <!-- markdownlint-disable MD029 -->
 
-# Query data from a single table
+# 単一のテーブルからデータをクエリする {#query-data-from-a-single-table}
 
-This document describes how to use SQL and various programming languages to query data from a single table in a database.
+このドキュメントでは、SQLおよびさまざまなプログラミング言語を使用して、データベース内の単一のテーブルからデータをクエリする方法について説明します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-The following content will take the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application as an example to show how to query data from a single table in TiDB.
+次のコンテンツでは、TiDBの単一のテーブルからデータをクエリする方法を示す例として[書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを取り上げます。
 
-Before querying data, make sure that you have completed the following steps:
+データをクエリする前に、次の手順を完了していることを確認してください。
 
-1. Build a TiDB cluster (using [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md) or [TiUP](/production-deployment-using-tiup.md) is recommended).
-2. [Import table schema and sample data of the Bookshop application](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data).
-3. [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md).
+1.  TiDBクラスタを構築します（ [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)を使用することをお勧めします）。
+2.  [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) 。
+3.  [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md) 。
 
-## Execute a simple query
+## 簡単なクエリを実行する {#execute-a-simple-query}
 
-In the database of the Bookshop application, the `authors` table stores the basic information of authors. You can use the `SELECT ... FROM ...` statement to query data from the database.
+Bookshopアプリケーションのデータベースでは、 `authors`テーブルに著者の基本情報が格納されています。 `SELECT ... FROM ...`ステートメントを使用して、データベースからデータを照会できます。
 
 <SimpleTab>
 <div label="SQL" href="simple-sql">
 
-Execute the following SQL statement in a MySQL client:
+MySQLクライアントで次のSQLステートメントを実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT id, name FROM authors;
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```
 +------------+--------------------------+
@@ -58,15 +58,15 @@ The output is as follows:
 </div>
 <div label="Java" href="simple-java">
 
-In Java, authors' basic information can be stored by declaring a class `Author`. You should choose appropriate Java data types according to the [type](/data-type-overview.md) and [value range](/data-type-numeric.md) in the database. For example:
+Javaでは、クラス`Author`を宣言することにより、作成者の基本情報を格納できます。データベースの[タイプ](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に応じて適切なJavaデータ型を選択する必要があります。例えば：
 
-- Use a variable of type `Int` to store data of type `int`.
-- Use a variable of type `Long` to store data of type `bigint`.
-- Use a variable of type `Short` to store data of type `tinyint`.
-- Use a variable of type `String` to store data of type `varchar`.
-- ...
+-   タイプ`Int`の変数を使用して、タイプ`int`のデータを格納します。
+-   タイプ`Long`の変数を使用して、タイプ`bigint`のデータを格納します。
+-   タイプ`Short`の変数を使用して、タイプ`tinyint`のデータを格納します。
+-   タイプ`String`の変数を使用して、タイプ`varchar`のデータを格納します。
+-   ..。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public class Author {
@@ -82,7 +82,7 @@ public class Author {
 }
 ```
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public class AuthorDAO {
@@ -107,25 +107,25 @@ public class AuthorDAO {
 }
 ```
 
-- After [connecting to TiDB using the JDBC driver](/develop/dev-guide-connect-to-tidb.md#jdbc), you can create a `Statement` object with `conn.createStatus()`.
-- Then call `stmt.executeQuery("query_sql")` to initiate a database query request to TiDB.
-- The query results will be stored in a `ResultSet` object. By traversing `ResultSet`, the returned results can be mapped to the `Author` object.
+-   [JDBCドライバーを使用したTiDBへの接続](/develop/dev-guide-connect-to-tidb.md#jdbc)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
+-   次に、 `stmt.executeQuery("query_sql")`を呼び出して、TiDBへのデータベースクエリ要求を開始します。
+-   クエリ結果は`ResultSet`のオブジェクトに保存されます。 `ResultSet`をトラバースすることにより、返された結果を`Author`オブジェクトにマップできます。
 
 </div>
 </SimpleTab>
 
-## Filter results
+## 結果をフィルタリングする {#filter-results}
 
-You can use the `WHERE` statement to filter query results.
+`WHERE`ステートメントを使用して、クエリ結果をフィルタリングできます。
 
-For example, the following command will query authors who were born in 1998 among all authors:
+たとえば、次のコマンドは、すべての作成者の中で1998年に生まれた作成者を照会します。
 
 <SimpleTab>
 <div label="SQL" href="filter-sql">
 
-Add filter conditions in the `WHERE` statement:
+`WHERE`ステートメントにフィルター条件を追加します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -134,13 +134,13 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" href="filter-java">
 
-In Java, you can use the same SQL to handle data query requests with dynamic parameters.
+Javaでは、同じSQLを使用して、動的パラメーターを使用したデータ照会要求を処理できます。
 
-This can be done by concatenating parameters into a SQL statement. However, this method will pose a potential [SQL Injection](https://en.wikipedia.org/wiki/SQL_injection) risk to the security of the application.
+これは、パラメーターをSQLステートメントに連結することで実行できます。ただし、この方法は、アプリケーションのセキュリティに潜在的な[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)のリスクをもたらします。
 
-To deal with such queries, use a [prepared statement](/develop/dev-guide-prepared-statement.md) instead of a normal statement.
+このようなクエリを処理するには、通常のステートメントの代わりに[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
@@ -165,13 +165,13 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 </div>
 </SimpleTab>
 
-## Sort results
+## 結果を並べ替える {#sort-results}
 
-With the `ORDER BY` statement, you can sort query results.
+`ORDER BY`ステートメントを使用すると、クエリ結果を並べ替えることができます。
 
-For example, the following SQL statement is to get a list of the youngest authors by sorting the `authors` table in descending order (`DESC`) according to the `birth_year` column.
+たとえば、次のSQLステートメントは、 `authors`のテーブルを`birth_year`列に従って降順（ `DESC` ）に並べ替えることにより、最年少の作成者のリストを取得します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT id, name, birth_year
@@ -179,7 +179,7 @@ FROM authors
 ORDER BY birth_year DESC;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +-----------+------------------------+------------+
@@ -199,11 +199,11 @@ The result is as follows:
 300000 rows in set (0.23 sec)
 ```
 
-## Limit the number of query results
+## クエリ結果の数を制限する {#limit-the-number-of-query-results}
 
-You can use the `LIMIT` statement to limit the number of query results.
+`LIMIT`ステートメントを使用して、クエリ結果の数を制限できます。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT id, name, birth_year
@@ -212,7 +212,7 @@ ORDER BY birth_year DESC
 LIMIT 10;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +-----------+------------------------+------------+
@@ -232,15 +232,15 @@ The result is as follows:
 10 rows in set (0.11 sec)
 ```
 
-With the `LIMIT` statement, the query time is significantly reduced from `0.23 sec` to `0.11 sec` in this example. For more information, see [TopN and Limit](/topn-limit-push-down.md).
+`LIMIT`ステートメントを使用すると、この例ではクエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)を参照してください。
 
-## Aggregate queries
+## クエリの集計 {#aggregate-queries}
 
-To have a better understanding of the overall data situation, you can use the `GROUP BY` statement to aggregate query results.
+データ全体の状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-For example, if you want to know which years there are more authors born, you can group the `authors` table by the `birth_year` column, and then count for each year:
+たとえば、著者がさらに生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`の列でグループ化し、各年を数えることができます。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT birth_year, COUNT (DISTINCT id) AS author_count
@@ -249,7 +249,7 @@ GROUP BY birth_year
 ORDER BY author_count DESC;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +------------+--------------+
@@ -270,4 +270,4 @@ The result is as follows:
 71 rows in set (0.00 sec)
 ```
 
-In addition to the `COUNT` function, TiDB also supports other aggregate functions. For more information, see [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md).
+`COUNT`の関数に加えて、TiDBは他の集約関数もサポートします。詳細については、 [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。

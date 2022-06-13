@@ -3,25 +3,25 @@ title: Decorrelation of Correlated Subquery
 summary: Understand how to decorrelate correlated subqueries.
 ---
 
-# Decorrelation of Correlated Subquery
+# 相関サブクエリの無相関化 {#decorrelation-of-correlated-subquery}
 
-[Subquery related optimizations](/subquery-optimization.md) describes how TiDB handles subqueries when there are no correlated columns. Because decorrelation of correlated subquery is complex, this article introduces some simple scenarios and the scope to which the optimization rule applies.
+[サブクエリ関連の最適化](/subquery-optimization.md)は、相関列がない場合にTiDBがサブクエリを処理する方法を示します。相関サブクエリの無相関化は複雑であるため、この記事では、いくつかの簡単なシナリオと、最適化ルールが適用される範囲を紹介します。
 
-## Introduction
+## 序章 {#introduction}
 
-Take `select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` as an example. The subquery `t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)` here refers to the correlated column in the query condition `t2.b=t1.b`, this condition happens to be an equivalent condition, so the query can be rewritten as `select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`. In this way, a correlated subquery is rewritten into `JOIN`.
+例として`select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)`を取り上げます。ここでのサブクエリ`t1.a < (select sum(t2.a) from t2 where t2.b = t1.b)`は、クエリ条件`t2.b=t1.b`の相関列を参照します。この条件はたまたま同等の条件であるため、クエリを`select t1.* from t1, (select b, sum(a) sum_a from t2 group by b) t2 where t1.b = t2.b and t1.a < t2.sum_a;`として書き換えることができます。このようにして、相関サブクエリは`JOIN`に書き換えられます。
 
-The reason why TiDB needs to do this rewriting is that the correlated subquery is bound to its external query result every time the subquery is executed. In the above example, if `t1.a` has 10 million values, this subquery would repeat 10 million times, because the condition `t2.b=t1.b` varies with the value of `t1.a`. When the correlation is lifted somehow, this subquery would execute only once.
+TiDBがこの書き換えを行う必要がある理由は、サブクエリが実行されるたびに、相関サブクエリが外部クエリ結果にバインドされるためです。上記の例では、 `t1.a`に1,000万の値がある場合、条件`t2.b=t1.b`は`t1.a`の値によって変化するため、このサブクエリは1,000万回繰り返されます。何らかの形で相関関係が解除されると、このサブクエリは1回だけ実行されます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-The disadvantage of this rewriting is that when the correlation is not lifted, the optimizer can use the index on the correlated column. That is, although this subquery may repeat many times, the index can be used to filter data each time. After using the rewriting rule, the position of the correlated column usually changes. Although the subquery is only executed once, the single execution time would be longer than that without decorrelation.
+この書き換えの欠点は、相関が解除されていない場合、オプティマイザーが相関列のインデックスを使用できることです。つまり、このサブクエリは何度も繰り返される可能性がありますが、インデックスを使用して毎回データをフィルタリングできます。書き換えルールを使用すると、通常、相関列の位置が変わります。サブクエリは1回だけ実行されますが、1回の実行時間は、非相関がない場合よりも長くなります。
 
-Therefore, when there are few external values, do not perform decorrelation, because it may bring better execution performance. At present, this optimization can be disabled by setting `subquery decorrelation` optimization rules in [blocklist of optimization rules and expression pushdown](/blocklist-control-plan.md).
+したがって、外部値が少ない場合は、実行パフォーマンスが向上する可能性があるため、非相関化を実行しないでください。現在、この最適化は[最適化ルールと式のプッシュダウンのブロックリスト](/blocklist-control-plan.md)に`subquery decorrelation`の最適化ルールを設定することで無効にできます。
 
-## Example
+## 例 {#example}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t1(a int, b int);
@@ -46,11 +46,11 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 
 ```
 
-The above is an example where the optimization takes effect. `HashJoin_11` is a normal `inner join`.
+上記は、最適化が有効になる例です。 `HashJoin_11`は通常の`inner join`です。
 
-Then, turn off the subquery decorrelation rules:
+次に、サブクエリの非相関ルールをオフにします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 insert into mysql.opt_rule_blacklist values("decorrelate");
@@ -75,4 +75,4 @@ explain select * from t1 where t1.a < (select sum(t2.a) from t2 where t2.b = t1.
 +----------------------------------------+----------+-----------+------------------------+------------------------------------------------------------------------------+
 ```
 
-After disabling the subquery decorrelation rule, you can see `range: decided by [eq(test.t2.b, test.t1.b)]` in `operator info` of `IndexRangeScan_25(Build)`. It means that the decorrelation of correlated subquery is not performed and TiDB uses the index range query.
+サブクエリの非相関ルールを無効にすると、 `IndexRangeScan_25(Build)` `operator info` `range: decided by [eq(test.t2.b, test.t1.b)]`表示されます。これは、相関サブクエリの非相関化が実行されず、TiDBがインデックス範囲クエリを使用することを意味します。

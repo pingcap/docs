@@ -3,11 +3,11 @@ title: SLOW_QUERY
 summary: Learn the `SLOW_QUERY` information_schema table.
 ---
 
-# SLOW_QUERY
+# SLOW_QUERY {#slow-query}
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB slow log file. The column names in the table are corresponding to the field names in the slow log. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
+`SLOW_QUERY`テーブルは、現在のノードの低速クエリ情報を提供します。これは、TiDB低速ログファイルの解析結果です。表の列名は、低速ログのフィールド名に対応しています。このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [遅いクエリログドキュメント](/identify-slow-queries.md)を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -76,11 +76,11 @@ DESC slow_query;
 54 rows in set (0.00 sec)
 ```
 
-## CLUSTER_SLOW_QUERY table
+## CLUSTER_SLOW_QUERYテーブル {#cluster-slow-query-table}
 
-The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes in the cluster, which is the parsing result of the TiDB slow log files. You can use the `CLUSTER_SLOW_QUERY` table the way you do with `SLOW_QUERY`. The table schema of the `CLUSTER_SLOW_QUERY` table differs from that of the `SLOW_QUERY` table in that an `INSTANCE` column is added to `CLUSTER_SLOW_QUERY`. The `INSTANCE` column represents the TiDB node address of the row information on the slow query. For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
+`CLUSTER_SLOW_QUERY`テーブルは、クラスタのすべてのノードの低速クエリ情報を提供します。これは、TiDB低速ログファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`の場合と同じように使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で`SLOW_QUERY`テーブルのテーブルスキーマとは異なります。 `INSTANCE`列は、低速クエリの行情報のTiDBノードアドレスを表します。このテーブルを使用して問題のあるステートメントを特定し、クエリのパフォーマンスを向上させる方法については、 [遅いクエリログドキュメント](/identify-slow-queries.md)を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 desc cluster_slow_query;
@@ -149,9 +149,9 @@ desc cluster_slow_query;
 55 rows in set (0.00 sec)
 ```
 
-When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
+クラスタシステムテーブルが照会されると、TiDBはすべてのノードからデータを取得するのではなく、関連する計算を他のノードにプッシュダウンします。実行計画は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 desc SELECT count(*) FROM cluster_slow_query WHERE user = 'u1';
@@ -169,11 +169,11 @@ desc SELECT count(*) FROM cluster_slow_query WHERE user = 'u1';
 +--------------------------+----------+-----------+--------------------------+------------------------------------------------------+
 ```
 
-In the above execution plan, the `user = u1` condition is pushed down to other (`cop`) TiDB nodes, and the aggregate operator is also pushed down (the `StreamAgg` operator in the graph).
+上記の実行プランでは、 `user = u1`の条件が他の（ `cop` ）TiDBノードにプッシュダウンされ、集計演算子もプッシュダウンされます（グラフの`StreamAgg`の演算子）。
 
-Currently, because statistics of the system tables are not collected, sometimes some aggregation operators cannot be pushed down, which results in slow execution. In this case, you can manually specify the SQL HINT to push down the aggregation operators. For example:
+現在、システムテーブルの統計が収集されていないため、一部の集計演算子をプッシュダウンできず、実行が遅くなることがあります。この場合、SQL HINTを手動で指定して、集計演算子をプッシュダウンできます。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT /*+ AGG_TO_COP() */ count(*) FROM cluster_slow_query GROUP BY user;

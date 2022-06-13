@@ -2,61 +2,61 @@
 title: tiup dm import
 ---
 
-# tiup dm import
+# tiup dm import {#tiup-dm-import}
 
-In DM v1.0, the cluster is basically deployed using TiDB Ansible. TiUP DM provides the `import` command to import v1.0 clusters and redeploy the clusters in DM v2.0.
+DM v1.0では、クラスタは基本的にTiDBAnsibleを使用してデプロイされます。 TiUP DMは、v1.0クラスターをインポートし、DMv2.0でクラスターを再デプロイするための`import`のコマンドを提供します。
 
-> **Note:**
+> **ノート：**
 >
-> - The command does not support importing DM Portal components from DM v1.0 clusters.
-> - Before importing the cluster, stop running the original cluster first.
-> - For data migration tasks that need to be upgraded to v2.0, do not execute `stop-task` on these tasks.
-> - The command only supports importing to DM v2.0.0-rc.2 and later versions.
-> - The `import` command is used to import a DM v1.0 cluster to a new DM v2.0 cluster. If you need to import data migration tasks to an existing v2.0 cluster, refer to [Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+](/dm/manually-upgrade-dm-1.0-to-2.0.md)
-> - The deployment directories of some components might be different from those in the original cluster. You can check it with the `display` command.
-> - Before importing the cluster, run `tiup update --self && tiup update dm` to upgrade TiUP DM components to the latest version.
-> - After the cluster is imported, there is only one DM-master node in the cluster. You can refer to [the `scale out` command](/tiup/tiup-component-dm-scale-out.md) to scale out the DM-master node.
+> -   このコマンドは、DMv1.0クラスターからのDMポータルコンポーネントのインポートをサポートしていません。
+> -   クラスタをインポートする前に、最初に元のクラスタの実行を停止してください。
+> -   v2.0にアップグレードする必要があるデータ移行タスクの場合、これらのタスクで`stop-task`を実行しないでください。
+> -   このコマンドは、DMv2.0.0-rc.2以降のバージョンへのインポートのみをサポートします。
+> -   `import`コマンドは、DMv1.0クラスタを新しいDMv2.0クラスターにインポートするために使用されクラスタ。データ移行タスクを既存のv2.0クラスタにインポートする必要がある場合は、 [TiDBデータ移行をv1.0.xからv2.0+に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
+> -   一部のコンポーネントのデプロイメントディレクトリは、元のクラスタのものとは異なる場合があります。 `display`コマンドで確認できます。
+> -   クラスタをインポートする前に、 `tiup update --self && tiup update dm`を実行してTiUPDMコンポーネントを最新バージョンにアップグレードします。
+> -   クラスタがインポートされた後、クラスターにはDMマスターノードが1つだけありクラスタ。 [`scale out`コマンド](/tiup/tiup-component-dm-scale-out.md)を参照して、DMマスターノードをスケールアウトできます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm import [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -v, --cluster-version
+### -v、-cluster-version {#v-cluster-version}
 
-- Specifies the version number for redeploying. You must use a version later than v2.0.0-rc.2 (including v2.0.0-rc.2).
-- Data type: `STRING`
-- This option is **required** to execute the command.
+-   再デプロイするバージョン番号を指定します。 v2.0.0-rc.2以降のバージョン（v2.0.0-rc.2を含む）を使用する必要があります。
+-   データ型： `STRING`
+-   このオプションは、コマンドを実行するために**必要です**。
 
-### -d, --dir
+### -d、-dir {#d-dir}
 
-- Specifies the directory of TiDB Ansible.
-- Data type: `STRING`
-- If this option is not specified in the command, the current directory is the default directory.
+-   TiDBAnsibleのディレクトリを指定します。
+-   データ型： `STRING`
+-   このオプションがコマンドで指定されていない場合、現在のディレクトリがデフォルトのディレクトリになります。
 
-### --inventory
+### - 在庫 {#inventory}
 
-- Specifies the name of the Ansible inventory file.
-- Data type: `STRING`
-- If this option is not specified in the command, the default file name is `"inventory.ini"`.
+-   Ansibleインベントリファイルの名前を指定します。
+-   データ型： `STRING`
+-   このオプションがコマンドで指定されていない場合、デフォルトのファイル名は`"inventory.ini"`です。
 
-### --rename
+### --名前を変更 {#rename}
 
-- Renames the imported cluster.
-- Data type: `STRING`
-- If this option is not specified in the command, the default cluster name is the `cluster_name` specified in the inventory file.
+-   インポートされたクラスタの名前を変更します。
+-   データ型： `STRING`
+-   このオプションがコマンドで指定されていない場合、デフォルトのクラスタ名はインベントリファイルで指定された`cluster_name`です。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を印刷します。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-The log of the importing process.
+インポートプロセスのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

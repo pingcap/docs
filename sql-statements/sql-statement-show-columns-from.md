@@ -3,59 +3,59 @@ title: SHOW [FULL] COLUMNS FROM | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [FULL] COLUMNS FROM for the TiDB database.
 ---
 
-# SHOW [FULL] COLUMNS FROM
+# [フル]列を表示 {#show-full-columns-from}
 
-The statement `SHOW [FULL] COLUMNS FROM <table_name>` describes the columns of a table or view in a useful tabular format. The optional keyword `FULL` displays the privileges the current user has to that column, and the `comment` from the table definition.
+ステートメント`SHOW [FULL] COLUMNS FROM <table_name>`は、テーブルまたはビューの列を便利な表形式で記述します。オプションのキーワード`FULL`は、現在のユーザーがその列に対して持つ特権を表示し、 `comment`はテーブル定義から表示します。
 
-The statements `SHOW [FULL] FIELDS FROM <table_name>`, `DESC <table_name>`, `DESCRIBE <table_name>`, and `EXPLAIN <table_name>` are aliases of this statement.
+ステートメント`SHOW [FULL] FIELDS FROM <table_name>` 、および`DESCRIBE <table_name>`は、この`EXPLAIN <table_name>`のエイリアス`DESC <table_name>` 。
 
-> **Note:**
+> **ノート：**
 >
-> `DESC TABLE <table_name>`, `DESCRIBE TABLE <table_name>`, and `EXPLAIN TABLE <table_name>` are not equivalent to the above statements. They are aliases of [`DESC SELECT * FROM <table_name>`](/sql-statements/sql-statement-explain.md).
+> `DESC TABLE <table_name>` 、および`DESCRIBE TABLE <table_name>`は、上記のステートメントと`EXPLAIN TABLE <table_name>`ではありません。それらは[`DESC SELECT * FROM &#x3C;table_name>`](/sql-statements/sql-statement-explain.md)のエイリアスです。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**ShowStmt：**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowColumnsFilterable:**
+**ShowColumnsFilterable：**
 
 ![ShowColumnsFilterable](/media/sqlgram/ShowColumnsFilterable.png)
 
-**OptFull:**
+**OptFull：**
 
 ![OptFull](/media/sqlgram/OptFull.png)
 
-**FieldsOrColumns:**
+**FieldsOrColumns：**
 
 ![FieldsOrColumns](/media/sqlgram/FieldsOrColumns.png)
 
-**ShowTableAliasOpt:**
+**ShowTableAliasOpt：**
 
 ![ShowTableAliasOpt](/media/sqlgram/ShowTableAliasOpt.png)
 
-**FromOrIn:**
+**FromOrIn：**
 
 ![FromOrIn](/media/sqlgram/FromOrIn.png)
 
-**TableName:**
+**TableName：**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-**ShowDatabaseNameOpt:**
+**ShowDatabaseNameOpt：**
 
 ![ShowDatabaseNameOpt](/media/sqlgram/ShowDatabaseNameOpt.png)
 
-**DBName:**
+**DBName：**
 
 ![DBName](/media/sqlgram/DBName.png)
 
-**ShowLikeOrWhereOpt:**
+**ShowLikeOrWhereOpt：**
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> create view v1 as select 1;
@@ -150,10 +150,10 @@ mysql> show full columns from mysql.user;
 33 rows in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)

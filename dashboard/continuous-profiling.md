@@ -3,102 +3,102 @@ title: TiDB Dashboard Instance Profiling - Continuous Profiling
 summary: Learn how to collect performance data from TiDB, TiKV and PD continuously to reduce MTTR.
 ---
 
-# TiDB Dashboard Instance Profiling - Continuous Profiling
+# TiDBダッシュボードインスタンスプロファイリング-継続的なプロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
 
-> **Note:**
+> **ノート：**
 >
-> This feature is designed for database experts. For non-expert users, it is recommended to use this feature under the guidance of PingCAP technical supports.
+> この機能は、データベースの専門家向けに設計されています。専門家でないユーザーの場合は、PingCAPテクニカルサポートの指導の下でこの機能を使用することをお勧めします。
 
-Continuous Profiling allows collecting performance data **continuously** from each TiDB, TiKV and PD instance. The collected performance data can be visualized as FlameGraph or DAG.
+継続的プロファイリングにより、各TiDB、TiKV、およびPDインスタンスからパフォーマンスデータを**継続的**に収集できます。収集されたパフォーマンスデータは、FlameGraphまたはDAGとして視覚化できます。
 
-With these performance data, experts can analyze resource consumption details like instance's CPU and memory, to help pinpoint sophisticated performance problems at any time, such as high CPU overhead, high memory usage, process stalls, and so on. Even for problems cannot be reproduced, experts can dig deep into the problem by viewing the historical performance data collected at that moment. In this way, MTTR can be reduced effectively.
+これらのパフォーマンスデータを使用して、専門家はインスタンスのCPUやメモリなどのリソース消費の詳細を分析し、CPUオーバーヘッドの高さ、メモリ使用量の高さ、プロセスのストールなど、高度なパフォーマンスの問題をいつでも特定できます。問題を再現できない場合でも、専門家はその時点で収集された過去のパフォーマンスデータを表示することで問題を深く掘り下げることができます。このようにして、MTTRを効果的に減らすことができます。
 
-## Compare with Manual Profiling
+## 手動プロファイリングと比較する {#compare-with-manual-profiling}
 
-Continuous Profiling is an enhanced feature of [Manual Profiling](/dashboard/dashboard-profiling.md). They can be both used to collect and analyze different kinds of performance data for each instance. Differences between them are as follows:
+連続プロファイリングは、 [手動プロファイリング](/dashboard/dashboard-profiling.md)の拡張機能です。これらは両方とも、インスタンスごとにさまざまな種類のパフォーマンスデータを収集および分析するために使用できます。それらの違いは次のとおりです。
 
-- Manual Profiling only collects performance data for a short period of time (for example, 30 seconds) at the moment you initiate the profiling, while Continuous Profiling collects data continuously when it is enabled.
-- Manual Profiling can only be used to analyze current occurring problems, while Continuous Profiling can be used to analyze both the current and historical problems.
-- Manual Profiling allows to collect specific performance data for specific instances, while Continuous Profiling collects all performance data for all instances.
-- Continuous Profiling stores more performance data, therefore it takes up more disk space.
+-   手動プロファイリングは、プロファイリングを開始した時点で短時間（たとえば、30秒）のパフォーマンスデータのみを収集しますが、連続プロファイリングは、有効になっている場合は継続的にデータを収集します。
+-   手動プロファイリングは現在発生している問題の分析にのみ使用できますが、継続的プロファイリングは現在の問題と過去の問題の両方の分析に使用できます。
+-   手動プロファイリングでは特定のインスタンスの特定のパフォーマンスデータを収集できますが、連続プロファイリングではすべてのインスタンスのすべてのパフォーマンスデータを収集します。
+-   連続プロファイリングはより多くのパフォーマンスデータを保存するため、より多くのディスクスペースを使用します。
 
-## Supported performance data
+## サポートされているパフォーマンスデータ {#supported-performance-data}
 
-All performance data in [Manual Profiling](/dashboard/dashboard-profiling.md#supported-performance-data) is collected.
+[手動プロファイリング](/dashboard/dashboard-profiling.md#supported-performance-data)のすべてのパフォーマンスデータが収集されます。
 
-- CPU: The CPU overhead of each internal function on TiDB, TiKV, TiFlash, and PD instances
+-   CPU：TiDB、TiKV、TiFlash、およびPDインスタンスの各内部機能のCPUオーバーヘッド
 
-- Heap: The memory consumption of each internal function on TiDB and PD instances
+-   ヒープ：TiDBおよびPDインスタンスの各内部関数のメモリ消費量
 
-- Mutex: The mutex contention states on TiDB and PD instances
+-   ミューテックス：TiDBおよびPDインスタンスでのミューテックス競合状態
 
-- Goroutine: The running state and call stack of all goroutines on TiDB and PD instances
+-   Goroutine：TiDBおよびPDインスタンス上のすべてのgoroutineの実行状態と呼び出しスタック
 
-## Access the page
+## ページにアクセスする {#access-the-page}
 
-You can access the Continuous Profiling page using either of the following methods:
+次のいずれかの方法を使用して、[ContinuousProfiling]ページにアクセスできます。
 
-- After logging into TiDB Dashboard, click **Advanced Debugging** > **Profiling Instances** > **Continuous Profiling** on the left navigation bar.
+-   TiDBダッシュボードにログインした後、左側のナビゲーションバーで[**高度なデバッグ**]&gt;[<strong>インスタンスのプロファイリング</strong>]&gt;[<strong>継続的なプロファイリング</strong>]をクリックします。
 
-  ![Access page](/media/dashboard/dashboard-conprof-access.png)
+    ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
-- Visit <http://127.0.0.1:2379/dashboard/#/continuous_profiling> in your browser. Replace `127.0.0.1:2379` with the actual PD instance address and port.
+-   ブラウザで[http://127.0.0.1:2379/dashboard/#/continuous_profiling](http://127.0.0.1:2379/dashboard/#/continuous_profiling)にアクセスします。 `127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えます。
 
-## Enable Continuous Profiling
+## 継続的なプロファイリングを有効にする {#enable-continuous-profiling}
 
-> **Note:**
+> **ノート：**
 >
-> To use Continuous Profiling, your cluster should be deployed or upgraded with a recent version of TiUP (v1.9.0 or above) or TiDB Operator (v1.3.0 or above). If your cluster was upgraded using an earlier version of TiUP or TiDB Operator, see [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown) for instructions.
+> 継続的プロファイリングを使用するには、クラスタを最新バージョンのTiUP（v1.9.0以降）またはTiDB Operator（v1.3.0以降）でデプロイまたはアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスタをアップグレードした場合は、手順について[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-Continuous Profiling is not enabled by default. After enabling it, you can have performance data continuously collected in the background without keeping the web pages always active. Data collected can be kept for a certain period of time and expired data is automatically cleared.
+継続的プロファイリングはデフォルトでは有効になっていません。これを有効にすると、Webページを常にアクティブに保つことなく、パフォーマンスデータをバックグラウンドで継続的に収集できます。収集されたデータは一定期間保持でき、期限切れのデータは自動的にクリアされます。
 
-To enable this feature:
+この機能を有効にするには：
 
-1. Visit the [Continuous Profiling page](#access-the-page).
-2. Click **Open Settings**. In the **Settings** area on the right, switch **Enable Feature** on, and modify the default value of **Retention Duration** if necessary.
-3. Click **Save**.
+1.  [継続的なプロファイリングページ](#access-the-page)にアクセスします。
+2.  [**設定を開く]**をクリックします。右側の<strong>[設定]</strong>領域で、[<strong>機能</strong>を有効にする]をオンに切り替え、必要に応じて<strong>保持期間</strong>のデフォルト値を変更します。
+3.  [**保存]**をクリックします。
 
 ![Enable feature](/media/dashboard/dashboard-conprof-start.png)
 
-## View current performance data
+## 現在のパフォーマンスデータを表示する {#view-current-performance-data}
 
-Manual Profiling cannot be initiated on clusters that have Continuous Profiling enabled. To view the performance data at the current moment, just click on the most recent profiling result.
+手動プロファイリングは、継続的プロファイリングが有効になっているクラスターでは開始できません。現時点でのパフォーマンスデータを表示するには、最新のプロファイリング結果をクリックするだけです。
 
-## View historical performance data
+## 過去のパフォーマンスデータを表示する {#view-historical-performance-data}
 
-On the list page, you can see all performance data collected since the enabling of this feature.
+リストページでは、この機能を有効にしてから収集されたすべてのパフォーマンスデータを確認できます。
 
 ![History results](/media/dashboard/dashboard-conprof-history.png)
 
-## Download performance data
+## パフォーマンスデータをダウンロードする {#download-performance-data}
 
-On the profiling result page, you can click **Download Profiling Result** in the upper-right corner to download all profiling results.
+プロファイリング結果ページで、右上隅にある[**プロファイリング結果のダウンロード**]をクリックして、すべてのプロファイリング結果をダウンロードできます。
 
 ![Download profiling result](/media/dashboard/dashboard-conprof-download.png)
 
-You can also click an individual instance in the table to view its profiling result. Alternatively, you can hover on ... to download raw data.
+テーブル内の個々のインスタンスをクリックして、そのプロファイリング結果を表示することもできます。または、...にカーソルを合わせて生データをダウンロードすることもできます。
 
 ![View profiling result](/media/dashboard/dashboard-conprof-single.png)
 
-## Disable Continuous Profiling
+## 継続的なプロファイリングを無効にする {#disable-continuous-profiling}
 
-1. Visit the [Continuous Profiling page](#access-the-page).
-2. Click the gear icon in the upper right corner to open the settings page. Switch **Enable Feature** off.
-3. Click **Save**.
-4. In the popped-up dialog box, click **Disable**.
+1.  [継続的なプロファイリングページ](#access-the-page)にアクセスします。
+2.  右上隅にある歯車のアイコンをクリックして、設定ページを開きます。 [**機能**を有効にする]をオフに切り替えます。
+3.  [**保存]**をクリックします。
+4.  ポップアップダイアログボックスで、[**無効**にする]をクリックします。
 
 ![Disable feature](/media/dashboard/dashboard-conprof-stop.png)
 
-## Frequently asked questions
+## よくある質問 {#frequently-asked-questions}
 
-**1. Continuous Profiling cannot be enabled and the UI displays "required component NgMonitoring is not started"**.
+**1.連続プロファイリングを有効にできず、UIに「必要なコンポーネントNgMonitoringが開始されていません」と表示されます**。
 
-See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown).
+[TiDBダッシュボードFAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-**2. Will performance be affected after enabling Continuous Profiling?**
+**2.継続的プロファイリングを有効にした後、パフォーマンスは影響を受けますか？**
 
-According to our benchmark, the average performance impact is less than 1% when the feature is enabled.
+ベンチマークによると、この機能を有効にした場合の平均パフォーマンスへの影響は1％未満です。
 
-**3. What is the status of this feature?**
+**3.この機能のステータスは何ですか？**
 
-It is now a generally available (GA) feature and can be used in production environments.
+現在、一般に利用可能な（GA）機能であり、実稼働環境で使用できます。

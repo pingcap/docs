@@ -2,40 +2,40 @@
 title: tiup dm scale-in
 ---
 
-# tiup dm scale-in
+# tiup dm scale-in {#tiup-dm-scale-in}
 
-The `tiup dm scale-in` command is used to scale in the cluster. Scaling in the cluster means taking the service offline, which eventually removes the specified node from the cluster and deletes the remaining related files.
+`tiup dm scale-in`コマンドは、クラスタでスケーリングするために使用されます。クラスタでのスケーリングとは、サービスをオフラインにすることを意味します。これにより、最終的に指定されたノードがクラスタから削除され、残りの関連ファイルが削除されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>` ：操作するクラスタの名前。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the nodes to be scaled in. If you need to scale in multiple nodes, split them by commas.
-- Data type: `STRINGS`
-- Default: no. This option is mandatory and the value must be not null.
+-   スケールインするノードを指定します。複数のノードでスケールインする必要がある場合は、それらをコンマで分割します。
+-   データ型： `STRINGS`
+-   デフォルト：いいえ。このオプションは必須であり、値はnullであってはなりません。
 
-### --force
+### - 力 {#force}
 
-- In some cases, some scale-in nodes in the cluster have been down, making it impossible to connect to the node through SSH for operation. At this time, you can use the `--force` option to remove these nodes from the cluster.
-- Data type: `BOOLEAN`
-- Default: false. If this option is not specified in the command, the specified nodes are not forcibly removed.
+-   場合によっては、クラスタの一部のスケールインノードがダウンしており、SSHを介してノードに接続して操作することができません。このとき、 `--force`オプションを使用して、これらのノードをクラスタから削除できます。
+-   データ型： `BOOLEAN`
+-   デフォルト：false。コマンドでこのオプションが指定されていない場合、指定されたノードは強制的に削除されません。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-The log of scaling in.
+のスケールインのログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

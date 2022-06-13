@@ -3,11 +3,11 @@ title: PARTITIONS
 summary: Learn the `PARTITIONS` information_schema table.
 ---
 
-# PARTITIONS
+# パーティション {#partitions}
 
-The `PARTITIONS` table provides information about partitioned tables.
+`PARTITIONS`テーブルは、パーティションテーブルに関する情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -47,7 +47,7 @@ DESC partitions;
 25 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE test.t1 (id INT NOT NULL PRIMARY KEY) PARTITION BY HASH (id) PARTITIONS 2;

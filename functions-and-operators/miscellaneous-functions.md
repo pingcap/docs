@@ -3,36 +3,36 @@ title: Miscellaneous Functions
 summary: Learn about miscellaneous functions in TiDB.
 ---
 
-# Miscellaneous Functions
+# その他の機能 {#miscellaneous-functions}
 
-TiDB supports most of the [miscellaneous functions](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html) available in MySQL 5.7.
+TiDBは、MySQL5.7で利用可能な[その他の機能](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html)のほとんどをサポートします。
 
-## Supported functions
+## サポートされている機能 {#supported-functions}
 
-| Name | Description  |
-|:------------|:-----------------------------------------------------------------------------------------------|
-| [`ANY_VALUE()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_any-value)              | Suppress `ONLY_FULL_GROUP_BY` value rejection     |
-| [`BIN_TO_UUID()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_bin-to-uuid)          | Convert UUID from binary format to text format    |
-| [`DEFAULT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_default)                  | Returns the default value for a table column      |
-| [`INET_ATON()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-aton)              | Return the numeric value of an IP address         |
-| [`INET_NTOA()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-ntoa)              | Return the IP address from a numeric value        |
-| [`INET6_ATON()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet6-aton)            | Return the numeric value of an IPv6 address       |
-| [`INET6_NTOA()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet6-ntoa)            | Return the IPv6 address from a numeric value      |
-| [`IS_IPV4()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv4)                  | Whether argument is an IPv4 address               |
-| [`IS_IPV4_COMPAT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv4-compat)    | Whether argument is an IPv4-compatible address    |
-| [`IS_IPV4_MAPPED()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv4-mapped)    | Whether argument is an IPv4-mapped address        |
-| [`IS_IPV6()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv6)                  | Whether argument is an IPv6 address               |
-| [`NAME_CONST()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_name-const)            | Can be used to rename a column name               |
-| [`SLEEP()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_sleep)                      | Sleep for a number of seconds                     |
-| [`UUID()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid)                        | Return a Universal Unique Identifier (UUID)       |
-| [`UUID_TO_BIN()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-to-bin)          | Convert UUID from text format to binary format    |
-| [`VALUES()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_values)                    | Defines the values to be used during an INSERT    |
+| 名前                                                                                                                 | 説明                              |
+| :----------------------------------------------------------------------------------------------------------------- | :------------------------------ |
+| [`ANY_VALUE()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_any-value)           | `ONLY_FULL_GROUP_BY`の値の拒否を抑制します |
+| [`BIN_TO_UUID()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_bin-to-uuid)       | UUIDをバイナリ形式からテキスト形式に変換する        |
+| [`DEFAULT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_default)               | テーブル列のデフォルト値を返します               |
+| [`INET_ATON()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-aton)           | IPアドレスの数値を返します                  |
+| [`INET_NTOA()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet-ntoa)           | 数値からIPアドレスを返す                   |
+| [`INET6_ATON()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet6-aton)         | IPv6アドレスの数値を返します                |
+| [`INET6_NTOA()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_inet6-ntoa)         | 数値からIPv6アドレスを返す                 |
+| [`IS_IPV4()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv4)               | 引数がIPv4アドレスかどうか                 |
+| [`IS_IPV4_COMPAT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv4-compat) | 引数がIPv4互換アドレスかどうか               |
+| [`IS_IPV4_MAPPED()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv4-mapped) | 引数がIPv4にマップされたアドレスかどうか          |
+| [`IS_IPV6()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_is-ipv6)               | 引数がIPv6アドレスかどうか                 |
+| [`NAME_CONST()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_name-const)         | 列名の名前を変更するために使用できます             |
+| [`SLEEP()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_sleep)                   | 数秒間寝る                           |
+| [`UUID()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid)                     | ユニバーサル一意識別子（UUID）を返す            |
+| [`UUID_TO_BIN()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-to-bin)       | UUIDをテキスト形式からバイナリ形式に変換する        |
+| [`VALUES()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_values)                 | INSERT中に使用される値を定義します            |
 
-## Unsupported functions
+## サポートされていない機能 {#unsupported-functions}
 
-| Name | Description  |
-|:------------|:-----------------------------------------------------------------------------------------------|
-| [`GET_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_get-lock)                | Get a named lock [TiDB #10929](https://github.com/pingcap/tidb/issues/14994) |
-| [`RELEASE_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_release-lock)        | Releases the named lock [TiDB #10929](https://github.com/pingcap/tidb/issues/14994) |
-| [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid-short)            | Provides a UUID that is unique given certain assumptions not present in TiDB [TiDB #4620](https://github.com/pingcap/tidb/issues/4620) |
-| [`MASTER_WAIT_POS()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_master-pos-wait)  | Relates to MySQL replication |
+| 名前                                                                                                                   | 説明                                                                                        |
+| :------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| [`GET_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_get-lock)               | 名前付きロックを取得する[TiDB＃10929](https://github.com/pingcap/tidb/issues/14994)                    |
+| [`RELEASE_LOCK()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_release-lock)       | 名前付きロックを解放します[TiDB＃10929](https://github.com/pingcap/tidb/issues/14994)                   |
+| [`UUID_SHORT()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_uuid-short)           | TiDB1に存在しない特定の仮定を前提として一意のUUIDを提供し[TiDB＃4620](https://github.com/pingcap/tidb/issues/4620) |
+| [`MASTER_WAIT_POS()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_master-pos-wait) | MySQLレプリケーションに関連します                                                                       |

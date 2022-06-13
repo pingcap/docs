@@ -3,64 +3,64 @@ title: SQL Prepare Execution Plan Cache
 summary: Learn about SQL Prepare Execution Plan Cache in TiDB.
 ---
 
-# SQL Prepare Execution Plan Cache
+# SQL準備実行プランキャッシュ {#sql-prepare-execution-plan-cache}
 
-TiDB supports execution plan caching for `Prepare` and `Execute` queries. This includes both forms of prepared statements:
+TiDBは、 `Prepare`クエリと`Execute`クエリの実行プランのキャッシュをサポートしています。これには、準備されたステートメントの両方の形式が含まれます。
 
-- Using the `COM_STMT_PREPARE` and `COM_STMT_EXECUTE` protocol features.
-- Using the SQL statements `PREPARE` and `EXECUTE`.
+-   `COM_STMT_PREPARE`および`COM_STMT_EXECUTE`プロトコル機能を使用します。
+-   SQLステートメント`PREPARE`および`EXECUTE`を使用します。
 
-The TiDB optimizer handles these two types of queries in the same way: when preparing, the parameterized query is parsed into an AST (Abstract Syntax Tree) and cached; in later execution, the execution plan is generated based on the stored AST and specific parameter values.
+TiDBオプティマイザは、これら2つのタイプのクエリを同じ方法で処理します。準備時に、パラメータ化されたクエリがAST（抽象構文ツリー）に解析され、キャッシュされます。後の実行では、保存されたASTと特定のパラメータ値に基づいて実行プランが生成されます。
 
-When the execution plan cache is enabled, in the first execution every `Prepare` statement checks whether the current query can use the execution plan cache, and if the query can use it, then put the generated execution plan into a cache implemented by LRU (Least Recently Used) linked list. In the subsequent `Execute` queries, the execution plan is obtained from the cache and checked for availability. If the check succeeds, the step of generating an execution plan is skipped. Otherwise, the execution plan is regenerated and saved in the cache.
+実行プランキャッシュが有効になっている場合、最初の実行で`Prepare`ステートメントごとに、現在のクエリが実行プランキャッシュを使用できるかどうかを確認し、クエリで使用できる場合は、生成された実行プランをLRUによって実装されたキャッシュに配置します（最近使用済み）リンクリスト。後続の`Execute`のクエリでは、実行プランがキャッシュから取得され、可用性がチェックされます。チェックが成功すると、実行プランを生成するステップはスキップされます。それ以外の場合、実行プランは再生成され、キャッシュに保存されます。
 
-In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
+現在のバージョンのTiDBでは、 `Prepare`のステートメントが次の条件のいずれかを満たしている場合、クエリまたはプランはキャッシュされません。
 
-- The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`.
-- The query accesses partitioned tables or temporary tables, or a table that contains generated columns.
-- The query contains sub-queries, such as `select * from t where a > (select ...)`.
-- The query contains the `ignore_plan_cache` hint, such as `select /*+ ignore_plan_cache() */ * from t`.
-- The query contains variables other than `?` (including system variables or user-defined variables), such as `select * from t where a>? and b>@x`.
-- The query contains the functions that cannot be cached: `database()`, `current_user`, `current_role`, `user`, `connection_id`, `last_insert_id`, `row_count`, `version`, and `like`.
-- The query contains `?` after `Limit`, such as `Limit ?` and `Limit 10, ?`. Such queries are not cached because the specific value of `?` has a great impact on query performance.
-- The query contains `?` after `Order By`, such as `Order By ?`. Such queries sort data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Order By a+?`, it is cached.
-- The query contains `?` after `Group By`, such as `Group By?`. Such queries group data based on the column specified by `?`. If the queries targeting different columns use the same execution plan, the results will be wrong. Therefore, such queries are not cached. However, if the query is a common one, such as `Group By a+?`, it is cached.
-- The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
-- The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
-- The plan attempts to access `TiFlash`.
-- In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
+-   `Union`には、 `SELECT` 、および`UPDATE` `Except`のSQL `Intersect`が含まれて`INSERT` `DELETE` 。
+-   クエリは、パーティションテーブルまたは一時テーブル、あるいは生成された列を含むテーブルにアクセスします。
+-   クエリには、 `select * from t where a > (select ...)`などのサブクエリが含まれています。
+-   クエリには、 `select /*+ ignore_plan_cache() */ * from t`などの`ignore_plan_cache`のヒントが含まれています。
+-   クエリには、 `select * from t where a>? and b>@x`などの`?`以外の変数（システム変数またはユーザー定義変数を含む）が含まれています。
+-   `row_count`には、キャッシュできない関数が`version`れて`current_role` `current_user` `last_insert_id` `database()` `like` `connection_id` `user` 。
+-   クエリには、 `Limit ?`や`Limit 10, ?`など、 `Limit`の後に`?`が含まれます。 `?`の特定の値はクエリのパフォーマンスに大きな影響を与えるため、このようなクエリはキャッシュされません。
+-   クエリには、 `Order By ?`のように`Order By`の後に`?`が含まれます。このようなクエリは、 `?`で指定された列に基づいてデータを並べ替えます。異なる列を対象とするクエリが同じ実行プランを使用している場合、結果は正しくありません。したがって、そのようなクエリはキャッシュされません。ただし、クエリが`Order By a+?`などの一般的なクエリである場合は、キャッシュされます。
+-   クエリには、 `Group By?`のように`Group By`の後に`?`が含まれます。このようなクエリは、 `?`で指定された列に基づいてデータをグループ化します。異なる列を対象とするクエリが同じ実行プランを使用している場合、結果は正しくありません。したがって、そのようなクエリはキャッシュされません。ただし、クエリが`Group By a+?`などの一般的なクエリである場合は、キャッシュされます。
+-   クエリには、 `(partition by year order by sale rows ? preceding)`などの`Window Frame`ウィンドウ関数の定義に`?`が含まれています。ウィンドウ関数の他の場所に`?`が表示されている場合、クエリはキャッシュされます。
+-   クエリには、 `c_int >= ?`や`c_int in (?, ?)`などの`int`と`string`を比較するためのパラメータが含まれています。ここで、 `?`は`set @x='123'`などの文字列型を示します。クエリ結果がMySQLと互換性があることを確認するには、各クエリでパラメータを調整して、そのようなクエリがキャッシュされないようにする必要があります。
+-   プランは`TiFlash`にアクセスしようとします。
+-   ほとんどの場合、現在の`Prepare`ステートメントにパラメーターがない場合を除き、 `TableDual`を含むプランはキャッシュされません。
 
-The LRU linked list is designed as a session-level cache because `Prepare` / `Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
+`Prepare`はセッション間で実行できないため、LRUリンクリストはセッションレベルのキャッシュとして設計されてい`Execute` 。 LRUリストの各要素は、キーと値のペアです。値は実行プランであり、キーは次の部分で構成されています。
 
-- The name of the database where `Execute` is executed
-- The identifier of the `Prepare` statement, that is, the name after the `PREPARE` keyword
-- The current schema version, which is updated after every successfully executed DDL statement
-- The SQL mode when executing `Execute`
-- The current time zone, which is the value of the `time_zone` system variable
-- The value of the `sql_select_limit` system variable
+-   `Execute`が実行されるデータベースの名前
+-   `Prepare`ステートメントの識別子、つまり`PREPARE`キーワードの後の名前
+-   現在のスキーマバージョン。これは、DDLステートメントが正常に実行されるたびに更新されます。
+-   実行時のSQLモード`Execute`
+-   `time_zone`システム変数の値である現在のタイムゾーン
+-   `sql_select_limit`システム変数の値
 
-Any change in the above information (for example, switching databases, renaming `Prepare` statement, executing DDL statements, or modifying the value of SQL mode / `time_zone`), or the LRU cache elimination mechanism causes the execution plan cache miss when executing.
+上記の情報の変更（たとえば、データベースの切り替え、 `Prepare`ステートメントの名前変更、DDLステートメントの実行、SQLモード/ `time_zone`の値の変更）、またはLRUキャッシュ除去メカニズムにより、実行時に実行プランのキャッシュミスが発生します。
 
-After the execution plan cache is obtained from the cache, TiDB first checks whether the execution plan is still valid. If the current `Execute` statement is executed in an explicit transaction, and the referenced table is modified in the transaction pre-order statement, the cached execution plan accessing this table does not contain the `UnionScan` operator, then it cannot be executed.
+実行プランキャッシュがキャッシュから取得された後、TiDBは最初に実行プランがまだ有効かどうかをチェックします。現在の`Execute`ステートメントが明示的なトランザクションで実行され、参照されるテーブルがトランザクションのpre-orderステートメントで変更された場合、このテーブルにアクセスするキャッシュされた実行プランに`UnionScan`演算子が含まれていないため、実行できません。
 
-After the validation test is passed, the scan range of the execution plan is adjusted according to the current parameter values, and then used to perform data querying.
+検証テストに合格すると、実行プランのスキャン範囲が現在のパラメータ値に従って調整され、データクエリの実行に使用されます。
 
-There are several points worth noting about execution plan caching and query performance:
+実行プランのキャッシュとクエリのパフォーマンスについては、注目に値する点がいくつかあります。
 
-- No matter an execution plan is cached or not, it is affected by SQL bindings. For execution plans that have not been cached (the first `Execute`), these plans are affected by existing SQL bindings. For execution plans that have been cached, if new SQL Bindings are created, these plans become invalid.
-- Cached plans are not affected by changes in statistics, optimization rules, and blocklist pushdown by expressions.
-- Considering that the parameters of `Execute` are different, the execution plan cache prohibits some aggressive query optimization methods that are closely related to specific parameter values to ensure adaptability. This causes that the query plan may not be optimal for certain parameter values. For example, the filter condition of the query is `where a > ? And a < ?`, the parameters of the first `Execute` statement are `2` and `1` respectively. Considering that these two parameters maybe be `1` and `2` in the next execution time, the optimizer does not generate the optimal `TableDual` execution plan that is specific to current parameter values;
-- If cache invalidation and elimination are not considered, an execution plan cache is applied to various parameter values, which in theory also results in non-optimal execution plans for certain values. For example, if the filter condition is `where a < ?` and the parameter value used for the first execution is `1`, then the optimizer generates the optimal `IndexScan` execution plan and puts it into the cache. In the subsequent executions, if the value becomes `10000`, the `TableScan` plan might be the better one. But due to the execution plan cache, the previously generated `IndexScan` is used for execution. Therefore, the execution plan cache is more suitable for application scenarios where the query is simple (the ratio of compilation is high) and the execution plan is relatively fixed.
+-   実行プランがキャッシュされているかどうかに関係なく、SQLバインディングの影響を受けます。キャッシュされていない実行プラン（最初の`Execute` ）の場合、これらのプランは既存のSQLバインディングの影響を受けます。キャッシュされた実行プランの場合、新しいSQLバインディングが作成されると、これらのプランは無効になります。
+-   キャッシュされたプランは、統計、最適化ルール、および式によるブロックリストのプッシュダウンの変更による影響を受けません。
+-   `Execute`のパラメーターが異なることを考慮すると、実行プランキャッシュは、適応性を確保するために特定のパラメーター値に密接に関連するいくつかの積極的なクエリ最適化メソッドを禁止します。これにより、クエリプランが特定のパラメータ値に対して最適でない場合があります。たとえば、クエリのフィルター条件は`where a > ? And a < ?`で、最初の`Execute`ステートメントのパラメーターはそれぞれ`2`と`1`です。これらの2つのパラメーターが次の実行時に`1`と`2`になる可能性があることを考慮すると、オプティマイザーは現在のパラメーター値に固有の最適`TableDual`実行プランを生成しません。
+-   キャッシュの無効化と削除が考慮されていない場合、実行プランキャッシュはさまざまなパラメータ値に適用され、理論的には特定の値に対して最適でない実行プランが発生します。たとえば、フィルター条件が`where a < ?`で、最初の実行に使用されるパラメーター値が`1`の場合、オプティマイザーは最適な`IndexScan`実行プランを生成し、それをキャッシュに入れます。以降の実行では、値が`10000`になった場合、 `TableScan`プランの方が適している可能性があります。ただし、実行プランキャッシュにより、以前に生成された`IndexScan`が実行に使用されます。したがって、実行プランキャッシュは、クエリが単純で（コンパイルの比率が高い）、実行プランが比較的固定されているアプリケーションシナリオに適しています。
 
-Since v6.1.0 the execution plan cache is enabled by default. You can control prepared plan cache via the system variable [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610).
+v6.1.0以降、実行プランキャッシュはデフォルトで有効になっています。準備された計画キャッシュは、システム変数[`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を介して制御できます。
 
-> **Note：**
+> **ノート：**
 >
-> The execution plan cache feature applies only to `Prepare` / `Execute` queries and does not take effect for normal queries.
+> 実行プランのキャッシュ機能は`Prepare` `Execute`にのみ適用され、通常のクエリには有効になりません。
 
-After the execution plan cache feature is enabled, you can use the session-level system variable `last_plan_from_cache` to see whether the previous `Execute` statement used the cached execution plan, for example:
+実行プランのキャッシュ機能を有効にした後、セッションレベルのシステム変数`last_plan_from_cache`を使用して、前の`Execute`のステートメントがキャッシュされた実行プランを使用したかどうかを確認できます。次に例を示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 MySQL [test]> create table t(a int);
@@ -93,9 +93,9 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-If you find that a certain set of `Prepare` / `Execute` has unexpected behavior due to the execution plan cache, you can use the `ignore_plan_cache()` SQL hint to skip using the execution plan cache for the current statement. Still, use the above statement as an example:
+実行プランキャッシュが原因で`Prepare`の特定のセットが予期しない動作をすることがわかった場合は、 `Execute` SQLヒントを使用して、現在のステートメントの実行プランキャッシュの使用をスキップでき`ignore_plan_cache()` 。それでも、例として上記のステートメントを使用してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 MySQL [test]> prepare stmt from 'select /*+ ignore_plan_cache() */ * from t where a = ?';
@@ -122,32 +122,32 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-## Memory management of Prepared Plan Cache
+## 準備された計画キャッシュのメモリ管理 {#memory-management-of-prepared-plan-cache}
 
-Using Prepared Plan Cache has some memory overhead. In internal tests, each cached plan consumes an average of 100 KiB of memory. Because Plan Cache is currently at the `SESSION` level, the total memory consumption is approximately `the number of sessions * the average number of cached plans in a session * 100 KiB`.
+準備済みプランキャッシュを使用すると、メモリのオーバーヘッドが発生します。内部テストでは、キャッシュされた各プランは平均100KiBのメモリを消費します。プランキャッシュは現在`SESSION`レベルであるため、合計メモリ消費量は約`the number of sessions * the average number of cached plans in a session * 100 KiB`です。
 
-For example, the current TiDB instance has 50 sessions in concurrency and each session has approximately 100 cached plans. The total memory consumption is approximately `50 * 100 * 100 KiB` = `512 MB`.
+たとえば、現在のTiDBインスタンスには同時実行で50のセッションがあり、各セッションには約100のキャッシュされたプランがあります。合計メモリ消費量は約`50 * 100 * 100 KiB` = `512 MB`です。
 
-You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows:
+システム変数`tidb_prepared_plan_cache_size`を構成することにより、各セッションでキャッシュできるプランの最大数を制御できます。さまざまな環境での推奨値は次のとおりです。
 
-- When the memory threshold of the TiDB server instance is <= 64 GiB, set `tidb_prepared_plan_cache_size` to `50`.
-- When the memory threshold of the TiDB server instance is > 64 GiB, set `tidb_prepared_plan_cache_size` to `100`.
+-   TiDBサーバーインスタンスのメモリしきい値が&lt;=64GiBの場合、 `tidb_prepared_plan_cache_size`を`50`に設定します。
+-   TiDBサーバーインスタンスのメモリしきい値が&gt;64GiBの場合、 `tidb_prepared_plan_cache_size`を`100`に設定します。
 
-When the unused memory of the TiDB server is less than a certain threshold, the memory protection mechanism of plan cache is triggered, through which some cached plans will be evicted.
+TiDBサーバーの未使用メモリが特定のしきい値を下回ると、プランキャッシュのメモリ保護メカニズムがトリガーされ、キャッシュされたプランの一部が削除されます。
 
-You can control the threshold by configuring the system variable `tidb_prepared_plan_cache_memory_guard_ratio`. The threshold is 0.1 by default, which means when the unused memory of the TiDB server is less than 10% of the total memory (90% of the memory is used), the memory protection mechanism is triggered.
+システム変数`tidb_prepared_plan_cache_memory_guard_ratio`を構成することにより、しきい値を制御できます。しきい値はデフォルトで0.1です。これは、TiDBサーバーの未使用メモリが合計メモリの10％未満（メモリの90％が使用されている）になると、メモリ保護メカニズムがトリガーされることを意味します。
 
-Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+メモリ制限により、プランキャッシュが失われる場合があります。 Grafanaダッシュボードで[`Plan Cache Miss OPS`メトリック](/grafana-tidb-dashboard.md)を表示すると、ステータスを確認できます。
 
-## Clear execution plan cache
+## 実行プランのキャッシュをクリアする {#clear-execution-plan-cache}
 
-You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
+`ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE`ステートメントを実行すると、実行プランのキャッシュをクリアできます。
 
-In this statement, `[SESSION | INSTANCE]`specifies whether the plan cache is cleared for the current session or the whole TiDB instance. If the scope is not specified, the statement above applies to the `SESSION` cache by default.
+このステートメントで、 `[SESSION | INSTANCE]`は、現在のセッションまたはTiDBインスタンス全体のプランキャッシュをクリアするかどうかを指定します。スコープが指定されていない場合、上記のステートメントはデフォルトで`SESSION`キャッシュに適用されます。
 
-The following is an example of clearing the `SESSION` execution plan cache:
+以下は、 `SESSION`の実行プランのキャッシュをクリアする例です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 MySQL [test]> create table t (a int);
@@ -185,20 +185,20 @@ MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be select
 1 row in set (0.00 sec)
 ```
 
-Currently, TiDB does not support clearing `GLOBAL` execution plan cache. That means you cannot clear the cached plan of the whole TiDB cluster. The following error is reported if you try to clear the `GLOBAL` execution plan cache:
+現在、TiDBは`GLOBAL`の実行プランキャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされたプランをクリアすることはできません。 `GLOBAL`実行プランのキャッシュをクリアしようとすると、次のエラーが報告されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 MySQL [test]> admin flush global plan_cache;
 ERROR 1105 (HY000): Do not support the 'admin flush global scope.'
 ```
 
-## Ignore the `COM_STMT_CLOSE` command and the `DEALLOCATE PREPARE` statement
+## <code>COM_STMT_CLOSE</code>コマンドとDEALLOCATEPREPAREステートメントを無視し<code>DEALLOCATE PREPARE</code> {#ignore-the-code-com-stmt-close-code-command-and-the-code-deallocate-prepare-code-statement}
 
-To reduce the syntax parsing cost of SQL statements, it is recommended that you run `prepare stmt` once, then `execute stmt` multiple times before running `deallocate prepare`:
+SQLステートメントの構文解析コストを削減するために、 `deallocate prepare`を実行する前に`prepare stmt`回実行し、次に`execute stmt`回実行することをお勧めします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once
@@ -208,9 +208,9 @@ MySQL [test]> execute stmt using ...;  -- Execute multiple times
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
 
-In real practice, you may be used to running `deallocate prepare` each time after running `execute stmt`, as shown below:
+実際には、以下に示すように、 `execute stmt`を実行した後は毎回`deallocate prepare`を実行することに慣れている可能性があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 MySQL [test]> prepare stmt from '...'; -- Prepare once
@@ -221,11 +221,11 @@ MySQL [test]> execute stmt using ...;
 MySQL [test]> deallocate prepare stmt; -- Release the prepared statement
 ```
 
-In such practice, the plan obtained by the first executed statement cannot be reused by the second executed statement.
+このような場合、最初に実行されたステートメントによって取得されたプランは、2番目に実行されたステートメントによって再利用することはできません。
 
-To address the problem, you can set the system varible [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600) to `ON` so TiDB ignores commands to close `prepare stmt`:
+この問題に対処するには、システム変数を[`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)から`ON`に設定して、TiDBが`prepare stmt`を閉じるコマンドを無視するようにします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> set @@tidb_ignore_prepared_cache_close_stmt=1;  -- Enable the variable

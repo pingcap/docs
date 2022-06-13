@@ -3,50 +3,50 @@ title: TiDB Monitoring Framework Overview
 summary: Use Prometheus and Grafana to build the TiDB monitoring framework.
 ---
 
-# TiDB Monitoring Framework Overview
+# TiDBモニタリングフレームワークの概要 {#tidb-monitoring-framework-overview}
 
-The TiDB monitoring framework adopts two open source projects: Prometheus and Grafana. TiDB uses [Prometheus](https://prometheus.io) to store the monitoring and performance metrics and [Grafana](https://grafana.com/grafana) to visualize these metrics.
+TiDB監視フレームワークは、PrometheusとGrafanaの2つのオープンソースプロジェクトを採用しています。 TiDBは、 [プロメテウス](https://prometheus.io)を使用して監視とパフォーマンスのメトリックを保存し、 [Grafana](https://grafana.com/grafana)を使用してこれらのメトリックを視覚化します。
 
-## About Prometheus in TiDB
+## TiDBのプロメテウスについて {#about-prometheus-in-tidb}
 
-As a time series database, Prometheus has a multi-dimensional data model and flexible query language. As one of the most popular open source projects, Prometheus has been adopted by many companies and organizations and has a very active community. PingCAP is one of the active developers and adopters of Prometheus for monitoring and alerting in TiDB, TiKV and PD.
+時系列データベースとして、Prometheusは多次元データモデルと柔軟なクエリ言語を備えています。最も人気のあるオープンソースプロジェクトの1つとして、Prometheusは多くの企業や組織に採用されており、非常に活発なコミュニティがあります。 PingCAPは、TiDB、TiKV、およびPDでの監視とアラートのためのPrometheusの積極的な開発者および採用者の1人です。
 
-Prometheus consists of multiple components. Currently, TiDB uses the following of them:
+Prometheusは複数のコンポーネントで構成されています。現在、TiDBは次のものを使用しています。
 
-- The Prometheus Server to scrape and store time series data
-- The client libraries to customize necessary metrics in the application
-- An Alertmanager for the alerting mechanism
+-   時系列データをスクレイプして保存するPrometheusサーバー
+-   アプリケーションで必要なメトリックをカスタマイズするためのクライアントライブラリ
+-   アラートメカニズムのAlertmanager
 
-The diagram is as follows:
+回路図は以下の通りです：
 
 ![diagram](/media/prometheus-in-tidb.png)
 
-## About Grafana in TiDB
+## TiDBのGrafanaについて {#about-grafana-in-tidb}
 
-Grafana is an open source project for analyzing and visualizing metrics. TiDB uses Grafana to display the performance metrics as follows:
+Grafanaは、メトリックを分析および視覚化するためのオープンソースプロジェクトです。 TiDBはGrafanaを使用して、パフォーマンスメトリックを次のように表示します。
 
-![Grafana monitored_groups](/media/grafana-monitored-groups.png)
+![Grafana monitored\_groups](/media/grafana-monitored-groups.png)
 
-- {TiDB_Cluster_name}-Backup-Restore: Monitoring metrics related to backup and restore.
-- {TiDB_Cluster_name}-Binlog: Monitoring metrics related to TiDB Binlog.
-- {TiDB_Cluster_name}-Blackbox_exporter: Monitoring metrics related to network probe.
-- {TiDB_Cluster_name}-Disk-Performance: Monitoring metrics related to disk performance.
-- {TiDB_Cluster_name}-Kafka-Overview: Monitoring metrics related to Kafka.
-- {TiDB_Cluster_name}-Lightning: Monitoring metrics related to TiDB Lightning.
-- {TiDB_Cluster_name}-Node_exporter: Monitoring metrics related to the operating system.
-- {TiDB_Cluster_name}-Overview: Monitoring overview related to important components.
-- {TiDB_Cluster_name}-PD: Monitoring metrics related to the PD server.
-- {TiDB_Cluster_name}-Performance-Read: Monitoring metrics related to read performance.
-- {TiDB_Cluster_name}-Performance-Write: Monitoring metrics related to write performance.
-- {TiDB_Cluster_name}-TiDB: Detailed monitoring metrics related to the TiDB server.
-- {TiDB_Cluster_name}-TiDB-Summary: Monitoring overview related to TiDB.
-- {TiDB_Cluster_name}-TiFlash-Proxy-Summary: Monitoring overview of the proxy server that is used to replicate data to TiFlash.
-- {TiDB_Cluster_name}-TiFlash-Summary: Monitoring overview related to TiFlash.
-- {TiDB_Cluster_name}-TiKV-Details: Detailed monitoring metrics related to the TiKV server.
-- {TiDB_Cluster_name}-TiKV-Summary: Monitoring overview related to the TiKV server.
-- {TiDB_Cluster_name}-TiKV-Trouble-Shooting: Monitoring metrics related to the TiKV error diagnostics.
-- {TiDB_Cluster_name}-TiCDC：Detailed monitoring metrics related to TiCDC.
+-   {TiDB_Cluster_name}-バックアップと復元：バックアップと復元に関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-Binlog：TiDBBinlogに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-Blackbox_exporter：ネットワークプローブに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-ディスク-パフォーマンス：ディスクパフォーマンスに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-Kafka-概要：Kafkaに関連するメトリックの監視。
+-   {TiDB_Cluster_name}-Lightning：TiDBLightningに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-Node_exporter：オペレーティングシステムに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-概要：重要なコンポーネントに関連する監視の概要。
+-   {TiDB_Cluster_name}-PD：PDサーバーに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-パフォーマンス-読み取り：読み取りパフォーマンスに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-パフォーマンス-書き込み：書き込みパフォーマンスに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-TiDB：TiDBサーバーに関連する詳細な監視メトリック。
+-   {TiDB_Cluster_name}-TiDB-概要：TiDBに関連する監視の概要。
+-   {TiDB_Cluster_name}-TiFlash-Proxy-概要：データをTiFlashにレプリケートするために使用されるプロキシサーバーの概要を監視します。
+-   {TiDB_Cluster_name}-TiFlash-概要：TiFlashに関連する監視の概要。
+-   {TiDB_Cluster_name}-TiKV-詳細：TiKVサーバーに関連する詳細な監視メトリック。
+-   {TiDB_Cluster_name}-TiKV-概要：TiKVサーバーに関連する監視の概要。
+-   {TiDB_Cluster_name}-TiKV-トラブルシューティング：TiKVエラー診断に関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-TiCDC：TiCDCに関連する詳細な監視メトリック。
 
-Each group has multiple panel labels of monitoring metrics, and each panel contains detailed information of multiple monitoring metrics. For example, the **Overview** monitoring group has five panel labels, and each labels corresponds to a monitoring panel. See the following UI:
+各グループには、監視メトリックの複数のパネルラベルがあり、各パネルには、複数の監視メトリックの詳細情報が含まれています。たとえば、**概要**監視グループには5つのパネルラベルがあり、各ラベルは監視パネルに対応しています。次のUIを参照してください。
 
 ![Grafana Overview](/media/grafana-monitor-overview.png)

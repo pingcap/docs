@@ -3,13 +3,13 @@ title: CLUSTER_LOG
 summary: Learn the `CLUSTER_LOG` information_schema table.
 ---
 
-# CLUSTER_LOG
+# CLUSTER_LOG {#cluster-log}
 
-You can query cluster logs on the `CLUSTER_LOG` cluster log table. By pushing down query conditions to each instance, the impact of the query on cluster performance is less than that of the `grep` command.
+`CLUSTER_LOG`クラスタログテーブルでクラスタログを照会できます。クエリ条件を各インスタンスにプッシュダウンすることにより、クラスタのパフォーマンスに対するクエリの影響は、 `grep`コマンドの影響よりも少なくなります。
 
-To get the logs of the TiDB cluster before v4.0, you need to log in to each instance to summarize logs. This cluster log table in 4.0 provides the global and time-ordered log search result, which makes it easier to track full-link events. For example, by searching logs according to the `region id`, you can query all logs in the life cycle of this Region. Similarly, by searching the full link log through the slow log's `txn id`, you can query the flow and the number of keys scanned by this transaction at each instance.
+v4.0より前のTiDBクラスタのログを取得するには、各インスタンスにログインしてログを要約する必要があります。 4.0のこのクラスタログテーブルは、グローバルで時間順に並べられたログ検索結果を提供します。これにより、フルリンクイベントの追跡が容易になります。たとえば、 `region id`に従ってログを検索することにより、このリージョンのライフサイクル内のすべてのログをクエリできます。同様に、低速ログの`txn id`を介して完全なリンクログを検索することにより、各インスタンスでこのトランザクションによってスキャンされたフローとキーの数を照会できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -29,23 +29,23 @@ DESC cluster_log;
 5 rows in set (0.00 sec)
 ```
 
-Field description:
+フィールドの説明：
 
-* `TIME`: The time to print the log.
-* `TYPE`: The instance type. The optional values are `tidb`, `pd`, and `tikv`.
-* `INSTANCE`: The service address of the instance.
-* `LEVEL`: The log level.
-* `MESSAGE`: The log content.
+-   `TIME` ：ログを印刷する時間。
+-   `TYPE` ：インスタンスタイプ。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `INSTANCE` ：インスタンスのサービスアドレス。
+-   `LEVEL` ：ログレベル。
+-   `MESSAGE` ：ログの内容。
 
-> **Note:**
+> **ノート：**
 >
-> + All fields of the cluster log table are pushed down to the corresponding instance for execution. To reduce the overhead of using the cluster log table, you must specify the keywords used for the search, the time range, and as many conditions as possible. For example, `select * from cluster_log where message like '%ddl%' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00' and type='tidb'`.
+> -   クラスタログテーブルのすべてのフィールドは、実行のために対応するインスタンスにプッシュダウンされます。クラスタログテーブルを使用するオーバーヘッドを減らすには、検索に使用するキーワード、時間範囲、および可能な限り多くの条件を指定する必要があります。たとえば、 `select * from cluster_log where message like '%ddl%' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00' and type='tidb'` 。
 >
-> + The `message` field supports the `like` and `regexp` regular expressions, and the corresponding pattern is encoded as `regexp`. Specifying multiple `message` conditions is equivalent to the `pipeline` form of the `grep` command. For example, executing the `select * from cluster_log where message like 'coprocessor%' and message regexp '.*slow.*' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00'` statement is equivalent to executing `grep 'coprocessor' xxx.log | grep -E '.*slow.*'` on all cluster instances.
+> -   `message`フィールドは`like`と`regexp`の正規表現をサポートし、対応するパターンは`regexp`としてエンコードされます。複数の`message`条件を指定することは、 `grep`コマンドの`pipeline`形式と同等です。たとえば、 `select * from cluster_log where message like 'coprocessor%' and message regexp '.*slow.*' and time > '2020-05-18 20:40:00' and time<'2020-05-18 21:40:00'`ステートメントを実行することは、すべてのクラスタインスタンスで`grep 'coprocessor' xxx.log | grep -E '.*slow.*'`を実行することと同じです。
 
-The following example shows how to query the execution process of a DDL statement using the `CLUSTER_LOG` table:
+次の例は、 `CLUSTER_LOG`テーブルを使用してDDLステートメントの実行プロセスを照会する方法を示しています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT time,instance,left(message,150) FROM cluster_log WHERE message LIKE '%ddl%job%ID.80%' AND type='tidb' AND time > '2020-05-18 20:40:00' AND time < '2020-05-18 21:40:00'
@@ -64,8 +64,8 @@ SELECT time,instance,left(message,150) FROM cluster_log WHERE message LIKE '%ddl
 +-------------------------+----------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-The query results above show the process of executing a DDL statement:
+上記のクエリ結果は、DDLステートメントを実行するプロセスを示しています。
 
-1. The request with a DDL JOB ID of `80` is sent to the `127.0.0.1:4002` TiDB instance.
-2. The `127.0.0.1:4000` TiDB instance processes this DDL request, which indicates that the `127.0.0.1:4000` instance is the DDL owner at that time.
-3. The request with a DDL JOB ID of `80` has been processed.
+1.  DDL JOB IDが`80`の要求は、 `127.0.0.1:4002`のTiDBインスタンスに送信されます。
+2.  `127.0.0.1:4000`つのTiDBインスタンスがこのDDL要求を処理します。これは、 `127.0.0.1:4000`のインスタンスがその時点でDDL所有者であることを示しています。
+3.  DDLJOBIDが`80`の要求が処理されました。

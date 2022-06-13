@@ -2,37 +2,37 @@
 title: Pre-GA release notes
 ---
 
-# Pre-GA Release Notes
+# GA以前のリリースノート {#pre-ga-release-notes}
 
-On August 30, 2017, TiDB Pre-GA is released! This release is focused on MySQL compatibility, SQL optimization, stability, and performance.
+2017年8月30日、TiDB Pre-GAがリリースされました！このリリースは、MySQLの互換性、SQLの最適化、安定性、およびパフォーマンスに重点を置いています。
 
-## TiDB
+## TiDB {#tidb}
 
-+ The SQL query optimizer:
-    - Adjust the cost model
-    - Use index scan to handle the `where` clause with the `compare` expression which has different types on each side
-    - Support the Greedy algorithm based Join Reorder
-+ Many enhancements have been introduced to be more compatible with MySQL
-+ Support `Natural Join`
-+ Support the JSON type (Experimental), including the query, update and index of the JSON fields
-+ Prune the useless data to reduce the consumption of the executor memory
-+ Support configuring prioritization in the SQL statements and automatically set the prioritization for some of the statements according to the query type
-+ Completed the expression refactor and the speed is increased by about 30%
+-   SQLクエリオプティマイザ：
+    -   コストモデルを調整する
+    -   インデックススキャンを使用して、両側に異なるタイプを持つ`compare`式の`where`句を処理します
+    -   欲張りアルゴリズムベースの結合したテーブルの再配置をサポートする
+-   MySQLとの互換性を高めるために、多くの拡張機能が導入されました
+-   サポート`Natural Join`
+-   JSONフィールドのクエリ、更新、インデックスなど、JSONタイプ（実験的）をサポートします
+-   不要なデータを整理して、エグゼキュータメモリの消費を削減します
+-   SQLステートメントでの優先順位付けの構成をサポートし、クエリタイプに従って一部のステートメントの優先順位付けを自動的に設定します
+-   式のリファクタリングを完了し、速度が約30％向上しました
 
-## Placement Driver (PD)
+## 配置ドライバー（PD） {#placement-driver-pd}
 
-+ Support manually changing the leader of the PD cluster
+-   PDクラスタのリーダーの手動変更をサポート
 
-## TiKV
+## TiKV {#tikv}
 
-+ Use dedicated Rocksdb instance to store Raft log
-+ Use `DeleteRange` to speed up the deleting of replicas
-+ Coprocessor now supports more pushdown operators
-+ Improve the performance and stability
+-   専用のRocksdbインスタンスを使用してRaftログを保存する
+-   `DeleteRange`を使用して、レプリカの削除を高速化します
+-   コプロセッサーは、より多くのプッシュダウン演算子をサポートするようになりました
+-   パフォーマンスと安定性を向上させる
 
-## TiDB Connector for Spark Beta Release
+## Sparkベータリリース用のTiDBコネクタ {#tidb-connector-for-spark-beta-release}
 
-+ Implement the predicates pushdown
-+ Implement the aggregation pushdown
-+ Implement range pruning
-+ Capable of running full set of TPC+H except for one query that needs view support
+-   述語プッシュダウンを実装する
+-   集約プッシュダウンを実装する
+-   範囲プルーニングを実装する
+-   ビューのサポートが必要な1つのクエリを除いて、TPC+Hのフルセットを実行できます

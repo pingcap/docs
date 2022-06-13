@@ -3,31 +3,31 @@ title: Read Historical Data Using the `tidb_read_staleness` System Variable
 summary: Learn how to read historical data using the `tidb_read_staleness` system variable.
 ---
 
-# Read Historical Data Using the `tidb_read_staleness` System Variable
+# <code>tidb_read_staleness</code>システム変数を使用して履歴データを読み取る {#read-historical-data-using-the-code-tidb-read-staleness-code-system-variable}
 
-To support reading the historical data, in v5.4, TiDB introduces a new system variable `tidb_read_staleness`. This document describes how to read historical data through this system variable, including detailed operating procedures.
+履歴データの読み取りをサポートするために、v5.4では、TiDBは新しいシステム変数`tidb_read_staleness`を導入しています。このドキュメントでは、詳細な操作手順を含め、このシステム変数を介して履歴データを読み取る方法について説明します。
 
-## Feature description
+## 機能の説明 {#feature-description}
 
-The `tidb_read_staleness` system variable is used to set the time range of historical data that TiDB can read in the current session. The data type of this variable is int type, and the scope of it is `SESSION`. After setting the value, TiDB selects a timestamp as new as possible from the range allowed by this variable, and all subsequent read operations are performed against this timestamp. For example, if the value of this variable is set to `-5`, on the condition that TiKV has the corresponding historical version's data, TiDB selects a timestamp as new as possible within a 5-second time range.
+`tidb_read_staleness`システム変数は、TiDBが現在のセッションで読み取ることができる履歴データの時間範囲を設定するために使用されます。この変数のデータ型はint型であり、そのスコープは`SESSION`です。値を設定した後、TiDBはこの変数で許可されている範囲から可能な限り新しいタイムスタンプを選択し、以降のすべての読み取り操作はこのタイムスタンプに対して実行されます。たとえば、この変数の値が`-5`に設定されている場合、TiKVに対応する履歴バージョンのデータがあることを条件として、TiDBは5秒の時間範囲内で可能な限り新しいタイムスタンプを選択します。
 
-After enabling `tidb_read_staleness`, you still can perform the following operations:
+`tidb_read_staleness`を有効にした後でも、次の操作を実行できます。
 
-- Insert, modify, delete data or perform DML operations in the current session. These statements are not affected by `tidb_read_staleness`.
-- Start an interactive transaction in the current session. Queries within this transaction still read the latest data.
+-   現在のセッションでデータを挿入、変更、削除、またはDML操作を実行します。これらのステートメントは`tidb_read_staleness`の影響を受けません。
+-   現在のセッションで対話型トランザクションを開始します。このトランザクション内のクエリは、引き続き最新のデータを読み取ります。
 
-After reading the historical data, you can read the latest data in the following two ways:
+履歴データを読み取った後、次の2つの方法で最新のデータを読み取ることができます。
 
-- Start a new session.
-- Set the value of the `tidb_read_staleness` variable to `""` using the `SET` statement.
+-   新しいセッションを開始します。
+-   `SET`ステートメントを使用して、 `tidb_read_staleness`変数の値を`""`に設定します。
 
-## Usage examples
+## 使用例 {#usage-examples}
 
-This section describes how to use `tidb_read_staleness` with examples.
+このセクションでは、例を使用して`tidb_read_staleness`を使用する方法について説明します。
 
-1. Create a table, and insert a few rows of data into the table:
+1.  テーブルを作成し、テーブルに数行のデータを挿入します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     create table t (c int);
@@ -37,7 +37,7 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 0 rows affected (0.01 sec)
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     insert into t values (1), (2), (3);
@@ -47,9 +47,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 3 rows affected (0.00 sec)
     ```
 
-2. Check out the data in the table:
+2.  表のデータを確認してください。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select * from t;
@@ -66,9 +66,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-3. Update the data in a row:
+3.  行のデータを更新します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     update t set c=22 where c=2;
@@ -78,9 +78,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 1 row affected (0.00 sec)
     ```
 
-4. Confirm that the data has been updated:
+4.  データが更新されたことを確認します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select * from t;
@@ -97,13 +97,13 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-5. Set the `tidb_read_staleness` system variable.
+5.  `tidb_read_staleness`のシステム変数を設定します。
 
-    The scope of this variable is `SESSION`. After setting its value, TiDB reads the latest version data before the time set by the value.
+    この変数のスコープは`SESSION`です。値を設定した後、TiDBは値で設定された時間より前に最新バージョンのデータを読み取ります。
 
-    The following setting indicates that TiDB selects a timestamp as new as possible within the time range from 5 seconds ago to now and uses it as the timestamp for reading historical data:
+    次の設定は、TiDBが5秒前から現在までの時間範囲内で可能な限り新しいタイムスタンプを選択し、それを履歴データを読み取るためのタイムスタンプとして使用することを示しています。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set @@tidb_read_staleness="-5";
@@ -113,14 +113,14 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-    > **Note:**
+    > **ノート：**
     >
-    >  - Use `@@` instead of `@` before `tidb_read_staleness`. `@@` means system variables, and `@` means user variables.
-    >  - You need to set the historical time range (the value of `tidb_read_staleness`) according to the total time that you spent in step 3 and step 4. Otherwise, the latest data will be displayed in the query results, not the historical data. Therefore, you need to adjust this time range according to the time you spent on operations. For example, in this example, since the set time range is 5 seconds, you need to complete step 3 and step 4 within 5 seconds.
+    > -   `tidb_read_staleness`の前に`@`ではなく`@@`を使用します。 `@@`はシステム変数を意味し、 `@`はユーザー変数を意味します。
+    > -   手順3と手順4で費やした合計時間に応じて、履歴時間範囲（値`tidb_read_staleness` ）を設定する必要があります。そうしないと、履歴データではなく、最新のデータがクエリ結果に表示されます。したがって、操作に費やした時間に応じて、この時間範囲を調整する必要があります。たとえば、この例では、設定された時間範囲が5秒であるため、5秒以内にステップ3とステップ4を完了する必要があります。
 
-    The data read here is the data before the update, that is, the historical data:
+    ここで読み取られるデータは、更新前のデータ、つまり履歴データです。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select * from t;
@@ -137,9 +137,9 @@ This section describes how to use `tidb_read_staleness` with examples.
     3 rows in set (0.00 sec)
     ```
 
-6. After un-setting this variable as follows, TiDB can read the latest data:
+6.  この変数の設定を次のように解除すると、TiDBは最新のデータを読み取ることができます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     set @@tidb_read_staleness="";
@@ -149,7 +149,7 @@ This section describes how to use `tidb_read_staleness` with examples.
     Query OK, 0 rows affected (0.00 sec)
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select * from t;

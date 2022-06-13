@@ -3,13 +3,13 @@ title: Explain Statements Using Partitions
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements Using Partitions
+# パーティションを使用してステートメントを説明する {#explain-statements-using-partitions}
 
-The `EXPLAIN` statement displays the partitions that TiDB needs to access in order to execute a query. Because of [partition pruning](/partition-pruning.md), the displayed partitions are often only a subset of the overall partitions. This document describes some of the optimizations for common partitioned tables, and how to interpret the output of `EXPLAIN`.
+`EXPLAIN`ステートメントは、クエリを実行するためにTiDBがアクセスする必要のあるパーティションを表示します。 [パーティションの剪定](/partition-pruning.md)のため、表示されるパーティションは、多くの場合、パーティション全体のサブセットにすぎません。このドキュメントでは、一般的なパーティションテーブルのいくつかの最適化と、 `EXPLAIN`の出力を解釈する方法について説明します。
 
-The sample data used in this document:
+このドキュメントで使用されているサンプルデータ：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -53,9 +53,9 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1;
 ```
 
-The following example shows a statement against the newly created partitioned table:
+次の例は、新しく作成されたパーティション表に対するステートメントを示しています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
@@ -74,16 +74,16 @@ EXPLAIN SELECT COUNT(*) FROM t1 WHERE d = '2017-06-01';
 5 rows in set (0.01 sec)
 ```
 
-Starting from the inner-most (`└─TableFullScan_19`) operator and working back towards the root operator (`StreamAgg_21`):
+最も内側の（ `└─TableFullScan_19` ）演算子から開始し、ルート演算子（ `StreamAgg_21` ）に向かって戻ります。
 
-* TiDB successfully identified that only one partition (`p2017`) needed to be accessed. This is noted under `access object`.
-* The partition itself was scanned in the operator `└─TableFullScan_19` and then `└─Selection_20` was applied to filter for rows that have a start date of `2017-06-01 00:00:00.000000`.
-* The rows that match `└─Selection_20` are then stream aggregated in the coprocessor, which natively understands the `count` function.
-* Each coprocessor request then sends back one row to  `└─TableReader_22` inside TiDB, which is then stream aggregated under `StreamAgg_21` and one row is returned to the client.
+-   TiDBは、アクセスする必要があるパーティションが1つ（ `p2017` ）だけであることを正常に識別しました。これは`access object`の下に記載されています。
+-   パーティション自体がオペレーター`└─TableFullScan_19`でスキャンされ、開始日が`2017-06-01 00:00:00.000000`の行をフィルターに適用するために`└─Selection_20`が適用されました。
+-   次に、 `└─Selection_20`に一致する行は、 `count`の関数をネイティブに理解するコプロセッサーでストリーム集約されます。
+-   次に、各コプロセッサー要求はTiDB内の1行を`└─TableReader_22`に送り返します。これは、 `StreamAgg_21`の下でストリーム集約され、1行がクライアントに返されます。
 
-In the following example, partition pruning does not eliminate any partitions:
+次の例では、パーティションプルーニングはパーティションを削除しません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
@@ -124,9 +124,9 @@ EXPLAIN SELECT COUNT(*) FROM t1 WHERE YEAR(d) = 2017;
 27 rows in set (0.00 sec)
 ```
 
-From the output above:
+上記の出力から：
 
-* TiDB believes that it needs to access all of the partitions `(p2016..pMax)`. This is because the predicate `YEAR(d) = 2017` is considered [non-sargable](https://en.wikipedia.org/wiki/Sargable). This issue is not specific to TiDB.
-* As each partition is scanned, a `Selection` operator filters out rows that do not match the year of 2017.
-* A stream aggregation on each partition is performed to count the number of rows that match.
-* The operator `└─PartitionUnion_21` unions the results from accessing each partition.
+-   TiDBは、すべてのパーティションにアクセスする必要があると考えています`(p2016..pMax)` 。これは、述語`YEAR(d) = 2017`が[引数不可](https://en.wikipedia.org/wiki/Sargable)と見なされるためです。この問題はTiDBに固有のものではありません。
+-   各パーティションがスキャンされると、 `Selection`人のオペレーターが2017年と一致しない行を除外します。
+-   一致する行数をカウントするために、各パーティションでストリーム集約が実行されます。
+-   演算子`└─PartitionUnion_21`は、各パーティションにアクセスした結果を結合します。

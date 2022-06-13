@@ -3,43 +3,43 @@ title: Developer Overview
 summary: Introduce the overview of the developer guide.
 ---
 
-# Developer Guide Overview
+# 開発者ガイドの概要 {#developer-guide-overview}
 
-This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
+このガイドはアプリケーション開発者向けに書かれていますが、TiDBの内部動作に興味がある場合、またはTiDB開発に参加したい場合は、TiDBの詳細について[TiDBカーネル開発ガイド](https://pingcap.github.io/tidb-dev-guide/)をお読みください。
 
-This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems. Therefore, before reading this page, it is recommended that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+このチュートリアルでは、TiDBを使用してアプリケーションをすばやく構築する方法、TiDBの考えられる使用例、および一般的な問題を処理する方法を示します。したがって、このページを読む前に、 [TiDBデータベースプラットフォームのクイックスタートガイド](/quick-start-with-tidb.md)を読むことをお勧めします。
 
-## TiDB basics
+## TiDBの基本 {#tidb-basics}
 
-Before you start working with TiDB, you need to understand some important mechanisms of how TiDB works:
+TiDBの使用を開始する前に、TiDBがどのように機能するかについてのいくつかの重要なメカニズムを理解する必要があります。
 
-- Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how transactions work in TiDB, or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to learn about transaction knowledge required for application development.
-- Understand [the way applications interact with TiDB](#the-way-applications-interact-with-tidb).
+-   [TiDBトランザクションの概要](/transaction-overview.md)を読んでTiDBでトランザクションがどのように機能するかを理解するか、 [アプリケーション開発者向けのトランザクションノート](/develop/dev-guide-transaction-overview.md)をチェックしてアプリケーション開発に必要なトランザクションの知識を学んでください。
+-   [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)を理解します。
 
-## TiDB transaction mechanisms
+## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 
-TiDB supports distributed transactions and offers both [optimistic transaction](/optimistic-transaction.md) and [pessimistic transaction](/pessimistic-transaction.md) modes. The current version of TiDB uses the **pessimistic transaction** mode by default, which allows you to transact with TiDB as you would with a traditional monolithic database (for example, MySQL).
+TiDBは分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)モードと[悲観的なトランザクション](/pessimistic-transaction.md)モードの両方を提供します。現在のバージョンのTiDBは、デフォルトで**悲観的トランザクション**モードを使用します。これにより、従来のモノリシックデータベース（MySQLなど）と同じようにTiDBでトランザクションを実行できます。
 
-You can start a transaction using [`BEGIN`](/sql-statements/sql-statement-begin.md), explicitly specify a **pessimistic transaction** using `BEGIN PESSIMISTIC`, or explicitly specify an **optimistic transaction** using `BEGIN OPTIMISTIC`. After that, you can either commit ([`COMMIT`](/sql-statements/sql-statement-commit.md)) or roll back ([`ROLLBACK`](/sql-statements/sql-statement-rollback.md)) the transaction.
+[`BEGIN`](/sql-statements/sql-statement-begin.md)を使用してトランザクションを開始するか、 `BEGIN PESSIMISTIC`を使用して**悲観的なトランザクション**を明示的に指定するか、 `BEGIN OPTIMISTIC`を使用して<strong>楽観的なトランザクション</strong>を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）またはロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）することができます。
 
-TiDB guarantees atomicity for all statements between the start of `BEGIN` and the end of `COMMIT` or `ROLLBACK`, that is, all statements that are executed during this period either succeed or fail as a whole. This is used to ensure data consistency you need for application development.
+TiDBは、 `BEGIN`の開始から`COMMIT`または`ROLLBACK`の終了までのすべてのステートメントのアトミック性を保証します。つまり、この期間中に実行されるすべてのステートメントは、全体として成功または失敗します。これは、アプリケーション開発に必要なデータの一貫性を確保するために使用されます。
 
-If you are not sure what an **optimistic transaction** is, do ***NOT*** use it yet. Because **optimistic transactions** require that the application can correctly handle [all errors](/error-codes.md) returned by the `COMMIT` statement. If you are not sure how your application handles them, use a **pessimistic transaction** instead.
+**楽観的なトランザクション**が何かわから*<strong>ない</strong>*場合は、まだ使用しないでください。<strong>楽観的なトランザクション</strong>では、アプリケーションが`COMMIT`ステートメントによって返される[すべてのエラー](/error-codes.md)を正しく処理できる必要があるためです。アプリケーションがそれらをどのように処理するかわからない場合は、代わりに<strong>悲観的なトランザクション</strong>を使用してください。
 
-## The way applications interact with TiDB
+## アプリケーションがTiDBと対話する方法 {#the-way-applications-interact-with-tidb}
 
-TiDB is highly compatible with the MySQL protocol and supports [most MySQL syntax and features](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility), so most MySQL connection libraries are compatible with TiDB. If your application framework or language does not have an official adaptation from PingCAP, it is recommended that you use MySQL's client libraries. More and more third-party libraries are actively supporting TiDB's different features.
+TiDBはMySQLプロトコルとの互換性が高く、 [ほとんどのMySQL構文と機能](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility)をサポートしているため、ほとんどのMySQL接続ライブラリはTiDBと互換性があります。アプリケーションフレームワークまたは言語にPingCAPからの正式な適応がない場合は、MySQLのクライアントライブラリを使用することをお勧めします。ますます多くのサードパーティライブラリがTiDBのさまざまな機能を積極的にサポートしています。
 
-Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the ORMs that support MySQL are also compatible with TiDB.
+TiDBはMySQLプロトコルおよびMySQL構文と互換性があるため、MySQLをサポートするほとんどのORMはTiDBとも互換性があります。
 
-## Read More
+## 続きを読む {#read-more}
 
-- [Quick Start](/develop/dev-guide-build-cluster-in-cloud.md)
-- [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
-- [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
-- [Database Schema Design](/develop/dev-guide-schema-design-overview.md)
-- [Write Data](/develop/dev-guide-insert-data.md)
-- [Read Data](/develop/dev-guide-get-data-from-single-table.md)
-- [Transaction](/develop/dev-guide-transaction-overview.md)
-- [Optimize](/develop/dev-guide-optimize-sql-overview.md)
-- [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)
+-   [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [DriverまたはORMを選択します](/develop/dev-guide-choose-driver-or-orm.md)
+-   [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)
+-   [データベーススキーマ設計](/develop/dev-guide-schema-design-overview.md)
+-   [データの書き込み](/develop/dev-guide-insert-data.md)
+-   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
+-   [取引](/develop/dev-guide-transaction-overview.md)
+-   [最適化](/develop/dev-guide-optimize-sql-overview.md)
+-   [アプリケーション例](/develop/dev-guide-sample-application-spring-boot.md)

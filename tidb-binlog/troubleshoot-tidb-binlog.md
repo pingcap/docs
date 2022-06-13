@@ -3,16 +3,16 @@ title: TiDB Binlog Troubleshooting
 summary: Learn the troubleshooting process of TiDB Binlog.
 ---
 
-# TiDB Binlog Troubleshooting
+# TiDBBinlogのトラブルシューティング {#tidb-binlog-troubleshooting}
 
-This document describes how to troubleshoot TiDB Binlog to find the problem.
+このドキュメントでは、問題を見つけるためにTiDBBinlogのトラブルシューティングを行う方法について説明します。
 
-If you encounter errors while running TiDB Binlog, take the following steps to troubleshoot:
+TiDB Binlogの実行中にエラーが発生した場合は、次の手順を実行してトラブルシューティングを行ってください。
 
-1. Check whether each monitoring metric is normal or not. Refer to [TiDB Binlog Monitoring](/tidb-binlog/monitor-tidb-binlog-cluster.md) for details.
+1.  各監視メトリックが正常かどうかを確認します。詳細は[TiDBBinlogモニタリング](/tidb-binlog/monitor-tidb-binlog-cluster.md)を参照してください。
 
-2. Use the [binlogctl tool](/tidb-binlog/binlog-control.md) to check whether the state of each Pump or Drainer node is normal or not.
+2.  [binlogctlツール](/tidb-binlog/binlog-control.md)を使用して、各ポンプまたはドレイナーノードの状態が正常であるかどうかを確認します。
 
-3. Check whether `ERROR` or `WARN` exists in the Pump log or Drainer log.
+3.  ポンプログまたはドレイナーログに`ERROR`または`WARN`が存在するかどうかを確認します。
 
-After finding out the problem by the above steps, refer to [FAQ](/tidb-binlog/tidb-binlog-faq.md) and [TiDB Binlog Error Handling](/tidb-binlog/handle-tidb-binlog-errors.md) for the solution. If you fail to find the solution or the solution provided does not help, submit an [issue](https://github.com/pingcap/tidb-binlog/issues) for help.
+上記の手順で問題を見つけたら、 [FAQ](/tidb-binlog/tidb-binlog-faq.md)と[TiDBBinlogエラー処理](/tidb-binlog/handle-tidb-binlog-errors.md)を参照して解決策を確認してください。解決策が見つからない場合、または提供されている解決策が役に立たない場合は、 [問題](https://github.com/pingcap/tidb-binlog/issues)を送信してください。

@@ -2,34 +2,34 @@
 title: tiup dm edit-config
 ---
 
-# tiup dm edit-config
+# tiup dm edit-config {#tiup-dm-edit-config}
 
-If you need to modify the cluster service configuration after the cluster is deployed, you can use the `tiup dm edit-config` command that starts an editor for you to modify the [topology file](/tiup/tiup-dm-topology-reference.md). of the specified cluster. This editor is specified in the `$EDITOR` environment variable by default. If the `$EDITOR` environment variable does not exist, the `vi` editor is used.
+クラスタのデプロイ後にクラスタサービス構成を変更する必要がある場合は、エディターを起動する`tiup dm edit-config`コマンドを使用して、 [トポロジーファイル](/tiup/tiup-dm-topology-reference.md)を変更できます。指定されたクラスタの。このエディターは、デフォルトで`$EDITOR`環境変数で指定されています。 `$EDITOR`環境変数が存在しない場合は、 `vi`エディターが使用されます。
 
-> **Note:**
+> **ノート：**
 >
-> + When you modify the configuration, you cannot add or delete machines. For how to add machines, see [Scale out a cluster](/tiup/tiup-component-dm-scale-out.md). For how to delete machines, see [Scale in a cluster](/tiup/tiup-component-dm-scale-in.md).
-> + After you execute the `tiup dm edit-config` command, the configuration is modified only on the control machine. Then you need to execute the `tiup dm reload` command to reload the configuration.
+> -   構成を変更する場合、マシンを追加または削除することはできません。マシンの追加方法については、 [クラスタをスケールアウトする](/tiup/tiup-component-dm-scale-out.md)を参照してください。マシンを削除する方法については、 [クラスタでのスケーリング](/tiup/tiup-component-dm-scale-in.md)を参照してください。
+> -   `tiup dm edit-config`コマンドを実行すると、制御マシンでのみ構成が変更されます。次に、 `tiup dm reload`コマンドを実行して構成を再ロードする必要があります。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm edit-config <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the cluster to operate on.
+`<cluster-name>` ：操作するクラスタ。
 
-## Option
+## オプション {#option}
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-- Normally, no output.
-- If you have mistakenly modified the fields that cannot be modified, when you save the file, an error is reported, reminding you to edit the file again. For the fields that cannot be modified, see [the topology file](/tiup/tiup-dm-topology-reference.md).
+-   通常、出力はありません。
+-   変更できないフィールドを誤って変更した場合、ファイルを保存するとエラーが報告され、ファイルを再度編集するように通知されます。変更できないフィールドについては、 [トポロジファイル](/tiup/tiup-dm-topology-reference.md)を参照してください。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

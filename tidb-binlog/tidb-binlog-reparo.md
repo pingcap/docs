@@ -3,15 +3,15 @@ title: Reparo User Guide
 summary: Learn to use Reparo.
 ---
 
-# Reparo User Guide
+# Reparoユーザーガイド {#reparo-user-guide}
 
-Reparo is a TiDB Binlog tool, used to recover the incremental data. To back up the incremental data, you can use Drainer of TiDB Binlog to output the binlog data in the protobuf format to files. To restore the incremental data, you can use Reparo to parse the binlog data in the files and apply the binlog in TiDB/MySQL.
+ReparoはTiDBBinlogツールであり、増分データを回復するために使用されます。インクリメンタルデータをバックアップするには、TiDB BinlogのDrainerを使用して、binlogデータをprotobuf形式でファイルに出力します。インクリメンタルデータを復元するには、Reparoを使用してファイル内のbinlogデータを解析し、TiDB/MySQLにbinlogを適用します。
 
-The Reparo installation package (`reparo`) is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+Reparoインストールパッケージ（ `reparo` ）はTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
-## Reparo usage
+## レパロの使用法 {#reparo-usage}
 
-### Description of command line parameters
+### コマンドラインパラメータの説明 {#description-of-command-line-parameters}
 
 ```
 Usage of Reparo:
@@ -51,7 +51,7 @@ Usage of Reparo:
     The number of SQL statements in a transaction that is output to the downstream database (`20` by default).
 ```
 
-### Description of the configuration file
+### 構成ファイルの説明 {#description-of-the-configuration-file}
 
 ```toml
 # The storage directory for the binlog file in the protobuf format that Drainer outputs
@@ -113,21 +113,20 @@ user = "root"
 password = ""
 ```
 
-### Start example
+### 例を開始 {#start-example}
 
 ```
 ./reparo -config reparo.toml
 ```
 
-> **Note:**
+> **ノート：**
 >
-> * `data-dir` specifies the directory for the binlog file that Drainer outputs.
-> * Both `start-datatime` and `start-tso` are used to specify the time point for starting recovery, but they are different in the time format. If they are not set, the recovery process starts from the earliest binlog file by default.
-> * Both `stop-datetime` and `stop-tso` are used to specify the time point for finishing recovery, but they are different in the time format. If they are not set, the recovery process ends up with the last binlog file by default.
-> * `dest-type` specifies the destination type. Its value can be "mysql" and "print."
+> -   `data-dir`は、Drainerが出力するbinlogファイルのディレクトリを指定します。
+> -   `start-datatime`と`start-tso`はどちらもリカバリを開始する時点を指定するために使用されますが、時間形式が異なります。それらが設定されていない場合、リカバリプロセスはデフォルトで最も古いbinlogファイルから開始されます。
+> -   `stop-datetime`と`stop-tso`はどちらもリカバリを終了する時点を指定するために使用されますが、時間形式が異なります。それらが設定されていない場合、リカバリプロセスはデフォルトで最後のbinlogファイルで終了します。
+> -   `dest-type`は宛先タイプを指定します。その値は「mysql」および「print」にすることができます。
 >
->     * When it is set to `mysql`, the data can be recovered to MySQL or TiDB that uses or is compatible with the MySQL protocol. In this case, you need to specify the database information in `[dest-db]` of the configuration information.
->     * When it is set to `print`, only the binlog information is printed. It is generally used for debugging and checking the binlog information. In this case, there is no need to specify `[dest-db]`.
->
-> * `replicate-do-db` specifies the database for recovery. If it is not set, all the databases are to be recovered.
-> * `replicate-do-table` specifies the table for recovery. If it is not set, all the tables are to be recovered.
+>     -   `mysql`に設定すると、MySQLプロトコルを使用するかMySQLプロトコルと互換性のあるMySQLまたはTiDBにデータを回復できます。この場合、構成情報の`[dest-db]`でデータベース情報を指定する必要があります。
+>     -   `print`に設定すると、binlog情報のみが出力されます。これは通常、binlog情報のデバッグとチェックに使用されます。この場合、 `[dest-db]`を指定する必要はありません。
+> -   `replicate-do-db`は、リカバリするデータベースを指定します。設定されていない場合は、すべてのデータベースがリカバリされます。
+> -   `replicate-do-table`は、リカバリ用のテーブルを指定します。設定されていない場合は、すべてのテーブルが復元されます。

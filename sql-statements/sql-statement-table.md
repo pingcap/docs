@@ -3,20 +3,20 @@ title: TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of TABLE for the TiDB database.
 ---
 
-# TABLE
+# テーブル {#table}
 
-The `TABLE` statement can be used instead of `SELECT * FROM` when no aggregation or complex filtering is needed.
+集計や複雑なフィルタリングが必要ない場合は、 `SELECT * FROM`の代わりに`TABLE`のステートメントを使用できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 TableStmt ::=
     "TABLE" Table ( "ORDER BY" Column )? ( "LIMIT" NUM )?
 ```
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1(id INT PRIMARY KEY);
@@ -26,7 +26,7 @@ CREATE TABLE t1(id INT PRIMARY KEY);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t1 VALUES (1),(2),(3);
@@ -37,7 +37,7 @@ Query OK, 3 rows affected (0.06 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 TABLE t1;
@@ -54,7 +54,7 @@ TABLE t1;
 3 rows in set (0.01 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 TABLE t1 ORDER BY id DESC;
@@ -71,7 +71,7 @@ TABLE t1 ORDER BY id DESC;
 3 rows in set (0.01 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 TABLE t1 LIMIT 1;
@@ -86,11 +86,11 @@ TABLE t1 LIMIT 1;
 1 row in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-The `TABLE` statement was introduced in MySQL 8.0.19.
+`TABLE`ステートメントはMySQL8.0.19で導入されました。
 
-## See also
+## も参照してください {#see-also}
 
-- [SELECT](/sql-statements/sql-statement-select.md)
-- [TABLE statements in MySQL](https://dev.mysql.com/doc/refman/8.0/en/table.html)
+-   [選択する](/sql-statements/sql-statement-select.md)
+-   [MySQLのTABLEステートメント](https://dev.mysql.com/doc/refman/8.0/en/table.html)

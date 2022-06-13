@@ -3,29 +3,29 @@ title: binlogctl
 summary: Learns how to use `binlogctl`.
 ---
 
-# binlogctl
+# binlogctl {#binlogctl}
 
-[Binlog Control](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) (`binlogctl` for short) is a command line tool for TiDB Binlog. You can use `binlogctl` to manage TiDB Binlog clusters.
+[ビンログ制御](https://github.com/pingcap/tidb-binlog/tree/master/binlogctl) （略して`binlogctl` ）は、TiDBBinlogのコマンドラインツールです。 `binlogctl`を使用して、TiDBBinlogクラスターを管理できます。
 
-You can use `binlogctl` to:
+`binlogctl`を使用して次のことができます。
 
-* Check the state of Pump or Drainer
-* Pause or close Pump or Drainer
-* Handle the abnormal state of Pump or Drainer
+-   ポンプまたはドレイナーの状態を確認してください
+-   ポンプまたはドレイナーを一時停止または閉じます
+-   ポンプまたはドレイナーの異常状態に対処する
 
-The following are its usage scenarios:
+その使用シナリオは次のとおりです。
 
-* An error occurs during data replication or you need to check the running state of Pump or Drainer.
-* You need to pause or close Pump or Drainer when maintaining the cluster.
-* A Pump or Drainer process exits abnormally, while the node state is not updated or is unexpected. This affects the data replication task.
+-   データ複製中にエラーが発生したか、ポンプまたはドレイナーの実行状態を確認する必要があります。
+-   クラスタを保守するときは、ポンプまたはドレイナーを一時停止または閉じる必要があります。
+-   ノードの状態が更新されていないか、予期しないときに、ポンプまたはドレイナープロセスが異常終了します。これは、データ複製タスクに影響します。
 
-## Download `binlogctl`
+## <code>binlogctl</code>ダウンロードする {#download-code-binlogctl-code}
 
-`binlogctl` is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+`binlogctl`はTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
-## Descriptions
+## 説明 {#descriptions}
 
-Command line parameters:
+コマンドラインパラメータ：
 
 ```
 Usage of binlogctl:
@@ -54,13 +54,13 @@ Usage of binlogctl:
         set time zone if you want to save time info in savepoint file; for example, Asia/Shanghai for CST time, `Local` for local time
 ```
 
-Command examples:
+コマンドの例：
 
-- Check the state of all the Pump or Drainer nodes.
+-   すべてのポンプノードまたはドレイナーノードの状態を確認します。
 
-    Set `cmd` to `pumps` or `drainers`. For example:
+    `cmd`を`pumps`または`drainers`に設定します。例えば：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pumps
@@ -70,7 +70,7 @@ Command examples:
     [2019/04/28 09:29:59.016 +00:00] [INFO] [nodes.go:48] ["query node"] [type=pump] [node="{NodeID: 1.1.1.1:8250, Addr: pump:8250, State: online, MaxCommitTS: 408012403141509121, UpdateTime: 2019-04-28 09:29:57 +0000 UTC}"]
     ```
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd drainers
@@ -80,31 +80,31 @@ Command examples:
     [2019/04/28 09:29:59.016 +00:00] [INFO] [nodes.go:48] ["query node"] [type=drainer] [node="{NodeID: 1.1.1.1:8249, Addr: 1.1.1.1:8249, State: online, MaxCommitTS: 408012403141509121, UpdateTime: 2019-04-28 09:29:57 +0000 UTC}"]
     ```
 
-- Pause or close Pump or Drainer.
+-   ポンプまたはドレイナーを一時停止または閉じます。
 
-    You can use the following commands to pause or close services:
+    次のコマンドを使用して、サービスを一時停止または閉じることができます。
 
-    | Command             | Description           | Example                                                                                             |
-    | :--------------- | :------------- | :------------------------------------------------------------------------------------------------|
-    | pause-pump      | Pause Pump      | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump -node-id ip-127-0-0-1:8250`       |
-    | pause-drainer   | Pause Drainer   | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-drainer -node-id ip-127-0-0-1:8249`    |
-    | offline-pump    | Close Pump      | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd offline-pump -node-id ip-127-0-0-1:8250`     |
-    | offline-drainer | Close Drainer   | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd offline-drainer -node-id ip-127-0-0-1:8249`  |
+    | 指示         | 説明          | 例                                                                                              |
+    | :--------- | :---------- | :--------------------------------------------------------------------------------------------- |
+    | 一時停止-ポンプ   | ポンプを一時停止します | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-pump -node-id ip-127-0-0-1:8250`      |
+    | 一時停止-水切り   | ドレイナーを一時停止  | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd pause-drainer -node-id ip-127-0-0-1:8249`   |
+    | オフラインポンプ   | ポンプを閉じる     | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd offline-pump -node-id ip-127-0-0-1:8250`    |
+    | オフラインドレイナー | ドレイナーを閉じる   | `bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd offline-drainer -node-id ip-127-0-0-1:8249` |
 
-    `binlogctl` sends the HTTP request to the Pump or Drainer node. After receiving the request, the node executes the exiting procedures accordingly.
+    `binlogctl`は、HTTPリクエストをPumpまたはDrainerノードに送信します。要求を受信した後、ノードはそれに応じて終了手順を実行します。
 
-- Modify the state of a Pump or Drainer node in abnormal states.
+-   異常な状態のポンプまたはドレイナーノードの状態を変更します。
 
-    When a Pump or Drainer node runs normally or when it is paused or closed in the normal process, it is in the normal state. In abnormal states, the Pump or Drainer node cannot correctly maintain its state. This affects data replication tasks. In this case, use `binlogctl` to repair the state information.
+    ポンプノードまたはドレイナーノードが正常に動作している場合、または通常のプロセスで一時停止または閉じている場合、通常の状態になります。異常な状態では、PumpまたはDrainerノードはその状態を正しく維持できません。これは、データ複製タスクに影響します。この場合、 `binlogctl`を使用して状態情報を修復します。
 
-    To update the state of a Pump or Drainer node, set `cmd` to `update-pump` or `update-drainer`. The state can be `paused` or `offline`. For example:
+    PumpまたはDrainerノードの状態を更新するには、 `cmd`を`update-pump`または`update-drainer`に設定します。状態は`paused`または`offline`にすることができます。例えば：
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     bin/binlogctl -pd-urls=http://127.0.0.1:2379 -cmd update-pump -node-id ip-127-0-0-1:8250 -state paused
     ```
 
-    > **Note:**
+    > **ノート：**
     >
-    > When a Pump or Drainer node runs normally, it regularly updates its state to PD. The above command directly modifies the Pump or Drainer state saved in PD; therefore, do not use the command when the Pump or Drainer node runs normally. For more information, refer to [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md).
+    > PumpまたはDrainerノードが正常に実行されると、その状態は定期的にPDに更新されます。上記のコマンドは、PDに保存されているポンプまたはドレイナーの状態を直接変更します。したがって、PumpノードまたはDrainerノードが正常に実行されている場合は、このコマンドを使用しないでください。詳細については、 [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)を参照してください。

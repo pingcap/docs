@@ -3,164 +3,163 @@ title: Numeric Types
 summary: Learn about numeric data types supported in TiDB.
 ---
 
-# Numeric Types
+# 数値タイプ {#numeric-types}
 
-TiDB supports all the MySQL numeric types, including:
+TiDBは、以下を含むすべてのMySQL数値タイプをサポートします。
 
-+ [Integer Types](#integer-types) (Exact Value)
-+ [Floating-Point Types](#floating-point-types) (Approximate Value)
-+ [Fixed-Point Types](#fixed-point-types) (Exact Value)
+-   [整数型](#integer-types) （正確な値）
+-   [浮動小数点型](#floating-point-types) （概算値）
+-   [固定小数点タイプ](#fixed-point-types) （正確な値）
 
-## Integer types
+## 整数型 {#integer-types}
 
-TiDB supports all the MySQL integer types, including `INTEGER`/`INT`, `TINYINT`, `SMALLINT`, `MEDIUMINT`, and `BIGINT`. For more information, see [Integer Data Type Syntax in MySQL](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html).
+`TINYINT`は、 `INTEGER` / `INT` 、および`SMALLINT`を含むすべてのMySQL整数型を`BIGINT`し`MEDIUMINT` 。詳細については、 [MySQLの整数データ型構文](https://dev.mysql.com/doc/refman/5.7/en/integer-types.html)を参照してください。
 
-The following table summarizes field descriptions:
+次の表は、フィールドの説明をまとめたものです。
 
-| Syntax Element | Description |
-| -------- | ------------------------------- |
-| M | the display width of the type. Optional. |
-| UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
-| ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
+| 構文要素  | 説明                                              |
+| ----- | ----------------------------------------------- |
+| M     | タイプの表示幅。オプション。                                  |
+| 未署名   | 署名なし。省略した場合はSIGNEDです。                           |
+| ゼロフィル | 数値列にZEROFILLを指定すると、TiDBは自動的にUNSIGNED属性を列に追加します。 |
 
-The following table summarizes the required storage and range for integer types supported by TiDB:
+次の表は、TiDBでサポートされている整数型に必要なストレージと範囲をまとめたものです。
 
-| Data Type | Storage Required (bytes) | Minimum Value (signed/unsigned) | Maximum value (signed/unsigned) |
-| ------- | -------- | ----------- | ------------ |
-| `TINYINT` | 1 | -128 / 0 | 127 / 255 |
-| `SMALLINT` | 2 | -32768 / 0 | 32767 / 65535 |
-| `MEDIUMINT` | 3 | -8388608 / 0 | 8388607 / 16777215 |
-| `INT` | 4 | -2147483648 / 0 | 2147483647 / 4294967295 |
-| `BIGINT` | 8 | -9223372036854775808 / 0 | 9223372036854775807 / 18446744073709551615 |
+| データ・タイプ     | 必要なストレージ（バイト） | 最小値（符号付き/符号なし）           | 最大値（符号付き/符号なし）                           |
+| ----------- | ------------- | ------------------------ | ---------------------------------------- |
+| `TINYINT`   | 1             | -128/0                   | 127/255                                  |
+| `SMALLINT`  | 2             | -32768/0                 | 32767/65535                              |
+| `MEDIUMINT` | 3             | -8388608 / 0             | 8388607/16777215                         |
+| `INT`       | 4             | -2147483648/0            | 2147483647/4294967295                    |
+| `BIGINT`    | 8             | -9223372036854775808 / 0 | 9223372036854775807/18446744073709551615 |
 
-### `BIT` type
+### <code>BIT</code>タイプ {#code-bit-code-type}
 
-The BIT data type. A type of BIT(M) enables the storage of M-bit values. M can range from 1 to 64, with the default value of 1:
+BITデータ型。 BIT（M）のタイプは、Mビット値の格納を可能にします。 Mの範囲は1〜64で、デフォルト値は1です。
 
 ```sql
 BIT[(M)]
 ```
 
-### `BOOLEAN` type
+### <code>BOOLEAN</code>型 {#code-boolean-code-type}
 
-The `BOOLEAN` type and its alias `BOOL` are equivalent to `TINYINT(1)`. If the value is `0`, it is considered as `False`; otherwise, it is considered `True`. As in MySQL, `True` is `1` and `False` is `0`:
+`BOOLEAN`タイプとそのエイリアス`BOOL`は`TINYINT(1)`と同等です。値が`0`の場合、 `False`と見なされます。それ以外の場合は、 `True`と見なされます。 MySQLと同様に、 `True`は`1`は`False` `0` 。
 
 ```sql
 BOOLEAN
 ```
 
-### `TINYINT` type
+### <code>TINYINT</code>タイプ {#code-tinyint-code-type}
 
-The `TINYINT` data type stores signed values of range [-128, 127] and unsigned values of range [0, 255]:
+`TINYINT`データ型は、範囲[-128、127]の符号付き値と範囲[0、255]の符号なし値を格納します。
 
 ```sql
 TINYINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### `SMALLINT` type
+### <code>SMALLINT</code>タイプ {#code-smallint-code-type}
 
-The `SMALLINT` data type stores signed values of range [-32768, 32767], and unsigned values of range [0, 65535]:
+`SMALLINT`データ型は、範囲[-32768、32767]の符号付きの値と、範囲[0、65535]の符号なしの値を格納します。
 
 ```sql
 SMALLINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### `MEDIUMINT` type
+### <code>MEDIUMINT</code>タイプ {#code-mediumint-code-type}
 
-The `MEDIUMINT` data type stores signed values of range [-8388608, 8388607], and unsigned values of range [0, 16777215]:
+`MEDIUMINT`データ型は、範囲[-8388608、8388607]の符号付きの値と、範囲[0、16777215]の符号なしの値を格納します。
 
 ```sql
 MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### `INTEGER` type
+### <code>INTEGER</code>タイプ {#code-integer-code-type}
 
-The `INTEGER` type and its alias `INT` stores signed values of range [-2147483648, 2147483647], and unsigned values of range [0, 4294967295]:
+`INTEGER`タイプとそのエイリアス`INT`は、範囲[-2147483648、2147483647]の符号付き値と、範囲[0、4294967295]の符号なし値を格納します。
 
 ```sql
 INT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-You can also use another form:
+別のフォームを使用することもできます。
 
 ```sql
 INTEGER[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-### `BIGINT` type
+### <code>BIGINT</code>タイプ {#code-bigint-code-type}
 
-The `BIGINT` data type stores signed values of range [-9223372036854775808, 9223372036854775807], and unsigned values of range [0, 18446744073709551615]:
+`BIGINT`データ型は、範囲[-9223372036854775808、9223372036854775807]の符号付き値と範囲[0、18446744073709551615]の符号なし値を格納します。
 
 ```sql
 BIGINT[(M)] [UNSIGNED] [ZEROFILL]
 ```
 
-## Floating-point types
+## 浮動小数点型 {#floating-point-types}
 
-TiDB supports all the MySQL floating-point types, including `FLOAT`, and `DOUBLE`. For more information, see [Floating-Point Types (Approximate Value) - FLOAT, DOUBLE in MySQL](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html).
+TiDBは、 `FLOAT` 、および`DOUBLE`を含むすべてのMySQL浮動小数点型をサポートします。詳細については、 [浮動小数点型（概算値）-MySQLのFLOAT、DOUBLE](https://dev.mysql.com/doc/refman/5.7/en/floating-point-types.html)を参照してください。
 
-The following table summarizes field descriptions:
+次の表は、フィールドの説明をまとめたものです。
 
-| Syntax Element | Description |
-| -------- | ------------------------------- |
-| M | the total number of digits |
-| D | the number of digits following the decimal point |
-| UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
-| ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
+| 構文要素  | 説明                                              |
+| ----- | ----------------------------------------------- |
+| M     | 総桁数                                             |
+| D     | 小数点以下の桁数                                        |
+| 未署名   | 署名なし。省略した場合はSIGNEDです。                           |
+| ゼロフィル | 数値列にZEROFILLを指定すると、TiDBは自動的にUNSIGNED属性を列に追加します。 |
 
-The following table summarizes the required storage for floating-point types supported by TiDB:
+次の表は、TiDBでサポートされている浮動小数点型に必要なストレージをまとめたものです。
 
-| Data Type | Storage Required (bytes)|
-| ----------- |----------|
-| `FLOAT` | 4 |
-| `FLOAT(p)` | If 0 <= p <= 24, it is 4; if 25 <= p <= 53, it is 8|
-| `DOUBLE` | 8 |
+| データ・タイプ    | 必要なストレージ（バイト）                                          |
+| ---------- | ------------------------------------------------------ |
+| `FLOAT`    | 4                                                      |
+| `FLOAT(p)` | 0 &lt;= p &lt;= 24の場合、4です。 25 &lt;= p &lt;= 53の場合、8です。 |
+| `DOUBLE`   | 8                                                      |
 
-### `FLOAT` type
+### <code>FLOAT</code>タイプ {#code-float-code-type}
 
-The `FLOAT` type stores a single-precision floating-point number. Permissible values are -3.402823466E+38 to -1.175494351E-38, 0, and 1.175494351E-38 to 3.402823466E+38. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
+`FLOAT`タイプは、単精度浮動小数点数を格納します。許容値は、-3.402823466E + 38〜-1.175494351E-38、0、および1.175494351E-38〜3.402823466E+38です。これらは、IEEE標準に基づく理論上の制限です。ハードウェアまたはオペレーティングシステムによっては、実際の範囲がわずかに小さくなる場合があります。
 
-`FLOAT(p)` can be used to represent the required precision in bits. TiDB uses this value only to determine whether to use `FLOAT` or `DOUBLE` for the resulting data type. If p is from 0 to 24, the data type becomes FLOAT with no M or D values. If p is from 25 to 53, the data type becomes `DOUBLE` with no M or D values. The range of the resulting column is the same as for the single-precision `FLOAT` or double-precision `DOUBLE` data type.
+`FLOAT(p)`は、必要な精度をビットで表すために使用できます。 TiDBはこの値を使用して、結果のデータ型に`FLOAT`と`DOUBLE`のどちらを使用するかを決定します。 pが0〜24の場合、データ型はMまたはD値のないFLOATになります。 pが25〜53の場合、データ型は`DOUBLE`になり、M値またはD値はありません。結果の列の範囲は、単精度`FLOAT`または倍精度`DOUBLE`のデータ型の場合と同じです。
 
 ```sql
 FLOAT[(M,D)] [UNSIGNED] [ZEROFILL]
 FLOAT(p) [UNSIGNED] [ZEROFILL]
 ```
 
-> **Note:**
+> **ノート：**
 >
-> As in MySQL, the `FLOAT` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
-> In TiDB, the default precision of the `FLOAT` data type is 8 bits, but in MySQL, the default precision is 6 bits. For example, assuming that you insert `123456789` and `1.23456789` into columns of the `FLOAT` type in both TiDB and MySQL, when you query the corresponding values in MySQL, you get `123457000` and `1.23457`, while in TiDB, you get `123456790` and `1.2345679`.
+> MySQLと同様に、 `FLOAT`データ型は概算値を格納します。通貨などの値については、代わりに`DECIMAL`タイプを使用することをお勧めします。 TiDBでは、 `FLOAT`データ型のデフォルトの精度は8ビットですが、MySQLでは、デフォルトの精度は6ビットです。たとえば、TiDBとMySQLの両方で`FLOAT`タイプの列に`123456789`と`1.23456789`を挿入すると、MySQLで対応する値をクエリすると、 `123457000`と`1.23457`が得られますが、TiDBでは`123456790`と`1.2345679`が得られます。
 
-### `DOUBLE` type
+### <code>DOUBLE</code>タイプ {#code-double-code-type}
 
-The `DOUBLE` type, and its alias `DOUBLE PRECISION` stores a double-precision floating-point number. Permissible values are -1.7976931348623157E+308 to -2.2250738585072014E-308, 0, and 2.2250738585072014E-308 to 1.7976931348623157E+308. These are the theoretical limits, based on the IEEE standard. The actual range might be slightly smaller depending on your hardware or operating system.
+`DOUBLE`型とそのエイリアス`DOUBLE PRECISION`は、倍精度浮動小数点数を格納します。許容値は、-1.7976931348623157E + 308〜-2.2250738585072014E-308、0、および2.2250738585072014E-308〜1.7976931348623157E+308です。これらは、IEEE標準に基づく理論上の制限です。ハードウェアまたはオペレーティングシステムによっては、実際の範囲がわずかに小さくなる場合があります。
 
 ```sql
 DOUBLE[(M,D)] [UNSIGNED] [ZEROFILL]
 DOUBLE PRECISION [(M,D)] [UNSIGNED] [ZEROFILL], REAL[(M,D)] [UNSIGNED] [ZEROFILL]
 ```
 
-> **Warning:**
+> **警告：**
 >
-> As in MySQL, the `DOUBLE` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
+> MySQLと同様に、 `DOUBLE`データ型は概算値を格納します。通貨などの値については、代わりに`DECIMAL`タイプを使用することをお勧めします。
 
-## Fixed-point types
+## 固定小数点タイプ {#fixed-point-types}
 
-TiDB supports all the MySQL floating-point types, including DECIMAL, and NUMERIC. For more information, [Fixed-Point Types (Exact Value) - DECIMAL, NUMERIC in MySQL](https://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html).
+TiDBは、DECIMALやNUMERICを含むすべてのMySQL浮動小数点型をサポートしています。詳細については、 [固定小数点タイプ（正確な値）-MySQLのDECIMAL、NUMERIC](https://dev.mysql.com/doc/refman/5.7/en/fixed-point-types.html) 。
 
-The meaning of the fields:
+フィールドの意味：
 
-| Syntax Element | Description |
-| -------- | ------------------------------- |
-| M | the total number of digits |
-| D | the number of digits after the decimal point |
-| UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
-| ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
+| 構文要素  | 説明                                              |
+| ----- | ----------------------------------------------- |
+| M     | 総桁数                                             |
+| D     | 小数点以下の桁数                                        |
+| 未署名   | 署名なし。省略した場合はSIGNEDです。                           |
+| ゼロフィル | 数値列にZEROFILLを指定すると、TiDBは自動的にUNSIGNED属性を列に追加します。 |
 
-### `DECIMAL` type
+### <code>DECIMAL</code>タイプ {#code-decimal-code-type}
 
-`DECIMAL` and its alias `NUMERIC` stores a packed "exact" fixed-point number. M is the total number of digits (the precision, the number of integer digits + the number of decimal digits), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
+`DECIMAL`とそのエイリアス`NUMERIC`は、パックされた「正確な」固定小数点数を格納します。 Mは総桁数（精度、整数桁数＋ 10進数）、Dは小数点以下の桁数（目盛り）です。小数点と（負の数の場合）-記号はMではカウントされません。Dが0の場合、値には小数点または小数部がありません。 DECIMALの最大桁数（M）は65です。サポートされる小数点以下の最大数（D）は30です。Dを省略した場合のデフォルトは0です。Mを省略した場合のデフォルトは10です。
 
 ```sql
 DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]

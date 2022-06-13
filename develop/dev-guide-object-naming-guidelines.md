@@ -3,45 +3,45 @@ title: Object Naming Convention
 summary: Learn the object naming convention in TiDB.
 ---
 
-# Object Naming Convention
+# オブジェクト命名規則 {#object-naming-convention}
 
-This document introduces the rules to name database objects, such as database, table, index, and user.
+このドキュメントでは、データベース、テーブル、インデックス、ユーザーなどのデータベースオブジェクトに名前を付けるためのルールを紹介します。
 
-## General rules
+## 一般的なルール {#general-rules}
 
-- It is recommended to use meaningful English words separated by underscores.
-- Use only letters, numbers, and underscores in a name.
-- Avoid using TiDB reserved words, such as `group` and `order`, as column names.
-- It is recommended to use lowercase letters for all database objects.
+-   アンダースコアで区切った意味のある英語の単語を使用することをお勧めします。
+-   名前には文字、数字、およびアンダースコアのみを使用してください。
+-   列名として、 `group`や`order`などのTiDB予約語を使用しないでください。
+-   すべてのデータベースオブジェクトには小文字を使用することをお勧めします。
 
-## Database naming convention
+## データベースの命名規則 {#database-naming-convention}
 
-It is recommended to differentiate database names by business, product, or other metrics and use no more than 20 characters in a database name. For example, you can name a temporary library as `tmp_crm` or a test library as `test_crm`.
+データベース名をビジネス、製品、またはその他のメトリックで区別し、データベース名に使用する文字数は20文字以下にすることをお勧めします。たとえば、一時ライブラリに`tmp_crm` 、テストライブラリに`test_crm`という名前を付けることができます。
 
-## Table naming convention
+## テーブルの命名規則 {#table-naming-convention}
 
-- Use the same prefix for tables of the same business or module, and make sure that the table name is self-explanatory as much as possible.
-- Separate words in a name by underscores. It is recommended to use no more than 32 characters in a table name.
-- It is recommended to annotate the purpose of the table for a better understanding. For example:
-    - Temporary table: `tmp_t_crm_relation_0425`
-    - Backup table: `bak_t_crm_relation_20170425`
-    - Temporary table of business operations: `tmp_st_{business code}_{creator abbreviation}_{date}`
-    - Record table of accounts period: `t_crm_ec_record_YYYY{MM}{dd}`
-- Create separate databases for tables of different business modules and add annotations accordingly.
-- Currently, TiDB only supports setting the value of `lower-case-table-names` to `2`. This means it is case-sensitive when you save a table name, but case-insensitive when you compare table names. The comparison is based on the lower case.
+-   同じビジネスまたはモジュールのテーブルに同じプレフィックスを使用し、テーブル名ができるだけわかりやすいものであることを確認してください。
+-   名前内の単語はアンダースコアで区切ります。テーブル名には32文字以内を使用することをお勧めします。
+-   理解を深めるために、表の目的に注釈を付けることをお勧めします。例えば：
+    -   一時テーブル： `tmp_t_crm_relation_0425`
+    -   バックアップテーブル： `bak_t_crm_relation_20170425`
+    -   事業運営の一時表： `tmp_st_{business code}_{creator abbreviation}_{date}`
+    -   勘定科目表期間の記録： `t_crm_ec_record_YYYY{MM}{dd}`
+-   異なるビジネスモジュールのテーブル用に個別のデータベースを作成し、それに応じて注釈を追加します。
+-   現在、TiDBは`lower-case-table-names`から`2`の値の設定のみをサポートしています。つまり、テーブル名を保存するときは大文字と小文字が区別されますが、テーブル名を比較するときは大文字と小文字が区別されません。比較は小文字に基づいています。
 
-## Column naming convention
+## 列の命名規則 {#column-naming-convention}
 
-- The column naming is the actual meaning or abbreviation of the column.
-- It is recommended to use the same column name between tables with the same meaning.
-- It is recommended to add annotations to columns and specify named values for enumerated types, such as "0: offline, 1: online".
-- It is recommended to name the boolean column as `is_{description}`. For example, the column of a `member` table that indicates whether the member is enabled, can be named as `is_enabled`.
-- It is not recommended to name a column with more than 30 characters, and the number of columns should be less than 60.
-- Avoid using TiDB reserved words as column names, such as `order`, `from`, and `desc`. To check whether a keyword is reserved, see [TiDB keywords](/keywords.md).
+-   列の名前は、列の実際の意味または省略形です。
+-   同じ意味を持つテーブル間で同じ列名を使用することをお勧めします。
+-   列に注釈を追加し、列挙型に「0：オフライン、1：オンライン」などの名前付き値を指定することをお勧めします。
+-   ブール列に`is_{description}`という名前を付けることをお勧めします。たとえば、メンバーが有効になっているかどうかを示す`member`テーブルの列には、 `is_enabled`という名前を付けることができます。
+-   30文字を超える列に名前を付けることはお勧めしません。また、列の数は60未満にする必要があります。
+-   `order`などの`from`予約語を列`desc`として使用することは避けてください。キーワードが予約されているかどうかを確認するには、 [TiDBキーワード](/keywords.md)を参照してください。
 
-## Index naming convention
+## インデックスの命名規則 {#index-naming-convention}
 
-- Primary key index: `pk_{table_name_abbreviation}_{field_name_abbreviation}`
-- Unique index: `uk_{table_name_abbreviation}_{field_name_abbreviation}`
-- Common index: `idx_{table_name_abbreviation}_{field_name_abbreviation}`
-- Column name with multiple words: use meaningful abbreviations
+-   主キーインデックス： `pk_{table_name_abbreviation}_{field_name_abbreviation}`
+-   一意のインデックス： `uk_{table_name_abbreviation}_{field_name_abbreviation}`
+-   共通インデックス： `idx_{table_name_abbreviation}_{field_name_abbreviation}`
+-   複数の単語を含む列名：意味のある略語を使用する

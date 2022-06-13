@@ -3,27 +3,27 @@ title: Common Table Expression
 summary: Learn the CTE feature of TiDB, which help you write SQL statements more efficiently.
 ---
 
-# Common Table Expression
+# 共通テーブル式 {#common-table-expression}
 
-In some transaction scenarios, due to application complexity, you might need to write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such a long SQL statement can be a developer’s nightmare.
+一部のトランザクションシナリオでは、アプリケーションが複雑なため、最大2,000行の単一のSQLステートメントを作成する必要がある場合があります。ステートメントには、おそらく多くの集計とマルチレベルのサブクエリのネストが含まれています。このような長いSQLステートメントを維持することは、開発者にとって悪夢になる可能性があります。
 
-To avoid such a long SQL statement, you can simplify queries by using [Views](/develop/dev-guide-use-views.md) or cache intermediate query results by using [Temporary tables](/develop/dev-guide-use-temporary-tables.md).
+このような長いSQLステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)を使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
-This document introduces the Common Table Expression (CTE) syntax in TiDB, which is a more convenient way to reuse query results.
+このドキュメントでは、クエリ結果を再利用するためのより便利な方法であるTiDBの共通テーブル式（CTE）構文を紹介します。
 
-Since TiDB v5.1, TiDB supports the CTE of the ANSI SQL99 standard and recursion. With CTE, you can write SQL statements for complex application logic more efficiently and maintain the code much easier.
+TiDB v5.1以降、TiDBはANSISQL99標準のCTEと再帰をサポートしています。 CTEを使用すると、複雑なアプリケーションロジックのSQLステートメントをより効率的に記述し、コードをはるかに簡単に保守できます。
 
-## Basic use
+## 基本的な使用法 {#basic-use}
 
-A Common Table Expression (CTE) is a temporary result set that can be referred to multiple times within a SQL statement to improve the statement readability and execution efficiency. You can apply the `WITH` statement to use CTE.
+Common Table Expression（CTE）は、SQLステートメント内で複数回参照できる一時的な結果セットであり、ステートメントの可読性と実行効率を向上させます。 `WITH`ステートメントを適用してCTEを使用できます。
 
-Common Table Expressions can be classified into two types: non-recursive CTE and recursive CTE.
+一般的なテーブル式は、非再帰CTEと再帰CTEの2つのタイプに分類できます。
 
-### Non-recursive CTE
+### 非再帰CTE {#non-recursive-cte}
 
-Non-recursive CTE can be defined using the following syntax:
+非再帰CTEは、次の構文を使用して定義できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 WITH <query_name> AS (
@@ -32,14 +32,14 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-For example, if you want to know how many books each of the 50 oldest authors have written, take the following steps:
+たとえば、50人の最も古い著者のそれぞれが何冊の本を書いたかを知りたい場合は、次の手順を実行します。
 
 <SimpleTab>
 <div label="SQL">
 
-Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
+[一時テーブル](/develop/dev-guide-use-temporary-tables.md)のステートメントを次のように変更します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -58,7 +58,7 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +------------+------------+---------------------+-------+
@@ -76,7 +76,7 @@ The result is as follows:
 </div>
 <div label="Java">
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
@@ -115,9 +115,9 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-It can be found that the author "Ray Macejkovic" wrote 4 books. With the CTE query, you can further get the order and rating information of these 4 books as follows:
+著者「RayMacejkovic」が4冊の本を書いたことがわかります。 CTEクエリを使用すると、次のようにこれら4冊の本の注文と評価の情報をさらに取得できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -152,7 +152,7 @@ FROM
 ;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +------------+-------------------------+----------------+--------+
@@ -166,15 +166,15 @@ The result is as follows:
 4 rows in set (0.06 sec)
 ```
 
-Three CTE blocks, which are separated by `,`, are defined in this SQL statement.
+このSQLステートメントでは、 `,`で区切られた3つのCTEブロックが定義されています。
 
-First, check out the books written by the author (ID is `2299112019`) in the CTE block `books_authored_by_rm`. Then find the average rating and order for these books respectively in `books_with_average_ratings` and `books_with_orders`. Finally, aggregate the results by the `JOIN` statement.
+まず、CTEブロック`books_authored_by_rm`で著者（IDは`2299112019` ）によって書かれた本をチェックしてください。次に、これらの本の平均評価と順序をそれぞれ`books_with_average_ratings`と`books_with_orders`で見つけます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-Note that the query in `books_authored_by_rm` executes only once, and then TiDB creates a temporary space to cache its result. When the queries in `books_with_average_ratings` and `books_with_orders` refer to `books_authored_by_rm`, TiDB gets its result directly from this temporary space.
+1のクエリは`books_authored_by_rm`回だけ実行され、TiDBはその結果をキャッシュするための一時的なスペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照している場合、TiDBはこの一時スペースから直接結果を取得します。
 
-### Recursive CTE
+### 再帰CTE {#recursive-cte}
 
-Recursive CTE can be defined using the following syntax:
+再帰CTEは、次の構文を使用して定義できます。
 
 ```sql
 WITH RECURSIVE <query_name> AS (
@@ -183,9 +183,9 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE：
+典型的な例は、再帰CTEを使用して[フィボナッチ数](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
@@ -197,7 +197,7 @@ WITH RECURSIVE fibonacci (n, fib_n, next_fib_n) AS
 SELECT * FROM fibonacci;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +------+-------+------------+
@@ -217,6 +217,6 @@ The result is as follows:
 10 rows in set (0.00 sec)
 ```
 
-## Read more
+## 続きを読む {#read-more}
 
-- [WITH](/sql-statements/sql-statement-with.md)
+-   [と](/sql-statements/sql-statement-with.md)

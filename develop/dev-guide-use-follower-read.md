@@ -3,43 +3,43 @@ title: Follower Read
 summary: Learn how to use Follower Read to optimize query performance.
 ---
 
-# Follower Read
+# フォロワー読み取り {#follower-read}
 
-This document introduces how to use Follower Read to optimize query performance.
+このドキュメントでは、フォロワー読み取りを使用してクエリのパフォーマンスを最適化する方法を紹介します。
 
-## Introduction
+## 序章 {#introduction}
 
-TiDB uses [Region](/tidb-storage.md#region) as the basic unit to distribute data to all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
+TiDBは、クラスタのすべてのノードにデータを分散するための基本単位として[領域](/tidb-storage.md#region)を使用します。リージョンには複数のレプリカを含めることができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDBはデータをフォロワーに同期的に更新します。
 
-By default, TiDB only reads and writes data on the leader of the same Region. When a read hotspot occurs in a Region, the Region leader can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load of the leader and improve the throughput of the whole system by balancing the load among multiple followers.
+デフォルトでは、TiDBは同じリージョンのリーダーでのみデータの読み取りと書き込みを行います。リージョンで読み取りホットスポットが発生すると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。この状況で、フォロワー読み取り機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
 
-## When to use
+## いつ使用するか {#when-to-use}
 
-You can visually analyze whether your application has a hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+アプリケーションのホットスポットリージョンが[TiDBダッシュボードキービジュアライザーページ](/dashboard/dashboard-key-visualizer.md)にあるかどうかを視覚的に分析できます。 「メトリクス選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
 
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](/troubleshoot-hot-spot-issues.md).
+ホットスポットの処理の詳細については、 [TiDBホットスポットの問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
 
-If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
+読み取りホットスポットが避けられない場合、または変更コストが非常に高い場合は、フォロワー読み取り機能を使用して、フォロワー領域への読み取り要求のバランスをより適切にロードしてみてください。
 
-## Enable Follower Read
+## フォロワー読み取りを有効にする {#enable-follower-read}
 
 <SimpleTab>
 <div label="SQL">
 
-To enable Follower Read, set the variable `tidb_replica_read` (default value is `leader`) to `follower` or `leader-and-follower`:
+フォロワー読み取りを有効にするには、変数`tidb_replica_read` （デフォルト値は`leader` ）を`follower`または`leader-and-follower`に設定します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-For more details about this variable, see [Follower Read Usage](/follower-read.md#usage).
+この変数の詳細については、 [フォロワー読み取りの使用法](/follower-read.md#usage)を参照してください。
 
 </div>
 <div label="Java">
 
-In Java, to enable Follower Read, define a `FollowerReadHelper` class.
+Javaでは、フォロワー読み取りを有効にするには、 `FollowerReadHelper`のクラスを定義します。
 
 {{< copyable "" >}}
 
@@ -83,7 +83,7 @@ public class FollowerReadHelper {
 }
 ```
 
-When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can balance the load between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
+フォロワーノードからデータを読み取るときは、 `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)`つの方法を使用して、フォロワー読み取り機能を有効にします。これにより、現在のセッションのリーダーノードとフォロワーノードの間の負荷を分散できます。接続が切断されると、元のモードに復元されます。
 
 {{< copyable "" >}}
 
@@ -128,8 +128,8 @@ public static class AuthorDAO {
 </div>
 </SimpleTab>
 
-## Read more
+## 続きを読む {#read-more}
 
-- [Follower Read](/follower-read.md)
-- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-- [TiDB Dashboard - Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+-   [フォロワー読み取り](/follower-read.md)
+-   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
+-   [TiDBダッシュボード-キービジュアライザーページ](/dashboard/dashboard-key-visualizer.md)

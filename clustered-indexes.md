@@ -3,43 +3,43 @@ title: Clustered Indexes
 summary: Learn the concept, user scenarios, usages, limitations, and compatibility of clustered indexes.
 ---
 
-# Clustered Indexes
+# クラスター化インデックス {#clustered-indexes}
 
-TiDB supports the clustered index feature since v5.0. This feature controls how data is stored in tables containing primary keys. It provides TiDB the ability to organize tables in a way that can improve the performance of certain queries.
+TiDBは、v5.0以降のクラスター化インデックス機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。これにより、TiDBは、特定のクエリのパフォーマンスを向上させる方法でテーブルを整理することができます。
 
-The term _clustered_ in this context refers to the _organization of how data is stored_ and not _a group of database servers working together_. Some database management systems refer to clustered indexes as _index-organized tables_ (IOT).
+このコンテキストでの*クラスター化*という用語<em>は、データの保存方法の編成を</em>指し、<em>一緒に動作するデータベースサーバーのグループでは</em>ありません。一部のデータベース管理システムでは、クラスター化インデックスを<em>インデックス編成テーブル</em>（IOT）と呼んでいます。
 
-Currently, tables containing primary keys in TiDB are divided into the following two categories:
+現在、TiDBの主キーを含むテーブルは、次の2つのカテゴリに分類されます。
 
-- `NONCLUSTERED`: The primary key of the table is non-clustered index. In tables with non-clustered indexes, the keys for row data consist of internal `_tidb_rowid` implicitly assigned by TiDB. Because primary keys are essentially unique indexes, tables with non-clustered indexes need at least two key-value pairs to store a row, which are:
-    - `_tidb_rowid` (key) - row data (value)
-    - Primary key data (key) - `_tidb_rowid` (value)
-- `CLUSTERED`: The primary key of the table is clustered index. In tables with clustered indexes, the keys for row data consist of primary key data given by the user. Therefore, tables with clustered indexes need only one key-value pair to store a row, which is:
-    - Primary key data (key) - row data (value)
+-   `NONCLUSTERED` ：テーブルの主キーは非クラスター化インデックスです。非クラスター化インデックスを持つテーブルでは、行データのキーは、TiDBによって暗黙的に割り当てられた内部`_tidb_rowid`で構成されます。主キーは本質的に一意のインデックスであるため、非クラスター化インデックスを持つテーブルには、行を格納するために少なくとも2つのキーと値のペアが必要です。
+    -   `_tidb_rowid` （キー）-行データ（値）
+    -   主キーデータ（キー） `_tidb_rowid` （値）
+-   `CLUSTERED` ：テーブルの主キーはクラスター化インデックスです。クラスタ化インデックスを持つテーブルでは、行データのキーは、ユーザーが指定した主キーデータで構成されます。したがって、クラスター化インデックスを持つテーブルは、行を格納するために1つのキーと値のペアのみを必要とします。
+    -   主キーデータ（キー）-行データ（値）
 
-> **Note:**
+> **ノート：**
 >
-> TiDB supports clustering only by a table's `PRIMARY KEY`. With clustered indexes enabled, the terms _the_ `PRIMARY KEY` and _the clustered index_ might be used interchangeably. `PRIMARY KEY` refers to the constraint (a logical property), and clustered index describes the physical implementation of how the data is stored.
+> TiDBは、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`という用語と<em>クラスター化インデックス</em>は同じ意味で使用される場合があります。 `PRIMARY KEY`は制約（論理プロパティ）を示し、クラスター化されたインデックスはデータの格納方法の物理的な実装を示します。
 
-## User scenarios
+## ユーザーシナリオ {#user-scenarios}
 
-Compared to tables with non-clustered indexes, tables with clustered indexes offer greater performance and throughput advantages in the following scenarios:
+非クラスター化インデックスを持つテーブルと比較して、クラスター化インデックスを持つテーブルは、次のシナリオでパフォーマンスとスループットの利点が向上します。
 
-+ When data is inserted, the clustered index reduces one write of the index data from the network.
-+ When a query with an equivalent condition only involves the primary key, the clustered index reduces one read of index data from the network.
-+ When a query with a range condition only involves the primary key, the clustered index reduces multiple reads of index data from the network.
-+ When a query with an equivalent or range condition only involves the primary key prefix, the clustered index reduces multiple reads of index data from the network.
+-   データが挿入されると、クラスター化されたインデックスにより、ネットワークからのインデックスデータの書き込みが1回減ります。
+-   同等の条件を持つクエリに主キーのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックスデータの読み取りを1回減らします。
+-   範囲条件を含むクエリに主キーのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックスデータの複数の読み取りを減らします。
+-   同等または範囲の条件を持つクエリに主キープレフィックスのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックスデータの複数の読み取りを減らします。
 
-On the other hand, tables with clustered indexes have certain disadvantages. See the following:
+一方、クラスター化インデックスを持つテーブルには、いくつかの欠点があります。以下を参照してください。
 
-- There might be write hotspot issues when inserting a large number of primary keys with close values.
-- The table data takes up more storage space if the data type of the primary key is larger than 64 bits, especially when there are multiple secondary indexes.
+-   近い値を持つ多数の主キーを挿入すると、書き込みホットスポットの問題が発生する可能性があります。
+-   主キーのデータ型が64ビットより大きい場合、特に複数のセカンダリインデックスがある場合、テーブルデータはより多くのストレージスペースを占有します。
 
-## Usages
+## 使用法 {#usages}
 
-## Create a table with clustered indexes
+## クラスタ化インデックスを使用してテーブルを作成する {#create-a-table-with-clustered-indexes}
 
-Since TiDB v5.0, you can add non-reserved keywords `CLUSTERED` or `NONCLUSTERED` after `PRIMARY KEY` in a `CREATE TABLE` statement to specify whether the table's primary key is a clustered index. For example:
+TiDB v5.0以降、 `CREATE TABLE`ステートメントの`PRIMARY KEY`の後に予約されていないキーワード`CLUSTERED`または`NONCLUSTERED`を追加して、テーブルの主キーがクラスター化インデックスであるかどうかを指定できます。例えば：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY CLUSTERED, b VARCHAR(255));
@@ -50,9 +50,9 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) CLUSTERED);
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) NONCLUSTERED);
 ```
 
-Note that keywords `KEY` and `PRIMARY KEY` have the same meaning in the column definition.
+キーワード`KEY`と`PRIMARY KEY`は、列の定義で同じ意味を持つことに注意してください。
 
-You can also use the [comment syntax](/comment-syntax.md) in TiDB to specify the type of the primary key. For example:
+TiDBの[コメント構文](/comment-syntax.md)を使用して、主キーのタイプを指定することもできます。例えば：
 
 ```sql
 CREATE TABLE t (a BIGINT PRIMARY KEY /*T![clustered_index] CLUSTERED */, b VARCHAR(255));
@@ -61,17 +61,17 @@ CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index
 CREATE TABLE t (a BIGINT, b VARCHAR(255), PRIMARY KEY(a, b) /*T![clustered_index] NONCLUSTERED */);
 ```
 
-For statements that do not explicitly specify the keyword `CLUSTERED`/`NONCLUSTERED`, the default behavior is controlled by the system variable `@@global.tidb_enable_clustered_index`. Supported values for this variable are as follows:
+キーワード`CLUSTERED`を明示的に指定しないステートメントの場合、デフォルトの動作はシステム変数`NONCLUSTERED`によって制御され`@@global.tidb_enable_clustered_index` 。この変数でサポートされている値は次のとおりです。
 
-- `OFF` indicates that primary keys are created as non-clustered indexes by default.
-- `ON` indicates that primary keys are created as clustered indexes by default.
-- `INT_ONLY` indicates that the behavior is controlled by the configuration item `alter-primary-key`. If `alter-primary-key` is set to `true`, primary keys are created as non-clustered indexes by default. If it is set to `false`, only the primary keys which consist of an integer column are created as clustered indexes.
+-   `OFF`は、主キーがデフォルトで非クラスター化インデックスとして作成されることを示します。
+-   `ON`は、主キーがデフォルトでクラスター化インデックスとして作成されることを示します。
+-   `INT_ONLY`は、動作が構成項目`alter-primary-key`によって制御されていることを示します。 `alter-primary-key`が`true`に設定されている場合、主キーはデフォルトで非クラスター化インデックスとして作成されます。 `false`に設定すると、整数列で構成される主キーのみがクラスター化インデックスとして作成されます。
 
-The default value of `@@global.tidb_enable_clustered_index` is `INT_ONLY`.
+デフォルト値の`@@global.tidb_enable_clustered_index`は`INT_ONLY`です。
 
-### Add or drop clustered indexes
+### クラスタ化インデックスを追加または削除する {#add-or-drop-clustered-indexes}
 
-TiDB does not support adding or dropping clustered indexes after tables are created. Nor does it support the mutual conversion between clustered indexes and non-clustered indexes. For example:
+TiDBは、テーブルの作成後のクラスター化インデックスの追加または削除をサポートしていません。また、クラスター化インデックスと非クラスター化インデックス間の相互変換もサポートしていません。例えば：
 
 ```sql
 ALTER TABLE t ADD PRIMARY KEY(b, a) CLUSTERED; -- Currently not supported.
@@ -79,9 +79,9 @@ ALTER TABLE t DROP PRIMARY KEY;     -- If the primary key is a clustered index, 
 ALTER TABLE t DROP INDEX `PRIMARY`; -- If the primary key is a clustered index, then not supported.
 ```
 
-### Add or drop non-clustered indexes
+### 非クラスター化インデックスを追加または削除する {#add-or-drop-non-clustered-indexes}
 
-TiDB supports adding or dropping non-clustered indexes after tables are created. You can explicitly specify the keyword `NONCLUSTERED` or omit it. For example:
+TiDBは、テーブルの作成後に非クラスター化インデックスを追加または削除することをサポートしています。キーワード`NONCLUSTERED`を明示的に指定することも、省略することもできます。例えば：
 
 ```sql
 ALTER TABLE t ADD PRIMARY KEY(b, a) NONCLUSTERED;
@@ -90,15 +90,15 @@ ALTER TABLE t DROP PRIMARY KEY;
 ALTER TABLE t DROP INDEX `PRIMARY`;
 ```
 
-### Check whether the primary key is a clustered index
+### 主キーがクラスター化インデックスであるかどうかを確認します {#check-whether-the-primary-key-is-a-clustered-index}
 
-You can check whether the primary key of a table is a clustered index using one of the following methods:
+次のいずれかの方法を使用して、テーブルの主キーがクラスター化インデックスであるかどうかを確認できます。
 
-- Execute the command `SHOW CREATE TABLE`.
-- Execute the command `SHOW INDEX FROM`.
-- Query the `TIDB_PK_TYPE` column in the system table `information_schema.tables`.
+-   コマンド`SHOW CREATE TABLE`を実行します。
+-   コマンド`SHOW INDEX FROM`を実行します。
+-   システムテーブル`information_schema.tables`の`TIDB_PK_TYPE`列をクエリします。
 
-By running the command `SHOW CREATE TABLE`, you can see whether the attribute of `PRIMARY KEY` is `CLUSTERED` or `NONCLUSTERED`. For example:
+コマンド`SHOW CREATE TABLE`を実行すると、 `PRIMARY KEY`の属性が`CLUSTERED`であるか`NONCLUSTERED`であるかを確認できます。例えば：
 
 ```sql
 mysql> SHOW CREATE TABLE t;
@@ -114,7 +114,7 @@ mysql> SHOW CREATE TABLE t;
 1 row in set (0.01 sec)
 ```
 
-By running the command `SHOW INDEX FROM`, you can check whether the result in the column `Clustered` shows `YES` or `NO`. For example:
+コマンド`SHOW INDEX FROM`を実行することにより、列`Clustered`の結果が`YES`または`NO`を示しているかどうかを確認できます。例えば：
 
 ```sql
 mysql> SHOW INDEX FROM t;
@@ -126,7 +126,7 @@ mysql> SHOW INDEX FROM t;
 1 row in set (0.01 sec)
 ```
 
-You can also query the column `TIDB_PK_TYPE` in the system table `information_schema.tables` to see whether the result is `CLUSTERED` or `NONCLUSTERED`. For example:
+システムテーブル`information_schema.tables`の列`TIDB_PK_TYPE`にクエリを実行して、結果が`CLUSTERED`か`NONCLUSTERED`かを確認することもできます。例えば：
 
 ```sql
 mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = 'test' AND table_name = 't';
@@ -138,62 +138,62 @@ mysql> SELECT TIDB_PK_TYPE FROM information_schema.tables WHERE table_schema = '
 1 row in set (0.03 sec)
 ```
 
-## Limitations
+## 制限事項 {#limitations}
 
-Currently, there are several different types of limitations for the clustered index feature. See the following:
+現在、クラスター化インデックス機能にはいくつかの異なるタイプの制限があります。以下を参照してください。
 
-- Situations that are not supported and not in the support plan:
-    - Using clustered indexes together with the attribute [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) is not supported. Also, the attribute [`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) does not take effect on tables with clustered indexes.
-    - Downgrading tables with clustered indexes is not supported. If you need to downgrade such tables, use logical backup tools to migrate data instead.
-- Situations that are not supported yet but in the support plan:
-    - Adding, dropping, and altering clustered indexes using `ALTER TABLE` statements are not supported.
-- Limitations for specific versions:    
-    - In v5.0, using the clustered index feature together with TiDB Binlog is not supported. After TiDB Binlog is enabled, TiDB only allows creating a single integer column as the clustered index of a primary key. TiDB Binlog does not replicate data changes (such as insertion, deletion, and update) on existing tables with clustered indexes to the downstream. If you need to replicate tables with clustered indexes to the downstream, upgrade your cluster to v5.1 or use [TiCDC](/ticdc/ticdc-overview.md) for replication instead.
+-   サポートされておらず、サポートプランに含まれていない状況：
+    -   クラスタ化インデックスを属性[`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と一緒に使用することはサポートされていません。また、属性[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)は、クラスター化インデックスを持つテーブルには有効になりません。
+    -   クラスタ化インデックスを使用したテーブルのダウングレードはサポートされていません。このようなテーブルをダウングレードする必要がある場合は、代わりに論理バックアップツールを使用してデータを移行してください。
+-   まだサポートされていないが、サポート計画に含まれている状況：
+    -   `ALTER TABLE`ステートメントを使用したクラスター化インデックスの追加、削除、および変更はサポートされていません。
+-   特定のバージョンの制限：
+    -   v5.0では、クラスター化インデックス機能をTiDBBinlogと一緒に使用することはサポートされていません。 TiDB Binlogを有効にすると、TiDBでは主キーのクラスター化インデックスとして単一の整数列のみを作成できます。 TiDB Binlogは、クラスター化インデックスを持つ既存のテーブルのデータ変更（挿入、削除、更新など）をダウンストリームに複製しません。クラスタ化インデックスを使用してテーブルをダウンストリームにレプリケートする必要がある場合は、クラスタをv5.1にアップグレードするか、代わりにレプリケーションに[TiCDC](/ticdc/ticdc-overview.md)を使用します。
 
-After TiDB Binlog is enabled, if the clustered index you create is not a single integer primary key, TiDB returns the following error:
+TiDB Binlogを有効にした後、作成するクラスター化インデックスが単一の整数の主キーでない場合、TiDBは次のエラーを返します。
 
 ```sql
 mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED);
 ERROR 8200 (HY000): Cannot create clustered index table when the binlog is ON
 ```
 
-If you use clustered indexes together with the attribute `SHARD_ROW_ID_BITS`, TiDB reports the following error:
+クラスタ化インデックスを属性`SHARD_ROW_ID_BITS`と一緒に使用すると、TiDBは次のエラーを報告します。
 
 ```sql
 mysql> CREATE TABLE t (a VARCHAR(255) PRIMARY KEY CLUSTERED) SHARD_ROW_ID_BITS = 3;
 ERROR 8200 (HY000): Unsupported shard_row_id_bits for table with primary key as row id
 ```
 
-## Compatibility
+## 互換性 {#compatibility}
 
-### Compatibility with earlier and later TiDB versions
+### 以前およびそれ以降のTiDBバージョンとの互換性 {#compatibility-with-earlier-and-later-tidb-versions}
 
-TiDB supports upgrading tables with clustered indexes but not downgrading such tables, which means that data in tables with clustered indexes on a later TiDB version is not available on an earlier one.
+TiDBは、クラスター化インデックスを使用したテーブルのアップグレードをサポートしますが、そのようなテーブルのダウングレードはサポートしません。つまり、新しいバージョンのクラスター化インデックスを使用したテーブルのデータは、以前のバージョンでは使用できません。
 
-The clustered index feature is partially supported in TiDB v3.0 and v4.0. It is enabled by default when the following requirements are fully met:
+クラスター化インデックス機能は、TiDBv3.0およびv4.0で部分的にサポートされています。次の要件が完全に満たされると、デフォルトで有効になります。
 
-- The table contains a `PRIMARY KEY`.
-- The `PRIMARY KEY` consists of only one column.
-- The `PRIMARY KEY` is an `INTEGER`.
+-   テーブルには`PRIMARY KEY`が含まれています。
+-   `PRIMARY KEY`は1つの列のみで構成されます。
+-   `PRIMARY KEY`は`INTEGER`です。
 
-Since TiDB v5.0, the clustered index feature is fully supported for all types of primary keys, but the default behavior is consistent with TiDB v3.0 and v4.0. To change the default behavior, you can configure the system variable `@@tidb_enable_clustered_index` to `ON` or `OFF`. For more details, see [Create a table with clustered indexes](#create-a-table-with-clustered-indexes).
+TiDB v5.0以降、クラスター化インデックス機能はすべてのタイプの主キーで完全にサポートされていますが、デフォルトの動作はTiDBv3.0およびv4.0と一貫しています。デフォルトの動作を変更するには、システム変数`@@tidb_enable_clustered_index`を`ON`または`OFF`に構成します。詳細については、 [クラスタ化インデックスを使用してテーブルを作成する](#create-a-table-with-clustered-indexes)を参照してください。
 
-### Compatibility with MySQL
+### MySQLとの互換性 {#compatibility-with-mysql}
 
-TiDB specific comment syntax supports wrapping the keywords `CLUSTERED` and `NONCLUSTERED` in a comment. The result of `SHOW CREATE TABLE` also contains TiDB specific SQL comments. MySQL databases and TiDB databases of an earlier version will ignore these comments.
+TiDB固有のコメント構文は、キーワード`CLUSTERED`と`NONCLUSTERED`をコメントでラップすることをサポートします。 `SHOW CREATE TABLE`の結果には、TiDB固有のSQLコメントも含まれています。以前のバージョンのMySQLデータベースおよびTiDBデータベースは、これらのコメントを無視します。
 
-### Compatibility with TiDB migration tools
+### TiDB移行ツールとの互換性 {#compatibility-with-tidb-migration-tools}
 
-The clustered index feature is only compatible with the following migration tools in v5.0 and later versions:
+クラスタ化インデックス機能は、v5.0以降のバージョンの次の移行ツールとのみ互換性があります。
 
-- Backup and restore tools: BR, Dumpling, and TiDB Lightning.
-- Data migration and replication tools: DM and TiCDC.
+-   バックアップと復元のツール：BR、Dumpling、TiDBLightning。
+-   データ移行およびレプリケーションツール：DMおよびTiCDC。
 
-However, you cannot convert a table with non-clustered indexes to a table with clustered indexes by backing up and restoring the table using the v5.0 BR tool, and vice versa.
+ただし、v5.0 BRツールを使用してテーブルをバックアップおよび復元することによって、非クラスター化インデックスを持つテーブルをクラスター化インデックスを持つテーブルに変換することはできません。その逆も同様です。
 
-### Compatibility with other TiDB features
+### 他のTiDB機能との互換性 {#compatibility-with-other-tidb-features}
 
-For a table with a combined primary key or a single non-integer primary key, if you change the primary key from a non-clustered index to a clustered index, the keys of its row data change as well. Therefore, `SPLIT TABLE BY/BETWEEN` statements that are executable in TiDB versions earlier than v5.0 are no longer workable in v5.0 and later versions of TiDB. If you want to split a table with clustered indexes using `SPLIT TABLE BY/BETWEEN`, you need to provide the value of the primary key column, instead of specifying an integer value. See the following example:
+結合された主キーまたは単一の非整数主キーを持つテーブルの場合、主キーを非クラスター化インデックスからクラスター化インデックスに変更すると、その行データのキーも変更されます。したがって、v5.0より前のバージョンのTiDBで実行可能な`SPLIT TABLE BY/BETWEEN`のステートメントは、v5.0以降のバージョンのTiDBでは機能しなくなります。 `SPLIT TABLE BY/BETWEEN`を使用してクラスター化インデックスを使用してテーブルを分割する場合は、整数値を指定する代わりに、主キー列の値を指定する必要があります。次の例を参照してください。
 
 ```sql
 mysql> create table t (a int, b varchar(255), primary key(a, b) clustered);
@@ -218,7 +218,7 @@ mysql> split table t by (0, ''), (50000, ''), (100000, '');
 1 row in set (0.01 sec)
 ```
 
-The attribute [`AUTO_RANDOM`](/auto-random.md) can only be used on clustered indexes. Otherwise, TiDB returns the following error:
+属性[`AUTO_RANDOM`](/auto-random.md)は、クラスター化インデックスでのみ使用できます。それ以外の場合、TiDBは次のエラーを返します。
 
 ```sql
 mysql> create table t (a bigint primary key nonclustered auto_random);

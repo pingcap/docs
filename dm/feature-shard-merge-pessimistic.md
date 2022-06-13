@@ -3,121 +3,121 @@ title: Merge and Migrate Data from Sharded Tables in the Pessimistic Mode
 summary: Learn how DM merges and migrates data from sharded tables in the pessimistic mode.
 ---
 
-# Merge and Migrate Data from Sharded Tables in the Pessimistic Mode
+# ペシミスティックモードでシャードテーブルからデータをマージおよび移行する {#merge-and-migrate-data-from-sharded-tables-in-the-pessimistic-mode}
 
-This document introduces the sharding support feature provided by Data Migration (DM) in the pessimistic mode (the default mode). This feature allows you to merge and migrate the data of tables with the same table schema in the upstream MySQL or MariaDB instances into one same table in the downstream TiDB.
+このドキュメントでは、ペシミスティックモード（デフォルトモード）でデータ移行（DM）によって提供されるシャーディングサポート機能を紹介します。この機能を使用すると、アップストリームのMySQLまたはMariaDBインスタンスの同じテーブルスキーマを持つテーブルのデータを、ダウンストリームのTiDBの1つの同じテーブルにマージして移行できます。
 
-## Restrictions
+## 制限 {#restrictions}
 
-DM has the following sharding DDL usage restrictions in the pessimistic mode:
+DMには、ペシミスティックモードでの次のシャーディングDDL使用制限があります。
 
-- For a logical **sharding group** (composed of all sharded tables that need to be merged and migrated into one same downstream table), it is limited to use one task containing exactly the sources of sharded tables to perform the migration.
-- In a logical **sharding group**, the same DDL statements must be executed in the same order in all upstream sharded tables (the schema name and the table name can be different), and the next DDL statement cannot be executed unless the current DDL operation is completely finished.
-    - For example, if you add `column A` to `table_1` before you add `column B`, then you cannot add `column B` to `table_2` before you add `column A`. Executing the DDL statements in a different order is not supported.
-- In a sharding group, the corresponding DDL statements should be executed in all upstream sharded tables.
-    - For example, if DDL statements are not executed on one or more upstream sharded tables corresponding to `DM-worker-2`, then other DM-workers that have executed the DDL statements pause their migration task and wait for `DM-worker-2` to receive the upstream DDL statements.
-- The sharding group migration task does not support `DROP DATABASE`/`DROP TABLE`.
-    - The sync unit in DM-worker automatically ignores the `DROP DATABASE`/`DROP TABLE` statement of upstream sharded tables.
-- The sharding group migration task does not support `TRUNCATE TABLE`.
-    - The sync unit in DM-worker automatically ignores the `TRUNCATE TABLE` statement of upstream sharded tables.
-- The sharding group migration task supports `RENAME TABLE`, but with the following limitations (online DDL is supported in another solution):
-    - A table can only be renamed to a new name that is not used by any other table.
-    - A single `RENAME TABLE` statement can only involve a single `RENAME` operation.
-- The sharding group migration task requires each DDL statement to involve operations on only one table.
-- The table schema of each sharded table must be the same at the starting point of the incremental replication task, so as to make sure the DML statements of different sharded tables can be migrated into the downstream with a definite table schema, and the subsequent sharding DDL statements can be correctly matched and migrated.
-- If you need to change the [table routing](/dm/dm-key-features.md#table-routing) rule, you have to wait for the migration of all sharding DDL statements to complete.
-    - During the migration of sharding DDL statements, an error is reported if you use `dmctl` to change `router-rules`.
-- If you need to `CREATE` a new table to a sharding group where DDL statements are being executed, you have to make sure that the table schema is the same as the newly modified table schema.
-    - For example, both the original `table_1` and `table_2` have two columns (a, b) initially, and have three columns (a, b, c) after the sharding DDL operation, so after the migration the newly created table should also have three columns (a, b, c).
-- Because the DM-worker that has received the DDL statements will pause the task to wait for other DM-workers to receive their DDL statements, the delay of data migration will be increased.
+-   論理**シャーディンググループ**（1つの同じダウンストリームテーブルにマージおよび移行する必要があるすべてのシャードテーブルで構成される）の場合、移行を実行するためにシャードテーブルのソースを正確に含む1つのタスクを使用するように制限されます。
+-   論理**シャーディンググループ**では、すべてのアップストリームシャーディングテーブルで同じDDLステートメントを同じ順序で実行する必要があり（スキーマ名とテーブル名は異なる場合があります）、現在のDDL操作が完全に行われない限り次のDDLステートメントを実行できません。終了した。
+    -   たとえば、 `column B`を追加する前に`column A`から`table_1`を追加した場合、 `column A`を追加する前に`column B`から`table_2`を追加することはできません。 DDLステートメントを別の順序で実行することはサポートされていません。
+-   シャーディンググループでは、対応するDDLステートメントをすべてのアップストリームシャードテーブルで実行する必要があります。
+    -   たとえば、1に対応する`DM-worker-2`つ以上のアップストリームシャードテーブルでDDLステートメントが実行されない場合、DDLステートメントを実行した他のDMワーカーは、移行タスクを一時停止し、 `DM-worker-2`がアップストリームDDLステートメントを受信するのを待ちます。
+-   シャーディンググループの移行タスクは`DROP DATABASE`をサポートしていませ`DROP TABLE` 。
+    -   DM-workerの同期ユニットは、アップストリームシャードテーブルの`DROP DATABASE`ステートメントを自動的に無視し`DROP TABLE` 。
+-   シャーディンググループの移行タスクは`TRUNCATE TABLE`をサポートしていません。
+    -   DM-workerの同期ユニットは、アップストリームシャードテーブルの`TRUNCATE TABLE`ステートメントを自動的に無視します。
+-   シャーディンググループ移行タスクは`RENAME TABLE`をサポートしますが、次の制限があります（オンラインDDLは別のソリューションでサポートされています）。
+    -   テーブルの名前を変更できるのは、他のテーブルで使用されていない新しい名前のみです。
+    -   1つの`RENAME TABLE`ステートメントには、1つの`RENAME`操作のみを含めることができます。
+-   シャーディンググループの移行タスクでは、各DDLステートメントに1つのテーブルのみに対する操作が含まれている必要があります。
+-   各シャードテーブルのテーブルスキーマは、インクリメンタルレプリケーションタスクの開始点で同じである必要があります。これにより、異なるシャードテーブルのDMLステートメントを、明確なテーブルスキーマと、それに続くシャーディングDDLを使用してダウンストリームに移行できるようになります。ステートメントは正しく照合および移行できます。
+-   [テーブルルーティング](/dm/dm-key-features.md#table-routing)のルールを変更する必要がある場合は、すべてのシャーディングDDLステートメントの移行が完了するのを待つ必要があります。
+    -   シャーディングDDLステートメントの移行中に、 `dmctl`を使用して`router-rules`を変更すると、エラーが報告されます。
+-   DDLステートメントが実行されているシャーディンググループに新しいテーブルを`CREATE`追加する必要がある場合は、テーブルスキーマが新しく変更されたテーブルスキーマと同じであることを確認する必要があります。
+    -   たとえば、元の`table_1`と`table_2`の両方に最初は2つの列（a、b）があり、シャーディングDDL操作後に3つの列（a、b、c）があるため、移行後、新しく作成されたテーブルにも3つの列（ a、b、c）。
+-   DDLステートメントを受信したDMワーカーは、他のDMワーカーがDDLステートメントを受信するのを待つためにタスクを一時停止するため、データ移行の遅延が増加します。
 
-## Background
+## バックグラウンド {#background}
 
-Currently, DM uses the binlog in the `ROW` format to perform the migration task. The binlog does not contain the table schema information. When you use the `ROW` binlog to migrate data, if you have not migrated multiple upstream tables into the same downstream table, then there only exist DDL operations of one upstream table that can update the table schema of the downstream table. The `ROW` binlog can be considered to have the nature of self-description. During the migration process, the DML statements can be constructed accordingly with the column values and the downstream table schema.
+現在、DMは`ROW`形式のbinlogを使用して移行タスクを実行します。 binlogには、テーブルスキーマ情報は含まれていません。 `ROW`のbinlogを使用してデータを移行する場合、複数のアップストリームテーブルを同じダウンストリームテーブルに移行していない場合、ダウンストリームテーブルのテーブルスキーマを更新できる1つのアップストリームテーブルのDDL操作のみが存在します。 `ROW`のbinlogは、自己記述の性質を持っていると見なすことができます。移行プロセス中に、DMLステートメントは、列の値とダウンストリームのテーブルスキーマに応じて作成できます。
 
-However, in the process of merging and migrating sharded tables, if DDL statements are executed on the upstream tables to modify the table schema, then you need to perform extra operations to migrate the DDL statements so as to avoid the inconsistency between the DML statements produced by the column values and the actual downstream table schema.
+ただし、シャーディングされたテーブルをマージおよび移行するプロセスで、アップストリームテーブルでDDLステートメントを実行してテーブルスキーマを変更する場合は、生成されたDMLステートメント間の不整合を回避するために、追加の操作を実行してDDLステートメントを移行する必要があります。列の値と実際のダウンストリームテーブルスキーマによって。
 
-Here is a simple example:
+簡単な例を次に示します。
 
 ![shard-ddl-example-1](/media/dm/shard-ddl-example-1.png)
 
-In the above example, the merging process is simplified, where only two MySQL instances exist in the upstream and each instance has only one table. When the migration begins, the table schema version of two sharded tables is marked as `schema V1`, and the table schema version after executing DDL statements is marked as `schema V2`.
+上記の例では、マージプロセスが簡略化されており、アップストリームには2つのMySQLインスタンスのみが存在し、各インスタンスには1つのテーブルしかありません。移行が開始されると、2つのシャーディングされたテーブルのテーブルスキーマバージョンは`schema V1`としてマークされ、DDLステートメントの実行後のテーブルスキーマバージョンは`schema V2`としてマークされます。
 
-Now assume that in the migration process, the binlog data received from the two upstream sharded tables has the following time sequence:
+ここで、移行プロセスで、2つのアップストリームシャードテーブルから受信したbinlogデータの時系列が次のようになっていると仮定します。
 
-1. When the migration begins, the sync unit in DM-worker receives the DML events of `schema V1` from the two sharded tables.
-2. At `t1`, the sharding DDL events from instance 1 are received.
-3. From `t2` on, the sync unit receives the DML events of `schema V2` from instance 1; but from instance 2, it still receives the DML events of `schema V1`.
-4. At `t3`, the sharding DDL events from instance 2 are received.
-5. From `t4` on, the sync unit receives the DML events of `schema V2` from instance 2 as well.
+1.  移行が開始されると、DM-workerの同期ユニットは、2つのシャーディングされたテーブルから`schema V1`のDMLイベントを受け取ります。
+2.  `t1`で、インスタンス1からのシャーディングDDLイベントが受信されます。
+3.  `t2`以降、同期ユニットはインスタンス1から`schema V2`のDMLイベントを受信します。ただし、インスタンス2からは、 `schema V1`のDMLイベントを引き続き受信します。
+4.  `t3`で、インスタンス2からのシャーディングDDLイベントが受信されます。
+5.  `t4`以降、同期ユニットはインスタンス2からも`schema V2`のDMLイベントを受信します。
 
-Assume that the DDL statements of sharded tables are not processed during the migration process. After DDL statements of instance 1 are migrated to the downstream, the downstream table schema is changed to `schema V2`. But for instance 2, the sync unit in DM-worker is still receiving DML events of `schema V1` from `t2` to `t3`. Therefore, when the DML statements of `schema V1` are migrated to the downstream, the inconsistency between the DML statements and the table schema can cause errors and the data cannot be migrated successfully.
+シャードテーブルのDDLステートメントは移行プロセス中に処理されないと想定します。インスタンス1のDDLステートメントがダウンストリームに移行された後、ダウンストリームテーブルスキーマが`schema V2`に変更されます。ただし、たとえば2の場合、DM-workerの同期ユニットはまだ`t2`から`t3`までの`schema V1`のDMLイベントを受信しています。したがって、 `schema V1`のDMLステートメントがダウンストリームにマイグレーションされると、DMLステートメントとテーブル・スキーマの間の不整合がエラーを引き起こし、データを正常にマイグレーションできない可能性があります。
 
-## Principles
+## 原則 {#principles}
 
-This section shows how DM migrates DDL statements in the process of merging sharded tables based on the above example in the pessimistic mode.
+このセクションでは、ペシミスティックモードでの上記の例に基づいて、シャーディングされたテーブルをマージするプロセスでDMがDDLステートメントを移行する方法を示します。
 
 ![shard-ddl-flow](/media/dm/shard-ddl-flow.png)
 
-In this example, `DM-worker-1` migrates the data from MySQL instance 1 and `DM-worker-2` migrates the data from MySQL instance 2. `DM-master` coordinates the DDL migration among multiple DM-workers. Starting from `DM-worker-1` receiving the DDL statements, the DDL migration process is simplified as follows:
+この例では、 `DM-worker-1`はMySQLインスタンス1からデータを移行し、 `DM-worker-2`はMySQLインスタンス2からデータを移行します`DM-master`は複数のDMワーカー間のDDL移行を調整します。 DDLステートメントを受信する`DM-worker-1`から開始して、DDL移行プロセスは次のように簡略化されます。
 
-1. `DM-worker-1` receives the DDL statement from MySQL instance 1 at `t1`, pauses the data migration of the corresponding DDL and DML statements, and sends the DDL information to `DM-master`.
-2. `DM-master` decides that the migration of this DDL statement needs to be coordinated based on the received DDL information, creates a lock for this DDL statement, sends the DDL lock information back to `DM-worker-1` and marks `DM-worker-1` as the owner of this lock at the same time.
-3. `DM-worker-2` continues migrating the DML statement until it receives the DDL statement from MySQL instance 2 at `t3`, pauses the data migration of this DDL statement, and sends the DDL information to `DM-master`.
-4. `DM-master` decides that the lock of this DDL statement already exists based on the received DDL information, and sends the lock information directly to `DM-worker-2`.
-5. Based on the configuration information when the task is started, the sharded table information in the upstream MySQL instances, and the deployment topology information, `DM-master` decides that it has received this DDL statement of all upstream sharded tables to be merged, and requests the owner of the DDL lock (`DM-worker-1`) to migrate this DDL statement to the downstream.
-6. `DM-worker-1` verifies the DDL statement execution request based on the DDL lock information received at Step #2, migrates this DDL statement to the downstream, and sends the results to `DM-master`. If this operation is successful, `DM-worker-1` continues migrating the subsequent (starting from the binlog at `t2`) DML statements.
-7. `DM-master` receives the response from the lock owner that the DDL is successfully executed, and requests all other DM-workers (`DM-worker-2`) that are waiting for the DDL lock to ignore this DDL statement and then continue to migrate the subsequent (starting from the binlog at `t4`) DML statements.
+1.  `DM-worker-1`はMySQLインスタンス1から`t1`でDDLステートメントを受信し、対応するDDLおよびDMLステートメントのデータ移行を一時停止し、DDL情報を`DM-master`に送信します。
+2.  `DM-master`は、受信したDDL情報に基づいてこのDDLステートメントの移行を調整する必要があると判断し、このDDLステートメントのロックを作成し、DDLロック情報を`DM-worker-1`に送り返し、同時に`DM-worker-1`をこのロックの所有者としてマークします。
+3.  `DM-worker-2`は、MySQLインスタンス2から`t3`でDDLステートメントを受信するまでDMLステートメントの移行を続行し、このDDLステートメントのデータ移行を一時停止し、DDL情報を`DM-master`に送信します。
+4.  `DM-master`は、受信したDDL情報に基づいて、このDDLステートメントのロックがすでに存在していると判断し、ロック情報を`DM-worker-2`に直接送信します。
+5.  タスク開始時の構成情報、アップストリームMySQLインスタンスのシャードテーブル情報、およびデプロイメントトポロジ情報に基づいて、 `DM-master`は、マージするすべてのアップストリームシャードテーブルのこのDDLステートメントを受信したと判断し、このDDLステートメントをダウンストリームに移行するためのDDLロック（ `DM-worker-1` ）。
+6.  `DM-worker-1`は、ステップ2で受信したDDLロック情報に基づいてDDLステートメント実行要求を検証し、このDDLステートメントをダウンストリームに移行して、結果を`DM-master`に送信します。この操作が成功すると、 `DM-worker-1`は後続の（ `t2`のbinlogから開始して）DMLステートメントの移行を続行します。
+7.  `DM-master`は、DDLが正常に実行されたというロック所有者からの応答を受信し、DDLロックを待機している他のすべてのDMワーカー（ `DM-worker-2` ）に、このDDLステートメントを無視して、後続の（binlogから開始して）移行を続行するように要求します。 `t4` ）DMLステートメント。
 
-The characteristics of DM handling the sharding DDL migration among multiple DM-workers can be concluded as follows:
+複数のDMワーカー間でのシャーディングDDL移行を処理するDMの特性は、次のように結論付けることができます。
 
-- Based on the task configuration and DM cluster deployment topology information, a logical sharding group is built in `DM-master` to coordinate DDL migration. The group members are DM-workers that handle each sub-task divided from the migration task).
-- After receiving the DDL statement from the binlog event, each DM-worker sends the DDL information to `DM-master`.
-- `DM-master` creates or updates the DDL lock based on the DDL information received from each DM-worker and the sharding group information.
-- If all members of the sharding group receive a same specific DDL statement, this indicates that all DML statements before the DDL execution on the upstream sharded tables have been completely migrated, and this DDL statement can be executed. Then DM can continue to migrate the subsequent DML statements.
-- After being converted by the [table router](/dm/dm-key-features.md#table-routing), the DDL statement of the upstream sharded tables must be consistent with the DDL statement to be executed in the downstream. Therefore, this DDL statement only needs to be executed once by the DDL owner and all other DM-workers can ignore this DDL statement.
+-   タスク構成とDMクラスタ展開トポロジー情報に基づいて、論理シャーディング・グループが`DM-master`に組み込まれ、DDL移行を調整します。グループメンバーは、移行タスクから分割された各サブタスクを処理するDMワーカーです）。
+-   binlogイベントからDDLステートメントを受信した後、各DMワーカーはDDL情報を`DM-master`に送信します。
+-   `DM-master`は、各DMワーカーから受信したDDL情報とシャーディンググループ情報に基づいて、DDLロックを作成または更新します。
+-   シャーディンググループのすべてのメンバーが同じ特定のDDLステートメントを受け取った場合、これは、アップストリームシャードテーブルでのDDL実行前のすべてのDMLステートメントが完全に移行され、このDDLステートメントを実行できることを示します。その後、DMは後続のDMLステートメントの移行を続行できます。
+-   [テーブルルーター](/dm/dm-key-features.md#table-routing)によって変換された後、アップストリームシャードテーブルのDDLステートメントは、ダウンストリームで実行されるDDLステートメントと一致している必要があります。したがって、このDDLステートメントはDDL所有者が1回だけ実行する必要があり、他のすべてのDMワーカーはこのDDLステートメントを無視できます。
 
-In the above example, only one sharded table needs to be merged in the upstream MySQL instance corresponding to each DM-worker. But in actual scenarios, there might be multiple sharded tables in multiple sharded schemas to be merged in one MySQL instance. And when this happens, it becomes more complex to coordinate the sharding DDL migration.
+上記の例では、各DMワーカーに対応するアップストリームのMySQLインスタンスにマージする必要があるシャードテーブルは1つだけです。ただし、実際のシナリオでは、複数のシャードスキーマに複数のシャードテーブルがあり、1つのMySQLインスタンスにマージされる場合があります。そして、これが発生すると、シャーディングDDL移行の調整がより複雑になります。
 
-Assume that there are two sharded tables, namely `table_1` and `table_2`, to be merged in one MySQL instance:
+1つのMySQLインスタンスにマージされる2つのシャードテーブル、つまり`table_1`と`table_2`があると仮定します。
 
 ![shard-ddl-example-2](/media/dm/shard-ddl-example-2.png)
 
-Because data comes from the same MySQL instance, all the data is obtained from the same binlog stream. In this case, the time sequence is as follows:
+データは同じMySQLインスタンスから取得されるため、すべてのデータは同じbinlogストリームから取得されます。この場合、時系列は次のようになります。
 
-1. The sync unit in DM-worker receives the DML statements of `schema V1` from both sharded tables when the migration begins.
-2. At `t1`, the sync unit in DM-worker receives the DDL statements of `table_1`.
-3. From `t2` to `t3`, the received data includes the DML statements of `schema V2` from `table_1` and the DML statements of `schema V1` from `table_2`.
-4. At `t3`, the sync unit in DM-worker receives the DDL statements of `table_2`.
-5. From `t4` on, the sync unit in DM-worker receives the DML statements of `schema V2` from both tables.
+1.  DM-workerの同期ユニットは、移行の開始時に両方のシャーディングされたテーブルから`schema V1`のDMLステートメントを受け取ります。
+2.  `t1`で、DM-workerの同期ユニットは`table_1`のDDLステートメントを受け取ります。
+3.  `t2`から`t3`まで、受信したデータには、 `table_1`から`schema V2`のDMLステートメントと`table_2`から`schema V1`のDMLステートメントが含まれます。
+4.  `t3`で、DM-workerの同期ユニットは`table_2`のDDLステートメントを受け取ります。
+5.  `t4`以降、DM-workerの同期ユニットは両方のテーブルから`schema V2`のDMLステートメントを受け取ります。
 
-If the DDL statements are not processed particularly during the data migration, when the DDL statement of `table_1` is migrated to the downstream and changes the downstream table schema, the DML statement of `schema V1` from `table_2` cannot be migrated successfully. Therefore, within a single DM-worker, a logical sharding group similar to that within `DM-master` is created, except that members of this group are different sharded tables in the same upstream MySQL instance.
+特にデータ移行中にDDLステートメントが処理されない場合、 `table_1`のDDLステートメントがダウンストリームに移行され、ダウンストリームテーブルスキーマが変更されると、 `table_2`から`schema V1`のDMLステートメントは正常に移行できません。したがって、単一のDMワーカー内に、 `DM-master`内と同様の論理シャーディンググループが作成されます。ただし、このグループのメンバーは、同じアップストリームMySQLインスタンス内の異なるシャーディングテーブルです。
 
-But when a DM-worker coordinates the migration of the sharding group within itself, it is not totally the same as that performed by `DM-master`. The reasons are as follows:
+ただし、DMワーカーがシャーディンググループの移行をそれ自体の中で調整する場合、 `DM-master`によって実行されるものと完全に同じではありません。その理由は次のとおりです。
 
-- When the DM-worker receives the DDL statement of `table_1`, it cannot pause the migration and needs to continue parsing the binlog to get the subsequent DDL statements of `table_2`. This means it needs to continue parsing between `t2` and `t3`.
-- During the binlog parsing process between `t2` and `t3`, the DML statements of `schema V2` from `table_1` cannot be migrated to the downstream until the sharding DDL statement is migrated and successfully executed.
+-   DMワーカーが`table_1`のDDLステートメントを受信すると、移行を一時停止することはできず、後続の`table_2`のDDLステートメントを取得するためにbinlogの解析を続行する必要があります。これは、 `t2`から`t3`の間で解析を継続する必要があることを意味します。
+-   `t2`から`t3`までのbinlog解析プロセス中、シャーディングDDLステートメントが移行されて正常に実行されるまで、 `table_1`から`schema V2`のDMLステートメントをダウンストリームに移行することはできません。
 
-In DM, the simplified migration process of sharding DDL statements within the DM worker is as follows:
+DMでは、DMワーカー内でDDLステートメントをシャーディングする単純化された移行プロセスは次のとおりです。
 
-1. When receiving the DDL statement of `table_1` at `t1`, the DM-worker records the DDL information and the current position of the binlog.
-2. DM-worker continues parsing the binlog between `t2` and `t3`.
-3. DM-worker ignores the DML statement with the `schema V2` schema that belongs to `table_1`, and migrates the DML statement with the `schema V1` schema that belongs to `table_2` to the downstream.
-4. When receiving the DDL statement of `table_2` at `t3`, the DM-worker records the DDL information and the current position of the binlog.
-5. Based on the information of the migration task configuration and the upstream schemas and tables, the DM-worker decides that the DDL statements of all sharded tables in the MySQL instance have been received and migrates them to the downstream to modify the downstream table schema.
-6. DM-worker sets the starting point of parsing the new binlog stream to be the position saved at Step #1.
-7. DM-worker resumes parsing the binlog between `t2` and `t3`.
-8. DM-worker migrates the DML statement with the `schema V2` schema that belongs to `table_1` to the downstream, and ignores the DML statement with the `schema V1` schema that belongs to `table_2`.
-9. After parsing the binlog position saved at Step #4, the DM-worker decides that all DML statements that have been ignored in Step #3 have been migrated to the downstream again.
-10. DM-worker resumes the migration starting from the binlog position at `t4`.
+1.  `table_1` at `t1`のDDLステートメントを受信すると、DMワーカーはDDL情報とbinlogの現在の位置を記録します。
+2.  DM-workerは、 `t2`から`t3`の間でbinlogの解析を続行します。
+3.  DM-workerは、 `table_1`に属する`schema V2`スキーマのDMLステートメントを無視し、 `table_2`に属する`schema V1`スキーマのDMLステートメントをダウンストリームに移行します。
+4.  `table_2` at `t3`のDDLステートメントを受信すると、DMワーカーはDDL情報とbinlogの現在の位置を記録します。
+5.  DMワーカーは、移行タスクの構成とアップストリームスキーマおよびテーブルの情報に基づいて、MySQLインスタンス内のすべてのシャーディングテーブルのDDLステートメントが受信されたと判断し、それらをダウンストリームに移行してダウンストリームテーブルスキーマを変更します。
+6.  DM-workerは、新しいbinlogストリームを解析する開始点を、ステップ1で保存された位置に設定します。
+7.  DM-workerは、binlogの解析を`t2`から`t3`の間で再開します。
+8.  DM-workerは、 `table_1`に属する`schema V2`スキーマのDMLステートメントをダウンストリームに移行し、 `table_2`に属する`schema V1`スキーマのDMLステートメントを無視します。
+9.  ステップ4で保存されたbinlog位置を解析した後、DMワーカーは、ステップ3で無視されたすべてのDMLステートメントが再びダウンストリームにマイグレーションされたと判断します。
+10. DM-workerは、binlogの位置`t4`から移行を再開します。
 
-You can conclude from the above analysis that DM mainly uses two-level sharding groups for coordination and control when handling migration of the sharding DDL. Here is the simplified process:
+上記の分析から、DMは、シャーディングDDLの移行を処理する際の調整と制御に、主に2レベルのシャーディンググループを使用していると結論付けることができます。簡略化されたプロセスは次のとおりです。
 
-1. Each DM-worker independently coordinates the DDL statements migration for the corresponding sharding group composed of multiple sharded tables within the upstream MySQL instance.
-2. After the DM-worker receives the DDL statements of all sharded tables, it sends the DDL information to `DM-master`.
-3. `DM-master` coordinates the DDL migration of the sharding group composed of the DM-workers based on the received DDL information.
-4. After receiving the DDL information from all DM-workers, `DM-master` requests the DDL lock owner (a specific DM-worker) to execute the DDL statement.
-5. The DDL lock owner executes the DDL statement and returns the result to `DM-master`. Then the owner restarts the migration of the previously ignored DML statements during the internal coordination of DDL migration.
-6. After `DM-master` confirms that the owner has successfully executed the DDL statement, it asks all other DM-workers to continue the migration.
-7. All other DM-workers separately restart the migration of the previously ignored DML statements during the internal coordination of DDL migration.
-8. After finishing migrating the ignored DML statements again, all DM-workers resume the normal migration process.
+1.  各DMワーカーは、アップストリームMySQLインスタンス内の複数のシャーディングテーブルで構成される対応するシャーディンググループのDDLステートメントの移行を個別に調整します。
+2.  DM-workerは、すべてのシャーディングされたテーブルのDDLステートメントを受信した後、DDL情報を`DM-master`に送信します。
+3.  `DM-master`は、受信したDDL情報に基づいて、DMワーカーで構成されるシャーディンググループのDDL移行を調整します。
+4.  すべてのDMワーカーからDDL情報を受信した後、 `DM-master`はDDLロック所有者（特定のDMワーカー）にDDLステートメントの実行を要求します。
+5.  DDLロックの所有者はDDLステートメントを実行し、結果を`DM-master`に返します。次に、所有者は、DDL移行の内部調整中に、以前に無視されたDMLステートメントの移行を再開します。
+6.  `DM-master`は、所有者がDDLステートメントを正常に実行したことを確認した後、他のすべてのDMワーカーに移行を続行するように要求します。
+7.  他のすべてのDMワーカーは、DDL移行の内部調整中に、以前に無視されたDMLステートメントの移行を個別に再開します。
+8.  無視されたDMLステートメントの移行が再度終了すると、すべてのDMワーカーは通常の移行プロセスを再開します。

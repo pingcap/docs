@@ -3,22 +3,22 @@ title: Handle Sharding DDL Locks Manually in DM
 summary: Learn how to handle sharding DDL locks manually in DM.
 ---
 
-# Handle Sharding DDL Locks Manually in DM
+# DMでシャーディングDDLロックを手動で処理する {#handle-sharding-ddl-locks-manually-in-dm}
 
-DM uses the sharding DDL lock to ensure operations are performed in the correct order. This locking mechanism resolves sharding DDL locks automatically in most cases, but you need to use the `shard-ddl-lock` command to manually handle the abnormal DDL locks in some abnormal scenarios.
+DMは、シャーディングDDLロックを使用して、操作が正しい順序で実行されるようにします。このロックメカニズムは、ほとんどの場合、シャーディングDDLロックを自動的に解決しますが、一部の異常なシナリオでは、 `shard-ddl-lock`コマンドを使用して異常なDDLロックを手動で処理する必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> - This document only applies to the processing of sharding DDL lock in pessimistic coordination mode.
-> - The commands in the Command usage sections in this document are in interactive mode. In command-line mode, you need to add the escape characters to avoid an error report.
-> - Do not use `shard-ddl-lock unlock` unless you are totally aware of the possible impacts brought by the command and you can accept them.
-> - Before manually handling the abnormal DDL locks, make sure that you have already read the DM [shard merge principles](/dm/feature-shard-merge-pessimistic.md#principles).
+> -   このドキュメントは、ペシミスティックコーディネーションモードでのシャーディングDDLロックの処理にのみ適用されます。
+> -   このドキュメントの「コマンドの使用法」セクションのコマンドは、対話型モードです。コマンドラインモードでは、エラーレポートを回避するために、エスケープ文字を追加する必要があります。
+> -   コマンドによってもたらされる可能性のある影響を完全に認識していて、それらを受け入れることができる場合を除いて、 `shard-ddl-lock unlock`を使用しないでください。
+> -   異常なDDLロックを手動で処理する前に、 [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)をすでに読んでいることを確認してください。
 
-## Command
+## 指示 {#command}
 
-### `shard-ddl-lock`
+### <code>shard-ddl-lock</code> {#code-shard-ddl-lock-code}
 
-You can use this command to view the DDL lock and request DM-master to release the specified DDL lock. This command is only supported in DM v6.0 and later. For earlier versions, you must use the `show-ddl-locks` and `unlock-ddl-locks` commands.
+このコマンドを使用して、DDLロックを表示し、DMマスターに指定されたDDLロックを解放するように要求できます。このコマンドは、DMv6.0以降でのみサポートされています。以前のバージョンでは、 `show-ddl-locks`および`unlock-ddl-locks`コマンドを使用する必要があります。
 
 ```bash
 shard-ddl-lock -h
@@ -38,24 +38,25 @@ Global Flags:
 Use "dmctl shard-ddl-lock [command] --help" for more information about a command.
 ```
 
-#### Arguments description
+#### 引数の説明 {#arguments-description}
 
-* `shard-ddl-lock [task] [flags]`: view the DDL lock information on the current DM-master.
+-   `shard-ddl-lock [task] [flags]` ：現在のDMマスターのDDLロック情報を表示します。
 
-+ `shard-ddl-lock [command]`: request DM-master to release the specified DDL lock. `[command]` only accepts `unlock` as a value.
+<!---->
 
-## Usage examples
+-   `shard-ddl-lock [command]` ：指定されたDDLロックを解放するようにDMマスターに要求します。 `[command]`は値として`unlock`のみを受け入れます。
 
-### `shard-ddl-lock [task] [flags]`
+## 使用例 {#usage-examples}
 
-You can use `shard-ddl-lock [task] [flags]` to view the DDL lock information on the current DM-master. For example:
+### <code>shard-ddl-lock [task] [flags]</code> {#code-shard-ddl-lock-task-flags-code}
+
+`shard-ddl-lock [task] [flags]`を使用して、現在のDMマスターのDDLロック情報を表示できます。例えば：
 
 ```bash
 shard-ddl-lock test
 ```
 
-<details>
-<summary>Expected output</summary>
+<details><summary>期待される出力</summary>
 
 ```
 {
@@ -83,13 +84,13 @@ shard-ddl-lock test
 
 </details>
 
-### `shard-ddl-lock unlock`
+### <code>shard-ddl-lock unlock</code> {#code-shard-ddl-lock-unlock-code}
 
-This command actively requests `DM-master` to unlock the specified DDL lock, including requesting the owner to execute the DDL statement, requesting all other DM-workers that are not the owner to skip the DDL statement, and removing the lock information on `DM-master`.
+このコマンドは、所有者にDDLステートメントの実行を要求し、所有者ではない他のすべてのDMワーカーにDDLステートメントをスキップするように要求し、 `DM-master`のロック情報を削除するなど、指定されたDDLロックのロックを解除するように`DM-master`をアクティブに要求します。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, `shard-ddl-lock unlock` takes effect only for the lock in the `pessimistic` mode.
+> 現在、 `shard-ddl-lock unlock`は`pessimistic`モードのロックに対してのみ有効です。
 
 ```bash
 shard-ddl-lock unlock -h
@@ -113,27 +114,27 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-`shard-ddl-lock unlock` accepts the following arguments:
+`shard-ddl-lock unlock`は次の引数を受け入れます。
 
-+ `-o, --owner`:
+-   `-o, --owner` ：
 
-    - Flag; string; optional
-    - If it is not specified, this command requests for the default owner (the owner in the result of `shard-ddl-lock`) to execute the DDL statement; if it is specified, this command requests for the MySQL source (the alternative of the default owner) to execute the DDL statement.
-    - The new owner should not be specified unless the original owner is already removed from the cluster.
+    -   国旗;ストリング;オプション
+    -   指定されていない場合、このコマンドはデフォルトの所有者（ `shard-ddl-lock`の結果の所有者）にDDLステートメントの実行を要求します。指定されている場合、このコマンドはMySQLソース（デフォルトの所有者の代替）にDDLステートメントの実行を要求します。
+    -   元の所有者がクラスタから既に削除されていない限り、新しい所有者を指定しないでください。
 
-+ `-f, --force-remove`:
+-   `-f, --force-remove` ：
 
-    - Flag; boolean; optional
-    - If it is not specified, this command removes the lock information only when the owner succeeds to execute the DDL statement; if it is specified, this command forcefully removes the lock information even though the owner fails to execute the DDL statement (after doing this you cannot query or operate on the lock again).
+    -   国旗;ブール値;オプション
+    -   指定されていない場合、このコマンドは、所有者がDDLステートメントの実行に成功した場合にのみロック情報を削除します。指定されている場合、このコマンドは、所有者がDDLステートメントの実行に失敗した場合でも、ロック情報を強制的に削除します（これを実行した後は、ロックを再度照会したり操作したりすることはできません）。
 
-+ `lock-id`:
+-   `lock-id` ：
 
-    - Non-flag; string; required
-    - It specifies the ID of the DDL lock that needs to be unlocked (the `ID` in the result of `shard-ddl-lock`).
+    -   非フラグ;ストリング;必要
+    -   ロックを解除する必要のあるDDLロックのIDを指定します（ `shard-ddl-lock`の結果の`ID` ）。
 
-The following is an example of the `shard-ddl-lock unlock` command:
+以下は、 `shard-ddl-lock unlock`コマンドの例です。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 shard-ddl-lock unlock test-`shard_db`.`shard_table`
@@ -146,25 +147,25 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 }
 ```
 
-## Supported scenarios
+## サポートされているシナリオ {#supported-scenarios}
 
-Currently, the `shard-ddl-lock unlock` command only supports handling sharding DDL locks in the following two abnormal scenarios.
+現在、 `shard-ddl-lock unlock`コマンドは、次の2つの異常なシナリオでのシャーディングDDLロックの処理のみをサポートしています。
 
-### Scenario 1: Some MySQL sources are removed
+### シナリオ1：一部のMySQLソースが削除されます {#scenario-1-some-mysql-sources-are-removed}
 
-#### The reason for the abnormal lock
+#### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
 
-Before `DM-master` tries to automatically unlock the sharding DDL lock, all the MySQL sources need to receive the sharding DDL events (for details, see [shard merge principles](/dm/feature-shard-merge-pessimistic.md#principles)). If the sharding DDL event is already in the migration process, and some MySQL sources have been removed and are not to be reloaded (these MySQL sources have been removed according to the application demand), then the sharding DDL lock cannot be automatically migrated and unlocked because not all the DM-workers can receive the DDL event.
+`DM-master`がシャーディングDDLロックのロックを自動的に解除しようとする前に、すべてのMySQLソースがシャーディングDDLイベントを受信する必要があります（詳細については、 [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください）。シャーディングDDLイベントがすでに移行プロセスにあり、一部のMySQLソースが削除されて再ロードされない場合（これらのMySQLソースはアプリケーションの要求に応じて削除されます）、シャーディングDDLロックを自動的に移行およびロック解除することはできません。すべてのDMワーカーがDDLイベントを受信できるわけではないためです。
 
-> **Note:**
+> **ノート：**
 >
-> If you need to make some DM-workers offline when not in the process of migrating sharding DDL events, a better solution is to use `stop-task` to stop the running tasks first, make the DM-workers go offline, remove the corresponding configuration information from the task configuration file, and finally use `start-task` and the new task configuration to restart the migration task.
+> シャーディングDDLイベントを移行していないときに、一部のDMワーカーをオフラインにする必要がある場合は、 `stop-task`を使用して実行中のタスクを最初に停止し、DMワーカーをオフラインにし、対応する構成情報をから削除することをお勧めします。タスク構成ファイルを作成し、最後に`start-task`と新しいタスク構成を使用して移行タスクを再開します。
 
-#### Manual solution
+#### 手動ソリューション {#manual-solution}
 
-Suppose that there are two instances `MySQL-1` (`mysql-replica-01`) and `MySQL-2` (`mysql-replica-02`) in the upstream, and there are two tables `shard_db_1`.`shard_table_1` and `shard_db_1`.`shard_table_2` in `MySQL-1` and two tables `shard_db_2`.`shard_table_1` and `shard_db_2`.`shard_table_2` in `MySQL-2`. Now we need to merge the four tables and migrate them into the table `shard_db`.`shard_table` in the downstream TiDB.
+アップストリームに2つのインスタンス`MySQL-1` （ `mysql-replica-01` ）と`MySQL-2` （ `mysql-replica-02` ）があり、2つのテーブル`shard_db_1`があるとします。 `shard_table_1`と`shard_db_1` 。 `MySQL-1`の`shard_table_2`と2つのテーブル`shard_db_2` 。 `shard_table_1`と`shard_db_2` 。 `MySQL-2`の`shard_table_2` 。次に、4つのテーブルをマージし、それらをテーブル`shard_db`に移行する必要があります。ダウンストリームTiDBで`shard_table` 。
 
-The initial table structure is:
+初期のテーブル構造は次のとおりです。
 
 ```sql
 SHOW CREATE TABLE shard_db_1.shard_table_1;
@@ -178,15 +179,15 @@ SHOW CREATE TABLE shard_db_1.shard_table_1;
 +---------------+------------------------------------------+
 ```
 
-The following DDL operation will be executed on the upstream sharded tables to alter the table structure:
+次のDDL操作は、テーブル構造を変更するためにアップストリームのシャーディングされたテーブルで実行されます。
 
 ```sql
 ALTER TABLE shard_db_*.shard_table_* ADD COLUMN c2 INT;
 ```
 
-The operation processes of MySQL and DM are as follows:
+MySQLとDMの操作プロセスは次のとおりです。
 
-1. The corresponding DDL operations are executed on the two sharded tables of `mysql-replica-01` to alter the table structures.
+1.  対応するDDL操作は、テーブル構造を変更するために`mysql-replica-01`の2つのシャーディングされたテーブルで実行されます。
 
     ```sql
     ALTER TABLE shard_db_1.shard_table_1 ADD COLUMN c2 INT;
@@ -196,8 +197,9 @@ The operation processes of MySQL and DM are as follows:
     ALTER TABLE shard_db_1.shard_table_2 ADD COLUMN c2 INT;
     ```
 
-2. DM-worker sends the received DDL information of the two sharded tables of `mysql-replica-01` to DM-master, and DM-master creates the corresponding DDL lock.
-3. Use `shard-ddl-lock` to check the information of the current DDL lock.
+2.  DM-workerは、 `mysql-replica-01`の2つのシャーディングテーブルの受信したDDL情報をDM-masterに送信し、DM-masterは対応するDDLロックを作成します。
+
+3.  `shard-ddl-lock`を使用して、現在のDDLロックの情報を確認します。
 
     ```bash
     » shard-ddl-lock test
@@ -224,17 +226,18 @@ The operation processes of MySQL and DM are as follows:
     }
     ```
 
-4. Due to the application demand, the data corresponding to `mysql-replica-02` is no longer needed to be migrated to the downstream TiDB, and `mysql-replica-02` is removed.
-5. The lock whose ID is ```test-`shard_db`.`shard_table` ``` on `DM-master` cannot receive the DDL information of `mysql-replica-02`.
+4.  アプリケーションの需要により、 `mysql-replica-02`に対応するデータをダウンストリームTiDBに移行する必要がなくなり、 `mysql-replica-02`が削除されます。
 
-    - The returned result `unsynced` by `shard-ddl-lock` has always included the information of `mysql-replica-02`.
+5.  IDが``test-`shard_db`.`shard_table` ``対`DM-master`のロックは、 `mysql-replica-02`のDDL情報を受信できません。
 
-6. Use `shard-ddl-lock unlock` to request `DM-master` to actively unlock the DDL lock.
+    -   返される結果`unsynced`には、常に`shard-ddl-lock`の情報が含まれてい`mysql-replica-02` 。
 
-    - If the owner of the DDL lock has gone offline, you can use the parameter `--owner` to specify another DM-worker as the new owner to execute the DDL.
-    - If any MySQL source reports an error, `result` will be set to `false`, and at this point you should check carefully if the errors of each MySQL source is acceptable and within expectations.
+6.  `shard-ddl-lock unlock`を使用して`DM-master`を要求し、DDLロックをアクティブにロック解除します。
 
-        {{< copyable "shell-regular" >}}
+    -   DDLロックの所有者がオフラインになった場合は、パラメーター`--owner`を使用して、DDLを実行するための新しい所有者として別のDMワーカーを指定できます。
+    -   いずれかのMySQLソースがエラーを報告した場合、 `result`は`false`に設定されます。この時点で、各MySQLソースのエラーが許容可能であり、期待範囲内であるかどうかを注意深く確認する必要があります。
+
+        {{< copyable "" >}}
 
         ```bash
         shard-ddl-lock unlock test-`shard_db`.`shard_table`
@@ -246,7 +249,7 @@ The operation processes of MySQL and DM are as follows:
             "msg": ""
         ```
 
-7. Use `shard-ddl-lock` to confirm if the DDL lock is unlocked successfully.
+7.  `shard-ddl-lock`を使用して、DDLロックが正常にロック解除されているかどうかを確認します。
 
     ```bash
     » shard-ddl-lock test
@@ -258,7 +261,7 @@ The operation processes of MySQL and DM are as follows:
     }
     ```
 
-8. Check whether the table structure is altered successfully in the downstream TiDB.
+8.  ダウンストリームTiDBでテーブル構造が正常に変更されているかどうかを確認します。
 
     ```sql
     mysql> SHOW CREATE TABLE shard_db.shard_table;
@@ -273,50 +276,50 @@ The operation processes of MySQL and DM are as follows:
     +-------------+--------------------------------------------------+
     ```
 
-9. Use `query-status` to confirm if the migration task is normal.
+9.  `query-status`を使用して、移行タスクが正常かどうかを確認します。
 
-#### Impact
+#### 影響 {#impact}
 
-After you have manually unlocked the lock by using `shard-ddl-lock unlock`, if you don't deal with the offline MySQL sources included in the task configuration information, the lock might still be unable to be migrated automatically when the next sharding DDL event is received.
+`shard-ddl-lock unlock`を使用して手動でロックのロックを解除した後、タスク構成情報に含まれるオフラインのMySQLソースを処理しないと、次のシャーディングDDLイベントを受信したときにロックを自動的に移行できない場合があります。
 
-Therefore, after you have manually unlocked the DDL lock, you should perform the following operations:
+したがって、DDLロックを手動でロック解除した後、次の操作を実行する必要があります。
 
-1. Use `stop-task` to stop the running tasks.
-2. Update the task configuration file, and remove the related information of the offline MySQL source from the configuration file.
-3. Use `start-task` and the new task configuration file to restart the task.
+1.  `stop-task`を使用して、実行中のタスクを停止します。
+2.  タスク構成ファイルを更新し、オフラインMySQLソースの関連情報を構成ファイルから削除します。
+3.  `start-task`と新しいタスク構成ファイルを使用して、タスクを再開します。
 
-> **Note:**
+> **ノート：**
 >
-> After you run `shard-ddl-lock unlock`, if the MySQL source that went offline is reloaded and the DM-worker tries to migrate the data of the sharded tables, a match error between the data and the downstream table structure might occur.
+> `shard-ddl-lock unlock`を実行した後、オフラインになったMySQLソースがリロードされ、DMワーカーがシャーディングされたテーブルのデータを移行しようとすると、データとダウンストリームテーブル構造の間で一致エラーが発生する可能性があります。
 
-### Scenario 2: Some DM-workers stop abnormally or the network failure occurs during the DDL unlocking process
+### シナリオ2：一部のDMワーカーが異常に停止するか、DDLロック解除プロセス中にネットワーク障害が発生します {#scenario-2-some-dm-workers-stop-abnormally-or-the-network-failure-occurs-during-the-ddl-unlocking-process}
 
-#### The reason for the abnormal lock
+#### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
 
-After `DM-master` receives the DDL events of all DM-workers, automatically running `unlock DDL lock` mainly include the following steps:
+`DM-master`がすべてのDMワーカーのDDLイベントを受信した後、自動的に実行される`unlock DDL lock`には、主に次の手順が含まれます。
 
-1. Ask the owner of the lock to execute the DDL and update the checkpoints of corresponding sharded tables.
-2. Remove the DDL lock information stored on `DM-master` after the owner successfully executes the DDL.
-3. Ask all other non-owners to skip the DDL and update the checkpoints of corresponding sharded tables after the owner successfully executes the DDL.
-4. DM-master removes the corresponding DDL lock information after all the owners or non-owners' operations are successful.
+1.  ロックの所有者にDDLを実行し、対応するシャードテーブルのチェックポイントを更新するように依頼します。
+2.  所有者がDDLを正常に実行した後、 `DM-master`に格納されているDDLロック情報を削除します。
+3.  所有者がDDLを正常に実行した後、他のすべての非所有者にDDLをスキップし、対応するシャードテーブルのチェックポイントを更新するように依頼します。
+4.  DM-masterは、すべての所有者または非所有者の操作が成功した後、対応するDDLロック情報を削除します。
 
-Currently, the above unlocking process is not atomic. If the non-owner skips the DDL operation successfully, the DM-worker where the non-owner is located stops abnormally or a network anomaly occurs with the downstream TiDB, which can cause the checkpoint updating to fail.
+現在、上記のロック解除プロセスはアトミックではありません。非所有者がDDL操作を正常にスキップすると、非所有者がいるDMワーカーが異常に停止するか、ダウンストリームTiDBでネットワーク異常が発生し、チェックポイントの更新が失敗する可能性があります。
 
-When the MySQL source corresponding to the non-owner restores data migration, the non-owner tries to request the DM-master to re-coordinate the DDL operation that has been coordinated before the exception occurs and will never receives the corresponding DDL operation from other MySQL sources. This can cause the DDL operation to automatically unlock the corresponding lock.
+非所有者に対応するMySQLソースがデータ移行を復元すると、非所有者は、例外が発生する前に調整されたDDL操作を再調整するようにDMマスターに要求しようとし、他から対応するDDL操作を受信することはありません。 MySQLソース。これにより、DDL操作で対応するロックが自動的にロック解除される可能性があります。
 
-#### Manual solution
+#### 手動ソリューション {#manual-solution}
 
-Suppose that now we have the same upstream and downstream table structures and the same demand for merging tables and migration as in the manual solution of [Some MySQL sources are removed](#scenario-1-some-mysql-sources-are-removed).
+これで、 [一部のMySQLソースが削除されました](#scenario-1-some-mysql-sources-are-removed)の手動ソリューションと同じアップストリームとダウンストリームのテーブル構造があり、テーブルのマージと移行に対する需要が同じであると仮定します。
 
-When `DM-master` automatically executes the unlocking process, the owner (`mysql-replica-01`) successfully executes the DDL and continues the migration process. However, in the process of requesting the non-owner (`mysql-replica-02`) to skip the DDL operation, the checkpoint fails to update after the DM-worker skips the DDL operation because the corresponding DM-worker was restarted.
+`DM-master`が自動的にロック解除プロセスを実行すると、所有者（ `mysql-replica-01` ）はDDLを正常に実行し、移行プロセスを続行します。ただし、非所有者（ `mysql-replica-02` ）にDDL操作のスキップを要求するプロセスでは、対応するDM-workerが再起動されたため、DM-workerがDDL操作をスキップした後、チェックポイントの更新に失敗します。
 
-After the data migration subtask corresponding to `mysql-replica-02` restores, a new lock is created on the DM-master, but other MySQL sources have executed or skipped DDL operations and are performing subsequent migration.
+`mysql-replica-02`の復元に対応するデータ移行サブタスクの後、DMマスターに新しいロックが作成されますが、他のMySQLソースがDDL操作を実行またはスキップし、後続の移行を実行しています。
 
-The operation processes are:
+操作プロセスは次のとおりです。
 
-1. Use `shard-ddl-lock` to confirm if the corresponding lock of the DDL exists on `DM-master`.
+1.  `shard-ddl-lock`を使用して、対応するDDLのロックが`DM-master`に存在するかどうかを確認します。
 
-    Only `mysql-replica-02` is at the `synced` state.
+    `synced`状態にあるのは`mysql-replica-02`つだけです。
 
     ```bash
     » shard-ddl-lock
@@ -343,9 +346,9 @@ The operation processes are:
     }
     ```
 
-2. Use `shard-ddl-lock` to ask `DM-master` to unlock the lock.
+2.  `shard-ddl-lock`を使用して`DM-master`にロックのロックを解除するように依頼します。
 
-    - During the unlocking process, the owner tries to execute the DDL operation to the downstream again (the original owner before restarting has executed the DDL operation to the downstream once). Make sure that the DDL operation can be executed multiple times.
+    -   ロック解除プロセス中に、所有者はダウンストリームに対してDDL操作を再度実行しようとします（再起動する前の元の所有者は、ダウンストリームに対してDDL操作を1回実行しました）。 DDL操作を複数回実行できることを確認してください。
 
         ```bash
         shard-ddl-lock unlock test-`shard_db`.`shard_table`
@@ -355,9 +358,10 @@ The operation processes are:
         }
         ```
 
-3. Use `shard-ddl-lock` to confirm if the DDL lock has been successfully unlocked.
-4. Use `query-status` to confirm if the migration task is normal.
+3.  `shard-ddl-lock`を使用して、DDLロックが正常にロック解除されたかどうかを確認します。
 
-#### Impact
+4.  `query-status`を使用して、移行タスクが正常かどうかを確認します。
 
-After manually unlocking the lock, the following sharding DDL can be migrated automatically and normally.
+#### 影響 {#impact}
+
+ロックを手動でロック解除した後、次のシャーディングDDLを自動的かつ通常どおりに移行できます。

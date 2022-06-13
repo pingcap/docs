@@ -4,33 +4,34 @@ summary: Learn how to build a simple CRUD application with TiDB and Java.
 ---
 
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD029 -->
 
-# Build a Simple CRUD App with TiDB and Java
+# TiDBとJavaを使用してシンプルなCRUDアプリを構築する {#build-a-simple-crud-app-with-tidb-and-java}
 
-This document describes how to use TiDB and Java to build a simple CRUD application.
+このドキュメントでは、TiDBとJavaを使用して単純なCRUDアプリケーションを構築する方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended to use Java 8 or a later Java version.
+> Java8以降のJavaバージョンを使用することをお勧めします。
 >
-> If you want to use Spring Boot for application development, refer to [Build the TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+> アプリケーション開発にSpringBootを使用する場合は、 [SpringBootを使用してTiDBアプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)を参照してください。
 
-## Step 1. Launch your TiDB cluster
+## ステップ1.TiDBクラスタを起動します {#step-1-launch-your-tidb-cluster}
 
-The following introduces how to start a TiDB cluster.
+以下に、TiDBクラスタを開始する方法を紹介します。
 
-### Use a TiDB Cloud free cluster
+### TiDB Cloudの無料クラスタを使用する {#use-a-tidb-cloud-free-cluster}
 
-For detailed steps, see [Create a free cluster](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster).
+詳細な手順については、 [無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
-### Use a local cluster
+### ローカルクラスタを使用する {#use-a-local-cluster}
 
-For detailed steps, see [Deploy a local test cluster](/quick-start-with-tidb.md#deploy-a-local-test-cluster) or [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
+詳細な手順については、 [ローカルテストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
-## Step 2. Get the code
+## ステップ2.コードを取得する {#step-2-get-the-code}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 git clone https://github.com/pingcap-inc/tidb-example-java.git
@@ -40,15 +41,15 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 <div label="Using JDBC" href="get-code-jdbc">
 
-Change to the `plain-java-jdbc` directory:
+`plain-java-jdbc`ディレクトリに移動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cd plain-java-jdbc
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -65,9 +66,9 @@ The structure of this directory is as follows:
             └── dbinit.sql
 ```
 
-You can find initialization statements for the table creation in `dbinit.sql`:
+テーブル作成の初期化ステートメントは`dbinit.sql`にあります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE test;
@@ -81,11 +82,11 @@ CREATE TABLE player (
 );
 ```
 
-`JDBCExample.java` is the main body of the `plain-java-jdbc`. TiDB is highly compatible with the MySQL protocol, so you need to initialize a MySQL source instance `MysqlDataSource` to connect to TiDB. Then, you can initialize `PlayerDAO` for object management and use it to read, edit, add, and delete data.
+`JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDBはMySQLプロトコルとの互換性が高いため、TiDBに接続するにはMySQLソースインスタンス`MysqlDataSource`を初期化する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
 
-`PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods to provide the ability to write data.
+`PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
 
-`PlayerBean` is a data entity class that is a mapping for tables. Each property of a `PlayerBean` corresponds to a field in the `player` table.
+`PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
 
 {{< copyable "" >}}
 
@@ -516,19 +517,19 @@ public class JDBCExample
 
 <div label="Using Hibernate (Recommended)" href="get-code-hibernate">
 
-Compared with Hibernate, the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
+Hibernateと比較すると、JDBC実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを手動で作成する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
-Hibernate is a popular open-source Java ORM, and it supports TiDB dialect starting from `v6.0.0.Beta2`, which fits TiDB features well. The following instructions take `v6.0.0.Beta2` as an example.
+Hibernateは人気のあるオープンソースのJavaORMであり、TiDBの機能によく適合する`v6.0.0.Beta2`から始まるTiDB方言をサポートします。次の手順では、例として`v6.0.0.Beta2`を取り上げます。
 
-Change to the `plain-java-hibernate` directory:
+`plain-java-hibernate`ディレクトリに移動します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cd plain-java-hibernate
 ```
 
-The structure of this directory is as follows:
+このディレクトリの構造は次のとおりです。
 
 ```
 .
@@ -545,7 +546,7 @@ The structure of this directory is as follows:
             └── hibernate.cfg.xml
 ```
 
-`hibernate.cfg.xml` is the Hibernate configuration file:
+`hibernate.cfg.xml`はHibernate構成ファイルです。
 
 {{< copyable "" >}}
 
@@ -575,11 +576,11 @@ The structure of this directory is as follows:
 </hibernate-configuration>
 ```
 
-`HibernateExample.java` is the main body of the `plain-java-hibernate`. Compared with JDBC, when using Hibernate, you only need to write the path of the configuration file, because Hibernate avoids differences in database creation between different databases.
+`HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBCと比較して、Hibernateを使用する場合、Hibernateは異なるデータベース間のデータベース作成の違いを回避するため、構成ファイルのパスを書き込むだけで済みます。
 
-`PlayerDAO` is a class used to manage data, in which `DAO` means [Data Access Object](https://en.wikipedia.org/wiki/Data_access_object). The class defines a set of data manipulation methods for writing data. Compared with JDBC, Hibernate encapsulates a large number of operations such as object mapping and CRUD of basic objects, which greatly simplifies the code.
+`PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBCと比較すると、Hibernateは、オブジェクトマッピングや基本オブジェクトのCRUDなどの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
-`PlayerBean` is a data entity class that is a mapping for tables. Each property of a `PlayerBean` corresponds to a field in the `player` table. Compared with JDBC, `PlayerBean` in Hibernate adds annotations to indicate mapping relationships for more information.
+`PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBCと比較して、Hibernateの`PlayerBean`は、より多くの情報のマッピング関係を示す注釈を追加します。
 
 {{< copyable "" >}}
 
@@ -815,51 +816,51 @@ public class HibernateExample
 
 </SimpleTab>
 
-## Step 3. Run the code
+## ステップ3.コードを実行します {#step-3-run-the-code}
 
-The following content introduces how to run the code step by step.
+次のコンテンツでは、コードを段階的に実行する方法を紹介します。
 
-### Step 3.1 Table initialization
+### ステップ3.1テーブルの初期化 {#step-3-1-table-initialization}
 
 <SimpleTab>
 
 <div label="Using JDBC" href="jdbc-table-init-jdbc">
 
-When using JDBC, you need to initialize the database tables manually. If you are using a local cluster, and MySQL client has been installed locally, you can run it directly in the `plain-java-jdbc` directory:
+JDBCを使用する場合は、データベーステーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQLクライアントがローカルにインストールされている場合は、次の`plain-java-jdbc`のディレクトリで直接実行できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 make mysql
 ```
 
-Or you can execute the following command:
+または、次のコマンドを実行できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --host 127.0.0.1 --port 4000 -u root<src/main/resources/dbinit.sql
 ```
 
-If you are using a non-local cluster or MySQL client has not been installed, connect to your cluster and run the statement in the `src/main/resources/dbinit.sql` file.
+非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続して`src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
 
 </div>
 
 <div label="Using Hibernate (Recommended)" href="jdbc-table-init-hibernate">
 
-No need to initialize tables manually.
+テーブルを手動で初期化する必要はありません。
 
 </div>
 
 </SimpleTab>
 
-### Step 3.2 Modify parameters for TiDB Cloud
+### ステップTiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
 <SimpleTab>
 
 <div label="Using JDBC" href="tidb-cloud-jdbc">
 
-If you are using a non-local default cluster, such as TiDB Cloud or other remote clusters, modify the parameters of the host, port, user, and password in `JDBCExample.java`:
+TiDB Cloudやその他のリモートクラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、ホスト、ポート、ユーザー、およびパスワードのパラメーターを`JDBCExample.java`で変更します。
 
 {{< copyable "" >}}
 
@@ -871,13 +872,13 @@ mysqlDataSource.setUser("root");
 mysqlDataSource.setPassword("");
 ```
 
-Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
+設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
 ```
 mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 ```
 
-In this case, you can modify the parameters as follows:
+この場合、次のようにパラメータを変更できます。
 
 {{< copyable "" >}}
 
@@ -893,7 +894,7 @@ mysqlDataSource.setPassword("123456");
 
 <div label="Using Hibernate (Recommended)" href="tidb-cloud-hibernate">
 
-If you are using a non-local default cluster, such as TiDB Cloud or other remote cluster, modify the `hibernate.connection.url`, `hibernate.connection.username`, `hibernate.connection.password` in `hibernate.cfg.xml`.
+`hibernate.connection.password` TiDB Cloudや`hibernate.cfg.xml`のリモートクラスタなど、ローカル以外のデフォルトクラスタを使用している場合は、 `hibernate.connection.url`を変更し`hibernate.connection.username` 。
 
 {{< copyable "" >}}
 
@@ -923,15 +924,15 @@ If you are using a non-local default cluster, such as TiDB Cloud or other remote
 </hibernate-configuration>
 ```
 
-Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
+設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
 ```
 
-In this case, you can modify the parameters as follows:
+この場合、次のようにパラメータを変更できます。
 
 {{< copyable "" >}}
 
@@ -965,73 +966,73 @@ In this case, you can modify the parameters as follows:
 
 </SimpleTab>
 
-### Step 3.3 Run
+### ステップ3.3実行 {#step-3-3-run}
 
 <SimpleTab>
 
 <div label="Using JDBC" href="run-jdbc">
 
-To run the code, you can run `make build` and `make run` respectively:
+コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 make build # this command executes `mvn clean package`
 make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
 ```
 
-Or you can use the native commands:
+または、ネイティブコマンドを使用できます。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 mvn clean package
 java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly, which is a combination of `make build` and `make run`.
+または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
 
 </div>
 
 <div label="Using Hibernate (Recommended)" href="run-hibernate">
 
-To run the code, you can run `make build` and `make run` respectively:
+コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 make build # this command executes `mvn clean package`
 make run # this command executes `java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar`
 ```
 
-Or you can use the native commands:
+または、ネイティブコマンドを使用できます。
 
-{{< copyable "shell" >}}
+{{< copyable "" >}}
 
 ```shell
 mvn clean package
 java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 ```
 
-Or run the `make` command directly, which is a combination of `make build` and `make run`.
+または、 `make build`と`make run`の組み合わせである`make`コマンドを直接実行します。
 
 </div>
 
 </SimpleTab>
 
-## Step 4. Expected output
+## ステップ4.期待される出力 {#step-4-expected-output}
 
 <SimpleTab>
 
 <div label="Using JDBC" href="output-jdbc">
 
-[JDBC Expected Output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
+[JDBCの期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
 
 </div>
 
 <div label="Using Hibernate (Recommended)" href="output-hibernate">
 
-[Hibernate Expected Output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
+[Hibernateの期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
 
 </div>
 

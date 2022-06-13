@@ -3,30 +3,30 @@ title: SHOW TABLE NEXT_ROW_ID
 summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
 ---
 
-# SHOW TABLE NEXT_ROW_ID
+# テーブルNEXT_ROW_IDを表示 {#show-table-next-row-id}
 
-`SHOW TABLE NEXT_ROW_ID` is used to show the details of some special columns of a table, including:
+`SHOW TABLE NEXT_ROW_ID`は、次のようなテーブルのいくつかの特別な列の詳細を示すために使用されます。
 
-* `AUTO_INCREMENT` column automatically created by TiDB, namely, `_tidb_rowid` column.
-* `AUTO_INCREMENT` column created by users.
-* [`AUTO_RANDOM`](/auto-random.md) column created by users.
-* [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md) created by users.
+-   TiDBによって自動的に作成される`AUTO_INCREMENT`列、つまり`_tidb_rowid`列。
+-   `AUTO_INCREMENT`列はユーザーによって作成されました。
+-   [`AUTO_RANDOM`](/auto-random.md)列はユーザーによって作成されました。
+-   [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)ユーザーによって作成されました。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowTableNextRowIDStmt:**
+**ShowTableNextRowIDStmt：**
 
 ![ShowTableNextRowIDStmt](/media/sqlgram/ShowTableNextRowIDStmt.png)
 
-**TableName:**
+**TableName：**
 
 ![TableName](/media/sqlgram/TableName.png)
 
-## Examples
+## 例 {#examples}
 
-For newly created tables, `NEXT_GLOBAL_ROW_ID` is `1` because no Row ID is allocated.
+新しく作成されたテーブルの場合、行IDが割り当てられていないため、 `NEXT_GLOBAL_ROW_ID`は`1`です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t(a int);
@@ -43,7 +43,7 @@ show table t next_row_id;
 1 row in set (0.00 sec)
 ```
 
-Data have been written to the table. The TiDB server that inserts the data allocates and caches 30000 IDs at once. Thus, NEXT_GLOBAL_ROW_ID is 30001 now.
+データがテーブルに書き込まれました。データを挿入するTiDBサーバーは、一度に30000個のIDを割り当ててキャッシュします。したがって、NEXT_GLOBAL_ROW_IDは30001になります。
 
 ```sql
 insert into t values (), (), ();
@@ -61,12 +61,12 @@ show table t next_row_id;
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [AUTO_RANDOM](/auto-random.md)
-* [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [AUTO_RANDOM](/auto-random.md)
+-   [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)

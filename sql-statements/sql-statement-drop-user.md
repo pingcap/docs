@@ -3,11 +3,11 @@ title: DROP USER | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP USER for the TiDB database.
 ---
 
-# DROP USER
+# ドロップユーザー {#drop-user}
 
-This statement removes a user from the TiDB system database. The optional keyword `IF EXISTS` can be used to silence an error if the user does not exist. This statement requires the `CREATE USER` privilege.
+このステートメントは、TiDBシステムデータベースからユーザーを削除します。オプションのキーワード`IF EXISTS`は、ユーザーが存在しない場合にエラーを消音するために使用できます。このステートメントには`CREATE USER`の特権が必要です。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropUserStmt ::=
@@ -17,7 +17,7 @@ Username ::=
     StringName ('@' StringName | singleAtIdentifier)? | 'CURRENT_USER' OptionalBraces
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> DROP USER idontexist;
@@ -59,13 +59,13 @@ mysql> SHOW GRANTS FOR 'newuser';
 ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%'
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Dropping a user that does not exist with `IF EXISTS` will not create a warning in TiDB. [Issue #10196](https://github.com/pingcap/tidb/issues/10196).
+-   `IF EXISTS`で存在しないユーザーを削除しても、TiDBに警告は作成されません。 [問題＃10196](https://github.com/pingcap/tidb/issues/10196) 。
 
-## See also
+## も参照してください {#see-also}
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
-* [ALTER USER](/sql-statements/sql-statement-alter-user.md)
-* [SHOW CREATE USER](/sql-statements/sql-statement-show-create-user.md)
-* [Privilege Management](/privilege-management.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+-   [ALTER USER](/sql-statements/sql-statement-alter-user.md)
+-   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
+-   [権限管理](/privilege-management.md)

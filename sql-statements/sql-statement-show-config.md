@@ -3,29 +3,29 @@ title: SHOW CONFIG
 summary: Overview of the use of SHOW CONFIG in the TiDB database
 ---
 
-# SHOW CONFIG
+# 設定を表示 {#show-config}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is currently an experimental feature. It is not recommended to use this feature in the production environment.
+> この機能は現在実験的機能です。この機能を実稼働環境で使用することはお勧めしません。
 
-The `SHOW CONFIG` statement is used to show the current configuration of various components of TiDB. Note that the configuration and system variables act on different dimensions and should not be mixed up. If you want to obtain the system variable information, use the [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md) syntax.
+`SHOW CONFIG`ステートメントは、TiDBのさまざまなコンポーネントの現在の構成を示すために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないでください。システム変数情報を取得する場合は、 [変数を表示する](/sql-statements/sql-statement-show-variables.md)構文を使用します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**ShowStmt：**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable:**
+**ShowTargetFilterable：**
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-## Examples
+## 例 {#examples}
 
-Show all configurations:
+すべての構成を表示：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CONFIG;
@@ -42,9 +42,9 @@ SHOW CONFIG;
 120 rows in set (0.01 sec)
 ```
 
-Show the configuration where the `type` is `tidb`:
+`type`が`tidb`の構成を表示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CONFIG WHERE type = 'tidb' AND name = 'advertise-address';
@@ -59,9 +59,9 @@ SHOW CONFIG WHERE type = 'tidb' AND name = 'advertise-address';
 1 row in set (0.05 sec)
 ```
 
-You can also use the `LIKE` clause to show the configuration where the `type` is `tidb`:
+`LIKE`句を使用して、 `type`が`tidb`である構成を表示することもできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CONFIG LIKE 'tidb';
@@ -78,10 +78,10 @@ SHOW CONFIG LIKE 'tidb';
 40 rows in set (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [SHOW VARIABLES](/sql-statements/sql-statement-show-variables.md)
+-   [変数を表示する](/sql-statements/sql-statement-show-variables.md)

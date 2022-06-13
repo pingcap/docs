@@ -2,47 +2,47 @@
 title: TiDB 2.0.6 Release Notes
 ---
 
-# TiDB 2.0.6 Release Notes
+# TiDB2.0.6リリースノート {#tidb-2-0-6-release-notes}
 
-On August 6, 2018, TiDB 2.0.6 is released. Compared with TiDB 2.0.5, this release has great improvement in system compatibility and stability.
+2018年8月6日、TiDB2.0.6がリリースされました。 TiDB 2.0.5と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Improvements
-    - Make "set system variable" log shorter to save disk space [#7031](https://github.com/pingcap/tidb/pull/7031)
-    - Record slow operations during the execution of `ADD INDEX` in the log, to make troubleshooting easier [#7083](https://github.com/pingcap/tidb/pull/7083)
-    - Reduce transaction conflicts when updating statistics [#7138](https://github.com/pingcap/tidb/pull/7138)
-    - Improve the accuracy of row count estimation when the values pending to be estimated exceeds the statistics range [#7185](https://github.com/pingcap/tidb/pull/7185)
-    - Choose the table with a smaller estimated row count as the outer table for `Index Join` to improve its execution efficiency [#7277](https://github.com/pingcap/tidb/pull/7277)
-    - Add the recover mechanism for panics occurred during the execution of `ANALYZE TABLE`, to avoid that the tidb-server is unavailable caused by abnormal behavior in the process of collecting statistics [#7228](https://github.com/pingcap/tidb/pull/7228)
-    - Return `NULL` and the corresponding warning when the results of `RPAD`/`LPAD` exceed the value of the `max_allowed_packet` system variable, compatible with MySQL [#7244](https://github.com/pingcap/tidb/pull/7244)
-    - Set the upper limit of placeholders count in the `PREPARE` statement to 65535, compatible with MySQL [#7250](https://github.com/pingcap/tidb/pull/7250)
-- Bug Fixes
-    - Fix the issue that the `DROP USER` statement is incompatible with MySQL behavior in some cases [#7014](https://github.com/pingcap/tidb/pull/7014)
-    - Fix the issue that statements like `INSERT`/`LOAD DATA` meet OOM after opening `tidb_batch_insert` [#7092](https://github.com/pingcap/tidb/pull/7092)
-    - Fix the issue that the statistics fail to automatically update when the data of a table keeps updating [#7093](https://github.com/pingcap/tidb/pull/7093)
-    - Fix the issue that the firewall breaks inactive gPRC connections [#7099](https://github.com/pingcap/tidb/pull/7099)
-    - Fix the issue that prefix index returns a wrong result in some scenarios [#7126](https://github.com/pingcap/tidb/pull/7126)
-    - Fix the panic issue caused by outdated statistics in some scenarios [#7155](https://github.com/pingcap/tidb/pull/7155)
-    - Fix the issue that one piece of index data is missed after the `ADD INDEX` operation in some scenarios [#7156](https://github.com/pingcap/tidb/pull/7156)
-    - Fix the wrong result issue when querying `NULL` values using the unique index in some scenarios [#7172](https://github.com/pingcap/tidb/pull/7172)
-    - Fix the messy code issue of the `DECIMAL` multiplication result in some scenarios [#7212](https://github.com/pingcap/tidb/pull/7212)
-    - Fix the wrong result issue of `DECIMAL` modulo operation in some scenarios [#7245](https://github.com/pingcap/tidb/pull/7245)
-    - Fix the issue that the `UPDATE`/`DELETE` statement in a transaction returns a wrong result under some special sequence of statements [#7219](https://github.com/pingcap/tidb/pull/7219)
-    - Fix the panic issue of the `UNION ALL`/`UPDATE` statement during the process of building the execution plan in some scenarios [#7225](https://github.com/pingcap/tidb/pull/7225)
-    - Fix the issue that the range of prefix index is calculated incorrectly in some scenarios [#7231](https://github.com/pingcap/tidb/pull/7231)
-    - Fix the issue that the `LOAD DATA` statement fails to write the binlog in some scenarios [#7242](https://github.com/pingcap/tidb/pull/7242)
-    - Fix the wrong result issue of `SHOW CREATE TABLE` during the execution process of `ADD INDEX` in some scenarios [#7243](https://github.com/pingcap/tidb/pull/7243)
-    - Fix the issue that panic occurs when `Index Join` does not initialize timestamps in some scenarios [#7246](https://github.com/pingcap/tidb/pull/7246)
-    - Fix the false alarm issue when `ADMIN CHECK TABLE` mistakenly uses the timezone in the session [#7258](https://github.com/pingcap/tidb/pull/7258)
-    - Fix the issue that `ADMIN CLEANUP INDEX` does not clean up the index in some scenarios [#7265](https://github.com/pingcap/tidb/pull/7265)
-    - Disable the Read Committed isolation level [#7282](https://github.com/pingcap/tidb/pull/7282)
+-   改善
+    -   ディスク容量を節約するために、「システム変数の設定」ログを短くします[＃7031](https://github.com/pingcap/tidb/pull/7031)
+    -   トラブルシューティングを容易にするために、 `ADD INDEX`の実行中に遅い操作をログに記録します[＃7083](https://github.com/pingcap/tidb/pull/7083)
+    -   統計を更新する際のトランザクションの競合を減らす[＃7138](https://github.com/pingcap/tidb/pull/7138)
+    -   推定される保留中の値が統計範囲[＃7185](https://github.com/pingcap/tidb/pull/7185)を超える場合の行数推定の精度を向上させます
+    -   実行効率を向上させるために、 `Index Join`の外部テーブルとして、推定行数が少ないテーブルを選択します[＃7277](https://github.com/pingcap/tidb/pull/7277)
+    -   `ANALYZE TABLE`の実行中に発生したパニックの回復メカニズムを追加して、統計の収集プロセスでの異常な動作によってtidb-serverが使用できなくなるのを回避します[＃7228](https://github.com/pingcap/tidb/pull/7228)
+    -   `LPAD`の結果が`RPAD`と互換性のある`max_allowed_packet`システム変数の値を超えると、 `NULL`と対応する警告を返し[＃7244](https://github.com/pingcap/tidb/pull/7244) 。
+    -   MySQL [＃7250](https://github.com/pingcap/tidb/pull/7250)と互換性のある、 `PREPARE`ステートメントのプレースホルダー数の上限を65535に設定します
+-   バグの修正
+    -   `DROP USER`ステートメントがMySQLの動作と互換性がない場合があるという問題を修正します[＃7014](https://github.com/pingcap/tidb/pull/7014)
+    -   `INSERT`のようなステートメントが`tidb_batch_insert`を開いた後に[＃7092](https://github.com/pingcap/tidb/pull/7092)を満たすという問題を修正し`LOAD DATA`
+    -   テーブルのデータが更新され続けると、統計が自動的に更新されない問題を修正します[＃7093](https://github.com/pingcap/tidb/pull/7093)
+    -   ファイアウォールが非アクティブなgPRC接続を切断する問題を修正します[＃7099](https://github.com/pingcap/tidb/pull/7099)
+    -   一部のシナリオでプレフィックスインデックスが間違った結果を返す問題を修正します[＃7126](https://github.com/pingcap/tidb/pull/7126)
+    -   一部のシナリオで古い統計によって引き起こされるパニックの問題を修正する[＃7155](https://github.com/pingcap/tidb/pull/7155)
+    -   一部のシナリオで1回の操作後に`ADD INDEX`つのインデックスデータが失われる問題を修正します[＃7156](https://github.com/pingcap/tidb/pull/7156)
+    -   一部のシナリオで一意のインデックスを使用して`NULL`の値をクエリするときの誤った結果の問題を修正します[＃7172](https://github.com/pingcap/tidb/pull/7172)
+    -   一部のシナリオでの`DECIMAL`乗算結果の厄介なコードの問題を修正します[＃7212](https://github.com/pingcap/tidb/pull/7212)
+    -   一部のシナリオでの`DECIMAL`のモジュロ演算の誤った結果の問題を修正します[＃7245](https://github.com/pingcap/tidb/pull/7245)
+    -   トランザクションの`UPDATE`ステートメントが、ステートメントの特別なシーケンスの下で間違った結果を返す問題を修正し[＃7219](https://github.com/pingcap/tidb/pull/7219) `DELETE`
+    -   一部のシナリオで実行プランを作成するプロセス中の`UNION ALL`ステートメントのパニックの問題を修正し[＃7225](https://github.com/pingcap/tidb/pull/7225) `UPDATE`
+    -   一部のシナリオでプレフィックスインデックスの範囲が正しく計算されない問題を修正します[＃7231](https://github.com/pingcap/tidb/pull/7231)
+    -   一部のシナリオで`LOAD DATA`ステートメントがbinlogの書き込みに失敗する問題を修正します[＃7242](https://github.com/pingcap/tidb/pull/7242)
+    -   一部のシナリオでの`ADD INDEX`の実行プロセス中の`SHOW CREATE TABLE`の誤った結果の問題を修正します[＃7243](https://github.com/pingcap/tidb/pull/7243)
+    -   一部のシナリオで`Index Join`がタイムスタンプを初期化しない場合にパニックが発生する問題を修正します[＃7246](https://github.com/pingcap/tidb/pull/7246)
+    -   `ADMIN CHECK TABLE`がセッション[＃7258](https://github.com/pingcap/tidb/pull/7258)でタイムゾーンを誤って使用した場合の誤警報の問題を修正します。
+    -   一部のシナリオで`ADMIN CLEANUP INDEX`がインデックスをクリーンアップしないという問題を修正します[＃7265](https://github.com/pingcap/tidb/pull/7265)
+    -   読み取りコミット分離レベル[＃7282](https://github.com/pingcap/tidb/pull/7282)を無効にする
 
-## TiKV
+## TiKV {#tikv}
 
-- Improvements
-    - Enlarge scheduler's default slots to reduce false conflicts
-    - Reduce continuous records of rollback transactions, to improve the Read performance when conflicts are extremely severe
-    - Limit the size and number of RocksDB log files, to reduce unnecessary disk usage in long-running condition
-- Bug Fixes
-    - Fix the crash issue when converting the data type from string to decimal
+-   改善
+    -   スケジューラのデフォルトスロットを拡大して、誤った競合を減らします
+    -   競合が非常に深刻な場合の読み取りパフォーマンスを向上させるために、ロールバックトランザクションの継続的な記録を減らします
+    -   RocksDBログファイルのサイズと数を制限して、長時間実行状態での不要なディスク使用量を減らします
+-   バグの修正
+    -   データ型を文字列から10進数に変換するときのクラッシュの問題を修正しました

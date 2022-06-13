@@ -3,17 +3,17 @@ title: Manage TiCDC Cluster and Replication Tasks
 summary: Learn how to manage a TiCDC cluster and replication tasks.
 ---
 
-# Manage TiCDC Cluster and Replication Tasks
+# TiCDCクラスターおよびレプリケーションタスクの管理 {#manage-ticdc-cluster-and-replication-tasks}
 
-This document describes how to upgrade TiCDC cluster and modify the configuration of TiCDC cluster using TiUP, and how to manage the TiCDC cluster and replication tasks using the command-line tool `cdc cli`.
+このドキュメントでは、TiUPを使用してTiCDCクラスタの構成を変更する方法と、コマンドラインツールを使用してTiCDCクラスタとレプリケーションタスクを管理する方法について説明します`cdc cli` 。
 
-You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the TiCDC cluster and replication tasks. For details, see [TiCDC OpenAPI](/ticdc/ticdc-open-api.md).
+HTTPインターフェイス（TiCDC OpenAPI機能）を使用して、TiCDCクラスタおよびレプリケーションタスクを管理することもできます。詳細については、 [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)を参照してください。
 
-## Upgrade TiCDC using TiUP
+## TiUPを使用してTiCDCをアップグレードする {#upgrade-ticdc-using-tiup}
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.1.0.
+このセクションでは、TiUPを使用してTiCDCクラスタをアップグレードする方法を紹介します。次の例では、TiCDCとTiDBクラスタ全体をv6.1.0にアップグレードする必要があると想定しています。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup update --self && \
@@ -21,24 +21,24 @@ tiup update --all && \
 tiup cluster upgrade <cluster-name> v6.1.0
 ```
 
-### Notes for upgrade
+### アップグレードに関する注意事項 {#notes-for-upgrade}
 
-* The `changefeed` configuration has changed in TiCDC v4.0.2. See [Compatibility notes for the configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file) for details.
-* If you encounter any issues, see [Upgrade TiDB using TiUP - FAQ](/upgrade-tidb-using-tiup.md#faq).
+-   `changefeed`の構成はTiCDCv4.0.2で変更されました。詳細については、 [構成ファイルの互換性に関する注意事項](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
+-   問題が発生した場合は、 [TiUPを使用してTiDBをアップグレードするFAQ](/upgrade-tidb-using-tiup.md#faq)を参照してください。
 
-## Modify TiCDC configuration using TiUP
+## TiUPを使用してTiCDC構成を変更する {#modify-ticdc-configuration-using-tiup}
 
-This section introduces how to modify the configuration of TiCDC cluster using the  [`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md) command of TiUP. The following example changes the value of `gc-ttl` from the default `86400` to `3600`, namely, one hour.
+このセクションでは、TiUPの[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用してTiCDCクラスタの構成を変更する方法を紹介します。次の例では、 `gc-ttl`の値をデフォルトの`86400`から`3600` 、つまり1時間に変更します。
 
-First, execute the following command. You need to replace `<cluster-name>` with your actual cluster name.
+まず、次のコマンドを実行します。 `<cluster-name>`を実際のクラスタ名に置き換える必要があります。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 tiup cluster edit-config <cluster-name>
 ```
 
-Then, enter the vi editor page and modify the `cdc` configuraion under [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs). The configuration is shown below:
+次に、viエディターページに入り、 [`server-configs`](/tiup/tiup-cluster-topology-reference.md#server_configs)の下の`cdc`構成を変更します。構成を以下に示します。
 
 ```shell
  server_configs:
@@ -53,30 +53,30 @@ Then, enter the vi editor page and modify the `cdc` configuraion under [`server-
     gc-ttl: 3600
 ```
 
-After the modification, execute the `tiup cluster reload -R cdc` command to reload the configuration.
+変更後、 `tiup cluster reload -R cdc`コマンドを実行して構成を再ロードします。
 
-## Use TLS
+## TLSを使用する {#use-tls}
 
-For details about using encrypted data transmission (TLS), see [Enable TLS Between TiDB Components](/enable-tls-between-components.md).
+暗号化データ伝送（TLS）の使用の詳細については、 [TiDBコンポーネント間のTLSを有効にする](/enable-tls-between-components.md)を参照してください。
 
-## Use `cdc cli` to manage cluster status and data replication task
+## <code>cdc cli</code>を使用して、クラスタステータスとデータレプリケーションタスクを管理します {#use-code-cdc-cli-code-to-manage-cluster-status-and-data-replication-task}
 
-This section introduces how to use `cdc cli` to manage a TiCDC cluster and data replication tasks. `cdc cli` is the `cli` sub-command executed using the `cdc` binary. The following description assumes that:
+このセクションでは、 `cdc cli`を使用してTiCDCクラスタおよびデータレプリケーションタスクを管理する方法を紹介します。 `cdc cli`は、 `cdc`バイナリを使用して実行される`cli`サブコマンドです。次の説明は、次のことを前提としています。
 
-- `cli` commands are executed directly using the `cdc` binary;
-- PD listens on `10.0.10.25` and the port is `2379`.
+-   `cli`コマンドは`cdc`バイナリを使用して直接実行されます。
+-   PDは`10.0.10.25`でリッスンし、ポートは`2379`です。
 
-> **Note:**
+> **ノート：**
 >
-> The IP address and port that PD listens on correspond to the `advertise-client-urls` parameter specified during the `pd-server` startup. Multiple `pd-server`s have multiple `advertise-client-urls` parameters and you can specify one or multiple parameters. For example, `--pd=http://10.0.10.25:2379` or `--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379`.
+> PDがリッスンするIPアドレスとポートは、 `pd-server`の起動時に指定された`advertise-client-urls`つのパラメーターに対応します。複数の`pd-server`には複数の`advertise-client-urls`のパラメーターがあり、1つまたは複数のパラメーターを指定できます。たとえば、 `--pd=http://10.0.10.25:2379`または`--pd=http://10.0.10.25:2379,http://10.0.10.26:2379,http://10.0.10.27:2379` 。
 
-If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with `tiup ctl cdc`.
+TiUPを使用してTiCDCを展開する場合は、次のコマンドの`cdc cli`を`tiup ctl cdc`に置き換えます。
 
-### Manage TiCDC service progress (`capture`)
+### TiCDCサービスの進捗状況を管理する（ <code>capture</code> ） {#manage-ticdc-service-progress-code-capture-code}
 
-- Query the `capture` list:
+-   `capture`のリストを照会します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cdc cli capture list --pd=http://10.0.10.25:2379
@@ -97,42 +97,42 @@ If you deploy TiCDC using TiUP, replace `cdc cli` in the following commands with
     ]
     ```
 
-    - `id`: The ID of the service process.
-    - `is-owner`: Indicates whether the service process is the owner node.
-    - `address`: The address via which the service process provides interface to the outside.
+    -   `id` ：サービスプロセスのID。
+    -   `is-owner` ：サービスプロセスが所有者ノードであるかどうかを示します。
+    -   `address` ：サービスプロセスが外部へのインターフェイスを提供するために使用するアドレス。
 
-### Manage replication tasks (`changefeed`)
+### レプリケーションタスクの管理（ <code>changefeed</code> ） {#manage-replication-tasks-code-changefeed-code}
 
-#### State transfer of replication tasks
+#### レプリケーションタスクの状態転送 {#state-transfer-of-replication-tasks}
 
-The state of a replication task represents the running status of the replication task. During the running of TiCDC, replication tasks might fail with errors, be manually paused, resumed, or reach the specified `TargetTs`. These behaviors can lead to the change of the replication task state. This section describes the states of TiCDC replication tasks and the transfer relationships between states.
+レプリケーションタスクの状態は、レプリケーションタスクの実行ステータスを表します。 TiCDCの実行中に、レプリケーションタスクがエラーで失敗したり、手動で一時停止、再開したり、指定された`TargetTs`に到達したりする場合があります。これらの動作は、レプリケーションタスクの状態の変化につながる可能性があります。このセクションでは、TiCDCレプリケーションタスクの状態と状態間の転送関係について説明します。
 
 ![TiCDC state transfer](/media/ticdc/ticdc-state-transfer.png)
 
-The states in the above state transfer diagram are described as follows:
+上記の状態転送図の状態は、次のように説明されています。
 
-- `Normal`: The replication task runs normally and the checkpoint-ts proceeds normally.
-- `Stopped`: The replication task is stopped, because the user manually pauses the changefeed. The changefeed in this state blocks GC operations.
-- `Error`: The replication task returns an error. The replication cannot continue due to some recoverable errors. The changefeed in this state keeps trying to resume until the state transfers to `Normal`. The changefeed in this state blocks GC operations.
-- `Finished`: The replication task is finished and has reached the preset `TargetTs`. The changefeed in this state does not block GC operations.
-- `Failed`: The replication task fails. Due to some unrecoverable errors, the replication task cannot resume and cannot be recovered. The changefeed in this state does not block GC operations.
+-   `Normal` ：レプリケーションタスクは正常に実行され、checkpoint-tsは正常に進行します。
+-   `Stopped` ：ユーザーが手動でチェンジフィードを一時停止したため、レプリケーションタスクが停止しました。この状態のチェンジフィードは、GC操作をブロックします。
+-   `Error` ：レプリケーションタスクはエラーを返します。回復可能なエラーが原因で、レプリケーションを続行できません。この状態のチェンジフィードは、状態が`Normal`に移行するまで再開を試み続けます。この状態のチェンジフィードは、GC操作をブロックします。
+-   `Finished` ：レプリケーションタスクが終了し、プリセット`TargetTs`に到達しました。この状態のチェンジフィードは、GC操作をブロックしません。
+-   `Failed` ：レプリケーションタスクは失敗します。一部の回復不能なエラーが原因で、レプリケーションタスクを再開できず、回復できません。この状態のチェンジフィードは、GC操作をブロックしません。
 
-The numbers in the above state transfer diagram are described as follows.
+上記の状態転送図の番号は次のとおりです。
 
-- ① Execute the `changefeed pause` command
-- ② Execute the `changefeed resume` command to resume the replication task
-- ③ Recoverable errors occur during the `changefeed` operation, and the operation is resumed automatically.
-- ④ Execute the `changefeed resume` command to resume the replication task
-- ⑤ Recoverable errors occur during the `changefeed` operation
-- ⑥ `changefeed` has reached the preset `TargetTs`, and the replication is automatically stopped.
-- ⑦ `changefeed` suspended longer than the duration specified by `gc-ttl`, and cannot be resumed.
-- ⑧ `changefeed` experienced an unrecoverable error when trying to execute automatic recovery.
+-   `changefeed pause`コマンドを実行する
+-   `changefeed resume`コマンドを実行してレプリケーションタスクを再開します
+-   ③1 `changefeed`の動作で回復可能なエラーが発生し、自動的に動作を再開します。
+-   `changefeed resume`コマンドを実行してレプリケーションタスクを再開します
+-   ⑤1 `changefeed`の操作で回復可能なエラーが発生する
+-   `TargetTs` `changefeed`到達し、レプリケーションが自動的に停止します。
+-   `changefeed`は`gc-ttl`で指定された期間より長く中断され、再開できません。
+-   `changefeed`は、自動回復を実行しようとしたときに回復不能なエラーが発生しました。
 
-#### Create a replication task
+#### レプリケーションタスクを作成する {#create-a-replication-task}
 
-Execute the following commands to create a replication task:
+次のコマンドを実行して、レプリケーションタスクを作成します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --changefeed-id="simple-replication-task" --sort-engine="unified"
@@ -144,8 +144,9 @@ ID: simple-replication-task
 Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":"2020-03-12T22:04:08.103600025+08:00","start-ts":415241823337054209,"target-ts":0,"admin-job-type":0,"sort-engine":"unified","sort-dir":".","config":{"case-sensitive":true,"filter":{"rules":["*.*"],"ignore-txn-start-ts":null,"ddl-allow-list":null},"mounter":{"worker-num":16},"sink":{"dispatchers":null},"scheduler":{"type":"table-number","polling-time":-1}},"state":"normal","history":null,"error":null}
 ```
 
-- `--changefeed-id`: The ID of the replication task. The format must match the `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$` regular expression. If this ID is not specified, TiCDC automatically generates a UUID (the version 4 format) as the ID.
-- `--sink-uri`: The downstream address of the replication task. Configure `--sink-uri` according to the following format. Currently, the scheme supports `mysql`/`tidb`/`kafka`/`pulsar`/`s3`/`local`.
+-   `--changefeed-id` ：レプリケーションタスクのID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`の正規表現と一致する必要があります。このIDが指定されていない場合、TiCDCはIDとしてUUID（バージョン4形式）を自動的に生成します。
+
+-   `--sink-uri` ：レプリケーションタスクのダウンストリームアドレス。次の形式に従って`--sink-uri`を構成します。現在、この`kafka`は`mysql` `local` `pulsar`して`s3` `tidb` 。
 
     {{< copyable "" >}}
 
@@ -153,151 +154,154 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
     ```
 
-    When a URI contains special characters, you need to process these special characters using URL encoding.
+    URIに特殊文字が含まれている場合、URLエンコードを使用してこれらの特殊文字を処理する必要があります。
 
-- `--start-ts`: Specifies the starting TSO of the `changefeed`. From this TSO, the TiCDC cluster starts pulling data. The default value is the current time.
-- `--target-ts`: Specifies the ending TSO of the `changefeed`. To this TSO, the TiCDC cluster stops pulling data. The default value is empty, which means that TiCDC does not automatically stop pulling data.
-- `--sort-engine`: Specifies the sorting engine for the `changefeed`. Because TiDB and TiKV adopt distributed architectures, TiCDC must sort the data changes before writing them to the sink. This option supports `unified` (by default)/`memory`/`file`.
+-   `--start-ts` ： `changefeed`の開始TSOを指定します。このTSOから、TiCDCクラスタはデータのプルを開始します。デフォルト値は現在の時刻です。
 
-    - `unified`: When `unified` is used, TiCDC prefers data sorting in memory. If the memory is insufficient, TiCDC automatically uses the disk to store the temporary data. This is the default value of `--sort-engine`.
-    - `memory`: Sorts data changes in memory. It is **NOT recommended** to use this sorting engine, because OOM is easily triggered when you replicate a large amount of data.
-    - `file`: Entirely uses the disk to store the temporary data. This feature is **deprecated**. It is **NOT recommended** to use it in **any** situation.
+-   `--target-ts` ： `changefeed`の終了TSOを指定します。このTSOに対して、TiCDCクラスタはデータのプルを停止します。デフォルト値は空です。これは、TiCDCがデータのプルを自動的に停止しないことを意味します。
 
-- `--config`: Specifies the configuration file of the `changefeed`.
-- `sort-dir`: Specifies the temporary file directory used by the sorting engine. **Note that this option is not supported since TiDB v4.0.13, v5.0.3 and v5.1.0. Do not use it any more**.
+-   `--sort-engine` ： `changefeed`のソートエンジンを指定します。 TiDBとTiKVは分散アーキテクチャを採用しているため、TiCDCはデータの変更をシンクに書き込む前にソートする必要があります。このオプションは、 `unified` （デフォルト）/ `memory` / `file`をサポートします。
 
-#### Configure sink URI with `mysql`/`tidb`
+    -   `unified` ： `unified`が使用されている場合、TiCDCはメモリ内のデータの並べ替えを優先します。メモリが不足している場合、TiCDCは自動的にディスクを使用して一時データを保存します。これはデフォルト値の`--sort-engine`です。
+    -   `memory` ：メモリ内のデータ変更を並べ替えます。大量のデータを複製するとOOMが簡単にトリガーされるため、この並べ替えエンジンの使用は**お勧めしません**。
+    -   `file` ：ディスクを完全に使用して一時データを保存します。この機能は**廃止され**ました。<strong>いかなる</strong>状況でも使用することは<strong>お勧めしません</strong>。
 
-Sample configuration:
+-   `--config` ： `changefeed`の構成ファイルを指定します。
 
-{{< copyable "shell-regular" >}}
+-   `sort-dir` ：ソートエンジンが使用する一時ファイルディレクトリを指定します。 **TiDB v4.0.13、v5.0.3、およびv5.1.0以降、このオプションはサポートされていないことに注意してください。もう使用しないでください**。
+
+#### <code>mysql</code> / <code>tidb</code>を使用してシンクURIを構成します {#configure-sink-uri-with-code-mysql-code-code-tidb-code}
+
+構成例：
+
+{{< copyable "" >}}
 
 ```shell
 --sink-uri="mysql://root:123456@127.0.0.1:3306/?worker-count=16&max-txn-row=5000"
 ```
 
-The following are descriptions of parameters and parameter values that can be configured for the sink URI with `mysql`/`tidb`:
+以下は、 `mysql` / `tidb`のシンクURIに設定できるパラメータとパラメータ値の説明です。
 
-| Parameter/Parameter Value    | Description                                             |
-| :------------ | :------------------------------------------------ |
-| `root`        | The username of the downstream database                              |
-| `123456`       | The password of the downstream database                                      |
-| `127.0.0.1`    | The IP address of the downstream database                               |
-| `3306`         | The port for the downstream data                                 |
-| `worker-count` | The number of SQL statements that can be concurrently executed to the downstream (optional, `16` by default)       |
-| `max-txn-row`  | The size of a transaction batch that can be executed to the downstream (optional, `256` by default) |
-| `ssl-ca` | The path of the CA certificate file needed to connect to the downstream MySQL instance (optional)  |
-| `ssl-cert` | The path of the certificate file needed to connect to the downstream MySQL instance (optional) |
-| `ssl-key` | The path of the certificate key file needed to connect to the downstream MySQL instance (optional) |
-| `time-zone` | The time zone used when connecting to the downstream MySQL instance, which is effective since v4.0.8. This is an optional parameter. If this parameter is not specified, the time zone of TiCDC service processes is used. If this parameter is set to an empty value, no time zone is specified when TiCDC connects to the downstream MySQL instance and the default time zone of the downstream is used. |
+| パラメータ/パラメータ値   | 説明                                                                                                                                                                                                                         |
+| :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `root`         | ダウンストリームデータベースのユーザー名                                                                                                                                                                                                       |
+| `123456`       | ダウンストリームデータベースのパスワード                                                                                                                                                                                                       |
+| `127.0.0.1`    | ダウンストリームデータベースのIPアドレス                                                                                                                                                                                                      |
+| `3306`         | ダウンストリームデータのポート                                                                                                                                                                                                            |
+| `worker-count` | ダウンストリームに対して同時に実行できるSQLステートメントの数（オプション、デフォルトでは`16` ）                                                                                                                                                                       |
+| `max-txn-row`  | ダウンストリームで実行できるトランザクションバッチのサイズ（オプション、デフォルトで`256` ）                                                                                                                                                                          |
+| `ssl-ca`       | ダウンストリームのMySQLインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                                                                                                         |
+| `ssl-cert`     | ダウンストリームのMySQLインスタンスに接続するために必要な証明書ファイルのパス（オプション）                                                                                                                                                                           |
+| `ssl-key`      | ダウンストリームのMySQLインスタンスに接続するために必要な証明書キーファイルのパス（オプション）                                                                                                                                                                         |
+| `time-zone`    | ダウンストリームのMySQLインスタンスに接続するときに使用されるタイムゾーン。v4.0.8以降で有効です。これはオプションのパラメータです。このパラメーターが指定されていない場合、TiCDCサービスプロセスのタイムゾーンが使用されます。このパラメーターが空の値に設定されている場合、TiCDCがダウンストリームのMySQLインスタンスに接続するときにタイムゾーンが指定されず、ダウンストリームのデフォルトのタイムゾーンが使用されます。 |
 
-#### Configure sink URI with `kafka`
+#### <code>kafka</code>を使用してシンクURIを構成する {#configure-sink-uri-with-code-kafka-code}
 
-Sample configuration:
+構成例：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
-The following are descriptions of parameters and parameter values that can be configured for the sink URI with `kafka`:
+以下は、 `kafka`を使用してシンクURIに構成できるパラメーターとパラメーター値の説明です。
 
-| Parameter/Parameter Value               | Description                                                        |
-| :------------------ | :------------------------------------------------------------ |
-| `127.0.0.1`          | The IP address of the downstream Kafka services                                 |
-| `9092`               | The port for the downstream Kafka                                          |
-| `topic-name` | Variable. The name of the Kafka topic |
-| `kafka-version`      | The version of the downstream Kafka (optional, `2.4.0` by default. Currently, the earliest supported Kafka version is `0.11.0.2` and the latest one is `2.7.0`. This value needs to be consistent with the actual version of the downstream Kafka)                      |
-| `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default) |
-| `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default) |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default). From v5.0.6 and v4.0.6, the default value has changed from 64MB and 256MB to 10MB. |
-| `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
-| `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
-| `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
-| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds three TiDB extension fields to the Kafka message. |
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol`. (optional, `16` by default) |
-| `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default) |
-| `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
-| `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
-| `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
-| `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
-| `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional) |
-| `sasl-gssapi-keytab-path` | The gssapi keytab path (optional)|
-| `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional) |
-| `sasl-gssapi-service-name` | The gssapi service name (optional) |
-| `sasl-gssapi-user` | The user name of gssapi authentication (optional) |
-| `sasl-gssapi-password` | The password of gssapi authentication (optional)  |
-| `sasl-gssapi-realm` | The gssapi realm name (optional) |
-| `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional) |
-| `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
-| `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
-| `write-timeout` | The timeout in sending a request to the downstream Kafka. The default value is `10s` |
-| `avro-decimal-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the DECIMAL field. The value can be `string` or `precise`, indicating either mapping the DECIMAL field to a string or a precise floating number.  |
-| `avro-bigint-unsigned-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the BIGINT UNSIGNED field. The value can be `string` or `long`, indicating either mapping the BIGINT UNSIGNED field to a 64-bit signed number or a string.  |
+| パラメータ/パラメータ値                         | 説明                                                                                                                                                                                                      |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `127.0.0.1`                          | ダウンストリームKafkaサービスのIPアドレス                                                                                                                                                                                |
+| `9092`                               | 下流のカフカの港                                                                                                                                                                                                |
+| `topic-name`                         | 変数。カフカトピックの名前                                                                                                                                                                                           |
+| `kafka-version`                      | ダウンストリームKafkaのバージョン（オプション、デフォルトで`2.4.0`現在、サポートされている最も古いKafkaバージョンは`0.11.0.2`で、最新のバージョンは`2.7.0`です。この値はダウンストリームKafkaの実際のバージョンと一致している必要があります）                                                              |
+| `kafka-client-id`                    | レプリケーションタスクのKafkaクライアントIDを指定します（オプション。デフォルトでは`TiCDC_sarama_producer_replication ID` ）。                                                                                                                  |
+| `partition-num`                      | ダウンストリームKafkaパーティションの数（オプション。値は実際のパーティション数を**超えてはなりません**。そうでない場合、レプリケーションタスクを正常に作成できません。デフォルトでは`3` ）                                                                                                    |
+| `max-message-bytes`                  | 毎回Kafkaブローカーに送信されるデータの最大サイズ（オプション、デフォルトでは`10MB` ）。 v5.0.6およびv4.0.6から、デフォルト値が64MBおよび256MBから10MBに変更されました。                                                                                                 |
+| `replication-factor`                 | 保存できるKafkaメッセージレプリカの数（オプション、デフォルトで`1` ）                                                                                                                                                                 |
+| `protocol`                           | メッセージがKafkaに出力されるプロトコル。値の`maxwell`は、 `canal-json` 、 `avro` `canal` `open-protocol` 。                                                                                                                    |
+| `auto-create-topic`                  | 渡された`topic-name`がKafkaクラスタに存在しない場合にTiCDCがトピックを自動的に作成するかどうかを決定します（オプション、デフォルトでは`true` ）                                                                                                                  |
+| `enable-tidb-extension`              | オプション。デフォルトでは`false` 。出力プロトコルが`canal-json`の場合、値が`true`の場合、TiCDCはResolvedイベントを送信し、TiDB拡張フィールドをKafkaメッセージに追加します。 v6.1.0以降、このパラメーターは`avro`プロトコルにも適用できます。値が`true`の場合、TiCDCは3つのTiDB拡張フィールドをKafkaメッセージに追加します。 |
+| `max-batch-size`                     | v4.0.9の新機能。メッセージプロトコルが1つのKafkaメッセージへの複数のデータ変更の出力をサポートしている場合、このパラメーターは1つのKafkaメッセージでのデータ変更の最大数を指定します。現在、Kafkaの`protocol`が`open-protocol`の場合にのみ有効になります。 （オプション、デフォルトで`16` ）                               |
+| `enable-tls`                         | TLSを使用してダウンストリームKafkaインスタンスに接続するかどうか（オプション、デフォルトで`false` ）                                                                                                                                              |
+| `ca`                                 | ダウンストリームのKafkaインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                                                                                      |
+| `cert`                               | ダウンストリームのKafkaインスタンスに接続するために必要な証明書ファイルのパス（オプション）                                                                                                                                                        |
+| `key`                                | ダウンストリームのKafkaインスタンスに接続するために必要な証明書キーファイルのパス（オプション）                                                                                                                                                      |
+| `sasl-user`                          | ダウンストリームのKafkaインスタンスに接続するために必要なSASL/PLAINまたはSASL/SCRAM認証のID（authcid）（オプション）                                                                                                                             |
+| `sasl-password`                      | ダウンストリームのKafkaインスタンスに接続するために必要なSASL/PLAINまたはSASL/SCRAM認証のパスワード（オプション）                                                                                                                                   |
+| `sasl-mechanism`                     | ダウンストリームのKafkaインスタンスに接続するために必要なSASL認証の名前。 `scram-sha-256`は、 `plain` 、または`scram-sha-512`にすることができ`gssapi` 。                                                                                               |
+| `sasl-gssapi-auth-type`              | gssapi認証タイプ。値は`user`または`keytab`にすることができます（オプション）                                                                                                                                                        |
+| `sasl-gssapi-keytab-path`            | gssapiキータブパス（オプション）                                                                                                                                                                                     |
+| `sasl-gssapi-kerberos-config-path`   | gssapi kerberos構成パス（オプション）                                                                                                                                                                              |
+| `sasl-gssapi-service-name`           | gssapiサービス名（オプション）                                                                                                                                                                                      |
+| `sasl-gssapi-user`                   | gssapi認証のユーザー名（オプション）                                                                                                                                                                                   |
+| `sasl-gssapi-password`               | gssapi認証のパスワード（オプション）                                                                                                                                                                                   |
+| `sasl-gssapi-realm`                  | gssapiレルム名（オプション）                                                                                                                                                                                       |
+| `sasl-gssapi-disable-pafxfast`       | gssapi PA-FX-FASTを無効にするかどうか（オプション）                                                                                                                                                                      |
+| `dial-timeout`                       | ダウンストリームKafkaとの接続を確立する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                           |
+| `read-timeout`                       | ダウンストリームのKafkaから返される応答を取得する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                      |
+| `write-timeout`                      | ダウンストリームKafkaにリクエストを送信する際のタイムアウト。デフォルト値は`10s`です                                                                                                                                                         |
+| `avro-decimal-handling-mode`         | `avro`のプロトコルでのみ有効です。 AvroがDECIMALフィールドを処理する方法を決定します。値は`string`または`precise`で、DECIMALフィールドを文字列または正確な浮動小数点数にマッピングすることを示します。                                                                                |
+| `avro-bigint-unsigned-handling-mode` | `avro`のプロトコルでのみ有効です。 AvroがBIGINTUNSIGNEDフィールドを処理する方法を決定します。値は`string`または`long`で、BIGINTUNSIGNEDフィールドを64ビットの符号付き数値または文字列にマッピングすることを示します。                                                                  |
 
-Best practices:
+ベストプラクティス：
 
-* It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
-* If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
-* In most cases, it is recommended to use the `canal-json` protocol.
+-   独自のKafkaトピックを作成することをお勧めします。少なくとも、トピックがKafkaブローカーに送信できる各メッセージのデータの最大量と、ダウンストリームのKafkaパーティションの数を設定する必要があります。チェンジフィードを作成する場合、これら2つの設定はそれぞれ`max-message-bytes`と`partition-num`に対応します。
+-   まだ存在しないトピックを使用してチェンジフィードを作成する場合、TiCDCは`partition-num`および`replication-factor`パラメーターを使用してトピックを作成しようとします。これらのパラメーターを明示的に指定することをお勧めします。
+-   ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
 
-> **Note:**
+> **ノート：**
 >
-> When `protocol` is `open-protocol`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
+> `protocol`が`open-protocol`の場合、TiCDCは長さが`max-message-bytes`を超えるメッセージの生成を回避しようとします。ただし、行が大きすぎて1回の変更だけで長さが`max-message-bytes`を超える場合、サイレント障害を回避するために、TiCDCはこのメッセージを出力しようとし、ログに警告を出力します。
 
-#### TiCDC uses the authentication and authorization of Kafka
+#### TiCDCはKafkaの認証と承認を使用します {#ticdc-uses-the-authentication-and-authorization-of-kafka}
 
-The following are examples when using Kafka SASL authentication:
+以下は、KafkaSASL認証を使用する場合の例です。
 
-- SASL/PLAIN
+-   SASL / PLAIN
 
     ```shell
     --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-user=alice-user&sasl-password=alice-secret&sasl-mechanism=plain"
     ```
 
-- SASL/SCRAM
+-   SASL / SCRAM
 
-    SCRAM-SHA-256 and SCRAM-SHA-512 are similar to the PLAIN method. You just need to specify `sasl-mechanism` as the corresponding authentication method.
+    SCRAM-SHA-256およびSCRAM-SHA-512は、PLAINメソッドに似ています。対応する認証方法として`sasl-mechanism`を指定する必要があります。
 
-- SASL/GSSAPI
+-   SASL / GSSAPI
 
-    SASL/GSSAPI `user` authentication:
+    SASL / GSSAPI `user`認証：
 
     ```shell
     --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
     ```
 
-    Values of `sasl-gssapi-user` and `sasl-gssapi-realm` are related to the [principle](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html) specified in kerberos. For example, if the principle is set as `alice/for-kafka@example.com`, then `sasl-gssapi-user` and `sasl-gssapi-realm` are specified as `alice/for-kafka` and `example.com` respectively.
+    `sasl-gssapi-user`と`sasl-gssapi-realm`の値は、Kerberosで指定された[原理](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html)に関連しています。たとえば、原則が`alice/for-kafka@example.com`に設定されている場合、 `sasl-gssapi-user`と`sasl-gssapi-realm`はそれぞれ`alice/for-kafka`と`example.com`として指定されます。
 
-    SASL/GSSAPI `keytab` authentication:
+    SASL / GSSAPI `keytab`認証：
 
     ```shell
     --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
     ```
 
-    For more information about SASL/GSSAPI authentication methods, see [Configuring GSSAPI](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html).
+    SASL / GSSAPI認証方式の詳細については、 [GSSAPIの構成](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html)を参照してください。
 
-- TLS/SSL encryption
+-   TLS/SSL暗号化
 
-    If the Kafka broker has TLS/SSL encryption enabled, you need to add the `-enable-tls=true` parameter to `--sink-uri`. If you want to use self-signed certificates, you also need to specify `ca`, `cert` and `key` in `--sink-uri`.
+    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `-enable-tls=true`パラメーターを`--sink-uri`に追加する必要があります。自己署名証明書を使用する場合は、 `cert` `ca`および`key`も指定する必要があり`--sink-uri` 。
 
-- ACL authorization
+-   ACL認証
 
-    The minimum set of permissions required for TiCDC to function properly is as follows.
+    TiCDCが正しく機能するために必要な最小限の権限セットは次のとおりです。
 
-    - The `Create` and `Write` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
-    - The `DescribeConfigs` permission for the Cluster resource type.
+    -   トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create`および`Write`の権限。
+    -   クラスターリソースタイプの`DescribeConfigs`のアクセス許可。
 
-#### Integrate TiCDC with Kafka Connect (Confluent Platform)
+#### TiCDCをKafkaConnect（Confluent Platform）と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
-To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you need to use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
+Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してデータをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `schema-registry`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。
 
-Sample configuration:
+構成例：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 --sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --schema-registry="http://127.0.0.1:8081" --config changefeed_config.toml
@@ -310,64 +314,64 @@ dispatchers = [
 ]
 ```
 
-For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
+詳細な統合ガイドについては、 [TiDBとConfluentプラットフォームの統合に関するクイックスタートガイド](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
-#### Configure sink URI with `pulsar`
+#### <code>pulsar</code>を使用してシンクURIを構成する {#configure-sink-uri-with-code-pulsar-code}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. Do **NOT** use it in a production environment.
+> これはまだ実験的機能です。実稼働環境では使用し**ない**でください。
 
-Sample configuration:
+構成例：
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 --sink-uri="pulsar://127.0.0.1:6650/topic-name?connectionTimeout=2s"
 ```
 
-The following are descriptions of parameters that can be configured for the sink URI with `pulsar`:
+以下は、 `pulsar`を使用してシンクURIに構成できるパラメーターの説明です。
 
-| Parameter  | Description                                            |
-| :------------------ | :------------------------------------------------------------ |
-| `connectionTimeout` | The timeout for establishing a connection to the downstream Pulsar, which is optional and defaults to 30 (seconds) |
-| `operationTimeout` | The timeout for performing an operation on the downstream Pulsar, which is optional and defaults to 30 (seconds) |
-| `tlsTrustCertsFilePath` | The path of the CA certificate file needed to connect to the downstream Pulsar instance (optional) |
-| `tlsAllowInsecureConnection` | Determines whether to allow unencrypted connection after TLS is enabled (optional) |
-| `tlsValidateHostname` |  Determines whether to verify the host name of the certificate from the downstream Pulsar (optional) |
-| `maxConnectionsPerBroker` | The maximum number of connections allowed to a single downstream Pulsar broker, which is optional and defaults to 1 |
-| `auth.tls` | Uses the TLS mode to verify the downstream Pulsar (optional). For example, `auth=tls&auth.tlsCertFile=/path/to/cert&auth.tlsKeyFile=/path/to/key`. |
-| `auth.token` | Uses the token mode to verify the downstream Pulsar (optional). For example, `auth=token&auth.token=secret-token` or `auth=token&auth.file=path/to/secret-token-file`. |
-| `name` | The name of Pulsar producer in TiCDC (optional) |
-| `protocol` | The protocol with which messages are output to Pulsar. The value options are `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
-| `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
-| `disableBatching` |  Disables automatically sending messages in batches (optional) |
-| `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
-| `compressionType` | Sets the compression algorithm used for sending messages (optional). The value options are `NONE`, `LZ4`, `ZLIB`, and `ZSTD`. (`NONE` by default) |
-| `hashingScheme` | The hash algorithm used for choosing the partition to which a message is sent (optional). The value options are `JavaStringHash` (default) and `Murmur3`. |
-| `properties.*` | The customized properties added to the Pulsar producer in TiCDC (optional). For example, `properties.location=Hangzhou`. |
+| パラメータ                        | 説明                                                                                                                                      |
+| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| `connectionTimeout`          | ダウンストリームパルサーへの接続を確立するためのタイムアウト。これはオプションで、デフォルトは30（秒）です。                                                                                 |
+| `operationTimeout`           | ダウンストリームパルサーで操作を実行するためのタイムアウト。これはオプションで、デフォルトは30（秒）です。                                                                                  |
+| `tlsTrustCertsFilePath`      | ダウンストリームPulsarインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                      |
+| `tlsAllowInsecureConnection` | TLSを有効にした後に暗号化されていない接続を許可するかどうかを決定します（オプション）                                                                                            |
+| `tlsValidateHostname`        | ダウンストリームパルサーからの証明書のホスト名を確認するかどうかを決定します（オプション）                                                                                           |
+| `maxConnectionsPerBroker`    | 単一のダウンストリームPulsarブローカーに許可される接続の最大数。これはオプションであり、デフォルトは1です。                                                                               |
+| `auth.tls`                   | TLSモードを使用して、ダウンストリームのパルサーを検証します（オプション）。たとえば、 `auth=tls&auth.tlsCertFile=/path/to/cert&auth.tlsKeyFile=/path/to/key` 。                   |
+| `auth.token`                 | トークンモードを使用して、ダウンストリームのパルサーを検証します（オプション）。たとえば、 `auth=token&auth.token=secret-token`または`auth=token&auth.file=path/to/secret-token-file` 。 |
+| `name`                       | TiCDCのパルサープロデューサーの名前（オプション）                                                                                                             |
+| `protocol`                   | メッセージがパルサーに出力されるプロトコル。値の`maxwell`は、 `canal-json` 、 `avro` `canal` `open-protocol` 。                                                     |
+| `maxPendingMessages`         | 保留中のメッセージキューの最大サイズを設定します。これはオプションで、デフォルトは1000です。たとえば、Pulsarからの確認メッセージの保留中です。                                                            |
+| `disableBatching`            | メッセージをバッチで自動的に送信することを無効にします（オプション）                                                                                                      |
+| `batchingMaxPublishDelay`    | 送信されたメッセージがバッチ処理される期間を設定します（デフォルト：10ms）                                                                                                 |
+| `compressionType`            | メッセージの送信に使用される圧縮アルゴリズムを設定します（オプション）。値のオプションは、 `NONE` 、 `ZSTD` `ZLIB` `LZ4` （デフォルトでは`NONE` ）                                             |
+| `hashingScheme`              | メッセージの送信先のパーティションを選択するために使用されるハッシュアルゴリズム（オプション）。値のオプションは`JavaStringHash` （デフォルト）と`Murmur3`です。                                           |
+| `properties.*`               | TiCDCのパルサープロデューサーに追加されたカスタマイズされたプロパティ（オプション）。たとえば、 `properties.location=Hangzhou` 。                                                     |
 
-For more parameters of Pulsar, see [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions) and [pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions).
+パルサーのその他のパラメーターについては、 [pulsar-client-go ClientOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ClientOptions)および[pulsar-client-go ProducerOptions](https://godoc.org/github.com/apache/pulsar-client-go/pulsar#ProducerOptions)を参照してください。
 
-#### Use the task configuration file
+#### タスク構成ファイルを使用する {#use-the-task-configuration-file}
 
-For more replication configuration (for example, specify replicating a single table), see [Task configuration file](#task-configuration-file).
+その他のレプリケーション構成（たとえば、単一のテーブルのレプリケーションを指定する）については、 [タスク構成ファイル](#task-configuration-file)を参照してください。
 
-You can use a configuration file to create a replication task in the following way:
+構成ファイルを使用して、次の方法でレプリケーションタスクを作成できます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="mysql://root:123456@127.0.0.1:3306/" --config changefeed.toml
 ```
 
-In the command above, `changefeed.toml` is the configuration file for the replication task.
+上記のコマンドで、 `changefeed.toml`はレプリケーションタスクの構成ファイルです。
 
-#### Query the replication task list
+#### レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
-Execute the following command to query the replication task list:
+次のコマンドを実行して、レプリケーションタスクリストを照会します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed list --pd=http://10.0.10.25:2379
@@ -385,19 +389,19 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 }]
 ```
 
-- `checkpoint` indicates that TiCDC has already replicated data before this time point to the downstream.
-- `state` indicates the state of the replication task.
-    - `normal`: The replication task runs normally.
-    - `stopped`: The replication task is stopped (manually paused).
-    - `error`: The replication task is stopped (by an error).
-    - `removed`: The replication task is removed. Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
-    - `finished`: The replication task is finished (data is replicated to the `target-ts`). Tasks of this state are displayed only when you have specified the `--all` option. To see these tasks when this option is not specified, execute the `changefeed query` command.
+-   `checkpoint`は、この時点より前にTiCDCがすでにデータをダウンストリームに複製していることを示します。
+-   `state`は、レプリケーションタスクの状態を示します。
+    -   `normal` ：レプリケーションタスクは正常に実行されます。
+    -   `stopped` ：レプリケーションタスクが停止します（手動で一時停止します）。
+    -   `error` ：レプリケーションタスクは（エラーによって）停止されます。
+    -   `removed` ：レプリケーションタスクが削除されます。この状態のタスクは、 `--all`オプションを指定した場合にのみ表示されます。このオプションが指定されていないときにこれらのタスクを表示するには、 `changefeed query`コマンドを実行します。
+    -   `finished` ：レプリケーションタスクが終了します（データは`target-ts`にレプリケートされます）。この状態のタスクは、 `--all`オプションを指定した場合にのみ表示されます。このオプションが指定されていないときにこれらのタスクを表示するには、 `changefeed query`コマンドを実行します。
 
-#### Query a specific replication task
+#### 特定のレプリケーションタスクをクエリする {#query-a-specific-replication-task}
 
-To query a specific replication task, execute the `changefeed query` command. The query result includes the task information and the task state. You can specify the `--simple` or `-s` argument to simplify the query result that will only include the basic replication state and the checkpoint information. If you do not specify this argument, detailed task configuration, replication states, and replication table information are output.
+特定のレプリケーションタスクをクエリするには、 `changefeed query`コマンドを実行します。クエリ結果には、タスク情報とタスク状態が含まれます。 `--simple`または`-s`引数を指定して、基本的なレプリケーション状態とチェックポイント情報のみを含むクエリ結果を簡略化できます。この引数を指定しない場合、詳細なタスク構成、レプリケーション状態、およびレプリケーションテーブル情報が出力されます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed query -s --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task
@@ -412,14 +416,14 @@ cdc cli changefeed query -s --pd=http://10.0.10.25:2379 --changefeed-id=simple-r
 }
 ```
 
-In the command and result above:
+上記のコマンドと結果では、次のようになります。
 
-+ `state` is the replication state of the current `changefeed`. Each state must be consistent with the state in `changefeed list`.
-+ `tso` represents the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
-+ `checkpoint` represents the corresponding time of the largest transaction TSO in the current `changefeed` that has been successfully replicated to the downstream.
-+ `error` records whether an error has occurred in the current `changefeed`.
+-   `state`は、現在の`changefeed`の複製状態です。各状態は、 `changefeed list`の状態と一致している必要があります。
+-   `tso`は、ダウンストリームに正常に複製された現在の`changefeed`の最大のトランザクションTSOを表します。
+-   `checkpoint`は、ダウンストリームに正常に複製された、現在の`changefeed`の最大のトランザクションTSOの対応する時間を表します。
+-   `error`は、現在の`changefeed`でエラーが発生したかどうかを記録します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task
@@ -484,66 +488,66 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-repl
 }
 ```
 
-In the command and result above:
+上記のコマンドと結果では、次のようになります。
 
-- `info` is the replication configuration of the queried `changefeed`.
-- `status` is the replication state of the queried `changefeed`.
-    - `resolved-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully sent from TiKV to TiCDC.
-    - `checkpoint-ts`: The largest transaction `TS` in the current `changefeed`. Note that this `TS` has been successfully written to the downstream.
-    - `admin-job-type`: The status of a `changefeed`:
-        - `0`: The state is normal.
-        - `1`: The task is paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
-        - `2`: The task is resumed. The replication task resumes from `checkpoint-ts`.
-        - `3`: The task is removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. Only the replication status is retained for later queries.
-- `task-status` indicates the state of each replication sub-task in the queried `changefeed`.
+-   `info`は、照会された`changefeed`の複製構成です。
+-   `status`は、照会された`changefeed`の複製状態です。
+    -   `resolved-ts` ：現在の`changefeed`で最大のトランザクション`TS` 。この`TS`はTiKVからTiCDCに正常に送信されていることに注意してください。
+    -   `checkpoint-ts` ：現在の`changefeed`で最大のトランザクション`TS` 。この`TS`はダウンストリームに正常に書き込まれていることに注意してください。
+    -   `admin-job-type` ： `changefeed`のステータス：
+        -   `0` ：状態は正常です。
+        -   `1` ：タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
+        -   `2` ：タスクが再開されます。レプリケーションタスクは`checkpoint-ts`から再開します。
+        -   `3` ：タスクは削除されます。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスのみが、後のクエリのために保持されます。
+-   `task-status`は、照会された`changefeed`の各レプリケーションサブタスクの状態を示します。
 
-#### Pause a replication task
+#### レプリケーションタスクを一時停止します {#pause-a-replication-task}
 
-Execute the following command to pause a replication task:
+次のコマンドを実行して、レプリケーションタスクを一時停止します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed pause --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
 ```
 
-In the above command:
+上記のコマンドでは：
 
-- `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to pause.
+-   `--changefeed-id=uuid`は、一時停止するレプリケーションタスクに対応する`changefeed`のIDを表します。
 
-#### Resume a replication task
+#### レプリケーションタスクを再開します {#resume-a-replication-task}
 
-Execute the following command to resume a paused replication task:
+次のコマンドを実行して、一時停止したレプリケーションタスクを再開します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed resume --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
 ```
 
-In the above command:
+上記のコマンドでは：
 
-- `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to resume.
+-   `--changefeed-id=uuid`は、再開するレプリケーションタスクに対応する`changefeed`のIDを表します。
 
-#### Remove a replication task
+#### レプリケーションタスクを削除する {#remove-a-replication-task}
 
-Execute the following command to remove a replication task:
+次のコマンドを実行して、レプリケーションタスクを削除します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed remove --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
 ```
 
-In the above command:
+上記のコマンドでは：
 
-- `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to remove.
+-   `--changefeed-id=uuid`は、削除するレプリケーションタスクに対応する`changefeed`のIDを表します。
 
-### Update task configuration
+### タスク構成の更新 {#update-task-configuration}
 
-Starting from v4.0.4, TiCDC supports modifying the configuration of the replication task (not dynamically). To modify the `changefeed` configuration, pause the task, modify the configuration, and then resume the task.
+v4.0.4以降、TiCDCはレプリケーションタスクの構成の変更をサポートします（動的ではありません）。 `changefeed`の構成を変更するには、タスクを一時停止し、構成を変更してから、タスクを再開します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
@@ -551,18 +555,18 @@ cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mys
 cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
 ```
 
-Currently, you can modify the following configuration items:
+現在、次の構成アイテムを変更できます。
 
-- `sink-uri` of the `changefeed`.
-- The `changefeed` configuration file and all configuration items in the file.
-- Whether to use the file sorting feature and the sorting directory.
-- The `target-ts` of the `changefeed`.
+-   `changefeed`の`sink-uri` 。
+-   `changefeed`の構成ファイルとファイル内のすべての構成項目。
+-   ファイルの並べ替え機能と並べ替えディレクトリを使用するかどうか。
+-   `changefeed`のうちの`target-ts`つ。
 
-### Manage processing units of replication sub-tasks (`processor`)
+### レプリケーションサブタスクの処理ユニットを管理する（ <code>processor</code> ） {#manage-processing-units-of-replication-sub-tasks-code-processor-code}
 
-- Query the `processor` list:
+-   `processor`のリストを照会します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cdc cli processor list --pd=http://10.0.10.25:2379
@@ -578,9 +582,9 @@ Currently, you can modify the following configuration items:
     ]
     ```
 
-- Query a specific `changefeed` which corresponds to the status of a specific replication task:
+-   特定のレプリケーションタスクのステータスに対応する特定の`changefeed`をクエリします。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     cdc cli processor query --pd=http://10.0.10.25:2379 --changefeed-id=simple-replication-task --capture-id=b293999a-4168-4988-a4f4-35d9589b226b
@@ -605,15 +609,15 @@ Currently, you can modify the following configuration items:
     }
     ```
 
-    In the command above:
+    上記のコマンドでは：
 
-    - `status.tables`: Each key number represents the ID of the replication table, corresponding to `tidb_table_id` of a table in TiDB.
-    - `resolved-ts`: The largest TSO among the sorted data in the current processor.
-    - `checkpoint-ts`: The largest TSO that has been successfully written to the downstream in the current processor.
+    -   `status.tables` ：各キー番号は、TiDBのテーブルの`tidb_table_id`に対応するレプリケーションテーブルのIDを表します。
+    -   `resolved-ts` ：現在のプロセッサでソートされたデータの中で最大のTSO。
+    -   `checkpoint-ts` ：現在のプロセッサのダウンストリームに正常に書き込まれた最大のTSO。
 
-## Task configuration file
+## タスク構成ファイル {#task-configuration-file}
 
-This section introduces the configuration of a replication task.
+このセクションでは、レプリケーションタスクの構成を紹介します。
 
 ```toml
 # Specifies whether the database names and tables in the configuration file are case-sensitive.
@@ -652,75 +656,74 @@ dispatchers = [
 protocol = "canal-json"
 ```
 
-### Notes for compatibility
+### 互換性に関する注意 {#notes-for-compatibility}
 
-* In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
-* In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
+-   TiCDC v4.0.0では、 `ignore-txn-commit-ts`が削除され、 `ignore-txn-start-ts`が追加されます。これは、start_tsを使用してトランザクションをフィルタリングします。
+-   TiCDC v4.0.2では、 `db-dbs` / `db-tables` / `ignore-dbs` / `ignore-tables`が削除され、 `rules`が追加されました。これは、データベースとテーブルに新しいフィルタールールを使用します。フィルタ構文の詳細については、 [テーブルフィルター](/table-filter.md)を参照してください。
 
-## Customize the rules for Topic and Partition dispatchers of Kafka Sink
+## KafkaSinkのトピックおよびパーティションディスパッチャのルールをカスタマイズします {#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink}
 
-### Matcher rules
+### マッチャールール {#matcher-rules}
 
-In the example of the previous section:
+前のセクションの例では：
 
-- For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, the `test3.aa` table is dispatched according to "Topic expression 2"; the `test5.aa` table is dispatched according to "Topic expression 3".
-- For a table that matches multiple matcher rules, it is dispatched according to the first matching topic expression. For example, the `test1.aa` table is distributed according to "Topic expression 1".
-- For tables that do not match any matcher rule, the corresponding data change events are sent to the default topic specified in `--sink-uri`. For example, the `test10.aa` table is sent to the default topic.
-- For tables that match the matcher rule but do not specify a topic dispatcher, the corresponding data changes are sent to the default topic specified in `--sink-uri`. For example, the `test6.aa` table is sent to the default topic.
+-   マッチャールールに一致するテーブルの場合、対応するトピック式で指定されたポリシーに従ってディスパッチされます。たとえば、 `test3.aa`テーブルは「トピック式2」に従ってディスパッチされます。 `test5.aa`テーブルは「トピック式3」に従ってディスパッチされます。
+-   複数のマッチャールールに一致するテーブルの場合、最初に一致するトピック式に従ってディスパッチされます。たとえば、 `test1.aa`テーブルは「トピック式1」に従って配布されます。
+-   どのマッチャールールにも一致しないテーブルの場合、対応するデータ変更イベントは、 `--sink-uri`で指定されたデフォルトのトピックに送信されます。たとえば、 `test10.aa`テーブルはデフォルトのトピックに送信されます。
+-   マッチャールールに一致するがトピックディスパッチャーを指定しないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルトトピックに送信されます。たとえば、 `test6.aa`テーブルはデフォルトのトピックに送信されます。
 
-### Topic dispatchers
+### トピックディスパッチャ {#topic-dispatchers}
 
-You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
+topic = &quot;xxx&quot;を使用してトピックディスパッチャーを指定し、トピック式を使用して柔軟なトピックディスパッチポリシーを実装できます。トピックの総数は1000未満にすることをお勧めします。
 
-The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
+トピック式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
-- `prefix`: optional. Indicates the prefix of the Topic Name.
-- `{schema}`: required. Used to match the schema name.
-- `middle`: optional. Indicates the delimiter between schema name and table name.
-- `{table}`: optional. Used to match the table name.
-- `suffix`: optional. Indicates the suffix of the Topic Name.
+-   `prefix` ：オプション。トピック名のプレフィックスを示します。
+-   `{schema}` ：必須。スキーマ名と一致させるために使用されます。
+-   `middle` ：オプション。スキーマ名とテーブル名の間の区切り文字を示します。
+-   `{table}` ：オプション。テーブル名と一致させるために使用されます。
+-   `suffix` ：オプション。トピック名のサフィックスを示します。
 
-`prefix`, `middle` and `suffix` can only include the following characters: `a-z`, `A-Z`, `0-9`, `.`, `_` and `-`. `{schema}` and `{table}` are both lowercase. Placeholders such as `{Schema}` and `{TABLE}` are invalid.
+`prefix` 、および`suffix`には、 `middle` 、 `0-9` `A-Z`の`_`のみを`.`ことが`-` `a-z` 。 `{schema}`と`{table}`は両方とも小文字です。 `{Schema}`や`{TABLE}`などのプレースホルダーは無効です。
 
-Some examples:
+いくつかの例：
 
-- `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - The data change events corresponding to `test1.table1` are sent to the topic named `hello_test1_table1`.
-    - The data change events corresponding to `test2.table2` are sent to the topic named `hello_test2_table2`.
-- `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - The data change events corresponding to all tables in `test3` are sent to the topic named `hello_test3_world`.
-    - The data change events corresponding to all tables in `test4` are sent to the topic named `hello_test4_world`.
-- `matcher = ['*.*'], topic = "{schema}_{table}"`
-    - All tables listened by TiCDC are dispatched to separate topics according to the "schema_table" rule. For example, for the `test.account` table, TiCDC dispatches its data change log to a Topic named `test_account`.
+-   `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
+    -   `test1.table1`に対応するデータ変更イベントは、 `hello_test1_table1`という名前のトピックに送信されます。
+    -   `test2.table2`に対応するデータ変更イベントは、 `hello_test2_table2`という名前のトピックに送信されます。
+-   `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
+    -   `test3`のすべてのテーブルに対応するデータ変更イベントは、 `hello_test3_world`という名前のトピックに送信されます。
+    -   `test4`のすべてのテーブルに対応するデータ変更イベントは、 `hello_test4_world`という名前のトピックに送信されます。
+-   `matcher = ['*.*'], topic = "{schema}_{table}"`
+    -   TiCDCによってリッスンされるすべてのテーブルは、「schema_table」ルールに従って個別のトピックにディスパッチされます。たとえば、 `test.account`テーブルの場合、TiCDCはデータ変更ログを`test_account`という名前のトピックにディスパッチします。
 
-### Dispatch DDL events
+### DDLイベントをディスパッチします {#dispatch-ddl-events}
 
-#### Schema-level DDLs
+#### スキーマレベルのDDL {#schema-level-ddls}
 
-DDLs that are not related to a specific table are called schema-level DDLs, such as `create database` and `drop database`. The events corresponding to schema-level DDLs are sent to the default topic specified in `--sink-uri`.
+特定のテーブルに関連しないDDLは、 `create database`や`drop database`などのスキーマレベルのDDLと呼ばれます。スキーマレベルのDDLに対応するイベントは、 `--sink-uri`で指定されたデフォルトのトピックに送信されます。
 
-#### Table-level DDLs
+#### テーブルレベルのDDL {#table-level-ddls}
 
-DDLs that are related to a specific table are called table-level DDLs, such as `alter table` and `create table`. The events corresponding to table-level DDLs are sent to the corresponding topic according to dispatcher configurations.
+特定のテーブルに関連するDDLは、 `alter table`や`create table`などのテーブルレベルのDDLと呼ばれます。テーブルレベルのDDLに対応するイベントは、ディスパッチャの構成に従って対応するトピックに送信されます。
 
-For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{table}`, DDL events are dispatched as follows:
+たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`のようなディスパッチャの場合、DDLイベントは次のようにディスパッチャされます。
 
-- If a single table is involved in the DDL event, the DDL event is sent to the corresponding topic as is. For example, for the DDL event `drop table test.table1`, the event is sent to the topic named `test_table1`.
-- If multiple tables are involved in the DDL event (`rename table` / `drop table` / `drop view` may involve multiple tables), the DDL event is split into multiple events and sent to the corresponding topics. For example, for the DDL event `rename table test.table1 to test.table10, test.table2 to test.table20`, the event `rename table test.table1 to test.table10` is sent to the topic named `test_table1` and the event `rename table test.table2 to test.table20` is sent to the topic named `test.table2`.
+-   単一のテーブルがDDLイベントに関与している場合、DDLイベントは対応するトピックにそのまま送信されます。たとえば、DDLイベント`drop table test.table1`の場合、イベントは`test_table1`という名前のトピックに送信されます。
+-   複数のテーブルがDDLイベントに関与している場合（ `rename table`は複数のテーブルに関与している可能性があり`drop table` ）、DDLイベントは複数のイベントに分割され、対応するトピックに送信され`drop view` 。たとえば、DDLイベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`は`test_table1`という名前のトピックに送信され、イベント`rename table test.table2 to test.table20`は`test.table2`という名前のトピックに送信されます。
 
-### Partition dispatchers
+### パーティションディスパッチャ {#partition-dispatchers}
 
-You can use `partition = "xxx"` to specify a partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
+`partition = "xxx"`を使用して、パーティションディスパッチャを指定できます。デフォルト、ts、インデックス値、テーブルの4つのディスパッチャをサポートします。ディスパッチャのルールは次のとおりです。
 
-- default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the index-value mode.
-- ts: Use the commitTs of the row change to hash and dispatch events.
-- index-value: Use the value of the primary key or the unique index of the table to hash and dispatch events.
-- table: Use the schema name of the table and the table name to hash and dispatch events.
+-   デフォルト：複数の一意のインデックス（主キーを含む）が存在する場合、または古い値機能が有効になっている場合、イベントはテーブルモードでディスパッチされます。一意のインデックス（または主キー）が1つしかない場合、イベントはインデックス値モードでディスパッチされます。
+-   ts：行変更のcommitTを使用して、イベントをハッシュおよびディスパッチします。
+-   index-value：主キーの値またはテーブルの一意のインデックスを使用して、イベントをハッシュおよびディスパッチします。
+-   table：テーブルのスキーマ名とテーブル名を使用して、イベントをハッシュおよびディスパッチします。
 
-> **Note:**
+> **ノート：**
 >
->
-> Since v6.1, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
+> v6.1以降、構成の意味を明確にするために、パーティションディスパッチャーを指定するために使用される構成が`dispatcher`から`partition`に変更され、 `partition`は`dispatcher`のエイリアスになりました。たとえば、次の2つのルールはまったく同じです。
 >
 > ```
 > [sink]
@@ -730,17 +733,17 @@ You can use `partition = "xxx"` to specify a partition dispatcher. It supports f
 > ]
 > ```
 >
-> However, `dispatcher` and `partition` cannot appear in the same rule. For example, the following rule is invalid.
+> ただし、 `dispatcher`と`partition`を同じルールに含めることはできません。たとえば、次のルールは無効です。
 >
 > ```
 > {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
 > ```
 
-## Output the historical value of a Row Changed Event <span class="version-mark">New in v4.0.5</span>
+## 行変更イベントの履歴値を出力する<span class="version-mark">v4.0.5の新機能</span> {#output-the-historical-value-of-a-row-changed-event-span-class-version-mark-new-in-v4-0-5-span}
 
-In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value cannot be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
+デフォルトの構成では、レプリケーションタスクで出力されるTiCDC Open Protocolの行変更イベントには変更された値のみが含まれ、変更前の値は含まれません。したがって、出力値は、行変更イベントの履歴値としてTiCDCOpenProtocolのコンシューマー側で使用することはできません。
 
-Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the `changefeed` configuration file at the root level:
+v4.0.5以降、TiCDCは行変更イベントの履歴値の出力をサポートします。この機能を有効にするには、ルートレベルの`changefeed`の構成ファイルで次の構成を指定します。
 
 {{< copyable "" >}}
 
@@ -748,15 +751,15 @@ Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Ch
 enable-old-value = true
 ```
 
-This feature is enabled by default since v5.0. To learn the output format of the TiCDC Open Protocol after this feature is enabled, see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event).
+この機能は、v5.0以降デフォルトで有効になっています。この機能を有効にした後のTiCDCOpenProtocolの出力形式については、 [TiCDCオープンプロトコル-行変更イベント](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
 
-## Replicate tables with the new framework for collations enabled
+## 照合用の新しいフレームワークを有効にしてテーブルを複製する {#replicate-tables-with-the-new-framework-for-collations-enabled}
 
-Starting from v4.0.15, v5.0.4, v5.1.1 and v5.2.0, TiCDC supports tables that have enabled [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
+v4.0.15、v5.0.4、v5.1.1、およびv5.2.0以降、TiCDCは[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にしたテーブルをサポートします。
 
-## Replicate tables without a valid index
+## 有効なインデックスなしでテーブルを複製する {#replicate-tables-without-a-valid-index}
 
-Since v4.0.8, TiCDC supports replicating tables that have no valid index by modifying the task configuration. To enable this feature, configure in the `changefeed` configuration file as follows:
+v4.0.8以降、TiCDCは、タスク構成を変更することにより、有効なインデックスを持たないテーブルの複製をサポートします。この機能を有効にするには、 `changefeed`の構成ファイルで次のように構成します。
 
 {{< copyable "" >}}
 
@@ -765,54 +768,54 @@ enable-old-value = true
 force-replicate = true
 ```
 
-> **Warning:**
+> **警告：**
 >
-> For tables without a valid index, operations such as `INSERT` and `REPLACE` are not reentrant, so there is a risk of data redundancy. TiCDC guarantees that data is distributed only at least once during the replication process. Therefore, enabling this feature to replicate tables without a valid index will definitely cause data redundancy. If you do not accept data redundancy, it is recommended to add an effective index, such as adding a primary key column with the `AUTO RANDOM` attribute.
+> 有効なインデックスのないテーブルの場合、 `INSERT`や`REPLACE`などの操作は再入可能ではないため、データが冗長になるリスクがあります。 TiCDCは、レプリケーションプロセス中にデータが少なくとも1回だけ配布されることを保証します。したがって、この機能を有効にして有効なインデックスなしでテーブルを複製できるようにすると、データの冗長性が確実に発生します。データの冗長性を受け入れない場合は、 `AUTO RANDOM`属性を持つ主キー列を追加するなど、効果的なインデックスを追加することをお勧めします。
 
-## Unified Sorter
+## ユニファイドソーター {#unified-sorter}
 
-Unified sorter is the sorting engine in TiCDC. It can mitigate OOM problems caused by the following scenarios:
+統合ソーターは、TiCDCのソーティングエンジンです。次のシナリオによって引き起こされるOOMの問題を軽減できます。
 
-+ The data replication task in TiCDC is paused for a long time, during which a large amount of incremental data is accumulated and needs to be replicated.
-+ The data replication task is started from an early timestamp so it becomes necessary to replicate a large amount of incremental data.
+-   TiCDCのデータ複製タスクは長時間一時停止されます。その間、大量の増分データが蓄積され、複製する必要があります。
+-   データ複製タスクは早いタイムスタンプから開始されるため、大量の増分データを複製する必要があります。
 
-For the changefeeds created using `cdc cli` after v4.0.13, Unified Sorter is enabled by default; for the changefeeds that have existed before v4.0.13, the previous configuration is used.
+v4.0.13以降に`cdc cli`を使用して作成されたチェンジフィードの場合、UnifiedSorterはデフォルトで有効になっています。 v4.0.13より前に存在していたチェンジフィードの場合、以前の構成が使用されます。
 
-To check whether or not the Unified Sorter feature is enabled on a changefeed, you can execute the following example command (assuming the IP address of the PD instance is `http://10.0.10.25:2379`):
+チェンジフィードでユニファイドソーター機能が有効になっているかどうかを確認するには、次のコマンド例を実行できます（PDインスタンスのIPアドレスが`http://10.0.10.25:2379`であると想定）。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-replication-task | grep 'sort-engine'
 ```
 
-In the output of the above command, if the value of `sort-engine` is "unified", it means that Unified Sorter is enabled on the changefeed.
+上記のコマンドの出力で、値`sort-engine`が「unified」の場合、チェンジフィードでUnifiedSorterが有効になっていることを意味します。
 
-> **Note:**
+> **ノート：**
 >
-> + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
-> + By default, Unified Sorter uses `data_dir` to store temporary files. It is recommended to ensure that the free disk space is greater than or equal to 500 GiB. For production environments, it is recommended to ensure that the free disk space on each node is greater than (the maximum `checkpoint-ts` delay allowed by the business) * (upstream write traffic at business peak hours). In addition, if you plan to replicate a large amount of historical data after `changefeed` is created, make sure that the free space on each node is greater than the amount of replicated data.
-> + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
-> + To enable Unified Sorter on an existing changefeed that uses `memory` to sort, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption).
+> -   サーバーで、待ち時間が長いか帯域幅が制限されている機械式ハードドライブやその他のストレージデバイスを使用している場合は、統合ソーターの使用に注意してください。
+> -   デフォルトでは、UnifiedSorterは`data_dir`を使用して一時ファイルを保存します。空きディスク容量が500GiB以上であることを確認することをお勧めします。実稼働環境では、各ノードの空きディスク容量が（ビジネスで許可されている最大`checkpoint-ts`の遅延）*（ビジネスのピーク時のアップストリーム書き込みトラフィック）よりも大きいことを確認することをお勧めします。さらに、 `changefeed`が作成された後に大量の履歴データを複製する場合は、各ノードの空き領域が複製されたデータの量よりも大きいことを確認してください。
+> -   統合ソーターはデフォルトで有効になっています。サーバーが上記の要件に一致せず、統合ソーターを無効にする場合は、チェンジフィードに`sort-engine`から`memory`を手動で設定する必要があります。
+> -   `memory`を使用してソートする既存のチェンジフィードでUnifiedSorterを有効にするには、 [タスクの中断後にTiCDCが再起動された後に発生するOOMを処理するにはどうすればよいですか？](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)で提供されているメソッドを参照してください。
 
-## Eventually consistent replication in disaster scenarios
+## 災害シナリオでの結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
-Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
+v5.3.0以降、TiCDCは、アップストリームTiDBクラスタからS3ストレージまたはダウンストリームクラスタのNFSファイルシステムへのインクリメンタルデータのバックアップをサポートします。アップストリームクラスタで災害が発生して使用できなくなった場合、TiCDCはダウンストリームデータを結果整合性のある最近の状態に復元できます。これは、TiCDCによって提供される結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリームクラスタにすばやく切り替えることができ、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
-Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that before the disaster the replication status of TiCDC is normal and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
+現在、TiCDCは、増分データをTiDBクラスタから別のTiDBクラスタまたはMySQL互換データベースシステム（ Aurora、MySQL、MariaDBを含む）に複製できます。アップストリームクラスタがクラッシュした場合、災害前のTiCDCのレプリケーションステータスは正常であり、レプリケーションラグが小さいという条件で、TiCDCは5分以内にダウンストリームクラスタのデータを復元できます。これにより、最大で10秒のデータ損失が可能になります。つまり、RTO &lt;= 5分、P95 RPO&lt;=10秒です。
 
-TiCDC replication lag increases in the following scenarios:
+TiCDCレプリケーションの遅延は、次のシナリオで増加します。
 
-- The TPS increases significantly in a short time
-- Large or long transactions occur in the upstream
-- The TiKV or TiCDC cluster in the upstream is reloaded or upgraded
-- Time-consuming DDL statements, such as `add index`, are executed in the upstream
-- The PD is configured with aggressive scheduling strategies, resulting in frequent transfer of Region leaders, or frequent Region merge or Region split
+-   TPSは短時間で大幅に増加します
+-   大規模または長いトランザクションがアップストリームで発生します
+-   アップストリームのTiKVまたはTiCDCクラスタがリロードまたはアップグレードされます
+-   `add index`などの時間のかかるDDLステートメントはアップストリームで実行されます
+-   PDは積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンのマージやリージョンの分割が頻繁に行われたりします。
 
-### Prerequisites
+### 前提条件 {#prerequisites}
 
-- Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
-- Enable this feature for changefeeds that need to have eventual consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
+-   TiCDCのリアルタイムインクリメンタルデータバックアップファイルを保存するための高可用性AmazonS3ストレージまたはNFSシステムを準備します。これらのファイルは、プライマリクラスタの障害が発生した場合にアクセスできます。
+-   災害シナリオで結果整合性が必要なチェンジフィードに対してこの機能を有効にします。これを有効にするには、チェンジフィード構成ファイルに次の構成を追加します。
 
 ```toml
 [consistent]
@@ -831,12 +834,12 @@ flush-interval = 1000
 storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 ```
 
-### Disaster recovery
+### 災害からの回復 {#disaster-recovery}
 
-When a disaster happens in the primary cluster, you need to recover manually in the secondary cluster by running the `cdc redo` command. The recovery process is as follows.
+プライマリクラスタで災害が発生した場合は、 `cdc redo`コマンドを実行してセカンダリクラスタで手動で回復する必要があります。復旧プロセスは以下のとおりです。
 
-1. Ensure that all the TiCDC processes have exited. This is to prevent the primary cluster from resuming service during data recovery and prevent TiCDC from restarting data synchronization.
-2. Use cdc binary for data recovery. Run the following command:
+1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データ回復中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
+2.  データ回復にはcdcバイナリを使用します。次のコマンドを実行します。
 
 ```shell
 cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
@@ -844,8 +847,8 @@ cdc redo apply --tmp-dir="/tmp/cdc/redo/apply" \
     --sink-uri="mysql://normal:123456@10.0.10.55:3306/"
 ```
 
-In this command:
+このコマンドの場合：
 
-- `tmp-dir`: Specifies the temporary directory for downloading TiCDC incremental data backup files.
-- `storage`: Specifies the address for storing the TiCDC incremental data backup files, either an Amazon S3 storage or an NFS directory.
-- `sink-uri`: Specifies the secondary cluster address to restore the data to. Scheme can only be `mysql`.
+-   `tmp-dir` ：TiCDCインクリメンタルデータバックアップファイルをダウンロードするための一時ディレクトリを指定します。
+-   `storage` ：AmazonS3ストレージまたはNFSディレクトリのいずれかのTiCDCインクリメンタルデータバックアップファイルを保存するためのアドレスを指定します。
+-   `sink-uri` ：データを復元するセカンダリクラスタアドレスを指定します。スキームは`mysql`のみです。

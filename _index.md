@@ -3,115 +3,105 @@ title: TiDB Introduction
 summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
 ---
 
-# TiDB Introduction
+# TiDBの紹介 {#tidb-introduction}
 
-[TiDB](https://github.com/pingcap/tidb) (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source, distributed, NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. TiDB can be deployed on-premise or in-cloud.
+[TiDB](https://github.com/pingcap/tidb) （/&#39;taɪdiːbi：/、「Ti」はTitaniumの略）は、Hybrid Transactional and Analytical Processing（HTAP）ワークロードをサポートするオープンソースの分散型NewSQLデータベースです。 MySQLと互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDBは、オンプレミスまたはクラウド内にデプロイできます。
 
-Designed for the cloud, TiDB provides flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview) helps manage TiDB on Kubernetes and automates operating tasks, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/tidb-cloud/), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/), allowing you to deploy and run TiDB clusters with just a few clicks.
+クラウド向けに設計されたTiDBは、クラウドプラットフォームで柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすためにTiDBを柔軟にスケーリングできます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview)は、KubernetesでのTiDBの管理を支援し、運用タスクを自動化します。これにより、管理対象のKubernetesを提供するクラウドへのTiDBのデプロイが容易になります。フルマネージドのTiDBサービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド内のTiDB](https://docs.pingcap.com/tidbcloud/)のフルパワーをアンロックするための最も簡単で、最も経済的で、最も回復力のある方法であり、数回クリックするだけでTiDBクラスターを展開および実行できます。
 
-<NavColumns>
-<NavColumn>
-<ColumnTitle>About TiDB</ColumnTitle>
+<NavColumns><NavColumn><ColumnTitle>TiDBについて</ColumnTitle>
 
-- [TiDB Introduction](/overview.md)
-- [Basic Features](/basic-features.md)
-- [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
-- [TiDB Release Timeline](/releases/release-timeline.md)
-- [Compatibility with MySQL](/mysql-compatibility.md)
-- [Usage Limitations](/tidb-limitations.md)
+-   [TiDBの紹介](/overview.md)
+-   [基本的な機能](/basic-features.md)
+-   [TiDB6.1リリースノート](/releases/release-6.1.0.md)
+-   [TiDBリリースタイムライン](/releases/release-timeline.md)
+-   [MySQLとの互換性](/mysql-compatibility.md)
+-   [使用制限](/tidb-limitations.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Quick Start</ColumnTitle>
+<NavColumn><ColumnTitle>クイックスタート</ColumnTitle>
 
-- [Quick Start with TiDB](/quick-start-with-tidb.md)
-- [Quick Start with HTAP](/quick-start-with-htap.md)
-- [Explore SQL with TiDB](/basic-sql-operations.md)
-- [Explore HTAP](/explore-htap.md)
-
-</NavColumn>
-
-<NavColumn>
-<ColumnTitle>Deploy and Use</ColumnTitle>
-
-- [Hardware and Software Requirements](/hardware-and-software-requirements.md)
-- [Check Environment and Configuration](/check-before-deployment.md)
-- [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md)
-- [Use TiFlash for Analytical Processing](/tiflash/tiflash-overview.md)
-- [Deploy TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+-   [TiDBのクイックスタート](/quick-start-with-tidb.md)
+-   [HTAPのクイックスタート](/quick-start-with-htap.md)
+-   [TiDBでSQLを探索する](/basic-sql-operations.md)
+-   [HTAPを探索する](/explore-htap.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Migrate Data</ColumnTitle>
+<NavColumn><ColumnTitle>デプロイして使用する</ColumnTitle>
 
-- [Migration Overview](/migration-overview.md)
-- [Migrate Data from CSV Files to TiDB](/migrate-from-csv-files-to-tidb.md)
-- [Migrate Data from SQL Files to TiDB](/migrate-from-sql-files-to-tidb.md)
-- [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md)
-
-</NavColumn>
-
-<NavColumn>
-<ColumnTitle>Maintain</ColumnTitle>
-
-- [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md)
-- [Scale TiDB Using TiUP](/scale-tidb-using-tiup.md)
-- [Back up and Restore Data](/br/backup-and-restore-tool.md)
-- [Deploy and Manage TiCDC](/ticdc/manage-ticdc.md)
-- [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
-- [Maintain TiFlash](/tiflash/maintain-tiflash.md)
+-   [ハードウェアとソフトウェアの要件](/hardware-and-software-requirements.md)
+-   [環境とConfiguration / コンフィグレーションを確認する](/check-before-deployment.md)
+-   [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)
+-   [分析処理にTiFlashを使用する](/tiflash/tiflash-overview.md)
+-   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Monitor and Alert</ColumnTitle>
+<NavColumn><ColumnTitle>データの移行</ColumnTitle>
 
-- [Monitoring Framework](/tidb-monitoring-framework.md)
-- [Monitoring API](/tidb-monitoring-api.md)
-- [Deploy Monitoring Services](/deploy-monitoring-services.md)
-- [Export Grafana Snapshots](/exporting-grafana-snapshots.md)
-- [Alert Rules and Solutions](/alert-rules.md)
-- [TiFlash Alert Rules and Solutions](/tiflash/tiflash-alert-rules.md)
+-   [移行の概要](/migration-overview.md)
+-   [CSVファイルからTiDBへのデータの移行](/migrate-from-csv-files-to-tidb.md)
+-   [SQLファイルからTiDBへのデータの移行](/migrate-from-sql-files-to-tidb.md)
+-   [AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Troubleshoot</ColumnTitle>
+<NavColumn><ColumnTitle>管理</ColumnTitle>
 
-- [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md)
-- [Identify Slow Queries](/identify-slow-queries.md)
-- [Analyze Slow Queries](/analyze-slow-queries.md)
-- [SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md)
-- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-- [Troubleshoot the TiDB Cluster](/troubleshoot-tidb-cluster.md)
-- [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md)
-- [Troubleshoot TiFlash](/tiflash/troubleshoot-tiflash.md)
+-   [TiUPを使用してTiDBをアップグレードする](/upgrade-tidb-using-tiup.md)
+-   [TiUPを使用してTiDBをスケーリングする](/scale-tidb-using-tiup.md)
+-   [データのバックアップと復元](/br/backup-and-restore-tool.md)
+-   [デプロイの導入と管理](/ticdc/manage-ticdc.md)
+-   [TiUPを使用してTiDBを管理する](/maintain-tidb-using-tiup.md)
+-   [TiFlashを管理する](/tiflash/maintain-tiflash.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>Reference</ColumnTitle>
+<NavColumn><ColumnTitle>監視と警告</ColumnTitle>
 
-- [TiDB Architecture](/tidb-architecture.md)
-- [Key Monitoring Metrics](/grafana-overview-dashboard.md)
-- [Enable TLS](/enable-tls-between-clients-and-servers.md)
-- [Privilege Management](/privilege-management.md)
-- [Role-Based Access Control](/role-based-access-control.md)
-- [Certificate-Based Authentication](/certificate-authentication.md)
+-   [モニタリングフレームワーク](/tidb-monitoring-framework.md)
+-   [モニタリングAPI](/tidb-monitoring-api.md)
+-   [監視サービスのデプロイ](/deploy-monitoring-services.md)
+-   [Grafanaスナップショットのエクスポート](/exporting-grafana-snapshots.md)
+-   [アラートルールとソリューション](/alert-rules.md)
+-   [TiFlashアラートルールとソリューション](/tiflash/tiflash-alert-rules.md)
 
 </NavColumn>
 
-<NavColumn>
-<ColumnTitle>FAQs</ColumnTitle>
+<NavColumn><ColumnTitle>トラブルシューティング</ColumnTitle>
 
-- [Product FAQs](/faq/tidb-faq.md)
-- [High Availability FAQs](/faq/high-availability-faq.md)
-- [SQL FAQs](/faq/sql-faq.md)
-- [Deploy and Maintain FAQs](/faq/deploy-and-maintain-faq.md)
-- [Upgrade and After Upgrade FAQs](/faq/upgrade-faq.md)
-- [Migration FAQs](/faq/migration-tidb-faq.md)
+-   [TiDBトラブルシューティングマップ](/tidb-troubleshooting-map.md)
+-   [遅いクエリを特定する](/identify-slow-queries.md)
+-   [遅いクエリを分析する](/analyze-slow-queries.md)
+-   [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
+-   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
+-   [TiDBクラスターのトラブルシューティング](/troubleshoot-tidb-cluster.md)
+-   [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
+-   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
+
+</NavColumn>
+
+<NavColumn><ColumnTitle>参照</ColumnTitle>
+
+-   [TiDBアーキテクチャ](/tidb-architecture.md)
+-   [主要な監視指標](/grafana-overview-dashboard.md)
+-   [TLSを有効にする](/enable-tls-between-clients-and-servers.md)
+-   [権限管理](/privilege-management.md)
+-   [ロールベースのアクセス制御](/role-based-access-control.md)
+-   [証明書ベースの認証](/certificate-authentication.md)
+
+</NavColumn>
+
+<NavColumn><ColumnTitle>よくある質問</ColumnTitle>
+
+-   [製品に関するよくある質問](/faq/tidb-faq.md)
+-   [高可用性に関するFAQ](/faq/high-availability-faq.md)
+-   [SQLに関するFAQ](/faq/sql-faq.md)
+-   [FAQのデプロイと管理](/faq/deploy-and-maintain-faq.md)
+-   [アップグレードおよびアップグレード後のFAQ](/faq/upgrade-faq.md)
+-   [移行に関するよくある質問](/faq/migration-tidb-faq.md)
 
 </NavColumn>
 </NavColumns>

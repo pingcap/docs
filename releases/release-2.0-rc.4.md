@@ -2,36 +2,36 @@
 title: TiDB 2.0 RC4 Release Notes
 ---
 
-# TiDB 2.0 RC4 Release Notes
+# TiDB2.0RC4リリースノート {#tidb-2-0-rc4-release-notes}
 
-On March 30, 2018, TiDB 2.0 RC4 is released. This release has great improvement in MySQL compatibility, SQL optimization and stability.
+2018年3月30日、TiDB2.0RC4がリリースされました。このリリースでは、MySQLの互換性、SQLの最適化、および安定性が大幅に改善されています。
 
-## TiDB
+## TiDB {#tidb}
 
-- Support `SHOW GRANTS FOR CURRENT_USER();`
-- Fix the issue that the `Expression` in `UnionScan` is not cloned
-- Support the `SET TRANSACTION` syntax
-- Fix the potential goroutine leak issue in `copIterator`
-- Fix the issue that `admin check table` misjudges the unique index including null
-- Support displaying floating point numbers using scientific notation
-- Fix the type inference issue during binary literal computing
-- Fix the issue in parsing the `CREATE VIEW` statement
-- Fix the panic issue when one statement contains both `ORDER BY` and `LIMIT 0`
-- Improve the execution performance of `DecodeBytes`
-- Optimize `LIMIT 0` to `TableDual`, to avoid building useless execution plans
+-   サポート`SHOW GRANTS FOR CURRENT_USER();`
+-   `UnionScan`の`Expression`が複製されない問題を修正します
+-   `SET TRANSACTION`構文をサポートする
+-   `copIterator`で潜在的なゴルーチンリークの問題を修正します
+-   `admin check table`がnullを含む一意のインデックスを誤って判断する問題を修正します
+-   科学的記数法を使用した浮動小数点数の表示のサポート
+-   バイナリリテラルコンピューティング中の型推論の問題を修正しました
+-   `CREATE VIEW`ステートメントの解析の問題を修正します
+-   1つのステートメントに`ORDER BY`と`LIMIT 0`の両方が含まれている場合のパニックの問題を修正します
+-   `DecodeBytes`の実行パフォーマンスを向上させる
+-   無駄な実行計画を作成しないように、 `LIMIT 0`から`TableDual`を最適化します
 
-## PD
+## PD {#pd}
 
-- Support splitting Region manually to handle the hot spot in a single Region
-- Fix the issue that the label property is not displayed when `pdctl` runs `config show all`
-- Optimize metrics and code structure
+-   単一のリージョンでホットスポットを処理するために、リージョンを手動で分割することをサポートします
+-   `pdctl`が実行されたときにlabelプロパティが表示されない問題を修正します`config show all`
+-   指標とコード構造を最適化する
 
-## TiKV
+## TiKV {#tikv}
 
-- Limit the memory usage during receiving snapshots, to avoid OOM in extreme conditions
-- Support configuring the behavior of Coprocessor when it encounters warnings
-- Support importing the data pattern in TiKV
-- Support splitting Region in the middle
-- Increase the speed of CI test
-- Use `crossbeam channel`
-- Fix the issue that too many logs are output caused by leader missing when TiKV is isolated
+-   極端な状況でのOOMを回避するために、スナップショットの受信中のメモリ使用量を制限します
+-   警告が発生したときのコプロセッサーの動作の構成をサポート
+-   TiKVでのデータパターンのインポートをサポート
+-   中央のリージョンの分割をサポート
+-   CIテストの速度を上げる
+-   使用`crossbeam channel`
+-   TiKVが分離されているときにリーダーが欠落しているために出力されるログが多すぎる問題を修正します

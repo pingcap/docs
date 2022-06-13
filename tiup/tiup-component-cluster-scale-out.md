@@ -2,64 +2,64 @@
 title: tiup cluster scale-out
 ---
 
-# tiup cluster scale-out
+# tiup cluster scale-out {#tiup-cluster-scale-out}
 
-The `tiup cluster scale-out` command is used for scaling out the cluster. The internal logic of scaling out the cluster is similar to the cluster deployment. The tiup-cluster component first establishes an SSH connection to the new node, creates the necessary directories on the target node, then performs the deployment and starts the service.
+`tiup cluster scale-out`コマンドは、クラスタをスケールアウトするために使用されます。クラスタをスケールアウトする内部ロジックは、クラスタのデプロイメントに似ています。 tiup-clusterコンポーネントは、最初に新しいノードへのSSH接続を確立し、ターゲットノードに必要なディレクトリを作成してから、展開を実行してサービスを開始します。
 
-When PD is scaled out, new PD nodes are added to the cluster by the join operation, and the configuration of the services associated with PD is updated; other services are directly started and added to the cluster.
+PDがスケールアウトされると、結合操作によって新しいPDノードがクラスタに追加され、PDに関連付けられたサービスの構成が更新されます。他のサービスは直接開始され、クラスタに追加されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [`cluster list`](/tiup/tiup-component-dm-list.md) command.
+`<cluster-name>` ：操作するクラスタの名前。クラスタ名を忘れた場合は、 [`cluster list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>`: the prepared [topology file](/tiup/tiup-dm-topology-reference.md). This topology file should only contain the new nodes that are to be added to the current cluster.
+`<topology.yaml>` ：準備された[トポロジーファイル](/tiup/tiup-dm-topology-reference.md) 。このトポロジファイルには、現在のクラスタに追加される新しいノードのみが含まれている必要があります。
 
-## Options
+## オプション {#options}
 
-### -u, --user
+### -u、-user {#u-user}
 
-- Specifies the user name used to connect to the target machine. This user must have the secret-free sudo root permission on the target machine.
-- Data type: `STRING`
-- Default: the current user who executes the command.
+-   ターゲットマシンへの接続に使用されるユーザー名を指定します。このユーザーは、ターゲットマシンに対するシークレットフリーのsudoroot権限を持っている必要があります。
+-   データ型： `STRING`
+-   デフォルト：コマンドを実行する現在のユーザー。
 
-### -i, --identity_file
+### -i、-identity_file {#i-identity-file}
 
-- Specifies the key file used to connect to the target machine.
-- Data type: `STRING`
-- If this option is not specified in the command, the `~/.ssh/id_rsa` file is used to connect to the target machine by default.
+-   ターゲットマシンへの接続に使用されるキーファイルを指定します。
+-   データ型： `STRING`
+-   コマンドでこのオプションが指定されていない場合、デフォルトでは`~/.ssh/id_rsa`ファイルがターゲットマシンへの接続に使用されます。
 
-### -p, --password
+### -p、-password {#p-password}
 
-- Specifies the password used to connect to the target machine. Do not use this option and `-i/--identity_file` at the same time.
-- Data type: `BOOLEAN`
-- Default: false
+-   ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`を同時に使用しないでください。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### --no-labels
+### --ラベルなし {#no-labels}
 
-- This option is used to skip the label check.
-- When two or more TiKV nodes are deployed on the same physical machine, a risk exists: PD does not know the cluster topology, so it might schedule multiple replicas of a Region to different TiKV nodes on one physical machine, which makes this physical machine a single point of failure. To avoid this risk, you can use labels to tell PD not to schedule the same Region to the same machine. See [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md) for label configuration.
-- For the test environment, this risk might not matter, and you can use `--no-labels` to skip the check.
-- Data type: `BOOLEAN`
-- Default: false
+-   このオプションは、ラベルチェックをスキップするために使用されます。
+-   2つ以上のTiKVノードが同じ物理マシンにデプロイされている場合、リスクが存在します。PDはクラスタトポロジを認識しないため、リージョンの複数のレプリカを1つの物理マシン上の異なるTiKVノードにスケジュールし、この物理マシンを単一障害点。このリスクを回避するために、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないようにPDに指示できます。ラベルの設定については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
+-   テスト環境では、このリスクは問題にならない可能性があり、 `--no-labels`を使用してチェックをスキップできます。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### --skip-create-user
+### --skip-create-user {#skip-create-user}
 
-- During the cluster deployment, tiup-cluster checks whether the specified user name in the topology file exists or not. If not, it creates one. To skip this check, you can use the `--skip-create-user` option.
-- Data type: `BOOLEAN`
-- Default: false
+-   クラスタの展開中に、tiup-clusterはトポロジファイルに指定されたユーザー名が存在するかどうかを確認します。そうでない場合は、作成します。このチェックをスキップするには、 `--skip-create-user`オプションを使用できます。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-The log of scaling out.
+スケールアウトのログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -3,11 +3,11 @@ title: REFERENTIAL_CONSTRAINTS
 summary: Learn the `REFERENTIAL_CONSTRAINTS` information_schema table.
 ---
 
-# REFERENTIAL_CONSTRAINTS
+# REFERENTIAL_CONSTRAINTS {#referential-constraints}
 
-The `REFERENTIAL_CONSTRAINTS` table provides information about `FOREIGN KEY` relationships between tables. Note that TiDB currently does not enforce `FOREIGN KEY` constraints, or perform actions such as `ON DELETE CASCADE`.
+`REFERENTIAL_CONSTRAINTS`のテーブルは、テーブル間の`FOREIGN KEY`の関係に関する情報を提供します。 TiDBは現在、 `FOREIGN KEY`の制約を強制したり、 `ON DELETE CASCADE`などのアクションを実行したりしないことに注意してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -33,7 +33,7 @@ DESC referential_constraints;
 11 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE test.parent (

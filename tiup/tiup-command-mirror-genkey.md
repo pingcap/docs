@@ -2,54 +2,54 @@
 title: tiup mirror genkey
 ---
 
-# tiup mirror genkey
+# tiup mirror genkey {#tiup-mirror-genkey}
 
-TiUP [mirror](/tiup/tiup-mirror-reference.md), according its definition, has three roles of users:
+TiUP [鏡](/tiup/tiup-mirror-reference.md)は、その定義によれば、ユーザーの3つの役割があります。
 
-- Mirror administrators: They have the permission to modify `root.json`, `index.json`, `snapshot.json`, and `timestamp.json`.
-- Component owners: They have the permission to modify the corresponding component.
-- Normal users: They can download and use the components.
+-   ミラー管理者`snapshot.json` `root.json` 、および`index.json`を変更する権限があり`timestamp.json` 。
+-   コンポーネントの所有者：対応するコンポーネントを変更する権限があります。
+-   通常のユーザー：コンポーネントをダウンロードして使用できます。
 
- Because TiUP requires the signature of the corresponding owner/administrator to modify a file, owners/administrators must have his or her own private key. The command `tiup mirror genkey` is used to generate a private key.
+TiUPはファイルを変更するために対応する所有者/管理者の署名を必要とするため、所有者/管理者は自分の秘密鍵を持っている必要があります。コマンド`tiup mirror genkey`は、秘密鍵を生成するために使用されます。
 
-> **Warning:**
+> **警告：**
 >
-> **DO NOT** transmit private keys over the Internet.
+> インターネット経由で秘密鍵を送信し**ない**でください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror genkey [flags]
 ```
 
-## Options
+## オプション {#options}
 
-### -n, --name
+### -n、-name {#n-name}
 
-- Specifies the name of the key, which also determines the name of the final generated file. The path of the generated private key file is `${TIUP_HOME}/keys/{name}.json`. `TIUP_HOME` refers to the home directory of TiUP, which is `$HOME/.tiup` by default. `name` refers to the private key name that `-n/--name` specifies.
-- Data type: `STRING`
-- Default: "private"
+-   キーの名前を指定します。これにより、最終的に生成されるファイルの名前も決まります。生成された秘密鍵ファイルのパスは`${TIUP_HOME}/keys/{name}.json`です。 `TIUP_HOME`は、TiUPのホームディレクトリを指します。デフォルトでは`$HOME/.tiup`です。 `name`は、 `-n/--name`が指定する秘密鍵名を指します。
+-   データ型： `STRING`
+-   デフォルト：「プライベート」
 
-### -p, --public
+### -p、-public {#p-public}
 
-- Shows the corresponding public key of the private key specified in the option `-n/--name`.
-- TiUP does not create a new private key when `-p/--public` is specified. If the private key specified in `-n/--name` does not exist, TiUP returns an error.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   オプション`-n/--name`で指定された秘密鍵の対応する公開鍵を表示します。
+-   `-p/--public`が指定されている場合、TiUPは新しい秘密鍵を作成しません。 `-n/--name`で指定された秘密鍵が存在しない場合、TiUPはエラーを返します。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-### --save
+### - 保存 {#save}
 
-- Saves the information of the public key as a file in the current directory. The file name is `{hash-prefix}-public.json`. `hash-prefix` is the first 16 bits of the key ID.
-- Data type: `BOOLEAN`
-- This option is disabled by default and its default value is `false`. To enable this option, you can add this option to the command, and pass the `true` value or do not pass any value.
+-   公開鍵の情報をファイルとして現在のディレクトリに保存します。ファイル名は`{hash-prefix}-public.json`です。 `hash-prefix`はキーIDの最初の16ビットです。
+-   データ型： `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
-## Outputs
+## 出力 {#outputs}
 
-- If `-p/--public` is not specified:
-    - If the private key specified in `-n/--name` exists: TiUP outputs `Key already exists, skipped`.
-    - If the private key specified in `-n/--name` does not exist: TiUP outputs `private key have been write to ${TIUP_HOME}/keys/{name}.json`.
-- If `-p/--public` is specified:
-    - If the private key specified in `-n/--name` does not exist: TiUP reports the error `Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`.
-    - If the private key specified in `-n/--name` exists: TiUP outputs the content of the corresponding public key.
+-   `-p/--public`が指定されていない場合：
+    -   `-n/--name`で指定された秘密鍵が存在する場合：TiUPは`Key already exists, skipped`を出力します。
+    -   `-n/--name`で指定された秘密鍵が存在しない場合：TiUPは`private key have been write to ${TIUP_HOME}/keys/{name}.json`を出力します。
+-   `-p/--public`を指定した場合：
+    -   `-n/--name`で指定された秘密鍵が存在しない場合：TiUPはエラー`Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`を報告します。
+    -   `-n/--name`で指定された秘密鍵が存在する場合：TiUPは、対応する公開鍵の内容を出力します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

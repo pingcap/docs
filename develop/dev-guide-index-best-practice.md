@@ -5,15 +5,15 @@ summary: Learn some best practices for creating and using indexes in TiDB.
 
 <!-- markdownlint-disable MD029 -->
 
-# Best Practices for Indexing
+# インデックス作成のベストプラクティス {#best-practices-for-indexing}
 
-This document introduces some best practices for creating and using indexes in TiDB.
+このドキュメントでは、TiDBでインデックスを作成および使用するためのいくつかのベストプラクティスを紹介します。
 
-## Before you begin
+## あなたが始める前に {#before-you-begin}
 
-This section takes the `books` table in the [bookshop](/develop/dev-guide-bookshop-schema-design.md) database as an example.
+このセクションでは、例として[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`books`テーブルを取り上げます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE `books` (
@@ -27,128 +27,131 @@ CREATE TABLE `books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-## Best practices for creating indexes
+## インデックスを作成するためのベストプラクティス {#best-practices-for-creating-indexes}
 
-- Creating a combined index with multiple columns, which is an optimization called [covering index optimization](/explain-indexes.md#indexreader). **Covering index optimization** allows TiDB to query data directly on indexes, which helps improve performance.
-- Avoid creating a secondary index on columns that you do not query often. A useful secondary index can speed up queries, but be aware that it also has side effects. Each time you add an index, an additional Key-Value is added when you insert a row. The more indexes you have, the slower you write, and the more space it consumes. In addition, too many indexes affect optimizer runtime, and inappropriate indexes can mislead the optimizer. So, more indexes do not always mean better performance.
-- Create an appropriate index based on your application. In principle, create indexes only on the columns to be used in queries to improve performance. The following cases are suitable for creating an index:
+-   [インデックスの最適化をカバー](/explain-indexes.md#indexreader)と呼ばれる最適化である、複数の列を持つ結合インデックスの作成。**インデックスの最適化をカバー**することで、TiDBはインデックスで直接データをクエリできるようになり、パフォーマンスの向上に役立ちます。
 
-    - Columns with a high distinction degree can significantly reduce the number of filtered rows. For example, it is recommended to create an index on the personal ID number, but not on the gender.
-    - Use combined indexes when querying with multiple conditions. Note that columns with equivalent conditions need to be placed in the front of the combined index. Here is an example: if the `select* from t where c1 = 10 and c2 = 100 and c3 > 10` query is frequently used, consider creating a combined index `Index cidx (c1, c2, c3)`, so that a index prefix can be constructed to scan by query conditions.
+-   頻繁にクエリを実行しない列にセカンダリインデックスを作成することは避けてください。便利なセカンダリインデックスはクエリを高速化できますが、副作用もあることに注意してください。インデックスを追加するたびに、行を挿入するときに追加のKey-Valueが追加されます。インデックスが多いほど、書き込みが遅くなり、より多くのスペースが消費されます。さらに、インデックスが多すぎるとオプティマイザの実行時間に影響し、不適切なインデックスはオプティマイザを誤解させる可能性があります。したがって、インデックスが多いからといって、必ずしもパフォーマンスが向上するとは限りません。
 
-- Name your secondary index meaningfully, and it is recommended to follow the table naming conventions of your company or organization. If such naming conventions do not exist, follow the rules in [Index Naming Specification](/develop/dev-guide-object-naming-guidelines.md).
+-   アプリケーションに基づいて適切なインデックスを作成します。原則として、パフォーマンスを向上させるために、クエリで使用される列にのみインデックスを作成します。次の場合は、インデックスの作成に適しています。
 
-## Best practices for using indexes
+    -   区別度の高い列は、フィルター処理された行の数を大幅に減らすことができます。たとえば、性別ではなく、個人ID番号にインデックスを作成することをお勧めします。
+    -   複数の条件でクエリを実行する場合は、複合インデックスを使用します。同等の条件の列は、結合されたインデックスの前に配置する必要があることに注意してください。次に例を示します`select* from t where c1 = 10 and c2 = 100 and c3 > 10`クエリが頻繁に使用される場合は、結合インデックス`Index cidx (c1, c2, c3)`を作成することを検討してください。これにより、クエリ条件でスキャンするインデックスプレフィックスを作成できます。
 
-- Indexes are to speed up queries, so make sure that the existing indexes are actually used by some queries. If an index is not used by any query, the index is meaningless, and you need to drop it.
-- When using a combined index, follow the left-prefix rule.
+-   セカンダリインデックスに意味のある名前を付けます。会社または組織のテーブルの命名規則に従うことをお勧めします。このような命名規則が存在しない場合は、 [インデックス命名仕様](/develop/dev-guide-object-naming-guidelines.md)の規則に従ってください。
 
-    Suppose that you create a new combined index on the `title` and `published_at` columns:
+## インデックスを使用するためのベストプラクティス {#best-practices-for-using-indexes}
 
-    {{< copyable "sql" >}}
+-   インデックスはクエリを高速化するためのものであるため、既存のインデックスが実際に一部のクエリで使用されていることを確認してください。インデックスがどのクエリでも使用されていない場合、インデックスは無意味であるため、削除する必要があります。
+
+-   複合インデックスを使用する場合は、左プレフィックス規則に従ってください。
+
+    `title`列と`published_at`列に新しい複合インデックスを作成するとします。
+
+    {{< copyable "" >}}
 
     ```sql
     CREATE INDEX title_published_at_idx ON books (title, published_at);
     ```
 
-    The following query can still use the combined index:
+    次のクエリでも、結合されたインデックスを使用できます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE title = 'database';
     ```
 
-    However, the following query cannot use the combined index because the condition for the leftmost first column in the index is not specified:
+    ただし、インデックスの左端の最初の列の条件が指定されていないため、次のクエリでは結合インデックスを使用できません。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE published_at = '2018-08-18 21:42:08';
     ```
 
-- When using an index column as a condition in a query, do not use calculation, function, or type conversion on it, which will prevent the TiDB optimizer from using the index.
+-   クエリの条件としてインデックス列を使用する場合は、計算、関数、または型変換を使用しないでください。これにより、TiDBオプティマイザがインデックスを使用できなくなります。
 
-    Suppose that you create a new index on the time type column `published_at`:
+    時間タイプ列`published_at`に新しいインデックスを作成するとします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     CREATE INDEX published_at_idx ON books (published_at);
     ```
 
-    However, the following query cannot use the index on `published_at`:
+    ただし、次のクエリでは`published_at`のインデックスを使用できません。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE YEAR(published_at)=2022;
     ```
 
-    To use the index on `published_at`, you can rewrite the query as follows, which avoids using any function on the index column:
+    `published_at`でインデックスを使用するには、次のようにクエリを書き直すことができます。これにより、インデックス列で関数を使用する必要がなくなります。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE published_at >= '2022-01-01' AND published_at < '2023-01-01';
     ```
 
-    You can also use an expression index to create an expression index for `YEAR(Published at)` in the query condition:
+    式インデックスを使用して、クエリ条件で`YEAR(Published at)`の式インデックスを作成することもできます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     CREATE INDEX published_year_idx ON books ((YEAR(published_at)));
     ```
 
-    Now, if you execute the `SELECT * FROM books WHERE YEAR(published_at)=2022;` query, the query can use the `published_year_idx` index to speed up the execution.
+    これで、 `SELECT * FROM books WHERE YEAR(published_at)=2022;`のクエリを実行すると、クエリは`published_year_idx`のインデックスを使用して実行を高速化できます。
 
-    > **Warning:**
+    > **警告：**
     >
-    > Currently, expression index is an experimental feature, and it needs to be enabled in the TiDB configuration file. For more details, see [expression index](/sql-statements/sql-statement-create-index.md#expression-index).
+    > 現在、式インデックスは実験的機能であり、TiDB構成ファイルで有効にする必要があります。詳細については、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を参照してください。
 
-- Try to use a covering index, in which the columns in the index contain the columns to be queried, and avoid querying all columns with `SELECT *` statements.
+-   インデックス内の列にクエリ対象の列が含まれているカバーリングインデックスを使用し、 `SELECT *`のステートメントですべての列をクエリしないようにしてください。
 
-    The following query only needs to scan the index `title_published_at_idx` to get the data:
+    次のクエリは、データを取得するためにインデックス`title_published_at_idx`をスキャンするだけで済みます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT title, published_at FROM books WHERE title = 'database';
     ```
 
-    Although the following query statement can use the combined index `(title, published_at)`, it causes an extra cost to query the non-indexed column, which requires TiDB to query row data according to the reference stored in the index data (usually the primary key information).
+    次のクエリステートメントは結合インデックス`(title, published_at)`を使用できますが、インデックスなしの列をクエリするための追加コストが発生します。これにより、TiDBは、インデックスデータ（通常は主キー情報）に格納されている参照に従って行データをクエリする必要があります。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE title = 'database';
     ```
 
-- A query cannot use indexes when the query condition contains `!=` or `NOT IN`. For example, the following query cannot use any indexes:
+-   クエリ条件に`!=`または`NOT IN`が含まれている場合、クエリはインデックスを使用できません。たとえば、次のクエリはインデックスを使用できません。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE title != 'database';
     ```
 
-- A query cannot use indexes if the `LIKE` condition starts with wildcard `%` in the query. For example, the following query cannot use any indexes:
+-   `LIKE`条件がクエリのワイルドカード`%`で始まる場合、クエリはインデックスを使用できません。たとえば、次のクエリはインデックスを使用できません。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM books WHERE title LIKE '%database';
     ```
 
-- When the query condition has multiple indexes available, and you know which index is the best in practice, it is recommended to use [Optimizer Hint](/optimizer-hints.md) to force the TiDB optimizer to use this index. This can prevent the TiDB optimizer from selecting the wrong index due to inaccurate statistics or other problems.
+-   クエリ条件に複数のインデックスが使用可能であり、どのインデックスが実際に最適であるかがわかっている場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用してTiDBオプティマイザにこのインデックスを使用させることをお勧めします。これにより、不正確な統計やその他の問題が原因でTiDBオプティマイザが間違ったインデックスを選択するのを防ぐことができます。
 
-    In the following query, assuming that indexes `id_idx` and `title_idx` are available on the column `id` and `title` respectively, if you know that `id_idx` is better, you can use `USE INDEX` hint in SQL to force the TiDB optimizer to use the `id_idx` index.
+    次のクエリでは、インデックス`id_idx`と`title_idx`がそれぞれ列`id`と`title`で使用可能であると仮定して、 `id_idx`の方が優れていることがわかっている場合は、SQLで`USE INDEX`ヒントを使用して、TiDBオプティマイザーに`id_idx`インデックスを使用させることができます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SELECT * FROM t USE INDEX(id_idx) WHERE id = 1 and title = 'database';
     ```
 
-- When using the `IN` expression in a query condition, it is recommended that the number of value matched after it does not exceed 300, otherwise the execution efficiency will be poor.
+-   クエリ条件で`IN`式を使用する場合は、一致する値の数が300を超えないようにすることをお勧めします。そうしないと、実行効率が低下します。

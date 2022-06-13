@@ -3,122 +3,133 @@ title: TiDB Cluster Troubleshooting Guide
 summary: Learn how to diagnose and resolve issues when you use TiDB.
 ---
 
-# TiDB Cluster Troubleshooting Guide
+# TiDBクラスタートラブルシューティングガイド {#tidb-cluster-troubleshooting-guide}
 
-You can use this guide to help you diagnose and solve basic problems while using TiDB. If your problem is not resolved, please collect the following information and [create an issue](https://github.com/pingcap/tidb/issues/new/choose):
+このガイドを使用すると、TiDBの使用中に基本的な問題を診断して解決するのに役立ちます。問題が解決しない場合は、次の情報と[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を収集してください。
 
-- The exact error message and the operations while the error occurs
-- The state of all the components
-- The `error`/`fatal`/`panic` information in the log of the component that reports the error
-- The configuration and deployment topology
-- The TiDB component related issue in `dmesg`
+-   正確なエラーメッセージとエラー発生時の操作
+-   すべてのコンポーネントの状態
+-   `fatal`を報告するコンポーネントの`panic`の`error`情報
+-   構成と展開のトポロジー
+-   `dmesg`のTiDBコンポーネント関連の問題
 
-For other information, see [Frequently Asked Questions (FAQ)](/faq/tidb-faq.md).
+その他の情報については、 [よくある質問（FAQ）](/faq/tidb-faq.md)を参照してください。
 
-## Cannot connect to the database
+## データベースに接続できません {#cannot-connect-to-the-database}
 
-1. Make sure all the services are started, including `tidb-server`, `pd-server`, and `tikv-server`.
-2. Use the `ps` command to check if all the processes are running.
+1.  `tidb-server` 、および`pd-server`を含むすべてのサービスが開始されていることを確認し`tikv-server` 。
 
-    - If a certain process is not running, see the following corresponding sections to diagnose and solve the issue.
+2.  `ps`コマンドを使用して、すべてのプロセスが実行されているかどうかを確認します。
 
-    + If all the processes are running, check the `tidb-server` log to see if the following messages are displayed:
-        - InformationSchema is out of date: This message is displayed if the `tikv-server` cannot be connected. Check the state and log of `pd-server` and `tikv-server`.
-        - panic: This message is displayed if there is an issue with the program. Please provide the detailed panic log and [create an issue](https://github.com/pingcap/tidb/issues/new/choose).
+    -   特定のプロセスが実行されていない場合は、次の対応するセクションを参照して、問題を診断および解決してください。
 
-3. If the data is cleared and the services are re-deployed, make sure that:
+    <!---->
 
-    - All the data in `tikv-server` and `pd-server` are cleared. The specific data is stored in `tikv-server` and the metadata is stored in `pd-server`. If only one of the two servers is cleared, the data will be inconsistent.
-    - After the data in `pd-server` and `tikv-server` are cleared and the `pd-server` and `tikv-server` are restarted, the `tidb-server` must be restarted too. The cluster ID is randomly allocated when the `pd-server` is initialized. So when the cluster is re-deployed, the cluster ID changes and you need to restart the `tidb-server` to get the new cluster ID.
+    -   すべてのプロセスが実行されている場合は、 `tidb-server`のログをチェックして、次のメッセージが表示されているかどうかを確認します。
+        -   InformationSchemaが古くなっています：このメッセージは、 `tikv-server`が接続できない場合に表示されます。 `pd-server`と`tikv-server`の状態とログを確認してください。
+        -   パニック：このメッセージは、プログラムに問題がある場合に表示されます。詳細なパニックログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
 
-## Cannot start `tidb-server`
+3.  データがクリアされ、サービスが再デプロイされた場合は、次のことを確認してください。
 
-See the following for the situations when the `tidb-server` cannot be started:
+    -   `tikv-server`と`pd-server`のすべてのデータがクリアされます。特定のデータは`tikv-server`に格納され、メタデータは`pd-server`に格納されます。 2つのサーバーのうち1つだけがクリアされると、データに一貫性がなくなります。
+    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`が再起動された後、 `tidb-server`も再起動する必要があります。クラスタIDは、 `pd-server`が初期化されるときにランダムに割り当てられます。したがって、クラスタが再デプロイされると、クラスタIDが変更され、 `tidb-server`を再起動して新しいクラスタIDを取得する必要があります。
 
-- Error in the startup parameters.
+## <code>tidb-server</code>を起動できません {#cannot-start-code-tidb-server-code}
 
-    See the [TiDB configuration and options](/command-line-flags-for-tidb-configuration.md).
+`tidb-server`を開始できない状況については、以下を参照してください。
 
-- The port is occupied.
+-   起動パラメータにエラーがあります。
 
-    Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tidb-server` is not occupied.
+    [TiDBの構成とオプション](/command-line-flags-for-tidb-configuration.md)を参照してください。
 
-+ Cannot connect to `pd-server`.
+-   ポートは占有されています。
 
-    - Check if the network between TiDB and PD is running smoothly, including whether the network can be pinged or if there is any issue with the Firewall configuration.
-    - If there is no issue with the network, check the state and log of the `pd-server` process.
+    `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tidb-server`を開始するポートが占有されていないことを確認します。
 
-## Cannot start `tikv-server`
+<!---->
 
-See the following for the situations when the `tikv-server` cannot be started:
+-   `pd-server`に接続できません。
 
-- Error in the startup parameters: See the [TiKV configuration and options](/command-line-flags-for-tikv-configuration.md).
+    -   TiDBとPDの間のネットワークがスムーズに実行されているかどうかを確認します。これには、ネットワークにpingを実行できるかどうか、ファイアウォールの構成に問題があるかどうかなどが含まれます。
+    -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認してください。
 
-- The port is occupied: Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `tikv-server` is not occupied.
+## <code>tikv-server</code>を起動できません {#cannot-start-code-tikv-server-code}
 
-+ Cannot connect to `pd-server`.
+`tikv-server`を開始できない状況については、以下を参照してください。
 
-    - Check if the network between TiDB and PD is running smoothly, including whether the network can be pinged or if there is any issue with the Firewall configuration.
+-   起動パラメータのエラー： [TiKVの構成とオプション](/command-line-flags-for-tikv-configuration.md)を参照してください。
 
-    - If there is no issue with the network, check the state and log of the `pd-server` process.
+-   ポートが占有されている： `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `tikv-server`を開始するポートが占有されていないことを確認します。
 
-- The file is occupied.
+<!---->
 
-    Do not open two TiKV files on one database file directory.
+-   `pd-server`に接続できません。
 
-## Cannot start `pd-server`
+    -   TiDBとPDの間のネットワークがスムーズに実行されているかどうかを確認します。これには、ネットワークにpingを実行できるかどうか、ファイアウォールの構成に問題があるかどうかなどが含まれます。
 
-See the following for the situations when the `pd-server` cannot be started:
+    -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認してください。
 
-- Error in the startup parameters.
+<!---->
 
-    See the [PD configuration and options](/command-line-flags-for-pd-configuration.md).
+-   ファイルが占有されています。
 
-- The port is occupied.
+    1つのデータベースファイルディレクトリで2つのTiKVファイルを開かないでください。
 
-    Use the `lsof -i:port` command to show all the networking related to a given port and make sure the port to start the `pd-server` is not occupied.
+## <code>pd-server</code>を起動できません {#cannot-start-code-pd-server-code}
 
-## The TiDB/TiKV/PD process aborts unexpectedly
+`pd-server`を開始できない状況については、以下を参照してください。
 
-- Is the process started on the foreground? The process might exit because the client aborts.
+-   起動パラメータにエラーがあります。
 
-- Is `nohup+&` run in the command line? This might cause the process to abort because it receives the hup signal. It is recommended to write and run the startup command in a script.
+    [PDの構成とオプション](/command-line-flags-for-pd-configuration.md)を参照してください。
 
-## TiDB panic
+-   ポートは占有されています。
 
-Please provide the panic log and [create an issue](https://github.com/pingcap/tidb/issues/new/choose).
+    `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `pd-server`を開始するポートが占有されていないことを確認します。
 
-## The connection is rejected
+## TiDB / TiKV/PDプロセスが予期せず中止されます {#the-tidb-tikv-pd-process-aborts-unexpectedly}
 
-Make sure the network parameters of the operating system are correct, including but not limited to:
+-   プロセスはフォアグラウンドで開始されていますか？クライアントが異常終了したため、プロセスが終了する場合があります。
 
-- The port in the connection string is consistent with the `tidb-server` starting port.
-- The firewall is configured correctly.
+-   コマンドラインで`nohup+&`実行されていますか？これにより、プロセスがhup信号を受信するため、プロセスが中止される可能性があります。スタートアップコマンドをスクリプトで記述して実行することをお勧めします。
 
-## Open too many files
+## TiDBパニック {#tidb-panic}
 
-Before starting the process, make sure the result of `ulimit -n` is large enough. It is recommended to set the value to `unlimited` or larger than `1000000`.
+パニックログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
 
-## Database access times out and the system load is too high
+## 接続が拒否されました {#the-connection-is-rejected}
 
-First, check the [slow query log](/identify-slow-queries.md) and see if it is because of some inappropriate SQL statement.
+オペレーティングシステムのネットワークパラメータが正しいことを確認してください。これには次のものが含まれますが、これらに限定されません。
 
-If you failed to solve the problem, provide the following information:
+-   接続文字列のポートは、 `tidb-server`の開始ポートと一致しています。
+-   ファイアウォールが正しく構成されている。
 
-+ The deployment topology
+## 開くファイルが多すぎます {#open-too-many-files}
 
-    - How many `tidb-server`/`pd-server`/`tikv-server` instances are deployed?
-    - How are these instances distributed in the machines?
+プロセスを開始する前に、 `ulimit -n`の結果が十分に大きいことを確認してください。値を`unlimited`または`1000000`より大きい値に設定することをお勧めします。
 
-+ The hardware configuration of the machines where these instances are deployed:
+## データベースアクセスがタイムアウトし、システム負荷が高すぎる {#database-access-times-out-and-the-system-load-is-too-high}
 
-    - The number of CPU cores
-    - The size of the memory
-    - The type of the disk (SSD or Hard Drive Disk)
-    - Are they physical machines or virtual machines?
+まず、 [遅いクエリログ](/identify-slow-queries.md)をチェックして、不適切なSQLステートメントが原因であるかどうかを確認します。
 
-- Are there other services besides the TiDB cluster?
-- Are the `pd-server`s and `tikv-server`s deployed separately?
-- What is the current operation?
-- Check the CPU thread name using the `top -H` command.
-- Are there any exceptions in the network or IO monitoring data recently?
+問題を解決できなかった場合は、次の情報を提供してください。
+
+-   展開トポロジ
+
+    -   `tidb-server`インスタンスはいくつデプロイされて`tikv-server` `pd-server`か？
+    -   これらのインスタンスはマシンにどのように分散されていますか？
+
+-   これらのインスタンスがデプロイされているマシンのハードウェア構成：
+
+    -   CPUコアの数
+    -   メモリのサイズ
+    -   ディスクの種類（SSDまたはハードディスク）
+    -   それらは物理マシンですか、それとも仮想マシンですか？
+
+<!---->
+
+-   TiDBクラスタ以外に他のサービスはありますか？
+-   `pd-server`秒と`tikv-server`秒は別々に展開されていますか？
+-   現在の操作は何ですか？
+-   `top -H`コマンドでCPUスレッド名を確認してください。
+-   最近、ネットワークまたはIO監視データに例外はありますか？

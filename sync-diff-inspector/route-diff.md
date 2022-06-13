@@ -3,11 +3,11 @@ title: Data Check for Tables with Different Schema or Table Names
 summary: Learn the data check for different database names or table names.
 ---
 
-# Data Check for Tables with Different Schema or Table Names
+# スキーマ名またはテーブル名が異なるテーブルのデータチェック {#data-check-for-tables-with-different-schema-or-table-names}
 
-When using replication tools such as [TiDB Data Migration](/dm/dm-overview.md), you can set `route-rules` to replicate data to a specified table in the downstream. sync-diff-inspector enables you to verify tables with different schema names or table names by setting `rules`.
+[TiDBデータ移行](/dm/dm-overview.md)などのレプリケーションツールを使用する場合は、 `route-rules`を設定して、ダウンストリームの指定されたテーブルにデータをレプリケートできます。 sync-diff-inspectorを使用すると、 `rules`を設定することにより、異なるスキーマ名またはテーブル名を持つテーブルを検証できます。
 
-The following is a simple configuration example. To learn the complete configuration, refer to [Sync-diff-inspector User Guide](/sync-diff-inspector/sync-diff-inspector-overview.md).
+以下は簡単な設定例です。完全な構成については、 [Sync-diff-inspectorユーザーガイド](/sync-diff-inspector/sync-diff-inspector-overview.md)を参照してください。
 
 ```toml
 ######################### Datasource config #########################
@@ -31,9 +31,9 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-This configuration can be used to check `test_2.t_2` in the downstream and `test_1.t_1` in the `mysql1` instance.
+この構成を使用して、ダウンストリームで`test_2.t_2`をチェックし、 `mysql1`インスタンスで`test_1.t_1`をチェックできます。
 
-To check a large number of tables with different schema names or table names, you can simplify the configuration by setting the mapping relationship by using `rules`. You can configure the mapping relationship of either schema or table, or of both. For example, all the tables in the upstream `test_1` database are replicated to the downstream `test_2` database, which can be checked through the following configuration:
+スキーマ名またはテーブル名が異なる多数のテーブルをチェックするには、 `rules`を使用してマッピング関係を設定することにより、構成を簡略化できます。スキーマまたはテーブル、あるいはその両方のマッピング関係を構成できます。たとえば、アップストリーム`test_1`データベースのすべてのテーブルがダウンストリーム`test_2`データベースに複製されます。これは、次の構成で確認できます。
 
 ```toml
 ######################### Datasource config #########################
@@ -57,6 +57,6 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-## Note
+## ノート {#note}
 
-If `test_2`.`t_2` exists in the upstream database, the downstream database also compares this table.
+`test_2`の場合。 `t_2`はアップストリームデータベースに存在し、ダウンストリームデータベースもこのテーブルを比較します。

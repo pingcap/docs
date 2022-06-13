@@ -5,1123 +5,1123 @@ summary: Learn the alert rules in a TiDB cluster.
 
 <!-- markdownlint-disable MD024 -->
 
-# TiDB Cluster Alert Rules
+# TiDBクラスターアラートルール {#tidb-cluster-alert-rules}
 
-This document describes the alert rules for different components in a TiDB cluster, including the rule descriptions and solutions of the alert items in TiDB, TiKV, PD, TiFlash, TiDB Binlog, TiCDC, Node_exporter and Blackbox_exporter.
+このドキュメントでは、TiDB、TiKV、PD、TiFlash、TiDB Binlog、TiCDC、Node_exporter、Blackbox_exporterのアラート項目のルールの説明と解決策を含め、TiDBクラスタのさまざまなコンポーネントのアラートルールについて説明します。
 
-According to the severity level, alert rules are divided into three categories (from high to low): emergency-level, critical-level, and warning-level. This division of severity levels applies to all alert items of each component below.
+重大度レベルに応じて、アラートルールは、緊急レベル、クリティカルレベル、および警告レベルの3つのカテゴリ（高から低）に分類されます。この重大度レベルの区分は、以下の各コンポーネントのすべてのアラート項目に適用されます。
 
-|  Severity level |  Description   |
-| :-------- | :----- |
-|  Emergency-level  |  The highest severity level at which the service is unavailable. Emergency-level alerts are often caused by a service or node failure. **Manual intervention is required immediately**. |
-|  Critical-level  |  Decreased service availability. For the critical-level alerts, a close watch on the abnormal metrics is required. |
-|  Warning-level  |  Warning-level alerts are a reminder for an issue or error.   |
+| 重大度レベル    | 説明                                                                                 |
+| :-------- | :--------------------------------------------------------------------------------- |
+| 緊急レベル     | サービスが利用できない最高の重大度レベル。緊急レベルのアラートは、多くの場合、サービスまたはノードの障害によって発生します。**すぐに手動による介入が必要です**。 |
+| クリティカルレベル | サービスの可用性の低下。クリティカルレベルのアラートの場合、異常なメトリックを注意深く監視する必要があります。                            |
+| 警告レベル     | 警告レベルのアラートは、問題またはエラーのリマインダーです。                                                     |
 
-## TiDB alert rules
+## TiDBアラートルール {#tidb-alert-rules}
 
-This section gives the alert rules for the TiDB component.
+このセクションでは、TiDBコンポーネントのアラートルールを示します。
 
-### Emergency-level alerts
+### 緊急レベルのアラート {#emergency-level-alerts}
 
-#### `TiDB_schema_error`
+#### <code>TiDB_schema_error</code> {#code-tidb-schema-error-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_session_schema_lease_error_total{type="outdated"}[15m]) > 0`
 
-* Description:
+-   説明：
 
-    The latest schema information is not reloaded in TiDB within one lease. When TiDB fails to continue providing services, an alert is triggered.
+    最新のスキーマ情報は、1つのリース内でTiDBに再ロードされません。 TiDBがサービスの提供を継続できない場合、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    It is often caused by an unavailable Region or a TiKV timeout. You need to locate the issue by checking the TiKV monitoring items.
+    多くの場合、使用できないリージョンまたはTiKVタイムアウトが原因です。 TiKV監視項目を確認して問題を特定する必要があります。
 
-#### `TiDB_tikvclient_region_err_total`
+#### <code>TiDB_tikvclient_region_err_total</code> {#code-tidb-tikvclient-region-err-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_tikvclient_region_err_total[10m]) > 6000`
 
-* Description:
+-   説明：
 
-    When TiDB accesses TiKV, a Region error occurs. When the error is reported over 6000 times in 10 minutes, an alert is triggered.
+    TiDBがTiKVにアクセスすると、リージョンエラーが発生します。エラーが10分間に6000回以上報告されると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    View the monitoring status of TiKV.
+    TiKVの監視ステータスを表示します。
 
-#### `TiDB_domain_load_schema_total`
+#### <code>TiDB_domain_load_schema_total</code> {#code-tidb-domain-load-schema-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_domain_load_schema_total{type="failed"}[10m]) > 10`
 
-* Description:
+-   説明：
 
-    The total number of failures to reload the latest schema information in TiDB. If the reloading failure occurs over 10 times in 10 minutes, an alert is triggered.
+    TiDBに最新のスキーマ情報を再ロードできなかった合計数。リロードの失敗が10分間に10回以上発生すると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    Same as [`TiDB_schema_error`](#tidb_schema_error).
+    [`TiDB_schema_error`](#tidb_schema_error)と同じ。
 
-#### `TiDB_monitor_keep_alive`
+#### <code>TiDB_monitor_keep_alive</code> {#code-tidb-monitor-keep-alive-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_monitor_keep_alive_total[10m]) < 100`
 
-* Description:
+-   説明：
 
-    Indicates whether the TiDB process still exists. If the number of times for `tidb_monitor_keep_alive_total` increases less than 100 in 10 minutes, the TiDB process might already exit and an alert is triggered.
+    TiDBプロセスがまだ存在するかどうかを示します。 `tidb_monitor_keep_alive_total`の回数が10分間に100回未満増加した場合、TiDBプロセスはすでに終了している可能性があり、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    * Check whether the TiDB process is out of memory.
-    * Check whether the machine has restarted.
+    -   TiDBプロセスのメモリが不足していないか確認してください。
+    -   本機が再起動したか確認してください。
 
-### Critical-level alerts
+### クリティカルレベルのアラート {#critical-level-alerts}
 
-#### `TiDB_server_panic_total`
+#### <code>TiDB_server_panic_total</code> {#code-tidb-server-panic-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_server_panic_total[10m]) > 0`
 
-* Description:
+-   説明：
 
-    The number of panicked TiDB threads. When a panic occurs, an alert is triggered. The thread is often recovered, otherwise, TiDB will frequently restart.
+    パニックに陥ったTiDBスレッドの数。パニックが発生すると、アラートがトリガーされます。スレッドは頻繁に回復されます。回復されない場合、TiDBは頻繁に再起動します。
 
-* Solution:
+-   解決：
 
-    Collect the panic logs to locate the issue.
+    パニックログを収集して、問題を特定します。
 
-### Warning-level alerts
+### 警告レベルのアラート {#warning-level-alerts}
 
-#### `TiDB_memory_abnormal`
+#### <code>TiDB_memory_abnormal</code> {#code-tidb-memory-abnormal-code}
 
-* Alert rule:
+-   アラートルール：
 
     `go_memstats_heap_inuse_bytes{job="tidb"} > 1e+10`
 
-* Description:
+-   説明：
 
-    The monitoring on the TiDB memory usage. If the usage exceeds 10 G, an alert is triggered.
+    TiDBメモリ使用量の監視。使用量が10Gを超えると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    Use the HTTP API to troubleshoot the goroutine leak issue.
+    HTTP APIを使用して、ゴルーチンリークの問題のトラブルシューティングを行います。
 
-#### `TiDB_query_duration`
+#### <code>TiDB_query_duration</code> {#code-tidb-query-duration-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tidb_server_handle_query_duration_seconds_bucket[1m])) BY (le, instance)) > 1`
 
-* Description:
+-   説明：
 
-    The latency of handling a request in TiDB. If the ninety-ninth percentile latency exceeds 1 second, an alert is triggered.
+    TiDBでリクエストを処理するまでのレイテンシ。 99パーセンタイル遅延が1秒を超えると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    View TiDB logs and search for the `SLOW_QUERY` and `TIME_COP_PROCESS` keywords to locate the slow SQL queries.
+    TiDBログを表示し、 `SLOW_QUERY`と`TIME_COP_PROCESS`のキーワードを検索して、遅いSQLクエリを見つけます。
 
-#### `TiDB_server_event_error`
+#### <code>TiDB_server_event_error</code> {#code-tidb-server-event-error-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_server_event_total{type=~"server_start|server_hang"}[15m]) > 0`
 
-* Description:
+-   説明：
 
-    The number of events that happen in the TiDB service. An alert is triggered when the following events happen:
+    TiDBサービスで発生するイベントの数。次のイベントが発生すると、アラートがトリガーされます。
 
-    1. start: The TiDB service starts.
-    2. hang: When a critical-level event (currently there is only one scenario: TiDB cannot write binlog) happens, TiDB enters the `hang` mode and waits to be killed manually.
+    1.  start：TiDBサービスが開始されます。
+    2.  ハング：クリティカルレベルのイベント（現在、TiDBがbinlogを書き込めないというシナリオは1つだけです）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
 
-* Solution:
+-   解決：
 
-    * Restart TiDB to recover the service.
-    * Check whether the TiDB Binlog service is normal.
+    -   TiDBを再起動して、サービスを回復します。
+    -   TiDBBinlogサービスが正常かどうかを確認します。
 
-#### `TiDB_tikvclient_backoff_seconds_count`
+#### <code>TiDB_tikvclient_backoff_seconds_count</code> {#code-tidb-tikvclient-backoff-seconds-count-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_tikvclient_backoff_seconds_count[10m]) > 10`
 
-* Description:
+-   説明：
 
-    The number of retries when TiDB fails to access TiKV. When the retry times is over 10 in 10 minutes, an alert is triggered.
+    TiDBがTiKVにアクセスできなかった場合の再試行回数。再試行時間が10分で10を超えると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    View the monitoring status of TiKV.
+    TiKVの監視ステータスを表示します。
 
-#### `TiDB_monitor_time_jump_back_error`
+#### <code>TiDB_monitor_time_jump_back_error</code> {#code-tidb-monitor-time-jump-back-error-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(tidb_monitor_time_jump_back_total[10m]) > 0`
 
-* Description:
+-   説明：
 
-    When the time of the machine that holds TiDB rewinds, an alert is triggered.
+    TiDBを保持しているマシンの時刻が巻き戻されると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    Troubleshoot the NTP configurations.
+    NTP構成のトラブルシューティングを行います。
 
-#### `TiDB_ddl_waiting_jobs`
+#### <code>TiDB_ddl_waiting_jobs</code> {#code-tidb-ddl-waiting-jobs-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(tidb_ddl_waiting_jobs) > 5`
 
-* Description:
+-   説明：
 
-    When the number of DDL tasks pending for execution in TiDB exceeds 5, an alert is triggered.
+    TiDBで実行が保留されているDDLタスクの数が5を超えると、アラートがトリガーされます。
 
-* Solution:
+-   解決：
 
-    Check whether there is any time-consuming `add index` operation that is being executed by running `admin show ddl`.
+    `admin show ddl`を実行して実行されている時間のかかる`add index`操作があるかどうかを確認します。
 
-## PD alert rules
+## PDアラートルール {#pd-alert-rules}
 
-This section gives the alert rules for the PD component.
+このセクションでは、PDコンポーネントのアラートルールを示します。
 
-### Emergency-level alerts
+### 緊急レベルのアラート {#emergency-level-alerts}
 
-#### `PD_cluster_down_store_nums`
+#### <code>PD_cluster_down_store_nums</code> {#code-pd-cluster-down-store-nums-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(sum(pd_cluster_status{type="store_down_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+-   説明：
 
-    PD has not received a TiKV/TiFlash heartbeat for a long time (the default configuration is 30 minutes).
+    PDはTiKV/TiFlashハートビートを長時間受信していません（デフォルト設定は30分です）。
 
-* Solution:
+-   解決：
 
-    * Check whether the TiKV/TiFlash process is normal, the network is isolated or the load is too high, and recover the service as much as possible.
-    * If the TiKV/TiFlash instance cannot be recovered, you can make it offline.
+    -   TiKV / TiFlashプロセスが正常であるか、ネットワークが分離されているか、または負荷が高すぎるかどうかを確認し、可能な限りサービスを回復します。
+    -   TiKV / TiFlashインスタンスを回復できない場合は、オフラインにすることができます。
 
-### Critical-level alerts
+### クリティカルレベルのアラート {#critical-level-alerts}
 
-#### `PD_etcd_write_disk_latency`
+#### <code>PD_etcd_write_disk_latency</code> {#code-pd-etcd-write-disk-latency-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(etcd_disk_wal_fsync_duration_seconds_bucket[1m])) by (instance, job, le)) > 1`
 
-* Description:
+-   説明：
 
-    If the latency of the fsync operation exceeds 1 second, it indicates that etcd writes data to disk at a lower speed than normal. It might lead to PD leader timeout or failure to store TSO on disk in time, which will shut down the service of the entire cluster.
+    fsync操作の待ち時間が1秒を超える場合は、etcdが通常よりも低速でデータをディスクに書き込んでいることを示しています。 PDリーダーのタイムアウトが発生したり、TSOを時間内にディスクに保存できなかったりして、クラスタ全体のサービスがシャットダウンする可能性があります。
 
-* Solution:
+-   解決：
 
-    * Find the cause of slow writes. It might be other services that overload the system. You can check whether PD itself occupies a large amount of CPU or I/O resources.
-    * Try to restart PD or manually transfer leader to another PD to recover the service.
-    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
+    -   書き込みが遅い原因を見つけます。システムに過負荷をかけるのは他のサービスである可能性があります。 PD自体が大量のCPUまたはI/Oリソースを占有しているかどうかを確認できます。
+    -   PDを再起動するか、リーダーを別のPDに手動で転送して、サービスを回復してみてください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
-#### `PD_miss_peer_region_count`
+#### <code>PD_miss_peer_region_count</code> {#code-pd-miss-peer-region-count-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(sum(pd_regions_status{type="miss_peer_region_count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+-   説明：
 
-    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time.
+    リージョンレプリカの数が`max-replicas`の値よりも少なくなっています。 TiKVマシンがダウンしていて、そのダウンタイムが`max-down-time`を超えると、通常、一定期間中に一部のリージョンのレプリカが失われます。
 
-* Solution:
+-   解決：
 
-    * Find the cause of the issue by checking whether there is any TiKV machine that is down or being made offline.
-    * Watch the Region health panel and see whether `miss_peer_region_count` is continuously decreasing.
+    -   ダウンしているかオフラインになっているTiKVマシンがあるかどうかを確認して、問題の原因を特定します。
+    -   地域のヘルスパネルを見て、 `miss_peer_region_count`が継続的に減少しているかどうかを確認します。
 
-### Warning-level alerts
+### 警告レベルのアラート {#warning-level-alerts}
 
-#### `PD_cluster_lost_connect_store_nums`
+#### <code>PD_cluster_lost_connect_store_nums</code> {#code-pd-cluster-lost-connect-store-nums-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(sum(pd_cluster_status{type="store_disconnected_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+-   説明：
 
-    PD does not receive a TiKV/TiFlash heartbeat within 20 seconds. Normally a TiKV/TiFlash heartbeat comes in every 10 seconds.
+    PDは20秒以内にTiKV/TiFlashハートビートを受信しません。通常、TiKV/TiFlashハートビートは10秒ごとに発生します。
 
-* Solution:
+-   解決：
 
-    * Check whether the TiKV/TiFlash instance is being restarted.
-    * Check whether the TiKV/TiFlash process is normal, the network is isolated, and the load is too high, and recover the service as much as possible.
-    * If you confirm that the TiKV/TiFlash instance cannot be recovered, you can make it offline.
-    * If you confirm that the TiKV/TiFlash instance can be recovered, but not in the short term, you can consider increasing the value of `max-down-time`. It will prevent the TiKV/TiFlash instance from being considered as irrecoverable and the data from being removed from the TiKV/TiFlash.
+    -   TiKV/TiFlashインスタンスが再起動されているかどうかを確認します。
+    -   TiKV / TiFlashプロセスが正常であり、ネットワークが分離されており、負荷が高すぎるかどうかを確認し、可能な限りサービスを回復します。
+    -   TiKV / TiFlashインスタンスを復元できないことを確認した場合は、オフラインにすることができます。
+    -   TiKV / TiFlashインスタンスを回復できるが、短期的には回復できないことを確認した場合は、 `max-down-time`の値を増やすことを検討できます。これにより、TiKV / TiFlashインスタンスが回復不能と見なされたり、データがTiKV/TiFlashから削除されたりするのを防ぐことができます。
 
-#### `PD_cluster_low_space`
+#### <code>PD_cluster_low_space</code> {#code-pd-cluster-low-space-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(sum(pd_cluster_status{type="store_low_space_count"}) by (instance) > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+-   説明：
 
-    Indicates that there is no sufficient space on the TiKV/TiFlash node.
+    TiKV/TiFlashノードに十分なスペースがないことを示します。
 
-* Solution:
+-   解決：
 
-    * Check whether the space in the cluster is generally insufficient. If so, increase its capacity.
-    * Check whether there is any issue with Region balance scheduling. If so, it will lead to uneven data distribution.
-    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, core dump, etc.
-    * Lower the Region weight of the node to reduce the data volume.
-    * When it is not possible to release the space, consider proactively making the node offline. This prevents insufficient disk space that leads to downtime.
+    -   クラスタのスペースが一般的に不十分であるかどうかを確認します。その場合は、容量を増やします。
+    -   リージョンバランスのスケジューリングに問題がないかどうかを確認します。その場合、データの分散が不均一になります。
+    -   ログ、スナップショット、コアダンプなど、大量のディスク容量を占めるファイルがないか確認してください。
+    -   ノードのリージョンの重みを下げて、データ量を減らします。
+    -   スペースを解放できない場合は、ノードを事前にオフラインにすることを検討してください。これにより、ダウンタイムにつながるディスク容量の不足を防ぎます。
 
-#### `PD_etcd_network_peer_latency`
+#### <code>PD_etcd_network_peer_latency</code> {#code-pd-etcd-network-peer-latency-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) by (To, instance, job, le)) > 1`
 
-* Description:
+-   説明：
 
-    The network latency between PD nodes is high. It might lead to the leader timeout and TSO disk storage timeout, which impacts the service of the cluster.
+    PDノード間のネットワーク遅延は高いです。リーダーのタイムアウトとTSOディスクストレージのタイムアウトが発生し、クラスタのサービスに影響を与える可能性があります。
 
-* Solution:
+-   解決：
 
-    * Check the network and system load status.
-    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
+    -   ネットワークとシステムの負荷状況を確認してください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
-#### `PD_tidb_handle_requests_duration`
+#### <code>PD_tidb_handle_requests_duration</code> {#code-pd-tidb-handle-requests-duration-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(pd_client_request_handle_requests_duration_seconds_bucket{type="tso"}[1m])) by (instance, job, le)) > 0.1`
 
-* Description:
+-   説明：
 
-    It takes a longer time for PD to handle the TSO request. It is often caused by a high load.
+    PDがTSO要求を処理するのに時間がかかります。多くの場合、高負荷が原因です。
 
-* Solution:
+-   解決：
 
-    * Check the load status of the server.
-    * Use pprof to analyze the CPU profile of PD.
-    * Manually switch the PD leader.
-    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
+    -   サーバーのロードステータスを確認してください。
+    -   pprofを使用して、PDのCPUプロファイルを分析します。
+    -   PDリーダーを手動で切り替えます。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
-#### `PD_down_peer_region_nums`
+#### <code>PD_down_peer_region_nums</code> {#code-pd-down-peer-region-nums-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(sum(pd_regions_status{type="down-peer-region-count"}) by (instance)  > 0) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+-   説明：
 
-    The number of Regions with an unresponsive peer reported by the Raft leader.
+    Raftリーダーによって報告された応答しないピアを持つリージョンの数。
 
-* Solution:
+-   解決：
 
-    * Check whether there is any TiKV that is down, or that was just restarted, or that is busy.
-    * Watch the Region health panel and see whether `down_peer_region_count` is continuously decreasing.
-    * Check the network between TiKV servers.
+    -   ダウンしている、または再起動したばかりの、またはビジー状態のTiKVがあるかどうかを確認します。
+    -   地域のヘルスパネルを見て、 `down_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   TiKVサーバー間のネットワークを確認してください。
 
-#### `PD_pending_peer_region_count`
+#### <code>PD_pending_peer_region_count</code> {#code-pd-pending-peer-region-count-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(sum(pd_regions_status{type="pending-peer-region-count"}) by (instance) > 100) and (sum(etcd_server_is_leader) by (instance) > 0)`
 
-* Description:
+-   説明：
 
-    There are too many Regions that have lagged Raft logs. It is normal that scheduling leads to a small number of pending peers, but if the number remains high, there might be an issue.
+    Raftログが遅れているリージョンが多すぎます。スケジューリングによって保留中のピアの数が少なくなるのは通常のことですが、その数が多いままの場合は、問題が発生している可能性があります。
 
-* Solution:
+-   解決：
 
-    * Watch the Region health panel and see whether `pending_peer_region_count` is continuously decreasing.
-    * Check the network between TiKV servers, especially whether there is enough bandwidth.
+    -   地域のヘルスパネルを見て、 `pending_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   TiKVサーバー間のネットワークを確認します。特に、十分な帯域幅があるかどうかを確認します。
 
-#### `PD_leader_change`
+#### <code>PD_leader_change</code> {#code-pd-leader-change-code}
 
-* Alert rule:
+-   アラートルール：
 
     `count(changes(pd_tso_events{type="save"}[10m]) > 0) >= 2`
 
-* Description:
+-   説明：
 
-    The PD leader is recently switched.
+    PDリーダーは最近切り替えられました。
 
-* Solution:
+-   解決：
 
-    * Exclude the human factors, such as restarting PD, manually transferring leader, adjusting leader priority, etc.
-    * Check the network and system load status.
-    * If the problematic PD instance cannot be recovered due to environmental factors, make it offline and replace it.
+    -   PDの再起動、リーダーの手動転送、リーダーの優先度の調整などの人的要因を除外します。
+    -   ネットワークとシステムの負荷状況を確認してください。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
 
-#### `TiKV_space_used_more_than_80%`
+#### <code>TiKV_space_used_more_than_80%</code> {#code-tikv-space-used-more-than-80-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(pd_cluster_status{type="storage_size"}) / sum(pd_cluster_status{type="storage_capacity"}) * 100 > 80`
 
-* Description:
+-   説明：
 
-    Over 80% of the cluster space is occupied.
+    クラスタスペースの80％以上が占有されています。
 
-* Solution:
+-   解決：
 
-    * Check whether it is needed to increase capacity.
-    * Check whether there is any file that occupies a large amount of disk space, such as the log, snapshot, core dump, etc.
+    -   容量を増やす必要があるかどうかを確認します。
+    -   ログ、スナップショット、コアダンプなど、大量のディスク容量を占めるファイルがないか確認してください。
 
-#### `PD_system_time_slow`
+#### <code>PD_system_time_slow</code> {#code-pd-system-time-slow-code}
 
-* Alert rule:
+-   アラートルール：
 
     `changes(pd_tso_events{type="system_time_slow"}[10m]) >= 1`
 
-* Description:
+-   説明：
 
-    The system time rewind might happen.
+    システム時刻の巻き戻しが発生する可能性があります。
 
-* Solution:
+-   解決：
 
-    Check whether the system time is configured correctly.
+    システム時刻が正しく設定されているか確認してください。
 
-#### `PD_no_store_for_making_replica`
+#### <code>PD_no_store_for_making_replica</code> {#code-pd-no-store-for-making-replica-code}
 
-* Alert rule:
+-   アラートルール：
 
     `increase(pd_checker_event_count{type="replica_checker", name="no_target_store"}[1m]) > 0`
 
-* Description:
+-   説明：
 
-    There is no appropriate store for additional replicas.
+    追加のレプリカ用の適切なストアはありません。
 
-* Solution:
+-   解決：
 
-    * Check whether there is enough space in the store.
-    * Check whether there is any store for additional replicas according to the label configuration if it is configured.
+    -   店舗に十分なスペースがあるかどうかを確認してください。
+    -   ラベル構成が構成されている場合は、ラベル構成に従って追加のレプリカのストアがあるかどうかを確認します。
 
-## TiKV alert rules
+## TiKVアラートルール {#tikv-alert-rules}
 
-This section gives the alert rules for the TiKV component.
+このセクションでは、TiKVコンポーネントのアラートルールを示します。
 
-### Emergency-level alerts
+### 緊急レベルのアラート {#emergency-level-alerts}
 
-#### `TiKV_memory_used_too_fast`
+#### <code>TiKV_memory_used_too_fast</code> {#code-tikv-memory-used-too-fast-code}
 
-* Alert rule:
+-   アラートルール：
 
     `process_resident_memory_bytes{job=~"tikv",instance=~".*"} - (process_resident_memory_bytes{job=~"tikv",instance=~".*"} offset 5m) > 5*1024*1024*1024`
 
-* Description:
+-   説明：
 
-    Currently, there are no TiKV monitoring items about memory. You can monitor the memory usage of the machines in the cluster by Node_exporter. The above rule indicates that when the memory usage exceeds 5 GB within 5 minutes (the memory is occupied too fast in TiKV), an alert is triggered.
+    現在、メモリに関するTiKV監視項目はありません。 Node_exporterを使用して、クラスタのマシンのメモリ使用量を監視できます。上記のルールは、メモリ使用量が5分以内に5 GBを超えると（TiKVではメモリの占有が速すぎる）、アラートがトリガーされることを示しています。
 
-* Solution:
+-   解決：
 
-    Adjust the `block-cache-size` value of both `rocksdb.defaultcf` and `rocksdb.writecf`.
+    `rocksdb.defaultcf`と`rocksdb.writecf`の両方の`block-cache-size`の値を調整します。
 
-#### `TiKV_GC_can_not_work`
+#### <code>TiKV_GC_can_not_work</code> {#code-tikv-gc-can-not-work-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(increase(tikv_gcworker_gc_tasks_vec{task="gc"}[1d])) < 1 and (sum(increase(tikv_gc_compaction_filter_perform[1d])) < 1 and sum(increase(tikv_engine_event_total{db="kv", cf="write", type="compaction"}[1d])) >= 1)`
 
-* Description:
+-   説明：
 
-    GC is not performed successfully on a TiKV instance within 24 hours, which indicates that GC is not working properly. If GC does not run in a short term, it will not cause much trouble; but if GC keeps down, more and more versions are retained, which slows down the query.
+    GCは24時間以内にTiKVインスタンスで正常に実行されません。これは、GCが正しく機能していないことを示しています。 GCが短期間で実行されなければ、それほど問題は発生しません。ただし、GCが停止し続けると、保持されるバージョンが増え、クエリの速度が低下します。
 
-* Solution:
+-   解決：
 
-    1. Perform `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"` to locate the `tidb-server` corresponding to the GC leader;
-    2. View the log of the `tidb-server`, and grep gc_worker tidb.log;
-    3. If you find that the GC worker has been resolving locks (the last log is "start resolve locks") or deleting ranges (the last log is “start delete {number} ranges”) during this time, it means the GC process is running normally. Otherwise, contact [support@pingcap.com](mailto:support@pingcap.com) to resolve this issue.
+    1.  `SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME = "tikv_gc_leader_desc"`を実行して、GCリーダーに対応する`tidb-server`を見つけます。
+    2.  `tidb-server`のログを表示し、grep gc_worker tidb.log;
+    3.  この間にGCワーカーがロックを解決している（最後のログは「ロックの解決を開始」）か、範囲を削除している（最後のログは「{number}範囲を開始」）場合は、GCプロセスが実行中であることを意味します。通常は。それ以外の場合は、 [support@pingcap.com](mailto:support@pingcap.com)に連絡してこの問題を解決してください。
 
-### Critical-level alerts
+### クリティカルレベルのアラート {#critical-level-alerts}
 
-#### `TiKV_server_report_failure_msg_total`
+#### <code>TiKV_server_report_failure_msg_total</code> {#code-tikv-server-report-failure-msg-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(rate(tikv_server_report_failure_msg_total{type="unreachable"}[10m])) BY (store_id) > 10`
 
-* Description:
+-   説明：
 
-    Indicates that the remote TiKV cannot be connected.
+    リモートTiKVが接続できないことを示します。
 
-* Solution:
+-   解決：
 
-    1. Check whether the network is clear.
-    2. Check whether the remote TiKV is down.
-    3. If the remote TiKV is not down, check whether the pressure is too high. Refer to the solution in [`TiKV_channel_full_total`](#tikv_channel_full_total).
+    1.  ネットワークがクリアであるかどうかを確認します。
+    2.  リモートTiKVがダウンしているかどうかを確認します。
+    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎるかどうかを確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
-#### `TiKV_channel_full_total`
+#### <code>TiKV_channel_full_total</code> {#code-tikv-channel-full-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(rate(tikv_channel_full_total[10m])) BY (type, instance) > 0`
 
-* Description:
+-   説明：
 
-    This issue is often caused by the stuck Raftstore thread and high pressure on TiKV.
+    この問題は、多くの場合、RaftstoreスレッドのスタックとTiKVへの高圧が原因で発生します。
 
-* Solution:
+-   解決：
 
-    1. Watch the Raft Propose monitor, and see whether the alerted TiKV node has a much higher Raft propose than other TiKV nodes. If so, it means that there are one or more hot spots on this TiKV. You need to check whether the hot spot scheduling can work properly.
-    2. Watch the Raft I/O monitor, and see whether the latency increases. If the latency is high, it means a bottleneck might exist in the disk. One feasible but unsafe solution is setting `sync-log` to `false`.
-    3. Watch the Raft Process monitor, and see whether the tick duration is high. If so, you need to add `raft-base-tick-interval = "2s"` under the `[raftstore]` configuration.
+    1.  Raft Proposeモニターを見て、アラートされたTiKVノードが他のTiKVノードよりもはるかに高いRaft提案を持っているかどうかを確認します。もしそうなら、それはこのTiKVに1つ以上のホットスポットがあることを意味します。ホットスポットのスケジューリングが正しく機能するかどうかを確認する必要があります。
+    2.  Raft I / Oモニターを監視し、レイテンシーが増加するかどうかを確認します。待ち時間が長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。実行可能であるが安全でない解決策の1つは、 `sync-log`を`false`に設定することです。
+    3.  Raft Processモニターを監視し、ティック期間が長いかどうかを確認します。その場合、 `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加する必要があります。
 
-#### `TiKV_write_stall`
+#### <code>TiKV_write_stall</code> {#code-tikv-write-stall-code}
 
-* Alert rule:
+-   アラートルール：
 
     `delta(tikv_engine_write_stall[10m]) > 0`
 
-* Description:
+-   説明：
 
-    The write pressure on RocksDB is too high, and a stall occurs.
+    RocksDBへの書き込み圧力が高すぎるため、ストールが発生します。
 
-* Solution:
+-   解決：
 
-    1. View the disk monitor, and troubleshoot the disk issues;
-    2. Check whether there is any write hot spot on the TiKV;
-    3. Set `max-sub-compactions` to a larger value under the `[rocksdb]` and `[raftdb]` configurations.
+    1.  ディスクモニターを表示し、ディスクの問題のトラブルシューティングを行います。
+    2.  TiKVに書き込みホットスポットがあるかどうかを確認します。
+    3.  `[rocksdb]`および`[raftdb]`構成では、 `max-sub-compactions`を大きい値に設定します。
 
-#### `TiKV_raft_log_lag`
+#### <code>TiKV_raft_log_lag</code> {#code-tikv-raft-log-lag-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_raftstore_log_lag_bucket[1m])) by (le, instance)) > 5000`
 
-* Description:
+-   説明：
 
-    If this value is relatively large, it means Follower has lagged far behind Leader, and Raft cannot be replicated normally. It is possibly because the TiKV machine where Follower is located is stuck or down.
+    この値が比較的大きい場合は、フォロワーがリーダーよりもはるかに遅れており、ラフトを正常に複製できないことを意味します。フォロワーが配置されているTiKVマシンがスタックしているか、ダウンしている可能性があります。
 
-#### `TiKV_async_request_snapshot_duration_seconds`
+#### <code>TiKV_async_request_snapshot_duration_seconds</code> {#code-tikv-async-request-snapshot-duration-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_storage_engine_async_request_duration_seconds_bucket{type="snapshot"}[1m])) by (le, instance, type)) > 1`
 
-* Description:
+-   説明：
 
-    If this value is relatively large, it means the load pressure on Raftstore is too high, and it might be stuck already.
+    この値が比較的大きい場合は、Raftstoreの負荷圧力が高すぎることを意味し、すでにスタックしている可能性があります。
 
-* Solution:
+-   解決：
 
-    Refer to the solution in [`TiKV_channel_full_total`](#tikv_channel_full_total).
+    [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
-#### `TiKV_async_request_write_duration_seconds`
+#### <code>TiKV_async_request_write_duration_seconds</code> {#code-tikv-async-request-write-duration-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_storage_engine_async_request_duration_seconds_bucket{type="write"}[1m])) by (le, instance, type)) > 1`
 
-* Description:
+-   説明：
 
-    If this value is relatively large, it means the Raft write takes a long time.
+    この値が比較的大きい場合は、Raftの書き込みに時間がかかることを意味します。
 
-* Solution:
+-   解決：
 
-    1. Check the pressure on Raftstore. See the solution in [`TiKV_channel_full_total`](#tikv_channel_full_total).
-    2. Check the pressure on the apply worker thread.
+    1.  Raftstoreの圧力を確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
+    2.  アプライワーカースレッドの圧力を確認してください。
 
-#### `TiKV_coprocessor_request_wait_seconds`
+#### <code>TiKV_coprocessor_request_wait_seconds</code> {#code-tikv-coprocessor-request-wait-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.9999, sum(rate(tikv_coprocessor_request_wait_seconds_bucket[1m])) by (le, instance, req)) > 10`
 
-* Description:
+-   説明：
 
-    If this value is relatively large, it means the pressure on the Coprocessor worker is high. There might be a slow task that makes the Coprocessor thread stuck.
+    この値が比較的大きい場合は、コプロセッサーワーカーへのプレッシャーが高いことを意味します。コプロセッサースレッドをスタックさせる遅いタスクがあるかもしれません。
 
-* Solution:
+-   解決：
 
-    1. View the slow query log from the TiDB log to see whether the index or full table scan is used in a query, or see whether it is needed to analyze;
-    2. Check whether there is a hot spot;
-    3. View the Coprocessor monitor and see whether `total` and `process` in `coprocessor table/index scan` match. If they differ a lot, it indicates too many invalid queries are performed. You can see whether there is `over seek bound`. If so, there are too many versions that GC does not handle in time. Then you need to increase the number of parallel GC threads.
+    1.  TiDBログから低速クエリログを表示して、インデックスまたは全表スキャンがクエリで使用されているかどうか、または分析が必要かどうかを確認します。
+    2.  ホットスポットがあるかどうかを確認します。
+    3.  コプロセッサーモニターを表示し、 `coprocessor table/index scan`の`total`と`process`が一致するかどうかを確認します。それらが大きく異なる場合は、実行された無効なクエリが多すぎることを示しています。 `over seek bound`があるかどうかを確認できます。もしそうなら、GCが時間内に処理しないバージョンが多すぎます。次に、並列GCスレッドの数を増やす必要があります。
 
-#### `TiKV_raftstore_thread_cpu_seconds_total`
+#### <code>TiKV_raftstore_thread_cpu_seconds_total</code> {#code-tikv-raftstore-thread-cpu-seconds-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(rate(tikv_thread_cpu_seconds_total{name=~"raftstore_.*"}[1m])) by (instance, name) > 1.6`
 
-* Description:
+-   説明：
 
-    The pressure on the Raftstore thread is too high.
+    Raftstoreスレッドへの圧力が高すぎます。
 
-* Solution:
+-   解決：
 
-    Refer to the solution in [`TiKV_channel_full_total`](#tikv_channel_full_total).
+    [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
-#### `TiKV_raft_append_log_duration_secs`
+#### <code>TiKV_raft_append_log_duration_secs</code> {#code-tikv-raft-append-log-duration-secs-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_raftstore_append_log_duration_seconds_bucket[1m])) by (le, instance)) > 1`
 
-* Description:
+-   説明：
 
-    Indicates the time cost of appending Raft log. If it is high, it usually means I/O is too busy.
+    Raftログを追加するための時間コストを示します。高い場合は、通常、I/Oがビジー状態であることを意味します。
 
-#### `TiKV_raft_apply_log_duration_secs`
+#### <code>TiKV_raft_apply_log_duration_secs</code> {#code-tikv-raft-apply-log-duration-secs-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_raftstore_apply_log_duration_seconds_bucket[1m])) by (le, instance)) > 1`
 
-* Description:
+-   説明：
 
-    Indicates the time cost of applying Raft log. If it is high, it usually means I/O is too busy.
+    Raftログを適用するための時間コストを示します。高い場合は、通常、I/Oがビジー状態であることを意味します。
 
-#### `TiKV_scheduler_latch_wait_duration_seconds`
+#### <code>TiKV_scheduler_latch_wait_duration_seconds</code> {#code-tikv-scheduler-latch-wait-duration-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_scheduler_latch_wait_duration_seconds_bucket[1m])) by (le, instance, type)) > 1`
 
-* Description:
+-   説明：
 
-    The waiting time for the write operations to obtain the memory lock in Scheduler. If it is high, there might be many write conflicts, or that some operations that lead to conflicts take a long time to finish and block other operations that wait for the same lock.
+    書き込み操作がスケジューラのメモリロックを取得するまでの待機時間。これが高い場合、書き込みの競合が多く発生するか、競合につながる一部の操作が終了して同じロックを待機する他の操作をブロックするのに長い時間がかかる可能性があります。
 
-* Solution:
+-   解決：
 
-    1. View the scheduler command duration in the Scheduler-All monitor and see which command is most time-consuming;
-    2. View the scheduler scan details in the Scheduler-All monitor and see whether `total` and `process` match. If they differ a lot, there are many invalid scans. You can also see whether there is `over seek bound`. If there is too much, it indicates GC does not work in time;
-    3. View the storage async snapshot/write duration in the Storage monitor and see whether the Raft operation is performed in time.
+    1.  Scheduler-Allモニターでスケジューラー・コマンドの期間を表示し、どのコマンドに最も時間がかかるかを確認します。
+    2.  Scheduler-Allモニターでスケジューラースキャンの詳細を表示し、 `total`と`process`が一致するかどうかを確認します。それらが大きく異なる場合、多くの無効なスキャンがあります。 `over seek bound`があるかどうかも確認できます。多すぎる場合は、GCが時間内に機能しないことを示します。
+    3.  ストレージモニターでストレージ非同期スナップショット/書き込み期間を表示し、ラフト操作が時間内に実行されているかどうかを確認します。
 
-#### `TiKV_thread_apply_worker_cpu_seconds`
+#### <code>TiKV_thread_apply_worker_cpu_seconds</code> {#code-tikv-thread-apply-worker-cpu-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `max(rate(tikv_thread_cpu_seconds_total{name=~"apply_.*"}[1m])) by (instance) > 0.9`
 
-* Description:
+-   説明：
 
-    The apply Raft log thread is under great pressure and is approaching or has exceeded its limit. This is often caused by a burst of writes.
+    アプライラフトログスレッドは大きな圧力を受けており、制限に近づいているか、制限を超えています。これは多くの場合、書き込みのバーストによって引き起こされます。
 
-### Warning-level alerts
+### 警告レベルのアラート {#warning-level-alerts}
 
-#### `TiKV_leader_drops`
+#### <code>TiKV_leader_drops</code> {#code-tikv-leader-drops-code}
 
-* Alert rule:
+-   アラートルール：
 
     `delta(tikv_pd_heartbeat_tick_total{type="leader"}[30s]) < -10`
 
-* Description:
+-   説明：
 
-    It is often caused by a stuck Raftstore thread.
+    多くの場合、Raftstoreスレッドのスタックが原因です。
 
-* Solution:
+-   解決：
 
-    1. Refer to [`TiKV_channel_full_total`](#tikv_channel_full_total).
-    2. It there is low pressure on TiKV, consider whether the PD scheduling is too frequent. You can view the Operator Create panel on the PD page, and check the types and number of the PD scheduling.
+    1.  [`TiKV_channel_full_total`](#tikv_channel_full_total)を参照してください。
+    2.  TiKVへの圧力が低い場合は、PDスケジューリングが頻繁すぎるかどうかを検討してください。 PDページでOperatorCreateパネルを表示し、PDスケジューリングのタイプと数を確認できます。
 
-#### `TiKV_raft_process_ready_duration_secs`
+#### <code>TiKV_raft_process_ready_duration_secs</code> {#code-tikv-raft-process-ready-duration-secs-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.999, sum(rate(tikv_raftstore_raft_process_duration_secs_bucket{type='ready'}[1m])) by (le, instance, type)) > 2`
 
-* Description:
+-   説明：
 
-    Indicates the time cost of handling Raft ready. If this value is large, it is often caused by the stuck appending log task.
+    Raftの準備ができた状態で処理するための時間コストを示します。この値が大きい場合は、ログの追加タスクがスタックしていることが原因であることがよくあります。
 
-#### `TiKV_raft_process_tick_duration_secs`
+#### <code>TiKV_raft_process_tick_duration_secs</code> {#code-tikv-raft-process-tick-duration-secs-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.999, sum(rate(tikv_raftstore_raft_process_duration_secs_bucket{type=’tick’}[1m])) by (le, instance, type)) > 2`
 
-* Description:
+-   説明：
 
-    Indicates the time cost of handling Raft tick. If this value is large, it is often caused by too many Regions.
+    ラフトティックの処理にかかる時間コストを示します。この値が大きい場合は、多くの場合、リージョンが多すぎることが原因です。
 
-* Solution:
+-   解決：
 
-    1. Consider using a higher-level log such as `warn` or `error`.
-    2. Add `raft-base-tick-interval = "2s"` under the `[raftstore]` configuration.
+    1.  `warn`や`error`などの高レベルのログの使用を検討してください。
+    2.  `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加します。
 
-#### `TiKV_scheduler_context_total`
+#### <code>TiKV_scheduler_context_total</code> {#code-tikv-scheduler-context-total-code}
 
-* Alert rule:
+-   アラートルール：
 
     `abs(delta( tikv_scheduler_context_total[5m])) > 1000`
 
-* Description:
+-   説明：
 
-    The number of write commands that are being executed by Scheduler. If this value is large, it means the task is not finished timely.
+    スケジューラーによって実行されている書き込みコマンドの数。この値が大きい場合は、タスクがタイムリーに終了していないことを意味します。
 
-* Solution:
+-   解決：
 
-    Refer to [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds).
+    [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
 
-#### `TiKV_scheduler_command_duration_seconds`
+#### <code>TiKV_scheduler_command_duration_seconds</code> {#code-tikv-scheduler-command-duration-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_scheduler_command_duration_seconds_bucket[1m])) by (le, instance, type)  / 1000) > 1`
 
-* Description:
+-   説明：
 
-    Indicates the time cost of executing the Scheduler command.
+    スケジューラコマンドの実行にかかる時間コストを示します。
 
-* Solution:
+-   解決：
 
-    Refer to [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds).
+    [`TiKV_scheduler_latch_wait_duration_seconds`](#tikv_scheduler_latch_wait_duration_seconds)を参照してください。
 
-#### `TiKV_coprocessor_outdated_request_wait_seconds`
+#### <code>TiKV_coprocessor_outdated_request_wait_seconds</code> {#code-tikv-coprocessor-outdated-request-wait-seconds-code}
 
-* Alert rule:
+-   アラートルール：
 
     `delta(tikv_coprocessor_outdated_request_wait_seconds_count[10m]) > 0`
 
-* Description:
+-   説明：
 
-    The waiting time of the expired requests by Coprocessor. If this value is large, it means there is high pressure on Coprocessor.
+    コプロセッサーによる期限切れの要求の待機時間。この値が大きい場合は、コプロセッサーに高い圧力がかかっていることを意味します。
 
-* Solution:
+-   解決：
 
-    Refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
+    [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds)を参照してください。
 
-#### `TiKV_coprocessor_pending_request`
+#### <code>TiKV_coprocessor_pending_request</code> {#code-tikv-coprocessor-pending-request-code}
 
-* Alert rule:
+-   アラートルール：
 
     `delta(tikv_coprocessor_pending_request[10m]) > 5000`
 
-* Description:
+-   説明：
 
-    The queuing requests of Coprocessor.
+    コプロセッサーのキューイング要求。
 
-* Solution:
+-   解決：
 
-    Refer to [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds).
+    [`TiKV_coprocessor_request_wait_seconds`](#tikv_coprocessor_request_wait_seconds)を参照してください。
 
-#### `TiKV_batch_request_snapshot_nums`
+#### <code>TiKV_batch_request_snapshot_nums</code> {#code-tikv-batch-request-snapshot-nums-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(rate(tikv_thread_cpu_seconds_total{name=~"cop_.*"}[1m])) by (instance) / (count(tikv_thread_cpu_seconds_total{name=~"cop_.*"}) * 0.9) / count(count(tikv_thread_cpu_seconds_total) by (instance)) > 0`
 
-* Description:
+-   説明：
 
-    The Coprocessor CPU usage of a TiKV machine exceeds 90%.
+    TiKVマシンのコプロセッサーCPU使用率が90％を超えています。
 
-#### `TiKV_pending_task`
+#### <code>TiKV_pending_task</code> {#code-tikv-pending-task-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(tikv_worker_pending_task_total) BY (instance,name)  > 1000`
 
-* Description:
+-   説明：
 
-    The number of pending tasks of TiKV.
+    TiKVの保留中のタスクの数。
 
-* Solution:
+-   解決：
 
-    Check which kind of tasks has a higher value. You can normally find a solution to the Coprocessor and apply worker tasks from other metrics.
+    どの種類のタスクの方が価値が高いかを確認してください。通常、コプロセッサーの解決策を見つけて、他のメトリックからワーカータスクを適用できます。
 
-#### `TiKV_low_space`
+#### <code>TiKV_low_space</code> {#code-tikv-low-space-code}
 
-* Alert rule:
+-   アラートルール：
 
     `sum(tikv_store_size_bytes{type="available"}) by (instance) / sum(tikv_store_size_bytes{type="capacity"}) by (instance) < 0.2`
 
-* Description:
+-   説明：
 
-    The data volume of TiKV exceeds 80% of the configured node capacity or the disk capacity of the machine.
+    TiKVのデータ量が、構成されたノード容量またはマシンのディスク容量の80％を超えています。
 
-* Solution:
+-   解決：
 
-    * Check the balance condition of node space.
-    * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
+    -   ノードスペースのバランス状態を確認してください。
+    -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスタノードを増やす計画を立てます。
 
-#### `TiKV_approximate_region_size`
+#### <code>TiKV_approximate_region_size</code> {#code-tikv-approximate-region-size-code}
 
-* Alert rule:
+-   アラートルール：
 
     `histogram_quantile(0.99, sum(rate(tikv_raftstore_region_size_bucket[1m])) by (le)) > 1073741824`
 
-* Description:
+-   説明：
 
-    The maximum Region approximate size that is scanned by the TiKV split checker is continually larger than 1 GB within one minute.
+    TiKVスプリットチェッカーによってスキャンされるリージョンのおおよその最大サイズは、1分以内に1GBを超え続けます。
 
-* Solution:
+-   解決：
 
-    The speed of splitting Regions is slower than the write speed. To alleviate this issue, you’d better update TiDB to a version that supports batch-split (>= 2.1.0-rc1). If it is not possible to update temporarily, you can use `pd-ctl operator add split-region <region_id> --policy=approximate` to manually split Regions.
+    リージョンの分割速度は、書き込み速度よりも遅くなります。この問題を軽減するには、TiDBをバッチ分割をサポートするバージョン（&gt; = 2.1.0-rc1）に更新することをお勧めします。一時的に更新できない場合は、 `pd-ctl operator add split-region <region_id> --policy=approximate`を使用してリージョンを手動で分割できます。
 
-## TiFlash alert rules
+## TiFlashアラートルール {#tiflash-alert-rules}
 
-For the detailed descriptions of TiFlash alert rules, see [TiFlash Alert Rules](/tiflash/tiflash-alert-rules.md).
+TiFlashアラートルールの詳細については、 [TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
 
-## TiDB Binlog alert rules
+## TiDBBinlogアラートルール {#tidb-binlog-alert-rules}
 
-For the detailed descriptions of TiDB Binlog alert rules, see [TiDB Binlog monitoring document](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules).
+TiDB Binlogアラートルールの詳細については、 [TiDBBinlogモニタリングドキュメント](/tidb-binlog/monitor-tidb-binlog-cluster.md#alert-rules)を参照してください。
 
-## TiCDC Alert rules
+## TiCDCアラートルール {#ticdc-alert-rules}
 
-For the detailed descriptions of TiCDC alert rules, see [TiCDC Alert Rules](/ticdc/ticdc-alert-rules.md).
+TiCDCアラートルールの詳細については、 [TiCDCアラートルール](/ticdc/ticdc-alert-rules.md)を参照してください。
 
-## Node_exporter host alert rules
+## Node_exporterホストアラートルール {#node-exporter-host-alert-rules}
 
-This section gives the alert rules for the Node_exporter host.
+このセクションでは、Node_exporterホストのアラートルールを示します。
 
-### Emergency-level alerts
+### 緊急レベルのアラート {#emergency-level-alerts}
 
-#### `NODE_disk_used_more_than_80%`
+#### <code>NODE_disk_used_more_than_80%</code> {#code-node-disk-used-more-than-80-code}
 
-* Alert rule:
+-   アラートルール：
 
     `node_filesystem_avail_bytes{fstype=~"(ext.|xfs)", mountpoint!~"/boot"} / node_filesystem_size_bytes{fstype=~"(ext.|xfs)", mountpoint!~"/boot"} * 100 <= 20`
 
-* Description:
+-   説明：
 
-    The disk space usage of the machine exceeds 80%.
+    本機のディスク容量が80％を超えています。
 
-* Solution:
+-   解決：
 
-    * Log in to the machine, run the `df -h` command to check the disk space usage.
-    * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
+    -   マシンにログインし、 `df -h`コマンドを実行してディスク容量の使用状況を確認します。
+    -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスタノードを増やす計画を立てます。
 
-#### `NODE_disk_inode_more_than_80%`
+#### <code>NODE_disk_inode_more_than_80%</code> {#code-node-disk-inode-more-than-80-code}
 
-* Alert rule:
+-   アラートルール：
 
     `node_filesystem_files_free{fstype=~"(ext.|xfs)"} / node_filesystem_files{fstype=~"(ext.|xfs)"} * 100 < 20`
 
-* Description:
+-   説明：
 
-    The inode usage of the filesystem on the machine exceeds 80%.
+    マシン上のファイルシステムのiノード使用率が80％を超えています。
 
-* Solution:
+-   解決：
 
-    * Log in to the machine and run the `df -i` command to view the node usage of the filesystem.
-    * Make a plan to increase the disk capacity or delete some data or increase cluster node depending on different situations.
+    -   マシンにログインし、 `df -i`コマンドを実行して、ファイルシステムのノード使用状況を表示します。
+    -   さまざまな状況に応じて、ディスク容量を増やすか、一部のデータを削除するか、クラスタノードを増やす計画を立てます。
 
-#### `NODE_disk_readonly`
+#### <code>NODE_disk_readonly</code> {#code-node-disk-readonly-code}
 
-* Alert rule:
+-   アラートルール：
 
     `node_filesystem_readonly{fstype=~"(ext.|xfs)"} == 1`
 
-* Description:
+-   説明：
 
-    The filesystem is read-only and data cannot be written in it. It is often caused by disk failure or filesystem corruption.
+    ファイルシステムは読み取り専用であり、データを書き込むことはできません。多くの場合、ディスク障害またはファイルシステムの破損が原因です。
 
-* Solution:
+-   解決：
 
-    * Log in to the machine and create a file to test whether it is normal.
-    * Check whether the disk LED is normal. If not, replace the disk and repair the filesystem of the machine.
+    -   マシンにログインし、ファイルを作成して、正常かどうかをテストします。
+    -   ディスクLEDが正常か確認してください。そうでない場合は、ディスクを交換して、マシンのファイルシステムを修復します。
 
-### Critical-level alerts
+### クリティカルレベルのアラート {#critical-level-alerts}
 
-#### `NODE_memory_used_more_than_80%`
+#### <code>NODE_memory_used_more_than_80%</code> {#code-node-memory-used-more-than-80-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(((node_memory_MemTotal_bytes-node_memory_MemFree_bytes-node_memory_Cached_bytes)/(node_memory_MemTotal_bytes)*100)) >= 80`
 
-* Description:
+-   説明：
 
-    The memory usage of the machine exceeds 80%.
+    本機のメモリー使用量が80％を超えています。
 
-* Solution:
+-   解決：
 
-    * View the Memory panel of the host in the Grafana Node Exporter dashboard, and see whether Used memory is too high and Available memory is too low.
-    * Log in to the machine and run the `free -m` command to view the memory usage. You can run `top` to check whether there is any abnormal process that has an overly high memory usage.
+    -   Grafana Node Exporterダッシュボードでホストのメモリパネルを表示し、使用済みメモリが高すぎるか、使用可能メモリが低すぎるかを確認します。
+    -   マシンにログインし、 `free -m`コマンドを実行してメモリ使用量を表示します。 `top`を実行して、メモリ使用量が多すぎる異常なプロセスがないかどうかを確認できます。
 
-### Warning-level alerts
+### 警告レベルのアラート {#warning-level-alerts}
 
-#### `NODE_node_overload`
+#### <code>NODE_node_overload</code> {#code-node-node-overload-code}
 
-* Alert rule:
+-   アラートルール：
 
     `(node_load5 / count without (cpu, mode) (node_cpu_seconds_total{mode="system"})) > 1`
 
-* Description:
+-   説明：
 
-    The CPU load on the machine is relatively high.
+    マシンのCPU負荷は比較的高いです。
 
-* Solution:
+-   解決：
 
-    * View the CPU Usage and Load Average of the host in the Grafana Node Exporter dashboard to check whether they are too high.
-    * Log in to the machine and run `top` to check the load average and the CPU usage, and see whether there is any abnormal process that has an overly high CPU usage.
+    -   Grafana Node ExporterダッシュボードでホストのCPU使用率と負荷平均を表示して、それらが高すぎるかどうかを確認します。
+    -   マシンにログインして`top`を実行し、負荷平均とCPU使用率を確認し、CPU使用率が高すぎる異常なプロセスがないかどうかを確認します。
 
-#### `NODE_cpu_used_more_than_80%`
+#### <code>NODE_cpu_used_more_than_80%</code> {#code-node-cpu-used-more-than-80-code}
 
-* Alert rule:
+-   アラートルール：
 
     `avg(irate(node_cpu_seconds_total{mode="idle"}[5m])) by(instance) * 100 <= 20`
 
-* Description:
+-   説明：
 
-    The CPU usage of the machine exceeds 80%.
+    マシンのCPU使用率が80％を超えています。
 
-* Solution:
+-   解決：
 
-    * View the CPU Usage and Load Average of the host on the Grafana Node Exporter dashboard to check whether they are too high.
-    * Log in to the machine and run `top` to check the Load Average and the CPU Usage, and see whether there is any abnormal process that has an overly high CPU usage.
+    -   Grafana Node ExporterダッシュボードでホストのCPU使用率と負荷平均を表示して、それらが高すぎるかどうかを確認します。
+    -   マシンにログインして`top`を実行し、負荷平均とCPU使用率を確認し、CPU使用率が高すぎる異常なプロセスがないかどうかを確認します。
 
-#### `NODE_tcp_estab_num_more_than_50000`
+#### <code>NODE_tcp_estab_num_more_than_50000</code> {#code-node-tcp-estab-num-more-than-50000-code}
 
-* Alert rule:
+-   アラートルール：
 
     `node_netstat_Tcp_CurrEstab > 50000`
 
-* Description:
+-   説明：
 
-    There are more than 50,000 TCP links in the "establish" status on the machine.
+    マシンの「確立」ステータスには50,000を超えるTCPリンクがあります。
 
-* Solution:
+-   解決：
 
-    * Log in to the machine and run `ss -s` to check the number of TCP links in the "estab" status in the current system.
-    * Run `netstat` to check whether there is any abnormal link.
+    -   マシンにログインして`ss -s`を実行し、現在のシステムで「estab」ステータスのTCPリンクの数を確認します。
+    -   `netstat`を実行して、異常なリンクがあるかどうかを確認します。
 
-#### `NODE_disk_read_latency_more_than_32ms`
+#### <code>NODE_disk_read_latency_more_than_32ms</code> {#code-node-disk-read-latency-more-than-32ms-code}
 
-* Alert rule:
+-   アラートルール：
 
     `((rate(node_disk_read_time_seconds_total{device=~".+"}[5m]) / rate(node_disk_reads_completed_total{device=~".+"}[5m])) or (irate(node_disk_read_time_seconds_total{device=~".+"}[5m]) / irate(node_disk_reads_completed_total{device=~".+"}[5m])) ) * 1000 > 32`
 
-* Description:
+-   説明：
 
-    The read latency of the disk exceeds 32 ms.
+    ディスクの読み取り待ち時間が32ミリ秒を超えています。
 
-* Solution:
+-   解決：
 
-    * Check the disk status by viewing the Grafana Disk Performance dashboard.
-    * Check the read latency of the disk by viewing the Disk Latency panel.
-    * Check the I/O usage by viewing the Disk I/O Utilization panel.
+    -   Grafana Disk Performanceダッシュボードを表示して、ディスクのステータスを確認します。
+    -   [ディスクレイテンシ]パネルを表示して、ディスクの読み取りレイテンシを確認します。
+    -   [ディスクI/O使用率]パネルを表示して、I/O使用量を確認します。
 
-#### `NODE_disk_write_latency_more_than_16ms`
+#### <code>NODE_disk_write_latency_more_than_16ms</code> {#code-node-disk-write-latency-more-than-16ms-code}
 
-* Alert rule:
+-   アラートルール：
 
     `((rate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / rate(node_disk_writes_completed_total{device=~".+"}[5m])) or (irate(node_disk_write_time_seconds_total{device=~".+"}[5m]) / irate(node_disk_writes_completed_total{device=~".+"}[5m])))> 16`
 
-* Description:
+-   説明：
 
-    The write latency of the disk exceeds 16ms.
+    ディスクの書き込み待ち時間が16msを超えています。
 
-* Solution:
+-   解決：
 
-    * Check the disk status by viewing the Grafana Disk Performance dashboard.
-    * Check the write latency of the disk by viewing the Disk Latency panel.
-    * Check the I/O usage by viewing the Disk I/O Utilization panel.
+    -   Grafana Disk Performanceダッシュボードを表示して、ディスクのステータスを確認します。
+    -   [ディスクレイテンシ]パネルを表示して、ディスクの書き込みレイテンシを確認します。
+    -   [ディスクI/O使用率]パネルを表示して、I/O使用量を確認します。
 
-## Blackbox_exporter TCP, ICMP, and HTTP alert rules
+## Blackbox_exporter TCP、ICMP、およびHTTPアラートルール {#blackbox-exporter-tcp-icmp-and-http-alert-rules}
 
-This section gives the alert rules for the Blackbox_exporter TCP, ICMP, and HTTP.
+このセクションでは、Blackbox_exporter TCP、ICMP、およびHTTPのアラートルールを示します。
 
-### Emergency-level alerts
+### 緊急レベルのアラート {#emergency-level-alerts}
 
-#### `TiDB_server_is_down`
+#### <code>TiDB_server_is_down</code> {#code-tidb-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="tidb"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the TiDB service port.
+    TiDBサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the TiDB service is down.
-    * Check whether the TiDB process exists.
-    * Check whether the network between the monitoring machine and the TiDB machine is normal.
+    -   TiDBサービスを提供するマシンがダウンしていないか確認してください。
+    -   TiDBプロセスが存在するかどうかを確認します。
+    -   監視マシンとTiDBマシン間のネットワークが正常か確認してください。
 
-#### `TiFlash_server_is_down`
+#### <code>TiFlash_server_is_down</code> {#code-tiflash-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="tiflash"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the TiFlash service port.
+    TiFlashサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the TiFlash service is down.
-    * Check whether the TiFlash process exists.
-    * Check whether the network between the monitoring machine and the TiFlash machine is normal.
+    -   TiFlashサービスを提供するマシンがダウンしていないか確認してください。
+    -   TiFlashプロセスが存在するかどうかを確認します。
+    -   監視マシンとTiFlashマシン間のネットワークが正常かどうかを確認します。
 
-#### `Pump_server_is_down`
+#### <code>Pump_server_is_down</code> {#code-pump-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="pump"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the pump service port.
+    ポンプサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the pump service is down.
-    * Check whether the pump process exists.
-    * Check whether the network between the monitoring machine and the pump machine is normal.
+    -   ポンプサービスを提供する機械がダウンしていないか確認してください。
+    -   ポンププロセスが存在するかどうかを確認します。
+    -   監視機とポンプ機のネットワークが正常か確認してください。
 
-#### `Drainer_server_is_down`
+#### <code>Drainer_server_is_down</code> {#code-drainer-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="drainer"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Drainer service port.
+    ドレイナーサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Drainer service is down.
-    * Check whether the Drainer process exists.
-    * Check whether the network between the monitoring machine and the Drainer machine is normal.
+    -   ドレイナーサービスを提供するマシンがダウンしていないか確認してください。
+    -   ドレイナープロセスが存在するかどうかを確認します。
+    -   監視機とドレイナー機のネットワークが正常か確認してください。
 
-#### `TiKV_server_is_down`
+#### <code>TiKV_server_is_down</code> {#code-tikv-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="tikv"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the TiKV service port.
+    TiKVサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the TiKV service is down.
-    * Check whether the TiKV process exists.
-    * Check whether the network between the monitoring machine and the TiKV machine is normal.
+    -   TiKVサービスを提供するマシンがダウンしていないか確認してください。
+    -   TiKVプロセスが存在するかどうかを確認します。
+    -   監視機とTiKV機のネットワークが正常か確認してください。
 
-#### `PD_server_is_down`
+#### <code>PD_server_is_down</code> {#code-pd-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="pd"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the PD service port.
+    PDサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the PD service is down.
-    * Check whether the PD process exists.
-    * Check whether the network between the monitoring machine and the PD machine is normal.
+    -   PDサービスを提供するマシンがダウンしていないか確認してください。
+    -   PDプロセスが存在するかどうかを確認します。
+    -   監視機とPD機間のネットワークが正常か確認してください。
 
-#### `Node_exporter_server_is_down`
+#### <code>Node_exporter_server_is_down</code> {#code-node-exporter-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="node_exporter"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Node_exporter service port.
+    Node_exporterサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Node_exporter service is down.
-    * Check whether the Node_exporter process exists.
-    * Check whether the network between the monitoring machine and the Node_exporter machine is normal.
+    -   Node_exporterサービスを提供するマシンがダウンしていないか確認してください。
+    -   Node_exporterプロセスが存在するかどうかを確認します。
+    -   監視マシンとNode_exporterマシン間のネットワークが正常かどうかを確認します。
 
-#### `Blackbox_exporter_server_is_down`
+#### <code>Blackbox_exporter_server_is_down</code> {#code-blackbox-exporter-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="blackbox_exporter"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Blackbox_Exporter service port.
+    Blackbox_Exporterサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Blackbox_Exporter service is down.
-    * Check whether the Blackbox_Exporter process exists.
-    * Check whether the network between the monitoring machine and the Blackbox_Exporter machine is normal.
+    -   Blackbox_Exporterサービスを提供するマシンがダウンしていないか確認してください。
+    -   Blackbox_Exporterプロセスが存在するかどうかを確認します。
+    -   監視マシンとBlackbox_Exporterマシン間のネットワークが正常かどうかを確認します。
 
-#### `Grafana_server_is_down`
+#### <code>Grafana_server_is_down</code> {#code-grafana-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="grafana"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Grafana service port.
+    Grafanaサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Grafana service is down.
-    * Check whether the Grafana process exists.
-    * Check whether the network between the monitoring machine and the Grafana machine is normal.
+    -   Grafanaサービスを提供するマシンがダウンしていないかどうかを確認します。
+    -   Grafanaプロセスが存在するかどうかを確認します。
+    -   監視マシンとGrafanaマシン間のネットワークが正常かどうかを確認します。
 
-#### `Pushgateway_server_is_down`
+#### <code>Pushgateway_server_is_down</code> {#code-pushgateway-server-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="pushgateway"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Pushgateway service port.
+    Pushgatewayサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Pushgateway service is down.
-    * Check whether the Pushgateway process exists.
-    * Check whether the network between the monitoring machine and the Pushgateway machine is normal.
+    -   Pushgatewayサービスを提供するマシンがダウンしていないか確認してください。
+    -   Pushgatewayプロセスが存在するかどうかを確認します。
+    -   監視機とプッシュゲートウェイ機のネットワークが正常か確認してください。
 
-#### `Kafka_exporter_is_down`
+#### <code>Kafka_exporter_is_down</code> {#code-kafka-exporter-is-down-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{group="kafka_exporter"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Kafka_Exporter service port.
+    Kafka_Exporterサービスポートのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Kafka_Exporter service is down.
-    * Check whether the Kafka_Exporter process exists.
-    * Check whether the network between the monitoring machine and the Kafka_Exporter machine is normal.
+    -   Kafka_Exporterサービスを提供するマシンがダウンしていないか確認してください。
+    -   Kafka_Exporterプロセスが存在するかどうかを確認します。
+    -   監視マシンとKafka_Exporterマシン間のネットワークが正常かどうかを確認します。
 
-#### `Pushgateway_metrics_interface`
+#### <code>Pushgateway_metrics_interface</code> {#code-pushgateway-metrics-interface-code}
 
-* Alert rule:
+-   アラートルール：
 
     `probe_success{job="blackbox_exporter_http"} == 0`
 
-* Description:
+-   説明：
 
-    Failure to probe the Pushgateway service http interface.
+    Pushgatewayサービスのhttpインターフェイスのプローブに失敗しました。
 
-* Solution:
+-   解決：
 
-    * Check whether the machine that provides the Pushgateway service is down.
-    * Check whether the Pushgateway process exists.
-    * Check whether the network between the monitoring machine and the Pushgateway machine is normal.
+    -   Pushgatewayサービスを提供するマシンがダウンしていないか確認してください。
+    -   Pushgatewayプロセスが存在するかどうかを確認します。
+    -   監視機とプッシュゲートウェイ機のネットワークが正常か確認してください。
 
-### Warning-level alerts
+### 警告レベルのアラート {#warning-level-alerts}
 
-#### `BLACKER_ping_latency_more_than_1s`
+#### <code>BLACKER_ping_latency_more_than_1s</code> {#code-blacker-ping-latency-more-than-1s-code}
 
-* Alert rule:
+-   アラートルール：
 
     `max_over_time(probe_duration_seconds{job=~"blackbox_exporter.*_icmp"}[1m]) > 1`
 
-* Description:
+-   説明：
 
-    The ping latency exceeds 1 second.
+    pingの待ち時間が1秒を超えています。
 
-* Solution:
+-   解決：
 
-    * View the ping latency between the two nodes on the Grafana Blackbox Exporter page to check whether it is too high.
-    * Check the TCP panel on the Grafana Node Exporter page to check whether there is any packet loss.
+    -   Grafana Blackbox Exporterページで2つのノード間のpingレイテンシを表示して、高すぎるかどうかを確認します。
+    -   Grafana Node ExporterページのTCPパネルをチェックして、パケット損失があるかどうかを確認します。

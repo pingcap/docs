@@ -3,13 +3,13 @@ title: EXPLAIN Statements Using Views
 summary: Learn about the execution plan information returned by the `EXPLAIN` statement in TiDB.
 ---
 
-# EXPLAIN Statements Using Views
+# ビューを使用したEXPLAINステートメント {#explain-statements-using-views}
 
-`EXPLAIN` displays the tables and indexes that a [view](/views.md) references, not the name of the view itself. This is because views are only virtual tables and do not store any data themselves. The definition of the view and the rest of the statement are merged together during SQL optimization.
+`EXPLAIN`は、ビュー自体の名前ではなく、 [見る](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが単なる仮想テーブルであり、データ自体を格納しないためです。ビューの定義とステートメントの残りの部分は、SQLの最適化中に一緒にマージされます。
 
-From the [bikeshare example database](/import-example-data.md), you can see that the following two queries are executed in a similar manner:
+[バイクシェアのサンプルデータベース](/import-example-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE trips ADD INDEX (duration);
@@ -42,9 +42,9 @@ Query OK, 0 rows affected (0.13 sec)
 3 rows in set (0.00 sec)
 ```
 
-Similarly, predicates from the view are pushed down to the base table:
+同様に、ビューの述語はベーステーブルにプッシュダウンされます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT * FROM long_trips WHERE bike_number = 'W00950';
@@ -72,11 +72,11 @@ EXPLAIN SELECT * FROM trips WHERE bike_number = 'W00950';
 3 rows in set (0.00 sec)
 ```
 
-In the first statement above, you can see that the index is used to satisfy the view definition, and then the `bike_number = 'W00950'` is applied when TiDB reads the table row. In the second statement, there are no indexes to satisfy the statement, and a `TableFullScan` is used.
+上記の最初のステートメントでは、インデックスがビュー定義を満たすために使用され、TiDBがテーブル行を読み取るときに`bike_number = 'W00950'`が適用されることがわかります。 2番目のステートメントでは、ステートメントを満たすためのインデックスがなく、 `TableFullScan`が使用されています。
 
-TiDB makes use of indexes that satisfy both the view definition and the statement itself. Consider the following composite index:
+TiDBは、ビュー定義とステートメント自体の両方を満たすインデックスを利用します。次の複合インデックスについて考えてみます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE trips ADD INDEX (bike_number, duration);
@@ -106,4 +106,4 @@ Query OK, 0 rows affected (2 min 31.20 sec)
 3 rows in set (0.00 sec)
 ```
 
-In the first statement, TiDB is able to use both parts of the composite index `(bike_number, duration)`. In the second statement, only the first part which is `bike_number` of the index `(bike_number, duration)` is used.
+最初のステートメントでは、TiDBは複合インデックス`(bike_number, duration)`の両方の部分を使用できます。 2番目のステートメントでは、インデックス`(bike_number, duration)`の`bike_number`である最初の部分のみが使用されます。

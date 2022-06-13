@@ -3,63 +3,63 @@ title: Analyze Slow Queries
 summary: Learn how to locate and analyze slow queries.
 ---
 
-# Analyze Slow Queries
+# 遅いクエリを分析する {#analyze-slow-queries}
 
-To address the issue of slow queries, you need to take the following two steps:
+遅いクエリの問題に対処するには、次の2つの手順を実行する必要があります。
 
-1. Among many queries, identify which type of queries are slow.
-2. Analyze why this type of queries are slow.
+1.  多くのクエリの中から、どのタイプのクエリが遅いかを特定します。
+2.  このタイプのクエリが遅い理由を分析します。
 
-You can easily perform step 1 using the [slow query log](/dashboard/dashboard-slow-query.md) and the [statement summary table](/statement-summary-tables.md) features. It is recommended to use [TiDB Dashboard](/dashboard/dashboard-intro.md), which integrates the two features and directly displays the slow queries in your browser. 
+[遅いクエリログ](/dashboard/dashboard-slow-query.md)と[ステートメント要約表](/statement-summary-tables.md)の機能を使用して、ステップ1を簡単に実行できます。 2つの機能を統合し、ブラウザに遅いクエリを直接表示する[TiDBダッシュボード](/dashboard/dashboard-intro.md)を使用することをお勧めします。
 
-This document focuses on how to perform step 2 - analyze why this type of queries are slow.
+このドキュメントでは、ステップ2の実行方法に焦点を当てています。このタイプのクエリが遅い理由を分析してください。
 
-Generally, slow queries have the following major causes:
+一般に、遅いクエリには次の主な原因があります。
 
-- Optimizer issues, such as wrong index selected, wrong join type or sequence selected.
-- System issues. All issues not caused by the optimizer are system issues. For example, a busy TiKV instance processes requests slowly; outdated Region information causes slow queries.
+-   間違ったインデックスが選択された、間違った結合タイプまたはシーケンスが選択されたなどのオプティマイザの問題。
+-   システムの問題。オプティマイザが原因ではないすべての問題は、システムの問題です。たとえば、ビジー状態のTiKVインスタンスはリクエストをゆっくり処理します。地域情報が古くなっていると、クエリが遅くなります。
 
-In actual situations, optimizer issues might cause system issues. For example, for a certain type of queries, the optimizer uses a full table scan instead of the index. As a result, the SQL queries consume many resources, which causes the CPU usage of some TiKV instances to soar. This seems like a system issue, but in essence, it is an optimizer issue.
+実際の状況では、オプティマイザの問題がシステムの問題を引き起こす可能性があります。たとえば、特定のタイプのクエリの場合、オプティマイザはインデックスの代わりに全表スキャンを使用します。その結果、SQLクエリは多くのリソースを消費し、一部のTiKVインスタンスのCPU使用率が急上昇します。これはシステムの問題のように見えますが、本質的にはオプティマイザの問題です。
 
-To identify system issues is relatively simple. To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. Therefore, it is recommended to analyze slow queries by following these procedures:
+システムの問題を特定するのは比較的簡単です。オプティマイザの問題を分析するには、実行プランが妥当かどうかを判断する必要があります。したがって、次の手順に従って、遅いクエリを分析することをお勧めします。
 
-1. Identify the performance bottleneck of the query, that is, the time-consuming part of the query process.
-2. Analyze the system issues: analyze the possible causes according to the query bottleneck and the monitoring/log information of that time.
-3. Analyze the optimizer issues: analyze whether there is a better execution plan.
+1.  クエリのパフォーマンスのボトルネック、つまりクエリプロセスの時間のかかる部分を特定します。
+2.  システムの問題を分析します。クエリのボトルネックとその時点の監視/ログ情報に従って、考えられる原因を分析します。
+3.  オプティマイザーの問題を分析します。より適切な実行プランがあるかどうかを分析します。
 
-The procedures above are explained in the following sections.
+上記の手順については、次のセクションで説明します。
 
-## Identify the performance bottleneck of the query
+## クエリのパフォーマンスのボトルネックを特定する {#identify-the-performance-bottleneck-of-the-query}
 
-First, you need to have a general understanding of the query process. The key stages of the query execution process in TiDB are illustrated in [TiDB performance map](/media/performance-map.png).
+まず、クエリプロセスの一般的な理解が必要です。 TiDBでのクエリ実行プロセスの主要な段階を[TiDBパフォーマンスマップ](/media/performance-map.png)に示します。
 
-You can get the duration information using the following methods:
+次の方法を使用して、期間情報を取得できます。
 
-- [Slow log](/identify-slow-queries.md). It is recommended to view the slow log in [TiDB Dashboard](/dashboard/dashboard-overview.md).
-- [`EXPLAIN ANALYZE` statement](/sql-statements/sql-statement-explain-analyze.md).
+-   [遅いログ](/identify-slow-queries.md) 。 [TiDBダッシュボード](/dashboard/dashboard-overview.md)で遅いログインを表示することをお勧めします。
+-   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md) 。
 
-The methods above are different in the following aspects:
+上記の方法は、次の点で異なります。
 
-- The slow log records the duration of almost all stages of a SQL execution, from parsing to returning results, and is relatively comprehensive (you can query and analyze the slow log in TiDB Dashboard in an intuitive way).
-- By executing `EXPLAIN ANALYZE`, you can learn the time consumption of each operator in an actual SQL execution. The results have more detailed statistics of the execution duration.
+-   スローログは、解析から結果の返送まで、SQL実行のほぼすべての段階の期間を記録し、比較的包括的です（TiDBダッシュボードでスローログを直感的な方法でクエリおよび分析できます）。
+-   `EXPLAIN ANALYZE`を実行することにより、実際のSQL実行における各演算子の消費時間を知ることができます。結果には、実行期間のより詳細な統計が含まれます。
 
-In summary, the slow log and `EXPLAIN ANALYZE` statements help you determine the SQL query is slow in which component (TiDB or TiKV) at which stage of the execution. Therefore, you can accurately identify the performance bottleneck of the query.
+要約すると、slow logおよび`EXPLAIN ANALYZE`ステートメントは、実行のどの段階でどのコンポーネント（TiDBまたはTiKV）でSQLクエリが遅いかを判断するのに役立ちます。したがって、クエリのパフォーマンスのボトルネックを正確に特定できます。
 
-In addition, since v4.0.3, the `Plan` field in the slow log also includes the SQL execution information, which is the result of `EXPLAIN ANALYZE`. So you can find all information of SQL duration in the slow log.
+さらに、v4.0.3以降、低速ログの`Plan`フィールドには、 `EXPLAIN ANALYZE`の結果であるSQL実行情報も含まれています。したがって、SQL期間のすべての情報を低速ログで見つけることができます。
 
-## Analyze system issues
+## システムの問題を分析する {#analyze-system-issues}
 
-System issues can be divided into the following types according to different execution stages of a SQL statement:
+システムの問題は、SQLステートメントのさまざまな実行段階に応じて次のタイプに分類できます。
 
-1. TiKV is slow in data processing. For example, the TiKV coprocessor processes data slowly.
-2. TiDB is slow in execution. For example, a `Join` operator processes data slowly.
-3. Other key stages are slow. For example, getting the timestamp takes a long time.
+1.  TiKVはデータ処理が遅いです。たとえば、TiKVコプロセッサーはデータをゆっくりと処理します。
+2.  TiDBの実行は遅いです。たとえば、 `Join`人のオペレーターはデータをゆっくりと処理します。
+3.  他の重要な段階は遅いです。たとえば、タイムスタンプの取得には長い時間がかかります。
 
-For each slow query, first determine to which type the query belongs, and then analyze it in detail.
+遅いクエリごとに、最初にクエリが属するタイプを判別してから、詳細に分析します。
 
-### TiKV is slow in data processing
+### TiKVはデータ処理が遅い {#tikv-is-slow-in-data-processing}
 
-If TiKV is slow in data processing, you can easily identify it in the result of `EXPLAIN ANALYZE`. In the following example, `StreamAgg_8` and `TableFullScan_15`, two `tikv-task`s (as indicated by `cop[tikv]` in the `task` column), take `170ms` to execute. After subtracting `170ms`, the execution time of TiDB operators account for a very small proportion of the total execution time. This indicates that the bottleneck is in TiKV.
+TiKVのデータ処理が遅い場合は、 `EXPLAIN ANALYZE`の結果で簡単に識別できます。次の例では、 `StreamAgg_8`と`TableFullScan_15`つの`tikv-task` （ `task`列の`cop[tikv]`で示されている）は、実行に`170ms`を要します。 `170ms`を引いた後、TiDBオペレーターの実行時間は、合計実行時間のごくわずかな割合を占めます。これは、ボトルネックがTiKVにあることを示しています。
 
 ```sql
 +----------------------------+---------+---------+-----------+---------------+------------------------------------------------------------------------------+---------------------------------+-----------+------+
@@ -72,9 +72,9 @@ If TiKV is slow in data processing, you can easily identify it in the result of 
 +----------------------------+---------+---------+-----------+---------------+------------------------------------------------------------------------------+---------------------------------+-----------+------
 ```
 
-In addition, the `Cop_process` and `Cop_wait` fields in the slow log can also help your analysis. In the following example, the total duration of the query is around `180.85ms`, and the largest `coptask` takes `171ms`. This indicates that the bottleneck of this query is on the TiKV side.
+さらに、低速ログの`Cop_process`フィールドと`Cop_wait`フィールドも分析に役立ちます。次の例では、クエリの合計時間は約`180.85ms`で、最大の`coptask`は`171ms`になります。これは、このクエリのボトルネックがTiKV側にあることを示しています。
 
-For the description of each field in the slow log, see [fields description](/identify-slow-queries.md#fields-description).
+スローログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 ```log
 # Query_time: 0.18085
@@ -84,25 +84,25 @@ For the description of each field in the slow log, see [fields description](/ide
 # Cop_wait: Avg_time: 1ms P90_time: 1ms Max_time: 1ms Max_Addr: 10.6.131.78
 ```
 
-After identifying that TiKV is the bottleneck, you can find out the cause as described in the following sections.
+TiKVがボトルネックであることを確認したら、次のセクションで説明するように原因を特定できます。
 
-#### TiKV instance is busy
+#### TiKVインスタンスがビジーです {#tikv-instance-is-busy}
 
-During the execution of a SQL statement, TiDB might fetch data from multiple TiKV instances. If one TiKV instance responds slowly, the overall SQL execution speed is slowed down.
+SQLステートメントの実行中に、TiDBは複数のTiKVインスタンスからデータをフェッチする場合があります。 1つのTiKVインスタンスの応答が遅い場合、全体的なSQL実行速度が遅くなります。
 
-The `Cop_wait` field in the slow log can help you determine this cause.
+遅いログの`Cop_wait`フィールドは、この原因を特定するのに役立ちます。
 
 ```log
 # Cop_wait: Avg_time: 1ms P90_time: 2ms Max_time: 110ms Max_Addr: 10.6.131.78
 ```
 
-The log above shows that a `cop-task` sent to the `10.6.131.78` instance waits `110ms` before being executed. It indicates that this instance is busy. You can check the CPU monitoring of that time to confirm the cause.
+上記のログは、 `10.6.131.78`のインスタンスに送信された`cop-task`が実行される前に`110ms`を待機していることを示しています。このインスタンスがビジーであることを示します。その時のCPU監視で原因を確認できます。
 
-#### Too many outdated keys
+#### 古いキーが多すぎます {#too-many-outdated-keys}
 
-A TiKV instance has much outdated data, which needs to be cleaned up for data scan. This impacts the processing speed.
+TiKVインスタンスには多くの古いデータがあり、データスキャンのためにクリーンアップする必要があります。これは処理速度に影響します。
 
-Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV instance has too many keys of the older versions.
+`Total_keys`と`Processed_keys`を確認してください。それらが大きく異なる場合、TiKVインスタンスには古いバージョンのキーが多すぎます。
 
 ```
 ...
@@ -110,11 +110,11 @@ Check `Total_keys` and `Processed_keys`. If they are greatly different, the TiKV
 ...
 ```
 
-### Other key stages are slow
+### 他の重要な段階は遅い {#other-key-stages-are-slow}
 
-#### Slow in getting timestamps
+#### タイムスタンプの取得が遅い {#slow-in-getting-timestamps}
 
-You can compare `Wait_TS` and `Query_time` in the slow log. The timestamps are prefetched, so generally `Wait_TS` should be low.
+遅いログで`Wait_TS`と`Query_time`を比較できます。タイムスタンプはプリフェッチされるため、通常は`Wait_TS`を低くする必要があります。
 
 ```
 # Query_time: 0.0300000
@@ -122,18 +122,18 @@ You can compare `Wait_TS` and `Query_time` in the slow log. The timestamps are p
 # Wait_TS: 0.02500000
 ```
 
-#### Outdated Region information
+#### 時代遅れの地域情報 {#outdated-region-information}
 
-Region information on the TiDB side might be outdated. In this situation, TiKV might return the `regionMiss` error. Then TiDB gets the Region information from PD again, which is reflected in the `Cop_backoff` information. Both the failed times and the total duration are recorded.
+TiDB側のリージョン情報が古くなっている可能性があります。この状況では、TiKVが`regionMiss`エラーを返す場合があります。次に、TiDBはPDからリージョン情報を再度取得します。これは`Cop_backoff`の情報に反映されます。失敗した時間と合計期間の両方が記録されます。
 
 ```
 # Cop_backoff_regionMiss_total_times: 200 Cop_backoff_regionMiss_total_time: 0.2 Cop_backoff_regionMiss_max_time: 0.2 Cop_backoff_regionMiss_max_addr: 127.0.0.1 Cop_backoff_regionMiss_avg_time: 0.2 Cop_backoff_regionMiss_p90_time: 0.2
 # Cop_backoff_rpcPD_total_times: 200 Cop_backoff_rpcPD_total_time: 0.2 Cop_backoff_rpcPD_max_time: 0.2 Cop_backoff_rpcPD_max_addr: 127.0.0.1 Cop_backoff_rpcPD_avg_time: 0.2 Cop_backoff_rpcPD_p90_time: 0.2
 ```
 
-#### Subqueries are executed in advance
+#### サブクエリは事前に実行されます {#subqueries-are-executed-in-advance}
 
-For statements with non-correlated subqueries, the subquery part might be executed in advance. For example, in `select * from t1 where a = (select max(a) from t2)`, the `select max(a) from t2` part might be executed in advance in the optimization stage. The result of `EXPLAIN ANALYZE` does not show the duration of this type of subqueries.
+相関のないサブクエリを含むステートメントの場合、サブクエリ部分が事前に実行される場合があります。たとえば、 `select * from t1 where a = (select max(a) from t2)`では、最適化段階で`select max(a) from t2`の部分が事前に実行される場合があります。 `EXPLAIN ANALYZE`の結果は、このタイプのサブクエリの期間を示していません。
 
 ```sql
 mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t1, t t2 where t1.a=t2.a);
@@ -149,7 +149,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 5 rows in set (7.77 sec)
 ```
 
-But you can identify this type of subquery execution in the slow log:
+ただし、このタイプのサブクエリの実行は、遅いログで識別できます。
 
 ```
 # Query_time: 7.770634843
@@ -157,17 +157,17 @@ But you can identify this type of subquery execution in the slow log:
 # Rewrite_time: 7.765673663 Preproc_subqueries: 1 Preproc_subqueries_time: 7.765231874
 ```
 
-From log record above, you can see that a subquery is executed in advance and takes `7.76s`.
+上記のログレコードから、サブクエリが事前に実行され、 `7.76s`がかかることがわかります。
 
-### TiDB is slow in execution
+### TiDBの実行が遅い {#tidb-is-slow-in-execution}
 
-Assume that the execution plan in TiDB is correct but the execution is slow. To solve this type of issue, you can adjust parameters or use the hint according to the result of `EXPLAIN ANALYZE` for the SQL statement.
+TiDBの実行プランは正しいが、実行が遅いと仮定します。このタイプの問題を解決するには、SQLステートメントの`EXPLAIN ANALYZE`の結果に応じて、パラメーターを調整するか、ヒントを使用できます。
 
-If the execution plan is incorrect, see the [Analyze optimizer issues](#analyze-optimizer-issues) section.
+実行計画が正しくない場合は、 [オプティマイザの問題を分析する](#analyze-optimizer-issues)セクションを参照してください。
 
-#### Low concurrency
+#### 同時実行性が低い {#low-concurrency}
 
-If the bottleneck is in the operator with concurrency, speed up the execution by adjusting the concurrency. For example:
+同時実行性のある演算子にボトルネックがある場合は、同時実行性を調整して実行を高速化します。例えば：
 
 ```sql
 mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
@@ -187,13 +187,13 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 9 rows in set (9.67 sec)
 ```
 
-As shown above, `HashJoin_14` and `Projection_24` consume much of the execution time. Consider increasing their concurrency using SQL variables to speed up execution.
+上に示したように、 `HashJoin_14`と`Projection_24`は実行時間の多くを消費します。実行を高速化するために、SQL変数を使用して同時実行性を高めることを検討してください。
 
-All system variables are documented in [system-variables](/system-variables.md). To increase the concurrency of `HashJoin_14`, you can modify the `tidb_hash_join_concurrency` system variable.
+すべてのシステム変数は[システム変数](/system-variables.md)で文書化されています。 `HashJoin_14`の並行性を高めるために、 `tidb_hash_join_concurrency`システム変数を変更できます。
 
-#### Data is spilled to disk
+#### データがディスクに流出する {#data-is-spilled-to-disk}
 
-Another cause of slow execution is disk spill that occurs during execution if the memory limit is reached. You can find out this cause in the execution plan and the slow log:
+実行速度が低下するもう1つの原因は、メモリ制限に達した場合に実行中に発生するディスクスピルです。この原因は、実行プランと遅いログで確認できます。
 
 ```sql
 +-------------------------+-----------+---------+-----------+---------------+------------------------------+----------------------+-----------------------+----------------+
@@ -211,11 +211,11 @@ Another cause of slow execution is disk spill that occurs during execution if th
 ...
 ```
 
-#### Join operations with Cartesian product
+#### デカルト積で操作に参加する {#join-operations-with-cartesian-product}
 
-Join operations with Cartesian product generate data volume as large as `left child row count * right child row count`. This is inefficient and should be avoided.
+デカルト積を使用した結合操作により、最大`left child row count * right child row count`のデータ量が生成されます。これは非効率的であり、避ける必要があります。
 
-This type of join operations is marked `CARTESIAN` in the execution plan. For example:
+このタイプの結合操作は、実行プランで`CARTESIAN`とマークされています。例えば：
 
 ```sql
 mysql> explain select * from t t1, t t2 where t1.a>t2.a;
@@ -232,24 +232,24 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 +------------------------------+-------------+-----------+---------------+---------------------------------------------------------+
 ```
 
-## Analyze optimizer issues
+## オプティマイザの問題を分析する {#analyze-optimizer-issues}
 
-To analyze optimizer issues, you need to determine whether the execution plan is reasonable or not. You need to have some understanding of the optimization process and each operator.
+オプティマイザの問題を分析するには、実行プランが妥当かどうかを判断する必要があります。最適化プロセスと各演算子についてある程度理解している必要があります。
 
-For the following examples, assume that the table schema is `create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`.
+次の例では、テーブルスキーマが`create table t (id int, a int, b int, c int, primary key(id), key(a), key(b, c))`であると想定しています。
 
-1. `select * from t`: There is no filter condition and a full table scan is performed. So the `TableFullScan` operator is used to read data.
-2. `select a from t where a=2`: There is a filter condition and only the index columns are read, so the `IndexReader` operator is used to read data.
-3. `select * from t where a=2`: There is a filter condition for `a` but the `a` index cannot fully cover the data to be read, so the `IndexLookup` operator is used.
-4. `select b from t where c=3`: Without the prefix condition, the multi-column index cannot be used. So the `IndexFullScan` is used.
-5. ...
+1.  `select * from t` ：フィルター条件はなく、全表スキャンが実行されます。したがって、 `TableFullScan`演算子はデータの読み取りに使用されます。
+2.  `select a from t where a=2` ：フィルター条件があり、インデックス列のみが読み取られるため、 `IndexReader`演算子を使用してデータを読み取ります。
+3.  `select * from t where a=2` ： `a`のフィルター条件がありますが、 `a`インデックスは読み取るデータを完全にカバーできないため、 `IndexLookup`演算子が使用されます。
+4.  `select b from t where c=3` ：プレフィックス条件がないと、複数列のインデックスは使用できません。したがって、 `IndexFullScan`が使用されます。
+5.  ..。
 
-The examples above are operators used for data reads. For more operators, see [Understand TiDB Execution Plan](/explain-overview.md).
+上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [TiDB実行計画を理解する](/explain-overview.md)を参照してください。
 
-In addition, reading [SQL Tuning Overview](/sql-tuning-overview.md) helps you better understand the TiDB optimizer and determine whether the execution plan is reasonable or not.
+さらに、 [SQLチューニングの概要](/sql-tuning-overview.md)を読むと、TiDBオプティマイザーをよりよく理解し、実行プランが妥当かどうかを判断するのに役立ちます。
 
-Most optimizer issues are explained in [SQL Tuning Overview](/sql-tuning-overview.md). For the solutions, see the following documents:
+ほとんどのオプティマイザの問題は[SQLチューニングの概要](/sql-tuning-overview.md)で説明されています。解決策については、次のドキュメントを参照してください。
 
-1. [Wrong Index Solution](/wrong-index-solution.md)
-2. [Wrong join order](/join-reorder.md)
-3. [Expressions are not pushed down](/blocklist-control-plan.md)
+1.  [インデックス問題の解決方法](/wrong-index-solution.md)
+2.  [間違った参加順序](/join-reorder.md)
+3.  [式はプッシュダウンされません](/blocklist-control-plan.md)

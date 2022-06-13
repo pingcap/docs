@@ -3,11 +3,11 @@ title: SCHEMATA
 summary: Learn the `SCHEMATA` information_schema table.
 ---
 
-# SCHEMATA
+# スキーマ {#schemata}
 
-The `SCHEMATA` table provides information about databases. The table data is equivalent to the result of the `SHOW DATABASES` statement.
+`SCHEMATA`の表は、データベースに関する情報を提供します。テーブルデータは、 `SHOW DATABASES`ステートメントの結果と同等です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -27,7 +27,7 @@ desc SCHEMATA;
 5 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM SCHEMATA;
@@ -46,10 +46,10 @@ SELECT * FROM SCHEMATA;
 5 rows in set (0.00 sec)
 ```
 
-Fields in the `SCHEMATA` table are described as follows:
+`SCHEMATA`表のフィールドは次のように説明されています。
 
-* `CATALOG_NAME`: The catalog to which the database belongs.
-* `SCHEMA_NAME`: The database name.
-* `DEFAULT_CHARACTER_SET_NAME`: The default character set of the database.
-* `DEFAULT_COLLATION_NAME`: The default collation of the database.
-* `SQL_PATH`: The value of this item is always `NULL`.
+-   `CATALOG_NAME` ：データベースが属するカタログ。
+-   `SCHEMA_NAME` ：データベース名。
+-   `DEFAULT_CHARACTER_SET_NAME` ：データベースのデフォルトの文字セット。
+-   `DEFAULT_COLLATION_NAME` ：データベースのデフォルトの照合順序。
+-   `SQL_PATH` ：このアイテムの値は常に`NULL`です。

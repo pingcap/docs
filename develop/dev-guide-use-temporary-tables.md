@@ -3,15 +3,15 @@ title: Temporary Tables
 summary: Learn how to create, view, query, and delete temporary tables.
 ---
 
-# Temporary Tables
+# 一時テーブル {#temporary-tables}
 
-Temporary tables can be thought of as a technique for reusing query results.
+一時テーブルは、クエリ結果を再利用するための手法と考えることができます。
 
-If you want to know something about the eldest authors in the [Bookshop](/develop/dev-guide-bookshop-schema-design.md) application, you might write multiple queries that use the list of eldest authors.
+[書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションの最年長の著者について何か知りたい場合は、最年長の著者のリストを使用する複数のクエリを作成できます。
 
-For example, you can use the following statement to get the top 50 eldest authors from the `authors` table:
+たとえば、次のステートメントを使用して、 `authors`のテーブルから上位50人の最年長の著者を取得できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT a.id, a.name, (IFNULL(a.death_year, YEAR(NOW())) - a.birth_year) AS age
@@ -20,7 +20,7 @@ ORDER BY age DESC
 LIMIT 50;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 +------------+---------------------+------+
@@ -39,29 +39,29 @@ The result is as follows:
 50 rows in set (0.01 sec)
 ```
 
-For the convenience of subsequent queries, you need to cache the result of this query. When using general tables for storage, you should pay attention to how to avoid the table name duplication problem between different sessions, and the need of cleaning up intermediate results in time, as these tables might not be used after a batch query.
+後続のクエリの便宜のために、このクエリの結果をキャッシュする必要があります。ストレージに一般テーブルを使用する場合、これらのテーブルはバッチクエリの後で使用されない可能性があるため、異なるセッション間でのテーブル名の重複の問題を回避する方法と、中間結果を時間内にクリーンアップする必要があることに注意する必要があります。
 
-## Create a temporary table
+## 一時テーブルを作成する {#create-a-temporary-table}
 
-To cache intermediate results, the temporary tables feature is introduced in TiDB v5.3.0. TiDB automatically drops a local temporary table after a session ends, which frees you from worrying about the management trouble caused by increasing intermediate results.
+中間結果をキャッシュするために、一時テーブル機能がTiDBv5.3.0に導入されました。 TiDBは、セッションの終了後にローカルの一時テーブルを自動的に削除します。これにより、中間結果の増加によって引き起こされる管理上の問題について心配する必要がなくなります。
 
-### Types of temporary tables
+### 一時テーブルの種類 {#types-of-temporary-tables}
 
-Temporary tables in TiDB are divided into two types: local temporary tables and global temporary tables.
+TiDBの一時テーブルは、ローカル一時テーブルとグローバル一時テーブルの2つのタイプに分けられます。
 
-- For a local temporary table, the table definition and data in the table are visible only to the current session. This type is suitable for temporarily storing intermediate data in the session.
-- For a global temporary table, the table definition is visible to the entire TiDB cluster, and the data in the table is visible only to the current transaction. This type is suitable for temporarily storing intermediate data in a transaction.
+-   ローカル一時テーブルの場合、テーブル定義とテーブル内のデータは、現在のセッションにのみ表示されます。このタイプは、セッションに中間データを一時的に保存するのに適しています。
+-   グローバル一時テーブルの場合、テーブル定義はTiDBクラスタ全体に表示され、テーブル内のデータは現在のトランザクションにのみ表示されます。このタイプは、トランザクションで中間データを一時的に保存するのに適しています。
 
-### Create a local temporary table
+### ローカル一時テーブルを作成する {#create-a-local-temporary-table}
 
-Before creating a local temporary table, you need to add `CREATE TEMPORARY TABLES` permission to the current database user.
+ローカル一時テーブルを作成する前に、現在のデータベースユーザーに`CREATE TEMPORARY TABLES`の権限を追加する必要があります。
 
 <SimpleTab>
 <div label="SQL" href="local-sql">
 
-You can create a temporary table using the `CREATE TEMPORARY TABLE <table_name>` statement. The default type is a local temporary table, which is visible only to the current session.
+`CREATE TEMPORARY TABLE <table_name>`ステートメントを使用して一時テーブルを作成できます。デフォルトのタイプはローカル一時テーブルで、現在のセッションにのみ表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TEMPORARY TABLE top_50_eldest_authors (
@@ -72,9 +72,9 @@ CREATE TEMPORARY TABLE top_50_eldest_authors (
 );
 ```
 
-After creating the temporary table, you can use the `INSERT INTO table_name SELECT ...` statement to insert the results of the above query into the temporary table you just created.
+一時テーブルを作成したら、 `INSERT INTO table_name SELECT ...`ステートメントを使用して、上記のクエリの結果を作成した一時テーブルに挿入できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO top_50_eldest_authors
@@ -84,7 +84,7 @@ ORDER BY age DESC
 LIMIT 50;
 ```
 
-The result is as follows:
+結果は次のとおりです。
 
 ```
 Query OK, 50 rows affected (0.03 sec)
@@ -94,7 +94,7 @@ Records: 50  Duplicates: 0  Warnings: 0
 </div>
 <div label="Java" href="local-java">
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public List<Author> getTop50EldestAuthorInfo() throws SQLException {
@@ -136,14 +136,14 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-### Create a global temporary table
+### グローバル一時テーブルを作成する {#create-a-global-temporary-table}
 
 <SimpleTab>
 <div label="SQL" href="global-sql">
 
-To create a global temporary table, you can add the `GLOBAL` keyword and end with `ON COMMIT DELETE ROWS`, which means the table will be deleted after the current transaction ends.
+グローバル一時テーブルを作成するには、 `GLOBAL`キーワードを追加し、 `ON COMMIT DELETE ROWS`で終了します。これは、現在のトランザクションが終了した後にテーブルが削除されることを意味します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
@@ -154,14 +154,14 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 ) ON COMMIT DELETE ROWS;
 ```
 
-When inserting data to global temporary tables, you must explicitly declare the start of the transaction via `BEGIN`. Otherwise, the data will be cleared after the `INSERT INTO` statement is executed. Because in the Auto Commit mode, the transaction is automatically committed after the `INSERT INTO` statement is executed, and the global temporary table is cleared when the transaction ends.
+グローバル一時テーブルにデータを挿入するときは、 `BEGIN`を介してトランザクションの開始を明示的に宣言する必要があります。それ以外の場合は、 `INSERT INTO`ステートメントの実行後にデータがクリアされます。自動コミットモードでは、 `INSERT INTO`ステートメントの実行後にトランザクションが自動的にコミットされ、トランザクションが終了するとグローバル一時テーブルがクリアされるためです。
 
 </div>
 <div label="Java" href="global-java">
 
-When using global temporary tables, you need to turn off Auto Commit mode first. In Java, you can do this with the `conn.setAutoCommit(false);` statement, and you can commit the transaction explicitly with `conn.commit();`. The data added to the global temporary table during the transaction will be cleared after the transaction is committed or canceled.
+グローバル一時テーブルを使用する場合は、最初に自動コミットモードをオフにする必要があります。 Javaでは、これは`conn.setAutoCommit(false);`ステートメントで実行でき、トランザクションは`conn.commit();`で明示的にコミットできます。トランザクション中にグローバル一時テーブルに追加されたデータは、トランザクションがコミットまたはキャンセルされた後にクリアされます。
 
-{{< copyable "java" >}}
+{{< copyable "" >}}
 
 ```java
 public List<Author> getTop50EldestAuthorInfo() throws SQLException {
@@ -206,11 +206,11 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-## View temporary tables
+## 一時テーブルを表示する {#view-temporary-tables}
 
-With the `SHOW [FULL] TABLES` statement, you can view a list of existing global temporary tables, but you cannot see any local temporary tables in the list. For now, TiDB does not have a similar `information_schema.INNODB_TEMP_TABLE_INFO` system table for storing temporary table information.
+`SHOW [FULL] TABLES`ステートメントを使用すると、既存のグローバル一時テーブルのリストを表示できますが、リストにローカル一時テーブルを表示することはできません。現在のところ、TiDBには、一時テーブル情報を格納するための同様の`information_schema.INNODB_TEMP_TABLE_INFO`システムテーブルがありません。
 
-For example, you can see the global temporary table `top_50_eldest_authors_global` in the table list, but not the `top_50_eldest_authors` table.
+たとえば、グローバル一時テーブル`top_50_eldest_authors_global`はテーブルリストに表示されますが、 `top_50_eldest_authors`テーブルは表示されません。
 
 ```
 +-------------------------------+------------+
@@ -227,19 +227,19 @@ For example, you can see the global temporary table `top_50_eldest_authors_globa
 9 rows in set (0.00 sec)
 ```
 
-## Query a temporary table
+## 一時テーブルをクエリする {#query-a-temporary-table}
 
-Once the temporary table is ready, you can query it as a normal data table:
+一時テーブルの準備ができたら、通常のデータテーブルとしてクエリを実行できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM top_50_eldest_authors;
 ```
 
-You can reference data from temporary tables to your query via [Multi-table join queries](/develop/dev-guide-join-tables.md):
+[マルチテーブル結合クエリ](/develop/dev-guide-join-tables.md)を介して、一時テーブルからクエリにデータを参照できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT ANY_VALUE(ta.id) AS author_id, ANY_VALUE(ta.age), ANY_VALUE(ta.name), COUNT(*) AS books
@@ -248,32 +248,32 @@ LEFT JOIN book_authors ba ON ta.id = ba.author_id
 GROUP BY ta.id;
 ```
 
-Different from [view](/develop/dev-guide-use-views.md), querying a temporary table gets data directly from the temporary table instead of executing the original query used in the data insert. In some cases, this can improve the query performance.
+[見る](/develop/dev-guide-use-views.md)とは異なり、一時テーブルをクエリすると、データ挿入で使用された元のクエリを実行する代わりに、一時テーブルから直接データが取得されます。場合によっては、これによりクエリのパフォーマンスが向上することがあります。
 
-## Drop a temporary table
+## 一時テーブルを削除します {#drop-a-temporary-table}
 
-A local temporary table in a session is automatically dropped after the **session** ends, along with both data and table schema. A global temporary table in a transaction is automatically cleared at the end of the **transaction**, but the table schema remains and needs to be deleted manually.
+セッション内のローカル一時テーブルは、データとテーブルスキーマの両方とともに、**セッション**の終了後に自動的に削除されます。トランザクション内のグローバル一時テーブルは、<strong>トランザクション</strong>の終了時に自動的にクリアされますが、テーブルスキーマは残り、手動で削除する必要があります。
 
-To manually drop local temporary tables, use the `DROP TABLE` or `DROP TEMPORARY TABLE` syntax. For example:
+ローカル一時テーブルを手動で削除するには、 `DROP TABLE`または`DROP TEMPORARY TABLE`構文を使用します。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP TEMPORARY TABLE top_50_eldest_authors;
 ```
 
-To manually drop global temporary tables, use the `DROP TABLE` or `DROP GLOBAL TEMPORARY TABLE` syntax. For example:
+グローバル一時テーブルを手動で削除するには、 `DROP TABLE`または`DROP GLOBAL TEMPORARY TABLE`構文を使用します。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 DROP GLOBAL TEMPORARY TABLE top_50_eldest_authors_global;
 ```
 
-## Limitation
+## 制限 {#limitation}
 
-For limitations of temporary tables in TiDB, see [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
+TiDBの一時テーブルの制限については、 [他のTiDB機能との互換性の制限](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features)を参照してください。
 
-## Read more
+## 続きを読む {#read-more}
 
-- [Temporary Tables](/temporary-tables.md)
+-   [一時テーブル](/temporary-tables.md)

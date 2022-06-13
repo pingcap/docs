@@ -3,17 +3,17 @@ title: Character Set and Collation
 summary: Learn about the supported character sets and collations in TiDB.
 ---
 
-# Character Set and Collation
+# 文字セットと照合 {#character-set-and-collation}
 
-This document introduces the character sets and collations supported by TiDB.
+このドキュメントでは、TiDBでサポートされている文字セットと照合を紹介します。
 
-## Concepts
+## コンセプト {#concepts}
 
-A character set is a set of symbols and encodings. The default character set in TiDB is utf8mb4, which matches the default in MySQL 8.0 and above.
+文字セットは、記号とエンコーディングのセットです。 TiDBのデフォルトの文字セットはutf8mb4で、MySQL8.0以降のデフォルトと一致します。
 
-A collation is a set of rules for comparing characters in a character set, and the sorting order of characters. For example in a binary collation `A` and `a` do not compare as equal:
+照合順序は、文字セット内の文字を比較するための一連のルール、および文字の並べ替え順序です。たとえば、バイナリ照合順序では、 `A`と`a`は等しいと比較されません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET NAMES utf8mb4 COLLATE utf8mb4_bin;
@@ -43,13 +43,13 @@ mysql> SELECT 'A' = 'a';
 1 row in set (0.00 sec)
 ```
 
-TiDB defaults to using a binary collation. This differs from MySQL, which uses a case-insensitive collation by default.
+TiDBは、デフォルトでバイナリ照合順序を使用します。これは、デフォルトで大文字と小文字を区別しない照合順序を使用するMySQLとは異なります。
 
-## Character sets and collations supported by TiDB
+## TiDBでサポートされている文字セットと照合 {#character-sets-and-collations-supported-by-tidb}
 
-Currently, TiDB supports the following character sets:
+現在、TiDBは次の文字セットをサポートしています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CHARACTER SET;
@@ -69,7 +69,7 @@ SHOW CHARACTER SET;
 6 rows in set (0.00 sec)
 ```
 
-TiDB supports the following collations:
+TiDBは、次の照合をサポートしています。
 
 ```sql
 mysql> show collation;
@@ -86,17 +86,17 @@ mysql> show collation;
 6 rows in set (0.00 sec)
 ```
 
-> **Warning:**
+> **警告：**
 >
-> TiDB incorrectly treats latin1 as a subset of utf8. This can lead to unexpected behaviors when you store characters that differ between latin1 and utf8 encodings. It is strongly recommended to the utf8mb4 character set. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
+> TiDBは、latin1をutf8のサブセットとして誤って扱います。これにより、latin1エンコーディングとutf8エンコーディングで異なる文字を格納するときに予期しない動作が発生する可能性があります。 utf8mb4文字セットに強くお勧めします。詳細については、 [TiDB＃18955](https://github.com/pingcap/tidb/issues/18955)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> The default collations in TiDB (binary collations, with the suffix `_bin`) are different than [the default collations in MySQL](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) (typically general collations, with the suffix `_general_ci`). This can cause incompatible behavior when specifying an explicit character set but relying on the implicit default collation to be chosen.
+> TiDBのデフォルトの照合（接尾辞`_bin`のバイナリ照合）は[MySQLのデフォルトの照合](https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html) （通常は接尾辞`_general_ci`の一般的な照合）とは異なります。これにより、明示的な文字セットを指定しているが、選択される暗黙的なデフォルトの照合順序に依存している場合に、互換性のない動作が発生する可能性があります。
 
-You can use the following statement to view the collations (under the [new framework for collations](#new-framework-for-collations)) that corresponds to the character set.
+次のステートメントを使用して、文字セットに対応する照合（ [照合のための新しいフレームワーク](#new-framework-for-collations)の下）を表示できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW COLLATION WHERE Charset = 'utf8mb4';
@@ -113,15 +113,15 @@ SHOW COLLATION WHERE Charset = 'utf8mb4';
 3 rows in set (0.00 sec)
 ```
 
-For details about the TiDB support of the GBK character set, see [GBK](/character-set-gbk.md).
+GBK文字セットのTiDBサポートの詳細については、 [GBK](/character-set-gbk.md)を参照してください。
 
-## `utf8` and `utf8mb4` in TiDB
+## <code>utf8mb4</code>の<code>utf8</code>とutf8mb4 {#code-utf8-code-and-code-utf8mb4-code-in-tidb}
 
-In MySQL, the character set `utf8` is limited to a maximum of three bytes. This is sufficient to store characters in the Basic Multilingual Plane (BMP), but not enough to store characters such as emojis. For this, it is recommended to use the character set `utf8mb4` instead.
+MySQLでは、文字セット`utf8`は最大3バイトに制限されています。これは、Basic Multilingual Plane（BMP）に文字を格納するには十分ですが、絵文字などの文字を格納するには十分ではありません。このため、代わりに文字セット`utf8mb4`を使用することをお勧めします。
 
-By default, TiDB provides the same 3-byte limit on `utf8` to ensure that data created in TiDB can still safely be restored in MySQL. This can be disabled by changing the value of `check-mb4-value-in-utf8` to `FALSE` in your TiDB configuration file.
+デフォルトでは、TiDBで作成されたデータをMySQLで安全に復元できるように、TiDBは`utf8`に同じ3バイトの制限を提供します。これは、TiDB構成ファイルの値を`check-mb4-value-in-utf8`から`FALSE`に変更することで無効にできます。
 
-The following demonstrates the default behavior when inserting a 4-byte emoji character into a table. The `INSERT` statement fails for the `utf8` character set, but succeeds for `utf8mb4`:
+以下は、4バイトの絵文字をテーブルに挿入するときのデフォルトの動作を示しています。 `INSERT`ステートメントは`utf8`文字セットでは失敗しますが、 `utf8mb4`では成功します。
 
 ```sql
 mysql> CREATE TABLE utf8_test (
@@ -151,13 +151,13 @@ mysql> SELECT char_length(c), length(c), c FROM utf8m4_test;
 1 row in set (0.00 sec)
 ```
 
-## Character set and collation in different layers
+## 異なるレイヤーでの文字セットと照合順序 {#character-set-and-collation-in-different-layers}
 
-The character set and collation can be set at different layers.
+文字セットと照合順序は、異なるレイヤーで設定できます。
 
-### Database character set and collation
+### データベースの文字セットと照合順序 {#database-character-set-and-collation}
 
-Each database has a character set and a collation. You can use the following statements to specify the database character set and collation:
+各データベースには、文字セットと照合順序があります。次のステートメントを使用して、データベースの文字セットと照合順序を指定できます。
 
 ```sql
 CREATE DATABASE db_name
@@ -169,11 +169,11 @@ ALTER DATABASE db_name
     [[DEFAULT] COLLATE collation_name]
 ```
 
-`DATABASE` can be replaced with `SCHEMA` here.
+ここでは、 `DATABASE`を`SCHEMA`に置き換えることができます。
 
-Different databases can use different character sets and collations. Use the `character_set_database` and `collation_database` to see the character set and collation of the current database:
+異なるデータベースは、異なる文字セットと照合を使用できます。 `character_set_database`と`collation_database`を使用して、現在のデータベースの文字セットと照合順序を確認します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -183,7 +183,7 @@ CREATE SCHEMA test1 CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE test1;
@@ -193,7 +193,7 @@ USE test1;
 Database changed
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT @@character_set_database, @@collation_database;
@@ -208,7 +208,7 @@ SELECT @@character_set_database, @@collation_database;
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
@@ -218,7 +218,7 @@ CREATE SCHEMA test2 CHARACTER SET latin1 COLLATE latin1_bin;
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE test2;
@@ -228,7 +228,7 @@ USE test2;
 Database changed
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT @@character_set_database, @@collation_database;
@@ -243,18 +243,18 @@ SELECT @@character_set_database, @@collation_database;
 1 row in set (0.00 sec)
 ```
 
-You can also see the two values in `INFORMATION_SCHEMA`:
+`INFORMATION_SCHEMA`の2つの値も確認できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT DEFAULT_CHARACTER_SET_NAME, DEFAULT_COLLATION_NAME
 FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'db_name';
 ```
 
-### Table character set and collation
+### テーブルの文字セットと照合順序 {#table-character-set-and-collation}
 
-You can use the following statement to specify the character set and collation for tables:
+次のステートメントを使用して、テーブルの文字セットと照合順序を指定できます。
 
 ```sql
 CREATE TABLE tbl_name (column_list)
@@ -266,9 +266,9 @@ ALTER TABLE tbl_name
     [COLLATE collation_name]
 ```
 
-For example:
+例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
@@ -278,11 +278,11 @@ CREATE TABLE t1(a int) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-If the table character set and collation are not specified, the database character set and collation are used as their default values.
+テーブルの文字セットと照合順序が指定されていない場合、データベースの文字セットと照合順序がデフォルト値として使用されます。
 
-### Column character set and collation
+### 列の文字セットと照合順序 {#column-character-set-and-collation}
 
-You can use the following statement to specify the character set and collation for columns:
+次のステートメントを使用して、列の文字セットと照合順序を指定できます。
 
 ```sql
 col_name {CHAR | VARCHAR | TEXT} (col_length)
@@ -294,21 +294,21 @@ col_name {ENUM | SET} (val_list)
     [COLLATE collation_name]
 ```
 
-If the column character set and collation are not specified, the table character set and collation are used as their default values.
+列の文字セットと照合順序が指定されていない場合は、テーブルの文字セットと照合順序がデフォルト値として使用されます。
 
-### String character sets and collation
+### 文字列文字セットと照合順序 {#string-character-sets-and-collation}
 
-Each string corresponds to a character set and a collation. When you use a string, this option is available:
+各文字列は、文字セットと照合順序に対応しています。文字列を使用する場合、次のオプションを使用できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 [_charset_name]'string' [COLLATE collation_name]
 ```
 
-Example:
+例：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT 'string';
@@ -316,29 +316,29 @@ SELECT _utf8mb4'string';
 SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 ```
 
-Rules:
+ルール：
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then the `charset_name` character set and the `collation_name` collation are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` but do not specify `COLLATE collation_name`, the `charset_name` character set and the default collation of `charset_name` are used.
-+ Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation given by the system variables `character_set_connection` and `collation_connection` are used.
+-   ルール1： `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
+-   ルール2： `CHARACTER SET charset_name`を指定し、 `COLLATE collation_name`を指定しない場合、 `charset_name`文字セットとデフォルトの`charset_name`の照合順序が使用されます。
+-   ルール3： `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合、システム変数`character_set_connection`と`collation_connection`によって指定された文字セットと照合順序が使用されます。
 
-### Client connection character set and collation
+### クライアント接続の文字セットと照合順序 {#client-connection-character-set-and-collation}
 
-+ The server character set and collation are the values of the `character_set_server` and `collation_server` system variables.
+-   サーバーの文字セットと照合順序は、 `character_set_server`と`collation_server`のシステム変数の値です。
 
-+ The character set and collation of the default database are the values of the `character_set_database` and `collation_database` system variables.
+-   デフォルトデータベースの文字セットと照合順序は、 `character_set_database`と`collation_database`のシステム変数の値です。
 
-You can use `character_set_connection` and `collation_connection` to specify the character set and collation for each connection. The `character_set_client` variable is to set the client character set.
+`character_set_connection`と`collation_connection`を使用して、各接続の文字セットと照合順序を指定できます。 `character_set_client`変数は、クライアントの文字セットを設定するためのものです。
 
-Before returning the result, the `character_set_results` system variable indicates the character set in which the server returns query results to the client, including the metadata of the result.
+結果を返す前に、 `character_set_results`システム変数は、サーバーが結果のメタデータを含むクエリ結果をクライアントに返す文字セットを示します。
 
-You can use the following statement to set the character set and collation that is related to the client:
+次のステートメントを使用して、クライアントに関連する文字セットと照合順序を設定できます。
 
-+ `SET NAMES 'charset_name' [COLLATE 'collation_name']`
+-   `SET NAMES 'charset_name' [COLLATE 'collation_name']`
 
-    `SET NAMES` indicates what character set the client will use to send SQL statements to the server. `SET NAMES utf8mb4` indicates that all the requests from the client use utf8mb4, as well as the results from the server.
+    `SET NAMES`は、クライアントがSQLステートメントをサーバーに送信するために使用する文字セットを示します。 `SET NAMES utf8mb4`は、クライアントからのすべての要求がutf8mb4を使用し、サーバーからの結果も使用することを示します。
 
-    The `SET NAMES 'charset_name'` statement is equivalent to the following statement combination:
+    `SET NAMES 'charset_name'`ステートメントは、次のステートメントの組み合わせと同等です。
 
     ```sql
     SET character_set_client = charset_name;
@@ -346,11 +346,11 @@ You can use the following statement to set the character set and collation that 
     SET character_set_connection = charset_name;
     ```
 
-    `COLLATE` is optional, if absent, the default collation of the `charset_name` is used to set the `collation_connection`.
+    `COLLATE`はオプションです。存在しない場合は、デフォルトの`charset_name`の照合順序を使用して`collation_connection`を設定します。
 
-+ `SET CHARACTER SET 'charset_name'`
+-   `SET CHARACTER SET 'charset_name'`
 
-    Similar to `SET NAMES`, the `SET NAMES 'charset_name'` statement is equivalent to the following statement combination:
+    `SET NAMES`と同様に、 `SET NAMES 'charset_name'`ステートメントは次のステートメントの組み合わせと同等です。
 
     ```sql
     SET character_set_client = charset_name;
@@ -359,35 +359,35 @@ You can use the following statement to set the character set and collation that 
     SET collation_connection = @@collation_database;
     ```
 
-## Selection priorities of character sets and collations
+## 文字セットと照合の選択の優先順位 {#selection-priorities-of-character-sets-and-collations}
 
-String > Column > Table > Database > Server
+文字列&gt;列&gt;テーブル&gt;データベース&gt;サーバー
 
-## General rules on selecting character sets and collation
+## 文字セットと照合順序の選択に関する一般的な規則 {#general-rules-on-selecting-character-sets-and-collation}
 
-+ Rule 1: If you specify `CHARACTER SET charset_name` and `COLLATE collation_name`, then the `charset_name` character set and the `collation_name` collation are used directly.
-+ Rule 2: If you specify `CHARACTER SET charset_name` and do not specify `COLLATE collation_name`, then the `charset_name` character set and the default collation of `charset_name` are used.
-+ Rule 3: If you specify neither `CHARACTER SET charset_name` nor `COLLATE collation_name`, the character set and collation with higher optimization levels are used.
+-   ルール1： `CHARACTER SET charset_name`と`COLLATE collation_name`を指定すると、 `charset_name`文字セットと`collation_name`照合順序が直接使用されます。
+-   ルール2： `CHARACTER SET charset_name`を指定し、 `COLLATE collation_name`を指定しない場合、 `charset_name`文字セットとデフォルトの`charset_name`の照合順序が使用されます。
+-   ルール3： `CHARACTER SET charset_name`も`COLLATE collation_name`も指定しない場合、より高い最適化レベルの文字セットと照合順序が使用されます。
 
-## Validity check of characters
+## 文字の妥当性チェック {#validity-check-of-characters}
 
-If the specified character set is `utf8` or `utf8mb4`, TiDB only supports the valid `utf8` characters. For invalid characters, TiDB reports the `incorrect utf8 value` error. This validity check of characters in TiDB is compatible with MySQL 8.0 but incompatible with MySQL 5.7 or earlier versions.
+指定された文字セットが`utf8`または`utf8mb4`の場合、TiDBは有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDBは`incorrect utf8 value`エラーを報告します。このTiDBの文字の有効性チェックは、MySQL 8.0と互換性がありますが、MySQL5.7以前のバージョンとは互換性がありません。
 
-To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the character check.
+このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`を使用して文字チェックをスキップします。
 
-## Collation support framework
+## 照合サポートフレームワーク {#collation-support-framework}
 
-The syntax support and semantic support for the collation are influenced by the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter indicates that TiDB can correctly use collations when comparing strings.
+照合順序の構文サポートとセマンティックサポートは、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)の構成項目の影響を受けます。構文サポートとセマンティックサポートは異なります。前者は、TiDBが照合を解析および設定できることを示しています。後者は、文字列を比較するときにTiDBが照合を正しく使用できることを示しています。
 
-Before v4.0, TiDB provides only the [old framework for collations](#old-framework-for-collations). In this framework, TiDB supports syntactically parsing most of the MySQL collations but semantically takes all collations as binary collations.
+v4.0より前では、TiDBは[照合のための古いフレームワーク](#old-framework-for-collations)のみを提供します。このフレームワークでは、TiDBはほとんどのMySQL照合を構文解析的にサポートしますが、意味的にはすべての照合をバイナリ照合として受け取ります。
 
-Since v4.0, TiDB supports a [new framework for collations](#new-framework-for-collations). In this framework, TiDB semantically parses different collations and strictly follows the collations when comparing strings.
+v4.0以降、TiDBは[照合のための新しいフレームワーク](#new-framework-for-collations)をサポートします。このフレームワークでは、TiDBはさまざまな照合を意味的に解析し、文字列を比較するときに照合を厳密に追跡します。
 
-### Old framework for collations
+### 照合のための古いフレームワーク {#old-framework-for-collations}
 
-Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB deletes the space at the end of the character according to the `PADDING` attribute of the collation before comparing characters, which causes the following behavior differences:
+v4.0より前では、TiDBでほとんどのMySQL照合を指定でき、これらの照合はデフォルトの照合に従って処理されます。つまり、バイト順序によって文字の順序が決まります。 MySQLとは異なり、TiDBは、文字を比較する前に、照合順序の`PADDING`属性に従って文字の末尾のスペースを削除します。これにより、次の動作の違いが発生します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
@@ -400,11 +400,11 @@ INSERT INTO t1 VALUES ('a ');
 Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, because comparison is performed after the spaces are filled in, the `Duplicate entry 'a '` error is returned.
 ```
 
-### New framework for collations
+### 照合のための新しいフレームワーク {#new-framework-for-collations}
 
-In TiDB 4.0, a complete framework for collations is introduced. This new framework supports semantically parsing collations and introduces the `new_collations_enabled_on_first_bootstrap` configuration item to decide whether to enable the new framework when a cluster is first initialized. To enable the new framework, set `new_collations_enabled_on_first_bootstrap` to `true`. For details, see [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap). If you initialize the cluster after the configuration item is enabled, you can check whether the new collation is enabled through the `new_collation_enabled` variable in the `mysql`.`tidb` table:
+TiDB 4.0では、照合のための完全なフレームワークが導入されています。この新しいフレームワークは、セマンティック解析の照合をサポートし、クラスタが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`の構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成項目を有効にした後でクラスタを初期化すると、 `mysql`の`new_collation_enabled`変数を使用して新しい照合順序が有効になっているかどうかを確認できます。 `tidb`テーブル：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled';
@@ -419,11 +419,11 @@ SELECT VARIABLE_VALUE FROM mysql.tidb WHERE VARIABLE_NAME='new_collation_enabled
 1 row in set (0.00 sec)
 ```
 
-Under the new framework, TiDB supports the `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, `gbk_chinese_ci`, and `gbk_bin` collations, which is compatible with MySQL.
+新しいフレームワークでは、 `utf8mb4_general_ci`はMySQLと互換性のある`utf8_general_ci` 、および`utf8mb4_unicode_ci`の`gbk_bin`を`gbk_chinese_ci`し`utf8_unicode_ci` 。
 
-When one of `utf8_general_ci`, `utf8mb4_general_ci`, `utf8_unicode_ci`, `utf8mb4_unicode_ci`, and `gbk_chinese_ci` is used, the string comparison is case-insensitive and accent-insensitive. At the same time, TiDB also corrects the collation's `PADDING` behavior:
+`utf8_general_ci` 、および`utf8mb4_general_ci`の`utf8mb4_unicode_ci` `gbk_chinese_ci`が使用されている場合、文字列の比較では大文字と小文字が区別されず、アクセントも区別され`utf8_unicode_ci`ん。同時に、TiDBは照合の`PADDING`の動作も修正します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t(a varchar(20) charset utf8mb4 collate utf8mb4_general_ci PRIMARY KEY);
@@ -436,36 +436,36 @@ INSERT INTO t VALUES ('a ');
 ERROR 1062 (23000): Duplicate entry 'a ' for key 'PRIMARY' # TiDB modifies the `PADDING` behavior to be compatible with MySQL.
 ```
 
-> **Note:**
+> **ノート：**
 >
-> The implementation of padding in TiDB is different from that in MySQL. In MySQL, padding is implemented by filling in spaces. In TiDB, padding is implemented by cutting out the spaces at the end. The two approaches are the same in most cases. The only exception is when the end of the string contains characters that are less than spaces (0x20). For example, the result of `'a' < 'a\t'` in TiDB is `1`, but in MySQL, `'a' < 'a\t'` is equivalent to `'a ' < 'a\t'`, and the result is `0`.
+> TiDBでのパディングの実装は、MySQLでの実装とは異なります。 MySQLでは、パディングはスペースを埋めることによって実装されます。 TiDBでは、パディングは最後のスペースを切り取って実装されます。 2つのアプローチは、ほとんどの場合同じです。唯一の例外は、文字列の末尾にスペース（0x20）未満の文字が含まれている場合です。たとえば、TiDBでの`'a' < 'a\t'`の結果は`1`ですが、MySQLでは`'a' < 'a\t'`は`'a ' < 'a\t'`に相当し、結果は`0`です。
 
-## Coercibility values of collations in expressions
+## 式の照合の強制力の値 {#coercibility-values-of-collations-in-expressions}
 
-If an expression involves multiple clauses of different collations, you need to infer the collation used in the calculation. The rules are as follows:
+式に異なる照合の複数の句が含まれる場合は、計算で使用される照合順序を推測する必要があります。ルールは次のとおりです。
 
-+ The coercibility value of the explicit `COLLATE` clause is `0`.
-+ If the collations of two strings are incompatible, the coercibility value of the concatenation of two strings with different collations is `1`.
-+ The collation of the column, `CAST()`, `CONVERT()`, or `BINARY()` has a coercibility value of `2`.
-+ The system constant (the string returned by `USER ()` or `VERSION ()`) has a coercibility value of `3`.
-+ The coercibility value of constants is `4`.
-+ The coercibility value of numbers or intermediate variables is `5`.
-+ `NULL` or expressions derived from `NULL` has a coercibility value of `6`.
+-   明示的な`COLLATE`節の強制力の値は`0`です。
+-   2つの文字列の照合に互換性がない場合、照合が異なる2つの文字列の連結の強制力の値は`1`です。
+-   列`CAST()` 、または`CONVERT()`の照合順序には、 `BINARY()`の強制力値があり`2` 。
+-   システム定数（ `USER ()`または`VERSION ()`によって返される文字列）の強制力の値は`3`です。
+-   定数の強制力の値は`4`です。
+-   数値または中間変数の強制力の値は`5`です。
+-   `NULL`または`NULL`から派生した式の強制力の値は、 `6`です。
 
-When inferring collations, TiDB prefers using the collation of expressions with lower coercibility values. If the coercibility values of two clauses are the same, the collation is determined according to the following priority:
+照合を推測する場合、TiDBは、より低い強制力の値を持つ式の照合順序を使用することを好みます。 2つの句の強制力の値が同じである場合、照合順序は次の優先順位に従って決定されます。
 
-binary > utf8mb4_bin > (utf8mb4_general_ci = utf8mb4_unicode_ci) > utf8_bin > (utf8_general_ci = utf8_unicode_ci) > latin1_bin > ascii_bin
+バイナリ&gt;utf8mb4_bin&gt;（utf8mb4_general_ci = utf8mb4_unicode_ci）&gt; utf8_bin&gt;（utf8_general_ci = utf8_unicode_ci）&gt; latin1_bin&gt; ascii_bin
 
-TiDB cannot infer the collation and reports an error in the following situations:
+TiDBは照合順序を推測できず、次の状況でエラーを報告します。
 
-- If the collations of two clauses are different and the coercibility value of both clauses is `0`.
-- If the collations of two clauses are incompatible and the returned type of expression is `String`.
+-   2つの句の照合が異なり、両方の句の強制力の値が`0`である場合。
+-   2つの句の照合に互換性がなく、返される式のタイプが`String`の場合。
 
-## `COLLATE` clause
+## <code>COLLATE</code>句 {#code-collate-code-clause}
 
-TiDB supports using the `COLLATE` clause to specify the collation of an expression. The coercibility value of this expression is `0`, which has the highest priority. See the following example:
+TiDBは、式の照合順序を指定するための`COLLATE`句の使用をサポートしています。この式の強制力の値は`0`であり、これが最も優先度が高くなります。次の例を参照してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
@@ -480,4 +480,4 @@ SELECT 'a' = _utf8mb4 'A' collate utf8mb4_general_ci;
 1 row in set (0.00 sec)
 ```
 
-For more details, see [Connection Character Sets and Collations](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html).
+詳細については、 [接続文字セットと照合](https://dev.mysql.com/doc/refman/5.7/en/charset-connection.html)を参照してください。

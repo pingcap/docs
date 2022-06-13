@@ -2,110 +2,110 @@
 title: TiDB 4.0.10 Release Notes
 ---
 
-# TiDB 4.0.10 Release Notes
+# TiDB4.0.10リリースノート {#tidb-4-0-10-release-notes}
 
-Release date: January 15, 2021
+発売日：2021年1月15日
 
-TiDB version: 4.0.10
+TiDBバージョン：4.0.10
 
-## New Features
+## 新機能 {#new-features}
 
-+ PD
+-   PD
 
-    - Add the `enable-redact-log` configuration item to redact user data from logs [#3266](https://github.com/pingcap/pd/pull/3266)
+    -   ログ[＃3266](https://github.com/pingcap/pd/pull/3266)からユーザーデータを編集するために`enable-redact-log`の構成アイテムを追加します
 
-+ TiFlash
+-   TiFlash
 
-    - Add the `security.redact_info_log` configuration item to redact user data from logs
+    -   ログからユーザーデータを編集するために`security.redact_info_log`の構成アイテムを追加します
 
-## Improvements
+## 改善 {#improvements}
 
-+ TiDB
+-   TiDB
 
-    - Make the size limit of a key-value entry in transaction configurable using `txn-entry-size-limit` [#21843](https://github.com/pingcap/tidb/pull/21843)
+    -   `txn-entry-size-limit` [＃21843](https://github.com/pingcap/tidb/pull/21843)を使用して、トランザクションのKey-Valueエントリのサイズ制限を構成可能にします。
 
-+ PD
+-   PD
 
-    - Optimize the `store-state-filter` metrics to show more information [#3100](https://github.com/tikv/pd/pull/3100)
-    - Upgrade the `go.etcd.io/bbolt` dependency to v1.3.5 [#3331](https://github.com/tikv/pd/pull/3331)
+    -   `store-state-filter`の指標を最適化して、より多くの情報を表示します[＃3100](https://github.com/tikv/pd/pull/3100)
+    -   `go.etcd.io/bbolt`の依存関係をv1.3.53にアップグレードし[＃3331](https://github.com/tikv/pd/pull/3331)
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   TiCDC
 
-        - Enable the old value feature for the `maxwell` protocol [#1144](https://github.com/pingcap/tiflow/pull/1144)
-        - Enable the unified sorter feature by default [#1230](https://github.com/pingcap/tiflow/pull/1230)
+        -   `maxwell`プロトコル[＃1144](https://github.com/pingcap/tiflow/pull/1144)の古い値機能を有効にします
+        -   統合ソーター機能をデフォルトで有効にする[＃1230](https://github.com/pingcap/tiflow/pull/1230)
 
-    + Dumpling
+    -   Dumpling
 
-        - Support checking unrecognized arguments and printing the current progress during dumping [#228](https://github.com/pingcap/dumpling/pull/228)
+        -   認識されない引数のチェックと、ダンプ中の現在の進行状況の出力をサポート[＃228](https://github.com/pingcap/dumpling/pull/228)
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Support retrying the error that occurs when reading from S3 [#533](https://github.com/pingcap/tidb-lightning/pull/533)
+        -   [＃533](https://github.com/pingcap/tidb-lightning/pull/533)からの読み取り時に発生するエラーの再試行をサポート
 
-## Bug Fixes
+## バグの修正 {#bug-fixes}
 
-+ TiDB
+-   TiDB
 
-    - Fix a concurrency bug that might cause the batch client timeout [#22336](https://github.com/pingcap/tidb/pull/22336)
-    - Fix the issue of duplicate bindings caused by concurrent baseline capture [#22295](https://github.com/pingcap/tidb/pull/22295)
-    - Make the baseline capture bound to the SQL statement work when the log level is `'debug'` [#22293](https://github.com/pingcap/tidb/pull/22293)
-    - Correctly release GC locks when Region merge occurs [#22267](https://github.com/pingcap/tidb/pull/22267)
-    - Return correct values for user variables of the `datetime` type [#22143](https://github.com/pingcap/tidb/pull/22143)
-    - Fix the issue of using index merge when there are multiple table filters [#22124](https://github.com/pingcap/tidb/pull/22124)
-    - Fix the `wrong precision` issue in TiFlash caused by the `prepare` plan cache [#21960](https://github.com/pingcap/tidb/pull/21960)
-    - Fix the issue of incorrect results caused by schema change [#21596](https://github.com/pingcap/tidb/pull/21596)
-    - Avoid unnecessary column flag changes in `ALTER TABLE` [#21474](https://github.com/pingcap/tidb/pull/21474)
-    - Set the database name for table aliases of query blocks used in optimizer hints [#21380](https://github.com/pingcap/tidb/pull/21380)
-    - Generate the proper optimizer hint for `IndexHashJoin` and `IndexMergeJoin` [#21020](https://github.com/pingcap/tidb/pull/21020)
+    -   バッチクライアントのタイムアウトを引き起こす可能性のある同時実行のバグを修正します[＃22336](https://github.com/pingcap/tidb/pull/22336)
+    -   同時ベースラインキャプチャによって引き起こされる重複バインディングの問題を修正します[＃22295](https://github.com/pingcap/tidb/pull/22295)
+    -   ログレベルが`'debug'`のときに、SQLステートメントに[＃22293](https://github.com/pingcap/tidb/pull/22293)されたベースラインキャプチャを機能させる
+    -   リージョンマージが発生したときにGCロックを正しく解放する[＃22267](https://github.com/pingcap/tidb/pull/22267)
+    -   `datetime`タイプ[＃22143](https://github.com/pingcap/tidb/pull/22143)のユーザー変数の正しい値を返します
+    -   複数のテーブルフィルターがある場合にインデックスマージを使用する問題を修正します[＃22124](https://github.com/pingcap/tidb/pull/22124)
+    -   `prepare`プランキャッシュ[＃21960](https://github.com/pingcap/tidb/pull/21960)によって引き起こされるTiFlashの`wrong precision`の問題を修正します
+    -   スキーマの変更によって引き起こされる誤った結果の問題を修正します[＃21596](https://github.com/pingcap/tidb/pull/21596)
+    -   `ALTER TABLE`での不要な列フラグの変更を[＃21474](https://github.com/pingcap/tidb/pull/21474)する
+    -   オプティマイザヒントで使用されるクエリブロックのテーブルエイリアスのデータベース名を設定します[＃21380](https://github.com/pingcap/tidb/pull/21380)
+    -   `IndexHashJoin`および[＃21020](https://github.com/pingcap/tidb/pull/21020)の適切なオプティマイザヒントを生成し`IndexMergeJoin`
 
-+ TiKV
+-   TiKV
 
-    - Fix the wrong mapping between ready and peer [#9409](https://github.com/tikv/tikv/pull/9409)
-    - Fix the issue that some logs are not redacted when `security.redact-info-log` is set to `true` [#9314](https://github.com/tikv/tikv/pull/9314)
+    -   レディとピア[＃9409](https://github.com/tikv/tikv/pull/9409)の間の間違ったマッピングを修正
+    -   `security.redact-info-log`が[＃9314](https://github.com/tikv/tikv/pull/9314)に設定されている場合、一部のログが編集されない問題を修正し`true` 。
 
-+ PD
+-   PD
 
-    - Fix the issue that the ID allocation is not monotonic [#3308](https://github.com/tikv/pd/pull/3308) [#3323](https://github.com/tikv/pd/pull/3323)
-    - Fix the issue that the PD client might be blocked in some cases [#3285](https://github.com/pingcap/pd/pull/3285)
+    -   ID割り当てが単調ではない問題を修正し[＃3323](https://github.com/tikv/pd/pull/3323) [＃3308](https://github.com/tikv/pd/pull/3308)
+    -   PDクライアントがブロックされる場合があるという問題を修正します[＃3285](https://github.com/pingcap/pd/pull/3285)
 
-+ TiFlash
+-   TiFlash
 
-    - Fix the issue that TiFlash fails to start because TiFlash fails to process the TiDB schema of an old version
-    - Fix the issue that TiFlash fails to start due to incorrect handling of `cpu_time` on the RedHat system
-    - Fix the issue that TiFlash fails to start when `path_realtime_mode` is set to `true`
-    - Fix an issue of incorrect results when calling the `substr` function with three parameters
-    - Fix the issue that TiFlash does not support changing the `Enum` type even if the change is lossless
+    -   TiFlashが古いバージョンのTiDBスキーマを処理できないためにTiFlashが起動しない問題を修正します
+    -   RedHatシステムで`cpu_time`が正しく処理されないためにTiFlashが起動しない問題を修正します
+    -   `path_realtime_mode`が`true`に設定されているとTiFlashが起動しない問題を修正します
+    -   3つのパラメーターで`substr`つの関数を呼び出すときの誤った結果の問題を修正します
+    -   変更がロスレスであっても、TiFlashが`Enum`タイプの変更をサポートしない問題を修正します
 
-+ Tools
+-   ツール
 
-    + TiCDC
+    -   TiCDC
 
-        - Fix the `maxwell` protocol issues, including the issue of `base64` data output and the issue of outputting TSO to unix timestamp [#1173](https://github.com/pingcap/tiflow/pull/1173)
-        - Fix a bug that outdated metadata might cause the newly created changefeed abnormal [#1184](https://github.com/pingcap/tiflow/pull/1184)
-        - Fix the issue of creating the receiver on the closed notifier [#1199](https://github.com/pingcap/tiflow/pull/1199)
-        - Fix a bug that the TiCDC owner might consume too much memory in the etcd watch client [#1227](https://github.com/pingcap/tiflow/pull/1227)
-        - Fix the issue that `max-batch-size` does not take effect [#1253](https://github.com/pingcap/tiflow/pull/1253)
-        - Fix the issue of cleaning up stale tasks before the capture information is constructed [#1280](https://github.com/pingcap/tiflow/pull/1280)
-        - Fix the issue that the recycling of db conn is block because `rollback` is not called in MySQL sink [#1285](https://github.com/pingcap/tiflow/pull/1285)
+        -   `base64`のデータ出力の問題やUNIXタイムスタンプ[＃1173](https://github.com/pingcap/tiflow/pull/1173)へのTSOの出力の問題など、 `maxwell`のプロトコルの問題を修正します。
+        -   古いメタデータが新しく作成されたチェンジフィードの異常を引き起こす可能性があるバグを修正します[＃1184](https://github.com/pingcap/tiflow/pull/1184)
+        -   閉じた通知機能[＃1199](https://github.com/pingcap/tiflow/pull/1199)でレシーバーを作成する問題を修正します
+        -   TiCDC所有者がetcdウォッチクライアントで大量のメモリを消費する可能性があるバグを修正します[＃1227](https://github.com/pingcap/tiflow/pull/1227)
+        -   `max-batch-size`が有効にならない問題を修正します[＃1253](https://github.com/pingcap/tiflow/pull/1253)
+        -   キャプチャ情報が構築される前に古いタスクをクリーンアップする問題を修正します[＃1280](https://github.com/pingcap/tiflow/pull/1280)
+        -   MySQLシンク[＃1285](https://github.com/pingcap/tiflow/pull/1285)で`rollback`が呼び出されないため、dbconnのリサイクルがブロックされる問題を修正します。
 
-    + Dumpling
+    -   Dumpling
 
-        - Avoid TiDB out of memory (OOM) by setting the default behavior of [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [#233](https://github.com/pingcap/dumpling/pull/233)
+        -   デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)に設定して、 [＃233](https://github.com/pingcap/dumpling/pull/233)のメモリ不足（OOM）を回避します。
 
-    + Backup & Restore (BR)
+    -   バックアップと復元（BR）
 
-        - Fix the issue that BR v4.0.9 cannot restore the files backed up using BR v4.0.8 on GCS [#688](https://github.com/pingcap/br/pull/688)
-        - Fix the issue that BR panics when the GCS storage URL has no prefix [#673](https://github.com/pingcap/br/pull/673)
-        - Disable backup statistics by default to avoid BR OOM [#693](https://github.com/pingcap/br/pull/693)
+        -   BRv4.0.9がGCS1でBRv4.0.8を使用してバックアップされたファイルを復元できない問題を修正し[＃688](https://github.com/pingcap/br/pull/688)
+        -   GCSストレージURLにプレフィックス[＃673](https://github.com/pingcap/br/pull/673)がない場合にBRがパニックになる問題を修正します
+        -   BR OOM [＃693](https://github.com/pingcap/br/pull/693)を回避するために、デフォルトでバックアップ統計を無効にします
 
-    + TiDB Binlog
+    -   TiDB Binlog
 
-        - Fix the issue that when the `AMEND TRANSACTION` feature is enabled, Drainer might choose the incorrect schema version to generate SQL statements [#1033](https://github.com/pingcap/tidb-binlog/pull/1033)
+        -   `AMEND TRANSACTION`機能が有効になっている場合、DrainerがSQLステートメントを生成するために誤ったスキーマバージョンを選択する可能性があるという問題を修正します[＃1033](https://github.com/pingcap/tidb-binlog/pull/1033)
 
-    + TiDB Lightning
+    -   TiDB Lightning
 
-        - Fix a bug that the Region is not split because the Region key is incorrectly encoded [#531](https://github.com/pingcap/tidb-lightning/pull/531)
-        - Fix the issue that the failure of `CREATE TABLE` might be lost when multiple tables are created [#530](https://github.com/pingcap/tidb-lightning/pull/530)
-        - Fix the issue of `column count mismatch` when using the TiDB-backend [#535](https://github.com/pingcap/tidb-lightning/pull/535)
+        -   リージョンキーが正しくエンコードされていないためにリージョンが分割されないバグを修正します[＃531](https://github.com/pingcap/tidb-lightning/pull/531)
+        -   複数のテーブルが作成されたときに`CREATE TABLE`の失敗が失われる可能性があるという問題を修正します[＃530](https://github.com/pingcap/tidb-lightning/pull/530)
+        -   TiDBバックエンド[＃535](https://github.com/pingcap/tidb-lightning/pull/535)を使用する場合の`column count mismatch`の問題を修正します

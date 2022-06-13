@@ -3,35 +3,35 @@ title: Monitoring FAQs
 summary: Learn about the FAQs related to TiDB Monitoring.
 ---
 
-# Monitoring FAQs
+# モニタリングに関するFAQ {#monitoring-faqs}
 
-This document summarizes the FAQs related to TiDB monitoring.
+このドキュメントは、TiDBモニタリングに関連するFAQをまとめたものです。
 
-- For details of Prometheus monitoring framework, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
-- For details of key metrics of monitoring, see [Key Metrics](/grafana-overview-dashboard.md).
+-   Prometheusモニタリングフレームワークの詳細については、 [モニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+-   監視の主要なメトリックの詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
 
-## Is there a better way of monitoring the key metrics?
+## 主要な指標を監視するためのより良い方法はありますか？ {#is-there-a-better-way-of-monitoring-the-key-metrics}
 
-The monitoring system of TiDB consists of Prometheus and Grafana. From the dashboard in Grafana, you can monitor various running metrics of TiDB which include the monitoring metrics of system resources, of client connection and SQL operation, of internal communication and Region scheduling. With these metrics, the database administrator can better understand the system running status, running bottlenecks and so on. In the practice of monitoring these metrics, we list the key metrics of each TiDB component. Generally you only need to pay attention to these common metrics. For details, see [official documentation](/grafana-overview-dashboard.md).
+TiDBの監視システムは、PrometheusとGrafanaで構成されています。 Grafanaのダッシュボードから、システムリソース、クライアント接続とSQL操作、内部通信、リージョンスケジューリングの監視メトリックを含む、TiDBのさまざまな実行メトリックを監視できます。これらのメトリックを使用すると、データベース管理者は、システムの実行ステータス、実行中のボトルネックなどをよりよく理解できます。これらのメトリックを監視する実際には、各TiDBコンポーネントの主要なメトリックをリストします。通常、これらの一般的な指標にのみ注意を払う必要があります。詳細については、 [公式ドキュメント](/grafana-overview-dashboard.md)を参照してください。
 
-## The Prometheus monitoring data is deleted every 15 days by default. Could I set it to two months or delete the monitoring data manually?
+## Prometheusモニタリングデータは、デフォルトで15日ごとに削除されます。 2か月に設定することはできますか、それとも監視データを手動で削除することはできますか？ {#the-prometheus-monitoring-data-is-deleted-every-15-days-by-default-could-i-set-it-to-two-months-or-delete-the-monitoring-data-manually}
 
-Yes. Find the startup script on the machine where Prometheus is started, edit the startup parameter and restart Prometheus.
+はい。 Prometheusが起動しているマシンで起動スクリプトを見つけ、起動パラメータを編集してPrometheusを再起動します。
 
 ```config
 --storage.tsdb.retention="60d"
 ```
 
-## Region Health monitor
+## 地域の健康モニター {#region-health-monitor}
 
-In TiDB 2.0, Region health is monitored in the PD metric monitoring page, in which the `Region Health` monitoring item shows the statistics of all the Region replica status. `miss` means shortage of replicas and `extra` means the extra replica exists. In addition, `Region Health` also shows the isolation level by `label`. `level-1` means the Region replicas are isolated physically in the first `label` level. All the Regions are in `level-0` when `location label` is not configured.
+TiDB 2.0では、リージョンの状態はPDメトリック監視ページで監視されます。このページでは、 `Region Health`の監視項目にすべてのリージョンレプリカステータスの統計が表示されます。 `miss`はレプリカの不足を意味し、 `extra`は余分なレプリカが存在することを意味します。さらに、 `Region Health`は`label`による分離レベルも示します。 `level-1`は、リージョンレプリカが最初の`label`レベルで物理的に分離されていることを意味します。 `location label`が構成されていない場合、すべてのリージョンは`level-0`になります。
 
-## What is the meaning of `selectsimplefull` in Statement Count monitor?
+## ステートメントカウントモニターの<code>selectsimplefull</code>の意味は何ですか？ {#what-is-the-meaning-of-code-selectsimplefull-code-in-statement-count-monitor}
 
-It means full table scan but the table might be a small system table.
+これは全表スキャンを意味しますが、テーブルは小さなシステムテーブルである可能性があります。
 
-## What is the difference between `QPS` and `Statement OPS` in the monitor?
+## モニターの<code>QPS</code>と<code>Statement OPS</code>の違いは何ですか？ {#what-is-the-difference-between-code-qps-code-and-code-statement-ops-code-in-the-monitor}
 
-The `QPS` statistics is about all the SQL statements, including `use database`, `load data`, `begin`, `commit`, `set`, `show`, `insert` and `select`.
+`QPS`の`begin`は、 `use database` 、 `show` `load data`を`insert`すべてのSQLステートメント`select` `set` `commit` 。
 
-The `Statement OPS` statistics is only about applications related SQL statements, including `select`, `update` and `insert`, therefore the `Statement OPS` statistics matches the applications better.
+`Statement OPS`の統計は、 `select` 、および`insert`を含むアプリケーション関連のSQLステートメントに関するものであるため、 `Statement OPS` `update`統計はアプリケーションとよりよく一致します。

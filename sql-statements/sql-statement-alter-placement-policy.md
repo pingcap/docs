@@ -3,18 +3,18 @@ title: ALTER PLACEMENT POLICY
 summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 ---
 
-# ALTER PLACEMENT POLICY
+# 配置ポリシーの変更 {#alter-placement-policy}
 
-`ALTER PLACEMENT POLICY` is used to modify existing placement policies that have previously been created. All the tables and partitions which use the placement policy will automatically be updated.
+`ALTER PLACEMENT POLICY`は、以前に作成された既存の配置ポリシーを変更するために使用されます。配置ポリシーを使用するすべてのテーブルとパーティションは自動的に更新されます。
 
-`ALTER PLACEMENT POLICY` _replaces_ the previous policy with the new definition. It does not _merge_ the old policy with the new one. In the following example, `FOLLOWERS=4` is lost when the `ALTER PLACEMENT POLICY` is executed:
+`ALTER PLACEMENT POLICY`は、以前のポリシーを新しい定義に*置き換え*ます。古いポリシーを新しいポリシーと<em>マージ</em>しません。次の例では、 `ALTER PLACEMENT POLICY`が実行されると`FOLLOWERS=4`が失われます。
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;
 ALTER PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterPolicyStmt ::=
@@ -49,15 +49,15 @@ AdvancedPlacementOption ::=
 |   "LEARNER_CONSTRAINTS" EqOpt stringLit
 ```
 
-## Examples
+## 例 {#examples}
 
-> **Note:**
+> **ノート：**
 >
-> To know which regions are available in your cluster, see [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md).
+> クラスタで使用可能なリージョンを確認するには、 [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を参照してください。
 >
-> If you do not see any available regions, your TiKV installation might not have labels set correctly.
+> 使用可能なリージョンが表示されない場合は、TiKVインストールでラベルが正しく設定されていない可能性があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
@@ -77,13 +77,13 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [Placement Rules in SQL](/placement-rules-in-sql.md)
-* [SHOW PLACEMENT](/sql-statements/sql-statement-show-placement.md)
-* [CREATE PLACEMENT POLICY](/sql-statements/sql-statement-create-placement-policy.md)
-* [DROP PLACEMENT POLICY](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [SQLの配置ルール](/placement-rules-in-sql.md)
+-   [配置を表示](/sql-statements/sql-statement-show-placement.md)
+-   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
+-   [ドロッププレースメントポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

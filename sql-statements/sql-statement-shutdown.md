@@ -3,19 +3,19 @@ title: SHUTDOWN
 summary: An overview of the usage of SHUTDOWN for the TiDB database.
 ---
 
-# SHUTDOWN
+# シャットダウン {#shutdown}
 
-The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execution of the `SHUTDOWN` statement requires the user to have `SHUTDOWN privilege`.
+`SHUTDOWN`ステートメントは、TiDBでシャットダウン操作を実行するために使用されます。 `SHUTDOWN`ステートメントを実行するには、ユーザーが`SHUTDOWN privilege`を持っている必要があります。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**Statement:**
+**声明：**
 
 ![Statement](/media/sqlgram/ShutdownStmt.png)
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHUTDOWN;
@@ -25,10 +25,10 @@ SHUTDOWN;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-> **Note:**
+> **ノート：**
 >
-> Because TiDB is a distributed database, the shutdown operation in TiDB stops the client-connected TiDB instance, not the entire TiDB cluster.
+> TiDBは分散データベースであるため、TiDBでのシャットダウン操作は、TiDBクラスタ全体ではなく、クライアントに接続されたTiDBインスタンスを停止します。
 
-The `SHUTDOWN` statement is partly compatible with MySQL. If you encounter any compatibility issues, you can report the issues [on GitHub](https://github.com/pingcap/tidb/issues/new/choose).
+`SHUTDOWN`ステートメントはMySQLと部分的に互換性があります。互換性の問題が発生した場合は、問題を報告できます[GitHubで](https://github.com/pingcap/tidb/issues/new/choose) 。

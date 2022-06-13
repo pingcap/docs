@@ -3,15 +3,15 @@ title: ANALYZE | TiDB SQL Statement Reference
 summary: An overview of the usage of ANALYZE for the TiDB database.
 ---
 
-# ANALYZE
+# 分析する {#analyze}
 
-This statement updates the statistics that TiDB builds on tables and indexes. It is recommended to run `ANALYZE` after performing a large batch update or import of records, or when you notice that query execution plans are sub-optimal.
+このステートメントは、TiDBがテーブルとインデックスに基づいて構築する統計を更新します。大規模なバッチ更新またはレコードのインポートを実行した後、またはクエリ実行プランが最適ではないことに気付いた場合は、 `ANALYZE`を実行することをお勧めします。
 
-TiDB will also automatically update its statistics over time as it discovers that they are inconsistent with its own estimates.
+TiDBはまた、統計が自身の推定値と矛盾していることを発見すると、時間の経過とともに統計を自動的に更新します。
 
-Currently, TiDB collects statistical information in two ways: full collection (implemented using the `ANALYZE TABLE` statement) and incremental collection (implemented using the `ANALYZE INCREMENTAL TABLE` statement). For detailed usage of these two statements, refer to [introduction to statistics](/statistics.md)
+現在、TiDBは、完全収集（ `ANALYZE TABLE`ステートメントを使用して実装）と増分収集（ `ANALYZE INCREMENTAL TABLE`ステートメントを使用して実装）の2つの方法で統計情報を収集します。これら2つのステートメントの詳細な使用法については、 [統計入門](/statistics.md)を参照してください。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AnalyzeTableStmt ::=
@@ -45,7 +45,7 @@ PartitionNameList ::=
     Identifier ( ',' Identifier )*
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, c1 INT NOT NULL);
@@ -80,16 +80,16 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-TiDB differs from MySQL in **both** the statistics it collects and how it makes use of statistics during query execution. While this statement is syntactically similar to MySQL, the following differences apply:
+TiDBは、収集する統計とクエリ実行中に統計を利用する方法の**両方**でMySQLとは異なります。このステートメントは構文的にMySQLに似ていますが、次の違いが適用されます。
 
-1. TiDB might not include very recently committed changes when running `ANALYZE TABLE`. After a batch-update of rows, you might need to `sleep(1)` before executing `ANALYZE TABLE` in order for the statistics update to reflect these changes. [#16570](https://github.com/pingcap/tidb/issues/16570).
-2. `ANALYZE TABLE` takes significantly longer to execute in TiDB than MySQL. This performance difference can be partially mitigated by enabling fast analyze with `SET GLOBAL tidb_enable_fast_analyze=1`. Fast analyze makes use of sampling, leading to less accurate statistics. Its usage is still considered experimental.
+1.  TiDBは、 `ANALYZE TABLE`を実行しているときに、ごく最近コミットされた変更を含まない場合があります。行のバッチ更新後、統計更新にこれらの変更を反映させるために、 `ANALYZE TABLE`を実行する前に`sleep(1)`を実行する必要がある場合があります。 [＃16570](https://github.com/pingcap/tidb/issues/16570) 。
+2.  `ANALYZE TABLE`は、MySQLよりもTiDBでの実行にかなり時間がかかります。このパフォーマンスの違いは、 `SET GLOBAL tidb_enable_fast_analyze=1`で高速分析を有効にすることで部分的に軽減できます。高速分析はサンプリングを利用するため、統計の精度が低下します。その使用法はまだ実験的と見なされます。
 
-MySQL does not support the `ANALYZE INCREMENTAL TABLE` statement. TiDB supports incremental collection of statistics. For detailed usage, refer to [incremental collection](/statistics.md#incremental-collection).
+MySQLは`ANALYZE INCREMENTAL TABLE`ステートメントをサポートしていません。 TiDBは、統計の増分収集をサポートしています。詳細な使用法については、 [インクリメンタルコレクション](/statistics.md#incremental-collection)を参照してください。
 
-## See also
+## も参照してください {#see-also}
 
-* [EXPLAIN](/sql-statements/sql-statement-explain.md)
-* [EXPLAIN ANALYZE](/sql-statements/sql-statement-explain-analyze.md)
+-   [説明](/sql-statements/sql-statement-explain.md)
+-   [説明分析](/sql-statements/sql-statement-explain-analyze.md)

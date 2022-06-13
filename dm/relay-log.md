@@ -3,27 +3,27 @@ title: Data Migration Relay Log
 summary: Learn the directory structure, initial migration rules and data purge of DM relay logs.
 ---
 
-# Data Migration Relay Log
+# データ移行リレーログ {#data-migration-relay-log}
 
-The Data Migration (DM) relay log consists of several sets of numbered files containing events that describe database changes, and an index file that contains the names of all used relay log files.
+データ移行（DM）リレーログは、データベースの変更を説明するイベントを含む番号付きファイルのいくつかのセットと、使用されているすべてのリレーログファイルの名前を含むインデックスファイルで構成されます。
 
-After relay log is enabled, DM-worker automatically migrates the upstream binlog to the local configuration directory (the default migration directory is `<deploy_dir>/<relay_log>` if DM is deployed using TiUP). The default value of `<relay_log>` is `relay-dir` and can be modified in [Upstream Database Configuration File](/dm/dm-source-configuration-file.md). Since v5.4.0, you can configure the local configuration directory through `relay-dir` in the [DM-worker configuration file](/dm/dm-worker-configuration-file.md), which takes precedence over the configuration file of the upstream database.
+リレーログを有効にすると、DM-workerはアップストリームbinlogをローカル構成ディレクトリに自動的に移行します（DMがTiUPを使用してデプロイされている場合、デフォルトの移行ディレクトリは`<deploy_dir>/<relay_log>`です）。デフォルト値の`<relay_log>`は`relay-dir`で、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)で変更できます。 v5.4.0以降、 [DM-worker構成ファイル](/dm/dm-worker-configuration-file.md)の`relay-dir`からローカル構成ディレクトリを構成できます。これは、アップストリーム・データベースの構成ファイルよりも優先されます。
 
-> **Warning:**
+> **警告：**
 >
-> `relay-dir` in the upstream database configuration file is marked as deprecated in v6.1 and might be removed in a future release. You can see the following prompt in the output of the relevant command: `` `relay-dir` in source config will be deprecated soon, please use `relay-dir` in worker config instead``.
+> アップストリームデータベース構成ファイルの`relay-dir`は、v6.1で非推奨としてマークされており、将来のリリースで削除される可能性があります。関連するコマンドの出力に次のプロンプトが表示されます`` `relay-dir` in source config will be deprecated soon, please use `relay-dir` in worker config instead`` 。
 
-When DM-worker is running, it migrates the upstream binlog to the local file in real time. The sync processing unit of DM-worker, reads the binlog events of the local relay log in real time, transforms these events to SQL statements, and then migrates these statements to the downstream database.
+DM-workerが実行されている場合、アップストリームのbinlogをローカルファイルにリアルタイムで移行します。 DM-workerの同期処理ユニットは、ローカルリレーログのbinlogイベントをリアルタイムで読み取り、これらのイベントをSQLステートメントに変換してから、これらのステートメントをダウンストリームデータベースに移行します。
 
-This document introduces the directory structure and initial migration rules DM relay logs, and how to pause, resume, and purge relay logs.
+このドキュメントでは、ディレクトリ構造と初期移行ルールのDMリレーログ、およびリレーログを一時停止、再開、およびパージする方法を紹介します。
 
-> **Note:**
+> **ノート：**
 >
-> The relay log feature requires additional disk I/O operations, resulting in higher latency of data migration. If the disk I/O performance in the deployment environment is poor, the relay log feature may become a bottleneck of the migration task and thus slows the migration.
+> リレーログ機能には追加のディスクI/O操作が必要であるため、データ移行の待ち時間が長くなります。展開環境でのディスクI/Oのパフォーマンスが低い場合、リレーログ機能が移行タスクのボトルネックになり、移行が遅くなる可能性があります。
 
-## Directory structure
+## ディレクトリ構造 {#directory-structure}
 
-An example of the directory structure of the local storage for a relay log:
+リレーログのローカルストレージのディレクトリ構造の例：
 
 ```
 <deploy_dir>/<relay_log>/
@@ -39,19 +39,19 @@ An example of the directory structure of the local storage for a relay log:
 `-- server-uuid.index
 ```
 
-- `subdir`:
+-   `subdir` ：
 
-    - DM-worker stores the binlog migrated from the upstream database in the same directory. Each directory is a `subdir`.
+    -   DM-workerは、アップストリームデータベースから移行されたbinlogを同じディレクトリに保存します。各ディレクトリは`subdir`です。
 
-    - `subdir` is named `<Upstream database UUID>.<Local subdir serial number>`.
+    -   `subdir`は`<Upstream database UUID>.<Local subdir serial number>`という名前です。
 
-    - After a switch between primary and secondary instances in the upstream, DM-worker generates a new `subdir` directory with an incremental serial number.
+    -   アップストリームでプライマリインスタンスとセカンダリインスタンスを切り替えた後、DM-workerは増分シリアル番号を使用して新しい`subdir`ディレクトリを生成します。
 
-        - In the above example, for the `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001` directory, `7e427cc0-091c-11e9-9e45-72b7c59d52d7` is the upstream database UUID and `000001` is the local `subdir` serial number.
+        -   上記の例では、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7.000001`ディレクトリの場合、 `7e427cc0-091c-11e9-9e45-72b7c59d52d7`はアップストリームデータベースのUUIDであり、 `000001`はローカル`subdir`のシリアル番号です。
 
-- `server-uuid.index`: Records a list of names of currently available `subdir` directory.
+-   `server-uuid.index` ：現在利用可能な`subdir`ディレクトリの名前のリストを記録します。
 
-- `relay.meta`: Stores the information of the migrated binlog in each `subdir`. For example,
+-   `relay.meta` ：移行されたbinlogの情報を各`subdir`に格納します。例えば、
 
     ```bash
     $ cat c0149e17-dff1-11e8-b6a8-0242ac110004.000001/relay.meta
@@ -65,42 +65,42 @@ An example of the directory structure of the local storage for a relay log:
     binlog-gtid = "3ccc475b-2343-11e7-be21-6c0b84d59f30:1-14,406a3f61-690d-11e7-87c5-6c92bf46f384:1-94321383,53bfca22-690d-11e7-8a62-18ded7a37b78:1-495,686e1ab6-c47e-11e7-a42c-6c92bf46f384:1-34981190,03fc0263-28c7-11e7-a653-6c0b84d59f30:1-7041423,05474d3c-28c7-11e7-8352-203db246dd3d:1-170,10b039fc-c843-11e7-8f6a-1866daf8d810:1-308290454"
     ```
 
-## Initial migration rules
+## 初期移行ルール {#initial-migration-rules}
 
-The starting position of the relay log migration is determined by the following rules:
+リレーログ移行の開始位置は、次のルールによって決定されます。
 
-- From the checkpoint of the downstream sync unit, DM firstly gets the earliest position from which the migration tasks need to replicate from the data source. If the position is later than any of the following positions, DM-worker starts the migration from this position.
+-   ダウンストリーム同期ユニットのチェックポイントから、DMは最初に、移行タスクがデータソースから複製する必要がある最も早い位置を取得します。ポジションが以下のポジションのいずれよりも遅い場合、DM-workerはこのポジションから移行を開始します。
 
-- If a valid local relay log exists (a valid relay log is a relay log with valid `server-uuid.index`, `subdir` and `relay.meta` files), DM-worker resumes migration from a position recorded by `relay.meta`.
+-   有効なローカルリレーログが存在する場合（有効なリレーログは、有効な`server-uuid.index` 、および`subdir`ファイルの`relay.meta`です）、DM-workerは`relay.meta`によって記録された位置から移行を再開します。
 
-- If a valid local relay log does not exist, but `relay-binlog-name` or `relay-binlog-gtid` is specified in the source configuration file:
+-   有効なローカルリレーログが存在しないが、ソース設定ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されている場合：
 
-    - In the non-GTID mode, if `relay-binlog-name` is specified, DM-worker starts migration from the specified binlog file.
-    - In the GTID mode, if `relay-binlog-gtid` is specified, DM-worker starts migration from the specified GTID.
+    -   非GTIDモードでは、 `relay-binlog-name`が指定されている場合、DM-workerは指定されたbinlogファイルから移行を開始します。
+    -   GTIDモードでは、 `relay-binlog-gtid`が指定されている場合、DM-workerは指定されたGTIDからの移行を開始します。
 
-- If a valid local relay log does not exist, and `relay-binlog-name` or `relay-binlog-gtid` is not specified in the DM configuration file:
+-   有効なローカルリレーログが存在せず、DM構成ファイルで`relay-binlog-name`または`relay-binlog-gtid`が指定されていない場合：
 
-    - In the non-GTID mode, DM-worker starts migration from the initial upstream binlog and migrates all the upstream binlog files to the latest successively.
+    -   非GTIDモードでは、DM-workerは最初のアップストリームbinlogからの移行を開始し、すべてのアップストリームbinlogファイルを最新のものに連続して移行します。
 
-    - In the GTID mode, DM-worker starts migration from the initial upstream GTID.
+    -   GTIDモードでは、DM-workerは最初のアップストリームGTIDから移行を開始します。
 
-        > **Note:**
+        > **ノート：**
         >
-        > If the upstream relay log is purged, an error occurs. In this case, set `relay-binlog-gtid` to specify the starting position of migration.
+        > アップストリームリレーログがパージされると、エラーが発生します。この場合、移行の開始位置を指定するには`relay-binlog-gtid`を設定します。
 
-## Start and stop the relay log feature
+## リレーログ機能を開始および停止します {#start-and-stop-the-relay-log-feature}
 
 <SimpleTab>
 
 <div label="v5.4.0 and later versions">
 
-In v5.4.0 and later versions, you can enable relay log by setting `enable-relay` to `true`. Since v5.4.0, when binding the upstream data source, DM-worker checks the `enable-relay` item in the configuration of the data source. If `enable-relay` is `true`, the relay log feature is enabled for this data source.
+v5.4.0以降のバージョンでは、 `enable-relay`を`true`に設定することでリレーログを有効にできます。 v5.4.0以降、アップストリームデータソースをバインドするときに、DM-workerはデータソースの構成の`enable-relay`の項目をチェックします。 `enable-relay`が`true`の場合、このデータソースに対してリレーログ機能が有効になります。
 
-For the detailed configuration method, see [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).
+詳細な設定方法については、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
-In addition, you can also dynamically adjust the `enable-relay` configuration of the data source using the `start-relay` or `stop-relay` command to enable or disable relay log in time.
+さらに、 `start-relay`または`stop-relay`コマンドを使用してデータソースの`enable-relay`構成を動的に調整し、リレーログイン時間を有効または無効にすることもできます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 » start-relay -s mysql-replica-01
@@ -117,19 +117,19 @@ In addition, you can also dynamically adjust the `enable-relay` configuration of
 
 <div label="versions between v2.0.2 (included) and v5.3.0 (included)">
 
-> **Note:**
+> **ノート：**
 >
-> In DM v2.0.x later than DM v2.0.2 and in v5.3.0, the configuration item `enable-relay` in the source configuration file is no longer valid, and you can only use `start-relay` and `stop-relay` to enable and disable relay log. If DM finds that `enable-relay` is set to `true` when [loading the data source configuration](/dm/dm-manage-source.md#operate-data-source), it outputs the following message:
+> DMv2.0.2より後のDMv2.0.xおよびv5.3.0では、ソース構成ファイルの構成項目`enable-relay`は無効になり、リレーログの有効化と無効化に使用できるのは`start-relay`と`stop-relay`のみです。 DMは、 [データソース構成のロード](/dm/dm-manage-source.md#operate-data-source)のときに`enable-relay`が`true`に設定されていることを検出すると、次のメッセージを出力します。
 >
 > ```
 > Please use `start-relay` to specify which workers should pull relay log of relay-enabled sources.
 > ```
 
-> **Warning:**
+> **警告：**
 >
-> This startup method is marked as deprecated in v6.1 and might be removed in a future release. You can see the following prompt in the output of the relevant command: `start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead`.
+> この起動方法はv6.1で非推奨としてマークされており、将来のリリースで削除される可能性があります。関連するコマンドの出力に次のプロンプトが表示されます`start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead` 。
 
-In the command `start-relay`, you can configure one or more DM-workers to migrate relay logs for the specified data source, but the DM-workers specified in the parameter must be free or have been bound to the upstream data source. Examples are as follows:
+コマンド`start-relay`では、指定されたデータソースのリレーログを移行するように1つ以上のDM-workerを構成できますが、パラメーターで指定されたDM-workerは解放されているか、アップストリームデータソースにバインドされている必要があります。例は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -161,16 +161,16 @@ In the command `start-relay`, you can configure one or more DM-workers to migrat
 
 <div label="earlier than v2.0.2">
 
-In DM versions earlier than v2.0.2 (not including v2.0.2), DM checks the configuration item `enable-relay` in the source configuration file when binding a DM-worker to an upstream data source. If `enable-relay` is set to `true`, DM enables the relay log feature for the data source.
+v2.0.2より前のバージョン（v2.0.2を含まない）では、DMワーカーをアップストリームデータソースにバインドするときに、DMはソース構成ファイルの構成項目`enable-relay`をチェックします。 `enable-relay`が`true`に設定されている場合、DMはデータソースのリレーログ機能を有効にします。
 
-See [Upstream Database Configuration File](/dm/dm-source-configuration-file.md) for how to set the configuration item `enable-relay`.
+構成項目`enable-relay`の設定方法については、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 </div>
 </SimpleTab>
 
-## Query relay logs
+## リレーログのクエリ {#query-relay-logs}
 
-You can use the command `query-status -s` to query the status of the relay log pulling process of an upstream data source. See the following example:
+コマンド`query-status -s`を使用して、アップストリームデータソースのリレーログプルプロセスのステータスを照会できます。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -229,9 +229,9 @@ You can use the command `query-status -s` to query the status of the relay log p
 }
 ```
 
-## Pause and resume the relay log feature
+## リレーログ機能を一時停止して再開します {#pause-and-resume-the-relay-log-feature}
 
-You can use the command `pause-relay` to pause the pulling process of relay logs and use the command `resume-relay` to resume the process. You need to specify the `source-id` of the upstream data source when executing these two commands. See the following examples:
+コマンド`pause-relay`を使用してリレーログのプルプロセスを一時停止し、コマンド`resume-relay`を使用してプロセスを再開できます。これらの2つのコマンドを実行するときは、アップストリームデータソースの`source-id`を指定する必要があります。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -283,15 +283,15 @@ You can use the command `pause-relay` to pause the pulling process of relay logs
 }
 ```
 
-## Purge relay logs
+## リレーログを削除する {#purge-relay-logs}
 
-Through the detection mechanism of reading and writing files, DM-worker does not purge the relay log that is being used or will be used later by the currently running data migration task.
+DM-workerは、ファイルの読み取りと書き込みの検出メカニズムを通じて、現在実行中のデータ移行タスクによって使用されている、または後で使用されるリレーログを削除しません。
 
-The data purge methods for the relay log include automatic purge and manual purge.
+リレーログのデータパージ方法には、自動パージと手動パージが含まれます。
 
-### Automatic data purge
+### 自動データパージ {#automatic-data-purge}
 
-You can enable automatic data purge and configure its strategy in the source configuration file. See the following example:
+自動データパージを有効にして、ソース構成ファイルでその戦略を構成できます。次の例を参照してください。
 
 ```yaml
 # relay log purge strategy
@@ -301,23 +301,23 @@ purge:
     remain-space: 15
 ```
 
-+ `purge.interval`
-    - The interval of automatic purge in the background, in seconds.
-    - "3600" by default, indicating a background purge task is performed every 3600 seconds.
+-   `purge.interval`
+    -   バックグラウンドでの自動パージの間隔（秒単位）。
+    -   デフォルトでは「3600」で、バックグラウンドパージタスクが3600秒ごとに実行されることを示します。
 
-+ `purge.expires`
-    - The number of hours for which the relay log (that has been previously written to the relay processing unit, and that is not being used or will not be read later by the currently running data migration task) can be retained before being purged in the automatic background purge.
-    - "0" by default, indicating data purge is not performed according to the update time of the relay log.
+-   `purge.expires`
+    -   自動でパージされる前に、リレーログ（以前にリレー処理装置に書き込まれ、使用されていないか、現在実行中のデータ移行タスクによって後で読み取られない）を保持できる時間数。バックグラウンドパージ。
+    -   デフォルトでは「0」。リレーログの更新時間に従ってデータパージが実行されないことを示します。
 
-+ `purge.remain-space`
-    - The amount of remaining disk space in GB less than which the specified DM-worker machine tries to purge the relay log that can be purged securely in the automatic background purge. If it is set to `0`, data purge is not performed according to the remaining disk space.
-    - "15" by default, indicating when the available disk space is less than 15GB, DM-master tries to purge the relay log securely.
+-   `purge.remain-space`
+    -   指定されたDMワーカーマシンが自動バックグラウンドパージで安全にパージできるリレーログをパージしようとするGB単位の残りのディスク容量。 `0`に設定されている場合、残りのディスク容量に応じてデータのパージは実行されません。
+    -   デフォルトでは「15」で、使用可能なディスク容量が15GB未満の場合、DMマスターはリレーログを安全にパージしようとします。
 
-### Manual data purge
+### 手動データパージ {#manual-data-purge}
 
-Manual data purge means using the `purge-relay` command provided by dmctl to specify `subdir` and the binlog name thus to purge all the relay logs **before** the specified binlog. If the `-subdir` option in the command is not specified, all relay logs **before** the current relay log sub-directory are purged.
+手動データパージとは、dmctlが提供する`purge-relay`コマンドを使用して`subdir`とbinlog名を指定し、指定されたbinlogの**前に**すべてのリレーログをパージすることを意味します。コマンドの`-subdir`オプションが指定されていない場合、現在のリレーログサブディレクトリ<strong>より前</strong>のすべてのリレーログが削除されます。
 
-Assuming that the directory structure of the current relay log is as follows:
+現在のリレーログのディレクトリ構造が次のようになっていると仮定します。
 
 ```
 $ tree .
@@ -341,7 +341,7 @@ e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
 deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
 ```
 
-+ Executing the following `purge-relay` command in dmctl purges all relay log files **before** `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002/mysql-bin.000001`, which is all relay log files in `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`.
+-   dmctlで次の`purge-relay`コマンドを実行すると、 `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002/mysql-bin.000001`**より前**のすべてのリレーログファイルが削除されます。これは、 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`のすべてのリレーログファイルです。
 
     {{< copyable "" >}}
 
@@ -349,7 +349,7 @@ deb76a2b-09cc-11e9-9129-5242cf3bb246.000003
     » purge-relay -s mysql-replica-01 --filename mysql-bin.000001 --sub-dir e4e0e8ab-09cc-11e9-9220-82cc35207219.000002
     ```
 
-+ Executing the following `purge-relay` command in dmctl purges all relay log file **before the current** (`deb76a2b-09cc-11e9-9129-5242cf3bb246.000003`) directory's `mysql-bin.000001`, which is all relay log files in `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001` and `e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`.
+-   dmctlで次の`purge-relay`コマンドを実行する**と、現在の**（ `deb76a2b-09cc-11e9-9129-5242cf3bb246.000003` ）ディレクトリの`mysql-bin.000001`の前にあるすべてのリレーログファイルが削除されます。これは、 `deb76a2b-09cc-11e9-9129-5242cf3bb246.000001`と`e4e0e8ab-09cc-11e9-9220-82cc35207219.000002`のすべてのリレーログファイルです。
 
     {{< copyable "" >}}
 

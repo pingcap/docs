@@ -3,11 +3,11 @@ title: TIDB_INDEXES
 summary: Learn the `TIDB_INDEXES` information_schema table.
 ---
 
-# TIDB_INDEXES
+# TIDB_INDEXES {#tidb-indexes}
 
-The `TIDB_INDEXES` table provides the INDEX information of all tables.
+`TIDB_INDEXES`テーブルは、すべてのテーブルのINDEX情報を提供します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -32,9 +32,9 @@ DESC tidb_indexes;
 10 rows in set (0.00 sec)
 ```
 
-`INDEX_ID` is the unique ID that TiDB allocates for each index. It can be used to do a join operation with `INDEX_ID` obtained from another table or API.
+`INDEX_ID`は、TiDBが各インデックスに割り当てる一意のIDです。別のテーブルまたはAPIから取得した`INDEX_ID`を使用して結合操作を実行するために使用できます。
 
-For example, you can obtain `TABLE_ID` and `INDEX_ID` that are involved in some slow query in the [`SLOW_QUERY` table](/information-schema/information-schema-slow-query.md) and then obtain the specific index information using the following SQL statements:
+たとえば、 [`SLOW_QUERY`テーブル](/information-schema/information-schema-slow-query.md)の低速クエリに関係する`TABLE_ID`と`INDEX_ID`を取得してから、次のSQLステートメントを使用して特定のインデックス情報を取得できます。
 
 ```sql
 SELECT
@@ -49,14 +49,14 @@ WHERE
  AND index_id = ?
 ```
 
-Fields in the `TIDB_INDEXES` table are described as follows:
+`TIDB_INDEXES`表のフィールドは次のように説明されています。
 
-* `TABLE_SCHEMA`: The name of the schema to which the index belongs.
-* `TABLE_NAME`: The name of the table to which the index belongs.
-* `NON_UNIQUE`: If the index is unique, the value is `0`; otherwise, the value is `1`.
-* `KEY_NAME`: The index name. If the index is the primary key, the name is `PRIMARY`.
-* `SEQ_IN_INDEX`: The sequential number of columns in the index, which starts from `1`.
-* `COLUMN_NAME`: The name of the column where the index is located.
-* `SUB_PART`: The prefix length of the index. If the the column is partly indexed, the `SUB_PART` value is the count of the indexed characters; otherwise, the value is `NULL`.
-* `INDEX_COMMENT`: The comment of the index, which is made when the index is created.
-* `INDEX_ID`: The index ID.
+-   `TABLE_SCHEMA` ：インデックスが属するスキーマの名前。
+-   `TABLE_NAME` ：インデックスが属するテーブルの名前。
+-   `NON_UNIQUE` ：インデックスが一意の場合、値は`0`です。それ以外の場合、値は`1`です。
+-   `KEY_NAME` ：インデックス名。インデックスが主キーの場合、名前は`PRIMARY`です。
+-   `SEQ_IN_INDEX` ：インデックス内の列の連続数`1`から始まります。
+-   `COLUMN_NAME` ：インデックスが配置されている列の名前。
+-   `SUB_PART` ：インデックスのプレフィックス長。列が部分的に索引付けされている場合、 `SUB_PART`の値は索引付けされた文字の数です。それ以外の場合、値は`NULL`です。
+-   `INDEX_COMMENT` ：インデックス作成時に作成されるインデックスのコメント。
+-   `INDEX_ID` ：インデックスID。

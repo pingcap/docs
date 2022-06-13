@@ -3,26 +3,26 @@ title: LOAD STATS
 summary: An overview of the usage of LOAD STATS for the TiDB database.
 ---
 
-# LOAD STATS
+# 統計のロード {#load-stats}
 
-The `LOAD STATS` statement is used to load the statistics into TiDB.
+`LOAD STATS`ステートメントは、統計をTiDBにロードするために使用されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 LoadStatsStmt ::=
     'LOAD' 'STATS' stringLit
 ```
 
-## Examples
+## 例 {#examples}
 
-You can access the address `http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}` to download the TiDB instance's statistics.
+アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`にアクセスして、TiDBインスタンスの統計をダウンロードできます。
 
-You can also use `LOAD STATS ${stats_path}` to load the specific statistics file.
+`LOAD STATS ${stats_path}`を使用して、特定の統計ファイルをロードすることもできます。
 
-The `${stats_path}` can be an absolute path or a relative path. If you use a relative path, the corresponding file is found starting from the path where `tidb-server` is started. Here is an example:
+`${stats_path}`は、絶対パスまたは相対パスにすることができます。相対パスを使用する場合、対応するファイルは`tidb-server`が開始されたパスから始まります。次に例を示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 LOAD STATS '/tmp/stats.json';
@@ -32,10 +32,10 @@ LOAD STATS '/tmp/stats.json';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [Statistics](/statistics.md)
+-   [統計](/statistics.md)

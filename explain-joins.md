@@ -3,11 +3,11 @@ title: Explain Statements That Use Joins
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements That Use Joins
+# テーブル結合を使用するステートメントを説明する {#explain-statements-that-use-joins}
 
-In TiDB, the SQL Optimizer needs to decide in which order tables should be joined and what is the most efficient join algorithm for a particular SQL statement. The examples in this document are based on the following sample data:
+TiDBでは、SQLオプティマイザーは、テーブルを結合する順序と、特定のSQLステートメントに対して最も効率的な結合アルゴリズムを決定する必要があります。このドキュメントの例は、次のサンプルデータに基づいています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);
@@ -37,11 +37,11 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1, t2;
 ```
 
-## Index Join
+## インデックス参加 {#index-join}
 
-If the number of estimated rows that need to be joined is small (typically less than 10000 rows), it is preferable to use the index join method. This method of join works similar to the primary method of join used in MySQL. In the following example, the operator `├─TableReader_28(Build)` first reads the table `t1`. For each row that matches, TiDB will probe the table `t2`:
+結合する必要のある推定行数が少ない場合（通常は10000行未満）、インデックス結合方式を使用することをお勧めします。この結合方法は、MySQLで使用される主要な結合方法と同様に機能します。次の例では、演算子`├─TableReader_28(Build)`が最初にテーブル`t1`を読み取ります。一致する行ごとに、TiDBはテーブル`t2`をプローブします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id;
@@ -61,17 +61,17 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_
 6 rows in set (0.00 sec)
 ```
 
-Index join is efficient in memory usage, but might be slower to execute than other join methods when a large number of probe operations are required. Consider also the following query:
+インデックス結合はメモリ使用量が効率的ですが、多数のプローブ操作が必要な場合は、他の結合方法よりも実行が遅くなる可能性があります。次のクエリも検討してください。
 
 ```sql
 SELECT * FROM t1 INNER JOIN t2 ON t1.id=t2.t1_id WHERE t1.pad1 = 'value' and t2.pad1='value';
 ```
 
-In an inner join operation, TiDB implements join reordering and might access either `t1` or `t2` first. Assume that TiDB selects `t1` as the first table to apply the `build` step, and then TiDB is able to filter on the predicate `t1.col = 'value'` before probing the table `t2`. The filter for the predicate `t2.col='value'` will be applied on each probe of table `t2`, which might be less efficient than other join methods.
+内部結合操作では、TiDBは結合の並べ替えを実装し、最初に`t1`または`t2`にアクセスする場合があります。 TiDBが`build`ステップを適用する最初のテーブルとして`t1`を選択すると、TiDBはテーブル`t2`をプローブする前に、述語`t1.col = 'value'`でフィルタリングできると仮定します。述語`t2.col='value'`のフィルターは、表`t2`の各プローブに適用されます。これは、他の結合方法よりも効率が低い可能性があります。
 
-Index join is effective if the build side is small and the probe side is pre-indexed and large. Consider the following query where an index join performs worse than a hash join and is not chosen by the SQL Optimizer:
+インデックス結合は、ビルド側が小さく、プローブ側が事前にインデックス付けされていて大きい場合に効果的です。インデックス結合のパフォーマンスがハッシュ結合よりも悪く、SQLオプティマイザーによって選択されていない次のクエリについて考えてみます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 -- DROP previously added index
@@ -122,7 +122,7 @@ Query OK, 0 rows affected (0.29 sec)
 6 rows in set (0.44 sec)
 ```
 
-In the above example, the index join operation is missing an index on `t1.int_col`. Once this index is added, the performance of the operation improves from `0.61 sec` to `0.14 sec`, as the following result shows:
+上記の例では、インデックス結合操作で`t1.int_col`のインデックスが欠落しています。このインデックスが追加されると、次の結果が示すように、操作のパフォーマンスが`0.61 sec`から`0.14 sec`に向上します。
 
 ```sql
 -- Re-add index
@@ -174,28 +174,28 @@ Query OK, 0 rows affected (3.65 sec)
 6 rows in set (0.36 sec)
 ```
 
-> **Note:**
+> **ノート：**
 >
-> In the above example, the SQL Optimizer selects the hash join plan which performs worse than the index join. Query optimization is an [NP-complete problem](https://en.wikipedia.org/wiki/NP-completeness), and less-than-optimal plans might be chosen. If this is a frequent query, it is recommended to use [SQL Plan Management](/sql-plan-management.md) to bind a hint to a query, which can be easier to manage than inserting hints into queries that your application sends to TiDB.
+> 上記の例では、SQLオプティマイザーはインデックス結合よりもパフォーマンスが悪いハッシュ結合プランを選択します。クエリの最適化は[NP完全問題](https://en.wikipedia.org/wiki/NP-completeness)であり、最適ではないプランが選択される可能性があります。これが頻繁なクエリである場合は、 [SQL計画管理](/sql-plan-management.md)を使用してヒントをクエリにバインドすることをお勧めします。これは、アプリケーションがTiDBに送信するクエリにヒントを挿入するよりも管理が簡単です。
 
-### Variations of Index Join
+### インデックス結合のバリエーション {#variations-of-index-join}
 
-An index join operation using the hint [`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-) creates a hash table of the intermediate results before joining on the outer table. TiDB also supports creating a hash table on the outer table using the hint [`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join). Each of these variations of index join is automatically selected by the SQL Optimizer.
+ヒント[`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-)を使用したインデックス結合操作は、外部テーブルに結合する前に、中間結果のハッシュテーブルを作成します。 TiDBは、ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用して外部テーブルにハッシュテーブルを作成することもサポートしています。インデックス結合のこれらの各バリエーションは、SQLオプティマイザによって自動的に選択されます。
 
-### Configuration
+### Configuration / コンフィグレーション {#configuration}
 
-Index join performance is influenced by the following system variables:
+インデックス結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
-* [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) (default value: `25000`) - the batch size of `index lookup join` operations.
-* [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) (default value: `4`) - the number of concurrent index lookup tasks.
+-   [`tidb_index_join_batch_size`](/system-variables.md#tidb_index_join_batch_size) （デフォルト値： `25000` ） `index lookup join`の操作のバッチサイズ。
+-   [`tidb_index_lookup_join_concurrency`](/system-variables.md#tidb_index_lookup_join_concurrency) （デフォルト値： `4` ）-同時インデックスルックアップタスクの数。
 
-## Hash Join
+## ハッシュ参加 {#hash-join}
 
-In a hash join operation, TiDB reads and caches the data on the `Build` side of the join in a hash table, and then reads the data on the `Probe` side of the join, probing the hash table to access required rows. Hash joins require more memory to execute than index joins but execute much faster when there are a lot of rows that need to be joined. The hash join operator is multi-threaded in TiDB and executes in parallel.
+ハッシュ結合操作では、TiDBは結合の`Build`側のデータを読み取ってハッシュテーブルにキャッシュし、次に結合の`Probe`側のデータを読み取って、ハッシュテーブルをプローブして必要な行にアクセスします。ハッシュ結合は、インデックス結合よりも実行に多くのメモリを必要としますが、結合する必要のある行が多数ある場合は、はるかに高速に実行されます。ハッシュ結合演算子はTiDBでマルチスレッド化されており、並行して実行されます。
 
-An example of hash join is as follows:
+ハッシュ結合の例は次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -214,19 +214,19 @@ EXPLAIN SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-For the execution process of `HashJoin_27`, TiDB performs the following operations in order:
+`HashJoin_27`の実行プロセスでは、TiDBは次の操作を順番に実行します。
 
-1. Cache the data of the `Build` side in memory.
-2. Construct a Hash Table on the `Build` side based on the cached data.
-3. Read the data at the `Probe` side.
-4. Use the data of the `Probe` side to probe the Hash Table.
-5. Return qualified data to the user.
+1.  片側のデータをメモリにキャッシュし`Build` 。
+2.  キャッシュされたデータに基づいて、片側にハッシュテーブルを作成し`Build` 。
+3.  片側のデータを読み取り`Probe` 。
+4.  片側のデータを使用して、ハッシュテーブルを調べ`Probe` 。
+5.  修飾されたデータをユーザーに返します。
 
-The `operator info` column in the `EXPLAIN` result table also records other information about `HashJoin_27`, including whether the query is Inner Join or Outer Join, and what are the conditions of Join. In the above example, the query is an Inner Join, where the Join condition `equal:[eq(test.t1.id, test.t2.id)]` partly corresponds with the query condition `WHERE t1.id = t2.id`. The operator info of the other Join operators in the following examples is similar to this one.
+`EXPLAIN`の結果テーブルの`operator info`列には、クエリが内部結合か外部結合か、結合の条件など、 `HashJoin_27`に関するその他の情報も記録されます。上記の例では、クエリは内部結合であり、結合条件`equal:[eq(test.t1.id, test.t2.id)]`はクエリ条件`WHERE t1.id = t2.id`に部分的に対応しています。次の例の他のJoin演算子の演算子情報は、これに似ています。
 
-### Runtime Statistics
+### 実行時統計 {#runtime-statistics}
 
-If [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) is exceeded, TiDB will attempt to use temporary storage on condition that the `oom-use-tmp-storage` value is `true` (default). This means that the `Build` operator used as part of the hash join might be created on disk. Runtime statistics such as memory usage are visible in the `execution info` of the `EXPLAIN ANALYZE` result table. The following example shows the output of `EXPLAIN ANALYZE` with a 1GB (default) `tidb_mem_quota_query` quota, and a 500MB quota. At 500MB, disk is used for temporary storage:
+[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) （デフォルト値：1GB）を超えると、TiDBは`oom-use-tmp-storage`の値が`true` （デフォルト）であることを条件に一時ストレージの使用を試みます。これは、ハッシュ結合の一部として使用される`Build`演算子がディスク上に作成される可能性があることを意味します。メモリ使用量などの実行時統計は、 `EXPLAIN ANALYZE`の結果テーブルの`execution info`に表示されます。次の例は、1GB（デフォルト）の`tidb_mem_quota_query`クォータと500MBクォータの`EXPLAIN ANALYZE`の出力を示しています。 500MBでは、ディスクは一時ストレージに使用されます。
 
 ```sql
 EXPLAIN ANALYZE SELECT /*+ HASH_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -260,20 +260,20 @@ Query OK, 0 rows affected (0.00 sec)
 5 rows in set (0.98 sec)
 ```
 
-### Configuration
+### Configuration / コンフィグレーション {#configuration}
 
-Hash join performance is influenced by the following system variables:
+ハッシュ結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
-* [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) (default value: 1GB) - if the memory quota for a query is exceeded, TiDB will attempt to spill the `Build` operator of a hash join to disk to save memory.
-* [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) (default value: `5`) - the number of concurrent hash join tasks.
+-   [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) （デフォルト値：1GB）-クエリのメモリクォータを超えた場合、TiDBはメモリを節約するためにハッシュ結合の`Build`演算子をディスクにスピルしようとします。
+-   [`tidb_hash_join_concurrency`](/system-variables.md#tidb_hash_join_concurrency) （デフォルト値： `5` ）-同時ハッシュ結合タスクの数。
 
-## Merge Join
+## マージ結合 {#merge-join}
 
-Merge join is a special sort of join that applies when both sides of the join are read in sorted order. It can be described as similar to an _efficient zipper merge_: as data is read on both the `Build` and the `Probe` sides of the join, the join operation works like a streaming operation. Merge joins require far less memory than hash join but do not execute in parallel.
+マージ結合は、結合の両側がソートされた順序で読み取られるときに適用される特別な種類の結合です。これは、*効率的なジッパーマージ*に似ていると説明できます。データは結合の`Build`側と`Probe`側の両方で読み取られるため、結合操作はストリーミング操作のように機能します。マージ結合はハッシュ結合よりもはるかに少ないメモリを必要としますが、並行して実行されません。
 
-The following is an example:
+次に例を示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
@@ -292,8 +292,8 @@ EXPLAIN SELECT /*+ MERGE_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 5 rows in set (0.00 sec)
 ```
 
-For the execution process of the merge join operator, TiDB performs the following operations:
+マージ結合演算子の実行プロセスでは、TiDBは次の操作を実行します。
 
-1. Read all the data of a Join Group from the `Build` side into the memory.
-2. Read the data of the `Probe` side.
-3. Compare whether each row of data on the `Probe` side matches a complete Join Group on the `Build` side. Apart from equivalent conditions, there are non-equivalent conditions. Here "match" mainly refers to checking whether non-equivalent conditions are met. Join Group refers to the data with the same value among all Join Keys.
+1.  参加グループのすべてのデータを片側からメモリに読み込み`Build` 。
+2.  片側のデータを読み取り`Probe` 。
+3.  `Probe`側のデータの各行が`Build`側の完全な参加グループと一致するかどうかを比較します。同等の条件とは別に、同等ではない条件があります。ここで「一致」とは、主に非等価条件が満たされているかどうかを確認することを指します。結合グループは、すべての結合キー間で同じ値を持つデータを参照します。

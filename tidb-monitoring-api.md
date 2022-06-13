@@ -3,25 +3,25 @@ title: TiDB Monitoring API
 summary: Learn the API of TiDB monitoring services.
 ---
 
-# TiDB Monitoring API
+# TiDBモニタリングAPI {#tidb-monitoring-api}
 
-You can use the following types of interfaces to monitor the TiDB cluster status:
+次のタイプのインターフェイスを使用して、TiDBクラスタのステータスを監視できます。
 
-- [The status interface](#use-the-status-interface): this interface uses the HTTP interface to get the component information. Using this interface, you can get the [running status](#running-status) of the current TiDB server and the [storage information](#storage-information) of a table.
-- [The metrics interface](#use-the-metrics-interface): this interface uses Prometheus to record the detailed information of the various operations in components and views these metrics using Grafana.
+-   [ステータスインターフェイス](#use-the-status-interface) ：このインターフェースはHTTPインターフェースを使用してコンポーネント情報を取得します。このインターフェイスを使用すると、現在のTiDBサーバーの[実行ステータス](#running-status)つとテーブルの[ストレージ情報](#storage-information)を取得できます。
+-   [メトリックインターフェイス](#use-the-metrics-interface) ：このインターフェースはPrometheusを使用してコンポーネントのさまざまな操作の詳細情報を記録し、Grafanaを使用してこれらのメトリックを表示します。
 
-## Use the status interface
+## ステータスインターフェイスを使用する {#use-the-status-interface}
 
-The status interface monitors the basic information of a specific component in the TiDB cluster. It can also act as the monitor interface for Keepalive messages. In addition, the status interface for the Placement Driver (PD) can get the details of the entire TiKV cluster.
+ステータスインターフェイスは、TiDBクラスタの特定のコンポーネントの基本情報を監視します。キープアライブメッセージの監視インターフェイスとしても機能します。さらに、配置ドライバー（PD）のステータスインターフェイスは、TiKVクラスタ全体の詳細を取得できます。
 
-### TiDB server
+### TiDBサーバー {#tidb-server}
 
-- TiDB API address: `http://${host}:${port}`
-- Default port: `10080`
+-   TiDB APIアドレス： `http://${host}:${port}`
+-   デフォルトのポート： `10080`
 
-### Running status
+### 実行ステータス {#running-status}
 
-The following example uses `http://${host}:${port}/status` to get the current status of the TiDB server and to determine whether the server is alive. The result is returned in **JSON** format.
+次の例では、 `http://${host}:${port}/status`を使用して、TiDBサーバーの現在のステータスを取得し、サーバーが稼働しているかどうかを判別します。結果は**JSON**形式で返されます。
 
 ```bash
 curl http://127.0.0.1:10080/status
@@ -32,11 +32,11 @@ curl http://127.0.0.1:10080/status
 }
 ```
 
-#### Storage information
+#### ストレージ情報 {#storage-information}
 
-The following example uses `http://${host}:${port}/schema_storage/${db}/${table}` to get the storage information of the specific data table. The result is returned in **JSON** format.
+次の例では、 `http://${host}:${port}/schema_storage/${db}/${table}`を使用して特定のデータテーブルのストレージ情報を取得します。結果は**JSON**形式で返されます。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```bash
 curl http://127.0.0.1:10080/schema_storage/mysql/stats_histograms
@@ -74,13 +74,13 @@ curl http://127.0.0.1:10080/schema_storage/test
 ]
 ```
 
-### PD server
+### PDサーバー {#pd-server}
 
-- PD API address: `http://${host}:${port}/pd/api/v1/${api_name}`
-- Default port: `2379`
-- Details about API names: see [PD API doc](https://download.pingcap.com/pd-api-v1.html)
+-   PD APIアドレス： `http://${host}:${port}/pd/api/v1/${api_name}`
+-   デフォルトのポート： `2379`
+-   API名の詳細： [PDAPIドキュメント](https://download.pingcap.com/pd-api-v1.html)を参照
 
-The PD interface provides the status of all the TiKV servers and the information about load balancing. See the following example for the information about a single-node TiKV cluster:
+PDインターフェイスは、すべてのTiKVサーバーのステータスと負荷分散に関する情報を提供します。シングルノードTiKVクラスタについては、次の例を参照してください。
 
 ```bash
 curl http://127.0.0.1:2379/pd/api/v1/stores
@@ -114,10 +114,10 @@ curl http://127.0.0.1:2379/pd/api/v1/stores
   ]
 ```
 
-## Use the metrics interface
+## メトリックインターフェイスを使用する {#use-the-metrics-interface}
 
-The metrics interface monitors the status and performance of the entire TiDB cluster.
+メトリックインターフェイスは、TiDBクラスタ全体のステータスとパフォーマンスを監視します。
 
-- If you use other deployment ways, [deploy Prometheus and Grafana](/deploy-monitoring-services.md) before using this interface.
+-   他の展開方法を使用する場合は、このインターフェイスを使用する前に[PrometheusとGrafanaをデプロイする](/deploy-monitoring-services.md) 。
 
-After Prometheus and Grafana are successfully deployed, [configure Grafana](/deploy-monitoring-services.md#configure-grafana).
+PrometheusとGrafanaが正常にデプロイされた後、 [Grafanaを構成する](/deploy-monitoring-services.md#configure-grafana) 。

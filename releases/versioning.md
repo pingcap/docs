@@ -3,100 +3,96 @@ title: TiDB Versioning
 summary: Learn the version numbering system of TiDB.
 ---
 
-# TiDB Versioning
+# TiDBバージョニング {#tidb-versioning}
 
-<Important>
-It is recommended to always upgrade to the latest patch release of your release series.
-</Important>
+<Important>リリースシリーズの最新のパッチリリースに常にアップグレードすることをお勧めします。</Important>
 
-TiDB offers two release series:
+TiDBは2つのリリースシリーズを提供しています。
 
-* Long-Term Support Releases
-* Development Milestone Releases (introduced in TiDB v6.0.0)
+-   長期サポートリリース
+-   開発マイルストーンリリース（TiDB v6.0.0で導入）
 
-## Release versioning
+## バージョン管理をリリース {#release-versioning}
 
-TiDB versioning has the form of `X.Y.Z`. `X.Y` represents a release series.
+TiDBのバージョン管理は`X.Y.Z`の形式です。 `X.Y`はリリースシリーズを表します。
 
-- Since TiDB 1.0, `X` increments every year. Each `X` release introduces new features and improvements.
-- `Y` increments from 0. Each `Y` release introduces new features and improvements.
-- In the first release of a release series, `Z` is set to 0 by default. For patch releases, `Z` increments from 1.
+-   TiDB 1.0以降、毎年`X`ずつ増加します。 `X`のリリースごとに、新機能と改善点が導入されています。
+-   `Y`は0から増分します`Y`のリリースごとに、新しい機能と改善が導入されます。
+-   リリースシリーズの最初のリリースでは、デフォルトで`Z`が0に設定されています。パッチリリースの場合、1から`Z`ずつ増加します。
 
-For the versioning system of TiDB v5.0.0 and earlier versions, refer to [Historical versioning](#historical-versioning-deprecated).
+TiDB v5.0.0以前のバージョンのバージョン管理システムについては、 [履歴バージョン管理](#historical-versioning-deprecated)を参照してください。
 
-## Long-Term Support releases
+## ロングタームサポートリリース {#long-term-support-releases}
 
-Long-Term Support (LTS) versions are released approximately every six months and introduce new features, improvements, bug fixes and security vulnerability fixes.
+ロングタームサポート（LTS）バージョンは、約6か月ごとにリリースされ、新機能、改善、バグ修正、およびセキュリティの脆弱性修正が導入されています。
 
-LTS releases are versioned as `X.Y.Z`. `Z` defaults to 0.
+LTSリリースは`X.Y.Z`としてバージョン管理されます。 `Z`のデフォルトは0です。
 
-Example versions:
+バージョン例：
 
-- 6.1.0
-- 5.4.0
+-   6.1.0
+-   5.4.0
 
-During the lifecycle of LTS, patch releases are made available on demand. Patch releases contain bug fixes and security vulnerability fixes, and do not introduce new features.
+LTSのライフサイクル中に、パッチリリースはオンデマンドで利用可能になります。パッチリリースにはバグ修正とセキュリティ脆弱性修正が含まれており、新機能は導入されていません。
 
-Patch releases are versioned as `X.Y.Z`. `X.Y` is consistent with the corresponding LTS versioning. The patch number `Z` increments from 1.
+パッチリリースは`X.Y.Z`としてバージョン管理されます。 `X.Y`は、対応するLTSバージョン管理と一致しています。パッチ番号`Z`は1から増加します。
 
-Example version:
+サンプルバージョン：
 
-- 6.1.1
+-   6.1.1
 
-<Note>
-v5.1.0, v5.2.0, v5.3.0, v5.4.0 were released only two months after their preceding releases, but all four releases are LTS and provide patch releases.
-</Note>
+<Note>v5.1.0、v5.2.0、v5.3.0、v5.4.0は、以前のリリースからわずか2か月後にリリースされましたが、4つのリリースはすべてLTSであり、パッチリリースを提供します。</Note>
 
-## Development Milestone Releases
+## 開発マイルストーンリリース {#development-milestone-releases}
 
-Development Milestone Releases (DMR) are released approximately every two months that do not contain LTS. DMR versions introduce new features, improvements and bug fixes. TiDB does not provide patch releases based on DMR, and any related bugs are fixed in the subsequent release series.
+開発マイルストーンリリース（DMR）は、LTSを含まない約2か月ごとにリリースされます。 DMRバージョンでは、新機能、改善点、バグ修正が導入されています。 TiDBはDMRに基づくパッチリリースを提供していません。関連するバグは、後続のリリースシリーズで修正されています。
 
-DMRs are versioned as `X.Y.Z`. `Z` defaults to 0. A `-DMR` suffix is appended to the version number.
+DMRは`X.Y.Z`としてバージョン管理されます。 `Z`のデフォルトは0です。バージョン番号に`-DMR`のサフィックスが追加されます。
 
-Example version:
+サンプルバージョン：
 
-- 6.0.0-DMR
+-   6.0.0-DMR
 
-## Versioning of TiDB ecosystem tools
+## TiDBエコシステムツールのバージョン管理 {#versioning-of-tidb-ecosystem-tools}
 
-Some TiDB tools are released together with the TiDB server and use the same version numbering system, such as TiDB Lightning. Some TiDB tools are released separately from the TiDB server and use their own version numbering system, such as TiUP and TiDB Operator.
+一部のTiDBツールはTiDBサーバーと一緒にリリースされ、TiDBLightningなどの同じバージョン番号付けシステムを使用します。一部のTiDBツールは、TiDBサーバーとは別にリリースされ、TiUPやTiDB Operatorなどの独自のバージョン番号付けシステムを使用します。
 
-## Historical versioning (deprecated)
+## 履歴バージョン管理（非推奨） {#historical-versioning-deprecated}
 
-### General Availability releases
+### 一般提供リリース {#general-availability-releases}
 
-General Availability (GA) releases are stable versions of the current release series of TiDB. GA versions are released after Release Candidate (RC) versions. GA can be used in production environments.
+General Availability（GA）リリースは、TiDBの現在のリリースシリーズの安定したバージョンです。 GAバージョンは、リリース候補（RC）バージョンの後にリリースされます。 GAは実稼働環境で使用できます。
 
-Example versions:
+バージョン例：
 
-- 1.0
-- 2.1 GA
-- 5.0 GA
+-   1.0
+-   2.1 GA
+-   5.0 GA
 
-### Release Candidate releases
+### リリース候補リリース {#release-candidate-releases}
 
-Release Candidate (RC) releases introduce new features and improvements. RC versions are significantly more stable than Beta versions. RC can be used for early testing, but are not suitable for production.
+リリース候補（RC）リリースでは、新機能と改善点が導入されています。 RCバージョンは、ベータバージョンよりも大幅に安定しています。 RCは初期のテストに使用できますが、本番環境には適していません。
 
-Example versions:
+バージョン例：
 
-- RC1
-- 2.0-RC1
-- 3.0.0-rc.1
+-   RC1
+-   2.0-RC1
+-   3.0.0-rc.1
 
-### Beta releases
+### ベータリリース {#beta-releases}
 
-Beta releases introduces new features and improvements. Beta versions are greatly improved over Alpha versions and have eliminated critical bugs, but still contain some bugs. Beta releases are available for users to test the latest features.
+ベータリリースでは、新機能と改善点が導入されています。ベータ版はアルファ版よりも大幅に改善されており、重大なバグは排除されていますが、まだいくつかのバグが含まれています。ベータリリースは、ユーザーが最新の機能をテストするために利用できます。
 
-Example versions:
+バージョン例：
 
-- 1.1 Beta
-- 2.1 Beta
-- 4.0.0-beta.1
+-   1.1ベータ版
+-   2.1ベータ版
+-   4.0.0-beta.1
 
-### Alpha releases
+### アルファリリース {#alpha-releases}
 
-Alpha releases are internal releases for testing and introduce new features and improvements. Alpha releases are the initial versions of the current release series. Alpha releases might have some bugs and are available for users to test the latest features.
+アルファリリースはテスト用の内部リリースであり、新機能と改善点を導入しています。アルファリリースは、現在のリリースシリーズの初期バージョンです。 Alphaリリースにはいくつかのバグがある可能性があり、ユーザーは最新の機能をテストできます。
 
-Example version:
+サンプルバージョン：
 
-- 1.1 Alpha
+-   1.1アルファ

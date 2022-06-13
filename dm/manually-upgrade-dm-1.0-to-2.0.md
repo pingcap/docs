@@ -3,37 +3,37 @@ title: Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+
 summary: Learn how to manually upgrade TiDB data migration from v1.0.x to v2.0+.
 ---
 
-# Manually Upgrade TiDB Data Migration from v1.0.x to v2.0+
+# TiDBデータ移行をv1.0.xからv2.0+に手動でアップグレードする {#manually-upgrade-tidb-data-migration-from-v1-0-x-to-v2-0}
 
-This document introduces how to manually upgrade the TiDB DM tool from v1.0.x to v2.0+. The main idea is to use the global checkpoint information in v1.0.x to start a new data migration task in the v2.0+ cluster.
+このドキュメントでは、TiDBDMツールをv1.0.xからv2.0+に手動でアップグレードする方法を紹介します。主なアイデアは、v1.0.xのグローバルチェックポイント情報を使用して、v2.0+クラスタで新しいデータ移行タスクを開始することです。
 
-For how to automatically upgrade the TiDB DM tool from v1.0.x to v2.0+, refer to [Using TiUP to automatically import the 1.0 cluster deployed by DM-Ansible](/dm/maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible).
+TiDBDMツールをv1.0.xからv2.0+に自動的にアップグレードする方法については、 [TiUPを使用して、DM-Ansibleによってデプロイされた1.0クラスタを自動的にインポートします](/dm/maintain-dm-using-tiup.md#import-and-upgrade-a-dm-10-cluster-deployed-using-dm-ansible)を参照してください。
 
-> **Note:**
+> **ノート：**
 >
-> - Currently, upgrading DM from v1.0.x to v2.0+ is not supported when the data migration task is in the process of full export or full import.
-> - As the gRPC protocol used for interaction between the components of the DM cluster is updated greatly, you need to make sure that the DM components (including dmctl) use the same version before and after the upgrade.
-> - Because the metadata storage of the DM cluster (such as checkpoint, shard DDL lock status and online DDL metadata, etc.) is updated greatly, the metadata of v1.0.x cannot be reused automatically in v2.0+. So you need to make sure the following requirements are satisfied before performing the upgrade operation:
->     - All data migration tasks are not in the process of shard DDL coordination.
->     - All data migration tasks are not in the process of online DDL coordination.
+> -   現在、データ移行タスクが完全エクスポートまたは完全インポートの処理中である場合、DMをv1.0.xからv2.0+にアップグレードすることはサポートされていません。
+> -   DMクラスタのコンポーネント間の相互作用に使用されるgRPCプロトコルは大幅に更新されるため、アップグレードの前後でDMコンポーネント（dmctlを含む）が同じバージョンを使用していることを確認する必要があります。
+> -   DMクラスタのメタデータストレージ（チェックポイント、シャードDDLロックステータス、オンラインDDLメタデータなど）が大幅に更新されるため、v1.0.xのメタデータをv2.0+で自動的に再利用することはできません。したがって、アップグレード操作を実行する前に、次の要件が満たされていることを確認する必要があります。
+>     -   すべてのデータ移行タスクは、シャードDDL調整のプロセスではありません。
+>     -   すべてのデータ移行タスクは、オンラインDDL調整のプロセスではありません。
 
-The steps for manual upgrade are as follows.
+手動アップグレードの手順は次のとおりです。
 
-## Step 1: Prepare v2.0+ configuration file
+## ステップ1：v2.0+構成ファイルを準備する {#step-1-prepare-v2-0-configuration-file}
 
-The prepared configuration files of v2.0+ include the configuration files of the upstream database and the configuration files of the data migration task.
+v2.0 +の準備された構成ファイルには、アップストリームデータベースの構成ファイルとデータ移行タスクの構成ファイルが含まれています。
 
-### Upstream database configuration file
+### アップストリームデータベース構成ファイル {#upstream-database-configuration-file}
 
-In v2.0+, the [upstream database configuration file](/dm/dm-source-configuration-file.md) is separated from the process configuration of the DM-worker, so you need to obtain the source configuration based on the [v1.0.x DM-worker configuration](/dm/dm-worker-configuration-file.md).
+v2.0 +では、 [アップストリームデータベース構成ファイル](/dm/dm-source-configuration-file.md)はDMワーカーのプロセス構成から分離されているため、 [v1.0.xDM-worker構成](/dm/dm-worker-configuration-file.md)に基づいてソース構成を取得する必要があります。
 
-> **Note:**
+> **ノート：**
 >
-> If `enable-gtid` in the source configuration is enabled during the upgrade from v1.0.x to v2.0+, you need to parse the binlog or relay log file to obtain the GTID sets corresponding to the binlog position.
+> v1.0.xからv2.0+へのアップグレード中にソース構成の`enable-gtid`が有効になっている場合は、binlogまたはリレーログファイルを解析して、binlogの位置に対応するGTIDセットを取得する必要があります。
 
-#### Upgrade a v1.0.x cluster deployed by DM-Ansible
+#### DM-Ansibleによってデプロイされたv1.0.xクラスタをアップグレードします {#upgrade-a-v1-0-x-cluster-deployed-by-dm-ansible}
 
-Assume that the v1.0.x DM cluster is deployed by DM-Ansible, and the following `dm_worker_servers` configuration is in the `inventory.ini` file:
+v1.0.x DMクラスタがDM-Ansibleによってデプロイされ、次の`dm_worker_servers`の構成が`inventory.ini`のファイルに含まれていると想定します。
 
 ```ini
 [dm_master_servers]
@@ -41,7 +41,7 @@ dm_worker1 ansible_host=172.16.10.72 server_id=101 source_id="mysql-replica-01" 
 dm_worker2 ansible_host=172.16.10.73 server_id=102 source_id="mysql-replica-02" mysql_host=172.16.10.82 mysql_user=root mysql_password='VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU=' mysql_port=3306
 ```
 
-Then you can convert it to the following two source configuration files:
+次に、それを次の2つのソース構成ファイルに変換できます。
 
 ```yaml
 # The source configuration corresponding to the original dm_worker1. For example, it is named as source1.yaml.
@@ -65,9 +65,9 @@ from:
   password: "VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU="   # Corresponds to the original `mysql_password`.
 ```
 
-#### Upgrade a v1.0.x cluster deployed by binary
+#### バイナリによってデプロイされたv1.0.xクラスタをアップグレードします {#upgrade-a-v1-0-x-cluster-deployed-by-binary}
 
-Assume that the v1.0.x DM cluster is deployed by binary, and the corresponding DM-worker configuration is as follows:
+v1.0.x DMクラスタがバイナリーによってデプロイされ、対応するDM-worker構成が次のようになっていると想定します。
 
 ```toml
 log-level = "info"
@@ -83,7 +83,7 @@ password = "VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU="
 port = 3306
 ```
 
-Then you can convert it to the following source configuration file:
+次に、それを次のソース構成ファイルに変換できます。
 
 ```yaml
 server-id: 101                                   # Corresponds to the original `server-id`.
@@ -96,32 +96,32 @@ from:
   password: "VjX8cEeTX+qcvZ3bPaO4h0C80pe/1aU="   # Corresponds to the original `from.password`.
 ```
 
-### Data migration task configuration file
+### データ移行タスク構成ファイル {#data-migration-task-configuration-file}
 
-For [data migration task configuration guide](/dm/dm-task-configuration-guide.md), v2.0+ is basically compatible with v1.0.x. You can directly copy the configuration of v1.0.x.
+[データ移行タスク構成ガイド](/dm/dm-task-configuration-guide.md)の場合、v2.0+は基本的にv1.0.xと互換性があります。 v1.0.xの構成を直接コピーできます。
 
-## Step 2: Deploy the v2.0+ cluster
+## ステップ2：v2.0+クラスタをデプロイ {#step-2-deploy-the-v2-0-cluster}
 
-> **Note:**
+> **ノート：**
 >
-> Skip this step if you have other v2.0+ clusters available.
+> 他のv2.0+クラスターを使用できる場合は、この手順をスキップしてください。
 
-[Use TiUP](/dm/deploy-a-dm-cluster-using-tiup.md) to deploy a new v2.0+ cluster according to the required number of nodes.
+[TiUPを使用する](/dm/deploy-a-dm-cluster-using-tiup.md)は、必要なノード数に応じて新しいv2.0+クラスタをデプロイします。
 
-## Step 3：Stop the v1.0.x cluster
+## ステップ3：v1.0.xクラスタを停止します {#step-3-stop-the-v1-0-x-cluster}
 
-If the original v1.0.x cluster is deployed by DM-Ansible, you need to use [DM-Ansible to stop the v1.0.x cluster](https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster).
+元のv1.0.xクラスタがDM-Ansibleによってデプロイされている場合は、 [DM-v1.0.xクラスタを停止できます](https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster)を使用する必要があります。
 
-If the original v1.0.x cluster is deployed by binary, you can stop the DM-worker and DM-master processes directly.
+元のv1.0.xクラスタがバイナリーでデプロイされている場合は、DM-workerおよびDM-masterプロセスを直接停止できます。
 
-## Step 4: Upgrade data migration task
+## ステップ4：データ移行タスクをアップグレードする {#step-4-upgrade-data-migration-task}
 
-1. Use the [`operate-source`](/dm/dm-manage-source.md#operate-data-source) command to load the upstream database source configuration from [step 1](#step-1-prepare-v20-configuration-file) into the v2.0+ cluster.
+1.  [`operate-source`](/dm/dm-manage-source.md#operate-data-source)コマンドを使用して、アップストリームデータベースソース設定を[ステップ1](#step-1-prepare-v20-configuration-file)からv2.0+クラスタにロードします。
 
-2. In the downstream TiDB cluster, obtain the corresponding global checkpoint information from the incremental checkpoint table of the v1.0.x data migration task.
+2.  ダウンストリームTiDBクラスタで、v1.0.xデータ移行タスクのインクリメンタルチェックポイントテーブルから対応するグローバルチェックポイント情報を取得します。
 
-    - Assume that the v1.0.x data migration configuration does not specify `meta-schema` (or specify its value as the default `dm_meta`), and the corresponding task name is `task_v1`, the corresponding checkpoint information is in the ``` `dm_meta`.`task_v1_syncer_checkpoint` ``` table of the downstream TiDB.
-    - Use the following SQL statements to obtain the global checkpoint information of all upstream database sources corresponding to the data migration task.
+    -   v1.0.xデータ移行構成で`meta-schema`が指定されておらず（またはその値がデフォルトの`dm_meta`として指定されて）、対応するタスク名が`task_v1`であるとすると、対応するチェックポイント情報はダウンストリームTiDBの`` `dm_meta`.`task_v1_syncer_checkpoint` ``テーブルにあります。
+    -   次のSQLステートメントを使用して、データ移行タスクに対応するすべてのアップストリームデータベースソースのグローバルチェックポイント情報を取得します。
 
         ```sql
         > SELECT `id`, `binlog_name`, `binlog_pos` FROM `dm_meta`.`task_v1_syncer_checkpoint` WHERE `is_global`=1;
@@ -133,13 +133,13 @@ If the original v1.0.x cluster is deployed by binary, you can stop the DM-worker
         +------------------+-------------------------+------------+
         ```
 
-3. Update the v1.0.x data migration task configuration file to start a new v2.0+ data migration task.
+3.  v1.0.xデータ移行タスク構成ファイルを更新して、新しいv2.0+データ移行タスクを開始します。
 
-    - If the data migration task configuration file of v1.0.x is `task_v1.yaml`, copy it and rename it to `task_v2.yaml`.
-    - Make the following changes to `task_v2.yaml`:
-        - Modify `name` to a new name, such as `task_v2`.
-        - Change `task-mode` to `incremental`.
-        - Set the starting point of incremental replication for each source according to the global checkpoint information obtained in step 2. For example:
+    -   v1.0.xのデータ移行タスク構成ファイルが`task_v1.yaml`の場合は、それをコピーして`task_v2.yaml`に名前を変更します。
+    -   `task_v2.yaml`に次の変更を加えます。
+        -   `name`を`task_v2`などの新しい名前に変更します。
+        -   `task-mode`を`incremental`に変更します。
+        -   手順2で取得したグローバルチェックポイント情報に従って、各ソースの増分レプリケーションの開始点を設定します。次に例を示します。
 
             ```yaml
             mysql-instances:
@@ -154,12 +154,12 @@ If the original v1.0.x cluster is deployed by binary, you can stop the DM-worker
                   binlog-pos: 10485
             ```
 
-            > **Note:**
+            > **ノート：**
             >
-            > If `enable-gtid` is enabled in the source configuration, currently you need to parse the binlog or relay log file to obtain the GTID sets corresponding to the binlog position, and set it to `binlog-gtid` in the `meta`.
+            > ソース構成で`enable-gtid`が有効になっている場合、現在、binlogまたはリレーログファイルを解析して、binlogの位置に対応するGTIDセットを取得し、 `meta`で`binlog-gtid`に設定する必要があります。
 
-4. Use the [`start-task`](/dm/dm-create-task.md) command to start the upgraded data migration task through the v2.0+ data migration task configuration file.
+4.  [`start-task`](/dm/dm-create-task.md)コマンドを使用して、v2.0+データ移行タスク構成ファイルを介してアップグレードされたデータ移行タスクを開始します。
 
-5. Use the [`query-status`](/dm/dm-query-status.md) command to confirm whether the data migration task is running normally.
+5.  [`query-status`](/dm/dm-query-status.md)コマンドを使用して、データ移行タスクが正常に実行されているかどうかを確認します。
 
-If the data migration task runs normally, it indicates that the DM upgrade to v2.0+ is successful.
+データ移行タスクが正常に実行されている場合は、v2.0+へのDMアップグレードが成功したことを示しています。

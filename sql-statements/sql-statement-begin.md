@@ -3,13 +3,13 @@ title: BEGIN | TiDB SQL Statement Reference
 summary: An overview of the usage of BEGIN for the TiDB database.
 ---
 
-# BEGIN
+# 始める {#begin}
 
-This statement starts a new transaction inside of TiDB. It is similar to the statements `START TRANSACTION` and `SET autocommit=0`.
+このステートメントは、TiDB内で新しいトランザクションを開始します。これは、ステートメント`START TRANSACTION`および`SET autocommit=0`に似ています。
 
-In the absence of a `BEGIN` statement, every statement will by default autocommit in its own transaction. This behavior ensures MySQL compatibility.
+`BEGIN`のステートメントがない場合、すべてのステートメントはデフォルトで独自のトランザクションで自動コミットされます。この動作により、MySQLの互換性が保証されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 BeginTransactionStmt ::=
@@ -17,7 +17,7 @@ BeginTransactionStmt ::=
 |   'START' 'TRANSACTION' ( 'READ' ( 'WRITE' | 'ONLY' ( 'WITH' 'TIMESTAMP' 'BOUND' TimestampBound )? ) | 'WITH' 'CONSISTENT' 'SNAPSHOT' )?
 ```
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
@@ -33,14 +33,14 @@ mysql> COMMIT;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-TiDB supports the syntax extension of `BEGIN PESSIMISTIC` or `BEGIN OPTIMISTIC`. This enables you to override the default transactional model for your transaction.
+TiDBは、 `BEGIN PESSIMISTIC`または`BEGIN OPTIMISTIC`の構文拡張をサポートしています。これにより、トランザクションのデフォルトのトランザクションモデルを上書きできます。
 
-## See also
+## も参照してください {#see-also}
 
-* [COMMIT](/sql-statements/sql-statement-commit.md)
-* [ROLLBACK](/sql-statements/sql-statement-rollback.md)
-* [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
-* [TiDB optimistic transaction model](/optimistic-transaction.md)
-* [TiDB pessimistic transaction mode](/pessimistic-transaction.md)
+-   [専念](/sql-statements/sql-statement-commit.md)
+-   [ロールバック](/sql-statements/sql-statement-rollback.md)
+-   [トランザクションを開始します](/sql-statements/sql-statement-start-transaction.md)
+-   [TiDB楽観的トランザクションモデル](/optimistic-transaction.md)
+-   [TiDB悲観的トランザクションモード](/pessimistic-transaction.md)

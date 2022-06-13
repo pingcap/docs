@@ -3,25 +3,25 @@ title: TiUP Mirror Reference Guide
 summary: Learn the general information of TiUP mirrors.
 ---
 
-# TiUP Mirror Reference Guide
+# TiUPミラーリファレンスガイド {#tiup-mirror-reference-guide}
 
-TiUP mirrors are TiUP's component warehouse, which stores components and their metadata. TiUP mirrors take the following two forms:
+TiUPミラーは、コンポーネントとそのメタデータを格納するTiUPのコンポーネントウェアハウスです。 TiUPミラーは、次の2つの形式を取ります。
 
-+ Directory on the local disk: serves the local TiUP client, which is called a local mirror in this document.
-+ HTTP mirror started based on the remote disk directory: serves the remote TiUP client, which is called a remote mirror in this document.
+-   ローカルディスク上のディレクトリ：このドキュメントではローカルミラーと呼ばれるローカルTiUPクライアントにサービスを提供します。
+-   リモートディスクディレクトリに基づいて開始されたHTTPミラー：このドキュメントではリモートミラーと呼ばれるリモートTiUPクライアントにサービスを提供します。
 
-## Create and update mirror
+## ミラーの作成と更新 {#create-and-update-mirror}
 
-You can create a TiUP mirror using one of the following two methods:
+次の2つの方法のいずれかを使用して、TiUPミラーを作成できます。
 
-+ Execute `tiup mirror init` to create a mirror from scratch.
-+ Execute `tiup mirror clone` to clone from an existing mirror.
+-   `tiup mirror init`を実行して、ミラーを最初から作成します。
+-   `tiup mirror clone`を実行して、既存のミラーからクローンを作成します。
 
-After the mirror is created, you can add components to or delete components from the mirror using the `tiup mirror` commands. TiUP updates a mirror by adding files and assigning a new version number to it, rather than deleting any files from the mirror.
+ミラーの作成後、 `tiup mirror`コマンドを使用して、ミラーにコンポーネントを追加したり、ミラーからコンポーネントを削除したりできます。 TiUPは、ミラーからファイルを削除するのではなく、ファイルを追加して新しいバージョン番号を割り当てることにより、ミラーを更新します。
 
-## Mirror structure
+## ミラー構造 {#mirror-structure}
 
-A typical mirror structure is as follows:
+一般的なミラー構造は次のとおりです。
 
 ```
 + <mirror-dir>                                  # Mirror's root directory
@@ -47,16 +47,16 @@ A typical mirror structure is as follows:
    |-- {hash}-timestamp.json                    # Private key of the timestamps
 ```
 
-> **Note:**
+> **ノート：**
 >
-> + The `commits` directory stores the logs generated in the process of mirror update and is used to roll back the mirror. You can delete the old log directories regularly when the disk space is insufficient.
-> + The private key stored in the `keys` directory is sensitive. It is recommended to keep it separately.
+> -   `commits`ディレクトリには、ミラーの更新プロセスで生成されたログが格納され、ミラーをロールバックするために使用されます。ディスク容量が不足している場合は、古いログディレクトリを定期的に削除できます。
+> -   `keys`ディレクトリに保存されている秘密鍵は機密情報です。別々に保管することをお勧めします。
 
-### Root directory
+### ルートディレクトリ {#root-directory}
 
-In a TiUP mirror, the root certificate is used to store the public key of other metadata files. Each time any metadata file (`*.json`) is obtained, TiUP client needs to find the corresponding public key in the installed `root.json` based on the metadata file type (root, index, snapshot, timestamp). Then TiUP client uses the public key to verify whether the signature is valid.
+TiUPミラーでは、ルート証明書は他のメタデータファイルの公開鍵を格納するために使用されます。メタデータファイル（ `*.json` ）が取得されるたびに、TiUPクライアントは、メタデータファイルタイプ（ルート、インデックス、スナップショット、タイムスタンプ）に基づいて、インストールされた`root.json`で対応する公開鍵を見つける必要があります。次に、TiUPクライアントは公開鍵を使用して、署名が有効かどうかを確認します。
 
-The root certificate's format is as follows:
+ルート証明書の形式は次のとおりです。
 
 ```
 {
@@ -102,11 +102,11 @@ The root certificate's format is as follows:
 }
 ```
 
-### Index
+### 索引 {#index}
 
-The index file records all the components in the mirror and the owner information of the components.
+インデックスファイルには、ミラー内のすべてのコンポーネントとコンポーネントの所有者情報が記録されます。
 
-The index file's format is as follows:
+インデックスファイルの形式は次のとおりです。
 
 ```
 {
@@ -167,11 +167,11 @@ The index file's format is as follows:
 }
 ```
 
-### Component
+### 成分 {#component}
 
-The component's metadata file records information of the component-specific platform and the version.
+コンポーネントのメタデータファイルには、コンポーネント固有のプラットフォームとバージョンの情報が記録されます。
 
-The component metadata file's format is as follows:
+コンポーネントメタデータファイルの形式は次のとおりです。
 
 ```
 {
@@ -217,11 +217,11 @@ The component metadata file's format is as follows:
 }
 ```
 
-### Snapshot
+### スナップショット {#snapshot}
 
-The snapshot file records the version number of each metadata file:
+スナップショットファイルには、各メタデータファイルのバージョン番号が記録されています。
 
-The snapshot file's structure is as follows:
+スナップショットファイルの構造は次のとおりです。
 
 ```
 {
@@ -262,11 +262,11 @@ The snapshot file's structure is as follows:
     }
 ```
 
-### Timestamp
+### タイムスタンプ {#timestamp}
 
-The timestamp file records the checksum of the current snapshot.
+タイムスタンプファイルには、現在のスナップショットのチェックサムが記録されます。
 
-The timestamp file's format is as follows:
+タイムスタンプファイルの形式は次のとおりです。
 
 ```
 {
@@ -296,16 +296,16 @@ The timestamp file's format is as follows:
         "version": {N}                                          # The version number of this file. You need to overwrite timestamp.json every time you update the file, and set its version to N + 1.
 ```
 
-## Client workflow
+## クライアントワークフロー {#client-workflow}
 
-The client uses the following logic to ensure that the files downloaded from the mirror are safe:
+クライアントは次のロジックを使用して、ミラーからダウンロードされたファイルが安全であることを確認します。
 
-+ A `root.json` file is included with the binary when the client is installed.
-+ The running client performs the following tasks based on the existing `root.json`:
-    1. Obtain the version from `root.json` and mark it as `N`.
-    2. Request `{N+1}.root.json` from the mirror. If the request is successful, use the public key recorded in `root.json` to verify whether the file is valid.
-    3. Request `timestamp.json` from the mirror and use the public key recorded in `root.json` to verify whether the file is valid.
-    4. Check whether the checksum of `snapshot.json` recorded in `timestamp.json` matches the checksum of the local `snapshot.json`. If the two do not match, request the latest `snapshot.json` from the mirror and use the public key recorded in `root.json` to verify whether the file is valid.
-    5. Obtain the version number `N` of the `index.json` file from `snapshot.json` and request `{N}.index.json` from the mirror. Then use the public key recorded in `root.json` to verify whether the file is valid.
-    6. For components such as `tidb.json` and `tikv.json`, the client obtains the version numbers `N` of the components from `snapshot.json` and requests `{N}.{component}.json` from the mirror. Then the client uses the public key recorded in `index.json` to verify whether the file is valid.
-    7. For component's tar files, the client obtains the URLs and checksums of the files from `{component}.json` and request the URLs for the tar packages. Then the client verifies whether the checksum is correct.
+-   クライアントのインストール時に、バイナリに`root.json`のファイルが含まれます。
+-   実行中のクライアントは、既存の`root.json`に基づいて次のタスクを実行します。
+    1.  `root.json`からバージョンを取得し、 `N`としてマークします。
+    2.  ミラーから`{N+1}.root.json`を要求します。要求が成功した場合は、 `root.json`で記録された公開鍵を使用して、ファイルが有効かどうかを確認します。
+    3.  ミラーから`timestamp.json`を要求し、 `root.json`で記録された公開鍵を使用して、ファイルが有効かどうかを確認します。
+    4.  `timestamp.json`で記録された`snapshot.json`のチェックサムがローカル`snapshot.json`のチェックサムと一致するかどうかを確認します。 2つが一致しない場合は、ミラーに最新の`snapshot.json`を要求し、 `root.json`で記録された公開鍵を使用して、ファイルが有効かどうかを確認します。
+    5.  `snapshot.json`から`index.json`ファイルのバージョン番号`N`を取得し、ミラーから`{N}.index.json`を要求します。次に、 `root.json`で記録された公開鍵を使用して、ファイルが有効かどうかを確認します。
+    6.  `tidb.json`や`tikv.json`などのコンポーネントの場合、クライアントはコンポーネントのバージョン番号`N`を`snapshot.json`から取得し、ミラーから`{N}.{component}.json`を要求します。次に、クライアントは`index.json`で記録された公開鍵を使用して、ファイルが有効かどうかを確認します。
+    7.  コンポーネントのtarファイルの場合、クライアントは`{component}.json`からファイルのURLとチェックサムを取得し、tarパッケージのURLを要求します。次に、クライアントはチェックサムが正しいかどうかを確認します。

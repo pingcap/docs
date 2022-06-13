@@ -2,50 +2,50 @@
 title: TiDB RC2 Release Notes
 ---
 
-# TiDB RC2 Release Notes
+# TiDBRC2リリースノート {#tidb-rc2-release-notes}
 
-On March 1, 2017, TiDB RC2 is released! This release is focused on the compatibility with MySQL, SQL query optimizer, system stability and performance in this version. What’s more, a new permission management mechanism is added and users can control data access in the same way as the MySQL privilege management system.
+2017年3月1日、TiDB RC2がリリースされました！このリリースは、MySQLとの互換性、SQLクエリオプティマイザー、システムの安定性、およびこのバージョンのパフォーマンスに重点を置いています。さらに、新しい権限管理メカニズムが追加され、ユーザーはMySQL特権管理システムと同じ方法でデータアクセスを制御できます。
 
-## TiDB
+## TiDB {#tidb}
 
-+ Query optimizer
-    - Collect column/index statistics and use them in the query optimizer
-    - Optimize the correlated subquery
-    - Optimize the Cost Based Optimizer (CBO) framework
-    - Eliminate aggregation using unique key information
-    - Refactor expression evaluation framework
-    - Convert Distinct to GroupBy
-    - Support the topn operation push-down
-+ Support basic privilege management
-+ Add lots of MySQL built-in functions
-+ Improve the Alter Table statement and support the modification of table name, default value and comment
-+ Support the Create Table Like statement
-+ Support the Show Warnings statement
-+ Support the Rename Table statement
-+ Restrict the size of a single transaction to avoid the cluster blocking of large transactions
-+ Automatically split data in the process of Load Data
-+ Optimize the performance of the AddIndex and Delete statement
-+ Support "ANSI_QUOTES" sql_mode
-+ Improve the monitoring system
-+ Fix Bugs
-+ Solve the problem of memory leak
+-   クエリオプティマイザ
+    -   列/インデックスの統計を収集し、クエリオプティマイザで使用します
+    -   相関サブクエリを最適化する
+    -   コストベースのオプティマイザー（CBO）フレームワークを最適化する
+    -   一意のキー情報を使用して集約を排除します
+    -   リファクタリング式評価フレームワーク
+    -   DistinctをGroupByに変換する
+    -   topn操作のプッシュダウンをサポートします
+-   基本的な特権管理をサポートする
+-   MySQL組み込み関数をたくさん追加する
+-   Alter Tableステートメントを改善し、テーブル名、デフォルト値、およびコメントの変更をサポートします
+-   CreateTableLikeステートメントをサポートする
+-   警告の表示ステートメントをサポートする
+-   RenameTableステートメントをサポートする
+-   単一のトランザクションのサイズを制限して、大規模なトランザクションのクラスタブロッキングを回避します
+-   データのロード中にデータを自動的に分割
+-   AddIndexおよびDeleteステートメントのパフォーマンスを最適化する
+-   「ANSI_QUOTES」sql_modeをサポート
+-   監視システムを改善する
+-   バグを修正する
+-   メモリリークの問題を解決する
 
-## PD
+## PD {#pd}
 
-+ Support location aware replica scheduling
-+ Conduct fast scheduling based on the number of region
-+ pd-ctl support more features
-    - Add or delete PD
-    - Obtain Region information with Key
-    - Add or delete scheduler and operator
-    - Obtain cluster label information
+-   ロケーション認識レプリカスケジューリングをサポート
+-   地域の数に基づいて高速スケジューリングを実行します
+-   pd-ctlはより多くの機能をサポートします
+    -   PDを追加または削除します
+    -   キーで地域情報を取得する
+    -   スケジューラーとオペレーターを追加または削除します
+    -   クラスタラベル情報を取得する
 
-## TiKV
+## TiKV {#tikv}
 
-+ Support Async Apply to improve the entire write performance
-+ Use prefix seek to improve the read performance of Write CF
-+ Use memory hint prefix to improve the insert performance of Raft CF
-+ Optimize the single read transaction performance
-+ Support more push-down expressions
-+ Improve the monitoring system
-+ Fix Bugs
+-   非同期適用をサポートして、書き込みパフォーマンス全体を向上させます
+-   プレフィックスシークを使用して、書き込みCFの読み取りパフォーマンスを向上させます
+-   Raft CFの挿入パフォーマンスを向上させるには、メモリヒントプレフィックスを使用します
+-   単一読み取りトランザクションのパフォーマンスを最適化する
+-   より多くのプッシュダウン式をサポート
+-   監視システムを改善する
+-   バグを修正する

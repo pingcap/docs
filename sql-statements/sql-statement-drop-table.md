@@ -3,11 +3,11 @@ title: DROP TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of DROP TABLE for the TiDB database.
 ---
 
-# DROP TABLE
+# ドロップテーブル {#drop-table}
 
-This statement drops a table from the currently selected database. An error is returned if the table does not exist, unless the `IF EXISTS` modifier is used.
+このステートメントは、現在選択されているデータベースからテーブルを削除します。 `IF EXISTS`修飾子を使用しない限り、テーブルが存在しない場合はエラーが返されます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 DropTableStmt ::=
@@ -24,15 +24,15 @@ TableNameList ::=
     TableName ( ',' TableName )*
 ```
 
-## Drop temporary tables
+## 一時テーブルを削除する {#drop-temporary-tables}
 
-You can use the following syntax to drop ordinary tables and temporary tables:
+次の構文を使用して、通常のテーブルと一時テーブルを削除できます。
 
-- Use `DROP TEMPORARY TABLE` to drop local temporary tables.
-- Use `DROP GLOBAL TEMPORARY TABLE` to drop global temporary tables.
-- Use `DROP TABLE` to drop ordinary tables or temporary tables.
+-   `DROP TEMPORARY TABLE`を使用して、ローカル一時テーブルを削除します。
+-   `DROP GLOBAL TEMPORARY TABLE`を使用して、グローバル一時テーブルを削除します。
+-   `DROP TABLE`を使用して、通常のテーブルまたは一時テーブルを削除します。
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> CREATE TABLE t1 (a INT);
@@ -53,13 +53,13 @@ mysql> DROP TABLE v1;
 Query OK, 0 rows affected (0.23 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-* Dropping a table with `IF EXISTS` does not return a warning when attempting to drop a table that does not exist. [Issue #7867](https://github.com/pingcap/tidb/issues/7867)
-* Currently `RESTRICT` and `CASCADE` are only supported syntactically.
+-   `IF EXISTS`のテーブルをドロップしても、存在しないテーブルをドロップしようとしても警告は返されません。 [問題＃7867](https://github.com/pingcap/tidb/issues/7867)
+-   現在、 `RESTRICT`と`CASCADE`は構文的にのみサポートされています。
 
-## See also
+## も参照してください {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [SHOW CREATE TABLE](/sql-statements/sql-statement-show-create-table.md)
-* [SHOW TABLES](/sql-statements/sql-statement-show-tables.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)

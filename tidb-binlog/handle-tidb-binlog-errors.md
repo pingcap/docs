@@ -3,15 +3,15 @@ title: TiDB Binlog Error Handling
 summary: Learn how to handle TiDB Binlog errors.
 ---
 
-# TiDB Binlog Error Handling
+# TiDBBinlogエラー処理 {#tidb-binlog-error-handling}
 
-This document introduces common errors that you might encounter and solutions to these errors when you use TiDB Binlog.
+このドキュメントでは、TiDB Binlogを使用するときに発生する可能性のある一般的なエラーと、これらのエラーの解決策を紹介します。
 
-## `kafka server: Message was too large, server rejected it to avoid allocation error` is returned when Drainer replicates data to Kafka
+## <code>kafka server: Message was too large, server rejected it to avoid allocation error</code> {#code-kafka-server-message-was-too-large-server-rejected-it-to-avoid-allocation-error-code-is-returned-when-drainer-replicates-data-to-kafka}
 
-Cause: Executing a large transaction in TiDB generates binlog data of a large size, which might exceed Kafka's limit on the message size.
+原因：TiDBで大規模なトランザクションを実行すると、大規模なbinlogデータが生成されます。これは、Kafkaのメッセージサイズの制限を超える可能性があります。
 
-Solution: Adjust the configuration parameters of Kafka as shown below:
+解決策：以下に示すように、Kafkaの構成パラメーターを調整します。
 
 {{< copyable "" >}}
 
@@ -21,27 +21,27 @@ replica.fetch.max.bytes=1073741824
 fetch.message.max.bytes=1073741824
 ```
 
-## Pump returns `no space left on device` error
+## ポンプは<code>no space left on device</code> {#pump-returns-code-no-space-left-on-device-code-error}
 
-Cause: The local disk space is insufficient for Pump to write binlog data normally.
+原因：Pumpがbinlogデータを正常に書き込むには、ローカルディスク容量が不足しています。
 
-Solution: Clean up the disk space and then restart Pump.
+解決策：ディスク領域をクリーンアップしてから、Pumpを再起動します。
 
-## `fail to notify all living drainer` is returned when Pump is started
+## ポンプの始動時に、 <code>fail to notify all living drainer</code> {#code-fail-to-notify-all-living-drainer-code-is-returned-when-pump-is-started}
 
-Cause: When Pump is started, it notifies all Drainer nodes that are in the `online` state. If it fails to notify Drainer, this error log is printed.
+原因：Pumpが起動すると、 `online`状態にあるすべてのDrainerノードに通知します。 Drainerへの通知に失敗した場合、このエラーログが出力されます。
 
-Solution: Use the [binlogctl tool](/tidb-binlog/binlog-control.md) to check whether each Drainer node is normal or not. This is to ensure that all Drainer nodes that are in the `online` state are working normally. If the state of a Drainer node is not consistent with its actual working status, use the binlogctl tool to change its state and then restart Pump.
+解決策： [binlogctlツール](/tidb-binlog/binlog-control.md)を使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`の状態にあるすべてのDrainerノードが正常に機能していることを確認するためです。 Drainerノードの状態が実際の動作状態と一致しない場合は、binlogctlツールを使用してその状態を変更してから、Pumpを再起動します。
 
-## Data loss occurs during the TiDB Binlog replication
+## TiDBBinlogレプリケーション中にデータ損失が発生します {#data-loss-occurs-during-the-tidb-binlog-replication}
 
-You need to confirm that TiDB Binlog is enabled on all TiDB instances and runs normally. If the cluster version is later than v3.0, use the `curl {TiDB_IP}:{STATUS_PORT}/info/all` command to confirm the TiDB Binlog status on all TiDB instances.
+TiDB BinlogがすべてのTiDBインスタンスで有効になっていて、正常に実行されていることを確認する必要があります。クラスタのバージョンがv3.0より後の場合は、 `curl {TiDB_IP}:{STATUS_PORT}/info/all`コマンドを使用して、すべてのTiDBインスタンスのTiDBBinlogステータスを確認します。
 
-## When the upstream transaction is large, Pump reports an error `rpc error: code = ResourceExhausted desc = trying to send message larger than max (2191430008 vs. 2147483647)`
+## アップストリームトランザクションが大きい場合、Pumpはエラー<code>rpc error: code = ResourceExhausted desc = trying to send message larger than max (2191430008 vs. 2147483647)</code> {#when-the-upstream-transaction-is-large-pump-reports-an-error-code-rpc-error-code-resourceexhausted-desc-trying-to-send-message-larger-than-max-2191430008-vs-2147483647-code}
 
-This error occurs because the gRPC message sent by TiDB to Pump exceeds the size limit. You can adjust the maximum size of a gRPC message that Pump allows by specifying `max-message-size` when starting Pump.
+このエラーは、TiDBからPumpに送信されるgRPCメッセージがサイズ制限を超えているために発生します。 Pumpの起動時に`max-message-size`を指定することで、Pumpが許可するgRPCメッセージの最大サイズを調整できます。
 
-## Is there any cleaning mechanism for the incremental data of the file format output by Drainer? Will the data be deleted?
+## Drainerによって出力されたファイル形式のインクリメンタルデータのクリーニングメカニズムはありますか？データは削除されますか？ {#is-there-any-cleaning-mechanism-for-the-incremental-data-of-the-file-format-output-by-drainer-will-the-data-be-deleted}
 
-- In Drainer v3.0.x, there is no cleaning mechanism for incremental data of the file format.
-- In the v4.0.x version, there is a time-based data cleaning mechanism. For details, refer to [Drainer's `retention-time` configuration item](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153).
+-   Drainer v3.0.xには、ファイル形式の増分データのクリーニングメカニズムはありません。
+-   v4.0.xバージョンには、時間ベースのデータクリーニングメカニズムがあります。詳しくは[ドレイナーの`retention-time`構成項目](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153)をご覧ください。

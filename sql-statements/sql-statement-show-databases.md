@@ -3,23 +3,23 @@ title: SHOW DATABASES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW DATABASES for the TiDB database.
 ---
 
-# SHOW DATABASES
+# データベースを表示する {#show-databases}
 
-This statement shows a list of databases that the current user has privileges to. Databases which the current user does not have access to will appear hidden from the list. The `information_schema` database always appears first in the list of databases.
+このステートメントは、現在のユーザーが特権を持っているデータベースのリストを示しています。現在のユーザーがアクセスできないデータベースは、リストから非表示になります。 `information_schema`のデータベースは、常にデータベースのリストの最初に表示されます。
 
-`SHOW SCHEMAS` is an alias of this statement.
+`SHOW SCHEMAS`はこのステートメントのエイリアスです。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowDatabasesStmt:**
+**ShowDatabasesStmt：**
 
 ![ShowDatabasesStmt](/media/sqlgram/ShowDatabasesStmt.png)
 
-**ShowLikeOrWhereOpt:**
+**ShowLikeOrWhereOpt：**
 
 ![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW DATABASES;
@@ -49,12 +49,12 @@ mysql> SHOW DATABASES;
 5 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
-## See also
+## も参照してください {#see-also}
 
-* [SHOW SCHEMAS](/sql-statements/sql-statement-show-schemas.md)
-* [DROP DATABASE](/sql-statements/sql-statement-drop-database.md)
-* [CREATE DATABASE](/sql-statements/sql-statement-create-database.md)
+-   [スキーマを表示する](/sql-statements/sql-statement-show-schemas.md)
+-   [ドロップデータベース](/sql-statements/sql-statement-drop-database.md)
+-   [データベースの作成](/sql-statements/sql-statement-create-database.md)

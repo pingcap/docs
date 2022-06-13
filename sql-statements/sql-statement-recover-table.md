@@ -3,25 +3,25 @@ title: RECOVER TABLE
 summary: An overview of the usage of RECOVER TABLE for the TiDB database.
 ---
 
-# RECOVER TABLE
+# 回復表 {#recover-table}
 
-`RECOVER TABLE` is used to recover a deleted table and the data on it within the GC (Garbage Collection) life time after the `DROP TABLE` statement is executed.
+`RECOVER TABLE`は、 `DROP TABLE`ステートメントが実行された後、GC（ガベージコレクション）の有効期間内に削除されたテーブルとそのテーブル上のデータを回復するために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 RECOVER TABLE table_name
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 RECOVER TABLE BY JOB ddl_job_id
 ```
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 RecoverTableStmt ::=
@@ -35,65 +35,65 @@ Int64Num ::= NUM
 NUM ::= intLit
 ```
 
-> **Note:**
+> **ノート：**
 >
-> + If a table is deleted and the GC lifetime is out, the table cannot be recovered with `RECOVER TABLE`. Execution of `RECOVER TABLE` in this scenario returns an error like: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
+> -   テーブルが削除され、GCの有効期間が切れている場合、テーブルを`RECOVER TABLE`で回復することはできません。このシナリオで`RECOVER TABLE`を実行すると、次のようなエラーが返されます`snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 >
-> + If the TiDB version is 3.0.0 or later, it is not recommended for you to use `RECOVER TABLE` when TiDB Binlog is used.
+> -   TiDBのバージョンが3.0.0以降の場合、TiDBBinlogを使用するときに`RECOVER TABLE`を使用することはお勧めしません。
 >
-> + `RECOVER TABLE` is supported in the Binlog version 3.0.1, so you can use `RECOVER TABLE` in the following three situations:
+> -   Binlogバージョン3.0.1では`RECOVER TABLE`がサポートされているため、次の3つの状況で`RECOVER TABLE`を使用できます。
 >
->     - Binlog version is 3.0.1 or later.
->     - TiDB 3.0 is used both in the upstream cluster and the downstream cluster.
->     - The GC life time of the secondary cluster must be longer than that of the primary cluster. However, as latency occurs during data replication between upstream and downstream databases, data recovery might fail in the downstream.
+>     -   Binlogのバージョンは3.0.1以降です。
+>     -   TiDB 3.0は、アップストリームクラスタとダウンストリームクラスタの両方で使用されます。
+>     -   セカンダリクラスタのGCライフタイムは、プライマリクラスタのGCライフタイムより長くする必要があります。ただし、アップストリームデータベースとダウンストリームデータベース間のデータレプリケーション中に遅延が発生するため、ダウンストリームでデータリカバリが失敗する可能性があります。
 
-### Troubleshoot errors during TiDB Binlog replication
+### TiDBBinlogレプリケーション中のエラーのトラブルシューティング {#troubleshoot-errors-during-tidb-binlog-replication}
 
-When you use `RECOVER TABLE` in the upstream TiDB during TiDB Binlog replication, TiDB Binlog might be interrupted in the following three situations:
+TiDB Binlogレプリケーション中にアップストリームTiDBで`RECOVER TABLE`を使用すると、次の3つの状況でTiDBBinlogが中断される可能性があります。
 
-+ The downstream database does not support the `RECOVER TABLE` statement. An error instance: `check the manual that corresponds to your MySQL server version for the right syntax to use near 'RECOVER TABLE table_name'`.
+-   ダウンストリームデータベースは`RECOVER TABLE`ステートメントをサポートしていません。エラーインスタンス： `check the manual that corresponds to your MySQL server version for the right syntax to use near 'RECOVER TABLE table_name'` 。
 
-+ The GC life time is not consistent between the upstream database and the downstream database. An error instance: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
+-   GCの有効期間は、アップストリームデータベースとダウンストリームデータベースの間で一貫していません。エラーインスタンス： `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 
-+ Latency occurs during replication between upstream and downstream databases. An error instance: `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`.
+-   レイテンシーは、アップストリームデータベースとダウンストリームデータベース間のレプリケーション中に発生します。エラーインスタンス： `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 
-For the above three situations, you can resume data replication from TiDB Binlog with a [full import of the deleted table](/ecosystem-tool-user-guide.md#backup-and-restore).
+上記の3つの状況では、TiDBBinlogからのデータレプリケーションを[削除されたテーブルの完全インポート](/ecosystem-tool-user-guide.md#backup-and-restore)で再開できます。
 
-## Examples
+## 例 {#examples}
 
-+ Recover the deleted table according to the table name.
+-   テーブル名に従って、削除されたテーブルを回復します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     DROP TABLE t;
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     RECOVER TABLE t;
     ```
 
-    This method searches the recent DDL job history and locates the first DDL operation of the `DROP TABLE` type, and then recovers the deleted table with the name identical to the one table name specified in the `RECOVER TABLE` statement.
+    このメソッドは、最近のDDLジョブ履歴を検索し、 `DROP TABLE`タイプの最初のDDL操作を見つけてから、 `RECOVER TABLE`ステートメントで指定された1つのテーブル名と同じ名前で削除されたテーブルをリカバリーします。
 
-+ Recover the deleted table according to the table's `DDL JOB ID` used.
+-   使用したテーブルの`DDL JOB ID`に従って、削除したテーブルを回復します。
 
-    Suppose that you had deleted the table `t` and created another `t`, and again you deleted the newly created `t`. Then, if you want to recover the `t` deleted in the first place, you must use the method that specifies the `DDL JOB ID`.
+    テーブル`t`を削除して別の`t`を作成し、新しく作成した`t`を再度削除したとします。次に、最初に削除された`t`を回復する場合は、 `DDL JOB ID`を指定するメソッドを使用する必要があります。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     DROP TABLE t;
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     ADMIN SHOW DDL JOBS 1;
     ```
 
-    The second statement above is used to search for the table's `DDL JOB ID` to delete `t`. In the following example, the ID is `53`.
+    上記の2番目のステートメントは、テーブルの`DDL JOB ID`を検索して`t`を削除するために使用されます。次の例では、IDは`53`です。
 
     ```
     +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
@@ -103,22 +103,22 @@ For the above three situations, you can resume data replication from TiDB Binlog
     +--------+---------+------------+------------+--------------+-----------+----------+-----------+-----------------------------------+--------+
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     RECOVER TABLE BY JOB 53;
     ```
 
-    This method recovers the deleted table via the `DDL JOB ID`. If the corresponding DDL job is not of the `DROP TABLE` type, an error occurs.
+    このメソッドは、 `DDL JOB ID`を介して削除されたテーブルを回復します。対応するDDLジョブが`DROP TABLE`タイプでない場合、エラーが発生します。
 
-## Implementation principle
+## 実装の原則 {#implementation-principle}
 
-When deleting a table, TiDB only deletes the table metadata, and writes the table data (row data and index data) to be deleted to the `mysql.gc_delete_range` table. The GC Worker in the TiDB background periodically removes from the `mysql.gc_delete_range` table the keys that exceed the GC life time.
+テーブルを削除する場合、TiDBはテーブルのメタデータのみを削除し、削除するテーブルデータ（行データとインデックスデータ）を`mysql.gc_delete_range`のテーブルに書き込みます。 TiDBバックグラウンドのGCワーカーは、GCの有効期間を超えるキーを`mysql.gc_delete_range`のテーブルから定期的に削除します。
 
-Therefore, to recover a table, you only need to recover the table metadata and delete the corresponding row record in the `mysql.gc_delete_range` table before the GC Worker deletes the table data. You can use a snapshot read of TiDB to recover the table metadata. Refer to [Read Historical Data](/read-historical-data.md) for details.
+したがって、テーブルをリカバリするには、GCワーカーがテーブルデータを削除する前に、テーブルメタデータをリカバリし、 `mysql.gc_delete_range`のテーブルの対応する行レコードを削除するだけで済みます。 TiDBのスナップショット読み取りを使用して、テーブルのメタデータを回復できます。詳細は[履歴データを読む](/read-historical-data.md)を参照してください。
 
-Table recovery is done by TiDB obtaining the table metadata through snapshot read, and then going through the process of table creation similar to `CREATE TABLE`. Therefore, `RECOVER TABLE` itself is, in essence, a kind of DDL operation.
+テーブルのリカバリは、TiDBがスナップショットの読み取りを通じてテーブルのメタデータを取得し、 `CREATE TABLE`と同様のテーブル作成のプロセスを実行することによって行われます。したがって、 `RECOVER TABLE`自体は、本質的に、一種のDDL操作です。
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。

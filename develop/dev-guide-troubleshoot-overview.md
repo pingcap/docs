@@ -3,25 +3,25 @@ title: SQL or Transaction Issues
 summary: Learn how to troubleshoot SQL or transaction issues that might occur during application development.
 ---
 
-# SQL or Transaction Issues
+# SQLまたはトランザクションの問題 {#sql-or-transaction-issues}
 
-This document introduces problems that may occur during application development and related documents.
+このドキュメントでは、アプリケーション開発および関連ドキュメントで発生する可能性のある問題を紹介します。
 
-## Troubleshoot SQL query problems
+## SQLクエリの問題のトラブルシューティング {#troubleshoot-sql-query-problems}
 
-If you want to improve SQL query performance, follow the instructions in [SQL Performance Tuning](/develop/dev-guide-optimize-sql-overview.md) to solve performance problems such as full table scans and missing indexes. If you still have performance issues, see the following documents:
+SQLクエリのパフォーマンスを向上させたい場合は、 [SQL性能チューニング](/develop/dev-guide-optimize-sql-overview.md)の手順に従って、全表スキャンやインデックスの欠落などのパフォーマンスの問題を解決してください。それでもパフォーマンスの問題が発生する場合は、次のドキュメントを参照してください。
 
-- [Analyze Slow Queries](/analyze-slow-queries.md)
-- [Identify Expensive Queries Using Top SQL](/dashboard/top-sql.md)
+-   [遅いクエリを分析する](/analyze-slow-queries.md)
+-   [Top SQLを使用して高価なクエリを特定する](/dashboard/top-sql.md)
 
-If you have questions about SQL operations, see [SQL FAQs](/faq/sql-faq.md).
+SQL操作について質問がある場合は、 [SQLに関するFAQ](/faq/sql-faq.md)を参照してください。
 
-## Troubleshoot transaction issues
+## トランザクションの問題のトラブルシューティング {#troubleshoot-transaction-issues}
 
-See [Handle transaction errors](/develop/dev-guide-transaction-troubleshoot.md).
+[トランザクションエラーを処理する](/develop/dev-guide-transaction-troubleshoot.md)を参照してください。
 
-## See also
+## も参照してください {#see-also}
 
-- [Unsupported features](/mysql-compatibility.md#unsupported-features)
-- [Cluster Management FAQs](/faq/manage-cluster-faq.md)
-- [TiDB FAQs](/faq/tidb-faq.md)
+-   [サポートされていない機能](/mysql-compatibility.md#unsupported-features)
+-   [クラスター管理に関するFAQ](/faq/manage-cluster-faq.md)
+-   [TiDBのよくある質問](/faq/tidb-faq.md)

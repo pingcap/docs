@@ -3,35 +3,35 @@ title: mysql Schema
 summary: Learn about the TiDB system tables.
 ---
 
-# `mysql` Schema
+# <code>mysql</code>スキーマ {#code-mysql-code-schema}
 
-The `mysql` schema contains TiDB system tables. The design is similar to the `mysql` schema in MySQL, where tables such as `mysql.user` can be edited directly. It also contains a number of tables which are extensions to MySQL.
+`mysql`スキーマには、TiDBシステムテーブルが含まれています。デザインはMySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能であるいくつかのテーブルも含まれています。
 
-## Grant system tables
+## システムテーブルを付与する {#grant-system-tables}
 
-These system tables contain grant information about user accounts and their privileges:
+これらのシステムテーブルには、ユーザーアカウントとその特権に関する付与情報が含まれています。
 
-- `user`: user accounts, global privileges, and other non-privilege columns
-- `db`: database-level privileges
-- `tables_priv`: table-level privileges
-- `columns_priv`: column-level privileges
+-   `user` ：ユーザーアカウント、グローバル特権、およびその他の非特権列
+-   `db` ：データベースレベルの権限
+-   `tables_priv` ：テーブルレベルの権限
+-   `columns_priv` ：列レベルの特権
 
-## Server-side help system tables
+## サーバー側のヘルプシステムテーブル {#server-side-help-system-tables}
 
-Currently, the `help_topic` is NULL.
+現在、 `help_topic`はNULLです。
 
-## Statistics system tables
+## 統計システムテーブル {#statistics-system-tables}
 
-- `stats_buckets`: the buckets of statistics
-- `stats_histograms`: the histograms of statistics
-- `stats_meta`: the meta information of tables, such as the total number of rows and updated rows
-- `analyze_jobs`: the ongoing statistics collection tasks and the history task records within the last 7 days
+-   `stats_buckets` ：統計のバケット
+-   `stats_histograms` ：統計のヒストグラム
+-   `stats_meta` ：行の総数や更新された行などのテーブルのメタ情報
+-   `analyze_jobs` ：過去7日間の進行中の統計収集タスクと履歴タスクレコード
 
-## GC worker system tables
+## GCワーカーシステムテーブル {#gc-worker-system-tables}
 
-- `gc_delete_range`: to record the data to be deleted
+-   `gc_delete_range` ：削除するデータを記録します
 
-## Miscellaneous system tables
+## その他のシステムテーブル {#miscellaneous-system-tables}
 
-- `GLOBAL_VARIABLES`: global system variable table
-- `tidb`: to record the version information when TiDB executes `bootstrap`
+-   `GLOBAL_VARIABLES` ：グローバルシステム変数テーブル
+-   `tidb` ：TiDB実行時のバージョン情報を記録します`bootstrap`

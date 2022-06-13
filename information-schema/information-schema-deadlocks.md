@@ -3,11 +3,11 @@ title: DEADLOCKS
 summary: Learn the `DEADLOCKS` information_schema table.
 ---
 
-# DEADLOCKS
+# デッドロック {#deadlocks}
 
-The `DEADLOCKS` table shows the information of the several deadlock errors that have occurred recently on the current TiDB node.
+`DEADLOCKS`の表は、現在のTiDBノードで最近発生したいくつかのデッドロックエラーの情報を示しています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -30,122 +30,122 @@ DESC deadlocks;
 +-------------------------+---------------------+------+------+---------+-------+
 ```
 
-The `DEADLOCKS` table uses multiple rows to show the same deadlock event, and each row displays the information about one of the transactions involved in the deadlock event. If the TiDB node records multiple deadlock errors, each error is distinguished using the `DEADLOCK_ID` column. The same `DEADLOCK_ID` indicates the same deadlock event. Note that `DEADLOCK_ID` **does not guarantee global uniqueness and will not be persisted**. It only shows the same deadlock event in the same result set.
+`DEADLOCKS`のテーブルは、複数の行を使用して同じデッドロックイベントを示し、各行には、デッドロックイベントに関連するトランザクションの1つに関する情報が表示されます。 TiDBノードが複数のデッドロックエラーを記録する場合、各エラーは`DEADLOCK_ID`列を使用して区別されます。同じ`DEADLOCK_ID`は、同じデッドロックイベントを示します。 `DEADLOCK_ID`**はグローバルな一意性を保証するものではなく、永続化されないことに**注意してください。同じ結果セットで同じデッドロックイベントのみが表示されます。
 
-The meaning of each column field in the `DEADLOCKS` table is as follows:
+`DEADLOCKS`テーブルの各列フィールドの意味は次のとおりです。
 
-* `DEADLOCK_ID`: The ID of the deadlock event. When multiple deadlock errors exist in the table, you can use this column to distinguish rows that belong to different deadlock errors.
-* `OCCUR_TIME`: The time when the deadlock error occurs.
-* `RETRYABLE`: Whether the deadlock error can be retried. For the description of retryable deadlock errors, see the [Retryable deadlock errors](#retryable-deadlock-errors) section.
-* `TRY_LOCK_TRX_ID`: The ID of the transaction that tries to acquire lock. This ID is also the `start_ts` of the transaction.
-* `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the lock-acquiring transaction.
-* `CURRENT_SQL_DIGEST_TEXT`: The normalized form of the SQL statement that is currently being executed in the lock-acquiring transaction.
-* `KEY`: The blocked key that the transaction tries to lock. The value of this field is displayed in the form of hexadecimal string.
-* `KEY_INFO`: The detailed information of `KEY`. See the [KEY_INFO](#key_info) section.
-* `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
+-   `DEADLOCK_ID` ：デッドロックイベントのID。テーブルに複数のデッドロックエラーが存在する場合、この列を使用して、さまざまなデッドロックエラーに属する行を区別できます。
+-   `OCCUR_TIME` ：デッドロックエラーが発生した時刻。
+-   `RETRYABLE` ：デッドロックエラーを再試行できるかどうか。再試行可能なデッドロックエラーの説明については、 [再試行可能なデッドロックエラー](#retryable-deadlock-errors)のセクションを参照してください。
+-   `TRY_LOCK_TRX_ID` ：ロックを取得しようとするトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
+-   `CURRENT_SQL_DIGEST` ：ロック取得トランザクションで現在実行されているSQLステートメントのダイジェスト。
+-   `CURRENT_SQL_DIGEST_TEXT` ：ロック取得トランザクションで現在実行されているSQLステートメントの正規化された形式。
+-   `KEY` ：トランザクションがロックしようとするブロックされたキー。このフィールドの値は、16進文字列の形式で表示されます。
+-   `KEY_INFO` ： `KEY`の詳細情報。 [KEY_INFO](#key_info)のセクションを参照してください。
+-   `TRX_HOLDING_LOCK` ：現在キーのロックを保持していてブロックを引き起こしているトランザクションのID。このIDはトランザクションの`start_ts`でもあります。
 
-To adjust the maximum number of deadlock events that can be recorded in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is recorded in the table.
+`DEADLOCKS`のテーブルに記録できるデッドロックイベントの最大数を調整するには、TiDB構成ファイルの[`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity)の構成を調整します。デフォルトでは、最近の10個のデッドロックイベントの情報がテーブルに記録されます。
 
-> **Warning:**
+> **警告：**
 >
-> * Only users with the [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process) privilege can query this table.
-> * The information (SQL digest) in the `CURRENT_SQL_DIGEST` column is the hash value calculated from the normalized SQL statement. The information in the `CURRENT_SQL_DIGEST_TEXT` column is internally queried from statements summary tables, so it is possible that the corresponding statement cannot be found internally. For the detailed description of SQL digests and the statements summary tables, see [Statement Summary Tables](/statement-summary-tables.md).
+> -   このテーブルを照会できるのは、 [処理する](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)の特権を持つユーザーのみです。
+> -   `CURRENT_SQL_DIGEST`列の情報（SQLダイジェスト）は、正規化されたSQLステートメントから計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報は、ステートメントの要約テーブルから内部的に照会されるため、対応するステートメントが内部で見つからない可能性があります。 SQLダイジェストとステートメントの要約テーブルの詳細については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
 
-## `KEY_INFO`
+## <code>KEY_INFO</code> {#code-key-info-code}
 
-The `KEY_INFO` column shows the detailed information of the `KEY` column. The information is shown in the JSON format. The description of each field is as follows:
+`KEY_INFO`列は、 `KEY`列の詳細情報を示しています。情報はJSON形式で表示されます。各フィールドの説明は次のとおりです。
 
-* `"db_id"`: The ID of the schema to which the key belongs.
-* `"db_name"`: The name of the schema to which the key belongs.
-* `"table_id"`: The ID of the table to which the key belongs.
-* `"table_name"`: The name of the table to which the key belongs.
-* `"partition_id"`: The ID of the partition where the key is located.
-* `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
-    * `"int"`: The handle type is int, which means that the handle is the row ID.
-    * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
-    * `"unknown"`: The handle type is currently not supported.
-* `"handle_value"`: The handle value.
-* `"index_id"`: The index ID to which the index key (the key that stores the index) belongs.
-* `"index_name"`: The name of the index to which the index key belongs.
-* `"index_values"`: The index value in the index key.
+-   `"db_id"` ：キーが属するスキーマのID。
+-   `"db_name"` ：キーが属するスキーマの名前。
+-   `"table_id"` ：キーが属するテーブルのID。
+-   `"table_name"` ：キーが属するテーブルの名前。
+-   `"partition_id"` ：キーが配置されているパーティションのID。
+-   `"partition_name"` ：キーが配置されているパーティションの名前。
+-   `"handle_type"` ：行キー（つまり、データの行を格納するキー）のハンドルタイプ。可能な値は次のとおりです：
+    -   `"int"` ：ハンドルタイプはintです。これは、ハンドルが行IDであることを意味します。
+    -   `"common"` ：ハンドルタイプはint64ではありません。このタイプは、クラスター化インデックスが有効になっている場合、非int主キーに表示されます。
+    -   `"unknown"` ：ハンドルタイプは現在サポートされていません。
+-   `"handle_value"` ：ハンドル値。
+-   `"index_id"` ：インデックスキー（インデックスを格納するキー）が属するインデックスID。
+-   `"index_name"` ：インデックスキーが属するインデックスの名前。
+-   `"index_values"` ：インデックスキーのインデックス値。
 
-In the above fields, if the information of a field is not applicable or currently unavailable, the field is omitted in the query result. For example, the row key information does not contain `index_id`, `index_name`, and `index_values`; the index key does not contain `handle_type` and `handle_value`; non-partitioned tables do not display `partition_id` and `partition_name`; the key information in the deleted table cannot obtain schema information such as `table_name`, `db_id`, `db_name`, and `index_name`, and it is unable to distinguish whether the table is a partitioned table.
+上記のフィールドで、フィールドの情報が適用できないか、現在利用できない場合、そのフィールドはクエリ結果で省略されます。たとえば、行キー情報には`index_id` 、および`index_name`は含まれて`index_values`ません。インデックスキーには`handle_type`と`handle_value`が含まれていません。パーティション化されていないテーブルは`partition_id`と`partition_name`を表示しません。削除されたテーブルの`db_name`情報は、 `table_name`などの`db_id`情報を取得できず、テーブルが`index_name`テーブルであるかどうかを区別できません。
 
-> **Note:**
+> **ノート：**
 >
-> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
+> キーがパーティション化が有効になっているテーブルからのものであり、クエリ中に何らかの理由（たとえば、キーが属するテーブルが削除された）のために、キーが属するスキーマの情報をクエリできない場合、IDキーが属するパーティションの`table_id`フィールドに表示される場合があります。これは、TiDBが複数の独立したテーブルのキーをエンコードするのと同じ方法で、異なるパーティションのキーをエンコードするためです。したがって、スキーマ情報が欠落している場合、TiDBは、キーがパーティション化されていないテーブルに属しているのか、テーブルの1つのパーティションに属しているのかを確認できません。
 
-## Retryable deadlock errors
+## 再試行可能なデッドロックエラー {#retryable-deadlock-errors}
 
-> **Note:**
+> **ノート：**
 >
-> The `DEADLOCKS` table does not collect the information of retryable deadlock errors by default. If you want the table to collect the retryable deadlock error information, you can adjust the value of [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable) in the TiDB configuration file.
+> `DEADLOCKS`テーブルは、デフォルトでは再試行可能なデッドロックエラーの情報を収集しません。テーブルで再試行可能なデッドロックエラー情報を収集する場合は、TiDB構成ファイルの値[`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)を調整できます。
 
-When transaction A is blocked by a lock already held by transaction B, and transaction B is directly or indirectly blocked by the lock held by the current transaction A, a deadlock error will occur. In this deadlock, there might be two cases:
+トランザクションAがトランザクションBによってすでに保持されているロックによってブロックされ、トランザクションBが現在のトランザクションAによって保持されているロックによって直接的または間接的にブロックされている場合、デッドロックエラーが発生します。このデッドロックでは、次の2つの場合があります。
 
-+ Case 1: Transaction B might be (directly or indirectly) blocked by a lock generated by a statement that has been executed after transaction A starts and before transaction A gets blocked.
-+ Case 2: Transaction B might also be blocked by the statement currently being executed in transaction A.
+-   ケース1：トランザクションBは、トランザクションAの開始後、トランザクションAがブロックされる前に実行されたステートメントによって生成されたロックによって、（直接的または間接的に）ブロックされる可能性があります。
+-   ケース2：トランザクションBは、トランザクションAで現在実行されているステートメントによってもブロックされる可能性があります。
 
-In case 1, TiDB will report a deadlock error to the client of transaction A and terminate the transaction.
+ケース1の場合、TiDBはトランザクションAのクライアントにデッドロックエラーを報告し、トランザクションを終了します。
 
-In case 2, the statement currently being executed in transaction A will be automatically retried in TiDB. For example, suppose that transaction A executes the following statement:
+ケース2の場合、トランザクションAで現在実行されているステートメントは、TiDBで自動的に再試行されます。たとえば、トランザクションAが次のステートメントを実行するとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 update t set v = v + 1 where id = 1 or id = 2;
 ```
 
-Transaction B executes the following two statements successively.
+トランザクションBは、次の2つのステートメントを連続して実行します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 update t set v = 4 where id = 2;
 update t set v = 2 where id = 1;
 ```
 
-Then if transaction A locks the two rows with `id = 1` and `id = 2`, and the two transactions run in the following sequence:
+次に、トランザクションAが2つの行を`id = 1`と`id = 2`でロックし、2つのトランザクションが次の順序で実行される場合：
 
-1. Transaction A locks the row with `id = 1`.
-2. Transaction B executes the first statement and locks the row with `id = 2`.
-3. Transaction B executes the second statement and tries to lock the row with `id = 1`, which is blocked by transaction A.
-4. Transaction A tries to lock the row with `id = 2` and is blocked by transaction B, which forms a deadlock.
+1.  トランザクションAは行を`id = 1`でロックします。
+2.  トランザクションBは最初のステートメントを実行し、行を`id = 2`でロックします。
+3.  トランザクションBは2番目のステートメントを実行し、トランザクションAによってブロックされている`id = 1`で行をロックしようとします。
+4.  トランザクションAは`id = 2`で行をロックしようとし、デッドロックを形成するトランザクションBによってブロックされます。
 
-For this case, because the statement of transaction A that blocks other transactions is also the statement currently being executed, the pessimistic lock on the current statement can be resolved (so that transaction B can continue to run), and the current statement can be retried. TiDB uses the key hash internally to determine whether this is the case.
+この場合、他のトランザクションをブロックするトランザクションAのステートメントも現在実行中のステートメントであるため、現在のステートメントのペシミスティックロックを解決して（トランザクションBを実行し続けることができるように）、現在のステートメントを再試行できます。 。 TiDBは内部でキーハッシュを使用して、これが当てはまるかどうかを判断します。
 
-When a retryable deadlock occurs, the internal automatic retry will not cause a transaction error, so it is transparent to the client. However, if this situation occurs frequently, the performance might be affected. When this occurs, you can see `single statement deadlock, retry statement` in the TiDB log.
+再試行可能なデッドロックが発生した場合、内部の自動再試行によってトランザクションエラーが発生することはないため、クライアントに対して透過的です。ただし、このような状況が頻繁に発生する場合は、パフォーマンスに影響を与える可能性があります。これが発生すると、TiDBログに`single statement deadlock, retry statement`が表示されます。
 
-## Example 1
+## 例1 {#example-1}
 
-Assume that the table definition and the initial data are as follows:
+テーブル定義と初期データは次のとおりであると想定します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t (id int primary key, v int);
 insert into t values (1, 10), (2, 20);
 ```
 
-Two transactions are executed in the following order:
+2つのトランザクションが次の順序で実行されます。
 
-| Transaction 1                               | Transaction 2                               | Description                 |
-|--------------------------------------|--------------------------------------|----------------------|
-| `update t set v = 11 where id = 1;`  |                                      |                      |
-|                                      | `update t set v = 21 where id = 2;`  |                      |
-| `update t set v = 12 where id = 2;`  |                                      | Transaction 1 gets blocked.          |
-|                                      | `update t set v = 22 where id = 1;`  | Transaction 2 reports a deadlock error.  |
+| トランザクション1                           | トランザクション2                           | 説明                         |
+| ----------------------------------- | ----------------------------------- | -------------------------- |
+| `update t set v = 11 where id = 1;` |                                     |                            |
+|                                     | `update t set v = 21 where id = 2;` |                            |
+| `update t set v = 12 where id = 2;` |                                     | トランザクション1がブロックされます。        |
+|                                     | `update t set v = 22 where id = 1;` | トランザクション2はデッドロックエラーを報告します。 |
 
-Next, transaction 2 reports a deadlock error. At this time, query the `DEADLOCKS` table:
+次に、トランザクション2はデッドロックエラーを報告します。このとき、 `DEADLOCKS`のテーブルをクエリします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from information_schema.deadlocks;
 ```
 
-The expected output is as follows:
+期待される出力は次のとおりです。
 
 ```sql
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
@@ -156,11 +156,11 @@ The expected output is as follows:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-Two rows of data are generated in the `DEADLOCKS` table. The `DEADLOCK_ID` field of both rows is `1`, which means that the information in both rows belongs to the same deadlock error. The first row shows that on the key of `"7480000000000000355F728000000000000002"`, the transaction of the ID `"426812829645406216"` is blocked by the transaction of the ID `"426812829645406217"`. The second row shows that on the key of `"7480000000000000355F728000000000000001"`, the transaction of the ID `"426812829645406217"` is blocked by the transaction of the ID `426812829645406216`, which constitutes mutual blocking and forms a deadlock.
+`DEADLOCKS`つのテーブルに2行のデータが生成されます。両方の行の`DEADLOCK_ID`フィールドは`1`です。これは、両方の行の情報が同じデッドロックエラーに属していることを意味します。最初の行は、 `"7480000000000000355F728000000000000002"`のキーで、 `"426812829645406216"`のトランザクションが`"426812829645406217"`のトランザクションによってブロックされていることを示しています。 2行目は、 `"7480000000000000355F728000000000000001"`のキーで、ID `"426812829645406217"`のトランザクションが`426812829645406216`のトランザクションによってブロックされていることを示しています。これは、相互ブロックを構成し、デッドロックを形成します。
 
-## Example 2
+## 例2 {#example-2}
 
-Assume that you query the `DEADLOCKS` table and get the following result:
+`DEADLOCKS`のテーブルをクエリして、次の結果が得られたとします。
 
 ```sql
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
@@ -174,15 +174,15 @@ Assume that you query the `DEADLOCKS` table and get the following result:
 +-------------+----------------------------+-----------+--------------------+------------------------------------------------------------------+-----------------------------------------+----------------------------------------+----------------------------------------------------------------------------------------------------+--------------------+
 ```
 
-The `DEADLOCK_ID` column in the above query result shows that the first two rows together represent the information of a deadlock error, and the two transactions that wait for each other form the deadlock. The next three rows together represent the information of another deadlock error, and the three transactions that wait in a cycle form the deadlock.
+上記のクエリ結果の`DEADLOCK_ID`列は、最初の2行が一緒になってデッドロックエラーの情報を表し、互いに待機している2つのトランザクションがデッドロックを形成していることを示しています。次の3行は一緒になって、別のデッドロックエラーの情報を表し、サイクルで待機する3つのトランザクションがデッドロックを形成します。
 
-## CLUSTER_DEADLOCKS
+## CLUSTER_DEADLOCKS {#cluster-deadlocks}
 
-The `CLUSTER_DEADLOCKS` table returns information about the recent deadlock errors on each TiDB node in the entire cluster, which is the combined information of the `DEADLOCKS` table on each node. `CLUSTER_DEADLOCKS` also includes an additional `INSTANCE` column to display the IP address and port of the node to distinguish between different TiDB nodes.
+`CLUSTER_DEADLOCKS`テーブルは、クラスタ全体の各TiDBノードでの最近のデッドロックエラーに関する情報を返します。これは、各ノードの`DEADLOCKS`テーブルの情報を組み合わせたものです。 `CLUSTER_DEADLOCKS`には、異なるTiDBノードを区別するためにノードのIPアドレスとポートを表示するための追加の`INSTANCE`列も含まれています。
 
-Note that, because `DEADLOCK_ID` does not guarantee global uniqueness, in the query result of the `CLUSTER_DEADLOCKS` table, you need to use the `INSTANCE` and `DEADLOCK_ID` together to distinguish the information of different deadlock errors in the result set.
+`DEADLOCK_ID`はグローバルな一意性を保証しないため、 `CLUSTER_DEADLOCKS`テーブルのクエリ結果では、 `INSTANCE`と`DEADLOCK_ID`を一緒に使用して、結果セット内のさまざまなデッドロックエラーの情報を区別する必要があることに注意してください。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;

@@ -2,62 +2,62 @@
 title: tiup dm reload
 ---
 
-# tiup dm reload
+# tiup dm reload {#tiup-dm-reload}
 
-After [modifying the cluster configuration](/tiup/tiup-component-dm-edit-config.md), the cluster needs to be reloaded using the `tiup dm reload` command for the configuration to take effect. This command publishes the configuration of the control machine to the remote machine where the service is running and restarts the service in order according to the upgrade process. The cluster remains available during the restart process.
+[クラスタ構成の変更](/tiup/tiup-component-dm-edit-config.md)の後、設定を有効にするには、 `tiup dm reload`コマンドを使用してクラスタをリロードする必要があります。このコマンドは、制御マシンの構成をサービスが実行されているリモートマシンに公開し、アップグレードプロセスに従って順番にサービスを再起動します。再起動プロセス中、クラスタは引き続き使用可能です。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup dm reload <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on.
+`<cluster-name>` ：操作するクラスタの名前。
 
-## Options
+## オプション {#options}
 
-### -N, --node
+### -N、-node {#n-node}
 
-- Specifies the nodes to be restarted. If not specified, all nodes are restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all nodes are selected by default.
+-   再起動するノードを指定します。指定しない場合、すべてのノードが再起動されます。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
+-   データ型： `STRINGS`
+-   このオプションがコマンドで指定されていない場合、デフォルトですべてのノードが選択されます。
 
-> **Note:**
+> **ノート：**
 >
-> + If the `-R, --role` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
-> + If the `--skip-restart` option is specified, the `-N, --node` option is invalid.
+> -   `-R, --role`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが再始動されます。
+> -   `--skip-restart`オプションが指定されている場合、 `-N, --node`オプションは無効です。
 
-### -R, --role
+### -R、-role {#r-role}
 
-- Specifies the roles to be restarted. If not specified, all roles are restarted. The value of this option is a comma-separated list of node roles. You can get the roles of nodes from the second column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
-- Data type: `STRINGS`
-- If this option is not specified in the command, all roles are selected by default.
+-   再起動するロールを指定します。指定しない場合、すべての役割が再開されます。このオプションの値は、ノードの役割のコンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの2番目の列から取得できます。
+-   データ型： `STRINGS`
+-   このオプションがコマンドで指定されていない場合、デフォルトですべての役割が選択されます。
 
-> **Note:**
+> **ノート：**
 >
-> + If the `-N, --node` option is specified at the same time, only the service nodes that match both the specifications of `-N, --node` and `-R, --role` are restarted.
-> + If the `--skip-restart` option is specified, the `-R, --role` option is invalid.
+> -   `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが再始動されます。
+> -   `--skip-restart`オプションが指定されている場合、 `-R, --role`オプションは無効です。
 
-### --skip-restart
+### --スキップ-再起動 {#skip-restart}
 
-The `tiup dm reload` command performs two operations:
+`tiup dm reload`コマンドは、次の2つの操作を実行します。
 
-- Refreshes all node configurations
-- Restarts the specified node
+-   すべてのノード構成を更新します
+-   指定されたノードを再起動します
 
-After you specify the `--skip-restart` option, it only refreshes the configuration without restarting any nodes, so that the refreshed configuration is not applied and does not take effect until the next restart of the corresponding service.
+`--skip-restart`オプションを指定すると、ノードを再起動せずに構成が更新されるだけなので、更新された構成は適用されず、対応するサービスが次に再起動されるまで有効になりません。
 
-- Data type: `BOOLEAN`
-- Default: false
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-The execution log of the tiup-dm.
+tiup-dmの実行ログ。
 
-[<< Back to the previous page - TiUP DM command list](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

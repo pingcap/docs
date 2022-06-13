@@ -3,15 +3,15 @@ title: SHOW ANALYZE STATUS
 summary: An overview of the usage of SHOW ANALYZE STATUS for the TiDB database.
 ---
 
-# SHOW ANALYZE STATUS
+# ステータスの分析を表示 {#show-analyze-status}
 
-The `SHOW ANALYZE STATUS` statement shows the statistics collection tasks being executed by TiDB and a limited number of historical task records.
+`SHOW ANALYZE STATUS`ステートメントは、TiDBによって実行されている統計収集タスクと、限られた数の履歴タスクレコードを示しています。
 
-Starting from TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement supports showing cluster-level tasks. Even after a TiDB restart, you can still view task records before the restart using this statement. Before TiDB v6.1.0, the `SHOW ANALYZE STATUS` statement can only show instance-level tasks, and task records are cleared after a TiDB restart.
+TiDB v6.1.0以降、 `SHOW ANALYZE STATUS`ステートメントはクラスターレベルのタスクの表示をサポートします。 TiDBを再起動した後でも、このステートメントを使用して、再起動前のタスクレコードを表示できます。 TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを表示でき、タスクレコードはTiDBの再起動後にクリアされます。
 
-Starting from TiDB v6.1.0, you can view the history tasks within the last 7 days through the system table `mysql.analyze_jobs`.
+TiDB v6.1.0以降、システムテーブル`mysql.analyze_jobs`から過去7日間の履歴タスクを表示できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 ShowAnalyzeStatusStmt ::= 'SHOW' 'ANALYZE' 'STATUS' ShowLikeOrWhereOpt
@@ -19,9 +19,9 @@ ShowAnalyzeStatusStmt ::= 'SHOW' 'ANALYZE' 'STATUS' ShowLikeOrWhereOpt
 ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 ```
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> create table t(x int, index idx(x)) partition by hash(x) partitions 2;
@@ -64,10 +64,10 @@ mysql> show analyze status;
 6 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [ANALYZE_STATUS table](/information-schema/information-schema-analyze-status.md)
+-   [ANALYZE_STATUSテーブル](/information-schema/information-schema-analyze-status.md)

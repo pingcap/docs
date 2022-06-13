@@ -3,13 +3,13 @@ title: SHOW DRAINER STATUS
 summary: An overview of the usage of SHOW DRAINER STATUS for the TiDB database.
 ---
 
-# SHOW DRAINER STATUS
+# ドレイナーステータスを表示 {#show-drainer-status}
 
-The `SHOW DRAINER STATUS` statement displays the status information for all Drainer nodes in the cluster.
+`SHOW DRAINER STATUS`ステートメントは、クラスタのすべてのDrainerノードのステータス情報を表示します。
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW DRAINER STATUS;
@@ -26,12 +26,12 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is a TiDB extension to MySQL syntax.
+このステートメントは、MySQL構文のTiDB拡張です。
 
-## See also
+## も参照してください {#see-also}
 
-* [SHOW PUMP STATUS](/sql-statements/sql-statement-show-pump-status.md)
-* [CHANGE PUMP STATUS](/sql-statements/sql-statement-change-pump.md)
-* [CHANGE DRAINER STATUS](/sql-statements/sql-statement-change-drainer.md)
+-   [ポンプステータスを表示](/sql-statements/sql-statement-show-pump-status.md)
+-   [ポンプステータスの変更](/sql-statements/sql-statement-change-pump.md)
+-   [ドレイナーステータスの変更](/sql-statements/sql-statement-change-drainer.md)

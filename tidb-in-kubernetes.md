@@ -3,8 +3,8 @@ title: Deploy a TiDB Cluster in Kubernetes
 summary: Learn how to deploy a TiDB cluster in Kubernetes.
 ---
 
-# Deploy a TiDB Cluster in Kubernetes
+# KubernetesにTiDBクラスターをデプロイする {#deploy-a-tidb-cluster-in-kubernetes}
 
-You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB clusters in Kubernetes. TiDB Operator is an automatic operation system for TiDB clusters in Kubernetes. It provides full life-cycle management for TiDB including deployment, upgrades, scaling, backup, fail-over, and configuration changes. With TiDB Operator, TiDB can run seamlessly in the Kubernetes clusters deployed on a public or private cloud. 
+[TiDB Operator](https://github.com/pingcap/tidb-operator)を使用して、KubernetesにTiDBクラスターをデプロイできます。 TiDB Operatorは、KubernetesのTiDBクラスターの自動オペレーティングシステムです。展開、アップグレード、スケーリング、バックアップ、フェイルオーバー、構成変更など、TiDBの完全なライフサイクル管理を提供します。 TiDB Operatorを使用すると、TiDBはパブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスターでシームレスに実行できます。
 
-Currently, the TiDB in Kubernetes documentation is independent of the TiDB documentation. For detailed steps on how to deploy TiDB clusters in Kubernetes using TiDB Operator, see [TiDB in Kubernetes documentation](https://docs.pingcap.com/tidb-in-kubernetes/stable/).
+現在、KubernetesドキュメントのTiDBはTiDBドキュメントから独立しています。 TiDB Operatorを使用してKubernetesにTiDBクラスターをデプロイする方法の詳細な手順については、 [KubernetesドキュメントのTiDB](https://docs.pingcap.com/tidb-in-kubernetes/stable/)を参照してください。

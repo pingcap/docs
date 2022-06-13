@@ -3,25 +3,25 @@ title: AUTO_INCREMENT
 summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 ---
 
-# AUTO_INCREMENT
+# 自動増加 {#auto-increment}
 
-This document introduces the `AUTO_INCREMENT` column attribute, including its concept, implementation principles, auto-increment related features, and restrictions.
+このドキュメントでは、 `AUTO_INCREMENT`列の属性を紹介します。これには、その概念、実装の原則、自動インクリメント関連の機能、および制限が含まれます。
 
-## Concept
+## 概念 {#concept}
 
-`AUTO_INCREMENT` is a column attribute that is used to automatically fill in default column values. When the `INSERT` statement does not specify values for the `AUTO_INCREMENT` column, the system automatically assigns values to this column.
+`AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。 `INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムはこの列に値を自動的に割り当てます。
 
-For performance reasons, `AUTO_INCREMENT` numbers are allocated in a batch of values (30 thousand by default) to each TiDB server. This means that while `AUTO_INCREMENT` numbers are guaranteed to be unique, values assigned to an `INSERT` statement will only be monotonic on a per TiDB server basis.
+パフォーマンス上の理由から、 `AUTO_INCREMENT`の数値が値のバッチ（デフォルトでは3万）で各TiDBサーバーに割り当てられます。つまり、 `AUTO_INCREMENT`の数値は一意であることが保証されていますが、 `INSERT`のステートメントに割り当てられた値は、TiDBサーバーごとに単調になります。
 
-The following is a basic example of `AUTO_INCREMENT`:
+以下は`AUTO_INCREMENT`の基本的な例です：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t(id int PRIMARY KEY AUTO_INCREMENT, c int);
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t(c) VALUES (1);
@@ -43,9 +43,9 @@ mysql> SELECT * FROM t;
 5 rows in set (0.01 sec)
 ```
 
-In addition, `AUTO_INCREMENT` also supports the `INSERT` statements that explicitly specify column values. In such cases, TiDB stores the explicitly specified values:
+さらに、 `AUTO_INCREMENT`は、列の値を明示的に指定する`INSERT`のステートメントもサポートします。このような場合、TiDBは明示的に指定された値を格納します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO t(id, c) VALUES (6, 6);
@@ -66,45 +66,45 @@ mysql> SELECT * FROM t;
 6 rows in set (0.01 sec)
 ```
 
-The usage above is the same as that of `AUTO_INCREMENT` in MySQL. However, in terms of the specific value that is implicitly assigned, TiDB differs from MySQL significantly.
+上記の使用法は、MySQLの`AUTO_INCREMENT`の使用法と同じです。ただし、暗黙的に割り当てられる特定の値に関しては、TiDBはMySQLとは大きく異なります。
 
-## Implementation principles
+## 実装の原則 {#implementation-principles}
 
-TiDB implements the `AUTO_INCREMENT` implicit assignment in the following way:
+TiDBは、次の方法で`AUTO_INCREMENT`の暗黙的な割り当てを実装します。
 
-For each auto-increment column, a globally visible key-value pair is used to record the maximum ID that has been assigned. In a distributed environment, communication between nodes has some overhead. Therefore, to avoid the issue of write amplification, each TiDB node applies for a batch of consecutive IDs as caches when assigning IDs, and then applies for the next batch of IDs after the first batch is assigned. Therefore, TiDB nodes do not apply to the storage node for IDs when assigning IDs each time. For example:
+自動インクリメント列ごとに、グローバルに表示されるキーと値のペアを使用して、割り当てられた最大IDを記録します。分散環境では、ノード間の通信にいくらかのオーバーヘッドがあります。したがって、ライトアンプリフィケーションの問題を回避するために、各TiDBノードはIDを割り当てるときにキャッシュとして連続するIDのバッチを適用し、最初のバッチが割り当てられた後にIDの次のバッチを適用します。したがって、TiDBノードは、毎回IDを割り当てるときにIDのストレージノードに適用されません。例えば：
 
 ```sql
 CREATE TABLE t(id int UNIQUE KEY AUTO_INCREMENT, c int);
 ```
 
-Assume two TiDB instances, `A` and `B`, in the cluster. If you execute an `INSERT` statement on the `t` table on `A` and `B` respectively:
+クラスタに2つのTiDBインスタンス`A`と`B`があると仮定します。それぞれ`A`と`B`の`t`テーブルで`INSERT`ステートメントを実行する場合：
 
 ```sql
 INSERT INTO t (c) VALUES (1)
 ```
 
-Instance `A` might cache the auto-increment IDs of `[1,30000]`, and instance `B` might cache the auto-increment IDs of `[30001,60000]`. In `INSERT` statements to be executed, these cached IDs of each instance will be assigned to the `AUTO_INCREMENT` column as the default values.
+インスタンス`A`は`[1,30000]`の自動インクリメントIDをキャッシュし、インスタンス`B`は`[30001,60000]`の自動インクリメントIDをキャッシュする場合があります。実行される`INSERT`のステートメントでは、各インスタンスのこれらのキャッシュされたIDがデフォルト値として`AUTO_INCREMENT`列に割り当てられます。
 
-## Basic Features
+## 基本的な機能 {#basic-features}
 
-### Uniqueness
+### 独自性 {#uniqueness}
 
-> **Warning:**
+> **警告：**
 >
-> When the cluster has multiple TiDB instances, if the table schema contains the auto-increment IDs, it is recommended not to use explicit insert and implicit assignment at the same time, which means using the default values of the auto-increment column and the custom values. Otherwise, it might break the uniqueness of implicitly assigned values.
+> クラスタに複数のTiDBインスタンスがある場合、テーブルスキーマに自動インクリメントIDが含まれている場合は、明示的な挿入と暗黙的な割り当てを同時に使用しないことをお勧めします。つまり、自動インクリメント列とカスタムのデフォルト値を使用します。値。そうしないと、暗黙的に割り当てられた値の一意性が損なわれる可能性があります。
 
-In the example above, perform the following operations in order:
+上記の例では、次の操作を順番に実行します。
 
-1. The client inserts a statement `INSERT INTO t VALUES (2, 1)` to instance `B`, which sets `id` to `2`. The statement is successfully executed.
+1.  クライアントは、ステートメント`INSERT INTO t VALUES (2, 1)`をインスタンス`B`に挿入します。これにより、 `id`が`2`に設定されます。ステートメントは正常に実行されました。
 
-2. The client sends a statement `INSERT INTO t (c) (1)` to instance `A`. This statement does not specify the value of `id`, so the ID is assigned by `A`. At present, because `A` caches the IDs of `[1, 30000]`, it might assign `2` as the value of the auto-increment ID, and increases the local counter by `1`. At this time, the data whose ID is `2` already exists in the database, so the `Duplicated Error` error is returned.
+2.  クライアントはステートメント`INSERT INTO t (c) (1)`をインスタンス`A`に送信します。このステートメントは`id`の値を指定しないため、IDは`A`によって割り当てられます。現在、 `A`は`[1, 30000]`のIDをキャッシュしているため、自動インクリメントIDの値として`2`を割り当て、ローカルカウンターを`1`増加させる可能性があります。このとき、IDが`2`のデータはデータベースに既に存在するため、 `Duplicated Error`エラーが返されます。
 
-### Monotonicity
+### 単調性 {#monotonicity}
 
-TiDB guarantees that `AUTO_INCREMENT` values are monotonic (always increasing) on a per-server basis. Consider the following example where consecutive `AUTO_INCREMENT` values of 1-3 are generated:
+TiDBは、サーバーごとに`AUTO_INCREMENT`の値が単調（常に増加）であることを保証します。 1〜3の連続する`AUTO_INCREMENT`の値が生成される次の例を考えてみます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a int PRIMARY KEY AUTO_INCREMENT, b timestamp NOT NULL DEFAULT NOW());
@@ -128,9 +128,9 @@ Records: 3  Duplicates: 0  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-Monotonicity is not the same guarantee as consecutive. Consider the following example:
+単調性は、連続と同じ保証ではありません。次の例を考えてみましょう。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (id INT NOT NULL PRIMARY KEY auto_increment, a VARCHAR(10), cnt INT NOT NULL DEFAULT 1, UNIQUE KEY (a));
@@ -167,13 +167,13 @@ Records: 2  Duplicates: 1  Warnings: 0
 3 rows in set (0.00 sec)
 ```
 
-In this example, the `AUTO_INCREMENT` value of `3` is allocated for the `INSERT` of the key `A` in `INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;` but never used because this `INSERT` statement contains a duplicate key `A`. This leads to a gap where the sequence is non-consecutive. This behavior is considered legal, even though it differs from MySQL. MySQL will also have gaps in the sequence in other scenarios such as transactions being aborted and rolled back.
+この例では、 `3`の`AUTO_INCREMENT`値が`INSERT INTO t (a) VALUES ('A'), ('C') ON DUPLICATE KEY UPDATE cnt = cnt + 1;`のキー`A`の`INSERT`に割り当てられていますが、この`INSERT`ステートメントに重複するキー`A`が含まれているため、使用されません。これにより、シーケンスが連続しないギャップが発生します。この動作は、MySQLとは異なりますが、合法と見なされます。 MySQLは、トランザクションが中止されてロールバックされるなど、他のシナリオでもシーケンスにギャップがあります。
 
-## AUTO_ID_CACHE
+## AUTO_ID_CACHE {#auto-id-cache}
 
-The `AUTO_INCREMENT` sequence might appear to _jump_ dramatically if an `INSERT` operation is performed against a different TiDB server. This is caused by the fact that each server has its own cache of `AUTO_INCREMENT` values:
+別のTiDBサーバーに対して`INSERT`の操作を実行すると、 `AUTO_INCREMENT`のシーケンスが劇的に*ジャンプ*するように見える場合があります。これは、各サーバーが`AUTO_INCREMENT`の値の独自のキャッシュを持っているという事実が原因です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a int PRIMARY KEY AUTO_INCREMENT, b timestamp NOT NULL DEFAULT NOW());
@@ -196,7 +196,7 @@ Query OK, 1 row affected (0.03 sec)
 4 rows in set (0.00 sec)
 ```
 
-A new `INSERT` operation against the initial TiDB server generates the `AUTO_INCREMENT` value of `4`. This is because the initial TiDB server still has space left in the `AUTO_INCREMENT` cache for allocation. In this case, the sequence of values cannot be considered globally monotonic, because the value of `4` is inserted after the value of `2000001`:
+最初のTiDBサーバーに対する新しい`INSERT`操作は、 `4`の`AUTO_INCREMENT`値を生成します。これは、最初のTiDBサーバーの`AUTO_INCREMENT`キャッシュに、割り当て用のスペースがまだ残っているためです。この場合、値のシーケンスはグローバルに単調であると見なすことはできません。これは、値`4`が値`2000001`の後に挿入されるためです。
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
@@ -215,7 +215,7 @@ mysql> SELECT * FROM t ORDER BY b;
 5 rows in set (0.00 sec)
 ```
 
-The `AUTO_INCREMENT` cache does not persist across TiDB server restarts. The following `INSERT` statement is performed after the initial TiDB server is restarted:
+`AUTO_INCREMENT`のキャッシュは、TiDBサーバーの再起動後も保持されません。次の`INSERT`のステートメントは、最初のTiDBサーバーが再起動された後に実行されます。
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (NULL);
@@ -235,9 +235,9 @@ mysql> SELECT * FROM t ORDER BY b;
 6 rows in set (0.00 sec)
 ```
 
-A high rate of TiDB server restarts might contribute to the exhaustion of `AUTO_INCREMENT` values. In the above example, the initial TiDB server still has values `[5-30000]` free in its cache. These values are lost, and will not be reallocated.
+TiDBサーバーの再起動率が高いと、 `AUTO_INCREMENT`の値が使い果たされる可能性があります。上記の例では、最初のTiDBサーバーのキャッシュに値`[5-30000]`が残っています。これらの値は失われ、再割り当てされません。
 
-It is not recommended to rely on`AUTO_INCREMENT` values being continuous. Consider the following example, where a TiDB server has a cache of values `[2000001-2030000]`. By manually inserting the value `2029998`, you can see the behavior as a new cache range is retrieved:
+`AUTO_INCREMENT`の値が連続していることに依存することはお勧めしません。次の例を考えてみましょう。ここでは、TiDBサーバーに値`[2000001-2030000]`のキャッシュがあります。値`2029998`を手動で挿入すると、新しいキャッシュ範囲が取得されたときの動作を確認できます。
 
 ```sql
 mysql> INSERT INTO t (a) VALUES (2029998);
@@ -274,11 +274,11 @@ mysql> SELECT * FROM t ORDER BY b;
 11 rows in set (0.00 sec)
 ```
 
-After the value `2030000` is inserted, the next value is `2060001`. This jump in sequence is due to another TiDB server obtaining the intermediate cache range of `[2030001-2060000]`. When multiple TiDB servers are deployed, there will be gaps in the `AUTO_INCREMENT` sequence because cache requests are interleaved.
+値`2030000`が挿入された後、次の値は`2060001`です。このシーケンスのジャンプは、別のTiDBサーバーが`[2030001-2060000]`の中間キャッシュ範囲を取得しているためです。複数のTiDBサーバーが展開されている場合、キャッシュ要求がインターリーブされるため、 `AUTO_INCREMENT`のシーケンスにギャップが生じます。
 
-### Cache size control
+### キャッシュサイズ制御 {#cache-size-control}
 
-In earlier versions of TiDB, the cache size of the auto-increment ID was transparent to users. Starting from v3.0.14, v3.1.2, and v4.0.rc-2, TiDB has introduced the `AUTO_ID_CACHE` table option to allow users to set the cache size for allocating the auto-increment ID.
+以前のバージョンのTiDBでは、自動インクリメントIDのキャッシュサイズはユーザーに対して透過的でした。 v3.0.14、v3.1.2、およびv4.0.rc-2以降、TiDBは、ユーザーが自動インクリメントIDを割り当てるためのキャッシュサイズを設定できるようにする`AUTO_ID_CACHE`テーブルオプションを導入しました。
 
 ```sql
 mysql> CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 100;
@@ -297,7 +297,7 @@ mysql> SELECT * FROM t;
 1 row in set (0.01 sec)
 ```
 
-At this time, if you invalidate the auto-increment cache of this column and redo the implicit insertion, the result is as follows:
+このとき、この列の自動インクリメントキャッシュを無効にして暗黙の挿入をやり直すと、結果は次のようになります。
 
 ```sql
 mysql> DELETE FROM t;
@@ -318,26 +318,26 @@ mysql> SELECT * FROM t;
 1 row in set (0.00 sec)
 ```
 
-The re-assigned value is `101`. This shows that the size of cache for allocating the auto-increment ID is `100`.
+再割り当てされた値は`101`です。これは、自動インクリメントIDを割り当てるためのキャッシュのサイズが`100`であることを示しています。
 
-In addition, when the length of consecutive IDs in a batch `INSERT` statement exceeds the length of `AUTO_ID_CACHE`, TiDB increases the cache size accordingly to ensure that the statement can be inserted properly.
+さらに、バッチ`INSERT`ステートメントの連続するIDの長さが`AUTO_ID_CACHE`の長さを超えると、TiDBはそれに応じてキャッシュサイズを増やし、ステートメントを正しく挿入できるようにします。
 
-### Auto-increment step size and offset
+### ステップサイズとオフセットの自動インクリメント {#auto-increment-step-size-and-offset}
 
-Starting from v3.0.9 and v4.0.0-rc.1, similar to the behavior of MySQL, the value implicitly assigned to the auto-increment column is controlled by the `@@auto_increment_increment` and `@@auto_increment_offset` session variables.
+v3.0.9およびv4.0.0-rc.1以降、MySQLの動作と同様に、自動インクリメント列に暗黙的に割り当てられる値は、 `@@auto_increment_increment`および`@@auto_increment_offset`セッション変数によって制御されます。
 
-The value (ID) implicitly assigned to auto-increment columns satisfies the following equation:
+自動インクリメント列に暗黙的に割り当てられた値（ID）は、次の式を満たします。
 
 `(ID - auto_increment_offset) % auto_increment_increment == 0`
 
-## Restrictions
+## 制限 {#restrictions}
 
-Currently, `AUTO_INCREMENT` has the following restrictions when used in TiDB:
+現在、TiDBで使用する場合、 `AUTO_INCREMENT`には次の制限があります。
 
-- It must be defined on the first column of the primary key or the first column of an index.
-- It must be defined on the column of `INTEGER`, `FLOAT`, or `DOUBLE` type.
-- It cannot be specified on the same column with the `DEFAULT` column value.
-- `ALTER TABLE` cannot be used to add the `AUTO_INCREMENT` attribute.
-- `ALTER TABLE` can be used to remove the `AUTO_INCREMENT` attribute. However, starting from v2.1.18 and v3.0.4, TiDB uses the session variable `@@tidb_allow_remove_auto_inc` to control whether `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` can be used to remove the `AUTO_INCREMENT` attribute of a column. By default, you cannot use `ALTER TABLE MODIFY` or `ALTER TABLE CHANGE` to remove the `AUTO_INCREMENT` attribute.
-- `ALTER TABLE` requires the `FORCE` option to set the `AUTO_INCREMENT` value to a smaller value.
-- Setting the `AUTO_INCREMENT` to a value smaller than `MAX(<auto_increment_column>)` leads to duplicate keys because pre-existing values are not skipped.
+-   主キーの最初の列またはインデックスの最初の列で定義する必要があります。
+-   `INTEGER` 、または`FLOAT`タイプの列で定義する必要があり`DOUBLE` 。
+-   `DEFAULT`列の値と同じ列に指定することはできません。
+-   `ALTER TABLE`を使用して`AUTO_INCREMENT`属性を追加することはできません。
+-   `ALTER TABLE`は、 `AUTO_INCREMENT`属性を削除するために使用できます。ただし、v2.1.18およびv3.0.4以降、TiDBはセッション変数`@@tidb_allow_remove_auto_inc`を使用して、列の`AUTO_INCREMENT`属性を削除するために`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`属性を削除することはできません。
+-   `ALTER TABLE`には、 `AUTO_INCREMENT`の値を小さい値に設定するための`FORCE`のオプションが必要です。
+-   `AUTO_INCREMENT`を`MAX(<auto_increment_column>)`より小さい値に設定すると、既存の値がスキップされないため、キーが重複します。

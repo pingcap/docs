@@ -3,9 +3,9 @@ title: Resume a Data Migration Task
 summary: Learn how to resume a data migration task.
 ---
 
-# Resume a Data Migration Task
+# データ移行タスクを再開します {#resume-a-data-migration-task}
 
-You can use the `resume-task` command to resume a data migration task in the `Paused` state. This is generally used in scenarios where you want to manually resume a data migration task after handling the error that get the task paused.
+`resume-task`コマンドを使用して、 `Paused`状態でデータ移行タスクを再開できます。これは通常、タスクを一時停止するエラーを処理した後、データ移行タスクを手動で再開するシナリオで使用されます。
 
 {{< copyable "" >}}
 
@@ -26,7 +26,7 @@ Global Flags:
  -s, --source strings   MySQL Source ID
 ```
 
-## Usage example
+## 使用例 {#usage-example}
 
 {{< copyable "" >}}
 
@@ -34,12 +34,12 @@ Global Flags:
 resume-task [-s "mysql-replica-01"] task-name
 ```
 
-## Flags description
+## フラグの説明 {#flags-description}
 
-- `-s`: (Optional) Specifies the MySQL source where you want to resume the subtask of the migration task. If it is set, the command resumes only the subtasks on the specified MySQL source.
-- `task-name | task-file`: (Required) Specifies the task name or task file path.
+-   `-s` :(オプション）移行タスクのサブタスクを再開するMySQLソースを指定します。設定されている場合、コマンドは指定されたMySQLソースのサブタスクのみを再開します。
+-   `task-name | task-file` :(必須）タスク名またはタスクファイルのパスを指定します。
 
-## Returned results
+## 返された結果 {#returned-results}
 
 {{< copyable "" >}}
 

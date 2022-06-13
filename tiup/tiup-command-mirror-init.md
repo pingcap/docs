@@ -2,9 +2,9 @@
 title: tiup mirror init
 ---
 
-# tiup mirror init
+# tiup mirror init {#tiup-mirror-init}
 
-The command `tiup mirror init` is used to initialize an empty mirror. The initialized mirror does not contain any components or component owners. The command only generates the following files for the initialized mirror:
+コマンド`tiup mirror init`は、空のミラーを初期化するために使用されます。初期化されたミラーには、コンポーネントまたはコンポーネントの所有者は含まれていません。このコマンドは、初期化されたミラーに対して次のファイルのみを生成します。
 
 ```
 + <mirror-dir>                                  # Mirror's root directory
@@ -19,28 +19,28 @@ The command `tiup mirror init` is used to initialize an empty mirror. The initia
    |-- {hash}-timestamp.json                    # Private key of the timestamps
 ```
 
-For the specific usage and content format of the above files, refer to [TiUP Mirror Reference Guide](/tiup/tiup-mirror-reference.md).
+上記のファイルの具体的な使用法とコンテンツ形式については、 [TiUPミラーリファレンスガイド](/tiup/tiup-mirror-reference.md)を参照してください。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup mirror init <path> [flags]
 ```
 
-`<path>` is used to specify a local directory where TiUP generates and stores mirror files. The local directory can be a relative path. If the specified directory already exists, it must be empty; if it does not exist, TiUP creates it automatically.
+`<path>`は、TiUPがミラーファイルを生成および保存するローカルディレクトリを指定するために使用されます。ローカルディレクトリは相対パスにすることができます。指定されたディレクトリがすでに存在する場合は、空である必要があります。存在しない場合、TiUPは自動的に作成します。
 
-## Options
+## オプション {#options}
 
-### -k, --key-dir
+### -k、-key-dir {#k-key-dir}
 
-- Specifies the directory where TiUP generates private key files. If the specified directory does not exist, TiUP automatically creates it.
-- Data type: `STRING`
-- If this option is not specified in the command, TiUP generates private key files in `{path}/keys` by default.
+-   TiUPが秘密鍵ファイルを生成するディレクトリを指定します。指定されたディレクトリが存在しない場合、TiUPは自動的にそれを作成します。
+-   データ型： `STRING`
+-   このオプションがコマンドで指定されていない場合、TiUPはデフォルトで秘密鍵ファイルを`{path}/keys`で生成します。
 
-### Outputs
+### 出力 {#outputs}
 
-- If the command is executed successfully, there is no output.
-- If the specified `<path>` is not empty, TiUP reports the error `Error: the target path '%s' is not an empty directory`.
-- If the specified `<path>` is not a directory, TiUP reports the error `Error: fdopendir: not a directory`.
+-   コマンドが正常に実行された場合、出力はありません。
+-   指定された`<path>`が空でない場合、TiUPはエラー`Error: the target path '%s' is not an empty directory`を報告します。
+-   指定された`<path>`がディレクトリでない場合、TiUPはエラー`Error: fdopendir: not a directory`を報告します。
 
-[<< Back to the previous page - TiUP Mirror command list](/tiup/tiup-command-mirror.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

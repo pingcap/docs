@@ -2,61 +2,61 @@
 title: tiup cluster upgrade
 ---
 
-# tiup cluster upgrade
+# tiup cluster upgrade {#tiup-cluster-upgrade}
 
-The `tiup cluster upgrade` command is used to upgrade the specified cluster to a specific version.
+`tiup cluster upgrade`コマンドは、指定されたクラスタを特定のバージョンにアップグレードするために使用されます。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
-- `<cluster-name>`: the cluster name to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
-- `<version>`: the target version to upgrade to. Currently, it is only allowed to upgrade to a version higher than the current cluster, that is, no downgrade is allowed. It is also not allowed to upgrade to the nightly version.
+-   `<cluster-name>` ：操作するクラスタ名。クラスタ名を忘れた場合は、 [クラスタリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+-   `<version>` ：アップグレードするターゲットバージョン。現在、現在のクラスタよりも高いバージョンへのアップグレードのみが許可されています。つまり、ダウングレードは許可されていません。ナイトリーバージョンへのアップグレードも許可されていません。
 
-## Options
+## オプション {#options}
 
-### --force
+### - 力 {#force}
 
-- To upgrade the cluster, you need to ensure that the cluster is currently started. In some cases, you might want to upgrade when the cluster is not started. At this time, you can use `--force` to ignore the error during the upgrade, forcibly replace the binary file and start the cluster.
-- Data type: `BOOLEAN`
-- Default: false
+-   クラスタをアップグレードするには、クラスタが現在開始されていることを確認する必要があります。場合によっては、クラスタが開始されていないときにアップグレードすることをお勧めします。このとき、 `--force`を使用すると、アップグレード中のエラーを無視し、バイナリファイルを強制的に置き換えて、クラスタを起動できます。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-> **Note:**
+> **ノート：**
 >
-> Forcing an upgrade of the cluster that is providing services might result in service unavailability. Unstarted clusters are started automatically after a successful upgrade.
+> サービスを提供しているクラスタのアップグレードを強制すると、サービスが使用できなくなる可能性があります。未起動のクラスターは、アップグレードが成功すると自動的に開始されます。
 
-### --transfer-timeout
+### --転送タイムアウト {#transfer-timeout}
 
-- When upgrading PD or TiKV, the leader of the upgraded node is migrated to other nodes first. The migration process takes some time, and you can set the maximum wait time (in seconds) by the `-transfer-timeout` option. After the timeout, the wait is skipped and the service is upgraded directly.
-- Data type: `uint`
-- Default: 300
+-   PDまたはTiKVをアップグレードする場合、アップグレードされたノードのリーダーが最初に他のノードに移行されます。移行プロセスには時間がかかります`-transfer-timeout`オプションで最大待機時間（秒単位）を設定できます。タイムアウト後、待機はスキップされ、サービスが直接アップグレードされます。
+-   データ型： `uint`
+-   デフォルト：300
 
-> **Note:**
+> **ノート：**
 >
-> If the wait is skipped and the service is upgraded directly, the service performance might jitter.
+> 待機をスキップしてサービスを直接アップグレードすると、サービスのパフォーマンスが低下する可能性があります。
 
-### --ignore-config-check
+### --ignore-config-check {#ignore-config-check}
 
-- After the binary is updated, a configuration check is performed on the TiDB, TiKV and PD components using `<binary> --config-check <config-file>`. `<binary>` is the path to the newly deployed binary and `<config-file>` is the configuration file generated based on the user configuration. To skip this check, you can use the `--ignore-config-check` option.
-- Data type: `BOOLEAN`
-- Default: false
+-   バイナリが更新された後、 `<binary> --config-check <config-file>`を使用してTiDB、TiKV、およびPDコンポーネントの構成チェックが実行されます。 `<binary>`は新しくデプロイされたバイナリへのパスであり、 `<config-file>`はユーザー構成に基づいて生成された構成ファイルです。このチェックをスキップするには、 `--ignore-config-check`オプションを使用できます。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-### --offline
+### - オフライン {#offline}
 
-- Declares that the current cluster is not running. When this option is specified, TiUP does not evict the service leader to another node or restart the service, but only replaces the binary files of the cluster components.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   現在のクラスタが実行されていないことを宣言します。このオプションを指定すると、TiUPはサービスリーダーを別のノードに削除したり、サービスを再起動したりせず、クラスタコンポーネントのバイナリファイルを置き換えるだけです。
+-   データ型： `BOOLEAN`
+-   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-### -h, --help
+### -h、-help {#h-help}
 
-- Prints the help information.
-- Data type: `BOOLEAN`
-- Default: false
+-   ヘルプ情報を出力します。
+-   データ型： `BOOLEAN`
+-   デフォルト：false
 
-## Output
+## 出力 {#output}
 
-The log of the upgrading progress.
+アップグレードの進行状況のログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

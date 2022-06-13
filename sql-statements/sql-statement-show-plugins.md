@@ -3,23 +3,23 @@ title: SHOW PLUGINS
 summary: An overview of the usage of SHOW PLUGINS for the TiDB database.
 ---
 
-# SHOW PLUGINS
+# プラグインを表示する {#show-plugins}
 
-`SHOW PLUGINS` shows all plugins installed in TiDB, including each plugin's status and version information.
+`SHOW PLUGINS`は、各プラグインのステータスとバージョン情報を含む、TiDBにインストールされているすべてのプラグインを示します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
-**ShowStmt:**
+**ShowStmt：**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable:**
+**ShowTargetFilterable：**
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
-## Examples
+## 例 {#examples}
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW PLUGINS;
@@ -34,7 +34,7 @@ SHOW PLUGINS;
 1 row in set (0.000 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW PLUGINS LIKE 'a%';
@@ -49,6 +49,6 @@ SHOW PLUGINS LIKE 'a%';
 1 row in set (0.000 sec)
 ```
 
-## MySQL compatibility
+## MySQLの互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
