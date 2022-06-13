@@ -134,7 +134,7 @@ Deploy the NgMonitoring component by following instructions in the [Enable Conti
 <details>
   <summary>Clusters Started using TiUP Playground</summary>
 
-TiUP Playground (>= v1.8.0) automatically starts the NgMonitoring component when starting the cluster. To update TiUP Playground to the latest version:
+When starting the cluster, TiUP Playground (>= v1.8.0) automatically starts the NgMonitoring component. To update TiUP Playground to the latest version, run the following command:
 
 {{< copyable "shell-regular" >}}
 
