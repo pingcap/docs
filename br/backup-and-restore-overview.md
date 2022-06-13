@@ -30,7 +30,7 @@ This section describes backup features, impact of backup, and backup file types.
 
 #### Backup features
 
-- **Back up cluster snapshots**: A snapshot of a TiDB cluster contains only the latest and transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
+- **Back up cluster snapshots**: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
 - **Back up incremental data**: Incremental data of a TiDB cluster is differentiated data between the latest snapshot and the previous snapshot. Incremental data is smaller compared with full data and it is a supplementary to snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
 - **Back up a database or a table**: In addition to snapshot and incremental data backup, BR supports backing up a database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
 - **Encrypt backup data**: BR supports encrypting data at the backup source or the storage end when data is backed up to Amazon S3. You can select an encryption method as required. For details, see [Encrypt backup data](/br/br-usage-backup.md#encrypt-backup-data).
@@ -49,9 +49,9 @@ This section describes restoration features and impact on performance.
 
 #### Restoration features
 
-- **Restore cluster snapshot backup**: You can restore cluster data to that of a snapshot backup in an empty cluster at a certain time. For details, see [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots).
-- **Restore cluster incremental backup**: You can restore cluster data to that of an incremental backup at a certain time. For details, see [Restore incremental backup](/br/br-usage-restore.md#restore-incremental-data).
-- **Restore a database or a table from backup**: You can restore part of a specific database or table. During the process, you need to filter out unnecessary data. For details, see [Restore a database or a table](/br/br-usage-restore.md#restore-a-database-or-a-table).
+- **Restore cluster snapshot backup**: You can restore snapshot backup data to a new cluster. For details, see [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots).
+- **Restore cluster incremental backup**: You can restore the incremental backup data to a cluster. For details, see [Restore incremental backup](/br/br-usage-restore.md#restore-incremental-data).
+- **Restore a database or a table from backup**: You can restore part of a specific database or table. During the process, BR will filter out unnecessary data. For details, see [Restore a database or a table](/br/br-usage-restore.md#restore-a-database-or-a-table).
 
 #### Impact on performance
 
@@ -75,7 +75,7 @@ The compatibility issues of BR and a TiDB cluster are as follows:
 
 - Some versions of BR are not compatible with the interface of the TiDB cluster.
 
-    Before v5.4.0, BR cannot restore `charset=GBK` tables. In the meantime, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
+    BR(< v5.4.0) cannot restore `charset=GBK` tables. In the meantime, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
 
 - The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restoration, compatibility issues might occur.
 
