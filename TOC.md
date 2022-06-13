@@ -158,6 +158,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
   - Configuration Tuning
     - System Tuning
@@ -501,6 +502,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
+    - [Performance Overview](/grafana-performance-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
