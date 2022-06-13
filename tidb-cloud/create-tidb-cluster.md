@@ -66,13 +66,18 @@ To create a Developer Tier cluster, take the following steps:
 
 1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Developer Tier**.
 
-2. On the **Create a Cluster** page, set up your cluster name and root password.
+2. On the **Create a Cluster** page, update the default cluster name if you want to use a custom name.
 
 3. Note that the cloud provider of Developer Tier is AWS, and then select the region where you want to create your cluster.
 
 4. View the cluster size of the Developer Tier, and then click **Create**.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+
+5. During the cluster creation, click **Security Quick Start** in the left cluster pane, and then do the following:
+
+    - Set the root password to access the cluster.
+    - Add the IP addesses that can be used to connect to your cluster.
 
 </div>
 
