@@ -14,7 +14,7 @@ This document describes BR's architecture, functions, and usage tips.
 
 BR sends a backup or restoration command to each TiKV node. After receiving the command, TiKV performs the corresponding backup or restoration operation.
 
-Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read during the restoration.
+Each TiKV node needs to access the storage path during backup and restoration.
 
 ![br-arch](/media/br-arch.png)
 
@@ -33,7 +33,7 @@ This section describes backup features, impact of backup, and backup file types.
 - **Back up cluster snapshots**: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
 - **Back up incremental data**: Incremental data of a TiDB cluster is differentiated data between the latest snapshot and the previous snapshot. Incremental data is smaller compared with full data and it is a supplementary to snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
 - **Back up a database or a table**: In addition to snapshot and incremental data backup, BR supports backing up a database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
-- **Encrypt backup data**: BR supports encrypting data at the backup source or the storage end when data is backed up to Amazon S3. You can select an encryption method as required. For details, see [Encrypt backup data](/br/br-usage-backup.md#encrypt-backup-data).
+- **Encrypt backup data**: BR supports backup data encryption and amazon S3 server-side encryption. You can select an encryption method as required. For details, see [Encrypt backup data](/br/br-usage-backup.md#encrypt-backup-data).
 
 #### Impact on performance
 
@@ -73,7 +73,7 @@ When BR restores data to the upstream cluster of TiCDC or TiDB Binlog, TiCDC or 
 
 The compatibility issues of BR and a TiDB cluster are as follows:
 
-- Some versions of BR are not compatible with the interface of the TiDB cluster.
+- There are some cross-version compatibility issues:
 
     BR(< v5.4.0) cannot restore `charset=GBK` tables. In the meantime, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
 

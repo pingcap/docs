@@ -11,7 +11,7 @@ This document describes the design principles of BR, including its architecture<
 
 BR sends a backup or restoration command to each TiKV node. After receiving the command, TiKV performs the corresponding backup or restoration operation.
 
-Each TiKV node has a path in which the backup files generated in the backup operation are stored and from which the stored backup files are read during the restoration.
+Each TiKV node needs to access the storage path during backup and restoration.
 
 ![br-arch](/media/br-arch.png)
 
