@@ -221,7 +221,7 @@ If the same expression is included in the aggregate (`GROUP BY`) functions, the 
 {{< copyable "sql" >}}
 
 ```sql
-SELECT max(lower(col1)) FROM t；
+SELECT max(lower(col1)) FROM t;
 SELECT min(col1) FROM t GROUP BY lower(col1);
 ```
 

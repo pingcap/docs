@@ -7,7 +7,7 @@ summary: An overview of the usage of SHOW STATS_META for TiDB database.
 
 You can use `SHOW STATS_META` to view how many rows are in a table and how many rows are changed in that table. When using this statement, you can filter the needed information by the `ShowLikeOrWhere` clause.
 
-Currently, the `SHOW STATS_META` statement outputs 6 columns：
+Currently, the `SHOW STATS_META` statement outputs 6 columns:
 
 | Column name | Description            |
 | -------- | ------------- |
@@ -18,7 +18,7 @@ Currently, the `SHOW STATS_META` statement outputs 6 columns：
 | modify_count | The number of rows modified |
 | row_count | The total row count |
 
-> **注意：**
+> **Note:**
 >
 > The `update_time` is updated when TiDB updates the `modify_count` and `row_count` fields according to DML statements. So `update_time` is not the last execution time of the `ANALYZE` statement.
 

@@ -729,7 +729,7 @@ Description of various types:
 - miss-peer: the Region without enough replicas
 - extra-peer: the Region with extra replicas
 - down-peer: the Region in which some replicas are Down
-- pending-peer：the Region in which some replicas are Pending
+- pending-peer: the Region in which some replicas are Pending
 
 Usage:
 
