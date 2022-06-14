@@ -223,7 +223,7 @@ For each database event record in audit logs, TiDB provides the following fields
 | 12 | USER | VARCHAR | 17 | Login username    |
 | 13 | DATABASE | VARCHAR | 64 | Event-related database      |
 | 14 | TABLES | VARCHAR | 64 | Event-related table name          |
-| 15 | SQL_TEXT | VARCHAR |  | Masked SQL statement   |
+| 15 | SQL_TEXT | VARCHAR | 64 KB | Masked SQL statement   |
 | 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
 
 Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
