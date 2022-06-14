@@ -39,7 +39,7 @@ The SQL execution phase is in green and other phases are in red on general. If n
 - tso_wait: Concurrent TSO waiting time per second during SQL execution
 - kv request type: Time waiting for each KV request type per second during SQL execution. The total KV request wait time might exceed SQL execution time, because KV requests are concurrent.
 
-Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. 
+Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.
 
 If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example:
 
@@ -84,7 +84,7 @@ Generally, dividing `tso - cmd` by `tso - request` yields the average batch size
 - CPU-Avg: Average CPU utilization of all TiKV instances
 - CPU-Delta: Maximum CPU utilization of all TiKV instances minus minimum CPU utilization of all TiKV instances
 - CPU-MAX: Maximum CPU utilization among all TiKV instances
-- IO-Avg：Average MBps of all TiKV instances
+- IO-Avg: Average MBps of all TiKV instances
 - IO-Delt: Maximum MBps of all TiKV instances minus minimum MBps of all TiKV instances
 - IO-MAX: Maximum MBps of all TiKV instances
 
@@ -134,7 +134,7 @@ Average time consumed in executing gRPC requests in all TiKV instances based on 
 ## Storage Async Write Duration, Store Duration, and Apply Duration
 
 - Storage Async Write Duration: Time consumed in asynchronous write
-- Store Duration: Time consumed in store loop during asynchronously write 
+- Store Duration: Time consumed in store loop during asynchronously write
 - Apply Duration: Time consumed in apply loop during asynchronously write
 
 All these three metrics include the average duration and P99 duration in all TiKV instances.
