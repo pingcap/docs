@@ -91,14 +91,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
         tiup diag upload ${filepath}
         ```
 
-        The following is an example output:
-
-        {{< copyable "shell-regular" >}}
-
-        ```bash
-        Completed!
-        Download URL: "https://clinic.pingcap.com/clinic/#/orgs/75/clusters/7055188676317281573 "
-        ```
+        After the upload is completed, the `Download URL` is displayed in the output.
 
         > **Note:**
         >
