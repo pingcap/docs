@@ -30,6 +30,8 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
     tiup install diag
     ```
 
+    <!--TODO: Log in to Clinic Server in US-->
+
 2. Log in to [Clinic Server](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, you can register on the login page.
 
 3. Create an organization on the Clinic Server. Organization is a collection of TiDB clusters. You can upload diagnostic data on the created organization.
