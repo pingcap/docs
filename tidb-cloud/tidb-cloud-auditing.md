@@ -197,7 +197,7 @@ For example, `13796619446086334065/0/tidb-audit-2022-04-21T18-16-29.529.log`. In
 
 ## Disable audit logging
 
-If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off** .
+If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off**.
 
 ## Audit log fields
 
@@ -238,7 +238,7 @@ Depending on the EVENT_CLASS field value set by TiDB, database event records in 
     | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
     | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to the MySQL protocol |
     | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
-    | 23 | OS_VERSION | VARCHAR | NA | The version of the operating system where the TiDB server is located  |
+    | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
     | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
     | 25 | PID | INTEGER |  | The PID of the TiDB process |
 
