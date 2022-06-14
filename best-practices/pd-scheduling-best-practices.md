@@ -138,8 +138,8 @@ You can use store commands of pd-ctl to query balance status of each store.
 
 The **Grafana PD/Statistics - hotspot** page shows the metrics about hot regions, among which:
 
-- Hot write region’s leader/peer distribution: the leader/peer distribution in hot write regions
-- Hot read region’s leader distribution: the leader distribution in hot read regions
+- Hot write region's leader/peer distribution: the leader/peer distribution in hot write regions
+- Hot read region's leader distribution: the leader distribution in hot read regions
 
 You can also query the status of hot regions using pd-ctl with the following commands:
 
