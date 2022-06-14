@@ -236,7 +236,7 @@ Depending on the EVENT_CLASS field value set by TiDB, database event records in 
     | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
     | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
     | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
-    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to the MySQL protocol |
+    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to clients communicating via the MySQL protocol |
     | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
     | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
     | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
