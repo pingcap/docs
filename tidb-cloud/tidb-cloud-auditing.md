@@ -205,9 +205,9 @@ For each database event record in audit logs, TiDB provides the following fields
 
 > **Note:**
 >
-> In the following tables, empty max length of a field means that the data type of this field has a well defined constant length (for example, 4 bytes for INTEGER).
+> In the following tables, the empty maximum length of a field means that the data type of this field has a well-defined constant length (for example, 4 bytes for INTEGER).
 
-| Col # | Field name | TiDB data type | Max length | Description |
+| Col # | Field name | TiDB data type | Maximum length | Description |
 |---|---|---|---|---|
 | 1 | N/A | N/A | N/A | Reserved for internal use |
 | 2 | N/A | N/A | N/A | Reserved for internal use |
@@ -228,13 +228,13 @@ For each database event record in audit logs, TiDB provides the following fields
 
 Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
 
-- If EVENT_CLASS is `CONNECTION`, database event records also contain the following fields:
+- If the EVENT_CLASS value is `CONNECTION`, database event records also contain the following fields:
 
-    | Col # | Field name | TiDB data type | Max length | Description |
+    | Col # | Field name | TiDB data type | Maximum length | Description |
     |---|---|---|---|---|
     | 17 | CLIENT_PORT | INTEGER |  | Client port number |
     | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
-    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connect via `socket` or `unix-socket` |
+    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
     | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
     | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to the MySQL protocol |
     | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
@@ -242,9 +242,9 @@ Depending on the EVENT_CLASS field value set by TiDB, database event records in 
     | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
     | 25 | PID | INTEGER |  | The PID of the TiDB process |
 
-- If EVENT_CLASS is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
+- If the EVENT_CLASS value is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
 
-    | Col # | Field name | TiDB data type | Max length | Description |
+    | Col # | Field name | TiDB data type | Maximum length | Description |
     |---|---|---|---|---|
     | 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
     | 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
