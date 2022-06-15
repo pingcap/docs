@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## June 15, 2022
+
+* Simplify the cluster creation process:
+
+    - When you create a cluster, TiDB Cloud provides a default cluster name. You can either use the default name or update it.
+    - When you create a cluster, you do not need to set the password on the ***Create a Cluster** page.
+    - During or after the cluster creation, you can set the root password to access the cluster and also the IP addresses to connect to the cluster in **Security Quick Start**.
+
 ## June 14, 2022
 
 * Upgrade TiDB Cloud to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) for Developer Tier.
