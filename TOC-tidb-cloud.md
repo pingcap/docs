@@ -46,6 +46,8 @@
 - Manage User Access
   - [Sign In](/tidb-cloud/manage-user-access.md)
   - [Sign Out](/tidb-cloud/manage-user-access.md#sign-out)
+  - [Manage User Passwords](/manage-user-access#manage-user-passwords)
+  - [Manage User Profiles](/manage-user-access#manage-user-profiles)
   - [View the Organization and Project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
   - [Invite an Organization Member](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
   - [Invite a Project Member](/tidb-cloud/manage-user-access.md#invite-a-project-member)
