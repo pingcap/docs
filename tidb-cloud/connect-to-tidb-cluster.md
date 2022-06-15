@@ -26,7 +26,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
     If the traffic filter is already set, skip the following sub-steps.
 
-    If the traffic filter is empty, perform the following sub-steps to add one.
+    If the traffic filter is empty, take the following sub-steps to add one.
 
     1. Click one of the buttons to add some rules quickly.
 
