@@ -128,9 +128,9 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 3. Depending on where your TiDB cluster is hosted, do one of the following:
 
-    - If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), select **AWS S3** as the data source type, enter the bucket URL of the sample data, and select the bucket region.
+    - If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), select **AWS S3** as the data source type, and then enter the bucket URL of the sample data.
 
-         **Your bucket URL and region should correspond to your target database region.** For example, if you create a cluster in US-West-2 (Oregon), you should choose the sample data URL of the bucket region of US-West-2 (Oregon) from the following list:
+         **Your bucket URL should correspond to your target database region.** For example, if you create a cluster in US-West-2 (Oregon), you should choose the sample data URL of the bucket region of US-West-2 (Oregon) from the following list:
 
         - US-West-2 (Oregon): `s3://tidbcloud-samples-us-west-2/data-ingestion/`
         - US-East-1 (Virginia): `s3://tidbcloud-samples-us-east-1/data-ingestion/`
