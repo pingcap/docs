@@ -31,7 +31,7 @@ After you have signed into TiDB Cloud, if you need to sign out, perform the foll
 >
 > The content in this section is only applicable to TiDB Cloud registration with email and password. If you sign up for TiDB Cloud with Google or GitHub, your password is managed by Google or GitHub and you cannot change it using the TiDB Cloud console.
 
-To improve your system security, if you sign up for TiDB Cloud with email and password, you must reset the password every 90 days.
+To improve your system security, if you sign up for TiDB Cloud with email and password, it is recommended that you reset your password every 90 days.
 
 To change the password, take the following steps:
 
@@ -43,7 +43,7 @@ To change the password, take the following steps:
 
 4. Click **Change Password**, and then check your mail box for the link to reset the password.
 
-If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. In this case, you need to follow the prompt to reset the password.
+If your password is not changed within 90 days, you will get a prompt to reset your password when you log in to TiDB Cloud. It is recommended that you follow the prompt to reset the password.
 
 ## View the organization and project
 

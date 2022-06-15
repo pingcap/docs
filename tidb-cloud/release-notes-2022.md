@@ -8,11 +8,17 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## June 14, 2022
+
+* Upgrade TiDB Cloud to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) for Developer Tier.
+* Optimize the entrance of **Project Settings**. From the TiDB Cloud console, you can choose a target project and go to its settings easily by clicking the **Project Settings** tab.
+* Optimize the experience of password expiration by providing expiration messages in the TiDB Cloud console.
+
 ## June 7, 2022
 
 * Add the [Try Free](https://tidbcloud.com/free-trial) registration page to quickly sign up for TiDB Cloud.
 * Remove the **Proof of Concept plan** option from the plan selection page. If you want to apply for a 14-day PoC trial for free, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page. For more information, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
-* Improve the system security by requiring users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days.
+* Improve the system security by prompting users who sign up for TiDB Cloud with emails and passwords to reset their passwords every 90 days.
 
 ## May 24, 2022
 
