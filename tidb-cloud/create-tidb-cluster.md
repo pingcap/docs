@@ -76,7 +76,7 @@ To create a Developer Tier cluster, take the following steps:
 
 5. During or after the cluster creation, click **Security Quick Start** in the left cluster pane.
 
-6. In the **Security Quick Start** dialog box, set the root password to access the cluster, add the IP addresses that can be used to connect to your cluster, and then click **Apply**.
+6. In the **Security Quick Start** dialog box, set the root password to access the cluster, add the IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 
@@ -114,7 +114,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 8. During or after the cluster creation, click **Security Quick Start** in the left cluster pane.
 
-9. In the **Security Quick Start** dialog box, set the root password to access the cluster, add the IP addresses that can be used to connect to your cluster, and then click **Apply**.
+9. In the **Security Quick Start** dialog box, set the root password to access the cluster, add the IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 </SimpleTab>
