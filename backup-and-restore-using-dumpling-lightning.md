@@ -1,7 +1,7 @@
 ---
 title: Use Dumpling and TiDB Lightning for Data Backup and Restoration
 summary: Introduce how to use Dumpling and TiDB Lightning to backup and restore full data of TiDB.
-aliases: ['/docs/stable/export-or-backup-using-dumpling/','/docs/v4.0/export-or-backup-using-dumpling/','/tidb/stable/export-or-backup-using-dumpling','/tidb/v4.0/export-or-backup-using-dumpling']
+aliases: ['/docs/stable/export-or-backup-using-dumpling/','/docs/v4.0/export-or-backup-using-dumpling/','/tidb/stable/export-or-backup-using-dumpling','/tidb/v4.0/export-or-backup-using-dumpling','/tidb/v5.0/backup-and-restore-using-dumpling-lightning/','/tidb/v5.1/backup-and-restore-using-dumpling-lightning/','/tidb/v5.2/backup-and-restore-using-dumpling-lightning/','/tidb/v5.3/backup-and-restore-using-dumpling-lightning/','/tidb/v5.4/backup-and-restore-using-dumpling-lightning/','/tidb/v6.0/backup-and-restore-using-dumpling-lightning/','/tidb/dev/backup-and-restore-using-dumpling-lightning/','/tidb/stable/backup-and-restore-using-dumpling-lightning/']
 ---
 
 # Use Dumpling and TiDB Lightning for Data Backup and Restoration
