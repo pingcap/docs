@@ -82,7 +82,6 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     - **Data Source Type**: select the type of the data source.
     - **Bucket URL**: select the bucket URL where your Parquet files are located.
-    - **Bucket Region**: select the region where your bucket is located.
     - **Data Format**: select **Parquet**.
     - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **Target Database**: fill in the **Username** and **Password** fields.
