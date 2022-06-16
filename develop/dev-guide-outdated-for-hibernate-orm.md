@@ -1,6 +1,7 @@
 ---
 title: App Development for Hibernate ORM
 summary: Learn how to develop a simple Java application using TiDB and the Hibernate ORM.
+aliases: ['/appdev/dev/for-hibernate-orm']
 ---
 
 # App Development for Hibernate ORM
