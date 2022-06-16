@@ -1,6 +1,7 @@
 ---
 title: App Development for go-sql-driver/mysql
 summary: Learn how to build a simple Golang application based on TiDB and go-sql-driver/mysql.
+aliases: ['/appdev/dev/for-go-sql-driver-mysql']
 ---
 
 # App Development for go-sql-driver/mysql

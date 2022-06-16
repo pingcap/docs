@@ -1,6 +1,7 @@
 ---
 title: Developer Overview
 summary: Introduce the overview of the developer guide.
+aliases: ['/appdev/dev/app-dev-overview']
 ---
 
 # Developer Guide Overview
