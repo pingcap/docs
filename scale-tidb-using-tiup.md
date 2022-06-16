@@ -402,17 +402,10 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> store delete <store_id>
         ```
 
-<<<<<<< HEAD
-        > **Note:**
-        >
-        > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
-        
-=======
     > **Note:**
     >
     > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
 
->>>>>>> 7eacee002 (deploy using tiup: align three PRs (#8603))
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
 4. Manually delete TiFlash data files (the location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
