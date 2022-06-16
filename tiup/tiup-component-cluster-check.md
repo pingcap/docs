@@ -26,7 +26,7 @@ Check whether the system time of the target machine is synchronized. Compare the
 
 ### System time zone
 
-Check whether the system time zone of the target machines is synchronized. Compare the time zone configuration of these machines and report an error if the time zone is insistent.
+Check whether the system time zone of the target machines is synchronized. Compare the time zone configuration of these machines and report an error if the time zone is inconsistent.
 
 ### Time synchronization service
 
