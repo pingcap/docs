@@ -900,6 +900,7 @@ Usage:
 ......
 >> store cancel-delete 1               // Cancel the delete operation previously performed on the store with the id of 1 which is in the offline state. After the cancellation, the store will enter the up state. Note that this command cannot make the tombstone store back to the up state. If the PD leader has been switched during the offline process, you need to manually modify the store limit.
 >> store label 1 zone cn               // Set the value of the label with the "zone" key to "cn" for the store with the store id of 1
+>> store label 1 --force               // Clean up all labels for the store with the store id of 1
 >> store weight 1 5 10                 // Set the leader weight to 5 and Region weight to 10 for the store with the store id of 1
 >> store remove-tombstone              // Remove stores that are in tombstone state
 >> store limit                         // Show the speed limit of adding-peer operations and the limit of removing-peer operations per minute in all stores
@@ -915,8 +916,13 @@ Usage:
 
 > **Note:**
 >
-> - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
-> - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
+> - `store label`:
+>    - The store label updates using a merge strategy. If you modify the store label in the TiKV configuration file, PD merges the modified label into those labels which already exist in the store and persists the merged label after the process is restarted.
+>    - If you want to have a unified management of the store label using TiUP, you can use the `store label <id> --force` command to clean up all store labels stored by PD before the cluster is restarted.
+>
+> - `store limit`:
+>    - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
+>    - You can use `pd-ctl` to check the status (Up, Disconnect, Offline, Down, or Tombstone) of a TiKV store. For the relationship between each status, refer to [Relationship between each status of a TiKV store](/tidb-scheduling.md#information-collection).
 
 ### `log [fatal | error | warn | info | debug]`
 
