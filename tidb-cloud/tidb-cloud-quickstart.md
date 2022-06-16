@@ -94,7 +94,9 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 3. In the **Connect to TiDB** dialog box, copy the connection string in **Step 2: Connect with a SQL client** . For example:
 
-    `mysql --connect-timeout 15 -u root -h tidb.4aa56280.2c524d28.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p`
+    ```shell
+    mysql --connect-timeout 15 -u root -h tidb.4aa56280.2c524d28.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
+    ```
 
 4. Use a SQL client to connect to your cluster.
 
