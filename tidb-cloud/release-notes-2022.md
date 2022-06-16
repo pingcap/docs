@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## June 16, 2022
 
-* Simplify the cluster creation process:
+* Simplify the cluster creation process
 
     - When you create a cluster, TiDB Cloud provides a default cluster name. You can either use the default name or update it.
     - When you create a cluster, you do not need to set the password on the **Create a Cluster** page.
