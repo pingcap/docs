@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     - When you create a cluster, TiDB Cloud provides a default cluster name. You can either use the default name or update it.
     - When you create a cluster, you do not need to set the password on the **Create a Cluster** page.
-    - During or after the cluster creation, you can set the root password to access the cluster and also the IP addresses to connect to the cluster in **Security Quick Start**.
+    - During or after the cluster creation, you can set the root password to access the cluster and also the IP addresses to connect to the cluster in the **Security Quick Start** dialog box.
 
 ## June 14, 2022
 
