@@ -917,8 +917,8 @@ Usage:
 > **Note:**
 >
 > - `store label`:
->    - The store label updates using a merge strategy. If you modify the store label in the TiKV configuration file, PD merges the modified label into those labels which already exist in the store and persists the merged label after the process is restarted.
->    - If you want to have a unified management of the store label using TiUP, you can use the `store label <id> --force` command to clean up all store labels stored by PD before the cluster is restarted.
+>     - The store label updates using a merge strategy. If you modify the store label in the TiKV configuration file, PD merges the modified label into those labels which already exist in the store and persists the merged label after the process is restarted.
+>     - If you want to have a unified management of the store label using TiUP, you can use the `store label <id> --force` command to clean up all store labels stored by PD before the cluster is restarted.
 >
 > - `store limit`:
 >    - The original `region-add` and `region-remove` parameters of the `store limit` command are deprecated and are replaced with `add-peer` and `remove-peer`.
