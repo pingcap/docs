@@ -107,7 +107,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, you need
         }
     ```
 
-    In the `kms:Decrypt` configuration, `<your AWS KMS key ARN>` is KMS key ARN that you use to encrypt the snapshot. For example,  `arn:aws:kms:us-west-2:577523860935:key/1e0eb9a8-c5d5-473c-bca8-43521190ba11`.  To get the value, locate the server-side encryption settings of the encrypted objects in your S3 bucket, and check the `AWS KMS key ARN` field.
+    In the `kms:Decrypt` configuration, `<your AWS KMS key ARN>` is KMS key ARN that you use to encrypt the snapshot. For example,  `arn:aws:kms:us-west-2:577523860935:key/1e0eb9a8-c5d5-473c-bca8-43521190ba11`. To get the value, locate the server-side encryption settings of the encrypted objects in your S3 bucket, and check the `AWS KMS key ARN` field.
 
 3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID of the target TiDB cluster exists. 
 
