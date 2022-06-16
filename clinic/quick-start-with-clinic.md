@@ -77,7 +77,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
     After the collection is complete, Diag provides the folder path where the collected data is located.
 
-2. Upload collected data to Clinic Server.
+2. Upload the collected data to Clinic Server.
 
     > **Note:**
     >
