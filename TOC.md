@@ -3,13 +3,13 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
+  - [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v6.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
-    - [v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
-    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.0-performance-benchmarking-with-tpch.md)
+    - [v6.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+    - [v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.1-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
@@ -78,6 +78,14 @@
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
+    - Archived Docs
+      - [For Hibernate ORM](/develop/dev-guide-outdated-for-hibernate-orm.md)
+      - [For Django](/develop/dev-guide-outdated-for-django.md)
+      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
+      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
+      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
+      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -166,16 +174,22 @@
   - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - Performance Tuning
-  - System Tuning
-    - [Operating System Tuning](/tune-operating-system.md)
-  - Software Tuning
-    - Configuration
-      - [Tune TiDB Memory](/configure-memory-usage.md)
-      - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
-      - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
-      - [TiKV Follower Read](/follower-read.md)
-      - [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
-    - [Coprocessor Cache](/coprocessor-cache.md)
+  - Tuning Guide
+    - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
+    - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+  - Configuration Tuning
+    - System Tuning
+      - [Operating System Tuning](/tune-operating-system.md)
+    - Software Tuning
+      - Configuration
+        - [Tune TiDB Memory](/configure-memory-usage.md)
+        - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+        - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+        - [TiKV Follower Read](/follower-read.md)
+        - [Tune Region Performance](/tune-region-performance.md)
+        - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+      - [Coprocessor Cache](/coprocessor-cache.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
     - Understanding the Query Execution Plan
@@ -330,6 +344,7 @@
       - [tiup-bench](/tiup/tiup-bench.md)
   - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
+    - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
@@ -475,6 +490,7 @@
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+    - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
     - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
     - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
@@ -495,6 +511,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
+    - [Performance Overview](/grafana-performance-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
@@ -539,10 +556,11 @@
       - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
-        - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+      - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
+      - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -692,6 +710,7 @@
       - [Isolation Levels](/transaction-isolation-levels.md)
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
+      - [Non-Transactional DML Statements](/non-transactional-dml.md)
     - Garbage Collection (GC)
       - [Overview](/garbage-collection-overview.md)
       - [Configuration](/garbage-collection-configuration.md)
@@ -828,6 +847,8 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - v6.1
+    - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4

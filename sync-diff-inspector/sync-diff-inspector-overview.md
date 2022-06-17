@@ -10,7 +10,7 @@ aliases: ['/docs/dev/sync-diff-inspector/sync-diff-inspector-overview/','/docs/d
 
 This guide introduces the key features of sync-diff-inspector and describes how to configure and use this tool. To download sync-diff-inspector, use one of the following methods:
 
-+ Binary package. Click [tidb-enterprise-tools-nightly-linux-amd64](https://download.pingcap.org/tidb-enterprise-tools-nightly-linux-amd64.tar.gz) to download.
++ Binary package. The sync-diff-inspector binary package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 + Docker image. Execute the following command to download:
 
     {{< copyable "shell-regular" >}}
@@ -125,7 +125,7 @@ target-table = "t2"             # The name of the target table
     # The downstream database. The value is the unique ID declared by data-sources.
     target-instance = "tidb0"
     # The tables of downstream databases to be compared. Each table needs to contain the schema name and the table name, separated by '.'
-    # Use "?" to match any character and “*” to match characters of any length.
+    # Use "?" to match any character and "*" to match characters of any length.
     # For detailed match rules, refer to golang regexp pkg: https://github.com/google/re2/wiki/Syntax.
     target-check-tables = ["schema*.table*", "!c.*", "test2.t2"]
     # (optional) Extra configurations for some tables, Config1 is defined in the following table config example.
