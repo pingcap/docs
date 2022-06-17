@@ -23,7 +23,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     arn:aws:iam::385595570414:role/import-sample-access
     ```
 
-6. For **Target Database**, enter `root` in the **Username** field, and enter the root password you have set when you created the cluster in the **Password** field.
+6. For **Target Database**, enter `root` in the **Username** field, and enter the root password of the cluster in the **Password** field.
 
     > **Note:**
     >
