@@ -29,13 +29,15 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
 
-4. On the **Create a Cluster (Dev Tier)** page, set up your cluster name and root password.
+4. On the **Create a Cluster (Dev Tier)** page, update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
-5. Note that the cloud provider of Developer Tier is AWS, and then select the region where you want to create your cluster.
+5. Click **Create**.
 
-6. View the cluster size of the Developer Tier, and then click **Create**.
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+6. During or after the cluster creation, click **Security Quick Start** in the left cluster pane.
+
+7. In the **Security Quick Start** dialog box, set the root password to access your cluster, add the IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 
@@ -57,56 +59,52 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
     >
     > If you want to get a 14-day free trial of TiDB Cloud Dedicated Tier first, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
-4. On the **Create a Cluster** page, set up your cluster name and root password, and then update the default port number `4000` if you cannot use `4000` for connection.
+4. On the **Create a Cluster** page, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
-5. Choose a cloud provider and a region, and then click **Next**.
-
-6. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
+5. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
 
     > **Note:**
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. The CIDR of a project cannot be modified once it is set.
 
-7. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
 
-8. Confirm the cluster information in the middle area and also the billing information in the right pane.
+7. Confirm the cluster information in the middle area and also the billing information in the right pane.
 
-9. Click **Add Credit Card** in the right pane to add a credit card for your account.
+8. Click **Add Credit Card** in the right pane to add a credit card for your account.
 
-10. Click **Create**.
+9. Click **Create**.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+
+10. During or after the cluster creation, click **Security Quick Start** in the left cluster pane.
+
+11. In the **Security Quick Start** dialog box, set the root password to access your cluster, add the IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 </SimpleTab>
 
 ## Step 2. Connect to your TiDB cluster
 
-1. Navigate to the TiDB Clusters page and click the name of your newly created cluster.
+1. On the **Active Clusters** page, click the name of your newly created cluster.
 
     The overview page of your newly created cluster is displayed.
 
 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
 
-3. In **Step 1: Create traffic filter**, click **Add Your Current IP Address**, and then click **Create Filter**.
+3. In the **Connect to TiDB** dialog box, copy the connection string in **Step 2: Connect with a SQL client** . For example:
 
-    The purpose of this step is to set up your traffic filter, which makes sure that the cluster accepts connections only from trusted IP addresses.
+    ```shell
+    mysql --connect-timeout 15 -u root -h tidb.4aa56280.2c524d28.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
+    ```
 
-4. In **Step 2: Connect with a SQL client**, use an SQL client to connect to your cluster.
+4. Use a SQL client to connect to your cluster.
 
     TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
 
-5. In the **Connect to TiDB** dialog box, copy the command provided in **Step 2: Connect with a SQL client**, and paste it into your Terminal interface.
+5. Paste the connection string into your Terminal interface.
 
-    The format of the command line is as follows, but you need to customize your endpoint.
-
-    {{< copyable "shell" >}}
-
-    ```shell
-    mysql -u root -h <endpoint> -P <port number> -p
-    ```
-
-6. Enter the root password you used when creating the cluster.
+6. Enter the root password of the cluster.
 
 7. Validate the connection in the MySQL client:
 
