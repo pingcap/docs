@@ -684,7 +684,7 @@ This section describes how to install the NUMA tool. In online environments, bec
 
 To install the NUMA tool, take either of the following two methods:
 
-**Method 1**: Log in to the target node to install. Take CentOS Linux release 7.7.1908 (Core) as an example.
+**Method 1**: Log in to the target node to install NUMA. Take CentOS Linux release 7.7.1908 (Core) as an example.
 
 {{< copyable "shell-regular" >}}
 
@@ -692,9 +692,9 @@ To install the NUMA tool, take either of the following two methods:
 sudo yum -y install numactl
 ```
 
-**Method 2**: Install on an exist cluster in batches using `tiup cluster exec`.
+**Method 2**: Install NUMA on an existing cluster in batches by running the `tiup cluster exec` command.
 
-- If the TiDB cluster is not deployed, you can see [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`.
+- If no TiDB cluster is deployed, follow [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`.
 
     {{< copyable "shell-regular" >}}
 
@@ -702,7 +702,14 @@ sudo yum -y install numactl
     tiup cluster deploy tidb-test v6.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-- The following is the description of `tiup cluster exec`:
+Run the `tiup cluster exec` command using the `sudo` privilege to install NUMA on all the target machines in the `tidb-test` cluster:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+tiup cluster exec tidb-test --sudo --command "yum -y install numactl"
+
+To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.
 
     {{< copyable "shell-regular" >}}
 
