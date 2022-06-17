@@ -7,19 +7,13 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
-1. Navigate to the TiDB Clusters page and click the name of your target cluster. The overview page of your target cluster is displayed.
+1. Navigate to the **Active Clusters** page and click the name of your target cluster. The overview page of your target cluster is displayed.
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
-3. Depending on where the TiDB cluster is hosted, do one of the following:
+3. Depending on where your TiDB cluster is hosted, do one of the following:
 
-    - If the TiDB cluster is hosted by AWS, select **AWS S3** for **Data Source Type**, and then enter the sample data URL in the **Bucket URL** field. The sample data bucket URL should correspond to the region where your cluster is created.
+    - If your TiDB cluster is hosted by AWS, select **AWS S3** for **Data Source Type**, and then enter the sample data URL `s3://tidbcloud-samples/data-ingestion/` in the **Bucket URL** field. The sample data bucket is hosted in the US West (Oregon) region for AWS.
 
-      - US West (Oregon): `s3://tidbcloud-samples/data-ingestion/`
-      - Asia Pacific (Tokyo): `s3://tidbcloud-samples-ap-northeast-1/data-ingestion/`
-      - Asia Pacific (Singapore): `s3://tidbcloud-samples-ap-southeast-1/data-ingestion/`
-      - US East (N. Virginia): `s3://tidbcloud-samples-us-east-1/data-ingestion/`
-      - US West (Oregon): `s3://tidbcloud-samples-us-west-2/data-ingestion/`
-
-    - If the TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, and then enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field. The sample data bucket is hosted in the US-West1 (Oregon) for GCP.
+    - If your TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, and then enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field. The sample data bucket is hosted in the US-West1 (Oregon) region for GCP.
 
 4. For **Data Format**, select **TiDB Dumpling**.
 
