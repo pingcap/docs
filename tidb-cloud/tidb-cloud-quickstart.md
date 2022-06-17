@@ -148,11 +148,11 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     - **Data Source Type**: `Google Cloud Stroage`.
     - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
-    - **Data Format**: Select **TiDB Dumpling**.
+    - **Data Format**: select **TiDB Dumpling**.
     - **Target Database**:
         - **Username**: `root`.
-        - **Password**: Enter your root password.
-    - **DB/Tables Filter**: Leave this field blank.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
 
     </div>
     </SimpleTab>
