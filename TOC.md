@@ -423,6 +423,7 @@
       - Architecture
         - [DM Architecture](/dm/dm-arch.md)
         - [DM-worker](/dm/dm-worker-intro.md)
+        - [Safe Mode](/dm/dm-safe-mode.md)
         - [Relay Log](/dm/relay-log.md)
       - Command Line
         - [DM-master & DM-worker](/dm/dm-command-line-flags.md)
