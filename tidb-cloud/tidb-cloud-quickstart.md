@@ -120,8 +120,6 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-<SimpleTab>
-<div label="AWS">
 
 If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), take the following steps:
 
@@ -130,6 +128,11 @@ If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default)
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
 
 3. Fill in the import parameters:
+
+    <SimpleTab>
+    <div label="AWS">
+
+    If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), fill in the following parameters:
 
     - **Data Source Type**: `AWS S3`.
     - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
@@ -140,21 +143,11 @@ If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default)
         - **Password**: enter your root password.
     - **DB/Tables Filter**: leave this field blank.
 
-4. Click **Import**.
+    </div>
 
-    The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
+    <div label="GCP">
 
-</div>
-
-<div label="GCP">
-
-If your TiDB cluster is hosted by GCP, take the following steps:
-
-1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
-
-2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
-
-3. Fill in the import parameters:
+    If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
     - **Data Source Type**: `Google Cloud Stroage`.
     - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
@@ -164,12 +157,12 @@ If your TiDB cluster is hosted by GCP, take the following steps:
         - **Password**: Enter your root password.
     - **DB/Tables Filter**: Leave this field blank.
 
+    </div>
+    </SimpleTab>
+
 4. Click **Import**.
 
     The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
-
-</div>
-</SimpleTab>
 
 ## Step 4. Query data
 
