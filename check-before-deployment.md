@@ -687,51 +687,22 @@ To install the NUMA tool, take either of the following two methods:
 
 **Method 1**: Log in to the target node to install NUMA. Take CentOS Linux release 7.7.1908 (Core) as an example.
 
-{{< copyable "shell-regular" >}}
-
 ```bash
 sudo yum -y install numactl
 ```
 
 **Method 2**: Install NUMA on an existing cluster in batches by running the `tiup cluster exec` command.
 
-- If no TiDB cluster is deployed, follow [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`.
-
-    {{< copyable "shell-regular" >}}
+1. Follow [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) to deploy a cluster `tidb-test`. If you have installed a TiDB cluster, you can skip this step.
 
     ```bash
-    tiup cluster deploy tidb-test v6.0.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
+    tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-Run the `tiup cluster exec` command using the `sudo` privilege to install NUMA on all the target machines in the `tidb-test` cluster:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-tiup cluster exec tidb-test --sudo --command "yum -y install numactl"
-
-To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.
-
-    {{< copyable "shell-regular" >}}
-
-    ```bash
-    tiup cluster exec --help
-    ```
-
-    ```
-    Run shell command on host in the tidb cluster
-    Usage:
-    cluster exec <cluster-name> [flags]
-    Flags:
-        --command string   the command run on cluster host (default "ls")
-    -h, --help             help for exec
-        --sudo             use root permissions (default false)
-    ```
-
-- To use the `sudo` privilege to execute the installation command for all the target machines in the `tidb-test` cluster, run the following command:
-
-    {{< copyable "shell-regular" >}}
+2. Run the `tiup cluster exec` command using the `sudo` privilege to install NUMA on all the target machines in the `tidb-test` cluster:
 
     ```bash
     tiup cluster exec tidb-test --sudo --command "yum -y install numactl"
     ```
+
+    To get help information of the `tiup cluster exec` command, run the `tiup cluster exec --help` command.
