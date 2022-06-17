@@ -120,9 +120,6 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-
-If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), take the following steps:
-
 1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
 
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
