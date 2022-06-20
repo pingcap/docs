@@ -78,7 +78,7 @@ It is recommeneded to [deploy TiDB using TiUP](/production-deployment-using-tiup
 
 ### Is there a graphical deployment tool for TiDB?
 
-Currently no.
+Currently, [TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart) provides a graphical interface for deploying TiDB.
 
 ### How to scale TiDB horizontally?
 
