@@ -1,15 +1,20 @@
 ---
 title: TiDB 5.3.2 Release Notes
-category: Releases
 ---
 
 
 
 # TiDB 5.3.2 Release Notes
 
-Release Date: June 20, 2022
+Release Date: June xx, 2022
 
 TiDB version: 5.3.2
+
+## Compatibility change(s)
+
+## Improvements
+
+## Bug fixes
 
 ## __unsorted
 
