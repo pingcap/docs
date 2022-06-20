@@ -35,6 +35,7 @@ Here is a configuration example of the `Datasource config` section:
     user = "root"
     password = ""
     snapshot = "409621863377928194"
+
 [data-sources.downtidb]
     host = "172.16.0.2"
     port = 4000
