@@ -98,7 +98,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
     >
     > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
 
-4. After logging into your TiDB cluster, validate the connection in the MySQL client:
+4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
 
     {{< copyable "sql" >}}
 
