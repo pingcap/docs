@@ -55,12 +55,13 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_DEPTH(json_doc)][json_depth] | Returns the maximum depth of a JSON document |
 | [JSON_LENGTH(json_doc[, path])][json_length] | Returns the length of a JSON document, or, if a path argument is given, the length of the value within the path |
 | [JSON_TYPE(json_val)][json_type] | Returns a string indicating the type of a JSON value |
-| [JSON_VALID(json_doc)][json_valid] | Checks if a json_doc is valid JSON. Useful for checking a column before converting it to the json type. |
+| [JSON_VALID(json_doc)][json_valid] | Checks if a json\_doc is valid JSON. Useful for checking a column before converting it to the json type. |
 
 ## Utility Functions
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
+| [JSON_PRETTY(json_doc)][json_pretty] | Pretty formatting of a JSON document |
 | [JSON_STORAGE_SIZE(json_doc)][json_storage_size] | Returns an approximate size of bytes required to store the json value. As the size does not account for TiKV using compression, the output of this function is not strictly compatible with MySQL. |
 
 ## Aggregate Functions
@@ -74,7 +75,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 The following JSON functions are unsupported in TiDB. You can track the progress in adding them in [TiDB #7546](https://github.com/pingcap/tidb/issues/7546):
 
 * `JSON_MERGE_PATCH`
-* `JSON_PRETTY`
 * `JSON_ARRAYAGG`
 
 ## See also
@@ -131,3 +131,9 @@ The following JSON functions are unsupported in TiDB. You can track the progress
 [json_array_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-append
 
 [json_array_insert]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-insert
+
+[json_objectagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg
+
+[json_pretty]: https://dev.mysql.com/doc/refman/5.7/en/json-utility-functions.html#function_json-pretty
+
+[json_storage_size]: https://dev.mysql.com/doc/refman/5.7/en/json-utility-functions.html#function_json-storage-size
