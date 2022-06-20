@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitorin
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus/Grafana) is deployed at the same time. For more information, see [Overview of the Monitoring Framework](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, and so on. A lot of metrics are there to help you diagnose.
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Performance\_overview, and so on. A lot of metrics are there to help you diagnose.
 
 You can get an overview of the component TiKV status from the **TiKV-Details** dashboard, where the key metrics are displayed. According to the [Performance Map](https://asktug.com/_/tidb-performance-map/#/), you can check whether the status of the cluster is as expected.
 
@@ -42,8 +42,9 @@ This document provides a detailed description of these key metrics on the **TiKV
 - gRPC message error: The number of gRPC message errors per type on each TiKV instance
 - Leader drop: The count of dropped leaders per TiKV instance
 - Leader missing: The count of missing leaders per TiKV instance
+- Log Replication Reject: The number of logappend messages rejected due to insufficient memory on each TiKV instance
 
-![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors.png)
+![TiKV Dashboard - Errors metrics](/media/tikv-dashboard-errors-v610.png)
 
 ## Server
 

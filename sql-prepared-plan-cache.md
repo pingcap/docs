@@ -29,6 +29,7 @@ In the current version of TiDB, if a `Prepare` statement meets any of the follow
 - The query contains `?` in the definition of the `Window Frame` window function, such as `(partition by year order by sale rows ? preceding)`. If `?` appears elsewhere in the window function, the query is cached.
 - The query contains parameters for comparing `int` and `string`, such as `c_int >= ?` or `c_int in (?, ?)`, in which `?` indicates the string type, such as `set @x='123'`. To ensure that the query result is compatible with MySQL, parameters need to be adjusted in each query, so such queries are not cached.
 - The plan attempts to access `TiFlash`.
+- In most cases, the plan that contains `TableDual` is not cached, unless the current `Prepare` statement does not have parameters.
 
 The LRU linked list is designed as a session-level cache because `Prepare` / `Execute` cannot be executed across sessions. Each element of the LRU list is a key-value pair. The value is the execution plan, and the key is composed of the following parts:
 
@@ -37,6 +38,7 @@ The LRU linked list is designed as a session-level cache because `Prepare` / `Ex
 - The current schema version, which is updated after every successfully executed DDL statement
 - The SQL mode when executing `Execute`
 - The current time zone, which is the value of the `time_zone` system variable
+- The value of the `sql_select_limit` system variable
 
 Any change in the above information (for example, switching databases, renaming `Prepare` statement, executing DDL statements, or modifying the value of SQL mode / `time_zone`), or the LRU cache elimination mechanism causes the execution plan cache miss when executing.
 
@@ -46,14 +48,14 @@ After the validation test is passed, the scan range of the execution plan is adj
 
 There are several points worth noting about execution plan caching and query performance:
 
-- The first `Execute` (no cache plan yet) is affected by existing SQL Bindings. Cached plans are not affected by new SQL Bindings. Similarly, cached plans are not affected by changes in statistics, optimization rules, and blacklist pushdown by expressions.
-- When restarting a TiDB instance (for example, online rolling upgrade of a TiDB cluster), the `Prepare` statement gets lost. `Prepared Statement not found` is returned if executing `execute stmt...`. To address the error, execute `prepare stmt ...` again.
+- No matter an execution plan is cached or not, it is affected by SQL bindings. For execution plans that have not been cached (the first `Execute`), these plans are affected by existing SQL bindings. For execution plans that have been cached, if new SQL Bindings are created, these plans become invalid.
+- Cached plans are not affected by changes in statistics, optimization rules, and blocklist pushdown by expressions.
 - Considering that the parameters of `Execute` are different, the execution plan cache prohibits some aggressive query optimization methods that are closely related to specific parameter values to ensure adaptability. This causes that the query plan may not be optimal for certain parameter values. For example, the filter condition of the query is `where a > ? And a < ?`, the parameters of the first `Execute` statement are `2` and `1` respectively. Considering that these two parameters maybe be `1` and `2` in the next execution time, the optimizer does not generate the optimal `TableDual` execution plan that is specific to current parameter values;
 - If cache invalidation and elimination are not considered, an execution plan cache is applied to various parameter values, which in theory also results in non-optimal execution plans for certain values. For example, if the filter condition is `where a < ?` and the parameter value used for the first execution is `1`, then the optimizer generates the optimal `IndexScan` execution plan and puts it into the cache. In the subsequent executions, if the value becomes `10000`, the `TableScan` plan might be the better one. But due to the execution plan cache, the previously generated `IndexScan` is used for execution. Therefore, the execution plan cache is more suitable for application scenarios where the query is simple (the ratio of compilation is high) and the execution plan is relatively fixed.
 
-Currently, the execution plan cache is disabled by default. You can enable this feature by enabling the [`prepared-plan-cache`](/tidb-configuration-file.md#prepared-plan-cache) in the TiDB configuration file.
+Since v6.1.0 the execution plan cache is enabled by default. You can control prepared plan cache via the system variable [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610).
 
-> **Note：**
+> **Note:**
 >
 > The execution plan cache feature applies only to `Prepare` / `Execute` queries and does not take effect for normal queries.
 
@@ -120,6 +122,23 @@ MySQL [test]> select @@last_plan_from_cache;
 +------------------------+
 1 row in set (0.00 sec)
 ```
+
+## Memory management of Prepared Plan Cache
+
+Using Prepared Plan Cache has some memory overhead. In internal tests, each cached plan consumes an average of 100 KiB of memory. Because Plan Cache is currently at the `SESSION` level, the total memory consumption is approximately `the number of sessions * the average number of cached plans in a session * 100 KiB`.
+
+For example, the current TiDB instance has 50 sessions in concurrency and each session has approximately 100 cached plans. The total memory consumption is approximately `50 * 100 * 100 KiB` = `512 MB`.
+
+You can control the maximum number of plans that can be cached in each session by configuring the system variable `tidb_prepared_plan_cache_size`. For different environments, the recommended value is as follows:
+
+- When the memory threshold of the TiDB server instance is <= 64 GiB, set `tidb_prepared_plan_cache_size` to `50`.
+- When the memory threshold of the TiDB server instance is > 64 GiB, set `tidb_prepared_plan_cache_size` to `100`.
+
+When the unused memory of the TiDB server is less than a certain threshold, the memory protection mechanism of plan cache is triggered, through which some cached plans will be evicted.
+
+You can control the threshold by configuring the system variable `tidb_prepared_plan_cache_memory_guard_ratio`. The threshold is 0.1 by default, which means when the unused memory of the TiDB server is less than 10% of the total memory (90% of the memory is used), the memory protection mechanism is triggered.
+
+Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
 
 ## Clear execution plan cache
 

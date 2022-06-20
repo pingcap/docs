@@ -57,7 +57,7 @@ If your deployment tool is TiUP, take the following steps to solve this problem.
 
 ### An `invalid connection` error is shown on the **Slow Queries** page
 
-The possible reason is that you have enabled the `prepared-plan-cache` feature of TiDB. As an experimental feature, when enabled, `prepared-plan-cache` might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable `prepared-plan-cache` by updating [TiDB Configuration file](/tidb-configuration-file.md#prepared-plan-cache) to solve this problem.
+The possible reason is that you have enabled the Prepared Plan Cache feature of TiDB. As an experimental feature, when enabled, Prepared Plan Cache might not function properly in specific TiDB versions, which could cause this problem in TiDB Dashboard (and other applications). You can disable Prepared Plan Cache by setting the system variable [`tidb_enable_prepared_plan_cache = OFF`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610).
 
 ### A `required component NgMonitoring is not started` error is shown
 
@@ -128,6 +128,20 @@ Please Contact PingCAP Technical Support for help if the error message is still 
   <summary>Clusters Deployed using TiDB Operator</summary>
 
 Deploy the NgMonitoring component by following instructions in the [Enable Continuous Profiling](https://docs.pingcap.com/tidb-in-kubernetes/dev/access-dashboard/#enable-continuous-profiling) section in TiDB Operator documentation.
+
+</details>
+
+<details>
+  <summary>Clusters Started using TiUP Playground</summary>
+
+When starting the cluster, TiUP Playground (>= v1.8.0) automatically starts the NgMonitoring component. To update TiUP Playground to the latest version, run the following command:
+
+{{< copyable "shell-regular" >}}
+
+```shell
+tiup update --self
+tiup update playground
+```
 
 </details>
 

@@ -8,10 +8,6 @@ aliases: ['/docs/dev/dynamic-config/']
 
 This document describes how to modify the cluster configuration online.
 
-> **Note:**
->
-> This feature is experimental. It is **NOT** recommended to use this feature in the production environment.
-
 You can update the configuration of components (including TiDB, TiKV, and PD) online using SQL statements, without restarting the cluster components. Currently, the method of changing TiDB instance configuration is different from that of changing configuration of other components (such TiKV and PD).
 
 ## Common Operations
@@ -132,6 +128,7 @@ The following TiKV configuration items can be modified online:
 | `raftstore.raft-log-gc-count-limit` | The hard limit on the allowable number of residual Raft logs |
 | `raftstore.raft-log-gc-size-limit` | The hard limit on the allowable size of residual Raft logs |
 | `raftstore.raft-max-size-per-msg` | The soft limit on the size of a single message packet that is allowed to be generated |
+| `raftstore.raft-entry-max-size` | The hard limit on the maximum size of a single Raft log |
 | `raftstore.raft-entry-cache-life-time` | The maximum remaining time allowed for the log cache in memory |
 | `raftstore.split-region-check-tick-interval` | The time interval at which to check whether the Region split is needed |
 | `raftstore.region-split-check-diff` | The maximum value by which the Region data is allowed to exceed before Region split |
@@ -150,7 +147,7 @@ The following TiKV configuration items can be modified online:
 | `raftstore.max-leader-missing-duration` | The longest duration allowed for a peer to be without a leader. If this value is exceeded, the peer verifies with PD whether it has been deleted. |
 | `raftstore.abnormal-leader-missing-duration` | The normal duration allowed for a peer to be without a leader. If this value is exceeded, the peer is seen as abnormal and marked in metrics and logs. |
 | `raftstore.peer-stale-state-check-interval` | The time interval to check whether a peer is without a leader |
-| `raftstore.consistency-check-interval` | The time interval to check consistency |
+| `raftstore.consistency-check-interval` | The time interval to check consistency (**NOT** recommended because it is not compatible with the garbage collection in TiDB) |
 | `raftstore.raft-store-max-leader-lease` | The longest trusted period of a Raft leader |
 | `raftstore.merge-check-tick-interval` | The time interval for merge check |
 | `raftstore.cleanup-import-sst-interval` | The time interval to check expired SST files |
@@ -171,6 +168,10 @@ The following TiKV configuration items can be modified online:
 | `pessimistic-txn.wake-up-delay-duration` | The duration after which a pessimistic transaction is woken up |
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
+| `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
+| `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which transactions write data |
+| `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which transactions and the Coprocessor read data |
+| `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
 | `gc.batch-keys` | The number of keys processed in one batch |
 | `gc.max-write-bytes-per-sec` | The maximum bytes that can be written into RocksDB per second |
@@ -198,6 +199,9 @@ The following TiKV configuration items can be modified online:
 | `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | The soft limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | The hard limit on the pending compaction bytes |
 | `{db-name}.{cf-name}.titan.blob-run-mode` | The mode of processing blob files |
+| `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
+| `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
+| `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
@@ -285,7 +289,7 @@ For detailed parameter description, refer to [PD Configuration File](/pd-configu
 
 Currently, the method of changing TiDB configuration is different from that of changing TiKV and PD configurations. You can modify TiDB configuration by using [system variables](/system-variables.md).
 
-The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable. 
+The following example shows how to modify `slow-threshold` online by using the `tidb_slow_log_threshold` variable.
 
 The default value of `slow-threshold` is 300 ms. You can set it to 200 ms by using `tidb_slow_log_threshold`.
 
@@ -318,7 +322,37 @@ The following TiDB configuration items can be modified online:
 
 | Configuration item | SQL variable | Description |
 | :--- | :--- |
-| `mem-quota-query` | `tidb_mem_quota_query` | The memory usage limit of a query |
 | `log.enable-slow-log` | `tidb_enable_slow_log` | Whether to enable slow log |
 | `log.slow-threshold` | `tidb_slow_log_threshold` | The threshold of slow log |
 | `log.expensive-threshold` | `tidb_expensive_query_time_threshold` | The threshold of a expensive query |
+
+### Modify TiFlash configuration online
+
+Currently, you can modify the TiFlash configuration `max_threads` by using the system variable [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610), which specifies the maximum concurrency for TiFlash to execute a request.
+
+The default value of `tidb_max_tiflash_threads` is `-1`, indicating that this system variable is invalid and depends on the setting of the TiFlash configuration file. You can set `max_threads` to 10 by using `tidb_max_tiflash_threads`:
+
+{{< copyable "sql" >}}
+
+```sql
+set tidb_max_tiflash_threads = 10;
+```
+
+```sql
+Query OK, 0 rows affected (0.00 sec)
+```
+
+{{< copyable "sql" >}}
+
+```sql
+select @@tidb_max_tiflash_threads;
+```
+
+```sql
++----------------------------+
+| @@tidb_max_tiflash_threads |
++----------------------------+
+| 10                         |
++----------------------------+
+1 row in set (0.00 sec)
+```

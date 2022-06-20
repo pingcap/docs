@@ -8,7 +8,7 @@ aliases: ['/docs/dev/grafana-tidb-dashboard/','/docs/dev/reference/key-monitorin
 
 If you use TiUP to deploy the TiDB cluster, the monitoring system (Prometheus & Grafana) is deployed at the same time. For the monitoring architecture, see [TiDB Monitoring Framework Overview](/tidb-monitoring-framework.md).
 
-The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, and so on. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel. The differences between the two panels are different in the following aspects:
+The Grafana dashboard is divided into a series of sub dashboards which include Overview, PD, TiDB, TiKV, Node\_exporter, Disk Performance, Performance\_overview, and so on. The TiDB dashboard consists of the TiDB panel and the TiDB Summary panel. The differences between the two panels are different in the following aspects:
 
 - TiDB panel: provides as comprehensive information as possible for troubleshooting cluster anomalies.
 - TiDB Summary Panel: extracts parts of the TiDB panel information with which users are most concerned, with some modifications. It provides data (such as QPS, TPS, response delay) that users care about in the daily database operations, which serves as the monitoring information to be displayed or reported.
@@ -27,7 +27,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - QPS: the number of SQL statements executed per second on all TiDB instances, which is counted according to `SELECT`, `INSERT`, `UPDATE`, and other types of statements
     - CPS By Instance: the command statistics on each TiDB instance, which is classified according to the success or failure of command execution results
     - Failed Query OPM: the statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per second on each TiDB instance. It contains the module in which the error occurs and the error code
-    - Slow query: the statistics of the processing time of slow queries (the time cost of the entire slow query, the time cost of Coprocessor，and the waiting time for Coprocessor scheduling). Slow queries are classified into internal and general SQL statements
+    - Slow query: the statistics of the processing time of slow queries (the time cost of the entire slow query, the time cost of Coprocessor, and the waiting time for Coprocessor scheduling). Slow queries are classified into internal and general SQL statements
     - Connection Idle Duration: the duration of idle connections
     - 999/99/95/80 Duration: the statistics of the execution time for different types of SQL statements (different percentiles)
 
@@ -59,7 +59,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Transaction Statement Num: the number of SQL statements in a transaction
     - Transaction Retry Num: the number of times that a transaction retries
     - Session Retry Error OPS: the number of errors encountered during the transaction retry per second. This metric includes two error types: retry failure and exceeding the maximum number of retries
-    - Commit Token Wait Duration: the wait duration in the flow control queue during the transaction commit. If the wait duration is long, it means that the transaction to commit is too large and the flow is controlled. If the system still has resources available, you can speed up the commit process by increasing the `committer-concurrency` value in the TiDB configuration file
+    - Commit Token Wait Duration: the wait duration in the flow control queue during the transaction commit. If the wait duration is long, it means that the transaction to commit is too large and the flow is controlled. If the system still has resources available, you can speed up the commit process by increasing the system variable `tidb_committer_concurrency`.
     - KV Transaction OPS: the number of transactions executed per second within each TiDB instance
         - A user transaction might trigger multiple transaction executions in TiDB, including reading internal metadata, atomic retries of the user transaction, and so on
         - TiDB's internally scheduled tasks also operate on the database through transactions, which are also included in this panel
@@ -83,6 +83,7 @@ To understand the key metrics displayed on the TiDB dashboard, check the followi
     - Execution Duration: the statistics of the execution time for SQL statements
     - Expensive Executor OPS: the statistics of the operators that consume many system resources per second, including `Merge Join`, `Hash Join`, `Index Look Up Join`, `Hash Agg`, `Stream Agg`, `Sort`, `TopN`, and so on
     - Queries Using Plan Cache OPS: the statistics of queries using the Plan Cache per second
+    - Plan Cache Miss OPS: the statistics of the number of times that the Plan Cache is missed per second
 
 - Distsql
     - Distsql Duration: the processing time of Distsql statements

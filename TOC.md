@@ -3,16 +3,15 @@
 
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
+  - [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v6.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
-    - [v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
-    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.0-performance-benchmarking-with-tpch.md)
+    - [v6.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+    - [v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.1-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
-  - [TiDB Adopters](/adopters.md)
   - [Credits](/credits.md)
 - Quick Start
   - [Try Out TiDB](/quick-start-with-tidb.md)
@@ -20,6 +19,73 @@
   - [Learn TiDB SQL](/basic-sql-operations.md)
   - [Learn HTAP](/explore-htap.md)
   - [Import Example Database](/import-example-data.md)
+- Develop
+  - [Overview](/develop/dev-guide-overview.md)
+  - Quick Start
+    - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
+    - Build a Simple CRUD App with TiDB
+      - [Java](/develop/dev-guide-sample-application-java.md)
+  - Example Applications
+    - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+  - Connect to TiDB
+    - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+    - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
+    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+  - Design Database Schema
+    - [Overview](/develop/dev-guide-schema-design-overview.md)
+    - [Create a Database](/develop/dev-guide-create-database.md)
+    - [Create a Table](/develop/dev-guide-create-table.md)
+    - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
+  - Write Data
+    - [Insert Data](/develop/dev-guide-insert-data.md)
+    - [Update Data](/develop/dev-guide-update-data.md)
+    - [Delete Data](/develop/dev-guide-delete-data.md)
+    - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
+  - Read Data
+    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
+    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
+    - [Subquery](/develop/dev-guide-use-subqueries.md)
+    - [Paginate Results](/develop/dev-guide-paginate-results.md)
+    - [Views](/develop/dev-guide-use-views.md)
+    - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
+    - [Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
+    - Read Replica Data
+      - [Follower Read](/develop/dev-guide-use-follower-read.md)
+      - [Stale Read](/develop/dev-guide-use-stale-read.md)
+    - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+  - Transaction
+    - [Overview](/develop/dev-guide-transaction-overview.md)
+    - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+    - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
+    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
+  - Optimize
+    - [Overview](/develop/dev-guide-optimize-sql-overview.md)
+    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
+    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
+    - Other Optimization Methods
+      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
+      - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
+  - Troubleshoot
+    - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
+    - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
+    - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
+  - Reference
+    - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+    - Guidelines
+      - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
+      - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+    - Archived Docs
+      - [For Hibernate ORM](/develop/dev-guide-outdated-for-hibernate-orm.md)
+      - [For Django](/develop/dev-guide-outdated-for-django.md)
+      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
+      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
+      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
+      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
+  - Cloud Native Development Environment
+    - [Gitpod](/develop/dev-guide-playground-gitpod.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -49,7 +115,8 @@
     - [Migrate and Merge MySQL Shards of Large Datasets](/migrate-large-mysql-shards-to-tidb.md)
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
     - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
-    - [Replicate Incremental Data between TiDB Clusters](/incremental-replication-between-clusters.md)
+    - [Migrate from One TiDB Cluster to Another TiDB Cluster](/migrate-from-tidb-to-tidb.md)
+    - [Replicate Data from TiDB to Kafka](/replicate-data-to-kafka.md)
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md)
     - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
@@ -80,6 +147,7 @@
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   - [Modify Configuration Online](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
+  - [Replicate Data Between Primary and Secondary Clusters](/replicate-betwwen-primary-and-secondary-clusters.md)
 - Monitor and Alert
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
@@ -106,16 +174,22 @@
   - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - Performance Tuning
-  - System Tuning
-    - [Operating System Tuning](/tune-operating-system.md)
-  - Software Tuning
-    - Configuration
-      - [Tune TiDB Memory](/configure-memory-usage.md)
-      - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
-      - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
-      - [TiKV Follower Read](/follower-read.md)
-      - [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
-    - [Coprocessor Cache](/coprocessor-cache.md)
+  - Tuning Guide
+    - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
+    - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+  - Configuration Tuning
+    - System Tuning
+      - [Operating System Tuning](/tune-operating-system.md)
+    - Software Tuning
+      - Configuration
+        - [Tune TiDB Memory](/configure-memory-usage.md)
+        - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+        - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+        - [TiKV Follower Read](/follower-read.md)
+        - [Tune Region Performance](/tune-region-performance.md)
+        - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+      - [Coprocessor Cache](/coprocessor-cache.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
     - Understanding the Query Execution Plan
@@ -270,6 +344,7 @@
       - [tiup-bench](/tiup/tiup-bench.md)
   - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
+    - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
@@ -415,6 +490,7 @@
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
     - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+    - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
     - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
     - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
@@ -435,6 +511,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
+    - [Performance Overview](/grafana-performance-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
@@ -479,9 +556,11 @@
       - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
+      - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
+      - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -611,6 +690,7 @@
       - [Bit Functions and Operators](/functions-and-operators/bit-functions-and-operators.md)
       - [Cast Functions and Operators](/functions-and-operators/cast-functions-and-operators.md)
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
+      - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
@@ -630,6 +710,7 @@
       - [Isolation Levels](/transaction-isolation-levels.md)
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
+      - [Non-Transactional DML Statements](/non-transactional-dml.md)
     - Garbage Collection (GC)
       - [Overview](/garbage-collection-overview.md)
       - [Configuration](/garbage-collection-configuration.md)
@@ -762,13 +843,16 @@
   - [Cluster Management FAQs](/faq/manage-cluster-faq.md)
   - [High Availability FAQs](/faq/high-availability-faq.md)
   - [High Reliability FAQs](/faq/high-reliability-faq.md)
-- [Glossary](/glossary.md)
 - Release Notes
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
+  - [TiDB Versioning](/releases/versioning.md)
+  - v6.1
+    - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
     - [5.3.1](/releases/release-5.3.1.md)
@@ -914,3 +998,4 @@
     - [RC3](/releases/release-rc.3.md)
     - [RC2](/releases/release-rc.2.md)
     - [RC1](/releases/release-rc.1.md)
+- [Glossary](/glossary.md)

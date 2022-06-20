@@ -10,7 +10,7 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 ## Linux OS version requirements
 
-| Linux OS Platform        | Version      |
+| Linux OS        | Version      |
 | :-----------------------:| :----------: |
 | Red Hat Enterprise Linux | 7.3 or later 7.x releases |
 | CentOS                   | 7.3 or later 7.x releases |
@@ -40,7 +40,7 @@ Other Linux OS versions such as Debian Linux and Fedora Linux might work but are
 
 > **Note:**
 >
-> It is required that you [deploy TiUP on the control machine](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine) to operate and manage TiDB clusters.
+> It is required that you [deploy TiUP on the control machine](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine) to operate and manage TiDB clusters.
 
 ### Target machines
 
@@ -76,9 +76,9 @@ You can deploy and run TiDB on the 64-bit generic hardware server platform in th
 
 | Component | CPU | Memory | Hard Disk Type | Network | Instance Number (Minimum Requirement) |
 | :-----: | :------: | :------: | :------: | :------: | :-----: |
-|  TiDB  | 16 core+ | 32 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
-| PD | 4 core+ | 8 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
-| TiKV | 16 core+ | 32 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
+|  TiDB  | 16 core+ | 48 GB+ | SAS | 10 Gigabit network card (2 preferred) | 2 |
+| PD | 8 core+ | 16 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
+| TiKV | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 3 |
 | TiFlash | 48 core+ | 128 GB+ | 1 or more SSDs | 10 Gigabit network card (2 preferred) | 2 |
 | TiCDC | 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred) | 2 |
 | Monitor | 8 core+ | 16 GB+ | SAS | Gigabit network card | 1 |
@@ -126,6 +126,17 @@ As an open source distributed NewSQL database, TiDB requires the following netwo
 | Grafana | 3000 | the port for the external Web monitoring service and client (Browser) access|
 | Alertmanager | 9093 | the port for the alert web service |
 | Alertmanager | 9094 | the alert communication port |
+
+## Disk space requirements
+
+| Component | Disk space requirement | Healthy disk usage |
+| :-- | :-- | :-- |
+| TiDB | At least 30 GB for the log disk | Lower than 90% |
+| PD | At least 20 GB for the data disk and for the log disk, respectively | Lower than 90% |
+| TiKV | At least 100 GB for the data disk and for the log disk, respectively | Lower than 80% |
+| TiFlash | At least 100 GB for the data disk and at least 30 GB for the log disk, respectively | Lower than 80% |
+| TiUP | <ul><li>Control machine: No more than 1 GB space is required for deploying a TiDB cluster of a single version. The space required increases if TiDB clusters of multiple versions are deployed. </li> <li> Deployment servers (machines where the TiDB components run): TiFlash occupies about 700 MB space and other components (such as PD, TiDB, and TiKV) occupy about 200 MB space respectively. During the cluster deployment process, the TiUP cluster requires less than 1 MB of temporary space (`/tmp` directory) to store temporary files.</li></ul>| N/A |
+| Ngmonitoring | <ul><li>Conprof: 3 x 1 GB x Number of components (each component occupies about 1 GB per day, 3 days in total) + 20 GB reserved space </li><li> Top SQL: 30 x 50 MB x Number of components (each component occupies about 50 MB per day, 30 days in total) </li><li> Conprof and Top SQL share the reserved space</li></ul> | N/A |
 
 ## Web browser requirements
 

@@ -28,7 +28,7 @@ First, use [`dumpling`](/dumpling-overview.md) to export data from MySQL:
 {{< copyable "shell-regular" >}}
 
 ```sh
-./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 In the above command:
@@ -48,9 +48,7 @@ Before the data import, you need to deploy a TiDB cluster. In this tutorial, TiD
 
 ### Step 2: Download TiDB Lightning installation package
 
-Download the TiDB Lightning installation package from the following link:
-
-- **v5.4.0**: [tidb-toolkit-v5.4.0-linux-amd64.tar.gz](https://download.pingcap.org/tidb-toolkit-v5.4.0-linux-amd64.tar.gz)
+The TiDB Lightning installation package is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 > **Note:**
 >
