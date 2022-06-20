@@ -74,7 +74,7 @@ TiDB Lightning supports:
 
 ## Could TiDB Lightning skip creating schema and tables?
 
-Yes. If you have already created the tables in the target database, you could set `no-schema = true` in the `[mydumper]` section in `tidb-lightning.toml`. This makes TiDB Lightning skip the `CREATE TABLE` invocations and fetch the metadata directly from the target database. TiDB Lightning will exit with error if a table is actually missing.
+Starting from v5.1, TiDB Lightning can automatically recognize the schema and tables in the downstream. If you use TiDB Lightning earlier than v5.1, you need to set `no-schema = true` in the `[mydumper]` section in `tidb-lightning.toml`. This makes TiDB Lightning skip the `CREATE TABLE` invocations and fetch the metadata directly from the target database. TiDB Lightning will exit with error if a table is actually missing.
 
 ## Can the Strict SQL Mode be disabled to allow importing invalid data?
 
@@ -147,7 +147,7 @@ upload-speed-limit = "100MB"
 
 ## Why TiDB Lightning requires so much free space in the target TiKV cluster?
 
-With the default settings of 3 replicas, the space requirement of the target TiKV cluster is 6 times the size of data source. The extra multiple of “2” is a conservative estimation because the following factors are not reflected in the data source:
+With the default settings of 3 replicas, the space requirement of the target TiKV cluster is 6 times the size of data source. The extra multiple of "2" is a conservative estimation because the following factors are not reflected in the data source:
 
 - The space occupied by indices
 - Space amplification in RocksDB
@@ -292,7 +292,7 @@ See the [Checkpoints control](/tidb-lightning/tidb-lightning-checkpoints.md#chec
 
 1. Fix the schema so that the file is entirely in either UTF-8 or GB-18030.
 
-2. Manually `CREATE` the affected tables in the target database, and then set `[mydumper] no-schema = true` to skip automatic table creation.
+2. Manually `CREATE` the affected tables in the target database.
 
 3. Set `[mydumper] character-set = "binary"` to skip the check. Note that this might introduce mojibake into the target database.
 

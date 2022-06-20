@@ -8,8 +8,6 @@ aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference
 
 This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
-If Local-backend is used for data import, during the import process, **the cluster cannot provide services**. If you do not want the TiDB services to be impacted, perform the data import according to [TiDB Lightning TiDB-backend](/tidb-lightning/tidb-lightning-backends.md#tidb-lightning-tidb-backend).
-
 ## Notes
 
 Before starting TiDB Lightning, note that:
@@ -43,7 +41,7 @@ With the default replica count of 3, this means the total free space should be a
 Use the [`dumpling` tool](/dumpling-overview.md) to export data from MySQL by using the following command:
 
 ```sh
-./bin/dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
+./dumpling -h 127.0.0.1 -P 3306 -u root -t 16 -F 256MB -B test -f 'test.t[12]' -o /data/my_database/
 ```
 
 In this command,
@@ -69,7 +67,7 @@ You can find deployment instructions in [TiDB Quick Start Guide](/quick-start-wi
 
 #### Step 2: Download the TiDB Lightning installation package
 
-Refer to the [TiDB enterprise tools download page](/download-ecosystem-tools.md#tidb-lightning) to download the TiDB Lightning package. 
+Refer to the [Download TiDB Tools](/download-ecosystem-tools.md) document to download the TiDB Lightning package.
 
 > **Note:**
 >

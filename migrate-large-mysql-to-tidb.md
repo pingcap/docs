@@ -118,7 +118,7 @@ The target TiKV cluster must have enough disk space to store the imported data. 
     port = ${port}                # e.g.: 4000
     user = "${user_name}"         # e.g.: "root"
     password = "${password}"      # e.g.: "rootroot"
-    status-port = ${status-port}  # During the import, TiCb Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+    status-port = ${status-port}  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
@@ -211,7 +211,7 @@ If the import fails, refer to [TiDB Lightning FAQ](/tidb-lightning/tidb-lightnin
 
     # Configures the data source.
     mysql-instances:
-      - source-id: "mysql-01"            # Data source ID，i.e., source-id in source1.yaml
+      - source-id: "mysql-01"            # Data source ID, i.e., source-id in source1.yaml
         block-allow-list: "bw-rule-1"    # You can use the block-allow-list configuration above.
         # syncer-config-name: "global"    # You can use the syncers incremental data configuration below.
         meta:                            # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.

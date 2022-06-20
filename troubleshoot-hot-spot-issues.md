@@ -37,7 +37,7 @@ Value: rowID
 
 Index data has two types: the unique index and the non-unique index.
 
-- For unique indexes, you can follow the coding rules above. 
+- For unique indexes, you can follow the coding rules above.
 - For non-unique indexes, a unique key cannot be constructed through this encoding, because the `tablePrefix{tableID}_indexPrefixSep{indexID}` of the same index is the same and the `ColumnsValue` of multiple rows might be the same. The encoding rule for non-unique indexes is as follows:
 
     ```
@@ -52,6 +52,8 @@ According to TiDB coding rules, the data of the same table is in a range prefixe
 The common auto-increment primary key is sequentially increasing. When the primary key is of the integer type, the value of the primary key is used as the RowID by default. At this time, the RowID is sequentially increasing, and a write hotspot of the table forms when a large number of `INSERT` operations exist.
 
 Meanwhile, the RowID in TiDB is also sequentially auto-incremental by default. When the primary key is not an integer type, you might also encounter the problem of write hotspots.
+
+In addition, when hotspots occur during the process of data writes (on a newly created table or partition) or data reads (periodic read hotspots in read-only scenarios), you can control the Region merge behavior using table attributes. For details, see [Control the Region merge behavior using table attributes](/table-attributes.md#control-the-region-merge-behavior-using-table-attributes).
 
 ### Index hotspots
 
@@ -100,8 +102,8 @@ Statement example:
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE：CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
-ALTER TABLE：ALTER TABLE t SHARD_ROW_ID_BITS = 4;
+CREATE TABLE: CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
+ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 ```
 
 The value of `SHARD_ROW_ID_BITS` can be dynamically modified. The modified value only takes effect for newly written data.

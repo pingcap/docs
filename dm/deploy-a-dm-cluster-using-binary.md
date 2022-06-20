@@ -12,19 +12,9 @@ This document introduces how to quickly deploy the Data Migration (DM) cluster u
 >
 > In the production environment, it is recommended to [use TiUP to deploy a DM cluster](/dm/deploy-a-dm-cluster-using-tiup.md).
 
-## Preparations
+## Download DM binary
 
-Download the official binary using the download link in the following table:
-
-| Package name | OS | Architecture | SHA256 checksum |
-|:---|:---|:---|:---|
-| `https://download.pingcap.org/dm-{version}-linux-amd64.tar.gz` | Linux | amd64 | `https://download.pingcap.org/dm-{version}-linux-amd64.sha256` |
-
-> **Note:**
->
-> `{version}` in the above download link indicates the version number of TiDB. For example, the download link for `v1.0.1` is `https://download.pingcap.org/dm-v1.0.1-linux-amd64.tar.gz`. You can check the published DM versions in the [DM Release](https://github.com/pingcap/tiflow/releases) page.
-
-The downloaded files have two subdirectories, `bin` and `conf`. The `bin` directory contains the binary files of DM-master, DM-worker, and dmctl. The `conf` directory contains the sample configuration files.
+The DM binary is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 ## Sample scenario
 
@@ -66,7 +56,7 @@ You can configure DM-master by using [command-line parameters](#dm-master-comman
 The following is the description of DM-master command-line parameters:
 
 ```bash
-./bin/dm-master --help
+./dm-master --help
 ```
 
 ```
@@ -131,7 +121,7 @@ The following is the configuration file of DM-master. It is recommended that you
       {{< copyable "shell-regular" >}}
 
       ```bash
-      ./bin/dm-master -config conf/dm-master1.toml
+      ./dm-master -config conf/dm-master1.toml
       ```
 
       > **Note:**
@@ -151,7 +141,7 @@ The following is the description of the DM-worker command-line parameters:
 {{< copyable "shell-regular" >}}
 
 ```bash
-./bin/dm-worker --help
+./dm-worker --help
 ```
 
 ```
@@ -207,7 +197,7 @@ The following is the DM-worker configuration file. It is recommended that you co
       {{< copyable "shell-regular" >}}
 
       ```bash
-      ./bin/dm-worker -config conf/dm-worker1.toml
+      ./dm-worker -config conf/dm-worker1.toml
       ```
 
 3. For DM-worker2, change `name` in the configuration file to `worker2`. Then repeat Step 2.

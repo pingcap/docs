@@ -11,13 +11,12 @@ It is recommended to use Sysbench 1.0 or later, which can be [downloaded here](h
 
 ### TiDB configuration
 
-Higher log level means fewer logs to be printed and thus positively influences TiDB performance. Enable `prepared plan cache` in the TiDB configuration to lower the cost of optimizing execution plan. Specifically, you can add the following command in the TiUP configuration file:
+Higher log level means fewer logs to be printed and thus positively influences TiDB performance. Specifically, you can add the following command in the TiUP configuration file:
 
 ```yaml
 server_configs:
   tidb:
     log.level: "error"
-    prepared-plan-cache.enabled: true
 ```
 
 ### TiKV configuration
@@ -28,7 +27,7 @@ There are multiple Column Families on TiKV cluster which are mainly used to stor
 
 Default CF : Write CF = 4 : 1
 
-Configuring the block cache of RocksDB on TiKV should be based on the machine’s memory size, in order to make full use of the memory. To deploy a TiKV cluster on a 40GB virtual machine, it is recommended to configure the block cache as follows:
+Configuring the block cache of RocksDB on TiKV should be based on the machine's memory size, in order to make full use of the memory. To deploy a TiKV cluster on a 40GB virtual machine, it is recommended to configure the block cache as follows:
 
 ```yaml
 server_configs:
