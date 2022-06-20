@@ -96,7 +96,7 @@ cp -rp keys ~/.tiup/
 tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
 ```
 
-After merging the mirror, run the following command to upgrade the TiUP Cluster component:
+After merging the mirrors, run the following command to upgrade the TiUP Cluster component:
 
 {{< copyable "shell-regular" >}}
 
