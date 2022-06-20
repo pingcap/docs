@@ -290,8 +290,9 @@ max-allowed-packet = 67_108_864
 # key-path = "/path/to/lightning.key"
 
 # When data importing is complete, tidb-lightning can automatically perform
-# the Checksum, Compact and Analyze operations. It is recommended to leave
-# these as true in the production environment.
+# the Checksum, Compact and Analyze operations. This configuration is only
+# valid when backend=local. It is recommended to leave these as true in
+# the production environment.
 # The execution order: Checksum -> Analyze
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.

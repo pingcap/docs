@@ -16,13 +16,13 @@ This page explains the special terms used in TiDB Lightning's logs, monitoring, 
 
 An operation to rebuild the [statistics](/statistics.md) information of a TiDB table, which is running the [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) statement.
 
-Because TiDB Lightning imports data without going through TiDB, the statistics information is not automatically updated. Therefore, TiDB Lightning explicitly analyzes every table after importing. This step can be omitted by setting the `post-restore.analyze` configuration to `false`.
+Because the local backend of TiDB Lightning imports data directly into TiKV, the statistics information is not automatically updated. Therefore, TiDB Lightning explicitly analyzes every table after importing. This step can be omitted by setting the `post-restore.analyze` configuration to `false`.
 
 ### `AUTO_INCREMENT_ID`
 
 Every table has an associated `AUTO_INCREMENT_ID` counter to provide the default value of an auto-incrementing column. In TiDB, this counter is additionally used to assign row IDs.
 
-Because TiDB Lightning imports data without going through TiDB, the `AUTO_INCREMENT_ID` counter is not automatically updated. Therefore, TiDB Lightning explicitly alters `AUTO_INCREMENT_ID` to a valid value. This step is always performed, even if the table has no `AUTO_INCREMENT` columns.
+Because the local backend of TiDB Lightning imports data directly into TiKV, the `AUTO_INCREMENT_ID` counter is not automatically updated. Therefore, TiDB Lightning explicitly alters `AUTO_INCREMENT_ID` to a valid value. This step is always performed, even if the table has no `AUTO_INCREMENT` columns.
 
 <!-- B -->
 
