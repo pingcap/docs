@@ -247,7 +247,12 @@
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
-    - [Placement Rules in SQL](/placement-rules-in-sql.md)
+    - Read Historical Data
+      - Use Stale Read (Recommended)
+        - [Usage Scenarios of Stale Read](/stale-read.md)
+        - [Perform Stale Read Using `As OF TIMESTAMP`](/as-of-timestamp.md)
+        - [Perform Stale Read Using `tidb_read_staleness`](/tidb-read-staleness.md)
+      - [Use the `tidb_snapshot` System Variable](/read-historical-data.md)
     - System Tables
       - [`mysql`](/mysql-schema.md)
       - INFORMATION_SCHEMA
@@ -299,7 +304,6 @@
         - [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
-      - [`METRICS_SCHEMA`](/metrics-schema.md)
   - [System Variables](/system-variables.md)
   - Storage Engines
     - TiKV
