@@ -134,8 +134,6 @@
       - [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md)
       - [`INSERT`](/sql-statements/sql-statement-insert.md)
       - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
-      - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
-      - [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)
       - [`MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)
       - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
       - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
@@ -303,6 +301,15 @@
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
   - [System Variables](/system-variables.md)
+  - Storage Engines
+    - TiKV
+      - [TiKV Overview](/tikv-overview.md)
+      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+      - [Titan Overview](/storage-engine/titan-overview.md)
+      - [Titan Configuration](/storage-engine/titan-configuration.md)
+    - TiFlash
+      - [Overview](/tiflash/tiflash-overview.md)
+      - [Use TiFlash](/tiflash/use-tiflash.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
