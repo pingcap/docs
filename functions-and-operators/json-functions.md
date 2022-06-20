@@ -9,7 +9,7 @@ summary: Learn about JSON functions.
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
-TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.
+TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7. Additional JSON functions were added to MySQL 5.7 after its release, and not all are available in TiDB (see [unsupported functions](#unsupported-functions)).
 
 ## Functions that create JSON values
 
@@ -40,7 +40,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 | [JSON_ARRAY_INSERT(json_doc, path, val[, path, val] ...)][json_array_insert] | Inserts an array into the json document and returns the modified document |
 | [JSON_INSERT(json_doc, path, val[, path, val] ...)][json_insert] | Inserts data into a JSON document and returns the result |
 | [JSON_MERGE(json_doc, json_doc[, json_doc] ...)][json_merge]  | A deprecated alias for `JSON_MERGE_PRESERVE` |
-| [JSON_MERGE_PATCH(json_doc, json_doc[, json_doc] ...)][json_merge_patch]  | Merge JSON documents |
 | [JSON_MERGE_PRESERVE(json_doc, json_doc[, json_doc] ...)][json_merge_preserve]  | Merges two or more JSON documents and returns the merged result |
 | [JSON_REMOVE(json_doc, path[, path] ...)][json_remove]    | Removes data from a JSON document and returns the result |
 | [JSON_REPLACE(json_doc, path, val[, path, val] ...)][json_replace] | Replaces existing values in a JSON document and returns the result |
@@ -69,8 +68,14 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 
 | Function Name                     | Description |
 | --------------------------------- | ----------- |
-| [JSON_ARRAYAGG(key)][json_arrayagg] | Provides an aggregation of keys. |
 | [JSON_OBJECTAGG(key, value)][json_objectagg] | Provides an aggregation of values for a given key. |
+
+## Unsupported functions
+
+The following JSON functions are unsupported in TiDB. You can track the progress in adding them in [TiDB #7546](https://github.com/pingcap/tidb/issues/7546):
+
+* `JSON_MERGE_PATCH`
+* `JSON_ARRAYAGG`
 
 ## See also
 
@@ -96,8 +101,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 [json_remove]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove
 
 [json_merge]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge
-
-[json_merge_patch]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge-patch
 
 [json_merge_preserve]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge-preserve
 
@@ -128,8 +131,6 @@ TiDB supports most of the JSON functions that shipped with the GA release of MyS
 [json_array_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-append
 
 [json_array_insert]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-insert
-
-[json_arrayagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-arrayagg
 
 [json_objectagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg
 
