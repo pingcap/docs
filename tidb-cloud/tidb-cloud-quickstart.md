@@ -92,21 +92,13 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
 
-3. In the **Connect to TiDB** dialog box, copy the connection string in **Step 2: Connect with a SQL client** . For example:
+3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
-    ```shell
-    mysql --connect-timeout 15 -u root -h tidb.4aa56280.2c524d28.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
-    ```
+    > **Tip:**
+    >
+    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
 
-4. Use a SQL client to connect to your cluster.
-
-    TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
-
-5. Paste the connection string into your Terminal interface.
-
-6. Enter the root password of the cluster.
-
-7. Validate the connection in the MySQL client:
+4. After logging into your TiDB cluster, validate the connection in the MySQL client:
 
     {{< copyable "sql" >}}
 
@@ -114,7 +106,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
     SELECT TiDB_version();
     ```
 
-    If you see the release version information, you are ready to play with the MySQL client on your TiDB Cloud cluster.
+    If you see the release version information, you are ready to use your TiDB cluster.
 
 ## Step 3. Import the sample data
 
