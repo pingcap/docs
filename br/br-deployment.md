@@ -9,9 +9,9 @@ This document describes the recommended deployment of Backup & Restore (BR) and 
 
 ## Deploy BR
 
-Recommended practices When deploying BR:
+Recommended practices when deploying BR:
 
-- In production environments, deploy BR on a node with at least 8 cores and 16 GB memory. Select an appropriate OS version by following [Linux OS version requirements](/hardware-and-software-requirements.md#linux-os-version-requirements).
+- In production environments, deploy BR on a node with at least 8 cores CPU and 16 GB memory. Select an appropriate OS version by following [Linux OS version requirements](/hardware-and-software-requirements.md#linux-os-version-requirements).
 - Save backup data to Amazon S3, GCS or Azure Blob Storage.
 - Allocate sufficient resources for backup and restoration；
 
@@ -21,8 +21,8 @@ Recommended practices When deploying BR:
 
 > **Note**:
 >
-> - If no Network File System (NFS) is mounted to a BR or TiKV node, or if you use external storage that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up by BR are generated at each TiKV node. Because BR only backs up the leader replica, you need to estimate the space reserved on each node based on the leader size. Because TiDB uses leader count for load balancing by default, leaders can greatly differ in size. This might resulting in uneven distribution of backup data on each node.
-> **Note that this is not the recommended way to deploy BR**, because the backup data are scattered in the local file system of each node. Collecting the backup data might result in data redundancy and operation and maintenance problems. Meanwhile, if you restore data directly before collecting the backup data, you will encounter the `SST file not found` error.
+> - If no Network File System (NFS) is mounted to a BR or TiKV node, or if you use external storage that supports Amazon S3, GCS, or Azure Blob Storage protocols, the data backed up by BR is generated at each TiKV node. Because BR only backs up the leader replica, you need to estimate the space reserved on each node based on the leader size. Because TiDB uses the leader count for load balancing by default, leaders can greatly differ in size. This might result in the issue that the backup data is unevenly distributed on each node.
+> - **Note that this is not the recommended way to deploy BR**, because the backup data are scattered in the local file system of each node. Collecting the backup data might result in data redundancy and operation and maintenance problems. Meanwhile, if you restore data directly before collecting the backup data, you will encounter the `SST file not found` error.
 
 ## Use BR
 
@@ -30,7 +30,7 @@ Currently, the following methods are supported to run the BR tool:
 
 ### Use SQL statements
 
-TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) SQL statements. The progress of these operations can be monitored with the statement [`SHOW BACKUPS| RESTORE`](/sql-statements/sql-statement-show-backups.md).
+TiDB supports both [`BACKUP`](/sql-statements/sql-statement-backup.md) and [`RESTORE`](/sql-statements/sql-statement-restore.md) SQL statements. You can monitor the progress of these operations using the statement [`SHOW BACKUPS| RESTORE`](/sql-statements/sql-statement-show-backups.md).
 
 ### Use the command-line tool
 
@@ -38,4 +38,4 @@ For details, see [Use BR Command-line for Backup and Restoration](/br/use-br-com
 
 ### Use BR in the Kubernetes environment
 
-In a Kubernetes environment, you can use TiDB Operator to back up TiDB cluster data to Amazon S3, GCS or persistent volumes or restore data from the backup data in such systems. For details, see [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview).
+In a Kubernetes environment, you can use TiDB Operator to back up TiDB cluster data to Amazon S3, GCS or persistent volumes, and restore data from the backup data in such systems. For details, see [Back Up and Restore Data Using TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview).

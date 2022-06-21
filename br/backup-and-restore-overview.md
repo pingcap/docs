@@ -8,7 +8,7 @@ aliases: ['/docs/dev/br/backup-and-restore-tool/','/docs/dev/reference/tools/br/
 
 [BR](https://github.com/pingcap/br) (Backup & Restore) is a command-line tool for **distributed backup and restoration** of the TiDB cluster data. In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
 
-This document describes BR's architecture, functions, and usage tips.
+This document describes BR's architecture, features, and usage tips.
 
 ## BR architecture
 
@@ -22,7 +22,7 @@ For detailed information about the BR design, see [BR Design Principles](/br/bac
 
 ## BR features
 
-This section describes BR features and performance indicators.
+This section describes BR features and the performance impact.
 
 ### Back up TiDB cluster data
 
@@ -31,17 +31,17 @@ This section describes backup features, impact of backup, and backup file types.
 #### Backup features
 
 - **Back up cluster snapshots**: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
-- **Back up incremental data**: Incremental data of a TiDB cluster is differentiated data between the latest snapshot and the previous snapshot. Incremental data is smaller compared with full data and it is a supplementary to snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
-- **Back up a database or a table**: In addition to snapshot and incremental data backup, BR supports backing up a database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
+- **Back up incremental data**: The incremental data of a TiDB cluster represents changes between the latest snapshot and the previous snapshot. Incremental data is smaller in size compared with full data, and can be used together with snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
+- **Back up a database or table**: On top of snapshot and incremental data backup, BR supports backing up a specific database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
 - **Encrypt backup data**: BR supports backup data encryption and amazon S3 server-side encryption. You can select an encryption method as required. For details, see [Encrypt backup data](/br/br-usage-backup.md#encrypt-backup-data).
 
 #### Impact on performance
 
-The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with reasonable configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-usage-backup.md#backup-performance-and-impact).
+The impact of backup on a TiDB cluster is kept below 20%, and this value can be reduced to 10% or less with the proper configuration of the TiDB cluster. The backup speed of a TiKV node is scalable and ranges from 50 MB/s to 100 MB/s. For more information, see [Backup performance and impact](/br/br-usage-backup.md#backup-performance-and-impact).
 
-#### Storage of backup data
+#### Storage types of backup data
 
-BR supports backing up data to Amazon S3, Google Cloud Storage, Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see [Back up data to external storage](/br/br-usage-backup.md#back-up-data-to-external-storage).
+BR supports backing up data to Amazon S3, Google Cloud Storage, Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see [Back up data to external storages](/br/br-usage-backup.md#back-up-data-to-external-storage).
 
 ### Restore TiDB cluster data
 
@@ -49,13 +49,13 @@ This section describes restoration features and impact on performance.
 
 #### Restoration features
 
-- **Restore cluster snapshot backup**: You can restore snapshot backup data to a new cluster. For details, see [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots).
-- **Restore cluster incremental backup**: You can restore the incremental backup data to a cluster. For details, see [Restore incremental backup](/br/br-usage-restore.md#restore-incremental-data).
+- **Restore snapshot backup**: You can restore snapshot backup data to a new cluster. For details, see [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots).
+- **Restore incremental backup**: You can restore the incremental backup data to a cluster. For details, see [Restore incremental backup](/br/br-usage-restore.md#restore-incremental-data).
 - **Restore a database or a table from backup**: You can restore part of a specific database or table. During the process, BR will filter out unnecessary data. For details, see [Restore a database or a table](/br/br-usage-restore.md#restore-a-database-or-a-table).
 
 #### Impact on performance
 
-Restoration proceeds with a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses resources of the target cluster as much as possible. For more details, see [Restoration performance and impact](/br/br-usage-restore.md#restoration-performance-and-impact).
+Data restoration is performed at a scalable speed. Generally, the speed is 100 MB/s per TiKV node. BR only supports restoring data to a new cluster and uses the resources of the target cluster as much as possible. For more details, see [Restoration performance and impact](/br/br-usage-restore.md#restoration-performance-and-impact).
 
 ## Before you use BR
 
@@ -65,7 +65,7 @@ Before you use BR, pay attention to its usage restrictions, compatibility, and o
 
 This section describes usage restrictions of BR.
 
-#### Unsupported scenario
+#### Unsupported scenarios
 
 When BR restores data to the upstream cluster of TiCDC or TiDB Binlog, TiCDC or TiDB Binlog cannot replicate the restored data to the downstream cluster.
 
@@ -75,7 +75,7 @@ The compatibility issues of BR and a TiDB cluster are as follows:
 
 - There are some cross-version compatibility issues:
 
-    BR(< v5.4.0) cannot restore `charset=GBK` tables. In the meantime, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
+    BR (< v5.4.0) cannot restore `charset=GBK` tables. In the meantime, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
 
 - The KV format might change when some features are enabled or disabled. If these features are not consistently enabled or disabled during backup and restoration, compatibility issues might occur.
 

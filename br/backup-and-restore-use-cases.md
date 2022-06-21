@@ -10,10 +10,10 @@ aliases: ['/docs/dev/br/backup-and-restore-use-cases/','/docs/dev/reference/tool
 
 This document describes common backup and restoration scenarios:
 
-- [Back up a single table to a network disk (recommended in production environment)](#back-up-a-single-table-to-a-network-disk-recommended-in-production-environment)
-- [Restore data from a network disk (recommended in production environment)](#restore-data-from-a-network-disk-recommended-in-production-environment)
-- [Back up a single table to a local disk](#back-up-a-single-table-to-a-local-disk-recommended-in-testing-environment)
-- [Restore data from a local disk](#restore-data-from-a-local-disk-recommended-in-testing-environment)
+- [Back up a single table to a network disk (recommended for production environments)](#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)
+- [Restore data from a network disk (recommended for production environments)](#restore-data-from-a-network-disk-recommended-for-production-environments)
+- [Back up a single table to a local disk](#back-up-a-single-table-to-a-local-disk-recommended-for-testing-environments)
+- [Restore data from a local disk](#restore-data-from-a-local-disk-recommended-for-testing-environments)
 
 This document aims to help you achieve the following goals:
 
@@ -36,7 +36,7 @@ You can estimate the performance of your backup or restoration operation based o
 
 ### Deployment method
 
-It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-cluster.md) and install BR by using TiUP.
+It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-cluster.md) and install BR using TiUP.
 
 ### Cluster versions
 
@@ -66,7 +66,7 @@ BR directly sends commands to the TiKV cluster and are not dependent on the TiDB
 
 ### Others
 
-Besides the preceding prerequisites, you should also perform the following checks before starting.
+In addition to the preceding prerequisites, you should also perform the following checks before performing the backup and restoration.
 
 #### Check before backup
 
@@ -79,7 +79,7 @@ Before running the [`br backup` command](/br/use-br-command-line-tool.md#br-comm
 
 Before running the [`br restore` command](/br/use-br-command-line-tool.md#br-command-line-description), check the target cluster to ensure that the table in this cluster does not have a duplicate name.
 
-## Back up a single table to a network disk (recommended in production environment)
+## Back up a single table to a network disk (recommended for production environments)
 
 Run the `br backup` command to back up the single table data `--db batchmark --table order_line` to the specified path `local:///br_data` in the network disk.
 
@@ -87,7 +87,7 @@ Run the `br backup` command to back up the single table data `--db batchmark --t
 
 - [Check before backup](#check-before-backup)
 - Configure a high-performance SSD hard disk host as the NFS server to store data, and all BR nodes, TiKV nodes, and TiFlash nodes as NFS clients. Mount the same path (for example, `/br_data`) to the NFS server for NFS clients to access the server.
-- The total transfer rate between the NFS server and all NFS clients must reach at least `the number of TiKV instances * 150MB/s`. Otherwise the network I/O might become the performance bottleneck.
+- The total transfer rate between the NFS server and all NFS clients must reach at least `the number of TiKV instances * 150MB/s`. Otherwise, the network I/O might become the performance bottleneck.
 
 > **Note:**
 >
@@ -179,13 +179,13 @@ The preceding log includes the following information:
 
 - `total take(Full backup time)`: Backup duration
 - `total take(real time)`: Total runtime of the application
-- `total size(MB)`: Backup data size
+- `total size(MB)`: The size of the backup data
 - `avg speed(MB/s)`: Backup throughput
-- `total kv`: Number of backed-up KV pairs
+- `total kv`: The number of backed-up KV pairs
 - `backup checksum`: Backup checksum duration
-- `backup fast checksum`: Total duration of calculating the checksum, KV pairs, and bytes of each table
-- `backup total regions`: Total number of backup Regions
-- `BackupTS`: Snapshot timestamp of the backup data
+- `backup fast checksum`: The total duration of calculating the checksum, KV pairs, and bytes of each table
+- `backup total regions`: The total number of backup Regions
+- `BackupTS`: The snapshot timestamp of the backup data
 - `Size`: The actual size of the backup data in the disk after compression
 
 From the preceding information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `62.86`.
@@ -216,7 +216,7 @@ The tuned performance results are as follows (with the same data size):
 - Backup throughput (`avg speed(MB/s)`): increased from `358.09` to `659.59`
 - Throughput of a single TiKV instance (`avg speed(MB/s)/tikv_count`): increased from `89` to `164.89`
 
-## Restore data from a network disk (recommended in production environment)
+## Restore data from a network disk (recommended for production environment)
 
 Use the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
 
@@ -295,13 +295,13 @@ In the log specified before running the restoration command, you can get the sta
 
 The above log includes the following information:
 
-- `total take(Full restore time)`: Restoration duration
-- `total take(real time)`: Total runtime of the application
-- `total size(MB)`: Restoration data size
-- `total kv`: Number of restored KV pairs
-- `avg speed(MB/s)`: Restoration throughput
-- `split region`: Region split duration
-- `restore checksum`: Restoration checksum duration
+- `total take(Full restore time)`: The restoration duration
+- `total take(real time)`: The total runtime of the application
+- `total size(MB)`: The size of the data to be restored
+- `total kv`: The number of restored KV pairs
+- `avg speed(MB/s)`: The restoration throughput
+- `split region`: The Region split duration
+- `restore checksum`: The restoration checksum duration
 - `Size`: The actual size of the restored data in the disk
 
 From the preceding information, the following items can be calculated:
@@ -311,7 +311,7 @@ From the preceding information, the following items can be calculated:
 
 #### Performance tuning
 
-If the resource usage of TiKV does not impose an obvious bottleneck during the restore process, you can increase the value of `--concurrency` (defaults to `128`). See the following example:
+If the resource usage of TiKV does not become an obvious bottleneck during the restore process, you can increase the value of `--concurrency` (defaults to `128`). See the following example:
 
 {{< copyable "shell-regular" >}}
 
@@ -326,7 +326,7 @@ The tuned performance results are as follows (with the same data size):
 - Throughput of a single TiKV instance (`avg speed(MB/s)`/`tikv_count`): increased from `91.8` to `199.1`
 - Average restore speed of a single TiKV instance (`total size(MB)`/(`split time` + `restore time`)/`tikv_count`): increased from `87.4` to `162.3`
 
-## Back up a single table to a local disk (recommended in testing environment)
+## Back up a single table to a local disk (recommended for testing environments)
 
 Run the `br backup` command to back up a single table `--db batchmark --table order_line` to the specified path `local:///home/tidb/backup_local` in the local disk.
 

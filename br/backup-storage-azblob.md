@@ -28,21 +28,21 @@ The following is an example of backup and restoration operations on Azure Blob S
 
 > **Note:**
 >
-> When backing up data to Azure Blob Storage using Azure AD or an access key , you should set `send-credentials-to-tikv = true` (which is `true` by default). Otherwise, the backup task will fail.
+> When backing up data to the Azure Blob Storage using Azure AD or an access key, you need to set `send-credentials-to-tikv = true` (which is `true` by default). Otherwise, the backup task will fail.
 
 ### Method 1: Back up and restore data using Azure AD (recommended)
 
-This section describes how to back up and restore data using Azure AD. Before backup or restoration, you need to configure environment variables.
+This section describes how to back up and restore data using Azure AD. Before performing backup or restoration, you need to configure environment variables.
 
 #### Configure environment variables
 
 In the operating environment of BR and TiKV, configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`.
 
-- When you start a cluster using TiUP, TiKV uses the "systemd" service. The following example provides how to configure the preceding three environment variables as parameters for TiKV:
+- When you start a cluster using TiUP, TiKV uses the "systemd" service. The following example introduces how to configure the preceding three environment variables as parameters for TiKV:
 
     > **Note:**
     >
-    > You need to restart TiKV in Step 3. If your TiKV cannot be restarted, you can back up and restore data using [Method 2](#method-2-back-up-and-restore-using-an-access-key-easy).
+    > You need to restart TiKV in Step 3. If your TiKV cannot be restarted, use [Method 2](#method-2-back-up-and-restore-using-an-access-key-easy) to back up and restore data.
 
     1. Suppose that the TiKV port on this node is 24000, that is, the name of the "systemd" service is "tikv-24000":
 
@@ -66,7 +66,7 @@ In the operating environment of BR and TiKV, configure the environment variables
         systemctl restart tikv-24000
         ```
 
-- For TiKV and BR started with command lines, to configure the Azure AD information for them, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment. You can check whether the variables are in the operating environment of BR and TiKV by running the following commands:
+- To configure the Azure AD information for TiKV and BR started with command lines, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment by running the following commands:
 
     ```
     echo $AZURE_CLIENT_ID
@@ -112,7 +112,7 @@ Based on the way `account-name` is specified, you can restore data either using 
 
 ### Method 2: Back up and restore using an access key (easy)
 
-Compared with backing up and restoring data using Azure AD, backup and restoration using an access key is easier because you do not need to configure environment variables. Other steps are similar to those using Azure AD.
+Compared with backing up and restoring data using Azure AD, backup and restoration using an access key is easier because you do not need to configure environment variables. Other steps are similar to those of using Azure AD.
 
 #### Back up
 
@@ -148,8 +148,8 @@ This feature is **only compatible** with v5.4.0 and later versions.
 
 ## See also
 
-- To know other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
-- To know more about the parameters, see the following documents:
+- To learn other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
+- To learn more about the parameters, see the following documents:
 
     - [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters)
     - [Azblob command-line parameters](/br/backup-and-restore-storages.md#azblob-command-line-parameters)

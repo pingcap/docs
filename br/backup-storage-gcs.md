@@ -11,7 +11,7 @@ The Backup & Restore (BR) tool supports using Google Cloud Storage (GCS) as the 
 
 You can quickly back up the data of a TiDB cluster deployed in Google Compute Engine (GCE) to GCS, or quickly restore a TiDB cluster from the backup data in GCS.
 
-## Back up to GCS
+## Back up data to GCS
 
 {{< copyable "shell-regular" >}}
 
@@ -23,7 +23,7 @@ When backing up data to GCS, you need to place a credential file in the node whe
 
 To obtain the credential files, refer to [CREATE AND DOWNLOAD THE GCS CREDENTIALS FILE](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html/google_cloud_backup_guide/creds).
 
-## Restore from GCS
+## Restore data from GCS
 
 {{< copyable "shell-regular" >}}
 
@@ -33,4 +33,4 @@ br restore full --pd "${PDIP}:2379" --Storage 'gcs://bucket-name/prefix?credenti
 
 ## See also
 
-To know other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
+To learn other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).

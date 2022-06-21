@@ -36,7 +36,7 @@ For TiDB v5.4.0 or later versions, BR not only reduces the default CPU utilizati
 The following is an internal test on a single node. The test results show that when you use the default configuration of v5.4.0 and v5.3.0 in the **full-speed backup** scenario, the impact of backup using BR on cluster performance is quite different. The detailed test results are as follows:
 
 - When BR uses the default configuration of v5.3.0, the QPS of write-only workload is reduced by 75%.
-- When BR uses the default configuration of v5.4.0, the QPS for the same workload is reduced by 25%. However, when this configuration is used, the speed of backup tasks using BR becomes correspondingly slower. The time required is 1.7 times that of the v5.3.0 configuration.
+- When BR uses the default configuration of v5.4.0, the QPS for the same workload is reduced by 25%. However, when this configuration is used, the duration of backup tasks using BR becomes correspondingly longer. The time required is 1.7 times that of the v5.3.0 configuration.
 
 You can use either of the following solutions to manually control the impact of backup tasks on cluster performance. Note that these methods reduce the impact of backup tasks on the cluster, but they also reduce the speed of backup tasks.
 
@@ -45,7 +45,7 @@ You can use either of the following solutions to manually control the impact of 
 
 ## Does BR back up system tables? During data restoration, do they raise conflicts?
 
-Before v5.1.0, BR filters out data from the system schema `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
+Before v5.1.0, BR filters out data from the system schemas `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
 
 During data restoration, system tables do not raise conflicts. The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables created in the `mysql` schema](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema).
 
@@ -210,11 +210,11 @@ Error message in the log: `log - ["backup occur kv error"][error="{\"KvError\":{
 
 If a key is locked during the backup process, BR tries to resolve the lock. A small number of these errors do not affect the correctness of the backup.
 
-## What should I do if a backup fails?
+## What should I do if a backup operation fails?
 
 Error message in the log: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
 
-If the backup operation fails and the preceding message occurs, perform one of the following operations and then start the backup again:
+If a backup operation fails and the preceding message occurs, perform one of the following operations and then start the backup again:
 
 - Change the directory for the backup. For example, change `/dir/backup-2020-01-01/` to `/dir/backup_local/`.
 - Delete the backup directories of all TiKV nodes and BR nodes.

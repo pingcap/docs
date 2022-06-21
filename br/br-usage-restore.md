@@ -204,4 +204,4 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --ratelimit 128
 
 > **Note:**
 >
-> The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, have reference value. However, the restoration speed may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
+> The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, are worthy of reference. However, the restoration speed may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.

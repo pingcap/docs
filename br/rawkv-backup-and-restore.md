@@ -33,13 +33,13 @@ In this command, the values of `--start` and `--end` are decoded using the forma
 
 - "raw": The input string is directly encoded as a key in binary format.
 - "hex": The default encoding format. The input string is treated as a hexadecimal number.
-- "escape": First escape (backslash) the input string, and then encode it into binary format,for example, 'abc\xFF\x00\r\n'.
+- "escaped": First escape (backslash) the input string, and then encode it into binary format, for example, 'abc\xFF\x00\r\n'.
 
 > **Note:**
 >
 > - If you use the local storage, you **must** copy all back up SST files to every TiKV node in the path specified by `--storage`. Even if each TiKV node eventually only needs to read a part of the SST files, they all need full access to the complete archive because:
 >
->     - Data are replicated into multiple peers. When ingesting SSTs, these files have to be present on all peers. This is unlike backup where reading from a single node is enough.
+>     - Data is replicated into multiple peers. When ingesting SSTs, these files have to be present on all peers. This is unlike backup where reading from a single node is enough.
 >     - Where each peer is scattered to during restoration is random. You have no idea in advance which node will read which file.
 >
 > - These can be avoided using shared storage, for example, mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file. In this case, the preceding caveats no longer apply.

@@ -39,7 +39,7 @@ br backup full \
 
 In the preceding command:
 
-- `--backupts`: The physical time of the snapshot. If data of this snapshot is treated with Garbage Collection (GC), the `br backup` command will exit with an error. If you leave this parameter unspecified, BR picks the snapshot corresponding to the backup start time.
+- `--backupts`: The physical time of the snapshot. If data of this snapshot is processed by Garbage Collection (GC), the `br backup` command will exit with an error. If you leave this parameter unspecified, BR picks the snapshot corresponding to the backup start time.
 - `--ratelimit`: The maximum speed **per TiKV** performing backup tasks (in MiB/s).
 - `--log-file`: The target file for BR logging.
 
@@ -142,7 +142,7 @@ LAST_BACKUP_TS=`br validate decode --field="end-version" -s s3://backup-data/202
 
 > **Note:**
 >
-> - The incremental backup needs to be under a different path from the previous snapshot backup.
+> - You need to save the incremental backup data under a different path from the previous snapshot backup.
 > - GC safepoint must be prior to `lastbackupts`. The defalt GC lifetime is 10 minutes in TiDB, which means that TiDB only backs up incremental data generated in the last 10 minutes. To back up earlier incremental data, you need to [adjust TiDB GC Lifetime setting](/system-variables.md#tidb_gc_life_time-new-in-v50).
 
 {{< copyable "shell-regular" >}}
@@ -209,6 +209,6 @@ You can mitigate impact on cluster performance by reducing the number of backup 
 
 > **Note:**
 >
-> The impact and speed of backup depends much on cluser configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, have reference value. However, the exact impact and performance cap may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
+> The impact and speed of backup depends much on cluser configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, are worthy of reference. However, the exact impact and performance cap may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
 
  Since v5.3.0, BR introduces the auto tunning feature (enabled by default) to adjust the number of backup threads. It can maintain the CPU utilization of the cluster below 80% during backup tasks. For details, see [BR Auto-Tune](/br/br-auto-tune.md).
