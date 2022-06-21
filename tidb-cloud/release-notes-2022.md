@@ -8,6 +8,13 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## June 21, 2022
+
+* Add the support of the GCP region `Taiwan` for Dedicated Tier cluster creation
+* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
+* Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js on the TiDB Cloud console so you can easily connect to your TiDB cluster.
+* Support obtaining bucket regions from bucket URLs automatically during data import to save your effort to fill in such information.
+
 ## June 16, 2022
 
 * Simplify the cluster creation process

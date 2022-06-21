@@ -35,7 +35,7 @@ For more information about the two options, see [Select Your Cluster Tier](/tidb
 
 If you are an organization owner, once you log in to TiDB Cloud, you have a default project. If you do not want to use the default project, you can take the following steps to create a new one:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**.
 
@@ -49,7 +49,7 @@ If you are an organization owner, once you log in to TiDB Cloud, you have a defa
 
 If you are a project member, you can access only the specific projects to which your organization owner invited you, and you cannot create new projects. To check which project you belong to, take the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**.
 
