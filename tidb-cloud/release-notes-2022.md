@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## June 21, 2022
 
-* Support [updating user profiles](/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
+* Support [updating user profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles) on the TiDB Cloud console, including first name, last time, company name, country, and phone number.
 * Provide the connection strings for MySQL, MyCLI, JDBC, Python, Go, and Node.js on the TiDB Cloud console so you can easily connect to your TiDB cluster.
 * Support obtaining bucket regions from bucket URLs automatically during data import to save your effort to fill in such information.
 
