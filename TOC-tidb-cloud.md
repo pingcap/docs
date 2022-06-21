@@ -37,7 +37,7 @@
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
   - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
   - [Restore](/tidb-cloud/backup-and-restore.md#restore)
-- Monitor Cluster
+- Monitor and Alert
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
   - Third-Party Monitoring Integrations
