@@ -1,7 +1,0 @@
-extends: existence
-message: "Don't use Chinese punctuation (%s) in English text."
-nonword: true
-level: error
-tokens:
-  #- '\w!(?:\s|$)'
-  - '！|？|，|。|：|；|“|”|’|‘'
