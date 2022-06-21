@@ -271,7 +271,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: NONE
 - Default value: `OFF`
-- This variable indicates whether [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) is used.
+- This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) is used.
 
 ### max_allowed_packet
 
@@ -362,7 +362,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- Indicates whether to write changes to [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md) or not.
+- Indicates whether to write changes to [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) or not.
 
 > **Note:**
 >
@@ -536,7 +536,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: INSTANCE
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
-- You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](/faq/upgrade-faq.md).
+- You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](https://docs.pingcap.com/tidb/stable/upgrade-faq).
 
 ### tidb_checksum_table_concurrency
 
@@ -663,7 +663,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
 ### tidb_enable_alter_placement
@@ -699,7 +699,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
+> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
 ### tidb_enable_auto_increment_in_generated
@@ -1649,7 +1649,12 @@ SET tidb_slow_log_threshold = 200;
 
 - Scope: GLOBAL
 - Default value: `OFF`
+<CustomContent platform="tidb">
 - This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This variable is used to control whether to enable the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature.
+</CustomContent>
 
 > **Warning:**
 >

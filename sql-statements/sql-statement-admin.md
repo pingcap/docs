@@ -112,7 +112,11 @@ ADMIN SHOW SLOW RECENT N;
 ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 ```
 
+<CustomContent platform="tidb">
+
 For details, refer to [admin show slow statement](/identify-slow-queries.md#admin-show-slow-command)
+
+</CustomContent>
 
 ## Synopsis
 
