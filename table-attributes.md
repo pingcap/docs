@@ -7,9 +7,16 @@ summary: Learn how to use the table attribute feature of TiDB.
 
 The Table Attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
 
+<CustomContent platform="tidb">
+Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots.
+</CustomContent>
+
 > **Note:**
 >
-> - Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
 > - When you use TiDB Binlog or TiCDC to perform replication or use BR to perform incremental backup, the replication or backup operations skip the DDL statement that sets table attributes. To use table attributes in the downstream or in the backup cluster, you need to manually execute the DDL statement in the downstream or in the backup cluster.
 > - TiDB v5.4.0 **does not support** Index Region. For details of Index Region, refer to [Split Index Region](/sql-statements/sql-statement-split-region.md#split-index-region).
 > - In TiDB v5.4.0, adding table attributes **only** takes effect on existing partitions. To add or delete partitions after adding table attributes, you need to reset table attributes. For detailed methods, see [How to use table attributes](#usage).

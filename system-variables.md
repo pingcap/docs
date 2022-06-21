@@ -893,7 +893,12 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: GLOBAL
 - Default value: `ON`
+<CustomContent platform="tidb">
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This telemetry variable is not applicable to TiDB Cloud.
+</CustomContent>
 
 ### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 

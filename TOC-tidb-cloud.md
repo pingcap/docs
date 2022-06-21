@@ -63,8 +63,14 @@
   - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 - Reference
-  - [Explore SQL with TiDB](/basic-sql-operations.md)
+  - TiDB Cluster Architecture
+    - [Overview](/tidb-architecture.md)
+    - [Storage](/tidb-storage.md)
+    - [Computing](/tidb-computing.md)
+    - [Scheduling](/tidb-scheduling.md)
+  - [TiDB Limitations](/tidb-limitations.md)
   - SQL
+    - [Explore SQL with TiDB](/basic-sql-operations.md)
     - SQL Language Structure and Syntax
       - Attributes
         - [AUTO_INCREMENT](/auto-increment.md)
@@ -84,7 +90,6 @@
       - [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)
       - [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md)
       - [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)
-      - [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
@@ -305,6 +310,12 @@
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
+  - Privileges
+    - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
+    - [Privilege Management](/privilege-management.md)
+    - [User Account Management](/user-account-management.md)
+    - [Role-Based Access Control](/role-based-access-control.md)
+    - [Certificate-Based Authentication](/certificate-authentication.md)
   - Storage Engines
     - TiKV
       - [TiKV Overview](/tikv-overview.md)
