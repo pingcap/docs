@@ -47,7 +47,7 @@ If your password is not changed within 90 days, you will get a prompt to reset y
 
 ## Manage user profiles
 
-In TiDB Cloud, you can easily mange your profile, including your first name, last time, company name, country, and phone number.
+In TiDB Cloud, you can easily manage your profile, including your first name, last time, company name, country, and phone number.
 
 1. Click the account name in the upper-right corner of the window.
 
