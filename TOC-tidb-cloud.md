@@ -5,6 +5,7 @@
   - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
+  - [MySQL Compatibility](/mysql-compatibility.md)
 - Get Started
   - [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)

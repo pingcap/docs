@@ -9,6 +9,8 @@ TiDB is highly compatible with the MySQL 5.7 protocol and the common features an
 
 However, some features of MySQL are not supported. This could be because there is now a better way to solve the problem (such as XML functions superseded by JSON), or a lack of current demand versus effort required (such as stored procedures and functions). Some features might also be difficult to implement as a distributed system.
 
+<CustomContent platform="tidb">
+
 - In addition, TiDB does not support the MySQL replication protocol, but provides specific tools to replicate data with MySQL.
     - Replicate data from MySQL: [TiDB Data Migration (DM)](/dm/dm-overview.md) is a tool that supports the full data migration and the incremental data replication from MySQL/MariaDB into TiDB.
     - Replicate data to MySQL: [TiCDC](/ticdc/ticdc-overview.md) is a tool for replicating the incremental data of TiDB by pulling TiKV change logs. TiCDC uses the [MySQL sink](/ticdc/ticdc-overview.md#sink-support) to replicate the incremental data of TiDB to MySQL.
@@ -16,6 +18,8 @@ However, some features of MySQL are not supported. This could be because there i
 > **Note:**
 >
 > This page refers to general differences between MySQL and TiDB. Refer to the dedicated pages for [Security](/security-compatibility-with-mysql.md) and [Pessimistic Transaction Mode](/pessimistic-transaction.md#difference-with-mysql-innodb) compatibility.
+
+</CustomContent>
 
 ## Unsupported features
 
@@ -81,7 +85,17 @@ mysql> SELECT _tidb_rowid, id FROM t;
 
 ### Performance schema
 
+<CustomContent platform="tidb">
+
 TiDB uses a combination of [Prometheus and Grafana](/tidb-monitoring-api.md) to store and query the performance monitoring metrics. Performance schema tables return empty results in TiDB.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB Cloud uses a combination of Prometheus and Grafana to store and query the performance monitoring metrics. Performance schema tables return empty results in TiDB.
+
+</CustomContent>
 
 ### Query Execution Plan
 
