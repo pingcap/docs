@@ -36,7 +36,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 </NavColumn>
 
 <NavColumn>
-<ColumnTitle>Manage Data</ColumnTitle>
+<ColumnTitle>Migrate Data</ColumnTitle>
 
 - [Import Sample Data](/tidb-cloud/import-sample-data.md)
 - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
@@ -48,7 +48,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 </NavColumn>
 
 <NavColumn>
-<ColumnTitle>Monitor Cluster</ColumnTitle>
+<ColumnTitle>Monitor and Alert</ColumnTitle>
 
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
 - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
