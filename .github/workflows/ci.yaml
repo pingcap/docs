@@ -27,9 +27,9 @@ jobs:
         run: |
           npm i
           node ./scripts/filterCloudDoc.js
-          cp ./scripts/verify-links.sh ./tmp/verify-links.sh
-          cd tmp
-          ./verify-links.sh
+          cp -r ./scripts ./tmp
+          cd ./tmp
+          ./scripts/verify-links.sh
 
   vale:
     runs-on: ubuntu-latest
