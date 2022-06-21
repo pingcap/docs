@@ -89,7 +89,7 @@ After you set up the payment method, TiDB Cloud will generate the invoice for th
 
 To view the list of invoices, perform the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**. The invoices page is displayed.
 
 ## Billing details
@@ -104,7 +104,7 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
 
@@ -134,7 +134,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
 - Anytime in the billing console: 
 
-    1. Click the account name in the upper-right corner of the window.
+    1. Click the account name in the upper-right corner of the TiDB Cloud console.
     2. Click **Billing**.
     3. Click the **Payment Method** tab, and then click **Add Credit Card**.
     4. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, card number, valid year and month, and CVC (Card Verification Code).
@@ -148,7 +148,7 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
