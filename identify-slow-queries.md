@@ -71,7 +71,7 @@ Slow query basics:
 * `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
 * `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
 * `Plan_from_cache`: Whether this statement hits the execution plan cache.
-* `Plan_from_binding`: Whether this statement has bound execution plans.
+* `Plan_from_binding`: Whether this statement uses the bound execution plans.
 * `Has_more_results`: Whether this statement has more results to be fetched by users.
 * `Rewrite_time`: The time consumed for rewriting the query of this statement.
 * `Preproc_subqueries`: The number of subqueries (in the statement) that are executed in advance. For example, the `where id in (select if from t)` subquery might be executed in advance.
