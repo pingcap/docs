@@ -28,6 +28,7 @@ jobs:
           npm i
           node ./scripts/filterCloudDoc.js
           cp -r ./scripts ./tmp
+          cp -r ./media ./tmp
           cd ./tmp
           ./scripts/verify-links.sh
 
