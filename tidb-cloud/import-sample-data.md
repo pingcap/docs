@@ -7,23 +7,23 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
-1. Navigate to the TiDB Clusters page and click the name of your target cluster. The overview page of your target cluster is displayed.
+1. Navigate to the **Active Clusters** page and click the name of your target cluster. The overview page of your target cluster is displayed.
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
-3. Depending on where the TiDB cluster is hosted, do one of the following: 
+3. Depending on where your TiDB cluster is hosted, do one of the following:
 
-    - If the TiDB cluster is hosted by AWS, select **AWS S3** for **Data Source Type**, enter the sample data URL `s3://tidbcloud-samples/data-ingestion/` in the **Bucket URL** field, and then select **US West (Oregon)** for  **Bucket Region**. The sample data bucket is hosted in the US West (Oregon) region for AWS.
+    - If your TiDB cluster is hosted by AWS, select **AWS S3** for **Data Source Type**, and then enter the sample data URL `s3://tidbcloud-samples/data-ingestion/` in the **Bucket URL** field. The sample data bucket is hosted in the US West (Oregon) region for AWS.
 
-    - If the TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field, and then select **US-West1 (Oregon)** for **Bucket Region**. The sample data bucket is hosted in the US-West1 (Oregon) for GCP.
+    - If your TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, and then enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field. The sample data bucket is hosted in the US-West1 (Oregon) region for GCP.
 
 4. For **Data Format**, select **TiDB Dumpling**.
 
-5. If the TiDB cluster is hosted by GCP, skip this step. If the TiDB cluster is hosted by AWS, enter the Role-ARN: 
+5. If the TiDB cluster is hosted by GCP, skip this step. If the TiDB cluster is hosted by AWS, enter the Role-ARN:
 
     ```
     arn:aws:iam::385595570414:role/import-sample-access
     ```
 
-6. For **Target Database**, enter `root` in the **Username** field, and enter the root password you have set when you created the cluster in the **Password** field.
+6. For **Target Database**, enter `root` in the **Username** field, and enter the root password of the cluster in the **Password** field.
 
     > **Note:**
     >

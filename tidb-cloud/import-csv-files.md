@@ -73,7 +73,6 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - **Data Source Type**: select the type of the data source.
     - **Bucket URL**: select the bucket URL where your CSV files are located.
-    - **Bucket Region**: select the region where your bucket is located.
     - **Data Format**: select **CSV**.
     - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **CSV Configuration**: check and update the CSV specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator. You can find the explanation of each CSV configuration right beside these fields.
