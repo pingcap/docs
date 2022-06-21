@@ -42,7 +42,6 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
 - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-- [Back Up and Restore Data](/tidb-cloud/backup-and-restore.md)
 - [Export Data from TiDB Cloud](/tidb-cloud/export-data-from-tidb-cloud.md)
 
 </NavColumn>
