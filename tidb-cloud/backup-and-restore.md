@@ -44,6 +44,7 @@ If you do not specify a preferred backup time, TiDB Cloud assigns a default back
 | GCP            | Oregon                   | us-west1        | 10:00 UTC           |
 | GCP            | Tokyo                    | asia-northeast1 | 17:00 UTC           |
 | GCP            | Singapore                | asia-southeast1 | 18:00 UTC           |
+| GCP            | Taiwan                   | asia-east1      | 18:00 UTC           |
 
 Note that you can not disable automatic backup.
 

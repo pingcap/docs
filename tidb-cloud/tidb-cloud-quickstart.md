@@ -92,21 +92,13 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
 
-3. In the **Connect to TiDB** dialog box, copy the connection string in **Step 2: Connect with a SQL client** . For example:
+3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
-    ```shell
-    mysql --connect-timeout 15 -u root -h tidb.4aa56280.2c524d28.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -p
-    ```
+    > **Tip:**
+    >
+    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
 
-4. Use a SQL client to connect to your cluster.
-
-    TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
-
-5. Paste the connection string into your Terminal interface.
-
-6. Enter the root password of the cluster.
-
-7. Validate the connection in the MySQL client:
+4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
 
     {{< copyable "sql" >}}
 
@@ -114,39 +106,50 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
     SELECT TiDB_version();
     ```
 
-    If you see the release version information, you are ready to play with the MySQL client on your TiDB Cloud cluster.
+    If you see the release version information, you are ready to use your TiDB cluster.
 
 ## Step 3. Import the sample data
 
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-1. Navigate to the TiDB Clusters page and click the name of your newly created cluster. The overview page of your cluster is displayed.
+1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
 
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
 
-3. Depending on where your TiDB cluster is hosted, do one of the following:
+3. Fill in the import parameters:
 
-    - If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), select **AWS S3** as the data source type, enter the bucket URL of the sample data, and select the bucket region.
+    <SimpleTab>
+    <div label="AWS">
 
-         **Your bucket URL and region should correspond to your target database region.** For example, if you create a cluster in US-West-2 (Oregon), you should choose the sample data URL of the bucket region of US-West-2 (Oregon) from the following list:
+    If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), fill in the following parameters:
 
-        - US-West-2 (Oregon): `s3://tidbcloud-samples-us-west-2/data-ingestion/`
-        - US-East-1 (Virginia): `s3://tidbcloud-samples-us-east-1/data-ingestion/`
-        - AP-Northeast-1 (Tokyo): `s3://tidbcloud-samples-ap-northeast-1/data-ingestion/`
-        - AP-Southeast-1 (Singapore): `s3://tidbcloud-samples-ap-southeast-1/data-ingestion/`
+    - **Data Source Type**: `AWS S3`.
+    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
+    - **Data Format**: select **TiDB Dumpling**.
+    - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
+    - **Target Database**:
+        - **Username**: `root`.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
 
-    - If your TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field, and then select **US-West1 (Oregon)** for **Bucket Region**. The sample data bucket is hosted in the US-West1 (Oregon) for GCP.
+    </div>
 
-4. Fill in the other import parameters.
+    <div label="GCP">
 
-    - Data Format: Select **TiDB Dumpling**.
-    - Setup Credentials: Enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
-    - Target Database:
-        - Username: `root`.
-        - Password: Enter your root password.
-    - DB/Tables Filter: Leave this field blank.
+    If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-5. Click **Import**.
+    - **Data Source Type**: `Google Cloud Stroage`.
+    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
+    - **Data Format**: select **TiDB Dumpling**.
+    - **Target Database**:
+        - **Username**: `root`.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
+
+    </div>
+    </SimpleTab>
+
+4. Click **Import**.
 
     The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
 
