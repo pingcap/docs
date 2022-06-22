@@ -18,17 +18,9 @@ As a command line tool of PD, PD Control obtains the state information of the cl
 
 To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]` command.
 
-### Download TiDB installation package
+### Download the installation package
 
-If you want to download the latest version of `pd-ctl`, directly download the TiDB package, because `pd-ctl` is included in the TiDB package.
-
-| Package download link                                                     | OS    | Architecture | SHA256 checksum                                                  |
-| :------------------------------------------------------------------------ | :---- | :----------- | :--------------------------------------------------------------- |
-| `https://download.pingcap.org/tidb-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux | amd64        | `https://download.pingcap.org/tidb-{version}-linux-amd64.sha256` |
-
-> **Note:**
->
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v6.0.0`, the package download link is `https://download.pingcap.org/tidb-v6.0.0-linux-amd64.tar.gz`.
+The PD Control installation package (`pd-ctl`) is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 ### Compile from source code
 
@@ -614,7 +606,7 @@ Usage:
 
 Use this command to query all Regions in a given range `[startkey, endkey)`. Ranges without `endKey`s are supported.
 
-The `limit` parameter limits the number of keys. The default value of `limit` is `16`, and the value of `-1` means unlimited keys. 
+The `limit` parameter limits the number of keys. The default value of `limit` is `16`, and the value of `-1` means unlimited keys.
 
 Usage:
 
@@ -738,7 +730,7 @@ Description of various types:
 - miss-peer: the Region without enough replicas
 - extra-peer: the Region with extra replicas
 - down-peer: the Region in which some replicas are Down
-- pending-peer：the Region in which some replicas are Pending
+- pending-peer: the Region in which some replicas are Pending
 
 Usage:
 
