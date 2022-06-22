@@ -45,6 +45,7 @@
   - Analyze Performance
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
+    - [Statement Summary Tables](/statement-summary-tables.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
     - Understanding the Query Execution Plan

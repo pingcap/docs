@@ -297,8 +297,13 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
+<CustomContent platform="tidb">
 - This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This placement rules variable is not applicable to TiDB Cloud.
+</CustomContent>
 
 ### plugin_dir
 
@@ -437,7 +442,20 @@ This variable is an alias for `last_insert_id`.
     - `0` or `OFF`, which means that the MPP mode will not be used.
     - `1` or `ON`, which means that the optimizer determines whether to use the MPP mode based on the cost estimation (by default).
 
-MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode).
+MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
+
+<CustomContent platform="tidb">
+
+ For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+ For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](https://docs.pingcap.com/tidb/stable/use-tiflash#control-whether-to-select-the-mpp-mode).
+
+</CustomContent>
+
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
@@ -674,7 +692,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: GLOBAL
 - Default value: `OFF`
+<CustomContent platform="tidb">
 - This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This variable is not applicable to TiDB Cloud.
+</CustomContent>
 
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
@@ -934,7 +957,19 @@ Query OK, 0 rows affected (0.09 sec)
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
 
-MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms. For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode).
+MPP is a distributed computing framework provided by the TiFlash engine, which allows data exchange between nodes and provides high-performance, high-throughput SQL algorithms.
+
+<CustomContent platform="tidb">
+
+ For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](/tiflash/use-tiflash.md#control-whether-to-select-the-mpp-mode).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+ For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](https://docs.pingcap.com/tidb/stable/use-tiflash#control-whether-to-select-the-mpp-mode).
+
+</CustomContent>
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -1058,7 +1093,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Possible values: `PHYSICAL`, `LEGACY`
     - `LEGACY`: Uses the old way of scanning, that is, disable Green GC.
     - `PHYSICAL`: Uses the physical scanning method, that is, enable Green GC.
+<CustomContent platform="tidb">
 - This variable specifies the way of scanning locks in the Resolve Locks step of GC. When the variable value is set to `LEGACY`, TiDB scans locks by Regions. When the value `PHYSICAL` is used, it enables each TiKV node to bypass the Raft layer and directly scan data, which can effectively mitigate the impact of GC wakening up all Regions when the [Hibernate Region](/tikv-configuration-file.md#hibernate-regions) feature is enabled, thus improving the execution speed in the Resolve Locks step.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This variable specifies the way of scanning locks in the Resolve Locks step of GC. When the variable value is set to `LEGACY`, TiDB scans locks by Regions. When the value `PHYSICAL` is used, it enables each TiKV node to bypass the Raft layer and directly scan data, which can effectively mitigate the impact of GC wakening up all Regions, thus improving the execution speed in the Resolve Locks step.
+</CustomContent>
 
 ### tidb_general_log
 
