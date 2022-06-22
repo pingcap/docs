@@ -33,7 +33,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 5. Click **Create**.
 
-   The **Security Quick Start** dialog box is displayed.
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
 
 6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
@@ -75,7 +75,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 9. Click **Create**.
 
-   The **Security Quick Start** dialog box is displayed.
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
 
 10. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
