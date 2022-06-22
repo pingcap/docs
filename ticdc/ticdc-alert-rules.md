@@ -182,7 +182,7 @@ Warning alerts are a reminder for an issue or error.
 
 - Solution:
 
-    There are many possible root causes. See [Troubleshoot TiCDC](/ticdc/troubleshoot-ticdc.md).
+    There are many possible root causes. See [Troubleshoot TiCDC](/ticdc/).
 
 ### `ticdc_memory_abnormal`
 
