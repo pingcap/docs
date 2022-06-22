@@ -486,7 +486,7 @@
     - [Deploy](/ticdc/deploy-ticdc.md)
     - [Maintain](/ticdc/manage-ticdc.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - [FAQ](/ticdc/ticdc-faq.md)
+    - [FAQs](/ticdc/ticdc-faq.md)
     - [Monitor](/ticdc/monitor-ticdc.md)
     - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - Reference
