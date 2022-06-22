@@ -45,5 +45,5 @@ Depending on which tools you want to use, you can install the corresponding offl
 | [Backup & Restore (BR)](/br/backup-and-restore-tool.md)  | `br-{version}-linux-amd64.tar.gz`  |
 | [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | `sync_diff_inspector`  |
 | [TiSpark](/tispark-overview.md)  | `tispark-{tispark-version}-any-any.tar.gz` <br/>`spark-{spark-version}-any-any.tar.gz`  |
-| [PD Control](/pd-control.md)  | `pd-recover-{version}-linux-amd64.tar` |
-| [PD Recover](/pd-recover.md)  | `etcdctl` |
+| [PD Control](/pd-control.md)  | `etcdctl` |
+| [PD Recover](/pd-recover.md)  | `pd-recover-{version}-linux-amd64.tar` |
