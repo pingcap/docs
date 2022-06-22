@@ -204,12 +204,6 @@ If you encounter an error above, it is recommended to use BR to restore the incr
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
-## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
-
-When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
-
-Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
-
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
 Suppose that the `create table test (id int primary key, ts timestamp)` statement is executed in the upstream TiDB. When TiCDC replicates this statement to the downstream MySQL 5.7, MySQL uses the default configuration. The table schema after the replication is as follows. The default value of the `timestamp` field becomes `CURRENT_TIMESTAMP`:
@@ -234,6 +228,12 @@ From the result, you can see that the table schema before and after the replicat
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
 
+## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
+
+When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
+
+Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
+
 ## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
 
 When the sink is TiDB or MySQL, the users of the downstream database need the following permissions:
@@ -252,4 +252,8 @@ If you need to replicate `recover table` to the downstream TiDB, you should have
 
 ## Why does TiCDC use disks? When does TiCDC write to disks? Does TiCDC use memory buffer to improve replication performance?
 
-When the upstream write traffic is at business peak hours, the downstream may fail to consume data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks  latency within a hundred milliseconds. tiCDC also makes use of memory to boost accelerated reads from disk to improve synchronous performance.
+When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
+
+## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR?
+
+Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, please avoid using TiDB Lightning and BR on tables that are replicated by TiCDC.
