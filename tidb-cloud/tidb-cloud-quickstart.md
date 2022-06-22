@@ -33,9 +33,11 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 5. Click **Create**.
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+   The **Security Quick Start** dialog box is displayed.
 
-    After that, the **Security Quick Start** dialog box is displayed for you to set the root password and allowed IP addresses to connect to your cluster. If you want to make these settings during the cluster creation, click **Security Quick Start** in the left cluster pane.
+6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
 </div>
 
@@ -73,9 +75,11 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 9. Click **Create**.
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+   The **Security Quick Start** dialog box is displayed.
 
-    After that, the **Security Quick Start** dialog box is displayed for you to set the root password and allowed IP addresses to connect to your cluster. If you want to make these settings during the cluster creation, click **Security Quick Start** in the left cluster pane.
+10. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
 </div>
 </SimpleTab>
