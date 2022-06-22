@@ -98,7 +98,9 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 4. Click **Confirm**.
 
-    After the restore process is completed, the **Security Quick Start** dialog box is displayed for you to set the root password and allowed IP addresses to connect to your cluster. If you want to make these settings during the restore process, click **Security Quick Start** in the left cluster pane.
+   The **Security Quick Start** dialog box is displayed.
+
+5. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 ### Restore a deleted cluster
 
@@ -114,4 +116,6 @@ To restore a deleted cluster from recycle bin, take the following steps:
 
 5. Click **Confirm**.
 
-    After the restore process is completed, the **Security Quick Start** dialog box is displayed for you to set the root password and allowed IP addresses to connect to your cluster. If you want to make these settings during the restore process, click **Security Quick Start** in the left cluster pane.
+   The **Security Quick Start** dialog box is displayed.
+
+6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
