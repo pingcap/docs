@@ -74,7 +74,7 @@ Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirro
 >
 > If the cluster to upgrade was deployed not using the offline method, skip this step.
 
-Refer to [Deploy a TiDB Cluster Using TiUP - Deploy TiUP offline](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline) to download the TiUP mirror of the new version and upload it to the control machine. After executing `local_install.sh`, TiUP will complete the overwrite upgrade.
+Refer to [Deploy a TiDB Cluster Using TiUP - Deploy TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline) to download the TiUP mirror of the new version and upload it to the control machine. After executing `local_install.sh`, TiUP will complete the overwrite upgrade.
 
 {{< copyable "shell-regular" >}}
 
@@ -84,7 +84,19 @@ sh tidb-community-server-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
 ```
 
-After the overwrite upgrade, execute the following command to upgrade the TiUP Cluster component.
+After the overwrite upgrade, run the following command to merge the server and toolkit offline mirrors to the server directory:
+
+{{< copyable "shell-regular" >}}
+
+```bash
+tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
+ls -ld tidb-community-server-${version}-linux-amd64 tidb-community-toolkit-${version}-linux-amd64
+cd tidb-community-server-${version}-linux-amd64/
+cp -rp keys ~/.tiup/
+tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
+```
+
+After merging the mirrors, run the following command to upgrade the TiUP Cluster component:
 
 {{< copyable "shell-regular" >}}
 

@@ -87,7 +87,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * TiFlash supports partitioned tables in dynamic pruning mode.
 
-    To enhance performance in OLAP scenarios, dynamic pruning mode is enabled by default for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
+    To enhance performance in OLAP scenarios, dynamic pruning mode is supported for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
 
     User documents: [Access partitioned tables in the MPP mode](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode), [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
@@ -97,7 +97,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     When RocksDB detects a damaged SST file in the background, TiKV will try to schedule the affected Peer and recover its data using other replicas. You can set the maximum allowable time for the recovery using the `background-error-recovery-window` parameter. If the recovery operation is not completed within the time window, TiKV will panic. This feature automatically detects and recovers recoverable damaged storage, thus improving the cluster stability.
 
-    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578`)`
+    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578)
 
 * Support non-transactional DML statement
 
@@ -115,7 +115,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Databases can effectively understand the distribution of data by collecting statistics, which helps generate reasonable execution plans and improve the efficiency of SQL execution. TiDB regularly collects statistics on frequently changed data objects in the background. However, collecting statistics takes up cluster resources and might affect the stable operation of the business during business peaks.
 
-    Starting from v6.1.0, TiDB introduces `tidb_max_auto_analyze_time` to control the maximum execution time for background statistics collection, which is 12 hours by default. When the application does not encounter a resource bottleneck, it is recommended not to modify this variable so that TiDB can timely collect statistics.
+    Starting from v6.1.0, TiDB introduces [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610) to control the maximum execution time for background statistics collection, which is 12 hours by default. When the application does not encounter a resource bottleneck, it is recommended not to modify this variable so that TiDB can timely collect statistics.
 
     [User document](/system-variables.md)
 
@@ -125,7 +125,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Before TiDB v6.1.0, when multiple Region replicas are lost because of machine failure, users have to stop all TiKV servers and use TiKV Control to recover TiKV one by one. Since TiDB v6.1.0, the recovery process is fully automated, does not require to stop TiKV, and does not affect other applications online. The recovery process can be triggered using PD Control and provides a more user-friendly summary information.
 
-    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483`)`
+    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483)
 
 * Support viewing history statistics collection tasks
 
@@ -177,7 +177,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * Support compatibility with user-level lock management with MySQL
 
-    User-level locks are a user-named lock management system provided by MySQL through built-in functions. The locking functions can provide lock blocking, waiting, and other lock management capabilities. User-level locks are also widely used in ORM frameworks, such as RoR, Elixir, and Ecto. Since v6.1.0, TiDB has supported MySQL-compatible user-level lock management, and supports `GET_LOCK`, `RELEASE_LOCK`, and `RELEASE_ALL_LOCKS` functions.
+    User-level locks are a user-named lock management system provided by MySQL through built-in functions. The locking functions can provide lock blocking, waiting, and other lock management capabilities. User-level locks are also widely used in ORM frameworks, such as Rails, Elixir, and Ecto. Since v6.1.0, TiDB has supported MySQL-compatible user-level lock management, and supports `GET_LOCK`, `RELEASE_LOCK`, and `RELEASE_ALL_LOCKS` functions.
 
     [User document](/functions-and-operators/locking-functions.md), [#14994](https://github.com/pingcap/tidb/issues/14994)
 
@@ -385,7 +385,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
     - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
     - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
-    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
+    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
 
 + TiDB Dashboard
 

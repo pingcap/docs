@@ -263,10 +263,6 @@ test> select * from t;
 
 ### List COLUMNS partitioning
 
-> **Warning:**
->
-> List COLUMNS partitioning is an experimental feature. It is not recommended that you use it in the production environment.
-
 List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
 
 Suppose that you want to divide the store employees from the following 12 cities into 4 regions, as shown in the following table:
@@ -569,6 +565,7 @@ Empty set (0.00 sec)
 You can see that the inserted record `(NULL, 'mothra')` falls into the same partition as `(0, 'gigan')`.
 
 > **Note:**
+>
 > `NULL` values by Hash partitions in TiDB are handled in the same way as described in [How MySQL Partitioning Handles NULL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), which, however, is not consistent with the actual behavior of MySQL. In other words, MySQL's implementation in this case is not consistent with its documentation.
 >
 > In this case, the actual behavior of TiDB is in line with the description of this document.

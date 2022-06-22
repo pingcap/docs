@@ -76,6 +76,16 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+    - Archived Docs
+      - [For Hibernate ORM](/develop/dev-guide-outdated-for-hibernate-orm.md)
+      - [For Django](/develop/dev-guide-outdated-for-django.md)
+      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
+      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
+      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
+      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
+  - Cloud Native Development Environment
+    - [Gitpod](/develop/dev-guide-playground-gitpod.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -326,6 +336,7 @@
       - [tiup-bench](/tiup/tiup-bench.md)
   - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
+    - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
@@ -547,7 +558,7 @@
       - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
-        - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+      - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
