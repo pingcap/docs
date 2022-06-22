@@ -844,6 +844,22 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Determines if TiDB permits non-transactional 'batched' statements. Only the value of `OFF` can be considered safe, as batch DML does not provide ACID guarantees.
 - This setting was previously a `tidb.toml` option (`enable-batch-dml`), but changed to a system variable starting from TiDB v6.1.0.
 
+### tidb_enable_change_multi_schema
+
+> **Warning:**
+>
+> TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. When the value of this variable is `ON`, only the following multi-schema changes are supported:
+    - Add multiple columns. For example, `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
+    - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
+    - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
+    - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
+
 ### tidb_enable_cascades_planner
 
 > **Warning:**
