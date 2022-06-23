@@ -44,20 +44,13 @@ TiDB version: 5.3.2
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that empty segments cannot be merged after GC [#4511](https://github.com/pingcap/tiflash/issues/4511)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
-    - Fix the potential crash issue that occurs when TLS is enabled [#23144](https://github.com/grpc/grpc/issues/23144)
+    - Fix the potential crash issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
-    - Fix the bug that invalid storage dir configurations lead to unexpected behavior [#4093](https://github.com/pingcap/tics/issues/4093)
+    - Fix the bug that invalid storage dir configurations lead to unexpected behavior [#4093](https://github.com/pingcap/tiflash/issues/4093)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    - Fix potential query error after add column under heavy read workload [#3967](https://github.com/pingcap/tics/issues/3967)
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3557](https://github.com/pingcap/tics/issues/3557)
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb. [#3475](https://github.com/pingcap/tics/issues/3475)
-    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [#3713](https://github.com/pingcap/tiflash/issues/3713)
+    - Fix potential query error after add column under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
+    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [#3447](https://github.com/pingcap/tics/issues/3447)
-
 
 + PD
 
@@ -211,7 +204,18 @@ TiDB version: 5.3.2
 
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix possible metadata corruption caused by Region merge on a lagging Region peer [#4437](https://github.com/pingcap/tiflash/issues/4437)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that a query containing `JOIN` might be hung if an error occurs [#4195](https://github.com/pingcap/tiflash/issues/4195)
+    - Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [4229](https://github.com/pingcap/tiflash/issues/4229)
+    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [3713](https://github.com/pingcap/tiflash/issues/3713)
+    - Fix bug that MPP query may failed due to grpc keepalive timeout [4662](https://github.com/pingcap/tiflash/issues/4662)
+    - Fix bug that MPP query may hang forever if there are many retry in exchange receiver  [3473](https://github.com/pingcap/tiflash/pull/3473)
+    - Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [4151](https://github.com/pingcap/tiflash/issues/4151)
+    - Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [3998](https://github.com/pingcap/tiflash/issues/3998)
+    - Fix potential `index out of bounds` error if calling `json_length` with empty string [2705](https://github.com/pingcap/tiflash/issues/2705)
+    - Fix decimal compare will return wrong result in some corner cae [4942](https://github.com/pingcap/tiflash/pull/4942)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix bug that MPP query may hang forever if query failed in join build stage [4195](https://github.com/pingcap/tiflash/issues/4195)
+    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [3447](https://github.com/pingcap/tiflash/issues/3447)
+    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb. [3475](https://github.com/pingcap/tiflash/issues/3475)
+    - Fix the bug that when cast string to datetime, the `microsecond` field may get wrong result [3556](https://github.com/pingcap/tiflash/issues/3556)
 
 + Tools
 
