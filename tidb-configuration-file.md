@@ -14,7 +14,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Determines whether to create a separate Region for each table.
 - Default value: `true`
-- It is recommended to set it to `false` if you need to create a large number of tables.
+- It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
 ### `token-limit`
 
