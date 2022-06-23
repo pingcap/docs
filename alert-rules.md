@@ -233,11 +233,7 @@ This section gives the alert rules for the PD component.
 
 * Description:
 
-<<<<<<< HEAD
-    The number of Region replicas is smaller than the value of `max-replicas`. When a TiKV machine is down and its downtime exceeds `max-down-time`, it usually leads to missing replicas for some Regions during a period of time. 
-=======
     The number of Region replicas is smaller than the value of `max-replicas`.
->>>>>>> b2f55be05 (ambiguous-words: clarify ambiguous words (#9206))
 
 * Solution:
 
