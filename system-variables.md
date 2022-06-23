@@ -864,7 +864,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls whether to enable the dynamic memory control feature for the operator that reads data. By default, this operator enables the maximum number of threads that [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency) allows to read data. When the memory usage of a single SQL statement exceeds [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) each time, the operator that reads data stops one thread.
+<CustomContent platform="tidb">
 - When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as [spilling data to disk](/tidb-configuration-file.md#oom-use-tmp-storage).
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- When the operator that reads data has only one thread left and the memory usage of a single SQL statement continues to exceed [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query), this SQL statement triggers other memory control behaviors, such as spilling data to disk.
+</CustomContent>
 
 ### tidb_enable_slow_log
 
@@ -1104,7 +1109,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: INSTANCE
 - Default value: `OFF`
+<CustomContent platform="tidb">
 - This variable is used to set whether to record all SQL statements in the [log](/tidb-configuration-file.md#logfile). This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This variable is used to set whether to record all SQL statements in the log. This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
+</CustomContent>
 - To see all records of this feature in the log, query the `"GENERAL_LOG"` string. The following information is recorded:
     - `conn`: The ID of the current session.
     - `user`: The current session user.
