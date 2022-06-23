@@ -89,10 +89,12 @@ TiDB version: 5.3.2
 
 + PD
 
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
+    - 修复 PD 由于 Hot Region 没有 Leader 导致的 Panic 的问题 [#5005](https://github.com/tikv/pd/issues/5005)
+    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
     (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that when there exists a Store with large capacity (2T for example), fully allocated small Stores cannot be detected, which results in no balance operator being generated [#4805](https://github.com/tikv/pd/issues/4805)
+    - 修复 `SchedulerMaxWaitingOperator ` 设置为 1 时，不产生调度的问题 [#4946](https://github.com/tikv/pd/issues/4946)
     (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that the label distribution has residual labels in the metrics [#4825](https://github.com/tikv/pd/issues/4825)
 
 + TiFlash
@@ -102,17 +104,17 @@ TiDB version: 5.3.2
     - Fix repeated crash caused by`commit state jump backward` errors [#2576](https://github.com/pingcap/tiflash/issues/2576)
     - Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
-    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [3713](https://github.com/pingcap/tiflash/issues/3713)
-    - Fix bug that MPP query may failed due to grpc keepalive timeout [4662](https://github.com/pingcap/tiflash/issues/4662)
-    - Fix bug that MPP query may hang forever if there are many retry in exchange receiver  [3473](https://github.com/pingcap/tiflash/pull/3473)
+    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [#3713](https://github.com/pingcap/tiflash/issues/3713)
+    - Fix bug that MPP query may failed due to grpc keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
+    - Fix bug that MPP query may hang forever if there are many retry in exchange receiver [#3473](https://github.com/pingcap/tiflash/pull/3473)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
-    - Fix potential `index out of bounds` error if calling `json_length` with empty string [2705](https://github.com/pingcap/tiflash/issues/2705)
-    - Fix decimal compare will return wrong result in some corner cae [4942](https://github.com/pingcap/tiflash/pull/4942)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix bug that MPP query may hang forever if query failed in join build stage [4195](https://github.com/pingcap/tiflash/issues/4195)
+    - Fix potential `index out of bounds` error if calling `json_length` with empty string [#2705](https://github.com/pingcap/tiflash/issues/2705)
+    - Fix decimal compare will return wrong result in some corner cae [#4942](https://github.com/pingcap/tiflash/pull/4942)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix bug that MPP query may hang forever if query failed in join build stage [#4195](https://github.com/pingcap/tiflash/issues/4195)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix possible wrong results when a query contains the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the `CastStringAsReal` behavior is inconsistent in TiFlash and in TiDB or TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)
-    - Fix the bug that when cast string to datetime, the `microsecond` field may get wrong result [3556](https://github.com/pingcap/tiflash/issues/3556)
+    - Fix the bug that when cast string to datetime, the `microsecond` field may get wrong result [#3556](https://github.com/pingcap/tiflash/issues/3556)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix potential errors when querying on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that TiFlash reports many "Keepalive watchdog fired" errors randomly [#4192](https://github.com/pingcap/tiflash/issues/4192)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
