@@ -8,13 +8,6 @@ Release Date: June xx, 2022
 
 TiDB version: 5.3.2
 
-## __unsorted
-
-+ PingCAP/TiDB
-
-    - Fix the issue that NewCollationEnable config not checked during restoration. [#33422](https://github.com/pingcap/tidb/issues/33422)
-    - Add a new hidden config `s3_multi_part_size` to make backup can control the part size when upload big sst file to s3. [#30087](https://github.com/pingcap/tidb/issues/30087)
-
 ## Compatibility Changes
 
 + TiDB
