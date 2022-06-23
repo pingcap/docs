@@ -255,6 +255,78 @@ For `PREPARE` / `EXECUTE` statements and for queries executed with binary protoc
 >
 > Because TiDB has some embedded SQL statements to ensure the correctness of some features, baseline capturing by default automatically shields these SQL statements.
 
+<<<<<<< HEAD
+=======
+### Filter out bindings
+
+This feature allows you to configure a blocklist to filter out queries whose bindings you do not want to capture. A blocklist has three dimensions, table name, frequency, and user name.
+
+#### Usage
+
+Insert filtering conditions into the system table `mysql.capture_plan_baselines_blacklist`. Then the filtering conditions take effect in the entire cluster immediately.
+
+```sql
+-- Filter by table name
+ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('table', 'test.t');
+
+-- Filter by database name and table name through wildcards
+ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('table', 'test.table_*');
+ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('table', 'db_*.table_*');
+
+-- Filter by frequency
+ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('frequency', '2');
+
+-- Filter by user name
+ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VALUES('user', 'user1');
+```
+
+| **Dimension name** | **Description**                                                     | Remarks                                                     |
+| :----------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
+| table        | Filter by table name. Each filtering rule is in the `db.table` format. The supported filtering syntax includes [Plain table names](/table-filter.md#plain-table-names) and [Wildcards](/table-filter.md#wildcards). | Case insensitive. If a table name contains illegal characters, the log returns a warning message `[sql-bind] failed to load mysql.capture_plan_baselines_blacklist`. |
+| frequency    | Filter by frequency. SQL statements executed more than once are captured by default. You can set a high frequency to capture statements that are frequently executed. | Setting frequency to a value smaller than 1 is considered illegal, and the log returns a warning message `[sql-bind] frequency threshold is less than 1, ignore it`. If multiple frequency filter rules are inserted, the value with the highest frequency prevails. |
+| user         | Filter by user name. Statements executed by blocklisted users are not captured.                           | If multiple users execute the same statement and their user names are all in the blocklist, this statement is not captured. |
+
+> **Note:**
+>
+> - Modifying a blocklist requires the super privilege.
+>
+> - If a blocklist contains illegal filters, TiDB returns the warning message `[sql-bind] unknown capture filter type, ignore it` in the log.
+
+### Prevent regression of execution plans during an upgrade
+
+ Before upgrading a TiDB cluster, you can use baseline capturing to prevent regression of execution plans by performing the following steps:
+
+1. Enable baseline capturing and keep it working.
+
+    > **Note:**
+    >
+    > Test data shows that long-term working of baseline capturing has a slight impact on the performance of the cluster load. Therefore, it is recommended to enable baseline capturing as long as possible so that important plans (appear twice or above) are captured.
+
+2. Upgrade the TiDB cluster. After the upgrade, TiDB uses those captured bindings to ensure execution plan consistency.
+
+3. After the upgrade, delete bindings as required.
+
+    - Check the binding source by running the [`SHOW GLOBAL BINDINGS`](#view-bindings) statement.
+
+        In the output, check the `Source` field to see whether a binding is captured (`capture`) or manually created (`manual`).
+
+    - Determine whether to retain the captured bindings:
+
+        ```
+        -- View the plan with the binding enabled
+        SET @@SESSION.TIDB_USE_PLAN_BASELINES = true;
+        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+
+        -- View the plan with the binding disabled
+        SET @@SESSION.TIDB_USE_PLAN_BASELINES = false;
+        EXPLAIN FORMAT='VERBOSE' SELECT * FROM t1 WHERE ...;
+        ```
+
+        - If the execution plan is consistent, you can delete the binding safely.
+
+        - If the execution plan is inconsistent, you need to identify the cause, for example, by checking statistics. In this case, you need to retain the binding to ensure plan consistency.
+
+>>>>>>> b2f55be05 (ambiguous-words: clarify ambiguous words (#9206))
 ## Baseline evolution
 
 Baseline evolution is an important feature of SPM introduced in TiDB v4.0.
