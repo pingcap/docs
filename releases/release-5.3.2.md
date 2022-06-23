@@ -23,7 +23,7 @@ TiDB version: 5.3.2
 
 + PD
 
-    - Disable compile swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
+    (dup: release-6.1.0.md > Improvements> PD)- Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
 
 ## Improvements
 
@@ -99,10 +99,10 @@ TiDB version: 5.3.2
 
 + TiFlash
 
-    - Fix some configuration issues [#4093](https://github.com/pingcap/tiflash/issues/4093), [#4091](https://github.com/pingcap/tiflash/issues/4091)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
     - Fix `TiFlash_schema_error` caused by `NOT NULL` columns [#4596](https://github.com/pingcap/tiflash/issues/4596)
     - Fix repeated crash caused by`commit state jump backward` errors [#2576](https://github.com/pingcap/tiflash/issues/2576)
-    - Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
+    (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
     - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [#3713](https://github.com/pingcap/tiflash/issues/3713)
     - Fix bug that MPP query may failed due to grpc keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
