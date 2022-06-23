@@ -12,38 +12,26 @@ TiDB version: 5.3.2
 
 + PingCAP/TiDB
 
-    - release-note [#34722](https://github.com/pingcap/tidb/issues/34722)
     - release-note [#33892](https://github.com/pingcap/tidb/issues/33892)
     - release-note [#34906](https://github.com/pingcap/tidb/issues/34906)
     - release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
     - release-note [#29283](https://github.com/pingcap/tidb/issues/29283)
-    - Fixed an issue where extra datums may break binlog. [#33608](https://github.com/pingcap/tidb/issues/33608)
-    (dup: release-6.1.0.md > Bug fixes> TiDB)- Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
     - release-note [#34320](https://github.com/pingcap/tidb/issues/34320)
     - release-note [#34417](https://github.com/pingcap/tidb/issues/34417)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the session panic that occurs when executing the prepared statement after table schema change with the MySQL binary protocol [#33509](https://github.com/pingcap/tidb/issues/33509)
     - release-note [#34350](https://github.com/pingcap/tidb/issues/34350)
-    (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#29737](https://github.com/pingcap/tidb/issues/27937)
+    (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#27937](https://github.com/pingcap/tidb/issues/27937)
     (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
     (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Lightning)- Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that the table attributes are not indexed when a new partition is added and the issue that the table range information is not updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
     (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix duplicate primary keys when inserting a record into a table after incremental restoration [#33596](https://github.com/pingcap/tidb/issues/33596)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
     - release-note [#33335](https://github.com/pingcap/tidb/issues/33335)
-    (dup: release-6.1.0.md > Bug fixes> TiDB)- Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
     (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that schedulers do not resume after BR or TiDB Lightning exits abnormally [#33546](https://github.com/pingcap/tidb/issues/33546)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that granting the `all` privilege might fail in clusters that are upgraded from v4.0 [#33588](https://github.com/pingcap/tidb/issues/33588)
     - Fix the issue that NewCollationEnable config not checked during restoration. [#33422](https://github.com/pingcap/tidb/issues/33422)
     (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix a bug that BR incremental restore returns errors mistakenly due to DDL jobs with empty query [#33322](https://github.com/pingcap/tidb/issues/33322)
     (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR does not retry enough times when Regions are not consistent during restoration [#33419](https://github.com/pingcap/tidb/issues/33419)
     - release-note [#33310](https://github.com/pingcap/tidb/issues/33310)
     (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
     (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Lightning)- Fix the checksum error "GC life time is shorter than transaction duration" [#32733](https://github.com/pingcap/tidb/issues/32733)
     (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
-    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
-
 
 + TiKV/TiKV
 
@@ -142,7 +130,6 @@ TiDB version: 5.3.2
 
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
 
-
 ## Improvements
 
 + TiDB
@@ -199,6 +186,17 @@ TiDB version: 5.3.2
     (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Dumpling)- Fix the issue that Amazon S3 cannot correctly calculate the size of compressed data [#30534](https://github.com/pingcap/tidb/issues/30534)
     (dup: release-5.4.0.md > Bug fixes> TiDB)- Fix the issue of potential data index inconsistency in optimistic transaction mode [#30410](https://github.com/pingcap/tidb/issues/30410)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that a SQL operation is canceled when its JSON type column joins its `CHAR` type column [#29401](https://github.com/pingcap/tidb/issues/29401)
+    - In the event that a network connectivity event occurred, TiDB did not always free the resources of the disconnected session correctly. This has been fixed to ensure that open transactions are rolled back, as well as other associated resources. [#34722](https://github.com/pingcap/tidb/issues/34722)
+    - Fixed an issue where extra datums may break binlog. [#33608](https://github.com/pingcap/tidb/issues/33608)
+    - Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
+    - Fix the session panic that occurs when executing the prepared statement after table schema change with the MySQL binary protocol [#33509](https://github.com/pingcap/tidb/issues/33509)
+    - Fix the issue that the table attributes are not indexed when a new partition is added and the issue that the table range information is not updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
+    - Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
+    - Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
+    - Fix the issue that granting the `all` privilege might fail in clusters that are upgraded from v4.0 [#33588](https://github.com/pingcap/tidb/issues/33588)
+    - Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
+    - Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
+    - Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
 
 + TiKV
 
