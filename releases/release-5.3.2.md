@@ -15,53 +15,17 @@ TiDB version: 5.3.2
     - release-note [#33892](https://github.com/pingcap/tidb/issues/33892)
     - release-note [#34906](https://github.com/pingcap/tidb/issues/34906)
     - release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
-    - release-note [#29283](https://github.com/pingcap/tidb/issues/29283)
     - release-note [#34320](https://github.com/pingcap/tidb/issues/34320)
     - release-note [#34417](https://github.com/pingcap/tidb/issues/34417)
     - release-note [#34350](https://github.com/pingcap/tidb/issues/34350)
-    (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#27937](https://github.com/pingcap/tidb/issues/27937)
-    (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Lightning)- Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix duplicate primary keys when inserting a record into a table after incremental restoration [#33596](https://github.com/pingcap/tidb/issues/33596)
-    - release-note [#33335](https://github.com/pingcap/tidb/issues/33335)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that schedulers do not resume after BR or TiDB Lightning exits abnormally [#33546](https://github.com/pingcap/tidb/issues/33546)
     - Fix the issue that NewCollationEnable config not checked during restoration. [#33422](https://github.com/pingcap/tidb/issues/33422)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix a bug that BR incremental restore returns errors mistakenly due to DDL jobs with empty query [#33322](https://github.com/pingcap/tidb/issues/33322)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR does not retry enough times when Regions are not consistent during restoration [#33419](https://github.com/pingcap/tidb/issues/33419)
-    - release-note [#33310](https://github.com/pingcap/tidb/issues/33310)
-    (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Lightning)- Fix the checksum error "GC life time is shorter than transaction duration" [#32733](https://github.com/pingcap/tidb/issues/32733)
-    (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
-
-+ TiKV/TiKV
-
     - Add a new hidden config `s3_multi_part_size` to make backup can control the part size when upload big sst file to s3. [#30087](https://github.com/pingcap/tidb/issues/30087)
-
-+ PingCAP/TiFlash
-
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix potential errors when querying on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that TiFlash reports many "Keepalive watchdog fired" errors randomly [#4192](https://github.com/pingcap/tiflash/issues/4192)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that empty segments cannot be merged after GC [#4511](https://github.com/pingcap/tiflash/issues/4511)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
-    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the bug that the `STR_TO_DATE()` function incorrectly handles leading zeros when parsing microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
-    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
 
 + PD
 
-    (dup: release-6.1.0.md > Improvements> PD)- Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
+
     - Fix the issue that the hot region may cause panic due to no leader [#5005](https://github.com/tikv/pd/issues/5005)
     - None. [#4946](https://github.com/tikv/pd/issues/4946)
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
-    (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that when there exists a Store with large capacity (2T for example), fully allocated small Stores cannot be detected, which results in no balance operator being generated [#4805](https://github.com/tikv/pd/issues/4805)
-    (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that the label distribution has residual labels in the metrics [#4825](https://github.com/tikv/pd/issues/4825)
 
 ## Compatibility Changes
 
@@ -85,33 +49,9 @@ TiDB version: 5.3.2
 
 + PD
 
-    -
-
-+ TiDB Dashboard
-
-    -
-
-+ TiFlash
-
-    -
+    (dup: release-6.1.0.md > Improvements> PD)- Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
 
 + Tools
-
-    + Backup & Restore (BR)
-
-        -
-
-    + TiCDC
-
-        -
-
-    + Dumpling
-
-        -
-
-    + TiDB Binlog
-
-        -
 
     + TiDB Data Migration (DM)
 
@@ -119,7 +59,7 @@ TiDB version: 5.3.2
 
     + TiDB Lightning
 
-        -
+        (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
 
 
 ## Bug Fixes
@@ -161,11 +101,11 @@ TiDB version: 5.3.2
 
 + PD
 
-    -
-
-+ TiDB Dashboard
-
-    -
+    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
+    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
+    (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
+    (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that when there exists a Store with large capacity (2T for example), fully allocated small Stores cannot be detected, which results in no balance operator being generated [#4805](https://github.com/tikv/pd/issues/4805)
+    (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that the label distribution has residual labels in the metrics [#4825](https://github.com/tikv/pd/issues/4825)
 
 + TiFlash
 
@@ -183,12 +123,29 @@ TiDB version: 5.3.2
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix possible wrong results when a query contains the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the `CastStringAsReal` behavior is inconsistent in TiFlash and in TiDB or TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)
     - Fix the bug that when cast string to datetime, the `microsecond` field may get wrong result [3556](https://github.com/pingcap/tiflash/issues/3556)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix potential errors when querying on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that TiFlash reports many "Keepalive watchdog fired" errors randomly [#4192](https://github.com/pingcap/tiflash/issues/4192)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that empty segments cannot be merged after GC [#4511](https://github.com/pingcap/tiflash/issues/4511)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
+    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the bug that the `STR_TO_DATE()` function incorrectly handles leading zeros when parsing microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
+    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
 
 + Tools
 
     + Backup & Restore (BR)
 
-        -
+        (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix duplicate primary keys when inserting a record into a table after incremental restoration [#33596](https://github.com/pingcap/tidb/issues/33596)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that schedulers do not resume after BR or TiDB Lightning exits abnormally [#33546](https://github.com/pingcap/tidb/issues/33546)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix a bug that BR incremental restore returns errors mistakenly due to DDL jobs with empty query [#33322](https://github.com/pingcap/tidb/issues/33322)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR does not retry enough times when Regions are not consistent during restoration [#33419](https://github.com/pingcap/tidb/issues/33419)
+        (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
 
     + TiCDC
 
@@ -204,14 +161,6 @@ TiDB version: 5.3.2
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix a stability problem in workerpool used by Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
 
-    + Dumpling
-
-        -
-
-    + TiDB Binlog
-
-        -
-
     + TiDB Data Migration (DM)
 
         (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
@@ -223,4 +172,6 @@ TiDB version: 5.3.2
 
     + TiDB Lightning
 
-        -
+        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Lightning)- Fix the issue of Local-backend import failure caused by out-of-bounds data in the `auto_increment` column [#27937](https://github.com/pingcap/tidb/issues/27937)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Lightning)- Fix the issue that the precheck does not check local disk resources and cluster availability [#34213](https://github.com/pingcap/tidb/issues/34213)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Lightning)- Fix the checksum error "GC life time is shorter than transaction duration" [#32733](https://github.com/pingcap/tidb/issues/32733)
