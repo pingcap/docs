@@ -12,15 +12,8 @@ TiDB version: 5.3.2
 
 + PingCAP/TiDB
 
-    - release-note [#34350](https://github.com/pingcap/tidb/issues/34350)
     - Fix the issue that NewCollationEnable config not checked during restoration. [#33422](https://github.com/pingcap/tidb/issues/33422)
     - Add a new hidden config `s3_multi_part_size` to make backup can control the part size when upload big sst file to s3. [#30087](https://github.com/pingcap/tidb/issues/30087)
-
-+ PD
-
-
-    - Fix the issue that the hot region may cause panic due to no leader [#5005](https://github.com/tikv/pd/issues/5005)
-    - None. [#4946](https://github.com/tikv/pd/issues/4946)
 
 ## Compatibility Changes
 
@@ -28,11 +21,11 @@ TiDB version: 5.3.2
 
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
 
++ PD
+
+    - Disable compile swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
+
 ## Improvements
-
-+ TiDB
-
-    -
 
 + TiKV
 
@@ -55,7 +48,6 @@ TiDB version: 5.3.2
     + TiDB Lightning
 
         (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
-
 
 ## Bug Fixes
 
@@ -144,6 +136,7 @@ TiDB version: 5.3.2
         (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR does not retry enough times when Regions are not consistent during restoration [#33419](https://github.com/pingcap/tidb/issues/33419)
         (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
         (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
+        - Fix the issue that backup cannot handle s3 internal error. [#34350](https://github.com/pingcap/tidb/issues/34350)
 
     + TiCDC
 
