@@ -832,6 +832,8 @@ The optimizer can prune partitions through `WHERE` conditions in the following t
 {{< copyable "sql" >}}
 
 ```sql
+SET @@sql_mode = '';
+
 CREATE TABLE employees  (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fname VARCHAR(25) NOT NULL,
