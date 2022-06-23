@@ -44,12 +44,12 @@ TiDB version: 5.3.2
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that MPP tasks might leak threads forever [#4238](https://github.com/pingcap/tiflash/issues/4238)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that empty segments cannot be merged after GC [#4511](https://github.com/pingcap/tiflash/issues/4511)
-    - Fix the potential crash issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the panic issue that occurs when TLS is enabled [#4196](https://github.com/pingcap/tiflash/issues/4196)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the issue that expired data is recycled slowly [#4146](https://github.com/pingcap/tiflash/issues/4146)
-    - Fix the bug that invalid storage dir configurations lead to unexpected behavior [#4093](https://github.com/pingcap/tiflash/issues/4093)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that some exceptions are not handled properly [#4101](https://github.com/pingcap/tiflash/issues/4101)
-    - Fix potential query error after add column under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
-    - Fix str_to_date() function incorrectly handles leading zeros when parsing Microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the potential query error after adding columns under heavy read workload [#3967](https://github.com/pingcap/tiflash/issues/3967)
+    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the bug that the `STR_TO_DATE()` function incorrectly handles leading zeros when parsing microseconds [#3557](https://github.com/pingcap/tiflash/issues/3557)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that TiFlash might return the `EstablishMPPConnection` error after it is restarted [#3615](https://github.com/pingcap/tiflash/issues/3615)
 
 + PD
@@ -68,28 +68,9 @@ TiDB version: 5.3.2
 
     + PingCAP/TiCDC
 
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
         - Please refer to [Release Notes Language Style Guide](https://pingcap.github.io/tidb-dev-guide/contribute-to-tidb/release-notes-style-guide.html) to write a quality release note. If you don't think this PR needs a release note then fill it with `None`. [#4287](https://github.com/pingcap/tiflow/issues/4287)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
-        - Fix a bug in redo log manager that flush log executed before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix a bug that resolved ts moves too fast when part of tables are not maintained redo writer. [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Add uuid suffix to redo log file name to prevent name conflict, which may cause data loss. [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - `Fix a bug that mysql sink may save a wrong checkpointTs`. [#5107](https://github.com/pingcap/tiflow/issues/5107)
         - Please add a release note. Please refer to [Release Notes Language Style Guide](https://pingcap.github.io/tidb-dev-guide/contribute-to-tidb/release-notes-style-guide.html) to write a quality release note. If you don't think this PR needs a release note then fill it with `None`. [#5344](https://github.com/pingcap/tiflow/issues/5344)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
-        - Fix an issue where TiCDC clusters may panic after an upgrade [#5266](https://github.com/pingcap/tiflow/issues/5266)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
-        (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix the issue that changefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix the issue that TiCDC fails to start when the first PD set in `--pd` is not available after TLS is enabled [#4777](https://github.com/pingcap/tiflow/issues/4777)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
         - `None` [#2792](https://github.com/pingcap/tiflow/issues/2792)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
-        (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that querying status through open API may be blocked when the PD node is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
-        - fix bug of relay log may turn off after master reboot in v5.3.1 [#4803](https://github.com/pingcap/tiflow/issues/4803)
-        (dup: release-5.4.1.md > Improvements> Tools> TiDB Data Migration (DM))- Support Syncer using the working directory of the DM-worker rather than `/tmp` to write internal files, and cleaning the directory after the task is stopped [#4107](https://github.com/pingcap/tiflow/issues/4107)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix a stability problem in workerpool used by Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)
-        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
         - `None`. [#4554](https://github.com/pingcap/tiflow/issues/4554)
         - Please add a release note. `None`. [#4565](https://github.com/pingcap/tiflow/issues/4565)
         - `None`. [#4135](https://github.com/pingcap/tiflow/issues/4135)
@@ -112,9 +93,9 @@ TiDB version: 5.3.2
 
     (dup: release-5.4.0.md > Improvements> TiKV)- Reduce the system call by the Raft client and increase CPU efficiency [#11309](https://github.com/tikv/tikv/issues/11309)
     (dup: release-6.1.0.md > Improvements> TiKV) - Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
-    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
-    - Reduce the write latency by separating I/O operations from Raftstore thread pool (disabled by default). For more information about tuning, see [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)
-    - Add more metrics for the garbage collection module of Raft logs [#11374](https://github.com/tikv/tikv/issues/11374)
+    (dup: release-5.2.4.md > Improvements> TiKV)- Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+    (dup: release-5.3.0.md > Improvements> TiKV> Enhance disk space protection to improve storage stability)- Reduce the write latency by separating I/O operations from Raftstore thread pool (disabled by default). For more information about tuning, see [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)
+    (dup: release-5.0.6.md > Improvements> TiKV)- Add more metrics for the garbage collection module of Raft logs to locate performance problems in the module [#11374](https://github.com/tikv/tikv/issues/11374)
 
 + PD
 
@@ -148,7 +129,7 @@ TiDB version: 5.3.2
 
     + TiDB Data Migration (DM)
 
-        -
+        (dup: release-5.4.1.md > Improvements> Tools> TiDB Data Migration (DM))- Support Syncer using the working directory of the DM-worker rather than `/tmp` to write internal files, and cleaning the directory after the task is stopped [#4107](https://github.com/pingcap/tiflow/issues/4107)
 
     + TiDB Lightning
 
@@ -164,15 +145,15 @@ TiDB version: 5.3.2
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that a SQL operation is canceled when its JSON type column joins its `CHAR` type column [#29401](https://github.com/pingcap/tidb/issues/29401)
     - In the event that a network connectivity event occurred, TiDB did not always free the resources of the disconnected session correctly. This has been fixed to ensure that open transactions are rolled back, as well as other associated resources. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fixed an issue where extra datums may break binlog. [#33608](https://github.com/pingcap/tidb/issues/33608)
-    - Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
-    - Fix the session panic that occurs when executing the prepared statement after table schema change with the MySQL binary protocol [#33509](https://github.com/pingcap/tidb/issues/33509)
-    - Fix the issue that the table attributes are not indexed when a new partition is added and the issue that the table range information is not updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
-    - Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
-    - Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
-    - Fix the issue that granting the `all` privilege might fail in clusters that are upgraded from v4.0 [#33588](https://github.com/pingcap/tidb/issues/33588)
-    - Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
-    - Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
-    - Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
+    (dup: release-6.1.0.md > Bug fixes> TiDB)- Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the session panic that occurs when executing the prepared statement after table schema change with the MySQL binary protocol [#33509](https://github.com/pingcap/tidb/issues/33509)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that the table attributes are not indexed when a new partition is added and the issue that the table range information is not updated when the partition changes [#33929](https://github.com/pingcap/tidb/issues/33929)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
+    (dup: release-6.1.0.md > Bug fixes> TiDB)- Fix the issue that some DDL statements might be stuck for a period after the PD node of a cluster is replaced [#33908](https://github.com/pingcap/tidb/issues/33908)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the issue that granting the `all` privilege might fail in clusters that are upgraded from v4.0 [#33588](https://github.com/pingcap/tidb/issues/33588)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
+    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
 
 + TiKV
 
@@ -184,13 +165,13 @@ TiDB version: 5.3.2
     (dup: release-6.1.0.md > Bug fixes> TiKV)- Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
     (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix the issue that successfully committed optimistic transactions may report the `Write Conflict` error when the network is poor [#34066](https://github.com/pingcap/tidb/issues/34066)
     (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix the issue that TiKV panics and destroys peers unexpectedly when the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
-    - Fix the bug that stale messages cause TiKV panic [#12023](https://github.com/tikv/tikv/issues/12023)
-    - Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
-    - Fix a potential panic issue when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
-    - Fix the issue that tikv-ctl returns an incorrect result due to incorrect string match pattern [#12329](https://github.com/tikv/tikv/issues/12329)
-    - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
-    - Fix the TiKV panic issue that the target peer is replaced with the peer that is destroyed without being initialized when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
-    - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
+    (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix a bug that stale messages cause TiKV to panic [#12023](https://github.com/tikv/tikv/issues/12023)
+    (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
+    (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix the potential panic issue that occurs when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
+    (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
+    (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
+    (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix the TiKV panic issue that occurs when the target peer is replaced with the peer that is destroyed without being initialized when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
+    (dup: release-5.4.1.md > Bug Fixes> TiKV)- Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
 
 + PD
 
@@ -204,17 +185,17 @@ TiDB version: 5.3.2
 
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix possible metadata corruption caused by Region merge on a lagging Region peer [#4437](https://github.com/pingcap/tiflash/issues/4437)
-    - Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [4229](https://github.com/pingcap/tiflash/issues/4229)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
     - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [3713](https://github.com/pingcap/tiflash/issues/3713)
     - Fix bug that MPP query may failed due to grpc keepalive timeout [4662](https://github.com/pingcap/tiflash/issues/4662)
     - Fix bug that MPP query may hang forever if there are many retry in exchange receiver  [3473](https://github.com/pingcap/tiflash/pull/3473)
-    - Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [4151](https://github.com/pingcap/tiflash/issues/4151)
-    - Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [3998](https://github.com/pingcap/tiflash/issues/3998)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
+    (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
     - Fix potential `index out of bounds` error if calling `json_length` with empty string [2705](https://github.com/pingcap/tiflash/issues/2705)
     - Fix decimal compare will return wrong result in some corner cae [4942](https://github.com/pingcap/tiflash/pull/4942)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix bug that MPP query may hang forever if query failed in join build stage [4195](https://github.com/pingcap/tiflash/issues/4195)
-    - Fix the bug that results of `where <string>` is wrong because it will be converted to int type. [3447](https://github.com/pingcap/tiflash/issues/3447)
-    - Fix the bug that castStringAsReal has different behaivor between tiflash and tikv/tidb. [3475](https://github.com/pingcap/tiflash/issues/3475)
+    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix possible wrong results when a query contains the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
+    (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the `CastStringAsReal` behavior is inconsistent in TiFlash and in TiDB or TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)
     - Fix the bug that when cast string to datetime, the `microsecond` field may get wrong result [3556](https://github.com/pingcap/tiflash/issues/3556)
 
 + Tools
@@ -225,7 +206,17 @@ TiDB version: 5.3.2
 
     + TiCDC
 
-        -
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
+        - Fix a bug in redo log manager that flush log executed before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix a bug that resolved ts moves too fast when part of tables are not maintained redo writer. [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Add uuid suffix to redo log file name to prevent name conflict, which may cause data loss. [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix a bug that mysql sink may save a wrong checkpointTs. [#5107](https://github.com/pingcap/tiflow/issues/5107)
+        - Fix an issue where TiCDC clusters may panic after an upgrade [#5266](https://github.com/pingcap/tiflow/issues/5266)
+        (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix the issue that changefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix the issue that TiCDC fails to start when the first PD set in `--pd` is not available after TLS is enabled [#4777](https://github.com/pingcap/tiflow/issues/4777)
+        (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that querying status through open API may be blocked when the PD node is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix a stability problem in workerpool used by Unified Sorter [#4447](https://github.com/pingcap/tiflow/issues/4447)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix a bug that sequence is incorrectly replicated in some cases [#4563](https://github.com/pingcap/tiflow/issues/4552)
 
     + Dumpling
 
@@ -237,7 +228,12 @@ TiDB version: 5.3.2
 
     + TiDB Data Migration (DM)
 
-        -
+        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
+        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
+        (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
+        - fix bug of relay log may turn off after master reboot in v5.3.1 [#4803](https://github.com/pingcap/tiflow/issues/4803)
 
     + TiDB Lightning
 
