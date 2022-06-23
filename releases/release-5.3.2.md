@@ -139,6 +139,10 @@ TiDB version: 5.3.2
 + TiKV
 
     (dup: release-5.4.0.md > Improvements> TiKV)- Reduce the system call by the Raft client and increase CPU efficiency [#11309](https://github.com/tikv/tikv/issues/11309)
+    - Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
+    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+    - Reduce the write latency by separating I/O operations from Raftstore thread pool (disabled by default). For more information about tuning, see [Tune TiKV Thread Pool Performance](/tune-tikv-thread-performance.md) [#10540](https://github.com/tikv/tikv/issues/10540)
+    - Add more metrics for the garbage collection module of Raft logs [#11374](https://github.com/tikv/tikv/issues/11374)
 
 + PD
 
@@ -200,7 +204,21 @@ TiDB version: 5.3.2
 
 + TiKV
 
-    -
+    - Fix the bug that causes frequent pd client reconnection [#12345](https://github.com/tikv/tikv/issues/12345)
+    - Fix a wrong check in datetime when the datetime has a fraction and 'Z' [#12739](https://github.com/tikv/tikv/issues/12739)
+    - Fix the bug that converting empty string causes TiKV crash [#12673](https://github.com/tikv/tikv/issues/12673)
+    - Fix possible duplicate commit records in async-commit pessimistic transactions [#12615](https://github.com/tikv/tikv/issues/12615)
+    - Fix the bug that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
+    - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
+    - Fix the issue that successfully committed optimistic transactions may report the `Write Conflict` error when the network is poor [#34066](https://github.com/pingcap/tidb/issues/34066)
+    - Fix the issue that TiKV panics and destroys peers unexpectedly when the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
+    - Fix the bug that stale messages cause TiKV panic [#12023](https://github.com/tikv/tikv/issues/12023)
+    - Fix the issue of intermittent packet loss and out of memory (OOM) caused by the overflow of memory metrics [#12160](https://github.com/tikv/tikv/issues/12160)
+    - Fix a potential panic issue when TiKV performs profiling on Ubuntu 18.04 [#9765](https://github.com/tikv/tikv/issues/9765)
+    - Fix the issue that tikv-ctl returns an incorrect result due to incorrect string match pattern [#12329](https://github.com/tikv/tikv/issues/12329)
+    - Fix a bug that replica reads might violate the linearizability [#12109](https://github.com/tikv/tikv/issues/12109)
+    - Fix the TiKV panic issue that the target peer is replaced with the peer that is destroyed without being initialized when merging a Region [#12048](https://github.com/tikv/tikv/issues/12048)
+    - Fix a bug that TiKV might panic if it has been running for 2 years or more [#11940](https://github.com/tikv/tikv/issues/11940)
 
 + PD
 
