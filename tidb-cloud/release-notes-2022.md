@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## June 23, 2022
 
-* Enlarge the maximum storage capacity of TiKV on TiDB Cloud
+* Increase the maximum storage capacity of TiKV on TiDB Cloud
 
     * 8 vCPU and 16 vCPU TiKV: support up to 4 TiB storage capacity
     * 4 vCPU TiKV: support up to 2 TiB storage capacity
