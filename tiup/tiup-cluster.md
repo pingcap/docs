@@ -43,13 +43,6 @@ Available Commands:
   show-config Show TiDB cluster config
   reload      Reload a TiDB cluster's config and restart if needed
   patch       Replace the remote package with a specified package and restart the service
-  rename      Rename the cluster
-  enable      Enable a TiDB cluster automatically at boot
-  disable     Disable automatic enabling of TiDB clusters at boot
-  replay      Replay previous operation and skip successed steps
-  template    Print topology template
-  tls         Enable/Disable TLS between TiDB components
-  meta        backup/restore meta information
   help        Help about any command
   completion  Generate the autocompletion script for the specified shell
 
