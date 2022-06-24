@@ -26,10 +26,6 @@ This section describes BR features and the performance impact.
 
 ### Back up TiDB cluster data
 
-This section describes backup features, impact of backup, and backup file types.
-
-#### Backup features
-
 - **Back up cluster snapshots**: A snapshot of a TiDB cluster contains transactionally consistent data at a specific time. You can back up snapshot data of a TiDB cluster using BR. For details, see [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots).
 - **Back up incremental data**: The incremental data of a TiDB cluster represents changes between the latest snapshot and the previous snapshot. Incremental data is smaller in size compared with full data, and can be used together with snapshot backup, which reduces the volume of backup data. For details, see [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data).
 - **Back up a database or table**: On top of snapshot and incremental data backup, BR supports backing up a specific database or table and filtering out unnecessary data. For details, see [Back up a database or table](/br/br-usage-backup.md#back-up-a-database-or-a-table).
@@ -44,10 +40,6 @@ The impact of backup on a TiDB cluster is kept below 20%, and this value can be 
 BR supports backing up data to Amazon S3, Google Cloud Storage, Azure Blob Storage, NFS, and other S3-compatible file storage services. For details, see [Back up data to external storages](/br/br-usage-backup.md#back-up-data-to-external-storage).
 
 ### Restore TiDB cluster data
-
-This section describes restoration features and impact on performance.
-
-#### Restoration features
 
 - **Restore snapshot backup**: You can restore snapshot backup data to a new cluster. For details, see [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots).
 - **Restore incremental backup**: You can restore the incremental backup data to a cluster. For details, see [Restore incremental backup](/br/br-usage-restore.md#restore-incremental-data).
@@ -73,7 +65,7 @@ When BR restores data to the upstream cluster of TiCDC or TiDB Binlog, TiCDC or 
 
 The compatibility issues of BR and a TiDB cluster are as follows:
 
-- There are some cross-version compatibility issues:
+- There is a cross-version compatibility issue:
 
     BR (< v5.4.0) cannot restore `charset=GBK` tables. In the meantime, no version of BR supports restoring `charset=GBK` tables to a TiDB cluster earlier than v5.4.0.
 

@@ -47,7 +47,7 @@ You can use either of the following solutions to manually control the impact of 
 
 Before v5.1.0, BR filters out data from the system schemas `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
 
-During data restoration, system tables do not raise conflicts. The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables created in the `mysql` schema](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema).
+The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables created in the `mysql` schema](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema).
 
 ## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
 
@@ -208,7 +208,7 @@ If you do not execute `ANALYZE` on the table, TiDB will fail to select the optim
 
 Error message in the log: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
 
-If a key is locked during the backup process, BR tries to resolve the lock. A small number of these errors do not affect the correctness of the backup.
+If a key is locked during the backup process, BR tries to resolve the lock. If this error occurs only occasionally, the correctness of the backup is not affected.
 
 ## What should I do if a backup operation fails?
 

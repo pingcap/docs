@@ -78,9 +78,9 @@ For more information about the environment variables, see [Azblob URL parameters
 
 #### Back up
 
-This section shows backing up data to `cool tier`, that is, the access tier of the uploaded object is `Cool`. You can specify `account-name` and `access-tier` in two ways:
+This section shows backing up data to `cool tier`, that is, the access tier of the uploaded object is `Cool`. You can specify `account-name` and `access-tier` in two ways. The backup operations differ depending on the way you choose:
 
-- Write the parameters information in URL parameters:
+- Specify `account-name` and `access-tier` as parameters in URL:
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&access-tier=Cool'
@@ -88,7 +88,7 @@ This section shows backing up data to `cool tier`, that is, the access tier of t
 
     If `access-tier` is not set (the value is empty), the value is `Hot` by default.
 
-- Write the parameters information in command-line parameters:
+- Specify `account-name` and `access-tier` as command-line parameters:
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1 --azblob.access-tier=Cool
@@ -96,15 +96,15 @@ This section shows backing up data to `cool tier`, that is, the access tier of t
 
 #### Restore
 
-Based on the way `account-name` is specified, you can restore data either using URLs or command-line parameters:
+Similar to how `account-name` is specified in [Back up](#back-up), you can restore data either using URLs or command-line parameters:
 
-- `account-name` is specified in URL parameters:
+- Specify `account-name` as a parameter in URL:
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1'
     ```
 
-- `account-name` is specified in command-line parameters:
+- Specify `account-name` as a command-line parameter:
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1
@@ -116,13 +116,13 @@ Compared with backing up and restoring data using Azure AD, backup and restorati
 
 #### Back up
 
-- `account-name`, `account-key`, and `access-tier` are specified in URL parameters:
+- Specify `account-name`, `account-key`, and `access-tier` as parameters in URL:
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==&access-tier=Cool'
     ```
 
-- `account-name`, `account-key`, and `access-tier` are specified in command-line parameters:
+- Specify `account-name`, `account-key`, and `access-tier` as command-line parameters:
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1 --azblob.account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw== --azblob.access-tier=Cool
@@ -130,13 +130,13 @@ Compared with backing up and restoring data using Azure AD, backup and restorati
 
 #### Restore
 
-- `account-name` and `account-key` are specified in URL parameters:
+- Specify `account-name` and `account-key` as parameters in URL:
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=='
     ```
 
-- `account-name` and `account-key` are specified in in command-line parameters:
+- Specify `account-name` and `account-key` as command-line parameters:
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1 --azblob.account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==

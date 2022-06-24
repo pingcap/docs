@@ -293,7 +293,7 @@ In the log specified before running the restoration command, you can get the sta
     [Size=48693068713]
 ```
 
-The above log includes the following information:
+The preceding log includes the following information:
 
 - `total take(Full restore time)`: The restoration duration
 - `total take(real time)`: The total runtime of the application
@@ -378,12 +378,12 @@ In the log specified before running the backup command, you can get the statisti
     ["backup fast checksum"=22.995552ms]
 ```
 
-The information from the preceding log includes:
+The preceding log includes the following information:
 
-- `total take(s)`: Backup duration
-- `total size(MB)`: Data size:
-- `avg speed(MB/s)`: Backup throughput
-- `backup checksum`: Backup checksum duration
+- `total take(s)`: The backup duration
+- `total size(MB)`: The data size
+- `avg speed(MB/s)`: The backup throughput
+- `backup checksum`: The backup checksum duration
 
 From the preceding information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `160`.
 
@@ -444,11 +444,11 @@ In the log specified before running the restoration command, you can get the sta
 
 The preceding log includes the following information:
 
-- `total take(s)`: Restoration duration
-- `total size(MB)`: Data size
-- `avg speed(MB/s)`: Restoration throughput
-- `split region`: Region split duration
-- `restore checksum`: Restoration checksum duration
+- `total take(s)`: The restoration duration
+- `total size(MB)`: The data size
+- `avg speed(MB/s)`: The restoration throughput
+- `split region`: The region split duration
+- `restore checksum`: The restoration checksum duration
 
 From the preceding information, the following items can be calculated:
 
