@@ -37,7 +37,7 @@ br restore full \
     --log-file restorefull.log
 ```
 
-In the preceding command, 
+In the preceding command,
 
 - `--ratelimit`: The maximum speed for **each TiKV** to perform a restoration task (unit: MiB/s)
 - `--log-file` The target file for BR logging
@@ -47,7 +47,7 @@ During restoration, a progress bar is displayed in the terminal, as shown below.
 ```shell
 br restore full \
     --pd "${PDIP}:2379" \
-    --storage "local:///tmp/backup" \
+    --storage "s3://backup-data/2022-01-30/" \
     --ratelimit 128 \
     --log-file restorefull.log
 Full Restore <---------/...............................................> 17.12%.
