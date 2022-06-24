@@ -35,7 +35,6 @@ Available Commands:
   clean       (EXPERIMENTAL) Cleanup a specified cluster
   upgrade     Upgrade a specified TiDB cluster
   display     Display information of a TiDB cluster
-  prune       Destroy and remove instances that is in tombstone state
   list        List all clusters
   audit       Show audit log of cluster operation
   import      Import an exist TiDB cluster from TiDB-Ansible
@@ -44,7 +43,6 @@ Available Commands:
   reload      Reload a TiDB cluster's config and restart if needed
   patch       Replace the remote package with a specified package and restart the service
   help        Help about any command
-  completion  Generate the autocompletion script for the specified shell
 
 Flags:
   -c, --concurrency int     max number of parallel tasks allowed (default 5)
