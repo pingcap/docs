@@ -63,7 +63,7 @@ In addition, TiDB also provides the following aggregate functions:
     1 row in set (0.00 sec)
     ```
 
-Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [window functions](/functions-and-operators/window-functions.md).
+Except for the `GROUP_CONCAT()` and `APPROX_PERCENTILE()` functions, all the preceding functions can serve as [Window functions](/functions-and-operators/window-functions.md).
 
 ## GROUP BY modifiers
 
