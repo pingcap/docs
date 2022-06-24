@@ -87,7 +87,7 @@ For further HTAP scenarios, refer to [How We Build an HTAP Database That Simplif
 
 ## Is there an easy migration path from another RDBMS to TiDB Cloud?
 
-TiDB provides TiDB Lightning and a Data Migration Tool to migrate data from MySQL databases. TiDB implements MySQL wire protocol and you can use the MySQL client to TiDB. We also offer access to data using TiKV APIs with programming languages such as Java, Go, Rust, and Python.
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
 ## How does TiDB protect data privacy and ensure security?
 
