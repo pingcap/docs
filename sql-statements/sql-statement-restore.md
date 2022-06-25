@@ -7,7 +7,7 @@ summary: An overview of the usage of RESTORE for the TiDB database.
 
 This statement performs a distributed restore from a backup archive previously produced by a [`BACKUP` statement](/sql-statements/sql-statement-backup.md).
 
-The `RESTORE` statement uses the same engine as the [BR tool](/br/backup-and-restore-use-cases.md), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
+The `RESTORE` statement uses the same engine as the [BR tool](https://docs.pingcap.com/tidb/stable/backup-and-restore-tool), except that the restore process is driven by TiDB itself rather than a separate BR tool. All benefits and caveats of BR also apply here. In particular, **`RESTORE` is currently not ACID-compliant**. Before running `RESTORE`, ensure that the following requirements are met:
 
 * The cluster is "offline", and the current TiDB session is the only active SQL connection to access all tables being restored.
 * When a full restore is being performed, the tables being restored should not already exist, because existing data might be overridden and causes inconsistency between the data and indices.
@@ -98,7 +98,17 @@ BR supports restoring data from S3 or GCS:
 RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/?region=us-west-2';
 ```
 
+<CustomContent platform="tidb">
+
 The URL syntax is further explained in [External Storages](/br/backup-and-restore-storages.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The URL syntax is further explained in [External Storages](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages).
+
+</CustomContent>
 
 When running on cloud environment where credentials should not be distributed, set the `SEND_CREDENTIALS_TO_TIKV` option to `FALSE`:
 
