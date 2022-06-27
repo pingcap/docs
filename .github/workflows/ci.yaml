@@ -19,6 +19,7 @@ jobs:
           node ./scripts/filterNonCloudDoc.js
           cp -r ./scripts ./tmp
           cp -r ./media ./tmp
+          cp .gitignore ./tmp/
           cd ./tmp
           ./scripts/verify-links.sh
           ./scripts/verify-link-anchors.sh
@@ -43,6 +44,7 @@ jobs:
           node ./scripts/filterCloudDoc.js
           cp -r ./scripts ./tmp
           cp -r ./media ./tmp
+          cp .gitignore ./tmp/
           cd ./tmp
           ./scripts/verify-links.sh
           ./scripts/verify-link-anchors.sh
