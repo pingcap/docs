@@ -71,7 +71,7 @@ You can learn about DM through the online documentation. If you have any questio
 
 ## License
 
-DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE).
+DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/LICENSE).
 
 ## DM versions
 
