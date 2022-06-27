@@ -15,7 +15,7 @@ You can configure both vCPUs size and node quantity for TiDB.
 
 ### TiDB vCPUs size
 
-The supported vCPU size includes 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported vCPU sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
 
 > **Note:**
 >
@@ -37,7 +37,7 @@ You can configure vCPUs size, node quantity, and storage size for TiKV.
 
 ### TiKV vCPUs size
 
-The supported size includes 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
 
 > **Note:**
 >
@@ -67,7 +67,12 @@ Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
 
 ### TiKV storage size
 
-You can configure the TiKV storage size only when you create or restore a cluster.
+- 8 vCPU or 16 vCPU TiKV supports up to 4 TiB storage capacity
+- 4 vCPU TiKV supports up to 2 TiB storage capacity
+
+> **Note:**
+>
+> You cannot decrease the TiKV storage size after the cluster creation.
 
 ## Size TiFlash<sup>beta</sup>
 
@@ -77,7 +82,7 @@ You can configure vCPUs size, node quantity, and storage size for TiFlash<sup>be
 
 ### TiFlash<sup>beta</sup> vCPUs size
 
-The supported vCPUs size includes 8 vCPU and 16 vCPU.
+The supported vCPU sizes include 8 vCPU and 16 vCPU.
 
 If the vCPUs size of TiDB or TiKV is set as **4 vCPU (Beta)**, TiFlash<sup>beta</sup> is not supported.
 
@@ -95,4 +100,8 @@ Minimum number of TiFlash<sup>beta</sup> nodes: `min((800 GB * 2 + 100 GB * 1) /
 
 ### TiFlash<sup>beta</sup> storage size
 
-You can configure the TiFlash<sup>beta</sup> storage size only when you create or restore a cluster.
+TiFlash<sup>beta</sup> supports up to 2 TiB storage capacity.
+
+> **Note:**
+>
+> You cannot decrease the TiFlash<sup>beta</sup> storage size after the cluster creation.
