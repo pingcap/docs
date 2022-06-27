@@ -1,13 +1,10 @@
 ---
 title: TiDB 5.4.2 Release Notes
-category: Releases
 ---
-
-
 
 # TiDB 5.4.2 Release Notes
 
-Release Date: June 27, 2022
+Release Date: xx xx, 2022
 
 TiDB version: 5.4.2
 
@@ -83,6 +80,9 @@ Fix min resolved ts/checkpoint table ID metrics [#5542](https://github.com/pingc
         - `None` [#5172](https://github.com/pingcap/tiflow/pull/5172)
         - `None`. [#4869](https://github.com/pingcap/tiflow/pull/4869)
 
+## Compatibility change(s)
+
+## Improvements
 
 ## Bug Fixes
 
