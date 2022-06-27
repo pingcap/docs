@@ -1,5 +1,5 @@
 import {
-  getMdFileList,
+  getFileList,
   copySingleFileSync,
   copyFileWithCustomContentSync,
   removeCustomContent,
@@ -14,24 +14,32 @@ const extractFilefromList = (
   inputPath = ".",
   outputPath = "."
 ) => {
-  fileList.forEach((filePath) => {
+  fileList.forEach((filePath = "") => {
     if (
       filePath.includes(`/tidb-cloud/`) ||
       filePath.includes(`TOC-tidb-cloud.md`)
     ) {
       return;
     }
-    copySingleFileSync(`${inputPath}/${filePath}`, `${outputPath}/${filePath}`);
-    copyFileWithCustomContentSync(
-      `${inputPath}/${filePath}`,
-      `${outputPath}/${filePath}`,
-      contentHandler
-    );
+    if (filePath.endsWith(".md")) {
+      copyFileWithCustomContentSync(
+        `${inputPath}/${filePath}`,
+        `${outputPath}/${filePath}`,
+        contentHandler
+      );
+    } else {
+      try {
+        copySingleFileSync(
+          `${inputPath}/${filePath}`,
+          `${outputPath}/${filePath}`
+        );
+      } catch (error) {}
+    }
   });
 };
 
 const main = () => {
-  const filteredLinkList = getMdFileList(".");
+  const filteredLinkList = getFileList(".");
 
   extractFilefromList(filteredLinkList, ".", "./tmp");
 };

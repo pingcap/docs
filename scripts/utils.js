@@ -103,6 +103,12 @@ export const getMdFileList = (prefix) => {
   return getMds(prefix);
 };
 
+export const getFileList = (prefix) => {
+  return glob.sync(prefix + "/**/*", {
+    ignore: ["**/node_modules/**", "./node_modules/**"],
+  });
+};
+
 const getAllFiles = (dirPath, arrayOfFiles) => {
   const files = fs.readdirSync(dirPath);
 
