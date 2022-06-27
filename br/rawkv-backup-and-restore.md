@@ -1,17 +1,17 @@
 ---
-title: Back Up and Restore Raw KV
-summary: Learn how to back up and restore Raw KV using BR.
+title: Back Up and Restore RawKV
+summary: Learn how to back up and restore RawKV using BR.
 ---
 
-# Back Up and Restore Raw KV
+# Back Up and Restore RawKV
 
-Backup & Restore (BR) supports backing up and restoring Raw KV (used by TiKV and PD) in particular. This document describes how to back up and restore Raw KV.
+Backup & Restore (BR) supports backing up and restoring RawKV (used by TiKV and PD) in particular. This document describes how to back up and restore RawKV.
 
 > **Warning:**
 >
 > This feature is in the experiment, without being thoroughly tested. It is **NOT** recommended that you use it in the production environment.
 
-## Back up Raw KV
+## Back up RawKV
 
 In some scenarios, TiKV might run independently of TiDB. Given that, BR supports bypassing the TiDB layer and backing up data in TiKV.
 
@@ -37,7 +37,7 @@ In this command, the values of `--start` and `--end` are decoded using the forma
 
 > **Note:**
 >
-> - If you use the local storage, you **must** copy all back up SST files to every TiKV node in the path specified by `--storage`. Even if each TiKV node eventually only needs to read a part of the SST files, they all need full access to the complete archive because:
+> - If you use the local storage, you **should** copy all back up SST files to every TiKV node in the path specified by `--storage`. Even if each TiKV node eventually only needs to read a part of the SST files, they all need full access to the complete archive because:
 >
 >     - Data is replicated into multiple peers. When ingesting SSTs, these files have to be present on all peers. This is unlike backup where reading from a single node is enough.
 >     - Where each peer is scattered to during restoration is random. You have no idea in advance which node will read which file.
@@ -45,9 +45,9 @@ In this command, the values of `--start` and `--end` are decoded using the forma
 > - These can be avoided using shared storage, for example, mounting an NFS on the local path, or using S3. With network storage, every node can automatically read every SST file. In this case, the preceding caveats no longer apply.
 > - Also, note that you can only run one restoration operation for a single cluster at the same time. Otherwise, unexpected behaviors might occur. For details, see [FAQ](/br/backup-and-restore-faq.md#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster).
 
-## Restore Raw KV
+## Restore RawKV
 
-Similar to [backing up Raw KV](#back-up-raw-kv), you can run the following command to restore Raw KV:
+Similar to [backing up RawKV](#back-up-rawkv), you can run the following command to restore RawKV:
 
 {{< copyable "shell-regular" >}}
 

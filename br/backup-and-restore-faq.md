@@ -47,7 +47,7 @@ You can use either of the following solutions to manually control the impact of 
 
 Before v5.1.0, BR filters out data from the system schemas `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
 
-The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables created in the `mysql` schema](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema).
+The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables created in the `mysql` schema (experimental)](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema).
 
 ## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
 
@@ -222,3 +222,7 @@ If a backup operation fails and the preceding message occurs, perform one of the
 ## What should I do if the disk usage shown on the monitoring node is inconsistent after BR backup or restoration?
 
 This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restoration. If the checksum succeeds, you can ignore this issue.
+
+## Why does an error occur when I restore placement rules to a cluster?
+
+Before v6.0.0, BR does not support [placement rules](/placement-rules.md). Starting from v6.0.0, BR supports the command line parameter `--with-tidb-placement-mode=strict/ignore`, which controls the way placement rules are imported. The default value is `strict`, indicating that RB imports and checks placement rules. When the value is `ignore`, BR ignores all placement rules.

@@ -36,7 +36,7 @@ Explanations for the above command are as follows:
 
 ### Sub-commands
 
-A `br` command consists of multiple layers of sub-commands. Currently, BR has the following three sub-commands:
+A `br` command consists of multiple layers of sub-commands. Currently, BR has the following sub-commands:
 
 * `br backup`: used to back up the data of the TiDB cluster.
 * `br restore`: used to restore the data of the TiDB cluster.
