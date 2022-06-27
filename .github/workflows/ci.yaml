@@ -17,6 +17,15 @@ jobs:
         run: ./scripts/verify-links.sh
       - name: Verify internal link anchors
         run: ./scripts/verify-link-anchors.sh
+
+  tidb-cloud-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "16"
       - name: Check TOC-tidb-cloud.md existence
         id: check_cloud_toc
         uses: andstor/file-existence-action@v1
@@ -27,9 +36,10 @@ jobs:
         run: |
           npm i
           node ./scripts/filterCloudDoc.js
-          cp ./scripts/verify-links.sh ./tmp/verify-links.sh
-          cd tmp
-          ./verify-links.sh
+          cp -r ./scripts ./tmp
+          cp -r ./media ./tmp
+          cd ./tmp
+          ./scripts/verify-links.sh
 
   vale:
     runs-on: ubuntu-latest
