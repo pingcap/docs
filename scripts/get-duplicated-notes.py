@@ -82,7 +82,7 @@ def check_exst_rn(note_pairs, main_path):
 
 if __name__ == "__main__":
 
-    ext_path = r'/Users/aaa/Documents/GitHub/githubid/docs/releases'  # 已发布的 release notes 文件夹
-    main_path = r'/Users/aaa/Documents/GitHub/githubid/docs/releases/release-5.3.1.md'  # 当前正在准备的release notes 文档路径
+    ext_path = r'/Users/huangran/Projects/pingcap-repos/docs/releases'  # 已发布的 release notes 文件夹
+    main_path = r'/Users/huangran/Projects/pingcap-repos/docs/releases/release-5.4.2.md'  # 当前正在准备的release notes 文档路径
     note_pairs = store_exst_rn(ext_path,main_path)
     check_exst_rn(note_pairs, main_path)
