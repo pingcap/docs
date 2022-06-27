@@ -12,20 +12,20 @@ TiDB version: 5.4.2
 
 + PingCAP/TiDB
 
-    - ```release-note [#35279](https://github.com/pingcap/tidb/issues/35279)
+    <!--transaction-->
     - ```release-note [#34906](https://github.com/pingcap/tidb/issues/34906)
     - ```release-note [#35198](https://github.com/pingcap/tidb/issues/35198)
-    - ```release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
-    - ```release-note [#34722](https://github.com/pingcap/tidb/issues/34722)
-    - ```release-note [#34865](https://github.com/pingcap/tidb/issues/34865)
-    - ```release-note [#34956](https://github.com/pingcap/tidb/issues/34956)
-    - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
-    - ```release-note [#34638](https://github.com/pingcap/tidb/pull/34638)
-    - ```release-note [#34350](https://github.com/pingcap/tidb/issues/34350)
-    (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
-    - ```release-note [#33965](https://github.com/pingcap/tidb/issues/33965)
-    (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
 
+    <!--diagnosis-->
+    - ```release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
+
+    <!--sql-infra-->
+    - ```release-note [#34722](https://github.com/pingcap/tidb/issues/34722)
+    - ```release-note [#34638](https://github.com/pingcap/tidb/pull/34638)
+    - ```release-note [#33965](https://github.com/pingcap/tidb/issues/33965)
+
+    <!--planner-->
+    - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
 
 + TiKV/TiKV
 
@@ -53,9 +53,22 @@ TiDB version: 5.4.2
     - Fix the issue that the hot region may cause panic due to no leader [#5005](https://github.com/tikv/pd/issues/5005)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
 
 
 + Tools
+
+    + BR
+
+        - ```release-note [#35279](https://github.com/pingcap/tidb/issues/35279)
+        - ```release-note [#34865](https://github.com/pingcap/tidb/issues/34865)
+        - ```release-note [#34956](https://github.com/pingcap/tidb/issues/34956)
+        - ```release-note [#34350](https://github.com/pingcap/tidb/issues/34350)
+        (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
+
+    + TiDB Lightning
+
+        (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
 
     + PingCAP/TiCDC
 
@@ -63,15 +76,16 @@ TiDB version: 5.4.2
         - Fix a bug in redo log manager that flush log executed before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix a bug that resolved ts moves too fast when part of tables are not maintained redo writer. [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Add uuid suffix to redo log file name to prevent name conflict, which may cause data loss. [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix data loss when upstream transaction conflicts during cdc reconnection
-Fix replication interruption due to leader missing by extending region retry duration
-Fix min resolved ts/checkpoint table ID metrics [#5468](https://github.com/pingcap/tiflow/issues/5468)
+        - Fix replication interruption due to leader missing by extending region retry duration
+        - Fix min resolved ts/checkpoint table ID metrics [#5542](https://github.com/pingcap/tiflow/pull/5542)
         - `Fix a bug that mysql sink may save a wrong checkpointTs`. [#5107](https://github.com/pingcap/tiflow/issues/5107)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
-        (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
         - Fix a bug that may causes goroutine leak in http server. [#5303](https://github.com/pingcap/tiflow/issues/5303)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
         - `None` [#2792](https://github.com/pingcap/tiflow/issues/2792)
+
+    + TiDB Data Migration (DM)
+
+        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
+        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
         - `None`. [#4858](https://github.com/pingcap/tiflow/issues/4858)
 
 ## Compatibility change(s)
@@ -82,12 +96,12 @@ Fix min resolved ts/checkpoint table ID metrics [#5468](https://github.com/pingc
 
 + PingCAP/TiDB
 
+    <!--planner-->
     - ```release-note [#34678](https://github.com/pingcap/tidb/issues/34678)
 
 
 + PingCAP/TiFlash
 
+    <!--storage-->
     - Fix the TiFlash crash issue that occurs after dropping a column of a table with clustered indexes under some situations. [#5154](https://github.com/pingcap/tiflash/issues/5154)
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
-
-
