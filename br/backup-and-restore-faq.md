@@ -225,4 +225,4 @@ This inconsistency is caused by the fact that the data compression rate used in 
 
 ## Why does an error occur when I restore placement rules to a cluster?
 
-Before v6.0.0, BR does not support [placement rules](/placement-rules.md). Starting from v6.0.0, BR supports the command line parameter `--with-tidb-placement-mode=strict/ignore`, which controls the way placement rules are imported. The default value is `strict`, indicating that RB imports and checks placement rules. When the value is `ignore`, BR ignores all placement rules.
+Before v6.0.0, BR does not support [placement rules](/placement-rules-in-sql.md). Starting from v6.0.0, BR supports the command line parameter `--with-tidb-placement-mode=strict/ignore`, which controls the way placement rules are imported. The default value is `strict`, indicating that RB imports and checks placement rules. When the value is `ignore`, BR ignores all placement rules.
