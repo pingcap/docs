@@ -74,7 +74,6 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Configuration file | `ticdc.toml` | `--include=config` |
 | Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` (Diag does not collect this data type by default) |
 
-
 ### Prometheus monitoring data
 
 | Data type | Exported file | Parameter for data collection by PingCAP Clinic |
