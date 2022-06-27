@@ -3,7 +3,7 @@ name: ci
 on: [pull_request]
 
 jobs:
-  pull:
+  tidb-check:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
@@ -13,10 +13,15 @@ jobs:
           node-version: "16"
       - name: Verify duplicated file names
         run: ./scripts/verify-duplicated-file-name.sh
-      - name: Verify internal links
-        run: ./scripts/verify-links.sh
-      - name: Verify internal link anchors
-        run: ./scripts/verify-link-anchors.sh
+      - name: Verify internal links and anchors - tidb only
+        run: |
+          npm i
+          node ./scripts/filterNonCloudDoc.js
+          cp -r ./scripts ./tmp
+          cp -r ./media ./tmp
+          cd ./tmp
+          ./scripts/verify-links.sh
+          ./scripts/verify-link-anchors.sh
 
   tidb-cloud-check:
     runs-on: ubuntu-latest
@@ -40,6 +45,7 @@ jobs:
           cp -r ./media ./tmp
           cd ./tmp
           ./scripts/verify-links.sh
+          ./scripts/verify-link-anchors.sh
 
   vale:
     runs-on: ubuntu-latest

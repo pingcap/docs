@@ -94,7 +94,9 @@ export const writeFileSync = (destPath, fileContent) => {
 };
 
 const getMds = (src) => {
-  return glob.sync(src + "/**/*.md");
+  return glob.sync(src + "/**/*.md", {
+    ignore: ["**/node_modules/**", "./node_modules/**"],
+  });
 };
 
 export const getMdFileList = (prefix) => {
