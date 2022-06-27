@@ -102,19 +102,21 @@ Rules that are attached to objects are applied *asynchronously*. To view the cur
 
 > **Note:**
 >
-> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
+> - Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
 >
-> ```sql
-> mysql> show placement labels;
-> +--------+----------------+
-> | Key    | Values         |
-> +--------+----------------+
-> | disk   | ["ssd"]        |
-> | region | ["us-east-1"]  |
-> | zone   | ["us-east-1a"] |
-> +--------+----------------+
-> 3 rows in set (0.00 sec)
-> ```
+>    ```sql
+>    mysql> show placement labels;
+>    +--------+----------------+
+>    | Key    | Values         |
+>    +--------+----------------+
+>    | disk   | ["ssd"]        |
+>    | region | ["us-east-1"]  |
+>    | zone   | ["us-east-1a"] |
+>    +--------+----------------+
+>    3 rows in set (0.00 sec)
+>    ```
+>
+> - When you use `CREATE PLACEMENT POLICY` to create a placement policy, TiDB does not check whether the labels exist. Instead, TiDB performs the check when you attach the policy to a table.
 
 | Option Name                | Description                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------|
@@ -198,13 +200,13 @@ CREATE PLACEMENT POLICY p3 FOLLOWERS=2;
 
 CREATE TABLE t1 (a INT);  -- Creates a table t1 with no placement options.
 
-ALTER DATABASE test POLICY=p2;  -- Changes the default placement option, and does not apply to the existing table t1.
+ALTER DATABASE test PLACEMENT POLICY=p2;  -- Changes the default placement option, and does not apply to the existing table t1.
 
 CREATE TABLE t2 (a INT);  -- Creates a table t2 with the default placement policy p2.
 
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;  -- Creates a table t3 without the default policy p2, because this statement has specified another placement rule.
 
-ALTER DATABASE test POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
+ALTER DATABASE test PLACEMENT POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
 
 CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 
