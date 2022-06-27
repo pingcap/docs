@@ -216,7 +216,7 @@ The tuned performance results are as follows (with the same data size):
 - Backup throughput (`avg speed(MB/s)`): increased from `358.09` to `659.59`
 - Throughput of a single TiKV instance (`avg speed(MB/s)/tikv_count`): increased from `89` to `164.89`
 
-## Restore data from a network disk (recommended for production environment)
+## Restore data from a network disk (recommended for production environments)
 
 Use the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
 
@@ -387,7 +387,7 @@ The preceding log includes the following information:
 
 From the preceding information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `160`.
 
-## Restore data from a local disk (recommended in testing environment)
+## Restore data from a local disk (recommended for testing environments)
 
 Run the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
 
