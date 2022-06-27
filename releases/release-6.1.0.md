@@ -97,7 +97,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     When RocksDB detects a damaged SST file in the background, TiKV will try to schedule the affected Peer and recover its data using other replicas. You can set the maximum allowable time for the recovery using the `background-error-recovery-window` parameter. If the recovery operation is not completed within the time window, TiKV will panic. This feature automatically detects and recovers recoverable damaged storage, thus improving the cluster stability.
 
-    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578`)`
+    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578)
 
 * Support non-transactional DML statement
 
@@ -125,7 +125,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Before TiDB v6.1.0, when multiple Region replicas are lost because of machine failure, users have to stop all TiKV servers and use TiKV Control to recover TiKV one by one. Since TiDB v6.1.0, the recovery process is fully automated, does not require to stop TiKV, and does not affect other applications online. The recovery process can be triggered using PD Control and provides a more user-friendly summary information.
 
-    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483`)`
+    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483)
 
 * Support viewing history statistics collection tasks
 
@@ -227,7 +227,6 @@ In 6.1.0, the key new features or improvements are as follows:
 | [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0. |
-| [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`enable-batch-dml`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_enable_new_only_full_group_by_check`](/system-variables.md#tidb_enable_new_only_full_group_by_check-new-in-v610) | Newly added | This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Newly added | Since v6.1.0, the Join Reorder algorithm of TiDB supports Outer Join. This variable controls the support behavior, and the default value is `ON`. |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB v6.1.0. |
@@ -246,7 +245,6 @@ In 6.1.0, the key new features or improvements are as follows:
 | Configuration file | Configuration | Change type | Description |
 |---|---|---|---|
 | TiDB | `committer-concurrency` | Deleted | Replaced by the system variable `tidb_committer_concurrency`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
-| TiDB | `enable-batch-dml` | Deleted | Replaced by the system variable `tidb_enable_batch_dml`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `lower-case-table-names` | Deleted | Currently TiDB only supports `lower_case_table_name=2`. If another value is set, after the cluster is upgraded to v6.1.0, the value is lost.  |
 | TiDB | `mem-quota-query` | Deleted | Replaced by the system variable `tidb_mem_quota_query`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `oom-action` | Deleted | Replaced by the system variable `tidb_mem_oom_action`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
@@ -367,7 +365,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
     - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue of memory leak in the TopSQL module [#34525](https://github.com/pingcap/tidb/issues/34525) [#34502](https://github.com/pingcap/tidb/issues/34502)
-    - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#3237](https://github.com/pingcap/tidb/issues/3237)
+    - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#32371](https://github.com/pingcap/tidb/issues/32371)
     - Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
 
 + TiKV
@@ -385,7 +383,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
     - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
     - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
-    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
+    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
 
 + TiDB Dashboard
 
