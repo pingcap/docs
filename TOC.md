@@ -485,16 +485,17 @@
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
     - [Maintain](/ticdc/manage-ticdc.md)
+    - Monitor and Alert
+      - [Monitor](/ticdc/monitor-ticdc.md)
+      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - [FAQs](/ticdc/ticdc-faq.md)
-    - [Monitor](/ticdc/monitor-ticdc.md)
-    - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - Reference
       - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
       - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
       - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-    - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+      - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
   - sync-diff-inspector
