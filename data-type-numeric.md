@@ -154,7 +154,7 @@ The meaning of the fields:
 
 | Syntax Element | Description |
 | -------- | ------------------------------- |
-| M | the total number of decimal digits |
+| M | the total number of decimal digits  |
 | D | the number of digits after the decimal point |
 | UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
 | ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
