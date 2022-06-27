@@ -14,7 +14,7 @@ The TiDB configuration file supports more options than command-line parameters. 
 
 - Determines whether to create a separate Region for each table.
 - Default value: `true`
-- It is recommended to set it to `false` if you need to create a large number of tables.
+- It is recommended to set it to `false` if you need to create a large number of tables (for example, more than 100 thousand tables).
 
 ### `token-limit`
 
@@ -195,14 +195,14 @@ Configuration items related to log.
 ### `enable-timestamp`
 
 - Determines whether to enable timestamp output in the log.
-- Default value: `true`
+- Default value: `null`
 - If you set the value to `false`, the log does not output timestamp.
 
 > **Note:**
 >
-> To be backward compatible, the initial `disable-timestamp` configuration item remains valid. But if the value of `disable-timestamp` semantically conflicts with the value of `enable-timestamp` (for example, if both `enable-timestamp` and `disable-timestamp` are set to `true`), TiDB ignores the value for `disable-timestamp`. In later versions, the `disable-timestamp` configuration will be removed.
->
-> Discard `disable-timestamp` and use `enable-timestamp` which is semantically easier to understand.
+> - To be backward compatible, the initial `disable-timestamp` configuration item remains valid. But if the value of `disable-timestamp` semantically conflicts with the value of `enable-timestamp` (for example, if both `enable-timestamp` and `disable-timestamp` are set to `true`), TiDB ignores the value for `disable-timestamp`.
+> - Currently, TiDB use `disable-timestamp` to determine whether to output timestamps in the log. In this situation, the value of `enable-timestamp` is `null`.
+> - In later versions, the `disable-timestamp` configuration will be removed. Discard `disable-timestamp` and use `enable-timestamp` which is semantically easier to understand.
 
 ### `enable-slow-log`
 

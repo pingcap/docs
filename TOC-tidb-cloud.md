@@ -22,7 +22,7 @@
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
-- Manage Data
+- Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
     - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
@@ -30,12 +30,12 @@
     - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
     - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
     - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
-  - Back Up and Restore Data
-    - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
-    - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
-    - [Restore](/tidb-cloud/backup-and-restore.md#restore)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
-- Monitor Cluster
+- Back Up and Restore Data
+  - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
+  - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
+  - [Restore](/tidb-cloud/backup-and-restore.md#restore)
+- Monitor and Alert
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
   - Third-Party Monitoring Integrations
@@ -98,7 +98,7 @@
   - [Remove an Organization Member](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
   - [Remove a Project Member](/tidb-cloud/manage-user-access.md#remove-a-project-member)
   - [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
-- Manage Billing
+- Billing
   - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
   - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
   - [Data Transfer Cost](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
