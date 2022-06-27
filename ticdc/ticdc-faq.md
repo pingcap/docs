@@ -1,9 +1,9 @@
 ---
-title: FAQs
+title: TiCDC FAQs
 summary: Learn the FAQs you might encounter when you use TiCDC.
 ---
 
-# FAQs
+# TiCDC FAQs
 
 This document introduces the common questions that you might encounter when using TiCDC.
 
