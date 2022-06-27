@@ -21,7 +21,7 @@ You can use the command-line flag or set the TiKV configuration file to bind som
 
 Assume that the topology has three layers: zone > rack > host, and you can use these labels (zone, rack, host) to set the TiKV location in one of the following methods:
 
-+ Use the command-line flag:
++ Use the command-line flag to start a TiKV instance:
 
     {{< copyable "" >}}
 
@@ -48,7 +48,8 @@ You can customize the value of `location-labels`, such as `zone`, `rack`, or `ho
 
 > **Note:**
 >
-> To make configurations take effect, you must configure `location-labels` for PD and `labels` for TiKV at the same time. Otherwise, PD does not perform scheduling according to the topology.
+> - To make configurations take effect, you must configure `location-labels` for PD and `labels` for TiKV at the same time. Otherwise, PD does not perform scheduling according to the topology.
+> - If you use Placement Rules in SQL, you only need to configure `labels` for TiKV. Currently, Placement Rules in SQL is incompatible with the `location-labels` configuration of PD and ignores this configuration. It is not recommended to use `location-labels` and Placement Rules in SQL at the same time; otherwise, unexpected results might occur.
 
 To configure `location-labels`, choose one of the following methods according to your cluster situation:
 
@@ -154,6 +155,10 @@ tikv_servers:
 ```
 
 For details, see [Geo-distributed Deployment topology](/geo-distributed-deployment-topology.md).
+
+> **Note:**
+>
+> If you have not configured `replication.location-labels` in the configuration file, when you deploy a cluster using this topology file, an error might occur. It is recommended that you confirm `replication.location-labels` is configured in the configuration file before deploying a cluster.
 
 ## PD schedules based on topology label
 
