@@ -16,7 +16,6 @@ const extractFilefromList = (
   outputPath = "."
 ) => {
   fileList.forEach((filePath) => {
-    copySingleFileSync(`${inputPath}/${filePath}`, `${outputPath}/${filePath}`);
     copyFileWithCustomContentSync(
       `${inputPath}/${filePath}`,
       `${outputPath}/${filePath}`,
