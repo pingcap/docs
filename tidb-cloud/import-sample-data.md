@@ -27,7 +27,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
     > **Note:**
     >
-    > If you have created a custom user and have the enough permissions, you can also use the name of the newly created user and the corresponding password.
+    > If you have created a custom user and granted the user with the required privileges, you can also use the name of the newly created user and the corresponding password. For more information about the required privileges, see [Downstream privilege requirements for local-backend](https://docs.pingcap.com/tidb/stable/tidb-lightning-requirements).
 
 7. Leave the **DB/Tables Filter** field blank.
 
