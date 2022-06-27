@@ -9,7 +9,7 @@ summary: Learn about JSON functions.
 >
 > This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
 
-TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7.
+TiDB supports most of the JSON functions that shipped with the GA release of MySQL 5.7. 
 
 ## Functions that create JSON values
 
