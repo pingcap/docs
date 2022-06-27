@@ -11,56 +11,6 @@ This document introduces the common errors you might encounter when using TiCDC,
 >
 > In this document, the PD address specified in `cdc cli` commands is `--pd=http://10.0.10.25:2379`. When you use the command, replace the address with your actual PD address.
 
-<<<<<<< HEAD
-## How do I choose `start-ts` when creating a task in TiCDC?
-
-The `start-ts` of a replication task corresponds to a Timestamp Oracle (TSO) in the upstream TiDB cluster. TiCDC requests data from this TSO in a replication task. Therefore, the `start-ts` of the replication task must meet the following requirements:
-
-- The value of `start-ts` is larger than the `tikv_gc_safe_point` value of the current TiDB cluster. Otherwise, an error occurs when you create a task.
-- Before starting a task, ensure that the downstream has all data before `start-ts`. For scenarios such as replicating data to message queues, if the data consistency between upstream and downstream is not required, you can relax this requirement according to your application need.
-
-If you do not specify `start-ts`, or specify `start-ts` as `0`, when a replication task is started, TiCDC gets a current TSO and starts the task from this TSO.
-
-## Why can't some tables be replicated when I create a task in TiCDC?
-
-When you execute `cdc cli changefeed create` to create a replication task, TiCDC checks whether the upstream tables meet the [replication restrictions](/ticdc/ticdc-overview.md#restrictions). If some tables do not meet the restrictions, `some tables are not eligible to replicate` is returned with a list of ineligible tables. You can choose `Y` or `y` to continue creating the task, and all updates on these tables are automatically ignored during the replication. If you choose an input other than `Y` or `y`, the replication task is not created.
-
-## How do I view the state of TiCDC replication tasks?
-
-To view the status of TiCDC replication tasks, use `cdc cli`. For example:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed list --pd=http://10.0.10.25:2379
-```
-
-The expected output is as follows:
-
-```json
-[{
-    "id": "4e24dde6-53c1-40b6-badf-63620e4940dc",
-    "summary": {
-      "state": "normal",
-      "tso": 417886179132964865,
-      "checkpoint": "2020-07-07 16:07:44.881",
-      "error": null
-    }
-}]
-```
-
-* `checkpoint`: TiCDC has replicated all data before this timestamp to downstream.
-* `state`: The state of this replication task:
-    * `normal`: The task runs normally.
-    * `stopped`: The task is stopped manually or encounters an error.
-    * `removed`: The task is removed.
-
-> **Note:**
->
-> This feature is introduced in TiCDC 4.0.3.
-
-=======
->>>>>>> 0135e7ef3 ( ticdc: adjust TOC and reorganize troubleshooting & faq (#9166))
 ## TiCDC replication interruptions
 
 ### How do I know whether a TiCDC replication task is interrupted?
