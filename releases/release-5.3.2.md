@@ -64,9 +64,9 @@ TiDB version: 5.3.2
 
 + TiKV
 
-    - Fix the bug that causes frequent pd client reconnection [#12345](https://github.com/tikv/tikv/issues/12345)
-    - Fix a wrong check in datetime when the datetime has a fraction and 'Z' [#12739](https://github.com/tikv/tikv/issues/12739)
-    - Fix the bug that converting empty string causes TiKV crash [#12673](https://github.com/tikv/tikv/issues/12673)
+    - Fix the bug that causes frequent PD client reconnection [#12345](https://github.com/tikv/tikv/issues/12345)
+    - Fix a wrong check in `DATETIME` when the datetime has a fraction and `Z` [#12739](https://github.com/tikv/tikv/issues/12739)
+    - Fix the bug that converting empty string causes TiKV panic [#12673](https://github.com/tikv/tikv/issues/12673)
     - Fix possible duplicate commit records in async-commit pessimistic transactions [#12615](https://github.com/tikv/tikv/issues/12615)
     (dup: release-6.1.0.md > Bug fixes> TiKV)- Fix the bug that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
     (dup: release-6.1.0.md > Bug fixes> TiKV)- Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
