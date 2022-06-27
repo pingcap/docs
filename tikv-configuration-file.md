@@ -493,15 +493,11 @@ Configuration items related to Raftstore
 
 ### `raft-max-inflight-msgs`
 
-<<<<<<< HEAD
-+ The number of Raft logs to be confirmed. If this number is exceeded, log sending slows down.
-=======
 > **Note:**
 >
 > This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
-+ The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
->>>>>>> d23b44746 (Add a note to some tikv configs (#9357))
++ The number of Raft logs to be confirmed. If this number is exceeded, log sending slows down.
 + Default value: `256`
 + Minimum value: greater than `0`
 
