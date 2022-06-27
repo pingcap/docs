@@ -462,7 +462,7 @@
       - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
       - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
-      - [BR FAQ](/br/backup-and-restore-faq.md)
+      - [BR FAQs](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)

@@ -1,10 +1,10 @@
 ---
-title: Backup & Restore FAQ
+title: Backup & Restore FAQs
 summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
 aliases: ['/docs/dev/br/backup-and-restore-faq/']
 ---
 
-# Backup & Restore FAQ
+# Backup & Restore FAQs
 
 This document lists the frequently asked questions (FAQs) and the solutions about Backup & Restore (BR).
 
@@ -225,4 +225,13 @@ This inconsistency is caused by the fact that the data compression rate used in 
 
 ## Why does an error occur when I restore placement rules to a cluster?
 
-Before v6.0.0, BR does not support [placement rules](/placement-rules-in-sql.md). Starting from v6.0.0, BR supports the command line parameter `--with-tidb-placement-mode=strict/ignore`, which controls the way placement rules are imported. The default value is `strict`, indicating that RB imports and checks placement rules. When the value is `ignore`, BR ignores all placement rules.
+Before v6.0.0, BR does not support [placement rules](/placement-rules-in-sql.md). Starting from v6.0.0, BR supports placement rules and introduces a command-line option `--with-tidb-placement-mode=strict/ignore` to control the backup and restore mode of placement rules. With the default value `strict`, BR imports and validates placement rules, but ignores all placement rules when the value is `ignore`.
+
+## Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?
+
+Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
+
+Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need to manually check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
+
+- If the value is consistent, you can add `--check-requirements=false` to the restoration command to skip this configuration check.
+- If the value is inconsistent, and you forcibly perform the restoration, BR reports a data validation error.
