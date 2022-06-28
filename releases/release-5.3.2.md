@@ -156,7 +156,7 @@ TiDB version: 5.3.2
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the issue that in some cases manually executing the filtered DDL in the downstream might cause task resumption failure [#5272](https://github.com/pingcap/tiflow/issues/5272)
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiDB Data Migration (DM))- Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
-        - fix bug of relay log may turn off after master reboot in v5.3.1 [#4803](https://github.com/pingcap/tiflow/issues/4803)
+        - Fix the issue that the relay log may be disabled after the DM-master reboots [#4803](https://github.com/pingcap/tiflow/issues/4803)
 
     + TiDB Lightning
 
