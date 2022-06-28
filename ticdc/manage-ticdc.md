@@ -11,14 +11,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.3.1.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.3.2.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.3.1
+tiup cluster upgrade <cluster-name> v5.3.2
 ```
 
 ### Notes for upgrade
@@ -572,7 +572,7 @@ worker-num = 16
 # The dispatcher rules are as follows:
 # - default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the rowid mode.
 # - ts: Use the commitTs of the row change to create Hash and dispatch events.
-# - index-value: Use the value of the primary key or the unique index of the table to create Hash and dispatch events. 
+# - index-value: Use the value of the primary key or the unique index of the table to create Hash and dispatch events.
 # - table: Use the schema name of the table and the table name to create Hash and dispatch events.
 # The matching syntax of matcher is the same as the filter rule syntax.
 dispatchers = [
