@@ -65,7 +65,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 ## May 1, 2022
 
 * Support configuring vCPU size of TiDB, TiKV, and TiFlash<sup>beta</sup> when you create or restore a cluster.
-* Add the support of the AWS region `Mumbai` for cluster creation
+* Add the support of the AWS region `Mumbai` for cluster creation.
 * Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud/tidb-cloud-billing.md).
 
 ## April 7, 2022
