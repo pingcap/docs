@@ -153,6 +153,10 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
 
+    > **Note:**
+    >
+    > After clicking **Import**, a dialog box "Warning: Please Read Before Proceeding" is displayed, reminding that the import process will consume significant database resources. Make sure that you read the warning message before clicking **Confirm** on the dialog box.
+
 ## Step 4. Query data
 
 When the process of importing data is completed, you can start to run some queries in your Terminal:
