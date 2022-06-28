@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## June 28, 2022
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md) of TiKV and TiFlash<sup>beta</sup> for a Dedicated Tier cluster.
+* Upgrade TiDB Cloud Dedicated Tier from [TiDB v5.4.0](https://docs.pingcap.com/tidb/stable/release-5.4.0) to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0).
 
 ## June 23, 2022
 
