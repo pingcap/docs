@@ -23,25 +23,6 @@ TiDB version: 5.4.2
     <!--planner-->
     - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
 
-+ TiKV/TiKV
-
-    - Fix the issue of unexpected `panic` on analyzed statistics when `max_sample_size` is set to `0`. [#11192](https://github.com/tikv/tikv/issues/11192)
-    - Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
-    - Fix possible panic when source peer catch up logs by snapshot in merge [#12663](https://github.com/tikv/tikv/issues/12663)
-    - Fix potential panic when a peer is being split and destroyed at the same time [#12825](https://github.com/tikv/tikv/issues/12825)
-    - Reload TLS certificate automatically when it changes. [#12546](https://github.com/tikv/tikv/issues/12546)
-    - Fix bug which causes frequent pd client reconnection [#12345](https://github.com/tikv/tikv/issues/12345)
-    - Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
-    - Fix a wrong check in datetime when the datetime has a fraction and 'Z' [#12739](https://github.com/tikv/tikv/issues/12739)
-    - Fix tikv crash when conv empty string [#12673](https://github.com/tikv/tikv/issues/12673)
-    - Fix possible duplicate commit record in async-commit pessimistic transactions. [#12615](https://github.com/tikv/tikv/issues/12615)
-    - Use `posix_fallocate` for space reservation. [#12543](https://github.com/tikv/tikv/issues/12543)
-    - Fix the issue that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
-    - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
-    - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
-    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
-
-
 + PD
 
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
@@ -93,9 +74,16 @@ TiDB version: 5.4.2
     <!--transaction-->
     - Improve the recovery time if the tikv hibernate region is enabled [#34906](https://github.com/pingcap/tidb/issues/34906)
 
++ TiKV
+
+    - Reload TLS certificate automatically when it changes. [#12546](https://github.com/tikv/tikv/issues/12546)
+    - Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
+    - Use `posix_fallocate` for space reservation. [#12543](https://github.com/tikv/tikv/issues/12543)
+    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+
 ## Bug Fixes
 
-+ PingCAP/TiDB
++ TiDB
 
     <!--planner-->
     - ```release-note [#34678](https://github.com/pingcap/tidb/issues/34678)
@@ -103,8 +91,22 @@ TiDB version: 5.4.2
     <!--transaction-->
     - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
 
++ TiKV
 
-+ PingCAP/TiFlash
+    - Fix the issue of unexpected `panic` on analyzed statistics when `max_sample_size` is set to `0`. [#11192](https://github.com/tikv/tikv/issues/11192)
+    - Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
+    - Fix possible panic when source peer catch up logs by snapshot in merge [#12663](https://github.com/tikv/tikv/issues/12663)
+    - Fix potential panic when a peer is being split and destroyed at the same time [#12825](https://github.com/tikv/tikv/issues/12825)
+    - Fix bug which causes frequent pd client reconnection [#12345](https://github.com/tikv/tikv/issues/12345)
+    - Fix a wrong check in datetime when the datetime has a fraction and 'Z' [#12739](https://github.com/tikv/tikv/issues/12739)
+    - Fix tikv crash when conv empty string [#12673](https://github.com/tikv/tikv/issues/12673)
+    - Fix possible duplicate commit record in async-commit pessimistic transactions. [#12615](https://github.com/tikv/tikv/issues/12615)
+    - Fix the issue that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
+    - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
+    - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
+
+
++ TiFlash
 
     <!--storage-->
     - Fix the TiFlash crash issue that occurs after dropping a column of a table with clustered indexes under some situations. [#5154](https://github.com/pingcap/tiflash/issues/5154)
