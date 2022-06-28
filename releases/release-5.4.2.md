@@ -23,15 +23,6 @@ TiDB version: 5.4.2
     <!--planner-->
     - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
 
-+ PD
-
-    - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
-    - Fix the issue that the hot region may cause panic due to no leader [#5005](https://github.com/tikv/pd/issues/5005)
-    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
-    - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
-
-
 + Tools
 
     + BR
@@ -68,10 +59,6 @@ TiDB version: 5.4.2
 
 ## Improvements
 
-+ PD
-
-    - Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
-
 + TiDB
 
     <!--transaction-->
@@ -84,6 +71,10 @@ TiDB version: 5.4.2
     - Use `posix_fallocate` for space reservation. [#12543](https://github.com/tikv/tikv/issues/12543)
     - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
 
++ PD
+
+    - Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
+
 ## Bug Fixes
 
 + TiDB
@@ -93,6 +84,8 @@ TiDB version: 5.4.2
 
     <!--transaction-->
     - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
+
+    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
 
 + TiKV
 
@@ -108,6 +101,12 @@ TiDB version: 5.4.2
     - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
     - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
 
++ PD
+
+    - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
+    - Fix the issue that the hot region may cause panic due to no leader [#5005](https://github.com/tikv/pd/issues/5005)
+    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
+    - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
 
 + TiFlash
 
