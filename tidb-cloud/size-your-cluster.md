@@ -67,8 +67,8 @@ Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
 
 ### TiKV storage size
 
-- 8 vCPU or 16 vCPU TiKV supports up to 4 TiB storage capacity
-- 4 vCPU TiKV supports up to 2 TiB storage capacity
+- 8 vCPU or 16 vCPU TiKV supports up to 4 TiB storage capacity.
+- 4 vCPU TiKV supports up to 2 TiB storage capacity.
 
 > **Note:**
 >

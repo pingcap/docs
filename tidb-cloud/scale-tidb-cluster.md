@@ -20,7 +20,7 @@ To scale a running cluster, take the following steps:
 3. Click **Scale** in the drop-down menu. The **Scale** window is displayed.
 4. In the **Scale** window, you can make the following changes:
 
-    - TiDB: increase or decrease the the node quantity.
+    - TiDB: increase or decrease the node quantity.
     - TiKV: increase the node quantity and storage size.
     - TiFlash<sup>beta</sup>: increase the node quantity and storage size.
 
