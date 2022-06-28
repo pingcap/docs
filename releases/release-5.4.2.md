@@ -12,10 +12,6 @@ TiDB version: 5.4.2
 
 + PingCAP/TiDB
 
-    <!--transaction-->
-    - ```release-note [#34906](https://github.com/pingcap/tidb/issues/34906)
-    - ```release-note [#35198](https://github.com/pingcap/tidb/issues/35198)
-
     <!--diagnosis-->
     - ```release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
 
@@ -92,6 +88,11 @@ TiDB version: 5.4.2
 
 ## Improvements
 
++ TiDB
+
+    <!--transaction-->
+    - Improve the recovery time if the tikv hibernate region is enabled [#34906](https://github.com/pingcap/tidb/issues/34906)
+
 ## Bug Fixes
 
 + PingCAP/TiDB
@@ -99,12 +100,15 @@ TiDB version: 5.4.2
     <!--planner-->
     - ```release-note [#34678](https://github.com/pingcap/tidb/issues/34678)
 
+    <!--transaction-->
+    - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
+
 
 + PingCAP/TiFlash
 
     <!--storage-->
     - Fix the TiFlash crash issue that occurs after dropping a column of a table with clustered indexes under some situations. [#5154](https://github.com/pingcap/tiflash/issues/5154)
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
-    
+
     <!--compute-->
     - Fix wrong result of Decimal comparing caused by overflow. [#4512](https://github.com/pingcap/tiflash/issues/4512)
