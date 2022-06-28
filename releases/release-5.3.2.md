@@ -95,21 +95,21 @@ TiDB version: 5.3.2
 + TiFlash
 
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the bug that invalid storage directory configurations lead to unexpected behaviors [#4093](https://github.com/pingcap/tiflash/issues/4093)
-    - Fix `TiFlash_schema_error` caused by `NOT NULL` columns [#4596](https://github.com/pingcap/tiflash/issues/4596)
+    - Fix `TiFlash_schema_error` reported when adding `NOT NULL` columns [#4596](https://github.com/pingcap/tiflash/issues/4596)
     - Fix repeated crash caused by`commit state jump backward` errors [#2576](https://github.com/pingcap/tiflash/issues/2576)
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
-    - Avoid false alert of `DB::Exception: Encode type of coprocessor response is not CHBlock` [#3713](https://github.com/pingcap/tiflash/issues/3713)
-    - Fix bug that MPP query may failed due to grpc keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
+    - Fix false report of inconsistent TiFlash version when TiFlash uses remote read [#3713](https://github.com/pingcap/tiflash/issues/3713)
+    - Fix a bug that MPP query fails due to random gRPC keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
     - Fix bug that MPP query may hang forever if there are many retry in exchange receiver [#3473](https://github.com/pingcap/tiflash/pull/3473)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
-    - Fix potential `index out of bounds` error if calling `json_length` with empty string [#2705](https://github.com/pingcap/tiflash/issues/2705)
-    - Fix decimal compare will return wrong result in some corner cae [#4942](https://github.com/pingcap/tiflash/pull/4942)
+    - Fix the potential `index out of bounds` error if calling `json_length` with empty string [#2705](https://github.com/pingcap/tiflash/issues/2705)
+    - Fix wrong decimal comparison result in corner cases [#4942](https://github.com/pingcap/tiflash/pull/4942)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix bug that MPP query may hang forever if query failed in join build stage [#4195](https://github.com/pingcap/tiflash/issues/4195)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix possible wrong results when a query contains the `where <string>` clause [#3447](https://github.com/pingcap/tiflash/issues/3447)
     (dup: release-5.2.4.md > Bug fixes> TiFlash)- Fix the issue that the `CastStringAsReal` behavior is inconsistent in TiFlash and in TiDB or TiKV [#3475](https://github.com/pingcap/tiflash/issues/3475)
-    - Fix the bug that when cast string to datetime, the `microsecond` field may get wrong result [#3556](https://github.com/pingcap/tiflash/issues/3556)
+    - Fix incorrect  `microsecond` when casting string to datetime [#3556](https://github.com/pingcap/tiflash/issues/3556)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix potential errors when querying on a table with many delete operations [#4747](https://github.com/pingcap/tiflash/issues/4747)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that TiFlash reports many "Keepalive watchdog fired" errors randomly [#4192](https://github.com/pingcap/tiflash/issues/4192)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that data not matching any region range remains on a TiFlash node [#4414](https://github.com/pingcap/tiflash/issues/4414)
@@ -133,7 +133,7 @@ TiDB version: 5.3.2
         (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR does not retry enough times when Regions are not consistent during restoration [#33419](https://github.com/pingcap/tidb/issues/33419)
         (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
         (dup: release-5.4.1.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR fails to back up RawKV [#32607](https://github.com/pingcap/tidb/issues/32607)
-        - Fix the issue that backup cannot handle s3 internal error. [#34350](https://github.com/pingcap/tidb/issues/34350)
+        - Fix the issue that BR cannot handle S3 internal errors [#34350](https://github.com/pingcap/tidb/issues/34350)
 
     + TiCDC
 
