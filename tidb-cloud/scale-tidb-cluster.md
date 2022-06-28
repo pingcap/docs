@@ -28,7 +28,7 @@ To scale a cluster, take the following steps:
 
 ## Increase the vCPU size
 
-When a cluster is running, you cannot increase its vCPU size of each node. To make such change, take either of the following methods:
+When a cluster is running, you cannot increase its vCPU size. To make such change, take either of the following methods:
 
 - Method 1: Increase the vCPU size through backup and restore
 
@@ -47,22 +47,26 @@ When a cluster is running, you cannot increase its vCPU size of each node. To ma
     - Cluster Name: xxx
     - Cloud Provider: GCP or AWS
 
-## Scale in the cluster size
+## Scale in a cluster
 
-To scale in TiKV or TiFlash<sup>beta</sup> nodes or scale down their storage sizes, you need to submit a support ticket. We will contact you and complete the scaling within the agreed time.
+To make the following scale-in or scale-down changes, you need to submit a support ticket. We will contact you and complete the scaling within the agreed time.
+
+- Decrease the vCPU size of TiDB, TiKV, or TiFlash<sup>beta</sup>
+- Scale in TiKV or TiFlash<sup>beta</sup> nodes
+- Decrease the storage size of TiKV or TiFlash<sup>beta</sup>
 
 > **Warning:**
 >
-> Scaling in TiKV or TiFlash<sup>beta</sup> nodes or scaling down their storage sizes can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
+> The preceding scale-in or scale-down changes can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
 
-To submit a scale-in or scale-down request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. For each node to be scaled, provide the following information in the **Description** box:
+To submit a support request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. For each node to be scaled, provide the following information in the **Description** box:
 
-- Node type: TiKV or TiFlash
-- Current node number: xxx
-- Expected node number: xxx
-- Current vCPU size: xxx
-- Expected vCPU size: xxx
-- Current storage size: xxx
-- Expected storage size: xxx
 - Cluster Name: xxx
 - Cloud Provider: GCP or AWS
+- Node type: TiDB, TiKV, or TiFlash
+- Current vCPU size: xxx
+- Expected vCPU size: xxx
+- Current node number: xxx
+- Expected node number: xxx
+- Current storage size: xxx
+- Expected storage size: xxx
