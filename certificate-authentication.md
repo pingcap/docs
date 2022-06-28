@@ -18,7 +18,17 @@ The rest of the document introduces in detail how to perform these operations.
 
 ## Create security keys and certificates
 
+<CustomContent platform="tidb">
+
 It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. The certificate generation process is similar to the process described in [Enable TLS Between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md). The following paragraphs demonstrate on how to configure more attribute fields that need to be verified in the certificate.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+It is recommended that you use [OpenSSL](https://www.openssl.org/) to create keys and certificates. The certificate generation process is similar to the process described in [Enable TLS Between TiDB Clients and Servers](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers). The following paragraphs demonstrate on how to configure more attribute fields that need to be verified in the certificate.
+
+</CustomContent>
 
 ### Generate CA key and certificate
 
