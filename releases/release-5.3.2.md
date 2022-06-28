@@ -136,11 +136,11 @@ TiDB version: 5.3.2
     + TiCDC
 
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
-        - Fix a bug in redo log manager that flush log executed before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix a bug that resolved ts moves too fast when part of tables are not maintained redo writer. [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Add uuid suffix to redo log file name to prevent name conflict, which may cause data loss. [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix a bug that mysql sink may save a wrong checkpointTs. [#5107](https://github.com/pingcap/tiflow/issues/5107)
-        - Fix an issue where TiCDC clusters may panic after an upgrade [#5266](https://github.com/pingcap/tiflow/issues/5266)
+        - Fix the bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix the bug that the resolved ts moves too fast when some tables are not maintained by the redo writer [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix the issue that file name conflicts may cause data loss by adding the UUID suffix to the redo log file name [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
+        - Fix the issue that TiCDC clusters may panic after upgrade [#5266](https://github.com/pingcap/tiflow/issues/5266)
         (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix the issue that changefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix the issue that TiCDC fails to start when the first PD set in `--pd` is not available after TLS is enabled [#4777](https://github.com/pingcap/tiflow/issues/4777)
         (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix a bug that querying status through open API may be blocked when the PD node is abnormal [#4778](https://github.com/pingcap/tiflow/issues/4778)
