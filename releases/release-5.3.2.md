@@ -87,7 +87,7 @@ TiDB version: 5.3.2
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
     (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that when there exists a Store with large capacity (2T for example), fully allocated small Stores cannot be detected, which results in no balance operator being generated [#4805](https://github.com/tikv/pd/issues/4805)
-    - Fix the issue that schedulers do not work when `SchedulerMaxWaitingOperator ` is set to `1` [#4946](https://github.com/tikv/pd/issues/4946)
+    - Fix the issue that schedulers do not work when `SchedulerMaxWaitingOperator` is set to `1` [#4946](https://github.com/tikv/pd/issues/4946)
     (dup: release-5.4.1.md > Bug Fixes> PD)- Fix the issue that the label distribution has residual labels in the metrics [#4825](https://github.com/tikv/pd/issues/4825)
     - Fix `SchedulerMaxWaitingOperator` set to 1, no scheduling issue [#4946](https://github.com/tikv/pd/issues/4946)
     - Fix PD Panic problem caused by Hot Region without Leader [#5005](https://github.com/tikv/pd/issues/5005)
