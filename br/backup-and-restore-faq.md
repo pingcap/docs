@@ -29,7 +29,7 @@ When you restore data, each node must have access to **all** backup files (SST f
 
 It is recommended that you mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments).
 
-## How much does a backup using BR affect the cluster?
+## How much impact does a backup operation have on the cluster?
 
 For TiDB v5.4.0 or later versions, BR not only reduces the default CPU utilization used by backup tasks, but also introduces the [BR Auto-tune](/br/br-auto-tune.md) feature to limit the resources used by backup tasks in the cluster with heavy workloads. Therefore, when you use the default configuration for backup tasks in a v5.4.0 cluster with heavy workloads, the impact of the tasks on the cluster performance is significantly less than that on the clusters earlier than v5.4.0.
 
