@@ -101,7 +101,7 @@ TiDB version: 5.3.2
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix a bug that canceled MPP queries might cause tasks to hang forever when the local tunnel is enabled [#4229](https://github.com/pingcap/tiflash/issues/4229)
     - Fix false report of inconsistent TiFlash version when TiFlash uses remote read [#3713](https://github.com/pingcap/tiflash/issues/3713)
     - Fix a bug that MPP query fails due to random gRPC keepalive timeout [#4662](https://github.com/pingcap/tiflash/issues/4662)
-    - Fix bug that MPP query may hang forever if there are many retry in exchange receiver [#3473](https://github.com/pingcap/tiflash/pull/3473)
+    - Fix a bug that MPP query might hang forever if there are retries in the exchange receiver [#3473](https://github.com/pingcap/tiflash/pull/3473)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the wrong result that occurs when casting `DATETIME` to `DECIMAL` [#4151](https://github.com/pingcap/tiflash/issues/4151)
     (dup: release-5.4.1.md > Bug Fixes> TiFlash)- Fix the overflow that occurs when casting `FLOAT` to `DECIMAL` [#3998](https://github.com/pingcap/tiflash/issues/3998)
     - Fix the potential `index out of bounds` error if calling `json_length` with empty string [#2705](https://github.com/pingcap/tiflash/issues/2705)
