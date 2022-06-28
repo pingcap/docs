@@ -107,4 +107,4 @@ TiDB version: 5.4.2
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
     
     <!--compute-->
-    - Fix wrong result of decimal comparing caused by overflow. [#4512](https://github.com/pingcap/tiflash/issues/4512)
+    - Fix wrong result of Decimal comparing caused by overflow. [#4512](https://github.com/pingcap/tiflash/issues/4512)
