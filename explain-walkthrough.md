@@ -15,7 +15,7 @@ The following statement from the [bikeshare example database](/import-example-da
 
 <CustomContent platform="tidb-cloud">
 
-The following statement from the [bikeshare example database](/tidb-cloud/import-sample-data) counts how many trips were taken on the July 1, 2017:
+The following statement from the [bikeshare example database](/tidb-cloud/import-sample-data.md) counts how many trips were taken on the July 1, 2017:
 
 </CustomContent>
 
