@@ -138,7 +138,7 @@ TiDB version: 5.3.2
         (dup: release-5.4.1.md > Bug Fixes> Tools> TiCDC)- Fix incorrect metrics caused by owner changes [#4774](https://github.com/pingcap/tiflow/issues/4774)
         - Fix the bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix the bug that the resolved ts moves too fast when some tables are not maintained by the redo writer [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix the issue that file name conflicts may cause data loss by adding the UUID suffix to the redo log file name [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Add the UUID suffix to the redo log file name to fix the issue that file name conflicts may cause data loss [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
         - Fix the issue that TiCDC clusters may panic after upgrade [#5266](https://github.com/pingcap/tiflow/issues/5266)
         (dup: release-5.2.4.md > Bug fixes> Tools> TiCDC)- Fix the issue that changefeed gets stuck when tables are repeatedly scheduled in the same node [#4464](https://github.com/pingcap/tiflow/issues/4464)
