@@ -5,7 +5,11 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # Determine Your TiDB Size
 
-This document describes how to determine the size of your TiDB cluster.
+This document describes how to determine the size of a Dedicated Tier cluster.
+
+> **Note:**
+>
+> A [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) comes with a default cluster size, which cannot be changed.
 
 ## Size TiDB
 
