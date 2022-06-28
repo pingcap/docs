@@ -64,7 +64,7 @@ TiDB version: 5.3.2
 
 + TiKV
 
-    - Fix the bug that the PD client reconnects frequently [#12345](https://github.com/tikv/tikv/issues/12345)
+    - Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
     - Fix a wrong check for `DATETIME` values with fractional seconds and `Z` [#12739](https://github.com/tikv/tikv/issues/12739)
     - Fix the issue that TiKV panics when converting empty string [#12673](https://github.com/tikv/tikv/issues/12673)
     - Fix possible duplicate commit records in pessimistic transactions when async commit is enabled [#12615](https://github.com/tikv/tikv/issues/12615)
