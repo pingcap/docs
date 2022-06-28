@@ -60,7 +60,7 @@ TiDB version: 5.3.2
     (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix wrong results of deleting data of multiple tables using `left join` [#31321](https://github.com/pingcap/tidb/issues/31321)
     (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
-    - Fix the problem that tidb-server may encounter crash because of `fatal error: concurrent map read and map write` [#35340](https://github.com/pingcap/tidb/issues/35340)
+    - Fix the panic issue caused by the `fatal error: concurrent map read and map write` error [#35340](https://github.com/pingcap/tidb/issues/35340)
 
 + TiKV
 
