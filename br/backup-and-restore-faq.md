@@ -216,7 +216,7 @@ Error message in the log: `log - Error: msg:"Io(Custom { kind: AlreadyExists, er
 
 If a backup operation fails and the preceding message occurs, perform one of the following operations and then start the backup again:
 
-- Change the directory for the backup. For example, change `/dir/backup-2020-01-01/` to `/dir/backup_local/`.
+- Change the directory for the backup. For example, change `/dir/backup_local/` to `/dir/backup-2020-01-01/`.
 - Delete the backup directories of all TiKV nodes and BR nodes.
 
 ## What should I do if the disk usage shown on the monitoring node is inconsistent after BR backup or restoration?
