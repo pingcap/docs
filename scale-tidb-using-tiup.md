@@ -266,7 +266,7 @@ If you want to remove a TiKV node from the `10.0.1.5` host, take the following s
     ```
     Starting /root/.tiup/components/cluster/v1.7.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v5.3.1
+    TiDB Version: v5.3.2
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -396,7 +396,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
         > **Note:**
         >
         > If multiple PD instances exist in the cluster, you only need to specify the IP address:port of an active PD instance in the above command.
-        
+
 3. Wait for the store of the TiFlash node to disappear or for the `state_name` to become `Tombstone` before you stop the TiFlash process.
 
 4. Manually delete TiFlash data files (whose location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
