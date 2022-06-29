@@ -85,7 +85,7 @@ If you are using **Maven**, add the following to your `<dependencies></dependenc
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.28</version>
+    <version>5.1.49</version>
 </dependency>
 ```
 
@@ -95,7 +95,7 @@ If you are using **Gradle**, add the following to your `dependencies`:
 
 ```gradle
 implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
-implementation 'mysql:mysql-connector-java:8.0.28'
+implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
 - For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
