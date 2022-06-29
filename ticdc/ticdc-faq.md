@@ -1,11 +1,11 @@
 ---
-title: Troubleshoot TiCDC
-summary: Learn how to troubleshoot issues you might encounter when you use TiCDC.
+title: TiCDC FAQs
+summary: Learn the FAQs you might encounter when you use TiCDC.
 ---
 
-# Troubleshoot TiCDC
+# TiCDC FAQs
 
-This document introduces the common issues and errors that you might encounter when using TiCDC, and the corresponding maintenance and troubleshooting methods.
+This document introduces the common questions that you might encounter when using TiCDC.
 
 > **Note:**
 >
@@ -58,84 +58,6 @@ The expected output is as follows:
 >
 > This feature is introduced in TiCDC 4.0.3.
 
-## TiCDC replication interruptions
-
-### How do I know whether a TiCDC replication task is interrupted?
-
-- Check the `changefeed checkpoint` monitoring metric of the replication task (choose the right `changefeed id`) in the Grafana dashboard. If the metric value stays unchanged, or the `checkpoint lag` metric keeps increasing, the replication task might be interrupted.
-- Check the `exit error count` monitoring metric. If the metric value is greater than `0`, an error has occurred in the replication task.
-- Execute `cdc cli changefeed list` and `cdc cli changefeed query` to check the status of the replication task. `stopped` means the task has stopped, and the `error` item provides the detailed error message. After the error occurs, you can search `error on running processor` in the TiCDC server log to see the error stack for troubleshooting.
-- In some extreme cases, the TiCDC service is restarted. You can search the `FATAL` level log in the TiCDC server log for troubleshooting.
-
-### How do I know whether the replication task is stopped manually?
-
-You can know whether the replication task is stopped manually by executing `cdc cli`. For example:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-2316-4f4f-a70b-d1a7c59ba79f
-```
-
-In the output of the above command, `admin-job-type` shows the state of this replication task:
-
-- `0`: In progress, which means that the task is not stopped manually.
-- `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
-- `2`: Resumed. The replication task resumes from `checkpoint-ts`.
-- `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. The replication status is retained only for later queries.
-
-### How do I handle replication interruptions?
-
-A replication task might be interrupted in the following known scenarios:
-
-- The downstream continues to be abnormal, and TiCDC still fails after many retries.
-
-    - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
-
-    - Handling method: You can resume the replication task via the HTTP interface after the downstream is back to normal.
-
-- Replication cannot continue because of incompatible SQL statement(s) in the downstream.
-
-    - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
-    - Handling procedures:
-        1. Query the status information of the replication task using the `cdc cli changefeed query` command and record the value of `checkpoint-ts`.
-        2. Use the new task configuration file and add the `ignore-txn-start-ts` parameter to skip the transaction corresponding to the specified `start-ts`.
-        3. Stop the old replication task via HTTP API. Execute `cdc cli changefeed create` to create a new task and specify the new task configuration file. Specify `checkpoint-ts` recorded in step 1 as the `start-ts` and start a new task to resume the replication.
-
-- In TiCDC v4.0.13 and earlier versions, when TiCDC replicates the partitioned table, it might encounter an error that leads to replication interruption.
-
-    - In this scenario, TiCDC saves the task information. Because TiCDC has set the service GC safepoint in PD, the data after the task checkpoint is not cleaned by TiKV GC within the valid period of `gc-ttl`.
-    - Handling procedures:
-        1. Pause the replication task by executing `cdc cli changefeed pause -c <changefeed-id>`.
-        2. Wait for about one munite, and then resume the replication task by executing `cdc cli changefeed resume -c <changefeed-id>`.
-
-### What should I do to handle the OOM that occurs after TiCDC is restarted after a task interruption?
-
-- Update your TiDB cluster and TiCDC cluster to the latest versions. The OOM problem has already been resolved in **v4.0.14 and later v4.0 versions, v5.0.2 and later v5.0 versions, and the latest versions**.
-
-- In the above updated versions, you can enable the Unified Sorter to help you sort data in the disk when the system memory is insufficient. To enable this function, you can pass `--sort-engine=unified` to the `cdc cli` command when creating a replication task. For example:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed update -c <changefeed-id> --sort-engine="unified" --pd=http://10.0.10.25:2379
-```
-
-If you fail to update your cluster to the above new versions, you can still enable Unified Sorter in **previous versions**. You can pass `--sort-engine=unified` and `--sort-dir=/path/to/sort_dir` to the `cdc cli` command when creating a replication task. For example:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed update -c <changefeed-id> --sort-engine="unified" --sort-dir="/data/cdc/sort" --pd=http://10.0.10.25:2379
-```
-
-> **Note:**
->
-> + Since v4.0.9, TiCDC supports the unified sorter engine.
-> + TiCDC (the 4.0 version) does not support dynamically modifying the sorting engine yet. Make sure that the changefeed has stopped before modifying the sorter settings.
-> + `sort-dir` has different behaviors in different versions. Refer to [compatibility notes for`sort-dir` and `data-dir`](/ticdc/ticdc-overview.md#compatibility-notes-for-sort-dir-and-data-dir), and configure it with caution.
-> + Currently, the unified sorter is an experimental feature. When the number of tables is too large (>=100), the unified sorter might cause performance issues and affect replication throughput. Therefore, it is not recommended to use it in a production environment. Before you enable the unified sorter, make sure that the machine of each TiCDC node has enough disk capacity. If the total size of unprocessed data changes might exceed 1 TB, it is not recommend to use TiCDC for replication.
-
 ## What is `gc-ttl` in TiCDC?
 
 Since v4.0.0-rc.1, PD supports external services in setting the service-level GC safepoint. Any service can register and update its GC safepoint. PD ensures that the key-value data later than this GC safepoint is not cleaned by GC.
@@ -161,64 +83,6 @@ If the replication task is suspended longer than the time specified by `gc-ttl`,
 
 The Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 hours, which means that the GC mechanism does not delete any data if the TiCDC service can be recovered within 24 hours after it is interrupted.
 
-## How do I handle the `Error 1298: Unknown or incorrect time zone: 'UTC'` error when creating the replication task or replicating data to MySQL?
-
-This error is returned when the downstream MySQL does not load the time zone. You can load the time zone by running [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html). After loading the time zone, you can create tasks and replicate data normally.
-
-{{< copyable "shell-regular" >}}
-
-```shell
-mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
-```
-
-If the output of the command above is similar to the following one, the import is successful:
-
-```
-Enter password:
-Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time zone. Skipping it.
-Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as time zone. Skipping it.
-Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it.
-Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
-```
-
-If the downstream is a special MySQL environment (a public cloud RDS or some MySQL derivative versions) and importing the time zone using the above method fails, you need to specify the MySQL time zone of the downstream using the `time-zone` parameter in `sink-uri`. You can first query the time zone used by MySQL:
-
-1. Query the time zone used by MySQL:
-
-    {{< copyable "sql" >}}
-
-    ```sql
-    show variables like '%time_zone%';
-    ```
-
-    ```
-    +------------------+--------+
-    | Variable_name    | Value  |
-    +------------------+--------+
-    | system_time_zone | CST    |
-    | time_zone        | SYSTEM |
-    +------------------+--------+
-    ```
-
-2. Specify the time zone when you create the replication task and create the TiCDC service:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed create --sink-uri="mysql://root@127.0.0.1:3306/?time-zone=CST" --pd=http://10.0.10.25:2379
-    ```
-
-    > **Note:**
-    >
-    > CST might be an abbreviation for the following four different time zones:
-    >
-    > - Central Standard Time (USA) UT-6:00
-    > - Central Standard Time (Australia) UT+9:30
-    > - China Standard Time UT+8:00
-    > - Cuba Standard Time UT-4:00
-    >
-    > In China, CST usually stands for China Standard Time.
-
 ## How to understand the relationship between the TiCDC time zone and the time zones of the upstream/downstream databases?
 
 ||Upstream time zone| TiCDC time zone|Downstream time zone|
@@ -238,13 +102,9 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
 
 If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
 
-* Replicates all tables except system tables
-* Enables the Old Value feature
-* Skips replicating tables that do not contain [valid indexes](/ticdc/ticdc-overview.md#restrictions)
-
-## How do I handle the incompatibility issue of configuration files caused by TiCDC upgrade?
-
-Refer to [Notes for compatibility](/ticdc/manage-ticdc.md#notes-for-compatibility).
+- Replicates all tables except system tables
+- Enables the Old Value feature
+- Skips replicating tables that do not contain [valid indexes](/ticdc/ticdc-overview.md#restrictions)
 
 ## Does TiCDC support outputting data changes in the Canal format?
 
@@ -315,10 +175,6 @@ In TiCDC Open Protocol, the type code `6` represents `null`.
 
 For more information, refer to [TiCDC Open Protocol column type code](/ticdc/ticdc-open-protocol.md#column-type-code).
 
-## The `start-ts` timestamp of the TiCDC task is quite different from the current time. During the execution of this task, replication is interrupted and an error `[CDC:ErrBufferReachLimit]` occurs
-
-Since v4.0.9, you can try to enable the unified sorter feature in your replication task, or use the BR tool for an incremental backup and restore, and then start the TiCDC replication task from a new time.
-
 ## How can I tell if a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event?
 
 If the Old Value feature is not enabled, you cannot tell whether a Row Changed Event of TiCDC Open Protocol is an `INSERT` event or an `UPDATE` event. If the feature is enabled, you can determine the event type by the fields it contains:
@@ -342,97 +198,11 @@ TiCDC provides partial support for large transactions (more than 5 GB in size). 
 
 If you encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
-1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/use-br-command-line-tool.md#back-up-incremental-data).
+1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-usage-backup.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
-3. [Restore the incremental data](/br/use-br-command-line-tool.md#restore-incremental-data).
+3. [Restore the incremental data](/br/br-usage-restore.md#restore-incremental-data).
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
-
-## When the downstream of a changefeed is a database similar to MySQL and TiCDC executes a time-consuming DDL statement, all other changefeeds are blocked. How should I handle the issue?
-
-1. Pause the execution of the changefeed that contains the time-consuming DDL statement. Then you can see that other changefeeds are no longer blocked.
-2. Search for the `apply job` field in the TiCDC log and confirm the `start-ts` of the time-consuming DDL statement.
-3. Manually execute the DDL statement in the downstream. After the execution finishes, go on performing the following operations.
-4. Modify the changefeed configuration and add the above `start-ts` to the `ignore-txn-start-ts` configuration item.
-5. Resume the paused changefeed.
-
-## After I upgrade the TiCDC cluster to v4.0.8, the `[CDC:ErrKafkaInvalidConfig]Canal requires old value to be enabled` error is reported when I execute a changefeed
-
-Since v4.0.8, if the `canal-json`, `canal` or `maxwell` protocol is used for output in a changefeed, TiCDC enables the old value feature automatically. However, if you have upgraded TiCDC from an earlier version to v4.0.8 or later, when the changefeed uses the `canal-json`, `canal` or `maxwell` protocol and the old value feature is disabled, this error is reported.
-
-To fix the error, take the following steps:
-
-1. Set the value of `enable-old-value` in the changefeed configuration file to `true`.
-2. Execute `cdc cli changefeed pause` to pause the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed pause -c test-cf --pd=http://10.0.10.25:2379
-    ```
-
-3. Execute `cdc cli changefeed update` to update the original changefeed configuration.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --sink-uri="mysql://127.0.0.1:3306/?max-txn-row=20&worker-number=8" --config=changefeed.toml
-    ```
-
-4. Execute `cdc cli changfeed resume` to resume the replication task.
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
-    ```
-
-## The `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy` error is reported when I use TiCDC to create a changefeed
-
-Solution: You need to execute the `pd-ctl service-gc-safepoint --pd <pd-addrs>` command to query the current GC safepoint and service GC safepoint. If the GC safepoint is smaller than the `start-ts` of the TiCDC replication task (changefeed), you can directly add the `--disable-gc-check` option to the `cdc cli create changefeed` command to create a changefeed.
-
-If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc_worker service_id`:
-
-- If your PD version is v4.0.8 or earlier, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
-- If your PD is upgraded from v4.0.8 or an earlier version to a later version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
-
-## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
-
-When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
-
-Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
-
-## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error
-
-For TiCDC v4.0.8 or earlier versions, you cannot effectively control the size of the message output to Kafka only by configuring the `max-message-bytes` setting for Kafka in the Sink URI. To control the message size, you also need to increase the limit on the bytes of messages to be received by Kafka. To add such a limit, add the following configuration to the Kafka server configuration.
-
-```
-# The maximum byte number of a message that the broker receives
-message.max.bytes=2147483648
-# The maximum byte number of a message that the broker copies
-replica.fetch.max.bytes=2147483648
-# The maximum message byte number that the consumer side reads
-fetch.message.max.bytes=2147483648
-```
-
-## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
-
-If a DDL statement fails to execute, the replication task (changefeed) automatically stops. The checkpoint-ts is the DDL statement's finish-ts minus one. If you want TiCDC to retry executing this statement in the downstream, use `cdc cli changefeed resume` to resume the replication task. For example:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
-```
-
-If you want to skip this DDL statement that goes wrong, set the start-ts of the changefeed to the checkpoint-ts (the timestamp at which the DDL statement goes wrong) plus one. For example, if the checkpoint-ts at which the DDL statement goes wrong is `415241823337054209`, execute the following commands to skip this DDL statement:
-
-{{< copyable "shell-regular" >}}
-
-```shell
-cdc cli changefeed update -c test-cf --pd=http://10.0.10.25:2379 --start-ts 415241823337054210
-cdc cli changefeed resume -c test-cf --pd=http://10.0.10.25:2379
-```
 
 ## The default value of the time type field is inconsistent when replicating a DDL statement to the downstream MySQL 5.7. What can I do?
 
@@ -458,6 +228,12 @@ From the result, you can see that the table schema before and after the replicat
 
 Since v5.0.1 or v4.0.13, for each replication to MySQL, TiCDC automatically sets `explicit_defaults_for_timestamp = ON` to ensure that the time type is consistent between the upstream and downstream. For versions earlier than v5.0.1 or v4.0.13, pay attention to the compatibility issue caused by the inconsistent `explicit_defaults_for_timestamp` value when using TiCDC to replicate the time type data.
 
+## `enable-old-value` is set to `true` when I create a TiCDC replication task, but `INSERT`/`UPDATE` statements from the upstream become `REPLACE INTO` after being replicated to the downstream
+
+When a changefeed is created in TiCDC, the `safe-mode` setting defaults to `true`, which generates the `REPLACE INTO` statement to execute for the upstream `INSERT`/`UPDATE` statements.
+
+Currently, users cannot modify the `safe-mode` setting, so this issue currently has no solution.
+
 ## When the sink of the replication downstream is TiDB or MySQL, what permissions do users of the downstream database need?
 
 When the sink is TiDB or MySQL, the users of the downstream database need the following permissions:
@@ -473,3 +249,11 @@ When the sink is TiDB or MySQL, the users of the downstream database need the fo
 - `Create View`
 
 If you need to replicate `recover table` to the downstream TiDB, you should have the `Super` permission.
+
+## Why does TiCDC use disks? When does TiCDC write to disks? Does TiCDC use memory buffer to improve replication performance?
+
+When upstream write traffic is at peak hours, the downstream may fail to consume all data in a timely manner, resulting in data pile-up. TiCDC uses disks to process the data that is piled up. TiCDC needs to write data to disks during normal operation. However, this is not usually the bottleneck for replication throughput and replication latency, given that writing to disks only results in latency within a hundred milliseconds. TiCDC also uses memory to accelerate reading data from disks to improve replication performance.
+
+## Why does replication using TiCDC stall or even stop after data restore using TiDB Lightning and BR?
+
+Currently, TiCDC is not yet fully compatible with TiDB Lightning and BR. Therefore, please avoid using TiDB Lightning and BR on tables that are replicated by TiCDC.

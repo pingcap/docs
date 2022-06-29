@@ -1,13 +1,13 @@
 ---
 title: Use BR Command-line for Backup and Restoration
-summary: Learn how to use the BR command line to backup and restore cluster data.
+summary: Learn how to use the BR command line to back up and restore cluster data.
 ---
 
 # Use BR Command-line for Backup and Restoration
 
 This document describes how to back up and restore TiDB cluster data using the BR command line.
 
-Make sure you have read [BR Tool Overview](/br/backup-and-restore-tool.md), especially [Usage Restrictions](/br/backup-and-restore-tool.md#usage-restrictions) and [Best Practices](/br/backup-and-restore-tool.md#best-practices).
+Make sure you have read [BR Tool Overview](/br/backup-and-restore-overview.md), especially [Usage restrictions](/br/backup-and-restore-overview.md#usage-restrictions) and [Some tips](/br/backup-and-restore-overview.md#some-tips).
 
 ## BR command-line description
 
@@ -22,7 +22,7 @@ This is a complete `br` command:
 {{< copyable "shell-regular" >}}
 
 ```shell
-br backup full --pd "${PDIP}:2379" -s "local:///tmp/backup"
+`br backup full --pd "${PDIP}:2379" -s "s3://backup-data/2022-01-30/"`
 ```
 
 Explanations for the above command are as follows:
@@ -30,28 +30,18 @@ Explanations for the above command are as follows:
 * `backup`: the sub-command of `br`.
 * `full`: the sub-command of `backup`.
 * `-s` (or `--storage`): the option that specifies the path where the backup files are stored.
-* `"local:///tmp/backup"`: the parameter of `-s`. `/tmp/backup` is the path in the local disk where the backed up files of each TiKV node are stored.
+* `"s3://backup-data/2022-01-30/"`: the parameter of `-s`, indicating that backup data is stored to the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
 * `--pd`: the option that specifies the Placement Driver (PD) service address.
 * `"${PDIP}:2379"`: the parameter of `--pd`.
 
-> **Note:**
->
-> - When the `local` storage is used, the backup data are scattered in the local file system of each node.
->
-> - It is **not recommended** to back up to a local disk in the production environment because you **have to** manually aggregate these data to complete the data restoration. For more information, see [Restore Cluster Data](#use-br-command-line-to-restore-cluster-data).
->
-> - Aggregating these backup data might cause redundancy and bring troubles to operation and maintenance. Even worse, if restoring data without aggregating these data, you can receive a rather confusing error message `SST file not found`.
->
-> - It is recommended to mount the NFS disk on each node, or back up to the `S3` object storage.
-
 ### Sub-commands
 
-A `br` command consists of multiple layers of sub-commands. Currently, BR has the following three sub-commands:
+A `br` command consists of multiple layers of sub-commands. Currently, BR has the following sub-commands:
 
 * `br backup`: used to back up the data of the TiDB cluster.
 * `br restore`: used to restore the data of the TiDB cluster.
 
-Each of the above three sub-commands might still include the following three sub-commands to specify the scope of an operation:
+Each of the above sub-commands might still include the following sub-commands to specify the scope of an operation:
 
 * `full`: used to back up or restore all the cluster data.
 * `db`: used to back up or restore the specified database of the cluster.
@@ -67,6 +57,7 @@ Each of the above three sub-commands might still include the following three sub
 * `--key`: specifies the path to the SSL certificate key in the PEM format.
 * `--status-addr`: specifies the listening address through which BR provides statistics to Prometheus.
 
+<<<<<<< HEAD
 ## Use BR command-line to back up cluster data
 
 To back up the cluster data, use the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
@@ -564,3 +555,32 @@ During data restoration, writing too much data affects the performance of the on
         --pd $PD_ADDR \
         --online
     ```
+=======
+## Examples of using BR command-line to back up cluster data
+
+To back up cluster data, run the `br backup` command. You can add the `full` or `table` sub-command to specify the scope of your backup operation: the whole cluster or a single table.
+
+- [Back up TiDB cluster snapshots](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)
+- [Back up a database](/br/br-usage-backup.md#back-up-a-database)
+- [Back up a table](/br/br-usage-backup.md#back-up-a-table)
+- [Back up multiple tables with table filter](/br/br-usage-backup.md#back-up-multiple-tables-with-table-filter)
+- [Back Up data on Amazon S3 using BR](/br/backup-storage-S3.md)
+- [Back up data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
+- [Back up data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
+- [Back up incremental data](/br/br-usage-backup.md#back-up-incremental-data)
+- [Encrypt data during backup](/br/br-usage-backup.md#encrypt-backup-data-at-the-backup-end)
+
+## Examples of using BR command-line to restore cluster data
+
+To restore cluster data, run the `br restore` command. You can add the `full`, `db` or `table` sub-command to specify the scope of your restoration: the whole cluster, a database or a single table.
+
+- [Restore TiDB cluster snapshots](/br/br-usage-restore.md#restore-tidb-cluster-snapshots)
+- [Restore a database](/br/br-usage-restore.md#restore-a-database)
+- [Restore a table](/br/br-usage-restore.md#restore-a-table)
+- [Restore multiple tables with table filter](/br/br-usage-restore.md#restore-multiple-tables-with-table-filter)
+- [Restore data on Amazon S3 using BR](/br/backup-storage-S3.md)
+- [Restore data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
+- [Restore data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
+- [Restore incremental data](/br/br-usage-restore.md#restore-incremental-data)
+- [Restore encrypted backup data](/br/br-usage-restore.md#restore-encrypted-backup-data)
+>>>>>>> b4600d877 (BR: refine BR docs (#8628))
