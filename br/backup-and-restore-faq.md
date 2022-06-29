@@ -1,12 +1,6 @@
 ---
-<<<<<<< HEAD
-title: Backup & Restore FAQ
-summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
-=======
 title: Backup & Restore FAQs
-summary: Learn about Frequently Asked Questions (FAQs) and the solutions of BR.
-aliases: ['/docs/dev/br/backup-and-restore-faq/']
->>>>>>> b4600d877 (BR: refine BR docs (#8628))
+summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
 ---
 
 # Backup & Restore FAQs

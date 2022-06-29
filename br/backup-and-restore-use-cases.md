@@ -82,12 +82,7 @@ Before running the [`br restore` command](/br/use-br-command-line-tool.md#br-com
 
 Run the `br backup` command to back up the single table data `--db batchmark --table order_line` to the specified path `local:///br_data` in the network disk.
 
-<<<<<<< HEAD
-1. Before executing the `br backup` command, ensure that no DDL is running on the TiDB cluster.
-2. Ensure that the storage device where the backup will be created has sufficient space.
-=======
 ### Backup prerequisites
->>>>>>> b4600d877 (BR: refine BR docs (#8628))
 
 - [Check before backup](#check-before-backup)
 - Configure a high-performance SSD hard disk host as the NFS server to store data, and all BR nodes, TiKV nodes, and TiFlash nodes as NFS clients. Mount the same path (for example, `/br_data`) to the NFS server for NFS clients to access the server.
