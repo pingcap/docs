@@ -82,9 +82,9 @@ Enable `Region Merge` by configuring the following parameters:
 {{< copyable "" >}}
 
 ```
->> pd-ctl config set max-merge-region-size 20
->> pd-ctl config set max-merge-region-keys 200000
->> pd-ctl config set merge-schedule-limit 8
+pd-ctl config set max-merge-region-size 20
+pd-ctl config set max-merge-region-keys 200000
+pd-ctl config set merge-schedule-limit 8
 ```
 
 Refer to [Region Merge](https://tikv.org/docs/4.0/tasks/configure/region-merge/) and the following three configuration parameters in the [PD configuration file](/pd-configuration-file.md#schedule) for more details:
