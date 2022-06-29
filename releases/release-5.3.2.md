@@ -10,6 +10,10 @@ TiDB version: 5.3.2
 
 ## Compatibility Changes
 
++ TiDB
+
+    - Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
+
 + PD
 
     - Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
@@ -52,7 +56,6 @@ TiDB version: 5.3.2
     - Fix a bug that TiDB may dispatch duplicate tasks to TiFlash [#32814](https://github.com/pingcap/tidb/issues/32814)
     - Fix the issue that the background HTTP service of TiDB might not exit successfully and makes the cluster in an abnormal state [#30571](https://github.com/pingcap/tidb/issues/30571)
     - Fix the panic issue caused by the `fatal error: concurrent map read and map write` error [#35340](https://github.com/pingcap/tidb/issues/35340)
-    - Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#29483](https://github.com/pingcap/tidb/issues/29483)
 
 + TiKV
 
