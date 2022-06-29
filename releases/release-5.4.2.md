@@ -15,11 +15,6 @@ TiDB version: 5.4.2
     <!--diagnosis-->
     - ```release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
 
-    <!--sql-infra-->
-    - ```release-note [#34722](https://github.com/pingcap/tidb/issues/34722)
-    - ```release-note [#34638](https://github.com/pingcap/tidb/pull/34638)
-    - ```release-note [#33965](https://github.com/pingcap/tidb/issues/33965)
-
     <!--planner-->
     - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
 
@@ -84,6 +79,10 @@ TiDB version: 5.4.2
 
     <!--transaction-->
     - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
+
+    <!--sql-infra-->
+    - Fix TiDB may not free the resources of the disconnected session correctly when a network connectivity event occurred. [#34722](https://github.com/pingcap/tidb/issues/34722)
+    - Fix querying CTE views may unexpectedly report `references invalid table`. [#33965](https://github.com/pingcap/tidb/issues/33965)
 
     (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
 
