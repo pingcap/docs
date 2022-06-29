@@ -84,7 +84,7 @@ In v5.4, the key new features or improvements are as follows:
 - Set the scope of `tidb_store_limit` from INSTANCE or GLOBAL to GLOBAL [#30756](https://github.com/pingcap/tidb/pull/30756)
 - Forbid converting the integer type column to the time type column when the column contains zero [#25728](https://github.com/pingcap/tidb/pull/25728)
 - Fix the issue that no error is reported for the `Inf` or `NAN` value when inserting floating-point values [#30148](https://github.com/pingcap/tidb/pull/30148)
-- Fix the issue that the `REPLACE` statement mistakenly modifies the ID values of other rows when the auto ID is out of range [#30301](https://github.com/pingcap/tidb/pull/30301)
+- Fix the issue that the `REPLACE` statement incorrectly changes other rows when the auto ID is out of range [#30301](https://github.com/pingcap/tidb/pull/30301)
 
 ## New features
 
