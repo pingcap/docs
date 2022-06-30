@@ -86,7 +86,7 @@ The recommended analysis process for slow queries is as follows.
 2. [Analyze system issues](/analyze-slow-queries.md#analyze-system-issues). According to the bottleneck point, combine the monitoring, logging and other information at that time to analyze the possible causes.
 3. [Analyze optimizer issues](/analyze-slow-queries.md#analyze-optimizer-issues). Analyze whether there is a better execution plan.
 
-## Schema Design
+## Optimize schema design
 
 If you still can't get better performance based on SQL performance tuning, you may need to check your Schema design and data read model to avoid transaction conflicts and hotspots. For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
@@ -111,4 +111,4 @@ In Key Visualizer, there are [four common heat map results](/dashboard/dashboard
 
 In both case of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
 
-For more SQL performance optimization, see [SQL Optimization](/faq/sql-faq.md#sql-optimization) in SQL Operations FAQ.
+For more SQL performance optimization, see [SQL Optimization](/faq/sql-faq.md#sql-optimization) in SQL FAQs.
