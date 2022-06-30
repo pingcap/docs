@@ -169,7 +169,7 @@ mysql> SELECT * FROM t1;
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -470,7 +470,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -570,7 +570,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -593,7 +593,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -810,7 +810,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -933,7 +933,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -987,7 +987,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1113,7 +1113,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1131,7 +1131,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1199,7 +1199,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1384,7 +1384,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1399,7 +1399,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1415,7 +1415,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1583,7 +1583,7 @@ explain select * from t where age=5;
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1613,7 +1613,7 @@ explain select * from t where age=5;
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1661,7 +1661,7 @@ SET tidb_query_log_max_len = 20
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1675,7 +1675,7 @@ SET tidb_query_log_max_len = 20
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1729,7 +1729,7 @@ SET tidb_query_log_max_len = 20
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1787,7 +1787,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -1809,7 +1809,7 @@ SET tidb_slow_log_threshold = 200;
 
 > **Note:**
 >
-> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
