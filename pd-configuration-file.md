@@ -155,14 +155,12 @@ Configuration items related to the log file
 ### `max-days`
 
 + The maximum number of days in which a log is kept
-+ Default value: `28`
-+ Minimum value: `1`
++ Default value: `0`
 
 ### `max-backups`
 
 + The maximum number of log files to keep
-+ Default value: `7`
-+ Minimum value: `1`
++ Default value: `0`
 
 ## `metric`
 
