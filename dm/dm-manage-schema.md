@@ -15,9 +15,9 @@ To deal with some special occasions, or to handle migration interruptions caused
 
 The internal table schema comes from the following sources:
 
-1. For full data migration (`task-mode=all`), the migration task goes through three stages: dump/load/sync, which means full export, full import, and incremental replication. In the dump stage, DM exports the table schema information along with the data and automatically creates the corresponding table in the downstream. In the sync stage, this table schema is used as the starting table scheme for incremental replication.
-2. In the sync stage, when DM handles DDL statements such as `ALTER TABLE`, it updates the internal table schema at the same time.
-3. If the task is an incremental migration (`task-mode=incremental`), in which the downstream has completed creating the table to be migrated, DM obtains the table schema information from the downstream database. This behavior varies with DM versions.
+- For full data migration (`task-mode=all`), the migration task goes through three stages: dump/load/sync, which means full export, full import, and incremental replication. In the dump stage, DM exports the table schema information along with the data and automatically creates the corresponding table in the downstream. In the sync stage, this table schema is used as the starting table scheme for incremental replication.
+- In the sync stage, when DM handles DDL statements such as `ALTER TABLE`, it updates the internal table schema at the same time.
+- If the task is an incremental migration (`task-mode=incremental`), in which the downstream has completed creating the table to be migrated, DM obtains the table schema information from the downstream database. This behavior varies with DM versions.
 
 For incremental replication, the schema maintenance is complicated. The whole data link contains the following table schemas, which might be the same or different:
 
@@ -28,7 +28,7 @@ For incremental replication, the schema maintenance is complicated. The whole da
 * The table schema currently maintained in DM (the schema tracker component), identified as `schema-I`.
 * The table schema in the downstream TiDB cluster, identified as `schema-D`.
 
-In most cases, the four table schemas above are the same.
+In most cases, the preceding four table schemas are consistent.
 
 When the upstream database performs a DDL operation to change the table schema, `schema-U` is changed. By applying the DDL operation to the internal schema tracker component and the downstream TiDB cluster, DM updates `schema-I` and `schema-D` in an orderly manner to keep them consistent with `schema-U`. Therefore, DM can then normally consume the binlog event corresponding to the `schema-B` table schema. That is, after the DDL operation is successfully migrated, `schema-U`, `schema-B`, `schema-I`, and `schema-D` are still consistent.
 
@@ -38,7 +38,7 @@ Note the following situations that might cause inconsistency:
 
 - When the downstream table has more columns than the upstream table, `schema-D` might be inconsistent with `schema-B` and `schema-I`. In the full data migration (`task-mode=all`), DM automatically handles inconsistency. In the incremental migration (`task-mode=incremental`), because the task is on a first start and there is no internal schema information yet, DM automatically reads the downstream schema (`schema-D`) and updates `schema-I` (this behavior varies with DM versions). After that, if DM uses `schema-I` to parse `schema-B`'s binlog, it will report `Column count doesn't match value count` error. For details, refer to [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md).
 
-The `binlog-schema` command can obtain, modify, and delete the `schema-I` table schema maintained in DM.
+You can run the `binlog-schema` command to obtain, modify, or delete the `schema-I` table schema maintained in DM.
 
 > **Note:**
 >
