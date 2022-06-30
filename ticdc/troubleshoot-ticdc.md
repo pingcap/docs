@@ -79,10 +79,10 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 
 In the output of the above command, `admin-job-type` shows the state of this replication task:
 
-* `0`: In progress, which means that the task is not stopped manually.
-* `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
-* `2`: Resumed. The replication task resumes from `checkpoint-ts`.
-* `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. The replication status is retained only for later queries.
+- `0`: In progress, which means that the task is not stopped manually.
+- `1`: Paused. When the task is paused, all replicated `processor`s exit. The configuration and the replication status of the task are retained, so you can resume the task from `checkpiont-ts`.
+- `2`: Resumed. The replication task resumes from `checkpoint-ts`.
+- `3`: Removed. When the task is removed, all replicated `processor`s are ended, and the configuration information of the replication task is cleared up. The replication status is retained only for later queries.
 
 ### How do I handle replication interruptions?
 
@@ -212,10 +212,10 @@ If the downstream is a special MySQL environment (a public cloud RDS or some MyS
     >
     > CST might be an abbreviation for the following four different time zones:
     >
-    > + Central Standard Time (USA) UT-6:00
-    > + Central Standard Time (Australia) UT+9:30
-    > + China Standard Time UT+8:00
-    > + Cuba Standard Time UT-4:00
+    > - Central Standard Time (USA) UT-6:00
+    > - Central Standard Time (Australia) UT+9:30
+    > - China Standard Time UT+8:00
+    > - Cuba Standard Time UT-4:00
     >
     > In China, CST usually stands for China Standard Time.
 
@@ -342,9 +342,9 @@ TiCDC provides partial support for large transactions (more than 5 GB in size). 
 
 If you encounter an error above, it is recommended to use BR to restore the incremental data of large transactions. The detailed operations are as follows:
 
-1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/use-br-command-line-tool.md#back-up-incremental-data).
+1. Record the `checkpoint-ts` of the changefeed that is terminated due to large transactions, use this TSO as the `--lastbackupts` of the BR incremental backup, and execute [incremental data backup](/br/br-usage-backup.md#back-up-incremental-data).
 2. After backing up the incremental data, you can find a log record similar to `["Full backup Failed summary : total backup ranges: 0, total success: 0, total failed: 0"] [BackupTS=421758868510212097]` in the BR log output. Record the `BackupTS` in this log.
-3. [Restore the incremental data](/br/use-br-command-line-tool.md#restore-incremental-data).
+3. [Restore the incremental data](/br/br-usage-restore.md#restore-incremental-data).
 4. Create a new changefeed and start the replication task from `BackupTS`.
 5. Delete the old changefeed.
 
