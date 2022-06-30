@@ -39,7 +39,7 @@ In addition to the information in the dashboard, there are also some SQL best pr
 
 ### Check the execution plan
 
-You can use [`EXPLAIN`](/explain-overview.md) to check the execution plan calculated by TiDB for a statement during compiling. In other words, TiDB considers hundreds or thousands of possible execution plans and determines that this execution plan consumes the least resource and executes the fastest.
+You can use [`EXPLAIN`](/explain-overview.md) to check the execution plan calculated by TiDB for a statement during compiling. In other words, TiDB estimates hundreds or thousands of possible execution plans and selects an optimal execution plan that consumes the least resource and executes the fastest.
 
 If the execution plan selected by TiDB is not optimal, you can use EXPLAIN or [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) to diagnose it.
 
@@ -49,28 +49,29 @@ After parsing the original query text by `parser` and basic validity verificatio
 
 Through these equivalence changes, the query can become easier to handle in the logical execution plan. After the equivalence changes, TiDB gets a query plan structure that is equivalent to the original query, and then gets a final execution plan based on the data distribution and the specific execution overhead of an operator. For more information, see [SQL Physical Optimization](/sql-physical-optimization.md).
 
-Also, TiDB can choose to enable execution plan caching to reduce the execution plan generation overhead when executing the `PREPARE` statement, as introduced in [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md).
+Also, TiDB can choose to enable execution plan caching to reduce the creation overhead of the execution plan when executing the `PREPARE` statement, as introduced in [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md).
 
 ### Optimize full table scan
 
 The most common reason for slow SQL queries is that the `SELECT` statements perform full table scan or use incorrect indexes. You can use EXPLAIN or EXPLAIN ANALYZE to view the execution plan of this query and locate the cause of the slow query. There are [three methods](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql) that you can use to optimize.
 
-- Use indexes to filter data
-- Use indexes to query data
-- Use primary keys to query data
+- Use secondary index
+- Use covering index
+- Use primary index
 
 ### DML best practices
 
 See [DML best practices](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#dml-best-practices).
 
-### DDL best practices for selecting primary keys
+### DDL best practices when selecting primary keys
 
 See [Guidelines to follow when selecting primary keys](https://docs.pingcap.com/tidb/stable/dev-guide-create-table#guidelines-to-follow-when-selecting-primary-key).
 
 ### Index best practices
 
 [Best practices for indexing](https://docs.pingcap.com/tidb/stable/dev-guide-index-best-practice) include best practices for creating indexes and using indexes.
-Among them, the speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices) in some scenarios.
+
+The speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices) in some scenarios.
 
 ### Transaction conflicts
 
@@ -78,25 +79,25 @@ For more information on how to locate and resolve transaction conflicts, see [Tr
 
 ### Use the Slow Log Memory Mapping Table
 
-You can query the contents of the slow query log by querying the [INFORMATION_SCHEMA.SLOW_QUERY](/identify-slow-queries.md#memory-mapping-in-slow-log) table, and find the structure in the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table. Using this table, you can perform queries using different fields to try to find potential problems.
+You can query the contents of the slow query log by querying the [INFORMATION_SCHEMA.SLOW_QUERY](/identify-slow-queries.md#memory-mapping-in-slow-log) table, and find the structure in the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table. Using this table, you can perform queries using different fields to find potential problems.
 
 The recommended analysis process for slow queries is as follows.
 
-1. [Identify the performance bottleneck of the query](/analyze-slow-queries.md#identify-the-performance-bottleneck-of-the-query). That is, identify the part of the query process that takes more time.
-2. [Analyze system issues](/analyze-slow-queries.md#analyze-system-issues). According to the bottleneck point, combine the monitoring, logging and other information at that time to analyze the possible causes.
+1. [Identify the performance bottleneck of the query](/analyze-slow-queries.md#identify-the-performance-bottleneck-of-the-query). That is, identify the part of the query process that takes long time.
+2. [Analyze system issues](/analyze-slow-queries.md#analyze-system-issues). According to the bottleneck point, combine the monitoring, logging and other information at that time to find the possible causes.
 3. [Analyze optimizer issues](/analyze-slow-queries.md#analyze-optimizer-issues). Analyze whether there is a better execution plan.
 
 ## Optimize schema design
 
-If you still can't get better performance based on SQL performance tuning, you may need to check your Schema design and data read model to avoid transaction conflicts and hotspots. For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+If you still can't get better performance based on SQL performance tuning, you may need to check your schema design and data read model to avoid transaction conflicts and hotspots. For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
 ### Hotspot issues
 
-Hotspot issues can be located and analyzed using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer). For specific troubleshooting steps, see [TiDB Hotspot Issues](troubleshoot-hot-spot-issues.md).
+You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer). For specific troubleshooting steps, see [TiDB Hotspot Issues](troubleshoot-hot-spot-issues.md).
 
 You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
 
-You can observe the following information in Key Visualizer. You need to understand ([basic concepts](/dashboard/dashboard-key-visualizer.md).
+You can observe the following information in Key Visualizer. You need to understand some [basic concepts](/dashboard/dashboard-key-visualizer.md).
 
 - A large heat map that shows the overall traffic over time.
 - The detailed information about a coordinate of the heat map.
@@ -111,4 +112,4 @@ In Key Visualizer, there are [four common heat map results](/dashboard/dashboard
 
 In both case of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
 
-For more SQL performance optimization, see [SQL Optimization](/faq/sql-faq.md#sql-optimization) in SQL FAQs.
+For more information about SQL performance optimization, see [SQL Optimization](/faq/sql-faq.md#sql-optimization) in SQL FAQs.
