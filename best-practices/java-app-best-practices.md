@@ -15,7 +15,7 @@ JavaアプリケーションでTiDBデータベースと対話する一般的な
 -   JDBC APIおよびJDBCドライバー：Javaアプリケーションは通常、標準の[JDBC（Javaデータベースコネクティビティ）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/)を使用してデータベースにアクセスします。 TiDBに接続するには、JDBCAPIを介してMySQLプロトコルを実装するJDBCドライバーを使用できます。 MySQL用のこのような一般的なJDBCドライバーには、 [MySQLコネクタ/J](https://github.com/mysql/mysql-connector-j)と[MariaDBコネクタ/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#about-mariadb-connectorj)が含まれます。
 -   データベース接続プール：要求されるたびに接続を作成するオーバーヘッドを削減するために、アプリケーションは通常、接続プールを使用して接続をキャッシュおよび再利用します。 JDBC [情報源](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は、接続プールAPIを定義します。必要に応じて、さまざまなオープンソース接続プールの実装から選択できます。
 -   データアクセスフレームワーク：アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
--   アプリケーションの実装：アプリケーションロジックは、データベースにどのコマンドを送信するかを制御します。一部のアプリケーションは、 [春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用して、トランザクションの開始ロジックとコミットロジックを管理します。
+-   アプリケーションの実装：アプリケーションロジックは、データベースにどのコマンドを送信するかを制御します。一部のアプリケーションは、トランザクションの開始ロジックとコミットロジックを管理するために[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用します。
 
 ![Java application components](/media/best-practices/java-practice-1.png)
 
@@ -128,7 +128,7 @@ JDBCは通常、実装関連の構成をJDBCURLパラメーターの形式で提
 バッチ書き込みの処理中に、 `rewriteBatchedStatements=true`を構成することをお勧めします。 `addBatch()`または`executeBatch()`を使用した後でも、JDBCはデフォルトでSQLを1つずつ送信します。次に例を示します。
 
 ```java
-pstmt = prepare(“insert into t (a) values(?)”);
+pstmt = prepare("insert into t (a) values(?)");
 pstmt.setInt(1, 10);
 pstmt.addBatch();
 pstmt.setInt(1, 11);
@@ -232,7 +232,7 @@ TiDB（MySQL）接続の構築は、TCP接続の構築に加えて、接続認�
 
 ### プローブ構成 {#probe-configuration}
 
-接続プールは、TiDBへの永続的な接続を維持します。 TiDBは、デフォルトでは（エラーが報告されない限り）クライアント接続をプロアクティブに閉じませんが、通常、クライアントとTiDBの間にLVSやHAProxyなどのネットワークプロキシがあります。通常、これらのプロキシは、一定期間アイドル状態になっている接続をプロアクティブにクリーンアップします。プロキシのアイドル構成に注意を払うことに加えて、接続プールは、接続を維持またはプローブする必要もあります。
+接続プールは、TiDBへの永続的な接続を維持します。 TiDBは、デフォルトでは（エラーが報告されない限り）クライアント接続をプロアクティブに閉じませんが、通常、クライアントとTiDBの間にLVSやHAProxyなどのネットワークプロキシがあります。通常、これらのプロキシは、一定期間アイドル状態になっている接続をプロアクティブにクリーンアップします（プロキシのアイドル構成によって制御されます）。プロキシのアイドル構成に注意を払うことに加えて、接続プールは、接続を維持またはプローブする必要もあります。
 
 Javaアプリケーションで次のエラーが頻繁に発生する場合：
 
@@ -271,7 +271,7 @@ MyBatis Mapperは、次の2つのパラメーターをサポートしていま�
 
 [動的SQL-foreach](http://www.mybatis.org/mybatis-3/dynamic-sql.html#foreach)
 
-複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`の形式への自動書き換えをサポートするために、前述のようにJDBCで`rewriteBatchedStatements=true`を構成することに加えて、MyBatisは動的SQLを使用してバッチ挿入を半自動で生成することもできます。例として、次のマッパーを取り上げます。
+複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`形式への自動書き換えをサポートするために、前述のようにJDBCで`rewriteBatchedStatements=true`を構成することに加えて、MyBatisは動的SQLを使用してバッチ挿入を半自動で生成することもできます。例として、次のマッパーを取り上げます。
 
 ```xml
 <insert id="insertTestBatch" parameterType="java.util.List" fetchSize="1">
@@ -374,4 +374,4 @@ Javaアプリケーションでフレームグラフを取得するのは面倒�
 
 このドキュメントでは、データベースと相互作用する一般的に使用されるJavaコンポーネントに基づいて、TiDBを使用してJavaアプリケーションを開発するための一般的な問題と解決策について説明します。 TiDBはMySQLプロトコルとの互換性が高いため、MySQLベースのJavaアプリケーションのベストプラクティスのほとんどはTiDBにも適用されます。
 
-[TiDBコミュニティのスラックチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)で参加し、TiDBを使用してJavaアプリケーションを開発する際の経験や問題について幅広いTiDBユーザーグループと共有してください。
+[TiDBコミュニティのSlackチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)で参加し、TiDBを使用してJavaアプリケーションを開発する際の経験や問題について幅広いTiDBユーザーグループと共有してください。

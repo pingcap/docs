@@ -1,0 +1,75 @@
+<!-- markdownlint-disable MD007 -->
+
+<!-- markdownlint-disable MD041 -->
+
+-   TiDB Cloudについて
+    -   [TiDB Cloudが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
+    -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
+    -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
+-   はじめに
+    -   [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
+-   クラスターの管理
+    -   クラスターを計画する
+        -   [クラスタ層を選択する](/tidb-cloud/select-cluster-tier.md)
+        -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
+    -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
+    -   TiDBクラスターに接続する
+        -   [SQLクライアントを介して接続する](/tidb-cloud/connect-to-tidb-cluster.md)
+        -   [SQLシェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
+    -   [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)
+    -   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
+    -   パフォーマンスの調整
+        -   [ステートメント分析](/tidb-cloud/tune-performance.md)
+        -   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
+    -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+    -   [TiDBクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
+-   データの移行
+    -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
+    -   データをTiDBに移行する
+        -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
+        -   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+        -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+        -   [AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
+        -   [AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
+    -   [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
+-   データのバックアップと復元
+    -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
+    -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
+    -   [戻す](/tidb-cloud/backup-and-restore.md#restore)
+-   監視と警告
+    -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
+    -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
+    -   サードパーティの監視統合
+        -   [Datadogの統合](/tidb-cloud/monitor-datadog-integration.md)
+        -   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+-   ユーザーアクセスの管理
+    -   [ログイン](/tidb-cloud/manage-user-access.md)
+    -   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
+    -   [ユーザーパスワードの管理](/tidb-cloud/manage-user-access.md#manage-user-passwords)
+    -   [ユーザープロファイルの管理](/tidb-cloud/manage-user-access.md#manage-user-profiles)
+    -   [組織とプロジェクトを表示する](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
+    -   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
+    -   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
+    -   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)
+    -   [組織メンバーを削除する](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
+    -   [プロジェクトメンバーを削除する](/tidb-cloud/manage-user-access.md#remove-a-project-member)
+    -   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+-   請求する
+    -   [ノードコスト](/tidb-cloud/tidb-cloud-billing.md)
+    -   [バックアップストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
+    -   [データ転送コスト](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
+    -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
+    -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+    -   [トライアルポイント](/tidb-cloud/tidb-cloud-billing.md#trial-points)
+    -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
+-   参照
+    -   [TiDBでSQLを探索する](/basic-sql-operations.md)
+    -   [サポート](/tidb-cloud/tidb-cloud-support.md)
+    -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
+-   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
+-   リリースノート
+    -   [2022年](/tidb-cloud/release-notes-2022.md)
+    -   [2021年](/tidb-cloud/release-notes-2021.md)
+    -   [2020](/tidb-cloud/release-notes-2020.md)

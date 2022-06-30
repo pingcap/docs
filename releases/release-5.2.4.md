@@ -31,10 +31,10 @@ TiDBバージョン：5.2.4
 
 -   TiKV
 
-    -   リーダーシップをCDCオブザーバーに移し、レイテンシーのジッターを減らします[＃12111](https://github.com/tikv/tikv/issues/12111)
+    -   リーダーシップをCDCオブザーバーに移し、レイテンシージッターを減らします[＃12111](https://github.com/tikv/tikv/issues/12111)
     -   ロックの解決ステップ[＃11993](https://github.com/tikv/tikv/issues/11993)を必要とするリージョンの数を減らすことにより、TiCDCの回復時間を短縮します。
     -   procファイルシステム（procfs）をv0.12.0に更新します[＃11702](https://github.com/tikv/tikv/issues/11702)
-    -   ラフトログへのGCを実行するときに書き込みバッチサイズを増やすことにより、ガベージコレクション（GC）プロセスを高速化します[＃11404](https://github.com/tikv/tikv/issues/11404)
+    -   GC to Raftログを実行するときに書き込みバッチサイズを増やすことにより、ガベージコレクション（GC）プロセスを高速化します[＃11404](https://github.com/tikv/tikv/issues/11404)
     -   検証プロセスを`Apply`スレッドプールから`Import`スレッドプールに移動して、SSTファイルの挿入速度を上げます[＃11239](https://github.com/tikv/tikv/issues/11239)
 
 -   ツール
@@ -121,7 +121,7 @@ TiDBバージョン：5.2.4
     -   マージされるターゲットリージョンが無効であるためにTiKVがパニックになり、ピアを予期せず破壊する問題を修正します[＃12232](https://github.com/tikv/tikv/issues/12232)
     -   ターゲットピアがリージョン[＃12048](https://github.com/tikv/tikv/issues/12048)のマージ時に初期化されずに破棄されたピアに置き換えられたときに発生するTiKVパニックの問題を修正します。
     -   スナップショットの適用が中止されたときに発生するTiKVパニックの問題を修正します[＃11618](https://github.com/tikv/tikv/issues/11618)
-    -   オペレーターの実行が失敗したときにTiKVが送信されるスナップショットの数を正しく計算できないバグを修正します[＃11341](https://github.com/tikv/tikv/issues/11341)
+    -   オペレーターの実行が失敗したときに送信されるスナップショットの数をTiKVが正しく計算できないバグを修正します[＃11341](https://github.com/tikv/tikv/issues/11341)
 
 -   PD
 

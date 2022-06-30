@@ -127,6 +127,14 @@ Flags:
     tiup bench tpcc --warehouses 4 prepare --output data --pprof :10111
     ```
 
+8.  データのクリーンアップ：
+
+    {{< copyable "" >}}
+
+    ```shell
+    tiup bench tpcc cleanup
+    ```
+
 ## TiUPを使用してTPC-Hテストを実行します {#run-tpc-h-test-using-tiup}
 
 TiUPベンチコンポーネントは、TPC-Hテストを実行するために次のコマンドとパラメータをサポートしています。

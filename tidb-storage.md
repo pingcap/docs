@@ -5,7 +5,7 @@ summary: Understand the storage layer of a TiDB database.
 
 # TiDBストレージ {#tidb-storage}
 
-このドキュメントでは、 [TiKV](https://github.com/tikv/tikv)のいくつかの設計アイデアと主要な概念を紹介します。
+このドキュメントでは、 [TiKV](https://github.com/tikv/tikv)のいくつかの設計アイデアと重要な概念を紹介します。
 
 ![storage-architecture](/media/tidb-storage-architecture.png)
 

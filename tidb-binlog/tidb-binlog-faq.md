@@ -202,7 +202,7 @@ kafka / fileのデータには`commit-ts`が含まれているため、チェッ
 
 一部の異常な状況では、Drainerノードがその状態を正しく維持できず、レプリケーションタスクに影響を及ぼしています。次に、 `update-drainer`コマンドを使用して状態を変更します。
 
-たとえば、Drainerプロセスが異常終了した場合（パニックが発生したときにプロセスを直接終了した場合、または誤って`kill -9`コマンドを使用してプロセスを強制終了した場合）、PDに保存されたDrainer状態情報は`online`のままです。ポンプノードが開始されると、終了したドレイナーノードへの通知に失敗し（ `notify drainer ...`エラー）、ポンプノードに障害が発生します。この状況では、 `update-drainer`コマンドを使用してDrainerの状態を`paused`に更新し、Pumpノードを再起動します。
+たとえば、Drainerプロセスが異常終了した場合（パニックが発生したときにプロセスを直接終了したり、誤って`kill -9`コマンドを使用してプロセスを強制終了したりした場合）、PDに保存されているDrainer状態情報は`online`のままです。ポンプノードが開始されると、終了したドレイナーノードへの通知に失敗し（ `notify drainer ...`エラー）、ポンプノードに障害が発生します。この状況では、 `update-drainer`コマンドを使用してDrainerの状態を`paused`に更新し、Pumpノードを再起動します。
 
 ## ポンプまたはドレイナーノードを閉じるにはどうすればよいですか？ {#how-can-i-close-a-pump-or-drainer-node}
 
@@ -237,7 +237,7 @@ Pumpプロセスが終了し、ノードが`paused`状態の場合、ノード�
 
 ## アップストリームデータベースでサポートされている一部のDDLステートメントがダウンストリームデータベースで実行されたときにエラーを引き起こす場合はどうすればよいですか？ {#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database}
 
-問題を解決するには、次の手順に従います。
+この問題を解決するには、次の手順に従います。
 
 1.  `drainer.log`を確認してください。 Drainerプロセスが終了する前に、最後に失敗したDDL操作を`exec failed`で検索します。
 

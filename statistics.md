@@ -119,7 +119,7 @@ v5.3.0より前では、TiDBはリザーバーサンプリング方式を使用�
 
 > **ノート：**
 >
-> 現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合、この行数を使用して、100,000行に対応するサンプリングレートを計算できます。この数値がわからない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)テーブルの`TABLE_KEYS`列を別の参照として使用して、サンプリングレートを計算できます。
+> 現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合、この行数を使用して、100,000行に対応するサンプリングレートを計算できます。この数値がわからない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリングレートを計算できます。
 >
 > 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼できます。ただし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)などの方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況を処理するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合に、 `TABLE_KEYS`を使用してサンプリングレートを計算できます。
 
@@ -484,13 +484,15 @@ mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
 
 `SHOW STATS_META`ステートメントを使用して、行の総数と更新された行の数を表示できます。
 
-`ShowLikeOrWhereOpt`の構文は次のとおりです。
-
 {{< copyable "" >}}
 
 ```sql
-SHOW STATS_META [ShowLikeOrWhere]
+SHOW STATS_META [ShowLikeOrWhere];
 ```
+
+`ShowLikeOrWhereOpt`の構文は次のとおりです。
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 現在、 `SHOW STATS_META`ステートメントは次の6列を返します。
 
@@ -511,15 +513,19 @@ SHOW STATS_META [ShowLikeOrWhere]
 
 `SHOW STATS_HEALTHY`ステートメントを使用して、テーブルの正常性状態を確認し、統計の精度を大まかに見積もることができます。 `modify_count` &gt; = `row_count`の場合、ヘルス状態は0です。 `modify_count` &lt; `row_count`の場合、ヘルス状態は（ `modify_count` / `row_count` ）*100です。
 
+構文は次のとおりです。
+
+{{< copyable "" >}}
+
+```sql
+SHOW STATS_HEALTHY [ShowLikeOrWhere];
+```
+
 `SHOW STATS_HEALTHY`の概要は次のとおりです。
 
 ![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
 
-`ShowLikeOrWhereOpt`部の概要は次のとおりです。
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
-
-現在、 `SHOW STATS_HEALTHY`ステートメントは次の4列を返します。
+現在、 `SHOW STATS_HEALTHY`ステートメントは次の4つの列を返します。
 
 | 列名               | 説明         |
 | :--------------- | :--------- |
@@ -648,7 +654,7 @@ DROP STATS TableName GLOBAL;
 デフォルトでは、列統計のサイズに応じて、TiDBは次のように統計を異なる方法でロードします。
 
 -   小さなスペース（count、distinctCount、nullCountなど）を消費する統計の場合、列データが更新されている限り、TiDBは対応する統計をメモリに自動的にロードしてSQL最適化段階で使用します。
--   大きなスペースを消費する統計（ヒストグラム、TopN、Count-Min Sketchなど）の場合、SQL実行のパフォーマンスを確保するために、TiDBはオンデマンドで統計を非同期にロードします。例としてヒストグラムを取り上げます。 TiDBは、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計のロードはSQL実行のパフォーマンスに影響を与えませんが、SQL最適化の統計が不完全になる可能性があります。
+-   大きなスペースを消費する統計（ヒストグラム、TopN、Count-Min Sketchなど）の場合、SQL実行のパフォーマンスを確保するために、TiDBはオンデマンドで統計を非同期にロードします。例としてヒストグラムを取り上げます。 TiDBは、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計ロードはSQL実行のパフォーマンスに影響を与えませんが、SQL最適化の統計が不完全になる可能性があります。
 
 v5.4.0以降、TiDBは同期ロード統計機能を導入しています。この機能により、SQLステートメントの実行時にTiDBが大規模な統計（ヒストグラム、TopN、Count-Min Sketch統計など）をメモリに同期的にロードできるようになり、SQL最適化の統計の完全性が向上します。
 

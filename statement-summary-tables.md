@@ -132,11 +132,11 @@ set global tidb_stmt_summary_history_size = 24;
 
 > **ノート：**
 >
-> `tidb_stmt_summary_history_size` 、および`tidb_stmt_summary_max_stmt_count`の構成項目は、メモリー使用量に影響し`tidb_stmt_summary_max_sql_length` 。必要に応じて、これらの構成を調整することをお勧めします。大きすぎる値を設定することはお勧めしません。
+> `tidb_stmt_summary_history_size` 、および`tidb_stmt_summary_max_stmt_count`の構成項目は、メモリー使用量に影響し`tidb_stmt_summary_max_sql_length` 。ニーズ、SQLサイズ、SQLカウント、およびマシン構成に基づいて、これらの構成を調整することをお勧めします。大きすぎる値を設定することはお勧めしません。 `tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`を使用してメモリ使用量を計算できます。
 
 ### ステートメントの要約に適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
 
-システムが一定期間実行された後、 `statement_summary`テーブルをチェックして、SQLエビクションが発生したかどうかを確認できます。例えば：
+システムが一定期間実行された後（システムの負荷に応じて）、 `statement_summary`のテーブルをチェックして、SQLエビクションが発生したかどうかを確認できます。例えば：
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;
@@ -182,7 +182,7 @@ select * from information_schema.statements_summary_evicted;
 
 ステートメントサマリーテーブルには、次の制限があります。
 
-上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメントサマリーテーブルがすべてメモリテーブルであり、データがストレージに永続化されるのではなく、メモリにキャッシュされるためです。
+上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメントサマリーテーブルがすべてメモリテーブルであり、データがストレージに保持されるのではなく、メモリにキャッシュされるためです。
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
 
@@ -200,7 +200,7 @@ SELECT avg_latency, exec_count, query_sample_text
     WHERE digest_text LIKE 'select * from employee%';
 ```
 
-`1ms`と`0.3ms`は、通常の`avg_latency`の範囲内と見なされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークでトラブルシューティングを行うことができます。
+`1ms`と`0.3ms`は、通常の`avg_latency`の範囲内と見なされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークでトラブルシューティングできます。
 
 {{< copyable "" >}}
 
@@ -324,7 +324,7 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_WRITE_KEYS` ：書き込まれたキーの最大数。
 -   `AVG_WRITE_SIZE` ：書き込まれたデータの平均量（バイト単位）。
 -   `MAX_WRITE_SIZE` ：書き込まれるデータの最大量（バイト単位）。
--   `AVG_PREWRITE_REGIONS` ：プリライトフェーズに関係するリージョンの平均数。
+-   `AVG_PREWRITE_REGIONS` ：プリライトフェーズに関与するリージョンの平均数。
 -   `MAX_PREWRITE_REGIONS` ：プリライトフェーズ中のリージョンの最大数。
 -   `AVG_TXN_RETRY` ：トランザクションの平均再試行回数。
 -   `MAX_TXN_RETRY` ：トランザクションの再試行の最大数。

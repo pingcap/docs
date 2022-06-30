@@ -10,23 +10,11 @@ summary: An overview of the usage of DROP INDEX for the TiDB database.
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram
-AlterTableDropIndexStmt ::=
-    'ALTER' IgnoreOptional 'TABLE' AlterTableDropIndexSpec
+AlterTableDropIndexStmt
+         ::= 'ALTER' 'IGNORE'? 'TABLE' AlterTableDropIndexSpec ( ',' AlterTableDropIndexSpec )*
 
-IgnoreOptional ::=
-    'IGNORE'?
-
-TableName ::=
-    Identifier ('.' Identifier)?
-
-AlterTableDropIndexSpec ::=
-    'DROP' ( KeyOrIndex | 'FOREIGN' 'KEY' ) IfExists Identifier
-
-KeyOrIndex ::=
-    'KEY'
-|   'INDEX'
-
-IfExists ::= ( 'IF' 'EXISTS' )?
+AlterTableDropIndexSpec
+         ::= 'DROP' ( 'FOREIGN'? 'KEY' | 'INDEX' ) ( 'IF' 'EXISTS' )? Identifier
 ```
 
 ## 例 {#examples}

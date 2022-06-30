@@ -219,7 +219,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
         > **ノート：**
         >
-        > このように操作された遊び場の場合、テスト展開が終了した後、TiUPは元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。データをストレージに永続化する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳しくは[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)をご覧ください。
+        > このように操作された遊び場の場合、テスト展開が終了した後、TiUPは元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが取得されます。データをストレージに永続化する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳しくは[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)をご覧ください。
 
 4.  TiDBにアクセスするための新しいセッションを開始します。
 
@@ -268,7 +268,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 ## 単一のマシンでの実稼働展開をシミュレートする {#simulate-production-deployment-on-a-single-machine}
 
--   シナリオ：完全なトポロジーを備えた最小のTiDBクラスタを体験し、単一のLinuxサーバーで本番デプロイメントの手順をシミュレートします。
+-   シナリオ：完全なトポロジを備えた最小のTiDBクラスタを体験し、単一のLinuxサーバーでの運用展開手順をシミュレートします。
 
 このセクションでは、TiUPで最小のトポロジのYAMLファイルを使用してTiDBクラスタをデプロイする方法について説明します。
 
@@ -344,7 +344,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     tiup update --self && tiup update cluster
     ```
 
-5.  rootユーザー権限を使用して、 `sshd`のサービスの接続制限を増やします。これは、TiUPが複数のマシンでの展開をシミュレートする必要があるためです。
+5.  rootユーザー特権を使用して、 `sshd`のサービスの接続制限を増やします。これは、TiUPが複数のマシンでの展開をシミュレートする必要があるためです。
 
     1.  `/etc/ssh/sshd_config`を変更し、 `MaxSessions`を`20`に設定します。
     2.  `sshd`のサービスを再起動します。

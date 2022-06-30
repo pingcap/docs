@@ -39,7 +39,7 @@ DebianLinuxやFedoraLinuxなどの他のLinuxOSバージョンは動作する可
 
 > **ノート：**
 >
-> [制御マシンにTiUPを展開します](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine)クラスターを運用および管理する必要があります。
+> [制御マシンにTiUPを展開します](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)クラスターを運用および管理する必要があります。
 
 ### ターゲットマシン {#target-machines}
 

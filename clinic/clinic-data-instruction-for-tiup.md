@@ -28,36 +28,33 @@ PingCAPは、データアクセスのアクセス許可を厳密に制御し、�
 
 ### TiDB診断データ {#tidb-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル                                                    | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :--------------------------------------------------------------- | :------------------------- |
-| ログ                             | `tidb.log`                                                       | `--include=log`            |
-| エラーログ                          | `tidb_stderr.log`                                                | `--include=log`            |
-| 遅いログ                           | `tidb_slow_query.log`                                            | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `tidb.toml`                                                      | `--include=config`         |
-| リアルタイム構成                       | `config.json`                                                    | `--include=config`         |
-| パフォーマンスデータ                     | `cpu_profile.proto` `mem_heap.proto` `goroutine.txt` `mutex.txt` | `--include=perf`           |
+| データ・タイプ                        | エクスポートされたファイル         | PingCAPクリニックによるデータ収集のパラメータ |
+| :----------------------------- | :-------------------- | :------------------------- |
+| ログ                             | `tidb.log`            | `--include=log`            |
+| エラーログ                          | `tidb_stderr.log`     | `--include=log`            |
+| 遅いログ                           | `tidb_slow_query.log` | `--include=log`            |
+| Configuration / コンフィグレーションファイル | `tidb.toml`           | `--include=config`         |
+| リアルタイム構成                       | `config.json`         | `--include=config`         |
 
 ### TiKV診断データ {#tikv-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル       | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :------------------ | :------------------------- |
-| ログ                             | `tikv.log`          | `--include=log`            |
-| エラーログ                          | `tikv_stderr.log`   | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `tikv.toml`         | `--include=config`         |
-| リアルタイム構成                       | `config.json`       | `--include=config`         |
-| パフォーマンスデータ                     | `cpu_profile.proto` | `--include=perf`           |
+| データ・タイプ                        | エクスポートされたファイル     | PingCAPクリニックによるデータ収集のパラメータ |
+| :----------------------------- | :---------------- | :------------------------- |
+| ログ                             | `tikv.log`        | `--include=log`            |
+| エラーログ                          | `tikv_stderr.log` | `--include=log`            |
+| Configuration / コンフィグレーションファイル | `tikv.toml`       | `--include=config`         |
+| リアルタイム構成                       | `config.json`     | `--include=config`         |
 
 ### PD診断データ {#pd-diagnostic-data}
 
-| データ・タイプ                                                                     | エクスポートされたファイル                                                    | PingCAPクリニックによるデータ収集のパラメータ |
-| :-------------------------------------------------------------------------- | :--------------------------------------------------------------- | :------------------------- |
-| ログ                                                                          | `pd.log`                                                         | `--include=log`            |
-| エラーログ                                                                       | `pd_stderr.log`                                                  | `--include=log`            |
-| Configuration / コンフィグレーションファイル                                              | `pd.toml`                                                        | `--include=config`         |
-| リアルタイム構成                                                                    | `config.json`                                                    | `--include=config`         |
-| コマンドの出力`tiup ctl pd -u http://${pd IP}:${PORT} store`                       | `store.json`                                                     | `--include=config`         |
-| コマンドの出力`tiup ctl pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json`                                            | `--include=config`         |
-| パフォーマンスデータ                                                                  | `cpu_profile.proto` `mem_heap.proto` `goroutine.txt` `mutex.txt` | `--include=perf`           |
+| データ・タイプ                                                                     | エクスポートされたファイル         | PingCAPクリニックによるデータ収集のパラメータ |
+| :-------------------------------------------------------------------------- | :-------------------- | :------------------------- |
+| ログ                                                                          | `pd.log`              | `--include=log`            |
+| エラーログ                                                                       | `pd_stderr.log`       | `--include=log`            |
+| Configuration / コンフィグレーションファイル                                              | `pd.toml`             | `--include=config`         |
+| リアルタイム構成                                                                    | `config.json`         | `--include=config`         |
+| コマンドの出力`tiup ctl pd -u http://${pd IP}:${PORT} store`                       | `store.json`          | `--include=config`         |
+| コマンドの出力`tiup ctl pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config`         |
 
 ### TiFlash診断データ {#tiflash-diagnostic-data}
 
@@ -67,17 +64,15 @@ PingCAPは、データアクセスのアクセス許可を厳密に制御し、�
 | エラーログ                          | `tiflash_stderr.log`                                              | `--include=log`            |
 | Configuration / コンフィグレーションファイル | `tiflash-learner.toml` `tiflash-preprocessed.toml` `tiflash.toml` | `--include=config`         |
 | リアルタイム構成                       | `config.json`                                                     | `--include=config`         |
-| パフォーマンスデータ                     | `cpu_profile.proto`                                               | `--include=perf`           |
 
 ### TiCDC診断データ {#ticdc-diagnostic-data}
 
-| データ・タイプ                        | エクスポートされたファイル                                                             | PingCAPクリニックによるデータ収集のパラメータ |
-| :----------------------------- | :------------------------------------------------------------------------ | :------------------------- |
-| ログ                             | `ticdc.log`                                                               | `--include=log`            |
-| エラーログ                          | `ticdc_stderr.log`                                                        | `--include=log`            |
-| Configuration / コンフィグレーションファイル | `ticdc.toml`                                                              | `--include=config`         |
-| パフォーマンスデータ                     | `cpu_profile.proto` `mem_heap.proto` `goroutine.txt` `mutex.txt`          | `--include=perf`           |
-| デバッグデータ                        | `info.txt` `status.txt` `changefeeds.txt` `captures.txt` `processors.txt` | `--include=debug`          |
+| データ・タイプ                        | エクスポートされたファイル                                                             | PingCAPクリニックによるデータ収集のパラメータ                    |
+| :----------------------------- | :------------------------------------------------------------------------ | :-------------------------------------------- |
+| ログ                             | `ticdc.log`                                                               | `--include=log`                               |
+| エラーログ                          | `ticdc_stderr.log`                                                        | `--include=log`                               |
+| Configuration / コンフィグレーションファイル | `ticdc.toml`                                                              | `--include=config`                            |
+| デバッグデータ                        | `info.txt` `status.txt` `changefeeds.txt` `captures.txt` `processors.txt` | `--include=debug` （Diagはデフォルトではこのデータ型を収集しません） |
 
 ### プロメテウスモニタリングデータ {#prometheus-monitoring-data}
 
@@ -88,10 +83,10 @@ PingCAPは、データアクセスのアクセス許可を厳密に制御し、�
 
 ### TiDBシステム変数 {#tidb-system-variables}
 
-| データ・タイプ                                                                    | エクスポートされたファイル          | PingCAPクリニックによるデータ収集のパラメータ |
-| :------------------------------------------------------------------------- | :--------------------- | :------------------------- |
-| TiDBシステム変数（Diagはデフォルトではこのデータ型を収集しません。このデータ型を収集する必要がある場合は、データベースの資格情報が必要です） | `mysql.tidb.csv`       | `--include=db_vars`        |
-|                                                                            | `global_variables.csv` | `--include=db_vars`        |
+| データ・タイプ    | エクスポートされたファイル          | PingCAPクリニックによるデータ収集のパラメータ                                                           |
+| :--------- | :--------------------- | :----------------------------------------------------------------------------------- |
+| TiDBシステム変数 | `mysql.tidb.csv`       | `--include=db_vars` （Diagはデフォルトではこのデータ型を収集しません。このデータ型を収集する必要がある場合は、データベースの資格情報が必要です） |
+|            | `global_variables.csv` | `--include=db_vars` （Diagはデフォルトではこのデータ型を収集しません）                                      |
 
 ### クラスタノードのシステム情報 {#system-information-of-the-cluster-node}
 

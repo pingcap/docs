@@ -125,7 +125,7 @@ TiDBスケジューリングプロセスは、I / O、ネットワーク、CPU�
 -   ノード容量の変動（常に喫水線の近く）およびPDの`store-limit`構成値の設定が大きすぎることによって引き起こされる冗長なスケジューリングの問題を減らします。これは、 `region-score-formula-version = v2`の構成項目を介して有効化された新しいスケジューリング計算式のセットを導入することによって実現されます。 [＃3269](https://github.com/tikv/pd/pull/3269)
 -   空のリージョンの数を減らすために`enable-cross-table-merge = true`を変更して、クロスリージョンマージ機能を有効にします。 [＃3129](https://github.com/tikv/pd/pull/3129)
 -   TiKVバックグラウンドでのデータ圧縮は、多くのI/Oリソースを占有します。システムは、圧縮率を自動的に調整して、バックグラウンドタスクとフォアグラウンド読み取りおよび書き込みの間のI/Oリソースの競合のバランスを取ります。 `rate-limiter-auto-tuned`の構成項目でこの機能を有効にすると、遅延ジッターが大幅に減少します。 [＃18011](https://github.com/pingcap/tidb/issues/18011)
--   TiKVがガベージコレクション（GC）とデータ圧縮を実行する場合、パーティションはCPUとI/Oリソースを占有します。これら2つのタスクの実行中に、重複するデータが存在します。 I / Oの使用量を減らすために、GC圧縮フィルター機能はこれら2つのタスクを1つに結合し、同じタスクで実行します。この機能はまだ実験的段階であり、 `gc.enable-compaction-filter = ture`を介して有効にすることができます。 [＃18009](https://github.com/pingcap/tidb/issues/18009)
+-   TiKVがガベージコレクション（GC）とデータ圧縮を実行する場合、パーティションはCPUとI/Oリソースを占有します。これら2つのタスクの実行中に、重複するデータが存在します。 I / Oの使用量を減らすために、GC Compaction Filter機能は、これら2つのタスクを1つに結合し、同じタスクで実行します。この機能はまだ実験的段階であり、 `gc.enable-compaction-filter = ture`を介して有効にすることができます。 [＃18009](https://github.com/pingcap/tidb/issues/18009)
 -   TiFlashがデータを圧縮またはソートするとき、それは多くのI/Oリソースを占有します。システムは、圧縮とデータの並べ替えによるI / Oリソースの使用を制限することにより、リソースの競合を軽減します。この機能はまだ実験的段階であり、 `bg_task_io_rate_limit`を介して有効にすることができます。
 
 関連する問題： [＃18005](https://github.com/pingcap/tidb/issues/18005)
@@ -158,8 +158,8 @@ TiDBスケジューリングプロセスは、I / O、ネットワーク、CPU�
 
 ## バックアップと復元 {#backup-and-restore}
 
--   Backup＆Restoreツール（BR）は、AWSS3およびGoogleCloudGCSへのデータのバックアップをサポートしています。 （ [ユーザードキュメント](/br/use-br-command-line-tool.md#back-up-data-to-amazon-s3-backend) ）
--   Backup＆Restoreツール（BR）は、AWSS3およびGoogleCloudGCSからTiDBへのデータの復元をサポートしています。 （ [ユーザードキュメント](/br/use-br-command-line-tool.md#restore-data-from-amazon-s3-backend) ）
+-   Backup＆Restoreツール（BR）は、AWSS3およびGoogleCloudGCSへのデータのバックアップをサポートしています。 （ [ユーザードキュメント](/br/backup-storage-S3.md) ）
+-   Backup＆Restoreツール（BR）は、AWSS3およびGoogleCloudGCSからTiDBへのデータの復元をサポートしています。 （ [ユーザードキュメント](/br/backup-storage-S3.md) ）
 -   関連する問題： [＃89](https://github.com/pingcap/br/issues/89)
 
 ## データのインポートとエクスポート {#data-import-and-export}

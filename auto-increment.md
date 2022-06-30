@@ -7,6 +7,10 @@ summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
 
 このドキュメントでは、 `AUTO_INCREMENT`列の属性を紹介します。これには、その概念、実装の原則、自動インクリメント関連の機能、および制限が含まれます。
 
+> **ノート：**
+>
+> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
 ## 概念 {#concept}
 
 `AUTO_INCREMENT`は、デフォルトの列値を自動的に入力するために使用される列属性です。 `INSERT`ステートメントで`AUTO_INCREMENT`列の値が指定されていない場合、システムはこの列に値を自動的に割り当てます。

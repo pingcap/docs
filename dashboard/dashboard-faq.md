@@ -128,6 +128,19 @@ TiDB Operatorドキュメントの[継続的なプロファイリングを有効
 
 </details>
 
+<details><summary>クラスターはTiUPPlaygroundの使用を開始しました</summary>
+
+クラスタを起動すると、TiUP Playground（&gt; = v1.8.0）が自動的にNgMonitoringコンポーネントを起動します。 TiUP Playgroundを最新バージョンに更新するには、次のコマンドを実行します。
+
+{{< copyable "" >}}
+
+```shell
+tiup update --self
+tiup update playground
+```
+
+</details>
+
 ### <code>unknown field</code>エラーが[<strong>低速クエリ]</strong>ページに表示されます {#an-code-unknown-field-code-error-is-shown-on-the-strong-slow-queries-strong-page}
 
 クラスタのアップグレード後に[**低速クエリ**]ページに`unknown field`のエラーが表示される場合、エラーは、TiDBダッシュボードサーバーフィールド（更新される可能性があります）とユーザー設定フィールド（ブラウザーキャッシュにある）の違いによって引き起こされる互換性の問題に関連しています。 。この問題は修正されました。クラスタがv5.0.3またはv4.0.14より前の場合は、次の手順を実行してブラウザのキャッシュをクリアします。

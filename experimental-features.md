@@ -45,7 +45,7 @@ summary: Learn the experimental features of TiDB.
 
 ## 保管所 {#storage}
 
--   [タイタンを無効にする](/storage-engine/titan-configuration.md#disable-titan-experimental) （v4.0で導入）
+-   [Titanを無効にする](/storage-engine/titan-configuration.md#disable-titan-experimental) （v4.0で導入）
 -   [タイタンレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental) （v4.0で導入）
 -   TiFlashは、ストレージエンジンの新しいデータを複数のハードドライブに分散して、I/O圧力を共有することをサポートしています。 （v4.0で導入）
 -   分割領域はバケットに分割されます。 [バケットは同時クエリの単位として使用されます](/tune-region-performance.md#use-bucket-to-increase-concurrency)スキャンの同時実行性を向上させます。 （v6.1.0で導入）
@@ -53,7 +53,7 @@ summary: Learn the experimental features of TiDB.
 
 ## バックアップと復元 {#backup-and-restoration}
 
--   [RawKVをバックアップする](/br/use-br-command-line-tool.md#back-up-raw-kv-experimental-feature) （v3.1で導入）
+-   [RawKVのバックアップと復元](/br/rawkv-backup-and-restore.md) （v3.1で導入）
 
 ## データ移行 {#data-migration}
 

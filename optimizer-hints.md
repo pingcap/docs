@@ -91,7 +91,7 @@ SELECT /*+ QB_NAME(QB1) */ * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 {{< copyable "" >}}
 
 ```sql
-select /*+ MERGE_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ MERGE_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
 > **ノート：**
@@ -105,7 +105,7 @@ select /*+ MERGE_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 {{< copyable "" >}}
 
 ```sql
-select /*+ INL_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ INL_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
 `INL_JOIN()`で指定されたパラメーターは、クエリプランを作成するときの内部テーブルの候補テーブルです。たとえば、 `INL_JOIN(t1)`は、TiDBがクエリプランを作成するための内部テーブルとして`t1`の使用のみを考慮することを意味します。候補テーブルにエイリアスがある場合は、 `INL_JOIN()`のパラメータとしてエイリアスを使用する必要があります。エイリアスがない場合は、テーブルの元の名前をパラメータとして使用します。たとえば、 `select /*+ INL_JOIN(t1) */ * from t t1, t t2 where t1.a = t2.b;`クエリでは、 `INL_JOIN()`のパラメータとして`t`ではなく`t`テーブルのエイリアス`t1`または`t2`を使用する必要があります。
@@ -125,7 +125,7 @@ select /*+ INL_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 {{< copyable "" >}}
 
 ```sql
-select /*+ HASH_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
+select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 ```
 
 > **ノート：**
@@ -139,7 +139,7 @@ select /*+ HASH_JOIN(t1, t2) */ * from t1，t2 where t1.id = t2.id;
 {{< copyable "" >}}
 
 ```sql
-select /*+ HASH_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
+select /*+ HASH_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
 ### STREAM_AGG（） {#stream-agg}
@@ -149,7 +149,7 @@ select /*+ HASH_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
 {{< copyable "" >}}
 
 ```sql
-select /*+ STREAM_AGG() */ count(*) from t1，t2 where t1.a > 10 group by t1.id;
+select /*+ STREAM_AGG() */ count(*) from t1, t2 where t1.a > 10 group by t1.id;
 ```
 
 ### USE_INDEX（t1_name、idx1_name [、idx2_name ...]） {#use-index-t1-name-idx1-name-idx2-name}
@@ -348,7 +348,7 @@ select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.
 
 ### MEMORY_QUOTA（N） {#memory-quota-n}
 
-`MEMORY_QUOTA(N)`のヒントでは、ステートメントで使用できるメモリの量に制限`N` （MBまたはGB単位のしきい値）が設定されます。ステートメントのメモリ使用量がこの制限を超えると、TiDBはステートメントの制限超過動作に基づいてログメッセージを生成するか、単に終了します。
+`MEMORY_QUOTA(N)`のヒントでは、ステートメントで使用できるメモリの量に制限`N` （MBまたはGB単位のしきい値）が設定されます。ステートメントのメモリ使用量がこの制限を超えると、TiDBはステートメントの制限を超えた動作に基づいてログメッセージを生成するか、単に終了します。
 
 次のヒントで、 `MEMORY_QUOTA(1024 MB)`は、メモリ使用量が1024MBに制限されていることを意味します。
 

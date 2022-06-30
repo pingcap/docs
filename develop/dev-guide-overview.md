@@ -1,6 +1,7 @@
 ---
 title: Developer Overview
 summary: Introduce the overview of the developer guide.
+aliases: ['/appdev/dev/app-dev-overview']
 ---
 
 # 開発者ガイドの概要 {#developer-guide-overview}

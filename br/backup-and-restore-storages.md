@@ -5,7 +5,7 @@ summary: Describes the storage URL format used in BR, TiDB Lightning, and Dumpli
 
 # 外部ストレージ {#external-storages}
 
-Backup＆Restore（BR）、TiDB Lighting、およびDumplingは、ローカルファイルシステムとAmazonS3でのデータの読み取りと書き込みをサポートします。 BRは、Google Cloud Storage（GCS）および[Azure Blob Storage（Azblob）](/br/backup-and-restore-azblob.md)でのデータの読み取りと書き込みもサポートしています。これらは、BRに渡される`--storage`パラメーター、TiDB Lightningに渡される`-d`パラメーター、およびDumplingに渡される`--output` （ `-o` ）パラメーターのURLスキームによって区別されます。
+Backup＆Restore（BR）、TiDB Lightning、およびDumplingは、ローカルファイルシステムおよびAmazonS3でのデータの読み取りと書き込みをサポートします。 BRは、 [Google Cloud Storage（GCS）](/br/backup-storage-gcs.md)と[Azure Blob Storage（Azblob）](/br/backup-storage-azblob.md)のデータの読み取りと書き込みもサポートしています。これらは、BRに渡される`--storage`パラメーター、TiDB Lightningに渡される`-d`パラメーター、およびDumplingに渡される`--output` （ `-o` ）パラメーターのURLスキームによって区別されます。
 
 ## スキーム {#schemes}
 
@@ -77,7 +77,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
 | `region`                  | Amazon S3のサービスリージョン（デフォルトは`us-east-1` ）                    |
 | `use-accelerate-endpoint` | Amazon S3でアクセラレーションエンドポイントを使用するかどうか（デフォルトは`false` ）        |
 | `endpoint`                | S3互換サービスのカスタムエンドポイントのURL（たとえば、 `https://s3.example.com/` ） |
-| `force-path-style`        | 仮想ホストスタイルアクセスではなく、パススタイルアクセスを使用します（デフォルトは`false` ）         |
+| `force-path-style`        | 仮想ホストスタイルアクセスではなく、パススタイルアクセスを使用します（デフォルトは`true` ）          |
 | `storage-class`           | アップロードされたオブジェクトのストレージクラス（ `STANDARD_IA` `STANDARD`         |
 | `sse`                     | アップロードの暗号化に使用されるサーバー側の暗号化アルゴリズム（空、 `AES256`または`aws:kms` ）  |
 | `sse-kms-key-id`          | `sse`が`aws:kms`に設定されている場合、KMSIDを指定します                      |
@@ -85,7 +85,9 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
 
 > **ノート：**
 >
-> アクセスキーとシークレットアクセスキーはプレーンテキストで記録されるため、ストレージURLに直接渡すことはお勧めしません。移行ツールは、次の順序で環境からこれらのキーを推測しようとします。
+> アクセスキーとシークレットアクセスキーはプレーンテキストで記録されるため、ストレージURLに直接渡すことはお勧めしません。
+
+アクセスキーとシークレットアクセスキーが指定されていない場合、移行ツールは次の順序で環境からこれらのキーを推測しようとします。
 
 1.  `$AWS_ACCESS_KEY_ID`および`$AWS_SECRET_ACCESS_KEY`の環境変数
 2.  `$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`の環境変数
@@ -119,15 +121,13 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
 TiKVとBRが同じストレージアカウントを使用することを保証するために、BRは`account-name`の値を決定します。つまり、デフォルトでは`send-credentials-to-tikv = true`が設定されています。 BRは、次の順序で環境からこれらのキーを推測します。
 
 1.  `account-name`**と**`account-key`の両方が指定されている場合、このパラメーターで指定されたキーが使用されます。
-2.  `account-key`が指定されていない場合、BRはBRのノード上の環境変数から関連する資格情報を読み取ろうとします。
-    -   BRは、最初に`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`を読み取り`$AZURE_CLIENT_SECRET` 。同時に、BRを使用すると、TiKVは上記の3つの環境変数をそれぞれのノードから読み取り、Azure AD（Azure Active Directory）を使用してアクセスできます。
-        -   `$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`は、 `$AZURE_CLIENT_SECRET` AzureアプリケーションのアプリケーションID `client_id` 、テナントID `tenant_id` 、およびクライアントパスワード`client_secret`を参照します。
-        -   オペレーティングシステムが`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`を構成しているかどうかを確認する方法、またはこれらの変数をパラメーターとして構成する必要がある場合は、 `$AZURE_CLIENT_SECRET`を参照して[環境変数をパラメーターとして構成する](/br/backup-and-restore-azblob.md#configure-environment-variables-as-parameters) 。
+2.  `account-key`が指定されていない場合、BRはBRのノード上の環境変数から関連する資格情報を読み取ろうとします。 BRは最初に`$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`を読み取り`$AZURE_CLIENT_SECRET` 。同時に、BRを使用すると、TiKVはこれらの3つの環境変数をそれぞれのノードから読み取り、Azure AD（Azure Active Directory）を使用して変数にアクセスできます。
 3.  上記の3つの環境変数がBRノードで構成されていない場合、BRはアクセスキーを使用して`$AZURE_STORAGE_KEY`を読み取ろうとします。
 
 > **ノート：**
 >
-> Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true` （デフォルトで設定）を設定する必要があります。そうしないと、バックアップタスクが失敗します。
+> -   Azure Blob Storageを外部ストレージとして使用する場合は、 `send-credentials-to-tikv = true` （デフォルトで設定）を設定する必要があります。そうしないと、バックアップタスクが失敗します。
+> -   `$AZURE_CLIENT_ID` 、および`$AZURE_TENANT_ID`は、 `$AZURE_CLIENT_SECRET` AzureアプリケーションのアプリケーションID `client_id` 、テナントID `tenant_id` 、およびクライアントパスワード`client_secret`を参照します。 3つの環境変数の存在を確認する方法、または環境変数をパラメーターとして構成する方法の詳細については、 [環境変数を構成する](/br/backup-storage-azblob.md#configure-environment-variables)を参照してください。
 
 ## コマンドラインパラメータ {#command-line-parameters}
 
@@ -149,10 +149,10 @@ URLパラメーターとコマンドラインパラメーターを同時に指�
 | :-------------------- | :------------------------------------------------------------------- |
 | `--s3.region`         | AmazonS3のサービスリージョン。デフォルトは`us-east-1`です。                              |
 | `--s3.endpoint`       | S3互換サービスのカスタムエンドポイントのURL。たとえば、 `https://s3.example.com/` 。           |
-| `--s3.storage-class`  | アップロードオブジェクトのストレージクラス。たとえば、 `STANDARD`と`STANDARD_IA` 。               |
+| `--s3.storage-class`  | アップロードオブジェクトのストレージクラス。たとえば、 `STANDARD`または`STANDARD_IA` 。             |
 | `--s3.sse`            | アップロードの暗号化に使用されるサーバー側の暗号化アルゴリズム。値のオプションは空で、 `AES256`と`aws:kms`です。    |
 | `--s3.sse-kms-key-id` | `--s3.sse`が`aws:kms`として設定されている場合、このパラメータはKMSIDを指定するために使用されます。        |
-| `--s3.acl`            | アップロードオブジェクトの固定ACL。たとえば、 `private`と`authenticated-read` 。            |
+| `--s3.acl`            | アップロードオブジェクトの固定ACL。たとえば、 `private`または`authenticated-read` 。          |
 | `--s3.provider`       | S3互換サービスのタイプ。サポートされている`other`は、 `aws` 、 `netease` `ceph` `alibaba` 。 |
 
 AWS S3以外のクラウドストレージにデータをエクスポートするには、クラウドプロバイダーと`virtual-hosted style`を使用するかどうかを指定します。次の例では、データがAlibabaCloudOSSストレージにエクスポートされます。
@@ -194,11 +194,11 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
 
 ### GCSコマンドラインパラメータ {#gcs-command-line-parameters}
 
-| コマンドラインパラメータ             | 説明                                                     |
-| :----------------------- | :----------------------------------------------------- |
-| `--gcs.credentials-file` | ツールノード上のJSON形式のクレデンシャルのパス。                             |
-| `--gcs.storage-class`    | `STANDARD`や`COLDLINE`などのアップロードオブジェクトのストレージタイプ。         |
-| `--gcs.predefined-acl`   | `private`や`project-private`などのアップロードオブジェクトの事前定義されたACL。 |
+| コマンドラインパラメータ             | 説明                                                            |
+| :----------------------- | :------------------------------------------------------------ |
+| `--gcs.credentials-file` | ツールノード上のJSON形式のクレデンシャルのパス                                     |
+| `--gcs.storage-class`    | アップロードオブジェクトのストレージタイプ（たとえば、 `STANDARD`または`COLDLINE` ）         |
+| `--gcs.predefined-acl`   | アップロードオブジェクトの事前定義されたACL（たとえば、 `private`または`project-private` ） |
 
 ### Azblobコマンドラインパラメーター {#azblob-command-line-parameters}
 

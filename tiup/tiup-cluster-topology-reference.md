@@ -24,7 +24,7 @@ TiUPを使用したTiDB展開のトポロジ構成ファイルには、次のセ
 -   [cdc_servers](#cdc_servers) ：TiCDCインスタンスの構成。この構成は、TiCDCコンポーネントが展開されるマシンを指定します。
 -   [tispark_masters](#tispark_masters) ：TiSparkマスターインスタンスの構成。この構成は、TiSparkマスターコンポーネントが展開されるマシンを指定します。 TiSparkマスターの1つのノードのみをデプロイできます。
 -   [tispark_workers](#tispark_workers) ：TiSparkワーカーインスタンスの構成。この構成は、TiSparkワーカーコンポーネントが展開されるマシンを指定します。
--   [Monitoring_servers](#monitoring_servers) ：PrometheusとNGMonitoringがデプロイされているマシンを指定します。 TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+-   [Monitoring_servers](#monitoring_servers) ：PrometheusとNGMonitoringがデプロイされるマシンを指定します。 TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 -   [grafana_servers](#grafana_servers) ：Grafanaインスタンスの構成。この構成は、Grafanaがデプロイされるマシンを指定します。
 -   [alertmanager_servers](#alertmanager_servers) ：Alertmanagerインスタンスの構成。この構成は、Alertmanagerがデプロイされているマシンを指定します。
 
@@ -428,7 +428,7 @@ pump_servers:
 
 `drainer_servers`は、TiDBBinlogのDrainerサービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。 `drainer_servers`は配列です。各配列要素には、次のフィールドが含まれています。
 
--   `host` ：Drainerサービスが展開されるマシンを指定します。フィールド値はIPアドレスであり、必須です。
+-   `host` ：Drainerサービスがデプロイされるマシンを指定します。フィールド値はIPアドレスであり、必須です。
 
 -   `ssh_port` ：操作のためにターゲットマシンに接続するSSHポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`つが使用されます。
 
@@ -752,7 +752,7 @@ grafana_servers:
 
 `alertmanager_servers`は、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成も指定します。 `alertmanager_servers`は配列です。各配列要素には、次のフィールドが含まれています。
 
--   `host` ：Alertmanagerサービスがデプロイされているマシンを指定します。フィールド値はIPアドレスであり、必須です。
+-   `host` ：Alertmanagerサービスがデプロイされるマシンを指定します。フィールド値はIPアドレスであり、必須です。
 
 -   `ssh_port` ：操作のためにターゲットマシンに接続するSSHポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`つが使用されます。
 

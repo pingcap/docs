@@ -130,7 +130,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
         -   `IS NOT`関数： `IS`
         -   文字列`NOT REGEXP()` ： `REGEXP()`
         -   数学`LEAST(int/real)` ： `GREATEST(int/real)`
-        -   `DAYOFYEAR()` `LAST_DAY()` `MONTHNAME()` `DAYOFNAME()` `DAYOFMONTH()` `DAYOFWEEK()`
+        -   `DAYOFYEAR()` `LAST_DAY()` `MONTHNAME()` `DAYNAME()` `DAYOFMONTH()` `DAYOFWEEK()`
         -   演算子：反左外側半結合、左外側半結合
 
         [ユーザードキュメント](/tiflash/use-tiflash.md#supported-push-down-calculations)
@@ -433,7 +433,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
         -   HTTPAPI処理の同期[＃1710](https://github.com/pingcap/tiflow/issues/1710)
         -   チェンジフィードを再開するための指数バックオフメカニズムを追加する[＃3329](https://github.com/pingcap/tiflow/issues/3329)
         -   MySQLシンクのデフォルトの分離レベルを読み取りコミットに設定して、 [＃3589](https://github.com/pingcap/tiflow/issues/3589)のデッドロックを減らします。
-        -   作成時にチェンジフィードパラメータを検証し、エラーメッセージを調整します[＃1716](https://github.com/pingcap/tiflow/issues/1716) [＃1718](https://github.com/pingcap/tiflow/issues/1718) [＃1719](https://github.com/pingcap/tiflow/issues/1719) [＃4472](https://github.com/pingcap/tiflow/issues/4472)
+        -   作成時にチェンジフィードパラメータを検証し、エラーメッセージを修正します[＃1716](https://github.com/pingcap/tiflow/issues/1716) [＃1718](https://github.com/pingcap/tiflow/issues/1718) [＃1719](https://github.com/pingcap/tiflow/issues/1719) [＃4472](https://github.com/pingcap/tiflow/issues/4472)
         -   Kafkaプロデューサーの構成パラメーターを公開して、 [＃4385](https://github.com/pingcap/tiflow/issues/4385)で構成可能にします。
 
     -   TiDBデータ移行（DM）
@@ -485,7 +485,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   `timdiff`関数の入力にミリ秒[＃31680](https://github.com/pingcap/tidb/issues/31680)が含まれている場合に返される誤った結果を修正
     -   パーティションを明示的に読み取り、IndexJoinプランを使用するときの誤った結果を修正する[＃32007](https://github.com/pingcap/tidb/issues/32007)
     -   列タイプを同時に変更すると、列の名前変更が失敗するバグを修正します[＃31075](https://github.com/pingcap/tidb/issues/31075)
-    -   TiFlashプランの正味コストを計算する式がTiKVプランと一致しないというバグを修正します[＃30103](https://github.com/pingcap/tidb/issues/30103)
+    -   TiFlashプランの正味コストを計算するための式がTiKVプランと一致しないというバグを修正します[＃30103](https://github.com/pingcap/tidb/issues/30103)
     -   `KILL TIDB`がアイドル状態の接続ですぐに有効にならないバグを修正します[＃24031](https://github.com/pingcap/tidb/issues/24031)
     -   生成された列を含むテーブルをクエリするときに発生する可能性のある誤った結果を修正する[＃33038](https://github.com/pingcap/tidb/issues/33038)
     -   `left join`を使用して複数のテーブルのデータを削除した誤った結果を[＃31321](https://github.com/pingcap/tidb/issues/31321)

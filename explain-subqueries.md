@@ -102,7 +102,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
 
 ## 半結合（相関サブクエリ） {#semi-join-correlated-subquery}
 
-前の2つの例では、サブクエリ内のデータが（ `HashAgg`を介して）一意になるか、一意であることが保証された後、TiDBは`INNER JOIN`操作を実行できます。両方の結合は、インデックス結合を使用して実行されます。
+前の2つの例では、サブクエリ内のデータが（ `StreamAgg`を介して）一意になるか、一意であることが保証された後、TiDBは`INNER JOIN`操作を実行できます。両方の結合は、インデックス結合を使用して実行されます。
 
 この例では、TiDBは別の実行プランを選択します。
 

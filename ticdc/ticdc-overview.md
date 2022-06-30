@@ -91,7 +91,7 @@ v4.0.8以降、TiCDCは、タスク構成を変更することにより**、有�
 -   RawKVのみを使用するTiKVクラスタ。
 -   TiDBの[DDL操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームTiDBが`SEQUENCE`を使用する場合、TiCDCはアップストリームで実行される`SEQUENCE`のDDL操作/機能を無視します。ただし、 `SEQUENCE`の関数を使用したDML操作は正しく複製できます。
 
-TiCDCは、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳しくは[FAQ：TiCDCは大規模なトランザクションの複製をサポートしていますか？リスクはありますか？](/ticdc/troubleshoot-ticdc.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)をご覧ください。
+TiCDCは、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳しくは[FAQ：TiCDCは大規模なトランザクションの複製をサポートしていますか？リスクはありますか？](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)をご覧ください。
 
 > **ノート：**
 >
@@ -148,6 +148,7 @@ v5.3.0以降、TiCDCは[グローバル一時テーブル](/temporary-tables.md#
 
 アップストリームクラスタにグローバル一時テーブルが含まれている場合、ダウンストリームTiDBクラスタはv5.3.0以降のバージョンであると予想されます。そうしないと、レプリケーションプロセス中にエラーが発生します。
 
-## TiCDCのトラブルシューティング {#troubleshoot-ticdc}
+## TiCDCのFAQとトラブルシューティング {#ticdc-faqs-and-troubleshooting}
 
-詳しくは[TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)をご覧ください。
+-   TiCDCのFAQについては、 [TiCDCのFAQ](/ticdc/ticdc-faq.md)を参照してください。
+-   TiCDCのトラブルシューティング方法については、 [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)を参照してください。

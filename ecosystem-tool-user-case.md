@@ -9,7 +9,7 @@ summary: Learn the common use cases of TiDB tools and how to choose the tools.
 
 ## 物理マシンまたは仮想マシンにデプロイを導入して運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
-物理マシンまたは仮想マシンにTiDBを展開して操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、TiUPを使用してTiDB、PD、TiKVなどのTiDBコンポーネントを管理できます。
+物理マシンまたは仮想マシンにTiDBを展開して運用する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、TiUPを使用してTiDB、PD、TiKVなどのTiDBコンポーネントを管理できます。
 
 ## KubernetesでTiDBをデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
 
@@ -31,9 +31,9 @@ MySQL / Auroraからフルデータとインクリメンタルデータの両方
 
 ## TiDBクラスタのバックアップと復元 {#back-up-and-restore-tidb-cluster}
 
-TiDBクラスタをバックアップするか、バックアップしたデータをクラスタに復元する必要がある場合は、 [BR](/br/backup-and-restore-tool.md) （バックアップと復元）を使用します。
+TiDBクラスタをバックアップするか、バックアップしたデータをクラスタに復元する必要がある場合は、 [BR](/br/backup-and-restore-overview.md) （バックアップと復元）を使用します。
 
-さらに、BRを使用して[増分バックアップ](/br/use-br-command-line-tool.md#back-up-incremental-data)および[インクリメンタルリストア](/br/use-br-command-line-tool.md#restore-incremental-data)のTiDBクラスタデータを実行することもできます。
+さらに、BRを使用して[増分バックアップ](/br/br-usage-backup.md#back-up-incremental-data)および[インクリメンタルリストア](/br/br-usage-restore.md#restore-incremental-data)のTiDBクラスタデータを実行することもできます。
 
 ## データをTiDBに移行する {#migrate-data-to-tidb}
 

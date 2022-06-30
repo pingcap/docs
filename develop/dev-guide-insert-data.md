@@ -140,7 +140,7 @@ Javaの完全な例については、以下を参照してください。
 -   データのエクスポート： [Dumpling](/dumpling-overview.md) 。 MySQLまたはTiDBデータをローカルまたはAmazonS3にエクスポートできます。
 -   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**のエクスポートされたデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
 -   データ複製： [TiDBデータ移行](/dm/dm-overview.md) 。 MySQL、MariaDB、およびAuroraデータベースをTiDBに複製できます。また、シャーディングされたインスタンスとテーブルのソースデータベースからのマージと移行もサポートしています。
--   データのバックアップと復元： [バックアップと復元（BR）](/br/backup-and-restore-tool.md) 。**Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオに適しています。
+-   データのバックアップと復元： [バックアップと復元（BR）](/br/backup-and-restore-overview.md) 。**Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオに適しています。
 
 ## ホットスポットを避ける {#avoid-hotspots}
 

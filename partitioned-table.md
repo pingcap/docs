@@ -262,10 +262,6 @@ test> select * from t;
 
 ### COLUMNSパーティショニングを一覧表示します {#list-columns-partitioning}
 
-> **警告：**
->
-> List COLUMNSパーティショニングは、実験的機能です。実稼働環境で使用することはお勧めしません。
-
 List COLUMNSパーティショニングは、Listパーティショニングの変形です。複数の列をパーティションキーとして使用できます。整数データ型に加えて、文字列、 `DATE` 、および`DATETIME`データ型の列をパーティション列として使用することもできます。
 
 次の表に示すように、次の12の都市の店舗の従業員を4つの地域に分割するとします。
@@ -567,7 +563,9 @@ Empty set (0.00 sec)
 
 挿入されたレコード`(NULL, 'mothra')`が`(0, 'gigan')`と同じパーティションに分類されることがわかります。
 
-> **注：** TiDBのハッシュパーティションによる`NULL`の値は、 [MySQLパーティショニングがNULLを処理する方法](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明したのと同じ方法で処理されますが、MySQLの実際の動作とは一致しません。言い換えると、この場合のMySQLの実装は、そのドキュメントと一致していません。
+> **ノート：**
+>
+> TiDBのハッシュパーティションによる`NULL`の値は、 [MySQLパーティショニングがNULLを処理する方法](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明したのと同じ方法で処理されますが、MySQLの実際の動作とは一致しません。言い換えると、この場合のMySQLの実装は、そのドキュメントと一致していません。
 >
 > この場合、TiDBの実際の動作は、このドキュメントの説明と一致しています。
 
@@ -646,7 +644,7 @@ Query OK, 0 rows affected (0.03 sec)
 ALTER TABLE members ADD PARTITION (PARTITION p3 VALUES LESS THAN (2010));
 ```
 
-テーブルを範囲でパーティション化する場合、 `ADD PARTITION`はパーティションリストの最後にのみ追加できます。既存のRangeパーティションに追加された場合、エラーが報告されます。
+テーブルを範囲でパーティション化する場合、 `ADD PARTITION`はパーティションリストの最後にのみ追加できます。既存の範囲パーティションに追加されている場合、エラーが報告されます。
 
 {{< copyable "" >}}
 
@@ -829,6 +827,8 @@ SELECT fname, lname, region_code, dob
 {{< copyable "" >}}
 
 ```sql
+SET @@sql_mode = '';
+
 CREATE TABLE employees  (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fname VARCHAR(25) NOT NULL,
@@ -935,7 +935,7 @@ SELECT store_id, COUNT(department_id) AS c
 2 rows in set (0.00 sec)
 ```
 
-パーティションの選択は、範囲パーティショニングやハッシュパーティショニングを含むすべてのタイプのテーブルパーティショニングでサポートされています。ハッシュパーティションの場合、パーティション名が指定されて`p2`ない場合、パーティション`p1`として`p0` 、...、または`pN-1`が自動的に使用されます。
+パーティションの選択は、範囲パーティショニングやハッシュパーティショニングを含むすべてのタイプのテーブルパーティショニングでサポートされています。ハッシュパーティションの場合、パーティション名が指定されて`p2`ない場合、 `p0` 、...、または`pN-1`がパーティション名として自動的に使用され`p1` 。
 
 `INSERT ... SELECT`の`SELECT`もパーティション選択を使用できます。
 

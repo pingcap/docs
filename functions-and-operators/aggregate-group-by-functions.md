@@ -62,6 +62,8 @@ summary: Learn about the supported aggregate functions in TiDB.
     1 row in set (0.00 sec)
     ```
 
+`GROUP_CONCAT()`と`APPROX_PERCENTILE()`の関数を除いて、前述のすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能できます。
+
 ## GROUPBY修飾子 {#group-by-modifiers}
 
 TiDBは現在、 `WITH ROLLUP`などの`GROUP BY`の修飾子をサポートしていません。今後、サポートを追加する予定です。 [TiDB＃4250](https://github.com/pingcap/tidb/issues/4250)を参照してください。

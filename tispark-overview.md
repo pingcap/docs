@@ -364,7 +364,7 @@ Q：SparkをTiKVと混合できますか？
 
 A：TiDBとTiKVが過負荷になり、重要なオンラインタスクを実行する場合は、TiSparkを個別にデプロイすることを検討してください。また、OLTPのネットワークリソースが危険にさらされてオンラインビジネスに影響を与えないように、さまざまなNICの使用を検討する必要があります。オンラインビジネスの要件が高くない場合、または負荷が十分に大きくない場合は、TiSparkとTiKVの展開を混在させることを検討できます。
 
-Q：TiSparkを使用してSQLステートメントを実行するときに`warning：WARN ObjectStore:568 - Failed to get database`が返された場合、どうすればよいですか？
+Q：TiSparkを使用してSQLステートメントを実行するときに`warning: WARN ObjectStore:568 - Failed to get database`が返された場合、どうすればよいですか？
 
 A：この警告は無視してかまいません。これは、Sparkがカタログに存在しない2つのデータベース（ `default`と`global_temp` ）を読み込もうとしたために発生します。この警告をミュートする場合は、 `tispark/conf`の`log4j`ファイルに`log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR`を追加して[log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43)を変更します。 Sparkの下の`config`の`log4j`ファイルにパラメータを追加できます。サフィックスが`template`の場合、 `mv`コマンドを使用して`properties`に変更できます。
 
@@ -378,6 +378,6 @@ A：デフォルトでは、TiSparkはhive-siteのHiveメタデータを読み�
 
 このデフォルトの動作が必要ない場合は、hive-siteでHiveメタデータを構成しないでください。
 
-Q：TiSparkがSparkタスクを実行しているときに`Error：java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...`が返された場合、どうすればよいですか？
+Q：TiSparkがSparkタスクを実行しているときに`Error: java.io.InvalidClassException: com.pingcap.tikv.region.TiRegion; local class incompatible: stream classdesc serialVersionUID ...`が返された場合、どうすればよいですか？
 
 A：エラーメッセージは`serialVersionUID`の競合を示しています。これは、 `class`つと`TiRegion`の異なるバージョンを使用したために発生します。 `TiRegion`はTiSparkにのみ存在するため、TiSparkパッケージの複数のバージョンが使用される可能性があります。このエラーを修正するには、TiSpark依存関係のバージョンがクラスタのすべてのノード間で一貫していることを確認する必要があります。

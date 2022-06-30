@@ -50,7 +50,7 @@ TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文
 
 -   `tidb_allow_remove_auto_inc`システム変数を使用して、 `AUTO_INCREMENT`列属性の削除を許可または禁止できます。列属性を削除する構文は`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`です。
 
--   TiDBは`AUTO_INCREMENT`列属性の追加をサポートしておらず、一度削除するとこの属性を回復することはできません。
+-   TiDBは、 `AUTO_INCREMENT`列属性の追加をサポートしておらず、この属性を削除すると、この属性を回復することはできません。
 
 -   詳細については、 [`AUTO_INCREMENT`](/auto-increment.md)を参照してください。
 
@@ -76,6 +76,10 @@ mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 3 rows in set (0.01 sec)
 ```
+
+> **ノート：**
+>
+> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 ### パフォーマンススキーマ {#performance-schema}
 

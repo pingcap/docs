@@ -108,7 +108,7 @@ HAProxyを使用して、負荷分散されたデータベース環境を簡単�
     {{< copyable "" >}}
 
     ```bash
-    echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
+    echo 'export PATH=/app/haproxy:$PATH' >> /etc/profile
     ```
 
 5.  インストールが成功したかどうかを確認します。

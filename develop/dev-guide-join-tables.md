@@ -203,12 +203,6 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ![Right Outer Join](/media/develop/right-outer-join.png)
 
-### フルアウタージョイン {#full-outer-join}
-
-完全外部結合は、左側のテーブルと右側のテーブルのすべてのレコードに基づいています。結合条件が満たされているかどうかに関係なく、左側のテーブルまたは右側のテーブルに一致する場合は、一致するすべてのレコードが返されます。結合条件に一致する値がない場合は、 `NULL`で埋められます。
-
-![Full Outer Join](/media/develop/full-outer-join.png)
-
 ### クロスジョイン {#cross-join}
 
 結合条件が一定の場合、2つのテーブル間の内部結合は[クロスジョイン](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットに`m \* n`のレコードが生成されます。
@@ -225,7 +219,7 @@ TiDBは、SQL構文レベルで`LEFT SEMI JOIN table_name`をサポートして�
 
 TiDBは、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
--   [インデックス参加](/explain-joins.md#index-join)
+-   [インデックス結合](/explain-joins.md#index-join)
 -   [ハッシュ参加](/explain-joins.md#hash-join)
 -   [マージ結合](/explain-joins.md#merge-join)
 

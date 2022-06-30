@@ -278,4 +278,4 @@ Confluent Schema Registryのデフォルトの互換性ポリシーが`BACKWARD`
 
 ## トピックの配布 {#topic-distribution}
 
-スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、およびTopicRecordNameStrategyの3つの[主題名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC AvroはTopicNameStrategyのみをサポートしています。つまり、Kafkaトピックは1つのデータ形式のデータしか受信できません。したがって、TiCDC Avroは、複数のテーブルを同じトピックにマッピングすることを禁止しています。チェンジフィードを作成するときに、トピックルールに構成済みの配布ルールに`{schema}`と`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。
+スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、およびTopicRecordNameStrategyの3つの[主題名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC AvroはTopicNameStrategyのみをサポートしています。つまり、Kafkaトピックは1つのデータ形式のデータしか受信できません。したがって、TiCDC Avroは、複数のテーブルを同じトピックにマッピングすることを禁止しています。チェンジフィードを作成するときに、トピックルールに構成済みの配布ルールに`{schema}`つと`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。

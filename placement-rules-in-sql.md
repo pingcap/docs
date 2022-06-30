@@ -102,19 +102,21 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 
 > **ノート：**
 >
-> 配置オプションは、各TiKVノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションはTiKVの`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの要約を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
+> -   配置オプションは、各TiKVノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションはTiKVの`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの要約を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
-> ```sql
-> mysql> show placement labels;
-> +--------+----------------+
-> | Key    | Values         |
-> +--------+----------------+
-> | disk   | ["ssd"]        |
-> | region | ["us-east-1"]  |
-> | zone   | ["us-east-1a"] |
-> +--------+----------------+
-> 3 rows in set (0.00 sec)
-> ```
+>     ```sql
+>     mysql> show placement labels;
+>     +--------+----------------+
+>     | Key    | Values         |
+>     +--------+----------------+
+>     | disk   | ["ssd"]        |
+>     | region | ["us-east-1"]  |
+>     | zone   | ["us-east-1a"] |
+>     +--------+----------------+
+>     3 rows in set (0.00 sec)
+>     ```
+>
+> -   `CREATE PLACEMENT POLICY`を使用して配置ポリシーを作成すると、TiDBはラベルが存在するかどうかをチェックしません。代わりに、ポリシーをテーブルにアタッチするときにTiDBがチェックを実行します。
 
 | オプション名           | 説明                                                                            |
 | ---------------- | ----------------------------------------------------------------------------- |
@@ -159,7 +161,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 ### パーティションテーブルに配置を割り当てます {#assign-placement-to-a-partitioned-table}
 
-テーブルに配置オプションを割り当てるだけでなく、テーブルパーティションにオプションを割り当てることもできます。例えば：
+テーブルに配置オプションを割り当てることに加えて、テーブルパーティションにオプションを割り当てることもできます。例えば：
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=5;
@@ -198,13 +200,13 @@ CREATE PLACEMENT POLICY p3 FOLLOWERS=2;
 
 CREATE TABLE t1 (a INT);  -- Creates a table t1 with no placement options.
 
-ALTER DATABASE test POLICY=p2;  -- Changes the default placement option, and does not apply to the existing table t1.
+ALTER DATABASE test PLACEMENT POLICY=p2;  -- Changes the default placement option, and does not apply to the existing table t1.
 
 CREATE TABLE t2 (a INT);  -- Creates a table t2 with the default placement policy p2.
 
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;  -- Creates a table t3 without the default policy p2, because this statement has specified another placement rule.
 
-ALTER DATABASE test POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
+ALTER DATABASE test PLACEMENT POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
 
 CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 
@@ -247,12 +249,12 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
-| ツール名           | サポートされている最小バージョン | 説明                                                                                             |
-| -------------- | ---------------- | ---------------------------------------------------------------------------------------------- |
-| バックアップと復元（BR）  | 6.0              | 配置ルールのインポートとエクスポートをサポートします。詳細は[BRの互換性](/br/backup-and-restore-tool.md#compatibility)を参照してください。 |
-| TiDB Lightning | まだ互換性がありません      | TiDB Lightningが配置ポリシーを含むバックアップデータをインポートすると、エラーが報告されます                                          |
-| TiCDC          | 6.0              | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                  |
-| TiDB Binlog    | 6.0              | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                  |
+| ツール名           | サポートされている最小バージョン | 説明                                                                                                 |
+| -------------- | ---------------- | -------------------------------------------------------------------------------------------------- |
+| バックアップと復元（BR）  | 6.0              | 配置ルールのインポートとエクスポートをサポートします。詳細は[BRの互換性](/br/backup-and-restore-overview.md#compatibility)を参照してください。 |
+| TiDB Lightning | まだ互換性がありません      | TiDB Lightningが配置ポリシーを含むバックアップデータをインポートすると、エラーが報告されます                                              |
+| TiCDC          | 6.0              | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                      |
+| TiDB Binlog    | 6.0              | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                      |
 
 ## 既知の制限 {#known-limitations}
 

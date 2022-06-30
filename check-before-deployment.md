@@ -640,7 +640,7 @@ sudo systemctl enable ntpd.service
     tidb ALL=(ALL) NOPASSWD: ALL
     ```
 
-3.  `tidb`人のユーザーを使用して制御マシンにログインし、次のコマンドを実行します。 `10.0.1.1`をターゲットマシンのIPに置き換え、プロンプトに従ってターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンドの実行後、SSH相互信頼はすでに作成されています。これは他のマシンにも当てはまります。新しく作成された`tidb`人のユーザーには、 `.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSAキーを生成するコマンドを実行します。制御マシンにTiDBコンポーネントを展開するには、制御マシンと制御マシン自体の相互信頼を構成します。
+3.  `tidb`人のユーザーを使用して制御マシンにログインし、次のコマンドを実行します。 `10.0.1.1`をターゲットマシンのIPに置き換え、プロンプトに従ってターゲットマシンの`tidb`ユーザーパスワードを入力します。コマンドの実行後、SSH相互信頼はすでに作成されています。これは他のマシンにも当てはまります。新しく作成された`tidb`人のユーザーには`.ssh`ディレクトリがありません。このようなディレクトリを作成するには、RSAキーを生成するコマンドを実行します。制御マシンにTiDBコンポーネントを展開するには、制御マシンと制御マシン自体の相互信頼を構成します。
 
     {{< copyable "" >}}
 
@@ -680,38 +680,28 @@ sudo systemctl enable ntpd.service
 > **ノート：**
 >
 > -   NUMAを使用したコアのバインドは、CPUリソースを分離する方法であり、高度に構成された物理マシンに複数のインスタンスをデプロイするのに適しています。
-> -   `tiup cluster deploy`を使用して展開を完了した後、 `exec`コマンドを使用してクラスタレベルの管理操作を実行できます。
+> -   `tiup cluster deploy`を使用して展開が完了したら、 `exec`コマンドを使用してクラスタレベルの管理操作を実行できます。
 
-1.  ターゲットノードにログインしてインストールします。例として、CentOS Linuxリリース7.7.1908（コア）を取り上げます。
+NUMAツールをインストールするには、次の2つの方法のいずれかを実行します。
 
-    {{< copyable "" >}}
+**方法1** ：ターゲットノードにログインしてNUMAをインストールします。例として、CentOS Linuxリリース7.7.1908（コア）を取り上げます。
+
+```bash
+sudo yum -y install numactl
+```
+
+**方法2** ： `tiup cluster exec`コマンドを実行して、NUMAを既存のクラスタにバッチでインストールします。
+
+1.  [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)に従って、クラスタ`tidb-test`をデプロイします。 TiDBクラスタをインストールしている場合は、この手順をスキップできます。
 
     ```bash
-    sudo yum -y install numactl
+    tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]
     ```
 
-2.  `tiup cluster`を使用して`exec`コマンドを実行し、バッチでインストールします。
-
-    {{< copyable "" >}}
-
-    ```bash
-    tiup cluster exec --help
-    ```
-
-    ```
-    Run shell command on host in the tidb cluster
-    Usage:
-    cluster exec <cluster-name> [flags]
-    Flags:
-        --command string   the command run on cluster host (default "ls")
-    -h, --help             help for exec
-        --sudo             use root permissions (default false)
-    ```
-
-    sudo権限を使用して、 `tidb-test`クラスタのすべてのターゲットマシンに対してインストールコマンドを実行するには、次のコマンドを実行します。
-
-    {{< copyable "" >}}
+2.  `sudo`特権を使用して`tiup cluster exec`コマンドを実行し、 `tidb-test`クラスタのすべてのターゲットマシンにNUMAをインストールします。
 
     ```bash
     tiup cluster exec tidb-test --sudo --command "yum -y install numactl"
     ```
+
+    `tiup cluster exec`コマンドのヘルプ情報を取得するには、 `tiup cluster exec --help`コマンドを実行します。

@@ -5,9 +5,23 @@ summary: Learn about the basic SQL statements for the TiDB database.
 
 # TiDBでSQLを探索する {#explore-sql-with-tidb}
 
+<CustomContent platform="tidb">
+
 TiDBはMySQLと互換性があり、ほとんどの場合、MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDBはMySQLと互換性があり、ほとんどの場合、MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility#unsupported-features)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
 SQLを試し、MySQLクエリとのTiDBの互換性をテストするには、次のようにします[TiDBをインストールせずに、Webブラウザで直接実行します](https://tour.tidb.io/) 。また、最初にTiDBクラスタをデプロイしてから、そのクラスターでSQLステートメントを実行することもできます。
+
+</CustomContent>
 
 このページでは、DDL、DML、CRUD操作などの基本的なTiDBSQLステートメントについて説明します。 TiDBステートメントの完全なリストについては、 [TiDBSQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 

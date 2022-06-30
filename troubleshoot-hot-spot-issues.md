@@ -89,7 +89,7 @@ TiDBコーディング規則によれば、同じテーブルのデータは、T
 
 非整数の主キー、または主キーまたは共同主キーのないテーブルの場合、TiDBは暗黙の自動インクリメントRowIDを使用します。 `INSERT`の操作が多数存在する場合、データは1つのリージョンに書き込まれるため、書き込みホットスポットが発生します。
 
-`SHARD_ROW_ID_BITS`を設定すると、RowIDが分散して複数のリージョンに書き込まれ、書き込みホットスポットの問題を軽減できます。ただし、 `SHARD_ROW_ID_BITS`を大きすぎる値に設定すると、RPC要求の数が増え、CPUとネットワークのオーバーヘッドが増加します。
+`SHARD_ROW_ID_BITS`を設定すると、行IDが分散して複数のリージョンに書き込まれ、書き込みホットスポットの問題を軽減できます。
 
 ```
 SHARD_ROW_ID_BITS = 4 # Represents 16 shards.
@@ -102,8 +102,8 @@ SHARD_ROW_ID_BITS = 0 # Represents the default 1 shard.
 {{< copyable "" >}}
 
 ```sql
-CREATE TABLE：CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
-ALTER TABLE：ALTER TABLE t SHARD_ROW_ID_BITS = 4;
+CREATE TABLE: CREATE TABLE t (c int) SHARD_ROW_ID_BITS = 4;
+ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 ```
 
 `SHARD_ROW_ID_BITS`の値は動的に変更できます。変更された値は、新しく書き込まれたデータに対してのみ有効になります。
@@ -178,5 +178,5 @@ TiDBのコプロセッサーキャッシュ機能は、計算結果キャッシ�
 
 **参照：**
 
--   [非常に同時の書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [並行性の高い書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
 -   [スプリットリージョン](/sql-statements/sql-statement-split-region.md)

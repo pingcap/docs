@@ -7,7 +7,7 @@ summary: Learn how to use the Batch Create Table feature. When restoring data, B
 
 データを復元する場合、Backup＆Restore（BR）はターゲットTiDBクラスタにデータベースとテーブルを作成してから、バックアップデータをテーブルに復元します。 TiDB v6.0.0より前のバージョンでは、BRは[シリアル実行](#implementation-principles)実装を使用して、復元プロセスでテーブルを作成します。ただし、BRが多数のテーブル（約50000）のデータを復元する場合、この実装ではテーブルの作成に多くの時間がかかります。
 
-テーブル作成プロセスを高速化し、データの復元時間を短縮するために、TiDBv6.0.0ではテーブルのバッチ作成機能が導入されています。この機能はデフォルトで有効になっています。
+テーブル作成プロセスを高速化し、データの復元時間を短縮するために、テーブルのバッチ作成機能がTiDBv6.0.0に導入されました。この機能はデフォルトで有効になっています。
 
 > **ノート：**
 >
@@ -59,7 +59,7 @@ br restore full -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore.l
 テスト結果は次のとおりです。
 
 ```
-‘[2022/03/12 22:37:49.060 +08:00] [INFO] [collector.go:67] ["Full restore success summary"] [total-ranges=751760] [ranges-succeed=751760] [ranges-failed=0] [split-region=1h33m18.078448449s] [restore-ranges=542693] [total-take=1h41m35.471476438s] [restore-data-size(after-compressed)=8.337TB] [Size=8336694965072] [BackupTS=431773933856882690] [total-kv=148015861383] [total-kv-size=16.16TB] [average-speed=2.661GB/s]’
+'[2022/03/12 22:37:49.060 +08:00] [INFO] [collector.go:67] ["Full restore success summary"] [total-ranges=751760] [ranges-succeed=751760] [ranges-failed=0] [split-region=1h33m18.078448449s] [restore-ranges=542693] [total-take=1h41m35.471476438s] [restore-data-size(after-compressed)=8.337TB] [Size=8336694965072] [BackupTS=431773933856882690] [total-kv=148015861383] [total-kv-size=16.16TB] [average-speed=2.661GB/s]'
 ```
 
 テスト結果から、1つのTiKVインスタンスを復元する平均速度は181.65 MB / s（ `average-speed`に等しい）であることがわかり`tikv_count` 。

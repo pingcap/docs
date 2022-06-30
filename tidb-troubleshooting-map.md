@@ -11,9 +11,9 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 1.1クライアント<code>Region is Unavailable</code>エラーを報告します {#1-1-the-client-reports-code-region-is-unavailable-code-error}
 
--   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないために発生します。 `TiKV server is busy`が発生するか、 `not leader`または`epoch not match`が原因でTiKVへの要求が失敗するか、TiKVへの要求がタイムアウトする可能性があります。このような場合、TiDBは`backoff`の再試行メカニズムを実行します。 `backoff`がしきい値（デフォルトでは20秒）を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内では、このエラーはクライアントには表示されません。
+-   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生するか、 `not leader`または`epoch not match`が原因でTiKVへの要求が失敗するか、TiKVへの要求がタイムアウトする可能性があります。このような場合、TiDBは`backoff`の再試行メカニズムを実行します。 `backoff`がしきい値（デフォルトでは20秒）を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内では、このエラーはクライアントには表示されません。
 
--   1.1.2複数のTiKVインスタンスが同時にOOMであるため、一定期間、リージョン内にリーダーが存在しません。中国語の[ケース-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
+-   1.1.2複数のTiKVインスタンスが同時にOOMであるため、OOM期間中にリーダーは発生しません。中国語の[ケース-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
 
 -   1.1.3 TiKVは`TiKV server is busy`を報告し、 `backoff`回を超えています。詳細については、 [4.3](#43-the-client-reports-the-server-is-busy-error)を参照してください。 `TiKV server is busy`は内部フロー制御メカニズムの結果であり、 `backoff`回でカウントされるべきではありません。この問題は修正されます。
 
@@ -57,9 +57,9 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   原因1：他のコンポーネント（PD / TiKV）とのネットワークの問題。
 
-    -   原因2：初期バージョンのTiDB（v3.0.8より前）では、同時実行性が高いためにゴルーチンが多いため、内部負荷が大きくなります。
+    -   原因2：初期バージョンのTiDB（v3.0.8より前）では、同時実行性が高いために多くのゴルーチンがあるため、内部負荷が大きくなります。
 
-    -   原因3：初期バージョン（v2.1.15およびバージョン&lt;v3.0.0-rc1）では、PDインスタンスがTiDBキーの削除に失敗するため、すべてのDDL変更が2つのリースを待機します。
+    -   原因3：初期バージョン（v2.1.15およびバージョン&lt;v3.0.0-rc1）では、PDインスタンスはTiDBキーの削除に失敗します。これにより、すべてのDDL変更が2つのリースを待機します。
 
     -   その他の不明な原因については、 [バグを報告](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md) 。
 
@@ -88,7 +88,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   3.1.4TiDBはログに`information schema is out of date`を報告します
 
-    -   原因1：DML文を実行しているTiDBサーバが`graceful kill`停止し、終了の準備をしています。 DMLステートメントを含むトランザクションの実行時間が1つのDDLリースを超えています。トランザクションがコミットされると、エラーが報告されます。
+    -   原因1：DMLステートメントを実行しているTiDBサーバーが`graceful kill`で停止し、終了する準備をしています。 DMLステートメントを含むトランザクションの実行時間が1つのDDLリースを超えています。トランザクションがコミットされると、エラーが報告されます。
 
     -   原因2：TiDBサーバーは、DMLステートメントの実行中にPDまたはTiKVに接続できません。その結果、TiDBサーバーが1つのDDLリース（デフォルトでは`45s` ）内に新しいスキーマをロードしなかったか、TiDBサーバーが`keep alive`の設定でPDから切断されました。
 
@@ -116,13 +116,13 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         -   v2.1.8以前のバージョンでは、 `tidb_stderr.log`の`fatal error: stack overflow`をgrepできます。
 
-    -   モニター：tidb-serverインスタンスのメモリー使用量が短時間で急激に増加します。
+    -   モニター：tidb-serverインスタンスのメモリ使用量は、短期間に急激に増加します。
 
 -   3.2.2OOMの原因となるSQLステートメントを見つけます。 （現在、TiDBのすべてのバージョンがSQLを正確に見つけることができません。それでも、OOMがSQLステートメントによって引き起こされているかどうかを分析する必要があります。）
 
-    -   バージョン&gt;=v3.0.0の場合、 `tidb.log`のgrep「expensive_query」。そのログメッセージは、タイムアウトした、またはメモリクォータを超えたSQLクエリを記録します。
+    -   バージョン&gt;=v3.0.0の場合、 `tidb.log`のgrep&quot;expensive_query&quot;。そのログメッセージは、タイムアウトした、またはメモリクォータを超えたSQLクエリを記録します。
 
-    -   バージョン&lt;v3.0.0の場合、grepは`tidb.log`で「メモリがクォータを超えています」と入力して、メモリクォータを超えるSQLクエリを検索します。
+    -   バージョン&lt;v3.0.0の場合、メモリクォータを超えるSQLクエリを見つけるために、grep「メモリがクォータを超えています」を`tidb.log`で指定します。
 
     > **ノート：**
     >
@@ -172,7 +172,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         MySQLでは、2つの高精度`Decimal`が分割され、結果が最大10進精度（ `30` ）を超える場合、 `30`桁のみが予約され、エラーは報告されません。
 
-        TiDBでは、計算結果はMySQLと同じですが、 `Decimal`を表すデータ構造内では、10進精度のフィールドは実際の精度を保持します。
+        TiDBでは、計算結果はMySQLの場合と同じですが、 `Decimal`を表すデータ構造内では、10進精度のフィールドは実際の精度を保持します。
 
         例として`(0.1^30) / 10`を取り上げます。精度が最大で`30`であるため、TiDBとMySQLの結果は両方とも`0`です。ただし、TiDBでは、小数精度のフィールドは`31`のままです。
 
@@ -268,7 +268,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 4.5TiKVの書き込みが遅い {#4-5-tikv-write-is-slow}
 
--   4.5.1 TiKV gRPCの`prewrite/commit/raw-put`期間を表示して、TiKV書き込みが少ないかどうかを確認します（生のKVクラスターの場合のみ）。一般的に、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)に従って遅いフェーズを見つけることができます。いくつかの一般的な状況を以下に示します。
+-   4.5.1 TiKV gRPCの`prewrite/commit/raw-put`期間を表示して、TiKV書き込みが少ないかどうかを確認します（RawKVクラスターの場合のみ）。一般的に、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)に従って遅いフェーズを見つけることができます。いくつかの一般的な状況を以下に示します。
 
 -   4.5.2スケジューラCPUがビジーです（トランザクションkvの場合のみ）。
 
@@ -333,7 +333,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   5.2.1PDスイッチリーダー。
 
-    -   原因1：ディスク。 PDノードが配置されているディスクには、完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因1：ディスク。 PDノードが配置されているディスクには完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
     -   原因2：ネットワーク。 PDログには`lost the TCP streaming connection`が表示されます。 PDノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana-** &gt; <strong>PD-</strong> &gt; <strong>etcd</strong>で`round trip`を表示して、原因を確認する必要があります。中国語の[ケース-177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 

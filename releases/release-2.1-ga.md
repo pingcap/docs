@@ -116,7 +116,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `ALTER TABLE RENAME KEY TO`構文をサポートする
 
-    -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します。
+    -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します
 
     -   [`ddl/owner/resign` HTTPインターフェースを使用してDDL所有者を解放し、新しいDDL所有者の選出を開始することをサポートします](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
 
@@ -215,7 +215,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   組み込み関数を追加する
 
-    -   [コプロセッサー`ReadPool`を追加して、要求の処理における同時実行性を向上させます](https://github.com/tikv/rfcs/blob/master/text/2017-12-22-read-pool.md)
+    -   [コプロセッサー`ReadPool`を追加して、要求の処理における同時実行性を向上させます](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
 
     -   時間関数の解析の問題とタイムゾーンに関連する問題を修正します
 
@@ -227,7 +227,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   連続ロールバックレコードを折りたたんで、読み取りパフォーマンスを確保します
 
-    -   [`UnsafeDestroyRange` APIを追加して、ドロップするテーブル/インデックスのスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/2018-08-29-unsafe-destroy-range.md)
+    -   [`UnsafeDestroyRange` APIを追加して、ドロップするテーブル/インデックスのスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
 
     -   書き込みへの影響を減らすためにGCモジュールを分離します
 

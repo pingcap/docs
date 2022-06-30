@@ -5,7 +5,7 @@ summary: Learn about the string types supported in TiDB.
 
 # 文字列型 {#string-types}
 
-`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列型を`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列タイプ](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
+`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列型を`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列型](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
 
 ## サポートされているタイプ {#supported-types}
 
@@ -19,17 +19,17 @@ summary: Learn about the string types supported in TiDB.
 
 ### <code>VARCHAR</code>タイプ {#code-varchar-code-type}
 
-`VARCHAR`は可変長の文字列です。 Mは、列の最大長を文字数（バイトではなく）で表します。 `VARCHAR`の最大サイズは65,535バイトを超えることはできません。行の最大長と使用されている文字セットによって、 `VARCHAR`の長さが決まります。
+`VARCHAR`は可変長の文字列です。 Mは、列の最大長を文字数（バイトではなく）で表します。 `VARCHAR`の最大サイズは65,535バイトを超えることはできません。最大行長と使用される文字セットによって、 `VARCHAR`の長さが決まります。
 
 1つの文字が占めるスペースは、文字セットによって異なる場合があります。次の表は、1文字で消費されるバイト数と、各文字セットの`VARCHAR`列の長さの範囲を示しています。
 
-| キャラクターセット | 文字あたりのバイト数 | 最大`VARCHAR`列の長さの範囲 |
-| --------- | ---------- | ------------------ |
-| アスキー      | 1          | （0、65535]          |
-| latin1    | 1          | （0、65535]          |
-| バイナリ      | 1          | （0、65535]          |
-| utf8      | 3          | （0、21845]          |
-| utf8mb4   | 4          | （0、16383]          |
+| キャラクターセット | 1文字あたりのバイト数 | 最大`VARCHAR`列の長さの範囲 |
+| --------- | ----------- | ------------------ |
+| アスキー      | 1           | （0、65535]          |
+| latin1    | 1           | （0、65535]          |
+| バイナリ      | 1           | （0、65535]          |
+| utf8      | 3           | （0、21845]          |
+| utf8mb4   | 4           | （0、16383]          |
 
 ```sql
 [NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -61,7 +61,7 @@ MEDIUMTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
 
 ### <code>LONGTEXT</code>タイプ {#code-longtext-code-type}
 
-`LONGTEXT`タイプは[`TEXT`タイプ](#text-type)に似ています。違いは、 `LONGTEXT`の最大列長が4,294,967,295であるということです。
+`LONGTEXT`タイプは[`TEXT`タイプ](#text-type)に似ています。違いは、 `LONGTEXT`の最大列長が4,294,967,295であるということです。ただし、 [TiDBの単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)のため、TiDBの単一列の最大ストレージサイズは6MBです。
 
 ```sql
 LONGTEXT [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -109,7 +109,7 @@ MEDIUMBLOB
 
 ### <code>LONGBLOB</code>タイプ {#code-longblob-code-type}
 
-`LONGBLOB`タイプは[`BLOB`タイプ](#blob-type)に似ています。違いは、 `LONGBLOB`の最大列長が4,294,967,295であるということです。
+`LONGBLOB`タイプは[`BLOB`タイプ](#blob-type)に似ています。違いは、 `LONGBLOB`の最大列長が4,294,967,295であるということです。ただし、 [TiDBの単一列の制限](/tidb-limitations.md#limitation-on-a-single-column)のため、TiDBの単一列の最大ストレージサイズは6MBです。
 
 ```sql
 LONGBLOB

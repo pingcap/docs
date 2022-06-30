@@ -137,7 +137,7 @@ summary: Learn the alert rules in a TiDB cluster.
     TiDBサービスで発生するイベントの数。次のイベントが発生すると、アラートがトリガーされます。
 
     1.  start：TiDBサービスが開始されます。
-    2.  ハング：クリティカルレベルのイベント（現在、TiDBがbinlogを書き込めないというシナリオは1つだけです）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
+    2.  ハング：クリティカルレベルのイベント（現在、シナリオは1つだけです：TiDBはbinlogを書き込めません）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
 
 -   解決：
 
@@ -233,7 +233,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    リージョンレプリカの数が`max-replicas`の値よりも少なくなっています。 TiKVマシンがダウンしていて、そのダウンタイムが`max-down-time`を超えると、通常、一定期間中に一部のリージョンのレプリカが失われます。
+    リージョンレプリカの数が`max-replicas`の値よりも少なくなっています。
 
 -   解決：
 
@@ -632,7 +632,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   アラートルール：
 
-    `histogram_quantile(0.999, sum(rate(tikv_raftstore_raft_process_duration_secs_bucket{type=’tick’}[1m])) by (le, instance, type)) > 2`
+    `histogram_quantile(0.999, sum(rate(tikv_raftstore_raft_process_duration_secs_bucket{type='tick'}[1m])) by (le, instance, type)) > 2`
 
 -   説明：
 

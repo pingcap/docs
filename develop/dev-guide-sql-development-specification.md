@@ -29,7 +29,7 @@ summary: Learn about the SQL development specifications for TiDB.
     ```sql
     SELECT gmt_create
     FROM ...
-    WHERE DATE_FORMAT(gmt_create，'%Y%m%d %H:%i:%s') = '20090101 00:00:0'
+    WHERE DATE_FORMAT(gmt_create, '%Y%m%d %H:%i:%s') = '20090101 00:00:0'
     ```
 
     おすすめされた：
@@ -37,14 +37,14 @@ summary: Learn about the SQL development specifications for TiDB.
     {{< copyable "" >}}
 
     ```sql
-    SELECT DATE_FORMAT(gmt_create，'%Y%m%d %H:%i:%s')
+    SELECT DATE_FORMAT(gmt_create, '%Y%m%d %H:%i:%s')
     FROM .. .
-    WHERE gmt_create = str_to_date('20090101 00:00:00'，'%Y%m%d %H:%i:s')
+    WHERE gmt_create = str_to_date('20090101 00:00:00', '%Y%m%d %H:%i:s')
     ```
 
 ## その他の仕様 {#other-specifications}
 
--   `WHERE`条件のインデックス列に対して数学演算または関数を実行しないでください。
+-   `WHERE`の条件では、インデックス列に対して数学演算または関数を実行しないでください。
 -   `OR`を`IN`または`UNION`に置き換えます。 `IN`の数は`300`未満でなければなりません。
 -   ファジープレフィックスクエリに`%`プレフィックスを使用することは避けてください。
 -   アプリケーションが**マルチステートメント**を使用してSQLを実行する場合、つまり、複数のSQLがセミコロンで結合され、一度に実行するためにクライアントに送信される場合、TiDBは最初のSQL実行の結果のみを返します。

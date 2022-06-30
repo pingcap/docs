@@ -28,7 +28,7 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 **ディスク容量**：
 
--   Dumplingには、データソース全体を保存するのに十分なディスク容量が必要です。 SSDをお勧めします。
+-   Dumplingには、データソース全体を格納できる（またはエクスポートするすべてのアップストリームテーブルを格納できる）ディスクスペースが必要です。 SSDをお勧めします。必要なスペースを計算するには、 [ダウンストリームストレージスペースの要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)を参照してください。
 -   インポート中、TiDB Lightningには、ソートされたキーと値のペアを格納するための一時的なスペースが必要です。ディスク容量は、データソースからの最大の単一テーブルを保持するのに十分である必要があります。
 -   フルデータボリュームが大きい場合は、アップストリームでのbinlogストレージ時間を増やすことができます。これは、インクリメンタルレプリケーション中にbinlogが失われないようにするためです。
 
@@ -78,7 +78,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     | `B`または`--database`  | エクスポートするデータベースを指定します                                                                       |
     | `-f`または`--filter`   | パターンに一致するテーブルをエクスポートします。構文については[テーブルフィルター](/table-filter.md)を参照してください。                     |
 
-    `${data-path}`に、エクスポートされたデータを格納するのに十分なスペースがあることを確認してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されないようにするには、 `-F`オプションを使用して単一ファイルのサイズを制限することを強くお勧めします。
+    `${data-path}`に、エクスポートされたすべてのアップストリームテーブルを格納するスペースがあることを確認してください。必要なスペースを計算するには、 [ダウンストリームストレージスペースの要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)を参照してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されないようにするには、 `-F`オプションを使用して単一ファイルのサイズを制限することを強くお勧めします。
 
 2.  `${data-path}`ディレクトリの`metadata`ファイルを表示します。これは、餃子で生成されたメタデータファイルです。手順3の増分レプリケーションに必要なbinlog位置情報を記録します。
 
@@ -211,7 +211,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     # Configures the data source.
     mysql-instances:
-      - source-id: "mysql-01"            # Data source ID，i.e., source-id in source1.yaml
+      - source-id: "mysql-01"            # Data source ID, i.e., source-id in source1.yaml
         block-allow-list: "bw-rule-1"    # You can use the block-allow-list configuration above.
         # syncer-config-name: "global"    # You can use the syncers incremental data configuration below.
         meta:                            # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.

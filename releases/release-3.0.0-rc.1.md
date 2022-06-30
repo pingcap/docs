@@ -48,7 +48,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   厳密なSQLモードが無効になっている場合にNULLフィールドを挿入する有効性チェックを修正しました[＃10161](https://github.com/pingcap/tidb/pull/10161)
 
 -   DDL
-    -   `CREATE TABLE`のステートメントに`pre_split_regions`のオプションを追加します。このオプションは、テーブル作成時にテーブル領域を事前分割して、テーブル作成後の大量の書き込みによって引き起こされる書き込みホットスポットを回避することをサポートします[＃10138](https://github.com/pingcap/tidb/pull/10138)
+    -   `CREATE TABLE`のステートメントに`pre_split_regions`のオプションを追加します。このオプションは、テーブル作成時にテーブル領域を事前に分割して、テーブル作成後の大量の書き込みによって引き起こされる書き込みホットスポットを回避することをサポートします[＃10138](https://github.com/pingcap/tidb/pull/10138)
     -   一部のDDLステートメントの実行パフォーマンスを最適化する[＃10170](https://github.com/pingcap/tidb/pull/10170)
     -   フルテキストインデックスは13 [＃9821](https://github.com/pingcap/tidb/pull/9821)サポートされていないという警告を追加し`FULLTEXT KEY`
     -   古いバージョンのTiDB1のUTF8およびUTF8MB4文字セットの互換性の問題を修正し[＃9820](https://github.com/pingcap/tidb/pull/9820)
@@ -122,7 +122,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   SSTを[＃4412](https://github.com/tikv/tikv/pull/4412)にアップロードする際のインポーターの速度制限をサポート
     -   サイズごとのテーブルのインポートをサポートして、大きなテーブルのChecksumとAnalyzeによるクラスタへの影響を減らし、Checksumと[＃156](https://github.com/pingcap/tidb-lightning/pull/156)の成功率を向上させます。
     -   データソースファイルをtypes.Datumとして直接解析し、KVエンコーダーからの余分な解析オーバーヘッドを節約することで、LightningのSQLエンコーディングパフォーマンスを50％向上させます[＃145](https://github.com/pingcap/tidb-lightning/pull/145)
-    -   ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md)に変更し[＃162](https://github.com/pingcap/tidb-lightning/pull/162)
+    -   ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)に変更し[＃162](https://github.com/pingcap/tidb-lightning/pull/162)
     -   構成ファイルが欠落している場合に使用するコマンドラインオプションをいくつか追加します[＃157](https://github.com/pingcap/tidb-lightning/pull/157)
 
 -   sync-diff-inspector

@@ -32,7 +32,7 @@
     -   TiDBに接続する
         -   [DriverまたはORMを選択します](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)
-        -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
+        -   [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
     -   データベーススキーマの設計
         -   [概要](/develop/dev-guide-schema-design-overview.md)
         -   [データベースを作成する](/develop/dev-guide-create-database.md)
@@ -77,10 +77,19 @@
         -   ガイドライン
             -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)
             -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
+        -   アーカイブされたドキュメント
+            -   [Djangoの場合](/develop/dev-guide-outdated-for-django.md)
+            -   [SQLAlchemyの場合](/develop/dev-guide-outdated-for-sqlalchemy.md)
+            -   [go-sql-driver/mysqlの場合](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
+            -   [GORMの場合](/develop/dev-guide-outdated-for-gorm.md)
+            -   [mysql-connector-pythonの場合](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+            -   [Laravelの場合](/develop/dev-guide-outdated-for-laravel.md)
+    -   クラウドネイティブ開発環境
+        -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
 -   デプロイ
     -   [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境Configuration / コンフィグレーションチェックリスト](/check-before-deployment.md)
-    -   クラスタトポロジを計画する
+    -   クラスタートポロジを計画する
         -   [最小限のトポロジー](/minimal-deployment-topology.md)
         -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDCトポロジ](/ticdc-deployment-topology.md)
@@ -121,17 +130,9 @@
         -   [TiUPを使用する（推奨）](/scale-tidb-using-tiup.md)
         -   [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
     -   バックアップと復元
-        -   BRツールを使用する（推奨）
-            -   [BRツールの概要](/br/backup-and-restore-tool.md)
-            -   [バックアップと復元にBRコマンドラインを使用する](/br/use-br-command-line-tool.md)
-            -   [BRのユースケース](/br/backup-and-restore-use-cases.md)
-            -   外部ストレージ
-                -   [外部ストレージの概要](/br/backup-and-restore-storages.md)
-                -   [AzureBlobStorageでのデータのバックアップと復元](/br/backup-and-restore-azblob.md)
-            -   BRの機能
-                -   [オートチューン](/br/br-auto-tune.md)
-                -   [テーブルのバッチ作成](/br/br-batch-create-table.md)
-            -   [BR FAQ](/br/backup-and-restore-faq.md)
+        -   [BRを使用してクラスターデータをバックアップする](/br/br-usage-backup.md)
+        -   [BRを使用してクラスターデータを復元する](/br/br-usage-restore.md)
+        -   [BRのユースケース](/br/backup-and-restore-use-cases.md)
     -   [タイムゾーンの構成](/configure-time-zone.md)
     -   [毎日のチェックリスト](/daily-check.md)
     -   [TiFlashを管理する](/tiflash/maintain-tiflash.md)
@@ -335,6 +336,7 @@
             -   [tiup-bench](/tiup/tiup-bench.md)
     -   PingCAPクリニック診断サービス（テクニカルプレビュー）
         -   [概要](/clinic/clinic-introduction.md)
+        -   [クイックスタート](/clinic/quick-start-with-clinic.md)
         -   [PingCAPクリニックを使用する](/clinic/clinic-user-guide-for-tiup.md)
         -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
     -   [TiDB Operator](/tidb-operator-overview.md)
@@ -444,13 +446,23 @@
             -   [エラーの処理](/dm/dm-error-handling.md)
         -   [リリースノート](/dm/dm-release-notes.md)
     -   バックアップと復元（BR）
-        -   [BRツールの概要](/br/backup-and-restore-tool.md)
-        -   [バックアップと復元にBRコマンドラインを使用する](/br/use-br-command-line-tool.md)
+        -   [BRの概要](/br/backup-and-restore-overview.md)
+        -   [デプロイを導入して使用する](/br/br-deployment.md)
+        -   [BRを使用してクラスターデータをバックアップする](/br/br-usage-backup.md)
+        -   [BRを使用してクラスターデータを復元する](/br/br-usage-restore.md)
         -   [BRのユースケース](/br/backup-and-restore-use-cases.md)
-        -   [外部ストレージ](/br/backup-and-restore-storages.md)
         -   BRの機能
             -   [オートチューン](/br/br-auto-tune.md)
-        -   [BR FAQ](/br/backup-and-restore-faq.md)
+            -   [テーブルのバッチ作成](/br/br-batch-create-table.md)
+        -   参考文献
+            -   [BRの設計原則](/br/backup-and-restore-design.md)
+            -   [BRコマンドライン](/br/use-br-command-line-tool.md)
+            -   [外部ストレージ](/br/backup-and-restore-storages.md)
+            -   [BRを使用してAmazonS3でデータをバックアップおよび復元する](/br/backup-storage-S3.md)
+            -   [BRを使用してAzureBlobStorageでデータをバックアップおよび復元する](/br/backup-storage-azblob.md)
+            -   [BRを使用してGoogleCloudStorageのデータをバックアップおよび復元する](/br/backup-storage-gcs.md)
+            -   [RawKVのバックアップと復元](/br/rawkv-backup-and-restore.md)
+            -   [BRのよくある質問](/br/backup-and-restore-faq.md)
     -   TiDB Binlog
         -   [概要](/tidb-binlog/tidb-binlog-overview.md)
         -   [クイックスタート](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -475,14 +487,17 @@
         -   [概要](/ticdc/ticdc-overview.md)
         -   [デプロイ](/ticdc/deploy-ticdc.md)
         -   [管理](/ticdc/manage-ticdc.md)
+        -   監視と警告
+            -   [モニタリング指標](/ticdc/monitor-ticdc.md)
+            -   [アラートルール](/ticdc/ticdc-alert-rules.md)
         -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
-        -   [モニター](/ticdc/monitor-ticdc.md)
-        -   [アラートルール](/ticdc/ticdc-alert-rules.md)
-        -   [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
-        -   [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
-        -   [TiCDCAvroプロトコル](/ticdc/ticdc-avro-protocol.md)
-        -   [TiCDC運河-JSONプロトコル](/ticdc/ticdc-canal-json.md)
-        -   [TiDBをConfluentプラットフォームと統合する](/ticdc/integrate-confluent-using-ticdc.md)
+        -   参照
+            -   [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
+            -   [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
+            -   [TiCDCAvroプロトコル](/ticdc/ticdc-avro-protocol.md)
+            -   [TiCDC運河-JSONプロトコル](/ticdc/ticdc-canal-json.md)
+            -   [TiDBをConfluentプラットフォームと統合する](/ticdc/integrate-confluent-using-ticdc.md)
+        -   [よくある質問](/ticdc/ticdc-faq.md)
         -   [用語集](/ticdc/ticdc-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
     -   sync-diff-inspector
@@ -546,7 +561,7 @@
             -   [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
             -   [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
             -   [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
-                -   [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+            -   [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
             -   [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
             -   [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
             -   [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -815,7 +830,7 @@
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
             -   [Titanの概要](/storage-engine/titan-overview.md)
-            -   [タイタンConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
+            -   [TitanConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
         -   TiFlash
             -   [概要](/tiflash/tiflash-overview.md)
             -   [TiFlashを使用する](/tiflash/use-tiflash.md)
@@ -845,6 +860,7 @@
         -   [5.4.1](/releases/release-5.4.1.md)
         -   [5.4.0](/releases/release-5.4.0.md)
     -   v5.3
+        -   [5.3.2](/releases/release-5.3.2.md)
         -   [5.3.1](/releases/release-5.3.1.md)
         -   [5.3.0](/releases/release-5.3.0.md)
     -   v5.2

@@ -73,7 +73,7 @@ TiDBクラスタをアップグレードする前に、まずTiUPまたはTiUP�
 >
 > アップグレードするクラスタがオフライン方式を使用せずにデプロイされた場合は、この手順をスキップしてください。
 
-[TiUPを使用してTiDBクラスターをデプロイする-TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline)を参照して、新しいバージョンのTiUPミラーをダウンロードし、制御マシンにアップロードします。 `local_install.sh`を実行した後、TiUPは上書きアップグレードを完了します。
+[TiUPを使用してTiDBクラスターをデプロイする-TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照して、新しいバージョンのTiUPミラーをダウンロードし、制御マシンにアップロードします。 `local_install.sh`を実行した後、TiUPは上書きアップグレードを完了します。
 
 {{< copyable "" >}}
 
@@ -83,7 +83,19 @@ sh tidb-community-server-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
 ```
 
-上書きアップグレード後、次のコマンドを実行してTiUPクラスターコンポーネントをアップグレードします。
+上書きアップグレード後、次のコマンドを実行して、サーバーとツールキットのオフラインミラーをサーバーディレクトリにマージします。
+
+{{< copyable "" >}}
+
+```bash
+tar xf tidb-community-toolkit-${version}-linux-amd64.tar.gz
+ls -ld tidb-community-server-${version}-linux-amd64 tidb-community-toolkit-${version}-linux-amd64
+cd tidb-community-server-${version}-linux-amd64/
+cp -rp keys ~/.tiup/
+tiup mirror merge ../tidb-community-toolkit-${version}-linux-amd64
+```
+
+ミラーをマージした後、次のコマンドを実行してTiUPクラスターコンポーネントをアップグレードします。
 
 {{< copyable "" >}}
 
@@ -231,7 +243,7 @@ Cluster version:    v6.1.0
 
 ### エラーが発生してアップグレードが中断された場合、このエラーを修正した後にアップグレードを再開するにはどうすればよいですか？ {#if-an-error-occurs-and-the-upgrade-is-interrupted-how-to-resume-the-upgrade-after-fixing-this-error}
 
-`tiup cluster upgrade`コマンドを再実行して、アップグレードを再開してください。アップグレード操作は、以前にアップグレードされたノードを再起動します。アップグレードされたノードを再起動したくない場合は、 `replay`サブコマンドを使用して操作を再試行してください。
+`tiup cluster upgrade`コマンドを再実行して、アップグレードを再開してください。アップグレード操作は、以前にアップグレードされたノードを再起動します。アップグレードされたノードを再起動したくない場合は、 `replay`サブコマンドを使用して操作を再試行します。
 
 1.  `tiup cluster audit`を実行して、操作レコードを確認します。
 

@@ -201,7 +201,7 @@ spring:
 {{< copyable "" >}}
 
 ```shell
-mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
+mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 ```
 
 したがって、パラメータは次のように設定する必要があります。
@@ -211,7 +211,7 @@ mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com:4000/test
+    url: jdbc:mysql://xxx.tidbcloud.com:4000/test
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -511,7 +511,7 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
   --data-urlencode 'price=100'
 ```
 
-リクエストは、ペイロードとして**フォームデータ**を使用します。リクエストの例は、売り手のID（ `sellID` ）が1、買い手のID（ `buyID` ）が2、購入した商品の数（ `amount` ）が10、購入に消費されたコインの数（ `price` ）が100であることを示しています。
+リクエストは、ペイロードとして**フォームデータ**を使用します。リクエストの例では、売り手のID（ `sellID` ）が1、買い手のID（ `buyID` ）が2、購入した商品の数（ `amount` ）が10、購入に消費されたコインの数（ `price` ）が100であることを示しています。
 
 戻り値は、トランザクションが成功したかどうかです。売り手にとって不十分な商品、買い手にとって不十分なコイン、またはデータベースエラーがある場合、 [データベーストランザクション](/develop/dev-guide-transaction-overview.md)は取引が成功せず、プレーヤーのコインや商品が失われないことを保証します。
 

@@ -74,7 +74,7 @@ summary: Learn the optimistic transaction model in TiDB.
 # Whether to disable automatic retry. ("on" by default)
 tidb_disable_txn_auto_retry = OFF
 # Set the maximum number of the retires. ("10" by default)
-# When “tidb_retry_limit = 0”, automatic retry is completely disabled.
+# When "tidb_retry_limit = 0", automatic retry is completely disabled.
 tidb_retry_limit = 10
 ```
 

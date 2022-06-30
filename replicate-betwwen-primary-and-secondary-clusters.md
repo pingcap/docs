@@ -11,7 +11,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 2.  プライマリクラスタからセカンダリクラスタに増分データを複製します。
 3.  プライマリクラスタがダウンしているときにREDOログを使用して、データを一貫して回復します。
 
-実行中のTiDBクラスタからそのセカンダリクラスタに増分データを複製するには、 [バックアップと復元（BR）](/br/backup-and-restore-tool.md)と[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
+実行中のTiDBクラスタからそのセカンダリクラスタに増分データを複製するには、バックアップと復元[BR](/br/backup-and-restore-overview.md)および[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 
 ## ステップ1.環境をセットアップします {#step-1-set-up-the-environment}
 
@@ -110,11 +110,11 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ2.完全なデータを移行する {#step-2-migrate-full-data}
 
-環境をセットアップした後、 [BR](https://github.com/pingcap/br)のバックアップおよび復元機能を使用して、完全なデータを移行できます。 BRは[いくつかの方法](/br/backup-and-restore-tool.md#how-to-use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
+環境を設定した後、 [BR](https://github.com/pingcap/br)のバックアップおよび復元機能を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
 
 > **ノート：**
 >
-> アップストリームクラスターとダウンストリームクラスターのバージョンが異なる場合は、 [BRの互換性](/br/backup-and-restore-tool.md#compatibility)を確認する必要があります。このドキュメントでは、アップストリームクラスターとダウンストリームクラスターが同じバージョンであると想定しています。
+> アップストリームクラスターとダウンストリームクラスターのバージョンが異なる場合は、 [BRの互換性](/br/backup-and-restore-overview.md#before-you-use-br)を確認する必要があります。このドキュメントでは、アップストリームクラスターとダウンストリームクラスターが同じバージョンであると想定しています。
 
 1.  GCを無効にします。
 
@@ -154,7 +154,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
     1 row in set (2.11 sec)
     ```
 
-    `BACKUP`コマンドが実行された後、TiDBはバックアップデータに関するメタデータを返します。データはバックアップされる前に生成されるため、 `BackupTS`に注意してください。このドキュメントでは**、データチェックの終了と**<strong>TiCDCによる増分移行スキャンの開始</strong>として`BackupTS`を使用します。
+    `BACKUP`コマンドが実行された後、TiDBはバックアップデータに関するメタデータを返します。データはバックアップされる前に生成されるため、 `BackupTS`に注意してください。このドキュメントでは**、データチェックの終了と**<strong>TiCDCによるインクリメンタルマイグレーションスキャンの開始</strong>として`BackupTS`を使用します。
 
 3.  データを復元します。
 
@@ -254,7 +254,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 3.  GCを有効にします。
 
-    TiCDCを使用した増分移行では、GCは複製された履歴データのみを削除します。したがって、チェンジフィードを作成した後、次のコマンドを実行してGCを有効にする必要があります。詳細については、 [TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/troubleshoot-ticdc.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
+    TiCDCを使用した増分移行では、GCは複製された履歴データのみを削除します。したがって、チェンジフィードを作成した後、次のコマンドを実行してGCを有効にする必要があります。詳細については、 [TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     {{< copyable "" >}}
 

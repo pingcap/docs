@@ -41,7 +41,7 @@ https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 | [TiDBデータ移行（DM）](/dm/dm-overview.md)                                         | `dm-worker-{version}-linux-amd64.tar.gz` <br/>`dm-master-{version}-linux-amd64.tar.gz` <br/>`dmctl-{version}-linux-amd64.tar.gz` |
 | [TiCDC](/ticdc/ticdc-overview.md)                                           | `cdc-{version}-linux-amd64.tar.gz`                                                                                               |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)                         | `pump-{version}-linux-amd64.tar.gz` <br/>`drainer-{version}-linux-amd64.tar.gz` <br/>`binlogctl` <br/>`reparo`                   |
-| [バックアップと復元（BR）](/br/backup-and-restore-tool.md)                             | `br-{version}-linux-amd64.tar.gz`                                                                                                |
+| [バックアップと復元（BR）](/br/backup-and-restore-overview.md)                         | `br-{version}-linux-amd64.tar.gz`                                                                                                |
 | [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) | `sync_diff_inspector`                                                                                                            |
 | [TiSpark](/tispark-overview.md)                                             | `tispark-{tispark-version}-any-any.tar.gz` <br/>`spark-{spark-version}-any-any.tar.gz`                                           |
 | [PD制御](/pd-control.md)                                                      | `pd-recover-{version}-linux-amd64.tar`                                                                                           |

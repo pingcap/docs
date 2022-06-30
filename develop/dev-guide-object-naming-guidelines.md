@@ -28,7 +28,6 @@ summary: Learn the object naming convention in TiDB.
     -   事業運営の一時表： `tmp_st_{business code}_{creator abbreviation}_{date}`
     -   勘定科目表期間の記録： `t_crm_ec_record_YYYY{MM}{dd}`
 -   異なるビジネスモジュールのテーブル用に個別のデータベースを作成し、それに応じて注釈を追加します。
--   現在、TiDBは`lower-case-table-names`から`2`の値の設定のみをサポートしています。つまり、テーブル名を保存するときは大文字と小文字が区別されますが、テーブル名を比較するときは大文字と小文字が区別されません。比較は小文字に基づいています。
 
 ## 列の命名規則 {#column-naming-convention}
 

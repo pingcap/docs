@@ -55,7 +55,7 @@ cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:830
 -   `pd` ：PDエンドポイントのコンマ区切りリスト。
 -   `config` ：TiCDCが使用する構成ファイルのアドレス（オプション）。このオプションは、TiCDCv5.0.0以降でサポートされています。このオプションは、TiUPv1.4.0以降のTiCDC展開で使用できます。
 -   `data-dir` ：ファイルを保存するためにディスクを使用する必要がある場合にTiCDCが使用するディレクトリを指定します。 Unified Sorterは、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク容量が500GiB以上であることを確認することをお勧めします。詳細については、 [ユニファイドソーター](/ticdc/manage-ticdc.md#unified-sorter)を参照してください。 TiUPを使用している場合は、 [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`を構成するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
--   `gc-ttl` ：TiCDCによって設定されたPDのサービスレベル`GC safepoint`のTTL（Time To Live）、およびレプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは24時間を意味します。注：TiCDCレプリケーションタスクの一時停止は、TiCDC GCセーフポイントの進行に影響します。つまり、 [TiCDCGCセーフポイントの完全な動作](/ticdc/troubleshoot-ticdc.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳しく説明されているように、アップストリームTiDBGCの進行に影響します。
+-   `gc-ttl` ：TiCDCによって設定されたPDのサービスレベル`GC safepoint`のTTL（Time To Live）、およびレプリケーションタスクが一時停止できる期間（秒単位）。デフォルト値は`86400`で、これは24時間を意味します。注：TiCDCレプリケーションタスクの一時停止は、TiCDC GCセーフポイントの進行に影響します。つまり、 [TiCDCGCセーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳しく説明されているように、アップストリームTiDBGCの進行に影響します。
 -   `log-file` ：TiCDCプロセスの実行中にログが出力されるパス。このパラメーターが指定されていない場合、ログは標準出力（stdout）に書き込まれます。
 -   `log-level` ：TiCDCプロセス実行時のログレベル。デフォルト値は`"info"`です。
 -   `ca` ：TLS接続用のCA証明書ファイルのパスをPEM形式で指定します（オプション）。

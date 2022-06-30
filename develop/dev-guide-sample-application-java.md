@@ -1,6 +1,7 @@
 ---
 title: Build a Simple CRUD App with TiDB and Java
 summary: Learn how to build a simple CRUD application with TiDB and Java.
+aliases: ['/appdev/dev/for-hibernate-orm','/tidb/stable/dev-guide-outdated-for-hibernate-orm']
 ---
 
 <!-- markdownlint-disable MD024 -->
@@ -576,11 +577,11 @@ cd plain-java-hibernate
 </hibernate-configuration>
 ```
 
-`HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBCと比較して、Hibernateを使用する場合、Hibernateは異なるデータベース間のデータベース作成の違いを回避するため、構成ファイルのパスを書き込むだけで済みます。
+`HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBCと比較すると、Hibernateを使用する場合、Hibernateは異なるデータベース間のデータベース作成の違いを回避するため、構成ファイルのパスを書き込むだけで済みます。
 
 `PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBCと比較すると、Hibernateは、オブジェクトマッピングや基本オブジェクトのCRUDなどの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
-`PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBCと比較して、Hibernateの`PlayerBean`は、より多くの情報のマッピング関係を示す注釈を追加します。
+`PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBCと比較して、Hibernateの`PlayerBean`は、詳細情報のマッピング関係を示す注釈を追加します。
 
 {{< copyable "" >}}
 
@@ -872,7 +873,7 @@ mysqlDataSource.setUser("root");
 mysqlDataSource.setPassword("");
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、 TiDB Cloudから取得する接続文字列が次のとおりであるとします。
 
 ```
 mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
@@ -924,12 +925,12 @@ mysqlDataSource.setPassword("123456");
 </hibernate-configuration>
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、 TiDB Cloudから取得する接続文字列が次のとおりであるとします。
 
 {{< copyable "" >}}
 
 ```shell
-mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com -P 4000 -p
+mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 ```
 
 この場合、次のようにパラメータを変更できます。
@@ -947,7 +948,7 @@ mysql --connect-timeout 15 -u root -h tidb.e049234d.d40d1f8b.us-east-1.prod.aws.
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.TiDBDialect</property>
-        <property name="hibernate.connection.url">jdbc:mysql://tidb.e049234d.d40d1f8b.us-east-1.prod.aws.tidbcloud.com:4000/test</property>
+        <property name="hibernate.connection.url">jdbc:mysql://xxx.tidbcloud.com:4000/test</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">123456</property>
         <property name="hibernate.connection.autocommit">false</property>

@@ -5,7 +5,7 @@ summary: Learn about Table Selector used by the table routing, binlog event filt
 
 # テーブルセレクター {#table-selector}
 
-テーブルセレクターは、スキーマ/テーブルの[ワイルドカード文字](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。指定されたテーブルに一致させるには、 `schema-pattern` / `table-pattern`を構成します。
+テーブルセレクターは、スキーマ/テーブルの[ワイルドカード文字](https://en.wikipedia.org/wiki/Wildcard_character)に基づく一致ルールを提供します。指定したテーブルに一致させるには、 `schema-pattern` / `table-pattern`を構成します。
 
 ## ワイルドカード文字 {#wildcard-character}
 
@@ -31,8 +31,8 @@ summary: Learn about Table Selector used by the table routing, binlog event filt
 -   スキーマ名に`schema_`のプレフィックスが含まれるすべてのスキーマとテーブルを照合します。
 
     ```yaml
-    schema-pattern： "schema_*"
-    table-pattern： ""
+    schema-pattern: "schema_*"
+    table-pattern: ""
     ```
 
 -   スキーマ名に`schema_`つのプレフィックスがあり、テーブル名に`table_`のプレフィックスがあるすべてのテーブルを照合します。

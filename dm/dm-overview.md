@@ -73,7 +73,7 @@ DMについては、オンラインドキュメントから学ぶことができ
 
 ## ライセンス {#license}
 
-DMはApache2.0ライセンスに準拠しています。詳細については、 [ライセンス](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE)を参照してください。
+DMはApache2.0ライセンスに準拠しています。詳細については、 [ライセンス](https://github.com/pingcap/tiflow/blob/master/LICENSE)を参照してください。
 
 ## DMバージョン {#dm-versions}
 

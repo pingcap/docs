@@ -52,7 +52,7 @@ summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
 
 -   [TiUPを使用してTiDBをアップグレードする](/upgrade-tidb-using-tiup.md)
 -   [TiUPを使用してTiDBをスケーリングする](/scale-tidb-using-tiup.md)
--   [データのバックアップと復元](/br/backup-and-restore-tool.md)
+-   [データのバックアップと復元](/br/backup-and-restore-overview.md)
 -   [デプロイの導入と管理](/ticdc/manage-ticdc.md)
 -   [TiUPを使用してTiDBを管理する](/maintain-tidb-using-tiup.md)
 -   [TiFlashを管理する](/tiflash/maintain-tiflash.md)

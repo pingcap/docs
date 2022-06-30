@@ -1,9 +1,9 @@
 ---
-title: Backup & Restore FAQ
-summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
+title: Backup & Restore FAQs
+summary: Learn about Frequently Asked Questions (FAQs) and the solutions of BR.
 ---
 
-# バックアップと復元FAQ {#backup-x26-restore-faq}
+# バックアップと復元に関するFAQ {#backup-x26-restore-faqs}
 
 このドキュメントには、よくある質問（FAQ）とバックアップと復元（BR）に関するソリューションが記載されています。
 
@@ -14,11 +14,11 @@ TiDB v5.4.0以降、BRはバックアップタスクの自動調整機能を導�
 TiKVは[動的に構成する](/tikv-control.md#modify-the-tikv-configuration-dynamically)自動調整機能をサポートしています。クラスタを再起動せずに、次の方法で機能を有効または無効にできます。
 
 -   自動調整を無効にする：TiKV構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)を`false`に設定します。
--   自動調整を有効にする： `backup.enable-auto-tune`を`true`に設定します。 v5.3.xからv5.4.0以降のバージョンにアップグレードするクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
+-   自動調整を有効にする： `backup.enable-auto-tune`を`true`に設定します。 v5.3.xからv5.4.0以降のバージョンにアップグレードされたクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
 `tikv-ctl`を使用して自動調整を有効または無効にするには、 [オートチューンを使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
-さらに、この機能により、バックアップタスクで使用されるデフォルトのスレッド数も削減されます。詳細については、 `backup.num-threads` ]（/ tikv-configuration-file.md＃num-threads-1）を参照してください。したがって、Grafanaダッシュボードでは、バックアップタスクで使用される速度、CPU使用率、およびI / Oリソース使用率は、v5.4より前のバージョンよりも低くなります。 v5.4より前のデフォルト値の`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッドの数が論理CPUコアの75％を占めていました。最大値は`32`でした。 v5.4以降、この構成アイテムのデフォルト値は`CPU * 0.5`で、最大値は`8`です。
+さらに、自動調整により、バックアップタスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ]（/ tikv-configuration-file.md＃num-threads-1）を参照してください。したがって、Grafanaダッシュボードでは、バックアップタスクで使用される速度、CPU使用率、およびI / Oリソース使用率は、v5.4.0より前のバージョンよりも低くなります。 v5.4.0より前では、デフォルト値の`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッドの数は、論理CPUコアの75％を占めています。最大値は`32`でした。 v5.4.0以降、この構成アイテムのデフォルト値は`CPU * 0.5`で、最大値は`8`です。
 
 オフラインクラスタでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数に変更できます。
 
@@ -26,35 +26,35 @@ TiKVは[動的に構成する](/tikv-control.md#modify-the-tikv-configuration-dy
 
 データを復元する場合、各ノードは**すべての**バックアップファイル（SSTファイル）にアクセスできる必要があります。デフォルトでは、 `local`のストレージが使用されている場合、バックアップファイルは異なるノードに分散しているため、データを復元することはできません。したがって、各TiKVノードのバックアップファイルを他のTiKVノードにコピーする必要があります。
 
-バックアップ中にNFSディスクをバックアップディスクとしてマウントすることをお勧めします。詳細については、 [1つのテーブルをネットワークディスクにバックアップします](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-in-production-environment)を参照してください。
+バックアップ中にNFSディスクをバックアップディスクとしてマウントすることをお勧めします。詳細については、 [1つのテーブルをネットワークディスクにバックアップします](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)を参照してください。
 
-## BRを使用したバックアップ中にクラスタにどの程度影響しますか？ {#how-much-does-it-affect-the-cluster-during-backup-using-br}
+## バックアップ操作はクラスタにどの程度の影響を与えますか？ {#how-much-impact-does-a-backup-operation-have-on-the-cluster}
 
-TiDB v5.4.0以降のバージョンでは、BRは、バックアップタスクで使用されるデフォルトのCPU使用率を下げるだけでなく、ワークロードが重いクラスタでバックアップタスクで使用されるリソースを制限します。したがって、ワークロードが重いv5.4.0クラスタのバックアップタスクにデフォルト構成を使用する場合、クラスタのパフォーマンスに対するタスクの影響は、v5.4.0より前のクラスターの影響よりも大幅に小さくなります。詳細については、 [BRオートチューン](/br/br-auto-tune.md)を参照してください。
+TiDB v5.4.0以降のバージョンでは、BRは、バックアップタスクで使用されるデフォルトのCPU使用率を減らすだけでなく、ワークロードが重いクラスタでバックアップタスクによって使用されるリソースを制限する[BRオートチューン](/br/br-auto-tune.md)つの機能も導入します。したがって、ワークロードが重いv5.4.0クラスタのバックアップタスクにデフォルト構成を使用する場合、クラスタのパフォーマンスに対するタスクの影響は、v5.4.0より前のクラスターの場合よりも大幅に小さくなります。
 
 以下は、単一ノードでの内部テストです。テスト結果は、**フルスピードバックアップ**シナリオでv5.4.0とv5.3.0のデフォルト構成を使用する場合、クラスタパフォーマンスに対するBRを使用したバックアップの影響がまったく異なることを示しています。詳細なテスト結果は次のとおりです。
 
 -   BRがv5.3.0のデフォルト構成を使用する場合、書き込み専用ワークロードのQPSは75％削減されます。
--   BRがv5.4.0のデフォルト構成を使用する場合、同じワークロードのQPSは25％削減されます。ただし、この構成を使用すると、BRを使用したバックアップタスクの速度がそれに応じて遅くなります。必要な時間は、v5.3.0構成の1.7倍です。
+-   BRがv5.4.0のデフォルト構成を使用する場合、同じワークロードのQPSは25％削減されます。ただし、この構成を使用すると、BRを使用したバックアップタスクの期間がそれに応じて長くなります。必要な時間は、v5.3.0構成の1.7倍です。
 
-バックアップタスクがクラスタのパフォーマンスに与える影響を手動で制御する必要がある場合は、次のソリューションを使用できます。これらの2つの方法は、クラスタへのバックアップタスクの影響を減らすことができますが、バックアップタスクの速度も低下させます。
+次のいずれかのソリューションを使用して、バックアップタスクがクラスタのパフォーマンスに与える影響を手動で制御できます。これらの方法は、クラスタへのバックアップタスクの影響を軽減しますが、バックアップタスクの速度も低下させることに注意してください。
 
 -   `--ratelimit`パラメータを使用して、バックアップタスクの速度を制限します。このパラメータは、**バックアップファイルを外部ストレージに保存**する速度を制限することに注意してください。バックアップファイルの合計サイズを計算するときは、バックアップログの`backup data size(after compressed)`をベンチマークとして使用します。
--   TiKV構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップタスクで使用されるリソースを制限します。この構成項目は、バックアップタスクで使用されるスレッドの数を決定します。 BRがバックアップタスクに使用するスレッドが`8`以下であり、クラスタの合計CPU使用率が60％を超えない場合、読み取りおよび書き込みのワークロードに関係なく、バックアップタスクはクラスタにほとんど影響を与えません。
+-   TiKV構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップタスクで使用されるスレッドの数を制限します。 BRがバックアップタスクに使用するスレッドが`8`以下であり、クラスタの合計CPU使用率が60％を超えない場合、読み取りおよび書き込みのワークロードに関係なく、バックアップタスクはクラスタにほとんど影響を与えません。
 
 ## BRはシステムテーブルをバックアップしますか？データの復元中に、競合が発生しますか？ {#does-br-back-up-system-tables-during-data-restoration-do-they-raise-conflicts}
 
-v5.1.0より前では、BRはバックアップ中にシステムスキーマ`mysql`からデータを除外していました。 v5.1.0以降、BRは、システムスキーマ`mysql.*`を含むすべてのデータをデフォルトで**バックアップ**します。
+v5.1.0より前では、BRはバックアップ中にシステムスキーマ`mysql.*`からデータを除外していました。 v5.1.0以降、BRは、システムスキーマ`mysql.*`を含むすべてのデータをデフォルトで**バックアップ**します。
 
-データの復元中、システムテーブルで競合が発生することはありません。 `mysql.*`でシステムテーブルを復元する技術的な実装はまだ完了していないため、システムスキーマ`mysql`のテーブルはデフォルトでは復元され**ません**。つまり、競合は発生しません。詳細については、 [`mysql`システムスキーマのテーブルデータのバックアップと復元（実験的機能）](/br/backup-and-restore-tool.md#back-up-and-restore-table-data-in-the-mysql-system-schema-experimental-feature)を参照してください。
+`mysql.*`でシステムテーブルを復元する技術的な実装はまだ完了していないため、システムスキーマ`mysql`のテーブルはデフォルトで**は復元されません**。つまり、競合は発生しません。詳細については、 [`mysql`スキーマで作成されたテーブルを復元します（実験的）](/br/br-usage-restore.md#restore-tables-created-in-the-mysql-schema)を参照してください。
 
 ## ルートを使用してBRを実行しようとしても、 <code>Permission denied</code>た、または<code>No such file or directory</code>エラーが発生しないようにするにはどうすればよいですか？ {#what-should-i-do-to-handle-the-code-permission-denied-code-or-code-no-such-file-or-directory-code-error-even-if-i-have-tried-to-run-br-using-root-in-vain}
 
 TiKVがバックアップディレクトリにアクセスできるかどうかを確認する必要があります。データをバックアップするには、TiKVに書き込み権限があるかどうかを確認してください。データを復元するには、読み取り権限があるかどうかを確認してください。
 
-バックアップ操作中に、記憶媒体がローカルディスクまたはネットワークファイルシステム（NFS）である場合、BRを開始するユーザーとTiKVを開始するユーザーが一致していることを確認します（BRとTiKVが異なるマシン上にある場合、ユーザー&#39;UIDは一貫している必要があります）。そうしないと、 `Permission denied`の問題が発生する可能性があります。
+バックアップ操作中に、記憶媒体がローカルディスクまたはネットワークファイルシステム（NFS）の場合、BRを開始するユーザーとTiKVを開始するユーザーが一致していることを確認します（BRとTiKVが異なるマシン上にある場合、ユーザーは&#39;UIDは一貫している必要があります）。そうしないと、 `Permission denied`の問題が発生する可能性があります。
 
-バックアップファイル（SSTファイル）はTiKVによって保存されるため、ルートアクセスでBRを実行すると、ディスクのアクセス許可が原因で失敗する可能性があります。
+バックアップファイル（SSTファイル）はTiKVによって保存されるため、rootアクセスでBRを実行すると、ディスクのアクセス許可が原因で失敗する可能性があります。
 
 > **ノート：**
 >
@@ -127,11 +127,13 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
     drwxr-xr-x 11 root root 310 Jul  4 10:35 ..
     ```
 
-    上記の出力から、 `tikv-server`つのインスタンスがユーザー`tidb_ouo`によって開始されていることがわかります。ただし、ユーザー`tidb_ouo`には`backup`の書き込み権限がないため、バックアップは失敗します。
+    上記の出力から、 `tikv-server`つのインスタンスがユーザー`tidb_ouo`によって開始されていることがわかります。ただし、ユーザー`tidb_ouo`には`backup`の書き込み権限がありません。したがって、バックアップは失敗します。
 
 ## <code>Io(Os...)</code>エラーを処理するにはどうすればよいですか？ {#what-should-i-do-to-handle-the-code-io-os-code-error}
 
-これらの問題のほとんどすべては、TiKVがディスクにデータを書き込むときに発生するシステムコールエラーです。たとえば、 `Io(Os {code: 13, kind: PermissionDenied...})`や`Io(Os {code: 2, kind: NotFound...})`などのエラーメッセージが表示された場合は、最初にバックアップディレクトリのマウント方法とファイルシステムを確認してから、別のフォルダまたは別のハードディスクにデータをバックアップしてみてください。
+これらの問題のほとんどすべては、TiKVがディスクにデータを書き込むときに発生するシステムコールエラーです（たとえば、 `Io(Os {code: 13, kind: PermissionDenied...})`または`Io(Os {code: 2, kind: NotFound...})` ）。
+
+このような問題に対処するには、まずバックアップディレクトリのマウント方法とファイルシステムを確認してから、別のフォルダまたは別のハードディスクにデータをバックアップしてみてください。
 
 たとえば、 `samba`で構築されたネットワークディスクにデータをバックアップするときに`Code: 22(invalid argument)`エラーが発生する場合があります。
 
@@ -173,9 +175,9 @@ BRを使用して[ `--ddl-batch-size` ]（/br/br-batch-create-table.md#how to us
 
 BRを使用してバックアップされたクラスタにTiFlashがある場合、BRがバックアップデータを復元するときに`TableInfo`はTiFlash情報を保存します。復元するクラスタにTiFlashがない場合は、 `region is unavailable`エラーが報告されます。
 
-## BRは、一部の履歴バックアップのインプレース完全リカバリをサポートしていますか？ {#does-br-support-in-place-full-recovery-of-some-historical-backup}
+## BRは、一部の履歴バックアップのインプレース完全復元をサポートしていますか？ {#does-br-support-in-place-full-restoration-of-some-historical-backup}
 
-いいえ。BRは、一部の履歴バックアップのインプレース完全リカバリをサポートしていません。
+いいえ。BRは、一部の履歴バックアップのインプレース完全復元をサポートしていません。
 
 ## Kubernetes環境での増分バックアップにBRを使用するにはどうすればよいですか？ {#how-can-i-use-br-for-incremental-backup-in-the-kubernetes-environment}
 
@@ -200,3 +202,35 @@ v4.0.9では、BRはデフォルトで統計をバックアップしますが、
 -   BRがデータを復元するとき、PDのいくつかのグローバル構成を変更します。したがって、データの復元に複数のBRプロセスを同時に使用すると、これらの構成が誤って上書きされ、異常なクラスタステータスが発生する可能性があります。
 -   BRはデータを復元するために多くのクラスタリソースを消費するため、実際、BRプロセスを並行して実行すると、復元速度は限られた範囲でしか向上しません。
 -   データ復元のために複数のBRプロセスを並行して実行するテストは行われていないため、成功する保証はありません。
+
+## バックアップログで<code>key locked Error</code>が報告された場合はどうすればよいですか？ {#what-should-i-do-if-the-backup-log-reports-code-key-locked-error-code}
+
+ログのエラーメッセージ： `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
+
+バックアッププロセス中にキーがロックされている場合、BRはロックを解決しようとします。このエラーがたまにしか発生しない場合、バックアップの正確性は影響を受けません。
+
+## バックアップ操作が失敗した場合はどうすればよいですか？ {#what-should-i-do-if-a-backup-operation-fails}
+
+ログのエラーメッセージ： `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
+
+バックアップ操作が失敗し、上記のメッセージが表示された場合は、次のいずれかの操作を実行してから、バックアップを再開してください。
+
+-   バックアップ用のディレクトリを変更します。たとえば、 `/dir/backup_local/`を`/dir/backup-2020-01-01/`に変更します。
+-   すべてのTiKVノードとBRノードのバックアップディレクトリを削除します。
+
+## BRのバックアップまたは復元後に、監視ノードに表示されるディスク使用量に一貫性がない場合はどうすればよいですか？ {#what-should-i-do-if-the-disk-usage-shown-on-the-monitoring-node-is-inconsistent-after-br-backup-or-restoration}
+
+この不整合は、バックアップで使用されるデータ圧縮率が復元で使用されるデフォルトの率と異なるという事実が原因で発生します。チェックサムが成功した場合、この問題は無視できます。
+
+## 配置ルールをクラスタに復元するとエラーが発生するのはなぜですか？ {#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster}
+
+v6.0.0より前では、BRは[配置ルール](/placement-rules-in-sql.md)をサポートしていません。 v6.0.0以降、BRは配置ルールをサポートし、配置ルールのバックアップおよび復元モードを制御するためのコマンドラインオプション`--with-tidb-placement-mode=strict/ignore`を導入しています。デフォルト値`strict`の場合、BRは配置ルールをインポートして検証しますが、値が`ignore`の場合はすべての配置ルールを無視します。
+
+## BRが<code>new_collations_enabled_on_first_bootstrap</code>不一致を報告するのはなぜですか？ {#why-does-br-report-code-new-collations-enabled-on-first-bootstrap-code-mismatch}
+
+TiDB v6.0.0以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BRは、アップストリームクラスタの`new_collations_enabled_on_first_bootstrap`の構成をバックアップし、この構成の値がアップストリームクラスターとダウンストリームクラスターの間で一貫しているかどうかを確認します。値が一貫している場合、BRはアップストリームクラスタにバックアップされたデータをダウンストリームクラスタに安全に復元します。値に一貫性がない場合、BRはデータの復元を実行せず、エラーを報告します。
+
+以前のバージョンのv6.0.0のTiDBクラスタにデータをバックアップし、このデータをv6.0.0以降のバージョンのTiDBクラスタに復元するとします。この状況では、 `new_collations_enabled_on_first_bootstrap`の値がアップストリームクラスターとダウンストリームクラスターの間で一貫しているかどうかを手動で確認する必要があります。
+
+-   値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
+-   値に一貫性がなく、強制的に復元を実行した場合、BRはデータ検証エラーを報告します。

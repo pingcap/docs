@@ -48,7 +48,7 @@ DELETE FROM {table} WHERE {filter}
 {{< copyable "" >}}
 
 ```sql
-SELECT COUNT(*) FROM `rating` WHERE `rating_at` >= "2022-04-15 00:00:00" AND  `rating_at` <= "2022-04-15 00:15:00";
+SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
 ```
 
 10,000を超えるレコードが返された場合は、 [一括削除](#bulk-delete)を使用してそれらを削除します。
@@ -61,7 +61,7 @@ SELECT COUNT(*) FROM `rating` WHERE `rating_at` >= "2022-04-15 00:00:00" AND  `r
 {{< copyable "" >}}
 
 ```sql
-DELETE FROM `rating` WHERE `rating_at` >= "2022-04-15 00:00:00" AND  `rating_at` <= "2022-04-15 00:15:00";
+DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
 ```
 
 </div>
@@ -74,15 +74,18 @@ DELETE FROM `rating` WHERE `rating_at` >= "2022-04-15 00:00:00" AND  `rating_at`
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
 
 try (Connection connection = ds.getConnection()) {
-    PreparedStatement pstmt = connection.prepareStatement("DELETE FROM `rating` WHERE `rating_at` >= ? AND  `rating_at` <= ?");
+    String sql = "DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= ? AND  `rated_at` <= ?";
+    PreparedStatement preparedStatement = connection.prepareStatement(sql);
     Calendar calendar = Calendar.getInstance();
     calendar.set(Calendar.MILLISECOND, 0);
 
     calendar.set(2022, Calendar.APRIL, 15, 0, 0, 0);
-    pstmt.setTimestamp(1, new Timestamp(calendar.getTimeInMillis()));
+    preparedStatement.setTimestamp(1, new Timestamp(calendar.getTimeInMillis()));
 
     calendar.set(2022, Calendar.APRIL, 15, 0, 15, 0);
-    pstmt.setTimestamp(2, new Timestamp(calendar.getTimeInMillis()));
+    preparedStatement.setTimestamp(2, new Timestamp(calendar.getTimeInMillis()));
+
+    preparedStatement.executeUpdate();
 } catch (SQLException e) {
     e.printStackTrace();
 }
@@ -93,7 +96,7 @@ try (Connection connection = ds.getConnection()) {
 
 > **ノート：**
 >
-> `rating_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字通りの量としてTiDBに保存されていると見なすことができます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)に別の時間文字列を表示します。
+> `rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字通りの量としてTiDBに保存されていると見なすことができます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)に別の時間文字列を表示します。
 >
 > また、MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038より大きい値を保存する場合は、 `DATETIME`タイプを使用することをお勧めします。
 

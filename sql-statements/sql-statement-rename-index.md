@@ -10,12 +10,11 @@ summary: An overview of the usage of RENAME INDEX for the TiDB database.
 ## あらすじ {#synopsis}
 
 ```ebnf+diagram
-AlterTableStmt ::=
-    'ALTER' IgnoreOptional 'TABLE' TableName ( AlterTableSpecListOpt AlterTablePartitionOpt | 'ANALYZE' 'PARTITION' PartitionNameList ( 'INDEX' IndexNameList )? AnalyzeOptionListOpt )
+AlterTableStmt
+         ::= 'ALTER' 'IGNORE'? 'TABLE' TableName RenameIndexSpec ( ',' RenameIndexSpec )*
 
-KeyOrIndex ::=
-    'KEY'
-|   'INDEX'
+RenameIndexSpec
+         ::= 'RENAME' ( 'KEY' | 'INDEX' ) Identifier 'TO' Identifier
 ```
 
 ## 例 {#examples}

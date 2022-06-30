@@ -21,7 +21,7 @@ TiDB Lightningは、CSV（コンマ区切り値）データソース、および
 
 CSVファイルはスキーマレスです。それらをTiDBにインポートするには、テーブルスキーマを提供する必要があります。これは、次のいずれかによって実行できます。
 
--   `CREATE TABLE`のDDLステートメントを含む`db_name.table_name-schema.sql`という名前のファイルと、 `CREATE DATABASE`のDDLステートメントを含む`db_name-schema-create.sql`という名前のファイルを提供します。
+-   `CREATE TABLE` DDLステートメントを含む`db_name.table_name-schema.sql`という名前のファイルと、 `CREATE DATABASE`ステートメントを含む`db_name-schema-create.sql`という名前のファイルを提供します。
 -   TiDBでテーブルスキーマを手動で作成します。
 
 ## Configuration / コンフィグレーション {#configuration}
@@ -188,7 +188,7 @@ strict-format = true
 -   区切り文字が空、または
 -   すべてのフィールドにターミネータ自体が含まれているわけではありません。デフォルト構成では、これはすべてのフィールドにCR（ `\r` ）またはLF（ `\n` ）が含まれていないことを意味します。
 
-CSVファイルが厳密ではないが、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが2つのチャンクに半分にカットされ、解析が失敗したり、さらに悪いことに、破損したデータを静かにインポートしたりする可能性があります。
+CSVファイルが厳密ではないが、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが半分に分割されて2つのチャンクになり、解析が失敗したり、さらに悪いことに、破損したデータを静かにインポートしたりする可能性があります。
 
 ## 一般的な構成 {#common-configurations}
 
@@ -198,7 +198,7 @@ CSVファイルが厳密ではないが、 `strict-format`が誤って`true`に�
 
 ```toml
 [mydumper.csv]
-separator = ',' # It is not recommended to use the default ‘,’. It is recommended to use ‘\|+\|‘ or other uncommon character combinations.
+separator = ',' # It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations.
 delimiter = '"'
 header = true
 not-null = false

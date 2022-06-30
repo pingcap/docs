@@ -15,7 +15,7 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 テーブルフィルターは、複数の`-f`または`--filter`コマンドラインパラメーターを使用してツールに適用できます。各フィルターは`db.table`の形式であり、各部分はワイルドカードにすることができます（ [次のセクション](#wildcards)でさらに説明されています）。以下に、各ツールの使用例を示します。
 
--   [BR](/br/backup-and-restore-tool.md) ：
+-   [BR](/br/backup-and-restore-overview.md) ：
 
     {{< copyable "" >}}
 

@@ -87,7 +87,7 @@ TiDBバージョン：6.1.0
 
 -   TiFlashは、動的プルーニングモードでパーティションテーブルをサポートします。
 
-    OLAPシナリオのパフォーマンスを向上させるために、パーティションテーブルでは動的プルーニングモードがデフォルトで有効になっています。 TiDBをv6.0.0より前のバージョンからアップグレードする場合は、パフォーマンスを最大化するために、既存のパーティションテーブルの統計を手動で更新することをお勧めします（v6.1.0へのアップグレード後に作成された新しいインストールまたは新しいパーティションには必要ありません）。
+    OLAPシナリオのパフォーマンスを向上させるために、パーティションテーブルで動的プルーニングモードがサポートされています。 TiDBをv6.0.0より前のバージョンからアップグレードする場合は、パフォーマンスを最大化するために、既存のパーティションテーブルの統計を手動で更新することをお勧めします（v6.1.0へのアップグレード後に作成された新しいインストールまたは新しいパーティションには必要ありません）。
 
     ユーザー[動的剪定モード](/partitioned-table.md#dynamic-pruning-mode) [＃3873](https://github.com/pingcap/tiflash/issues/3873) [MPPモードでパーティションテーブルにアクセスする](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
 
@@ -97,7 +97,7 @@ TiDBバージョン：6.1.0
 
     RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けるピアをスケジュールし、他のレプリカを使用してそのデータを回復しようとします。 `background-error-recovery-window`パラメーターを使用して、リカバリーの最大許容時間を設定できます。時間枠内に回復操作が完了しない場合、TiKVはパニックになります。この機能は、回復可能な損傷したストレージを自動的に検出して回復するため、クラスタの安定性が向上します。
 
-    [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578%60)
+    [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578)
 
 -   非トランザクションDMLステートメントをサポートする
 
@@ -115,7 +115,7 @@ TiDBバージョン：6.1.0
 
     データベースは、統計を収集することでデータの分散を効果的に理解できます。これにより、合理的な実行プランが生成され、SQL実行の効率が向上します。 TiDBは、バックグラウンドで頻繁に変更されるデータオブジェクトに関する統計を定期的に収集します。ただし、統計の収集はクラスタリソースを消費し、ビジネスのピーク時にビジネスの安定した運用に影響を与える可能性があります。
 
-    v6.1.0以降、TiDBではバックグラウンド統計収集の最大実行時間を制御するために`tidb_max_auto_analyze_time`が導入されています。これは、デフォルトでは12時間です。アプリケーションでリソースのボトルネックが発生しない場合は、TiDBがタイムリーに統計を収集できるように、この変数を変更しないことをお勧めします。
+    v6.1.0以降、TiDBではバックグラウンド統計収集の最大実行時間を制御するために[`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が導入されています。これは、デフォルトでは12時間です。アプリケーションでリソースのボトルネックが発生しない場合は、TiDBがタイムリーに統計を収集できるように、この変数を変更しないことをお勧めします。
 
     [ユーザードキュメント](/system-variables.md)
 
@@ -125,11 +125,11 @@ TiDBバージョン：6.1.0
 
     TiDB v6.1.0より前では、マシンの障害のために複数のリージョンレプリカが失われた場合、ユーザーはすべてのTiKVサーバーを停止し、TiKV制御を使用してTiKVを1つずつ回復する必要があります。 TiDB v6.1.0以降、リカバリプロセスは完全に自動化されており、TiKVを停止する必要がなく、オンラインの他のアプリケーションに影響を与えません。回復プロセスはPD制御を使用してトリガーでき、よりユーザーフレンドリーな要約情報を提供します。
 
-    [ユーザードキュメント](/online-unsafe-recovery.md) [＃10483](https://github.com/tikv/tikv/issues/10483%60)
+    [ユーザードキュメント](/online-unsafe-recovery.md) [＃10483](https://github.com/tikv/tikv/issues/10483)
 
 -   履歴統計収集タスクの表示をサポート
 
-    `SHOW ANALYZE STATUS`ステートメントを使用して、クラスターレベルの統計収集タスクを表示できます。 TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを示し、履歴タスクレコードはTiDBの再起動後にクリアされます。したがって、履歴統計の収集時間と詳細を表示することはできません。 TiDB v6.1.0以降では、統計収集タスクの履歴レコードが保持され、クラスタの再起動後にクエリを実行できます。これにより、統計の異常によって引き起こされるクエリパフォーマンスの問題をトラブルシューティングするためのリファレンスが提供されます。
+    `SHOW ANALYZE STATUS`ステートメントを使用して、クラスターレベルの統計収集タスクを表示できます。 TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを示し、履歴タスクレコードはTiDBの再起動後にクリアされます。したがって、履歴統計の収集時間と詳細を表示することはできません。 TiDB v6.1.0以降、統計収集タスクの履歴レコードは保持され、クラスタの再起動後にクエリを実行できます。これにより、統計の異常によって引き起こされるクエリパフォーマンスの問題をトラブルシューティングするためのリファレンスが提供されます。
 
     [ユーザードキュメント](/sql-statements/sql-statement-show-analyze-status.md)
 
@@ -175,7 +175,7 @@ TiDBバージョン：6.1.0
 
 -   MySQLを使用したユーザーレベルのロック管理との互換性をサポート
 
-    ユーザーレベルのロックは、組み込み関数を介してMySQLによって提供されるユーザー名のロック管理システムです。ロック機能は、ロックのブロック、待機、およびその他のロック管理機能を提供できます。ユーザーレベルのロックは、RoR、Elixir、EctoなどのORMフレームワークでも広く使用されています。 v6.1.0以降、TiDBはMySQL互換のユーザーレベルのロック管理をサポートし、 `GET_LOCK` 、および`RELEASE_LOCK`の機能をサポートして`RELEASE_ALL_LOCKS`ます。
+    ユーザーレベルのロックは、組み込み関数を介してMySQLによって提供されるユーザー名のロック管理システムです。ロック機能は、ロックのブロック、待機、およびその他のロック管理機能を提供できます。ユーザーレベルのロックは、Rails、Elixir、EctoなどのORMフレームワークでも広く使用されています。 v6.1.0以降、TiDBはMySQL互換のユーザーレベルのロック管理をサポートし、 `GET_LOCK` 、および`RELEASE_LOCK`の機能をサポートして`RELEASE_ALL_LOCKS`ます。
 
     [ユーザードキュメント](/functions-and-operators/locking-functions.md) [＃14994](https://github.com/pingcap/tidb/issues/14994)
 
@@ -225,7 +225,6 @@ TiDBバージョン：6.1.0
 | [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)                                       | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `security.require-secure-transport` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                    |
 | [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)                                   | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `performance.committer-concurrency` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                    |
 | [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)                                       | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `run-auto-analyze` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                                     |
-| [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml-new-in-v610)                                             | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `enable-batch-dml` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                                     |
 | [`tidb_enable_new_only_full_group_by_check`](/system-variables.md#tidb_enable_new_only_full_group_by_check-new-in-v610)       | 新しく追加されました | この変数は、TiDBが`ONLY_FULL_GOUP_BY`チェックを実行するときの動作を制御します。                                                                                                  |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                           | 新しく追加されました | v6.1.0以降、TiDBの結合したテーブルの再配置再注文アルゴリズムは外部結合をサポートしています。この変数はサポート動作を制御し、デフォルト値は`ON`です。                                                                    |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                         | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `prepared-plan-cache.enabled` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                          |
@@ -244,7 +243,6 @@ TiDBバージョン：6.1.0
 | Configuration / コンフィグレーションファイル | Configuration / コンフィグレーション                                                                                                                                                                             | タイプを変更する   | 説明                                                                                                                                                        |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                           | `committer-concurrency`                                                                                                                                                                                | 削除         | システム変数`tidb_committer_concurrency`に置き換えられました。この構成項目は無効になりました。値を変更する場合は、対応するシステム変数を変更する必要があります。                                                            |
-| TiDB                           | `enable-batch-dml`                                                                                                                                                                                     | 削除         | システム変数`tidb_enable_batch_dml`に置き換えられました。この構成項目は無効になりました。値を変更する場合は、対応するシステム変数を変更する必要があります。                                                                 |
 | TiDB                           | `lower-case-table-names`                                                                                                                                                                               | 削除         | 現在、TiDBは`lower_case_table_name=2`のみをサポートしています。別の値が設定されている場合、クラスタがv6.1.0にアップグレードされた後、値は失われます。                                                              |
 | TiDB                           | `mem-quota-query`                                                                                                                                                                                      | 削除         | システム変数`tidb_mem_quota_query`に置き換えられました。この構成項目は無効になりました。値を変更する場合は、対応するシステム変数を変更する必要があります。                                                                  |
 | TiDB                           | `oom-action`                                                                                                                                                                                           | 削除         | システム変数`tidb_mem_oom_action`に置き換えられました。この構成項目は無効になりました。値を変更する場合は、対応するシステム変数を変更する必要があります。                                                                   |
@@ -365,7 +363,7 @@ TiDBバージョン：6.1.0
     -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`のテーブルが照会されたときにTiDBサーバーのメモリが不足する可能性がある問題を修正します。この問題は、Grafanaダッシュボード[＃33893](https://github.com/pingcap/tidb/issues/33893)で遅いクエリをチェックしたときに発生する可能性があります
     -   システム変数`max_allowed_packet`が有効にならない問題を修正します[＃31422](https://github.com/pingcap/tidb/issues/31422)
     -   [＃34502](https://github.com/pingcap/tidb/issues/34502)モジュールのメモリリークの問題を修正します[＃34525](https://github.com/pingcap/tidb/issues/34525)
-    -   PointGetプラン[＃3237](https://github.com/pingcap/tidb/issues/3237)でプランキャッシュが間違っている可能性がある問題を修正します
+    -   PointGetプラン[＃32371](https://github.com/pingcap/tidb/issues/32371)でプランキャッシュが間違っている可能性がある問題を修正します
     -   プランキャッシュがRC分離レベル[＃34447](https://github.com/pingcap/tidb/issues/34447)で開始されたときに、クエリ結果が間違っている可能性がある問題を修正します。
 
 -   TiKV
@@ -383,7 +381,7 @@ TiDBバージョン：6.1.0
     -   13の間違ったステータス`not leader`を修正し[＃4797](https://github.com/tikv/pd/issues/4797)
     -   一部のコーナーケースでのTSOフォールバックのバグを修正[＃4884](https://github.com/tikv/pd/issues/4884)
     -   PDリーダーの転送後に削除されたトゥームストーンストアが再び表示される問題を修正します[＃4941](https://github.com/tikv/pd/issues/4941)
-    -   PDリーダーの転送直後にスケジューリングを開始できない問題を修正します[4769](https://github.com/tikv/pd/issues/4769)
+    -   PDリーダーの転送直後にスケジューリングを開始できない問題を修正します[＃4769](https://github.com/tikv/pd/issues/4769)
 
 -   TiDBダッシュボード
 

@@ -76,11 +76,11 @@ TiDBLightningの基本は次のとおりです。
 
 ### バックアップと復元 {#backup-and-restore}
 
-[復元する](/br/backup-and-restore-tool.md) （BR）は、TiDBクラスタデータの分散バックアップと復元のためのコマンドラインツールです。 BRは、膨大なデータ量のTiDBクラスターを効果的にバックアップおよび復元できます。
+[復元する](/br/backup-and-restore-overview.md) （BR）は、TiDBクラスタデータの分散バックアップと復元のためのコマンドラインツールです。 BRは、膨大なデータ量のTiDBクラスターを効果的にバックアップおよび復元できます。
 
 BRの基本は次のとおりです。
 
--   [入力および出力データソース](/br/backup-and-restore-tool.md#types-of-backup-files) ：SST+ `backupmeta`ファイル
+-   [入力および出力データソース](/br/backup-and-restore-design.md#types-of-backup-files) ：SST+ `backupmeta`ファイル
 -   サポートされているTiDBバージョン：v3.1およびv4.0
 -   Kubernetesのサポート：はい。詳細については、 [BRを使用してS3互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用してS3互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
 

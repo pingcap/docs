@@ -9,11 +9,11 @@ summary: Learn about the FAQs related to data migration.
 
 移行関連のツールに関するよくある質問については、以下のリストにある対応するリンクをクリックしてください。
 
--   [バックアップと復元FAQ](/br/backup-and-restore-faq.md)
+-   [バックアップと復元に関するFAQ](/br/backup-and-restore-faq.md)
 -   [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
 -   [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)
 -   [TiDBデータ移行（DM）に関するFAQ](/dm/dm-faq.md)
--   [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
+-   [TiCDCのFAQ](/ticdc/ticdc-faq.md)
 
 ## 完全なデータのエクスポートとインポート {#full-data-export-and-import}
 
@@ -166,7 +166,7 @@ GoogleCloudSpannerには[同様の制限](https://cloud.google.com/spanner/docs/
 
 ### TiDBは構文への<code>replace into</code>サポートしていますか？ {#does-tidb-support-the-code-replace-into-code-syntax}
 
-はい。ただし、 `load data`は`replace into`構文をサポートしていません。
+はい。
 
 ### データを削除した後、クエリの速度が遅くなるのはなぜですか？ {#why-does-the-query-speed-getting-slow-after-deleting-data}
 
@@ -174,7 +174,7 @@ GoogleCloudSpannerには[同様の制限](https://cloud.google.com/spanner/docs/
 
 ### データを削除する最も効率的な方法は何ですか？ {#what-is-the-most-efficient-way-of-deleting-data}
 
-大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`を使用することをお勧めします。ループを削除し、トランザクションサイズの制限を超えないように、ループを終了する条件として`Affected Rows == 0`を使用します。ビジネスフィルタリングロジックを満たすことを前提として、強力なフィルタインデックス列を追加するか、主キーを直接使用して`id >= 5000*n+m and id < 5000*(n+1)+m`などの範囲を選択することをお勧めします。
+大量のデータを削除する場合は、 `Delete from t where xx limit 5000;`を使用することをお勧めします。ループを介して削除し、トランザクションサイズの制限を超えないように、ループを終了する条件として`Affected Rows == 0`を使用します。ビジネスフィルタリングロジックを満たすことを前提として、強力なフィルタインデックス列を追加するか、主キーを直接使用して`id >= 5000*n+m and id < 5000*(n+1)+m`などの範囲を選択することをお勧めします。
 
 一度に削除する必要のあるデータの量が非常に多い場合、各削除は逆方向にトラバースするため、このループメソッドはますます遅くなります。以前のデータを削除した後、削除されたフラグの多くは短期間残り（その後、すべてがガベージコレクションによって処理されます）、次のDeleteステートメントに影響を与えます。可能であれば、Where条件を調整することをお勧めします。 [TiDBのベストプラクティスの詳細](https://en.pingcap.com/blog/tidb-best-practice/#write)を参照してください。
 

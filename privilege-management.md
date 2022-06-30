@@ -386,7 +386,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
-このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`表の有効射程はグローバルです。
+このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`テーブルの有効範囲はグローバルです。
 
 `mysql.db`の`Host`と`User`は、ユーザーがアクセスできるデータベースを決定します。有効射程はデータベースです。
 
@@ -412,7 +412,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 `db`の表では、空のユーザーは匿名ユーザー名と一致します。 `User`列にワイルドカードを使用することはできません。 `Host`列と`Db`列の値は、パターンマッチングを使用できる`%`列と`_`列を使用できます。
 
-`user`および`db`テーブルのデータも、メモリにロードされるときにソートされます。
+`user`および`db`テーブルのデータも、メモリにロードされるときに並べ替えられます。
 
 `tables_priv`と`columns_priv`の`%`の使用法は似てい`Table_name`が、 `Db`の列の値に`Column_name`を含めることはできませ`%` 。ロード時の並べ替えも同様です。
 

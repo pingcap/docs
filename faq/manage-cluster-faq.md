@@ -25,7 +25,7 @@ MySQLと同様に、TiDBには静的パラメーターとソリッドパラメ�
 
 ### TiDB（TiKV）のデータディレクトリはどこにありますか？ {#where-and-what-are-the-data-directories-in-tidb-tikv}
 
-TiKVデータは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、データベース、ラフト、スナップの4つのディレクトリが含まれ、それぞれバックアップ、データ、ラフトデータ、ミラーデータを格納するために使用されます。
+TiKVデータは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、db、raft、およびsnapの4つのディレクトリが含まれ、それぞれバックアップ、データ、Raftデータ、およびミラーデータを格納するために使用されます。
 
 ### TiDBのシステムテーブルは何ですか？ {#what-are-the-system-tables-in-tidb}
 
@@ -185,7 +185,7 @@ pd-ctlツールを使用して、クラスタの一般的なステータスを�
 処理時間はシナリオによって異なります。一般に、次の3つのシナリオを検討できます。
 
 1.  対応するデータテーブルの行数が比較的少ない`Add Index`の操作：約3秒
-2.  対応するデータテーブルの行数が比較的多い`Add Index`の操作：処理時間は、特定の行数とそのときのQPSによって異なります（ `Add Index`の操作の優先度は通常のSQL操作よりも低くなります）。
+2.  対応するデータテーブルに比較的多数の行がある`Add Index`の操作：処理時間は、特定の行数とそのときのQPSによって異なります（ `Add Index`の操作の優先度は通常のSQL操作よりも低くなります）。
 3.  その他のDDL操作：約1秒
 
 DDL要求を受信するTiDBサーバーインスタンスが、DDL所有者がいるTiDBサーバーインスタンスと同じである場合、上記の最初と3番目のシナリオのコストは数十から数百ミリ秒にすぎない可能性があります。
@@ -427,6 +427,6 @@ TiDBは、小さなサイズのデータと限られたリージョンでは同�
 
 ### TiDBでデータをバックアップする方法は？ {#how-to-back-up-data-in-tidb}
 
-現在、大量のデータのバックアップには、 [BR](/br/backup-and-restore-tool.md)を使用することをお勧めします。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式のMySQLツール`mysqldump`はデータのバックアップと復元のためにTiDBでもサポートされていますが、そのパフォーマンスは[BR](/br/backup-and-restore-tool.md)よりも悪く、大量のデータのバックアップと復元にははるかに長い時間が必要です。
+現在、大量のデータ（1 TBを超える）のバックアップには、 [BR](/br/backup-and-restore-overview.md)を使用する方法が推奨されます。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式のMySQLツール`mysqldump`はデータのバックアップと復元のためにTiDBでもサポートされていますが、そのパフォーマンスはBRに勝るものはなく、大量のデータのバックアップと復元にははるかに長い時間が必要です。
 
 BRに関するその他のFAQについては、 [BRのよくある質問](/br/backup-and-restore-faq.md)を参照してください。

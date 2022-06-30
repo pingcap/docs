@@ -1,6 +1,7 @@
 ---
 title: Migrate from one TiDB cluster to another TiDB cluster
 summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster.
+aliases: ['/tidb/v6.1/incremental-replication-between-clusters/']
 ---
 
 # あるTiDBクラスターから別のTiDBクラスターに移行する {#migrate-from-one-tidb-cluster-to-another-tidb-cluster}
@@ -111,11 +112,11 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 ## ステップ2.完全なデータを移行する {#step-2-migrate-full-data}
 
-環境をセットアップした後、 [BR](https://github.com/pingcap/br)のバックアップおよび復元機能を使用して、完全なデータを移行できます。 BRは[いくつかの方法](/br/backup-and-restore-tool.md#how-to-use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
+環境を設定した後、 [BR](https://github.com/pingcap/br)のバックアップおよび復元機能を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
 
 > **ノート：**
 >
-> アップストリームクラスターとダウンストリームクラスターのバージョンが異なる場合は、 [BRの互換性](/br/backup-and-restore-tool.md#compatibility)を確認する必要があります。このドキュメントでは、アップストリームクラスターとダウンストリームクラスターが同じバージョンであると想定しています。
+> アップストリームクラスターとダウンストリームクラスターのバージョンが異なる場合は、 [BRの互換性](/br/backup-and-restore-overview.md#before-you-use-br)を確認する必要があります。このドキュメントでは、アップストリームクラスターとダウンストリームクラスターが同じバージョンであると想定しています。
 
 1.  GCを無効にします。
 
@@ -127,7 +128,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     Query OK, 0 rows affected (0.01 sec)
     MySQL [test]> SELECT @@global.tidb_gc_enable;
-    +-------------------------+：
+    +-------------------------+:
     | @@global.tidb_gc_enable |
     +-------------------------+
     |                       0 |
@@ -238,7 +239,7 @@ summary: Learn how to migrate data from one TiDB cluster to another TiDB cluster
 
 3.  GCを有効にします。
 
-    TiCDCを使用した増分移行では、GCは複製された履歴データのみを削除します。したがって、チェンジフィードを作成した後、次のコマンドを実行してGCを有効にする必要があります。詳細については、 [TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/troubleshoot-ticdc.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
+    TiCDCを使用した増分移行では、GCは複製された履歴データのみを削除します。したがって、チェンジフィードを作成した後、次のコマンドを実行してGCを有効にする必要があります。詳細については、 [TiCDCガベージコレクション（GC）セーフポイントの完全な動作は何ですか？](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)を参照してください。
 
     {{< copyable "" >}}
 

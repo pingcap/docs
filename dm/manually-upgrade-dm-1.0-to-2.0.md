@@ -108,7 +108,7 @@ from:
 
 [TiUPを使用する](/dm/deploy-a-dm-cluster-using-tiup.md)は、必要なノード数に応じて新しいv2.0+クラスタをデプロイします。
 
-## ステップ3：v1.0.xクラスタを停止します {#step-3-stop-the-v1-0-x-cluster}
+## 手順3：v1.0.xクラスタを停止する {#step-3-stop-the-v1-0-x-cluster}
 
 元のv1.0.xクラスタがDM-Ansibleによってデプロイされている場合は、 [DM-v1.0.xクラスタを停止できます](https://docs.pingcap.com/tidb-data-migration/v1.0/cluster-operations#stop-a-cluster)を使用する必要があります。
 

@@ -12,7 +12,7 @@ title: TiDB 2.0.9 Release Notes
 -   場合によっては`UNION ALL`ステートメントのパニック問題を修正します[＃7942](https://github.com/pingcap/tidb/pull/7942)
 -   間違ったDDLジョブによって引き起こされるスタックオーバーフローの問題を修正する[＃7959](https://github.com/pingcap/tidb/pull/7959)
 -   `Commit`の操作の低速ログを追加します[＃7983](https://github.com/pingcap/tidb/pull/7983)
--   `Limit`の値が大きすぎるために発生するパニックの問題を修正します[＃8004](https://github.com/pingcap/tidb/pull/8004)
+-   `Limit`の値が大きすぎることによって引き起こされるパニックの問題を修正します[＃8004](https://github.com/pingcap/tidb/pull/8004)
 -   `USING`節[＃8048](https://github.com/pingcap/tidb/pull/8048)での`utf8mb4`文字セットの指定のサポート
 -   `TRUNCATE`の組み込み関数が符号なし整数型[＃8069](https://github.com/pingcap/tidb/pull/8069)のパラメーターをサポートするようにします。
 -   場合によっては、統計モジュールの主キーの選択性推定の問題を修正します[＃8150](https://github.com/pingcap/tidb/pull/8150)
@@ -21,7 +21,7 @@ title: TiDB 2.0.9 Release Notes
 -   場合によっては`Union`ステートメントの不安定な結果を修正します[＃8168](https://github.com/pingcap/tidb/pull/8168)
 -   `Insert`以外のステートメントで`NULL`が`values`によって返されない問題を修正します[＃8179](https://github.com/pingcap/tidb/pull/8179)
 -   統計モジュールが古いデータをクリアできない場合があるという問題を修正します[＃8184](https://github.com/pingcap/tidb/pull/8184)
--   トランザクションの最大許容実行時間を構成可能なオプションにする[8209](https://github.com/pingcap/tidb/pull/8209)
+-   トランザクションの最大許容実行時間を構成可能なオプションにする[＃8209](https://github.com/pingcap/tidb/pull/8209)
 -   場合によっては`expression rewriter`の間違った比較アルゴリズムを修正します[＃8288](https://github.com/pingcap/tidb/pull/8288)
 -   `UNION ORDER BY`ステートメント[＃8307](https://github.com/pingcap/tidb/pull/8307)によって生成された余分な列を削除します
 -   `admin show next_row_id`ステートメント[＃8274](https://github.com/pingcap/tidb/pull/8274)をサポートする
