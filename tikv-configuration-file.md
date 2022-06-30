@@ -480,6 +480,7 @@ Configuration items related to Raftstore.
 
 + The storage capacity, which is the maximum size allowed to store data. If `capacity` is left unspecified, the capacity of the current disk prevails. To deploy multiple TiKV instances on the same physical disk, add this parameter to the TiKV configuration. For details, see [Key parameters of the hybrid deployment](/hybrid-deployment-topology.md#key-parameters).
 + Default value: `0`
++ Unit: KB|MB|GB
 
 ### `raftdb-path`
 
@@ -488,11 +489,19 @@ Configuration items related to Raftstore.
 
 ### `raft-base-tick-interval`
 
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
+
 + The time interval at which the Raft state machine ticks
 + Default value: `"1s"`
 + Minimum value: greater than `0`
 
 ### `raft-heartbeat-ticks`
+
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of passed ticks when the heartbeat is sent. This means that a heartbeat is sent at the time interval of `raft-base-tick-interval` * `raft-heartbeat-ticks`.
 + Default value: `2`
@@ -500,11 +509,19 @@ Configuration items related to Raftstore.
 
 ### `raft-election-timeout-ticks`
 
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
+
 + The number of passed ticks when Raft election is initiated. This means that if Raft group is missing the leader, a leader election is initiated approximately after the time interval of `raft-base-tick-interval` * `raft-election-timeout-ticks`.
 + Default value: `10`
 + Minimum value: `raft-heartbeat-ticks`
 
 ### `raft-min-election-timeout-ticks`
+
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The minimum number of ticks during which the Raft election is initiated. If the number is `0`, the value of `raft-election-timeout-ticks` is used. The value of this parameter must be greater than or equal to `raft-election-timeout-ticks`.
 + Default value: `0`
@@ -512,11 +529,19 @@ Configuration items related to Raftstore.
 
 ### `raft-max-election-timeout-ticks`
 
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
+
 + The maximum number of ticks during which the Raft election is initiated. If the number is `0`, the value of `raft-election-timeout-ticks` * `2` is used.
 + Default value: `0`
 + Minimum value: `0`
 
 ### `raft-max-size-per-msg`
+
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The soft limit on the size of a single message packet
 + Default value: `"1MB"`
@@ -525,6 +550,10 @@ Configuration items related to Raftstore.
 + Unit: KB|MB|GB
 
 ### `raft-max-inflight-msgs`
+
+> **Note:**
+>
+> This configuration item cannot be queried via SQL statements but can be configured in the configuration file.
 
 + The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending.
 + Default value: `256`
@@ -1620,7 +1649,7 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 Configuration items related to Quota Limiter.
 
-Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the foreground of TiKV might process too many read and write requests so that the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
 
 > **Warning:**
 >
