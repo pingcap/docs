@@ -1,7 +1,7 @@
 ---
 title: Back up and Restore Data on Azure Blob Storage Using BR
 summary: Learn how to use BR to back up and restore data on Azure Blob Storage.
-aliases: ['/tidb/dev/backup-and-restore-azblob/']
+aliases: ['/tidb/v6.0/backup-and-restore-azblob/']
 ---
 
 # Back up and Restore Data on Azure Blob Storage Using BR
