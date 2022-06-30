@@ -11,7 +11,17 @@ The `SELECT` statement is used to read data from TiDB.
 
 **SelectStmt:**
 
+<CustomContent platform="tidb">
+
 ![SelectStmt](/media/sqlgram/SelectStmt.png)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+![SelectStmt](/media/sqlgram/SelectStmt-tidb-cloud.png)
+
+</CustomContent>
 
 **FromDual:**
 
