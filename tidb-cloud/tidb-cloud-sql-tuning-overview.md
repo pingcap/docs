@@ -92,7 +92,7 @@ If you still can't get better performance based on SQL performance tuning, you m
 
 ### Hotspot issues
 
-Hotspot issues can be located and analyzed using [Key Visualizer](/tidbcloud/tune-performance.md#key-visualizer). For specific troubleshooting steps, see [TiDB Hotspot Issues](troubleshoot-hot-spot-issues.md).
+Hotspot issues can be located and analyzed using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer). For specific troubleshooting steps, see [TiDB Hotspot Issues](troubleshoot-hot-spot-issues.md).
 
 You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
 
