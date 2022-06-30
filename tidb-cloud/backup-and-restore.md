@@ -6,7 +6,7 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 # Back up and Restore TiDB Cluster Data
 
-This document describes how to back up and restore your TiDB cluster data on TiDB Cloud. 
+This document describes how to back up and restore your TiDB cluster data on TiDB Cloud.
 
 ## Backup
 
