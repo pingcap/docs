@@ -21,21 +21,21 @@ To improve the performance of SQL statements, refer to the following principles.
 
 TiDB Cloud provides several tools to help analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
 
-### Diagnosis - Statement
+### Use Statement in Diagnostics
 
-[Statement](/tidb-cloud/tune-performance.md#statement-analysis) collects the execution results of all SQL statements on the cluster. It is often used to analyze the total time consumed or time consumed in a single execution when a SQL statement takes a long time.
+[Statement](/tidb-cloud/tune-performance.md#statement-analysis) on the Diagnostics tab on the TiDB Cloud console collects the execution statistics of SQL statements of all databases on the cluster. It is often used to analyze the total time consumed or time consumed in a single execution when a SQL statement takes a long time.
 
-Note that on this page, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
+Note that on this tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 
 You can see some key information in Statement.
 
 - SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans and the database where the execution takes place.
 - Execution plan list: If the SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: Shows the details of the selected execution plan. It collects the execution plans of such SQL and the corresponding execution time from several perspectives, you can get more information from it. See [Execution plan in details](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#execution-details-of-plans) (area 3 in the image below).
+- Execution plan details: Shows the details of the selected execution plan. It collects the execution plans of such SQL and the corresponding execution time from several perspectives, you can get more information from it. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
-In addition to the information in the dashboard, there are also some SQL best practices for TiDB Cloud to follow.
+In addition to the information in the dashboard, there are also some SQL best practices for TiDB Cloud to follow, as described in the following sections.
 
 ### Check the execution plan
 
@@ -72,7 +72,7 @@ See [Guidelines to follow when selecting primary keys](https://docs.pingcap.com/
 [Best practices for indexing](https://docs.pingcap.com/tidb/stable/dev-guide-index-best-practice) include best practices for creating indexes and using indexes.
 Among them, the speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices) in some scenarios.
 
-### Transaction Conflict
+### Transaction conflicts
 
 For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
