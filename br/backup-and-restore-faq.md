@@ -1,6 +1,6 @@
 ---
 title: Backup & Restore FAQs
-summary: Learn about Frequently Asked Questions (FAQ) and the solutions of BR.
+summary: Learn about Frequently Asked Questions (FAQs) and the solutions of BR.
 ---
 
 # Backup & Restore FAQs
