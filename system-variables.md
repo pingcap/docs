@@ -680,7 +680,17 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
     For more details, see [limits of retry](/optimistic-transaction.md#limits-of-retry).
 
+    <CustomContent platform="tidb">
+
     This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is controlled by [`max_retry_count`](/tidb-configuration-file.md#max-retry-count).
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    This variable only applies to optimistic transactions, not to pessimistic transactions. The number of retries for pessimistic transactions is 256.
+
+    </CustomContent>
 
 ### tidb_distsql_scan_concurrency
 
@@ -919,7 +929,12 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
 - This variable controls the behavior of the optimizer on using statistics of a table when the statistics are outdated.
+<CustomContent platform="tidb">
 - The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated. You can change this ratio using the [`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio) configuration.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- The optimizer determines whether the statistics of a table is outdated in this way: since the last time `ANALYZE` is executed on a table to get the statistics, if 80% of the table rows are modified (the modified row count divided by the total row count), the optimizer determines that the statistics of this table is outdated.
+</CustomContent>
 - By default (with the variable value `ON`), when the statistics of a table is outdated, the optimizer determines that the statistics of the table is no longer reliable except for the total row count. Then, the optimizer uses the pseudo statistics. If you set the variable value to `OFF`, even if the statistics of a table are outdated, the optimizer still keeps using the statistics.
 - If the data on a table is frequently modified without executing `ANALYZE` on this table in time, to keep the execution plan stable, you can set the variable value to `OFF`.
 
@@ -1037,7 +1052,9 @@ Query OK, 0 rows affected (0.09 sec)
 
 - Scope: SESSION
 - Default value: `OFF`
+<CustomContent platform="tidb">
 - To change this default value, modify the [`performance.enforce-mpp`](/tidb-configuration-file.md#enforce-mpp) configuration value.
+</CustomContent>
 - Controls whether to ignore the optimizer's cost estimation and to forcibly use TiFlash's MPP mode for query execution. The value options are as follows:
     - `0` or `OFF`, which means that the MPP mode is not forcibly used (by default).
     - `1` or `ON`, which means that the cost estimation is ignored and the MPP mode is forcibly used. Note that this setting only takes effect when `tidb_allow_mpp=true`.
@@ -1224,7 +1241,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `user`: The current session user.
     - `schemaVersion`: The current schema version.
     - `txnStartTS`: The timestamp at which the current transaction starts.
+    <CustomContent platform="tidb">
     - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via [`max-retry-count`](/tidb-configuration-file.md#max-retry-count). In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
+    </CustomContent>
+    <CustomContent platform="tidb-cloud">
+    - `forUpdateTS`: In the pessimistic transactional mode, `forUpdateTS` is the current timestamp of the SQL statement. When a write conflict occurs in the pessimistic transaction, TiDB retries the SQL statement currently being executed and updates this timestamp. You can configure the number of retries via `max-retry-count`. In the optimistic transactional model, `forUpdateTS` is equivalent to `txnStartTS`.
+    </CustomContent>
     - `isReadConsistency`: Indicates whether the current transactional isolation level is Read Committed (RC).
     - `current_db`: The name of the current database.
     - `txn_mode`: The transactional mode. Value options are `OPTIMISTIC` and `PESSIMISTIC`.
@@ -1344,7 +1366,12 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `0`
 - Range: `[0, 2147483647]`
+<CustomContent platform="tidb">
 - This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- This variable is used to adjust the maximum days of logger on the current TiDB instance. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+</CustomContent>
 
 ### tidb_low_resolution_tso
 
@@ -1384,7 +1411,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the threshold value of memory quota for a query.
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file. The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
+- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
+<CustomContent platform="tidb">
+- The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
+</CustomContent>
 
 ### tidb_memory_usage_alarm_ratio
 
@@ -1398,8 +1428,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 - Scope: INSTANCE
 - Default value: `0.8`
+<CustomContent platform="tidb">
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
+- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
+</CustomContent>
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
 

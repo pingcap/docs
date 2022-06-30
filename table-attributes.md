@@ -127,7 +127,20 @@ ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
 
 When the above two attributes are configured at the same time, the Regions belonging to the partition `p` can actually be merged. When the attribute of the partition is reset, the partition `p` inherits the attribute from the table `t`, and the Regions cannot be merged.
 
+<CustomContent platform="tidb">
+
 > **Note:**
 >
 > - When there is now only an attribute of a partition, even if the `merge_option=allow` attribute is configured, the partition is still split into multiple Regions by default according to the actual number of partitions. To merge all Regions, you need to [reset the attribute of the table](#usage).
 > - When using the `merge_option` attribute, you need to pay attention to the PD configuration parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval). Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after the interval specified by `split-merge-interval`. If the `merge_option` attribute is configured, PD decides whether to merge Regions after the specified interval according to the `merge_option` configuration.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> - When there is now only an attribute of a partition, even if the `merge_option=allow` attribute is configured, the partition is still split into multiple Regions by default according to the actual number of partitions. To merge all Regions, you need to [reset the attribute of the table](#usage).
+> - Suppose that the `merge_option` attribute is not configured. In this case, if Regions meet conditions, Regions can be merged after one hour. If the `merge_option` attribute is configured, PD decides whether to merge Regions after one hour according to the `merge_option` configuration.
+
+</CustomContent>

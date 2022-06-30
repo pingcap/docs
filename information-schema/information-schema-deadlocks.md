@@ -44,7 +44,17 @@ The meaning of each column field in the `DEADLOCKS` table is as follows:
 * `KEY_INFO`: The detailed information of `KEY`. See the [KEY_INFO](#key_info) section.
 * `TRX_HOLDING_LOCK`: The ID of the transaction that currently holds the lock on the key and causes blocking. This ID is also the `start_ts` of the transaction.
 
+<CustomContent platform="tidb">
+
 To adjust the maximum number of deadlock events that can be recorded in the `DEADLOCKS` table, adjust the [`pessimistic-txn.deadlock-history-capacity`](/tidb-configuration-file.md#deadlock-history-capacity) configuration in the TiDB configuration file. By default, the information of the recent 10 deadlock events is recorded in the table.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The information of the recent 10 deadlock events is recorded in the `DEADLOCKS` table.
+
+</CustomContent>
 
 > **Warning:**
 >
