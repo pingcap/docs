@@ -13,7 +13,7 @@ TiDB version: 5.4.2
 + PingCAP/TiDB
 
     <!--diagnosis-->
-    - ```release-note [#35340](https://github.com/pingcap/tidb/issues/35340)
+    - Fix the issue of concurrent map read and write on statement summary. [#35340](https://github.com/pingcap/tidb/issues/35340)
 
     <!--planner-->
     - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
