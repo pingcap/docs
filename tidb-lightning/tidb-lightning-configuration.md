@@ -290,10 +290,12 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-# When data importing is complete, tidb-lightning can automatically perform
-# the Checksum, Compact and Analyze operations. It is recommended to leave
-# these as true in the production environment.
+# In the local backend mode, when data import is completed, TiDB Lightning
+# can automatically perform the Checksum and Analyze operations. It is
+# recommended to leave these as true in the production environment.
 # The execution order: Checksum -> Analyze
+# Note that these two operations are not needed for the tidb backend mode,
+# so they are skipped in operation.
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
@@ -301,22 +303,14 @@ max-allowed-packet = 67_108_864
 # - "optional": Perform admin checksum. If checksum fails, TiDB Lightning will report a WARN log but ignore any error.
 # - "off": Do not perform checksum.
 # Note that since v4.0.8, the default value has changed from "true" to "required".
-# For backward compatibility, bool values "true" and "false" are also allowed for this field.
+# Note:
+# 1. Checksum failure usually means import exception (data loss or inconsistency). It is recommended to always enable checksum.
+# 2. For backward compatibility, bool values "true" and "false" are also allowed for this field.
 # "true" is equivalent to "required" and "false" is equivalent to "off".
 checksum = "required"
 # Specifies whether to perform `ANALYZE TABLE <table>` for each table after checksum is done.
 # Options available for this field are the same as `checksum`. However, the default value for this field is "optional".
 analyze = "optional"
-
-# If the value is set to `true`, a level-1 compaction is performed
-# every time a table is imported.
-# The default value is `false`.
-level-1-compact = false
-
-# If the value is set to `true`, a full compaction on the whole
-# TiKV cluster is performed at the end of the import.
-# The default value is `false`.
-compact = false
 
 # Configures the background periodic actions.
 # Supported units: h (hour), m (minute), s (second).
