@@ -914,8 +914,8 @@ Configuration items related to Coprocessor.
 >
 > `report-region-buckets-tick-interval` is an experimental feature introduced in TiDB v6.1.0. It is not recommended that you use it in production environments.
 
-+ The interval of TiKV's reporting bucket information to PD when `enable-region-bucket` is true.
-+ Default value: 10s
++ The interval at which TiKV reports bucket information to PD when `enable-region-bucket` is true.
++ Default value: `10s`
 
 ## RocksDB
 
