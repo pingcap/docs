@@ -14,7 +14,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
 2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
 3.  [Amazon S3バケットを作成し、ソースデータファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。データの準備の部分で、さまざまな**データ形式**の長所と短所を確認できます。
-4.  ソースデータの仕様に従って、[**データソースタイプ**]、[<strong>バケット名]</strong> 、[<strong>地域</strong>]、および<strong>[データ形式]</strong>フィールドに入力します。
+4.  ソースデータの仕様に従って、[**データソースタイプ**]、[<strong>バケットURL</strong> ]、および<strong>[データ形式]</strong>フィールドに入力します。
 5.  クラスタの接続設定に従って、**ターゲットデータベース**の<strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
 6.  [クロスアカウントアクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウントアクセスのバケットポリシーとロールを作成します。
 7.  [**インポート]**をクリックしてタスクを作成します。
@@ -98,7 +98,7 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
 
 3.  ソースデータベースをS3にバックアップします。
 
-    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、中括弧（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
+    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、中かっこ（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
 
     {{< copyable "" >}}
 

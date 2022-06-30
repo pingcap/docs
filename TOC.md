@@ -734,7 +734,7 @@
             -   [TiKVの概要](/tikv-overview.md)
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
             -   [Titanの概要](/storage-engine/titan-overview.md)
-            -   [タイタンConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
+            -   [TitanConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
         -   TiFlash
             -   [概要](/tiflash/tiflash-overview.md)
             -   [TiFlashを使用する](/tiflash/use-tiflash.md)
@@ -760,6 +760,7 @@
         -   [5.4.1](/releases/release-5.4.1.md)
         -   [5.4.0](/releases/release-5.4.0.md)
     -   v5.3
+        -   [5.3.2](/releases/release-5.3.2.md)
         -   [5.3.1](/releases/release-5.3.1.md)
         -   [5.3.0](/releases/release-5.3.0.md)
     -   v5.2

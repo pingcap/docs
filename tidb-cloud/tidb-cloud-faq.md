@@ -87,7 +87,7 @@ TiDBは、Raftコンセンサスアルゴリズムを使用して、リージョ
 
 ## 別のRDBMSからTiDB Cloudへの簡単な移行パスはありますか？ {#is-there-an-easy-migration-path-from-another-rdbms-to-tidb-cloud}
 
-TiDBは、MySQLデータベースからデータを移行するためのTiDBLightningとデータ移行ツールを提供します。 TiDBはMySQLワイヤープロトコルを実装しており、MySQLクライアントをTiDBに使用できます。また、Java、Go、Rust、Pythonなどのプログラミング言語でTiKVAPIを使用してデータにアクセスすることもできます。
+TiDBはMySQLと高い互換性があります。データがセルフホストのMySQLインスタンスからのものであるか、パブリッククラウドによって提供されるRDSサービスからのものであるかに関係なく、MySQL互換データベースからTiDBにデータをスムーズに移行できます。詳細については、 [MySQL互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
 ## TiDBはどのようにしてデータのプライバシーを保護し、セキュリティを確保しますか？ {#how-does-tidb-protect-data-privacy-and-ensure-security}
 

@@ -13,11 +13,11 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないために発生します。 `TiKV server is busy`が発生するか、 `not leader`または`epoch not match`が原因でTiKVへの要求が失敗するか、TiKVへの要求がタイムアウトする可能性があります。このような場合、TiDBは`backoff`の再試行メカニズムを実行します。 `backoff`がしきい値（デフォルトでは20秒）を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内では、このエラーはクライアントには表示されません。
 
--   1.1.2複数のTiKVインスタンスが同時にOOMであるため、一定期間、リージョン内にリーダーが存在しません。中国語の[ケース-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
+-   1.1.2複数のTiKVインスタンスが同時にOOMであるため、OOM期間中にリーダーは発生しません。中国語の[ケース-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
 
 -   1.1.3 TiKVは`TiKV server is busy`を報告し、 `backoff`回を超えています。詳細については、 [4.3](#43-the-client-reports-the-server-is-busy-error)を参照してください。 `TiKV server is busy`は内部フロー制御メカニズムの結果であり、 `backoff`回でカウントされるべきではありません。この問題は修正されます。
 
--   1.1.4複数のTiKVインスタンスを開始できなかったため、リージョンにリーダーがいません。複数のTiKVインスタンスが物理マシンに展開されている場合、ラベルが適切に構成されていないと、物理マシンに障害が発生すると、リージョン内にリーダーが存在しなくなる可能性があります。中国語の[ケース-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
+-   1.1.4複数のTiKVインスタンスの開始に失敗したため、リージョンにリーダーが存在しません。複数のTiKVインスタンスが物理マシンに展開されている場合、ラベルが適切に構成されていないと、物理マシンに障害が発生すると、リージョン内にリーダーが存在しなくなる可能性があります。中国語の[ケース-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
 
 -   1.1.5フォロワーの適用が前のエポックで遅れている場合、フォロワーがリーダーになった後、 `epoch not match`でリクエストを拒否します。中国語の[ケース-958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md)を参照してください（TiKVはそのメカニズムを最適化する必要があります）。
 
@@ -43,7 +43,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   2.2.2CPU負荷が増加します。
 
--   2.2.3TiKVの遅い書き込み。 [4.5](#45-tikv-write-is-slow)を参照してください。
+-   2.2.3TiKVの低速書き込み。 [4.5](#45-tikv-write-is-slow)を参照してください。
 
 -   2.2.4TiDBの間違った実行プラン。 [3.3](#33-wrong-execution-plan)を参照してください。
 
@@ -126,7 +126,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     > **ノート：**
     >
-    > 単一のSQLメモリ使用量のデフォルトのしきい値は`1GB`です（バイト単位、スコープ： `SESSION` ）。このパラメーターは、 `tidb_mem_quota_query`を構成することで設定できます。構成アイテムをホットロードすることにより、構成ファイルの`mem-quota-query`アイテム（バイト単位）を変更することもできます。
+    > 単一のSQLメモリ使用量のデフォルトのしきい値は`1GB`です（バイト単位、スコープ： `SESSION` ）。このパラメーターは、 `tidb_mem_quota_query`を構成することで設定できます。構成アイテムをホットロードすることにより、構成ファイル内の`mem-quota-query`のアイテム（バイト単位）を変更することもできます。
 
 -   3.2.3OOMの問題を軽減する
 
@@ -333,7 +333,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   5.2.1PDスイッチリーダー。
 
-    -   原因1：ディスク。 PDノードが配置されているディスクには、完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因1：ディスク。 PDノードが配置されているディスクには完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
     -   原因2：ネットワーク。 PDログには`lost the TCP streaming connection`が表示されます。 PDノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana-** &gt; <strong>PD-</strong> &gt; <strong>etcd</strong>で`round trip`を表示して、原因を確認する必要があります。中国語の[ケース-177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
@@ -457,7 +457,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.2.3レプリケーションタスクが中断され、 `driver: bad connection`のエラーが返されます。
 
-    -   `driver: bad connection`エラーは、DMとダウンストリームTiDBデータベース間の接続に異常が発生し（ネットワーク障害、TiDB再起動など）、現在の要求のデータがまだTiDBに送信されていないことを示します。
+    -   `driver: bad connection`エラーは、DMとダウンストリームTiDBデータベース間の接続に異常が発生したこと（ネットワーク障害、TiDB再起動など）、および現在の要求のデータがまだTiDBに送信されていないことを示します。
 
         -   DM 1.0.0 GAより前のバージョンの場合は、 `stop-task`を実行してタスクを停止し、 `start-task`を実行してタスクを再開します。
         -   DM 1.0.0 GA以降のバージョンでは、このタイプのエラーに対する自動再試行メカニズムが追加されています。 [＃265](https://github.com/pingcap/dm/pull/265)を参照してください。

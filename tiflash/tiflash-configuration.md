@@ -208,7 +208,7 @@ tmp_path = "/tidb-data/tiflash-9000/tmp"
     # key_path = "/path/to/tiflash-server-key.pem"
 ```
 
-### <code>tiflash-learner.toml</code>ファイルを設定します {#configure-the-code-tiflash-learner-toml-code-file}
+### <code>tiflash-learner.toml</code>ファイルを構成します {#configure-the-code-tiflash-learner-toml-code-file}
 
 ```toml
 [server]
@@ -237,7 +237,7 @@ tmp_path = "/tidb-data/tiflash-9000/tmp"
     redact-info-log = false
 ```
 
-上記の項目に加えて、他のパラメータはTiKVのパラメータと同じです。キーが`engine`である`label`は予約されており、手動で構成できないことに注意してください。
+上記の項目に加えて、他のパラメータはTiKVのパラメータと同じです。キーが`engine`の`label`は予約されており、手動で構成できないことに注意してください。
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
@@ -259,9 +259,8 @@ v4.0.9以降のバージョンのTiDBクラスターの場合、TiFlashは、ス
 
 TiFlashノードに同様のI/Oメトリックを持つディスクが複数ある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにしておくことをお勧めします。 TiFlashは、I/O圧力とデータをすべてのディレクトリに分散します。
 
-TiFlashノードに異なるI/Oメトリックを持つ複数のディスクがある場合は、 `storage.latest.dir`のリストでメトリックの高いディレクトリを指定し、 `storage.main.dir`のリストでメトリックの低いディレクトリを指定することをお勧めします。たとえば、1つのNVMe-SSDと2つのSATA-SSDの場合、 `storage.latest.dir`から`["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir`から`["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`に設定できます。 TiFlashは、I/O圧力とデータをこれら2つのディレクトリリストにそれぞれ分散します。この場合、 `storage.latest.dir`の容量は、合計計画容量の10％として計画する必要があることに注意してください。
+TiFlashノードに異なるI/Oメトリックを持つ複数のディスクがある場合は、 `storage.latest.dir`のリストでメトリックの高いディレクトリを指定し、 `storage.main.dir`のリストでメトリックの低いディレクトリを指定することをお勧めします。たとえば、1つのNVMe-SSDと2つのSATA-SSDの場合、 `storage.latest.dir`から`["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir`から`["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`に設定できます。 TiFlashは、I/O圧力とデータをこれら2つのディレクトリリストにそれぞれ分散します。この場合、 `storage.latest.dir`の容量は、計画された合計容量の10％として計画する必要があることに注意してください。
 
 > **警告：**
 >
-> -   `[storage]`構成は、v1.2.5以降のTiUPでサポートされています。 TiDBクラスタのバージョンがv4.0.9以降の場合は、TiUPのバージョンがv1.2.5以降であることを確認してください。そうしないと、 `[storage]`で定義されたデータディレクトリはTiUPによって管理されません。
-> -   [ストレージ]構成を使用した後、クラスタをv4.0.9より前のバージョンにダウングレードすると、TiFlashで**データが失わ**れる可能性があります。
+> `[storage]`構成は、v1.2.5以降のTiUPでサポートされています。 TiDBクラスタのバージョンがv4.0.9以降の場合は、TiUPのバージョンがv1.2.5以降であることを確認してください。そうしないと、 `[storage]`で定義されたデータディレクトリはTiUPによって管理されません。

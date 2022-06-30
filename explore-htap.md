@@ -39,7 +39,7 @@ TiDBでは、オンライントランザクション処理（OLTP）用の行ベ
 
 ## 環境の準備 {#environment-preparation}
 
-TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応するストレージエンジンを展開する必要があります。データ量が多い場合（たとえば、100 T）、主要なソリューションとしてTiFlash超並列処理（MPP）を使用し、補足的なソリューションとしてTiSparkを使用することをお勧めします。
+TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応するストレージエンジンを展開する必要があります。データ量が多い場合（たとえば、100 T）、TiFlash超並列処理（MPP）をプライマリソリューションとして使用し、TiSparkを補足ソリューションとして使用することをお勧めします。
 
 -   TiFlash
 
@@ -53,7 +53,7 @@ TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応す�
 
 -   TiSpark
 
-    -   データをSparkで分析する必要がある場合は、TiSparkをデプロイします（Spark 3.xは現在サポートされていません）。特定のプロセスについては、 [TiSparkユーザーガイド](/tispark-overview.md)を参照してください。
+    -   データをSparkで分析する必要がある場合は、TiSparkをデプロイします。特定のプロセスについては、 [TiSparkユーザーガイド](/tispark-overview.md)を参照してください。
 
 <!--    - Real-time stream processing
   - If you want to build an efficient and easy-to-use real-time data warehouse with TiDB and Flink, you are welcome to participate in Apache Flink x TiDB meetups.-->

@@ -53,14 +53,14 @@ v5.4では、主な新機能または改善点は次のとおりです。
 | TiKV                           | [`snap-generator-pool-size`](/tikv-configuration-file.md#snap-generator-pool-size-new-in-v540)                  | 新しく追加されました | `snap-generator`スレッドプールのサイズ。デフォルト値は`2`です。                                                                                                                                                                                                                                                                                |
 | TiKV                           | `log.file.max-size` `log.file.max-days` `log.file.max-backups`                                                  | 新しく追加されました | 詳細については、 [TiKVConfiguration / コンフィグレーションファイル`log.file`](/tikv-configuration-file.md#logfile-new-in-v540)を参照してください。                                                                                                                                                                                                       |
 | TiKV                           | `raft-engine`                                                                                                   | 新しく追加されました | `enable` `recovery-mode` `target-file-size` `bytes-per-sync` `recovery-read-block-size` `purge-threshold` `recovery-read-block-size` `batch-compression-threshold` `recovery-threads` `dir`詳細については、 [TiKVConfiguration / コンフィグレーションファイル-raft `raft-engine`](/tikv-configuration-file.md#raft-engine)を参照してください。           |
-| TiKV                           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新しく追加されました | v5.3.0では、デフォルト値は`false`です。 v5.4.0以降、デフォルト値は`true`に変更されています。このパラメーターは、クラスタリソースの使用率が高い場合に、バックアップタスクで使用されるリソースを制限して、クラスタへの影響を減らすかどうかを制御します。デフォルト構成では、バックアップタスクの速度が低下する可能性があります。                                                                                                                                             |
+| TiKV                           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新しく追加されました | v5.3.0では、デフォルト値は`false`です。 v5.4.0以降、デフォルト値は`true`に変更されています。このパラメーターは、クラスタリソースの使用率が高い場合に、バックアップタスクで使用されるリソースを制限して、クラスタへの影響を減らすかどうかを制御します。デフォルトの構成では、バックアップタスクの速度が低下する可能性があります。                                                                                                                                            |
 | TiKV                           | `log-level` `log-format` `log-file` `log-rotation-size`                                                         | 変更         | TiKVログパラメータの名前は、 `log.enable-timestamp` `log.level` `log.format`置き換えられ`log.file.filename` 。古いパラメーターのみを設定し、それらの値がデフォルト以外の値に設定されている場合、古いパラメーターは新しいパラメーターとの互換性を維持します。古いパラメータと新しいパラメータの両方が設定されている場合、新しいパラメータが有効になります。詳細については、 [TiKVConfiguration / コンフィグレーションファイル-ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。 |
 | TiKV                           | `log-rotation-timespan`                                                                                         | 削除         | ログローテーション間のタイムスパン。このタイムスパンが経過すると、ログファイルがローテーションされます。つまり、現在のログファイルのファイル名にタイムスタンプが追加され、新しいログファイルが作成されます。                                                                                                                                                                                                                   |
 | TiKV                           | `allow-remove-leader`                                                                                           | 削除         | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                               |
 | TiKV                           | `raft-msg-flush-interval`                                                                                       | 削除         | Raftメッセージがバッチで送信される間隔を決定します。 Raftメッセージは、この構成アイテムで指定された間隔ごとにバッチで送信されます。                                                                                                                                                                                                                                                   |
 | PD                             | [`log.level`](/pd-configuration-file.md#level)                                                                  | 変更         | デフォルト値は「INFO」から「info」に変更され、大文字と小文字が区別されないことが保証されています。                                                                                                                                                                                                                                                                    |
 | TiFlash                        | [`profile.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | 新しく追加されました | エラスティックスレッドプール機能を有効にするか無効にするかを決定します。この構成アイテムを有効にすると、同時実行性の高いシナリオでTiFlashCPU使用率を大幅に向上させることができます。デフォルト値は`false`です。                                                                                                                                                                                                         |
-| TiFlash                        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新しく追加されました | DTFileのバージョンを指定します。デフォルト値は`2`で、その下にハッシュがデータファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データファイルにはメタデータとトークンデータのチェックサムが含まれ、複数のハッシュアルゴリズムがサポートされます。                                                                                                                                                                              |
+| TiFlash                        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                    | 新しく追加されました | DTFileのバージョンを指定します。デフォルト値は`2`で、その下にハッシュがデータファイルに埋め込まれます。値を`3`に設定することもできます。 `3`の場合、データファイルにはメタデータとトークンデータのチェックサムが含まれ、複数のハッシュアルゴリズムをサポートします。                                                                                                                                                                               |
 | TiFlash                        | [`logger.count`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                              | 変更         | デフォルト値は`10`に変更されます。                                                                                                                                                                                                                                                                                                      |
 | TiFlash                        | [`status.metrics_port`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                       | 変更         | デフォルト値は`8234`に変更されます。                                                                                                                                                                                                                                                                                                    |
 | TiFlash                        | [`raftstore.apply-pool-size`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)         | 新しく追加されました | Raftデータをストレージにフラッシュするプール内のスレッドの許容数。デフォルト値は`4`です。                                                                                                                                                                                                                                                                         |
@@ -79,6 +79,12 @@ v5.4では、主な新機能または改善点は次のとおりです。
 -   v5.4.0以降、プランキャッシュを介してキャッシュされた実行プランのSQLバインディングを作成すると、バインディングは、対応するクエリに対してすでにキャッシュされているプランを無効にします。新しいバインディングは、v5.4.0より前にキャッシュされた実行プランには影響しません。
 -   v5.3以前のバージョンでは、 [TiDBデータ移行（DM）](https://docs.pingcap.com/tidb-data-migration/v5.3/)のドキュメントはTiDBドキュメントから独立しています。 v5.4以降、DMドキュメントは同じバージョンのTiDBドキュメントに統合されています。 DMドキュメントサイトにアクセスしなくても、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
 -   cdclogとともに、ポイントインタイムリカバリ（PITR）の実験的機能を削除します。 v5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
+-   システム変数を「DEFAULT」に設定する動作をよりMySQL互換にします[＃29680](https://github.com/pingcap/tidb/pull/29680)
+-   システム変数`lc_time_names`を読み取り専用[＃30084](https://github.com/pingcap/tidb/pull/30084)に設定します
+-   `tidb_store_limit`のスコープをINSTANCEまたはGLOBALからGLOBAL3に設定し[＃30756](https://github.com/pingcap/tidb/pull/30756)
+-   列にゼロが含まれている場合、整数型の列を時間型の列に変換することを禁止します[＃25728](https://github.com/pingcap/tidb/pull/25728)
+-   浮動小数点値を挿入するときに`Inf`または`NAN`の値でエラーが報告されない問題を修正します[＃30148](https://github.com/pingcap/tidb/pull/30148)
+-   自動IDが範囲[＃30301](https://github.com/pingcap/tidb/pull/30301)から外れると、 `REPLACE`ステートメントが他の行を誤って変更する問題を修正します。
 
 ## 新機能 {#new-features}
 
@@ -166,7 +172,7 @@ v5.4では、主な新機能または改善点は次のとおりです。
 
     TiKVのログストレージエンジンとして[Raft Engine](https://github.com/tikv/raft-engine)を使用することをサポートします。 RocksDBと比較して、 Raft EngineはTiKVI / O書き込みトラフィックを最大40％、CPU使用率を10％削減し、特定の負荷の下でフォアグラウンドスループットを約5％向上させ、テールレイテンシーを20％削減します。さらに、 Raft Engineはログのリサイクルの効率を改善し、極端な状況でのログの蓄積の問題を修正します。
 
-    Raft Engineはまだ実験的機能であり、デフォルトでは無効になっています。 Raft EngineのRaftEngineのデータ形式は、以前のバージョンと互換性がないことに注意してください。クラスタをアップグレードまたはダウングレードする前に、すべてのTiKVノードでRaft Engineが無効になっていることを確認する必要があります。 RaftEngineはRaft Engine以降のバージョンでのみ使用することをお勧めします。
+    Raft Engineはまだ実験的機能であり、デフォルトでは無効になっています。 Raft EngineのRaftEngineのデータ形式は、以前のバージョンと互換性がないことに注意してください。クラスタをアップグレードする前に、すべてのTiKVノードでRaft Engineが無効になっていることを確認する必要があります。 RaftEngineはRaft Engine以降のバージョンでのみ使用することをお勧めします。
 
     [ユーザードキュメント](/tikv-configuration-file.md#raft-engine)
 
@@ -246,7 +252,7 @@ v5.4では、主な新機能または改善点は次のとおりです。
 
 -   **DMでの<a href="/character-set-and-collation.md">照合順序</a>の処理を最適化する**
 
-    `collation_compatible`の構成アイテムを追加します。値のオプションは`loose` （デフォルト）と`strict`です。
+    `collation_compatible`の構成アイテムを追加します。値のオプションは`loose` （デフォルト）と`strict`です：
 
     -   アプリケーションに照合順序に関する厳密な要件がなく、クエリ結果の照合順序がアップストリームとダウンストリームで異なる可能性がある場合は、デフォルトの`loose`モードを使用してエラーの報告を回避できます。
     -   アプリケーションに照合順序に関する厳しい要件があり、照合順序がアップストリームとダウンストリームの間で一貫している必要がある場合は、 `strict`モードを使用できます。ただし、ダウンストリームがアップストリームのデフォルトの照合順序をサポートしていない場合、データレプリケーションでエラーが報告されることがあります。
@@ -283,7 +289,7 @@ v5.4では、主な新機能または改善点は次のとおりです。
 
     -   サポートされるその他のコンポーネント：TiDB、PD、およびTiKVに加えて、TiDBv5.4.0はTiFlashのCPUプロファイリングもサポートします。
 
-    -   より多くの形式のプロファイリング表示：フレームチャートでのCPUプロファイリングとGoroutineの結果の表示をサポートします。
+    -   より多くの形式のプロファイリング表示：フレームチャートでのCPUプロファイリングとGoroutine結果の表示をサポートします。
 
     -   サポートされるより多くのデプロイメント環境：継続的プロファイリングは、 TiDB Operatorを使用してデプロイされたクラスターにも使用できます。
 
@@ -297,14 +303,13 @@ v5.4では、主な新機能または改善点は次のとおりです。
 
 -   TiDB
 
-    -   新しいシステム変数[`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)を追加して、ページングを使用してコプロセッサー要求を送信するかどうかを決定します。この機能を有効にすると、処理するデータの量を減らし、レイテンシとリソース消費を減らすことができます[＃30578](https://github.com/pingcap/tidb/issues/30578)
     -   キャッシュされたクエリプラン[＃30370](https://github.com/pingcap/tidb/pull/30370)をクリアするための`ADMIN {SESSION | INSTANCE | GLOBAL} PLAN_CACHE`構文をサポートする
 
 -   TiKV
 
     -   コプロセッサーは、ストリームのような方法でリクエストを処理するためのページングAPIをサポートします[＃11448](https://github.com/tikv/tikv/issues/11448)
     -   読み取り操作がセカンダリロックが解決されるのを待つ必要がないように`read-through-lock`をサポートします[＃11402](https://github.com/tikv/tikv/issues/11402)
-    -   ディスクスペースの枯渇によるパニックを回避するためのディスク保護メカニズムを追加する[＃10537](https://github.com/tikv/tikv/issues/10537)
+    -   ディスクスペースの枯渇によるパニックを回避するために、ディスク保護メカニズムを追加します[＃10537](https://github.com/tikv/tikv/issues/10537)
     -   ログのアーカイブとローテーションのサポート[＃11651](https://github.com/tikv/tikv/issues/11651)
     -   Raftクライアントによるシステムコールを減らし、CPU効率を向上させます[＃11309](https://github.com/tikv/tikv/issues/11309)
     -   コプロセッサーは、部分文字列をTiKV1にプッシュダウンすることをサポートし[＃11495](https://github.com/tikv/tikv/issues/11495)
@@ -333,7 +338,7 @@ v5.4では、主な新機能または改善点は次のとおりです。
 
     -   TiCDC
 
-        -   「EventFeed再試行率制限」ログの数を減らす[＃4006](https://github.com/pingcap/tiflow/issues/4006)
+        -   「EventFeed再試行レート制限」ログの数を減らす[＃4006](https://github.com/pingcap/tiflow/issues/4006)
         -   多くのテーブルを複製するときの複製待ち時間を短縮する[＃3900](https://github.com/pingcap/tiflow/issues/3900)
         -   TiKVストアがダウンしたときにKVクライアントが回復する時間を短縮する[＃3191](https://github.com/pingcap/tiflow/issues/3191)
 

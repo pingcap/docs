@@ -139,11 +139,11 @@ set global tidb_stmt_summary_history_size = 24;
 
 > **ノート：**
 >
-> `tidb_stmt_summary_history_size` 、および`tidb_stmt_summary_max_stmt_count`の構成項目は、メモリー使用量に影響し`tidb_stmt_summary_max_sql_length` 。必要に応じて、これらの構成を調整することをお勧めします。大きすぎる値を設定することはお勧めしません。
+> `tidb_stmt_summary_history_size` 、および`tidb_stmt_summary_max_stmt_count`の構成項目は、メモリー使用量に影響し`tidb_stmt_summary_max_sql_length` 。ニーズ、SQLサイズ、SQLカウント、およびマシン構成に基づいて、これらの構成を調整することをお勧めします。大きすぎる値を設定することはお勧めしません。 `tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`を使用してメモリ使用量を計算できます。
 
 ### ステートメントの要約に適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
 
-システムが一定期間実行された後、 `statement_summary`テーブルをチェックして、SQLエビクションが発生したかどうかを確認できます。例えば：
+システムが一定期間実行された後（システムの負荷に応じて）、 `statement_summary`のテーブルをチェックして、SQLエビクションが発生したかどうかを確認できます。例えば：
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;

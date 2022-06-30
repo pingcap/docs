@@ -75,7 +75,7 @@ TiDBクラスタをアップグレードする前に、まずTiUPまたはTiUP�
 >
 > アップグレードするクラスタがオフライン方式を使用せずにデプロイされた場合は、この手順をスキップしてください。
 
-[TiUPを使用してTiDBクラスターをデプロイする-TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline)を参照して、新しいバージョンのTiUPミラーをダウンロードし、制御マシンにアップロードします。 `local_install.sh`を実行した後、TiUPは上書きアップグレードを完了します。
+[TiUPを使用してTiDBクラスターをデプロイする-TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)を参照して、新しいバージョンのTiUPミラーをダウンロードし、制御マシンにアップロードします。 `local_install.sh`を実行した後、TiUPは上書きアップグレードを完了します。
 
 {{< copyable "" >}}
 

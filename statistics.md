@@ -5,7 +5,7 @@ summary: Learn how the statistics collect table-level and column-level informati
 
 # 統計入門 {#introduction-to-statistics}
 
-TiDBは統計を使用して[どのインデックスを選択するか](/choose-index.md)を決定します。 `tidb_analyze_version`変数は、TiDBによって収集される統計を制御します。現在、 `tidb_analyze_version = 1`と`tidb_analyze_version = 2`の2つのバージョンの統計がサポートされています。 v5.1.0より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0以降のバージョンでは、この変数のデフォルト値は`2`であり、これは実験的機能として機能します。クラスタがv5.3.0より前のバージョンからv5.3.0以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
+TiDBは統計を使用して[どのインデックスを選択するか](/choose-index.md)を決定します。 `tidb_analyze_version`変数は、TiDBによって収集される統計を制御します。現在、2つのバージョンの統計がサポートされています： `tidb_analyze_version = 1`と`tidb_analyze_version = 2` 。 v5.1.0より前のバージョンでは、この変数のデフォルト値は`1`です。 v5.3.0以降のバージョンでは、この変数のデフォルト値は`2`であり、これは実験的機能として機能します。クラスタがv5.3.0より前のバージョンからv5.3.0以降にアップグレードされた場合、デフォルト値の`tidb_analyze_version`は変更されません。
 
 > **ノート：**
 >
@@ -119,7 +119,7 @@ v5.3.0より前では、TiDBはリザーバーサンプリング方式を使用�
 
 > **ノート：**
 >
-> 現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合、この行数を使用して、100,000行に対応するサンプリングレートを計算できます。この数値がわからない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)テーブルの`TABLE_KEYS`列を別の参照として使用して、サンプリングレートを計算できます。
+> 現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合、この行数を使用して、100,000行に対応するサンプリングレートを計算できます。この数値がわからない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリングレートを計算できます。
 >
 > 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼できます。ただし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)などの方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況を処理するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合に、 `TABLE_KEYS`を使用してサンプリングレートを計算できます。
 
@@ -416,13 +416,15 @@ SHOW ANALYZE STATUS [ShowLikeOrWhere]
 
 `SHOW STATS_META`ステートメントを使用して、行の総数と更新された行の数を表示できます。
 
-`ShowLikeOrWhereOpt`の構文は次のとおりです。
-
 {{< copyable "" >}}
 
 ```sql
-SHOW STATS_META [ShowLikeOrWhere]
+SHOW STATS_META [ShowLikeOrWhere];
 ```
+
+`ShowLikeOrWhereOpt`の構文は次のとおりです。
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 現在、 `SHOW STATS_META`ステートメントは次の6列を返します。
 
@@ -443,13 +445,17 @@ SHOW STATS_META [ShowLikeOrWhere]
 
 `SHOW STATS_HEALTHY`ステートメントを使用して、テーブルの正常性状態を確認し、統計の精度を大まかに見積もることができます。 `modify_count` &gt; = `row_count`の場合、ヘルス状態は0です。 `modify_count` &lt; `row_count`の場合、ヘルス状態は（ `modify_count` / `row_count` ）*100です。
 
+構文は次のとおりです。
+
+{{< copyable "" >}}
+
+```sql
+SHOW STATS_HEALTHY [ShowLikeOrWhere];
+```
+
 `SHOW STATS_HEALTHY`の概要は次のとおりです。
 
 ![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
-
-`ShowLikeOrWhereOpt`部の概要は次のとおりです。
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 現在、 `SHOW STATS_HEALTHY`ステートメントは次の4列を返します。
 

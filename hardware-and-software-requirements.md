@@ -38,7 +38,7 @@ DebianLinuxやFedoraLinuxなどの他のLinuxOSバージョンは動作する可
 
 > **ノート：**
 >
-> [制御マシンにTiUPを展開します](/production-deployment-using-tiup.md#step-2-install-tiup-on-the-control-machine)クラスターを運用および管理する必要があります。
+> [制御マシンにTiUPを展開します](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)クラスターを運用および管理する必要があります。
 
 ### ターゲットマシン {#target-machines}
 
@@ -87,7 +87,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 > -   実稼働環境では、より高い構成を使用することを強くお勧めします。
 > -   PCIeSSDを使用している場合はTiKVハードディスクのサイズを2TB以内に、通常のSSDを使用している場合は1.5TB以内に保つことをお勧めします。
 
-TiFlashを展開する前に、次の点に注意してください。
+TiFlashを展開する前に、次の項目に注意してください。
 
 -   TiFlashは[複数のディスクに展開](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
 -   TiKVデータのリアルタイムレプリケーションをバッファリングするために、TiFlashデータディレクトリの最初のディスクとして高性能SSDを使用することをお勧めします。このディスクのパフォーマンスは、PCI-ESSDなどのTiKVのパフォーマンスより低くすることはできません。ディスク容量は、合計容量の10％以上である必要があります。そうしないと、このノードのボトルネックになる可能性があります。通常のSSDを他のディスクに展開できますが、PCI-ESSDが優れているとパフォーマンスが向上することに注意してください。

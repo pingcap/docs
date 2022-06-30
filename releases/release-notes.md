@@ -11,6 +11,7 @@ title: Release Notes
 
 ## 5.3 {#5-3}
 
+-   [5.3.2](/releases/release-5.3.2.md)
 -   [5.3.1](/releases/release-5.3.1.md)
 -   [5.3.0](/releases/release-5.3.0.md)
 

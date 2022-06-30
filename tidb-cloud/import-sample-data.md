@@ -7,15 +7,15 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 このドキュメントでは、UIを介してサンプルデータをTiDB Cloudにインポートする方法について説明します。使用されているサンプルデータは、Capital Bikeshare DataLicenseAgreementに基づいてリリースされたCapitalBikeshareのシステムデータです。サンプルデータをインポートする前に、1つのTiDBクラスタが必要です。
 
-1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
+1.  [**アクティブクラスター**]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
 
 2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
 
 3.  TiDBクラスタがホストされている場所に応じて、次のいずれかを実行します。
 
-    -   TiDBクラスタがAWSによってホストされている場合は、[**データソースタイプ**]に[ <strong>AWS S3</strong> ]を選択し、[<strong>バケットURL</strong> ]フィールドにサンプルデータURL `s3://tidbcloud-samples/data-ingestion/`を入力してから、[<strong>バケットリージョン</strong>]に[ <strong>US West（オレゴン）]</strong>を選択します。サンプルデータバケットは、AWSの米国西部（オレゴン）リージョンでホストされています。
+    -   TiDBクラスタがAWSによってホストされている場合は、[**データソースタイプ**]に[ <strong>AWS S3</strong> ]を選択し、[<strong>バケットURL</strong> ]フィールドにサンプルデータ`s3://tidbcloud-samples/data-ingestion/`を入力します。サンプルデータバケットは、AWSの米国西部（オレゴン）リージョンでホストされています。
 
-    -   TiDBクラスタがGCPでホストされている場合は、[**データソースの種類**]に[ <strong>Google Cloud Storage</strong> ]を選択し、[<strong>バケットURL</strong> ]フィールドにサンプルデータのURL `gcs://tidbcloud-samples-us-west1`を入力して、[<strong>バケットリージョン</strong>]に[ <strong>US-West1（オレゴン）]</strong>を選択します。サンプルデータバケットは、GCPのUS-West1（オレゴン）でホストされています。
+    -   TiDBクラスタがGCPでホストされている場合は、[**データソースの種類**]に[ <strong>Google Cloud Storage</strong> ]を選択し、[<strong>バケットURL</strong> ]フィールドにサンプルデータの`gcs://tidbcloud-samples-us-west1`を入力します。サンプルデータバケットは、GCPのUS-West1（オレゴン）リージョンでホストされています。
 
 4.  [**データ形式]**で、[ <strong>TiDBDumpling</strong>]を選択します。
 
@@ -25,11 +25,11 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
     arn:aws:iam::385595570414:role/import-sample-access
     ```
 
-6.  [**ターゲットデータベース**]で、 <strong>[ユーザー</strong>名]フィールドに`root`を入力し、クラスタの作成時に設定したルートパスワードを[<strong>パスワード</strong>]フィールドに入力します。
+6.  [**ターゲットデータベース**]で、 <strong>[ユーザー</strong>名]フィールドに`root`を入力し、[<strong>パスワード</strong>]フィールドにクラスタのルートパスワードを入力します。
 
     > **ノート：**
     >
-    > カスタムユーザーを作成し、十分な権限がある場合は、新しく作成したユーザーの名前と対応するパスワードを使用することもできます。
+    > ターゲットデータベースのカスタムユーザーを作成した場合は、新しく作成したユーザーの名前と対応するパスワードを使用することもできます。
 
 7.  [ **DB/テーブルフィルター]**フィールドは空白のままにします。
 

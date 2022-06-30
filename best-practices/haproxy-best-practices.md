@@ -54,7 +54,7 @@ HAProxyをデプロイする前に、ハードウェアとソフトウェアの�
 
 > **ノート：**
 >
-> -   サポートされている他のオペレーティングシステムの詳細については、 [HAProxyのドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
+> -   サポートされているその他のオペレーティングシステムの詳細については、 [HAProxyのドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 
@@ -108,7 +108,7 @@ HAProxyを使用して、負荷分散されたデータベース環境を簡単�
     {{< copyable "" >}}
 
     ```bash
-    echo 'export PATH=/app/haproxy/bin:$PATH' >> /etc/profile
+    echo 'export PATH=/app/haproxy:$PATH' >> /etc/profile
     ```
 
 5.  インストールが成功したかどうかを確認します。

@@ -9,7 +9,7 @@ summary: Learn about JSON functions.
 >
 > これはまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
 
-TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関数をサポートしています。追加のJSON関数がリリース後にMySQL5.7に追加されましたが、すべてがTiDBで使用できるわけではありません（ [サポートされていない機能](#unsupported-functions)を参照）。
+TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関数をサポートしています。
 
 ## JSON値を作成する関数 {#functions-that-create-json-values}
 
@@ -40,6 +40,7 @@ TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関�
 | [JSON\_ARRAY\_INSERT(json\_doc, path, val\[, path, val\] ...)][json_array_insert]     | jsonドキュメントに配列を挿入し、変更されたドキュメントを返します   |
 | [JSON\_INSERT(json\_doc, path, val\[, path, val\] ...)][json_insert]                  | JSONドキュメントにデータを挿入し、結果を返します           |
 | [JSON\_MERGE(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge]                    | `JSON_MERGE_PRESERVE`の非推奨のエイリアス      |
+| [JSON\_MERGE\_PATCH(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge_patch]       | JSONドキュメントをマージする                     |
 | [JSON\_MERGE\_PRESERVE(json\_doc, json\_doc\[, json\_doc\] ...)][json_merge_preserve] | 2つ以上のJSONドキュメントをマージし、マージされた結果を返します   |
 | [JSON\_REMOVE(json\_doc, path\[, path\] ...)][json_remove]                            | JSONドキュメントからデータを削除し、結果を返します          |
 | [JSON\_REPLACE(json\_doc, path, val\[, path, val\] ...)][json_replace]                | JSONドキュメントの既存の値を置き換えて、結果を返します        |
@@ -59,23 +60,17 @@ TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関�
 
 ## ユーティリティ関数 {#utility-functions}
 
-| 関数名                                               | 説明                                                                                      |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [JSON_STORAGE_SIZE（json_doc）] [json_storage_size] | json値を格納するために必要なバイトのおおよそのサイズを返します。サイズは圧縮を使用するTiKVを考慮していないため、この関数の出力はMySQLと厳密に互換性がありません。 |
+| 関数名                                                 | 説明                                                                                      |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [JSON\_PRETTY(json\_doc)][json_pretty]              | JSONドキュメントのきれいなフォーマット                                                                   |
+| [JSON\_STORAGE\_SIZE(json\_doc)][json_storage_size] | json値を格納するために必要なバイトのおおよそのサイズを返します。サイズは圧縮を使用するTiKVを考慮していないため、この関数の出力はMySQLと厳密に互換性がありません。 |
 
 ## 集計関数 {#aggregate-functions}
 
-| 関数名                                          | 説明                |
-| -------------------------------------------- | ----------------- |
-| [JSON_OBJECTAGG（key、value）] [json_objectagg] | 特定のキーの値の集計を提供します。 |
-
-## サポートされていない機能 {#unsupported-functions}
-
-次のJSON関数はTiDBではサポートされていません。 [TiDB＃7546](https://github.com/pingcap/tidb/issues/7546)でそれらを追加する際の進捗状況を追跡できます：
-
--   `JSON_MERGE_PATCH`
--   `JSON_PRETTY`
--   `JSON_ARRAYAGG`
+| 関数名                                           | 説明                |
+| --------------------------------------------- | ----------------- |
+| [JSON\_ARRAYAGG(key)][json_arrayagg]          | キーの集約を提供します。      |
+| [JSON\_OBJECTAGG(key, value)][json_objectagg] | 特定のキーの値の集計を提供します。 |
 
 ## も参照してください {#see-also}
 
@@ -101,6 +96,8 @@ TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関�
 [json_remove]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-remove
 
 [json_merge]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge
+
+[json_merge_patch]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge-patch
 
 [json_merge_preserve]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-merge-preserve
 
@@ -131,3 +128,11 @@ TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関�
 [json_array_append]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-append
 
 [json_array_insert]: https://dev.mysql.com/doc/refman/5.7/en/json-modification-functions.html#function_json-array-insert
+
+[json_arrayagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-arrayagg
+
+[json_objectagg]: https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_json-objectagg
+
+[json_pretty]: https://dev.mysql.com/doc/refman/5.7/en/json-utility-functions.html#function_json-pretty
+
+[json_storage_size]: https://dev.mysql.com/doc/refman/5.7/en/json-utility-functions.html#function_json-storage-size

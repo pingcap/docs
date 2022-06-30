@@ -145,7 +145,7 @@ Attention:
 Do you want to continue? [y/N]:
 ```
 
-パスワードを入力すると、TiUPクラスタは必要なコンポーネントをダウンロードし、対応するマシンにデプロイします。次のメッセージが表示されたら、展開は成功しています。
+パスワードを入力すると、TiUPクラスタは必要なコンポーネントをダウンロードして対応するマシンにデプロイします。次のメッセージが表示されたら、展開は成功しています。
 
 ```bash
 Deployed cluster `prod-cluster` successfully
@@ -320,7 +320,7 @@ PDをスケールアウトすると、ノードが`join`クラスタに追加さ
     tiup cluster scale-out tidb-test scale.yaml
     ```
 
-    コマンドの実行後、 `tiup cluster display tidb-test`を実行することにより、スケールアウトされたクラスタのステータスを確認できます。
+    コマンドの実行後、 `tiup cluster display tidb-test`を実行することで、スケールアウトされたクラスタのステータスを確認できます。
 
 ## ローリングアップグレード {#rolling-upgrade}
 
@@ -710,7 +710,7 @@ TiUPデータは、ユーザーのホームディレクトリの`.tiup`ディレ
 3.  ターゲットマシンのホームディレクトリで`tar xzvf tiup.tar.gz`を実行します。
 4.  `.tiup`のディレクトリを`PATH`の環境変数に追加します。
 
-    `bash`を使用し、 `tidb`ユーザーの場合、 `~/.bashrc`に`export PATH=/home/tidb/.tiup/bin:$PATH`を追加して、 `source ~/.bashrc`を実行できます。次に、使用するシェルとユーザーに応じて、対応する調整を行います。
+    `bash`を使用し、 `tidb`ユーザーの場合、 `~/.bashrc`に`export PATH=/home/tidb/.tiup/bin:$PATH`を追加して、 `source ~/.bashrc`を実行できます。次に、使用するシェルとユーザーに応じて対応する調整を行います。
 
 > **ノート：**
 >

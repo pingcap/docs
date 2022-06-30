@@ -25,7 +25,7 @@
         -   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
     -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
     -   [TiDBクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
--   データの管理
+-   データの移行
     -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
     -   データをTiDBに移行する
         -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
@@ -33,12 +33,12 @@
         -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
         -   [AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
         -   [AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
-    -   データのバックアップと復元
-        -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
-        -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
-        -   [戻す](/tidb-cloud/backup-and-restore.md#restore)
     -   [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
--   モニタークラスター
+-   データのバックアップと復元
+    -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
+    -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
+    -   [戻す](/tidb-cloud/backup-and-restore.md#restore)
+-   監視と警告
     -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
     -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
     -   サードパーティの監視統合
@@ -47,6 +47,8 @@
 -   ユーザーアクセスの管理
     -   [ログイン](/tidb-cloud/manage-user-access.md)
     -   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
+    -   [ユーザーパスワードの管理](/tidb-cloud/manage-user-access.md#manage-user-passwords)
+    -   [ユーザープロファイルの管理](/tidb-cloud/manage-user-access.md#manage-user-profiles)
     -   [組織とプロジェクトを表示する](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
     -   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
     -   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
@@ -54,7 +56,7 @@
     -   [組織メンバーを削除する](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
     -   [プロジェクトメンバーを削除する](/tidb-cloud/manage-user-access.md#remove-a-project-member)
     -   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
--   請求を管理する
+-   請求する
     -   [ノードコスト](/tidb-cloud/tidb-cloud-billing.md)
     -   [バックアップストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
     -   [データ転送コスト](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)

@@ -21,7 +21,7 @@ title: TiDB 2.0.9 Release Notes
 -   場合によっては`Union`ステートメントの不安定な結果を修正します[＃8168](https://github.com/pingcap/tidb/pull/8168)
 -   `Insert`以外のステートメントで`NULL`が`values`によって返されない問題を修正します[＃8179](https://github.com/pingcap/tidb/pull/8179)
 -   統計モジュールが古いデータをクリアできない場合があるという問題を修正します[＃8184](https://github.com/pingcap/tidb/pull/8184)
--   トランザクションの最大許容実行時間を構成可能なオプションにする[8209](https://github.com/pingcap/tidb/pull/8209)
+-   トランザクションの最大許容実行時間を構成可能なオプションにする[＃8209](https://github.com/pingcap/tidb/pull/8209)
 -   場合によっては`expression rewriter`の間違った比較アルゴリズムを修正します[＃8288](https://github.com/pingcap/tidb/pull/8288)
 -   `UNION ORDER BY`ステートメント[＃8307](https://github.com/pingcap/tidb/pull/8307)によって生成された余分な列を削除します
 -   `admin show next_row_id`ステートメント[＃8274](https://github.com/pingcap/tidb/pull/8274)をサポートする

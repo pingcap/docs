@@ -9,13 +9,13 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 # TiDBConfiguration / コンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションについてのみ説明します。
+TiDB構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションについてのみ説明します。
 
 ### <code>split-table</code> {#code-split-table-code}
 
 -   テーブルごとに個別のリージョンを作成するかどうかを決定します。
 -   デフォルト値： `true`
--   多数のテーブルを作成する必要がある場合は、 `false`に設定することをお勧めします。
+-   多数のテーブル（たとえば、10万を超えるテーブル）を作成する必要がある場合は、 `false`に設定することをお勧めします。
 
 ### <code>token-limit</code> {#code-token-limit-code}
 
@@ -139,7 +139,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 -   新しく作成されたインデックスの最大許容長を設定します。
 -   デフォルト値： `3072`
 -   単位：バイト
--   現在、有効な値の範囲は`[3072, 3072*4]`です。 MySQLとTiDB（バージョン&lt;v3.0.11）にはこの構成アイテムはありませんが、どちらも新しく作成されたインデックスの長さを制限します。 MySQLのこの制限は`3072`です。 TiDB（バージョン= &lt;3.0.7）では、この制限は`3072*4`です。 TiDB（3.0.7 &lt;バージョン&lt;3.0.11）では、この制限は`3072`です。この構成は、MySQLおよび以前のバージョンのTiDBと互換性があるように追加されています。
+-   現在、有効な値の範囲は`[3072, 3072*4]`です。 MySQLとTiDB（バージョン&lt;v3.0.11）にはこの構成項目はありませんが、どちらも新しく作成されたインデックスの長さを制限します。 MySQLのこの制限は`3072`です。 TiDB（バージョン= &lt;3.0.7）では、この制限は`3072*4`です。 TiDB（3.0.7 &lt;バージョン&lt;3.0.11）では、この制限は`3072`です。この構成は、MySQLおよび以前のバージョンのTiDBと互換性があるように追加されています。
 
 ### <code>table-column-count-limit</code> <span class="version-mark">limitv5.0の新機能</span> {#code-table-column-count-limit-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -196,14 +196,14 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 ### <code>enable-timestamp</code> {#code-enable-timestamp-code}
 
 -   ログでタイムスタンプ出力を有効にするかどうかを決定します。
--   デフォルト値： `true`
+-   デフォルト値： `null`
 -   値を`false`に設定すると、ログはタイムスタンプを出力しません。
 
 > **ノート：**
 >
-> 下位互換性を保つために、最初の`disable-timestamp`の構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合（たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合）、TiDBは`disable-timestamp`の値を無視します。それ以降のバージョンでは、 `disable-timestamp`の構成が削除されます。
->
-> `disable-timestamp`を破棄し、意味的に理解しやすい`enable-timestamp`を使用します。
+> -   下位互換性を保つために、最初の`disable-timestamp`の構成項目は引き続き有効です。ただし、 `disable-timestamp`の値が`enable-timestamp`の値と意味的に競合する場合（たとえば、 `enable-timestamp`と`disable-timestamp`の両方が`true`に設定されている場合）、TiDBは`disable-timestamp`の値を無視します。
+> -   現在、TiDBは`disable-timestamp`を使用して、タイムスタンプをログに出力するかどうかを決定します。この状況では、 `enable-timestamp`の値は`null`です。
+> -   それ以降のバージョンでは、 `disable-timestamp`の構成が削除されます。 `disable-timestamp`を破棄し、意味的に理解しやすい`enable-timestamp`を使用します。
 
 ### <code>enable-slow-log</code> {#code-enable-slow-log-code}
 
@@ -354,7 +354,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 >
 > `server-memory-quota`はまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
 
--   tidb-serverインスタンスのメモリ使用制限。<!-- New in TiDB v5.0 -->この構成アイテムは、前の[`max-memory`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#max-memory)を完全に置き換えます。
+-   tidb-serverインスタンスのメモリ使用制限。
 -   デフォルト値： `0` （バイト単位）。これは、メモリ制限がないことを意味します。
 
 ### <code>memory-usage-alarm-ratio</code> <span class="version-mark">ratiov4.0.9の新機能</span> {#code-memory-usage-alarm-ratio-code-span-class-version-mark-new-in-v4-0-9-span}
@@ -367,7 +367,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>max-txn-ttl</code> {#code-max-txn-ttl-code}
 
--   1つのトランザクションがロックを保持できる最長時間。この時間を超えると、トランザクションのロックが他のトランザクションによってクリアされ、このトランザクションを正常にコミットできなくなる可能性があります。
+-   1つのトランザクションがロックを保持できる最長の時間。この時間を超えると、トランザクションのロックが他のトランザクションによってクリアされ、このトランザクションを正常にコミットできなくなる可能性があります。
 -   デフォルト値： `3600000`
 -   単位：ミリ秒
 -   この時間より長くロックを保持するトランザクションは、コミットまたはロールバックすることしかできません。コミットが成功しない可能性があります。
@@ -422,7 +422,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
     -   `stats-lease`の間隔で、TiDBはメモリにロードする必要のある列統計をチェックします。
     -   `200 * stats-lease`の間隔で、TiDBはメモリにキャッシュされたフィードバックをシステムテーブルに書き込みます。
     -   `5 * stats-lease`の間隔で、TiDBはシステムテーブルのフィードバックを読み取り、メモリにキャッシュされている統計を更新します。
--   `stats-lease`が0に設定されている場合、TiDBはシステムテーブルのフィードバックを定期的に読み取り、3秒ごとにメモリにキャッシュされている統計を更新します。ただし、TiDBは、次の統計関連のシステムテーブルを自動的に変更しなくなりました。
+-   `stats-lease`が0に設定されている場合、TiDBはシステムテーブルのフィードバックを定期的に読み取り、メモリにキャッシュされている統計を3秒ごとに更新します。ただし、TiDBは、次の統計関連のシステムテーブルを自動的に変更しなくなりました。
     -   `mysql.stats_meta` ：TiDBは、トランザクションによって変更されたテーブル行の数を自動的に記録し、このシステムテーブルに更新しなくなりました。
     -   `mysql.stats_top_n` `mysql.stats_buckets` `mysql.stats_histograms`は、統計を自動的に分析してプロアクティブに更新しなくなりました。
     -   `mysql.stats_feedback` ：TiDBは、クエリされたデータによって返された統計の一部に従って、テーブルとインデックスの統計を更新しなくなりました。
@@ -718,7 +718,7 @@ v3.1.0で導入された`experimental`のセクションでは、TiDBの実験�
 
 ### <code>allow-expression-index</code> <span class="version-mark">indexv4.0.0の新機能</span> {#code-allow-expression-index-code-span-class-version-mark-new-in-v4-0-0-span}
 
--   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0以降、式の関数が安全であれば、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が存在する可能性があります。 `tidb_allow_function_for_expression_index`の変数をクエリすることにより、式の作成に直接使用しても安全な関数を取得できます。
+-   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0以降、式の関数が安全であれば、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が存在する可能性があります。 `tidb_allow_function_for_expression_index`変数をクエリすることにより、式の作成に直接使用しても安全な関数を取得できます。
 -   デフォルト値： `false`
 
 ### <code>stats-load-concurrency</code><span class="version-mark">の新機能</span> {#code-stats-load-concurrency-code-span-class-version-mark-new-in-v5-4-0-span}

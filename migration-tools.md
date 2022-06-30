@@ -101,5 +101,5 @@ tiup update --self && tiup update dm
 
 ## も参照してください {#see-also}
 
--   [TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline)
+-   [TiUPをオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)
 -   [ツールをバイナリでダウンロードしてインストールする](/download-ecosystem-tools.md)

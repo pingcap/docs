@@ -31,7 +31,7 @@ TiDBバージョン：3.0.16
 -   TiDB
 
     -   あるトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されるために発生したデータの不整合の問題を修正します[＃18248](https://github.com/pingcap/tidb/pull/18248)
-    -   PDサーバー側フォロワー[17944](https://github.com/pingcap/tidb/pull/17944)の`Got too many pings`エラーログを修正します
+    -   PDサーバー側フォロワー[＃17944](https://github.com/pingcap/tidb/pull/17944)の`Got too many pings`エラーログを修正します
     -   HashJoinの子が`TypeNull`列[＃17935](https://github.com/pingcap/tidb/pull/17935)を返すときに発生する可能性のあるパニックの問題を修正します
     -   アクセスが拒否されたときのエラーメッセージを修正する[＃17722](https://github.com/pingcap/tidb/pull/17722)
     -   `int`タイプと`float`タイプのJSON比較の問題を修正[＃17715](https://github.com/pingcap/tidb/pull/17715)

@@ -32,18 +32,17 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 </NavColumn>
 
-<NavColumn><ColumnTitle>データの管理</ColumnTitle>
+<NavColumn><ColumnTitle>データの移行</ColumnTitle>
 
 -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
 -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
 -   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
--   [データのバックアップと復元](/tidb-cloud/backup-and-restore.md)
 -   [TiDB Cloudからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
 
 </NavColumn>
 
-<NavColumn><ColumnTitle>モニタークラスター</ColumnTitle>
+<NavColumn><ColumnTitle>監視と警告</ColumnTitle>
 
 -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
 -   [Datadogの統合](/tidb-cloud/monitor-datadog-integration.md)

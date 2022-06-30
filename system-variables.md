@@ -5,7 +5,7 @@ summary: Use system variables to optimize performance or alter running behavior.
 
 # システム変数 {#system-variables}
 
-`GLOBAL` `INSTANCE` `SESSION` `INSTANCE` `SESSION` `GLOBAL`適用される可能性があるという点でいくつかの違いがあります。
+`GLOBAL` `INSTANCE` `SESSION` `INSTANCE` `SESSION` `GLOBAL`適用される場合があるという点でいくつかの違いがあります。
 
 -   `GLOBAL`スコープ変数への変更は**、TiDBとの新しい接続セッションにのみ適用されます**。現在アクティブな接続セッションは影響を受けません。これらの変更は永続化され、再起動後も有効です。
 -   `INSTANCE`スコープ変数への変更は、変更が行われた直後に、現在のTiDBインスタンスとのすべてのアクティブまたは新しい接続セッションに適用されます。他のTiDBインスタンスは影響を受けません。これらの変更は永続化されず、TiDBの再起動後に無効になります。
@@ -601,8 +601,8 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   範囲： `[32, 10240]`
 -   単位：行
 -   この変数は、DDL操作の`re-organize`フェーズでバッチサイズを設定するために使用されます。たとえば、TiDBが`ADD INDEX`の操作を実行する場合、インデックスデータは`tidb_ddl_reorg_worker_cnt` （数）の同時ワーカーによって埋め戻される必要があります。各ワーカーは、インデックスデータをバッチで埋め戻します。
-    -   `ADD INDEX`の操作中に`UPDATE`や`REPLACE`などの更新操作が多数存在する場合、バッチサイズが大きいほど、トランザクションが競合する可能性が高くなります。この場合、バッチサイズを小さい値に調整する必要があります。最小値は32です。
-    -   トランザクションの競合が存在しない場合は、バッチサイズを大きな値に設定できます。これにより、データの埋め戻し速度を上げることができますが、TiKVへの書き込み圧力も高くなります。
+    -   `ADD INDEX`操作中に`UPDATE`や`REPLACE`などの更新操作が多数存在する場合、バッチサイズが大きいほど、トランザクションが競合する可能性が高くなります。この場合、バッチサイズを小さい値に調整する必要があります。最小値は32です。
+    -   トランザクションの競合が存在しない場合は、バッチサイズを大きな値に設定できます（ワーカー数を考慮してください。参照については[オンラインワークロードと`ADD INDEX`操作の相互作用テスト](/benchmark/online-workloads-and-add-index-operations.md)を参照してください）。これにより、データの埋め戻し速度を上げることができますが、TiKVへの書き込み圧力も高くなります。
 
 ### tidb_ddl_reorg_priority {#tidb-ddl-reorg-priority}
 
@@ -642,7 +642,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   この変数は、 `scan`操作の同時実行性を設定するために使用されます。
 -   OLAPシナリオでは大きな値を使用し、OLTPシナリオでは小さな値を使用します。
 -   OLAPシナリオの場合、最大値はすべてのTiKVノードのCPUコアの数を超えてはなりません。
--   テーブルに多数のパーティションがある場合は、変数値を適切に減らして、TiKVがメモリ不足（OOM）になるのを防ぐことができます。
+-   テーブルに多数のパーティションがある場合は、変数値を適切に減らして（スキャンするデータのサイズとスキャンの頻度によって決定される）、TiKVがメモリ不足（OOM）になるのを防ぐことができます。
 
 ### tidb_dml_batch_size {#tidb-dml-batch-size}
 
@@ -680,7 +680,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
--   この変数は、 `AMEND TRANSACTION`機能を有効にするかどうかを制御するために使用されます。悲観的トランザクションで`AMEND TRANSACTION`の機能を有効にすると、このトランザクションに関連付けられたテーブルに同時DDL操作とスキーマバージョンの変更が存在する場合、TiDBはトランザクションを修正しようとします。 TiDBは、トランザクションのコミットを修正して、コミットを最新の有効なスキーマバージョンと一致させ、 `Information schema is changed`エラーが発生することなくトランザクションを正常にコミットできるようにします。この機能は、次の同時DDL操作で有効です。
+-   この変数は、 `AMEND TRANSACTION`機能を有効にするかどうかを制御するために使用されます。悲観的トランザクションで`AMEND TRANSACTION`の機能を有効にすると、このトランザクションに関連付けられたテーブルにDDL操作とスキーマバージョンの変更が同時に存在する場合、TiDBはトランザクションを修正しようとします。 TiDBは、トランザクションのコミットを修正して、コミットを最新の有効なスキーマバージョンと一致させ、 `Information schema is changed`エラーが発生することなくトランザクションを正常にコミットできるようにします。この機能は、次の同時DDL操作で有効です。
 
     -   `ADD COLUMN`または`DROP COLUMN`の操作。
     -   フィールドの長さを増やす`MODIFY COLUMN`または`CHANGE COLUMN`の操作。
@@ -707,6 +707,22 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
 -   この変数は、生成された列または式インデックスを作成するときに`AUTO_INCREMENT`列を含めるかどうかを決定するために使用されます。
+
+### tidb_enable_change_multi_schema {#tidb-enable-change-multi-schema}
+
+> **警告：**
+>
+> TiDBは、将来、より多くの種類のマルチスキーマ変更をサポートする予定です。このシステム変数は、TiDBの将来のリリースで削除される予定です。
+
+-   スコープ：グローバル
+-   クラスタに永続化：はい
+-   タイプ：ブール
+-   デフォルト値： `OFF`
+-   この変数は、 `ALTER TABLE`つのステートメントで複数の列またはインデックスを変更できるかどうかを制御するために使用されます。この変数の値が`ON`の場合、次のマルチスキーマ変更のみがサポートされます。
+    -   複数の列を追加します。たとえば、 `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;` 。
+    -   複数の列を削除します。たとえば、 `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;` 。
+    -   複数のインデックスを削除します。たとえば、 `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;` 。
+    -   単一列のインデックスでカバーされている列を削除します。たとえば、スキーマに`INDEX idx(c1)`が含まれている`ALTER TABLE t DROP COLUMN c1` 。
 
 ### tidb_enable_cascades_planner {#tidb-enable-cascades-planner}
 
@@ -801,24 +817,25 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
 -   可能な`ON` `WARN` `OFF`
--   デフォルトでは、まだ実装されていない機能の構文を使用しようとすると、TiDBはエラーを返します。変数値が`ON`に設定されている場合、TiDBはこのような機能が利用できない場合を黙って無視します。これは、SQLコードを変更できない場合に役立ちます。
+-   デフォルトでは、まだ実装されていない機能の構文を使用しようとすると、TiDBはエラーを返します。変数値が`ON`に設定されている場合、TiDBはこのような機能が利用できない場合を黙って無視します。これは、SQLコードに変更を加えることができない場合に役立ちます。
 -   `noop`の機能を有効にすると、次の動作が制御されます。
     -   `get_lock`および`release_lock`関数
     -   `LOCK IN SHARE MODE`構文
     -   `SQL_CALC_FOUND_ROWS`構文
     -   `START TRANSACTION READ ONLY`および`SET TRANSACTION READ ONLY`構文
     -   `tx_read_only` `read_only` `offline_mode` `transaction_read_only` `sql_auto_is_null`システム`super_read_only`
+    -   `GROUP BY <expr> ASC|DESC`構文
 
 > **警告：**
 >
-> 安全と見なすことができるのは、デフォルト値の`OFF`のみです。 `tidb_enable_noop_functions=1`を設定すると、TiDBがエラーを提供せずに特定の構文を無視できるため、アプリケーションで予期しない動作が発生する可能性があります。たとえば、構文`START TRANSACTION READ ONLY`は許可されますが、トランザクションは読み取り/書き込みモードのままです。
+> 安全と見なすことができるのは、デフォルト値の`OFF`のみです。 `tidb_enable_noop_functions=1`を設定すると、TiDBがエラーを提供せずに特定の構文を無視できるため、アプリケーションで予期しない動作が発生する可能性があります。たとえば、構文`START TRANSACTION READ ONLY`は許可されていますが、トランザクションは読み取り/書き込みモードのままです。
 
 ### tidb_enable_pagingv5.4.0<span class="version-mark">の新機能</span> {#tidb-enable-paging-span-class-version-mark-new-in-v5-4-0-span}
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `OFF`
 -   この変数は、ページングの方法を使用して`IndexLookUp`のオペレーターでコプロセッサー要求を送信するかどうかを制御します。
--   ユーザーシナリオ： `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュダウンできない読み取りクエリの場合、読み取りクエリの待機時間が長くなり、TiKVの`unified read pool`のCPU使用率が高くなる可能性があります。このような場合、 `Limit`演算子は少数のデータセットしか必要としないため、 `tidb_enable_paging`を`ON`に設定すると、TiDBが処理するデータが少なくなり、クエリの待機時間とリソース消費が削減されます。
+-   ユーザーシナリオ： `IndexLookup`と`Limit`を使用し、 `Limit`を`IndexScan`にプッシュダウンできない読み取りクエリの場合、読み取りクエリの待機時間が長くなり、TiKVの`unified read pool`のCPU使用率が高くなる可能性があります。このような場合、 `Limit`演算子は少量のデータセットしか必要としないため、 `tidb_enable_paging`を`ON`に設定すると、TiDBが処理するデータが少なくなり、クエリの待機時間とリソース消費が削減されます。
 -   `tidb_enable_paging`が有効になっている場合、プッシュダウンできず`960`未満の`Limit`の`IndexLookUp`の要求に対して、TiDBはページングの方法を使用してコプロセッサー要求を送信します。 `Limit`が少ないほど、最適化はより明白になります。
 
 ### tidb_enable_parallel_applyv5.0<span class="version-mark">の新</span>機能 {#tidb-enable-parallel-apply-span-class-version-mark-new-in-v5-0-span}
@@ -988,7 +1005,7 @@ MPPは、TiFlashエンジンによって提供される分散コンピューテ�
 
 v5.0以降でも、上記のシステム変数を個別に変更でき（非推奨の警告が返されます）、変更は対応する単一の演算子にのみ影響します。その後、 `tidb_executor_concurrency`を使用して演算子の同時実行性を変更しても、個別に変更された演算子は影響を受けません。 `tidb_executor_concurrency`を使用してすべての演算子の同時実行性を変更する場合は、上記のすべての変数の値を`-1`に設定できます。
 
-以前のバージョンからv5.0にアップグレードされたシステムの場合、上記の変数の値を変更していない場合（つまり、 `tidb_hash_join_concurrency`の値が`5`で、残りの値が`4` ）、オペレーターの同時実行性は以前にこれらの変数は自動的に`tidb_executor_concurrency`によって管理されます。これらの変数のいずれかを変更した場合でも、対応する演算子の同時実行性は変更された変数によって制御されます。
+以前のバージョンからv5.0にアップグレードされたシステムの場合、上記の変数の値を変更していない場合（つまり、 `tidb_hash_join_concurrency`の値が`5`で、残りの値が`4` ）、オペレーターの同時実行性は以前にこれらの変数は自動的に`tidb_executor_concurrency`によって管理されます。これらの変数のいずれかを変更した場合でも、対応する演算子の並行性は変更された変数によって制御されます。
 
 ### tidb_expensive_query_time_threshold {#tidb-expensive-query-time-threshold}
 
@@ -1297,7 +1314,7 @@ v5.0以降でも、上記のシステム変数を個別に変更でき（非推�
 
 -   スコープ：セッション|グローバル
 -   デフォルト値： `0.9`
--   この変数は、列の順序の相関を使用して行数を推定できるようにするかどうかを決定するしきい値を設定するために使用されます。現在の列と`handle`列の間の次数相関がしきい値を超えると、このメソッドが有効になります。
+-   この変数は、列順序相関を使用して行数の推定を有効にするかどうかを決定するしきい値を設定するために使用されます。現在の列と`handle`列の間の次数相関がしきい値を超えると、このメソッドが有効になります。
 
 ### tidb_opt_distinct_agg_push_down {#tidb-opt-distinct-agg-push-down}
 
@@ -1561,6 +1578,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 -   デフォルト値： `OFF`
 -   この変数は、UTF-8検証をスキップするかどうかを設定するために使用されます。
 -   UTF-8文字を検証すると、パフォーマンスに影響します。入力文字が有効なUTF-8文字であることが確実な場合は、変数値を`ON`に設定できます。
+
+> **ノート：**
+>
+> 文字チェックをスキップすると、TiDBはアプリケーションによって書き込まれた不正なUTF-8文字の検出に失敗し、 `ANALYZE`の実行時にデコードエラーを引き起こし、その他の不明なエンコードの問題を引き起こす可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合は、文字チェックをスキップすることはお勧めしません。
 
 ### tidb_slow_log_threshold {#tidb-slow-log-threshold}
 

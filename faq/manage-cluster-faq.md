@@ -47,9 +47,9 @@ MySQLと同様に、TiDBにはシステムテーブルも含まれており、�
 
     最初に`information_schema.cluster_processlist`を使用して、TiDBインスタンスアドレスとセッションIDを見つけます。 DMLステートメントを実行しているTiDBインスタンスにクライアントを直接接続します。次に、 `kill tidb session_id`ステートメントを実行します。
 
-    クライアントが別のTiDBインスタンスに接続するか、クライアントとTiDBクラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別のTiDBインスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
+    クライアントが別のTiDBインスタンスに接続する場合、またはクライアントとTiDBクラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別のTiDBインスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
--   DDLステートメントを強制終了します。最初に`admin show ddl jobs`を使用して終了する必要のあるDDLジョブのIDを見つけてから、 `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
+-   DDLステートメントを強制終了する：最初に`admin show ddl jobs`を使用して終了する必要のあるDDLジョブのIDを見つけてから、 `admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
 
 ### TiDBはセッションタイムアウトをサポートしていますか？ {#does-tidb-support-session-timeout}
 
@@ -86,7 +86,7 @@ TiDBコミュニティは非常に活発です。 1.0 GAのリリース後、エ
 
 -   CPU占有率が高いなどのコンピューティングリソースの不足。
 
--   書き込みおよび読み取りの容量が不足しています。
+-   書き込みと読み取りの容量が不足しています。
 
 ビジネスの成長に合わせてTiDBを拡張できます。
 
@@ -183,7 +183,7 @@ pd-ctlツールを使用して、クラスタの一般的なステータスを�
 処理時間はシナリオによって異なります。一般に、次の3つのシナリオを検討できます。
 
 1.  対応するデータテーブルの行数が比較的少ない`Add Index`の操作：約3秒
-2.  対応するデータテーブルの行数が比較的多い`Add Index`の操作：処理時間は、特定の行数とそのときのQPSによって異なります（ `Add Index`の操作の優先度は通常のSQL操作よりも低くなります）。
+2.  対応するデータテーブルに比較的多数の行がある`Add Index`の操作：処理時間は、特定の行数とそのときのQPSによって異なります（ `Add Index`の操作の優先度は通常のSQL操作よりも低くなります）。
 3.  その他のDDL操作：約1秒
 
 DDL要求を受信するTiDBサーバーインスタンスが、DDL所有者がいるTiDBサーバーインスタンスと同じである場合、上記の最初と3番目のシナリオのコストは数十から数百ミリ秒にすぎない可能性があります。
@@ -299,7 +299,7 @@ GROUP BY
 
 これは、スタートアップパラメータのアドレスが他のTiKVによってPDクラスタに登録されているためです。このエラーの原因となる一般的な条件：TiKV `--data-dir`で指定されたパスにデータフォルダーがありません（削除または移動後に更新--data-dirがありません）、前のパラメーターでTiKVを再起動してください.pd-ctlの[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)の機能を試してください。前のストアを削除してから、TiKVを再起動します。
 
-### TiKVプライマリノードとセカンダリノードは同じ圧縮アルゴリズムを使用していますが、なぜ結果が異なるのですか？ {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
+### TiKVプライマリノードとセカンダリノードは同じ圧縮アルゴリズムを使用していますが、結果が異なるのはなぜですか？ {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
 
 現在、TiKVプライマリノードの一部のファイルの圧縮率は高く、これは基盤となるデータ分散とRocksDBの実装によって異なります。データサイズが時々変動するのは正常です。基盤となるストレージエンジンは、必要に応じてデータを調整します。
 
@@ -425,6 +425,6 @@ TiDBは、小さなサイズのデータと限られたリージョンでは同�
 
 ### TiDBでデータをバックアップする方法は？ {#how-to-back-up-data-in-tidb}
 
-現在、大量のデータのバックアップには、 [BR](/br/backup-and-restore-tool.md)を使用することをお勧めします。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式のMySQLツール`mysqldump`はデータのバックアップと復元のためにTiDBでもサポートされていますが、そのパフォーマンスは[BR](/br/backup-and-restore-tool.md)よりも悪く、大量のデータのバックアップと復元にははるかに長い時間が必要です。
+現在、大量のデータ（1 TBを超える）のバックアップには、 [BR](/br/backup-and-restore-tool.md)を使用する方法が推奨されます。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式のMySQLツール`mysqldump`はデータのバックアップと復元のためにTiDBでもサポートされていますが、そのパフォーマンスは[BR](/br/backup-and-restore-tool.md)よりも悪く、大量のデータのバックアップと復元にははるかに長い時間が必要です。
 
 BRに関するその他のFAQについては、 [BRのよくある質問](/br/backup-and-restore-faq.md)を参照してください。

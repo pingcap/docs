@@ -39,7 +39,7 @@ TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文
 -   `CHECKSUM TABLE`構文[＃1895](https://github.com/pingcap/tidb/issues/1895)
 -   `REPAIR TABLE`構文
 -   `OPTIMIZE TABLE`構文
--   `GET_LOCK`と`RELEASE_LOCK`の機能[＃14994](https://github.com/pingcap/tidb/issues/14994)
+-   `GET_LOCK`および`RELEASE_LOCK`関数[＃14994](https://github.com/pingcap/tidb/issues/14994)
 -   [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)と`REPLACE`キーワード[＃24515](https://github.com/pingcap/tidb/issues/24515)
 -   `HANDLER`ステートメント
 -   `CREATE TABLESPACE`ステートメント
@@ -78,6 +78,10 @@ mysql> SELECT _tidb_rowid, id FROM t;
 +-------------+------+
 3 rows in set (0.01 sec)
 ```
+
+> **ノート：**
+>
+> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
 ### パフォーマンススキーマ {#performance-schema}
 
@@ -168,7 +172,7 @@ TiDBはほとんどの[SQLモード](/sql-mode.md)をサポートします：
     -   MySQL5.7のデフォルト値は`latin1`です。
     -   MySQL8.0のデフォルト値は`utf8mb4`です。
 -   デフォルトの照合順序：
-    -   TiDBでのデフォルトの`utf8mb4`の照合順序は`utf8mb4_bin`です。
+    -   TiDBのデフォルトの`utf8mb4`の照合順序は`utf8mb4_bin`です。
     -   MySQL5.7の`utf8mb4`のデフォルトの照合順序は`utf8mb4_general_ci`です。
     -   MySQL8.0のデフォルトの`utf8mb4`の照合順序は`utf8mb4_0900_ai_ci`です。
 -   デフォルト値`foreign_key_checks` ：
