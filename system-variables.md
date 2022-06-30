@@ -545,7 +545,16 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Persists to cluster: Yes
 - Type: Time
 - Default value: `00:00 +0000`
-- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1AM and 3AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+- This variable is used to restrict the time window that the automatic update of statistics is permitted. For example, to only allow automatic statistics updates between 1 AM and 3 AM, set `tidb_auto_analyze_start_time='01:00 +0000'` and `tidb_auto_analyze_end_time='03:00 +0000'`.
+
+### `tidb_max_auto_analyze_time` <span class="version-mark">New in v6.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `43200`
+- Range: `[0, 2147483647]`
+- Unit: seconds
+- This variable is used to specify the maximum execution time of automatic `ANALYZE` tasks. When the execution time of an automatic `ANALYZE` task exceeds the specified time, the task will be terminated. When the value of this variable is `0`, there is no limit to the maximum execution time of automatic `ANALYZE` tasks.
 
 ### tidb_backoff_lock_fast
 
@@ -941,7 +950,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`
 - This variable is used to set whether to enable the `LIST (COLUMNS) TABLE PARTITION` feature.
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
@@ -949,8 +958,18 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `OFF`
+- Default value: `ON`
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
+- For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
+
+### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- Value options: `OFF` and `ON`
+- This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. For detailed information about `ONLY_FULL_GROUP_BY`, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by). In v6.1.0, TiDB handles this check more strictly and correctly.
+- To avoid potential compatibility issues caused by version upgrades, the default value of this variable is `OFF` in v6.1.0.
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
@@ -1266,6 +1285,15 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 >     - A large amount of history data may affect performance to a certain degree, especially for range queries such as `select count(*) from t`
 > - If there is any transaction that has been running longer than `tidb_gc_life_time`, during GC, the data since `start_ts` is retained for this transaction to continue execution. For example, if `tidb_gc_life_time` is configured to 10 minutes, among all transactions being executed, the transaction that starts earliest has been running for 15 minutes, GC will retain data of the recent 15 minutes.
 
+### tidb_gc_max_wait_time <span class="version-mark">New in v6.1.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `86400`
+- Range: `[600, 31536000]`
+- Unit: Seconds
+- This variable is used to set the maximum time that active transactions block the GC safe point. During each time of GC, the safe point does not exceed the start time of the ongoing transactions by default. If the runtime of active transactions does not exceed this variable value, the GC safe point will be blocked until the runtime exceeds this value. This variable value is an integer type.
+
 ### tidb_gc_run_interval <span class="version-mark">New in v5.0</span>
 
 - Scope: GLOBAL
@@ -1490,6 +1518,22 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.
 - This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0.
 
+### tidb_mem_quota_analyze <span class="version-mark">New in v6.1.0</span>
+
+> **Warning:**
+>
+> Currently, the `ANALYZE` memory quota is an experimental feature, and the memory statistics might be inaccurate in production environments.
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `0`
+- Unit: Bytes
+- This variable controls the maximum memory usage of TiDB updating statistics. Such a memory usage occurs when you manually execute [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) and when TiDB automatically analyzes tasks in the background. When the total memory usage exceeds this threshold, user-executed `ANALYZE` will exit, and an error message is reported that reminds you to try a lower sampling rate or retry later. If the automatic task in the TiDB background exits because the memory threshold is exceeded, and the sampling rate used is higher than the default value, TiDB will retry the update using the default sampling rate. When this variable value is negative or zero, TiDB does not limit the memory usage of both the manual and automatic update tasks.
+
+> **Note:**
+>
+> `auto_analyze` will be triggered in a TiDB cluster only when `run-auto-analyze` is enabled in the TiDB startup configuration file.
+
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1579,14 +1623,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 > * [Connector/J](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-configuration-properties.html) (`allowMultiQueries`)
 > * PHP [mysqli](https://dev.mysql.com/doc/apis-php/en/apis-php-mysqli.quickstart.multiple-statement.html) (`mysqli_multi_query`)
 
-### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
+### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Default value: `OFF`
-- Value options: `OFF` and `ON`
-- This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. For detailed information about `ONLY_FULL_GROUP_BY`, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/sql-mode.html#sqlmode_only_full_group_by). In v6.1.0, TiDB handles this check more strictly and correctly.
-- To avoid potential compatibility issues caused by version upgrades, the default value of this variable is `OFF` in v6.1.0.
+- Default value: `0`
+- This variable specifies whether to return an error immediately when the error occurs in a non-transactional DML statement.
+- When the value is set to `0`, the non-transactional DML statement stops immediately at the first error and returns the error. All the following batches are canceled.
+- When the value is set to `1` and an error occurs in a batch, the following batches will continue to be executed until all batches are executed. All errors occurred during the execution process are returned together in the result.
 
 ### tidb_opt_agg_push_down
 
@@ -1974,6 +2018,14 @@ Usage example:
 SET tidb_slow_log_threshold = 200;
 ```
 
+### tidb_max_tiflash_threads <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `-1`
+- Range: `[-1, 256]`
+- This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
+
 ### tidb_slow_query_file
 
 - Scope: SESSION
@@ -1987,6 +2039,10 @@ SET tidb_slow_log_threshold = 200;
 - This variable is used to set the time point at which the data is read by the session. For example, when you set the variable to "2017-11-11 20:20:20" or a TSO number like "400036290571534337", the current session reads the data of this moment.
 
 ### tidb_stats_cache_mem_quota <span class="version-mark">New in v6.1.0</span>
+
+> **Warning:**
+>
+> This variable is an experimental feature. It is not recommended to use it in production environments.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -2151,13 +2207,15 @@ SET tidb_slow_log_threshold = 200;
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Enumeration
-- Default value: `OFF`
+- Default value: `FAST`
 - Possible values: `OFF`, `FAST`, `STRICT`
 - This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
 
     - `OFF`: Disable this check.
     - `FAST`: Enable most of the check items, with almost no impact on performance.
     - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
+
+- For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
 ### tidb_txn_mode
 
