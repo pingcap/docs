@@ -717,6 +717,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_alter_placement
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
 > **Warning:**
 >
 > Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
@@ -727,7 +735,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
 </CustomContent>
 <CustomContent platform="tidb-cloud">
-- This variable is not applicable to TiDB Cloud.
+- This variable enables or disables Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
 </CustomContent>
 
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
