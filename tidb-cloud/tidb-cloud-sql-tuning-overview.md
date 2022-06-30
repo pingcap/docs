@@ -1,29 +1,29 @@
 ---
 title: SQL Tuning Overview
-summary: Learn about how to tune SQL in TiDB Cloud.
+summary: Learn about how to tune SQL performance in TiDB Cloud.
 ---
 
 # SQL Tuning Overview
 
-To get the best SQL performance, consider the following.
+To get the best SQL performance, consider the following:
 
-- SQL performance tuning. There are many ways to optimize SQL performance, such as querying statements, optimizing execution plans, optimizing full table scans, and other ways described in this document.
-- Schema design. Depending on your business load type, you may need to optimize the schema to avoid transaction conflicts or hotspots.
+- Tune SQL performance. There are many ways to optimize SQL performance, such as querying statements, optimizing execution plans, and optimizing full table scans.
+- Optimize schema design. Depending on your business load type, you may need to optimize the schema to avoid transaction conflicts or hotspots.
 
 ## Tune SQL performance
 
 To improve the performance of SQL statements, refer to the following principles.
 
-- Minimize the scope of the scanned data. The less data scanned, the better. It is better to scan only the required data and avoid scanning the redundant data.
+- Minimize the scope of the scanned data. It is always a best practice to scan only the required data and avoid scanning the redundant data.
 - Use appropriate indexes. For the column in the `WHERE` clause in SQL, you need to make sure that there is a corresponding index. Otherwise it will become a statement to scan the full table and the performance is very poor.
-- Use the appropriate Join type. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the best Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
-- Use the appropriate storage engine. For mixed OLTP and OLAP types of loads, the TiFlash query engine is recommended, see [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
+- Use appropriate Join types. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the best Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
+- Use appropriate storage engines. It is recommended to use the TiFlash query engine for mixed OLTP and OLAP types of loads. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
 
-TiDB Cloud provides several tools to help analyze slow queries executed on a cluster. This section describes different approaches to optimize slow queries.
+TiDB Cloud provides several tools to help analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
 
 ### Diagnosis - Statement
 
-[Statement](tidbcloud/tune-performance#statement-analysis) collects the execution results of all SQL statements on the cluster. It is often used to analyze the total time consumed or time consumed in a single execution when a SQL statement takes a long time.
+[Statement](/tidb-cloud/tune-performance.md#statement-analysis) collects the execution results of all SQL statements on the cluster. It is often used to analyze the total time consumed or time consumed in a single execution when a SQL statement takes a long time.
 
 Note that on this page, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 
