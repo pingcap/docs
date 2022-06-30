@@ -165,6 +165,14 @@ mysql> SELECT * FROM t1;
 
 ### ddl_slow_threshold
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `300`
 - Unit: Milliseconds
@@ -456,8 +464,15 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
-
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: SESSION
 - Default value: `OFF`
@@ -551,6 +566,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_check_mb4_value_in_utf8
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
@@ -565,6 +588,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - When the variable is set to a larger value, the execution performance of other queries is affected.
 
 ### tidb_config
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: SESSION
 - Default value: ""
@@ -775,6 +806,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_collect_execution_info
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
@@ -890,6 +929,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_slow_log
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `ON`
 - This variable is used to control whether to enable the slow log feature.
@@ -935,6 +982,14 @@ Query OK, 0 rows affected (0.09 sec)
     - `OFF` indicates disabling the `TABLE PARTITION` feature. In this case, the syntax that creates a partition table can be executed, but the table created is not a partitioned one.
 
 ### tidb_enable_telemetry <span class="version-mark">New in v4.0.2</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: GLOBAL
 - Default value: `ON`
@@ -1054,6 +1109,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_expensive_query_time_threshold
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `60`
 - Range: `[10, 2147483647]`
@@ -1063,6 +1126,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - Expensive query logs print the statements that are being executed, with execution time exceeding the threshold value, and their related information.
 
 ### tidb_force_priority
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: INSTANCE
 - Default value: `NO_PRIORITY`
@@ -1123,6 +1194,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 ### tidb_general_log
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: INSTANCE
 - Default value: `OFF`
@@ -1301,12 +1380,28 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_memory_usage_alarm_ratio
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `0.8`
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
 ### tidb_metric_query_range_duration <span class="version-mark">New in v4.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: SESSION
 - Default value: `60`
@@ -1315,6 +1410,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This variable is used to set the range duration of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
 ### tidb_metric_query_step <span class="version-mark">New in v4.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: SESSION
 - Default value: `60`
@@ -1476,6 +1579,14 @@ explain select * from t where age=5;
 
 ### tidb_opt_write_row_id
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: SESSION
 - Default value: `OFF`
 - This variable is used to control whether to allow `INSERT`, `REPLACE`, and `UPDATE` statements to operate on the `_tidb_rowid` column. This variable can be used only when you import data using TiDB tools.
@@ -1497,6 +1608,14 @@ explain select * from t where age=5;
 - This variable controls whether to enable the [ANALYZE configuration persistence](/statistics.md#persist-analyze-configurations) feature.
 
 ### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: INSTANCE
 - Default value: `0`
@@ -1538,11 +1657,27 @@ SET tidb_query_log_max_len = 20
 
 ### tidb_record_plan_in_slow_log
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `ON`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
 
 ### tidb_redact_log
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
@@ -1589,6 +1724,14 @@ SET tidb_query_log_max_len = 20
 - This variable is used to set the maximum number of the retries for optimistic transactions. When a transaction encounters retryable errors (such as transaction conflicts, very slow transaction commit, or table schema changes), this transaction is re-executed according to this variable. Note that setting `tidb_retry_limit` to `0` disables the automatic retry. This variable only applies to optimistic transactions, not to pessimistic transactions.
 
 ### tidb_row_format_version
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: GLOBAL
 - Default value: `2`
@@ -1640,6 +1783,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_threshold
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: INSTANCE
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
@@ -1653,6 +1804,14 @@ SET tidb_slow_log_threshold = 200;
 ```
 
 ### tidb_slow_query_file
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> The variable is applicable to TiDB only and not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: SESSION
 - Default value: ""
