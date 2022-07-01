@@ -3,9 +3,13 @@ title: Push-down calculations Supported by TiFlash
 summary: Learn the push-down calculations supported by TiFlash.
 ---
 
-# Push-down calculations Supported by TiFlash
+# Push-down Calculations Supported by TiFlash
 
-This document introduces  the push-down calculations supported by TiFlash. TiFlash supports the push-down of the following operators:
+This document introduces the push-down calculations supported by TiFlash. 
+
+## Push-down operators
+
+TiFlash supports the push-down of the following operators:
 
 * TableScan: Reads data from tables.
 * Selection: Filters data.
@@ -25,7 +29,9 @@ In TiDB, operators are organized in a tree structure. For an operator to be push
 + All of its child operators can be pushed down to TiFlash.
 + If an operator contains expressions (most of the operators contain expressions), all expressions of the operator can be pushed down to TiFlash.
 
-Currently, TiFlash supports the following push-down expressions:
+## Push-down expressions
+
+TiFlash supports the following push-down expressions:
 
 * Mathematical functions: `+, -, /, *, %, >=, <=, =, !=, <, >, round, abs, floor(int), ceil(int), ceiling(int), sqrt, log, log2, log10, ln, exp, pow, sign, radians, degrees, conv, crc32, greatest(int/real), least(int/real)`
 * Logical functions: `and, or, not, case when, if, ifnull, isnull, in, like, coalesce, is`
@@ -37,7 +43,7 @@ Currently, TiFlash supports the following push-down expressions:
 * Aggregate functions: `min, max, sum, count, avg, approx_count_distinct, group_concat`
 * Miscellaneous functions: `inetntoa, inetaton, inet6ntoa, inet6aton`
 
-## Other restrictions
+## Restrictions
 
 * Expressions that contain the Bit, Set, and Geometry types cannot be pushed down to TiFlash.
 
