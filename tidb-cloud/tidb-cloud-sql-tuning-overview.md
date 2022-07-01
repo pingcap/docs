@@ -5,33 +5,33 @@ summary: Learn about how to tune SQL performance in TiDB Cloud.
 
 # SQL Tuning Overview
 
-To get the best SQL performance, you can do the following:
+This document introduces how to tune SQL performance in TiDB Cloud. To get the best SQL performance, you can do the following:
 
 - Tune SQL performance. There are many ways to optimize SQL performance, such as querying statements, optimizing execution plans, and optimizing full table scan.
 - Optimize schema design. Depending on your business load type, you may need to optimize the schema to avoid transaction conflicts or hotspots.
 
 ## Tune SQL performance
 
-To improve the performance of SQL statements, refer to the following principles.
+To improve the performance of SQL statements, consider the following principles.
 
-- Minimize the scope of the scanned data. It is always a best practice to scan only the required data and avoid scanning the redundant data.
-- Use appropriate indexes. For the column in the `WHERE` clause in SQL, you need to make sure that there is a corresponding index. Otherwise it will become a statement to scan the full table and the performance is very poor.
-- Use appropriate Join types. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the best Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
+- Minimize the scope of the scanned data. It is always a best practice to scan only the minimum scope of data and avoid scanning all data.
+- Use appropriate indexes. For the column in the `WHERE` clause in SQL, you need to make sure that there is a corresponding index. Otherwise it will become a statement to scan the full table and result in poor performance.
+- Use appropriate Join types. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
 - Use appropriate storage engines. It is recommended to use the TiFlash query engine for mixed OLTP and OLAP types of loads. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
 
-TiDB Cloud provides several tools to help analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
+TiDB Cloud provides several tools to help you analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
 
-### Use Statement in Diagnostics
+### Use Statement on the Diagnostics tab
 
-[Statement](/tidb-cloud/tune-performance.md#statement-analysis) on the Diagnostics tab on the TiDB Cloud console collects the execution statistics of SQL statements of all databases on the cluster. It is often used to analyze the total time consumed or time consumed in a single execution when a SQL statement takes a long time.
+The TiDB Cloud console provides a **[Statement](/tidb-cloud/tune-performance.md#statement-analysis)** sub-tab on the **Diagnostics** tab. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to analyze the total time consumed or the time consumed by a single execution when a SQL statement takes a long time.
 
-Note that on this tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
+Note that on this sub-tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 
-You can see some key information in Statement.
+You can view some key information in **Statement**.
 
-- SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans and the database where the execution takes place.
-- Execution plan list: If the SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: Shows the details of the selected execution plan. It collects the execution plans of such SQL and the corresponding execution time from several perspectives, you can get more information from it. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
+- SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
+- Execution plan list: if the SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
+- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL and the corresponding execution time from several perspectives, you can get more information from it. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
