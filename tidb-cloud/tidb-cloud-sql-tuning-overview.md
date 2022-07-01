@@ -73,10 +73,6 @@ See [Guidelines to follow when selecting primary keys](https://docs.pingcap.com/
 
 The speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices) in some scenarios.
 
-### Transaction conflicts
-
-For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
-
 ### Use the Slow Log Memory Mapping Table
 
 You can query the contents of the slow query log by querying the [INFORMATION_SCHEMA.SLOW_QUERY](/identify-slow-queries.md#memory-mapping-in-slow-log) table, and find the structure in the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table. Using this table, you can perform queries using different fields to find potential problems.
@@ -89,7 +85,11 @@ The recommended analysis process for slow queries is as follows.
 
 ## Optimize schema design
 
-If you still can't get better performance based on SQL performance tuning, you may need to check your schema design and data read model to avoid transaction conflicts and hotspots. For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+If you still can't get better performance based on SQL performance tuning, you may need to check your schema design and data read model to avoid transaction conflicts and hotspots.
+
+### Transaction conflicts
+
+For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
 
 ### Hotspot issues
 
