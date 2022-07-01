@@ -243,19 +243,6 @@ Usage:
     config set max-store-down-time 30m  // Set the time within which PD receives no heartbeats and after which PD starts to add replicas to 30 minutes
     ```
 
-<<<<<<< HEAD
-=======
-- `max-store-preparing-time` controls the maximum waiting time for the store to go online. During the online stage of a store, PD can query the online progress of the store. When the specified time is exceeded, PD assumes that the store has been online and cannot query the online progress of the store again. But this does not prevent Regions from transferring to the new online store. In most scenarios, you do not need to adjust this parameter.
-
-    The following command specifies that the maximum waiting time for the store to go online is 4 hours.
-
-    {{< copyable "" >}}
-
-    ```bash
-    config set max-store-preparing-time 4h
-    ```
-
->>>>>>> ee77b7cf9 (fix format: remove >> in code block (#9418))
 - `leader-schedule-limit` controls the number of tasks scheduling the leader at the same time. This value affects the speed of leader balance. A larger value means a higher speed and setting the value to 0 closes the scheduling. Usually the leader scheduling has a small load, and you can increase the value in need.
 
     ```bash
@@ -774,21 +761,6 @@ Usage:
 >> scheduler config balance-hot-region-scheduler  // Display the configuration of the balance-hot-region scheduler
 ```
 
-<<<<<<< HEAD
-=======
-### `scheduler config balance-leader-scheduler`
-
-Use this command to view and control the `balance-leader-scheduler` policy.
-
-Since TiDB v6.0.0, PD introduces the `Batch` parameter for `balance-leader-scheduler` to control the speed at which the balance-leader processes tasks. To use this parameter, you can modify the `balance-leader batch` configuration item using pd-ctl.
-
-Before v6.0.0, PD does not have this configuration item, which means `balance-leader batch=1`. In v6.0.0 or later versions, the default value of `balance-leader batch` is `4`. To set this configuration item to a value greater than `4`, you need to set a greater value for [`scheduler-max-waiting-operator`](#config-show--set-option-value--placement-rules) (whose default value is `5`) at the same time. You can get the expected acceleration effect only after modifying both configuration items.
-
-```bash
-scheduler config balance-leader-scheduler set batch 3 // Set the size of the operator that the balance-leader scheduler can execute in a batch to 3
-```
-
->>>>>>> ee77b7cf9 (fix format: remove >> in code block (#9418))
 #### `scheduler config balance-hot-region-scheduler`
 
 Use this command to view and control the `balance-hot-region-scheduler` policy.
