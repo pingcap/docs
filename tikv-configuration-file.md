@@ -492,7 +492,7 @@ Raftstoreに関連するConfiguration / コンフィグレーションアイテ�
 >
 > この構成アイテムは、SQLステートメントを介して照会することはできませんが、構成ファイルで構成することはできます。
 
--   Raftステートマシンが作動する時間間隔
+-   ラフトステートマシンが作動する時間間隔
 -   デフォルト値： `"1s"`
 -   最小値： `0`より大きい
 
@@ -561,7 +561,7 @@ Raftstoreに関連するConfiguration / コンフィグレーションアイテ�
 
 ### <code>raft-entry-max-size</code> {#code-raft-entry-max-size-code}
 
--   単一ログの最大サイズの厳しい制限
+-   単一ログの最大サイズのハード制限
 -   デフォルト値： `"8MB"`
 -   最小値： `0`
 -   単位：MB | GB
@@ -907,6 +907,15 @@ Raftstoreに関連するConfiguration / コンフィグレーションアイテ�
 > **警告：**
 >
 > `region-bucket-size`は、TiDBv6.1.0で導入された実験的機能です。実稼働環境で使用することはお勧めしません。
+
+### <code>report-region-buckets-tick-interval</code><span class="version-mark">の新機能</span> {#code-report-region-buckets-tick-interval-code-span-class-version-mark-new-in-v6-1-0-span}
+
+> **警告：**
+>
+> `report-region-buckets-tick-interval`は、TiDBv6.1.0で導入された実験的機能です。実稼働環境で使用することはお勧めしません。
+
+-   `enable-region-bucket`が真の場合にTiKVがバケット情報をPDに報告する間隔。
+-   デフォルト値： `10s`
 
 ## RocksDB {#rocksdb}
 

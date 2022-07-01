@@ -1,9 +1,9 @@
 ---
-title: Use PingCAP Clinic
+title: Troubleshoot TiDB Cluster Using PingCAP Clinic
 summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot cluster problems remotely and perform a quick check of the cluster status on a cluster deployed using TiUP.
 ---
 
-# PingCAPクリニックを使用する {#use-pingcap-clinic}
+# PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング {#troubleshoot-tidb-cluster-using-pingcap-clinic}
 
 TiUPを使用して展開されたTiDBクラスターおよびDMクラスターの場合、 PingCAPクリニック Diagnostic Service（PingCAPクリニック）を使用して、クラスタの問題をリモートでトラブルシューティングし、Diagクライアント（Diag）および[クリニックサーバー中国](https://clinic.pingcap.com.cn) （Clinic Server）を使用してローカルでクラスタステータスのクイックチェックを実行できます。 Diag and Clinic Serverの詳細については、 [PingCAPクリニックのコンポーネント](/clinic/clinic-introduction.md)を参照してください。
 
@@ -11,7 +11,7 @@ PingCAPクリニックは現在テクニカルプレビュー段階にありま�
 
 > **ノート：**
 >
-> PingCAPクリニックは、TiDBAnsibleを使用してデプロイされたクラスターからのデータの収集を一時的**にサポートしていません**。
+> PingCAPクリニックは、TiDBAnsibleを使用してデプロイされたクラスターからのデータの収集**をサポートしていません**。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -26,7 +26,7 @@ PingCAPクリニックは現在テクニカルプレビュー段階にありま�
 
 ## 前提条件 {#prerequisites}
 
-PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックによって提供されるデータを収集するためのコンポーネント）をインストールし、データをアップロードするための環境を準備する必要があります。
+PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックが提供するデータを収集するためのコンポーネント）をインストールし、データをアップロードするための環境を準備する必要があります。
 
 1.  Diagをインストールします。
 
@@ -55,14 +55,14 @@ PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックに�
 
     収集したデータをDiagを介してアップロードする場合、ユーザー認証用のトークンが必要です。トークンDiagをすでに設定している場合は、トークンを再利用してこの手順をスキップできます。
 
-    トークンを取得するには、 [クリニックサーバー](https://clinic.pingcap.com.cn)にログインし、クラスターページの右下隅にあるアイコンをクリックします。次に、[**診断ツールのアクセストークンの取得**]を選択し、ポップアップウィンドウで[ <strong>+</strong> ]をクリックして、表示されたトークン情報をコピーして保存します。
+    トークンを取得するには、 [クリニックサーバー](https://clinic.pingcap.com.cn)にログインし、クラスターページの右下隅にあるアイコンをクリックします。次に、[**診断ツールのアクセストークンの取得**]を選択し、ポップアップウィンドウで[ <strong>+</strong> ]をクリックします。表示されたトークン情報をコピーして保存したことを確認してください。
 
     ![Get the Token](/media/clinic-get-token.png)
 
     > **ノート：**
     >
     > -   Clinic Serverに初めてアクセスするときは、トークンを取得する前に、AskTUGアカウントを使用して[クリニックサーバー](https://clinic.pingcap.com.cn)にログインし、最初に組織を作成する必要があります。
-    > -   データセキュリティのために、TiDBはトークン情報が作成されたときにのみ表示します。情報を紛失した場合は、古いトークンを削除して新しいトークンを作成できます。
+    > -   データセキュリティのために、TiDBはトークンの作成時にのみトークンを表示します。トークンを紛失した場合は、古いトークンを削除して新しいトークンを作成してください。
     > -   トークンは、データのアップロードにのみ使用されます。
 
     次に、Diagでトークンを設定します。例えば：

@@ -337,7 +337,7 @@
     -   PingCAPクリニック診断サービス（テクニカルプレビュー）
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
-        -   [PingCAPクリニックを使用する](/clinic/clinic-user-guide-for-tiup.md)
+        -   [PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
         -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
     -   [TiDB Operator](/tidb-operator-overview.md)
     -   [Dumpling](/dumpling-overview.md)

@@ -106,5 +106,5 @@ PingCAPクリニックを使用する前に、Diagをインストールし、デ
 ## 次は何ですか {#what-s-next}
 
 -   [PingCAPクリニックの概要](/clinic/clinic-introduction.md)
--   [PingCAPクリニックを使用する](/clinic/clinic-user-guide-for-tiup.md)
+-   [PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
 -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
