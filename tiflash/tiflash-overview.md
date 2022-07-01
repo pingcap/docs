@@ -92,6 +92,6 @@ To experience the whole process from importing data to querying in a TPC-H datas
 - [Monitor the TiFlash cluster](/tiflash/monitor-tiflash.md).
 - Learn [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
 - [Troubleshoot a TiFlash cluster](/tiflash/troubleshoot-tiflash.md).
-- [Supported Push-down Calculations in TiFlash](/tiflash/tiflash-supported-pushdown-calculations.md)
-- [Data Validation in TiFlash](/tiflash/tiflash-data-validation.md)
-- [TiFlash Compatibility](/tiflash/tiflash-compatibility.md)
+- [Supported push-down calculations in TiFlash](/tiflash/tiflash-supported-pushdown-calculations.md)
+- [Data validation in TiFlash](/tiflash/tiflash-data-validation.md)
+- [TiFlash compatibility](/tiflash/tiflash-compatibility.md)
