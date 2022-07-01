@@ -31,15 +31,13 @@ TiDB version: 5.4.2
 
     + PingCAP/TiCDC
 
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiCDC)- Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
+        - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
         - Fix a bug in redo log manager that flush log executed before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix a bug that resolved ts moves too fast when part of tables are not maintained redo writer. [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Add uuid suffix to redo log file name to prevent name conflict, which may cause data loss. [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix replication interruption due to leader missing by extending region retry duration
-        - Fix min resolved ts/checkpoint table ID metrics [#5542](https://github.com/pingcap/tiflow/pull/5542)
-        - `Fix a bug that mysql sink may save a wrong checkpointTs`. [#5107](https://github.com/pingcap/tiflow/issues/5107)
+        - Fix replication interruption due to leader missing by extending region retry duration. [#5230](https://github.com/pingcap/tiflow/issues/5230)
+        - Fix a bug that mysql sink may save a wrong checkpointTs. [#5107](https://github.com/pingcap/tiflow/issues/5107)
         - Fix a bug that may causes goroutine leak in http server. [#5303](https://github.com/pingcap/tiflow/issues/5303)
-        - `None` [#2792](https://github.com/pingcap/tiflow/issues/2792)
 
     + TiDB Data Migration (DM)
 
