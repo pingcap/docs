@@ -174,7 +174,3 @@ mysql> explain SELECT count(*) FROM test.employees;
 +------------------------------+----------+--------------+-----------------+---------------------------------------------------------+
 5 rows in set (0,00 sec)
 ```
-
-## See also
-
-- [TiFlash Overview](/tiflash/tiflash-overview.md)

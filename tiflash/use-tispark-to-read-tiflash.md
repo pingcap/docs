@@ -26,7 +26,3 @@ You can configure this parameter in one of the following ways:
 * Set `spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")` in Spark shell in a real-time manner.
 
 * Set `set spark.tispark.isolation_read_engines=tiflash` in Thrift server after the server is connected via beeline.
-
-## See also
-
-- [TiFlash Overview](/tiflash/tiflash-overview.md)

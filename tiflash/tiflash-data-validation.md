@@ -42,7 +42,3 @@ TiFlash supports both automatic and manual data validation:
 ### Validation tool
 
 In addition to automatic data validation performed when TiFlash reads data, a tool for manually checking data integrity is introduced in v5.4.0. For details, refer to [DTTool](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
-
-## See also
-
-- [TiFlash Overview](/tiflash/tiflash-overview.md)
