@@ -39,7 +39,7 @@ In 6.1.0, the key new features or improvements are as follows:
     * `DENSE_RANK()`
     * `ROW_NUMBER()`
 
-  [User document](/tiflashtiflash-supported-pushdown-calculations.md), [#33072](https://github.com/pingcap/tidb/issues/33072)
+  [User document](/tiflash/tiflash-supported-pushdown-calculations.md), [#33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### Observability
 
