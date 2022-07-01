@@ -142,7 +142,7 @@ You can click any of the following scales to check its performance data.
 
     | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|--------------|
-    | TPCC              | 1,200   | 15,208 | 13,748 | 2,321.00     |
+    | TPCC              | 1,200   | 15,208 | 13,748 | 2,321        |
 
     Sysbench OLTP performance:
 
@@ -183,7 +183,7 @@ You can click any of the following scales to check its performance data.
 
     | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|--------------|
-    | TPCC              | 1,200   | 33,394 | 30,188 | 1,048.00     |
+    | TPCC              | 1,200   | 33,394 | 30,188 | 1,048        |
 
     Sysbench OLTP performance:
 
