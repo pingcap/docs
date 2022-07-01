@@ -23,7 +23,7 @@ TiKVインスタンスには、複数のリージョンがあります。 Raftst
 
 ## パフォーマンスの問題 {#performance-problem}
 
-Raftstoreワークフロー図から、各リージョンのメッセージが1つずつ処理されます。リージョンが多数存在する場合、Raftstoreがこれらのリージョンのハートビートを処理するのに時間がかかり、遅延が発生する可能性があります。その結果、一部の読み取りおよび書き込み要求は時間内に処理されません。読み取りと書き込みの負荷が高い場合、RaftstoreスレッドのCPU使用率がボトルネックになりやすく、遅延がさらに増加し、パフォーマンスに影響を与える可能性があります。
+Raftstoreワークフロー図から、各リージョンのメッセージが1つずつ処理されます。リージョンが多数存在する場合、Raftstoreがこれらのリージョンのハートビートを処理するのに時間がかかり、遅延が発生する可能性があります。その結果、一部の読み取りおよび書き込み要求は時間内に処理されません。読み取りと書き込みのプレッシャーが高い場合、RaftstoreスレッドのCPU使用率がボトルネックになりやすく、遅延がさらに増加し、パフォーマンスに影響を与える可能性があります。
 
 一般に、ロードされたRaftstoreのCPU使用率が85％以上に達すると、Raftstoreはビジー状態になり、ボトルネックになります。同時に、 `propose wait duration`は数百ミリ秒にもなる可能性があります。
 
@@ -82,9 +82,9 @@ Hibernateリージョンはデフォルトで[TiKVマスター](https://github.c
 {{< copyable "" >}}
 
 ```
->> pd-ctl config set max-merge-region-size 20
->> pd-ctl config set max-merge-region-keys 200000
->> pd-ctl config set merge-schedule-limit 8
+config set max-merge-region-size 20
+config set max-merge-region-keys 200000
+config set merge-schedule-limit 8
 ```
 
 詳細については、 [リージョンマージ](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および3の次の[PD構成ファイル](/pd-configuration-file.md#schedule)つの構成パラメーターを参照してください。
@@ -101,7 +101,7 @@ I / OリソースとCPUリソースが十分な場合は、単一のマシンに
 
 ### 方法5： <code>raft-base-tick-interval</code>調整する {#method-5-adjust-code-raft-base-tick-interval-code}
 
-リージョンの数を減らすことに加えて、単位時間内に各リージョンのメッセージの数を減らすことで、Raftstoreへのプレッシャーを減らすこともできます。たとえば、 `raft-base-tick-interval`の構成アイテムの値を適切に増やすことができます。
+リージョンの数を減らすことに加えて、単位時間内の各リージョンのメッセージの数を減らすことで、Raftstoreへのプレッシャーを減らすこともできます。たとえば、 `raft-base-tick-interval`の構成アイテムの値を適切に増やすことができます。
 
 {{< copyable "" >}}
 
