@@ -103,7 +103,7 @@ You can configure the TiFlash<sup>beta</sup> storage size only when you create o
 
 ## Performance reference
 
-This section provides performance test results of 6 popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
+This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of 6 popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
 
 Test environment:
 
@@ -122,37 +122,37 @@ You can click any of the following scales to check its performance data.
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps)   |
-    |-------------------|---------|--------|--------|---------------|------------|
-    | TPCC              | 300     | 14,532 | 13,137 | 608           | 13.5       |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|---------------|
+    | TPCC              | 300     | 14,532 | 13,137 | 608           |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|--------|--------|---------------|------------|
-    | Insert            | 300     | 8,848  | 8,848  | 36            | 13         |
-    | Point Select      | 600     | 46,224 | 46,224 | 13            | 8          |
-    | Read Write        | 150     | 719    | 14,385 | 209           | 29         |
-    | Update Index      | 150     | 4,346  | 4,346  | 35            | 10         |
-    | Update Non-index  | 600     | 13,603 | 13,603 | 44            | 6          |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    |-------------------|---------|--------|--------|---------------|
+    | Insert            | 300     | 8,848  | 8,848  | 36            |
+    | Point Select      | 600     | 46,224 | 46,224 | 13            |
+    | Read Write        | 150     | 719    | 14,385 | 209           |
+    | Update Index      | 150     | 4,346  | 4,346  | 35            |
+    | Update Non-index  | 600     | 13,603 | 13,603 | 44            |
 
 - Maximum TPS and QPS
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 1,200   | 15,208 | 13,748 | 2,321.00     | 14.4      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 1,200   | 15,208 | 13,748 | 2,321.00     |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|--------|--------|---------------|------------|
-    | Insert            | 1,500   | 11,601 | 11,601 | 129           | 18         |
-    | Point Select      | 600     | 46,224 | 46,224 | 13            | 8          |
-    | Read Write        | 150     | 14,385 | 719    | 209           | 29         |
-    | Update Index      | 1,200   | 6,526  | 6,526  | 184           | 13         |
-    | Update Non-index  | 1,500   | 14,351 | 14,351 | 105           | 9          |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    |-------------------|---------|--------|--------|---------------|
+    | Insert            | 1,500   | 11,601 | 11,601 | 129           |
+    | Point Select      | 600     | 46,224 | 46,224 | 13            |
+    | Read Write        | 150     | 14,385 | 719    | 209           |
+    | Update Index      | 1,200   | 6,526  | 6,526  | 184           |
+    | Update Non-index  | 1,500   | 14,351 | 14,351 | 105           |
 
 </details>
 
@@ -163,37 +163,37 @@ You can click any of the following scales to check its performance data.
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 600     | 32,266 | 29,168 | 548          | 29.1      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 600     | 32,266 | 29,168 | 548          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|--------|--------|---------------|------------|
-    | Insert            | 600     | 17,831 | 17,831 | 34            | 26         |
-    | Point Select      | 600     | 93,287 | 93,287 | 6             | 16         |
-    | Read Write        | 300     | 29,729 | 1,486  | 202           | 61         |
-    | Update Index      | 300     | 9,415  | 9,415  | 32            | 19         |
-    | Update Non-index  | 1,200   | 31,092 | 31,092 | 39            | 12         |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    |-------------------|---------|--------|--------|---------------|
+    | Insert            | 600     | 17,831 | 17,831 | 34            |
+    | Point Select      | 600     | 93,287 | 93,287 | 6             |
+    | Read Write        | 300     | 29,729 | 1,486  | 202           |
+    | Update Index      | 300     | 9,415  | 9,415  | 32            |
+    | Update Non-index  | 1,200   | 31,092 | 31,092 | 39            |
 
 - Maximum TPS and QPS
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 1,200   | 33,394 | 30,188 | 1,048.00     | 31.2      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 1,200   | 33,394 | 30,188 | 1,048.00     |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|--------|--------|---------------|------------|
-    | Insert            | 2,000   | 23,633 | 23,633 | 84            | 31         |
-    | Point Select      | 600     | 93,287 | 93,287 | 6             | 16         |
-    | Read Write        | 600     | 30,464 | 1,523  | 394           | 64         |
-    | Update Index      | 2,000   | 15,146 | 15,146 | 132           | 27         |
-    | Update Non-index  | 2,000   | 34,505 | 34,505 | 58            | 18         |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    |-------------------|---------|--------|--------|---------------|
+    | Insert            | 2,000   | 23,633 | 23,633 | 84            |
+    | Point Select      | 600     | 93,287 | 93,287 | 6             |
+    | Read Write        | 600     | 30,464 | 1,523  | 394           |
+    | Update Index      | 2,000   | 15,146 | 15,146 | 132           |
+    | Update Non-index  | 2,000   | 34,505 | 34,505 | 58            |
 
 </details>
 
@@ -204,37 +204,37 @@ You can click any of the following scales to check its performance data.
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 1,200   | 62,918 | 56,878 | 310          | 16.3      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 1,200   | 62,918 | 56,878 | 310          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|---------|---------|---------------|------------|
-    | Insert            | 1,200   | 33,892  | 33,892  | 23            | 14         |
-    | Point Select      | 1,200   | 185,574 | 181,255 | 4             | 9          |
-    | Read Write        | 600     | 59,160  | 2,958   | 127           | 36         |
-    | Update Index      | 600     | 18,735  | 18,735  | 21            | 12         |
-    | Update Non-index  | 2,400   | 60,629  | 60,629  | 23            | 7          |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    |-------------------|---------|---------|---------|---------------|
+    | Insert            | 1,200   | 33,892  | 33,892  | 23            |
+    | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
+    | Read Write        | 600     | 59,160  | 2,958   | 127           |
+    | Update Index      | 600     | 18,735  | 18,735  | 21            |
+    | Update Non-index  | 2,400   | 60,629  | 60,629  | 23            |
 
 - Maximum TPS and QPS
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 2,400   | 65,452 | 59,169 | 570          | 17.6      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 2,400   | 65,452 | 59,169 | 570          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|---------|---------|---------------|------------|
-    | Insert            | 4,000   | 47,029  | 47,029  | 43            | 17         |
-    | Point Select      | 1,200   | 185,574 | 181,255 | 4             | 9          |
-    | Read Write        | 1,200   | 60,624  | 3,030   | 197           | 37         |
-    | Update Index      | 4,000   | 30,140  | 30,140  | 67            | 16         |
-    | Update Non-index  | 4,000   | 68,664  | 68,664  | 29            | 10         |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    |-------------------|---------|---------|---------|---------------|
+    | Insert            | 4,000   | 47,029  | 47,029  | 43            |
+    | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
+    | Read Write        | 1,200   | 60,624  | 3,030   | 197           |
+    | Update Index      | 4,000   | 30,140  | 30,140  | 67            |
+    | Update Non-index  | 4,000   | 68,664  | 68,664  | 29            |
 
 </details>
 
@@ -245,37 +245,37 @@ You can click any of the following scales to check its performance data.
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 1,200   | 67,941 | 61,419 | 540          | 65.2      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 1,200   | 67,941 | 61,419 | 540          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|---------|---------|---------------|------------|
-    | Insert            | 1,200   | 35,096  | 35,096  | 34            | 45         |
-    | Point Select      | 1,200   | 228,600 | 228,600 | 5             | 29         |
-    | Read Write        | 600     | 73,150  | 3,658   | 164           | 153        |
-    | Update Index      | 600     | 18,886  | 18,886  | 32            | 46         |
-    | Update Non-index  | 2,000   | 63,837  | 63,837  | 31            | 33         |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    |-------------------|---------|---------|---------|---------------|
+    | Insert            | 1,200   | 35,096  | 35,096  | 34            |
+    | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
+    | Read Write        | 600     | 73,150  | 3,658   | 164           |
+    | Update Index      | 600     | 18,886  | 18,886  | 32            |
+    | Update Non-index  | 2,000   | 63,837  | 63,837  | 31            |
 
 - Maximum TPS and QPS
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) | IO (MBps) |
-    |-------------------|---------|--------|--------|--------------|-----------|
-    | TPCC              | 1,200   | 67,941 | 61,419 | 540          | 65.2      |
+    | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 1,200   | 67,941 | 61,419 | 540          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|---------|---------|---------------|------------|
-    | Insert            | 2,000   | 43,338  | 43,338  | 46            | 50         |
-    | Point Select      | 1,200   | 228,600 | 228,600 | 5             | 29         |
-    | Read Write        | 1,200   | 73,631  | 3,682   | 326           | 158        |
-    | Update Index      | 3,000   | 29,576  | 29,576  | 101           | 64         |
-    | Update Non-index  | 3,000   | 64,624  | 64,624  | 46            | 33         |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    |-------------------|---------|---------|---------|---------------|
+    | Insert            | 2,000   | 43,338  | 43,338  | 46            |
+    | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
+    | Read Write        | 1,200   | 73,631  | 3,682   | 326           |
+    | Update Index      | 3,000   | 29,576  | 29,576  | 101           |
+    | Update Non-index  | 3,000   | 64,624  | 64,624  | 46            |
 
 </details>
 
@@ -286,36 +286,36 @@ You can click any of the following scales to check its performance data.
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC    | QPS     | Latency (ms) | IO (MBps) |
-    |-------------------|---------|---------|---------|--------------|-----------|
-    | TPCC              | 2,400   | 133,164 | 120,380 | 305          | 35.3      |
+    | Transaction model | Threads | tpmC    | QPS     | Latency (ms) |
+    |-------------------|---------|---------|---------|--------------|
+    | TPCC              | 2,400   | 133,164 | 120,380 | 305          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|---------|---------|---------------|------------|
-    | Insert            | 2,400   | 69,139  | 69,139  | 22            | 25         |
-    | Point Select      | 2,400   | 448,056 | 448,056 | 4             | 17         |
-    | Read Write        | 1,200   | 145,568 | 7,310   | 97            | 80         |
-    | Update Index      | 1,200   | 36,638  | 36,638  | 20            | 25         |
-    | Update Non-index  | 4,000   | 125,129 | 125,129 | 17            | 19         |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    |-------------------|---------|---------|---------|---------------|
+    | Insert            | 2,400   | 69,139  | 69,139  | 22            |
+    | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
+    | Read Write        | 1,200   | 145,568 | 7,310   | 97            |
+    | Update Index      | 1,200   | 36,638  | 36,638  | 20            |
+    | Update Non-index  | 4,000   | 125,129 | 125,129 | 17            |
 
 - Maximum TPS and QPS
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC    | QPS     | Latency (ms) | IO (MBps) |
-    |-------------------|---------|---------|---------|--------------|-----------|
-    | TPCC              | 2,400   | 133,164 | 120,380 | 305          | 35.3      |
+    | Transaction model | Threads | tpmC    | QPS     | Latency (ms) |
+    |-------------------|---------|---------|---------|--------------|
+    | TPCC              | 2,400   | 133,164 | 120,380 | 305          |
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) | IO (MBps ) |
-    |-------------------|---------|---------|---------|---------------|------------|
-    | Insert            | 4,000   | 86,242  | 86,242  | 25            | 29         |
-    | Point Select      | 2,400   | 448,056 | 448,056 | 4             | 17         |
-    | Read Write        | 2,400   | 146,526 | 7,326   | 172           | 82         |
-    | Update Index      | 6,000   | 58,856  | 58,856  | 51            | 34         |
-    | Update Non-index  | 6,000   | 128,601 | 128,601 | 24            | 19         |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    |-------------------|---------|---------|---------|---------------|
+    | Insert            | 4,000   | 86,242  | 86,242  | 25            |
+    | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
+    | Read Write        | 2,400   | 146,526 | 7,326   | 172           |
+    | Update Index      | 6,000   | 58,856  | 58,856  | 51            |
+    | Update Non-index  | 6,000   | 128,601 | 128,601 | 24            |
 
 </details>
