@@ -5,9 +5,9 @@ summary: Learn about how to tune SQL performance in TiDB Cloud.
 
 # SQL Tuning Overview
 
-To get the best SQL performance, consider the following:
+To get the best SQL performance, you can do the following:
 
-- Tune SQL performance. There are many ways to optimize SQL performance, such as querying statements, optimizing execution plans, and optimizing full table scans.
+- Tune SQL performance. There are many ways to optimize SQL performance, such as querying statements, optimizing execution plans, and optimizing full table scan.
 - Optimize schema design. Depending on your business load type, you may need to optimize the schema to avoid transaction conflicts or hotspots.
 
 ## Tune SQL performance
