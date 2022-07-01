@@ -17,7 +17,7 @@ To improve the performance of SQL statements, consider the following principles.
 - Minimize the scope of the scanned data. It is always a best practice to scan only the minimum scope of data and avoid scanning all data.
 - Use appropriate indexes. For the column in the `WHERE` clause in SQL, you need to make sure that there is a corresponding index. Otherwise it will become a statement to scan the full table and result in poor performance.
 - Use appropriate Join types. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
-- Use appropriate storage engines. It is recommended to use the TiFlash query engine for mixed OLTP and OLAP types of loads. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
+- Use appropriate storage engines. It is recommended to use the TiFlash query engine for mixed OLTP and OLAP. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
 
 TiDB Cloud provides several tools to help you analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
 
@@ -73,7 +73,7 @@ See [Guidelines to follow when selecting primary keys](https://docs.pingcap.com/
 
 The speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices) in some scenarios.
 
-### Use the Slow Log Memory Mapping Table
+### Use the slow log memory mapping table
 
 You can query the contents of the slow query log by querying the [INFORMATION_SCHEMA.SLOW_QUERY](/identify-slow-queries.md#memory-mapping-in-slow-log) table, and find the structure in the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table. Using this table, you can perform queries using different fields to find potential problems.
 
@@ -97,19 +97,19 @@ You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performan
 
 You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
 
-You can observe the following information in Key Visualizer. You need to understand some [basic concepts](/dashboard/dashboard-key-visualizer.md).
+You can observe the following information in Key Visualizer. You may need to understand some [basic concepts](/dashboard/dashboard-key-visualizer.md) first.
 
-- A large heat map that shows the overall traffic over time.
-- The detailed information about a coordinate of the heat map.
-- The identification information such as tables and indexes that is displayed on the left side.
+- A large heat map that shows the overall traffic over time
+- The detailed information about a coordinate of the heat map
+- The identification information such as tables and indexes that is displayed on the left side
 
 In Key Visualizer, there are [four common heat map results](/dashboard/dashboard-key-visualizer.md#common-heatmap-types).
 
 - Evenly distributed workload: desired result
-- Alternating brightness and darkness along the X-axis (time): need to focus on the resources at peak times
-- Alternating brightness and darkness along the Y-axis: need to focus on the degree of hotspot aggregation generated
-- Bright diagonal lines: need to focus on the business model
+- Alternating brightness and darkness along the X-axis (time): need to check the resources at peak times
+- Alternating brightness and darkness along the Y-axis: need to check the degree of hotspot aggregation generated
+- Bright diagonal lines: need to check the business model
 
-In both case of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
+In both cases of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
 
 For more information about SQL performance optimization, see [SQL Optimization](/faq/sql-faq.md#sql-optimization) in SQL FAQs.
