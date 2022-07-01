@@ -12,9 +12,6 @@ TiDB version: 5.4.2
 
 + PingCAP/TiDB
 
-    <!--diagnosis-->
-    - Fix the issue of concurrent map read and write on statement summary. [#35340](https://github.com/pingcap/tidb/issues/35340)
-
     <!--planner-->
     - ```release-note [#34613](https://github.com/pingcap/tidb/issues/34613)
 
@@ -83,6 +80,9 @@ TiDB version: 5.4.2
     <!--sql-infra-->
     - Fix TiDB may not free the resources of the disconnected session correctly when a network connectivity event occurred. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fix querying CTE views may unexpectedly report `references invalid table`. [#33965](https://github.com/pingcap/tidb/issues/33965)
+
+    <!--diagnosis-->
+    - Fix the issue of concurrent map read and write on statement summary. [#35340](https://github.com/pingcap/tidb/issues/35340)
 
     (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
 
