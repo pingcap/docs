@@ -103,7 +103,7 @@ You can configure the TiFlash<sup>beta</sup> storage size only when you create o
 
 ## Performance reference
 
-This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of 6 popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
+This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of five popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
 
 Test environment:
 
