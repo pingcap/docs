@@ -287,7 +287,7 @@ After the modification is finished, you can use the `rule-bundle set` subcommand
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### Use pd-ctl to view and modify all configurations
