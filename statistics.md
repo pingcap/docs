@@ -578,7 +578,7 @@ The statement deletes statistics of all the tables in `TableName`.
 
 > **Note:**
 >
-> The content in this section is applicable to TiDB only and not applicable to TiDB Cloud.
+> This section is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -611,7 +611,7 @@ After enabling the synchronously loading statistics feature, you can further con
 
 > **Note:**
 >
-> The content in this section is applicable to TiDB only and not applicable to TiDB Cloud.
+> This section is not applicable to TiDB Cloud.
 
 </CustomContent>
 

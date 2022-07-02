@@ -1,9 +1,9 @@
 ---
-title: Use an HTAP Cluster
-summary: Learn how to use HTAP cluster in TiDB Cloud.
+title: Read data from TiFlash
+summary: Learn how to use an HTAP cluster to read data from TiFlash.
 ---
 
-# Use an HTAP Cluster
+# Read Data from TiFlash
 
 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) means Hybrid Transactional/Analytical Processing. The HTAP cluster in TiDB Cloud is composed of [TiKV](https://tikv.org), a row-based storage engine designed for transactional processing, and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>beta</sup>, a columnar storage designed for analytical processing. Your application data is first stored in TiKV and then replicated to TiFlash<sup>beta</sup> via the Raft consensus algorithm. So it is real time replication from the row store to the columnar store.
 

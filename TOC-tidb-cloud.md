@@ -18,7 +18,9 @@
     - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
     - [Connect via SQL Shell](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
   - [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md)
-  - [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md)
+  - Use an HTAP Cluster
+    - [TiFlash Overview](/tiflash/tiflash-overview.md)
+    - [Read Data from TiFlash](/tidb-cloud/use-htap-cluster.md)
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
@@ -41,7 +43,7 @@
   - Third-Party Monitoring Integrations
     - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
     - [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
-- Analyze and Tune Performance
+- Tune Performance
   - Analyze Performance
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
@@ -330,17 +332,15 @@
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
-  - Privileges
+  - Cluster Privileges
     - [Security Compatibility with MySQL](/security-compatibility-with-mysql.md)
-    - [Privilege Management](/privilege-management.md)
-    - [User Account Management](/user-account-management.md)
-    - [Role-Based Access Control](/role-based-access-control.md)
-    - [Certificate-Based Authentication](/certificate-authentication.md)
-  - Storage Engines
-    - TiKV
-      - [TiKV Overview](/tikv-overview.md)
-      - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
-    - [TiFlash](/tiflash/tiflash-overview.md)
+    - [Cluster Privilege Management](/privilege-management.md)
+    - [Cluster User Account Management](/user-account-management.md)
+    - [Cluster Role-Based Access Control](/role-based-access-control.md)
+    - [Cluster Certificate-Based Authentication](/certificate-authentication.md)
+  - TiKV
+    - [TiKV Overview](/tikv-overview.md)
+    - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
   - [Support](/tidb-cloud/tidb-cloud-support.md)
   - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
