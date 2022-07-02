@@ -328,7 +328,6 @@ This variable is an alias for `last_insert_id`.
 
 - It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
 
-
 ### plugin_dir
 
 - Scope: INSTANCE
@@ -766,7 +765,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 <CustomContent platform="tidb-cloud">
 
-- This variable enables or disables Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
+- This variable enables or disables [Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
 
 </CustomContent>
 
