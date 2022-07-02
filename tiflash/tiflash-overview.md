@@ -78,7 +78,7 @@ TiFlash accelerates the computing of TiDB in two ways:
 - The columnar storage engine is more efficient in performing read operation.
 - TiFlash shares part of the computing workload of TiDB.
 
-TiFlash shares the computing workload in the same way as the TiKV Coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash. 
+TiFlash shares the computing workload in the same way as the TiKV Coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash.
 
 <CustomContent platform="tidb">
 

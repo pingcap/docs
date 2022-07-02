@@ -8,11 +8,15 @@ summary: Learn how to use the table attribute feature of TiDB.
 The Table Attributes feature is introduced in TiDB v5.3.0. Using this feature, you can add specific attributes to a table or partition to perform the operations corresponding to the attributes. For example, you can use table attributes to control the Region merge behavior.
 
 <CustomContent platform="tidb">
+
 Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots. For more information, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md).
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
+
 Currently, TiDB only supports adding the `merge_option` attribute to a table or partition to control the Region merge behavior. The `merge_option` attribute is only part of how to deal with hotspots.
+
 </CustomContent>
 
 > **Note:**

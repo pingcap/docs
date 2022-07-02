@@ -44,9 +44,7 @@ However, some features of MySQL are not supported. This could be because there i
 + `REPAIR TABLE` syntax
 + `OPTIMIZE TABLE` syntax
 + `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
-<CustomContent platform="tidb">
-+ [`LOAD DATA`](/sql-statements/sql-statement-load-data.md) with the `REPLACE` keyword [#24515](https://github.com/pingcap/tidb/issues/24515)
-</CustomContent>
++ `LOAD DATA` with the `REPLACE` keyword [#24515](https://github.com/pingcap/tidb/issues/24515)
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
 
@@ -182,7 +180,11 @@ For details, see [Compatibility between TiDB local temporary tables and MySQL te
 
 For compatibility reasons, TiDB supports the syntax to create tables with alternative storage engines. In implementation, TiDB describes the metadata as the InnoDB storage engine.
 
+<CustomContent platform="tidb">
+
 TiDB supports storage engine abstraction similar to MySQL, but you need to specify the storage engine using the [`--store`](/command-line-flags-for-tidb-configuration.md#--store) option when you start the TiDB server.
+
+</CustomContent>
 
 ### SQL modes
 
