@@ -148,6 +148,8 @@ To reduce the overhead of locking, TiKV implements the pipelined locking process
 
 * There is a low probability that the transaction commit fails, but it does not affect the correctness of the transactions.
 
+<CustomContent platform="tidb">
+
 If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you should disable the pipelined locking feature.
 
 ![Pipelined pessimistic lock](/media/pessimistic-transaction-pipelining.png)
@@ -167,6 +169,7 @@ If the TiKV cluster is v4.0.9 or later, you can also dynamically disable this fe
 set config tikv pessimistic-txn.pipelined='false';
 ```
 
+<<<<<<< HEAD
 ## In-memory pessimistic lock
 
 In v6.0.0, TiKV introduces the feature of in-memory pessimistic lock. When this feature is enabled, pessimistic locks are usually stored in the memory of the Region leader only, and are not persisted to disk or replicated through Raft to other replicas. This feature can greatly reduce the overhead of acquiring pessimistic locks and improve the throughput of pessimistic transactions.
@@ -191,3 +194,12 @@ To dynamically disable this feature, modify the TiKV configuration online:
 ```sql
 set config tikv pessimistic-txn.in-memory='false';
 ```
+=======
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If the application logic relies on the locking or lock waiting mechanisms, or if you want to guarantee as much as possible the success rate of transaction commits even in the case of TiKV cluster anomalies, you can contact <a href="mailto:tidbcloud-support@pingcap.com">PingCAP Support</a> to disable the pipelined locking feature.
+
+</CustomContent>
+>>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
