@@ -10,15 +10,6 @@ TiDB version: 5.4.2
 
 ## __unsorted
 
-+ PingCAP/TiDB
-
-    <!--planner-->
-    - Fix wrong TableDual plans cached under binary protocol [#34690] (https://github.com/pingcap/tidb/issues/34690) [#34678] (https://github.com/pingcap/tidb/issues/34678)
-    - Fix the wrongly inferred null flag of firstrow agg func in EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
-    - Fix the wrong 2-phase aggregate plan for TiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)
-    - Fix the wrong null flag of final aggregate after aggregate is pushed through outer join [#34465](https://github.com/pingcap/tidb/issues/34465)
-    - Fix the wrong memory-usage value used when Plan Cache evicts [#34613](https://github.com/pingcap/tidb/issues/34613)
-
 + Tools
 
     + BR
@@ -74,7 +65,11 @@ TiDB version: 5.4.2
 + TiDB
 
     <!--planner-->
-    - ```release-note [#34678](https://github.com/pingcap/tidb/issues/34678)
+    - Fix wrong TableDual plans cached under binary protocol [#34690] (https://github.com/pingcap/tidb/issues/34690) [#34678] (https://github.com/pingcap/tidb/issues/34678)
+    - Fix the wrongly inferred null flag of firstrow agg func in EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
+    - Fix the wrong 2-phase aggregate plan for TiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)
+    - Fix the wrong null flag of final aggregate after aggregate is pushed through outer join [#34465](https://github.com/pingcap/tidb/issues/34465)
+    - Fix the wrong memory-usage value used when Plan Cache evicts [#34613](https://github.com/pingcap/tidb/issues/34613)
 
     <!--transaction-->
     - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
