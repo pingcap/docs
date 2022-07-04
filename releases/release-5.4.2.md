@@ -106,6 +106,7 @@ TiDB version: 5.4.2
         - Fix replication interruption due to leader missing by extending region retry duration. [#5230](https://github.com/pingcap/tiflow/issues/5230)
         (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
         - Fix a bug that may causes goroutine leak in http server. [#5303](https://github.com/pingcap/tiflow/issues/5303)
+        - Fix the issue that meta Region changes can lead latency increasing [#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
 
     + TiDB Data Migration (DM)
 
