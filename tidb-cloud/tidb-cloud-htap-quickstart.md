@@ -24,16 +24,31 @@ USE bikeshare;
 ALTER TABLE trips SET TIFLASH REPLICA 1;
 ```
 
-2. When the process of replication table is completed, you can start to run some queries in your Terminal.
-Check the number of trips by different start and end stations.
+To check the replication progress, use the following command:
 
-    ```sql
-    SELECT start_station_name, end_station_name, COUNT(ride_id) as count from `trips`
-    GROUP BY start_station_name, end_station_name
-    ORDER BY count ASC;
-    ```
+{{< copyable "sql" >}}
 
-3. Now we can compare the execution statistics between TiKV storage and TiFlash Storage.
+```sql
+SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>' and TABLE_NAME = '<table_name>';
+```
+
+### Step 2. Query data using HTAP
+
+When the process of replication table is completed, you can start to run some queries in your Terminal.
+
+For example, you can check the number of trips by different start and end stations:
+
+```sql
+SELECT start_station_name, end_station_name, COUNT(ride_id) as count from `trips`
+GROUP BY start_station_name, end_station_name
+ORDER BY count ASC;
+```
+
+### Step 3. Compare the query performance between row-based storage and columnar storage
+
+In this step, you can compare the execution statistics between TiKV (row-based storage) and TiFlash (columnar storage).
+
+- To get the execution statistics of this query using TiKV, execute the following statement:
 
     ```sql
     EXPLAIN ANALYZE SELECT /*+ READ_FROM_STORAGE(TIKV[trips]) */ start_station_name, end_station_name, COUNT(ride_id) as count from `trips`
@@ -41,7 +56,9 @@ Check the number of trips by different start and end stations.
     ORDER BY count ASC;
     ```
 
-4. TiDB Optimizer will automatically choose TiKV storage or TiFlash Storage. The  HINT /*+ READ_FROM_STORAGE(TIKV[trips]) */ will force the optimizer to choose TiKV storage.
+    For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. In the preceding statement, `HINT /*+ READ_FROM_STORAGE(TIKV[trips]) */` is used to force the optimizer to choose TiKV so you can check its execution statistics.
+
+- To get the execution statistics of this query using TiFlash, execute the following statement:
 
     ```sql
     EXPLAIN ANALYZE SELECT start_station_name, end_station_name, COUNT(ride_id) as count from `trips`
@@ -49,4 +66,6 @@ Check the number of trips by different start and end stations.
     ORDER BY count ASC;
     ```
 
-Because of cache, the query with TiKV storage may be faster after the first time, since the sample data is very small and the query is very simple. Once the data is updated frequently, the cache will be missed.
+> **Note:**
+>
+> Because the sample data is very small and the query in this document is very simple, the query using TiKV might be faster after the first time. Once the data is updated frequently, the cache will be missed.
