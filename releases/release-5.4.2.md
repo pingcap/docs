@@ -14,15 +14,15 @@ TiDB version: 5.4.2
 
     + BR
 
-        - ```release-note [#35279](https://github.com/pingcap/tidb/issues/35279)
-        - ```release-note [#34865](https://github.com/pingcap/tidb/issues/34865)
-        - ```release-note [#34956](https://github.com/pingcap/tidb/issues/34956)
-        - ```release-note [#34350](https://github.com/pingcap/tidb/issues/34350)
-        (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
+        - Avoid to report ErrRestoreTableIDMismatch for BR on RawKV mode [35279](https://github.com/pingcap/tidb/issues/35279)
+        - BR will retry for saving file error correctly now [#34865](https://github.com/pingcap/tidb/issues/34865)
+        - Fix a panic issue when running BR [#34956](https://github.com/pingcap/tidb/issues/34956)
+        - Retry correctly for S3 internal errors [#34350](https://github.com/pingcap/tidb/issues/34350)
+        - Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
 
     + TiDB Lightning
 
-        (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
+        - Scattering Region in batch mode to improve the stability of this process [#33618](https://github.com/pingcap/tidb/issues/33618)
 
     + PingCAP/TiCDC
 
@@ -36,9 +36,8 @@ TiDB version: 5.4.2
 
     + TiDB Data Migration (DM)
 
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that DM occupies more disk space after the task automatically resumes [#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
-        - `None`. [#4858](https://github.com/pingcap/tiflow/issues/4858)
+        - Fix an issue that DM occupies more disk space after the task automatically resumes [#5344](https://github.com/pingcap/tiflow/issues/5344)
+        - Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
 
 ## Compatibility change(s)
 
