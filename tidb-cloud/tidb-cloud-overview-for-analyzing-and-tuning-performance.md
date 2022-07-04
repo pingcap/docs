@@ -52,3 +52,77 @@ There are several pages on the TiDB Cloud console that help you troubleshoot use
 If you require additional metrics, you can contact the PingCAP support team.
 
 If you experience latency and performance issues that are not as expected, consider steps in the following sections for analysis and troubleshooting.
+
+### Locate bottlenecks in user response time
+
+Observe Latency(P80) on the Overview tab. If this value is much lower than the P80 value for user response time, you can determine that the main bottleneck may be outside the TiDB cluster.
+
+#### Bottlenecks outside the TiDB cluster
+
+If the bottleneck is outside the TiDB cluster, you can use the following steps to troubleshoot the bottleneck.
+
+1. Check the TiDB version on the left side of the [Overview tab](/tidb-cloud/monitor-tidb-cluster.md). If it is v6.0.0 or earlier versions, it is recommended to contact the PingCAP support team to confirm if the Prepared plan cache, Raft-engine and TiKV AsyncIO features can be enabled. Enabling these features, along with application-side tuning, can significantly improve throughput performance and reduce latency and resource utilization.
+2. If necessary, you can increase the TiDB token limit to further increase throughput.
+3. If the Prepared plan cache feature is enabled, you use JDBC on the user side, it is recommended to use the following configuration:
+
+   `useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance`
+
+   If you do not use JDBC on the user side, you want to take full advantage of the Plan cache feature of the current TiDB cluster, you need to cache the prepared statement object on the client side without resetting the calls to StmtPrepare and StmtClose, reducing the number of commands to be called for each query from 3 to 1. There is some development effort for this, depending on your performance requirements and the amount of client-side changes. You can consult the PingCAP support team for help.
+
+#### Bottlenecks in the TiDB cluster
+
+If you determine that the performance bottleneck is within a TiDB cluster, it is recommended that you check the following.
+
+- Optimize slow SQL queries.
+- Resolve hotspot issues.
+- Expand the capacity.
+
+### Resolve hotstpot issues
+
+You can view hotspot issues on the [Key Visualizer tab](/tidb-cloud/tune-performance.md#key-visualizer). The following screen shot shows a sample heat map displayed by the traffic visualization function. The horizontal coordinate of the map is the time and the vertical coordinate is each table and index. Brighter color means higher traffic. You can toggle the display of read or write traffic in the toolbar.
+
+![Hotspot issues](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot.png)
+
+When the following bright diagonal line (diagonal up or diagonal down) appears in the write flow graph, as the writes appear only at the end, it shows a stepped pattern as the number of table regions becomes larger. At this point, it indicates that the table constitutes a write hotspot.
+
+![Write hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-write-hotspot.png)
+
+For reading hot spots, they are generally represented in the heat map as a bright horizontal line, usually a small table with a large number of visits, as shown in the following figure.
+
+![Read hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-read-hotspot.png)
+
+Hover over the highlighted block to see what table or index has high traffic, as shown in the following figure.
+
+![Hotspot index](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot-index.png)
+
+When there are write hotspots, you should first confirm whether you are using a self-incrementing primary key, or no primary key, or using a time-dependent insert statement or index.
+
+### Scale out
+
+In the metrics under [Overview](/tidb-cloud/monitor-tidb-cluster.md), you can look at storage space, CPU utilization, and TiKV IO rate. If any of them are consistently approaching the upper limit for a significant period of time, you should be alerted to the fact that the current cluster size is not matching the business requirements. After confirming the previous steps, it is recommended to contact the PingCAP support team to confirm if there is a need for scaling out.
+
+### Other issues
+
+If the above methods still do not resolve the performance issue, we recommend contacting the PingCAP support team to further troubleshoot the issue. The following information, as appropriate, may speed up the troubleshooting process.
+
+- The problem cluster ID
+- Problem time interval and a comparable normal time interval
+- Description of the business load characteristics (e.g., read/write ratios and primary behavior)
+- Description of the problem phenomenon and what to expect
+
+## Summary
+
+In general, for less-than-expected performance, you can use the following straightforward and effective "optimization combinations".
+
+| Action | Effect |
+|:--|:--|
+| Prepared plan cache + JDBC | Throughput performance will be greatly improved, latency will be significantly reduced, and the average TiDB CPU utilization will be significantly reduced. |
+| Enable AsyncIO and Raft-engine in TiKV | There will be some improvement in throughput performance |
+| Clustered Index | Throughput performance will be greatly improved |
+|  Scale out TiDB nodes |Throughput performance will be greatly improved  |
+| Client-side optimization, same server resources split 1 JVM into 3 | Throughput performance will improve significantly and may further continue to improve throughput capacity if further split |
+| Reasonable control of network latency between application and database |  Unreasonable network latency can lead to decreased throughput and increased latency |
+
+For issues other than these, we recommend contacting the PingCAP support team for help in the first instance.
+
+In the future, TiDB Cloud will introduce more observable data and self-diagnostic services to provide you with a more comprehensive understanding of performance metrics and more direct operational advice to further improve your experience.
