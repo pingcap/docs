@@ -169,9 +169,6 @@ allow-expression-index = true
 
 </CustomContent>
 
-> **Note:**
-<<<<<<< HEAD
->
 > Expression index involves various kinds of expressions. To ensure correctness, only some fully tested functions are allowed for creating an expression index. This means that only these functions are allowed in expressions in a production environment. You can get these functions by querying `tidb_allow_function_for_expression_index` variable. In future versions, more functions might be added to the list.
 >
 > {{< copyable "sql" >}}
@@ -193,8 +190,6 @@ allow-expression-index = true
 > ```sql
 > allow-expression-index = true
 > ```
-=======
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 >
 > An expression index cannot be created on a primary key.
 >

@@ -376,11 +376,7 @@ In addition to this hint, setting the `tidb_replica_read` environment variable t
 
 The `IGNORE_PLAN_CACHE()` hint reminds the optimizer not to use the Plan Cache when handling the current `prepare` statement.
 
-<<<<<<< HEAD
 This hint is used to temporarily disable the Plan Cache for a certain type of queries when [prepare-plan-cache](/sql-prepared-plan-cache.md) is enabled.
-=======
-This hint is used to temporarily disable the Plan Cache for a certain type of queries when the [execution plan cache](/sql-prepared-plan-cache.md) feature is enabled.
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 
 In the following example, the Plan Cache is forcibly disabled when executing the `prepare` statement.
 

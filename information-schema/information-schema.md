@@ -74,13 +74,8 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`INSPECTION_SUMMARY`](https://docs.pingcap.com/tidb/stable/information-schema-inspection-summary)    | A summarized report of important monitoring metrics. This table is not applicable to TiDB Cloud. |
 | [`METRICS_SUMMARY`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-summary)          | A summary of metrics extracted from Prometheus. This table is not applicable to TiDB Cloud. |
 | `METRICS_SUMMARY_BY_LABEL`                                                              | See `METRICS_SUMMARY` table. |
-<<<<<<< HEAD
-| [`METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)            | Provides the PromQL definitions for tables in `METRICS_SCHEMA`. |
-| [`PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)    | Provides information on all placement policies.                                 |
-=======
 | [`METRICS_TABLES`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-tables)            | Provides the PromQL definitions for tables in `METRICS_SCHEMA`. This table is not applicable to TiDB Cloud. |
-| [`PLACEMENT_RULES`](https://docs.pingcap.com/tidb/stable/information-schema-placement-rules)          | Provides information on all objects that have explicit placement rules assigned. This table is not applicable to TiDB Cloud. |
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+| [`PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)    | Provides information on all placement policies.                                 |
 | [`SEQUENCES`](/information-schema/information-schema-sequences.md)                      | The TiDB implementation of sequences is based on MariaDB. |
 | [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)                    | Provides information on slow queries on the current TiDB server. |
 | [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)                                    | Similar to performance_schema statement summary in MySQL. |

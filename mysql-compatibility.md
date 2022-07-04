@@ -43,11 +43,6 @@ However, some features of MySQL are not supported. This could be because there i
 + `CHECKSUM TABLE` syntax [#1895](https://github.com/pingcap/tidb/issues/1895)
 + `REPAIR TABLE` syntax
 + `OPTIMIZE TABLE` syntax
-<<<<<<< HEAD
-=======
-+ `GET_LOCK` and `RELEASE_LOCK` functions [#14994](https://github.com/pingcap/tidb/issues/14994)
-+ `LOAD DATA` with the `REPLACE` keyword [#24515](https://github.com/pingcap/tidb/issues/24515)
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 + `HANDLER` statement
 + `CREATE TABLESPACE` statement
 

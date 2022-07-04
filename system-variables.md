@@ -185,20 +185,15 @@ mysql> SELECT * FROM t1;
 
 ### ddl_slow_threshold
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `300`
 - Unit: Milliseconds
 - Log DDL operations whose execution time exceeds the threshold value.
@@ -346,36 +341,6 @@ This variable is an alias for `last_insert_id`.
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
-<<<<<<< HEAD
-=======
-### placement_checks <span class="version-mark">New in v5.3.0</span>
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
-- Scope: SESSION | GLOBAL
-- Default value: `ON`
-
-<CustomContent platform="tidb">
-
-- This variable controls whether DDL statements validate [Placement Rules in SQL](/placement-rules-in-sql.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- This variable controls whether DDL statements validate [Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
-
-</CustomContent>
-
-- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if placement rules are violated. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
-
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 ### plugin_dir
 
 - Scope: GLOBAL
@@ -679,11 +644,6 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 ### tidb_check_mb4_value_in_utf8
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Boolean
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -692,8 +652,9 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Boolean
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
 - You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](https://docs.pingcap.com/tidb/stable/upgrade-faq).
@@ -870,38 +831,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
-<<<<<<< HEAD
-=======
-### tidb_enable_alter_placement
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
-> **Warning:**
->
-> Currently, Placement Rules in SQL is an experimental feature. It is not recommended that you use it in production environments.
-
-- Scope: GLOBAL
-- Default value: `OFF`
-
-<CustomContent platform="tidb">
-
-- This variable enables or disables [Placement Rules in SQL](/placement-rules-in-sql.md).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- This variable enables or disables [Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
-
-</CustomContent>
-
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 ### tidb_enable_amend_pessimistic_txn <span class="version-mark">New in v4.0.7</span>
 
 - Scope: SESSION | GLOBAL
@@ -998,11 +927,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_collect_execution_info
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Boolean
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -1011,8 +935,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Boolean
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
 
@@ -1203,11 +1128,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 ### tidb_enable_slow_log
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Boolean
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -1216,8 +1136,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the slow log feature.
 
@@ -1286,7 +1207,6 @@ Query OK, 0 rows affected (0.09 sec)
 
 - This variable is used to dynamically control whether the telemetry collection in TiDB is enabled. By setting the value to `OFF`, the telemetry collection is disabled. If the [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402) TiDB configuration item is set to `false` on all TiDB instances, the telemetry collection is always disabled and this system variable will not take effect. See [Telemetry](/telemetry.md) for details.
 
-<<<<<<< HEAD
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
 > **Warning:**
@@ -1297,16 +1217,18 @@ Query OK, 0 rows affected (0.09 sec)
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
+
+<CustomContent platform="tidb">
+
 - This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
-=======
+
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This telemetry variable is not applicable to TiDB Cloud.
+- This variable is used to control whether to enable the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature.
 
 </CustomContent>
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 
 ### tidb_enable_tso_follower_proxy <span class="version-mark">New in v5.3.0</span>
 
@@ -1440,11 +1362,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_expensive_query_time_threshold
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Integer
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -1453,8 +1370,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
 - Default value: `60`
 - Range: `[10, 2147483647]`
 - Unit: Seconds
@@ -1464,10 +1382,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_force_priority
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -1476,8 +1390,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
@@ -1562,11 +1476,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_general_log
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Boolean
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -1575,8 +1484,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Boolean
 - Default value: `OFF`
 
 <CustomContent platform="tidb-cloud">
@@ -1842,9 +1752,19 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[-1, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the threshold value of memory quota for a query.
-<<<<<<< HEAD
 - If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by `tidb_mem_oom_action`.
-- This setting was previously session scoped and used the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0 `tidb_mem_quota_query` is now a `SESSION | GLOBAL` scoped variable.
+
+<CustomContent platform="tidb">
+
+- This setting was previously session scoped and used the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0, `tidb_mem_quota_query` is now a `SESSION | GLOBAL` scoped variable.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This setting was previously session scoped. Starting from v6.1.0, `tidb_mem_quota_query` is now a `SESSION | GLOBAL` scoped variable.
+
+</CustomContent>
 
 ### tidb_memory_usage_alarm_ratio
 
@@ -1853,31 +1773,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Default value: `0.8`
 - Range: `[0, 1]`
-=======
-- If the memory quota of a query during execution exceeds the threshold value, TiDB performs the operation designated by the OOMAction option in the configuration file.
-
-<CustomContent platform="tidb">
-
-- The initial value of this variable is configured by [`mem-quota-query`](/tidb-configuration-file.md#mem-quota-query).
-
-</CustomContent>
-
-### tidb_memory_usage_alarm_ratio
-
-<CustomContent platform="tidb-cloud">
-
-> **Note:**
->
-> This TiDB variable is not applicable to TiDB Cloud.
-
-</CustomContent>
-
-- Scope: INSTANCE
-- Default value: `0.8`
-
-<CustomContent platform="tidb">
-
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
@@ -2133,21 +2028,6 @@ explain select * from t where age=5;
 
 ### tidb_placement_mode <span class="version-mark">New in v6.0.0</span>
 
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Enumeration
-- Default value: `STRICT`
-- Possible values: `STRICT`, `IGNORE`
-- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.
-- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
-
-### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
-
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Integer
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -2156,8 +2036,39 @@ explain select * from t where age=5;
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Enumeration
+- Default value: `STRICT`
+- Possible values: `STRICT`, `IGNORE`
+
+<CustomContent platform="tidb">
+
+- This variable controls whether DDL statements ignore the [placement rules specified in SQL](/placement-rules-in-sql.md). When the variable value is `IGNORE`, all placement rule options are ignored.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable controls whether DDL statements ignore the [placement rules specified in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql). When the variable value is `IGNORE`, all placement rule options are ignored.
+
+</CustomContent>
+
+- It is intended to be used by logical dump/restore tools to ensure that tables can always be created even if invalid placement rules are assigned. This is similar to how mysqldump writes `SET FOREIGN_KEY_CHECKS=0;` to the start of every dump file.
+
+### tidb_pprof_sql_cpu <span class="version-mark">New in v4.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
 - Default value: `0`
 - Range: `[0, 1]`
 - This variable is used to control whether to mark the corresponding SQL statement in the profile output to identify and troubleshoot performance issues.
@@ -2232,11 +2143,6 @@ explain select * from t where age=5;
 
 ### tidb_record_plan_in_slow_log
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Boolean
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
@@ -2245,8 +2151,9 @@ explain select * from t where age=5;
 
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
 
@@ -2384,21 +2291,16 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_slow_log_threshold
 
-<<<<<<< HEAD
-- Scope: GLOBAL
-- Persists to cluster: No
-- Type: Integer
-=======
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
-
 </CustomContent>
 
-- Scope: INSTANCE
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
+- Scope: GLOBAL
+- Persists to cluster: No
+- Type: Integer
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
@@ -2528,30 +2430,6 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Unit: Seconds
 - This variable is used to set the refresh time of [statement summary tables](/statement-summary-tables.md).
 
-<<<<<<< HEAD
-=======
-### `tidb_enable_top_sql` <span class="version-mark">New in v5.4.0</span>
-
-- Scope: GLOBAL
-- Default value: `OFF`
-
-<CustomContent platform="tidb">
-
-- This variable is used to control whether to enable the [Top SQL](/dashboard/top-sql.md) feature.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- This variable is used to control whether to enable the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature.
-
-</CustomContent>
-
-> **Warning:**
->
-> Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
-
->>>>>>> 6fa05c068 (cloud: add SQL related docs (#9001))
 ### tidb_store_limit <span class="version-mark">New in v3.0.4 and v4.0</span>
 
 - Scope: GLOBAL
