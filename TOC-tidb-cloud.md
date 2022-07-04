@@ -20,7 +20,7 @@
   - [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md)
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - Tune Performance
-    - [Statement Analysis](/tidb-cloud/tune-performance.md)
+    - [Statement](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
