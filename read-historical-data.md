@@ -182,6 +182,6 @@ To restore data from an older version, you can use one of the following methods:
 
 <CustomContent platform="tidb-cloud">
 
-- Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
+- Use [Dumpling](https://docs.pingcap.com/tidb/v5.4/dumpling-overview) to export a historical snapshot. Dumpling performs well in exporting larger sets of data.
 
 </CustomContent>

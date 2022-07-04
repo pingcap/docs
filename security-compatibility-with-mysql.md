@@ -26,7 +26,7 @@ The support for TLS authentication is configured differently. For detailed infor
 
 <CustomContent platform="tidb-cloud">
 
-The support for TLS authentication is configured differently. For detailed information, see [Enable TLS between TiDB Clients and Servers](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers).
+The support for TLS authentication is configured differently. For detailed information, see [Enable TLS between TiDB Clients and Servers](https://docs.pingcap.com/tidb/v5.4/enable-tls-between-clients-and-servers).
 
 </CustomContent>
 

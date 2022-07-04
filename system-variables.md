@@ -279,7 +279,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: NONE
 - Default value: `OFF`
-- This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) is used.
+- This variable indicates whether [TiDB Binlog](https://docs.pingcap.com/tidb/v5.4/tidb-binlog-overview) is used.
 
 ### max_allowed_packet
 
@@ -322,7 +322,7 @@ This variable is an alias for `last_insert_id`.
 
 <CustomContent platform="tidb-cloud">
 
-- This variable controls whether DDL statements validate [Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
+- This variable controls whether DDL statements validate [Placement Rules in SQL](https://docs.pingcap.com/tidb/v5.4/placement-rules-in-sql).
 
 </CustomContent>
 
@@ -390,7 +390,7 @@ This variable is an alias for `last_insert_id`.
 
 - Scope: SESSION | GLOBAL
 - Default value: `ON`
-- Indicates whether to write changes to [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview) or not.
+- Indicates whether to write changes to [TiDB Binlog](https://docs.pingcap.com/tidb/v5.4/tidb-binlog-overview) or not.
 
 > **Note:**
 >
@@ -475,7 +475,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 <CustomContent platform="tidb-cloud">
 
- For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](https://docs.pingcap.com/tidb/stable/use-tiflash#control-whether-to-select-the-mpp-mode).
+ For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](https://docs.pingcap.com/tidb/v5.4/use-tiflash#control-whether-to-select-the-mpp-mode).
 
 </CustomContent>
 
@@ -592,7 +592,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: INSTANCE
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
-- You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](https://docs.pingcap.com/tidb/stable/upgrade-faq).
+- You might need to disable this option when upgrading your cluster from an earlier version of TiDB where the `utf8` checking was more relaxed. For details, see [FAQs After Upgrade](https://docs.pingcap.com/tidb/v5.4/upgrade-faq).
 
 ### tidb_checksum_table_concurrency
 
@@ -666,7 +666,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Unit: Rows
 - This variable is used to set the batch size during the `re-organize` phase of the DDL operation. For example, when TiDB executes the `ADD INDEX` operation, the index data needs to backfilled by `tidb_ddl_reorg_worker_cnt` (the number) concurrent workers. Each worker backfills the index data in batches.
     - If many updating operations such as `UPDATE` and `REPLACE` exist during the `ADD INDEX` operation, a larger batch size indicates a larger probability of transaction conflicts. In this case, you need to adjust the batch size to a smaller value. The minimum value is 32.
-    - If the transaction conflict does not exist, you can set the batch size to a large value (consider the worker count. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/stable/online-workloads-and-add-index-operations) for reference). This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
+    - If the transaction conflict does not exist, you can set the batch size to a large value (consider the worker count. See [Interaction Test on Online Workloads and `ADD INDEX` Operations](https://docs.pingcap.com/tidb/v5.4/online-workloads-and-add-index-operations) for reference). This can increase the speed of the backfilling data, but the write pressure on TiKV also becomes higher.
 
 ### tidb_ddl_reorg_priority
 
@@ -737,7 +737,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
+> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/v5.4/ticdc-overview) instead.
 > - Enabling this parameter only means that one-phase commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
 ### tidb_enable_alter_placement
@@ -765,7 +765,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 <CustomContent platform="tidb-cloud">
 
-- This variable enables or disables [Placement Rules in SQL](https://docs.pingcap.com/tidb/stable/placement-rules-in-sql).
+- This variable enables or disables [Placement Rules in SQL](https://docs.pingcap.com/tidb/v5.4/placement-rules-in-sql).
 
 </CustomContent>
 
@@ -792,7 +792,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Note:**
 >
 > - The default value of `ON` only applies to new clusters. if your cluster was upgraded from an earlier version of TiDB, the value `OFF` will be used instead.
-> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
+> - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/v5.4/ticdc-overview) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
 ### tidb_enable_auto_increment_in_generated
@@ -1113,7 +1113,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 <CustomContent platform="tidb-cloud">
 
- For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](https://docs.pingcap.com/tidb/stable/use-tiflash#control-whether-to-select-the-mpp-mode).
+ For details about the selection of the MPP mode, refer to [Control whether to select the MPP mode](https://docs.pingcap.com/tidb/v5.4/use-tiflash#control-whether-to-select-the-mpp-mode).
 
 </CustomContent>
 
@@ -1499,8 +1499,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb-cloud">
 
-- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
-- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
+- TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/v5.4/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
+- You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](https://docs.pingcap.com/tidb/v5.4/tidb-configuration-file#memory-usage-alarm-ratio-new-in-v409).
 
 </CustomContent>
 
@@ -2010,7 +2010,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to control whether to enable the [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) feature.
+- This variable is used to control whether to enable the [Top SQL](https://docs.pingcap.com/tidb/v5.4/top-sql) feature.
 
 </CustomContent>
 

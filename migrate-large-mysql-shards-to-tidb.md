@@ -202,7 +202,7 @@ Follow these steps to start `tidb-lightning`:
     # Choose a local backend.
     # "local": The default mode. It is used for large data volumes greater than 1 TiB. During migration, downstream TiDB cannot provide services.
     # "tidb": Used for data volumes less than 1 TiB. During migration, downstream TiDB can provide services normally.
-    # For more information, see [TiDB Lightning Backends](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends)
+    # For more information, see [TiDB Lightning Backends](https://docs.pingcap.com/tidb/v5.4/tidb-lightning-backends)
     backend = "local"
     # Set the temporary directory for the sorted key value pairs. It must be empty.
     # The free space must be greater than the size of the dataset to be imported.

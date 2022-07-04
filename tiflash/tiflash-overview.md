@@ -88,7 +88,7 @@ For details, see [Supported pushdown calculations](/tiflash/use-tiflash.md#suppo
 
 <CustomContent platform="tidb-cloud">
 
-For details, see [Supported pushdown calculations](https://docs.pingcap.com/tidb/stable/use-tiflash#supported-push-down-calculations).
+For details, see [Supported pushdown calculations](https://docs.pingcap.com/tidb/v5.4/use-tiflash#supported-push-down-calculations).
 
 </CustomContent>
 
