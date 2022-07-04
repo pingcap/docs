@@ -46,7 +46,7 @@ TiDB version: 5.4.2
 + TiDB
 
     <!--transaction-->
-    - Improve the recovery time if the tikv hibernate region is enabled [#34906](https://github.com/pingcap/tidb/issues/34906)
+    - Prevent sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
@@ -72,7 +72,9 @@ TiDB version: 5.4.2
 
     <!--transaction-->
     - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
-
+    - Avoid WriteConflict errors in pessimistic transactions [#11612](https://github.com/tikv/tikv/issues/11612)
+    - Fix an idempotency issue when undertermined errors and region errors are met in the same request [#34875](https://github.com/pingcap/tidb/issues/34875)
+    - Fix an atomicity issue when rolling back an async-commit transaction [#33641](https://github.com/pingcap/tidb/issues/33641)
     <!--sql-infra-->
     - Fix TiDB may not free the resources of the disconnected session correctly when a network connectivity event occurred. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fix querying CTE views may unexpectedly report `references invalid table`. [#33965](https://github.com/pingcap/tidb/issues/33965)
@@ -99,7 +101,7 @@ TiDB version: 5.4.2
 + PD
 
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
-    - Fix the issue that the hot region may cause panic due to no leader [#5005](https://github.com/tikv/pd/issues/5005)
+    - Fix the PD panic that occurs when a hot region has no leader [#5005](https://github.com/tikv/pd/issues/5005)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
     (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
 
