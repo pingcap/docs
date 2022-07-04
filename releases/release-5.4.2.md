@@ -13,7 +13,7 @@ TiDB version: 5.4.2
 + TiDB
 
     <!--transaction-->
-    - Improve the recovery time if the tikv hibernate region is enabled [#34906](https://github.com/pingcap/tidb/issues/34906)
+    - Prevent sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
@@ -45,7 +45,9 @@ TiDB version: 5.4.2
 
     <!--transaction-->
     - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
-
+    - Avoid WriteConflict errors in pessimistic transactions [#11612](https://github.com/tikv/tikv/issues/11612)
+    - Fix an idempotency issue when undertermined errors and region errors are met in the same request [#34875](https://github.com/pingcap/tidb/issues/34875)
+    - Fix an atomicity issue when rolling back an async-commit transaction [#33641](https://github.com/pingcap/tidb/issues/33641)
     <!--sql-infra-->
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Previously, when a network connectivity issue occurred, TiDB did not always correctly free the resources held by the disconnected session. This issue has been fixed so that open transactions can be rolled back and other associated resources can be released. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fix querying CTE views may unexpectedly report `references invalid table`. [#33965](https://github.com/pingcap/tidb/issues/33965)
