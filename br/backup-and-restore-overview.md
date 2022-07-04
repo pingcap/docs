@@ -1,7 +1,7 @@
 ---
 title: BR Overview
 summary: Learn about the definition and functions of BR.
-aliases: ['/tidb/v6.1/backup-and-restore-tool/']
+aliases: ['/tidb/stable/backup-and-restore-tool/']
 ---
 
 # BR Overview
