@@ -141,7 +141,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 300     | 8,848  | 8,848  | 36            |
     | Point Select      | 600     | 46,224 | 46,224 | 13            |
@@ -159,7 +159,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 1,500   | 11,601 | 11,601 | 129           |
     | Point Select      | 600     | 46,224 | 46,224 | 13            |
@@ -182,7 +182,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 600     | 17,831 | 17,831 | 34            |
     | Point Select      | 600     | 93,287 | 93,287 | 6             |
@@ -200,7 +200,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 2,000   | 23,633 | 23,633 | 84            |
     | Point Select      | 600     | 93,287 | 93,287 | 6             |
@@ -223,7 +223,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 1,200   | 33,892  | 33,892  | 23            |
     | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
@@ -241,7 +241,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 4,000   | 47,029  | 47,029  | 43            |
     | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
@@ -264,7 +264,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 1,200   | 35,096  | 35,096  | 34            |
     | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
@@ -282,7 +282,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 2,000   | 43,338  | 43,338  | 46            |
     | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
@@ -305,7 +305,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 2,400   | 69,139  | 69,139  | 22            |
     | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
@@ -323,7 +323,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 4,000   | 86,242  | 86,242  | 25            |
     | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
