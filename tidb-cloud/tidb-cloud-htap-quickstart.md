@@ -7,7 +7,7 @@ summary: Learn how to get started with TiDB Cloud HTAP.
 
 This tutorial guides you through an easy way to experience Hybrid Transactional and Analytical Processing (HTAP) once you have already started your TiDB cluster on the TiDB Cloud and have TiFlash node in your cluster.
 
-The content includes how to replicate tables to TiFlash , run queries with TiFlash and experience the performance boost.
+The content includes how to replicate tables to TiFlash, run queries with TiFlash and experience the performance boost.
 
 ## Before you begin
 
@@ -68,4 +68,4 @@ In this step, you can compare the execution statistics between TiKV (row-based s
 
 > **Note:**
 >
-> Because the sample data is very small and the query in this document is very simple, the query using TiKV might be faster after the first time. Once the data is updated frequently, the cache will be missed.
+> Because the sample data is very small and the query in this document is very simple, if you have already forced the optimizer to choose TiKV for this query and run the same query again, TiKV will reuse its cache, and the query might be much faster. If the data is updated frequently, the cache will be missed.
