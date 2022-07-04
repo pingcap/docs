@@ -22,7 +22,7 @@ These charges appear as separate items on your monthly TiDB Cloud bills.
 
 TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
 
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and vCPUs size of TiDB, TiKV, and TiFlash<sup>beta</sup>.
+In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash<sup>beta</sup>.
 
 The specified node quantity and associated vCPUs determine your hourly compute cost.
 

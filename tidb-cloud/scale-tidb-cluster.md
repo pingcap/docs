@@ -26,32 +26,32 @@ To scale a cluster, take the following steps:
 
 5. Click **Confirm**.
 
-## Increase the vCPU size
+## Increase the node size
 
-When a cluster is running, you cannot increase its vCPU size. To make such change, take either of the following methods:
+When a cluster is running, you cannot increase its node size. To make such change, take either of the following methods:
 
-- Method 1: Increase the vCPU size through backup and restore
+- Method 1: Increase the node size through backup and restore
 
-    You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the vCPU size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
+    You need to [create a latest backup of the cluster](/tidb-cloud/backup-and-restore.md#manual-backup), [delete the cluster](/tidb-cloud/delete-tidb-cluster.md), and then increase the node size when you [restore the deleted cluster](/tidb-cloud/backup-and-restore.md#restore-a-deleted-cluster). Before taking this method, make sure the following impacts are acceptable:
 
     - To avoid any data loss during or after the backup, you need to stop the connection to the cluster through your SQL client before creating the backup.
     - After you stop the connection to the cluster, your applications running on this cluster cannot provide service normally until the restoring process is completed.
 
-- Method 2: Increase the vCPU size through a support ticket
+- Method 2: Increase the node size through a support ticket
 
     Perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to create a support ticket. For each node to be scaled, provide the following information in the **Description** box of the ticket:
 
     - Cluster name: xxx
     - Cloud provider: GCP or AWS
     - Node type: TiDB, TiKV, or TiFlash
-    - Current vCPU size: xxx
-    - Expected vCPU size: xxx
+    - Current node size: xxx
+    - Expected node size: xxx
 
 ## Scale in a cluster
 
 To make the following scale-in or scale-down changes, you need to submit a support ticket. We will contact you and complete the scaling within the agreed time.
 
-- Decrease the vCPU size of TiDB, TiKV, or TiFlash<sup>beta</sup>
+- Decrease the node size of TiDB, TiKV, or TiFlash<sup>beta</sup>
 - Scale in TiKV or TiFlash<sup>beta</sup> nodes
 - Decrease the storage size of TiKV or TiFlash<sup>beta</sup>
 
@@ -64,8 +64,8 @@ To submit a support request, perform the steps in [TiDB Cloud Support](/tidb-clo
 - Cluster name: xxx
 - Cloud provider: GCP or AWS
 - Node type: TiDB, TiKV, or TiFlash
-- Current vCPU size: xxx
-- Expected vCPU size: xxx
+- Current node size: xxx
+- Expected node size: xxx
 - Current node number: xxx
 - Expected node number: xxx
 - Current storage size: xxx

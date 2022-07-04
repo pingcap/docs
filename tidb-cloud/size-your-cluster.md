@@ -15,15 +15,15 @@ This document describes how to determine the size of a Dedicated Tier cluster.
 
 TiDB is for computing only and does not store data. It is horizontally scalable.
 
-You can configure both vCPUs size and node quantity for TiDB.
+You can configure both node size and node quantity for TiDB.
 
-### TiDB vCPUs size
+### TiDB node size
 
-The supported vCPU sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported node sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
 
 > **Note:**
 >
-> If the vCPU size of TiDB is set as **4 vCPU (Beta)**, note the following restrictions:
+> If the node size of TiDB is set as **4 vCPU (Beta)**, note the following restrictions:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
 > - TiDB can only be used with TiKV with 4 vCPU.
@@ -37,15 +37,15 @@ For high availability, it is recommended that you configure at least two TiDB no
 
 TiKV is responsible for storing data. It is horizontally scalable.
 
-You can configure vCPUs size, node quantity, and storage size for TiKV.
+You can configure node size, node quantity, and storage size for TiKV.
 
-### TiKV vCPUs size
+### TiKV node size
 
 The supported sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
 
 > **Note:**
 >
-> If the vCPUs size of TiKV is set as **4 vCPU (Beta)**, note the following restrictions:
+> If the node size of TiKV is set as **4 vCPU (Beta)**, note the following restrictions:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
 > - TiKV can only be used with TiDB with 4 vCPU.
@@ -82,13 +82,13 @@ Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
 
 TiFlash<sup>beta</sup> synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
 
-You can configure vCPUs size, node quantity, and storage size for TiFlash<sup>beta</sup>.
+You can configure node size, node quantity, and storage size for TiFlash<sup>beta</sup>.
 
-### TiFlash<sup>beta</sup> vCPUs size
+### TiFlash<sup>beta</sup> node size
 
-The supported vCPU sizes include 8 vCPU and 16 vCPU.
+The supported node sizes include 8 vCPU and 16 vCPU.
 
-If the vCPUs size of TiDB or TiKV is set as **4 vCPU (Beta)**, TiFlash<sup>beta</sup> is not supported.
+If the node size of TiDB or TiKV is set as **4 vCPU (Beta)**, TiFlash<sup>beta</sup> is not supported.
 
 ### TiFlash<sup>beta</sup> node quantity
 
