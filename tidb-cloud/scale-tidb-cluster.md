@@ -67,5 +67,7 @@ To submit a support request, perform the steps in [TiDB Cloud Support](/tidb-clo
 - Expected node size: xxx
 - Current node number: xxx
 - Expected node number: xxx
-- Current storage size: xxx
-- Expected storage size: xxx
+
+> **Note:**
+>
+> You cannot decrease the cluster storage size after your cluster is created.
