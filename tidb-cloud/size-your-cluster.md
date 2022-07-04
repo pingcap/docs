@@ -19,14 +19,18 @@ You can configure both node size and node quantity for TiDB.
 
 ### TiDB node size
 
-The supported node sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported node sizes include the following:
+
+- 4 vCPU, 16 GiB (Beta)
+- 8 vCPU, 16 GiB
+- 16 vCPU, 32 GiB
 
 > **Note:**
 >
-> If the node size of TiDB is set as **4 vCPU (Beta)**, note the following restrictions:
+> If the node size of TiDB is set as **4 vCPU, 16 GiB (Beta)**, note the following restrictions:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - TiDB can only be used with TiKV with 4 vCPU.
+> - TiDB can only be used with 4 vCPU TiKV.
 > - TiFlash<sup>beta</sup> is unavailable.
 
 ### TiDB node quantity
@@ -43,14 +47,18 @@ You can configure node size, node quantity, and storage size for TiKV.
 
 ### TiKV node size
 
-The supported sizes include 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported node sizes include the following:
+
+- 4 vCPU, 16 GiB (Beta)
+- 8 vCPU, 64 GiB
+- 16 vCPU, 64 GiB
 
 > **Note:**
 >
-> If the node size of TiKV is set as **4 vCPU (Beta)**, note the following restrictions:
+> If the node size of TiKV is set as **4 vCPU, 16 GiB (Beta)**, note the following restrictions:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - TiKV can only be used with TiDB with 4 vCPU.
+> - TiKV can only be used with 4 vCPU TiDB.
 > - TiFlash<sup>beta</sup> is unavailable.
 
 ### TiKV node quantity
@@ -90,9 +98,12 @@ You can configure node size, node quantity, and storage size for TiFlash<sup>bet
 
 ### TiFlash<sup>beta</sup> node size
 
-The supported node sizes include 8 vCPU and 16 vCPU.
+The supported node sizes include the following:
 
-Note that TiFlash<sup>beta</sup> is unavailable when the vCPU size of TiDB or TiKV is set as **4 vCPU (Beta)**.
+- 8 vCPU, 64 GiB
+- 16 vCPU, 128 GiB
+
+Note that TiFlash<sup>beta</sup> is unavailable when the vCPU size of TiDB or TiKV is set as **4 vCPU, 16 GiB (Beta)**.
 
 ### TiFlash<sup>beta</sup> node quantity
 

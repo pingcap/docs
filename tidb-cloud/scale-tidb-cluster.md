@@ -53,11 +53,10 @@ To make the following scale-in or scale-down changes, you need to submit a suppo
 
 - Decrease the node size of TiDB, TiKV, or TiFlash<sup>beta</sup>
 - Scale in TiKV or TiFlash<sup>beta</sup> nodes
-- Decrease the storage size of TiKV or TiFlash<sup>beta</sup>
 
 > **Warning:**
 >
-> The preceding scale-in or scale-down changes can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
+> The preceding scale-down and scale-in changes can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
 
 To submit a support request, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to contact our support team. For each node to be scaled, provide the following information in the **Description** box:
 
