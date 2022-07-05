@@ -109,4 +109,4 @@ In this step, you can compare the execution statistics between TiKV (row-based s
 
 > **Note:**
 >
-> Because the sample data is very small and the query in this document is very simple, if you have already forced the optimizer to choose TiKV for this query and run the same query again, TiKV will reuse its cache, so the query might be much faster. If the data is updated frequently, the cache will be missed.
+> Because the size of sample data is small and the query in this document is very simple, if you have already forced the optimizer to choose TiKV for this query and run the same query again, TiKV will reuse its cache, so the query might be much faster. If the data is updated frequently, the cache will be missed.
