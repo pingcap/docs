@@ -65,7 +65,6 @@ Slow query basics:
 * `Is_internal`: Whether a SQL statement is TiDB internal. `true` indicates that a SQL statement is executed internally in TiDB and `false` indicates that a SQL statement is executed by the user.
 * `Index_names`: The index names used by the statement.
 * `Stats`: The health state of the involved tables. `pseudo` indicates that the state is unhealthy.
-* `Index_ids`: The IDs of the indexes involved in a statement.
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
 * `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
@@ -79,9 +78,9 @@ Slow query basics:
 * `Exec_retry_count`: The retry times of this statement. This field is usually for pessimistic transactions in which the statement is retried when the lock is failed.
 * `Exec_retry_time`: The execution retry duration of this statement. For example, if a statement has been executed three times in total (failed for the first two times), `Exec_retry_time` means the total duration of the first two executions. The duration of the last execution is `Query_time` minus `Exec_retry_time`.
 * `KV_total`: The time spent on all the RPC requests on TiKV/TiFlash.
-* `PD_total`: The time consumed for all the RPC requests on PD.
-* `Backoff_total`: The time consumed for all the backoff in the execution of this statement.
-* `Write_sql_response_total`: The time consumed for sending results to the client.
+* `PD_total`: The time spent on all the RPC requests on PD.
+* `Backoff_total`: The time spent on all the backoff in the execution of this statement.
+* `Write_sql_response_total`: The time spent on sending results to the client.
 * `Result_rows`: The row count of the result.
 * `IsExplicitTxn`: Whether this statement is in an explicit transaction. If the value is `false`, the transaction is `autocommit=1` and the statement is automatically committed after execution.
 
