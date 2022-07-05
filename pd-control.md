@@ -20,7 +20,15 @@ To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:
 
 ### Download the installation package
 
-The PD Control installation package (`pd-ctl`) is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
+To get the latest version of `pd-ctl`, download the TiDB installation package, and then find `pd-ctl` in `ctl-{version}-linux-amd64.tar.gz` of the package.
+
+| Package download link                                                                      | Operating system | Architecture | SHA256 checksums                                                                   |
+|:-------------------------------------------------------------------------------------------|:-----------------|:-------------|:-----------------------------------------------------------------------------------|
+| `https://download.pingcap.org/tidb-community-server-{version}-linux-amd64.tar.gz` (pd-ctl) | Linux            | amd64        | `https://download.pingcap. org/tidb-community-server-{version}-linux-amd64.sha256` |
+
+> **Note:**
+>
+> `{version}` in the download link indicates the version number of TiDB. For example, the download link for `v6.1.0` is `https://download.pingcap.org/tidb-community-server-v6.1.0-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
