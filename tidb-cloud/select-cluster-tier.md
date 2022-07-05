@@ -35,7 +35,7 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 - No high availability or automatic failover.
 - Upgrades to clusters might incur significant downtimes.
 - Each cluster allows one automatic daily backup and two manual backups.
-- The maximum number of connections to the Dev Tier cluster is 50.
+- The maximum number of connections to the Developer Tier cluster is 50.
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering to connect to clusters.
 - You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
