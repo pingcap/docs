@@ -5,7 +5,17 @@ summary: Learn about the transaction isolation levels in TiDB.
 
 # TiDBトランザクション分離レベル {#tidb-transaction-isolation-levels}
 
+<CustomContent platform="tidb">
+
 トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[酸](/glossary.md#acid)と呼ばれます）。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[酸](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます）。
+
+</CustomContent>
 
 SQL-92標準では、トランザクション分離の4つのレベルが定義されています。コミットされていない読み取り、コミットされた読み取り、繰り返し可能な読み取り、およびシリアル化可能です。詳細については、次の表を参照してください。
 
@@ -20,9 +30,9 @@ TiDBは、MySQLとの互換性のために`REPEATABLE-READ`としてアドバタ
 
 > **ノート：**
 >
-> TiDB v3.0では、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると**、トランザクション分離レベル**が損なわれる可能性があるため、お勧めしません。詳細は[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
+> TiDB v3.0以降、トランザクションの自動再試行はデフォルトで無効になっています。自動再試行を有効にすると**、トランザクション分離レベル**が損なわれる可能性があるため、お勧めしません。詳細は[トランザクションの再試行](/optimistic-transaction.md#automatic-retry)を参照してください。
 >
-> TiDB [v3.0.8](/releases/release-3.0.8.md#tidb)から、新しく作成されたTiDBクラスターはデフォルトで[悲観的なトランザクションモード](/pessimistic-transaction.md)を使用します。現在の読み取り（ `for update`読み取り）は**繰り返し不可の読み取り**です。詳細は[悲観的なトランザクションモード](/pessimistic-transaction.md)を参照してください。
+> TiDB v3.0.8以降、新しく作成されたTiDBクラスターはデフォルトで[悲観的なトランザクションモード](/pessimistic-transaction.md)を使用します。現在の読み取り（ `for update`の読み取り）は**繰り返し不可能な読み取り**です。詳細は[悲観的なトランザクションモード](/pessimistic-transaction.md)を参照してください。
 
 ## 繰り返し可能な読み取り分離レベル {#repeatable-read-isolation-level}
 
@@ -53,7 +63,7 @@ TiDBのRepeatableRead分離レベルは、MySQLのそれとは異なります。
 
 ## コミットされた分離レベルを読み取る {#read-committed-isolation-level}
 
-TiDB [v4.0.0-ベータ版](/releases/release-4.0.0-beta.md#tidb)以降、TiDBはReadCommitted分離レベルをサポートしています。
+TiDB v4.0.0-beta以降、TiDBはReadCommitted分離レベルをサポートしています。
 
 歴史的な理由から、現在の主流データベースの読み取りコミット分離レベルは基本的に[Oracleによって定義された一貫性のある読み取り分離レベル](https://docs.oracle.com/cd/B19306_01/server.102/b14220/consist.htm)です。この状況に適応するために、TiDBペシミスティックトランザクションの読み取りコミット分離レベルも、本質的に一貫した読み取り動作です。
 

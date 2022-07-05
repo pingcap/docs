@@ -94,7 +94,7 @@ enable-placement-rules = true
 }
 ```
 
-ブートストラップされたクラスタの場合、pd-ctlを使用してオンラインで配置ルールを有効にすることもできます。
+ブートストラップクラスタの場合、pd-ctlを使用してオンラインで配置ルールを有効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -274,12 +274,12 @@ pd-ctl config placement-rules rule-bundle get pd
 }
 ```
 
-出力をファイルに書き込むには、 `rule-bundle get`サブコマンドに`-out`引数を追加します。これは、その後の変更と保存に便利です。
+出力をファイルに書き込むには、 `rule-bundle get`サブコマンドに`--out`引数を追加します。これは、その後の変更と保存に便利です。
 
 {{< copyable "" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
 変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成をPDサーバーに保存できます。 [pd-ctlを使用してルールを設定する](#set-rules-using-pd-ctl)で説明した`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
@@ -287,7 +287,7 @@ pd-ctl config placement-rules rule-bundle get pd -out="group.json"
 {{< copyable "" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### pd-ctlを使用して、すべての構成を表示および変更します {#use-pd-ctl-to-view-and-modify-all-configurations}
@@ -431,7 +431,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ4：高性能ディスクを備えた北京ノードのテーブルに2つのフォロワーレプリカを追加する {#scenario-4-add-two-follower-replicas-for-a-table-in-the-beijing-node-with-high-performance-disks}
 
-次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシンルームに配置する必要があり、ディスクタイプは`hdd`であってはなりません。
+次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシンルームに配置する必要があり、ディスクタイプは`ssd`であってはなりません。
 
 {{< copyable "" >}}
 
@@ -445,7 +445,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
   "count": 2,
   "label_constraints": [
     {"key": "zone", "op": "in", "values": ["bj1", "bj2"]},
-    {"key": "disk", "op": "notIn", "values": ["hdd"]}
+    {"key": "disk", "op": "notIn", "values": ["ssd"]}
   ],
   "location_labels": ["host"]
 }

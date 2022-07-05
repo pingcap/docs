@@ -46,7 +46,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
     -   1つのTiDB共有ノード
     -   1つのTiKV共有ノード（500 MiBのOLTPストレージを使用）
-    -   1つのTiFlash<sup>ベータ</sup>共有ノード（500 MiBのOLAPストレージを使用）
+    -   1つのTiFlash共有ノード（500 MiBのOLAPストレージを使用）
 
     はじめに[ここ](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
@@ -104,7 +104,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年6月14日 {#june-14-2021}
 
--   AuroraスナップショットをTiDBインスタンスにインポートする際のEBSのマウントエラーを修正しました
+-   AuroraスナップショットをTiDBインスタンスにインポートするときのマウントEBSエラーを修正します
 
 ## 2021年5月10日 {#may-10-2021}
 

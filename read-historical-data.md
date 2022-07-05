@@ -27,7 +27,7 @@ TiDBは、特別なクライアントやドライバーを使用せずに、標�
 -   変数は`SESSION`スコープで有効です。
 -   その値は、 `SET`ステートメントを使用して変更できます。
 -   変数のデータ型はテキストです。
--   この変数は、TSO（Timestamp Oracle）と日時を受け入れます。 TSOは、PDから取得する世界的にユニークなタイムサービスです。使用可能な日時の形式は「2016-10-0816：45：26.999」です。通常、日時は「2016-10-0816:45:26」のように2番目の精度で設定できます。
+-   この変数は、TSO（Timestamp Oracle）と日時を受け入れます。 TSOは、PDから取得する世界的にユニークなタイムサービスです。使用可能な日時の形式は「2016-10-0816：45：26.999」です。通常、日時は「2016-10-0816:45:26」のように2番目の精度を使用して設定できます。
 -   変数が設定されると、TiDBは、データ構造のためだけに、その値をタイムスタンプとして使用してスナップショットを作成し、オーバーヘッドはありません。その後、 `SELECT`の操作すべてがこのスナップショットからデータを読み取ります。
 
 > **ノート：**
@@ -174,4 +174,14 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 -   単純なケースでは、 `tidb_snapshot`変数を設定して出力をコピーアンドペーストした後に`SELECT`を使用するか、 `SELECT ... INTO LOCAL OUTFLE`を使用して後でデータをインポートするために`LOAD DATA`を使用します。
 
+<CustomContent platform="tidb">
+
 -   [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb)を使用して、履歴スナップショットをエクスポートします。Dumplingは、より大きなデータセットのエクスポートでうまく機能します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、履歴スナップショットをエクスポートします。Dumplingは、より大きなデータセットのエクスポートでうまく機能します。
+
+</CustomContent>

@@ -7,7 +7,7 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 このステートメントは、TiDBクラスタの分散バックアップを実行するために使用されます。
 
-`BACKUP`のステートメントは、バックアッププロセスが個別のBRツールではなく、TiDB自体によって駆動されることを除いて、 [BRツール](/br/backup-and-restore-use-cases.md)と同じエンジンを使用します。 BRのすべての利点と警告は、このステートメントにも適用されます。
+`BACKUP`のステートメントは、バックアッププロセスが個別のBRツールではなく、TiDB自体によって駆動されることを除いて、 [BRツール](/br/backup-and-restore-tool.md)と同じエンジンを使用します。 BRのすべての利点と警告は、このステートメントにも適用されます。
 
 `BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`の特権が必要です。さらに、バックアップを実行するTiDBノードとクラスタのすべてのTiKVノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ（ `local://`で始まるストレージパス）は許可されません。
 
@@ -71,7 +71,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 | `Size`           | バックアップアーカイブの合計サイズ（バイト単位）                                            |
 | `BackupTS`       | バックアップが作成されたときのスナップショットのTSO（ [増分バックアップ](#incremental-backup)に役立ちます） |
 | `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ（現在のタイムゾーン）。                        |
-| `Execution Time` | `BACKUP`のタスクの実行が開始されたときのタイムスタンプ（現在のタイムゾーン）。                         |
+| `Execution Time` | `BACKUP`のタスクが実行を開始したときのタイムスタンプ（現在のタイムゾーン）。                          |
 
 ### テーブルをバックアップする {#back-up-tables}
 
@@ -120,7 +120,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2'
 
 ### パフォーマンスの微調整 {#performance-fine-tuning}
 
-`RATE_LIMIT`を使用して、TiKVノードごとの平均アップロード速度を制限し、ネットワーク帯域幅を減らします。
+`RATE_LIMIT`を使用して、TiKVノードあたりの平均アップロード速度を制限し、ネットワーク帯域幅を減らします。
 
 デフォルトでは、すべてのTiKVノードが4つのバックアップスレッドを実行します。この値は、 `CONCURRENCY`オプションで調整できます。
 

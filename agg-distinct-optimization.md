@@ -27,7 +27,17 @@ mysql> explain SELECT DISTINCT a from t;
 
 通常、 `DISTINCT`オプションの集計関数は、シングルスレッド実行モデルのTiDBレイヤーで実行されます。
 
+<CustomContent platform="tidb">
+
 TiDBの[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)のシステム変数または[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)の構成項目は、個別の集約クエリを書き換えてTiKV/TiFlashコプロセッサーにプッシュするかどうかを制御します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDBの[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えてTiKV/TiFlashコプロセッサーにプッシュするかどうかを制御します。
+
+</CustomContent>
 
 この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集約関数がTiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分がTiKV /TiFlashコプロセッサーにプッシュされます。TiKVコプロセッサーの列aで重複した値を削除するためのHashAgg_5があります。これにより、TiDBレイヤーでの`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 

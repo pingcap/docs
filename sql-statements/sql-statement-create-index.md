@@ -141,29 +141,35 @@ CREATE TABLE t1(col1 char(10), col2 char(10), index((lower(col1))));
 DROP INDEX idx1 ON t1;
 ```
 
+式インデックスには、さまざまな種類の式が含まれます。正確性を確保するために、完全にテストされた一部の関数のみが式インデックスの作成を許可されています。これは、これらの関数のみが実稼働環境の式で許可されることを意味します。これらの関数は、 `tidb_allow_function_for_expression_index`の変数をクエリすることで取得できます。将来のバージョンでは、さらに多くの関数がリストに追加される可能性があります。
+
+{{< copyable "" >}}
+
+```sql
+mysql> select @@tidb_allow_function_for_expression_index;
++--------------------------------------------+
+| @@tidb_allow_function_for_expression_index |
++--------------------------------------------+
+| lower, md5, reverse, upper, vitess_hash    |
++--------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+上記の戻り結果に含まれていない関数の場合、これらの関数は完全にテストされておらず、実験的ものと見なすことができる実稼働環境には推奨されません。演算子、 `cast`などの他の式も実験的ものと見`case when` 、本番環境には推奨されません。
+
+<CustomContent platform="tidb">
+
+これらの実験的式を引き続き使用する場合は、 [TiDB構成ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
+
+{{< copyable "" >}}
+
+```sql
+allow-expression-index = true
+```
+
+</CustomContent>
+
 > **ノート：**
->
-> 式インデックスには、さまざまな種類の式が含まれます。正確性を確保するために、完全にテストされた一部の関数のみが式インデックスの作成を許可されています。これは、これらの関数のみが実稼働環境の式で許可されることを意味します。これらの関数は、 `tidb_allow_function_for_expression_index`の変数をクエリすることで取得できます。将来のバージョンでは、さらに多くの関数がリストに追加される可能性があります。
->
-> {{< copyable "" >}}
->
-> ```sql
-> mysql> select @@tidb_allow_function_for_expression_index;
-> +--------------------------------------------+
-> | @@tidb_allow_function_for_expression_index |
-> +--------------------------------------------+
-> | lower, md5, reverse, upper, vitess_hash    |
-> +--------------------------------------------+
-> 1 row in set (0.00 sec)
-> ```
->
-> 上記の戻り結果に含まれていない関数の場合、これらの関数は完全にテストされておらず、実験的ものと見なすことができる実稼働環境には推奨されません。演算子、 `cast`などの他の式も実験的ものと見`case when` 、本番環境には推奨されません。ただし、それでもこれらの式を使用する場合は、 [TiDB構成ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
->
-> {{< copyable "" >}}
->
-> ```sql
-> allow-expression-index = true
-> ```
 >
 > 主キーに式インデックスを作成することはできません。
 >
@@ -225,7 +231,7 @@ SELECT max(lower(col1)) FROM t；
 SELECT min(col1) FROM t GROUP BY lower(col1);
 ```
 
-式インデックスに対応する式を確認するには、 `show index`を実行するか、システムテーブル`information_schema.tidb_indexes`とテーブル`information_schema.STATISTICS`を確認します。出力の`Expression`列は、対応する式を示しています。非式インデックスの場合、列には`NULL`が表示されます。
+式インデックスに対応する式を確認するには、 `show index`を実行するか、システムテーブル`information_schema.tidb_indexes`とテーブル`information_schema.STATISTICS`を確認してください。出力の`Expression`列は、対応する式を示しています。非式インデックスの場合、列には`NULL`が表示されます。
 
 行が挿入または更新されるたびに式の値を計算する必要があるため、式インデックスを維持するコストは他のインデックスを維持するコストよりも高くなります。式の値はすでにインデックスに格納されているため、オプティマイザが式のインデックスを選択するときに、この値を再計算する必要はありません。
 
@@ -254,7 +260,7 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 -   降順インデックスはサポートされていません（MySQL 5.7と同様）。
 -   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
 -   式インデックスはビューと互換性がありません。ビューを使用してクエリを実行する場合、式インデックスを同時に使用することはできません。
--   式インデックスには、バインディングとの互換性の問題があります。式インデックスの式に定数がある場合、対応するクエリに対して作成されたバインディングはそのスコープを拡張します。たとえば、式インデックスの式が`a+1`であり、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されたバインディングは`a+? > ?`です。これは、 `a+2 > 2`などの条件を持つクエリも式インデックスを使用するように強制され、実行プランが不十分になることを意味します。さらに、これはSQL Plan Management（SPM）のベースラインキャプチャとベースラインの進化にも影響します。
+-   式インデックスには、バインディングとの互換性の問題があります。式インデックスの式に定数がある場合、対応するクエリに対して作成されたバインディングはそのスコープを拡張します。たとえば、式インデックスの式が`a+1`であり、対応するクエリ条件が`a+1 > 2`であるとします。この場合、作成されたバインディングは`a+? > ?`です。これは、 `a+2 > 2`などの条件を持つクエリも式インデックスを使用するように強制され、実行プランが不十分になることを意味します。さらに、これはSQL Plan Management（SPM）のベースラインキャプチャとベースライン進化にも影響します。
 
 ## も参照してください {#see-also}
 
@@ -265,5 +271,5 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 -   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
 -   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [説明](/sql-statements/sql-statement-explain.md)

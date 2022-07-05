@@ -116,7 +116,7 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ### TableReader {#tablereader}
 
-`TableReader`オペレーターの実行情報は、通常、次のとおりです。
+`TableReader`演算子の実行情報は、通常、次のとおりです。
 
 ```
 cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.07587ms, max_proc_keys: 16, p95_proc_keys: 16, tot_proc: 1ms, tot_wait: 1ms, rpc_num: 6, rpc_time: 5.313996 ms, copr_cache_hit_ratio: 0.00}
@@ -127,12 +127,12 @@ cop_task: {num: 6, max: 1.07587ms, min: 844.312µs, avg: 919.601µs, p95: 1.0758
     -   `max` ： `min` `p95`の実行に消費された実行時間の最大値、最小値、平均値、および`avg`値。
     -   `max_proc_keys`および`p95_proc_keys` ：すべての警官タスクでTiKVによってスキャンされた最大およびP95キー値。最大値とP95値の差が大きい場合、データ分布が不均衡になる可能性があります。
     -   `rpc_num` ：TiKVに送信された`rpc_time` `Cop`のRPC要求に費やされた合計数と合計時間。
-    -   `copr_cache_hit_ratio` ： `cop`のタスク要求に対するコプロセッサーキャッシュのヒット率。詳細については、 [コプロセッサーのキャッシュConfiguration / コンフィグレーション](/tidb-configuration-file.md)を参照してください。
+    -   `copr_cache_hit_ratio` ： `cop`のタスク要求に対するコプロセッサーキャッシュのヒット率。
 -   `backoff` ：さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
 
 ### 入れる {#insert}
 
-`Insert`オペレーターの実行情報は、通常、次のとおりです。
+`Insert`演算子の実行情報は、通常、次のとおりです。
 
 ```
 prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878µs, prefetch:763.8µs, rpc:{BatchGet:{num_rpc:1, total_time:699.166µs},Get:{num_rpc:1, total_time:378.276µs }}}

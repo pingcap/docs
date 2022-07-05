@@ -88,6 +88,14 @@ ADMIN RELOAD bindings;
 
 ## <code>ADMIN REPAIR</code>ステートメント {#code-admin-repair-code-statement}
 
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このTiDBステートメントはTiDB Cloudには適用されません。
+
+</CustomContent>
+
 極端な場合に信頼できない方法で保存されたテーブルのメタデータを上書きするには、 `ADMIN REPAIR TABLE`を使用します。
 
 {{< copyable "" >}}
@@ -96,7 +104,11 @@ ADMIN RELOAD bindings;
 ADMIN REPAIR TABLE tbl_name CREATE TABLE STATEMENT;
 ```
 
+<CustomContent platform="tidb">
+
 ここで「信頼できない」とは、元のテーブルのメタデータが`CREATE TABLE STATEMENT`の操作でカバーできることを手動で確認する必要があることを意味します。この`REPAIR`ステートメントを使用するには、 [`repair-mode`](/tidb-configuration-file.md#repair-mode)構成項目を有効にし、修復するテーブルが[`repair-table-list`](/tidb-configuration-file.md#repair-table-list)にリストされていることを確認します。
+
+</CustomContent>
 
 ## <code>ADMIN SHOW SLOW</code>ステートメント {#code-admin-show-slow-code-statement}
 
@@ -112,7 +124,11 @@ ADMIN SHOW SLOW RECENT N;
 ADMIN SHOW SLOW TOP [INTERNAL | ALL] N;
 ```
 
+<CustomContent platform="tidb">
+
 詳しくは[adminshowslowステートメント](/identify-slow-queries.md#admin-show-slow-command)をご覧ください。
+
+</CustomContent>
 
 ## あらすじ {#synopsis}
 
@@ -123,7 +139,7 @@ AdminStmt ::=
 
 ## 例 {#examples}
 
-次のコマンドを実行して、現在実行中のDDLジョブキュー内の最後の10個の完了したDDLジョブを表示します。 `NUM`が指定されていない場合、デフォルトでは、最後に完了した10個のDDLジョブのみが表示されます。
+次のコマンドを実行して、現在実行中のDDLジョブキューで最後に完了した10個のDDLジョブを表示します。 `NUM`が指定されていない場合、デフォルトでは、最後に完了した10個のDDLジョブのみが表示されます。
 
 {{< copyable "" >}}
 

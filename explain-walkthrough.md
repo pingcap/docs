@@ -7,7 +7,17 @@ summary: Learn how to use EXPLAIN by walking through an example statement
 
 SQLは宣言型言語であるため、クエリが効率的に実行されているかどうかを自動的に判断することはできません。現在の実行プランを学習するには、最初に[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用する必要があります。
 
+<CustomContent platform="tidb">
+
 [バイクシェアのサンプルデータベース](/import-example-data.md)からの次のステートメントは、2017年7月1日に行われた旅行の数をカウントします。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[バイクシェアのサンプルデータベース](/tidb-cloud/import-sample-data.md)からの次のステートメントは、2017年7月1日に行われた旅行の数をカウントします。
+
+</CustomContent>
 
 {{< copyable "" >}}
 
@@ -32,7 +42,7 @@ EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00
 
 1.  コプロセッサー（TiKV）は、 `trips`のテーブル全体を`TableFullScan`の操作として読み取ります。次に、読み取った行を`Selection_19`オペレーターに渡します。5オペレーターはまだTiKV内にあります。
 2.  次に、 `WHERE start_date BETWEEN ..`述語は`Selection_19`演算子でフィルタリングされます。この選択を満たすには、約`250`行が推定されます。この数は、統計とオペレーターのロジックに従って推定されていることに注意してください。 `└─TableFullScan_18`演算子は`stats:pseudo`を示します。これは、テーブルに実際の統計情報がないことを意味します。 `ANALYZE TABLE trips`を実行して統計情報を収集した後、統計はより正確になると予想されます。
-3.  選択基準を満たす行には、 `count`の関数が適用されます。これは、まだTiKV（ `cop[tikv]` ）内にある`StreamAgg_9`オペレーター内でも完了します。 TiKVコプロセッサーは、いくつかのMySQL組み込み関数を実行でき、そのうちの`count`つがその1つです。
+3.  選択基準を満たす行には、 `count`の関数が適用されます。これは、まだTiKV（ `cop[tikv]` ）内にある`StreamAgg_9`演算子内でも完了します。 TiKVコプロセッサーは、いくつかのMySQL組み込み関数を実行でき、そのうちの`count`つがその1つです。
 4.  `StreamAgg_9`の結果は、TiDBサーバー内にある`TableReader_21`オペレーターに送信されます（ `root`のタスク）。この演算子の`estRows`列の値は`1`です。これは、演算子がアクセスされる各TiKV領域から1行を受け取ることを意味します。これらのリクエストの詳細については、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 5.  次に、 `StreamAgg_20`演算子は、 `└─TableReader_21`演算子の各行に`count`関数を適用します。これは、 [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)から見ることができ、約56行になります。これはルート演算子であるため、結果をクライアントに返します。
 
@@ -116,7 +126,7 @@ SHOW STATS_HEALTHY;
 
 -   TiDB（ `StreamAgg_20` ）とTiKV（ `└─StreamAgg_9` ）の両方で行数を集計するには、ストリーム集計を使用します。これは、メモリ使用量が非常に効率的です。
 
-現在の実行プランの最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`がすぐには適用されないことです。すべての行は最初に`TableFullScan`演算子で読み取られ、次に選択が適用されます。 `SHOW CREATE TABLE trips`の出力から原因を見つけることができます：
+現在の実行プランの最大の問題は、述語`start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59'`がすぐには適用されないことです。すべての行は最初に`TableFullScan`演算子で読み取られ、その後選択が適用されます。 `SHOW CREATE TABLE trips`の出力から原因を見つけることができます：
 
 {{< copyable "" >}}
 

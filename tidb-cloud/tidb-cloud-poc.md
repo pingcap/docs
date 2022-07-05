@@ -11,7 +11,7 @@ TiDB Cloudは、フルマネージドクラウドデータベースでTiDBの優
 
 このドキュメントでは、一般的なPoC手順について説明し、 TiDB CloudPoCをすばやく完了するのに役立つことを目的としています。これは、TiDBの専門家と大規模な顧客ベースによって検証されたベストプラクティスです。
 
-PoCの実行に興味がある場合は、開始する前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>に連絡してください。サポートチームは、テストプランの作成を支援し、PoC手順をスムーズにガイドします。
+PoCの実行に興味がある場合は、開始する前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>に連絡してください。サポートチームは、テストプランの作成を支援し、PoC手順をスムーズに進めることができます。
 
 または、 [開発者層を作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) （1年間の無料トライアル）してTiDB Cloudに慣れ、簡単に評価することもできます。開発者層には[特別利用規約](/tidb-cloud/select-cluster-tier.md#developer-tier-special-terms-and-conditions)あることに注意してください。
 
@@ -54,13 +54,13 @@ TiDB Cloudは、高可用性と大量のデータとの強力な一貫性を必�
 -   リアルタイムHTAP
 -   MySQL5.7プロトコルおよびMySQLエコシステムと互換性があります
 
-また、分析処理の高速化に役立つ列型ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>ベータ</sup>の使用にも興味があるかもしれません。 PoC中は、いつでもTiFlash<sup>ベータ</sup>機能を使用できます。
+また、分析処理の高速化に役立つ列型ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)の使用にも興味があるかもしれません。 PoC中は、いつでもTiFlash機能を使用できます。
 
 ## ステップ3.サインアップして、PoC専用のクラスタを作成します {#step-3-sign-up-and-create-a-dedicated-cluster-for-the-poc}
 
 PoC専用のクラスタを作成するには、次の手順を実行します。
 
-1.  次のいずれかを実行して、PoCアプリケーションフォームに入力します。
+1.  次のいずれかを実行して、PoC申請フォームに記入します。
 
     -   すでに[開発者層を作成しました](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)つ（1年間の無料トライアル）をお持ちの場合は、PoCアプリケーションの送信に関するプロンプトバーがTiDB Cloudコンソールに表示されます。バーのPoCアプリケーションリンクをクリックして、PoCアプリケーションフォームに入力できます。
     -   開発者層をまだ作成していない場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページに移動してPoCアプリケーションフォームに記入してください。
@@ -69,10 +69,10 @@ PoC専用のクラスタを作成するには、次の手順を実行します�
 
 2.  PoCの[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタを作成するには、 [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)を参照してください。
 
-クラスタを作成する前に、クラスタのサイズ設定に容量計画を立てることをお勧めします。 TiDB、TiKV、またはTiFlash<sup>ベータ</sup>ノードの推定数から始めて、パフォーマンス要件を満たすために後でクラスタをスケールアウトすることができます。詳細については、次のドキュメントを参照するか、サポートチームにご相談ください。
+クラスタを作成する前に、クラスタのサイズ設定に容量計画を立てることをお勧めします。 TiDB、TiKV、またはTiFlashノードの推定数から始めて、後でクラスタをスケールアウトしてパフォーマンス要件を満たすことができます。詳細については、次のドキュメントを参照するか、サポートチームにご相談ください。
 
 -   推定方法の詳細については、 [TiDBのサイズを設定する](/tidb-cloud/size-your-cluster.md)を参照してください。
--   専用クラスタの構成については、 [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。 TiDB、TiKV、およびTiFlash<sup>ベータ</sup>（オプション）のクラスタサイズをそれぞれ構成します。
+-   専用クラスタの構成については、 [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。 TiDB、TiKV、およびTiFlash（オプション）のクラスタサイズをそれぞれ構成します。
 -   PoCトライアルポイントの消費を効果的に計画および最適化する方法については、このドキュメントの[FAQ](#faq)を参照してください。
 -   スケーリングの詳細については、 [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
@@ -116,7 +116,7 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 
 さまざまな形式のデータをTiDB Cloudにインポートできます。
 
--   [TiDBDumpling形式でサンプルデータをインポートする](/tidb-cloud/import-sample-data.md)
+-   [サンプルデータをTiDBDumpling形式でインポートする](/tidb-cloud/import-sample-data.md)
 -   [Auroraから移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 -   [AmazonS3またはGCSからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
 -   [ApacheParquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)
@@ -134,7 +134,7 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 
 ワークロードを開始した後、次の方法を使用してシステムを監視できます。
 
--   クラスターの一般的に使用されるメトリックは、クラスタの概要ページにありクラスタ。これには、合計QPS、レイテンシー、接続、TiFlash<sup>ベータ</sup>リクエストQPS、TiFlash<sup>ベータ</sup>リクエスト期間、TiFlash<sup>ベータ</sup>ストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKVが含まれます。 IO読み取り、およびTiKVIO書き込み。 [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
+-   クラスターの一般的に使用されるメトリックは、クラスタの概要ページにありクラスタ。これには、合計QPS、レイテンシー、接続、TiFlash要求QPS、TiFlash要求期間、TiFlashストレージサイズ、TiKVストレージサイズ、TiDB CPU、TiKV CPU、TiKV IO読み取り、およびTiKVIO書き込み。 [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照してください。
 -   **[診断]&gt;[ステートメント]**に移動します。ここで、SQLの実行を監視し、システムテーブルにクエリを実行せずにパフォーマンスの問題を簡単に見つけることができます。 [ステートメント分析](/tidb-cloud/tune-performance.md)を参照してください。
 -   **[診断]&gt;[キービジュア**ライザー]に移動します。ここで、TiDBデータアクセスパターンとデータホットスポットを表示できます。 [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)を参照してください。
 -   これらのメトリックを独自のDatadogおよびPrometheusに統合することもできます。 [サードパーティの統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を参照してください。
@@ -163,7 +163,7 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
     -   **[診断]&gt;[ステートメント]**ページでSQL実行プランを確認します。
     -   **[ダッシュボード]&gt;[キービジュアライザー]**ページでホットスポットの問題を確認します。
     -   **[概要]&gt;[容量メトリック**]ページで、TiDBクラスタの容量が不足していないかどうかを監視します。
-    -   TiFlash<sup>ベータ</sup>機能を使用して、分析処理を最適化します。 [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)を参照してください。
+    -   TiFlash機能を使用して、分析処理を最適化します。 [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)を参照してください。
 
 ## ステップ7.その他の機能を調べる {#step-7-explore-more-features}
 

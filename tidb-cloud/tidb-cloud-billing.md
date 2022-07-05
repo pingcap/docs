@@ -22,15 +22,15 @@ TiDB Cloudは、消費するリソースに応じて課金されます。これ�
 
 TiDB Cloudを使用すると、データベースクラスタのコンピューティングリソースの料金を時間単位で支払うことができます。これは、動的なワークロードに最適です。
 
-TiDB Cloudでは、TiDB、TiKV、TiFlash<sup>ベータ版</sup>のノード数とvCPUサイズを指定することで、クラスタサイズを簡単に制御できます。
+TiDB Cloudでは、TiDB、TiKV、TiFlashのノード数とノードサイズを指定することで、クラスタサイズを簡単に制御できます。
 
 指定されたノード数と関連するvCPUによって、1時間あたりの計算コストが決まります。
 
-TiDB、TiKV、およびTiFlash<sup>ベータ</sup>ノードの計算コストは、クラウドプロバイダーや地域によって異なる場合があることに注意してください。詳細については、 [TiDB Cloudの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
+TiDB、TiKV、およびTiFlashノードの計算コストは、クラウドプロバイダーや地域によって異なる場合があることに注意してください。詳細については、 [TiDB Cloudの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 
 ## ストレージコスト {#storage-cost}
 
-TiKVとTiFlashの両方の<sup>ベータ</sup>ノードは、データを永続ブロックストレージに保存します。ストレージコストは、クラスタのすべてのTiKVおよびTiFlash<sup>ベータ</sup>ノードが消費するストレージの総量に応じて生成されます。
+TiKVノードとTiFlashノードはどちらも、データを永続ブロックストレージに保存します。ストレージコストは、クラスタのすべてのTiKVノードとTiFlashノードが消費するストレージの総量に応じて生成されます。
 
 TiDB Cloudは、発生した費用を顧客に転嫁します。詳細については、 [TiDB Cloudの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 
@@ -60,7 +60,7 @@ AWSとGCPはどちらも、データがクラウド内を移動したりクラ�
 
 TiDB Cloudは、これらの料金を発生時に顧客に渡します。これは、公開されている[AWS](https://aws.amazon.com/ec2/pricing/on-demand/)および[GCP](https://cloud.google.com/vpc/network-pricing)の価格表を使用して計算され、追加料金は発生しません。
 
-このコストポリシーは、クラスターのライセンス方法に関係なく、 [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)つのクラスターを持つすべてのTiDB Cloudのお客様に適用されます。
+このコストポリシーは、クラスターのライセンス方法に関係なく、クラスターが[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)つあるすべてのTiDB Cloudのお客様に適用されます。
 
 これらの料金を表示しやすくするために、 TiDB Cloudの請求書と請求書は、すべてのデータ転送料金を次のカテゴリに集約して整理します。
 
@@ -100,7 +100,7 @@ TiDB Cloudは、これらの料金を発生時に顧客に渡します。これ�
 
 > **ノート：**
 >
-> 遅延やその他の理由により、当月の請求の詳細は参照用であり、正確であるとは限りません。 TiDB Cloudは、過去の請求の正確性を保証するため、原価計算を実行したり、他のニーズを満たすことができます。
+> 遅延やその他の理由により、当月の請求の詳細は参照用であり、正確であるとは限りません。 TiDB Cloudは、過去の請求書の正確性を保証するため、原価計算を実行したり、他のニーズを満たすことができます。
 
 請求の詳細を表示するには、次の手順を実行します。
 

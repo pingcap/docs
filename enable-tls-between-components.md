@@ -22,7 +22,17 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
     `openssl`などのツールを使用して、自己署名証明`cfssl`を生成でき`easy-rsa` 。
 
+    <CustomContent platform="tidb">
+
     `openssl`を選択すると、 [自己署名証明書の生成](/generate-self-signed-certificates.md)を参照できます。
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
+    `openssl`を選択すると、 [自己署名証明書の生成](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)を参照できます。
+
+    </CustomContent>
 
 2.  証明書を構成します。
 
@@ -199,7 +209,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
 ### 証明書をリロードします {#reload-certificates}
 
-証明書とキーをリロードするために、TiDB、PD、TiKV、およびすべての種類のクライアントは、新しい接続が作成されるたびに、現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
+証明書とキーを再ロードするために、TiDB、PD、TiKV、およびすべての種類のクライアントは、新しい接続が作成されるたびに、現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
 
 ## も参照してください {#see-also}
 

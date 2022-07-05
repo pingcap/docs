@@ -7,11 +7,25 @@ aliases: ['/tidbcloud/glossary']
 
 # TiDB Cloud用語集 {#tidb-cloud-glossary}
 
+## A {#a}
+
+### 酸 {#acid}
+
+ACIDは、トランザクションの4つの主要なプロパティである、アトミック性、一貫性、分離、および耐久性を指します。これらの各プロパティについて、以下で説明します。
+
+-   **原子性**とは、操作のすべての変更が実行されるか、実行されないことを意味します。 TiDBは、トランザクションの原子性を実現するために、主キーを格納する[TiDBリージョン](#region)の原子性を保証します。
+
+-   **一貫性**とは、トランザクションが常にデータベースをある一貫性のある状態から別の状態に移行することを意味します。 TiDBでは、メモリにデータを書き込む前にデータの整合性が確保されます。
+
+-   **分離**とは、処理中のトランザクションが完了するまで他のトランザクションから見えないことを意味します。これにより、同時トランザクションは一貫性を犠牲にすることなくデータの読み取りと書き込みを行うことができます。 TiDBは現在、分離レベル`REPEATABLE READ`をサポートしています。
+
+-   **耐久性**とは、トランザクションがコミットされると、システム障害が発生した場合でもコミットされたままになることを意味します。 TiKVは永続ストレージを使用して耐久性を確保します。
+
 ## C {#c}
 
 ### クラスタ層 {#cluster-tier}
 
-クラスタの機能と容量を決定します。クラスタ層が異なれば、クラスタ内のTiDB、TiKV、およびTiFlash<sup>ベータ</sup>ノードの数も異なります。
+クラスタの機能と容量を決定します。クラスタ層が異なれば、クラスタ内のTiDB、TiKV、およびTiFlashノードの数も異なります。
 
 ## M {#m}
 
@@ -23,7 +37,7 @@ aliases: ['/tidbcloud/glossary']
 
 ### ノード {#node}
 
-データインスタンス（TiKV）またはコンピューティングインスタンス（TiDB）または分析インスタンス（TiFlash<sup>ベータ</sup>）のいずれかを指します。
+データインスタンス（TiKV）またはコンピューティングインスタンス（TiDB）または分析インスタンス（TiFlash）のいずれかを指します。
 
 ## O {#o}
 
@@ -39,7 +53,7 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 ### ポリシー {#policy}
 
-特定のアクションやリソースへのアクセスなど、役割、ユーザー、または組織に適用されるアクセス許可を定義するドキュメント。
+特定のアクションやリソースへのアクセスなど、役割、ユーザー、または組織に適用される権限を定義するドキュメント。
 
 ### 事業 {#project}
 
@@ -59,7 +73,7 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 -   TiDB Cloudリージョン
 
-    同じ地理的領域に配置された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
+    同じ地理的領域に展開された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
 
 -   TiDBリージョン
 
@@ -73,13 +87,13 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 ### TiDBクラスタ {#tidb-cluster}
 
-機能的な作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) （ [配置ドライバー](https://docs.pingcap.com/tidb/stable/tidb-scheduling) ）、および[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)の<sup>ベータ</sup>ノードの[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 。
+機能する作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) （ [配置ドライバー](https://docs.pingcap.com/tidb/stable/tidb-scheduling) ）、および[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)ノードの[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 。
 
 ### TiDBノード {#tidb-node}
 
 トランザクションストアまたは分析ストアから返されたクエリからのデータを集約するコンピューティングノード。 TiDBノードの数を増やすと、クラスタが処理できる同時クエリの数が増えます。
 
-### TiFlash<sup>ベータ</sup>ノード {#tiflash-sup-beta-sup-node}
+### TiFlashノード {#tiflash-node}
 
 TiKVからのデータをリアルタイムで複製し、リアルタイムの分析ワークロードをサポートする分析ストレージノード。
 

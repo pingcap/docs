@@ -7,7 +7,7 @@ summary: Learn the architecture and key features of TiFlash.
 
 [TiFlash](https://github.com/pingcap/tiflash)は、TiDBを本質的にハイブリッドトランザクション/分析処理（HTAP）データベースにする重要なコンポーネントです。 TiKVの列型ストレージ拡張として、TiFlashは優れた分離レベルと強力な一貫性の保証の両方を提供します。
 
-TiFlashでは、列レプリカはRaftLearnerコンセンサスアルゴリズムに従って非同期に複製されます。これらのレプリカが読み取られると、スナップショット分離レベルの整合性は、Raftインデックスとマルチバージョン同時実行制御（MVCC）を検証することによって達成されます。
+TiFlashでは、柱状レプリカはRaftLearnerコンセンサスアルゴリズムに従って非同期に複製されます。これらのレプリカが読み取られると、スナップショット分離レベルの整合性は、Raftインデックスとマルチバージョン同時実行制御（MVCC）を検証することによって達成されます。
 
 ## 建築 {#architecture}
 
@@ -21,9 +21,21 @@ TiFlashは、TiKVでの書き込みをブロックしない低コストで、TiK
 
 TiFlashはTiDBとTiSparkの両方と互換性があり、これら2つのコンピューティングエンジンから自由に選択できます。
 
-ワークロードを確実に分離するために、TiKVとは異なるノードにTiFlashをデプロイすることをお勧めします。ビジネスの分離が必要ない場合は、TiFlashとTiKVを同じノードに展開することもできます。
+ワークロードを確実に分離するために、TiKVとは異なるノードにTiFlashを展開することをお勧めします。ビジネスの分離が必要ない場合は、TiFlashとTiKVを同じノードに展開することもできます。
 
-現在、TiFlashに直接データを書き込むことはできません。学習者の役割としてTiDBクラスタに接続するため、TiKVでデータを書き込んでから、それをTiFlashに複製する必要があります。 TiFlashは、テーブル単位でのデータレプリケーションをサポートしていますが、展開後、デフォルトではデータはレプリケートされません。指定されたテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables)を参照してください。
+現在、TiFlashに直接データを書き込むことはできません。学習者の役割としてTiDBクラスタに接続するため、TiKVでデータを書き込んでから、それをTiFlashに複製する必要があります。 TiFlashは、テーブル単位でのデータレプリケーションをサポートしていますが、展開後、デフォルトではデータはレプリケートされません。
+
+<CustomContent platform="tidb">
+
+指定されたテーブルのデータを複製するには、 [テーブルのTiFlashレプリカを作成する](/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+指定されたテーブルのデータを複製するには、 [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)を参照してください。
+
+</CustomContent>
 
 TiFlashには、列型ストレージモジュール、 `tiflash proxy` 、および`pd buddy`の3つのコンポーネントがあります。 `tiflash proxy`は、マルチラフトコンセンサスアルゴリズムを使用した通信を担当します。 `pd buddy`はPDと連携して、テーブル単位でTiKVからTiFlashにデータを複製します。
 
@@ -66,9 +78,23 @@ TiFlashは、次の2つの方法でTiDBのコンピューティングを高速�
 -   列指向ストレージエンジンは、読み取り操作の実行においてより効率的です。
 -   TiFlashは、TiDBのコンピューティングワークロードの一部を共有します。
 
-TiFlashは、TiKVコプロセッサーと同じ方法でコンピューティングワークロードを共有します。TiDBは、ストレージレイヤーで完了できるコンピューティングをプッシュダウンします。コンピューティングをプッシュダウンできるかどうかは、TiFlashのサポートに依存します。詳細については、 [サポートされているプッシュダウン計算](/tiflash/use-tiflash.md#supported-push-down-calculations)を参照してください。
+TiFlashは、TiKVコプロセッサーと同じ方法でコンピューティングワークロードを共有します。TiDBは、ストレージレイヤーで完了できるコンピューティングをプッシュダウンします。コンピューティングをプッシュダウンできるかどうかは、TiFlashのサポートに依存します。
+
+<CustomContent platform="tidb">
+
+詳細については、 [サポートされているプッシュダウン計算](/tiflash/use-tiflash.md#supported-push-down-calculations)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+詳細については、 [サポートされているプッシュダウン計算](https://docs.pingcap.com/tidb/stable/use-tiflash#supported-push-down-calculations)を参照してください。
+
+</CustomContent>
 
 ## も参照してください {#see-also}
+
+<CustomContent platform="tidb">
 
 -   TiFlashノードを使用して新しいクラスタをデプロイするには、 [TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 -   デプロイされたクラスタにTiFlashノードを追加するには、 [TiFlashクラスタをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster)を参照してください。
@@ -79,3 +105,12 @@ TiFlashは、TiKVコプロセッサーと同じ方法でコンピューティン
 -   [TiFlashクラスタを監視する](/tiflash/monitor-tiflash.md) 。
 -   学ぶ[TiFlashアラートルール](/tiflash/tiflash-alert-rules.md) 。
 -   [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md) 。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)
+-   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
+
+</CustomContent>

@@ -13,7 +13,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 ## 手順1.TiDBクラスタを作成する {#step-1-create-a-tidb-cluster}
 
-無料の[開発者層（開発層）](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスタまたは[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターを作成できます。
+無料の[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスタまたは[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスターを作成できます。
 
 <SimpleTab>
 <div label="Developer Tier">
@@ -29,13 +29,13 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 3.  プランの選択ページで、**開発者層**プランの[<strong>無料で開始</strong>]をクリックします。
 
-4.  [**クラスターの作成（開発層）]**ページで、必要に応じてデフォルトのクラスタ名を更新してから、クラスタを作成するリージョンを選択します。
+4.  [**クラスターの作成（開発者層）]**ページで、必要に応じてデフォルトのクラスタ名を更新してから、クラスタを作成するリージョンを選択します。
 
 5.  [**作成]**をクリックします。
 
     クラスタ作成プロセスが開始され、[**セキュリティクイックスタート**]ダイアログボックスが表示されます。
 
-6.  [**セキュリティクイックスタート**]ダイアログボックスで、ルートパスワードと許可されたIPアドレスをクラスタに接続するように設定し、[<strong>適用</strong>]をクリックします。
+6.  [**セキュリティクイックスタート**]ダイアログボックスで、ルートパスワードとクラスタへの接続を許可するIPアドレスを設定し、[<strong>適用</strong>]をクリックします。
 
     TiDB Cloudクラスタは約5〜15分で作成されます。
 
@@ -57,7 +57,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
     > **ノート：**
     >
-    > 最初にTiDB Cloud Tierの14日間の無料試用版を入手したい場合は、 [TiDB Cloudで概念実証（PoC）を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+    > 最初にTiDB Cloud Tierの14日間の無料トライアルを取得する場合は、 [TiDB Cloudで概念実証（PoC）を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
 
 4.  [**クラスターの作成**]ページで、必要に応じてデフォルトのクラスタ名とポート番号を更新し、クラウドプロバイダーとリージョンを選択して、[<strong>次へ</strong>]をクリックします。
 
@@ -67,7 +67,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
     >
     > プロジェクトCIDRを設定するときは、アプリケーションが配置されているVPCのCIDRとの競合を回避してください。プロジェクトのCIDRは、一度設定すると変更できません。
 
-6.  TiDB、TiKV、およびTiFlash<sup>ベータ</sup>（オプション）にそれぞれ[クラスタサイズ](/tidb-cloud/size-your-cluster.md)を構成し、[**次へ**]をクリックします。
+6.  TiDB、TiKV、およびTiFlash（オプション）にそれぞれ[クラスタサイズ](/tidb-cloud/size-your-cluster.md)を構成し、[**次へ**]をクリックします。
 
 7.  中央の領域でクラスタ情報を確認し、右側のペインで請求情報も確認します。
 
@@ -77,7 +77,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
     クラスタ作成プロセスが開始され、[**セキュリティクイックスタート**]ダイアログボックスが表示されます。
 
-10. [**セキュリティクイックスタート**]ダイアログボックスで、ルートパスワードと許可されたIPアドレスをクラスタに接続するように設定し、[<strong>適用</strong>]をクリックします。
+10. [**セキュリティクイックスタート**]ダイアログボックスで、ルートパスワードとクラスタへの接続を許可するIPアドレスを設定し、[<strong>適用</strong>]をクリックします。
 
     TiDB Cloudクラスタは約5〜15分で作成されます。
 
@@ -121,7 +121,7 @@ Capital Bikeshareのサンプルデータを提供しているため、データ
     <SimpleTab>
      <div label="AWS">
 
-    TiDBクラスタがAWSによってホストされている場合（デフォルトでは開発層はAWSによってホストされています）、次のパラメーターを入力します。
+    TiDBクラスタがAWSによってホストされている場合（開発者層はデフォルトでAWSによってホストされています）、次のパラメーターを入力します。
 
     -   **データソースタイプ**： `AWS S3` 。
     -   **バケットURL** ：サンプルデータ`s3://tidbcloud-samples/data-ingestion/`を入力します。
@@ -174,7 +174,7 @@ Capital Bikeshareのサンプルデータを提供しているため、データ
     DESCRIBE trips;
     ```
 
-3.  `trips`のテーブルにレコードがいくつ存在するかを確認します。
+3.  `trips`のテーブルに存在するレコードの数を確認します。
 
     {{< copyable "" >}}
 

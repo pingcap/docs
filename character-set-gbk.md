@@ -33,7 +33,17 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 MySQLのGBK文字セットのデフォルトの照合順序は`gbk_chinese_ci`です。 MySQLとは異なり、TiDBのGBK文字セットのデフォルトの照合順序は`gbk_bin`です。さらに、TiDBはGBKをUTF8MB4に変換してから、バイナリ照合順序を使用するため、TiDBの`gbk_bin`照合順序はMySQLの`gbk_bin`照合順序と同じではありません。
 
+<CustomContent platform="tidb">
+
 TiDBをMySQLGBK文字セットの照合と互換性を持たせるには、最初にTiDBクラスタを初期化するときに、TiDBオプション[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)から`true`を設定して[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDBをMySQLGBK文字セットの照合と互換性を持たせるために、最初にTiDBクラスタを初期化するとき、 TiDB Cloudはデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
+
+</CustomContent>
 
 照合用の新しいフレームワークを有効にした後、GBK文字セットに対応する照合を確認すると、TiDBGBKのデフォルトの照合順序が`gbk_chinese_ci`に変更されていることがわかります。
 

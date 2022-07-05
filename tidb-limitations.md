@@ -43,14 +43,24 @@ summary: Learn the usage limitations of TiDB.
 | サイズ     | 無制限                         |
 | パーティション | 8192                        |
 
+<CustomContent platform="tidb">
+
 -   `Columns`の上限は[`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50)を介して変更できます。
 -   `Indexes`の上限は[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)を介して変更できます。
 
+</CustomContent>
+
 ## 単一行の制限 {#limitation-on-a-single-row}
 
-| タイプ | 上限                                                                                                                      |
-| :-- | :---------------------------------------------------------------------------------------------------------------------- |
-| サイズ | デフォルトでは6MB。サイズ制限は、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成アイテムで調整できます。 |
+| タイプ | 上限   |
+| :-- | :--- |
+| サイズ | 6 MB |
+
+<CustomContent platform="tidb">
+
+サイズ制限は、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成項目で調整できます。
+
+</CustomContent>
 
 ## 単一列の制限 {#limitation-on-a-single-column}
 
@@ -71,6 +81,12 @@ summary: Learn the usage limitations of TiDB.
 
 ## SQLステートメントの制限 {#limitations-on-sql-statements}
 
-| タイプ                         | 上限                                                                                                                                               |
-| :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1回のトランザクションでのSQLステートメントの最大数 | オプティミスティックトランザクションが使用され、トランザクションの再試行が有効になっている場合、デフォルトの上限は5000であり、 [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)を使用して変更できます。 |
+| タイプ                         | 上限                                                         |
+| :-------------------------- | :--------------------------------------------------------- |
+| 1回のトランザクションでのSQLステートメントの最大数 | オプティミスティックトランザクションが使用され、トランザクションの再試行が有効になっている場合、上限は5000です。 |
+
+<CustomContent platform="tidb">
+
+[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)の構成アイテムを使用して制限を変更できます。
+
+</CustomContent>

@@ -5,7 +5,13 @@ summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema table.
 
 # TIDB_HOT_REGIONS_HISTORY {#tidb-hot-regions-history}
 
-`TIDB_HOT_REGIONS_HISTORY`の表は、PDによってローカルに定期的に記録される履歴ホットリージョンに関する情報を提供します。 [`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を設定することにより、レコード間隔を指定できます。デフォルト値は10分です。 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540)を設定することにより、ホットリージョンに関する履歴情報を予約する期間を指定できます。デフォルト値は7日です。詳細については、 [PD構成ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
+`TIDB_HOT_REGIONS_HISTORY`の表は、PDによってローカルに定期的に記録される履歴ホットリージョンに関する情報を提供します。
+
+<CustomContent platform="tidb">
+
+[`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を設定することにより、レコード間隔を指定できます。デフォルト値は10分です。 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540)を設定することにより、ホットリージョンに関する履歴情報を予約する期間を指定できます。デフォルト値は7日です。詳細については、 [PD構成ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
+
+</CustomContent>
 
 {{< copyable "" >}}
 

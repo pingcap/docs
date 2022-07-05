@@ -13,9 +13,9 @@ SQLの配置ルールは、SQLインターフェイスを使用してTiKVクラ�
 
 詳細なユーザーシナリオは次のとおりです。
 
--   異なるアプリケーションの複数のデータベースをマージして、データベースの保守コストを削減します
+-   異なるアプリケーションの複数のデータベースをマージして、データベースのメンテナンスのコストを削減します
 -   重要なデータのレプリカ数を増やして、アプリケーションの可用性とデータの信頼性を向上させます
--   新しいデータをSSDに保存し、古いデータをHHDに保存して、データのアーカイブとストレージのコストを削減します
+-   新しいデータをNVMeストレージに保存し、古いデータをSSDに保存して、データのアーカイブとストレージのコストを削減します
 -   ホットスポットデータのリーダーを高性能TiKVインスタンスにスケジュールする
 -   コールドデータを低コストのストレージメディアに分離して、コスト効率を向上させます
 
@@ -35,7 +35,7 @@ CREATE TABLE t2 (a INT) PLACEMENT POLICY=eastandwest;
 
 直接配置オプションを使用する場合は、各オブジェクト（テーブルやパーティションなど）のルールを変更する必要があります。
 
-`PLACEMENT POLICY`はどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるために、 `CREATE TABLE`の特権に追加の特権は必要ありません。
+`PLACEMENT POLICY`はどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるために、 `CREATE TABLE`の特権に対する追加の特権は必要ありません。
 
 ## オプションリファレンス {#option-reference}
 
@@ -101,7 +101,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 >
 > 次の例では、現在TiDBの実験的機能であるリストパーティショニングを使用しています。パーティション化されたテーブルでは、テーブルのパーティション化関数のすべての列に`PRIMARY KEY`が含まれている必要もあります。
 
-テーブルに配置オプションを割り当てるだけでなく、テーブルパーティションにオプションを割り当てることもできます。例えば：
+テーブルに配置オプションを割り当てることに加えて、テーブルパーティションにオプションを割り当てることもできます。例えば：
 
 ```sql
 CREATE PLACEMENT POLICY europe PRIMARY_REGION="eu-central-1" REGIONS="eu-central-1,eu-west-1";
@@ -144,30 +144,30 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default FOLLOWERS=2 opt
 たとえば、データがラベル`disk`が値と一致する必要があるTiKVストアに存在する必要があるという制約を設定するには、次のようにします。
 
 ```sql
-CREATE PLACEMENT POLICY storeonfastssd CONSTRAINTS="[+disk=ssd]";
-CREATE PLACEMENT POLICY storeonhdd CONSTRAINTS="[+disk=hdd]";
+CREATE PLACEMENT POLICY storageonnvme CONSTRAINTS="[+disk=nvme]";
+CREATE PLACEMENT POLICY storageonssd CONSTRAINTS="[+disk=ssd]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
 PLACEMENT POLICY=companystandardpolicy
 PARTITION BY RANGE( YEAR(purchased) ) (
-  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storeonhdd,
+  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storageonssd,
   PARTITION p1 VALUES LESS THAN (2005),
   PARTITION p2 VALUES LESS THAN (2010),
   PARTITION p3 VALUES LESS THAN (2015),
-  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storeonfastssd
+  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storageonnvme
 );
 ```
 
-制約は、リスト形式（ `[+disk=ssd]` ）またはディクショナリ形式（ `{+disk=ssd: 1,+disk=hdd: 2}` ）のいずれかで指定できます。
+制約は、リスト形式（ `[+disk=ssd]` ）またはディクショナリ形式（ `{+disk=ssd: 1,+disk=nvme: 2}` ）のいずれかで指定できます。
 
-リスト形式では、制約はキーと値のペアのリストとして指定されます。キーは`+`または`-`で始まります。 `+disk=ssd`は、ラベル`disk`を`ssd`に設定する必要があることを示し、 `-disk=hdd`は、ラベル`disk`を`hdd`に設定してはならないことを示します。
+リスト形式では、制約はキーと値のペアのリストとして指定されます。キーは`+`または`-`で始まります。 `+disk=ssd`は、ラベル`disk`を`ssd`に設定する必要があることを示し、 `-disk=nvme`は、ラベル`disk`を`nvme`に設定してはならないことを示します。
 
-ディクショナリ形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1,+any: 1}";`は、1人のフォロワーがus-east-1にいること、1人のフォロワーがus-east-2にいること、1人のフォロワーがus-west-1にいること、1人のフォロワーが任意の地域にいることを示します。別の例では、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=hdd":1,"+region=us-west-1":1}';`は、1人のフォロワーがhddディスクを使用してus-east-1にあり、1人のフォロワーがus-west-1にいることを示します。
+ディクショナリ形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1,+any: 1}";`は、1人のフォロワーがus-east-1にいること、1人のフォロワーがus-east-2にいること、1人のフォロワーがus-west-1にいること、1人のフォロワーが任意の地域にいることを示します。別の例では、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';`は、1人のフォロワーがnvmeディスクを使用してus-east-1にあり、1人のフォロワーがus-west-1にいることを示します。
 
 > **ノート：**
 >
-> 辞書とリストの形式はYAMLパーサーに基づいていますが、YAML構文が正しく解析されていない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=hdd:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=hdd: 1}"`は`'{"+disk=ssd": 1, "+disk=hdd": 1}'`として正しく解析されます。
+> 辞書とリストの形式はYAMLパーサーに基づいていますが、YAML構文が正しく解析されていない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
 
 ## 既知の制限 {#known-limitations}
 

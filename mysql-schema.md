@@ -33,4 +33,9 @@ summary: Learn about the TiDB system tables.
 ## その他のシステムテーブル {#miscellaneous-system-tables}
 
 -   `GLOBAL_VARIABLES` ：グローバルシステム変数テーブル
+
+<CustomContent platform="tidb">
+
 -   `tidb` ：TiDB実行時のバージョン情報を記録します`bootstrap`
+
+</CustomContent>

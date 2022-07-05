@@ -29,19 +29,19 @@ TiDBは統計を使用して[どのインデックスを選択するか](/choose
 
 これらの2つのバージョンには、TiDBに異なる情報が含まれています。
 
-| 情報                | バージョン1                            | バージョン2                                                |
-| ----------------- | --------------------------------- | ----------------------------------------------------- |
-| テーブルの行の総数         | √                                 | √                                                     |
-| 列数-最小スケッチ         | √                                 | ××                                                    |
-| インデックスカウント-最小スケッチ | √                                 | ××                                                    |
-| 列Top-N            | √                                 | √（メンテナンス方法と精度が向上）                                     |
-| インデックストップ-N       | √（メンテナンス精度が不十分な場合、不正確になる可能性があります） | √（メンテナンス方法と精度が向上）                                     |
-| 列ヒストグラム           | √                                 | √（ヒストグラムにはTop-N値は含まれていません。）                           |
-| インデックスヒストグラム      | √                                 | √（ヒストグラムバケットは各バケットの異なる値の数を記録し、ヒストグラムにはTop-N値は含まれません。） |
-| 列の`NULL`の数        | √                                 | √                                                     |
-| インデックス内の`NULL`の数  | √                                 | √                                                     |
-| 列の平均の長さ           | √                                 | √                                                     |
-| インデックスの平均の長さ      | √                                 | √                                                     |
+| 情報                | バージョン1                            | バージョン2                                              |
+| ----------------- | --------------------------------- | --------------------------------------------------- |
+| テーブルの行の総数         | √                                 | √                                                   |
+| 列数-最小スケッチ         | √                                 | ××                                                  |
+| インデックスカウント-最小スケッチ | √                                 | ××                                                  |
+| 列Top-N            | √                                 | √（メンテナンス方法と精度が向上）                                   |
+| インデックストップ-N       | √（メンテナンス精度が不十分な場合、不正確になる可能性があります） | √（メンテナンス方法と精度が向上）                                   |
+| 列ヒストグラム           | √                                 | √（ヒストグラムにはTop-N値は含まれていません。）                         |
+| インデックスヒストグラム      | √                                 | √（ヒストグラムバケットは各バケットの異なる値の数を記録し、ヒストグラムには上位N値は含まれません。） |
+| 列の`NULL`の数        | √                                 | √                                                   |
+| インデックス内の`NULL`の数  | √                                 | √                                                   |
+| 列の平均の長さ           | √                                 | √                                                   |
+| インデックスの平均の長さ      | √                                 | √                                                   |
 
 バージョン1と比較して、バージョン2の統計は、データ量が膨大な場合にハッシュの衝突によって引き起こされる潜在的な不正確さを回避します。また、ほとんどのシナリオで推定精度を維持します。
 
@@ -61,7 +61,7 @@ TiDBは統計を使用して[どのインデックスを選択するか](/choose
 
 Count-MinSketchはハッシュ構造です。等価クエリに`a = 1`つまたは`IN`のクエリ（たとえば、 `a in (1, 2, 3)` ）が含まれている場合、TiDBはこのデータ構造を使用して推定します。
 
-Count-Min Sketchはハッシュ構造であるため、ハッシュの衝突が発生する可能性があります。 `EXPLAIN`ステートメントでは、同等のクエリの推定値が実際の値から大幅に逸脱している場合、大きい値と小さい値が一緒にハッシュされていると見なすことができます。この場合、ハッシュの衝突を回避するために次のいずれかの方法をとることができます。
+Count-Min Sketchはハッシュ構造であるため、ハッシュの衝突が発生する可能性があります。 `EXPLAIN`ステートメントでは、同等のクエリの推定値が実際の値から大きく外れている場合、大きい値と小さい値が一緒にハッシュされていると見なすことができます。この場合、ハッシュの衝突を回避するために次のいずれかの方法をとることができます。
 
 -   `WITH NUM TOPN`パラメーターを変更します。 TiDBは、高周波（top x）データを個別に保存し、他のデータはCount-MinSketchに保存します。したがって、大きい値と小さい値が一緒にハッシュされるのを防ぐために、 `WITH NUM TOPN`の値を増やすことができます。 TiDBでは、デフォルト値は20です。最大値は1024です。このパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
 -   2つのパラメータ`WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`を変更します。どちらもハッシュバケットの数と衝突確率に影響します。実際のシナリオに従って2つのパラメーターの値を適切に増やして、ハッシュの衝突の可能性を減らすことができますが、統計のメモリ使用量が高くなります。 TiDBでは、デフォルト値の`WITH NUM CMSKETCH DEPTH`は5で、デフォルト値の`WITH NUM CMSKETCH WIDTH`は2048です。2つのパラメーターの詳細については、 [フルコレクション](#full-collection)を参照してください。
@@ -121,7 +121,7 @@ v5.3.0より前では、TiDBはリザーバーサンプリング方式を使用�
 >
 > 現在のサンプリングレートは、適応アルゴリズムに基づいて計算されます。 [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)を使用してテーブルの行数を確認できる場合、この行数を使用して、100,000行に対応するサンプリングレートを計算できます。この数値がわからない場合は、 [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md)表の`TABLE_KEYS`列を別の参照として使用して、サンプリングレートを計算できます。
 >
-> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼できます。ただし、 [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)などの方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況を処理するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合に、 `TABLE_KEYS`を使用してサンプリングレートを計算できます。
+> 通常、 `STATS_META`は`TABLE_KEYS`よりも信頼できます。ただし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)などの方法でデータをインポートすると、 `STATS_META`の結果は`0`になります。この状況を処理するために、 `STATS_META`の結果が`TABLE_KEYS`の結果よりもはるかに小さい場合に、 `TABLE_KEYS`を使用してサンプリングレートを計算できます。
 
 ##### 一部の列の統計を収集する {#collect-statistics-on-some-columns}
 
@@ -155,7 +155,17 @@ v5.3.0より前では、TiDBはリザーバーサンプリング方式を使用�
 
     1.  [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)システム変数の値を`ON`に設定して、TiDBが`PREDICATE COLUMNS`を収集できるようにします。
 
+        <CustomContent platform="tidb">
+
         設定後、TiDBは100* [`stats-lease`](/tidb-configuration-file.md#stats-lease)ごとに`PREDICATE COLUMNS`の情報を`mysql.column_stats_usage`のシステムテーブルに書き込みます。
+
+        </CustomContent>
+
+        <CustomContent platform="tidb-cloud">
+
+        設定後、TiDBは300秒ごとに`PREDICATE COLUMNS`の情報を`mysql.column_stats_usage`のシステムテーブルに書き込みます。
+
+        </CustomContent>
 
     2.  ビジネスのクエリパターンが比較的安定したら、次の構文を使用して`PREDICATE COLUMNS`の統計を収集します。
 
@@ -180,7 +190,7 @@ v5.3.0より前では、TiDBはリザーバーサンプリング方式を使用�
     ANALYZE TABLE TableName ALL COLUMNS [WITH NUM BUCKETS|TOPN|CMSKETCH DEPTH|CMSKETCH WIDTH]|[WITH NUM SAMPLES|WITH FLOATNUM SAMPLERATE];
     ```
 
-`ANALYZE`ステートメント（ `COLUMNS ColumnNameList` 、および`PREDICATE COLUMNS`を含む）の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ALL COLUMNS`に設定して、 `ON`機能を有効に[ANALYZE構成の永続性](#persist-analyze-configurations)ます。 ANALYZE構成永続化機能を有効にした後：
+`ANALYZE`ステートメント（ `COLUMNS ColumnNameList` 、および`PREDICATE COLUMNS`を含む）の列構成を永続化する場合は、 `tidb_persist_analyze_options`システム変数の値を`ALL COLUMNS`に設定して、 `ON`機能を使用可能に[ANALYZE構成の永続性](#persist-analyze-configurations)ます。 ANALYZE構成永続化機能を有効にした後：
 
 -   TiDBが統計を自動的に収集する場合、または列構成を指定せずに`ANALYZE`ステートメントを実行して統計を手動で収集する場合、TiDBは統計収集に以前に永続化された構成を引き続き使用します。
 -   列構成を指定して`ANALYZE`ステートメントを手動で複数回実行すると、TiDBは、最新の`ANALYZE`ステートメントで指定された新しい構成を使用して、以前に記録された永続構成を上書きします。
@@ -378,7 +388,7 @@ v5.4.0以降、TiDBはいくつかの`ANALYZE`構成の永続化をサポート�
 
 `ANALYZE`構成の永続化機能を無効にするには、 `tidb_persist_analyze_options`システム変数を`OFF`に設定します。 `ANALYZE`構成の永続化機能は`tidb_analyze_version = 1`には適用できないため、 `tidb_analyze_version = 1`を設定すると機能を無効にすることもできます。
 
-`ANALYZE`構成永続化機能を無効にした後、TiDBは永続化された構成レコードをクリアしません。したがって、この機能を再度有効にすると、TiDBは、以前に記録された永続的な構成を使用して統計を収集し続けます。
+`ANALYZE`構成の永続化機能を無効にした後、TiDBは永続化された構成レコードをクリアしません。したがって、この機能を再度有効にすると、TiDBは、以前に記録された永続的な構成を使用して統計を収集し続けます。
 
 > **ノート：**
 >
@@ -569,10 +579,18 @@ DROP STATS TableName
 
 ## 負荷統計 {#load-statistics}
 
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このセクションは、 TiDB Cloudには適用されません。
+
+</CustomContent>
+
 デフォルトでは、列統計のサイズに応じて、TiDBは次のように統計を異なる方法でロードします。
 
 -   小さなスペース（count、distinctCount、nullCountなど）を消費する統計の場合、列データが更新されている限り、TiDBは対応する統計をメモリに自動的にロードしてSQL最適化段階で使用します。
--   大きなスペースを消費する統計（ヒストグラム、TopN、Count-Min Sketchなど）の場合、SQL実行のパフォーマンスを確保するために、TiDBはオンデマンドで統計を非同期にロードします。例としてヒストグラムを取り上げます。 TiDBは、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計のロードはSQL実行のパフォーマンスに影響を与えませんが、SQL最適化の統計が不完全になる可能性があります。
+-   大きなスペースを消費する統計（ヒストグラム、TopN、Count-Min Sketchなど）の場合、SQL実行のパフォーマンスを確保するために、TiDBはオンデマンドで統計を非同期にロードします。例としてヒストグラムを取り上げます。 TiDBは、オプティマイザがその列のヒストグラム統計を使用する場合にのみ、列のヒストグラム統計をメモリにロードします。オンデマンドの非同期統計ロードはSQL実行のパフォーマンスに影響を与えませんが、SQL最適化の統計が不完全になる可能性があります。
 
 v5.4.0以降、TiDBは同期ロード統計機能を導入しています。この機能により、SQLステートメントの実行時にTiDBが大規模な統計（ヒストグラム、TopN、Count-Min Sketch統計など）をメモリに同期的にロードできるようになり、SQL最適化の統計の完全性が向上します。
 
@@ -582,13 +600,25 @@ v5.4.0以降、TiDBは同期ロード統計機能を導入しています。こ�
 
 統計の同期ロード機能はデフォルトで無効になっています。この機能を有効にするには、 [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)システム変数の値を、SQL最適化が完全な列統計を同期的にロードするために最大で待機できるタイムアウト（ミリ秒単位）に設定します。この変数のデフォルト値は`0`で、機能が無効になっていることを示します。
 
+<CustomContent platform="tidb">
+
 同期ロード統計機能を有効にした後、次のように機能をさらに構成できます。
 
 -   SQL最適化の待機時間がタイムアウトに達したときのTiDBの動作を制御するには、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`OFF`で、タイムアウト後にSQLの実行が失敗することを示します。この変数を`ON`に設定すると、タイムアウト後、SQL最適化プロセスはどの列にもヒストグラム、TopN、またはCMSketch統計を使用しませんが、疑似統計の使用に戻ります。
 -   同期ロード統計機能が同時に処理できる列の最大数を指定するには、TiDB構成ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。デフォルト値は`5`です。
 -   同期ロード統計機能がキャッシュできる列要求の最大数を指定するには、TiDB構成ファイルの[`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540)オプションの値を変更します。デフォルト値は`1000`です。
 
+</CustomContent>
+
 ## 統計のインポートとエクスポート {#import-and-export-statistics}
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このセクションは、 TiDB Cloudには適用されません。
+
+</CustomContent>
 
 ### 統計のエクスポート {#export-statistics}
 
@@ -638,5 +668,15 @@ LOAD STATS 'file_name'
 
 ## も参照してください {#see-also}
 
+<CustomContent platform="tidb">
+
 -   [統計のロード](/sql-statements/sql-statement-load-stats.md)
 -   [ドロップ統計](/sql-statements/sql-statement-drop-stats.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[SQL準備実行プランキャッシュ](/sql-prepared-plan-cache.md)
+
+</CustomContent>

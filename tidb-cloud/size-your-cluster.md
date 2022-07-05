@@ -5,25 +5,33 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # TiDBサイズを決定する {#determine-your-tidb-size}
 
-このドキュメントでは、TiDBクラスタのサイズを決定する方法について説明します。
+このドキュメントでは、専用層クラスタのサイズを決定する方法について説明します。
+
+> **ノート：**
+>
+> [開発者層クラスタ](/tidb-cloud/select-cluster-tier.md#developer-tier)には、変更できないデフォルトのクラスタサイズが付属しています。
 
 ## サイズTiDB {#size-tidb}
 
 TiDBはコンピューティング専用であり、データを保存しません。水平方向にスケーラブルです。
 
-TiDBのvCPUサイズとノード数の両方を構成できます。
+TiDBのノードサイズとノード数の両方を構成できます。
 
-### TiDBvCPUサイズ {#tidb-vcpu-size}
+### TiDBノードサイズ {#tidb-node-size}
 
-サポートされているvCPUサイズには、4つのvCPU（ベータ）、8つのvCPU、および16のvCPUが含まれます。
+サポートされているノードサイズは次のとおりです。
+
+-   4 vCPU、16 GiB（ベータ）
+-   8 vCPU、16 GiB
+-   16 vCPU、32 GiB
 
 > **ノート：**
 >
-> TiDBのvCPUサイズが**4vCPU（ベータ）**に設定されている場合は、次の制限に注意してください。
+> TiDBのノードサイズが**4vCPU、16 GiB（ベータ）**に設定されている場合は、次の制限に注意してください。
 >
 > -   TiDBのノード数は1または2にのみ設定でき、TiKVのノード数は3に固定されています。
-> -   TiDBは、4vCPUのTiKVでのみ使用できます。
-> -   TiFlash<sup>ベータ版</sup>は利用できません。
+> -   TiDBは、4つのvCPUTiKVでのみ使用できます。
+> -   TiFlashは利用できません。
 
 ### TiDBノードの数量 {#tidb-node-quantity}
 
@@ -35,19 +43,23 @@ TiDBサイズを決定する方法の詳細については、 [パフォーマ�
 
 TiKVはデータの保存を担当します。水平方向にスケーラブルです。
 
-TiKVのvCPUサイズ、ノード数、およびストレージサイズを構成できます。
+TiKVのノードサイズ、ノード数、およびストレージサイズを構成できます。
 
-### TiKVvCPUサイズ {#tikv-vcpu-size}
+### TiKVノードサイズ {#tikv-node-size}
 
-サポートされているサイズには、4 vCPU（ベータ）、8 vCPU、および16vCPUが含まれます。
+サポートされているノードサイズは次のとおりです。
+
+-   4 vCPU、16 GiB（ベータ）
+-   8 vCPU、64 GiB
+-   16 vCPU、64 GiB
 
 > **ノート：**
 >
-> TiKVのvCPUサイズが**4vCPU（ベータ）**に設定されている場合は、次の制限に注意してください。
+> TiKVのノードサイズが**4vCPU、16 GiB（ベータ）**に設定されている場合は、次の制限に注意してください。
 >
 > -   TiDBのノード数は1または2にのみ設定でき、TiKVのノード数は3に固定されています。
-> -   TiKVは、4vCPUのTiDBでのみ使用できます。
-> -   TiFlash<sup>ベータ版</sup>は利用できません。
+> -   TiKVは、4つのvCPUTiDBでのみ使用できます。
+> -   TiFlashは利用できません。
 
 ### TiKVノードの数量 {#tikv-node-quantity}
 
@@ -71,35 +83,47 @@ TiKVサイズを決定する方法の詳細については、 [パフォーマ�
 
 ### TiKVストレージサイズ {#tikv-storage-size}
 
-TiKVストレージサイズは、クラスタを作成または復元する場合にのみ構成できます。
+-   8vCPUまたは16vCPUTiKVは、最大4TiBのストレージ容量をサポートします。
+-   4 vCPU TiKVは、最大2TiBのストレージ容量をサポートします。
 
-## サイズTiFlash<sup>ベータ</sup> {#size-tiflash-sup-beta-sup}
+> **ノート：**
+>
+> クラスタの作成後にTiKVストレージサイズを減らすことはできません。
 
-TiFlash<sup>ベータ版</sup>は、TiKVからのデータをリアルタイムで同期し、箱から出してすぐにリアルタイム分析ワークロードをサポートします。水平方向にスケーラブルです。
+## サイズTiFlash {#size-tiflash}
 
-TiFlash<sup>ベータ版</sup>のvCPUサイズ、ノード数、およびストレージサイズを構成できます。
+TiFlashは、TiKVからのデータをリアルタイムで同期し、箱から出してすぐにリアルタイム分析ワークロードをサポートします。水平方向にスケーラブルです。
 
-### TiFlash<sup>ベータ</sup>vCPUサイズ {#tiflash-sup-beta-sup-vcpu-size}
+TiFlashのノードサイズ、ノード数、およびストレージサイズを構成できます。
 
-サポートされているvCPUサイズには、8個のvCPUと16個のvCPUが含まれます。
+### TiFlashノードサイズ {#tiflash-node-size}
 
-TiDBまたはTiKVのvCPUサイズが**4vCPU（ベータ）**に設定されている場合、TiFlash<sup>ベータ</sup>は使用できないことに注意してください。
+サポートされているノードサイズは次のとおりです。
 
-### TiFlash<sup>ベータ</sup>ノードの数量 {#tiflash-sup-beta-sup-node-quantity}
+-   8 vCPU、64 GiB
+-   16 vCPU、128 GiB
 
-TiDB Cloudは、TiFlash<sup>ベータ</sup>ノードをリージョン内のさまざまなアベイラビリティーゾーンに均等にデプロイします。実稼働環境で高可用性を実現するために、各TiDB Cloudクラスタに少なくとも2つのTiFlash<sup>ベータ</sup>ノードを構成し、データのレプリカを少なくとも2つ作成することをお勧めします。
+TiDBまたはTiKVのvCPUサイズが**4vCPU、16 GiB（ベータ）に**設定されている場合、TiFlashは使用できないことに注意してください。
 
-TiFlash<sup>ベータ</sup>ノードの最小数は、特定のテーブルのTiFlash<sup>ベータ</sup>レプリカ数によって異なります。
+### TiFlashノードの数量 {#tiflash-node-quantity}
 
-TiFlash<sup>ベータ</sup>ノードの最小数： `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
+TiDB Cloudは、TiFlashノードをリージョン内のさまざまなアベイラビリティーゾーンに均等にデプロイします。本番環境で高可用性を実現するには、各TiDB Cloudクラスタに少なくとも2つのTiFlashノードを構成し、データのレプリカを少なくとも2つ作成することをお勧めします。
 
-たとえば、AWSの各TiFlash<sup>ベータ</sup>ノードのストレージサイズを1024 GBに設定し、テーブルAに2つのレプリカ（圧縮サイズは800 GB）、テーブルBに1つのレプリカ（圧縮サイズは100 GB）を設定すると、その場合、必要なTiFlash<sup>ベータ</sup>ノードの数は次のとおりです。
+TiFlashノードの最小数は、特定のテーブルのTiFlashレプリカ数によって異なります。
 
-TiFlash<sup>ベータ</sup>ノードの最小数： `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+TiFlashノードの最小数： `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-### TiFlash<sup>ベータ</sup>ストレージサイズ {#tiflash-sup-beta-sup-storage-size}
+たとえば、AWS上の各TiFlashノードのストレージサイズを1024 GBに構成し、テーブルAに2つのレプリカ（圧縮サイズは800 GB）を設定し、テーブルBに1つのレプリカ（圧縮サイズは100 GB）を設定すると、必要なTiFlashノードの数は次のとおりです。
 
-クラスタを作成または復元する場合にのみ、TiFlash<sup>ベータ</sup>ストレージサイズを構成できます。
+TiFlashノードの最小数： `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+
+### TiFlashストレージサイズ {#tiflash-storage-size}
+
+TiFlashは、最大2TiBのストレージ容量をサポートします。
+
+> **ノート：**
+>
+> クラスタの作成後にTiFlashストレージサイズを減らすことはできません。
 
 ## パフォーマンスリファレンス {#performance-reference}
 

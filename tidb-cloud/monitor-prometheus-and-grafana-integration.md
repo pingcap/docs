@@ -70,15 +70,15 @@ Grafanaの使用方法の詳細については、 [Grafanaのドキュメント]
 
 Prometheusは、TiDBクラスターの次のメトリックデータを追跡します。
 
-| メトリック名                                | メトリックタイプ | ラベル                                                                                                                          | 説明                                              |
-| :------------------------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| tidbcloud_db_queries_total            | カウント     | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | 実行されたステートメントの総数                                 |
-| tidbcloud_db_failed_queries_total     | カウント     | タイプ： `planner:xxx\|executor:2345\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb` | 実行エラーの総数                                        |
-| tidbcloud_db_connections              | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`                                             | TiDBサーバーの現在の接続数                                 |
-| tidbcloud_db_query_duration_seconds   | ヒストグラム   | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | ステートメントの期間ヒストグラム                                |
-| tidbcloud_node_storage_used_bytes     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlash<sup>ベータ</sup>ノードのディスク使用量バイト        |
-| tidbcloud_node_storage_capacity_bytes | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlash<sup>ベータ</sup>ノードのディスク容量バイト         |
-| tidbcloud_node_cpu_seconds_total      | カウント     | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードのCPU使用率     |
-| tidbcloud_node_cpu_capacity_cores     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードのCPU制限コア    |
-| tidbcloud_node_memory_used_bytes      | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードの使用済みメモリバイト |
-| tidbcloud_node_memory_capacity_bytes  | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlash<sup>ベータ</sup>ノードのメモリ容量バイト   |
+| メトリック名                                | メトリックタイプ | ラベル                                                                                                                          | 説明                              |
+| :------------------------------------ | :------- | :--------------------------------------------------------------------------------------------------------------------------- | :------------------------------ |
+| tidbcloud_db_queries_total            | カウント     | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | 実行されたステートメントの総数                 |
+| tidbcloud_db_failed_queries_total     | カウント     | タイプ： `planner:xxx\|executor:2345\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb` | 実行エラーの総数                        |
+| tidbcloud_db_connections              | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`                                             | TiDBサーバーの現在の接続数                 |
+| tidbcloud_db_query_duration_seconds   | ヒストグラム   | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | ステートメントの期間ヒストグラム                |
+| tidbcloud_node_storage_used_bytes     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク使用量バイト      |
+| tidbcloud_node_storage_capacity_bytes | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク容量バイト       |
+| tidbcloud_node_cpu_seconds_total      | カウント     | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのCPU使用率   |
+| tidbcloud_node_cpu_capacity_cores     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのCPU制限コア  |
+| tidbcloud_node_memory_used_bytes      | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードの使用メモリバイト |
+| tidbcloud_node_memory_capacity_bytes  | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのメモリ容量バイト |

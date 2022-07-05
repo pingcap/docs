@@ -34,7 +34,13 @@ Query OK, 0 rows affected (0.00 sec)
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   設計上、 `KILL`はデフォルトでMySQLと互換性がありません。これにより、ロードバランサーの背後に複数のTiDBサーバーを配置するのが一般的であるため、間違ったTiDBサーバーで接続が終了するのを防ぐことができます。
+
+<CustomContent platform="tidb">
+
 -   クライアントが常に同じTiDBノードに接続されることが確実でない限り、構成ファイルに[`compatible-kill-query = true`](/tidb-configuration-file.md#compatible-kill-query)を設定しないでください。これは、デフォルトのMySQLクライアントで<kbd>ctrl</kbd> + <kbd>c</kbd>を押すと、 `KILL`が実行される新しい接続が開くためです。間にプロキシがある場合、新しい接続が別のTiDBノードにルーティングされる可能性があり、これにより別のセッションが強制終了される可能性があります。
+
+</CustomContent>
+
 -   `KILL TIDB`ステートメントはTiDB拡張です。このステートメントの機能は、 `KILL [CONNECTION|QUERY]`コマンドおよびMySQLコマンドラインの<kbd>ctrl</kbd> + <kbd>c</kbd>機能に似ています。同じTiDBノードで`KILL TIDB`を使用しても安全です。
 
 ## も参照してください {#see-also}

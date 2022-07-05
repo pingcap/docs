@@ -3,7 +3,7 @@ title: CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of CREATE TABLE for the TiDB database.
 ---
 
-# CREATE TABLE {#create-table}
+# テーブルの作成 {#create-table}
 
 このステートメントは、現在選択されているデータベースに新しいテーブルを作成します。 MySQLの`CREATE TABLE`ステートメントと同様に動作します。
 
@@ -99,9 +99,21 @@ OnCommitOpt ::=
 | `CHARACTER SET`                              | テーブルに[キャラクターセット](/character-set-and-collation.md)を指定するには                          | `CHARACTER SET` =&#39;utf8mb4&#39; |
 | `COMMENT`                                    | コメント情報                                                                            | `COMMENT` =&#39;コメント情報&#39;        |
 
+<CustomContent platform="tidb">
+
 > **ノート：**
 >
 > `split-table`構成オプションはデフォルトで有効になっています。有効にすると、新しく作成されたテーブルごとに個別のリージョンが作成されます。詳細については、 [TiDB構成ファイル](/tidb-configuration-file.md)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> TiDBは、新しく作成されたテーブルごとに個別のリージョンを作成します。
+
+</CustomContent>
 
 ## 例 {#examples}
 
@@ -189,7 +201,19 @@ mysql> DESC t1;
 
 -   空間タイプを除くすべてのデータタイプがサポートされています。
 -   `FULLTEXT` 、および`HASH`のインデックスはサポートさ`SPATIAL`ていません。
+
+<CustomContent platform="tidb">
+
 -   互換性のために、 `index_col_name`属性は、デフォルトで最大長制限が3072バイトの長さオプションをサポートします。長さの制限は、 `max-index-length`の構成オプションを使用して変更できます。詳細については、 [TiDB構成ファイル](/tidb-configuration-file.md#max-index-length)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   互換性のために、 `index_col_name`属性は、最大長制限が3072バイトの長さオプションをサポートします。
+
+</CustomContent>
+
 -   `index_col_name`の`[ASC | DESC]`は現在解析されていますが、無視されます（MySQL 5.7互換の動作）。
 -   `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
 -   TiDBは、1つのテーブルで最大512列をサポートします。 InnoDBの対応する数の制限は1017であり、MySQLのハード制限は4096です。詳細については、 [TiDBの制限](/tidb-limitations.md)を参照してください。
@@ -202,4 +226,4 @@ mysql> DESC t1;
 -   [データ型](/data-type-overview.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
 -   [テーブルのようなものを作成](/sql-statements/sql-statement-create-table-like.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)

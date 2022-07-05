@@ -9,6 +9,8 @@ TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文
 
 ただし、MySQLの一部の機能はサポートされていません。これは、問題を解決するためのより良い方法（JSONに置き換えられたXML関数など）があるか、現在の需要と必要な労力（ストアドプロシージャや関数など）が不足していることが原因である可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
 
+<CustomContent platform="tidb">
+
 -   さらに、TiDBはMySQLレプリケーションプロトコルをサポートしていませんが、MySQLでデータをレプリケートするための特定のツールを提供します。
     -   MySQLからのデータの複製： [TiDBデータ移行（DM）](/dm/dm-overview.md)は、MySQL/MariaDBからTiDBへの完全なデータ移行と増分データ複製をサポートするツールです。
     -   MySQLへのデータの複製： [TiCDC](/ticdc/ticdc-overview.md)は、TiKV変更ログをプルすることによってTiDBの増分データを複製するためのツールです。 TiCDCは[MySQLシンク](/ticdc/ticdc-overview.md#sink-support)を使用して、TiDBの増分データをMySQLに複製します。
@@ -16,6 +18,8 @@ TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文
 > **ノート：**
 >
 > このページでは、MySQLとTiDBの一般的な違いについて説明します。 [安全](/security-compatibility-with-mysql.md)と[悲観的なトランザクションモード](/pessimistic-transaction.md#difference-with-mysql-innodb)の互換性については、専用ページを参照してください。
+
+</CustomContent>
 
 ## サポートされていない機能 {#unsupported-features}
 
@@ -40,7 +44,7 @@ TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文
 -   `REPAIR TABLE`構文
 -   `OPTIMIZE TABLE`構文
 -   `GET_LOCK`および`RELEASE_LOCK`関数[＃14994](https://github.com/pingcap/tidb/issues/14994)
--   [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)と`REPLACE`キーワード[＃24515](https://github.com/pingcap/tidb/issues/24515)
+-   `LOAD DATA`と`REPLACE`キーワード[＃24515](https://github.com/pingcap/tidb/issues/24515)
 -   `HANDLER`ステートメント
 -   `CREATE TABLESPACE`ステートメント
 
@@ -79,13 +83,35 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
+<CustomContent platform="tidb">
+
 > **ノート：**
 >
 > `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
+</CustomContent>
+
 ### パフォーマンススキーマ {#performance-schema}
 
+<CustomContent platform="tidb">
+
 TiDBは、 [プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み合わせを使用して、パフォーマンス監視メトリックを格納および照会します。パフォーマンススキーマテーブルは、TiDBに空の結果を返します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB Cloudのパフォーマンスメトリックを確認するには、 TiDB Cloudコンソールのクラスタ概要ページを確認するか、 [サードパーティの監視統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を使用します。パフォーマンススキーマテーブルは、TiDBに空の結果を返します。
+
+</CustomContent>
 
 ### クエリ実行プラン {#query-execution-plan}
 
@@ -105,12 +131,12 @@ TiDBは、MySQLの組み込み関数のほとんどをサポートしていま�
 
 TiDBでは、サポートされているすべてのDDL変更はオンラインで実行されます。 MySQLのDDL操作と比較して、TiDBのDDL操作には次の主要な制限があります。
 
--   `ALTER TABLE`のステートメントで複数の操作を完了することはできません。たとえば、1つのステートメントに複数の列またはインデックスを追加することはできません。そうしないと、 `Unsupported multi schema change`エラーが出力される可能性があります。
+-   `ALTER TABLE`のステートメントで複数の操作を完了することはできません。たとえば、1つのステートメントに複数の列またはインデックスを追加することはできません。そうしないと、 `Unsupported multi schema change`エラーが出力される場合があります。
 -   TiDBの`ALTER TABLE`は、一部のデータ型の変更をサポートしていません。たとえば、TiDBは`DECIMAL`タイプから`DATE`タイプへの変更をサポートしていません。データ型の変更がサポートされていない場合、TiDBは`Unsupported modify column: type %d not match origin %d`エラーを報告します。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)を参照してください。
 -   `ALGORITHM={INSTANT,INPLACE,COPY}`構文は、TiDBのアサーションとしてのみ機能し、 `ALTER`アルゴリズムを変更しません。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)を参照してください。
 -   `CLUSTERED`タイプの主キーの追加/削除はサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
 -   さまざまなタイプのインデックス（ `HASH|BTREE|RTREE|FULLTEXT` ）はサポートされておらず、指定すると解析されて無視されます。
--   テーブルパーティショニングは、 `HASH` 、および`RANGE`のパーティショニングタイプをサポートし`LIST` 。サポートされていないパーティションタイプの場合、 `Warning: Unsupported partition type %s, treat as normal table`エラーが出力されることがあります`%s`は特定のパーティションタイプです。
+-   テーブルパーティショニングは、 `HASH` 、および`RANGE`のパーティショニングタイプをサポートし`LIST` 。サポートされていないパーティションタイプの場合、 `Warning: Unsupported partition type %s, treat as normal table`エラーが出力されることがあります。ここで、 `%s`は特定のパーティションタイプです。
 -   テーブルパーティショニングは、 `ADD` 、および`DROP`の操作もサポートし`TRUNCATE` 。他のパーティション操作は無視されます。次のテーブルパーティション構文はサポートされていません。
 
     -   `PARTITION BY KEY`
@@ -121,7 +147,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 ### テーブルを分析する {#analyze-table}
 
-[統計収集](/statistics.md#manual-collection)は、MySQLとMySQLでの動作が異なります。つまり、MySQL / InnoDBでは比較的軽量で短期間の操作ですが、TiDBではテーブルの統計を完全に再構築し、完了するまでにはるかに長い時間がかかる可能性があります。
+[統計収集](/statistics.md#manual-collection)は、MySQLとMySQLでの動作が異なります。これは、MySQL / InnoDBでの比較的軽量で短期間の操作ですが、TiDBでは、テーブルの統計を完全に再構築し、完了するまでにはるかに長い時間がかかる場合があります。
 
 これらの違いについては、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)で詳しく説明しています。
 
@@ -141,7 +167,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 TiDBのビューは更新できません。 `UPDATE`などの`INSERT`操作はサポートして`DELETE`ません。
 
-### 一時テーブル {#temporary-tables}
+### 一時的なテーブル {#temporary-tables}
 
 詳細については、 [TiDBローカル一時テーブルとMySQL一時テーブル間の互換性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)を参照してください。
 
@@ -155,7 +181,11 @@ TiDBのビューは更新できません。 `UPDATE`などの`INSERT`操作は�
 
 互換性の理由から、TiDBは代替ストレージエンジンでテーブルを作成する構文をサポートしています。実装では、TiDBはメタデータをInnoDBストレージエンジンとして記述します。
 
+<CustomContent platform="tidb">
+
 TiDBはMySQLと同様のストレージエンジンの抽象化をサポートしていますが、TiDBサーバーを起動するときに[`--store`](/command-line-flags-for-tidb-configuration.md#--store)オプションを使用してストレージエンジンを指定する必要があります。
+
+</CustomContent>
 
 ### SQLモード {#sql-modes}
 

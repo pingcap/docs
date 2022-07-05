@@ -63,7 +63,7 @@ TiDBで作成された新しいテーブルごとに、このテーブルのデ�
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-    `BY value_list…`は、現在のリージョンがスピルされることに基づいて、一連のポイントを手動で指定します。データが不均一に分散しているシナリオに適しています。
+    `BY value_list…`は、現在のリージョンがスピルトされることに基づいて、一連のポイントを手動で指定します。データが不均一に分散しているシナリオに適しています。
 
 次の例は、 `SPLIT`ステートメントの結果を示しています。
 
@@ -428,9 +428,13 @@ region3:   [ 2<<61     ,  3<<61 )
 region4:   [ 3<<61     ,  +inf  )
 ```
 
-## ノート {#notes}
+<CustomContent platform="tidb">
 
-Split Regionステートメントによって分割されたRegionは、PDの[リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラーによって制御されます。 PDがすぐに新しく分割されたリージョンを再マージしないようにするには、リージョンマージ機能に関連する[動的に変更する](/pd-control.md)の構成アイテムを作成する必要があります。
+> **ノート：**
+>
+> Split Regionステートメントによって分割されたRegionは、PDの[リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラーによって制御されます。 PDがすぐに新しく分割されたリージョンを再マージしないようにするには、リージョンマージ機能に関連する[動的に変更する](/pd-control.md)の構成アイテムを作成する必要があります。
+
+</CustomContent>
 
 ## MySQLの互換性 {#mysql-compatibility}
 

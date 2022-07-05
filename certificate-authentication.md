@@ -10,7 +10,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 証明書ベースの認証を使用するには、次の操作を実行する必要がある場合があります。
 
 -   セキュリティキーと証明書を作成する
--   TiDBとクライアントの証明書を構成します
+-   TiDBとクライアントの証明書を構成する
 -   ユーザーがログインしたときに検証されるユーザー証明書情報を構成します
 -   証明書の更新と置換
 
@@ -18,7 +18,17 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 ## セキュリティキーと証明書を作成する {#create-security-keys-and-certificates}
 
-キーと証明書の作成には[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。次の段落では、証明書で検証する必要のある属性フィールドをさらに構成する方法について説明します。
+<CustomContent platform="tidb">
+
+キーと証明書の作成には[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)で説明したプロセスと同様です。次の段落では、証明書で検証する必要のある属性フィールドをさらに構成する方法を示します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+キーと証明書の作成には[OpenSSL](https://www.openssl.org/)を使用することをお勧めします。証明書の生成プロセスは、 [TiDBクライアントとサーバー間のTLSを有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)で説明したプロセスと同様です。次の段落では、証明書で検証する必要のある属性フィールドをさらに構成する方法を示します。
+
+</CustomContent>
 
 ### CAキーと証明書を生成する {#generate-ca-key-and-certificate}
 
@@ -130,7 +140,7 @@ TiDBは、ユーザーがTiDBにログインするための証明書ベースの
 
 ### クライアントキーと証明書を生成する {#generate-client-key-and-certificate}
 
-サーバーのキーと証明書を生成した後、クライアントのキーと証明書を生成する必要があります。多くの場合、ユーザーごとに異なるキーと証明書を生成する必要があります。
+サーバーキーと証明書を生成した後、クライアントのキーと証明書を生成する必要があります。多くの場合、ユーザーごとに異なるキーと証明書を生成する必要があります。
 
 1.  次のコマンドを実行して、クライアントキーを生成します。
 
@@ -277,9 +287,9 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     openssl x509 -noout -subject -in ca-cert.pem | sed 's/.\{8\}//'  | sed 's/, /\//g' | sed 's/ = /=/g' | sed 's/^/\//'
     ```
 
--   `require san` ：ユーザー証明書を発行するCA証明書の`Subject Alternative Name`の情報を指定します。指定する情報は、クライアント証明書の生成に使用される[`alt_names`構成ファイルの<code>openssl.cnf</code>](/generate-self-signed-certificates.md)と一致しています。
+-   `require san` ：ユーザー証明書を発行するCA証明書の`Subject Alternative Name`の情報を指定します。指定する情報は、クライアント証明書の生成に使用される[`alt_names`構成ファイルの<code>openssl.cnf</code>](https://docs.pingcap.com/tidb/stable/generate-self-signed-certificates)と一致しています。
 
-    -   次のコマンドを実行して、生成された証明書の`require san`のアイテムの情報を取得します。
+    -   次のコマンドを実行して、生成された証明書の`require san`の項目の情報を取得します。
 
         {{< copyable "" >}}
 
@@ -293,7 +303,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
         -   IP
         -   DNS
 
-    -   複数のチェック項目は、コンマで接続した後に設定できます。たとえば、 `u1`ユーザーに対して次のように`require san`を構成します。
+    -   複数のチェック項目は、コンマで接続した後に設定できます。たとえば、 `u1`のユーザーに対して次のように`require san`を構成します。
 
         {{< copyable "" >}}
 
@@ -317,7 +327,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 スペースまたは`and`を区切り文字として使用して、1つまたは複数のオプションを構成できます。
 
--   ユーザーを作成するときにユーザー証明書を構成します（ `create user` ）：
+-   ユーザーを作成するときにユーザー証明書を構成する（ `create user` ）：
 
     {{< copyable "" >}}
 
