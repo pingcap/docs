@@ -22,15 +22,15 @@ These charges appear as separate items on your monthly TiDB Cloud bills.
 
 TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
 
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash<sup>beta</sup>.
+In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash.
 
 The specified node quantity and associated vCPUs determine your hourly compute cost.
 
-Note that the compute cost of TiDB, TiKV, and TiFlash<sup>beta</sup> nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
+Note that the compute cost of TiDB, TiKV, and TiFlash nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
 
 ## Storage cost
 
-Both TiKV and TiFlash<sup>beta</sup> nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash<sup>beta</sup> nodes in your cluster consume.
+Both TiKV and TiFlash nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash nodes in your cluster consume.
 
 TiDB Cloud passes the costs onto customers as they are incurred. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
 

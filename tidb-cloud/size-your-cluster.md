@@ -31,7 +31,7 @@ The supported node sizes include the following:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
 > - TiDB can only be used with 4 vCPU TiKV.
-> - TiFlash<sup>beta</sup> is unavailable.
+> - TiFlash is unavailable.
 
 ### TiDB node quantity
 
@@ -59,7 +59,7 @@ The supported node sizes include the following:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
 > - TiKV can only be used with 4 vCPU TiDB.
-> - TiFlash<sup>beta</sup> is unavailable.
+> - TiFlash is unavailable.
 
 ### TiKV node quantity
 
@@ -90,40 +90,40 @@ For more information about how to determine the TiKV size, see [Performance refe
 >
 > You cannot decrease the TiKV storage size after the cluster creation.
 
-## Size TiFlash<sup>beta</sup>
+## Size TiFlash
 
-TiFlash<sup>beta</sup> synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
+TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
 
-You can configure node size, node quantity, and storage size for TiFlash<sup>beta</sup>.
+You can configure node size, node quantity, and storage size for TiFlash.
 
-### TiFlash<sup>beta</sup> node size
+### TiFlash node size
 
 The supported node sizes include the following:
 
 - 8 vCPU, 64 GiB
 - 16 vCPU, 128 GiB
 
-Note that TiFlash<sup>beta</sup> is unavailable when the vCPU size of TiDB or TiKV is set as **4 vCPU, 16 GiB (Beta)**.
+Note that TiFlash is unavailable when the vCPU size of TiDB or TiKV is set as **4 vCPU, 16 GiB (Beta)**.
 
-### TiFlash<sup>beta</sup> node quantity
+### TiFlash node quantity
 
-TiDB Cloud deploys TiFlash<sup>beta</sup> nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash<sup>beta</sup> nodes in each TiDB Cloud cluster and create at least 2 replicas of the data for high availability in your production environment.
+TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least 2 replicas of the data for high availability in your production environment.
 
-The minimum number of TiFlash<sup>beta</sup> nodes depends on the TiFlash<sup>beta</sup> replica counts for specific tables:
+The minimum number of TiFlash nodes depends on the TiFlash replica counts for specific tables:
 
-Minimum number of TiFlash<sup>beta</sup> nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
+Minimum number of TiFlash nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-For example, if you configure the storage size of each TiFlash<sup>beta</sup> node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash<sup>beta</sup> nodes is as follows:
+For example, if you configure the storage size of each TiFlash node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash nodes is as follows:
 
-Minimum number of TiFlash<sup>beta</sup> nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+Minimum number of TiFlash nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
 
-### TiFlash<sup>beta</sup> storage size
+### TiFlash storage size
 
-TiFlash<sup>beta</sup> supports up to 2 TiB storage capacity.
+TiFlash supports up to 2 TiB storage capacity.
 
 > **Note:**
 >
-> You cannot decrease the TiFlash<sup>beta</sup> storage size after the cluster creation.
+> You cannot decrease the TiFlash storage size after the cluster creation.
 
 ## Performance reference
 

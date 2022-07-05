@@ -22,7 +22,7 @@ To scale a cluster, take the following steps:
 
     - TiDB: increase or decrease the node quantity.
     - TiKV: increase the node quantity and storage size.
-    - TiFlash<sup>beta</sup>: increase the node quantity and storage size.
+    - TiFlash: increase the node quantity and storage size.
 
 5. Click **Confirm**.
 
@@ -51,8 +51,8 @@ When a cluster is running, you cannot increase its node size. To make such chang
 
 To make the following scale-in or scale-down changes, you need to submit a support ticket. We will contact you and complete the scaling within the agreed time.
 
-- Decrease the node size of TiDB, TiKV, or TiFlash<sup>beta</sup>
-- Scale in TiKV or TiFlash<sup>beta</sup> nodes
+- Decrease the node size of TiDB, TiKV, or TiFlash
+- Scale in TiKV or TiFlash nodes
 
 > **Warning:**
 >

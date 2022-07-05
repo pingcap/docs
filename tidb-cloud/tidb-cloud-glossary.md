@@ -11,7 +11,7 @@ aliases: ['/tidbcloud/glossary']
 
 ### cluster tier
 
-Determines the functionality and capacity of your cluster. Different cluster tiers provide different numbers of TiDB, TiKV, and TiFlash<sup>beta</sup> nodes in your cluster.
+Determines the functionality and capacity of your cluster. Different cluster tiers provide different numbers of TiDB, TiKV, and TiFlash nodes in your cluster.
 
 ## M
 
@@ -23,7 +23,7 @@ A user that has been invited to an organization, with access to the organization
 
 ### node
 
-Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analytical instance (TiFlash<sup>beta</sup>).
+Refers to either a data instance (TiKV) or a compute instance (TiDB) or an analytical instance (TiFlash).
 
 ## O
 
@@ -73,13 +73,13 @@ A separate database that can be located in the same or different region and cont
 
 ### TiDB cluster
 
-The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage), [the Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>beta</sup> nodes that form a functional working database.
+The collection of [TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing), [TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage), [the Placement Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) (PD), and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) nodes that form a functional working database.
 
 ### TiDB node
 
 The computing node that aggregates data from queries returned from transactional or analytical stores. Increasing the number of TiDB nodes will increase the number of concurrent queries that the cluster can handle.
 
-### TiFlash<sup>beta</sup> node
+### TiFlash node
 
 The analytical storage node that replicates data from TiKV in real time and supports real-time analytical workloads.
 
