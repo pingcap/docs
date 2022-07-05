@@ -92,18 +92,18 @@ In this step, you can compare the execution statistics between TiKV (row-based s
     In the output, you can get the execution time from the `execution info` column.
 
     ```sql
-    id                                 | estRows   | actRows | task         | access object | execution info | operator info                                                                                         | memory  | disk
-    -----------------------------------+-----------+---------+--------------+---------------+------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+---------
-    Sort_5                             | 633.00    | 73633   | root         |               | time:420.2ms, loops:73 | Column#15                                                                                         | 5.61 MB | 0 Bytes
+    id                                 | estRows   | actRows | task         | access object | execution info                        | operator info                      | memory  | disk
+    -----------------------------------+-----------+---------+--------------+---------------+---------------------------------------+------------------------------------+---------+---------
+    Sort_5                             | 633.00    | 73633   | root         |               | time:420.2ms, loops:73                | Column#15                          | 5.61 MB | 0 Bytes
     └─Projection_7                     | 633.00    | 73633   | root         |               | time:368.7ms, loops:73, Concurrenc... | bikeshare.trips.start_station_...  | 4.94 MB | N/A
-      └─TableReader_34                 | 633.00    | 73633   | root         |               | time:368.6ms, loops:73, cop_task:...  | data:ExchangeSender_33           | N/A     | N/A
-        └─ExchangeSender_33            | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:360.7ms, loops:... | N/A                              | N/A
-          └─Projection_29              | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:330.7ms, loops:... | N/A                            | N/A
-            └─HashAgg_30               | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:330.7ms, loops:... | N/A                          | N/A
-              └─ExchangeReceiver_32    | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:280.7ms, loops:... | N/A                        | N/A
-                └─ExchangeSender_31    | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:272.3ms, loops:... | N/A                      | N/A
-                  └─HashAgg_12         | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:252.3ms, loops:... | N/A     | N/A
-                    └─TableFullScan_28 | 816090.00 | 816090  | mpp[tiflash] | table:trips   | tiflash_task:{time:92.3ms, loops:1... | keep order:false        | N/A       | N/A
+      └─TableReader_34                 | 633.00    | 73633   | root         |               | time:368.6ms, loops:73, cop_task:...  | data:ExchangeSender_33             | N/A     | N/A
+        └─ExchangeSender_33            | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:360.7ms, loops:... | ExchangeType: PassThrough          | N/A     | N/A
+          └─Projection_29              | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:330.7ms, loops:... | Column#15, bikeshare.trips.star... | N/A     | N/A
+            └─HashAgg_30               | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:330.7ms, loops:... | group by:bikeshare.trips.end_st... | N/A     | N/A
+              └─ExchangeReceiver_32    | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:280.7ms, loops:... |                                    | N/A     | N/A
+                └─ExchangeSender_31    | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:272.3ms, loops:... | ExchangeType: HashPartition, Ha... | N/A     | N/A
+                  └─HashAgg_12         | 633.00    | 73633   | mpp[tiflash] |               | tiflash_task:{time:252.3ms, loops:... | group by:bikeshare.trips.end_st... | N/A     | N/A
+                    └─TableFullScan_28 | 816090.00 | 816090  | mpp[tiflash] | table:trips   | tiflash_task:{time:92.3ms, loops:1... | keep order:false                   | N/A     | N/A
     (10 rows)
     ```
 
