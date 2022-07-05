@@ -170,7 +170,7 @@
     - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
   - Configuration Tuning
-    - [Operating System Tuning](/tune-operating-system.md)
+    - [Tune Operating System Performance](/tune-operating-system.md)
     - [Tune TiDB Memory](/configure-memory-usage.md)
     - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
     - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
