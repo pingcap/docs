@@ -274,12 +274,12 @@ The output of the above command:
 }
 ```
 
-To write the output to a file, add the `-out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
+To write the output to a file, add the `--out` argument to the `rule-bundle get` subcommand, which is convenient for subsequent modification and saving.
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
 After the modification is finished, you can use the `rule-bundle set` subcommand to save the configuration in the file to the PD server. Unlike the `save` command described in [Set rules using pd-ctl](#set-rules-using-pd-ctl), this command replaces all the rules of this group on the server side.
@@ -287,7 +287,7 @@ After the modification is finished, you can use the `rule-bundle set` subcommand
 {{< copyable "shell-regular" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### Use pd-ctl to view and modify all configurations
@@ -431,7 +431,7 @@ Add a separate rule for the row key of the table and limit `count` to `2`. Use `
 
 ### Scenario 4: Add two follower replicas for a table in the Beijing node with high-performance disks
 
-The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must not be `hdd`.
+The following example shows a more complicated `label_constraints` configuration. In this rule, the replicas must be placed in the `bj1` or `bj2` machine room, and the disk type must not be `ssd`.
 
 {{< copyable "" >}}
 
@@ -445,7 +445,7 @@ The following example shows a more complicated `label_constraints` configuration
   "count": 2,
   "label_constraints": [
     {"key": "zone", "op": "in", "values": ["bj1", "bj2"]},
-    {"key": "disk", "op": "notIn", "values": ["hdd"]}
+    {"key": "disk", "op": "notIn", "values": ["ssd"]}
   ],
   "location_labels": ["host"]
 }

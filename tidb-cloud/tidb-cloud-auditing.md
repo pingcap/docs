@@ -193,7 +193,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 
 TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
 
-For example, `13796619446086334065/0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `0` indicates the Pod ID.
+For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the Pod ID.
 
 ## Disable audit logging
 
