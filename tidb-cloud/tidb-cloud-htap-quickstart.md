@@ -5,13 +5,13 @@ summary: Learn how to get started with TiDB Cloud HTAP.
 
 # TiDB Cloud HTAP Quick Start
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) means Hybrid Transactional/Analytical Processing. The HTAP cluster in TiDB Cloud is composed of [TiKV](https://tikv.org), a row-based storage engine designed for transactional processing, and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>beta</sup>, a columnar storage designed for analytical processing. Your application data is first stored in TiKV and then replicated to TiFlash<sup>beta</sup> via the Raft consensus algorithm. So it is real time replication from the row store to the columnar store.
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) means Hybrid Transactional/Analytical Processing. The HTAP cluster in TiDB Cloud is composed of [TiKV](https://tikv.org), a row-based storage engine designed for transactional processing, and [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview), a columnar storage designed for analytical processing. Your application data is first stored in TiKV and then replicated to TiFlash via the Raft consensus algorithm. So it is real time replication from the row storage to the columnar storage.
 
 This tutorial guides you through an easy way to experience the Hybrid Transactional and Analytical Processing (HTAP) feature of TiDB Cloud. The content includes how to replicate tables to TiFlash, run queries with TiFlash, and experience the performance boost.
 
 ## Before you begin
 
-Before experiencing the HTAP feature, take the steps in [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a cluster with TiFlash nodes and import sample data to the cluster.
+Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a cluster with TiFlash nodes, connect to the TiDB cluster, and import sample data to the cluster.
 
 ## Steps
 
@@ -34,8 +34,8 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bikeshare
 
 In the result of the preceding statement:
 
-- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change any more.
-- `PROGRESS` means the progress of the replication. The value is between 0.0 and 1.0. 1 means at least one replica is replicated.
+- `AVAILABLE` indicates whether the TiFlash replica of a specific table is available or not. `1` means available and `0` means unavailable. Once a replica becomes available, this status does not change anymore.
+- `PROGRESS` means the progress of the replication. The value is between `0.0` and `1.0`. `1` means at least one replica is replicated.
 
 ### Step 2. Query data using HTAP
 
@@ -61,7 +61,7 @@ In this step, you can compare the execution statistics between TiKV (row-based s
     ORDER BY count ASC;
     ```
 
-    For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use TiFlash replicas based on the cost estimation. In the preceding statement, `HINT /*+ READ_FROM_STORAGE(TIKV[trips]) */` is used to force the optimizer to choose TiKV so you can check its execution statistics.
+    For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation. In the preceding statement, `HINT /*+ READ_FROM_STORAGE(TIKV[trips]) */` is used to force the optimizer to choose TiKV so you can check the execution statistics of TiKV.
 
 - To get the execution statistics of this query using TiFlash, execute the following statement:
 
