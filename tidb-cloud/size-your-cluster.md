@@ -5,25 +5,33 @@ summary: Learn how to determine the size of your TiDB Cloud cluster.
 
 # Determine Your TiDB Size
 
-This document describes how to determine the size of your TiDB cluster.
+This document describes how to determine the size of a Dedicated Tier cluster.
+
+> **Note:**
+>
+> A [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) comes with a default cluster size, which cannot be changed.
 
 ## Size TiDB
 
 TiDB is for computing only and does not store data. It is horizontally scalable.
 
-You can configure both vCPU size and node quantity for TiDB.
+You can configure both node size and node quantity for TiDB.
 
-### TiDB vCPU size
+### TiDB node size
 
-The supported vCPU size includes 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported node sizes include the following:
+
+- 4 vCPU, 16 GiB (Beta)
+- 8 vCPU, 16 GiB
+- 16 vCPU, 32 GiB
 
 > **Note:**
 >
-> If the vCPU size of TiDB is set as **4 vCPU (Beta)**, note the following restrictions:
+> If the node size of TiDB is set as **4 vCPU, 16 GiB (Beta)**, note the following restrictions:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - TiDB can only be used with TiKV with 4 vCPU.
-> - TiFlash<sup>beta</sup> is unavailable.
+> - TiDB can only be used with 4 vCPU TiKV.
+> - TiFlash is unavailable.
 
 ### TiDB node quantity
 
@@ -35,19 +43,23 @@ For more information about how to determine the TiDB size, see [Performance refe
 
 TiKV is responsible for storing data. It is horizontally scalable.
 
-You can configure vCPU size, node quantity, and storage size for TiKV.
+You can configure node size, node quantity, and storage size for TiKV.
 
-### TiKV vCPU size
+### TiKV node size
 
-The supported size includes 4 vCPU (Beta), 8 vCPU, and 16 vCPU.
+The supported node sizes include the following:
+
+- 4 vCPU, 16 GiB (Beta)
+- 8 vCPU, 64 GiB
+- 16 vCPU, 64 GiB
 
 > **Note:**
 >
-> If the vCPU size of TiKV is set as **4 vCPU (Beta)**, note the following restrictions:
+> If the node size of TiKV is set as **4 vCPU, 16 GiB (Beta)**, note the following restrictions:
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
-> - TiKV can only be used with TiDB with 4 vCPU.
-> - TiFlash<sup>beta</sup> is unavailable.
+> - TiKV can only be used with 4 vCPU TiDB.
+> - TiFlash is unavailable.
 
 ### TiKV node quantity
 
@@ -71,35 +83,47 @@ For more information about how to determine the TiKV size, see [Performance refe
 
 ### TiKV storage size
 
-You can configure the TiKV storage size only when you create or restore a cluster.
+- 8 vCPU or 16 vCPU TiKV supports up to 4 TiB storage capacity.
+- 4 vCPU TiKV supports up to 2 TiB storage capacity.
 
-## Size TiFlash<sup>beta</sup>
+> **Note:**
+>
+> You cannot decrease the TiKV storage size after the cluster creation.
 
-TiFlash<sup>beta</sup> synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
+## Size TiFlash
 
-You can configure vCPU size, node quantity, and storage size for TiFlash<sup>beta</sup>.
+TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
 
-### TiFlash<sup>beta</sup> vCPU size
+You can configure node size, node quantity, and storage size for TiFlash.
 
-The supported vCPU size includes 8 vCPU and 16 vCPU.
+### TiFlash node size
 
-Note that TiFlash<sup>beta</sup> is unavailable when the vCPU size of TiDB or TiKV is set as **4 vCPU (Beta)**.
+The supported node sizes include the following:
 
-### TiFlash<sup>beta</sup> node quantity
+- 8 vCPU, 64 GiB
+- 16 vCPU, 128 GiB
 
-TiDB Cloud deploys TiFlash<sup>beta</sup> nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash<sup>beta</sup> nodes in each TiDB Cloud cluster and create at least 2 replicas of the data for high availability in your production environment.
+Note that TiFlash is unavailable when the vCPU size of TiDB or TiKV is set as **4 vCPU, 16 GiB (Beta)**.
 
-The minimum number of TiFlash<sup>beta</sup> nodes depends on the TiFlash<sup>beta</sup> replica counts for specific tables:
+### TiFlash node quantity
 
-Minimum number of TiFlash<sup>beta</sup> nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
+TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least two replicas of the data for high availability in your production environment.
 
-For example, if you configure the storage size of each TiFlash<sup>beta</sup> node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash<sup>beta</sup> nodes is as follows:
+The minimum number of TiFlash nodes depends on the TiFlash replica counts for specific tables:
 
-Minimum number of TiFlash<sup>beta</sup> nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+Minimum number of TiFlash nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-### TiFlash<sup>beta</sup> storage size
+For example, if you configure the storage size of each TiFlash node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash nodes is as follows:
 
-You can configure the TiFlash<sup>beta</sup> storage size only when you create or restore a cluster.
+Minimum number of TiFlash nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
+
+### TiFlash storage size
+
+TiFlash supports up to 2 TiB storage capacity.
+
+> **Note:**
+>
+> You cannot decrease the TiFlash storage size after the cluster creation.
 
 ## Performance reference
 
@@ -128,7 +152,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 300     | 8,848  | 8,848  | 36            |
     | Point Select      | 600     | 46,224 | 46,224 | 13            |
@@ -146,7 +170,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 1,500   | 11,601 | 11,601 | 129           |
     | Point Select      | 600     | 46,224 | 46,224 | 13            |
@@ -169,7 +193,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 600     | 17,831 | 17,831 | 34            |
     | Point Select      | 600     | 93,287 | 93,287 | 6             |
@@ -187,7 +211,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS    | QPS    | Latency (ms ) |
+    | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
     |-------------------|---------|--------|--------|---------------|
     | Insert            | 2,000   | 23,633 | 23,633 | 84            |
     | Point Select      | 600     | 93,287 | 93,287 | 6             |
@@ -210,7 +234,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 1,200   | 33,892  | 33,892  | 23            |
     | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
@@ -228,7 +252,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 4,000   | 47,029  | 47,029  | 43            |
     | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
@@ -251,7 +275,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 1,200   | 35,096  | 35,096  | 34            |
     | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
@@ -269,7 +293,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 2,000   | 43,338  | 43,338  | 46            |
     | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
@@ -292,7 +316,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 2,400   | 69,139  | 69,139  | 22            |
     | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
@@ -310,7 +334,7 @@ You can click any of the following scales to check its performance data.
 
     Sysbench OLTP performance:
 
-    | Transaction model | Threads | TPS     | QPS     | Latency (ms ) |
+    | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
     |-------------------|---------|---------|---------|---------------|
     | Insert            | 4,000   | 86,242  | 86,242  | 25            |
     | Point Select      | 2,400   | 448,056 | 448,056 | 4             |

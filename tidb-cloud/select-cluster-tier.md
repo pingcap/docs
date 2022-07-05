@@ -21,9 +21,9 @@ Each Developer Tier cluster is a full-featured TiDB cluster and comes with the f
 
 - 1 TiDB shared node
 - 1 TiKV shared node (with 500 MiB of OLTP storage)
-- 1 TiFlash<sup>beta</sup> shared node (with 500 MiB of OLAP storage)
+- 1 TiFlash shared node (with 500 MiB of OLAP storage)
 
-Developer Tier clusters run on shared nodes. Although each node is run in its own container on a virtual machine (VM), that VM is also running other TiDB, TiKV, or TiFlash<sup>beta</sup> nodes. As a result, shared nodes will have reduced performance when compared to standard, dedicated TiDB Cloud nodes. However, as all nodes are running in separate containers and have dedicated cloud disks, data stored in a Developer Tier cluster is isolated and will never be exposed to other TiDB clusters.
+Developer Tier clusters run on shared nodes. Although each node is run in its own container on a virtual machine (VM), that VM is also running other TiDB, TiKV, or TiFlash nodes. As a result, shared nodes will have reduced performance when compared to standard, dedicated TiDB Cloud nodes. However, as all nodes are running in separate containers and have dedicated cloud disks, data stored in a Developer Tier cluster is isolated and will never be exposed to other TiDB clusters.
 
 For each TiDB Cloud account, you can use one complimentary Developer Tier cluster to use for one year. Although you can only run one Developer Tier cluster at a time, you can delete and recreate the cluster as many times as you wish.
 
@@ -48,10 +48,10 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 
 The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
 
-For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash<sup>beta</sup> easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
+For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
 
 To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
 
 > **Note:**
 >
-> You cannot change the cluster storage size after your cluster is created.
+> You cannot decrease the cluster storage size after your cluster is created.
