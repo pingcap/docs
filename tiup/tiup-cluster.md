@@ -38,7 +38,6 @@ Available Commands:
   audit       Show audit log of cluster operation
   import      Import an existing TiDB cluster from TiDB-Ansible
   edit-config Edit TiDB cluster config
-  show-config Show TiDB cluster config
   reload      Reload a TiDB cluster's config and restart if needed
   patch       Replace the remote package with a specified package and restart the service
   help        Help about any command
@@ -466,7 +465,7 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --ssh string          (EXPERIMENTAL) The executor type: 'builtin', 'system', 'none'.
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
@@ -518,7 +517,7 @@ Flags:
   -r, --rename NAME        Rename the imported cluster to NAME
 
 Global Flags:
-      --ssh string        (EXPERIMENTAL) The executor type: 'builtin', 'system', 'none'.
+      --ssh string        (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
