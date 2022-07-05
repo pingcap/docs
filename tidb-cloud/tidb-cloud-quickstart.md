@@ -67,7 +67,7 @@ You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. The CIDR of a project cannot be modified once it is set.
 
-6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
 7. Confirm the cluster information in the middle area and also the billing information in the right pane.
 
