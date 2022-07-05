@@ -10,14 +10,15 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## July 05, 2022
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md) of TiKV and TiFlash for a Dedicated Tier cluster.
-* Support showing the memory information in the node size field.
 * The columnar storage TiFlash is now in General Availability (GA).
 
     - TiFlash makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. Your application data is first stored in TiKV and then replicated to TiFlash via the Raft consensus algorithm. So it is real time replication from the row storage to the columnar storage.
     - For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation.
 
-    To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap- quickstart.md).
+    To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
+
+* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md) of TiKV and TiFlash for a Dedicated Tier cluster.
+* Support showing the memory information in the node size field.
 
 ## June 28, 2022
 
