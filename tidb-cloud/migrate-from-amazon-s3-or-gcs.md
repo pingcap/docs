@@ -88,7 +88,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, you need
     In the template, you need to update the following two fields to your own resource values:
 
     - `"Resource": "<Your S3 bucket ARN>"`: `<Your S3 bucket ARN>` is the ARN of your S3 bucket. You can go to the **Properties** tab in your S3 bucket, and get the Amazon Resource Name (ARN) value in the **Bucket Overview** area. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test"`.
-    - `"Resource": "arn:aws:s3:::<Your customized directory>"`: `<Your customized directory>` is a directory that you can customize in your S3 bucket root level for data storage. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If you want to store your data in the S3 bucket root directory, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`.
+    - `"Resource": "arn:aws:s3:::<Your customized directory>"`: `<Your customized directory>` is a directory that you can customize in your S3 bucket root level for data storage. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If you want to store your data in the S3 bucket root directory, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Note that this field is expected to end with `/*`.
 
 3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID of the target TiDB cluster exists. 
 
