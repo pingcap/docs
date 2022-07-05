@@ -1,7 +1,7 @@
 ---
 title: Back up and Restore Data on Azure Blob Storage Using BR
 summary: Learn how to use BR to back up and restore data on Azure Blob Storage.
-aliases: ['/tidb/v6.1/backup-and-restore-azblob/']
+aliases: ['/tidb/stable/backup-and-restore-azblob/']
 ---
 
 # BRを使用してAzureBlobStorageのデータをバックアップおよび復元する {#back-up-and-restore-data-on-azure-blob-storage-using-br}
@@ -98,7 +98,7 @@ BRおよびTiKVの動作環境で、環境変数`$AZURE_CLIENT_ID` 、および`
 
 [バックアップ](#back-up)で`account-name`を指定する方法と同様に、URLまたはコマンドラインパラメータを使用してデータを復元できます。
 
--   URLのパラメータとして`account-name`を指定します。
+-   URLのパラメーターとして`account-name`を指定します。
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1'

@@ -7,7 +7,8 @@
     -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
     -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
 -   はじめに
-    -   [クイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [TiDB Cloud試しください](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [HTAPをお試しください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
     -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
 -   クラスターの管理
     -   クラスターを計画する

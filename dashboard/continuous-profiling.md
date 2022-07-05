@@ -48,13 +48,13 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 > **ノート：**
 >
-> 継続的プロファイリングを使用するには、クラスタを最新バージョンのTiUP（v1.9.0以降）またはTiDB Operator（v1.3.0以降）でデプロイまたはアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスタをアップグレードした場合は、手順について[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
+> 継続的プロファイリングを使用するには、クラスタをデプロイするか、最新バージョンのTiUP（v1.9.0以降）またはTiDB Operator（v1.3.0以降）でアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスタをアップグレードした場合は、手順について[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-継続的プロファイリングはデフォルトでは有効になっていません。これを有効にすると、Webページを常にアクティブに保つことなく、パフォーマンスデータをバックグラウンドで継続的に収集できます。収集されたデータは一定期間保持でき、期限切れのデータは自動的にクリアされます。
+TiDB v6.1.0以降、継続的プロファイリングはデフォルトで有効になっています。これを有効にすると、Webページを常にアクティブに保つことなく、パフォーマンスデータをバックグラウンドで継続的に収集できます。収集されたデータは一定期間保持でき、期限切れのデータは自動的にクリアされます。
 
 この機能を有効にするには：
 
-1.  [継続的なプロファイリングページ](#access-the-page)にアクセスします。
+1.  [連続プロファイリングページ](#access-the-page)にアクセスします。
 2.  [**設定を開く]**をクリックします。右側の<strong>[設定]</strong>領域で、[<strong>機能</strong>を有効にする]をオンに切り替え、必要に応じて<strong>保持期間</strong>のデフォルト値を変更します。
 3.  [**保存]**をクリックします。
 
@@ -62,7 +62,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 ## 現在のパフォーマンスデータを表示する {#view-current-performance-data}
 
-手動プロファイリングは、継続的プロファイリングが有効になっているクラスターでは開始できません。現時点でのパフォーマンスデータを表示するには、最新のプロファイリング結果をクリックするだけです。
+連続プロファイリングが有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、最新のプロファイリング結果をクリックするだけです。
 
 ## 過去のパフォーマンスデータを表示する {#view-historical-performance-data}
 
@@ -82,7 +82,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 ## 継続的なプロファイリングを無効にする {#disable-continuous-profiling}
 
-1.  [継続的なプロファイリングページ](#access-the-page)にアクセスします。
+1.  [連続プロファイリングページ](#access-the-page)にアクセスします。
 2.  右上隅にある歯車のアイコンをクリックして、設定ページを開きます。 [**機能**を有効にする]をオフに切り替えます。
 3.  [**保存]**をクリックします。
 4.  ポップアップダイアログボックスで、[**無効**にする]をクリックします。
@@ -95,7 +95,7 @@ summary: Learn how to collect performance data from TiDB, TiKV and PD continuous
 
 [TiDBダッシュボードFAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-**2.継続的プロファイリングを有効にした後、パフォーマンスは影響を受けますか？**
+**2.連続プロファイリングを有効にすると、パフォーマンスに影響がありますか？**
 
 ベンチマークによると、この機能を有効にした場合の平均パフォーマンスへの影響は1％未満です。
 

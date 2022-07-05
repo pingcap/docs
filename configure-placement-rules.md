@@ -68,7 +68,7 @@ v5.0で導入された配置ルールは、PDがさまざまなタイプのデ�
 
 ### 配置ルールを有効にする {#enable-placement-rules}
 
-配置ルール機能は、v5.0以降のバージョンのTiDBではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。無効にした後でこの機能を有効にするには、クラスタを初期化する前に、PD構成ファイルを次のように変更できます。
+配置ルール機能は、v5.0以降のバージョンのTiDBではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。無効にした後でこの機能を有効にするには、クラスタを初期化する前に、PD構成ファイルを次のように変更します。
 
 {{< copyable "" >}}
 
@@ -94,7 +94,7 @@ enable-placement-rules = true
 }
 ```
 
-ブートストラップされたクラスタの場合、pd-ctlを使用してオンラインで配置ルールを有効にすることもできます。
+ブートストラップクラスタの場合、pd-ctlを使用してオンラインで配置ルールを有効にすることもできます。
 
 {{< copyable "" >}}
 
@@ -274,12 +274,12 @@ pd-ctl config placement-rules rule-bundle get pd
 }
 ```
 
-出力をファイルに書き込むには、 `rule-bundle get`サブコマンドに`-out`引数を追加します。これは、その後の変更と保存に便利です。
+出力をファイルに書き込むには、 `rule-bundle get`サブコマンドに`--out`引数を追加します。これは、その後の変更と保存に便利です。
 
 {{< copyable "" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle get pd -out="group.json"
+pd-ctl config placement-rules rule-bundle get pd --out="group.json"
 ```
 
 変更が完了したら、 `rule-bundle set`サブコマンドを使用して、ファイル内の構成をPDサーバーに保存できます。 [pd-ctlを使用してルールを設定する](#set-rules-using-pd-ctl)で説明した`save`コマンドとは異なり、このコマンドはサーバー側でこのグループのすべてのルールを置き換えます。
@@ -287,7 +287,7 @@ pd-ctl config placement-rules rule-bundle get pd -out="group.json"
 {{< copyable "" >}}
 
 ```bash
-pd-ctl config placement-rules rule-bundle set pd -in="group.json"
+pd-ctl config placement-rules rule-bundle set pd --in="group.json"
 ```
 
 ### pd-ctlを使用して、すべての構成を表示および変更します {#use-pd-ctl-to-view-and-modify-all-configurations}
@@ -341,7 +341,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 このセクションでは、配置ルールの一般的な使用シナリオを紹介します。
 
-### シナリオ1：クラスタの災害耐性を向上させるために、通常のテーブルに3つのレプリカを使用し、メタデータに5つのレプリカを使用する {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
+### シナリオ1：クラスタの災害耐性を向上させるために、通常のテーブルに3つのレプリカを使用し、メタデータに5つのレプリカを使用します {#scenario-1-use-three-replicas-for-normal-tables-and-five-replicas-for-the-metadata-to-improve-cluster-disaster-tolerance}
 
 キーの範囲をメタデータの範囲に制限するルールを追加し、値を`count`に設定するだけ`5` 。このルールの例を次に示します。
 

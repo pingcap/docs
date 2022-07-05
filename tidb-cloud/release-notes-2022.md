@@ -8,6 +8,19 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2022年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
+## 2022年7月5日 {#july-05-2022}
+
+-   カラム型ストレージTiFlashは現在一般提供（GA）になっています。
+
+    -   TiFlashは、TiDBを本質的にハイブリッドトランザクション/分析処理（HTAP）データベースにします。アプリケーションデータは最初にTiKVに保存され、次にRaftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ストレージから列ストレージへのリアルタイムレプリケーションです。
+    -   TiFlashレプリカを含むテーブルの場合、TiDBオプティマイザは、コスト見積もりに基づいて、TiKVレプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。
+
+    TiFlashがもたらすメリットを体験するには、 [TiDB Cloudクイックスタートガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)を参照してください。
+
+-   専用層クラスタのTiKVとTiFlashの[ストレージサイズを増やす](/tidb-cloud/scale-tidb-cluster.md)をサポートします。
+
+-   ノードサイズフィールドでのメモリ情報の表示をサポートします。
+
 ## 2022年6月28日 {#june-28-2022}
 
 -   TiDB Cloud専用階層を[TiDB v5.4.1](https://docs.pingcap.com/tidb/stable/release-5.4.1)から[TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)にアップグレードします。
@@ -23,7 +36,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   専用層クラスタを作成するためのGCPリージョン`Taiwan`のサポートを追加します。
 -   名、前回、会社名、国、電話番号など、 TiDB Cloudコンソールで[ユーザープロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします。
--   TiDB CloudコンソールでMySQL、MyCLI、JDBC、Python、Go、Node.jsの接続文字列を提供して、TiDBクラスタに簡単に接続できるようにします。
+-   TiDB CloudコンソールでMySQL、MyCLI、JDBC、Python、Go、およびNode.jsの接続文字列を提供して、TiDBクラスタに簡単に接続できるようにします。
 -   データのインポート中にバケットURLからバケット領域を自動的に取得することをサポートして、そのような情報を入力する手間を省きます。
 
 ## 2022年6月16日 {#june-16-2022}
@@ -64,7 +77,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022年5月1日 {#may-1-2022}
 
--   クラスタを作成または復元するときに、TiDB、TiKV、およびTiFlash<sup>ベータ</sup>のvCPUサイズの構成をサポートします。
+-   クラスタを作成または復元するときに、TiDB、TiKV、およびTiFlashのvCPUサイズの構成をサポートします。
 -   クラスタ作成のためのAWSリージョン`Mumbai`のサポートを追加します。
 -   コンピューティング、ストレージ、およびデータ転送のコストを[TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md)に更新します。
 
@@ -92,11 +105,11 @@ TiDB Cloudが一般提供になりました。 [サインアップ](https://tidb
 
 一般的な変更：
 
--   固定クラスタサイズのクラスタ層はもうありません。 TiDB、TiKV、およびTiFlash<sup>ベータ</sup>のクラスタサイズを簡単にカスタマイズできます。
--   TiFlashを使用しない既存のクラスタへのTiFlash<sup>ベータ</sup>ノードの追加をサポートします。
+-   固定クラスタサイズのクラスタ層はもうありません。 TiDB、TiKV、TiFlashのクラスタサイズを簡単にカスタマイズできます。
+-   TiFlashを使用しない既存のクラスタへのTiFlashノードの追加をサポートします。
 -   新しいクラスタを作成するときに、ストレージサイズ（500〜2048 GiB）の指定をサポートします。クラスタの作成後にストレージサイズを変更することはできません。
 -   新しいパブリックリージョンを導入します： `eu-central-1` 。
--   8 vCPU TiFlash<sup>ベータ版</sup>を廃止し、16vCPUTiFlashを提供します。
+-   8 vCPU TiFlashを廃止し、16vCPUTiFlashを提供します。
 -   CPUとストレージの価格を分けてください（どちらも30％のパブリックプレビュー割引があります）。
 -   [課金情報](/tidb-cloud/tidb-cloud-billing.md)と[価格表](https://en.pingcap.com/tidb-cloud/#pricing)を更新します。
 

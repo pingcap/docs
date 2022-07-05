@@ -11,7 +11,7 @@ aliases: ['/tidbcloud/glossary']
 
 ### クラスタ層 {#cluster-tier}
 
-クラスタの機能と容量を決定します。クラスタ層が異なれば、クラスタ内のTiDB、TiKV、およびTiFlash<sup>ベータ</sup>ノードの数も異なります。
+クラスタの機能と容量を決定します。クラスタ層が異なれば、クラスタ内のTiDB、TiKV、およびTiFlashノードの数も異なります。
 
 ## M {#m}
 
@@ -23,7 +23,7 @@ aliases: ['/tidbcloud/glossary']
 
 ### ノード {#node}
 
-データインスタンス（TiKV）またはコンピューティングインスタンス（TiDB）または分析インスタンス（TiFlash<sup>ベータ</sup>）のいずれかを指します。
+データインスタンス（TiKV）またはコンピューティングインスタンス（TiDB）または分析インスタンス（TiFlash）のいずれかを指します。
 
 ## O {#o}
 
@@ -39,7 +39,7 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 ### ポリシー {#policy}
 
-特定のアクションやリソースへのアクセスなど、役割、ユーザー、または組織に適用されるアクセス許可を定義するドキュメント。
+特定のアクションやリソースへのアクセスなど、役割、ユーザー、または組織に適用される権限を定義するドキュメント。
 
 ### 事業 {#project}
 
@@ -53,13 +53,13 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 ### ごみ箱 {#recycle-bin}
 
-有効なバックアップを持つ削除されたクラスターのデータが保存される場所。バックアップされたクラスタが削除されると、クラスタの既存のバックアップファイルがごみ箱に移動されます。自動バックアップからのバックアップファイルの場合、ごみ箱はそれらを7日間保持します。手動バックアップからのバックアップファイルの場合、有効期限はありません。データの損失を防ぐために、時間内にデータを新しいクラスタに復元することを忘れないでください。クラスタ**にバックアップがない**場合、削除されたクラスタはここに表示されないことに注意してください。
+有効なバックアップを持つ削除されたクラスターのデータが保存される場所。バックアップされたクラスタが削除されると、クラスタの既存のバックアップファイルがごみ箱に移動されます。自動バックアップからのバックアップファイルの場合、ごみ箱はそれらを7日間保持します。手動バックアップからのバックアップファイルの場合、有効期限はありません。データの損失を避けるために、時間内にデータを新しいクラスタに復元することを忘れないでください。クラスタ**にバックアップがない**場合、削除されたクラスタはここに表示されないことに注意してください。
 
 ### 領域 {#region}
 
 -   TiDB Cloudリージョン
 
-    同じ地理的領域に配置された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
+    同じ地理的領域に展開された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
 
 -   TiDBリージョン
 
@@ -73,13 +73,13 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 ### TiDBクラスタ {#tidb-cluster}
 
-機能的な作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) （ [配置ドライバー](https://docs.pingcap.com/tidb/stable/tidb-scheduling) ）、および[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)の<sup>ベータ</sup>ノードの[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 。
+機能する作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) （ [配置ドライバー](https://docs.pingcap.com/tidb/stable/tidb-scheduling) ）、および[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)ノードの[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 。
 
 ### TiDBノード {#tidb-node}
 
 トランザクションストアまたは分析ストアから返されたクエリからのデータを集約するコンピューティングノード。 TiDBノードの数を増やすと、クラスタが処理できる同時クエリの数が増えます。
 
-### TiFlash<sup>ベータ</sup>ノード {#tiflash-sup-beta-sup-node}
+### TiFlashノード {#tiflash-node}
 
 TiKVからのデータをリアルタイムで複製し、リアルタイムの分析ワークロードをサポートする分析ストレージノード。
 
