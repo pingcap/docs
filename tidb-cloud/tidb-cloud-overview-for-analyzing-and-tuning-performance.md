@@ -40,7 +40,7 @@ System throughput indicates the number of requests that can be completed by a sy
 
 For example, for a database system running OLTP loads, after its CPU utilization exceeds 65%, the CPU queueing scheduling latency increases significantly. This is because concurrent requests of a system are not completely independent, which means that these requests can collaborate and compete for shared resources. For example, requests from different users might perform mutually exclusive locking operations on the same data. When the resource utilization increases, the queuing and scheduling latency increases too, which causes that the shared resources cannot be released in time and in turn prolongs the waiting time for shared resources by other tasks.
 
-## Troubleshooting steps
+## Troubleshoot bottlenecks in user response time
 
 There are several pages on the TiDB Cloud console that help you troubleshoot user response time.
 
