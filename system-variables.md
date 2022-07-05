@@ -387,7 +387,19 @@ This variable is an alias for `last_insert_id`.
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
+
+<CustomContent platform="tidb">
+
 - This variable ensures that all connections to TiDB are either on a local socket, or using TLS. See [Enable TLS between TiDB Clients and Servers](/enable-tls-between-clients-and-servers.md) for additional details.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable ensures that all connections to TiDB are either on a local socket, or using TLS.
+
+</CustomContent>
+
 - Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
 - This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0.
 
@@ -1017,7 +1029,19 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
+
+<CustomContent platform="tidb">
+
+- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidb/stable/troubleshoot-data-inconsistency-errors).
+
+</CustomContent>
+
 - For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
@@ -1701,7 +1725,19 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Enumeration
 - Default value: `CANCEL`
 - Possible values: `CANCEL`, `LOG`
+
+<CustomContent platform="tidb">
+
 - Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by `tidb_mem_quota_query` and cannot be spilled over to disk. See [TiDB Memory Control](/configure-memory-usage.md) for details.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Specifies what operation TiDB performs when a single SQL statement exceeds the memory quota specified by [`tidb_mem_quota_query`](#tidb_mem_quota_query) and cannot be spilled over to disk.
+
+</CustomContent>
+
 - The default value is `CANCEL`, but in TiDB v4.0.2 and earlier versions, the default value is `LOG`.
 - This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0.
 
@@ -1768,11 +1804,22 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_memory_usage_alarm_ratio
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: GLOBAL
 - Persists to cluster: No
 - Type: Float
 - Default value: `0.8`
 - Range: `[0, 1]`
+
+<CustomContent platform="tidb">
+
 - TiDB triggers an alarm when the percentage of the memory it takes exceeds a certain threshold. For the detailed usage description of this feature, see [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 - You can set the initial value of this variable by configuring [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409).
 
@@ -2517,11 +2564,22 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Enumeration
 - Default value: `FAST`
 - Possible values: `OFF`, `FAST`, `STRICT`
-- This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
+
+<CustomContent platform="tidb">
+
+- This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md).
 
     - `OFF`: Disable this check.
     - `FAST`: Enable most of the check items, with almost no impact on performance.
     - `STRICT`: Enable all check items, with a minor impact on pessimistic transaction performance when the system workload is high.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control the assertion level. Assertion is a consistency check between data and indexes, which checks whether a key being written exists in the transaction commit process. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](https://docs.pingcap.com/tidb/stable/troubleshoot-data-inconsistency-errors).
+
+</CustomContent>
 
 - For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
