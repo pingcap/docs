@@ -107,7 +107,7 @@ Note that TiFlash is unavailable when the vCPU size of TiDB or TiKV is set as **
 
 ### TiFlash node quantity
 
-TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least 2 replicas of the data for high availability in your production environment.
+TiDB Cloud deploys TiFlash nodes evenly to different availability zones in a region. It is recommended that you configure at least two TiFlash nodes in each TiDB Cloud cluster and create at least two replicas of the data for high availability in your production environment.
 
 The minimum number of TiFlash nodes depends on the TiFlash replica counts for specific tables:
 
