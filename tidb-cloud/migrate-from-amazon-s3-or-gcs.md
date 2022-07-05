@@ -88,7 +88,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, you need
     In the template, you need to update the following two fields to your own resource values:
 
     - `"Resource": "<Your S3 bucket ARN>"`: `<Your S3 bucket ARN>` is the ARN of your S3 bucket. You can go to the **Properties** tab in your S3 bucket, and get the Amazon Resource Name (ARN) value in the **Bucket Overview** area. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test"`.
-    - `"Resource": "arn:aws:s3:::<Your customized directory>"`: `<Your customized directory>` is a directory that you can customize in your S3 bucket root level for data storage. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If you want to store your data in the S3 bucket root directory, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Note that this field is expected to end with `/*`.
+    - `"Resource": "arn:aws:s3:::<Your customized directory>"`: `<Your customized directory>` is a directory that you can customize in your S3 bucket root level for data storage. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If you want to store your data in the S3 bucket root directory, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Note that this value is expected to end with `/*`; otherwise, you might encounter the `AccessDenied` error.
 
 3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID of the target TiDB cluster exists. 
 
@@ -152,7 +152,8 @@ Your TiDB Cloud cluster can now access the Amazon S3 bucket.
 
 > **Note:**
 > 
-> To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region. 
+> - To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
+> - If you have encountered the `AccessDenied` error during the data import process, see [Troubleshoot Permission Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-permission-error.md)
 
 ## Import or migrate from GCS to TiDB Cloud
 
