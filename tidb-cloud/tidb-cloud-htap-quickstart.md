@@ -28,8 +28,6 @@ ALTER TABLE trips SET TIFLASH REPLICA 1;
 
 To check the replication progress, execute the following statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bikeshare' and TABLE_NAME = 'trips';
 ```
