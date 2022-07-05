@@ -99,7 +99,7 @@ Hover over the highlighted block to see which table or index has high traffic, a
 
 #### Scale out
 
-In the metrics under [Overview](/tidb-cloud/monitor-tidb-cluster.md), you can view storage space, CPU utilization, and TiKV IO rate. If any of them are reaching the upper limit for a long time, it is possible that the current cluster size can not meet the business requirements. It is recommended to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to confirm if there is a need for scaling out.
+In the metrics under [Overview](/tidb-cloud/monitor-tidb-cluster.md), you can view storage space, CPU utilization, and TiKV IO rate. If any of them are reaching the upper limit for a long time, it is possible that the current cluster size can not meet the business requirements. It is recommended to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to confirm if you need to scale out the cluster.
 
 #### Other issues
 
@@ -107,8 +107,8 @@ If the previous methods can not resolve the performance issue, you can contact t
 
 - The cluster ID
 - The issue interval and a comparable normal interval
-- Description of the business load characteristics, such as read or write ratios and primary behavior
-- Description of the problem phenomenon and expected behavior
+- The problem phenomenon and expected behavior
+- The business load characteristics, such as read or write ratios and primary behavior
 
 ## Summary
 
