@@ -21,9 +21,9 @@ To improve the performance of SQL statements, consider the following principles.
 
 TiDB Cloud provides several tools to help you analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
 
-### Use Statement on the Diagnostics tab
+### Use Statement on the Diagnosis tab
 
-The TiDB Cloud console provides a **[Statement](/tidb-cloud/tune-performance.md#statement-analysis)** sub-tab on the **Diagnostics** tab. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to analyze the total time consumed or the time consumed by a single execution when a SQL statement takes a long time.
+The TiDB Cloud console provides a **[Statement](/tidb-cloud/tune-performance.md#statement-analysis)** sub-tab on the **Diagnosis** tab. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to analyze the total time consumed or the time consumed by a single execution when a SQL statement takes a long time.
 
 Note that on this sub-tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 

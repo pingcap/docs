@@ -51,7 +51,7 @@ There are several pages on the TiDB Cloud console that help you troubleshoot use
 
 If you require additional metrics, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md).
 
-If you experience latency and performance issues that are not as expected, consider steps in the following sections for analysis and troubleshooting.
+If you experience latency and performance issues, refer to the steps in the following sections for analysis and troubleshooting.
 
 ### Locate bottlenecks in user response time
 
@@ -61,31 +61,35 @@ Observe Latency(P80) on the Overview tab. If this value is much lower than the P
 
 If the bottleneck is outside the TiDB cluster, you can use the following steps to troubleshoot the bottleneck.
 
-1. Check the TiDB version on the left side of the [Overview tab](/tidb-cloud/monitor-tidb-cluster.md). If it is v6.0.0 or earlier versions, it is recommended to contact the PingCAP support team to confirm if the Prepared plan cache, Raft-engine and TiKV AsyncIO features can be enabled. Enabling these features, along with application-side tuning, can significantly improve throughput performance and reduce latency and resource utilization.
-2. If necessary, you can increase the TiDB token limit to further increase throughput.
-3. If the Prepared plan cache feature is enabled, you use JDBC on the user side, it is recommended to use the following configuration:
+1. Check the TiDB version on the left side of the [Overview tab](/tidb-cloud/monitor-tidb-cluster.md). If it is v6.0.0 or earlier versions, it is recommended to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to confirm if the Prepared plan cache, Raft-engine and TiKV AsyncIO features can be enabled. Enabling these features, along with application-side tuning, can significantly improve throughput performance and reduce latency and resource utilization.
+2. If necessary, you can increase the TiDB token limit to increase the throughput.
+3. If the Prepared plan cache feature is enabled, and you use JDBC on the user side, it is recommended to use the following configuration:
 
     ```
     useServerPrepStmts=true&cachePrepStmts=true& prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
     ```
 
-   If you do not use JDBC on the user side, you want to take full advantage of the Plan cache feature of the current TiDB cluster, you need to cache the prepared statement object on the client side without resetting the calls to StmtPrepare and StmtClose, reducing the number of commands to be called for each query from 3 to 1. There is some development effort for this, depending on your performance requirements and the amount of client-side changes. You can consult the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help.
+   If you do not use JDBC and want to take full advantage of the Plan cache feature of the current TiDB cluster, you need to cache the prepared statement objects on the client side. You do not need to reset the calls to StmtPrepare and StmtClose. Reduce the number of commands to be called for each query from 3 to 1. It requires some development effort, depending on your performance requirements and the amount of client-side changes. You can consult the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help.
 
 #### Bottlenecks in the TiDB cluster
 
-If you determine that the performance bottleneck is within a TiDB cluster, it is recommended that you check the following.
+If you determine that the performance bottleneck is within a TiDB cluster, it is recommended that you do the following:
 
 - Optimize slow SQL queries.
 - Resolve hotspot issues.
-- Expand the capacity.
+- Scale out the cluster to expand the capacity.
+
+### Optimize slow SQL queries
+
+For more information about SQL performance tuning, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
 
 ### Resolve hotstpot issues
 
-You can view hotspot issues on the [Key Visualizer tab](/tidb-cloud/tune-performance.md#key-visualizer). The following screen shot shows a sample heat map. The horizontal coordinate of the map is the time and the vertical coordinate is the table and index. Brighter color indicates higher traffic. You can toggle the display of read or write traffic in the toolbar.
+You can view hotspot issues on the [Key Visualizer tab](/tidb-cloud/tune-performance.md#key-visualizer). The following screen shot shows a sample heat map. The horizontal coordinate of the map is the time, and the vertical coordinate is the table and index. Brighter color indicates higher traffic. You can toggle the display of read or write traffic in the toolbar.
 
 ![Hotspot issues](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot.png)
 
-The following screen shot shows an example of a write hotspot. A bright diagonal line (diagonal up or diagonal down) appears in the write flow graph, and the write traffic appears only at the end of the line. It becomes a stepped pattern as the number of table Regions grows. It indicates that there is a write hotspot in the table.
+The following screen shot shows an example of a write hotspot. A bright diagonal line (diagonal up or diagonal down) appears in the write flow graph, and the write traffic appears only at the end of the line. It becomes a stepped pattern as the number of table Regions grows. It indicates that there is a write hotspot in the table. When a write hotspot occurs, you need to check whether you are using a self-incrementing primary key, or no primary key, or using a time-dependent insert statement or index.
 
 ![Write hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-write-hotspot.png)
 
@@ -93,11 +97,9 @@ A read hotspot is generally represented in the heat map as a bright horizontal l
 
 ![Read hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-read-hotspot.png)
 
-Hover over the highlighted block to see what table or index has high traffic, as shown in the following screen shot.
+Hover over the highlighted block to see which table or index has high traffic, as shown in the following screen shot.
 
 ![Hotspot index](/media/tidb-cloud/tidb-cloud-troubleshoot-hotspot-index.png)
-
-When there are write hotspots, you should first confirm whether you are using a self-incrementing primary key, or no primary key, or using a time-dependent insert statement or index.
 
 ### Scale out
 
@@ -105,7 +107,7 @@ In the metrics under [Overview](/tidb-cloud/monitor-tidb-cluster.md), you can vi
 
 ### Other issues
 
-If the previous methods still do not resolve the performance issue, you can contact the  [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to further troubleshoot the issue. The following information, as appropriate, may speed up the troubleshooting process.
+If the previous methods can not resolve the performance issue, you can contact the  [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help. It is recommended to provide the following information to speed up the troubleshooting process.
 
 - The cluster ID
 - The issue interval and a comparable normal interval
@@ -121,10 +123,8 @@ In general, you can use the following optimization methods to analyze and resolv
 | Prepared plan cache + JDBC | Throughput performance will be greatly improved, latency will be significantly reduced, and the average TiDB CPU utilization will be significantly reduced. |
 | Enable AsyncIO and Raft-engine in TiKV | There will be some improvement in throughput performance. |
 | Clustered Index | Throughput performance will be greatly improved. |
-|  Scale out TiDB nodes |Throughput performance will be greatly improved.  |
-| Client-side optimization, same server resources split 1 JVM into 3 | Throughput performance will improve significantly and may further continue to improve throughput capacity if further split. |
-| Reasonable control of network latency between application and database |  Unreasonable network latency can lead to decreased throughput and increased latency. |
+| Scale out TiDB nodes |Throughput performance will be greatly improved.  |
+| Client-side optimization. Split 1 JVM into 3 | Throughput performance will improve significantly and may further continue to improve throughput capacity if further split. |
+| Limit the network latency between the application and the database | High network latency can lead to decreased throughput and increased latency. |
 
-For other issues, contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help.
-
-In the future, TiDB Cloud will introduce more observable data and self-diagnostic services to provide you with a more comprehensive understanding of performance metrics and more direct operational advice to improve your experience.
+In the future, TiDB Cloud will introduce more observable data and self-diagnostic services. They will provide you with a more comprehensive understanding of performance metrics and operational advice to improve your experience.
