@@ -17,7 +17,9 @@ Before experiencing the HTAP feature, follow [TiDB Cloud Quick Start](/tidb-clou
 
 ### Step 1. Replicate the sample data to the columnar storage engine
 
-After a cluster with TiFlash nodes is created, TiKV does not replicate data to TiFlash by default. You need to execute the following DDL statements in a MySQL client of TiDB to specify the tables to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly.
+After a cluster with TiFlash nodes is created, TiKV does not replicate data to TiFlash by default. You need to execute DDL statements in a MySQL client of TiDB to specify the tables to be replicated. After that, TiDB will create the specified replicas in TiFlash accordingly.
+
+For example, to replicate the `trips` table to TiFlash, execute the following statement:
 
 ```sql
 USE bikeshare;
