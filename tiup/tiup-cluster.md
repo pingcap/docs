@@ -23,7 +23,7 @@ Usage:
   tiup cluster [command]
 
 Available Commands:
-  check       Perform preflight checks for the cluster.
+  check       Precheck a cluster
   deploy      Deploy a cluster for production
   start       Start a TiDB cluster
   stop        Stop a TiDB cluster
@@ -31,12 +31,12 @@ Available Commands:
   scale-in    Scale in a TiDB cluster
   scale-out   Scale out a TiDB cluster
   destroy     Destroy a specified cluster
-  clean       (EXPERIMENTAL) Cleanup a specified cluster
+  clean       (Experimental) Clean up a specified cluster
   upgrade     Upgrade a specified TiDB cluster
   display     Display information of a TiDB cluster
   list        List all clusters
   audit       Show audit log of cluster operation
-  import      Import an exist TiDB cluster from TiDB-Ansible
+  import      Import an existing TiDB cluster from TiDB-Ansible
   edit-config Edit TiDB cluster config
   show-config Show TiDB cluster config
   reload      Reload a TiDB cluster's config and restart if needed
@@ -44,13 +44,13 @@ Available Commands:
   help        Help about any command
 
 Flags:
-  -c, --concurrency int     max number of parallel tasks allowed (default 5)
+  -c, --concurrency int     Maximum number of concurrent tasks allowed (defaults to `5`)
       --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
   -h, --help                help for tiup
-      --ssh string          (EXPERIMENTAL) The executor type: 'builtin', 'system', 'none'.
-      --ssh-timeout uint    Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-  -v, --version             version for tiup
-      --wait-timeout uint   Timeout in seconds to wait for an operation to complete, ignored for operations that don't fit. (default 120)
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
+      --ssh-timeout uint    Timeout in seconds to connect a host via SSH. Operations that don't need an SSH connection are ignored. (default 5)
+  -v, --version            TiUP version
+      --wait-timeout uint   Timeout in seconds to wait for an operation to complete. Inapplicable operations are ignored. (defaults to `120`)
   -y, --yes                 Skip all confirmations and assumes 'yes'
 ```
 
@@ -370,7 +370,7 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --ssh string          (EXPERIMENTAL) The executor type: 'builtin', 'system', 'none'.
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
