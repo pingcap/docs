@@ -28,7 +28,7 @@ To scale a cluster, take the following steps:
 
 ## Increase the node size
 
-When a cluster is running, you cannot increase its node size. To make such change, take either of the following methods:
+When a cluster is running, you cannot increase its node size. To make such changes, take either of the following methods:
 
 - Method 1: Increase the node size through backup and restore
 
