@@ -70,14 +70,14 @@ In this step, you can compare the execution statistics between TiKV (row-based s
     In the output, you can get the execution time from the `execution info` column.
 
     ```sql
-    id                         | estRows   | actRows | task      | access object | execution info                                                | operator info                                                                                                                                          | memory  | disk
-    ---------------------------+-----------+---------+-----------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+---------
-    Sort_5                     | 633.00    | 73633   | root      |               | time:1.62s, loops:73                                                | Column#15                                                                                                                                          | 6.88 MB | 0 Bytes
-    └─Projection_7             | 633.00    | 73633   | root      |               | time:1.57s, loops:76, Concurrency:OFF                                                | bikeshare.trips.start_station_name, bikeshare.trips.end_station_name, Column#15                                                                                                                                          | 6.20 MB | N/A
-      └─HashAgg_15             | 633.00    | 73633   | root      |               | time:1.57s, loops:76, partial_... | group by:bikeshare.trips.end_s... | 58.0 MB | N/A
-        └─TableReader_16       | 633.00    | 111679  | root      |               | time:1.34s, loops:3, cop_task:... | data:HashAgg_8 | 7.55 MB | N/A
-          └─HashAgg_8          | 633.00    | 111679  | cop[tikv] |               | tikv_task:{proc max:830ms, min... | group by:bikeshare.trips.end_s... | N/A     | N/A
-            └─TableFullScan_14 | 816090.00 | 816090  | cop[tikv] | table:trips   | tikv_task:{proc max:490ms, min... | keep order:false   | N/A     | N/A
+    id                         | estRows   | actRows | task      | access object | execution info                            | operator info                                | memory  | disk
+    ---------------------------+-----------+---------+-----------+---------------+-------------------------------------------+-----------------------------------------------+---------+---------
+    Sort_5                     | 633.00    | 73633   | root      |               | time:1.62s, loops:73                      | Column#15                                    | 6.88 MB | 0 Bytes
+    └─Projection_7             | 633.00    | 73633   | root      |               | time:1.57s, loops:76, Concurrency:OFF...  | bikeshare.trips.start_station_name...        | 6.20 MB | N/A                                                                                                                                        | 6.20 MB | N/A
+      └─HashAgg_15             | 633.00    | 73633   | root      |               | time:1.57s, loops:76, partial_worker:...  | group by:bikeshare.trips.end_station_name... | 58.0 MB | N/A
+        └─TableReader_16       | 633.00    | 111679  | root      |               | time:1.34s, loops:3, cop_task: {num: ...  | data:HashAgg_8                               | 7.55 MB | N/A
+          └─HashAgg_8          | 633.00    | 111679  | cop[tikv] |               | tikv_task:{proc max:830ms, min:470ms,...  | group by:bikeshare.trips.end_station_name... | N/A     | N/A
+            └─TableFullScan_14 | 816090.00 | 816090  | cop[tikv] | table:trips   |  tikv_task:{proc max:490ms, min:310ms,... | keep order:false                             | N/A     | N/A
     (6 rows)
     ```
 
