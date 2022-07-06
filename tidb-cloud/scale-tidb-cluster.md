@@ -8,7 +8,8 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 > **Note:**
 >
-> - Currently, you cannot scale a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier).
+> - The cluster scaling feature is not available for [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier).
+> - For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
 > - When a cluster is in the scaling status, you cannot perform any new scaling operations on it.
 
 ## Scale a cluster
@@ -67,7 +68,3 @@ To submit a support request, perform the steps in [TiDB Cloud Support](/tidb-clo
 - Expected node size: xxx
 - Current node number: xxx
 - Expected node number: xxx
-
-> **Note:**
->
-> You cannot decrease the cluster storage size after your cluster is created.
