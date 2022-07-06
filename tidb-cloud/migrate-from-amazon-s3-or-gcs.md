@@ -39,7 +39,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure the following:
 
 ### Step 2. Configure Amazon S3 access 
 
-To allow TiDB cloud to access the source data in your Amazon S3 bucket, you need to configure the Amazon S3 for each TiDB Cloud as a service on the AWS project and Amazon S3 bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the Amazon S3 bucket.
+To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the Amazon S3 for each TiDB Cloud as a service on the AWS project and Amazon S3 bucket pair. Once the configuration is done for one cluster in a project, all database clusters in that project can access the Amazon S3 bucket.
 
 1. Get the TiDB Cloud account ID and external ID of the target TiDB cluster. 
 
