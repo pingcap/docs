@@ -7,9 +7,9 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
-> **Warning:**
+> **Note:**
 >
-> Currently, the **audit logging** feature is experimental. It is not recommended that you use it for production environments.
+> Currently, the **audit logging** feature is experimental. The interface and output are subject to change.
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
