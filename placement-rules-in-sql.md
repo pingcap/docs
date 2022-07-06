@@ -15,7 +15,7 @@ The detailed user scenarios are as follows:
 
 - Merge multiple databases of different applications to reduce the cost on database maintenance
 - Increase replica count for important data to improve the application availability and data reliability
-- Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
+- Store new data into NVMe storage and store old data into SSDs to lower the cost on data archiving and storage 
 - Schedule the leaders of hotspot data to high-performance TiKV instances
 - Separate cold data to lower-cost storage mediums to improve cost efficiency
 
@@ -102,19 +102,21 @@ Rules that are attached to objects are applied *asynchronously*. To view the cur
 
 > **Note:**
 >
-> Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
+> - Placement options depend on labels correctly specified in the configuration of each TiKV node. For example, the `PRIMARY_REGION` option depends on the `region` label in TiKV. To see a summary of all labels available in your TiKV cluster, use the statement [`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md):
 >
-> ```sql
-> mysql> show placement labels;
-> +--------+----------------+
-> | Key    | Values         |
-> +--------+----------------+
-> | disk   | ["ssd"]        |
-> | region | ["us-east-1"]  |
-> | zone   | ["us-east-1a"] |
-> +--------+----------------+
-> 3 rows in set (0.00 sec)
-> ```
+>    ```sql
+>    mysql> show placement labels;
+>    +--------+----------------+
+>    | Key    | Values         |
+>    +--------+----------------+
+>    | disk   | ["ssd"]        |
+>    | region | ["us-east-1"]  |
+>    | zone   | ["us-east-1a"] |
+>    +--------+----------------+
+>    3 rows in set (0.00 sec)
+>    ```
+>
+> - When you use `CREATE PLACEMENT POLICY` to create a placement policy, TiDB does not check whether the labels exist. Instead, TiDB performs the check when you attach the policy to a table.
 
 | Option Name                | Description                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------|
@@ -198,13 +200,13 @@ CREATE PLACEMENT POLICY p3 FOLLOWERS=2;
 
 CREATE TABLE t1 (a INT);  -- Creates a table t1 with no placement options.
 
-ALTER DATABASE test POLICY=p2;  -- Changes the default placement option, and does not apply to the existing table t1.
+ALTER DATABASE test PLACEMENT POLICY=p2;  -- Changes the default placement option, and does not apply to the existing table t1.
 
 CREATE TABLE t2 (a INT);  -- Creates a table t2 with the default placement policy p2.
 
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;  -- Creates a table t3 without the default policy p2, because this statement has specified another placement rule.
 
-ALTER DATABASE test POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
+ALTER DATABASE test PLACEMENT POLICY=p3;  -- Changes the default policy, and does not apply to existing tables.
 
 CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 
@@ -220,36 +222,36 @@ The placement options `PRIMARY_REGION`, `REGIONS`, and `SCHEDULE` meet the basic
 For example, to set constraints that data must reside on a TiKV store where the label `disk` must match a value:
 
 ```sql
-CREATE PLACEMENT POLICY storeonfastssd CONSTRAINTS="[+disk=ssd]";
-CREATE PLACEMENT POLICY storeonhdd CONSTRAINTS="[+disk=hdd]";
+CREATE PLACEMENT POLICY storageonnvme CONSTRAINTS="[+disk=nvme]";
+CREATE PLACEMENT POLICY storageonssd CONSTRAINTS="[+disk=ssd]";
 CREATE PLACEMENT POLICY companystandardpolicy CONSTRAINTS="";
 
 CREATE TABLE t1 (id INT, name VARCHAR(50), purchased DATE)
 PLACEMENT POLICY=companystandardpolicy
 PARTITION BY RANGE( YEAR(purchased) ) (
-  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storeonhdd,
+  PARTITION p0 VALUES LESS THAN (2000) PLACEMENT POLICY=storageonssd,
   PARTITION p1 VALUES LESS THAN (2005),
   PARTITION p2 VALUES LESS THAN (2010),
   PARTITION p3 VALUES LESS THAN (2015),
-  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storeonfastssd
+  PARTITION p4 VALUES LESS THAN MAXVALUE PLACEMENT POLICY=storageonnvme
 );
 ```
 
-You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd: 1,+disk=hdd: 2}`).
+You can either specify constraints in list format (`[+disk=ssd]`) or in dictionary format (`{+disk=ssd: 1,+disk=nvme: 2}`).
 
-In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=hdd` indicates that the label `disk` must not be `hdd`.
+In list format, constraints are specified as a list of key-value pairs. The key starts with either a `+` or a `-`. `+disk=ssd` indicates that the label `disk` must be set to `ssd`, and `-disk=nvme` indicates that the label `disk` must not be `nvme`.
 
-In dictionary format, constraints also indicate a number of instances that apply to that rule. For example, `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2 and 1 follower is in us-west-1. For another example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=hdd":1,"+region=us-west-1":1}';` indicates that 1 follower is in us-east-1 with an hdd disk, and 1 follower is in us-west-1.
+In dictionary format, constraints also indicate a number of instances that apply to that rule. For example, `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";` indicates that 1 follower is in us-east-1, 1 follower is in us-east-2 and 1 follower is in us-west-1. For another example, `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';` indicates that 1 follower is in us-east-1 with an nvme disk, and 1 follower is in us-west-1.
 
 > **Note:**
 >
-> Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=hdd:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=hdd:1": null}'`. But `"{+disk=ssd: 1,+disk=hdd: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=hdd": 1}'`.
+> Dictionary and list formats are based on the YAML parser, but the YAML syntax might be incorrectly parsed. For example, `"{+disk=ssd:1,+disk=nvme:2}"` is incorrectly parsed as `'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`. But `"{+disk=ssd: 1,+disk=nvme: 1}"` is correctly parsed as `'{"+disk=ssd": 1, "+disk=nvme": 1}'`.
 
 ## Compatibility with tools
 
 | Tool Name | Minimum supported version | Description |
 | --- | --- | --- |
-| Backup & Restore (BR) | 6.0 | Supports importing and exporting placement rules. Refer to [BR Compatibility](/br/backup-and-restore-tool.md#compatibility) for details. |
+| Backup & Restore (BR) | 6.0 | Supports importing and exporting placement rules. Refer to [BR Compatibility](/br/backup-and-restore-overview.md#compatibility) for details. |
 | TiDB Lightning | Not compatible yet | An error is reported when TiDB Lightning imports backup data that contains placement policies  |
 | TiCDC | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |
 | TiDB Binlog | 6.0 | Ignores placement rules, and does not replicate the rules to the downstream |

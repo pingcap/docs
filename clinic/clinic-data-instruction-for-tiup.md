@@ -35,7 +35,6 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Slow log | `tidb_slow_query.log` | `--include=log` |
 | Configuration file | `tidb.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
-| Performance data | `cpu_profile.proto`, `mem_heap.proto`, `goroutine.txt`, `mutex.txt` | `--include=perf` |
 
 ### TiKV diagnostic data
 
@@ -45,7 +44,6 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Error log | `tikv_stderr.log` | `--include=log` |
 | Configuration file | `tikv.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
-| Performance data | `cpu_profile.proto` | `--include=perf` |
 
 ### PD diagnostic data
 
@@ -57,7 +55,6 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Real-time configuration | `config.json` | `--include=config` |
 | Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} store` | `store.json` | `--include=config` |
 | Outputs of the command `tiup ctl pd -u http://${pd IP}:${PORT} config placement-rules show` | `placement-rule.json` | `--include=config` |
-| Performance data | `cpu_profile.proto`, `mem_heap.proto`, `goroutine.txt`, `mutex.txt` | `--include=perf` |
 
 ### TiFlash diagnostic data
 
@@ -65,9 +62,8 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | :------ | :------ |:-------- |
 | Log | `tiflash.log` | `--include=log` |
 | Error log | `tiflash_stderr.log` | `--include=log` |
-| Configuration file |  `tiflash-learner.toml`，`tiflash-preprocessed.toml`，`tiflash.toml` | `--include=config` |
+| Configuration file |  `tiflash-learner.toml`, `tiflash-preprocessed.toml`, `tiflash.toml` | `--include=config` |
 | Real-time configuration | `config.json` | `--include=config` |
-| Performance data | `cpu_profile.proto` | `--include=perf` |
 
 ### TiCDC diagnostic data
 
@@ -76,8 +72,7 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 | Log | `ticdc.log` | `--include=log`|
 | Error log | `ticdc_stderr.log` | `--include=log` |
 | Configuration file | `ticdc.toml` | `--include=config` |
-| Performance data | `cpu_profile.proto`, `mem_heap.proto`, `goroutine.txt`, `mutex.txt` | `--include=perf` |
-| Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` |
+| Debug data | `info.txt`, `status.txt`, `changefeeds.txt`, `captures.txt`, `processors.txt` | `--include=debug` (Diag does not collect this data type by default) |
 
 ### Prometheus monitoring data
 
@@ -90,8 +85,8 @@ This section lists the types of diagnostic data that can be collected by Diag fr
 
 | Data type | Exported file | Parameter for data collection by PingCAP Clinic |
 | :------ | :------ |:-------- |
-| TiDB system variables (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) | `mysql.tidb.csv` | `--include=db_vars` |
-| | `global_variables.csv` | `--include=db_vars` |
+| TiDB system variables | `mysql.tidb.csv` | `--include=db_vars` (Diag does not collect this data type by default; if you need to collect this data type, database credential is required) |
+| | `global_variables.csv` | `--include=db_vars` (Diag does not collect this data type by default) |
 
 ### System information of the cluster node
 

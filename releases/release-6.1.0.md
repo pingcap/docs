@@ -4,7 +4,7 @@ title: TiDB 6.1.0 Release Notes
 
 # TiDB 6.1.0 Release Notes
 
-Release date: x x, 2022
+Release date: June 13, 2022
 
 TiDB version: 6.1.0
 
@@ -23,13 +23,13 @@ In 6.1.0, the key new features or improvements are as follows:
 
 ### SQL
 
-* List partitioning and list columns partitioning become GA. Both are compatible with MySQL 5.7.
+* List partitioning and list COLUMNS partitioning become GA. Both are compatible with MySQL 5.7.
 
-    [User document: List partitioning](/partitioned-table.md#list-partitioning), [User document: List COLUMNS partitioning](/partitioned-table.md#list-columns-partitioning)
+    User documents: [List partitioning](/partitioned-table.md#list-partitioning), [List COLUMNS partitioning](/partitioned-table.md#list-columns-partitioning)
 
 * TiFlash supports initiating a compact command. (experimental)
 
-    TiFlash v6.1.0 introduces the `ALTER TABLE ... COMPACT` statement, which provides a manual way to compact physical data based on the existing background compaction mechanism. With this statement, you can update data in earlier formats and improve read/write performance any time as appropriate. It is recommended that you execute this statement to compact data after upgrading your cluster to v6.1.0. This statement is an extension of the standard SQL syntax and therefore is compatible with MySQL clients. For scenarios other than TiFlash upgrade, usually  there is no need to use this statement.
+    TiFlash v6.1.0 introduces the `ALTER TABLE ... COMPACT` statement, which provides a manual way to compact physical data based on the existing background compaction mechanism. With this statement, you can update data in earlier formats and improve read/write performance any time as appropriate. It is recommended that you execute this statement to compact data after upgrading your cluster to v6.1.0. This statement is an extension of the standard SQL syntax and therefore is compatible with MySQL clients. For scenarios other than TiFlash upgrade, usually there is no need to use this statement.
 
     [User document](/sql-statements/sql-statement-alter-table-compact.md), [#4145](https://github.com/pingcap/tiflash/issues/4145)
 
@@ -39,7 +39,7 @@ In 6.1.0, the key new features or improvements are as follows:
     * `DENSE_RANK()`
     * `ROW_NUMBER()`
 
-    [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#33072](https://github.com/pingcap/tidb/issues/33072)
+  [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### Observability
 
@@ -70,16 +70,11 @@ In 6.1.0, the key new features or improvements are as follows:
 * Support the join order hint syntax
 
     * The `LEADING` hint reminds the optimizer to use the specified order as the prefix of join operations. A good prefix of join can quickly reduce the amount of data at the early phase of join and improve the query performance.
-
-        [User document](/optimizer-hints.md#leadingt1_name--tl_name-)
-
     * The `STRAIGHT_JOIN` hint reminds the optimizer to join tables in an order that is consistent with the order of tables in the `FROM` clause.
-
-        [User document](/optimizer-hints.md#straight_join)
 
     This provides a method for you to fix the order of table joins. A proper use of the hints can effectively enhance the SQL performance and cluster stability.
 
-    [#29932](https://github.com/pingcap/tidb/issues/29932)
+    User document: [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-), [`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join), [#29932](https://github.com/pingcap/tidb/issues/29932)
 
 * TiFlash supports four more functions:
 
@@ -92,17 +87,17 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * TiFlash supports partitioned tables in dynamic pruning mode.
 
-    To enhance performance in OLAP scenarios, dynamic pruning mode is enabled by default for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
+    To enhance performance in OLAP scenarios, dynamic pruning mode is supported for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
 
-    [User document: Access partitioned tables in the MPP mode](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode), [User document: Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
+    User documents: [Access partitioned tables in the MPP mode](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode), [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
 ### Stability
 
 * Automatic recovery from SST corruption
 
-    When RocksDB detects a damaged SST file in the background, TiKV will try to schedule the affected Peer and recover its data using other replicas. You can set the maximum allowable time for the recovery using the `background-error-recovery-window` parameter. If the recovery operation is not completed within the time window, TiKV will automatically panic. This feature automatically detects and recovers recoverable damaged storage, thus improving the cluster stability.
+    When RocksDB detects a damaged SST file in the background, TiKV will try to schedule the affected Peer and recover its data using other replicas. You can set the maximum allowable time for the recovery using the `background-error-recovery-window` parameter. If the recovery operation is not completed within the time window, TiKV will panic. This feature automatically detects and recovers recoverable damaged storage, thus improving the cluster stability.
 
-    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578`)`
+    [User document](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610), [#10578](https://github.com/tikv/tikv/issues/10578)
 
 * Support non-transactional DML statement
 
@@ -120,7 +115,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Databases can effectively understand the distribution of data by collecting statistics, which helps generate reasonable execution plans and improve the efficiency of SQL execution. TiDB regularly collects statistics on frequently changed data objects in the background. However, collecting statistics takes up cluster resources and might affect the stable operation of the business during business peaks.
 
-    Starting from v6.1.0, TiDB introduces `tidb_max_auto_analyze_time` to control the maximum execution time for background statistics collection, which is 12 hours by default. When the application does not encounter a resource bottleneck, it is recommended not to modify this variable so that TiDB can timely collect statistics.
+    Starting from v6.1.0, TiDB introduces [`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610) to control the maximum execution time for background statistics collection, which is 12 hours by default. When the application does not encounter a resource bottleneck, it is recommended not to modify this variable so that TiDB can timely collect statistics.
 
     [User document](/system-variables.md)
 
@@ -130,7 +125,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     Before TiDB v6.1.0, when multiple Region replicas are lost because of machine failure, users have to stop all TiKV servers and use TiKV Control to recover TiKV one by one. Since TiDB v6.1.0, the recovery process is fully automated, does not require to stop TiKV, and does not affect other applications online. The recovery process can be triggered using PD Control and provides a more user-friendly summary information.
 
-    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483`)`
+    [User document](/online-unsafe-recovery.md), [#10483](https://github.com/tikv/tikv/issues/10483)
 
 * Support viewing history statistics collection tasks
 
@@ -140,20 +135,20 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * Support modifying TiDB, TiKV, and TiFlash configurations online
 
-    In earlier TiDB versions, after modifying a configuration item, you must restart the cluster to make the modification effective. This might interrupt online services. To address this issue, TiDB v6.1.0 introduces the online configuration feature, which allows you to validate a parameter change without restarting the cluster. The specific optimizations are as follows:
+  In earlier TiDB versions, after modifying a configuration item, you must restart the cluster to make the modification effective. This might interrupt online services. To address this issue, TiDB v6.1.0 introduces the online configuration feature, which allows you to validate a parameter change without restarting the cluster. The specific optimizations are as follows:
 
     * Transform some TiDB configuration items to system variables, so that they can be modified online and persisted. Note that the original configuration items are deprecated after transformation. For a detailed list of the transformed configuration items, see [Configuration file parameters](#configuration-file-parameters).
     * Support configuring some TiKV parameters online. For a detailed list of the parameters, see [Others](#others).
     * Transform the TiFlash configuration item `max_threads` to a system variable `tidb_max_tiflash_threads`, so that the configuration can be modified online and persisted. Note that the original configuration item remains after transformation.
 
-    For v6.1.0 clusters upgraded (including online and offline upgrades) from earlier versions, note that:
+  For v6.1.0 clusters upgraded (including online and offline upgrades) from earlier versions, note that:
 
-    * If the configuration  items specified in the configuration file before the upgrade already exist, TiDB will automatically update the values of the configured items to those of the corresponding system variables during the upgrade process. In this way, after the upgrade, the system behavior is not affected by parameter optimization.
+    * If the configuration items specified in the configuration file before the upgrade already exist, TiDB will automatically update the values of the configured items to those of the corresponding system variables during the upgrade process. In this way, after the upgrade, the system behavior is not affected by parameter optimization.
     * The automatic update mentioned above occurs only once during the upgrade. After the upgrade, the deprecated configuration items are no longer effective.
 
-    This feature allows you to modify parameters online, and validate and persist them, instead of restarting the system and interrupting services. This makes your daily maintenance easier.
+  This feature allows you to modify parameters online, and validate and persist them, instead of restarting the system and interrupting services. This makes your daily maintenance easier.
 
-    [User document](/dynamic-config.md)
+  [User document](/dynamic-config.md)
 
 * Support killing queries or connections globally
 
@@ -169,10 +164,12 @@ In 6.1.0, the key new features or improvements are as follows:
 
     TiKV API V2 provides a new Raw Key Value storage format and access interface, including:
 
-    * The data is stored in MVCC (Multi-Version Concurrency Control) and the change timestamp of the data is recorded. This feature will lay the foundation for implementing Change Data Capture and incremental backup and restore.
+    * The data is stored in MVCC and the change timestamp of the data is recorded. This feature will lay the foundation for implementing Change Data Capture and incremental backup and restore.
     * Data is scoped according to different usage and supports co-existence of a single TiDB cluster, Transactional KV, RawKV applications.
 
-    Note: Due to significant changes in the underlying storage format, after enabling API V2, you cannot roll back a TiKV cluster to a version earlier than v6.1.0. Downgrading TiKV might result in data corruption.
+  <Warning>
+  Due to significant changes in the underlying storage format, after enabling API V2, you cannot roll back a TiKV cluster to a version earlier than v6.1.0. Downgrading TiKV might result in data corruption.
+  </Warning>
 
     [User document](/tikv-configuration-file.md#api-version-new-in-v610), [#11745](https://github.com/tikv/tikv/issues/11745)
 
@@ -180,7 +177,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
 * Support compatibility with user-level lock management with MySQL
 
-    User-level locks are a user-named lock management system provided by MySQL through built-in functions. The locking functions can provide lock blocking, waiting, and other lock management capabilities. User-level locks are also widely used in ORM frameworks, such as RoR, Elixir, and Ecto. Since v6.1.0, TiDB has supported MySQL-compatible user-level lock management, and supports `GET_LOCK`, `RELEASE_LOCK`, and `RELEASE_ALL_LOCKS` functions.
+    User-level locks are a user-named lock management system provided by MySQL through built-in functions. The locking functions can provide lock blocking, waiting, and other lock management capabilities. User-level locks are also widely used in ORM frameworks, such as Rails, Elixir, and Ecto. Since v6.1.0, TiDB has supported MySQL-compatible user-level lock management, and supports `GET_LOCK`, `RELEASE_LOCK`, and `RELEASE_ALL_LOCKS` functions.
 
     [User document](/functions-and-operators/locking-functions.md), [#14994](https://github.com/pingcap/tidb/issues/14994)
 
@@ -230,7 +227,6 @@ In 6.1.0, the key new features or improvements are as follows:
 | [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`security.require-secure-transport`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`performance.committer-concurrency`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0. |
-| [`tidb_enable_batch_dml`](/system-variables.md#tidb_enable_batch_dml-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`enable-batch-dml`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_enable_new_only_full_group_by_check`](/system-variables.md#tidb_enable_new_only_full_group_by_check-new-in-v610) | Newly added | This variable controls the behavior when TiDB performs the `ONLY_FULL_GOUP_BY` check. |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) | Newly added | Since v6.1.0, the Join Reorder algorithm of TiDB supports Outer Join. This variable controls the support behavior, and the default value is `ON`. |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.enabled`), but changed to a system variable starting from TiDB v6.1.0. |
@@ -240,7 +236,7 @@ In 6.1.0, the key new features or improvements are as follows:
 | [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) | Newly added | This variable controls the maximum memory usage when TiDB updates statistics, including manually executed [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) by users and automatic analyze tasks in the TiDB background. |
 | [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610) | Newly added | This variable specifies whether to return error immediately when an error occurs in a non-transactional DML statement. |
-| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) |  | This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0. |
+| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) | Newly added | This variable sets the memory quota for the TiDB statistics cache. |
 
@@ -249,11 +245,10 @@ In 6.1.0, the key new features or improvements are as follows:
 | Configuration file | Configuration | Change type | Description |
 |---|---|---|---|
 | TiDB | `committer-concurrency` | Deleted | Replaced by the system variable `tidb_committer_concurrency`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
-| TiDB | `enable-batch-dml` | Deleted | Replaced by the system variable `tidb_enable_batch_dml`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `lower-case-table-names` | Deleted | Currently TiDB only supports `lower_case_table_name=2`. If another value is set, after the cluster is upgraded to v6.1.0, the value is lost.  |
 | TiDB | `mem-quota-query` | Deleted | Replaced by the system variable `tidb_mem_quota_query`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `oom-action` | Deleted | Replaced by the system variable `tidb_mem_oom_action`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
-| TiDB | `prepared-plan-cache.capacity` | Deleted | Replaced by the system variable  `tidb_prepared_plan_cache_size`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
+| TiDB | `prepared-plan-cache.capacity` | Deleted | Replaced by the system variable `tidb_prepared_plan_cache_size`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `prepared-plan-cache.enabled` | Deleted | Replaced by the system variable `tidb_enable_prepared_plan_cache`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `query-log-max-len` | Deleted | Replaced by the system variable `tidb_query_log_max_len`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
 | TiDB | `require-secure-transport` | Deleted | Replaced by the system variable `require_secure_transport`. This configuration item is no longer valid, if you want to modify the value, you need to modify the corresponding system variable. |
@@ -279,7 +274,7 @@ In 6.1.0, the key new features or improvements are as follows:
 | TiCDC | [`dispatchers.partition`](/ticdc/manage-ticdc.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink) | Newly added | `dispatchers.partition` is an alias for `dispatchers.dispatcher`. Controls how TiCDC dispatches incremental data to Kafka partitions. |
 | TiCDC | [`schema-registry`](/ticdc/manage-ticdc.md#integrate-ticdc-with-kafka-connect-confluent-platform) | Newly added | Specifies the schema registry endpoint that stores Avro schema. |
 | DM | `worker` in the `dmctl start-relay` command | Deleted | This parameter is not recommended for use. Will provide a simpler implementation. |
-| DM | `relay-dir` in the source configuration file  | Deleted | Replaced by the same configuration item in the worker configuration file. |
+| DM | `relay-dir` in the source configuration file | Deleted | Replaced by the same configuration item in the worker configuration file. |
 | DM | `is-sharding` in the task configuration file | Deleted | Replaced by the `shard-mode` configuration item. |
 | DM | `auto-fix-gtid` in the task configuration file | Deleted | Deprecated in v5.x and officially deleted in v6.1.0. |
 | DM | `meta-dir` and `charset` in the source configuration file | Deleted | Deprecated in v5.x and officially deleted in v6.1.0. |
@@ -362,7 +357,7 @@ In 6.1.0, the key new features or improvements are as follows:
 + TiDB
 
     - Fix the issue of possible panic that might occur when the `in` function processes the `bit` type data [#33070](https://github.com/pingcap/tidb/issues/33070)
-    - Fix the issue of wrong query result because the `UnionScan` operator cannot maintain the order  [#33175](https://github.com/pingcap/tidb/issues/33175)
+    - Fix the issue of wrong query result because the `UnionScan` operator cannot maintain the order [#33175](https://github.com/pingcap/tidb/issues/33175)
     - Fix the issue that the Merge Join operator gets wrong results in certain cases [#33042](https://github.com/pingcap/tidb/issues/33042)
     - Fix the issue that the `index join` result might be wrong in the dynamic pruning mode [#33231](https://github.com/pingcap/tidb/issues/33231)
     - Fix the issue that data might not be garbage-collected when some partitions of a partitioned table is dropped [#33620](https://github.com/pingcap/tidb/issues/33620)
@@ -370,14 +365,14 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the issue that the TiDB server might run out of memory when the `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` table is queried. This issue can be triggered when you check slow queries on the Grafana dashboard [#33893](https://github.com/pingcap/tidb/issues/33893)
     - Fix the issue that the system variable `max_allowed_packet` does not take effect [#31422](https://github.com/pingcap/tidb/issues/31422)
     - Fix the issue of memory leak in the TopSQL module [#34525](https://github.com/pingcap/tidb/issues/34525) [#34502](https://github.com/pingcap/tidb/issues/34502)
-    - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#3237](https://github.com/pingcap/tidb/issues/3237)
+    - Fix the issue that the Plan Cache might be wrong on the PointGet plan [#32371](https://github.com/pingcap/tidb/issues/32371)
     - Fix the issue that query result might be wrong when Plan Cache is started in the RC isolation level [#34447](https://github.com/pingcap/tidb/issues/34447)
 
 + TiKV
 
     - Fix the issue that the Raft log lag is increasing when a TiKV instance is taken offline [#12161](https://github.com/tikv/tikv/issues/12161)
     - Fix the issue that TiKV panics and destroys peers unexpectedly because the target Region to be merged is invalid [#12232](https://github.com/tikv/tikv/issues/12232)
-    - Fix the issue that TiKV reports the `failed to load_latest_options` error when upgrading from v5.3.1 or v5.4.0 to v6.0.0 [#12269](https://github.com/tikv/tikv/issues/12269)
+    - Fix the issue that TiKV reports the `failed to load_latest_options` error when upgrading from v5.3.1 or v5.4.0 to v6.0.0 or later versions [#12269](https://github.com/tikv/tikv/issues/12269)
     - Fix the issue of OOM caused by appending Raft logs when the memory resource is insufficient [#11379](https://github.com/tikv/tikv/issues/11379)
     - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
     - Fix the issue of TiKV memory usage spike in a short time after `stats_monitor` falls into a dead loop [#12416](https://github.com/tikv/tikv/issues/12416)
@@ -388,7 +383,11 @@ In 6.1.0, the key new features or improvements are as follows:
     - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
     - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
     - Fix the issue that a removed tombstone store appears again after the PD leader transfer ​​[#4941](https://github.com/tikv/pd/issues/4941)
-    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [4769](https://github.com/tikv/pd/issues/4769)
+    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
+
++ TiDB Dashboard
+
+    - Fix a bug that Top SQL cannot collect the CPU overhead of the SQL statements that were running before the Top SQL feature is enabled [#33859](https://github.com/pingcap/tidb/issues/33859)
 
 + TiFlash
 
@@ -402,10 +401,6 @@ In 6.1.0, the key new features or improvements are as follows:
         - Fix OOM caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
         - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
 
-    + TiDB Dashboard
-
-        - Fix a bug that Top SQL cannot collect the CPU overhead of the SQL statements that were running before the Top SQL feature is enabled [#33859](https://github.com/pingcap/tidb/issues/33859)
-
     + TiDB Data Migration (DM)
 
         - Fix the `start-time` time zone issue and change DM behavior from using the downstream time zone to using the upstream time zone [#5271](https://github.com/pingcap/tiflow/issues/5471)
@@ -416,7 +411,7 @@ In 6.1.0, the key new features or improvements are as follows:
         - Fix the DM worker panic issue that occurs when the primary key is not first in the index returned by the `SHOW CREATE TABLE` statement [#5159](https://github.com/pingcap/tiflow/issues/5159)
         - Fix the issue that CPU usage may increase and a large amount of log is printed when GTID is enabled or when the task is automatically resumed [#5063](https://github.com/pingcap/tiflow/issues/5063)
         - Fix the offline option and other usage issues in DM WebUI [#4993](https://github.com/pingcap/tiflow/issues/4993)
-        - Fix the issue that incremental tasks fail to start when GTID is empty in the upstream  [#3731](https://github.com/pingcap/tiflow/issues/3731)
+        - Fix the issue that incremental tasks fail to start when GTID is empty in the upstream [#3731](https://github.com/pingcap/tiflow/issues/3731)
         - Fix the issue that empty configurations may cause dm-master to panic [#3732](https://github.com/pingcap/tiflow/issues/3732)
 
     + TiDB Lightning

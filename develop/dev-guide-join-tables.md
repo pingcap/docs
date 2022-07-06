@@ -5,7 +5,7 @@ summary: This document describes how to use multi-table join queries.
 
 # Multi-table Join Queries
 
-In many scenarios，you need to use one query to get data from multiple tables. You can use the `JOIN` statement to combine the data from two or more tables.
+In many scenarios, you need to use one query to get data from multiple tables. You can use the `JOIN` statement to combine the data from two or more tables.
 
 ## Join types
 
@@ -202,12 +202,6 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 A right outer join returns all the records in the right table and the values ​​in the left table that match the join condition. If there is no matching value, it is filled with `NULL`.
 
 ![Right Outer Join](/media/develop/right-outer-join.png)
-
-### FULL OUTER JOIN
-
-A full outer join is based on all the records in the left table and the right table. Whether or not the join condition is met, it returns all the matching records when there is a match in the left table or the right table. If no value matches the join condition, it is filled with `NULL`.
-
-![Full Outer Join](/media/develop/full-outer-join.png)
 
 ### CROSS JOIN
 

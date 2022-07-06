@@ -6,9 +6,9 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-table-filter/','/docs/dev/ref
 
 # Table Filter
 
-The TiDB ecosystem tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
+The TiDB migration tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
 
-Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
+Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
 
 ## Usage
 
@@ -16,7 +16,7 @@ Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define 
 
 Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage in each tool.
 
-* [BR](/br/backup-and-restore-tool.md):
+* [BR](/br/backup-and-restore-overview.md):
 
     {{< copyable "shell-regular" >}}
 

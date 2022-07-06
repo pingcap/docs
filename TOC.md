@@ -76,6 +76,15 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+    - Archived Docs
+      - [For Django](/develop/dev-guide-outdated-for-django.md)
+      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
+      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
+      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
+      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
+  - Cloud Native Development Environment
+    - [Gitpod](/develop/dev-guide-playground-gitpod.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -120,17 +129,9 @@
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
-    - Use BR Tool (Recommended)
-      - [BR Tool Overview](/br/backup-and-restore-tool.md)
-      - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
-      - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - External Storages
-        - [External Storages Overview](/br/backup-and-restore-storages.md)
-        - [Back up and Restore Data on Azure Blob Storage](/br/backup-and-restore-azblob.md)
-      - BR Features
-        - [Auto Tune](/br/br-auto-tune.md)
-        - [Batch Create Table](/br/br-batch-create-table.md)
-      - [BR FAQ](/br/backup-and-restore-faq.md)
+    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
+    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
+    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -166,6 +167,7 @@
 - Performance Tuning
   - Tuning Guide
     - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
     - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
   - Configuration Tuning
     - System Tuning
@@ -333,7 +335,8 @@
       - [tiup-bench](/tiup/tiup-bench.md)
   - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
-    - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Quick Start](/clinic/quick-start-with-clinic.md)
+    - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
@@ -442,13 +445,23 @@
       - [Handle Errors](/dm/dm-error-handling.md)
     - [Release Notes](/dm/dm-release-notes.md)
   - Backup & Restore (BR)
-    - [BR Tool Overview](/br/backup-and-restore-tool.md)
-    - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
+    - [BR Overview](/br/backup-and-restore-overview.md)
+    - [Deploy and Use BR](/br/br-deployment.md)
+    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
+    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
     - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-    - [External Storages](/br/backup-and-restore-storages.md)
     - BR Features
       - [Auto Tune](/br/br-auto-tune.md)
-    - [BR FAQ](/br/backup-and-restore-faq.md)
+      - [Batch Create Table](/br/br-batch-create-table.md)
+    - References
+      - [BR Design Principles](/br/backup-and-restore-design.md)
+      - [BR Command-line](/br/use-br-command-line-tool.md)
+      - [External Storages](/br/backup-and-restore-storages.md)
+      - [Back Up and Restore Data on Amazon S3 Using BR](/br/backup-storage-S3.md)
+      - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
+      - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
+      - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
+      - [BR FAQs](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -473,14 +486,17 @@
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
     - [Maintain](/ticdc/manage-ticdc.md)
+    - Monitor and Alert
+      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
+      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - [Monitor](/ticdc/monitor-ticdc.md)
-    - [Alert Rules](/ticdc/ticdc-alert-rules.md)
-    - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
-    - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-    - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
-    - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-    - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    - Reference
+      - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
+      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
+      - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
   - sync-diff-inspector
@@ -499,6 +515,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
+    - [Performance Overview](/grafana-performance-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
@@ -543,7 +560,7 @@
       - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
-        - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+      - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
@@ -842,6 +859,7 @@
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2

@@ -28,7 +28,7 @@ You can download TiDB Toolkit from the following link:
 https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 ```
 
-`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.0.0` is `https://download.pingcap.org/tidb-community-toolkit-v6.0.0-linux-amd64.tar.gz`.
+`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.1.0` is `https://download.pingcap.org/tidb-community-toolkit-v6.1.0-linux-amd64.tar.gz`.
 
 ## TiDB Toolkit description
 
@@ -42,7 +42,7 @@ Depending on which tools you want to use, you can install the corresponding offl
 | [TiDB Data Migration (DM)](/dm/dm-overview.md)  | `dm-worker-{version}-linux-amd64.tar.gz` <br/>`dm-master-{version}-linux-amd64.tar.gz` <br/>`dmctl-{version}-linux-amd64.tar.gz`  |
 | [TiCDC](/ticdc/ticdc-overview.md)  | `cdc-{version}-linux-amd64.tar.gz`  |
 | [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)  | `pump-{version}-linux-amd64.tar.gz` <br/>`drainer-{version}-linux-amd64.tar.gz` <br/>`binlogctl` <br/>`reparo`  |
-| [Backup & Restore (BR)](/br/backup-and-restore-tool.md)  | `br-{version}-linux-amd64.tar.gz`  |
+| [Backup & Restore (BR)](/br/backup-and-restore-overview.md)  | `br-{version}-linux-amd64.tar.gz`  |
 | [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md)  | `sync_diff_inspector`  |
 | [TiSpark](/tispark-overview.md)  | `tispark-{tispark-version}-any-any.tar.gz` <br/>`spark-{spark-version}-any-any.tar.gz`  |
 | [PD Control](/pd-control.md)  | `pd-recover-{version}-linux-amd64.tar` |

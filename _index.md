@@ -8,7 +8,7 @@ aliases: ['/docs/dev/','/docs/dev/adopters/','/tidb/dev/adopters']
 
 [TiDB](https://github.com/pingcap/tidb) (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source, distributed, NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. TiDB can be deployed on-premise or in-cloud.
 
-Designed for the cloud, TiDB provides flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview) helps manage TiDB on Kubernetes and automates operating tasks, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/tidb-cloud/), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/), allowing you to deploy and run TiDB clusters with just a few clicks.
+Designed for the cloud, TiDB provides flexible scalability, reliability and security on the cloud platform. Users can elastically scale TiDB to meet the requirements of their changing workloads. [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/tidb-operator-overview) helps manage TiDB on Kubernetes and automates operating tasks, which makes TiDB easier to deploy on any cloud that provides managed Kubernetes. [TiDB Cloud](https://pingcap.com/tidb-cloud/), the fully-managed TiDB service, is the easiest, most economical, and most resilient way to unlock the full power of [TiDB in the cloud](https://docs.pingcap.com/tidbcloud/), allowing you to deploy and run TiDB clusters with just a few clicks.
 
 <NavColumns>
 <NavColumn>
@@ -59,7 +59,7 @@ Designed for the cloud, TiDB provides flexible scalability, reliability and secu
 
 - [Upgrade TiDB Using TiUP](/upgrade-tidb-using-tiup.md)
 - [Scale TiDB Using TiUP](/scale-tidb-using-tiup.md)
-- [Back up and Restore Data](/br/backup-and-restore-tool.md)
+- [Back up and Restore Data](/br/backup-and-restore-overview.md)
 - [Deploy and Manage TiCDC](/ticdc/manage-ticdc.md)
 - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
 - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
