@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Diagnostic Report
-summary: Learn the TiDB Dashboard diagnostic report.
+summary: Learn the TiDB Dashboard diagnostic report. 
 ---
 
 # TiDB Dashboard Diagnostic Report

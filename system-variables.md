@@ -62,13 +62,13 @@ SET  GLOBAL tidb_distsql_scan_concurrency = 10;
 - Controls the initial offset of `AUTO_INCREMENT` values to be allocated to a column. This setting is often used in combination with `auto_increment_increment`. For example:
 
 ```sql
-mysql> CREATE TABLE t1 (a int not null primary key auto_increment);
+mysql> CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY auto_increment);
 Query OK, 0 rows affected (0.10 sec)
 
-mysql> set auto_increment_offset=1;
+mysql> SET auto_increment_offset=1;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> set auto_increment_increment=3;
+mysql> SET auto_increment_increment=3;
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> INSERT INTO t1 VALUES (),(),(),();
@@ -352,10 +352,10 @@ mysql> SELECT * FROM t1;
     - When set to zero and using optimistic transactions:
 
         ```sql
-        tidb> create table t (i int key);
-        tidb> insert into t values (1);
-        tidb> begin optimistic;
-        tidb> insert into t values (1);
+        tidb> CREATE TABLE t (i INT KEY);
+        tidb> INSERT INTO t VALUES (1);
+        tidb> BEGIN OPTIMISTIC;
+        tidb> INSERT INTO t VALUES (1);
         Query OK, 1 row affected
         tidb> commit; -- Check only when a transaction is committed.
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
@@ -364,9 +364,9 @@ mysql> SELECT * FROM t1;
     - When set to 1 and using optimistic transactions:
 
         ```sql
-        tidb> set @@tidb_constraint_check_in_place=1;
-        tidb> begin optimistic;
-        tidb> insert into t values (1);
+        tidb> SET @@tidb_constraint_check_in_place=1;
+        tidb> BEGIN OPTIMISTIC;
+        tidb> INSERT INTO t VALUES (1);
         ERROR 1062 : Duplicate entry '1' for key 'PRIMARY'
         ```
 
@@ -1037,7 +1037,7 @@ mysql> desc select count(distinct a) from test.t;
 - In the following example, before you enable `tidb_opt_prefer_range_scan`, the TiDB optimizer performs a full table scan. After you enable `tidb_opt_prefer_range_scan`, the optimizer selects an index scan.
 
 ```sql
-explain select * from t where age=5;
+explain SELECT * FROM t WHERE age=5;
 +-------------------------+------------+-----------+---------------+-------------------+
 | id                      | estRows    | task      | access object | operator info     |
 +-------------------------+------------+-----------+---------------+-------------------+
@@ -1160,12 +1160,12 @@ SET tidb_query_log_max_len = 20
 - After this switch is enabled, if an isolation level unsupported by TiDB is assigned to `tx_isolation`, no error is reported. This helps improve compatibility with applications that set (but do not depend on) a different isolation level.
 
 ```sql
-tidb> set tx_isolation='serializable';
+tidb> SET tx_isolation='serializable';
 ERROR 8048 (HY000): The isolation level 'serializable' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
-tidb> set tidb_skip_isolation_level_check=1;
+tidb> SET tidb_skip_isolation_level_check=1;
 Query OK, 0 rows affected (0.00 sec)
 
-tidb> set tx_isolation='serializable';
+tidb> SET tx_isolation='serializable';
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 ```
 
