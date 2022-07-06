@@ -75,7 +75,7 @@ Many `INFORMATION_SCHEMA` tables have a corresponding `SHOW` command. The benefi
 | [`METRICS_SUMMARY`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-summary)          | A summary of metrics extracted from Prometheus. This table is not applicable to TiDB Cloud. |
 | `METRICS_SUMMARY_BY_LABEL`                                                              | See `METRICS_SUMMARY` table. |
 | [`METRICS_TABLES`](https://docs.pingcap.com/tidb/stable/information-schema-metrics-tables)            | Provides the PromQL definitions for tables in `METRICS_SCHEMA`. This table is not applicable to TiDB Cloud. |
-| [`PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)    | Provides information on all placement policies.                                 |
+| [`PLACEMENT_POLICIES`](https://docs.pingcap.com/tidb/stable/information-schema-placement-policies)    | Provides information on all placement policies. This table is not applicable to TiDB Cloud. |
 | [`SEQUENCES`](/information-schema/information-schema-sequences.md)                      | The TiDB implementation of sequences is based on MariaDB. |
 | [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)                    | Provides information on slow queries on the current TiDB server. |
 | [`STATEMENTS_SUMMARY`](/statement-summary-tables.md)                                    | Similar to performance_schema statement summary in MySQL. |

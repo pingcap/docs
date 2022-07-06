@@ -89,6 +89,7 @@
   - Garbage Collection (GC)
      - [Overview](/garbage-collection-overview.md)
      - [Configuration](/garbage-collection-configuration.md)
+  - [Tune Region Performance](/tune-region-performance.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
 - Manage User Access
   - [Sign In](/tidb-cloud/manage-user-access.md)
@@ -141,8 +142,10 @@
       - [`ALTER DATABASE`](/sql-statements/sql-statement-alter-database.md)
       - [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
+      - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
+      - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -261,6 +264,7 @@
       - [Bit Functions and Operators](/functions-and-operators/bit-functions-and-operators.md)
       - [Cast Functions and Operators](/functions-and-operators/cast-functions-and-operators.md)
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
+      - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
       - [JSON Functions](/functions-and-operators/json-functions.md)
       - [Aggregate (GROUP BY) Functions](/functions-and-operators/aggregate-group-by-functions.md)
@@ -280,9 +284,11 @@
       - [Isolation Levels](/transaction-isolation-levels.md)
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
+      - [Non-Transactional DML Statements](/non-transactional-dml.md)
     - [Views](/views.md)
     - [Partitioning](/partitioned-table.md)
     - [Temporary Tables](/temporary-tables.md)
+    - [Cached Tables](/cached-tables.md)
     - Character Set and Collation
       - [Overview](/character-set-and-collation.md)
       - [GBK](/character-set-gbk.md)
@@ -341,6 +347,7 @@
   - TiKV
     - [TiKV Overview](/tikv-overview.md)
     - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+  - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)

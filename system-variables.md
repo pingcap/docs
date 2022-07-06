@@ -1233,6 +1233,14 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
 > **Warning:**
 >
 > Currently, Top SQL is an experimental feature. It is not recommended that you use it for production environments.
@@ -2516,14 +2524,41 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_top_sql_max_meta_count <span class="version-mark">New in v6.0.0</span>
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
 - Default value: `5000`
 - Range: `[1, 10000]`
+
+<CustomContent platform="tidb">
+
 - This variable is used to control the maximum number of SQL statement types collected by [Top SQL](/dashboard/top-sql.md) per minute.
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control the maximum number of SQL statement types collected by [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) per minute.
+
+</CustomContent>
+
 ### tidb_top_sql_max_time_series_count <span class="version-mark">New in v6.0.0</span>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
 
 > **Note:**
 >
@@ -2534,7 +2569,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Type: Integer
 - Default value: `100`
 - Range: `[1, 5000]`
+
+<CustomContent platform="tidb">
+
 - This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) per minute.
+
+</CustomContent>
 
 ### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
 
