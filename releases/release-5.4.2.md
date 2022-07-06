@@ -81,7 +81,7 @@ TiDB version: 5.4.2
 + TiFlash
 
     <!--storage-->
-    - Fix the TiFlash crash issue that occurs after dropping a column of a table with clustered indexes under some situations. [#5154](https://github.com/pingcap/tiflash/issues/5154)
+    - Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154)
     (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
 
     <!--compute-->
@@ -91,9 +91,9 @@ TiDB version: 5.4.2
 
     + BR
 
-        - Avoid to report ErrRestoreTableIDMismatch for BR on RawKV mode [35279](https://github.com/pingcap/tidb/issues/35279)
-        - BR will retry for saving file error correctly now [#34865](https://github.com/pingcap/tidb/issues/34865)
-        - Fix a panic issue when running BR [#34956](https://github.com/pingcap/tidb/issues/34956)
+        - Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [35279](https://github.com/pingcap/tidb/issues/35279)
+        - Fix a bug that BR does not retry when an error occurs in saving files [#34865](https://github.com/pingcap/tidb/issues/34865)
+        - Fix a panic issue when BR is running [#34956](https://github.com/pingcap/tidb/issues/34956)
         (dup: release-5.3.2.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR cannot handle S3 internal errors [#34350](https://github.com/pingcap/tidb/issues/34350)
         (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
 
