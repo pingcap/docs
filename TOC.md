@@ -49,7 +49,7 @@
         -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
         -   [結果をページングする](/develop/dev-guide-paginate-results.md)
         -   [ビュー](/develop/dev-guide-use-views.md)
-        -   [一時テーブル](/develop/dev-guide-use-temporary-tables.md)
+        -   [一時的なテーブル](/develop/dev-guide-use-temporary-tables.md)
         -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
         -   レプリカデータの読み取り
             -   [フォロワー読み取り](/develop/dev-guide-use-follower-read.md)
@@ -363,6 +363,7 @@
         -   [用語集](/tidb-lightning/tidb-lightning-glossary.md)
     -   TiDBデータ移行
         -   [TiDBデータ移行について](/dm/dm-overview.md)
+        -   [建築](/dm/dm-arch.md)
         -   [クイックスタート](/dm/quick-start-with-dm.md)
         -   DMクラスタをデプロイする
             -   [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)
@@ -406,7 +407,7 @@
                 -   [DMパフォーマンスのテスト](/dm/dm-performance-test.md)
                 -   [パフォーマンスの問題を処理する](/dm/dm-handle-performance-issues.md)
             -   データソースの管理
-                -   [移行するMySQLインスタンスを切り替えます](/dm/usage-scenario-master-slave-switch.md)
+                -   [移行するMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
             -   タスクの管理
                 -   [失敗したDDLステートメントの処理](/dm/handle-failed-ddl-statements.md)
                 -   [移行するテーブルのスキーマを管理する](/dm/dm-manage-schema.md)
@@ -415,7 +416,6 @@
             -   [デイリーチェック](/dm/dm-daily-check.md)
         -   参照
             -   建築
-                -   [DMアーキテクチャ](/dm/dm-arch.md)
                 -   [DMワーカー](/dm/dm-worker-intro.md)
                 -   [リレーログ](/dm/relay-log.md)
             -   コマンドライン
@@ -721,7 +721,7 @@
             -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
-        -   [一時テーブル](/temporary-tables.md)
+        -   [一時的なテーブル](/temporary-tables.md)
         -   [キャッシュされたテーブル](/cached-tables.md)
         -   文字セットと照合
             -   [概要](/character-set-and-collation.md)

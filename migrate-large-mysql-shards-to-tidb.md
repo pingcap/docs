@@ -11,11 +11,7 @@ summary: Learn how to migrate and merge large datasets of shards from MySQL into
 
 MySQLシャードのデータサイズが1TiB未満の場合は、 [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)で説明されている手順に従うことができます。これは、完全移行と増分移行の両方をサポートし、手順が簡単です。
 
-次の図は、 DumplingとTiDBLightningを使用してMySQLシャードテーブルをTiDBに移行およびマージする方法を示しています。
-
-![Use Dumpling and TiDB Lightning to migrate and merge MySQL shards to TiDB](/media/shard-merge-using-lightning-en.png)
-
-この例では、 `my_db1`と`my_db2`の2つのデータベースがあることを前提としています。 Dumplingを使用して、 `my_db1`から2つのテーブル`table1`と`table2`をエクスポートし、 `my_db2`からそれぞれ2つのテーブル`table3`と`table4`をエクスポートします。その後、TiDB Lightingを使用して、エクスポートされた4つのテーブルをターゲットTiDBの`mydb`から同じ`table5`にインポートしてマージします。
+このドキュメントの例では、 `my_db1`と`my_db2`の2つのデータベースがあることを前提としています。 Dumplingを使用して、 `my_db1`から2つのテーブル`table1`と`table2`をエクスポートし、 `my_db2`からそれぞれ2つのテーブル`table3`と`table4`をエクスポートします。その後、TiDB Lightningを使用して、エクスポートされた4つのテーブルをターゲットTiDBの`mydb`から同じ`table5`にインポートしてマージします。
 
 このドキュメントでは、次の手順に従ってデータを移行できます。
 
@@ -41,7 +37,7 @@ MySQLシャードのデータサイズが1TiB未満の場合は、 [小さなデ
 
 ### シャードテーブルの競合を確認する {#check-conflicts-for-sharded-tables}
 
-移行に異なるシャードテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行する前に、ビジネスの観点から現在のシャーディングスキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
+移行に異なるシャーディングテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行する前に、ビジネスの観点から現在のシャーディングスキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
 
 テーブル1〜4のテーブル構造は次のようになります。
 
@@ -104,7 +100,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 | `-B`または`--database` | エクスポートするデータベースを指定します。                                                                                                    |
 | `-f`または`--filter`   | フィルタパターンに一致するテーブルをエクスポートします。フィルタ構文については、 [テーブルフィルター](/table-filter.md)を参照してください。                                         |
 
-`${data-path}`に十分な空き容量があることを確認してください。単一のテーブルのサイズが大きすぎるためにバックアッププロセスが中断されないように、 `-F`のオプションを使用することを強くお勧めします。
+`${data-path}`に十分な空き領域があることを確認してください。単一のテーブルのサイズが大きすぎるためにバックアッププロセスが中断されないように、 `-F`のオプションを使用することを強くお勧めします。
 
 次に、次のコマンドを実行して、 Dumplingを使用して`my_db2`から`table3`と`table4`をエクスポートします。パスは`${data-path}/my_db1`ではなく`${data-path}/my_db2`であることに注意してください。
 
@@ -131,7 +127,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my
 回復不能なエラー（データの破損など）が原因でTiDB Lightningタスクがクラッシュした場合、チェックポイントからは取得されませんが、エラーが報告されてタスクが終了します。インポートされたデータの安全性を確保するには、他の手順に進む前に、 `tidb-lightning-ctl`コマンドを使用してこれらのエラーを解決する必要があります。オプションは次のとおりです。
 
 -   --checkpoint-error-destroy：このオプションを使用すると、失敗したターゲットテーブルの既存のデータをすべて最初に破棄することで、それらのテーブルへのデータのインポートを最初から再開できます。
--   --checkpoint-error-ignore：移行が失敗した場合、このオプションは、エラーが発生しなかったかのようにエラーステータスをクリアします。
+-   --checkpoint-error-ignore：移行が失敗した場合、このオプションは、エラーが発生したことがないかのようにエラーステータスをクリアします。
 -   --checkpoint-remove：このオプションは、エラーに関係なく、すべてのチェックポイントをクリアするだけです。
 
 詳細については、 [TiDBLightningチェックポイント](/tidb-lightning/tidb-lightning-checkpoints.md)を参照してください。

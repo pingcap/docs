@@ -9,11 +9,9 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 このドキュメントは、合計1TiB未満のMySQLシャードの移行に適用されます。合計1TiBを超えるデータを含むMySQLシャードを移行する場合、DMのみを使用して移行するには長い時間がかかります。この場合、 [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行することをお勧めします。
 
-このドキュメントでは、移行手順を説明するための簡単な例を取り上げます。この例の2つのデータソースMySQLインスタンスのMySQLシャードは、ダウンストリームTiDBクラスタに移行されます。図を以下に示します。
+このドキュメントでは、移行手順を説明するための簡単な例を取り上げます。この例の2つのデータソースMySQLインスタンスのMySQLシャードは、ダウンストリームTiDBクラスタに移行されます。
 
-![Use DM to Migrate Sharded Tables](/media/migrate-shard-tables-within-1tb-en.png)
-
-MySQLインスタンス1とMySQLインスタンス2の両方に、次のスキーマとテーブルが含まれています。この例では、両方のインスタンスでプレフィックスが`sale`の`store_01`および`store_02`スキーマから、 `store`スキーマのダウンストリーム`sale`テーブルにテーブルを移行してマージします。
+この例では、MySQLインスタンス1とMySQLインスタンス2の両方に次のスキーマとテーブルが含まれています。この例では、両方のインスタンスでプレフィックスが`sale`の`store_01`および`store_02`スキーマから、 `store`スキーマのダウンストリーム`sale`テーブルにテーブルを移行してマージします。
 
 | スキーマ     | テーブル            |
 | :------- | :-------------- |
@@ -35,7 +33,7 @@ MySQLインスタンス1とMySQLインスタンス2の両方に、次のスキ�
 
 ### シャーディングされたテーブルの競合を確認します {#check-conflicts-for-the-sharded-tables}
 
-移行に異なるシャードテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行する前に、ビジネスの観点から現在のシャーディングスキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
+移行に異なるシャーディングテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行する前に、ビジネスの観点から現在のシャーディングスキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
 
 この例では、 `sale_01`と`sale_02`は次のように同じテーブル構造を持っています
 
@@ -212,7 +210,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-エラーが発生した場合は、 `query-status <name of the error task>`を使用してより詳細な情報を表示します。 `query-status`コマンドのクエリ結果、タスクステータス、およびサブタスクステータスの詳細については、 [TiDBデータ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
+エラーが発生した場合は、 `query-status <name of the error task>`を使用してより詳細な情報を表示します。 `query-status`コマンドのクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [TiDBデータ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
 
 ## 手順5.タスクを監視してログを確認する（オプション） {#step-5-monitor-tasks-and-check-logs-optional}
 

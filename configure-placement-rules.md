@@ -68,7 +68,7 @@ v5.0で導入された配置ルールは、PDがさまざまなタイプのデ�
 
 ### 配置ルールを有効にする {#enable-placement-rules}
 
-配置ルール機能は、v5.0以降のバージョンのTiDBではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。無効にした後でこの機能を有効にするには、クラスタを初期化する前に、PD構成ファイルを次のように変更します。
+配置ルール機能は、v5.0以降のバージョンのTiDBではデフォルトで有効になっています。無効にするには、 [配置ルールを無効にする](#disable-placement-rules)を参照してください。無効にした後でこの機能を有効にするには、クラスタを初期化する前に、PD構成ファイルを次のように変更できます。
 
 {{< copyable "" >}}
 
@@ -126,7 +126,7 @@ pd-ctl config placement-rules disable
 
 > **ノート：**
 >
-> ルールの変更は、リアルタイムのPDスケジューリングに影響します。ルールの設定が不適切な場合、レプリカが少なくなり、システムの高可用性に影響を与える可能性があります。
+> ルールの変更は、リアルタイムのPDスケジューリングに影響します。ルール設定が不適切な場合、レプリカが少なくなり、システムの高可用性に影響を与える可能性があります。
 
 pd-ctlは、次のメソッドを使用してシステム内のルールを表示することをサポートしており、出力はJSON形式のルールまたはルールリストです。
 
@@ -431,7 +431,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
 
 ### シナリオ4：高性能ディスクを備えた北京ノードのテーブルに2つのフォロワーレプリカを追加する {#scenario-4-add-two-follower-replicas-for-a-table-in-the-beijing-node-with-high-performance-disks}
 
-次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシンルームに配置する必要があり、ディスクタイプは`hdd`であってはなりません。
+次の例は、より複雑な`label_constraints`構成を示しています。このルールでは、レプリカは`bj1`または`bj2`のマシンルームに配置する必要があり、ディスクタイプは`ssd`であってはなりません。
 
 {{< copyable "" >}}
 
@@ -445,7 +445,7 @@ table ttt ranges: (NOTE: key range might be changed after DDL)
   "count": 2,
   "label_constraints": [
     {"key": "zone", "op": "in", "values": ["bj1", "bj2"]},
-    {"key": "disk", "op": "notIn", "values": ["hdd"]}
+    {"key": "disk", "op": "notIn", "values": ["ssd"]}
   ],
   "location_labels": ["host"]
 }
