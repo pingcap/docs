@@ -13,7 +13,7 @@ TiDB version: 5.4.2
 + TiDB
 
     <!--transaction-->
-    - Prevent sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
+    - Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
@@ -37,20 +37,20 @@ TiDB version: 5.4.2
 + TiDB
 
     <!--planner-->
-    - Fix wrong TableDual plans cached under binary protocol [#34690] (https://github.com/pingcap/tidb/issues/34690) [#34678] (https://github.com/pingcap/tidb/issues/34678)
-    - Fix the wrongly inferred null flag of firstrow agg func in EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
-    - Fix the wrong 2-phase aggregate plan for TiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)
-    - Fix the wrong null flag of final aggregate after aggregate is pushed through outer join [#34465](https://github.com/pingcap/tidb/issues/34465)
-    - Fix the wrong memory-usage value used when Plan Cache evicts [#34613](https://github.com/pingcap/tidb/issues/34613)
+    - Fix the issue of wrong TableDual plans cached in binary protocol [#34690] (https://github.com/pingcap/tidb/issues/34690) [#34678] (https://github.com/pingcap/tidb/issues/34678)
+    - Fix the issue of incorrectly inferred null flag of the TiFlash `firstrow` aggregate function in the EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
+    - Fix the issue that the planner generates wrong 2-phase aggregate plan for TiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)
+    - Fix the planner wrong behaviors that occur when `tidb_opt_agg_push_down` and `tidb_enforce_mpp` are enabled [#34465](https://github.com/pingcap/tidb/issues/34465)
+    - Fix the wrong memory-usage value used when Plan Cache is evicted [#34613](https://github.com/pingcap/tidb/issues/34613)
 
     <!--transaction-->
-    - Fix the issue that the column list does not work in the load data statement [#35198](https://github.com/pingcap/tidb/issues/35198)
-    - Avoid WriteConflict errors in pessimistic transactions [#11612](https://github.com/tikv/tikv/issues/11612)
-    - Fix an idempotency issue when undertermined errors and region errors are met in the same request [#34875](https://github.com/pingcap/tidb/issues/34875)
-    - Fix an atomicity issue when rolling back an async-commit transaction [#33641](https://github.com/pingcap/tidb/issues/33641)
+    - Fix the issue that the column list does not work in the `LOAD DATA` statement [#35198](https://github.com/pingcap/tidb/issues/35198)
+    - Avoid reporting `WriteConflict` errors in pessimistic transactions [#11612](https://github.com/tikv/tikv/issues/11612)
+    - Fix the issue that the prewrite requests are not idempotency when Region errors and network issues occur [#34875](https://github.com/pingcap/tidb/issues/34875)
+    - Fix the issue that the async commit transactions being rolled back might not meet atomicity [#33641](https://github.com/pingcap/tidb/issues/33641)
     <!--sql-infra-->
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Previously, when a network connectivity issue occurred, TiDB did not always correctly free the resources held by the disconnected session. This issue has been fixed so that open transactions can be rolled back and other associated resources can be released. [#34722](https://github.com/pingcap/tidb/issues/34722)
-    - Fix querying CTE views may unexpectedly report `references invalid table`. [#33965](https://github.com/pingcap/tidb/issues/33965)
+    - Fix the issue that the `references invalid table` error might be incorrectly reported when TiDB queries views with CTE [#33965](https://github.com/pingcap/tidb/issues/33965)
 
     <!--diagnosis-->
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the panic issue caused by the `fatal error: concurrent map read and map write` error [#35340](https://github.com/pingcap/tidb/issues/35340)
