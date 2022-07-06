@@ -89,7 +89,6 @@
   - Garbage Collection (GC)
      - [Overview](/garbage-collection-overview.md)
      - [Configuration](/garbage-collection-configuration.md)
-  - [Tune Region Performance](/tune-region-performance.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
 - Manage User Access
   - [Sign In](/tidb-cloud/manage-user-access.md)
