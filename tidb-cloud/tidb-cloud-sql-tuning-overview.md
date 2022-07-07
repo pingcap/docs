@@ -19,7 +19,7 @@ To improve the performance of SQL statements, consider the following principles.
 - Use appropriate Join types. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
 - Use appropriate storage engines. It is recommended to use the TiFlash query engine for mixed OLTP and OLAP. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
 
-TiDB Cloud provides several tools to help you analyze slow queries on a cluster. This section describes several approaches to optimize slow queries.
+TiDB Cloud provides several tools to help you analyze slow queries on a cluster. The following sections describe several approaches to optimize slow queries.
 
 ### Use Statement on the Diagnosis tab
 
@@ -30,12 +30,12 @@ Note that on this sub-tab, SQL queries with the same structure (even if the quer
 You can view some key information in **Statement**.
 
 - SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
-- Execution plan list: if the SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
+- Execution plan list: if a SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
 - Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL and the corresponding execution time from several perspectives, you can get more information from it. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
-In addition to the information in the dashboard, there are also some SQL best practices for TiDB Cloud to follow, as described in the following sections.
+In addition to the information in the **Statement** dashboard, there are also some SQL best practices for TiDB Cloud as described in the following sections.
 
 ### Check the execution plan
 
@@ -49,7 +49,7 @@ After parsing the original query text by `parser` and basic validity verificatio
 
 Through these equivalence changes, the query can become easier to handle in the logical execution plan. After the equivalence changes, TiDB gets a query plan structure that is equivalent to the original query, and then gets a final execution plan based on the data distribution and the specific execution overhead of an operator. For more information, see [SQL Physical Optimization](/sql-physical-optimization.md).
 
-Also, TiDB can choose to enable execution plan caching to reduce the creation overhead of the execution plan when executing the `PREPARE` statement, as introduced in [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md).
+Also, TiDB can choose to enable execution plan cache to reduce the creation overhead of the execution plan when executing the `PREPARE` statement, as introduced in [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md).
 
 ### Optimize full table scan
 
@@ -85,7 +85,7 @@ The recommended analysis process for slow queries is as follows.
 
 ## Optimize schema design
 
-If you still can't get better performance based on SQL performance tuning, you may need to check your schema design and data read model to avoid transaction conflicts and hotspots.
+If you still cannot get better performance based on SQL performance tuning, you may need to check your schema design and data read model to avoid transaction conflicts and hotspots.
 
 ### Transaction conflicts
 
