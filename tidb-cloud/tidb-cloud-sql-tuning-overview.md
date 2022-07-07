@@ -15,15 +15,15 @@ This document introduces how to tune SQL performance in TiDB Cloud. To get the b
 To improve the performance of SQL statements, consider the following principles.
 
 - Minimize the scope of the scanned data. It is always a best practice to scan only the minimum scope of data and avoid scanning all data.
-- Use appropriate indexes. For the column in the `WHERE` clause in SQL, you need to make sure that there is a corresponding index. Otherwise it will become a statement to scan the full table and result in poor performance.
-- Use appropriate Join types. Depending on the size and correlation of each table in the query, it is also very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
-- Use appropriate storage engines. It is recommended to use the TiFlash query engine for mixed OLTP and OLAP. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
+- Use appropriate indexes. For each column in the `WHERE` clause in a SQL statement, make sure that there is a corresponding index. Otherwise, the `WHERE` clause will scan the full table and result in poor performance.
+- Use appropriate Join types. Depending on the size and correlation of each table in the query, it is very important to choose the right Join type. Generally, the cost-based optimizer in TiDB automatically chooses the optimal Join type. However, in some cases, you may need to specify the Join type manually. For details, see [Explain Statements That Use Joins](/explain-joins.md).
+- Use appropriate storage engines. It is recommended to use the TiFlash storage engine for Hybrid Transactional and Analytical Processing (HTAP) workloads. See [HTAP Queries](https://docs.pingcap.com/tidb/stable/dev-guide-hybrid-oltp-and-olap-queries).
 
 TiDB Cloud provides several tools to help you analyze slow queries on a cluster. The following sections describe several approaches to optimize slow queries.
 
 ### Use Statement on the Diagnosis tab
 
-The TiDB Cloud console provides a **[Statement](/tidb-cloud/tune-performance.md#statement-analysis)** sub-tab on the **Diagnosis** tab. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to analyze the total time consumed or the time consumed by a single execution when a SQL statement takes a long time.
+The TiDB Cloud console provides a **[Statement](/tidb-cloud/tune-performance.md#statement-analysis)** sub-tab on the **Diagnosis** tab. It collects the execution statistics of SQL statements of all databases on the cluster. You can use it to identify and analyze SQL statements that consume a long time in total or in a single execution.
 
 Note that on this sub-tab, SQL queries with the same structure (even if the query parameters do not match) are grouped into the same SQL statement. For example, `SELECT * FROM employee WHERE id IN (1, 2, 3)` and `select * from EMPLOYEE where ID in (4, 5)` are both part of the same SQL statement `select * from employee where id in (...)`.
 
@@ -31,7 +31,7 @@ You can view some key information in **Statement**.
 
 - SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
 - Execution plan list: if a SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL and the corresponding execution time from several perspectives, you can get more information from it. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
+- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
@@ -53,7 +53,7 @@ Also, TiDB can choose to enable execution plan cache to reduce the creation over
 
 ### Optimize full table scan
 
-The most common reason for slow SQL queries is that the `SELECT` statements perform full table scan or use incorrect indexes. You can use EXPLAIN or EXPLAIN ANALYZE to view the execution plan of this query and locate the cause of the slow query. There are [three methods](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql) that you can use to optimize.
+The most common reason for slow SQL queries is that the `SELECT` statements perform full table scan or use incorrect indexes. You can use EXPLAIN or EXPLAIN ANALYZE to view the execution plan of a query and locate the cause of the slow execution. There are [three methods](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql) that you can use to optimize.
 
 - Use secondary index
 - Use covering index

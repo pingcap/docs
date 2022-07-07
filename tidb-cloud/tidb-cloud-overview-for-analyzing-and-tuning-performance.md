@@ -90,7 +90,7 @@ The following screenshot shows an example of a write hotspot. A bright diagonal 
 
 ![Write hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-write-hotspot.png)
 
-A read hotspot is generally represented in the heat map as a bright horizontal line, usually a small table with a large number of visits, as shown in the following screen shot.
+A read hotspot is generally represented in the heat map as a bright horizontal line, usually a small table with a large number of queries, as shown in the following screenshot.
 
 ![Read hotspot](/media/tidb-cloud/tidb-cloud-troubleshoot-read-hotspot.png)
 
