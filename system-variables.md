@@ -1307,7 +1307,7 @@ This variable is an alias for _transaction_isolation_.
 ### version
 
 - Scope: NONE
-- Default value: `5.7.25-TiDB-(tidb version)`
+- Default value: `5.7.25-TiDB-`(tidb version)
 - This variable returns the MySQL version, followed by the TiDB version. For example '5.7.25-TiDB-v4.0.0-beta.2-716-g25e003253'.
 
 ### version_comment
@@ -1327,7 +1327,7 @@ This variable is an alias for _transaction_isolation_.
 ### warning_count
 
 - Scope: SESSION
-- Default value: 0
+- Default value: `0`
 - This read-only variable indicates the number of warnings that occurred in the statement that was previously executed.
 
 ### windowing_use_high_precision
