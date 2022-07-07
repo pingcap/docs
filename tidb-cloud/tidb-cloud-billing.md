@@ -22,15 +22,15 @@ These charges appear as separate items on your monthly TiDB Cloud bills.
 
 TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
 
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and vCPUs size of TiDB, TiKV, and TiFlash<sup>beta</sup>.
+In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash.
 
 The specified node quantity and associated vCPUs determine your hourly compute cost.
 
-Note that the compute cost of TiDB, TiKV, and TiFlash<sup>beta</sup> nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
+Note that the compute cost of TiDB, TiKV, and TiFlash nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
 
 ## Storage cost
 
-Both TiKV and TiFlash<sup>beta</sup> nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash<sup>beta</sup> nodes in your cluster consume.
+Both TiKV and TiFlash nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash nodes in your cluster consume.
 
 TiDB Cloud passes the costs onto customers as they are incurred. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
 
@@ -89,7 +89,7 @@ After you set up the payment method, TiDB Cloud will generate the invoice for th
 
 To view the list of invoices, perform the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**. The invoices page is displayed.
 
 ## Billing details
@@ -104,7 +104,7 @@ After setting the payment method, TiDB Cloud will generate the invoice and billi
 
 To view the billing details, perform the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
 
@@ -134,7 +134,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 
 - Anytime in the billing console: 
 
-    1. Click the account name in the upper-right corner of the window.
+    1. Click the account name in the upper-right corner of the TiDB Cloud console.
     2. Click **Billing**.
     3. Click the **Payment Method** tab, and then click **Add Credit Card**.
     4. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, card number, valid year and month, and CVC (Card Verification Code).
@@ -148,7 +148,7 @@ You can bind multiple credit cards, and set one of them as the default credit ca
 
 To set the default credit card, perform the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.

@@ -75,7 +75,7 @@ Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirro
 >
 > If the cluster to upgrade was deployed not using the offline method, skip this step.
 
-Refer to [Deploy a TiDB Cluster Using TiUP - Deploy TiUP offline](/production-deployment-using-tiup.md#method-2-deploy-tiup-offline) to download the TiUP mirror of the new version and upload it to the control machine. After executing `local_install.sh`, TiUP will complete the overwrite upgrade.
+Refer to [Deploy a TiDB Cluster Using TiUP - Deploy TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline) to download the TiUP mirror of the new version and upload it to the control machine. After executing `local_install.sh`, TiUP will complete the overwrite upgrade.
 
 {{< copyable "shell-regular" >}}
 
@@ -177,7 +177,10 @@ tiup cluster upgrade <cluster-name> v5.4.2
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> - When upgrading a TiDB cluster from versions earlier than 5.3 to 5.3 or later, you cannot upgrade TiFlash online. Instead, you must first stop all the TiFlash instances and then upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
+> - To upgrade TiFlash from versions earlier than 5.3 to 5.3 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
+>    1. Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
+>    2. Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
+>    3. Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
 
 #### Offline upgrade
 

@@ -35,7 +35,7 @@ For more information about the two options, see [Select Your Cluster Tier](/tidb
 
 If you are an organization owner, once you log in to TiDB Cloud, you have a default project. If you do not want to use the default project, you can take the following steps to create a new one:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**.
 
@@ -49,7 +49,7 @@ If you are an organization owner, once you log in to TiDB Cloud, you have a defa
 
 If you are a project member, you can access only the specific projects to which your organization owner invited you, and you cannot create new projects. To check which project you belong to, take the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**.
 
@@ -72,11 +72,11 @@ To create a Developer Tier cluster, take the following steps:
 
 4. View the cluster size of the Developer Tier, and then click **Create**.
 
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+
+5. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
     Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
-
-5. During or after the cluster creation, click **Security Quick Start** in the left cluster pane.
-
-6. In the **Security Quick Start** dialog box, set the root password to access your cluster, add the IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 
@@ -98,7 +98,7 @@ To create a Dedicated Tier cluster, take the following steps:
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
 
-4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
 5. Confirm the cluster information in the middle area and the billing information in the right pane.
 
@@ -110,11 +110,11 @@ To create a Dedicated Tier cluster, take the following steps:
 
 7. Click **Create**.
 
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+
+8. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
     Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
-
-8. During or after the cluster creation, click **Security Quick Start** in the left cluster pane.
-
-9. In the **Security Quick Start** dialog box, set the root password to access your cluster, add the IP addresses to connect to your cluster, and then click **Apply**.
 
 </div>
 </SimpleTab>

@@ -28,7 +28,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
     1. Click one of the buttons to add some rules quickly.
 
-        - **Add Your Current IP Address**
+        - **Add My Current IP Address**
         - **Add Rules from Default Set**
         - **Allow Access from Anywhere**
 
@@ -36,13 +36,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
     3. Click **Create Filter** to confirm the changes.
 
-4. Use a SQL client to connect to TiDB.
-
-    {{< copyable "shell" >}}
-
-    ```shell
-    mysql -u root -h <endpoint> -P <port number> -p
-    ```
+4. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
 ## Connect via VPC peering
 
