@@ -60,7 +60,7 @@ In this sample policy:
     - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure that you have granted the `kms:Decrypt` permission to the role you have used to import data to TiDB Cloud.
     - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
 
-If your policy is not correctly configured as the preceding example shows, correct the `Resource` fields in your policy and try to import data again.
+If your policy is not correctly configured as the preceding example shows, correct the `Resource` fields in your policy and try importing data again.
 
 > **Tip:**
 >
@@ -111,7 +111,7 @@ In the AWS Management Console, open the Amazon S3 console, go to **Bucket** > **
 
 If the configuration is not "Bucket owner enforced", the `AccessDenied` error occurs, because your account does not have enough permissions for all objects in this bucket.
 
-To handle the error, click **edit** on the upper right corner of the page and change the ownership to "Bucket owner enforced". Note that this might affect your other applications that are using this bucket.
+To handle the error, click **Edit** on the upper right corner of the Object Ownership area and change the ownership to "Bucket owner enforced". Note that this might affect your other applications that are using this bucket.
 
 ## Check your bucket encryption type
 
@@ -126,7 +126,6 @@ There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) an
 
 <details>
 <summary>For the AWS managed key (aws/s3) in SSE-KMS</summary>
-<br />
 
 In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants are not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
 
@@ -135,9 +134,8 @@ To solve the permission error, click **Edit** on the upper right corner of the *
 
 <details>
 <summary>For the customer-managed key in SSE-KMS</summary>
-<br />
 
-To handle the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** on the upper right corner of the page to add the role you have used to import data to TiDB Cloud. Then, try to import data again.
+To solve the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** on the upper right corner of the page to add the role you have used to import data to TiDB Cloud. Then, try importing data again.
 
 </details>
 
