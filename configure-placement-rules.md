@@ -452,7 +452,7 @@ The following example shows a more complicated `label_constraints` configuration
 }
 ```
 
-### Scenario 5: Migrate a table to the nodes with SSD disk
+### Scenario 5: Migrate a table to the nodes with SSD disks
 
 Different from scenario 3, this scenario is not to add new replica(s) on the basis of the existing configuration, but to forcibly override the other configuration of a data range. So you need to specify an `index` value large enough and set `override` to `true` in the rule group configuration to override the existing rule.
 
