@@ -1,11 +1,11 @@
 ---
-title: Troubleshoot Permission Errors during Data Import from S3
+title: Troubleshoot Permission Errors during Data Import from Amazon S3
 summary: Learn how to troubleshoot permission errors when importing data from Amazon S3 to TiDB Cloud.
 ---
 
-# Troubleshoot Permission Errors during Data Import from S3
+# Troubleshoot Permission Errors during Data Import from Amazon S3
 
-This document introduces how to troubleshoot permission errors that might occur when you [import data from Amazon S3 into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud).
+This document describes how to troubleshoot permission errors that might occur when you [import data from Amazon S3 into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud).
 
 After clicking **Import** on the **Data Import Task** page on the TiDB Cloud console, if you see an error message with the keyword `AccessDenied`, a permission error has occurred.
 
@@ -55,10 +55,10 @@ In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**
 
 In this sample policy:
 
-- Pay attention to the line of `"arn:aws:s3:::tidbcloud-samples-sun-encry-kms-bucket/*"`. This is your customized directory that you can customize in your S3 bucket root level for data storage. This directory need to end with `/*`, for example, `"arn:aws:s3:::<bucket>/<sub-dir>/*"`. If you fill in with `"arn:aws:s3:::<bucket-name>"`, the `AccessDenied` error occurs.
+- Pay attention to the line of `"arn:aws:s3:::tidbcloud-samples-sun-encry-kms-bucket/*"`. This is a directory that you can customize in your S3 bucket root level for data storage. The directory needs to end with `/*`, for example, `"arn:aws:s3:::<bucket>/<sub-dir>/*"`. If you fill in with `"arn:aws:s3:::<bucket-name>"` only, the `AccessDenied` error occurs.
 - The line of `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is the KMS key of the bucket.
     - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure that you have granted the `kms:Decrypt` permission to the role you have used to import data to TiDB Cloud.
-    - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value need to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
+    - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
 
 If your policy is not correctly configured as the preceding example shows, correct the `Resource` fields in your policy and try to import data again.
 
@@ -70,9 +70,9 @@ If your policy is not correctly configured as the preceding example shows, corre
 
 ## Check the bucket policy
 
-In the AWS Management Console, open the Amazon S3 console, go to **Bucket** > **Permissions**, and find the **Bucket policy** page. By default, this page has no policy value. If any denied policy is displayed, the `AccessDenied` error might occur.
+In the AWS Management Console, open the Amazon S3 console, go to **Bucket** > **Permissions**, and find the **Bucket policy** page. By default, this page has no policy value. If any denied policy is displayed on this page, the `AccessDenied` error might occur during data import.
 
-If you see a denied policy, check whether the policy relates to the current data import. If yes, delete it on the page and retry the data import.
+If you see a denied policy, check whether the policy relates to the current data import. If yes, delete it from the page and retry the data import.
 
 ## Check the trust entity
 
@@ -121,16 +121,16 @@ To check the encryption type of your bucket, open the Amazon S3 console in the A
 
 There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) and AWS Key Management Service (SSE-KMS). For SSE-S3, further check is not needed because this encryption type does not cause permission errors. For SSE-KMS, you need to check the following:
 
-- If the AWS KMS key ARN on the page is in black color without underline, the AWS KMS key is an AWS-managed key (aws/s3).
-- If the AWS KMS key ARN on the page is in blue color with underline, click the key ARN to see the specific encryption type. It might be an AWS managed key (aws/s3) or a customer-managed key.
+- If the AWS KMS key ARN on the page is displayed in black without an underline, the AWS KMS key is an AWS-managed key (aws/s3).
+- If the AWS KMS key ARN on the page is displayed in blue with an underline, click the key ARN to see the specific encryption type. It might be an AWS managed key (aws/s3) or a customer-managed key.
 
 <details>
 <summary>For the AWS managed key (aws/s3) in SSE-KMS</summary>
 <br />
 
-In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants is not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
+In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants are not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
 
-To handle the permission error, click **edit** on the upper right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
+To solve the permission error, click **Edit** on the upper right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
 </details>
 
 <details>
