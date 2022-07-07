@@ -17,7 +17,7 @@ TiDB version: 5.4.2
 
 + TiKV
 
-    - Reload TLS certificate automatically when it changes to improve availability [#12546](https://github.com/tikv/tikv/issues/12546)
+    - Reload TLS certificate automatically for each update to improve availability [#12546](https://github.com/tikv/tikv/issues/12546)
     (dup: release-6.1.0.md > Improvements> TiKV)- Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
     (dup: release-5.2.4.md > Improvements> TiKV)- Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
 
@@ -58,10 +58,10 @@ TiDB version: 5.4.2
 
 + TiKV
 
-    - Fix the panic issue caused by analyzed statistics when `max_sample_size` is set to `0` [#11192](https://github.com/tikv/tikv/issues/11192)
+    - Fix the panic issue caused by analyzing statistics when `max_sample_size` is set to `0` [#11192](https://github.com/tikv/tikv/issues/11192)
     (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
-    - Fix the panic issue when source peer catch up logs by snapshot in merge [#12663](https://github.com/tikv/tikv/issues/12663)
-    - Fix the panic issue when a peer is being split and destroyed at the same time [#12825](https://github.com/tikv/tikv/issues/12825)
+    - Fix the panic issue that might occur when the source peer catches up logs by snapshot in the Region merge process [#12663](https://github.com/tikv/tikv/issues/12663)
+    - Fix the panic issue that might occur when a peer is being split and destroyed at the same time [#12825](https://github.com/tikv/tikv/issues/12825)
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of time parsing error that occurs when the `DATETIME` values contain a fraction and `Z` [#12739](https://github.com/tikv/tikv/issues/12739)
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue that TiKV panics when performing type conversion for an empty string [#12673](https://github.com/tikv/tikv/issues/12673)
