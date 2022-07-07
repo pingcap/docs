@@ -69,7 +69,7 @@ TiDB version: 5.4.2
     - Fix the issue that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
     - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
     - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
-    - Fix the issue of failing to start TiKV that occurs on the aufs [#12543](https://github.com/tikv/tikv/issues/12543)
+    - Fix the issue of failing to start TiKV on AUFS [#12543](https://github.com/tikv/tikv/issues/12543)
 
 + PD
 
