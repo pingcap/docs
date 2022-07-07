@@ -17,31 +17,24 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
 
 -   [BR](/br/backup-and-restore-overview.md) ：
 
-    {{< copyable "" >}}
-
     ```shell
     ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
+    ```
+
+    ```shell
     ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                 ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
 -   [Dumpling](/dumpling-overview.md) ：
 
-    {{< copyable "" >}}
-
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
-    #          ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
 -   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) ：
 
-    {{< copyable "" >}}
-
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
 ### TOML構成ファイル {#toml-configuration-files}
@@ -78,7 +71,7 @@ db2.tbl2
 db3.tbl3
 ```
 
-プレーンな名前は、次のように有効な[識別子文字](/schema-object-names.md)のみで構成されている必要があります。
+プレーン名は、次のように有効な[識別子文字](/schema-object-names.md)のみで構成されている必要があります。
 
 -   `9` `0`
 -   文字（ `a`から`z` `Z` `A`
@@ -86,7 +79,7 @@ db3.tbl3
 -   `_`
 -   非ASCII文字（U+0080からU+10FFFF）
 
-他のすべてのASCII文字は予約されています。次のセクションで説明するように、句読点の中には特別な意味を持つものがあります。
+他のすべてのASCII文字は予約されています。次のセクションで説明するように、一部の句読点には特別な意味があります。
 
 ### ワイルドカード {#wildcards}
 

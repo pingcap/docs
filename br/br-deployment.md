@@ -21,7 +21,7 @@ BRを展開する際の推奨プラクティス：
 
 > **注**：
 >
-> -   ネットワークファイルシステム（NFS）がBRまたはTiKVノードにマウントされていない場合、またはAmazon S3、GCS、またはAzure Blob Storageプロトコルをサポートする外部ストレージを使用している場合、BRによってバックアップされるデータは各TiKVノードで生成されます。 BRはリーダーレプリカのみをバックアップするため、リーダーのサイズに基づいて各ノードで予約されているスペースを見積もる必要があります。 TiDBはデフォルトで負荷分散にリーダー数を使用するため、リーダーのサイズは大きく異なる可能性があります。これにより、バックアップデータが各ノードに不均一に分散されるという問題が発生する可能性があります。
+> -   ネットワークファイルシステム（NFS）がBRまたはTiKVノードにマウントされていない場合、またはAmazon S3、GCS、またはAzure Blob Storageプロトコルをサポートする外部ストレージを使用している場合、BRによってバックアップされるデータは各TiKVノードで生成されます。 BRはリーダーレプリカのみをバックアップするため、リーダーのサイズに基づいて各ノードで予約されているスペースを見積もる必要があります。 TiDBはデフォルトでロードバランシングにリーダー数を使用するため、リーダーのサイズは大きく異なる可能性があります。これにより、バックアップデータが各ノードに不均一に分散されるという問題が発生する可能性があります。
 > -   バックアップデータは各ノードのローカルファイルシステムに分散しているため、**これはBRを展開するための推奨される方法ではないことに注意してください**。バックアップデータを収集すると、データの冗長性と運用および保守の問題が発生する可能性があります。一方、バックアップデータを収集する直前にデータを復元すると、 `SST file not found`エラーが発生します。
 
 ## BRを使用する {#use-br}
@@ -30,7 +30,7 @@ BRを展開する際の推奨プラクティス：
 
 ### SQLステートメントを使用する {#use-sql-statements}
 
-TiDBは、 [`BACKUP`](/sql-statements/sql-statement-backup.md)つと[`RESTORE`](/sql-statements/sql-statement-restore.md)のSQLステートメントの両方をサポートします。ステートメント[`SHOW BACKUPS| RESTORE`](/sql-statements/sql-statement-show-backups.md)を使用して、これらの操作の進行状況を監視できます。
+TiDBは、 [`BACKUP`](/sql-statements/sql-statement-backup.md)つと[`RESTORE`](/sql-statements/sql-statement-restore.md)のSQLステートメントの両方をサポートします。ステートメント[`SHOW BACKUPS|RESTORES`](/sql-statements/sql-statement-show-backups.md)を使用して、これらの操作の進行状況を監視できます。
 
 ### コマンドラインツールを使用する {#use-the-command-line-tool}
 
