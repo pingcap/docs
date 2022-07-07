@@ -4,7 +4,7 @@ title: TiDB 5.4.2 Release Notes
 
 # TiDB 5.4.2 Release Notes
 
-Release Date: xx xx, 2022
+Release Date: July 8, 2022
 
 TiDB version: 5.4.2
 
@@ -18,18 +18,18 @@ TiDB version: 5.4.2
 + TiKV
 
     - Reload TLS certificate automatically for each update to improve availability [#12546](https://github.com/tikv/tikv/issues/12546)
-    (dup: release-6.1.0.md > Improvements> TiKV)- Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
-    (dup: release-5.2.4.md > Improvements> TiKV)- Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
+    - Improve the health check to detect unavailable Raftstore, so that the TiKV client can update Region Cache in time [#12398](https://github.com/tikv/tikv/issues/12398)
+    - Transfer the leadership to CDC observer to reduce latency jitter [#12111](https://github.com/tikv/tikv/issues/12111)
 
 + PD
 
-    (dup: release-6.1.0.md > Improvements> PD)- Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
+    - Disable compiling swagger server by default [#4932](https://github.com/tikv/pd/issues/4932)
 
 + Tools
 
     + TiDB Lightning
 
-        (dup: release-6.1.0.md > Improvements> Tools> TiDB Lightning)- Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
+        - Optimize Scatter Region to batch mode to improve the stability of the Scatter Region process [#33618](https://github.com/pingcap/tidb/issues/33618)
 
 ## Bug Fixes
 
@@ -48,44 +48,44 @@ TiDB version: 5.4.2
     - Fix the issue that the prewrite requests are not idempotency when Region errors and network issues occur [#34875](https://github.com/pingcap/tidb/issues/34875)
     - Fix the issue that the async commit transactions being rolled back might not meet atomicity [#33641](https://github.com/pingcap/tidb/issues/33641)
     <!--sql-infra-->
-    (dup: release-5.3.2.md > Bug Fixes> TiDB)- Previously, when a network connectivity issue occurred, TiDB did not always correctly free the resources held by the disconnected session. This issue has been fixed so that open transactions can be rolled back and other associated resources can be released. [#34722](https://github.com/pingcap/tidb/issues/34722)
+    - Previously, when a network connectivity issue occurred, TiDB did not always correctly free the resources held by the disconnected session. This issue has been fixed so that open transactions can be rolled back and other associated resources can be released. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fix the issue that the `references invalid table` error might be incorrectly reported when TiDB queries views with CTE [#33965](https://github.com/pingcap/tidb/issues/33965)
 
     <!--diagnosis-->
-    (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the panic issue caused by the `fatal error: concurrent map read and map write` error [#35340](https://github.com/pingcap/tidb/issues/35340)
+    - Fix the panic issue caused by the `fatal error: concurrent map read and map write` error [#35340](https://github.com/pingcap/tidb/issues/35340)
 
-    (dup: release-5.4.1.md > Bug Fixes> TiDB)- Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
+    - Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
 
 + TiKV
 
     - Fix the panic issue caused by analyzing statistics when `max_sample_size` is set to `0` [#11192](https://github.com/tikv/tikv/issues/11192)
-    (dup: release-6.0.0-dmr.md > Bug fixes> TiKV)- Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
+    - Fix the potential issue of mistakenly reporting TiKV panics when exiting TiKV [#12231](https://github.com/tikv/tikv/issues/12231)
     - Fix the panic issue that might occur when the source peer catches up logs by snapshot in the Region merge process [#12663](https://github.com/tikv/tikv/issues/12663)
     - Fix the panic issue that might occur when a peer is being split and destroyed at the same time [#12825](https://github.com/tikv/tikv/issues/12825)
-    (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
-    (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of time parsing error that occurs when the `DATETIME` values contain a fraction and `Z` [#12739](https://github.com/tikv/tikv/issues/12739)
-    (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue that TiKV panics when performing type conversion for an empty string [#12673](https://github.com/tikv/tikv/issues/12673)
-    (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the possible duplicate commit records in pessimistic transactions when async commit is enabled [#12615](https://github.com/tikv/tikv/issues/12615)
-    (dup: release-6.1.0.md > Bug fixes> TiKV)- Fix the issue that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
-    (dup: release-6.1.0.md > Bug fixes> TiKV)- Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
-    (dup: release-5.2.4.md > Bug fixes> TiKV)- Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
+    - Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
+    - Fix the issue of time parsing error that occurs when the `DATETIME` values contain a fraction and `Z` [#12739](https://github.com/tikv/tikv/issues/12739)
+    - Fix the issue that TiKV panics when performing type conversion for an empty string [#12673](https://github.com/tikv/tikv/issues/12673)
+    - Fix the possible duplicate commit records in pessimistic transactions when async commit is enabled [#12615](https://github.com/tikv/tikv/issues/12615)
+    - Fix the issue that TiKV reports the `invalid store ID 0` error when using Follower Read [#12478](https://github.com/tikv/tikv/issues/12478)
+    - Fix the issue of TiKV panic caused by the race between destroying peers and batch splitting Regions [#12368](https://github.com/tikv/tikv/issues/12368)
+    - Fix the issue that tikv-ctl returns an incorrect result due to its wrong string match [#12329](https://github.com/tikv/tikv/issues/12329)
     - Fix the issue of failing to start TiKV that occurs on the aufs [#12543](https://github.com/tikv/tikv/issues/12543)
 
 + PD
 
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
-    (dup: release-5.3.2.md > Bug Fixes> PD)- Fix the PD panic that occurs when a hot region has no leader [#5005](https://github.com/tikv/pd/issues/5005)
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
-    (dup: release-6.1.0.md > Bug fixes> PD)- Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
+    - Fix the wrong status code of `not leader` [#4797](https://github.com/tikv/pd/issues/4797)
+    - Fix the PD panic that occurs when a hot region has no leader [#5005](https://github.com/tikv/pd/issues/5005)
+    - Fix the issue that scheduling cannot start immediately after the PD leader transfer [#4769](https://github.com/tikv/pd/issues/4769)
+    - Fix a bug of TSO fallback in some corner cases [#4884](https://github.com/tikv/pd/issues/4884)
 
 + TiFlash
 
     <!--storage-->
     - Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154)
-    (dup: release-6.1.0.md > Bug fixes> TiFlash)- Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
+    - Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
 
     <!--compute-->
-    (dup: release-5.3.2.md > Bug Fixes> TiFlash)- Fix wrong decimal comparison results in corner cases [#4512](https://github.com/pingcap/tiflash/issues/4512)
+    - Fix wrong decimal comparison results in corner cases [#4512](https://github.com/pingcap/tiflash/issues/4512)
 
 + Tools
 
@@ -94,22 +94,22 @@ TiDB version: 5.4.2
         - Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [35279](https://github.com/pingcap/tidb/issues/35279)
         - Fix a bug that BR does not retry when an error occurs in saving files [#34865](https://github.com/pingcap/tidb/issues/34865)
         - Fix a panic issue when BR is running [#34956](https://github.com/pingcap/tidb/issues/34956)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix the issue that BR cannot handle S3 internal errors [#34350](https://github.com/pingcap/tidb/issues/34350)
-        (dup: release-6.0.0-dmr.md > Bug fixes> Tools> Backup & Restore (BR))- Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
+        - Fix the issue that BR cannot handle S3 internal errors [#34350](https://github.com/pingcap/tidb/issues/34350)
+        - Fix a bug that BR gets stuck when the restore operation meets some unrecoverable errors [#33200](https://github.com/pingcap/tidb/issues/33200)
 
     + TiCDC
 
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiCDC)- Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
+        - Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix replication interruption that occurs when Region leader is missing and the retry exceeds the limit [#5230](https://github.com/pingcap/tiflow/issues/5230)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
+        - Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
         - Fix a bug that may cause goroutine leak in the HTTP server [#5303](https://github.com/pingcap/tiflow/issues/5303)
         - Fix the issue that changes in meta Region can lead to latency increase [#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
 
     + TiDB Data Migration (DM)
 
         - Fix the issue that DM occupies more disk space after a task automatically resumes [#5344](https://github.com/pingcap/tiflow/issues/5344)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
+        - Fix the issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
 
