@@ -54,7 +54,7 @@ TiDB Cloud is suitable for various use cases that require high availability and 
 - Real-time HTAP
 - Compatible with the MySQL 5.7 protocol and MySQL ecosystem
 
-You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)<sup>beta</sup>, a columnar storage engine that helps speed up analytical processing. During the PoC, you can use the TiFlash<sup>beta</sup> feature at any time.
+You might also be interested in using [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview), a columnar storage engine that helps speed up analytical processing. During the PoC, you can use the TiFlash feature at any time.
 
 ## Step 3. Sign up and create a dedicated cluster for the PoC
 
@@ -69,10 +69,10 @@ To create a dedicated cluster for the PoC, take the following steps:
 
 2. Refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster for the PoC.
 
-Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash<sup>beta</sup> nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
+Capacity planning is recommended for cluster sizing before you create a cluster. You can start with estimated numbers of TiDB, TiKV, or TiFlash nodes, and scale out the cluster later to meet performance requirements. You can find more details in the following documents or consult our support team.
 
 - For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
-- For configurations of the dedicated cluster, see [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively.
+- For configurations of the dedicated cluster, see [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
 - For how to plan and optimize your PoC trial points consumption effectively, see [FAQ](#faq) in this document.
 - For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
@@ -134,9 +134,9 @@ Before testing the workload, consider performing a manual backup, so that you ca
 
 After kicking off the workload, you can observe the system using the following methods:
 
-- The commonly used metrics of the cluster can be found on the cluster overview page, including Total QPS, Latency, Connections, TiFlash<sup>beta</sup> Request QPS, TiFlash<sup>beta</sup> Request Duration, TiFlash<sup>beta</sup> Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
-- Go to **Diagnostic > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement](/tidb-cloud/tune-performance.md).
-- Go to **Diagnostic > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
+- The commonly used metrics of the cluster can be found on the cluster overview page, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write. See [Monitor a TiDB Cluster](/tidb-cloud/monitor-tidb-cluster.md).
+- Go to **Diagnosis > Statements**, where you can observe SQL execution and easily locate performance problems without querying the system tables. See [Statement Analysis](/tidb-cloud/tune-performance.md).
+- Go to **Diagnosis > Key Visualizer**, where you can view TiDB data access patterns and data hotspots. See [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
 - You can also integrate these metrics to your own Datadog and Prometheus. See [Third-party integrations](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations).
 
 Now it is time for evaluating the test results.
@@ -163,7 +163,7 @@ The following are tips for performance tuning:
     - Check the SQL execution plan on the **Diagnostic > Statements** page.
     - Check hotspot issues on the **Dashboard > Key Visualizer** page.
     - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
-    - Use the TiFlash<sup>beta</sup> feature to optimize analytical processing. See [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
+    - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
 
 ## Step 7. Explore more features
 
