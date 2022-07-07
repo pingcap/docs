@@ -89,7 +89,7 @@ TiDB version: 5.4.2
 
 + Tools
 
-    + BR
+    + Backup & Restore (BR)
 
         - Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [35279](https://github.com/pingcap/tidb/issues/35279)
         - Fix a bug that BR does not retry when an error occurs in saving files [#34865](https://github.com/pingcap/tidb/issues/34865)
