@@ -100,16 +100,16 @@ TiDB version: 5.4.2
     + TiCDC
 
         (dup: release-6.1.0.md > Bug fixes> Tools> TiCDC)- Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix the bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix the bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix the bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix replication interruption due to leader missing by extending region retry duration. [#5230](https://github.com/pingcap/tiflow/issues/5230)
+        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix replication interruption that occurs when Region leader is missing and the retry exceeds the limit [#5230](https://github.com/pingcap/tiflow/issues/5230)
         (dup: release-5.3.2.md > Bug Fixes> Tools> TiCDC)- Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
-        - Fix a bug that may causes goroutine leak in http server. [#5303](https://github.com/pingcap/tiflow/issues/5303)
-        - Fix the issue that meta Region changes can lead latency increasing [#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
+        - Fix a bug that may cause goroutine leak in the HTTP server [#5303](https://github.com/pingcap/tiflow/issues/5303)
+        - Fix the issue that changes in meta Region can lead to latency increase [#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
 
     + TiDB Data Migration (DM)
 
-        - Fix an issue that DM occupies more disk space after the task automatically resumes [#5344](https://github.com/pingcap/tiflow/issues/5344)
-        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix an issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
+        - Fix the issue that DM occupies more disk space after a task automatically resumes [#5344](https://github.com/pingcap/tiflow/issues/5344)
+        (dup: release-6.1.0.md > Bug fixes> Tools> TiDB Data Migration (DM))- Fix the issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
 
