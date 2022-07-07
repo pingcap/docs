@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/backup-and-restore-tool/']
 
 # BR Overview
 
-[BR](https://github.com/pingcap/br) (Backup & Restore) is a command-line tool for **distributed backup and restoration** of the TiDB cluster data. In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
+[BR](https://github.com/pingcap/tidb/tree/master/br) (Backup & Restore) is a command-line tool for **distributed backup and restoration** of the TiDB cluster data. In addition to regular backup and restoration, you can also use BR for large-scale data migration as long as compatibility is ensured.
 
 This document describes BR's architecture, features, and usage tips.
 
