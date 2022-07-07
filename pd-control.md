@@ -27,7 +27,7 @@ If you want to download the latest version of `pd-ctl`, directly download the Ti
 
 > **Note:**
 >
-> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.4.1`, the package download link is `https://download.pingcap.org/tidb-v5.4.1-linux-amd64.tar.gz`.
+> `{version}` indicates the version number of TiDB. For example, if `{version}` is `v5.4.2`, the package download link is `https://download.pingcap.org/tidb-v5.4.2-linux-amd64.tar.gz`.
 
 ### Compile from source code
 
@@ -603,7 +603,7 @@ Usage:
 
 Use this command to query all Regions in a given range `[startkey, endkey)`. Ranges without `endKey`s are supported.
 
-The `limit` parameter limits the number of keys. The default value of `limit` is `16`, and the value of `-1` means unlimited keys. 
+The `limit` parameter limits the number of keys. The default value of `limit` is `16`, and the value of `-1` means unlimited keys.
 
 Usage:
 

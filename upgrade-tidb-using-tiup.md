@@ -161,12 +161,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v5.4.1:
+For example, if you want to upgrade the cluster to v5.4.2:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v5.4.1
+tiup cluster upgrade <cluster-name> v5.4.2
 ```
 
 > **Note:**
@@ -218,7 +218,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v5.4.1
+Cluster version:    v5.4.2
 ```
 
 > **Note:**
@@ -268,7 +268,7 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v5.4.1
+tiup install ctl:v5.4.2
 ```
 
 ## TiDB 5.4 compatibility changes
