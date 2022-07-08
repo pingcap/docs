@@ -19,9 +19,13 @@
     - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
     - [Connect via SQL Shell](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
   - [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md)
-  - Use an HTAP Cluster
+  - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
-    - [Read Data from TiFlash](/tidb-cloud/use-htap-cluster.md)
+    - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+    - [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
+    - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+    - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+    - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
