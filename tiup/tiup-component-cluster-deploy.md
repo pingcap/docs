@@ -13,7 +13,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
 -   `<cluster-name>` ：新しいクラスタの名前。既存のクラスタ名と同じにすることはできません。
--   `<version>` ：デプロイするTiDBクラスタのバージョン番号（ `v5.4.1`など）。
+-   `<version>` ：デプロイするTiDBクラスタのバージョン番号（ `v5.4.2`など）。
 -   `<topology.yaml>` ：準備された[トポロジーファイル](/tiup/tiup-cluster-topology-reference.md) 。
 
 ## オプション {#options}

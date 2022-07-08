@@ -5,7 +5,7 @@ summary: Learn how to create a private mirror.
 
 # プライベートミラーを作成する {#create-a-private-mirror}
 
-プライベートクラウドを作成する場合、通常、TiUPの公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドによって実装されるプライベートミラーを作成できます。オフライン展開には`mirror`コマンドを使用することもできます。プライベートミラーを使用すると、自分で作成してパッケージ化したコンポーネントを使用することもできます。
+プライベートクラウドを作成するときは、通常、TiUPの公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドによって実装されるプライベートミラーを作成できます。オフライン展開には`mirror`コマンドを使用することもできます。プライベートミラーを使用すると、自分で作成してパッケージ化したコンポーネントを使用することもできます。
 
 ## TiUP <code>mirror</code>の概要 {#tiup-code-mirror-code-overview}
 
@@ -87,9 +87,9 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     コンポーネントの1つのバージョン（すべてのバージョンではない）のみを複製する場合は、 `--<component>=<version>`を使用してこのバージョンを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> --tidb v5.4.1`コマンドを実行して、TiDBコンポーネントのv5.4.1バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v5.4.1 --tikv all`コマンドを実行して、v5.4.1バージョンのTiDBコンポーネントとすべてのバージョンのTiKVコンポーネントのクローンを作成します。
-    -   `tiup mirror clone <target-dir> v5.4.1`コマンドを実行して、クラスタのすべてのコンポーネントのv5.4.1バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v5.4.2`コマンドを実行して、TiDBコンポーネントのv5.4.2バージョンのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v5.4.2 --tikv all`コマンドを実行して、v5.4.2バージョンのTiDBコンポーネントとすべてのバージョンのTiKVコンポーネントのクローンを作成します。
+    -   `tiup mirror clone <target-dir> v5.4.2`コマンドを実行して、クラスタのすべてのコンポーネントのv5.4.2バージョンのクローンを作成します。
 
 クローン作成後、署名キーが自動的に設定されます。
 

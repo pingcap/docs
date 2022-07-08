@@ -5,10 +5,11 @@ summary: Learn about the TiDB release timeline.
 
 # TiDBリリースタイムライン {#tidb-release-timeline}
 
-このドキュメントでは、リリースされたすべてのTiDBバージョンを新しいものから順に示しています。
+このドキュメントでは、リリースされたすべてのTiDBバージョンを新しい順に示しています。
 
 | バージョン                                             | 発売日        |
 | :------------------------------------------------ | :--------- |
+| [5.4.2](/releases/release-5.4.2.md)               | 2022-07-08 |
 | [5.3.2](/releases/release-5.3.2.md)               | 2022-06-29 |
 | [5.4.1](/releases/release-5.4.1.md)               | 2022-05-13 |
 | [5.2.4](/releases/release-5.2.4.md)               | 2022-04-26 |

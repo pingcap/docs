@@ -362,7 +362,7 @@
                 -   [データソースのエクスポートとインポート、およびクラスターのタスクConfiguration / コンフィグレーション](/dm/dm-export-import-config.md)
                 -   [失敗したDDLステートメントの処理](/dm/handle-failed-ddl-statements.md)
             -   [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)
-            -   [移行するMySQLインスタンスを切り替えます](/dm/usage-scenario-master-slave-switch.md)
+            -   [移行するMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
             -   [移行するテーブルのスキーマを管理する](/dm/dm-manage-schema.md)
             -   [アラートを処理する](/dm/dm-handle-alerts.md)
             -   [デイリーチェック](/dm/dm-daily-check.md)
@@ -626,7 +626,7 @@
             -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
-        -   [一時テーブル](/temporary-tables.md)
+        -   [一時的なテーブル](/temporary-tables.md)
         -   文字セットと照合
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
@@ -743,11 +743,11 @@
     -   [テーブルフィルター](/table-filter.md)
     -   [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)
 -   よくある質問
-    -   [TiDBのよくある質問](/faq/tidb-faq.md)
+    -   [TiDBのFAQ](/faq/tidb-faq.md)
     -   [SQLに関するFAQ](/faq/sql-faq.md)
     -   [展開に関するFAQ](/faq/deploy-and-maintain-faq.md)
-    -   [移行に関するよくある質問](/faq/migration-tidb-faq.md)
-    -   [アップグレードに関するよくある質問](/faq/upgrade-faq.md)
+    -   [移行に関するFAQ](/faq/migration-tidb-faq.md)
+    -   [アップグレードに関するFAQ](/faq/upgrade-faq.md)
     -   [モニタリングに関するFAQ](/faq/monitor-faq.md)
     -   [クラスター管理に関するFAQ](/faq/manage-cluster-faq.md)
     -   [高可用性に関するFAQ](/faq/high-availability-faq.md)
@@ -757,6 +757,7 @@
     -   [リリースタイムライン](/releases/release-timeline.md)
     -   [TiDBバージョニング](/releases/versioning.md)
     -   v5.4
+        -   [5.4.2](/releases/release-5.4.2.md)
         -   [5.4.1](/releases/release-5.4.1.md)
         -   [5.4.0](/releases/release-5.4.0.md)
     -   v5.3

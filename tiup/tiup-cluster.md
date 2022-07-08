@@ -52,7 +52,7 @@ Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-## クラスタをデプロイします {#deploy-the-cluster}
+## クラスタをデプロイする {#deploy-the-cluster}
 
 クラスタをデプロイするには、 `tiup cluster deploy`コマンドを実行します。コマンドの使用法は次のとおりです。
 
@@ -112,12 +112,12 @@ tidb_servers:
 ...
 ```
 
-ファイルを`/tmp/topology.yaml`として保存します。 TiDB v5.4.1を使用する場合で、クラスタ名が`prod-cluster`の場合は、次のコマンドを実行します。
+ファイルを`/tmp/topology.yaml`として保存します。 TiDB v5.4.2を使用する場合で、クラスタ名が`prod-cluster`の場合は、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v5.4.1 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v5.4.2 /tmp/topology.yaml
 ```
 
 実行中に、TiUPはトポロジを再度確認するように要求し、ターゲットマシンのルートパスワードを要求します（ `-p`フラグはパスワードの入力を意味します）。
@@ -125,7 +125,7 @@ tiup cluster deploy -p prod-cluster v5.4.1 /tmp/topology.yaml
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v5.4.1
+TiDB Version: v5.4.2
 Type        Host          Ports        Directories
 ----        ----          -----        -----------
 pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
@@ -165,12 +165,12 @@ tiup cluster list
 Starting /root/.tiup/components/cluster/v1.9.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v5.4.1    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v5.4.2    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## クラスタを開始します {#start-the-cluster}
 
-クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを起動します。
+クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを開始します。
 
 {{< copyable "" >}}
 
@@ -193,7 +193,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.9.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v5.4.1
+TiDB Version: v5.4.2
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -264,7 +264,7 @@ tiup cluster display prod-cluster
 ```
 Starting /root/.tiup/components/cluster/v1.9.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v5.4.1
+TiDB Version: v5.4.2
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -372,12 +372,12 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-たとえば、次のコマンドはクラスタをv5.4.1にアップグレードします。
+たとえば、次のコマンドはクラスタをv5.4.2にアップグレードします。
 
 {{< copyable "" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v5.4.1
+tiup cluster upgrade tidb-test v5.4.2
 ```
 
 ## 構成を更新する {#update-configuration}
@@ -559,11 +559,11 @@ tiup cluster audit
 Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.9.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-05-13T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
-4BKWjF  2022-05-13T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
-4BKVwH  2022-05-13T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
-4BKKH1  2022-05-13T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster destroy test
-4BKKDx  2022-05-13T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.1 /tmp/topology.yaml
+4BLhr0  2022-07-08T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.2 /tmp/topology.yaml
+4BKWjF  2022-07-08T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.2 /tmp/topology.yaml
+4BKVwH  2022-07-08T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.2 /tmp/topology.yaml
+4BKKH1  2022-07-08T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster destroy test
+4BKKDx  2022-07-08T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.0/cluster deploy test v5.4.2 /tmp/topology.yaml
 ```
 
 最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のようにコマンドの`audit-id`をフラグとして渡します。
@@ -714,4 +714,4 @@ TiUPデータは、ユーザーのホームディレクトリの`.tiup`ディレ
 
 > **ノート：**
 >
-> 制御マシンのディスク損傷などの異常な状態によって引き起こされるTiUPデータの損失を回避するために、 `.tiup`のディレクトリを定期的にバックアップすることをお勧めします。
+> 制御マシンのディスクの損傷などの異常な状態によって引き起こされるTiUPデータの損失を回避するために、 `.tiup`のディレクトリを定期的にバックアップすることをお勧めします。

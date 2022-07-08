@@ -9,7 +9,7 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 このガイドでは、sync-diff-inspectorの主な機能を紹介し、このツールを構成して使用する方法について説明します。 sync-diff-inspectorをダウンロードするには、次のいずれかの方法を使用します。
 
--   バイナリパッケージ。 [tidb-community-toolkit-v5.4.1-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.4.1-linux-amd64.tar.gz)をクリックしてダウンロードします。
+-   バイナリパッケージ。 [tidb-community-toolkit-v5.4.2-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.4.2-linux-amd64.tar.gz)をクリックしてダウンロードします。
 -   Dockerイメージ。次のコマンドを実行してダウンロードします。
 
     {{< copyable "" >}}
@@ -57,7 +57,7 @@ sync-diff-inspectorの構成は、次の部分で構成されています。
 -   `Global config` ：チェックするスレッドの数、矛盾するテーブルを修正するためにSQLステートメントをエクスポートするかどうか、データをキャンプするかどうかなどの一般的な構成。
 -   `Databases config` ：アップストリームおよびダウンストリームデータベースのインスタンスを構成します。
 -   `Routes` ：ダウンストリームの単一スキーマ名と一致するアップストリームの複数のスキーマ名のルール**（オプション）** 。
--   `Task config` ：チェックするテーブルを構成します。一部のテーブルにアップストリームデータベースとダウンストリームデータベースの間に特定のマッピング関係がある場合、または特別な要件がある場合は、これらのテーブルを構成する必要があります。
+-   `Task config` ：チェックするテーブルを設定します。一部のテーブルにアップストリームデータベースとダウンストリームデータベースの間に特定のマッピング関係がある場合、または特別な要件がある場合は、これらのテーブルを設定する必要があります。
 -   `Table config` ：無視する指定された範囲や列など、特定のテーブルの特別な構成**（オプション）** 。
 
 以下は、完全な構成ファイルの説明です。

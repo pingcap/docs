@@ -11,14 +11,14 @@ HTTPインターフェイス（TiCDC OpenAPI機能）を使用して、TiCDCク�
 
 ## TiUPを使用してTiCDCをアップグレードする {#upgrade-ticdc-using-tiup}
 
-このセクションでは、TiUPを使用してTiCDCクラスタをアップグレードする方法を紹介します。次の例では、TiCDCとTiDBクラスタ全体をv5.4.1にアップグレードする必要があると想定しています。
+このセクションでは、TiUPを使用してTiCDCクラスタをアップグレードする方法を紹介します。次の例では、TiCDCとTiDBクラスタ全体をv5.4.2にアップグレードする必要があると想定しています。
 
 {{< copyable "" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.4.1
+tiup cluster upgrade <cluster-name> v5.4.2
 ```
 
 ### アップグレードに関する注意事項 {#notes-for-upgrade}
@@ -121,7 +121,7 @@ TiUPを使用してTiCDCを展開する場合は、次のコマンドの`cdc cli
 
 -   `changefeed pause`コマンドを実行する
 -   `changefeed resume`コマンドを実行してレプリケーションタスクを再開します
--   ③1 `changefeed`の動作で回復可能なエラーが発生し、自動的に動作を再開します。
+-   ③1 `changefeed`の運転で回復可能なエラーが発生し、自動的に運転を再開します。
 -   `changefeed resume`コマンドを実行してレプリケーションタスクを再開します
 -   ⑤1 `changefeed`の操作で回復可能なエラーが発生する
 -   `TargetTs` `changefeed`到達し、レプリケーションが自動的に停止します。
@@ -190,7 +190,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 | `3306`         | ダウンストリームデータのポート                                                                                                                                                                                                            |
 | `worker-count` | ダウンストリームに対して同時に実行できるSQLステートメントの数（オプション、デフォルトでは`16` ）                                                                                                                                                                       |
 | `max-txn-row`  | ダウンストリームで実行できるトランザクションバッチのサイズ（オプション、デフォルトで`256` ）                                                                                                                                                                          |
-| `ssl-ca`       | ダウンストリームのMySQLインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                                                                                                         |
+| `ssl-ca`       | ダウンストリームMySQLインスタンスに接続するために必要なCA証明書ファイルのパス（オプション）                                                                                                                                                                          |
 | `ssl-cert`     | ダウンストリームのMySQLインスタンスに接続するために必要な証明書ファイルのパス（オプション）                                                                                                                                                                           |
 | `ssl-key`      | ダウンストリームのMySQLインスタンスに接続するために必要な証明書キーファイルのパス（オプション）                                                                                                                                                                         |
 | `time-zone`    | ダウンストリームのMySQLインスタンスに接続するときに使用されるタイムゾーン。v4.0.8以降で有効です。これはオプションのパラメータです。このパラメーターが指定されていない場合、TiCDCサービスプロセスのタイムゾーンが使用されます。このパラメーターが空の値に設定されている場合、TiCDCがダウンストリームのMySQLインスタンスに接続するときにタイムゾーンが指定されず、ダウンストリームのデフォルトのタイムゾーンが使用されます。 |
@@ -440,7 +440,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-repl
         -   `1` ：タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
         -   `2` ：タスクが再開されます。レプリケーションタスクは`checkpoint-ts`から再開します。
         -   `3` ：タスクは削除されます。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスのみが、後のクエリのために保持されます。
--   `task-status`は、照会された`changefeed`の各レプリケーションサブタスクの状態を示します。
+-   `task-status`は、クエリされた`changefeed`の各レプリケーションサブタスクの状態を示します。
 
 #### レプリケーションタスクを一時停止します {#pause-a-replication-task}
 
@@ -640,7 +640,7 @@ force-replicate = true
 
 ## ユニファイドソーター {#unified-sorter}
 
-統合ソーターは、TiCDCのソーティングエンジンです。次のシナリオによって引き起こされるOOMの問題を軽減できます。
+ユニファイドソーターは、TiCDCのソーティングエンジンです。次のシナリオによって引き起こされるOOMの問題を軽減できます。
 
 -   TiCDCのデータ複製タスクは長時間一時停止されます。その間、大量の増分データが蓄積され、複製する必要があります。
 -   データ複製タスクは早いタイムスタンプから開始されるため、大量の増分データを複製する必要があります。
@@ -662,7 +662,7 @@ cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-re
 > -   サーバーで、待ち時間が長いか帯域幅が制限されている機械式ハードドライブやその他のストレージデバイスを使用している場合は、統合ソーターの使用に注意してください。
 > -   デフォルトでは、UnifiedSorterは`data_dir`を使用して一時ファイルを保存します。空きディスク容量が500GiB以上であることを確認することをお勧めします。実稼働環境では、各ノードの空きディスク容量が（ビジネスで許可されている最大`checkpoint-ts`の遅延）*（ビジネスのピーク時のアップストリーム書き込みトラフィック）よりも大きいことを確認することをお勧めします。さらに、 `changefeed`が作成された後に大量の履歴データを複製する場合は、各ノードの空き領域が複製されたデータの量よりも大きいことを確認してください。
 > -   統合ソーターはデフォルトで有効になっています。サーバーが上記の要件に一致せず、統合ソーターを無効にする場合は、チェンジフィードに`sort-engine`から`memory`を手動で設定する必要があります。
-> -   `memory`を使用して並べ替える既存のチェンジフィードでUnifiedSorterを有効にするには、 [タスクの中断後にTiCDCが再起動された後に発生するOOMを処理するにはどうすればよいですか？](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)で提供されている方法を参照してください。
+> -   `memory`を使用してソートする既存のチェンジフィードでUnifiedSorterを有効にするには、 [タスクの中断後にTiCDCが再起動された後に発生するOOMを処理するにはどうすればよいですか？](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption)で提供されているメソッドを参照してください。
 
 ## 災害シナリオでの結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
@@ -670,7 +670,7 @@ v5.3.0以降、TiCDCは、アップストリームTiDBクラスタからS3スト
 
 現在、TiCDCは、増分データをTiDBクラスタから別のTiDBクラスタまたはMySQL互換データベースシステム（ Aurora、MySQL、MariaDBを含む）に複製できます。アップストリームクラスタがクラッシュした場合、災害前のTiCDCのレプリケーションステータスは正常であり、レプリケーションラグが小さいという条件で、TiCDCは5分以内にダウンストリームクラスタのデータを復元できます。これにより、最大で10秒のデータ損失が可能になります。つまり、RTO &lt;= 5分、P95 RPO&lt;=10秒です。
 
-TiCDCレプリケーションの遅延は、次のシナリオで増加します。
+TiCDCレプリケーションラグは、次のシナリオで増加します。
 
 -   TPSは短時間で大幅に増加します
 -   大規模または長いトランザクションがアップストリームで発生します
@@ -686,8 +686,8 @@ TiCDCレプリケーションの遅延は、次のシナリオで増加します
 ```toml
 [consistent]
 # Consistency level. Options include:
-# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified. 
-# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters. 
+# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified.
+# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters.
 level = "eventual"
 
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.
@@ -704,7 +704,7 @@ storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 
 プライマリクラスタで災害が発生した場合は、 `cdc redo`コマンドを実行してセカンダリクラスタで手動で回復する必要があります。復旧プロセスは以下のとおりです。
 
-1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データリカバリ中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
+1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データ回復中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
 2.  データ回復にはcdcバイナリを使用します。次のコマンドを実行します。
 
 ```shell

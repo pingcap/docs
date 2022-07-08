@@ -25,7 +25,7 @@ TiDB BinlogはTiDBパッケージに含まれているため、最新バージ�
 
 > **ノート：**
 >
-> 上記のダウンロードリンクの`{version}`は、TiDBのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.1-linux-amd64.tar.gz`です。
+> 上記のダウンロードリンクの`{version}`は、TiDBのバージョン番号を示します。たとえば、 `v5.4.2`のダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.2-linux-amd64.tar.gz`です。
 
 ## TiDB Lightning {#tidb-lightning}
 
@@ -37,7 +37,7 @@ TiDB BinlogはTiDBパッケージに含まれているため、最新バージ�
 
 > **ノート：**
 >
-> 上記のダウンロードリンクの`{version}`は、TiDBLightningのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`です。
+> 上記のダウンロードリンクの`{version}`は、TiDBLightningのバージョン番号を示します。たとえば、 `v5.4.2`のダウンロードリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.2-linux-amd64.tar.gz`です。
 
 ## BR（バックアップと復元） {#br-backup-and-restore}
 
@@ -49,7 +49,7 @@ TiDB BinlogはTiDBパッケージに含まれているため、最新バージ�
 
 > **ノート：**
 >
-> 上記のダウンロードリンクの`{version}`は、BRのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`です。
+> 上記のダウンロードリンクの`{version}`は、BRのバージョン番号を示します。たとえば、 `v5.4.2`のダウンロードリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.2-linux-amd64.tar.gz`です。
 
 ## TiDB DM（データ移行） {#tidb-dm-data-migration}
 
@@ -61,7 +61,7 @@ TiDB BinlogはTiDBパッケージに含まれているため、最新バージ�
 
 > **ノート：**
 >
-> 上記のダウンロードリンクの`{version}`は、DMのバージョン番号を示します。たとえば、 `v5.4.1`のダウンロードリンクは`https://download.pingcap.org/dm-v5.4.1-linux-amd64.tar.gz`です。公開されているDMのバージョンは[DMリリース](https://github.com/pingcap/dm/releases)ページで確認できます。
+> 上記のダウンロードリンクの`{version}`は、DMのバージョン番号を示します。たとえば、 `v5.4.2`のダウンロードリンクは`https://download.pingcap.org/dm-v5.4.2-linux-amd64.tar.gz`です。公開されているDMのバージョンは[DMリリース](https://github.com/pingcap/dm/releases)ページで確認できます。
 
 ## Dumpling {#dumpling}
 
@@ -73,7 +73,7 @@ TiDB BinlogはTiDBパッケージに含まれているため、最新バージ�
 
 > **ノート：**
 >
-> ダウンロードリンクの`{version}`は、 Dumplingのバージョン番号です。たとえば、 `v5.4.1`バージョンのDumplingをダウンロードするためのリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.1-linux-amd64.tar.gz`です。現在リリースされているバージョンは[TiDBリリース](https://github.com/pingcap/tidb/releases)で表示できます。
+> ダウンロードリンクの`{version}`は、 Dumplingのバージョン番号です。たとえば、 `v5.4.2`バージョンのDumplingをダウンロードするためのリンクは`https://download.pingcap.org/tidb-toolkit-v5.4.2-linux-amd64.tar.gz`です。現在リリースされているバージョンは[TiDBリリース](https://github.com/pingcap/tidb/releases)で表示できます。
 >
 > Dumplingはarm64linuxをサポートします。ダウンロードリンクの`amd64`を`arm64`に置き換えることができます。これは、 Dumplingの`arm64`バージョンを意味します。
 

@@ -26,7 +26,7 @@ PD RecoverはTiDBパッケージに含まれているため、最新バージョ
 
 > **ノート：**
 >
-> `{version}`はTiDBのバージョン番号を示します。たとえば、 `{version}`が`v5.4.1`の場合、パッケージのダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.1-linux-amd64.tar.gz`です。
+> `{version}`はTiDBのバージョン番号を示します。たとえば、 `{version}`が`v5.4.2`の場合、パッケージのダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.2-linux-amd64.tar.gz`です。
 
 ## クイックスタート {#quick-start}
 

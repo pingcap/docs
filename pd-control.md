@@ -27,7 +27,7 @@ PD制御を使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_ip
 
 > **ノート：**
 >
-> `{version}`はTiDBのバージョン番号を示します。たとえば、 `{version}`が`v5.4.1`の場合、パッケージのダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.1-linux-amd64.tar.gz`です。
+> `{version}`はTiDBのバージョン番号を示します。たとえば、 `{version}`が`v5.4.2`の場合、パッケージのダウンロードリンクは`https://download.pingcap.org/tidb-v5.4.2-linux-amd64.tar.gz`です。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -203,7 +203,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
--   `enable-one-way-merge`は、PDがリージョンを次のリージョンとマージすることのみを許可するかどうかを制御します。 `false`に設定すると、PDにより、リージョンを隣接する2つのリージョンとマージできます。
+-   `enable-one-way-merge`は、PDがリージョンを次のリージョンとのマージのみを許可するかどうかを制御します。 `false`に設定すると、PDにより、リージョンを隣接する2つのリージョンとマージできます。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
@@ -493,7 +493,7 @@ time: 43.12698ms
 
 ### <code>region &#x3C;region_id> [--jq="&#x3C;query string>"]</code> {#code-region-x3c-region-id-jq-x3c-query-string-code}
 
-このコマンドを使用して、リージョン情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
+このコマンドを使用して、地域情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -901,7 +901,7 @@ time: 43.12698ms
 
 > **ノート：**
 >
-> -   `store limit`コマンドの元の`region-add`および`region-remove`パラメーターは廃止され、 `add-peer`および`remove-peer`に置き換えられました。
+> -   `store limit`コマンドの元の`region-add`および`region-remove`パラメーターは非推奨になり、 `add-peer`および`remove-peer`に置き換えられました。
 > -   `pd-ctl`を使用して、TiKVストアのステータス（アップ、切断、オフライン、ダウン、またはトゥームストーン）を確認できます。各ステータスの関係については、 [TiKVストアの各ステータス間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### <code>log [fatal | error | warn | info | debug]</code> {#code-log-fatal-error-warn-info-debug-code}
@@ -1059,7 +1059,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 ...
 ```
 
-同じ方法で、store30またはstore31にレプリカがあるすべてのリージョンを見つけることもできます。
+同様に、store30またはstore31にレプリカがあるすべてのリージョンを見つけることもできます。
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id] | select(any(.==(30,31)))}"

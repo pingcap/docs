@@ -88,7 +88,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
       log_dir: /data/deploy/install/log/pd-2379
     ```
 
-    現在のクラスタの構成を表示するには、 `tiup cluster edit-config <cluster-name>`を実行します。 `global`と`server_configs`のパラメータ設定は`scale-out.yaml`に継承され、 `scale-out.yaml`でも有効になるためです。
+    現在のクラスタの構成を表示するには、 `tiup cluster edit-config <cluster-name>`を実行します。 `global`と`server_configs`のパラメーター構成は`scale-out.yaml`に継承され、したがって`scale-out.yaml`でも有効になるためです。
 
 2.  scale-outコマンドを実行します。
 
@@ -134,7 +134,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
     tiup cluster display <cluster-name>
     ```
 
-    ブラウザを使用して監視プラットフォーム[http://10.0.1.5:3000](http://10.0.1.5:3000)にアクセスし、クラスタと新しいノードのステータスを監視します。
+    ブラウザを使用して[http://10.0.1.5:3000](http://10.0.1.5:3000)の監視プラットフォームにアクセスし、クラスタと新しいノードのステータスを監視します。
 
 スケールアウト後のクラスタトポロジは次のとおりです。
 
@@ -275,7 +275,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
     ```
     Starting /root/.tiup/components/cluster/v1.9.0/cluster display <cluster-name>
     TiDB Cluster: <cluster-name>
-    TiDB Version: v5.4.1
+    TiDB Version: v5.4.2
     ID              Role         Host        Ports                            Status  Data Dir                Deploy Dir
     --              ----         ----        -----                            ------  --------                ----------
     10.0.1.3:8300   cdc          10.0.1.3    8300                             Up      data/cdc-8300           deploy/cdc-8300
@@ -392,7 +392,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
 
 2.  pd-ctlでTiFlashノードを削除します。
 
-    -   pd-ctlに`store delete <store_id>`を入力します（ `<store_id>`は、前の手順で見つかったTiFlashノードのストアIDです。
+    -   pd-ctlに`store delete <store_id>`を入力します（ `<store_id>`は前の手順で見つかったTiFlashノードのストアIDです。
 
     -   TiUPデプロイメントを使用する場合は、 `pd-ctl`を`tiup ctl pd`に置き換えます。
 

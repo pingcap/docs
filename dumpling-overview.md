@@ -23,7 +23,7 @@ SSTファイル（キーと値のペア）のバックアップ、または遅�
 4.  TiDBに対してさらに最適化が行われます。
     -   単一のTiDBSQLステートメントのメモリ制限の構成をサポート
     -   TiDBv4.0.0以降のTiDBGC時間の自動調整をサポート
-    -   TiDBの非表示列`_tidb_rowid`を使用して、単一のテーブルからの同時データエクスポートのパフォーマンスを最適化します
+    -   TiDBの非表示の列`_tidb_rowid`を使用して、単一のテーブルからの同時データエクスポートのパフォーマンスを最適化します
     -   TiDBの場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定して、データバックアップの時点を指定できます。これにより、一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用する代わりに、バックアップの一貫性が保証されます。
 
 ## Dumpling紹介 {#dumpling-introduction}
@@ -172,7 +172,7 @@ dumpling \
 
 v4.0.8以降、 Dumplingはクラウドストレージへのデータのエクスポートをサポートしています。 AmazonのS3バックエンドストレージにデータをバックアップする必要がある場合は、 `-o`パラメーターでS3ストレージパスを指定する必要があります。
 
-指定したリージョンにS3バケットを作成する必要があります（ [Amazonドキュメント-S3バケットを作成するにはどうすればよいですか](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照）。バケット内にフォルダも作成する必要がある場合は、 [Amazonドキュメント-フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
+指定したリージョンにS3バケットを作成する必要があります（ [Amazonドキュメント-S3バケットを作成するにはどうすればよいですか](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照）。バケット内にフォルダも作成する必要がある場合は、 [Amazonドキュメント-フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
 S3バックエンドストレージにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`を、環境変数としてDumplingノードに渡します。
 
@@ -207,7 +207,7 @@ Dumplingを使用してデータをバックアップする場合は、 `--s3.re
 
 {{< copyable "" >}}
 
-```shell
+```bash
 ./dumpling \
   -u root \
   -P 4000 \
@@ -249,7 +249,7 @@ Dumplingは、 `-B`オプションの特定のデータベースまたは`-T`オ
 例：
 
 -   `-B employees`は`employees`のデータベースをエクスポートします。
--   `-T employees.WorkOrder`は`employees.WorkOrder`のテーブルをエクスポートします。
+-   `-T employees.WorkOrder`は`employees.WorkOrder`テーブルをエクスポートします。
 
 ### 同時実行によるエクスポート効率の向上 {#improve-export-efficiency-through-concurrency}
 
@@ -379,5 +379,5 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--escape-backslash`         | バックスラッシュ（ `\` ）を使用して、エクスポートファイル内の特殊文字をエスケープします                                                                                                                                                                                       | 真実                                                                                                                                                                     |             |
 | `--output-filename-template` | [golangテンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、および`{{.Table}}`の引数を`{{.Index}}`する<br/>3つの引数は、データファイルのデータベース名、テーブル名、およびチャンクIDを表します。                                             | &#39;{{。DB}}。{{。Table}}。{{。Index}}&#39;                                                                                                                                |             |
 | `--status-addr`              | Prometheusがメトリックとpprofデバッグをプルするためのアドレスを含む餃子のサービスアドレス                                                                                                                                                                                 | &quot;：8281&quot;                                                                                                                                                      |             |
-| `--tidb-mem-quota-query`     | Dumplingコマンドの1行でSQLステートメントをエクスポートするためのメモリ制限。単位はバイトです。 v4.0.10以降のバージョンでは、このパラメーターを設定しない場合、TiDBはデフォルトで`mem-quota-query`構成項目の値をメモリー制限値として使用します。 v4.0.10より前のバージョンの場合、パラメーター値のデフォルトは32GBです。                                               | 34359738368                                                                                                                                                            |             |
+| `--tidb-mem-quota-query`     | 1行のDumplingコマンドでSQLステートメントをエクスポートする際のメモリ制限。単位はバイトです。 v4.0.10以降のバージョンでは、このパラメーターを設定しない場合、TiDBはデフォルトで`mem-quota-query`構成項目の値をメモリー制限値として使用します。 v4.0.10より前のバージョンの場合、パラメーター値のデフォルトは32GBです。                                                | 34359738368                                                                                                                                                            |             |
 | `--params`                   | エクスポートするデータベースの接続のセッション変数を指定します。必要な形式は`"character_set_client=latin1,character_set_connection=latin1"`です                                                                                                                              |                                                                                                                                                                        |             |
