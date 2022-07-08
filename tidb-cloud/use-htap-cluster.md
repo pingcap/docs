@@ -21,7 +21,7 @@ TiKV data is not replicated to TiFlash by default. You can select which table to
 ALTER TABLE table_name SET TIFLASH REPLICA 1;
 ```
 
-The number of replicas count must be smaller than the number of TiFlash nodes. Setting the number of replicas to `0` means deleting the replica in TiFlash.
+The number of replicas count must be no larger than the number of TiFlash nodes. Setting the number of replicas to `0` means deleting the replica in TiFlash.
 
 To check the replication progress, use the following command:
 
