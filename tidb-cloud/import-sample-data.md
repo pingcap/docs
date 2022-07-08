@@ -7,31 +7,48 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
 This document describes how to import sample data into TiDB Cloud via the UI. The sample data used is the system data from Capital Bikeshare, released under the Capital Bikeshare Data License Agreement. Before importing the sample data, you need to have one TiDB cluster.
 
-1. Navigate to the **Active Clusters** page and click the name of your target cluster. The overview page of your target cluster is displayed.
+1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
+
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
-3. Depending on where your TiDB cluster is hosted, do one of the following:
 
-    - If your TiDB cluster is hosted by AWS, select **AWS S3** for **Data Source Type**, and then enter the sample data URL `s3://tidbcloud-samples/data-ingestion/` in the **Bucket URL** field. The sample data bucket is hosted in the US West (Oregon) region for AWS.
+3. Fill in the import parameters:
 
-    - If your TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, and then enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field. The sample data bucket is hosted in the US-West1 (Oregon) region for GCP.
+    <SimpleTab>
+    <div label="AWS">
 
-4. For **Data Format**, select **TiDB Dumpling**.
+    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
-5. If the TiDB cluster is hosted by GCP, skip this step. If the TiDB cluster is hosted by AWS, enter the Role-ARN:
+    - **Data Source Type**: `AWS S3`.
+    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
+    - **Data Format**: select **TiDB Dumpling**.
+    - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
+    - **Target Database**:
+        - **Username**: `root`.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
 
-    ```
-    arn:aws:iam::385595570414:role/import-sample-access
-    ```
+    Then, click **Validate** to check whether TiDB Cloud has the access to the sample data in the specified bucket URL.
 
-6. For **Target Database**, enter `root` in the **Username** field, and enter the root password of the cluster in the **Password** field.
+    </div>
 
-    > **Note:**
-    >
-    > If you have created a custom user of the target database, you can also use the name of the newly created user and the corresponding password.
+    <div label="GCP">
 
-7. Leave the **DB/Tables Filter** field blank.
+    If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-8. Click **Import**. Then the sample data starts being imported.
+    - **Data Source Type**: `Google Cloud Stroage`.
+    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
+    - **Data Format**: select **TiDB Dumpling**.
+    - **Target Database**:
+        - **Username**: `root`.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
+
+    </div>
+    </SimpleTab>
+
+4. Click **Import**.
+
+    The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
 
 Once the cluster finishes the data importing process, you will get the sample data in your database.
 
