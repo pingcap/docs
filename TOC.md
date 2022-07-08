@@ -462,7 +462,7 @@
             -   [BRを使用してAzureBlobStorageでデータをバックアップおよび復元する](/br/backup-storage-azblob.md)
             -   [BRを使用してGoogleCloudStorageのデータをバックアップおよび復元する](/br/backup-storage-gcs.md)
             -   [RawKVのバックアップと復元](/br/rawkv-backup-and-restore.md)
-            -   [BRのよくある質問](/br/backup-and-restore-faq.md)
+            -   [BRに関するFAQ](/br/backup-and-restore-faq.md)
     -   TiDB Binlog
         -   [概要](/tidb-binlog/tidb-binlog-overview.md)
         -   [クイックスタート](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -833,17 +833,23 @@
             -   [TitanConfiguration / コンフィグレーション](/storage-engine/titan-configuration.md)
         -   TiFlash
             -   [概要](/tiflash/tiflash-overview.md)
-            -   [TiFlashを使用する](/tiflash/use-tiflash.md)
+            -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
+            -   [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
+            -   [TiSparkを使用してTiFlashレプリカを読み取る](/tiflash/use-tispark-to-read-tiflash.md)
+            -   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+            -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
+            -   [データ検証](/tiflash/tiflash-data-validation.md)
+            -   [互換性](/tiflash/tiflash-compatibility.md)
     -   [テレメトリー](/telemetry.md)
     -   [エラーコード](/error-codes.md)
     -   [テーブルフィルター](/table-filter.md)
     -   [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)
 -   よくある質問
-    -   [TiDBのよくある質問](/faq/tidb-faq.md)
+    -   [TiDBのFAQ](/faq/tidb-faq.md)
     -   [SQLに関するFAQ](/faq/sql-faq.md)
     -   [展開に関するFAQ](/faq/deploy-and-maintain-faq.md)
-    -   [移行に関するよくある質問](/faq/migration-tidb-faq.md)
-    -   [アップグレードに関するよくある質問](/faq/upgrade-faq.md)
+    -   [移行に関するFAQ](/faq/migration-tidb-faq.md)
+    -   [アップグレードに関するFAQ](/faq/upgrade-faq.md)
     -   [モニタリングに関するFAQ](/faq/monitor-faq.md)
     -   [クラスター管理に関するFAQ](/faq/manage-cluster-faq.md)
     -   [高可用性に関するFAQ](/faq/high-availability-faq.md)
@@ -857,6 +863,7 @@
     -   v6.0
         -   [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
     -   v5.4
+        -   [5.4.2](/releases/release-5.4.2.md)
         -   [5.4.1](/releases/release-5.4.1.md)
         -   [5.4.0](/releases/release-5.4.0.md)
     -   v5.3

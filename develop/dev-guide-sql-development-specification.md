@@ -49,6 +49,6 @@ summary: Learn about the SQL development specifications for TiDB.
 -   ファジープレフィックスクエリに`%`プレフィックスを使用することは避けてください。
 -   アプリケーションが**マルチステートメント**を使用してSQLを実行する場合、つまり、複数のSQLがセミコロンで結合され、一度に実行するためにクライアントに送信される場合、TiDBは最初のSQL実行の結果のみを返します。
 -   式を使用する場合は、式がストレージレイヤー（TiKVまたはTiFlash）へのプッシュダウンの計算をサポートしているかどうかを確認してください。そうでない場合は、TiDBレイヤーでさらに多くのメモリ消費とOOMを期待する必要があります。ストレージレイヤーをプッシュダウンできるコンピューティングは次のとおりです。
-    -   [TiFlashはプッシュダウン計算をサポートしていました](/tiflash/use-tiflash.md#supported-push-down-calculations) 。
+    -   [TiFlashはプッシュダウン計算をサポートしていました](/tiflash/tiflash-supported-pushdown-calculations.md) 。
     -   [TiKV-プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md) 。
     -   [述語プッシュダウン](/predicate-push-down.md) 。

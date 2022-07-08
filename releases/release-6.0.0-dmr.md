@@ -53,7 +53,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 -   データベースによるTiFlashレプリカの構築をサポートします。データベース内のすべてのテーブルにTiFlashレプリカを追加するには、単一のSQLステートメントを使用するだけで済み、運用と保守のコストを大幅に節約できます。
 
-    [ユーザードキュメント](/tiflash/use-tiflash.md#create-tiflash-replicas-for-databases)
+    [ユーザードキュメント](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-databases)
 
 ### 取引 {#transaction}
 
@@ -63,7 +63,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 ### 可観測性 {#observability}
 
--   Top SQL：専門家以外のパフォーマンス診断
+-   Top SQL：非専門家向けのパフォーマンス診断
 
     Top SQLは、DBAおよびアプリ開発者向けのTiDBダッシュボードのセルフサービスデータベースパフォーマンス監視および診断機能であり、現在TiDBv6.0で一般的に利用可能です。
 
@@ -75,7 +75,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 -   継続的なプロファイリングをサポートする
 
-    TiDBダッシュボードには、継続的プロファイリング機能が導入されています。この機能は、TiDBv6.0で一般的に利用可能になりました。継続的なプロファイリングはデフォルトでは有効になっていません。有効にすると、個々のTiDB、TiKV、およびPDインスタンスのパフォーマンスデータが常に収集され、オーバーヘッドはごくわずかです。履歴パフォーマンスデータを使用すると、技術専門家は、問題の再現が困難な場合でも、メモリ消費量が多いなどの問題の根本原因をさかのぼって特定できます。このようにして、平均修復時間（MTTR）を短縮できます。
+    TiDBダッシュボードには、継続的プロファイリング機能が導入されています。この機能は、TiDBv6.0で一般的に利用可能になりました。連続プロファイリングはデフォルトでは有効になっていません。有効にすると、個々のTiDB、TiKV、およびPDインスタンスのパフォーマンスデータが常に収集され、オーバーヘッドはごくわずかです。履歴パフォーマンスデータを使用すると、技術専門家は、問題の再現が困難な場合でも、メモリ消費量が多いなどの問題の根本原因をさかのぼって特定できます。このようにして、平均修復時間（MTTR）を短縮できます。
 
     [ユーザードキュメント](/dashboard/continuous-profiling.md)
 
@@ -83,7 +83,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 -   ホットスポットの小さなテーブルをキャッシュする
 
-    ホットスポットの小さなテーブルにアクセスするシナリオのユーザーアプリケーションの場合、TiDBはホットスポットテーブルをメモリに明示的にキャッシュすることをサポートします。これにより、アクセスパフォーマンスが大幅に向上し、スループットが向上し、アクセス遅延が減少します。このソリューションは、サードパーティのキャッシュミドルウェアの導入を効果的に回避し、アーキテクチャの複雑さを軽減し、運用と保守のコストを削減できます。このソリューションは、構成テーブルや為替レートテーブルなど、小さなテーブルが頻繁にアクセスされるが更新されることはめったにないシナリオに適しています。
+    ホットスポットの小さなテーブルにアクセスするシナリオのユーザーアプリケーションの場合、TiDBはホットスポットテーブルをメモリに明示的にキャッシュすることをサポートします。これにより、アクセスパフォーマンスが大幅に向上し、スループットが向上し、アクセスの待ち時間が短縮されます。このソリューションは、サードパーティのキャッシュミドルウェアの導入を効果的に回避し、アーキテクチャの複雑さを軽減し、運用と保守のコストを削減できます。このソリューションは、構成テーブルや為替レートテーブルなど、小さなテーブルが頻繁にアクセスされるが更新されることはめったにないシナリオに適しています。
 
     [ユーザードキュメント](/cached-tables.md) [＃25293](https://github.com/pingcap/tidb/issues/25293)
 
@@ -101,7 +101,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 -   実行計画を共有するために準備されたステートメントを強化する
 
-    SQL実行プランを再利用すると、SQLステートメントの解析時間を効果的に短縮し、CPUリソースの消費を減らし、SQLの実行効率を向上させることができます。 SQLチューニングの重要な方法の1つは、SQL実行プランを効果的に再利用することです。 TiDBは、プリペアドステートメントとの実行プランの共有をサポートしています。ただし、プリペアドステートメントが閉じられると、TiDBは対応するプランキャッシュを自動的にクリアします。その後、TiDBは繰り返されるSQLステートメントを不必要に解析し、実行効率に影響を与える可能性があります。 v6.0.0以降、TiDBは、 `tidb_ignore_prepared_cache_close_stmt`パラメーター（デフォルトでは無効）を使用して`COM_STMT_CLOSE`コマンドを無視するかどうかの制御をサポートしています。パラメータが有効になっている場合、TiDBはプリペアドステートメントを閉じるコマンドを無視し、実行プランをキャッシュに保持して、実行プランの再利用率を向上させます。
+    SQL実行プランを再利用すると、SQLステートメントの解析時間を効果的に短縮し、CPUリソースの消費を減らし、SQLの実行効率を向上させることができます。 SQLチューニングの重要な方法の1つは、SQL実行プランを効果的に再利用することです。 TiDBは、プリペアドステートメントとの実行プランの共有をサポートしています。ただし、プリペアドステートメントが閉じられると、TiDBは対応するプランキャッシュを自動的にクリアします。その後、TiDBは繰り返されるSQLステートメントを不必要に解析し、実行効率に影響を与える可能性があります。 v6.0.0以降、TiDBは、 `tidb_ignore_prepared_cache_close_stmt`パラメーター（デフォルトでは無効）を介して`COM_STMT_CLOSE`コマンドを無視するかどうかの制御をサポートしています。パラメータが有効になっている場合、TiDBはプリペアドステートメントを閉じるコマンドを無視し、実行プランをキャッシュに保持して、実行プランの再利用率を向上させます。
 
     [ユーザードキュメント](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement) [＃31056](https://github.com/pingcap/tidb/issues/31056)
 
@@ -121,11 +121,11 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
     このモードでは、TiDBはTiFlashのMPPエンジンを使用してパーティションテーブルのデータを読み取り、計算できます。これにより、パーティションテーブルのクエリパフォーマンスが大幅に向上します。
 
-    [ユーザードキュメント](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
+    [ユーザードキュメント](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
 
 -   MPPエンジンのコンピューティングパフォーマンスを向上させる
 
-    -   MPPエンジンへのより多くの機能と演算子のプッシュダウンをサポート
+    -   より多くの関数と演算子をMPPエンジンにプッシュダウンすることをサポート
 
         -   `IS NOT`関数： `IS`
         -   文字列`NOT REGEXP()` ： `REGEXP()`
@@ -133,7 +133,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
         -   `DAYOFYEAR()` `LAST_DAY()` `MONTHNAME()` `DAYNAME()` `DAYOFMONTH()` `DAYOFWEEK()`
         -   演算子：反左外側半結合、左外側半結合
 
-        [ユーザードキュメント](/tiflash/use-tiflash.md#supported-push-down-calculations)
+        [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)
 
     -   エラスティックスレッドプール（デフォルトで有効）はGAになります。この機能は、CPU使用率を向上させることを目的としています。
 
@@ -165,7 +165,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
     警告：新しいバージョンのデータ形式は、v5.4.0より前のバージョンにダウングレードすることはできません。このようなダウングレード中は、TiFlashレプリカを削除し、ダウングレード後にデータを複製する必要があります。または、 [dttoolの移行](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を参照してダウングレードを実行することもできます。
 
-    [ユーザードキュメント](/tiflash/use-tiflash.md#use-data-validation)
+    [ユーザードキュメント](/tiflash/tiflash-data-validation.md)
 
 -   スレッドの使用率を向上させる
 
@@ -220,7 +220,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
     構成アイテム`lightning.max-error`を追加しました。デフォルト値は0です。値が0より大きい場合、最大エラー機能が有効になります。エンコード中に行でエラーが発生した場合、この行を含むレコードがターゲットTiDBの`lightning_task_info.type_error_v1`に追加され、この行は無視されます。エラーのある行がしきい値を超えると、TiDBLightningはすぐに終了します。
 
-    `lightning.max-error`の構成と一致する`lightning.task-info-schema-name`の構成項目は、データ保存エラーを報告するデータベースの名前を記録します。
+    `lightning.max-error`の構成と一致して、 `lightning.task-info-schema-name`の構成項目は、データ保存エラーを報告するデータベースの名前を記録します。
 
     この機能は、すべてのタイプのエラーを網羅しているわけではありません。たとえば、構文エラーは適用されません。
 
@@ -278,7 +278,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 > **ノート：**
 >
-> 以前のTiDBバージョンからv6.0.0にアップグレードするときに、すべての中間バージョンの互換性の変更に関する注意事項を知りたい場合は、対応するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
+> 以前のTiDBバージョンからv6.0.0にアップグレードするときに、すべての中間バージョンの互換性変更に関する注意事項を知りたい場合は、対応するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
 
 ### システム変数 {#system-variables}
 
@@ -290,7 +290,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 | [`tidb_enable_mutation_checker`](/system-variables.md#tidb_enable_mutation_checker-new-in-v600)                                                                                           | 新しく追加されました | ミューテーションチェッカーを有効にするかどうかを制御します。デフォルト値は`ON`です。 v6.0.0より前のバージョンからアップグレードする既存のクラスターの場合、ミューテーションチェッカーはデフォルトで無効になっています。                                                                                                                                                                                        |
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)                                                                         | 新しく追加されました | プリペアドステートメントを閉じるコマンドを無視するかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                      |
 | [`tidb_mem_quota_binding_cache`](/system-variables.md#tidb_mem_quota_binding_cache-new-in-v600)                                                                                           | 新しく追加されました | `binding`を保持するキャッシュのメモリ使用量のしきい値を設定します。デフォルト値は`67108864` （64 MiB）です。                                                                                                                                                                                                                                      |
-| [`tidb_placement_mode`](/system-variables.md#tidb_placement_mode-new-in-v600)                                                                                                             | 新しく追加されました | DDLステートメントが[SQLの配置ルール](/placement-rules-in-sql.md)で指定された配置ルールを無視するかどうかを制御します。デフォルト値は`strict`です。これは、DDLステートメントが配置ルールを無視しないことを意味します。                                                                                                                                                                       |
+| [`tidb_placement_mode`](/system-variables.md#tidb_placement_mode-new-in-v600)                                                                                                             | 新しく追加されました | DDLステートメントが[SQLの配置ルール](/placement-rules-in-sql.md)で指定された配置ルールを無視するかどうかを制御します。デフォルト値は`strict`です。これは、DDLステートメントが配置規則を無視しないことを意味します。                                                                                                                                                                        |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                                                                         | 新しく追加されました | <li>トランザクション内の読み取りステートメントの待機時間を最適化します。読み取り/書き込みの競合がより深刻な場合、この変数をオンにすると、オーバーヘッドと遅延が追加され、パフォーマンスが低下します。デフォルト値は`off`です。</li><li>この変数はまだ[レプリカ読み取り](/system-variables.md#tidb_replica_read-new-in-v40)と互換性がありません。読み取り要求で`tidb_rc_read_check_ts`がオンになっている場合、レプリカ読み取りを使用できない可能性があります。両方の変数を同時にオンにしないでください。</li> |
 | [`tidb_sysdate_is_now`](/system-variables.md#tidb_sysdate_is_now-new-in-v600)                                                                                                             | 新しく追加されました | `SYSDATE`関数を`NOW`関数に置き換えることができるかどうかを制御します。この構成アイテムは、MySQLオプション[`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now)と同じ効果があります。デフォルト値は`OFF`です。                                                                                                     |
 | [`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600)                                                                                                       | 新しく追加されました | [テーブルキャッシュ](/cached-tables.md)のリース時間を秒単位で制御します。デフォルト値は`3`です。                                                                                                                                                                                                                                             |
@@ -314,7 +314,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 | TiKV                           | [`rocksdb.max-background-jobs`](/tikv-configuration-file.md#max-background-jobs)                                                                                                                                 | 変更         | <li>CPUコアの数が10の場合、デフォルト値は`9`です。</li><li> CPUコアの数が8の場合、デフォルト値は`7`です。</li>                                                                                                                                                                                                                                   |
 | TiFlash                        | [`profiles.default.dt_enable_logical_split`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                                                                                                   | 変更         | DeltaTreeStorageEngineのセグメントが論理分割を使用するかどうかを決定します。デフォルト値は`true`から`false`に変更されます。                                                                                                                                                                                                                            |
 | TiFlash                        | [`profiles.default.enable_elastic_threadpool`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                                                                                                 | 変更         | エラスティックスレッドプールを有効にするかどうかを制御します。デフォルト値は`false`から`true`に変更されます。                                                                                                                                                                                                                                              |
-| TiFlash                        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                                                                                                                     | 変更         | TiFlashのデータ検証機能を制御します。デフォルト値は`2`から`3`に変更されます。<br/> `format_version`が`3`に設定されている場合、ハードウェア障害による誤った読み取りを回避するために、すべてのTiFlashデータの読み取り操作で整合性チェックが実行されます。<br/>新しいフォーマットバージョンは、v5.4より前のバージョンにダウングレードできないことに注意してください。                                                                                               |
+| TiFlash                        | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                                                                                                                     | 変更         | TiFlashのデータ検証機能を制御します。デフォルト値は`2`から`3`に変更されます。<br/> `format_version`が`3`に設定されている場合、ハードウェア障害による誤った読み取りを回避するために、すべてのTiFlashデータの読み取り操作で整合性チェックが実行されます。<br/>新しい形式のバージョンをv5.4より前のバージョンにダウングレードすることはできないことに注意してください。                                                                                              |
 | TiDB                           | [`pessimistic-txn.pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)                                                                                                     | 新しく追加されました | 悲観的トランザクションモードがグローバルに有効になっている場合に自動コミットトランザクションが使用するトランザクションモードを決定します（ `tidb_txn_mode='pessimistic'` ）。                                                                                                                                                                                                     |
 | TiKV                           | [`pessimistic-txn.in-memory`](/tikv-configuration-file.md#in-memory-new-in-v600)                                                                                                                                 | 新しく追加されました | メモリ内のペシミスティックロックを有効にするかどうかを制御します。この機能を有効にすると、ペシミスティックトランザクションは、ペシミスティックロックをディスクに書き込んだり、他のレプリカに複製したりする代わりに、ペシミスティックロックを可能な限りTiKVメモリに保存します。これにより、悲観的なトランザクションのパフォーマンスが向上します。ただし、ペシミスティックロックが失われる可能性は低く、ペシミスティックトランザクションのコミットに失敗する可能性があります。デフォルト値は`true`です。                                                   |
 | TiKV                           | [`quota`](/tikv-configuration-file.md#quota)                                                                                                                                                                     | 新しく追加されました | フロントエンドリクエストが占めるリソースを制限するクォータリミッターに関連する構成アイテムを追加します。クォータリミッターは実験的機能であり、デフォルトでは無効になっています。新しい`max-delay-duration`関連の構成アイテムは、 `foreground-cpu-time` 、および`foreground-read-bandwidth` `foreground-write-bandwidth` 。                                                                                            |
@@ -356,7 +356,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   パフォーマンス概要ダッシュボードを追加して、一般的なクリティカルパスのコアパフォーマンスメトリックを表示し、TiDBでのメトリック分析を容易にします[＃31676](https://github.com/pingcap/tidb/issues/31676)
     -   `LOAD DATA LOCAL INFILE`ステートメント[＃24515](https://github.com/pingcap/tidb/issues/24515)での`REPLACE`キーワードの使用のサポート
     -   Rangeパーティションテーブル[＃26739](https://github.com/pingcap/tidb/issues/26739)の組み込み`IN`式のパーティションプルーニングをサポートします。
-    -   MPP集約クエリで冗長になる可能性のあるExchange操作を排除することにより、クエリの効率を向上させます[＃31762](https://github.com/pingcap/tidb/issues/31762)
+    -   MPP集計クエリで冗長になる可能性のあるExchange操作を排除することにより、クエリの効率を向上させます[＃31762](https://github.com/pingcap/tidb/issues/31762)
     -   `TRUNCATE PARTITION`ステートメントと`DROP PARTITION`ステートメントで重複するパーティション名を許可することでMySQLとの互換性を向上させます[＃31681](https://github.com/pingcap/tidb/issues/31681)
     -   `ADMIN SHOW DDL JOBS`ステートメント[＃23494](https://github.com/pingcap/tidb/issues/23494)の結果に`CREATE_TIME`情報を表示することをサポートします。
     -   新しい組み込み関数をサポートする`CHARSET()` [＃3931](https://github.com/pingcap/tidb/issues/3931)
@@ -385,7 +385,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   多くのキー範囲を持つバッチのRaftstoreのサンプリング精度を向上させます[＃12327](https://github.com/tikv/tikv/issues/12327)
     -   プロファイルをより簡単に識別できるように、 `debug/pprof/profile`に正しい「Content-Type」を追加します[＃11521](https://github.com/tikv/tikv/issues/11521)
     -   Raftstoreにハートビートがある場合、または読み取り要求を処理する場合に、リーダーのリース時間を無限に更新します。これにより、遅延ジッターを減らすことができます[＃11579](https://github.com/tikv/tikv/issues/11579)
-    -   リーダーを切り替えるときにコストが最小のストアを選択します。これにより、パフォーマンスの安定性が向上します[＃10602](https://github.com/tikv/tikv/issues/10602)
+    -   リーダーを切り替える際のコストが最も少ないストアを選択してください。これにより、パフォーマンスの安定性が向上します[＃10602](https://github.com/tikv/tikv/issues/10602)
     -   Raftストアをブロックすることによって引き起こされるパフォーマンスジッターを減らすために、Raftログを非同期的にフェッチします[＃11320](https://github.com/tikv/tikv/issues/11320)
     -   ベクトル計算[＃5751](https://github.com/tikv/tikv/issues/5751)で`QUARTER`関数をサポートします
     -   `BIT`データ型の[＃30738](https://github.com/pingcap/tidb/issues/30738)へのプッシュダウンをサポート
@@ -398,19 +398,19 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   [＃11965](https://github.com/tikv/tikv/issues/11965)の値を`user-value` + `ttl` + `ValueMeta`としてエンコードし、911で`delete`をエンコードし`ValueMeta` 。
     -   動的変更の[＃12017](https://github.com/tikv/tikv/issues/12017) `raftstore.raft-max-size-per-msg`
     -   Grafana1でのマルチ[＃12014](https://github.com/tikv/tikv/issues/12014)のモニタリングをサポート
-    -   リーダーシップをCDCオブザーバーに移し、レイテンシーのジッターを減らします[＃12111](https://github.com/tikv/tikv/issues/12111)
+    -   リーダーシップをCDCオブザーバーに移して、レイテンシージッターを減らす[＃12111](https://github.com/tikv/tikv/issues/12111)
     -   `raftstore.apply_max_batch_size`および`raftstore.store_max_batch_size`の動的変更を[＃11982](https://github.com/tikv/tikv/issues/11982)
     -   RawKV V2は、 `raw_get`つまたは`raw_scan`のリクエストを受信すると最新バージョンを返します[＃11965](https://github.com/tikv/tikv/issues/11965)
     -   RCCheckTS整合性読み取り[＃12097](https://github.com/tikv/tikv/issues/12097)をサポートする
     -   動的変更のサポート`storage.scheduler-worker-pool-size` （スケジューラープールのスレッド数） [＃12067](https://github.com/tikv/tikv/issues/12067)
-    -   グローバルフォアグラウンドフローコントローラを使用してCPUと帯域幅の使用を制御し、TiKV1のパフォーマンスの安定性を向上させ[＃11855](https://github.com/tikv/tikv/issues/11855)
+    -   グローバルフォアグラウンドフローコントローラーを使用してCPUと帯域幅の使用を制御し、TiKV1のパフォーマンスの安定性を向上させ[＃11855](https://github.com/tikv/tikv/issues/11855)
     -   動的変更のサポート`readpool.unified.max-thread-count` （UnifyReadPoolのスレッド数） [＃11781](https://github.com/tikv/tikv/issues/11781)
     -   TiKV内部パイプラインを使用してRocksDBパイプラインを置き換え、 `rocksdb.enable-multibatch-write`パラメーター[＃12059](https://github.com/tikv/tikv/issues/12059)を廃止します
 
 -   PD
 
     -   リーダーを追い出すときに転送する最速のオブジェクトを自動的に選択することをサポートします。これにより、追い出しプロセスがスピードアップします[＃4229](https://github.com/tikv/pd/issues/4229)
-    -   リージョンが使用できなくなった場合に備えて、2つのレプリカのRaftグループから投票者を削除することを禁止します[＃4564](https://github.com/tikv/pd/issues/4564)
+    -   地域が利用できなくなった場合に備えて、2レプリカのいかだグループから投票者を削除することを禁止する[＃4564](https://github.com/tikv/pd/issues/4564)
     -   バランスリーダーのスケジューリングをスピードアップ[＃4652](https://github.com/tikv/pd/issues/4652)
 
 -   TiFlash
@@ -433,12 +433,12 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
         -   HTTPAPI処理の同期[＃1710](https://github.com/pingcap/tiflow/issues/1710)
         -   チェンジフィードを再開するための指数バックオフメカニズムを追加する[＃3329](https://github.com/pingcap/tiflow/issues/3329)
         -   MySQLシンクのデフォルトの分離レベルを読み取りコミットに設定して、 [＃3589](https://github.com/pingcap/tiflow/issues/3589)のデッドロックを減らします。
-        -   作成時にチェンジフィードパラメータを検証し、エラーメッセージを修正します[＃1716](https://github.com/pingcap/tiflow/issues/1716) [＃1718](https://github.com/pingcap/tiflow/issues/1718) [＃1719](https://github.com/pingcap/tiflow/issues/1719) [＃4472](https://github.com/pingcap/tiflow/issues/4472)
+        -   作成時にチェンジフィードパラメータを検証し、エラーメッセージを調整します[＃1716](https://github.com/pingcap/tiflow/issues/1716) [＃1718](https://github.com/pingcap/tiflow/issues/1718) [＃1719](https://github.com/pingcap/tiflow/issues/1719) [＃4472](https://github.com/pingcap/tiflow/issues/4472)
         -   Kafkaプロデューサーの構成パラメーターを公開して、 [＃4385](https://github.com/pingcap/tiflow/issues/4385)で構成可能にします。
 
     -   TiDBデータ移行（DM）
 
-        -   アップストリームテーブルスキーマに一貫性がなく、オプティミスティックモードの場合のタスクの開始をサポートする[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
+        -   アップストリームテーブルスキーマに一貫性がなく、オプティミスティックモードである場合のタスクの開始をサポートする[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
         -   `stopped`状態でのタスクの作成をサポート[＃4484](https://github.com/pingcap/tiflow/issues/4484)
         -   `/tmp`ではなくDM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクの停止後にディレクトリをクリーンアップするSyncerをサポートします[＃4107](https://github.com/pingcap/tiflow/issues/4107)
         -   事前チェックが改善されました。一部の重要なチェックがスキップされなくなりました。 [＃3608](https://github.com/pingcap/tiflow/issues/3608)
@@ -461,7 +461,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   エスケープ文字[＃31589](https://github.com/pingcap/tidb/issues/31589)でデータが壊れた場合のデータのロードパニックを修正
     -   照合順序を伴う`greatest`または`least`関数が間違った結果を取得する問題を修正します[＃31789](https://github.com/pingcap/tidb/issues/31789)
     -   date_add関数とdate_sub関数が誤ったデータ型を返す可能性があるバグを修正します[＃31809](https://github.com/pingcap/tidb/issues/31809)
-    -   挿入ステートメントを使用して仮想的に生成された列にデータを挿入するときに発生する可能性があったパニックを修正します[＃31735](https://github.com/pingcap/tidb/issues/31735)
+    -   挿入ステートメントを使用して仮想的に生成された列にデータを挿入するときに発生する可能性のあるパニックを修正[＃31735](https://github.com/pingcap/tidb/issues/31735)
     -   作成されたリストパーティションに重複する列が存在する場合にエラーが報告されないバグを修正します[＃31784](https://github.com/pingcap/tidb/issues/31784)
     -   `select for update union select`が誤ったスナップショットを使用したときに返される誤った結果を修正する[＃31530](https://github.com/pingcap/tidb/issues/31530)
     -   復元操作の終了後にリージョンが不均一に分散される可能性があるという潜在的な問題を修正します[＃31034](https://github.com/pingcap/tidb/issues/31034)
@@ -492,7 +492,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   オーバーフロー[＃31868](https://github.com/pingcap/tidb/issues/31868)の場合に`SUBTIME`関数が間違った結果を返すバグを修正します
     -   集計クエリに`having`の条件が含まれている場合に`selection`演算子をプッシュダウンできないバグを修正します[＃33166](https://github.com/pingcap/tidb/issues/33166)
     -   クエリがエラーを報告したときにCTEがブロックされる可能性があるバグを修正します[＃31302](https://github.com/pingcap/tidb/issues/31302)
-    -   非厳密モードでテーブルを作成するときにvarbinaryまたはvarchar列の長さが長すぎると、エラーが発生する可能性があるバグを修正します[＃30328](https://github.com/pingcap/tidb/issues/30328)
+    -   非厳密モードでテーブルを作成するときにvarbinary列またはvarchar列の長さが長すぎると、エラーが発生する可能性があるバグを修正します[＃30328](https://github.com/pingcap/tidb/issues/30328)
     -   フォロワーが指定されていない場合の`information_schema.placement_policies`のフォロワー数の誤りを修正[＃31702](https://github.com/pingcap/tidb/issues/31702)
     -   インデックスが作成されるときにTiDBが列プレフィックスの長さを0として指定できる問題を修正します[＃31972](https://github.com/pingcap/tidb/issues/31972)
     -   TiDBがスペース[＃31535](https://github.com/pingcap/tidb/issues/31535)で終わるパーティション名を許可する問題を修正します
@@ -538,7 +538,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   `DATETIME`から[＃4151](https://github.com/pingcap/tiflash/issues/4151)をキャストするときに発生する間違った結果を修正し`DECIMAL`
     -   クエリがキャンセルされたときに発生するメモリリークの問題を修正します[＃4098](https://github.com/pingcap/tiflash/issues/4098)
     -   エラスティックスレッドプールを有効にするとメモリリークが発生する可能性があるバグを修正します[＃4098](https://github.com/pingcap/tiflash/issues/4098)
-    -   ローカルトンネルが有効になっている場合、MPPクエリをキャンセルするとタスクが永久にハングする可能性があるバグを修正します[＃4229](https://github.com/pingcap/tiflash/issues/4229)
+    -   ローカルトンネルが有効になっている場合、MPPクエリをキャンセルすると、タスクが永久にハングする可能性があるバグを修正します[＃4229](https://github.com/pingcap/tiflash/issues/4229)
     -   HashJoinビルド側の失敗により、MPPクエリが永久にハングする可能性があるバグを修正します[＃4195](https://github.com/pingcap/tiflash/issues/4195)
     -   MPPタスクがスレッドを永久にリークする可能性があるバグを修正します[＃4238](https://github.com/pingcap/tiflash/issues/4238)
 

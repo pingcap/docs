@@ -127,7 +127,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を介してTiDBのGrafanaダッシュボードにアクセスします。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-8.  （オプション）分析用に[TiFlashにデータをロードする](/tiflash/use-tiflash.md) 。
+8.  （オプション）分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
 9.  テスト展開後にクラスタをクリーンアップします。
 
@@ -219,7 +219,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
         > **ノート：**
         >
-        > このように操作された遊び場の場合、テスト展開が終了した後、TiUPは元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが取得されます。データをストレージに永続化する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳しくは[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)をご覧ください。
+        > このように操作された遊び場の場合、テスト展開が終了した後、TiUPは元のクラスタデータをクリーンアップします。コマンドを再実行すると、新しいクラスタが作成されます。データをストレージに永続化する場合は、 `tiup --tag <your-tag> playground ...`を実行します。詳しくは[TiUPリファレンスガイド](/tiup/tiup-reference.md#-t---tag)をご覧ください。
 
 4.  TiDBにアクセスするための新しいセッションを開始します。
 
@@ -245,7 +245,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 7.  [http://127.0.0.1:3000](http://127.0.0.1:3000)を介してTiDBのGrafanaダッシュボードにアクセスします。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-8.  （オプション）分析用に[TiFlashにデータをロードする](/tiflash/use-tiflash.md) 。
+8.  （オプション）分析用に[TiFlashにデータをロードする](/tiflash/tiflash-overview.md#use-tiflash) 。
 
 9.  テスト展開後にクラスタをクリーンアップします。
 
@@ -509,5 +509,5 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 -   TiFlashを使用した分析ソリューションをお探しの場合：
 
-    -   [TiFlashを使用する](/tiflash/use-tiflash.md)
+    -   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
     -   [TiFlashの概要](/tiflash/tiflash-overview.md)

@@ -110,7 +110,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ2.完全なデータを移行する {#step-2-migrate-full-data}
 
-環境を設定した後、 [BR](https://github.com/pingcap/br)のバックアップおよび復元機能を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
+環境を設定した後、 [BR](https://github.com/pingcap/tidb/tree/master/br) ）のバックアップおよび復元機能を使用して完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
 
 > **ノート：**
 >
@@ -154,7 +154,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
     1 row in set (2.11 sec)
     ```
 
-    `BACKUP`コマンドが実行された後、TiDBはバックアップデータに関するメタデータを返します。データはバックアップされる前に生成されるため、 `BackupTS`に注意してください。このドキュメントでは**、データチェックの終了と**<strong>TiCDCによるインクリメンタルマイグレーションスキャンの開始</strong>として`BackupTS`を使用します。
+    `BACKUP`コマンドが実行された後、TiDBはバックアップデータに関するメタデータを返します。データはバックアップされる前に生成されるため、 `BackupTS`に注意してください。このドキュメントでは**、データチェックの終了と**<strong>TiCDCによる増分移行スキャンの開始</strong>として`BackupTS`を使用します。
 
 3.  データを復元します。
 
@@ -290,7 +290,7 @@ tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=mini
 
 ## ステップ6.プライマリクラスタとそのサービスを回復する {#step-6-recover-the-primary-cluster-and-its-services}
 
-前のステップの後、ダウンストリーム（セカンダリ）クラスタには、特定の時間のアップストリーム（プライマリ）クラスタと一致するデータがあります。データの信頼性を確保するには、新しいプライマリクラスターとセカンダリクラスターを設定する必要があります。
+前のステップの後、ダウンストリーム（セカンダリ）クラスタには、特定の時間にアップストリーム（プライマリ）クラスタと整合性のあるデータがあります。データの信頼性を確保するには、新しいプライマリクラスターとセカンダリクラスターを設定する必要があります。
 
 1.  新しいプライマリクラスタとして、ノードAに新しいTiDBクラスタをデプロイします。
 

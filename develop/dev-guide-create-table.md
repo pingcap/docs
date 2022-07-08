@@ -61,7 +61,7 @@ CREATE TABLE `bookshop`.`users` (
 
 -   `{column_name}` ：列名。
 -   `{data_type}` ：列[データ・タイプ](/basic-features.md#data-types-functions-and-operators) 。
--   `{column_qualification}` ：列**レベルの制約**や[生成された列（実験的特徴）](/generated-columns.md)の句などの列の修飾。
+-   `{column_qualification}` ：列**レベルの制約**や[生成された列（実験的特徴）](/generated-columns.md)の句などの列の資格。
 
 `nickname`の識別子`id`など、いくつかの列を`users`テーブルに追加でき`balance` 。
 
@@ -77,7 +77,7 @@ CREATE TABLE `bookshop`.`users` (
 
 上記のステートメントでは、フィールドは名前`id`とタイプ[bigint](/data-type-numeric.md#bigint-type)で定義されています。これは、一意のユーザー識別子を表すために使用されます。これは、すべてのユーザーIDが`bigint`タイプでなければならないことを意味します。
 
-次に、長さ制限が100文字の[varchar](/data-type-string.md#varchar-type)タイプの`nickname`という名前のフィールドが定義されます。これは、 `nicknames`人のユーザーが`varchar`タイプを使用し、100文字以下であることを意味します。
+次に、長さ制限が100文字の[varchar](/data-type-string.md#varchar-type)タイプの`nickname`という名前のフィールドが定義されます。これは、ユーザーの`nicknames`人が`varchar`タイプを使用し、100文字以下であることを意味します。
 
 最後に、 `balance`という名前のフィールドが追加されます。これは[10進数](/data-type-numeric.md#decimal-type)タイプで、**精度**は`15` 、<strong>スケール</strong>は`2`です。 <strong>Precision</strong>はフィールドの合計桁数を表し、 <strong>scale</strong>は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`を意味し、範囲は`-999.99` `999.99` 。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`であることを`99999.9`します。<strong>小数</strong>は[固定小数点タイプ](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ（たとえば、ユーザープロパティ関連）では、必ず<strong>10進</strong>型を使用してください。
 
@@ -155,7 +155,7 @@ TiDBは、v5.0以降の[クラスター化されたインデックス](/clustere
 
 > **ノート：**
 >
-> TiDBは、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`という用語と<em>クラスター化インデックス</em>は同じ意味で使用される場合があります。 `PRIMARY KEY`は制約（論理プロパティ）を示し、クラスター化されたインデックスはデータの格納方法の物理的な実装を示します。
+> TiDBは、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`という用語と<em>クラスター化インデックス</em>は同じ意味で使用される場合があります。 `PRIMARY KEY`は制約（論理プロパティ）を示し、クラスター化されたインデックスはデータの保存方法の物理的な実装を示します。
 
 [クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `book`の`ratings`を`users`ます。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
 
@@ -209,7 +209,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ### 重複する値を防ぐ {#prevent-duplicate-values}
 
-列の値が重複しないようにする必要がある場合は、 `UNIQUE`制約を使用できます。
+列の値の重複を防ぐ必要がある場合は、 `UNIQUE`制約を使用できます。
 
 たとえば、ユーザーのニックネームが一意であることを確認するには、次のように`users`のテーブルのテーブル作成SQLステートメントを書き直すことができます。
 
@@ -272,7 +272,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 -   `{table_name}` ：テーブル名。
 -   `{count}` ：複製されたレプリカの数。 0の場合、複製されたレプリカは削除されます。
 
-その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDBは、コストの最適化に基づいて、クエリに対してTiKV（行ベース）またはTiFlash（列ベース）を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas)を参照してください。
+その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDBは、コストの最適化に基づいて、クエリに対してTiKV（行ベース）またはTiFlash（列ベース）を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ### HTAP機能の使用例 {#an-example-of-using-htap-capabilities}
 

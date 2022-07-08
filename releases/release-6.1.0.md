@@ -39,7 +39,7 @@ TiDBバージョン：6.1.0
     -   `DENSE_RANK()`
     -   `ROW_NUMBER()`
 
-    [ユーザードキュメント](/tiflash/use-tiflash.md#supported-push-down-calculations) [＃33072](https://github.com/pingcap/tidb/issues/33072)
+    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [＃33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### 可観測性 {#observability}
 
@@ -69,7 +69,7 @@ TiDBバージョン：6.1.0
 
 -   結合順序ヒント構文をサポートする
 
-    -   `LEADING`ヒントは、結合操作のプレフィックスとして指定された順序を使用するようにオプティマイザーに通知します。結合の適切なプレフィックスを使用すると、結合の初期段階でデータ量をすばやく削減し、クエリのパフォーマンスを向上させることができます。
+    -   `LEADING`ヒントは、結合操作のプレフィックスとして指定された順序を使用するようにオプティマイザに通知します。結合の適切なプレフィックスを使用すると、結合の初期段階でデータ量をすばやく削減し、クエリのパフォーマンスを向上させることができます。
     -   `STRAIGHT_JOIN`ヒントは、 `FROM`句のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザに通知します。
 
     これは、テーブル結合の順序を修正するための方法を提供します。ヒントを適切に使用すると、SQLのパフォーマンスとクラスタの安定性を効果的に高めることができます。
@@ -83,13 +83,13 @@ TiDBバージョン：6.1.0
     -   `TO_SECONDS`
     -   `WEEKOFYEAR`
 
-    [ユーザードキュメント](/tiflash/use-tiflash.md#supported-push-down-calculations) [＃4679](https://github.com/pingcap/tiflash/issues/4679) [＃4678](https://github.com/pingcap/tiflash/issues/4678) [＃4677](https://github.com/pingcap/tiflash/issues/4677)
+    [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [＃4679](https://github.com/pingcap/tiflash/issues/4679) [＃4678](https://github.com/pingcap/tiflash/issues/4678) [＃4677](https://github.com/pingcap/tiflash/issues/4677)
 
 -   TiFlashは、動的プルーニングモードでパーティションテーブルをサポートします。
 
     OLAPシナリオのパフォーマンスを向上させるために、パーティションテーブルで動的プルーニングモードがサポートされています。 TiDBをv6.0.0より前のバージョンからアップグレードする場合は、パフォーマンスを最大化するために、既存のパーティションテーブルの統計を手動で更新することをお勧めします（v6.1.0へのアップグレード後に作成された新しいインストールまたは新しいパーティションには必要ありません）。
 
-    ユーザー[動的剪定モード](/partitioned-table.md#dynamic-pruning-mode) [＃3873](https://github.com/pingcap/tiflash/issues/3873) [MPPモードでパーティションテーブルにアクセスする](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode)
+    ユーザー[動的剪定モード](/partitioned-table.md#dynamic-pruning-mode) [＃3873](https://github.com/pingcap/tiflash/issues/3873) [MPPモードでパーティションテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
 
 ### 安定 {#stability}
 
@@ -135,7 +135,7 @@ TiDBバージョン：6.1.0
 
 -   オンラインでのTiDB、TiKV、およびTiFlash構成の変更のサポート
 
-    以前のバージョンのTiDBでは、構成アイテムを変更した後、変更を有効にするためにクラスタを再起動する必要があります。これにより、オンラインサービスが中断される可能性があります。この問題に対処するために、TiDB v6.1.0にはオンライン構成機能が導入されており、クラスタを再起動せずにパラメーターの変更を検証できます。具体的な最適化は次のとおりです。
+    以前のTiDBバージョンでは、構成アイテムを変更した後、変更を有効にするためにクラスタを再起動する必要があります。これにより、オンラインサービスが中断される可能性があります。この問題に対処するために、TiDB v6.1.0にはオンライン構成機能が導入されており、クラスタを再起動せずにパラメーターの変更を検証できます。具体的な最適化は次のとおりです。
 
     -   一部のTiDB構成アイテムをシステム変数に変換して、オンラインで変更して永続化できるようにします。元の構成アイテムは、変換後に非推奨になることに注意してください。変換された構成アイテムの詳細なリストについては、 [Configuration / コンフィグレーションファイルのパラメーター](#configuration-file-parameters)を参照してください。
     -   一部のTiKVパラメーターのオンライン構成をサポートします。パラメータの詳細なリストについては、 [その他](#others)を参照してください。
@@ -372,7 +372,7 @@ TiDBバージョン：6.1.0
     -   マージされるターゲットリージョンが無効であるためにTiKVがパニックになり、ピアを予期せず破壊する問題を修正します[＃12232](https://github.com/tikv/tikv/issues/12232)
     -   v5.3.1またはv5.4.0からv6.0.0以降のバージョン[＃12269](https://github.com/tikv/tikv/issues/12269)にアップグレードするときにTiKVが`failed to load_latest_options`エラーを報告する問題を修正します。
     -   メモリリソースが不足しているときにRaftログを追加することによって引き起こされるOOMの問題を修正します[＃11379](https://github.com/tikv/tikv/issues/11379)
-    -   ピアの破棄とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVパニックの問題を修正します
+    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVパニックの問題を修正します
     -   `stats_monitor`がデッドループに陥った後、短時間でTiKVメモリ使用量が急増する問題を修正します[＃12416](https://github.com/tikv/tikv/issues/12416)
     -   FollowerRead3を使用するとTiKVが`invalid store ID 0`エラーを報告する問題を修正し[＃12478](https://github.com/tikv/tikv/issues/12478)
 
@@ -406,7 +406,7 @@ TiDBバージョン：6.1.0
         -   チェックポイントフラッシュにより、失敗した行のデータがスキップされる可能性がある問題を修正します[＃5279](https://github.com/pingcap/tiflow/issues/5279)
         -   場合によっては、ダウンストリームでフィルター処理されたDDLを手動で実行すると、タスクの再開が失敗する可能性があるという問題を修正します[＃5272](https://github.com/pingcap/tiflow/issues/5272)
         -   `case-sensitive: true`が設定されていない場合に大文字のテーブルを複製できない問題を修正します[＃5255](https://github.com/pingcap/tiflow/issues/5255)
-        -   `SHOW CREATE TABLE`ステートメントによって返されるインデックスの最初に主キーがない場合に発生するDMワーカーのパニックの問題を修正します[＃5159](https://github.com/pingcap/tiflow/issues/5159)
+        -   `SHOW CREATE TABLE`ステートメント[＃5159](https://github.com/pingcap/tiflow/issues/5159)によって返されるインデックスの最初に主キーがない場合に発生するDMワーカーのパニックの問題を修正します。
         -   GTIDを有効にした場合、またはタスクが自動的に再開された場合に、CPU使用率が増加し、大量のログが出力される可能性がある問題を修正します[＃5063](https://github.com/pingcap/tiflow/issues/5063)
         -   DMWebUI1のオフラインオプションおよびその他の使用上の問題を修正し[＃4993](https://github.com/pingcap/tiflow/issues/4993)
         -   アップストリーム[＃3731](https://github.com/pingcap/tiflow/issues/3731)でGTIDが空の場合にインクリメンタルタスクを開始できない問題を修正します。

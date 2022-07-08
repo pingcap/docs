@@ -91,7 +91,7 @@ TiUPは、オンライン展開とオフライン展開の2つの方法のいず
 
 このセクションの次の手順を実行して、TiUPを使用してTiDBクラスタをオフラインでデプロイします。
 
-#### TiUPオフラインコンポーネントパッケージを準備する {#prepare-the-tiup-offline-component-package}
+#### TiUPオフラインコンポーネントパッケージを準備します {#prepare-the-tiup-offline-component-package}
 
 TiUPオフラインコンポーネントパッケージを準備するには、 `tiup mirror clone`を使用してオフラインコンポーネントパッケージを手動でパックできます。
 
@@ -121,7 +121,7 @@ TiUPオフラインコンポーネントパッケージを準備するには、 
         which tiup
         ```
 
-2.  TiUPを使用してミラーを引きます。
+2.  TiUPを使用してミラーを引き出します。
 
     1.  インターネットにアクセスできるマシンで必要なコンポーネントをプルします。
 
@@ -422,7 +422,7 @@ tiup cluster display tidb-test
 
 TiDBクラスタと一緒に[TiFlash](/tiflash/tiflash-overview.md)をデプロイした場合は、次のドキュメントを参照してください。
 
--   [TiFlashを使用する](/tiflash/use-tiflash.md)
+-   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)
 -   [TiFlashクラスターを管理する](/tiflash/maintain-tiflash.md)
 -   [TiFlashアラートルールとソリューション](/tiflash/tiflash-alert-rules.md)
 -   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)

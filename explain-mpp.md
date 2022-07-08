@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the EXPLAIN stat
 
 # MPPモードでのステートメントの説明 {#explain-statements-in-the-mpp-mode}
 
-TiDBは、 [MPPモード](/tiflash/use-tiflash.md#use-the-mpp-mode)を使用したクエリの実行をサポートしています。 MPPモードでは、TiDBオプティマイザがMPPの実行プランを生成します。 MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
+TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリの実行をサポートしています。 MPPモードでは、TiDBオプティマイザがMPPの実行プランを生成します。 MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカがあるテーブルでのみ使用できることに注意してください。
 
 このドキュメントの例は、次のサンプルデータに基づいています。
 
@@ -29,7 +29,7 @@ MPPモードでは、クエリは論理的に複数のクエリフラグメン�
 EXPLAIN SELECT COUNT(*) FROM t1 GROUP BY id;
 ```
 
-このクエリは、MPPモードで2つのフラグメントに分割されます。 1つは第1段階の集約用で、もう1つは第2段階の集約用であり、これも最終的な集約です。このクエリが実行されると、各クエリフラグメントが1つ以上のMPPタスクにインスタンス化されます。
+このクエリは、MPPモードでは2つのフラグメントに分割されます。 1つは第1段階の集約用で、もう1つは第2段階の集約用であり、これも最終的な集約です。このクエリが実行されると、各クエリフラグメントが1つ以上のMPPタスクにインスタンス化されます。
 
 ## 交換事業者 {#exchange-operators}
 

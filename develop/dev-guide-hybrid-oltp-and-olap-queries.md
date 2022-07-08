@@ -21,7 +21,7 @@ TiDBは、オンライントランザクション処理（OLTP）に行ベース
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables
 ```
 
-または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import)を使用して、事前に準備されたサンプルデータをインポートできます。
+または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import)を使用して、事前に準備されたサンプルデータをインポートすることもできます。
 
 ## ウィンドウ関数 {#window-functions}
 
@@ -83,7 +83,7 @@ ORDER BY month ASC;
 13 rows in set (0.01 sec)
 ```
 
-横軸に時間を、縦軸に累積注文額をとった折れ線グラフで上記のデータを視覚化します。傾きを変えることで、本の歴史的な順序傾向を簡単に知ることができます。
+上記のデータを、横軸に時間を、縦軸に累積注文量をとった折れ線グラフで視覚化します。傾きを変えることで、本の歴史的な順序傾向を簡単に知ることができます。
 
 ### <code>PARTITION BY</code>句 {#code-partition-by-code-clause}
 
@@ -254,11 +254,11 @@ SELECT * FROM acc;
 
 `EXPLAIN`ステートメントを使用して、上記のSQLステートメントの実行プランを確認できます。 `cop[tiflash]`と`cop[tikv]`が同時にタスク列に表示される場合は、TiFlashとTiKVの両方がこのクエリを完了するようにスケジュールされていることを意味します。 TiFlashとTiKVストレージエンジンは通常異なるTiDBノードを使用するため、2つのクエリタイプは相互に影響を受けないことに注意してください。
 
-TiDBがTiFlashの使用を選択する方法の詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas)を参照してください。
+TiDBがTiFlashの使用を選択する方法の詳細については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ## 続きを読む {#read-more}
 
 -   [HTAPのクイックスタート](/quick-start-with-htap.md)
 -   [HTAPを探索する](/explore-htap.md)
 -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
--   [TiFlashを使用する](/tiflash/use-tiflash.md)
+-   [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)

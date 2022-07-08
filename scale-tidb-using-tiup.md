@@ -88,7 +88,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
       log_dir: /data/deploy/install/log/pd-2379
     ```
 
-    現在のクラスタの構成を表示するには、 `tiup cluster edit-config <cluster-name>`を実行します。 `global`と`server_configs`のパラメータ設定は`scale-out.yaml`に継承され、 `scale-out.yaml`でも有効になるためです。
+    現在のクラスタの構成を表示するには、 `tiup cluster edit-config <cluster-name>`を実行します。 `global`と`server_configs`のパラメーター構成は`scale-out.yaml`に継承され、したがって`scale-out.yaml`でも有効になるためです。
 
 2.  scale-outコマンドを実行します。
 
@@ -346,7 +346,7 @@ TiDBクラスタの容量は、オンラインサービスを中断すること�
     ALTER TABLE <db-name>.<table-name> SET tiflash replica 0;
     ```
 
-2.  関連するテーブルのTiFlashレプリカが削除されるのを待ちます。 [テーブルのレプリケーションの進行状況を確認します](/tiflash/use-tiflash.md#check-replication-progress)であり、関連するテーブルのレプリケーション情報が見つからない場合、レプリカは削除されます。
+2.  関連するテーブルのTiFlashレプリカが削除されるのを待ちます。 [テーブルのレプリケーションの進行状況を確認します](/tiflash/create-tiflash-replicas.md#check-replication-progress)であり、関連するテーブルのレプリケーション情報が見つからない場合、レプリカは削除されます。
 
 ### 2.スケールイン操作を実行します {#2-perform-the-scale-in-operation}
 
