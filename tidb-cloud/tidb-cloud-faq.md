@@ -93,8 +93,6 @@ TiDB provides TiDB Lightning and a Data Migration Tool to migrate data from MySQ
 
 Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
 
-## Why TiDB Cloud does not back up and restore TiFlash data?
-
 ## Can I import my data directly to TiFlash?
 
 No. When you import data to TiDB Cloud, the data is imported to TiKV. After the import is complete, you can use a SQL statement to specify which table to be replicated to TiFlash. Then, TiDB will create the specified replicas in TiFlash accordingly. For more information, see [Use an HTAP Cluster](/use-htap-cluster.md).
