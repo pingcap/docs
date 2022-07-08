@@ -1,6 +1,7 @@
 ---
 title: TiFlash Overview
 summary: Learn the architecture and key features of TiFlash.
+aliases: ['/tidb/stable/use-tiflash','/tidb/v6.1/use-tiflash']
 ---
 
 # TiFlash Overview
@@ -23,19 +24,7 @@ TiFlash is compatible with both TiDB and TiSpark, which enables you to freely ch
 
 It is recommended that you deploy TiFlash in different nodes from TiKV to ensure workload isolation. It is also acceptable to deploy TiFlash and TiKV in the same node if no business isolation is required.
 
-Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in the unit of table, but no data is replicated by default after deployment.
-
-<CustomContent platform="tidb">
-
-To replicate data of a specified table, see [Create TiFlash replicas for tables](/tiflash/use-tiflash.md#create-tiflash-replicas-for-tables).
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-To replicate data of a specified table, see [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
-
-</CustomContent>
+Currently, data cannot be written directly into TiFlash. You need to write data in TiKV and then replicate it to TiFlash, because it connects to the TiDB cluster as a Learner role. TiFlash supports data replication in the unit of table, but no data is replicated by default after deployment. To replicate data of a specified table, see [Create TiFlash replicas for tables](/tiflash/create-tiflash-replicas.md#create-tiflash-replicas-for-tables).
 
 TiFlash has three components: the columnar storage module, `tiflash proxy`, and `pd buddy`. `tiflash proxy` is responsible for the communication using the Multi-Raft consensus algorithm. `pd buddy` works with PD to replicate data from TiKV to TiFlash in the unit of table.
 
@@ -78,19 +67,20 @@ TiFlash accelerates the computing of TiDB in two ways:
 - The columnar storage engine is more efficient in performing read operation.
 - TiFlash shares part of the computing workload of TiDB.
 
-TiFlash shares the computing workload in the same way as the TiKV Coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash.
+TiFlash shares the computing workload in the same way as the TiKV Coprocessor does: TiDB pushes down the computing that can be completed in the storage layer. Whether the computing can be pushed down depends on the support of TiFlash. For details, see [Supported pushdown calculations](/tiflash/tiflash-supported-pushdown-calculations.md).
 
-<CustomContent platform="tidb">
+## Use TiFlash
 
-For details, see [Supported pushdown calculations](/tiflash/use-tiflash.md#supported-push-down-calculations).
+After TiFlash is deployed, data replication does not automatically begin. You need to manually specify the tables to be replicated.
 
-</CustomContent>
+You can either use TiDB to read TiFlash replicas for medium-scale analytical processing, or use TiSpark to read TiFlash replicas for large-scale analytical processing, which is based on your own needs. See the following sections for details:
 
-<CustomContent platform="tidb-cloud">
+- [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+- [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+- [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+- [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
 
-For details, see [Supported pushdown calculations](https://docs.pingcap.com/tidb/stable/use-tiflash#supported-push-down-calculations).
-
-</CustomContent>
+To experience the whole process from importing data to querying in a TPC-H dataset, refer to [Quick Start Guide for TiDB HTAP](/quick-start-with-htap.md).
 
 ## See also
 
@@ -98,19 +88,18 @@ For details, see [Supported pushdown calculations](https://docs.pingcap.com/tidb
 
 - To deploy a new cluster with TiFlash nodes, see [Deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md).
 - To add a TiFlash node in a deployed cluster, see [Scale out a TiFlash cluster](/scale-tidb-using-tiup.md#scale-out-a-tiflash-cluster).
-- [Use TiFlash](/tiflash/use-tiflash.md).
 - [Maintain a TiFlash cluster](/tiflash/maintain-tiflash.md).
 - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md).
 - [Configure TiFlash](/tiflash/tiflash-configuration.md).
 - [Monitor the TiFlash cluster](/tiflash/monitor-tiflash.md).
 - Learn [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).
 - [Troubleshoot a TiFlash cluster](/tiflash/troubleshoot-tiflash.md).
+- [Supported push-down calculations in TiFlash](/tiflash/tiflash-supported-pushdown-calculations.md)
+- [Data validation in TiFlash](/tiflash/tiflash-data-validation.md)
+- [TiFlash compatibility](/tiflash/tiflash-compatibility.md)
 
 </CustomContent>
 
-<CustomContent platform="tidb-cloud">
-
-- [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md)
-- [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
+<CustomContent platform="tidb">
 
 </CustomContent>
