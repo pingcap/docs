@@ -12,7 +12,6 @@ TiDB version: 5.4.2
 
 + TiDB
 
-    <!--transaction-->
     - Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
@@ -35,26 +34,18 @@ TiDB version: 5.4.2
 
 + TiDB
 
-    <!--planner-->
     - Fix the issue of wrong TableDual plans cached in binary protocol [#34690](https://github.com/pingcap/tidb/issues/34690) [#34678](https://github.com/pingcap/tidb/issues/34678)
     - Fix the issue of incorrectly inferred null flag of the TiFlash `firstrow` aggregate function in the EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
     - Fix the issue that the planner generates wrong 2-phase aggregate plan for TiFlash [#34682](https://github.com/pingcap/tidb/issues/34682)
     - Fix the planner wrong behaviors that occur when `tidb_opt_agg_push_down` and `tidb_enforce_mpp` are enabled [#34465](https://github.com/pingcap/tidb/issues/34465)
     - Fix the wrong memory-usage value used when Plan Cache is evicted [#34613](https://github.com/pingcap/tidb/issues/34613)
-
-    <!--transaction-->
     - Fix the issue that the column list does not work in the `LOAD DATA` statement [#35198](https://github.com/pingcap/tidb/issues/35198)
     - Avoid reporting `WriteConflict` errors in pessimistic transactions [#11612](https://github.com/tikv/tikv/issues/11612)
     - Fix the issue that the prewrite requests are not idempotency when Region errors and network issues occur [#34875](https://github.com/pingcap/tidb/issues/34875)
     - Fix the issue that the async commit transactions being rolled back might not meet atomicity [#33641](https://github.com/pingcap/tidb/issues/33641)
-    <!--sql-infra-->
     - Previously, when a network connectivity issue occurred, TiDB did not always correctly free the resources held by the disconnected session. This issue has been fixed so that open transactions can be rolled back and other associated resources can be released. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fix the issue that the `references invalid table` error might be incorrectly reported when TiDB queries views with CTE [#33965](https://github.com/pingcap/tidb/issues/33965)
-
-    <!--diagnosis-->
     - Fix the panic issue caused by the `fatal error: concurrent map read and map write` error [#35340](https://github.com/pingcap/tidb/issues/35340)
-
-    - Fix the error that occurs when reading from the `INFORMATION_SCHEMA.ATTRIBUTES` table by skipping the unidentifiable table attributes [#33665](https://github.com/pingcap/tidb/issues/33665)
 
 + TiKV
 
@@ -80,11 +71,8 @@ TiDB version: 5.4.2
 
 + TiFlash
 
-    <!--storage-->
     - Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154)
     - Fix potential data inconsistency after a lot of INSERT and DELETE operations [#4956](https://github.com/pingcap/tiflash/issues/4956)
-
-    <!--compute-->
     - Fix wrong decimal comparison results in corner cases [#4512](https://github.com/pingcap/tiflash/issues/4512)
 
 + Tools
@@ -100,8 +88,8 @@ TiDB version: 5.4.2
     + TiCDC
 
         - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
-        - Fix the bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Fix the bug that the resolved ts moves too fast when some tables are not maintained by the redo writer [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix a bug that the resolved ts moves too fast when some tables are not maintained by the redo writer [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Add the UUID suffix to the redo log file name to fix the issue that file name conflicts may cause data loss [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix replication interruption that occurs when Region leader is missing and the retry exceeds the limit [#5230](https://github.com/pingcap/tiflow/issues/5230)
         - Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
