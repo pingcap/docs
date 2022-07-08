@@ -126,19 +126,18 @@ If you are the owner or billing administrator of your organization, you can mana
 
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
-- When you are creating a cluster: 
+- When you are creating a cluster:
 
-    1. Before you click **Submit** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
-    2. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, card number, valid year and month, and CVC (Card Verification Code).
-    3. Click **Submit**.
+    1. Before you click **Create Cluster** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
+    2. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, addresss, card number, valid year and month, and CVC (Card Verification Code).
+    3. Click **Save Card**.
 
-- Anytime in the billing console: 
+- Anytime in the billing console:
 
     1. Click the account name in the upper-right corner of the TiDB Cloud console.
     2. Click **Billing**.
-    3. Click the **Payment Method** tab, and then click **Add Credit Card**.
-    4. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, card number, valid year and month, and CVC (Card Verification Code).
-    5. Click **Submit**.
+    3. Under the **Payment Method** tab, click **Add a New Card**.
+    4. Fill in the billing address and card information, and then click **Save**.
 
 > **Note:**
 >
