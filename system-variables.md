@@ -2330,6 +2330,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > **Note:**
 >
 > This TiDB variable is not applicable to TiDB Cloud.
+
 </CustomContent>
 
 - Scope: GLOBAL
