@@ -35,7 +35,7 @@ See the documentation of TiDB Cloud
 
 Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully managed service.
 
-[Try Free](https://tidbcloud.com")
+<a href="https://tidbcloud.com" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
 
 </DocHomeSection>
 
