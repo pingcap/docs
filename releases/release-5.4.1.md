@@ -10,7 +10,7 @@ TiDB version: 5.4.1
 
 ## Compatibility changes
 
-TiDB v5.4.1 does not introduce any compatibility changes in product design. But note that bug fixes in this release might result in compatibility changes, too. For more information, see [Bug Fixes](#bug-fixes).
+TiDB v5.4.2 does not introduce any compatibility changes in product design. But note that bug fixes in this release might result in compatibility changes, too. For more information, see [Bug Fixes](#bug-fixes).
 
 ## Improvements
 
