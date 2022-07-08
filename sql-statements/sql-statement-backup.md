@@ -7,7 +7,7 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 This statement is used to perform a distributed backup of the TiDB cluster.
 
-The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-tool.md) does, except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and warnings of BR also apply in this statement.
+The `BACKUP` statement uses the same engine as the [BR tool](/br/backup-and-restore-overview.md) does, except that the backup process is driven by TiDB itself rather than a separate BR tool. All benefits and warnings of BR also apply in this statement.
 
 Executing `BACKUP` requires either the `BACKUP_ADMIN` or `SUPER` privilege. Additionally, both the TiDB node executing the backup and all TiKV nodes in the cluster must have read or write permission to the destination. Local storage (storage paths starting with `local://`) is not permitted when [Security Enhanced Mode](/system-variables.md#tidb_enable_enhanced_security) is enabled.
 
