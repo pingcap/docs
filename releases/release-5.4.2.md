@@ -91,7 +91,7 @@ TiDB version: 5.4.2
 
     + Backup & Restore (BR)
 
-        - Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [35279](https://github.com/pingcap/tidb/issues/35279)
+        - Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [#35279](https://github.com/pingcap/tidb/issues/35279)
         - Fix a bug that BR does not retry when an error occurs in saving files [#34865](https://github.com/pingcap/tidb/issues/34865)
         - Fix a panic issue when BR is running [#34956](https://github.com/pingcap/tidb/issues/34956)
         - Fix the issue that BR cannot handle S3 internal errors [#34350](https://github.com/pingcap/tidb/issues/34350)
