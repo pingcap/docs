@@ -100,4 +100,3 @@ TiDB version: 5.4.2
 
         - Fix the issue that DM occupies more disk space after a task automatically resumes [#5344](https://github.com/pingcap/tiflow/issues/5344)
         - Fix the issue that the uppercase table cannot be replicated when `case-sensitive: true` is not set [#5255](https://github.com/pingcap/tiflow/issues/5255)
-
