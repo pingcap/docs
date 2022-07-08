@@ -13,7 +13,7 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 <SimpleTab>
 <div label="Developer Tier">
@@ -29,7 +29,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
 
-4. On the **Create a Cluster (Dev Tier)** page, update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create a Cluster (Developer Tier)** page, update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
@@ -67,7 +67,7 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. The CIDR of a project cannot be modified once it is set.
 
-6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
 7. Confirm the cluster information in the middle area and also the billing information in the right pane.
 
@@ -121,7 +121,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
     <SimpleTab>
     <div label="AWS">
 
-    If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), fill in the following parameters:
+    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
     - **Data Source Type**: `AWS S3`.
     - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
