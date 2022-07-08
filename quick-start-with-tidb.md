@@ -127,7 +127,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 7. Access the Grafana dashboard of TiDB through <http://127.0.0.1:3000>. Both the default username and password are `admin`.
 
-8. (Optional) [Load data to TiFlash](/tiflash/use-tiflash.md) for analysis.
+8. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
 
 9. Clean up the cluster after the test deployment:
 
@@ -246,7 +246,7 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
 
 7. Access the Grafana dashboard of TiDB through <http://127.0.0.1:3000>. Both the default username and password are `admin`.
 
-8. (Optional) [Load data to TiFlash](/tiflash/use-tiflash.md) for analysis.
+8. (Optional) [Load data to TiFlash](/tiflash/tiflash-overview.md#use-tiflash) for analysis.
 
 9. Clean up the cluster after the test deployment:
 
@@ -510,5 +510,5 @@ Other requirements for the target machine:
 
 - If you're looking for analytics solution with TiFlash:
 
-    - [Use TiFlash](/tiflash/use-tiflash.md)
+    - [Use TiFlash](/tiflash/tiflash-overview.md#use-tiflash)
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
