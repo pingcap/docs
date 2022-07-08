@@ -90,7 +90,7 @@ TiDB version: 5.4.2
         - Fix data loss that occurs in special incremental scanning scenarios [#5468](https://github.com/pingcap/tiflow/issues/5468)
         - Fix a bug that the redo log manager flushes logs before writing logs [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix a bug that the resolved ts moves too fast when some tables are not maintained by the redo writer [#5486](https://github.com/pingcap/tiflow/issues/5486)
-        - Add the UUID suffix to the redo log file name to fix the issue that file name conflicts may cause data loss [#5486](https://github.com/pingcap/tiflow/issues/5486)
+        - Fix the issue that file name conflicts may cause data loss [#5486](https://github.com/pingcap/tiflow/issues/5486)
         - Fix replication interruption that occurs when Region leader is missing and the retry exceeds the limit [#5230](https://github.com/pingcap/tiflow/issues/5230)
         - Fix the bug that MySQL Sink may save a wrong checkpointTs [#5107](https://github.com/pingcap/tiflow/issues/5107)
         - Fix a bug that may cause goroutine leak in the HTTP server [#5303](https://github.com/pingcap/tiflow/issues/5303)
