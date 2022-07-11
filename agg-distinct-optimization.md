@@ -29,13 +29,13 @@ Usually, aggregate functions with the `DISTINCT` option is executed in the TiDB 
 
 <CustomContent platform="tidb">
 
-The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable or the [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) configuration item in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV/TiFlash Coprocessor.
+The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable or the [`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down) configuration item in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV or TiFlash Coprocessor.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV/TiFlash Coprocessor.
+The [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down) system variable in TiDB controls whether to rewrite the distinct aggregate queries and push them to the TiKV or TiFlash Coprocessor.
 
 </CustomContent>
 
