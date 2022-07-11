@@ -131,7 +131,7 @@ The fee is deducted from a bound credit card according to your cluster usage. To
 - When you are creating a cluster:
 
     1. Before you click **Create Cluster** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
-    2. In the **Add a Card** dialog box, enter the cardholder's name, email, phone, country/region, addresss, card number, valid year and month, and CVC (Card Verification Code).
+    2. In the **Add a Card** dialog box, fill in the card information and billing address.
     3. Click **Save Card**.
 
 - Anytime in the billing console:
