@@ -765,6 +765,6 @@ LOAD STATS 'file_name'
 
 <CustomContent platform="tidb-cloud">
 
-[SQL Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+* [SQL Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
 
 </CustomContent>
