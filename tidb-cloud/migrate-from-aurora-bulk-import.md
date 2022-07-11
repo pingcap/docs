@@ -17,7 +17,8 @@ To import data, perform the following steps:
 4. Fill in the **Data Source Type**, **Bucket URL**, and **Data Format** fields according to the specification of your source data.
 5. Fill in the **Username** and **Password** fields of the **Target Database** according to the connection settings of your cluster.
 6. Create the bucket policy and role for cross-account access according to [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
-7. Click **Import** to create the task.
+7. Click **Validate** to verify whether TiDB Cloud has the access to the data in the specified bucket URL.
+8. Click **Import** to start the import task.
 
 > **Note:**
 >

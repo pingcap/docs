@@ -27,7 +27,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
         - **Password**: enter your root password.
     - **DB/Tables Filter**: leave this field blank.
 
-    Then, click **Validate** to check whether TiDB Cloud has the access to the sample data in the specified bucket URL.
+    Then, click **Validate** to verify whether TiDB Cloud has the access to the sample data in the specified bucket URL.
 
     </div>
 
