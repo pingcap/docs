@@ -82,7 +82,6 @@
       - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
       - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
-      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
 - Deploy
@@ -336,7 +335,7 @@
   - PingCAP Clinic Diagnostic Service (Technical Preview)
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
-    - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
@@ -362,6 +361,7 @@
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
     - [About TiDB Data Migration](/dm/dm-overview.md)
+    - [Architecture](/dm/dm-arch.md)
     - [Quick Start](/dm/quick-start-with-dm.md)
     - Deploy a DM cluster
       - [Hardware and Software Requirements](/dm/dm-hardware-and-software-requirements.md)
@@ -414,7 +414,6 @@
       - [Daily Check](/dm/dm-daily-check.md)
     - Reference
       - Architecture
-        - [DM Architecture](/dm/dm-arch.md)
         - [DM-worker](/dm/dm-worker-intro.md)
         - [Relay Log](/dm/relay-log.md)
       - Command Line
@@ -832,7 +831,13 @@
       - [Titan Configuration](/storage-engine/titan-configuration.md)
     - TiFlash
       - [Overview](/tiflash/tiflash-overview.md)
-      - [Use TiFlash](/tiflash/use-tiflash.md)
+      - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+      - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+      - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+      - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+      - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+      - [Data Validation](/tiflash/tiflash-data-validation.md)
+      - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Telemetry](/telemetry.md)
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
@@ -856,6 +861,7 @@
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.2](/releases/release-5.4.2.md)
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
