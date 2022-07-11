@@ -233,7 +233,7 @@ The following are hard restrictions on non-transactional DML statements. If thes
 
 </CustomContent>
 
-<CustomContent platform="tidb">
+<CustomContent platform="tidb-cloud">
 
 - [Common Table Expression](https://docs.pingcap.com/tidb/stable/dev-guide-use-common-table-expression) is not supported.
 
