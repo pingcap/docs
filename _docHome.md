@@ -13,19 +13,19 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://tidbcloud.com" icon="tidb" label="TiDB Cloud Docs">
+<DocHomeCard href="https://tidbcloud.com" icon="doc1" label="TiDB Cloud Docs">
 
 See the documentation of TiDB Cloud
 
 </DocHomeCard>
 
-<DocHomeCard href="https://tidbcloud.com" icon="tidb" label="TiDB Cloud Docs">
+<DocHomeCard href="https://tidbcloud.com" icon="doc2" label="TiDB Cloud Docs">
 
 See the documentation of TiDB Cloud
 
 </DocHomeCard>
 
-<DocHomeCard href="https://tidbcloud.com" icon="tidb" label="TiDB Cloud Docs">
+<DocHomeCard href="https://tidbcloud.com" icon="doc3" label="TiDB Cloud Docs">
 
 See the documentation of TiDB Cloud
 
