@@ -7,7 +7,7 @@ summary: Learn the AUTO_RANDOM attribute.
 
 > **Note:**
 >
-> `AUTO_RANDOM` was marked as stable since v4.0.3.
+> `AUTO_RANDOM` has been generally available since v4.0.3.
 
 ## User scenario
 

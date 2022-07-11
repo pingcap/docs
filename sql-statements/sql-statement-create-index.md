@@ -129,9 +129,9 @@ You can also specify the expression index when you create the table:
 CREATE TABLE t1(col1 char(10), col2 char(10), index((lower(col1))));
 ```
 
-> **Note**
+> **Note:**
 >
-> The expression in an expression index must be surrounded by '(' and ')'. Otherwise, a syntax error is reported.
+> The expression in an expression index must be surrounded by `(` and `)`. Otherwise, a syntax error is reported.
 
 You can drop an expression index in the same way as dropping an ordinary index:
 

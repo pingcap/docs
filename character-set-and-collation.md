@@ -410,7 +410,7 @@ Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, becau
 
 ### New framework for collations
 
-Since TiDB 4.0, a complete framework for collations is introduced.
+Since TiDB v4.0, a complete framework for collations is introduced.
 
 <CustomContent platform="tidb">
 
