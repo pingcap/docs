@@ -11,7 +11,7 @@ PingCAPクリニックは現在テクニカルプレビュー段階にありま�
 
 -   クライアントの診断：
 
-    Diag client（Diag）は、クラスタ側にデプロイされた診断ツールです。 Diagは、クラスタ診断データの収集、クリニックサーバーへの診断データのアップロード、およびクラスタでローカルのクイックヘルスチェックを実行するために使用されます。 Diagが収集できる診断データの完全なリストについては、 [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
+    Diag client（Diag）は、クラスタ側にデプロイされた診断ツールです。 Diagは、クラスタ診断データを収集し、診断データをClinic Serverにアップロードし、クラスタでローカルにクイックヘルスチェックを実行するために使用されます。 Diagが収集できる診断データの完全なリストについては、 [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)を参照してください。
 
     > **ノート：**
     >
@@ -50,7 +50,7 @@ PingCAPクリニックは現在テクニカルプレビュー段階にありま�
 -   HTTP呼び出しを介してデータを収集する
 
     -   Diagは、TiDBコンポーネントのHTTPインターフェイスを呼び出すことにより、TiDB、TiKV、PD、およびその他のコンポーネントのリアルタイム構成サンプリング情報とリアルタイムパフォーマンスサンプリング情報を取得できます。
-    -   PrometheusのHTTPインターフェースを呼び出すことにより、Diagはアラート情報を取得し、メトリックデータを監視できます。
+    -   PrometheusのHTTPインターフェースを呼び出すことにより、Diagはアラート情報を取得してメトリックデータを監視できます。
 
 -   SQLステートメントを介してデータベースパラメータをクエリする
 
@@ -58,5 +58,11 @@ PingCAPクリニックは現在テクニカルプレビュー段階にありま�
 
 ## 次のステップ {#next-step}
 
--   [PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
--   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
+-   オンプレミス環境でPingCAPクリニックを使用する
+    -   [PingCAPクリニックのクイックスタート](/clinic/quick-start-with-clinic.md)
+    -   [PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
+    -   [PingCAPクリニックの診断データ](/clinic/clinic-data-instruction-for-tiup.md)
+
+-   KubernetesでPingCAPクリニックを使用する
+    -   [PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)
+    -   [PingCAPクリニックの診断データ](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-data-collection)
