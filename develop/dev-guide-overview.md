@@ -1,11 +1,7 @@
 ---
 title: Developer Overview
 summary: Introduce the overview of the developer guide.
-<<<<<<< HEAD
-aliases: ['/appdev/dev/app-dev-overview']
-=======
-aliases: ['/tidb/dev/connectors-and-apis/','/tidb/stable/connectors-and-apis/','/appdev/dev/','/tidb/dev/dev-guide-outdated-for-laravel']
->>>>>>> cd23352c2 (delete outdated document `App Development for Laravel` (#9535))
+aliases: ['/appdev/dev/app-dev-overview'，'/tidb/stable/dev-guide-outdated-for-laravel']
 ---
 
 # Developer Guide Overview
