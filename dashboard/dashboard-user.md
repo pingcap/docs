@@ -5,7 +5,7 @@ summary: Learn how to create SQL users to access TiDB Dashboard.
 
 # TiDBダッシュボードユーザー管理 {#tidb-dashboard-user-management}
 
-TiDBダッシュボードは、TiDBと同じユーザー特権システムとサインイン認証を使用します。 TiDB SQLユーザーを制御および管理して、TiDBダッシュボードへのアクセスを制限できます。このドキュメントでは、TiDB SQLユーザーがTiDBダッシュボードにアクセスするために必要な最小特権について説明し、最小特権SQLユーザーを作成する方法とRBACを介して認証する方法を例示します。
+TiDBダッシュボードは、TiDBと同じユーザー特権システムとサインイン認証を使用します。 TiDB SQLユーザーを制御および管理して、TiDBダッシュボードへのアクセスを制限できます。このドキュメントでは、 TiDB SQLユーザーがTiDBダッシュボードにアクセスするために必要な最小特権について説明し、最小特権SQLユーザーを作成する方法とRBACを介して認証する方法を例示します。
 
 TiDB SQLユーザーを制御および管理する方法の詳細については、 [TiDBユーザーアカウント管理](/user-account-management.md)を参照してください。
 

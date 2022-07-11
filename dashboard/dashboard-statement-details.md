@@ -25,7 +25,7 @@ summary: View the execution details of a single SQL statement in TiDB Dashboard.
 
 ### 基本タブ {#basic-tab}
 
-SQL実行の基本情報には、テーブル名、インデックス名、実行カウント、および合計レイテンシが含まれます。 [**説明**]列には、各フィールドの詳細な説明が表示されます。
+SQL実行の基本情報には、テーブル名、インデックス名、実行カウント、および合計待機時間が含まれます。 [**説明**]列には、各フィールドの詳細な説明が表示されます。
 
 ![Basic information](/media/dashboard/dashboard-statement-plans-basic.png)
 

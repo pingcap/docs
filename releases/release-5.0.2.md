@@ -45,7 +45,7 @@ TiDBバージョン：5.0.2
 
     -   TiCDC
 
-        -   テーブルのメモリ消費量の監視メトリックを追加する[＃1885](https://github.com/pingcap/tiflow/pull/1885)
+        -   テーブルのメモリ消費量の監視メトリックを追加します[＃1885](https://github.com/pingcap/tiflow/pull/1885)
         -   並べ替え段階[＃1863](https://github.com/pingcap/tiflow/pull/1863)でメモリとCPUの使用量を最適化する
         -   ユーザーの混乱を引き起こす可能性のある不要なログ情報を削除する[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
@@ -63,13 +63,13 @@ TiDBバージョン：5.0.2
 
 -   TiDB
 
-    -   場合によっては[＃24717](https://github.com/pingcap/tidb/issues/24717)インデックスとインデックス結合を使用することによって引き起こされるパニックの問題を修正し[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716)
+    -   場合によっては[＃24717](https://github.com/pingcap/tidb/issues/24717)インデックスとインデックス結合を使用することによって引き起こされるpanicの問題を修正し[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716)
     -   準備されたプランキャッシュ`point get`がトランザクション[＃24741](https://github.com/pingcap/tidb/issues/24741)の`point get`ステートメントによって誤って使用される問題を修正します。
     -   照合順序が`ascii_bin`または[＃24569](https://github.com/pingcap/tidb/issues/24569)の場合に間違ったプレフィックスインデックス値を書き込む問題を修正し`latin1_bin`
     -   進行中のトランザクションがGCワーカーによって中断される可能性があるという問題を修正します[＃24591](https://github.com/pingcap/tidb/issues/24591)
-    -   `new-collation`が有効になっているが、 `new-row-format`が無効になっている場合に、クラスター化されたインデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
-    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングする
-    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するパニックの問題を修正します
+    -   `new-collation`が有効で、 `new-row-format`が無効の場合、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
+    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングします
+    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するpanicの問題を修正します
     -   列プルーニングの改善により、 `Apply`および`Join`の演算子の結果が正しくなくなる問題を修正します[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックされたプライマリロックを解決できないバグを修正します[＃24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketchレコードの重複を引き起こす可能性のある統計のGCの問題を修正します[＃24357](https://github.com/pingcap/tidb/pull/24357)
@@ -84,13 +84,13 @@ TiDBバージョン：5.0.2
 
     -   古い値の読み取りによって引き起こされる[＃9981](https://github.com/tikv/tikv/issues/9981)の問題を修正します[＃9996](https://github.com/tikv/tikv/issues/9996)
     -   照合順序が`latin1_bin`の場合に、クラスター化された主キー列の2次インデックスの値が空になる問題を修正し[＃24548](https://github.com/pingcap/tidb/issues/24548) 。
-    -   パニックが発生したときにTiKVがコアダンプファイルを生成できるようにする`abort-on-panic`の構成を追加します。ユーザーは、コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
+    -   panicが発生したときにTiKVがコアダンプファイルを生成できるようにする`abort-on-panic`の構成を追加します。ユーザーは、コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
     -   TiKVがビジーでないときに発生する`point get`クエリのパフォーマンスリグレッションの問題を修正します[＃10046](https://github.com/tikv/tikv/issues/10046)
 
 -   PD
 
-    -   店舗が多い場合にPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
-    -   存在しないストアからエビクトリーダースケジューラを削除するときに発生するパニックの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
+    -   店舗数が多いとPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
+    -   存在しないストアからエビクトリーダースケジューラを削除するときに発生するpanicの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
     -   オフラインピアがマージされた後に統計が更新されない問題を修正します[＃3611](https://github.com/tikv/pd/issues/3611)
 
 -   TiFlash
@@ -98,12 +98,12 @@ TiDBバージョン：5.0.2
     -   共有デルタインデックスを同時に複製した場合の誤った結果の問題を修正
     -   TiFlashが不完全なデータで再起動できないという潜在的な問題を修正します
     -   古いdmファイルが自動的に削除されない問題を修正します
-    -   圧縮フィルター機能が有効になっているときに発生する可能性のあるパニックを修正します
+    -   圧縮フィルター機能が有効になっているときに発生する可能性のあるpanicを修正します
     -   `ExchangeSender`が重複データを送信するという潜在的な問題を修正します
     -   TiFlashが非同期コミットからフォールバックされたロックを解決できない問題を修正します
     -   `TIMEZONE`タイプのキャスト結果に`TIMESTAMP`タイプが含まれている場合に誤った結果が返される問題を修正しました
-    -   セグメント分割中に発生するTiFlashパニックの問題を修正します
-    -   非ルートMPPタスクに関する実行情報が正確でない問題を修正します
+    -   セグメント分割中に発生するTiFlashpanicの問題を修正します
+    -   非ルートMPPタスクに関する実行情報が正確でないという問題を修正します
 
 -   ツール
 
@@ -126,6 +126,6 @@ TiDBバージョン：5.0.2
 
     -   TiDB Lightning
 
-        -   KVデータの生成時に発生するTiDBLightningパニックの問題を修正します[＃1127](https://github.com/pingcap/br/pull/1127)
-        -   自動コミットが無効になっている場合、TiDBバックエンドモードのTiDBLightningがデータを読み込めない問題を修正します[＃1104](https://github.com/pingcap/br/issues/1104)
+        -   KVデータの生成時に発生するTiDB Lightningpanicの問題を修正します[＃1127](https://github.com/pingcap/br/pull/1127)
+        -   自動コミットが無効になっている場合、TiDBバックエンドモードのTiDB Lightningがデータを読み込めない問題を修正します[＃1104](https://github.com/pingcap/br/issues/1104)
         -   データのインポート中にキーの合計サイズがラフトエントリの制限を超えたためにバッチ分割リージョンが失敗するバグを修正します[＃969](https://github.com/pingcap/br/issues/969)

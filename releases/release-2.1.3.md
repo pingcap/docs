@@ -9,15 +9,15 @@ title: TiDB 2.1.3 Release Notes
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー/エグゼキューター
-    -   場合によっては、準備済みプランキャッシュのパニックの問題を修正します[＃8826](https://github.com/pingcap/tidb/pull/8826)
+    -   場合によっては、プリペアドプランキャッシュのpanicの問題を修正します[＃8826](https://github.com/pingcap/tidb/pull/8826)
     -   インデックスがプレフィックスインデックス[＃8851](https://github.com/pingcap/tidb/pull/8851)の場合に範囲計算が間違っている問題を修正します
-    -   `SQL_MODE`が厳密でない場合に文字列が不正な`TIME`形式の場合、 `CAST(str AS TIME(N))`はnullを返します[＃8966](https://github.com/pingcap/tidb/pull/8966)
-    -   `UPDATE` 、場合によっては[＃8980](https://github.com/pingcap/tidb/pull/8980)の処理中に生成された列のパニックの問題を修正します
+    -   `SQL_MODE`が厳密でない場合に文字列が不正な`TIME`形式である場合、 `CAST(str AS TIME(N))`はnullを返します[＃8966](https://github.com/pingcap/tidb/pull/8966)
+    -   `UPDATE` 、場合によっては[＃8980](https://github.com/pingcap/tidb/pull/8980)の処理中に生成されたカラムのpanicの問題を修正します
     -   場合によっては、統計ヒストグラムの上限オーバーフローの問題を修正します[＃8989](https://github.com/pingcap/tidb/pull/8989)
     -   全表スキャンを回避し、クラスタのストレスを軽減するための`_tidb_rowid`の構築クエリのサポート範囲[＃9059](https://github.com/pingcap/tidb/pull/9059)
     -   `CAST(AS TIME)`の精度が大きすぎる場合はエラーを返します[＃9058](https://github.com/pingcap/tidb/pull/9058)
     -   デカルト積[＃9037](https://github.com/pingcap/tidb/pull/9037)で`Sort Merge Join`の使用を許可する
-    -   場合によっては、パニック後に統計ワーカーが再開できない問題を修正します[＃9085](https://github.com/pingcap/tidb/pull/9085)
+    -   場合によっては、panic後に統計ワーカーが再開できない問題を修正します[＃9085](https://github.com/pingcap/tidb/pull/9085)
     -   `Sort Merge Join`が場合によっては間違った結果を返すという問題を修正します[＃9046](https://github.com/pingcap/tidb/pull/9046)
     -   `CASE`節[＃8355](https://github.com/pingcap/tidb/pull/8355)でJSONタイプを返すことをサポートします
 -   サーバ
@@ -29,7 +29,7 @@ title: TiDB 2.1.3 Release Notes
 -   DDL
     -   MySQL [＃8808](https://github.com/pingcap/tidb/pull/8808)の動作と一貫性を保つために、 `RENAME TABLE`の互換性の問題を修正します
     -   `ADD INDEX`の同時変更のサポートはすぐに有効になります[＃8786](https://github.com/pingcap/tidb/pull/8786)
-    -   場合によっては`ADD COLUMN`のプロセス中に`UPDATE`のパニックの問題を修正します[＃8906](https://github.com/pingcap/tidb/pull/8906)
+    -   場合によっては`ADD COLUMN`のプロセス中に`UPDATE`のpanicの問題を修正します[＃8906](https://github.com/pingcap/tidb/pull/8906)
     -   場合によってはテーブルパーティションを同時に作成する問題を修正します[＃8902](https://github.com/pingcap/tidb/pull/8902)
     -   `utf8` [＃9152](https://github.com/pingcap/tidb/pull/9152)セットの`utf8mb4`への変換を[＃8951](https://github.com/pingcap/tidb/pull/8951)
     -   シャードビットオーバーフローの問題を修正[＃8976](https://github.com/pingcap/tidb/pull/8976)

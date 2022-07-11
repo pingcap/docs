@@ -39,7 +39,7 @@ TiDBバージョン：3.0.20
     -   不明なタイムゾーンを[＃20605](https://github.com/pingcap/tidb/pull/20605)する`'posixrules'`
     -   符号なし整数型をビット型[＃20362](https://github.com/pingcap/tidb/pull/20362)に変換するときに発生する問題を修正します
     -   ビットタイプ列[＃20339](https://github.com/pingcap/tidb/pull/20339)の破損したデフォルト値を修正します
-    -   等しい条件の1つが`Enum`または`Set`タイプ[＃20296](https://github.com/pingcap/tidb/pull/20296)である場合に、誤っている可能性のある結果を修正します。
+    -   等しい条件の1つが`Enum`または`Set`タイプ[＃20296](https://github.com/pingcap/tidb/pull/20296)である場合に、潜在的に誤った結果を修正します
     -   [＃20061](https://github.com/pingcap/tidb/pull/20061)の間違った動作を修正し`!= any()`
     -   `BETWEEN...AND...`の型変換が無効な結果を返す問題を修正します[＃21503](https://github.com/pingcap/tidb/pull/21503)
     -   `ADDDATE`関数[＃21008](https://github.com/pingcap/tidb/pull/21008)との互換性の問題を修正します

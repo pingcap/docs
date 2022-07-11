@@ -10,7 +10,7 @@ summary: Learn about the key features of DM and appropriate parameter configurat
 異なるDMバージョンの場合、テーブルルーティング、ブロックおよび許可リスト、およびbinlogイベントフィルター機能のスキーマ名またはテーブル名の異なる一致ルールに注意してください。
 
 -   DM v1.0.5以降のバージョンでは、上記のすべての機能が[ワイルドカード一致](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートします。 DMのすべてのバージョンで、ワイルドカード式には`*`を**1つしか**含めることができず<strong>、最後に</strong>`*`を配置する必要があることに注意してください。
--   v1.0.5より前のバージョンのDMの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
+-   v1.0.5より前のDMバージョンの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
 
 単純なシナリオでの照合には、ワイルドカードを使用することをお勧めします。
 
@@ -135,11 +135,11 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 -   `do-tables` ：MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-do-table)と同様に、テーブルのリストを移行できるようにします。 `db-name`と`tbl-name`の両方を指定する必要があります
 -   `ignore-tables` ：MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)と同様に、移行するテーブルのブロックリスト。 `db-name`と`tbl-name`の両方を指定する必要があります
 
-上記のパラメータの値が`~`文字で始まる場合、この値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターを使用して、スキーマ名またはテーブル名を照合できます。
+上記のパラメーターの値が`~`文字で始まる場合、この値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターを使用して、スキーマ名またはテーブル名を照合できます。
 
 ### フィルタリングプロセス {#filtering-process}
 
-`do-dbs`と`ignore-dbs`に対応するフィルタリングルールは、MySQLの[データベースレベルのレプリケーションとバイナリロギングオプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html)に似ています。 `do-tables`と`ignore-tables`に対応するフィルタリングルールは、MySQLの[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html)に似ています。
+`do-dbs`と`ignore-dbs`に対応するフィルタリングルールは、MySQLの[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-db-options.html)に似ています。 `do-tables`と`ignore-tables`に対応するフィルタリングルールは、MySQLの[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/5.7/en/replication-rules-table-options.html)に似ています。
 
 > **ノート：**
 >
@@ -382,7 +382,7 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-v2.0.5以降のバージョンでは、 `task`の構成ファイルの`online-ddl`の構成アイテムを使用する必要があります。
+v2.0.5以降のバージョンでは、 `task`の構成ファイルの`online-ddl`の構成項目を使用する必要があります。
 
 -   アップストリームのMySQL/MariaDBが（同時に）gh-ostまたはpt-oscツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`に設定します。
 

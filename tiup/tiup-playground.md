@@ -135,7 +135,7 @@ tiup client
 
 このコマンドは、コンソール上の現在のマシンのプレイグラウンドによって開始されたTiDBクラスターのリストを提供します。接続するTiDBクラスタを選択します。 [ <kbd>Enter</kbd> ]をクリックすると、組み込みのMySQLクライアントが開いてTiDBに接続します。
 
-## 開始されたクラスタの情報を表示する {#view-information-of-the-started-cluster}
+## 開始されたクラスタの情報をビューする {#view-information-of-the-started-cluster}
 
 {{< copyable "" >}}
 
@@ -168,7 +168,7 @@ tiup playground scale-out --db 2
 
 ## クラスタでのスケーリング {#scale-in-a-cluster}
 
-`tiup playground scale-in`コマンドに`pid`を指定して、対応するインスタンスでスケーリングできます。 `pid`を表示するには、 `tiup playground display`を実行します。
+`tiup playground scale-in`コマンドで`pid`を指定して、対応するインスタンスでスケーリングできます。 `pid`を表示するには、 `tiup playground display`を実行します。
 
 {{< copyable "" >}}
 

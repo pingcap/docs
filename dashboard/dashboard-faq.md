@@ -11,7 +11,7 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 ### ファイアウォールまたはリバースプロキシが構成されている場合、TiDBダッシュボード以外の内部アドレスにリダイレクトされます {#when-the-firewall-or-reverse-proxy-is-configured-i-am-redirected-to-an-internal-address-other-than-tidb-dashboard}
 
-複数のPlacementDriver（PD）インスタンスがクラスタにデプロイされている場合、実際にTiDBダッシュボードサービスを実行しているのはPDインスタンスの1つだけです。これの代わりに他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。ファイアウォールまたはリバースプロキシがTiDBダッシュボードにアクセスするように適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
+複数の配置Driver（PD）インスタンスがクラスタにデプロイされている場合、実際にTiDBダッシュボードサービスを実行しているのはPDインスタンスの1つだけです。これの代わりに他のPDインスタンスにアクセスすると、ブラウザは別のアドレスにリダイレクトします。ファイアウォールまたはリバースプロキシがTiDBダッシュボードにアクセスするように適切に構成されていない場合、ダッシュボードにアクセスすると、ファイアウォールまたはリバースプロキシによって保護されている内部アドレスにリダイレクトされる可能性があります。
 
 -   複数のPDインスタンスを使用するTiDBダッシュボードの動作原理については、 [TiDBダッシュボードマルチPDインスタンスの展開](/dashboard/dashboard-ops-deploy.md)を参照してください。
 -   リバースプロキシを正しく構成する方法については、 [リバースプロキシを介してTiDBダッシュボードを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
@@ -27,9 +27,9 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 ### <code>prometheus_not_found</code>エラーは、[概要]ページの[ <strong>QPS</strong> ]セクションと[<strong>レイテンシ</strong>]セクションに表示されます {#a-code-prometheus-not-found-code-error-is-shown-in-strong-qps-strong-and-strong-latency-strong-sections-on-the-overview-page}
 
-[**概要]**ページの[ <strong>QPS</strong> ]セクションと[<strong>レイテンシ]</strong>セクションには、Prometheusがデプロイされたクラスタが必要です。それ以外の場合は、エラーが表示されます。この問題は、Prometheusインスタンスをクラスタにデプロイすることで解決できます。
+[**概要]**ページの[ <strong>QPS</strong> ]セクションと[<strong>レイテンシー]</strong>セクションには、Prometheusがデプロイされたクラスタが必要です。それ以外の場合は、エラーが表示されます。この問題は、Prometheusインスタンスをクラスタにデプロイすることで解決できます。
 
-Prometheusインスタンスがデプロイされたときにこの問題が引き続き発生する場合、考えられる理由は、デプロイメントツールが古く（TiUPまたはTiDB Operator）、ツールがメトリックアドレスを自動的に報告しないため、TiDBダッシュボードがクエリを実行できないことです。メトリック。デプロイメントツールを最新バージョンにアップグレードして、再試行できます。
+Prometheusインスタンスがデプロイされたときにこの問題が引き続き発生する場合は、デプロイメントツールが古く（TiUPまたはTiDB Operator）、ツールがメトリックアドレスを自動的に報告しないため、TiDBダッシュボードがクエリを実行できないことが考えられます。メトリック。デプロイメントツールを最新バージョンにアップグレードして、再試行できます。
 
 展開ツールがTiUPの場合は、次の手順を実行してこの問題を解決してください。その他の展開ツールについては、それらのツールの対応するドキュメントを参照してください。
 
@@ -56,7 +56,7 @@ Prometheusインスタンスがデプロイされたときにこの問題が引�
 
 ### <code>invalid connection</code>エラーが[<strong>低速クエリ]</strong>ページに表示されます {#an-code-invalid-connection-code-error-is-shown-on-the-strong-slow-queries-strong-page}
 
-考えられる理由は、TiDBの準備済みプランキャッシュ機能を有効にしていることです。実験的機能として、有効にすると、Prepared Plan Cacheが特定のTiDBバージョンで正しく機能しない場合があり、TiDBダッシュボード（およびその他のアプリケーション）でこの問題が発生する可能性があります。システム変数[`tidb_enable_prepared_plan_cache = OFF`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を設定することにより、準備済み計画キャッシュを無効にできます。
+考えられる理由は、TiDBのプリペアドプランキャッシュ機能を有効にしていることです。実験的機能として、有効にすると、 プリペアドプランキャッシュが特定のTiDBバージョンで正しく機能しない場合があり、TiDBダッシュボード（およびその他のアプリケーション）でこの問題が発生する可能性があります。システム変数[`tidb_enable_prepared_plan_cache = OFF`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)を設定することにより、プリペアドプランキャッシュを無効にできます。
 
 ### <code>required component NgMonitoring is not started</code>エラーが表示されます {#a-code-required-component-ngmonitoring-is-not-started-code-error-is-shown}
 
@@ -68,7 +68,7 @@ Webページに`required component NgMonitoring is not started`が表示され�
 
 手順1.バージョンを確認する
 
-1.  TiUPクラスタのバージョンを確認してください。 NgMonitoringは、TiUPがv1.9.0以降の場合にのみ展開されます。
+1.  TiUPクラスタのバージョンを確認してください。 NgMonitoringは、TiUPがv1.9.0以降の場合にのみデプロイされます。
 
     {{< copyable "" >}}
 

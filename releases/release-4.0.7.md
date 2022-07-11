@@ -79,11 +79,11 @@ TiDBバージョン：4.0.7
 
     -   TLSハンドシェイクが失敗したときにステータスAPIが使用できない問題を修正します[＃8649](https://github.com/tikv/tikv/pull/8649)
     -   潜在的な未定義動作を修正する[＃7782](https://github.com/tikv/tikv/pull/7782)
-    -   `UnsafeDestroyRange`の実行時にスナップショットを生成することによって発生する可能性のあるパニックを修正し[＃8681](https://github.com/tikv/tikv/pull/8681)
+    -   `UnsafeDestroyRange`の実行時にスナップショットを生成することによって発生する可能性のあるpanicを修正し[＃8681](https://github.com/tikv/tikv/pull/8681)
 
 -   PD
 
-    -   `balance-region`が有効になっているときに一部のリージョンにリーダーがない場合にPDがパニックになる可能性があるバグを修正します[＃2994](https://github.com/pingcap/pd/pull/2994)
+    -   `balance-region`が有効になっているときに一部のリージョンにリーダーがない場合にPDがpanicになる可能性があるバグを修正します[＃2994](https://github.com/pingcap/pd/pull/2994)
     -   リージョンマージ後のリージョンサイズとリージョンキーの統計的偏差を修正[＃2985](https://github.com/pingcap/pd/pull/2985)
     -   誤ったホットスポット統計を修正する[＃2991](https://github.com/pingcap/pd/pull/2991)
     -   35に`nil` [＃2974](https://github.com/pingcap/pd/pull/2974)チェックがないという問題を修正し`redirectSchedulerDelete`

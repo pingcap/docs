@@ -11,7 +11,7 @@ TiDB Cloudは、フルマネージドクラウドデータベースでTiDBの優
 
 このドキュメントでは、一般的なPoC手順について説明し、 TiDB CloudPoCをすばやく完了するのに役立つことを目的としています。これは、TiDBの専門家と大規模な顧客ベースによって検証されたベストプラクティスです。
 
-PoCの実行に興味がある場合は、開始する前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>に連絡してください。サポートチームは、テストプランの作成を支援し、PoC手順をスムーズに進めることができます。
+PoCの実行に興味がある場合は、開始する前に<a href="mailto:tidbcloud-support@pingcap.com">PingCAP</a>に連絡してください。サポートチームは、テストプランの作成を支援し、PoC手順をスムーズにガイドします。
 
 または、 [開発者層を作成する](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) （1年間の無料トライアル）してTiDB Cloudに慣れ、簡単に評価することもできます。開発者層には[特別利用規約](/tidb-cloud/select-cluster-tier.md#developer-tier-special-terms-and-conditions)あることに注意してください。
 
@@ -52,7 +52,7 @@ TiDB Cloudは、高可用性と大量のデータとの強力な一貫性を必�
 -   水平方向のスケールアウトまたはスケールイン
 -   金融グレードの高可用性
 -   リアルタイムHTAP
--   MySQL5.7プロトコルおよびMySQLエコシステムと互換性があります
+-   MySQL 5.7プロトコルおよびMySQLエコシステムと互換性があります
 
 また、分析処理の高速化に役立つ列型ストレージエンジンである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)の使用にも興味があるかもしれません。 PoC中は、いつでもTiFlash機能を使用できます。
 
@@ -60,7 +60,7 @@ TiDB Cloudは、高可用性と大量のデータとの強力な一貫性を必�
 
 PoC専用のクラスタを作成するには、次の手順を実行します。
 
-1.  次のいずれかを実行して、PoC申請フォームに記入します。
+1.  次のいずれかを実行して、PoCアプリケーションフォームに入力します。
 
     -   すでに[開発者層を作成しました](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)つ（1年間の無料トライアル）をお持ちの場合は、PoCアプリケーションの送信に関するプロンプトバーがTiDB Cloudコンソールに表示されます。バーのPoCアプリケーションリンクをクリックして、PoCアプリケーションフォームに入力できます。
     -   開発者層をまだ作成していない場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページに移動してPoCアプリケーションフォームに記入してください。
@@ -89,7 +89,7 @@ PoC専用のクラスタを作成するには、次の手順を実行します�
 
 PoCトライアルポイントの数には限りがあるため、トライアルポイントの価値を最大化するには、 TiDB Cloudでの互換性テストと予備分析のために[開発者層クラスタ](/tidb-cloud/select-cluster-tier.md#developer-tier) （1年間の無料トライアル）を作成することをお勧めします。
 
-TiDB CloudはMySQL5.7と高い互換性があります。データがMySQLと互換性がある場合、またはMySQLと互換性があるように適合できる場合は、データをTiDBに直接インポートできます。
+TiDB CloudはMySQL5.7と高い互換性がありMySQL 5.7。データがMySQLと互換性がある場合、またはMySQLと互換性があるように適合できる場合は、データをTiDBに直接インポートできます。
 
 互換性の詳細については、次のドキュメントを参照してください。
 
@@ -116,7 +116,7 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 
 さまざまな形式のデータをTiDB Cloudにインポートできます。
 
--   [サンプルデータをTiDBDumpling形式でインポートする](/tidb-cloud/import-sample-data.md)
+-   [TiDBDumpling形式でサンプルデータをインポートする](/tidb-cloud/import-sample-data.md)
 -   [Auroraから移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 -   [AmazonS3またはGCSからCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
 -   [ApacheParquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)

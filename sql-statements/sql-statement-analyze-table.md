@@ -91,5 +91,5 @@ MySQLは`ANALYZE INCREMENTAL TABLE`ステートメントをサポートしてい
 
 ## も参照してください {#see-also}
 
--   [説明](/sql-statements/sql-statement-explain.md)
--   [説明分析](/sql-statements/sql-statement-explain-analyze.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)
+-   [EXPLAIN分析](/sql-statements/sql-statement-explain-analyze.md)

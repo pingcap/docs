@@ -5,9 +5,9 @@ summary: Learn about miscellaneous functions in TiDB.
 
 # その他の機能 {#miscellaneous-functions}
 
-TiDBは、MySQL5.7で利用可能な[その他の機能](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html)のほとんどをサポートします。
+TiDBは、MySQL5.7で利用可能な[その他の関数](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html)のほとんどをサポートしMySQL 5.7。
 
-## サポートされている機能 {#supported-functions}
+## サポートされている関数 {#supported-functions}
 
 | 名前                                                                                                                 | 説明                              |
 | :----------------------------------------------------------------------------------------------------------------- | :------------------------------ |
@@ -28,7 +28,7 @@ TiDBは、MySQL5.7で利用可能な[その他の機能](https://dev.mysql.com/d
 | [`UUID_TO_BIN()`](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html#function_uuid-to-bin)       | UUIDをテキスト形式からバイナリ形式に変換する        |
 | [`VALUES()`](https://dev.mysql.com/doc/refman/5.7/en/miscellaneous-functions.html#function_values)                 | INSERT中に使用される値を定義します            |
 
-## サポートされていない機能 {#unsupported-functions}
+## サポートされていない関数 {#unsupported-functions}
 
 | 名前                                                                                                                   | 説明                                                                                        |
 | :------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |

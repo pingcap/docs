@@ -17,7 +17,7 @@
 -   クイックスタート
     -   [TiDBをお試しください](/quick-start-with-tidb.md)
     -   [HTAPをお試しください](/quick-start-with-htap.md)
-    -   [TiDBSQLを学ぶ](/basic-sql-operations.md)
+    -   [TiDB SQLを学ぶ](/basic-sql-operations.md)
     -   [HTAPを学ぶ](/explore-htap.md)
     -   [サンプルデータベースのインポート](/import-example-data.md)
 -   発展させる
@@ -32,7 +32,7 @@
     -   TiDBに接続する
         -   [DriverまたはORMを選択します](/develop/dev-guide-choose-driver-or-orm.md)
         -   [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)
-        -   [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
+        -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
     -   データベーススキーマの設計
         -   [概要](/develop/dev-guide-schema-design-overview.md)
         -   [データベースを作成する](/develop/dev-guide-create-database.md)
@@ -45,11 +45,11 @@
         -   [プリペアドステートメント](/develop/dev-guide-prepared-statement.md)
     -   データの読み取り
         -   [単一のテーブルからのデータのクエリ](/develop/dev-guide-get-data-from-single-table.md)
-        -   [マルチテーブル結合クエリ](/develop/dev-guide-join-tables.md)
+        -   [マルチテーブル参加クエリ](/develop/dev-guide-join-tables.md)
         -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
         -   [結果をページングする](/develop/dev-guide-paginate-results.md)
         -   [ビュー](/develop/dev-guide-use-views.md)
-        -   [一時的なテーブル](/develop/dev-guide-use-temporary-tables.md)
+        -   [一時テーブル](/develop/dev-guide-use-temporary-tables.md)
         -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
         -   レプリカデータの読み取り
             -   [フォロワー読み取り](/develop/dev-guide-use-follower-read.md)
@@ -93,7 +93,7 @@
         -   [最小限のトポロジー](/minimal-deployment-topology.md)
         -   [TiFlashトポロジ](/tiflash-deployment-topology.md)
         -   [TiCDCトポロジ](/ticdc-deployment-topology.md)
-        -   [TiDBBinlogトポロジ](/tidb-binlog-deployment-topology.md)
+        -   [Binlogトポロジ](/tidb-binlog-deployment-topology.md)
         -   [TiSparkトポロジ](/tispark-deployment-topology.md)
         -   [クロスDCトポロジ](/geo-distributed-deployment-topology.md)
         -   [ハイブリッドトポロジ](/hybrid-deployment-topology.md)
@@ -303,7 +303,7 @@
                 -   [tiup cluster stop](/tiup/tiup-component-cluster-stop.md)
                 -   [tiup cluster template](/tiup/tiup-component-cluster-template.md)
                 -   [tiup cluster upgrade](/tiup/tiup-component-cluster-upgrade.md)
-            -   TiUPDMコマンド
+            -   TiUP DMコマンド
                 -   [概要](/tiup/tiup-component-dm.md)
                 -   [tiup dm audit](/tiup/tiup-component-dm-audit.md)
                 -   [tiup dm deploy](/tiup/tiup-component-dm-deploy.md)
@@ -469,14 +469,14 @@
         -   [デプロイ](/tidb-binlog/deploy-tidb-binlog.md)
         -   [管理](/tidb-binlog/maintain-tidb-binlog-cluster.md)
         -   [構成、設定](/tidb-binlog/tidb-binlog-configuration-file.md)
-            -   [ポンプ](/tidb-binlog/tidb-binlog-configuration-file.md#pump)
-            -   [ドレイナー](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
+            -   [Pump](/tidb-binlog/tidb-binlog-configuration-file.md#pump)
+            -   [Drainer](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)
         -   [アップグレード](/tidb-binlog/upgrade-tidb-binlog.md)
         -   [モニター](/tidb-binlog/monitor-tidb-binlog-cluster.md)
-        -   [レパロ](/tidb-binlog/tidb-binlog-reparo.md)
+        -   [Reparo](/tidb-binlog/tidb-binlog-reparo.md)
         -   [binlogctl](/tidb-binlog/binlog-control.md)
-        -   [Binlogコンシューマークライアント](/tidb-binlog/binlog-consumer-client.md)
-        -   [TiDBBinlogリレーログ](/tidb-binlog/tidb-binlog-relay-log.md)
+        -   [Binlog Consumer Client](/tidb-binlog/binlog-consumer-client.md)
+        -   [TiDBBinlogBinlog](/tidb-binlog/tidb-binlog-relay-log.md)
         -   [TiDBクラスター間の双方向レプリケーション](/tidb-binlog/bidirectional-replication-between-tidb-clusters.md)
         -   [用語集](/tidb-binlog/tidb-binlog-glossary.md)
         -   トラブルシューティング
@@ -721,7 +721,7 @@
             -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
-        -   [一時的なテーブル](/temporary-tables.md)
+        -   [一時テーブル](/temporary-tables.md)
         -   [キャッシュされたテーブル](/cached-tables.md)
         -   文字セットと照合
             -   [概要](/character-set-and-collation.md)
@@ -799,7 +799,7 @@
             -   [遅いクエリページ](/dashboard/dashboard-slow-query.md)
             -   クラスター診断
                 -   [クラスタ診断ページにアクセスする](/dashboard/dashboard-diagnostics-access.md)
-                -   [診断レポートを表示する](/dashboard/dashboard-diagnostics-report.md)
+                -   [診断レポートをビューする](/dashboard/dashboard-diagnostics-report.md)
                 -   [診断を使用する](/dashboard/dashboard-diagnostics-usage.md)
             -   [検索ログページ](/dashboard/dashboard-log-search.md)
             -   インスタンスプロファイリング

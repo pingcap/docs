@@ -59,7 +59,7 @@ summary: Learn about the operators precedence, comparison functions and operator
 
 ## 演算子の優先順位 {#operator-precedence}
 
-次のリストに、優先順位の高いものから低いものへと、演算子の優先順位を示します。 1行に一緒に表示される演算子は、同じ優先順位を持ちます。
+演算子の優先順位は、優先順位の高いものから低いものの順に、次のリストに示されています。 1行に一緒に表示される演算子は、同じ優先順位を持ちます。
 
 ```sql
 INTERVAL

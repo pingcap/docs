@@ -12,15 +12,15 @@ TiUPを使用してTiDBを展開またはスケーリングするには、クラ
 
 TiUPを使用したTiDB展開のトポロジ構成ファイルには、次のセクションが含まれる場合があります。
 
--   [グローバル](#global) ：クラスターのグローバル構成。一部の構成アイテムはデフォルト値を使用し、インスタンスごとに個別に構成できます。
+-   [グローバル](#global) ：クラスターのグローバル構成。一部の構成項目はデフォルト値を使用しており、インスタンスごとに個別に構成できます。
 -   [監視](#monitored) ：監視サービスのConfiguration / コンフィグレーション、つまり、blackbox_exporterと`node_exporter` 。各マシンには、 `node_exporter`と`blackbox_exporter`が配備されています。
 -   [server_configs](#server_configs) ：コンポーネントのグローバル構成。各コンポーネントを個別に構成できます。インスタンスに同じ名前の構成アイテムがある場合、インスタンスの構成アイテムが有効になります。
 -   [pd_servers](#pd_servers) ：PDインスタンスの構成。この構成は、PDコンポーネントが展開されるマシンを指定します。
 -   [tidb_servers](#tidb_servers) ：TiDBインスタンスの構成。この構成は、TiDBコンポーネントがデプロイされるマシンを指定します。
 -   [tikv_servers](#tikv_servers) ：TiKVインスタンスの構成。この構成は、TiKVコンポーネントが展開されるマシンを指定します。
 -   [tiflash_servers](#tiflash_servers) ：TiFlashインスタンスの構成。この構成は、TiFlashコンポーネントが展開されるマシンを指定します。
--   [pump_servers](#pump_servers) ：Pumpインスタンスの構成。この構成は、Pumpコンポーネントがデプロイされるマシンを指定します。
--   [drainer_servers](#drainer_servers) ：Drainerインスタンスの構成。この構成は、Drainerコンポーネントがデプロイされるマシンを指定します。
+-   [pump_servers](#pump_servers) ： Pumpインスタンスの構成。この構成は、 Pumpコンポーネントがデプロイされるマシンを指定します。
+-   [drainer_servers](#drainer_servers) ： Drainerインスタンスの構成。この構成は、 Drainerコンポーネントがデプロイされるマシンを指定します。
 -   [cdc_servers](#cdc_servers) ：TiCDCインスタンスの構成。この構成は、TiCDCコンポーネントが展開されるマシンを指定します。
 -   [tispark_masters](#tispark_masters) ：TiSparkマスターインスタンスの構成。この構成は、TiSparkマスターコンポーネントが展開されるマシンを指定します。 TiSparkマスターの1つのノードのみをデプロイできます。
 -   [tispark_workers](#tispark_workers) ：TiSparkワーカーインスタンスの構成。この構成は、TiSparkワーカーコンポーネントが展開されるマシンを指定します。
@@ -30,7 +30,7 @@ TiUPを使用したTiDB展開のトポロジ構成ファイルには、次のセ
 
 ### <code>global</code> {#code-global-code}
 
-`global`セクションは、クラスターのグローバル構成に対応し、次のフィールドがあります。
+`global`セクションはクラスターのグローバル構成に対応し、次のフィールドがあります。
 
 -   `user` ：デプロイされたクラスタの開始に使用されたユーザー。デフォルト値は`"tidb"`です。 `<user>`フィールドで指定されたユーザーがターゲットマシンに存在しない場合、このユーザーは自動的に作成されます。
 
@@ -131,9 +131,9 @@ monitored:
 
 -   `tiflash_learner` ：各TiFlashノードには特別な組み込みTiKVがあります。この構成アイテムは、この特別なTiKVを構成するために使用されます。通常、この構成アイテムのコンテンツを変更することはお勧めしません。
 
--   `pump` ：ポンプサービス関連の構成。完全な構成については、 [TiDBBinlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#pump)を参照してください。
+-   `pump` ：Pumpサービス関連の構成。完全な構成については、 [Binlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#pump)を参照してください。
 
--   `drainer` ：ドレイナーサービス関連の構成。完全な構成については、 [TiDBBinlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)を参照してください。
+-   `drainer` ：ドDrainerサービス関連の構成。完全な構成については、 [Binlog構成ファイル](/tidb-binlog/tidb-binlog-configuration-file.md#drainer)を参照してください。
 
 -   `cdc` ：TiCDCサービス関連の構成。完全な構成については、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)を参照してください。
 
@@ -167,7 +167,7 @@ server_configs:
 
 -   `client_port` ：PDがクライアントへの接続に使用するポートを指定します。デフォルト値は`2379`です。
 
--   `peer_port` ：PD間の通信用のポートを指定します。デフォルト値は`2380`です。
+-   `peer_port` ：PD間の通信用ポートを指定します。デフォルト値は`2380`です。
 
 -   `deploy_dir` ：デプロイメントディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ディレクトリは`global`で構成された`deploy_dir`ディレクトリに従って生成されます。
 
@@ -380,13 +380,13 @@ tiflash_servers:
 
 ### <code>pump_servers</code> {#code-pump-servers-code}
 
-`pump_servers`は、TiDBBinlogのPumpサービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。 `pump_servers`は配列であり、配列の各要素には次のフィールドが含まれています。
+`pump_servers`は、 BinlogのPumpサービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。 `pump_servers`は配列であり、配列の各要素には次のフィールドが含まれています。
 
--   `host` ：ポンプサービスが展開されるマシンを指定します。フィールド値はIPアドレスであり、必須です。
+-   `host` ：Pumpサービスが展開されるマシンを指定します。フィールド値はIPアドレスであり、必須です。
 
 -   `ssh_port` ：操作のためにターゲットマシンに接続するSSHポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`つが使用されます。
 
--   `port` ：ポンプサービスのリスニングポート。デフォルト値は`8250`です。
+-   `port` ：Pumpサービスのリスニングポート。デフォルト値は`8250`です。
 
 -   `deploy_dir` ：デプロイメントディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ディレクトリは`global`で構成された`deploy_dir`ディレクトリに従って生成されます。
 
@@ -426,13 +426,13 @@ pump_servers:
 
 ### <code>drainer_servers</code> {#code-drainer-servers-code}
 
-`drainer_servers`は、TiDBBinlogのDrainerサービスが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。 `drainer_servers`は配列です。各配列要素には、次のフィールドが含まれています。
+`drainer_servers`は、 BinlogDrainerが展開されるマシンを指定します。また、各マシンのサービス構成も指定します。 `drainer_servers`は配列です。各配列要素には、次のフィールドが含まれています。
 
--   `host` ：Drainerサービスがデプロイされるマシンを指定します。フィールド値はIPアドレスであり、必須です。
+-   `host` ： Drainerサービスがデプロイされるマシンを指定します。フィールド値はIPアドレスであり、必須です。
 
 -   `ssh_port` ：操作のためにターゲットマシンに接続するSSHポートを指定します。指定されていない場合は、 `global`のセクションのうち`ssh_port`つが使用されます。
 
--   `port` ：ドレイナーサービスのリスニングポート。デフォルト値は`8249`です。
+-   `port` ：Drainerサービスのリスニングポート。デフォルト値は`8249`です。
 
 -   `deploy_dir` ：デプロイメントディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ディレクトリは`global`で構成された`deploy_dir`ディレクトリに従って生成されます。
 
@@ -440,7 +440,7 @@ pump_servers:
 
 -   `log_dir` ：ログディレクトリを指定します。相対ディレクトリとして指定または指定されていない場合、ログは`global`で構成された`log_dir`ディレクトリに従って生成されます。
 
--   `commit_ts` （非推奨）：Drainerが起動すると、チェックポイントを読み取ります。 Drainerがチェックポイントを取得しない場合、Drainerはこのフィールドを最初の起動のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です（Drainerは常にPDから最新のタイムスタンプをcommit_tsとして取得します）。
+-   `commit_ts` （非推奨）： Drainerが起動すると、チェックポイントを読み取ります。 Drainerがチェックポイントを取得しない場合、Drainerはこのフィールドを最初の起動のレプリケーション時点として使用します。このフィールドのデフォルトは`-1`です（Drainerは常にPDからcommit_tsとして最新のタイムスタンプを取得します）。
 
 -   `numa_node` ：NUMAポリシーをインスタンスに割り当てます。このフィールドを指定する前に、ターゲットマシンに[numactl](https://linux.die.net/man/8/numactl)がインストールされていることを確認する必要があります。このフィールドが指定されている場合、cpubindおよびmembindポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。フィールド値は、「0,1」などのNUMAノードのIDです。
 
@@ -462,7 +462,7 @@ pump_servers:
 -   `arch`
 -   `os`
 
-`commit_ts`フィールドは、TiUP v1.9.2以降非推奨になり、Drainerの開始スクリプトには記録されません。それでもこのフィールドを使用する必要がある場合は、次の例を参照して`config`の`initial-commit-ts`フィールドを構成してください。
+`commit_ts`フィールドは、TiUP v1.9.2以降非推奨になり、 Drainerの開始スクリプトには記録されません。それでもこのフィールドを使用する必要がある場合は、次の例を参照して`config`の`initial-commit-ts`フィールドを構成してください。
 
 `drainer_servers`の構成例は次のとおりです。
 

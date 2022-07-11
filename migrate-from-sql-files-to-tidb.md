@@ -5,12 +5,12 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 # SQLファイルからTiDBへのデータの移行 {#migrate-data-from-sql-files-to-tidb}
 
-このドキュメントでは、TiDBLightningを使用してMySQLSQLファイルからTiDBにデータを移行する方法について説明します。 MySQL SQLファイルの生成方法については、 [Dumplingを使用してSQLファイルにエクスポート](/dumpling-overview.md#export-to-sql-files)を参照してください。
+このドキュメントでは、TiDBLightningを使用してTiDB LightningファイルからTiDBにデータを移行する方法について説明します。 MySQL SQLファイルの生成方法については、 [Dumplingを使用してSQLファイルにエクスポート](/dumpling-overview.md#export-to-sql-files)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
--   [TiUPを使用してTiDBLightningをインストールする](/migration-tools.md)
--   [TiDBLightningのターゲットデータベースに必要な権限を付与します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
+-   [TiDB Lightningを使用してTiDBLightningをインストールする](/migration-tools.md)
+-   [TiDB Lightningのターゲットデータベースに必要な権限を付与します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database)
 
 ## ステップ1.SQLファイルを準備します {#step-1-prepare-sql-files}
 
@@ -22,7 +22,7 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 Dumplingを使用してデータをエクスポートする場合、テーブルスキーマファイルは自動的にエクスポートされます。他の方法でエクスポートされたデータの場合、次のいずれかの方法でテーブルスキーマを作成できます。
 
--   **方法1** ：TiDBLightningを使用してターゲットテーブルスキーマを作成します。
+-   **方法1** ： TiDB Lightningを使用してターゲットテーブルスキーマを作成します。
 
     必要なDDLステートメントを含むSQLファイルを作成します。
 
@@ -65,7 +65,7 @@ status-port = ${status-port}  # During the import process, TiDB Lightning needs 
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
-構成ファイルの詳細については、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+構成ファイルの詳細については、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ4.データをインポートします {#step-4-import-the-data}
 
@@ -87,10 +87,10 @@ TiDB Lightningは、 `~/.aws/credentials`からのクレデンシャルファイ
 
 -   デフォルトで5分ごとに更新される`grep`ログで`progress`キーワードを検索します。
 -   Grafanaダッシュボードを使用します。詳細については、 [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
--   Webインターフェイスを使用します。詳細については、 [TiDBLightningWebインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
+-   Webインターフェイスを使用します。詳細については、 [TiDB Lightningインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
-インポートが完了すると、TiDBLightningは自動的に終了します。ログの最後の5行に`the whole procedure completed`が含まれている場合は、インポートが正常に完了したことを意味します。
+インポートが完了すると、 TiDB Lightningは自動的に終了します。ログの最後の5行に`the whole procedure completed`が含まれている場合は、インポートが正常に完了したことを意味します。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、TiDB Lightningが正常に終了したことを意味するだけであり、タスクの完了ではありません。インポートプロセス中に問題が発生した場合は、トラブルシューティングについて[TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
+> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味するだけであり、タスクの完了ではありません。インポートプロセス中に問題が発生した場合は、トラブルシューティングについて[TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。

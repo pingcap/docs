@@ -4,7 +4,7 @@ title: TiDB 3.0.0 Beta.1 Release Notes
 
 # TiDB3.0.0Beta.1リリースノート {#tidb-3-0-0-beta-1-release-notes}
 
-発売日：2019年3月26日
+リリース日：2019年3月26日
 
 TiDBバージョン：3.0.0-beta.1
 
@@ -55,12 +55,12 @@ TiDB Ansibleバージョン：3.0.0-beta.1
     -   [＃9461](https://github.com/pingcap/tidb/pull/9461) `CREATE ROLE`
 -   サーバ
     -   `/debug/zip`のHTTPインターフェースを追加して、現在のTiDBインスタンスの情報を取得します[＃9651](https://github.com/pingcap/tidb/pull/9651)
-    -   `show pump status`および`show drainer status`のSQLステートメントをサポートして、ポンプまたはドレイナーのステータスを確認します[＃9456](https://github.com/pingcap/tidb/pull/9456)
+    -   `show pump status`および`show drainer status`のSQLステートメントをサポートして、PumpまたはDrainerのステータスを確認します[＃9456](https://github.com/pingcap/tidb/pull/9456)
     -   SQLステートメントを使用したPumpまたはDrainerステータスの変更のサポート[＃9789](https://github.com/pingcap/tidb/pull/9789)
     -   遅いSQLステートメントを簡単に追跡できるようにSQLテキストへのHASHフィンガープリントの追加をサポート[＃9662](https://github.com/pingcap/tidb/pull/9662)
     -   `log_bin`のシステム変数（デフォルトでは「0」）を追加して、binlogの有効化状態を制御します。現在の状態のチェックのみをサポート[＃9343](https://github.com/pingcap/tidb/pull/9343)
     -   構成ファイルを使用したbinlog送信戦略の管理のサポート[＃9864](https://github.com/pingcap/tidb/pull/9864)
-    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブル[＃9290](https://github.com/pingcap/tidb/pull/9290)を使用した低速ログのクエリのサポート
+    -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブルを使用した低速ログのクエリのサポート[＃9290](https://github.com/pingcap/tidb/pull/9290)
     -   TiDBに表示されるMySQLのバージョンを5.7.10から[＃9553](https://github.com/pingcap/tidb/pull/9553)に変更します。
     -   ツールによる収集と分析を容易にするために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)を統合します
     -   `high_error_rate_feedback_total`の監視項目を追加して、統計に基づいて実際のデータ量と推定データ量の差を記録します[＃9209](https://github.com/pingcap/tidb/pull/9209)
@@ -94,8 +94,8 @@ TiDB Ansibleバージョン：3.0.0-beta.1
 -   ローカルリーダーを使用したRawReadインターフェイスでの読み取りのサポート[＃4222](https://github.com/tikv/tikv/pull/4222)
 -   構成情報に関するメトリックを追加する[＃4206](https://github.com/tikv/tikv/pull/4206)
 -   境界[＃4255](https://github.com/tikv/tikv/pull/4255)を超えるキーに関するメトリックを追加します
--   バインドされたエラーを超えるキーに遭遇したときにパニックを制御するか、エラーを返すオプションを追加します[＃4254](https://github.com/tikv/tikv/pull/4254)
--   `INSERT`操作のサポートを追加し、キーが存在しない場合にのみ事前書き込みを成功させ、 [＃4085](https://github.com/tikv/tikv/pull/4085)を削除し`Batch Get` 。
+-   バインドされたエラーを超えるキーに遭遇したときにpanicを制御するか、エラーを返すオプションを追加します[＃4254](https://github.com/tikv/tikv/pull/4254)
+-   `INSERT`操作のサポートを追加し、キーが存在しない場合にのみプリライトを成功させ、 [＃4085](https://github.com/tikv/tikv/pull/4085)を削除し`Batch Get` 。
 -   バッチシステム[＃4200](https://github.com/tikv/tikv/pull/4200)でより公平なバッチ戦略を使用する
 -   tikv- [＃3825](https://github.com/tikv/tikv/pull/3825)でRawスキャンをサポートする
 

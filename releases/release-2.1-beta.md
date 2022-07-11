@@ -9,14 +9,14 @@ title: TiDB 2.1 Beta Release Notes
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   `Index Join`の選択範囲を最適化して、実行パフォーマンスを向上させます
+    -   選択範囲`Index Join`を最適化して、実行パフォーマンスを向上させます
     -   相関サブクエリを最適化し、 `Filter`を押し下げ、インデックス範囲を拡張して、一部のクエリの効率を桁違いに向上させます
     -   `UPDATE`および`DELETE`ステートメントで`Index Hint`および`Join Hint`をサポート
     -   使用可能なインデックスが存在しない場合は、ヒント`TIDM_SMJ`を検証します
     -   `ABS` 、および`FLOOR`関数の`IS TRUE`ダウンを`IS FALSE`し`CEIL`
     -   特に定数畳み込みプロセスで`IF`と`IFNULL`の関数を処理します
 -   SQL実行エンジン
-    -   一部のシナリオでは、並列`Hash Aggregate`演算子を実装し、 `Hash Aggregate`のコンピューティングパフォーマンスを350％向上させます。
+    -   並列`Hash Aggregate`演算子を実装し、一部のシナリオで`Hash Aggregate`のコンピューティングパフォーマンスを350％向上させます
     -   並列`Project`オペレーターを実装し、一部のシナリオでパフォーマンスを74％向上させる
     -   実行パフォーマンスを向上させるために、 `Hash Join`の`Inner`テーブルと`Outer`テーブルのデータを同時に読み取ります
     -   一部のシナリオで`INSERT … ON DUPLICATE KEY UPDATE …`の誤った結果を修正
@@ -37,7 +37,7 @@ title: TiDB 2.1 Beta Release Notes
     -   `PlanCache`のパフォーマンスの問題を修正します
     -   `tidb_retry_limit`のシステム変数を追加して、トランザクションの自動再試行時間を制御します
     -   `tidb_disable_txn_auto_retry`のシステム変数を追加して、トランザクションが自動的に試行されるかどうかを制御します
-    -   `time`種類の書き込みデータの精度の問題を修正
+    -   `time`タイプの書き込みデータの精度の問題を修正
     -   競合するトランザクションのパフォーマンスを最適化するために、ローカルで競合するトランザクションのキューをサポートする
     -   `UPDATE`のステートメントの`Affected Rows`を修正
     -   `insert ignore on duplicate key update`のステートメントパフォーマンスを最適化する
@@ -57,7 +57,7 @@ title: TiDB 2.1 Beta Release Notes
 
 ## PD {#pd}
 
--   ネットワーク分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間でRaftPreVoteを有効にします
+-   ネットワーク分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間でRaftを有効にします
 -   BalanceSchedulerが小さなリージョンを頻繁にスケジュールする問題を最適化します
 -   ホットスポットスケジューラを最適化して、交通統計情報のジッターへの適応性を向上させます
 -   `region merge`をスケジュールするときに、行数が多いリージョンをスキップします

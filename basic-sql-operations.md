@@ -23,11 +23,11 @@ SQLを試し、MySQLクエリとのTiDBの互換性をテストするには、�
 
 </CustomContent>
 
-このページでは、DDL、DML、CRUD操作などの基本的なTiDBSQLステートメントについて説明します。 TiDBステートメントの完全なリストについては、 [TiDBSQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
+このページでは、DDL、DML、CRUD操作などの基本的なTiDB SQLステートメントについて説明します。 TiDBステートメントの完全なリストについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/)を参照してください。
 
 ## カテゴリー {#category}
 
-SQLは、その機能に応じて次の4つのタイプに分類されます。
+SQLは、その関数に応じて次の4つのタイプに分類されます。
 
 -   DDL（データ定義言語）：データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。
 
@@ -195,7 +195,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 一般的なDML機能は、テーブルレコードの追加、変更、および削除です。対応するコマンドは`INSERT` 、および`UPDATE` `DELETE` 。
 
-テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
+テーブルにデータを挿入するには、次の`INSERT`のステートメントを使用します。
 
 {{< copyable "" >}}
 

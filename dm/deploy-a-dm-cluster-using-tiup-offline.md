@@ -189,7 +189,7 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-期待される出力には、インスタンスID、ロール、ホスト、リスニングポート、ステータス（クラスタがまだ開始されていないため、ステータスは`Down` ）、および`inactive`クラスタのディレクトリ情報が含まれ`dm-test` 。
+期待される出力には、インスタンスID、役割、ホスト、リスニングポート、ステータス（クラスタがまだ開始されていないため、ステータスは`Down` ）、および`inactive`クラスタのディレクトリ情報が含まれ`dm-test` 。
 
 ## ステップ7：クラスタを開始します {#step-7-start-the-cluster}
 

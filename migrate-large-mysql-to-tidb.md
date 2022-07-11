@@ -5,31 +5,31 @@ summary: Learn how to migrate MySQL of large datasets to TiDB.
 
 # 大規模なデータセットのMySQLをTiDBに移行する {#migrate-mysql-of-large-datasets-to-tidb}
 
-移行するデータ量が少ない場合は、完全移行とインクリメンタルレプリケーションの両方で簡単に[DMを使用してデータを移行する](/migrate-small-mysql-to-tidb.md)を実行できます。ただし、DMは低速（30〜50 GiB / h）でデータをインポートするため、データ量が多い場合は移行に時間がかかる場合があります。このドキュメントの「大規模なデータセット」とは、通常、1TiB以上のデータを意味します。
+移行するデータ量が少ない場合は、完全移行と増分レプリケーションの両方で簡単に[DMを使用してデータを移行する](/migrate-small-mysql-to-tidb.md)を実行できます。ただし、DMは低速（30〜50 GiB / h）でデータをインポートするため、データ量が多い場合は移行に時間がかかる場合があります。このドキュメントの「大規模なデータセット」とは、通常、1TiB以上のデータを意味します。
 
 このドキュメントでは、大規模なデータセットをMySQLからTiDBに移行する方法について説明します。移行全体には2つのプロセスがあります。
 
-1.  *完全な移行*。 DumplingとTiDBLightningを使用して、完全な移行を実行します。 TiDB Lightningの**ローカルバックエンド**モードでは、最大500 GiB/hの速度でデータをインポートできます。
+1.  *完全な移行*。 DumplingとTiDB Lightningを使用して、完全な移行を実行します。 TiDB Lightningの**ローカルバックエンド**モードでは、最大500 GiB/hの速度でデータをインポートできます。
 2.  *インクリメンタルレプリケーション*。完全な移行が完了したら、DMを使用して増分データを複製できます。
 
 ## 前提条件 {#prerequisites}
 
 -   [DMをインストールする](/dm/deploy-a-dm-cluster-using-tiup.md) 。
--   [DumplingとTiDBLightningをインストールします](/migration-tools.md) 。
+-   [DumplingとTiDB Lightningをインストールします](/migration-tools.md) 。
 -   [DMに必要なソースデータベースとターゲットデータベースの権限を付与します](/dm/dm-worker-intro.md) 。
--   [TiDBLightningに必要なターゲットデータベース権限を付与します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
+-   [TiDB Lightningに必要なターゲットデータベース権限を付与します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
 -   [Dumplingに必要なソースデータベース権限を付与します](/dumpling-overview.md#export-data-from-tidbmysql) 。
 
 ## リソース要件 {#resource-requirements}
 
-**オペレーティングシステム**：このドキュメントの例では、新しいCentOS7インスタンスを使用しています。仮想マシンは、ローカルホストまたはクラウドのいずれかにデプロイできます。 TiDB Lightningはデフォルトで必要なだけのCPUリソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他のTiDBコンポーネント（たとえば`tikv-server` ）と一緒に単一のサーバーにデプロイしてから、TiDBLightningからのCPU使用率を制限するように`region-concurrency`を構成できます。通常、サイズは論理CPUの75％に設定できます。
+**オペレーティングシステム**：このドキュメントの例では、新しいCentOS7インスタンスを使用しています。仮想マシンは、ローカルホストまたはクラウドのいずれかにデプロイできます。 TiDB Lightningはデフォルトで必要なだけのCPUリソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他のTiDBコンポーネント（たとえば`tikv-server` ）と一緒に単一のサーバーにデプロイしてから、 TiDB LightningからのCPU使用率を制限するように`region-concurrency`を構成できます。通常、サイズは論理CPUの75％に設定できます。
 
-**メモリとCPU** ：TiDB Lightningは大量のリソースを消費するため、64GiBを超えるメモリと32を超えるCPUコアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPUコアとメモリ（GiB）の比率が1：2より大きいことを確認してください。
+**メモリとCPU** ： TiDB Lightningは大量のリソースを消費するため、64GiBを超えるメモリと32を超えるCPUコアを割り当てることをお勧めします。最高のパフォーマンスを得るには、CPUコアとメモリ（GiB）の比率が1：2より大きいことを確認してください。
 
 **ディスク容量**：
 
 -   Dumplingには、データソース全体を格納できる（またはエクスポートするすべてのアップストリームテーブルを格納できる）ディスクスペースが必要です。 SSDをお勧めします。必要なスペースを計算するには、 [ダウンストリームストレージスペースの要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)を参照してください。
--   インポート中、TiDB Lightningには、ソートされたキーと値のペアを格納するための一時的なスペースが必要です。ディスク容量は、データソースからの最大の単一テーブルを保持するのに十分である必要があります。
+-   インポート中、 TiDB Lightningには、ソートされたキーと値のペアを格納するための一時的なスペースが必要です。ディスク容量は、データソースからの最大の単一テーブルを保持するのに十分である必要があります。
 -   フルデータボリュームが大きい場合は、アップストリームでのbinlogストレージ時間を増やすことができます。これは、インクリメンタルレプリケーション中にbinlogが失われないようにするためです。
 
 **注**：MySQLからDumplingによってエクスポートされた正確なデータ量を計算することは困難ですが、次のSQLステートメントを使用して`information_schema.tables`テーブルの`data-length`フィールドを要約することにより、データ量を見積もることができます。
@@ -80,7 +80,7 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     `${data-path}`に、エクスポートされたすべてのアップストリームテーブルを格納するスペースがあることを確認してください。必要なスペースを計算するには、 [ダウンストリームストレージスペースの要件](/tidb-lightning/tidb-lightning-requirements.md#downstream-storage-space-requirements)を参照してください。すべてのスペースを消費する大きなテーブルによってエクスポートが中断されないようにするには、 `-F`オプションを使用して単一ファイルのサイズを制限することを強くお勧めします。
 
-2.  `${data-path}`ディレクトリの`metadata`ファイルを表示します。これは、餃子で生成されたメタデータファイルです。手順3の増分レプリケーションに必要なbinlog位置情報を記録します。
+2.  `${data-path}`ディレクトリの`metadata`ファイルをビューします。これは、餃子で生成されたメタデータファイルです。手順3の増分レプリケーションに必要なbinlog位置情報を記録します。
 
     ```
     SHOW MASTER STATUS:
@@ -122,11 +122,11 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
-    TiDB Lightning構成の詳細については、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+    TiDB Lightning構成の詳細については、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 2.  `tidb-lightning`を実行してインポートを開始します。コマンドラインで直接プログラムを起動すると、SIGHUP信号を受信した後、プロセスが予期せず終了する場合があります。この場合、 `nohup`または`screen`ツールを使用してプログラムを実行することをお勧めします。例えば：
 
-    S3からデータをインポートする場合は、S3ストレージパスにアクセスできるSecretKeyとAccessKeyを環境変数としてTiDBLightningノードに渡します。 `~/.aws/credentials`からクレデンシャルを読み取ることもできます。
+    S3からデータをインポートする場合は、S3ストレージパスにアクセスできるSecretKeyとAccessKeyを環境変数としてTiDB Lightningノードに渡します。 `~/.aws/credentials`からクレデンシャルを読み取ることもできます。
 
     {{< copyable "" >}}
 
@@ -140,13 +140,13 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     -   `grep`ログのキーワード`progress` 。進行状況は、デフォルトで5分ごとに更新されます。
     -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
-    -   [TiDBLightningWebインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
+    -   [TiDB Lightningインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
 4.  TiDB Lightningがインポートを完了すると、自動的に終了します。ログ印刷`the whole procedure completed`の最後の5行が見つかった場合、インポートは成功しています。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、TiDB Lightningが正常に終了することを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了することを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
 インポートが失敗した場合、トラブルシューティングについては[TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
@@ -246,10 +246,10 @@ SELECT table_name,table_schema,SUM(data_length)/1024/1024 AS data_length,SUM(ind
 
     上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-    | パラメータ           | 説明                                                           |
-    | --------------- | ------------------------------------------------------------ |
-    | `--master-addr` | `dmctl`が接続されるクラスタのDMマスターの{advertise-addr}例：172.16.10.71：8261 |
-    | `start-task`    | 移行タスクを開始します。                                                 |
+    | パラメータ           | 説明                                                              |
+    | --------------- | --------------------------------------------------------------- |
+    | `--master-addr` | `dmctl`が接続されるクラスタの任意のDMマスターの{advertise-addr}例：172.16.10.71：8261 |
+    | `start-task`    | 移行タスクを開始します。                                                    |
 
     タスクの開始に失敗した場合は、プロンプトメッセージを確認し、構成を修正してください。その後、上記のコマンドを再実行してタスクを開始できます。
 
@@ -271,7 +271,7 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 移行タスクの履歴ステータスおよびその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUPを使用してDMをデプロイしたときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合は、デプロイメント中に指定したIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
+TiUPを使用してDMをデプロイしたときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合は、デプロイメント中に指定されたIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
 
 DMの実行中、DM-worker、DM-master、およびdmctlは、関連情報をログに出力します。これらのコンポーネントのログディレクトリは次のとおりです。
 

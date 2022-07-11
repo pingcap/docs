@@ -7,13 +7,13 @@ summary: Learn about some FAQs and the solutions during and after upgrading TiDB
 
 このドキュメントでは、TiDBをアップグレードするときまたはアップグレードした後のいくつかのFAQとその解決策を紹介します。
 
-## アップグレードに関するよくある質問 {#upgrade-faqs}
+## アップグレードに関するFAQ {#upgrade-faqs}
 
 このセクションでは、TiDBをアップグレードする際のいくつかのFAQとその解決策を示します。
 
 ### ローリングアップデートの効果は何ですか？ {#what-are-the-effects-of-rolling-updates}
 
-ローリング更新をTiDBサービスに適用すると、実行中のアプリケーションはさまざまな程度で影響を受けます。したがって、ビジネスのピーク時にローリング更新を実行することはお勧めしません。最小クラスタトポロジ（TiDB * 2、PD * 3、TiKV * 3）を構成する必要があります。ポンプまたはドレイナーサービスがクラスタに含まれている場合は、更新をローリングする前にドレイナーを停止することをお勧めします。 TiDBをアップグレードすると、Pumpもアップグレードされます。
+ローリング更新をTiDBサービスに適用すると、実行中のアプリケーションはさまざまな程度で影響を受けます。したがって、ビジネスのピーク時にローリング更新を実行することはお勧めしません。最小クラスタトポロジ（TiDB * 2、PD * 3、TiKV * 3）を構成する必要があります。PumpまたはDrainerサービスがクラスタに含まれている場合は、更新をローリングする前にDrainerを停止することをお勧めします。 TiDBをアップグレードすると、 Pumpもアップグレードされます。
 
 ### DDL実行中にTiDBクラスタをアップグレードできますか？ {#can-i-upgrade-the-tidb-cluster-during-the-ddl-execution}
 
@@ -27,7 +27,7 @@ DDLステートメントがクラスタで実行されているときは**TiDB**
 
 バイナリを使用してTiDBをアップグレードすることはお勧めしません。代わりに、バージョンの一貫性と互換性の両方を保証する[TiUPを使用してTiDBをアップグレードする](/upgrade-tidb-using-tiup.md)または[KubernetesでTiDBクラスタをアップグレードする](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)にすることをお勧めします。
 
-## アップグレード後のよくある質問 {#after-upgrade-faqs}
+## アップグレード後のFAQ {#after-upgrade-faqs}
 
 このセクションでは、TiDBをアップグレードした後のいくつかのFAQとその解決策を示します。
 
@@ -215,7 +215,7 @@ alter table t change column a a varchar(22) character set utf8;
     alter table t convert to character set utf8mb4;
     ```
 
--   問題＃1で行ったように列文字セットを指定して、元の列文字セット（UTF8MB4）との一貫性を保つこともできます。
+-   問題＃1で行ったように列の文字セットを指定して、元の列の文字セット（UTF8MB4）との一貫性を保つこともできます。
 
     {{< copyable "" >}}
 

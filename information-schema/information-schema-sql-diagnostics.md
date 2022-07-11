@@ -15,7 +15,7 @@ SQL診断システムには次の利点があります。
 
 -   システム全体のすべてのコンポーネントからの情報を統合します。
 -   これは、システムテーブルを介して上位層への一貫したインターフェイスを提供します。
--   監視の要約と自動診断を提供します。
+-   監視の概要と自動診断を提供します。
 -   クラスタ情報の照会が簡単になります。
 
 ## 概要 {#overview}
@@ -34,7 +34,7 @@ SQL診断システムは、次の3つの主要部分で構成されています�
 
 -   クラスタトポロジテーブル[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)から、クラスタの現在のトポロジ情報、各インスタンスのバージョン、バージョンに対応するGitハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時刻を取得できます。
 -   クラスタ構成テーブル[`information_schema.cluster_config`](/information-schema/information-schema-cluster-config.md)から、クラスタ内のすべてのインスタンスの構成を取得できます。 4.0より前のバージョンの場合、これらの構成情報を取得するには、各インスタンスのHTTPAPIに1つずつアクセスする必要があります。
--   クラスタハードウェアテーブル[`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md)で、クラスタハードウェア情報をすばやくクエリできます。
+-   クラスタハードウェアテーブル[`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md)で、クラスタハードウェア情報をすばやく照会できます。
 -   クラスタ負荷テーブル[`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md)では、クラスタのさまざまなインスタンスとハードウェアタイプの負荷情報を照会できます。
 -   カーネルパラメータテーブル[`information_schema.cluster_systeminfo`](/information-schema/information-schema-cluster-systeminfo.md)で、クラスタのさまざまなインスタンスのカーネル構成情報をクエリできます。現在、TiDBはsysctl情報のクエリをサポートしています。
 -   クラスタログテーブル[`information_schema.cluster_log`](/information-schema/information-schema-cluster-log.md)で、クラスタログをクエリできます。クエリ条件を各インスタンスにプッシュダウンすることにより、クラスタのパフォーマンスに対するクエリの影響は、 `grep`コマンドの影響よりも少なくなります。

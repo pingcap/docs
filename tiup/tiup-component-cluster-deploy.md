@@ -58,7 +58,7 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -h、-help {#h-help}
 
--   ヘルプ情報を印刷します。
+-   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -66,4 +66,4 @@ tiup cluster deploy <cluster-name> <version> <topology.yaml> [flags]
 
 展開ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

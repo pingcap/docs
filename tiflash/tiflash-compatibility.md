@@ -36,4 +36,4 @@ summary: Learn the TiDB features that are incompatible with TiFlash.
         Empty set (0.01 sec)
         ```
 
-        上記の例では、コンパイルから推測される`a/b`の型は、TiDBとTiFlashの両方で`Decimal(7,4)`です。 `Decimal(7,4)`によって制約され、 `a/b`の返されるタイプは`0.0000`である必要があります。 TiDBでは、 `a/b`の実行時精度は`Decimal(7,4)`よりも高いため、元のテーブルデータは`where a/b`条件でフィルタリングされません。ただし、TiFlashでは、 `a/b`の計算では結果タイプとして`Decimal(7,4)`が使用されるため、元のテーブルデータは`where a/b`条件でフィルタリングされます。
+        上記の例では、コンパイルから推測される`a/b`の型は、TiDBとTiFlashの両方で`Decimal(7,4)`です。 `Decimal(7,4)`によって制約され、 `a/b`の返されるタイプは`0.0000`である必要があります。 TiDBでは、 `a/b`の実行時精度は`Decimal(7,4)`よりも高いため、元のテーブルデータは`where a/b`条件によってフィルタリングされません。ただし、TiFlashでは、 `a/b`の計算では結果タイプとして`Decimal(7,4)`が使用されるため、元のテーブルデータは`where a/b`条件でフィルタリングされます。

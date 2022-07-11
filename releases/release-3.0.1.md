@@ -25,17 +25,17 @@ TiDB Ansibleバージョン：3.0.1
 -   ARM64アーキテクチャでのTiDBのコンパイルのサポート[＃11150](https://github.com/pingcap/tidb/pull/11150)
 -   データベースまたはテーブルの照合順序の変更をサポートしますが、データベース/テーブルの文字セットはUTF-8または[＃11086](https://github.com/pingcap/tidb/pull/11086)である必要があります。
 -   `UPDATE … SELECT`ステートメントの`SELECT`サブクエリが`UPDATE`式の列の解析に失敗し、列が誤ってプルーニングされた場合にエラーが報告される問題を修正します[＃11252](https://github.com/pingcap/tidb/pull/11252)
--   列が複数回クエリされ、ポイントクエリ中に返された結果がNULLである場合に発生するパニックの問題を修正します[＃11226](https://github.com/pingcap/tidb/pull/11226)
+-   列が複数回クエリされ、ポイントクエリ中に返された結果がNULLである場合に発生するpanicの問題を修正します[＃11226](https://github.com/pingcap/tidb/pull/11226)
 -   `RAND`関数[＃11169](https://github.com/pingcap/tidb/pull/11169)を使用するときに非スレッドセーフ`rand.Rand`によって引き起こされるデータ競合の問題を修正します
 -   SQLステートメントのメモリ使用量がしきい値を超えているが、 `oom-action="cancel"`が構成されている場合にこのステートメントの実行がキャンセルされず、返される結果が正しくないというバグを修正します[＃11004](https://github.com/pingcap/tidb/pull/11004)
 -   MemTrackerのメモリ使用量が正しくクリーンアップされなかったために`SHOW PROCESSLIST`がメモリ使用量が`0`ではないことを示す問題を修正します[＃10970](https://github.com/pingcap/tidb/pull/10970)
 -   整数と非整数を比較した結果が正しくない場合があるというバグを修正します[＃11194](https://github.com/pingcap/tidb/pull/11194)
 -   テーブルパーティションのクエリに明示的なトランザクションの述語が含まれている場合にクエリ結果が正しくないというバグを修正します[＃11196](https://github.com/pingcap/tidb/pull/11196)
--   `infoHandle`が[＃11022](https://github.com/pingcap/tidb/pull/11022)である可能性があるため、DDLジョブのパニックの問題を修正し`NULL`
+-   `infoHandle`が[＃11022](https://github.com/pingcap/tidb/pull/11022)である可能性があるため、DDLジョブのpanicの問題を修正し`NULL`
 -   クエリされた列がサブクエリで参照されておらず、ネストされた集計クエリを実行すると誤ってプルーニングされるため、クエリ結果が正しくない問題を修正します[＃11020](https://github.com/pingcap/tidb/pull/11020)
 -   `Sleep`関数が時間[＃11028](https://github.com/pingcap/tidb/pull/11028)の`KILL`ステートメントに応答しない問題を修正します。
 -   `SHOW PROCESSLIST`コマンドで表示される`DB`列と`INFO`列がMySQL7と互換性がないという問題を修正し[＃11003](https://github.com/pingcap/tidb/pull/11003)
--   `skip-grant-table=true`が構成されている場合に`FLUSH PRIVILEGES`ステートメントによって引き起こされるシステムパニックの問題を修正します[＃11027](https://github.com/pingcap/tidb/pull/11027)
+-   `skip-grant-table=true`が構成されている場合に`FLUSH PRIVILEGES`ステートメントによって引き起こされるシステムpanicの問題を修正します[＃11027](https://github.com/pingcap/tidb/pull/11027)
 -   テーブルの主キーが`UNSIGNED`整数[＃11099](https://github.com/pingcap/tidb/pull/11099)の場合、 `FAST ANALYZE`によって収集された主キーの統計が正しくない問題を修正します。
 -   「無効なキー」エラーが`FAST ANALYZE`ステートメントによって報告される場合があるという問題を修正します[＃11098](https://github.com/pingcap/tidb/pull/11098)
 -   列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントによって示される精度が不完全であるという問題を修正します[＃11088](https://github.com/pingcap/tidb/pull/11088)
@@ -63,7 +63,7 @@ TiDB Ansibleバージョン：3.0.1
 
 -   PDがホットリージョン[＃1552](https://github.com/pingcap/pd/pull/1552)をスケジュールするときに、スケジュール制限が自動的に0に調整される問題を修正します。
 -   etcd [＃1596](https://github.com/pingcap/pd/pull/1596)のgRPCゲートウェイ機能を有効にするには、 `enable-grpc-gateway`の構成オプションを追加します
--   スケジューラー構成`hot-region-schedule-limit` `store-balance-rate`その他の統計を追加し[＃1601](https://github.com/pingcap/pd/pull/1601) 。
+-   スケジューラ構成に関連する`store-balance-rate`およびその他の統計を追加し[＃1601](https://github.com/pingcap/pd/pull/1601) `hot-region-schedule-limit`
 -   ホットリージョンのスケジューリング戦略を最適化し、スケジューリング中にレプリカが不足しているリージョンをスキップして、複数のレプリカが同じ[＃1609](https://github.com/pingcap/pd/pull/1609)にスケジュールされないようにします。
 -   リージョンのマージ処理ロジックを最適化し、小さいサイズのリージョンのマージを優先して、リージョンのマージを高速化することをサポートします[＃1613](https://github.com/pingcap/pd/pull/1613)
 -   一度にホットリージョンスケジューリングのデフォルト制限を64に調整して、あまりにも多くのスケジューリングタスクがシステムリソースを占有してパフォーマンスに影響を与えないようにします[＃1616](https://github.com/pingcap/pd/pull/1616)
@@ -84,7 +84,7 @@ TiDB Lightning
 ## TiDB Ansible {#tidb-ansible}
 
 -   ansibleコマンドとその`jmespath`および`jinja2`依存関係パッケージ[＃803](https://github.com/pingcap/tidb-ansible/pull/803)の事前チェック機能を追加し[＃813](https://github.com/pingcap/tidb-ansible/pull/813)
--   使用可能なディスク容量がパラメーター値[＃806](https://github.com/pingcap/tidb-ansible/pull/806)未満の場合に、Pumpに`stop-write-at-available-space`パラメーター（デフォルトでは10 GiB）を追加して、Pumpでのbinlogファイルの書き込みを停止します。
+-   使用可能なディスク容量がパラメーター値[＃806](https://github.com/pingcap/tidb-ansible/pull/806)未満の場合に、 Pumpに`stop-write-at-available-space`パラメーター（デフォルトでは10 GiB）を追加して、 Pumpでのbinlogファイルの書き込みを停止します。
 -   TiKV監視情報のI/O監視項目を更新し、新しいバージョン[＃820](https://github.com/pingcap/tidb-ansible/pull/820)の監視コンポーネントと互換性を持たせる
 -   PD監視情報を更新し、ディスクパフォーマンスダッシュボード[＃817](https://github.com/pingcap/tidb-ansible/pull/817)でディスクレイテンシが空であるという異常を修正します。
 -   TiKV詳細ダッシュボードにTitanの監視項目を追加する[＃824](https://github.com/pingcap/tidb-ansible/pull/824)

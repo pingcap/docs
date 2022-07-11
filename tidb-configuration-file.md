@@ -9,7 +9,7 @@ summary: Learn the TiDB configuration file options that are not involved in comm
 
 # TiDBConfiguration / コンフィグレーションファイル {#tidb-configuration-file}
 
-TiDB構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係しないオプションについてのみ説明します。
+TiDB構成ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの構成ファイル[`config.toml.example`](https://github.com/pingcap/tidb/blob/master/config/config.toml.example)をダウンロードして、名前を`config.toml`に変更できます。このドキュメントでは、 [コマンドラインオプション](/command-line-flags-for-tidb-configuration.md)に関係のないオプションについてのみ説明します。
 
 ### <code>split-table</code> {#code-split-table-code}
 
@@ -33,7 +33,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>tmp-storage-path</code> {#code-tmp-storage-path-code}
 
--   単一のSQLステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリクォータを超えた場合に、一部のオペレータの一時ストレージパスを指定します。
+-   単一のSQLステートメントがシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)で指定されたメモリー割り当てを超えた場合に、一部のオペレーターの一時記憶域パスを指定します。
 -   デフォルト値： `<temporary directory of OS>/<OS user ID>_tidb/MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=/tmp-storage` 。 `MC4wLjAuMDo0MDAwLzAuMC4wLjA6MTAwODA=`は`<host>:<port>/<statusHost>:<statusPort>`の`Base64`エンコード結果です。
 -   この構成は、 `oom-use-tmp-storage`が`true`の場合にのみ有効になります。
 
@@ -115,7 +115,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 -   新しく作成されたインデックスの最大許容長を設定します。
 -   デフォルト値： `3072`
 -   単位：バイト
--   現在、有効な値の範囲は`[3072, 3072*4]`です。 MySQLとTiDB（バージョン&lt;v3.0.11）にはこの構成項目はありませんが、どちらも新しく作成されたインデックスの長さを制限します。 MySQLのこの制限は`3072`です。 TiDB（バージョン= &lt;3.0.7）では、この制限は`3072*4`です。 TiDB（3.0.7 &lt;バージョン&lt;3.0.11）では、この制限は`3072`です。この構成は、MySQLおよび以前のバージョンのTiDBと互換性があるように追加されています。
+-   現在、有効な値の範囲は`[3072, 3072*4]`です。 MySQLとTiDB（バージョン&lt;v3.0.11）にはこの構成アイテムはありませんが、どちらも新しく作成されたインデックスの長さを制限します。 MySQLのこの制限は`3072`です。 TiDB（バージョン= &lt;3.0.7）では、この制限は`3072*4`です。 TiDB（3.0.7 &lt;バージョン&lt;3.0.11）では、この制限は`3072`です。この構成は、MySQLおよび以前のバージョンのTiDBと互換性があるように追加されています。
 
 ### <code>table-column-count-limit</code> <span class="version-mark">limitv5.0の新機能</span> {#code-table-column-count-limit-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -198,7 +198,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 -   低速クエリログのファイル名。
 -   デフォルト値： `tidb-slow.log`
 -   スローログのフォーマットはTiDBv2.1.8で更新されているため、スローログは個別にスローログファイルに出力されます。 v2.1.8より前のバージョンでは、この変数はデフォルトで「」に設定されています。
--   設定後、スロークエリログが別途このファイルに出力されます。
+-   設定後、低速クエリログがこのファイルに個別に出力されます。
 
 ### <code>slow-threshold</code> {#code-slow-threshold-code}
 
@@ -338,7 +338,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>max-txn-ttl</code> {#code-max-txn-ttl-code}
 
--   1つのトランザクションがロックを保持できる最長の時間。この時間を超えると、トランザクションのロックが他のトランザクションによってクリアされ、このトランザクションを正常にコミットできなくなる可能性があります。
+-   1つのトランザクションがロックを保持できる最長時間。この時間を超えると、トランザクションのロックが他のトランザクションによってクリアされ、このトランザクションを正常にコミットできなくなる可能性があります。
 -   デフォルト値： `3600000`
 -   単位：ミリ秒
 -   この時間より長くロックを保持するトランザクションは、コミットまたはロールバックすることしかできません。コミットが成功しない可能性があります。
@@ -360,7 +360,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 -   TiDBでの単一トランザクションのサイズ制限。
 -   デフォルト値： `104857600` （バイト単位）
--   1つのトランザクションでは、Key-Valueレコードの合計サイズがこの値を超えることはできません。このパラメーターの最大値は`1099511627776` （1 TB）です。 binlogを使用してダウンストリームコンシューマーKafka（ `arbiter`クラスタなど）にサービスを提供した場合、このパラメーターの値は`1073741824` （1 GB）以下でなければならないことに注意してください。これは、Kafkaが処理できる単一のメッセージサイズの上限が1GBであるためです。それ以外の場合、この制限を超えるとエラーが返されます。
+-   1つのトランザクションで、Key-Valueレコードの合計サイズがこの値を超えることはできません。このパラメーターの最大値は`1099511627776` （1 TB）です。 binlogを使用してダウンストリームコンシューマーKafka（ `arbiter`クラスタなど）にサービスを提供した場合、このパラメーターの値は`1073741824` （1 GB）以下でなければならないことに注意してください。これは、Kafkaが処理できる単一のメッセージサイズの上限が1GBであるためです。それ以外の場合、この制限を超えるとエラーが返されます。
 
 ### <code>tcp-keep-alive</code> {#code-tcp-keep-alive-code}
 
@@ -387,7 +387,7 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
     -   `stats-lease`の間隔で、TiDBはメモリにロードする必要のある列統計をチェックします。
     -   `200 * stats-lease`の間隔で、TiDBはメモリにキャッシュされたフィードバックをシステムテーブルに書き込みます。
     -   `5 * stats-lease`の間隔で、TiDBはシステムテーブルのフィードバックを読み取り、メモリにキャッシュされている統計を更新します。
--   `stats-lease`が0に設定されている場合、TiDBはシステムテーブルのフィードバックを定期的に読み取り、メモリにキャッシュされている統計を3秒ごとに更新します。ただし、TiDBは、次の統計関連のシステムテーブルを自動的に変更しなくなりました。
+-   `stats-lease`が0に設定されている場合、TiDBはシステムテーブルのフィードバックを定期的に読み取り、3秒ごとにメモリにキャッシュされている統計を更新します。ただし、TiDBは、次の統計関連のシステムテーブルを自動的に変更しなくなりました。
     -   `mysql.stats_meta` ：TiDBは、トランザクションによって変更されたテーブル行の数を自動的に記録し、このシステムテーブルに更新しなくなりました。
     -   `mysql.stats_top_n` `mysql.stats_buckets` `mysql.stats_histograms`は、統計を自動的に分析してプロアクティブに更新しなくなりました。
     -   `mysql.stats_feedback` ：TiDBは、クエリされたデータによって返された統計の一部に従って、テーブルとインデックスの統計を更新しなくなりました。
@@ -510,12 +510,12 @@ opentracing.reporterに関連するConfiguration / コンフィグレーショ�
 
 ### <code>queue-size</code> {#code-queue-size-code}
 
--   レポーターがメモリ内で記録するキューサイズ。
+-   レポーターが記録するキューのサイズは、メモリにまたがっています。
 -   デフォルト値： `0`
 
 ### <code>buffer-flush-interval</code> {#code-buffer-flush-interval-code}
 
--   レポーターがメモリ内のスパンをストレージにフラッシュする間隔。
+-   レポーターがメモリー内のスパンをストレージにフラッシュする間隔。
 -   デフォルト値： `0`
 
 ### <code>log-spans</code> {#code-log-spans-code}
@@ -528,7 +528,7 @@ opentracing.reporterに関連するConfiguration / コンフィグレーショ�
 -   レポーターが送信するアドレスは、jaeger-agentにまたがっています。
 -   デフォルト値： `""`
 
-## tikv-client {#tikv-client}
+## tikv-クライアント {#tikv-client}
 
 ### <code>grpc-connection-count</code> {#code-grpc-connection-count-code}
 
@@ -557,7 +557,7 @@ opentracing.reporterに関連するConfiguration / コンフィグレーショ�
 
 -   トランザクションコミットを実行するときの最大タイムアウト。
 -   デフォルト値： `41s`
--   この値は、ラフト選挙タイムアウトの2倍より大きく設定する必要があります。
+-   この値は、Raft選挙タイムアウトの2倍より大きく設定する必要があります。
 
 ### <code>max-batch-size</code> {#code-max-batch-size-code}
 
@@ -608,7 +608,7 @@ opentracing.reporterに関連するConfiguration / コンフィグレーショ�
 
 ## binlog {#binlog}
 
-TiDBBinlogに関連する構成。
+Binlogに関連する構成。
 
 ### <code>enable</code> {#code-enable-code}
 
@@ -634,7 +634,7 @@ TiDBBinlogに関連する構成。
 
 ### <code>strategy</code> {#code-strategy-code}
 
--   binlogがエクスポートされるときのポンプ選択の戦略。現在、 `hash`つと`range`の方法のみがサポートされています。
+-   binlogがエクスポートされるときのPump選択の戦略。現在、 `hash`つと`range`の方法のみがサポートされています。
 -   デフォルト値： `range`
 
 ## 状態 {#status}

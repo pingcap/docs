@@ -37,24 +37,24 @@ TiDBダッシュボードの[低速クエリ]ページで、クラスタのす�
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2.png)
 
-### 列で並べ替え {#sort-by-column}
+### カラムで並べ替え {#sort-by-column}
 
 デフォルトでは、リストは**終了時間**の降順で並べ替えられます。列見出しをクリックして列で並べ替えるか、並べ替え順序を切り替えます。
 
 ![Modify sorting basis](/media/dashboard/dashboard-slow-queries-list3.png)
 
-## 実行の詳細を表示する {#view-execution-details}
+## 実行の詳細をビューする {#view-execution-details}
 
 リスト内の任意の項目をクリックして、次のような低速クエリの詳細な実行情報を表示します。
 
 -   クエリ：SQLステートメントのテキスト（下の画像の領域1を参照）。
--   計画：低速クエリの実行計画。実行プランの読み方については、 [クエリ実行プランを理解する](/explain-overview.md)を参照してください（下の画像の領域2を参照）。
+-   計画：低速クエリの実行計画。実行計画の読み方については、 [クエリ実行プランを理解する](/explain-overview.md)を参照してください（下の画像の領域2を参照）。
 -   その他のソートされたSQL実行情報（下の画像の領域3を参照）。
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1.png)
 
 アイテムの詳細情報を表示するには、 **[展開]**リンクをクリックします。 [<strong>コピー]</strong>リンクをクリックして、詳細情報をクリップボードにコピーします。
 
-対応するタブタイトルをクリックして、ソートされたさまざまなSQL実行の情報を切り替えます。
+対応するタブタイトルをクリックして、並べ替えられたさまざまなSQL実行の情報を切り替えます。
 
 ![Show different sorted execution information](/media/dashboard/dashboard-slow-queries-detail2.png)

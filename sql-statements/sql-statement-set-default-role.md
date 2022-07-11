@@ -5,7 +5,7 @@ summary: An overview of the usage of SET DEFAULT ROLE for the TiDB database.
 
 # <code>SET DEFAULT ROLE</code> {#code-set-default-role-code}
 
-このステートメントは、デフォルトでユーザーに適用される特定の役割を設定します。したがって、 `SET ROLE <rolename>`または`SET ROLE ALL`を実行しなくても、ロールに関連付けられた権限が自動的に付与されます。
+このステートメントは、デフォルトでユーザーに適用される特定のロールを設定します。したがって、 `SET ROLE <rolename>`または`SET ROLE ALL`を実行しなくても、ロールに関連付けられた権限が自動的に付与されます。
 
 ## あらすじ {#synopsis}
 
@@ -158,7 +158,7 @@ mysql> SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-`SET DEFAULT ROLE`は、ユーザーに関連付けられた役割を自動的に`GRANT`しません。 `jennifer`が付与していない役割に対して`SET DEFAULT ROLE`を実行しようとすると、次のエラーが発生します。
+`SET DEFAULT ROLE`は、ユーザーに関連付けられた役割を自動的に`GRANT`しません。 `jennifer`が付与していないロールに対して`SET DEFAULT ROLE`を実行しようとすると、次のエラーが発生します。
 
 ```sql
 mysql> SET DEFAULT ROLE analyticsteam TO jennifer;

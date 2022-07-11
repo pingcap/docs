@@ -88,8 +88,8 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 -   `DATA_TYPE` ：列のデータのタイプ。
 -   `CHARACTER_MAXIMUM_LENGTH` ：文字列列の場合、文字の最大長。
 -   `CHARACTER_OCTET_LENGTH` ：文字列列の場合、バイト単位の最大長。
--   `NUMERIC_PRECISION` ：数値型列の数値精度。
--   `NUMERIC_SCALE` ：数値型列の数値スケール。
+-   `NUMERIC_PRECISION` ：数値タイプの列の数値精度。
+-   `NUMERIC_SCALE` ：数値タイプの列の数値スケール。
 -   `DATETIME_PRECISION` ：時間タイプの列の場合、小数秒の精度。
 -   `CHARACTER_SET_NAME` ：文字列列の文字セットの名前。
 -   `COLLATION_NAME` ：文字列列の照合順序の名前。

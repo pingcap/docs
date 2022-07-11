@@ -13,7 +13,7 @@ SQLの配置ルールは、SQLインターフェイスを使用してTiKVクラ�
 
 詳細なユーザーシナリオは次のとおりです。
 
--   異なるアプリケーションの複数のデータベースをマージして、データベースのメンテナンスのコストを削減します
+-   異なるアプリケーションの複数のデータベースをマージして、データベースの保守コストを削減します
 -   重要なデータのレプリカ数を増やして、アプリケーションの可用性とデータの信頼性を向上させます
 -   新しいデータをNVMeストレージに保存し、古いデータをSSDに保存して、データのアーカイブとストレージのコストを削減します
 -   ホットスポットデータのリーダーを高性能TiKVインスタンスにスケジュールする
@@ -35,7 +35,7 @@ CREATE TABLE t2 (a INT);
 ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 ```
 
-配置ポリシーはどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるには、 `CREATE TABLE`の特権に対する追加の特権は必要ありません。
+配置ポリシーはどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるには、 `CREATE TABLE`の特権に追加の特権は必要ありません。
 
 配置ポリシーを変更するには、 [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)を使用できます。変更は、対応するポリシーが割り当てられているすべてのオブジェクトに反映されます。
 
@@ -49,7 +49,7 @@ ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 DROP PLACEMENT POLICY myplacementpolicy;
 ```
 
-## 現在の配置ルールを表示する {#view-current-placement-rules}
+## 現在の配置ルールをビューする {#view-current-placement-rules}
 
 テーブルに配置ルールが添付されている場合は、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを表示できます。使用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
 
@@ -120,8 +120,8 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 
 | オプション名           | 説明                                                                            |
 | ---------------- | ----------------------------------------------------------------------------- |
-| `PRIMARY_REGION` | いかだリーダーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                             |
-| `REGIONS`        | いかだフォロワーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                            |
+| `PRIMARY_REGION` | Raftリーダーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                            |
+| `REGIONS`        | Raftフォロワーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                           |
 | `SCHEDULE`       | フォロワーの配置をスケジュールするために使用される戦略。値のオプションは`EVEN` （デフォルト）または`MAJORITY_IN_PRIMARY`です。 |
 | `FOLLOWERS`      | フォロワーの数。たとえば、 `FOLLOWERS=2`は、データのレプリカが3つあることを意味します（フォロワー2つとリーダー1つ）。           |
 
@@ -161,7 +161,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 ### パーティションテーブルに配置を割り当てます {#assign-placement-to-a-partitioned-table}
 
-テーブルに配置オプションを割り当てることに加えて、テーブルパーティションにオプションを割り当てることもできます。例えば：
+テーブルに配置オプションを割り当てるだけでなく、テーブルパーティションにオプションを割り当てることもできます。例えば：
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=5;

@@ -104,7 +104,7 @@ TiDBバージョン：4.0.6
     -   [＃19831](https://github.com/pingcap/tidb/pull/19831)の誤ったクエリ結果を修正し`!= ALL (subq)`
     -   `enum`と`set`のタイプを変換するバグを修正します[＃19778](https://github.com/pingcap/tidb/pull/19778)
     -   `SHOW STATS_META`と[＃19760](https://github.com/pingcap/tidb/pull/19760)の特権チェックを追加し`SHOW STATS_BUCKET`
-    -   `builtinGreatestStringSig`と[＃19758](https://github.com/pingcap/tidb/pull/19758)によって引き起こされる不一致の列の長さのエラーを修正し`builtinLeastStringSig`
+    -   `builtinGreatestStringSig`と[＃19758](https://github.com/pingcap/tidb/pull/19758)によって引き起こされる不一致の列長のエラーを修正し`builtinLeastStringSig`
     -   不要なエラーや警告が発生した場合、ベクトル化された制御式はスカラー実行にフォールバックします[＃19749](https://github.com/pingcap/tidb/pull/19749)
     -   相関列のタイプが[＃19692](https://github.com/pingcap/tidb/pull/19692)の場合の`Apply`演算子のエラーを修正し`Bit`
     -   ユーザーがMySQL8.0クライアント[＃19690](https://github.com/pingcap/tidb/pull/19690)で`processlist`と`cluster_log`をクエリしたときに発生する問題を修正します
@@ -119,12 +119,12 @@ TiDBバージョン：4.0.6
     -   35に`Apply` [＃19566](https://github.com/pingcap/tidb/pull/19566)エグゼキュータがある場合のクエリエラーを修正し`IndexLookupJoin`
     -   パーティションテーブル[＃19546](https://github.com/pingcap/tidb/pull/19546)で`Apply`を`HashJoin`に変換するときの間違った結果を修正します
     -   [＃19508](https://github.com/pingcap/tidb/pull/19508)の内側に`IndexLookUp` `Apply`エグゼキュータがある場合の誤った結果を修正
-    -   ビュー[＃19491](https://github.com/pingcap/tidb/pull/19491)を使用する際の予期しないパニックを修正
+    -   ビュー[＃19491](https://github.com/pingcap/tidb/pull/19491)を使用する際の予期しないpanicを修正
     -   `anti-semi-join`クエリ[＃19477](https://github.com/pingcap/tidb/pull/19477)の誤った結果を修正します
     -   統計が削除されたときに`TopN`統計が削除されないバグを修正します[＃19465](https://github.com/pingcap/tidb/pull/19465)
     -   バッチポイント[＃19460](https://github.com/pingcap/tidb/pull/19460)の誤った使用によって引き起こされた間違った結果を修正します
     -   仮想生成された列[＃19439](https://github.com/pingcap/tidb/pull/19439)で列が`indexLookupJoin`に見つからないというバグを修正します
-    -   `select`と`update`のクエリの異なるプランがデータム[＃19403](https://github.com/pingcap/tidb/pull/19403)を比較するというエラーを修正します
+    -   `select`クエリと`update`クエリの異なるプランがデータム[＃19403](https://github.com/pingcap/tidb/pull/19403)を比較するというエラーを修正します
     -   リージョンキャッシュ[＃19362](https://github.com/pingcap/tidb/pull/19362)のTiFlash作業インデックスのデータ競合を修正
     -   `logarithm`関数が警告を表示しないバグを修正します[＃19291](https://github.com/pingcap/tidb/pull/19291)
     -   TiDBがデータをディスクに保持するときに発生する予期しないエラーを修正します[＃19272](https://github.com/pingcap/tidb/pull/19272)
@@ -133,12 +133,12 @@ TiDBバージョン：4.0.6
     -   テーブルendKeyとRegionendKeyが同じ場合にTiDBが`no regions`エラーを返す問題を修正します[＃19895](https://github.com/pingcap/tidb/pull/19895)
     -   パーティション[＃19891](https://github.com/pingcap/tidb/pull/19891)の変更の予期しない成功を修正
     -   プッシュダウン式で許可されるデフォルトの最大パケット長の誤った値を修正します[＃19876](https://github.com/pingcap/tidb/pull/19876)
-    -   `ENUM`列の`Max` [＃19869](https://github.com/pingcap/tidb/pull/19869)の誤った動作を修正し`Min` `SET`
+    -   `ENUM`列の`Max`関数の[＃19869](https://github.com/pingcap/tidb/pull/19869)た動作を修正し`Min` `SET`
     -   一部のTiFlashノードがオフラインの場合の`tiflash_segments`および`tiflash_tables`システムテーブルからの読み取りエラーを修正します[＃19748](https://github.com/pingcap/tidb/pull/19748)
     -   `Count(col)`集計関数[＃19628](https://github.com/pingcap/tidb/pull/19628)の間違った結果を修正します
     -   `TRUNCATE`操作の実行時エラーを修正します[＃19445](https://github.com/pingcap/tidb/pull/19445)
     -   `Var`に大文字の文字が含まれている場合に`PREPARE statement FROM @Var`が失敗する問題を修正します[＃19378](https://github.com/pingcap/tidb/pull/19378)
-    -   大文字のスキーマでスキーマ文字セットを変更するとパニックが発生するバグを修正します[＃19302](https://github.com/pingcap/tidb/pull/19302)
+    -   大文字のスキーマでスキーマ文字セットを変更するとpanicが発生するバグを修正します[＃19302](https://github.com/pingcap/tidb/pull/19302)
     -   情報に[＃19159](https://github.com/pingcap/tidb/pull/19159)が含まれている場合に、 `information_schema.statements_summary`と`explain`の間の計画の不整合を修正し`tikv/tiflash` 。
     -   ファイルが[＃19725](https://github.com/pingcap/tidb/pull/19725)の間存在しないというテストのエラーを修正し`select into outfile`
     -   `INFORMATION_SCHEMA.CLUSTER_HARDWARE`にRAIDデバイス情報がないという問題を修正します[＃19457](https://github.com/pingcap/tidb/pull/19457)
@@ -151,7 +151,7 @@ TiDBバージョン：4.0.6
 
     -   照合順序が有効になっている場合の非インデックス列の推定エラーを修正します[＃8620](https://github.com/tikv/tikv/pull/8620)
     -   リージョン転送[＃8460](https://github.com/tikv/tikv/pull/8460)のプロセス中にGreenGCがロックを見逃す可能性がある問題を修正します
-    -   Raftメンバーシップの変更中にTiKVの実行が非常に遅い場合に発生するパニックの問題を修正します[＃8497](https://github.com/tikv/tikv/pull/8497)
+    -   Raftメンバーシップの変更中にTiKVの実行が非常に遅い場合に発生するpanicの問題を修正します[＃8497](https://github.com/tikv/tikv/pull/8497)
     -   PD同期要求を呼び出すときにPDクライアントスレッドと他のスレッドの間で発生するデッドロックの問題を修正します[＃8612](https://github.com/tikv/tikv/pull/8612)
     -   jemallocをv5.2.1にアップグレードして、巨大なページ[＃8463](https://github.com/tikv/tikv/pull/8463)のメモリ割り当ての問題に対処します。
     -   長時間実行されるクエリで統合スレッドプールがハングする問題を修正します[＃8427](https://github.com/tikv/tikv/pull/8427)
@@ -178,15 +178,15 @@ TiDBバージョン：4.0.6
     -   TiCDC
 
         -   場合によってはTiCDCがメモリをリークする問題を修正します[＃942](https://github.com/pingcap/tiflow/pull/942)
-        -   TiCDCがKafkaシンク[＃912](https://github.com/pingcap/tiflow/pull/912)でパニックになる可能性がある問題を修正します
+        -   TiCDCがKafkaシンク[＃912](https://github.com/pingcap/tiflow/pull/912)でpanicになる可能性がある問題を修正します
         -   プーラー[＃927](https://github.com/pingcap/tiflow/pull/927)でCommitTまたはResolvedT（CRT）が`resolvedTs`未満になる可能性がある問題を修正します。
         -   `changefeed`がMySQLドライバー[＃936](https://github.com/pingcap/tiflow/pull/936)によってブロックされる可能性がある問題を修正します
         -   TiCDC1の誤った解決済みTs間隔を修正し[＃8573](https://github.com/tikv/tikv/pull/8573)
 
     -   バックアップと復元（BR）
 
-        -   チェックサム[＃479](https://github.com/pingcap/br/pull/479)中に発生する可能性のあるパニックを修正する
-        -   PDリーダー[＃496](https://github.com/pingcap/br/pull/496)の変更後に発生する可能性のあるパニックを修正します
+        -   チェックサム[＃479](https://github.com/pingcap/br/pull/479)中に発生する可能性のあるpanicを修正する
+        -   PDリーダー[＃496](https://github.com/pingcap/br/pull/496)の変更後に発生する可能性のあるpanicを修正します
 
     -   Dumpling
 
@@ -195,4 +195,4 @@ TiDBバージョン：4.0.6
     -   TiDB Lightning
 
         -   書き込みと取り込みのすべての失敗した操作が誤って成功として表示される問題を修正します[＃381](https://github.com/pingcap/tidb-lightning/pull/381)
-        -   TiDBLightningが終了する前に一部のチェックポイント更新がデータベースに書き込まれない可能性がある問題を修正します[＃386](https://github.com/pingcap/tidb-lightning/pull/386)
+        -   TiDB Lightningが終了する前に一部のチェックポイント更新がデータベースに書き込まれない可能性がある問題を修正します[＃386](https://github.com/pingcap/tidb-lightning/pull/386)

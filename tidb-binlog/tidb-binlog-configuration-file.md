@@ -3,13 +3,13 @@ title: TiDB Binlog Configuration File
 summary: Learn the configuration items of TiDB Binlog.
 ---
 
-# TiDBBinlogConfiguration / コンフィグレーションファイル {#tidb-binlog-configuration-file}
+# BinlogConfiguration / コンフィグレーションファイル {#tidb-binlog-configuration-file}
 
-このドキュメントでは、TiDBBinlogの構成項目を紹介します。
+このドキュメントでは、 Binlogの構成項目を紹介します。
 
-## ポンプ {#pump}
+## Pump {#pump}
 
-このセクションでは、Pumpの構成項目を紹介します。完全なポンプ構成ファイルの例については、 [ポンプConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
+このセクションでは、 Pumpの構成項目を紹介します。完全なPump構成ファイルの例については、 [PumpConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/pump/pump.toml)を参照してください。
 
 ### addr {#addr}
 
@@ -63,7 +63,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ### node-id {#node-id}
 
--   ポンプノードIDを指定します。このIDを使用すると、このポンププロセスをクラスタで識別できます。
+-   PumpノードIDを指定します。このIDを使用すると、このPumpプロセスをクラスタで識別できます。
 -   デフォルト値： `hostname:port number` 。たとえば、 `node-1:8250` 。
 
 ### 安全 {#security}
@@ -106,12 +106,12 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### stop-write-at-available-space {#stop-write-at-available-space}
 
--   使用可能なストレージスペースがこの指定された値を下回ると、Binlog書き込み要求は受け入れられなくなります。 `900 MB`などの形式を使用して、 `12 GiB`スペースを指定でき`5 GB` 。クラスタに複数のPumpノードがある場合、スペースが不足しているためにPumpノードが書き込み要求を拒否すると、TiDBは自動的に他のPumpノードにbinlogを書き込みます。
+-   使用可能なストレージ容量がこの指定された値を下回ると、 Binlog書き込み要求は受け入れられなくなります。 `900 MB`などの形式を使用して、 `12 GiB`スペースを指定でき`5 GB` 。クラスタに複数のPumpノードがある場合、スペースが不足しているためにPumpノードが書き込み要求を拒否すると、TiDBは自動的に他のPumpノードにbinlogを書き込みます。
 -   デフォルト値： `10 GiB`
 
 #### kv {#kv}
 
-現在、Pumpのストレージは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel構成を調整するために使用される`kv`のサブグループもあります。サポートされている構成項目は次のとおりです。
+現在、 Pumpのストレージは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel構成を調整するために使用される`kv`のサブグループもあります。サポートされている構成項目は次のとおりです。
 
 -   ブロックキャッシュ容量
 -   block-restart-interval
@@ -126,9 +126,9 @@ summary: Learn the configuration items of TiDB Binlog.
 
 上記の項目の詳細については、 [GoLevelDBドキュメント](https://godoc.org/github.com/syndtr/goleveldb/leveldb/opt#Options)を参照してください。
 
-## ドレイナー {#drainer}
+## Drainer {#drainer}
 
-このセクションでは、Drainerの構成項目を紹介します。完全なDrainer構成ファイルの例については、 [ドレイナーConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
+このセクションでは、 Drainerの構成項目を紹介します。完全なDrainer構成ファイルの例については、 [DrainerConfiguration / コンフィグレーション](https://github.com/pingcap/tidb-binlog/blob/master/cmd/drainer/drainer.toml)を参照してください。
 
 ### addr {#addr}
 
@@ -152,7 +152,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ### node-id {#node-id}
 
--   ドレイナーノードIDを指定します。このIDを使用すると、このドレイナープロセスをクラスタで識別できます。
+-   DrainerノードIDを指定します。このIDを使用すると、このDrainerプロセスをクラスタで識別できます。
 -   デフォルト値： `hostname:port number` 。たとえば、 `node-1:8249` 。
 
 ### data-dir {#data-dir}
@@ -162,7 +162,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 ### 検出間隔 {#detect-interval}
 
--   PDがポンプ情報を更新する間隔（秒単位）を指定します。
+-   PDがPump情報を更新する間隔（秒単位）を指定します。
 -   デフォルト値： `5`
 
 ### pd-urls {#pd-urls}
@@ -176,17 +176,17 @@ summary: Learn the configuration items of TiDB Binlog.
 -   commit ts（コミットタイムスタンプ）は、TiDBでの[取引](/transaction-overview.md#transactions)のコミットの特定の時点です。これは、現在のトランザクションの一意のIDとして、グローバルに一意であり、PDから増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`の構成を取得できます。
     -   BRを使用する場合、BR（backupmeta）によってバックアップされたメタデータに記録されたバックアップTSから`initial-commit-ts`を取得できます。
     -   Dumplingを使用する場合、Dumpling（メタデータ）によってバックアップされたメタデータに記録されたPosから`initial-commit-ts`を取得できます。
-    -   PD制御を使用する場合、 `tso`コマンドの出力に`initial-commit-ts`が含まれます。
+    -   PD Controlを使用する場合、 `tso`コマンドの出力に`initial-commit-ts`が含まれます。
 -   デフォルト値： `-1` 。 Drainerは、開始時刻としてPDから新しいタイムスタンプを取得します。これは、レプリケーションプロセスが現在の時刻から開始されることを意味します。
 
 ### 同期チェック時間 {#synced-check-time}
 
--   HTTP APIを介して`/status`のパスにアクセスし、Drainerレプリケーションのステータスを照会できます。 `synced-check-time`は、最後に成功したレプリケーションから`synced`分、つまりレプリケーションが完了したと見なされる分数を指定します。
+-   HTTP APIを介して`/status`のパスにアクセスし、 Drainerレプリケーションのステータスを照会できます。 `synced-check-time`は、最後に成功したレプリケーションから`synced`分、つまりレプリケーションが完了したと見なされる分数を指定します。
 -   デフォルト値： `5`
 
 ### コンプレッサー {#compressor}
 
--   ポンプとドレイナー間のデータ転送に使用される圧縮アルゴリズムを指定します。現在、 `gzip`のアルゴリズムのみがサポートされています。
+-   PumpとDrainer間のデータ転送に使用される圧縮アルゴリズムを指定します。現在、 `gzip`のアルゴリズムのみがサポートされています。
 -   デフォルト値： &quot;&quot;、これは圧縮なしを意味します。
 
 ### 安全 {#security}
@@ -298,7 +298,7 @@ tbl-name = "~^a.*"
 
 #### セーフモード {#safe-mode}
 
-セーフモードが有効になっている場合、Drainerはレプリケーションの更新を次のように変更します。
+セーフモードが有効になっている場合、 Drainerはレプリケーションの更新を次のように変更します。
 
 -   `Insert`は`Replace Into`に変更されます
 -   `Update`は`Delete`プラス`Replace Into`に変更されます
@@ -313,10 +313,10 @@ tbl-name = "~^a.*"
 
 次の構成項目は、ダウンストリームデータベースへの接続に関連しています。
 
--   `host` ：この項目が設定されていない場合、TiDBBinlogはデフォルトで`localhost`である`MYSQL_HOST`環境変数をチェックしようとします。
--   `port` ：この項目が設定されていない場合、TiDBBinlogはデフォルトで`3306`である`MYSQL_PORT`環境変数をチェックしようとします。
--   `user` ：この項目が設定されていない場合、TiDBBinlogはデフォルトで`root`である`MYSQL_USER`環境変数をチェックしようとします。
--   `password` ：この項目が設定されていない場合、TiDBBinlogはデフォルトで`""`である`MYSQL_PSWD`環境変数をチェックしようとします。
+-   `host` ：この項目が設定されていない場合、 Binlogはデフォルトで`localhost`である`MYSQL_HOST`環境変数をチェックしようとします。
+-   `port` ：この項目が設定されていない場合、 Binlogはデフォルトで`3306`である`MYSQL_PORT`環境変数をチェックしようとします。
+-   `user` ：この項目が設定されていない場合、 Binlogはデフォルトで`root`である`MYSQL_USER`環境変数をチェックしようとします。
+-   `password` ：この項目が設定されていない場合、 Binlogはデフォルトで`""`である`MYSQL_PSWD`環境変数をチェックしようとします。
 
 #### ファイル {#file}
 

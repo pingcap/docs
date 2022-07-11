@@ -3,7 +3,7 @@ title: EXPLAIN ANALYZE | TiDB SQL Statement Reference
 summary: An overview of the usage of EXPLAIN ANALYZE for the TiDB database.
 ---
 
-# 説明分析 {#explain-analyze}
+# EXPLAIN分析 {#explain-analyze}
 
 `EXPLAIN ANALYZE`ステートメントは`EXPLAIN`と同様に機能しますが、主な違いは、実際にステートメントを実行することです。これにより、クエリプランニングの一部として使用される見積もりを、実行中に検出された実際の値と比較できます。見積もりが実際の値と大幅に異なる場合は、影響を受けるテーブルで`ANALYZE TABLE`を実行することを検討する必要があります。
 
@@ -31,7 +31,7 @@ ExplainableStmt ::=
 |   UnionStmt
 ```
 
-## EXPLAINANALYZE出力フォーマット {#explain-analyze-output-format}
+## EXPLAIN出力フォーマット {#explain-analyze-output-format}
 
 `EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`は対応するSQLステートメントを実行し、その実行時情報を記録して、実行プランと一緒に情報を返します。したがって、 `EXPLAIN ANALYZE`は`EXPLAIN`ステートメントの拡張と見なすことができます。 `EXPLAIN` （クエリ実行の`memory`用）と比較すると、 `EXPLAIN ANALYZE`の`execution info`結果には、 `actRows`などの情報の列も含まれ`disk` 。これらの列の詳細は次のとおりです。
 
@@ -174,7 +174,7 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
 
 ### IndexHashJoin {#indexhashjoin}
 
-`IndexHashJoin`演算子の実行プロセスは、 `IndexJoin`演算子の実行プロセスと同様です。 `IndexHashJoin`演算子には、1つの外部ワーカーとNつの内部ワーカーが並行して実行されますが、出力順序が外部テーブルの順序と一致することは保証されません。詳細な実行プロセスは次のとおりです。
+`IndexHashJoin`演算子の実行プロセスは、 `IndexJoin`演算子の実行プロセスと同様です。 `IndexHashJoin`オペレーターには、1つの外部ワーカーとNつの内部ワーカーが並行して実行されますが、出力順序が外部テーブルの順序と一致することは保証されません。詳細な実行プロセスは次のとおりです。
 
 1.  外部ワーカーはN個の外部行を読み取り、タスクを作成して、それを内部ワーカーチャネルに送信します。
 2.  内部ワーカーは内部ワーカーチャネルからタスクを受け取り、すべてのタスクに対して次の3つの操作を順番に実行します。外側の行からハッシュテーブルを作成しますb。ビルドキーの範囲は外側の行から取得し、内側の行をフェッチしますc。ハッシュテーブルをプローブし、結合結果を結果チャネルに送信します。注：ステップaとステップbは同時に実行されています。
@@ -245,7 +245,7 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 ```
 
 -   `prewrite` ：トランザクションの2PCコミットの`prewrite`フェーズに費やされた時間。
--   `wait_prewrite_binlog:` ：プリライトBinlogの書き込み待機にかかる時間。
+-   `wait_prewrite_binlog:` ：Binlogの書き込み待機にかかる時間。
 -   `get_commit_ts` ：トランザクションコミットタイムスタンプの取得にかかった時間。
 -   `commit` ：トランザクションの2PCコミット中に`commit`フェーズに費やされた時間。
 -   `write_keys` ：トランザクションに書き込まれた合計`keys` 。
@@ -262,6 +262,6 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 ## も参照してください {#see-also}
 
 -   [クエリ実行プランを理解する](/explain-overview.md)
--   [説明](/sql-statements/sql-statement-explain.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)
 -   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
 -   [痕跡](/sql-statements/sql-statement-trace.md)

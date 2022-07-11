@@ -3,11 +3,11 @@ title: Titan Configuration
 summary: Learn how to configure Titan.
 ---
 
-# タイタンConfiguration / コンフィグレーション {#titan-configuration}
+# TitanConfiguration / コンフィグレーション {#titan-configuration}
 
 このドキュメントでは、対応する構成アイテムを使用して[巨人](/storage-engine/titan-overview.md)を有効または無効にする方法、および関連するパラメーターとレベルマージ機能を紹介します。
 
-## タイタンを有効にする {#enable-titan}
+## Titanを有効にする {#enable-titan}
 
 TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKVインスタンスでTitanを直接有効にすることができます。次の2つの方法のいずれかを使用して、Titanを有効にできます。
 
@@ -45,15 +45,15 @@ Titanを有効にした後、RocksDBに保存されている既存のデータ�
 
 > **ノート：**
 >
-> Titanが無効になっている場合、RocksDBはTitanに移行されたデータを読み取ることができません。 Titanがすでに有効になっているTiKVインスタンスでTitanが誤って無効にされている場合（誤って`rocksdb.titan.enabled`から`false`に設定されている場合）、TiKVは起動に失敗し、 `You have disabled titan when its data directory is not empty`エラーがTiKVログに表示されます。 Titanを正しく無効にするには、 [タイタンを無効にする](#disable-titan-experimental)を参照してください。
+> Titanが無効になっている場合、RocksDBはTitanに移行されたデータを読み取ることができません。 Titanがすでに有効になっているTiKVインスタンスでTitanが誤って無効にされている場合（誤って`rocksdb.titan.enabled`から`false`に設定されている場合）、TiKVは開始に失敗し、 `You have disabled titan when its data directory is not empty`エラーがTiKVログに表示されます。 Titanを正しく無効にするには、 [Titanを無効にする](#disable-titan-experimental)を参照してください。
 
 ## パラメーター {#parameters}
 
 TiUPを使用してTitan関連のパラメータを調整するには、 [構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
--   タイタンGCスレッド数。
+-   TitanGCスレッド数。
 
-    [ **TiKVの詳細]** -&gt;[<strong>スレッドCPU</strong> ]-&gt;[ <strong>RocksDBCPU</strong> ]パネルから、Titan GCスレッドが長時間フルキャパシティーになっていることを確認した場合は、TitanGCスレッドプールのサイズを増やすことを検討してください。
+    [ **TiKVの詳細]** -&gt;[<strong>スレッドCPU</strong> ]-&gt;[ <strong>RocksDBCPU</strong> ]パネルから、Titan GCスレッドが長期間フルキャパシティーになっていることを確認した場合は、TitanGCスレッドプールのサイズを増やすことを検討してください。
 
     {{< copyable "" >}}
 
@@ -64,7 +64,7 @@ TiUPを使用してTitan関連のパラメータを調整するには、 [構成
 
 -   値のサイズのしきい値。
 
-    フォアグラウンドに書き込まれる値のサイズがしきい値よりも小さい場合、この値はRocksDBに保存されます。それ以外の場合、この値はTitanのblobファイルに保存されます。値のサイズの分布に基づいて、しきい値を大きくすると、より多くの値がRocksDBに保存され、TiKVは小さな値の読み取りでより優れたパフォーマンスを発揮します。しきい値を下げると、より多くの値がTitanに送られ、RocksDBの圧縮がさらに減少します。
+    フォアグラウンドに書き込まれる値のサイズがしきい値よりも小さい場合、この値はRocksDBに保存されます。それ以外の場合、この値はTitanのblobファイルに保存されます。値のサイズの分布に基づいて、しきい値を大きくすると、より多くの値がRocksDBに格納され、TiKVは小さな値の読み取りでより優れたパフォーマンスを発揮します。しきい値を下げると、より多くの値がTitanに送られ、RocksDBの圧縮がさらに減少します。
 
     ```toml
     [rocksdb.defaultcf.titan]
@@ -110,7 +110,7 @@ TiUPを使用してTitan関連のパラメータを調整するには、 [構成
     rate-bytes-per-sec = 0
     ```
 
-## タイタンを無効にする（実験的） {#disable-titan-experimental}
+## Titanを無効にする（実験的） {#disable-titan-experimental}
 
 Titanを無効にするには、 `rocksdb.defaultcf.titan.blob-run-mode`オプションを構成できます。 `blob-run-mode`のオプションの値は次のとおりです。
 

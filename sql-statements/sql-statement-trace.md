@@ -64,4 +64,4 @@ JSON形式のトレースは、TiDBステータスポートを介してアクセ
 
 ## も参照してください {#see-also}
 
--   [説明分析](/sql-statements/sql-statement-explain-analyze.md)
+-   [EXPLAIN分析](/sql-statements/sql-statement-explain-analyze.md)

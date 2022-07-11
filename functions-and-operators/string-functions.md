@@ -5,15 +5,15 @@ summary: Learn about the string functions in TiDB.
 
 # 文字列関数 {#string-functions}
 
-TiDBは、MySQL 5.7で使用可能な[文字列関数](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html)のほとんどと、Oracle21で使用可能な[機能](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)の一部をサポートします。
+TiDBは、 MySQL 5.7で使用可能な[文字列関数](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html)のほとんどと、Oracle21で使用可能な[関数](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlqr/SQL-Functions.html#GUID-93EC62F8-415D-4A7E-B050-5D5B2C127009)の一部をサポートします。
 
-## サポートされている機能 {#supported-functions}
+## サポートされている関数 {#supported-functions}
 
 | 名前                                                                                                                                            | 説明                                                                      |
 | :-------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- |
 | [`ASCII()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ascii)                                                     | 左端の文字の数値を返します                                                           |
 | [`BIN()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_bin)                                                         | 数値のバイナリ表現を含む文字列を返します                                                    |
-| [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_bit-length)                                           | 引数の長さをビット単位で返します                                                        |
+| [`BIT_LENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_bit-length)                                           | 引数の長さをビットで返します                                                          |
 | [`CHAR()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_char)                                                       | 渡された各整数の文字を返します                                                         |
 | [`CHAR_LENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_char-length)                                         | 引数の文字数を返す                                                               |
 | [`CHARACTER_LENGTH()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_character-length)                               | `CHAR_LENGTH()`の同義語                                                     |
@@ -52,20 +52,20 @@ TiDBは、MySQL 5.7で使用可能な[文字列関数](https://dev.mysql.com/doc
 | [`RIGHT()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_right)                                                     | 指定された右端の文字数を返します                                                        |
 | [`RLIKE`](https://dev.mysql.com/doc/refman/5.7/en/regexp.html#operator_regexp)                                                                | `REGEXP`の同義語                                                            |
 | [`RPAD()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_rpad)                                                       | 指定された回数だけ文字列を追加します                                                      |
-| [`RTRIM()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_rtrim)                                                     | 末尾のスペースを削除する                                                            |
+| [`RTRIM()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_rtrim)                                                     | 末尾のスペースを削除します                                                           |
 | [`SPACE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_space)                                                     | 指定された数のスペースの文字列を返します                                                    |
 | [`STRCMP()`](https://dev.mysql.com/doc/refman/5.7/en/string-comparison-functions.html#function_strcmp)                                        | 2つの文字列を比較する                                                             |
 | [`SUBSTR()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_substr)                                                   | 指定されたとおりに部分文字列を返します                                                     |
 | [`SUBSTRING()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_substring)                                             | 指定されたとおりに部分文字列を返します                                                     |
 | [`SUBSTRING_INDEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_substring-index)                                 | 指定された区切り文字の出現回数の前の文字列から部分文字列を返します                                       |
 | [`TO_BASE64()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_to-base64)                                             | Base-64文字列に変換された引数を返します                                                 |
-| [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690) | 文字列内の他の文字に出現するすべての文字を置き換えます。 Oracleのように、空の文字列を`NULL`として扱いません。           |
+| [`TRANSLATE()`](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRANSLATE.html#GUID-80F85ACB-092C-4CC7-91F6-B3A585E3A690) | 文字列内で出現するすべての文字を他の文字に置き換えます。 Oracleのように、空の文字列を`NULL`として扱いません。           |
 | [`TRIM()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_trim)                                                       | 先頭と末尾のスペースを削除します                                                        |
 | [`UCASE()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ucase)                                                     | `UPPER()`の同義語                                                           |
 | [`UNHEX()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_unhex)                                                     | 数値の16進表現を含む文字列を返します                                                     |
 | [`UPPER()`](https://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_upper)                                                     | 大文字に変換する                                                                |
 
-## サポートされていない機能 {#unsupported-functions}
+## サポートされていない関数 {#unsupported-functions}
 
 -   `LOAD_FILE()`
 -   `MATCH`

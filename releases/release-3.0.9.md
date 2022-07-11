@@ -21,7 +21,7 @@ TiDB Ansibleバージョン：3.0.9
 -   サーバ
     -   `auto_increment_increment`および`auto_increment_offset`のシステム変数をサポートする[＃14396](https://github.com/pingcap/tidb/pull/14396)
     -   `tidb_tikvclient_ttl_lifetime_reach_total`の監視メトリックを追加して、TTLが10分の悲観的なトランザクションの数を監視します[＃14300](https://github.com/pingcap/tidb/pull/14300)
-    -   SQLクエリの実行中にパニックが発生した場合にSQL情報をログに出力する[＃14322](https://github.com/pingcap/tidb/pull/14322)
+    -   SQLクエリの実行中にpanicが発生した場合にSQL情報をログに出力する[＃14322](https://github.com/pingcap/tidb/pull/14322)
     -   ステートメントサマリーテーブルに`plan`フィールドと`plan_digest`フィールドを追加して、実行中の`plan`フィールドと`plan`シグニチャ[＃14285](https://github.com/pingcap/tidb/pull/14285)を記録します。
     -   `stmt-summary.max-stmt-count`構成項目のデフォルト値を`100`から[＃14285](https://github.com/pingcap/tidb/pull/14285)に調整し`200` 。
     -   低速クエリテーブルに`plan_digest`フィールドを追加して、 `plan`シグニチャを記録します[＃14292](https://github.com/pingcap/tidb/pull/14292)
@@ -50,9 +50,9 @@ TiDB Ansibleバージョン：3.0.9
 ## ツール {#tools}
 
 -   TiDB Binlog
-    -   Drainer1によって出力されたbinlogプロトコルに一意のキー情報を追加し[＃862](https://github.com/pingcap/tidb-binlog/pull/862)
-    -   [＃868](https://github.com/pingcap/tidb-binlog/pull/868)のデータベース接続に暗号化されたパスワードを使用することをサポート
+    -   Drainer1によって出力されたDrainerプロトコルに一意のキー情報を追加し[＃862](https://github.com/pingcap/tidb-binlog/pull/862)
+    -   Drainerのデータベース接続に暗号化されたパスワードを使用することを[＃868](https://github.com/pingcap/tidb-binlog/pull/868)
 
 ## TiDB Ansible {#tidb-ansible}
 
--   [＃1105](https://github.com/pingcap/tidb-ansible/pull/1105)の展開を最適化するためのディレクトリの自動作成をサポート
+-   TiDB Lightningの展開を最適化するためのディレクトリの自動作成を[＃1105](https://github.com/pingcap/tidb-ansible/pull/1105)

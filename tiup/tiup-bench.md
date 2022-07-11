@@ -111,7 +111,7 @@ Flags:
     tiup bench tpcc --warehouses 4 prepare --output data
     ```
 
-6.  指定されたテーブルのCSVファイルを生成します。
+6.  指定したテーブルのCSVファイルを生成します。
 
     {{< copyable "" >}}
 

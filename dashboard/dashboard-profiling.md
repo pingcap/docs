@@ -13,7 +13,7 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 これらのパフォーマンスデータを使用して、専門家はインスタンスのCPUやメモリなどの現在のリソース消費の詳細を分析し、CPUオーバーヘッドの高さ、メモリ使用量の高さ、プロセスのストールなど、進行中の高度なパフォーマンスの問題を特定できます。
 
-プロファイリングを開始した後、TiDBダッシュボードは一定期間（デフォルトでは30秒）の現在のパフォーマンスデータを収集します。したがって、この機能は、クラスタが現在直面している進行中の問題を分析するためにのみ使用でき、履歴の問題には大きな影響を与えません。**いつでも**パフォーマンスデータを収集して分析する場合は、 [継続的なプロファイリング](/dashboard/continuous-profiling.md)を参照してください。
+プロファイリングを開始した後、TiDBダッシュボードは一定期間（デフォルトでは30秒）の現在のパフォーマンスデータを収集します。したがって、この機能は、クラスタが現在直面している進行中の問題を分析するためにのみ使用でき、過去の問題に大きな影響を与えることはありません。**いつでも**パフォーマンスデータを収集して分析する場合は、 [継続的なプロファイリング](/dashboard/continuous-profiling.md)を参照してください。
 
 ## サポートされているパフォーマンスデータ {#supported-performance-data}
 
@@ -47,9 +47,9 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 プロファイリングを開始する前に、プロファイリング期間を変更できます。この期間は、プロファイリングに必要な時間によって決定されます。デフォルトでは30秒です。 30秒の期間は、完了するのに30秒かかります。
 
-[継続的なプロファイリング](/dashboard/continuous-profiling.md)が有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、 [継続的なプロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)の最新のプロファイリング結果をクリックします。
+[継続的なプロファイリング](/dashboard/continuous-profiling.md)が有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、 [連続プロファイリングページ](/dashboard/continuous-profiling.md#access-the-page)の最新のプロファイリング結果をクリックします。
 
-## プロファイリングステータスの表示 {#view-profiling-status}
+## プロファイリングステータスのビュー {#view-profiling-status}
 
 プロファイリングが開始されると、プロファイリングのステータスと進行状況をリアルタイムで表示できます。
 
@@ -67,10 +67,10 @@ summary: Learn how to collect performance data to analyze sophisticated problems
 
 ![Single instance result](/media/dashboard/dashboard-profiling-view-single.png)
 
-## プロファイリング履歴を表示する {#view-profiling-history}
+## プロファイリング履歴をビューする {#view-profiling-history}
 
 オンデマンドのプロファイリング履歴がページに一覧表示されます。行をクリックして詳細を表示します。
 
 ![View profiling history](/media/dashboard/dashboard-profiling-history.png)
 
-プロファイリングステータスページの詳細な操作については、 [プロファイリングステータスの表示](#view-profiling-status)を参照してください。
+プロファイリングステータスページの詳細な操作については、 [プロファイリングステータスのビュー](#view-profiling-status)を参照してください。

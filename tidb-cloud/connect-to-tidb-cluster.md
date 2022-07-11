@@ -14,7 +14,7 @@ TiDBクラスタがTiDB Cloud上に作成されたら、次の3つの方法の�
 
 <!---->
 
--   [SQLシェルを介して接続する](#connect-via-sql-shell) ：TiDB SQLを試して、TiDBとMySQLの互換性をすばやくテストするか、ユーザー権限を管理します
+-   [SQLシェルを介して接続する](#connect-via-sql-shell) ： TiDB SQLを試して、TiDBとMySQLの互換性をすばやくテストするか、ユーザー権限を管理します
 
 ## 標準接続で接続する {#connect-via-standard-connection}
 

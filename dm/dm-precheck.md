@@ -62,7 +62,7 @@ tiup dmctl check-task ./task.yaml
 
 -   （必須）アップストリームデータベースのダンプ許可
 
-    -   INFORMATION_SCHEMAおよびダンプテーブルに対するSELECT権限
+    -   INFORMATION_SCHEMAおよびダンプ表に対するSELECT権限
     -   `consistency=flush`の場合はRELOAD権限
     -   `consistency=flush/lock`の場合、ダンプテーブルに対するLOCKTABLES権限
 
@@ -71,9 +71,9 @@ tiup dmctl check-task ./task.yaml
     -   ペシミスティックモードで、すべてのシャーディングされたテーブルのテーブルスキーマが次の項目で一貫しているかどうかを確認します。
 
         -   列の数
-        -   列名
-        -   列の順序
-        -   列タイプ
+        -   カラム名
+        -   カラムの順序
+        -   カラムタイプ
         -   主キー
         -   一意のインデックス
 

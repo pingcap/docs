@@ -15,7 +15,7 @@ summary: Learn how to troubleshoot issues you might encounter when you use TiCDC
 
 ### TiCDCレプリケーションタスクが中断されているかどうかを確認するにはどうすればよいですか？ {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
 
--   Grafanaダッシュボードでレプリケーションタスクの`changefeed checkpoint`の監視メトリックを確認します（右の`changefeed id`を選択します）。メトリック値が変更されない場合、または`checkpoint lag`メトリックが増加し続ける場合は、レプリケーションタスクが中断される可能性があります。
+-   Grafanaダッシュボードでレプリケーションタスクの`changefeed checkpoint`のモニタリングメトリックを確認します（右の`changefeed id`を選択します）。メトリック値が変更されない場合、または`checkpoint lag`メトリックが増加し続ける場合は、レプリケーションタスクが中断される可能性があります。
 -   `exit error count`の監視メトリックを確認します。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しています。
 -   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。 `stopped`はタスクが停止したことを意味し、 `error`項目は詳細なエラーメッセージを提供します。エラーが発生した後、TiCDCサーバーログで`error on running processor`を検索して、トラブルシューティングのためのエラースタックを確認できます。
 -   極端な場合には、TiCDCサービスが再起動されます。トラブルシューティングのために、TiCDCサーバーログで`FATAL`レベルのログを検索できます。
@@ -33,7 +33,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 上記のコマンドの出力で、 `admin-job-type`はこのレプリケーションタスクの状態を示しています。
 
 -   `0` ：進行中です。これは、タスクが手動で停止されていないことを意味します。
--   `1` ：一時停止。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
+-   `1` ：一時停止。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成と複製ステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
 -   `2` ：再開しました。レプリケーションタスクは`checkpoint-ts`から再開します。
 -   `3` ：削除されました。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスは、後のクエリのためにのみ保持されます。
 
@@ -66,7 +66,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 
 -   TiDBクラスタとTiCDCクラスタを最新バージョンに更新します。 OOMの問題は、 **v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョンで**はすでに解決されています。
 
-## レプリケーションタスクを作成するとき、またはデータをMySQLにレプリケートするときに、 <code>Error 1298: Unknown or incorrect time zone: &#39;UTC&#39;</code>エラーを処理するにはどうすればよいですか？ {#how-do-i-handle-the-code-error-1298-unknown-or-incorrect-time-zone-utc-code-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
+## <code>Error 1298: Unknown or incorrect time zone: &#39;UTC&#39;</code>エラーを処理するにはどうすればよいですか？ {#how-do-i-handle-the-code-error-1298-unknown-or-incorrect-time-zone-utc-code-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
 このエラーは、ダウンストリームのMySQLがタイムゾーンをロードしない場合に返されます。 [`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行すると、タイムゾーンを読み込むことができます。タイムゾーンを読み込んだ後、タスクを作成してデータを通常どおりに複製できます。
 

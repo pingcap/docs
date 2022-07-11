@@ -106,7 +106,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 データ移行のターゲットとして既存のTiDBクラスタを選択できます。
 
-テスト用のTiDBクラスタがない場合は、次のコマンドを実行して、デモンストレーション環境をすばやく構築できます。
+テスト用のTiDBクラスタがない場合は、次のコマンドを実行してデモ環境をすばやく構築できます。
 
 {{< copyable "" >}}
 

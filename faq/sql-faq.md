@@ -45,7 +45,7 @@ summary: Learn about the FAQs related to TiDB SQL.
 2 rows in set (0.00 sec)
 ```
 
-`ORDER BY`で使用されている列のリストが一意でない場合も、ステートメントは非決定的であると見なされます。次の例では、列`a`の値が重複しています。したがって、決定論的であることが保証されるのは`ORDER BY a, b`だけです。
+`ORDER BY`で使用されている列のリストが一意でない場合も、ステートメントは非決定論的であると見なされます。次の例では、列`a`の値が重複しています。したがって、決定論的であることが保証されるのは`ORDER BY a, b`だけです。
 
 ```sql
 > select * from t order by a;
@@ -75,7 +75,7 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 はい。ペシミスティックロック（TiDB v3.0以降のデフォルト）を使用する場合、 `SELECT FOR UPDATE`の実行はMySQLと同様に動作します。
 
-楽観的ロックを使用する場合、 `SELECT FOR UPDATE`はトランザクションの開始時にデータをロックしませんが、トランザクションがコミットされるときに競合をチェックします。チェックで競合が明らかになった場合、コミットしているトランザクションはロールバックします。
+楽観的ロックを使用する場合、 `SELECT FOR UPDATE`はトランザクションの開始時にデータをロックしませんが、トランザクションがコミットされるときに競合をチェックします。チェックで競合が明らかになった場合、コミットしているトランザクションはロールバックされます。
 
 ## TiDBのコーデックは、UTF-8文字列が比較可能であることを保証できますか？キーがUTF-8をサポートする必要がある場合、コーディングの提案はありますか？ {#can-the-codec-of-tidb-guarantee-that-the-utf-8-string-is-memcomparable-is-there-any-coding-suggestion-if-our-key-needs-to-support-utf-8}
 
@@ -145,7 +145,7 @@ TiDB1の表示内容は`SHOW PROCESSLIST`とほぼ同じ`SHOW PROCESSLIST` 。 `
 
 -   `HIGH_PRIORITY` ：このステートメントの優先度は高くなります。つまり、TiDBはこのステートメントを優先し、最初に実行します。
 
--   `LOW_PRIORITY` ：このステートメントの優先度は低くなります。つまり、TiDBは、実行期間中にこのステートメントの優先度を下げます。
+-   `LOW_PRIORITY` ：このステートメントの優先度は低くなります。つまり、TiDBは実行期間中にこのステートメントの優先度を下げます。
 
 上記の2つのパラメータをTiDBのDMLと組み合わせて使用できます。例えば：
 
@@ -185,11 +185,11 @@ SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_conditio
 
 TiDBは、 `schema`回を使用してSQLステートメントを処理し、オンライン非同期DDL変更をサポートします。 DMLステートメントとDDLステートメントが同時に実行される可能性があるため、各ステートメントが同じ`schema`を使用して実行されることを確認する必要があります。したがって、DML操作が進行中のDDL操作と一致すると、 `Information schema is changed`エラーが報告される場合があります。 DML操作中のエラー報告が多すぎるのを防ぐために、いくつかの改善が行われました。
 
-現在、このエラー報告にはまだいくつかの理由があります（最初の1つだけがテーブルに関連しています）。
+現在、このエラー報告にはまだいくつかの理由があります（最初の1つだけがテーブルに関連しています）：
 
 -   DML操作に関係するいくつかのテーブルは、進行中のDDL操作に関係するテーブルと同じです。
 -   DML操作は長時間続きます。この期間中に、多くのDDLステートメントが実行されたため、1024を超える`schema`バージョンの変更が発生します。 `tidb_max_delta_schema_count`変数を変更することにより、このデフォルト値を変更できます。
--   DML要求を受け入れるTiDBサーバーは、 `schema information`を長時間ロードできません（TiDBとPDまたはTiKV間の接続障害が原因である可能性があります）。この期間中に、多くのDDLステートメントが実行されたため、100を`schema`バージョン変更が発生しました。
+-   DML要求を受け入れるTiDBサーバーは、 `schema information`を長時間ロードできません（TiDBとPDまたはTiKV間の接続障害が原因である可能性があります）。この期間中に、多くのDDLステートメントが実行されたため、100を超える`schema`のバージョン変更が発生します。
 -   TiDBの再起動後、最初のDDL操作が実行される前に、DML操作が実行され、最初のDDL操作が発生します（つまり、最初のDDL操作が実行される前に、DMLに対応するトランザクションが開始されます。最初の`schema`バージョンの後DDLが変更されると、DMLに対応するトランザクションがコミットされます）、このDML操作はこのエラーを報告します。
 
 > **ノート：**
@@ -223,7 +223,7 @@ DMLステートメントを実行するときに、TiDBがDDLリース内の最�
 
 ### <code>select count(1)</code>を最適化する方法は？ {#how-to-optimize-code-select-count-1-code}
 
-`count(1)`ステートメントは、テーブル内の行の総数をカウントします。並行性の程度を改善すると、速度を大幅に向上させることができます。並行性を変更するには、 [資料](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPUとI/Oリソースにも依存します。 TiDBは、すべてのクエリでTiKVにアクセスします。データ量が少ない場合、すべてのMySQLがメモリ内にあり、TiDBはネットワークアクセスを実行する必要があります。
+`count(1)`ステートメントは、テーブル内の行の総数をカウントします。並行性の程度を改善すると、速度を大幅に向上させることができます。並行性を変更するには、 [資料](/system-variables.md#tidb_distsql_scan_concurrency)を参照してください。ただし、CPUとI/Oリソースにも依存します。 TiDBは、すべてのクエリでTiKVにアクセスします。データ量が少ない場合、すべてのMySQLはメモリ内にあり、TiDBはネットワークアクセスを実行する必要があります。
 
 推奨事項：
 
@@ -265,7 +265,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### テーブルに対して<code>analyze</code>を実行する必要があるかどうかを判断するにはどうすればよいですか？ {#how-to-determine-whether-i-need-to-execute-code-analyze-code-on-a-table}
 
-`show stats_healthy`を使用して`Healthy`フィールドを表示します。通常、フィールド値が60より小さい場合は、テーブルで`analyze`を実行する必要があります。
+`show stats_healthy`を使用して`Healthy`フィールドをビューします。通常、フィールド値が60より小さい場合は、テーブルで`analyze`を実行する必要があります。
 
 ### クエリプランがツリーとして表示される場合のIDルールとは何ですか？このツリーの実行順序は何ですか？ {#what-is-the-id-rule-when-a-query-plan-is-presented-as-a-tree-what-is-the-execution-order-for-this-tree}
 

@@ -9,7 +9,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
 -   TiDBおよびTiKV; TiDBとPD
 -   TiKVとPD
--   TiDBコントロールとTiDB; TiKVコントロールとTiKV; PD制御とPD
+-   TiDBコントロールとTiDB; TiKV ControlとTiKV; PD ControlとPD
 -   各TiKV、PD、TiDBクラスタ内の内部通信
 
 現在、一部の特定のコンポーネントの暗号化された送信のみを有効にすることはサポートされていません。
@@ -199,7 +199,7 @@ summary: Learn how to enable TLS authentication between TiDB components.
 
 ### 証明書をリロードします {#reload-certificates}
 
-証明書とキーをリロードするために、TiDB、PD、TiKV、およびすべての種類のクライアントは、新しい接続が作成されるたびに、現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
+証明書とキーを再ロードするために、TiDB、PD、TiKV、およびすべての種類のクライアントは、新しい接続が作成されるたびに、現在の証明書とキーファイルを再読み取りします。現在、CA証明書をリロードすることはできません。
 
 ## も参照してください {#see-also}
 

@@ -8,9 +8,9 @@ title: TiDB 2.1.2 Release Notes
 
 ## TiDB {#tidb}
 
--   TiDBをKafkaバージョン[＃8747](https://github.com/pingcap/tidb/pull/8747)のTiDBBinlogと互換性を持たせる
+-   BinlogをKafkaバージョン[＃8747](https://github.com/pingcap/tidb/pull/8747)のTiDBBinlogと互換性を持たせる
 -   ローリングアップデートでTiDBの終了メカニズムを改善する[＃8707](https://github.com/pingcap/tidb/pull/8707)
--   場合によっては、生成された列のインデックスを追加することによって引き起こされるパニックの問題を修正します[＃8676](https://github.com/pingcap/tidb/pull/8676)
+-   場合によっては、生成された列のインデックスを追加することによって引き起こされるpanicの問題を修正します[＃8676](https://github.com/pingcap/tidb/pull/8676)
 -   SQLステートメントに`TIDB_SMJ Hint`が存在する場合、オプティマイザーが最適なクエリプランを見つけられない場合があるという問題を修正します[＃8729](https://github.com/pingcap/tidb/pull/8729)
 -   `AntiSemiJoin`が誤った結果を返す場合があるという問題を修正します[＃8730](https://github.com/pingcap/tidb/pull/8730)
 -   `utf8`文字セット[＃8754](https://github.com/pingcap/tidb/pull/8754)の有効な文字チェックを改善します
@@ -18,12 +18,12 @@ title: TiDB 2.1.2 Release Notes
 
 ## PD {#pd}
 
--   リージョンマージ[＃1377](https://github.com/pingcap/pd/pull/1377)に関するリージョン情報の更新の問題を修正します
+-   リージョンマージ[＃1377](https://github.com/pingcap/pd/pull/1377)に関するリージョン情報の更新の問題を修正しました
 
 ## TiKV {#tikv}
 
 -   `DAY` （ `d` ）単位の構成形式をサポートし、構成の互換性の問題を修正します[＃3931](https://github.com/tikv/tikv/pull/3931)
--   `Approximate Size Split`によって引き起こされる可能性のあるパニックの問題を修正し[＃3942](https://github.com/tikv/tikv/pull/3942)
+-   `Approximate Size Split`によって引き起こされる可能性のあるpanicの問題を修正し[＃3942](https://github.com/tikv/tikv/pull/3942)
 -   リージョンマージ[＃3822](https://github.com/tikv/tikv/pull/3822)に関する2つの問題を修正し[＃3873](https://github.com/tikv/tikv/pull/3873)
 
 ## ツール {#tools}
@@ -34,4 +34,4 @@ title: TiDB 2.1.2 Release Notes
     -   チェックポイントを使用してLightningを再起動した後に`Too many open engines`が発生する問題を修正します
 -   TiDB Binlog
     -   DrainerがKafkaにデータを書き込む際のボトルネックを解消します
-    -   TiDBBinlogのKafkaバージョンをサポートする
+    -   BinlogのKafkaバージョンをサポートする

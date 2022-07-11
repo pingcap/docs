@@ -20,7 +20,7 @@ TiDB Ansibleバージョン：2.1.9
 -   主キーが符号なしタイプ[＃10209](https://github.com/pingcap/tidb/pull/10209)の場合の`MAX`関数の誤った結果の問題を修正します
 -   非厳密SQLモード[＃10254](https://github.com/pingcap/tidb/pull/10254)でNULL値がNOTNULL列に挿入される可能性がある問題を修正します。
 -   `DISTINCT` [＃10270](https://github.com/pingcap/tidb/pull/10270)に複数の列が存在する場合の、 `COUNT`関数の誤った結果の問題を修正します。
--   `LOAD DATA`が不規則なCSVファイルを解析するときに発生したパニックの問題を修正します[＃10269](https://github.com/pingcap/tidb/pull/10269)
+-   `LOAD DATA`が不規則なCSVファイルを解析するときに発生したpanicの問題を修正します[＃10269](https://github.com/pingcap/tidb/pull/10269)
 -   [＃10244](https://github.com/pingcap/tidb/pull/10244)で外部結合キータイプと内部結合キータイプが矛盾している場合のオーバーフローエラーを無視し`Index Lookup Join` 。
 -   ステートメントが誤ってポイントと判断される問題を修正します-場合によっては[＃10299](https://github.com/pingcap/tidb/pull/10299)を取得します
 -   場合によっては、タイムタイプがタイムゾーンを変換しない場合の誤った結果の問題を修正します[＃10345](https://github.com/pingcap/tidb/pull/10345)
@@ -36,7 +36,7 @@ TiDB Ansibleバージョン：2.1.9
     -   コプロセッサー関連情報の出力形式を調整して、pt-query- [＃10300](https://github.com/pingcap/tidb/pull/10300)で解析できるようにします。
     -   遅いクエリステートメントの`#`文字の問題を修正します[＃10275](https://github.com/pingcap/tidb/pull/10275)
     -   遅いクエリステートメントのメモリテーブルにいくつかの情報列を追加します[＃10317](https://github.com/pingcap/tidb/pull/10317)
-    -   トランザクションコミット時間を追加して、クエリログ[＃10310](https://github.com/pingcap/tidb/pull/10310)を遅くします
+    -   トランザクションのコミット時間を追加して、クエリログを遅くします[＃10310](https://github.com/pingcap/tidb/pull/10310)
     -   一部の時間形式がpt-query-digest1で解析できない問題を修正し[＃10323](https://github.com/pingcap/tidb/pull/10323)
 
 ## PD {#pd}
@@ -45,7 +45,7 @@ TiDB Ansibleバージョン：2.1.9
 
 ## TiKV {#tikv}
 
--   リーダー[＃4604](https://github.com/tikv/tikv/pull/4604)を転送するときに発生する可能性のあるクォーラムの変更を修正
+-   リーダー[＃4604](https://github.com/tikv/tikv/pull/4604)を転送する際の潜在的なクォーラムの変更を修正
 
 ## ツール {#tools}
 

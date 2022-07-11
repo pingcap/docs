@@ -22,7 +22,7 @@ title: TiDB 1.0.5 Release Notes
 -   ある状況下でリーダーがバランスをとるのをやめる問題を修正します。
     -   [869](https://github.com/pingcap/pd/pull/869)
     -   [874](https://github.com/pingcap/pd/pull/874)
--   [ブートストラップ中の潜在的なパニックを修正します。](https://github.com/pingcap/pd/pull/889)
+-   [ブートストラップ中の潜在的なpanicを修正します。](https://github.com/pingcap/pd/pull/889)
 
 ## TiKV {#tikv}
 

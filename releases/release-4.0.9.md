@@ -38,8 +38,8 @@ TiDBバージョン：4.0.9
 
 -   TiDB
 
-    -   等しい条件を他の条件に変換するときは、ヒューリスティックな方法で（インデックス）マージ結合を避けてください[＃21146](https://github.com/pingcap/tidb/pull/21146)
-    -   ユーザー変数の種類を区別する[＃21107](https://github.com/pingcap/tidb/pull/21107)
+    -   等しい条件を他の条件に変換するときに、ヒューリスティックな方法で（インデックス）マージ結合を回避します[＃21146](https://github.com/pingcap/tidb/pull/21146)
+    -   ユーザー変数のタイプを区別する[＃21107](https://github.com/pingcap/tidb/pull/21107)
     -   構成ファイル[＃20922](https://github.com/pingcap/tidb/pull/20922)での`GOGC`変数の設定のサポート
     -   ダンプされたバイナリ時間（ `Timestamp`および`Datetime` ）を[＃21135](https://github.com/pingcap/tidb/pull/21135)との互換性を高めます
     -   `LOCK IN SHARE MODE`構文[＃21005](https://github.com/pingcap/tidb/pull/21005)を使用するステートメントにエラーメッセージを提供します
@@ -55,7 +55,7 @@ TiDBバージョン：4.0.9
 
     -   タグを追加して、 `split`コマンドのソースをトレースします[＃8936](https://github.com/tikv/tikv/pull/8936)
     -   `pessimistic-txn.pipelined`構成の動的変更をサポート[＃9100](https://github.com/tikv/tikv/pull/9100)
-    -   Backup＆Restoreと[＃9098](https://github.com/tikv/tikv/pull/9098)を実行する際のパフォーマンスへの影響を減らす
+    -   Backup＆ [＃9098](https://github.com/tikv/tikv/pull/9098)とTiDB Lightningを実行する際のパフォーマンスへの影響を減らす
     -   取り込み中のSSTエラーの監視メトリックを追加する[＃9096](https://github.com/tikv/tikv/pull/9096)
     -   一部のピアがまだログを複製する必要があるときにリーダーが休止状態になるのを防ぐ[＃9093](https://github.com/tikv/tikv/pull/9093)
     -   パイプライン化された悲観的ロックの成功率を上げる[＃9086](https://github.com/tikv/tikv/pull/9086)
@@ -123,11 +123,11 @@ TiDBバージョン：4.0.9
 -   TiDB
 
     -   `OR`条件[＃21287](https://github.com/pingcap/tidb/pull/21287)でプレフィックスインデックスを使用した場合の誤った結果の問題を修正します。
-    -   自動再試行が有効になっているときにパニックを引き起こす可能性のあるバグを修正します[＃21285](https://github.com/pingcap/tidb/pull/21285)
+    -   自動再試行が有効になっているときにpanicを引き起こす可能性のあるバグを修正します[＃21285](https://github.com/pingcap/tidb/pull/21285)
     -   列タイプ[＃21273](https://github.com/pingcap/tidb/pull/21273)に従ってパーティション定義をチェックするときに発生するバグを修正します
     -   パーティション式の値タイプがパーティション列タイプ[＃21136](https://github.com/pingcap/tidb/pull/21136)と一致しないバグを修正します
     -   ハッシュタイプのパーティションがパーティション名が一意であるかどうかをチェックしないバグを修正します[＃21257](https://github.com/pingcap/tidb/pull/21257)
-    -   非`INT`タイプの値をハッシュ分割テーブル[＃21238](https://github.com/pingcap/tidb/pull/21238)に挿入した後に返される誤った結果を修正します
+    -   非`INT`タイプの値をハッシュパーティションテーブル[＃21238](https://github.com/pingcap/tidb/pull/21238)に挿入した後に返される誤った結果を修正します
     -   場合によっては`INSERT`ステートメントでインデックス結合を使用するときの予期しないエラーを修正します[＃21249](https://github.com/pingcap/tidb/pull/21249)
     -   `CASE WHEN`演算子の`BigInt`の符号なし列の値が`BigInt`の符号付きの値に誤って変換される問題を修正します[＃21236](https://github.com/pingcap/tidb/pull/21236)
     -   インデックスハッシュ結合とインデックスマージ結合が照合順序を考慮しないバグを修正します[＃21219](https://github.com/pingcap/tidb/pull/21219)
@@ -145,13 +145,13 @@ TiDBバージョン：4.0.9
     -   読み取りコミット分離レベルのトランザクションでインデックスマージを使用すると、結果が正しくない可能性があるという問題を修正します[＃21253](https://github.com/pingcap/tidb/pull/21253)
     -   書き込みの競合後のトランザクションの再試行によって引き起こされる自動ID割り当ての失敗を修正します[＃21079](https://github.com/pingcap/tidb/pull/21079)
     -   13を使用してJSONデータを[＃21074](https://github.com/pingcap/tidb/pull/21074)に正しくインポートできない問題を修正し`LOAD DATA`
-    -   新しく追加された`Enum`タイプの列のデフォルト値が正しくない問題を修正します[＃20998](https://github.com/pingcap/tidb/pull/20998)
+    -   新しく追加された`Enum`型列のデフォルト値が正しくない問題を修正します[＃20998](https://github.com/pingcap/tidb/pull/20998)
     -   `adddate`関数が無効な文字を挿入する問題を修正します[＃21176](https://github.com/pingcap/tidb/pull/21176)
     -   いくつかの状況で生成された間違った`PointGet`プランが間違った結果を引き起こすという問題を修正します[＃21244](https://github.com/pingcap/tidb/pull/21244)
     -   MySQL [＃20888](https://github.com/pingcap/tidb/pull/20888)と互換性があるように、 `ADD_DATE`関数の夏時間の変換を無視します
     -   末尾のスペースが`varchar`または`char`の長さの制約を超える文字列を挿入できないバグを修正します[＃21282](https://github.com/pingcap/tidb/pull/21282)
     -   `int`と`year`を比較するときに、整数を`[1, 69]`から`[2001, 2069]`または`[70, 99]`から`[1970, 1999]`に変換しない[＃21283](https://github.com/pingcap/tidb/pull/21283)を修正します。
-    -   `Double`タイプのフィールド[＃21272](https://github.com/pingcap/tidb/pull/21272)を計算するときに、 `sum()`関数のオーバーフロー結果によって引き起こされるパニックを修正します。
+    -   `Double`タイプのフィールド[＃21272](https://github.com/pingcap/tidb/pull/21272)を計算するときに、 `sum()`関数のオーバーフロー結果によって引き起こされるpanicを修正します。
     -   `DELETE`が一意キー[＃20705](https://github.com/pingcap/tidb/pull/20705)にロックを追加できないバグを修正します
     -   スナップショットの読み取りがロックキャッシュにヒットするバグを修正[＃21539](https://github.com/pingcap/tidb/pull/21539)
     -   長期間のトランザクションで大量のデータを読み取った後の潜在的なメモリリークの問題を修正します[＃21129](https://github.com/pingcap/tidb/pull/21129)
@@ -162,9 +162,9 @@ TiDBバージョン：4.0.9
 
     -   列が255を超える場合、コプロセッサーが誤った結果を返す可能性がある問題を修正します[＃9131](https://github.com/tikv/tikv/pull/9131)
     -   リージョンマージがネットワークパーティション[＃9108](https://github.com/tikv/tikv/pull/9108)の間にデータ損失を引き起こす可能性がある問題を修正します
-    -   `latin1`文字セット[＃9082](https://github.com/tikv/tikv/pull/9082)を使用すると、 `ANALYZE`ステートメントがパニックを引き起こす可能性がある問題を修正します。
+    -   `latin1`文字セット[＃9082](https://github.com/tikv/tikv/pull/9082)を使用すると、 `ANALYZE`ステートメントがpanicを引き起こす可能性がある問題を修正します。
     -   数値タイプを時間タイプ[＃9031](https://github.com/tikv/tikv/pull/9031)に変換したときに返される誤った結果を修正します
-    -   透過的データ暗号化（TDE）が有効になっている場合、TiDBLightningがインポーターバックエンドまたはローカルバックエンドを使用してSSTファイルをTiKVに取り込めないバグを修正します[＃8995](https://github.com/tikv/tikv/pull/8995)
+    -   透過的データ暗号化（TDE）が有効になっている場合、TiDBLightningがインポーターバックエンドまたはローカルバックエンドを使用してSSTファイルをTiDB Lightningに取り込めないバグを修正します[＃8995](https://github.com/tikv/tikv/pull/8995)
     -   無効な`advertise-status-addr`の値を修正します（ `0.0.0.0` ） [＃9036](https://github.com/tikv/tikv/pull/9036)
     -   コミットされたトランザクションでこのキーがロックされて削除されたときにキーが存在することを示すエラーが返される問題を修正します[＃8930](https://github.com/tikv/tikv/pull/8930)
     -   RocksDBキャッシュマッピングエラーがデータ破損を引き起こす問題を修正します[＃9029](https://github.com/tikv/tikv/pull/9029)
@@ -221,4 +221,4 @@ TiDBバージョン：4.0.9
 
         -   キーが間違ったフィールド情報を使用してエンコードされる問題を修正します[＃437](https://github.com/pingcap/tidb-lightning/pull/437)
         -   GC存続時間TTLが有効にならない問題を修正します[＃448](https://github.com/pingcap/tidb-lightning/pull/448)
-        -   ローカルバックエンドモードで実行中のTiDBLightningを手動で停止するとパニックが発生する問題を修正します[＃484](https://github.com/pingcap/tidb-lightning/pull/484)
+        -   ローカルバックエンドモードで実行中のTiDB Lightningを手動で停止するとpanicが発生する問題を修正します[＃484](https://github.com/pingcap/tidb-lightning/pull/484)

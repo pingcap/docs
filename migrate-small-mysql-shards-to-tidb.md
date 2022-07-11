@@ -5,7 +5,7 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 # 小さなデータセットのMySQLシャードをTiDBに移行およびマージする {#migrate-and-merge-mysql-shards-of-small-datasets-to-tidb}
 
-複数のMySQLデータベースインスタンスをアップストリームで1つのTiDBデータベースにダウンストリームで移行およびマージする必要があり、データ量が多すぎない場合は、DMを使用してMySQLシャードを移行できます。このドキュメントの「小さなデータセット」とは、通常、1TiB前後またはそれ未満のデータを意味します。このドキュメントの例を通じて、移行の操作手順、注意事項、およびトラブルシューティングを学ぶことができます。
+複数のMySQLデータベースインスタンスをアップストリームで1つのTiDBデータベースダウンストリームに移行およびマージする必要があり、データ量が多すぎない場合は、DMを使用してMySQLシャードを移行できます。このドキュメントの「小さなデータセット」とは、通常、1TiB前後またはそれ未満のデータを意味します。このドキュメントの例を通じて、移行の操作手順、注意事項、およびトラブルシューティングを学ぶことができます。
 
 このドキュメントは、合計1TiB未満のMySQLシャードの移行に適用されます。合計1TiBを超えるデータを含むMySQLシャードを移行する場合、DMのみを使用して移行するには長い時間がかかります。この場合、 [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行することをお勧めします。
 
@@ -33,7 +33,7 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 ### シャーディングされたテーブルの競合を確認します {#check-conflicts-for-the-sharded-tables}
 
-移行に異なるシャーディングテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行する前に、ビジネスの観点から現在のシャーディングスキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
+移行に異なるシャードテーブルからのデータのマージが含まれる場合、マージ中に主キーまたは一意のインデックスの競合が発生する可能性があります。したがって、移行する前に、ビジネスの観点から現在のシャーディングスキームを詳しく調べ、競合を回避する方法を見つける必要があります。詳細については、 [複数のシャードテーブル間での主キーまたは一意のインデックス間の競合を処理します](/dm/shard-merge-best-practices.md#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables)を参照してください。以下は簡単な説明です。
 
 この例では、 `sale_01`と`sale_02`は次のように同じテーブル構造を持っています
 

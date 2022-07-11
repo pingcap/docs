@@ -5,7 +5,7 @@ summary: Learn about the bit functions and operators.
 
 # ビット関数と演算子 {#bit-functions-and-operators}
 
-TiDBは、MySQL5.7で利用可能な[ビット関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html)すべてをサポートします。
+TiDBは、 MySQL 5.7で利用可能な[ビット関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/bit-functions.html)すべてをサポートします。
 
 **ビット関数と演算子：**
 

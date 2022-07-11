@@ -64,11 +64,11 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### - オフライン {#offline}
 
--   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
+-   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
 
 ### -h、-help {#h-help}
 
--   ヘルプ情報を印刷します。
+-   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -76,4 +76,4 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 tiup-dmの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

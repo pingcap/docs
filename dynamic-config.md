@@ -13,7 +13,7 @@ summary: Learn how to change the cluster configuration online.
 
 このセクションでは、構成をオンラインで変更する一般的な操作について説明します。
 
-### インスタンス構成の表示 {#view-instance-configuration}
+### インスタンス構成のビュー {#view-instance-configuration}
 
 クラスタのすべてのインスタンスの構成を表示するには、 `show config`ステートメントを使用します。結果は次のとおりです。
 
@@ -115,13 +115,13 @@ show warnings;
 
 一部の変更が失敗した場合は、対応するステートメントを再実行するか、失敗した各インスタンスを変更する必要があります。ネットワークの問題やマシンの障害が原因で一部のTiKVインスタンスにアクセスできない場合は、回復後にこれらのインスタンスを変更してください。
 
-構成アイテムが正常に変更されると、結果は構成ファイルに保持され、後続の操作で優先されます。一部の構成アイテムの名前は、 `limit`や`key`などのTiDB予約語と競合する可能性があります。これらの構成アイテムについては、バックティック`` ` ``を使用して囲みます。たとえば、 `` `raftstore.raft-log-gc-size-limit` `` 。
+構成アイテムが正常に変更されると、結果は構成ファイルに保持され、後続の操作で優先されます。一部の構成アイテムの名前は、 `limit`や`key`などのTiDB予約語と競合する可能性があります。これらの構成項目については、バッククォート`` ` ``を使用して囲みます。たとえば、 `` `raftstore.raft-log-gc-size-limit` `` 。
 
 次のTiKV構成アイテムはオンラインで変更できます。
 
 | Configuration / コンフィグレーション項目                              | 説明                                                                                                                    |
 | :-------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| `raftstore.raft-max-inflight-msgs`                        | 確認するラフトログの数。この数を超えると、Raftステートマシンはログの送信を遅くします。                                                                         |
+| `raftstore.raft-max-inflight-msgs`                        | 確認するRaftの数。この数を超えると、 Raftステートマシンはログの送信を遅くします。                                                                         |
 | `raftstore.raft-log-gc-tick-interval`                     | Raftログを削除するポーリングタスクがスケジュールされる時間間隔                                                                                     |
 | `raftstore.raft-log-gc-threshold`                         | 残りのRaftログの最大許容数のソフト制限                                                                                                 |
 | `raftstore.raft-log-gc-count-limit`                       | 残りのRaftログの許容数の厳しい制限                                                                                                   |
@@ -147,7 +147,7 @@ show warnings;
 | `raftstore.abnormal-leader-missing-duration`              | 通常の期間では、ピアがリーダーなしでいることができました。この値を超えると、ピアは異常と見なされ、メトリックとログにマークされます。                                                    |
 | `raftstore.peer-stale-state-check-interval`               | ピアにリーダーがいないかどうかを確認するための時間間隔                                                                                           |
 | `raftstore.consistency-check-interval`                    | 整合性をチェックする時間間隔（TiDBのガベージコレクションと互換性がないため、お勧めし**ません**）                                                                  |
-| `raftstore.raft-store-max-leader-lease`                   | ラフトリーダーの最長の信頼できる期間                                                                                                    |
+| `raftstore.raft-store-max-leader-lease`                   | Raftリーダーの最長の信頼できる期間                                                                                                   |
 | `raftstore.merge-check-tick-interval`                     | マージチェックの時間間隔                                                                                                          |
 | `raftstore.cleanup-import-sst-interval`                   | 期限切れのSSTファイルをチェックする時間間隔                                                                                               |
 | `raftstore.local-read-batch-size`                         | 1つのバッチで処理される読み取り要求の最大数                                                                                                |
@@ -239,48 +239,48 @@ set config pd `log.level`='info'
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-構成アイテムが正常に変更された場合、結果は構成ファイルではなくetcdに保持されます。 etcdの構成は、後続の操作で優先されます。一部の構成アイテムの名前は、TiDBの予約語と競合する可能性があります。これらの構成アイテムについては、バックティック`` ` ``を使用して囲みます。たとえば、 `` `schedule.leader-schedule-limit` `` 。
+構成アイテムが正常に変更された場合、結果は構成ファイルではなくetcdに保持されます。 etcdの構成は、後続の操作で優先されます。一部の構成アイテムの名前は、TiDBの予約語と競合する可能性があります。これらの構成項目については、バッククォート`` ` ``を使用して囲みます。たとえば、 `` `schedule.leader-schedule-limit` `` 。
 
 次のPD構成アイテムはオンラインで変更できます。
 
-| Configuration / コンフィグレーション項目               | 説明                                              |
-| :----------------------------------------- | :---------------------------------------------- |
-| `log.level`                                | ログレベル                                           |
-| `cluster-version`                          | クラスタバージョン                                       |
-| `schedule.max-merge-region-size`           | `Region Merge`のサイズ制限を制御します（MB単位）                |
-| `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します                      |
-| `schedule.patrol-region-interval`          | `replicaChecker`がリージョンのヘルス状態をチェックする頻度を決定します     |
-| `schedule.split-merge-interval`            | 同じリージョンで分割およびマージ操作を実行する時間間隔を決定します               |
-| `schedule.max-snapshot-count`              | 1つのストアが同時に送信または受信できるスナップショットの最大数を決定します          |
-| `schedule.max-pending-peer-count`          | 1つのストアで保留中のピアの最大数を決定します                         |
-| `schedule.max-store-down-time`             | 切断されたストアを回復できないとPDが判断するまでのダウンタイム                |
-| `schedule.leader-schedule-policy`          | リーダースケジューリングのポリシーを決定します                         |
-| `schedule.leader-schedule-limit`           | 同時に実行されたリーダースケジューリングタスクの数                       |
-| `schedule.region-schedule-limit`           | 同時に実行されたリージョンスケジューリングタスクの数                      |
-| `schedule.replica-schedule-limit`          | 同時に実行されたレプリカスケジューリングタスクの数                       |
-| `schedule.merge-schedule-limit`            | 同時に実行された`Region Merge`のスケジューリングタスクの数            |
-| `schedule.hot-region-schedule-limit`       | 同時に実行されたホットリージョンスケジューリングタスクの数                   |
-| `schedule.hot-region-cache-hits-threshold` | リージョンがホットスポットと見なされるしきい値を決定します                   |
-| `schedule.high-space-ratio`                | それを下回るとストアの容量が十分になるしきい値比率                       |
-| `schedule.low-space-ratio`                 | それを超えると店舗の容量が不足するしきい値比率                         |
-| `schedule.tolerant-size-ratio`             | `balance`のバッファサイズを制御します                         |
-| `schedule.enable-remove-down-replica`      | `DownReplica`を自動的に削除する機能を有効にするかどうかを決定します        |
-| `schedule.enable-replace-offline-replica`  | 移行する機能を有効にするかどうかを決定します`OfflineReplica`          |
-| `schedule.enable-make-up-replica`          | レプリカを自動的に補足する機能を有効にするかどうかを決定します                 |
-| `schedule.enable-remove-extra-replica`     | 余分なレプリカを削除する機能を有効にするかどうかを決定します                  |
-| `schedule.enable-location-replacement`     | 分離レベルチェックを有効にするかどうかを決定します                       |
-| `schedule.enable-cross-table-merge`        | クロステーブルマージを有効にするかどうかを決定します                      |
-| `schedule.enable-one-way-merge`            | 一方向のマージを有効にします。これにより、次の隣接するリージョンとのマージのみが可能になります |
-| `replication.max-replicas`                 | レプリカの最大数を設定します                                  |
-| `replication.location-labels`              | TiKVクラスタのトポロジー情報                                |
-| `replication.enable-placement-rules`       | 配置ルールを有効にします                                    |
-| `replication.strictly-match-label`         | ラベルチェックを有効にします                                  |
-| `pd-server.use-region-storage`             | 独立したリージョンストレージを有効にします                           |
-| `pd-server.max-gap-reset-ts`               | タイムスタンプ（BR）をリセットする最大間隔を設定します                    |
-| `pd-server.key-type`                       | クラスタキータイプを設定します                                 |
-| `pd-server.metric-storage`                 | クラスタメトリックのストレージアドレスを設定します                       |
-| `pd-server.dashboard-address`              | ダッシュボードアドレスを設定します                               |
-| `replication-mode.replication-mode`        | バックアップモードを設定します                                 |
+| Configuration / コンフィグレーション項目               | 説明                                               |
+| :----------------------------------------- | :----------------------------------------------- |
+| `log.level`                                | ログレベル                                            |
+| `cluster-version`                          | クラスタバージョン                                        |
+| `schedule.max-merge-region-size`           | `Region Merge`のサイズ制限を制御します（MB単位）                 |
+| `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します                       |
+| `schedule.patrol-region-interval`          | `replicaChecker`がリージョンのヘルス状態をチェックする頻度を決定します      |
+| `schedule.split-merge-interval`            | 同じリージョンで分割およびマージ操作を実行する時間間隔を決定します                |
+| `schedule.max-snapshot-count`              | 1つのストアが同時に送信または受信できるスナップショットの最大数を決定します           |
+| `schedule.max-pending-peer-count`          | 1つのストアで保留中のピアの最大数を決定します                          |
+| `schedule.max-store-down-time`             | 切断されたストアを回復できないとPDが判断するまでのダウンタイム                 |
+| `schedule.leader-schedule-policy`          | リーダースケジューリングのポリシーを決定します                          |
+| `schedule.leader-schedule-limit`           | 同時に実行されたリーダースケジューリングタスクの数                        |
+| `schedule.region-schedule-limit`           | 同時に実行されたリージョンスケジューリングタスクの数                       |
+| `schedule.replica-schedule-limit`          | 同時に実行されたレプリカスケジューリングタスクの数                        |
+| `schedule.merge-schedule-limit`            | 同時に実行された`Region Merge`のスケジューリングタスクの数             |
+| `schedule.hot-region-schedule-limit`       | 同時に実行されたホットリージョンスケジューリングタスクの数                    |
+| `schedule.hot-region-cache-hits-threshold` | リージョンがホットスポットと見なされるしきい値を決定します                    |
+| `schedule.high-space-ratio`                | それを下回るとストアの容量が十分になるしきい値比率                        |
+| `schedule.low-space-ratio`                 | それを超えると店舗の容量が不足するしきい値比率                          |
+| `schedule.tolerant-size-ratio`             | `balance`のバッファサイズを制御します                          |
+| `schedule.enable-remove-down-replica`      | `DownReplica`を自動的に削除する機能を有効にするかどうかを決定します         |
+| `schedule.enable-replace-offline-replica`  | 移行する機能を有効にするかどうかを決定します`OfflineReplica`           |
+| `schedule.enable-make-up-replica`          | レプリカを自動的に補足する機能を有効にするかどうかを決定します                  |
+| `schedule.enable-remove-extra-replica`     | 余分なレプリカを削除する機能を有効にするかどうかを決定します                   |
+| `schedule.enable-location-replacement`     | 分離レベルチェックを有効にするかどうかを決定します                        |
+| `schedule.enable-cross-table-merge`        | クロステーブルマージを有効にするかどうかを決定します                       |
+| `schedule.enable-one-way-merge`            | 一方向のマージを有効にします。これにより、次の隣接するリージョンとのマージのみが可能になります。 |
+| `replication.max-replicas`                 | レプリカの最大数を設定します                                   |
+| `replication.location-labels`              | TiKVクラスタのトポロジー情報                                 |
+| `replication.enable-placement-rules`       | 配置ルールを有効にします                                     |
+| `replication.strictly-match-label`         | ラベルチェックを有効にします                                   |
+| `pd-server.use-region-storage`             | 独立したリージョンストレージを有効にします                            |
+| `pd-server.max-gap-reset-ts`               | タイムスタンプ（BR）をリセットする最大間隔を設定します                     |
+| `pd-server.key-type`                       | クラスタキータイプを設定します                                  |
+| `pd-server.metric-storage`                 | クラスタメトリックのストレージアドレスを設定します                        |
+| `pd-server.dashboard-address`              | ダッシュボードアドレスを設定します                                |
+| `replication-mode.replication-mode`        | バックアップモードを設定します                                  |
 
 パラメータの詳細については、 [PDConfiguration / コンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
 

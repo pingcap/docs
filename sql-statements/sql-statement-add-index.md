@@ -75,7 +75,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   `FULLTEXT` 、および`HASH`のインデックスはサポートさ`SPATIAL`ていません。
--   降順インデックスはサポートされていません（MySQL 5.7と同様）。
+-   降順インデックスはサポートされていません（ MySQL 5.7と同様）。
 -   現在、複数のインデックスを同時に追加することはサポートされていません。
 -   `CLUSTERED`タイプの主キーをテーブルに追加することはサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
 
@@ -89,4 +89,4 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 -   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [説明](/sql-statements/sql-statement-explain.md)
+-   [EXPLAIN](/sql-statements/sql-statement-explain.md)

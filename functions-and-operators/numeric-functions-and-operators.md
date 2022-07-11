@@ -5,7 +5,7 @@ summary: Learn about the numeric functions and operators.
 
 # 数値関数と演算子 {#numeric-functions-and-operators}
 
-TiDBは、MySQL5.7で利用可能な[数値関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html)すべてをサポートします。
+TiDBは、 MySQL 5.7で利用可能な[数値関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html)すべてをサポートします。
 
 ## 算術演算子 {#arithmetic-operators}
 

@@ -5,7 +5,7 @@ summary: A brief introduction to transactions in TiDB.
 
 # 取引概要 {#transaction-overview}
 
-TiDBは完全な分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)と[悲観的なトランザクション](/pessimistic-transaction.md)を提供します（TiDB 3.0で導入）。この記事では、主にトランザクションステートメント、楽観的なトランザクションと悲観的なトランザクション、トランザクション分離レベル、および楽観的なトランザクションでのアプリケーション側の再試行とエラー処理について説明します。
+TiDBは完全な分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)と[悲観的なトランザクション](/pessimistic-transaction.md)を提供します（TiDB 3.0で導入）。この記事では、主にトランザクションステートメント、楽観的なトランザクションと悲観的なトランザクション、トランザクションの分離レベル、および楽観的なトランザクションでのアプリケーション側の再試行とエラー処理について説明します。
 
 ## 一般的なステートメント {#common-statements}
 

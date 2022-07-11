@@ -12,15 +12,15 @@ TiDBバージョン：3.0.14
 
 -   TiDB
 
-    -   `performance_schema`と`metrics_schema`のユーザー権限を読み取り/書き込みから読み取り専用[＃15417](https://github.com/pingcap/tidb/pull/15417)に調整します
+    -   `performance_schema`と`metrics_schema`のユーザー特権を読み取り/書き込みから読み取り専用[＃15417](https://github.com/pingcap/tidb/pull/15417)に調整します
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
 -   TiDB
 
     -   `join`条件が`handle`属性[＃15734](https://github.com/pingcap/tidb/pull/15734)の列に複数の同等の条件を持っている場合、 `index join`のクエリ結果が正しくない問題を修正します。
-    -   `handle`属性[＃16079](https://github.com/pingcap/tidb/pull/16079)の列で`fast analyze`操作を実行するときに発生するパニックを修正します。
-    -   DDLステートメントが`prepare`の方法で実行されたときに、DDLジョブ構造の`query`フィールドが正しくないという問題を修正します。この問題により、Binlogがデータレプリケーションに使用されている場合、アップストリームとダウンストリームの間でデータの不整合が発生する可能性があります。 [＃15443](https://github.com/pingcap/tidb/pull/15443)
+    -   `handle`属性[＃16079](https://github.com/pingcap/tidb/pull/16079)の列で`fast analyze`操作を実行するときに発生するpanicを修正します
+    -   DDLステートメントが`prepare`の方法で実行されたときに、DDLジョブ構造の`query`フィールドが正しくないという問題を修正します。この問題により、 Binlogがデータレプリケーションに使用されている場合、アップストリームとダウンストリームの間でデータの不整合が発生する可能性があります。 [＃15443](https://github.com/pingcap/tidb/pull/15443)
 
 -   TiKV
 
@@ -31,10 +31,10 @@ TiDBバージョン：3.0.14
 -   TiDB
 
     -   `admin show ddl jobs`ステートメントのクエリ結果にスキーマ名列とテーブル名列を追加します[＃16428](https://github.com/pingcap/tidb/pull/16428)
-    -   切り捨てられたテーブルの回復をサポートするために`RECOVER TABLE`構文を拡張します[＃15458](https://github.com/pingcap/tidb/pull/15458)
+    -   `RECOVER TABLE`構文を拡張して、切り捨てられたテーブルの回復をサポートします[＃15458](https://github.com/pingcap/tidb/pull/15458)
     -   `SHOW GRANTS`ステートメント[＃16168](https://github.com/pingcap/tidb/pull/16168)の特権チェックをサポートします。
     -   `LOAD DATA`ステートメント[＃16736](https://github.com/pingcap/tidb/pull/16736)の特権チェックをサポートします。
-    -   日時に関連する機能をパーティションキーとして使用する場合のパーティションプルーニングのパフォーマンスを向上させる[＃15618](https://github.com/pingcap/tidb/pull/15618)
+    -   日時に関連する関数をパーティションキーとして使用する場合のパーティションプルーニングのパフォーマンスを向上させる[＃15618](https://github.com/pingcap/tidb/pull/15618)
     -   `dispatch error`のログレベルを`WARN`から[＃16232](https://github.com/pingcap/tidb/pull/16232)に調整し`ERROR`
     -   クライアントに[＃15415](https://github.com/pingcap/tidb/pull/15415)の使用を強制する`require-secure-transport`のスタートアップオプションをサポートする
     -   TLSが構成されている場合にTiDBコンポーネント間のHTTP通信をサポートする[＃15419](https://github.com/pingcap/tidb/pull/15419)
@@ -53,8 +53,8 @@ TiDBバージョン：3.0.14
 
 -   TiKV
 
-    -   多くの競合があり、 `BatchRollback`の条件が楽観的なトランザクションに存在する場合のパフォーマンスを向上させます[＃7605](https://github.com/tikv/tikv/pull/7605)
-    -   ペシミスティックトランザクション[＃7584](https://github.com/tikv/tikv/pull/7584)に多くの競合が存在する場合、ペシミスティックロック`waiter`が頻繁にウェイクアップされるために発生するパフォーマンスの低下の問題を修正します。
+    -   楽観的なトランザクションに多くの競合と`BatchRollback`条件が存在する場合に、パフォーマンスを向上させます[＃7605](https://github.com/tikv/tikv/pull/7605)
+    -   ペシミスティックトランザクション[＃7584](https://github.com/tikv/tikv/pull/7584)に多くの競合が存在する場合、ペシミスティックロック`waiter`が頻繁にウェイクアップされるために発生するパフォーマンス低下の問題を修正します。
 
 -   ツール
 
@@ -71,7 +71,7 @@ TiDBバージョン：3.0.14
     -   ステートメントの概要[＃15231](https://github.com/pingcap/tidb/pull/15231)の`TABLE_NAMES`列の値が正しくない問題を修正します。
     -   プランキャッシュが有効になっている場合、一部の式の結果が正しくない問題を修正します[＃16184](https://github.com/pingcap/tidb/pull/16184)
     -   `not`関数の結果が正しくない[＃15916](https://github.com/pingcap/tidb/pull/15916)を修正し`istrue` `isfalse`
-    -   冗長インデックスを持つテーブルでの`MergeJoin`操作によって引き起こされるパニックを修正します[＃15919](https://github.com/pingcap/tidb/pull/15919)
+    -   冗長インデックスを持つテーブルでの`MergeJoin`操作によって引き起こされるpanicを修正します[＃15919](https://github.com/pingcap/tidb/pull/15919)
     -   述部が外部テーブル[＃16492](https://github.com/pingcap/tidb/pull/16492)のみを参照している場合に、リンクを誤って単純化することによって引き起こされる問題を修正します。
     -   `CURRENT_ROLE`関数が`SET ROLE`ステートメント[＃15569](https://github.com/pingcap/tidb/pull/15569)によって引き起こされたエラーを報告する問題を修正します。
     -   このステートメントが[＃16633](https://github.com/pingcap/tidb/pull/16633)に遭遇したときに、 `LOAD DATA`ステートメントの結果がMySQLと互換性がないという問題を修正し`\` 。
@@ -83,11 +83,11 @@ TiDBバージョン：3.0.14
     -   [＃15359](https://github.com/pingcap/tidb/pull/15359)の誤った動作を修正し`CASE WHEN (not_int)`
     -   現在のスキーマにない`view`を使用すると`Unknown column`エラーメッセージが返される問題を修正します[＃15866](https://github.com/pingcap/tidb/pull/15866)
     -   時間文字列の解析結果がMySQL1と互換性がないという問題を修正し[＃16242](https://github.com/pingcap/tidb/pull/16242)
-    -   右側の子ノード[＃16528](https://github.com/pingcap/tidb/pull/16528)に`null`列が存在する場合に、照合順序演算子が`left join`でパニックになる可能性を修正します。
+    -   右側の子ノード[＃16528](https://github.com/pingcap/tidb/pull/16528)に`null`列が存在する場合に、照合順序演算子が`left join`でpanicになる可能性を修正します。
     -   TiKVが`StaleCommand`のエラーメッセージを返し続けるとSQLの実行がブロックされてもエラーメッセージが返されない問題を修正します[＃16528](https://github.com/pingcap/tidb/pull/16528)
-    -   監査プラグインが有効になっているときにポートプローブによって引き起こされる可能性のあるパニックを修正します[＃15967](https://github.com/pingcap/tidb/pull/15967)
-    -   `fast analyze`がインデックスのみで機能する場合に発生するパニックを修正します[＃15967](https://github.com/pingcap/tidb/pull/15967)
-    -   場合によっては`SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST`ステートメントの実行で発生する可能性のあるパニックを修正します[＃16309](https://github.com/pingcap/tidb/pull/16309)
+    -   監査プラグインが有効になっているときにポートプローブによって引き起こされる可能性のあるpanicを修正します[＃15967](https://github.com/pingcap/tidb/pull/15967)
+    -   `fast analyze`がインデックスのみで機能する場合に発生するpanicを修正します[＃15967](https://github.com/pingcap/tidb/pull/15967)
+    -   場合によっては`SELECT * FROM INFORMATION_SCHEMA.PROCESSLIST`ステートメントの実行で発生する可能性のあるpanicを修正します[＃16309](https://github.com/pingcap/tidb/pull/16309)
     -   メモリを割り当てる前にパーティションの数を確認せずにハッシュパーティションテーブルを作成するときに、多数のパーティション（たとえば、 `9999999999999` ）を指定することによって発生するTiDBOOMの問題を修正します[＃16218](https://github.com/pingcap/tidb/pull/16218)
     -   [＃16726](https://github.com/pingcap/tidb/pull/16726)のパーティションテーブルの誤った情報の問題を修正し`information_schema.tidb_hot_table`
     -   パーティション選択アルゴリズムがハッシュパーティションテーブル[＃16070](https://github.com/pingcap/tidb/pull/16070)で有効にならない問題を修正します
@@ -96,7 +96,7 @@ TiDBバージョン：3.0.14
     -   `VALUES`関数のパラメータータイプが[＃15486](https://github.com/pingcap/tidb/pull/15486)の場合の誤った動作の問題を修正し`bit(n)`
     -   `view`列の名前が長すぎると、TiDBの処理ロジックがMySQLと矛盾する問題を修正します。この場合、システムは自動的に短い列名を生成します。 [＃14873](https://github.com/pingcap/tidb/pull/14873)
     -   `(not not col)`が[＃16094](https://github.com/pingcap/tidb/pull/16094)として誤って最適化される問題を修正し`col`
-    -   `IndexLookupJoin`のプランによって構築された内部テーブルの誤った`range`の問題を修正します[＃15753](https://github.com/pingcap/tidb/pull/15753)
+    -   `IndexLookupJoin`の計画によって構築された内部テーブルの誤った`range`の問題を修正します[＃15753](https://github.com/pingcap/tidb/pull/15753)
     -   `only_full_group_by`が角かっこ[＃16012](https://github.com/pingcap/tidb/pull/16012)で式を正しくチェックできない問題を修正します
     -   `select view_name.col_name from view_name`ステートメントの実行時にエラーが返される問題を修正します[＃15572](https://github.com/pingcap/tidb/pull/15572)
 

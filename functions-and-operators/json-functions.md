@@ -9,7 +9,7 @@ summary: Learn about JSON functions.
 >
 > これはまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
 
-TiDBは、MySQL5.7のGAリリースに付属しているほとんどのJSON関数をサポートしています。
+TiDBは、 MySQL 5.7のGAリリースに付属しているほとんどのJSON関数をサポートしています。
 
 ## JSON値を作成する関数 {#functions-that-create-json-values}
 

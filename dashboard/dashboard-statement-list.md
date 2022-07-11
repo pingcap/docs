@@ -37,7 +37,7 @@ SQLステートメントの要約ページの上部で、表示するSQL実行�
 
 ![Choose columns](/media/dashboard/dashboard-statement-columns-selector.png)
 
-### 列で並べ替え {#sort-by-column}
+### カラムで並べ替え {#sort-by-column}
 
 デフォルトでは、リストは**合計レイテンシー**で高から低にソートされます。別の列見出しをクリックして、並べ替え基準を変更するか、並べ替え順序を切り替えます。
 

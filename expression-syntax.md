@@ -17,7 +17,7 @@ summary: Learn about the expression syntax in TiDB.
 
 -   ParamMarker（ `?` ）、システム変数、ユーザー変数、およびCASE式。
 
-次のルールは、TiDBパーサーの[parser.y](https://github.com/pingcap/parser/blob/master/parser.y)のルールに基づく式の構文です。次のシンタックスダイアグラムのナビゲート可能なバージョンについては、 [TiDBSQL構文図](https://pingcap.github.io/sqlgram/#Expression)を参照してください。
+次のルールは、TiDBパーサーの[parser.y](https://github.com/pingcap/parser/blob/master/parser.y)のルールに基づく式の構文です。次のシンタックスダイアグラムのナビゲート可能なバージョンについては、 [TiDB SQL構文図](https://pingcap.github.io/sqlgram/#Expression)を参照してください。
 
 ```ebnf+diagram
 Expression ::=

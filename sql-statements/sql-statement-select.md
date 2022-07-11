@@ -134,7 +134,7 @@ mysql> SELECT * FROM t1;
 
 -   構文`SELECT ... INTO @variable`はサポートされていません。
 -   構文`SELECT ... GROUP BY ... WITH ROLLUP`はサポートされていません。
--   構文`SELECT .. GROUP BY expr`は、MySQL5.7のように`GROUP BY expr ORDER BY expr`を意味しません。代わりに、TiDBはMySQL 8.0の動作と一致し、デフォルトの順序を意味しません。
+-   構文`SELECT .. GROUP BY expr`は、 MySQL 5.7のように`GROUP BY expr ORDER BY expr`を意味しません。代わりに、TiDBはMySQL 8.0の動作と一致し、デフォルトの順序を意味しません。
 
 ## も参照してください {#see-also}
 

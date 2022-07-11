@@ -14,7 +14,7 @@ title: TiDB RC1 Release Notes
 -   安定性が向上し、TiKVは200ノードのクラスタをサポートできます。
 -   RawKVAPIとGolangクライアントをサポートします。
 
-## 配置ドライバー（PD） {#placement-driver-pd}
+## 配置Driver（PD） {#placement-driver-pd}
 
 -   スケジューリング戦略フレームワークが最適化され、戦略がより柔軟で合理的になりました。
 -   クロスデータセンターのスケジューリングをサポートするために、 `label`のサポートが追加されました。
@@ -38,7 +38,7 @@ title: TiDB RC1 Release Notes
 
 ## 新しいツール {#new-tools}
 
--   `Loader`は、Perconaの`mydumper`データ形式と互換性があるように追加され、次の機能を提供します。
+-   `Loader`は、Perconaの`mydumper`データ形式と互換性があるように追加され、次の関数を提供します。
     -   マルチスレッドインポート
     -   エラーが発生した場合は再試行してください
     -   ブレークポイント履歴書

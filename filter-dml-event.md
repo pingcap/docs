@@ -12,7 +12,7 @@ summary: Learn how to filter DML events using SQL expressions.
 -   [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
 -   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-インクリメンタルデータレプリケーションを実行する場合、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定のタイプのbinlogイベントをフィルタリングできます。たとえば、アーカイブや監査などの目的で、 `DELETE`のイベントをダウンストリームに複製しないように選択できます。ただし、Binlog Event Filterは、より細かい粒度が必要な行の`DELETE`イベントをフィルタリングするかどうかを決定できません。
+インクリメンタルデータレプリケーションを実行する場合、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定のタイプのbinlogイベントをフィルタリングできます。たとえば、アーカイブや監査などの目的で、 `DELETE`のイベントをダウンストリームに複製しないように選択できます。ただし、 Binlog Event Filterは、より細かい粒度が必要な行の`DELETE`イベントをフィルタリングするかどうかを決定できません。
 
 この問題に対処するために、v2.0.5以降、DMはデータのフィルタリングにインクリメンタルデータレプリケーションで`binlog value filter`を使用することをサポートしています。 DMでサポートされている`ROW`形式のbinlogの中で、binlogイベントはすべての列の値を保持し、これらの値に基づいてSQL式を構成できます。式が行の変更を`TRUE`として計算する場合、DMはこの行の変更をダウンストリームに複製しません。
 

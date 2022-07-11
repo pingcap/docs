@@ -5,9 +5,9 @@ summary: Learn about the encryption and compression functions.
 
 # 暗号化および圧縮機能 {#encryption-and-compression-functions}
 
-TiDBは、MySQL5.7で利用可能な[暗号化および圧縮機能](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html)のほとんどをサポートします。
+TiDBは、MySQL5.7で利用可能な[暗号化および圧縮関数](https://dev.mysql.com/doc/refman/5.7/en/encryption-functions.html)のほとんどをサポートしMySQL 5.7。
 
-## サポートされている機能 {#supported-functions}
+## サポートされている関数 {#supported-functions}
 
 | 名前                                                                                                                                                 | 説明                          |
 | :------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- |
@@ -35,8 +35,8 @@ TiDBは、MySQL5.7で利用可能な[暗号化および圧縮機能](https://dev
 
 `block_encryption_mode`変数は、 `AES_ENCRYPT()`と`AES_DECRYPT()`に使用される暗号化モードを設定します。
 
-## サポートされていない機能 {#unsupported-functions}
+## サポートされていない関数 {#unsupported-functions}
 
--   `DES_DECRYPT()` ：これらの関数は`ENCRYPT()` `DES_ENCRYPT()`で非推奨になり、 `OLD_PASSWORD()`で削除されました。
+-   `DES_DECRYPT()` ：これらの関数は`ENCRYPT()` `DES_ENCRYPT()`で非推奨にMySQL 5.7、 `OLD_PASSWORD()`で削除されました。
 -   `VALIDATE_PASSWORD_STRENGTH()`
 -   [問題＃2632](https://github.com/pingcap/tidb/issues/2632)でのみ使用可能な機能

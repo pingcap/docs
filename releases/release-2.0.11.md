@@ -12,7 +12,7 @@ title: TiDB 2.0.11 Release Notes
 -   TiDBのテーブルに対する`Rename`の操作がMySQL3の操作と互換性がないという問題を修正し[＃8809](https://github.com/pingcap/tidb/pull/8809)
 -   `ADD INDEX`ステートメント[＃8750](https://github.com/pingcap/tidb/pull/8750)の実行中に`ADMIN CHECK TABLE`操作を実行すると、エラーメッセージが誤って報告される問題を修正します。
 -   プレフィックスインデックス範囲が正しくない場合がある問題を修正します[＃8877](https://github.com/pingcap/tidb/pull/8877)
--   場合によっては列が追加されたときの`UPDATE`ステートメントのパニックの問題を修正します[＃8904](https://github.com/pingcap/tidb/pull/8904)
+-   場合によっては列が追加されたときの`UPDATE`ステートメントのpanicの問題を修正します[＃8904](https://github.com/pingcap/tidb/pull/8904)
 
 ## TiKV {#tikv}
 

@@ -3,11 +3,11 @@ title: PD Control User Guide
 summary: Use PD Control to obtain the state information of a cluster and tune a cluster.
 ---
 
-# PD制御ユーザーガイド {#pd-control-user-guide}
+# PD Controlユーザーガイド {#pd-control-user-guide}
 
-PDのコマンドラインツールとして、PD Controlはクラスターの状態情報を取得し、クラスタを調整しクラスタ。
+PDのコマンドラインツールとして、 PD Controlはクラスターの状態情報を取得し、クラスタを調整しクラスタ。
 
-## PD制御をインストールします {#install-pd-control}
+## PD Controlをインストールします {#install-pd-control}
 
 > **ノート：**
 >
@@ -15,11 +15,11 @@ PDのコマンドラインツールとして、PD Controlはクラスターの�
 
 ### TiUPコマンドを使用する {#use-tiup-command}
 
-PD制御を使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]`コマンドを実行します。
+PD Controlを使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]`コマンドを実行します。
 
 ### インストールパッケージをダウンロードする {#download-the-installation-package}
 
-PD制御インストールパッケージ（ `pd-ctl` ）は、TiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+PD Controlインストールパッケージ（ `pd-ctl` ）は、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
 ### ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -195,7 +195,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
     config set split-merge-interval 24h  // Set the interval between `split` and `merge` to one day
     ```
 
--   `enable-one-way-merge`は、PDがリージョンを次のリージョンとマージすることのみを許可するかどうかを制御します。 `false`に設定すると、PDにより、リージョンを隣接する2つのリージョンとマージできます。
+-   `enable-one-way-merge`は、PDがリージョンを次のリージョンとのマージのみを許可するかどうかを制御します。 `false`に設定すると、PDにより、リージョンを隣接する2つのリージョンとマージできます。
 
     ```bash
     config set enable-one-way-merge true  // Enables one-way merging.
@@ -210,7 +210,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 -   `key-type`は、クラスタに使用されるキーエンコードタイプを指定します。サポートされているオプションは[&quot;table&quot;、 &quot;raw&quot;、 &quot;txn&quot;]で、デフォルト値は&quot;table&quot;です。
 
     -   クラスタにTiDBインスタンスが存在しない場合、 `key-type`は「raw」または「txn」になり、PDは、 `enable-cross-table-merge`の設定に関係なく、テーブル間でリージョンをマージできます。
-    -   クラスタにTiDBインスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PDがテーブル間でリージョンをマージできるかどうかは`enable-cross-table-merge`によって決定されます。 `key-type`が「生」の場合、配置ルールは機能しません。
+    -   クラスタにTiDBインスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決定されます。 `key-type`が「生」の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.
@@ -495,7 +495,7 @@ time: 43.12698ms
 
 ### <code>region &#x3C;region_id> [--jq="&#x3C;query string>"]</code> {#code-region-x3c-region-id-jq-x3c-query-string-code}
 
-このコマンドを使用して、リージョン情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
+このコマンドを使用して、地域情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -728,7 +728,7 @@ time: 43.12698ms
 さまざまなタイプの説明：
 
 -   ミスピア：十分なレプリカがない地域
--   エクストラピア：追加のレプリカがある地域
+-   extra-peer：余分なレプリカがあるリージョン
 -   ダウンピア：一部のレプリカがダウンしているリージョン
 -   保留中のピア：一部のレプリカが保留中のリージョン
 
@@ -857,7 +857,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
--   `read-priorities` 、および`write-leader-priorities`は、スケジューラがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つの次元がサポートされています。
+-   `read-priorities` 、および`write-leader-priorities`は、スケジューラがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つのディメンションがサポートされています。
 
     -   `read-priorities`および`write-leader-priorities`は、読み取りおよび書き込みリーダータイプのホットリージョンをスケジュールするためにスケジューラーが優先するディメンションを制御します。寸法オプションは`query` 、および`byte` `key` 。
 
@@ -916,7 +916,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
 > **ノート：**
 >
-> -   `store limit`コマンドの元の`region-add`および`region-remove`パラメーターは廃止され、 `add-peer`および`remove-peer`に置き換えられました。
+> -   `store limit`コマンドの元の`region-add`および`region-remove`パラメーターは非推奨になり、 `add-peer`および`remove-peer`に置き換えられました。
 > -   `pd-ctl`を使用して、TiKVストアのステータス（アップ、切断、オフライン、ダウン、またはトゥームストーン）を確認できます。各ステータスの関係については、 [TiKVストアの各ステータス間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
 ### <code>log [fatal | error | warn | info | debug]</code> {#code-log-fatal-error-warn-info-debug-code}
@@ -960,7 +960,7 @@ unsafe remove-failed-stores 101,102,103
 Success!
 ```
 
-オンラインの安全でないリカバリの現在または過去の状態を表示します。
+OnlineUnsafeRecoveryの現在または過去の状態を表示します。
 
 ```bash
 unsafe remove-failed-stores show
@@ -1022,7 +1022,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 ...
 ```
 
-### リージョンレプリカの配布ステータスを照会します {#query-the-distribution-status-of-the-region-replicas}
+### リージョンレプリカの配布ステータスを照会する {#query-the-distribution-status-of-the-region-replicas}
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id]}"

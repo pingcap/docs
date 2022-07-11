@@ -20,7 +20,7 @@ TiDB Ansibleバージョン：3.0.2
     -   `SHOW COLUMNS FROM tbl WHERE FIELDS IN (SELECT 'a')`のような`SHOW`ステートメントの[＃11459](https://github.com/pingcap/tidb/pull/11459)をサポートする
     -   集計関数の関連する列が見つからず、 `outerJoinElimination`の最適化ルールが列エイリアスを正しく処理しないためにエラーが報告される問題を修正します。最適化プロセスでのエイリアス解析を改善して、最適化がより多くのクエリタイプをカバーできるようにします[＃11377](https://github.com/pingcap/tidb/pull/11377)
     -   Window関数で構文制限に違反した場合にエラーが報告されない問題を修正します（たとえば、フレーム定義の最後に`UNBOUNDED PRECEDING`を表示することは許可されていません） [＃11543](https://github.com/pingcap/tidb/pull/11543)
-    -   [＃11535](https://github.com/pingcap/tidb/pull/11535)との非互換性を引き起こす`ERROR 3593 (HY000): You cannot use the window function FUNCTION_NAME in this context`エラーメッセージで`FUNCTION_NAME`が大文字であるという問題を修正します。
+    -   [＃11535](https://github.com/pingcap/tidb/pull/11535)との非互換性を引き起こす`ERROR 3593 (HY000): You cannot use the window function FUNCTION_NAME in this context`エラーメッセージの`FUNCTION_NAME`が大文字であるという問題を修正します。
     -   Window関数で実装されていない`IGNORE NULLS`構文が使用されているが、エラーが報告されないという問題を修正します[＃11593](https://github.com/pingcap/tidb/pull/11593)
     -   オプティマイザーが時間等しい条件を正しく推定しない問題を修正します[＃11512](https://github.com/pingcap/tidb/pull/11512)
     -   フィードバック情報に基づくTop-N統計の更新をサポート[＃11507](https://github.com/pingcap/tidb/pull/11507)
@@ -37,7 +37,7 @@ TiDB Ansibleバージョン：3.0.2
     -   このクエリのメモリ使用量を示すために、 `EXPLAIN ANALYZE`によって返される結果に`MEMORY`列を追加します[＃11418](https://github.com/pingcap/tidb/pull/11418)
     -   [＃11429](https://github.com/pingcap/tidb/pull/11429)の結果に`CARTESIAN`結合を追加し`EXPLAIN`
     -   floatおよびdoubleタイプの自動インクリメント列の誤ったデータを修正します[＃11385](https://github.com/pingcap/tidb/pull/11385)
-    -   疑似統計がダンプされたときにいくつかの情報によって引き起こされるパニックの問題を修正し[＃11460](https://github.com/pingcap/tidb/pull/11460) `nil`
+    -   疑似統計がダンプされたときにいくつかの情報によって引き起こされるpanicの問題を修正し[＃11460](https://github.com/pingcap/tidb/pull/11460) `nil`
     -   定数畳み込みの最適化によって引き起こされる`SELECT … CASE WHEN … ELSE NULL ...`の誤ったクエリ結果を修正します[＃11441](https://github.com/pingcap/tidb/pull/11441)
     -   `floatStrToIntStr`が[＃11473](https://github.com/pingcap/tidb/pull/11473)などの入力を正しく解析しない問題を修正し`+999.9999e2`
     -   `DATE_ADD`および`DATE_SUB`関数の結果がオーバーフローした場合に`NULL`が返されない場合があるという問題を修正します[＃11476](https://github.com/pingcap/tidb/pull/11476)
@@ -48,10 +48,10 @@ TiDB Ansibleバージョン：3.0.2
     -   JSONデータのfloatフィールドが整数[＃11534](https://github.com/pingcap/tidb/pull/11534)に変換されたときに結果がオーバーフローした場合、エラーメッセージが`constant … overflows bigint`ではなく`constant … overflows float`を報告する問題を修正します。
     -   `DATE_ADD`関数が`FLOAT` 、および`DOUBLE`列パラメーターを受け取ったときに誤った型変換が原因で結果が間違っている可能性があるという問題を修正し[＃11527](https://github.com/pingcap/tidb/pull/11527) `DECIMAL`
     -   `DATE_ADD`関数[＃11615](https://github.com/pingcap/tidb/pull/11615)のINTERVAL分数の符号を誤って処理することによって引き起こされる誤った結果を修正します。
-    -   `Ranger`がプレフィックスインデックス[＃11565](https://github.com/pingcap/tidb/pull/11565)を正しく処理しないために発生したプレフィックスインデックスがインデックスルックアップ結合に含まれている場合の誤ったクエリ結果を修正します。
+    -   `Ranger`がプレフィックスインデックス[＃11565](https://github.com/pingcap/tidb/pull/11565)を正しく処理しなかったために、インデックスルックアップ結合にプレフィックスインデックスが含まれている場合の誤ったクエリ結果を修正します。
     -   `NAME_CONST`の2番目のパラメーターが負の数[＃11268](https://github.com/pingcap/tidb/pull/11268)のときに`NAME_CONST`関数が実行されると、「NAME_CONSTへの引数が正しくありません」というメッセージが報告される問題を修正します。
-    -   SQLステートメントが現在の時刻の計算を含み、値が複数回フェッチされる場合、結果がMySQLと互換性がないという問題を修正します。同じSQLステートメントの現在時刻をフェッチするときに同じ値を使用する[＃11394](https://github.com/pingcap/tidb/pull/11394)
-    -   `baseExecutor`の`Close`がエラーを報告したときに`Close`が`ChildExecutor`に対して呼び出されないという問題を修正します。この問題は、 `KILL`のステートメントが有効にならず、 `ChildExecutor`が閉じられていない場合に、Goroutineリークにつながる可能性があります[＃11576](https://github.com/pingcap/tidb/pull/11576)
+    -   SQLステートメントに現在時刻の計算が含まれ、値が複数回フェッチされる場合、結果がMySQLと互換性がないという問題を修正します。同じSQLステートメントの現在時刻をフェッチするときに同じ値を使用する[＃11394](https://github.com/pingcap/tidb/pull/11394)
+    -   `Close`がエラーを報告したときに`Close`が`ChildExecutor`に対して呼び出されない問題を修正し`baseExecutor` 。この問題は、 `KILL`のステートメントが有効にならず、 `ChildExecutor`が閉じられていない場合に、Goroutineリークにつながる可能性があります[＃11576](https://github.com/pingcap/tidb/pull/11576)
 -   サーバ
     -   `LOAD DATA`がCSVファイル[＃11250](https://github.com/pingcap/tidb/pull/11250)の欠落している`TIMESTAMP`フィールドを処理するときに、自動追加値が現在のタイムスタンプではなく0になる問題を修正します。
     -   `SHOW CREATE USER`ステートメントが関連する特権を正しくチェックせず、 `SHOW CREATE USER CURRENT_USER()`によって返される`USER`と`HOST`が間違っている可能性があるという問題を修正します[＃11229](https://github.com/pingcap/tidb/pull/11229)
@@ -65,7 +65,7 @@ TiDB Ansibleバージョン：3.0.2
         -   悲観的ロックのデフォルトTTLを30秒から40秒に増やします
         -   最大TTLを60秒から120秒に増やします
         -   最初の`LockKeys`のリクエストから悲観的なロック期間を計算します
-    -   TiKVクライアントの`SendRequest`機能ロジックを変更します。接続を構築できないときに待機するのではなく、すぐに別のピアに接続してみてください[＃11531](https://github.com/pingcap/tidb/pull/11531)
+    -   TiKVクライアントの`SendRequest`の機能ロジックを変更します。接続を確立できないときに待機するのではなく、すぐに別のピアに接続してみてください[＃11531](https://github.com/pingcap/tidb/pull/11531)
     -   リージョンキャッシュの最適化：別のストアが同じアドレスでオンラインになっているときにストアが移動された場合、削除されたストアに無効のラベルを付けて、キャッシュ内のストア情報をできるだけ早く更新します[＃11567](https://github.com/pingcap/tidb/pull/11567)
     -   `http://{TiDB_ADDRESS:TIDB_IP}/mvcc/key/{db}/{table}/{handle}`によって返される結果にリージョンIDを追加し[＃11557](https://github.com/pingcap/tidb/pull/11557)
     -   ScatterTableAPIがRangeキーをエスケープしないためにScatterTableが機能しない問題を修正します[＃11298](https://github.com/pingcap/tidb/pull/11298)
@@ -96,7 +96,7 @@ TiDB Ansibleバージョン：3.0.2
 ## TiKV {#tikv}
 
 -   Raftログが時間[＃5160](https://github.com/tikv/tikv/pull/5160)に書き込まれない場合にTiKVがパニックになるバグを修正します
--   TiKVパニック後にパニック情報がログファイルに書き込まれないバグを修正します[＃5198](https://github.com/tikv/tikv/pull/5198)
+-   TiKVパニック後にpanic情報がログファイルに書き込まれないバグを修正します[＃5198](https://github.com/tikv/tikv/pull/5198)
 -   悲観的なトランザクションで挿入操作が正しく実行されない可能性があるバグを修正します[＃5203](https://github.com/tikv/tikv/pull/5203)
 -   INFO1への手動介入を必要としない一部のログの出力レベルを下げ[＃5193](https://github.com/tikv/tikv/pull/5193)
 -   ストレージエンジンのサイズ[＃5200](https://github.com/tikv/tikv/pull/5200)の監視の精度を向上させる
@@ -106,7 +106,7 @@ TiDB Ansibleバージョン：3.0.2
 
 ## PD {#pd}
 
--   スキャッターリージョンスケジューラが機能しないバグを修正します[＃1642](https://github.com/pingcap/pd/pull/1642)
+-   ScatterRegionスケジューラが機能しないバグを修正します[＃1642](https://github.com/pingcap/pd/pull/1642)
 -   pd- [＃1653](https://github.com/pingcap/pd/pull/1653)でリージョンのマージ操作を実行できないバグを修正します。
 -   pd- [＃1651](https://github.com/pingcap/pd/pull/1651)でtombstoneの削除操作を実行できないバグを修正します。
 -   領域のスキャン操作を実行すると、キースコープと重複する領域が見つからない問題を修正します[＃1648](https://github.com/pingcap/pd/pull/1648)
@@ -116,13 +116,13 @@ TiDB Ansibleバージョン：3.0.2
 
 TiDB Binlog
 
--   起動時に構成アイテムチェック機能を追加します。これにより、Binlogサービスが停止し、無効なアイテムが見つかったときにエラーが報告されます[＃687](https://github.com/pingcap/tidb-binlog/pull/687)
--   Drainerに`node-id`の構成を追加して、Drainer3で使用される特定のロジックを指定し[＃684](https://github.com/pingcap/tidb-binlog/pull/684)
+-   起動時に構成アイテムチェック機能を追加します。これにより、 Binlogサービスが停止し、無効なアイテムが見つかったときにエラーが報告されます[＃687](https://github.com/pingcap/tidb-binlog/pull/687)
+-   Drainerに`node-id`の構成を追加して、 Drainerで使用される特定のロジックを指定し[＃684](https://github.com/pingcap/tidb-binlog/pull/684)
 
 TiDB Lightning
 
 -   2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`が元の値に戻らないという問題を修正します[＃218](https://github.com/pingcap/tidb-lightning/pull/218)
--   起動時に構成アイテムチェック機能を追加します。これにより、Binlogサービスが停止し、無効なアイテムが見つかったときにエラーが報告されます[＃217](https://github.com/pingcap/tidb-lightning/pull/217)
+-   起動時に構成アイテムチェック機能を追加します。これにより、 Binlogサービスが停止し、無効なアイテムが見つかったときにエラーが報告されます[＃217](https://github.com/pingcap/tidb-lightning/pull/217)
 
 ## TiDB Ansible {#tidb-ansible}
 
@@ -134,7 +134,7 @@ TiDB Lightning
 -   TiDBダッシュボード[＃854](https://github.com/pingcap/tidb-ansible/pull/854)に各監視項目の説明を追加します
 -   TiDBサマリーダッシュボードを追加して、クラスタのステータスをより適切に表示し、問題のトラブルシューティングを行います[＃855](https://github.com/pingcap/tidb-ansible/pull/855)
 -   TiKVダッシュボード[＃857](https://github.com/pingcap/tidb-ansible/pull/857)のアロケータ統計監視項目を更新します。
--   ノードエクスポータのアラート式[＃860](https://github.com/pingcap/tidb-ansible/pull/860)のユニットエラーを修正します。
+-   ノードエクスポータのアラート式[＃860](https://github.com/pingcap/tidb-ansible/pull/860)のユニットエラーを修正します
 -   TiSparkjarパッケージを[＃862](https://github.com/pingcap/tidb-ansible/pull/862)にアップグレードします。
 -   Ansibleタスク機能の説明を更新する[＃867](https://github.com/pingcap/tidb-ansible/pull/867)
 -   TiDBダッシュボード[＃874](https://github.com/pingcap/tidb-ansible/pull/874)のローカルリーダーリクエスト監視項目の式を更新します。

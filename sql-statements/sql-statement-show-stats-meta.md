@@ -9,7 +9,7 @@ summary: An overview of the usage of SHOW STATS_META for TiDB database.
 
 現在、 `SHOW STATS_META`ステートメントは6列を出力します。
 
-| 列名             | 説明       |
+| カラム名           | 説明       |
 | -------------- | -------- |
 | db_name        | データベース名  |
 | table_name     | テーブル名    |

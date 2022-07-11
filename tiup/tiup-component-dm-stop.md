@@ -34,7 +34,7 @@ tiup dm stop <cluster-name> [flags]
 
 -   停止する役割を指定します。指定しない場合、すべての役割が停止します。このオプションの値は、ノードの役割のコンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの2番目の列から取得できます。
 -   データ型： `STRINGS`
--   このオプションがコマンドで指定されていない場合、デフォルトですべての役割が選択されます。
+-   コマンドでこのオプションが指定されていない場合、デフォルトですべての役割が選択されます。
 
 > **ノート：**
 >
@@ -50,4 +50,4 @@ tiup dm stop <cluster-name> [flags]
 
 サービス停止のログ。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

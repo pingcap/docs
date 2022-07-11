@@ -5,9 +5,9 @@ summary: Learn about the compatibility of TiDB with MySQL, and the unsupported a
 
 # MySQLの互換性 {#mysql-compatibility}
 
-TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文と高い互換性があります。 MySQL 5.7のエコシステムツール（PHPMyAdmin、Navicat、MySQL Workbench、mysqldump、およびMydumper / myloader）とMySQLクライアントをTiDBに使用できます。
+TiDBは、 MySQL 5.7プロトコルおよびMySQL 5.7の一般的な機能と構文と高い互換性があります。 MySQL 5.7のエコシステムツール（PHPMyAdmin、Navicat、MySQL Workbench、mysqldump、およびMydumper / myloader）とMySQLクライアントをTiDBに使用できます。
 
-ただし、MySQLの一部の機能はサポートされていません。これは、問題を解決するためのより良い方法（JSONに置き換えられたXML関数など）があるか、現在の需要と必要な労力（ストアドプロシージャや関数など）が不足していることが原因である可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
+ただし、MySQLの一部の機能はサポートされていません。これは、問題を解決するためのより良い方法（JSONに置き換えられたXML関数など）があるか、現在の需要と必要な労力の不足（ストアドプロシージャや関数など）が原因である可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
 
 -   さらに、TiDBはMySQLレプリケーションプロトコルをサポートしていませんが、MySQLでデータをレプリケートするための特定のツールを提供します。
     -   MySQLからのデータの複製： [TiDBデータ移行（DM）](/dm/dm-overview.md)は、MySQL/MariaDBからTiDBへの完全なデータ移行と増分データ複製をサポートするツールです。
@@ -50,7 +50,7 @@ TiDBは、MySQL5.7プロトコルおよびMySQL5.7の一般的な機能と構文
 
 -   `tidb_allow_remove_auto_inc`システム変数を使用して、 `AUTO_INCREMENT`列属性の削除を許可または禁止できます。列属性を削除する構文は`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`です。
 
--   TiDBは、 `AUTO_INCREMENT`列属性の追加をサポートしておらず、この属性を削除すると、この属性を回復することはできません。
+-   TiDBは`AUTO_INCREMENT`列属性の追加をサポートしておらず、一度削除するとこの属性を回復することはできません。
 
 -   詳細については、 [`AUTO_INCREMENT`](/auto-increment.md)を参照してください。
 
@@ -93,22 +93,22 @@ MySQLシステム変数`optimizer_switch`はTiDBでは読み取り専用であ�
 
 詳細については、 [クエリ実行プランを理解する](/explain-overview.md)を参照してください。
 
-### 内蔵機能 {#built-in-functions}
+### 内蔵関数 {#built-in-functions}
 
 TiDBは、MySQLの組み込み関数のほとんどをサポートしていますが、すべてをサポートしているわけではありません。ステートメント`SHOW BUILTINS`は、使用可能な関数のリストを提供します。
 
-参照： [TiDBSQL文法](https://pingcap.github.io/sqlgram/#functioncallkeyword) 。
+参照： [TiDB SQL文法](https://pingcap.github.io/sqlgram/#functioncallkeyword) 。
 
 ### DDL {#ddl}
 
 TiDBでは、サポートされているすべてのDDL変更はオンラインで実行されます。 MySQLのDDL操作と比較して、TiDBのDDL操作には次の主要な制限があります。
 
--   `ALTER TABLE`のステートメントで複数の操作を完了することはできません。たとえば、1つのステートメントに複数の列またはインデックスを追加することはできません。そうしないと、 `Unsupported multi schema change`エラーが出力される可能性があります。
+-   `ALTER TABLE`のステートメントで複数の操作を完了することはできません。たとえば、1つのステートメントに複数の列またはインデックスを追加することはできません。そうしないと、 `Unsupported multi schema change`エラーが出力される場合があります。
 -   TiDBの`ALTER TABLE`は、一部のデータ型の変更をサポートしていません。たとえば、TiDBは`DECIMAL`タイプから`DATE`タイプへの変更をサポートしていません。データ型の変更がサポートされていない場合、TiDBは`Unsupported modify column: type %d not match origin %d`エラーを報告します。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-modify-column.md)を参照してください。
--   `ALGORITHM={INSTANT,INPLACE,COPY}`構文は、TiDBのアサーションとしてのみ機能し、 `ALTER`アルゴリズムを変更しません。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)を参照してください。
+-   `ALGORITHM={INSTANT,INPLACE,COPY}`構文は、TiDBのアサーションとしてのみ関数し、 `ALTER`アルゴリズムを変更しません。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)を参照してください。
 -   `CLUSTERED`タイプの主キーの追加/削除はサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
 -   さまざまなタイプのインデックス（ `HASH|BTREE|RTREE|FULLTEXT` ）はサポートされておらず、指定すると解析されて無視されます。
--   テーブルパーティショニングは、 `HASH` 、および`RANGE`のパーティショニングタイプをサポートし`LIST` 。サポートされていないパーティションタイプの場合、 `Warning: Unsupported partition type %s, treat as normal table`エラーが出力されることがあります`%s`は特定のパーティションタイプです。
+-   テーブルパーティショニングは、 `HASH` 、および`RANGE`のパーティショニングタイプをサポートし`LIST` 。サポートされていないパーティションタイプの場合、 `Warning: Unsupported partition type %s, treat as normal table`エラーが出力されることがあります。ここで、 `%s`は特定のパーティションタイプです。
 -   テーブルパーティショニングは、 `ADD` 、および`DROP`の操作もサポートし`TRUNCATE` 。他のパーティション操作は無視されます。次のテーブルパーティション構文はサポートされていません。
 
     -   `PARTITION BY KEY`
@@ -127,7 +127,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 -   構文`SELECT ... INTO @variable`はサポートされていません。
 -   構文`SELECT ... GROUP BY ... WITH ROLLUP`はサポートされていません。
--   構文`SELECT .. GROUP BY expr`は、MySQL5.7のように`GROUP BY expr ORDER BY expr`を意味しません。
+-   構文`SELECT .. GROUP BY expr`は、 MySQL 5.7のように`GROUP BY expr ORDER BY expr`を意味しません。
 
 詳細については、 [`SELECT`](/sql-statements/sql-statement-select.md)ステートメントのリファレンスを参照してください。
 
@@ -161,27 +161,27 @@ TiDBはMySQLと同様のストレージエンジンの抽象化をサポート�
 
 TiDBはほとんどの[SQLモード](/sql-mode.md)をサポートします：
 
--   `Oracle`や`PostgreSQL`などの互換モードは解析されますが、無視されます。互換モードはMySQL5.7で非推奨になり、MySQL8.0で削除されました。
--   `ONLY_FULL_GROUP_BY`モードには、MySQL5.7のマイナー[意味の違い](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql)があります。
+-   `Oracle`や`PostgreSQL`などの互換モードは解析されますが、無視されます。互換モードはMySQL5.7で非推奨になり、 MySQL 5.7で削除されました。
+-   `ONLY_FULL_GROUP_BY`モードには、 MySQL 5.7のマイナー[意味の違い](/functions-and-operators/aggregate-group-by-functions.md#differences-from-mysql)があります。
 -   MySQLの`NO_DIR_IN_CREATE`および`NO_ENGINE_SUBSTITUTION`モードは互換性のために受け入れられていますが、TiDBには適用されません。
 
 ### デフォルトの違い {#default-differences}
 
 -   デフォルトの文字セット：
     -   TiDBのデフォルト値は`utf8mb4`です。
-    -   MySQL5.7のデフォルト値は`latin1`です。
+    -   MySQL 5.7のデフォルト値は`latin1`です。
     -   MySQL8.0のデフォルト値は`utf8mb4`です。
 -   デフォルトの照合順序：
     -   TiDBのデフォルトの`utf8mb4`の照合順序は`utf8mb4_bin`です。
-    -   MySQL5.7の`utf8mb4`のデフォルトの照合順序は`utf8mb4_general_ci`です。
+    -   MySQL 5.7の`utf8mb4`のデフォルトの照合順序は`utf8mb4_general_ci`です。
     -   MySQL8.0のデフォルトの`utf8mb4`の照合順序は`utf8mb4_0900_ai_ci`です。
 -   デフォルト値`foreign_key_checks` ：
     -   TiDBのデフォルト値は`OFF`で、現在TiDBは`OFF`のみをサポートしています。
-    -   MySQL5.7のデフォルト値は`ON`です。
+    -   MySQL 5.7のデフォルト値は`ON`です。
 -   デフォルトのSQLモード：
     -   TiDBのデフォルトのSQLモードには、次のモードが含まれ`ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION` 。
     -   MySQLのデフォルトのSQLモード：
-        -   MySQL5.7のデフォルトのSQLモードはTiDBと同じです。
+        -   MySQL5.7のデフォルトのSQLモードはMySQL 5.7と同じです。
         -   MySQL 8.0のデフォルトのSQLモードには、次のモードが含まれてい`ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION` 。
 -   デフォルト値`lower_case_table_names` ：
     -   TiDBのデフォルト値は`2`で、現在TiDBは`2`のみをサポートしています。

@@ -40,7 +40,7 @@ DESC metrics_summary;
 -   `QUANTILE` ：パーセンタイル。 SQLステートメントを使用して`QUANTILE`を指定できます。例えば：
     -   `select * from metrics_summary where quantile=0.99`は、0.99パーセンタイルのデータの表示を指定します。
     -   `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)`は、0.8、0.90、0.99、0.999パーセンタイルのデータを同時に表示することを指定します。
--   `SUM_VALUE` 、および`AVG_VALUE`は`MIN_VALUE` 、合計、平均値、最小値、および最大値を意味し`MAX_VALUE` 。
+-   `SUM_VALUE` 、および`AVG_VALUE`は、 `MIN_VALUE`合計、平均値、最小値、および最大値を意味し`MAX_VALUE` 。
 -   `COMMENT` ：対応する監視テーブルのコメント。
 
 例えば：

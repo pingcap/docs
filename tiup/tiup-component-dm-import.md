@@ -14,7 +14,7 @@ DM v1.0では、クラスタは基本的にTiDBAnsibleを使用してデプロ�
 > -   このコマンドは、DMv2.0.0-rc.2以降のバージョンへのインポートのみをサポートします。
 > -   `import`コマンドは、DMv1.0クラスタを新しいDMv2.0クラスターにインポートするために使用されクラスタ。データ移行タスクを既存のv2.0クラスタにインポートする必要がある場合は、 [TiDBデータ移行をv1.0.xからv2.0+に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
 > -   一部のコンポーネントのデプロイメントディレクトリは、元のクラスタのものとは異なる場合があります。 `display`コマンドで確認できます。
-> -   クラスタをインポートする前に、 `tiup update --self && tiup update dm`を実行してTiUPDMコンポーネントを最新バージョンにアップグレードします。
+> -   クラスタをインポートする前に、 `tiup update --self && tiup update dm`を実行してTiUP DMコンポーネントを最新バージョンにアップグレードします。
 > -   クラスタがインポートされた後、クラスターにはDMマスターノードが1つだけありクラスタ。 [`scale out`コマンド](/tiup/tiup-component-dm-scale-out.md)を参照して、DMマスターノードをスケールアウトできます。
 
 ## 構文 {#syntax}
@@ -51,7 +51,7 @@ tiup dm import [flags]
 
 ### -h、-help {#h-help}
 
--   ヘルプ情報を印刷します。
+-   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -59,4 +59,4 @@ tiup dm import [flags]
 
 インポートプロセスのログ。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

@@ -98,7 +98,7 @@ try (Connection connection = ds.getConnection()) {
 >
 > `rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字通りの量としてTiDBに保存されていると見なすことができます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)に別の時間文字列を表示します。
 >
-> また、MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038より大きい値を保存する場合は、 `DATETIME`タイプを使用することをお勧めします。
+> また、MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038より大きい値を格納する場合は、 `DATETIME`タイプを使用することをお勧めします。
 
 ## パフォーマンスに関する考慮事項 {#performance-considerations}
 

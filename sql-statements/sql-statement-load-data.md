@@ -5,7 +5,7 @@ summary: An overview of the usage of LOAD DATA for the TiDB database.
 
 # データを読み込む {#load-data}
 
-`LOAD DATA`ステートメントバッチはデータをTiDBテーブルにロードします。
+`LOAD DATA`ステートメントのバッチは、データをTiDBテーブルにロードします。
 
 ## あらすじ {#synopsis}
 

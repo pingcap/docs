@@ -34,7 +34,7 @@ TiUPプレイグラウンドコンポーネントは、主にLinuxまたはmacOS
 
 ## 同じホストに複数のインスタンスをデプロイできますか？ {#can-multiple-instances-be-deployed-on-the-same-host}
 
-TiUPクラスタコンポーネントを使用して、同じホストに複数のインスタンスをデプロイできますが、異なるポートとディレクトリが構成されています。そうしないと、ディレクトリとポートの競合が発生する可能性があります。
+TiUPクラスタコンポーネントを使用して、同じホストに複数のインスタンスを展開できますが、異なるポートとディレクトリが構成されています。そうしないと、ディレクトリとポートの競合が発生する可能性があります。
 
 ## 同じクラスタ内でポートとディレクトリの競合が検出されていますか？ {#are-port-and-directory-conflicts-detected-within-the-same-cluster}
 
@@ -42,7 +42,7 @@ TiUPクラスタコンポーネントを使用して、同じホストに複数�
 
 ## 異なるクラスター間でポートとディレクトリの競合が検出されていますか？ {#are-port-and-directory-conflicts-detected-among-different-clusters}
 
-複数の異なるクラスターが同じTiUP制御マシンによって展開されている場合、これらのクラスター間のポートとディレクトリの競合は、展開およびスケーリング中に検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
+複数の異なるクラスターが同じTiUPコントロールマシンによって展開されている場合、これらのクラスター間のポートとディレクトリの競合は、展開およびスケーリング中に検出されます。クラスターが異なるTiUP制御マシンによってデプロイされている場合、競合検出は現在サポートされていません。
 
 ## クラスタの展開中に、TiUPは<code>ssh: handshake failed: read tcp 10.10.10.34:38980 -&gt; 10.10.10.34:3600: read: connection reset by peer</code>ました {#during-cluster-deployment-tiup-received-an-code-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-code-error}
 

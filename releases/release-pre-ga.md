@@ -19,7 +19,7 @@ title: Pre-GA release notes
 -   SQLステートメントでの優先順位付けの構成をサポートし、クエリタイプに従って一部のステートメントの優先順位付けを自動的に設定します
 -   式のリファクタリングを完了し、速度が約30％向上しました
 
-## 配置ドライバー（PD） {#placement-driver-pd}
+## 配置Driver（PD） {#placement-driver-pd}
 
 -   PDクラスタのリーダーの手動変更をサポート
 

@@ -59,7 +59,7 @@ Grafanaの使用方法の詳細については、 [Grafanaのドキュメント]
 
 ## 回転するscrap_configのベストプラクティス {#best-practice-of-rotating-scrape-config}
 
-データのセキュリティを向上させるには、scrap_configファイルベアラートークンを定期的にローテーションするのが一般的なベストプラクティスです。
+データのセキュリティを向上させるために、scrap_configファイルベアラトークンを定期的にローテーションすることが一般的なベストプラクティスです。
 
 1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheusの新しいscrap_configファイルを作成します。
 2.  新しいファイルの内容をPrometheus構成ファイルに追加します。

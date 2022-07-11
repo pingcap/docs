@@ -66,7 +66,7 @@ TiDB Ansibleバージョン：4.0.0-beta.1
 -   TiDB Binlog
     -   コンポーネント間の[＃894](https://github.com/pingcap/tidb-binlog/pull/894)をサポート[＃904](https://github.com/pingcap/tidb-binlog/pull/904)
     -   Drainerに`kafka-client-id`の構成アイテムを追加して、Kafkaのクライアント[＃902](https://github.com/pingcap/tidb-binlog/pull/902)を構成します。
-    -   [＃885](https://github.com/pingcap/tidb-binlog/pull/885)での増分バックアップデータのパージをサポート
+    -   Drainerでの[＃885](https://github.com/pingcap/tidb-binlog/pull/885)バックアップデータのパージをサポート
 
 -   TiDB Ansible
     -   1つのクラスタでの複数のGrafana/Prometheus/Alertmanagersのデプロイをサポート[＃1142](https://github.com/pingcap/tidb-ansible/pull/1142)
@@ -81,7 +81,7 @@ TiDB Ansibleバージョン：4.0.0-beta.1
     -   `create or replace view`ステートメントが正しく処理されないために`information_schema.views`に重複データが存在する問題を修正します[＃14832](https://github.com/pingcap/tidb/pull/14832)
     -   `plan cache`が有効になっている場合の`BatchPointGet`の誤った結果を修正します[＃14855](https://github.com/pingcap/tidb/pull/14855)
     -   タイムゾーンが変更された後にデータが間違ったパーティションテーブルに挿入される問題を修正します[＃14370](https://github.com/pingcap/tidb/pull/14370)
-    -   外部結合の簡略化中に`IsTrue`関数の無効な名前を使用して式を再構築するときに発生したパニックを修正します[＃14515](https://github.com/pingcap/tidb/pull/14515)
+    -   外部結合の簡略化中に`IsTrue`関数の無効な名前を使用して式を再構築するときに発生したpanicを修正します[＃14515](https://github.com/pingcap/tidb/pull/14515)
     -   `show binding`ステートメント[＃14443](https://github.com/pingcap/tidb/pull/14443)の誤った特権チェックを修正します
 
 -   TiKV

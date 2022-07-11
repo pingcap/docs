@@ -122,9 +122,9 @@ MySQL [test]> select @@last_plan_from_cache;
 1 row in set (0.00 sec)
 ```
 
-## 準備された計画キャッシュのメモリ管理 {#memory-management-of-prepared-plan-cache}
+## プリペアドプランキャッシュのメモリ管理 {#memory-management-of-prepared-plan-cache}
 
-準備済みプランキャッシュを使用すると、メモリのオーバーヘッドが発生します。内部テストでは、キャッシュされた各プランは平均100KiBのメモリを消費します。プランキャッシュは現在`SESSION`レベルであるため、合計メモリ消費量は約`the number of sessions * the average number of cached plans in a session * 100 KiB`です。
+プリペアドプランキャッシュを使用すると、メモリのオーバーヘッドが発生します。内部テストでは、キャッシュされた各プランは平均100KiBのメモリを消費します。プランキャッシュは現在`SESSION`レベルであるため、合計メモリ消費量は約`the number of sessions * the average number of cached plans in a session * 100 KiB`です。
 
 たとえば、現在のTiDBインスタンスには同時実行で50のセッションがあり、各セッションには約100のキャッシュされたプランがあります。合計メモリ消費量は約`50 * 100 * 100 KiB` = `512 MB`です。
 

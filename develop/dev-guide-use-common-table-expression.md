@@ -5,7 +5,7 @@ summary: Learn the CTE feature of TiDB, which help you write SQL statements more
 
 # 共通テーブル式 {#common-table-expression}
 
-一部のトランザクションシナリオでは、アプリケーションが複雑なため、最大2,000行の単一のSQLステートメントを作成する必要がある場合があります。ステートメントには、おそらく多くの集計とマルチレベルのサブクエリのネストが含まれています。このような長いSQLステートメントを維持することは、開発者にとって悪夢になる可能性があります。
+一部のトランザクションシナリオでは、アプリケーションが複雑なため、最大2,000行の単一のSQLステートメントを作成する必要がある場合があります。このステートメントには、おそらく多くの集計とマルチレベルのサブクエリのネストが含まれています。このような長いSQLステートメントを維持することは、開発者にとって悪夢になる可能性があります。
 
 このような長いSQLステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)を使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
@@ -170,7 +170,7 @@ FROM
 
 まず、CTEブロック`books_authored_by_rm`で著者（IDは`2299112019` ）によって書かれた本をチェックしてください。次に、これらの本の平均評価と順序をそれぞれ`books_with_average_ratings`と`books_with_orders`で見つけます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-1のクエリは`books_authored_by_rm`回だけ実行され、TiDBはその結果をキャッシュするための一時的なスペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照している場合、TiDBはこの一時スペースから直接結果を取得します。
+1のクエリは`books_authored_by_rm`回だけ実行され、TiDBはその結果をキャッシュするための一時スペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照している場合、TiDBはこの一時スペースから直接結果を取得します。
 
 ### 再帰CTE {#recursive-cte}
 

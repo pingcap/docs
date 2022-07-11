@@ -4,7 +4,7 @@ title: TiDB 2.1.7 Release Notes
 
 # TiDB2.1.7リリースノート {#tidb-2-1-7-release-notes}
 
-発売日：2019年3月28日
+リリース日：2019年3月28日
 
 TiDBバージョン：2.1.7
 
@@ -23,13 +23,13 @@ TiDB Ansibleバージョン：2.1.7
 -   `default_week_format`変数が`week`関数[＃9753](https://github.com/pingcap/tidb/pull/9753)で有効にならない問題を修正します
 -   プラグインフレームワークをサポートする[＃9880](https://github.com/pingcap/tidb/pull/9880) 、 [＃9888](https://github.com/pingcap/tidb/pull/9888)
 -   `log_bin`システム変数[＃9634](https://github.com/pingcap/tidb/pull/9634)を使用して、binlogの有効化状態のチェックをサポートします。
--   SQLステートメントを使用したポンプ/ドレイナーステータスのチェックのサポート[＃9896](https://github.com/pingcap/tidb/pull/9896)
+-   SQLステートメントを使用したPump/Drainerステータスのチェックのサポート[＃9896](https://github.com/pingcap/tidb/pull/9896)
 -   TiDB1をアップグレードするときにutf8でmb4文字をチェックすることに関する互換性の問題を修正し[＃9887](https://github.com/pingcap/tidb/pull/9887)
--   集計関数が場合によってはJSONデータを計算するときのパニックの問題を修正します[＃9927](https://github.com/pingcap/tidb/pull/9927)
+-   集計関数が場合によってはJSONデータを計算するときのpanicの問題を修正します[＃9927](https://github.com/pingcap/tidb/pull/9927)
 
 ## PD {#pd}
 
--   レプリカの数が1の場合、バランス領域に転送リーダーステップを作成できない問題を修正します[＃1462](https://github.com/pingcap/pd/pull/1462)
+-   レプリカの数が1の場合、バランス領域にリーダーの転送ステップを作成できない問題を修正します[＃1462](https://github.com/pingcap/pd/pull/1462)
 
 ## ツール {#tools}
 

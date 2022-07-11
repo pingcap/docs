@@ -39,14 +39,14 @@ DebianLinuxやFedoraLinuxなどの他のLinuxOSバージョンは動作する可
 
 > **ノート：**
 >
-> [制御マシンにTiUPを展開します](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)クラスターを運用および管理する必要があります。
+> [制御マシンにTiUPを展開します](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)クラスタを運用および管理する必要があります。
 
 ### ターゲットマシン {#target-machines}
 
 | ソフトウェア  | バージョン    |
 | :------ | :------- |
 | sshpass | 1.06以降   |
-| numa    | 2.0.12以降 |
+| 沼       | 2.0.12以降 |
 | タール     | どれか      |
 
 ## サーバーの推奨事項 {#server-recommendations}
@@ -93,7 +93,7 @@ TiFlashを展開する前に、次の点に注意してください。
 -   TiFlashは[複数のディスクに展開](/tiflash/tiflash-configuration.md#multi-disk-deployment)にすることができます。
 -   TiKVデータのリアルタイムレプリケーションをバッファリングするために、TiFlashデータディレクトリの最初のディスクとして高性能SSDを使用することをお勧めします。このディスクのパフォーマンスは、PCI-ESSDなどのTiKVのパフォーマンスより低くすることはできません。ディスク容量は、合計容量の10％以上である必要があります。そうしないと、このノードのボトルネックになる可能性があります。通常のSSDを他のディスクに展開できますが、PCI-ESSDが優れているとパフォーマンスが向上することに注意してください。
 -   TiKVとは異なるノードにTiFlashを展開することをお勧めします。 TiFlashとTiKVを同じノードにデプロイする必要がある場合は、CPUコアとメモリの数を増やし、TiFlashとTiKVを異なるディスクにデプロイして、相互に干渉しないようにしてください。
--   TiFlashディスクの総容量は次のように計算されます： `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKVの全体的な計画容量が1 TB、TiKVレプリカの数が3、TiFlashレプリカの数が2の場合、TiFlashの推奨される合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。このような場合は、複製するテーブルのデータ量に応じてTiFlashの容量を決定してください。
+-   TiFlashディスクの総容量は次のように計算されます： `the data volume of the entire TiKV cluster to be replicated / the number of TiKV replicas * the number of TiFlash replicas` 。たとえば、TiKVの全体的な計画容量が1 TB、TiKVレプリカの数が3、TiFlashレプリカの数が2の場合、TiFlashの推奨される合計容量は`1024 GB / 3 * 2`です。一部のテーブルのデータのみを複製できます。このような場合は、複製するテーブルのデータ量に応じて、TiFlashの容量を決定してください。
 
 TiCDCを展開する前に、1TBを超えるPCIe-SSDディスクにTiCDCを展開することをお勧めします。
 
@@ -115,8 +115,8 @@ TiCDCを展開する前に、1TBを超えるPCIe-SSDディスクにTiCDCを展�
 |      TiFlash      |   20170  | TiFlashプロキシサービスポート                              |
 |      TiFlash      |   20292  | PrometheusがTiFlashプロキシメトリックをプルするためのポート          |
 |      TiFlash      |   8234   | PrometheusがTiFlashメトリックをプルするためのポート              |
-|        ポンプ        |   8250   | ポンプ通信ポート                                        |
-|       ドレイナー       |   8249   | ドレイナー通信ポート                                      |
+|        Pump       |   8250   | Pump通信ポート                                       |
+|      Drainer      |   8249   | Drainer通信ポート                                    |
 |       TiCDC       |   8300   | TiCDC通信ポート                                      |
 |       モニタリング      |   9090   | Prometheusサービスの通信ポート                            |
 |       モニタリング      |   20120  | NgMonitoringサービスの通信ポート                          |

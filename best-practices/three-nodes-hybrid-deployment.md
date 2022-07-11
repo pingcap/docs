@@ -57,7 +57,7 @@ tikv:
 
 #### <code>readpool.unified.max-thread-count</code> {#code-readpool-unified-max-thread-count-code}
 
-このパラメータのデフォルト値は、マシンスレッド数の80％です。ハイブリッド展開シナリオでは、この値を手動で計算して指定する必要があります。最初に、TiKVが使用するCPUスレッドの予想数の80％に設定できます。
+このパラメータのデフォルト値は、マシンスレッド数の80％です。ハイブリッド展開シナリオでは、この値を手動で計算して指定する必要があります。最初に、TiKVで使用されるCPUスレッドの予想数の80％に設定できます。
 
 #### <code>server.grpc-concurrency</code> {#code-server-grpc-concurrency-code}
 

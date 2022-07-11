@@ -25,7 +25,7 @@ tiup [flags] <component> [args...]      # Runs a component
 -   このオプションを有効にすると、指定したバイナリファイルパスが出力されます。
 
     -   `tiup -B/--binary <component>`を実行すると、最新の安定してインストールされた`<component>`コンポーネントのパスが印刷されます。 `<component>`がインストールされていない場合、エラーが返されます。
-    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされている`<component>`のコンポーネントの`<version>`のパスが出力されます。この`<version>`が印刷されない場合、エラーが返されます。
+    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされている`<component>`のコンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合、エラーが返されます。
 
 -   データ型： `BOOLEAN`
 

@@ -128,7 +128,7 @@ TiDB Cloudのデータベース詳細ページで、[**インポート**]ボタ�
 
 TiDB Cloudの詳細については、 [TiDB Cloudドキュメント](https://docs.pingcap.com/tidbcloud)を参照してください。
 
-### データのインポートステータスを表示する {#view-data-import-status}
+### データのインポートステータスをビューする {#view-data-import-status}
 
 インポートが完了したら、次のSQLステートメントを実行して、各テーブルのデータボリューム情報を表示できます。
 

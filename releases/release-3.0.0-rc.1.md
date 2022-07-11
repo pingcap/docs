@@ -4,7 +4,7 @@ title: TiDB 3.0.0-rc.1 Release Notes
 
 # TiDB3.0.0-rc.1リリースノート {#tidb-3-0-0-rc-1-release-notes}
 
-発売日：2019年5月10日
+リリース日：2019年5月10日
 
 TiDBバージョン：3.0.0-rc.1
 
@@ -25,7 +25,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   誤った実行を防ぐために、論理最適化フェーズで集計関数を削除する場合は、特に`GROUP_CONCAT`を処理します[＃9967](https://github.com/pingcap/tidb/pull/9967)
     -   フィルタが定数[＃9848](https://github.com/pingcap/tidb/pull/9848)の場合は、フィルタを結合演算子の子ノードに適切にプッシュダウンします。
     -   MySQL [＃10064](https://github.com/pingcap/tidb/pull/10064)との非互換性を防ぐために、論理最適化フェーズで列をプルーニングするときに`RAND()`などの一部の関数を特別に処理します。
-    -   サポート`FAST ANALYZE`は、領域全体をスキャンするのではなく、領域をサンプリングすることで統計収集を高速化します。この機能は、変数`tidb_enable_fast_analyze`によって制御されます。 [＃10258](https://github.com/pingcap/tidb/pull/10258)
+    -   サポート`FAST ANALYZE`は、リージョン全体をスキャンするのではなく、リージョンをサンプリングすることで統計収集を高速化します。この機能は、変数`tidb_enable_fast_analyze`によって制御されます。 [＃10258](https://github.com/pingcap/tidb/pull/10258)
     -   SQLステートメントの実行プランバインディングを実行することで実行の安定性を確保するSQLプラン管理をサポートします。この機能は現在ベータ版であり、SELECTステートメントのバインドされた実行プランのみをサポートします。実稼働環境での使用はお勧めしません。 [＃10284](https://github.com/pingcap/tidb/pull/10284)
 
 -   実行エンジン
@@ -56,7 +56,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   テーブルの文字セットが変更された後、列の文字セットが変更されないというバグを修正します[＃9790](https://github.com/pingcap/tidb/pull/9790)
     -   列のデフォルト値として`BINARY`を使用する場合の`SHOW COLUMN`の潜在的なバグを修正し`BIT` [＃9897](https://github.com/pingcap/tidb/pull/9897)
     -   `COLLATION`ステートメント`SHOW FULL COLUMNS`に`CHARSET`の説明を表示する際の互換性の問題を修正し[＃10007](https://github.com/pingcap/tidb/pull/10007) 。
-    -   `SHOW COLLATIONS`ステートメントがTiDB3でサポートされている照合のみをリストするという問題を修正し[＃10186](https://github.com/pingcap/tidb/pull/10186)
+    -   `SHOW COLLATIONS`ステートメントがTiDB3でサポートされている照合のみをリストする問題を修正し[＃10186](https://github.com/pingcap/tidb/pull/10186)
 
 ## PD {#pd}
 
@@ -79,9 +79,9 @@ TiDB Ansibleバージョン：3.0.0-rc.1
 
 -   エンジン
     -   読み取りトラフィックの誤った統計を引き起こす可能性のある問題を修正します[＃4436](https://github.com/tikv/tikv/pull/4436)
-    -   範囲[＃4503](https://github.com/tikv/tikv/pull/4503)を削除するときにプレフィックスエクストラクタパニックを引き起こす可能性がある問題を修正します
+    -   範囲[＃4503](https://github.com/tikv/tikv/pull/4503)を削除するときにプレフィックスエクストラクタpanicを引き起こす可能性がある問題を修正します
     -   メモリ管理を最適化して、 [＃4537](https://github.com/tikv/tikv/pull/4537)のメモリ割り当てとコピーを削減し`Iterator Key Bound Option`
-    -   学習者のログギャップを考慮しないと、場合によってはパニックが発生する可能性があるという問題を修正します[＃4559](https://github.com/tikv/tikv/pull/4559)
+    -   学習者のログギャップを考慮しないと、場合によってはpanicが発生する可能性があるという問題を修正します[＃4559](https://github.com/tikv/tikv/pull/4559)
     -   異なる[＃4612](https://github.com/tikv/tikv/pull/4612)間での`block cache` `column families`共有をサポート
 
 -   サーバ
@@ -95,7 +95,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   バッチインデックススキャンエグゼキュータ[＃4419](https://github.com/tikv/tikv/pull/4419)を追加します
     -   ベクトル化された評価フレームワークを追加する[＃4322](https://github.com/tikv/tikv/pull/4322)
     -   バッチエグゼキュータの実行サマリーフレームワークを追加する[＃4433](https://github.com/tikv/tikv/pull/4433)
-    -   評価パニックを引き起こす可能性のある無効な列オフセットを回避するために、RPN式を作成するときに最大列を確認してください[＃4481](https://github.com/tikv/tikv/pull/4481)
+    -   評価panicを引き起こす可能性のある無効な列オフセットを回避するために、RPN式を作成するときに最大列を確認してください[＃4481](https://github.com/tikv/tikv/pull/4481)
     -   `BatchLimitExecutor`を[＃4469](https://github.com/tikv/tikv/pull/4469)
     -   ReadPoolで元の`futures-cpupool`を`tokio-threadpool`に置き換えて、コンテキストスイッチ[＃4486](https://github.com/tikv/tikv/pull/4486)を減らします
     -   バッチ集約フレームワークの追加[＃4533](https://github.com/tikv/tikv/pull/4533)
@@ -112,8 +112,8 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   unsignedint型の主キー列のbinlogデータが負の場合のレプリケーション中止の問題を修正します[＃573](https://github.com/pingcap/tidb-binlog/pull/573)
     -   ダウンストリームが`pb`の場合、圧縮オプションを提供しません。ダウンストリーム名を`pb`から[＃559](https://github.com/pingcap/tidb-binlog/pull/559)に変更し`file`
     -   ローカルストレージでの非同期フラッシュを可能にする`storage.sync-log`の構成アイテムをPumpに追加します[＃509](https://github.com/pingcap/tidb-binlog/pull/509)
-    -   ポンプとドレイナー[＃495](https://github.com/pingcap/tidb-binlog/pull/495)間の通信のトラフィック圧縮をサポートします
-    -   Drainerに`syncer.sql-mode`の構成アイテムを追加して、さまざまなsql- [＃511](https://github.com/pingcap/tidb-binlog/pull/511)でのDDLクエリの解析をサポートします。
+    -   PumpとDrainer[＃495](https://github.com/pingcap/tidb-binlog/pull/495)間の通信のトラフィック圧縮をサポートします
+    -   Drainerに`syncer.sql-mode`の構成アイテムを追加して、さまざまなsql- DrainerでのDDLクエリの解析をサポートし[＃511](https://github.com/pingcap/tidb-binlog/pull/511) 。
     -   レプリケーションを必要としないテーブルの除外をサポートするために`syncer.ignore-table`の構成アイテムを追加します[＃520](https://github.com/pingcap/tidb-binlog/pull/520)
 
 -   雷
@@ -135,12 +135,12 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   クラスタステータスを表示するためのサマリーダッシュボード
     -   問題のトラブルシューティングのためのtrouble_shootingダッシュボード
     -   開発者が問題を分析するための詳細ダッシュボード
--   Kafkaバージョン[＃730](https://github.com/pingcap/tidb-ansible/pull/730)のTiDBBinlogのダウンロードエラーの原因となるバグを修正します
+-   Kafkaバージョン[＃730](https://github.com/pingcap/tidb-ansible/pull/730)のBinlogのダウンロードエラーの原因となるバグを修正します
 -   CentOS 7.0以降、およびRedHat7.0以降としてサポートされているオペレーティングシステムのバージョン制限を変更する[＃733](https://github.com/pingcap/tidb-ansible/pull/733)
 -   ローリングアップデート中のバージョン検出モードをマルチコンカレント[＃736](https://github.com/pingcap/tidb-ansible/pull/736)に変更します
 -   [＃740](https://github.com/pingcap/tidb-ansible/pull/740)のドキュメントリンクを更新する
 -   冗長なTiKV監視メトリックを削除します。トラブルシューティング用の新しいメトリックを追加する[＃735](https://github.com/pingcap/tidb-ansible/pull/735)
 -   `table-regions.py`のスクリプトを最適化して、表[＃739](https://github.com/pingcap/tidb-ansible/pull/739)ごとにリーダーの分布を表示します
--   Drainer1の構成ファイルを更新し[＃745](https://github.com/pingcap/tidb-ansible/pull/745)
+-   Drainerの構成ファイルを更新し[＃745](https://github.com/pingcap/tidb-ansible/pull/745)
 -   SQLカテゴリごとにレイテンシを表示する新しいパネルでTiDBモニタリングを最適化する[＃747](https://github.com/pingcap/tidb-ansible/pull/747)
 -   Lightning構成ファイルを更新し、 `tidb_lightning_ctl`のスクリプトを追加します[＃1e946f8](https://github.com/pingcap/tidb-ansible/commit/1e946f89908e8fd6ef84128c6da3064ddfccf6a8)

@@ -5,7 +5,7 @@ summary: Learn about the Control Flow functions.
 
 # 制御フロー機能 {#control-flow-functions}
 
-TiDBは、MySQL5.7で利用可能な[制御フロー機能](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html)すべてをサポートします。
+TiDBは、 MySQL 5.7で利用可能な[制御フロー関数](https://dev.mysql.com/doc/refman/5.7/en/flow-control-functions.html)すべてをサポートします。
 
 | 名前                                                                                                | 説明                         |
 | :------------------------------------------------------------------------------------------------ | :------------------------- |

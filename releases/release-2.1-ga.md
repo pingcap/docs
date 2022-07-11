@@ -10,7 +10,7 @@ title: TiDB 2.1 GA Release Notes
 
 -   SQLオプティマイザー
 
-    -   `Index Join`の選択範囲を最適化して、実行パフォーマンスを向上させます
+    -   選択範囲`Index Join`を最適化して、実行パフォーマンスを向上させます
 
     -   `Index Join`の外部テーブルの選択を最適化し、行カウントの推定値が小さいテーブルを外部テーブルとして使用します
 
@@ -22,7 +22,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `UPDATE`および`DELETE`ステートメントでのインデックスヒントと結合ヒントの使用のサポート
 
-    -   より多くの機能の`CEIL` `IS FALSE`を`IS TRUE` `FLOOR` `ABS`
+    -   より多くの関数の`CEIL` `IS FALSE`を`IS TRUE` `FLOOR` `ABS`
 
     -   `IF`および`IFNULL`の組み込み関数の定数畳み込みアルゴリズムを最適化します
 
@@ -116,7 +116,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `ALTER TABLE RENAME KEY TO`構文をサポートする
 
-    -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します
+    -   `admin show ddl jobs`の出力情報にテーブル名とデータベース名を追加します。
 
     -   [`ddl/owner/resign` HTTPインターフェースを使用してDDL所有者を解放し、新しいDDL所有者の選出を開始することをサポートします](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)
 
@@ -136,7 +136,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `Show ProcessList`ステートメントは、より正確な情報を返します
 
-## 配置ドライバー（PD） {#placement-driver-pd}
+## 配置Driver（PD） {#placement-driver-pd}
 
 -   可用性を最適化する
 
@@ -199,7 +199,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `Filter`の関連メトリックを追加します
 
-    -   etcdRaftステートマシンに関するメトリックを追加します
+    -   Raftステートマシンに関するメトリックを追加します
 
 -   パフォーマンス
 
@@ -227,7 +227,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   連続ロールバックレコードを折りたたんで、読み取りパフォーマンスを確保します
 
-    -   [`UnsafeDestroyRange` APIを追加して、ドロップするテーブル/インデックスのスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
+    -   [`UnsafeDestroyRange` APIを追加して、ドロップするテーブル/インデックス用のスペースの収集をサポートします](https://github.com/tikv/rfcs/blob/master/text/0002-unsafe-destroy-range.md)
 
     -   書き込みへの影響を減らすためにGCモジュールを分離します
 
@@ -245,7 +245,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   キーの数に応じて`Region Split`をサポートし、インデックススキャンの同時実行性を向上させます
 
-    -   ラフトメッセージプロセスを改善して、 `Region Split`による不要な遅延を回避します
+    -   Raftメッセージプロセスを改善して、 `Region Split`による不要な遅延を回避します
 
     -   ネットワーク分離がサービスに与える影響を減らすために、デフォルトで`PreVote`機能を有効にします
 

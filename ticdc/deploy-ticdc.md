@@ -5,7 +5,7 @@ summary: Learn how to deploy TiCDC and the hardware and software recommendations
 
 # TiCDCをデプロイ {#deploy-ticdc}
 
-このドキュメントでは、TiCDCクラスタを展開する方法と、それを展開および実行するためのハードウェアとソフトウェアの推奨事項について説明します。 TiCDCを新しいTiDBクラスタと一緒にデプロイするか、TiCDCコンポーネントを既存のTiDBクラスタに追加することができます。通常、TiUPを使用してTiCDCを展開することをお勧めします。さらに、必要に応じてバイナリを使用してデプロイすることもできます。
+このドキュメントでは、TiCDCクラスタを展開する方法と、それを展開および実行するためのハードウェアとソフトウェアの推奨事項について説明します。 TiCDCを新しいTiDBクラスタと一緒にデプロイするか、TiCDCコンポーネントを既存のTiDBクラスタに追加することができます。一般に、TiUPを使用してTiCDCを展開することをお勧めします。さらに、必要に応じてバイナリを使用してデプロイすることもできます。
 
 ## ソフトウェアとハードウェアの推奨事項 {#software-and-hardware-recommendations}
 

@@ -10,7 +10,7 @@ TiDBバージョン：6.1.0
 
 6.1.0では、主な新機能または改善点は次のとおりです。
 
--   リストのパーティショニングとリストのCOLUMNSパーティショニングがGAになり、MySQL5.7と互換性があります
+-   List パーティショニングとリストのCOLUMNSパーティショニングがGAになり、 MySQL 5.7と互換性があります
 -   TiFlashパーティションテーブル（動的プルーニング）がGAになります
 -   MySQLと互換性のあるユーザーレベルのロック管理をサポートする
 -   非トランザクションDMLステートメントをサポートします（ `DELETE`のみをサポートします）
@@ -23,9 +23,9 @@ TiDBバージョン：6.1.0
 
 ### SQL {#sql}
 
--   リストのパーティショニングとリストのCOLUMNSパーティショニングはGAになります。どちらもMySQL5.7と互換性があります。
+-   List パーティショニングとリストのCOLUMNSパーティショニングはGAになります。どちらもMySQL 5.7と互換性があります。
 
-    ユーザー[COLUMNSパーティショニングを一覧表示します](/partitioned-table.md#list-columns-partitioning) ： [リストのパーティション化](/partitioned-table.md#list-partitioning)
+    ユーザー[List COLUMNS パーティショニング](/partitioned-table.md#list-columns-partitioning) ： [List パーティショニング](/partitioned-table.md#list-partitioning)
 
 -   TiFlashは、コンパクトコマンドの開始をサポートしています。 （実験的）
 
@@ -57,7 +57,7 @@ TiDBバージョン：6.1.0
 
 -   カスタマイズされたリージョンサイズをサポート（実験的）
 
-    リージョンをより大きなサイズに設定すると、リージョンの数を効果的に減らし、リージョンの管理を容易にし、クラスタのパフォーマンスと安定性を向上させることができます。この機能は、リージョン内のより小さな範囲であるバケットの概念を導入します。クエリユニットとしてバケットを使用すると、リージョンがより大きなサイズに設定されている場合に、同時クエリのパフォーマンスを最適化できます。バケットをクエリユニットとして使用すると、ホットリージョンのサイズを動的に調整して、スケジューリングの効率と負荷分散を確保することもできます。この機能は現在実験的です。実稼働環境での使用はお勧めしません。
+    リージョンをより大きなサイズに設定すると、リージョンの数を効果的に減らし、リージョンの管理を容易にし、クラスタのパフォーマンスと安定性を向上させることができます。この機能は、リージョン内のより小さな範囲であるバケットの概念を導入します。クエリユニットとしてバケットを使用すると、リージョンがより大きなサイズに設定されている場合に、同時クエリのパフォーマンスを最適化できます。バケットをクエリユニットとして使用すると、ホットリージョンのサイズを動的に調整して、スケジューリングの効率と負荷分散を確保することもできます。この機能は現在実験的中です。実稼働環境での使用はお勧めしません。
 
     [ユーザードキュメント](/tune-region-performance.md) [＃11515](https://github.com/tikv/tikv/issues/11515)
 
@@ -70,13 +70,13 @@ TiDBバージョン：6.1.0
 -   結合順序ヒント構文をサポートする
 
     -   `LEADING`ヒントは、結合操作のプレフィックスとして指定された順序を使用するようにオプティマイザに通知します。結合の適切なプレフィックスを使用すると、結合の初期段階でデータ量をすばやく削減し、クエリのパフォーマンスを向上させることができます。
-    -   `STRAIGHT_JOIN`ヒントは、 `FROM`句のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザに通知します。
+    -   `STRAIGHT_JOIN`ヒントは、 `FROM`節のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザーに通知します。
 
     これは、テーブル結合の順序を修正するための方法を提供します。ヒントを適切に使用すると、SQLのパフォーマンスとクラスタの安定性を効果的に高めることができます。
 
     ユーザー[`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join) [＃29932](https://github.com/pingcap/tidb/issues/29932) [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-)
 
--   TiFlashはさらに4つの機能をサポートしています。
+-   TiFlashはさらに4つの関数をサポートしています。
 
     -   `FROM_DAYS`
     -   `TO_DAYS`
@@ -89,13 +89,13 @@ TiDBバージョン：6.1.0
 
     OLAPシナリオのパフォーマンスを向上させるために、パーティションテーブルで動的プルーニングモードがサポートされています。 TiDBをv6.0.0より前のバージョンからアップグレードする場合は、パフォーマンスを最大化するために、既存のパーティションテーブルの統計を手動で更新することをお勧めします（v6.1.0へのアップグレード後に作成された新しいインストールまたは新しいパーティションには必要ありません）。
 
-    ユーザー[動的剪定モード](/partitioned-table.md#dynamic-pruning-mode) [＃3873](https://github.com/pingcap/tiflash/issues/3873) [MPPモードでパーティションテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
+    ユーザー[動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode) [＃3873](https://github.com/pingcap/tiflash/issues/3873) [MPPモードでパーティションテーブルにアクセスする](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode)
 
-### 安定 {#stability}
+### 安定性 {#stability}
 
 -   SST破損からの自動回復
 
-    RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けるピアをスケジュールし、他のレプリカを使用してそのデータを回復しようとします。 `background-error-recovery-window`パラメーターを使用して、リカバリーの最大許容時間を設定できます。時間枠内にリカバリ操作が完了しない場合、TiKVはパニックになります。この機能は、回復可能な損傷したストレージを自動的に検出して回復するため、クラスタの安定性が向上します。
+    RocksDBがバックグラウンドで破損したSSTファイルを検出すると、TiKVは影響を受けるピアをスケジュールし、他のレプリカを使用してそのデータを回復しようとします。 `background-error-recovery-window`パラメーターを使用して、リカバリーの最大許容時間を設定できます。時間枠内に回復操作が完了しない場合、TiKVはpanicになります。この機能は、回復可能な損傷したストレージを自動的に検出して回復するため、クラスタの安定性が向上します。
 
     [ユーザードキュメント](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610) [＃10578](https://github.com/tikv/tikv/issues/10578)
 
@@ -123,19 +123,19 @@ TiDBバージョン：6.1.0
 
 -   複数のレプリカが失われた場合のワンストップオンラインデータリカバリをサポートする
 
-    TiDB v6.1.0より前では、マシンの障害のために複数のリージョンレプリカが失われた場合、ユーザーはすべてのTiKVサーバーを停止し、TiKV制御を使用してTiKVを1つずつ回復する必要があります。 TiDB v6.1.0以降、リカバリプロセスは完全に自動化されており、TiKVを停止する必要がなく、オンラインの他のアプリケーションに影響を与えません。回復プロセスはPD制御を使用してトリガーでき、よりユーザーフレンドリーな要約情報を提供します。
+    TiDB v6.1.0より前では、マシンの障害のために複数のリージョンレプリカが失われた場合、ユーザーはすべてのTiKVサーバーを停止し、 TiKV Controlを使用してTiKVを1つずつ回復する必要があります。 TiDB v6.1.0以降、リカバリプロセスは完全に自動化されており、TiKVを停止する必要がなく、オンラインの他のアプリケーションに影響を与えません。回復プロセスはPD Controlを使用してトリガーでき、よりユーザーフレンドリーな要約情報を提供します。
 
     [ユーザードキュメント](/online-unsafe-recovery.md) [＃10483](https://github.com/tikv/tikv/issues/10483)
 
 -   履歴統計収集タスクの表示をサポート
 
-    `SHOW ANALYZE STATUS`ステートメントを使用して、クラスターレベルの統計収集タスクを表示できます。 TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを示し、履歴タスクレコードはTiDBの再起動後にクリアされます。したがって、履歴統計の収集時間と詳細を表示することはできません。 TiDB v6.1.0以降では、統計収集タスクの履歴レコードが保持され、クラスタの再起動後にクエリを実行できます。これにより、統計の異常によって引き起こされるクエリパフォーマンスの問題をトラブルシューティングするためのリファレンスが提供されます。
+    `SHOW ANALYZE STATUS`ステートメントを使用して、クラスターレベルの統計収集タスクを表示できます。 TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`ステートメントはインスタンスレベルのタスクのみを示し、履歴タスクレコードはTiDBの再起動後にクリアされます。したがって、履歴統計の収集時間と詳細を表示することはできません。 TiDB v6.1.0以降、統計収集タスクの履歴レコードは保持され、クラスタの再起動後にクエリを実行できます。これにより、統計の異常によって引き起こされるクエリパフォーマンスの問題をトラブルシューティングするためのリファレンスが提供されます。
 
     [ユーザードキュメント](/sql-statements/sql-statement-show-analyze-status.md)
 
 -   オンラインでのTiDB、TiKV、およびTiFlash構成の変更のサポート
 
-    以前のTiDBバージョンでは、構成アイテムを変更した後、変更を有効にするためにクラスタを再起動する必要があります。これにより、オンラインサービスが中断される可能性があります。この問題に対処するために、TiDB v6.1.0にはオンライン構成機能が導入されており、クラスタを再起動せずにパラメーターの変更を検証できます。具体的な最適化は次のとおりです。
+    以前のバージョンのTiDBでは、構成アイテムを変更した後、変更を有効にするためにクラスタを再起動する必要があります。これにより、オンラインサービスが中断される可能性があります。この問題に対処するために、TiDB v6.1.0にはオンライン構成機能が導入されており、クラスタを再起動せずにパラメーターの変更を検証できます。具体的な最適化は次のとおりです。
 
     -   一部のTiDB構成アイテムをシステム変数に変換して、オンラインで変更して永続化できるようにします。元の構成アイテムは、変換後に非推奨になることに注意してください。変換された構成アイテムの詳細なリストについては、 [Configuration / コンフィグレーションファイルのパラメーター](#configuration-file-parameters)を参照してください。
     -   一部のTiKVパラメーターのオンライン構成をサポートします。パラメータの詳細なリストについては、 [その他](#others)を参照してください。
@@ -175,7 +175,7 @@ TiDBバージョン：6.1.0
 
 -   MySQLを使用したユーザーレベルのロック管理との互換性をサポート
 
-    ユーザーレベルのロックは、組み込み関数を介してMySQLによって提供されるユーザー名のロック管理システムです。ロック機能は、ロックのブロック、待機、およびその他のロック管理機能を提供できます。ユーザーレベルのロックは、Rails、Elixir、EctoなどのORMフレームワークでも広く使用されています。 v6.1.0以降、TiDBはMySQL互換のユーザーレベルのロック管理をサポートし、 `GET_LOCK` 、および`RELEASE_LOCK`の機能をサポートして`RELEASE_ALL_LOCKS`ます。
+    ユーザーレベルのロックは、組み込み関数を介してMySQLによって提供されるユーザー名のロック管理システムです。ロック関数は、ロックのブロック、待機、およびその他のロック管理機能を提供できます。ユーザーレベルのロックは、Rails、Elixir、EctoなどのORMフレームワークでも広く使用されています。 v6.1.0以降、TiDBはMySQL互換のユーザーレベルのロック管理をサポートし、 `GET_LOCK` 、および`RELEASE_LOCK`の関数をサポートして`RELEASE_ALL_LOCKS`ます。
 
     [ユーザードキュメント](/functions-and-operators/locking-functions.md) [＃14994](https://github.com/pingcap/tidb/issues/14994)
 
@@ -229,7 +229,7 @@ TiDBバージョン：6.1.0
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                           | 新しく追加されました | v6.1.0以降、TiDBの結合したテーブルの再配置再注文アルゴリズムは外部結合をサポートしています。この変数はサポート動作を制御し、デフォルト値は`ON`です。                                                                    |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                         | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `prepared-plan-cache.enabled` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                          |
 | [`tidb_gc_max_wait_time`](/system-variables.md#tidb_gc_max_wait_time-new-in-v610)                                             | 新しく追加されました | この変数は、コミットされていないトランザクションによってブロックされるGCセーフポイントの最大時間を設定するために使用されます。                                                                                     |
-| [tidb_max_auto_analyze_time](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)                                     | 新しく追加されました | この変数は、自動分析の最大実行時間を指定するために使用されます。                                                                                                                     |
+| [tidb_max_auto_analyze_time](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)                                     | 新しく追加されました | この変数は、auto analyzeの最大実行時間を指定するために使用されます。                                                                                                             |
 | [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)                                       | 新しく追加されました | この変数は、TiFlashがリクエストを実行するための最大同時実行性を設定するために使用されます。                                                                                                    |
 | [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)                                                 | 新しく追加されました | この設定は、以前は`tidb.toml`オプション（ `oom-action` ）でしたが、TiDBv6.1.0以降のシステム変数に変更されました。                                                                           |
 | [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)                                           | 新しく追加されました | この変数は、TiDBが統計を更新するときの最大メモリ使用量を制御します。これには、ユーザーが手動で実行した[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)や、TiDBバックグラウンドでの自動分析タスクが含まれます。 |
@@ -279,13 +279,13 @@ TiDBバージョン：6.1.0
 
 ### その他 {#others}
 
--   準備済みプランキャッシュをデフォルトで有効にする
+-   プリペアドプランキャッシュをデフォルトで有効にする
 
-    準備済みプランキャッシュは、新しいクラスターでデフォルトで有効になっており、 `Prepare` / `Execute`リクエストの実行プランをキャッシュします。後続の実行では、クエリプランの最適化をスキップできるため、パフォーマンスが向上します。アップグレードされたクラスターは、構成ファイルから構成を継承します。新しいクラスターは新しいデフォルト値を使用します。つまり、Prepared Plan Cacheはデフォルトで有効になっており、各セッションは最大100のプランをキャッシュできます（ `capacity=100` ）。この機能のメモリ消費量については、 [準備された計画キャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)を参照してください。
+    プリペアドプランキャッシュは、新しいクラスターでデフォルトで有効になっており、 `Prepare` / `Execute`リクエストの実行プランをキャッシュします。後続の実行では、クエリプランの最適化をスキップできるため、パフォーマンスが向上します。アップグレードされたクラスターは、構成ファイルから構成を継承します。新しいクラスターは新しいデフォルト値を使用します。つまり、 プリペアドプランキャッシュはデフォルトで有効になっており、各セッションは最大100のプランをキャッシュできます（ `capacity=100` ）。この機能のメモリ消費量については、 [プリペアドプランキャッシュのメモリ管理](/sql-prepared-plan-cache.md#memory-management-of-prepared-plan-cache)を参照してください。
 
 -   TiDB v6.1.0より前では、 `SHOW ANALYZE STATUS`はインスタンスレベルのタスクを示し、タスクレコードはTiDBの再起動後にクリアされます。 TiDB v6.1.0以降、 `SHOW ANALYZE STATUS`はクラスターレベルのタスクを示し、タスクレコードは再起動後も保持されます。 `tidb_analyze_version = 2`の場合、 `Job_info`列に`analyze option`情報が追加されます。
 
--   TiKV内の破損したSSTファイルにより、TiKVプロセスがパニックになる可能性があります。 TiDB v6.1.0より前は、SSTファイルが破損しているため、TiKVはすぐにパニックに陥りました。 TiDB v6.1.0以降、SSTファイルが破損してから1時間後にTiKVプロセスがパニックになります。
+-   TiKV内の破損したSSTファイルにより、TiKVプロセスがpanicになる可能性があります。 TiDB v6.1.0より前は、SSTファイルが破損しているため、TiKVはすぐにpanicに陥りました。 TiDB v6.1.0以降、SSTファイルが破損してから1時間後にTiKVプロセスがpanicになります。
 
 -   次のTiKV構成アイテムは[オンラインで値を変更する](/dynamic-config.md#modify-tikv-configuration-online)をサポートします：
 
@@ -303,11 +303,11 @@ TiDBバージョン：6.1.0
     -   アップグレード前に構成ファイルで指定された構成アイテムがすでに存在する場合、TiDBは、アップグレードプロセス中に、構成されたアイテムの値を対応するシステム変数の値に自動的に更新します。このように、アップグレード後、パラメータの最適化によってシステムの動作が変わることはありません。
     -   上記の自動更新は、アップグレード中に1回だけ発生します。アップグレード後、廃止された構成アイテムは無効になります。
 
--   ダッシュボードページがDMWebUIから削除されます。
+-   ダッシュボードページがDM WebUIから削除されます。
 
 -   `dispatchers.topic`と`dispatchers.partition`が有効になっている場合、TiCDCをv6.1.0より前のバージョンにダウングレードすることはできません。
 
--   Avroプロトコルを使用するTiCDCChangefeedは、v6.1.0より前のバージョンにダウングレードすることはできません。
+-   Avroプロトコルを使用するTiCDC Changefeedは、v6.1.0より前のバージョンにダウングレードすることはできません。
 
 ## 改善 {#improvements}
 
@@ -329,7 +329,7 @@ TiDBバージョン：6.1.0
     -   大きなスナップショットファイルを複数のファイルに分割することをサポート[＃11595](https://github.com/tikv/tikv/issues/11595)
     -   スナップショットガベージコレクションをRaftstoreからバックグラウンドスレッドに移動して、スナップショットGCがRaftstoreメッセージループをブロックしないようにします[＃11966](https://github.com/tikv/tikv/issues/11966)
     -   最大メッセージ長（ `max-grpc-send-msg-len` ）とgPRCメッセージの最大バッチサイズ（ `raft-msg-max-batch-size` ）の動的設定をサポート[＃12334](https://github.com/tikv/tikv/issues/12334)
-    -   [＃10483](https://github.com/tikv/tikv/issues/10483)を介しオンラインの安全でない復元計画の実行をサポート
+    -   Raftを介しオンラインの安全でない復元計画の実行を[＃10483](https://github.com/tikv/tikv/issues/10483)
 
 -   PD
     -   リージョンラベルの存続時間（TTL）をサポート[＃4694](https://github.com/tikv/pd/issues/4694)
@@ -354,9 +354,9 @@ TiDBバージョン：6.1.0
 
 -   TiDB
 
-    -   `in`関数が`bit`タイプのデータを処理するときに発生する可能性のあるパニックの問題を修正します[＃33070](https://github.com/pingcap/tidb/issues/33070)
+    -   `in`関数が`bit`タイプのデータを処理するときに発生する可能性のあるpanicの問題を修正します[＃33070](https://github.com/pingcap/tidb/issues/33070)
     -   `UnionScan`演算子は順序[＃33175](https://github.com/pingcap/tidb/issues/33175)を維持できないため、誤ったクエリ結果の問題を修正します
-    -   マージ結合演算子が特定の場合に間違った結果を取得する問題を修正します[＃33042](https://github.com/pingcap/tidb/issues/33042)
+    -   マージ結合演算子が特定の場合に間違った結果を得る問題を修正します[＃33042](https://github.com/pingcap/tidb/issues/33042)
     -   動的プルーニングモード[＃33231](https://github.com/pingcap/tidb/issues/33231)で`index join`の結果が間違っている可能性があるという問題を修正します。
     -   パーティションテーブルの一部のパーティションが削除されたときにデータがガベージコレクションされない可能性がある問題を修正します[＃33620](https://github.com/pingcap/tidb/issues/33620)
     -   クラスタのPDノードが置き換えられた後、一部のDDLステートメントが一定期間スタックする可能性がある問題を修正します[＃33908](https://github.com/pingcap/tidb/issues/33908)
@@ -372,7 +372,7 @@ TiDBバージョン：6.1.0
     -   マージされるターゲットリージョンが無効であるためにTiKVがパニックになり、ピアを予期せず破壊する問題を修正します[＃12232](https://github.com/tikv/tikv/issues/12232)
     -   v5.3.1またはv5.4.0からv6.0.0以降のバージョン[＃12269](https://github.com/tikv/tikv/issues/12269)にアップグレードするときにTiKVが`failed to load_latest_options`エラーを報告する問題を修正します。
     -   メモリリソースが不足しているときにRaftログを追加することによって引き起こされるOOMの問題を修正します[＃11379](https://github.com/tikv/tikv/issues/11379)
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVパニックの問題を修正します
+    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVpanicの問題を修正します
     -   `stats_monitor`がデッドループに陥った後、短時間でTiKVメモリ使用量が急増する問題を修正します[＃12416](https://github.com/tikv/tikv/issues/12416)
     -   FollowerRead3を使用するとTiKVが`invalid store ID 0`エラーを報告する問題を修正し[＃12478](https://github.com/tikv/tikv/issues/12478)
 
@@ -406,16 +406,16 @@ TiDBバージョン：6.1.0
         -   チェックポイントフラッシュにより、失敗した行のデータがスキップされる可能性がある問題を修正します[＃5279](https://github.com/pingcap/tiflow/issues/5279)
         -   場合によっては、ダウンストリームでフィルター処理されたDDLを手動で実行すると、タスクの再開が失敗する可能性があるという問題を修正します[＃5272](https://github.com/pingcap/tiflow/issues/5272)
         -   `case-sensitive: true`が設定されていない場合に大文字のテーブルを複製できない問題を修正します[＃5255](https://github.com/pingcap/tiflow/issues/5255)
-        -   `SHOW CREATE TABLE`ステートメント[＃5159](https://github.com/pingcap/tiflow/issues/5159)によって返されるインデックスの最初に主キーがない場合に発生するDMワーカーのパニックの問題を修正します。
+        -   `SHOW CREATE TABLE`ステートメント[＃5159](https://github.com/pingcap/tiflow/issues/5159)によって返されるインデックスの最初に主キーがない場合に発生するDMワーカーのpanicの問題を修正します。
         -   GTIDを有効にした場合、またはタスクが自動的に再開された場合に、CPU使用率が増加し、大量のログが出力される可能性がある問題を修正します[＃5063](https://github.com/pingcap/tiflow/issues/5063)
-        -   DMWebUI1のオフラインオプションおよびその他の使用上の問題を修正し[＃4993](https://github.com/pingcap/tiflow/issues/4993)
+        -   DM WebUIのオフラインオプションおよびその他の使用上の問題を修正し[＃4993](https://github.com/pingcap/tiflow/issues/4993)
         -   アップストリーム[＃3731](https://github.com/pingcap/tiflow/issues/3731)でGTIDが空の場合にインクリメンタルタスクを開始できない問題を修正します。
-        -   空の構成によりdm-masterがパニックになる可能性がある問題を修正します[＃3732](https://github.com/pingcap/tiflow/issues/3732)
+        -   空の構成によりdm-masterがpanicになる可能性がある問題を修正します[＃3732](https://github.com/pingcap/tiflow/issues/3732)
 
     -   TiDB Lightning
 
         -   事前チェックでローカルディスクリソースとクラスタの可用性がチェックされない問題を修正します[＃34213](https://github.com/pingcap/tidb/issues/34213)
         -   スキーマ[＃33381](https://github.com/pingcap/tidb/issues/33381)の誤ったルーティングの問題を修正します
-        -   TiDBLightningがパニックになったときにPD構成が正しく復元されない問題を修正します[＃31733](https://github.com/pingcap/tidb/issues/31733)
+        -   TiDB LightningがパニックになったときにPD構成が正しく復元されない問題を修正します[＃31733](https://github.com/pingcap/tidb/issues/31733)
         -   `auto_increment`列[＃29737](https://github.com/pingcap/tidb/issues/27937)の範囲外のデータが原因で発生するローカルバックエンドのインポートエラーの問題を修正します。
         -   `auto_random`列または`auto_increment`列がnullの場合のローカルバックエンドインポートの失敗の問題を修正します[＃34208](https://github.com/pingcap/tidb/issues/34208)

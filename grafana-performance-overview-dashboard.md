@@ -5,7 +5,7 @@ summary: Learn key metrics displayed on the Performance Overview dashboard.
 
 # パフォーマンスの概要に関する主要な指標 {#key-metrics-on-performance-overview}
 
-TiUPを使用してTiDBクラスタをデプロイする場合、監視システム（Prometheus＆Grafana）も同時にデプロイされます。詳細については、 [TiDBモニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用してTiDBクラスタをデプロイする場合、監視システム（Prometheus＆Grafana）が同時にデプロイされます。詳細については、 [TiDBモニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、PerformanceOverviewなどを含む一連のサブダッシュボードに分割されています。診断に役立つ多くのメトリックがあります。
 
@@ -145,9 +145,9 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 ## ログ期間の追加、ログ期間のコミット、およびログ期間の適用 {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
--   ログの追加期間：Raftがログを追加するために費やした時間
--   コミットログ期間：Raftがログをコミットするために消費した時間
--   ログの適用期間：Raftがログを適用するために費やした時間
+-   ログの追加期間： Raftがログを追加するために費やした時間
+-   コミットログ期間： Raftがログをコミットするために消費した時間
+-   ログの適用期間： Raftがログを適用するために費やした時間
 
 これら3つのメトリックにはすべて、すべてのTiKVインスタンスの平均期間とP99期間が含まれます。
 

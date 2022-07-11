@@ -5,7 +5,7 @@ summary: Learn how to use the data and time functions.
 
 # 日付と時刻の関数 {#date-and-time-functions}
 
-TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html)すべてをサポートします。
+TiDBは、 MySQL 5.7で利用可能な[日付と時刻の関数](https://dev.mysql.com/doc/refman/5.7/en/numeric-functions.html)すべてをサポートします。
 
 > **ノート：**
 >
@@ -39,7 +39,7 @@ TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql
 | [`FROM_UNIXTIME()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_from-unixtime)                                          | Unixタイムスタンプを日付としてフォーマットする                      |
 | [`GET_FORMAT()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_get-format)                                                | 日付形式の文字列を返します                                  |
 | [`HOUR()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_hour)                                                            | 時間を抽出する                                        |
-| [`LAST_DAY`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_last-day)                                                      | 引数の月末日を返す                                      |
+| [`LAST_DAY`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_last-day)                                                      | 引数の月末日を返します                                    |
 | [`LOCALTIME()` 、 <code>LOCALTIME</code>](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_localtime)                         | NOW（）の同義語                                      |
 | [`LOCALTIMESTAMP` 、 <code>LOCALTIMESTAMP()</code>](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_localtimestamp)          | NOW（）の同義語                                      |
 | [`MAKEDATE()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_makedate)                                                    | 年と日から日付を作成します                                  |
@@ -66,7 +66,7 @@ TiDBは、MySQL5.7で利用可能な[日付と時刻の関数](https://dev.mysql
 | [`TIMESTAMPADD()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timestampadd)                                            | 日時式に間隔を追加する                                    |
 | [`TIMESTAMPDIFF()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_timestampdiff)                                          | 日時式から間隔を減算します                                  |
 | [`TO_DAYS()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_to-days)                                                      | 日に変換された日付引数を返します                               |
-| [`TO_SECONDS()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_to-seconds)                                                | 0年目からの秒数に変換された日付または日時引数を返します                   |
+| [`TO_SECONDS()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_to-seconds)                                                | 0年以降の秒に変換された日付または日時引数を返します                     |
 | [`UNIX_TIMESTAMP()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_unix-timestamp)                                        | Unixタイムスタンプを返す                                 |
 | [`UTC_DATE()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_utc-date)                                                    | 現在のUTC日付を返します                                  |
 | [`UTC_TIME()`](https://dev.mysql.com/doc/refman/5.7/en/date-and-time-functions.html#function_utc-time)                                                    | 現在のUTC時刻を返します                                  |

@@ -60,7 +60,7 @@ Binlogレプリケーションユニットのパフォーマンスの問題を�
 -   このメトリックが長期間1より大きい場合は、通常、パフォーマンスの問題があることを示しています。
 -   このメトリックが0の場合、通常、パフォーマンスの問題がないことを示します。
 
-`binlog file gap between master and syncer`が長期間1より大きい場合は、 `binlog file gap between relay and syncer`をチェックして、遅延が主に存在するユニットを特定します。この値が通常0の場合、遅延はリレーログユニットに存在する可能性があります。次に、 [リレーログユニット](#relay-log-unit)を参照してこの問題を解決できます。それ以外の場合は、Binlogレプリケーションユニットのチェックを続行します。
+`binlog file gap between master and syncer`が長期間1より大きい場合は、 `binlog file gap between relay and syncer`をチェックして、遅延が主に存在するユニットを特定します。この値が通常0の場合、遅延はリレーログユニットに存在する可能性があります。次に、 [リレーログユニット](#relay-log-unit)を参照してこの問題を解決できます。それ以外の場合は、 Binlogレプリケーションユニットのチェックを続行します。
 
 ### binlogデータを読み取る {#read-binlog-data}
 

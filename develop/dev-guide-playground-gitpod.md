@@ -36,7 +36,7 @@ Gitpodは、コードに直接変換する開発環境向けのオープンソ�
 
 TiDB Playgroundの準備が整うと、別の`Spring JPA Hibernate`つのタスクが実行されます。ターミナルエリア右側で進捗状況を確認できます。
 
-これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーションペインの`REMOTE EXPLORER`の領域を確認し（GitpodはURLベースのポート転送をサポートしています）、ポート`8080`のURLを見つけます。
+これらのタスクがすべて完了すると、次のようなページが表示されます。このページで、左側のナビゲーションペインの`REMOTE EXPLORER`の領域（GitpodはURLベースのポート転送をサポートしています）を確認し、ポート`8080`のURLを見つけます。
 
 ![playground gitpod workspace ready](/media/develop/playground-gitpod-workspace-ready.png)
 

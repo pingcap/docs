@@ -11,7 +11,7 @@ TiFlashがデプロイされた後、データレプリケーションは自動�
 TiDBを使用して中規模の分析処理用のTiFlashレプリカを読み取るか、TiSparkを使用して大規模な分析処理用のTiFlashレプリカを読み取ることができます。これは独自のニーズに基づいています。詳細については、次のセクションを参照してください。
 
 -   [TiDBを使用してTiFlashレプリカを読み取る](#use-tidb-to-read-tiflash-replicas)
--   [TiSparkを使用してTiFlashレプリカを読み取ります](#use-tispark-to-read-tiflash-replicas)
+-   [TiSparkを使用してTiFlashレプリカを読み取る](#use-tispark-to-read-tiflash-replicas)
 
 ## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
@@ -59,9 +59,9 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
     CREATE TABLE table_name like t;
     ```
 
--   v4.0.6より前のバージョンでは、TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートが失敗します。テーブルのTiFlashレプリカを作成する前に、データをテーブルにインポートする必要があります。
+-   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートが失敗します。テーブルのTiFlashレプリカを作成する前に、データをテーブルにインポートする必要があります。
 
--   TiDBとTiDBLightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、TiDBLightningを使用してそのテーブルにデータをインポートできます。これにより、TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
+-   TiDBとTiDB Lightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
 -   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製しないことをお勧めします。この制限は、今後のバージョンで削除される予定です。
 
@@ -265,9 +265,9 @@ explain analyze select count(*) from test.t;
     engines = ["tikv", "tidb", "tiflash"]
     ```
 
-    **INSTANCEレベルのデフォルト構成は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
+    **INSTANCEレベルのデフォルト設定は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
 
--   SESSIONレベル。次のステートメントを使用して構成します。
+-   セッションレベル。次のステートメントを使用して構成します。
 
     {{< copyable "" >}}
 
@@ -291,7 +291,7 @@ explain analyze select count(*) from test.t;
 >
 > [TiDBダッシュボード](/dashboard/dashboard-intro.md)およびその他のコンポーネントは、TiDBメモリテーブル領域に格納されている一部のシステムテーブルを読み取る必要があるため、常に「tidb」エンジンをインスタンスレベルのエンジン構成に追加することをお勧めします。
 
-照会されたテーブルに指定されたエンジンのレプリカがない場合（たとえば、エンジンが「tiflash」として構成されているが、テーブルにTiFlashレプリカがない場合）、クエリはエラーを返します。
+クエリされたテーブルに指定されたエンジンのレプリカがない場合（たとえば、エンジンが「tiflash」として構成されているが、テーブルにTiFlashレプリカがない場合）、クエリはエラーを返します。
 
 ### 手動ヒント {#manual-hint}
 
@@ -311,7 +311,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように促すこともできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。さらに、ヒントはエンジン分離の前提でのみ有効になります。ヒントで指定されたエンジンがエンジン分離リストにない場合、ヒントも無視され、警告が報告されます。
 
@@ -327,7 +327,7 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 >
 > `UPDATE ...`より前では、非読み取り専用SQLステートメント（たとえば、 `INSERT INTO ... SELECT` ）での`SELECT ... FOR UPDATE`レプリカからの読み取りの`DELETE ...`は定義されていません。 v4.0.3以降のバージョンでは、内部的にTiDBは非読み取り専用SQLステートメントのTiFlashレプリカを無視して、データの正確性を保証します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDBは非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの分離](#engine-isolation)の場合、TiDBはエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDBはヒントを無視します。
 
-## TiSparkを使用してTiFlashレプリカを読み取ります {#use-tispark-to-read-tiflash-replicas}
+## TiSparkを使用してTiFlashレプリカを読み取る {#use-tispark-to-read-tiflash-replicas}
 
 現在、TiSparkを使用して、TiDBのエンジン分離と同様の方法でTiFlashレプリカを読み取ることができます。この方法は、 `spark.tispark.isolation_read_engines`つのパラメーターを構成するためのものです。パラメータ値のデフォルトは`tikv,tiflash`です。これは、TiDBがCBOの選択に従ってTiFlashまたはTiKVからデータを読み取ることを意味します。パラメータ値を`tiflash`に設定すると、TiDBがTiFlashからデータを強制的に読み取ることを意味します。
 
@@ -379,9 +379,9 @@ TiDBでは、演算子はツリー構造で編成されています。オペレ�
 -   文字列関数： `substr, char_length, replace, concat, concat_ws, left, right, ascii, length, trim, ltrim, rtrim, position, format, lower, ucase, upper, substring_index, lpad, rpad, strcmp, regexp`
 -   日付関数： `date_format, timestampdiff, from_unixtime, unix_timestamp(int), unix_timestamp(decimal), str_to_date(date), str_to_date(datetime), datediff, year, month, day, extract(datetime), date, hour, microsecond, minute, second, sysdate, date_add, date_sub, adddate, subdate, quarter, dayname, dayofmonth, dayofweek, dayofyear, last_day, monthname, to_seconds, to_days, from_days, weekofyear`
 -   JSON関数： `json_length`
--   変換機能： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
+-   変換関数： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
 -   集計関数： `min, max, sum, count, avg, approx_count_distinct, group_concat`
--   その他の機能： `inetntoa, inetaton, inet6ntoa, inet6aton`
+-   その他の関数： `inetntoa, inetaton, inet6ntoa, inet6aton`
 
 ### その他の制限 {#other-restrictions}
 

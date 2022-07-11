@@ -36,13 +36,13 @@ SQLでは、 `UPDATE`ステートメントは通常次の形式になります�
 UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {filter_value}
 ```
 
-|       パラメータ名      |      説明      |
-| :---------------: | :----------: |
-|     `{table}`     |     テーブル名    |
-| `{update_column}` |    更新される列名   |
-|  `{update_value}` |   更新される列の値   |
-| `{filter_column}` |  フィルタに一致する列名 |
-|  `{filter_value}` | フィルタに一致する列の値 |
+|       パラメータ名      |       説明       |
+| :---------------: | :------------: |
+|     `{table}`     |      テーブル名     |
+| `{update_column}` |    更新されるカラム名   |
+|  `{update_value}` |   更新されるカラムの値   |
+| `{filter_column}` |  フィルタに一致するカラム名 |
+|  `{filter_value}` | フィルタに一致するカラムの値 |
 
 詳細については、 [UPDATE構文](/sql-statements/sql-statement-update.md)を参照してください。
 
@@ -102,13 +102,13 @@ INSERT INTO {table} ({columns}) VALUES ({values})
     ON DUPLICATE KEY UPDATE {update_column} = {update_value};
 ```
 
-|       パラメータ名      |    説明    |
-| :---------------: | :------: |
-|     `{table}`     |   テーブル名  |
-|    `{columns}`    |  挿入する列名  |
-|     `{values}`    |  挿入する列の値 |
-| `{update_column}` |  更新される列名 |
-|  `{update_value}` | 更新される列の値 |
+|       パラメータ名      |     説明     |
+| :---------------: | :--------: |
+|     `{table}`     |    テーブル名   |
+|    `{columns}`    |  挿入するカラム名  |
+|     `{values}`    |  挿入するカラムの値 |
+| `{update_column}` |  更新されるカラム名 |
+|  `{update_value}` | 更新されるカラムの値 |
 
 ### 重複する<code>INSERT ON DUPLICATE KEY UPDATE</code>のベストプラクティス {#code-insert-on-duplicate-key-update-code-best-practices}
 
@@ -117,7 +117,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code> {#code-insert-on-duplicate-key-update-code-example}
 
-たとえば、本のユーザーの評価を含めるために[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のテーブルを更新する必要があります。ユーザーがまだ本を評価していない場合は、新しい評価が作成されます。ユーザーがすでに評価している場合は、以前の評価が更新されます。
+たとえば、 [評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のテーブルを更新して、その本に対するユーザーの評価を含める必要があります。ユーザーがまだ本を評価していない場合は、新しい評価が作成されます。ユーザーがすでに評価している場合は、以前の評価が更新されます。
 
 次の例では、主キーは`book_id`と`user_id`の共同主キーです。ユーザー`user_id = 1`は、本`book_id = 1000`に`5`の評価を与えます。
 

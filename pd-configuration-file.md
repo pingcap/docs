@@ -94,7 +94,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
--   PDを強制的に新しいクラスタとして開始し、Raftメンバーの数を`1`に変更するかどうかを決定します
+-   PDを強制的に新しいクラスタとして開始し、 Raftメンバーの数を`1`に変更するかどうかを決定します
 -   デフォルト値： `false`
 
 ## 安全 {#security}
@@ -151,7 +151,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 -   単一のログファイルの最大サイズ。この値を超えると、システムはログをいくつかのファイルに自動的に分割します。
 -   デフォルト値： `300`
--   ユニット：MiB
+-   単位：MiB
 -   最小値： `1`
 
 ### <code>max-days</code> {#code-max-days-code}
@@ -280,7 +280,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 > **ノート：**
 >
-> クラスタをTiDB4.0バージョンから現在のバージョンにアップグレードした場合、アップグレードの前後で一貫したPDの動作を保証するために、新しい数式バージョンはデフォルトで自動的に無効になります。数式のバージョンを変更する場合は、手動で`pd-ctl`の設定を切り替える必要があります。詳しくは[PD制御](/pd-control.md#config-show--set-option-value--placement-rules)をご覧ください。
+> クラスタをTiDB4.0バージョンから現在のバージョンにアップグレードした場合、アップグレードの前後で一貫したPDの動作を保証するために、新しい数式バージョンはデフォルトで自動的に無効になります。数式のバージョンを変更する場合は、手動で`pd-ctl`の設定を切り替える必要があります。詳しくは[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)をご覧ください。
 
 ### <code>enable-joint-consensus</code><span class="version-mark">の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -303,7 +303,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ## <code>replication</code> {#code-replication-code}
 
-レプリカに関連するConfiguration / コンフィグレーション項目
+レプリカに関連するConfiguration / コンフィグレーションアイテム
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 

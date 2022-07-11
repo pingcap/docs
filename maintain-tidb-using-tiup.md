@@ -7,14 +7,14 @@ summary: Learn the common operations to operate and maintain a TiDB cluster usin
 
 このドキュメントでは、TiUPを使用してTiDBクラスタを操作および保守する場合の次の一般的な操作について説明します。
 
--   クラスタリストを表示する
+-   クラスタリストをビューする
 -   クラスタを開始します
--   クラスタステータスを表示する
+-   クラスタのステータスをビューする
 -   構成を変更する
 -   クラスタを停止します
 -   クラスタを破壊する
 
-## クラスタリストを表示する {#view-the-cluster-list}
+## クラスタリストをビューする {#view-the-cluster-list}
 
 TiUPクラスタコンポーネントを使用して、複数のTiDBクラスターを管理できます。 TiDBクラスタがデプロイされると、クラスタはTiUPクラスタリストに表示されます。
 
@@ -30,7 +30,7 @@ tiup cluster list
 
 TiDBクラスタのコンポーネントは、次の順序で開始されます。
 
-**PD&gt;TiKV&gt;ポンプ&gt;TiDB&gt;TiFlash&gt;ドレイナー&gt;TiCDC&gt;プロメテウス&gt;Grafana&gt;Alertmanager**
+**PD&gt;TiKV&gt;Pump&gt;TiDB&gt;TiFlash&gt;Drainer&gt;TiCDC&gt;プロメテウス&gt;Grafana&gt;Alertmanager**
 
 クラスタを起動するには、次のコマンドを実行します。
 
@@ -66,7 +66,7 @@ tiup cluster start ${cluster-name}
 >
 > `-R`つまたは`-N`のパラメーターを使用して指定されたコンポーネントを開始する場合は、開始順序が正しいことを確認してください。たとえば、TiKVコンポーネントの前にPDコンポーネントを開始します。そうしないと、起動が失敗する可能性があります。
 
-## クラスタステータスを表示する {#view-the-cluster-status}
+## クラスタのステータスをビューする {#view-the-cluster-status}
 
 クラスタを起動した後、各コンポーネントのステータスをチェックして、正常に動作することを確認します。 TiUPは`display`コマンドを提供するため、コンポーネントのステータスを表示するためにすべてのマシンにログインする必要はありません。
 
@@ -200,7 +200,7 @@ tiup cluster rename ${cluster-name} ${new-name}
 
 TiDBクラスタのコンポーネントは、次の順序で停止します（監視コンポーネントも停止します）。
 
-**Alertmanager&gt; Grafana&gt; Prometheus&gt; TiCDC&gt; Drainer&gt; TiFlash&gt; TiDB&gt; Pump&gt; TiKV&gt; PD**
+**Alertmanager&gt; Grafana&gt; Prometheus&gt; TiCDC&gt; Drainer &gt; TiFlash&gt; TiDB&gt; Pump &gt; TiKV&gt; PD**
 
 クラスタを停止するには、次のコマンドを実行します。
 

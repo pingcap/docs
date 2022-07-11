@@ -27,8 +27,8 @@ summary: This document gives an overview of Data Migration configuration files.
 
 このセクションでは、いくつかの重要な概念について説明します。
 
-| 概念          | 説明                                                                           | Configuration / コンフィグレーションファイル                              |
-| :---------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------- |
-| `source-id` | MySQLまたはMariaDBインスタンス、またはプライマリ-セカンダリ構造の移行グループを一意に表します。 `source-id`の最大長は32です。 | `source_id` of `source.yaml` ;<br/> `source-id` `task.yaml` |
-| DMマスターID    | DMマスターを一意に表します（ `dm-master.toml`の`master-addr`パラメーターによる）                     | `master-addr` of `dm-master.toml`                           |
-| DM-ワーカーID   | DMワーカーを一意に表します（ `dm-worker.toml`の`worker-addr`パラメーターによる）                     | `worker-addr` of `dm-worker.toml`                           |
+| 概念          | 説明                                                                           | Configuration / コンフィグレーションファイル                           |
+| :---------- | :--------------------------------------------------------------------------- | :------------------------------------------------------- |
+| `source-id` | MySQLまたはMariaDBインスタンス、またはプライマリ-セカンダリ構造の移行グループを一意に表します。 `source-id`の最大長は32です。 | `source.yaml`の`source_id` ;<br/> `source-id` `task.yaml` |
+| DMマスターID    | DMマスターを一意に表します（ `dm-master.toml`の`master-addr`パラメーターによる）                     | `master-addr` of `dm-master.toml`                        |
+| DM-ワーカーID   | DMワーカーを一意に表します（ `dm-worker.toml`の`worker-addr`パラメーターによる）                     | `worker-addr` of `dm-worker.toml`                        |

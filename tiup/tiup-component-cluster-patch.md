@@ -25,7 +25,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 次の手順に従って、このコマンドに必要なバイナリパッケージを事前にパックする必要があります。
 
--   置き換えるコンポーネントの名前`${component}` （tidb、tikv、pd ...）、コンポーネントの`${version}` （v4.0.0、v4.0.1 ...）、およびオペレーティングシステム`${os}` （ `linux` ）とプラットフォーム`${arch}`を決定します。コンポーネントが実行される場所。
+-   交換するコンポーネントの名前`${component}` （tidb、tikv、pd ...）、コンポーネントの`${version}` （v4.0.0、v4.0.1 ...）、およびオペレーティングシステム`${os}` （ `linux` ）とプラットフォーム`${arch}`を決定します。コンポーネントが実行される場所。
 -   コマンド`wget https://tiup-mirrors.pingcap.com/${component}-${version}-${os}-${arch}.tar.gz -O /tmp/${component}-${version}-${os}-${arch}.tar.gz`を使用して、現在のコンポーネントパッケージをダウンロードします。
 -   `mkdir -p /tmp/package && cd /tmp/package`を実行して、ファイルをパックするための一時ディレクトリを作成します。
 -   `tar xf /tmp/${component}-${version}-${os}-${arch}.tar.gz`を実行して、元のバイナリパッケージを解凍します。
@@ -44,7 +44,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### --転送タイムアウト {#transfer-timeout}
 
--   PDまたはTiKVサービスを再起動する場合、TiKV / PDは最初に、再起動するノードのリーダーを別のノードに転送します。転送処理には時間がかかるため、オプション`--transfer-timeout`を使用して最大待機時間（秒単位）を設定できます。タイムアウト後、TiUPはサービスを直接再起動します。
+-   PDまたはTiKVサービスを再起動する場合、TiKV / PDは最初に、再起動するノードのリーダーを別のノードに転送します。転送プロセスには時間がかかるため、オプション`--transfer-timeout`を使用して、最大待機時間（秒単位）を設定できます。タイムアウト後、TiUPはサービスを直接再起動します。
 -   データ型： `UINT`
 -   このオプションが指定されていない場合、TiUPは`300`秒間待機した後、サービスを直接再起動します。
 
@@ -64,7 +64,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -R、-role {#r-role}
 
--   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の2番目の列から、ノードにデプロイされた役割を取得できます。
+-   置き換える役割を指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の2番目の列から、ノードにデプロイされたロールを取得できます。
 -   データ型： `STRINGS`
 -   このオプションが指定されていない場合、TiUPはデフォルトで置き換える役割を選択しません。
 
@@ -80,7 +80,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -h、-help {#h-help}
 
--   ヘルプ情報を印刷します。
+-   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -88,4 +88,4 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

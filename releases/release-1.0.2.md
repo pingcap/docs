@@ -15,7 +15,7 @@ title: TiDB 1.0.2 Release Notes
 -   `Index Look Join`演算子を最適化して、データサイズが小さい場合のクエリ速度を高速化します
 -   プレフィックスインデックスの判断に関する問題を修正します
 
-## 配置ドライバー（PD） {#placement-driver-pd}
+## 配置Driver（PD） {#placement-driver-pd}
 
 -   例外的な状況でのスケジューリングの安定性を向上させる
 

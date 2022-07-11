@@ -2,7 +2,7 @@
 title: Connection Pools and Connection Parameters
 ---
 
-# 接続プールと接続パラメーター {#connection-pools-and-connection-parameters}
+# 接続プールと接続パラメータ {#connection-pools-and-connection-parameters}
 
 このドキュメントでは、ドライバまたはORMフレームワークを使用してTiDBに接続するときに、接続プールと接続パラメータを構成する方法について説明します。
 
@@ -55,7 +55,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 式の各パラメーターの説明は次のとおりです。
 
--   **接続**：取得した接続のサイズ。
+-   **接続**：取得された接続のサイズ。
 -   **core_count** ：CPUコアの数。
 -   **Effective_spindle_count** ：ハードドライブの数（ [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません）。回転する各ハードディスクはスピンドルと呼ぶことができるからです。たとえば、16個のディスクのRAIDを備えたサーバーを使用している場合、 <strong>effective_spindle_count</strong>は16になります<strong>。HDD</strong>は通常一度に1つの要求しか処理できないため、ここでの式は、サーバーが実行できる同時I/O要求の数を実際に測定しています。管理。
 
@@ -171,7 +171,7 @@ JDBCは通常、実装関連の構成をJDBCURLパラメーターの形式で提
 
 -   **prepStmtCacheSqlLimit**
 
-    `cachePrepStmts`を構成した後、 `prepStmtCacheSqlLimit`の構成にも注意してください（デフォルト値は`256`です）。この構成は、クライアントにキャッシュされるプリペアドステートメントの最大長を制御します。
+    `cachePrepStmts`を構成した後、 `prepStmtCacheSqlLimit`の構成にも注意してください（デフォルト値は`256`です）。この構成は、クライアントにキャッシュされる準備済みステートメントの最大長を制御します。
 
     この最大長を超えるプリペアドステートメントはキャッシュされないため、再利用できません。この場合、アプリケーションの実際のSQLの長さに応じて、この構成の値を増やすことを検討できます。
 
@@ -279,6 +279,6 @@ enableQueryTimeouts=false
 
 #### タイムアウト関連のパラメーター {#timeout-related-parameters}
 
-TiDBは、タイムアウトを制御するための2つのMySQL互換パラメーター、 **wait_timeout**と<strong>max_execution_time</strong>を提供します。これらの2つのパラメーターはそれぞれ、Javaアプリケーションとの接続アイドルタイムアウトと接続でのSQL実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDBとJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。両方のパラメーターのデフォルト値は`0`です。これにより、デフォルトで接続が無限にアイドル状態になり、無限にビジーになります（1つのSQLステートメントが実行されるまでの期間は無限になります）。
+TiDBは、タイムアウトを制御するための2つのMySQL互換パラメーター**wait_timeout**と<strong>max_execution_time</strong>を提供します。これらの2つのパラメーターはそれぞれ、Javaアプリケーションとの接続アイドルタイムアウトと接続でのSQL実行のタイムアウトを制御します。つまり、これらのパラメータは、TiDBとJavaアプリケーション間の接続の最長アイドル時間と最長ビジー時間を制御します。両方のパラメーターのデフォルト値は`0`です。これにより、デフォルトで接続が無限にアイドル状態になり、無限にビジーになります（1つのSQLステートメントが実行されるまでの期間は無限になります）。
 
 ただし、実際の実稼働環境では、実行時間が長すぎるアイドル状態の接続とSQLステートメントは、データベースとアプリケーションに悪影響を及ぼします。アイドル状態の接続と長時間実行されるSQLステートメントを回避するために、アプリケーションの接続文字列でこれら2つのパラメーターを構成できます。たとえば、 `sessionVariables=wait_timeout=3600` （1時間）と`sessionVariables=max_execution_time=300000` （5分）を設定します。

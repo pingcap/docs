@@ -112,7 +112,7 @@ aliases: ['/tidb/v6.1/incremental-replication-between-clusters/']
 
 ## ステップ2.完全なデータを移行する {#step-2-migrate-full-data}
 
-環境をセットアップした後、 [BR](https://github.com/pingcap/tidb/tree/master/br)のバックアップおよび復元機能を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
+環境をセットアップした後、 [BR](https://github.com/pingcap/tidb/tree/master/br)のバックアップおよび復元関数を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
 
 > **ノート：**
 >

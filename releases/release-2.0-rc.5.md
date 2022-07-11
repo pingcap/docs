@@ -22,7 +22,7 @@ title: TiDB 2.0 RC5 Release Notes
 
 ## PD {#pd}
 
--   RaftLearnerのサポートを追加する
+-   Raftのサポートを追加する
 -   バランス領域スケジューラを最適化して、スケジューリングのオーバーヘッドを削減します
 -   `schedule-limit`構成のデフォルト値を調整します
 -   IDを頻繁に割り当てる問題を修正します

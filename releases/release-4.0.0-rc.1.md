@@ -16,7 +16,7 @@ TiDBバージョン：4.0.0-rc.1
 
 -   TiDB Binlog
 
-    -   [＃950](https://github.com/pingcap/tidb-binlog/pull/950)でシーケンスDDL操作をサポートする
+    -   Drainerでシーケンス[＃950](https://github.com/pingcap/tidb-binlog/pull/950)操作をサポートする
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
@@ -24,7 +24,7 @@ TiDBバージョン：4.0.0-rc.1
 
     -   `MemBuffer`がチェックされていないため、明示的なトランザクションで`INSERT ... ON DUPLICATE UPDATE`のステートメントが複数の行で誤って実行される可能性がある問題を修正します[＃16689](https://github.com/pingcap/tidb/pull/16689)
     -   複数の行で重複したキーをロックするときのデータの不整合を修正[＃16769](https://github.com/pingcap/tidb/pull/16769)
-    -   TiDBインスタンス間の非スーパーバッチアイドル接続をリサイクルするときに発生するパニックを修正します[＃16303](https://github.com/pingcap/tidb/pull/16303)
+    -   TiDBインスタンス間の非スーパーバッチアイドル接続をリサイクルするときに発生するpanicを修正します[＃16303](https://github.com/pingcap/tidb/pull/16303)
 
 -   TiKV
 
@@ -38,7 +38,7 @@ TiDBバージョン：4.0.0-rc.1
     -   異常状態のリージョンからデータを読み取るときにエラーが発生する問題を修正します
     -   `recover table`を正しくサポートするように、TiFlashのテーブル名のマッピングを変更し`flashback table`
     -   テーブルの名前を変更するときに発生する可能性のあるデータ損失の問題を修正するために、ストレージパスを変更します
-    -   スーパーバッチが有効になっている場合のTiDBの潜在的なパニックを修正します
+    -   スーパーバッチが有効になっている場合のTiDBの潜在的なpanicを修正します
     -   オンライン更新シナリオで読み取りモードを変更して、読み取りパフォーマンスを向上させます
 
 -   TiCDC
@@ -61,7 +61,7 @@ TiDBバージョン：4.0.0-rc.1
     -   コプロセッサー要求のバッチでのTiFlashへの送信をサポート[＃16226](https://github.com/pingcap/tidb/pull/16226)
     -   コプロセッサーのキャッシュ機能をデフォルトで有効にする[＃16710](https://github.com/pingcap/tidb/pull/16710)
     -   SQLステートメントの特別なコメントでステートメントの登録されたセクションのみを解析します[＃16157](https://github.com/pingcap/tidb/pull/16157)
-    -   PDおよびTiKVインスタンスの構成を表示するための`SHOW CONFIG`構文の使用をサポートします[＃16475](https://github.com/pingcap/tidb/pull/16475)
+    -   PDおよびTiKVインスタンスの構成を表示するための`SHOW CONFIG`構文の使用をサポート[＃16475](https://github.com/pingcap/tidb/pull/16475)
 
 -   TiKV
 
@@ -71,7 +71,7 @@ TiDBバージョン：4.0.0-rc.1
     -   同じアドレスにバインドされている複数のTiKVインスタンスが開始されないように、ファイルロックチェックを追加します[＃7447](https://github.com/tikv/tikv/pull/7447)
     -   安静時の暗号化でAWSKMSをサポートする[＃7465](https://github.com/tikv/tikv/pull/7465)
 
--   配置ドライバー（PD）
+-   配置Driver（PD）
 
     -   `config manager`を削除して、他のコンポーネントがコンポーネント構成を制御できるようにします[＃2349](https://github.com/pingcap/pd/pull/2349)
 
@@ -79,7 +79,7 @@ TiDBバージョン：4.0.0-rc.1
 
     -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
     -   `handle`列と`version`列をキャッシュして、単一の読み取りまたは書き込み要求のディスクI/Oを削減します
-    -   `fromUnixTime`と`dateFormat`の機能のプッシュダウンをサポート
+    -   `fromUnixTime`と`dateFormat`の関数のプッシュダウンをサポート
     -   最初のディスクに従ってグローバル状態を評価し、この評価を報告します
     -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックをGrafanaに追加します
     -   `Chunk`コーデックの10進データエンコーディングを最適化する
@@ -106,12 +106,12 @@ TiDBバージョン：4.0.0-rc.1
 -   列が符号なし[＃16004](https://github.com/pingcap/tidb/pull/16004)として定義されているため、システムテーブルに負の数が正しく表示されない問題を修正します。
 -   `use_index_merge`のヒントに無効なインデックス名が含まれている場合に警告を追加します[＃15960](https://github.com/pingcap/tidb/pull/15960)
 -   同じ一時ディレクトリを共有するTiDBサーバーの複数のインスタンスを禁止する[＃16026](https://github.com/pingcap/tidb/pull/16026)
--   プランキャッシュが有効になっている場合に`explain for connection`の実行中に発生するパニックを修正します[＃16285](https://github.com/pingcap/tidb/pull/16285)
+-   プランキャッシュが有効になっている場合に`explain for connection`の実行中に発生するpanicを修正します[＃16285](https://github.com/pingcap/tidb/pull/16285)
 -   `tidb_capture_plan_baselines`システム変数の結果が正しく表示されない問題を修正します[＃16048](https://github.com/pingcap/tidb/pull/16048)
 -   `prepare`ステートメントの`group by`句が誤って解析される問題を修正します[＃16377](https://github.com/pingcap/tidb/pull/16377)
--   `analyze primary key`ステートメントの実行中に発生する可能性のあるパニックを修正します[＃16081](https://github.com/pingcap/tidb/pull/16081)
+-   `analyze primary key`ステートメントの実行中に発生する可能性のあるpanicを修正します[＃16081](https://github.com/pingcap/tidb/pull/16081)
 -   `cluster_info`システムテーブルのTiFlashストア情報が間違っている問題を修正します[＃16024](https://github.com/pingcap/tidb/pull/16024)
--   インデックスマージプロセス中に発生する可能性のあるパニックを修正する[＃16360](https://github.com/pingcap/tidb/pull/16360)
+-   インデックスマージプロセス中に発生する可能性のあるpanicを修正する[＃16360](https://github.com/pingcap/tidb/pull/16360)
 -   インデックスマージリーダーが生成された列を読み取るときに誤った結果が発生する可能性がある問題を修正します[＃16359](https://github.com/pingcap/tidb/pull/16359)
 -   `show create table`ステートメント[＃16526](https://github.com/pingcap/tidb/pull/16526)のデフォルトシーケンス値の誤った表示を修正します。
 -   シーケンスが主キー[＃16510](https://github.com/pingcap/tidb/pull/16510)のデフォルト値として使用されるため、 `not-null`エラーが返される問題を修正します。
@@ -130,7 +130,7 @@ TiDBバージョン：4.0.0-rc.1
     -   トランザクションの不必要なウェイクアップにより、重いロックレースワークロードで無駄な再試行とパフォーマンスの低下が発生する問題を修正します[＃7551](https://github.com/tikv/tikv/pull/7551)
     -   リージョンが複数回のマージでスタックする可能性がある問題を修正します[＃7518](https://github.com/tikv/tikv/pull/7518)
     -   学習者[＃7518](https://github.com/tikv/tikv/pull/7518)を削除するときに学習者が削除されない問題を修正します
-    -   フォロワーの読み取りがraft-rs1でパニックを引き起こす可能性がある問題を修正し[＃7408](https://github.com/tikv/tikv/pull/7408)
+    -   フォロワーの読み取りがraft-rs1でpanicを引き起こす可能性がある問題を修正し[＃7408](https://github.com/tikv/tikv/pull/7408)
     -   `group by constant`エラー[＃7383](https://github.com/tikv/tikv/pull/7383)が原因でSQL操作が失敗する可能性があるバグを修正します
     -   対応するプライマリロックがペシミスティックロックの場合、オプティミスティックロックが読み取りをブロックする可能性がある問題を修正します[＃7328](https://github.com/tikv/tikv/pull/7328)
 
@@ -145,7 +145,7 @@ TiDBバージョン：4.0.0-rc.1
 
     -   ストレージエンジンの粗粒度インデックスの最適化を無効にする
     -   リージョンのロックを解決するときに例外がスローされ、一部のロックをスキップする必要があるというバグを修正します
-    -   コプロセッサー統計を収集するときのヌルポインター例外（NPE）を修正
+    -   コプロセッサー統計を収集するときのヌルポインター例外（NPE）を修正しました
     -   リージョンメタのチェックを修正して、リージョン分割/リージョンマージのプロセスが正しいことを確認します
     -   コプロセッサーの応答のサイズが推定されないため、メッセージサイズがgRPCの制限を超える問題を修正します
     -   TiFlashの`AdminCmdType::Split`コマンドの処理を修正しました

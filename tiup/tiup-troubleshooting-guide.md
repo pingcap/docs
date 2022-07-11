@@ -51,6 +51,6 @@ CDNサーバーのキャッシュ時間は短いため、新しいチェック�
 
 同じコンポーネントの再起動されていないノードの数が比較的多い場合は、 `tiup cluster restart -R <component>`を実行して特定のタイプのコンポーネントを再起動することもできます。
 
-### アップグレード中に、 <code>node_exporter-9100.service/blackbox_exporter-9115.service</code>が存在しないことがわかります {#during-the-upgrade-you-find-that-code-node-exporter-9100-service-blackbox-exporter-9115-service-code-does-not-exist}
+### アップグレード中に、 <code>node_exporter-9100.service/blackbox_exporter-9115.service</code>が存在しないことがわかりました {#during-the-upgrade-you-find-that-code-node-exporter-9100-service-blackbox-exporter-9115-service-code-does-not-exist}
 
 以前にクラスタをTiDBAnsibleから移行し、エクスポーターがTiDB Ansibleにデプロイされていなかった場合、この状況が発生する可能性があります。これを解決するには、当面の間、不足しているファイルを他のノードから新しいノードに手動でコピーします。 TiUPチームは、移行プロセス中に不足しているコンポーネントを完了します。

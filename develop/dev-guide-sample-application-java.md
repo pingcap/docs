@@ -581,7 +581,7 @@ cd plain-java-hibernate
 
 `PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBCと比較すると、Hibernateは、オブジェクトマッピングや基本オブジェクトのCRUDなどの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 
-`PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBCと比較して、Hibernateの`PlayerBean`は、詳細情報のマッピング関係を示す注釈を追加します。
+`PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。 JDBCと比較して、Hibernateの`PlayerBean`は、より多くの情報のマッピング関係を示す注釈を追加します。
 
 {{< copyable "" >}}
 
@@ -873,7 +873,7 @@ mysqlDataSource.setUser("root");
 mysqlDataSource.setPassword("");
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得する接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
 ```
 mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
@@ -925,7 +925,7 @@ mysqlDataSource.setPassword("123456");
 </hibernate-configuration>
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得する接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
 {{< copyable "" >}}
 

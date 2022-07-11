@@ -15,7 +15,7 @@ JavaアプリケーションでTiDBデータベースと対話する一般的な
 -   JDBC APIおよびJDBCドライバー：Javaアプリケーションは通常、標準の[JDBC（Javaデータベースコネクティビティ）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/)を使用してデータベースにアクセスします。 TiDBに接続するには、JDBCAPIを介してMySQLプロトコルを実装するJDBCドライバーを使用できます。 MySQL用のこのような一般的なJDBCドライバーには、 [MySQLコネクタ/J](https://github.com/mysql/mysql-connector-j)と[MariaDBコネクタ/J](https://mariadb.com/kb/en/library/about-mariadb-connector-j/#about-mariadb-connectorj)が含まれます。
 -   データベース接続プール：要求されるたびに接続を作成するオーバーヘッドを削減するために、アプリケーションは通常、接続プールを使用して接続をキャッシュおよび再利用します。 JDBC [情報源](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は、接続プールAPIを定義します。必要に応じて、さまざまなオープンソース接続プールの実装から選択できます。
 -   データアクセスフレームワーク：アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
--   アプリケーションの実装：アプリケーションロジックは、データベースにどのコマンドを送信するかを制御します。一部のアプリケーションは、トランザクションの開始ロジックとコミットロジックを管理するために[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用します。
+-   アプリケーションの実装：アプリケーションロジックは、データベースにどのコマンドを送信するかを制御します。一部のアプリケーションは、 [春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)の側面を使用して、トランザクションの開始ロジックとコミットロジックを管理します。
 
 ![Java application components](/media/best-practices/java-practice-1.png)
 
@@ -105,7 +105,7 @@ JDBCは通常、実装関連の構成をJDBCURLパラメーターの形式で提
 
 ##### <code>prepStmtCacheSqlLimit</code> {#code-prepstmtcachesqllimit-code}
 
-`cachePrepStmts`を構成した後、 `prepStmtCacheSqlLimit`の構成にも注意してください（デフォルト値は`256`です）。この構成は、クライアントにキャッシュされるプリペアドステートメントの最大長を制御します。
+`cachePrepStmts`を構成した後、 `prepStmtCacheSqlLimit`の構成にも注意してください（デフォルト値は`256`です）。この構成は、クライアントにキャッシュされる準備済みステートメントの最大長を制御します。
 
 この最大長を超えるプリペアドステートメントはキャッシュされないため、再利用できません。この場合、アプリケーションの実際のSQLの長さに応じて、この構成の値を増やすことを検討できます。
 
@@ -271,7 +271,7 @@ MyBatis Mapperは、次の2つのパラメーターをサポートしていま�
 
 [動的SQL-foreach](http://www.mybatis.org/mybatis-3/dynamic-sql.html#foreach)
 
-複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`形式への自動書き換えをサポートするために、前述のようにJDBCで`rewriteBatchedStatements=true`を構成することに加えて、MyBatisは動的SQLを使用してバッチ挿入を半自動で生成することもできます。例として、次のマッパーを取り上げます。
+複数の`INSERT`ステートメントの`insert ... values(...), (...), ...`の形式への自動書き換えをサポートするために、前述のようにJDBCで`rewriteBatchedStatements=true`を構成することに加えて、MyBatisは動的SQLを使用してバッチ挿入を半自動で生成することもできます。例として、次のマッパーを取り上げます。
 
 ```xml
 <insert id="insertTestBatch" parameterType="java.util.List" fetchSize="1">
@@ -321,7 +321,7 @@ Cursor<Post> queryAllPost();
 
 -   単純：実行ごとにプリペアドステートメントがJDBCに呼び出されます（JDBC構成項目`cachePrepStmts`が有効になっている場合、繰り返されるプリペアドステートメントが再利用されます）
 -   再利用：プリペアドステートメントは`executor`にキャッシュされるため、 `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
--   バッチ`UPDATE`各更新操作（ `INSERT` ）は最初にバッチに追加され、トランザクションがコミットされるか、 `SELECT`クエリが実行されるまで実行され`DELETE` 。 JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合、ステートメントを書き直そうとします。そうでない場合は、ステートメントが1つずつ送信されます。
+-   バッチ`UPDATE`各更新操作（ `INSERT` ）は最初にバッチに追加され、トランザクションがコミットされるか、 `SELECT`が実行されるまで実行され`DELETE` 。 JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合、ステートメントを書き直そうとします。そうでない場合は、ステートメントが1つずつ送信されます。
 
 通常、デフォルト値の`ExecutorType`は`Simple`です。 `openSession`を呼び出すときは、 `ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクションで`UPDATE`または`INSERT`ステートメントがかなり高速に実行されることがありますが、データの読み取りまたはトランザクションのコミット時には低速です。これは実際には正常であるため、遅いSQLクエリのトラブルシューティングを行う場合はこれに注意する必要があります。
 
@@ -374,4 +374,4 @@ Javaアプリケーションでフレームグラフを取得するのは面倒�
 
 このドキュメントでは、データベースと相互作用する一般的に使用されるJavaコンポーネントに基づいて、TiDBを使用してJavaアプリケーションを開発するための一般的な問題と解決策について説明します。 TiDBはMySQLプロトコルとの互換性が高いため、MySQLベースのJavaアプリケーションのベストプラクティスのほとんどはTiDBにも適用されます。
 
-[TiDBコミュニティのSlackチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)で参加し、TiDBを使用してJavaアプリケーションを開発する際の経験や問題について幅広いTiDBユーザーグループと共有してください。
+[TiDBコミュニティのスラックチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)で参加し、TiDBを使用してJavaアプリケーションを開発する際の経験や問題について幅広いTiDBユーザーグループと共有してください。

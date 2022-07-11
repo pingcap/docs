@@ -17,7 +17,7 @@ summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-または[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import)を使用して、事前に準備されたサンプルデータをインポートします。
+または、 [TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import)を押して、事前に準備されたサンプルデータをインポートします。
 
 ## 問題：全表スキャン {#issue-full-table-scan}
 

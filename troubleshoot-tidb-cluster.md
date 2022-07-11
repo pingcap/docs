@@ -27,7 +27,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
     -   すべてのプロセスが実行されている場合は、 `tidb-server`のログをチェックして、次のメッセージが表示されているかどうかを確認します。
         -   InformationSchemaが古くなっています：このメッセージは、 `tikv-server`が接続できない場合に表示されます。 `pd-server`と`tikv-server`の状態とログを確認してください。
-        -   パニック：このメッセージは、プログラムに問題がある場合に表示されます。詳細なパニックログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
+        -   panic：このメッセージは、プログラムに問題がある場合に表示されます。詳細なpanicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
 
 3.  データがクリアされ、サービスが再デプロイされた場合は、次のことを確認してください。
 
@@ -93,9 +93,9 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   コマンドラインで`nohup+&`実行されていますか？これにより、プロセスがhup信号を受信するため、プロセスが中止される可能性があります。スタートアップコマンドをスクリプトで記述して実行することをお勧めします。
 
-## TiDBパニック {#tidb-panic}
+## TiDBpanic {#tidb-panic}
 
-パニックログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
+panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new/choose)を提供してください。
 
 ## 接続が拒否されました {#the-connection-is-rejected}
 

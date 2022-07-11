@@ -80,7 +80,7 @@ Prometheusは、多くのクエリ式と関数をサポートしています。�
 
 ![Add an instance dimension to the query expression](/media/best-practices/add-instance-dimension.jpeg)
 
-### ヒント2：Y軸のスケールを切り替えます {#tip-2-switch-the-scale-of-the-y-axis}
+### ヒント2：Y軸のスケールを切り替える {#tip-2-switch-the-scale-of-the-y-axis}
 
 クエリ期間を例にとると、Y軸はデフォルトで2進対数スケール（log <sub>2</sub> n）になり、表示のギャップが狭くなります。変化を増幅するために、線形スケールに切り替えることができます。次の2つの図を比較すると、表示の違いに簡単に気づき、SQLステートメントの実行が遅い時間を見つけることができます。
 
@@ -136,7 +136,7 @@ PDのダッシュボードには、現在のリーダーの指標のみが表示
 
 通常、凡例ではデフォルトで`Max`つと`Current`の関数のみが使用可能です。メトリックが大きく変動する場合は、 `Avg`関数などの他の要約関数を凡例に追加して、一定期間の全体的な傾向を確認できます。
 
-`Avg`関数などのサマリー関数を追加します。
+`Avg`関数を追加します。
 
 ![Add summary functions such as Avg](/media/best-practices/add-avg-function.jpeg)
 

@@ -38,7 +38,7 @@ tiup cluster [command] [flags]
 
 ### --wait-timeout {#wait-timeout}
 
--   操作プロセスの各ステップの最大待機時間（秒単位）を指定します。操作プロセスは、サービスを開始または停止するようにsystemctlを指定したり、ポートがオンラインまたはオフラインになるのを待機したりするなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
+-   操作プロセスの各ステップの最大待機時間（秒単位）を指定します。操作プロセスは、サービスを開始または停止するsystemctlの指定や、ポートがオンラインまたはオフラインになるのを待つなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
 -   データ型： `UINT`
 -   コマンドでこのオプションが指定されていない場合、各ステップの最大待機時間は`120`秒です。
 
@@ -66,10 +66,10 @@ tiup cluster [command] [flags]
 -   [小切手](/tiup/tiup-component-cluster-check.md) ：デプロイの前後にクラスタをチェックします
 -   [配備](/tiup/tiup-component-cluster-deploy.md) ：指定されたトポロジに基づいてクラスタをデプロイします
 -   [リスト](/tiup/tiup-component-cluster-list.md) ：デプロイされたクラスターのリストを照会します
--   [画面](/tiup/tiup-component-cluster-display.md) ：指定したクラスタの状態を表示します
+-   [画面](/tiup/tiup-component-cluster-display.md) ：指定したクラスタのステータスを表示します
 -   [始める](/tiup/tiup-component-cluster-start.md) ：指定されたクラスタを開始します
 -   [止まる](/tiup/tiup-component-cluster-stop.md) ：指定されたクラスタを停止します
--   [再起動](/tiup/tiup-component-cluster-restart.md) ：指定したクラスタを再起動します
+-   [再起動](/tiup/tiup-component-cluster-restart.md) ：指定されたクラスタを再起動します
 -   [スケールイン](/tiup/tiup-component-cluster-scale-in.md) ：指定されたクラスタのスケール
 -   [規格外](/tiup/tiup-component-cluster-scale-out.md) ：指定されたクラスタをスケールアウトします
 -   [アップグレード](/tiup/tiup-component-cluster-upgrade.md) ：指定されたクラスタをアップグレードします

@@ -110,7 +110,7 @@ select * from employee where id in (...) and salary between ? and ?;
 -   `tidb_stmt_summary_history_size` ： `statements_summary_history`テーブルに格納されている各SQLステートメントカテゴリのサイズ。これは、 `statement_summary_evicted`テーブルのレコードの最大数でもあります。デフォルト値は`24`です。
 -   `tidb_stmt_summary_max_stmt_count` ：ステートメントサマリーテーブルに格納できるSQLステートメントの数を制限します。デフォルト値は`3000`です。制限を超えると、最近未使用のままになっているSQLステートメントがクリアされます。これらのクリアされたSQLステートメントは、 `statement_summary_evicted`の表に記録されます。
 -   `tidb_stmt_summary_max_sql_length` ： `DIGEST_TEXT`と`QUERY_SAMPLE_TEXT`の最長表示長を指定します。デフォルト値は`4096`です。
--   `tidb_stmt_summary_internal_query` ：TiDBSQLステートメントをカウントするかどうかを決定します。 `1`はカウントすることを意味し、 `0`はカウントしないことを意味します。デフォルト値は`0`です。
+-   `tidb_stmt_summary_internal_query` ： TiDB SQLステートメントをカウントするかどうかを決定します。 `1`はカウントすることを意味し、 `0`はカウントしないことを意味します。デフォルト値は`0`です。
 
 > **ノート：**
 >
@@ -182,7 +182,7 @@ select * from information_schema.statements_summary_evicted;
 
 ステートメントサマリーテーブルには、次の制限があります。
 
-上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメントサマリーテーブルがすべてメモリテーブルであり、データがストレージに保持されるのではなく、メモリにキャッシュされるためです。
+上記のステートメント要約テーブルのすべてのデータは、TiDBサーバーを再起動すると失われます。これは、ステートメントサマリーテーブルがすべてメモリテーブルであり、データがストレージに永続化されるのではなく、メモリにキャッシュされるためです。
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
 
@@ -190,7 +190,7 @@ select * from information_schema.statements_summary_evicted;
 
 ### サーバー側が原因でSQLの待ち時間が長くなる可能性はありますか？ {#could-high-sql-latency-be-caused-by-the-server-end}
 
-この例では、クライアントは`employee`テーブルでのポイントクエリでパフォーマンスが低下しています。 SQLテキストに対してあいまい検索を実行できます。
+この例では、クライアントは`employee`テーブルのポイントクエリでパフォーマンスが低下しています。 SQLテキストに対してあいまい検索を実行できます。
 
 {{< copyable "" >}}
 
@@ -200,7 +200,7 @@ SELECT avg_latency, exec_count, query_sample_text
     WHERE digest_text LIKE 'select * from employee%';
 ```
 
-`1ms`と`0.3ms`は、通常の`avg_latency`の範囲内と見なされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークでトラブルシューティングできます。
+`1ms`と`0.3ms`は、通常の`avg_latency`の範囲内と見なされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークでトラブルシューティングを行うことができます。
 
 {{< copyable "" >}}
 

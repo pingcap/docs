@@ -18,9 +18,9 @@ TiDB Ansibleバージョン：2.1.13
 -   `update-stats`の構成項目を追加して、統計を更新するかどうかを制御します[＃10772](https://github.com/pingcap/tidb/pull/10772)
 -   ホットスポットの問題を解決するためにRegionpresplitをサポートするには、次のTiDB固有の構文を追加します。
 -   `PRE_SPLIT_REGIONS`テーブルオプション[＃10863](https://github.com/pingcap/tidb/pull/10863)を追加します
--   `SPLIT TABLE table_name INDEX index_name`の構文を追加します[＃10865](https://github.com/pingcap/tidb/pull/10865)
--   `SPLIT TABLE [table_name] BETWEEN (min_value...) AND (max_value...) REGIONS [region_num]`の構文を追加します[＃10882](https://github.com/pingcap/tidb/pull/10882)
--   場合によっては`KILL`構文によって引き起こされるパニックの問題を修正します[＃10879](https://github.com/pingcap/tidb/pull/10879)
+-   `SPLIT TABLE table_name INDEX index_name`構文[＃10865](https://github.com/pingcap/tidb/pull/10865)を追加します
+-   `SPLIT TABLE [table_name] BETWEEN (min_value...) AND (max_value...) REGIONS [region_num]`構文[＃10882](https://github.com/pingcap/tidb/pull/10882)を追加します
+-   場合によっては`KILL`構文によって引き起こされるpanicの問題を修正します[＃10879](https://github.com/pingcap/tidb/pull/10879)
 -   MySQLとの互換性を改善する`ADD_DATE`場合によっては[＃10718](https://github.com/pingcap/tidb/pull/10718)
 -   インデックス結合[＃10856](https://github.com/pingcap/tidb/pull/10856)での内部テーブル選択の選択率の誤った推定を修正しました
 
@@ -32,5 +32,5 @@ TiDB Ansibleバージョン：2.1.13
 ## ツール {#tools}
 
 -   TiDB Binlog
-    -   データの書き込みに失敗したときにポンプが戻り値をチェックしないことによって引き起こされる誤ったオフセットの問題を修正します[＃640](https://github.com/pingcap/tidb-binlog/pull/640)
-    -   コンテナ環境でブリッジモードをサポートするために、Drainerに`advertise-addr`の構成を追加します[＃634](https://github.com/pingcap/tidb-binlog/pull/634)
+    -   データの書き込みに失敗したときにPumpが戻り値をチェックしないことによって引き起こされる誤ったオフセットの問題を修正します[＃640](https://github.com/pingcap/tidb-binlog/pull/640)
+    -   コンテナ環境でブリッジモードをサポートするために、 Drainerに`advertise-addr`の構成を追加します[＃634](https://github.com/pingcap/tidb-binlog/pull/634)

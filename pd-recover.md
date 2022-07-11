@@ -14,11 +14,11 @@ PD Recoverは、PDのディザスタリカバリツールであり、サービ�
 
 > **ノート：**
 >
-> 通常、PD制御ツールはリリースされたバイナリまたはDockerにすでに存在するため、ソースコードをコンパイルする必要はありません。ただし、開発者ユーザーは、ソースコードのコンパイルについて上記の手順を参照できます。
+> 通常、 PD ControlツールはリリースされたバイナリまたはDockerにすでに存在するため、ソースコードをコンパイルする必要はありません。ただし、開発者ユーザーは、ソースコードのコンパイルについて上記の手順を参照できます。
 
-## TiDBToolkitをダウンロードする {#download-tidb-toolkit}
+## TiDB Toolkitをダウンロードする {#download-tidb-toolkit}
 
-PDRecoverインストールパッケージはTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+PDRecoverインストールパッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
 ## クイックスタート {#quick-start}
 
@@ -58,7 +58,7 @@ cat {{/path/to}}/tidb.log | grep "init cluster id"
 ...
 ```
 
-#### TiKVログからクラスタIDを取得します {#get-cluster-id-from-tikv-log}
+#### TiKVログからクラスタIDを取得する {#get-cluster-id-from-tikv-log}
 
 TiKVログからクラスタIDを取得するには、次のコマンドを実行します。
 

@@ -11,7 +11,7 @@ summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution
 
 [TiFlash](/tiflash/tiflash-overview.md)は、HTAPを有効にするもう1つのツールです。 TiFlashとTiSparkはどちらも、複数のホストを使用してOLTPデータに対してOLAPクエリを実行できます。 TiFlashはデータを列形式で保存するため、より効率的な分析クエリが可能になります。 TiFlashとTiSparkは一緒に使用できます。
 
-TiSparkは、TiKVクラスタとPDクラスタに依存しています。また、Sparkクラスタをセットアップする必要があります。このドキュメントでは、TiSparkのセットアップと使用方法について簡単に紹介します。 ApacheSparkの基本的な知識が必要です。詳細については、 [ApacheSparkのWebサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
+TiSparkは、TiKVクラスタとPDクラスタに依存しています。また、Sparkクラスタを設定する必要があります。このドキュメントでは、TiSparkのセットアップと使用方法について簡単に紹介します。 ApacheSparkの基本的な知識が必要です。詳細については、 [ApacheSparkのWebサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
 
 Spark Catalyst Engineと緊密に統合されたTiSparkは、コンピューティングを正確に制御します。これにより、SparkはTiKVからデータを効率的に読み取ることができます。 TiSparkは、高速ポイントクエリを可能にするインデックスシークもサポートしています。
 
@@ -358,7 +358,7 @@ spark.sql.tidb.password $your_tidb_server_password
 
 Q：既存のSpark / Hadoopクラスタとの共有リソースとは対照的に、独立したデプロイメントの長所/短所は何ですか？
 
-A：個別のデプロイなしで既存のSparkクラスタを使用できますが、既存のクラスタがビジーの場合、TiSparkは目的の速度を達成できません。
+A：既存のSparkクラスタは個別にデプロイせずに使用できますが、既存のクラスタがビジーの場合、TiSparkは目的の速度を達成できません。
 
 Q：SparkをTiKVと混合できますか？
 

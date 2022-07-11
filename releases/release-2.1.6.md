@@ -15,12 +15,12 @@ title: TiDB 2.1.6 Release Notes
     -   パニックを回避するために、 `show stats_histograms`は有効な列のみを出力するようにします[＃9502](https://github.com/pingcap/tidb/pull/9502)
 
 -   サーバ
-    -   Binlog3を有効/無効にする`log_bin`の変数をサポートし[＃9634](https://github.com/pingcap/tidb/pull/9634)
+    -   Binlogを有効/無効にする`log_bin`の変数をサポートし[＃9634](https://github.com/pingcap/tidb/pull/9634)
     -   誤ったトランザクションコミットを回避するために、トランザクションの健全性チェックを追加します[＃9559](https://github.com/pingcap/tidb/pull/9559)
-    -   変数の設定がパニックにつながる可能性がある問題を修正します[＃9539](https://github.com/pingcap/tidb/pull/9539)
+    -   変数の設定がpanicにつながる可能性がある問題を修正します[＃9539](https://github.com/pingcap/tidb/pull/9539)
 
 -   DDL
-    -   `Create Table Like`ステートメントが場合によってはパニックを引き起こす問題を修正します[＃9652](https://github.com/pingcap/tidb/pull/9652)
+    -   `Create Table Like`ステートメントが場合によってはpanicを引き起こす問題を修正します[＃9652](https://github.com/pingcap/tidb/pull/9652)
     -   etcdクライアントの`AutoSync`機能を有効にして、場合によってはTiDBとetcd間の接続の問題を回避します[＃9600](https://github.com/pingcap/tidb/pull/9600)
 
 ## TiKV {#tikv}

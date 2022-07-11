@@ -29,7 +29,7 @@ summary: Learn the object naming convention in TiDB.
     -   勘定科目表期間の記録： `t_crm_ec_record_YYYY{MM}{dd}`
 -   異なるビジネスモジュールのテーブル用に個別のデータベースを作成し、それに応じて注釈を追加します。
 
-## 列の命名規則 {#column-naming-convention}
+## カラムの命名規則 {#column-naming-convention}
 
 -   列の名前は、列の実際の意味または省略形です。
 -   同じ意味を持つテーブル間で同じ列名を使用することをお勧めします。
@@ -43,4 +43,4 @@ summary: Learn the object naming convention in TiDB.
 -   主キーインデックス： `pk_{table_name_abbreviation}_{field_name_abbreviation}`
 -   一意のインデックス： `uk_{table_name_abbreviation}_{field_name_abbreviation}`
 -   共通インデックス： `idx_{table_name_abbreviation}_{field_name_abbreviation}`
--   複数の単語を含む列名：意味のある略語を使用する
+-   複数の単語を含むカラム名：意味のある略語を使用する

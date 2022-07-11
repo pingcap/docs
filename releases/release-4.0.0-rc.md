@@ -46,7 +46,7 @@ TiUPバージョン：0.0.3
 -   TiDB
 
     -   大文字と小文字を区別しない照合順序を追加して、ユーザーが新しいクラスタ[＃33](https://github.com/pingcap/tidb/projects/33)で`utf8mb4_general_ci`と`utf8_general_ci`を有効にできるようにします。
-    -   切り捨てられたテーブルの回復をサポートするために`RECOVER TABLE`構文を拡張します[＃15398](https://github.com/pingcap/tidb/pull/15398)
+    -   `RECOVER TABLE`構文を拡張して、切り捨てられたテーブルの回復をサポートします[＃15398](https://github.com/pingcap/tidb/pull/15398)
     -   tidb-serverステータスポートが占有されているときにアラートログを返す代わりに開始を拒否する[＃15177](https://github.com/pingcap/tidb/pull/15177)
     -   シーケンスをデフォルトの列値として使用する書き込みパフォーマンスを最適化する[＃15216](https://github.com/pingcap/tidb/pull/15216)
     -   `DDLJobs`システムテーブルを追加して、DDLジョブの詳細をクエリします[＃14837](https://github.com/pingcap/tidb/pull/14837)
@@ -71,7 +71,7 @@ TiUPバージョン：0.0.3
 
     -   TiDB Lightning
 
-        -   [＃281](https://github.com/pingcap/tidb-lightning/pull/281) [＃275](https://github.com/pingcap/tidb-lightning/pull/275)のパフォーマンスを最適化する
+        -   TiDB Lightning [＃281](https://github.com/pingcap/tidb-lightning/pull/281) [＃275](https://github.com/pingcap/tidb-lightning/pull/275)を最適化する
 
 ## バグの修正 {#bug-fixes}
 
@@ -87,13 +87,13 @@ TiUPバージョン：0.0.3
     -   これらの列に負の数が明示的に書き込まれると、 `AutoRandom`属性の列がリベースされる問題を修正します[＃15397](https://github.com/pingcap/tidb/pull/15397)
 
 -   TiKV
-    -   フォロワー読み取り機能が有効になっているときにリーダーを転送することによって発生する可能性のあるパニックを修正します[＃7101](https://github.com/tikv/tikv/pull/7101)
+    -   フォロワー読み取り機能が有効になっているときにリーダーを転送することによって発生する可能性のあるpanicを修正します[＃7101](https://github.com/tikv/tikv/pull/7101)
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   バックエンドが[＃283](https://github.com/pingcap/tidb-lightning/pull/283)の場合の文字変換エラーによるデータエラーの問題を修正
+        -   バックエンドがTiDB1の場合の文字変換のエラーによって引き起こされるデータエラーの問題を修正し[＃283](https://github.com/pingcap/tidb-lightning/pull/283)
 
     -   TiCDC
 

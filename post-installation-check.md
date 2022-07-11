@@ -159,7 +159,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     Query OK, 1 row affected (0.03 sec)
     ```
 
--   `tab_tidb`のエントリを表示します。
+-   `tab_tidb`のエントリをビューします。
 
     {{< copyable "" >}}
 
@@ -178,7 +178,7 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     1 row in set (0.00 sec)
     ```
 
--   TiKVのストアの状態、 `store_id` 、容量、および稼働時間を表示します。
+-   ビューのストアの状態、 `store_id` 、容量、および稼働時間を表示します。
 
     {{< copyable "" >}}
 

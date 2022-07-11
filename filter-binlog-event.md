@@ -26,7 +26,7 @@ filters:
     action: Ignore
 ```
 
--   `schema-pattern` ：スキーマまたは`table-pattern`に一致するフィルター
+-   `table-pattern` ：一致するスキーマまたはテーブルをフィルターし`schema-pattern`
 
 -   `events` ：binlogイベントをフィルタリングします。サポートされているイベントを以下の表に示します。
 

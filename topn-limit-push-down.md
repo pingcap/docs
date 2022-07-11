@@ -66,7 +66,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-このクエリでは、TopN演算子の並べ替えルールは、外側のテーブル`t`の列にのみ依存するため、TopNをJoinにプッシュダウンする前に計算を実行して、Join操作の計算コストを削減できます。さらに、TiDBはTopNをストレージレイヤーにプッシュダウンします。
+このクエリでは、TopN演算子の並べ替えルールは、外部テーブル`t`の列のみに依存するため、TopNをJoinにプッシュダウンする前に計算を実行して、Join操作の計算コストを削減できます。さらに、TiDBはTopNをストレージレイヤーにプッシュダウンします。
 
 ### 例3：参加する前にTopNをプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
 

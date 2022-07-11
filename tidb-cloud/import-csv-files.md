@@ -63,7 +63,7 @@ TiDBCloudがTiDB CloudまたはGCSバケット内のCSVファイルにアクセ�
 
 -   組織でTiDB CloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
-## ステップ4.CSVファイルをTiDB Cloudにインポートします {#step-4-import-csv-files-to-tidb-cloud}
+## ステップ4.CSVファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
 
 CSVファイルをTiDB Cloudにインポートするには、次の手順を実行します。
 
@@ -79,7 +79,7 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
 
     -   **データ形式**： <strong>CSV</strong>を選択します。
 
-    -   **クレデンシャルのセットアップ**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
+    -   **クレデンシャルの設定**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
 
     -   **CSVConfiguration / コンフィグレーション**：セパレーター、区切り文字、ヘッダー、非ヌル、ヌル、バックスラッシュエスケープ、トリムラストセパレーターなど、CSV固有の構成を確認して更新します。これらのフィールドのすぐ横に、各CSV構成の説明があります。
 
@@ -97,7 +97,7 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
 
 4.  [**インポート]**をクリックして、インポートタスクを開始します。
 
-5.  インポートの進行状況が成功を示したら、[**ファイルの総数]**の後の数を確認します。
+5.  インポートの進行状況が成功を示したら、TotalFilesの後の数を確認し**ます**。
 
     数値がゼロの場合は、[**オブジェクト名パターン]**フィールドに入力した値と一致するデータファイルがないことを意味します。この場合、「<strong>オブジェクト名パターン」</strong>フィールドにタイプミスがないことを確認して、再試行してください。
 

@@ -96,7 +96,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 9 rows in set (0.00 sec)
 ```
 
-実行プランの例には、 `ExchangeReceiver`つと`ExchangeSender`の演算子が含まれています。実行プランは、 `nation`テーブルが読み取られた後、 `ExchangeSender`オペレーターがテーブルを各ノードにブロードキャストし、 `HashJoin`および`HashAgg`操作が`nation`テーブルと`customer`テーブルで実行され、結果がTiDBに返されることを示しています。
+実行プランの例には、 `ExchangeReceiver`と`ExchangeSender`の演算子が含まれています。実行プランは、 `nation`テーブルが読み取られた後、 `ExchangeSender`オペレーターがテーブルを各ノードにブロードキャストし、 `HashJoin`および`HashAgg`操作が`nation`テーブルと`customer`テーブルで実行され、結果がTiDBに返されることを示しています。
 
 TiFlashは、ブロードキャストハッシュ結合を使用するかどうかを制御するために、次の2つのグローバル/セッション変数を提供します。
 

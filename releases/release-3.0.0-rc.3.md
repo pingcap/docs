@@ -19,8 +19,8 @@ TiDB Ansibleバージョン：3.0.0-rc.3
 -   SQLオプティマイザー
     -   仮想生成された列統計を収集する機能を削除する[＃10629](https://github.com/pingcap/tidb/pull/10629)
     -   ポイントクエリ中に主キー定数がオーバーフローする問題を修正[＃10699](https://github.com/pingcap/tidb/pull/10699)
-    -   `fast analyze`で初期化されていない情報を使用するとパニック[＃10691](https://github.com/pingcap/tidb/pull/10691)が発生する問題を修正します
-    -   `prepare`を使用して`create view`ステートメントを実行すると、列情報が間違っているためにパニックが発生する問題を修正します[＃10713](https://github.com/pingcap/tidb/pull/10713)
+    -   `fast analyze`で初期化されていない情報を使用するとpanic[＃10691](https://github.com/pingcap/tidb/pull/10691)が発生する問題を修正します
+    -   `prepare`を使用して`create view`ステートメントを実行すると、列情報が間違っているためにpanicが発生する問題を修正します[＃10713](https://github.com/pingcap/tidb/pull/10713)
     -   ウィンドウ関数を処理するときに列情報が複製されない問題を修正します[＃10720](https://github.com/pingcap/tidb/pull/10720)
     -   インデックス結合[＃10854](https://github.com/pingcap/tidb/pull/10854)での内部テーブル選択の選択率の誤った推定を修正しました
     -   `stats-lease`変数値が[＃10811](https://github.com/pingcap/tidb/pull/10811)の場合の自動ロード統計をサポートします
@@ -39,7 +39,7 @@ TiDB Ansibleバージョン：3.0.0-rc.3
     -   クエリがメモリ構成の制限を超えたときに`expensive query`ログを出力する機能を追加します[＃10849](https://github.com/pingcap/tidb/pull/10849)
     -   `bind-info-lease`の構成アイテムを追加して、変更されたバインディング実行プラン[＃10727](https://github.com/pingcap/tidb/pull/10727)の更新時間を制御します。
     -   `execdetails.ExecDetails`ポインター[＃10832](https://github.com/pingcap/tidb/pull/10832)が原因で、コプロセッサー・リソースを迅速に解放できなかったために発生した、同時発生率の高いシナリオでのOOMの問題を修正します。
-    -   場合によっては`kill`ステートメントによって引き起こされるパニックの問題を修正します[＃10876](https://github.com/pingcap/tidb/pull/10876)
+    -   場合によっては`kill`ステートメントによって引き起こされるpanicの問題を修正します[＃10876](https://github.com/pingcap/tidb/pull/10876)
 
 -   サーバ
     -   GC1の修復時にゴルーチンがリークする可能性がある問題を修正し[＃10683](https://github.com/pingcap/tidb/pull/10683)
@@ -112,8 +112,8 @@ TiDB Ansibleバージョン：3.0.0-rc.3
 ## ツール {#tools}
 
 -   TiDB Binlog
-    -   データの書き込みに失敗したときにポンプが戻り値をチェックしないことによって引き起こされる誤ったオフセットの問題を修正します[＃640](https://github.com/pingcap/tidb-binlog/pull/640)
-    -   コンテナ環境でブリッジモードをサポートするために、Drainerに`advertise-addr`の構成を追加します[＃634](https://github.com/pingcap/tidb-binlog/pull/634)
+    -   データの書き込みに失敗したときにPumpが戻り値をチェックしないことによって引き起こされる誤ったオフセットの問題を修正します[＃640](https://github.com/pingcap/tidb-binlog/pull/640)
+    -   コンテナ環境でブリッジモードをサポートするために、 Drainerに`advertise-addr`の構成を追加します[＃634](https://github.com/pingcap/tidb-binlog/pull/634)
     -   Pumpに`GetMvccByEncodeKey`関数を追加して、トランザクションステータスのクエリを高速化します[＃632](https://github.com/pingcap/tidb-binlog/pull/632)
 
 ## TiDB Ansible {#tidb-ansible}

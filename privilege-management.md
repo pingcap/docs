@@ -5,7 +5,7 @@ summary: Learn how to manage the privilege.
 
 # 権限管理 {#privilege-management}
 
-TiDBは、構文や特権タイプなど、MySQL5.7の特権管理システムをサポートしています。 MySQL8.0の次の機能もサポートされています。
+TiDBは、構文や特権タイプなど、 MySQL 5.7の特権管理システムをサポートしています。 MySQL8.0の次の機能もサポートされています。
 
 -   TiDB3.0以降のSQLロール。
 -   TiDB5.1以降の動的特権。
@@ -162,7 +162,7 @@ SHOW GRANTS; -- show grants for the current user
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
-たとえば、ユーザー`rw_user@192.168.%`を作成し、 `test.write_table`テーブルに対する書き込み権限とグローバル読み取り権限をユーザーに付与します。
+たとえば、ユーザー`rw_user@192.168.%`を作成し、そのユーザーに`test.write_table`テーブルへの書き込み権限とグローバル読み取り権限を付与します。
 
 ```sql
 CREATE USER `rw_user`@`192.168.%`;
@@ -317,7 +317,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 `SHOW PROCESSLIST`は、他のユーザーに属する接続を表示するために`SUPER`を必要とします。
 
-### ロール/ユーザーの作成 {#create-role-user}
+### 役割/ユーザーの作成 {#create-role-user}
 
 `CREATE ROLE`には`CREATE ROLE`特権が必要です。
 
@@ -386,7 +386,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
-このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`テーブルの有効範囲はグローバルです。
+このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`表の有効射程はグローバルです。
 
 `mysql.db`の`Host`と`User`は、ユーザーがアクセスできるデータベースを決定します。有効射程はデータベースです。
 
@@ -400,7 +400,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ユーザーIDは、接続を開始するホストである`Host`とユーザー名である`User`の2つの情報に基づいています。ユーザー名が空でない場合、指定されたユーザーと完全に一致する必要があります。
 
-`User` + `Host`は、 `user`のテーブルの複数の行に一致する場合があります。このシナリオに対処するために、 `user`テーブルの行がソートされます。クライアントが接続すると、テーブルの行が1つずつチェックされます。最初に一致した行が検証に使用されます。並べ替えの際、ホストはユーザーの前にランク付けされます。
+`User` + `Host`は、 `user`のテーブルの複数の行に一致する場合があります。このシナリオに対処するために、 `user`テーブルの行がソートされます。クライアントが接続すると、テーブルの行が1つずつチェックされます。最初に一致した行が検証に使用されます。並べ替えるとき、ホストはユーザーの前にランク付けされます。
 
 ### 確認をリクエストする {#request-verification}
 

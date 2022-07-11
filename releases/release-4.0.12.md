@@ -56,21 +56,21 @@ TiDBバージョン：4.0.12
 
     -   バックアップと復元（BR）
 
-        -   `HTTP_PROXY`と`HTTPS_PROXY`の環境変数をログに記録します[＃827](https://github.com/pingcap/br/pull/827)
+        -   `HTTP_PROXY`と`HTTPS_PROXY`の環境変数をログに記録する[＃827](https://github.com/pingcap/br/pull/827)
         -   テーブルが多い場合のバックアップパフォーマンスの向上[＃745](https://github.com/pingcap/br/pull/745)
-        -   サービスセーフポイントチェックが失敗した場合にエラーを報告する[＃826](https://github.com/pingcap/br/pull/826)
+        -   サービスセーフポイントチェックが失敗した場合のエラーの報告[＃826](https://github.com/pingcap/br/pull/826)
         -   [＃803](https://github.com/pingcap/br/pull/803)に`cluster_version`と`br_version`の情報を追加し`backupmeta`
-        -   バックアップの成功率を上げるために、外部ストレージエラーの再試行を追加します[＃851](https://github.com/pingcap/br/pull/851)
+        -   バックアップ[＃851](https://github.com/pingcap/br/pull/851)の成功率を上げるために、外部ストレージエラーの再試行を追加します
         -   バックアップ中のメモリ使用量を削減[＃886](https://github.com/pingcap/br/pull/886)
 
     -   TiDB Lightning
 
-        -   予期しないエラーを回避するために、TiDBLightningを実行する前にTiDBクラスタのバージョンを確認してください[＃787](https://github.com/pingcap/br/pull/787)
+        -   予期しないエラーを回避するために、 TiDB Lightningを実行する前にTiDBクラスタのバージョンを確認してください[＃787](https://github.com/pingcap/br/pull/787)
         -   TiDB Lightningが`cancel`のエラー[＃867](https://github.com/pingcap/br/pull/867)に遭遇すると、すぐに失敗します
         -   `tikv-importer.engine-mem-cache-size`と`tikv-importer.local-writer-mem-cache-size`の構成項目を追加して、メモリ使用量とパフォーマンスのバランスを取ります[＃866](https://github.com/pingcap/br/pull/866)
         -   TiDB Lightningのローカルバックエンドに対して`batch split region`を並行して実行し、インポート速度を上げます[＃868](https://github.com/pingcap/br/pull/868)
-        -   TiDB Lightningを使用してS3ストレージからデータをインポートする場合、TiDBLightningは`s3:ListBucket`パーミッション[＃919](https://github.com/pingcap/br/pull/919)を必要としなくなりました。
-        -   チェックポイントから再開する場合、TiDBLightningは元のエンジンを使用し続けます[＃924](https://github.com/pingcap/br/pull/924)
+        -   TiDB Lightningを使用してS3ストレージからデータをインポートする場合、 TiDB Lightningは`s3:ListBucket`パーミッション[＃919](https://github.com/pingcap/br/pull/919)を必要としなくなりました。
+        -   チェックポイントから再開する場合、 TiDB Lightningは元のエンジンを使用し続けます[＃924](https://github.com/pingcap/br/pull/924)
 
 ## バグの修正 {#bug-fixes}
 
@@ -89,7 +89,7 @@ TiDBバージョン：4.0.12
     -   TiKVストアをトゥームストーンとしてマークした後、同じIPアドレスとポートを持つ異なるStoreIDで新しいTiKVストアを開始すると、 `StoreNotMatch`エラー[＃23071](https://github.com/pingcap/tidb/pull/23071)が返される問題を修正します。
     -   `NULL`で`YEAR`と比較した場合は`INT`タイプを調整しないで[＃22844](https://github.com/pingcap/tidb/pull/22844)
     -   `auto_random`列[＃22736](https://github.com/pingcap/tidb/pull/22736)のテーブルにデータをロードするときに接続が失われる問題を修正します
-    -   キャンセルパス[＃23297](https://github.com/pingcap/tidb/pull/23297)でDDL操作がパニックに遭遇した場合のDDLハングオーバーの問題を修正します。
+    -   キャンセルパス[＃23297](https://github.com/pingcap/tidb/pull/23297)でDDL操作がpanicに遭遇した場合のDDLハングオーバーの問題を修正します。
     -   `YEAR`列を[＃23104](https://github.com/pingcap/tidb/pull/23104)と比較するときのインデックススキャンの間違ったキー範囲を修正し`NULL`
     -   正常に作成されたビューが使用に失敗する問題を修正します[＃23083](https://github.com/pingcap/tidb/pull/23083)
 
@@ -132,6 +132,6 @@ TiDBバージョン：4.0.12
     -   TiDB Lightning
 
         -   TiKVImporterがファイルがすでに存在していることを無視する可能性があるエラーを修正します[＃848](https://github.com/pingcap/br/pull/848)
-        -   TiDBLightningが間違ったタイムスタンプを使用して間違ったデータを読み取る可能性があるバグを修正します[＃850](https://github.com/pingcap/br/pull/850)
+        -   TiDB Lightningが間違ったタイムスタンプを使用して間違ったデータを読み取る可能性があるバグを修正します[＃850](https://github.com/pingcap/br/pull/850)
         -   TiDBLightningの予期しない終了によりチェックポイントファイルが破損する可能性があるバグを修正します[＃889](https://github.com/pingcap/br/pull/889)
         -   `cancel`エラーが無視されるために発生する可能性のあるデータエラーの問題を修正します[＃874](https://github.com/pingcap/br/pull/874)

@@ -23,7 +23,7 @@ TiDBダッシュボードのキービジュアライザーページは、TiDBの
 
 ![Key Visualizer page](/media/dashboard/dashboard-keyviz-overview.png)
 
-上記のインターフェイスから、次のオブジェクトを確認できます。
+上記のインターフェースから、次のオブジェクトを確認できます。
 
 -   時間の経過に伴う全体的なトラフィックの変化を示す大きなヒートマップ。
 -   ある座標点の詳細情報。
@@ -46,7 +46,7 @@ TiDBデータベースを使用する場合、ホットスポットの問題が�
 -   隣接するデータを`AUTO_INCREMENT`の主キーを使用してテーブルに書き込みます。これにより、このテーブルでホットスポットの問題が発生します。
 -   隣接する時間データをテーブルの時間インデックスに書き込みます。これにより、テーブルインデックスでホットスポットの問題が発生します。
 
-ホットスポットの詳細については、 [非常に同時の書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
+ホットスポットの詳細については、 [並行性の高い書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md#hotspot-causes)を参照してください。
 
 ### ヒートマップ {#heatmap}
 
@@ -178,4 +178,4 @@ Key Visualizerを開くと、デフォルトで過去6時間のデータベー�
 
 ## ホットスポットの問題に対処する {#address-hotspot-issues}
 
-TiDBには、一般的なホットスポットの問題を軽減するための組み込み機能がいくつかあります。詳細は[非常に同時の書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。
+TiDBには、一般的なホットスポットの問題を軽減するための組み込み機能がいくつかあります。詳細は[並行性の高い書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)を参照してください。

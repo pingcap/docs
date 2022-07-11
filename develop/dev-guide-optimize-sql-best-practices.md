@@ -146,7 +146,7 @@ DELETE FROM t;
 
 ### <code>ADD INDEX</code>の追加のベストプラクティス {#code-add-index-code-best-practices}
 
-TiDBはオンライン`ADD INDEX`操作をサポートし、テーブル内のデータの読み取りと書き込みをブロックしません。次のシステム変数を変更することにより、 `ADD INDEX`の速度を調整できます。
+TiDBはオンライン`ADD INDEX`操作をサポートし、テーブルでのデータの読み取りと書き込みをブロックしません。次のシステム変数を変更することにより、 `ADD INDEX`の速度を調整できます。
 
 -   [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 -   [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
@@ -179,4 +179,4 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ### も参照してください {#see-also}
 
--   [非常に同時の書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)
+-   [並行性の高い書き込みのベストプラクティス](/best-practices/high-concurrency-best-practices.md)

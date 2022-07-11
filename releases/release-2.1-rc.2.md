@@ -14,9 +14,9 @@ title: TiDB 2.1 RC2 Release Notes
     -   `Range`のコンピューティングロジックを拡張して、複数の`IN`または`EQUAL`の条件を同時に処理できるようにします[＃7577](https://github.com/pingcap/tidb/pull/7577)
     -   `Range`が空の場合に`TableScan`の推定結果が正しくない問題を修正します[＃7583](https://github.com/pingcap/tidb/pull/7583)
     -   `UPDATE`ステートメント[＃7586](https://github.com/pingcap/tidb/pull/7586)の`PointGet`演算子をサポートします
-    -   一部の条件で`FirstRow`集計関数を実行するプロセス中のパニックの問題を修正します[＃7624](https://github.com/pingcap/tidb/pull/7624)
+    -   一部の条件で`FirstRow`集計関数を実行するプロセス中のpanicの問題を修正します[＃7624](https://github.com/pingcap/tidb/pull/7624)
 -   SQL実行エンジン
-    -   `HashJoin`オペレーターがエラー[＃7554](https://github.com/pingcap/tidb/pull/7554)に遭遇したときに発生する可能性のある`DataRace`の問題を修正します
+    -   `HashJoin`オペレーターがエラー[＃7554](https://github.com/pingcap/tidb/pull/7554)に遭遇したときの潜在的な`DataRace`の問題を修正します
     -   `HashJoin`オペレーターに内部テーブルを読み取らせ、同時にハッシュテーブルを作成します[＃7544](https://github.com/pingcap/tidb/pull/7544)
     -   ハッシュ集計演算子のパフォーマンスを最適化する[＃7541](https://github.com/pingcap/tidb/pull/7541)
     -   結合演算子のパフォーマンスを最適化[＃7433](https://github.com/pingcap/tidb/pull/7433) [＃7493](https://github.com/pingcap/tidb/pull/7493)
@@ -27,9 +27,9 @@ title: TiDB 2.1 RC2 Release Notes
     -   統計の変更がない場合に発生する統計更新エラーを修正します[＃7530](https://github.com/pingcap/tidb/pull/7530)
     -   `Analyze`のリクエストを作成するときは、RC分離レベルと低い優先度を使用します[＃7496](https://github.com/pingcap/tidb/pull/7496)
     -   1日の特定の期間の統計自動分析の有効化をサポート[＃7570](https://github.com/pingcap/tidb/pull/7570)
-    -   統計情報をログに記録する際のパニックの問題を修正する[＃7588](https://github.com/pingcap/tidb/pull/7588)
+    -   統計情報をログに記録する際のpanicの問題を修正する[＃7588](https://github.com/pingcap/tidb/pull/7588)
     -   `ANALYZE TABLE WITH BUCKETS`ステートメント[＃7619](https://github.com/pingcap/tidb/pull/7619)を使用したヒストグラム内のバケット数の構成のサポート
-    -   空のヒストグラムを更新するときのパニックの問題を修正します[＃7640](https://github.com/pingcap/tidb/pull/7640)
+    -   空のヒストグラムを更新するときのpanicの問題を修正します[＃7640](https://github.com/pingcap/tidb/pull/7640)
     -   統計情報を使用して`information_schema.tables.data_length`を更新します[＃7657](https://github.com/pingcap/tidb/pull/7657)
 -   サーバ
     -   トレース関連の依存関係を追加する[＃7532](https://github.com/pingcap/tidb/pull/7532)
@@ -76,14 +76,14 @@ title: TiDB 2.1 RC2 Release Notes
     -   モニターにDDLジョブタイプと現在のスキーマバージョン情報を追加します[＃7472](https://github.com/pingcap/tidb/pull/7472)
     -   `Admin Restore Table`つの機能の設計を完了します[＃7383](https://github.com/pingcap/tidb/pull/7383)
     -   `Bit`タイプのデフォルト値が128を超える問題を修正します[＃7249](https://github.com/pingcap/tidb/pull/7249)
-    -   `Bit`タイプのデフォルト値を[＃7604](https://github.com/pingcap/tidb/pull/7604)にできない問題を修正し`NULL`
+    -   `Bit`タイプのデフォルト値を[＃7604](https://github.com/pingcap/tidb/pull/7604)にできない問題を修正し`NULL` 。
     -   DDLキュー[＃7608](https://github.com/pingcap/tidb/pull/7608)のチェック`CREATE TABLE/DATABASE`の間隔を短くします。
     -   `ddl/owner/resign` HTTPインターフェースを使用して、DDL所有者を解放し、新しい所有者の選出を開始します[＃7649](https://github.com/pingcap/tidb/pull/7649)
 -   TiKVGoクライアント
     -   `Seek` [＃7419](https://github.com/pingcap/tidb/pull/7419)操作で35しか得られないという問題をサポートし`Key`
 -   [テーブルパーティション](https://github.com/pingcap/tidb/projects/6) （実験的）
-    -   `Bigint`タイプがパーティションキー[＃7520](https://github.com/pingcap/tidb/pull/7520)として使用できない問題を修正します
-    -   パーティションテーブルにインデックスを追加するときに問題が発生した場合のロールバック操作をサポートする[＃7437](https://github.com/pingcap/tidb/pull/7437)
+    -   `Bigint`タイプをパーティションキー[＃7520](https://github.com/pingcap/tidb/pull/7520)として使用できない問題を修正します。
+    -   パーティションテーブルにインデックスを追加する際に問題が発生した場合のロールバック操作をサポートする[＃7437](https://github.com/pingcap/tidb/pull/7437)
 
 ## PD {#pd}
 
@@ -115,4 +115,4 @@ title: TiDB 2.1 RC2 Release Notes
 -   バグの修正
     -   新しく分割されたリージョン[＃3557](https://github.com/tikv/tikv/pull/3557)の`PreVote`のメッセージを破棄することによって引き起こされるリーダー選挙の問題を修正します
     -   リージョン[＃3573](https://github.com/tikv/tikv/pull/3573)をマージした後のフォロワー関連の統計を修正
-    -   ローカルリーダーが廃止されたリージョン情報を使用する問題を修正します[＃3565](https://github.com/tikv/tikv/pull/3565)
+    -   ローカルリーダーが廃止された地域情報を使用する問題を修正します[＃3565](https://github.com/tikv/tikv/pull/3565)

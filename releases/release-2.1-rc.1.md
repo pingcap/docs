@@ -23,12 +23,12 @@ title: TiDB 2.1 RC1 Release Notes
 -   SQL実行エンジン
     -   夏時間が正しく計算されない場合があるという問題を修正します[＃6823](https://github.com/pingcap/tidb/pull/6823)
     -   集計関数フレームワークをリファクタリングして、 `Stream`および`Hash`の集計演算子の実行効率を向上させます[＃6852](https://github.com/pingcap/tidb/pull/6852)
-    -   `Hash`集計演算子が正常に終了できない場合がある問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
+    -   `Hash`集計演算子が正常に終了できない場合があるという問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
     -   `BIT_OR`が非整数データを正しく[＃6994](https://github.com/pingcap/tidb/pull/6994)しない問題を修正し`BIT_AND` `BIT_XOR`
     -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスをほぼ10倍に向上させます[＃7027](https://github.com/pingcap/tidb/pull/7027)
     -   時間タイプデータのメモリ使用量を最適化し、時間タイプデータのメモリ使用量を50％削減します[＃7043](https://github.com/pingcap/tidb/pull/7043)
     -   `UNION`ステートメントで返された結果が符号付き整数および符号なし整数と混合される問題を修正します[＃7112](https://github.com/pingcap/tidb/pull/7112)と互換性がありません。
-    -   `FROM_BASE64` `RPAD` `LPAD` [＃7171](https://github.com/pingcap/tidb/pull/7171) `REPEAT`された[＃7409](https://github.com/pingcap/tidb/pull/7409)が多[＃7266](https://github.com/pingcap/tidb/pull/7266)ことによって引き起こされる[＃7431](https://github.com/pingcap/tidb/pull/7431)の問題を修正し`TO_BASE64`
+    -   `FROM_BASE64` `RPAD` `LPAD` [＃7171](https://github.com/pingcap/tidb/pull/7171) `REPEAT`された[＃7409](https://github.com/pingcap/tidb/pull/7409)が多[＃7266](https://github.com/pingcap/tidb/pull/7266)ことによって[＃7431](https://github.com/pingcap/tidb/pull/7431)れるpanicの問題を修正し`TO_BASE64`
     -   `MergeJoin`が`IndexJoin`の値を処理するときの誤った結果を修正し`NULL` [＃7255](https://github.com/pingcap/tidb/pull/7255)
     -   場合によっては`Outer Join`の誤った結果を修正します[＃7288](https://github.com/pingcap/tidb/pull/7288)
     -   `Data Truncated`のエラーメッセージを改善して、表[＃7401](https://github.com/pingcap/tidb/pull/7401)の間違ったデータと対応するフィールドを見つけやすくします。
@@ -68,8 +68,8 @@ title: TiDB 2.1 RC1 Release Notes
     -   `Prepare`ステートメント[＃7162](https://github.com/pingcap/tidb/pull/7162)に`PlaceHolder`の数の検証を追加します。
     -   [＃7353](https://github.com/pingcap/tidb/pull/7353) `set character_set_results = null`
     -   `flush status`構文[＃7369](https://github.com/pingcap/tidb/pull/7369)をサポートします
-    -   `information_schema`で`SET`タイプと`ENUM`タイプの列サイズを[＃7347](https://github.com/pingcap/tidb/pull/7347)
-    -   テーブルを作成するためのステートメントの`NATIONAL CHARACTER`構文をサポートします[＃7378](https://github.com/pingcap/tidb/pull/7378)
+    -   [＃7347](https://github.com/pingcap/tidb/pull/7347)で`SET`および`ENUM`タイプの列サイズを修正し`information_schema`
+    -   テーブルを作成するためのステートメントの`NATIONAL CHARACTER`構文をサポートする[＃7378](https://github.com/pingcap/tidb/pull/7378)
     -   `LOAD DATA`ステートメント[＃7391](https://github.com/pingcap/tidb/pull/7391)で`CHARACTER SET`構文をサポートします。
     -   `SET`および`ENUM`タイプの列情報を修正します[＃7417](https://github.com/pingcap/tidb/pull/7417)
     -   `CREATE USER`ステートメント[＃7402](https://github.com/pingcap/tidb/pull/7402)で`IDENTIFIED WITH`構文をサポートします。
@@ -117,7 +117,7 @@ title: TiDB 2.1 RC1 Release Notes
     -   スケジューリングシミュレーターを改善する
     -   pd-ctlの統計を使用したリージョンの分割をサポート
     -   pd-ctlで`jq`を呼び出すことにより、JSON出力のフォーマットをサポートします
-    -   etcdRaftステートマシンに関するメトリックを追加します
+    -   Raftステートマシンに関するメトリックを追加します
 -   バグの修正
     -   リーダーを切り替えた後に名前空間が再ロードされない問題を修正します
     -   名前空間のスケジューリングがスケジュールの制限を超える問題を修正します

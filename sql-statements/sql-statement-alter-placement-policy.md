@@ -86,4 +86,4 @@ Create Policy | CREATE PLACEMENT POLICY `p1` PRIMARY_REGION="us-east-1" REGIONS=
 -   [SQLの配置ルール](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
 -   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
--   [ドロッププレースメントポリシー](/sql-statements/sql-statement-drop-placement-policy.md)
+-   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

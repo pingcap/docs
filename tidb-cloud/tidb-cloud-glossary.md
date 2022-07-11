@@ -59,7 +59,7 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 -   TiDB Cloudリージョン
 
-    同じ地理的領域に展開された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
+    同じ地理的領域に展開された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)のノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンにデプロイされます。
 
 -   TiDBリージョン
 
@@ -67,13 +67,13 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 ### レプリカ {#replica}
 
-同じまたは異なるリージョンに配置でき、同じデータを含む別のデータベース。レプリカは、多くの場合、災害復旧の目的またはパフォーマンスの向上のために使用されます。
+同じ地域または異なる地域に配置でき、同じデータを含む別のデータベース。レプリカは、多くの場合、災害復旧の目的またはパフォーマンスの向上のために使用されます。
 
 ## T {#t}
 
 ### TiDBクラスタ {#tidb-cluster}
 
-機能する作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) （ [配置ドライバー](https://docs.pingcap.com/tidb/stable/tidb-scheduling) ）、および[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)ノードの[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 。
+機能する作業データベースを形成する[TiDB](https://docs.pingcap.com/tidb/stable/tidb-computing) （ [配置Driver](https://docs.pingcap.com/tidb/stable/tidb-scheduling) ）、および[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)ノードの[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 。
 
 ### TiDBノード {#tidb-node}
 

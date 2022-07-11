@@ -32,12 +32,12 @@ TiDBバージョン：3.0.16
 
     -   あるトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されるために発生したデータの不整合の問題を修正します[＃18248](https://github.com/pingcap/tidb/pull/18248)
     -   PDサーバー側フォロワー[＃17944](https://github.com/pingcap/tidb/pull/17944)の`Got too many pings`エラーログを修正します
-    -   HashJoinの子が`TypeNull`列[＃17935](https://github.com/pingcap/tidb/pull/17935)を返すときに発生する可能性のあるパニックの問題を修正します
+    -   HashJoinの子が`TypeNull`列[＃17935](https://github.com/pingcap/tidb/pull/17935)を返すときに発生する可能性のあるpanicの問題を修正します
     -   アクセスが拒否されたときのエラーメッセージを修正する[＃17722](https://github.com/pingcap/tidb/pull/17722)
     -   `int`タイプと`float`タイプのJSON比較の問題を修正[＃17715](https://github.com/pingcap/tidb/pull/17715)
     -   データ競合の原因となるフェイルポイントを更新する[＃17710](https://github.com/pingcap/tidb/pull/17710)
     -   テーブルの作成時にタイムアウトの事前分割リージョンが機能しない可能性がある問題を修正します[＃17617](https://github.com/pingcap/tidb/pull/17617)
-    -   送信失敗後のあいまいなエラーメッセージによって引き起こされるパニックを修正する[＃17378](https://github.com/pingcap/tidb/pull/17378)
+    -   送信失敗後のあいまいなエラーメッセージによって引き起こされるpanicを修正する[＃17378](https://github.com/pingcap/tidb/pull/17378)
     -   特別な場合に`FLASHBACK TABLE`が失敗する可能性があるという問題を修正します[＃17165](https://github.com/pingcap/tidb/pull/17165)
     -   ステートメントに文字列列のみがある場合の不正確な範囲計算結果の問題を修正します[＃16658](https://github.com/pingcap/tidb/pull/16658)
     -   `only_full_group_by`モードが設定されているときに発生したクエリエラーを修正します[＃16620](https://github.com/pingcap/tidb/pull/16620)
@@ -47,8 +47,8 @@ TiDBバージョン：3.0.16
 -   TiKV
 
     -   取り込んだファイルから読み取られた潜在的な誤った結果を修正する[＃8039](https://github.com/tikv/tikv/pull/8039)
-    -   複数のマージプロセス中にストアが分離されている場合、ピアを削除できない問題を修正します[＃8005](https://github.com/tikv/tikv/pull/8005)
+    -   複数のマージプロセス中にストアが分離されている場合にピアを削除できない問題を修正します[＃8005](https://github.com/tikv/tikv/pull/8005)
 
 -   PD
 
-    -   [＃2577](https://github.com/pingcap/pd/pull/2577)でリージョンキーをクエリするときの`404`のエラーを修正しました
+    -   PD Controlでリージョンキーをクエリするときの`404` [＃2577](https://github.com/pingcap/pd/pull/2577)エラーを修正しました

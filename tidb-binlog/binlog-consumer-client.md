@@ -3,11 +3,11 @@ title: Binlog Consumer Client User Guide
 summary: Use Binlog Consumer Client to consume TiDB secondary binlog data from Kafka and output the data in a specific format.
 ---
 
-# Binlogコンシューマークライアントユーザーガイド {#binlog-consumer-client-user-guide}
+# Binlog Consumer Clientユーザーガイド {#binlog-consumer-client-user-guide}
 
-Binlog Consumer Clientは、KafkaからのTiDBセカンダリbinlogデータを消費し、特定の形式でデータを出力するために使用されます。現在、Drainerは、MySQL、TiDB、ファイル、Kafkaなどの複数の種類のダウンストリーミングをサポートしています。ただし、ユーザーがデータを他の形式（ElasticsearchやHiveなど）に出力するための要件をカスタマイズしている場合があるため、この機能が導入されています。
+Binlog Consumer Clientは、KafkaからのTiDBセカンダリbinlogデータを消費し、特定の形式でデータを出力するために使用されます。現在、 Drainerは、MySQL、TiDB、ファイル、Kafkaなどの複数の種類のダウンストリーミングをサポートしています。ただし、ユーザーがデータを他の形式（ElasticsearchやHiveなど）に出力するための要件をカスタマイズしている場合があるため、この機能が導入されています。
 
-## ドレイナーを構成する {#configure-drainer}
+## Drainerを構成する {#configure-drainer}
 
 Drainerの構成ファイルを変更し、Kafkaにデータを出力するように設定します。
 
@@ -26,7 +26,7 @@ kafka-version = "0.8.2.0"
 
 ### データ形式 {#data-format}
 
-まず、DrainerによってKafkaに出力されるデータのフォーマット情報を取得する必要があります。
+まず、 DrainerによってKafkaに出力されるデータのフォーマット情報を取得する必要があります。
 
 ```
 // `Column` stores the column data in the corresponding variable based on the data type.
@@ -119,9 +119,9 @@ message Binlog {
 
 データ形式の定義については、 [`secondary_binlog.proto`](https://github.com/pingcap/tidb-tools/blob/master/tidb-binlog/proto/proto/secondary_binlog.proto)を参照してください。
 
-### 運転者 {#driver}
+### Driver {#driver}
 
-[TiDB-ツール](https://github.com/pingcap/tidb-tools/)のプロジェクトは[運転者](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/driver)を提供します。これは、Kafkaのbinlogデータを読み取るために使用されます。次の機能があります。
+[TiDB-ツール](https://github.com/pingcap/tidb-tools/)のプロジェクトは[Driver](https://github.com/pingcap/tidb-tools/tree/master/tidb-binlog/driver)を提供します。これは、Kafkaのbinlogデータを読み取るために使用されます。次の機能があります。
 
 -   Kafkaデータを読み取ります。
 -   `commit ts`に基づいてKafkaに保存されているbinlogを見つけます。
@@ -132,16 +132,16 @@ Driverを使用する場合は、次の情報を構成する必要がありま�
 -   `CommitTS` ：どの`commit ts`からbinlogの読み取りを開始するか
 -   `Offset` ： `offset`がデータの読み取りを開始する場所。 `CommitTS`が設定されている場合、このパラメーターを構成する必要はありません。
 -   `ClusterID` ：TiDBクラスタのクラスタID
--   `Topic` ：カフカのトピック名。トピックが空の場合は、 `<ClusterID>_obinlog`のデフォルト名を使用します。
+-   `Topic` ：カフカのトピック名。トピックが空の場合は、 Drainerの`<ClusterID>_obinlog`名を使用します。
 
-パッケージ内のドライバーコードを引用してドライバーを使用し、ドライバーが提供するサンプルコードを参照して、ドライバーの使用方法とbinlogデータの解析方法を学ぶことができます。
+パッケージ内のDriverコードを引用してDriverを使用し、Driverが提供するサンプルコードを参照して、Driverの使用方法とbinlogデータの解析方法を学ぶことができます。
 
 現在、2つの例が提供されています。
 
 -   Driverを使用してデータをMySQLに複製します。この例は、binlogをSQLに変換する方法を示しています
--   ドライバを使用してデータを印刷する
+-   Driverを使用してデータを印刷する
 
 > **ノート：**
 >
-> -   サンプルコードは、ドライバーの使用方法のみを示しています。本番環境でDriverを使用する場合は、コードを最適化する必要があります。
-> -   現在、Golangバージョンのドライバーとサンプルコードのみが利用可能です。他の言語を使用する場合は、binlog protoファイルに基づいて対応する言語でコードファイルを生成し、Kafkaでbinlogデータを読み取り、データを解析して、データをダウンストリームに出力するアプリケーションを開発する必要があります。サンプルコードを最適化し、他の言語のサンプルコードを[TiDB-ツール](https://github.com/pingcap/tidb-tools)に送信することもできます。
+> -   サンプルコードは、 Driverの使用方法のみを示しています。本番環境でDriverを使用する場合は、コードを最適化する必要があります。
+> -   現在、GolangバージョンのDriverとサンプルコードのみが利用可能です。他の言語を使用する場合は、binlog protoファイルに基づいて対応する言語でコードファイルを生成し、Kafkaでbinlogデータを読み取り、データを解析して、データをダウンストリームに出力するアプリケーションを開発する必要があります。サンプルコードを最適化し、他の言語のサンプルコードを[TiDB-ツール](https://github.com/pingcap/tidb-tools)に送信することもできます。

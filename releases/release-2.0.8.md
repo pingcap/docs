@@ -19,7 +19,7 @@ title: TiDB 2.0.8 Release Notes
     -   一部の条件で統計モジュールによって引き起こされるメモリリークの問題を修正します[＃7864](https://github.com/pingcap/tidb/pull/7864)
     -   一部の異常な状態で`ANALYZE`の結果が得られない問題を修正します[＃7871](https://github.com/pingcap/tidb/pull/7871)
     -   返された結果が正しいことを確認するために、関数`SYSDATE`を折りたたまないでください[＃7894](https://github.com/pingcap/tidb/pull/7894)
-    -   いくつかの条件で`substring_index`パニックの問題を修正します[＃7896](https://github.com/pingcap/tidb/pull/7896)
+    -   いくつかの条件で`substring_index`panicの問題を修正します[＃7896](https://github.com/pingcap/tidb/pull/7896)
     -   一部の条件で`OUTER JOIN`が誤って`INNER JOIN`に変換される問題を修正します[＃7899](https://github.com/pingcap/tidb/pull/7899)
 
 ## TiKV {#tikv}

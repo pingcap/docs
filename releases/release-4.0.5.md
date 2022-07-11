@@ -108,7 +108,7 @@ TiDBバージョン：4.0.5
     -   `collation`関数を使用すると間違ったクエリ結果が得られる問題を修正します[＃18735](https://github.com/pingcap/tidb/pull/18735)
     -   `getAutoIncrementID()`関数が`tidb_snapshot`セッション変数を考慮しないというバグを修正します。これにより、ダンパーツールが`table not exist`エラー[＃18692](https://github.com/pingcap/tidb/pull/18692)で失敗する可能性があります。
     -   [＃18434](https://github.com/pingcap/tidb/pull/18434)のようなSQLステートメントの`unknown column error`を修正し`select a from t having t.a`
-    -   パーティションキーが整数型[＃18186](https://github.com/pingcap/tidb/pull/18186)の場合、64ビットの符号なし型をハッシュパーティションテーブルに書き込むとオーバーフローが発生し、予期しない負の数が発生するというパニックの問題を修正します。
+    -   パーティションキーが整数型[＃18186](https://github.com/pingcap/tidb/pull/18186)の場合、64ビットの符号なし型をハッシュパーティションテーブルに書き込むとオーバーフローが発生し、予期しない負の数が発生するというpanicの問題を修正します。
     -   `char`関数[＃18122](https://github.com/pingcap/tidb/pull/18122)の間違った動作を修正します
     -   `ADMIN REPAIR TABLE`ステートメントが範囲パーティション[＃17988](https://github.com/pingcap/tidb/pull/17988)の式の整数を解析できない問題を修正します
     -   `SET CHARSET`ステートメント[＃17289](https://github.com/pingcap/tidb/pull/17289)の誤った動作を修正します
@@ -117,28 +117,28 @@ TiDBバージョン：4.0.5
     -   TiDBのバージョン情報が`cluster_info`表[＃18413](https://github.com/pingcap/tidb/pull/18413)のPD/TiKVのバージョン情報と矛盾する問題を修正します。
     -   悲観的なトランザクションの既存のチェックを修正する[＃19004](https://github.com/pingcap/tidb/pull/19004)
     -   `union select for update`を実行すると同時レース[＃19006](https://github.com/pingcap/tidb/pull/19006)が発生する可能性がある問題を修正します
-    -   `apply`に`PointGet`演算子[＃19046](https://github.com/pingcap/tidb/pull/19046)の子がある場合の間違ったクエリ結果を修正します
+    -   `apply`に`PointGet`演算子[＃19046](https://github.com/pingcap/tidb/pull/19046)の子がある場合の誤ったクエリ結果を修正します
     -   `IndexLookUp`が`Apply`演算子[＃19496](https://github.com/pingcap/tidb/pull/19496)の内側にあるときに発生する誤った結果を修正します
     -   `anti-semi-join`クエリの誤った結果を修正[＃19472](https://github.com/pingcap/tidb/pull/19472)
     -   [＃19456](https://github.com/pingcap/tidb/pull/19456)の誤った使用によって引き起こされた誤った結果を修正し`BatchPointGet`
     -   `UnionScan`が`Apply`演算子[＃19496](https://github.com/pingcap/tidb/pull/19496)の内側にあるときに発生する誤った結果を修正します
-    -   `EXECUTE`ステートメントを使用して高価なクエリログを出力することによって引き起こされるパニックを修正します[＃17419](https://github.com/pingcap/tidb/pull/17419)
-    -   結合キーが`ENUM`または[＃19235](https://github.com/pingcap/tidb/pull/19235)の場合のインデックス結合エラーを修正し`SET` 。
+    -   `EXECUTE`ステートメントを使用して高価なクエリログ[＃17419](https://github.com/pingcap/tidb/pull/17419)を出力することによって引き起こされるpanicを修正します
+    -   結合キーが`ENUM`または`SET`の場合のインデックス結合エラーを修正し[＃19235](https://github.com/pingcap/tidb/pull/19235)た
     -   インデックス列[＃19358](https://github.com/pingcap/tidb/pull/19358)に`NULL`の値が存在する場合、クエリ範囲を構築できない問題を修正します。
     -   グローバル構成の更新によって引き起こされるデータ競合の問題を修正します[＃17964](https://github.com/pingcap/tidb/pull/17964)
-    -   大文字スキーマ[＃19286](https://github.com/pingcap/tidb/pull/19286)の文字セットを変更するときに発生するパニックの問題を修正します
+    -   大文字スキーマ[＃19286](https://github.com/pingcap/tidb/pull/19286)の文字セットを変更するときに発生するpanicの問題を修正します
     -   ディスクスピルアクション中に一時ディレクトリを変更することによって引き起こされる予期しないエラーを修正します[＃18970](https://github.com/pingcap/tidb/pull/18970)
     -   10進タイプ[＃19131](https://github.com/pingcap/tidb/pull/19131)の間違ったハッシュキーを修正します
     -   `PointGet`および`BatchPointGet`演算子がパーティション選択構文を考慮せず、誤った結果を取得する問題を修正します[＃19141](https://github.com/pingcap/tidb/issues/19141)
     -   `Apply`演算子を`UnionScan`演算子と一緒に使用した場合の誤った結果を修正します[＃19104](https://github.com/pingcap/tidb/issues/19104)
     -   インデックス付きの仮想生成列が間違った値を返す原因となるバグを修正します[＃17989](https://github.com/pingcap/tidb/issues/17989)
-    -   実行時統計のロックを追加して、同時実行によって引き起こされるパニックを修正します[＃18983](https://github.com/pingcap/tidb/pull/18983)
+    -   実行時統計のロックを追加して、同時実行によって引き起こされるpanicを修正します[＃18983](https://github.com/pingcap/tidb/pull/18983)
 
 -   TiKV
 
     -   Hibernateリージョンが有効になっている場合のリーダー選挙のスピードアップ[＃8292](https://github.com/tikv/tikv/pull/8292)
     -   スケジューリング中のメモリリークの問題を修正[＃8357](https://github.com/tikv/tikv/pull/8357)
-    -   リーダーが急速に休止状態になるのを防ぐために、 `hibernate-timeout`の構成アイテムを追加します[＃8208](https://github.com/tikv/tikv/pull/8208)
+    -   リーダーが休止状態になるのが速すぎるのを防ぐために、 `hibernate-timeout`の構成アイテムを追加します[＃8208](https://github.com/tikv/tikv/pull/8208)
 
 -   PD
 
@@ -173,4 +173,4 @@ TiDBバージョン：4.0.5
 
     -   TiDB Lightning
 
-        -   TiDBバックエンド[＃357](https://github.com/pingcap/tidb-lightning/pull/357)を使用する場合の空のバイナリ/16進リテラルの構文エラーを修正します
+        -   TiDBバックエンド[＃357](https://github.com/pingcap/tidb-lightning/pull/357)を使用する場合の空のバイナリ/16進リテラルの構文エラーを修正しました

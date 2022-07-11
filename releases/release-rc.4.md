@@ -29,7 +29,7 @@ title: TiDB RC4 Release Notes
 -   JSONタイプと操作をサポートする
 -   クエリの優先順位付けと分離レベルの構成をサポートする
 
-### 配置ドライバー（PD） {#placement-driver-pd}
+### 配置Driver（PD） {#placement-driver-pd}
 
 -   PDを使用したTiKVロケーションラベルの設定のサポート
 -   スケジューラーを最適化する
@@ -44,7 +44,7 @@ title: TiDB RC4 Release Notes
 -   RC分離レベルをサポートする
 -   Jepsenテスト結果と安定性を改善します
 -   サポートドキュメントストア
--   コプロセッサーは、より多くのプッシュダウン機能をサポートするようになりました
+-   コプロセッサーは、より多くのプッシュダウン関数をサポートするようになりました
 -   パフォーマンスと安定性を向上させる
 
 ### TiSparkベータリリース {#tispark-beta-release}

@@ -5,7 +5,7 @@ summary: Learn about the cast functions and operators.
 
 # キャスト関数と演算子 {#cast-functions-and-operators}
 
-TiDBは、MySQL5.7で利用可能な[キャスト関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html)すべてをサポートします。
+TiDBは、 MySQL 5.7で利用可能な[キャスト関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/cast-functions.html)すべてをサポートします。
 
 | 名前                                                                                          | 説明                  |
 | ------------------------------------------------------------------------------------------- | ------------------- |

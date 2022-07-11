@@ -193,7 +193,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
 -   `JOB_TYPE` ：DDL操作のタイプ。
 -   `SCHEMA_STATE` ：スキーマの現在の状態。 `JOB_TYPE`が`add index`の場合、それはインデックスの状態です。 `JOB_TYPE`が`add column`の場合、それは列の状態です。 `JOB_TYPE`が`create table`の場合、それはテーブルの状態です。一般的な状態は次のとおりです。
     -   `none` ：存在しないことを示します。 `drop`または`create`の操作が失敗してロールバックすると、通常は`none`の状態になります。
-    -   `delete only` ：これらの`write only` `delete reorganization`の`write reorganization`は中間状態です。中間状態からの変換は非常に高速であるため、これらの状態は一般的な操作では表示されません。 `write reorganization`の状態は`add index`の操作でのみ確認できます。これは、インデックスデータが追加されていることを意味します。
+    -   `delete only` ：これらの`write only` `delete reorganization`の`write reorganization`は中間状態です。中間状態からの変換が非常に速いため、これらの状態は一般的な操作では表示されません。 `write reorganization`の状態は`add index`の操作でのみ確認できます。これは、インデックスデータが追加されていることを意味します。
     -   `public` ：既存で使用可能であることを示します。 `create table`や`add index/column`のような操作が終了すると、通常は`public`の状態になります。つまり、作成されたテーブル/列/インデックスは通常、読み取りと書き込みが可能になります。
 -   `SCHEMA_ID` ：DDL操作が実行されるデータベースのID。
 -   `TABLE_ID` ：DDL操作が実行されるテーブルのID。
@@ -201,7 +201,7 @@ admin show ddl jobs 5 where state!='synced' and db_name='test';
 -   `START_TIME` ：DDL操作の開始時刻。
 -   `END_TIME` ：DDL操作の終了時刻。
 -   `STATE` ：DDL操作の状態。一般的な状態は次のとおりです。
-    -   `none` ：操作タスクがDDLジョブキューに入れられたが、前のタスクが完了するのを待機しているため、まだ実行されていないことを示します。もう1つの理由は、ドロップ操作の実行後に`none`状態になるが、まもなく`synced`状態に更新されるためです。これは、すべてのTiDBインスタンスがこの状態に同期されたことを意味します。
+    -   `none` ：操作タスクがDDLジョブキューに入れられたが、前のタスクが完了するのを待っているため、まだ実行されていないことを示します。もう1つの理由は、ドロップ操作の実行後に`none`状態になるが、まもなく`synced`状態に更新されるためです。これは、すべてのTiDBインスタンスがこの状態に同期されたことを意味します。
     -   `running` ：操作が実行されていることを示します。
     -   `synced` ：操作が正常に実行され、すべてのTiDBインスタンスがこの状態に同期されたことを示します。
     -   `rollback done` ：操作が失敗し、ロールバックが終了したことを示します。

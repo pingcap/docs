@@ -52,7 +52,7 @@ TiDBバージョン：4.0.3
     -   デフォルトで実行情報の収集を有効にする[＃18518](https://github.com/pingcap/tidb/pull/18518)
     -   `tiflash_tables`と`tiflash_segments`のシステムテーブルを追加します[＃18536](https://github.com/pingcap/tidb/pull/18536)
     -   実験的機能から`AUTO RANDOM`移動し、その一般提供を発表します。改善点と互換性の変更は次のとおりです。
-        -   構成ファイルの`experimental.allow-auto-random`を非推奨にします。このアイテムがどのように構成されていても、列に`AUTO RANDOM`の機能をいつでも定義できます。 [＃18613](https://github.com/pingcap/tidb/pull/18613) [＃18623](https://github.com/pingcap/tidb/pull/18623)
+        -   構成ファイルで`experimental.allow-auto-random`を廃止します。このアイテムがどのように構成されていても、列に`AUTO RANDOM`の機能をいつでも定義できます。 [＃18613](https://github.com/pingcap/tidb/pull/18613) [＃18623](https://github.com/pingcap/tidb/pull/18623)
         -   `tidb_allow_auto_random_explicit_insert`セッション変数を追加して、 `AUTO RANDOM`列への明示的な書き込みを制御します。デフォルト値は`false`です。これは、列への明示的な書き込みによって引き起こされる`AUTO_RANDOM_BASE`しない更新を回避するためです。 [＃18508](https://github.com/pingcap/tidb/pull/18508)
         -   `BIGINT`列と`UNSIGNED BIGINT`列にのみ`AUTO_RANDOM`を定義できるようにし、シャードビットの最大数を`15`に制限します。これにより、割り当て可能なスペースが急速に消費されるのを防ぎます[＃18538](https://github.com/pingcap/tidb/pull/18538)
         -   `BIGINT`列に`AUTO_RANDOM`属性を定義し、主キー[＃17987](https://github.com/pingcap/tidb/pull/17987)に負の値を挿入するときに、 `AUTO_RANDOM_BASE`更新をトリガーしないでください。
@@ -102,8 +102,8 @@ TiDBバージョン：4.0.3
 
 -   TiDB
 
-    -   実行中にエラーが発生した場合、 `IndexHashJoin`の空セットではなくエラーを返します[＃18586](https://github.com/pingcap/tidb/pull/18586)
-    -   gRPCtransportReaderが壊れたときに繰り返し発生するパニックを修正[＃18562](https://github.com/pingcap/tidb/pull/18562)
+    -   実行中にエラーが発生した場合、 `IndexHashJoin`の空のセットではなくエラーを返します[＃18586](https://github.com/pingcap/tidb/pull/18586)
+    -   gRPCtransportReaderが壊れたときに繰り返し発生するpanicを修正[＃18562](https://github.com/pingcap/tidb/pull/18562)
     -   GreenGCがオフラインストアのロックをスキャンしない問題を修正します。これによりデータが不完全になる可能性があります[＃18550](https://github.com/pingcap/tidb/pull/18550)
     -   TiFlashエンジン[＃18534](https://github.com/pingcap/tidb/pull/18534)を使用した非読み取り専用ステートメントの処理を禁止する
     -   クエリ接続がパニックになったときに実際のエラーメッセージを返す[＃18500](https://github.com/pingcap/tidb/pull/18500)
@@ -111,9 +111,9 @@ TiDBバージョン：4.0.3
     -   あるトランザクションで書き込まれ、削除された主キーのロックが別のトランザクションによって解決されるために発生したデータの不整合の問題を修正します[＃18291](https://github.com/pingcap/tidb/pull/18291)
     -   こぼれたディスクをうまく機能させる[＃18288](https://github.com/pingcap/tidb/pull/18288)
     -   生成された列[＃17907](https://github.com/pingcap/tidb/pull/17907)を含むテーブルで`REPLACE INTO`ステートメントが機能するときに報告されるエラーを修正します
-    -   `IndexHashJoin`人と`IndexMergeJoin`人の労働者がパニックになったときにOOMエラーを返す[＃18527](https://github.com/pingcap/tidb/pull/18527)
+    -   `IndexHashJoin`人と`IndexMergeJoin`人のワーカーがpanicになったときにOOMエラーを返します[＃18527](https://github.com/pingcap/tidb/pull/18527)
     -   `Index Join`で使用されるインデックスに整数の主キー[＃18565](https://github.com/pingcap/tidb/pull/18565)が含まれている場合に、 `Index Join`を実行すると、特殊なケースで誤った結果が返される可能性があるというバグを修正します。
-    -   クラスタで新しい照合順序が有効になっている場合、トランザクション内の新しい照合順序で列で更新されたデータを一意のインデックス[＃18703](https://github.com/pingcap/tidb/pull/18703)から読み取ることができない問題を修正します。
+    -   クラスタで新しい照合順序が有効になっている場合、トランザクション内の新しい照合順序で列で更新されたデータを一意のインデックス[＃18703](https://github.com/pingcap/tidb/pull/18703)から読み取ることができないという問題を修正します。
 
 -   TiKV
 

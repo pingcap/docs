@@ -41,4 +41,4 @@ tiup cluster template [flags]
 
 指定されたオプションに従ってトポロジテンプレートを出力します。これは、展開のためにトポロジファイルにリダイレクトできます。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -6,7 +6,7 @@ category: reference
 
 # 管理チェックサムテーブル {#admin-checksum-table}
 
-`ADMIN CHECKSUM TABLE`ステートメントは、テーブルのデータとインデックスのCRC64チェックサムを計算します。このステートメントは、インポート操作が正常に完了したことを確認するためにTiDBLightningなどのプログラムによって使用されます。
+`ADMIN CHECKSUM TABLE`ステートメントは、テーブルのデータとインデックスのCRC64チェックサムを計算します。このステートメントは、インポート操作が正常に完了したことを確認するためにTiDB Lightningなどのプログラムによって使用されます。
 
 ## あらすじ {#synopsis}
 

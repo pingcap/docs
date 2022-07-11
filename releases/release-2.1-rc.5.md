@@ -39,7 +39,7 @@ title: TiDB 2.1 RC5 Release Notes
     -   オーバーバウンドスキャンを回避するために、ticlientの`Scan`コマンドに上限を追加し[＃8247](https://github.com/pingcap/tidb/pull/8247) [＃8081](https://github.com/pingcap/tidb/pull/8081)
 -   DDL
     -   トランザクションでDDLステートメントを実行するとエラーが発生する場合がある問題を修正します[＃8056](https://github.com/pingcap/tidb/pull/8056)
-    -   パーティションテーブルで`truncate table`を実行しても[＃8103](https://github.com/pingcap/tidb/pull/8103)が有効にならない問題を修正します。
+    -   パーティションテーブルで`truncate table`を実行しても[＃8103](https://github.com/pingcap/tidb/pull/8103)が有効にならない問題を修正します
     -   場合によってはキャンセルされた後、DDL操作が正しくロールバックされない問題を修正します[＃8057](https://github.com/pingcap/tidb/pull/8057)
     -   `admin show next_row_id`コマンドを追加して、次に使用可能な行[＃8268](https://github.com/pingcap/tidb/pull/8268)を返します。
 
@@ -56,7 +56,7 @@ title: TiDB 2.1 RC5 Release Notes
 ## TiKV {#tikv}
 
 -   `WriteConflict`のエラーメッセージを[＃3750](https://github.com/tikv/tikv/pull/3750)する
--   パニックマークファイルを追加する[＃3746](https://github.com/tikv/tikv/pull/3746)
+-   panicマークファイルを追加する[＃3746](https://github.com/tikv/tikv/pull/3746)
 -   grpcioをダウングレードして、新しいバージョンのgRPC1によって引き起こされるセグメンテーション違反の問題を回避し[＃3650](https://github.com/tikv/tikv/pull/3650)
 -   `kv_scan`のインターフェイスに上限を追加します[＃3749](https://github.com/tikv/tikv/pull/3749)
 

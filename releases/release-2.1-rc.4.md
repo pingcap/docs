@@ -14,19 +14,19 @@ title: TiDB 2.1 RC4 Release Notes
 -   SQL実行エンジン
     -   `AVG`関数[＃7874](https://github.com/pingcap/tidb/pull/7874)の精度の問題を修正します
     -   `EXPLAIN ANALYZE`ステートメントを使用して、実行時間やクエリ実行プロセス中に返された各演算子の行数などの実行時統計を確認することをサポートします[＃7925](https://github.com/pingcap/tidb/pull/7925)
-    -   テーブルの列が結果セット[＃7943](https://github.com/pingcap/tidb/pull/7943)に複数回表示される場合の、 `PointGet`演算子のパニックの問題を修正します。
-    -   `Limit`節[＃8002](https://github.com/pingcap/tidb/pull/8002)の値が大きすぎるために発生するパニックの問題を修正します。
-    -   場合によっては`AddDate`ステートメントの実行プロセス中のパニックの問題を修正し[＃8009](https://github.com/pingcap/tidb/pull/8009) `SubDate`
+    -   テーブルの列が結果セット[＃7943](https://github.com/pingcap/tidb/pull/7943)に複数回表示される場合の、 `PointGet`演算子のpanicの問題を修正します。
+    -   `Limit`節[＃8002](https://github.com/pingcap/tidb/pull/8002)の値が大きすぎるために発生するpanicの問題を修正します。
+    -   場合によっては`AddDate`ステートメントの実行プロセス中のpanicの問題を修正し[＃8009](https://github.com/pingcap/tidb/pull/8009) `SubDate`
 -   統計
     -   結合されたインデックスのヒストグラムの下限のプレフィックスが範囲[＃7856](https://github.com/pingcap/tidb/pull/7856)外であると判断する問題を修正します。
     -   統計収集によって引き起こされるメモリリークの問題を修正します[＃7873](https://github.com/pingcap/tidb/pull/7873)
-    -   ヒストグラムが空の場合のパニックの問題を修正します[＃7928](https://github.com/pingcap/tidb/pull/7928)
+    -   ヒストグラムが空の場合のpanicの問題を修正します[＃7928](https://github.com/pingcap/tidb/pull/7928)
     -   統計がアップロードされているときにヒストグラムの境界が範囲外になる問題を修正します[＃7944](https://github.com/pingcap/tidb/pull/7944)
     -   統計サンプリングプロセスの値の最大長を制限する[＃7982](https://github.com/pingcap/tidb/pull/7982)
 -   サーバ
     -   ラッチをリファクタリングして、トランザクションの競合の誤判断を回避し、同時トランザクションの実行パフォーマンスを向上させます[＃7711](https://github.com/pingcap/tidb/pull/7711)
-    -   場合によっては遅いクエリを収集することによって引き起こされるパニックの問題を修正します[＃7874](https://github.com/pingcap/tidb/pull/7847)
-    -   `LOAD DATA`ステートメント[＃8005](https://github.com/pingcap/tidb/pull/8005)で`ESCAPED BY`が空の文字列である場合のパニックの問題を修正します。
+    -   場合によっては遅いクエリを収集することによって引き起こされるpanicの問題を修正します[＃7874](https://github.com/pingcap/tidb/pull/7847)
+    -   `LOAD DATA`ステートメント[＃8005](https://github.com/pingcap/tidb/pull/8005)で`ESCAPED BY`が空の文字列である場合のpanicの問題を修正します。
     -   「コプロセッサー・エラー」ログ情報を完成させます[＃8006](https://github.com/pingcap/tidb/pull/8006)
 -   互換性
     -   クエリが空の場合は、 `SHOW PROCESSLIST`の結果の`Command`のフィールドを`Sleep`に設定します[＃7839](https://github.com/pingcap/tidb/pull/7839)

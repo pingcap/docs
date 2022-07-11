@@ -18,14 +18,14 @@ title: TiDB 2.0.10 Release Notes
 -   `GetVar`または`SetVar`を含むフィルターを[＃8454](https://github.com/pingcap/tidb/pull/8454)ないでください
 -   `UNION`句の結果の長さが正しくない場合があるという問題を修正します[＃8491](https://github.com/pingcap/tidb/pull/8491)
 -   [＃8488](https://github.com/pingcap/tidb/pull/8488)の問題を修正し`PREPARE FROM @var_name`
--   場合によっては統計情報をダンプするときのパニックの問題を修正します[＃8464](https://github.com/pingcap/tidb/pull/8464)
+-   場合によっては統計情報をダンプするときのpanicの問題を修正します[＃8464](https://github.com/pingcap/tidb/pull/8464)
 -   場合によっては、ポイントクエリの統計推定の問題を修正します[＃8493](https://github.com/pingcap/tidb/pull/8493)
--   返されたデフォルトの`enum`値が文字列[＃8476](https://github.com/pingcap/tidb/pull/8476)である場合のパニックの問題を修正します
+-   返されたデフォルトの`enum`値が文字列[＃8476](https://github.com/pingcap/tidb/pull/8476)である場合のpanicの問題を修正します
 -   ワイドテーブルのシナリオでメモリが過剰に消費される問題を修正します[＃8467](https://github.com/pingcap/tidb/pull/8467)
 -   パーサーがmodオペコード[＃8431](https://github.com/pingcap/tidb/pull/8431)を誤ってフォーマットしたときに発生する問題を修正します
--   場合によっては外部キー制約を追加することによって引き起こされるパニックの問題を修正し[＃8410](https://github.com/pingcap/tidb/pull/8410) [＃8421](https://github.com/pingcap/tidb/pull/8421)
--   `YEAR`列型がゼロ値[＃8396](https://github.com/pingcap/tidb/pull/8396)を誤って変換する問題を修正します
--   `VALUES`関数の引数が列[＃8404](https://github.com/pingcap/tidb/pull/8404)ではない場合に発生したパニックの問題を修正します
+-   場合によっては外部キー制約を追加することによって引き起こされるpanicの問題を修正し[＃8410](https://github.com/pingcap/tidb/pull/8410) [＃8421](https://github.com/pingcap/tidb/pull/8421)
+-   `YEAR`列タイプがゼロ値[＃8396](https://github.com/pingcap/tidb/pull/8396)を誤って変換する問題を修正します
+-   `VALUES`関数の引数が列[＃8404](https://github.com/pingcap/tidb/pull/8404)ではない場合に発生したpanicの問題を修正します
 -   サブクエリを含むステートメントのプランキャッシュを無効にする[＃8395](https://github.com/pingcap/tidb/pull/8395)
 
 ## PD {#pd}
@@ -34,5 +34,5 @@ title: TiDB 2.0.10 Release Notes
 
 ## TiKV {#tikv}
 
--   遅延の可能性を最適化するために、リーダーを新しく作成されたピアに転送しないでください[＃3929](https://github.com/tikv/tikv/pull/3929)
+-   遅延の可能性を最適化するために、リーダーを新しく作成されたピアに転送することは避けてください[＃3929](https://github.com/tikv/tikv/pull/3929)
 -   冗長なリージョンハートビートを修正する[＃3930](https://github.com/tikv/tikv/pull/3930)

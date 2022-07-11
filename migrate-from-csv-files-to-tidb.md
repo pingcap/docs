@@ -11,12 +11,12 @@ TiDB Lightningは、CSVファイルおよびタブ区切り値（TSV）などの
 
 ## 前提条件 {#prerequisites}
 
--   [TiDBLightningをインストールします](/migration-tools.md) 。
--   [TiDBLightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
+-   [TiDB Lightningをインストールします](/migration-tools.md) 。
+-   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
 
 ## 手順1.CSVファイルを準備します {#step-1-prepare-the-csv-files}
 
-すべてのCSVファイルを同じディレクトリに配置します。すべてのCSVファイルを認識するためにTiDBLightningが必要な場合、ファイル名は次の要件を満たしている必要があります。
+すべてのCSVファイルを同じディレクトリに配置します。すべてのCSVファイルを認識するためにTiDB Lightningが必要な場合、ファイル名は次の要件を満たしている必要があります。
 
 -   CSVファイルにテーブル全体のデータが含まれている場合は、ファイルに`${db_name}.${table_name}.csv`という名前を付けます。
 -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値のサフィックスを追加します。たとえば、 `${db_name}.${table_name}.003.csv` 。数字の接尾辞は連続していない場合がありますが、昇順である必要があります。また、すべてのサフィックスが同じ長さになるように、数値の前にゼロを追加する必要があります。
@@ -25,7 +25,7 @@ TiDB Lightningは、CSVファイルおよびタブ区切り値（TSV）などの
 
 CSVファイルにはスキーマ情報が含まれていないため、CSVファイルからTiDBにデータをインポートする前に、ターゲットテーブルスキーマを作成する必要があります。次の2つの方法のいずれかによって、ターゲットテーブルスキーマを作成できます。
 
--   **方法1** ：TiDBLightningを使用してターゲットテーブルスキーマを作成します。
+-   **方法1** ： TiDB Lightningを使用してターゲットテーブルスキーマを作成します。
 
     必要なDDLステートメントを含むSQLファイルを作成します。
 
@@ -87,17 +87,17 @@ status-port = ${status-port} # During the import, TiDB Lightning needs to obtain
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
-構成ファイルの詳細については、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+構成ファイルの詳細については、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ## ステップ4.インポートパフォーマンスを調整します（オプション） {#step-4-tune-the-import-performance-optional}
 
-約256MiBの均一サイズのCSVファイルからデータをインポートすると、TiDBLightningが最高のパフォーマンスで動作します。ただし、単一の大きなCSVファイルからデータをインポートする場合、TiDB Lightningはデフォルトでインポートを処理するために1つのスレッドしか使用できないため、インポート速度が低下する可能性があります。
+約256MiBの均一サイズのCSVファイルからデータをインポートすると、 TiDB Lightningが最高のパフォーマンスで動作します。ただし、単一の大きなCSVファイルからデータをインポートする場合、 TiDB Lightningはデフォルトでインポートを処理するために1つのスレッドしか使用できないため、インポート速度が低下する可能性があります。
 
-インポートを高速化するために、大きなCSVファイルを小さなファイルに分割できます。一般的な形式のCSVファイルの場合、TiDB Lightningがファイル全体を読み取る前に、各行の開始位置と終了位置をすばやく見つけることは困難です。したがって、TiDBLightningはデフォルトでCSVファイルを自動的に分割しません。ただし、インポートするCSVファイルが特定の形式の要件を満たしている場合は、 `strict-format`モードを有効にできます。このモードでは、TiDB Lightningは1つの大きなCSVファイルをそれぞれ約256MiBの複数のファイルに自動的に分割し、それらを並行して処理します。
+インポートを高速化するために、大きなCSVファイルを小さなファイルに分割できます。一般的な形式のCSVファイルの場合、 TiDB Lightningがファイル全体を読み取る前に、各行の開始位置と終了位置をすばやく見つけることは困難です。したがって、 TiDB LightningはデフォルトでCSVファイルを自動的に分割しません。ただし、インポートするCSVファイルが特定の形式の要件を満たしている場合は、 `strict-format`モードを有効にできます。このモードでは、 TiDB Lightningは1つの大きなCSVファイルをそれぞれ約256MiBの複数のファイルに自動的に分割し、それらを並列処理します。
 
 > **ノート：**
 >
-> CSVファイルが厳密な形式ではないが、誤って`strict-format`モードが`true`に設定されている場合、複数行にまたがるフィールドは2つのフィールドに分割されます。これにより、解析が失敗し、TiDBLightningがエラーを報告せずに破損したデータをインポートする可能性があります。
+> CSVファイルが厳密な形式ではないが、誤って`strict-format`モードが`true`に設定されている場合、複数行にまたがるフィールドは2つのフィールドに分割されます。これにより、解析が失敗し、 TiDB Lightningがエラーを報告せずに破損したデータをインポートする可能性があります。
 
 厳密な形式のCSVファイルでは、各フィールドは1行しか使用しません。次の要件を満たしている必要があります。
 
@@ -125,13 +125,13 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 
 -   `grep`ログのキーワード`progress` 。進行状況は、デフォルトで5分ごとに更新されます。
 -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
--   [TiDBLightningWebインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
+-   [TiDB Lightningインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
 TiDB Lightningがインポートを完了すると、自動的に終了します。ログ印刷`the whole procedure completed`の最後の5行が見つかった場合、インポートは成功しています。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、TiDB Lightningが正常に終了することを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了することを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
 インポートが失敗した場合、トラブルシューティングについては[TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 

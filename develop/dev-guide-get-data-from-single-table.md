@@ -270,4 +270,4 @@ ORDER BY author_count DESC;
 71 rows in set (0.00 sec)
 ```
 
-`COUNT`の関数に加えて、TiDBは他の集約関数もサポートします。詳細については、 [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。
+`COUNT`関数に加えて、TiDBは他の集約関数もサポートします。詳細については、 [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。

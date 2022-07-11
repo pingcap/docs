@@ -15,18 +15,18 @@ summary: Learn about the basic features of TiDB.
 | [日付と時刻のタイプ](/data-type-date-and-time.md)                                       |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [文字列型](/data-type-string.md)                                                   |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [JSONタイプ](/data-type-json.md)                                                  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
-| [制御フロー機能](/functions-and-operators/control-flow-functions.md)                  |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [制御フロー関数](/functions-and-operators/control-flow-functions.md)                  |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [文字列関数](/functions-and-operators/string-functions.md)                          |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)        |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [日付と時刻の関数](/functions-and-operators/date-and-time-functions.md)                |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [ビット関数と演算子](/functions-and-operators/bit-functions-and-operators.md)           |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)         |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md) |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [情報機能](/functions-and-operators/information-functions.md)                      |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [暗号化および圧縮関数](/functions-and-operators/encryption-and-compression-functions.md) |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [情報関数](/functions-and-operators/information-functions.md)                      |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [JSON関数](/functions-and-operators/json-functions.md)                           | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
 | [集計関数](/functions-and-operators/aggregate-group-by-functions.md)               |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [ウィンドウ関数](/functions-and-operators/window-functions.md)                        |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [その他の機能](/functions-and-operators/miscellaneous-functions.md)                  |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [その他の関数](/functions-and-operators/miscellaneous-functions.md)                  |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [演算子](/functions-and-operators/operators.md)                                   |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [^1] [文字セットと照合](/character-set-and-collation.md)                               |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [ユーザーレベルのロック](/functions-and-operators/locking-functions.md)                   |  Y  |  N  | N   |  N  |  N  |  N  |  N  |    N    |
@@ -113,8 +113,8 @@ summary: Learn about the basic features of TiDB.
 | -------------------------------------------------- | :-: | :-: | --- | :-: | :-: | :-: | :-: | :-----: |
 | [範囲分割](/partitioned-table.md)                      |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [ハッシュ分割](/partitioned-table.md)                    |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [リストのパーティション化](/partitioned-table.md)              |  Y  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |    N    |
-| [COLUMNSパーティショニングを一覧表示します](/partitioned-table.md)  |  Y  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |    N    |
+| [List パーティショニング](/partitioned-table.md)            |  Y  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |    N    |
+| [List COLUMNS パーティショニング](/partitioned-table.md)    |  Y  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |    N    |
 | [`EXCHANGE PARTITION`](/partitioned-table.md)      | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |    N    |
 | [動的剪定](/partitioned-table.md#dynamic-pruning-mode) |  Y  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |  N  |    N    |
 

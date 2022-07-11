@@ -119,9 +119,9 @@ TiCDCはDMLイベントをKafkaイベントに変換し、イベントのキー�
 
 `enable-tidb-extension`が無効になっている値データ形式と比較して、 `_tidb_op` 、および`_tidb_commit_physical_time`の`_tidb_commit_ts`つの新しいフィールドが追加されています。
 
-### 列データ形式 {#column-data-format}
+### カラムデータ形式 {#column-data-format}
 
-列データは、キー/値データ形式の`{{ColumnValueBlock}}`の部分です。 TiCDCは、SQLタイプに基づいて列データ形式を生成します。基本的な列データ形式は次のとおりです。
+カラムデータは、キー/値データ形式の`{{ColumnValueBlock}}`の部分です。 TiCDCは、SQLタイプに基づいてカラムデータ形式を生成します。基本的なカラムデータ形式は次のとおりです。
 
 ```
 {
@@ -135,7 +135,7 @@ TiCDCはDMLイベントをKafkaイベントに変換し、イベントのキー�
 }
 ```
 
-1つの列がNULLになる可能性がある場合、列のデータ形式は次のようになります。
+1つの列がNULLになる可能性がある場合、カラムのデータ形式は次のようになります。
 
 ```
 {
@@ -190,7 +190,7 @@ TiCDCはDMLイベントをKafkaイベントに変換し、イベントのキー�
 | 設定         | 設定        | ストリング     |                                                                                                  |
 | 10進数       | 10進数      | バイト       | `avro-decimal-handling-mode`が文字列の場合、AVRO_TYPEは文字列です。                                             |
 
-Avroプロトコルでは、他の2つの`sink-uri`パラメーターが列データ形式にも影響を与える可能性があります： `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode` 。
+Avroプロトコルでは、他の2つの`sink-uri`パラメーターがカラムデータ形式にも影響を与える可能性があります： `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode` 。
 
 -   `avro-decimal-handling-mode`は、Avroが次のような10進フィールドを処理する方法を制御します。
 
@@ -217,7 +217,7 @@ dispatchers = [
 ]
 ```
 
-ほとんどのSQLタイプは、基本の列データ形式にマップされます。他のいくつかのSQLタイプは、基本データ形式を拡張してより多くの情報を提供します。
+ほとんどのSQLタイプは、基本のカラムデータ形式にマップされます。他のいくつかのSQLタイプは、基本データ形式を拡張してより多くの情報を提供します。
 
 BIT（64）
 
@@ -278,4 +278,4 @@ Confluent Schema Registryのデフォルトの互換性ポリシーが`BACKWARD`
 
 ## トピックの配布 {#topic-distribution}
 
-スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、およびTopicRecordNameStrategyの3つの[主題名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC AvroはTopicNameStrategyのみをサポートしています。つまり、Kafkaトピックは1つのデータ形式のデータしか受信できません。したがって、TiCDC Avroは、複数のテーブルを同じトピックにマッピングすることを禁止しています。チェンジフィードを作成するときに、トピックルールに構成済みの配布ルールに`{schema}`つと`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。
+スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、およびTopicRecordNameStrategyの3つの[主題名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC AvroはTopicNameStrategyのみをサポートしています。つまり、Kafkaトピックは1つのデータ形式のデータしか受信できません。したがって、TiCDC Avroは、複数のテーブルを同じトピックにマッピングすることを禁止しています。チェンジフィードを作成するときに、トピックルールに構成済みの配布ルールに`{schema}`と`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。

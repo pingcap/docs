@@ -9,19 +9,19 @@ summary: Learn the terms used in TiDB Data Migration.
 
 ## B {#b}
 
-### ビンログ {#binlog}
+### Binlog {#binlog}
 
 TiDB DMでは、binlogsはTiDBデータベースで生成されたバイナリログファイルを参照します。 MySQLまたはMariaDBと同じ表示があります。詳細については、 [MySQLバイナリログ](https://dev.mysql.com/doc/internals/en/binary-log.html)と[MariaDBバイナリログ](https://mariadb.com/kb/en/library/binary-log/)を参照してください。
 
 ### Binlogイベント {#binlog-event}
 
-Binlogイベントは、MySQLまたはMariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントは、binlogファイルに保存されます。詳細については、 [MySQLBinlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[MariaDBBinlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
+Binlogイベントは、MySQLまたはMariaDBサーバーインスタンスに対して行われたデータ変更に関する情報です。これらのbinlogイベントは、binlogファイルに保存されます。詳細については、 [Binlogイベント](https://dev.mysql.com/doc/internals/en/binlog-event.html)と[Binlogイベント](https://mariadb.com/kb/en/library/1-binlog-events/)を参照してください。
 
 ### Binlogイベントフィルター {#binlog-event-filter}
 
 [Binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)は、ブロックおよび許可リストのフィルタリングルールよりもきめ細かいフィルタリング機能です。詳細は[binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)を参照してください。
 
-### ビンログの位置 {#binlog-position}
+### Binlogの位置 {#binlog-position}
 
 binlog位置は、binlogファイル内のbinlogイベントのオフセット情報です。詳細については、 [MySQL `SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/8.0/en/show-binlog-events.html)と[MariaDB `SHOW BINLOG EVENTS`](https://mariadb.com/kb/en/library/show-binlog-events/)を参照してください。
 
@@ -42,11 +42,11 @@ Binlogレプリケーション処理ユニットは、DM-workerでアップス�
 -   完全インポートタスクでは、チェックポイントは、インポートされているファイル内の正常にインポートされたデータのオフセットおよびその他の情報に対応します。チェックポイントは、データインポートタスクと同期して更新されます。
 -   インクリメンタルレプリケーションでは、チェックポイントは、正常に解析されてダウンストリームに移行された[binlogの位置](#binlog-position)および[binlogイベント](#binlog-event)のその他の情報に対応します。チェックポイントは、DDL操作が正常に移行された後、または最後の更新から30秒後に更新されます。
 
-また、 [リレー処理装置](#relay-processing-unit)に対応する`relay.meta`の情報は、チェックポイントと同様に機能します。リレー処理ユニットは、 [binlogイベント](#binlog-event)をアップストリームからプルしてこのイベントを[リレーログ](#relay-log)に書き込み、 [binlogの位置](#binlog-position)またはこのイベントに対応するGTID情報を`relay.meta`に書き込みます。
+また、 [リレー処理装置](#relay-processing-unit)に対応する`relay.meta`の情報は、チェックポイントと同様に機能します。リレー処理ユニットは、アップストリームから[binlogイベント](#binlog-event)をプルし、このイベントを[リレーログ](#relay-log)に書き込み、このイベントに対応する[binlogの位置](#binlog-position)またはGTID情報を`relay.meta`に書き込みます。
 
 ## D {#d}
 
-### ダンプ処理装置/ダンプ装置 {#dump-processing-unit-dump-unit}
+### ダンプ処理ユニット/ダンプユニット {#dump-processing-unit-dump-unit}
 
 ダンプ処理装置は、DM-workerでアップストリームからすべてのデータをエクスポートするために使用される処理装置です。各サブタスクは、ダンプ処理ユニットに対応します。
 

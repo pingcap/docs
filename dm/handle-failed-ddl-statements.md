@@ -699,7 +699,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
     }
     ```
 
-3.  MySQLインスタンス1および2の間違ったDDLステートメントを置き換えるには、もう一度`handle-error <task-name> replace`を実行します。
+3.  `handle-error <task-name> replace`を再度実行して、MySQLインスタンス1および2の間違ったDDLステートメントを置き換えます。
 
     {{< copyable "" >}}
 

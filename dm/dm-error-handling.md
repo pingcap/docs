@@ -26,12 +26,12 @@ summary: Learn about the error system and how to handle common errors when you u
     | エラータイプ            | エラーソース                                  | エラーサンプル                                                                                                                                                                                                                                                                                          |
     | :---------------- | :-------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `database`        | データベース操作                                | `[code=10003:class=database:scope=downstream:level=medium] database driver: invalid connection`                                                                                                                                                                                                  |
-    | `functional`      | DMの基本的な機能                               | `[code=11005:class=functional:scope=internal:level=high] not allowed operation: alter multiple tables in one statement`                                                                                                                                                                          |
+    | `functional`      | DMの基本関数                                 | `[code=11005:class=functional:scope=internal:level=high] not allowed operation: alter multiple tables in one statement`                                                                                                                                                                          |
     | `config`          | 設定が正しくありません                             | `[code=20005:class=config:scope=internal:level=medium] empty source-id not valid`                                                                                                                                                                                                                |
-    | `binlog-op`       | ビンログ操作                                  | `[code=22001:class=binlog-op:scope=internal:level=high] empty UUIDs not valid`                                                                                                                                                                                                                   |
+    | `binlog-op`       | Binlog操作                                | `[code=22001:class=binlog-op:scope=internal:level=high] empty UUIDs not valid`                                                                                                                                                                                                                   |
     | `checkpoint`      | チェックポイント操作                              | `[code=24002:class=checkpoint:scope=internal:level=high] save point bin.1234 is older than current pos bin.1371`                                                                                                                                                                                 |
     | `task-check`      | タスクチェックの実行                              | `[code=26003:class=task-check:scope=internal:level=medium] new table router error`                                                                                                                                                                                                               |
-    | `relay-event-lib` | リレーモジュールの基本機能を実行する                      | `[code=28001:class=relay-event-lib:scope=internal:level=high] parse server-uuid.index`                                                                                                                                                                                                           |
+    | `relay-event-lib` | リレーモジュールの基本関数を実行する                      | `[code=28001:class=relay-event-lib:scope=internal:level=high] parse server-uuid.index`                                                                                                                                                                                                           |
     | `relay-unit`      | リレー処理装置                                 | `[code=30015:class=relay-unit:scope=upstream:level=high] TCPReader get event: ERROR 1236 (HY000): Could not open log file`                                                                                                                                                                       |
     | `dump-unit`       | ダンプ処理装置                                 | `[code=32001:class=dump-unit:scope=internal:level=high] mydumper runs with error: CRITICAL **: 15:12:17.559: Error connecting to database: Access denied for user 'root'@'172.17.0.1' (using password: NO)`                                                                                      |
     | `load-unit`       | 負荷処理装置                                  | `[code=34002:class=load-unit:scope=internal:level=high] corresponding ending of sql: ')' not found`                                                                                                                                                                                              |
@@ -75,13 +75,13 @@ summary: Learn about the error system and how to handle common errors when you u
 
 DMの実行中にエラーが発生した場合は、次の手順を実行してこのエラーのトラブルシューティングを行ってください。
 
-1.  `query-status`コマンドを実行して、タスクの実行状態とエラー出力を確認してください。
+1.  `query-status`コマンドを実行して、タスクの実行状況とエラー出力を確認してください。
 
 2.  エラーに関連するログファイルを確認してください。ログファイルはDM-masterノードとDM-workerノードにあります。エラーに関する重要な情報を取得するには、 [エラーシステム](#error-system)を参照してください。次に、 [一般的なエラーの処理](#handle-common-errors)のセクションをチェックして解決策を見つけます。
 
 3.  エラーがこのドキュメントでカバーされておらず、ログを確認したりメトリックを監視したりしても問題を解決できない場合は、R＆Dに連絡できます。
 
-4.  エラーが解決したら、dmctlを使用してタスクを再開します。
+4.  エラーが解決されたら、dmctlを使用してタスクを再開します。
 
     {{< copyable "" >}}
 
@@ -174,7 +174,7 @@ binlogレプリケーション処理装置の場合、次のソリューショ�
 
 5.  `start-task`を使用して移行タスクを開始します。
 
-6.  `query-status`を使用して移行タスクのステータスを表示します。 `safe-mode`を元の値に復元し、元のエラートリガーリレーログファイルの移行が完了したら、移行タスクを再開できます。
+6.  `query-status`を使用して移行タスクのステータスをビューします。 `safe-mode`を元の値に復元し、元のエラートリガーリレーログファイルの移行が完了したら、移行タスクを再開できます。
 
 ### <code>Access denied for user &#39;root&#39;@&#39;172.31.43.27&#39; (using password: YES)</code>た。タスクを照会するか、ログを確認すると表示されます {#code-access-denied-for-user-root-172-31-43-27-using-password-yes-code-shows-when-you-query-the-task-or-check-the-log}
 
@@ -194,7 +194,7 @@ binlogレプリケーション処理装置の場合、次のソリューショ�
 
 -   ダンプ処理装置には、 `extra-args`の`statement-size`オプションを設定することをお勧めします。
 
-    デフォルトの`--statement-size`設定によれば、ダンプ処理装置によって生成されるデフォルトのサイズ`Insert Statement`は約`1M`です。このデフォルト設定では、ほとんどの場合、負荷処理装置はエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`を報告しません。
+    デフォルトの`--statement-size`設定によると、ダンプ処理装置によって生成されるデフォルトのサイズ`Insert Statement`は約`1M`です。このデフォルト設定では、ほとんどの場合、負荷処理装置はエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`を報告しません。
 
     データダンプ中に次の`WARN`のログを受け取る場合があります。この`WARN`のログは、ダンププロセスには影響しません。これは、幅の広いテーブルがダンプされることを意味するだけです。
 

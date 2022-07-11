@@ -29,14 +29,14 @@ TiDB Ansibleバージョン：3.1.0 GA
     -   [＃16125](https://github.com/pingcap/tidb/pull/16125)でのコプロセッサータスクの情報の表示をサポートし`explain format = "dot"` 。
     -   `disable-error-stack`構成項目[＃16182](https://github.com/pingcap/tidb/pull/16182)を使用して、ログの冗長スタック情報を削減します。
 
--   配置ドライバー（PD）
+-   配置Driver（PD）
 
     -   ホットリージョンのスケジューリングを最適化する[＃2342](https://github.com/pingcap/pd/pull/2342)
 
 -   TiFlash
 
     -   DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
-    -   `fromUnixTime`と`dateFormat`の機能のプッシュダウンをサポート
+    -   `fromUnixTime`と`dateFormat`の関数のプッシュダウンをサポート
     -   ラフ集合フィルターをデフォルトで無効にします
 
 -   TiDB Ansible
@@ -49,27 +49,27 @@ TiDB Ansibleバージョン：3.1.0 GA
 
 -   TiDB
 
-    -   一部のシナリオでのマージ結合操作によって引き起こされるパニックの問題を修正します[＃15920](https://github.com/pingcap/tidb/pull/15920)
+    -   一部のシナリオでのマージ結合操作によって引き起こされるpanicの問題を修正します[＃15920](https://github.com/pingcap/tidb/pull/15920)
     -   選択性の計算で一部の式が繰り返しカウントされる問題を修正[＃16052](https://github.com/pingcap/tidb/pull/16052)
-    -   極端な場合に統計情報をロードするときに発生したパニックの問題を修正します[＃15710](https://github.com/pingcap/tidb/pull/15710)
+    -   極端な場合に統計情報をロードするときに発生したpanicの問題を修正します[＃15710](https://github.com/pingcap/tidb/pull/15710)
     -   SQLクエリ[＃16015](https://github.com/pingcap/tidb/pull/16015)で同等の式を認識できない場合にエラーが返される問題を修正します
     -   あるデータベースの`view`つを別のデータベースからクエリするとエラーが返される問題を修正します[＃15867](https://github.com/pingcap/tidb/pull/15867)
-    -   列が[＃16080](https://github.com/pingcap/tidb/pull/16080)を使用して処理されるときに発生するパニックの問題を修正し`fast analyze`
+    -   列が[＃16080](https://github.com/pingcap/tidb/pull/16080)を使用して処理されるときに発生するpanicの問題を修正し`fast analyze`
     -   `current_role`印刷結果[＃16084](https://github.com/pingcap/tidb/pull/16084)の誤った文字セットを修正します
     -   MySQL接続ハンドシェイクエラー[＃15799](https://github.com/pingcap/tidb/pull/15799)のログを調整します
-    -   監査プラグインがロードされた後のポートプロービングによって引き起こされるパニックの問題を修正します[＃16065](https://github.com/pingcap/tidb/pull/16065)
-    -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のパニック問題を修正します。
+    -   監査プラグインがロードされた後のポートプロービングによって引き起こされるpanicの問題を修正します[＃16065](https://github.com/pingcap/tidb/pull/16065)
+    -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のpanic問題を修正します。
     -   監視セッションの再試行エラーのカウントが不正確になる問題を修正します[＃16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[＃16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の誤った結果の問題を修正します
     -   クラスタにTiFlashノードがある場合にガベージコレクション（GC）が正常に機能しない可能性がある問題を修正します[＃15761](https://github.com/pingcap/tidb/pull/15761)
-    -   ハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成するときに、ユーザーが大きなパーティションカウントを設定すると、TiDBがメモリ（OOM）を使い果たす問題を修正します。
+    -   ユーザーがハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成するときに大きなパーティションカウントを設定すると、TiDBがメモリ（OOM）を使い果たす問題を修正します。
     -   警告がエラーと誤解される問題を修正し、 `UNION`ステートメントが`SELECT`ステートメントと同じ動作をするようにします[＃16138](https://github.com/pingcap/tidb/pull/16138)
     -   `TopN`がmocktikv3にプッシュダウンされたときの実行エラーを修正し[＃16200](https://github.com/pingcap/tidb/pull/16200)
     -   `runtime.growslice` [＃16142](https://github.com/pingcap/tidb/pull/16142)の不要なオーバーヘッドを回避するために、初期長を`chunk.column.nullBitMap`に増やします。
 
 -   TiKV
 
-    -   レプリカ読み取りによって引き起こされるパニックの問題を修正し[＃7369](https://github.com/tikv/tikv/pull/7369) [＃7418](https://github.com/tikv/tikv/pull/7418)
+    -   レプリカ読み取りによって引き起こされるpanicの問題を修正し[＃7369](https://github.com/tikv/tikv/pull/7369) [＃7418](https://github.com/tikv/tikv/pull/7418)
     -   復元プロセスで空のリージョンが作成される問題を修正します[＃7419](https://github.com/tikv/tikv/pull/7419)
     -   ロック要求の解決を繰り返すと、悲観的なトランザクションのアトミック性が損なわれる可能性があるという問題を修正します[＃7389](https://github.com/tikv/tikv/pull/7389)
 
@@ -84,7 +84,7 @@ TiDB Ansibleバージョン：3.1.0 GA
 
     -   TiDB Binlog
 
-        -   TiFlash関連のDDLジョブが[＃948](https://github.com/pingcap/tidb-binlog/pull/948)のレプリケーションを中断する可能性がある問題を修正し[＃942](https://github.com/pingcap/tidb-binlog/pull/942)
+        -   [＃942](https://github.com/pingcap/tidb-binlog/pull/942)関連のDDLジョブがDrainerのレプリケーションを中断する可能性がある問題を修正し[＃948](https://github.com/pingcap/tidb-binlog/pull/948)
 
     -   バックアップと復元（BR）
 

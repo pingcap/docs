@@ -38,4 +38,4 @@ tiup dm scale-in <cluster-name> [flags]
 
 のスケールインのログ。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

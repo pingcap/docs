@@ -131,7 +131,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   クライアント
 -   CMSKETCH（R）
 -   COALESCE
--   COLLATE（R）
+-   照合（R）
 -   照合
 -   列（R）
 -   列
@@ -232,7 +232,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   EXISTS（R）
 -   拡張
 -   期限切れ
--   説明（R）
+-   EXPLAIN（R）
 -   拡張
 
 <a id="F" class="letter" href="#F">F</a>

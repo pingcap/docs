@@ -15,7 +15,7 @@ summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB databa
 
 テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントが終了して返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することにより、圧縮を安全に中断できます。圧縮を中断しても、データの一貫性が損なわれたり、データが失われたりすることはなく、その後の手動またはバックグラウンドの圧縮にも影響しません。
 
-このデータ圧縮ステートメントは現在、TiFlashレプリカでのみサポートされており、TiKVレプリカではサポートされていません。
+このデータ圧縮ステートメントは現在、TiKVレプリカではなく、TiFlashレプリカでのみサポートされています。
 
 ## あらすじ {#synopsis}
 
@@ -28,7 +28,7 @@ AlterTableCompactStmt ::=
 
 ### テーブル内のコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
 
-以下は、例として`employees`のテーブルを取ります。これには、2つのTiFlashレプリカを持つ4つのパーティションがあります。
+次に、 `employees`のテーブルを例として取り上げます。このテーブルには、2つのTiFlashレプリカを持つ4つのパーティションがあります。
 
 ```sql
 CREATE TABLE employees (
@@ -65,9 +65,9 @@ ALTER TABLE employees COMPACT TIFLASH REPLICA;
 
 `ALTER TABLE ... COMPACT`構文はTiDB固有であり、標準SQL構文の拡張です。同等のMySQL構文はありませんが、MySQLクライアントまたはMySQLプロトコルに準拠するさまざまなデータベースドライバーを使用して、このステートメントを実行できます。
 
-## TiDBBinlogとTiCDCの互換性 {#tidb-binlog-and-ticdc-compatibility}
+## BinlogとTiCDCの互換性 {#tidb-binlog-and-ticdc-compatibility}
 
-`ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、TiDBBinlogまたはTiCDCによってダウンストリームに複製されません。
+`ALTER TABLE ... COMPACT`ステートメントは論理データの変更をもたらさないため、 BinlogまたはTiCDCによってダウンストリームに複製されません。
 
 ## も参照してください {#see-also}
 

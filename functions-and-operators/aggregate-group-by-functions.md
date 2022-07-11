@@ -20,7 +20,7 @@ summary: Learn about the supported aggregate functions in TiDB.
 | [`MAX()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_max)                                                   | 最大値を返す                               |
 | [`MIN()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_min)                                                   | 最小値を返す                               |
 | [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_group-concat)                                 | 連結された文字列を返します                        |
-| [`VARIANCE()` 、 <code>VAR_POP()</code>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop)                 | 母分散を返します                             |
+| [`VARIANCE()` 、 <code>VAR_POP()</code>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop)                 | 母集団の標準分散を返します                        |
 | [`STD()` 、 <code>STDDEV()</code> 、 <code>STDDEV_POP</code>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_std) | 母標準偏差を返します                           |
 | [`VAR_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-samp)                                         | 標本分散を返す                              |
 | [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp)                                   | サンプルの標準偏差を返します                       |
@@ -29,7 +29,7 @@ summary: Learn about the supported aggregate functions in TiDB.
 -   特に明記されていない限り、グループ関数は`NULL`の値を無視します。
 -   `GROUP BY`句を含まないステートメントでグループ関数を使用する場合、それはすべての行でグループ化することと同じです。
 
-さらに、TiDBは次の集約関数も提供します。
+さらに、TiDBは次の集計関数も提供します。
 
 -   `APPROX_PERCENTILE(expr, constant_integer_expr)`
 
@@ -62,11 +62,11 @@ summary: Learn about the supported aggregate functions in TiDB.
     1 row in set (0.00 sec)
     ```
 
-`GROUP_CONCAT()`と`APPROX_PERCENTILE()`の関数を除いて、前述のすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として機能できます。
+`GROUP_CONCAT()`と`APPROX_PERCENTILE()`の関数を除いて、前述のすべての関数は[ウィンドウ関数](/functions-and-operators/window-functions.md)として関数できます。
 
 ## GROUPBY修飾子 {#group-by-modifiers}
 
-TiDBは現在、 `WITH ROLLUP`などの`GROUP BY`の修飾子をサポートしていません。今後、サポートを追加する予定です。 [TiDB＃4250](https://github.com/pingcap/tidb/issues/4250)を参照してください。
+TiDBは現在、 `WITH ROLLUP`などの`GROUP BY`の修飾子をサポートしていません。将来的にはサポートを追加する予定です。 [TiDB＃4250](https://github.com/pingcap/tidb/issues/4250)を参照してください。
 
 ## SQLモードのサポート {#sql-mode-support}
 
@@ -98,7 +98,7 @@ TiDBは現在、デフォルトで[`ONLY_FULL_GROUP_BY`](/mysql-compatibility.md
 
 ### MySQLとの違い {#differences-from-mysql}
 
-`ONLY_FULL_GROUP_BY`の現在の実装は、MySQL5.7の実装よりも厳密ではありません。たとえば、結果が「c」で並べ替えられることを期待して、次のクエリを実行するとします。
+`ONLY_FULL_GROUP_BY`の現在の実装は、 MySQL 5.7の実装よりも厳密ではありません。たとえば、結果が「c」で並べ替えられることを期待して、次のクエリを実行するとします。
 
 ```sql
 drop table if exists t;

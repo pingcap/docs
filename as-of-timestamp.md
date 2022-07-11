@@ -71,7 +71,7 @@ insert into t values (1), (2), (3);
 Query OK, 3 rows affected (0.00 sec)
 ```
 
-表のデータを表示します。
+表のデータをビューします。
 
 ```sql
 select * from t;
@@ -88,7 +88,7 @@ select * from t;
 3 rows in set (0.00 sec)
 ```
 
-現在の時刻を表示します。
+現在の時刻をビューします。
 
 ```sql
 select now();
@@ -132,7 +132,7 @@ select * from t;
 
 ### <code>SELECT</code>ステートメントを使用して履歴データを読み取ります {#read-historical-data-using-the-code-select-code-statement}
 
-[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用して、過去のある時点のデータを読み取ることができます。
+[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用して、過去のある時点からのデータを読み取ることができます。
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';

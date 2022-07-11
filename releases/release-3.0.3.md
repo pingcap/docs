@@ -23,8 +23,8 @@ TiDB Ansibleバージョン：3.0.3
     -   シーケンシャル読み取りが必要なデータの同時実行性を減らして、 [＃11679](https://github.com/pingcap/tidb/pull/11679)の可能性を減らします。
     -   一部の組み込み関数（ `if`や`coalesce`など）で複数のパラメーターが署名されていない場合に、誤った型の推測が発生する可能性がある問題を修正します[＃11621](https://github.com/pingcap/tidb/pull/11621)
     -   `Div`関数が符号なし10進型を処理する場合のMySQLとの非互換性を修正します[＃11813](https://github.com/pingcap/tidb/pull/11813)
-    -   ポンプ/ドレイナー[＃11827](https://github.com/pingcap/tidb/pull/11827)のステータスを変更するSQLステートメントを実行するときにパニックが発生する可能性がある問題を修正します
-    -   Autocommit = 1で、 `begin`のステートメントがない場合に`select ... for update`でパニックが発生する可能性がある問題を修正します[＃11736](https://github.com/pingcap/tidb/pull/11736)
+    -   Pump/ Drainerのステータスを変更するSQLステートメントを実行するときにpanicが発生する可能性がある問題を修正し[＃11827](https://github.com/pingcap/tidb/pull/11827)
+    -   Autocommit = 1で、 `begin`のステートメントがない場合に`select ... for update`でpanicが発生する可能性がある問題を修正します[＃11736](https://github.com/pingcap/tidb/pull/11736)
     -   `set default role`ステートメントの実行時に発生する可能性のある権限チェックエラーを修正します[＃11777](https://github.com/pingcap/tidb/pull/11777)
     -   `create user`または`drop user`を実行したときに発生する可能性のある権限チェックエラーを修正します[＃11814](https://github.com/pingcap/tidb/pull/11814)
     -   `select ... for update`ステートメントが`PointGetExecutor`関数[＃11718](https://github.com/pingcap/tidb/pull/11718)に組み込まれると、自動再試行される可能性がある問題を修正します。
@@ -40,10 +40,10 @@ TiDB Ansibleバージョン：3.0.3
     -   テストの[＃11685](https://github.com/pingcap/tidb/pull/11685)が正しく使用されていることを確認するためのサポート`make testSuite`
 -   DDL
     -   複数のパーティションを削除するときにパーティションタイプを変更するステートメントを含む、サポートされていないパーティション関連のDDLステートメントの実行をスキップします[＃11373](https://github.com/pingcap/tidb/pull/11373)
-    -   生成された列をその依存列の前に配置することを禁止する[＃11686](https://github.com/pingcap/tidb/pull/11686)
+    -   生成されたカラムをその依存列の前に配置することを禁止する[＃11686](https://github.com/pingcap/tidb/pull/11686)
     -   `tidb_ddl_reorg_worker_cnt`と[＃11874](https://github.com/pingcap/tidb/pull/11874)のデフォルト値を変更し`tidb_ddl_reorg_batch_size`
 -   モニター
-    -   新しいバックオフ監視タイプを追加して、各バックオフタイプの期間を記録します。コミットバックオフ[＃11728](https://github.com/pingcap/tidb/pull/11728)など、以前はカウントされていなかったタイプをカバーするために、バックオフメトリックを追加します。
+    -   新しいバックオフ監視タイプを追加して、各バックオフタイプの期間を記録します。コミットバックオフ[＃11728](https://github.com/pingcap/tidb/pull/11728)など、以前はカウントされていなかったタイプをカバーするために、バックオフメトリックを追加します
 
 ## TiKV {#tikv}
 
@@ -64,7 +64,7 @@ TiDB Ansibleバージョン：3.0.3
 ## ツール {#tools}
 
 -   TiDB Binlog
-    -   Drainerのデフォルト値`defaultBinlogItemCount`を65536から512に変更して、Drainerの起動時にOOMが発生する可能性を減らします[＃721](https://github.com/pingcap/tidb-binlog/pull/721)
+    -   Drainerのデフォルト値`defaultBinlogItemCount`を65536から512に変更して、 Drainerの起動時にOOMが発生する可能性を減らします[＃721](https://github.com/pingcap/tidb-binlog/pull/721)
     -   潜在的なオフライン輻輳を回避するために、ポンプサーバーのオフラインロジックを最適化する[＃701](https://github.com/pingcap/tidb-binlog/pull/701)
 -   TiDB Lightning：
     -   `information_schema`をインポートする場合、デフォルトでシステムデータベース`mysql` 、および`performance_schema`をスキップし`sys` [＃225](https://github.com/pingcap/tidb-lightning/pull/225)

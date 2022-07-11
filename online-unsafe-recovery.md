@@ -9,7 +9,7 @@ summary: Learn how to use Online Unsafe Recovery.
 >
 > オンラインの安全でないリカバリは、損失のあるリカバリの一種です。この機能を使用する場合、データとデータインデックスの整合性は保証されません。
 
-恒久的に損傷したレプリカが原因でTiKV上のデータの一部が読み取りおよび書き込み不能になった場合、オンラインの安全でない回復機能を使用して、不可逆回復操作を実行できます。
+恒久的に破損したレプリカが原因でTiKV上のデータの一部が読み取りおよび書き込み不能になった場合、オンラインの安全でないリカバリ機能を使用して、不可逆リカバリ操作を実行できます。
 
 ## 機能の説明 {#feature-description}
 
@@ -38,7 +38,7 @@ Online Unsafe Recoveryを使用する前に、次の要件が満たされてい�
 
 ### 手順1.復旧できない店舗を指定する {#step-1-specify-the-stores-that-cannot-be-recovered}
 
-PD制御を使用して、回復できないTiKVノードを指定し、 [`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行して自動回復をトリガーします。
+PD Controlを使用して、回復できないTiKVノードを指定し、 [`unsafe remove-failed-stores &#x3C;store_id>[,&#x3C;store_id>,...]`](/pd-control.md#unsafe-remove-failed-stores-store-ids--show)を実行して自動回復をトリガーします。
 
 {{< copyable "" >}}
 
@@ -46,13 +46,13 @@ PD制御を使用して、回復できないTiKVノードを指定し、 [`unsaf
 pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 ```
 
-コマンドが`Success`を返す場合、PD制御はタスクをPDに正常に登録しています。これは、要求が受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。リカバリタスクはバックグラウンドで実行されます。回復の進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用します。
+コマンドが`Success`を返す場合、 PD ControlはタスクをPDに正常に登録しています。これは、要求が受け入れられたことを意味するだけであり、リカバリが正常に実行されたことを意味するものではありません。リカバリタスクはバックグラウンドで実行されます。回復の進行状況を確認するには、 [`show`](#step-2-check-the-recovery-progress-and-wait-for-the-completion)を使用します。
 
-コマンドが`Failed`を返す場合、PD制御はタスクをPDに登録できませんでした。考えられるエラーは次のとおりです。
+コマンドが`Failed`を返す場合、 PD ControlはタスクをPDに登録できませんでした。考えられるエラーは次のとおりです。
 
 -   `unsafe recovery is running` ：すでに進行中のリカバリタスクがあります。
 -   `invalid input store x doesn't exist` ：指定されたストアIDは存在しません。
--   `invalid input store x is up and connected` ：IDを持つ指定されたストアはまだ正常であり、回復されるべきではありません。
+-   `invalid input store x is up and connected` ：IDを持つ指定されたストアはまだ正常であり、リカバリーされるべきではありません。
 
 リカバリタスクの最長許容期間を指定するには、 `--timeout <seconds>`オプションを使用します。このオプションが指定されていない場合、最長の期間はデフォルトで5分です。タイムアウトが発生すると、リカバリが中断され、エラーが返されます。
 
@@ -65,7 +65,7 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores <store_id1,store_id2,...>
 
 ### 手順2.リカバリの進行状況を確認し、完了を待ちます {#step-2-check-the-recovery-progress-and-wait-for-the-completion}
 
-上記のストア削除コマンドが正常に実行されたら、PD Controlを使用して、 [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行することで削除の進行状況を確認できます。
+上記のストア削除コマンドが正常に実行されたら、 PD Controlを使用して、 [`unsafe remove-failed-stores show`](/pd-control.md#config-show--set-option-value--placement-rules)を実行することで削除の進行状況を確認できます。
 
 {{< copyable "" >}}
 
@@ -76,11 +76,11 @@ pd-ctl -u <pd_addr> unsafe remove-failed-stores show
 回復プロセスには、複数の可能な段階があります。
 
 -   `collect report` ：PDがTiKVからレポートを収集し、グローバル情報を取得する初期段階。
--   `tombstone tiflash learner` ：不健康な地域の中で、他の健康な仲間よりも新しいTiFlash学習者を削除して、このような極端な状況と起こりうるパニックを防ぎます。
+-   `tombstone tiflash learner` ：不健康な地域の中で、他の健康な仲間よりも新しいTiFlash学習者を削除して、このような極端な状況と起こりうるpanicを防ぎます。
 -   `force leader for commit merge` ：特別なステージ。未完了のコミットマージがある場合、極端な状況の場合、最初にコミットマージのあるリージョンで`force leader`が実行されます。
--   `force leader` ：不健康な地域に、残りの健康な仲間の中にラフトリーダーを割り当てるように強制します。
--   `demote failed voter` ：リージョンの失敗した有権者を学習者に降格します。その後、リージョンは通常どおりラフトリーダーを選択できます。
--   `create empty region` ：キー範囲のスペースを埋めるために空の領域を作成します。これは、一部のリージョンのすべてのレプリカを含むストアが破損している場合を解決するためです。
+-   `force leader` ：不健康な地域に、残りの健康な仲間の中にRaftリーダーを割り当てるように強制します。
+-   `demote failed voter` ：リージョンの失敗した有権者を学習者に降格します。その後、リージョンは通常どおりRaftリーダーを選択できます。
+-   `create empty region` ：キー範囲のスペースを埋めるために空のリージョンを作成します。これは、一部のリージョンのすべてのレプリカを含むストアが破損している場合を解決するためです。
 
 上記の各段階は、情報、時間、詳細な復旧計画を含むJSON形式で出力されます。例えば：
 

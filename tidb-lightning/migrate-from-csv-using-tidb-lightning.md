@@ -3,11 +3,11 @@ title: TiDB Lightning CSV Support and Restrictions
 summary: Learn how to import CSV files via TiDB Lightning.
 ---
 
-# TiDBLightningCSVのサポートと制限 {#tidb-lightning-csv-support-and-restrictions}
+# TiDB Lightningのサポートと制限 {#tidb-lightning-csv-support-and-restrictions}
 
-このドキュメントでは、TiDBLightningを使用してCSVファイルからTiDBにデータを移行する方法について説明します。 MySQLからCSVファイルを生成する方法については、 [Dumplingを使用してCSVファイルにエクスポート](/dumpling-overview.md#export-to-csv-files)を参照してください。
+このドキュメントでは、TiDBLightningを使用してCSVファイルからTiDB Lightningにデータを移行する方法について説明します。 MySQLからCSVファイルを生成する方法については、 [Dumplingを使用してCSVファイルにエクスポート](/dumpling-overview.md#export-to-csv-files)を参照してください。
 
-TiDB Lightningは、CSV（コンマ区切り値）データソース、およびTSV（タブ区切り値）などの他の区切り形式の読み取りをサポートしています。
+TiDB Lightningは、CSV（カンマ区切り値）データソース、およびTSV（タブ区切り値）などの他の区切り形式の読み取りをサポートしています。
 
 ## ファイル名 {#file-name}
 
@@ -21,7 +21,7 @@ TiDB Lightningは、CSV（コンマ区切り値）データソース、および
 
 CSVファイルはスキーマレスです。それらをTiDBにインポートするには、テーブルスキーマを提供する必要があります。これは、次のいずれかによって実行できます。
 
--   `CREATE TABLE` DDLステートメントを含む`db_name.table_name-schema.sql`という名前のファイルと、 `CREATE DATABASE`ステートメントを含む`db_name-schema-create.sql`という名前のファイルを提供します。
+-   `CREATE TABLE`のDDLステートメントを含む`db_name.table_name-schema.sql`という名前のファイルと、 `CREATE DATABASE`のDDLステートメントを含む`db_name-schema-create.sql`という名前のファイルを提供します。
 -   TiDBでテーブルスキーマを手動で作成します。
 
 ## Configuration / コンフィグレーション {#configuration}
@@ -51,7 +51,7 @@ backslash-escape = true
 trim-last-separator = false
 ```
 
-`separator`などのすべての文字列フィールドで、入力に特殊文字が含まれている場合は、バックスラッシュエスケープシーケンスを使用して、それらを*二重引用符で囲まれ*`"…"` `delimiter`で表すことができ`terminator` 。たとえば、 `separator = "\u001f"`は、ASCII文字0x1Fを区切り文字として使用することを意味します。
+`separator`などのすべての文字列フィールドで、入力に特殊文字が含まれている場合は、円記号のエスケープシーケンスを使用して、それらを*二重引用符で囲まれ*`"…"` `delimiter`で表すことができ`terminator` 。たとえば、 `separator = "\u001f"`は、ASCII文字0x1Fを区切り文字として使用することを意味します。
 
 さらに、*一重引用符で囲まれ*た文字列（ `'…'` ）を使用して、円記号のエスケープを抑制することができます。たとえば、 `terminator = '\n'`は、2文字の文字列を使用することを意味します。つまり、円記号の後に文字「n」をターミネータとして使用します。
 
@@ -131,7 +131,7 @@ trim-last-separator = false
     | `\t` | タブ（U + 0009）          |
     | `\Z` | Windows EOF（U + 001A） |
 
-    他のすべての場合（たとえば、 `\"` ）、円記号は単純に削除され、フィールドに次の文字（ `"` ）が残ります。左の文字には特別な役割（区切り文字など）はなく、通常の文字です。
+    他のすべての場合（たとえば、 `\"` ）は、バックスラッシュが単純に削除され、フィールドに次の文字（ `"` ）が残ります。左の文字には特別な役割（区切り文字など）はなく、通常の文字です。
 
 -   引用符は、円記号のエスケープが解釈されるかどうかには影響しません。
 
@@ -188,7 +188,7 @@ strict-format = true
 -   区切り文字が空、または
 -   すべてのフィールドにターミネータ自体が含まれているわけではありません。デフォルト構成では、これはすべてのフィールドにCR（ `\r` ）またはLF（ `\n` ）が含まれていないことを意味します。
 
-CSVファイルが厳密ではないが、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが半分に分割されて2つのチャンクになり、解析が失敗したり、さらに悪いことに、破損したデータを静かにインポートしたりする可能性があります。
+CSVファイルが厳密ではないが、 `strict-format`が誤って`true`に設定されている場合、複数行にまたがるフィールドが2つのチャンクに半分にカットされ、解析が失敗したり、さらに悪いことに、破損したデータを静かにインポートしたりする可能性があります。
 
 ## 一般的な構成 {#common-configurations}
 
@@ -206,7 +206,7 @@ null = '\N'
 backslash-escape = true
 ```
 
-内容の例：
+コンテンツの例：
 
 ```
 ID,Region,Count
@@ -228,7 +228,7 @@ null = 'NULL'
 backslash-escape = false
 ```
 
-内容の例：
+コンテンツの例：
 
 ```
 ID    Region    Count
@@ -250,7 +250,7 @@ not-null = true
 backslash-escape = false
 ```
 
-内容の例：
+コンテンツの例：
 
 ```
 1|East|32|

@@ -29,7 +29,7 @@ summary: Learn common operations when you troubleshoot a TiFlash cluster.
     ulimit -n 1000000
     ```
 
-3.  PD制御ツールを使用して、ノード（同じIPとポート）でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [TiFlashクラスタでのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+3.  PD Controlツールを使用して、ノード（同じIPとポート）でオフラインにできなかったTiFlashインスタンスがあるかどうかを確認し、インスタンスを強制的にオフラインにします。詳細な手順については、 [TiFlashクラスタでのスケーリング](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 上記の方法で問題を解決できない場合は、TiFlashログファイルと電子メールを[info@pingcap.com](mailto:info@pingcap.com)に保存して詳細を確認してください。
 
@@ -86,7 +86,7 @@ TiDBでは、クエリのタイムスタンプを1秒前に設定できます。
 
 ## 一部のクエリは、 <code>Region Unavailable</code>エラーを返します {#some-queries-return-the-code-region-unavailable-code-error}
 
-TiFlashの負荷圧力が大きすぎて、TiFlashデータレプリケーションが遅れる場合、一部のクエリは`Region Unavailable`エラーを返す可能性があります。
+TiFlashの負荷圧力が大きすぎて、TiFlashデータの複製が遅れる場合、一部のクエリは`Region Unavailable`エラーを返す可能性があります。
 
 この場合、TiFlashノードを追加することで負荷圧力のバランスをとることができます。
 
@@ -158,7 +158,7 @@ TiFlashノードをデプロイしてレプリケーションを開始した後�
 
     > **ノート：**
     >
-    > `max-replicas`はデフォルトで3に設定されます。実稼働環境では、値は通常、TiKVノードの数よりも少なくなります。テスト環境では、値は1にすることができます。
+    > `max-replicas`はデフォルトで3に設定されています。実稼働環境では、値は通常、TiKVノードの数よりも少なくなります。テスト環境では、値は1にすることができます。
 
     {{< copyable "" >}}
 
@@ -217,7 +217,7 @@ TiFlashでのデータ複製は正常に開始されますが、一定期間後�
 
 1.  ディスク容量を確認してください。
 
-    ディスクスペースの比率が値`low-space-ratio` （デフォルトは0.8。ノードのスペース使用量が80％を超えると、ディスクスペースの枯渇を防ぐためにPDはこのノードへのデータの移行を停止します）より大きいかどうかを確認します。
+    ディスク容量率が値`low-space-ratio` （デフォルトは0.8）より大きいかどうかを確認します。ノードの容量使用率が80％を超えると、PDはディスク容量の枯渇を防ぐためにこのノードへのデータの移行を停止します。
 
     -   ディスク使用率が`low-space-ratio`以上の場合、ディスク容量が不足しています。ディスク容量を減らすには、 `${data}/flash/`フォルダの下にある`space_placeholder_file`などの不要なファイルを削除します（必要に応じて、ファイルを削除した後、 `reserve-space`を0MBに設定します）。
     -   ディスク使用率が`low-space-ratio`の値よりも小さい場合、ディスク容量は十分です。次のステップに進みます。

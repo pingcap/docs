@@ -45,7 +45,7 @@ mysql
     -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
-## データベースを表示する {#view-databases}
+## データベースをビューする {#view-databases}
 
 クラスタのデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 

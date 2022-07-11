@@ -39,20 +39,20 @@ TiDB Ansibleバージョン：2.1.16
     -   この操作によって引き起こされる自動インクリメント列の誤った結果を回避するために、自動インクリメント列へのインデックスの削除を禁止します[＃11402](https://github.com/pingcap/tidb/pull/11402)
     -   異なる文字セットと照合でテーブルを作成および変更するときに、列の文字セットが正しくないという問題を修正します[＃11423](https://github.com/pingcap/tidb/pull/11423)
     -   `alter table ... set default...`と、この列を変更する別のDDLステートメントが並行して実行されるときに列スキーマが正しくなくなる可能性がある問題を修正します[＃11374](https://github.com/pingcap/tidb/pull/11374)
-    -   生成された列Aが生成された列Bに依存し、Aを使用してインデックス[＃11538](https://github.com/pingcap/tidb/pull/11538)を作成すると、データが埋め戻されない問題を修正します。
+    -   生成されたカラムAが生成されたカラムBに依存し、Aを使用してインデックス[＃11538](https://github.com/pingcap/tidb/pull/11538)を作成すると、データが埋め戻されない問題を修正します。
     -   `ADMIN CHECK TABLE`の操作をスピードアップ[＃11538](https://github.com/pingcap/tidb/pull/11676)
 
 ## TiKV {#tikv}
 
--   クライアントが閉じられているTiKV領域にアクセスしたときにエラーメッセージを返すことをサポートします[＃4820](https://github.com/tikv/tikv/pull/4820)
+-   クライアントが閉じられているTiKVリージョンにアクセスしたときにエラーメッセージを返すことをサポートします[＃4820](https://github.com/tikv/tikv/pull/4820)
 -   リバース`raw_scan`および`raw_batch_scan`インターフェイス[＃5148](https://github.com/tikv/tikv/pull/5148)をサポート
 
 ## ツール {#tools}
 
 -   TiDB Binlog
-    -   トランザクション[＃697](https://github.com/pingcap/tidb-binlog/pull/697)で一部のステートメントの実行をスキップするには、Drainerに`ignore-txn-commit-ts`の構成アイテムを追加します。
-    -   起動時に構成項目チェックを追加します。これにより、Pump and Drainerの実行が停止し、無効な構成項目を満たすとエラーメッセージが返されます[＃708](https://github.com/pingcap/tidb-binlog/pull/708)
-    -   Drainerに`node-id`の構成を追加して、Drainerのノード[＃706](https://github.com/pingcap/tidb-binlog/pull/706)を指定します。
+    -   トランザクション[＃697](https://github.com/pingcap/tidb-binlog/pull/697)で一部のステートメントの実行をスキップするには、 Drainerに`ignore-txn-commit-ts`の構成アイテムを追加します。
+    -   起動時に構成項目チェックを追加します。これにより、 PumpとDrainerの実行が停止し、無効な構成項目を満たすとエラーメッセージが返されます[＃708](https://github.com/pingcap/tidb-binlog/pull/708)
+    -   Drainerに`node-id`の構成を追加して、Drainerのノード[＃706](https://github.com/pingcap/tidb-binlog/pull/706)を指定します
 -   TiDB Lightning
     -   2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`が元の値に戻らないという問題を修正します[＃224](https://github.com/pingcap/tidb-lightning/pull/224)
 
@@ -60,6 +60,6 @@ TiDB Ansibleバージョン：2.1.16
 
 -   Spark3に`log4j`の構成ファイルを追加し[＃842](https://github.com/pingcap/tidb-ansible/pull/842)
 -   tisparkjarパッケージを[＃863](https://github.com/pingcap/tidb-ansible/pull/863)に更新します。
--   [＃845](https://github.com/pingcap/tidb-ansible/pull/845)がKafkaまたはZooKeeper1を使用すると、Prometheus構成ファイルが間違った形式で生成される問題を修正します。
+-   BinlogがKafkaまたはZooKeeper1を使用すると、Prometheus構成ファイルが間違った形式で生成される問題を修正し[＃845](https://github.com/pingcap/tidb-ansible/pull/845) 。
 -   `rolling_update.yml`操作の実行時にPDがリーダーの切り替えに失敗するバグを修正します[＃888](https://github.com/pingcap/tidb-ansible/pull/888)
 -   安定性を向上させるために、PDノードのローリング更新のロジックを最適化します-最初にフォロワーをアップグレードし、次にリーダーをアップグレードします[＃895](https://github.com/pingcap/tidb-ansible/pull/895)

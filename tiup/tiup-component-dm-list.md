@@ -34,4 +34,4 @@ tiup dm list [flags]
 -   `Path` ：コントロールマシン上のクラスタ展開データのパス。
 -   `PrivateKey` ：クラスタへの秘密鍵のパス。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

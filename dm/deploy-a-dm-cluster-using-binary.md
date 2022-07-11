@@ -13,7 +13,7 @@ summary: Learn how to deploy a Data Migration cluster using DM binary.
 
 ## DMバイナリをダウンロード {#download-dm-binary}
 
-DMバイナリはTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+DMバイナリはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
 ## サンプルシナリオ {#sample-scenario}
 

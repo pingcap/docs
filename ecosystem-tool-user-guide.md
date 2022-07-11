@@ -54,15 +54,15 @@ Dumplingの基本は次のとおりです。
 
 ### 完全なデータのインポート {#full-data-import}
 
-[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) （Lightning）は、TiDBクラスタに大量のデータを完全にインポートするために使用されるツールです。現在、TiDB Lightningは、DumplingまたはCSVデータソースを介してエクスポートされたSQLダンプの読み取りをサポートしています。
+[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) （Lightning）は、TiDBクラスタに大量のデータを完全にインポートするために使用されるツールです。現在、 TiDB Lightningは、DumplingまたはCSVデータソースを介してエクスポートされたSQLダンプの読み取りをサポートしています。
 
 TiDB Lightningは、次の3つのモードをサポートしています。
 
--   `local` ：TiDB Lightningは、データを順序付けられたキーと値のペアに解析し、それらをTiKVに直接インポートします。このモードは通常、大量のデータ（TBレベル）を新しいクラスタにインポートするためのものです。インポート中、クラスタはサービスを提供できません。
+-   `local` ： TiDB Lightningは、データを順序付けられたキーと値のペアに解析し、それらをTiKVに直接インポートします。このモードは通常、大量のデータ（TBレベル）を新しいクラスタにインポートするためのものです。インポート中、クラスタはサービスを提供できません。
 -   `importer` ：このモードは`local`モードに似ています。このモードを使用するには、キーと値のペアのインポートを支援する追加のコンポーネント`tikv-importer`をデプロイする必要があります。ターゲットクラスタがv4.0以降のバージョンの場合は、 `local`モードを使用することをお勧めします。
 -   `tidb` ：このモードはバックエンドとしてTiDB / MySQLを使用します。これは、 `local`モードおよび`importer`モードよりも低速ですが、オンラインで実行できます。また、MySQLへのデータのインポートもサポートしています。
 
-TiDBLightningの基本は次のとおりです。
+TiDB Lightningの基本は次のとおりです。
 
 -   入力データソース：
     -   Dumplingの出力ファイル
@@ -78,7 +78,7 @@ TiDBLightningの基本は次のとおりです。
 
 [復元する](/br/backup-and-restore-overview.md) （BR）は、TiDBクラスタデータの分散バックアップと復元のためのコマンドラインツールです。 BRは、膨大なデータ量のTiDBクラスターを効果的にバックアップおよび復元できます。
 
-BRの基本は次のとおりです。
+以下はBRの基本です。
 
 -   [入力および出力データソース](/br/backup-and-restore-design.md#types-of-backup-files) ：SST+ `backupmeta`ファイル
 -   サポートされているTiDBバージョン：v3.1およびv4.0
@@ -88,13 +88,13 @@ BRの基本は次のとおりです。
 
 [TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)は、TiDBクラスターのbinlogを収集し、ほぼリアルタイムの同期とバックアップを提供するツールです。これは、TiDBクラスターをプライマリTiDBクラスタのセカンダリクラスタにするなど、TiDBクラスター間の増分データレプリケーションに使用できクラスタ。
 
-TiDBBinlogの基本は次のとおりです。
+以下は、 Binlogの基本です。
 
 -   入出力：
     -   入力：TiDBクラスタ
     -   出力：TiDBクラスタ、MySQL、Kafkaまたは増分バックアップファイル
 -   サポートされているTiDBバージョン：v2.1以降
--   Kubernetesのサポート：はい。詳細については、 [TiDBBinlogクラスターの操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[KubernetesでのTiDBBinlogDrainerの構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
+-   Kubernetesのサポート：はい。詳細については、 [Binlogクラスターの操作](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-tidb-binlog)と[KubernetesでのBinlogの構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-tidb-binlog-drainer)を参照してください。
 
 ### データ移行 {#data-migration}
 

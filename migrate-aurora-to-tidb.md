@@ -9,13 +9,13 @@ summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
 
 移行全体には2つのプロセスがあります。
 
--   TiDBLightningを使用して完全なデータをTiDBにインポートする
+-   TiDBLightningを使用して完全なデータをTiDB Lightningにインポートする
 -   DMを使用して増分データをTiDBに複製する（オプション）
 
 ## 前提条件 {#prerequisites}
 
--   [DumplingとTiDBLightningをインストールします](/migration-tools.md)
--   [TiDBLightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
+-   [DumplingとTiDB Lightningをインストールします](/migration-tools.md)
+-   [TiDB Lightningに必要なターゲットデータベース権限を取得します](/tidb-lightning/tidb-lightning-faq.md#what-are-the-privilege-requirements-for-the-target-database) 。
 
 ## 完全なデータをTiDBにインポートする {#import-full-data-to-tidb}
 
@@ -49,7 +49,7 @@ binlogの位置を取得したら、5分以内にスナップショットをエ�
 
 ### ステップ2.スキーマをエクスポートする {#step-2-export-schema}
 
-AuroraのスナップショットファイルにはDDLステートメントが含まれていないため、 Dumplingを使用してスキーマをエクスポートし、TiDBLightningを使用してターゲットデータベースにスキーマを作成する必要があります。スキーマを手動で作成する場合は、この手順をスキップできます。
+AuroraのスナップショットファイルにはDDLステートメントが含まれていないため、 Dumplingを使用してスキーマをエクスポートし、 TiDB Lightningを使用してターゲットデータベースにスキーマを作成する必要があります。スキーマを手動で作成する場合は、この手順をスキップできます。
 
 次のコマンドを実行して、 Dumplingを使用してスキーマをエクスポートします。このコマンドには、目的のテーブルスキーマのみをエクスポートするための`--filter`つのパラメーターが含まれています。
 
@@ -76,7 +76,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 | `-d`または`--no-data`     | データをエクスポートしません。スキーマのみをエクスポートします。                                                                |
 | `-f`または`--filter`      | パターンに一致するテーブルをエクスポートします。 `-f`と`-T`を同時に使用しないでください。構文については[テーブルフィルター](/table-filter.md)を参照してください。 |
 
-### 手順3.TiDBLightning構成ファイルを作成します {#step-3-create-the-tidb-lightning-configuration-file}
+### 手順TiDB Lightning構成ファイルを作成します {#step-3-create-the-tidb-lightning-configuration-file}
 
 次のように`tidb-lightning.toml`の構成ファイルを作成します。
 
@@ -119,7 +119,7 @@ table = '$2'
 type = '$3'
 ```
 
-TiDBクラスタでTLSを有効にする必要がある場合は、 [TiDBLightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
+TiDBクラスタでTLSを有効にする必要がある場合は、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
 ### ステップ4.完全なデータをTiDBにインポートします {#step-4-import-full-data-to-tidb}
 
@@ -147,13 +147,13 @@ TiDBクラスタでTLSを有効にする必要がある場合は、 [TiDBLightni
 
     -   `grep`ログのキーワード`progress` 。進行状況は、デフォルトで5分ごとに更新されます。
     -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
-    -   [TiDBLightningWebインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
+    -   [TiDB Lightningインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
 4.  TiDB Lightningがインポートを完了すると、自動的に終了します。ログ印刷`the whole procedure completed`の最後の5行が見つかった場合、インポートは成功しています。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、TiDB Lightningが正常に終了することを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
+> インポートが成功したかどうかに関係なく、ログの最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了することを意味しますが、必ずしもインポートが成功したことを意味するわけではありません。
 
 インポート中に問題が発生した場合は、 [TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してトラブルシューティングを行ってください。
 

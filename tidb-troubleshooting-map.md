@@ -11,13 +11,13 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ### 1.1クライアント<code>Region is Unavailable</code>エラーを報告します {#1-1-the-client-reports-code-region-is-unavailable-code-error}
 
--   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないことが原因です。 `TiKV server is busy`が発生するか、 `not leader`または`epoch not match`が原因でTiKVへの要求が失敗するか、TiKVへの要求がタイムアウトする可能性があります。このような場合、TiDBは`backoff`の再試行メカニズムを実行します。 `backoff`がしきい値（デフォルトでは20秒）を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内では、このエラーはクライアントには表示されません。
+-   1.1.1 `Region is Unavailable`エラーは通常、リージョンが一定期間利用できないために発生します。 `TiKV server is busy`が発生するか、 `not leader`または`epoch not match`が原因でTiKVへの要求が失敗するか、TiKVへの要求がタイムアウトする可能性があります。このような場合、TiDBは`backoff`の再試行メカニズムを実行します。 `backoff`がしきい値（デフォルトでは20秒）を超えると、エラーがクライアントに送信されます。 `backoff`のしきい値内では、このエラーはクライアントには表示されません。
 
 -   1.1.2複数のTiKVインスタンスが同時にOOMであるため、OOM期間中にリーダーは発生しません。中国語の[ケース-991](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case991.md)を参照してください。
 
 -   1.1.3 TiKVは`TiKV server is busy`を報告し、 `backoff`回を超えています。詳細については、 [4.3](#43-the-client-reports-the-server-is-busy-error)を参照してください。 `TiKV server is busy`は内部フロー制御メカニズムの結果であり、 `backoff`回でカウントされるべきではありません。この問題は修正されます。
 
--   1.1.4複数のTiKVインスタンスの開始に失敗したため、リージョンにリーダーが存在しません。複数のTiKVインスタンスが物理マシンに展開されている場合、ラベルが適切に構成されていないと、物理マシンに障害が発生すると、リージョン内にリーダーが存在しなくなる可能性があります。中国語の[ケース-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
+-   1.1.4複数のTiKVインスタンスを開始できなかったため、リージョンにリーダーがいません。複数のTiKVインスタンスが物理マシンに展開されている場合、ラベルが適切に構成されていないと、物理マシンに障害が発生すると、リージョン内にリーダーが存在しなくなる可能性があります。中国語の[ケース-228](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case228.md)を参照してください。
 
 -   1.1.5フォロワーの適用が前のエポックで遅れている場合、フォロワーがリーダーになった後、 `epoch not match`でリクエストを拒否します。中国語の[ケース-958](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case958.md)を参照してください（TiKVはそのメカニズムを最適化する必要があります）。
 
@@ -57,9 +57,9 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   原因1：他のコンポーネント（PD / TiKV）とのネットワークの問題。
 
-    -   原因2：初期バージョンのTiDB（v3.0.8より前）では、同時実行性が高いために多くのゴルーチンがあるため、内部負荷が大きくなります。
+    -   原因2：初期バージョンのTiDB（v3.0.8より前）では、同時実行性が高いためにゴルーチンが多いため、内部負荷が大きくなります。
 
-    -   原因3：初期バージョン（v2.1.15およびバージョン&lt;v3.0.0-rc1）では、PDインスタンスはTiDBキーの削除に失敗します。これにより、すべてのDDL変更が2つのリースを待機します。
+    -   原因3：初期バージョン（v2.1.15およびバージョン&lt;v3.0.0-rc1）では、PDインスタンスがTiDBキーの削除に失敗するため、すべてのDDL変更が2つのリースを待機します。
 
     -   その他の不明な原因については、 [バグを報告](https://github.com/pingcap/tidb/issues/new?labels=type%2Fbug&#x26;template=bug-report.md) 。
 
@@ -172,7 +172,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         MySQLでは、2つの高精度`Decimal`が分割され、結果が最大10進精度（ `30` ）を超える場合、 `30`桁のみが予約され、エラーは報告されません。
 
-        TiDBでは、計算結果はMySQLの場合と同じですが、 `Decimal`を表すデータ構造内では、10進精度のフィールドは実際の精度を保持します。
+        TiDBでは、計算結果はMySQLと同じですが、 `Decimal`を表すデータ構造内では、10進精度のフィールドは実際の精度を保持します。
 
         例として`(0.1^30) / 10`を取り上げます。精度が最大で`30`であるため、TiDBとMySQLの結果は両方とも`0`です。ただし、TiDBでは、小数精度のフィールドは`31`のままです。
 
@@ -254,7 +254,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   4.4.1TiKVが再起動されたための再選
 
-    -   TiKVがパニックになった後、systemdによってプルアップされ、正常に実行されます。 TiKVログを表示することで、パニックが発生したかどうかを確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md)です。
+    -   TiKVがパニックになった後、systemdによってプルアップされ、正常に実行されます。 TiKVログを表示することで、panicが発生したかどうかを確認できます。この問題は予期しないものであるため、発生した場合は[バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md)です。
 
     -   TiKVはサードパーティによって停止または強制終了され、systemdによってプルアップされます。 `dmesg`とTiKVログを表示して原因を確認してください。
 
@@ -278,7 +278,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   4.5.3追加ログが遅い。
 
-    TiKVGrafanaの**RaftIO** / `append log duration`は高く、通常はディスクの書き込み操作が遅いためです。 RocksDBの`WAL Sync Duration max`の値--raftを確認することで、原因を確認できます。
+    TiKVGrafanaの**Raft** / `append log duration`は高く、通常はディスクの書き込み操作が遅いためです。 RocksDBの`WAL Sync Duration max`の値--raftを確認することで、原因を確認できます。
 
     その他の状況では、 [バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
 
@@ -291,7 +291,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   4.5.5適用が遅い。
 
-    TiKVGrafanaの**RaftIO** / `apply log duration`は高く、通常は高い<strong>Raft Propose</strong> / `apply wait duration`が付属しています。考えられる原因は次のとおりです。
+    TiKVGrafanaの**Raft** / `apply log duration`は高く、通常は高い<strong>Raft Propose</strong> / `apply wait duration`が付属しています。考えられる原因は次のとおりです。
 
     -   `[raftstore] apply-pool-size`は小さすぎ（ `1`の値を設定し、大きすぎないようにすることをお勧めし`5` ）、**スレッドCPU** / `apply CPU`は大きすぎます。
 
@@ -303,9 +303,9 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   その他の状況では、 [バグを報告](https://github.com/tikv/tikv/issues/new?template=bug-report.md) 。
 
--   4.5.6Raftコミットログが遅い。
+-   Raftコミットログが遅い。
 
-    TiKVGrafanaの**RaftIO** / `commit log duration`は高いです（このメトリックは、v4.x以降のGrafanaでのみサポートされます）。すべての地域は、独立したRaftグループに対応しています。 Raftには、TCPのスライディングウィンドウメカニズムと同様のフロー制御メカニズムがあります。 `[raftstore] raft-max-inflight-msgs = 256`パラメータを設定することにより、スライディングウィンドウのサイズを制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメーターを調整できます。
+    TiKVGrafanaの**Raft** / `commit log duration`は高いです（このメトリックは、v4.x以降のGrafanaでのみサポートされます）。すべての地域は、独立したRaftグループに対応しています。 Raftには、TCPのスライディングウィンドウメカニズムと同様のフロー制御メカニズムがあります。 `[raftstore] raft-max-inflight-msgs = 256`パラメータを設定することにより、スライディングウィンドウのサイズを制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメーターを調整できます。
 
 -   4.5.7その他の状況については、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)の書き込みパスを参照して、原因を分析してください。
 
@@ -333,7 +333,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   5.2.1PDスイッチリーダー。
 
-    -   原因1：ディスク。 PDノードが配置されているディスクには完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因1：ディスク。 PDノードが配置されているディスクには、完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
     -   原因2：ネットワーク。 PDログには`lost the TCP streaming connection`が表示されます。 PDノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana-** &gt; <strong>PD-</strong> &gt; <strong>etcd</strong>で`round trip`を表示して、原因を確認する必要があります。中国語の[ケース-177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
@@ -343,7 +343,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   PDはリーダーを選出できません：PDログには`lease is not expired`が表示されます。 [この問題](https://github.com/etcd-io/etcd/issues/10355)はv3.0.xおよびv2.1.19で修正されています。中国語の[ケース-875](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case875.md)を参照してください。
 
-    -   選挙は遅い：地域の読み込み期間は長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒などの秒単位の場合は、リージョンの読み込みが遅いことを意味します。 `use-region-storage`を`true`に設定すると、v3.0で`region storage`機能を有効にできます。これにより、リージョンの読み込み時間が大幅に短縮されます。中国語の[ケース-429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md)を参照してください。
+    -   選挙は遅い：地域の読み込み期間は長い。この問題は、PDログで`grep "regions cost"`を実行することで確認できます。結果が`load 460927 regions cost 11.77099s`秒などの秒単位の場合は、リージョンの読み込みが遅いことを意味します。 `use-region-storage`を`true`に設定することで、v3.0の`region storage`機能を有効にできます。これにより、リージョンの読み込み時間が大幅に短縮されます。中国語の[ケース-429](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case429.md)を参照してください。
 
 -   5.2.3TiDBがSQLステートメントを実行するとPDがタイムアウトしました。
 
@@ -375,15 +375,15 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 ## 6.エコシステムツール {#6-ecosystem-tools}
 
-### 6.1TiDBビンログ {#6-1-tidb-binlog}
+### 6.1TiDBBinlog {#6-1-tidb-binlog}
 
--   6.1.1 TiDB Binlogは、TiDBから変更を収集し、ダウンストリームのTiDBまたはMySQLプラットフォームへのバックアップとレプリケーションを提供するツールです。詳細については、 [GitHubのTiDBBinlog](https://github.com/pingcap/tidb-binlog)を参照してください。
+-   6.1.1 TiDB Binlogは、TiDBから変更を収集し、ダウンストリームのTiDBまたはMySQLプラットフォームへのバックアップとレプリケーションを提供するツールです。詳細については、 [GitHubのBinlog](https://github.com/pingcap/tidb-binlog)を参照してください。
 
--   6.1.2ポンプ/ドレイナーステータスの`Update Time`は正常に更新され、ログに異常は表示されませんが、ダウンストリームにデータは書き込まれません。
+-   6.1.2Pump/Drainerステータスの`Update Time`は正常に更新され、ログに異常は表示されませんが、ダウンストリームにデータは書き込まれません。
 
     -   BinlogはTiDB構成で有効になっていません。 TiDBで`[binlog]`の構成を変更します。
 
--   6.1.3Drainerの`sarama`は`EOF`エラーを報告します。
+-   Drainerの`sarama`は`EOF`エラーを報告します。
 
     -   DrainerのKafkaクライアントバージョンは、Kafkaのバージョンと矛盾しています。 `[syncer.to] kafka-version`の構成を変更する必要があります。
 
@@ -409,7 +409,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         -   これは、異なるタイムゾーンが原因です。 Drainerがアップストリームおよびダウンストリームデータベースと同じタイムゾーンにあることを確認する必要があります。 Drainerは`/etc/localtime`からタイムゾーンを取得し、 `TZ`環境変数をサポートしていません。中国語の[ケース-826](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case826.md)を参照してください。
 
-        -   TiDBでは、タイムスタンプのデフォルト値は`null`ですが、MySQL 5.7（MySQL 8を除く）の同じデフォルト値が現在の時刻です。したがって、アップストリームTiDBのタイムスタンプが`null`で、ダウンストリームがMySQL 5.7の場合、タイムスタンプ列のデータに一貫性がありません。 binlogを有効にする前に、アップストリームで`set @@global.explicit_defaults_for_timestamp=on;`を実行する必要があります。
+        -   TiDBでは、タイムスタンプのデフォルト値は`null`ですが、 MySQL 5.7 （MySQL 8を除く）の同じデフォルト値が現在の時刻です。したがって、アップストリームTiDBのタイムスタンプが`null`で、ダウンストリームがMySQL 5.7の場合、タイムスタンプ列のデータに一貫性がありません。 binlogを有効にする前に、アップストリームで`set @@global.explicit_defaults_for_timestamp=on;`を実行する必要があります。
 
     -   その他の状況では、 [バグを報告](https://github.com/pingcap/tidb-binlog/issues/new?labels=bug&#x26;template=bug-report.md) 。
 
@@ -417,7 +417,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   ダウンストリームはTiDB/MySQLであり、アップストリームは頻繁にDDL操作を実行します。中国語の[ケース-1023](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1023.md)を参照してください。
 
-    -   ダウンストリームはTiDB/MySQLであり、レプリケートされるテーブルには主キーと一意のインデックスがないため、binlogのパフォーマンスが低下します。主キーまたは一意のインデックスを追加することをお勧めします。
+    -   ダウンストリームはTiDB/MySQLであり、複製されるテーブルには主キーと一意のインデックスがないため、binlogのパフォーマンスが低下します。主キーまたは一意のインデックスを追加することをお勧めします。
 
     -   ダウンストリームがファイルに出力する場合は、出力ディスクまたはネットワークディスクの速度が遅いかどうかを確認してください。
 
@@ -425,19 +425,19 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.1.7 Pumpはbinlogを書き込めず、 `no space left on device`エラーを報告します。
 
-    -   ローカルディスク容量は、Pumpがbinlogデータを正常に書き込むには不十分です。ディスクスペースをクリーンアップしてから、Pumpを再起動する必要があります。
+    -   ローカルディスク容量は、 Pumpがbinlogデータを正常に書き込むには不十分です。ディスクスペースをクリーンアップしてから、 Pumpを再起動する必要があります。
 
--   6.1.8ポンプは、起動時に`fail to notify all living drainer`のエラーを報告します。
+-   6.1.8Pumpは、起動時に`fail to notify all living drainer`のエラーを報告します。
 
-    -   原因：Pumpが起動すると、 `online`状態にあるすべてのDrainerノードに通知します。 Drainerへの通知に失敗した場合、このエラーログが出力されます。
+    -   原因： Pumpが起動すると、 `online`状態にあるすべてのDrainerノードに通知します。 Drainerへの通知に失敗した場合、このエラーログが出力されます。
 
-    -   解決策：binlogctlツールを使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`状態のすべてのDrainerノードが正常に機能していることを確認するためです。 Drainerノードの状態が実際の動作状態と一致しない場合は、binlogctlツールを使用してその状態を変更してから、Pumpを再起動します。ケース[通知に失敗するすべての生きている水切り](/tidb-binlog/handle-tidb-binlog-errors.md#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started)を参照してください。
+    -   解決策：binlogctlツールを使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`状態のすべてのDrainerノードが正常に機能していることを確認するためです。 Drainerノードの状態が実際の動作状態と一致しない場合は、binlogctlツールを使用してその状態を変更してから、 Pumpを再起動します。ケース[通知に失敗するすべての生きている水切り](/tidb-binlog/handle-tidb-binlog-errors.md#fail-to-notify-all-living-drainer-is-returned-when-pump-is-started)を参照してください。
 
--   6.1.9Drainerは`gen update sqls failed: table xxx: row data is corruption []`のエラーを報告します。
+-   Drainerは`gen update sqls failed: table xxx: row data is corruption []`のエラーを報告します。
 
     -   トリガー：アップストリームは、 `DROP COLUMN`のDDLを実行しながら、このテーブルに対してDML操作を実行します。この問題はv3.0.6で修正されています。中国語の[ケース-820](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case820.md)を参照してください。
 
--   6.1.10ドレイナーレプリケーションがハングしています。プロセスはアクティブなままですが、チェックポイントは更新されません。
+-   Drainerドレイナーレプリケーションがハングしています。プロセスはアクティブなままですが、チェックポイントは更新されません。
 
     -   この問題はv3.0.4で修正されています。中国語の[ケース-741](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case741.md)を参照してください。
 
@@ -457,7 +457,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.2.3レプリケーションタスクが中断され、 `driver: bad connection`のエラーが返されます。
 
-    -   `driver: bad connection`エラーは、DMとダウンストリームTiDBデータベース間の接続に異常が発生したこと（ネットワーク障害、TiDB再起動など）、および現在の要求のデータがまだTiDBに送信されていないことを示します。
+    -   `driver: bad connection`エラーは、DMとダウンストリームTiDBデータベース間の接続に異常が発生し（ネットワーク障害、TiDB再起動など）、現在の要求のデータがまだTiDBに送信されていないことを示します。
 
         -   DM 1.0.0 GAより前のバージョンの場合は、 `stop-task`を実行してタスクを停止し、 `start-task`を実行してタスクを再開します。
         -   DM 1.0.0 GA以降のバージョンでは、このタイプのエラーに対する自動再試行メカニズムが追加されています。 [＃265](https://github.com/pingcap/dm/pull/265)を参照してください。
@@ -491,11 +491,11 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.2.7DMレプリケーションプロセスはエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`を返します。
 
-    -   この値はMySQL8.0またはTiDBに正常に書き込むことはできませんが、MySQL5.7に書き込むことはできます。 `tidb_skip_utf8_check`パラメータを有効にすると、データ形式のチェックをスキップできます。
+    -   この値はMySQL8.0またはTiDBに正常に書き込むことはできませんが、 MySQL 5.7に書き込むことはできます。 `tidb_skip_utf8_check`パラメータを有効にすると、データ形式のチェックをスキップできます。
 
-### 6.3TiDBライトニング {#6-3-tidb-lightning}
+### TiDB Lightning {#6-3-tidb-lightning}
 
--   6.3.1 TiDB Lightningは、大量のデータをTiDBクラスタに高速に完全にインポートするためのツールです。 [GitHub上のTiDBLightning](https://github.com/pingcap/tidb-lightning)を参照してください。
+-   6.3.1 TiDB Lightningは、大量のデータをTiDBクラスタに高速に完全にインポートするためのツールです。 [GitHub上のTiDB Lightning](https://github.com/pingcap/tidb-lightning)を参照してください。
 
 -   6.3.2インポート速度が遅すぎます。
 
@@ -503,11 +503,11 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
         -   設定は、ログの先頭から`region-concurrency`を検索して見つけることができます。
         -   TiDB Lightningがサーバーを他のサービス（Importerなど）と共有する場合は、そのサーバー上のCPUコアの総数の`region-concurrency` ％を手動で設定する必要があります。
-        -   CPUにクォータがある場合（たとえば、Kubernetes設定によって制限されている場合）、TiDBLightningはこれを読み取れない可能性があります。この場合、 `region-concurrency`も手動で減らす必要があります。
+        -   CPUにクォータがある場合（たとえば、Kubernetes設定によって制限されている場合）、 TiDB Lightningはこれを読み取れない可能性があります。この場合、 `region-concurrency`も手動で減らす必要があります。
 
     -   インデックスを追加するたびに、行ごとに新しいKVペアが導入されます。 N個のインデックスがある場合、インポートされる実際のサイズは、 [Mydumper](https://docs.pingcap.com/tidb/v4.0/mydumper-overview)の出力のサイズの約（N + 1）倍になります。インデックスが無視できる場合は、最初にスキーマからインデックスを削除し、インポートの完了後に`CREATE INDEX`を介してインデックスを追加し直すことができます。
 
-    -   TiDBLightningのバージョンは古いです。最新バージョンを試してください。インポート速度が向上する可能性があります。
+    -   TiDB Lightningのバージョンは古いです。最新バージョンを試してください。インポート速度が向上する可能性があります。
 
 -   `checksum failed: checksum mismatched remote vs local` 。
 
@@ -524,18 +524,18 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   6.3.4 `Checkpoint for … has invalid status:(error code)`
 
-    -   原因：チェックポイントが有効になっていて、Lightning/Importerが以前に異常終了しました。偶発的なデータ破損を防ぐために、エラーが解決されるまでTiDBLightningは起動しません。エラーコードは25未満の整数で、可能な値は`0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21`です。整数は、インポートプロセスで予期しない終了が発生するステップを示します。整数が大きいほど、終了が遅くなります。
+    -   原因：チェックポイントが有効になっていて、Lightning/Importerが以前に異常終了しました。偶発的なデータ破損を防ぐために、エラーが解決されるまでTiDB Lightningは起動しません。エラーコードは25未満の整数で、可能な値は`0, 3, 6, 9, 12, 14, 15, 17, 18, 20 and 21`です。整数は、インポートプロセスで予期しない終了が発生するステップを示します。整数が大きいほど、終了が遅くなります。
 
     -   解決策： [トラブルシューティングソリューション](/tidb-lightning/tidb-lightning-faq.md#checkpoint-for--has-invalid-status-error-code)を参照してください。
 
 -   6.3.5 `ResourceTemporarilyUnavailable("Too many open engines …: 8")`
 
-    -   原因：同時エンジンファイルの数が、tikv-importerで指定された制限を超えています。これは、設定の誤りが原因である可能性があります。また、設定が正しい場合でも、以前にtidb-lightningが異常終了した場合は、エンジンファイルがぶら下がった状態のままになることがあり、このエラーも発生する可能性があります。
+    -   原因：同時エンジンファイルの数が、tikv-importerで指定された制限を超えています。これは、設定の誤りが原因である可能性があります。また、設定が正しい場合でも、以前にtidb-lightningが異常終了した場合は、エンジンファイルがぶら下がっている状態のままになることがあり、このエラーも発生する可能性があります。
     -   解決策： [トラブルシューティングソリューション](/tidb-lightning/tidb-lightning-faq.md#resourcetemporarilyunavailabletoo-many-open-engines--)を参照してください。
 
 -   6.3.6 `cannot guess encoding for input file, please convert to UTF-8 manually`
 
-    -   原因：TiDB Lightningは、UTF-8およびGB-18030エンコーディングのみをサポートします。このエラーは、ファイルがこれらのエンコーディングのいずれにも含まれていないことを意味します。また、ALTER TABLEの過去の実行により、ファイルにUTF-8の文字列とGB-18030の別の文字列が含まれるなど、エンコードが混在している可能性もあります。
+    -   原因： TiDB Lightningは、UTF-8およびGB-18030エンコーディングのみをサポートします。このエラーは、ファイルがこれらのエンコーディングのいずれにも含まれていないことを意味します。また、ALTER TABLEの過去の実行により、ファイルにUTF-8の文字列とGB-18030の別の文字列が含まれるなど、エンコードが混在している可能性もあります。
 
     -   解決策： [トラブルシューティングソリューション](/tidb-lightning/tidb-lightning-faq.md#cannot-guess-encoding-for-input-file-please-convert-to-utf-8-manually)を参照してください。
 
@@ -614,7 +614,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   `peer is not leader` 。
 
-    リクエストは、リーダーではないレプリカに送信されます。エラー応答がどのレプリカが最新のリーダーであるかを示している場合、TiDBはエラーに従ってローカルルーティングを更新し、最新のリーダーに新しい要求を送信します。通常、ビジネスは影響を受けません。
+    リクエストは、リーダーではないレプリカに送信されます。エラー応答がどのレプリカが最新のリーダーであるかを示している場合、TiDBはエラーに応じてローカルルーティングを更新し、最新のリーダーに新しい要求を送信します。通常、ビジネスは影響を受けません。
 
     v3.0以降のバージョンでは、前のリーダーへの要求が失敗した場合、TiDBは他のピアを試行します。これにより、TiKVログで頻繁に`peer is not leader`が発生する可能性があります。 TiDBの対応するリージョンの`switch region peer to next due to send request fail`のログを確認して、送信失敗の根本的な原因を特定できます。詳しくは[7.1.4](#71-tidb)をご覧ください。
 

@@ -3,7 +3,7 @@ title: TiDB Lightning Glossary
 summary: List of special terms used in TiDB Lightning.
 ---
 
-# TiDBLightning用語集 {#tidb-lightning-glossary}
+# TiDB Lightning用語集 {#tidb-lightning-glossary}
 
 このページでは、TiDB Lightningのログ、監視、構成、およびドキュメントで使用される特別な用語について説明します。
 
@@ -15,13 +15,13 @@ summary: List of special terms used in TiDB Lightning.
 
 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行しているTiDBテーブルの[統計学](/statistics.md)情報を再構築する操作。
 
-TiDB LightningはTiDBを経由せずにデータをインポートするため、統計情報は自動的に更新されません。したがって、TiDB Lightningは、インポート後にすべてのテーブルを明示的に分析します。この手順は、 `post-restore.analyze`構成を`false`に設定することで省略できます。
+TiDB LightningはTiDBを経由せずにデータをインポートするため、統計情報は自動的に更新されません。したがって、 TiDB Lightningは、インポート後にすべてのテーブルを明示的に分析します。この手順は、 `post-restore.analyze`構成を`false`に設定することで省略できます。
 
 ### <code>AUTO_INCREMENT_ID</code> {#code-auto-increment-id-code}
 
 すべてのテーブルには、自動インクリメント列のデフォルト値を提供する`AUTO_INCREMENT_ID`のカウンターが関連付けられています。 TiDBでは、このカウンターは行IDを割り当てるために追加で使用されます。
 
-TiDB LightningはTiDBを経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンターは自動的に更新されません。したがって、TiDBLightningは`AUTO_INCREMENT_ID`を有効な値に明示的に変更します。テーブルに`AUTO_INCREMENT`の列がない場合でも、このステップは常に実行されます。
+TiDB LightningはTiDBを経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンターは自動的に更新されません。したがって、 TiDB Lightningは`AUTO_INCREMENT_ID`を有効な値に明示的に変更します。テーブルに`AUTO_INCREMENT`の列がない場合でも、このステップは常に実行されます。
 
 <!-- B -->
 
@@ -29,9 +29,9 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### バックエンド {#back-end}
 
-バックエンドは、TiDBLightningが解析結果を送信する宛先です。 「バックエンド」とも呼ばれます。
+バックエンドは、 TiDB Lightningが解析結果を送信する宛先です。 「バックエンド」とも呼ばれます。
 
-詳細については、 [TiDBLightningバックエンド](/tidb-lightning/tidb-lightning-backends.md)を参照してください。
+詳細については、 [TiDB Lightningエンド](/tidb-lightning/tidb-lightning-backends.md)を参照してください。
 
 <!-- C -->
 
@@ -49,7 +49,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 -   すべてのKVペアの全長、および
 -   各ペアに[CRC-64-ECMA](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)の値のビット単位のXOR。
 
-すべてのテーブルの[ローカル](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum)を比較することによる[インポートされたデータを検証します](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data) 。いずれかのペアが一致しない場合、プログラムは停止します。 `post-restore.checksum`構成を`false`に設定すると、このチェックをスキップできます。
+すべてのテーブルの[ローカル](/tidb-lightning/tidb-lightning-glossary.md#local-checksum)と[インポートされたデータを検証します](/tidb-lightning/tidb-lightning-faq.md#how-to-ensure-the-integrity-of-the-imported-data)を比較することに[リモートチェックサム](/tidb-lightning/tidb-lightning-glossary.md#remote-checksum) TiDB Lightning 。いずれかのペアが一致しない場合、プログラムは停止します。 `post-restore.checksum`構成を`false`に設定すると、このチェックをスキップできます。
 
 チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
 
@@ -57,15 +57,15 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 
 ソースデータの連続範囲。通常、データソース内の単一のファイルに相当します。
 
-ファイルが大きすぎる場合、TiDBLightningはファイルを複数のチャンクに分割する場合があります。
+ファイルが大きすぎる場合、 TiDB Lightningはファイルを複数のチャンクに分割する場合があります。
 
 ### 圧縮 {#compaction}
 
-複数の小さなSSTファイルを1つの大きなSSTファイルにマージし、削除されたエントリをクリーンアップする操作。 TiKVは、TiDB Lightningのインポート中に、バックグラウンドでデータを自動的に圧縮します。
+複数の小さなSSTファイルを1つの大きなSSTファイルにマージし、削除されたエントリをクリーンアップする操作。 TiKVは、 TiDB Lightningのインポート中に、バックグラウンドでデータを自動的に圧縮します。
 
 > **ノート：**
 >
-> 従来の理由から、テーブルがインポートされるたびに圧縮を明示的にトリガーするようにTiDBLightningを構成することもできます。ただし、これは推奨されておらず、対応する設定はデフォルトで無効になっています。
+> 従来の理由から、テーブルがインポートされるたびに圧縮を明示的にトリガーするようにTiDB Lightningを構成することもできます。ただし、これは推奨されておらず、対応する設定はデフォルトで無効になっています。
 
 技術的な詳細については、 [圧縮に関するRocksDBのwikiページ](https://github.com/facebook/rocksdb/wiki/Compaction)を参照してください。
 
@@ -127,7 +127,7 @@ TiDB Lightningは、複数のインデックスエンジンを同時に処理し
 
 [SSTファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)のコンテンツ全体をRocksDB（TiKV）ストアに挿入する操作。
 
-取り込みは、KVペアを1つずつ挿入する場合に比べて非常に高速な操作です。この操作は、TiDBLightningのパフォーマンスを決定する要因です。
+取り込みは、KVペアを1つずつ挿入する場合に比べて非常に高速な操作です。この操作は、 TiDB Lightningのパフォーマンスを決定する要因です。
 
 技術的な詳細については、 [SSTファイルの作成と取り込みに関するRocksDBのwikiページ](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files)を参照してください。
 
@@ -149,7 +149,7 @@ SQLまたはCSV行をKVペアに解析するルーチン。複数のKVエンコ�
 
 ### ローカルチェックサム {#local-checksum}
 
-KVペアをTiKVImporterに送信する前にTiDBLightning自体によって計算されたテーブルの[チェックサム](/tidb-lightning/tidb-lightning-glossary.md#checksum) 。
+KVペアをTiKVImporterに送信する前にTiDB Lightning自体によって計算されたテーブルの[チェックサム](/tidb-lightning/tidb-lightning-glossary.md#checksum) 。
 
 <!-- N -->
 

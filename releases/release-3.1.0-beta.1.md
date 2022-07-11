@@ -37,4 +37,4 @@ TiDB Ansibleバージョン：3.1.0-beta.1
 
 -   初期化フェーズ[＃1086](https://github.com/pingcap/tidb-ansible/pull/1086)の間にオペレーティングシステムでTransparentHugePages（THP）を自動的に無効にする機能を追加します
 -   BRコンポーネントのGrafanaモニタリングを追加する[＃1093](https://github.com/pingcap/tidb-ansible/pull/1093)
--   関連するディレクトリを自動的に作成して、TiDBLightningの展開を最適化します[＃1104](https://github.com/pingcap/tidb-ansible/pull/1104)
+-   関連するディレクトリを自動的に作成して、 TiDB Lightningの展開を最適化します[＃1104](https://github.com/pingcap/tidb-ansible/pull/1104)

@@ -3,7 +3,7 @@ title: Migration FAQs
 summary: Learn about the FAQs related to data migration.
 ---
 
-# 移行に関するよくある質問 {#migration-faqs}
+# 移行に関するFAQ {#migration-faqs}
 
 このドキュメントは、TiDBデータ移行に関連するよくある質問（FAQ）をまとめたものです。
 
@@ -11,7 +11,7 @@ summary: Learn about the FAQs related to data migration.
 
 -   [バックアップと復元に関するFAQ](/br/backup-and-restore-faq.md)
 -   [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
--   [TiDB LightningFAQ](/tidb-lightning/tidb-lightning-faq.md)
+-   [TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md)
 -   [TiDBデータ移行（DM）に関するFAQ](/dm/dm-faq.md)
 -   [TiCDCのFAQ](/ticdc/ticdc-faq.md)
 

@@ -26,7 +26,7 @@ TiDBはMySQLプロトコルとの互換性が高いですが、一部の機能�
 TiDBは、Javaに対して次の2つのサポートレベルを提供します。
 
 -   **フル**：このドライバーまたはORMの使用に既知の問題がないことを示します。
--   **検証済み**：TiDBとMySQLの互換性の違いにより、このドライバーまたはORMを使用するとエラーが発生する可能性があることを示します。
+-   **確認済み**：TiDBとMySQLの互換性の違いにより、このドライバーまたはORMを使用するとエラーが発生する可能性があることを示します。
 
 ### Javaドライバー {#java-drivers}
 
@@ -108,4 +108,4 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 
 > **ノート：**
 >
-> `Hibernate`のバージョンをアップグレードできない場合は、代わりにMySQL5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などのTiDB固有の機能が失われたりする可能性があります。
+> `Hibernate`のバージョンをアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などのTiDB固有の機能が失われたりする可能性があります。

@@ -32,7 +32,7 @@ TiDB Ansibleバージョン：2.1.10
 -   `ALTER DATABASE`構文[＃10503](https://github.com/pingcap/tidb/pull/10503)をサポートします
 -   低速クエリステートメント[＃10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合に、 `SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正します。
 -   パーティションテーブルの`Add index`操作をキャンセルできない場合があるという問題を修正します[＃10533](https://github.com/pingcap/tidb/pull/10533)
--   OOMパニックが回復できない場合がある問題を修正します[＃10545](https://github.com/pingcap/tidb/pull/10545)
+-   OOMpanicが回復できない場合がある問題を修正します[＃10545](https://github.com/pingcap/tidb/pull/10545)
 -   テーブルメタデータを書き換えるDDL操作のセキュリティを向上させる[＃10547](https://github.com/pingcap/tidb/pull/10547)
 
 ## PD {#pd}
@@ -50,9 +50,9 @@ TiDB Ansibleバージョン：2.1.10
 ## ツール {#tools}
 
 -   TiDB Lightning
-    -   [＃176](https://github.com/pingcap/tidb-lightning/pull/176)が13へのデータ送信に失敗した場合の再試行機能を追加し`importer`
+    -   TiDB Lightningが[＃176](https://github.com/pingcap/tidb-lightning/pull/176)へのデータ送信に失敗した場合の再試行機能を追加し`importer`
 -   TiDB Binlog
-    -   トラブルシューティングを容易にするためにポンプ貯蔵ログを最適化する[＃607](https://github.com/pingcap/tidb-binlog/pull/607)
+    -   トラブルシューティングを容易にするためにPump貯蔵ログを最適化する[＃607](https://github.com/pingcap/tidb-binlog/pull/607)
 
 ## TiDB Ansible {#tidb-ansible}
 

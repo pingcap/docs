@@ -21,7 +21,7 @@ summary: Learn the environment check operations before deploying TiDB.
 
 例として`/dev/nvme0n1`のデータディスクを取り上げます。
 
-1.  データディスクを表示します。
+1.  データディスクをビューします。
 
     {{< copyable "" >}}
 
@@ -53,7 +53,7 @@ summary: Learn the environment check operations before deploying TiDB.
     mkfs.ext4 /dev/nvme0n1p1
     ```
 
-4.  データディスクのパーティションUUIDを表示します。
+4.  データディスクのパーティションUUIDをビューします。
 
     この例では、nvme0n1p1のUUIDは`c51eb23b-195c-4061-92a9-3fad812cc12f`です。
 
@@ -447,7 +447,7 @@ sudo systemctl enable ntpd.service
 
             > **ノート：**
             >
-            > `grubby`を実行する前に、最初に`grubby`のパッケージをインストールします。
+            > `grubby`を実行する前に、最初に`grubby`パッケージをインストールします。
 
             {{< copyable "" >}}
 
@@ -680,7 +680,7 @@ sudo systemctl enable ntpd.service
 > **ノート：**
 >
 > -   NUMAを使用したコアのバインドは、CPUリソースを分離する方法であり、高度に構成された物理マシンに複数のインスタンスをデプロイするのに適しています。
-> -   `tiup cluster deploy`を使用して展開が完了したら、 `exec`コマンドを使用してクラスタレベルの管理操作を実行できます。
+> -   `tiup cluster deploy`を使用して展開を完了した後、 `exec`コマンドを使用してクラスタレベルの管理操作を実行できます。
 
 NUMAツールをインストールするには、次の2つの方法のいずれかを実行します。
 

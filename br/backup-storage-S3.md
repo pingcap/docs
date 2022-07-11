@@ -36,7 +36,7 @@ S3を使用してバックアップまたは復元を実行する前に、S3に�
     br backup full --pd "${PDIP}:2379" --storage "s3://${Bucket}/${Folder}" --s3.region "${region}"
     ```
 
--   `br` CLIでS3にアクセスするために`access-key`と`secret-access-key`を構成し、BRから各TiKVにアクセスキーを渡すように`--send-credentials-to-tikv=true`を設定します。
+-   `br` CLIでS3にアクセスするために`access-key`と`secret-access-key`を設定し、BRから各TiKVにアクセスキーを渡すように`--send-credentials-to-tikv=true`を設定します。
 
     {{< copyable "" >}}
 
@@ -62,7 +62,7 @@ br backup full \
 
 前のコマンドで：
 
--   `--s3.region` ：S3のリージョンを指定します。
+-   `--s3.region` ：S3の領域を指定します。
 -   `--send-credentials-to-tikv` ：アクセスキーがTiKVノードに渡されることを指定します。
 
 ## S3からデータを復元する {#restore-data-from-s3}

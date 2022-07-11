@@ -5,7 +5,7 @@ summary: Learn how to connect to TiDB.
 
 # TiDBに接続する {#connect-to-tidb}
 
-TiDBは、MySQL5.7プロトコルと高い互換性があります。クライアントリンクパラメータの完全なリストについては、 [MySQLクライアントオプション](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html)を参照してください。
+TiDBは、 MySQL 5.7プロトコルと高い互換性があります。クライアントリンクパラメータの完全なリストについては、 [MySQLクライアントオプション](https://dev.mysql.com/doc/refman/5.7/en/mysql-command-options.html)を参照してください。
 
 TiDBは[MySQLクライアント/サーバープロトコル](https://dev.mysql.com/doc/internals/en/client-server-protocol.html)をサポートします。これにより、ほとんどのクライアントドライバーとORMフレームワークがMySQLに接続するのと同じようにTiDBに接続できます。
 
@@ -21,7 +21,7 @@ mysql --host <tidb_server_host> --port 4000 -u root -p --comments
 
 > **ノート：**
 >
-> バージョン5.7.7より前のMySQLシェルは、デフォルトで[オプティマイザーのヒント](/optimizer-hints.md#optimizer-hints)をクリアします。以前のMySQLShellバージョンでヒント構文を使用する必要がある場合は、クライアントの起動時に`--comments`オプションを追加します。
+> バージョン5.7.7より前のMySQLシェルは、デフォルトで[オプティマイザーのヒント](/optimizer-hints.md#optimizer-hints)をクリアします。以前のMySQLシェルバージョンでヒント構文を使用する必要がある場合は、クライアントの起動時に`--comments`オプションを追加します。
 
 ## JDBC {#jdbc}
 

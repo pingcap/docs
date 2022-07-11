@@ -15,7 +15,7 @@ title: TiDB 3.0 Beta Release Notes
     -   ハッシュ分割をサポートする
 -   SQLオプティマイザー
     -   [＃7676](https://github.com/pingcap/tidb/pull/7676)の最適化ルールを再サポートし`AggregationElimination`
-    -   `NOT EXISTS`のサブクエリを最適化し、それをアンチセミジョイン[＃7842](https://github.com/pingcap/tidb/pull/7842)に変換します
+    -   `NOT EXISTS`のサブクエリを最適化し、それをAnti SemiJoin3に変換し[＃7842](https://github.com/pingcap/tidb/pull/7842)
     -   新しいCascadesオプティマイザーをサポートするために`tidb_enable_cascades_planner`の変数を追加します。現在、Cascadesオプティマイザはまだ完全には実装されておらず、デフォルトでオフになっています[＃7879](https://github.com/pingcap/tidb/pull/7879)
     -   トランザクションでのインデックス結合の使用のサポート[＃7877](https://github.com/pingcap/tidb/pull/7877)
     -   外部結合での定数伝播を最適化して、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにします。これにより、外部結合の無駄な計算が減り、実行パフォーマンスが向上します[＃7794](https://github.com/pingcap/tidb/pull/7794) 。
@@ -24,7 +24,7 @@ title: TiDB 3.0 Beta Release Notes
     -   全表スキャンを回避し、クラスタのストレスを軽減するための`_tidb_rowid`の構築クエリのサポート範囲[＃8047](https://github.com/pingcap/tidb/pull/8047)
     -   `IN`のサブクエリを最適化して、集計後に内部結合を実行し、 `tidb_opt_insubq_to_join_and_agg`の変数を追加して、この最適化ルールを有効にしてデフォルトで開くかどうかを制御します[＃7531](https://github.com/pingcap/tidb/pull/7531)
     -   `DO`ステートメント[＃8343](https://github.com/pingcap/tidb/pull/8343)でのサブクエリの使用のサポート
-    -   外部結合除去の最適化ルールを追加して、不要なテーブルスキャンと結合操作を減らし、実行パフォーマンスを向上させます[＃8021](https://github.com/pingcap/tidb/pull/8021)
+    -   外部結合除去の最適化ルールを追加して、不要なテーブルスキャンおよび結合操作を減らし、実行パフォーマンスを向上させます[＃8021](https://github.com/pingcap/tidb/pull/8021)
     -   `TIDB_INLJ`オプティマイザーのヒントの動作を変更すると、オプティマイザーはヒントで指定されたテーブルをインデックス結合[＃8243](https://github.com/pingcap/tidb/pull/8243)の内部テーブルとして使用します。
     -   `Prepare`ステートメントの実行プランキャッシュが有効になるときに使用できるように、 `PointGet`を広範囲に使用します[＃8108](https://github.com/pingcap/tidb/pull/8108)
     -   複数のテーブルを結合するときに結合順序の選択を最適化するために、貪欲な`Join Reorder`アルゴリズムを導入します[＃8394](https://github.com/pingcap/tidb/pull/8394)
@@ -40,11 +40,11 @@ title: TiDB 3.0 Beta Release Notes
     -   SQLチューニングプロセスを容易にする`EXPLAIN ANALYZE`つの機能をサポートする[＃7827](https://github.com/pingcap/tidb/pull/7827)
     -   多くの列を持つワイドテーブルの書き込みパフォーマンスを最適化する[＃7935](https://github.com/pingcap/tidb/pull/7935)
     -   [＃8242](https://github.com/pingcap/tidb/pull/8242) `admin show next_row_id`
-    -   `tidb_init_chunk_size`変数を追加して、実行エンジン[＃8480](https://github.com/pingcap/tidb/pull/8480)で使用される初期チャンクのサイズを制御します。
+    -   `tidb_init_chunk_size`変数を追加して、実行エンジン[＃8480](https://github.com/pingcap/tidb/pull/8480)が使用する初期チャンクのサイズを制御します。
     -   `shard_row_id_bits`を改善し、自動インクリメント[＃8936](https://github.com/pingcap/tidb/pull/8936)をクロスチェックします
 -   `Prepare`ステートメント
     -   異なるユーザー変数が入力されたときにクエリプランが正しいことを保証するために、サブクエリを含む`Prepare`ステートメントをクエリプランキャッシュに追加することを禁止します[＃8064](https://github.com/pingcap/tidb/pull/8064)
-    -   クエリプランキャッシュを最適化して、ステートメントに非決定論的関数が含まれている場合にプランをキャッシュできるようにします[＃8105](https://github.com/pingcap/tidb/pull/8105)
+    -   クエリプランのキャッシュを最適化して、ステートメントに非決定論関数が含まれている場合にプランをキャッシュできるようにします[＃8105](https://github.com/pingcap/tidb/pull/8105)
     -   クエリプランのキャッシュを最適化して、 `DELETE` / `UPDATE` / `INSERT`のクエリプランをキャッシュできるようにします[＃8107](https://github.com/pingcap/tidb/pull/8107)
     -   クエリプランキャッシュを最適化して、 `DEALLOCATE`ステートメントを実行するときに対応するプランを削除します[＃8332](https://github.com/pingcap/tidb/pull/8332)
     -   クエリプランのキャッシュを最適化して、メモリ使用量を制限することにより、あまりにも多くのプランをキャッシュすることによって引き起こされるTiDBOOMの問題を回避します[＃8339](https://github.com/pingcap/tidb/pull/8339)
@@ -61,7 +61,7 @@ title: TiDB 3.0 Beta Release Notes
     -   `interactive_timeout`のシステム変数[＃8573](https://github.com/pingcap/tidb/pull/8573)をサポートします
     -   `wait_timeout`のシステム変数[＃8346](https://github.com/pingcap/tidb/pull/8346)をサポートします
     -   `tidb_batch_commit`の変数[＃8293](https://github.com/pingcap/tidb/pull/8293)を使用して、ステートメントの数に基づいてトランザクションを複数のトランザクションに分割することをサポートします。
-    -   遅いログをチェックするための`ADMIN SHOW SLOW`ステートメントの使用をサポート[＃7785](https://github.com/pingcap/tidb/pull/7785)
+    -   遅いログをチェックするために`ADMIN SHOW SLOW`ステートメントを使用することをサポートします[＃7785](https://github.com/pingcap/tidb/pull/7785)
 -   互換性
     -   `ALLOW_INVALID_DATES`モード[＃9027](https://github.com/pingcap/tidb/pull/9027)をサポートする
     -   CSVファイルの`LoadData`のフォールトトレランスを改善[＃9005](https://github.com/pingcap/tidb/pull/9005)
@@ -94,7 +94,7 @@ title: TiDB 3.0 Beta Release Notes
 ## TiKV {#tikv}
 
 -   分散[＃3179](https://github.com/tikv/tikv/pull/3179)をサポート
--   書き込みストール[＃3606](https://github.com/tikv/tikv/pull/3606)を回避するために、スナップショットを適用する前にRocksDBレベル0ファイルを確認してください
+-   スナップショットを適用する前にRocksDBレベル0ファイルを確認して、書き込みストール[＃3606](https://github.com/tikv/tikv/pull/3606)を回避します
 -   リバース`raw_scan`および`raw_batch_scan`を[＃3742](https://github.com/tikv/tikv/pull/3724)
 -   HTTPを使用した監視情報の取得のサポート[＃3855](https://github.com/tikv/tikv/pull/3855)
 -   DSTをより適切にサポートする[＃3786](https://github.com/tikv/tikv/pull/3786)

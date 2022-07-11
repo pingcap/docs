@@ -43,4 +43,4 @@ TiDB Ansibleバージョン：2.1.11
 
 ## TiDB Ansible {#tidb-ansible}
 
--   ドレイナーパラメータの追加[＃760](https://github.com/pingcap/tidb-ansible/pull/760)
+-   Drainerパラメータの追加[＃760](https://github.com/pingcap/tidb-ansible/pull/760)

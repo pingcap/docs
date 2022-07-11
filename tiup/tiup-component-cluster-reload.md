@@ -53,7 +53,7 @@ tiup cluster reload <cluster-name> [flags]
 
 -   再起動するロールを指定します。指定しない場合、すべての役割が再開されます。このオプションの値は、ノードの役割のコンマ区切りのリストです。役割は、 [クラスタステータス](/tiup/tiup-component-cluster-display.md)テーブルの2番目の列です。
 -   データ型： `STRINGS`
--   このオプションがコマンドで指定されていない場合、デフォルトですべての役割が選択されます。
+-   コマンドでこのオプションが指定されていない場合、デフォルトですべての役割が選択されます。
 
 > **ノート：**
 >
@@ -82,4 +82,4 @@ tiup cluster reload <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

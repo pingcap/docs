@@ -7,7 +7,7 @@ summary: Learn the TiDB Dashboard diagnostic report.
 
 このドキュメントでは、診断レポートの内容と表示のヒントを紹介します。クラスタ診断ページにアクセスしてレポートを生成するには、 [TiDBダッシュボードクラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
-## レポートを表示 {#view-report}
+## レポートをビュー {#view-report}
 
 診断レポートは、次の部分で構成されています。
 
@@ -190,7 +190,7 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
         -   `tikv_scheduler_latch_wait` ：ラッチの待機にかかる時間。
         -   `tikv_storage_async_request`での書き込みの時間消費（書き込みはこの監視メトリックのラベルです）。
 
-上記のメトリックの中で、 `tikv_storage_async_request`での書き込みの時間消費は、次の部分を含むRaftKVの書き込みの時間消費を指します。
+上記のメトリックの中で、 `tikv_storage_async_request`での書き込みの時間消費は、次の部分を含むRaftの書き込みの時間消費を指します。
 
 -   `tikv_raft_propose_wait`
 -   `tikv_raft_process` 、主に`tikv_raft_append_log`を含む
@@ -202,9 +202,9 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 
 > **ノート：**
 >
-> Raft KVの書き込みは`tikv_raft_commit_log` `tikv_raft_apply_wait`のバッチで処理される可能性があるため、 `TOTAL_TIME`を使用して各モジュールで消費される時間を測定することは、Raft KVの書き込みに関連するメトリック（具体的には`tikv_raft_process` 、および`tikv_raft_append_log` ）の監視には適用でき`tikv_raft_apply_log`ん。この状況では、各モジュールの消費時間をP999およびP99の時間と比較する方が合理的です。
+> Raft KVの書き込みは`tikv_raft_commit_log` `tikv_raft_apply_wait`のバッチで処理される可能性があるため、 `TOTAL_TIME`を使用して各モジュールで消費される時間を測定することは、 Raft KVの書き込みに関連するメトリック（具体的には`tikv_raft_process` 、および`tikv_raft_append_log` ）の監視には適用でき`tikv_raft_apply_log`ん。この状況では、各モジュールの消費時間をP999およびP99の時間と比較する方が合理的です。
 >
-> その理由は、非同期書き込み要求が10個ある場合、Raft KVは内部で10個の要求をバッチ実行にパックし、実行時間は1秒であるためです。したがって、各リクエストの実行時間は1秒、10リクエストの合計時間は10秒ですが、RaftKV処理の合計時間は1秒です。 `TOTAL_TIME`を使用して消費時間を測定すると、残りの9秒がどこで費やされているかがわからない場合があります。また、リクエストの総数（ `TOTAL_COUNT` ）から、RaftKVの監視メトリックと他の以前の監視メトリックの違いを確認できます。
+> その理由は、非同期書き込み要求が10個ある場合、 Raft KVは内部で10個の要求をバッチ実行にパックし、実行時間は1秒であるためです。したがって、各リクエストの実行時間は1秒、10リクエストの合計時間は10秒ですが、 Raft処理の合計時間は1秒です。 `TOTAL_TIME`を使用して消費時間を測定すると、残りの9秒がどこで費やされているかがわからない場合があります。また、リクエストの総数（ `TOTAL_COUNT` ）から、 Raftの監視メトリックと他の以前の監視メトリックの違いを確認できます。
 
 #### 各コンポーネントで発生したエラー {#errors-occurred-in-each-component}
 
@@ -220,7 +220,7 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 
 ##### TiDBコンポーネントにかかる時間 {#time-consumed-by-tidb-component}
 
-この表は、各TiDBモジュールで消費される時間と各時間消費の比率を示しています。これは、概要の`time consume`の表と同様ですが、この表のラベル情報はより詳細です。
+この表は、各TiDBモジュールで消費された時間と各時間の比率を示しています。これは、概要の`time consume`の表と同様ですが、この表のラベル情報はより詳細です。
 
 ##### TiDBサーバー接続 {#tidb-server-connections}
 
@@ -233,7 +233,7 @@ TiDBには自動診断結果が組み込まれています。各フィールド�
 ![Transaction report](/media/dashboard/dashboard-diagnostics-tidb-txn.png)
 
 -   `TOTAL_VALUE` ：レポートの時間範囲内のすべての値の合計（SUM）。
--   `TOTAL_COUNT` ：この監視メトリックの発生の総数。
+-   `TOTAL_COUNT` ：この監視メトリックの合計発生数。
 -   `P999` ：この監視メトリックの最大P999値。
 -   `P99` ：この監視メトリックの最大P99値。
 -   `P90` ：この監視メトリックの最大P90値。
@@ -279,7 +279,7 @@ TiKVモジュールの監視情報に関する表は次のとおりです。
 -   `TiKV Error` ：TiKVの各モジュールに関連するエラー情報。
 -   `TiKV Engine Size` ：TiKVの各ノードに保存されている列ファミリーのデータのサイズ。
 -   `Coprocessor Info` ：TiKVのコプロセッサーモジュールに関連する監視情報。
--   `Raft Info` ：TiKVのラフトモジュールの監視情報。
+-   `Raft Info` ：TiKVのRaftモジュールの監視情報。
 -   `Snapshot Info` ：TiKVのスナップショット関連の監視情報。
 -   `GC Info` ：TiKVのガベージコレクション（GC）関連の監視情報。
 -   `Cache Hit` ：TiKVのRocksDBの各キャッシュのヒット率情報。

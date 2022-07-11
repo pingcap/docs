@@ -22,7 +22,7 @@ TiDBバージョン：4.0.1
 -   TiFlash
 
     -   TiDBの新しい照合順序フレームワークをサポートする
-    -   `BitAnd/BitOr` `Json_length`を`If`に`BitXor/BitNot`ダウンすることをサポート
+    -   `BitAnd/BitOr` `Json_length`を`If`に`BitXor/BitNot`ダウンする関数をサポート
     -   TiFlashでの大規模なトランザクションのロックの解決ロジックをサポートする
 
 -   ツール
@@ -45,7 +45,7 @@ TiDBバージョン：4.0.1
 -   PD
 
     -   状況によっては配置ルールの設定ミスを防ぐ[＃2516](https://github.com/pingcap/pd/pull/2516)
-    -   配置ルールを削除するとパニックが発生する可能性がある問題を修正します[＃2515](https://github.com/pingcap/pd/pull/2515)
+    -   配置ルールを削除するとpanicが発生する可能性がある問題を修正します[＃2515](https://github.com/pingcap/pd/pull/2515)
     -   ストアの使用サイズがゼロの場合、ストア情報を取得できないバグを修正します[＃2474](https://github.com/pingcap/pd/pull/2474)
 
 -   TiFlash

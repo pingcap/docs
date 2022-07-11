@@ -54,7 +54,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 -   [ログイン](/tidb-cloud/manage-user-access.md#sign-in)
 -   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
--   [組織とプロジェクトを表示する](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
+-   [組織とプロジェクトをビューする](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
 -   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
 -   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
 -   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)

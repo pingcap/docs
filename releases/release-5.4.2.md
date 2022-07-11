@@ -4,7 +4,7 @@ title: TiDB 5.4.2 Release Notes
 
 # TiDB5.4.2リリースノート {#tidb-5-4-2-release-notes}
 
-発売日：2022年7月8日
+リリース日：2022年7月8日
 
 TiDBバージョン：5.4.2
 
@@ -43,29 +43,29 @@ TiDBバージョン：5.4.2
     -   悲観的なトランザクションで`WriteConflict`エラーを報告することは避けてください[＃11612](https://github.com/tikv/tikv/issues/11612)
     -   リージョンエラーとネットワークの問題が発生したときに、事前書き込み要求がべき等ではないという問題を修正します[＃34875](https://github.com/pingcap/tidb/issues/34875)
     -   ロールバックされる非同期コミットトランザクションがアトミック性[＃33641](https://github.com/pingcap/tidb/issues/33641)を満たさない可能性がある問題を修正します
-    -   以前は、ネットワーク接続の問題が発生したときに、TiDBが切断されたセッションによって保持されているリソースを常に正しく解放するとは限りませんでした。この問題は修正され、開いているトランザクションをロールバックしたり、その他の関連リソースを解放したりできるようになりました。 [＃34722](https://github.com/pingcap/tidb/issues/34722)
+    -   以前は、ネットワーク接続の問題が発生したときに、TiDBが切断されたセッションによって保持されているリソースを常に正しく解放するとは限りませんでした。この問題は修正され、開いているトランザクションをロールバックしたり、他の関連リソースを解放したりできるようになりました。 [＃34722](https://github.com/pingcap/tidb/issues/34722)
     -   TiDBが[＃33965](https://github.com/pingcap/tidb/issues/33965)でビューをクエリすると、 `references invalid table`のエラーが誤って報告される可能性がある問題を修正します。
-    -   `fatal error: concurrent map read and map write`エラー[＃35340](https://github.com/pingcap/tidb/issues/35340)によって引き起こされるパニックの問題を修正します
+    -   `fatal error: concurrent map read and map write`エラー[＃35340](https://github.com/pingcap/tidb/issues/35340)によって引き起こされるpanicの問題を修正します
 
 -   TiKV
 
-    -   `max_sample_size`が[＃11192](https://github.com/tikv/tikv/issues/11192)に設定されているときに統計を分析することによって引き起こされるパニックの問題を修正し`0`
+    -   `max_sample_size`が[＃11192](https://github.com/tikv/tikv/issues/11192)に設定されているときに統計を分析することによって引き起こされるpanicの問題を修正し`0`
     -   TiKV1を終了するときに誤ってTiKVパニックを報告する潜在的な問題を修正し[＃12231](https://github.com/tikv/tikv/issues/12231)
-    -   リージョンマージプロセスでソースピアがスナップショットによってログをキャッチするときに発生する可能性があるパニックの問題を修正します[＃12663](https://github.com/tikv/tikv/issues/12663)
-    -   ピアが分割され、同時に破壊されているときに発生する可能性のあるパニックの問題を修正します[＃12825](https://github.com/tikv/tikv/issues/12825)
+    -   リージョンマージプロセスでソースピアがスナップショットによってログをキャッチするときに発生する可能性があるpanicの問題を修正します[＃12663](https://github.com/tikv/tikv/issues/12663)
+    -   ピアが分割され、同時に破壊されているときに発生する可能性のあるpanicの問題を修正します[＃12825](https://github.com/tikv/tikv/issues/12825)
     -   PDクライアントがエラー[＃12345](https://github.com/tikv/tikv/issues/12345)に遭遇したときに発生する頻繁なPDクライアント再接続の問題を修正します
     -   `DATETIME`の値に小数部と[＃12739](https://github.com/tikv/tikv/issues/12739)が含まれている場合に発生する時間解析エラーの問題を修正し`Z`
     -   空の文字列の型変換を実行するときにTiKVがパニックになる問題を修正します[＃12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効になっている場合に、悲観的なトランザクションで重複する可能性のあるコミットレコードを修正します[＃12615](https://github.com/tikv/tikv/issues/12615)
     -   FollowerRead3を使用するとTiKVが`invalid store ID 0`エラーを報告する問題を修正し[＃12478](https://github.com/tikv/tikv/issues/12478)
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVパニックの問題を修正します
+    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVpanicの問題を修正します
     -   文字列の一致が正しくないためにtikv-ctlが誤った結果を返す問題を修正します[＃12329](https://github.com/tikv/tikv/issues/12329)
     -   AUFS1でTiKVを開始できない問題を修正し[＃12543](https://github.com/tikv/tikv/issues/12543)
 
 -   PD
 
     -   13の間違ったステータス`not leader`を修正し[＃4797](https://github.com/tikv/pd/issues/4797)
-    -   ホットリージョンにリーダーがない場合に発生するPDパニックを修正する[＃5005](https://github.com/tikv/pd/issues/5005)
+    -   ホットリージョンにリーダーがない場合に発生するPDpanicを修正する[＃5005](https://github.com/tikv/pd/issues/5005)
     -   PDリーダーの転送直後にスケジューリングを開始できない問題を修正します[＃4769](https://github.com/tikv/pd/issues/4769)
     -   一部のコーナーケースでのTSOフォールバックのバグを修正[＃4884](https://github.com/tikv/pd/issues/4884)
 
@@ -81,7 +81,7 @@ TiDBバージョン：5.4.2
 
         -   BRがRawKVモード[＃35279](https://github.com/pingcap/tidb/issues/35279)で`ErrRestoreTableIDMismatch`を報告するバグを修正します
         -   ファイルの保存中にエラーが発生したときにBRが再試行しないバグを修正します[＃34865](https://github.com/pingcap/tidb/issues/34865)
-        -   BRが実行されているときのパニックの問題を修正します[＃34956](https://github.com/pingcap/tidb/issues/34956)
+        -   BRが実行されているときのpanicの問題を修正します[＃34956](https://github.com/pingcap/tidb/issues/34956)
         -   BRがS3内部エラーを処理できない問題を修正します[＃34350](https://github.com/pingcap/tidb/issues/34350)
         -   復元操作で回復不能なエラーが発生したときにBRがスタックするバグを修正します[＃33200](https://github.com/pingcap/tidb/issues/33200)
 

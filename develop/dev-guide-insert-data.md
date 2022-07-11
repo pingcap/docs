@@ -84,7 +84,7 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-デフォルトのMySQLJDBCドライバー設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
+デフォルトのMySQLJDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
 |            パラメータ           |                意味                |                                                                   推奨シナリオ                                                                  | 推奨されるConfiguration / コンフィグレーション |
 | :------------------------: | :------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------: |
@@ -111,7 +111,7 @@ connectionAttributes=none
 useInformationSchema=true
 ```
 
-`mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties`をチェックすると、対応するバージョンのMySQLJDBCDriverの`useConfigs=maxPerformance`に含まれる構成を取得できます。
+`mysql-connector-java-{version}.jar!/com/mysql/cj/configurations/maxPerformance.properties`をチェックすると、対応するバージョンのDriverの`useConfigs=maxPerformance`に含まれる構成を取得できます。
 
 以下は、JDBC接続文字列構成の一般的なシナリオです。この例では、ホスト： `127.0.0.1` 、ポート： `4000` 、ユーザー名： `root` 、パスワード：null、デフォルトのデータベース： `test` ：
 
@@ -138,7 +138,7 @@ Javaの完全な例については、以下を参照してください。
 一括挿入に推奨されるツールは次のとおりです。
 
 -   データのエクスポート： [Dumpling](/dumpling-overview.md) 。 MySQLまたはTiDBデータをローカルまたはAmazonS3にエクスポートできます。
--   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**のエクスポートされたデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
+-   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。**Dumpling**のエクスポートされたデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
 -   データ複製： [TiDBデータ移行](/dm/dm-overview.md) 。 MySQL、MariaDB、およびAuroraデータベースをTiDBに複製できます。また、シャーディングされたインスタンスとテーブルのソースデータベースからのマージと移行もサポートしています。
 -   データのバックアップと復元： [バックアップと復元（BR）](/br/backup-and-restore-overview.md) 。**Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオに適しています。
 

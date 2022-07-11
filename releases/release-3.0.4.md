@@ -24,7 +24,7 @@ TiDB Ansibleバージョン：3.0.4
     -   TiDBにグローバルスコープの`tidb_txn_mode`のシステム変数を追加し、ペシミスティックロックの使用を許可します。 TiDBはデフォルトで楽観的ロックを採用していることに注意してください
     -   低速クエリログの使いやすさを向上させるために、TiDB低速クエリログの`Index_ids`フィールドを`Index_names`に置き換えます
     -   TiDB構成ファイルに`split-region-max-num`つのパラメーターを追加して、 `SPLIT TABLE`の構文で許可されるリージョンの最大数を変更します。
-    -   SQLの実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返します
+    -   SQLの実行がメモリ制限を超えたときにリンクを切断する代わりに、 `Out Of Memory Quota`エラーを返します
     -   誤操作を避けるために、TiDBの列の`AUTO_INCREMENT`属性を削除することを禁止します。この属性を削除するには、 `tidb_allow_remove_auto_inc`システム変数を変更します
 -   修正された問題
     -   コメント化されていないTiDB固有の構文`PRE_SPLIT_REGIONS`により、データレプリケーション中にダウンストリームデータベースでエラーが発生する可能性がある問題を修正します
@@ -43,7 +43,7 @@ TiDB Ansibleバージョン：3.0.4
 -   SQLオプティマイザー
     -   フィードバックによって分割されたときに無効なクエリ範囲が発生する可能性がある問題を修正します[＃12170](https://github.com/pingcap/tidb/pull/12170)
     -   結果に無効なキーが含まれている場合にエラーを返すのではなく、 `SHOW STATS_BUCKETS`ステートメントの返されたエラーを16進数で表示します[＃12094](https://github.com/pingcap/tidb/pull/12094)
-    -   クエリに`SLEEP`関数（たとえば、 `select 1 from (select sleep(1)) t;)` ）が含まれている場合、列の整理によってクエリ[＃11953](https://github.com/pingcap/tidb/pull/11953)で無効な`sleep(1)`が発生する問題を修正します。
+    -   クエリに`SLEEP`関数（たとえば、 `select 1 from (select sleep(1)) t;)` ）が含まれている場合、列の整理によってクエリ[＃11953](https://github.com/pingcap/tidb/pull/11953)中に無効な`sleep(1)`が発生する問題を修正します。
     -   クエリがテーブルデータではなく列数のみに関係する場合は、インデックススキャンを使用してIOを下げます[＃12112](https://github.com/pingcap/tidb/pull/12112)
     -   MySQL [＃12100](https://github.com/pingcap/tidb/pull/12100)と互換性があるように、 `use index()`にインデックスが指定されていない場合は、インデックスを使用しないでください。
     -   `CMSketch`の統計の`TopN`のレコードの数を厳密に制限して、ステートメントの数がトランザクションのサイズに関するTiDBの制限を超えたために`ANALYZE`のステートメントが失敗するという問題を修正します[＃11914](https://github.com/pingcap/tidb/pull/11914)
@@ -52,7 +52,7 @@ TiDB Ansibleバージョン：3.0.4
 -   SQL実行エンジン
     -   `PREPARED`ステートメントが正しく実行されなかった場合にSQLステートメントをログに出力します[＃12191](https://github.com/pingcap/tidb/pull/12191)
     -   `UNIX_TIMESTAMP`関数を使用してパーティショニング[＃12169](https://github.com/pingcap/tidb/pull/12169)を実装する場合は、パーティションプルーニングをサポートします。
-    -   `AUTO_INCREMENT`が`MAX int64`と[＃12162](https://github.com/pingcap/tidb/pull/12162)を誤って割り当てたときにエラーが報告されない問題を修正し`MAX uint64` 。
+    -   `AUTO_INCREMENT`が`MAX int64`と[＃12162](https://github.com/pingcap/tidb/pull/12162)を誤って割り当てたときにエラーが報告されないという問題を修正し`MAX uint64` 。
     -   `SHOW TABLE … REGIONS`および`SHOW TABLE .. INDEX … REGIONS`構文に`WHERE`句を追加します[＃12123](https://github.com/pingcap/tidb/pull/12123)
     -   SQLの実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返します[＃12127](https://github.com/pingcap/tidb/pull/12127)
     -   `JSON_UNQUOTE`の関数がJSONテキストを処理すると誤った結果が返される問題を修正します[＃11955](https://github.com/pingcap/tidb/pull/11955)
@@ -72,7 +72,7 @@ TiDB Ansibleバージョン：3.0.4
     -   低速クエリログの使いやすさを向上させるために、TiDB低速クエリログの`Index_ids`フィールドを`Index_names`に置き換えます[＃12061](https://github.com/pingcap/tidb/pull/12061)
     -   TiDBにグローバルスコープの`tidb_txn_mode`のシステム変数を追加し、ペシミスティックロック[＃12049](https://github.com/pingcap/tidb/pull/12049)の使用を許可します
     -   低速クエリログに`Backoff`フィールドを追加して、 [＃12335](https://github.com/pingcap/tidb/pull/12335)のコミットフェーズでのバックオフ情報を記録します。
-    -   カーソル（たとえば、 `PREPARE stmt1FROM SELECT * FROM t WHERE a > ?; EXECUTE stmt1 USING @variable` ）を使用して`PREPARE` + `EXECUTE`の結果を取得するときに、低速のクエリログが正しくない問題を修正します[＃12392](https://github.com/pingcap/tidb/pull/12392)
+    -   カーソル（たとえば、 `PREPARE stmt1FROM SELECT * FROM t WHERE a > ?; EXECUTE stmt1 USING @variable` ）を使用して`PREPARE` + `EXECUTE`の結果を取得すると、遅いクエリログが正しくないという問題を修正します[＃12392](https://github.com/pingcap/tidb/pull/12392)
     -   サポート`tidb_enable_stmt_summary` 。この機能を有効にすると、 [＃12308](https://github.com/pingcap/tidb/pull/12308)はSQLステートメントをカウントし、システムテーブル35を使用して結果を照会でき`performance_schema.events_statements_summary_by_digest` 。
     -   tikv-clientの一部のログのレベルを調整します（たとえば、 `batchRecvLoop fails`のログレベルを`ERROR`から`INFO`に変更します） [＃12383](https://github.com/pingcap/tidb/pull/12383)
 -   DDL
@@ -113,7 +113,7 @@ TiDB Ansibleバージョン：3.0.4
     -   Reparoに`worker-count`と`txn-batch`の構成項目を追加して、回復速度を制御します[＃746](https://github.com/pingcap/tidb-binlog/pull/746)
     -   Drainerのメモリ使用量を最適化して、同時実行の効率を高めます[＃737](https://github.com/pingcap/tidb-binlog/pull/737)
 -   TiDB Lightning
-    -   チェックポイントからデータを再インポートすると、TiDBLightningがパニックになる可能性がある問題を修正します[＃237](https://github.com/pingcap/tidb-lightning/pull/237)
+    -   チェックポイントからデータを再インポートすると、 TiDB Lightningがpanicになる可能性がある問題を修正します[＃237](https://github.com/pingcap/tidb-lightning/pull/237)
     -   `AUTO_INCREMENT`のアルゴリズムを最適化して、 `AUTO_INCREMENT`列がオーバーフローするリスクを減らします[＃227](https://github.com/pingcap/tidb-lightning/pull/227)
 
 ## TiDB Ansible {#tidb-ansible}

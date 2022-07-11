@@ -25,7 +25,7 @@ MySQLと同様に、TiDBには静的パラメーターとソリッドパラメ�
 
 ### TiDB（TiKV）のデータディレクトリはどこにありますか？ {#where-and-what-are-the-data-directories-in-tidb-tikv}
 
-TiKVデータは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、db、raft、およびsnapの4つのディレクトリが含まれ、それぞれバックアップ、データ、Raftデータ、およびミラーデータを格納するために使用されます。
+TiKVデータは[`--data-dir`](/command-line-flags-for-tikv-configuration.md#--data-dir)にあり、バックアップ、db、raft、およびsnapの4つのディレクトリが含まれ、それぞれバックアップ、データ、 Raftデータ、およびミラーデータを格納するために使用されます。
 
 ### TiDBのシステムテーブルは何ですか？ {#what-are-the-system-tables-in-tidb}
 
@@ -47,7 +47,7 @@ MySQLと同様に、TiDBにはシステムテーブルも含まれており、�
 
     最初に`information_schema.cluster_processlist`を使用してTiDBインスタンスアドレスとセッションIDを見つけてから、killコマンドを実行します。
 
-    TiDB v6.1.0では、グローバルキル機能が導入されています（デフォルトで有効になっている`enable-global-kill`の構成によって制御されます）。グローバルキルが有効になっている場合は、 `kill session_id`を実行するだけです。
+    TiDB v6.1.0では、グローバルキル機能が導入されています（デフォルトで有効になっている`enable-global-kill`構成で制御されます）。グローバルキルが有効になっている場合は、 `kill session_id`を実行するだけです。
 
     TiDBのバージョンがv6.1.0より前の場合、またはグローバルキル機能が有効になっていない場合、デフォルトでは`kill session_id`は有効になりません。 DMLステートメントを終了するには、DMLステートメントを実行しているTiDBインスタンスにクライアントを直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別のTiDBインスタンスに接続する場合、またはクライアントとTiDBクラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別のTiDBインスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
@@ -138,7 +138,7 @@ PDのほとんどのAPIは、TiKVクラスタが初期化されている場合�
 
 ### PDの時刻同期誤差の最大許容値はどれくらいですか？ {#what-s-the-maximum-tolerance-for-time-synchronization-error-of-pd}
 
-PDは同期エラーを許容できますが、エラー値が大きいほど、PDによって割り当てられたタイムスタンプと物理時間の間のギャップが大きくなり、履歴バージョンの読み取りなどの機能に影響します。
+PDは同期エラーを許容できますが、エラー値が大きいほど、PDによって割り当てられたタイムスタンプと物理時間の間のギャップが大きくなり、履歴バージョンの読み取りなどの関数に影響します。
 
 ### クライアント接続はどのようにしてPDを見つけますか？ {#how-does-the-client-connection-find-pd}
 
@@ -148,7 +148,7 @@ PDは同期エラーを許容できますが、エラー値が大きいほど、
 
 各ステータスの関係については、 [TiKVストアの各ステータス間の関係](/tidb-scheduling.md#information-collection)を参照してください。
 
-PD制御を使用して、TiKVストアのステータス情報を確認できます。
+PD Controlを使用して、TiKVストアのステータス情報を確認できます。
 
 ### PDの<code>leader-schedule-limit</code>と<code>region-schedule-limit</code>スケジューリングパラメータの違いは何ですか？ {#what-is-the-difference-between-the-code-leader-schedule-limit-code-and-code-region-schedule-limit-code-scheduling-parameters-in-pd}
 
@@ -159,7 +159,7 @@ PD制御を使用して、TiKVストアのステータス情報を確認でき�
 
 はい。現在、更新できるのはグローバル数のレプリカのみです。初めて起動すると、PDは構成ファイル（conf / pd.yml）を読み取り、その中のmax-replicas構成を使用します。後で番号を更新する場合は、pd-ctl設定コマンド`config set max-replicas $num`を使用し、 `config show all`を使用して有効な設定を表示します。更新はアプリケーションに影響を与えず、バックグラウンドで構成されます。
 
-TiKVインスタンスの総数が、設定したレプリカの数以上であることを常に確認してください。たとえば、3つのレプリカには少なくとも3つのTiKVインスタンスが必要です。レプリカの数を増やす前に、追加のストレージ要件を見積もる必要があります。 pd-ctlの詳細については、 [PD制御ユーザーガイド](/pd-control.md)を参照してください。
+TiKVインスタンスの総数が、設定したレプリカの数以上であることを常に確認してください。たとえば、3つのレプリカには少なくとも3つのTiKVインスタンスが必要です。レプリカの数を増やす前に、追加のストレージ要件を見積もる必要があります。 pd-ctlの詳細については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### コマンドラインクラスタ管理ツールがない場合にクラスタ全体のヘルスステータスを確認するにはどうすればよいですか？ {#how-to-check-the-health-status-of-the-whole-cluster-when-lacking-command-line-cluster-management-tools}
 
@@ -213,7 +213,7 @@ TiDBサーバーとTiKVサーバー間の通信処理では、大量のデータ
 
 ### TiDB TiClientタイプの主な理由は何ですか？ {#what-is-the-main-reason-of-tidb-ticlient-type}
 
-TiClientリージョンエラーインジケータは、クライアントとしてのTiDBサーバーがKVインターフェイスを介してTiKVサーバーにアクセスしてデータ操作を実行するときに表示されるエラータイプとメトリックを示します。エラータイプには`not_leader`と`stale_epoch`が含まれます。これらのエラーは、TiDBサーバーが自身のキャッシュ情報に従ってリージョンリーダーデータを操作する場合、リージョンリーダーが移行した場合、または現在のTiKVリージョン情報とTiDBキャッシュのルーティング情報に一貫性がない場合に発生します。通常、この場合、TiDBサーバーはPDから最新のルーティングデータを自動的に取得し、前の操作をやり直します。
+TiClientリージョンエラーインジケータは、クライアントとしてのTiDBサーバーがKVインターフェイスを介してTiKVサーバーにアクセスしてデータ操作を実行するときに表示されるエラータイプとメトリックを示します。エラータイプには、 `not_leader`と`stale_epoch`が含まれます。これらのエラーは、TiDBサーバーが自身のキャッシュ情報に従ってリージョンリーダーデータを操作する場合、リージョンリーダーが移行した場合、または現在のTiKVリージョン情報とTiDBキャッシュのルーティング情報に一貫性がない場合に発生します。通常、この場合、TiDBサーバーはPDから最新のルーティングデータを自動的に取得し、前の操作をやり直します。
 
 ### TiDBがサポートする同時接続の最大数はいくつですか？ {#what-s-the-maximum-number-of-concurrent-connections-that-tidb-supports}
 
@@ -299,7 +299,7 @@ GROUP BY
 
 ### TiKVを起動すると、 <code>duplicated store address</code>メッセージが表示されます {#the-code-duplicated-store-address-code-message-is-displayed-when-starting-tikv}
 
-これは、スタートアップパラメータのアドレスが他のTiKVによってPDクラスタに登録されているためです。このエラーの原因となる一般的な条件：TiKV `--data-dir`で指定されたパスにデータフォルダーがありません（削除または移動後に更新--data-dirがありません）、前のパラメーターでTiKVを再起動してください.pd-ctlの[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)の機能を試してください。前のストアを削除してから、TiKVを再起動します。
+これは、スタートアップパラメータのアドレスが他のTiKVによってPDクラスタに登録されているためです。このエラーの原因となる一般的な条件：TiKV `--data-dir`で指定されたパスにデータフォルダがありません（削除または移動後に更新--data-dirがありません）、前のパラメータでTiKVを再起動してください.pd-ctlの[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)の機能を試してください。前のストアを削除してから、TiKVを再起動します。
 
 ### TiKVプライマリノードとセカンダリノードは同じ圧縮アルゴリズムを使用していますが、結果が異なるのはなぜですか？ {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
 
@@ -307,12 +307,12 @@ GROUP BY
 
 ### TiKVブロックキャッシュの機能は何ですか？ {#what-are-the-features-of-tikv-block-cache}
 
-TiKVは、RocksDBの列ファミリー（CF）機能を実装しています。デフォルトでは、KVデータは最終的にRocksDB内の3つのCF（デフォルト、書き込み、ロック）に保存されます。
+TiKVは、RocksDBのカラムファミリー（CF）機能を実装しています。デフォルトでは、KVデータは最終的にRocksDB内の3つのCF（デフォルト、書き込み、ロック）に保存されます。
 
 -   デフォルトのCFは実際のデータを格納し、対応するパラメーターは`[rocksdb.defaultcf]`にあります。
 -   書き込みCFは、データバージョン情報（MVCC）とインデックス関連データを格納し、対応するパラメータは`[rocksdb.writecf]`にあります。
 -   ロックCFはロック情報を保存し、システムはデフォルトパラメータを使用します。
--   RaftRocksDBインスタンスはRaftログを保存します。デフォルトのCFは主にRaftログを格納し、対応するパラメーターは`[raftdb.defaultcf]`にあります。
+-   RaftRaftを保存します。デフォルトのCFは主にRaftログを保存し、対応するパラメーターは`[raftdb.defaultcf]`にあります。
 -   すべてのCFには、データブロックをキャッシュし、RocksDBの読み取り速度を向上させるための共有ブロックキャッシュがあります。ブロックキャッシュのサイズは、 `block-cache-size`パラメーターによって制御されます。パラメータの値が大きいほど、より多くのホットデータをキャッシュでき、読み取り操作に適しています。同時に、より多くのシステムメモリを消費します。
 -   各CFには個別の書き込みバッファーがあり、サイズは`write-buffer-size`パラメーターによって制御されます。
 
@@ -329,7 +329,7 @@ TiKVは、RocksDBの列ファミリー（CF）機能を実装しています。�
 
 ### ノードがダウンした場合、サービスは影響を受けますか？はいの場合、どのくらいですか？ {#if-a-node-is-down-will-the-service-be-affected-if-yes-how-long}
 
-TiKVは、Raftを使用して、複数のレプリカ間でデータを複製します（デフォルトでは、リージョンごとに3つのレプリカ）。 1つのレプリカで問題が発生した場合、他のレプリカでデータの安全性を保証できます。 Raftプロトコルに基づいて、ノードがダウンしたときに1つのリーダーに障害が発生した場合、最大2 *のリース時間（リース時間は10秒）の後、別のノードのフォロワーがすぐにリージョンリーダーとして選出されます。
+TiKVは、 Raftを使用して、複数のレプリカ間でデータを複製します（デフォルトでは、リージョンごとに3つのレプリカ）。 1つのレプリカで問題が発生した場合、他のレプリカでデータの安全性を保証できます。 Raftプロトコルに基づいて、ノードがダウンしたときに1つのリーダーに障害が発生した場合、最大2 *のリース時間（リース時間は10秒）の後、別のノードのフォロワーがすぐにリージョンリーダーとして選出されます。
 
 ### 高いI/O、メモリ、CPUを使用し、パラメータ構成を超えるTiKVシナリオは何ですか？ {#what-are-the-tikv-scenarios-that-take-up-high-i-o-memory-cpu-and-exceed-the-parameter-configuration}
 
@@ -367,9 +367,9 @@ WALは順序付き書き込みに属しており、現在、独自の構成を�
 
 ### Raft + TiKVアーキテクチャの複数のレプリカは、絶対的なデータの安全性を実現できますか？最も厳密なモード（ <code>sync-log = true</code> ）をスタンドアロンストレージに適用する必要がありますか？ {#can-raft-multiple-replicas-in-the-tikv-architecture-achieve-absolute-data-safety-is-it-necessary-to-apply-the-most-strict-mode-code-sync-log-true-code-to-a-standalone-storage}
 
-[いかだコンセンサスアルゴリズム](https://raft.github.io/)を使用してTiKVノード間でデータが冗長に複製され、ノード障害が発生した場合の回復可能性が確保されます。データがレプリカの50％以上に書き込まれた場合にのみ、アプリケーションはACK（3つのノードのうち2つ）を返します。ただし、理論的には、2つのノードがクラッシュする可能性があります。したがって、データの安全性に関する要件はそれほど厳しくなく、パフォーマンスに関する要件が極端なシナリオを除いて、 `sync-log`モードを有効にすることを強くお勧めします。
+ノード障害が発生した場合の回復可能性を確保するために、 [Raftコンセンサスアルゴリズム](https://raft.github.io/)を使用してTiKVノード間でデータが冗長に複製されます。データがレプリカの50％以上に書き込まれた場合にのみ、アプリケーションはACK（3つのノードのうち2つ）を返します。ただし、理論的には、2つのノードがクラッシュする可能性があります。したがって、データの安全性に関する要件はそれほど厳しくなく、パフォーマンスに関する要件が極端なシナリオを除いて、 `sync-log`モードを有効にすることを強くお勧めします。
 
-`sync-log`を使用する代わりに、Raftグループに3つではなく5つのレプリカを用意することを検討することもできます。これにより、データの安全性を維持しながら、2つのレプリカの障害が発生する可能性があります。
+`sync-log`を使用する代わりに、 Raftグループに3つではなく5つのレプリカを用意することを検討することもできます。これにより、データの安全性を維持しながら、2つのレプリカの障害が発生する可能性があります。
 
 スタンドアロンのTiKVノードの場合でも、 `sync-log`モードを有効にすることをお勧めします。そうしないと、ノードに障害が発生した場合に最後の書き込みが失われる可能性があります。
 
@@ -429,4 +429,4 @@ TiDBは、小さなサイズのデータと限られたリージョンでは同�
 
 現在、大量のデータ（1 TBを超える）のバックアップには、 [BR](/br/backup-and-restore-overview.md)を使用する方法が推奨されます。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式のMySQLツール`mysqldump`はデータのバックアップと復元のためにTiDBでもサポートされていますが、そのパフォーマンスはBRに勝るものはなく、大量のデータのバックアップと復元にははるかに長い時間が必要です。
 
-BRに関するその他のFAQについては、 [BRのよくある質問](/br/backup-and-restore-faq.md)を参照してください。
+BRに関するその他のFAQについては、 [BRに関するFAQ](/br/backup-and-restore-faq.md)を参照してください。

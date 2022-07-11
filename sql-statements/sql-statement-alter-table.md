@@ -161,7 +161,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 -   主キー列の[Reorg-データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
 
--   パーティション表の列タイプの変更はサポートされていません。
+-   パーティションテーブルの列タイプの変更はサポートされていません。
 
 -   生成された列の列タイプの変更はサポートされていません。
 

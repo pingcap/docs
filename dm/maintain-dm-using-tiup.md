@@ -5,7 +5,7 @@ summary: Learn how to maintain a DM cluster using TiUP.
 
 # TiUPを使用してDMクラスターを管理する {#maintain-a-dm-cluster-using-tiup}
 
-このドキュメントでは、TiUPDMコンポーネントを使用してDMクラスタを保守する方法を紹介します。
+このドキュメントでは、 TiUP DMコンポーネントを使用してDMクラスタを保守する方法を紹介します。
 
 DMクラスタをまだデプロイしていない場合は、 [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を参照して手順を確認できます。
 
@@ -59,7 +59,7 @@ Flags:
   -y, --yes                Skip all confirmations and assumes 'yes'
 ```
 
-## クラスタリストを表示する {#view-the-cluster-list}
+## クラスタリストをビューする {#view-the-cluster-list}
 
 クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタリストを表示します。
 
@@ -77,7 +77,7 @@ prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiu
 
 ## クラスタを開始します {#start-the-cluster}
 
-クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを起動します。
+クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを開始します。
 
 {{< copyable "" >}}
 
@@ -145,7 +145,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 ## クラスタをスケールアウトする {#scale-out-a-cluster}
 
-スケールアウト操作には、展開と同様の内部ロジックがあります。TiUPDMコンポーネントは、最初にノードのSSH接続を確認し、ターゲットノードに必要なディレクトリを作成してから、展開操作を実行し、ノードサービスを開始します。
+スケールアウト操作には、展開と同様の内部ロジックがありますTiUP DMコンポーネントは、最初にノードのSSH接続を確認し、ターゲットノードに必要なディレクトリを作成してから、展開操作を実行し、ノードサービスを開始します。
 
 たとえば、 `prod-cluster`クラスタのDM-workerノードをスケールアウトするには、次の手順を実行します（DM-masterのスケールアウトにも同様の手順があります）。
 
@@ -199,7 +199,7 @@ tiup dm upgrade prod-cluster ${version}
 
 ## 構成を更新する {#update-configuration}
 
-コンポーネント構成を動的に更新する場合、TiUPDMコンポーネントは各クラスタの現在の構成を保存します。この構成を編集するには、 `tiup dm edit-config <cluster-name>`コマンドを実行します。例えば：
+コンポーネント構成を動的に更新する場合、 TiUP DMコンポーネントは各クラスタの現在の構成を保存します。この構成を編集するには、 `tiup dm edit-config <cluster-name>`コマンドを実行します。例えば：
 
 {{< copyable "" >}}
 
@@ -273,7 +273,7 @@ tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 > -   TiUPは、v2.0.0-rc.2以降のバージョンのDMクラスタへのインポートのみをサポートします。
 > -   `import`コマンドは、DM1.0クラスタから新しいDM2.0クラスターにデータをインポートするために使用されクラスタ。 DM移行タスクを既存のDM2.0クラスタにインポートする必要がある場合は、 [TiDBデータ移行をv1.0.xからv2.0+に手動でアップグレードする](/dm/manually-upgrade-dm-1.0-to-2.0.md)を参照してください。
 > -   一部のコンポーネントのデプロイメントディレクトリは、元のクラスタのデプロイメントディレクトリとは異なります。 `display`コマンドを実行して詳細を表示できます。
-> -   インポートする前に`tiup update --self && tiup update dm`を実行して、TiUPDMコンポーネントが最新バージョンであることを確認します。
+> -   インポートする前に`tiup update --self && tiup update dm`を実行して、 TiUP DMコンポーネントが最新バージョンであることを確認します。
 > -   インポート後、クラスタにはDMマスターノードが1つだけ存在します。 DMマスターをスケールアウトするには、 [クラスタをスケールアウトする](#scale-out-a-cluster)を参照してください。
 
 TiUPがリリースされる前は、DM-Ansibleを使用してDMクラスターをデプロイすることがよくあります。 TiUPがDM-AnsibleによってデプロイされたDM1.0クラスタを引き継ぐことができるようにするには、 `import`コマンドを使用します。
@@ -295,7 +295,7 @@ tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 
 展開が完了したら、 `tiup dm start`コマンドを実行してクラスタを開始し、DMカーネルのアップグレードプロセスを開始できます。
 
-## 操作ログを表示する {#view-the-operation-log}
+## 操作ログをビューする {#view-the-operation-log}
 
 操作ログを表示するには、 `audit`コマンドを使用します。 `audit`コマンドの使用法は次のとおりです。
 
@@ -323,7 +323,7 @@ ID      Time                  Command
 4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
 ```
 
-最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`の引数を渡します。
+最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`引数を渡します。
 
 {{< copyable "" >}}
 

@@ -19,7 +19,7 @@ TiDBの使用を開始する前に、TiDBがどのように機能するかにつ
 
 ## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 
-TiDBは分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)モードと[悲観的なトランザクション](/pessimistic-transaction.md)モードの両方を提供します。現在のバージョンのTiDBは、デフォルトで**悲観的トランザクション**モードを使用します。これにより、従来のモノリシックデータベース（MySQLなど）と同じようにTiDBでトランザクションを実行できます。
+TiDBは分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)モードと[悲観的な取引](/pessimistic-transaction.md)モードの両方を提供します。現在のバージョンのTiDBは、デフォルトで**悲観的トランザクション**モードを使用します。これにより、従来のモノリシックデータベース（MySQLなど）と同じようにTiDBでトランザクションを実行できます。
 
 [`BEGIN`](/sql-statements/sql-statement-begin.md)を使用してトランザクションを開始するか、 `BEGIN PESSIMISTIC`を使用して**悲観的なトランザクション**を明示的に指定するか、 `BEGIN OPTIMISTIC`を使用して<strong>楽観的なトランザクション</strong>を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）またはロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）することができます。
 

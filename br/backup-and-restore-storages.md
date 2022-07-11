@@ -5,7 +5,7 @@ summary: Describes the storage URL format used in BR, TiDB Lightning, and Dumpli
 
 # 外部ストレージ {#external-storages}
 
-Backup＆Restore（BR）、TiDB Lightning、およびDumplingは、ローカルファイルシステムおよびAmazonS3でのデータの読み取りと書き込みをサポートします。 BRは、 [Google Cloud Storage（GCS）](/br/backup-storage-gcs.md)と[Azure Blob Storage（Azblob）](/br/backup-storage-azblob.md)のデータの読み取りと書き込みもサポートしています。これらは、BRに渡される`--storage`パラメーター、TiDB Lightningに渡される`-d`パラメーター、およびDumplingに渡される`--output` （ `-o` ）パラメーターのURLスキームによって区別されます。
+Backup＆Restore（BR）、 TiDB Lightning、およびDumplingは、ローカルファイルシステムとAmazonS3でのデータの読み取りと書き込みをサポートします。 BRは、 [Google Cloud Storage（GCS）](/br/backup-storage-gcs.md)と[Azure Blob Storage（Azblob）](/br/backup-storage-azblob.md)のデータの読み取りと書き込みもサポートしています。これらは、BRに渡される`--storage`パラメーター、 TiDB Lightningに渡される`-d`パラメーター、およびDumplingに渡される`--output` （ `-o` ）パラメーターのURLスキームによって区別されます。
 
 ## スキーム {#schemes}
 
@@ -93,8 +93,8 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
 2.  `$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`の環境変数
 3.  `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにあるツールノードの共有クレデンシャルファイル
 4.  `~/.aws/credentials`のツールノードにある共有クレデンシャルファイル
-5.  AmazonEC2コンテナの現在のIAMの役割
-6.  AmazonECSタスクの現在のIAMの役割
+5.  AmazonEC2コンテナの現在のIAMロール
+6.  AmazonECSタスクの現在のIAMロール
 
 ### GCSURLパラメータ {#gcs-url-parameters}
 
@@ -183,7 +183,7 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
         --log-file backuptable.log
     ```
 
--   TiDBLightningを使用してAlibabaCloudOSSにデータをエクスポートします。 YAML形式の構成ファイルで次のコンテンツを指定する必要があります。
+-   TiDB Lightningにデータをエクスポートします。 YAML形式の構成ファイルで次のコンテンツを指定する必要があります。
 
     {{< copyable "" >}}
 
@@ -224,4 +224,4 @@ AWS S3以外のクラウドストレージにデータをエクスポートす�
 BACKUP DATABASE * TO 's3://bucket-name/prefix' SEND_CREDENTIALS_TO_TIKV = FALSE;
 ```
 
-2つのアプリケーションは現在スタンドアロンであるため、このオプションはTiDBLightningおよびDumplingではサポートされていません。
+2つのアプリケーションは現在スタンドアロンであるため、このオプションはTiDB LightningおよびDumplingではサポートされていません。

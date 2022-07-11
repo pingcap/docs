@@ -21,9 +21,9 @@ SSTファイル（キーと値のペア）のバックアップ、または遅�
 2.  データのフィルタリングを容易にする[テーブルフィルター](https://github.com/pingcap/tidb-tools/blob/master/pkg/table-filter/README.md)つの機能をサポートします
 3.  AmazonS3クラウドストレージへのデータのエクスポートをサポートします。
 4.  TiDBに対してさらに最適化が行われます。
-    -   単一のTiDBSQLステートメントのメモリ制限の構成をサポート
+    -   単一のTiDB SQLステートメントのメモリ制限の構成をサポート
     -   TiDBv4.0.0以降のTiDBGC時間の自動調整をサポート
-    -   TiDBの非表示列`_tidb_rowid`を使用して、単一のテーブルからの同時データエクスポートのパフォーマンスを最適化します
+    -   TiDBの非表示の列`_tidb_rowid`を使用して、単一のテーブルからの同時データエクスポートのパフォーマンスを最適化します
     -   TiDBの場合、値[`tidb_snapshot`](/read-historical-data.md#how-tidb-reads-data-from-history-versions)を設定して、データバックアップの時点を指定できます。これにより、一貫性を確保するために`FLUSH TABLES WITH READ LOCK`を使用する代わりに、バックアップの一貫性が保証されます。
 
 ## Dumpling紹介 {#dumpling-introduction}
@@ -36,7 +36,7 @@ Dumplingを使用する場合は、実行中のクラスタでexportコマンド
 
 `tiup install dumpling`を実行すると、 [TiUP](/tiup/tiup-overview.md)を使用してDumplingを取得できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。
 
-DumplingインストールパッケージはTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+DumplingインストールパッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
 ## TiDB/MySQLからデータをエクスポートする {#export-data-from-tidb-mysql}
 
@@ -172,7 +172,7 @@ dumpling \
 
 v4.0.8以降、 Dumplingはクラウドストレージへのデータのエクスポートをサポートしています。 AmazonのS3バックエンドストレージにデータをバックアップする必要がある場合は、 `-o`パラメーターでS3ストレージパスを指定する必要があります。
 
-指定したリージョンにS3バケットを作成する必要があります（ [Amazonドキュメント-S3バケットを作成するにはどうすればよいですか](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照）。バケット内にフォルダも作成する必要がある場合は、 [Amazonドキュメント-フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
+指定したリージョンにS3バケットを作成する必要があります（ [Amazonドキュメント-S3バケットを作成するにはどうすればよいですか](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-bucket.html)を参照）。バケット内にフォルダも作成する必要がある場合は、 [Amazonドキュメント-フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-folder.html)を参照してください。
 
 S3バックエンドストレージにアクセスする権限を持つアカウントの`SecretKey`と`AccessKey`を、環境変数としてDumplingノードに渡します。
 
@@ -352,7 +352,7 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `-t`または`--threads`           | 同時バックアップスレッドの数                                                                                                                                                                                                                       | 4                                                                                                                                                                      |             |
 | `-r`または`--rows`              | テーブルを指定された行数の行に分割します（通常、大きなテーブルを複数のファイルに分割する同時操作に適用できます。アップストリームデータベースがTiDB v3.0以降のバージョンの場合、このパラメーターの値が0より大きい場合は、 TiDBリージョン情報は分割に使用され、ここで指定された値は無効になります。                                                                             |                                                                                                                                                                        |             |
 | `-L`または`--logfile`           | ログ出力アドレス。空の場合、ログはコンソールに出力されます                                                                                                                                                                                                        | &quot;&quot;                                                                                                                                                           |             |
-| `--loglevel`                 | ログレベル{debug、info、warn、error、dpanic、panic、fatal}                                                                                                                                                                                      | &quot;情報&quot;                                                                                                                                                         |             |
+| `--loglevel`                 | ログレベル{debug、info、warn、error、dpanic、 panic、fatal}                                                                                                                                                                                     | &quot;情報&quot;                                                                                                                                                         |             |
 | `--logfmt`                   | ログ出力形式{text、json}                                                                                                                                                                                                                    | &quot;文章&quot;                                                                                                                                                         |             |
 | `-d`または`--no-data`           | データをエクスポートしない（スキーマのみがエクスポートされるシナリオに適しています）                                                                                                                                                                                           |                                                                                                                                                                        |             |
 | `--no-header`                | ヘッダーを生成せずにテーブルのCSVファイルをエクスポートする                                                                                                                                                                                                      |                                                                                                                                                                        |             |
@@ -379,5 +379,5 @@ SET GLOBAL tidb_gc_life_time = '10m';
 | `--escape-backslash`         | バックスラッシュ（ `\` ）を使用して、エクスポートファイル内の特殊文字をエスケープします                                                                                                                                                                                       | 真実                                                                                                                                                                     |             |
 | `--output-filename-template` | [golangテンプレート](https://golang.org/pkg/text/template/#hdr-Arguments)の形式で表されるファイル名テンプレート<br/>`{{.DB}}` 、および`{{.Table}}`の引数を`{{.Index}}`する<br/>3つの引数は、データファイルのデータベース名、テーブル名、およびチャンクIDを表します。                                             | &#39;{{。DB}}。{{。Table}}。{{。Index}}&#39;                                                                                                                                |             |
 | `--status-addr`              | Prometheusがメトリックとpprofデバッグをプルするためのアドレスを含む餃子のサービスアドレス                                                                                                                                                                                 | &quot;：8281&quot;                                                                                                                                                      |             |
-| `--tidb-mem-quota-query`     | 1行のDumplingコマンドによるSQLステートメントのエクスポートのメモリ制限。単位はバイトです。 v4.0.10以降のバージョンでは、このパラメーターを設定しない場合、TiDBはデフォルトで`mem-quota-query`構成項目の値をメモリー制限値として使用します。 v4.0.10より前のバージョンの場合、パラメーター値のデフォルトは32GBです。                                                 | 34359738368                                                                                                                                                            |             |
+| `--tidb-mem-quota-query`     | Dumplingコマンドの1行でSQLステートメントをエクスポートするメモリ制限。単位はバイトです。 v4.0.10以降のバージョンでは、このパラメーターを設定しない場合、TiDBはデフォルトで`mem-quota-query`構成項目の値をメモリー制限値として使用します。 v4.0.10より前のバージョンの場合、パラメーター値のデフォルトは32GBです。                                                  | 34359738368                                                                                                                                                            |             |
 | `--params`                   | エクスポートするデータベースの接続のセッション変数を指定します。必要な形式は`"character_set_client=latin1,character_set_connection=latin1"`です                                                                                                                              |                                                                                                                                                                        |             |

@@ -11,7 +11,7 @@ summary: Learn about the supported character sets and collations in TiDB.
 
 文字セットは、記号とエンコーディングのセットです。 TiDBのデフォルトの文字セットはutf8mb4で、MySQL8.0以降のデフォルトと一致します。
 
-照合順序は、文字セット内の文字を比較するための一連のルール、および文字のソート順です。たとえば、バイナリ照合順序では、 `A`と`a`は等しいと比較されません。
+照合順序は、文字セット内の文字を比較するための一連のルール、および文字の並べ替え順序です。たとえば、バイナリ照合順序では、 `A`と`a`は等しいと比較されません。
 
 {{< copyable "" >}}
 
@@ -280,7 +280,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 テーブルの文字セットと照合順序が指定されていない場合、データベースの文字セットと照合順序がデフォルト値として使用されます。
 
-### 列の文字セットと照合順序 {#column-character-set-and-collation}
+### カラムの文字セットと照合順序 {#column-character-set-and-collation}
 
 次のステートメントを使用して、列の文字セットと照合順序を指定できます。
 
@@ -361,7 +361,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字セットと照合の選択の優先順位 {#selection-priorities-of-character-sets-and-collations}
 
-文字列&gt;列&gt;テーブル&gt;データベース&gt;サーバー
+文字列&gt;カラム&gt;テーブル&gt;データベース&gt;サーバー
 
 ## 文字セットと照合順序の選択に関する一般的な規則 {#general-rules-on-selecting-character-sets-and-collation}
 
@@ -371,7 +371,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 ## 文字の妥当性チェック {#validity-check-of-characters}
 
-指定された文字セットが`utf8`または`utf8mb4`の場合、TiDBは有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDBは`incorrect utf8 value`エラーを報告します。このTiDBの文字の有効性チェックは、MySQL 8.0と互換性がありますが、MySQL5.7以前のバージョンとは互換性がありません。
+指定された文字セットが`utf8`または`utf8mb4`の場合、TiDBは有効な`utf8`文字のみをサポートします。無効な文字の場合、TiDBは`incorrect utf8 value`エラーを報告します。このTiDBの文字の有効性チェックは、 MySQL 5.7 8.0と互換性がありますが、MySQL5.7以前のバージョンとは互換性がありません。
 
 このエラー報告を無効にするには、 `set @@tidb_skip_utf8_check=1;`を使用して文字チェックをスキップします。
 
@@ -406,7 +406,7 @@ Query OK, 1 row affected # In TiDB, it is successfully executed. In MySQL, becau
 
 ### 照合のための新しいフレームワーク {#new-framework-for-collations}
 
-TiDB 4.0では、照合のための完全なフレームワークが導入されています。この新しいフレームワークは、セマンティック解析の照合をサポートし、クラスタが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`の構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成項目を有効にした後でクラスタを初期化すると、 `mysql`の`new_collation_enabled`変数を使用して新しい照合順序が有効になっているかどうかを確認できます。 `tidb`テーブル：
+TiDB 4.0では、照合のための完全なフレームワークが導入されています。この新しいフレームワークは、意味論的な照合の解析をサポートし、クラスタが最初に初期化されるときに新しいフレームワークを有効にするかどうかを決定する`new_collations_enabled_on_first_bootstrap`の構成項目を導入します。新しいフレームワークを有効にするには、 `new_collations_enabled_on_first_bootstrap`を`true`に設定します。詳細については、 [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)を参照してください。構成項目を有効にした後でクラスタを初期化すると、 `mysql`の`new_collation_enabled`変数を使用して新しい照合順序が有効になっているかどうかを確認できます。 `tidb`テーブル：
 
 {{< copyable "" >}}
 

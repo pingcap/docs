@@ -11,7 +11,7 @@ title: TiDB 1.0.7 Release Notes
 -   [`FIELD_LIST`コマンドを最適化する](https://github.com/pingcap/tidb/pull/5679)
 -   [情報スキーマのデータ競合を修正](https://github.com/pingcap/tidb/pull/5676)
 -   [履歴に読み取り専用ステートメントを追加しないでください](https://github.com/pingcap/tidb/pull/5661)
--   [`session`変数を追加して、ログクエリを制御します](https://github.com/pingcap/tidb/pull/5659)
+-   [ログクエリを制御する`session`変数を追加します](https://github.com/pingcap/tidb/pull/5659)
 -   [統計のリソースリークの問題を修正します](https://github.com/pingcap/tidb/pull/5657)
 -   [ゴルーチンリークの問題を修正する](https://github.com/pingcap/tidb/pull/5624)
 -   [httpステータスサーバーのスキーマ情報APIを追加します](https://github.com/pingcap/tidb/pull/5256)
@@ -31,7 +31,7 @@ title: TiDB 1.0.7 Release Notes
 
 -   [`Table Scan`サポート](https://github.com/pingcap/tikv/pull/2657)
 -   [tikv-ctlでリモートモードをサポートする](https://github.com/pingcap/tikv/pull/2377)
--   [tikv-ctlprotoのフォーマット互換性の問題を修正](https://github.com/pingcap/tikv/pull/2668)
+-   [tikv-ctlprotoのフォーマット互換性の問題を修正します](https://github.com/pingcap/tikv/pull/2668)
 -   [PDからのスケジューリングコマンドの損失を修正](https://github.com/pingcap/tikv/pull/2669)
 -   [プッシュメトリックにタイムアウトを追加](https://github.com/pingcap/tikv/pull/2686)
 

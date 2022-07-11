@@ -3,11 +3,11 @@ title: TiDB Binlog Tutorial
 summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
 ---
 
-# TiDBBinlogチュートリアル {#tidb-binlog-tutorial}
+# Binlogチュートリアル {#tidb-binlog-tutorial}
 
-このチュートリアルは、各コンポーネント（Placement Driver、TiKV Server、TiDB Server、Pump、およびDrainer）の単一ノードを使用して、MariaDBServerインスタンスにデータをプッシュするように設定された単純なTiDBBinlogデプロイメントから始まります。
+このチュートリアルは、各コンポーネント（Placement Driver、TiKV Server、TiDB Server、 Pump、およびDrainer ）の単一ノードを使用して、MariaDBServerインスタンスにデータをプッシュするように設定された単純なBinlogデプロイメントから始まります。
 
-このチュートリアルは、 [TiDBアーキテクチャ](/tidb-architecture.md)にある程度精通しているユーザー、すでにTiDBクラスタをセットアップしている可能性がある（必須ではない）ユーザー、およびTiDBBinlogを実際に体験したいユーザーを対象としています。このチュートリアルは、TiDB Binlogの「タイヤを蹴る」ための良い方法であり、そのアーキテクチャの概念に慣れるための良い方法です。
+このチュートリアルは、 [TiDBアーキテクチャ](/tidb-architecture.md)にある程度精通しているユーザー、すでにTiDBクラスタをセットアップしている可能性がある（必須ではない）ユーザー、およびBinlogを実際に体験したいユーザーを対象としています。このチュートリアルは、TiDB Binlogの「タイヤを蹴る」ための良い方法であり、そのアーキテクチャの概念に慣れるための良い方法です。
 
 > **警告：**
 >
@@ -15,27 +15,27 @@ summary: Learn to deploy TiDB Binlog with a simple TiDB cluster.
 
 このチュートリアルは、x86-64で最新のLinuxディストリビューションを使用していることを前提としています。このチュートリアルでは、例として、VMwareで実行されている最小限のCentOS7インストールを使用しています。既存の環境の癖に影響されないように、クリーンインストールから開始することをお勧めします。ローカル仮想化を使用したくない場合は、クラウドサービスを使用してCentOS7VMを簡単に起動できます。
 
-## TiDBBinlogの概要 {#tidb-binlog-overview}
+## Binlogの概要 {#tidb-binlog-overview}
 
 TiDB Binlogは、TiDBからバイナリログデータを収集し、リアルタイムのデータバックアップとレプリケーションを提供するソリューションです。 TiDBサーバークラスタからダウンストリームプラットフォームに増分データ更新をプッシュします。
 
 TiDB Binlogを使用して、増分バックアップを行ったり、あるTiDBクラスタから別のクラスターにデータを複製したり、Kafkaを介して選択したダウンストリームプラットフォームにTiDB更新を送信したりできます。
 
-TiDB Binlogは、MySQLまたはMariaDBからTiDBにデータを移行する場合に特に便利です。この場合、TiDB DM（データ移行）プラットフォームを使用してMySQL / MariaDBクラスタからTiDBにデータを取得し、TiDBBinlogを使用してTiDBクラスタと同期した個別のダウンストリームMySQL/MariaDBインスタンス/クラスタ。 TiDB Binlogを使用すると、TiDBへのアプリケーショントラフィックをダウンストリームのMySQLまたはMariaDBインスタンス/クラスタにプッシュできます。これにより、ダウンタイムやデータ損失なしにアプリケーションをMySQLまたはMariaDBに簡単に戻すことができるため、TiDBへの移行のリスクが軽減されます。
+TiDB Binlogは、MySQLまたはMariaDBからTiDBにデータを移行する場合に特に便利です。この場合、TiDB DM（データ移行）プラットフォームを使用してMySQL / MariaDBクラスタからTiDBにデータを取得し、 Binlogを使用してTiDBクラスタと同期した個別のダウンストリームMySQL/MariaDBインスタンス/クラスタ。 TiDB Binlogを使用すると、TiDBへのアプリケーショントラフィックをダウンストリームのMySQLまたはMariaDBインスタンス/クラスタにプッシュできます。これにより、ダウンタイムやデータ損失なしにアプリケーションをMySQLまたはMariaDBに簡単に戻すことができるため、TiDBへの移行のリスクが軽減されます。
 
-詳細については、 [TiDBBinlogClusterユーザーガイド](/tidb-binlog/tidb-binlog-overview.md)を参照してください。
+詳細については、 [Binlogユーザーガイド](/tidb-binlog/tidb-binlog-overview.md)を参照してください。
 
 ## 建築 {#architecture}
 
-TiDB Binlogは、**ポンプ**と<strong>ドレイナー</strong>の2つのコンポーネントで構成されています。いくつかのポンプノードがポンプクラスタを構成します。各PumpノードはTiDBサーバーインスタンスに接続し、クラスタの各TiDBサーバーインスタンスに対して行われた更新を受信します。 DrainerはPumpクラスタに接続し、受信した更新を特定のダウンストリーム宛先（Kafka、別のTiDBクラスター、MySQL / MariaDBサーバーなど）の正しい形式に変換します。
+TiDB Binlogは、**Pump**と<strong>Drainer</strong>の2つのコンポーネントで構成されています。いくつかのPumpノードがポンプクラスタを構成します。各PumpノードはTiDBサーバーインスタンスに接続し、クラスタの各TiDBサーバーインスタンスに対して行われた更新を受信します。 DrainerはPumpクラスタに接続し、受信した更新を特定のダウンストリーム宛先（Kafka、別のTiDBクラスター、MySQL / MariaDBサーバーなど）の正しい形式に変換します。
 
 ![TiDB-Binlog architecture](/media/tidb-binlog-cluster-architecture.png)
 
-Pumpのクラスター化されたアーキテクチャにより、新しいTiDBサーバーインスタンスがTiDBクラスターに参加または離脱したり、PumpノードがPumpクラスタに参加または離脱したりしても、更新が失われることはありません。
+Pumpのクラスター化されたアーキテクチャにより、新しいTiDBサーバーインスタンスがTiDBクラスターに参加または離脱したり、 PumpノードがPumpクラスタに参加または離脱したりしても、更新が失われることはありません。
 
 ## インストール {#installation}
 
-この場合、MySQLServerの代わりにMariaDBServerを使用しています。これは、RHEL /CentOS7のデフォルトのパッケージリポジトリにMariaDBServerが含まれているためです。後で使用するために、クライアントとサーバーが必要になります。今すぐインストールしましょう：
+この場合、MySQLサーバーの代わりにMariaDBサーバーを使用しています。これは、RHEL /CentOS7のデフォルトのパッケージリポジトリにMariaDBサーバーが含まれているためです。後で使用するために、クライアントとサーバーが必要になります。今すぐインストールしましょう：
 
 ```bash
 sudo yum install -y mariadb-server
@@ -123,7 +123,7 @@ max-open-files=1024
 
 ## ブートストラップ {#bootstrapping}
 
-これで、各コンポーネントを開始できます。これは特定の順序で行うのが最適です。最初に配置ドライバー（PD）、次にTiKVサーバー、次にポンプ（TiDBはバイナリログを送信するためにポンプサービスに接続する必要があるため）、最後にTiDBサーバーです。
+これで、各コンポーネントを開始できます。これは特定の順序で行うのが最適です。最初に配置Driver（PD）、次にTiKVサーバー、次にPump（TiDBはバイナリログを送信するためにPumpサービスに接続する必要があるため）、最後にTiDBサーバーです。
 
 以下を使用してすべてのサービスを開始します。
 
@@ -193,7 +193,7 @@ sudo systemctl start mariadb
 ./drainer --config=drainer.toml &>drainer.out &
 ```
 
-MySQLサーバーのインストールを容易にするオペレーティングシステムを使用している場合は、それでも問題ありません。ポート3306でリッスンしていることと、空のパスワードを使用してユーザー「root」として接続できること、または必要に応じてdrainer.tomlを調整できることを確認してください。
+MySQLサーバーのインストールを容易にするオペレーティングシステムを使用している場合は、それでも問題ありません。ポート3306でリッスンしていることと、空のパスワードを使用してユーザー「root」として接続できること、または必要に応じてdrainerを調整できることを確認してください。
 
 ```bash
 mysql -h 127.0.0.1 -P 3306 -u root
@@ -321,7 +321,7 @@ MariaDB [tidbtest]> select * from t1;
 5 rows in set (0.00 sec)
 ```
 
-MariaDBサーバーにクエリを実行するときにTiDBに挿入したのと同じ行が表示されます。おめでとう！ TiDBBinlogを設定しました。
+MariaDBサーバーにクエリを実行するときにTiDBに挿入したのと同じ行が表示されます。おめでとう！ Binlogを設定しました。
 
 ## binlogctl {#binlogctl}
 
@@ -359,9 +359,9 @@ pkill drainer
 [2019/04/11 17:44:22.640 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: paused, MaxCommitTS: 407638915597467649, UpdateTime: 2019-04-11 17:44:18 -0400 EDT}"]
 ```
 
-「NodeIDs」を`binlogctl`とすると、個々のノードを制御できます。この場合、ドレイナーのNodeIDは「localhost.localdomain：8249」であり、ポンプのNodeIDは「localhost.localdomain：8250」です。
+「NodeIDs」を`binlogctl`とすると、個々のノードを制御できます。この場合、drainerのNodeIDは「localhost.localdomain：8249」であり、PumpのNodeIDは「localhost.localdomain：8250」です。
 
-このチュートリアルでの`binlogctl`の主な使用法は、クラスタの再起動の場合である可能性があります。 TiDBクラスタのすべてのプロセスを終了して再起動しようとすると（ダウンストリームのMySQL / MariaDBサーバーまたはDrainerを除く）、PumpはDrainerに接続できず、Drainerがまだ「オンライン」であると信じているため、起動を拒否します。
+このチュートリアルでの`binlogctl`の主な使用法は、クラスタの再起動の場合である可能性があります。 TiDBクラスタのすべてのプロセスを終了して再起動しようとすると（ダウンストリームのMySQL / MariaDBサーバーまたはDrainerを除く）、 PumpはDrainerに接続できず、 Drainerがまだ「オンライン」であると信じているため、起動を拒否します。
 
 この問題には3つの解決策があります。
 
@@ -372,9 +372,9 @@ pkill drainer
     ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=offline-drainer --node-id=localhost.localdomain:8249
     ```
 
--   ポンプを始動*する前に*ドレイナーを始動してください。
+-   Pumpを始動*する前に*Drainerを始動してください。
 
--   PDを開始した後（ただし、ドレイナーとポンプを開始する前）に`binlogctl`を使用して、一時停止したドレイナーの状態を更新します。
+-   PDを開始した後（ただし、 DrainerとPumpを開始する前）に`binlogctl`を使用して、一時停止したDrainerの状態を更新します。
 
     ```
     ./binlogctl --pd-urls=http://127.0.0.1:2379 --cmd=update-drainer --node-id=localhost.localdomain:8249 --state=offline
@@ -382,7 +382,7 @@ pkill drainer
 
 ## 掃除 {#cleanup}
 
-TiDBクラスタおよびTiDBBinlogプロセスを停止するには、クラスタを形成するすべてのプロセス（pd-server、tikv-server、pump、tidb-server、drainer）を開始したシェルで`pkill -P $$`を実行できます。各コンポーネントをクリーンにシャットダウンするのに十分な時間を与えるには、特定の順序でコンポーネントを停止すると便利です。
+TiDBクラスタおよびBinlogプロセスを停止するには、クラスタを形成するすべてのプロセス（pd-server、tikv-server、pump、tidb-server、 drainer）を開始したシェルで`pkill -P $$`を実行できます。各コンポーネントをクリーンにシャットダウンするのに十分な時間を与えるには、特定の順序でコンポーネントを停止すると便利です。
 
 ```bash
 for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
@@ -411,10 +411,10 @@ sleep 3
 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
-コンポーネントのいずれかが起動に失敗した場合は、失敗した個々のコンポーネントを再起動してみてください。
+コンポーネントのいずれかが起動に失敗した場合は、障害が発生した個々のコンポーネントを再起動してみてください。
 
 ## 結論 {#conclusion}
 
-このチュートリアルでは、単一のポンプと単一のドレイナーを備えたクラスタを使用して、TiDBクラスタからダウンストリームのMariaDBサーバーに複製するようにTiDBBinlogを設定しました。これまで見てきたように、TiDB Binlogは、TiDBクラスタへの変更をキャプチャして処理するための包括的なプラットフォームです。
+このチュートリアルでは、単一のPumpと単一のDrainerを備えたクラスタを使用して、TiDBクラスタからダウンストリームのMariaDBサーバーに複製するようにBinlogを設定しました。これまで見てきたように、TiDB Binlogは、TiDBクラスタへの変更をキャプチャして処理するための包括的なプラットフォームです。
 
-より堅牢な開発、テスト、または本番デプロイメントでは、高可用性とスケーリングの目的で複数のTiDBサーバーを使用し、複数のPumpインスタンスを使用して、TiDBサーバーインスタンスへのアプリケーショントラフィックがPumpの問題の影響を受けないようにします。クラスタ。追加のDrainerインスタンスを使用して、更新をさまざまなダウンストリームプラットフォームにプッシュしたり、増分バックアップを実装したりすることもできます。
+より堅牢な開発、テスト、または実稼働展開では、高可用性とスケーリングの目的で複数のTiDBサーバーを使用し、複数のPumpインスタンスを使用して、TiDBサーバーインスタンスへのアプリケーショントラフィックがPumpの問題の影響を受けないようにします。クラスタ。追加のDrainerインスタンスを使用して、更新をさまざまなダウンストリームプラットフォームにプッシュしたり、増分バックアップを実装したりすることもできます。

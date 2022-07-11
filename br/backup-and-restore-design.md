@@ -5,7 +5,7 @@ summary: Learn about the design details of BR.
 
 # BRの設計原則 {#br-design-principles}
 
-このドキュメントでは、アーキテクチャとバックアップファイルを含むバックアップと復元（BR）の設計原則について説明します。
+このドキュメントでは、アーキテクチャとバックアップファイルを含む、バックアップと復元（BR）の設計原則について説明します。
 
 ## BRアーキテクチャ {#br-architecture}
 
@@ -35,7 +35,7 @@ SSTファイルは`storeID_regionID_regionEpoch_keyHash_cf`の形式で名前が
 -   `regionID`はリージョンIDです。
 -   `regionEpoch`はリージョンのバージョン番号です。
 -   `keyHash`は、範囲のstartKeyのハッシュ（sha256）値であり、キーの一意性を保証します。
--   `cf`はRocksDBの列ファミリーを示します（デフォルトでは`default`または`write` ）。
+-   `cf`はRocksDBのカラムファミリーを示します（デフォルトでは`default`または`write` ）。
 
 ### SSTファイルの保存形式 {#storage-format-of-sst-files}
 

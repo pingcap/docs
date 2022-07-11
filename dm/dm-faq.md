@@ -90,7 +90,7 @@ MySQLはエクスポート用のスナップショットを指定できないた
 
 ### <code>Load</code>段階で {#in-the-code-load-code-stage}
 
-エクスポート中、複数のデータ移行タスクは通常、異なるbinlog位置を持ちます。 `Load`のステージでタスクをマージすると、binlogの位置についてコンセンサスに到達できない可能性があります。したがって、 `Load`段階のデータ移行タスクにテーブルを追加することはお勧めしません。
+エクスポート中、複数のデータ移行タスクは通常、異なるbinlog位置を持ちます。 `Load`段階でタスクをマージすると、binlogの位置について合意に達することができない場合があります。したがって、 `Load`段階のデータ移行タスクにテーブルを追加することはお勧めしません。
 
 ### <code>Sync</code>段階 {#in-the-code-sync-code-stage}
 
@@ -125,11 +125,11 @@ MySQLはエクスポート用のスナップショットを指定できないた
 
 ## エラー1054の処理方法：DM1.0クラスタの既存のDM移行タスクがDM2.0以降のクラスタで実行されているときに発生する<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code> ？ {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 
-DM v2.0以降、DM 1.0クラスタのタスク構成ファイルを使用して`start-task`コマンドを直接実行し、増分データレプリケーションを続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
+DM v2.0以降、DM 1.0クラスタのタスク構成ファイルを使用して`start-task`コマンドを直接実行し、増分データ複製を続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
 このエラーは[DM1.0クラスタのDM移行タスクをDM2.0クラスタに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
-## TiUPがDMの一部のバージョン（v2.0.0-hotfixなど）の展開に失敗するのはなぜですか？ {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
+## TiUPがDMの一部のバージョン（v2.0.0-hotfixなど）のデプロイに失敗するのはなぜですか？ {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
 
 `tiup list dm-master`コマンドを使用して、TiUPが展開をサポートするDMバージョンを表示できます。 TiUPは、このコマンドで表示されないDMバージョンを管理しません。
 
@@ -160,7 +160,7 @@ DM 1.0では、モニターデータを生成するために`enable-heartbeat`�
 -   データは手動または他のレプリケーションプログラムによって挿入されません。
 -   このテーブルに関連付けられたDMLフィルターは構成されていません。
 
-トラブルシューティングを容易にするために、最初にダウンストリームTiDBインスタンスの一般的なログファイルを収集してから、 [TiDBコミュニティのSlackチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカルサポートを依頼できます。次の例は、一般的なログファイルを収集する方法を示しています。
+トラブルシューティングを容易にするために、最初にダウンストリームTiDBインスタンスの一般的なログファイルを収集してから、 [TiDBコミュニティのスラックチャネル](https://tidbcommunity.slack.com/archives/CH7TTLL7P)でテクニカルサポートを依頼できます。次の例は、一般的なログファイルを収集する方法を示しています。
 
 ```bash
 # Enable general log collection
@@ -189,17 +189,17 @@ if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to
 
 DM v6.0以降、 `sql-skip`と`handle-error`は`binlog`に置き換えられます。この問題を回避するには、代わりに`binlog`コマンドを使用できます。
 
-## DMが複製しているときに、 <code>REPLACE</code>ステートメントがダウンストリームに表示され続けるのはなぜですか？ {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
+## DMが複製しているときに<code>REPLACE</code>ステートメントがダウンストリームに表示され続けるのはなぜですか？ {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
 [セーフモード](/dm/dm-glossary.md#safe-mode)がタスクに対して自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジューリングがある場合、タスクが開始または再開されてから1分以内であるため、セーフモードが有効になります。
 
 DM-workerログファイルを確認して、 `change count`を含む行を検索できます。行の`new count`がゼロでない場合、セーフモードが有効になります。有効になっている理由を確認するには、いつ発生するか、以前にエラーが報告されていないかどうかを確認してください。
 
-## DM v2.0では、タスク中にDMが再起動すると、完全なインポートタスクが失敗するのはなぜですか？ {#in-dm-v2-0-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
+## DM v2.0で、タスク中にDMが再起動した場合、完全なインポートタスクが失敗するのはなぜですか？ {#in-dm-v2-0-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
 
 DM v2.0.1以前のバージョンでは、完全なインポートが完了する前にDMが再起動すると、アップストリームデータソースとDMワーカーノード間のバインディングが変更される可能性があります。たとえば、ダンプ・ユニットの中間データがDM-workerノードAにあるが、ロード・ユニットがDM-workerノードBによって実行されているため、操作が失敗する可能性があります。
 
-この問題に対する2つの解決策は次のとおりです。
+この問題の2つの解決策は次のとおりです。
 
 -   データ量が少ない場合（1 TB未満）、またはタスクがシャーディングされたテーブルをマージする場合は、次の手順を実行します。
 
@@ -218,7 +218,7 @@ DM v2.0.1以前のバージョンでは、完全なインポートが完了す�
         -   `task-mode`を`incremental`に変更します。
         -   ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
-## DMがエラーを報告する理由<code>ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.</code>インクリメンタルタスク中に再起動した場合はどうなりますか？ {#why-does-dm-report-the-error-code-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master-auto-position-1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-code-if-it-restarts-during-an-incremental-task}
+## DMがエラー<code>ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.</code>インクリメンタルタスク中に再起動した場合はどうなりますか？ {#why-does-dm-report-the-error-code-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master-auto-position-1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-code-if-it-restarts-during-an-incremental-task}
 
 このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中にパージされたことを示します。
 
@@ -231,14 +231,14 @@ DM v2.0.1以前のバージョンでは、完全なインポートが完了す�
 
 ## クラスタがTiUPv1.3.0またはv1.3.1を使用してデプロイされている場合、DMクラスタディスプレイのGrafanaダッシュボードがダッシュボードの<code>failed to fetch dashboard</code>たのはなぜですか？ {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-code-failed-to-fetch-dashboard-code-if-the-cluster-is-deployed-using-tiup-v1-3-0-or-v1-3-1}
 
-これはTiUPの既知のバグであり、TiUPv1.3.2で修正されています。この問題に対する2つの解決策は次のとおりです。
+これはTiUPの既知のバグであり、TiUPv1.3.2で修正されています。この問題の2つの解決策は次のとおりです。
 
 -   解決策1：
     1.  コマンド`tiup update --self && tiup update dm`を使用して、TiUPを新しいバージョンにアップグレードします。
     2.  クラスタのGrafanaノードをスケールインしてからスケールアウトし、Grafanaサービスを再起動します。
 -   解決策2：
     1.  `deploy/grafana-$port/bin/public`のフォルダをバックアップします。
-    2.  [TiUPDMオフラインパッケージ](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
+    2.  [TiUP DMオフラインパッケージ](https://download.pingcap.org/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
     3.  オフラインパッケージで`grafana-v4.0.3-**.tar.gz`を解凍します。
     4.  フォルダ`deploy/grafana-$port/bin/public`を`grafana-v4.0.3-**.tar.gz`の`public`フォルダに置き換えます。
     5.  `tiup dm restart $cluster_name -R grafana`を実行して、Grafanaサービスを再起動します。
@@ -352,7 +352,7 @@ query-status test
 
 DM v2.0以降のバージョンでは、 `heartbeat`機能はデフォルトで無効になっています。タスク構成ファイルでこの機能を有効にすると、高可用性機能が妨げられます。この問題を解決するには、タスク構成ファイルで`enable-heartbeat`を`false`に設定して、 `heartbeat`機能を無効にしてから、タスク構成ファイルを再ロードします。 DMは、以降のリリースで`heartbeat`機能を強制的に無効にします。
 
-## DMマスターが再起動した後、クラスタへの参加に失敗し、DMが「埋め込みetcdの開始に失敗しました。RawCause：メンバーxxxはすでにブートストラップされています」というエラーを報告するのはなぜですか？ {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
+## DMマスターが再起動した後、クラスタへの参加に失敗し、DMが「埋め込みetcdの開始に失敗しました、RawCause：メンバーxxxはすでにブートストラップされています」というエラーを報告するのはなぜですか？ {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
 DMマスターが起動すると、DMはetcd情報を現在のディレクトリに記録します。 DMマスターの再起動後にディレクトリが変更された場合、DMはetcd情報にアクセスできないため、再起動は失敗します。
 
@@ -364,7 +364,7 @@ dmctl executeコマンドを使用すると、DMマスターへの接続が失�
 
 この場合、環境変数`https_proxy`を確認できます（ **https**であることに注意してください）。この変数が構成されている場合、dmctlは`https_proxy`で指定されたホストとポートを自動的に接続します。ホストに対応する転送サービスがない場合、接続は失敗し`proxy` 。
 
-この問題を解決するには、 `https_proxy`が必須かどうかを確認してください。そうでない場合は、設定をキャンセルしてください。それ以外の場合は、元のdmctlコマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加します。
+この問題を解決するには、 `https_proxy`が必須かどうかを確認してください。そうでない場合は、設定をキャンセルしてください。それ以外の場合は、oringialdmctlコマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加します。
 
 > **ノート：**
 >

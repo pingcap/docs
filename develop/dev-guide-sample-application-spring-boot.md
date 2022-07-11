@@ -25,7 +25,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 ### ローカルクラスタの使用 {#using-a-local-cluster}
 
-ローカルクラスタは、 [ローカルテストクラスタのデプロイ](/quick-start-with-tidb.md)または[TiDBクラスタを本番環境にデプロイする](/production-deployment-using-tiup.md)のいずれかで開始できます。
+ローカルクラスタは、 [ローカルテストクラスタのデプロイ](/quick-start-with-tidb.md)または[本番環境でのTiDBクラスタのデプロイ](/production-deployment-using-tiup.md)のいずれかで開始できます。
 
 ## ステップ2：JDKをインストールする {#step-2-install-jdk}
 
@@ -65,7 +65,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
         dnf install maven
         ```
 
-    -   yum：
+    -   ヤム：
 
         {{< copyable "" >}}
 
@@ -108,7 +108,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
 
 -   春のウェブ
 -   Spring Data JPA
--   MySQLドライバー
+-   MySQLDriver
 
 完全な構成は次のとおりです。
 
@@ -511,7 +511,7 @@ curl --location --request PUT 'http://localhost:8080/player/trade' \
   --data-urlencode 'price=100'
 ```
 
-リクエストは、ペイロードとして**フォームデータ**を使用します。リクエストの例では、売り手のID（ `sellID` ）が1、買い手のID（ `buyID` ）が2、購入した商品の数（ `amount` ）が10、購入に消費されたコインの数（ `price` ）が100であることを示しています。
+リクエストは、ペイロードとして**フォームデータ**を使用します。リクエストの例は、売り手のID（ `sellID` ）が1、買い手のID（ `buyID` ）が2、購入した商品の数（ `amount` ）が10、購入に消費されたコインの数（ `price` ）が100であることを示しています。
 
 戻り値は、トランザクションが成功したかどうかです。売り手にとって不十分な商品、買い手にとって不十分なコイン、またはデータベースエラーがある場合、 [データベーストランザクション](/develop/dev-guide-transaction-overview.md)は取引が成功せず、プレーヤーのコインや商品が失われないことを保証します。
 
@@ -530,7 +530,7 @@ true
 5.  プレーヤーの総数を取得します。
 6.  `id` of 1のプレーヤーが売り手で、 `id` of 2のプレーヤーが買い手であり、105が`coins`のコストで購入されるトランザクションを実行し`goods` 。
 
-このスクリプトは、 `make request`または`./request.sh`で実行できます。結果は次のようになります。
+このスクリプトは`make request`または`./request.sh`で実行できます。結果は次のようになります。
 
 ```shell
 cheese@CheesedeMacBook-Pro spring-jpa-hibernate % make request
@@ -597,7 +597,7 @@ false
 
 #### Maven構成 {#maven-configuration}
 
-`pom.xml`ファイルは、プロジェクトのMaven依存関係、パッケージ化メソッド、およびパッケージ化情報を宣言するMaven構成ファイルです。この構成ファイルを生成するプロセスを[同じ依存関係を持つ空のアプリケーションを作成する](#create-a-blank-application-with-the-same-dependency-optional)で複製するか、プロジェクトに直接コピーすることができます。
+`pom.xml`のファイルは、プロジェクトのMaven依存関係、パッケージ化メソッド、およびパッケージ化情報を宣言するMaven構成ファイルです。この構成ファイルを生成するプロセスを[同じ依存関係を持つ空のアプリケーションを作成する](#create-a-blank-application-with-the-same-dependency-optional)で複製するか、プロジェクトに直接コピーすることができます。
 
 {{< copyable "" >}}
 
@@ -819,7 +819,7 @@ public class PlayerBean {
 -   `@Entity`は、 `PlayerBean`がエンティティクラスであることを宣言します。
 -   `@Table`は、注釈属性`name`を使用して、このエンティティクラスを`player_jpa`テーブルに関連付けます。
 -   `@Id`は、このプロパティがテーブルの主キー列に関連していることを宣言します。
--   `@GeneratedValue`は、この列の値が自動的に生成され、手動で設定しないことを示します。属性`generator`は、ジェネレーターの名前を`player_id`として指定するために使用されます。
+-   `@GeneratedValue`は、この列の値が自動的に生成されるため、手動で設定しないことを示します。属性`generator`は、ジェネレーターの名前を`player_id`として指定するために使用されます。
 -   `@SequenceGenerator`は、 [順序](/sql-statements/sql-statement-create-sequence.md)を使用するジェネレーターを宣言し、アノテーション属性`name`を使用してジェネレーターの名前を`player_id`として宣言します（ `@GeneratedValue`で指定された名前と一致します）。アノテーション属性`sequenceName`は、データベース内のシーケンスの名前を指定するために使用されます。最後に、注釈属性`allocationSize`を使用して、シーケンスのステップサイズを1として宣言します。
 -   `@Column`は、各プライベート属性を`player_jpa`テーブルの列として宣言し、注釈属性`name`を使用して、属性に対応する列の名前を決定します。
 

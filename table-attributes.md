@@ -48,7 +48,7 @@ summary: Learn how to use the table attribute feature of TiDB.
 
 ## 属性オーバーライドルール {#attribute-override-rules}
 
-テーブルに構成された属性は、テーブルのすべてのパーティションで有効になります。ただし、例外が1つあります。テーブルとパーティションが同じ属性で構成されているが、属性値が異なる場合、パーティション属性がテーブル属性をオーバーライドします。たとえば、テーブル`t`が`key=value`属性で構成され、パーティション`p`が`key=value1`で構成されているとします。
+テーブルに構成された属性は、テーブルのすべてのパーティションで有効になります。ただし、例外が1つあります。テーブルとパーティションが同じ属性で構成されているが、属性値が異なる場合、パーティション属性はテーブル属性をオーバーライドします。たとえば、テーブル`t`が`key=value`属性で構成され、パーティション`p`が`key=value1`で構成されているとします。
 
 ```sql
 ALTER TABLE t ATTRIBUTES[=]'key=value';
@@ -69,7 +69,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
 
 #### 読み取り専用シナリオでの定期的な読み取りホットスポット {#periodic-read-hotspot-in-read-only-scenarios}
 
-読み取り専用のシナリオで、リージョンを手動で分割することにより、テーブルまたはパーティションで発生する定期的な読み取りホットスポットを削減しようとし、ホットスポットの問題が解決された後に手動で分割されたリージョンをマージしたくないとします。この場合、 `merge_option`属性をテーブルまたはパーティションに追加し、その値を`deny`に設定できます。
+読み取り専用のシナリオで、リージョンを手動で分割することにより、テーブルまたはパーティションで発生する定期的な読み取りホットスポットを削減しようとし、ホットスポットの問題が解決された後に手動で分割されたリージョンをマージしたくないとします。この場合、テーブルまたはパーティションに`merge_option`属性を追加し、その値を`deny`に設定できます。
 
 ### 使用法 {#usage}
 
@@ -103,7 +103,7 @@ ALTER TABLE t PARTITION p ATTRIBUTES[=]'key=value1';
     ALTER TABLE t PARTITION p ATTRIBUTES 'merge_option=allow';
     ```
 
--   `merge_option`アトリビューションを構成したすべてのテーブルまたはパーティションを表示します。
+-   `merge_option`の属性を構成するすべてのテーブルまたはパーティションを表示します。
 
     ```sql
     SELECT * FROM information_schema.attributes WHERE attributes LIKE '%merge_option%';

@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_SYSTEMINFO` kernel parameter table.
 
 # CLUSTER_SYSTEMINFO {#cluster-systeminfo}
 
-`CLUSTER_SYSTEMINFO`カーネルパラメータテーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報をクエリできます。現在、 `sysctl`システムの情報を照会することができます。
+`CLUSTER_SYSTEMINFO`カーネルパラメータテーブルを使用して、クラスタのすべてのインスタンスが配置されているサーバーのカーネル構成情報を照会できます。現在、 `sysctl`システムの情報を照会することができます。
 
 {{< copyable "" >}}
 

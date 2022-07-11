@@ -30,7 +30,7 @@ TiDB Ansibleバージョン：3.1.1
 
     -   インスタンスレベルでの分離読み取り設定が有効にならず、TiDBのアップグレード後に分離読み取り設定が誤って保持される問題を修正します[＃16482](https://github.com/pingcap/tidb/pull/16482) [＃16802](https://github.com/pingcap/tidb/pull/16802)
     -   `partition (P0)` [＃16076](https://github.com/pingcap/tidb/pull/16076)などの構文でエラーが報告されないように、ハッシュパーティションテーブルのパーティション選択構文を修正します。
-    -   `UPDATE`のSQLステートメントがビューからのみクエリを実行し、ビューを更新しない場合でも、更新ステートメントがエラー[＃16789](https://github.com/pingcap/tidb/pull/16789)を報告する問題を修正します。
+    -   `UPDATE`のSQLステートメントがビューからのみクエリを実行し、ビューを更新しない場合でも、updateステートメントがエラーを報告する問題を修正します[＃16789](https://github.com/pingcap/tidb/pull/16789)
     -   ネストされたクエリ[＃16423](https://github.com/pingcap/tidb/pull/16423)から`not not`を削除することによって引き起こされる誤った結果の問題を修正します
 
 -   TiFlash

@@ -61,7 +61,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   説明：
 
-    TiFlashのRegionRaftIndexの待機時間が2秒を超える確率が99％を超えると、アラートがトリガーされます。
+    RaftのRegionRaftIndexの待機時間が2秒を超える確率が99％を超えると、アラートがトリガーされます。
 
 -   解決：
 

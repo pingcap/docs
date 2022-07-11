@@ -4,7 +4,7 @@ title: TiUP DM
 
 # TiUP DM {#tiup-dm}
 
-TiDBクラスターの管理に使用される[TiUPクラスター](/tiup/tiup-component-cluster.md)と同様に、TiUPDMはDMクラスターの管理に使用されます。 TiUP DMコンポーネントを使用して、DMクラスターの展開、開始、停止、破棄、エラスティックスケーリング、DMクラスターのアップグレード、DMクラスターの構成パラメーターの管理など、DMクラスターの日常の運用および保守タスクを実行できます。
+TiDBクラスターの管理に使用される[TiUPクラスター](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスターの管理に使用されます。 TiUP DMコンポーネントを使用して、DMクラスターの展開、開始、停止、破棄、エラスティックスケーリング、DMクラスターのアップグレード、DMクラスターの構成パラメーターの管理など、DMクラスターの日常の運用および保守タスクを実行できます。
 
 ## 構文 {#syntax}
 
@@ -38,7 +38,7 @@ tiup dm [command] [flags]
 
 ### --wait-timeout {#wait-timeout}
 
--   操作プロセスの各ステップの最大待機時間（秒単位）を指定します。操作プロセスは、サービスを開始または停止するようにsystemctlを指定したり、ポートがオンラインまたはオフラインになるのを待機したりするなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
+-   操作プロセスの各ステップの最大待機時間（秒単位）を指定します。操作プロセスは、サービスを開始または停止するsystemctlの指定や、ポートがオンラインまたはオフラインになるのを待つなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
 -   データ型： `UINT`
 -   コマンドでこのオプションが指定されていない場合、各ステップの最大待機時間は`120`秒です。
 
@@ -50,7 +50,7 @@ tiup dm [command] [flags]
 
 ### -v、-version {#v-version}
 
--   TiUPDMの現在のバージョンを印刷します。
+-   TiUP DMの現在のバージョンを出力します。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -72,10 +72,10 @@ tiup dm [command] [flags]
 -   [再起動](/tiup/tiup-component-dm-restart.md) ：指定したクラスタを再起動します。
 -   [スケールイン](/tiup/tiup-component-dm-scale-in.md) ：指定されたクラスタでスケーリングします。
 -   [規格外](/tiup/tiup-component-dm-scale-out.md) ：指定されたクラスタをスケールアウトします。
--   [アップグレード](/tiup/tiup-component-dm-upgrade.md) ：指定したクラスタをアップグレードします。
+-   [アップグレード](/tiup/tiup-component-dm-upgrade.md) ：指定されたクラスタをアップグレードします。
 -   [プルーン](/tiup/tiup-component-dm-prune.md) ：指定されたクラスタのトゥームストーンステータスのインスタンスをクリーンアップします。
 -   [edit-config](/tiup/tiup-component-dm-edit-config.md) ：指定したクラスタの構成を変更します。
--   [リロード](/tiup/tiup-component-dm-reload.md) ：指定したクラスタの構成を再ロードします。
+-   [リロード](/tiup/tiup-component-dm-reload.md) ：指定したクラスタの構成をリロードします。
 -   [パッチ](/tiup/tiup-component-dm-patch.md) ：デプロイされたクラスタの指定されたサービスを置き換えます。
 -   [破壊する](/tiup/tiup-component-dm-destroy.md) ：指定されたクラスタを破棄します。
 -   [監査](/tiup/tiup-component-dm-audit.md) ：指定されたクラスタの操作監査ログを照会します。

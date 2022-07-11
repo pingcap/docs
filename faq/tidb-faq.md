@@ -19,13 +19,13 @@ TiDBは、水平方向のスケーラビリティ、高可用性、および一�
 
 #### TiDBのアーキテクチャは何ですか？ {#what-is-tidb-s-architecture}
 
-TiDBクラスタには、TiDBサーバー、PD（配置ドライバー）サーバー、およびTiKVサーバーの3つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください。
+TiDBクラスタには、TiDBサーバー、PD（配置Driver）サーバー、およびTiKVサーバーの3つのコンポーネントがあります。詳細については、 [TiDBアーキテクチャ](/tidb-architecture.md)を参照してください。
 
 #### TiDBはMySQLに基づいていますか？ {#is-tidb-based-on-mysql}
 
 いいえ。TiDBはMySQLの構文とプロトコルをサポートしていますが、PingCAP、Incによって開発および保守されている新しいオープンソースデータベースです。
 
-#### TiDB、TiKV、PD（プレースメントドライバー）のそれぞれの責任は何ですか？ {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
+#### TiDB、TiKV、PD（プレースメントDriver）のそれぞれの責任は何ですか？ {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
 -   TiDBはSQLコンピューティング層として機能し、主にSQLの解析、クエリプランの指定、およびエグゼキュータの生成を担当します。
 -   TiKVは、実際のデータを格納するために使用される分散型Key-Valueストレージエンジンとして機能します。つまり、TiKVはTiDBのストレージエンジンです。
@@ -142,7 +142,7 @@ TiKVサーバーがビジーです。これは通常、データベースの負�
 
 #### エラー9005（HY000）：リージョンは利用できません {#error-9005-hy000-region-is-unavailable}
 
-アクセスされたリージョンは利用できません。レプリカの数が不十分であるなどの理由により、ラフトグループは利用できません。これは通常、TiKVサーバーがビジーであるか、TiKVノードがシャットダウンされている場合に発生します。 TiKVサーバーのステータス、監視データ、ログを確認してください。
+アクセスされたリージョンは利用できません。レプリカの数が不十分であるなどの理由により、Raftグループは利用できません。これは通常、TiKVサーバーがビジーであるか、TiKVノードがシャットダウンされている場合に発生します。 TiKVサーバーのステータス、監視データ、ログを確認してください。
 
 #### エラー9006（HY000）：GCの有効期間がトランザクション期間よりも短い {#error-9006-hy000-gc-life-time-is-shorter-than-transaction-duration}
 
@@ -172,7 +172,7 @@ SET GLOBAL tidb_gc_life_time = '30m';
 
 #### エラー2013（HY000）：クエリ中にMySQLサーバーへの接続が失われました {#error-2013-hy000-lost-connection-to-mysql-server-during-query}
 
--   パニックがログにあるかどうかを確認します。
+-   panicがログにあるかどうかを確認します。
 -   `dmesg -T | grep -i oom`を使用して、OOMがdmesgに存在するかどうかを確認します。
 -   長時間アクセスできない場合も、このエラーが発生する可能性があります。これは通常、TCPタイムアウトが原因で発生します。 TCPが長期間使用されていない場合、オペレーティングシステムはTCPを強制終了します。
 

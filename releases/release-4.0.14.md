@@ -81,11 +81,11 @@ TiDBバージョン：4.0.14
 -   TiDB
 
     -   [＃24865](https://github.com/pingcap/tidb/issues/24865)と評価された`WHERE`句でサブクエリを結合するときに`SELECT`の結果がMySQLと互換性がないという問題を修正し`false`
-    -   引数が`ENUM`または`SET`タイプ[＃24944](https://github.com/pingcap/tidb/issues/24944)の場合に発生する`ifnull`関数の計算エラーを修正します
+    -   引数が`ENUM`または`SET`タイプ[＃24944](https://github.com/pingcap/tidb/issues/24944)の場合に発生する`ifnull`関数の計算エラーを修正しました
     -   場合によっては、間違った集計プルーニングを修正します[＃25202](https://github.com/pingcap/tidb/issues/25202)
     -   列が`SET`タイプ[＃25669](https://github.com/pingcap/tidb/issues/25669)の場合に発生する可能性があるマージ結合操作の誤った結果を修正します
     -   TiDBがデカルト結合[＃25591](https://github.com/pingcap/tidb/issues/25591)に対して誤った結果を返す問題を修正します
-    -   `SELECT ... FOR UPDATE`が結合操作で機能し、結合がパーティションテーブル[＃20028](https://github.com/pingcap/tidb/issues/20028)を使用する場合に発生するパニックの問題を修正します。
+    -   `SELECT ... FOR UPDATE`が結合操作で機能し、結合がパーティションテーブル[＃20028](https://github.com/pingcap/tidb/issues/20028)を使用する場合に発生するpanicの問題を修正します。
     -   キャッシュされた`prepared`プランが[＃24741](https://github.com/pingcap/tidb/issues/24741)に誤って使用される問題を修正し`point get`
     -   `LOAD DATA`ステートメントがutf8以外のデータを異常にインポートする可能性がある問題を修正します[＃25979](https://github.com/pingcap/tidb/issues/25979)
     -   HTTPAPI1を介して統計にアクセスするときに発生する可能性のあるメモリリークの問題を修正し[＃24650](https://github.com/pingcap/tidb/pull/24650)
@@ -94,18 +94,18 @@ TiDBバージョン：4.0.14
     -   `DateTime`を解析するときに無効な文字列が切り捨てられない問題を修正し[＃22231](https://github.com/pingcap/tidb/issues/22231)
     -   列タイプが[＃22159](https://github.com/pingcap/tidb/issues/22159)の場合、 `select into outfile`ステートメントで結果が得られない可能性がある問題を修正し`YEAR` 。
     -   `NULL`が`UNION`サブクエリ[＃26532](https://github.com/pingcap/tidb/issues/26532)にある場合、クエリ結果が間違っている可能性がある問題を修正します。
-    -   実行中の射影演算子が場合によってはパニックを引き起こす可能性がある問題を修正します[＃26534](https://github.com/pingcap/tidb/pull/26534)
+    -   実行中の射影演算子が場合によってはpanicを引き起こす可能性がある問題を修正します[＃26534](https://github.com/pingcap/tidb/pull/26534)
 
 -   TiKV
 
-    -   特定のプラットフォームで期間の計算がパニックになる可能性がある問題を修正します[＃related-issue](https://github.com/rust-lang/rust/issues/86470#issuecomment-877557654)
+    -   特定のプラットフォームで期間の計算がpanicになる可能性がある問題を修正します[＃related-issue](https://github.com/rust-lang/rust/issues/86470#issuecomment-877557654)
     -   `DOUBLE`から[＃25200](https://github.com/pingcap/tidb/issues/25200)をキャストする間違った関数を修正し`DOUBLE`
-    -   非同期ロガーを使用するとパニックログが失われる可能性がある問題を修正します[＃8998](https://github.com/tikv/tikv/issues/8998)
-    -   暗号化が有効になっている場合にスナップショットを2回作成するときに発生するパニックの問題を修正し[＃10407](https://github.com/tikv/tikv/issues/10407) [＃9786](https://github.com/tikv/tikv/issues/9786)
+    -   非同期ロガーを使用するとpanicログが失われる可能性がある問題を修正します[＃8998](https://github.com/tikv/tikv/issues/8998)
+    -   暗号化が有効になっている場合にスナップショットを2回作成するときに発生するpanicの問題を修正し[＃10407](https://github.com/tikv/tikv/issues/10407) [＃9786](https://github.com/tikv/tikv/issues/9786)
     -   コプロセッサー[＃10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数タイプを修正してください
-    -   シャットダウン中の疑わしい警告と[＃10307](https://github.com/tikv/tikv/issues/10307)からの非決定論的応答の問題を修正します[＃10353](https://github.com/tikv/tikv/issues/10353)
+    -   シャットダウン中の疑わしい警告と[＃10307](https://github.com/tikv/tikv/issues/10307)からの非決定論的な応答の問題を修正します[＃10353](https://github.com/tikv/tikv/issues/10353)
     -   バックアップスレッドリークの問題を修正[＃10287](https://github.com/tikv/tikv/issues/10287)
-    -   分割プロセスが遅すぎてリージョンのマージが進行中の場合、リージョンの分割がパニックになり、メタデータが破損する可能性がある問題を修正します[＃8456](https://github.com/tikv/tikv/issues/8456) [＃8783](https://github.com/tikv/tikv/issues/8783)
+    -   分割プロセスが遅すぎてリージョンのマージが進行中の場合、リージョンの分割がpanicになり、メタデータが破損する可能性がある問題を修正します[＃8456](https://github.com/tikv/tikv/issues/8456) [＃8783](https://github.com/tikv/tikv/issues/8783)
     -   リージョンのハートビートにより、状況によってはTiKVが大きなリージョンを分割できない問題を修正します[＃10111](https://github.com/tikv/tikv/issues/10111)
     -   TiKVとTiDB1の間のCMSketchのフォーマットの不一致によって引き起こされる誤った統計を修正し[＃25638](https://github.com/pingcap/tidb/issues/25638)
     -   `apply wait duration`メトリック[＃9893](https://github.com/tikv/tikv/issues/9893)の誤った統計を修正します
@@ -115,27 +115,27 @@ TiDBバージョン：4.0.14
 
     -   削除操作の実行後にスケジューラーが再表示される可能性があるバグを修正します[＃2572](https://github.com/tikv/pd/issues/2572)
     -   一時構成がロードされる前にスケジューラーが開始されたときに発生する可能性のあるデータ競合の問題を修正します[＃3771](https://github.com/tikv/pd/issues/3771)
-    -   領域散乱操作中に発生する可能性のあるPDパニックの問題を修正します[＃3761](https://github.com/pingcap/pd/pull/3761)
+    -   領域散乱操作中に発生する可能性のあるPDpanicの問題を修正します[＃3761](https://github.com/pingcap/pd/pull/3761)
     -   一部の演算子の優先度が正しく設定されていない問題を修正します[＃3703](https://github.com/pingcap/pd/pull/3703)
-    -   存在しないストアから`evict-leader`のスケジューラーを削除するときに発生する可能性のあるPDパニックの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
-    -   店舗が多い場合にPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
+    -   存在しないストアから`evict-leader`のスケジューラーを削除するときに発生する可能性のあるPDpanicの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
+    -   店舗数が多いとPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
 
 -   TiDBダッシュボード
 
     -   **プロファイリング**UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正します[＃944](https://github.com/pingcap/tidb-dashboard/pull/944)
     -   **ステートメント**UIに「プランカウント」が表示されない問題を修正します[＃939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    -   クラスタのアップグレード後に**SlowQueryUI**に「不明なフィールド」エラーが表示される可能性がある問題を修正します[＃902](https://github.com/pingcap/tidb-dashboard/issues/902)
+    -   クラスタのアップグレード後に**SlowQueryUI**が「不明なフィールド」エラーを表示する可能性がある問題を修正します[＃902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 -   TiFlash
 
-    -   DAGリクエストのコンパイル時に発生する可能性のあるパニックの問題を修正します
-    -   読み取り負荷が大きいときに発生するパニックの問題を修正します
+    -   DAGリクエストのコンパイル時に発生する可能性のあるpanicの問題を修正します
+    -   読み取り負荷が大きいときに発生するpanicの問題を修正します
     -   列ストレージでの分割の失敗が原因でTiFlashが再起動し続ける問題を修正します
     -   TiFlashがデルタデータを削除できない潜在的なバグを修正します
     -   共有デルタインデックスを同時に複製するときに発生する誤った結果を修正します
     -   データが不完全な場合にTiFlashが再起動しないバグを修正します
     -   古いdmファイルを自動的に削除できない問題を修正します
-    -   特定の引数を使用して`SUBSTRING`関数を実行するときに発生するパニックの問題を修正します
+    -   特定の引数を使用して`SUBSTRING`関数を実行するときに発生するpanicの問題を修正します
     -   `INTEGER`タイプを`TIME`タイプにキャストするときの誤った結果の問題を修正します
 
 -   ツール
@@ -146,10 +146,10 @@ TiDBバージョン：4.0.14
 
     -   TiDB Lightning
 
-        -   TiDBLightningがParquetファイルの`DECIMAL`タイプのデータの解析に失敗する問題を修正します[＃1276](https://github.com/pingcap/br/pull/1276)
-        -   TiDBLightningがインポートされた大きなCSVファイルを分割するときに報告されるEOFエラーを修正します[＃1133](https://github.com/pingcap/br/issues/1133)
+        -   TiDBLightningがTiDB Lightningファイルの`DECIMAL`タイプのデータの解析に失敗する問題を修正します[＃1276](https://github.com/pingcap/br/pull/1276)
+        -   TiDB Lightningがインポートされた大きなCSVファイルを分割するときに報告されるEOFエラーを修正します[＃1133](https://github.com/pingcap/br/issues/1133)
         -   TiDB Lightningが`FLOAT`または`DOUBLE`タイプ[＃1185](https://github.com/pingcap/br/pull/1185)の`auto_increment`列のテーブルをインポートすると、非常に大きなベース値が生成されるバグを修正します。
-        -   4GBを超えるKVデータを生成するときに発生するTiDBLightningパニックの問題を修正します[＃1128](https://github.com/pingcap/br/pull/1128)
+        -   4GBを超えるKVデータを生成するときに発生するTiDB Lightningpanicの問題を修正します[＃1128](https://github.com/pingcap/br/pull/1128)
 
     -   Dumpling
 
@@ -158,9 +158,9 @@ TiDBバージョン：4.0.14
     -   TiCDC
 
         -   新しいテーブルパーティションを追加した後の余分なパーティションディスパッチの問題を修正します[＃2205](https://github.com/pingcap/tiflow/pull/2205)
-        -   [＃2023](https://github.com/pingcap/tiflow/pull/2023)が13の読み取りに失敗したときに発生するパニックの問題を修正し`/proc/meminfo`
+        -   [＃2023](https://github.com/pingcap/tiflow/pull/2023)が13の読み取りに失敗したときに発生するpanicの問題を修正し`/proc/meminfo`
         -   [＃1957](https://github.com/pingcap/tiflow/pull/1957)のランタイムメモリ消費を削減する[＃2011](https://github.com/pingcap/tiflow/pull/2011)
         -   MySQLシンクがエラーに遭遇して一時停止した後に一部のMySQL接続がリークする可能性があるバグを修正します[＃1945](https://github.com/pingcap/tiflow/pull/1945)
         -   開始TSが現在のTSからGCTTL1を引いた値よりも小さい場合、 [＃1839](https://github.com/pingcap/tiflow/issues/1839)チェンジフィードを作成できない問題を修正します。
-        -   CPUオーバーヘッド[＃1853](https://github.com/pingcap/tiflow/issues/1853)が多すぎないように、ソートヒープのメモリ`malloc`を減らします。
+        -   ソートヒープのメモリ`malloc`を減らして、CPUオーバーヘッド[＃1853](https://github.com/pingcap/tiflow/issues/1853)が多すぎないようにします。
         -   テーブルを移動するときにレプリケーションタスクが停止する可能性があるバグを修正します[＃1827](https://github.com/pingcap/tiflow/pull/1827)

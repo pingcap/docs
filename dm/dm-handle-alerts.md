@@ -32,7 +32,7 @@ summary: Understand how to deal with the alert information in DM.
 
     アラートを処理するには、次の手順を実行できます。
 
-    1.  対応するDM-workerノードの動作ステータスを表示します。
+    1.  対応するDM-workerノードの動作ステータスをビューします。
     2.  ノードが接続されているか確認してください。
     3.  ログを介してエラーをトラブルシューティングします。
 
@@ -74,7 +74,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    リレーログ処理ユニットがエラーに遭遇すると、このユニットは`Paused`状態に移行し、アラートが即座にトリガーされます。
+    リレーログ処理ユニットでエラーが発生すると、このユニットは`Paused`状態に移行し、すぐにアラートがトリガーされます。
 
 -   解決：
 

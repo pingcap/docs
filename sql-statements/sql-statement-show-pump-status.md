@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW PUMP STATUS for the TiDB database.
 
 # ポンプステータスを表示 {#show-pump-status}
 
-`SHOW PUMP STATUS`ステートメントは、クラスタのすべてのポンプノードのステータス情報を表示します。
+`SHOW PUMP STATUS`ステートメントは、クラスタのすべてのPumpノードのステータス情報を表示します。
 
 ## 例 {#examples}
 

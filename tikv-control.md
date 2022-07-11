@@ -3,13 +3,13 @@ title: TiKV Control User Guide
 summary: Use TiKV Control to manage a TiKV cluster.
 ---
 
-# TiKVControlユーザーガイド {#tikv-control-user-guide}
+# TiKV Controlユーザーガイド {#tikv-control-user-guide}
 
-TiKV Control（ `tikv-ctl` ）は、クラスタの管理に使用されるTiKVのコマンドラインツールです。そのインストールディレクトリは次のとおりです。
+TiKV Control （ `tikv-ctl` ）は、クラスタの管理に使用されるTiKVのコマンドラインツールです。そのインストールディレクトリは次のとおりです。
 
 -   クラスタがTiUPを使用して展開されている場合、 `tikv-ctl`のディレクトリが`~/.tiup/components/ctl/{VERSION}/`のディレクトリにあります。
 
-## TiUPでTiKVコントロールを使用する {#use-tikv-control-in-tiup}
+## TiUPでTiKV Controlを使用する {#use-tikv-control-in-tiup}
 
 > **ノート：**
 >
@@ -129,7 +129,7 @@ AAFF
 
 このセクションでは、 `tikv-ctl`がサポートするサブコマンドについて詳しく説明します。一部のサブコマンドは、多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`を実行してください。
 
-### ラフトステートマシンの情報を表示する {#view-information-of-the-raft-state-machine}
+### Raftステートマシンの情報をビューする {#view-information-of-the-raft-state-machine}
 
 `raft`サブコマンドを使用して、特定の時点でのRaftステートマシンのステータスを表示します。ステータス情報には、3つの構造体（ **RegionLocalState** 、 <strong>RaftLocalState</strong> 、および<strong>RegionApplyState</strong> ）と、特定のログの対応するエントリの2つの部分が含まれます。
 
@@ -146,7 +146,7 @@ apply state key: \001\002\000\000\000\000\000\000\000\002\003
 apply state: Some(applied_index: 314617 truncated_state {index: 313474 term: 151})
 ```
 
-### リージョンサイズを表示する {#view-the-region-size}
+### リージョンサイズをビューする {#view-the-region-size}
 
 `size`コマンドを使用して、リージョンサイズを表示します。
 
@@ -171,7 +171,7 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
 ```
 
-### 特定のキーのMVCCを表示する {#view-mvcc-of-a-given-key}
+### 特定のキーのMVCCをビューする {#view-mvcc-of-a-given-key}
 
 `scan`コマンドと同様に、 `mvcc`コマンドを使用して特定のキーのMVCCを表示できます。
 
@@ -247,7 +247,7 @@ success!
 
 `tombstone`コマンドは通常、同期ログが有効になっておらず、電源を切るとRaftステートマシンに書き込まれたデータの一部が失われる状況で使用されます。
 
-TiKVインスタンスでは、このコマンドを使用して、一部のリージョンのステータスをトゥームストーンに設定できます。次に、インスタンスを再起動すると、それらのリージョンはスキップされ、それらのリージョンの破損したRaftステートマシンによって引き起こされる再起動の失敗を回避します。これらのリージョンには、Raftメカニズムを介して読み取りと書き込みを続行できるように、他のTiKVインスタンスに十分な正常なレプリカが必要です。
+TiKVインスタンスでは、このコマンドを使用して、一部のリージョンのステータスをトゥームストーンに設定できます。次に、インスタンスを再起動すると、それらのリージョンはスキップされ、それらのリージョンの破損したRaftステートマシンによって引き起こされる再起動の失敗を回避します。これらのリージョンには、 Raftメカニズムを介して読み取りと書き込みを続行できるように、他のTiKVインスタンスに十分な正常なレプリカが必要です。
 
 通常、 `remove-peer`コマンドを使用して、このリージョンの対応するピアを削除できます。
 
@@ -288,7 +288,7 @@ success!
 
 ### TiKVに<code>consistency-check</code>要求を送信します {#send-a-code-consistency-check-code-request-to-tikv}
 
-`consistency-check`コマンドを使用して、特定のリージョンの対応するラフト内のレプリカ間の整合性チェックを実行します。チェックが失敗すると、TiKV自体がパニックになります。 `--host`で指定されたTiKVインスタンスがリージョンリーダーでない場合、エラーが報告されます。
+`consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗すると、TiKV自体がパニックになります。 `--host`で指定されたTiKVインスタンスがリージョンリーダーでない場合、エラーが報告されます。
 
 ```bash
 $ tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
@@ -309,16 +309,16 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 
 ### Raftステートマシンが破損しているリージョンを印刷します {#print-the-regions-where-the-raft-state-machine-corrupts}
 
-TiKVの起動中にリージョンをチェックしないようにするには、 `tombstone`コマンドを使用して、RaftステートマシンがTombstoneにエラーを報告するリージョンを設定します。このコマンドを実行する前に、 `bad-regions`コマンドを使用してエラーのあるリージョンを見つけ、自動処理のために複数のツールを組み合わせます。
+TiKVの起動中にリージョンをチェックしないようにするには、 `tombstone`コマンドを使用して、 RaftステートマシンがTombstoneにエラーを報告するリージョンを設定します。このコマンドを実行する前に、 `bad-regions`コマンドを使用してエラーのあるリージョンを見つけ、自動処理のために複数のツールを組み合わせます。
 
 ```bash
 $ tikv-ctl --data-dir /path/to/tikv bad-regions
 all regions are healthy
 ```
 
-コマンドが正常に実行されると、上記の情報が出力されます。コマンドが失敗すると、不良リージョンのリストが出力されます。現在、検出できるエラーには、 `last index`の不一致、および`apply index`ログの損失が含まれ`commit index` 。スナップショットファイルの損傷などの他の条件については、さらにサポートが必要です。
+コマンドが正常に実行されると、上記の情報が出力されます。コマンドが失敗すると、不良リージョンのリストが出力されます。現在、検出できるエラーには、 `last index`の不一致、および`apply index`ログの損失がRaftれ`commit index` 。スナップショットファイルの損傷などの他の条件については、さらにサポートが必要です。
 
-### リージョンのプロパティを表示する {#view-region-properties}
+### リージョンのプロパティをビューする {#view-region-properties}
 
 -   `/path/to/tikv`でデプロイされたTiKVインスタンスのリージョン2のプロパティをローカルで表示するには：
 
@@ -503,7 +503,7 @@ $ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/d
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
-データ暗号化キーをダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスターキーも指定する必要があります。マスターキーの設定方法については、 [残りの暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`構成は無視され、マスターキーのローテーションはトリガーされません。
+データ暗号化キーをダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスターキーも指定する必要があります。マスターキーの設定方法については、 [暗号化-保管時](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`構成は無視され、マスターキーのローテーションはトリガーされません。
 
 ```
 # conf.toml
@@ -543,9 +543,9 @@ Type "I consent" to continue, anything else to exit: I consent
 
 ### 破損したSSTファイルに関連する情報を印刷する {#print-information-related-to-damaged-sst-files}
 
-TiKV内の破損したSSTファイルにより、TiKVプロセスがパニックになる可能性があります。 TiDB v6.1.0より前では、これらのファイルによりTiKVはすぐにパニックになります。 TiDB v6.1.0以降、TiKVプロセスはSSTファイルが破損してから1時間後にパニックになります。
+TiKV内の破損したSSTファイルにより、TiKVプロセスがpanicになる可能性があります。 TiDB v6.1.0より前では、これらのファイルによりTiKVはすぐにpanicになります。 TiDB v6.1.0以降、TiKVプロセスはSSTファイルが破損してから1時間後にpanicになります。
 
-破損したSSTファイルをクリーンアップするには、TiKV Controlで`bad-ssts`コマンドを実行して、必要な情報を表示します。以下は、コマンドと出力の例です。
+破損したSSTファイルをクリーンアップするには、 TiKV Controlで`bad-ssts`コマンドを実行して、必要な情報を表示します。以下は、コマンドと出力の例です。
 
 > **ノート：**
 >

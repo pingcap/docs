@@ -27,7 +27,7 @@ PLAN REPLAYER DUMP EXPLAIN [ANALYZE] sql-statement;
 -   TiDBバージョン
 -   TiDB構成
 -   TiDBセッション変数
--   TiDBSQLバインディング
+-   TiDB SQLバインディング
 -   `sql-statement`のテーブルスキーマ
 -   `sql-statement`のテーブルの統計
 -   `EXPLAIN [ANALYZE] sql-statement`の結果

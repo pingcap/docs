@@ -7,7 +7,7 @@ summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 
 [TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタの運用および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DMクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなど、毎日のTiDBデータ移行（DM）操作を簡単に実行し、DMクラスタパラメーターを管理できクラスタ。
 
-TiUPは、DMv2.0以降のDMバージョンのデプロイをサポートします。このドキュメントでは、さまざまなトポロジのDMクラスターを展開する方法を紹介します。
+TiUPは、DMv2.0以降のDMバージョンの展開をサポートします。このドキュメントでは、さまざまなトポロジのDMクラスターを展開する方法を紹介します。
 
 > **ノート：**
 >
@@ -33,7 +33,7 @@ DMが完全なデータレプリケーションタスクを実行する場合、
 
     インストール後、 `~/.bashrc`はPATHにTiUPを追加するように変更されているため、新しいターミナルを開くか、グローバル環境変数`source ~/.bashrc`を再宣言して使用する必要があります。
 
-2.  TiUPDMコンポーネントをインストールします。
+2.  TiUP DMコンポーネントをインストールします。
 
     {{< copyable "" >}}
 
@@ -143,7 +143,7 @@ alertmanager_servers:
 >     -   TiUPノードは、すべてのDMマスターノードの`port`つ（デフォルトでは`8261` ）に接続できます。
 >     -   TiUPノードは、すべてのDMワーカーノードの`port`つ（デフォルトでは`8262` ）に接続できます。
 
-`master_servers.host.config`つのパラメーターの説明については、 [マスターパラメーター](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`のパラメーターの説明については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+`master_servers.host.config`つのパラメータの説明については、 [マスターパラメーター](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`のパラメーターの説明については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
 
 ## 手順3：展開コマンドを実行する {#step-3-execute-the-deployment-command}
 
@@ -200,7 +200,7 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-期待される出力には、インスタンスID、ロール、ホスト、リスニングポート、ステータス（クラスタがまだ開始されていないため、ステータスは`Down` ）、およびディレクトリ情報が含まれ`inactive` 。
+期待される出力には、インスタンスID、役割、ホスト、リスニングポート、ステータス（クラスタがまだ開始されていないため、ステータスは`Down` ）、およびディレクトリ情報が含まれ`inactive` 。
 
 ## ステップ6：TiDBクラスタを開始します {#step-6-start-the-tidb-cluster}
 

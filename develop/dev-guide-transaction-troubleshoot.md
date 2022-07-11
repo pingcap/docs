@@ -15,7 +15,7 @@ summary: Learn about how to handle transaction errors, such as deadlocks and app
 ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 ```
 
-デッドロックは、2つ以上のトランザクションが、すでに保持しているロックを解放するために相互に待機している場合、またはロックの順序に一貫性がないためにロックリソースを待機しているループが発生した場合に発生します。
+デッドロックは、2つ以上のトランザクションが、すでに保持しているロックを解放するために相互に待機している場合に発生します。または、ロックの順序に一貫性がないため、ループがロックリソースを待機します。
 
 次に、 [`bookshop`](/develop/dev-guide-bookshop-schema-design.md)データベースのテーブル`books`を使用したデッドロックの例を示します。
 
@@ -65,7 +65,7 @@ UPDATE books SET stock=stock-1 WHERE id IN (1, 2);
 
 ### 解決策3：楽観的なトランザクションを使用する {#solution-3-use-optimistic-transactions}
 
-楽観的なトランザクションモデルにはデッドロックはありません。ただし、アプリケーションでは、失敗した場合に備えて楽観的なトランザクション再試行ロジックを追加する必要があります。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
+楽観的なトランザクションモデルにはデッドロックはありません。ただし、アプリケーションでは、失敗した場合に備えて、楽観的なトランザクション再試行ロジックを追加する必要があります。詳細については、 [アプリケーションの再試行とエラー処理](#application-retry-and-error-handling)を参照してください。
 
 ### 解決策4：再試行 {#solution-4-retry}
 
@@ -115,7 +115,7 @@ while True:
 
 > ノート：
 >
-> `Error 9007: Write conflict`が頻繁に発生する場合は、スキーマ設計とワークロードのデータアクセスパターンを確認して、競合の根本原因を特定し、より適切な設計で競合を回避する必要があります。トランザクションの競合をトラブルシューティングして解決する方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
+> `Error 9007: Write conflict`が頻繁に発生する場合は、スキーマ設計とワークロードのデータアクセスパターンを確認して、競合の根本原因を特定し、より適切な設計で競合を回避する必要があります。トランザクションの競合のトラブルシューティングと解決方法については、 [ロックの競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 
 ## も参照してください {#see-also}
 

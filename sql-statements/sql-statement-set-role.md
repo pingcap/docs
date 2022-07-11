@@ -88,7 +88,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-次の`SET ROLE`のステートメントを実行して、有効なすべての役割をキャンセルします。
+次の`SET ROLE`のステートメントを実行して、有効なすべてのロールをキャンセルします。
 
 {{< copyable "" >}}
 

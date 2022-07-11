@@ -30,7 +30,7 @@ TiDB、TiKV、およびTiFlashノードの計算コストは、クラウドプ�
 
 ## ストレージコスト {#storage-cost}
 
-TiKVノードとTiFlashノードはどちらも、データを永続ブロックストレージに保存します。ストレージコストは、クラスタのすべてのTiKVノードとTiFlashノードが消費するストレージの総量に応じて生成されます。
+TiKVノードとTiFlashノードはどちらも、データを永続的なブロックストレージに保存します。ストレージコストは、クラスタのすべてのTiKVノードとTiFlashノードが消費するストレージの総量に応じて生成されます。
 
 TiDB Cloudは、発生した費用を顧客に転嫁します。詳細については、 [TiDB Cloudの価格](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 

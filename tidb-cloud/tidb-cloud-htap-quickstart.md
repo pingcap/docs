@@ -37,7 +37,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bikeshare
 -   `AVAILABLE`は、特定のテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`は利用可能、 `0`は利用不可を意味します。レプリカが使用可能になると、このステータスは変更されなくなります。
 -   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` `1.0` 。 `1.0`は、少なくとも1つのレプリカが複製されることを意味します。
 
-### 手順2.HTAPを使用してデータをクエリする {#step-2-query-data-using-htap}
+### ステップ2.HTAPを使用してデータをクエリする {#step-2-query-data-using-htap}
 
 レプリケーションのプロセスが完了すると、いくつかのクエリの実行を開始できます。
 

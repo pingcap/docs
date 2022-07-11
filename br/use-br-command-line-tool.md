@@ -31,7 +31,7 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 -   `full` ： `backup`のサブコマンド。
 -   `-s` （または`--storage` ）：バックアップファイルが保存されるパスを指定するオプション。
 -   `"s3://backup-data/2022-01-30/"` ：パラメータ`-s`これは、バックアップデータがAmazonS3の`backup-data`バケットの`2022-01-30/`ディレクトリに保存されていることを示します。
--   `--pd` ：配置ドライバー（PD）サービスアドレスを指定するオプション。
+-   `--pd` ：配置Driver（PD）サービスアドレスを指定するオプション。
 -   `"${PDIP}:2379"` ： `--pd`のパラメータ。
 
 ### サブコマンド {#sub-commands}

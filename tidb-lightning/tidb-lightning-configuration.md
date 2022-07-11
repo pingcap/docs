@@ -3,15 +3,15 @@ title: TiDB Lightning Configuration
 summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 ---
 
-# TiDBLightningConfiguration / コンフィグレーション {#tidb-lightning-configuration}
+# TiDB LightningConfiguration / コンフィグレーション {#tidb-lightning-configuration}
 
-このドキュメントでは、TiDB Lightningのグローバル構成、タスク構成、およびTiKVインポーター構成のサンプルを提供し、コマンドラインパラメーターの使用法について説明します。
+このドキュメントでは、 TiDB Lightningのグローバル構成、タスク構成、およびTiKVインポーター構成のサンプルを提供し、コマンドラインパラメーターの使用法について説明します。
 
 ## Configuration / コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
+TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、 TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
 
-### TiDB Lightning（グローバル） {#tidb-lightning-global}
+### TiDB Lightning （グローバル） {#tidb-lightning-global}
 
 ```toml
 ### tidb-lightning global configuration
@@ -33,7 +33,7 @@ max-days = 28
 max-backups = 14
 ```
 
-### TiDB Lightning（タスク） {#tidb-lightning-task}
+### TiDB Lightning （タスク） {#tidb-lightning-task}
 
 ```toml
 ### tidb-lightning task configuration
@@ -418,7 +418,7 @@ min-available-ratio = 0.05
 | -f*ルール*                     | [テーブルフィルタールール](/table-filter.md) （複数回指定可能）                                                          | `mydumper.filter`              |
 | -*バックエンドバックエンド*             | [配信バックエンド](/tidb-lightning/tidb-lightning-backends.md) （ `local` 、 `tidb` `importer`                | `tikv-importer.backend`        |
 | --ログファイル*ファイル*              | ログファイルのパス。デフォルトでは`/tmp/lightning.log.{timestamp}`です。 &#39;-&#39;に設定すると、ログファイルがstdoutに出力されることを意味します。 | `lightning.log-file`           |
-| --status-addr *ip：port*     | TiDBLightningサーバーのリスニングアドレス                                                                         | `lightning.status-port`        |
+| --status-addr *ip：port*     | TiDB Lightningサーバーのリスニングアドレス                                                                        | `lightning.status-port`        |
 | --importer *host：port*      | TiKVインポーターの住所                                                                                       | `tikv-importer.addr`           |
 | --pd-urls *host：port*       | PDエンドポイントアドレス                                                                                       | `tidb.pd-addr`                 |
 | --tidb-ホスト*ホスト*             | TiDBサーバーホスト                                                                                         | `tidb.host`                    |
@@ -433,7 +433,7 @@ min-available-ratio = 0.05
 | --ca*ファイル*                  | TLS接続用のCA証明書パス                                                                                      | `security.ca-path`             |
 | --証明書*ファイル*                 | TLS接続の証明書パス                                                                                         | `security.cert-path`           |
 | --キー*ファイル*                  | TLS接続用の秘密鍵パス                                                                                        | `security.key-path`            |
-| --server-mode               | サーバーモードでTiDBLightningを起動します                                                                         | `lightning.server-mode`        |
+| --server-mode               | サーバーモードでTiDB Lightningを起動します                                                                        | `lightning.server-mode`        |
 
 コマンドラインパラメーターと構成ファイルの対応する設定の両方が提供されている場合は、コマンドラインパラメーターが使用されます。たとえば、 `./tidb-lightning -L debug --config cfg.toml`を実行すると、 `cfg.toml`の内容に関係なく、常にログレベルが「デバッグ」に設定されます。
 
@@ -448,7 +448,7 @@ min-available-ratio = 0.05
 | --フェッチモード                        | すべてのTiKVストアの現在のモードを出力します                  |
 | --import-engine *uuid*           | 閉じたエンジンファイルをTiKVインポーターからTiKVクラスタにインポートします |
 | --cleanup-engine *uuid*          | TiKVインポーターからエンジンファイルを削除します                |
-| --checkpoint-dump*フォルダー*         | 現在のチェックポイントをCSVとしてフォルダーにダンプします            |
+| --checkpoint-dump*フォルダー*         | 現在のチェックポイントをCSVとしてフォルダにダンプします             |
 | --checkpoint-error-テーブル名を破棄し*ます* | チェックポイントを削除し、エラーが発生した場合はテーブルを削除します        |
 | --checkpoint-error-テーブル名を無視し*ます* | 指定されたテーブルに関連するチェックポイントに記録されたエラーを無視します     |
 | --チェックポイント-テーブル名を削除し*ます*         | テーブルのチェックポイントを無条件に削除します                   |

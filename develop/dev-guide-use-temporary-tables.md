@@ -59,7 +59,7 @@ TiDBの一時テーブルは、ローカル一時テーブルとグローバル�
 <SimpleTab>
 <div label="SQL" href="local-sql">
 
-`CREATE TEMPORARY TABLE <table_name>`ステートメントを使用して一時テーブルを作成できます。デフォルトのタイプはローカル一時テーブルで、現在のセッションにのみ表示されます。
+`CREATE TEMPORARY TABLE <table_name>`ステートメントを使用して一時テーブルを作成できます。デフォルトのタイプはローカル一時テーブルであり、現在のセッションにのみ表示されます。
 
 {{< copyable "" >}}
 
@@ -206,7 +206,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 </div>
 </SimpleTab>
 
-## 一時テーブルを表示する {#view-temporary-tables}
+## 一時テーブルをビューする {#view-temporary-tables}
 
 `SHOW [FULL] TABLES`ステートメントを使用すると、既存のグローバル一時テーブルのリストを表示できますが、リストにローカル一時テーブルを表示することはできません。現在のところ、TiDBには、一時テーブル情報を格納するための同様の`information_schema.INNODB_TEMP_TABLE_INFO`システムテーブルがありません。
 

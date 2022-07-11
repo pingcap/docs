@@ -56,7 +56,7 @@ TiDBバージョン：5.0.1
 
     -   コプロセッサーが`IN`式[＃10018](https://github.com/tikv/tikv/pull/10018)の符号付きまたは符号なし整数型を適切に処理できない問題を修正します。
     -   SSTファイルをバッチ取り込みした後の多くの空のリージョンの問題を修正します[＃10015](https://github.com/tikv/tikv/pull/10015)
-    -   `cast_string_as_time`の入力が無効なUTF-8バイト[＃9995](https://github.com/tikv/tikv/pull/9995)の場合に発生する可能性のあるパニックを修正します。
+    -   `cast_string_as_time`の入力が無効なUTF-8バイト[＃9995](https://github.com/tikv/tikv/pull/9995)の場合に発生する可能性のあるpanicを修正します。
     -   ファイル辞書ファイルが破損した後にTiKVが起動できないバグを修正します[＃9992](https://github.com/tikv/tikv/pull/9992)
 
 -   TiFlash
@@ -72,8 +72,8 @@ TiDBバージョン：5.0.1
     -   列名が重複するとTiFlashでエラーが発生する問題を修正します
     -   TiFlashがMPPプランの解析に失敗する問題を修正します
     -   テーブルGC中にnullポインタの例外が発生する可能性があるという潜在的な問題を修正します
-    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashパニックの問題を修正します
-    -   BRの復元中にTiFlashがパニックになる可能性がある問題を修正します
+    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正します
+    -   BRの復元中にTiFlashがpanicになる可能性がある問題を修正します
 
 -   ツール
 
@@ -91,7 +91,7 @@ TiDBバージョン：5.0.1
 
         -   Unified Sorterの同時実行の問題を修正し、役に立たないエラーメッセージをフィルタリングします[＃1678](https://github.com/pingcap/tiflow/pull/1678)
         -   冗長ディレクトリの作成がMinIO1でのレプリケーションを中断する可能性があるバグを修正し[＃1672](https://github.com/pingcap/tiflow/pull/1672)
-        -   `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定して、MySQL5.7ダウンストリームがアップストリームTiDB5と同じ動作を維持するようにし[＃1659](https://github.com/pingcap/tiflow/pull/1659) 。
+        -   `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定して、 MySQL 5.7ダウンストリームがアップストリームTiDB5と同じ動作を維持するようにし[＃1659](https://github.com/pingcap/tiflow/pull/1659) 。
         -   `io.EOF`を誤って処理すると、レプリケーションが中断される可能性があるという問題を修正します[＃1648](https://github.com/pingcap/tiflow/pull/1648)
         -   TiCDCダッシュボードのTiKVCDCエンドポイントCPUメトリックを修正します[＃1645](https://github.com/pingcap/tiflow/pull/1645)
         -   場合によってはレプリケーションのブロックを回避するために`defaultBufferChanSize`を増やします[＃1632](https://github.com/pingcap/tiflow/pull/1632)

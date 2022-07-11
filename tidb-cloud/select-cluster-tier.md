@@ -33,12 +33,12 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 
 -   稼働時間のSLA保証はありません。
 -   高可用性や自動フェイルオーバーはありません。
--   クラスタへのアップグレードでは、大幅なダウンタイムが発生する可能性があります。
+-   クラスターへのアップグレードでは、大幅なダウンタイムが発生する可能性があります。
 -   各クラスタでは、1日1回の自動バックアップと2回の手動バックアップが可能です。
 -   開発者層クラスタへの接続の最大数は50です。
 -   チェンジフィード（Apache KafkaSinkおよびMySQLSink）を作成したり、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用して増分データを複製したりすることはできません。
 -   VPCピアリングを使用してクラスターに接続することはできません。
--   クラスタをより大きなストレージや標準ノードに拡張したり、ノードの数を増やしたりすることはできません。
+-   クラスターをより大きなストレージや標準ノードに拡張したり、ノードの数を増やしたりすることはできません。
 -   サードパーティの監視サービスを使用することはできません。
 -   TiDBクラスタのポート番号をカスタマイズすることはできません。
 -   データ転送は、1週間に合計20GiBの入出力に制限されています。 20 GiBの制限に達すると、ネットワークトラフィックは10 KB/sに抑制されます。
@@ -46,7 +46,7 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 
 ## 専用層 {#dedicated-tier}
 
-TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、本番環境での使用専用です。
+TiDB Cloud Dedicated Tierは、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番環境専用です。
 
 専用層クラスターの場合、ビジネスニーズに応じて、TiDB、TiKV、およびTiFlashのクラスタサイズを簡単にカスタマイズできます。 TiKVノードとTiFlashノードごとに、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)つの異なるアベイラビリティーゾーンに分散されます。
 

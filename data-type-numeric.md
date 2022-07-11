@@ -51,7 +51,7 @@ BOOLEAN
 
 ### <code>TINYINT</code>タイプ {#code-tinyint-code-type}
 
-`TINYINT`データ型は、範囲[-128、127]の符号付き値と範囲[0、255]の符号なし値を格納します。
+`TINYINT`データ型は、範囲[-128、127]の符号付きの値と範囲[0、255]の符号なしの値を格納します。
 
 ```sql
 TINYINT[(M)] [UNSIGNED] [ZEROFILL]
@@ -75,7 +75,7 @@ MEDIUMINT[(M)] [UNSIGNED] [ZEROFILL]
 
 ### <code>INTEGER</code>タイプ {#code-integer-code-type}
 
-`INTEGER`タイプとそのエイリアス`INT`は、範囲[-2147483648、2147483647]の符号付き値と、範囲[0、4294967295]の符号なし値を格納します。
+`INTEGER`タイプとそのエイリアス`INT`は、範囲[-2147483648、2147483647]の符号付きの値と、範囲[0、4294967295]の符号なしの値を格納します。
 
 ```sql
 INT[(M)] [UNSIGNED] [ZEROFILL]
@@ -89,7 +89,7 @@ INTEGER[(M)] [UNSIGNED] [ZEROFILL]
 
 ### <code>BIGINT</code>タイプ {#code-bigint-code-type}
 
-`BIGINT`データ型は、範囲[-9223372036854775808、9223372036854775807]の符号付き値と範囲[0、18446744073709551615]の符号なし値を格納します。
+`BIGINT`データ型は、範囲[-9223372036854775808、9223372036854775807]の符号付きの値と、範囲[0、18446744073709551615]の符号なしの値を格納します。
 
 ```sql
 BIGINT[(M)] [UNSIGNED] [ZEROFILL]

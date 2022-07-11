@@ -17,7 +17,7 @@ summary: Learn how to locate and analyze slow queries.
 一般に、遅いクエリには次の主な原因があります。
 
 -   間違ったインデックスが選択された、間違った結合タイプまたはシーケンスが選択されたなどのオプティマイザの問題。
--   システムの問題。オプティマイザが原因ではないすべての問題は、システムの問題です。たとえば、ビジー状態のTiKVインスタンスはリクエストをゆっくり処理します。地域情報が古くなっていると、クエリが遅くなります。
+-   システムの問題。オプティマイザが原因ではないすべての問題は、システムの問題です。たとえば、ビジー状態のTiKVインスタンスはリクエストをゆっくり処理します。古くなった地域情報により、クエリが遅くなります。
 
 実際の状況では、オプティマイザの問題がシステムの問題を引き起こす可能性があります。たとえば、特定のタイプのクエリの場合、オプティマイザはインデックスの代わりに全表スキャンを使用します。その結果、SQLクエリは多くのリソースを消費し、一部のTiKVインスタンスのCPU使用率が急上昇します。これはシステムの問題のように見えますが、本質的にはオプティマイザの問題です。
 
@@ -55,7 +55,7 @@ summary: Learn how to locate and analyze slow queries.
 2.  TiDBの実行は遅いです。たとえば、 `Join`人のオペレーターはデータをゆっくりと処理します。
 3.  他の重要な段階は遅いです。たとえば、タイムスタンプの取得には長い時間がかかります。
 
-遅いクエリごとに、最初にクエリが属するタイプを判別してから、詳細に分析します。
+遅いクエリごとに、最初にクエリがどのタイプに属するかを判別してから、詳細に分析します。
 
 ### TiKVはデータ処理が遅い {#tikv-is-slow-in-data-processing}
 
@@ -122,9 +122,9 @@ TiKVインスタンスには多くの古いデータがあり、データスキ�
 # Wait_TS: 0.02500000
 ```
 
-#### 時代遅れの地域情報 {#outdated-region-information}
+#### 古くなった地域情報 {#outdated-region-information}
 
-TiDB側のリージョン情報が古くなっている可能性があります。この状況では、TiKVが`regionMiss`エラーを返す場合があります。次に、TiDBはPDからリージョン情報を再度取得します。これは`Cop_backoff`の情報に反映されます。失敗した時間と合計期間の両方が記録されます。
+TiDB側の地域情報が古くなっている可能性があります。この状況では、TiKVは`regionMiss`エラーを返す可能性があります。次に、TiDBはPDからリージョン情報を再度取得します。これは`Cop_backoff`の情報に反映されます。失敗した時間と合計期間の両方が記録されます。
 
 ```
 # Cop_backoff_regionMiss_total_times: 200 Cop_backoff_regionMiss_total_time: 0.2 Cop_backoff_regionMiss_max_time: 0.2 Cop_backoff_regionMiss_max_addr: 127.0.0.1 Cop_backoff_regionMiss_avg_time: 0.2 Cop_backoff_regionMiss_p90_time: 0.2
@@ -149,7 +149,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 5 rows in set (7.77 sec)
 ```
 
-ただし、このタイプのサブクエリの実行は、遅いログで識別できます。
+ただし、このタイプのサブクエリの実行は、低速ログで識別できます。
 
 ```
 # Query_time: 7.770634843

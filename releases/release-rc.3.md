@@ -32,7 +32,7 @@ title: TiDB RC3 Release Notes
 -   MySQL組み込み関数をさらに追加する
 -   システム変数を使用して、大きなトランザクションを小さなトランザクションに自動的に分割してコミットすることをサポートします
 
-## 配置ドライバー（PD） {#placement-driver-pd}
+## 配置Driver（PD） {#placement-driver-pd}
 
 -   gRPCをサポートする
 -   ディザスタリカバリツールキットを提供する

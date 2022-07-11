@@ -33,13 +33,13 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 `ERROR 8139 (HY000): writing inconsistent data in table: t, index: i1, index-handle:4 != record-handle:3, index: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x69, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x1, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x1, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x0, 0x0, 0x0, 0xfc, 0x3, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x4}, flags:0x0, value:[]uint8{0x30}, indexID:1}, record: tables.mutation{key:kv.Key{0x74, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x49, 0x5f, 0x72, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x3}, flags:0xd, value:[]uint8{0x80, 0x0, 0x2, 0x0, 0x0, 0x0, 0x1, 0x2, 0x5, 0x0, 0xa, 0x0, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x68, 0x65, 0x6c, 0x6c, 0x6f}, indexID:0}`
 
-このエラーは、書き込まれるデータのハンドル（つまり、行データのキー）に一貫性がないことを示しています。表`t`のインデックス`i1`の場合、トランザクションによって書き込まれる行のハンドルは、インデックスのキーと値のペアで4、行のレコードのキーと値のペアで3です。この行のデータは書き込まれません。
+このエラーは、書き込まれるデータのハンドル（つまり、行データのキー）に一貫性がないことを示しています。表`t`の索引`i1`の場合、トランザクションによって書き込まれる行のハンドルは、索引のキーと値のペアで4であり、行のレコードのキーと値のペアで3です。この行のデータは書き込まれません。
 
 #### エラー8140 {#error-8140}
 
 `ERROR 8140 (HY000): writing inconsistent data in table: t, index: i2, col: c1, indexed-value:{KindString hellp} != record-value:{KindString hello}`
 
-このエラーは、トランザクションによって書き込まれる行のデータがインデックスのデータと一致しないことを示しています。表`t`の索引`i2`の場合、トランザクションによって書き込まれる行には、索引のキーと値のペアにデータ`hellp`があり、レコードのキーと値のペアにデータ`hello`があります。この行のデータは書き込まれません。
+このエラーは、トランザクションによって書き込まれる行のデータがインデックスのデータと一致しないことを示しています。表`t`のインデックス`i2`の場合、トランザクションによって書き込まれる行には、インデックスのキーと値のペアにデータ`hellp`があり、レコードのキーと値のペアにデータ`hello`があります。この行のデータは書き込まれません。
 
 #### エラー8141 {#error-8141}
 
@@ -67,7 +67,7 @@ TiDBは、トランザクションまたは[`ADMIN CHECK [TABLE|INDEX]`](/sql-st
 
 `ERROR 8223 (HY000): data inconsistency in table: t2, index: i1, handle: {hello, hello}, index-values:"" != record-values:"handle: {hello, hello}, values: [KindString hello KindString hello]"`
 
-このエラーは、 `index-values`がnullで、 `record-values`がnullではないことを示します。これは、行に対応するインデックスがないことを意味します。
+このエラーは、 `index-values`がヌルで`record-values`がヌルではないことを示します。これは、行に対応するインデックスがないことを意味します。
 
 ## 理由と解決策 {#reasons-and-solutions}
 

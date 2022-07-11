@@ -19,7 +19,7 @@ TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prome
 
 ## Prometheus構成をカスタマイズする {#customize-prometheus-configurations}
 
-現在、TiUPはPrometheusルールとスクレイピング構成ファイルのカスタマイズをサポートしています。
+現在、TiUPはPrometheusルールとスクレイプ構成ファイルのカスタマイズをサポートしています。
 
 ### Prometheusルール構成をカスタマイズする {#customize-prometheus-rule-configuration}
 

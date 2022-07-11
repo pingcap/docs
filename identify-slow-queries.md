@@ -77,7 +77,7 @@ insert into t select * from t;
 -   `Get_commit_ts_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）中に`commit_ts`を取得するために費やされた時間。
 -   `Local_latch_wait_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）の前にTiDBがロックの待機に費やす時間。
 -   `Write_keys` ：トランザクションがTiKVの書き込みCFに書き込むキーの数。
--   `Write_size` ：トランザクションがコミットするときに書き込まれるキーまたは値の合計サイズ。
+-   `Write_size` ：トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
 -   `Prewrite_region` ：2フェーズトランザクションコミットの最初のフェーズ（プリライト）に関与するTiKVリージョンの数。各リージョンは、リモートプロシージャコールをトリガーします。
 
 メモリ使用量フィールド：
@@ -144,7 +144,7 @@ TiKVコプロセッサータスクフィールド：
 set @@tidb_enable_collect_execution_info=0;
 ```
 
-`Plan`フィールドの返される結果は、 `EXPLAIN`または`EXPLAIN ANALYZE`の結果とほぼ同じ形式になります。実行プランの詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
+`Plan`フィールドの返される結果は、 `EXPLAIN`または`EXPLAIN ANALYZE`の結果とほぼ同じ形式になります。実行計画の詳細については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を参照してください。
 
 詳細については、 [TiDB固有の変数と構文](/system-variables.md)を参照してください。
 
@@ -204,7 +204,7 @@ TiDB 4.0の場合、 `SLOW_QUERY`は、ローテーションされた低速ロ�
 
 TiDB 4.0は、すべてのTiDBノードの低速クエリ情報をクエリするために[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)のシステムテーブルを追加します。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で`SLOW_QUERY`テーブルのテーブルスキーマとは異なります。 `INSTANCE`列は、低速クエリの行情報のTiDBノードアドレスを表します。 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように`CLUSTER_SLOW_QUERY`を使用できます。
 
-`CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBは、他のノードからすべての低速クエリ情報を取得して1つのTiDBノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
+`CLUSTER_SLOW_QUERY`のテーブルをクエリすると、TiDBは、他のノードからすべての低速クエリ情報を取得して1つのTiDBノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
 ## <code>SLOW_QUERY</code> / <code>CLUSTER_SLOW_QUERY</code>の使用例 {#code-slow-query-code-code-cluster-slow-query-code-usage-examples}
 
@@ -258,7 +258,7 @@ limit 2;
 +-------------+------------------------------------------------------------------+----------------+
 ```
 
-### 同じSQLフィンガープリントを使用して同様の低速クエリをクエリする {#query-similar-slow-queries-with-the-same-sql-fingerprints}
+### 同じSQLフィンガープリントを使用して同様の遅いクエリをクエリする {#query-similar-slow-queries-with-the-same-sql-fingerprints}
 
 Top-N SQLステートメントをクエリした後、同じフィンガープリントを使用して同様の遅いクエリをクエリし続けます。
 
@@ -466,7 +466,7 @@ digest             | 24bd6d8a9b238086c9b8c3d240ad4ef32f79ce94cf5a468c0b8fe1eb5f8
 
 ### 他のTiDB低速ログファイルを解析する {#parse-other-tidb-slow-log-files}
 
-TiDBは、セッション変数`tidb_slow_query_file`を使用して、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会するときに読み取られて解析されるファイルを制御します。セッション変数の値を変更することにより、他の低速クエリログファイルのコンテンツをクエリできます。
+TiDBは、セッション変数`tidb_slow_query_file`を使用して、クエリ`INFORMATION_SCHEMA.SLOW_QUERY`で読み取られ解析されるファイルを制御します。セッション変数の値を変更することにより、他の低速クエリログファイルのコンテンツをクエリできます。
 
 {{< copyable "" >}}
 
@@ -555,7 +555,7 @@ TiDBは、メモリが限られているため、限られた数の低速クエ�
 
 次の表に、出力の詳細を示します。
 
-| 列名             | 説明                                                 |
+| カラム名           | 説明                                                 |
 | :------------- | :------------------------------------------------- |
 | 始める            | SQL実行の開始時刻                                         |
 | 間隔             | SQL実行の期間                                           |

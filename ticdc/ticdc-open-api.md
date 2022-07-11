@@ -244,7 +244,7 @@ curl -X DELETE http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 `state`の値`normal` `finished` 、 `all` 、 `error` `stopped` `failed` 。
 
-このパラメーターが指定されていない場合、状態が正常、停止、または失敗したレプリケーション・タスクの基本情報がデフォルトで返されます。
+このパラメーターが指定されていない場合、デフォルトでは、状態が正常、停止、または失敗したレプリケーションタスクの基本情報が返されます。
 
 ### 例 {#example}
 
@@ -338,7 +338,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 ## レプリケーションタスクを一時停止します {#pause-a-replication-task}
 
-このAPIは非同期インターフェースです。リクエストが成功すると、 `202 Accepted`が返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけであり、コマンドが正常に実行されることを保証するものではありません。
+このAPIは非同期インターフェースです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけであり、コマンドが正常に実行されることを保証するものではありません。
 
 ### URIをリクエストする {#request-uri}
 
@@ -366,7 +366,7 @@ curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/pause
 
 ## レプリケーションタスクを再開します {#resume-a-replication-task}
 
-このAPIは非同期インターフェースです。リクエストが成功すると、 `202 Accepted`が返されます。返される結果は、サーバーがコマンドの実行に同意したことを意味するだけであり、コマンドが正常に実行されることを保証するものではありません。
+このAPIは非同期インターフェースです。リクエストが成功すると、 `202 Accepted`が返されます。返された結果は、サーバーがコマンドの実行に同意したことを意味するだけであり、コマンドが正常に実行されることを保証するものではありません。
 
 ### URIをリクエストする {#request-uri}
 
@@ -582,7 +582,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 | :---------- | :--------- |
 | `log_level` | 設定するログレベル。 |
 
-`log_level`は、「debug」、「info」、「warn」、「error」、「dpanic」、「panic」、および「fatal」の[zapによって提供されるログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします。
+`log_level`は[zapによって提供されるログレベル](https://godoc.org/go.uber.org/zap#UnmarshalText)をサポートします： &quot;debug&quot;、 &quot;info&quot;、 &quot;warn&quot;、 &quot;error&quot;、 &quot;dpanic&quot;、 &quot;panic&quot;、および&quot;fatal&quot;。
 
 ### 例 {#example}
 

@@ -31,8 +31,8 @@ TiDB Ansibleバージョン：3.0.8
     -   理解し[＃13796](https://github.com/pingcap/tidb/pull/13796)ように`change column`のエラーメッセージ出力を最適化する`modify column`
     -   パーティションテーブルのリージョンの分割をサポートする`SPLIT PARTITION TABLE`の構文を追加します[＃13929](https://github.com/pingcap/tidb/pull/13929)
     -   インデックスの作成時にインデックスの長さが正しくチェックされないため、インデックスの長さが3072バイトを超え、エラーが報告されない問題を修正します[＃13779](https://github.com/pingcap/tidb/pull/13779)
-    -   パーティションテーブルにインデックスを追加するのに時間がかかりすぎるために、 `GC life time is shorter than transaction duration`エラーメッセージが報告される可能性があるという問題を修正します[＃14132](https://github.com/pingcap/tidb/pull/14132)
-    -   `DROP COLUMN`の実行時に外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`が実行されたときの[＃14105](https://github.com/pingcap/tidb/pull/14105)を修正し`MODIFY COLUMN` `CHANGE COLUMN`
+    -   パーティションテーブルにインデックスを追加するのに時間がかかりすぎるため、 `GC life time is shorter than transaction duration`エラーメッセージが報告される可能性があるという問題を修正します[＃14132](https://github.com/pingcap/tidb/pull/14132)
+    -   `DROP COLUMN`実行時に外部`CHANGE COLUMN`がチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`実行時のpanicを[＃14105](https://github.com/pingcap/tidb/pull/14105) `MODIFY COLUMN`
 -   サーバ
     -   ステートメントの要約の改善：
         -   多数のSQLメトリックフィールドを追加して、SQLステートメントの詳細な分析を容易にし[＃14168](https://github.com/pingcap/tidb/pull/14168) [＃14151](https://github.com/pingcap/tidb/pull/14151)
@@ -64,9 +64,9 @@ TiDB Ansibleバージョン：3.0.8
 -   取引
     -   新しいクラスタが作成されたときに、 `tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[＃14171](https://github.com/pingcap/tidb/pull/14171)
     -   トランザクションが再試行されたときに単一ステートメントのロック待機時間がリセットされないため、ペシミスティックトランザクションに対してロック待機時間が長すぎるという問題を修正します[＃13990](https://github.com/pingcap/tidb/pull/13990)
-    -   悲観的なトランザクションモード[＃14050](https://github.com/pingcap/tidb/pull/14050)で変更されていないデータのロックが解除されるため、間違ったデータが読み取られる可能性がある問題を修正します。
+    -   悲観的なトランザクションモード[＃14050](https://github.com/pingcap/tidb/pull/14050)では、変更されていないデータのロックが解除されるため、間違ったデータが読み取られる可能性があるという問題を修正します。
     -   mocktikv [＃14175](https://github.com/pingcap/tidb/pull/14175)でプリライトが実行されるとトランザクションタイプが区別されないため、挿入値の制限チェックが繰り返される問題を修正しました。
-    -   `session.TxnState`が[＃13988](https://github.com/pingcap/tidb/pull/13988)の場合、トランザクションが正しく処理されないため、パニックを修正し`Invalid` 。
+    -   `session.TxnState`が[＃13988](https://github.com/pingcap/tidb/pull/13988)の場合、トランザクションが正しく処理されないため、panicを修正し`Invalid` 。
     -   mocktikvの`ErrConfclit`構造に35が含まれて[＃14080](https://github.com/pingcap/tidb/pull/14080)ない問題を修正し`ConflictCommitTS`
     -   ロックを解決した後、TiDBがロックタイムアウトを正しくチェックしないためにトランザクションがブロックされる問題を修正します[＃14083](https://github.com/pingcap/tidb/pull/14083)
 -   モニター
@@ -78,7 +78,7 @@ TiDB Ansibleバージョン：3.0.8
     -   コプロセッサー[＃6051](https://github.com/tikv/tikv/pull/6051)でエラーが発生した場合、出力ログのレベルを`error`から`warn`に変更します。
     -   統計サンプリングデータの更新動作を、行の直接更新から挿入前の削除に変更して、 [＃6069](https://github.com/tikv/tikv/pull/6096) -server1の更新動作との一貫性を維持します。
 -   ラフトストア
-    -   `destroy`のメッセージを`peerfsm`に繰り返し送信し、 `peerfsm`が複数回破壊されることによって引き起こされるパニックを修正します[＃6297](https://github.com/tikv/tikv/pull/6297)
+    -   `destroy`のメッセージを`peerfsm`に繰り返し送信し、 `peerfsm`が複数回破壊されることによって引き起こされるpanicを修正します[＃6297](https://github.com/tikv/tikv/pull/6297)
     -   デフォルト値の`split-region-on-table`を`true`から`false`に更新して、デフォルトでリージョンをテーブルで分割できないようにします[＃6253](https://github.com/tikv/tikv/pull/6253)
 -   エンジン
     -   RocksDBイテレータエラーが極端な条件で正しく処理されないために空のデータが返される可能性がある問題を修正します[＃6326](https://github.com/tikv/tikv/pull/6326)
@@ -93,7 +93,7 @@ TiDB Ansibleバージョン：3.0.8
     -   `context`を使用してクライアントを作成し、新しいクライアントを作成するときにタイムアウト期間を設定することをサポートします[＃1994](https://github.com/pingcap/pd/pull/1994)
     -   `KeepAlive`の接続の作成をサポート[＃2035](https://github.com/pingcap/pd/pull/2035)
 -   `/api/v1/regions`の[＃1986](https://github.com/pingcap/pd/pull/1986)を最適化する
--   `tombstone`の状態のストアを削除するとパニックが発生する可能性がある問題を修正します[＃2038](https://github.com/pingcap/pd/pull/2038)
+-   `tombstone`の状態のストアを削除するとpanicが発生する可能性がある問題を修正します[＃2038](https://github.com/pingcap/pd/pull/2038)
 -   ディスク[＃2011](https://github.com/pingcap/pd/issues/2011)からリージョン情報をロードするときに、オーバーラップしたリージョンが誤って削除される問題を修正し[＃2040](https://github.com/pingcap/pd/pull/2040) 。
 -   etcdをv3.4.0からv3.4.3にアップグレードします（アップグレード後は、pd-recoverを使用してのみetcdを劣化させることができることに注意してください） [＃2058](https://github.com/pingcap/pd/pull/2058)
 

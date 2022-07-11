@@ -3,46 +3,46 @@ title: TiDB Binlog Cluster Deployment
 summary: Learn how to deploy TiDB Binlog cluster.
 ---
 
-# TiDBBinlogクラスターの展開 {#tidb-binlog-cluster-deployment}
+# Binlogクラスターの展開 {#tidb-binlog-cluster-deployment}
 
-このドキュメントでは、 [バイナリパッケージを使用してTiDBBinlogをデプロイする](#deploy-tidb-binlog-using-a-binary-package)の方法について説明します。
+このドキュメントでは、 [バイナリパッケージを使用してBinlogをデプロイする](#deploy-tidb-binlog-using-a-binary-package)の方法について説明します。
 
 ## ハードウェア要件 {#hardware-requirements}
 
-Pump and Drainerは、Intelx86-64アーキテクチャを備えた64ビットユニバーサルハードウェアサーバープラットフォームにデプロイされて動作します。
+PumpとDrainerは、Intelx86-64アーキテクチャを備えた64ビットユニバーサルハードウェアサーバープラットフォームにデプロイされて動作します。
 
 開発、テスト、および実稼働の環境では、サーバーハードウェアの要件は次のとおりです。
 
-| サービス  | サーバーの数 | CPU  | ディスク                                                                        | メモリー |
-| :---- | :----- | :--- | :-------------------------------------------------------------------------- | :--- |
-| ポンプ   | 3      | 8コア+ | SSD、200 GB +                                                                | 16G  |
-| ドレイナー | 1      | 8コア+ | SAS、100 GB以上（binlogがローカルファイルとして出力される場合、ディスクサイズは、これらのファイルが保持される期間によって異なります。） | 16G  |
+| サービス    | サーバーの数 | CPU  | ディスク                                                                        | メモリー |
+| :------ | :----- | :--- | :-------------------------------------------------------------------------- | :--- |
+| Pump    | 3      | 8コア+ | SSD、200 GB +                                                                | 16G  |
+| Drainer | 1      | 8コア+ | SAS、100 GB以上（binlogがローカルファイルとして出力される場合、ディスクサイズは、これらのファイルが保持される期間によって異なります。） | 16G  |
 
-## TiUPを使用してTiDBBinlogをデプロイ {#deploy-tidb-binlog-using-tiup}
+## Binlogを使用してTiDBBinlogをデプロイ {#deploy-tidb-binlog-using-tiup}
 
-TiUPを使用してTiDBBinlogをデプロイすることをお勧めします。これを行うには、TiUPを使用してTiDBをデプロイするときに、TiDBBinlogの`drainer`と`pump`のノード情報を[TiDBBinlogデプロイメントトポロジ](/tidb-binlog-deployment-topology.md)に追加する必要があります。詳細な展開情報については、 [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+Binlogを使用してTiDBBinlogをデプロイすることをお勧めします。これを行うには、TiUPを使用してTiDBをデプロイするときに、 Binlogの`drainer`と`pump`のノード情報を[Binlogデプロイメントトポロジ](/tidb-binlog-deployment-topology.md)に追加する必要があります。詳細な展開情報については、 [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
-## バイナリパッケージを使用してTiDBBinlogをデプロイ {#deploy-tidb-binlog-using-a-binary-package}
+## バイナリパッケージを使用してBinlogをデプロイ {#deploy-tidb-binlog-using-a-binary-package}
 
 ### 公式バイナリパッケージをダウンロードする {#download-the-official-binary-package}
 
-TiDB Binlogのバイナリパッケージは、TiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+TiDB Binlogのバイナリパッケージは、 Binlogに含まれてTiDB Toolkit。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
 ### 使用例 {#the-usage-example}
 
 3つのPDノード、1つのTiDBノード、2つのPumpノード、および1つのDrainerノードがあるとすると、各ノードの情報は次のようになります。
 
-| ノード   | IP           |
-| :---- | :----------- |
-| TiDB  | 192.168.0.10 |
-| PD1   | 192.168.0.16 |
-| PD2   | 192.168.0.15 |
-| PD3   | 192.168.0.14 |
-| ポンプ   | 192.168.0.11 |
-| ポンプ   | 192.168.0.12 |
-| ドレイナー | 192.168.0.13 |
+| ノード     | IP           |
+| :------ | :----------- |
+| TiDB    | 192.168.0.10 |
+| PD1     | 192.168.0.16 |
+| PD2     | 192.168.0.15 |
+| PD3     | 192.168.0.14 |
+| Pump    | 192.168.0.11 |
+| Pump    | 192.168.0.12 |
+| Drainer | 192.168.0.13 |
 
-次のパートでは、上記のノードに基づいてポンプとドレイナーを使用する方法を示します。
+次のパートでは、上記のノードに基づいてPumpとDrainerを使用する方法を示します。
 
 1.  バイナリを使用してPumpをデプロイします。
 
@@ -82,7 +82,7 @@ TiDB Binlogのバイナリパッケージは、TiDBツールキットに含ま�
             the frequency at which a Pump node generates fake binlog ("3" by default, in seconds)
         ```
 
-    -   例として「192.168.0.11」にPumpをデプロイすると、Pump構成ファイルは次のようになります。
+    -   例として「192.168.0.11」にPumpをデプロイすると、 Pump構成ファイルは次のようになります。
 
         ```toml
         # Pump Configuration
@@ -136,7 +136,7 @@ TiDB Binlogのバイナリパッケージは、TiDBツールキットに含ま�
         # write-L0-slowdown-trigger = 17
         ```
 
-    -   ポンプの起動例：
+    -   Pumpの起動例：
 
         {{< copyable "" >}}
 
@@ -204,7 +204,7 @@ TiDB Binlogのバイナリパッケージは、TiDBツールキットに含ま�
             the number of SQL statements of a transaction which are output to the downstream database ("1" by default)
         ```
 
-    -   例として「192.168.0.13」にDrainerをデプロイすると、Drainer構成ファイルは次のようになります。
+    -   例として「192.168.0.13」にDrainerをデプロイすると、 Drainer構成ファイルは次のようになります。
 
         ```toml
         # Drainer Configuration.
@@ -348,11 +348,11 @@ TiDB Binlogのバイナリパッケージは、TiDBツールキットに含ま�
         # topic-name = ""
         ```
 
-    -   ドレイナーの開始：
+    -   Drainerの開始：
 
         > **ノート：**
         >
-        > ダウンストリームがMySQL/TiDBの場合、データの整合性を保証するには、Drainerを最初に起動する前に、 `initial-commit-ts`の値を取得してデータの完全バックアップを作成し、データを復元する必要があります。
+        > ダウンストリームがMySQL/TiDBの場合、データの整合性を保証するには、 `initial-commit-ts`の値を取得してデータの完全バックアップを作成し、 Drainerを最初に起動する前にデータを復元する必要があります。
 
         Drainerを初めて起動するときは、 `initial-commit-ts`パラメーターを使用します。
 
@@ -366,21 +366,21 @@ TiDB Binlogのバイナリパッケージは、TiDBツールキットに含ま�
 
 3.  TiDBサーバーの起動：
 
-    -   Pump and Drainerを起動した後、TiDBサーバーの構成ファイルに次のセクションを追加して、binlogを有効にしてTiDBサーバーを起動します。
+    -   PumpとDrainer and Drainerを起動した後、このセクションをTiDBサーバーの構成ファイルに追加して、binlogを有効にしてTiDBサーバーを起動します。
 
         ```
         [binlog]
         enable=true
         ```
 
-    -   TiDBサーバーはPDから登録されたポンプのアドレスを取得し、それらすべてにデータをストリーミングします。登録されているPumpインスタンスがない場合、TiDBサーバーは起動を拒否するか、Pumpインスタンスがオンラインになるまで起動をブロックします。
+    -   TiDBサーバーはPDから登録されたポンプのアドレスを取得し、それらすべてにデータをストリーミングします。登録されているPumpインスタンスがない場合、TiDBサーバーは起動を拒否するか、 Pumpインスタンスがオンラインになるまで起動をブロックします。
 
 > **ノート：**
 >
-> -   TiDBが実行されているときは、少なくとも1つのポンプが正常に実行されていることを保証する必要があります。
-> -   TiDBサーバーでTiDBBinlogサービスを有効にするには、TiDBで`-enable-binlog`スタートアップパラメーターを使用するか、TiDBサーバー構成ファイルの[binlog]セクションにenable=trueを追加します。
-> -   同じクラスタのすべてのTiDBインスタンスでTiDBBinlogサービスが有効になっていることを確認してください。有効になっていないと、データレプリケーション中にアップストリームとダウンストリームのデータの不整合が発生する可能性があります。 TiDB Binlogサービスが有効になっていないTiDBインスタンスを一時的に実行する場合は、TiDB構成ファイルに`run_ddl=false`を設定します。
+> -   TiDBが実行されているときは、少なくとも1つのPumpが正常に実行されていることを保証する必要があります。
+> -   TiDBサーバーでBinlogサービスを有効にするには、TiDBで`-enable-binlog`スタートアップパラメーターを使用するか、TiDBサーバー構成ファイルの[binlog]セクションにenable=trueを追加します。
+> -   同じクラスタのすべてのTiDBインスタンスでBinlogサービスが有効になっていることを確認してください。有効になっていないと、データ複製中にアップストリームとダウンストリームのデータの不整合が発生する可能性があります。 TiDB Binlogサービスが有効になっていないTiDBインスタンスを一時的に実行する場合は、TiDB構成ファイルに`run_ddl=false`を設定します。
 > -   Drainerは、 `ignore schemas`のテーブル（フィルターリスト内のスキーマ）での`rename`操作をサポートしていません。
-> -   既存のTiDBクラスタでDrainerを起動する場合は、通常、クラスタデータの完全バックアップを作成し、**スナップショットタイムスタンプ**を取得し、データをターゲットデータベースにインポートしてから、Drainerを起動して、対応する<strong>スナップショット</strong>から増分データを複製する必要があります。<strong>タイムスタンプ</strong>。
+> -   既存のTiDBクラスタでDrainerを起動する場合は、通常、クラスタデータの完全バックアップを作成し、**スナップショットタイムスタンプ**を取得し、データをターゲットデータベースにインポートしてから、 Drainerを起動して、対応する<strong>スナップショット</strong>から増分データを複製する必要があります。<strong>タイムスタンプ</strong>。
 > -   ダウンストリームデータベースがTiDBまたはMySQLの場合、アップストリームデータベースとダウンストリームデータベースの`sql_mode`が一致していることを確認してください。つまり、各SQLステートメントがアップストリームで実行され、ダウンストリームにレプリケートされる場合、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して、 `sql_mode`を比較できます。
-> -   DDLステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、Drainerはデータの複製に失敗します。例として、ダウンストリームデータベースMySQLがInnoDBエンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製します。この場合、Drainerで[トランザクションをスキップする](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)を構成し、ダウンストリームデータベースで互換性のあるステートメントを手動で実行できます。
+> -   DDLステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、 Drainerはデータの複製に失敗します。例として、ダウンストリームデータベースMySQLがInnoDBエンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製します。この場合、 Drainerで[トランザクションをスキップする](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)を構成し、ダウンストリームデータベースで互換性のあるステートメントを手動で実行できます。

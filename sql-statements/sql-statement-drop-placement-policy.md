@@ -3,7 +3,7 @@ title: DROP PLACEMENT POLICY
 summary: The usage of ALTER PLACEMENT POLICY in TiDB.
 ---
 
-# ドロッププレースメントポリシー {#drop-placement-policy}
+# ドロップ配置ポリシー {#drop-placement-policy}
 
 `DROP PLACEMENT POLICY`は、以前に作成された配置ポリシーを削除するために使用されます。
 

@@ -16,7 +16,7 @@ TiDBバージョン：4.0.8
 
 -   TiFlash
 
-    -   `CAST`の機能のプッシュダウンをサポート
+    -   `CAST`の関数のプッシュダウンをサポート
 
 -   ツール
 
@@ -93,16 +93,16 @@ TiDBバージョン：4.0.8
 
 -   TiDB
 
-    -   パーティションテーブルを使用するときに発生する予期しないパニックを修正する[＃20565](https://github.com/pingcap/tidb/pull/20565)
+    -   パーティションテーブルを使用するときに発生する予期しないpanicを修正する[＃20565](https://github.com/pingcap/tidb/pull/20565)
     -   インデックスマージ結合[＃20427](https://github.com/pingcap/tidb/pull/20427)を使用して外側をフィルタリングするときの外部結合の誤った結果を修正しました
     -   データが長すぎる場合にデータを`BIT`タイプに変換すると、 `NULL`の値が返される問題を修正します[＃20363](https://github.com/pingcap/tidb/pull/20363)
     -   `BIT`タイプの列[＃20340](https://github.com/pingcap/tidb/pull/20340)の破損したデフォルト値を修正します
-    -   `BIT`タイプを`INT64`タイプ[＃20312](https://github.com/pingcap/tidb/pull/20312)に変換するときに発生する可能性があるオーバーフローエラーを修正します
+    -   `BIT`タイプを`INT64`タイプ[＃20312](https://github.com/pingcap/tidb/pull/20312)に変換するときに発生する可能性のあるオーバーフローエラーを修正します
     -   ハイブリッドタイプの列[＃20297](https://github.com/pingcap/tidb/pull/20297)の伝播列の最適化で発生する可能性のある誤った結果を修正します。
-    -   プランキャッシュから古いプランを保存するときに発生する可能性のあるパニックを修正する[＃20246](https://github.com/pingcap/tidb/pull/20246)
-    -   `FROM_UNIXTIME`と`UNION ALL`を一緒に使用すると、返される結果が誤って切り捨てられるバグを修正します[＃20240](https://github.com/pingcap/tidb/pull/20240)
+    -   プランキャッシュから古いプランを保存するときに発生する可能性のあるpanicを修正する[＃20246](https://github.com/pingcap/tidb/pull/20246)
+    -   `FROM_UNIXTIME`と`UNION ALL`を一緒に使用すると、返された結果が誤って切り捨てられるバグを修正します[＃20240](https://github.com/pingcap/tidb/pull/20240)
     -   `Enum`タイプの値を`Float`タイプ[＃20235](https://github.com/pingcap/tidb/pull/20235)に変換すると、間違った結果が返される可能性がある問題を修正します。
-    -   [＃20210](https://github.com/pingcap/tidb/pull/20210)の起こりうるパニックを修正し`RegionStore.accessStore`
+    -   [＃20210](https://github.com/pingcap/tidb/pull/20210)の起こりうるpanicを修正し`RegionStore.accessStore`
     -   最大符号なし整数を`BatchPointGet`でソートしたときに返される間違った結果を修正し[＃20205](https://github.com/pingcap/tidb/pull/20205)
     -   `Enum`と`Set`の強制力が間違っているというバグを修正します[＃20364](https://github.com/pingcap/tidb/pull/20364)
     -   あいまいな`YEAR`変換[＃20292](https://github.com/pingcap/tidb/pull/20292)の問題を修正します
@@ -112,7 +112,7 @@ TiDBバージョン：4.0.8
     -   範囲[＃20170](https://github.com/pingcap/tidb/pull/20170)外の`YEAR`タイプのデータの不正確なエラー情報を修正します
     -   悲観的なトランザクションの再試行中に発生する可能性のある予期しない`invalid auto-id`エラーを修正します[＃20134](https://github.com/pingcap/tidb/pull/20134)
     -   `ALTER TABLE`を使用して`Enum`タイプ`Set`を変更すると、制約がチェックされない問題を修正し[＃20046](https://github.com/pingcap/tidb/pull/20046) 。
-    -   複数の演算子が同時実行[＃19947](https://github.com/pingcap/tidb/pull/19947)に使用されたときに記録された`cop`のタスクの誤った実行時情報を修正します
+    -   並行性[＃19947](https://github.com/pingcap/tidb/pull/19947)に複数の演算子が使用されている場合に記録される`cop`のタスクの誤った実行時情報を修正します
     -   読み取り専用のシステム変数をセッション変数として明示的に選択できない問題を修正します[＃19944](https://github.com/pingcap/tidb/pull/19944)
     -   重複`ORDER BY`条件が次善の実行プラン[＃20333](https://github.com/pingcap/tidb/pull/20333)を引き起こす可能性があるという問題を修正します
     -   フォントサイズが最大許容値を超えると、生成されたメトリックプロファイルが失敗する可能性がある問題を修正します[＃20637](https://github.com/pingcap/tidb/pull/20637)
@@ -126,8 +126,8 @@ TiDBバージョン：4.0.8
 
 -   PD
 
-    -   TiDBダッシュボードのキービジュアライザーが場合によってはPDパニックを引き起こす可能性があるバグを修正します[＃3096](https://github.com/pingcap/pd/pull/3096)
-    -   PDストアが10分以上ダウンした場合にPDがパニックになる可能性があるバグを修正します[＃3069](https://github.com/pingcap/pd/pull/3069)
+    -   TiDBダッシュボードのキービジュアライザーが場合によってはPDpanicを引き起こす可能性があるバグを修正します[＃3096](https://github.com/pingcap/pd/pull/3096)
+    -   PDストアが10分以上ダウンした場合にPDがpanicになる可能性があるバグを修正します[＃3069](https://github.com/pingcap/pd/pull/3069)
 
 -   TiFlash
 
@@ -142,7 +142,7 @@ TiDBバージョン：4.0.8
 
     -   バックアップと復元（BR）
 
-        -   復元中の`send on closed channel`のパニックを修正[＃559](https://github.com/pingcap/br/pull/559)
+        -   復元中の`send on closed channel`のpanicを修正[＃559](https://github.com/pingcap/br/pull/559)
 
     -   TiCDC
 

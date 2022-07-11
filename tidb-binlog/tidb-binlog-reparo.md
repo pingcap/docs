@@ -5,11 +5,11 @@ summary: Learn to use Reparo.
 
 # Reparoユーザーガイド {#reparo-user-guide}
 
-ReparoはTiDBBinlogツールであり、増分データを回復するために使用されます。インクリメンタルデータをバックアップするには、TiDB BinlogのDrainerを使用して、binlogデータをprotobuf形式でファイルに出力します。インクリメンタルデータを復元するには、Reparoを使用してファイル内のbinlogデータを解析し、TiDB/MySQLにbinlogを適用します。
+ReparoはBinlogツールであり、増分データを回復するために使用されます。インクリメンタルデータをバックアップするには、TiDB DrainerのBinlogを使用して、binlogデータをprotobuf形式でファイルに出力します。インクリメンタルデータを復元するには、Reparoを使用してファイル内のReparoデータを解析し、TiDB/MySQLにbinlogを適用します。
 
-Reparoインストールパッケージ（ `reparo` ）はTiDBツールキットに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+Reparoインストールパッケージ（ `reparo` ）は、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
-## レパロの使用法 {#reparo-usage}
+## Reparoの使用法 {#reparo-usage}
 
 ### コマンドラインパラメータの説明 {#description-of-command-line-parameters}
 
@@ -121,7 +121,7 @@ password = ""
 
 > **ノート：**
 >
-> -   `data-dir`は、Drainerが出力するbinlogファイルのディレクトリを指定します。
+> -   `data-dir`は、Drainerが出力するDrainerファイルのディレクトリを指定します。
 > -   `start-datatime`と`start-tso`はどちらもリカバリを開始する時点を指定するために使用されますが、時間形式が異なります。それらが設定されていない場合、リカバリプロセスはデフォルトで最も古いbinlogファイルから開始されます。
 > -   `stop-datetime`と`stop-tso`はどちらもリカバリを終了する時点を指定するために使用されますが、時間形式が異なります。それらが設定されていない場合、リカバリプロセスはデフォルトで最後のbinlogファイルで終了します。
 > -   `dest-type`は宛先タイプを指定します。その値は「mysql」および「print」にすることができます。
@@ -129,4 +129,4 @@ password = ""
 >     -   `mysql`に設定すると、MySQLプロトコルを使用するかMySQLプロトコルと互換性のあるMySQLまたはTiDBにデータを回復できます。この場合、構成情報の`[dest-db]`でデータベース情報を指定する必要があります。
 >     -   `print`に設定すると、binlog情報のみが出力されます。これは通常、binlog情報のデバッグとチェックに使用されます。この場合、 `[dest-db]`を指定する必要はありません。
 > -   `replicate-do-db`は、リカバリするデータベースを指定します。設定されていない場合は、すべてのデータベースがリカバリされます。
-> -   `replicate-do-table`は、リカバリ用のテーブルを指定します。設定されていない場合は、すべてのテーブルが復元されます。
+> -   `replicate-do-table`は、リカバリー用のテーブルを指定します。設定されていない場合は、すべてのテーブルが復元されます。

@@ -19,10 +19,10 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 -   SQLオプティマイザー
     -   より多くのシナリオに参加するインデックスをサポートする[＃10540](https://github.com/pingcap/tidb/pull/10540)
     -   履歴統計のエクスポートをサポート[＃10291](https://github.com/pingcap/tidb/pull/10291)
-    -   単調に増加するインデックス列[＃10355](https://github.com/pingcap/tidb/pull/10355)でインクリメンタル`Analyze`操作をサポートします
+    -   単調に増加するインデックス列[＃10355](https://github.com/pingcap/tidb/pull/10355)でインクリメンタル`Analyze`操作をサポートします。
     -   `Order By`節[＃10488](https://github.com/pingcap/tidb/pull/10488)のNULL値を無視します
     -   列情報を単純化するときの`UnionAll`論理演算子の誤ったスキーマ情報計算を修正します[＃10384](https://github.com/pingcap/tidb/pull/10384)
-    -   `Not`演算子[＃10363](https://github.com/pingcap/tidb/pull/10363/files)を押すときは、元の式を変更しないでください。
+    -   `Not`演算子[＃10363](https://github.com/pingcap/tidb/pull/10363/files)を押し下げるときは、元の式を変更しないでください。
     -   ヒストグラムの`dump`相関を[＃10573](https://github.com/pingcap/tidb/pull/10573) `load`
 
 -   実行エンジン
@@ -46,13 +46,13 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 
 -   DDL
     -   古いバージョンの[＃10272](https://github.com/pingcap/tidb/pull/10272)のストレージにある文字セット名の大文字の問題を修正しました
-    -   テーブルの作成時にホットスポットの書き込みを回避するために、テーブルの作成時にテーブル領域を事前に割り当てるテーブルパーティションの`preSplit`をサポートします[＃10221](https://github.com/pingcap/tidb/pull/10221)
+    -   テーブルパーティションの`preSplit`をサポートします。これは、テーブルの作成時にテーブルリージョンを事前に割り当てて、テーブルの作成後にホットスポットを書き込まないようにします[＃10221](https://github.com/pingcap/tidb/pull/10221)
     -   TiDBがPDのバージョン情報を誤って更新する場合がある問題を修正します[＃10324](https://github.com/pingcap/tidb/pull/10324)
     -   `ALTER DATABASE`ステートメント[＃10393](https://github.com/pingcap/tidb/pull/10393)を使用した文字セットと照合順序の変更をサポートします。
     -   ホットスポットの問題を軽減するために、指定されたテーブルのインデックスと範囲に基づいてリージョンを分割することをサポートします[＃10203](https://github.com/pingcap/tidb/pull/10203)
     -   `alter table`ステートメントを使用して10進列の精度を変更することを禁止する[＃10433](https://github.com/pingcap/tidb/pull/10433)
     -   ハッシュパーティション[＃10273](https://github.com/pingcap/tidb/pull/10273)の式と関数の制限を修正しました
-    -   パーティションを含むテーブルにインデックスを追加すると、場合によってはTiDBパニックが発生する問題を修正します[＃10475](https://github.com/pingcap/tidb/pull/10475)
+    -   パーティションを含むテーブルにインデックスを追加すると、場合によってはTiDBpanicが発生する問題を修正します[＃10475](https://github.com/pingcap/tidb/pull/10475)
     -   無効なテーブルスキーマを回避するために、DDLを実行する前にテーブル情報を検証します[＃10464](https://github.com/pingcap/tidb/pull/10464)
     -   デフォルトでハッシュパーティションを有効にします。パーティション定義に列が1つしかない場合は、範囲列パーティションを有効にします[＃9936](https://github.com/pingcap/tidb/pull/9936)
 
@@ -103,9 +103,9 @@ TiDB Ansibleバージョン：3.0.0-rc.2
         -   `Int`のサポートと[＃4733](https://github.com/tikv/tikv/pull/4733)
         -   `Real`のサポートと[＃4733](https://github.com/tikv/tikv/pull/4733)
         -   `Decimal`のサポートと[＃4733](https://github.com/tikv/tikv/pull/4733)
-        -   `Int`のMOD機能を[＃4727](https://github.com/tikv/tikv/pull/4727)
-        -   `Real`のMOD機能を[＃4727](https://github.com/tikv/tikv/pull/4727)
-        -   `Decimal`のMOD機能を[＃4727](https://github.com/tikv/tikv/pull/4727)
+        -   `Int`のMOD関数を[＃4727](https://github.com/tikv/tikv/pull/4727)
+        -   `Real`のMOD関数を[＃4727](https://github.com/tikv/tikv/pull/4727)
+        -   `Decimal`のMOD関数を[＃4727](https://github.com/tikv/tikv/pull/4727)
         -   `Int`のマイナス演算を[＃4746](https://github.com/tikv/tikv/pull/4746)
         -   `Real`のマイナス演算を[＃4746](https://github.com/tikv/tikv/pull/4746)
         -   `Decimal`のマイナス演算を[＃4746](https://github.com/tikv/tikv/pull/4746)

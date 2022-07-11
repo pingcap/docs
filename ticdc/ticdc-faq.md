@@ -60,14 +60,14 @@ cdc cli changefeed list --pd=http://10.0.10.25:2379
 
 ## TiCDC <code>gc-ttl</code>とは何ですか？ {#what-is-code-gc-ttl-code-in-ticdc}
 
-v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントを設定する際に外部サービスをサポートします。どのサービスでも、GCセーフポイントを登録および更新できます。 PDは、このGCセーフポイントより後のKey-ValueデータがGCによってクリーンアップされないようにします。
+v4.0.0-rc.1以降、PDはサービスレベルのGCセーフポイントの設定で外部サービスをサポートします。どのサービスでも、GCセーフポイントを登録および更新できます。 PDは、このGCセーフポイントより後のKey-ValueデータがGCによってクリーンアップされないようにします。
 
-レプリケーションタスクが利用できないか中断されている場合、この機能により、TiCDCによって消費されるデータがGCによってクリーンアップされることなくTiKVに保持されます。
+レプリケーションタスクが使用できないか中断されている場合、この機能により、TiCDCによって消費されるデータがGCによってクリーンアップされることなくTiKVに保持されます。
 
 TiCDCサーバーを起動するときに、 `gc-ttl`を構成することにより、GCセーフポイントの存続時間（TTL）期間を指定できます。 `gc-ttl`もでき[TiUPを使用して変更する](/ticdc/manage-ticdc.md#modify-ticdc-configuration-using-tiup) 。デフォルト値は24時間です。 TiCDCでは、この値は次のことを意味します。
 
 -   TiCDCサービスが停止した後、GCセーフポイントがPDに保持される最大時間。
--   タスクが中断または手動で停止された後、レプリケーションタスクを一時停止できる最大時間。中断されたレプリケーションタスクの時間が`gc-ttl`で設定された値より長い場合、レプリケーションタスクは`failed`ステータスになり、再開できず、GCセーフポイントの進行に影響を与え続けることができません。
+-   タスクが中断または手動で停止された後、レプリケーションタスクを一時停止できる最大時間。中断されたレプリケーションタスクの時間が`gc-ttl`で設定された値よりも長い場合、レプリケーションタスクは`failed`ステータスになり、再開できず、GCセーフポイントの進行に影響を与え続けることができません。
 
 上記の2番目の動作は、TiCDCv4.0.13以降のバージョンで導入されています。目的は、TiCDCのレプリケーションタスクが長時間中断され、アップストリームTiKVクラスタのGCセーフポイントが長時間継続せず、古いデータバージョンが多すぎて、アップストリームクラスタのパフォーマンスに影響を与えるのを防ぐことです。
 
@@ -87,7 +87,7 @@ TiCDCがサービスGCセーフポイントに設定するTime-To-Live（TTL）�
 
 |                              |                              上流のタイムゾーン                             |                                  TiCDCタイムゾーン                                 |                            下流のタイムゾーン                           |
 | :--------------------------: | :----------------------------------------------------------------: | :--------------------------------------------------------------------------: | :------------------------------------------------------------: |
-| Configuration / コンフィグレーション方法 |              [タイムゾーンのサポート](/configure-time-zone.md)を参照             |                       TiCDCサーバーの起動時に`--tz`パラメーターを使用して構成                      |               `sink-uri`の`time-zone`パラメータを使用して設定               |
+| Configuration / コンフィグレーション方法 |              [タイムゾーンのサポート](/configure-time-zone.md)を参照             |                       TiCDCサーバーの起動時に`--tz`パラメーターを使用して構成                      |               `sink-uri`の`time-zone`パラメータを使用して構成               |
 |              説明              | アップストリームTiDBのタイムゾーン。タイムスタンプタイプのDML操作とタイムスタンプタイプの列に関連するDDL操作に影響します。 | TiCDCは、アップストリームTiDBのタイムゾーンがTiCDCタイムゾーン構成と同じであると想定し、タイムスタンプ列に対して関連する操作を実行します。 | ダウンストリームMySQLは、ダウンストリームタイムゾーン設定に従って、DMLおよびDDL操作のタイムスタンプを処理します。 |
 
 > **ノート：**
@@ -163,7 +163,7 @@ cdc cli changefeed create --pd=http://10.0.10.25:2379 --sink-uri="kafka://127.0.
 
 ## TiCDCがデータをKafkaに複製するとき、メッセージ内のデータ変更のタイムスタンプをどのように知ることができますか？ {#when-ticdc-replicates-data-to-kafka-how-do-i-know-the-timestamp-of-the-data-changes-in-a-message}
 
-Unixタイムスタンプを取得するには、Kafkaメッセージのキーの`ts`を18ビット右に移動します。
+Kafkaメッセージのキーの`ts`を右に18ビット移動すると、UNIXタイムスタンプを取得できます。
 
 ## TiCDC Open Protocolはどのように<code>null</code>を表しますか？ {#how-does-ticdc-open-protocol-represent-code-null-code}
 
@@ -204,9 +204,9 @@ TiCDCは、大規模なトランザクション（5 GBを超えるサイズ）�
 4.  新しいチェンジフィードを作成し、 `BackupTS`からレプリケーションタスクを開始します。
 5.  古いチェンジフィードを削除します。
 
-## DDLステートメントをダウンストリームのMySQL5.7に複製する場合、時間タイプフィールドのデフォルト値に一貫性がありません。私に何ができる？ {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
+## DDLステートメントをダウンストリームのMySQL 5.7に複製する場合、時間タイプフィールドのデフォルト値に一貫性がありません。私に何ができる？ {#the-default-value-of-the-time-type-field-is-inconsistent-when-replicating-a-ddl-statement-to-the-downstream-mysql-5-7-what-can-i-do}
 
-`create table test (id int primary key, ts timestamp)`ステートメントがアップストリームTiDBで実行されると仮定します。 TiCDCがこのステートメントをダウンストリームのMySQL5.7に複製する場合、MySQLはデフォルト構成を使用します。レプリケーション後のテーブルスキーマは次のとおりです。 `timestamp`フィールドのデフォルト値は`CURRENT_TIMESTAMP`になります：
+`create table test (id int primary key, ts timestamp)`ステートメントがアップストリームTiDBで実行されると仮定します。 TiCDCがこのステートメントをダウンストリームのMySQL5.7に複製する場合、 MySQL 5.7はデフォルト構成を使用します。レプリケーション後のテーブルスキーマは次のとおりです。 `timestamp`フィールドのデフォルト値は`CURRENT_TIMESTAMP`になります：
 
 {{< copyable "" >}}
 
@@ -228,7 +228,7 @@ mysql root@127.0.0.1:test> show create table test;
 
 v5.0.1またはv4.0.13以降、MySQLへのレプリケーションごとに、TiCDCは自動的に`explicit_defaults_for_timestamp = ON`を設定して、時間タイプがアップストリームとダウンストリームの間で一貫していることを確認します。 v5.0.1またはv4.0.13より前のバージョンでは、TiCDCを使用して時間タイプデータを複製するときに、一貫性のない`explicit_defaults_for_timestamp`値によって引き起こされる互換性の問題に注意してください。
 
-## TiCDCレプリケーションタスクを作成すると<code>enable-old-value</code>が<code>true</code>に設定されますが、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントは、ダウンストリームにレプリケートされた後、 <code>REPLACE INTO</code>になります。 {#code-enable-old-value-code-is-set-to-code-true-code-when-i-create-a-ticdc-replication-task-but-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream}
+## TiCDCレプリケーションタスクを作成すると、 <code>enable-old-value</code>が<code>true</code>に設定されますが、アップストリームからの<code>INSERT</code> / <code>UPDATE</code>ステートメントは、ダウンストリームにレプリケートされた後、 <code>REPLACE INTO</code>になります。 {#code-enable-old-value-code-is-set-to-code-true-code-when-i-create-a-ticdc-replication-task-but-code-insert-code-code-update-code-statements-from-the-upstream-become-code-replace-into-code-after-being-replicated-to-the-downstream}
 
 TiCDCでチェンジフィードが作成されると、 `safe-mode`の設定はデフォルトで`true`になり、アップストリームの`INSERT`ステートメントに対して実行する`REPLACE INTO`ステートメントが生成され`UPDATE` 。
 
@@ -254,6 +254,6 @@ TiCDCでチェンジフィードが作成されると、 `safe-mode`の設定は
 
 アップストリームの書き込みトラフィックがピーク時にある場合、ダウンストリームはすべてのデータをタイムリーに消費できず、データが蓄積する可能性があります。 TiCDCは、ディスクを使用して、積み上げられたデータを処理します。 TiCDCは、通常の操作中にディスクにデータを書き込む必要があります。ただし、ディスクへの書き込みでは100ミリ秒以内の遅延しか発生しないため、これは通常、レプリケーションスループットとレプリケーション遅延のボトルネックにはなりません。 TiCDCはまた、メモリを使用してディスクからのデータの読み取りを高速化し、レプリケーションのパフォーマンスを向上させます。
 
-## TiCDCを使用したレプリケーションが停止したり、TiDB LightningとBRを使用したデータの復元後に停止したりするのはなぜですか？ {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-and-br}
+## TiCDCを使用したレプリケーションが停止したり、 TiDB LightningとBRを使用したデータの復元後に停止したりするのはなぜですか？ {#why-does-replication-using-ticdc-stall-or-even-stop-after-data-restore-using-tidb-lightning-and-br}
 
-現在、TiCDCはTiDBLightningおよびBRと完全には互換性がありません。したがって、TiCDCによって複製されるテーブルでTiDBLightningおよびBRを使用することは避けてください。
+現在、TiCDCはTiDB LightningおよびBRと完全には互換性がありません。したがって、TiCDCによって複製されるテーブルでTiDB LightningおよびBRを使用することは避けてください。

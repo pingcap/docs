@@ -23,12 +23,12 @@ TiDB Ansibleバージョン：2.1.12
 -   テーブルの文字セットを変更しながら、列の文字セットを変更する[＃10714](https://github.com/pingcap/tidb/pull/10714)
 -   場合によっては、小数を浮動小数点に変換するときのオーバーフローの問題を修正します[＃10730](https://github.com/pingcap/tidb/pull/10730)
 -   一部の非常に大きなメッセージが、TiDBおよびTiKV1の[＃10710](https://github.com/pingcap/tidb/pull/10710)によって送受信されるメッセージの最大サイズが一貫していないために発生する「grpc：受信メッセージが最大より大きい」エラーを報告する問題を修正します。
--   `ORDER BY`が場合によってはNULLをフィルタリングしないことによって引き起こされるパニックの問題を修正します[＃10488](https://github.com/pingcap/tidb/pull/10488)
+-   `ORDER BY`が場合によってはNULLをフィルタリングしないことによって引き起こされるpanicの問題を修正します[＃10488](https://github.com/pingcap/tidb/pull/10488)
 -   複数のノードが存在する場合、 `UUID`関数によって返される値が重複する可能性がある問題を修正します[＃10711](https://github.com/pingcap/tidb/pull/10711)
 -   `CAST(-num as datetime)`によって返される値を`error`からNULL5に変更し[＃10703](https://github.com/pingcap/tidb/pull/10703)
 -   場合によっては、符号なしヒストグラムが符号付き範囲を満たす問題を修正します[＃10695](https://github.com/pingcap/tidb/pull/10695)
--   統計フィードバックがbigintunsigned主キー[＃10307](https://github.com/pingcap/tidb/pull/10307)に一致したときに、データの読み取りでエラーが誤って報告される問題を修正します。
--   パーティションテーブルの`Show Create Table`の結果が正しく表示されない場合があるという問題を修正します[＃10690](https://github.com/pingcap/tidb/pull/10690)
+-   統計フィードバックがbigintunsignedプライマリキー[＃10307](https://github.com/pingcap/tidb/pull/10307)に一致したときに、データの読み取りでエラーが誤って報告される問題を修正します。
+-   パーティション化されたテーブルの`Show Create Table`の結果が正しく表示されない場合があるという問題を修正します[＃10690](https://github.com/pingcap/tidb/pull/10690)
 -   一部の相関サブクエリでは、 `GROUP_CONCAT`集計関数の計算結果が正しくないという問題を修正します[＃10670](https://github.com/pingcap/tidb/pull/10670)
 -   遅いクエリのメモリテーブルが遅いクエリログを解析するときに結果が誤って表示される問題を修正します[＃10776](https://github.com/pingcap/tidb/pull/10776)
 

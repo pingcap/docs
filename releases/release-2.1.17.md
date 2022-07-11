@@ -23,7 +23,7 @@ TiDB Ansibleバージョン：2.1.17
 -   変更された動作
     -   TiDBの低速クエリログの`start ts`を最後の再試行時刻から最初の実行時刻に変更します
     -   低速クエリログの使いやすさを向上させるために、TiDB低速クエリログの`Index_ids`フィールドを`Index_names`フィールドに置き換えます
-    -   TiDBの構成ファイルに`split-region-max-num`つのパラメーターを追加して、 `SPLIT TABLE`の構文で許可されるリージョンの最大数を変更します。これはデフォルトの構成では1,000から10,000に増加します。
+    -   TiDBの構成ファイルに`split-region-max-num`パラメーターを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。これはデフォルト構成では1,000から10,000に増加します。
 
 ## TiDB {#tidb}
 
@@ -32,7 +32,7 @@ TiDB Ansibleバージョン：2.1.17
     -   外部テーブルの行数がインデックスルックアップ結合の単一バッチの行数よりも多い場合にクエリ結果が正しくない可能性がある問題を修正します。インデックスルックアップ結合の機能範囲を拡張します。 `UnionScan`は[＃11843](https://github.com/pingcap/tidb/pull/11843)のサブノードとして使用でき`IndexJoin`
     -   統計フィードバックプロセス中に無効なキーが発生する可能性がある状況のために、 `SHOW STAT_BUCKETS`の構文に無効なキー（ `invalid encoded key flag 252`など）の表示を追加します[＃12098](https://github.com/pingcap/tidb/pull/12098)
 -   SQL実行エンジン
-    -   `CAST`関数が数値タイプ[＃11712](https://github.com/pingcap/tidb/pull/11712)を変換しているときに、最初に`UINT`に変換される数値によって引き起こされるいくつかの誤った結果（ `select cast(13835058000000000000 as double)`など）を修正します。
+    -   `CAST`関数が数値タイプ[＃11712](https://github.com/pingcap/tidb/pull/11712)を変換しているときに、最初に`UINT`に変換された数値によって引き起こされるいくつかの誤った結果（ `select cast(13835058000000000000 as double)`など）を修正します。
     -   `DIV`の計算の被除数が小数であり、この計算に負の数[＃11812](https://github.com/pingcap/tidb/pull/11812)が含まれている場合、計算結果が正しくない可能性がある問題を修正します。
     -   `ConvertStrToIntStrict`関数を追加して、 `SELECT` / `EXPLAIN`ステートメント[＃11892](https://github.com/pingcap/tidb/pull/11892)の実行時に一部の文字列が`INT`タイプに変換されることによって引き起こされるMySQLの非互換性の問題を修正します。
     -   `EXPLAIN ... FOR CONNECTION`が使用されている場合に`stmtCtx`の設定が間違っているために、 `Explain`の結果が正しくない可能性があるという問題を修正します[＃11978](https://github.com/pingcap/tidb/pull/11978)
@@ -44,10 +44,10 @@ TiDB Ansibleバージョン：2.1.17
     -   低速クエリログに記録された`start ts`を、TiDBトランザクションを再試行するときの最後の再試行時刻から最初の実行時刻に変更します[＃11878](https://github.com/pingcap/tidb/pull/11878)
     -   リージョン全体でのスキャン操作を回避し、キーの数が減ったときにロックを解決するコストを削減するために、トランザクションのキーの数を`LockResolver`に追加します[＃11889](https://github.com/pingcap/tidb/pull/11889)
     -   遅いクエリログで`succ`フィールド値が正しくない可能性がある問題を修正します[＃11886](https://github.com/pingcap/tidb/pull/11886)
-    -   低速クエリログに記録された`Index_ids`を`Index_names`フィールドに置き換えて、低速クエリログの使いやすさを向上させます[＃12063](https://github.com/pingcap/tidb/pull/12063)
+    -   遅いクエリログの使いやすさを向上させるために、遅いクエリログにファイルされた`Index_ids`を`Index_names`フィールドに置き換えます[＃12063](https://github.com/pingcap/tidb/pull/12063)
     -   `Duration`に`-` （ `select time(‘--’)`など）が含まれている場合に、TiDBが`-`をEOFエラーに解析することによって発生する接続切断の問題を修正します[＃11910](https://github.com/pingcap/tidb/pull/11910)
     -   無効なリージョンを`RegionCache`からすばやく削除して、このリージョン[＃11931](https://github.com/pingcap/tidb/pull/11931)に送信されるリクエストの数を減らします。
-    -   `oom-action = "cancel"`とOOMが`Insert Into … Select`構文[＃12126](https://github.com/pingcap/tidb/pull/12126)で発生した場合に、OOMパニックの問題を誤って処理することによって引き起こされる接続切断の問題を修正します。
+    -   `oom-action = "cancel"`とOOMが`Insert Into … Select`構文[＃12126](https://github.com/pingcap/tidb/pull/12126)で発生した場合に、OOMpanicの問題を誤って処理することによって引き起こされる接続切断の問題を修正します。
 -   DDL
     -   `tikvSnapshot`の逆スキャンインターフェイスを追加して、DDL履歴ジョブを効率的にクエリします。このインターフェースを使用した後、 `ADMIN SHOW DDL JOBS`の実行時間は大幅に短縮されます[＃11789](https://github.com/pingcap/tidb/pull/11789)
     -   `CREATE TABLE ... PRE_SPLIT_REGION`構文を改善します。35の場合、事前分割領域の数を2 ^（N-1）から`PRE_SPLIT_REGION = N` ^Nに変更し[＃11797](https://github.com/pingcap/tidb/pull/11797/files) 。
@@ -81,7 +81,7 @@ TiDB Ansibleバージョン：2.1.17
     -   Reparoに`worker-count`と`txn-batch`の構成項目を追加して、回復速度を制御します[＃746](https://github.com/pingcap/tidb-binlog/pull/746)
     -   Drainerのメモリ使用量を最適化して、並列実行効率を向上させます[＃735](https://github.com/pingcap/tidb-binlog/pull/735)
     -   場合によってはPumpが正常に終了できないバグを修正します[＃739](https://github.com/pingcap/tidb-binlog/pull/739)
-    -   ポンプの`LevelDB`の処理ロジックを最適化して、 [＃720](https://github.com/pingcap/tidb-binlog/pull/720)の実行効率を向上させます
+    -   Pumpの`LevelDB`の処理ロジックを最適化して、 [＃720](https://github.com/pingcap/tidb-binlog/pull/720)の実行効率を向上させます
 -   TiDB Lightning
     -   チェックポイント[＃239](https://github.com/pingcap/tidb-lightning/pull/239)からデータを再インポートすることによってtidb-lightningがクラッシュする可能性があるバグを修正します
 

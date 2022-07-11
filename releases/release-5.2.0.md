@@ -50,7 +50,7 @@ v5.2では、主な新機能と改善点は次のとおりです。
 | TiKV構成ファイル                     | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)                                                                | 新しく追加されました | リクエストのバッチ処理を有効にするかどうかを制御します。有効にすると、書き込みパフォーマンスが大幅に向上します。デフォルト値は`true`です。                                                        |
 | TiKV構成ファイル                     | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新しく追加されました | 一定の間隔で、TiKVはRaftstoreコンポーネントのレイテンシーを検査します。この構成項目は、検査の間隔を指定します。待ち時間がこの値を超える場合、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。            |
 | TiKV構成ファイル                     | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)                                      | 変更         | ピアに許可されている最長の非アクティブ期間を示します。タイムアウトのあるピアは`down`としてマークされ、PDは後でそれを削除しようとします。デフォルト値は`5m`から`10m`に変更されます。                              |
-| TiKV構成ファイル                     | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新しく追加されました | TiKVのラフトメッセージのキューサイズを指定します。デフォルト値は`8192`です。                                                                                     |
+| TiKV構成ファイル                     | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新しく追加されました | TiKVのRaftメッセージのキューサイズを指定します。デフォルト値は`8192`です。                                                                                    |
 | TiKV構成ファイル                     | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新しく追加されました | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                     |
 | TiKV構成ファイル                     | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新しく追加されました | kvDB memtableの数がこのしきい値に達すると、フロー制御メカニズムが機能し始めます。デフォルト値は`5`です。                                                                    |
 | TiKV構成ファイル                     | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新しく追加されました | kvDB L0ファイルの数がこのしきい値に達すると、フロー制御メカニズムが機能し始めます。デフォルト値は`9`です。                                                                      |
@@ -61,8 +61,8 @@ v5.2では、主な新機能と改善点は次のとおりです。
 
 -   アップグレードする前に、 [`tidb_evolve_plan_baselines`](/system-variables.md#tidb_evolve_plan_baselines-new-in-v40)のシステム変数の値が`ON`であるかどうかを確認してください。値が`ON`の場合は、 `OFF`に設定します。そうしないと、アップグレードは失敗します。
 -   v4.0からv5.2にアップグレードされたTiDBクラスターの場合、デフォルト値の[`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)が`WARN`から`OFF`に変更されます。
--   アップグレードする前に、TiDB構成[`feedback-probability`](/tidb-configuration-file.md#feedback-probability)の値を確認してください。値が`0`でない場合、アップグレード後に「回復可能なゴルーチンのパニック」エラーが発生しますが、このエラーはアップグレードには影響しません。
--   TiDBは、MySQL5.7のnoop変数`innodb_default_row_format`と互換性があります。この変数を設定しても効果はありません。 [＃23541](https://github.com/pingcap/tidb/issues/23541)
+-   アップグレードする前に、TiDB構成[`feedback-probability`](/tidb-configuration-file.md#feedback-probability)の値を確認してください。値が`0`でない場合、アップグレード後に「回復可能なゴルーチンのpanic」エラーが発生しますが、このエラーはアップグレードには影響しません。
+-   TiDBは、MySQL5.7のnoop変数`innodb_default_row_format`と互換性がありMySQL 5.7。この変数を設定しても効果はありません。 [＃23541](https://github.com/pingcap/tidb/issues/23541)
 -   TiDB 5.2以降、システムセキュリティを向上させるために、クライアントからの接続用にトランスポート層を暗号化することをお勧めします（必須ではありません）。 TiDBは、TiDBで暗号化を自動的に構成して有効にする自動TLS機能を提供します。自動TLS機能を使用するには、TiDBをアップグレードする前に、TiDB構成ファイルの[`security.auto-tls`](/tidb-configuration-file.md#auto-tls)を`true`に設定します。
 -   MySQL 8.0からの移行を容易にし、セキュリティを向上させるために、 `caching_sha2_password`の認証方法をサポートします。
 
@@ -90,7 +90,7 @@ v5.2では、主な新機能と改善点は次のとおりです。
 
 -   **オプティマイザのカーディナリティ推定の精度を向上させる**
 
-    -   TiDBによるTopN/Limitの推定の精度を向上させます。たとえば、 `order by col limit x`の条件を含む大きなテーブルのページネーションクエリの場合、TiDBは適切なインデックスをより簡単に選択し、クエリの応答時間を短縮できます。
+    -   TiDBによるTopN/Limitの推定の精度を向上させます。たとえば、 `order by col limit x`の条件を含む大きなテーブルでのページネーションクエリの場合、TiDBは適切なインデックスをより簡単に選択し、クエリの応答時間を短縮できます。
     -   範囲外推定の精度を向上させます。たとえば、1日の統計が更新されていない場合でも、TiDBは`where date=Now()`を含むクエリに対応するインデックスを正確に選択できます。
     -   `tidb_opt_limit_push_down_threshold`変数を導入して、Limit / TopNをプッシュダウンするオプティマイザーの動作を制御します。これにより、推定が間違っているためにLimit/TopNをプッシュダウンできない場合があるという問題が解決されます。
 
@@ -104,7 +104,7 @@ v5.2では、主な新機能と改善点は次のとおりです。
 
 ### 取引 {#transaction}
 
--   **Lock Viewの一般提供（GA）**
+-   **ロックビューの一般提供（GA）**
 
     ロックビュー機能は、ペシミスティックロックのロック競合とロック待機に関する詳細情報を提供します。これは、DBAがトランザクションロックイベントを監視し、デッドロックの問題をトラブルシューティングするのに役立ちます。
 
@@ -114,19 +114,19 @@ v5.2では、主な新機能と改善点は次のとおりです。
     -   `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスタの一連のSQLダイジェストに対応する正規化されたSQLステートメント（形式と引数のないフォーム）をクエリします。これにより、トランザクションによって過去に実行されたステートメントをクエリする操作が簡素化されます。
     -   `DATA_LOCK_WAITS`および`DEADLOCKS`システム表に列を追加して、表名、行ID、索引値、および鍵から解釈されるその他の鍵情報を表示します。これにより、キーが属するテーブルの検索やキー情報の解釈などの操作が簡素化されます。
     -   `DEADLOCKS`テーブルでの再試行可能なデッドロック・エラーの情報の収集をサポートします。これにより、このようなエラーによって引き起こされた問題のトラブルシューティングが容易になります。エラー収集はデフォルトで無効になっており、 `pessimistic-txn.deadlock-history-collect-retryable`の構成を使用して有効にできます。
-    -   `TIDB_TRX`システムテーブルでクエリ実行トランザクションとアイドルトランザクションの区別をサポートします。現在、 `Normal`の状態は`Running`つの状態と`Idle`の状態に分割されています。
+    -   `TIDB_TRX`システムテーブルでクエリ実行トランザクションとアイドルトランザクションの区別をサポートします。 `Normal`の状態が`Running`つと`Idle`の状態に分割されました。
 
     ユーザードキュメント：
 
-    -   クラスタのすべてのTiKVノードで発生している悲観的なロック待機イベントを表示します： [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
-    -   TiDBノードで最近発生したデッドロックエラーを表示します： [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
-    -   TiDBノードで実行中のトランザクションを表示します： [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+    -   クラスタのすべてのTiKVノードで発生している悲観的なロック待機イベントをビューします： [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    -   TiDBノードで最近発生したデッドロックエラーをビューします： [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
+    -   TiDBノードで実行中のトランザクションをビューします： [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 -   `AUTO_RANDOM`または`SHARD_ROW_ID_BITS`属性を持つテーブルにインデックスを追加するユーザーシナリオを最適化します。
 
-### 安定 {#stability}
+### 安定性 {#stability}
 
--   **TiFlash I/Oトラフィック制限を追加する**
+-   **TiFlash I/Oトラフィック制限を追加します**
 
     この新機能は、ディスク帯域幅が小さく特定のサイズのクラウドストレージに適しています。デフォルトでは無効になっています。
 
@@ -141,7 +141,7 @@ v5.2では、主な新機能と改善点は次のとおりです。
     具体的には、RocksDB圧縮のストレスが蓄積すると、次の問題を回避するために、RocksDBレイヤーではなくTiKVスケジューラーレイヤーでフロー制御が実行されます。
 
     -   RocksDBの書き込みストールが原因でRaftstoreがスタックしています。
-    -   いかだ選挙がタイムアウトし、その結果、ノードリーダーが転送されます。
+    -   Raft選挙がタイムアウトし、その結果、ノードリーダーが転送されます。
 
     この新しいメカニズムは、フロー制御アルゴリズムを改善して、書き込みトラフィックが多い場合のQPSの低下を軽減します。
 
@@ -157,15 +157,15 @@ v5.2では、主な新機能と改善点は次のとおりです。
 
 -   **データ移行（DM）の操作を簡素化する**
 
-    DM v2.0.6は、VIPを使用してデータソースの変更イベント（フェイルオーバーまたは計画変更）を自動的に識別し、新しいデータソースインスタンスに自動的に接続して、データ複製の待ち時間を短縮し、操作手順を簡素化できます。
+    DM v2.0.6は、VIPを使用してデータソースの変更イベント（フェイルオーバーまたはプラン変更）を自動的に識別し、新しいデータソースインスタンスに自動的に接続して、データ複製の待ち時間を短縮し、操作手順を簡素化できます。
 
--   TiDB Lightningは、CSVデータでカスタマイズされたラインターミネータをサポートし、MySQL LOADDATACSVデータ形式と互換性があります。その後、データフローアーキテクチャで直接TiDBLightningを使用できます。
+-   TiDB Lightningは、CSVデータでカスタマイズされたラインターミネータをサポートし、MySQL LOADDATACSVデータ形式と互換性があります。その後、データフローアーキテクチャで直接TiDB Lightningを使用できます。
 
     [＃1297](https://github.com/pingcap/br/pull/1297)
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
-TiCDCは、HTTPプロトコル（OpenAPI）を使用したTiCDCタスクの管理をサポートしています。これは、Kubernetesとオンプレミス環境の両方でよりユーザーフレンドリーな操作方法です。 （実験的特徴）
+TiCDCは、HTTPプロトコル（OpenAPI）を使用したTiCDCタスクの管理をサポートしています。これは、Kubernetesとオンプレミス環境の両方にとってよりユーザーフレンドリーな操作方法です。 （実験的特徴）
 
 [＃2411](https://github.com/pingcap/tiflow/issues/2411)
 
@@ -198,7 +198,7 @@ AppleM1チップを搭載したMacコンピュータでの`tiup playground`コ�
 
     -   内蔵機能`json_unquote()`から[＃24415](https://github.com/pingcap/tidb/issues/24415)へのプッシュダウンをサポート
     -   デュアルテーブル[＃25614](https://github.com/pingcap/tidb/pull/25614)からの`union`ブランチの削除をサポート
-    -   骨材オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
+    -   集計オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
     -   MPP外部結合が、テーブルの行数[＃25142](https://github.com/pingcap/tidb/pull/25142)に基づいてビルドテーブルを選択できるようにします。
     -   リージョン[＃24724](https://github.com/pingcap/tidb/pull/24724)に基づく異なるTiFlashノード間でのMPPクエリワークロードのバランス調整をサポート
     -   MPPクエリの実行後にキャッシュ内の古いリージョンを無効にすることをサポートします[＃24432](https://github.com/pingcap/tidb/pull/24432)
@@ -220,10 +220,10 @@ AppleM1チップを搭載したMacコンピュータでの`tiup playground`コ�
 -   TiFlash
 
     -   `LIKE`の追加： `MOD / %`
-    -   文字列`TRIM()`を`POSITION()`し`COALESCE()` `LENGTH()` `ASCII()`
-    -   `POW()` `LOG2()` `MOD()` `LOG10()` `SIN()` `RADIANS()` `ROUND(decimal)` `CONV()` `CRC32()` `DEGREES()` `EXP()` `LN()` `LOG()`
+    -   `TRIM()` `POSITION()`関数の`COALESCE()` `LENGTH()` `ASCII()`
+    -   `RADIANS()`関数`MOD()` `POW()` `SIN()` `ROUND(decimal)` `CONV()` `CRC32()` `DEGREES()` `EXP()` `LN()` `LOG()` `LOG10()` `LOG2()`
     -   日付関数の`DATE_ADD(string, real)` `DATE()` `ADDDATE(string, real)`
-    -   他の関数を`INET6_NTOA()`し`INET_ATON()` `INET6_ATON` `INET_NTOA()`
+    -   他の関数を`INET_ATON()` `INET6_NTOA()` `INET6_ATON` `INET_NTOA()`
     -   新しい照合順序が有効になっている場合、MPPモードでシャッフルハッシュ結合計算とシャッフルハッシュ集計計算をサポートします
     -   基本コードを最適化してMPPパフォーマンスを向上させる
     -   `STRING`タイプから`DOUBLE`タイプへのキャストをサポート
@@ -249,10 +249,10 @@ AppleM1チップを搭載したMacコンピュータでの`tiup playground`コ�
 
 -   TiDB
 
-    -   `SET`型列[＃25669](https://github.com/pingcap/tidb/issues/25669)でマージ結合を使用すると誤った結果が返される問題を修正します。
+    -   `SET`タイプの列[＃25669](https://github.com/pingcap/tidb/issues/25669)でマージ結合を使用すると誤った結果が返される問題を修正します
     -   `IN`式の引数[＃25591](https://github.com/pingcap/tidb/issues/25591)のデータ破損の問題を修正します
     -   GCのセッションがグローバル変数の影響を受けないようにする[＃24976](https://github.com/pingcap/tidb/issues/24976)
-    -   ウィンドウ関数クエリ[＃25344](https://github.com/pingcap/tidb/issues/25344)で`limit`を使用するときに発生するパニックの問題を修正します
+    -   ウィンドウ関数クエリ[＃25344](https://github.com/pingcap/tidb/issues/25344)で`limit`を使用するときに発生するpanicの問題を修正します
     -   `Limit`を使用してパーティションテーブルをクエリするときに返される誤った値を修正し[＃24636](https://github.com/pingcap/tidb/issues/24636)
     -   `IFNULL`が`ENUM`または`SET`タイプの列[＃24944](https://github.com/pingcap/tidb/issues/24944)で正しく有効にならない問題を修正します
     -   結合サブクエリの`count`を[＃24865](https://github.com/pingcap/tidb/issues/24865)に変更することによって引き起こされる間違った結果を修正し`first_row`
@@ -286,11 +286,11 @@ AppleM1チップを搭載したMacコンピュータでの`tiup playground`コ�
     -   TiFlashがデルタデータを削除できないという潜在的な問題を修正します
     -   TiFlashが`CAST`関数の非バイナリ文字に間違ったパディングを追加するバグを修正します
     -   複雑な`GROUP BY`列の集計クエリを処理するときの誤った結果の問題を修正します
-    -   書き込み圧力が高い場合に発生するTiFlashパニックの問題を修正します
-    -   右のジョンキーがNULL可能ではなく、左の結合キーがNULL可能である場合に発生するパニックを修正します
+    -   書き込み圧力が高い場合に発生するTiFlashpanicの問題を修正します
+    -   右のジョンキーがNULL可能ではなく、左の結合キーがNULL可能である場合に発生するpanicを修正します
     -   `read-index`のリクエストに時間がかかる可能性のある問題を修正します
-    -   読み取り負荷が大きいときに発生するパニックの問題を修正します
-    -   `Date_Format`の関数が`STRING`の型の引数と`NULL`の値で呼び出されたときに発生する可能性のあるパニックの問題を修正します
+    -   読み取り負荷が大きいときに発生するpanicの問題を修正します
+    -   `Date_Format`の関数が`STRING`の型の引数と`NULL`の値で呼び出されたときに発生する可能性のあるpanicの問題を修正します
 
 -   ツール
 
@@ -313,11 +313,11 @@ AppleM1チップを搭載したMacコンピュータでの`tiup playground`コ�
 
     -   TiDB Lightning
 
-        -   TiDBLightningがParquetファイル[＃1272](https://github.com/pingcap/br/pull/1272)の`DECIMAL`データ型の解析に失敗するバグを修正します
-        -   テーブルスキーマの復元時にTiDBLightningが「エラー9007：書き込みの競合」エラーを報告するバグを修正します[＃1290](https://github.com/pingcap/br/issues/1290)
-        -   intハンドル[＃1291](https://github.com/pingcap/br/issues/1291)のオーバーフローが原因でTiDBLightningがデータのインポートに失敗するバグを修正します
-        -   ローカルバックエンドモードでのデータ損失が原因でTiDBLightningがチェックサム不一致エラーを受け取る可能性があるバグを修正します[＃1403](https://github.com/pingcap/br/issues/1403)
-        -   TiDBLightningがテーブルスキーマを復元しているときのクラスター化インデックスとのLightingの非互換性の問題を修正します[＃1362](https://github.com/pingcap/br/issues/1362)
+        -   TiDBLightningがTiDB Lightningファイル[＃1272](https://github.com/pingcap/br/pull/1272)の`DECIMAL`データ型の解析に失敗するバグを修正します
+        -   テーブルスキーマの復元時にTiDB Lightningが「エラー9007：書き込みの競合」エラーを報告するバグを修正します[＃1290](https://github.com/pingcap/br/issues/1290)
+        -   intハンドル[＃1291](https://github.com/pingcap/br/issues/1291)のオーバーフローが原因でTiDB Lightningがデータのインポートに失敗するバグを修正します
+        -   ローカルバックエンドモードでのデータ損失が原因でTiDB Lightningがチェックサム不一致エラーを受け取る可能性があるバグを修正します[＃1403](https://github.com/pingcap/br/issues/1403)
+        -   TiDB Lightningがテーブルスキーマを復元しているときのクラスター化されたインデックスとのLightingの非互換性の問題を修正します[＃1362](https://github.com/pingcap/br/issues/1362)
 
     -   Dumpling
 

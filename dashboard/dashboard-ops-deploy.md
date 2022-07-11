@@ -33,7 +33,7 @@ TiDBダッシュボードを提供しないPDインスタンスにアクセス�
 
 ### TiDBダッシュボードを実際に提供するPDインスタンスを確認します {#check-the-pd-instance-that-actually-serves-tidb-dashboard}
 
-TiUPを使用して展開された実行中のクラスタの場合、 `tiup cluster display`コマンドを使用して、どのPDインスタンスがTiDBダッシュボードにサービスを提供しているかを確認できます。 `CLUSTER_NAME`をクラスタ名に置き換えます。
+TiUPを使用してデプロイされた実行中のクラスタの場合、 `tiup cluster display`コマンドを使用して、どのPDインスタンスがTiDBダッシュボードにサービスを提供しているかを確認できます。 `CLUSTER_NAME`をクラスタ名に置き換えます。
 
 {{< copyable "" >}}
 

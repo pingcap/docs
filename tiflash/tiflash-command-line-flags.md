@@ -29,7 +29,7 @@ summary: Learn the command-line startup flags of TiFlash.
     -   `--algorithm` ：データ検証に使用されるハッシュアルゴリズム。値のオプションは、 `xxh3` （デフォルト）、 `city128` 、 `none` `crc32` `crc64`このパラメーターは、 `version`が`2`の場合にのみ有効です。
     -   `--frame` ：検証フレームのサイズ。デフォルト値は`1048576`です。このパラメータは、 `version`が`2`の場合にのみ有効です。
     -   `--compression` ：ターゲット圧縮アルゴリズム。値のオプションは、 `LZ4` （デフォルト）、 `LZ4HC` 、および`zstd` `none` 。
-    -   `--level` ：目標圧縮レベル。指定しない場合、圧縮アルゴリズムに従って、推奨される圧縮レベルがデフォルトで使用されます。 `compression`が`LZ4`または`zstd`に設定されている場合、デフォルトレベルは1です`compression`が`LZ4HC`に設定されている場合、デフォルトレベルは9です。
+    -   `--level` ：目標圧縮レベル。指定しない場合、推奨される圧縮レベルが圧縮アルゴリズムに従ってデフォルトで使用されます。 `compression`が`LZ4`または`zstd`に設定されている場合、デフォルトレベルは1です`compression`が`LZ4HC`に設定されている場合、デフォルトレベルは9です。
     -   `--config-file` ： `dttool migrate`の設定ファイルは[`server`の構成ファイル](/tiflash/tiflash-command-line-flags.md#server---config-file)と同じです。構成ファイルを使用する場合は、ローカルTiFlashサーバーインスタンスを終了します。詳細については、 `--imitative`を参照してください。
     -   `--file-id` ：DTFileのID。たとえば、 `dmf_123`のIDは`123`です。
     -   `--workdir` ： `dmf_xxx`の親ディレクトリ。

@@ -5,7 +5,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 # 楽観的な取引と悲観的な取引 {#optimistic-transactions-and-pessimistic-transactions}
 
-[楽観的なトランザクション](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合が発生するとロールバックします。対照的に、 [悲観的なトランザクション](/pessimistic-transaction.md)モデルは、実際にトランザクションをコミットする前に変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることを確認した後にのみコミットを開始します。
+[楽観的なトランザクション](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合が発生するとロールバックします。対照的に、 [悲観的な取引](/pessimistic-transaction.md)モデルは、実際にトランザクションをコミットする前に変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることを確認した後にのみコミットを開始します。
 
 直接コミットは成功する可能性が高いため、楽観的なトランザクションモデルは競合率が低いシナリオに適しています。ただし、トランザクションの競合が発生すると、ロールバックのコストは比較的高くなります。
 

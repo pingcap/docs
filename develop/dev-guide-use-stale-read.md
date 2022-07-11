@@ -475,7 +475,7 @@ public class BookDAO {
 <SimpleTab>
 <div label="SQL">
 
-セッションでStaleReadを有効にします。
+セッションで古い読み取りを有効にする：
 
 {{< copyable "" >}}
 
@@ -485,7 +485,7 @@ SET @@tidb_read_staleness="-5";
 
 たとえば、値が`-5`に設定されていて、TiKVに対応する履歴データがある場合、TiDBは5秒の時間範囲内で可能な限り新しいタイムスタンプを選択します。
 
-セッションでStaleReadを無効にします。
+セッションで古い読み取りを無効にします。
 
 {{< copyable "" >}}
 

@@ -63,7 +63,7 @@ Intelx86-64アーキテクチャの64ビット汎用ハードウェアサーバ�
 ### TiDBコンポーネントの推奨構成は何ですか？ {#what-s-the-recommended-configuration-of-tidb-components}
 
 -   TiDBには、CPUとメモリに対する高い要件があります。 TiDB Binlogを有効にする必要がある場合は、サービスボリュームの見積もりとGC操作の時間要件に基づいて、ローカルディスク容量を増やす必要があります。ただし、SSDディスクは必須ではありません。
--   PDはクラスタのメタデータを格納し、頻繁に読み取りおよび書き込み要求を行います。高いI/Oディスクが必要です。パフォーマンスの低いディスクは、クラスタ全体のパフォーマンスに影響します。 SSDディスクの使用をお勧めします。さらに、リージョンの数が多いほど、CPUとメモリに対する要件が高くなります。
+-   PDはクラスタのメタデータを格納し、頻繁に読み取りおよび書き込み要求を行います。高いI/Oディスクが必要です。パフォーマンスの低いディスクは、クラスタ全体のパフォーマンスに影響します。 SSDディスクを使用することをお勧めします。さらに、リージョンの数が多いほど、CPUとメモリに対する要件が高くなります。
 -   TiKVには、CPU、メモリ、およびディスクに対する高い要件があります。 SSDを使用する必要があります。
 
 詳細については、 [ソフトウェアとハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
@@ -74,7 +74,7 @@ Intelx86-64アーキテクチャの64ビット汎用ハードウェアサーバ�
 
 ### TiKV / PDの変更された<code>toml</code>構成が有効にならないのはなぜですか？ {#why-the-modified-code-toml-code-configuration-for-tikv-pd-does-not-take-effect}
 
-`toml`の構成を有効にするには、TiKV/PDで`--config`つのパラメーターを設定する必要があります。 TiKV / PDは、デフォルトでは設定を読み取りません。現在、この問題はBinaryを使用してデプロイする場合にのみ発生します。 TiKVの場合は、構成を編集してサービスを再起動します。 PDの場合、構成ファイルはPDが初めて開始されたときにのみ読み取られ、その後pd-ctlを使用して構成を変更できます。詳細については、 [PD制御ユーザーガイド](/pd-control.md)を参照してください。
+`toml`の構成を有効にするには、TiKV/PDで`--config`つのパラメーターを設定する必要があります。 TiKV / PDは、デフォルトでは設定を読み取りません。現在、この問題はBinaryを使用してデプロイする場合にのみ発生します。 TiKVの場合は、構成を編集してサービスを再起動します。 PDの場合、構成ファイルはPDが初めて開始されたときにのみ読み取られ、その後pd-ctlを使用して構成を変更できます。詳細については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### TiDB監視フレームワーク（Prometheus + Grafana）をスタンドアロンマシンまたは複数のマシンにデプロイする必要がありますか？推奨されるCPUとメモリは何ですか？ {#should-i-deploy-the-tidb-monitoring-framework-prometheus-grafana-on-a-standalone-machine-or-on-multiple-machines-what-is-the-recommended-cpu-and-memory}
 
@@ -92,23 +92,23 @@ Intelx86-64アーキテクチャの64ビット汎用ハードウェアサーバ�
 
 ### Inventory.ini変数の説明 {#description-of-inventory-ini-variables}
 
-| 変数                      | 説明                                                                                                            |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `cluster_name`          | クラスタの名前、調整可能                                                                                                  |
-| `tidb_version`          | TiDBのバージョン                                                                                                    |
-| `deployment_method`     | デプロイの方法、デフォルトではバイナリ、Dockerはオプション                                                                              |
-| `process_supervision`   | プロセスの監視方法（デフォルトではsystemd）、オプションの監視                                                                            |
-| `timezone`              | 管理対象ノードのタイムゾーン、調整可能、デフォルトでは`Asia/Shanghai`変数で`set_timezone`                                                   |
-| `set_timezone`          | 管理対象ノードのタイムゾーンを編集します。デフォルトではTrueです。 Falseは閉じることを意味します                                                         |
-| `enable_elk`            | 現在サポートされていません                                                                                                 |
-| `enable_firewalld`      | ファイアウォールを有効にするには、デフォルトで閉じています                                                                                 |
-| `enable_ntpd`           | 管理対象ノードのNTPサービスを監視します。デフォルトではTrueです。閉じないでください                                                                 |
-| `machine_benchmark`     | 管理対象ノードのディスクIOPSを監視します。デフォルトではTrueです。閉じないでください                                                                |
-| `set_hostname`          | IPに基づいて管理対象ノードのホスト名を編集します。デフォルトではFalseです。                                                                     |
-| `enable_binlog`         | Pumpをデプロイしてbinlogを有効にするかどうか（デフォルトではFalse、Kafkaクラスタに依存）。 `zookeeper_addrs`変数を参照してください                          |
-| `zookeeper_addrs`       | binlogKafkaクラスタのZooKeeperアドレス                                                                                 |
-| `enable_slow_query_log` | TiDBの低速クエリログを単一のファイルに記録するには：（{{deploy_dir}} / log / tidb_slow_query.log）。デフォルトではFalseで、TiDBログに記録します           |
-| `deploy_without_tidb`   | Key-Valueモードでは、PD、TiKV、および監視サービスのみをデプロイし、TiDBはデプロイしません。 `inventory.ini`ファイルでtidb_serversホストグループのIPをnullに設定します |
+| 変数                      | 説明                                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- |
+| `cluster_name`          | クラスタの名前、調整可能                                                                                              |
+| `tidb_version`          | TiDBのバージョン                                                                                                |
+| `deployment_method`     | デプロイの方法、デフォルトではバイナリ、Dockerはオプション                                                                          |
+| `process_supervision`   | プロセスの監視方法（デフォルトではsystemd）、オプションの監視                                                                        |
+| `timezone`              | 管理対象ノードのタイムゾーン、調整可能、デフォルトでは`Asia/Shanghai`変数で`set_timezone`                                               |
+| `set_timezone`          | 管理対象ノードのタイムゾーンを編集します。デフォルトではTrueです。 Falseは閉じることを意味します                                                     |
+| `enable_elk`            | 現在サポートされていません                                                                                             |
+| `enable_firewalld`      | ファイアウォールを有効にするには、デフォルトで閉じています                                                                             |
+| `enable_ntpd`           | 管理対象ノードのNTPサービスを監視します。デフォルトではTrueです。閉じないでください                                                             |
+| `machine_benchmark`     | 管理対象ノードのディスクIOPSを監視します。デフォルトではTrueです。閉じないでください                                                            |
+| `set_hostname`          | IPに基づいて管理対象ノードのホスト名を編集します。デフォルトではFalseです。                                                                 |
+| `enable_binlog`         | Pumpをデプロイしてbinlogを有効にするかどうか（デフォルトではFalse、Kafkaクラスタに依存）。 `zookeeper_addrs`変数を参照してください                      |
+| `zookeeper_addrs`       | binlogKafkaクラスタのZooKeeperアドレス                                                                             |
+| `enable_slow_query_log` | TiDBの低速クエリログを単一のファイルに記録するには：（{{deploy_dir}} / log / tidb_slow_query.log）。デフォルトではFalseで、TiDBログに記録します       |
+| `deploy_without_tidb`   | Key-Valueモードでは、PD、TiKV、および監視サービスのみを展開し、TiDBは展開しません。 `inventory.ini`ファイルでtidb_serversホストグループのIPをnullに設定します |
 
 ### 遅いクエリログをTiDBに個別に記録するにはどうすればよいですか？遅いクエリのSQLステートメントを見つける方法は？ {#how-to-separately-record-the-slow-query-log-in-tidb-how-to-locate-the-slow-query-sql-statement}
 
@@ -122,7 +122,7 @@ Intelx86-64アーキテクチャの64ビット汎用ハードウェアサーバ�
 
 TiDB `label`の構成は、クラスタ展開アーキテクチャに関連しています。これは重要であり、PDがグローバルな管理とスケジューリングを実行するための基礎となります。以前にクラスタをデプロイするときに`label`を構成しなかった場合は、PD管理ツール`pd-ctl` （たとえば、 `config set location-labels "zone,rack,host"` ）を使用して`location-labels`の情報を手動で追加することにより、デプロイメント構造を調整する必要があります（実際の`label`レベル名に基づいて構成する必要があります）。
 
-`pd-ctl`の使用法については、 [PD制御ユーザーガイド](/pd-control.md)を参照してください。
+`pd-ctl`の使用法については、 [PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
 ### ディスクテストの<code>dd</code>コマンドが<code>oflag=direct</code>オプションを使用するのはなぜですか？ {#why-does-the-code-dd-code-command-for-the-disk-test-use-the-code-oflag-direct-code-option}
 

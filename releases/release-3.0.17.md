@@ -32,7 +32,7 @@ TiDBバージョン：3.0.17
 
 -   TiDB
 
-    -   `IndexHashJoin`または`IndexMergeJoin`を含むクエリでパニックが発生した場合、空のセットではなく実際のエラーメッセージを返します[＃18498](https://github.com/pingcap/tidb/pull/18498)
+    -   `IndexHashJoin`つまたは`IndexMergeJoin`を含むクエリでpanicが発生した場合は、空のセットではなく実際のエラーメッセージを返します[＃18498](https://github.com/pingcap/tidb/pull/18498)
     -   `SELECT a FROM t HAVING t.a`のようなSQLステートメントの不明な列エラーを修正し[＃18432](https://github.com/pingcap/tidb/pull/18432)
     -   テーブルに主キーがない場合、またはテーブルにすでに整数の主キーがある場合は、テーブルに主キーを追加することを禁止します[＃18342](https://github.com/pingcap/tidb/pull/18342)
     -   `EXPLAIN FORMAT="dot" FOR CONNECTION`を実行すると空のセットを返し[＃17157](https://github.com/pingcap/tidb/pull/17157)

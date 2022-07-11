@@ -4,7 +4,7 @@ title: TiDB 5.3.1 Release Notes
 
 # TiDB5.3.1リリースノート {#tidb-5-3-1-release-notes}
 
-発売日：2022年3月3日
+リリース日：2022年3月3日
 
 TiDBバージョン：5.3.1
 
@@ -25,7 +25,7 @@ TiDBバージョン：5.3.1
 -   TiKV
 
     -   ロックの解決ステップ[＃11993](https://github.com/tikv/tikv/issues/11993)を必要とするリージョンの数を減らすことにより、TiCDCの回復時間を短縮します。
-    -   ラフトログへのGCを実行するときに書き込みバッチサイズを増やすことにより、ガベージコレクション（GC）プロセスを高速化します[＃11404](https://github.com/tikv/tikv/issues/11404)
+    -   GC to Raftログを実行するときに書き込みバッチサイズを増やすことにより、ガベージコレクション（GC）プロセスを高速化します[＃11404](https://github.com/tikv/tikv/issues/11404)
     -   procファイルシステム（procfs）をv0.12.0に更新します[＃11702](https://github.com/tikv/tikv/issues/11702)
 
 -   PD
@@ -60,18 +60,18 @@ TiDBバージョン：5.3.1
     -   `tidb_restricted_read_only`が有効になっているときに`tidb_super_read_only`が自動的に有効にならないバグを修正します[＃31745](https://github.com/pingcap/tidb/issues/31745)
     -   照合順序を伴う`greatest`または`least`関数が間違った結果を取得する問題を修正します[＃31789](https://github.com/pingcap/tidb/issues/31789)
     -   クエリ実行時のMPPタスクリストの空のエラーを修正[＃31636](https://github.com/pingcap/tidb/issues/31636)
-    -   innerWorkerパニックによって引き起こされるインデックス結合の誤った結果を修正します[＃31494](https://github.com/pingcap/tidb/issues/31494)
+    -   innerWorkerpanicによって引き起こされるインデックス結合の誤った結果を修正します[＃31494](https://github.com/pingcap/tidb/issues/31494)
     -   列タイプを`FLOAT`から`DOUBLE`に変更した後の誤ったクエリ結果を[＃31372](https://github.com/pingcap/tidb/issues/31372)する
     -   インデックスルックアップ結合[＃30468](https://github.com/pingcap/tidb/issues/30468)を使用してクエリを実行するときの`invalid transaction`のエラーを修正しました
     -   `Order By`の最適化による誤ったクエリ結果を[＃30271](https://github.com/pingcap/tidb/issues/30271)
     -   `MaxDays`と`MaxBackups`の構成が遅いログ[＃25716](https://github.com/pingcap/tidb/issues/25716)で有効にならない問題を修正します
-    -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとパニックになる問題を修正します[＃28078](https://github.com/pingcap/tidb/issues/28078)
+    -   `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`ステートメントを実行するとpanicになる問題を修正します[＃28078](https://github.com/pingcap/tidb/issues/28078)
 
 -   TiKV
 
-    -   ピアステータスが`Applying`のときにスナップショットファイルを削除することによって引き起こされるパニックの問題を修正し[＃11746](https://github.com/tikv/tikv/issues/11746)
+    -   ピアステータスが`Applying`のときにスナップショットファイルを削除することによって引き起こされるpanicの問題を修正し[＃11746](https://github.com/tikv/tikv/issues/11746)
     -   フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合のQPSドロップの問題を修正します[＃11424](https://github.com/tikv/tikv/issues/11424)
-    -   cgroupコントローラーがマウントされていないときに発生するパニックの問題を修正します[＃11569](https://github.com/tikv/tikv/issues/11569)
+    -   cgroupコントローラーがマウントされていないときに発生するpanicの問題を修正します[＃11569](https://github.com/tikv/tikv/issues/11569)
     -   TiKVの動作が停止した後、解決されたTSの遅延が増加する問題を修正します[＃11351](https://github.com/tikv/tikv/issues/11351)
     -   GCワーカーがビジー状態のときにTiKVがデータの範囲を削除できない（ `unsafe_destroy_range`は実行できない）バグを修正します[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   ピアを破棄すると待ち時間が長くなる可能性があるという問題を修正します[＃10210](https://github.com/tikv/tikv/issues/10210)
@@ -81,9 +81,9 @@ TiDBバージョン：5.3.1
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正します[＃11549](https://github.com/tikv/tikv/issues/11549)
     -   TiKVノードがダウンすると、解決されたタイムスタンプが[＃11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正します。
     -   Raftクライアントの実装でバッチメッセージが大きすぎるという問題を修正します[＃9714](https://github.com/tikv/tikv/issues/9714)
-    -   リージョンマージ、ConfChange、およびスナップショットが極端な条件で同時に発生するときに発生するパニックの問題を修正します[＃11475](https://github.com/tikv/tikv/issues/11475)
+    -   リージョンマージ、ConfChange、およびスナップショットが極端な条件で同時に発生するときに発生するpanicの問題を修正します[＃11475](https://github.com/tikv/tikv/issues/11475)
     -   TiKVが逆テーブルスキャンを実行すると、TiKVがメモリロックを検出できない問題を修正します[＃11440](https://github.com/tikv/tikv/issues/11440)
-    -   ディスク容量がいっぱいになると、RocksDBのフラッシュまたは圧縮によってパニックが発生する問題を修正します[＃11224](https://github.com/tikv/tikv/issues/11224)
+    -   ディスク容量がいっぱいになると、RocksDBのフラッシュまたは圧縮によってpanicが発生する問題を修正します[＃11224](https://github.com/tikv/tikv/issues/11224)
     -   tikv-ctlが正しいリージョン関連情報を返さないバグを修正します[＃11393](https://github.com/tikv/tikv/issues/11393)
     -   インスタンスごとのgRPCリクエストの平均レイテンシがTiKVメトリクス[＃11299](https://github.com/tikv/tikv/issues/11299)で不正確であるという問題を修正します
 
@@ -103,7 +103,7 @@ TiDBバージョン：5.3.1
     -   `cast(string as decimal)`が間違った結果を返す問題を修正します
     -   主キー列をより大きなintデータ型に変更した後の潜在的なデータの不整合を修正
     -   `in`が`select (arg0, arg1) in (x,y)`のようなステートメントに複数の引数を持っている場合、 `in`が間違った結果を返すというバグを修正します
-    -   MPPクエリが停止したときにTiFlashがパニックになる可能性がある問題を修正します
+    -   MPPクエリが停止したときにTiFlashがpanicになる可能性がある問題を修正します
     -   入力引数に先行ゼロがある場合に`str_to_date`が間違った結果を返す問題を修正します
     -   フィルタが`where <string>`形式の場合、クエリが間違った結果を返す問題を修正します
     -   入力引数`string`が`%Y-%m-%d\n%H:%i:%s`形式の場合に`cast(string as datetime)`が間違った結果を返す問題を修正します
@@ -118,7 +118,7 @@ TiDBバージョン：5.3.1
 
         -   [＃4637](https://github.com/pingcap/tiflow/issues/4637)がエラーを報告するバグを修正します`Column length too big`
         -   PDリーダーが殺されたときにTiCDCノードが異常終了するバグを修正します[＃4248](https://github.com/pingcap/tiflow/issues/4248)
-        -   セーフモードでの更新ステートメントの実行エラーがDMワーカーのパニックを引き起こす可能性がある問題を修正します[＃4317](https://github.com/pingcap/tiflow/issues/4317)
+        -   セーフモードでの更新ステートメントの実行エラーがDMワーカーのpanicを引き起こす可能性がある問題を修正します[＃4317](https://github.com/pingcap/tiflow/issues/4317)
         -   TiKVクライアントのキャッシュ領域メトリックが負になる可能性がある問題を修正します[＃4300](https://github.com/pingcap/tiflow/issues/4300)
         -   必要なプロセッサ情報が存在しない場合にHTTPAPIがパニックになるバグを修正します[＃3840](https://github.com/pingcap/tiflow/issues/3840)
         -   DM-masterとDM-workerを特定の順序で再起動した後、DM-masterのリレーステータスが間違っているバグを修正します[＃3478](https://github.com/pingcap/tiflow/issues/3478)
@@ -140,9 +140,9 @@ TiDBバージョン：5.3.1
         -   `CREATE VIEW`ステートメントがデータレプリケーションを中断する問題を修正します[＃4173](https://github.com/pingcap/tiflow/issues/4173)
         -   DDLステートメントがスキップされた後にスキーマをリセットする必要がある問題を修正します[＃4177](https://github.com/pingcap/tiflow/issues/4177)
         -   `mq sink write row`に監視データがないという問題を修正します[＃3431](https://github.com/pingcap/tiflow/issues/3431)
-        -   レプリケーションタスクが削除されたときに発生する可能性のあるパニックの問題を修正する[＃3128](https://github.com/pingcap/tiflow/issues/3128)
+        -   レプリケーションタスクが削除されたときに発生する可能性のあるpanicの問題を修正する[＃3128](https://github.com/pingcap/tiflow/issues/3128)
         -   デッドロックによってレプリケーションタスクがスタックするという潜在的な問題を修正します[＃4055](https://github.com/pingcap/tiflow/issues/4055)
-        -   etcd1のタスクステータスを手動でクリーニングするときに発生するTiCDCパニックの問題を修正し[＃2980](https://github.com/pingcap/tiflow/issues/2980)
+        -   etcd1のタスクステータスを手動でクリーニングするときに発生するTiCDCpanicの問題を修正し[＃2980](https://github.com/pingcap/tiflow/issues/2980)
         -   DDLステートメントの特別なコメントによってレプリケーションタスクが停止する問題を修正します[＃3755](https://github.com/pingcap/tiflow/issues/3755)
         -   `config.Metadata.Timeout`の誤った構成によって引き起こされるレプリケーション停止の問題を修正し[＃3352](https://github.com/pingcap/tiflow/issues/3352) 。
         -   一部のRHELリリース[＃3584](https://github.com/pingcap/tiflow/issues/3584)のタイムゾーンの問題が原因でサービスを開始できない問題を修正します
@@ -151,11 +151,11 @@ TiDBバージョン：5.3.1
         -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)によって引き起こされる過度に頻繁な警告の問題を修正します
         -   CanalおよびMaxwellプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`の構成アイテムが自動的に`true`に設定されないバグを修正します。
         -   AvroシンクがJSONタイプの列の解析をサポートしていない問題を修正します[＃3624](https://github.com/pingcap/tiflow/issues/3624)
-        -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)の負の値のエラーを修正します
+        -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)の負の値エラーを修正しました
 
     -   TiDB Lightning
 
-        -   一部のインポートタスクにソースファイルが含まれていない場合にTiDBLightningがメタデータスキーマを削除しない可能性があるバグを修正します[＃28144](https://github.com/pingcap/tidb/issues/28144)
-        -   ストレージURLプレフィックスが「gcs：// xxx」ではなく「gs：// xxx」の場合、TiDBLightningがエラーを返すバグを修正します[＃32742](https://github.com/pingcap/tidb/issues/32742)
+        -   一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正します[＃28144](https://github.com/pingcap/tidb/issues/28144)
+        -   ストレージURLプレフィックスが「gcs：// xxx」ではなく「gs：// xxx」の場合、 TiDB Lightningがエラーを返すバグを修正します[＃32742](https://github.com/pingcap/tidb/issues/32742)
         -   --log-file=&quot;-&quot;を設定してもログがstdout1に[＃29876](https://github.com/pingcap/tidb/issues/29876)されない問題を修正します
-        -   S3ストレージパスが存在しない場合にTiDBLightningがエラーを報告しない問題を修正します[＃30709](https://github.com/pingcap/tidb/issues/30709)
+        -   S3ストレージパスが存在しない場合にTiDB Lightningがエラーを報告しない問題を修正します[＃30709](https://github.com/pingcap/tidb/issues/30709)

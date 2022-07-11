@@ -3,7 +3,7 @@ title: Multi-table Join Queries
 summary: This document describes how to use multi-table join queries.
 ---
 
-# マルチテーブル結合クエリ {#multi-table-join-queries}
+# マルチテーブル参加クエリ {#multi-table-join-queries}
 
 多くのシナリオでは、1つのクエリを使用して、複数のテーブルからデータを取得する必要があります。 `JOIN`ステートメントを使用して、2つ以上のテーブルのデータを組み合わせることができます。
 
@@ -219,9 +219,9 @@ TiDBは、SQL構文レベルで`LEFT SEMI JOIN table_name`をサポートして�
 
 TiDBは、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
--   [インデックス結合](/explain-joins.md#index-join)
+-   [インデックス参加](/explain-joins.md#index-join)
 -   [ハッシュ参加](/explain-joins.md#hash-join)
--   [マージ結合](/explain-joins.md#merge-join)
+-   [マージ参加](/explain-joins.md#merge-join)
 
 オプティマイザは、結合されたテーブルのデータ量などの要因に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用すると、クエリが結合に使用するアルゴリズムを確認できます。
 

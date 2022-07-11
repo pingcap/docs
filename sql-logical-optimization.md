@@ -4,7 +4,7 @@ title: SQL Logical Optimization
 
 # SQL論理最適化 {#sql-logical-optimization}
 
-この章では、TiDBが最終的なクエリプランを生成する方法を理解するのに役立ついくつかの重要なロジックの書き直しについて説明します。たとえば、TiDBで`select * from t where t.a in (select t1.a from t1 where t1.b=t.b)`のクエリを実行すると、TiDBがここでいくつかの書き換えを行ったため、 `IN`つのサブクエリ`t.a in (select t1.a from t1 where t1.b=t.b)`が存在しないことがわかります。
+この章では、TiDBが最終的なクエリプランを生成する方法を理解するのに役立つ、いくつかの重要なロジックの書き直しについて説明します。たとえば、TiDBで`select * from t where t.a in (select t1.a from t1 where t1.b=t.b)`のクエリを実行すると、TiDBがここでいくつかの書き換えを行ったため、 `IN`つのサブクエリ`t.a in (select t1.a from t1 where t1.b=t.b)`が存在しないことがわかります。
 
 この章では、次の主要な書き直しを紹介します。
 

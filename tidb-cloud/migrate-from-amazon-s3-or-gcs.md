@@ -47,7 +47,7 @@ TiDBクラウドがAmazonS3バケットのソースデータにアクセスで�
     2.  [ **AWSIAMポリシー設定の表示]を**クリックします。ターゲットTiDBクラスタの対応するTiDB CloudアカウントIDとTiDB Cloud外部IDが表示されます。
     3.  次の手順で使用されるため、 TiDB CloudアカウントIDと外部IDをメモしてください。
 
-2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、次の読み取り専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
+2.  AWSマネジメントコンソールで、[ **IAM]** &gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、次の読み取り専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
 
     -   s3：GetObject
     -   s3：GetObjectVersion
@@ -219,7 +219,7 @@ TiDBクラウドがGCSバケット内のソースデータにアクセスでき�
 
 ### ステップ3.ソースデータファイルをGCSにコピーし、データをTiDB Cloudにインポートします {#step-3-copy-source-data-files-to-gcs-and-import-data-into-tidb-cloud}
 
-1.  ソースデータファイルをGCSバケットにコピーするには、GoogleCloudConsoleまたはgsutilのいずれかを使用してデータをGCSバケットにアップロードできます。
+1.  ソースデータファイルをGCSバケットにコピーするには、GoogleCloudConsoleまたはgsutilを使用してデータをGCSバケットにアップロードします。
 
     -   Google Cloud Consoleを使用してデータをアップロードするには、GoogleCloudStorageのドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)をご覧ください。
     -   gsutilを使用してデータをアップロードするには、次のコマンドを使用します。

@@ -5,7 +5,7 @@ summary: Use Optimizer Hints to influence query execution plans
 
 # オプティマイザーのヒント {#optimizer-hints}
 
-TiDBは、MySQL5.7で導入されたコメントのような構文に基づくオプティマイザヒントをサポートしています。たとえば、一般的な構文の1つは`/*+ HINT_NAME([t1_name [, t2_name] ...]) */`です。 TiDBオプティマイザが最適でないクエリプランを選択する場合は、オプティマイザヒントの使用をお勧めします。
+TiDBは、 MySQL 5.7で導入されたコメントのような構文に基づくオプティマイザヒントをサポートしています。たとえば、一般的な構文の1つは`/*+ HINT_NAME([t1_name [, t2_name] ...]) */`です。 TiDBオプティマイザが最適でないクエリプランを選択する場合は、オプティマイザヒントの使用をお勧めします。
 
 > **ノート：**
 >
@@ -215,7 +215,7 @@ SELECT /*+ LIMIT_TO_COP() */ * FROM t WHERE a = 1 AND b > 10 ORDER BY c LIMIT 1;
 
 ### READ_FROM_STORAGE（TIFLASH [t1_name [、tl_name ...]]、TIKV [t2_name [、tl_name ...]]） {#read-from-storage-tiflash-t1-name-tl-name-tikv-t2-name-tl-name}
 
-`READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])`ヒントは、オプティマイザに特定のストレージエンジンから特定のテーブルを読み取るように指示します。現在、このヒントは2つのストレージエンジンパラメータ（ `TIKV`と`TIFLASH` ）をサポートしています。テーブルにエイリアスがある場合は、エイリアスを`READ_FROM_STORAGE()`のパラメータとして使用します。テーブルにエイリアスがない場合は、テーブルの元の名前をパラメータとして使用します。例えば：
+`READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name ...]])`ヒントは、オプティマイザーに特定のストレージエンジンから特定のテーブルを読み取るように指示します。現在、このヒントは2つのストレージエンジンパラメータ（ `TIKV`と`TIFLASH` ）をサポートしています。テーブルにエイリアスがある場合は、エイリアスを`READ_FROM_STORAGE()`のパラメータとして使用します。テーブルにエイリアスがない場合は、テーブルの元の名前をパラメータとして使用します。例えば：
 
 {{< copyable "" >}}
 
@@ -348,7 +348,7 @@ select /*+ MAX_EXECUTION_TIME(1000) */ * from t1 inner join t2 where t1.id = t2.
 
 ### MEMORY_QUOTA（N） {#memory-quota-n}
 
-`MEMORY_QUOTA(N)`のヒントでは、ステートメントで使用できるメモリの量に制限`N` （MBまたはGB単位のしきい値）が設定されます。ステートメントのメモリ使用量がこの制限を超えると、TiDBはステートメントの制限を超えた動作に基づいてログメッセージを生成するか、単に終了します。
+`MEMORY_QUOTA(N)`のヒントでは、ステートメントで使用できるメモリの量に制限`N` （MBまたはGB単位のしきい値）が設定されます。ステートメントのメモリ使用量がこの制限を超えると、TiDBはステートメントの制限超過動作に基づいてログメッセージを生成するか、単に終了します。
 
 次のヒントで、 `MEMORY_QUOTA(1024 MB)`は、メモリ使用量が1024MBに制限されていることを意味します。
 
@@ -403,7 +403,7 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 ### NTH_PLAN（N） {#nth-plan-n}
 
-`NTH_PLAN(N)`のヒントは、物理最適化中に見つかった`N`番目の物理計画を選択するようにオプティマイザーに通知します。 `N`は正の整数でなければなりません。
+`NTH_PLAN(N)`のヒントは、物理最適化中に検出された`N`番目の物理計画を選択するようにオプティマイザーに通知します。 `N`は正の整数でなければなりません。
 
 指定された`N`が物理最適化の検索範囲を超えている場合、TiDBは警告を返し、このヒントを無視する戦略に基づいて最適な物理計画を選択します。
 

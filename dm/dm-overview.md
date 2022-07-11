@@ -15,7 +15,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 
 ## 基本的な機能 {#basic-features}
 
--   **MySQLとの互換性。** DMは、MySQL 5.7プロトコル、およびMySQL5.7のほとんどの機能と構文と互換性があります。
+-   **MySQLとの互換性。** DMは、 MySQL 5.7 MySQL 5.7プロトコル、およびMySQL5.7のほとんどの機能と構文と互換性があります。
 -   **DMLおよびDDLイベントの複製。** MySQLbinlogでのDMLおよびDDLイベントの解析と複製をサポートします。
 -   **MySQLシャードの移行とマージ。** DMは、アップストリームの複数のMySQLデータベースインスタンスをダウンストリームの1つのTiDBデータベースに移行およびマージすることをサポートします。さまざまな移行シナリオに合わせたレプリケーションルールのカスタマイズをサポートします。アップストリームのMySQLシャードのDDL変更を自動的に検出して処理できるため、運用コストが大幅に削減されます。
 -   **さまざまな種類のフィルター。**イベントタイプ、正規表現、およびSQL式を事前定義して、データ移行プロセス中にMySQLbinlogイベントを除外できます。

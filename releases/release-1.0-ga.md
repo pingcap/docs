@@ -25,7 +25,7 @@ title: TiDB 1.0 release notes
 
 ## TiKV {#tikv}
 
--   コプロセッサーは、より多くのプッシュダウン機能をサポートするようになりました
+-   コプロセッサーは、より多くのプッシュダウン関数をサポートするようになりました
 -   サンプリング操作のプッシュダウンをサポート
 -   データコンパクトの手動トリガーをサポートして、スペースをすばやく収集します
 -   パフォーマンスと安定性を向上させる
@@ -73,7 +73,7 @@ title: TiDB 1.0 release notes
 -   アンディ・リブリアン
 -   アーサーヤン
 -   astaxie
--   白揚
+-   バイ、ヤン
 -   バイラオヘ
 -   ビン劉
 -   宇宙を非難する
@@ -82,7 +82,7 @@ title: TiDB 1.0 release notes
 -   セガオ
 -   Changjian Zhang
 -   チェンリアン
--   コレラ胡
+-   Cholerae Hu
 -   チュチャオ
 -   冷水
 -   コールRローレンス
@@ -99,7 +99,7 @@ title: TiDB 1.0 release notes
 -   ディスク
 -   ドンシュ
 -   dreamquster
--   ドロゴン
+-   ドラゴン
 -   デュチュアン
 -   ディラン・ウェン
 -   eBoyy
@@ -213,7 +213,7 @@ title: TiDB 1.0 release notes
 -   sumBug
 -   sunhao2017
 -   タオメン
--   タオ・チョウ
+-   タオ周
 -   テニックス
 -   tiancaiamao
 -   TianGuangyu

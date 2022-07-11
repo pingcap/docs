@@ -55,7 +55,7 @@ tiup cluster clean <cluster-name> [flags]
 
 ### -h、-help {#h-help}
 
--   ヘルプ情報を印刷します。
+-   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -63,4 +63,4 @@ tiup cluster clean <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt;前のページに戻る-TiUPClusterコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

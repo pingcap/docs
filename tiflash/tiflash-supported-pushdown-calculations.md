@@ -41,7 +41,7 @@ TiFlashは、次のプッシュダウン式をサポートしています。
 -   JSON関数： `json_length`
 -   変換関数： `cast(int as double), cast(int as decimal), cast(int as string), cast(int as time), cast(double as int), cast(double as decimal), cast(double as string), cast(double as time), cast(string as int), cast(string as double), cast(string as decimal), cast(string as time), cast(decimal as int), cast(decimal as string), cast(decimal as time), cast(time as int), cast(time as decimal), cast(time as string), cast(time as real)`
 -   集計関数： `min, max, sum, count, avg, approx_count_distinct, group_concat`
--   その他の機能： `inetntoa, inetaton, inet6ntoa, inet6aton`
+-   その他の関数： `inetntoa, inetaton, inet6ntoa, inet6aton`
 
 ## 制限 {#restrictions}
 

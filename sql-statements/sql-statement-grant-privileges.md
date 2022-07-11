@@ -78,7 +78,7 @@ mysql> SHOW GRANTS FOR 'newuser';
 ## MySQLの互換性 {#mysql-compatibility}
 
 -   MySQLと同様に、 `USAGE`特権はTiDBサーバーにログインする機能を示します。
--   列レベルの権限は現在サポートされていません。
+-   カラムレベルの権限は現在サポートされていません。
 -   MySQLと同様に、 `NO_AUTO_CREATE_USER` sqlモードが存在しない場合、ユーザーが存在しない場合、 `GRANT`ステートメントは空のパスワードで新しいユーザーを自動的に作成します。このsql-modeを削除すると（デフォルトで有効になっています）、セキュリティ上のリスクがあります。
 
 ## も参照してください {#see-also}

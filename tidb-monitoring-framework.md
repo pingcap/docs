@@ -28,11 +28,11 @@ Grafanaは、メトリックを分析および視覚化するためのオープ�
 ![Grafana monitored\_groups](/media/grafana-monitored-groups.png)
 
 -   {TiDB_Cluster_name}-バックアップと復元：バックアップと復元に関連するメトリックを監視します。
--   {TiDB_Cluster_name}-Binlog：TiDBBinlogに関連するメトリックを監視します。
+-   {TiDB_Cluster_name} Binlog： Binlogに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Blackbox_exporter：ネットワークプローブに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-ディスク-パフォーマンス：ディスクパフォーマンスに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Kafka-概要：Kafkaに関連するメトリックの監視。
--   {TiDB_Cluster_name}-Lightning：TiDBLightningに関連するメトリックを監視します。
+-   {TiDB_Cluster_name}-Lightning： TiDB Lightningに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-Node_exporter：オペレーティングシステムに関連するメトリックを監視します。
 -   {TiDB_Cluster_name}-概要：重要なコンポーネントに関連する監視の概要。
 -   {TiDB_Cluster_name}-PD：PDサーバーに関連するメトリックを監視します。

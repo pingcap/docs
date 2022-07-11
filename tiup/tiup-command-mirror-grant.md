@@ -38,7 +38,7 @@ tiup mirror grant <id> [flags]
 ### 出力 {#outputs}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   コンポーネント所有者のIDが重複している場合、TiUPはエラー`Error: owner %s exists`を報告します。
+-   コンポーネントの所有者のIDが重複している場合、TiUPはエラー`Error: owner %s exists`を報告します。
 -   キーが別のコンポーネント所有者によって使用されている場合、TiUPはエラー`Error: key %s exists`を報告します。
 
 [&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

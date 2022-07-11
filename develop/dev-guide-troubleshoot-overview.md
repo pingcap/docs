@@ -24,4 +24,4 @@ SQL操作について質問がある場合は、 [SQLに関するFAQ](/faq/sql-f
 
 -   [サポートされていない機能](/mysql-compatibility.md#unsupported-features)
 -   [クラスター管理に関するFAQ](/faq/manage-cluster-faq.md)
--   [TiDBのよくある質問](/faq/tidb-faq.md)
+-   [TiDBのFAQ](/faq/tidb-faq.md)

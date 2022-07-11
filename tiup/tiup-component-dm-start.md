@@ -20,7 +20,7 @@ tiup dm start <cluster-name> [flags]
 
 -   開始するノードを指定します。指定しない場合、すべてのノードが開始されます。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
 -   データ型： `STRINGS`
--   このオプションがコマンドで指定されていない場合、すべてのノードが開始されます。
+-   コマンドでこのオプションが指定されていない場合、すべてのノードが開始されます。
 
 > **ノート：**
 >
@@ -46,4 +46,4 @@ tiup dm start <cluster-name> [flags]
 
 サービス開始のログ。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

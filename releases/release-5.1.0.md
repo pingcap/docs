@@ -13,7 +13,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 -   MySQL8.0のCommonTableExpression（CTE）機能をサポートして、SQLステートメントの可読性と実行効率を向上させます。
 -   オンラインでの列タイプの変更をサポートして、コード開発の柔軟性を向上させます。
 -   クエリの安定性を向上させるために新しい統計タイプを導入します。これはデフォルトで実験的機能として有効になっています。
--   MySQL 8.0の動的特権機能をサポートして、特定の操作をよりきめ細かく制御できるようにします。
+-   MySQL 8.0の動的特権機能をサポートして、特定の操作に対してよりきめ細かい制御を実装します。
 -   Stale Read機能を使用してローカルレプリカからデータを直接読み取ることをサポートして、読み取りの待ち時間を短縮し、クエリのパフォーマンスを向上させます（実験的）。
 -   ロックビュー機能を追加して、データベース管理者（DBA）がトランザクションロックイベントを監視し、デッドロックの問題をトラブルシューティングできるようにします（実験的）。
 -   バックグラウンドタスクにTiKV書き込みレートリミッターを追加して、読み取りおよび書き込み要求のレイテンシーが安定するようにします。
@@ -26,14 +26,14 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                      | タイプを変更する   | 説明                                                                                                                          |
-| :--------------------------------------------------------------------------------------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新しく追加されました | 共通テーブル式の最大再帰深度を制御します。                                                                                                       |
-| [`init_connect`](/system-variables.md#init_connect)                                      | 新しく追加されました | TiDBサーバーへの初期接続を制御します。                                                                                                       |
-| [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)          | 新しく追加されました | TiDBが統計を収集する方法を制御します。この変数のデフォルト値は`2`です。これは実験的機能です。                                                                          |
-| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新しく追加されました | 接続しているTiDBサーバーでセキュリティ拡張モード（SEM）が有効になっているかどうかを示します。この変数設定は、TiDBサーバーを再起動せずに変更することはできません。                                      |
-| [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新しく追加されました | オプティマイザのコスト見積もりを無視するかどうか、およびクエリの実行にMPPモードを強制的に使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                            |
-| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新しく追加されました | パーティション表の動的プルーニング・モードを使用可能にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`です。これは、パーティション表の動的プルーニング・モードがデフォルトで無効になっていることを意味します。 |
+| 変数名                                                                                      | タイプを変更する   | 説明                                                                                                                                |
+| :--------------------------------------------------------------------------------------- | :--------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| [`cte_max_recursion_depth`](/system-variables.md#cte_max_recursion_depth)                | 新しく追加されました | 共通テーブル式の最大再帰深度を制御します。                                                                                                             |
+| [`init_connect`](/system-variables.md#init_connect)                                      | 新しく追加されました | TiDBサーバーへの初期接続を制御します。                                                                                                             |
+| [`tidb_analyze_version`](/system-variables.md#tidb_analyze_version-new-in-v510)          | 新しく追加されました | TiDBが統計を収集する方法を制御します。この変数のデフォルト値は`2`です。これは実験的機能です。                                                                                |
+| [`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)    | 新しく追加されました | 接続しているTiDBサーバーでセキュリティ拡張モード（SEM）が有効になっているかどうかを示します。この変数設定は、TiDBサーバーを再起動せずに変更することはできません。                                            |
+| [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)                   | 新しく追加されました | オプティマイザのコスト見積もりを無視するかどうか、およびクエリの実行にMPPモードを強制的に使用するかどうかを制御します。この変数のデータ型は`BOOL`で、デフォルト値は`false`です。                                  |
+| [`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51) | 新しく追加されました | パーティションテーブルの動的プルーニングモードを有効にするかどうかを指定します。この機能は実験的です。この変数のデフォルト値は`static`です。これは、パーティション化されたテーブルの動的プルーニングモードがデフォルトで無効になっていることを意味します。 |
 
 ### Configuration / コンフィグレーションファイルのパラメーター {#configuration-file-parameters}
 
@@ -58,9 +58,9 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 ### その他 {#others}
 
--   アップグレードする前に、TiDB構成[`feedback-probability`](/tidb-configuration-file.md#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「回復可能なゴルーチンのパニック」エラーが発生しますが、このエラーはアップグレードには影響しません。
+-   アップグレードする前に、TiDB構成[`feedback-probability`](/tidb-configuration-file.md#feedback-probability)の値を確認してください。値が0でない場合、アップグレード後に「回復可能なゴルーチンのpanic」エラーが発生しますが、このエラーはアップグレードには影響しません。
 -   TiDBのGoコンパイラバージョンをgo1.13.7からgo1.16.4にアップグレードします。これにより、TiDBのパフォーマンスが向上します。 TiDB開発者の場合は、Goコンパイラのバージョンをアップグレードして、スムーズにコンパイルできるようにしてください。
--   TiDBローリングアップグレード中にTiDBBinlogを使用するクラスタで、クラスター化インデックスを使用してテーブルを作成することは避けてください。
+-   TiDBローリングアップグレード中にBinlogを使用するクラスタで、クラスター化インデックスを使用してテーブルを作成することは避けてください。
 -   TiDBローリングアップグレード中に`alter table ... modify column`または`alter table ... change column`のようなステートメントを実行することは避けてください。
 -   v5.1以降、各テーブルのTiFlashレプリカを構築するときに、システムテーブルのレプリカを設定することはサポートされなくなりました。クラスタをアップグレードする前に、関連するシステムテーブルのレプリカをクリアする必要があります。そうしないと、アップグレードは失敗します。
 -   TiCDCの`cdc cli changefeed`コマンドの`--sort-dir`パラメータを非推奨にします。代わりに、 `cdc server`コマンドで`--sort-dir`を設定できます。 [＃1795](https://github.com/pingcap/tiflow/pull/1795)
@@ -72,7 +72,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 -   MySQL8.0のCommonTableExpression（CTE）機能をサポートします。
 
-    この機能は、階層データを再帰的または非再帰的にクエリする機能をTiDBに提供し、ツリークエリを使用して、人的資源、製造、金融市場、教育などの複数のセクターでアプリケーションロジックを実装するニーズを満たします。
+    この機能により、TiDBは階層データを再帰的または非再帰的にクエリできるようになり、ツリークエリを使用して、人材、製造、金融市場、教育などの複数のセクターでアプリケーションロジックを実装する必要があります。
 
     TiDBでは、 `WITH`ステートメントを適用して共通テーブル式を使用できます。 [ユーザードキュメント](/sql-statements/sql-statement-with.md) [＃17472](https://github.com/pingcap/tidb/issues/17472)
 
@@ -128,9 +128,9 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
     ユーザードキュメント：
 
-    -   クラスタ内のすべてのTiKVノードで現在発生している悲観的ロックおよびその他のロックを表示します[`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
-    -   TiDBノードで最近発生したいくつかのデッドロックエラーを表示します[`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
-    -   TiDBノードで現在実行されているトランザクション情報を表示します[`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
+    -   クラスタ内のすべてのTiKVノードで現在発生している悲観的ロックおよびその他のロックをビューします[`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    -   TiDBノードで最近発生したいくつかのデッドロックエラーをビューします[`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
+    -   TiDBノードで現在実行されているトランザクション情報をビューします[`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
 ### パフォーマンス {#performance}
 
@@ -146,7 +146,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
     [ユーザードキュメント](/tikv-configuration-file.md#hibernate-regions) [＃10266](https://github.com/tikv/tikv/pull/10266)
 
-### 安定 {#stability}
+### 安定性 {#stability}
 
 -   TiCDCの複製の安定性の問題を解決する
 
@@ -207,7 +207,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
 
 -   TiFlash
 
-    -   `Union All` 、および`TopN`の機能を`Limit`
+    -   `Union All` 、および`TopN`の関数を`Limit`
     -   MPPモードでの左外部結合と半反結合を含むデカルト積をサポートします
     -   ロック操作を最適化して、実行中のDDLステートメントと読み取り操作が相互にブロックされないようにします
     -   TiFlashによる期限切れデータのクリーンアップを最適化する
@@ -248,7 +248,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
     -   TiDB Lightning
 
         -   データのインポート速度を向上させます。最適化の結果は、TPC-Cデータのインポート速度が30％向上し、より多くのインデックス（5インデックス）を持つ大きなテーブル（2TB +）のインポート速度が50％以上向上することを示しています。 [＃753](https://github.com/pingcap/br/pull/753)
-        -   インポートするデータと、インポートする前にターゲットクラスタに事前チェックを追加し、エラーを報告して、インポート要件を満たしていない場合にインポートプロセスを拒否します[＃999](https://github.com/pingcap/br/pull/999)
+        -   インポートするデータと、インポートする前のターゲットクラスタに事前チェックを追加し、エラーを報告して、インポート要件を満たしていない場合にインポートプロセスを拒否します[＃999](https://github.com/pingcap/br/pull/999)
         -   ローカルバックエンドでのチェックポイント更新のタイミングを最適化して、ブレークポイントからの再起動のパフォーマンスを向上させます[＃1080](https://github.com/pingcap/br/pull/1080)
 
 ## バグの修正 {#bug-fixes}
@@ -269,13 +269,13 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
     -   ユーザーは、 `REPLACE`の操作を実行するために、テーブルに対して`INSERT`と`DELETE`の両方の特権が必要になります[＃23909](https://github.com/pingcap/tidb/issues/23909)
     -   ユーザーは、 `REPLACE`の操作を実行するために、テーブルに対して`INSERT`と`DELETE`の両方の特権が必要になります[＃24070](https://github.com/pingcap/tidb/pull/24070)
     -   バイナリとバイト[＃23846](https://github.com/pingcap/tidb/issues/23846)を誤って比較することによって引き起こされた間違った`TableDual`プランを修正します
-    -   場合によっては[＃24717](https://github.com/pingcap/tidb/issues/24717)インデックスとインデックス結合を使用することによって引き起こされるパニックの問題を修正し[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716)
+    -   場合によっては[＃24717](https://github.com/pingcap/tidb/issues/24717)インデックスとインデックス結合を使用することによって引き起こされるpanicの問題を修正し[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716)
     -   準備されたプランキャッシュ`point get`がトランザクション[＃24741](https://github.com/pingcap/tidb/issues/24741)の`point get`ステートメントによって誤って使用される問題を修正します。
     -   照合順序が`ascii_bin`または[＃24569](https://github.com/pingcap/tidb/issues/24569)の場合に間違ったプレフィックスインデックス値を書き込む問題を修正し`latin1_bin`
     -   進行中のトランザクションがGCワーカーによって中断される可能性があるという問題を修正します[＃24591](https://github.com/pingcap/tidb/issues/24591)
-    -   `new-collation`が有効になっているが、 `new-row-format`が無効になっている場合に、クラスター化されたインデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
-    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングする
-    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するパニックの問題を修正します
+    -   `new-collation`が有効で、 `new-row-format`が無効の場合、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
+    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングします
+    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するpanicの問題を修正します
     -   列プルーニングの改善により、 `Apply`および`Join`の演算子の結果が正しくなくなる問題を修正します[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックされたプライマリロックを解決できないバグを修正します[＃24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketchレコードの重複を引き起こす可能性のある統計のGCの問題を修正します[＃24357](https://github.com/pingcap/tidb/pull/24357)
@@ -293,14 +293,14 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
     -   ファイル辞書ファイルが破損した後にTiKVが起動できないバグを修正します[＃9886](https://github.com/tikv/tikv/issues/9886)
     -   古い値の読み取りによって引き起こされる[＃9981](https://github.com/tikv/tikv/issues/9981)の問題を修正します[＃9996](https://github.com/tikv/tikv/issues/9996)
     -   照合順序が`latin1_bin`の場合に、クラスター化された主キー列の2次インデックスの値が空になる問題を修正し[＃24548](https://github.com/pingcap/tidb/issues/24548) 。
-    -   パニックが発生したときにTiKVがコアダンプファイルを生成できるようにする`abort-on-panic`の構成を追加します。ユーザーは、コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
+    -   panicが発生したときにTiKVがコアダンプファイルを生成できるようにする`abort-on-panic`の構成を追加します。ユーザーは、コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
     -   TiKVがビジーでないときに発生する`point get`クエリのパフォーマンスリグレッションの問題を修正します[＃10046](https://github.com/tikv/tikv/issues/10046)
 
 -   PD
 
-    -   店舗が多い場合にPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
+    -   店舗数が多いとPDリーダーの再選が遅くなる問題を修正[＃3697](https://github.com/tikv/pd/issues/3697)
 
-    -   存在しないストアからエビクトリーダースケジューラを削除するときに発生するパニックの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
+    -   存在しないストアからエビクトリーダースケジューラを削除するときに発生するpanicの問題を修正します[＃3660](https://github.com/tikv/pd/issues/3660)
 
     -   オフラインピアがマージされた後に統計が更新されない問題を修正します[＃3611](https://github.com/tikv/pd/issues/3611)
 
@@ -314,22 +314,22 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
     -   文字列型を整数型にキャストするときの誤った結果の問題を修正します
     -   連続した高速書き込みによってTiFlashのメモリが不足する可能性がある問題を修正します
     -   テーブルGC中にnullポインタの例外が発生する可能性があるという潜在的な問題を修正します
-    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashパニックの問題を修正します
-    -   BRの復元中にTiFlashがパニックになる可能性がある問題を修正します
+    -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正します
+    -   BRの復元中にTiFlashがpanicになる可能性がある問題を修正します
     -   共有デルタインデックスを同時に複製した場合の誤った結果の問題を修正
-    -   圧縮フィルター機能が有効になっているときに発生する可能性のあるパニックを修正します
+    -   圧縮フィルター機能が有効になっているときに発生する可能性のあるpanicを修正します
     -   TiFlashが非同期コミットからフォールバックされたロックを解決できない問題を修正します
     -   `TIMEZONE`タイプのキャスト結果に`TIMESTAMP`タイプが含まれている場合に誤った結果が返される問題を修正しました
-    -   セグメント分割中に発生するTiFlashパニックの問題を修正します
+    -   セグメント分割中に発生するTiFlashpanicの問題を修正します
 
 -   ツール
 
     -   TiDB Lightning
 
-        -   KVデータの生成時に発生するTiDBLightningパニックの問題を修正します[＃1127](https://github.com/pingcap/br/pull/1127)
+        -   KVデータの生成時に発生するTiDB Lightningpanicの問題を修正します[＃1127](https://github.com/pingcap/br/pull/1127)
         -   データのインポート中にキーの合計サイズがラフトエントリの制限を超えたためにバッチ分割リージョンが失敗するバグを修正します[＃969](https://github.com/pingcap/br/issues/969)
         -   CSVファイルをインポートするときに、ファイルの最後の行に改行文字（ `\r\n` ）が含まれていない場合、エラーが報告される問題を修正します[＃1133](https://github.com/pingcap/br/issues/1133)
-        -   インポートするテーブルにdouble型の自動インクリメント列が含まれている場合、auto_increment値が異常になる問題を修正します[＃1178](https://github.com/pingcap/br/pull/1178)
+        -   インポートするテーブルにdoubleタイプの自動インクリメント列が含まれている場合、auto_increment値が異常になる問題を修正します[＃1178](https://github.com/pingcap/br/pull/1178)
 
     -   バックアップと復元（BR）
         -   いくつかのTiKVノードの障害によって引き起こされるバックアップ中断の問題を修正します[＃980](https://github.com/pingcap/br/issues/980)
@@ -338,7 +338,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
 
         -   Unified Sorterの同時実行の問題を修正し、役に立たないエラーメッセージをフィルタリングします[＃1678](https://github.com/pingcap/tiflow/pull/1678)
         -   冗長ディレクトリの作成がMinIO1でのレプリケーションを中断する可能性があるバグを修正し[＃1463](https://github.com/pingcap/tiflow/issues/1463)
-        -   `explicit_defaults_for_timestamp`セッション変数のデフォルト値をONに設定して、MySQL5.7ダウンストリームがアップストリーム[＃1585](https://github.com/pingcap/tiflow/issues/1585)と同じ動作を維持するようにします。
+        -   `explicit_defaults_for_timestamp`セッション変数のデフォルト値をONに設定して、 MySQL 5.7ダウンストリームがアップストリーム[＃1585](https://github.com/pingcap/tiflow/issues/1585)と同じ動作を維持するようにします。
         -   `io.EOF`を誤って処理すると、レプリケーションが中断される可能性があるという問題を修正します[＃1633](https://github.com/pingcap/tiflow/issues/1633)
         -   TiCDCダッシュボードのTiKVCDCエンドポイントCPUメトリックを修正します[＃1645](https://github.com/pingcap/tiflow/pull/1645)
         -   場合によってはレプリケーションのブロックを回避するために`defaultBufferChanSize`を増やします[＃1259](https://github.com/pingcap/tiflow/issues/1259)

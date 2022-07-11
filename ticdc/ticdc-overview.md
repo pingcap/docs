@@ -51,7 +51,7 @@ TiCDCのアーキテクチャを次の図に示します。
 -   すべてのDDLまたはDMLステートメントについて、TiCDCはそれら**を少なくとも1回**出力します。
 -   TiKVまたはTiCDCクラスタで障害が発生すると、TiCDCは同じDDL/DMLステートメントを繰り返し送信する場合があります。重複したDDL/DMLステートメントの場合：
 
-    -   MySQLシンクはDDLステートメントを繰り返し実行できます。 `truncate table`など、ダウンストリームで繰り返し実行できるDDLステートメントの場合、ステートメントは正常に実行されます。 `create table`など、繰り返し実行できないものの場合、実行は失敗し、TiCDCはエラーを無視して複製を続行します。
+    -   MySQLシンクはDDLステートメントを繰り返し実行できます。 `truncate table`など、ダウンストリームで繰り返し実行できるDDLステートメントの場合、ステートメントは正常に実行されます。 `create table`のように繰り返し実行できないものの場合、実行は失敗し、TiCDCはエラーを無視して複製を続行します。
     -   Kafkaシンクはメッセージを繰り返し送信しますが、重複したメッセージは`Resolved Ts`の制約に影響しません。ユーザーは、Kafkaコンシューマーからの重複メッセージをフィルタリングできます。
 
 #### レプリケーションの一貫性 {#replication-consistency}
@@ -65,7 +65,7 @@ TiCDCのアーキテクチャを次の図に示します。
 
 -   カフカシンク
 
-    -   TiCDCは、データ配布のためのさまざまな戦略を提供します。テーブル、主キー、またはタイムスタンプに基づいて、さまざまなKafkaパーティションにデータを分散できます。
+    -   TiCDCは、データ配布のためのさまざまな戦略を提供します。テーブル、主キー、またはタイムスタンプに基づいて、さまざまなKafkaパーティションにデータを配布できます。
     -   さまざまな配布戦略の場合、さまざまなコンシューマー実装は、行レベルの一貫性、結果整合性、またはクロステーブルトランザクションの一貫性など、さまざまなレベルの一貫性を実現できます。
     -   TiCDCにはKafkaコンシューマーの実装はありませんが、提供するのは[TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)だけです。このプロトコルに従って、Kafkaコンシューマーを実装できます。
 
@@ -89,7 +89,7 @@ v4.0.8以降、TiCDCは、タスク構成を変更することにより**、有�
 現在、次のシナリオはサポートされていません。
 
 -   RawKVのみを使用するTiKVクラスタ。
--   TiDBの[DDL操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームTiDBが`SEQUENCE`を使用する場合、TiCDCはアップストリームで実行される`SEQUENCE`のDDL操作/機能を無視します。ただし、 `SEQUENCE`の関数を使用したDML操作は正しく複製できます。
+-   TiDBの[DDL操作`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)と[SEQUENCE関数](/sql-statements/sql-statement-create-sequence.md#sequence-function) 。アップストリームTiDBが`SEQUENCE`を使用する場合、TiCDCはアップストリームで実行される`SEQUENCE`のDDL操作/関数を無視します。ただし、 `SEQUENCE`の関数を使用したDML操作は正しく複製できます。
 
 TiCDCは、アップストリームでの大規模なトランザクションのシナリオに対して部分的なサポートのみを提供します。詳しくは[FAQ：TiCDCは大規模なトランザクションの複製をサポートしていますか？リスクはありますか？](/ticdc/ticdc-faq.md#does-ticdc-support-replicating-large-transactions-is-there-any-risk)をご覧ください。
 

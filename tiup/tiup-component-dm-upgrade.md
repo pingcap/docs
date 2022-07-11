@@ -19,7 +19,7 @@ tiup dm upgrade <cluster-name> <version> [flags]
 
 ### - オフライン {#offline}
 
--   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
+-   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
 
 ### -h、-help {#h-help}
 
@@ -31,4 +31,4 @@ tiup dm upgrade <cluster-name> <version> [flags]
 
 サービスアップグレードプロセスのログ。
 
-[&lt;&lt;前のページに戻る-TiUPDMコマンドリスト](/tiup/tiup-component-dm.md#command-list)
+[&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

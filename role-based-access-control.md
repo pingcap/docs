@@ -16,7 +16,7 @@ TiDBの役割ベースのアクセス制御（RBAC）システムの実装は、
 -   役割を作成します。
 -   ロールを削除します。
 -   ロールに特権を付与します。
--   別のユーザーに役割を付与します。そのユーザーは、役割を有効にした後、その役割に関連する特権を取得できます。
+-   別のユーザーに役割を付与します。そのユーザーは、ロールを有効にした後、ロールに関連する特権を取得できます。
 
 ### 役割を作成する {#create-a-role}
 
@@ -34,11 +34,11 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 
 ロールを作成するには、 `CREATE ROLE`または`CREATE USER`の特権が必要です。
 
-### 役割に特権を付与する {#grant-a-privilege-to-a-role}
+### ロールに特権を付与する {#grant-a-privilege-to-a-role}
 
 ロールに特権を付与する操作は、ユーザーに特権を付与する操作と同じです。詳細については、 [TiDB権限管理](/privilege-management.md)を参照してください。
 
-たとえば、次のステートメントを使用して、 `app_read`の役割に`app_db`のデータベースを読み取る特権を付与できます。
+たとえば、次のステートメントを使用して、 `app_read`のロールに`app_db`のデータベースを読み取る権限を付与できます。
 
 {{< copyable "" >}}
 
@@ -46,7 +46,7 @@ CREATE ROLE 'app_developer', 'app_read', 'app_write';
 GRANT SELECT ON app_db.* TO 'app_read'@'%';
 ```
 
-次のステートメントを使用して、 `app_write`の役割に`app_db`のデータベースにデータを書き込む特権を付与できます。
+次のステートメントを使用して、 `app_write`のロールに`app_db`のデータベースにデータを書き込む特権を付与できます。
 
 {{< copyable "" >}}
 
@@ -64,7 +64,7 @@ GRANT ALL ON app_db.* TO 'app_developer';
 
 ### ユーザーに役割を付与する {#grant-a-role-to-a-user}
 
-ユーザー`dev1`が`app_db`のすべての特権を持つ開発者の役割を持っていると仮定します。 2人のユーザー`read_user1`と`read_user2`は、 `app_db`に対する読み取り専用特権を持っています。そして、ユーザ`rw_user1`は、 `app_db`に対する読み取りおよび書き込み特権を有する。
+ユーザー`dev1`が`app_db`のすべての特権を持つ開発者ロールを持っていると仮定します。 2人のユーザー`read_user1`と`read_user2`は、 `app_db`に対する読み取り専用特権を持っています。そして、ユーザ`rw_user1`は、 `app_db`に対する読み取りおよび書き込み特権を有する。
 
 `CREATE USER`を使用してユーザーを作成します。
 
@@ -87,7 +87,7 @@ GRANT 'app_read', 'app_write' TO 'rw_user1'@'localhost';
 
 別のユーザーに役割を付与したり、役割を取り消したりするには、 `SUPER`の特権が必要です。
 
-ユーザーに役割を付与することは、その役割をすぐに有効にすることを意味するわけではありません。ロールを有効にすることは別の操作です。
+ユーザーに役割を付与することは、その役割をすぐに有効にすることを意味するわけではありません。ロールの有効化は別の操作です。
 
 次の操作は「関係ループ」を形成する可能性があります。
 
@@ -178,7 +178,7 @@ SHOW GRANTS FOR 'read_user1'@'localhost' USING 'app_read';
 `SHOW GRANTS`または`SHOW GRANTS FOR CURRENT_USER()`を使用して、現在のユーザーの特権を確認できます。 `SHOW GRANTS`と`SHOW GRANTS FOR CURRENT_USER()`は、次の点で異なります。
 
 -   `SHOW GRANTS`は、現在のユーザーに対して有効になっているロールの特権を示します。
--   `SHOW GRANTS FOR CURRENT_USER()`は、有効なロールの特権を示しません。
+-   `SHOW GRANTS FOR CURRENT_USER()`は、有効な役割の特権を示しません。
 
 ### デフォルトの役割を設定する {#set-the-default-role}
 
@@ -236,7 +236,7 @@ SET ROLE {
 }
 ```
 
-たとえば、 `rw_user1`がログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`を有効にできます。
+たとえば、 `rw_user1`がログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`および`app_write`を有効にすることができます。
 
 {{< copyable "" >}}
 
@@ -260,7 +260,7 @@ SET ROLE DEFAULT
 SET ROLE ALL
 ```
 
-次のステートメントを使用して、すべての役割を無効にすることができます。
+次のステートメントを使用して、すべてのロールを無効にすることができます。
 
 {{< copyable "" >}}
 
@@ -278,7 +278,7 @@ SET ROLE ALL EXCEPT 'app_read'
 
 > **ノート：**
 >
-> `SET ROLE`を使用して役割を有効にする場合、この役割は現在のセッションでのみ有効です。
+> `SET ROLE`を使用してロールを有効にする場合、このロールは現在のセッションでのみ有効です。
 
 ### 現在有効な役割を確認してください {#check-the-current-enabled-role}
 
@@ -356,7 +356,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 
 ### 役割を削除する {#delete-a-role}
 
-次のステートメントを使用して、役割`app_read`および`app_write`を削除できます。
+次のステートメントを使用して、ロール`app_read`と`app_write`を削除できます。
 
 {{< copyable "" >}}
 
@@ -364,7 +364,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`表の`app_read`と`app_write`の役割レコードと許可表の関連レコードが削除され、2つの役割に関連する許可が終了します。
+この操作により、 `mysql.user`テーブルの`app_read`と`app_write`のロール・レコードと許可テーブルの関連レコードが削除され、2つの役割に関連する許可が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`の権限が必要です。
 

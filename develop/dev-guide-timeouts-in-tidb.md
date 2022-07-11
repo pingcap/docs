@@ -13,7 +13,7 @@ TiDBのトランザクション実装は、MVCC（Multiple Version Concurrency C
 
 デフォルトでは、各MVCCバージョン（整合性スナップショット）は10分間保持されます。読み取りに10分以上かかるトランザクションは、エラー`GC life time is shorter than transaction duration`を受け取ります。
 
-読み取り時間を長くする必要がある場合、たとえば、フルバックアップに**Mydumper**を使用している場合（ <strong>Mydumper</strong>は一貫性のあるスナップショットをバックアップします）、TiDBの`mysql.tidb`テーブルの`tikv_gc_life_time`の値を調整して、MVCCバージョンの保持時間を増やすことができます。 `tikv_gc_life_time`はグローバルかつ即座に有効になることに注意してください。値を大きくすると、既存のすべてのスナップショットの寿命が長くなり、値を小さくすると、すべてのスナップショットの寿命がすぐに短くなります。 MVCCのバージョンが多すぎると、TiKVの処理効率に影響します。したがって、 <strong>Mydumper</strong>を使用して完全バックアップを実行した後、 `tikv_gc_life_time`を以前の設定に戻す必要があります。
+読み取り時間を長くする必要がある場合、たとえば、フルバックアップに**Mydumper**を使用している場合（ <strong>Mydumper</strong>は一貫性のあるスナップショットをバックアップします）、TiDBの`mysql.tidb`テーブルの`tikv_gc_life_time`の値を調整して、MVCCバージョンの保持時間を増やすことができます。 `tikv_gc_life_time`はグローバルかつ即座に有効になることに注意してください。値を大きくすると、既存のすべてのスナップショットの寿命が長くなり、値を小さくすると、すべてのスナップショットの寿命がすぐに短くなります。 MVCCバージョンが多すぎると、TiKVの処理効率に影響します。したがって、 <strong>Mydumper</strong>を使用して完全バックアップを実行した後、 `tikv_gc_life_time`を以前の設定に戻す必要があります。
 
 GCの詳細については、 [GCの概要](/garbage-collection-overview.md)を参照してください。
 
