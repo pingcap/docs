@@ -124,6 +124,8 @@ If you are the owner or billing administrator of your organization, you can mana
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
+### Add a credit card
+
 The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
 
 - When you are creating a cluster:
@@ -151,3 +153,14 @@ To set the default credit card, perform the following steps:
 2. Click **Billing**.
 3. Click the **Payment Method** tab.
 4. Select a credit card in the credit card list, and click **Set as default**.
+
+### Edit billing profile information
+
+The billing profile information includes the business legal address and tax registration information. By providing the tax registration number, the collection of certain taxes might be exempted from your invoice.
+
+To edit the billing profile information, perform the following steps:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Click **Billing**.
+3. Click the **Payment Method** tab.
+4. Edit the billing profile information, and then click **Save**.
