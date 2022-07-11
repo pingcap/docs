@@ -5,7 +5,7 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB Cloud" subTitle="Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="Find the guide, samples, and references you need to use TiDB Cloud.">
 
 <LearningPath label="Learn" icon="cloud1">
 
