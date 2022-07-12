@@ -800,7 +800,7 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 
 > **Warning:**
 >
-> Due to a [critical bug #6189](https://github.com/pingcap/tiflow/issues/6189), it is not recommended that you use eventually consistent replication in disaster scenarios.
+> Currently, it is not recommended that you use eventually consistent replication in disaster scenarios. For details, see [critical bug #6189](https://github.com/pingcap/tiflow/issues/6189).
 
 Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 
