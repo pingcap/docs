@@ -50,7 +50,6 @@ You can configure node size, node quantity, and storage size for TiKV.
 The supported node sizes include the following:
 
 - 4 vCPU, 16 GiB (Beta)
-- 8 vCPU, 32 GiB
 - 8 vCPU, 64 GiB
 - 16 vCPU, 64 GiB
 

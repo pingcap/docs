@@ -10,7 +10,6 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## July 12, 2022
 
-* Provide a new option for TiKV node size: `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for a 8 vCPU TiKV node.
 * Add the **Validate** button to the **Data Import Task** page for AWS S3, which helps you detect data access issues before the data import starts.
 * Add **Billing Profile** under the **Payment Method** tab. By providing your tax registration number in **Billing Profile**, the collection of certain taxes might get exempted from your invoice.
 
