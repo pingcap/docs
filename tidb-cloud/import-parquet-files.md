@@ -66,11 +66,11 @@ ParquetファイルをTiDB Cloudにインポートする前に、ターゲット
 
 TiDBCloudがTiDB CloudまたはGCSバケット内のParquetファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   組織がAWSでサービスとしてTiDB Cloudを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   ParquetファイルがAmazonS3にある場合は、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、ロールARN値をメモします。
 
--   組織でTiDB CloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
+-   ParquetファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
 ## ステップ4.ParquetファイルをTiDB Cloudにインポートします {#step-4-import-parquet-files-to-tidb-cloud}
 
@@ -92,6 +92,8 @@ ParquetファイルをTiDB Cloudにインポートするには、次の手順を
     -   **ターゲットテーブル名**：ターゲットテーブルの名前を入力します。たとえば、 `mydb.mytable` 。
 
 4.  [**インポート]**をクリックして、インポートタスクを開始します。
+
+    ParquetファイルがAmazonS3にある場合は、[**インポート**]をクリックする前に、[<strong>検証</strong>]をクリックして、 TiDB Cloudが指定したバケットURLのサンプルデータにアクセスできるかどうかを確認する必要があります。
 
 5.  インポートの進行状況が成功を示したら、TotalFilesの後の数を確認し**ます**。
 
@@ -115,7 +117,7 @@ ParquetファイルをTiDB Cloudにインポートするには、次の手順を
 
 次の表に、TiDBCloudにインポートできるサポートされているTiDB Cloudデータ型を示します。
 
-| 寄木細工のプリミティブタイプ          | 寄木細工の論理型         | TiDBまたはMySQLのタイプ                                                                                                                                                                                     |
+| 寄木細工のプリミティブ型            | 寄木細工の論理型         | TiDBまたはMySQLのタイプ                                                                                                                                                                                     |
 | ----------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ダブル                     | ダブル              | ダブル<br/>浮く                                                                                                                                                                                           |
 | FIXED_LEN_BYTE_ARRAY（9） | DECIMAL（20,0）    | BIGINT UNSIGNED                                                                                                                                                                                      |

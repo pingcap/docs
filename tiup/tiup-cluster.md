@@ -20,36 +20,37 @@ Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.0/cluste
 Deploy a TiDB cluster for production
 
 Usage:
-  cluster [flags]
-  cluster [command]
+  tiup cluster [command]
 
 Available Commands:
-  check       Perform preflight checks for the cluster
+  check       Precheck a cluster
   deploy      Deploy a cluster for production
   start       Start a TiDB cluster
   stop        Stop a TiDB cluster
   restart     Restart a TiDB cluster
   scale-in    Scale in a TiDB cluster
   scale-out   Scale out a TiDB cluster
-  clean       Clean up cluster data
   destroy     Destroy a specified cluster
+  clean       (Experimental) Clean up a specified cluster
   upgrade     Upgrade a specified TiDB cluster
-  exec        Run shell command on host in the tidb cluster
   display     Display information of a TiDB cluster
   list        List all clusters
   audit       Show audit log of cluster operation
-  import      Import an exist TiDB cluster from TiDB Ansible
+  import      Import an existing TiDB cluster from TiDB-Ansible
   edit-config Edit TiDB cluster config
   reload      Reload a TiDB cluster's config and restart if needed
   patch       Replace the remote package with a specified package and restart the service
   help        Help about any command
 
 Flags:
-  -h, --help              help for cluster
-      --native-ssh        Use the system's native SSH client
-      --wait-timeout int  Timeout of waiting the operation
-      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-  -y, --yes               Skip all confirmations and assumes 'yes'
+  -c, --concurrency int     Maximum number of concurrent tasks allowed (defaults to `5`)
+      --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
+  -h, --help                help for tiup
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
+      --ssh-timeout uint    Timeout in seconds to connect a host via SSH. Operations that don't need an SSH connection are ignored. (default 5)
+  -v, --version            TiUP version
+      --wait-timeout uint   Timeout in seconds to wait for an operation to complete. Inapplicable operations are ignored. (defaults to `120`)
+  -y, --yes                 Skip all confirmations and assumes 'yes'
 ```
 
 ## クラスタをデプロイする {#deploy-the-cluster}
@@ -145,7 +146,7 @@ Attention:
 Do you want to continue? [y/N]:
 ```
 
-パスワードを入力すると、TiUPクラスタは必要なコンポーネントをダウンロードし、対応するマシンに展開します。次のメッセージが表示されたら、展開は成功しています。
+パスワードを入力すると、TiUPクラスタは必要なコンポーネントをダウンロードして対応するマシンにデプロイします。次のメッセージが表示されたら、展開は成功しています。
 
 ```bash
 Deployed cluster `prod-cluster` successfully
@@ -308,10 +309,10 @@ PDをスケールアウトすると、ノードが`join`クラスタに追加さ
     ---
 
     pd_servers:
-      - ip: 172.16.5.140
+      - host: 172.16.5.140
 
     tikv_servers:
-      - ip: 172.16.5.140
+      - host: 172.16.5.140
     ```
 
 2.  スケールアウト操作を実行します。 TiUPクラスタは、ポート、ディレクトリ、および`scale.yaml`で説明されているその他の情報に従って、対応するノードをクラスタに追加します。
@@ -368,7 +369,7 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --native-ssh        Use the system's native SSH client
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
@@ -464,7 +465,7 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --native-ssh        Use the system's native SSH client
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
@@ -516,7 +517,7 @@ Flags:
   -r, --rename NAME        Rename the imported cluster to NAME
 
 Global Flags:
-      --native-ssh        Use the system's native SSH client
+      --ssh string        (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
@@ -679,13 +680,13 @@ CPUスレッド数チェック、メモリサイズチェック、およびデ�
 -   認証にSSHプラグインを使用するには
 -   カスタマイズされたSSHクライアントを使用するには
 
-次に、 `--native-ssh`コマンドラインフラグを使用して、システムネイティブのコマンドラインツールを有効にします。
+次に、 `--ssh=system`コマンドラインフラグを使用して、システムネイティブのコマンドラインツールを有効にします。
 
--   クラスタのデプロイ： `tiup cluster deploy <cluster-name> <version> <topo> --native-ssh`
--   クラスタを開始します： `tiup cluster start <cluster-name> --native-ssh`
--   クラスタのアップグレード： `tiup cluster upgrade ... --native-ssh`
+-   クラスタのデプロイ： `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`
+-   クラスタを開始します： `tiup cluster start <cluster-name> --ssh=system`
+-   クラスタのアップグレード： `tiup cluster upgrade ... --ssh=system`
 
-上記のすべてのクラスタ操作コマンドに`--native-ssh`を追加して、システムのネイティブSSHクライアントを使用できます。
+上記のすべてのクラスタ操作コマンドに`--ssh=system`を追加して、システムのネイティブSSHクライアントを使用できます。
 
 すべてのコマンドにこのようなフラグが追加されないようにするには、 `TIUP_NATIVE_SSH`システム変数を使用して、ローカルSSHクライアントを使用するかどうかを指定できます。
 
@@ -697,7 +698,7 @@ export TIUP_NATIVE_SSH=1
 export TIUP_NATIVE_SSH=enable
 ```
 
-この環境変数と`--native-ssh`を同時に指定すると、 `--native-ssh`の優先度が高くなります。
+この環境変数と`--ssh`を同時に指定すると、 `--ssh`の優先度が高くなります。
 
 > **ノート：**
 >

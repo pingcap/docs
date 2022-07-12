@@ -8,6 +8,11 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページには、2022年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリースノートがリストされています。
 
+## 2022年7月12日 {#july-12-2022}
+
+-   Amazon S3の**[データインポートタスク**]ページに[<strong>検証</strong>]ボタンを追加します。これは、データのインポートを開始する前にデータアクセスの問題を検出するのに役立ちます。
+-   [**支払い方法**]タブで<strong>請求プロファイル</strong>を追加します。<strong>請求プロファイル</strong>に税登録番号を入力すると、特定の税金が請求書から免除される場合があります。
+
 ## 2022年7月5日 {#july-05-2022}
 
 -   カラム型ストレージTiFlashは現在一般提供（GA）になっています。

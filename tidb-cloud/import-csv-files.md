@@ -57,13 +57,13 @@ CSVファイルをTiDB Cloudにインポートする前に、ターゲットデ�
 
 TiDBCloudがTiDB CloudまたはGCSバケット内のCSVファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   組織がAWSでサービスとしてTiDB Cloudを使用している場合、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   CSVファイルがAmazonS3にある場合は、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、ロールARN値をメモします。
 
--   組織でTiDB CloudをGoogleCloudPlatform（GCP）のサービスとして使用している場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
+-   CSVファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
-## ステップ4.CSVファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
+## ステップ4.CSVファイルをTiDB Cloudにインポートします {#step-4-import-csv-files-to-tidb-cloud}
 
 CSVファイルをTiDB Cloudにインポートするには、次の手順を実行します。
 
@@ -79,7 +79,7 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
 
     -   **データ形式**： <strong>CSV</strong>を選択します。
 
-    -   **クレデンシャルの設定**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
+    -   **クレデンシャルのセットアップ**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
 
     -   **CSVConfiguration / コンフィグレーション**：セパレーター、区切り文字、ヘッダー、非ヌル、ヌル、バックスラッシュエスケープ、トリムラストセパレーターなど、CSV固有の構成を確認して更新します。これらのフィールドのすぐ横に、各CSV構成の説明があります。
 
@@ -96,6 +96,8 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
     -   **ターゲットテーブル名**：ターゲットテーブルの名前を入力します。たとえば、 `mydb.mytable` 。
 
 4.  [**インポート]**をクリックして、インポートタスクを開始します。
+
+    CSVファイルがAmazonS3にある場合は、[**インポート**]をクリックする前に、[<strong>検証</strong>]をクリックして、 TiDB Cloudが指定されたバケットURLのサンプルデータにアクセスできるかどうかを確認する必要があります。
 
 5.  インポートの進行状況が成功を示したら、TotalFilesの後の数を確認し**ます**。
 

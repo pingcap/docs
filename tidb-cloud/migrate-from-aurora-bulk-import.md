@@ -17,13 +17,14 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 4.  ソースデータの仕様に従って、[**データソースタイプ**]、[<strong>バケットURL</strong> ]、および<strong>[データ形式]</strong>フィールドに入力します。
 5.  クラスタの接続設定に従って、**ターゲットデータベース**の<strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
 6.  [クロスアカウントアクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウントアクセスのバケットポリシーとロールを作成します。
-7.  [**インポート]**をクリックしてタスクを作成します。
+7.  [**検証**]をクリックして、 TiDB Cloudが指定されたバケットURLのデータにアクセスできるかどうかを確認します。
+8.  [**インポート]**をクリックして、インポートタスクを開始します。
 
 > **ノート：**
 >
 > タスクが失敗した場合は、 [不完全なデータをクリーンアップする方法を学ぶ](#learn-how-to-clean-up-incomplete-data)を参照してください。
 
-## Amazon S3バケットを作成し、ソースデータファイルを準備する方法を学びます {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
+## AmazonS3バケットを作成してソースデータファイルを準備する方法を学ぶ {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
 データを準備するには、次の2つのオプションから1つを選択できます。
 

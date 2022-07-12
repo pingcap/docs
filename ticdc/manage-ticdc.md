@@ -297,7 +297,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 
 #### TiCDCをKafkaConnect（Confluent Platform）と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
-Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用して、データをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `schema-registry`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。
+Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してデータをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `schema-registry`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。
 
 構成例：
 
@@ -496,7 +496,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id=simple-repl
     -   `checkpoint-ts` ：現在の`changefeed`で最大のトランザクション`TS` 。この`TS`はダウンストリームに正常に書き込まれていることに注意してください。
     -   `admin-job-type` ： `changefeed`のステータス：
         -   `0` ：状態は正常です。
-        -   `1` ：タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成と複製ステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
+        -   `1` ：タスクは一時停止されています。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
         -   `2` ：タスクが再開されます。レプリケーションタスクは`checkpoint-ts`から再開します。
         -   `3` ：タスクは削除されます。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスのみが、後のクエリのために保持されます。
 -   `task-status`は、クエリされた`changefeed`の各レプリケーションサブタスクの状態を示します。
@@ -723,7 +723,7 @@ topic = &quot;xxx&quot;を使用してトピックディスパッチャーを指
 
 > **ノート：**
 >
-> v6.1以降、構成の意味を明確にするために、パーティションディスパッチャーを指定するために使用される構成が`dispatcher`から`partition`に変更され、 `partition`は`dispatcher`のエイリアスになりました。たとえば、次の2つのルールはまったく同じです。
+> v6.1以降、構成の意味を明確にするために、パーティション・ディスパッチャーを指定するために使用される構成が`dispatcher`から`partition`に変更され、 `partition`は`dispatcher`のエイリアスになりました。たとえば、次の2つのルールはまったく同じです。
 >
 > ```
 > [sink]
@@ -800,6 +800,10 @@ cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-re
 
 ## 災害シナリオでの結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
+> **警告：**
+>
+> 現在、災害シナリオで結果整合性のあるレプリケーションを使用することはお勧めしません。詳細については、 [重大なバグ＃6189](https://github.com/pingcap/tiflow/issues/6189)を参照してください。
+
 v5.3.0以降、TiCDCは、アップストリームTiDBクラスタからS3ストレージまたはダウンストリームクラスタのNFSファイルシステムへのインクリメンタルデータのバックアップをサポートします。アップストリームクラスタで災害が発生して使用できなくなった場合、TiCDCはダウンストリームデータを結果整合性のある最近の状態に復元できます。これは、TiCDCによって提供される結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリームクラスタにすばやく切り替えることができ、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
 現在、TiCDCは、増分データをTiDBクラスタから別のTiDBクラスタまたはMySQL互換データベースシステム（ Aurora、MySQL、MariaDBを含む）に複製できます。アップストリームクラスタがクラッシュした場合、災害前のTiCDCのレプリケーションステータスは正常であり、レプリケーションラグが小さいという条件で、TiCDCは5分以内にダウンストリームクラスタのデータを復元できます。これにより、最大で10秒のデータ損失が可能になります。つまり、RTO &lt;= 5分、P95 RPO&lt;=10秒です。
@@ -838,7 +842,7 @@ storage = "s3://logbucket/test-changefeed?endpoint=http://$S3_ENDPOINT/"
 
 プライマリクラスタで災害が発生した場合は、 `cdc redo`コマンドを実行してセカンダリクラスタで手動で回復する必要があります。復旧プロセスは以下のとおりです。
 
-1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データ回復中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
+1.  すべてのTiCDCプロセスが終了したことを確認します。これは、データリカバリ中にプライマリクラスタがサービスを再開するのを防ぎ、TiCDCがデータ同期を再開するのを防ぐためです。
 2.  データ回復にはcdcバイナリを使用します。次のコマンドを実行します。
 
 ```shell

@@ -110,7 +110,7 @@ TiCDCによって出力された増分変更ログの「元の値」。 TiCDCに
 
 ## Raft Engine {#raft-engine}
 
-Raft Engineは、ログ構造設計の組み込み永続ストレージエンジンです。これは、TiKVがマルチラフトログを保存するために構築されています。 v5.4以降、TiDBはログストレージエンジンとしてRaft Engineの使用をサポートしています（実験的機能、デフォルトでは無効になっています）。詳細については、 [Raft Engine](/tikv-configuration-file.md#raft-engine)を参照してください。
+Raft Engineは、ログ構造設計の組み込み永続ストレージエンジンです。これは、TiKVがマルチラフトログを保存するために構築されています。 v5.4以降、TiDBはログストレージRaft EngineとしてRaftEngineの使用をサポートしています。詳細については、 [Raft Engine](/tikv-configuration-file.md#raft-engine)を参照してください。
 
 ### リージョン/ピア/Raftグループ {#region-peer-raft-group}
 
