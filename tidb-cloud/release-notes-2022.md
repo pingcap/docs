@@ -8,6 +8,11 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## July 12, 2022
+
+* Add the **Validate** button to the **Data Import Task** page for Amazon S3, which helps you detect data access issues before the data import starts.
+* Add **Billing Profile** under the **Payment Method** tab. By providing your tax registration number in **Billing Profile**, certain taxes might be exempted from your invoice.
+
 ## July 05, 2022
 
 * The columnar storage TiFlash is now in General Availability (GA).
