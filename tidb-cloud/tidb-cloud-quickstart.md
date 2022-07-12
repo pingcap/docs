@@ -132,6 +132,8 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
         - **Password**: enter your root password.
     - **DB/Tables Filter**: leave this field blank.
 
+    Then, click **Validate** to verify whether TiDB Cloud has the access to the sample data in the specified bucket URL.
+
     </div>
 
     <div label="GCP">
