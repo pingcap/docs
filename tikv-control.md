@@ -107,7 +107,7 @@ You can add corresponding parameters and subcommands after `tiup ctl tikv`.
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
-- Local mode: Use the `--db` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
+- Local mode: Use the `--data-dir` option to specify the local TiKV data directory path. In this mode, you need to stop the running TiKV instance.
 
 Unless otherwise noted, all commands support both the remote mode and the local mode.
 
@@ -229,6 +229,7 @@ Use the `compact` command to manually compact data of each TiKV. If you specify 
 
 - Use the `--host` option to specify the TiKV that needs to perform compaction.
 - Use the `-d` option to specify the RocksDB that performs compaction. The optional values are `kv` and `raft`.
+- Use the `--data-dir` option to specify the local TiKV data directory path.
 - Use the `--threads` option allows you to specify the concurrency for the TiKV compaction and its default value is `8`. Generally, a higher concurrency comes with a faster compaction speed, which might yet affect the service. You need to choose an appropriate concurrency count based on your scenario.
 - Use the `--bottommost` option to include or exclude the bottommost files when TiKV performs compaction. The value options are `default`, `skip`, and `force`. The default value is `default`.
     - `default` means that the bottommost files are included only when the Compaction Filter feature is enabled.
