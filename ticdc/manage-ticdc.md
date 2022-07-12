@@ -121,7 +121,7 @@ TiUPを使用してTiCDCを展開する場合は、次のコマンドの`cdc cli
 
 -   `changefeed pause`コマンドを実行する
 -   `changefeed resume`コマンドを実行してレプリケーションタスクを再開します
--   ③1 `changefeed`の運転で回復可能なエラーが発生し、自動的に運転を再開します。
+-   ③1 `changefeed`の動作で回復可能なエラーが発生し、自動的に動作を再開します。
 -   `changefeed resume`コマンドを実行してレプリケーションタスクを再開します
 -   ⑤1 `changefeed`の操作で回復可能なエラーが発生する
 -   `TargetTs` `changefeed`到達し、レプリケーションが自動的に停止します。
@@ -163,7 +163,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 -   `--sort-engine` ： `changefeed`のソートエンジンを指定します。 TiDBとTiKVは分散アーキテクチャを採用しているため、TiCDCはデータの変更をシンクに書き込む前にソートする必要があります。このオプションは、 `unified` （デフォルト）/ `memory` / `file`をサポートします。
 
     -   `unified` ： `unified`が使用されている場合、TiCDCはメモリ内のデータの並べ替えを優先します。メモリが不足している場合、TiCDCは自動的にディスクを使用して一時データを保存します。これはデフォルト値の`--sort-engine`です。
-    -   `memory` ：メモリ内のデータ変更を並べ替えます。大量のデータを複製するとOOMが簡単にトリガーされるため、この並べ替えエンジンの使用は**お勧めしません**。
+    -   `memory` ：メモリ内のデータ変更をソートします。大量のデータを複製するとOOMが簡単にトリガーされるため、この並べ替えエンジンの使用は**お勧めしません**。
     -   `file` ：ディスクを完全に使用して一時データを保存します。この機能は**廃止され**ました。<strong>いかなる</strong>状況でも使用することは<strong>お勧めしません</strong>。
 
 -   `--config` ： `changefeed`の構成ファイルを指定します。
@@ -253,7 +253,7 @@ Info: {"sink-uri":"mysql://root:123456@127.0.0.1:3306/","opts":{},"create-time":
 --opts registry="http://127.0.0.1:8081"
 ```
 
-Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してデータをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `opts`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。 `avro`プロトコルとConfluent統合は**実験的**ものであることに注意してください。
+Confluentが提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用して、データをリレーショナルデータベースまたは非リレーショナルデータベースにストリーミングするには、 `avro`プロトコルを使用し、 `opts`のURLを指定する必要があり[コンフルエントなスキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/) 。 `avro`プロトコルとConfluent統合は**実験的**ものであることに注意してください。
 
 詳細な統合ガイドについては、 [TiDBとConfluentプラットフォームの統合に関するクイックスタートガイド](/ticdc/integrate-confluent-using-ticdc.md)を参照してください。
 
@@ -666,6 +666,10 @@ cdc cli --pd="http://10.0.10.25:2379" changefeed query --changefeed-id=simple-re
 
 ## 災害シナリオでの結果整合性レプリケーション {#eventually-consistent-replication-in-disaster-scenarios}
 
+> **警告：**
+>
+> 現在、災害シナリオで結果整合性のあるレプリケーションを使用することはお勧めしません。詳細については、 [重大なバグ＃6189](https://github.com/pingcap/tiflow/issues/6189)を参照してください。
+
 v5.3.0以降、TiCDCは、アップストリームTiDBクラスタからS3ストレージまたはダウンストリームクラスタのNFSファイルシステムへのインクリメンタルデータのバックアップをサポートします。アップストリームクラスタで災害が発生して使用できなくなった場合、TiCDCはダウンストリームデータを結果整合性のある最近の状態に復元できます。これは、TiCDCによって提供される結果整合性のあるレプリケーション機能です。この機能を使用すると、アプリケーションをダウンストリームクラスタにすばやく切り替えることができ、長時間のダウンタイムを回避し、サービスの継続性を向上させることができます。
 
 現在、TiCDCは、増分データをTiDBクラスタから別のTiDBクラスタまたはMySQL互換データベースシステム（ Aurora、MySQL、MariaDBを含む）に複製できます。アップストリームクラスタがクラッシュした場合、災害前のTiCDCのレプリケーションステータスは正常であり、レプリケーションラグが小さいという条件で、TiCDCは5分以内にダウンストリームクラスタのデータを復元できます。これにより、最大で10秒のデータ損失が可能になります。つまり、RTO &lt;= 5分、P95 RPO&lt;=10秒です。
@@ -676,7 +680,7 @@ TiCDCレプリケーションラグは、次のシナリオで増加します。
 -   大規模または長いトランザクションがアップストリームで発生します
 -   アップストリームのTiKVまたはTiCDCクラスタがリロードまたはアップグレードされます
 -   `add index`などの時間のかかるDDLステートメントはアップストリームで実行されます
--   PDは積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンのマージやリージョンの分割が頻繁に行われたりします。
+-   PDは積極的なスケジューリング戦略で構成されているため、リージョンリーダーが頻繁に異動したり、リージョンのマージや分割が頻繁に行われたりします。
 
 ### 前提条件 {#prerequisites}
 
