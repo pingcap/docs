@@ -11,7 +11,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 ## July 12, 2022
 
 * Add the **Validate** button to the **Data Import Task** page for Amazon S3, which helps you detect data access issues before the data import starts.
-* Add **Billing Profile** under the **Payment Method** tab. By providing your tax registration number in **Billing Profile**, your invoice might be exempt from paying certain taxes.
+* Add **Billing Profile** under the **Payment Method** tab. By providing your tax registration number in **Billing Profile**, certain taxes might be exempted from your invoice.
 
 ## July 05, 2022
 

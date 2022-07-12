@@ -156,7 +156,7 @@ To set the default credit card, perform the following steps:
 
 ### Edit billing profile information
 
-The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, your invoice might be exempt from paying certain taxes.
+The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
 
 To edit the billing profile information, perform the following steps:
 
