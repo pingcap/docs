@@ -48,7 +48,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
 4. Click **Import**.
 
-    The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
+    The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
 Once the cluster finishes the data importing process, you will get the sample data in your database.
 
