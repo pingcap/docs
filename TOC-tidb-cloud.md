@@ -24,6 +24,7 @@
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [Use Open API](/tidb-cloud/open-api-overview.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)

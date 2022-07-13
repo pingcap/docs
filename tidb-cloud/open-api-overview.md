@@ -8,7 +8,7 @@ The API has the following features:
 - **HTTPS-only.** You can only access the API via HTTPS, ensuring all the data sent over the network is encrypted with TLS.
 - **Key-based access and digest authentication.** Before you access TiDB Cloud Open API, you must generate an API key. All requests are authenticated through [HTTP Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication), ensuring the API key is never sent over the network.
 
-To start using TiDB Cloud Open API, see the following resources:
+To start using TiDB Cloud Open API, refer to the following resources:
 
 - [Get started](/xxx)
 - [API full references](xxxx/tidbcloud/api/v1)
