@@ -71,4 +71,56 @@ The open source TiDB platform released under the Apache 2.0 license, and support
 
 </DocHomeSection>
 
+<DocHomeSection label="Developers" anchor="developers" id="developers">
+
+<DocHomeCardContainer>
+
+<DocHomeCard href="https://en.pingcap.com/developers/" icon="doc4" label="Build Applications with TiDB">
+
+A Database for Modern Devs. The paradigm shift to a fully distributed database is underway.
+
+</DocHomeCard>
+
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="cloud1" label="OSS Insight">
+
+A powerful insight tool that can help you analyze in depth any single GitHub repository
+
+</DocHomeCard>
+
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc1" label="Developer Docs for TiDB">
+
+See a compilation of short videos describing TiDB and a variety of use cases
+
+</DocHomeCard>
+
+</DocHomeCardContainer>
+
+</DocHomeSection>
+
+<DocHomeSection label="More resources" anchor="resources" id="resources">
+
+<DocHomeCardContainer>
+
+<DocHomeCard href="https://en.pingcap.com/community/" icon="doc4" label="Community">
+
+Join us on Slack or become a contributor
+
+</DocHomeCard>
+
+<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc5" label="Blog Posts">
+
+Learn great articles about TiDB
+
+</DocHomeCard>
+
+<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc6" label="Videos">
+
+See a compilation of short videos describing TiDB and a variety of use cases
+
+</DocHomeCard>
+
+</DocHomeCardContainer>
+
+</DocHomeSection>
+
 </DocHomeContainer>
