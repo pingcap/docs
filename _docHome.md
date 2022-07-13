@@ -13,13 +13,13 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud" icon="cloud1" label="TiDB Cloud Docs">
+<DocHomeCard href="https://docs.pingcap.com/tidbcloud" icon="doc2" label="TiDB Cloud Docs">
 
 See the documentation of TiDB Cloud
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart" icon="cloud2" label="Get Started with TiDB Cloud">
+<DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart" icon="cloud5" label="Get Started with TiDB Cloud">
 
 Guides you through an easy way to get started with your TiDB Cloud
 
@@ -51,13 +51,13 @@ See the documentation of TiDB
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc2" label="Get Started with TiDB Cloud">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc5" label="Get Started with TiDB Cloud">
 
 Walks you through the quickest way to get started with TiDB
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="doc3" label="Deploy a Local TiDB Cluster">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="Deploy a Local TiDB Cluster">
 
 Introduces how to deploy a local TiDB cluster in a production environment
 
@@ -75,21 +75,21 @@ The open source TiDB platform released under the Apache 2.0 license, and support
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://en.pingcap.com/developers/" icon="doc4" label="Build Applications with TiDB">
+<DocHomeCard href="https://en.pingcap.com/developers/" icon="doc6" label="Build Applications with TiDB">
 
 A Database for Modern Devs. The paradigm shift to a fully distributed database is underway.
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="cloud1" label="OSS Insight">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="cloud6" label="OSS Insight">
 
 A powerful insight tool that can help you analyze in depth any single GitHub repository
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc1" label="Developer Docs for TiDB">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Docs for TiDB">
 
-See a compilation of short videos describing TiDB and a variety of use cases
+Docs for developers of TiDB
 
 </DocHomeCard>
 
@@ -101,19 +101,19 @@ See a compilation of short videos describing TiDB and a variety of use cases
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://en.pingcap.com/community/" icon="doc4" label="Community">
+<DocHomeCard href="https://en.pingcap.com/community/" icon="doc9" label="Community">
 
 Join us on Slack or become a contributor
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc5" label="Blog Posts">
+<DocHomeCard href="https://en.pingcap.com/blog/" icon="doc10" label="Blog Posts">
 
 Learn great articles about TiDB
 
 </DocHomeCard>
 
-<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc6" label="Videos">
+<DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
 
 See a compilation of short videos describing TiDB and a variety of use cases
 
