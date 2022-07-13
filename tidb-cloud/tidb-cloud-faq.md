@@ -95,7 +95,7 @@ Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are include
 
 ## Can I import my data directly to TiFlash?
 
-No. When you import data to TiDB Cloud, the data is imported to TiKV. After the import is complete, you can use a SQL statement to specify which table to be replicated to TiFlash. Then, TiDB will create the specified replicas in TiFlash accordingly. For more information, see [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
+No. When you import data to TiDB Cloud, the data is imported to TiKV. After the import is complete, you can use SQL statements to specify which tables to be replicated to TiFlash. Then, TiDB will create the replicas of the specified tables in TiFlash accordingly. For more information, see [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
 
 ## Can I export TiFlash data in the CSV format?
 
