@@ -55,18 +55,20 @@ This section describes how to create, edit, delete or terminate a private endpoi
 
 Before you create a private endpoint, make sure that you are using TiDB Cloud Dedicated Tier.
 
+Take the following steps to create a private endpoint. If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
+
 #### Step 1. Find the entrance
 
-To find the entrance to create a private endpoint, follow one of the following ways:
+To find the entrance to creating a private endpoint, follow one of the following methods:
 
 - From the **Project Settings** page:
 
-    1. On the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
+    1. In the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
     2. Click **Add** on the top right corner to open the creation page.
 
 - From the **Connect to TiDB** dialog of an active cluster:
 
-    1. On the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
+    1. In the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
     2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
     3. Select the **Private Endpoint** tab. If no private endpoint has been created, click **Create** on the dialog to open the creation page.
 
@@ -83,62 +85,64 @@ By default, such type of a cluster is selected:
 
 > **Note:**
 >
-> - Only the Dedicated Tier clusters are displayed in the drop-down list. Developer Tier clusters are displayed.
+> - Only the Dedicated Tier clusters are displayed in the drop-down list. Developer Tier clusters are not displayed.
 > - If a cluster is being created, it is not displayed in the drop-down list. You cannot create a private endpoint for such clusters.
-> - If there is no existing created cluster, you will see **Create Cluster** on the right side of the drop-down list. Click **Create Cluter** to create a TiDB cluster. For details, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
+> - If there is no existing created cluster, you will see **Create Cluster** on the right side of the drop-down list. Click **Create Cluter** to create a TiDB cluster. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
 
 #### Step 3. Choose a region
 
 After you have choosen a TiDB cluster, you are at the **Service Endpoint** stage. Click the drop-down list to choose the region where your cluster is located, and then click **Next**.
 
-Note that you cannot choose other regions where your cluster is not located. Cross-region private endpoint is currently not supported.
+Note that you cannot choose other regions. Cross-region private endpoint is currently not supported.
 
 #### Step 4. Create an endpoint service
 
 After you have choosen a region, you are at the **Interface Endpoint** stage. When you enter this stage, TiDB Cloud begins to create an endpoint service, which takes 3 to 4 minutes.
 
-During the creation process, you need to provide your VPC ID and subnet IDs that are available from your AWS Management Console. If you do not know how to get these IDs, click **Show Instruction**s and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs. To fold the snapshots, click the **Hide instruction**.
+1. During the creation process, you need to provide your VPC ID and subnet IDs that are available from your AWS Management Console.
 
-After the endpoint service creation is complete, the endpoint service name and the **Next** button are available, and the placeholders in the command in the **Create VPC Interface Endpoint** area are automatically replaced with the real values.
+    If you do not know how to get these IDs, click **Show Instruction** and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs. To fold the snapshots, click the **Hide instruction**.
 
-Then you need to create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
+    After the endpoint service creation is complete, the endpoint service name and the **Next** button are available, and the placeholders in the command in the **Create VPC Interface Endpoint** area are automatically replaced with the real values.
 
-<SimpleTab>
-<div label="AWS Console" href="aws-console">
+2. Then you need to create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
 
-1. In your AWS Management Console, go to the **VPC** > **Endpoint**, and click **Create Endpoint** on the upper right corner. The **Create endpoint** page is displayed.
-2. Under **Service category**, select **Other endpoint services**.
-3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of TiDB Cloud console, and click **Verify service**.
-4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
-5. In the **Subnets** area, select the availabilty zones where your TiDB cluster is located. Then click **Create endpoint**.
+    <SimpleTab>
+    <div label="AWS Console" href="aws-console">
 
-> **Tip:**
->
-> If your service is spanning more than three availability zones (AZs), you might not be able to select AZs in the area. To address the issue, contact the TiDB Cloud team for help.
->
-> In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+    1. In your AWS Management Console, go to the **VPC** > **Endpoint**, and click **Create Endpoint** on the upper right corner. The **Create endpoint** page is displayed.
+    2. Under **Service category**, select **Other endpoint services**.
+    3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of TiDB Cloud console, and click **Verify service**.
+    4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
+    5. In the **Subnets** area, select the availabilty zones where your TiDB cluster is located. Then click **Create endpoint**.
 
-</div>
-<div label="AWS CLI" href="aws-cli">
+    > **Tip:**
+    >
+    > If your service is spanning more than three availability zones (AZs), you might not be able to select AZs in the area. To address the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    >
+    > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
 
-Copy the command and run it in your terminal to create the VPC interface endpoint.
+    </div>
+    <div label="AWS CLI" href="aws-cli">
 
-> **Tip:**
->
-> If your service is spanning more than three availability zones (AZs), an error is returned.
->
-> In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+    Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint.
 
-</div>
-</SimpleTab>
+    > **Tip:**
+    >
+    > If your service is spanning more than three availability zones (AZs), an error is returned. To address the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    >
+    > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
 
-Then click **Next**.
+    </div>
+    </SimpleTab>
+
+    Then click **Next**.
 
 #### Step 5. Accept the endpoint connection
 
 After you have created an endpoint service, you are at the **Accept Endpoint Connection** stage. Fill in the box with the your VPC endpoint ID and click **Next**.
 
-You can get your VPC endpoint ID from your AWS Management Console. If you do not know how to get it, click **Show Instruction** and you will see a snapshot of the AWS Management Console that illustrate how to get it. To fold the snapshot, click the **Hide instruction**.
+You can get your VPC endpoint ID from your AWS Management Console. If you do not know how to get it, click **Show Instruction** and you will see a snapshot of the AWS Management Console that illustrates how to get it. To fold the snapshot, click the **Hide instruction**.
 
 #### Step 6. Enable Private DNS
 
@@ -179,7 +183,9 @@ Take the following steps to connect to a private endpoint service using a privat
 
 ## Billing information
 
-The private endpoint cost contains the following parts:
+The private endpoint is available only for Dedicated Tier clusters.
+
+The cost of private endpoint contains the following parts:
 
 - The cost of the private endpoint: $0.01/hour per VPC per endpoint. For details, see [AWS PrivateLink pricing - Interface Endpoint pricing](https://aws.amazon.com/privatelink/pricing/?nc1=h_ls).
 - The cost of endpoint service or network load balancer. For details, see [AWS Elastic Load Balancing pricing](https://aws.amazon.com/elasticloadbalancing/pricing/).
