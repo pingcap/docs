@@ -519,7 +519,7 @@ public class JDBCExample
 
 Compared with [Mybatis](https://mybatis.org/mybatis-3/index.html), the JDBC implementation might be not a best practice, because you need to write error handling logic manually and cannot reuse code easily, which makes your code slightly redundant.
 
-Mybatis is a popular open-source Java class persistence framework. The following will use [MyBatis Generator](https://mybatis.org/generator/quickstart.html) to generate the persistence layer code as a Maven plugin.
+Mybatis is a popular open-source Java class persistence framework. The following uses [MyBatis Generator](https://mybatis.org/generator/quickstart.html) as a Maven plugin to generate the persistence layer code.
 
 Change to the `plain-java-mybatis` directory:
 
