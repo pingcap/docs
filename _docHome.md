@@ -27,7 +27,7 @@ Guides you through an easy way to get started with your TiDB Cloud
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-poc" icon="cloud3" label="Perform a PoC with TiDB Cloud">
 
-Describes the typical PoC procedures and helps you quickly complete a TiDB Cloud PoC.
+Helps you quickly complete a TiDB Cloud PoC.
 
 </DocHomeCard>
 
@@ -51,7 +51,7 @@ See the documentation of TiDB
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc5" label="Get Started with TiDB Cloud">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/quick-start-with-tidb" icon="doc5" label="Get Started with TiDB">
 
 Walks you through the quickest way to get started with TiDB
 
@@ -59,7 +59,7 @@ Walks you through the quickest way to get started with TiDB
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup" icon="cloud7" label="Deploy a Local TiDB Cluster">
 
-Introduces how to deploy a local TiDB cluster in a production environment
+Learn how to deploy TiDB locally in production
 
 </DocHomeCard>
 
@@ -75,7 +75,7 @@ The open source TiDB platform released under the Apache 2.0 license, and support
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://en.pingcap.com/developers/" icon="doc6" label="Build Applications with TiDB">
+<DocHomeCard href="https://en.pingcap.com/developers/" icon="doc6" label="Build Applications">
 
 A Database for Modern Devs. The paradigm shift to a fully distributed database is underway.
 
