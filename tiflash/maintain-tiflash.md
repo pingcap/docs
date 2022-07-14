@@ -33,9 +33,9 @@ There are two ways to check the TiFlash version:
 
 | Log Information | Log Description |
 |---------------|-------------------|
-| [INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23] | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
-| [DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30] | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
-| [DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30] | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
+| [INFO] [`<unknown>`] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23] | Data starts to be replicated (the number in the square brackets at the start of the log refers to the thread ID |
+| [DEBUG] [`<unknown>`] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30] | Handling DAG request, that is, TiFlash starts to handle a Coprocessor request |
+| [DEBUG] [`<unknown>`] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30] | Handling DAG request done, that is, TiFlash finishes handling a Coprocessor request |
 
 You can find the beginning or the end of a Coprocessor request, and then locate the related logs of the Coprocessor request through the thread ID printed at the start of the log.
 
