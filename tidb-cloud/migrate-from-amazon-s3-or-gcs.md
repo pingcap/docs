@@ -137,7 +137,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
 1. On the **Data Import Task** page, besides the **Role ARN** field, you also need to fill in the following information:
 
-    - **Data Source Type**: `AWS S3`
+    - **Data Source Type**: `AWS S3`.
     - **Bucket URL**: fill in the bucket URL of your source data.
     - **Data Format**: choose the format of your data.
     - **Target Cluster**: fill in the **Username** and **Password** fields.
