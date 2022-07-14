@@ -75,6 +75,9 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
     3. Open the IAM console at <https://console.aws.amazon.com/iam/>, click **Policies** in the navigation pane on the left, and then click **Create Policy** in the **Policies** pane on the right.
+
+        ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
+
     4. On the **Create policy** page, click the **JSON** tab.
     5. Copy the following access policy template and paste it to the policy text field.
 
@@ -119,6 +122,9 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 3. In the AWS Management Console, create an access role for TiDB Cloud and get the role ARN.
 
     1. In the IAM console at <https://console.aws.amazon.com/iam/>, click **Roles** in the navigation pane on the left, and then click **Create role** in the **Roles** pane on the right.
+
+        ![Create a role](/media/tidb-cloud/aws-create-role.png)
+    
     2. To create a role, fill in the following information:
 
         - Under **Trusted entity type**, select **AWS account**.
