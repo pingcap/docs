@@ -649,7 +649,7 @@ The strategy for generating these files is written in `mybatis-generator.xml`, w
 </generatorConfiguration>
 ```
 
-`mybatis-generator.xml` is included in `pom.xml` as the `mybatis-generator-maven-plugin` plugin configuration.
+`mybatis-generator.xml` is included in `pom.xml` as the configuration of `mybatis-generator-maven-plugin`.
 
 ```xml
 <plugin>
