@@ -24,28 +24,51 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure the following:
 
 ### Step 1. Create an Amazon S3 bucket and prepare source data files
 
-1. Create an Amazon S3 bucket in your corporate-owned AWS account. 
+1. Create an Amazon S3 bucket in your corporate-owned AWS account.
 
     For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the AWS User Guide.
+
+    > **Note:**
+    >
+    > To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
 
 2. If you are migrating data from an upstream database, you need to export the source data first.
 
     For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
 
+3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either AWS Web console or AWS CLI.
+
+    - To upload files using the AWS Web console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
+    - To upload files using the AWS CLI, use the following command:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        aws s3 sync <Local path> <Amazon S3 bucket URL>
+        ```
+
+        For example:
+
+        {{< copyable "shell-regular" >}}
+
+        ```shell
+        aws s3 sync ./tidbcloud-samples-us-west-2/ s3://target-url-in-s3
+        ```
+
 > **Note:**
-> 
-> - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name). 
+>
+> - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name).
 > - Where possible and applicable, it is recommended that you split a large source file into smaller files of maximum size 256 MB because it allows TiDB Cloud to read files in parallel across threads, thereby resulting in potentially enhanced import performance.
 
 ### Step 2. Configure Amazon S3 access
 
-To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can access the Amazon S3 bucket.
+To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can access the Amazon S3 bucket.
 
 1. Get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
-    1. In the TiDB Cloud console, choose a target project and a target cluster, and then click **Import**.
-    2. Click **Show AWS IAM policy settings** to get the TiDB Cloud Account ID and TiDB Cloud External ID.
-    3. Take a note of the TiDB Cloud Account ID and External ID because they will be used in the following steps.
+    1. In the TiDB Cloud Console, choose your target project, and then click the name of your target cluster. The overview page of your cluster is displayed.
+    2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
+    3. On the **Data Import Task** page, click **Show AWS IAM policy settings** to get the TiDB Cloud Account ID and TiDB Cloud External ID, and then take a note of these IDs for later use.
 
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
@@ -92,50 +115,33 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 3. In the AWS Management Console, create a access role for TiDB Cloud and get the role ARN.
 
     1. Open the IAM console at <https://console.aws.amazon.com/iam/>, and then click **Roles** in the navigation pane one the left.
-    2. Click **Create role**, take the following steps:
+    2. Click **Create role**, fill in the following information, and then click **Next** in the lower-right corner.
 
         - Under **Trusted entity type**, select **AWS account**.
         - Under **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
-        - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, paste the TiDB Cloud External ID to the **External ID** field, and then click **Next** in the lower-right corner.
+        - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field.
 
     3. In the policy list, choose the policy you just created, and then click **Next** in the lower-right corner.
     4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
-    5. In the list of roles, click the role you just created to go to its summary page, and then copy the ARN of the role.
+    5. In the list of roles, click the role that you just created to go to its summary page, and then copy the ARN of the role.
 
-4. In the TiDB Cloud console, go to the screen where you get the TiDB Cloud account ID and external ID of the target TiDB cluster, update the **Role ARN** field using the role value from the previous step.
+4. In the TiDB Cloud console, go to the **Data Import Task** page where you get the TiDB Cloud account ID and external ID of the target TiDB cluster, fill in the **Role ARN** field that you get from the previous step.
 
-Your TiDB Cloud cluster can now access the Amazon S3 bucket.
+### Step 3. Import data into TiDB Cloud
 
-> **Note:**
->
-> To remove access to TiDB Cloud, simply delete the trust policy that you added.
+1. On the **Data Import Task** page, fill in the following information.
 
-### Step 3. Copy source data files to Amazon S3 and import data into TiDB Cloud 
+    - **Data Source Type**: `AWS S3`
+    - **Bucket URL**: fill in the bucket URL of your source data.
+    - **Data Format**: choose the format of your data.
+    - **Setup Credentials**: enter the Role ARN value for **Role-ARN**.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
+    - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
 
-1. To copy your source data files to your Amazon S3 bucket, you can upload the data to the Amazon S3 bucket using either AWS Web console or AWS CLI.
+2. click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL
+3. Click **Import** to start the import task.
 
-    - To upload data using the AWS Web console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
-    - To upload data using the AWS CLI, use the following command:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        aws s3 sync <Local path> <S3 URL> 
-        ```
-
-        For example:
-
-        {{< copyable "shell-regular" >}}
-
-        ```shell
-        aws s3 sync ./tidbcloud-samples-us-west-2/ s3://target-url-in-s3
-        ```        
-
-2. From the TiDB Cloud console, navigate to the TiDB Clusters page, and then click the name of your target cluster to go to its own overview page. In the cluster information pane on the left, click **Import**, and then fill in the importing related information on the **Data Import Task** page.
-
-> **Note:**
-> 
-> To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region. 
+After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 
 ## Import or migrate from GCS to TiDB Cloud
 
