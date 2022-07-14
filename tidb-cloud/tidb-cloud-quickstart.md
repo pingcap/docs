@@ -132,7 +132,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
         - **Password**: enter your root password.
     - **DB/Tables Filter**: leave this field blank.
 
-    Then, click **Validate** to verify whether TiDB Cloud has the access to the sample data in the specified bucket URL.
+    Then, click **Validate** to verify whether TiDB Cloud has the access to the sample data in the specified bucket URL. If you have encountered the `AccessDenied` error after clicking **Validate**, see [Troubleshoot Permission Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-permission-error.md).
 
     </div>
 
