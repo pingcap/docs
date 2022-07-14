@@ -88,7 +88,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
                         "s3:GetObject",
                         "s3:GetObjectVersion"
                     ],
-                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>"
+                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
                 },
                 {
                     "Effect": "Allow",
@@ -104,7 +104,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
         In the policy text field, update the following configurations to your own values.
 
-        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>"`
+        - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
 
             For example, if your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
 
