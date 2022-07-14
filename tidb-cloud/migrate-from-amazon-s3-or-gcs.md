@@ -13,7 +13,7 @@ summary: Learn how to import or migrate data from Amazon Simple Storage Service 
 
 ## AmazonS3からTiDB Cloudにインポートまたは移行します {#import-or-migrate-from-amazon-s3-to-tidb-cloud}
 
-組織がAWSでサービスとしてTiDB Cloudを使用している場合は、データをTiDB Cloudにインポートまたは移行するためのステージングエリアとしてAmazonS3を使用できます。
+組織がAWSのサービスとしてTiDB Cloudを使用している場合は、データをTiDB Cloudにインポートまたは移行するためのステージングエリアとしてAmazonS3を使用できます。
 
 ### 前提条件 {#prerequisites}
 
@@ -39,7 +39,7 @@ AmazonS3からTiDB Cloudにデータを移行する前に、次のことを確�
 
 ### ステップ2.AmazonS3アクセスを設定します {#step-2-configure-amazon-s3-access}
 
-TiDBクラウドがAmazonS3バケットのソースデータにアクセスできるようにするには、各TiDB CloudのAmazonS3をAWSプロジェクトとAmazonS3バケットペアのサービスとして設定する必要があります。プロジェクト内の1つのクラスタの設定が完了すると、そのプロジェクト内のすべてのデータベースクラスターがAmazonS3バケットにアクセスできるようになります。
+TiDBCloudがTiDB Cloudバケットのソースデータにアクセスできるようにするには、各TiDB CloudのAmazonS3をAWSプロジェクトとAmazonS3バケットペアのサービスとして設定する必要があります。プロジェクト内の1つのクラスタの設定が完了すると、そのプロジェクト内のすべてのデータベースクラスターがAmazonS3バケットにアクセスできるようになります。
 
 1.  ターゲットTiDBクラスタのTiDB CloudアカウントIDと外部IDを取得します。
 
@@ -47,7 +47,7 @@ TiDBクラウドがAmazonS3バケットのソースデータにアクセスで�
     2.  [ **AWSIAMポリシー設定の表示]を**クリックします。ターゲットTiDBクラスタの対応するTiDB CloudアカウントIDとTiDB Cloud外部IDが表示されます。
     3.  次の手順で使用されるため、 TiDB CloudアカウントIDと外部IDをメモしてください。
 
-2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、次の読み取り専用アクセス許可を持つストレージバケットポリシーが存在するかどうかを確認します。
+2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、次の読み取り専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
 
     -   s3：GetObject
     -   s3：GetObjectVersion
@@ -88,12 +88,12 @@ TiDBクラウドがAmazonS3バケットのソースデータにアクセスで�
     テンプレートでは、次の2つのフィールドを独自のリソース値に更新する必要があります。
 
     -   `"Resource": "<Your S3 bucket ARN>"` ： `<Your S3 bucket ARN>`はS3バケットのARNです。 S3バケットの[**プロパティ**]タブに移動し、[<strong>バケットの概要</strong>]領域でAmazonリソース名（ARN）の値を取得できます。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test"` 。
-    -   `"Resource": "arn:aws:s3:::<Your customized directory>"` ： `<Your customized directory>`は、データストレージ用にS3バケットルートレベルでカスタマイズできるディレクトリです。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"` 。データをS3バケットルートディレクトリに保存する場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`を使用します。
+    -   `"Resource": "arn:aws:s3:::<Your customized directory>"` ： `<Your customized directory>`は、データストレージ用にS3バケットルートレベルでカスタマイズできるディレクトリです。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"` 。データをS3バケットルートディレクトリに保存する場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`を使用します。この値は`/*`で終わると予想されることに注意してください。そうしないと、 `AccessDenied`エラーが発生する可能性があります。
 
 3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがターゲットTiDBクラスタのTiDB CloudアカウントIDに対応するロールが存在するかどうかを確認します。
 
     -   はいの場合、次の手順でターゲットTiDBクラスタに一致する役割を使用できます。
-    -   そうでない場合は、[ **Create role** ]をクリックし、信頼エンティティタイプとして[ <strong>Another AWSアカウント</strong>]を選択してから、[AccountID <strong>]</strong>フィールドにターゲットTiDBクラスタのTiDB CloudアカウントIDを入力します。
+    -   そうでない場合は、[**ロールの作成**]をクリックし、信頼エンティティタイプとして[<strong>別のAWSアカウント</strong>]を選択して、ターゲットTiDBクラスタのTiDB CloudアカウントIDを[<strong>アカウントID]</strong>フィールドに入力します。
 
 4.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]で、前の手順のロール名をクリックして<strong>[概要</strong>]ページに移動し、次の手順を実行します。
 
@@ -152,7 +152,8 @@ TiDBクラウドがAmazonS3バケットのソースデータにアクセスで�
 
 > **ノート：**
 >
-> 出力料金とレイテンシーを最小限に抑えるには、AmazonS3バケットとTiDB Cloudデータベースクラスタを同じリージョンに配置します。
+> -   出力料金とレイテンシーを最小限に抑えるには、AmazonS3バケットとTiDB Cloudデータベースクラスタを同じリージョンに配置します。
+> -   データインポートプロセス中に`AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のパーミッションエラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-permission-error.md)を参照してください。
 
 ## GCSからTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-gcs-to-tidb-cloud}
 
@@ -187,9 +188,9 @@ TiDBクラウドがGCSバケット内のソースデータにアクセスでき�
 1.  ターゲットTiDBクラスタのGoogleCloudServiceアカウントIDを取得します。
 
     1.  TiDB Cloud管理コンソールで、Google Cloud Platformにデプロイされているターゲットプロジェクトとターゲットクラスタを選択し、[**インポート**]をクリックします。
-    2.  [ **Google Cloud ServiceアカウントIDを表示]**をクリックして、サービスアカウントIDをコピーします。
+    2.  [ **Google CloudサービスアカウントIDを表示]**をクリックして、サービスアカウントIDをコピーします。
 
-2.  Google Cloud Platform（GCP）管理コンソールで、[ **IAMと管理**]&gt; [<strong>ロール</strong>]に移動し、ストレージコンテナの次の読み取り専用権限を持つロールが存在するかどうかを確認します。
+2.  Google Cloud Platform（GCP）管理コンソールで、[ **IAMと管理**]&gt; [<strong>役割</strong>]に移動し、ストレージコンテナの次の読み取り専用権限を持つ役割が存在するかどうかを確認します。
 
     -   storage.buckets.get
     -   storage.objects.get
