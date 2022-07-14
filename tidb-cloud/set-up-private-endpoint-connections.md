@@ -39,6 +39,14 @@ The relationship of a TiDB cluster in TiDB Cloud, an endpoint service, and a pri
 - Private endpoint supports CIDR overlap.
 - Simplified network management: Private endpoint is easy to use and manage because it removes the need to whitelist public IPs and manage internet connectivity with internet gateways, NAT gateways, or firewall proxies. There is no longer a need to configure an internet gateway, VPC peering connection, or Transit VPC to enable connectivity.
 
+> **Note:**
+>
+> In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
+>
+> - You are using a TiCDC cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
+> - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
+> - You are connecting to PD or TiKV nodes directly.
+
 ## How to use private endpoint
 
 This section describes how to create, edit, delete or terminate a private endpoint, and how to connect to a private endpoint service via private endpoint.
@@ -91,9 +99,40 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
 
 During the creation process, you need to provide your VPC ID and subnet IDs that are available from your AWS Management Console. If you do not know how to get these IDs, click **Show Instruction**s and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs. To fold the snapshots, click the **Hide instruction**.
 
-After the endpoint service creation is completed, the **Next** button is available, and the placeholders in the command in the **Create VPC Interface Endpoint** area are automatically replaced with the real values.
+After the endpoint service creation is complete, the endpoint service name and the **Next** button are available, and the placeholders in the command in the **Create VPC Interface Endpoint** area are automatically replaced with the real values.
 
-Copy the command and run it in your terminal to create the VPC interface endpoint. Then click **Next**.
+Then you need to create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
+
+<SimpleTab>
+<div label="AWS Console" href="aws-console">
+
+1. In your AWS Management Console, go to the **VPC** > **Endpoint**, and click **Create Endpoint** on the upper right corner. The **Create endpoint** page is displayed.
+2. Under **Service category**, select **Other endpoint services**.
+3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of TiDB Cloud console, and click **Verify service**.
+4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
+5. In the **Subnets** area, select the availabilty zones where your TiDB cluster is located. Then click **Create endpoint**.
+
+> **Tip:**
+>
+> If your service is spanning more than three availability zones (AZs), you might not be able to select AZs in the area. To address the issue, contact the TiDB Cloud team for help.
+>
+> In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+
+</div>
+<div label="AWS CLI" href="aws-cli">
+
+Copy the command and run it in your terminal to create the VPC interface endpoint.
+
+> **Tip:**
+>
+> If your service is spanning more than three availability zones (AZs), an error is returned.
+>
+> In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+
+</div>
+</SimpleTab>
+
+Then click **Next**.
 
 #### Step 5. Accept the endpoint connection
 
