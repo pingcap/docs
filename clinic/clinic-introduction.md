@@ -7,7 +7,7 @@ summary: Learn about the PingCAP Clinic Diagnostic Service (PingCAP Clinic), inc
 
 PingCAP Clinic Diagnostic Service (PingCAP Clinic) is a diagnostic service provided by PingCAP for TiDB clusters that are deployed using either TiUP or TiDB Operator. This service helps to troubleshoot cluster problems remotely and provides a quick check of cluster status locally. With PingCAP Clinic, you can ensure the stable operation of your TiDB cluster for its full life-cycle, predict potential problems, reduce the probability of problems, troubleshoot cluster problems quickly, and fix cluster problems.
 
-PingCAP Clinic is currently in the Technical Preview stage. This service provides the following two components to diagnose cluster problems:
+PingCAP Clinic provides the following two components to diagnose cluster problems:
 
 - Diag client:
 
@@ -15,13 +15,14 @@ PingCAP Clinic is currently in the Technical Preview stage. This service provide
 
     > **Note:**
     >
-    > Diag temporarily **does not support** collecting data from the clusters deployed using TiDB Ansible.
+    > Diag supports TiDB v4.0 and later versions, but **does not support** collecting data from the clusters deployed using TiDB Ansible.
 
 - Clinic Server:
 
-    Clinic Server is a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports.
+    Clinic Server is a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports. There are two independent services based on different storage locations:
 
-    Currently, you can upload the collected diagnostic data to [Clinic Server China](https://clinic.pingcap.com.cn) only. The uploaded data is stored in the AWS S3 China (Beijing) region server set up by PingCAP. Clinic Server Global will be provided soon with a new URL and data storage location in one of the AWS S3 regions in North America.
+    - [Clinic Server in Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing).
+    - [Clinic Server in US](https://clinic.pingcap.com): the collected data is stored in AWS US.
 
 ## User scenarios
 
@@ -29,9 +30,9 @@ PingCAP Clinic is currently in the Technical Preview stage. This service provide
 
     When your cluster has some problems that cannot be fixed quickly, you can ask for help at [TiDB Community slack channel](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or contact PingCAP technical support. When contacting technical support for remote assistance, you need to save various diagnostic data from the cluster and forward the data to the support staff. In this case, you can use Diag to collect diagnostic data with one click. Diag helps you to collect complete diagnostic data quickly, which can avoid complex manual data collection operations. After collecting data, you can upload the data to the Clinic Server for PingCAP technical support staff to troubleshoot cluster problems. The Clinic Server provides secure storage for uploaded diagnostic data and supports the online diagnosis, which greatly improves the troubleshooting efficiency.
 
-- Perform a quick check on the cluster status locally
+- Perform a quick check on the cluster status
 
-    Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by PingCAP Clinic. The PingCAP Clinic Technical Preview version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+    Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. You can check the potential health risks of a cluster using the local and remote quick check feature provided by PingCAP Clinic.
 
 ## Implementation principles
 
@@ -55,6 +56,21 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 - Query database parameters through SQL statements
 
     Using SQL statements, Diag can query system variables and other information of TiDB. To use this method, you need to **additionally provide** the username and password to access TiDB when collecting data.
+
+## The limitations of Clinic Server
+
+> **Note:**
+>
+> - Clinic Server provides free service from July 15, 2022 to Jan 14, 2023. PingCAP Clinic will notify you through email before Jan 14, 2023 if the service starts requiring payment.
+> - If you want to adjust the usage limitations, contact PingCAP technical support.
+
+| Service Type| Limitation |
+| :------ | :------ |
+| Number of clusters | 10/organization |
+| Storage capacity | 50 GB/cluster |
+| Storage time | 180 days |
+| Data size | 3 GB |
+| Saving time | 3 days|
 
 ## Next step
 
