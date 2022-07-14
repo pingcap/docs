@@ -1581,7 +1581,7 @@ Configuration items related to TiCDC.
 ### `min-ts-interval`
 
 + The interval at which Resolved TS is calculated and forwarded.
-+ Default value: `"1s"`
++ Default value: `"200ms"`
 
 ### `old-value-cache-memory-quota`
 
