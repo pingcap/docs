@@ -32,7 +32,7 @@ PingCAP Clinic provides the following two components to diagnose cluster problem
 
 - Perform a quick check on the cluster status
 
-    Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. You can check the potential health risks of a cluster using the local and remote quick check feature provided by PingCAP Clinic.
+    Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. You can check the potential health risks of a cluster using the local and server-side quick check feature provided by PingCAP Clinic.
 
 ## Implementation principles
 
