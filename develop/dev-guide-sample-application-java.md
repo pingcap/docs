@@ -559,7 +559,7 @@ The structure of this directory is as follows:
 
 The automatically generated files are:
 
-- `src/main/java/com/pingcap/model/Player.java`: `Player` entity class.
+- `src/main/java/com/pingcap/model/Player.java`: The `Player` entity class.
 - `src/main/java/com/pingcap/model/PlayerMapper.java`: The interface of `Player Mapper`.
 - `src/main/resources/mapper/PlayerMapper.xml`: XML mapping of `Player`. It's the configuration that Mybatis uses to automatically generate the implementation class of the `Player Mapper` interface.
 
