@@ -49,6 +49,6 @@ The column names and their descriptions of the `information_schema.tiflash_repli
 | TABLE_NAME | Table name |
 | TABLE_ID | Table ID |
 | REPLICA_COUNT | Number of TiFlash replicas |
-|LOCATION_LABELS | The hint for PD, based on which multiple replicas in a Region are scattered. |
+|LOCATION_LABELS | The hint for PD, based on which multiple replicas in a Region are scattered |
 | AVAILABLE | Available or not (0/1)|
 | PROGRESS | Replication progress [0.0~1.0] |
