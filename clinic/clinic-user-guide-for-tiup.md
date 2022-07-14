@@ -58,12 +58,12 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
         <SimpleTab>
         <div label="Clinic Server in the US">
 
-        [Clinic Server in the US](https://clinic.pingcap.com): the collected data is stored in AWS US.
+        [Clinic Server in the US](https://clinic.pingcap.com): the collected data is stored in AWS US regions.
 
         </div>
         <div label="Clinic Server in the Chinese mainland">
 
-        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing).
+        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing) regions.
 
         </div>
 
