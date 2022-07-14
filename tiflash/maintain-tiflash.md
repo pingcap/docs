@@ -31,11 +31,11 @@ TiFlashのバージョンを確認する方法は2つあります。
 
 ## TiFlashの重要なログ {#tiflash-critical-logs}
 
-| ログ情報                                                                                                                                                   | ログの説明                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
-| [INFO] [ `<unknown>` ] [&quot;KVStore：永続化を開始[リージョン47、適用：用語6インデックス10]&quot;] [thread_id = 23]                                                           | データの複製が開始されます（ログの先頭にある角かっこ内の数字はスレッドIDを示します  |
-| [DEBUG] [ `<unknown>` ] [&quot;CoprocessorHandler：grpc :: Status DB :: CoprocessorHandler :: execute（）：DAGリクエストの処理&quot;] [thread_id = 30]             | DAG要求の処理、つまり、TiFlashはコプロセッサー要求の処理を開始します     |
-| [DEBUG] [ `<unknown>` ] [&quot;CoprocessorHandler：grpc :: Status DB :: CoprocessorHandler :: execute（）：Handle DAG request done&quot;] [thread_id = 30] | 完了したDAG要求の処理、つまり、TiFlashはコプロセッサー要求の処理を終了します |
+| ログ情報                                                                                                                                 | ログの説明                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| `[INFO] [<unknown>] ["KVStore: Start to persist [region 47, applied: term 6 index 10]"] [thread_id=23]`                              | データの複製が開始されます（ログの先頭にある角かっこ内の数字はスレッドIDを示します  |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handling DAG request"] [thread_id=30]`    | DAG要求の処理、つまり、TiFlashはコプロセッサー要求の処理を開始します     |
+| `[DEBUG] [<unknown>] ["CoprocessorHandler: grpc::Status DB::CoprocessorHandler::execute(): Handle DAG request done"] [thread_id=30]` | 完了したDAG要求の処理、つまり、TiFlashはコプロセッサー要求の処理を終了します |
 
 コプロセッサー要求の開始または終了を見つけて、ログの先頭に印刷されたスレッドIDからコプロセッサー要求の関連ログを見つけることができます。
 
@@ -43,11 +43,12 @@ TiFlashのバージョンを確認する方法は2つあります。
 
 `information_schema.tiflash_replica`システムテーブルの列名とその説明は次のとおりです。
 
-| カラム名          | 説明                     |
-| ------------- | ---------------------- |
-| TABLE_SCHEMA  | データベース名                |
-| TABLE_NAME    | テーブル名                  |
-| TABLE_ID      | テーブルID                 |
-| REPLICA_COUNT | TiFlashレプリカの数          |
-| 利用可能          | 利用可能かどうか（0/1）          |
-| 進捗            | レプリケーションの進行状況[0.0〜1.0] |
+| カラム名            | 説明                                |
+| --------------- | --------------------------------- |
+| TABLE_SCHEMA    | データベース名                           |
+| TABLE_NAME      | テーブル名                             |
+| TABLE_ID        | テーブルID                            |
+| REPLICA_COUNT   | TiFlashレプリカの数                     |
+| LOCATION_LABELS | リージョン内の複数のレプリカが分散していることに基づくPDのヒント |
+| 利用可能            | 利用可能かどうか（0/1）                     |
+| 進捗              | レプリケーションの進行状況[0.0〜1.0]            |

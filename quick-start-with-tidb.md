@@ -297,7 +297,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
 
 -   `root`人のユーザーとそのパスワードが必要です
 -   [ターゲットマシンのファイアウォールサービスを停止します](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines) 、またはTiDBクラスタノードに必要なポートを開きます
--   現在、TiUPはx86_64（AMD64およびARM）アーキテクチャでのTiDBの展開をサポートしています。
+-   現在、TiUPクラスタはx86_64（AMD64）およびARMアーキテクチャーへのTiDBのデプロイをサポートしています。
 
     -   AMD64ではCentOS7.3以降のバージョンを使用することをお勧めします
     -   ARMではCentOS7.61810を使用することをお勧めします
