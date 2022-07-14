@@ -64,7 +64,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure the following:
 
 To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can access the Amazon S3 bucket.
 
-1. Get the TiDB Cloud account ID and external ID of the target TiDB cluster.
+1. In the TiDB Cloud Console, get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
     1. In the TiDB Cloud Console, choose your target project, and then click the name of your target cluster. The overview page of your cluster is displayed.
     2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
@@ -74,7 +74,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
     1. Sign in to the AWS Management Console and open the Amazon S3 console at <https://console.aws.amazon.com/s3/>.
     2. In the **Buckets** list, choose the name of your bucket with the source data, click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-test`), and then take a note of the bucket ARN for later use.
-    3. Open the IAM console at <https://console.aws.amazon.com/iam/>, and then click **Policies** in the navigation pane one the left.
+    3. Open the IAM console at <https://console.aws.amazon.com/iam/>, and then click **Policies** in the navigation pane on the left.
     4. Click **Create Policy**, and then click the **JSON** tab.
     5. Copy the following access policy template and paste it into the policy text field.
 
@@ -106,7 +106,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
         - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>"`
 
-            For example, if your source data is stored in the `mydata` directory of your S3 bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If your source data is stored in the root directory of your S3 bucket, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Make sure that `/*` is used at the end of the directory to avoid TiDB Cloud access issues.
+            For example, if your source data is stored in the `mydata` directory of the `tidb-cloud-test` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If your source data is stored in the root directory of the bucket, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Make sure that `/*` is used at the end of the directory to avoid TiDB Cloud access issues.
 
         - `"Resource": "<Your S3 bucket ARN>"`
 
