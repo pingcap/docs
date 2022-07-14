@@ -73,9 +73,12 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 2. In the AWS Management Console, create a managed policy for your Amazon S3 bucket.
 
     1. Sign in to the AWS Management Console and open the Amazon S3 console at <https://console.aws.amazon.com/s3/>.
-    2. In the **Buckets** list, choose the name of your bucket with the source data, click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-test`), and then take a note of the bucket ARN for later use.
-    3. Open the IAM console at <https://console.aws.amazon.com/iam/>, and then click **Policies** in the navigation pane on the left.
-    4. Click **Create Policy**, and then click the **JSON** tab.
+    2. In the **Buckets** list, choose the name of your bucket with the source data, click **Copy ARN** to get your S3 bucket ARN (for example, `arn:aws:s3:::tidb-cloud-soure-data`), and then take a note of the bucket ARN for later use.
+
+        ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
+
+    3. Open the IAM console at <https://console.aws.amazon.com/iam/>, click **Policies** in the navigation pane on the left, and then click **Create Policy** in the **Policies** pane on the right.
+    4. On the **Create policy** page, click the **JSON** tab.
     5. Copy the following access policy template and paste it into the policy text field.
 
         ```
@@ -102,39 +105,44 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
         }
         ```
 
-    6. In the policy text field, update the following information to your own values.
+        In the policy text field, update the following information to your own values.
 
         - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>"`
 
-            For example, if your source data is stored in the `mydata` directory of the `tidb-cloud-test` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If your source data is stored in the root directory of the bucket, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Make sure that `/*` is used at the end of the directory to avoid TiDB Cloud access issues.
+            For example, if your source data is stored in the root directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. If your source data is stored in the `mydata` directory of the `tidb-cloud-test` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. Make sure that `/*` is used at the end of the directory to avoid TiDB Cloud access issues.
 
         - `"Resource": "<Your S3 bucket ARN>"`
 
             For example, `"Resource": "arn:aws:s3:::tidb-cloud-test"`.
 
-3. In the AWS Management Console, create a access role for TiDB Cloud and get the role ARN.
+    6. Click **Next: Tags**, add a tag of the policy (optional), and then click **Next:Review**
 
-    1. Open the IAM console at <https://console.aws.amazon.com/iam/>, and then click **Roles** in the navigation pane one the left.
-    2. Click **Create role**, fill in the following information, and then click **Next** in the lower-right corner.
+    7. Set a policy name, and then click **Create policy**.
+
+3. In the AWS Management Console, create a role for TiDB Cloud and get the role ARN.
+
+    1. In the IAM console at <https://console.aws.amazon.com/iam/>, click **Roles** in the navigation pane on the left, and then click **Create role** in the **Roles** pane on the right.
+    2. To create a role, fill in the following information:
 
         - Under **Trusted entity type**, select **AWS account**.
         - Under **An AWS account**, select **Another AWS account**, and then paste the TiDB Cloud account ID to the **Account ID** field.
         - Under **Options**, click **Require external ID (Best practice when a third party will assume this role)**, and then paste the TiDB Cloud External ID to the **External ID** field.
 
-    3. In the policy list, choose the policy you just created, and then click **Next** in the lower-right corner.
+    3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
     4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
-    5. In the list of roles, click the role that you just created to go to its summary page, and then copy the ARN of the role.
+    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then copy the ARN of the role.
 
-4. In the TiDB Cloud console, go to the **Data Import Task** page where you get the TiDB Cloud account ID and external ID of the target TiDB cluster, fill in the **Role ARN** field that you get from the previous step.
+        ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
+
+4. In the TiDB Cloud console, go to the **Data Import Task** page where you get the TiDB Cloud account ID and external ID of the target TiDB cluster, paste the **Role ARN** field that you get from the previous step.
 
 ### Step 3. Import data into TiDB Cloud
 
-1. On the **Data Import Task** page, fill in the following information.
+1. On the **Data Import Task** page, besides the the **Role ARN** field, you also need to fill in the following information.
 
     - **Data Source Type**: `AWS S3`
     - **Bucket URL**: fill in the bucket URL of your source data.
     - **Data Format**: choose the format of your data.
-    - **Setup Credentials**: enter the Role ARN value for **Role-ARN**.
     - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
 
