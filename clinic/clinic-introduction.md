@@ -21,8 +21,8 @@ PingCAP Clinic provides the following two components to diagnose cluster problem
 
     Clinic Server is a cloud service deployed in the cloud. By providing diagnostic services in the SaaS model, the Clinic Server can not only receive uploaded diagnostic data but also work as an online diagnostic environment to store data, view data, and provide cluster diagnostic reports. There are two independent services based on different storage locations:
 
-    - [Clinic Server in Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing).
-    - [Clinic Server in US](https://clinic.pingcap.com): the collected data is stored in AWS US.
+    - [Clinic Server in the US](https://clinic.pingcap.com): the collected data is stored in AWS US regions.
+    - [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing) regions.
 
 ## User scenarios
 
