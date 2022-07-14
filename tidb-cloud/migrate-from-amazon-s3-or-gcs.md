@@ -17,10 +17,7 @@ If your organization is using TiDB Cloud as a service on AWS, you can use Amazon
 
 ### Prerequisites
 
-Before migrating data from Amazon S3 to TiDB Cloud, ensure the following:
-
-- You have administrator access to your corporate-owned AWS account.
-- You have administrator access to the TiDB Cloud Management Portal.
+Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrator access to your corporate-owned AWS account.
 
 ### Step 1. Create an Amazon S3 bucket and prepare source data files
 
@@ -109,13 +106,13 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
         - `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>"`
 
-            For example, if your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. Make sure that `/*` is added to the end of the directory so TiDB can access all files in this directory.
+            For example, if your source data is stored in the root directory of the `tidb-cloud-source-data` bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`. If your source data is stored in the `mydata` directory of the bucket, use `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`. Make sure that `/*` is added to the end of the directory so TiDB Cloud can access all files in this directory.
 
         - `"Resource": "<Your S3 bucket ARN>"`
 
             For example, `"Resource": "arn:aws:s3:::tidb-cloud-source-data"`.
 
-    6. Click **Next: Tags**, add a tag of the policy (optional), and then click **Next:Review**
+    6. Click **Next: Tags**, add a tag of the policy (optional), and then click **Next:Review**.
 
     7. Set a policy name, and then click **Create policy**.
 
@@ -130,7 +127,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
     3. Click **Next** to open the policy list, choose the policy you just created, and then click **Next**.
     4. Under **Role details**, set a name for the role, and then click **Create role** in the lower-right corner. After the role is created, the list of roles is displayed.
-    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then copy the ARN of the role.
+    5. In the list of roles, click the name of the role that you just created to go to its summary page, and then copy the role ARN.
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
@@ -138,7 +135,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
 ### Step 3. Import data into TiDB Cloud
 
-1. On the **Data Import Task** page, besides the **Role ARN** field, you also need to fill in the following information.
+1. On the **Data Import Task** page, besides the **Role ARN** field, you also need to fill in the following information:
 
     - **Data Source Type**: `AWS S3`
     - **Bucket URL**: fill in the bucket URL of your source data.
@@ -146,7 +143,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
     - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
 
-2. click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL
+2. click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL.
 3. Click **Import** to start the import task.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
