@@ -70,7 +70,7 @@ First, Diag gets cluster topology information from the deployment tool TiUP (tiu
 | Storage capacity | 50 GB/cluster |
 | Storage time | 180 days |
 | Data size | 3 GB/package |
-| Saving time | 3 days|
+| Data rebuild environment saving time | 3 days|
 
 ## Next step
 
