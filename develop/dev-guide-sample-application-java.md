@@ -677,7 +677,7 @@ Once included in the Maven plugin, you can delete the old generated files and ma
 
 > **Note:**
 >
-> The property `configuration.overwrite` in `mybatis-generator.xml` only controls that the generated Java code files are written using overwrite strategy. But the XML mapping files will still be written as appended. Therefore, it is recommended to delete the old file before Mybaits Generator generates.
+> The property `configuration.overwrite` in `mybatis-generator.xml` only ensures that the generated Java code files are overwritten. But the XML mapping files are still written as appended. Therefore, it is recommended to delete the old file before Mybaits Generator generating a new one.
 
 `Player.java` is a data entity class file generated using Mybatis Generator, which is a mapping of database tables within the application. Each property of the `Player` class corresponds to a field in the `player` table.
 
