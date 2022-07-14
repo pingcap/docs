@@ -563,7 +563,7 @@ The automatically generated files are:
 - `src/main/java/com/pingcap/model/PlayerMapper.java`: The interface of `Player Mapper`.
 - `src/main/resources/mapper/PlayerMapper.xml`: The XML mapping of `Player`. Mybatis uses this configuration to automatically generate the implementation class of the `PlayerMapper` interface.
 
-The strategy for generating these files is written in the `mybatis-generator.xml` configuration file, which is the configuration file for [Mybatis Generator](https://mybatis.org/generator/quickstart.html), and the following configuration file had comments to describe how to use it.
+The strategy for generating these files is written in `mybatis-generator.xml`, which is the configuration file for [Mybatis Generator](https://mybatis.org/generator/quickstart.html). There are comments in the following configuration file to describe how to use it.
 
 {{< copyable "" >}}
 
