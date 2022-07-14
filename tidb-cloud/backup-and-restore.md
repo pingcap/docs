@@ -94,7 +94,7 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 3. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the vCPUs size, node quantity, and storage size for the cluster.
+    - Increase the node size, node quantity, and storage size for the cluster.
 
 4. Click **Confirm**.
 
@@ -112,7 +112,7 @@ To restore a deleted cluster from recycle bin, take the following steps:
 4. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the vCPUs size, node quantity, and storage size for the cluster.
+    - Increase the node size, node quantity, and storage size for the cluster.
 
 5. Click **Confirm**.
 

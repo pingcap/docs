@@ -11,14 +11,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.4.1.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v5.4.2.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v5.4.1
+tiup cluster upgrade <cluster-name> v5.4.2
 ```
 
 ### Notes for upgrade
@@ -662,6 +662,10 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 
 ## Eventually consistent replication in disaster scenarios
 
+> **Warning:**
+>
+> Currently, it is not recommended that you use eventually consistent replication in disaster scenarios. For details, see [critical bug #6189](https://github.com/pingcap/tiflow/issues/6189).
+
 Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 
 Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that before the disaster the replication status of TiCDC is normal and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
@@ -682,8 +686,8 @@ TiCDC replication lag increases in the following scenarios:
 ```toml
 [consistent]
 # Consistency level. Options include:
-# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified. 
-# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters. 
+# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified.
+# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters.
 level = "eventual"
 
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.

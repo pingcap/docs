@@ -207,7 +207,7 @@ By default, Dumpling exports all databases except system databases (including `m
 
 {{< copyable "shell-regular" >}}
 
-```shell
+```bash
 ./dumpling \
   -u root \
   -P 4000 \

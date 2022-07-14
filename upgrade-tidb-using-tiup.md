@@ -161,12 +161,12 @@ If your application has a maintenance window for the database to be stopped for 
 tiup cluster upgrade <cluster-name> <version>
 ```
 
-For example, if you want to upgrade the cluster to v5.4.1:
+For example, if you want to upgrade the cluster to v5.4.2:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster upgrade <cluster-name> v5.4.1
+tiup cluster upgrade <cluster-name> v5.4.2
 ```
 
 > **Note:**
@@ -177,7 +177,10 @@ tiup cluster upgrade <cluster-name> v5.4.1
 >
 > + To keep a stable performance, make sure that all leaders in a TiKV instance are evicted before stopping the instance. You can set `--transfer-timeout` to a larger value, for example, `--transfer-timeout 3600` (unit: second).
 >
-> - When upgrading a TiDB cluster from versions earlier than 5.3 to 5.3 or later, you cannot upgrade TiFlash online. Instead, you must first stop all the TiFlash instances and then upgrade the cluster offline. Then, reload the cluster so that other components are upgraded online without interruption.
+> - To upgrade TiFlash from versions earlier than 5.3 to 5.3 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
+>    1. Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
+>    2. Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
+>    3. Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
 
 #### Offline upgrade
 
@@ -218,7 +221,7 @@ tiup cluster display <cluster-name>
 ```
 Cluster type:       tidb
 Cluster name:       <cluster-name>
-Cluster version:    v5.4.1
+Cluster version:    v5.4.2
 ```
 
 > **Note:**
@@ -268,7 +271,7 @@ You can upgrade the tool version by using TiUP to install the `ctl` component of
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup install ctl:v5.4.1
+tiup install ctl:v5.4.2
 ```
 
 ## TiDB 5.4 compatibility changes
