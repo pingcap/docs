@@ -56,17 +56,17 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     - Login in to the Clinic Server.
 
         <SimpleTab>
-        <div label="Clinic Server in Chinese mainland">
+        <div label="Clinic Server in the US">
 
-        [Clinic Server in Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing).
+        [Clinic Server in the US](https://clinic.pingcap.com): the collected data is stored in AWS US.
+
+        </div>
+        <div label="Clinic Server in the Chinese mainland">
+
+        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing).
 
         </div>
 
-        <div label="Clinic Server in US">
-
-        [Clinic Server in US](https://clinic.pingcap.com): the collected data is stored in AWS US.
-
-        </div>
         </SimpleTab>
 
     - Click the icon in the lower-right corner of the Cluster page and select **Get Access Token For Diag Tool**, click **+** in the pop-up window. Make sure that you have copied and saved the displayed token information.
@@ -92,13 +92,22 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
     > **Note:**
     >
     > - Setting `region` is supported in Diag v0.9.0 and later versions.
-    > - For versions earlier than Diag v0.9.0, the data is uploaded to Clinic Server in Chinese mainland by default.
+    > - For versions earlier than Diag v0.9.0, the data is uploaded to Clinic Server in the Chinese mainland by default.
     > - To set `region` in Diag earlier than v0.9.0, using `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab>
-    <div label="Clinic Server in Chinese mainland">
+    <div label="Clinic Server in the US">
 
-    For Clinic Server in Chinese mainland, set `region` to `CN` using the following command:
+    For Clinic Server in the US, set `region` to `US` using the following command:
+
+    ```bash
+    tiup diag config clinic.region US
+    ```
+
+    </div>
+    <div label="Clinic Server in the Chinese mainland">
+
+    For Clinic Server in the Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
     tiup diag config clinic.region CN
@@ -106,15 +115,6 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
     </div>
 
-    <div label="Clinic Server in US">
-
-    For Clinic Server in US, set `region` to `US` using the following command:
-
-    ```bash
-    tiup diag config clinic.region US
-    ```
-
-    </div>
     </SimpleTab>
 
 4. (Optional) Enable log redaction.
