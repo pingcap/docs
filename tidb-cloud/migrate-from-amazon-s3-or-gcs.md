@@ -131,7 +131,7 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
-4. In the TiDB Cloud console, go to the **Data Import Task** page where you get the TiDB Cloud account ID and external ID, and then paste the **Role ARN** field that you get from the previous step.
+4. In the TiDB Cloud console, go to the **Data Import Task** page where you get the TiDB Cloud account ID and external ID, and then paste the role ARN to the **Role ARN** field.
 
 ### Step 3. Import data into TiDB Cloud
 
