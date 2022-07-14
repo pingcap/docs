@@ -7,15 +7,16 @@ summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster di
 
 This document describes how to use PingCAP Clinic diagnosis service (PingCAP Clinic) to collect, upload, and view cluster diagnosis data quickly.
 
-PingCAP Clinic consists of two components: Diag client (shorten as Diag) and [Clinic Server cloud service](https://clinic.pingcap.com.cn) (shorten as Clinic Server). For details of two components, refer to [PingCAP Clinic Overview](/clinic/clinic-introduction.md).
+PingCAP Clinic consists of two components: Diag client (shorten as Diag) and Clinic Server cloud service (shorten as Clinic Server). For details of two components, refer to [PingCAP Clinic Overview](/clinic/clinic-introduction.md).
 
-When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
+## User scenarios
 
-PingCAP Clinic is currently in the Technical Preview stage.
+- When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
+- When the cluster is running properly and you need to check the status of the cluster, you can use Diag to collect diagnostic data, upload the data to Clinic Server and view the results of Health Report.
 
 > **Note:**
 >
-> - The following methods to collect and upload data are only applicable to [clusters deployed with TiUP](/production-deployment-using-tiup.md).
+> - The following methods to collect and upload data are **only** applicable to [clusters deployed with TiUP](/production-deployment-using-tiup.md). For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 > - The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
 
 ## Prerequisites
@@ -24,13 +25,28 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
 1. On your control machine with TiUP installed, run the following command to install Diag:
 
-    {{< copyable "shell-regular" >}}
-
     ```bash
     tiup install diag
     ```
 
-2. Log in to [Clinic Server](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, you can register on the login page.
+2. Log in to Clinic Server.
+
+    <SimpleTab>
+    <div label="Clinic Server in Chinese mainland">
+
+    Go to the [Clinic Server in Chinese mainland](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, you can create one on that page
+
+    </div>
+
+    <div label="Clinic Server in US">
+
+    Go to the [Clinic Server in US](https://clinic.pingcap.com) and select **Sign in with TiDB Account** to enter the TiDB Cloud login page. If you do not have an TiDB Cloud account, you can create one on that page.
+    > **Note:**
+    >
+    > Clinic Server in US only uses TiDB Cloud account to log in. Users are not required to actually use TiDB Cloud service.
+
+    </div>
+    </SimpleTab>
 
 3. Create an organization on the Clinic Server. Organization is a collection of TiDB clusters. You can upload diagnostic data on the created organization.
 
@@ -45,15 +61,45 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
     > - For data security, TiDB only displays the token information when it is created. If you lost the information, you can delete the old token and create a new one.
     > - A token is only used for uploading data.
 
-5. Set the token in Diag.
+5. Set the token and `region` in Diag.
 
-    For example:
+    - To set the `clinic.token`, use the following command:
 
-    {{< copyable "shell-regular" >}}
+        ```bash
+        tiup diag config clinic.token ${token-value}
+        ```
+
+    - To set the `clinic.region`, use the following command:
+
+    `region` determines the encryption certification used and the target service when uploading the data. For example:
+
+    > **Note:**
+    >
+    > - Setting `region` is supported in Diag v0.9.0 and later versions.
+    > - For versions earlier than Diag v0.9.0, the data is uploaded to Clinic Server in Chinese mainland by default.
+    > - To set `region` in Diag earlier than v0.9.0, using `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
+
+    <SimpleTab>
+    <div label="Clinic Server in Chinese mainland">
+
+    For Clinic Server in Chinese mainland, set `region` to `CN` using the following command:
 
     ```bash
-    tiup diag config clinic.token ${token-value}
+    tiup diag config clinic.region CN
     ```
+
+    </div>
+
+    <div label="Clinic Server in US">
+
+    For Clinic Server in US, set `region` to `US` using the following command:
+
+    ```bash
+    tiup diag config clinic.region US
+    ```
+
+    </div>
+    </SimpleTab>
 
 6. (Optional) Enable log redaction.
 
@@ -64,8 +110,6 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 1. Run Diag to collect diagnostic data.
 
     For example, to collect the diagnostic data from 4 hours ago to 2 hours ago based on the current time, run the following command:
-
-    {{< copyable "shell-regular" >}}
 
     ```bash
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
@@ -79,7 +123,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
     > **Note:**
     >
-    > The size of data (the folder with collected data) to be uploaded should be **no larger than** 10 GB. Otherwise, the data upload fails.
+    > The size of data (the compressed file with collected data) to be uploaded should be **no larger than** 3 GB. Otherwise, the data upload fails.
 
     - If the network where your cluster is located can access the internet, you can directly upload the folder with collected data using the following command:
 
@@ -93,7 +137,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
         > **Note:**
         >
-        > When uploading data using this method, you need to use Diag v0.7.0 or a later version. You can get the Diag version when you run it. If the Diag version is earlier than 0.7.0, you can use the `tiup update diag` command to upgrade Diag to the latest version.
+        > When uploading data using this method, you need to use Diag v0.9.0 or a later version. You can get the Diag version when you run it. If the Diag version is earlier than 0.9.0, you can use the `tiup update diag` command to upgrade Diag to the latest version.
 
     - If the network where your cluster is located cannot access the internet, you need to pack the collected data and upload the package. For details, see [Method 2. Pack and upload data](/clinic/clinic-user-guide-for-tiup.md#method-2-pack-and-upload-data).
 
@@ -102,6 +146,10 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
     By default, the diagnostic data includes the cluster name, cluster topology information, log content in the collected diagnostic data, and Grafana Dashboard information reorganized based on the metrics in the collected data.
 
     You can use the data to troubleshoot cluster problems by yourself, or you can provide the data access link to PingCAP technical support staff to facilitate the remote troubleshooting.
+
+4. View the results of Health Report
+
+    After the data is uploaded, Clinic Server processes the data automatically in the background. The Health Report will be generated in approximately 5 to 15 minutes. You can view the report by opening the diagnostic data link and click the "Health Report".
 
 ## What's next
 
