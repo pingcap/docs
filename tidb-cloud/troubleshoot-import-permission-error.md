@@ -7,7 +7,7 @@ summary: Learn how to troubleshoot permission errors when importing data from Am
 
 This document describes how to troubleshoot permission errors that might occur when you [import data from Amazon S3 into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud).
 
-After clicking **Import** on the **Data Import Task** page on the TiDB Cloud console, if you see an error message with the keyword `AccessDenied`, a permission error has occurred.
+After clicking **Validate** on the **Data Import Task** page on the TiDB Cloud console, if you see an error message with the keyword `AccessDenied`, a permission error has occurred.
 
 To troubleshoot the permission error, perform the following checks in the AWS Management Console.
 
