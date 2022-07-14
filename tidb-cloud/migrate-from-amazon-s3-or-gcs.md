@@ -143,14 +143,14 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
     - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
 
-2. click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL.
-3. Click **Import** to start the import task.
+2. click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL. If any access errors are returned, check and update your access configuration in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access). Then validate the access again.
+3. After the validation passes, click **Import** to start the import task.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 
 ## Import or migrate from GCS to TiDB Cloud
 
-If your organization is using TiDB Cloud as a service on Google Cloud Platform (GCP), you can use Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud. 
+If your organization is using TiDB Cloud as a service on Google Cloud Platform (GCP), you can use Google Cloud Storage (GCS) as a staging area for importing or migrating data into TiDB Cloud.
 
 ### Prerequisites
 
