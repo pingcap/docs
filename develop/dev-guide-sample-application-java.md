@@ -673,7 +673,7 @@ The strategy for generating these files is written in `mybatis-generator.xml`, w
 </plugin>
 ```
 
-Once included in the Maven plugin, you can delete the old generated files and make new ones with the command `mvn mybatis-generate`. Or you can use `make gen` to delete the old file and generate the new file at the same time.
+Once included in the Maven plugin, you can delete the old generated files and make new ones using `mvn mybatis-generate`. Or you can use `make gen` to delete the old file and generate a new one at the same time.
 
 > **Note:**
 >
