@@ -1,10 +1,10 @@
 ---
-title: TiDB Lightning Deployment
+title: Deploy TiDB Lightning
 summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 aliases: ['/docs/dev/tidb-lightning/deploy-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/deployment/']
 ---
 
-# TiDB Lightning Deployment
+# Deploy TiDB Lightning
 
 This document describes the hardware requirements of TiDB Lightning using the Local-backend, and how to deploy it manually.
 
