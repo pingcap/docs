@@ -27,15 +27,15 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 
     > **Note:**
     >
-    > To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
+    > To minimize egress charges and latency, create your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
 
 2. If you are migrating data from an upstream database, you need to export the source data first.
 
     For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
 
-3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either AWS Web console or AWS CLI.
+3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either the Amazon S3 Console or the AWS CLI.
 
-    - To upload files using the AWS Web console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
+    - To upload files using the Amazon S3 Console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
     - To upload files using the AWS CLI, use the following command:
 
         {{< copyable "shell-regular" >}}
