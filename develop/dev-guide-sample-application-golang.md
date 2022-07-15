@@ -468,7 +468,7 @@ func randomPlayers(amount int) []Player {
 }
 ```
 
-`sql.go` holds the constants for SQL statements:
+`sql.go` defines SQL statements as constants:
 
 {{< copyable "" >}}
 
