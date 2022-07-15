@@ -27,7 +27,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 
     > **Note:**
     >
-    > To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
+    > To minimize egress charges and latency, create your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
 
 2. If you are migrating data from an upstream database, you need to export the source data first.
 
