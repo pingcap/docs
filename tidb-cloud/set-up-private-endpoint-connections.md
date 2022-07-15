@@ -5,8 +5,6 @@ summary: Learn how to set up private endpoint connections in TiDB Cloud.
 
 # Set Up Private Endpoint Connections
 
-This document introduces what is a private endpoint, how to use it in TiDB Cloud, the billing information, and the status information.
-
 TiDB Cloud supports using a private endpoint to privately connect your virtual private cloud (VPC) to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. This TiDB Cloud service is an endpoint service.
 
 Powered by AWS PrivateLink, the endpoint connection is secure and private, and does not expose your data to the public internet.
@@ -59,12 +57,12 @@ Take the following steps to create a private endpoint. If you have multiple clus
 
 #### Step 1. Find the entrance
 
-To find the entrance to creating a private endpoint, follow one of the following methods:
+To find the entrance to creating a private endpoint, take one of the following methods:
 
 - From the **Project Settings** page:
 
     1. In the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
-    2. Click **Add** on the top right corner to open the creation page.
+    2. Click **Add** in the upper-right corner to open the creation page.
 
 - From the **Connect to TiDB** dialog of an active cluster:
 
@@ -77,11 +75,6 @@ On the creation page, a flow bar is displayed indicating the stages of creating 
 #### Step 2. Choose a TiDB cluster
 
 After you open the creation page for a private endpoint, you are at the **Choose Cluster** stage. Click the drop-down list to choose a TiDB cluster for which you want to create a private endpoint, and then click **Next**.
-
-By default, such type of a cluster is selected:
-
-- From the cluster page you entered the creation page
-- The first cluster with no privated endpoint created for it
 
 > **Note:**
 >
@@ -108,17 +101,17 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
 2. Then you need to create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
 
     <SimpleTab>
-    <div label="AWS Console" href="aws-console">
+    <div label="Use AWS Console" href="use-aws-console">
 
-    1. In your AWS Management Console, go to the **VPC** > **Endpoint**, and click **Create Endpoint** on the upper right corner. The **Create endpoint** page is displayed.
+    1. In your AWS Management Console, go to **VPC** > **Endpoint**, and click **Create Endpoint** in the upper-right corner. The **Create endpoint** page is displayed.
     2. Under **Service category**, select **Other endpoint services**.
-    3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of TiDB Cloud console, and click **Verify service**.
+    3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console, and click **Verify service**.
     4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
     5. In the **Subnets** area, select the availabilty zones where your TiDB cluster is located. Then click **Create endpoint**.
 
     > **Tip:**
     >
-    > If your service is spanning more than three availability zones (AZs), you might not be able to select AZs in the area. To address the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. To solve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
     >
     > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
 
@@ -129,7 +122,7 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
 
     > **Tip:**
     >
-    > If your service is spanning more than three availability zones (AZs), an error is returned. To address the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > If your service is spanning across more than three availability zones (AZs), an error is returned. To resolve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
     >
     > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
 
@@ -167,7 +160,7 @@ To edit a private endpoint, take these steps:
 
 ### Delete or terminate a private endpoint
 
-To delete or terminate a private endpoint, use one of the following methods:
+To delete or terminate a private endpoint, take one of the following methods:
 
 - Drop the TiDB cluster that has been configured as a private endpoint service. In this way, all private endpoints connected to the cluster will be deleted.
 - Drop a single private endpoint. To do that, open the **Private Endpoint** page, click the **Terminate** button next to the private endpoint you want to terminate, and the endpoint will be terminated.
@@ -176,7 +169,7 @@ To delete or terminate a private endpoint, use one of the following methods:
 
 Take the following steps to connect to a private endpoint service using a private endpoint:
 
-1. On the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
+1. In the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
 3. Select the **Private Endpoint** tab. If you have created a private endpoint, it is displayed under **Step 1: Create Private Endpoint**.
 4. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
