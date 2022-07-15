@@ -7,16 +7,16 @@ summary: Learn how to use PingCAP Clinic to collect, upload, and view cluster di
 
 This document describes how to use PingCAP Clinic diagnosis service (PingCAP Clinic) to collect, upload, and view cluster diagnosis data quickly.
 
-PingCAP Clinic consists of two components: Diag client (shorten as Diag) and Clinic Server cloud service (shorten as Clinic Server). For details of two components, refer to [PingCAP Clinic Overview](/clinic/clinic-introduction.md).
+PingCAP Clinic consists of two components: Diag client (shorten as Diag) and Clinic Server cloud service (shorten as Clinic Server). For details of these two components, refer to [PingCAP Clinic Overview](/clinic/clinic-introduction.md).
 
 ## User scenarios
 
-- When your cluster has some problems, if you need to contact PingCAP technical support, you can perform the following operations to facilitate the remote troubleshooting: collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support staff.
-- When the cluster is running properly and you need to check the status of the cluster, you can use Diag to collect diagnostic data, upload the data to Clinic Server and view the results of Health Report.
+- To accurately identify and quickly resolve problems in your cluster when seeking help remotely from PingCAP technical support, you can collect diagnostic data with Diag, upload the collected data to the Clinic Server, and provide the data access link to the technical support.
+- When the cluster is running properly and you need to check the status of the cluster, you can use Diag to collect diagnostic data, upload the data to Clinic Server, and view the results of Health Report.
 
 > **Note:**
 >
-> - The following methods to collect and upload data are **only** applicable to [clusters deployed with TiUP](/production-deployment-using-tiup.md). For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
+> - The following methods to collect and upload data are **only** applicable to [clusters deployed using TiUP](/production-deployment-using-tiup.md). For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 > - The diagnostic data collected by PingCAP Clinic is **only** used for troubleshooting cluster problems.
 
 ## Prerequisites
@@ -34,17 +34,17 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
     <SimpleTab>
     <div label="Clinic Server in the US">
 
-    Go to the [Clinic Server in the US](https://clinic.pingcap.com) and select **Sign in with TiDB Account** to enter the TiDB Cloud login page. If you do not have an TiDB Cloud account, you can create one on that page.
+    Go to the [Clinic Server in the US](https://clinic.pingcap.com) and select **Sign in with TiDB Account** to enter the TiDB Cloud login page. If you do not have an TiDB Cloud account, create one on that page.
 
     > **Note:**
     >
-    > Clinic Server in the US only uses TiDB Cloud account to log in. Users are not required to actually use TiDB Cloud service.
+    > A TiDB Cloud account is only used for logging in to Clinic Server in SSO mode and is not mandatory for accessing the TiDB Cloud service.
 
     </div>
 
     <div label="Clinic Server in the Chinese mainland">
 
-    Go to the [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, you can create one on that page
+    Go to the [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn) and select **Sign in with AskTUG** to enter the AskTUG community login page. If you do not have an AskTUG account, create one on that page
 
     </div>
     </SimpleTab>
@@ -53,7 +53,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
 4. Get an access token to upload data. When uploading collected data through Diag, you need a token for user authentication to ensure the data is isolated securely. If you already get a token from the Clinic Server, you can reuse the token.
 
-    To get a token, click the icon in the lower-right corner of the Cluster page, and select **Get Access Token For Diag Tool**. Then, click **+** in the pop-up window, and copy and save the displayed token information.
+    To get a token, click the icon in the lower-right corner of the Cluster page, select **Get Access Token For Diag Tool**, and click **+** in the pop-up window. Make sure that you have copied and saved the token that is displayed.
 
     ![An example of a token](/media/clinic-get-token.png)
 
@@ -64,21 +64,20 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
 5. Set the token and `region` in Diag.
 
-    - To set the `clinic.token`, use the following command:
+    - Run the following command to set the `clinic.token`:
 
         ```bash
         tiup diag config clinic.token ${token-value}
         ```
 
-    - To set the `clinic.region`, use the following command:
+    - Run the following command to set the `clinic.region`:
 
-    `region` determines the encryption certification used and the target service when uploading the data. For example:
+    `region` determines the encryption certificate used for packing data and the target service when uploading the data. For example:
 
     > **Note:**
     >
-    > - Setting `region` is supported in Diag v0.9.0 and later versions.
-    > - For versions earlier than Diag v0.9.0, the data is uploaded to Clinic Server in the Chinese mainland by default.
-    > - To set `region` in Diag earlier than v0.9.0, using `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
+    > - Diag v0.9.0 and later versions support setting `region`.
+    > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab>
     <div label="Clinic Server in the US">
@@ -150,7 +149,7 @@ Before using PingCAP Clinic, you need to install Diag and prepare an environment
 
 4. View the results of Health Report
 
-    After the data is uploaded, Clinic Server processes the data automatically in the background. The Health Report will be generated in approximately 5 to 15 minutes. You can view the report by opening the diagnostic data link and click the "Health Report".
+    After data is uploaded, Clinic Server processes the data automatically in the background. The Health Report is generated in approximately 5 to 15 minutes. You can view the report by opening the diagnostic data link and click the "Health Report".
 
 ## What's next
 
