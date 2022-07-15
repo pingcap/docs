@@ -46,7 +46,7 @@ Alternatively, you can log in to the TiDB Cloud console, and then click **Resume
 - No uptime SLA guarantee.
 - No high availability or automatic failover.
 - Upgrades to clusters might incur significant downtimes.
-- Each cluster allows one automatic daily backup and two manual backups.
+- The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 - The maximum number of connections to the Developer Tier cluster is 50.
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering to connect to clusters.
@@ -54,7 +54,6 @@ Alternatively, you can log in to the TiDB Cloud console, and then click **Resume
 - You cannot use a third-party monitoring service.
 - You cannot customize the port number of a TiDB cluster.
 - The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
-- The cluster will be backed up and shut down after 7 days of inactivity. To use the cluster again, you can restore it from previous backups.
 
 ## Dedicated Tier
 
