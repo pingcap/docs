@@ -59,7 +59,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 
 ### Step 2. Configure Amazon S3 access
 
-To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket.
+To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket.
 
 1. In the TiDB Cloud Console, get the TiDB Cloud account ID and external ID of the target TiDB cluster.
 
@@ -149,7 +149,8 @@ To allow TiDB cloud to access the source data in your Amazon S3 bucket, take the
     - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
 
-2. Click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL. If any access errors are returned, check and update your access configuration in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access). Then validate the access again.
+2. Click **Validate** to verify whether TiDB Cloud has the access to the source data in your specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+
 3. After the validation passes, click **Import** to start the import task.
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
