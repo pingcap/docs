@@ -5,7 +5,7 @@ summary: Learn how to troubleshoot access denied errors when importing data from
 
 # Troubleshoot Access Denied Errors during Data Import from Amazon S3
 
-This document describes how to troubleshoot access denied errors that might occur when you [import data from Amazon S3 into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud).
+This document describes how to troubleshoot access denied errors that might occur when you import data from Amazon S3 into TiDB Cloud.
 
 After clicking **Validate** on the **Data Import Task** page on the TiDB Cloud console, if you see an error message with the keyword `AccessDenied`, an access denied error has occurred.
 
@@ -13,7 +13,9 @@ To troubleshoot the access denied errors, perform the following checks in the AW
 
 ## Check the policy of the IAM role
 
-In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find the role you have created for the target TiDB cluster, and check the **Permission policies**. Check each policy and make sure that the `Resource` fields in each policy are correctly configured. The following is a sample policy:
+In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find the role you have created for the target TiDB cluster, and check the **Permission policies**. Check each policy and make sure that the `Resource` fields in each policy are correctly configured.
+
+The following is a sample policy.
 
 ```
 {
@@ -26,9 +28,7 @@ In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**
                 "s3:GetObject",
                 "s3:GetObjectVersion"
             ],
-            "Resource": [
-                "arn:aws:s3:::tidbcloud-samples-sun-encry-kms-bucket/*"
-            ]
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
         },
         {
             "Sid": "VisualEditor1",
@@ -37,9 +37,7 @@ In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**
                 "s3:ListBucket",
                 "s3:GetBucketLocation"
             ],
-            "Resource": [
-                "arn:aws:s3:::tidbcloud-samples-sun-encry-kms-bucket"
-            ]
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
         },
         {
             "Sid": "AllowKMSkey",
@@ -53,12 +51,24 @@ In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**
 }
 ```
 
-In this sample policy:
+In this sample policy, pay attention to the following:
 
-- Pay attention to the line of `"arn:aws:s3:::tidbcloud-samples-sun-encry-kms-bucket/*"`. This is a directory that you can customize in your S3 bucket root level for data storage. The directory needs to end with `/*`, for example, `"arn:aws:s3:::<bucket>/<sub-dir>/*"`. If you fill in with `"arn:aws:s3:::<bucket-name>"` only, the `AccessDenied` error occurs.
-- The line of `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is the KMS key of the bucket.
-    - If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure that you have granted the `kms:Decrypt` permission to the role you have used to import data to TiDB Cloud.
-    - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
+- In `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`, `"arn:aws:s3:::tidb-cloud-source-data"` is a sample S3 bucket ARN, and `/mydata/*` is a directory that you can customize in your S3 bucket root level for data storage. The directory needs to end with `/*`, for example, `"<Your S3 bucket ARN>/<Directory of your source data>/*"`. If `/*` is not added, the `AccessDenied` error occurs.
+
+- If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy. `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is a sample KMS key of the bucket.
+
+    ```
+        {
+            "Sid": "AllowKMSkey",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+        }
+    ```
+
+    If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
 
 If your policy is not correctly configured as the preceding example shows, correct the `Resource` fields in your policy and try importing data again.
 
