@@ -15,7 +15,7 @@ To troubleshoot the access denied errors, perform the following checks in the AW
 
 In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find the role you have created for the target TiDB cluster, and check the **Permission policies**. Check each policy and make sure that the `Resource` fields in each policy are correctly configured.
 
-The following is an example policy.
+The following is a sample policy.
 
 ```
 {
