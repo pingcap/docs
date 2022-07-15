@@ -101,7 +101,7 @@ To stop the `tikv-importer` process, you can choose the corresponding operation 
 
 To stop the `tidb-lightning` process, you can choose the corresponding operation according to your deployment method.
 
-- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lighting` command and then terminate the process using the `kill -2 ${PID}` command.
+- For manual deployment: if `tidb-lightning` is running in foreground, press <kbd>Ctrl</kbd>+<kbd>C</kbd> to exit. Otherwise, obtain the process ID using the `ps aux | grep tidb-lightning` command and then terminate the process using the `kill -2 ${PID}` command.
 
 ## Why the `tidb-lightning` process suddenly quits while running in background?
 

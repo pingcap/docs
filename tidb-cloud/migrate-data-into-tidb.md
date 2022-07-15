@@ -107,7 +107,7 @@ The following steps show how to import data to TiDB Cloud using TiDB Lightning T
         {{< copyable "shell-regular" >}}
 
         ```shell
-        vim tidb-lighting.toml
+        vim tidb-lightning.toml
         ```
 
     2. Configure the importing information.       
