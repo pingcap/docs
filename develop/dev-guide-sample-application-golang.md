@@ -13,7 +13,7 @@ This document describes how to use TiDB and Golang to build a simple CRUD applic
 
 > **Note:**
 >
-> It is recommended to use Golang 1.16 or a later Golang SDK version.
+> It is recommended to use Golang 1.16 or a later version.
 
 ## Step 1. Launch your TiDB cluster
 
