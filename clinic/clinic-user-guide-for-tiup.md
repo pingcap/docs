@@ -5,13 +5,13 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # Troubleshoot TiDB Cluster Using PingCAP Clinic
 
-For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using Diag client (Diag) and Clinic Server. For details about Diag and Clinic Server, see [PingCAP Clinic components](/clinic/clinic-introduction.md).
+For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clinic Diagnostic Service (PingCAP Clinic) to troubleshoot cluster problems remotely and perform a quick check on cluster status locally using Diag client (Diag) and Clinic Server.
 
 > **Note:**
 >
 > - This document **only** applies to clusters deployed using TiUP in an on-premises environment. For clusters deployed using TiDB Operator in Kubernetes, see [PingCAP Clinic for TiDB Operator environments](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide).
 >
-> - PingCAP Clinic **does not support** collecting data from the clusters deployed using TiDB Ansible.
+> - PingCAP Clinic **does not support** collecting data from clusters deployed using TiDB Ansible.
 
 ## User scenarios
 
@@ -22,7 +22,7 @@ For TiDB clusters and DM clusters deployed using TiUP, you can use PingCAP Clini
 
 - [Perform a quick check on the cluster status locally](#perform-a-quick-check-on-the-cluster-status-locally)
 
-    Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. You can check the potential health risks of a cluster using the local quick check feature provided by PingCAP Clinic, which only checks configuration. For more detailed checks, it is recommended to upload the diagnostic data to the Clinic Server and use the Health Report feature to analyze metrics, logs, and configuration.
+    Even if your cluster is running stably for now, it is necessary to periodically check the cluster to detect potential stability risks. You can identify potential health risks of a cluster using the local quick check feature provided by PingCAP Clinic. The local check only checks configuration. To check more items, such as metrics and logs, it is recommended to upload the diagnostic data to the Clinic Server and use the Health Report feature.
 
 ## Prerequisites
 
@@ -51,25 +51,25 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
     When uploading collected data through Diag, you need a token for user authentication. If you already set a token Diag, you can reuse the token and skip this step.
 
-    To get a token, follow the steps below:
+    To get a token, perform the following steps:
 
-    - Login in to the Clinic Server.
+    - Log in to the Clinic Server.
 
         <SimpleTab>
         <div label="Clinic Server in the US">
 
-        [Clinic Server in the US](https://clinic.pingcap.com): the collected data is stored in AWS US regions.
+        [Clinic Server in the US](https://clinic.pingcap.com): Data is stored in AWS in US.
 
         </div>
         <div label="Clinic Server in the Chinese mainland">
 
-        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): the collected data is stored in AWS China (Beijing) regions.
+        [Clinic Server in the Chinese mainland](https://clinic.pingcap.com.cn): Data is stored in AWS in China (Beijing) regions.
 
         </div>
 
         </SimpleTab>
 
-    - Click the icon in the lower-right corner of the Cluster page and select **Get Access Token For Diag Tool**, click **+** in the pop-up window. Make sure that you have copied and saved the displayed token information.
+    - Click the icon in the lower-right corner of the Cluster page, select **Get Access Token For Diag Tool**, and click **+** in the pop-up window. Make sure that you have copied and saved the token that is displayed.
 
         ![Get the Token](/media/clinic-get-token.png)
 
@@ -87,13 +87,12 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 3. Set the `region` in Diag.
 
-    `region` determines the encryption certification used and the target service when uploading the data. For example:
+    `region` determines the encryption certificate used for packing data and the target service when uploading the data. For example:
 
     > **Note:**
     >
-    > - Setting `region` is supported in Diag v0.9.0 and later versions.
-    > - For versions earlier than Diag v0.9.0, the data is uploaded to Clinic Server in the Chinese mainland by default.
-    > - To set `region` in Diag earlier than v0.9.0, using `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
+    > - Diag v0.9.0 and later versions support setting `region`.
+    > - For versions earlier than Diag v0.9.0, data is uploaded to Clinic Server in the Chinese region by default. To set `region` in these versions, run the `tiup update diag` command to upgrade Diag to the latest version and then set `region` in Diag.
 
     <SimpleTab>
     <div label="Clinic Server in the US">
@@ -238,7 +237,7 @@ Depending on the network connection of the cluster, you can choose one of the fo
 
 > **Note:**
 >
-> If you did not set a token or `region` in Diag before uploading data, Diag reports the upload failure and reminds you to set. To set a token, see [the second step in Prerequisites](#prerequisites).
+> If you did not set a token or `region` in Diag before uploading data, Diag reports the upload failure and reminds you to set a token or `region`. To set a token, see [the second step in Prerequisites](#prerequisites).
 
 #### Method 1. Upload directly
 
@@ -291,7 +290,7 @@ If the network where your cluster is located cannot access the internet, you nee
 
 ## Perform a quick check on the cluster status locally
 
-You can have a quick check on the cluster status locally using Diag. Even if your cluster runs stably now, it is necessary to periodically check the cluster to avoid potential stability risks. The PingCAP Clinic Technical Preview version provides a rationality check on cluster configuration items to discover unreasonable configurations and provide modification suggestions.
+You can have a quick check on the cluster status locally using Diag. Even if your cluster is running stably for now, it is necessary to periodically check the cluster to detect potential stability risks. You can identify potential health risks of a cluster using the local quick check feature provided by PingCAP Clinic. The local check only checks configuration. To check more items, such as metrics and logs, it is recommended to upload the diagnostic data to the Clinic Server and use the Health Report feature.
 
 1. Collect configuration data:
 
@@ -367,7 +366,7 @@ You can have a quick check on the cluster status locally using Diag. Even if you
 
 2. After uploading data, I cannot open the returned data access link. What should I do?
 
-    Try logging in to Clinic Server first. If you still cannot open the link, check whether you have permission to view the data. If not, contact the data owner for permission. After getting the permission, try logging in to Clinic Server and opening the link again.
+    Log in to Clinic Server first. If you still cannot open the link after login success, check whether you have access to data. If not, contact the data owner for permission. After getting the permission, log in to Clinic Server and open the link again.
 
 3. How long will the uploaded data be kept on the Clinic Server?
 
