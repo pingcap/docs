@@ -55,7 +55,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 > **Note:**
 >
 > - Ensure that your source data can be copied to a file format supported by TiDB Cloud. The supported formats include CSV, Dumpling, and Aurora Backup Snapshot. If your source files are in the CSV format, you need to follow [the naming convention supported by TiDB](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name).
-> - Where possible and applicable, it is recommended that you split a large source file into smaller files of maximum size 256 MB because it allows TiDB Cloud to read files in parallel across threads, thereby resulting in potentially enhanced import performance.
+> - Where possible and applicable, it is recommended that you split a large source file into smaller files of maximum size 256 MB. It allows TiDB Cloud to read files in parallel across threads, thereby resulting in potentially enhanced import performance.
 
 ### Step 2. Configure Amazon S3 access
 
