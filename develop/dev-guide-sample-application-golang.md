@@ -179,7 +179,7 @@ func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
 }
 ```
 
-Subsequently, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) for adapting TiDB transactions and write the following code:
+To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
 
 {{< copyable "" >}}
 
