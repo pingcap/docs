@@ -797,7 +797,7 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 </div>
 
-<div label="Using gorm (Recommended)" href="tidb-cloud-gorm">
+<div label="Using GORM (Recommended)" href="tidb-cloud-gorm">
 
 If you are using a non-local default cluster, such as TiDB Cloud or other remote clusters, modify the value of the `dsn` in `gorm.go`:
 
