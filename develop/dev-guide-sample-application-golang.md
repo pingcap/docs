@@ -489,7 +489,7 @@ const (
 
 <div label="Using GORM (Recommended)" href="get-code-gorm">
 
-Compared with gorm, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic and close `*sql.Rows` manually. Besides, cannot reuse code easily, which makes your code slightly redundant.
+Compared with GORM, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic, close `*sql.Rows` manually and cannot reuse code easily, which makes your code slightly redundant.
 
 gorm is a popular open-source Golang ORM. The following instructions take `v1.23.5` as an example.
 
