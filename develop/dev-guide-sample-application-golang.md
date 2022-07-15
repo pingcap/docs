@@ -234,7 +234,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 }
 ```
 
-Define a set of data management methods in `dao.go` to provide the ability to write to TiDB. This is also the core part of this example:
+`dao.go` defines a set of data manipulation methods to provide the ability to write data. This is also the core part of this example.
 
 {{< copyable "" >}}
 
