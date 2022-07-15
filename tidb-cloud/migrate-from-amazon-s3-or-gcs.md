@@ -153,7 +153,7 @@ Your TiDB Cloud cluster can now access the Amazon S3 bucket.
 > **Note:**
 > 
 > - To minimize egress charges and latency, locate your Amazon S3 bucket and TiDB Cloud database cluster in the same region.
-> - If you have encountered the `AccessDenied` error during the data import process, see [Troubleshoot Permission Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-permission-error.md).
+> - If you have encountered the `AccessDenied` error during the data import process, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-permission-error.md).
 
 ## Import or migrate from GCS to TiDB Cloud
 

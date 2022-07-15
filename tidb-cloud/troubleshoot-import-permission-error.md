@@ -1,15 +1,15 @@
 ---
-title: Troubleshoot Permission Errors during Data Import from Amazon S3
-summary: Learn how to troubleshoot permission errors when importing data from Amazon S3 to TiDB Cloud.
+title: Troubleshoot Access Denied Errors during Data Import from Amazon S3
+summary: Learn how to troubleshoot access denied errors when importing data from Amazon S3 to TiDB Cloud.
 ---
 
-# Troubleshoot Permission Errors during Data Import from Amazon S3
+# Troubleshoot Access Denied Errors during Data Import from Amazon S3
 
-This document describes how to troubleshoot permission errors that might occur when you [import data from Amazon S3 into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud).
+This document describes how to troubleshoot access denied errors that might occur when you [import data from Amazon S3 into TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud).
 
-After clicking **Validate** on the **Data Import Task** page on the TiDB Cloud console, if you see an error message with the keyword `AccessDenied`, a permission error has occurred.
+After clicking **Validate** on the **Data Import Task** page on the TiDB Cloud console, if you see an error message with the keyword `AccessDenied`, an access denied error has occurred.
 
-To troubleshoot the permission error, perform the following checks in the AWS Management Console.
+To troubleshoot the access denied errors, perform the following checks in the AWS Management Console.
 
 ## Check the policy of the IAM role
 
@@ -119,7 +119,7 @@ There are more than one way to encrypt an S3 bucket. When you try to access the 
 
 To check the encryption type of your bucket, open the Amazon S3 console in the AWS Management console, choose the name of the target bucket, choose **Properties**, and you will see the **Default encryption** page that shows the encryption type of the bucket.
 
-There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) and AWS Key Management Service (SSE-KMS). For SSE-S3, further check is not needed because this encryption type does not cause permission errors. For SSE-KMS, you need to check the following:
+There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) and AWS Key Management Service (SSE-KMS). For SSE-S3, further check is not needed because this encryption type does not cause access denied errors. For SSE-KMS, you need to check the following:
 
 - If the AWS KMS key ARN on the page is displayed in black without an underline, the AWS KMS key is an AWS-managed key (aws/s3).
 - If the AWS KMS key ARN on the page is displayed in blue with an underline, click the key ARN to see the specific encryption type. It might be an AWS managed key (aws/s3) or a customer-managed key.
@@ -129,7 +129,7 @@ There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) an
 
 In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants are not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
 
-To solve the permission error, click **Edit** in the upper-right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
+To solve the access denied error, click **Edit** in the upper-right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
 </details>
 
 <details>
