@@ -162,7 +162,7 @@ public class EffectWriteSkew {
 
 <div label="Golang" href="write-skew-golang">
 
-Write a [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) for adapting TiDB transactions. And then, write the following code:
+To adapt TiDB transactions, write a [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
 
 {{< copyable "" >}}
 
