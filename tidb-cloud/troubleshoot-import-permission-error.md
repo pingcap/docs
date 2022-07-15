@@ -13,7 +13,7 @@ To troubleshoot the permission error, perform the following checks in the AWS Ma
 
 ## Check the policy of the IAM role
 
-In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find the role you have created for the target TiDB cluster, and check the **Permission policies**. Check each policy and make sure that the `Resource` fields in each policy is correctly configured. The following is a sample policy:
+In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find the role you have created for the target TiDB cluster, and check the **Permission policies**. Check each policy and make sure that the `Resource` fields in each policy are correctly configured. The following is a sample policy:
 
 ```
 {
@@ -111,7 +111,7 @@ In the AWS Management Console, open the Amazon S3 console, go to **Bucket** > **
 
 If the configuration is not "Bucket owner enforced", the `AccessDenied` error occurs, because your account does not have enough permissions for all objects in this bucket.
 
-To handle the error, click **Edit** on the upper right corner of the Object Ownership area and change the ownership to "Bucket owner enforced". Note that this might affect your other applications that are using this bucket.
+To handle the error, click **Edit** in the upper-right corner of the Object Ownership area and change the ownership to "Bucket owner enforced". Note that this might affect your other applications that are using this bucket.
 
 ## Check your bucket encryption type
 
@@ -129,13 +129,13 @@ There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) an
 
 In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants are not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
 
-To solve the permission error, click **Edit** on the upper right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
+To solve the permission error, click **Edit** in the upper-right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
 </details>
 
 <details>
 <summary>For the customer-managed key in SSE-KMS</summary>
 
-To solve the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** on the upper right corner of the page to add the role you have used to import data to TiDB Cloud. Then, try importing data again.
+To solve the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** in the upper-right corner of the page to add the role you have used to import data to TiDB Cloud. Then, try importing data again.
 
 </details>
 
@@ -145,4 +145,4 @@ To solve the `AccessDenied` error in this situation, click the key ARN or manual
 
 ## Check the AWS article for instruction
 
-If you have performed all the checks above and still get the `AccessDenied` error, you can check the AWS article [How do I troubleshoot 403 Access Denied errors from Amazon S3](https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/) for instruction.
+If you have performed all the checks above and still get the `AccessDenied` error, you can check the AWS article [How do I troubleshoot 403 Access Denied errors from Amazon S3](https://aws.amazon.com/premiumsupport/knowledge-center/s3-troubleshoot-403/) for more instruction.
