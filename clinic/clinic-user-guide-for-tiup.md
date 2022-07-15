@@ -5,13 +5,13 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング {#troubleshoot-tidb-cluster-using-pingcap-clinic}
 
-TiUPを使用して展開されたTiDBクラスターおよびDMクラスターの場合、 PingCAPクリニック Diagnostic Service（PingCAPクリニック）を使用して、クラスタの問題をリモートでトラブルシューティングし、Diagクライアント（Diag）および[クリニックサーバー中国](https://clinic.pingcap.com.cn) （Clinic Server）を使用してローカルでクラスタステータスのクイックチェックを実行できます。 Diag and Clinic Serverの詳細については、 [PingCAPクリニックのコンポーネント](/clinic/clinic-introduction.md)を参照してください。
-
-PingCAPクリニックは現在テクニカルプレビュー段階にあります。
+TiUPを使用してデプロイされたTiDBクラスターおよびDMクラスターの場合、 PingCAPクリニック Diagnostic Service（PingCAPクリニック）を使用して、クラスタの問題をリモートでトラブルシューティングし、Diagクライアント（Diag）およびClinicServerを使用してローカルでクラスタステータスをすばやく確認できます。
 
 > **ノート：**
 >
-> PingCAPクリニックは、TiDBAnsibleを使用してデプロイされたクラスターからのデータの収集**をサポートしていません**。
+> -   このドキュメントは、オンプレミス環境でTiUPを使用してデプロイされたクラスターに**のみ**適用されます。 KubernetesでTiDB Operatorを使用してデプロイされたクラスターについては、 [TiDBTiDB Operator環境向けのPingCAPクリニック](https://docs.pingcap.com/tidb-in-kubernetes/stable/clinic-user-guide)を参照してください。
+>
+> -   PingCAPクリニックは、TiDBAnsibleを使用してデプロイされたクラスターからのデータの収集**をサポートしていません**。
 
 ## ユーザーシナリオ {#user-scenarios}
 
@@ -22,25 +22,21 @@ PingCAPクリニックは現在テクニカルプレビュー段階にありま�
 
 -   [ローカルでクラスタステータスのクイックチェックを実行します](#perform-a-quick-check-on-the-cluster-status-locally)
 
-    現在クラスタが安定して稼働している場合でも、潜在的な安定性のリスクを回避するために、クラスタを定期的にチェックする必要があります。 PingCAPクリニックが提供するローカルクイックチェック機能を使用して、クラスタの潜在的な健康リスクをチェックできます。 PingCAPクリニック Technical Previewバージョンは、クラスタ構成アイテムの合理性チェックを提供して、不合理な構成を発見し、変更の提案を提供します。
+    現在、クラスタを定期的にチェックして、潜在的な安定性のリスクを検出する必要があります。 PingCAPクリニックが提供するローカルクイックチェック機能を使用して、クラスタの潜在的な健康リスクを特定できます。ローカルチェックは構成のみをチェックします。メトリックやログなどのその他の項目を確認するには、診断データをクリニックサーバーにアップロードし、ヘルスレポート機能を使用することをお勧めします。
 
 ## 前提条件 {#prerequisites}
 
-PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックによって提供されるデータを収集するためのコンポーネント）をインストールし、データをアップロードするための環境を準備する必要があります。
+PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックが提供するデータを収集するためのコンポーネント）をインストールし、データをアップロードするための環境を準備する必要があります。
 
 1.  Diagをインストールします。
 
     -   制御マシンにTiUPをインストールした場合は、次のコマンドを実行してDiagをインストールします。
-
-        {{< copyable "" >}}
 
         ```bash
         tiup install diag
         ```
 
     -   Diagをインストールしている場合は、次のコマンドを使用してDiagを最新バージョンにアップグレードできます。
-
-        {{< copyable "" >}}
 
         ```bash
         tiup update diag
@@ -55,9 +51,27 @@ PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックに�
 
     収集したデータをDiag経由でアップロードする場合、ユーザー認証用のトークンが必要です。トークンDiagをすでに設定している場合は、トークンを再利用してこの手順をスキップできます。
 
-    トークンを取得するには、 [クリニックサーバー](https://clinic.pingcap.com.cn)にログインし、クラスターページの右下隅にあるアイコンをクリックします。次に、[**診断ツールのアクセストークンの取得**]を選択し、ポップアップウィンドウで[ <strong>+</strong> ]をクリックします。表示されたトークン情報をコピーして保存したことを確認してください。
+    トークンを取得するには、次の手順を実行します。
 
-    ![Get the Token](/media/clinic-get-token.png)
+    -   クリニックサーバーにログインします。
+
+        <SimpleTab>
+          <div label="Clinic Server in the US">
+
+        [米国のクリニックサーバー](https://clinic.pingcap.com) ：データは米国のAWSに保存されます。
+
+        </div>
+          <div label="Clinic Server in the Chinese mainland">
+
+        [中国本土のクリニックサーバー](https://clinic.pingcap.com.cn) ：データは中国（北京）地域のAWSに保存されます。
+
+        </div>
+
+        </SimpleTab>
+
+    -   [クラスター]ページの右下隅にあるアイコンをクリックし、[**診断ツールのアクセストークンの取得**]を選択して、ポップアップウィンドウで[ <strong>+</strong> ]をクリックします。表示されたトークンをコピーして保存したことを確認してください。
+
+        ![Get the Token](/media/clinic-get-token.png)
 
     > **ノート：**
     >
@@ -65,15 +79,44 @@ PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックに�
     > -   データセキュリティのために、TiDBはトークンの作成時にのみトークンを表示します。トークンを紛失した場合は、古いトークンを削除して新しいトークンを作成してください。
     > -   トークンは、データのアップロードにのみ使用されます。
 
-    次に、Diagでトークンを設定します。例えば：
+    -   次に、Diagでトークンを設定します。例えば：
 
-    {{< copyable "" >}}
+        ```bash
+        tiup diag config clinic.token ${token-value}
+        ```
+
+3.  Diagに`region`を設定します。
+
+    `region`は、データのアップロード時にデータとターゲットサービスをパックするために使用される暗号化証明書を決定します。例えば：
+
+    > **ノート：**
+    >
+    > -   Diag v0.9.0以降のバージョンは、設定`region`をサポートしています。
+    > -   Diag v0.9.0より前のバージョンの場合、データはデフォルトで中国地域のClinicServerにアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行してDiagを最新バージョンにアップグレードしてから、Diagで`region`を設定します。
+
+    <SimpleTab>
+     <div label="Clinic Server in the US">
+
+    米国のClinicServerの場合、次のコマンドを使用して`region`から`US`に設定します。
 
     ```bash
-    tiup diag config clinic.token ${token-value}
+    tiup diag config clinic.region US
     ```
 
-3.  （オプション）ログの編集を有効にします。
+    </div>
+     <div label="Clinic Server in the Chinese mainland">
+
+    中国本土のクリニックサーバーの場合、次のコマンドを使用して`region`から`CN`に設定します。
+
+    ```bash
+    tiup diag config clinic.region CN
+    ```
+
+    </div>
+
+    </SimpleTab>
+
+4.  （オプション）ログの編集を有効にします。
 
     TiDBが詳細なログ情報を提供する場合、機密情報（ユーザーデータなど）をログに出力する場合があります。ローカルログとクリニックサーバーで機密情報が漏洩するのを防ぎたい場合は、TiDB側でログの編集を有効にすることができます。詳細については、 [ログ編集](/log-redaction.md#log-redaction-in-tidb-side)を参照してください。
 
@@ -96,8 +139,6 @@ Diagを使用すると、TiUPを使用してデプロイされたTiDBクラス�
 1.  Diagのデータ収集コマンドを実行します。
 
     たとえば、現在の時刻に基づいて4時間前から2時間前までの診断データを収集するには、次のコマンドを実行します。
-
-    {{< copyable "" >}}
 
     ```bash
     tiup diag collect ${cluster-name} -f="-4h" -t="-2h"
@@ -125,8 +166,6 @@ Diagを使用すると、TiUPを使用してデプロイされたTiDBクラス�
 
     コマンドを実行した後、Diagはすぐにデータの収集を開始しません。代わりに、Diagは、続行するかどうかを確認するために、出力に推定データサイズとターゲットデータストレージパスを提供します。例えば：
 
-    {{< copyable "" >}}
-
     ```bash
     Estimated size of data to collect:
     Host               Size       Target
@@ -146,8 +185,6 @@ Diagを使用すると、TiUPを使用してデプロイされたTiDBクラス�
 
     収集が完了すると、Diagは収集されたデータが配置されているフォルダーパスを提供します。例えば：
 
-    {{< copyable "" >}}
-
     ```bash
     Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
     ```
@@ -157,8 +194,6 @@ Diagを使用すると、TiUPを使用してデプロイされたTiDBクラス�
 1.  Diagのデータ収集コマンドを実行します。
 
     たとえば、現在の時刻に基づいて4時間前から2時間前までの診断データを収集するには、次のコマンドを実行します。
-
-    {{< copyable "" >}}
 
     ```bash
     tiup diag collectdm ${cluster-name} -f="-4h" -t="-2h"
@@ -173,8 +208,6 @@ Diagを使用すると、TiUPを使用してデプロイされたTiDBクラス�
     データの収集には一定の時間がかかります。時間は、収集するデータの量によって異なります。たとえば、テスト環境では、1GBのデータを収集するのに約10分かかります。
 
     収集が完了すると、Diagは収集されたデータが配置されているフォルダーパスを提供します。例えば：
-
-    {{< copyable "" >}}
 
     ```bash
     Collected data are stored in /home/qiaodan/diag-fNTnz5MGhr6
@@ -204,7 +237,7 @@ Diagを使用すると、TiUPを使用してデプロイされたTiDBクラス�
 
 > **ノート：**
 >
-> データをアップロードする前にDiagでトークンを設定しなかった場合、Diagはアップロードの失敗を報告し、トークンを設定するように通知します。トークンを設定するには、 [前提条件の2番目のステップ](#prerequisites)を参照してください。
+> データをアップロードする前にDiagでトークンまたは`region`を設定しなかった場合、Diagはアップロードの失敗を報告し、トークンまたは`region`を設定するように通知します。トークンを設定するには、 [前提条件の2番目のステップ](#prerequisites)を参照してください。
 
 #### 方法1.直接アップロードする {#method-1-upload-directly}
 
@@ -224,8 +257,6 @@ tiup diag upload
 
 1.  次のコマンドを実行して、 [ステップ2.データを収集する](#step-2-collect-data)で取得した収集データをパックします。
 
-    {{< copyable "" >}}
-
     ```bash
     tiup diag package ${filepath}
     ```
@@ -241,15 +272,11 @@ tiup diag upload
 
 2.  インターネットにアクセスできるマシンから、圧縮データパッケージをアップロードします。
 
-    {{< copyable "" >}}
-
     ```bash
     tiup diag upload ${filepath}
     ```
 
     次に、出力例を示します。
-
-    {{< copyable "" >}}
 
     ```bash
     [root@Copy-of-VM-EE-CentOS76-v1 qiaodan]# tiup diag upload /home/qiaodan/diag-fNTnz5MGhr6
@@ -263,11 +290,9 @@ tiup diag upload
 
 ## ローカルでクラスタステータスのクイックチェックを実行します {#perform-a-quick-check-on-the-cluster-status-locally}
 
-Diagを使用して、ローカルでクラスタステータスをすばやく確認できます。現在クラスタが安定して稼働している場合でも、潜在的な安定性のリスクを回避するために、クラスタを定期的にチェックする必要があります。 PingCAPクリニック Technical Previewバージョンは、クラスタ構成アイテムの合理性チェックを提供して、不合理な構成を発見し、変更の提案を提供します。
+Diagを使用して、ローカルでクラスタステータスをすばやく確認できます。現在、クラスタを定期的にチェックして、潜在的な安定性のリスクを検出する必要があります。 PingCAPクリニックが提供するローカルクイックチェック機能を使用して、クラスタの潜在的な健康リスクを特定できます。ローカルチェックは構成のみをチェックします。メトリックやログなどのその他の項目を確認するには、診断データをクリニックサーバーにアップロードし、ヘルスレポート機能を使用することをお勧めします。
 
 1.  構成データを収集します。
-
-    {{< copyable "" >}}
 
     ```bash
     tiup diag collect ${cluster-name} --include="config"
@@ -276,8 +301,6 @@ Diagを使用して、ローカルでクラスタステータスをすばやく�
     構成ファイルのデータは比較的小さいです。収集後、収集されたデータはデフォルトで現在のパスに保存されます。テスト環境では、18ノードのクラスタの場合、構成ファイルのデータサイズは10KB未満です。
 
 2.  構成データの診断：
-
-    {{< copyable "" >}}
 
     ```bash
     tiup diag check ${subdir-in-output-data}
@@ -288,8 +311,6 @@ Diagを使用して、ローカルでクラスタステータスをすばやく�
 3.  診断結果をビューします。
 
     診断結果はコマンドラインに返されます。例えば：
-
-    {{< copyable "" >}}
 
     ```bash
     Starting component `diag`: /root/.tiup/components/diag/v0.7.0/diag check diag-fNTnz5MGhr6
@@ -345,8 +366,8 @@ Diagを使用して、ローカルでクラスタステータスをすばやく�
 
 2.  データをアップロードした後、返されたデータアクセスリンクを開くことができません。私は何をすべきか？
 
-    最初に[クリニックサーバー](https://clinic.pingcap.com.cn)にログインしてみてください。それでもリンクを開くことができない場合は、データを表示する権限があるかどうかを確認してください。そうでない場合は、許可を得るためにデータ所有者に連絡してください。許可を得た後、クリニックサーバーにログインしてリンクを再度開いてみてください。
+    最初にクリニックサーバーにログインします。ログインに成功してもリンクを開くことができない場合は、データにアクセスできるかどうかを確認してください。そうでない場合は、許可を得るためにデータ所有者に連絡してください。許可を得た後、クリニックサーバーにログインし、リンクを再度開きます。
 
 3.  アップロードされたデータはクリニックサーバーにどのくらいの期間保持されますか？
 
-    テクニカルサポートケースがクローズされた後、PingCAPは90日以内に対応するデータを完全に削除または匿名化します。
+    最長時間は180日です。クリニックサーバーページにアップロードしたデータはいつでも削除できます。

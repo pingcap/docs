@@ -34,6 +34,7 @@
         -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
         -   [AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
         -   [AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
+        -   [AmazonS3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     -   [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
 -   データのバックアップと復元
     -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)

@@ -5,7 +5,7 @@ summary: Learn how to import or migrate data from Amazon Simple Storage Service 
 
 # AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-amazon-s3-or-gcs-to-tidb-cloud}
 
-このドキュメントでは、データをTiDB Cloudにインポートまたは移行するためのステージング領域としてAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）を使用する方法について説明します。
+このドキュメントでは、データをTiDB Cloudにインポートまたは移行するためのステージング領域として、Amazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）を使用する方法について説明します。
 
 > **ノート：**
 >
@@ -17,10 +17,7 @@ summary: Learn how to import or migrate data from Amazon Simple Storage Service 
 
 ### 前提条件 {#prerequisites}
 
-AmazonS3からTiDB Cloudにデータを移行する前に、次のことを確認してください。
-
--   企業所有のAWSアカウントへの管理者アクセス権があります。
--   管理者はTiDB Cloud管理ポータルにアクセスできます。
+AmazonS3からTiDB Cloudにデータを移行する前に、企業所有のAWSアカウントへの管理者アクセス権があることを確認してください。
 
 ### ステップ1.AmazonS3バケットを作成し、ソースデータファイルを準備します {#step-1-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
@@ -28,131 +25,137 @@ AmazonS3からTiDB Cloudにデータを移行する前に、次のことを確�
 
     詳細については、AWSユーザーガイドの[バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
+    > **ノート：**
+    >
+    > 出力料金とレイテンシーを最小限に抑えるには、AmazonS3バケットとTiDB Cloudデータベースクラスタを同じリージョンに作成します。
+
 2.  アップストリームデータベースからデータを移行する場合は、最初にソースデータをエクスポートする必要があります。
 
-    詳細については、 [TiUPをインストールします](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup)および[MySQL互換データベースからデータをエクスポートする](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases)を参照してください。
+    詳細については、 [MySQL互換データベースからデータを移行する](/tidb-cloud/migrate-data-into-tidb.md)を参照してください。
 
-> **ノート：**
->
-> -   ソースデータをTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、Dumpling、 Auroraバックアップスナップショットが含まれます。ソースファイルがCSV形式の場合は、 [TiDBでサポートされている命名規則](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
-> -   可能で適用可能な場合は、大きなソースファイルを最大サイズ256 MBの小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudがスレッド間でファイルを並列に読み取ることができ、インポートパフォーマンスが向上する可能性があります。
+3.  ソースデータがローカルファイルにある場合は、AmazonS3コンソールまたはAWSCLIのいずれかを使用してファイルをAmazonS3バケットにアップロードできます。
 
-### ステップ2.AmazonS3アクセスを設定します {#step-2-configure-amazon-s3-access}
-
-TiDBクラウドがAmazonS3バケットのソースデータにアクセスできるようにするには、各TiDB CloudのAmazonS3をAWSプロジェクトとAmazonS3バケットペアのサービスとして設定する必要があります。プロジェクト内の1つのクラスタの設定が完了すると、そのプロジェクト内のすべてのデータベースクラスターがAmazonS3バケットにアクセスできるようになります。
-
-1.  ターゲットTiDBクラスタのTiDB CloudアカウントIDと外部IDを取得します。
-
-    1.  TiDB Cloud管理コンソールで、AWSにデプロイされているターゲットプロジェクトとターゲットクラスタを選択し、[**インポート**]をクリックします。
-    2.  [ **AWSIAMポリシー設定の表示]を**クリックします。ターゲットTiDBクラスタの対応するTiDB CloudアカウントIDとTiDB Cloud外部IDが表示されます。
-    3.  次の手順で使用されるため、 TiDB CloudアカウントIDと外部IDをメモしてください。
-
-2.  AWSマネジメントコンソールで、[ **IAM]** &gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、次の読み取り専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
-
-    -   s3：GetObject
-    -   s3：GetObjectVersion
-    -   s3：ListBucket
-    -   s3：GetBucketLocation
-
-    上記の権限を持つストレージバケットポリシーが存在するかどうかに応じて、次のいずれかを実行します。
-
-    -   はいの場合、次の手順で、ターゲットTiDBクラスタに一致するストレージバケットポリシーを使用できます。
-    -   そうでない場合は、[ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]&gt;[ポリシーの<strong>作成</strong>]に移動し、次のポリシーテンプレートに従ってターゲットTiDBクラスタのバケットポリシーを定義します。
-
-    {{< copyable "" >}}
-
-    ```
-    {
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:GetObject",
-                    "s3:GetObjectVersion"
-                ],
-                "Resource": "arn:aws:s3:::<Your customized directory>"
-            },
-            {
-                "Effect": "Allow",
-                "Action": [
-                    "s3:ListBucket",
-                    "s3:GetBucketLocation"
-                ],
-                "Resource": "<Your S3 bucket ARN>"
-            }
-        ]
-    }
-    ```
-
-    テンプレートでは、次の2つのフィールドを独自のリソース値に更新する必要があります。
-
-    -   `"Resource": "<Your S3 bucket ARN>"` ： `<Your S3 bucket ARN>`はS3バケットのARNです。 S3バケットの[**プロパティ**]タブに移動し、[<strong>バケットの概要</strong>]領域でAmazonリソース名（ARN）の値を取得できます。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test"` 。
-    -   `"Resource": "arn:aws:s3:::<Your customized directory>"` ： `<Your customized directory>`は、データストレージ用にS3バケットルートレベルでカスタマイズできるディレクトリです。たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"` 。データをS3バケットルートディレクトリに保存する場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`を使用します。
-
-3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがターゲットTiDBクラスタのTiDB CloudアカウントIDに対応するロールが存在するかどうかを確認します。
-
-    -   はいの場合、次の手順でターゲットTiDBクラスタに一致する役割を使用できます。
-    -   そうでない場合は、[**ロールの作成**]をクリックし、信頼エンティティタイプとして[<strong>別のAWSアカウント</strong>]を選択して、ターゲットTiDBクラスタのTiDB CloudアカウントIDを[<strong>アカウントID]</strong>フィールドに入力します。
-
-4.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]で、前の手順のロール名をクリックして<strong>[概要</strong>]ページに移動し、次の手順を実行します。
-
-    1.  [**権限**]タブで、ターゲットTiDBクラスタのストレージバケットポリシーがロールにアタッチされているかどうかを確認します。
-
-        そうでない場合は、[ポリシーの添付]を選択し、必要な**ポリシー**を検索して、[<strong>ポリシーの添付</strong>]をクリックします。
-
-    2.  [**信頼関係**]タブをクリックし、[<strong>信頼関係の編集</strong>]をクリックして、 <strong>Condition sts：ExternalId</strong>属性の値がターゲットTiDBクラスタのTiDB Cloud外部IDであるかどうかを確認します。
-
-        そうでない場合は、JSONテキストエディターで**Condition sts：ExternalId**属性を更新し、[<strong>信頼ポリシーの更新</strong>]をクリックします。
-
-        以下は、 **Condition sts：ExternalId**属性の構成例です。
-
-        {{< copyable "" >}}
-
-        ```
-        "Condition": {
-            "StringEquals": {
-            "sts:ExternalId": "696e6672612d61706993147c163238a8a7005caaf40e0338fc"
-            }
-        }
-        ```
-
-    3.  **[概要**]ページに戻り、<strong>ロールARN</strong>値をクリップボードにコピーします。
-
-5.  TiDB Cloud管理コンソールで、ターゲットTiDBクラスタのTiDB CloudアカウントIDと外部IDを取得する画面に移動し、前の手順のロール値を使用して[**ロールARN** ]フィールドを更新します。
-
-これで、 TiDB CloudクラスタがAmazonS3バケットにアクセスできるようになりました。
-
-> **ノート：**
->
-> TiDB Cloudへのアクセスを削除するには、追加した信頼ポリシーを削除するだけです。
-
-### ステップ3.ソースデータファイルをAmazonS3にコピーし、データをTiDB Cloudにインポートします {#step-3-copy-source-data-files-to-amazon-s3-and-import-data-into-tidb-cloud}
-
-1.  ソースデータファイルをAmazonS3バケットにコピーするには、AWSWebコンソールまたはAWSCLIのいずれかを使用してデータをAmazonS3バケットにアップロードできます。
-
-    -   AWS Webコンソールを使用してデータをアップロードするには、AWSユーザーガイドの[オブジェクトのアップロード](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html)を参照してください。
-    -   AWS CLIを使用してデータをアップロードするには、次のコマンドを使用します。
-
-        {{< copyable "" >}}
+    -   Amazon S3コンソールを使用してファイルをアップロードするには、AWSユーザーガイドの[オブジェクトのアップロード](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html)を参照してください。
+    -   AWS CLIを使用してファイルをアップロードするには、次のコマンドを使用します。
 
         ```shell
-        aws s3 sync <Local path> <S3 URL> 
+        aws s3 sync <Local path> <Amazon S3 bucket URL>
         ```
 
         例えば：
 
-        {{< copyable "" >}}
-
         ```shell
-        aws s3 sync ./tidbcloud-samples-us-west-2/ s3://target-url-in-s3
+        aws s3 sync ./tidbcloud-samples-us-west-2/ s3://tidb-cloud-source-data
         ```
-
-2.  TiDB Cloudコンソールから、[TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックして、独自の概要ページに移動します。左側のクラスタ情報ペインで、[**インポート**]をクリックし、[<strong>データインポートタスク</strong>]ページでインポート関連情報を入力します。
 
 > **ノート：**
 >
-> 出力料金とレイテンシーを最小限に抑えるには、AmazonS3バケットとTiDB Cloudデータベースクラスタを同じリージョンに配置します。
+> -   ソースデータをTiDB Cloudでサポートされているファイル形式にコピーできることを確認してください。サポートされている形式には、CSV、Dumpling、 Auroraバックアップスナップショットが含まれます。ソースファイルがCSV形式の場合は、 [TiDBでサポートされている命名規則](https://docs.pingcap.com/tidb/stable/migrate-from-csv-using-tidb-lightning#file-name)に従う必要があります。
+> -   可能で適用可能な場合は、大きなソースファイルを最大サイズ256MBの小さなファイルに分割することをお勧めします。これにより、 TiDB Cloudはスレッド間でファイルを並列に読み取ることができるため、インポートのパフォーマンスが向上する可能性があります。
+
+### ステップ2.AmazonS3アクセスを設定します {#step-2-configure-amazon-s3-access}
+
+TiDBCloudがTiDB Cloudバケットのソースデータにアクセスできるようにするには、次の手順を実行してTiDB Cloudのバケットアクセスを設定し、Role-ARNを取得します。プロジェクト内の1つのTiDBクラスタの設定が完了すると、そのプロジェクト内のすべてのTiDBクラスターが同じRole-ARNを使用してAmazonS3バケットにアクセスできるようになります。
+
+1.  TiDB Cloud Consoleで、ターゲットTiDBクラスタのTiDB CloudアカウントIDと外部IDを取得します。
+
+    1.  TiDB Cloud Consoleで、ターゲットプロジェクトを選択し、ターゲットクラスタの名前をクリックして概要ページに移動します。
+    2.  左側のクラスタ概要ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
+    3.  [**データインポートタスク**]ページで、[ <strong>AWS IAMポリシー設定の表示</strong>]をクリックして、 TiDB CloudアカウントIDとTiDB Cloud外部IDを取得します。後で使用するために、これらのIDをメモしてください。
+
+2.  AWSマネジメントコンソールで、AmazonS3バケットのマネージドポリシーを作成します。
+
+    1.  AWSマネジメントコンソールにサインインし、AmazonS3コンソールを[https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で開きます。
+
+    2.  [**バケット**]リストで、ソースデータを含むバケットの名前を選択し、[ARNの<strong>コピー</strong>]をクリックしてS3バケットのARNを取得します（たとえば、 `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットARNをメモしておきます。
+
+        ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
+
+    3.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーションペインで[**ポリシー**]をクリックしてから、[ポリシーの<strong>作成</strong>]をクリックします。
+
+        ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
+
+    4.  [**ポリシーの作成**]ページで、[ <strong>JSON</strong> ]タブをクリックします。
+
+    5.  次のアクセスポリシーテンプレートをコピーして、ポリシーテキストフィールドに貼り付けます。
+
+        ```
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "VisualEditor0",
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:GetObject",
+                        "s3:GetObjectVersion"
+                    ],
+                    "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
+                },
+                {
+                    "Sid": "VisualEditor1",
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:ListBucket",
+                        "s3:GetBucketLocation"
+                    ],
+                    "Resource": "<Your S3 bucket ARN>"
+                }
+            ]
+        }
+        ```
+
+        ポリシーテキストフィールドで、次の構成を独自の値に更新します。
+
+        -   `"Resource": "<Your S3 bucket ARN>/<Directory of the source data>/*"`
+
+            たとえば、ソースデータが`tidb-cloud-source-data`バケットのルートディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/*"`を使用します。ソースデータがバケットの`mydata`ディレクトリに保存されている場合は、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"`を使用します。 TiDB Cloudがこのディレクトリ内のすべてのファイルにアクセスできるように、ディレクトリの最後に`/*`が追加されていることを確認してください。
+
+        -   `"Resource": "<Your S3 bucket ARN>"`
+
+            たとえば、 `"Resource": "arn:aws:s3:::tidb-cloud-source-data"` 。
+
+    6.  [**次へ：タグ**]をクリックし、ポリシーのタグを追加して（オプション）、[<strong>次へ：レビュー</strong>]をクリックします。
+
+    7.  ポリシー名を設定し、[**ポリシーの作成**]をクリックします。
+
+3.  AWSマネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロールARNを取得します。
+
+    1.  [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーションペインで[**役割**]をクリックし、[役割の<strong>作成</strong>]をクリックします。
+
+        ![Create a role](/media/tidb-cloud/aws-create-role.png)
+
+    2.  ロールを作成するには、次の情報を入力します。
+
+        -   [**信頼できるエンティティタイプ**]で、[ <strong>AWSアカウント]</strong>を選択します。
+        -   [ **AWSアカウント**]で、[<strong>別のAWSアカウント</strong>]を選択し、 TiDB CloudアカウントIDを[<strong>アカウントID]</strong>フィールドに貼り付けます。
+        -   [**オプション**]で、[外部IDが必要] <strong>（サードパーティがこの役割を引き受ける場合のベストプラクティス）を</strong>クリックし、 TiDB Cloud外部IDを[<strong>外部ID</strong> ]フィールドに貼り付けます。
+
+    3.  [**次へ**]をクリックしてポリシーリストを開き、作成したポリシーを選択して、[<strong>次へ</strong>]をクリックします。
+
+    4.  [**役割の詳細**]で、役割の名前を設定し、右下隅にある[<strong>役割の作成</strong>]をクリックします。ロールが作成されると、ロールのリストが表示されます。
+
+    5.  ロールのリストで、作成したロールの名前をクリックして概要ページに移動し、ロールARNをコピーします。
+
+        ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
+
+4.  TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDを取得する**[データインポートタスク**]ページに移動し、役割ARNを[<strong>役割ARN]</strong>フィールドに貼り付けます。
+
+### ステップ3.データをTiDB Cloudにインポートする {#step-3-import-data-into-tidb-cloud}
+
+1.  [**データインポートタスク**]ページで、[<strong>役割ARN]</strong>フィールドに加えて、次の情報も入力する必要があります。
+
+    -   **データソースタイプ**： `AWS S3` 。
+    -   **バケットURL** ：ソースデータのバケットURLを入力します。
+    -   **データ形式**：データの形式を選択します。
+    -   **ターゲットクラスター**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
+    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
+
+2.  [**検証**]をクリックして、 TiDB Cloudが指定されたバケットURLのソースデータにアクセスできるかどうかを確認します。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+
+3.  検証に合格したら、[**インポート**]をクリックしてインポートタスクを開始します。
+
+データがインポートされた後、 TiDB CloudのAmazon S3アクセスを削除する場合は、 [ステップ2.AmazonS3アクセスを設定します](#step-2-configure-amazon-s3-access)で追加したポリシーを削除するだけです。
 
 ## GCSからTiDB Cloudへのインポートまたは移行 {#import-or-migrate-from-gcs-to-tidb-cloud}
 
@@ -224,15 +227,11 @@ TiDBクラウドがGCSバケット内のソースデータにアクセスでき�
     -   Google Cloud Consoleを使用してデータをアップロードするには、GoogleCloudStorageのドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)をご覧ください。
     -   gsutilを使用してデータをアップロードするには、次のコマンドを使用します。
 
-        {{< copyable "" >}}
-
         ```shell
-        gsutil rsync -r <Local path> <GCS URL> 
+        gsutil rsync -r <Local path> <GCS URL>
         ```
 
         例えば：
-
-        {{< copyable "" >}}
 
         ```shell
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs

@@ -83,7 +83,6 @@
             -   [go-sql-driver/mysqlの場合](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
             -   [GORMの場合](/develop/dev-guide-outdated-for-gorm.md)
             -   [mysql-connector-pythonの場合](/develop/dev-guide-outdated-for-python-mysql-connector.md)
-            -   [Laravelの場合](/develop/dev-guide-outdated-for-laravel.md)
     -   クラウドネイティブ開発環境
         -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
 -   デプロイ
@@ -333,8 +332,8 @@
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-ミラー](/tiup/tiup-mirror.md)
-            -   [tiup-bench](/tiup/tiup-bench.md)
-    -   PingCAPクリニック診断サービス（テクニカルプレビュー）
+            -   [tiup-ベンチ](/tiup/tiup-bench.md)
+    -   PingCAPクリニック診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)
         -   [PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング](/clinic/clinic-user-guide-for-tiup.md)
@@ -407,7 +406,7 @@
                 -   [DMパフォーマンスのテスト](/dm/dm-performance-test.md)
                 -   [パフォーマンスの問題を処理する](/dm/dm-handle-performance-issues.md)
             -   データソースの管理
-                -   [移行するMySQLインスタンスを切り替える](/dm/usage-scenario-master-slave-switch.md)
+                -   [移行するMySQLインスタンスを切り替えます](/dm/usage-scenario-master-slave-switch.md)
             -   タスクの管理
                 -   [失敗したDDLステートメントの処理](/dm/handle-failed-ddl-statements.md)
                 -   [移行するテーブルのスキーマを管理する](/dm/dm-manage-schema.md)

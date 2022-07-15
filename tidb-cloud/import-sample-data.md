@@ -27,7 +27,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
         -   **パスワード**：rootパスワードを入力します。
     -   **DB /テーブルフィルター**：このフィールドは空白のままにします。
 
-    次に、[**検証**]をクリックして、 TiDB Cloudが指定されたバケットURLのサンプルデータにアクセスできるかどうかを確認します。
+    次に、[**検証**]をクリックして、 TiDB Cloudが指定されたバケットURLのサンプルデータにアクセスできるかどうかを確認します。 [<strong>検証</strong>]をクリックした後に`AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
     </div>
 
