@@ -38,15 +38,11 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
     - To upload files using the Amazon S3 Console, see [Uploading objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html) in the AWS User Guide.
     - To upload files using the AWS CLI, use the following command:
 
-        {{< copyable "shell-regular" >}}
-
         ```shell
         aws s3 sync <Local path> <Amazon S3 bucket URL>
         ```
 
         For example:
-
-        {{< copyable "shell-regular" >}}
 
         ```shell
         aws s3 sync ./tidbcloud-samples-us-west-2/ s3://tidb-cloud-source-data
@@ -213,36 +209,32 @@ To allow TiDB cloud to access the source data in your GCS bucket, you need to co
     1. In the **New Principals** field, paste the Google Cloud Service Account ID of the target TiDB cluster. 
     2. In the **Role** drop-down list, choose the role of the target TiDB cluster. 
     3. Click **SAVE**. 
-    
+
 Your TiDB Cloud cluster can now access the GCS bucket.
 
 > **Note:**
 >
 > To remove the access to TiDB Cloud, you can simply delete the principal that you added.
 
-### Step 3. Copy source data files to GCS and import data into TiDB Cloud 
+### Step 3. Copy source data files to GCS and import data into TiDB Cloud
 
 1. To copy your source data files to your GCS bucket, you can upload the data to the GCS bucket using either Google Cloud Console or gsutil.
 
     - To upload data using Google Cloud Console, see [Creating storage buckets](https://cloud.google.com/storage/docs/creating-buckets) in Google Cloud Storage documentation.
     - To upload data using gsutil, use the following command:
 
-        {{< copyable "shell-regular" >}}
-
         ```shell
-        gsutil rsync -r <Local path> <GCS URL> 
+        gsutil rsync -r <Local path> <GCS URL>
         ```
 
         For example:
 
-        {{< copyable "shell-regular" >}}
-
         ```shell
         gsutil rsync -r ./tidbcloud-samples-us-west-2/ gs://target-url-in-gcs
-        ```       
+        ```
 
 2. From the TiDB Cloud console, navigate to the TiDB Clusters page, and then click the name of your target cluster to go to its own overview page. In the cluster information pane on the left, click **Import**, and then fill in the importing related information on the **Data Import Task** page.
 
 > **Note:**
 >
-> To minimize egress charges and latency, locate your GCS bucket and TiDB Cloud database cluster in the same region. 
+> To minimize egress charges and latency, locate your GCS bucket and TiDB Cloud database cluster in the same region.
