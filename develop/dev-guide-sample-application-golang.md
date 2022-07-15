@@ -487,7 +487,7 @@ const (
 
 </div>
 
-<div label="Using gorm (Recommended)" href="get-code-gorm">
+<div label="Using GORM (Recommended)" href="get-code-gorm">
 
 Compared with gorm, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic and close `*sql.Rows` manually. Besides, cannot reuse code easily, which makes your code slightly redundant.
 
