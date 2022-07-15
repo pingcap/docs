@@ -759,7 +759,7 @@ If you are using a non-local cluster or MySQL client has not been installed, con
 
 </div>
 
-<div label="Using gorm (Recommended)" href="sql-driver-table-init-gorm">
+<div label="Using GORM (Recommended)" href="sql-driver-table-init-gorm">
 
 No need to initialize tables manually.
 
