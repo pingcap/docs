@@ -855,7 +855,7 @@ Or run the `make all` command directly, which is a combination of `make mysql`, 
 
 </div>
 
-<div label="Using gorm (Recommended)" href="run-gorm">
+<div label="Using GORM (Recommended)" href="run-gorm">
 
 To run the code, you can run `make build` and `make run` respectively:
 
