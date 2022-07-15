@@ -491,7 +491,7 @@ const (
 
 Compared with GORM, the go-sql-driver/mysql implementation might be not a best practice, because you need to write error handling logic, close `*sql.Rows` manually and cannot reuse code easily, which makes your code slightly redundant.
 
-gorm is a popular open-source Golang ORM. The following instructions take `v1.23.5` as an example.
+GORM is a popular open-source ORM library for Golang. The following instructions take `v1.23.5` as an example.
 
 Write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) for adapting TiDB transactions and write the following code:
 
