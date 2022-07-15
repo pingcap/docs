@@ -81,7 +81,7 @@ CREATE TABLE player (
 
 {{< copyable "" >}}
 
-```golang
+```go
 package main
 
 import (
