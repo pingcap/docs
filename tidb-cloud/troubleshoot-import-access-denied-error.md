@@ -28,9 +28,7 @@ The following is an example policy.
                 "s3:GetObject",
                 "s3:GetObjectVersion"
             ],
-            "Resource": [
-                "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
-            ]
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data/mydata/*"
         },
         {
             "Sid": "VisualEditor1",
@@ -39,9 +37,7 @@ The following is an example policy.
                 "s3:ListBucket",
                 "s3:GetBucketLocation"
             ],
-            "Resource": [
-                "arn:aws:s3:::tidb-cloud-source-data"
-            ]
+            "Resource": "arn:aws:s3:::tidb-cloud-source-data"
         },
         {
             "Sid": "AllowKMSkey",
@@ -57,13 +53,24 @@ The following is an example policy.
 
 In this sample policy, pay attention to the following:
 
-- In the `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"` line, `"arn:aws:s3:::tidb-cloud-source-data"` is a sample S3 bucket ARN, and `/mydata/*` is a directory that you can customize in your S3 bucket root level for data storage. The directory needs to end with `/*`, for example, `"<Your S3 bucket ARN>/<Directory of your source data>/*"`. If `/*` is not added, the `AccessDenied` error occurs.
-- `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is the KMS key of the bucket.
+- In `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`, `"arn:aws:s3:::tidb-cloud-source-data"` is a sample S3 bucket ARN, and `/mydata/*` is a directory that you can customize in your S3 bucket root level for data storage. The directory needs to end with `/*`, for example, `"<Your S3 bucket ARN>/<Directory of your source data>/*"`. If `/*` is not added, the `AccessDenied` error occurs.
 
-    If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, note the following:
+- If you have enabled AWS Key Management Service key (SSE-KMS) with customer-managed key encryption, make sure the following configuration is included in the policy.
 
-    - Make sure that you have granted the `kms:Decrypt` permission to the role you have used to import data to TiDB Cloud.
-    - If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
+```
+        {
+            "Sid": "AllowKMSkey",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": "arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"
+        }
+```
+
+    `"arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f"` is the KMS key of the bucket.
+
+    If the objects in your bucket have been copied from another encrypted bucket, the KMS key value needs to include the keys of both buckets. For example, `"Resource": ["arn:aws:kms:ap-northeast-1:105880447796:key/c3046e91-fdfc-4f3a-acff-00597dd3801f","arn:aws:kms:ap-northeast-1:495580073302:key/0d7926a7-6ecc-4bf7-a9c1-a38f0faec0cd"]`.
 
 If your policy is not correctly configured as the preceding example shows, correct the `Resource` fields in your policy and try importing data again.
 

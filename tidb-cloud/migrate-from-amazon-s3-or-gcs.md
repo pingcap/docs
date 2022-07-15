@@ -86,6 +86,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
             "Version": "2012-10-17",
             "Statement": [
                 {
+                    "Sid": "VisualEditor0",
                     "Effect": "Allow",
                     "Action": [
                         "s3:GetObject",
@@ -94,6 +95,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
                     "Resource": "<Your S3 bucket ARN>/<Directory of your source data>/*"
                 },
                 {
+                    "Sid": "VisualEditor1",
                     "Effect": "Allow",
                     "Action": [
                         "s3:ListBucket",
