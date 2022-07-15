@@ -1674,7 +1674,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to adjust the maximum days of logger on the current TiDB instance. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+- This variable is used to adjust the maximum days of logger on the current TiDB instance.
 
 </CustomContent>
 
