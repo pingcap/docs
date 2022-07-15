@@ -493,7 +493,7 @@ Compared with GORM, the go-sql-driver/mysql implementation might be not a best p
 
 GORM is a popular open-source ORM library for Golang. The following instructions take `v1.23.5` as an example.
 
-Write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) for adapting TiDB transactions and write the following code:
+To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util) according to the following code:
 
 {{< copyable "" >}}
 
