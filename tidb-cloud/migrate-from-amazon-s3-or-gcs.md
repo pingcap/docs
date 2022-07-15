@@ -31,7 +31,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 
 2. If you are migrating data from an upstream database, you need to export the source data first.
 
-    For more information, see [Install TiUP](/tidb-cloud/migrate-data-into-tidb.md#step-1-install-tiup) and [Export data from MySQL compatible databases](/tidb-cloud/migrate-data-into-tidb.md#step-2-export-data-from-mysql-compatible-databases).
+    For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
 3. If your source data is in local files, you can upload the files to the Amazon S3 bucket using either the Amazon S3 Console or the AWS CLI.
 
