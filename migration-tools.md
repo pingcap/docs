@@ -18,7 +18,7 @@ The following list introduces the user scenarios, the supported upstreams and do
 ## [TiDB Data Migration (DM)](/dm/dm-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
 |:---|:---|:---|:---|:---|
-| Data migration from MySQL-compatible databases to TiDB |  MySQL, MariaDB, Aurora, MySQL| TiDB   | <ul><li>A convenient and unified data migration task management tool that supports full data migration and incremental replication</li><li>Support filtering tables and operations</li><li>Support shard merge and migration</li></ul>  | Data import speed is roughly the same as that of TiDB Lighting's TiDB-backend, and much lower than that of TiDB Lighting's Local-backend. So it is recommended to use DM to migrate full data with a size of less than 1 TiB. |
+| Data migration from MySQL-compatible databases to TiDB |  MySQL, MariaDB, Aurora, MySQL| TiDB   | <ul><li>A convenient and unified data migration task management tool that supports full data migration and incremental replication</li><li>Support filtering tables and operations</li><li>Support shard merge and migration</li></ul>  | Data import speed is roughly the same as that of TiDB Lightning's TiDB-backend, and a lot lower than that of TiDB Lightning's Local-backend. So it is recommended to use DM to migrate full data with a size of less than 1 TiB. |
 
 ## [Dumpling](/dumpling-overview.md)
 | User scenario | Upstream (or the imported source file) | Downstream (or the output file) | Advantages | Limitation |
