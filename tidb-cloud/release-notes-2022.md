@@ -8,6 +8,10 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## July xx, 2022
+
+* Provide a new option for TiKV node size: `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for a 8 vCPU TiKV node.
+
 ## July 12, 2022
 
 * Add the **Validate** button to the **Data Import Task** page for Amazon S3, which helps you detect data access issues before the data import starts.
