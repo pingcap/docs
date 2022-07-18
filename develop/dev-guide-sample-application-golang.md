@@ -637,7 +637,7 @@ func tradeExample(db *gorm.DB) {
 }
 
 func simpleExample(db *gorm.DB) {
-    // Create a player, who has a coin and a goods..
+    // Create a player, who has a coin and a goods.
     if err := db.Clauses(clause.OnConflict{UpdateAll: true}).
         Create(&Player{ID: "test", Coins: 1, Goods: 1}).Error; err != nil {
         panic(err)
