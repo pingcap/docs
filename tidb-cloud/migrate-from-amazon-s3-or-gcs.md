@@ -147,9 +147,13 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
     - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
 
-2. Click **Validate** to verify whether TiDB Cloud has the access to the source data in your specified bucket URL. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+2. Click **Import**.
 
-3. After the validation passes, click **Import** to start the import task.
+    A warning message about the database resource consumption is displayed.
+
+3. Click **Confirm**.
+
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 

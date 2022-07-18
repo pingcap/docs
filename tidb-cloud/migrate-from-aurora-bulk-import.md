@@ -17,8 +17,13 @@ To import data, perform the following steps:
 4. Fill in the **Data Source Type**, **Bucket URL**, and **Data Format** fields according to the specification of your source data.
 5. Fill in the **Username** and **Password** fields of the **Target Database** according to the connection settings of your cluster.
 6. Create the bucket policy and role for cross-account access according to [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
-7. Click **Validate** to verify whether TiDB Cloud has the access to the data in the specified bucket URL.
-8. Click **Import** to start the import task.
+7. Click **Import**.
+
+    A warning message about the database resource consumption is displayed.
+
+8. Click **Confirm**.
+
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
 > **Note:**
 >

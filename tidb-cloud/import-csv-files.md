@@ -86,11 +86,15 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example,`my-data.csv`.
     - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
 
-4. Click **Import** to start the import task.
+4. Click **Import**.
 
-    If your CSV files are located in Amazon S3, before clicking **Import**, you need to click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL.
+    A warning message about the database resource consumption is displayed.
 
-5. When the import progress shows success, check the number after **Total Files:**.
+5. Click **Confirm**.
+
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+
+6. When the import progress shows success, check the number after **Total Files:**.
 
     If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, ensure that there are no typos in the **Object Name Pattern** field and try again.
 
