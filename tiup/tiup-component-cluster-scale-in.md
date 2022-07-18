@@ -49,7 +49,7 @@ tiup cluster scale-in <cluster-name> [flags]
 
 > **Warning:**
 >
-> When you use this option to forcibly remove TiKV or TiFlash nodes that are in service or are pending offline, these nodes will be deleted immediately without waiting for data to be migrated. This imposes a very high risk of data loss. If the loss is to the region where the metadata is located, the entire cluster will be unavailable and unrecoverable.
+> When you use this option to forcibly remove TiKV or TiFlash nodes that are in service or are pending offline, these nodes will be deleted immediately without waiting for data to be migrated. This imposes a very high risk of data loss. If data loss occurs in the region where the metadata is located, the entire cluster will be unavailable and unrecoverable.
 
 ### --transfer-timeout
 
