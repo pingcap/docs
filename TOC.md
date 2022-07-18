@@ -84,6 +84,8 @@
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
+  - Third-party Support
+    - [Third-Party Libiaries Supported by PingCAP](/develop/dev-guide-third-party-support.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
