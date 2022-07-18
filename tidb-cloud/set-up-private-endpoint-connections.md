@@ -61,7 +61,7 @@ To find the entrance to creating a private endpoint, take one of the following m
 
 - From the **Project Settings** page:
 
-    1. In the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
+    1. On the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
     2. Click **Add** in the upper-right corner to open the creation page.
 
 - From the **Connect to TiDB** dialog of an active cluster:
@@ -79,7 +79,7 @@ After you open the creation page for a private endpoint, you are at the **Choose
 > **Note:**
 >
 > - Only the Dedicated Tier clusters are displayed in the drop-down list. Developer Tier clusters are not displayed.
-> - If a cluster is being created, it is not displayed in the drop-down list. You cannot create a private endpoint for such clusters.
+> - If a cluster is being created, it is not displayed in the drop-down list.
 > - If there is no existing created cluster, you will see **Create Cluster** on the right side of the drop-down list. Click **Create Cluter** to create a TiDB cluster. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
 
 #### Step 3. Choose a region
@@ -103,6 +103,8 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
     <SimpleTab>
     <div label="Use AWS Console" href="use-aws-console">
 
+    To use the AWS Management Console to create the VPC interface, perform the following steps:
+
     1. In your AWS Management Console, go to **VPC** > **Endpoint**, and click **Create Endpoint** in the upper-right corner. The **Create endpoint** page is displayed.
     2. Under **Service category**, select **Other endpoint services**.
     3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console, and click **Verify service**.
@@ -118,7 +120,43 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
     </div>
     <div label="AWS CLI" href="aws-cli">
 
-    Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint.
+    To use the AWS CLI to create the VPC interface, perform the following steps:
+
+    1. Install AWS Command Line Interface (AWS CLI).
+
+        ```bash
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
+        ```
+
+    2. Configure AWS CLI according to your account information. To get the information required by AWS CLI, see [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html).
+
+        ```bash
+        aws configure
+        ```
+
+    3. Replace the following variable values with your account information.
+
+        ```bash
+        # Sets up the related variables.
+        pcx_tidb_to_app_id="<TiDB peering id>"
+        app_region="<APP Region>"
+        app_vpc_id="<Your VPC ID>"
+        tidbcloud_project_cidr="<TiDB Cloud Project VPC CIDR>"
+        ```
+
+        For example:
+
+        ```
+        # Sets up the related variables
+        pcx_tidb_to_app_id="pcx-069f41efddcff66c8"
+        app_region="us-west-2"
+        app_vpc_id="vpc-0039fb90bb5cf8698"
+        tidbcloud_project_cidr="10.250.0.0/16"
+        ```
+
+    4. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint.
 
     > **Tip:**
     >
@@ -139,7 +177,7 @@ You can get your VPC endpoint ID from your AWS Management Console. If you do not
 
 #### Step 6. Enable Private DNS
 
-After you have accepted the endpoint connection, you are at the **Enable Private DNS** stage. Click the **Copy** button to copy the command and run it in your terminal. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
+After you have accepted the endpoint connection, you are at the **Enable Private DNS** stage. Click the **Copy** button to copy the command and run it in your AWS CLI. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
 
 Then click **Create** to finalize the creation of the private endpoint.
 
