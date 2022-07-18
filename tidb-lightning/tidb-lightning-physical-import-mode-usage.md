@@ -123,7 +123,7 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v1 lim
 10 rows in set (0.14 sec)
 ```
 
-You can manually identify the records that need to be retained and insert these records into the table. For more information, refer to [Resolve duplication in physical import mode](/tidb-lightning/tidb-lightning-error-resolution.md#resolve-duplication-in-physical-import-mode).
+You can manually identify the records that need to be retained and insert these records into the table.
 
 ## Performance tuning
 
