@@ -229,7 +229,7 @@ public class BatchDeleteExample
 }
 ```
 
-In each iteration, `DELETE` up to 1000 rows data in the time period from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+In each iteration, `DELETE` deletes up to 1000 rows data in the time period from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
 
 </div>
 
