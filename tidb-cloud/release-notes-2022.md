@@ -8,6 +8,13 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## July xx, 2022
+
+* Behavior changes to Developer Tier
+
+    * The Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After a few days of inactivity, the Developer Tier cluster will be hibernated automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button on the TiDB Cloud console.
+    * The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+
 ## July 12, 2022
 
 * Add the **Validate** button to the **Data Import Task** page for Amazon S3, which helps you detect data access issues before the data import starts.
