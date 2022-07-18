@@ -173,7 +173,7 @@ Suppose you find an application error within a specific time period. You need to
 <SimpleTab>
 <div label="Java">
 
-In Java, the bulk-delete example is like the following:
+In Java, the bulk-delete example is as follows:
 
 {{< copyable "" >}}
 
@@ -229,13 +229,13 @@ public class BatchDeleteExample
 }
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows in the time period from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
 
 </div>
 
 <div label="Golang">
 
-In Golang, the bulk-delete example is like the following:
+In Golang, the bulk-delete example is as follows:
 
 {{< copyable "" >}}
 
@@ -286,7 +286,7 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
 }
 ```
 
-In each iteration, `DELETE` deletes up to 1000 rows in the time period from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
+In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` to `2022-04-15 00:15:00`.
 
 </div>
 
