@@ -75,9 +75,21 @@ The open source TiDB platform released under the Apache 2.0 license, and support
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://en.pingcap.com/developers/" icon="doc6" label="Build Applications">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-django" icon="python" label="Python">
 
-A Database for Modern Devs. The paradigm shift to a fully distributed database is underway.
+Python applications can connect to and communicate with TiDB through native drivers and ORM frameworks.
+
+</DocHomeCard>
+
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-java" icon="java" label="Java">
+
+Java applications can connect to and communicate with TiDB through JDBC or Swing, or with ORM frameworks like Hibernate.
+
+</DocHomeCard>
+
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="go">
+
+Go applications can connect to and communicate with TiDB through a native driver and ORM frameworks.
 
 </DocHomeCard>
 
@@ -116,6 +128,12 @@ Learn great articles about TiDB
 <DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
 
 See a compilation of short videos describing TiDB and a variety of use cases
+
+</DocHomeCard>
+
+<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
+
+Well designed online courses and instructor led-training to teach you TiDB and TiDB Cloud.
 
 </DocHomeCard>
 

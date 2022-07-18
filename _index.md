@@ -5,7 +5,7 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb" title="TiDB" subTitle="Find the guide, samples, and references you need to use TiDB.">
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -114,6 +114,8 @@ hide_commit: true
 [TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview)
 
 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)
+
+[PingCAP Clinic](https://docs.pingcap.com/tidb/stable/clinic-introduction)
 
 </LearningPath>
 

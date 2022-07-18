@@ -5,13 +5,15 @@ hide_sidebar: true
 hide_commit: true
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
 
 <LearningPath label="Learn" icon="cloud1">
 
 [What is TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
 [Architecture](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
+
+[FAQ](https://docs.pingcap.com/tidbcloud/tidb-cloud-faq)
 
 </LearningPath>
 
@@ -27,17 +29,17 @@ hide_commit: true
 
 <LearningPath label="Use" icon="cloud7">
 
-[Create](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
+[Create a Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster)
 
-[Connect](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
+[Connect to a Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
 
-[Scale](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[Scale Clusters](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[Tune](https://docs.pingcap.com/tidbcloud/tune-performance)
+[Tune Performance](https://docs.pingcap.com/tidbcloud/tune-performance)
 
-[Upgrade](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
+[Upgrade Clusters](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
 
-[Delete](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
+[Delete Clusters](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
 
 </LearningPath>
 
