@@ -45,8 +45,6 @@ scrape_configs:
 
 [Grafana](https://grafana.com/)は、Prometheusメトリックをダッシュボードとして視覚化するためのWebインターフェイスです。
 
-[TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を実行し、トポロジ構成にGrafanaとPrometheusを追加すると、 [Grafana+Prometheusモニタリングプラットフォーム](/tidb-monitoring-framework.md)のセットが同時にデプロイされます。この状況では、最初に[ダッシュボードのJSONファイル](https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json)をインポートする必要があります。
-
 ### 行1：速度 {#row-1-speed}
 
 ![Panels in first row](/media/lightning-grafana-row-1.png)

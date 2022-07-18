@@ -92,6 +92,46 @@ try (Connection connection = ds.getConnection()) {
 ```
 
 </div>
+
+<div label="Golang" href="delete-golang">
+
+{{< copyable "" >}}
+
+```go
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "time"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:4000)/bookshop")
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    startTime := time.Date(2022, 04, 15, 0, 0, 0, 0, time.UTC)
+    endTime := time.Date(2022, 04, 15, 0, 15, 0, 0, time.UTC)
+
+    bulkUpdateSql := fmt.Sprintf("DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= ? AND  `rated_at` <= ?")
+    result, err := db.Exec(bulkUpdateSql, startTime, endTime)
+    if err != nil {
+        panic(err)
+    }
+    _, err = result.RowsAffected()
+    if err != nil {
+        panic(err)
+    }
+}
+```
+
+</div>
+
 </SimpleTab>
 
 > **ノート：**
@@ -129,6 +169,11 @@ TiDBは[統計情報](/statistics.md)を使用してインデックスの選択�
 ### 一括削除の例 {#bulk-delete-example}
 
 特定の期間内にアプリケーションエラーを見つけたとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があり、10,000を超えるレコードが15分で書き込まれます。次のように実行できます。
+
+<SimpleTab>
+<div label="Java">
+
+Javaでは、一括削除の例は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -184,4 +229,65 @@ public class BatchDeleteExample
 }
 ```
 
-各反復で、 `SELECT`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの期間のデータに対して最大1000行の主キー値を選択します。次に、一括削除を実行します。各ループの最後に`TimeUnit.SECONDS.sleep(1);`があると、一括削除操作が1秒間一時停止し、一括削除操作が多くのハードウェアリソースを消費するのを防ぐことに注意してください。
+各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大1000行を削除します。
+
+</div>
+
+<div label="Golang">
+
+Golangでは、一括削除の例は次のとおりです。
+
+{{< copyable "" >}}
+
+```go
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "time"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:4000)/bookshop")
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    affectedRows := int64(-1)
+    startTime := time.Date(2022, 04, 15, 0, 0, 0, 0, time.UTC)
+    endTime := time.Date(2022, 04, 15, 0, 15, 0, 0, time.UTC)
+
+    for affectedRows != 0 {
+        affectedRows, err = deleteBatch(db, startTime, endTime)
+        if err != nil {
+            panic(err)
+        }
+    }
+}
+
+// deleteBatch delete at most 1000 lines per batch
+func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
+    bulkUpdateSql := fmt.Sprintf("DELETE FROM `bookshop`.`ratings` WHERE `rated_at` >= ? AND  `rated_at` <= ? LIMIT 1000")
+    result, err := db.Exec(bulkUpdateSql, startTime, endTime)
+    if err != nil {
+        return -1, err
+    }
+    affectedRows, err := result.RowsAffected()
+    if err != nil {
+        return -1, err
+    }
+
+    fmt.Printf("delete %d data\n", affectedRows)
+    return affectedRows, nil
+}
+```
+
+各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大1000行を削除します。
+
+</div>
+
+</SimpleTab>

@@ -25,11 +25,83 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 次のコードは、2つのスレッドを使用して、2人のユーザーが悲観的なトランザクションモードで同じ本を購入するプロセスをシミュレートします。書店には10冊の本が残っています。ボブは6冊の本を購入し、アリスは4冊の本を購入します。彼らはほぼ同時に注文を完了します。その結果、在庫のある本はすべて売り切れました。
 
+<SimpleTab>
+
+<div label="Java" href="pessimstic-concurrent-save-java">
+
 複数のスレッドを使用して、複数のユーザーが同時にデータを挿入する状況をシミュレートするため、安全なスレッドを持つ接続オブジェクトを使用する必要があります。ここでは、Javaで人気のある接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)をデモに使用します。
+
+</div>
+
+<div label="Golang" href="pessimstic-concurrent-save-golang">
+
+Golangの`sql.DB`は同時実行に対して安全であるため、サードパーティのパッケージをインポートする必要はありません。
+
+TiDBトランザクションを適応させるには、次のコードに従ってツールキット[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
+
+{{< copyable "" >}}
+
+```go
+package util
+
+import (
+    "context"
+    "database/sql"
+)
+
+type TiDBSqlTx struct {
+    *sql.Tx
+    conn        *sql.Conn
+    pessimistic bool
+}
+
+func TiDBSqlBegin(db *sql.DB, pessimistic bool) (*TiDBSqlTx, error) {
+    ctx := context.Background()
+    conn, err := db.Conn(ctx)
+    if err != nil {
+        return nil, err
+    }
+    if pessimistic {
+        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "pessimistic")
+    } else {
+        _, err = conn.ExecContext(ctx, "set @@tidb_txn_mode=?", "optimistic")
+    }
+    if err != nil {
+        return nil, err
+    }
+    tx, err := conn.BeginTx(ctx, nil)
+    if err != nil {
+        return nil, err
+    }
+    return &TiDBSqlTx{
+        conn:        conn,
+        Tx:          tx,
+        pessimistic: pessimistic,
+    }, nil
+}
+
+func (tx *TiDBSqlTx) Commit() error {
+    defer tx.conn.Close()
+    return tx.Tx.Commit()
+}
+
+func (tx *TiDBSqlTx) Rollback() error {
+    defer tx.conn.Close()
+    return tx.Tx.Rollback()
+}
+```
+
+</div>
+
+</SimpleTab>
 
 ### 悲観的なトランザクションの例を書く {#write-a-pessimistic-transaction-example}
 
-#### Configuration / コンフィグレーションファイル {#configuration-file}
+<SimpleTab>
+
+<div label="Java" href="pessimstic-code-java">
+
+**Configuration / コンフィグレーションファイル**
 
 Mavenを使用してパッケージを管理する場合は、 `pom.xml`の`<dependencies>`ノードで、次の依存関係を追加して`HikariCP`をインポートし、パッケージターゲットとJARパッケージスタートアップのメインクラスを設定します。以下は`pom.xml`の例です。
 
@@ -109,7 +181,7 @@ Mavenを使用してパッケージを管理する場合は、 `pom.xml`の`<dep
 </project>
 ```
 
-#### コーディング {#coding}
+**コーディング**
 
 次に、コードを記述します。
 
@@ -258,9 +330,341 @@ public class TxnExample {
 }
 ```
 
+</div>
+
+<div label="Golang" href="pessimstic-code-golang">
+
+必要なデータベース操作を含む`helper.go`のファイルを作成します。
+
+{{< copyable "" >}}
+
+```go
+package main
+
+import (
+    "context"
+    "database/sql"
+    "fmt"
+    "time"
+
+    "github.com/go-sql-driver/mysql"
+    "github.com/pingcap-inc/tidb-example-golang/util"
+    "github.com/shopspring/decimal"
+)
+
+type TxnFunc func(txn *util.TiDBSqlTx) error
+
+const (
+    ErrWriteConflict      = 9007 // Transactions in TiKV encounter write conflicts.
+    ErrInfoSchemaChanged  = 8028 // table schema changes
+    ErrForUpdateCantRetry = 8002 // "SELECT FOR UPDATE" commit conflict
+    ErrTxnRetryable       = 8022 // The transaction commit fails and has been rolled back
+)
+
+const retryTimes = 5
+
+var retryErrorCodeSet = map[uint16]interface{}{
+    ErrWriteConflict:      nil,
+    ErrInfoSchemaChanged:  nil,
+    ErrForUpdateCantRetry: nil,
+    ErrTxnRetryable:       nil,
+}
+
+func runTxn(db *sql.DB, optimistic bool, optimisticRetryTimes int, txnFunc TxnFunc) {
+    txn, err := util.TiDBSqlBegin(db, !optimistic)
+    if err != nil {
+        panic(err)
+    }
+
+    err = txnFunc(txn)
+    if err != nil {
+        txn.Rollback()
+        if mysqlErr, ok := err.(*mysql.MySQLError); ok && optimistic && optimisticRetryTimes != 0 {
+            if _, retryableError := retryErrorCodeSet[mysqlErr.Number]; retryableError {
+                fmt.Printf("[runTxn] got a retryable error, rest time: %d\n", optimisticRetryTimes-1)
+                runTxn(db, optimistic, optimisticRetryTimes-1, txnFunc)
+                return
+            }
+        }
+
+        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
+    } else {
+        err = txn.Commit()
+        if mysqlErr, ok := err.(*mysql.MySQLError); ok && optimistic && optimisticRetryTimes != 0 {
+            if _, retryableError := retryErrorCodeSet[mysqlErr.Number]; retryableError {
+                fmt.Printf("[runTxn] got a retryable error, rest time: %d\n", optimisticRetryTimes-1)
+                runTxn(db, optimistic, optimisticRetryTimes-1, txnFunc)
+                return
+            }
+        }
+
+        if err == nil {
+            fmt.Println("[runTxn] commit success")
+        }
+    }
+}
+
+func prepareData(db *sql.DB, optimistic bool) {
+    runTxn(db, optimistic, retryTimes, func(txn *util.TiDBSqlTx) error {
+        publishedAt, err := time.Parse("2006-01-02 15:04:05", "2018-09-01 00:00:00")
+        if err != nil {
+            return err
+        }
+
+        if err = createBook(txn, 1, "Designing Data-Intensive Application",
+            "Science & Technology", publishedAt, decimal.NewFromInt(100), 10); err != nil {
+            return err
+        }
+
+        if err = createUser(txn, 1, "Bob", decimal.NewFromInt(10000)); err != nil {
+            return err
+        }
+
+        if err = createUser(txn, 2, "Alice", decimal.NewFromInt(10000)); err != nil {
+            return err
+        }
+
+        return nil
+    })
+}
+
+func buyPessimistic(db *sql.DB, goroutineID, orderID, bookID, userID, amount int) {
+    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
+    if goroutineID != 1 {
+        txnComment = "\t" + txnComment
+    }
+
+    fmt.Printf("\nuser %d try to buy %d books(id: %d)\n", userID, amount, bookID)
+
+    runTxn(db, false, retryTimes, func(txn *util.TiDBSqlTx) error {
+        time.Sleep(time.Second)
+
+        // read the price of book
+        selectBookForUpdate := "select `price` from books where id = ? for update"
+        bookRows, err := txn.Query(selectBookForUpdate, bookID)
+        if err != nil {
+            return err
+        }
+        fmt.Println(txnComment + selectBookForUpdate + " successful")
+        defer bookRows.Close()
+
+        price := decimal.NewFromInt(0)
+        if bookRows.Next() {
+            err = bookRows.Scan(&price)
+            if err != nil {
+                return err
+            }
+        } else {
+            return fmt.Errorf("book ID not exist")
+        }
+        bookRows.Close()
+
+        // update book
+        updateStock := "update `books` set stock = stock - ? where id = ? and stock - ? >= 0"
+        result, err := txn.Exec(updateStock, amount, bookID, amount)
+        if err != nil {
+            return err
+        }
+        fmt.Println(txnComment + updateStock + " successful")
+
+        affected, err := result.RowsAffected()
+        if err != nil {
+            return err
+        }
+
+        if affected == 0 {
+            return fmt.Errorf("stock not enough, rollback")
+        }
+
+        // insert order
+        insertOrder := "insert into `orders` (`id`, `book_id`, `user_id`, `quality`) values (?, ?, ?, ?)"
+        if _, err := txn.Exec(insertOrder,
+            orderID, bookID, userID, amount); err != nil {
+            return err
+        }
+        fmt.Println(txnComment + insertOrder + " successful")
+
+        // update user
+        updateUser := "update `users` set `balance` = `balance` - ? where id = ?"
+        if _, err := txn.Exec(updateUser,
+            price.Mul(decimal.NewFromInt(int64(amount))), userID); err != nil {
+            return err
+        }
+        fmt.Println(txnComment + updateUser + " successful")
+
+        return nil
+    })
+}
+
+func buyOptimistic(db *sql.DB, goroutineID, orderID, bookID, userID, amount int) {
+    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
+    if goroutineID != 1 {
+        txnComment = "\t" + txnComment
+    }
+
+    fmt.Printf("\nuser %d try to buy %d books(id: %d)\n", userID, amount, bookID)
+
+    runTxn(db, true, retryTimes, func(txn *util.TiDBSqlTx) error {
+        time.Sleep(time.Second)
+
+        // read the price and stock of book
+        selectBookForUpdate := "select `price`, `stock` from books where id = ? for update"
+        bookRows, err := txn.Query(selectBookForUpdate, bookID)
+        if err != nil {
+            return err
+        }
+        fmt.Println(txnComment + selectBookForUpdate + " successful")
+        defer bookRows.Close()
+
+        price, stock := decimal.NewFromInt(0), 0
+        if bookRows.Next() {
+            err = bookRows.Scan(&price, &stock)
+            if err != nil {
+                return err
+            }
+        } else {
+            return fmt.Errorf("book ID not exist")
+        }
+        bookRows.Close()
+
+        if stock < amount {
+            return fmt.Errorf("book not enough")
+        }
+
+        // update book
+        updateStock := "update `books` set stock = stock - ? where id = ? and stock - ? >= 0"
+        result, err := txn.Exec(updateStock, amount, bookID, amount)
+        if err != nil {
+            return err
+        }
+        fmt.Println(txnComment + updateStock + " successful")
+
+        affected, err := result.RowsAffected()
+        if err != nil {
+            return err
+        }
+
+        if affected == 0 {
+            return fmt.Errorf("stock not enough, rollback")
+        }
+
+        // insert order
+        insertOrder := "insert into `orders` (`id`, `book_id`, `user_id`, `quality`) values (?, ?, ?, ?)"
+        if _, err := txn.Exec(insertOrder,
+            orderID, bookID, userID, amount); err != nil {
+            return err
+        }
+        fmt.Println(txnComment + insertOrder + " successful")
+
+        // update user
+        updateUser := "update `users` set `balance` = `balance` - ? where id = ?"
+        if _, err := txn.Exec(updateUser,
+            price.Mul(decimal.NewFromInt(int64(amount))), userID); err != nil {
+            return err
+        }
+        fmt.Println(txnComment + updateUser + " successful")
+
+        return nil
+    })
+}
+
+func createBook(txn *util.TiDBSqlTx, id int, title, bookType string,
+    publishedAt time.Time, price decimal.Decimal, stock int) error {
+    _, err := txn.ExecContext(context.Background(),
+        "INSERT INTO `books` (`id`, `title`, `type`, `published_at`, `price`, `stock`) values (?, ?, ?, ?, ?, ?)",
+        id, title, bookType, publishedAt, price, stock)
+    return err
+}
+
+func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.Decimal) error {
+    _, err := txn.ExecContext(context.Background(),
+        "INSERT INTO `users` (`id`, `nickname`, `balance`) VALUES (?, ?, ?)",
+        id, nickname, balance)
+    return err
+}
+```
+
+次に、 `main`関数を使用して`txn.go`を記述し、 `helper.go`を呼び出して、着信コマンドライン引数を処理します。
+
+{{< copyable "" >}}
+
+```go
+package main
+
+import (
+    "database/sql"
+    "flag"
+    "fmt"
+    "sync"
+)
+
+func main() {
+    optimistic, alice, bob := parseParams()
+
+    openDB("mysql", "root:@tcp(127.0.0.1:4000)/bookshop?charset=utf8mb4", func(db *sql.DB) {
+        prepareData(db, optimistic)
+        buy(db, optimistic, alice, bob)
+    })
+}
+
+func buy(db *sql.DB, optimistic bool, alice, bob int) {
+    buyFunc := buyOptimistic
+    if !optimistic {
+        buyFunc = buyPessimistic
+    }
+
+    wg := sync.WaitGroup{}
+    wg.Add(1)
+    go func() {
+        defer wg.Done()
+        buyFunc(db, 1, 1000, 1, 1, bob)
+    }()
+
+    wg.Add(1)
+    go func() {
+        defer wg.Done()
+        buyFunc(db, 2, 1001, 1, 2, alice)
+    }()
+
+    wg.Wait()
+}
+
+func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
+    db, err := sql.Open(driverName, dataSourceName)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    runnable(db)
+}
+
+func parseParams() (optimistic bool, alice, bob int) {
+    flag.BoolVar(&optimistic, "o", false, "transaction is optimistic")
+    flag.IntVar(&alice, "a", 4, "Alice bought num")
+    flag.IntVar(&bob, "b", 6, "Bob bought num")
+
+    flag.Parse()
+
+    fmt.Println(optimistic, alice, bob)
+
+    return optimistic, alice, bob
+}
+```
+
+Golangの例には、すでに楽観的なトランザクションが含まれています。
+
+</div>
+
+</SimpleTab>
+
 ### 売り過ぎを伴わない例 {#an-example-that-does-not-involve-overselling}
 
 サンプルプログラムを実行します。
+
+<SimpleTab>
+
+<div label="Java" href="pessimstic-not-oversell-java">
 
 {{< copyable "" >}}
 
@@ -268,6 +672,21 @@ public class TxnExample {
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=6
 ```
+
+</div>
+
+<div label="Golang" href="pessimstic-not-oversell-golang">
+
+{{< copyable "" >}}
+
+```shell
+go build -o bin/txn
+./bin/txn -a 4 -b 6
+```
+
+</div>
+
+</SimpleTab>
 
 SQLログ：
 
@@ -324,12 +743,31 @@ mysql> SELECT * FROM users;
 
 サンプルプログラムを実行します。
 
+<SimpleTab>
+
+<div label="Java" href="pessimstic-oversell-java">
+
 {{< copyable "" >}}
 
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=7
 ```
+
+</div>
+
+<div label="Golang" href="pessimstic-oversell-golang">
+
+{{< copyable "" >}}
+
+```shell
+go build -o bin/txn
+./bin/txn -a 4 -b 7
+```
+
+</div>
+
+</SimpleTab>
 
 {{< copyable "" >}}
 
@@ -383,7 +821,11 @@ mysql> SELECT * FROM users;
 
 ### 楽観的な取引例を書く {#write-an-optimistic-transaction-example}
 
-#### コーディング {#coding}
+<SimpleTab>
+
+<div label="Java" href="optimistic-code-java">
+
+**コーディング**
 
 {{< copyable "" >}}
 
@@ -543,7 +985,7 @@ public class TxnExample {
 }
 ```
 
-#### Configuration / コンフィグレーションの変更 {#configuration-changes}
+**Configuration / コンフィグレーションの変更**
 
 スタートアップクラスを`pom.xml`に変更します：
 
@@ -561,9 +1003,23 @@ public class TxnExample {
 <mainClass>com.pingcap.txn.optimistic.TxnExample</mainClass>
 ```
 
+</div>
+
+<div label="Golang" href="optimistic-code-golang">
+
+[悲観的なトランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションのGolangの例は、すでに楽観的なトランザクションをサポートしており、変更せずに直接使用できます。
+
+</div>
+
+</SimpleTab>
+
 ### 売り過ぎを伴わない例 {#an-example-that-does-not-involve-overselling}
 
 サンプルプログラムを実行します。
+
+<SimpleTab>
+
+<div label="Java" href="optimistic-not-oversell-java">
 
 {{< copyable "" >}}
 
@@ -571,6 +1027,21 @@ public class TxnExample {
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=6
 ```
+
+</div>
+
+<div label="Golang" href="optimistic-not-oversell-golang">
+
+{{< copyable "" >}}
+
+```shell
+go build -o bin/txn
+./bin/txn -a 4 -b 6 -o true
+```
+
+</div>
+
+</SimpleTab>
 
 SQLステートメントの実行プロセス：
 
@@ -635,12 +1106,31 @@ mysql> SELECT * FROM users;
 
 サンプルプログラムを実行します。
 
+<SimpleTab>
+
+<div label="Java" href="optimistic-oversell-java">
+
 {{< copyable "" >}}
 
 ```shell
 mvn clean package
 java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_NUM=7
 ```
+
+</div>
+
+<div label="Golang" href="optimistic-oversell-golang">
+
+{{< copyable "" >}}
+
+```shell
+go build -o bin/txn
+./bin/txn -a 4 -b 7 -o true
+```
+
+</div>
+
+</SimpleTab>
 
 {{< copyable "" >}}
 

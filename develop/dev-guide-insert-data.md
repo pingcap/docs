@@ -129,6 +129,81 @@ Javaの完全な例については、以下を参照してください。
 
 </div>
 
+<div label="Golang">
+
+```go
+package main
+
+import (
+    "database/sql"
+    "strings"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+type Player struct {
+    ID    string
+    Coins int
+    Goods int
+}
+
+func bulkInsertPlayers(db *sql.DB, players []Player, batchSize int) error {
+    tx, err := db.Begin()
+    if err != nil {
+        return err
+    }
+
+    stmt, err := tx.Prepare(buildBulkInsertSQL(batchSize))
+    if err != nil {
+        return err
+    }
+
+    defer stmt.Close()
+
+    for len(players) > batchSize {
+        if _, err := stmt.Exec(playerToArgs(players[:batchSize])...); err != nil {
+            tx.Rollback()
+            return err
+        }
+
+        players = players[batchSize:]
+    }
+
+    if len(players) != 0 {
+        if _, err := tx.Exec(buildBulkInsertSQL(len(players)), playerToArgs(players)...); err != nil {
+            tx.Rollback()
+            return err
+        }
+    }
+
+    if err := tx.Commit(); err != nil {
+        tx.Rollback()
+        return err
+    }
+
+    return nil
+}
+
+func playerToArgs(players []Player) []interface{} {
+    var args []interface{}
+    for _, player := range players {
+        args = append(args, player.ID, player.Coins, player.Goods)
+    }
+    return args
+}
+
+func buildBulkInsertSQL(amount int) string {
+    return "INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)" + strings.Repeat(",(?,?,?)", amount-1)
+}
+```
+
+Golangの完全な例については、以下を参照してください。
+
+-   [go-sql-driver / mysqlを使用して、TiDBとGolangを使用した単純なCRUDアプリを構築します](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
+-   [GORMを使用して、TiDBとGolangを使用したシンプルなCRUDアプリを構築します](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+
+</div>
+
 </SimpleTab>
 
 ## 一括挿入 {#bulk-insert}
@@ -138,7 +213,7 @@ Javaの完全な例については、以下を参照してください。
 一括挿入に推奨されるツールは次のとおりです。
 
 -   データのエクスポート： [Dumpling](/dumpling-overview.md) 。 MySQLまたはTiDBデータをローカルまたはAmazonS3にエクスポートできます。
--   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。**Dumpling**のエクスポートされたデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
+-   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**のエクスポートされたデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
 -   データ複製： [TiDBデータ移行](/dm/dm-overview.md) 。 MySQL、MariaDB、およびAuroraデータベースをTiDBに複製できます。また、シャーディングされたインスタンスとテーブルのソースデータベースからのマージと移行もサポートしています。
 -   データのバックアップと復元： [バックアップと復元（BR）](/br/backup-and-restore-overview.md) 。**Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオに適しています。
 

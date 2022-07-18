@@ -80,8 +80,6 @@
         -   アーカイブされたドキュメント
             -   [Djangoの場合](/develop/dev-guide-outdated-for-django.md)
             -   [SQLAlchemyの場合](/develop/dev-guide-outdated-for-sqlalchemy.md)
-            -   [go-sql-driver/mysqlの場合](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
-            -   [GORMの場合](/develop/dev-guide-outdated-for-gorm.md)
             -   [mysql-connector-pythonの場合](/develop/dev-guide-outdated-for-python-mysql-connector.md)
     -   クラウドネイティブ開発環境
         -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
@@ -332,7 +330,7 @@
             -   [tiup-playground](/tiup/tiup-playground.md)
             -   [tiup-cluster](/tiup/tiup-cluster.md)
             -   [tiup-ミラー](/tiup/tiup-mirror.md)
-            -   [tiup-ベンチ](/tiup/tiup-bench.md)
+            -   [tiup-bench](/tiup/tiup-bench.md)
     -   PingCAPクリニック診断サービス
         -   [概要](/clinic/clinic-introduction.md)
         -   [クイックスタート](/clinic/quick-start-with-clinic.md)

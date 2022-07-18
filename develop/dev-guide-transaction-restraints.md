@@ -25,13 +25,17 @@ TiDBの`SI`の分離レベルは**ファントム読み取り**を回避でき�
 
 ## SIは書き込みスキューを回避できません {#si-cannot-avoid-write-skew}
 
-TiDBのSI分離レベルでは、**書き込みスキュー**例外を回避できません。 `SELECT FOR UPDATE`の構文を使用して、<strong>書き込みスキュー</strong>例外を回避できます。
+TiDBのSI分離レベルでは、**書き込みスキュー**例外を回避できません。 `SELECT FOR UPDATE`の構文を使用して、<strong>書き込みスキュー</strong>の例外を回避できます。
 
-**書き込みスキュー**例外は、2つの同時トランザクションが異なるが関連するレコードを読み取り、各トランザクションが読み取ったデータを更新し、最終的にトランザクションをコミットするときに発生します。これらの関連レコード間に、複数のトランザクションで同時に変更できない制約がある場合、最終結果は制約に違反します。
+**書き込みスキュー**例外は、2つの同時トランザクションが異なるが関連するレコードを読み取り、各トランザクションが読み取ったデータを更新し、最終的にトランザクションをコミットするときに発生します。複数のトランザクションで同時に変更できないこれらの関連レコード間に制約がある場合、最終結果は制約に違反します。
 
 たとえば、病院の医師シフト管理プログラムを作成しているとします。病院では通常、同時に複数の医師が待機している必要がありますが、最小要件は、少なくとも1人の医師が待機していることです。医師は、シフト中に少なくとも1人の医師が待機している限り、シフトをドロップできます（たとえば、気分が悪い場合）。
 
 現在、医師`Alice`と`Bob`が待機している状況があります。どちらも気分が悪いので、病気休暇を取ることにしました。彼らはたまたま同時にボタンをクリックします。次のプログラムでこのプロセスをシミュレートしてみましょう。
+
+<SimpleTab>
+
+<div label="Java" href="write-skew-java">
 
 {{< copyable "" >}}
 
@@ -154,6 +158,180 @@ public class EffectWriteSkew {
 }
 ```
 
+</div>
+
+<div label="Golang" href="write-skew-golang">
+
+TiDBトランザクションを適応させるには、次のコードに従って[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
+
+{{< copyable "" >}}
+
+```go
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "sync"
+
+    "github.com/pingcap-inc/tidb-example-golang/util"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    openDB("mysql", "root:@tcp(127.0.0.1:4000)/test", func(db *sql.DB) {
+        writeSkew(db)
+    })
+}
+
+func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
+    db, err := sql.Open(driverName, dataSourceName)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    runnable(db)
+}
+
+func writeSkew(db *sql.DB) {
+    err := prepareData(db)
+    if err != nil {
+        panic(err)
+    }
+
+    waitingChan, waitGroup := make(chan bool), sync.WaitGroup{}
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 1, 1)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 2, 2)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Wait()
+}
+
+func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) error {
+    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
+    if goroutineID != 1 {
+        txnComment = "\t" + txnComment
+    }
+
+    txn, err := util.TiDBSqlBegin(db, true)
+    if err != nil {
+        return err
+    }
+    fmt.Println(txnComment + "start txn")
+
+    // Txn 1 should be waiting until txn 2 is done.
+    if goroutineID == 1 {
+        <-waitingChan
+    }
+
+    txnFunc := func() error {
+        queryCurrentOnCall := "SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = ? AND `shift_id` = ?"
+        rows, err := txn.Query(queryCurrentOnCall, true, 123)
+        if err != nil {
+            return err
+        }
+        defer rows.Close()
+        fmt.Println(txnComment + queryCurrentOnCall + " successful")
+
+        count := 0
+        if rows.Next() {
+            err = rows.Scan(&count)
+            if err != nil {
+                return err
+            }
+        }
+        rows.Close()
+
+        if count < 2 {
+            return fmt.Errorf("at least one doctor is on call")
+        }
+
+        shift := "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?"
+        _, err = txn.Exec(shift, false, doctorID, 123)
+        if err == nil {
+            fmt.Println(txnComment + shift + " successful")
+        }
+        return err
+    }
+
+    err = txnFunc()
+    if err == nil {
+        txn.Commit()
+        fmt.Println("[runTxn] commit success")
+    } else {
+        txn.Rollback()
+        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
+    }
+
+    // Txn 2 is done. Let txn 1 run again.
+    if goroutineID == 2 {
+        waitingChan <- true
+    }
+
+    return nil
+}
+
+func prepareData(db *sql.DB) error {
+    err := createDoctorTable(db)
+    if err != nil {
+        return err
+    }
+
+    err = createDoctor(db, 1, "Alice", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 2, "Bob", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 3, "Carol", false, 123)
+    if err != nil {
+        return err
+    }
+    return nil
+}
+
+func createDoctorTable(db *sql.DB) error {
+    _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
+        "    `id` int(11) NOT NULL," +
+        "    `name` varchar(255) DEFAULT NULL," +
+        "    `on_call` tinyint(1) DEFAULT NULL," +
+        "    `shift_id` int(11) DEFAULT NULL," +
+        "    PRIMARY KEY (`id`)," +
+        "    KEY `idx_shift_id` (`shift_id`)" +
+        "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
+    return err
+}
+
+func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) error {
+    _, err := db.Exec("INSERT INTO `doctors` (`id`, `name`, `on_call`, `shift_id`) VALUES (?, ?, ?, ?)",
+        id, name, onCall, shiftID)
+    return err
+}
+```
+
+</div>
+
+</SimpleTab>
+
 SQLログ：
 
 {{< copyable "" >}}
@@ -189,6 +367,10 @@ mysql> SELECT * FROM doctors;
 ![Write Skew](/media/develop/write-skew.png)
 
 次に、書き込みスキューの問題を回避するために、サンプルプログラムを`SELECT FOR UPDATE`を使用するように変更しましょう。
+
+<SimpleTab>
+
+<div label="Java" href="overcome-write-skew-java">
 
 {{< copyable "" >}}
 
@@ -310,6 +492,178 @@ public class EffectWriteSkew {
     }
 }
 ```
+
+</div>
+
+<div label="Golang" href="overcome-write-skew-golang">
+
+{{< copyable "" >}}
+
+```go
+package main
+
+import (
+    "database/sql"
+    "fmt"
+    "sync"
+
+    "github.com/pingcap-inc/tidb-example-golang/util"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    openDB("mysql", "root:@tcp(127.0.0.1:4000)/test", func(db *sql.DB) {
+        writeSkew(db)
+    })
+}
+
+func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
+    db, err := sql.Open(driverName, dataSourceName)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    runnable(db)
+}
+
+func writeSkew(db *sql.DB) {
+    err := prepareData(db)
+    if err != nil {
+        panic(err)
+    }
+
+    waitingChan, waitGroup := make(chan bool), sync.WaitGroup{}
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 1, 1)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Add(1)
+    go func() {
+        defer waitGroup.Done()
+        err = askForLeave(db, waitingChan, 2, 2)
+        if err != nil {
+            panic(err)
+        }
+    }()
+
+    waitGroup.Wait()
+}
+
+func askForLeave(db *sql.DB, waitingChan chan bool, goroutineID, doctorID int) error {
+    txnComment := fmt.Sprintf("/* txn %d */ ", goroutineID)
+    if goroutineID != 1 {
+        txnComment = "\t" + txnComment
+    }
+
+    txn, err := util.TiDBSqlBegin(db, true)
+    if err != nil {
+        return err
+    }
+    fmt.Println(txnComment + "start txn")
+
+    // Txn 1 should be waiting until txn 2 is done.
+    if goroutineID == 1 {
+        <-waitingChan
+    }
+
+    txnFunc := func() error {
+        queryCurrentOnCall := "SELECT COUNT(*) AS `count` FROM `doctors` WHERE `on_call` = ? AND `shift_id` = ?"
+        rows, err := txn.Query(queryCurrentOnCall, true, 123)
+        if err != nil {
+            return err
+        }
+        defer rows.Close()
+        fmt.Println(txnComment + queryCurrentOnCall + " successful")
+
+        count := 0
+        if rows.Next() {
+            err = rows.Scan(&count)
+            if err != nil {
+                return err
+            }
+        }
+        rows.Close()
+
+        if count < 2 {
+            return fmt.Errorf("at least one doctor is on call")
+        }
+
+        shift := "UPDATE `doctors` SET `on_call` = ? WHERE `id` = ? AND `shift_id` = ?"
+        _, err = txn.Exec(shift, false, doctorID, 123)
+        if err == nil {
+            fmt.Println(txnComment + shift + " successful")
+        }
+        return err
+    }
+
+    err = txnFunc()
+    if err == nil {
+        txn.Commit()
+        fmt.Println("[runTxn] commit success")
+    } else {
+        txn.Rollback()
+        fmt.Printf("[runTxn] got an error, rollback: %+v\n", err)
+    }
+
+    // Txn 2 is done. Let txn 1 run again.
+    if goroutineID == 2 {
+        waitingChan <- true
+    }
+
+    return nil
+}
+
+func prepareData(db *sql.DB) error {
+    err := createDoctorTable(db)
+    if err != nil {
+        return err
+    }
+
+    err = createDoctor(db, 1, "Alice", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 2, "Bob", true, 123)
+    if err != nil {
+        return err
+    }
+    err = createDoctor(db, 3, "Carol", false, 123)
+    if err != nil {
+        return err
+    }
+    return nil
+}
+
+func createDoctorTable(db *sql.DB) error {
+    _, err := db.Exec("CREATE TABLE IF NOT EXISTS `doctors` (" +
+        "    `id` int(11) NOT NULL," +
+        "    `name` varchar(255) DEFAULT NULL," +
+        "    `on_call` tinyint(1) DEFAULT NULL," +
+        "    `shift_id` int(11) DEFAULT NULL," +
+        "    PRIMARY KEY (`id`)," +
+        "    KEY `idx_shift_id` (`shift_id`)" +
+        "  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin")
+    return err
+}
+
+func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) error {
+    _, err := db.Exec("INSERT INTO `doctors` (`id`, `name`, `on_call`, `shift_id`) VALUES (?, ?, ?, ?)",
+        id, name, onCall, shiftID)
+    return err
+}
+```
+
+</div>
+
+</SimpleTab>
 
 SQLログ：
 
