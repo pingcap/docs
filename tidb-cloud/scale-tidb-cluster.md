@@ -6,16 +6,18 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 # Scale Your TiDB Cluster
 
+> **Note:**
+>
+> - For [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier), the cluster scaling feature is unavailable.
+> - When a cluster is in the scaling status, you cannot perform any new scaling operations on it.
+
 You can scale a TiDB cluster in the following dimensions:
 
 - Node number of TiDB, TiKV, and TiFlash
 - Storage size of TiKV and TiFlash
 - Node size of TiDB, TiKV, and TiFlash
 
-> **Note:**
->
-> - For [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier), the cluster scaling feature is unavailable.
-> - When a cluster is in the scaling status, you cannot perform any new scaling operations on it.
+For information about how to determine the size of your TiDB cluster, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
 
 ## Change node number
 
