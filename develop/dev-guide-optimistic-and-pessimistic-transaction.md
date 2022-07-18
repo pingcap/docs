@@ -37,7 +37,7 @@ Because you use multiple threads to simulate the situation that multiple users i
 
 `sql.DB` in Golang is concurrency-safe, so there is no need to import a third-party package.
 
-To adapt TiDB transactions, write the toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)according to the following code:
+To adapt TiDB transactions, write a toolkit [util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)according to the following code:
 
 {{< copyable "" >}}
 

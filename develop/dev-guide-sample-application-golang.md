@@ -893,7 +893,7 @@ Or run the `make` command directly, which is a combination of `make build` and `
 
 <div label="Using GORM (Recommended)" href="output-gorm">
 
-[gorm Expected Output](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
+[GORM Expected Output](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
 
 </div>
 
