@@ -101,7 +101,7 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
 2. Then you need to create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
 
     <SimpleTab>
-    <div label="Use AWS Console" href="use-aws-console">
+    <div label="Use AWS Console">
 
     To use the AWS Management Console to create the VPC interface, perform the following steps:
 
@@ -118,7 +118,7 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
     > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
 
     </div>
-    <div label="AWS CLI" href="aws-cli">
+    <div label="AWS CLI">
 
     To use the AWS CLI to create the VPC interface, perform the following steps:
 
