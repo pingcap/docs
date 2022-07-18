@@ -56,7 +56,7 @@ If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to del
 If fewer than 10,000 records are returned, use the following example to delete them.
 
 <SimpleTab>
-<div label="SQL" href="delete-sql">
+<div label="SQL">
 
 {{< copyable "sql" >}}
 
@@ -66,7 +66,7 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 </div>
 
-<div label="Java" href="delete-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -93,7 +93,7 @@ try (Connection connection = ds.getConnection()) {
 
 </div>
 
-<div label="Golang" href="delete-golang">
+<div label="Golang">
 
 {{< copyable "" >}}
 
