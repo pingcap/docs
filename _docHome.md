@@ -1,5 +1,5 @@
 ---
-title: doc home
+title: PingCAP Documentation
 hide_sidebar: true
 hide_commit: true
 hide_leftNav: true
@@ -35,7 +35,7 @@ Helps you quickly complete a TiDB Cloud PoC.
 
 Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully managed service.
 
-<a href="https://tidbcloud.com" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
+<a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
 
 </DocHomeSection>
 
