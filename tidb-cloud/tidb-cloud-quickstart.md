@@ -18,6 +18,8 @@ You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md
 <SimpleTab>
 <div label="Developer Tier">
 
+To create a free Developer Tier cluster, take the following steps:
+
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
     - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
@@ -42,6 +44,8 @@ You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md
 </div>
 
 <div label="Dedicated Tier">
+
+To create a Dedicated Tier cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
 
