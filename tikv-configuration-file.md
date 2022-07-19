@@ -1658,33 +1658,69 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 Configuration items related to Quota Limiter.
 
-Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the foreground of TiKV might process too many read and write requests so that the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+### `max-delay-duration` <span class="version-mark">New in v6.0.0</span>
+
++ The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
++ Default value: `500ms`
+
+### Foreground Quota Limiter
+
+Configuration items related to foreground Quota Limiter.
+
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the foreground of TiKV might process too many read and write requests so that the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the foreground quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
 
 > **Warning:**
 >
-> - Quota Limiter is an experimental feature introduced in TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
+> - Foreground Quota Limiter is an experimental feature introduced in TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
 > - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
 
-### `foreground-cpu-time` (new in v6.0.0)
+#### `foreground-cpu-time` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the CPU resources used by TiKV foreground to process read and write requests.
 + Default value: `0` (which means no limit)
-+ Unit: millicpu (for example, `1500` means that foreground requests consume 1.5v CPU)
++ Unit: millicpu (for example, `1500` means that the foreground requests consume 1.5v CPU)
 
-### `foreground-write-bandwidth` (new in v6.0.0)
+#### `foreground-write-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions write data.
 + Default value: `0KB` (which means no limit)
 
-### `foreground-read-bandwidth` (new in v6.0.0)
+#### `foreground-read-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
 
-### `max-delay-duration` (new in v6.0.0)
+### Background Quota Limiter
 
-+ The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
-+ Default value: `500ms`
+Configuration items related to background Quota Limiter.
+
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the background of TiKV might process too many calculations and read and write requests, so that the CPU resources used by the foreground are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the background quota-related configuration items to limit the CPU resources to be used by the background. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+
+> **Warning:**
+>
+> - Background Quota Limiter is an experimental feature introduced in TiDB v6.2.0, and it is **NOT** recommended to use it in the production environment.
+> - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
+
+#### `background-cpu-time` <span class="version-mark">New in v6.2.0</span>
+
++ The soft limit on the CPU resources used by TiKV background to process read and write requests.
++ Default value: `0` (which means no limit)
++ Unit: millicpu (for example, `1500` means that the background requests consume 1.5v CPU)
+
+#### `background-write-bandwidth` <span class="version-mark">New in v6.2.0</span>
+
++ The soft limit on the bandwidth with which background transactions write data.
++ Default value: `0KB` (which means no limit)
+
+#### `background-read-bandwidth` <span class="version-mark">New in v6.2.0</span>
+
++ The soft limit on the bandwidth with which background transactions and the Coprocessor read data.
++ Default value: `0KB` (which means no limit)
+
+#### `enable-auto-tune` <span class="version-mark">New in v6.2.0</span>
+
++ Determines whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.
++ Default value: `false` (which means that the auto-tuning is disabled)
 
 ## causal-ts <span class="version-mark">New in v6.1.0</span>
 
