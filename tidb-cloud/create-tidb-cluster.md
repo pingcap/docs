@@ -45,7 +45,7 @@ If you are an organization owner, once you log in to TiDB Cloud, you have a defa
 
 4. Enter a name for your project, and then click **Confirm**.
 
-5. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
+5. To return to the **Active Clusters** page, click the TiDB Cloud logo in the upper-left corner of the window.
 
 If you are a project member, you can access only the specific projects to which your organization owner invited you, and you cannot create new projects. To check which project you belong to, take the following steps:
 
@@ -55,7 +55,7 @@ If you are a project member, you can access only the specific projects to which 
 
     The **Projects** tab is displayed by default.
 
-3. To return to the cluster page, click the TiDB Cloud logo in the upper-left corner of the window.
+3. To return to the **Active Clusters** page, click the TiDB Cloud logo in the upper-left corner of the window.
 
 ## Step 4. Create a TiDB cluster
 
@@ -64,7 +64,7 @@ If you are a project member, you can access only the specific projects to which 
 
 To create a Developer Tier cluster, take the following steps:
 
-1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Developer Tier**.
+1. On the TiDB Cloud **Active Clusters** page, click **Create Cluster**, and then click **Developer Tier**.
 
 2. On the **Create a Cluster** page, update the default cluster name if necessary.
 
@@ -84,7 +84,7 @@ To create a Developer Tier cluster, take the following steps:
 
 To create a Dedicated Tier cluster, take the following steps:
 
-1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Dedicated Tier**.
+1. On the TiDB Cloud **Active Clusters** page, click **Create Cluster**, and then click **Dedicated Tier**.
 
 2. On the **Create a Cluster** page, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
