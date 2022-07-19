@@ -89,7 +89,7 @@ Java applications can connect to and communicate with TiDB through JDBC or Swing
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="Golang">
 
-Go applications can connect to and communicate with TiDB through a native driver and ORM frameworks.
+Golang applications can connect to and communicate with TiDB through a native driver and ORM frameworks.
 
 </DocHomeCard>
 
