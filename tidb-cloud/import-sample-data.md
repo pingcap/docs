@@ -27,8 +27,6 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
         - **Password**: enter your root password.
     - **DB/Tables Filter**: leave this field blank.
 
-    Then, click **Validate** to verify whether TiDB Cloud has the access to the sample data in the specified bucket URL. If you encounter the `AccessDenied` error after clicking **Validate**, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
-
     </div>
 
     <div label="GCP">
@@ -48,7 +46,13 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
 4. Click **Import**.
 
-    The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
+    A warning message about the database resource consumption is displayed.
+
+5. Click **Confirm**.
+
+    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically.
+
+The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
 Once the cluster finishes the data importing process, you will get the sample data in your database.
 
