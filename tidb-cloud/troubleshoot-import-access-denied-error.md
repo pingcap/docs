@@ -13,7 +13,9 @@ To troubleshoot the access denied errors, perform the following checks in the AW
 
 ## Check the policy of the IAM role
 
-In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find the role you have created for the target TiDB cluster, and check the **Permission policies**. Check each policy and make sure that the `Resource` fields in each policy are correctly configured.
+1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find and click on the role you have created for the target TiDB cluster. The role summary page is displayed.
+2. In the **Permission policies** area of the role summary page, click on each policy to enter the policy summary page.
+3. On the policy summary page, click on the **{}JSON** tab to see the permission policy. Make sure that the `Resource` fields in each policy are correctly configured.
 
 The following is a sample policy.
 
@@ -74,19 +76,21 @@ If your policy is not correctly configured as the preceding example shows, corre
 
 > **Tip:**
 >
-> If you have updated the permission policy multiple times and still get the `AccessDenied` error during data import, you can try to revoke active sessions. Go to **IAM** > **Access Management** > **Roles**, find **Revoke active sessions** and click the button to revoke active sessions. Then, retry the data import.
+> If you have updated the permission policy multiple times and still get the `AccessDenied` error during data import, you can try to revoke active sessions. Go to **IAM** > **Access Management** > **Roles**, click on your target role to enter the role summary page. On the role summary page, find **Revoke active sessions** and click the button to revoke active sessions. Then, retry the data import.
 >
 > Note that this might affect your other applications.
 
 ## Check the bucket policy
 
-In the AWS Management Console, open the Amazon S3 console, go to **Bucket** > **Permissions**, and find the **Bucket policy** page. By default, this page has no policy value. If any denied policy is displayed on this page, the `AccessDenied` error might occur during data import.
+1. In the AWS Management Console, open the Amazon S3 console, go to the **Buckets** page. A list of buckets are displayed.
+2. Select and click on the target bucket and the bucket information page is displayed.
+3. Click on the **Permissions** tab and find the **Bucket policy** area. By default, this area has no policy value. If any denied policy is displayed in this area, the `AccessDenied` error might occur during data import.
 
-If you see a denied policy, check whether the policy relates to the current data import. If yes, delete it from the page and retry the data import.
+If you see a denied policy, check whether the policy relates to the current data import. If yes, delete it from the area and retry the data import.
 
 ## Check the trust entity
 
-In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, click the **Trust relationships** tab, and you will see the trusted entities.
+In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find and click on the role you have created for the target TiDB cluster. The role summary page is displayed. On the role summary page, click the **Trust relationships** tab, and you will see the trusted entities.
 
 The following is a sample trust entity:
 
@@ -117,9 +121,11 @@ In the sample trust entity:
 
 ## Check the Object Ownership
 
-In the AWS Management Console, open the Amazon S3 console, go to **Bucket** > **Permissions**, and find the **Object Ownership** page. Make sure that the "Object Ownership" configuration is "Bucket owner enforced".
+1. In the AWS Management Console, open the Amazon S3 console, go to the **Buckets** page. A list of buckets are displayed.
+2. Select and click on the target bucket and the bucket information page is displayed.
+3. On the bucket information page, scroll down to find the **Object Ownership** area. Make sure that the "Object Ownership" configuration is "Bucket owner enforced".
 
-If the configuration is not "Bucket owner enforced", the `AccessDenied` error occurs, because your account does not have enough permissions for all objects in this bucket.
+    If the configuration is not "Bucket owner enforced", the `AccessDenied` error occurs, because your account does not have enough permissions for all objects in this bucket.
 
 To handle the error, click **Edit** in the upper-right corner of the Object Ownership area and change the ownership to "Bucket owner enforced". Note that this might affect your other applications that are using this bucket.
 
@@ -127,25 +133,25 @@ To handle the error, click **Edit** in the upper-right corner of the Object Owne
 
 There are more than one way to encrypt an S3 bucket. When you try to access the objects in a bucket, the role you have created must have the permission to access the encryption key for data decryption. Otherwise, the `AccessDenied` error occurs.
 
-To check the encryption type of your bucket, open the Amazon S3 console in the AWS Management console, choose the name of the target bucket, choose **Properties**, and you will see the **Default encryption** page that shows the encryption type of the bucket.
+To check the encryption type of your bucket, open the Amazon S3 console in the AWS Management console and click **Buckets** on the left navigation bar, choose the name of the target bucket, choose **Properties**, and you will see the **Default encryption** area that shows the encryption type of the bucket.
 
 There are two types of server-side encryption: Amazon S3-managed key (SSE-S3) and AWS Key Management Service (SSE-KMS). For SSE-S3, further check is not needed because this encryption type does not cause access denied errors. For SSE-KMS, you need to check the following:
 
-- If the AWS KMS key ARN on the page is displayed in black without an underline, the AWS KMS key is an AWS-managed key (aws/s3).
-- If the AWS KMS key ARN on the page is displayed in blue with an underline, click the key ARN to see the specific encryption type. It might be an AWS managed key (aws/s3) or a customer-managed key.
+- If the AWS KMS key ARN in the area is displayed in black without an underline, the AWS KMS key is an AWS-managed key (aws/s3).
+- If the AWS KMS key ARN in the area is displayed in blue with an underline, click on the key ARN to open the key information page. Check the left navigation bar to see the specific encryption type. It might be an AWS managed key (aws/s3) or a customer-managed key.
 
 <details>
 <summary>For the AWS managed key (aws/s3) in SSE-KMS</summary>
 
 In this situation, if the `AccessDenied` error occurs, the reason might be that the key is read-only and cross-account permission grants are not allowed. See the AWS article [Why are cross-account users getting Access Denied errors when they try to access S3 objects encrypted by a custom AWS KMS key](https://aws.amazon.com/premiumsupport/knowledge-center/cross-account-access-denied-error-s3/) for details.
 
-To solve the access denied error, click **Edit** in the upper-right corner of the **Default encryption** page, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
+To solve the access denied error, click **Edit** in the upper-right corner of the **Default encryption** area, and change the AWS KMS key to "Choose from your AWS KMS keys" or "Enter AWS KMS key ARN", or change the server-side encryption method to "AWS S3 Managed Key (SSE-S3). In addition to this method, you can also create a new bucket and use the custom-managed key or the SSE-S3 encryption method.
 </details>
 
 <details>
 <summary>For the customer-managed key in SSE-KMS</summary>
 
-To solve the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** in the upper-right corner of the page to add the role you have used to import data to TiDB Cloud. Then, try importing data again.
+To solve the `AccessDenied` error in this situation, click the key ARN or manually find the key in KMS. A **Key users** page is displayed. Click **Add** in the upper-right corner of the area to add the role you have used to import data to TiDB Cloud. Then, try importing data again.
 
 </details>
 
