@@ -28,9 +28,6 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 To allow TiDB Cloud to write audit logs to your cloud bucket, you need to enable audit logging first.
 
-<SimpleTab>
-<div label="AWS">
-
 ### Enable audit logging for AWS
 
 To enable audit logging for AWS, take the following steps:
@@ -171,9 +168,6 @@ In the TiDB Cloud console, go back to the **Audit Logging** dialog box where you
 >
 > - After enabling audit logging, if you make any new changes to bucket URL or location, you must click **Restart** to load the changes and rerun the **Test Connectivity** check to make the changes effective.
 > - To remove GCS access from TiDB Cloud, simply delete the principal that you added.
-
-</div>
-</SimpleTab>
 
 ## Specify auditing filter rules
 
