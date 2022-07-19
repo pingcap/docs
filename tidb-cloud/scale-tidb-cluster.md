@@ -31,7 +31,7 @@ To increase the number of TiDB, TiKV, or TiFlash nodes, take the following steps
 4. In the **Scale** window, increase the number of TiDB, TiKV, or TiFlash nodes.
 5. Click **Confirm**.
 
-### Decrease TiDB node number
+### Decrease node number
 
 To decrease the number of TiDB nodes, take the following steps:
 
@@ -41,19 +41,17 @@ To decrease the number of TiDB nodes, take the following steps:
 4. In the **Scale** window, decrease the number of TiDB nodes.
 5. Click **Confirm**.
 
-### Decrease TiKV or TiFlash node number
+To decrease the number of TiKV or TiFlash nodes, you need to submit a support ticket. The PingCAP support team will contact you and complete the scaling within the agreed time.
 
 > **Warning:**
 >
 > Decreasing TiKV or TiFlash node number can be risky, which might lead to insufficient storage space, excessive CPU usage, or excessive memory usage on remaining nodes.
 
-To decrease the number of TiKV or TiFlash nodes, you need to submit a support ticket. The PingCAP support team will contact you and complete the scaling within the agreed time.
-
 To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). For each node to be scaled, provide the following information in the **Description** box:
 
 - Cluster name: xxx
 - Cloud provider: GCP or AWS
-- Node type: TiKV, or TiFlash
+- Node type: TiKV or TiFlash
 - Current node number: xxx
 - Expected node number: xxx
 
