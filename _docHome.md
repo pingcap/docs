@@ -5,7 +5,7 @@ hide_commit: true
 hide_leftNav: true
 ---
 
-<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the tutorials, instructions, and references that you are lookoing for to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
+<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the tutorials, instructions, and references that you are looking for to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
@@ -87,7 +87,7 @@ Java applications can connect to and communicate with TiDB through JDBC or Swing
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="Go">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="Golang">
 
 Go applications can connect to and communicate with TiDB through a native driver and ORM frameworks.
 

@@ -11,7 +11,7 @@ hide_commit: true
 
 [What is TiDB](https://docs.pingcap.com/tidb/stable/overview)
 
-[Featurs](https://docs.pingcap.com/tidb/stable/basic-features)
+[Features](https://docs.pingcap.com/tidb/stable/basic-features)
 
 [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)
 
@@ -87,7 +87,7 @@ hide_commit: true
 
 [Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-overview)
 
-[Performance Analysis and Tuning](https://docs.pingcap.com/tidb/stable/performance-tuning-methods)
+[Performance Tuning](https://docs.pingcap.com/tidb/stable/performance-tuning-methods)
 
 [Tune OLTP](https://docs.pingcap.com/tidb/stable/performance-tuning-practices)
 
