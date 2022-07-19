@@ -47,15 +47,15 @@ hide_commit: true
 
 [Import sample data](https://docs.pingcap.com/tidbcloud/import-sample-data)
 
-[From MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
+[MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
 
-[From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
+[Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
-[From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
 
-[Import CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
-[Import Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 </LearningPath>
 
@@ -67,7 +67,7 @@ hide_commit: true
 
 [Datadog Integration](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[Prometheus and Grafana Integration](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 
 </LearningPath>
 
