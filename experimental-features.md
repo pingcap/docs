@@ -18,7 +18,7 @@ This document introduces the experimental features of TiDB in different versions
 
 + Improve the stability of the optimizer's choice of indexes (Introduced in v5.0)
     + Extend the statistics feature by collecting the multi-column order dependency information.
-    + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index. For details, see [Statistics - `tidb_analyze_version = 2`](/statistics.md).
+    + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index. For details, see descriptions about [Statistics - `tidb_analyze_version = 2`](/statistics.md).
 + When TiKV is deployed with limited resources, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the [Quota Limiter](/tikv-configuration-file.md#quota) to limit the CPU resources to be used by the foreground. (Introduced in v6.0)
 
 ## Scheduling
