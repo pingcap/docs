@@ -1496,7 +1496,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to set whether to record all SQL statements in the log. This feature is disabled by default. If maintenance personnel needs to trace all SQL statements when locating issues, they can enable this feature.
+- This variable is used to set whether to record all SQL statements in the log. This feature is disabled by default. If you need to trace all SQL statements when locating issues, enable this feature.
 
 </CustomContent>
 
@@ -1668,7 +1668,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to adjust the maximum days of logger on the current TiDB instance. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+- This variable is used to adjust the maximum days of logger on the current TiDB instance.
 
 </CustomContent>
 
@@ -1773,13 +1773,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb">
 
-- This setting was previously session scoped and used the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0, `tidb_mem_quota_query` is now a `SESSION | GLOBAL` scoped variable.
+- For versions earlier than TiDB v6.1.0, this is a session scope variable and uses the value of `mem-quota-query` from `tidb.toml` as an initial value. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This setting was previously session scoped. Starting from v6.1.0, `tidb_mem_quota_query` is now a `SESSION | GLOBAL` scoped variable.
+- For versions earlier than TiDB v6.1.0, this is a session scope variable. Starting from v6.1.0, `tidb_mem_quota_query` is a `SESSION | GLOBAL` scope variable.
 
 </CustomContent>
 
