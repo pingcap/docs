@@ -3,11 +3,11 @@ title: PD Control User Guide
 summary: Use PD Control to obtain the state information of a cluster and tune a cluster.
 ---
 
-# PD制御ユーザーガイド {#pd-control-user-guide}
+# PD Controlユーザーガイド {#pd-control-user-guide}
 
-PDのコマンドラインツールとして、PD Controlはクラスターの状態情報を取得し、クラスタを調整しクラスタ。
+PDのコマンドラインツールとして、 PD Controlはクラスターの状態情報を取得し、クラスタを調整しクラスタ。
 
-## PD制御をインストールします {#install-pd-control}
+## PD Controlをインストールします {#install-pd-control}
 
 > **ノート：**
 >
@@ -15,7 +15,7 @@ PDのコマンドラインツールとして、PD Controlはクラスターの�
 
 ### TiUPコマンドを使用する {#use-tiup-command}
 
-PD制御を使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]`コマンドを実行します。
+PD Controlを使用するには、 `tiup ctl:<cluster-version> pd -u http://<pd_ip>:<pd_port> [-i]`コマンドを実行します。
 
 ### TiDBインストールパッケージをダウンロードする {#download-tidb-installation-package}
 
@@ -185,10 +185,10 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
     ```
 
--   `max-merge-region-size`は、リージョンマージのサイズの上限を制御します（単位はMです）。 `regionSize`が指定された値を超えると、PDはそれを隣接するリージョンとマージしません。 0に設定すると、リージョンマージが無効になります。
+-   `max-merge-region-size`は、リージョンマージのサイズの上限を制御します（単位はMiBです）。 `regionSize`が指定された値を超えると、PDはそれを隣接するリージョンとマージしません。 0に設定すると、リージョンマージが無効になります。
 
     ```bash
-    config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16M
+    config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
 -   `max-merge-region-keys`は、リージョンマージのキーカウントの上限を制御します。 `regionKeyCount`が指定された値を超えると、PDはそれを隣接するリージョンとマージしません。
@@ -478,7 +478,7 @@ Success!
 >> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
-リージョンの分割は、可能な限り中央に近い位置から開始されます。この位置は、「スキャン」と「近似」の2つの戦略を使用して見つけることができます。違いは、前者はリージョンをスキャンして中央のキーを決定し、後者はSSTファイルに記録されている統計をチェックしておおよその位置を取得することです。一般に、前者の方が正確ですが、後者の方がI / Oの消費量が少なく、より速く完了することができます。
+リージョンの分割は、可能な限り中央に近い位置から開始されます。この位置は、「スキャン」と「概算」の2つの戦略を使用して見つけることができます。違いは、前者はリージョンをスキャンして中央のキーを決定し、後者はSSTファイルに記録されている統計をチェックしておおよその位置を取得することです。一般に、前者の方が正確ですが、後者の方がI / Oの消費量が少なく、より速く完了することができます。
 
 ### <code>ping</code> {#code-ping-code}
 
@@ -493,7 +493,7 @@ time: 43.12698ms
 
 ### <code>region &#x3C;region_id> [--jq="&#x3C;query string>"]</code> {#code-region-x3c-region-id-jq-x3c-query-string-code}
 
-このコマンドを使用して、地域情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
+このコマンドを使用して、リージョン情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -843,7 +843,7 @@ time: 43.12698ms
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
--   `read-priorities` 、および`write-leader-priorities`は、スケジューラがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つの次元がサポートされています。
+-   `read-priorities` 、および`write-leader-priorities`は、スケジューラーがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つの次元がサポートされています。
 
     -   `read-priorities`および`write-leader-priorities`は、読み取りおよび書き込みリーダータイプのホットリージョンをスケジュールするためにスケジューラーが優先するディメンションを制御します。寸法オプションは`query` 、および`byte` `key` 。
 
@@ -946,7 +946,7 @@ unsafe remove-failed-stores 101,102,103
 Success!
 ```
 
-オンラインの安全でないリカバリの現在または過去の状態を表示します。
+OnlineUnsafeRecoveryの現在または過去の状態を表示します。
 
 ```bash
 unsafe remove-failed-stores show
