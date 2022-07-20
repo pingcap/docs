@@ -107,7 +107,7 @@ When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-
 
 The possible statuses of a private endpoint are explained as follows:
 
-- **Not Configured**: You have just created an endpoint service but have not yet created a private endpoint. If you click **Edit** of that row, you are directed to the **Interface Endpoint** stage of creating a private endpoint. See [Step 4. Create an endpoint service](/tidb-cloud/set-up-private-endpoint-connections.md#step-4-create-an-endpoint-service) for details.
+- **Not Configured**: You have just created an endpoint service but have not yet created a private endpoint. If you click **Edit** of that row, you are directed to the **Interface Endpoint** stage of creating a private endpoint. See [Step 4. Create an endpoint service](/tidb-cloud/set-up-private-endpoint-connections.md#step-4-create-an-aws-interface-endpoint) for details.
 - **Initiating**: The private endpoint is being initiated or verified after you fill in your VPC ID at the **Interface Endpoint** stage of creating a private endpoint. If you open a new **Private Endpoint** page, you will see that the **Edit** button of the row is disabled.
 - **Pending**: After your VPC ID is verified at the **Interface Endpoint** stage of creating a private endpoint, you have not yet enabled the private DNS. If you click **Edit** of that row, you are directed to the **Enable Private DNS** stage of creating a private endpoint. See [Step 6. Enable Private DNS](/tidb-cloud/set-up-private-endpoint-connections.md#step-6-enable-private-dns) for details.
 - **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
