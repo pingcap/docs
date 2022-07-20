@@ -5,10 +5,6 @@ summary: An overview of the usage of ALTER TABLE ... COMPACT for the TiDB databa
 
 # ALTER TABLE ... COMPACT
 
-> **Warning:**
->
-> This statement is still an experimental feature. It is NOT recommended that you use it in the production environment.
-
 To enhance read performance and reduce disk usage, TiDB automatically schedules data compaction on storage nodes in the background. During the compaction, storage nodes rewrite physical data, including cleaning up deleted rows and merging multiple versions of data caused by updates. The `ALTER TABLE ... COMPACT` statement allows you to initiate compaction for a specific table immediately, without waiting until compaction is triggered in the background.
 
 The execution of this statement does not block existing SQL statements or affect any TiDB features, such as transactions, DDL, and GC. Data that can be selected via SQL statements will not be changed either. However, executing this statement consumes some IO and CPU resources, which might result in higher SQL execution latency.
