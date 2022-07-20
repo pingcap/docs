@@ -35,7 +35,7 @@ For more information about the two options, see [Select Your Cluster Tier](/tidb
 
 If you are an organization owner, once you log in to TiDB Cloud, you have a default project. If you do not want to use the default project, you can take the following steps to create a new one:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**.
 
@@ -49,7 +49,7 @@ If you are an organization owner, once you log in to TiDB Cloud, you have a defa
 
 If you are a project member, you can access only the specific projects to which your organization owner invited you, and you cannot create new projects. To check which project you belong to, take the following steps:
 
-1. Click the account name in the upper-right corner of the window.
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
 
 2. Click **Organization Settings**.
 
@@ -66,13 +66,17 @@ To create a Developer Tier cluster, take the following steps:
 
 1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Developer Tier**.
 
-2. On the **Create a Cluster** page, set up your cluster name and root password.
+2. On the **Create a Cluster** page, update the default cluster name if necessary.
 
 3. Note that the cloud provider of Developer Tier is AWS, and then select the region where you want to create your cluster.
 
 4. View the cluster size of the Developer Tier, and then click **Create**.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+
+5. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
 </div>
 
@@ -82,33 +86,35 @@ To create a Dedicated Tier cluster, take the following steps:
 
 1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Dedicated Tier**.
 
-2. On the **Create a Cluster** page, set up your cluster name and root password, and then update the default port number `4000` if you cannot use `4000` for connection.
-
-3. Choose a cloud provider and a region, and then click **Next**.
+2. On the **Create a Cluster** page, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
     > **Note:**
     >
     > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), the cloud provider is AWS, and you cannot change it in TiDB Cloud.
 
-4. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
+3. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
 
     > **Note:**
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
 
-5. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
-6. Confirm the cluster information in the middle area and the billing information in the right pane.
+5. Confirm the cluster information in the middle area and the billing information in the right pane.
 
-7. If you have not added a payment method, click **Add Credit Card** in the right pane.
+6. If you have not added a payment method, click **Add Credit Card** in the right pane.
 
     > **Note:**
     >
     > If you signed up TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-8. Click **Create**.
+7. Click **Create**.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+
+8. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
 </div>
 </SimpleTab>

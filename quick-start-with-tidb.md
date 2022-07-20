@@ -80,10 +80,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v5.4.1 --db 2 --pd 3 --kv 3
+        tiup playground v5.4.2 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.4.1. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v5.4.2. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -201,10 +201,10 @@ As a distributed system, a basic TiDB test cluster usually consists of 2 TiDB in
         {{< copyable "shell-regular" >}}
 
         ```shell
-        tiup playground v5.4.1 --db 2 --pd 3 --kv 3
+        tiup playground v5.4.2 --db 2 --pd 3 --kv 3
         ```
 
-        The command downloads a version cluster to the local machine and starts it, such as v5.4.1. To view the latest version, run `tiup list tidb`.
+        The command downloads a version cluster to the local machine and starts it, such as v5.4.2. To view the latest version, run `tiup list tidb`.
 
         This command returns the access methods of the cluster:
 
@@ -298,7 +298,7 @@ Other requirements for the target machine:
 
 - The `root` user and its password is required
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines), or open the port needed by the TiDB cluster nodes
-- Currently, TiUP supports deploying TiDB on the x86_64 (AMD64 and ARM) architectures:
+- Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures:
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64
     - It is recommended to use CentOS 7.6 1810 on ARM

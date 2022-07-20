@@ -19,7 +19,7 @@ Before adding VPC Peering requests to a region, you need to set a project CIDR f
 
 You can set the project CIDR during creating the first Dedicated Tier of your project. If you want to set the project CIDR before creating the tier, do the following:
 
-1. On the TiDB Cloud console, choose the target project, and then click the gear icon in the upper left corner to open the project settings.
+1. On the TiDB Cloud console, choose a target project, and then click the **Project Settings** tab.
 
 2. In the left pane, click **Project CIDR**.
 
@@ -48,9 +48,9 @@ You can set the project CIDR during creating the first Dedicated Tier of your pr
 
 ### Step 1: Add VPC peering requests
 
-1. On the TiDB Cloud console, choose the target project for VPC peering, and then click the gear icon in the upper left corner to open the project settings.
+1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Project Settings** tab.
 
-    The **VPC Peering** page is displayed by default.
+    The **VPC Peering** configuration is displayed by default.
 
 2. Click **Add**, choose the AWS icon, and then fill in the required information of your existing AWS VPC:
 
@@ -188,7 +188,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 ### Step 3: Connect to the TiDB cluster on TiDB Cloud
 
-1. Navigate to the **TiDB Cluster** page and find your cluster.
+1. Navigate to the **Active Clusters** page and click the name of your cluster.
 
 2. Click **Connect**. The **Connect to TiDB** dialog displays. You could see the **Status** of the VPC peering is **active**.
 
@@ -198,9 +198,9 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 ### Steps
 
-1. On the TiDB Cloud console, choose the target project for VPC peering, and then click the gear icon in the upper left corner to open the project settings.
+1. On the TiDB Cloud console, choose a target project for VPC peering, and then click the **Project Settings** tab.
 
-    The **VPC Peering** page is displayed by default.
+    The **VPC Peering** configuration is displayed by default.
 
 2. Click **Add**, choose the Google Cloud icon, and then fill in the required information of your existing GCP VPC:
 

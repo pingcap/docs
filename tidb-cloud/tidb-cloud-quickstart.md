@@ -13,7 +13,7 @@ This tutorial guides you through an easy way to get started with your TiDB Cloud
 
 ## Step 1. Create a TiDB cluster
 
-You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) cluster or a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 <SimpleTab>
 <div label="Developer Tier">
@@ -29,13 +29,15 @@ You can either create a free [Developer Tier (Dev Tier)](/tidb-cloud/select-clus
 
 3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
 
-4. On the **Create a Cluster (Dev Tier)** page, set up your cluster name and root password.
+4. On the **Create a Cluster (Developer Tier)** page, update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
-5. Note that the cloud provider of Developer Tier is AWS, and then select the region where you want to create your cluster.
+5. Click **Create**.
 
-6. View the cluster size of the Developer Tier, and then click **Create**.
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
 </div>
 
@@ -57,58 +59,46 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
     >
     > If you want to get a 14-day free trial of TiDB Cloud Dedicated Tier first, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
-4. On the **Create a Cluster** page, set up your cluster name and root password, and then update the default port number `4000` if you cannot use `4000` for connection.
+4. On the **Create a Cluster** page, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
-5. Choose a cloud provider and a region, and then click **Next**.
-
-6. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
+5. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
 
     > **Note:**
     >
     > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. The CIDR of a project cannot be modified once it is set.
 
-7. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash<sup>beta</sup> (optional) respectively, and then click **Next**.
+6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
-8. Confirm the cluster information in the middle area and also the billing information in the right pane.
+7. Confirm the cluster information in the middle area and also the billing information in the right pane.
 
-9. Click **Add Credit Card** in the right pane to add a credit card for your account.
+8. Click **Add Credit Card** in the right pane to add a credit card for your account.
 
-10. Click **Create**.
+9. Click **Create**.
 
-Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+
+10. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
 </div>
 </SimpleTab>
 
 ## Step 2. Connect to your TiDB cluster
 
-1. Navigate to the TiDB Clusters page and click the name of your newly created cluster.
+1. On the **Active Clusters** page, click the name of your newly created cluster.
 
     The overview page of your newly created cluster is displayed.
 
 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
 
-3. In **Step 1: Create traffic filter**, click **Add Your Current IP Address**, and then click **Create Filter**.
+3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
-    The purpose of this step is to set up your traffic filter, which makes sure that the cluster accepts connections only from trusted IP addresses.
+    > **Tip:**
+    >
+    > TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
 
-4. In **Step 2: Connect with a SQL client**, use an SQL client to connect to your cluster.
-
-    TiDB Cloud is MySQL-compatible, so you can connect to your cluster using any MySQL client tools. We recommend using [mysql — The MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) or [mysql — The MySQL Command-Line Client from MariaDB](https://mariadb.com/kb/en/mysql-command-line-client/).
-
-5. In the **Connect to TiDB** dialog box, copy the command provided in **Step 2: Connect with a SQL client**, and paste it into your Terminal interface.
-
-    The format of the command line is as follows, but you need to customize your endpoint.
-
-    {{< copyable "shell" >}}
-
-    ```shell
-    mysql -u root -h <endpoint> -P <port number> -p
-    ```
-
-6. Enter the root password you used when creating the cluster.
-
-7. Validate the connection in the MySQL client:
+4. After logging into your TiDB cluster, you can use the following SQL statement to validate the connection:
 
     {{< copyable "sql" >}}
 
@@ -116,39 +106,50 @@ Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
     SELECT TiDB_version();
     ```
 
-    If you see the release version information, you are ready to play with the MySQL client on your TiDB Cloud cluster.
+    If you see the release version information, you are ready to use your TiDB cluster.
 
 ## Step 3. Import the sample data
 
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-1. Navigate to the TiDB Clusters page and click the name of your newly created cluster. The overview page of your cluster is displayed.
+1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
 
 2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
 
-3. Depending on where your TiDB cluster is hosted, do one of the following:
+3. Fill in the import parameters:
 
-    - If your TiDB cluster is hosted by AWS (the Dev Tier is hosted by AWS by default), select **AWS S3** as the data source type, enter the bucket URL of the sample data, and select the bucket region.
+    <SimpleTab>
+    <div label="AWS">
 
-         **Your bucket URL and region should correspond to your target database region.** For example, if you create a cluster in US-West-2 (Oregon), you should choose the sample data URL of the bucket region of US-West-2 (Oregon) from the following list:
+    If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
-        - US-West-2 (Oregon): `s3://tidbcloud-samples-us-west-2/data-ingestion/`
-        - US-East-1 (Virginia): `s3://tidbcloud-samples-us-east-1/data-ingestion/`
-        - AP-Northeast-1 (Tokyo): `s3://tidbcloud-samples-ap-northeast-1/data-ingestion/`
-        - AP-Southeast-1 (Singapore): `s3://tidbcloud-samples-ap-southeast-1/data-ingestion/`
+    - **Data Source Type**: `AWS S3`.
+    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
+    - **Data Format**: select **TiDB Dumpling**.
+    - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
+    - **Target Database**:
+        - **Username**: `root`.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
 
-    - If your TiDB cluster is hosted by GCP, select **Google Cloud Storage** for **Data Source Type**, enter the sample data URL `gcs://tidbcloud-samples-us-west1` in the **Bucket URL** field, and then select **US-West1 (Oregon)** for **Bucket Region**. The sample data bucket is hosted in the US-West1 (Oregon) for GCP.
+    </div>
 
-4. Fill in the other import parameters.
+    <div label="GCP">
 
-    - Data Format: Select **TiDB Dumpling**.
-    - Setup Credentials: Enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
-    - Target Database:
-        - Username: `root`.
-        - Password: Enter your root password.
-    - DB/Tables Filter: Leave this field blank.
+    If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-5. Click **Import**.
+    - **Data Source Type**: `Google Cloud Stroage`.
+    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
+    - **Data Format**: select **TiDB Dumpling**.
+    - **Target Database**:
+        - **Username**: `root`.
+        - **Password**: enter your root password.
+    - **DB/Tables Filter**: leave this field blank.
+
+    </div>
+    </SimpleTab>
+
+4. Click **Import**.
 
     The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
 

@@ -45,8 +45,8 @@ Bug fixes:
     Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
     
     * One TiDB shared node
-    * One TiKV shared node (with 10 GiB of OLTP storage)
-    * One TiFlash<sup>beta</sup> shared node (with 10 GiB of OLAP storage)
+    * One TiKV shared node (with 500 MiB of OLTP storage)
+    * One TiFlash shared node (with 500 MiB of OLAP storage)
   
   Get started [here](/tidb-cloud/tidb-cloud-quickstart.md).
   

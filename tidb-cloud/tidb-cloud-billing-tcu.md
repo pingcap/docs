@@ -11,7 +11,7 @@ TiDB Cloud measures the capacity of changefeeds in TiCDC Capacity Units (TCUs). 
 
 For each TiDB cluster, the number of TiCDC Capacity Units is set up by TiDB Cloud according to the total vCPU count of all TiKV nodes in your cluster as follows:
 
-| Total vCPU of all TiKV nodes | Number of TCUs |
+| Total vCPUs of all TiKV nodes | Number of TCUs |
 |------------------------------|----------------|
 | < 48                         | 16             |
 | >= 48, and < 120             | 24             |
@@ -34,3 +34,4 @@ The following table lists the price of TiDB Cloud for each TiCDC Capacity Unit (
 | gcp/us-central1     |          $0.1452 |
 | gcp/asia-northeast1 |          $0.1868 |
 | gcp/asia-southeast1 |          $0.1746 |
+| gcp/asia-east1      |          $0.1628 |

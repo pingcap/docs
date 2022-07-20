@@ -130,7 +130,8 @@ FLOAT(p) [UNSIGNED] [ZEROFILL]
 > **Note:**
 >
 > As in MySQL, the `FLOAT` data type stores approximate values. For values such as currency, it is recommended to use the `DECIMAL` type instead.
-> In TiDB, the default precision of the `FLOAT` data type is 8 bits, but in MySQL, the default precision is 6 bits. For example, assuming that you insert `123456789` and `1.23456789` into columns of the `FLOAT` type in both TiDB and MySQL, when you query the corresponding values in MySQL, you get `123457000` and `1.23457`, while in TiDB, you get `123456790` and `1.2345679`.
+>
+> In TiDB, the default precision of the `FLOAT` data type is 8 digits, but in MySQL, the default precision is 6 digits. For example, assuming that you insert `123456789` and `1.23456789` into columns of the `FLOAT` type in both TiDB and MySQL, when you query the corresponding values in MySQL, you get `123457000` and `1.23457`, while in TiDB, you get `123456790` and `1.2345679`.
 
 ### `DOUBLE` type
 
@@ -153,14 +154,14 @@ The meaning of the fields:
 
 | Syntax Element | Description |
 | -------- | ------------------------------- |
-| M | the total number of digits |
+| M | the total number of decimal digits  |
 | D | the number of digits after the decimal point |
 | UNSIGNED | UNSIGNED. If omitted, it is SIGNED. |
 | ZEROFILL | If you specify ZEROFILL for a numeric column, TiDB automatically adds the UNSIGNED attribute to the column. |
 
 ### `DECIMAL` type
 
-`DECIMAL` and its alias `NUMERIC` stores a packed "exact" fixed-point number. M is the total number of digits (the precision, the number of integer digits + the number of decimal digits), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
+`DECIMAL` and its alias `NUMERIC` store a packed "exact" fixed-point number. M is the total number of decimal digits (the precision), and D is the number of digits after the decimal point (the scale). The decimal point and (for negative numbers) the - sign are not counted in M. If D is 0, values have no decimal point or fractional part. The maximum number of digits (M) for DECIMAL is 65. The maximum number of supported decimals (D) is 30. If D is omitted, the default is 0. If M is omitted, the default is 10.
 
 ```sql
 DECIMAL[(M[,D])] [UNSIGNED] [ZEROFILL]

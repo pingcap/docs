@@ -68,7 +68,7 @@ A hash collision might occur since Count-Min Sketch is a hash structure. In the 
 
 ## Top-N values
 
-Top-N values are values with the top N occurrences in a column or index. TiDB records the values and occurences of Top-N values.
+Top-N values are values with the top N occurrences in a column or index. TiDB records the values and occurrences of Top-N values.
 
 ## Collect statistics
 
@@ -116,7 +116,7 @@ Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Si
 >
 > The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
 >
-> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
 
 ##### Collect statistics on some columns
 
@@ -150,7 +150,17 @@ If a table has many columns, collecting statistics on all the columns can cause 
 
     1. Set the value of the [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540) system variable to `ON` to enable TiDB to collect `PREDICATE COLUMNS`.
 
+        <CustomContent platform="tidb">
+
         After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 100 * [`stats-lease`](/tidb-configuration-file.md#stats-lease).
+
+        </CustomContent>
+
+        <CustomContent platform="tidb-cloud">
+
+        After the setting, TiDB writes the `PREDICATE COLUMNS` information to the `mysql.column_stats_usage` system table every 300 seconds.
+
+        </CustomContent>
 
     2. After the query pattern of your business is relatively stable, collect statistics on `PREDICATE COLUMNS` by using the following syntax:
 
@@ -411,13 +421,15 @@ You can view the statistics status using the following statements.
 
 You can use the `SHOW STATS_META` statement to view the total number of rows and the number of updated rows.
 
-The syntax of `ShowLikeOrWhereOpt` is as follows:
-
 {{< copyable "sql" >}}
 
 ```sql
-SHOW STATS_META [ShowLikeOrWhere]
+SHOW STATS_META [ShowLikeOrWhere];
 ```
+
+The syntax of `ShowLikeOrWhereOpt` is as follows:
+
+![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
@@ -438,13 +450,17 @@ Currently, the `SHOW STATS_META` statement returns the following 6 columns:
 
 You can use the `SHOW STATS_HEALTHY` statement to check the health state of tables and roughly estimate the accuracy of the statistics. When `modify_count` >= `row_count`, the health state is 0; when `modify_count` < `row_count`, the health state is (1 - `modify_count`/`row_count`) * 100.
 
+The syntax is as follows:
+
+{{< copyable "sql" >}}
+
+```sql
+SHOW STATS_HEALTHY [ShowLikeOrWhere];
+```
+
 The synopsis of `SHOW STATS_HEALTHY` is:
 
 ![ShowStatsHealthy](/media/sqlgram/ShowStatsHealthy.png)
-
-and the synopsis of the `ShowLikeOrWhereOpt` part is:
-
-![ShowLikeOrWhereOpt](/media/sqlgram/ShowLikeOrWhereOpt.png)
 
 Currently, the `SHOW STATS_HEALTHY` statement returns the following 4 columns:
 
@@ -558,6 +574,14 @@ The statement deletes statistics of all the tables in `TableName`.
 
 ## Load statistics
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is not applicable to TiDB Cloud.
+
+</CustomContent>
+
 By default, depending on the size of column statistics, TiDB loads statistics differently as follows:
 
 - For statistics that consume small space (such as count, distinctCount, and nullCount), as long as the column data is updated, TiDB automatically loads the corresponding statistics into memory for use in the SQL optimization stage.
@@ -571,13 +595,25 @@ Since v5.4.0, TiDB introduces the synchronously loading statistics feature. This
 
 The synchronously loading statistics feature is disabled by default. To enable this feature, set the value of the [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540) system variable to a timeout (in milliseconds) that SQL optimization can wait for at most to synchronously load complete column statistics. The default value of this variable is `0`, indicating that the feature is disabled.
 
+<CustomContent platform="tidb">
+
 After enabling the synchronously loading statistics feature, you can further configure the feature as follows:
 
 - To control how TiDB behaves when the waiting time of SQL optimization reaches the timeout, modify the value of the [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540) system variable. The default value of this variable is `OFF`, indicating that the SQL execution fails after the timeout. If you set this variable to `ON`, after the timeout, the SQL optimization process does not use any histogram, TopN, or CMSketch statistics on any columns, but gets back to using pseudo statistics.
 - To specify the maximum number of columns that the synchronously loading statistics feature can process concurrently, modify the value of the [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540) option in the TiDB configuration file. The default value is `5`.
 - To specify the maximum number of column requests that the synchronously loading statistics feature can cache, modify the value of the [`stats-load-queue-size`](/tidb-configuration-file.md#stats-load-queue-size-new-in-v540) option in the TiDB configuration file. The default value is `1000`.
 
+</CustomContent>
+
 ## Import and export statistics
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This section is not applicable to TiDB Cloud.
+
+</CustomContent>
 
 ### Export statistics
 
@@ -627,5 +663,15 @@ LOAD STATS 'file_name'
 
 ## See also
 
+<CustomContent platform="tidb">
+
 * [LOAD STATS](/sql-statements/sql-statement-load-stats.md)
 * [DROP STATS](/sql-statements/sql-statement-drop-stats.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[SQL Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
+
+</CustomContent>

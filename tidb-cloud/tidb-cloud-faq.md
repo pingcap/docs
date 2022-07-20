@@ -87,8 +87,16 @@ For further HTAP scenarios, refer to [How We Build an HTAP Database That Simplif
 
 ## Is there an easy migration path from another RDBMS to TiDB Cloud?
 
-TiDB provides TiDB Lightning and a Data Migration Tool to migrate data from MySQL databases. TiDB implements MySQL wire protocol and you can use the MySQL client to TiDB. We also offer access to data using TiKV APIs with programming languages such as Java, Go, Rust, and Python.
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
 ## How does TiDB protect data privacy and ensure security?
 
 Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
+
+## Can I import my data directly to TiFlash?
+
+No. When you import data to TiDB Cloud, the data is imported to TiKV. After the import is complete, you can use SQL statements to specify which tables to be replicated to TiFlash. Then, TiDB will create the replicas of the specified tables in TiFlash accordingly. For more information, see [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
+
+## Can I export TiFlash data in the CSV format?
+
+No. TiFlash data cannot be exported.

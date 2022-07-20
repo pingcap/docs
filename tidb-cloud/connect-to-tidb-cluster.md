@@ -18,17 +18,17 @@ After your TiDB cluster is created on TiDB Cloud, you can use one of the followi
 
 To connect to your TiDB cluster via standard connection, perform the following steps:
 
-1. Navigate to the **TiDB Cluster** page and click the name of your newly created cluster.
+1. Navigate to the **Active Clusters** page and click the name of your newly created cluster.
 
-2. Click **Connect**. The **Connect to TiDB** dialog displays.
+2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
 
-3. Create the traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via SQL client.
+3. Create the traffic filter for the cluster. Traffic filter is a list of IPs and CIDR addresses that are allowed to access TiDB Cloud via a SQL client.
 
-    If it is the first time that you connect to the cluster, the traffic filter is empty by default. Perform the following sub-steps to add one. If the traffic filter is already set, skip this step.
+    If the traffic filter is already set, skip the following sub-steps. If the traffic filter is empty, take the following sub-steps to add one.
 
     1. Click one of the buttons to add some rules quickly.
 
-        - **Add Your Current IP Address**
+        - **Add My Current IP Address**
         - **Add Rules from Default Set**
         - **Allow Access from Anywhere**
 
@@ -36,13 +36,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
     3. Click **Create Filter** to confirm the changes.
 
-4. Use a SQL client to connect to TiDB.
-
-    {{< copyable "shell" >}}
-
-    ```shell
-    mysql -u root -h <endpoint> -P <port number> -p
-    ```
+4. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
 ## Connect via VPC peering
 
@@ -52,7 +46,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
 To connect to your TiDB cluster via VPC peering, perform the following steps:
 
-1. Navigate to the **TiDB Cluster** page and click the name of your newly created cluster.
+1. Navigate to the **Active Clusters** page and click the name of your newly created cluster.
 
 2. Click **Connect**, and select the **VPC Peering** tab at the **Connect to TiDB** dialog.
 
@@ -72,7 +66,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 To connect to your TiDB cluster using SQL shell, perform the following steps:
 
-1. Navigate to the **TiDB Cluster** page and click the name of your newly created cluster.
+1. Navigate to the **Active Clusters** page and click the name of your newly created cluster.
 
 2. Click **Connect**, and select the **Web SQL Shell** tab at the **Connect to TiDB** dialog.
 

@@ -44,6 +44,7 @@ If you do not specify a preferred backup time, TiDB Cloud assigns a default back
 | GCP            | Oregon                   | us-west1        | 10:00 UTC           |
 | GCP            | Tokyo                    | asia-northeast1 | 17:00 UTC           |
 | GCP            | Singapore                | asia-southeast1 | 18:00 UTC           |
+| GCP            | Taiwan                   | asia-east1      | 18:00 UTC           |
 
 Note that you can not disable automatic backup.
 
@@ -90,14 +91,16 @@ To restore your TiDB cluster data from a backup to a new cluster, take the follo
 
 2. Select an existing backup in the list, and click **Restore**.
 
-3. In the **Restore** window, enter the cluster name and password.
-
-    If needed, you can also make the following changes:
+3. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the vCPUs size, node quantity, and storage size for the cluster.
+    - Increase the node size, node quantity, and storage size for the cluster.
 
 4. Click **Confirm**.
+
+   The cluster restore process starts and the **Security Quick Start** dialog box is displayed.
+
+5. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
 ### Restore a deleted cluster
 
@@ -106,11 +109,13 @@ To restore a deleted cluster from recycle bin, take the following steps:
 1. In the TiDB Cloud console, go to the target project and click the **Recycle Bin** tab.
 2. Locate the cluster you want to restore, and then click **Backups** in the **Action** column.
 3. Locate your desired backup time, and then click **Restore**.
-4. In the **Restore** window, enter the cluster name and root password.
-
-    If needed, you can also make the following changes:
+4. In the **Restore** window, make the following changes if necessary:
 
     - Update the port number of the cluster.
-    - Increase the vCPUs size, node quantity, and storage size for the cluster.
+    - Increase the node size, node quantity, and storage size for the cluster.
 
 5. Click **Confirm**.
+
+   The cluster restore process starts and the **Security Quick Start** dialog box is displayed.
+
+6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.

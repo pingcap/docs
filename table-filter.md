@@ -5,9 +5,9 @@ summary: Usage of table filter feature in TiDB tools.
 
 # Table Filter
 
-The TiDB ecosystem tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
+The TiDB migration tools operate on all the databases by default, but oftentimes only a subset is needed. For example, you only want to work with the schemas in the form of `foo*` and `bar*` and nothing else.
 
-Since TiDB 4.0, all TiDB ecosystem tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
+Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define subsets. This document describes how to use the table filter feature.
 
 ## Usage
 
@@ -17,31 +17,24 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 * [BR](/br/backup-and-restore-tool.md):
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     ./br backup full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
+    ```
+
+    ```shell
     ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
-    #                 ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
 * [Dumpling](/dumpling-overview.md):
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
-    #          ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
 * [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md):
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
-    #                ^~~~~~~~~~~~~~~~~~~~~~~
     ```
 
 ### TOML configuration files

@@ -7,9 +7,9 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
-> **Warning:**
+> **Note:**
 >
-> Currently, the **audit logging** feature is experimental. It is not recommended that you use it for production environments.
+> Currently, the **audit logging** feature is experimental. The interface and output are subject to change.
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
@@ -193,8 +193,60 @@ To specify auditing filter rules for a cluster, take the following steps:
 
 TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
 
-For example, `13796619446086334065/0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `0` indicates the Pod ID.
+For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the Pod ID.
 
 ## Disable audit logging
 
-If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off** .
+If you no longer want to audit a cluster, go to the page of the cluster, click **Settings** > **Audit Settings**, and then toggle the audit setting in the upper-right corner to **Off**.
+
+## Audit log fields
+
+For each database event record in audit logs, TiDB provides the following fields:
+
+> **Note:**
+>
+> In the following tables, the empty maximum length of a field means that the data type of this field has a well-defined constant length (for example, 4 bytes for INTEGER).
+
+| Col # | Field name | TiDB data type | Maximum length | Description |
+|---|---|---|---|---|
+| 1 | N/A | N/A | N/A | Reserved for internal use |
+| 2 | N/A | N/A | N/A | Reserved for internal use |
+| 3 | N/A | N/A | N/A | Reserved for internal use |
+| 4 | ID       | INTEGER |  | Unique event ID  |
+| 5 | TIMESTAMP | TIMESTAMP |  | Time of event   |
+| 6 | EVENT_CLASS | VARCHAR | 15 | Event type     |
+| 7 | EVENT_SUBCLASS     | VARCHAR | 15 | Event subtype |
+| 8 | STATUS_CODE | INTEGER |  | Response status of the statement   |
+| 9 | COST_TIME | INTEGER |  | Time consumed by the statement    |
+| 10 | HOST | VARCHAR | 16 | Server IP    |
+| 11 | CLIENT_IP         | VARCHAR | 16 | Client IP   |
+| 12 | USER | VARCHAR | 17 | Login username    |
+| 13 | DATABASE | VARCHAR | 64 | Event-related database      |
+| 14 | TABLES | VARCHAR | 64 | Event-related table name          |
+| 15 | SQL_TEXT | VARCHAR | 64 KB | Masked SQL statement   |
+| 16 | ROWS | INTEGER |  | Number of affected rows (`0` indicates that no rows are affected)      |
+
+Depending on the EVENT_CLASS field value set by TiDB, database event records in audit logs also contain additional fields as follows:
+
+- If the EVENT_CLASS value is `CONNECTION`, database event records also contain the following fields:
+
+    | Col # | Field name | TiDB data type | Maximum length | Description |
+    |---|---|---|---|---|
+    | 17 | CLIENT_PORT | INTEGER |  | Client port number |
+    | 18 | CONNECTION_ID | INTEGER |  | Connection ID |
+    | 19 | CONNECTION_TYPE  | VARCHAR | 12 | Connection via `socket` or `unix-socket` |
+    | 20 | SERVER_ID | INTEGER |  | TiDB server ID |
+    | 21 | SERVER_PORT | INTEGER |  | The port that the TiDB server uses to listen to client communicating via the MySQL protocol |
+    | 22 | SERVER_OS_LOGIN_USER | VARCHAR | 17 | The username of the TiDB process startup system  |
+    | 23 | OS_VERSION | VARCHAR | N/A | The version of the operating system where the TiDB server is located  |
+    | 24 | SSL_VERSION | VARCHAR | 6 | The current SSL version of TiDB |
+    | 25 | PID | INTEGER |  | The PID of the TiDB process |
+
+- If the EVENT_CLASS value is `TABLE_ACCESS` or `GENERAL`, database event records also contain the following fields:
+
+    | Col # | Field name | TiDB data type | Maximum length | Description |
+    |---|---|---|---|---|
+    | 17 | CONNECTION_ID | INTEGER |  | Connection ID   |
+    | 18 | COMMAND | VARCHAR | 14 | The command type of the MySQL protocol |
+    | 19 | SQL_STATEMENT  | VARCHAR | 17 | The SQL statement type |
+    | 20 | PID | INTEGER |  | The PID of the TiDB process  |
