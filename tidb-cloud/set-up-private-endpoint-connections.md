@@ -45,19 +45,17 @@ The relationship of a TiDB cluster in TiDB Cloud, an endpoint service, and a pri
 > - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 > - You are connecting to PD or TiKV nodes directly.
 
-## Use private endpoint with AWS
+## Set up private endpoint with AWS
 
-This section describes how to create, edit, delete or terminate a private endpoint, and how to connect to a private endpoint service via private endpoint.
+This section describes how to set up a private endpoint and how to connect to a private endpoint service via private endpoint.
+
+Take the following steps to set up a private endpoint. If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
 ### Prerequisites
 
 TiDB Cloud supports private endpoints only Dedicated Tier clusters. You are expected to create a Dedicated Tier cluster before creating a private endpoint. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
 
-### Create a private endpoint
-
-Take the following steps to create a private endpoint. If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
-
-#### Step 1. Find the entrance
+#### Step 1: Find the entrance
 
 To find the entrance to creating a private endpoint, take one of the following methods:
 
@@ -74,7 +72,7 @@ To find the entrance to creating a private endpoint, take one of the following m
 
 On the creation page, a flow bar is displayed indicating the stages of creating a private endpoint: **Choose Cluster** > **Service Endpoint** > **Interface Endpoint** > **Accept Endpoint Connection** > **Enable Private DNS**.
 
-#### Step 2. Choose a TiDB cluster
+#### Step 2: Choose a TiDB cluster
 
 After you open the creation page for a private endpoint, you are at the **Choose Cluster** stage. Click the drop-down list to choose a TiDB cluster for which you want to create a private endpoint, and then click **Next**.
 
@@ -82,7 +80,7 @@ After you open the creation page for a private endpoint, you are at the **Choose
 >
 > Before a cluster is created, it is not displayed in the drop-down list. You cannot create a private endpoint for a cluster that is not created.
 
-#### Step 3. Choose Service Endpoint Region
+#### Step 3: Choose Service Endpoint Region
 
 After you have choosen a TiDB cluster, you are at the **Service Endpoint** stage. From the **Region** List, select the region in which you want to create the private endpoint. Then, click **Next**.
 
@@ -90,7 +88,7 @@ After you have choosen a TiDB cluster, you are at the **Service Endpoint** stage
 >
 > The default region is where your cluster is located. Do not change it. Cross-region private endpoint is currently not supported.
 
-#### Step 4. Create an AWS Interface Endpoint
+#### Step 4: Create an AWS Interface Endpoint
 
 After you have choosen a region, you are at the **Interface Endpoint** stage. When you enter this stage, TiDB Cloud begins to create an endpoint service, which takes 3 to 4 minutes.
 
@@ -153,13 +151,13 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
 
     Then click **Next**.
 
-#### Step 5. Accept the endpoint connection
+#### Step 5: Accept the endpoint connection
 
 After you have created an endpoint service, you are at the **Accept Endpoint Connection** stage. Fill in the box with the your VPC endpoint ID and click **Next**.
 
 You can get your VPC endpoint ID from your AWS Management Console. If you do not know how to get it, click **Show Instruction** and you will see a snapshot of the AWS Management Console that illustrates how to get it. To fold the snapshot, click the **Hide instruction**.
 
-#### Step 6. Enable Private DNS
+#### Step 6: Enable Private DNS
 
 After you have accepted the endpoint connection, you are at the **Enable Private DNS** stage. Click the **Copy** button to copy the command and run it in your AWS CLI. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
 
