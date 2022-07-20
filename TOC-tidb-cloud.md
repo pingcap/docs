@@ -34,6 +34,7 @@
     - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
     - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
     - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
+    - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
 - Back Up and Restore Data
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)

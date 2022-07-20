@@ -93,9 +93,17 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
 
+## Can I import my data directly to TiFlash?
+
+No. When you import data to TiDB Cloud, the data is imported to TiKV. After the import is complete, you can use SQL statements to specify which tables to be replicated to TiFlash. Then, TiDB will create the replicas of the specified tables in TiFlash accordingly. For more information, see [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
+
+## Can I export TiFlash data in the CSV format?
+
+No. TiFlash data cannot be exported.
+
 ## What is the status information of private endpoint and endpoint service?
 
-When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md), you can see the status of a private endpoint or private endpoint service on the [**Private Endpoint** page](/tidb-cloud/set-up-private-endpoint-connections.md#step-1-find-the-entrance).
+When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md), the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](/tidb-cloud/set-up-private-endpoint-connections.md#step-1-find-the-entrance).
 
 The possible statuses of a private endpoint are explained as follows:
 

@@ -69,8 +69,6 @@ You can set the project CIDR during creating the first Dedicated Tier of your pr
 
 3. Click **Initialize**. The **Approve VPC Peerings** dialog is displayed.
 
-    ![Add VPC peering](/media/tidb-cloud/vpc-peering/tidb-cloud-vpc-peering-env-check-information.png)
-
 ### Step 2: Approve and configure the VPC peering
 
 Use either of the following two options to approve and configure the VPC peering connection:
@@ -212,8 +210,6 @@ You can also use the AWS dashboard to configure the VPC peering connection.
     - Application GCP project ID
     - VPC Network Name
     - VPC CIDR
-
-    ![VPC-Peering](/media/tidb-cloud/VPC-Peering2.png)
 
 3. Click **Initialize**. The **Approve VPC Peerings** dialog is displayed.
 

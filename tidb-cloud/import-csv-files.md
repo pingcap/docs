@@ -57,11 +57,11 @@ Before importing CSV files into TiDB Cloud, you need to create the target databa
 
 To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do one of the following:
 
-- If your organization is using TiDB Cloud as a service on AWS, [configure cross-account access to Amazon S3](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access).
+- If your CSV files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access).
 
     Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud).
 
-- If your organization is using TiDB Cloud as a service on Google Cloud Platform (GCP), [configure cross-account access to GCS](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access).
+- If your CSV files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access).
 
 ## Step 4. Import CSV files to TiDB Cloud
 
@@ -86,9 +86,15 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example,`my-data.csv`.
     - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
 
-4. Click **Import** to start the import task.
+4. Click **Import**.
 
-5. When the import progress shows success, check the number after **Total Files:**.
+    A warning message about the database resource consumption is displayed.
+
+5. Click **Confirm**.
+
+    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+
+6. When the import progress shows success, check the number after **Total Files:**.
 
     If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, ensure that there are no typos in the **Object Name Pattern** field and try again.
 
