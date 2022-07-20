@@ -58,7 +58,7 @@ If fewer than 10,000 records are returned, use the following example to delete t
 <SimpleTab>
 <div label="SQL">
 
-{{< copyable "sql" >}}
+In SQL, the example is as follows:
 
 ```sql
 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
@@ -68,7 +68,7 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 <div label="Java">
 
-{{< copyable "" >}}
+In Java, the example is as follows:
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -95,7 +95,7 @@ try (Connection connection = ds.getConnection()) {
 
 <div label="Golang">
 
-{{< copyable "" >}}
+In Golang, the example is as follows:
 
 ```go
 package main
