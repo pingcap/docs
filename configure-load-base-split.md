@@ -33,7 +33,7 @@ The Load Base Split feature is currently controlled by three parameters:
 
 - `split.qps-threshold`: The threshold of QPS for the Region to be split, default is `3000` per second.
 - `split.byte-threshold`: The threshold of read load for the Region to be split, default is 30 MiB per second.
-- `split.region-cpu-overload-threshold-ratio`: The threshold of CPU usage for the Region to be split, default is `0.25`.
+- `split.region-cpu-overload-threshold-ratio`: The threshold of CPU usage (the percentage of CPU time of the read thread pool) for the Region to be split, default is `0.25`.
 
 If the sum of all types of read requests per second for a Region exceeds the QPS threshold or traffic threshold for 10 consecutive seconds, PD splits the Region.
 
