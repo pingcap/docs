@@ -37,7 +37,7 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="Deploy" icon="cloud5">
+<LearningPath label="Deploy" icon="deploy">
 
 [Requirements](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements)
 
