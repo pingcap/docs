@@ -5,7 +5,7 @@ summary: Learn how to set up private endpoint connections in TiDB Cloud.
 
 # Set Up Private Endpoint Connections
 
-TiDB Cloud supports highy secure and one-way access from your virtual private cloud (VPC) to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
+TiDB Cloud supports highy secure and one-way access to the TiDB Cloud service hosted in an AWS VPC via the [AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc), as if the service were in your own VPC. A private endpoint is exposed in your VPC and you can create a connection to the TiDB Cloud service via the endpoint with permission.
 
 Powered by AWS PrivateLink, the endpoint connection is secure and private, and does not expose your data to the public internet.
 
