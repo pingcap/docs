@@ -82,13 +82,13 @@ After you open the creation page for a private endpoint, you are at the **Choose
 > - If a cluster is being created, it is not displayed in the drop-down list.
 > - If there is no existing created cluster, you will see **Create Cluster** on the right side of the drop-down list. Click **Create Cluter** to create a TiDB cluster. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
 
-#### Step 3. Choose a region
+#### Step 3. Choose Service Endpoint Region
 
 After you have choosen a TiDB cluster, you are at the **Service Endpoint** stage. Click the drop-down list to choose the region where your cluster is located, and then click **Next**.
 
 Note that you cannot choose other regions. Cross-region private endpoint is currently not supported.
 
-#### Step 4. Create an endpoint service
+#### Step 4. Create an AWS Interface Endpoint
 
 After you have choosen a region, you are at the **Interface Endpoint** stage. When you enter this stage, TiDB Cloud begins to create an endpoint service, which takes 3 to 4 minutes.
 
@@ -120,7 +120,7 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
     </div>
     <div label="AWS CLI">
 
-    To use the AWS CLI to create the VPC interface, perform the following steps:
+    To use the AWS CLI to create an AWS Interface Endpoint, perform the following steps:
 
     1. Install AWS Command Line Interface (AWS CLI).
 
