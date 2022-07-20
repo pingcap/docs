@@ -15,7 +15,7 @@ To troubleshoot the access denied errors, perform the following checks in the AW
 
 1. In the AWS Management Console, go to **IAM** > **Access Management** > **Roles**, find and click on the role you have created for the target TiDB cluster. The role summary page is displayed.
 2. In the **Permission policies** area of the role summary page, click on each policy to enter the policy summary page.
-3. On the policy summary page, click on the **{}JSON** tab to see the permission policy. Make sure that the `Resource` fields in each policy are correctly configured.
+3. On the policy summary page, click the **{}JSON** tab to see the permission policy. Make sure that the `Resource` fields in each policy are correctly configured.
 
 The following is a sample policy.
 
@@ -84,7 +84,7 @@ If your policy is not correctly configured as the preceding example shows, corre
 
 1. In the AWS Management Console, open the Amazon S3 console, go to the **Buckets** page. A list of buckets are displayed.
 2. Select and click on the target bucket and the bucket information page is displayed.
-3. Click on the **Permissions** tab and find the **Bucket policy** area. By default, this area has no policy value. If any denied policy is displayed in this area, the `AccessDenied` error might occur during data import.
+3. Click the **Permissions** tab and find the **Bucket policy** area. By default, this area has no policy value. If any denied policy is displayed in this area, the `AccessDenied` error might occur during data import.
 
 If you see a denied policy, check whether the policy relates to the current data import. If yes, delete it from the area and retry the data import.
 
