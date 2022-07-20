@@ -997,7 +997,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 <CustomContent platform="tidb-cloud">
 
 - Default value: `ON`
-- This variable is ready-only. For the TiDB nodes that your are connected to, the Security Enhanced Mode (SEM) is enabled by default.
+- This variable is ready-only. For TiDB Cloud, the Security Enhanced Mode (SEM) is enabled by default.
 
 </CustomContent>
 
@@ -2278,7 +2278,18 @@ explain select * from t where age=5;
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
     - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
+
+<CustomContent platform="tidb">
+
 - Users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- For TiDB Cloud, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
+
+</CustomContent>
 
 ### tidb_retry_limit
 
