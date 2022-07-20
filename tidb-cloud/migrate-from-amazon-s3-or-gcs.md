@@ -149,7 +149,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
 
 2. Click **Import**.
 
-    A warning message about the database resource consumption is displayed.
+    A warning message about the database resource consumption is displayed. You can ignore the warning message.
 
 3. Click **Confirm**.
 

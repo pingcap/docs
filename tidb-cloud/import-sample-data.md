@@ -46,7 +46,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
 4. Click **Import**.
 
-    A warning message about the database resource consumption is displayed.
+    A warning message about the database resource consumption is displayed. You can ignore the warning message.
 
 5. Click **Confirm**.
 

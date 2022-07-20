@@ -155,7 +155,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 4. Click **Import**.
 
-    A warning message about the database resource consumption is displayed.
+    A warning message about the database resource consumption is displayed. You can ignore the warning message.
 
 5. Click **Confirm**.
 

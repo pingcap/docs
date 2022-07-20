@@ -19,7 +19,7 @@ To import data, perform the following steps:
 6. Create the bucket policy and role for cross-account access according to [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
 7. Click **Import**.
 
-    A warning message about the database resource consumption is displayed.
+    A warning message about the database resource consumption is displayed. You can ignore the warning message.
 
 8. Click **Confirm**.
 

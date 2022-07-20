@@ -88,7 +88,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 4. Click **Import**.
 
-    A warning message about the database resource consumption is displayed.
+    A warning message about the database resource consumption is displayed. You can ignore the warning message.
 
 5. Click **Confirm**.
 
