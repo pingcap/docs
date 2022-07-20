@@ -15,14 +15,23 @@ TiDBはMySQLと高い互換性があります。データがセルフホスト�
 
 ## 前提条件 {#prerequisites}
 
-TiDBは現在、次のCI照合のみをサポートしています。 MySQL互換データベースからTiDBにデータを移行する前に、サポートされている照合が要件を満たしていることを確認してください。
+MySQL互換データベースからTiDBにデータを移行する前に、サポートされているTiDB Cloudの照合が要件を満たしていることを確認してください。
 
+デフォルトでは、 TiDB Cloudは次のCI照合をサポートします。
+
+-   ascii_bin
+-   バイナリ
+-   latin1_bin
+-   utf8_bin
 -   utf8_general_ci
+-   utf8_unicode_ci
+-   utf8mb4_bin
 -   utf8mb4_general_ci
+-   utf8mb4_unicode_ci
 
 ## 手順1.TiUPをインストールします {#step-1-install-tiup}
 
-TiUPは、TiDBエコシステムのパッケージマネージャーであり、1行のコマンドで任意のTiDBクラスタコンポーネントを実行するのに役立ちます。このドキュメントでは、TiUPを使用して、 DumplingとTiDBLightningのインストールと実行を支援します。
+TiUPは、TiDBエコシステムのパッケージマネージャーであり、1行のコマンドで任意のTiDBクラスタコンポーネントを実行するのに役立ちます。このドキュメントでは、TiUPを使用してDumplingとTiDB Lightningをインストールして実行します。
 
 1.  TiUPをダウンロードしてインストールします。
 
@@ -88,11 +97,11 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 -   ソースデータがローカルファイルにある場合は、次のいずれかを実行します。
 
     -   データが1TBを超える場合は、データをTiDB Cloudにインポートまたは移行するためのステージング領域としてAmazonS3またはGCSを使用することをお勧めします。詳細については、 [AmazonS3またはGCSからTiDB Cloudにインポートまたは移行します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)を参照してください。
-    -   データが1TB未満の場合は、このドキュメントの次の手順に従ってTiDBLightningTiDBバックエンドを使用できます。
+    -   データが1TB未満の場合は、このドキュメントの次の手順に従ってTiDB Lightningバックエンドを使用できます。
 
-次の手順は、TiDBLightningTiDBバックエンドを使用してデータをTiDB Cloudにインポートする方法を示しています。
+次の手順は、 TiDB Lightningバックエンドを使用してデータをTiDB Cloudにインポートする方法を示しています。
 
-1.  TiDBLightningをインストールします。
+1.  TiDB Lightningをインストールします：
 
     {{< copyable "" >}}
 
@@ -102,7 +111,7 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
 2.  TiDB Lightning構成ファイルを作成し、インポート情報を構成します。
 
-    1.  TiDBLightning構成ファイルを作成します。
+    1.  TiDB Lightning構成ファイルを作成します。
 
         {{< copyable "" >}}
 
@@ -144,9 +153,9 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
         no-schema = false
         ```
 
-        ターゲットTiDBクラスタでTLSを構成する場合、またはさらに構成を行う場合は、 [TiDBLightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
+        ターゲットTiDBクラスタでTLSを構成する場合、またはさらに構成を行う場合は、 [TiDB LightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
 
-3.  TiDBLightningを使用してデータをTiDBにインポートします。
+3.  TiDB Lightningを使用してデータをTiDBにインポートします：
 
     {{< copyable "" >}}
 
