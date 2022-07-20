@@ -205,9 +205,14 @@ mysql> SELECT * FROM t1;
 - Persists to cluster: Yes
 - Type: Enumeration
 - Default value: `mysql_native_password`
-- Possible values: `mysql_native_password`, `caching_sha2_password`
-- This variable sets the authentication method that the server advertises when the server-client connection is being established. Possible values for this variable are documented in [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
-- Value options: `mysql_native_password` and `caching_sha2_password`. For more details, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+- Possible values: `mysql_native_password` and `caching_sha2_password`
+- This variable sets the authentication method that the server advertises when the server-client connection is being established.
+
+<CustomContent platform="tidb">
+
+For more possible values of this variable, see [Authentication plugin status](/security-compatibility-with-mysql.md#authentication-plugin-status).
+
+</CustomContent>
 
 ### default_week_format
 
