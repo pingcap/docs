@@ -990,20 +990,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 <CustomContent platform="tidb">
 
 - Default value: `OFF`
+- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - Default value: `ON`
-
-</CustomContent>
-
-- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled.
-
-<CustomContent platform="tidb">
-
-- To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
+- This variable is ready-only. For the TiDB nodes that your are connected to, the Security Enhanced Mode (SEM) is enabled by default.
 
 </CustomContent>
 
