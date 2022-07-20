@@ -725,6 +725,24 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
 
+### tidb_ddl_enable_fast_reorg
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default `OFF`
+- This variable enable/disable add index DDL task to go fast reorg path in `re-organize` phase.
+
+### tidb_ddl_disk_quota
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `107374182400` 100 GB
+- Range: `[107374182400, 1125899906842624]` [100 GB, 1 PB]
+- Unit: Threads
+- This variable is used to set the threshold of fast reorg can store index data in TiDB local storage.
+
 ### tidb_disable_txn_auto_retry
 
 - Scope: SESSION | GLOBAL
