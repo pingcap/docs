@@ -45,13 +45,15 @@ The relationship of a TiDB cluster in TiDB Cloud, an endpoint service, and a pri
 > - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 > - You are connecting to PD or TiKV nodes directly.
 
-## How to use private endpoint
+## Use private endpoint with AWS
 
 This section describes how to create, edit, delete or terminate a private endpoint, and how to connect to a private endpoint service via private endpoint.
 
-### Create a private endpoint
+### Prerequisites
 
-Before you create a private endpoint, make sure that you are using TiDB Cloud Dedicated Tier.
+TiDB Cloud supports private endpoints only Dedicated Tier clusters. You are expected to create a Dedicated Tier cluster before creating a private endpoint. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
+
+### Create a private endpoint
 
 Take the following steps to create a private endpoint. If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
@@ -78,15 +80,15 @@ After you open the creation page for a private endpoint, you are at the **Choose
 
 > **Note:**
 >
-> - Only the Dedicated Tier clusters are displayed in the drop-down list. Developer Tier clusters are not displayed.
-> - If a cluster is being created, it is not displayed in the drop-down list.
-> - If there is no existing created cluster, you will see **Create Cluster** on the right side of the drop-down list. Click **Create Cluter** to create a TiDB cluster. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
+> Before a cluster is created, it is not displayed in the drop-down list. You cannot create a private endpoint for a cluster that is not created.
 
 #### Step 3. Choose Service Endpoint Region
 
-After you have choosen a TiDB cluster, you are at the **Service Endpoint** stage. Click the drop-down list to choose the region where your cluster is located, and then click **Next**.
+After you have choosen a TiDB cluster, you are at the **Service Endpoint** stage. From the **Region** List, select the region in which you want to create the private endpoint. Then, click **Next**.
 
-Note that you cannot choose other regions. Cross-region private endpoint is currently not supported.
+> **Note:**
+>
+> The default region is where your cluster is located. Do not change it. Cross-region private endpoint is currently not supported.
 
 #### Step 4. Create an AWS Interface Endpoint
 
@@ -136,32 +138,15 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
         aws configure
         ```
 
-    3. Replace the following variable values with your account information.
-
-        ```bash
-        # Sets up the related variables.
-        app_region="<APP Region>"
-        app_vpc_id="<Your VPC ID>"
-        tidbcloud_project_cidr="<TiDB Cloud Project VPC CIDR>"
-        ```
-
-        For example:
-
-        ```
-        # Sets up the related variables
-        pcx_tidb_to_app_id="pcx-069f41efddcff66c8"
-        app_region="us-west-2"
-        app_vpc_id="vpc-0039fb90bb5cf8698"
-        tidbcloud_project_cidr="10.250.0.0/16"
-        ```
-
-    4. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint.
+    3. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint.
 
     > **Tip:**
     >
-    > If your service is spanning across more than three availability zones (AZs), an error is returned. To resolve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > - If your service is spanning across more than three availability zones (AZs), an error is returned. To resolve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
     >
-    > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+    >     In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+    >
+    > - You cannot copy the command until TiDB Cloud finishes creating endpoint service in the background.
 
     </div>
     </SimpleTab>
@@ -179,28 +164,6 @@ You can get your VPC endpoint ID from your AWS Management Console. If you do not
 After you have accepted the endpoint connection, you are at the **Enable Private DNS** stage. Click the **Copy** button to copy the command and run it in your AWS CLI. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
 
 Then click **Create** to finalize the creation of the private endpoint.
-
-### Edit a private endpoint
-
-To edit a private endpoint, take these steps:
-
-1. Open the **Private Endpoint** page. To find this page, see [Create a private endpoint - Step 1. Find the entrance](#step-1-find-the-entrance).
-
-    All the created private endpoints are displayed on this page.
-
-2. Click the **Edit** button next to the private endpoint you want to edit, and you will automatically enter the last stage at which you were creating a private endpoint. For example, if you were at the **Accept Endpoint Connection** stage, you will be back to this stage once you click **Edit**.
-
-> **Note:**
->
-> - You can edit a private endpoint only when the endpoint is being created (in a status other than "Active"). Once the creation process is finished, you can no longer edit the endpoint.
-> - When you are editing a private endpoint on the endpoint creation page, you cannot change the cluster or region.
-
-### Delete or terminate a private endpoint
-
-To delete or terminate a private endpoint, take one of the following methods:
-
-- Drop the TiDB cluster that has been configured as a private endpoint service. In this way, all private endpoints connected to the cluster will be deleted.
-- Drop a single private endpoint. To do that, open the **Private Endpoint** page, click the **Terminate** button next to the private endpoint you want to terminate, and the endpoint will be terminated.
 
 ### Connect to a private endpoint service
 
