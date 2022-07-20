@@ -78,7 +78,6 @@ To delete a running backup job, it is similar as [**Delete backup files**](#dele
 
 2. Click **Delete** for the backup file that which is in "Pending" or "Running" state.
 
-
 ### Best practices for backup
 
 - It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
