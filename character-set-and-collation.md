@@ -346,7 +346,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
     SET character_set_connection = charset_name;
     ```
 
-    `COLLATE`はオプションです。存在しない場合は、デフォルトの`charset_name`の照合順序を使用して`collation_connection`を設定します。
+    `COLLATE`はオプションです。存在しない場合は、 `charset_name`のデフォルトの照合順序を使用して`collation_connection`を設定します。
 
 -   `SET CHARACTER SET 'charset_name'`
 

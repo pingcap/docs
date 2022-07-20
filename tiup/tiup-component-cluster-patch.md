@@ -36,13 +36,13 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ## オプション {#options}
 
-### -上書き {#overwrite}
+### --overwrite {#overwrite}
 
 -   特定のコンポーネント（TiDBやTiKVなど）にパッチを適用した後、tiupクラスタがコンポーネントをスケールアウトすると、TiUPはデフォルトで元のコンポーネントバージョンを使用します。クラスタが将来スケールアウトするときにパッチを適用するバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-### --転送タイムアウト {#transfer-timeout}
+### --transfer-timeout {#transfer-timeout}
 
 -   PDまたはTiKVサービスを再起動する場合、TiKV / PDは最初に、再起動するノードのリーダーを別のノードに転送します。転送プロセスには時間がかかるため、オプション`--transfer-timeout`を使用して、最大待機時間（秒単位）を設定できます。タイムアウト後、TiUPはサービスを直接再起動します。
 -   データ型： `UINT`
@@ -72,7 +72,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 >
 > オプション`-N, --node`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを置き換えます。
 
-### - オフライン {#offline}
+### &#x20;--offline {#offline}
 
 -   現在のクラスタが実行されていないことを宣言します。このオプションを指定すると、TiUPはサービスリーダーを別のノードに削除したり、サービスを再起動したりせず、クラスタコンポーネントのバイナリファイルを置き換えるだけです。
 -   データ型： `BOOLEAN`
@@ -80,7 +80,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### -h、-help {#h-help}
 
--   ヘルプ情報を出力します。
+-   ヘルプ情報を印刷します。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 

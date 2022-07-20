@@ -200,7 +200,7 @@ scrape_configs:
 
 -   **`tikv_import_sst_ingest_duration`** （ヒストグラム）
 
-    SSTファイルをTiKVに取り込むのに必要な時間のバケット化されたヒストグラム。
+    SSTファイルをTiKVに取り込むために必要な時間のバケット化されたヒストグラム。
 
 -   **`tikv_import_each_phase`** （ゲージ）
 

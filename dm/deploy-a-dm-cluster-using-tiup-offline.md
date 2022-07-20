@@ -156,7 +156,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 
 -   デプロイされたDMクラスタの名前は`dm-test`です。
 -   DMクラスタのバージョンは`${version}`です。 `tiup list dm-master`を実行すると、TiUPでサポートされている最新バージョンを表示できます。
--   初期化設定ファイルは`topology.yaml`です。
+-   初期化構成ファイルは`topology.yaml`です。
 -   `--user root` ： `root`キーを使用してターゲットマシンにログインしてクラスタの展開を完了するか、 `ssh`および`sudo`の特権を持つ他のユーザーを使用して展開を完了することができます。
 -   `[-i]`および`[-p]` ：オプション。パスワードなしでターゲットマシンへのログインを設定した場合、これらのパラメータは必要ありません。そうでない場合は、2つのパラメーターのいずれかを選択してください。 `[-i]`は、ターゲットマシンにアクセスできる`root`のユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。 `[-p]`は、ユーザーパスワードをインタラクティブに入力するために使用されます。
 -   TiUP DMは、組み込みSSHクライアントを使用します。制御マシンシステムにネイティブなSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスタに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って構成を編集します。
@@ -189,7 +189,7 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-期待される出力には、インスタンスID、役割、ホスト、リスニングポート、ステータス（クラスタがまだ開始されていないため、ステータスは`Down` ）、および`inactive`クラスタのディレクトリ情報が含まれ`dm-test` 。
+期待される出力には、インスタンスID、ロール、ホスト、リスニングポート、ステータス（クラスタがまだ開始されていないため、ステータスは`Down` ）、および`inactive`クラスタのディレクトリ情報が含まれ`dm-test` 。
 
 ## ステップ7：クラスタを開始します {#step-7-start-the-cluster}
 

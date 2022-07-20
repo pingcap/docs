@@ -13,7 +13,7 @@ summary: Learn how to stream TiDB data to the Confluent Platform using TiCDC.
 
 [コンフルエントなプラットフォーム](https://docs.confluent.io/current/platform.html)は、ApacheKafkaをコアとするデータストリーミングプラットフォームです。多くの公式およびサードパーティのシンクコネクタを備えたConfluentPlatformを使用すると、ストリームソースをリレーショナルデータベースまたは非リレーショナルデータベースに簡単に接続できます。
 
-TiDBをConfluentPlatformと統合するには、TiCDCコンポーネントをAvroプロトコルで使用できます。 TiCDCは、ConfluentPlatformが認識する形式でデータ変更をKafkaにストリーミングできます。詳細な統合ガイドについては、次のセクションを参照してください。
+TiDBをConfluentPlatformと統合するには、TiCDCコンポーネントをAvroプロトコルで使用できます。 TiCDCは、ConfluentPlatformが認識できる形式でデータ変更をKafkaにストリーミングできます。詳細な統合ガイドについては、次のセクションを参照してください。
 
 ## 前提条件 {#prerequisites}
 

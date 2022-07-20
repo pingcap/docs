@@ -20,7 +20,7 @@ tiup cluster destroy <cluster-name> [flags]
 
 ## オプション {#options}
 
-### - 力 {#force}
+### &#x20;--force {#force}
 
 -   場合によっては、クラスタの一部のノードがダウンしており、SSHを介してノードに接続して操作することができません。現時点では、 `--force`オプションを使用してこれらのエラーを無視できます。
 -   データ型： `Boolean`
@@ -34,7 +34,7 @@ tiup cluster destroy <cluster-name> [flags]
 
 ### --retain-role-data {#retain-role-data}
 
--   データを保持する必要がある役割を指定します。複数の役割を指定する必要がある場合は、このオプションを複数回使用します： `--retain-role-data <role-A> --retain-role-data <role-B>` 。
+-   データを保持する必要があるロールを指定します。複数の役割を指定する必要がある場合は、このオプションを複数回使用します： `--retain-role-data <role-A> --retain-role-data <role-B>` 。
 -   データ型： `StringArray`
 -   デフォルト：空
 

@@ -181,6 +181,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 -   `Region Merge`のサイズ制限を制御します。リージョンサイズが指定された値より大きい場合、PDはリージョンを隣接するリージョンとマージしません。
 -   デフォルト値： `20`
+-   単位：MiB
 
 ### <code>max-merge-region-keys</code> {#code-max-merge-region-keys-code}
 
@@ -303,7 +304,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ## <code>replication</code> {#code-replication-code}
 
-レプリカに関連するConfiguration / コンフィグレーションアイテム
+レプリカに関連するConfiguration / コンフィグレーション項目
 
 ### <code>max-replicas</code> {#code-max-replicas-code}
 

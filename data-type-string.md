@@ -5,7 +5,7 @@ summary: Learn about the string types supported in TiDB.
 
 # 文字列型 {#string-types}
 
-`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列型を`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列タイプ](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
+`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列タイプを`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列タイプ](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
 
 ## サポートされているタイプ {#supported-types}
 

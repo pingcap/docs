@@ -125,7 +125,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 
 -   `grep`ログのキーワード`progress` 。進行状況は、デフォルトで5分ごとに更新されます。
 -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
--   [TiDB Lightningインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
+-   [TiDB Lightningインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
 TiDB Lightningがインポートを完了すると、自動的に終了します。ログ印刷`the whole procedure completed`の最後の5行が見つかった場合、インポートは成功しています。
 

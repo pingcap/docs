@@ -364,7 +364,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
     » query-status test
     ```
 
-    <details><summary>実行結果をご覧ください。</summary>
+    <details><summary>実行結果を参照してください。</summary>
 
     ```
     {

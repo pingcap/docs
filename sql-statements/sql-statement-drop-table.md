@@ -55,11 +55,11 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   `IF EXISTS`のテーブルをドロップしても、存在しないテーブルをドロップしようとしても警告は返されません。 [問題＃7867](https://github.com/pingcap/tidb/issues/7867)
+-   `IF EXISTS`のテーブルを削除しても、存在しないテーブルを削除しようとしても警告は返されません。 [問題＃7867](https://github.com/pingcap/tidb/issues/7867)
 -   現在、 `RESTRICT`と`CASCADE`は構文的にのみサポートされています。
 
 ## も参照してください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)

@@ -3,7 +3,7 @@ title: Function and Operator Reference
 summary: Learn how to use the functions and operators.
 ---
 
-# 関数とオペレーターのリファレンス {#function-and-operator-reference}
+# 関数と演算子のリファレンス {#function-and-operator-reference}
 
 TiDBの関数と演算子の使用法は、MySQLと似ています。 [MySQLの関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/functions.html)を参照してください。
 

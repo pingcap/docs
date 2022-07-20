@@ -65,8 +65,6 @@ VPCピアリング接続は、プライベートIPアドレスを使用して2�
 
 3.  [**初期化]**をクリックします。 [ <strong>VPCPearingsの承認</strong>]ダイアログが表示されます。
 
-    ![Add VPC peering](/media/tidb-cloud/vpc-peering/tidb-cloud-vpc-peering-env-check-information.png)
-
 ### ステップ2：VPCピアリングを承認および構成します {#step-2-approve-and-configure-the-vpc-peering}
 
 次の2つのオプションのいずれかを使用して、VPCピアリング接続を承認および設定します。
@@ -208,8 +206,6 @@ AWSダッシュボードを使用して、VPCピアリング接続を設定す�
     -   アプリケーションGCPプロジェクトID
     -   VPCネットワーク名
     -   VPC CIDR
-
-    ![VPC-Peering](/media/tidb-cloud/VPC-Peering2.png)
 
 3.  [**初期化]**をクリックします。 [ <strong>VPCPearingsの承認</strong>]ダイアログが表示されます。
 

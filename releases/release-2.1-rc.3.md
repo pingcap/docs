@@ -45,7 +45,7 @@ title: TiDB 2.1 RC3 Release Notes
 -   改善
     -   リージョンAPI1でより詳細な情報を返し[＃1252](https://github.com/pingcap/pd/pull/1252)
 -   バグ修正
-    -   PDがリーダー[＃1250](https://github.com/pingcap/pd/pull/1250)を切り替えた後、 `adjacent-region-scheduler`がクラッシュにつながる可能性がある問題を修正します
+    -   PDがリーダー[＃1250](https://github.com/pingcap/pd/pull/1250)を切り替えた後に`adjacent-region-scheduler`がクラッシュにつながる可能性がある問題を修正します
 
 ## TiKV {#tikv}
 

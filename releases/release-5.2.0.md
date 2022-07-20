@@ -104,7 +104,7 @@ v5.2では、主な新機能と改善点は次のとおりです。
 
 ### 取引 {#transaction}
 
--   **ロックビューの一般提供（GA）**
+-   **Lock ビューの一般提供（GA）**
 
     ロックビュー機能は、ペシミスティックロックのロック競合とロック待機に関する詳細情報を提供します。これは、DBAがトランザクションロックイベントを監視し、デッドロックの問題をトラブルシューティングするのに役立ちます。
 
@@ -165,7 +165,7 @@ v5.2では、主な新機能と改善点は次のとおりです。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
-TiCDCは、HTTPプロトコル（OpenAPI）を使用したTiCDCタスクの管理をサポートしています。これは、Kubernetesとオンプレミス環境の両方にとってよりユーザーフレンドリーな操作方法です。 （実験的特徴）
+TiCDCは、HTTPプロトコル（OpenAPI）を使用したTiCDCタスクの管理をサポートしています。これは、Kubernetesとオンプレミス環境の両方でよりユーザーフレンドリーな操作方法です。 （実験的特徴）
 
 [＃2411](https://github.com/pingcap/tiflow/issues/2411)
 
@@ -198,7 +198,7 @@ AppleM1チップを搭載したMacコンピュータでの`tiup playground`コ�
 
     -   内蔵機能`json_unquote()`から[＃24415](https://github.com/pingcap/tidb/issues/24415)へのプッシュダウンをサポート
     -   デュアルテーブル[＃25614](https://github.com/pingcap/tidb/pull/25614)からの`union`ブランチの削除をサポート
-    -   集計オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
+    -   骨材オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
     -   MPP外部結合が、テーブルの行数[＃25142](https://github.com/pingcap/tidb/pull/25142)に基づいてビルドテーブルを選択できるようにします。
     -   リージョン[＃24724](https://github.com/pingcap/tidb/pull/24724)に基づく異なるTiFlashノード間でのMPPクエリワークロードのバランス調整をサポート
     -   MPPクエリの実行後にキャッシュ内の古いリージョンを無効にすることをサポートします[＃24432](https://github.com/pingcap/tidb/pull/24432)

@@ -26,7 +26,7 @@ DMを使用してテーブルを移行する場合、DMはテーブルスキー�
 
 アップストリームデータベースがDDL操作を実行してテーブルスキーマを変更すると、 `schema-U`が変更されます。内部スキーマトラッカーコンポーネントとダウンストリームTiDBクラスタにDDL操作を適用することにより、DMは`schema-I`と`schema-D`を順番に更新し、 `schema-U`との整合性を維持します。したがって、DMは通常、 `schema-B`テーブルスキーマに対応するbinlogイベントを消費できます。つまり、DDL操作が正常に移行された後でも、 `schema-B` 、および`schema-U`は`schema-I`性があり`schema-D` 。
 
-ただし、 [オプティミスティックモードシャーディングDDLサポート](/dm/feature-shard-merge-optimistic.md)を有効にした移行中に、ダウンストリームテーブルの`schema-D`が、一部のアップストリームシャードテーブルの`schema-B`および`schema-I`と一致しない場合があります。このような場合でも、DMは`schema-I`と`schema-B`の一貫性を維持して、DMLに対応するbinlogイベントを正常に解析できるようにします。
+ただし、 [オプティミスティックモードシャーディングDDLサポート](/dm/feature-shard-merge-optimistic.md)を有効にして移行中に、ダウンストリームテーブルの`schema-D`が、一部のアップストリームシャードテーブルの`schema-B`および`schema-I`と一致しない場合があります。このような場合でも、DMは`schema-I`と`schema-B`の一貫性を維持して、DMLに対応するbinlogイベントを正常に解析できるようにします。
 
 さらに、一部のシナリオ（ダウンストリームテーブルにアップストリームテーブルよりも多くの列がある場合など）では、 `schema-D`が`schema-B`および`schema-I`と矛盾する場合があります。
 
@@ -66,7 +66,7 @@ Use "dmctl binlog-schema [command] --help" for more information about a command.
 
 > **ノート：**
 >
-> -   テーブルスキーマはデータ移行中に変更される可能性があるため、予測可能なテーブルスキーマを取得するために、現在`binlog-schema`コマンドは、データ移行タスクが`Paused`状態の場合にのみ使用できます。
+> -   データ移行中にテーブルスキーマが変更される可能性があるため、予測可能なテーブルスキーマを取得するには、現在、データ移行タスクが`Paused`状態の場合にのみ`binlog-schema`コマンドを使用できます。
 > -   誤った取り扱いによるデータの損失を避けるために、スキーマを変更する前に、まずテーブルスキーマを取得してバックアップすることを**強くお勧め**します。
 
 ## パラメーター {#parameters}
@@ -82,7 +82,7 @@ Use "dmctl binlog-schema [command] --help" for more information about a command.
 
 ### テーブルスキーマを取得する {#get-the-table-schema}
 
-テーブルスキーマを取得するには、次の`binlog-schema list`コマンドを実行します。
+テーブルスキーマを取得するには、 `binlog-schema list`コマンドを実行します。
 
 ```bash
 help binlog-schema list

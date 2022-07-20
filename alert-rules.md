@@ -452,7 +452,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
     1.  ネットワークがクリアであるかどうかを確認します。
     2.  リモートTiKVがダウンしているかどうかを確認します。
-    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎるかどうかを確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
+    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎないかどうかを確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
 #### <code>TiKV_channel_full_total</code> {#code-tikv-channel-full-total-code}
 
@@ -887,7 +887,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
 -   説明：
 
-    ディスクの読み取り遅延が32ミリ秒を超えています。
+    ディスクの読み取り待ち時間が32ミリ秒を超えています。
 
 -   解決：
 

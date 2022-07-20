@@ -11,7 +11,7 @@ summary: Learn the basics on TiDB database schema design.
 
 ## TiDBのオブジェクト {#objects-in-tidb}
 
-いくつかの一般的な用語を区別するために、TiDBで使用される用語に関する簡単な合意を次に示します。
+いくつかの一般的な用語を区別するために、TiDBで使用される用語に関する簡単な合意を以下に示します。
 
 -   一般的な用語[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるために、このドキュメントの**データベース**は論理オブジェクトを指し、 <strong>TiDB</strong>はTiDB自体を指し、<strong>クラスタ</strong>はTiDBのデプロイされたインスタンスを指します。
 
@@ -27,7 +27,7 @@ TiDBには、 `test`という名前のデフォルトデータベースが付属
 
 テーブルは、 [データベース](#database)の関連データのコレクションです。
 
-各テーブルは**行**と<strong>列</strong>で構成されています。行の各値は特定の<strong>列</strong>に属します。各列は単一のデータ型のみを許可します。列をさらに限定するために、 [制約](/constraints.md)を追加できます。計算を高速化するために、 [生成された列（実験的特徴）](/generated-columns.md)を追加できます。
+各テーブルは**行**と<strong>列</strong>で構成されています。行の各値は特定の<strong>列</strong>に属します。各列は単一のデータ型のみを許可します。列をさらに限定するために、 [制約](/constraints.md)を追加できます。計算を高速化するために、 [生成された列（実験的機能）](/generated-columns.md)を追加できます。
 
 ### 索引 {#index}
 
@@ -56,7 +56,7 @@ TiDBには、 `test`という名前のデフォルトデータベースが付属
 -   [見えないインデックス](/sql-statements/sql-statement-add-index.md)
 -   [複合`PRIMARY KEY`](/constraints.md#primary-key)
 -   [一意のインデックス](/constraints.md#unique-key)
--   [整数`PRIMARY KEY`のクラスター化インデックス](/constraints.md)
+-   [整数の`PRIMARY KEY`のクラスター化インデックス](/constraints.md)
 -   [複合キーまたは非整数キーのクラスター化インデックス](/constraints.md)
 
 ### その他のサポートされている論理オブジェクト {#other-supported-logical-objects}

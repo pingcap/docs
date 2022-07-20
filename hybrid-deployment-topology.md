@@ -33,7 +33,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
 
 -   TiKVの構成を最適化する
 
-    -   `readpool`をスレッドプールに自己適応するように構成します。 `readpool.unified.max-thread-count`パラメータを設定することにより、 `readpool.storage`と`readpool.coprocessor`に統合スレッドプールを共有させ、それぞれ自己適応型スイッチを設定できます。
+    -   `readpool`をスレッドプールに自己適応するように構成します。 `readpool.unified.max-thread-count`パラメータを設定することにより、 `readpool.storage`と`readpool.coprocessor`で統合スレッドプールを共有し、それぞれ自己適応型スイッチを設定できます。
 
         -   `readpool.storage`と`readpool.coprocessor`を有効にする：
 
@@ -62,7 +62,7 @@ summary: Learn the hybrid deployment topology of TiDB clusters.
             storage.block-cache.capacity = (MEM_TOTAL * 0.5 / the number of TiKV instances)
             ```
 
-    -   複数のTiKVインスタンスが同じ物理ディスクに展開されている場合は、TiKV構成に`capacity`つのパラメーターを追加します。
+    -   複数のTiKVインスタンスが同じ物理ディスクにデプロイされている場合は、TiKV構成に`capacity`つのパラメーターを追加します。
 
         ```
         raftstore.capacity = disk total capacity / the number of TiKV instances

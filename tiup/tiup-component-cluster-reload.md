@@ -16,13 +16,13 @@ tiup cluster reload <cluster-name> [flags]
 
 ## オプション {#options}
 
-### - 力 {#force}
+### &#x20;--force {#force}
 
 -   リロードプロセスのエラーを無視し、強制的にリロードします。
 -   データ型： `BOOLEAN`
 -   デフォルト：false
 
-### --転送タイムアウト {#transfer-timeout}
+### --transfer-timeout {#transfer-timeout}
 
 -   PDまたはTiKVを再起動する場合、再起動したノードのリーダーが最初に他のノードに移行され、移行プロセスに時間がかかります。 `-transfer-timeout`を設定すると、最大待機時間（秒単位）を設定できます。タイムアウト後、サービスは待機せずに直接再開できます。
 -   データ型： `UINT`
@@ -60,7 +60,7 @@ tiup cluster reload <cluster-name> [flags]
 > 1.  `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが再始動されます。
 > 2.  `--skip-restart`オプションが指定されている場合、 `-R, --role`オプションは無効です。
 
-### --スキップ-再起動 {#skip-restart}
+### --skip-restart {#skip-restart}
 
 `tiup cluster reload`コマンドは、次の2つの操作を実行します。
 

@@ -74,7 +74,7 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 1.  TiKV側のインデックススキャンオペレータ`└─IndexFullScan_31`は、 `t2.t1_id`列の値を読み取ります。
 2.  `└─StreamAgg_39`オペレーターの一部のタスクは、TiKVの`t1_id`の値を重複排除します。
 3.  `├─StreamAgg_49(Build)`オペレーターの一部のタスクは、TiDBの`t1_id`の値を重複排除します。重複排除は、集計関数`firstrow(test.t2.t1_id)`によって実行されます。
-4.  演算結果は、 `t1`テーブルの主キーと結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
+4.  操作結果は、 `t1`テーブルの主キーと結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
 
 ## 内部結合（一意のサブクエリ） {#inner-join-unique-subquery}
 

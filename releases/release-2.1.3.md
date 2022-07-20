@@ -11,7 +11,7 @@ title: TiDB 2.1.3 Release Notes
 -   SQLオプティマイザー/エグゼキューター
     -   場合によっては、プリペアドプランキャッシュのpanicの問題を修正します[＃8826](https://github.com/pingcap/tidb/pull/8826)
     -   インデックスがプレフィックスインデックス[＃8851](https://github.com/pingcap/tidb/pull/8851)の場合に範囲計算が間違っている問題を修正します
-    -   `SQL_MODE`が厳密でない場合に文字列が不正な`TIME`形式である場合、 `CAST(str AS TIME(N))`はnullを返します[＃8966](https://github.com/pingcap/tidb/pull/8966)
+    -   `SQL_MODE`が厳密でない場合に文字列が不正な`TIME`形式の場合、 `CAST(str AS TIME(N))`はnullを返します[＃8966](https://github.com/pingcap/tidb/pull/8966)
     -   `UPDATE` 、場合によっては[＃8980](https://github.com/pingcap/tidb/pull/8980)の処理中に生成されたカラムのpanicの問題を修正します
     -   場合によっては、統計ヒストグラムの上限オーバーフローの問題を修正します[＃8989](https://github.com/pingcap/tidb/pull/8989)
     -   全表スキャンを回避し、クラスタのストレスを軽減するための`_tidb_rowid`の構築クエリのサポート範囲[＃9059](https://github.com/pingcap/tidb/pull/9059)
@@ -40,7 +40,7 @@ title: TiDB 2.1.3 Release Notes
 
 ## PD {#pd}
 
--   リーダー選出に関連するウォッチの問題を修正[＃1396](https://github.com/pingcap/pd/pull/1396)
+-   リーダー選挙に関連するウォッチの問題を修正[＃1396](https://github.com/pingcap/pd/pull/1396)
 
 ## TiKV {#tikv}
 

@@ -279,7 +279,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
 -   `require san` ：ユーザー証明書を発行するCA証明書の`Subject Alternative Name`の情報を指定します。指定する情報は、クライアント証明書の生成に使用される[`alt_names`構成ファイルの<code>openssl.cnf</code>](/generate-self-signed-certificates.md)と一致しています。
 
-    -   次のコマンドを実行して、生成された証明書の`require san`の項目の情報を取得します。
+    -   次のコマンドを実行して、生成された証明書の`require san`のアイテムの情報を取得します。
 
         {{< copyable "" >}}
 

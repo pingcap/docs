@@ -344,7 +344,7 @@ summary: Learn how to quickly get started with the TiDB platform and see if TiDB
     tiup update --self && tiup update cluster
     ```
 
-5.  rootユーザー特権を使用して、 `sshd`のサービスの接続制限を増やします。これは、TiUPが複数のマシンでの展開をシミュレートする必要があるためです。
+5.  rootユーザー権限を使用して、 `sshd`のサービスの接続制限を増やします。これは、TiUPが複数のマシンでの展開をシミュレートする必要があるためです。
 
     1.  `/etc/ssh/sshd_config`を変更し、 `MaxSessions`を`20`に設定します。
     2.  `sshd`のサービスを再起動します。

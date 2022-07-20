@@ -12,7 +12,7 @@ TiDBバージョン：4.0.2
 
 -   TiDB
 
-    -   低速クエリログとステートメントサマリーテーブル[＃18130](https://github.com/pingcap/tidb/pull/18130)の機密情報を削除します
+    -   遅いクエリログとステートメントサマリーテーブル[＃18130](https://github.com/pingcap/tidb/pull/18130)の機密情報を削除します
     -   シーケンスキャッシュ[＃18103](https://github.com/pingcap/tidb/pull/18103)で負の値を禁止する
     -   `CLUSTER_INFO`のテーブルからトゥームストーンTiKVおよびTiFlashストアを削除します[＃17953](https://github.com/pingcap/tidb/pull/17953)
     -   診断ルールを`current-load`から[＃17660](https://github.com/pingcap/tidb/pull/17660)に変更し`node-check`
@@ -111,7 +111,7 @@ TiDBバージョン：4.0.2
     -   メモリクォータが不足し、クエリのキャンセルがトリガーされた場合の`IndexMergeJoin`エグゼキュータのハングの問題を修正します[＃17654](https://github.com/pingcap/tidb/pull/17654)
     -   `Insert`および`Replace`エグゼキュータの過剰なカウントメモリ使用量を修正します[＃18062](https://github.com/pingcap/tidb/pull/18062)
     -   同じデータベースで`DROP DATABASE`と`DROP TABLE`が同時に実行されると、TiFlashストレージへのデータレプリケーションが停止する問題を修正します[＃17901](https://github.com/pingcap/tidb/pull/17901)
-    -   TiDBとオブジェクトストレージサービス`RESTORE`の間の`BACKUP`障害を修正し[＃17844](https://github.com/pingcap/tidb/pull/17844)
+    -   TiDBとオブジェクトストレージサービス間の`BACKUP`障害を修正し[＃17844](https://github.com/pingcap/tidb/pull/17844) `RESTORE`
     -   アクセスが拒否されたときに特権チェックが失敗するという誤ったエラーメッセージを修正します[＃17724](https://github.com/pingcap/tidb/pull/17724)
     -   `DELETE`ステートメントから生成されたクエリフィードバックを破棄し[＃17843](https://github.com/pingcap/tidb/pull/17843) `UPDATE`
     -   `AUTO_RANDOM`のプロパティがないテーブルの`AUTO_RANDOM_BASE`を変更することを禁止します[＃17828](https://github.com/pingcap/tidb/pull/17828)
@@ -120,7 +120,7 @@ TiDBバージョン：4.0.2
     -   大きな整数と浮動小数点値でのJSON比較の不正確な結果を修正します[＃17717](https://github.com/pingcap/tidb/pull/17717)
     -   `COUNT()`関数[＃17704](https://github.com/pingcap/tidb/pull/17704)の結果の誤ったdecimalプロパティを修正します
     -   入力のタイプがバイナリ文字列[＃17620](https://github.com/pingcap/tidb/pull/17620)の場合の`HEX()`関数の誤った結果を修正します
-    -   フィルタ条件[＃17697](https://github.com/pingcap/tidb/pull/17697)なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`テーブルをクエリすると、空の結果が返される問題を修正します。
+    -   フィルタ条件[＃17697](https://github.com/pingcap/tidb/pull/17697)なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`のテーブルをクエリすると、空の結果が返される問題を修正します。
     -   `ALTER USER`ステートメントがユーザー情報を更新するために使用するハッシュパスワードが予期しないものであるという問題を修正します[＃17646](https://github.com/pingcap/tidb/pull/17646)
     -   `ENUM`と`SET`の値の照合順序をサポート[＃17701](https://github.com/pingcap/tidb/pull/17701)
     -   テーブル[＃17619](https://github.com/pingcap/tidb/pull/17619)を作成するときに、リージョンを事前分割するためのタイムアウトメカニズムが機能しない問題を修正します。

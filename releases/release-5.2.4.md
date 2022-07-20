@@ -87,7 +87,7 @@ TiDBバージョン：5.2.4
     -   TiDBが失敗した認証の多くのログを予期せず出力する可能性がある問題を修正します[＃29709](https://github.com/pingcap/tidb/issues/29709)
     -   システム変数`max_allowed_packet`が有効にならない問題を修正します[＃31422](https://github.com/pingcap/tidb/issues/31422)
     -   自動IDが範囲[＃29483](https://github.com/pingcap/tidb/issues/29483)から外れると、 `REPLACE`ステートメントが他の行を誤って変更する問題を修正します。
-    -   遅いクエリログがログを正常に出力できず、メモリを過剰に消費する可能性があるという問題を修正します[＃32656](https://github.com/pingcap/tidb/issues/32656)
+    -   遅いクエリログがログを正常に出力できず、メモリを大量に消費する可能性があるという問題を修正します[＃32656](https://github.com/pingcap/tidb/issues/32656)
     -   NATURALJOINの結果に予期しない列が含まれる可能性がある問題を修正します[＃24981](https://github.com/pingcap/tidb/issues/29481)
     -   1つのステートメントで`ORDER BY`と`LIMIT`を一緒に使用すると、データのクエリにプレフィックス列インデックスが使用されている場合に誤った結果が出力される可能性がある問題を修正します[＃29711](https://github.com/pingcap/tidb/issues/29711)
     -   楽観的なトランザクションが再試行すると、DOUBLEタイプの自動インクリメント列が変更される可能性がある問題を修正します[＃29892](https://github.com/pingcap/tidb/issues/29892)
@@ -184,7 +184,7 @@ TiDBバージョン：5.2.4
         -   CanalおよびMaxwellプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`の構成アイテムが自動的に`true`に設定されないバグを修正します。
         -   AvroシンクがJSONタイプの列の解析をサポートしていない問題を修正します[＃3624](https://github.com/pingcap/tiflow/issues/3624)
         -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/tiflow/issues/3010)の負の値エラーを修正しました
-        -   コンテナ環境でのOOMの問題を修正する[＃1798](https://github.com/pingcap/tiflow/issues/1798)
+        -   コンテナ環境でのOOMの問題を修正します[＃1798](https://github.com/pingcap/tiflow/issues/1798)
         -   DDLの処理後のメモリリークの問題を修正[＃3174](https://github.com/pingcap/tiflow/issues/3174)
         -   テーブルが同じノードで繰り返しスケジュールされている場合にchangefeedがスタックする問題を修正します[＃4464](https://github.com/pingcap/tiflow/issues/4464)
         -   PDノードが異常な場合にオープンAPIを介したステータスのクエリがブロックされる可能性があるバグを修正します[＃4778](https://github.com/pingcap/tiflow/issues/4778)

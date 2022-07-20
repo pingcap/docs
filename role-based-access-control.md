@@ -54,7 +54,7 @@ GRANT SELECT ON app_db.* TO 'app_read'@'%';
 GRANT INSERT, UPDATE, DELETE ON app_db.* TO 'app_write'@'%';;
 ```
 
-次のステートメントを使用して、 `app_developer`の役割に`app_db`のデータベースに対するすべての特権を付与できます。
+次のステートメントを使用して、 `app_developer`のロールに`app_db`のデータベースに対するすべての権限を付与できます。
 
 {{< copyable "" >}}
 
@@ -236,7 +236,7 @@ SET ROLE {
 }
 ```
 
-たとえば、 `rw_user1`がログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`および`app_write`を有効にすることができます。
+たとえば、 `rw_user1`がログインした後、次のステートメントを使用して、現在のセッションでのみ有効なロール`app_read`と`app_write`を有効にすることができます。
 
 {{< copyable "" >}}
 
@@ -268,7 +268,7 @@ SET ROLE ALL
 SET ROLE NONE
 ```
 
-次のステートメントを使用して、 `app_read`以外の役割を有効にできます。
+次のステートメントを使用して、 `app_read`以外のロールを有効にすることができます。
 
 {{< copyable "" >}}
 
@@ -324,7 +324,7 @@ SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 
 ### 役割を取り消す {#revoke-a-role}
 
-次のステートメントを使用して、ユーザー`read_user1@localhost`および`read_user2@localhost`に付与された`app_read`の役割を取り消すことができます。
+次のステートメントを使用して、ユーザー`read_user1@localhost`および`read_user2@localhost`に付与された`app_read`のロールを取り消すことができます。
 
 {{< copyable "" >}}
 
@@ -364,7 +364,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`テーブルの`app_read`と`app_write`のロール・レコードと許可テーブルの関連レコードが削除され、2つの役割に関連する許可が終了します。
+この操作により、 `mysql.user`テーブルの`app_read`と`app_write`のロール・レコードおよび許可テーブルの関連レコードが削除され、2つの役割に関連する許可が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`の権限が必要です。
 

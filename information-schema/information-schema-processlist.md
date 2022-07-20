@@ -5,7 +5,7 @@ summary: Learn the `PROCESSLIST` information_schema table.
 
 # プロセスリスト {#processlist}
 
-`PROCESSLIST`は、 `SHOW PROCESSLIST`と同様に、処理されているリクエストを表示するために使用されます。
+`SHOW PROCESSLIST`と同様に、 `PROCESSLIST`は、処理されている要求を表示するために使用されます。
 
 `PROCESSLIST`のテーブルには、 `SHOW PROCESSLIST`には存在しない追加の列があります。
 

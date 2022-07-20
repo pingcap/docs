@@ -75,7 +75,7 @@ TiDBバージョン：5.3.1
     -   TiKVの動作が停止した後、解決されたTSの遅延が増加する問題を修正します[＃11351](https://github.com/tikv/tikv/issues/11351)
     -   GCワーカーがビジー状態のときにTiKVがデータの範囲を削除できない（ `unsafe_destroy_range`は実行できない）バグを修正します[＃11903](https://github.com/tikv/tikv/issues/11903)
     -   ピアを破棄すると待ち時間が長くなる可能性があるという問題を修正します[＃10210](https://github.com/tikv/tikv/issues/10210)
-    -   領域が空の場合に`any_value`関数が間違った結果を返すバグを修正します[＃11735](https://github.com/tikv/tikv/issues/11735)
+    -   リージョンが空の場合に`any_value`関数が間違った結果を返すバグを修正します[＃11735](https://github.com/tikv/tikv/issues/11735)
     -   初期化されていないレプリカを削除すると、古いレプリカが再作成される可能性がある問題を修正します[＃10533](https://github.com/tikv/tikv/issues/10533)
     -   新しい選択が終了した後に`Prepare Merge`がトリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正します[＃11526](https://github.com/tikv/tikv/issues/11526)
     -   コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正します[＃11549](https://github.com/tikv/tikv/issues/11549)

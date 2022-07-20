@@ -61,7 +61,7 @@ title: TiDB 3.0 Beta Release Notes
     -   `interactive_timeout`のシステム変数[＃8573](https://github.com/pingcap/tidb/pull/8573)をサポートします
     -   `wait_timeout`のシステム変数[＃8346](https://github.com/pingcap/tidb/pull/8346)をサポートします
     -   `tidb_batch_commit`の変数[＃8293](https://github.com/pingcap/tidb/pull/8293)を使用して、ステートメントの数に基づいてトランザクションを複数のトランザクションに分割することをサポートします。
-    -   遅いログをチェックするために`ADMIN SHOW SLOW`ステートメントを使用することをサポートします[＃7785](https://github.com/pingcap/tidb/pull/7785)
+    -   遅いログをチェックするための`ADMIN SHOW SLOW`ステートメントの使用をサポート[＃7785](https://github.com/pingcap/tidb/pull/7785)
 -   互換性
     -   `ALLOW_INVALID_DATES`モード[＃9027](https://github.com/pingcap/tidb/pull/9027)をサポートする
     -   CSVファイルの`LoadData`のフォールトトレランスを改善[＃9005](https://github.com/pingcap/tidb/pull/9005)
@@ -94,7 +94,7 @@ title: TiDB 3.0 Beta Release Notes
 ## TiKV {#tikv}
 
 -   分散[＃3179](https://github.com/tikv/tikv/pull/3179)をサポート
--   スナップショットを適用する前にRocksDBレベル0ファイルを確認して、書き込みストール[＃3606](https://github.com/tikv/tikv/pull/3606)を回避します
+-   書き込みストール[＃3606](https://github.com/tikv/tikv/pull/3606)を回避するために、スナップショットを適用する前にRocksDBレベル0ファイルを確認してください
 -   リバース`raw_scan`および`raw_batch_scan`を[＃3742](https://github.com/tikv/tikv/pull/3724)
 -   HTTPを使用した監視情報の取得のサポート[＃3855](https://github.com/tikv/tikv/pull/3855)
 -   DSTをより適切にサポートする[＃3786](https://github.com/tikv/tikv/pull/3786)

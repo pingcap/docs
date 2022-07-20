@@ -30,7 +30,7 @@ TiDB Ansibleバージョン：2.1.10
 -   `PERIOD_ADD`のパラメータの有効性を確認して[＃10430](https://github.com/pingcap/tidb/pull/10430)
 -   TiDBの無効な`YEAR`文字列の動作がMySQL3の動作と互換性がないという問題を修正し[＃10493](https://github.com/pingcap/tidb/pull/10493)
 -   `ALTER DATABASE`構文[＃10503](https://github.com/pingcap/tidb/pull/10503)をサポートします
--   低速クエリステートメント[＃10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合に、 `SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正します。
+-   遅いクエリステートメント[＃10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合に、 `SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正します。
 -   パーティションテーブルの`Add index`操作をキャンセルできない場合があるという問題を修正します[＃10533](https://github.com/pingcap/tidb/pull/10533)
 -   OOMpanicが回復できない場合がある問題を修正します[＃10545](https://github.com/pingcap/tidb/pull/10545)
 -   テーブルメタデータを書き換えるDDL操作のセキュリティを向上させる[＃10547](https://github.com/pingcap/tidb/pull/10547)

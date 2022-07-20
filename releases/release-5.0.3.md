@@ -34,7 +34,7 @@ TiDBバージョン：5.0.3
     -   デュアルテーブルからのユニオンブランチの削除をサポート[＃25614](https://github.com/pingcap/tidb/pull/25614)
     -   内蔵機能`replace()`から[＃25565](https://github.com/pingcap/tidb/pull/25565)へのプッシュダウンをサポート
     -   `datediff()`関数`unix_timestamp()` 、および`day()`を`concat()`に`datesub()` [＃25564](https://github.com/pingcap/tidb/pull/25564)することを`concat_ws()`し`year()`
-    -   集計オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
+    -   骨材オペレーターのコストファクターを最適化する[＃25241](https://github.com/pingcap/tidb/pull/25241)
     -   `Limit`人のオペレーターを[＃25159](https://github.com/pingcap/tidb/pull/25159)にプッシュダウンすることをサポート
     -   内蔵機能`str_to_date`から[＃25148](https://github.com/pingcap/tidb/pull/25148)へのプッシュダウンをサポート
     -   MPP外部結合が、テーブルの行数[＃25142](https://github.com/pingcap/tidb/pull/25142)に基づいてビルドテーブルを選択できるようにします。
@@ -48,7 +48,7 @@ TiDBバージョン：5.0.3
 -   TiKV
 
     -   TiCDCシンクのメモリ消費を制限する[＃10305](https://github.com/tikv/tikv/pull/10305)
-    -   TiCDCの古い値のキャッシュ[＃10313](https://github.com/tikv/tikv/pull/10313)のメモリ制限の上限を追加します
+    -   TiCDCの古い値キャッシュ[＃10313](https://github.com/tikv/tikv/pull/10313)のメモリ制限上限を追加します
 
 -   PD
 

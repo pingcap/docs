@@ -41,7 +41,7 @@ TiDB Ansibleバージョン：3.0.1
 -   列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`ステートメントによって示される精度が不完全であるという問題を修正します[＃11088](https://github.com/pingcap/tidb/pull/11088)
 -   ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正して、 [＃11118](https://github.com/pingcap/tidb/pull/11118)と互換性を持たせる
 -   TiDBがTiKVに接続できず、TiKVクライアントバッチgRPCのバックグラウンドスレッドがパニックになった後、サービスを提供できないという問題を修正します[＃11101](https://github.com/pingcap/tidb/pull/11101)
--   文字列[＃11044](https://github.com/pingcap/tidb/pull/11044)のコピーが浅いために、変数が`SetVar`だけ正しく設定されない問題を修正します。
+-   文字列[＃11044](https://github.com/pingcap/tidb/pull/11044)のコピーが浅いため、変数が`SetVar`だけ正しく設定されない問題を修正します。
 -   `INSERT … ON DUPLICATE`ステートメントがテーブルパーティション[＃11231](https://github.com/pingcap/tidb/pull/11231)に適用されると、実行が失敗し、エラーが報告される問題を修正します。
 -   悲観的ロック（実験的機能）
     -   悲観的ロックを使用してポイントクエリが実行され、返されたデータが空の場合に、行のロックが無効であるために誤った結果が返される問題を修正します[＃10976](https://github.com/pingcap/tidb/pull/10976)

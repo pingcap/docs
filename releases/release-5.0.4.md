@@ -12,7 +12,7 @@ TiDBバージョン：5.0.4
 
 -   TiDB
 
-    -   新しいセッションで`SHOW VARIABLES`を実行するのが遅い問題を修正します。この修正により、 [＃19341](https://github.com/pingcap/tidb/pull/19341)で行われたいくつかの変更が元に戻され、互換性の問題が発生する可能性があります。 [＃24326](https://github.com/pingcap/tidb/issues/24326)
+    -   新しいセッションで`SHOW VARIABLES`を実行すると時間がかかる問題を修正します。この修正により、 [＃19341](https://github.com/pingcap/tidb/pull/19341)で行われたいくつかの変更が元に戻され、互換性の問題が発生する可能性があります。 [＃24326](https://github.com/pingcap/tidb/issues/24326)
     -   `tidb_stmt_summary_max_stmt_count`変数のデフォルト値を`200`から[＃25873](https://github.com/pingcap/tidb/pull/25873)に変更し`3000`
 
     <!---->
@@ -131,7 +131,7 @@ TiDBバージョン：5.0.4
     -   Grafanaの**コプロセッサーキャッシュ**パネルのメトリックが間違っている問題を修正します[＃26338](https://github.com/pingcap/tidb/issues/26338)
     -   同じパーティションを同時に切り捨てると、DDLステートメントがスタックする問題を修正します[＃26229](https://github.com/pingcap/tidb/issues/26229)
     -   セッション変数が`GROUP BY`項目として使用されたときに発生する誤ったクエリ結果の問題を修正します[＃27106](https://github.com/pingcap/tidb/issues/27106)
-    -   テーブル[＃25902](https://github.com/pingcap/tidb/issues/25902)を結合するときの`VARCHAR`とタイムスタンプの間の誤った暗黙の変換を修正
+    -   テーブル[＃25902](https://github.com/pingcap/tidb/issues/25902)を結合するときの`VARCHAR`とタイムスタンプの間の誤った暗黙の変換を修正しました
     -   関連するサブクエリステートメントの間違った結果を修正する[＃27233](https://github.com/pingcap/tidb/issues/27233)
 
 -   TiKV

@@ -112,7 +112,7 @@ Y軸を線形スケールに切り替えます。
 
 ### ヒント4：共有十字線またはツールチップを使用する {#tip-4-use-shared-crosshair-or-tooltip}
 
-**[設定]**パネルには、デフォルトで[<strong>デフォルト</strong>]に設定されている<strong>グラフツールチップ</strong>パネルオプションがあります。
+**[設定]**パネルには、デフォルトで[<strong>デフォルト</strong>]になっている<strong>グラフツールチップ</strong>パネルオプションがあります。
 
 ![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
 

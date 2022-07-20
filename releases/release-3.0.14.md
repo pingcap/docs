@@ -12,7 +12,7 @@ TiDBバージョン：3.0.14
 
 -   TiDB
 
-    -   `performance_schema`と`metrics_schema`のユーザー特権を読み取り/書き込みから読み取り専用[＃15417](https://github.com/pingcap/tidb/pull/15417)に調整します
+    -   `performance_schema`と`metrics_schema`のユーザー権限を読み取り/書き込みから読み取り専用[＃15417](https://github.com/pingcap/tidb/pull/15417)に調整します
 
 ## 重要なバグ修正 {#important-bug-fixes}
 
@@ -31,7 +31,7 @@ TiDBバージョン：3.0.14
 -   TiDB
 
     -   `admin show ddl jobs`ステートメントのクエリ結果にスキーマ名列とテーブル名列を追加します[＃16428](https://github.com/pingcap/tidb/pull/16428)
-    -   `RECOVER TABLE`構文を拡張して、切り捨てられたテーブルの回復をサポートします[＃15458](https://github.com/pingcap/tidb/pull/15458)
+    -   切り捨てられたテーブルの回復をサポートするために`RECOVER TABLE`構文を拡張します[＃15458](https://github.com/pingcap/tidb/pull/15458)
     -   `SHOW GRANTS`ステートメント[＃16168](https://github.com/pingcap/tidb/pull/16168)の特権チェックをサポートします。
     -   `LOAD DATA`ステートメント[＃16736](https://github.com/pingcap/tidb/pull/16736)の特権チェックをサポートします。
     -   日時に関連する関数をパーティションキーとして使用する場合のパーティションプルーニングのパフォーマンスを向上させる[＃15618](https://github.com/pingcap/tidb/pull/15618)
@@ -96,7 +96,7 @@ TiDBバージョン：3.0.14
     -   `VALUES`関数のパラメータータイプが[＃15486](https://github.com/pingcap/tidb/pull/15486)の場合の誤った動作の問題を修正し`bit(n)`
     -   `view`列の名前が長すぎると、TiDBの処理ロジックがMySQLと矛盾する問題を修正します。この場合、システムは自動的に短い列名を生成します。 [＃14873](https://github.com/pingcap/tidb/pull/14873)
     -   `(not not col)`が[＃16094](https://github.com/pingcap/tidb/pull/16094)として誤って最適化される問題を修正し`col`
-    -   `IndexLookupJoin`の計画によって構築された内部テーブルの誤った`range`の問題を修正します[＃15753](https://github.com/pingcap/tidb/pull/15753)
+    -   `IndexLookupJoin`のプランによって構築された内部テーブルの誤った`range`の問題を修正します[＃15753](https://github.com/pingcap/tidb/pull/15753)
     -   `only_full_group_by`が角かっこ[＃16012](https://github.com/pingcap/tidb/pull/16012)で式を正しくチェックできない問題を修正します
     -   `select view_name.col_name from view_name`ステートメントの実行時にエラーが返される問題を修正します[＃15572](https://github.com/pingcap/tidb/pull/15572)
 

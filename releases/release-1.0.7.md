@@ -11,7 +11,7 @@ title: TiDB 1.0.7 Release Notes
 -   [`FIELD_LIST`コマンドを最適化する](https://github.com/pingcap/tidb/pull/5679)
 -   [情報スキーマのデータ競合を修正](https://github.com/pingcap/tidb/pull/5676)
 -   [履歴に読み取り専用ステートメントを追加しないでください](https://github.com/pingcap/tidb/pull/5661)
--   [ログクエリを制御する`session`変数を追加します](https://github.com/pingcap/tidb/pull/5659)
+-   [`session`変数を追加して、ログクエリを制御します](https://github.com/pingcap/tidb/pull/5659)
 -   [統計のリソースリークの問題を修正します](https://github.com/pingcap/tidb/pull/5657)
 -   [ゴルーチンリークの問題を修正する](https://github.com/pingcap/tidb/pull/5624)
 -   [httpステータスサーバーのスキーマ情報APIを追加します](https://github.com/pingcap/tidb/pull/5256)

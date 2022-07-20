@@ -5,7 +5,7 @@ summary: Use the slow query log to identify problematic SQL statements.
 
 # 遅いクエリを特定する {#identify-slow-queries}
 
-ユーザーが遅いクエリを識別し、SQL実行のパフォーマンスを分析および改善できるように、TiDBは、実行時間が[遅いしきい値](/tidb-configuration-file.md#slow-threshold) （デフォルト値は300ミリ秒）から[遅いクエリファイル](/tidb-configuration-file.md#slow-query-file) （デフォルト値は &quot;tidb-slow.log&quot;）を超えるステートメントを出力します。
+ユーザーが遅いクエリを識別し、SQL実行のパフォーマンスを分析および改善できるように、TiDBは、実行時間が[遅いしきい値](/tidb-configuration-file.md#slow-threshold) （デフォルト値は300ミリ秒）から[遅いクエリファイル](/tidb-configuration-file.md#slow-query-file) （デフォルト値は「tidb-slow.log」）を超えるステートメントを出力します。
 
 TiDBは、デフォルトで低速クエリログを有効にします。構成を変更することにより、機能を有効または無効にできます[`enable-slow-log`](/tidb-configuration-file.md#enable-slow-log) 。
 
@@ -60,7 +60,7 @@ insert into t select * from t;
 -   `Is_internal` ：SQLステートメントがTiDB内部であるかどうか。 `true`はSQLステートメントがTiDBの内部で実行されることを示し、 `false`はSQLステートメントがユーザーによって実行されることを示します。
 -   `Index_ids` ：ステートメントに含まれるインデックスのID。
 -   `Succ` ：ステートメントが正常に実行されたかどうか。
--   `Backoff_time` ：ステートメントで再試行が必要なエラーが発生した場合の再試行までの待機時間。一般的なエラーには、 `lock occurs` 、および`Region split`が含まれ`tikv server is busy` 。
+-   `Backoff_time` ：ステートメントで再試行が必要なエラーが発生した場合の再試行までの待機時間。そのような一般的なエラーには、 `lock occurs` 、および`Region split`が含まれ`tikv server is busy` 。
 -   `Plan` ：ステートメントの実行プラン。 `select tidb_decode_plan('xxx...')`ステートメントを使用して、特定の実行プランを解析します。
 -   `Prepared` ：このステートメントが`Prepare`または`Execute`の要求であるかどうか。
 -   `Plan_from_cache` ：このステートメントが実行プランのキャッシュにヒットするかどうか。
@@ -77,12 +77,12 @@ insert into t select * from t;
 -   `Get_commit_ts_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）中に`commit_ts`を取得するために費やされた時間。
 -   `Local_latch_wait_time` ：2フェーズトランザクションコミットの第2フェーズ（コミット）の前にTiDBがロックの待機に費やす時間。
 -   `Write_keys` ：トランザクションがTiKVの書き込みCFに書き込むキーの数。
--   `Write_size` ：トランザクションがコミットされたときに書き込まれるキーまたは値の合計サイズ。
+-   `Write_size` ：トランザクションがコミットしたときに書き込まれるキーまたは値の合計サイズ。
 -   `Prewrite_region` ：2フェーズトランザクションコミットの最初のフェーズ（プリライト）に関与するTiKVリージョンの数。各リージョンは、リモートプロシージャコールをトリガーします。
 
 メモリ使用量フィールド：
 
--   `Mem_max` ：SQLステートメントの実行期間中に使用される最大メモリスペース（単位はバイト）。
+-   `Mem_max` ：SQL文の実行期間中に使用される最大メモリスペース（単位はバイト）。
 
 ハードディスクフィールド：
 
@@ -204,7 +204,7 @@ TiDB 4.0の場合、 `SLOW_QUERY`は、ローテーションされた低速ロ�
 
 TiDB 4.0は、すべてのTiDBノードの低速クエリ情報をクエリするために[`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-slow-query.md#cluster_slow_query-table)のシステムテーブルを追加します。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは、 `INSTANCE`列が`CLUSTER_SLOW_QUERY`に追加されるという点で`SLOW_QUERY`テーブルのテーブルスキーマとは異なります。 `INSTANCE`列は、低速クエリの行情報のTiDBノードアドレスを表します。 [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)と同じように`CLUSTER_SLOW_QUERY`を使用できます。
 
-`CLUSTER_SLOW_QUERY`のテーブルをクエリすると、TiDBは、他のノードからすべての低速クエリ情報を取得して1つのTiDBノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
+`CLUSTER_SLOW_QUERY`テーブルをクエリすると、TiDBは、他のノードからすべての低速クエリ情報を取得して1つのTiDBノードで操作を実行するのではなく、計算と判断を他のノードにプッシュします。
 
 ## <code>SLOW_QUERY</code> / <code>CLUSTER_SLOW_QUERY</code>の使用例 {#code-slow-query-code-code-cluster-slow-query-code-usage-examples}
 

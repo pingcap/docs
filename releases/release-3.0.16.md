@@ -17,7 +17,7 @@ TiDBバージョン：3.0.16
     -   新しく追加されたパーティション[＃17668](https://github.com/pingcap/tidb/pull/17668)の個別のリージョンを分割します
     -   `delete`または`update`ステートメントから生成されたフィードバックを破棄します[＃17841](https://github.com/pingcap/tidb/pull/17841)
     -   将来のGoバージョン[＃17887](https://github.com/pingcap/tidb/pull/17887)と互換性があるように、 `job.DecodeArgs`分の`json.Unmarshal`の使用法を修正してください
-    -   低速クエリログとステートメントサマリーテーブル[＃18128](https://github.com/pingcap/tidb/pull/18128)の機密情報を削除します
+    -   遅いクエリログとステートメントサマリーテーブル[＃18128](https://github.com/pingcap/tidb/pull/18128)の機密情報を削除します
     -   MySQLの動作を`DateTime`の区切り文字[＃17499](https://github.com/pingcap/tidb/pull/17499)と一致させます
     -   MySQL3と一致する範囲の日付形式で`%h`を処理し[＃17496](https://github.com/pingcap/tidb/pull/17496)
 

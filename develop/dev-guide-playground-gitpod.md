@@ -32,7 +32,7 @@ Gitpodは、コードに直接変換する開発環境向けのオープンソ�
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-このページのシナリオでは、 [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview)を使用してTiDBプレイグラウンドを構築します。ターミナルエリアの左側で進捗状況を確認できます。
+このページのシナリオでは、 [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview)を使用してTiDBプレイグラウンドを構築しています。ターミナルエリアの左側で進捗状況を確認できます。
 
 TiDB Playgroundの準備が整うと、別の`Spring JPA Hibernate`つのタスクが実行されます。ターミナルエリア右側で進捗状況を確認できます。
 

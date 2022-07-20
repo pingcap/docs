@@ -11,7 +11,7 @@ summary: Learn how to manage TiUP components using TiUP commands.
 -   install：コンポーネントの特定のバージョンをインストールします。
 -   update：コンポーネントを最新バージョンに更新します。
 -   アンインストール：コンポーネントをアンインストールします。
--   status：実行中のコンポーネントのステータスを確認します。
+-   status：実行中のコンポーネントのステータスをチェックします。
 -   clean：コンポーネントがデプロイされているインスタンスをクリーンアップします。
 -   help：ヘルプ情報を出力します。このコマンドに別のTiUPコマンドを追加すると、追加されたコマンドの使用法が出力されます。
 
@@ -110,7 +110,7 @@ tiup update --self
 
 ## コンポーネントを操作する {#operate-components}
 
-インストールが完了したら、 `tiup <component>`コマンドを使用して対応するコンポーネントを開始できます。
+インストールが完了したら、 `tiup <component>`コマンドを使用して対応するコンポーネントを起動できます。
 
 ```shell
 tiup [flags] <component>[:version] [args...]

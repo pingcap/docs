@@ -177,7 +177,7 @@ CREATE TABLE t1 (
 
 `DATETIME`と`TIMESTAMP`の値には、ミリ秒単位で正確な最大6桁の小数部分を含めることができます。 `DATETIME`または`TIMESTAMP`タイプの列では、小数部分が破棄されるのではなく保存されます。小数部の場合、値は「YYYY-MM-DD HH：MM：SS [.fraction]」の形式で、小数部の範囲は000000〜999999です。小数部と小数部を区切るには小数点を使用する必要があります。休み。
 
--   `type_name(fsp)`を使用して、分数精度をサポートする列を定義し`TIMESTAMP` `type_name`は`TIME` 、または`DATETIME`です。例えば、
+-   `type_name(fsp)`を使用して、小数精度をサポートする列を定義し`TIMESTAMP` `type_name`は`TIME` 、または`DATETIME`です。例えば、
 
     ```sql
     CREATE TABLE t1 (t TIME(3), dt DATETIME(6));

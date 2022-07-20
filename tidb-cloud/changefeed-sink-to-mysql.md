@@ -32,7 +32,7 @@ MySQLサービスがパブリックインターネットアクセスのないAWS
 
 MySQLサービスがパブリックインターネットアクセスのないGCPVPCにある場合は、次の手順を実行します。
 
-1.  MySQLサービスがGoogleCloudSQLの場合、GoogleCloudSQLインスタンスの関連付けられたVPCでMySQLエンドポイントを公開する必要があります。あなたはグーグルによって開発された[**CloudSQLAuthプロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使う必要があるかもしれません。
+1.  MySQLサービスがGoogleCloudSQLの場合、GoogleCloudSQLインスタンスの関連付けられたVPCでMySQLエンドポイントを公開する必要があります。 Googleが開発した[**CloudSQLAuthプロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要があるかもしれません。
 2.  MySQLサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
 3.  MySQLが配置されているVPCの入力ファイアウォールルールを変更します。
 

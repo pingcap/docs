@@ -447,7 +447,7 @@ sudo systemctl enable ntpd.service
 
             > **ノート：**
             >
-            > `grubby`を実行する前に、最初に`grubby`パッケージをインストールします。
+            > `grubby`を実行する前に、最初に`grubby`のパッケージをインストールします。
 
             {{< copyable "" >}}
 

@@ -117,7 +117,7 @@ TiDBバージョン：4.0.5
     -   TiDBのバージョン情報が`cluster_info`表[＃18413](https://github.com/pingcap/tidb/pull/18413)のPD/TiKVのバージョン情報と矛盾する問題を修正します。
     -   悲観的なトランザクションの既存のチェックを修正する[＃19004](https://github.com/pingcap/tidb/pull/19004)
     -   `union select for update`を実行すると同時レース[＃19006](https://github.com/pingcap/tidb/pull/19006)が発生する可能性がある問題を修正します
-    -   `apply`に`PointGet`演算子[＃19046](https://github.com/pingcap/tidb/pull/19046)の子がある場合の誤ったクエリ結果を修正します
+    -   `apply`に`PointGet`演算子[＃19046](https://github.com/pingcap/tidb/pull/19046)の子がある場合の間違ったクエリ結果を修正します
     -   `IndexLookUp`が`Apply`演算子[＃19496](https://github.com/pingcap/tidb/pull/19496)の内側にあるときに発生する誤った結果を修正します
     -   `anti-semi-join`クエリの誤った結果を修正[＃19472](https://github.com/pingcap/tidb/pull/19472)
     -   [＃19456](https://github.com/pingcap/tidb/pull/19456)の誤った使用によって引き起こされた誤った結果を修正し`BatchPointGet`

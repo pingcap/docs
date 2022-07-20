@@ -7,7 +7,7 @@ summary: Learn how to use EXPLAIN by walking through an example statement
 
 SQLは宣言型言語であるため、クエリが効率的に実行されているかどうかを自動的に判断することはできません。現在の実行プランを学習するには、最初に[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントを使用する必要があります。
 
-[バイクシェアサンプルデータベース](/import-example-data.md)からの次のステートメントは、2017年7月1日に行われた旅行の数をカウントします。
+[バイクシェアのサンプルデータベース](/import-example-data.md)からの次のステートメントは、2017年7月1日に行われた旅行の数をカウントします。
 
 {{< copyable "" >}}
 

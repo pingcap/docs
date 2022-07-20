@@ -102,7 +102,7 @@ EXPLAIN SELECT * FROM t1 WHERE intkey >= 99 AND intkey <= 103;
 
 `IndexLookup`オペレーターには、2つの子ノードがあります。
 
--   `├─IndexRangeScan_8(Build)`演算子は、 `intkey`インデックスに対して範囲スキャンを実行し、内部`RowID`の値（このテーブルでは主キー）を取得します。
+-   `├─IndexRangeScan_8(Build)`オペレーターは、 `intkey`インデックスに対して範囲スキャンを実行し、内部`RowID`の値（このテーブルでは主キー）を取得します。
 -   次に、 `└─TableRowIDScan_9(Probe)`演算子は、テーブルデータから行全体を取得します。
 
 `IndexLookup`つのタスクには2つのステップが必要なため、多数の行が一致するシナリオでは、SQLオプティマイザーは[統計学](/statistics.md)に基づいて`TableFullScan`の演算子を選択する場合があります。次の例では、多数の行が`intkey > 100`の条件に一致し、 `TableFullScan`が選択されています。

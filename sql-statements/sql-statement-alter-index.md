@@ -122,7 +122,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## も参照してください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)

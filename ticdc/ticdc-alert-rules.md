@@ -21,7 +21,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    レプリケーションタスクは10分以上遅れます。
+    レプリケーションタスクが10分以上遅れています。
 
 -   解決：
 
@@ -35,7 +35,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    レプリケーションタスクの解決済みTSが10分以上遅れています。
+    レプリケーションタスクの解決済みTSが10分以上遅延しています。
 
 -   解決：
 

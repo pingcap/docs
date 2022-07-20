@@ -3,7 +3,7 @@ title: TiCDC Canal-JSON Protocol
 summary: Learn the concept of TiCDC Canal-JSON Protocol and how to use it.
 ---
 
-# TiCDC運河-JSONプロトコル {#ticdc-canal-json-protocol}
+# TiCDC Canal-JSONプロトコル {#ticdc-canal-json-protocol}
 
 Canal-JSONは、 [アリババ運河](https://github.com/alibaba/canal)で定義されるデータ交換フォーマットプロトコルです。このドキュメントでは、TiDB拡張フィールド、Canal-JSONデータ形式の定義、公式のCanalとの比較など、Canal-JSONデータ形式がTiCDCでどのように実装されているかを学習できます。
 
@@ -258,11 +258,11 @@ Canal-JSON形式は、対応するデータ型を`mysqlType`フィールドと`s
 
 Java SQLタイプの詳細については、 [JavaSQLクラスタイプ](https://docs.oracle.com/javase/8/docs/api/java/sql/Types.html)を参照してください。
 
-## TiCDC運河-JSONと公式運河の比較 {#comparison-of-ticdc-canal-json-and-the-official-canal}
+## TiCDC Canal-JSONと公式運河の比較 {#comparison-of-ticdc-canal-json-and-the-official-canal}
 
 TiCDCがCanal-JSONデータ形式を実装する方法（ `Update`イベントと`mysqlType`フィールドを含む）は、公式のCanalとは異なります。次の表に、主な違いを示します。
 
-| アイテム             | TiCDC運河-JSON                    | 運河                                |
+| アイテム             | TiCDC Canal-JSON                | 運河                                |
 | :--------------- | :------------------------------ | :-------------------------------- |
 | `Update`種類のイベント  | `old`フィールドには、すべての列データが含まれます     | `old`フィールドには、変更された列データのみが含まれます    |
 | `mysqlType`フィールド | パラメータ付きの型の場合、型パラメータの情報は含まれていません | パラメータ付きの型の場合、型パラメータの完全な情報が含まれています |
@@ -452,7 +452,7 @@ TiCDCの出力は次のとおりです。
 }
 ```
 
-## TiCDC運河の変更-JSON {#changes-in-ticdc-canal-json}
+## TiCDC Canalの変更-JSON {#changes-in-ticdc-canal-json}
 
 ### <code>Delete</code>イベントの<code>Old</code>フィールドの変更 {#changes-in-the-code-old-code-field-of-the-code-delete-code-events}
 

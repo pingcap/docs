@@ -187,7 +187,7 @@ TiDBバージョン：4.0.0-rc.2
 
         -   `TZ`の環境変数が設定されていないときに間違ったタイムゾーンを使用する問題を修正します[＃512](https://github.com/pingcap/tiflow/pull/512)
 
-        -   一部のエラーが正しく処理されないために、サーバーの終了時に所有者がリソースをクリーンアップしない問題を修正します[＃528](https://github.com/pingcap/tiflow/pull/528)
+        -   一部のエラーが正しく処理されないために、サーバーの終了時に所有者がリソースをクリーンアップしないという問題を修正します[＃528](https://github.com/pingcap/tiflow/pull/528)
 
         -   TiKV1に再接続するときにTiCDCがスタックする可能性がある問題を修正し[＃531](https://github.com/pingcap/tiflow/pull/531)
 

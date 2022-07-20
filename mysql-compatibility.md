@@ -139,7 +139,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 TiDBのビューは更新できません。 `UPDATE`などの`INSERT`操作はサポートして`DELETE`ません。
 
-### 一時テーブル {#temporary-tables}
+### 一時的なテーブル {#temporary-tables}
 
 詳細については、 [TiDBローカル一時テーブルとMySQL一時テーブル間の互換性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)を参照してください。
 

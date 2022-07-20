@@ -151,9 +151,13 @@ TiDBCloudがTiDB Cloudバケットのソースデータにアクセスできる�
     -   **ターゲットクラスター**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
     -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
 
-2.  [**検証**]をクリックして、 TiDB Cloudが指定されたバケットURLのソースデータにアクセスできるかどうかを確認します。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+2.  [**インポート]**をクリックします。
 
-3.  検証に合格したら、[**インポート**]をクリックしてインポートタスクを開始します。
+    データベースリソースの消費に関する警告メッセージが表示されます。
+
+3.  [**確認]**をクリックします。
+
+    TiDB Cloudは、指定されたバケットURLのデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポートタスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 データがインポートされた後、 TiDB CloudのAmazon S3アクセスを削除する場合は、 [ステップ2.AmazonS3アクセスを設定します](#step-2-configure-amazon-s3-access)で追加したポリシーを削除するだけです。
 

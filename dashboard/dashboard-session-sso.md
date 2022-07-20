@@ -154,7 +154,7 @@ TiDBダッシュボード用にSSOを構成したら、次の手順を実行し�
 
 Oktaと同様に、 [Auth0](https://auth0.com/)もOIDCSSOIDサービスを提供します。次の手順では、Auth0をTiDBダッシュボードSSOプロバイダーとして使用できるようにAuth0とTiDBダッシュボードを構成する方法について説明します。
 
-### 手順1：Auth0を構成する {#step-1-configure-auth0}
+### ステップ1：Auth0を構成する {#step-1-configure-auth0}
 
 1.  Auth0管理サイトにアクセスします。
 

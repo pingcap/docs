@@ -11,7 +11,7 @@ summary: Learn about the command-line flags in DM.
 
 ### <code>--advertise-addr</code> {#code-advertise-addr-code}
 
--   クライアント要求の受信に使用されるDMマスターの外部アドレス
+-   クライアントリクエストの受信に使用されるDMマスターの外部アドレス
 -   デフォルト値は`"{master-addr}"`です
 -   オプションのフラグ。 `"domain-name:port"`の形式にすることができます
 

@@ -33,7 +33,7 @@ TiDBバージョン：3.0.15
     -   `IsTrue`および`IsFalse`関数のストレージレイヤーと計算レイヤーでの一貫性のない結果の問題を修正します[＃16627](https://github.com/pingcap/tidb/pull/16627)
     -   [＃16993](https://github.com/pingcap/tidb/pull/16993)などの一部の式の誤った`NotNull`フラグを修正し`case when`
     -   一部のシナリオでオプティマイザが`TableDual`の物理計画を見つけられないという問題を修正します[＃17014](https://github.com/pingcap/tidb/pull/17014)
-    -   パーティション選択の構文がハッシュパーティションテーブル[＃17051](https://github.com/pingcap/tidb/pull/17051)で正しく有効にならない問題を修正します
+    -   パーティション選択の構文がハッシュパーティションテーブル[＃17051](https://github.com/pingcap/tidb/pull/17051)で正しく有効にならない問題を修正します。
     -   XORが浮動小数点数[＃16976](https://github.com/pingcap/tidb/pull/16976)で動作する場合の、TiDBとMySQL間の一貫性のない結果を修正します。
     -   準備された方法でDDLステートメントを実行するときに発生するエラーを修正します[＃17415](https://github.com/pingcap/tidb/pull/17415)
     -   IDアロケータ[＃17548](https://github.com/pingcap/tidb/pull/17548)でバッチサイズを計算する誤った処理ロジックを修正します

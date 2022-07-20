@@ -47,7 +47,7 @@ EXPLAIN SELECT * FROM t1 WHERE id BETWEEN 80 AND 120;
 
 このセクションでは、Hashパーティション表でのパーティションプルーニングの適用可能な使用シナリオと適用できない使用シナリオについて説明します。
 
-#### ハッシュパーティションテーブルで適用可能なシナリオ {#applicable-scenario-in-hash-partitioned-tables}
+#### ハッシュ分割テーブルで適用可能なシナリオ {#applicable-scenario-in-hash-partitioned-tables}
 
 パーティションプルーニングは、ハッシュパーティションテーブルの等価比較のクエリ条件にのみ適用されます。
 
@@ -70,7 +70,7 @@ explain select * from t where x = 1;
 
 上記のSQLステートメントでは、条件`x = 1`から、すべての結果が1つのパーティションに分類されることがわかります。値`1`は、ハッシュパーティションを通過した後、 `p1`パーティションにあることを確認できます。したがって、 `p1`のパーティションのみをスキャンする必要があり、一致する結果が`p4` `p2` `p3`にアクセスする必要はありません。実行プランからは、 `TableFullScan`演算子が1つだけ表示され、 `access object`で`p1`パーティションが指定されているため、 `partition pruning`が有効になっていることが確認できます。
 
-#### ハッシュパーティションテーブルの適用できないシナリオ {#inapplicable-scenarios-in-hash-partitioned-tables}
+#### ハッシュ分割テーブルの適用できないシナリオ {#inapplicable-scenarios-in-hash-partitioned-tables}
 
 このセクションでは、Hashパーティション表でのパーティションプルーニングの2つの適用できない使用シナリオについて説明します。
 
@@ -147,7 +147,7 @@ explain select * from t2 where x = (select * from t1 where t2.x = t1.x and t2.x 
 
 #### Rangeパーティションテーブルで適用可能なシナリオ {#applicable-scenarios-in-range-partitioned-tables}
 
-このセクションでは、範囲パーティションテーブルでのパーティションプルーニングの3つの適用可能な使用シナリオについて説明します。
+このセクションでは、範囲パーティション表でのパーティションプルーニングの3つの適用可能な使用シナリオについて説明します。
 
 ##### シナリオ1 {#scenario-one}
 

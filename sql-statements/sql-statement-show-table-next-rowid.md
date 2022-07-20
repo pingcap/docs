@@ -67,6 +67,6 @@ show table t next_row_id;
 
 ## も参照してください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [AUTO_RANDOM](/auto-random.md)
 -   [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)

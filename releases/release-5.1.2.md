@@ -39,7 +39,7 @@ TiDBバージョン：5.1.2
 
     -   TiCDC構成の動的変更のサポート[＃10645](https://github.com/tikv/tikv/issues/10645)
     -   解決済みTSメッセージのサイズを縮小して、ネットワーク帯域幅を節約します[＃2448](https://github.com/pingcap/tiflow/issues/2448)
-    -   単一のストアによって報告されるハートビートメッセージ内のピア統計の数を制限する[＃10621](https://github.com/tikv/tikv/pull/10621)
+    -   単一のストアによって報告されるハートビートメッセージのピア統計の数を制限する[＃10621](https://github.com/tikv/tikv/pull/10621)
 
 -   PD
 
@@ -84,7 +84,7 @@ TiDBバージョン：5.1.2
     -   再試行可能なデッドロックが`INFORMATION_SCHEMA.DEADLOCKS`テーブル[＃27400](https://github.com/pingcap/tidb/issues/27400)に誤って記録されるバグを修正します。
     -   パーティション化されたテーブルからの`TABLESAMPLE`のクエリ結果が期待どおりに並べ替えられない問題を修正します[＃27349](https://github.com/pingcap/tidb/issues/27349)
     -   未使用の`/debug/sub-optimal-plan`を削除し[＃27265](https://github.com/pingcap/tidb/pull/27265)
-    -   ハッシュパーティションテーブルが署名されていないデータを処理するときにクエリが間違った結果を返す可能性があるバグを修正します[＃26569](https://github.com/pingcap/tidb/issues/26569)
+    -   ハッシュ分割テーブルが署名されていないデータを処理するときにクエリが間違った結果を返す可能性があるバグを修正します[＃26569](https://github.com/pingcap/tidb/issues/26569)
     -   `NO_UNSIGNED_SUBTRACTION`が設定されている場合にパーティションの作成が失敗するバグを修正します[＃26765](https://github.com/pingcap/tidb/issues/26765)
     -   `Apply`が[＃26958](https://github.com/pingcap/tidb/issues/26958)に変換されるときに`distinct`フラグが欠落する問題を修正し`Join`
     -   新しく回復されたTiFlashノードのブロック期間を設定して、この期間中にクエリがブロックされないようにします[＃26897](https://github.com/pingcap/tidb/pull/26897)

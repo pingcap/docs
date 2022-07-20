@@ -161,7 +161,7 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 -   主キー列の[Reorg-データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
 
--   パーティションテーブルの列タイプの変更はサポートされていません。
+-   パーティション表の列タイプの変更はサポートされていません。
 
 -   生成された列の列タイプの変更はサポートされていません。
 
@@ -182,6 +182,6 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
 -   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
 -   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)

@@ -99,7 +99,7 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-上記の`START_KEY`では、 `t_75_r_31717`および`END_KEY`は、 `63434` KEYが`31717`のデータがこのリージョンに保管されていることを示してい`t_75_r_63434` 。プレフィックス`t_75_`は、これが内部テーブルIDが`75`のテーブル（ `t` ）のリージョンであることを示します。 `START_KEY`または`END_KEY`の空のキー値は、それぞれ負の無限大または正の無限大を示します。
+上記の`START_KEY`では、 `t_75_r_31717`および`END_KEY`は、 `63434` KEYが`31717`のデータがこのリージョンに保管されていることを示してい`t_75_r_63434` 。プレフィックス`t_75_`は、これが`75`の内部テーブルIDを持つテーブル（ `t` ）のリージョンであることを示します。 `START_KEY`または`END_KEY`の空のキー値は、それぞれ負の無限大または正の無限大を示します。
 
 TiDBは、必要に応じてリージョンを自動的にリバランスします。手動でリバランスするには、次の`SPLIT TABLE REGION`のステートメントを使用します。
 
@@ -201,4 +201,4 @@ test> show table t regions;
 ## も参照してください {#see-also}
 
 -   [スプリットリージョン](/sql-statements/sql-statement-split-region.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

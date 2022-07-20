@@ -15,7 +15,7 @@ title: TiDB 1.0 release notes
 -   内部データ形式を最適化して、中間データサイズを削減します
 -   MySQLの互換性を強化する
 -   `NO_SQL_CACHE`構文をサポートし、ストレージエンジンでのキャッシュ使用を制限します
--   ハッシュアグリゲーターオペレーターをリファクタリングして、メモリ使用量を削減します
+-   ハッシュアグリゲーター演算子をリファクタリングして、メモリ使用量を削減します
 -   StreamAggregatorオペレーターをサポートする
 
 ## PD {#pd}
@@ -73,7 +73,7 @@ title: TiDB 1.0 release notes
 -   アンディ・リブリアン
 -   アーサーヤン
 -   astaxie
--   バイ、ヤン
+-   白揚
 -   バイラオヘ
 -   ビン劉
 -   宇宙を非難する
@@ -119,7 +119,7 @@ title: TiDB 1.0 release notes
 -   Haibin Xie
 -   韓非
 -   ホーキングレイ
--   中村宏明
+-   中村博昭
 -   hiwjd
 -   王宏源
 -   胡明
@@ -217,7 +217,7 @@ title: TiDB 1.0 release notes
 -   テニックス
 -   tiancaiamao
 -   TianGuangyu
--   トリスタンスー
+-   トリスタン・スー
 -   ueizhou
 -   UncP
 -   Unknwon

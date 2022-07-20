@@ -146,7 +146,7 @@ TiDBバージョン：4.0.8
 
     -   TiCDC
 
-        -   GCセーフポイント[＃979](https://github.com/pingcap/tiflow/pull/979)の更新に失敗したために発生した予期しない終了を修正します
+        -   GCセーフポイント[＃979](https://github.com/pingcap/tiflow/pull/979)の更新の失敗によって引き起こされた予期しない終了を修正します
         -   modリビジョンキャッシュが正しくないためにタスクステータスが予期せずフラッシュされる問題を修正します[＃1017](https://github.com/pingcap/tiflow/pull/1017)
         -   予期しない空のMaxwellメッセージを修正する[＃978](https://github.com/pingcap/tiflow/pull/978)
 

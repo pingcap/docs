@@ -159,7 +159,7 @@ CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 
 クォーラムを達成できるように十分なフォロワーがプライマリリージョン（ `us-east-1` ）に配置されるようにするには、 `MAJORITY_IN_PRIMARY`のスケジュールを使用できます。このスケジュールは、可用性をいくらか犠牲にして、待ち時間の短いトランザクションを提供するのに役立ちます。プライマリリージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`は自動フェイルオーバーを提供できません。
 
-### パーティションテーブルに配置を割り当てます {#assign-placement-to-a-partitioned-table}
+### パーティションテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
 
 テーブルに配置オプションを割り当てるだけでなく、テーブルパーティションにオプションを割り当てることもできます。例えば：
 

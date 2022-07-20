@@ -5,7 +5,7 @@ summary: Learn how to use the PingCAP Clinic Diagnostic Service to troubleshoot 
 
 # PingCAPクリニックを使用したTiDBクラスターのトラブルシューティング {#troubleshoot-tidb-cluster-using-pingcap-clinic}
 
-TiUPを使用してデプロイされたTiDBクラスターおよびDMクラスターの場合、 PingCAPクリニック Diagnostic Service（PingCAPクリニック）を使用して、クラスタの問題をリモートでトラブルシューティングし、Diagクライアント（Diag）およびClinicServerを使用してローカルでクラスタステータスをすばやく確認できます。
+TiUPを使用してデプロイされたTiDBクラスターおよびDMクラスターの場合、 PingCAPクリニック Diagnostic Service（PingCAPクリニック）を使用して、クラスタの問題をリモートでトラブルシューティングし、Diagクライアント（Diag）およびClinicServerを使用してローカルでクラスタステータスのクイックチェックを実行できます。
 
 > **ノート：**
 >
@@ -49,7 +49,7 @@ PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックが�
 
 2.  データをアップロードするためのアクセストークン（トークン）を取得して設定します。
 
-    収集したデータをDiag経由でアップロードする場合、ユーザー認証用のトークンが必要です。トークンDiagをすでに設定している場合は、トークンを再利用してこの手順をスキップできます。
+    収集したデータをDiagを介してアップロードする場合、ユーザー認証用のトークンが必要です。トークンDiagをすでに設定している場合は、トークンを再利用してこの手順をスキップできます。
 
     トークンを取得するには、次の手順を実行します。
 
@@ -63,7 +63,7 @@ PingCAPクリニックを使用する前に、Diag（ PingCAPクリニックが�
         </div>
           <div label="Clinic Server in the Chinese mainland">
 
-        [中国本土のクリニックサーバー](https://clinic.pingcap.com.cn) ：データは中国（北京）地域のAWSに保存されます。
+        [中国本土のクリニックサーバー](https://clinic.pingcap.com.cn) ：データは中国（北京）リージョンのAWSに保存されます。
 
         </div>
 

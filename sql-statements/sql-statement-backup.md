@@ -120,7 +120,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2'
 
 ### パフォーマンスの微調整 {#performance-fine-tuning}
 
-`RATE_LIMIT`を使用して、TiKVノードあたりの平均アップロード速度を制限し、ネットワーク帯域幅を減らします。
+`RATE_LIMIT`を使用して、TiKVノードごとの平均アップロード速度を制限し、ネットワーク帯域幅を減らします。
 
 デフォルトでは、すべてのTiKVノードが4つのバックアップスレッドを実行します。この値は、 `CONCURRENCY`オプションで調整できます。
 

@@ -43,7 +43,7 @@ TiDB Ansibleバージョン：3.0.8
     -   HTTPインターフェースを使用して[＃13892](https://github.com/pingcap/tidb/pull/13892)の書き込みを回復する機能を追加します。
     -   MySQLの動作との一貫性を保つために、 `GRANT roles TO user`に必要な特権を`GrantPriv`から`ROLE_ADMIN`または`SUPER`に更新します[＃13932](https://github.com/pingcap/tidb/pull/13932)
     -   MySQLの動作との互換性を維持するために、TiDBの動作を現在のデータベースの使用から`GRANT`ステートメントでデータベース名が指定されていない場合の`No database selected`エラーの報告に変更し[＃13784](https://github.com/pingcap/tidb/pull/13784) 。
-    -   MySQLの動作との一貫性を保つために、ユーザーが対応するスキーマの特権を持っている場合にのみ実行可能な`REVOKE`ステートメントの実行特権を`SuperPriv`から`REVOKE`に変更します[＃13306](https://github.com/pingcap/tidb/pull/13306)
+    -   MySQLの動作との一貫性を保つために、ユーザーが対応するスキーマの権限を持っている場合にのみ実行可能な`REVOKE`ステートメントの実行権限を`SuperPriv`から`REVOKE`に変更します[＃13306](https://github.com/pingcap/tidb/pull/13306)
     -   `GRANT ALL`構文に[＃13943](https://github.com/pingcap/tidb/pull/13943)が含まれていない場合に、ターゲットユーザーに`GrantPriv`が誤って付与される問題を修正し`WITH GRANT OPTION` 。
     -   `LoadDataInfo`が[＃13980](https://github.com/pingcap/tidb/pull/13980)の呼び出しに失敗したときに、エラーメッセージに`LOAD DATA`ステートメントの誤った動作の原因が含まれていないという問題を修正し`addRecord` 。
     -   クエリ内の複数のSQLステートメントが同じ`StartTime`を共有するため、間違った遅いクエリ情報が出力される問題を修正し[＃13898](https://github.com/pingcap/tidb/pull/13898) 。
@@ -57,7 +57,7 @@ TiDB Ansibleバージョン：3.0.8
     -   TiDBバージョンを3.0にアップグレードすると、 `SHOW VARIABLE`の結果のうち`tidb_enable_window_function`つが誤って`1`を出力する問題を修正し、誤った結果を[＃14131](https://github.com/pingcap/tidb/pull/14131)に置き換え`0` 。
     -   1TiKVノードがオフラインのときに継続的に再試行するために`gcworker`がリークする可能性がある問題を修正します[＃14106](https://github.com/pingcap/tidb/pull/14106)
     -   問題追跡[＃14138](https://github.com/pingcap/tidb/pull/14138)の使いやすさを向上させるために、遅いクエリログにbinlogを`Prewrite`回記録します。
-    -   `tidb_enable_table_partition`変数を`GLOBAL SCOPE`にサポートさ[＃14091](https://github.com/pingcap/tidb/pull/14091)
+    -   `tidb_enable_table_partition` [＃14091](https://github.com/pingcap/tidb/pull/14091)をサポートする`GLOBAL SCOPE`
     -   新しい特権が追加されたときに、新しく追加された特権が対応するユーザーに正しく付与されないために、ユーザー特権が欠落しているか、誤って追加されている可能性がある問題を修正します[＃14178](https://github.com/pingcap/tidb/pull/14178)
     -   TiKVサーバーが切断されたときに`rpcClient`が閉じないため、 `CheckStreamTimeoutLoop`つのゴルーチンがリークする可能性がある問題を修正します[＃14227](https://github.com/pingcap/tidb/pull/14227)
     -   証明書ベースの認証をサポートする（ [ユーザードキュメント](/certificate-authentication.md) ） [＃13955](https://github.com/pingcap/tidb/pull/13955)

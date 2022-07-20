@@ -12,7 +12,7 @@ TiDB Ansibleバージョン：4.0.0-ベータ版
 
 ## TiDB {#tidb}
 
--   `INSERT`の`DELETE`中に使用されたメモリが`REPLACE`構成項目で指定された制限を`UPDATE`た場合は、ログを印刷するか、SQLの実行をキャンセルして`MemQuotaQuery` 。実際の動作は、 `OOMAction`の構成によって異なります。 [＃14179](https://github.com/pingcap/tidb/pull/14179) [＃14289](https://github.com/pingcap/tidb/pull/14289) [＃14299](https://github.com/pingcap/tidb/pull/14299)
+-   `INSERT`の`DELETE`中に使用されたメモリが`REPLACE`構成項目で指定された制限を`UPDATE`た場合は、ログを印刷するか、SQL実行をキャンセルして`MemQuotaQuery` 。実際の動作は、 `OOMAction`の構成によって異なります。 [＃14179](https://github.com/pingcap/tidb/pull/14179) [＃14289](https://github.com/pingcap/tidb/pull/14289) [＃14299](https://github.com/pingcap/tidb/pull/14299)
 -   駆動テーブルと被駆動テーブルの両方の行数を考慮して、 `Index Join`のコストを計算する精度を高めます[＃12085](https://github.com/pingcap/tidb/pull/12085)
 -   15個のSQLヒントを追加して、オプティマイザーの動作を制御し、オプティマイザーをより安定させます
     -   [＃11253](https://github.com/pingcap/tidb/pull/11253) [＃11364](https://github.com/pingcap/tidb/pull/11364) [＃11673](https://github.com/pingcap/tidb/pull/11673) [＃11740](https://github.com/pingcap/tidb/pull/11740) [＃11746](https://github.com/pingcap/tidb/pull/11746)
@@ -22,7 +22,7 @@ TiDB Ansibleバージョン：4.0.0-ベータ版
 -   インデックスマージ機能をサポートすることにより、テーブルクエリのパフォーマンスを向上させます[＃10121](https://github.com/pingcap/tidb/pull/10121) [＃10512](https://github.com/pingcap/tidb/pull/10512) [＃11245](https://github.com/pingcap/tidb/pull/11245) [＃12225](https://github.com/pingcap/tidb/pull/12225) [＃12248](https://github.com/pingcap/tidb/pull/12248) [＃12305](https://github.com/pingcap/tidb/pull/12305) [＃12843](https://github.com/pingcap/tidb/pull/12843)
 -   インデックス結果をキャッシュし、重複する結果を排除することで、範囲計算のパフォーマンスを向上させ、CPUオーバーヘッドを削減します[＃12856](https://github.com/pingcap/tidb/pull/12856)
 -   遅いログのレベルを通常のログのレベルから切り離します[＃12359](https://github.com/pingcap/tidb/pull/12359)
--   `oom-use-tmp-storage`つのパラメーター（デフォルトでは`true` ）を追加して、単一のSQLステートメントの実行のメモリ使用量が`mem-quota-query`を超え、SQLに`Hash Join` [＃11832](https://github.com/pingcap/tidb/pull/11832) [＃11937](https://github.com/pingcap/tidb/pull/11937) [＃12116](https://github.com/pingcap/tidb/pull/12116) [＃12067](https://github.com/pingcap/tidb/pull/12067)が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します。
+-   `oom-use-tmp-storage`つのパラメーター（デフォルトでは`true` ）を追加して、単一のSQLステートメントの実行のメモリ使用量が`mem-quota-query`を超え、SQLに`Hash Join` [＃11832](https://github.com/pingcap/tidb/pull/11832) [＃11937](https://github.com/pingcap/tidb/pull/11937) [＃12116](https://github.com/pingcap/tidb/pull/12116) [＃12067](https://github.com/pingcap/tidb/pull/12067)が含まれている場合に、一時ファイルを使用して中間結果をキャッシュするかどうかを制御します
 -   `create index`を使用して式インデックスを作成し、 `alter table`を使用して式インデックスを削除することをサポートし`drop index` [＃14117](https://github.com/pingcap/tidb/pull/14117)
 -   `query-log-max-len`パラメーターのデフォルト値を`4096`に増やして、切り捨てられたSQL出力の数を減らします。このパラメータは動的に調整できます。 [＃12491](https://github.com/pingcap/tidb/pull/12491)
 -   列属性に`AutoRandom`キーワードを追加して、システムがランダムな整数を主キーに自動的に割り当てるかどうかを制御することをサポートします。これにより、 `AUTO_INCREMENT`主キー[＃13127](https://github.com/pingcap/tidb/pull/13127)によって引き起こされるホットスポットの問題が回避されます。

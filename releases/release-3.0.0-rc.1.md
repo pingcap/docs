@@ -48,7 +48,7 @@ TiDB Ansibleバージョン：3.0.0-rc.1
     -   厳密なSQLモードが無効になっている場合にNULLフィールドを挿入する有効性チェックを修正しました[＃10161](https://github.com/pingcap/tidb/pull/10161)
 
 -   DDL
-    -   `CREATE TABLE`のステートメントに`pre_split_regions`のオプションを追加します。このオプションは、テーブル作成時にテーブル領域を事前に分割して、テーブル作成後の大量の書き込みによって引き起こされる書き込みホットスポットを回避することをサポートします[＃10138](https://github.com/pingcap/tidb/pull/10138)
+    -   `CREATE TABLE`のステートメントに`pre_split_regions`のオプションを追加します。このオプションは、テーブル作成時にテーブル領域を事前分割して、テーブル作成後の大量の書き込みによって引き起こされる書き込みホットスポットを回避することをサポートします[＃10138](https://github.com/pingcap/tidb/pull/10138)
     -   一部のDDLステートメントの実行パフォーマンスを最適化する[＃10170](https://github.com/pingcap/tidb/pull/10170)
     -   フルテキストインデックスは13 [＃9821](https://github.com/pingcap/tidb/pull/9821)サポートされていないという警告を追加し`FULLTEXT KEY`
     -   古いバージョンのTiDB1のUTF8およびUTF8MB4文字セットの互換性の問題を修正し[＃9820](https://github.com/pingcap/tidb/pull/9820)

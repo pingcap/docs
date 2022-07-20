@@ -24,7 +24,7 @@ TiDB Ansibleバージョン：2.1.8
 -   互換性を向上させるために、 `STR_TO_DATE`関数の`%H`形式をサポートします[＃9964](https://github.com/pingcap/tidb/pull/9964)
 -   `GROUP_CONCAT`の関数が一意のインデックスでグループ化されている場合に結果が間違っているという問題を修正します[＃9969](https://github.com/pingcap/tidb/pull/9969)
 -   オプティマイザのヒントに一致しないテーブル名が含まれている場合に警告を返します[＃9970](https://github.com/pingcap/tidb/pull/9970)
--   ログ形式を統合して、分析用のツールを使用したログの収集を容易にします統合ログ形式
+-   ログ形式を統合して、分析用ツールを使用したログの収集を容易にします統合ログ形式
 -   多くのNULL値が不正確な統計推定を引き起こす問題を修正します[＃9979](https://github.com/pingcap/tidb/pull/9979)
 -   TIMESTAMPタイプのデフォルト値が境界値[＃9987](https://github.com/pingcap/tidb/pull/9987)の場合にエラーが報告される問題を修正します
 -   13の[＃10000](https://github.com/pingcap/tidb/pull/10000)を検証し`time_zone`
@@ -54,7 +54,7 @@ TiDB Ansibleバージョン：2.1.8
 -   PiDB Binlog Pumpに`storage.sync-log`の構成アイテムを追加して、 Pumpでローカルストレージのディスクの非同期フラッシュをサポートし[＃529](https://github.com/pingcap/tidb-binlog/pull/529) 。
 -   TiDBBinlogPumpとBinlog間の通信のトラフィック圧縮をサポートし[＃530](https://github.com/pingcap/tidb-binlog/pull/530)
 -   TiDB Binlogに`syncer.sql-mode`の構成アイテムを追加して、異なる`sql-mode`秒を使用したDDLクエリの解析をサポートします[＃513](https://github.com/pingcap/tidb-binlog/pull/513)
--   TiDB Binlogに`syncer.ignore-table`の構成アイテムを追加して、複製されないフィルタリングテーブルをサポートします[＃526](https://github.com/pingcap/tidb-binlog/pull/526)
+-   複製さDrainerないフィルタリングテーブルをサポートするために、 Binlogに`syncer.ignore-table`の構成アイテムを追加します[＃526](https://github.com/pingcap/tidb-binlog/pull/526)
 
 ## TiDB Ansible {#tidb-ansible}
 

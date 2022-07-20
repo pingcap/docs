@@ -14,7 +14,7 @@ DM-workerは、MySQL/MariaDBからTiDBにデータを移行するために使用
 -   1人のDMワーカーが、1つのMySQL/MariaDBインスタンスのデータを複数のTiDBインスタンスに移行することをサポートします
 -   複数のDMワーカーは、複数のMySQL/MariaDBインスタンスのデータを1つのTiDBインスタンスに移行することをサポートします
 
-## DM-workerプロセッシングユニット {#dm-worker-processing-unit}
+## DM-worker処理ユニット {#dm-worker-processing-unit}
 
 DM-workerタスクには、リレーログ、ダンプ処理ユニット、ロード処理ユニット、binlogレプリケーションなどの複数のロジックユニットが含まれています。
 

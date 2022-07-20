@@ -31,7 +31,7 @@ DDLステートメントがクラスタで実行されているときは**TiDB**
 
 このセクションでは、TiDBをアップグレードした後のいくつかのFAQとその解決策を示します。
 
-### DDL操作の実行時に文字セット（文字セット）エラーが発生する {#the-character-set-charset-errors-when-executing-ddl-operations}
+### DDL操作の実行時の文字セット（文字セット）エラー {#the-character-set-charset-errors-when-executing-ddl-operations}
 
 v2.1.0以前のバージョン（v2.0のすべてのバージョンを含む）では、TiDBの文字セットはデフォルトでUTF-8です。ただし、v2.1.1以降、デフォルトの文字セットはUTF8MB4に変更されました。
 
@@ -215,7 +215,7 @@ alter table t change column a a varchar(22) character set utf8;
     alter table t convert to character set utf8mb4;
     ```
 
--   問題＃1で行ったように列の文字セットを指定して、元の列の文字セット（UTF8MB4）との一貫性を保つこともできます。
+-   問題＃1で行ったように列文字セットを指定して、元の列文字セット（UTF8MB4）との一貫性を保つこともできます。
 
     {{< copyable "" >}}
 

@@ -5,7 +5,7 @@ summary: Learn the terms used in TiDB Binlog.
 
 # Binlog用語集 {#tidb-binlog-glossary}
 
-このドキュメントには、TiDB Binlogのログ、監視、構成、およびドキュメントで使用されている用語がリストされています。
+このドキュメントには、TiDB Binlogのログ、監視、構成、およびドキュメントで使用される用語がリストされています。
 
 ## Binlog {#binlog}
 

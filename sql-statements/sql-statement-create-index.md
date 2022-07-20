@@ -225,7 +225,7 @@ SELECT max(lower(col1)) FROM t;
 SELECT min(col1) FROM t GROUP BY lower(col1);
 ```
 
-式インデックスに対応する式を確認するには、 `show index`を実行するか、システムテーブル`information_schema.tidb_indexes`とテーブル`information_schema.STATISTICS`を確認します。出力の`Expression`列は、対応する式を示します。非式インデックスの場合、列には`NULL`が表示されます。
+式インデックスに対応する式を確認するには、 `show index`を実行するか、システムテーブル`information_schema.tidb_indexes`とテーブル`information_schema.STATISTICS`を確認してください。出力の`Expression`列は、対応する式を示します。非式インデックスの場合、列には`NULL`が表示されます。
 
 行が挿入または更新されるたびに式の値を計算する必要があるため、式インデックスを維持するコストは他のインデックスを維持するコストよりも高くなります。式の値はすでにインデックスに格納されているため、オプティマイザが式のインデックスを選択するときに、この値を再計算する必要はありません。
 
@@ -265,5 +265,5 @@ CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 -   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
 -   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [EXPLAIN](/sql-statements/sql-statement-explain.md)

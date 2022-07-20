@@ -13,7 +13,7 @@ TiDB Ansibleバージョン：2.1.11
 ## TiDB {#tidb}
 
 -   [＃10595](https://github.com/pingcap/tidb/pull/10595)に誤ったスキーマが使用される問題を修正し`delete from join`
--   組み込み`CONVERT()`が誤ったフィールドタイプ[＃10263](https://github.com/pingcap/tidb/pull/10263)を返す可能性がある問題を修正します
+-   ビルトイン`CONVERT()`が誤ったフィールドタイプ[＃10263](https://github.com/pingcap/tidb/pull/10263)を返す可能性がある問題を修正します
 -   バケット数[＃10569](https://github.com/pingcap/tidb/pull/10569)を更新するときに、重複していないフィードバックをマージします
 -   `unix_timestamp()-unix_timestamp(now())`の計算エラーを[＃10491](https://github.com/pingcap/tidb/pull/10491)
 -   `period_diff`の非互換性の問題をMySQL8.03と修正し[＃10501](https://github.com/pingcap/tidb/pull/10501)

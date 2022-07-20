@@ -20,7 +20,7 @@ summary: Learn about the supported aggregate functions in TiDB.
 | [`MAX()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_max)                                                   | 最大値を返す                               |
 | [`MIN()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_min)                                                   | 最小値を返す                               |
 | [`GROUP_CONCAT()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_group-concat)                                 | 連結された文字列を返します                        |
-| [`VARIANCE()` 、 <code>VAR_POP()</code>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop)                 | 母集団の標準分散を返します                        |
+| [`VARIANCE()` 、 <code>VAR_POP()</code>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-pop)                 | 母分散を返します                             |
 | [`STD()` 、 <code>STDDEV()</code> 、 <code>STDDEV_POP</code>](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_std) | 母標準偏差を返します                           |
 | [`VAR_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_var-samp)                                         | 標本分散を返す                              |
 | [`STDDEV_SAMP()`](https://dev.mysql.com/doc/refman/5.7/en/aggregate-functions.html#function_stddev-samp)                                   | サンプルの標準偏差を返します                       |
@@ -66,7 +66,7 @@ summary: Learn about the supported aggregate functions in TiDB.
 
 ## GROUPBY修飾子 {#group-by-modifiers}
 
-TiDBは現在、 `WITH ROLLUP`などの`GROUP BY`の修飾子をサポートしていません。将来的にはサポートを追加する予定です。 [TiDB＃4250](https://github.com/pingcap/tidb/issues/4250)を参照してください。
+TiDBは現在、 `WITH ROLLUP`などの`GROUP BY`の修飾子をサポートしていません。今後、サポートを追加する予定です。 [TiDB＃4250](https://github.com/pingcap/tidb/issues/4250)を参照してください。
 
 ## SQLモードのサポート {#sql-mode-support}
 

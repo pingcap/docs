@@ -45,7 +45,7 @@ TiDBは、特別なクライアントやドライバーを必要とせずに、 
 >
 > タイムスタンプの指定に加えて、 `AS OF TIMESTAMP`句の最も一般的な使用法は、数秒前のデータを読み取ることです。このアプローチを使用する場合は、5秒より古い履歴データを読み取ることをお勧めします。
 >
-> Stale Readを使用する場合は、TiDBノードとPDノードにNTPサービスを展開する必要があります。これにより、TiDBによって使用される指定されたタイムスタンプが最新のTSO割り当ての進行状況（数秒先のタイムスタンプなど）よりも進んだり、GCセーフポイントのタイムスタンプよりも遅れたりする状況を回避できます。指定されたタイムスタンプがサービススコープを超えると、TiDBはエラーを返します。
+> Stale Readを使用する場合は、TiDBノードとPDノードにNTPサービスを展開する必要があります。これにより、TiDBによって使用される指定されたタイムスタンプが最新のTSO割り当ての進行状況（数秒先のタイムスタンプなど）よりも進んだり、GCセーフポイントのタイムスタンプよりも遅くなったりする状況を回避できます。指定されたタイムスタンプがサービススコープを超えると、TiDBはエラーを返します。
 
 ## 使用例 {#usage-examples}
 
@@ -132,7 +132,7 @@ select * from t;
 
 ### <code>SELECT</code>ステートメントを使用して履歴データを読み取ります {#read-historical-data-using-the-code-select-code-statement}
 
-[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用して、過去のある時点からのデータを読み取ることができます。
+[`SELECT ... FROM ... AS OF TIMESTAMP`](/sql-statements/sql-statement-select.md)ステートメントを使用して、過去のある時点のデータを読み取ることができます。
 
 ```sql
 select * from t as of timestamp '2021-05-26 16:45:26';

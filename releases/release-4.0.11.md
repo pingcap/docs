@@ -97,7 +97,7 @@ TiDBバージョン：4.0.11
     -   `ceiling`関数[＃21936](https://github.com/pingcap/tidb/pull/21936)の間違った型推論を修正します
     -   `Double`タイプの列が10進数の[＃21916](https://github.com/pingcap/tidb/pull/21916)を無視する問題を修正します
     -   相関集計がサブクエリ[＃21877](https://github.com/pingcap/tidb/pull/21877)で計算される問題を修正します
-    -   キーの長さが65536以上のJSONオブジェクトのエラーを報告する[＃21870](https://github.com/pingcap/tidb/pull/21870)
+    -   キー長&gt;= [＃21870](https://github.com/pingcap/tidb/pull/21870)のJSONオブジェクトのエラーを報告する
     -   `dyname`関数がMySQL3と互換性がないという問題を修正し[＃21850](https://github.com/pingcap/tidb/pull/21850)
     -   入力データが長すぎる場合に`to_base64`関数が`NULL`を返す問題を修正します[＃21813](https://github.com/pingcap/tidb/pull/21813)
     -   サブクエリ[＃21808](https://github.com/pingcap/tidb/pull/21808)の複数のフィールドを比較できない問題を修正しました

@@ -63,7 +63,7 @@ explain analyze select count(*) from test.t;
 
     **INSTANCEレベルのデフォルト設定は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
 
--   セッションレベル。次のステートメントを使用して構成します。
+-   SESSIONレベル。次のステートメントを使用して構成します。
 
     {{< copyable "" >}}
 
@@ -107,7 +107,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように促すこともできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。さらに、ヒントはエンジン分離の前提でのみ有効になります。ヒントで指定されたエンジンがエンジン分離リストにない場合、ヒントも無視され、警告が報告されます。
 

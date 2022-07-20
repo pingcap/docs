@@ -153,7 +153,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 ### シナリオ1：一部のMySQLソースが削除されます {#scenario-1-some-mysql-sources-are-removed}
 
-#### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
+#### 異常ロックの理由 {#the-reason-for-the-abnormal-lock}
 
 `DM-master`がシャーディングDDLロックのロックを自動的に解除しようとする前に、すべてのMySQLソースがシャーディングDDLイベントを受信する必要があります（詳細については、 [シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照してください）。シャーディングDDLイベントがすでに移行プロセスにあり、一部のMySQLソースが削除されて再ロードされない場合（これらのMySQLソースはアプリケーションの要求に応じて削除されます）、シャーディングDDLロックを自動的に移行およびロック解除することはできません。すべてのDMワーカーがDDLイベントを受信できるわけではないためです。
 
@@ -294,7 +294,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 ### シナリオ2：一部のDMワーカーが異常に停止するか、DDLロック解除プロセス中にネットワーク障害が発生します {#scenario-2-some-dm-workers-stop-abnormally-or-the-network-failure-occurs-during-the-ddl-unlocking-process}
 
-#### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
+#### 異常ロックの理由 {#the-reason-for-the-abnormal-lock}
 
 `DM-master`がすべてのDMワーカーのDDLイベントを受信した後、自動的に実行される`unlock DDL lock`には、主に次の手順が含まれます。
 

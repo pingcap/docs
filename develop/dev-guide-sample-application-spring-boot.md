@@ -65,7 +65,7 @@ summary: Learn an example of how to build a TiDB application using Spring Boot.
         dnf install maven
         ```
 
-    -   ヤム：
+    -   yum：
 
         {{< copyable "" >}}
 
@@ -530,7 +530,7 @@ true
 5.  プレーヤーの総数を取得します。
 6.  `id` of 1のプレーヤーが売り手で、 `id` of 2のプレーヤーが買い手であり、105が`coins`のコストで購入されるトランザクションを実行し`goods` 。
 
-このスクリプトは`make request`または`./request.sh`で実行できます。結果は次のようになります。
+このスクリプトは、 `make request`または`./request.sh`で実行できます。結果は次のようになります。
 
 ```shell
 cheese@CheesedeMacBook-Pro spring-jpa-hibernate % make request
@@ -1120,7 +1120,7 @@ public class PlayerController {
 
 -   [`@RestController`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html)は`PlayerController`を[Webコントローラー](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)として宣言し、戻り値を`JSON`出力としてシリアル化します。
 -   [`@RequestMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html)はURLエンドポイントを`/player`にマップします。つまり、この`Web Controller`は`/player`のURLに送信されたリクエストのみをリッスンします。
--   `@Autowired`は、 `Spring`のコンテナーがコラボレーションBean間の関係を自動配線できることを意味します。宣言には`PlayerService`オブジェクトが必要です。これはインターフェイスであり、使用する実装クラスを指定しません。これはSpringによって組み立てられます。このアセンブリのルールについては、Springの公式Webサイトの[IoCコンテナ](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html)を参照してください。
+-   `@Autowired`は、 `Spring`のコンテナーが協調するBean間の関係を自動配線できることを意味します。宣言には`PlayerService`オブジェクトが必要です。これはインターフェイスであり、使用する実装クラスを指定しません。これはSpringによって組み立てられます。このアセンブリのルールについては、Springの公式Webサイトの[IoCコンテナ](https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/beans.html)を参照してください。
 -   [`@PostMapping`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/PostMapping.html)は、この関数がHTTPの[役職](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)要求に応答することを宣言します。
     -   `@RequestBody`は、HTTPペイロード全体が`playerList`パラメーターに解析されることを宣言します。
     -   `@NonNull`は、パラメーターがnullであってはならないことを宣言します。それ以外の場合は、エラーを返します。

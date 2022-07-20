@@ -36,7 +36,7 @@ PumpまたはDrainerの状態の説明：
 
 ### Drainer {#drainer}
 
--   開始：開始すると、 Drainerノードはその状態を`online`に設定し、 `offline`状態ではないすべてのPumpノードからbinlogをプルしようとします。 binlogの取得に失敗した場合は、試行を続けます。
+-   開始：開始すると、 Drainerノードはその状態を`online`に設定し、 `offline`状態にないすべてのPumpノードからbinlogをプルしようとします。 binlogの取得に失敗した場合は、試行を続けます。
 -   終了：プロセスが正常に終了する前に、 Drainerノードは`paused`または`offline`の状態になります。プロセスが異常終了した場合（ `kill -9` 、プロセスpanic、クラッシュが原因）、 Drainerノードは`online`状態のままです。
     -   一時停止： `kill`コマンド（ `kill -9`ではなく）を使用するか、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押すか、binlogctlツールの`pause-drainer`コマンドを使用して、 Drainerプロセスを一時停止できます。一時停止命令を受け取った後、 Drainerノードはその状態を`pausing`に設定し、 Pumpノードからのbinlogのプルを停止します。すべてのスレッドが安全に終了した後、 Drainerノードはその状態を`paused`に設定し、プロセスを終了します。
     -   オフライン：binlogctlツールの`offline-drainer`コマンドを使用することによってのみ、 Drainerプロセスを閉じることができます。オフライン命令を受け取った後、 Drainerノードはその状態を`closing`に設定し、 Pumpノードからのbinlogのプルを停止します。すべてのスレッドが安全に終了した後、 Drainerノードはその状態を`offline`に更新し、プロセスを終了します。

@@ -37,7 +37,7 @@ title: TiDB 2.1 Beta Release Notes
     -   `PlanCache`のパフォーマンスの問題を修正します
     -   `tidb_retry_limit`のシステム変数を追加して、トランザクションの自動再試行時間を制御します
     -   `tidb_disable_txn_auto_retry`のシステム変数を追加して、トランザクションが自動的に試行されるかどうかを制御します
-    -   `time`タイプの書き込みデータの精度の問題を修正
+    -   `time`種類の書き込みデータの精度の問題を修正
     -   競合するトランザクションのパフォーマンスを最適化するために、ローカルで競合するトランザクションのキューをサポートする
     -   `UPDATE`のステートメントの`Affected Rows`を修正
     -   `insert ignore on duplicate key update`のステートメントパフォーマンスを最適化する

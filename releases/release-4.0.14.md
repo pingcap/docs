@@ -103,7 +103,7 @@ TiDBバージョン：4.0.14
     -   非同期ロガーを使用するとpanicログが失われる可能性がある問題を修正します[＃8998](https://github.com/tikv/tikv/issues/8998)
     -   暗号化が有効になっている場合にスナップショットを2回作成するときに発生するpanicの問題を修正し[＃10407](https://github.com/tikv/tikv/issues/10407) [＃9786](https://github.com/tikv/tikv/issues/9786)
     -   コプロセッサー[＃10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数タイプを修正してください
-    -   シャットダウン中の疑わしい警告と[＃10307](https://github.com/tikv/tikv/issues/10307)からの非決定論的な応答の問題を修正します[＃10353](https://github.com/tikv/tikv/issues/10353)
+    -   シャットダウン中の疑わしい警告と[＃10307](https://github.com/tikv/tikv/issues/10307)からの非決定的な応答の問題を修正します[＃10353](https://github.com/tikv/tikv/issues/10353)
     -   バックアップスレッドリークの問題を修正[＃10287](https://github.com/tikv/tikv/issues/10287)
     -   分割プロセスが遅すぎてリージョンのマージが進行中の場合、リージョンの分割がpanicになり、メタデータが破損する可能性がある問題を修正します[＃8456](https://github.com/tikv/tikv/issues/8456) [＃8783](https://github.com/tikv/tikv/issues/8783)
     -   リージョンのハートビートにより、状況によってはTiKVが大きなリージョンを分割できない問題を修正します[＃10111](https://github.com/tikv/tikv/issues/10111)
@@ -162,5 +162,5 @@ TiDBバージョン：4.0.14
         -   [＃1957](https://github.com/pingcap/tiflow/pull/1957)のランタイムメモリ消費を削減する[＃2011](https://github.com/pingcap/tiflow/pull/2011)
         -   MySQLシンクがエラーに遭遇して一時停止した後に一部のMySQL接続がリークする可能性があるバグを修正します[＃1945](https://github.com/pingcap/tiflow/pull/1945)
         -   開始TSが現在のTSからGCTTL1を引いた値よりも小さい場合、 [＃1839](https://github.com/pingcap/tiflow/issues/1839)チェンジフィードを作成できない問題を修正します。
-        -   ソートヒープのメモリ`malloc`を減らして、CPUオーバーヘッド[＃1853](https://github.com/pingcap/tiflow/issues/1853)が多すぎないようにします。
+        -   CPUオーバーヘッド[＃1853](https://github.com/pingcap/tiflow/issues/1853)が多すぎないように、ソートヒープのメモリ`malloc`を減らします。
         -   テーブルを移動するときにレプリケーションタスクが停止する可能性があるバグを修正します[＃1827](https://github.com/pingcap/tiflow/pull/1827)

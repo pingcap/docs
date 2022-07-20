@@ -30,7 +30,7 @@ title: TiDB 2.0.5 Release Notes
 
 ## PD {#pd}
 
--   一部のシナリオでレプリカの移行がTiKVディスクスペースを消費する問題を修正します
+-   一部のシナリオで、レプリカの移行によってTiKVディスク領域が消費される問題を修正します
 -   `AdjacentRegionScheduler`によって引き起こされるクラッシュの問題を修正します
 
 ## TiKV {#tikv}

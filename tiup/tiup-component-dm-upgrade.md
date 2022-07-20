@@ -17,7 +17,7 @@ tiup dm upgrade <cluster-name> <version> [flags]
 
 ## オプション {#options}
 
-### - オフライン {#offline}
+### &#x20;--offline {#offline}
 
 -   現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMは、サービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
 

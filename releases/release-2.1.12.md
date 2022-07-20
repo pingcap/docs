@@ -34,7 +34,7 @@ TiDB Ansibleバージョン：2.1.12
 
 ## PD {#pd}
 
--   etcdリーダー選出が極端な条件でブロックされる問題を修正します[＃1576](https://github.com/pingcap/pd/pull/1576)
+-   etcdリーダー選挙が極端な状況でブロックされる問題を修正します[＃1576](https://github.com/pingcap/pd/pull/1576)
 
 ## TiKV {#tikv}
 

@@ -80,7 +80,7 @@ BRはコマンドをTiKVクラスタに直接送信し、TiDBサーバーに依�
 
 ## 単一のテーブルをネットワークディスクにバックアップします（実稼働環境に推奨） {#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments}
 
-`br backup`コマンドを実行して、単一のテーブルデータ`--db batchmark --table order_line`をネットワークディスクの指定されたパス`local:///br_data`にバックアップします。
+`br backup`コマンドを実行して、単一テーブルのデータ`--db batchmark --table order_line`をネットワークディスク内の指定されたパス`local:///br_data`にバックアップします。
 
 ### バックアップの前提条件 {#backup-prerequisites}
 
@@ -191,7 +191,7 @@ bin/br backup table \
 
 ### 性能調整 {#performance-tuning}
 
-バックアッププロセス中にTiKVのリソース使用量が明らかなボトルネックにならない場合（たとえば、 [バックアップの監視メトリック](#monitoring-metrics-for-the-backup)では、バックアップワーカーの最大CPU使用率は約`1500%`であり、全体的なI / O使用率は`30%`未満です）、パフォーマンスを調整するために、 `--concurrency` （デフォルトでは`4` ）の値を増やすことを試みることができます。ただし、このパフォーマンス調整方法は、多くの小さなテーブルのユースケースには適していません。次の例を参照してください。
+バックアッププロセス中にTiKVのリソース使用量が明らかなボトルネックにならない場合（たとえば、 [バックアップの監視メトリック](#monitoring-metrics-for-the-backup)では、バックアップワーカーのCPU使用率の最高値は約`1500%`であり、全体的なI / O使用率は`30%`未満です）、パフォーマンスを調整するために、 `--concurrency` （デフォルトでは`4` ）の値を増やすことを試みることができます。ただし、このパフォーマンス調整方法は、多くの小さなテーブルのユースケースには適していません。次の例を参照してください。
 
 {{< copyable "" >}}
 

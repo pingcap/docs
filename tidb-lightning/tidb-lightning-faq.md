@@ -337,7 +337,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 TiDB Lightningバックエンドは、v4.0.0以降のバージョンのTiDBクラスターへのデータのインポートのみをサポートします。ローカルバックエンドを使用してデータをv2.xまたはv3.xクラスタにインポートしようとすると、上記のエラーが報告されます。このとき、データのインポートにImporter-backendまたはTiDB-backendを使用するように構成を変更できます。
 
-一部の`nightly`バージョンは、v4.0.0-beta.2に類似している可能性があります。これらの`nightly`のバージョンのTiDB Lightningは、実際にはローカルバックエンドをサポートしています。 `nightly`バージョンを使用しているときにこのエラーが発生した場合は、構成`check-requirements = false`を設定することでバージョンチェックをスキップできます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうしないと、インポートが失敗する可能性があります。
+一部の`nightly`バージョンは、v4.0.0-beta.2に類似している可能性があります。これらの`nightly`のバージョンのTiDB Lightningは、実際にはローカルバックエンドをサポートしています。 `nightly`バージョンを使用しているときにこのエラーが発生した場合は、構成`check-requirements = false`を設定することにより、バージョンチェックをスキップできます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうしないと、インポートが失敗する可能性があります。
 
 ## <code>restore table test.district failed: unknown columns in header [...]</code> {#code-restore-table-test-district-failed-unknown-columns-in-header-code}
 

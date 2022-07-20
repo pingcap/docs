@@ -177,10 +177,10 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
     ```
 
--   `max-merge-region-size`は、リージョンマージのサイズの上限を制御します（単位はMです）。 `regionSize`が指定された値を超えると、PDはそれを隣接するリージョンとマージしません。 0に設定すると、リージョンマージが無効になります。
+-   `max-merge-region-size`は、リージョンマージのサイズの上限を制御します（単位はMiBです）。 `regionSize`が指定された値を超えると、PDはそれを隣接するリージョンとマージしません。 0に設定すると、リージョンマージが無効になります。
 
     ```bash
-    config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16M
+    config set max-merge-region-size 16 // Set the upper limit on the size of Region Merge to 16 MiB
     ```
 
 -   `max-merge-region-keys`は、リージョンマージのキーカウントの上限を制御します。 `regionKeyCount`が指定された値を超えると、PDはそれを隣接するリージョンとマージしません。
@@ -210,7 +210,7 @@ tiup ctl pd -u https://127.0.0.1:2379 --cacert="path/to/ca" --cert="path/to/cert
 -   `key-type`は、クラスタに使用されるキーエンコードタイプを指定します。サポートされているオプションは[&quot;table&quot;、 &quot;raw&quot;、 &quot;txn&quot;]で、デフォルト値は&quot;table&quot;です。
 
     -   クラスタにTiDBインスタンスが存在しない場合、 `key-type`は「raw」または「txn」になり、PDは、 `enable-cross-table-merge`の設定に関係なく、テーブル間でリージョンをマージできます。
-    -   クラスタにTiDBインスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PDがテーブル間でリージョンをマージできるかどうかは、 `enable-cross-table-merge`によって決定されます。 `key-type`が「生」の場合、配置ルールは機能しません。
+    -   クラスタにTiDBインスタンスが存在する場合、 `key-type`は「テーブル」である必要があります。 PDがテーブル間でリージョンをマージできるかどうかは`enable-cross-table-merge`によって決定されます。 `key-type`が「生」の場合、配置ルールは機能しません。
 
     ```bash
     config set key-type raw  // Enable cross table merge.
@@ -480,7 +480,7 @@ Success!
 >> operator check 1                                     // Check the status of the operators related to Region 1
 ```
 
-リージョンの分割は、可能な限り中央に近い位置から開始されます。この位置は、「スキャン」と「近似」の2つの戦略を使用して見つけることができます。違いは、前者はリージョンをスキャンして中央のキーを決定し、後者はSSTファイルに記録されている統計をチェックしておおよその位置を取得することです。一般に、前者の方が正確ですが、後者の方がI / Oの消費量が少なく、より速く完了することができます。
+リージョンの分割は、可能な限り中央に近い位置から開始されます。この位置は、「スキャン」と「概算」の2つの戦略を使用して見つけることができます。違いは、前者はリージョンをスキャンして中央のキーを決定し、後者はSSTファイルに記録されている統計をチェックしておおよその位置を取得することです。一般に、前者の方が正確ですが、後者の方がI / Oの消費量が少なく、より速く完了することができます。
 
 ### <code>ping</code> {#code-ping-code}
 
@@ -495,7 +495,7 @@ time: 43.12698ms
 
 ### <code>region &#x3C;region_id> [--jq="&#x3C;query string>"]</code> {#code-region-x3c-region-id-jq-x3c-query-string-code}
 
-このコマンドを使用して、地域情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
+このコマンドを使用して、リージョン情報を表示します。 jq形式の出力については、 [jq-formatted-json-output-usage](#jq-formatted-json-output-usage)を参照してください。
 
 使用法：
 
@@ -728,7 +728,7 @@ time: 43.12698ms
 さまざまなタイプの説明：
 
 -   ミスピア：十分なレプリカがない地域
--   extra-peer：余分なレプリカがあるリージョン
+-   エクストラピア：追加のレプリカがある地域
 -   ダウンピア：一部のレプリカがダウンしているリージョン
 -   保留中のピア：一部のレプリカが保留中のリージョン
 
@@ -857,7 +857,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
--   `read-priorities` 、および`write-leader-priorities`は、スケジューラがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つのディメンションがサポートされています。
+-   `read-priorities` 、および`write-leader-priorities`は、スケジューラがホットリージョンスケジューリングで優先するディメンションを制御し`write-peer-priorities` 。構成には2つの次元がサポートされています。
 
     -   `read-priorities`および`write-leader-priorities`は、読み取りおよび書き込みリーダータイプのホットリージョンをスケジュールするためにスケジューラーが優先するディメンションを制御します。寸法オプションは`query` 、および`byte` `key` 。
 
@@ -1022,7 +1022,7 @@ store --jq='.stores[].store | select(.labels | length>0 and contains([{"key":"en
 ...
 ```
 
-### リージョンレプリカの配布ステータスを照会する {#query-the-distribution-status-of-the-region-replicas}
+### リージョンレプリカの配布ステータスを照会します {#query-the-distribution-status-of-the-region-replicas}
 
 ```bash
 >> region --jq=".regions[] | {id: .id, peer_stores: [.peers[].store_id]}"

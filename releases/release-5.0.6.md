@@ -23,7 +23,7 @@ TiDBバージョン：5.0.6
 
 -   TiDB
 
-    -   コプロセッサーがロックに遭遇したときに、影響を受けるSQLステートメントをデバッグ・ログに表示します。これは、問題の診断に役立ちます[＃27718](https://github.com/pingcap/tidb/issues/27718)
+    -   コプロセッサーがロックに遭遇したときに、影響を受けるSQLステートメントをデバッグログに表示します。これは、問題の診断に役立ちます[＃27718](https://github.com/pingcap/tidb/issues/27718)
 
 -   TiKV
 
@@ -114,7 +114,7 @@ TiDBバージョン：5.0.6
 
     -   TiKVノードが削除された後に発生するpanicの問題を修正します[＃4344](https://github.com/tikv/pd/issues/4344)
     -   ダウンストア[＃3353](https://github.com/tikv/pd/issues/3353)が原因でオペレーターがブロックされる可能性がある問題を修正します
-    -   スタックしたリージョンシンカー[＃3936](https://github.com/tikv/pd/issues/3936)によって引き起こされる遅いリーダー選出を修正
+    -   スタックしたリージョンシンカー[＃3936](https://github.com/tikv/pd/issues/3936)によって引き起こされる遅いリーダー選挙を修正
     -   ダウンノードを修復するときにピアを削除する速度が制限される問題を修正します[＃4090](https://github.com/tikv/pd/issues/4090)
     -   リージョンのハートビートが60秒未満の場合にホットスポットキャッシュをクリアできない問題を修正します[＃4390](https://github.com/tikv/pd/issues/4390)
 
@@ -126,12 +126,12 @@ TiDBバージョン：5.0.6
     -   `Cannot open file`のエラーが原因でTiFlashがクラッシュする問題を修正します
     -   MPPクエリが強制終了されたときにTiFlashがクラッシュすることがある問題を修正しました
     -   予期しないエラーを修正する`3rd arguments of function substringUTF8 must be constants`
-    -   過度の`OR`条件によって引き起こされるクエリの失敗を修正
+    -   過度の`OR`条件によって引き起こされるクエリの失敗を修正します
     -   `where <string>`の結果が間違っているバグを修正します
     -   TiFlashとTiDB/TiKVの間で一貫性のない`CastStringAsDecimal`の動作を修正
     -   エラー`different types: expected Nullable(Int64), got Int64`によって引き起こされたクエリの失敗を修正します
     -   エラー`Unexpected type of column: Nullable(Nothing)`によって引き起こされたクエリの失敗を修正します
-    -   `DECIMAL`のデータ型のデータを比較するときにオーバーフローが原因で発生するクエリの失敗を修正
+    -   `DECIMAL`のデータ型のデータを比較するときにオーバーフローによって引き起こされるクエリの失敗を修正しました
 
 -   ツール
 

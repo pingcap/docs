@@ -46,7 +46,7 @@ TiDBバージョン：5.1.1
     -   古いクエリからのビューの作成を禁止する[＃26200](https://github.com/pingcap/tidb/pull/26200)
     -   MPPモード[＃26194](https://github.com/pingcap/tidb/pull/26194)で`COUNT(DISTINCT)`集約機能を徹底的に押し下げます。
     -   MPPクエリを起動する前にTiFlashの可用性を確認してください[＃26192](https://github.com/pingcap/tidb/pull/26192)
-    -   読み取りタイムスタンプを将来の時間に設定することを許可しない[＃25763](https://github.com/pingcap/tidb/pull/25763)
+    -   読み取りタイムスタンプを将来の時刻に設定することを許可しない[＃25763](https://github.com/pingcap/tidb/pull/25763)
     -   集計関数を`EXPLAIN`のステートメントでプッシュダウンできない場合のログ警告の出力[＃25737](https://github.com/pingcap/tidb/pull/25737)
     -   `statements_summary_evicted`のテーブルを追加して、クラスタ[＃25587](https://github.com/pingcap/tidb/pull/25587)の削除されたカウント情報を記録します。
     -   フォーマット指定子[＃25768](https://github.com/pingcap/tidb/pull/25768)の組み込み関数`str_to_date`のMySQL互換性を改善し`%b/%M/%r/%T`
@@ -108,7 +108,7 @@ TiDBバージョン：5.1.1
     -   特定のプラットフォームで期間の計算がpanicになる可能性がある問題を修正します[＃10569](https://github.com/tikv/tikv/pull/10569)
     -   LoadBaseSplitが`batch_get_command`のエンコードされていないキーを誤って使用する問題を修正し[＃10542](https://github.com/tikv/tikv/issues/10542)
     -   `resolved-ts.advance-ts-interval`構成をオンラインで変更してもすぐには有効にならないという問題を修正します[＃10426](https://github.com/tikv/tikv/issues/10426)
-    -   レプリカが4つを超えるまれなケースで、フォロワーのメタデータが破損する問題を修正します[＃10225](https://github.com/tikv/tikv/issues/10225)
+    -   4つを超えるレプリカがあるまれなケースでのフォロワーメタデータの破損の問題を修正します[＃10225](https://github.com/tikv/tikv/issues/10225)
     -   暗号化が有効になっている場合にスナップショットを2回作成するときに発生するpanicの問題を修正し[＃10407](https://github.com/tikv/tikv/issues/10407) [＃9786](https://github.com/tikv/tikv/issues/9786)
     -   間違った`tikv_raftstore_hibernated_peer_state`メトリック[＃10330](https://github.com/tikv/tikv/issues/10330)を修正
     -   コプロセッサー[＃10176](https://github.com/tikv/tikv/issues/10176)の`json_unquote()`関数の間違った引数タイプを修正してください

@@ -55,5 +55,5 @@ summary: Learn how to optimize the configuration of the data migration task to i
 > **ノート：**
 >
 > -   レプリケーションタスクの作成後に値`syncers`を更新することはできません。タスクを作成する前に、各オプションの値を確認してください。値を更新する必要がある場合は、dmctlを使用してタスクを停止し、構成ファイルを更新して、タスクを再作成してください。
-> -   `syncers` 。簡単にするために、 `worker-count`を`syncer-thread`構成項目に置き換えることができます。
+> -   `syncers` 。簡単にするために、 `worker-count`を`syncer-thread`構成アイテムに置き換えることができます。
 > -   実際のシナリオに応じて、 `worker-count`と`batch`の値を変更できます。たとえば、DMとダウンストリームデータベースの間に高いネットワーク遅延がある場合は、値`worker-count`を増やし、値`batch`を適切に減らすことができます。

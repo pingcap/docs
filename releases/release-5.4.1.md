@@ -71,7 +71,7 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
     -   初期化中のテーブルの`TopN`統計情報が正しくソートされないバグを修正します[＃34216](https://github.com/pingcap/tidb/issues/34216)
     -   識別できないテーブル属性をスキップして、 `INFORMATION_SCHEMA.ATTRIBUTES`テーブルから読み取るときに発生するエラーを修正します[＃33665](https://github.com/pingcap/tidb/issues/33665)
     -   `@@tidb_enable_parallel_apply`が設定されていても、 `order`プロパティが存在する場合に`Apply`演算子が並列化されないというバグを修正します[＃34237](https://github.com/pingcap/tidb/issues/34237)
-    -   `sql_mode`が[＃34099](https://github.com/pingcap/tidb/issues/34099)に設定されている場合に`'0000-00-00 00:00:00'`が`datetime`列に挿入される可能性があるバグを修正し`NO_ZERO_DATE` 。
+    -   `sql_mode`が[＃34099](https://github.com/pingcap/tidb/issues/34099)に設定されている場合に`'0000-00-00 00:00:00'`が`datetime`列に挿入される可能性があるバグを修正し`NO_ZERO_DATE`
     -   `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`のテーブルが照会されたときにTiDBサーバーのメモリが不足する可能性がある問題を修正します。この問題は、Grafanaダッシュボード[＃33893](https://github.com/pingcap/tidb/issues/33893)で遅いクエリをチェックしたときに発生する可能性があります
     -   `NOWAIT`ステートメントで、実行中のトランザクションがロック[＃32754](https://github.com/pingcap/tidb/issues/32754)に遭遇したときにすぐに返されないというバグを修正します。
     -   `GBK`文字セットと`gbk_bin`照合順序[＃31308](https://github.com/pingcap/tidb/issues/31308)でテーブルを作成するときに失敗するバグを修正します
@@ -93,7 +93,7 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
     -   一部のコーナーケースでスコアの計算が不正確になる問題を修正します[＃12254](https://github.com/tikv/tikv/issues/12254)
     -   `resolved_ts`モジュールによって引き起こされたOOMの問題を修正し、メトリックを追加します[＃12159](https://github.com/tikv/tikv/issues/12159)
     -   ネットワークが貧弱な場合に、正常にコミットされた楽観的なトランザクションが`Write Conflict`エラーを報告する可能性がある問題を修正します[＃34066](https://github.com/pingcap/tidb/issues/34066)
-    -   貧弱なネットワークでレプリカ読み取りが有効になっている場合に発生するTiKVpanicの問題を修正します[＃12046](https://github.com/tikv/tikv/issues/12046)
+    -   貧弱なネットワークでレプリカの読み取りが有効になっている場合に発生するTiKVpanicの問題を修正します[＃12046](https://github.com/tikv/tikv/issues/12046)
 
 -   PD
 
@@ -132,10 +132,10 @@ TiDB v5.4.1では、製品設計に互換性の変更は導入されていませ
 
         -   バックアップの再試行中に暗号化情報が失われた場合に復元操作が失敗するバグを修正します[＃32423](https://github.com/pingcap/tidb/issues/32423)
         -   BRがRawKV1のバックアップに失敗する問題を修正し[＃32607](https://github.com/pingcap/tidb/issues/32607)
-        -   インクリメンタル復元後にレコードをテーブルに挿入するときに重複する主キーを修正する[＃33596](https://github.com/pingcap/tidb/issues/33596)
+        -   インクリメンタル復元後にテーブルにレコードを挿入するときに重複する主キーを修正する[＃33596](https://github.com/pingcap/tidb/issues/33596)
         -   空のクエリ[＃33322](https://github.com/pingcap/tidb/issues/33322)を使用したDDLジョブが原因で、BRインクリメンタルリストアが誤ってエラーを返すバグを修正します。
         -   復元操作の終了後にリージョンが不均一に分散される可能性があるという潜在的な問題を修正します[＃31034](https://github.com/pingcap/tidb/issues/31034)
-        -   復元中にリージョンに一貫性がない場合にBRが十分な回数再試行しない問題を修正します[＃33419](https://github.com/pingcap/tidb/issues/33419)
+        -   復元中にリージョンの一貫性がない場合にBRが十分な回数再試行しない問題を修正します[＃33419](https://github.com/pingcap/tidb/issues/33419)
         -   小さなファイルのマージが有効になっているときにBRがときどきpanicになる可能性がある問題を修正します[＃33801](https://github.com/pingcap/tidb/issues/33801)
         -   BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正します[＃33546](https://github.com/pingcap/tidb/issues/33546)
 

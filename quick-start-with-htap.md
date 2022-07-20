@@ -13,10 +13,10 @@ summary: Learn how to quickly get started with the TiDB HTAP.
 
 ## 基本概念 {#basic-concepts}
 
-TiDB HTAPを使用する前に、TiDBオンライントランザクション処理（OLTP）用の行ベースのストレージエンジンである[TiKV](/tikv-overview.md)と、TiDBオンライン分析処理（OLAP）用の列型ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)に関する基本的な知識が必要です。
+TiDB HTAPを使用する前に、TiDBオンライントランザクション処理（OLTP）用の行ベースのストレージエンジンである[TiKV](/tikv-overview.md) 、およびTiDBオンライン分析処理（OLAP）用の列型ストレージエンジンである[TiFlash](/tiflash/tiflash-overview.md)に関する基本的な知識が必要です。
 
 -   HTAPのストレージエンジン：HTAPでは、行ベースのストレージエンジンと列型ストレージエンジンが共存します。どちらのストレージエンジンもデータを自動的に複製し、強力な一貫性を保つことができます。行ベースのストレージエンジンはOLTPパフォーマンスを最適化し、列型ストレージエンジンはOLAPパフォーマンスを最適化します。
--   HTAPのデータ整合性：分散型およびトランザクション型のKey-Valueデータベースとして、TiKVはACID準拠のトランザクション型インターフェースを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により、複数のレプリカ間のデータ整合性と高可用性を保証します。 TiKVの列型ストレージ拡張として、TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってリアルタイムでTiKVからデータを複製します。これにより、データはTiKVとTiFlashの間で強力に一貫性が保たれます。
+-   HTAPのデータ整合性：分散型およびトランザクション型のKey-Valueデータベースとして、TiKVはACID準拠のトランザクション型インターフェースを提供し、 [Raftコンセンサスアルゴリズム](https://raft.github.io/raft.pdf)の実装により、複数のレプリカ間のデータ整合性と高可用性を保証します。 TiKVの列型ストレージ拡張として、TiFlashはRaft Learnerコンセンサスアルゴリズムに従ってリアルタイムでTiKVからデータを複製します。これにより、TiKVとTiFlashの間でデータの一貫性が確保されます。
 -   HTAPのデータ分離：TiKVとTiFlashは、HTAPリソース分離の問題を解決するために、必要に応じて異なるマシンに展開できます。
 -   MPPコンピューティングエンジン： [MPP](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)は、TiDB 5.0以降のTiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットのSQLアルゴリズムを提供します。 MPPモードでは、分析クエリの実行時間を大幅に短縮できます。
 
@@ -44,7 +44,7 @@ tiup playground
 
 > **ノート：**
 >
-> 分析クエリに既存のデータを使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQLステートメントを実行するか、関連するツールを使用してデータを作成できます。
+> 分析クエリに既存のデータを使用する場合は、 [データをTiDBに移行する](/migration-overview.md)を実行できます。独自のテストデータを設計および作成する場合は、SQLステートメントを実行するか、関連するツールを使用して作成できます。
 
 1.  次のコマンドを実行して、テストデータ生成ツールをインストールします。
 

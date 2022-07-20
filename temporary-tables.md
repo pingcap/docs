@@ -3,7 +3,7 @@ title: Temporary Tables
 summary: Learn the temporary tables feature in TiDB, and learn how to use temporary tables to store intermediate data of an application, which helps reduce table management overhead and improve performance.
 ---
 
-# 一時テーブル {#temporary-tables}
+# 一時的なテーブル {#temporary-tables}
 
 一時テーブル機能は、TiDBv5.3.0で導入されました。この機能は、アプリケーションの中間結果を一時的に保存する問題を解決します。これにより、テーブルを頻繁に作成および削除する必要がなくなります。中間計算データを一時テーブルに保存できます。中間データが不要になると、TiDBは一時テーブルを自動的にクリーンアップしてリサイクルします。これにより、ユーザーアプリケーションが複雑になりすぎるのを防ぎ、テーブル管理のオーバーヘッドを減らし、パフォーマンスを向上させます。
 
@@ -152,7 +152,7 @@ TiDBローカル一時テーブルの次の機能と制限は、MySQL一時テ�
 
 -   ローカル一時テーブルを作成または削除しても、現在のトランザクションは自動的にコミットされません。
 -   ローカル一時テーブルが配置されているスキーマを削除した後、一時テーブルは削除されず、読み取りと書き込みが可能です。
--   ローカル一時テーブルを作成するには、 `CREATE TEMPORARY TABLES`の権限が必要です。テーブルに対する後続のすべての操作には、権限は必要ありません。
+-   ローカル一時テーブルを作成するには、 `CREATE TEMPORARY TABLES`の権限が必要です。テーブルに対する後続のすべての操作には、許可は必要ありません。
 -   ローカル一時テーブルは、外部キーとパーティションテーブルをサポートしていません。
 -   ローカル一時テーブルに基づくビューの作成はサポートされていません。
 -   `SHOW [FULL] TABLES`はローカル一時テーブルを表示しません。
@@ -327,6 +327,6 @@ TiDBのローカル一時テーブルは、次の機能をサポートしてい*
 
 ## も参照してください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [テーブルのようなものを作成](/sql-statements/sql-statement-create-table-like.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)

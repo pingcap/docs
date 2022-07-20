@@ -189,9 +189,9 @@ TiDB構成ファイルは、コマンドラインパラメーターよりも多�
 
 ### <code>enable-slow-log</code> {#code-enable-slow-log-code}
 
--   低速クエリログを有効にするかどうかを決定します。
+-   遅いクエリログを有効にするかどうかを決定します。
 -   デフォルト値： `true`
--   低速クエリログを有効にするには、 `enable-slow-log`を`true`に設定します。それ以外の場合は、 `false`に設定します。
+-   遅いクエリログを有効にするには、 `enable-slow-log`を`true`に設定します。それ以外の場合は、 `false`に設定します。
 
 ### <code>slow-query-file</code> {#code-slow-query-file-code}
 
@@ -510,12 +510,12 @@ opentracing.reporterに関連するConfiguration / コンフィグレーショ�
 
 ### <code>queue-size</code> {#code-queue-size-code}
 
--   レポーターが記録するキューのサイズは、メモリにまたがっています。
+-   レポーターがメモリ内で記録するキューサイズ。
 -   デフォルト値： `0`
 
 ### <code>buffer-flush-interval</code> {#code-buffer-flush-interval-code}
 
--   レポーターがメモリー内のスパンをストレージにフラッシュする間隔。
+-   レポーターがメモリ内のスパンをストレージにフラッシュする間隔。
 -   デフォルト値： `0`
 
 ### <code>log-spans</code> {#code-log-spans-code}

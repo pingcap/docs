@@ -39,7 +39,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   TiKVインスタンスのリージョンが多すぎると、単一のgRPCスレッドがボトルネックになります（Grafana-&gt; **TiKV** <strong>-details-</strong> &gt; <strong>Thread CPU / gRPC CPU Per Thread</strong>メトリックを確認してください）。 v3.x以降のバージョンでは、 `Hibernate Region`を有効にして問題を解決できます。中国語の[ケース-612](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case612.md)を参照してください。
 
-    -   v3.0より前のバージョンでは、raftstoreスレッドまたはapplyスレッドがボトルネックになった場合（ **Grafana-** &gt; <strong>TiKV-details-</strong> &gt; <strong>Thread CPU / raft</strong> storeCPUおよび<strong>AsyncapplyCPU</strong>メトリックが`80%`を超える場合）、TiKV（v2 .x）インスタンスまたはマルチスレッドを使用したv3.xへのアップグレード。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
+    -   v3.0より前のバージョンでは、raftstoreスレッドまたはapplyスレッドがボトルネックになると（ **Grafana-** &gt; <strong>TiKV-details-</strong> &gt; <strong>Thread CPU / raft</strong> storeCPUおよび<strong>AsyncapplyCPU</strong>メトリックが`80%`を超える場合）、TiKV（v2 .x）インスタンスまたはマルチスレッドを使用したv3.xへのアップグレード。 <!-- See [case-517](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case517.md) in Chinese. -->
 
 -   2.2.2CPU負荷が増加します。
 
@@ -333,7 +333,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   5.2.1PDスイッチリーダー。
 
-    -   原因1：ディスク。 PDノードが配置されているディスクには、完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
+    -   原因1：ディスク。 PDノードが配置されているディスクには完全なI/O負荷があります。 PDが、I/Oの需要が高くディスクの状態が高い他のコンポーネントとともに展開されているかどうかを調査します。 **Grafana-** &gt;<strong>ディスクパフォーマンス</strong>-&gt;<strong>レイテンシ</strong>/<strong>ロード</strong>でモニターメトリックを表示することで、原因を確認できます。必要に応じて、FIOツールを使用してディスクのチェックを実行することもできます。中国語の[ケース-292](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case292.md)を参照してください。
 
     -   原因2：ネットワーク。 PDログには`lost the TCP streaming connection`が表示されます。 PDノード間のネットワークに問題があるかどうかを確認し、モニター**Grafana-** &gt; <strong>PD-</strong> &gt; <strong>etcd</strong>で`round trip`を表示して、原因を確認する必要があります。中国語の[ケース-177](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case177.md)を参照してください。
 
@@ -473,7 +473,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
     -   DMがリレーログまたはインクリメンタルレプリケーションをプルするプロセス中に、アップストリームbinlogファイルのサイズが4 GBを超えると、この2つのエラーが発生する可能性があります。
 
-    -   原因：リレーログを書き込む場合、DMはbinlogの位置とbinlogファイルのサイズに基づいてイベント検証を実行し、複製されたbinlogの位置をチェックポイントとして保存する必要があります。ただし、公式のMySQLはuint32を使用してbinlogの位置を格納します。つまり、4 GBを超えるbinlogファイルのbinlogの位置がオーバーフローすると、上記のエラーが発生します。
+    -   原因：リレーログを書き込む場合、DMはbinlogの位置とbinlogファイルのサイズに基づいてイベント検証を実行し、複製されたbinlogの位置をチェックポイントとして保存する必要があります。ただし、公式のMySQLはuint32を使用してbinlogの位置を格納します。つまり、4 GBを超えるbinlogファイルのbinlogの位置がオーバーフローし、上記のエラーが発生します。
 
     -   解決：
 
@@ -614,7 +614,7 @@ summary: Learn how to troubleshoot common errors in TiDB.
 
 -   `peer is not leader` 。
 
-    リクエストは、リーダーではないレプリカに送信されます。エラー応答がどのレプリカが最新のリーダーであるかを示している場合、TiDBはエラーに応じてローカルルーティングを更新し、最新のリーダーに新しい要求を送信します。通常、ビジネスは影響を受けません。
+    リクエストは、リーダーではないレプリカに送信されます。エラー応答がどのレプリカが最新のリーダーであるかを示している場合、TiDBはエラーに従ってローカルルーティングを更新し、最新のリーダーに新しい要求を送信します。通常、ビジネスは影響を受けません。
 
     v3.0以降のバージョンでは、前のリーダーへの要求が失敗した場合、TiDBは他のピアを試行します。これにより、TiKVログで頻繁に`peer is not leader`が発生する可能性があります。 TiDBの対応するリージョンの`switch region peer to next due to send request fail`のログを確認して、送信失敗の根本的な原因を特定できます。詳しくは[7.1.4](#71-tidb)をご覧ください。
 

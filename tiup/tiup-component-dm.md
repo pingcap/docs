@@ -72,10 +72,10 @@ tiup dm [command] [flags]
 -   [再起動](/tiup/tiup-component-dm-restart.md) ：指定したクラスタを再起動します。
 -   [スケールイン](/tiup/tiup-component-dm-scale-in.md) ：指定されたクラスタでスケーリングします。
 -   [規格外](/tiup/tiup-component-dm-scale-out.md) ：指定されたクラスタをスケールアウトします。
--   [アップグレード](/tiup/tiup-component-dm-upgrade.md) ：指定されたクラスタをアップグレードします。
+-   [アップグレード](/tiup/tiup-component-dm-upgrade.md) ：指定したクラスタをアップグレードします。
 -   [プルーン](/tiup/tiup-component-dm-prune.md) ：指定されたクラスタのトゥームストーンステータスのインスタンスをクリーンアップします。
 -   [edit-config](/tiup/tiup-component-dm-edit-config.md) ：指定したクラスタの構成を変更します。
--   [リロード](/tiup/tiup-component-dm-reload.md) ：指定したクラスタの構成をリロードします。
+-   [リロード](/tiup/tiup-component-dm-reload.md) ：指定したクラスタの構成を再ロードします。
 -   [パッチ](/tiup/tiup-component-dm-patch.md) ：デプロイされたクラスタの指定されたサービスを置き換えます。
 -   [破壊する](/tiup/tiup-component-dm-destroy.md) ：指定されたクラスタを破棄します。
 -   [監査](/tiup/tiup-component-dm-audit.md) ：指定されたクラスタの操作監査ログを照会します。

@@ -11,7 +11,7 @@ TiFlashがデプロイされた後、データレプリケーションは自動�
 TiDBを使用して中規模の分析処理用のTiFlashレプリカを読み取るか、TiSparkを使用して大規模な分析処理用のTiFlashレプリカを読み取ることができます。これは独自のニーズに基づいています。詳細については、次のセクションを参照してください。
 
 -   [TiDBを使用してTiFlashレプリカを読み取る](#use-tidb-to-read-tiflash-replicas)
--   [TiSparkを使用してTiFlashレプリカを読み取る](#use-tispark-to-read-tiflash-replicas)
+-   [TiSparkを使用してTiFlashレプリカを読み取ります](#use-tispark-to-read-tiflash-replicas)
 
 ## TiFlashレプリカを作成する {#create-tiflash-replicas}
 
@@ -267,7 +267,7 @@ explain analyze select count(*) from test.t;
 
     **INSTANCEレベルのデフォルト設定は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
 
--   セッションレベル。次のステートメントを使用して構成します。
+-   SESSIONレベル。次のステートメントを使用して構成します。
 
     {{< copyable "" >}}
 
@@ -311,7 +311,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように促すこともできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。さらに、ヒントはエンジン分離の前提でのみ有効になります。ヒントで指定されたエンジンがエンジン分離リストにない場合、ヒントも無視され、警告が報告されます。
 
@@ -327,13 +327,13 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 >
 > `UPDATE ...`より前では、非読み取り専用SQLステートメント（たとえば、 `INSERT INTO ... SELECT` ）での`SELECT ... FOR UPDATE`レプリカからの読み取りの`DELETE ...`は定義されていません。 v4.0.3以降のバージョンでは、内部的にTiDBは非読み取り専用SQLステートメントのTiFlashレプリカを無視して、データの正確性を保証します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDBは非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの分離](#engine-isolation)の場合、TiDBはエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDBはヒントを無視します。
 
-## TiSparkを使用してTiFlashレプリカを読み取る {#use-tispark-to-read-tiflash-replicas}
+## TiSparkを使用してTiFlashレプリカを読み取ります {#use-tispark-to-read-tiflash-replicas}
 
 現在、TiSparkを使用して、TiDBのエンジン分離と同様の方法でTiFlashレプリカを読み取ることができます。この方法は、 `spark.tispark.isolation_read_engines`つのパラメーターを構成するためのものです。パラメータ値のデフォルトは`tikv,tiflash`です。これは、TiDBがCBOの選択に従ってTiFlashまたはTiKVからデータを読み取ることを意味します。パラメータ値を`tiflash`に設定すると、TiDBがTiFlashからデータを強制的に読み取ることを意味します。
 
 > **ノート**
 >
-> このパラメーターが`tiflash`に設定されている場合、クエリに関係するすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカがないテーブルの場合、エラーが報告されます。このパラメーターが`tikv`に設定されている場合、TiKVレプリカのみが読み取られます。
+> このパラメーターが`tiflash`に設定されている場合、クエリに関係するすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカを持たないテーブルの場合、エラーが報告されます。このパラメーターが`tikv`に設定されている場合、TiKVレプリカのみが読み取られます。
 
 このパラメーターは、次のいずれかの方法で構成できます。
 
@@ -603,7 +603,7 @@ TiFlashは、自動データ検証と手動データ検証の両方をサポー�
 
 > **警告：**
 >
-> V3検証メカニズムを有効にすると、新しく生成されたDTFileをv5.4.0より前のTiFlashで直接読み取ることはできません。 v5.4.0以降、TiFlashはV2とV3の両方をサポートし、バージョンをアクティブにアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で[バージョンの切り替え](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を実行する必要があります。
+> V3検証メカニズムを有効にすると、新しく生成されたDTFileをv5.4.0より前のTiFlashで直接読み取ることはできません。 v5.4.0以降、TiFlashはV2とV3の両方をサポートし、バージョンを積極的にアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で[バージョンの切り替え](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を実行する必要があります。
 
 #### 検証ツール {#validation-tool}
 

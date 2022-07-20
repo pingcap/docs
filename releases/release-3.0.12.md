@@ -45,7 +45,7 @@ TiDB Ansibleバージョン：3.0.12
     -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと、追跡が遅くなり、クラスタがスタックし、トランザクションサイズによってTiKV接続が頻繁に再接続される可能性があるという問題を解決します[＃7072](https://github.com/tikv/tikv/pull/7072) [＃6993](https://github.com/tikv/tikv/pull/6993)
 
 -   PD
-    -   PDがリージョンハートビートを処理するときにデータ競合が原因で発生するリージョン情報が正しくない問題を修正します[＃2233](https://github.com/pingcap/pd/pull/2233)
+    -   PDがリージョンハートビートを処理するときにデータ競合によって引き起こされる誤ったリージョン情報の問題を修正します[＃2233](https://github.com/pingcap/pd/pull/2233)
 
 -   TiDB Ansible
     -   クラスタでの複数のGrafana/Prometheus/Alertmanagerのデプロイをサポート[＃1198](https://github.com/pingcap/tidb-ansible/pull/1198)

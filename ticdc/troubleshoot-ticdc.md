@@ -15,7 +15,7 @@ summary: Learn how to troubleshoot issues you might encounter when you use TiCDC
 
 ### TiCDCレプリケーションタスクが中断されているかどうかを確認するにはどうすればよいですか？ {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
 
--   Grafanaダッシュボードでレプリケーションタスクの`changefeed checkpoint`のモニタリングメトリックを確認します（右の`changefeed id`を選択します）。メトリック値が変更されない場合、または`checkpoint lag`メトリックが増加し続ける場合は、レプリケーションタスクが中断される可能性があります。
+-   Grafanaダッシュボードでレプリケーションタスクの`changefeed checkpoint`の監視メトリックを確認します（右の`changefeed id`を選択します）。メトリック値が変更されない場合、または`checkpoint lag`メトリックが増加し続ける場合は、レプリケーションタスクが中断される可能性があります。
 -   `exit error count`の監視メトリックを確認します。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しています。
 -   `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。 `stopped`はタスクが停止したことを意味し、 `error`項目は詳細なエラーメッセージを提供します。エラーが発生した後、TiCDCサーバーログで`error on running processor`を検索して、トラブルシューティングのためのエラースタックを確認できます。
 -   極端な場合には、TiCDCサービスが再起動されます。トラブルシューティングのために、TiCDCサーバーログで`FATAL`レベルのログを検索できます。
@@ -33,7 +33,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
 上記のコマンドの出力で、 `admin-job-type`はこのレプリケーションタスクの状態を示しています。
 
 -   `0` ：進行中です。これは、タスクが手動で停止されていないことを意味します。
--   `1` ：一時停止。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成と複製ステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
+-   `1` ：一時停止。タスクが一時停止されると、複製されたすべての`processor`が終了します。タスクの構成とレプリケーションステータスは保持されるため、 `checkpiont-ts`からタスクを再開できます。
 -   `2` ：再開しました。レプリケーションタスクは`checkpoint-ts`から再開します。
 -   `3` ：削除されました。タスクが削除されると、複製された`processor`がすべて終了し、複製タスクの構成情報がクリアされます。レプリケーションステータスは、後のクエリのためにのみ保持されます。
 
@@ -55,7 +55,7 @@ cdc cli changefeed query --pd=http://10.0.10.25:2379 --changefeed-id 28c43ffc-23
         2.  新しいタスク構成ファイルを使用し、 `ignore-txn-start-ts`パラメーターを追加して、指定された`start-ts`に対応するトランザクションをスキップします。
         3.  HTTPAPIを介して古いレプリケーションタスクを停止します。 `cdc cli changefeed create`を実行して新しいタスクを作成し、新しいタスク構成ファイルを指定します。手順1で記録した`checkpoint-ts`を`start-ts`として指定し、新しいタスクを開始してレプリケーションを再開します。
 
--   TiCDC v4.0.13以前のバージョンでは、TiCDCがパーティションテーブルを複製するときに、複製の中断につながるエラーが発生する場合があります。
+-   TiCDC v4.0.13以前のバージョンでは、TiCDCがパーティション化されたテーブルを複製するときに、複製の中断につながるエラーが発生する場合があります。
 
     -   このシナリオでは、TiCDCはタスク情報を保存します。 TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント後のデータは有効期間`gc-ttl`以内にTiKVGCによってクリーンアップされません。
     -   取り扱い手順：

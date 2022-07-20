@@ -72,7 +72,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 -   MySQL8.0のCommonTableExpression（CTE）機能をサポートします。
 
-    この機能により、TiDBは階層データを再帰的または非再帰的にクエリできるようになり、ツリークエリを使用して、人材、製造、金融市場、教育などの複数のセクターでアプリケーションロジックを実装する必要があります。
+    この機能により、TiDBは階層データを再帰的または非再帰的にクエリすることができ、ツリークエリを使用して、人材、製造、金融市場、教育などの複数のセクターでアプリケーションロジックを実装する必要があります。
 
     TiDBでは、 `WITH`ステートメントを適用して共通テーブル式を使用できます。 [ユーザードキュメント](/sql-statements/sql-statement-with.md) [＃17472](https://github.com/pingcap/tidb/issues/17472)
 
@@ -150,7 +150,7 @@ v5.1では、主な新機能または改善点は次のとおりです。
 
 -   TiCDCの複製の安定性の問題を解決する
 
-    -   次のシナリオでOOMを回避するために、TiCDCメモリ使用量を改善します
+    -   次のシナリオでOOMを回避するために、TiCDCのメモリ使用量を改善します
     -   レプリケーションの中断中に1TBを超える大量のデータが蓄積されると、再レプリケーションによってOOMの問題が発生します。
     -   大量のデータ書き込みは、TiCDCでOOMの問題を引き起こします。
     -   次のシナリオで、TiCDCレプリケーションの中断の可能性を減らします。
@@ -230,7 +230,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
 
         -   `mysql` [＃1078](https://github.com/pingcap/br/pull/1078) [＃1143](https://github.com/pingcap/br/pull/1143)でのシステムテーブルのバックアップと復元のサポート
         -   仮想ホストアドレッシングモードに基づくS3互換ストレージをサポートする[＃10243](https://github.com/tikv/tikv/pull/10243)
-        -   backupmetaの形式を最適化して、メモリ使用量を削減します[＃1171](https://github.com/pingcap/br/pull/1171)
+        -   バックアップメタのフォーマットを最適化してメモリ使用量を削減[＃1171](https://github.com/pingcap/br/pull/1171)
 
     -   TiCDC
 
@@ -329,7 +329,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
         -   KVデータの生成時に発生するTiDB Lightningpanicの問題を修正します[＃1127](https://github.com/pingcap/br/pull/1127)
         -   データのインポート中にキーの合計サイズがラフトエントリの制限を超えたためにバッチ分割リージョンが失敗するバグを修正します[＃969](https://github.com/pingcap/br/issues/969)
         -   CSVファイルをインポートするときに、ファイルの最後の行に改行文字（ `\r\n` ）が含まれていない場合、エラーが報告される問題を修正します[＃1133](https://github.com/pingcap/br/issues/1133)
-        -   インポートするテーブルにdoubleタイプの自動インクリメント列が含まれている場合、auto_increment値が異常になる問題を修正します[＃1178](https://github.com/pingcap/br/pull/1178)
+        -   インポートするテーブルにdouble型の自動インクリメント列が含まれている場合、auto_increment値が異常になる問題を修正します[＃1178](https://github.com/pingcap/br/pull/1178)
 
     -   バックアップと復元（BR）
         -   いくつかのTiKVノードの障害によって引き起こされるバックアップ中断の問題を修正します[＃980](https://github.com/pingcap/br/issues/980)
@@ -343,7 +343,7 @@ TiDBは、実行ステータス、障害ステータスなどを含む、テレ�
         -   TiCDCダッシュボードのTiKVCDCエンドポイントCPUメトリックを修正します[＃1645](https://github.com/pingcap/tiflow/pull/1645)
         -   場合によってはレプリケーションのブロックを回避するために`defaultBufferChanSize`を増やします[＃1259](https://github.com/pingcap/tiflow/issues/1259)
         -   Avro出力[＃1712](https://github.com/pingcap/tiflow/pull/1712)でタイムゾーン情報が失われる問題を修正します
-        -   Unified Sorterで古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
+        -   Unified Sorterでの古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
         -   多くの古いリージョンが存在する場合に発生するKVクライアントのデッドロックバグを修正します[＃1599](https://github.com/pingcap/tiflow/issues/1599)
         -   `--cert-allowed-cn`フラグ[＃1697](https://github.com/pingcap/tiflow/pull/1697)の間違ったヘルプ情報を修正します
         -   [＃1750](https://github.com/pingcap/tiflow/pull/1750)にデータを複製するときにSUPER特権を必要とする`explicit_defaults_for_timestamp`の更新を元に戻します。

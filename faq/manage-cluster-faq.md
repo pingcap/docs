@@ -47,7 +47,7 @@ MySQLと同様に、TiDBにはシステムテーブルも含まれており、�
 
     最初に`information_schema.cluster_processlist`を使用してTiDBインスタンスアドレスとセッションIDを見つけてから、killコマンドを実行します。
 
-    TiDB v6.1.0では、グローバルキル機能が導入されています（デフォルトで有効になっている`enable-global-kill`構成で制御されます）。グローバルキルが有効になっている場合は、 `kill session_id`を実行するだけです。
+    TiDB v6.1.0では、グローバルキル機能が導入されています（デフォルトで有効になっている`enable-global-kill`の構成によって制御されます）。グローバルキルが有効になっている場合は、 `kill session_id`を実行するだけです。
 
     TiDBのバージョンがv6.1.0より前の場合、またはグローバルキル機能が有効になっていない場合、デフォルトでは`kill session_id`は有効になりません。 DMLステートメントを終了するには、DMLステートメントを実行しているTiDBインスタンスにクライアントを直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別のTiDBインスタンスに接続する場合、またはクライアントとTiDBクラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別のTiDBインスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、 [`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
@@ -299,7 +299,7 @@ GROUP BY
 
 ### TiKVを起動すると、 <code>duplicated store address</code>メッセージが表示されます {#the-code-duplicated-store-address-code-message-is-displayed-when-starting-tikv}
 
-これは、スタートアップパラメータのアドレスが他のTiKVによってPDクラスタに登録されているためです。このエラーの原因となる一般的な条件：TiKV `--data-dir`で指定されたパスにデータフォルダがありません（削除または移動後に更新--data-dirがありません）、前のパラメータでTiKVを再起動してください.pd-ctlの[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)の機能を試してください。前のストアを削除してから、TiKVを再起動します。
+これは、スタートアップパラメータのアドレスが他のTiKVによってPDクラスタに登録されているためです。このエラーの原因となる一般的な条件：TiKV `--data-dir`で指定されたパスにデータフォルダーがありません（削除または移動後に更新--data-dirがありません）、前のパラメーターでTiKVを再起動します.pd-ctlの[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)の機能を試してください。前のストアを削除してから、TiKVを再起動します。
 
 ### TiKVプライマリノードとセカンダリノードは同じ圧縮アルゴリズムを使用していますが、結果が異なるのはなぜですか？ {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
 
@@ -318,7 +318,7 @@ TiKVは、RocksDBのカラムファミリー（CF）機能を実装していま�
 
 ### TiKVチャネルがいっぱいになるのはなぜですか？ {#why-is-the-tikv-channel-full}
 
--   Raftstoreスレッドが遅すぎるか、I/Oによってブロックされています。 RaftstoreのCPU使用状況を確認できます。
+-   Raftstoreスレッドが遅すぎるか、I/Oによってブロックされています。 RaftstoreのCPU使用状況を表示できます。
 -   TiKVはビジー状態（CPU、ディスクI / Oなど）であり、処理できません。
 
 ### TiKVがリージョンリーダーを頻繁に切り替えるのはなぜですか？ {#why-does-tikv-frequently-switch-region-leader}
@@ -379,7 +379,7 @@ WALは順序付き書き込みに属しており、現在、独自の構成を�
 
 ### TiDBには、KVインターフェイスを直接使用でき、独立したキャッシュを必要としないMySQLのようなInnoDB memcachedプラグインがありますか？ {#does-tidb-have-an-innodb-memcached-plugin-like-mysql-which-can-directly-use-the-kv-interface-and-does-not-need-the-independent-cache}
 
-TiKVは、インターフェイスの個別の呼び出しをサポートしています。理論的には、インスタンスをキャッシュとして使用できます。 TiDBは分散リレーショナルデータベースであるため、TiKVを個別にサポートすることはありません。
+TiKVは、インターフェイスの個別の呼び出しをサポートしています。理論的には、インスタンスをキャッシュとして使用できます。 TiDBは分散型リレーショナルデータベースであるため、TiKVを個別にサポートすることはありません。
 
 ### コプロセッサーコンポーネントは何に使用されますか？ {#what-is-the-coprocessor-component-used-for}
 

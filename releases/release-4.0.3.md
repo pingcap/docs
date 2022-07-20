@@ -56,7 +56,7 @@ TiDBバージョン：4.0.3
         -   `tidb_allow_auto_random_explicit_insert`セッション変数を追加して、 `AUTO RANDOM`列への明示的な書き込みを制御します。デフォルト値は`false`です。これは、列への明示的な書き込みによって引き起こされる`AUTO_RANDOM_BASE`しない更新を回避するためです。 [＃18508](https://github.com/pingcap/tidb/pull/18508)
         -   `BIGINT`列と`UNSIGNED BIGINT`列にのみ`AUTO_RANDOM`を定義できるようにし、シャードビットの最大数を`15`に制限します。これにより、割り当て可能なスペースが急速に消費されるのを防ぎます[＃18538](https://github.com/pingcap/tidb/pull/18538)
         -   `BIGINT`列に`AUTO_RANDOM`属性を定義し、主キー[＃17987](https://github.com/pingcap/tidb/pull/17987)に負の値を挿入するときに、 `AUTO_RANDOM_BASE`更新をトリガーしないでください。
-        -   `UNSIGNED BIGINT`列に`AUTO_RANDOM`属性を定義する場合は、整数の最上位ビットをID割り当てに使用します。これにより、割り当て可能なスペースが増えます[＃18404](https://github.com/pingcap/tidb/pull/18404)
+        -   `UNSIGNED BIGINT`列に`AUTO_RANDOM`属性を定義する場合は、ID割り当てに整数の最上位ビットを使用します。これにより、より多くの割り当て可能スペースが取得されます[＃18404](https://github.com/pingcap/tidb/pull/18404)
         -   `SHOW CREATE TABLE`の結果で`AUTO_RANDOM` [＃18316](https://github.com/pingcap/tidb/pull/18316)の更新をサポート
 
 -   TiKV

@@ -46,7 +46,7 @@ TiDB Ansibleバージョン：4.0.0-beta.2
 
 -   TiKV
     -   バックアップ中に空の短い値を満たすときに発生する可能性のあるpanicの問題を修正します[＃6718](https://github.com/tikv/tikv/pull/6718)
-    -   場合によっては休止状態の[＃6772](https://github.com/tikv/tikv/pull/6672)が正しく起動されない可能性がある問題を修正し[＃6648](https://github.com/tikv/tikv/pull/6648) [＃6376](https://github.com/tikv/tikv/pull/6736)
+    -   場合によっては休止状態の[＃6772](https://github.com/tikv/tikv/pull/6672)が正しく起動されない可能性があるという問題を修正し[＃6648](https://github.com/tikv/tikv/pull/6648) [＃6376](https://github.com/tikv/tikv/pull/6736)
 
 -   PD
     -   ルールチェッカーがリージョン[＃2160](https://github.com/pingcap/pd/pull/2160)にストアを割り当てられないというpanicの問題を修正します

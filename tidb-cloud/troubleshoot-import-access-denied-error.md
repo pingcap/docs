@@ -7,13 +7,13 @@ summary: Learn how to troubleshoot access denied errors when importing data from
 
 このドキュメントでは、AmazonS3からTiDB Cloudにデータをインポートするときに発生する可能性のあるアクセス拒否エラーのトラブルシューティング方法について説明します。
 
-TiDB Cloudコンソールの**[データインポートタスク**]ページで[<strong>検証</strong>]をクリックした後、キーワード`AccessDenied`のエラーメッセージが表示された場合は、アクセス拒否エラーが発生しています。
+TiDB Cloudコンソールの[**データインポートタスク**]ページで[<strong>インポート</strong>]をクリックし、インポートプロセスを確認すると、 TiDB Cloudは、指定されたバケットURLのデータにアクセスできるかどうかの検証を開始します。キーワード`AccessDenied`のエラーメッセージが表示された場合は、アクセス拒否エラーが発生しています。
 
 アクセス拒否エラーのトラブルシューティングを行うには、AWSマネジメントコンソールで次のチェックを実行します。
 
 ## IAMロールのポリシーを確認してください {#check-the-policy-of-the-iam-role}
 
-AWSマネジメントコンソールで、[ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[ロール]に移動し、ターゲットTiDBクラスタ用に作成した<strong>ロール</strong>を見つけて、<strong>パーミッションポリシー</strong>を確認します。各ポリシーをチェックし、各ポリシーの`Resource`のフィールドが正しく構成されていることを確認します。
+AWS Management Consoleで、[ **IAM** ]&gt; [ <strong>Access Management</strong> ]&gt; [ <strong>Roles</strong> ]に移動し、ターゲットTiDBクラスタ用に作成したロールを見つけて、<strong>パーミッションポリシー</strong>を確認します。各ポリシーをチェックし、各ポリシーの`Resource`のフィールドが正しく構成されていることを確認します。
 
 以下はサンプルポリシーです。
 

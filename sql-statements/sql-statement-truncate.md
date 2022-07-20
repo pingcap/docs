@@ -67,5 +67,5 @@ Query OK, 0 rows affected (0.11 sec)
 
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
 -   [消去](/sql-statements/sql-statement-delete.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)

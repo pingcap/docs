@@ -63,7 +63,7 @@ TiDBバージョン：4.0.10
 -   TiKV
 
     -   レディとピア[＃9409](https://github.com/tikv/tikv/pull/9409)の間の間違ったマッピングを修正
-    -   `security.redact-info-log`を[＃9314](https://github.com/tikv/tikv/pull/9314)に設定すると、一部のログが編集されない問題を修正し`true` 。
+    -   `security.redact-info-log`が[＃9314](https://github.com/tikv/tikv/pull/9314)に設定されている場合、一部のログが編集されない問題を修正し`true` 。
 
 -   PD
 
@@ -102,7 +102,7 @@ TiDBバージョン：4.0.10
 
     -   TiDB Binlog
 
-        -   `AMEND TRANSACTION`機能が有効になっている場合、 DrainerがSQLステートメントを生成するために誤ったスキーマバージョンを選択する可能性があるという問題を修正します[＃1033](https://github.com/pingcap/tidb-binlog/pull/1033)
+        -   `AMEND TRANSACTION`つの機能が有効になっている場合、 DrainerがSQLステートメントを生成するために誤ったスキーマバージョンを選択する可能性があるという問題を修正します[＃1033](https://github.com/pingcap/tidb-binlog/pull/1033)
 
     -   TiDB Lightning
 

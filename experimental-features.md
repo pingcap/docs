@@ -15,10 +15,9 @@ summary: Learn the experimental features of TiDB.
 
 ## 安定性 {#stability}
 
--   TiFlashは、データの圧縮または並べ替えによってI / Oリソースの使用を制限し、バックグラウンドタスクとフロントエンドデータの読み取りおよび書き込みの間のI / Oリソースの競合を軽減します（v5.0で導入）
 -   オプティマイザーによるインデックスの選択の安定性を向上させます（v5.0で導入）
     -   複数列の順序依存関係情報を収集して、統計機能を拡張します。
-    -   `CMSKetch`とヒストグラムから`TopN`の値を削除したり、各テーブルインデックスのヒストグラムバケットのNDV情報を追加したりするなど、統計モジュールをリファクタリングします。
+    -   `CMSKetch`とヒストグラムから`TopN`の値を削除し、各テーブルインデックスのヒストグラムバケットのNDV情報を追加するなど、統計モジュールをリファクタリングします。詳細については、 [統計`tidb_analyze_version = 2`](/statistics.md)に関する説明を参照してください。
 -   TiKVが限られたリソースでデプロイされている場合、TiKVのフォアグラウンドが処理する読み取りおよび書き込み要求が多すぎると、バックグラウンドで使用されるCPUリソースがそのような要求の処理に使用され、TiKVのパフォーマンスの安定性に影響します。この状況を回避するには、 [クォータリミッター](/tikv-configuration-file.md#quota)を使用して、フォアグラウンドで使用されるCPUリソースを制限します。 （v6.0で導入）
 
 ## スケジューリング {#scheduling}
@@ -47,7 +46,6 @@ summary: Learn the experimental features of TiDB.
 
 -   [Titanを無効にする](/storage-engine/titan-configuration.md#disable-titan-experimental) （v4.0で導入）
 -   [タイタンレベルマージ](/storage-engine/titan-configuration.md#level-merge-experimental) （v4.0で導入）
--   TiFlashは、ストレージエンジンの新しいデータを複数のハードドライブに分散して、I/O圧力を共有することをサポートしています。 （v4.0で導入）
 -   分割領域はバケットに分割されます。 [バケットは同時クエリの単位として使用されます](/tune-region-performance.md#use-bucket-to-increase-concurrency)スキャンの同時実行性を向上させます。 （v6.1.0で導入）
 -   TiKVは[API V2](/tikv-configuration-file.md#api-version-new-in-v610)を導入します。 （v6.1.0で導入）
 

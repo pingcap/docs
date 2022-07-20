@@ -72,7 +72,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### ssl-ca {#ssl-ca}
 
--   信頼できるSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
+-   トラステッドSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
 -   デフォルト値： &quot;&quot;
 
 #### ssl-cert {#ssl-cert}
@@ -195,7 +195,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### ssl-ca {#ssl-ca}
 
--   信頼できるSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
+-   トラステッドSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
 -   デフォルト値： &quot;&quot;
 
 #### ssl-cert {#ssl-cert}
@@ -320,7 +320,7 @@ tbl-name = "~^a.*"
 
 #### ファイル {#file}
 
--   `dir` ：binlogファイルが保存されるディレクトリを指定します。この項目が設定されていない場合は、 `data-dir`が使用されます。
+-   `dir` ：binlogファイルが保存されるディレクトリを指定します。この項目が設定されていない場合、 `data-dir`が使用されます。
 
 #### カフカ {#kafka}
 

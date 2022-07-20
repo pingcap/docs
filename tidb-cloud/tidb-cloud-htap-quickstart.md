@@ -17,7 +17,7 @@ HTAP機能を体験する前に、 [TiDB Cloudクイックスタート](/tidb-cl
 
 ### 手順1.サンプルデータを列型ストレージエンジンに複製します {#step-1-replicate-the-sample-data-to-the-columnar-storage-engine}
 
-TiFlashノードを含むクラスタが作成された後、TiKVはデフォルトでデータをTiFlashに複製しません。レプリケートするテーブルを指定するには、TiDBのMySQLクライアントでDDLステートメントを実行する必要があります。その後、TiDBはそれに応じて指定されたテーブルレプリカをTiFlashに作成します。
+TiFlashノードを含むクラスタが作成された後、TiKVはデフォルトでデータをTiFlashに複製しません。複製するテーブルを指定するには、TiDBのMySQLクライアントでDDLステートメントを実行する必要があります。その後、TiDBはそれに応じて指定されたテーブルレプリカをTiFlashに作成します。
 
 たとえば、 `trips`のテーブル（Capital Bikeshareサンプルデータ内）をTiFlashに複製するには、次のステートメントを実行します。
 

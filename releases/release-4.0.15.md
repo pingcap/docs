@@ -12,7 +12,7 @@ TiDBバージョン：4.0.15
 
 -   TiDB
 
-    -   新しいセッションで`SHOW VARIABLES`を実行するのが遅い問題を修正します。この修正により、 [＃21045](https://github.com/pingcap/tidb/pull/21045)で行われたいくつかの変更が元に戻され、互換性の問題が発生する可能性があります。 [＃24326](https://github.com/pingcap/tidb/issues/24326)
+    -   新しいセッションで`SHOW VARIABLES`を実行すると時間がかかる問題を修正します。この修正により、 [＃21045](https://github.com/pingcap/tidb/pull/21045)で行われたいくつかの変更が元に戻され、互換性の問題が発生する可能性があります。 [＃24326](https://github.com/pingcap/tidb/issues/24326)
 
     <!---->
 
@@ -76,7 +76,7 @@ TiDBバージョン：4.0.15
         -   同時実行性が高い場合に、ワーカープールを最適化してゴルーチンを減らします[＃2211](https://github.com/pingcap/tiflow/issues/2211)
         -   他のチェンジフィードに影響を与えないように、DDLステートメントを非同期で実行します[＃2295](https://github.com/pingcap/tiflow/issues/2295)
         -   グローバルgRPC接続プールを追加し、KVクライアント間でgRPC接続を共有します[＃2531](https://github.com/pingcap/tiflow/pull/2531)
-        -   回復不能なDMLエラーで高速に失敗する[＃1724](https://github.com/pingcap/tiflow/issues/1724)
+        -   回復不能なDMLエラーで迅速に失敗する[＃1724](https://github.com/pingcap/tiflow/issues/1724)
         -   ユニファイドソーターがメモリを使用してデータを並べ替えるときにメモリ管理を最適化する[＃2553](https://github.com/pingcap/tiflow/issues/2553)
         -   DDL実行の[＃2669](https://github.com/pingcap/tiflow/issues/2669)メトリックを追加する[＃2595](https://github.com/pingcap/tiflow/issues/2595)
         -   メジャーバージョンまたはマイナーバージョン間でのTiCDCクラスターの運用を禁止する[＃2601](https://github.com/pingcap/tiflow/pull/2601)

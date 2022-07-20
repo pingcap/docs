@@ -44,8 +44,8 @@ TiDB Ansibleバージョン：2.1.16
 
 ## TiKV {#tikv}
 
--   クライアントが閉じられているTiKVリージョンにアクセスしたときにエラーメッセージを返すことをサポートします[＃4820](https://github.com/tikv/tikv/pull/4820)
--   リバース`raw_scan`および`raw_batch_scan`インターフェイス[＃5148](https://github.com/tikv/tikv/pull/5148)をサポート
+-   クライアントが閉じられているTiKV領域にアクセスしたときにエラーメッセージを返すことをサポートします[＃4820](https://github.com/tikv/tikv/pull/4820)
+-   リバース`raw_scan`および`raw_batch_scan`インターフェース[＃5148](https://github.com/tikv/tikv/pull/5148)をサポート
 
 ## ツール {#tools}
 

@@ -1164,7 +1164,7 @@ cd plain-java-hibernate
 </hibernate-configuration>
 ```
 
-`HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBCと比較すると、Hibernateを使用する場合、Hibernateは異なるデータベース間のデータベース作成の違いを回避するため、構成ファイルのパスを書き込むだけで済みます。
+`HibernateExample.java`は`plain-java-hibernate`の本体です。 JDBCと比較して、Hibernateを使用する場合、Hibernateは異なるデータベース間のデータベース作成の違いを回避するため、構成ファイルのパスを書き込むだけで済みます。
 
 `PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 JDBCと比較すると、Hibernateは、オブジェクトマッピングや基本オブジェクトのCRUDなどの多数の操作をカプセル化するため、コードが大幅に簡素化されます。
 

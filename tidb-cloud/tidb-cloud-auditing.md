@@ -13,7 +13,7 @@ TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステー�
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログの定期的な分析を実施することがセキュリティのベストプラクティスです。
 
-監査ログ機能はデフォルトで無効になっています。クラスタを監査するには、最初に監査ログを有効にしてから、監査フィルタールールを指定する必要があります。
+監査ログ機能はデフォルトで無効になっています。クラスタを監査するには、最初に監査ログを有効にしてから、監査フィルタルールを指定する必要があります。
 
 > **ノート：**
 >
@@ -27,9 +27,6 @@ TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステー�
 ## AWSまたはGCPの監査ログを有効にする {#enable-audit-logging-for-aws-or-gcp}
 
 TiDB Cloudが監査ログをクラウドバケットに書き込めるようにするには、最初に監査ログを有効にする必要があります。
-
-<SimpleTab>
-<div label="AWS">
 
 ### AWSの監査ログを有効にする {#enable-audit-logging-for-aws}
 
@@ -51,10 +48,10 @@ TiDB Cloudバケットを指定します。
 
     1.  TiDB Cloudコンソールで、AWSにデプロイされたプロジェクトとクラスタを選択します。
     2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>ログの監査</strong>]ダイアログボックスが表示されます。
-    3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>ShowAWSIAMポリシー設定</strong>]をクリックします。対応するTiDB CloudアカウントIDとTiDBクラスタのTiDB Cloud外部IDが表示されます。
+    3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>IAMポリシー設定</strong>]をクリックします。対応するTiDB CloudアカウントIDとTiDBクラスタのTiDB Cloud外部IDが表示されます。
     4.  後で使用するために、 TiDB CloudアカウントIDと外部IDを記録します。
 
-2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、 `s3:PutObject`の書き込み専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
+2.  AWS管理コンソールで、[ **IAM]** &gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、 `s3:PutObject`の書き込み専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために、一致したストレージバケットポリシーを記録します。
     -   そうでない場合は、[ **IAM]** &gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー]</strong> &gt;[ポリシーの<strong>作成]</strong>に移動し、次のポリシーテンプレートに従ってバケットポリシーを定義します。
@@ -83,7 +80,7 @@ TiDB Cloudバケットを指定します。
 
 4.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]で、前の手順のロール名をクリックして<strong>[概要</strong>]ページに移動し、次の手順を実行します。
 
-    1.  [**権限**]タブで、 `s3:PutObject`の書き込み専用権限を持つ記録されたポリシーがロールに添付されているかどうかを確認します。そうでない場合は、[ポリシーの添付]を選択し、必要な<strong>ポリシー</strong>を検索して、[<strong>ポリシーの添付</strong>]をクリックします。
+    1.  [**権限**]タブで、 `s3:PutObject`の書き込み専用権限を持つ記録されたポリシーがロールにアタッチされているかどうかを確認します。そうでない場合は、[ポリシーの添付]を選択し、必要な<strong>ポリシー</strong>を検索して、[<strong>ポリシーの添付</strong>]をクリックします。
     2.  **[概要**]ページに戻り、<strong>ロールARN</strong>値をクリップボードにコピーします。
 
 #### 手順3.監査ログを有効にする {#step-3-enable-audit-logging}
@@ -109,10 +106,6 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDと外部ID値を�
 > -   監査ログを有効にした後、バケットのURL、場所、またはARNに新しい変更を加えた場合は、[**再起動**]をクリックして変更をロードし、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
 > -   TiDB CloudからAmazonS3アクセスを削除するには、追加した信頼ポリシーを削除するだけです。
 
-</div>
-
-<div label="GCP">
-
 ### GCPの監査ログを有効にする {#enable-audit-logging-for-gcp}
 
 GCPの監査ログを有効にするには、次の手順を実行します。
@@ -135,7 +128,7 @@ TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPア�
     2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>ログの監査</strong>]ダイアログボックスが表示されます。
     3.  [ **Google CloudサービスアカウントIDを表示]**をクリックし、後で使用できるようにサービスアカウントIDをコピーします。
 
-2.  Google Cloud Platform（GCP）管理コンソールで、[ **IAMと管理**]&gt; [<strong>ロール</strong>]に移動し、ストレージコンテナの次の書き込み専用権限を持つロールが存在するかどうかを確認します。
+2.  Google Cloud Platform（GCP）管理コンソールで、[ **IAMと管理**]&gt; [<strong>役割</strong>]に移動し、ストレージコンテナの次の書き込み専用権限を持つ役割が存在するかどうかを確認します。
 
     -   storage.objects.create
     -   storage.objects.delete
@@ -176,9 +169,6 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[Ti
 >
 > -   監査ログを有効にした後、バケットのURLまたは場所に新しい変更を加えた場合は、[**再起動**]をクリックして変更をロードし、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
 > -   TiDB CloudからGCSアクセスを削除するには、追加したプリンシパルを削除するだけです。
-
-</div>
-</SimpleTab>
 
 ## 監査フィルタールールを指定する {#specify-auditing-filter-rules}
 
@@ -242,7 +232,7 @@ TiDBによって設定されたEVENT_CLASSフィールド値に応じて、監�
     | 19 | 接続タイプ                | VARCHAR  | 12   | `socket`または`unix-socket`を介した接続                     |
     | 20 | SERVER_ID            | 整数       |      | TiDBサーバーID                                         |
     | 21 | サーバポート               | 整数       |      | TiDBサーバーがMySQLプロトコルを介して通信するクライアントをリッスンするために使用するポート |
-    | 22 | SERVER_OS_LOGIN_USER | VARCHAR  | 17   | TiDBプロセス起動システムのユーザー名                               |
+    | 22 | SERVER_OS_LOGIN_USER | VARCHAR  | 17   | TiDBプロセススタートアップシステムのユーザー名                          |
     | 23 | OS_VERSION           | VARCHAR  | 該当なし | TiDBサーバーが配置されているオペレーティングシステムのバージョン                 |
     | 24 | SSL_VERSION          | VARCHAR  | 6    | TiDBの現在のSSLバージョン                                   |
     | 25 | PID                  | 整数       |      | TiDBプロセスのPID                                       |

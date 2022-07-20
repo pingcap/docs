@@ -80,5 +80,5 @@ mysql> SELECT * FROM t1;
 ## も参照してください {#see-also}
 
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)

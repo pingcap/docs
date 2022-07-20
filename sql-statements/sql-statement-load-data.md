@@ -77,7 +77,7 @@ Query OK, 0 rows affected (0.14 sec)
 
 次の例では、 `LOAD DATA`を使用してデータをインポートします。区切り文字としてコンマを指定します。データを囲む二重引用符は無視されます。ファイルの最初の行は無視されます。
 
-エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されているコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
+エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されたコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
 
 {{< copyable "" >}}
 

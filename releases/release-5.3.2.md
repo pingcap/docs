@@ -64,7 +64,7 @@ TiDBバージョン：5.3.2
     -   空の文字列の型変換を実行するときにTiKVがパニックになる問題を修正します[＃12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効になっている場合に、悲観的なトランザクションで重複する可能性のあるコミットレコードを修正します[＃12615](https://github.com/tikv/tikv/issues/12615)
     -   FollowerRead3を使用するとTiKVが`invalid store ID 0`エラーを報告するバグを修正し[＃12478](https://github.com/tikv/tikv/issues/12478)
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVpanicの問題を修正します
+    -   ピアの破棄とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVpanicの問題を修正します
     -   ネットワークが貧弱な場合に、正常にコミットされた楽観的なトランザクションが`Write Conflict`エラーを報告する可能性がある問題を修正します[＃34066](https://github.com/pingcap/tidb/issues/34066)
     -   マージするターゲットリージョンが無効な場合にTiKVがパニックになり、ピアを予期せず破壊する問題を修正します[＃12232](https://github.com/tikv/tikv/issues/12232)
     -   古いメッセージが原因でTiKVがpanicになるバグを修正します[＃12023](https://github.com/tikv/tikv/issues/12023)
@@ -92,7 +92,7 @@ TiDBバージョン：5.3.2
     -   `commit state jump backward`のエラーによって引き起こされる繰り返しのクラッシュを修正します[＃2576](https://github.com/pingcap/tiflash/issues/2576)
     -   多くのINSERTおよびDELETE操作後の潜在的なデータの不整合を修正します[＃4956](https://github.com/pingcap/tiflash/issues/4956)
     -   ローカルトンネルが有効になっている場合、MPPクエリをキャンセルすると、タスクが永久にハングする可能性があるバグを修正します[＃4229](https://github.com/pingcap/tiflash/issues/4229)
-    -   TiFlashがリモート読み取りを使用する場合の一貫性のないTiFlashバージョンの誤ったレポートを修正[＃3713](https://github.com/pingcap/tiflash/issues/3713)
+    -   TiFlashがリモート読み取りを使用する場合の一貫性のないTiFlashバージョンの誤ったレポートを修正します[＃3713](https://github.com/pingcap/tiflash/issues/3713)
     -   ランダムなgRPCキープアライブタイムアウトが原因でMPPクエリが失敗する可能性があるバグを修正します[＃4662](https://github.com/pingcap/tiflash/issues/4662)
     -   Exchangeレシーバー[＃3444](https://github.com/pingcap/tiflash/issues/3444)で再試行が行われると、MPPクエリが永久にハングする可能性があるバグを修正します。
     -   `DATETIME`から[＃4151](https://github.com/pingcap/tiflash/issues/4151)をキャストするときに発生する間違った結果を修正し`DECIMAL`
@@ -120,10 +120,10 @@ TiDBバージョン：5.3.2
 
     -   バックアップと復元（BR）
 
-        -   インクリメンタル復元後にレコードをテーブルに挿入するときに重複する主キーを修正する[＃33596](https://github.com/pingcap/tidb/issues/33596)
+        -   インクリメンタル復元後にテーブルにレコードを挿入するときに重複する主キーを修正する[＃33596](https://github.com/pingcap/tidb/issues/33596)
         -   BRまたはTiDB Lightningが異常終了した後にスケジューラが再開しない問題を修正します[＃33546](https://github.com/pingcap/tidb/issues/33546)
         -   空のクエリ[＃33322](https://github.com/pingcap/tidb/issues/33322)を使用したDDLジョブが原因で、BRインクリメンタルリストアが誤ってエラーを返すバグを修正します。
-        -   復元中にリージョンに一貫性がない場合にBRが十分な回数再試行しない問題を修正します[＃33419](https://github.com/pingcap/tidb/issues/33419)
+        -   復元中にリージョンの一貫性がない場合にBRが十分な回数再試行しない問題を修正します[＃33419](https://github.com/pingcap/tidb/issues/33419)
         -   復元操作で回復不能なエラーが発生したときにBRがスタックするバグを修正します[＃33200](https://github.com/pingcap/tidb/issues/33200)
         -   BRがRawKV1のバックアップに失敗する問題を修正し[＃32607](https://github.com/pingcap/tidb/issues/32607)
         -   BRがS3内部エラーを処理できない問題を修正します[＃34350](https://github.com/pingcap/tidb/issues/34350)

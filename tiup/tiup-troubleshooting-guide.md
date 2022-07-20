@@ -27,7 +27,7 @@ CDNサーバーのキャッシュ時間は短いため、新しいチェック�
 
 ## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
-### <code>unable to authenticate, attempted methods [none publickey]</code>がプロンプトされます {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
+### <code>unable to authenticate, attempted methods [none publickey]</code>は、デプロイメント中にプロンプトが表示されます {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
 
 展開中に、コンポーネントパッケージがリモートホストにアップロードされ、初期化が実行されます。このプロセスでは、リモートホストに接続する必要があります。このエラーは、リモートホストに接続するためのSSH秘密鍵が見つからなかったことが原因で発生します。
 

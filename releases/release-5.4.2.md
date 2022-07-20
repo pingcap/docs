@@ -58,7 +58,7 @@ TiDBバージョン：5.4.2
     -   空の文字列の型変換を実行するときにTiKVがパニックになる問題を修正します[＃12673](https://github.com/tikv/tikv/issues/12673)
     -   非同期コミットが有効になっている場合に、悲観的なトランザクションで重複する可能性のあるコミットレコードを修正します[＃12615](https://github.com/tikv/tikv/issues/12615)
     -   FollowerRead3を使用するとTiKVが`invalid store ID 0`エラーを報告する問題を修正し[＃12478](https://github.com/tikv/tikv/issues/12478)
-    -   ピアの破壊とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVpanicの問題を修正します
+    -   ピアの破棄とリージョン[＃12368](https://github.com/tikv/tikv/issues/12368)のバッチ分割の間の競合によって引き起こされるTiKVpanicの問題を修正します
     -   文字列の一致が正しくないためにtikv-ctlが誤った結果を返す問題を修正します[＃12329](https://github.com/tikv/tikv/issues/12329)
     -   AUFS1でTiKVを開始できない問題を修正し[＃12543](https://github.com/tikv/tikv/issues/12543)
 

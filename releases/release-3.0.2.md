@@ -106,7 +106,7 @@ TiDB Ansibleバージョン：3.0.2
 
 ## PD {#pd}
 
--   ScatterRegionスケジューラが機能しないバグを修正します[＃1642](https://github.com/pingcap/pd/pull/1642)
+-   スキャッターリージョンスケジューラが機能しないバグを修正します[＃1642](https://github.com/pingcap/pd/pull/1642)
 -   pd- [＃1653](https://github.com/pingcap/pd/pull/1653)でリージョンのマージ操作を実行できないバグを修正します。
 -   pd- [＃1651](https://github.com/pingcap/pd/pull/1651)でtombstoneの削除操作を実行できないバグを修正します。
 -   領域のスキャン操作を実行すると、キースコープと重複する領域が見つからない問題を修正します[＃1648](https://github.com/pingcap/pd/pull/1648)

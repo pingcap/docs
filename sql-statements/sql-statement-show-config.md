@@ -9,7 +9,7 @@ summary: Overview of the use of SHOW CONFIG in the TiDB database
 >
 > この機能は現在実験的機能です。この機能を実稼働環境で使用することはお勧めしません。
 
-`SHOW CONFIG`ステートメントは、TiDBのさまざまなコンポーネントの現在の構成を示すために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないでください。システム変数情報を取得する場合は、 [変数を表示する](/sql-statements/sql-statement-show-variables.md)構文を使用します。
+`SHOW CONFIG`ステートメントは、TiDBのさまざまなコンポーネントの現在の構成を示すために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないでください。システム変数情報を取得する場合は、 [変数を表示する](/sql-statements/sql-statement-show-variables.md)構文を使用してください。
 
 ## あらすじ {#synopsis}
 

@@ -16,7 +16,7 @@ tiup cluster display <cluster-name> [flags]
 
 ## オプション {#options}
 
-### -ダッシュボード {#dashboard}
+### --dashboard {#dashboard}
 
 -   デフォルトでは、クラスタ全体のすべてのノード情報が表示されます。 `--dashboard`オプションでは、ダッシュボード情報のみが表示されます。
 -   データ型： `BOOLEAN`

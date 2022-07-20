@@ -38,7 +38,7 @@ tiup dm reload <cluster-name> [flags]
 > -   `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが再始動されます。
 > -   `--skip-restart`オプションが指定されている場合、 `-R, --role`オプションは無効です。
 
-### --スキップ-再起動 {#skip-restart}
+### --skip-restart {#skip-restart}
 
 `tiup dm reload`コマンドは、次の2つの操作を実行します。
 

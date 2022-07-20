@@ -10,7 +10,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` information_schema table
 -   不正な形式のSQLステートメント。
 -   ゼロ除算エラー。
 -   重複するキー値の範囲外を挿入しようとしました。
--   許可エラー。
+-   権限エラー。
 -   テーブルが存在しません。
 
 クライアントエラーは、MySQLサーバープロトコルを介してクライアントに返されます。このプロトコルでは、アプリケーションが適切なアクションを実行することが期待されます。 `information_schema` 。 `CLIENT_ERRORS_SUMMARY_GLOBAL`表は、概要を示しており、アプリケーションがTiDBサーバーから返されたエラーを正しく処理（またはログ記録）していないシナリオで役立ちます。

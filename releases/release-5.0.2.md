@@ -110,7 +110,7 @@ TiDBバージョン：5.0.2
     -   TiCDC
 
         -   Avro出力[＃1712](https://github.com/pingcap/tiflow/pull/1712)でタイムゾーン情報が失われる問題を修正します
-        -   Unified Sorterで古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
+        -   Unified Sorterでの古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
         -   多くの古いリージョンが存在する場合に発生するKVクライアントのデッドロックバグを修正します[＃1599](https://github.com/pingcap/tiflow/issues/1599)
         -   `--cert-allowed-cn`フラグ[＃1697](https://github.com/pingcap/tiflow/pull/1697)の間違ったヘルプ情報を修正します
         -   [＃1750](https://github.com/pingcap/tiflow/pull/1750)にデータを複製するときに`SUPER`特権を必要とする`explicit_defaults_for_timestamp`の更新を元に戻します。

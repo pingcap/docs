@@ -49,6 +49,6 @@ mysql> SHOW TABLES;
 
 ## も参照してください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
 -   [他の机](/sql-statements/sql-statement-alter-table.md)

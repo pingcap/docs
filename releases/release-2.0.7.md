@@ -19,7 +19,7 @@ title: TiDB 2.0.7 Release Notes
 -   バグの修正
     -   主キーが整数[＃7298](https://github.com/pingcap/tidb/pull/7298)であるテーブルで`USE INDEX(PRIMARY)`を使用できない問題を修正します。
     -   内側の行が[＃7301](https://github.com/pingcap/tidb/pull/7301)の場合、 `Merge Join`と`Index Join`が誤った結果を出力する問題を修正し`NULL` 。
-    -   チャンクサイズの設定が小さすぎる場合に`Join`が誤った結果を出力する問題を修正します[＃7315](https://github.com/pingcap/tidb/pull/7315)
+    -   チャンクサイズの設定が小さすぎると`Join`が誤った結果を出力する問題を修正します[＃7315](https://github.com/pingcap/tidb/pull/7315)
     -   `range column`を含むテーブルを作成するステートメントによって引き起こされるpanicの問題を修正し[＃7379](https://github.com/pingcap/tidb/pull/7379)
     -   `admin check table`が時間タイプの列[＃7457](https://github.com/pingcap/tidb/pull/7457)のエラーを誤って報告する問題を修正します
     -   デフォルト値`current_timestamp`のデータは、 `=`条件[＃7467](https://github.com/pingcap/tidb/pull/7467)を使用してクエリできないという問題を修正します。

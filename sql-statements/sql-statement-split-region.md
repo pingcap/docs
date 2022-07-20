@@ -246,7 +246,7 @@ region3  [("b", "2019-04-17 14:26:19") , ("c", "")                   )
 region4  [("c", "")                    , maxIndexValue               )
 ```
 
-### パーティション化されたテーブルの分割領域 {#split-regions-for-partitioned-tables}
+### パーティションテーブルの分割領域 {#split-regions-for-partitioned-tables}
 
 パーティション化されたテーブルのリージョンの分割は、通常のテーブルのリージョンの分割と同じです。唯一の違いは、すべてのパーティションに対して同じ分割操作が実行されることです。
 
@@ -266,7 +266,7 @@ region4  [("c", "")                    , maxIndexValue               )
     SPLIT [PARTITION] TABLE table_name [PARTITION (partition_name_list...)] [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-#### パーティション化されたテーブルの分割領域の例 {#examples-of-split-regions-for-partitioned-tables}
+#### パーティションテーブルの分割領域の例 {#examples-of-split-regions-for-partitioned-tables}
 
 1.  パーティションテーブルを作成します`t` 。 2つのパーティションに分割されたハッシュテーブルを作成するとします。ステートメントの例は次のとおりです。
 
@@ -407,7 +407,7 @@ region4  [("c", "")                    , maxIndexValue               )
 >
 > `PRE_SPLIT_REGIONS`の値は`SHARD_ROW_ID_BITS`の値以下でなければなりません。
 
-`tidb_scatter_region`グローバル変数は`PRE_SPLIT_REGIONS`の動作に影響します。この変数は、テーブルの作成後に結果を返す前に、リージョンが事前に分割および分散されるのを待つかどうかを制御します。テーブルの作成後に集中的な書き込みがある場合は、この変数の値を`1`に設定する必要があります。そうすると、すべてのリージョンが分割されて分散されるまで、TiDBは結果をクライアントに返しません。そうしないと、TiDBはスキャッタリングが完了する前にデータを書き込みます。これは、書き込みパフォーマンスに大きな影響を及ぼします。
+`tidb_scatter_region`グローバル変数は`PRE_SPLIT_REGIONS`の動作に影響を与えます。この変数は、テーブルの作成後に結果を返す前に、リージョンが事前に分割および分散されるのを待つかどうかを制御します。テーブルの作成後に集中的な書き込みがある場合は、この変数の値を`1`に設定する必要があります。そうすると、すべてのリージョンが分割されて分散されるまで、TiDBは結果をクライアントに返しません。そうしないと、TiDBはスキャッタリングが完了する前にデータを書き込みます。これは、書き込みパフォーマンスに大きな影響を及ぼします。
 
 ### pre_split_regionsの例 {#examples-of-pre-split-regions}
 
@@ -439,4 +439,4 @@ Split Regionステートメントによって分割されたRegionは、PDの[�
 ## も参照してください {#see-also}
 
 -   [テーブルの地域を表示する](/sql-statements/sql-statement-show-table-regions.md)
--   セッション[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 。
+-   セッション変数[`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、および[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 。

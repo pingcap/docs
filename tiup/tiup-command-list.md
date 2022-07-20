@@ -16,7 +16,7 @@ tiup list [component] [flags]
 
 ## オプション {#options}
 
-### - 全て {#all}
+### &#x20;--all {#all}
 
 -   すべてのコンポーネントを表示します。デフォルトでは、TiUPは非表示のコンポーネントを表示しません。
 -   データ型： `BOOLEAN`

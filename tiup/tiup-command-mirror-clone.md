@@ -17,7 +17,7 @@ tiup mirror clone <target-dir> [global version] [flags]
 
 ## オプション {#options}
 
-### -f、-full {#f-full}
+### -f、 --full {#f-full}
 
 -   ミラー全体のクローンを作成するかどうか。このオプションが設定されている場合、他のオプションは無視され、TiUPはターゲットミラーからすべてのバージョンのすべてのコンポーネントを完全に複製します。
 -   データ型： `BOOLEAN`

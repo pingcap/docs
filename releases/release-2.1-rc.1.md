@@ -15,7 +15,7 @@ title: TiDB 2.1 RC1 Release Notes
     -   `PREPARE`以外のステートメントのプランキャッシュを削除します[＃7040](https://github.com/pingcap/tidb/pull/7040)
     -   `INSERT`ステートメントが解析および実行されない場合があるという問題を修正します[＃7068](https://github.com/pingcap/tidb/pull/7068)
     -   `IndexJoin`の結果が正しくない場合があるという問題を修正します[＃7150](https://github.com/pingcap/tidb/pull/7150)
-    -   場合によっては、一意のインデックスを使用して`NULL`の値が見つからないという問題を修正します[＃7163](https://github.com/pingcap/tidb/pull/7163)
+    -   場合によっては一意のインデックスを使用して`NULL`の値が見つからないという問題を修正します[＃7163](https://github.com/pingcap/tidb/pull/7163)
     -   UTF [＃7194](https://github.com/pingcap/tidb/pull/7194) 81のプレフィックスインデックスの範囲計算の問題を修正します。
     -   場合によっては`Project`演算子を削除することにより、結果が正しくないという問題を修正します[＃7257](https://github.com/pingcap/tidb/pull/7257)
     -   主キーが整数[＃7316](https://github.com/pingcap/tidb/pull/7316)の場合に`USE INDEX(PRIMARY)`を使用できない問題を修正します
@@ -23,7 +23,7 @@ title: TiDB 2.1 RC1 Release Notes
 -   SQL実行エンジン
     -   夏時間が正しく計算されない場合があるという問題を修正します[＃6823](https://github.com/pingcap/tidb/pull/6823)
     -   集計関数フレームワークをリファクタリングして、 `Stream`および`Hash`の集計演算子の実行効率を向上させます[＃6852](https://github.com/pingcap/tidb/pull/6852)
-    -   `Hash`集計演算子が正常に終了できない場合があるという問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
+    -   `Hash`集計演算子が正常に終了できない場合がある問題を修正します[＃6982](https://github.com/pingcap/tidb/pull/6982)
     -   `BIT_OR`が非整数データを正しく[＃6994](https://github.com/pingcap/tidb/pull/6994)しない問題を修正し`BIT_AND` `BIT_XOR`
     -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスをほぼ10倍に向上させます[＃7027](https://github.com/pingcap/tidb/pull/7027)
     -   時間タイプデータのメモリ使用量を最適化し、時間タイプデータのメモリ使用量を50％削減します[＃7043](https://github.com/pingcap/tidb/pull/7043)
@@ -60,7 +60,7 @@ title: TiDB 2.1 RC1 Release Notes
     -   遅いクエリログに詳細情報を表示させる[＃7302](https://github.com/pingcap/tidb/pull/7302)
     -   PDへのtidb-server関連情報の登録と[＃7082](https://github.com/pingcap/tidb/pull/7082)によるこの情報の取得をサポートします。
 -   互換性
-    -   セッション変数`warning_count`および[＃6945](https://github.com/pingcap/tidb/pull/6945)をサポートし`error_count` 。
+    -   セッション変数`warning_count`および`error_count`を[＃6945](https://github.com/pingcap/tidb/pull/6945)する
     -   システム変数を読み取るときに`Scope`のチェックを追加します[＃6958](https://github.com/pingcap/tidb/pull/6958)
     -   `MAX_EXECUTION_TIME`構文[＃7012](https://github.com/pingcap/tidb/pull/7012)をサポートします
     -   `SET`構文[＃7020](https://github.com/pingcap/tidb/pull/7020)のより多くのステートメントをサポートする

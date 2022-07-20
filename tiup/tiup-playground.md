@@ -7,7 +7,7 @@ summary: Learn how to quickly deploy a local TiDB cluster using the playground c
 
 TiDBクラスタは、複数のコンポーネントで構成される分散システムです。一般的なTiDBクラスタは、少なくとも3つのPDノード、3つのTiKVノード、および2つのTiDBノードで構成されます。 TiDBをすばやく体験したい場合は、非常に多くのコンポーネントを手動でデプロイするのに時間がかかり、複雑になることがあります。このドキュメントでは、TiUPのプレイグラウンドコンポーネントと、それを使用してローカルTiDBテスト環境をすばやく構築する方法を紹介します。
 
-## TiUPプレイグラウンドの概要 {#tiup-playground-overview}
+## TiUP遊び場の概要 {#tiup-playground-overview}
 
 遊び場コンポーネントの基本的な使用法を以下に示します。
 

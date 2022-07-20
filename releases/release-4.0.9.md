@@ -39,13 +39,13 @@ TiDBバージョン：4.0.9
 -   TiDB
 
     -   等しい条件を他の条件に変換するときに、ヒューリスティックな方法で（インデックス）マージ結合を回避します[＃21146](https://github.com/pingcap/tidb/pull/21146)
-    -   ユーザー変数のタイプを区別する[＃21107](https://github.com/pingcap/tidb/pull/21107)
+    -   ユーザー変数の種類を区別する[＃21107](https://github.com/pingcap/tidb/pull/21107)
     -   構成ファイル[＃20922](https://github.com/pingcap/tidb/pull/20922)での`GOGC`変数の設定のサポート
     -   ダンプされたバイナリ時間（ `Timestamp`および`Datetime` ）を[＃21135](https://github.com/pingcap/tidb/pull/21135)との互換性を高めます
     -   `LOCK IN SHARE MODE`構文[＃21005](https://github.com/pingcap/tidb/pull/21005)を使用するステートメントにエラーメッセージを提供します
     -   ショートカット可能な式で定数を折りたたむときに、不要な警告やエラーを出力しないようにする[＃21040](https://github.com/pingcap/tidb/pull/21040)
     -   `LOAD DATA`ステートメント[＃21199](https://github.com/pingcap/tidb/pull/21199)を準備するときにエラーを発生させます
-    -   整数列タイプを変更するときは、整数のゼロフィルサイズの属性を無視します[＃20986](https://github.com/pingcap/tidb/pull/20986)
+    -   整数列タイプ[＃20986](https://github.com/pingcap/tidb/pull/20986)を変更するときは、整数のゼロフィルサイズの属性を無視してください。
     -   `EXPLAIN ANALYZE` [＃21066](https://github.com/pingcap/tidb/pull/21066)の結果に、DMLステートメントのエグゼキュータ関連のランタイム情報を追加します。
     -   単一のSQLステートメントの主キーに対する複数の更新を禁止する[＃21113](https://github.com/pingcap/tidb/pull/21113)
     -   接続アイドル時間の監視メトリックを追加します[＃21301](https://github.com/pingcap/tidb/pull/21301)
@@ -127,7 +127,7 @@ TiDBバージョン：4.0.9
     -   列タイプ[＃21273](https://github.com/pingcap/tidb/pull/21273)に従ってパーティション定義をチェックするときに発生するバグを修正します
     -   パーティション式の値タイプがパーティション列タイプ[＃21136](https://github.com/pingcap/tidb/pull/21136)と一致しないバグを修正します
     -   ハッシュタイプのパーティションがパーティション名が一意であるかどうかをチェックしないバグを修正します[＃21257](https://github.com/pingcap/tidb/pull/21257)
-    -   非`INT`タイプの値をハッシュパーティションテーブル[＃21238](https://github.com/pingcap/tidb/pull/21238)に挿入した後に返される誤った結果を修正します
+    -   非`INT`タイプの値をハッシュ分割テーブル[＃21238](https://github.com/pingcap/tidb/pull/21238)に挿入した後に返される誤った結果を修正します
     -   場合によっては`INSERT`ステートメントでインデックス結合を使用するときの予期しないエラーを修正します[＃21249](https://github.com/pingcap/tidb/pull/21249)
     -   `CASE WHEN`演算子の`BigInt`の符号なし列の値が`BigInt`の符号付きの値に誤って変換される問題を修正します[＃21236](https://github.com/pingcap/tidb/pull/21236)
     -   インデックスハッシュ結合とインデックスマージ結合が照合順序を考慮しないバグを修正します[＃21219](https://github.com/pingcap/tidb/pull/21219)

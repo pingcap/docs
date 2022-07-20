@@ -43,7 +43,7 @@ TiDB Ansibleバージョン：3.0.4
 -   SQLオプティマイザー
     -   フィードバックによって分割されたときに無効なクエリ範囲が発生する可能性がある問題を修正します[＃12170](https://github.com/pingcap/tidb/pull/12170)
     -   結果に無効なキーが含まれている場合にエラーを返すのではなく、 `SHOW STATS_BUCKETS`ステートメントの返されたエラーを16進数で表示します[＃12094](https://github.com/pingcap/tidb/pull/12094)
-    -   クエリに`SLEEP`関数（たとえば、 `select 1 from (select sleep(1)) t;)` ）が含まれている場合、列の整理によってクエリ[＃11953](https://github.com/pingcap/tidb/pull/11953)中に無効な`sleep(1)`が発生する問題を修正します。
+    -   クエリに`SLEEP`関数（たとえば、 `select 1 from (select sleep(1)) t;)` ）が含まれている場合、列の整理によってクエリ[＃11953](https://github.com/pingcap/tidb/pull/11953)で無効な`sleep(1)`が発生する問題を修正します。
     -   クエリがテーブルデータではなく列数のみに関係する場合は、インデックススキャンを使用してIOを下げます[＃12112](https://github.com/pingcap/tidb/pull/12112)
     -   MySQL [＃12100](https://github.com/pingcap/tidb/pull/12100)と互換性があるように、 `use index()`にインデックスが指定されていない場合は、インデックスを使用しないでください。
     -   `CMSketch`の統計の`TopN`のレコードの数を厳密に制限して、ステートメントの数がトランザクションのサイズに関するTiDBの制限を超えたために`ANALYZE`のステートメントが失敗するという問題を修正します[＃11914](https://github.com/pingcap/tidb/pull/11914)

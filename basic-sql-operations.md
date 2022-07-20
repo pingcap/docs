@@ -195,7 +195,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 一般的なDML機能は、テーブルレコードの追加、変更、および削除です。対応するコマンドは`INSERT` 、および`UPDATE` `DELETE` 。
 
-テーブルにデータを挿入するには、次の`INSERT`のステートメントを使用します。
+テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
 
 {{< copyable "" >}}
 

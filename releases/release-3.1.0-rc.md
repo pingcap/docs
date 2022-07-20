@@ -87,16 +87,16 @@ TiDB Ansibleバージョン：3.1.0-rc
     -   既存のキーをトランザクションに挿入し、整合性チェックパラメータを無効にしたときにすぐに削除することによって引き起こされる競合チェックの失敗またはデータインデックスの不整合の問題を修正します[＃7112](https://github.com/tikv/tikv/pull/7112)
     -   `TopN`が符号なし整数を比較するときの計算エラーを修正します[＃7199](https://github.com/tikv/tikv/pull/7199)
     -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと、ログの追跡が遅くなり、クラスタがスタックする可能性があるという問題を解決します。トランザクションサイズが大きいと、TiKVサーバー間で頻繁に再接続される可能性があるという問題[＃7087](https://github.com/tikv/tikv/pull/7087) [＃7078](https://github.com/tikv/tikv/pull/7078)
-    -   レプリカに送信された保留中の読み取り要求が永続的にブロックされる可能性がある問題を修正します[＃6543](https://github.com/tikv/tikv/pull/6543)
+    -   レプリカに送信される保留中の読み取り要求が永続的にブロックされる可能性がある問題を修正します[＃6543](https://github.com/tikv/tikv/pull/6543)
     -   スナップショットを適用すると、レプリカの読み取りがブロックされる可能性がある問題を修正します[＃7249](https://github.com/tikv/tikv/pull/7249)
     -   リーダーの異動によりTiKVがpanicになる可能性がある問題を修正[＃7240](https://github.com/tikv/tikv/pull/7240)
     -   データをS31にバックアップするときに、すべてのSSTファイルがゼロで埋められる問題を修正し[＃6967](https://github.com/tikv/tikv/pull/6967) 。
     -   バックアップ中にSSTファイルのサイズが記録されず、復元後に多くの空のリージョンが発生する問題を修正します[＃6983](https://github.com/tikv/tikv/pull/6983)
-    -   バックアップ[＃7297](https://github.com/tikv/tikv/pull/7297)でAWSIAMWebIDをサポートする
+    -   バックアップ[＃7297](https://github.com/tikv/tikv/pull/7297)でIAMをサポートする
 
 -   PD
 
-    -   PDがリージョンハートビートを処理するときにデータ競合が原因で発生するリージョン情報が正しくない問題を修正します[＃2234](https://github.com/pingcap/pd/pull/2234)
+    -   PDがリージョンハートビートを処理するときにデータ競合によって引き起こされる誤ったリージョン情報の問題を修正します[＃2234](https://github.com/pingcap/pd/pull/2234)
     -   `random-merge-scheduler`がロケーションラベルと配置ルールに従わないという問題を修正します[＃2212](https://github.com/pingcap/pd/pull/2221)
     -   配置ルールが同じ`startKey`と[＃2222](https://github.com/pingcap/pd/pull/2222)の別の配置ルールによって上書きされる問題を修正し`endKey`
     -   APIのバージョン番号がPDサーバー[＃2192](https://github.com/pingcap/pd/pull/2192)のバージョン番号と一致しない問題を修正します

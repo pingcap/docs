@@ -490,7 +490,7 @@ const (
 
 <div label="Using GORM (Recommended)" href="get-code-gorm">
 
-GORMと比較すると、go-sql-driver / mysqlの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じ、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+GORMと比較すると、go-sql-driver / mysqlの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
 GORMは、Golangで人気のあるオープンソースのORMライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
 
@@ -782,7 +782,7 @@ TiDB Cloudやその他のリモートクラスターなど、ローカル以外�
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得する接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
 ```
 mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
@@ -808,7 +808,7 @@ TiDB Cloudやその他のリモートクラスターなど、ローカル以外�
 dsn := "root:@tcp(127.0.0.1:4000)/test?charset=utf8mb4"
 ```
 
-設定したパスワードが`123456`で、 TiDB Cloudから取得する接続文字列が次のとおりであるとします。
+設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
 ```
 mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p

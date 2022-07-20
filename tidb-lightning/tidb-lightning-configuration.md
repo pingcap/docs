@@ -9,7 +9,7 @@ summary: Learn about the CLI usage and sample configuration in TiDB Lightning.
 
 ## Configuration / コンフィグレーションファイル {#configuration-files}
 
-TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、 TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
+TiDB Lightningには、「グローバル」と「タスク」の2つの構成クラスがあり、互換性のある構造を持っています。それらの区別は、 [サーバーモード](/tidb-lightning/tidb-lightning-web-interface.md)が有効になっている場合にのみ発生します。サーバーモードが無効になっている場合（デフォルト）、 TiDB Lightningは1つのタスクのみを実行し、グローバル構成とタスク構成の両方に同じ構成ファイルが使用されます。
 
 ### TiDB Lightning （グローバル） {#tidb-lightning-global}
 

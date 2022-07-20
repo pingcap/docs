@@ -68,7 +68,7 @@ TiDB Binlogクラスタは、 PumpとDrainerとDrainerで構成されていま�
 
     -   TiDBシステム変数[tidb_enable_amend_pessimistic_txn](/system-variables.md#tidb_enable_amend_pessimistic_txn-new-in-v407) ：2つの機能には互換性の問題があります。それらを一緒に使用すると、 Binlogがデータを一貫して複製しないという問題が発生する可能性があります。
 
--   Drainerは、binlogのMySQL、TiDB、Kafka、またはローカルファイルへの複製をサポートしています。 binlogを他のDrainerのサポートされていない宛先に複製する必要がある場合は、 DrainerをKafkaに複製し、Kafkaのデータを読み取って、binlogコンシューマープロトコルに従ってカスタマイズされた処理を行うようにDrainerを設定できます。 [Binlog Consumer Clientユーザーガイド](/tidb-binlog/binlog-consumer-client.md)を参照してください。
+-   Drainerは、binlogのMySQL、TiDB、Kafka、またはローカルファイルへの複製をサポートしています。 binlogを他のDrainerでサポートされていない宛先に複製する必要がある場合は、 DrainerをKafkaに複製し、Kafkaでデータを読み取って、binlogコンシューマープロトコルに従ってカスタマイズされた処理を行うようにDrainerを設定できます。 [Binlog Consumer Clientユーザーガイド](/tidb-binlog/binlog-consumer-client.md)を参照してください。
 
 -   増分データを回復するためにBinlogを使用するには、config `db-type`を`file` （proto buffer形式のローカルファイル）に設定します。 Drainerは、binlogを指定された[プロトバッファ形式](https://github.com/pingcap/tidb-binlog/blob/master/proto/pb_binlog.proto)のデータに変換し、そのデータをローカルファイルに書き込みます。このように、 [Reparo](/tidb-binlog/tidb-binlog-reparo.md)を使用してデータを段階的に回復できます。
 

@@ -71,7 +71,7 @@ from:
 | `enable-gtid`       | GTIDを使用してアップストリームからbinlogをプルするかどうかを決定します。デフォルト値は`false`です。一般に、 `enable-gtid`を手動で構成する必要はありません。ただし、アップストリームデータベースでGTIDが有効になっていて、プライマリ/セカンダリスイッチが必要な場合は、 `enable-gtid`から`true`に設定する必要があります。 |
 | `enable-relay`      | リレーログ機能を有効にするかどうかを決定します。デフォルト値は`false`です。 DM v2.0.2以降、この構成アイテムは非推奨になりました。 [リレーログ機能を有効にする](/dm/relay-log.md#start-and-stop-the-relay-log-feature)にするには、代わりに`start-relay`コマンドを使用します。       |
 | `relay-binlog-name` | DM-workerがbinlogのプルを開始するファイル名を指定します。たとえば、 `"mysql-bin.000002"` 。 `enable_gtid`が`false`の場合にのみ機能します。このパラメーターが指定されていない場合、DM-workerは最新のbinlogから開始してbinlogをプルします。                             |
-| `relay-binlog-gtid` | DM-workerがbinlogのプルを開始するGTIDを指定します。たとえば、 `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。 `enable_gtid`が`true`の場合にのみ機能します。このパラメーターが指定されていない場合、DM-workerは最新のGTIDから開始してbinlogをプルします。      |
+| `relay-binlog-gtid` | DMワーカーがbinlogのプルを開始するGTIDを指定します。たとえば、 `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。 `enable_gtid`が`true`の場合にのみ機能します。このパラメーターが指定されていない場合、DM-workerは最新のGTIDから開始してbinlogをプルします。         |
 | `relay-dir`         | リレーログディレクトリを指定します。                                                                                                                                                                       |
 | `host`              | アップストリームデータベースのホストを指定します。                                                                                                                                                                |
 | `port`              | アップストリームデータベースのポートを指定します。                                                                                                                                                                |

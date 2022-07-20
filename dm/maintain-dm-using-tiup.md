@@ -323,7 +323,7 @@ ID      Time                  Command
 4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
 ```
 
-最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`引数を渡します。
+最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`の引数を渡します。
 
 {{< copyable "" >}}
 

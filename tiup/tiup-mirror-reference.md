@@ -21,7 +21,7 @@ TiUPミラーは、コンポーネントとそのメタデータを格納するT
 
 ## ミラー構造 {#mirror-structure}
 
-一般的なミラー構造は次のとおりです。
+典型的なミラー構造は次のとおりです。
 
 ```
 + <mirror-dir>                                  # Mirror's root directory

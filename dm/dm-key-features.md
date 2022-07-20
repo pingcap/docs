@@ -9,8 +9,8 @@ summary: Learn about the key features of DM and appropriate parameter configurat
 
 異なるDMバージョンの場合、テーブルルーティング、ブロックおよび許可リスト、およびbinlogイベントフィルター機能のスキーマ名またはテーブル名の異なる一致ルールに注意してください。
 
--   DM v1.0.5以降のバージョンでは、上記のすべての機能が[ワイルドカード一致](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートします。 DMのすべてのバージョンで、ワイルドカード式には`*`を**1つしか**含めることができず<strong>、最後に</strong>`*`を配置する必要があることに注意してください。
--   v1.0.5より前のDMバージョンの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
+-   DM v1.0.5以降のバージョンでは、上記のすべての機能が[ワイルドカード一致](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートします。 DMのすべてのバージョンで、ワイルドカード式に含めることができる`*`は**1つだけ**であり、 `*`<strong>を最後に配置する必要が</strong>あることに注意してください。
+-   v1.0.5より前のバージョンのDMの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
 
 単純なシナリオでの照合には、ワイルドカードを使用することをお勧めします。
 
@@ -224,7 +224,7 @@ block-allow-list:  # Use black-white-list if the DM version is earlier than or e
 | `logs` 。 `messages_2018`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                     |
 | `forum_backup_2016` 。 `messages` | はい            | スキーマ`forum_backup_2016`はどの`do-dbs`とも一致しません。                                                                                                        |
 | `forum_backup_2017` 。 `messages` | はい            | スキーマ`forum_backup_2017`はどの`do-dbs`とも一致しません。                                                                                                        |
-| `forum` 。 `users`                | はい            | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.スキーマとテーブルが`do-tables`と`ignore-tables`のいずれにも一致せず、 `do-tables`が空ではありません。</li>             |
+| `forum` 。 `users`                | はい            | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.スキーマとテーブルが`do-tables`と`ignore-tables`のいずれにも一致せず、 `do-tables`は空ではありません。</li>             |
 | `forum` 。 `messages`             | いいえ           | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.表`messages`は`do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`にあります。</li>          |
 | `forum_backup_2018` 。 `messages` | いいえ           | <li>スキーマ`forum_backup_2018`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.スキーマとテーブルは`do-tables`と一致し`db-name: "~^forum.*",tbl-name: "messages"` 。</li> |
 
@@ -382,7 +382,7 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-v2.0.5以降のバージョンでは、 `task`の構成ファイルの`online-ddl`の構成項目を使用する必要があります。
+v2.0.5以降のバージョンでは、 `task`の構成ファイルの`online-ddl`の構成アイテムを使用する必要があります。
 
 -   アップストリームのMySQL/MariaDBが（同時に）gh-ostまたはpt-oscツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`に設定します。
 

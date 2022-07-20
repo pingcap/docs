@@ -18,7 +18,7 @@ tiup uninstall <component1>:<version> [component2...N] [flags]
 
 ## オプション {#options}
 
-### - 全て {#all}
+### &#x20;--all {#all}
 
 -   指定されたコンポーネントのインストールされているすべてのバージョンをアンインストールします。 `<version>`を省略する場合は、このオプションを使用する必要があります。
 -   データ型： `BOOLEAN`

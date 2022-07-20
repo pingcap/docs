@@ -72,7 +72,7 @@ TiDBバージョン：4.0.13
     -   `BINARY`タイプの列の照合順序が適切に処理されないために誤ったクエリ結果が発生する問題を修正します[＃23598](https://github.com/pingcap/tidb/pull/23598)
     -   `UPDATE`ステートメントに`HAVING`句[＃23575](https://github.com/pingcap/tidb/pull/23575)の結合クエリが含まれている場合に発生するクエリpanicの問題を修正します。
     -   比較式[＃23474](https://github.com/pingcap/tidb/pull/23474)で`NULL`定数を使用すると、TiFlashが誤った結果を返す原因となる問題を修正します。
-    -   `YEAR`タイプの列を`STRING`定数[＃23335](https://github.com/pingcap/tidb/pull/23335)と比較するときの誤った結果の問題を修正します
+    -   `YEAR`タイプの列を`STRING`定数[＃23335](https://github.com/pingcap/tidb/pull/23335)と比較するときの間違った結果の問題を修正します
     -   `session.group_concat_max_len`の設定が小さすぎると`group_concat`がパニックになる問題を修正します[＃23257](https://github.com/pingcap/tidb/pull/23257)
     -   `TIME`タイプの列[＃23233](https://github.com/pingcap/tidb/pull/23233)に`BETWEEN`式を使用したときに発生する誤ったクエリ結果の問題を修正します
     -   `DELETE`ステートメントの特権チェックの問題を修正します[＃23215](https://github.com/pingcap/tidb/pull/23215)

@@ -179,7 +179,7 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 
 ## <code>GROUP_CONCAT()</code>でorder byが使用されていないため、結果セットは不安定です。 {#the-result-set-is-unstable-because-order-by-is-not-used-in-code-group-concat-code}
 
-TiDBはストレージレイヤーからデータを並行して読み取るため、結果セットは不安定です。したがって、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は、不安定であると簡単に認識されます。
+TiDBはストレージレイヤーからデータを並列に読み取るため、結果セットは不安定です。したがって、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は、不安定であると簡単に認識されます。
 
 `GROUP_CONCAT()`が結果セットの出力を順番に取得できるようにするには、SQLセマンティクスに準拠する`ORDER BY`句に並べ替えフィールドを追加する必要があります。次の例では、 `ORDER BY`なしで`customer_id`をスプライスする`GROUP_CONCAT()`は、不安定な結果セットを引き起こします。
 

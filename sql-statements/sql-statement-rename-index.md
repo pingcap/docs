@@ -55,7 +55,7 @@ Create Table: CREATE TABLE `t1` (
 
 ## も参照してください {#see-also}
 
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
 -   [インデックスを表示](/sql-statements/sql-statement-show-index.md)

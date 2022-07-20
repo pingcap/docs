@@ -40,7 +40,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 
 ## 新しいテーブルを作成するときにセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
-テーブルの作成と同時にセカンダリインデックスを作成するには、 [CREATE TABLE](/sql-statements/sql-statement-create-table.md)ステートメントの最後に`KEY`キーワードを含む句を追加します。
+テーブルの作成と同時にセカンダリインデックスを作成するには、 [テーブルの作成](/sql-statements/sql-statement-create-table.md)ステートメントの最後に`KEY`キーワードを含む句を追加します。
 
 {{< copyable "" >}}
 

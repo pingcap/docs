@@ -50,7 +50,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   ハッシュ結合の実行を最適化します。結合タイプが内部結合または半結合であり、内部テーブルが空の場合、外部テーブルからデータを読み取らずに結果を返します。
 
-    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、実行時間や各演算子の返された行数などの実行時統計を確認することをサポートします
+    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、実行時間や各オペレーターの返された行数などの実行時統計を確認することをサポートします
 
 -   統計
 
@@ -142,7 +142,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   バージョン管理メカニズムを導入し、互換性のあるクラスタのローリング更新をサポートします
 
-    -   ネットワーク分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間で[`Raft PreVote`有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
+    -   ネットワークの分離後にネットワークが回復したときにリーダーが再選されるのを防ぐために、PDノード間で[`Raft PreVote`有効にする](https://github.com/pingcap/pd/blob/5c7b18cf3af91098f07cf46df0b59fbf8c7c5462/conf/config.toml#L22)
 
     -   デフォルトで`raft learner`を有効にすると、スケジューリング中のマシン障害によってデータが利用できなくなるリスクが低くなります。
 

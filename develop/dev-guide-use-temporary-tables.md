@@ -3,7 +3,7 @@ title: Temporary Tables
 summary: Learn how to create, view, query, and delete temporary tables.
 ---
 
-# 一時テーブル {#temporary-tables}
+# 一時的なテーブル {#temporary-tables}
 
 一時テーブルは、クエリ結果を再利用するための手法と考えることができます。
 
@@ -276,4 +276,4 @@ TiDBの一時テーブルの制限については、 [他のTiDB機能との互�
 
 ## 続きを読む {#read-more}
 
--   [一時テーブル](/temporary-tables.md)
+-   [一時的なテーブル](/temporary-tables.md)

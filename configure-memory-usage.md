@@ -57,7 +57,7 @@ server-memory-quota = 34359738368
 
 ## 過度のメモリ使用量のアラームをトリガーします {#trigger-the-alarm-of-excessive-memory-usage}
 
-デフォルト設定では、マシンのメモリ使用量が合計メモリの80％に達すると、tidb-serverインスタンスがアラームログを出力し、関連するステータスファイルを記録します。 `memory-usage-alarm-ratio`を設定することにより、メモリ使用率のしきい値を設定できます。詳細なアラームルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
+デフォルトの構成では、マシンのメモリ使用量が合計メモリの80％に達すると、tidb-serverインスタンスがアラームログを出力し、関連するステータスファイルを記録します。 `memory-usage-alarm-ratio`を設定することにより、メモリ使用率のしきい値を設定できます。詳細なアラームルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
 
 アラームが1回トリガーされた後、メモリ使用率が10秒を超えてしきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータスファイルの保存を回避するために、現在、TiDBは最近の5つのアラーム中に生成されたステータスファイルのみを保持します。
 

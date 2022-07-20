@@ -18,7 +18,7 @@ title: TiDB 2.1.2 Release Notes
 
 ## PD {#pd}
 
--   リージョンマージ[＃1377](https://github.com/pingcap/pd/pull/1377)に関するリージョン情報の更新の問題を修正しました
+-   リージョンマージ[＃1377](https://github.com/pingcap/pd/pull/1377)に関するリージョン情報の更新の問題を修正します
 
 ## TiKV {#tikv}
 

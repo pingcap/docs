@@ -65,7 +65,7 @@ title: TiDB 2.1 RC2 Release Notes
     -   組み込み機能をサポートする`encode/decode` [＃7622](https://github.com/pingcap/tidb/pull/7622)
     -   一部の時間関連関数がMySQLの動作と互換性がない場合があるという問題を修正します[＃7636](https://github.com/pingcap/tidb/pull/7636)
     -   文字列[＃7654](https://github.com/pingcap/tidb/pull/7654)のデータの時間タイプを解析する互換性の問題を修正します
-    -   `DateTime`データのデフォルト値を計算するときにタイムゾーンが考慮されない問題を修正します[＃7655](https://github.com/pingcap/tidb/pull/7655)
+    -   `DateTime`データのデフォルト値を計算するときにタイムゾーンが考慮されないという問題を修正します[＃7655](https://github.com/pingcap/tidb/pull/7655)
 -   DML
     -   `InsertOnDuplicateUpdate`ステートメント[＃7534](https://github.com/pingcap/tidb/pull/7534)に正しい`last_insert_id`を設定します
     -   `auto_increment_id`カウンター[＃7515](https://github.com/pingcap/tidb/pull/7515)を更新するケースを減らします

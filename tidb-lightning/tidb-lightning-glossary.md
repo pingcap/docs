@@ -29,7 +29,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### バックエンド {#back-end}
 
-バックエンドは、 TiDB Lightningが解析結果を送信する宛先です。 「バックエンド」とも呼ばれます。
+バックエンドは、 TiDB Lightningが解析結果を送信する宛先です。 「バックエンド」とも表記されます。
 
 詳細については、 [TiDB Lightningエンド](/tidb-lightning/tidb-lightning-backends.md)を参照してください。
 

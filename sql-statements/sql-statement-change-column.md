@@ -150,14 +150,14 @@ ERROR 8200 (HY000): Unsupported modify column: change from original type decimal
 
 -   現在、 `ALTER TABLE`のステートメントで複数の変更を行うことはサポートされていません。
 -   主キー列の[Reorg-データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
--   パーティションテーブルの列タイプの変更はサポートされていません。
+-   パーティション表の列タイプの変更はサポートされていません。
 -   生成された列の列タイプの変更はサポートされていません。
 -   一部のデータ型（たとえば、一部のTIME、Bit、Set、Enum、およびJSON型）の変更は、TiDBとMySQL間の`CAST`関数の動作の互換性の問題のためにサポートされていません。
 
 ## も参照してください {#see-also}
 
--   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
--   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
+-   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップ列](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-modify-column.md)

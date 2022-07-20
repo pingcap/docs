@@ -43,7 +43,7 @@ TiDB Ansibleバージョン：3.0.3
     -   生成されたカラムをその依存列の前に配置することを禁止する[＃11686](https://github.com/pingcap/tidb/pull/11686)
     -   `tidb_ddl_reorg_worker_cnt`と[＃11874](https://github.com/pingcap/tidb/pull/11874)のデフォルト値を変更し`tidb_ddl_reorg_batch_size`
 -   モニター
-    -   新しいバックオフ監視タイプを追加して、各バックオフタイプの期間を記録します。コミットバックオフ[＃11728](https://github.com/pingcap/tidb/pull/11728)など、以前はカウントされていなかったタイプをカバーするために、バックオフメトリックを追加します
+    -   新しいバックオフ監視タイプを追加して、各バックオフタイプの期間を記録します。コミットバックオフ[＃11728](https://github.com/pingcap/tidb/pull/11728)など、以前はカウントされていなかったタイプをカバーするために、バックオフメトリックを追加します。
 
 ## TiKV {#tikv}
 

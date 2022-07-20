@@ -62,7 +62,7 @@ TiFlashには、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong> 
 ## DDL {#ddl}
 
 -   スキーマバージョン：各TiFlashインスタンスに現在キャッシュされているスキーマのバージョン。
--   スキーマ適用OPM： `schema diff`分あたりのすべてのTiFlashインスタンスによって`apply`の操作で同期されたTiDB1の数。このアイテムには、 `apply`の`failed apply`つのタイプのカウントが含まれています： `diff apply` 、および`full apply` 。 `diff apply`は、単一の適用の通常のプロセスです。 `diff apply`が失敗すると、 `failed apply`は`1`増加し、TiFlashは`full apply`にロールバックし、最新のスキーマ情報をプルして、TiFlashのスキーマバージョンを更新します。
+-   Schema Apply OPM： `schema diff`分あたりのすべてのTiFlashインスタンスによって`apply`の操作で同期されたTiDB1の数。このアイテムには、 `apply`の`failed apply`つのタイプのカウントが含まれています： `diff apply` 、および`full apply` 。 `diff apply`は、単一の適用の通常のプロセスです。 `diff apply`が失敗すると、 `failed apply`は`1`増加し、TiFlashは`full apply`にロールバックし、最新のスキーマ情報をプルして、TiFlashのスキーマバージョンを更新します。
 -   スキーマ内部DDLOPM：すべてのTiFlashインスタンスで1分あたりに実行される特定のDDL操作の数。
 -   スキーマ適用期間：すべてのTiFlashインスタンスで`apply schema`の操作に使用される時間。
 
@@ -75,7 +75,7 @@ TiFlashには、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong> 
 -   内部タスクOPS：すべてのTiFlashインスタンスが1秒間に内部データ並べ替えタスクを実行する回数。
 -   内部タスク期間：内部データ並べ替えタスクのためにすべてのTiFlashインスタンスによって消費される時間。
 -   ページGCタスクOPM：すべてのTiFlashインスタンスが1分間にデルタデータ並べ替えタスクを実行する回数。
--   ページGCタスク期間：デルタデータ並べ替えタスクを実行するためにすべてのTiFlashインスタンスによって消費される時間の分布。
+-   ページGCタスク期間：デルタデータソートタスクを実行するためにすべてのTiFlashインスタンスによって消費される時間の分布。
 -   ディスク書き込みOPS：すべてのTiFlashインスタンスによる1秒あたりのディスク書き込み数。
 -   ディスク読み取りOPS：すべてのTiFlashインスタンスによる1秒あたりのディスク読み取り数。
 -   書き込みフロー：すべてのTiFlashインスタンスによるディスク書き込みのトラフィック。
@@ -101,6 +101,6 @@ TiFlashには、TiFlash **-Summary** 、 <strong>TiFlash-Proxy-Summary</strong> 
 
 ## Raft {#raft}
 
--   インデックスOPSの読み取り：各TiFlashインスタンスが1秒間に`read_index`のリクエストをトリガーする回数。これは、トリガーされるリージョンの数に相当します。
+-   読み取りインデックスOPS：各TiFlashインスタンスが1秒間に`read_index`のリクエストをトリガーする回数。これは、トリガーされるリージョンの数に相当します。
 -   読み取りインデックス期間：すべてのTiFlashインスタンスで`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
 -   待機インデックス期間：すべてのTiFlashインスタンスで`wait_index`が使用する時間、つまり、 `read_index`の要求が受信された後にローカルインデックス&gt;=read_indexになるまで待機するために使用される時間。

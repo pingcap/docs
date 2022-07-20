@@ -59,7 +59,7 @@ TiDB Ansibleバージョン：3.1.0 GA
     -   MySQL接続ハンドシェイクエラー[＃15799](https://github.com/pingcap/tidb/pull/15799)のログを調整します
     -   監査プラグインがロードされた後のポートプロービングによって引き起こされるpanicの問題を修正します[＃16065](https://github.com/pingcap/tidb/pull/16065)
     -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のpanic問題を修正します。
-    -   監視セッションの再試行エラーのカウントが不正確になる問題を修正します[＃16120](https://github.com/pingcap/tidb/pull/16120)
+    -   モニタリングセッションの再試行エラーのカウントが不正確になる問題を修正します[＃16120](https://github.com/pingcap/tidb/pull/16120)
     -   `ALLOW_INVALID_DATES`モード[＃16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の誤った結果の問題を修正します
     -   クラスタにTiFlashノードがある場合にガベージコレクション（GC）が正常に機能しない可能性がある問題を修正します[＃15761](https://github.com/pingcap/tidb/pull/15761)
     -   ユーザーがハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成するときに大きなパーティションカウントを設定すると、TiDBがメモリ（OOM）を使い果たす問題を修正します。

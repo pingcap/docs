@@ -10,7 +10,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_HOST` information_schema tabl
 -   不正な形式のSQLステートメント。
 -   ゼロ除算エラー。
 -   範囲外または重複するキー値を挿入しようとしました。
--   許可エラー。
+-   権限エラー。
 -   存在しないテーブル。
 
 これらのエラーは、MySQLサーバープロトコルを介してクライアントに返されます。このプロトコルでは、アプリケーションが適切なアクションを実行することが期待されます。 `information_schema` 。 `CLIENT_ERRORS_SUMMARY_BY_HOST`表は、アプリケーションがTiDBサーバーから返されたエラーを正しく処理（またはログ記録）していないシナリオでエラーを検査するための便利な方法を提供します。

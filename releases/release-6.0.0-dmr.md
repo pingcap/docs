@@ -37,7 +37,7 @@ TiDB v6.0.0以降、TiDBは次の2種類のリリースを提供します。
 
 -   開発マイルストーンリリース
 
-    開発マイルストーンリリース（DMR）は、約2か月ごとにリリースされます。 DMRは新機能と改善点を導入しますが、パッチリリースは受け入れません。オンプレミスユーザーが実稼働環境でDMRを使用することはお勧めしません。たとえば、v6.0.0-DMRはDMRです。
+    開発マイルストーンリリース（DMR）は、約2か月ごとにリリースされます。 DMRは新機能と改善点を導入していますが、パッチリリースは受け付けていません。オンプレミスユーザーが実稼働環境でDMRを使用することはお勧めしません。たとえば、v6.0.0-DMRはDMRです。
 
 TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
@@ -125,7 +125,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 -   MPPエンジンのコンピューティングパフォーマンスを向上させる
 
-    -   より多くの関数と演算子をMPPエンジンにプッシュダウンすることをサポート
+    -   MPPエンジンへのより多くの関数とオペレーターのプッシュダウンをサポート
 
         -   `IS NOT`関数： `IS`
         -   文字`NOT REGEXP()`関数： `REGEXP()`
@@ -278,7 +278,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
 > **ノート：**
 >
-> 以前のTiDBバージョンからv6.0.0にアップグレードするときに、すべての中間バージョンの互換性の変更に関する注意事項を知りたい場合は、対応するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
+> 以前のTiDBバージョンからv6.0.0にアップグレードするときに、すべての中間バージョンの互換性変更に関する注意事項を知りたい場合は、対応するバージョンの[リリースノート](/releases/release-notes.md)を確認できます。
 
 ### システム変数 {#system-variables}
 
@@ -343,7 +343,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 -   DMはOpenAPIインターフェースを変更します
     -   内部メカニズムの変更により、タスク管理に関連するインターフェースは以前の実験的バージョンと互換性がありません。適応のために新しい[DMOpenAPIドキュメント](/dm/dm-open-api.md)を参照する必要があります。
 -   DMは、完全なインポートフェーズ中に競合を解決するためにメソッドを変更します
-    -   `loader.<name>.on-duplicate`つのパラメータが追加されます。デフォルト値は`replace`です。これは、新しいデータを使用して既存のデータを置き換えることを意味します。以前の動作を維持したい場合は、値を`error`に設定できます。このパラメーターは、完全なインポートフェーズ中の動作のみを制御します。
+    -   `loader.<name>.on-duplicate`つのパラメーターが追加されます。デフォルト値は`replace`です。これは、新しいデータを使用して既存のデータを置き換えることを意味します。以前の動作を維持したい場合は、値を`error`に設定できます。このパラメーターは、完全なインポートフェーズ中の動作のみを制御します。
 -   DMを使用するには、対応するバージョンの`dmctl`を使用する必要があります
     -   内部メカニズムの変更により、DMをv6.0.0にアップグレードした後、 `dmctl`もv6.0.0にアップグレードする必要があります。
 -   v5.4（v5.4のみ）では、TiDBは一部のnoopシステム変数に誤った値を許可します。 v6.0.0以降、TiDBはシステム変数に誤った値を設定することを許可していません。 [＃31538](https://github.com/pingcap/tidb/issues/31538)
@@ -356,7 +356,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   パフォーマンス概要ダッシュボードを追加して、一般的なクリティカルパスのコアパフォーマンスメトリックを表示し、TiDBでのメトリック分析を容易にします[＃31676](https://github.com/pingcap/tidb/issues/31676)
     -   `LOAD DATA LOCAL INFILE`ステートメント[＃24515](https://github.com/pingcap/tidb/issues/24515)での`REPLACE`キーワードの使用のサポート
     -   Rangeパーティションテーブル[＃26739](https://github.com/pingcap/tidb/issues/26739)の組み込み`IN`式のパーティションプルーニングをサポートします。
-    -   MPP集約クエリで冗長になる可能性のあるExchange操作を排除することにより、クエリの効率を向上させます[＃31762](https://github.com/pingcap/tidb/issues/31762)
+    -   MPP集計クエリで冗長になる可能性のあるExchange操作を排除することにより、クエリの効率を向上させます[＃31762](https://github.com/pingcap/tidb/issues/31762)
     -   `TRUNCATE PARTITION`ステートメントと`DROP PARTITION`ステートメントで重複するパーティション名を許可することでMySQLとの互換性を向上させます[＃31681](https://github.com/pingcap/tidb/issues/31681)
     -   `ADMIN SHOW DDL JOBS`ステートメント[＃23494](https://github.com/pingcap/tidb/issues/23494)の結果に`CREATE_TIME`情報を表示することをサポートします。
     -   新しい組み込み関数をサポートする`CHARSET()` [＃3931](https://github.com/pingcap/tidb/issues/3931)
@@ -438,7 +438,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
 
     -   TiDBデータ移行（DM）
 
-        -   アップストリームテーブルスキーマに一貫性がなく、オプティミスティックモードである場合のタスクの開始をサポートする[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
+        -   アップストリームテーブルスキーマに一貫性がなく、オプティミスティックモードの場合のタスクの開始をサポートする[＃3629](https://github.com/pingcap/tiflow/issues/3629) [＃3708](https://github.com/pingcap/tiflow/issues/3708) [＃3786](https://github.com/pingcap/tiflow/issues/3786)
         -   `stopped`状態でのタスクの作成をサポート[＃4484](https://github.com/pingcap/tiflow/issues/4484)
         -   `/tmp`ではなくDM-workerの作業ディレクトリを使用して内部ファイルを書き込み、タスクの停止後にディレクトリをクリーンアップするSyncerをサポートします[＃4107](https://github.com/pingcap/tiflow/issues/4107)
         -   事前チェックが改善されました。一部の重要なチェックがスキップされなくなりました。 [＃3608](https://github.com/pingcap/tiflow/issues/3608)
@@ -461,7 +461,7 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   エスケープ文字[＃31589](https://github.com/pingcap/tidb/issues/31589)でデータが壊れた場合のデータのロードpanicを修正
     -   照合順序を伴う`greatest`または`least`関数が間違った結果を取得する問題を修正します[＃31789](https://github.com/pingcap/tidb/issues/31789)
     -   date_add関数とdate_sub関数が誤ったデータ型を返す可能性があるバグを修正します[＃31809](https://github.com/pingcap/tidb/issues/31809)
-    -   挿入ステートメントを使用して仮想的に生成された列にデータを挿入するときに発生する可能性のあるpanicを修正[＃31735](https://github.com/pingcap/tidb/issues/31735)
+    -   挿入ステートメントを使用して仮想的に生成された列にデータを挿入するときに発生する可能性があったpanicを修正します[＃31735](https://github.com/pingcap/tidb/issues/31735)
     -   作成されたリストパーティションに重複する列が存在する場合にエラーが報告されないバグを修正します[＃31784](https://github.com/pingcap/tidb/issues/31784)
     -   `select for update union select`が誤ったスナップショットを使用したときに返される誤った結果を修正する[＃31530](https://github.com/pingcap/tidb/issues/31530)
     -   復元操作の終了後にリージョンが不均一に分散される可能性があるという潜在的な問題を修正します[＃31034](https://github.com/pingcap/tidb/issues/31034)
@@ -490,9 +490,9 @@ TiDB v6.0.0はDMRであり、そのバージョンは6.0.0-DMRです。
     -   生成された列を含むテーブルをクエリするときに発生する可能性のある誤った結果を修正する[＃33038](https://github.com/pingcap/tidb/issues/33038)
     -   `left join`を使用して複数のテーブルのデータを削除した誤った結果を[＃31321](https://github.com/pingcap/tidb/issues/31321)
     -   オーバーフロー[＃31868](https://github.com/pingcap/tidb/issues/31868)の場合に`SUBTIME`関数が間違った結果を返すバグを修正します
-    -   集計クエリに`having`の条件が含まれている場合に`selection`演算子をプッシュダウンできないバグを修正します[＃33166](https://github.com/pingcap/tidb/issues/33166)
+    -   集計クエリに`having`の条件[＃33166](https://github.com/pingcap/tidb/issues/33166)が含まれていると、 `selection`の演算子をプッシュダウンできないバグを修正します。
     -   クエリがエラーを報告したときにCTEがブロックされる可能性があるバグを修正します[＃31302](https://github.com/pingcap/tidb/issues/31302)
-    -   非厳密モードでテーブルを作成するときにvarbinary列またはvarchar列の長さが長すぎると、エラーが発生する可能性があるバグを修正します[＃30328](https://github.com/pingcap/tidb/issues/30328)
+    -   非厳密モードでテーブルを作成するときにvarbinaryまたはvarchar列の長さが長すぎると、エラーが発生する可能性があるバグを修正します[＃30328](https://github.com/pingcap/tidb/issues/30328)
     -   フォロワーが指定されていない場合の`information_schema.placement_policies`のフォロワー数の誤りを修正[＃31702](https://github.com/pingcap/tidb/issues/31702)
     -   インデックスが作成されるときにTiDBが列プレフィックスの長さを0として指定できる問題を修正します[＃31972](https://github.com/pingcap/tidb/issues/31972)
     -   TiDBがスペース[＃31535](https://github.com/pingcap/tidb/issues/31535)で終わるパーティション名を許可する問題を修正します

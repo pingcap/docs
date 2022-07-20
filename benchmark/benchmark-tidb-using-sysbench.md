@@ -177,7 +177,7 @@ sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 r
 
 この問題は、多くの場合、プロキシの使用に関係しています。単一のTiDBサーバーにプレッシャーを加え、各結果を合計し、合計した結果をプロキシを使用した結果と比較できます。
 
-例としてHAproxyを取り上げます。パラメータ`nbproc`は、最大で開始できるプロセスの数を増やすことができます。それ以降のバージョンのHAproxyも`nbthread`と`cpu-map`をサポートしています。これらはすべて、プロキシの使用によるパフォーマンスへの悪影響を軽減できます。
+例としてHAproxyを取り上げます。パラメーター`nbproc`は、最大で開始できるプロセスの数を増やすことができます。それ以降のバージョンのHAproxyも`nbthread`と`cpu-map`をサポートしています。これらはすべて、プロキシの使用によるパフォーマンスへの悪影響を軽減できます。
 
 ### 同時実行性が高いのに、なぜTiKVのCPU使用率がまだ低いのですか？ {#under-high-concurrency-why-is-the-cpu-utilization-rate-of-tikv-still-low}
 

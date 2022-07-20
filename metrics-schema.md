@@ -5,7 +5,7 @@ summary: Learn the `METRICS_SCHEMA` schema.
 
 # メトリクススキーマ {#metrics-schema}
 
-`METRICS_SCHEMA`は、Prometheusに保存されているTiDBメトリックの上部にある一連のビューです。各テーブルのPromQL（Prometheus Query Language）のソースは、 [`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
+`METRICS_SCHEMA`は、Prometheusに保存されているTiDBメトリックの上にある一連のビューです。各テーブルのPromQL（Prometheus Query Language）のソースは、 [`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
 
 {{< copyable "" >}}
 

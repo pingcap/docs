@@ -13,7 +13,7 @@ summary: Learn about the basic features of TiDB.
 | ------------------------------------------------------------------------------ | :-: | :-: | --- | :-: | :-: | :-: | :-: | :-----: |
 | [数値タイプ](/data-type-numeric.md)                                                 |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [日付と時刻のタイプ](/data-type-date-and-time.md)                                       |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
-| [文字列型](/data-type-string.md)                                                   |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
+| [文字列タイプ](/data-type-string.md)                                                 |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [JSONタイプ](/data-type-json.md)                                                  | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
 | [制御フロー関数](/functions-and-operators/control-flow-functions.md)                  |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | [文字列関数](/functions-and-operators/string-functions.md)                          |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
@@ -93,7 +93,7 @@ summary: Learn about the basic features of TiDB.
 | [DDLアルゴリズムアサーション](/sql-statements/sql-statement-alter-table.md) |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  Y  |    Y    |
 | マルチスキーマの変更：列を追加                                                 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 | 実験的 |   実験的   |
 | [列タイプを変更する](/sql-statements/sql-statement-modify-column.md)     |  Y  |  Y  | Y   |  Y  |  Y  |  Y  |  N  |    N    |
-| [一時テーブル](/temporary-tables.md)                                  |  Y  |  Y  | Y   |  Y  |  N  |  N  |  N  |    N    |
+| [一時的なテーブル](/temporary-tables.md)                                |  Y  |  Y  | Y   |  Y  |  N  |  N  |  N  |    N    |
 
 ## トランザクション {#transactions}
 

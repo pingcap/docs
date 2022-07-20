@@ -12,7 +12,7 @@ TiDBバージョン：5.2.1
 
 -   TiDB
 
-    -   間違った実行プランが原因で実行中に発生するエラーを修正します。間違った実行プランは、パーティションテーブルの集計演算子をプッシュダウンするときのスキーマ列の浅いコピーが原因で発生します。 [＃27797](https://github.com/pingcap/tidb/issues/27797) [＃26554](https://github.com/pingcap/tidb/issues/26554)
+    -   間違った実行プランが原因で実行中に発生するエラーを修正します。誤った実行プランは、パーティションテーブルの集計演算子をプッシュダウンするときのスキーマ列の浅いコピーが原因で発生します。 [＃27797](https://github.com/pingcap/tidb/issues/27797) [＃26554](https://github.com/pingcap/tidb/issues/26554)
 
 -   TiKV
 

@@ -57,7 +57,7 @@ TiDB Lightningは、ローカルファイルまたはリモートのMySQL互換�
 
 ## チェックポイント管理 {#checkpoints-control}
 
-回復不能なエラー（データ破損など）が原因で`tidb-lightning`が異常終了した場合、エラーが解決されるまでチェックポイントの再利用を拒否します。これは状況の悪化を防ぐためです。チェックポイントエラーは、 `tidb-lightning-ctl`プログラムを使用して解決できます。
+回復不能なエラー（データの破損など）が原因で`tidb-lightning`が異常終了した場合、エラーが解決されるまでチェックポイントの再利用を拒否します。これは状況の悪化を防ぐためです。チェックポイントエラーは、 `tidb-lightning-ctl`プログラムを使用して解決できます。
 
 ### <code>--checkpoint-error-destroy</code> {#code-checkpoint-error-destroy-code}
 

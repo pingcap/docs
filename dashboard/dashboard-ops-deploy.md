@@ -29,7 +29,7 @@ TiDBダッシュボードを提供しないPDインスタンスにアクセス�
 
 > **ノート：**
 >
-> TiDBダッシュボードを提供するPDインスタンスは、PDリーダーではない可能性があります。
+> TiDBダッシュボードにサービスを提供するPDインスタンスは、PDリーダーではない可能性があります。
 
 ### TiDBダッシュボードを実際に提供するPDインスタンスを確認します {#check-the-pd-instance-that-actually-serves-tidb-dashboard}
 

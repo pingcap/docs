@@ -7,7 +7,7 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 `EXPLAIN`は、ビュー自体の名前ではなく、 [見る](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが単なる仮想テーブルであり、データ自体を格納しないためです。ビューの定義とステートメントの残りの部分は、SQLの最適化中に一緒にマージされます。
 
-[バイクシェアサンプルデータベース](/import-example-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
+[バイクシェアのサンプルデータベース](/import-example-data.md)から、次の2つのクエリが同様の方法で実行されていることがわかります。
 
 {{< copyable "" >}}
 

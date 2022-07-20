@@ -13,7 +13,7 @@ summary: Learn the non-transactional DML statements in TiDB. At the expense of a
 
 > **ノート：**
 >
-> 非トランザクションDMLステートメントは、ステートメントの原子性と分離を保証するものではなく、元のDMLステートメントと同等ではありません。
+> 非トランザクションDMLステートメントは、ステートメントのアトミック性と分離を保証するものではなく、元のDMLステートメントと同等ではありません。
 
 ## 使用シナリオ {#usage-scenarios}
 
@@ -224,7 +224,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 -   batch-dmlが有効になっている場合は使用できません。
 -   [ `tidb_snapshot` ]（/ read-historical-data.md＃operation flow）が設定されている場合は使用できません。
 -   `prepare`ステートメントでは使用できません。
--   `ENUM` `BIT`は、 `SET` `JSON`としてサポートされていません。
+-   `ENUM` `BIT`は`SET` `JSON`としてサポートされていません。
 -   [一時テーブル](/temporary-tables.md)ではサポートされていません。
 -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)はサポートされていません。
 
@@ -281,7 +281,7 @@ batch-dmlは、DMLステートメントの実行中にトランザクション�
 
 -   他にも同時書き込みがあります。
 -   非トランザクションDMLステートメントは、ステートメント自体が読み取る値を変更します。
--   各バッチで実行されるSQLステートメントは、 `WHERE`の条件が変更されるため、異なる実行プランと式の計算順序を引き起こす可能性があります。したがって、実行結果は元のステートメントとは異なる場合があります。
+-   `WHERE`の条件が変更されるため、各バッチで実行されるSQLステートメントにより、実行プランと式の計算順序が異なる場合があります。したがって、実行結果は元のステートメントとは異なる場合があります。
 -   DMLステートメントには、非決定論的な操作が含まれています。
 
 ## MySQLの互換性 {#mysql-compatibility}

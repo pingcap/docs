@@ -22,7 +22,7 @@ TiDBバージョン：4.0.0-rc.1
 
 -   TiDB
 
-    -   `MemBuffer`がチェックされていないため、明示的なトランザクションで`INSERT ... ON DUPLICATE UPDATE`のステートメントが複数の行で誤って実行される可能性がある問題を修正します[＃16689](https://github.com/pingcap/tidb/pull/16689)
+    -   `MemBuffer`がチェックされていないため、明示的なトランザクションの複数の行で`INSERT ... ON DUPLICATE UPDATE`ステートメントが誤って実行される可能性がある問題を修正します[＃16689](https://github.com/pingcap/tidb/pull/16689)
     -   複数の行で重複したキーをロックするときのデータの不整合を修正[＃16769](https://github.com/pingcap/tidb/pull/16769)
     -   TiDBインスタンス間の非スーパーバッチアイドル接続をリサイクルするときに発生するpanicを修正します[＃16303](https://github.com/pingcap/tidb/pull/16303)
 
@@ -61,7 +61,7 @@ TiDBバージョン：4.0.0-rc.1
     -   コプロセッサー要求のバッチでのTiFlashへの送信をサポート[＃16226](https://github.com/pingcap/tidb/pull/16226)
     -   コプロセッサーのキャッシュ機能をデフォルトで有効にする[＃16710](https://github.com/pingcap/tidb/pull/16710)
     -   SQLステートメントの特別なコメントでステートメントの登録されたセクションのみを解析します[＃16157](https://github.com/pingcap/tidb/pull/16157)
-    -   PDおよびTiKVインスタンスの構成を表示するための`SHOW CONFIG`構文の使用をサポート[＃16475](https://github.com/pingcap/tidb/pull/16475)
+    -   PDおよびTiKVインスタンスの構成を表示するための`SHOW CONFIG`構文の使用をサポートします[＃16475](https://github.com/pingcap/tidb/pull/16475)
 
 -   TiKV
 
@@ -126,7 +126,7 @@ TiDBバージョン：4.0.0-rc.1
 -   TiKV
 
     -   OpenSSLのセキュリティ問題に対処する：CVE-2020-1967 [＃7622](https://github.com/tikv/tikv/pull/7622)
-    -   楽観的なトランザクション[＃7604](https://github.com/tikv/tikv/pull/7604)に多くの書き込み競合が存在する場合は、パフォーマンスを向上させるために`BatchRollback`で書き込まれたロールバックレコードを保護しないでください。
+    -   楽観的なトランザクションに多くの書き込み競合が存在する場合は、パフォーマンスを向上させるために`BatchRollback`で書き込まれたロールバックレコードを保護しないでください[＃7604](https://github.com/tikv/tikv/pull/7604)
     -   トランザクションの不必要なウェイクアップにより、重いロックレースワークロードで無駄な再試行とパフォーマンスの低下が発生する問題を修正します[＃7551](https://github.com/tikv/tikv/pull/7551)
     -   リージョンが複数回のマージでスタックする可能性がある問題を修正します[＃7518](https://github.com/tikv/tikv/pull/7518)
     -   学習者[＃7518](https://github.com/tikv/tikv/pull/7518)を削除するときに学習者が削除されない問題を修正します

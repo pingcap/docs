@@ -29,7 +29,7 @@ TiDB Ansibleバージョン：3.0.5
     -   `HashAgg`が[＃12766](https://github.com/pingcap/tidb/pull/12766)の子ノードとして機能するときにクエリがハングする問題を修正し`Apply`
     -   型変換[＃12811](https://github.com/pingcap/tidb/pull/12811)に関して、 `AND`と`OR`の論理式が誤った結果を返す問題を修正します。
 -   サーバ
-    -   トランザクションTTLを変更するインターフェース機能を実装して、後で大規模なトランザクションをサポートできるようにします[＃12397](https://github.com/pingcap/tidb/pull/12397)
+    -   後で大規模なトランザクションをサポートできるようにトランザクションTTLを変更するインターフェイス機能を実装する[＃12397](https://github.com/pingcap/tidb/pull/12397)
     -   悲観的なトランザクションをサポートするために、必要に応じてトランザクションTTLの拡張をサポートします（最大10分） [＃12579](https://github.com/pingcap/tidb/pull/12579)
     -   TiDBがスキーマの変更と対応する変更されたテーブル情報を100から1024にキャッシュする回数を調整し、 `tidb_max_delta_schema_count`のシステム変数[＃12502](https://github.com/pingcap/tidb/pull/12502)を使用して変更をサポートします。
     -   `kvrpc.Cleanup`プロトコルの動作を更新して、時間外でないトランザクションのロックをクリーンアップしないようにします[＃12417](https://github.com/pingcap/tidb/pull/12417)
@@ -44,7 +44,7 @@ TiDB Ansibleバージョン：3.0.5
     -   `Create Table`操作でSet列[＃12267](https://github.com/pingcap/tidb/pull/12267)のIntタイプのデフォルト値が正しく設定されない問題を修正します。
     -   `Create Table`ステートメントで一意のインデックスを作成するときに複数の`unique`をサポートする[＃12463](https://github.com/pingcap/tidb/pull/12463)
     -   この列のデフォルト値を既存の行に入力すると、 `Alter Table`を使用してビットタイプの列を追加するときにエラーが発生する可能性がある問題を修正し[＃12489](https://github.com/pingcap/tidb/pull/12489) 。
-    -   Rangeパーティションテーブルが日付または日時タイプの列をパーティションキーとして使用する場合のパーティションの追加の失敗を修正します[＃12815](https://github.com/pingcap/tidb/pull/12815)
+    -   RangeパーティションテーブルがDateまたはDatetimeタイプの列をパーティションキーとして使用する場合のパーティションの追加の失敗を修正します[＃12815](https://github.com/pingcap/tidb/pull/12815)
     -   テーブルの作成時またはパーティションの追加時に、パーティションキーとして[日付]または[日時タイプ]列を持つ範囲パーティションテーブルのパーティションタイプとパーティションキータイプの整合性のチェックをサポートします[＃12792](https://github.com/pingcap/tidb/pull/12792)
     -   範囲パーティションテーブル[＃12718](https://github.com/pingcap/tidb/pull/12718)を作成するときに、一意キー列セットがパーティション列セット以上である必要があるというチェックを追加します。
 -   モニター

@@ -247,7 +247,7 @@ Query OK, 0 rows affected (0.01 sec)
 | :----------------------------------------- | :----------------------------------------------- |
 | `log.level`                                | ログレベル                                            |
 | `cluster-version`                          | クラスタバージョン                                        |
-| `schedule.max-merge-region-size`           | `Region Merge`のサイズ制限を制御します（MB単位）                 |
+| `schedule.max-merge-region-size`           | `Region Merge`のサイズ制限を制御します（MiB単位）                |
 | `schedule.max-merge-region-keys`           | `Region Merge`キーの最大数を指定します                       |
 | `schedule.patrol-region-interval`          | `replicaChecker`がリージョンのヘルス状態をチェックする頻度を決定します      |
 | `schedule.split-merge-interval`            | 同じリージョンで分割およびマージ操作を実行する時間間隔を決定します                |

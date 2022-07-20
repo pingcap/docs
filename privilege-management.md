@@ -265,7 +265,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 テーブルに`INDEX`の特権が必要です。
 
-### CREATE TABLE {#create-table}
+### テーブルの作成 {#create-table}
 
 テーブルに`CREATE`の特権が必要です。
 
