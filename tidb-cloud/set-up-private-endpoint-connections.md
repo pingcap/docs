@@ -140,7 +140,6 @@ After you have choosen a region, you are at the **Interface Endpoint** stage. Wh
 
         ```bash
         # Sets up the related variables.
-        pcx_tidb_to_app_id="<TiDB peering id>"
         app_region="<APP Region>"
         app_vpc_id="<Your VPC ID>"
         tidbcloud_project_cidr="<TiDB Cloud Project VPC CIDR>"
@@ -221,22 +220,3 @@ The cost of private endpoint contains the following parts:
 - The cost of the private endpoint: $0.01/hour per VPC per endpoint. For details, see [AWS PrivateLink pricing - Interface Endpoint pricing](https://aws.amazon.com/privatelink/pricing/?nc1=h_ls).
 - The cost of endpoint service or network load balancer. For details, see [AWS Elastic Load Balancing pricing](https://aws.amazon.com/elasticloadbalancing/pricing/).
 - The cost of data transfer, which is the same as the EC2 data transfer charges. For details, see [TiDB Cloud - Data transfer cost](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#data-transfer-cost) or [AWS EC2 pricing](https://aws.amazon.com/ec2/pricing/on-demand/).
-
-## Status information of private endpoint and private endpoint service
-
-You can see the status of a private endpoint or private endpoint service on the [**Private Endpoint** page](#step-1-find-the-entrance).
-
-The possible statuses of a private endpoint are explained as follows:
-
-- **Not Configured**: You have just created an endpoint service but have not yet created a private endpoint. If you click **Edit** of that row, you are directed to the **Interface Endpoint** stage of creating a private endpoint. See [Step 4. Create an endpoint service](#step-4-create-an-endpoint-service) for details.
-- **Initiating**: The private endpoint is being initiated or verified after you fill in your VPC ID at the **Interface Endpoint** stage of creating a private endpoint. If you open a new **Private Endpoint** page, you will see that the **Edit** button of the row is disabled.
-- **Pending**: After your VPC ID is verified at the **Interface Endpoint** stage of creating a private endpoint, you have not yet enabled the private DNS. If you click **Edit** of that row, you are directed to the **Enable Private DNS** stage of creating a private endpoint. See [Step 6. Enable Private DNS](#step-6-enable-private-dns) for details.
-- **Active**: Your private endpoint is ready to use. You cannot edit the private endpoint of this status.
-- **Deleting**: The private endpoint is being deleted.
-- **Failed**: The private endpoint creation fails. You can click **Edit** of that row to retry the creation.
-
-The possible statuses of a private endpoint service are explained as follows:
-
-- **Creating**: The endpoint service is being created, which takes 3 to 5 minutes.
-- **Active**: The endpoint service is created, no matter whether the private endpoint is created or not.
-- **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
