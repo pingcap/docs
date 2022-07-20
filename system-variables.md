@@ -545,10 +545,33 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
 - Type: Integer
+
+<CustomContent platform="tidb">
+
 - Default value: `2`
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Default value: `1`
+
+</CustomContent>
+
 - Range: `[1, 2]`
 - Controls how TiDB collects statistics.
+
+<CustomContent platform="tidb">
+
 - In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- For detailed introduction of this variable, see [Introduction to Statistics](/statistics.md).
+
+</CustomContent>
 
 ### tidb_auto_analyze_end_time
 
@@ -963,8 +986,27 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: NONE
 - Type: Boolean
+
+<CustomContent platform="tidb">
+
 - Default value: `OFF`
-- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled. To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- Default value: `ON`
+
+</CustomContent>
+
+- This variable indicates whether the TiDB server you are connected to has the Security Enhanced Mode (SEM) enabled.
+
+<CustomContent platform="tidb">
+
+- To change its value, you need to modify the value of `enable-sem` in your TiDB server configuration file and restart the TiDB server.
+
+</CustomContent>
+
 - SEM is inspired by the design of systems such as [Security-Enhanced Linux](https://en.wikipedia.org/wiki/Security-Enhanced_Linux). It reduces the abilities of users with the MySQL `SUPER` privilege and instead requires `RESTRICTED` fine-grained privileges to be granted as a replacement. These fine-grained privileges include:
     - `RESTRICTED_TABLES_ADMIN`: The ability to write data to system tables in the `mysql` schema and to see sensitive columns on `information_schema` tables.
     - `RESTRICTED_STATUS_ADMIN`: The ability to see sensitive variables in the command `SHOW STATUS`.

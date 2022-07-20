@@ -5,7 +5,19 @@ summary: Learn how the statistics collect table-level and column-level informati
 
 # Introduction to Statistics
 
-TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`. In versions before v5.1.0, the default value of this variable is `1`. In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+TiDB uses statistics to decide [which index to choose](/choose-index.md). The `tidb_analyze_version` variable controls the statistics collected by TiDB. Currently, two versions of statistics are supported: `tidb_analyze_version = 1` and `tidb_analyze_version = 2`.
+
+<CustomContent platform="tidb">
+
+In versions before v5.1.0, the default value of this variable is `1`. In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For TiDB Cloud, the default value of this variable is `1`.
+
+</CustomContent>
 
 > **Note:**
 >
@@ -112,11 +124,23 @@ You can perform full collection using the following syntax.
 
 Before v5.3.0, TiDB uses the reservoir sampling method to collect statistics. Since v5.3.0, the TiDB Version 2 statistics uses the Bernoulli sampling method to collect statistics by default. To re-use the reservoir sampling method, you can use the `WITH NUM SAMPLES` statement.
 
+The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
+
+<CustomContent platform="tidb">
+
 > **Note:**
 >
-> The current sampling rate is calculated based on an adaptive algorithm. When you can observe the number of rows in a table using [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md), you can use this number of rows to calculate the sampling rate corresponding to 100,000 rows. If you cannot observe this number, you can use the `TABLE_KEYS` column in the [`TABLE_STORAGE_STATS`](/information-schema/information-schema-table-storage-stats.md) table as another reference to calculate the sampling rate.
->
 > Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through the methods like [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> Normally, `STATS_META` is more credible than `TABLE_KEYS`. However, after importing data through TiDB Cloud console (see [Import Sample Data](/tidb-cloud/import-sample-data.md)), the result of `STATS_META` is `0`. To handle this situation, you can use `TABLE_KEYS` to calculate the sampling rate when the result of `STATS_META` is much smaller than the result of `TABLE_KEYS`.
+
+</CustomContent>
 
 ##### Collect statistics on some columns
 
@@ -417,7 +441,19 @@ The following are the `ANALYZE` configurations that support persistence:
 
 #### Enable ANALYZE configuration persistence
 
-The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and `tidb_persist_analyze_options` is `ON` by default). You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
+<CustomContent platform="tidb">
+
+The `ANALYZE` configuration persistence feature is enabled by default (the system variable `tidb_analyze_version` is `2` and `tidb_persist_analyze_options` is `ON` by default).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The `ANALYZE` configuration persistence feature is disabled by default. To enable the feature, ensure that the system variable `tidb_persist_analyze_options` is `ON` and set the system variable `tidb_analyze_version` to `2`.
+
+</CustomContent>
+
+You can use this feature to record the persistence configurations specified in the `ANALYZE` statement when executing the statement manually. Once recorded, the next time TiDB automatically updates statistics or you manually collect statistics without specifying these configuration, TiDB will collect statistics according to the recorded configurations.
 
 When you manually execute the `ANALYZE` statement multiple times with persistence configurations specified, TiDB overwrites the previously recorded persistent configuration using the new configurations specified by the latest `ANALYZE` statement.
 
