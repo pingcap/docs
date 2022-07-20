@@ -21,7 +21,7 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Prerequisites
 
-- You are using a TiDB Cloud Dedicated tier or POC tier. Audit logging is not available for TiDB Cloud Developer Tier clusters.
+- You are using a TiDB Cloud Dedicated tier. Audit logging is not available for TiDB Cloud Developer Tier clusters.
 - You are the audit administrator of your organization in TiDB Cloud. Otherwise, you cannot see the audit-related options in the TiDB Cloud console. For more information, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
 
 ## Enable audit logging for AWS or GCP
