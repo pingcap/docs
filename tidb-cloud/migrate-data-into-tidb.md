@@ -15,9 +15,9 @@ This document describes how to use [Dumpling](https://docs.pingcap.com/tidb/stab
 
 ## Prerequisites
 
-Before migrating data from MySQL-compatible databases into TiDB, ensure that the supported collations of TiDB can meet your requirements.
+Before migrating data from MySQL-compatible databases into TiDB, ensure that the supported collations of TiDB Cloud can meet your requirements.
 
-By default, TiDB supports the following CI collations:
+By default, TiDB Cloud supports the following CI collations:
 
 - ascii_bin
 - binary
