@@ -70,6 +70,14 @@ To delete an existing backup file, perform the following steps:
 
 2. Click **Delete** for the backup file that you want to delete.
 
+### Delete a running backup job
+
+To delete a running backup job, it is similar as [**Delete backup files**](#delete-backup-files).
+
+1. Navigate to the **Backup** tab of a cluster.
+
+2. Click **Delete** for the backup file that is in the **Pending** or **Running** state.
+
 ### Best practices for backup
 
 - It is recommended that you perform backup operations at cluster idle time to minimize the impact on business.
