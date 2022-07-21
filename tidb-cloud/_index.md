@@ -9,7 +9,7 @@ hide_commit: true
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
+[Why TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro)
 
 [Architecture](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro#architecture)
 
@@ -33,13 +33,13 @@ hide_commit: true
 
 [Connect to a Cluster](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)
 
-[Scale Clusters](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
+[Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/tiflash-overview)
 
-[Tune Performance](https://docs.pingcap.com/tidbcloud/tune-performance)
+[Scale a Cluster](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[Upgrade Clusters](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
+[Upgrade a Cluster](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
 
-[Delete Clusters](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
+[Delete a Cluster](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
 
 </LearningPath>
 
@@ -47,15 +47,15 @@ hide_commit: true
 
 [Import sample data](https://docs.pingcap.com/tidbcloud/import-sample-data)
 
-[MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
+[From MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
 
-[Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
+[From Amazon Aurora MySQL](https://docs.pingcap.com/tidbcloud/migrate-from-aurora-bulk-import)
 
-[Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
+[From Amazon S3 or GCS](https://docs.pingcap.com/tidbcloud/migrate-from-amazon-s3-or-gcs)
 
-[CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
-[Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
 </LearningPath>
 
@@ -65,21 +65,21 @@ hide_commit: true
 
 [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
 
-[Datadog Integration](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
+[Use Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
-[Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+[Use Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
 
 </LearningPath>
 
 <LearningPath label="User Access" icon="users">
-
-[Sign in and sign out](https://docs.pingcap.com/tidbcloud/manage-user-access)
 
 [Manage Passwords](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
 
 [Manage Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles)
 
 [View Organization and Project](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
+
+[Invite a member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
 
 [Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
 
