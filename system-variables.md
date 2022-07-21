@@ -997,7 +997,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 <CustomContent platform="tidb-cloud">
 
 - Default value: `ON`
-- This variable is ready-only. For TiDB Cloud, the Security Enhanced Mode (SEM) is enabled by default.
+- This variable is read-only. For TiDB Cloud, the Security Enhanced Mode (SEM) is enabled by default.
 
 </CustomContent>
 
