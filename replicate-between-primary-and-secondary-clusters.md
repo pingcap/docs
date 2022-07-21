@@ -1,6 +1,10 @@
 ---
 title: Replicate data between primary and secondary clusters
 summary: Learn how to replicate data from a primary cluster to a secondary cluster.
+<<<<<<< HEAD:replicate-betwwen-primary-and-secondary-clusters.md
+=======
+aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/dev/replicate-betwwen-primary-and-secondary-clusters/']
+>>>>>>> 9743d42d3 (betwwen → between (#9664)):replicate-between-primary-and-secondary-clusters.md
 ---
 
 # Replicate Data Between Primary and Secondary Clusters
