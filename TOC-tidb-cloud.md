@@ -343,9 +343,12 @@
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
-  - TiKV
-    - [TiKV Overview](/tikv-overview.md)
-    - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+  - Storage Engines
+    - TiKV
+        - [TiKV Overview](/tikv-overview.md)
+        - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
+    - TiFlash
+        - [TiFlash Overview](/tiflash/tiflash-overview.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
