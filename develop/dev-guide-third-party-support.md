@@ -14,7 +14,7 @@ PingCAP works with community and provides the following levels of support:
 - **_Full_**: Indicates that PingCAP is already compatible with most of the tool's functionalities, and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of third-party tools documented in the table below.
 - **_Beta_**: Indicates that PingCAP is working on providing support for the tool. Primary features of the tool are compatible with TiDB, but the lack of complete compatibility test may lead to some unexpected behavior.
 
-> **Warn:**
+> **Warning:**
 >
 > Unless specified, support for [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) are not included for **Driver** or **ORM frameworks**.
 
