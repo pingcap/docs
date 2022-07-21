@@ -12,7 +12,7 @@ TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frame
 PingCAP works with community and provides the following levels of support:
 
 - **_Full_**: Indicates that PingCAP is already compatible with most of the tool's functionalities, and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of third-party tools documented in the table below.
-- **_Beta_**: Indicates that PingCAP is working on providing support for the tool. The primary features of the tool is compatible with TiDB, but the lack of complete features testing may lead to some unexpected behavior.
+- **_Beta_**: Indicates that PingCAP is working on providing support for the tool. Primary features of the tool are compatible with TiDB, but the lack of complete compatibility test may lead to some unexpected behavior.
 
 > **Warn:**
 >
@@ -28,7 +28,7 @@ If you are facing problems connecting to TiDB using the tools listed in this art
 | C#(.Net)   | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/)       | 8.0.28  | Beta | N/A                                                                                        | N/A                                                                            |
 | C#(.Net)   | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/)     | 8.0.28  | Beta | N/A                                                                                        | N/A                                                                            |
 | Go         | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)            | v1.6.0  | Full | N/A                                                                                        | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
-| Java       | [JDBC](https://dev.mysql.com/downloads/connector/j/)                     | 5.1.46；8.0.29  | Full | 5.1.46：N/A；8.0.29：[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0)                                                                                     | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)     |
+| Java       | [JDBC](https://dev.mysql.com/downloads/connector/j/)                     | 5.1.46;8.0.29  | Full | 5.1.46：N/A;8.0.29:[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0)                                                                                     | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)     |
 | JavaScript | [mysql](https://github.com/mysqljs/mysql)                                | v2.18.1 | Beta | N/A                                                                                        | N/A                                                                            |
 | PHP        | [MySQL Connector/PHP](https://downloads.mysql.com/archives/c-php/)       | 5.0.37  | Beta | N/A                                                                                        | N/A                                                                            |
 | Python     | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0.28  | Beta | N/A                                                                                        | N/A                                                                            |
