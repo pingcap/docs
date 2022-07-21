@@ -16,7 +16,7 @@ PingCAP works with community and provides the following levels of support:
 
 > **Warn:**
 >
-> Unless specifically stated, [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) are not included for supported **Driver** or **ORM frameworks**.
+> Unless specified, support for [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) are not included for **Driver** or **ORM frameworks**.
 
 If you are having problems connecting to TiDB using the tools listed in this article, please submit an [issue](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md) on GitHub with details to help this tool making better.
 
