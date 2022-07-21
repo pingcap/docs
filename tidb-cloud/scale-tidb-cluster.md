@@ -15,7 +15,7 @@ You can scale a TiDB cluster in the following dimensions:
 
 - Node number of TiDB, TiKV, and TiFlash
 - Storage size of TiKV and TiFlash
-- Node size of TiDB, TiKV, and TiFlash
+- Node size (including vCPUs and memory) of TiDB, TiKV, and TiFlash
 
 For information about how to determine the size of your TiDB cluster, see [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md).
 
