@@ -24,9 +24,6 @@ Make sure that you have read the following documents:
 
 You can deploy TiUP on the control machine in either of the two ways: online deployment and offline deployment.
 
-<SimpleTab>
-<div label="Deploy TiUP online">
-
 ### Deploy TiUP online
 
 Log in to the control machine using a regular user account (take the `tidb` user as an example). Subsequent TiUP installation and cluster management can be performed by the `tidb` user.
@@ -204,9 +201,6 @@ source /home/tidb/.bash_profile
 The `local_install.sh` script automatically runs the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
 
 To switch the mirror to another directory, run the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, run the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
-
-</div>
-</SimpleTab>
 
 ## Step 3. Initialize cluster topology file
 
