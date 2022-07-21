@@ -69,7 +69,7 @@ When resuming an incremental replication task from the checkpoint, DM determines
 
     In the second case, DM does not know which binlog events after the checkpoint are executed in the downstream. To ensure that repeatedly executed binlog events do not cause any problems, DM automatically enables safe mode between the preceding two checkpoints. The default interval between two checkpoints is 30 seconds, which means when a normal incremental replication task starts, safe mode is enforced for the first 60 seconds (2 * 30 seconds).
 
-    You can change the checkpoint interval by setting the `checkpoint-flush-interval` item in syncer configuration, thereby adjusting the safe mode period at the beginning of a incremental replication task. It is not recommended to adjust this setting. If necessary, you can [manually enable safe mode](#manually-enable).
+    Usually, it is not recommended to change the checkpoint interval to adjust the safe mode period at the beginning of the incremental replication task. However, if you do need a change, you can [manually enable safe mode](#manually-enable) (recommended) or set the `checkpoint-flush-interval` item in syncer configuration.
 
 ### Manually enable
 
