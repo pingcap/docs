@@ -44,14 +44,24 @@ This document describes the common usage limitations of TiDB, including the maxi
 | Size      | unlimited |
 | Partitions | 8192     |
 
+<CustomContent platform="tidb">
+
 * The upper limit of `Columns` can be modified via [`table-column-count-limit`](/tidb-configuration-file.md#table-column-count-limit-new-in-v50).
 * The upper limit of `Indexes` can be modified via [`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50).
+
+</CustomContent>
 
 ## Limitation on a single row
 
 | Type       | Upper limit   |
 |:----------|:----------|
-| Size       | 6 MB by default. You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item. |
+| Size       | 6 MB  |
+
+<CustomContent platform="tidb">
+
+You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) configuration item.
+
+</CustomContent>
 
 ## Limitation on a single column
 
@@ -74,8 +84,18 @@ This document describes the common usage limitations of TiDB, including the maxi
 
 | Type       | Upper limit   |
 |:----------|:----------|
+<<<<<<< HEAD
 | The maximum number of SQL statements in a single transaction |  When the optimistic transaction is used and the transaction retry is enabled, the default upper limit is 5000, which can be modified using [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit). |
 
 ## Limitations on TiKV version
 
 In your cluster, if the version of the TiDB component is v6.2.0 or later, the version of TiKV must be v6.2.0 or later.
+=======
+| The maximum number of SQL statements in a single transaction |  When the optimistic transaction is used and the transaction retry is enabled, the upper limit is 5000. |
+
+<CustomContent platform="tidb">
+
+You can modify the limit via the [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit) configuration item.
+
+</CustomContent>
+>>>>>>> 81f07d13d (cloud: add SQL and TiFlash related docs (#9001) (#9479))

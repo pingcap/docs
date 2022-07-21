@@ -19,7 +19,17 @@ hide_commit: true
 
 <LearningPath label="Try" icon="cloud5">
 
+<<<<<<< HEAD
 [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
+=======
+- [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
+- [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
+- [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
+- [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md)
+- [Use an HTAP Cluster](/tiflash/tiflash-overview.md)
+- [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
+- [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+>>>>>>> 81f07d13d (cloud: add SQL and TiFlash related docs (#9001) (#9479))
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
