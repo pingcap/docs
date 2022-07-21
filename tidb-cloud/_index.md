@@ -29,7 +29,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
 - [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
 - [Connect to a TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md)
-- [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md)
+- [Use an HTAP Cluster](/tiflash/tiflash-overview.md)
 - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
 - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
 

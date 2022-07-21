@@ -163,7 +163,7 @@ The following are tips for performance tuning:
     - Check the SQL execution plan on the **Diagnostic > Statements** page.
     - Check hotspot issues on the **Dashboard > Key Visualizer** page.
     - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
-    - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
+    - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tiflash/tiflash-overview.md).
 
 ## Step 7. Explore more features
 
