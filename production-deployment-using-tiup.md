@@ -80,10 +80,6 @@ Log in to the control machine using a regular user account (take the `tidb` user
     tiup --binary cluster
     ```
 
-</div>
-
-<div label="Deploy TiUP offline">
-
 ### Deploy TiUP offline
 
 Perform the following steps in this section to deploy a TiDB cluster offline using TiUP:
