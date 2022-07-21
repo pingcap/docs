@@ -1703,13 +1703,13 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 <CustomContent platform="tidb">
 
-- This variable is used to adjust the maximum days of logger on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
+- This variable is used to set the maximum days that the log is retained on the current TiDB instance. Its value defaults to the value of the [`max-days`](/tidb-configuration-file.md#max-days) configuration in the configuration file. Changing the variable value only affects the current TiDB instance. After TiDB is restarted, the variable value is reset and the configuration value is not affected.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- This variable is used to adjust the maximum days of logger on the current TiDB instance.
+- This variable is used to set the maximum days that the log is retained on the current TiDB instance.
 
 </CustomContent>
 
