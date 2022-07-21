@@ -68,6 +68,8 @@ To make these charges easier to view, your TiDB Cloud bills and invoices aggrega
 - Data transfer – Cross Region
 - Data transfer – Internet
 
+If you are using the private endpoint connection with AWS PrivateLink, the cost is $0.01/hour per VPC per endpoint. For details, see [AWS PrivateLink pricing - Interface Endpoint pricing](https://aws.amazon.com/privatelink/pricing/?nc1=h_ls).
+
 ## Invoices
 
 If you are the owner or billing administrator of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
