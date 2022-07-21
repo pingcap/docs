@@ -5,7 +5,7 @@ summary: Support level for Third-Party.
 
 # Third-Party Libiaries Supported by PingCAP
 
-TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frameworks and other tools that adapt to MySQL compatible with TiDB. This page focuses on these tools support levels.
+TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frameworks and other tools that adapt to MySQL compatible with TiDB. This page focuses on these tools and their support levels.
 
 ## Support Level
 
