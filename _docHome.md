@@ -67,13 +67,19 @@ Learn how to deploy TiDB locally in production
 
 The open source TiDB platform released under the Apache 2.0 license, and supported by the community
 
-<a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
+<a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Download</a>
 
 </DocHomeSection>
 
 <DocHomeSection label="Developers" anchor="developers" id="developers">
 
 <DocHomeCardContainer>
+
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Docs for TiDB">
+
+Docs for developers of TiDB
+
+</DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-django" icon="python" label="Python">
 
@@ -96,12 +102,6 @@ Golang applications can connect to and communicate with TiDB through a native dr
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="cloud6" label="OSS Insight">
 
 A powerful insight tool that can help you analyze in depth any single GitHub repository
-
-</DocHomeCard>
-
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Docs for TiDB">
-
-Docs for developers of TiDB
 
 </DocHomeCard>
 
@@ -134,6 +134,18 @@ See a compilation of short videos describing TiDB and a variety of use cases
 <DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
 Well designed online courses and instructor led-training to teach you TiDB and TiDB Cloud.
+
+</DocHomeCard>
+
+<DocHomeCard href="https://en.pingcap.com/event/" icon="events" label="Events">
+
+Learn events about PingCAP and the community
+
+</DocHomeCard>
+
+<DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
+
+Download eBooks and Papers
 
 </DocHomeCard>
 
