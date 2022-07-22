@@ -75,9 +75,9 @@ The open source TiDB platform released under the Apache 2.0 license, and support
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Docs for TiDB">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Guide">
 
-Docs for developers of TiDB
+Docs for application developers
 
 </DocHomeCard>
 
