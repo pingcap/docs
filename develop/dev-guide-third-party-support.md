@@ -1,5 +1,5 @@
 ---
-title: Third-Party Libiaries Supported by PingCAP
+title: Third-Party Libraries Supported by PingCAP
 summary: Support level for Third-Party.
 ---
 
