@@ -101,6 +101,12 @@ Golang applications can connect to and communicate with TiDB through a native dr
 
 <DocHomeCardContainer>
 
+<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
+
+Well designed online courses and instructor led-training to teach you TiDB and TiDB Cloud.
+
+</DocHomeCard>
+
 <DocHomeCard href="https://en.pingcap.com/community/" icon="doc9" label="Community">
 
 Join us on Slack or become a contributor
@@ -116,12 +122,6 @@ Learn great articles about TiDB
 <DocHomeCard href="https://en.pingcap.com/videos/" icon="doc11" label="Videos">
 
 See a compilation of short videos describing TiDB and a variety of use cases
-
-</DocHomeCard>
-
-<DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
-
-Well designed online courses and instructor led-training to teach you TiDB and TiDB Cloud.
 
 </DocHomeCard>
 
