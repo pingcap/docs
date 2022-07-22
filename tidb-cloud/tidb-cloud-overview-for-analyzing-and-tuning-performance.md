@@ -104,7 +104,7 @@ On the cluster [Overview](/tidb-cloud/monitor-tidb-cluster.md) page, check the s
 
 #### Other issues
 
-If the previous methods cannot resolve the performance issue, you can contact the  [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help. It is recommended to provide the following information to speed up the troubleshooting process.
+If the previous methods cannot resolve the performance issue, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for help. It is recommended to provide the following information to speed up the troubleshooting process.
 
 - The cluster ID
 - The issue interval and a comparable normal interval
@@ -118,7 +118,7 @@ In general, you can use the following optimization methods to analyze and resolv
 | Action | Effect |
 |:--|:--|
 | Prepared plan cache + JDBC | Throughput performance will be greatly improved, latency will be significantly reduced, and the average TiDB CPU utilization will be significantly reduced. |
-| Enable AsyncIO and Raft-engine in TiKV | There will be some improvement in throughput performance. |
+| Enable AsyncIO and Raft-engine in TiKV | There will be some improvement in throughput performance. You need to contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) to enable it. |
 | Clustered Index | Throughput performance will be greatly improved. |
 | Scale out TiDB nodes |Throughput performance will be greatly improved.  |
 | Client-side optimization. Split 1 JVM into 3 | Throughput performance will improve significantly and may further continue to improve throughput capacity if further split. |
