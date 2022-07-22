@@ -1,12 +1,13 @@
 ---
 title: Physical Import Mode
+summary: Learn about the physical import mode in TiDB Lightning.
 ---
 
 # Physical Import Mode
 
-Physical import mode is an efficient and fast import mode that inserts data directly into TiKV ndoes as key-value pairs without going through the SQL interface. It is suitable for importing up to 100 TB of data.
+Physical import mode is an efficient and fast import mode that inserts data directly into TiKV nodes as key-value pairs without going through the SQL interface. It is suitable for importing up to 100 TB of data.
 
-Before you use physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
+Before you use the physical import mode, make sure to read [Requirements and restrictions](#requirements-and-restrictions).
 
 ## Implementation
 
@@ -16,7 +17,7 @@ Before you use physical import mode, make sure to read [Requirements and restric
 
 3. Each table is divided into multiple contiguous **blocks**, so that Lightning can import data data from large tables (200 GB+) in parallel.
 
-4. `tidb-lightning` prepares a "engine file" for each block to handle key-value pairs. `tidb-lightning` reads the SQL dump in parallel, converts the data source to key-value pairs in the same encoding as TiDB, sorts the key-value pairs and writes them to a local temporary storage file.
+4. `tidb-lightning` prepares an "engine file" for each block to handle key-value pairs. `tidb-lightning` reads the SQL dump in parallel, converts the data source to key-value pairs in the same encoding as TiDB, sorts the key-value pairs and writes them to a local temporary storage file.
 
 5. When an engine file is written, `tidb-lightning` starts to split and schedule data on the target TiKV cluster, and then imports data to TiKV cluster.
 
@@ -29,8 +30,6 @@ Before you use physical import mode, make sure to read [Requirements and restric
 7. After all steps are completed, `tidb-lightning` automatically switches the TiKV nodes to "normal mode", and the TiDB cluster can provide services normally.
 
 ## Requirements and restrictions
-
-### 运行环境需求
 
 ### Environment requirements
 
