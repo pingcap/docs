@@ -1,5 +1,6 @@
 ---
 title: Use Physical Import Mode
+summary: Learn how to use the physical import mode in TiDB Lightning.
 ---
 
 # Use Physical Import Mode
@@ -19,7 +20,7 @@ max-size = 128 # MB
 max-days = 28
 max-backups = 14
 
-# Check the cluster minimum requirements before start.
+# Checks the cluster minimum requirements before start.
 check-requirements = true
 
 [mydumper]
@@ -132,7 +133,7 @@ You can manually identify the records that need to be retained and insert these 
 - **Upgrade the hardware of the node where Lightning is deployed, especially the CPU and the storage device of `sorted-key-dir`.**
 - **Use the [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) feature to achieve horizontal scaling.**
 
-Lightning provides some concurrency-related configurations to affect Physical Import Mode import performance. However, from long-term experience, it is recommended to keep the following four configuration items in the the default value. Adjusting the four configuraitons does not bring significant performance boost.
+Lightning provides some concurrency-related configurations to affect Physical Import Mode import performance. However, from long-term experience, it is recommended to keep the following four configuration items in the default value. Adjusting the four configurations does not bring significant performance boost.
 
 ```
 [lightning]
@@ -145,7 +146,7 @@ index-concurrency = 2
 table-concurrency = 6
 
 # The concurrency of data. The default value is the number of logical CPUs.
-# region-concurrency =
+region-concurrency =
 
 # The maximum concurrency of I/O. When the concurrency is too high, the disk
 # cache may be frequently refreshed, causing the cache miss and read speed
@@ -156,9 +157,9 @@ io-concurrency = 5
 
 During the import, each table is split into one "index engine" to store indices, and multiple "data engines" to store row data.
 
-`index-concurrency` controls the maximum concurrency of the index engine. When you adjust `index-concurrency`, you need to ensure that `index-concurrency * the number of source files of each table > region-concurrency` to ensure that the cpu is fully utilized. The ratio is usually between 1.5 ~ 2. Do not set `index-concurrency` too high and not lower than 2 (default). Too high `index-concurrency` causes too many pipelines to be built, which causes the index-engine import stage to pile up.
+`index-concurrency` controls the maximum concurrency of the index engine. When you adjust `index-concurrency`, make sure that `index-concurrency * the number of source files of each table > region-concurrency` to ensure that the CPU is fully utilized. The ratio is usually between 1.5 ~ 2. Do not set `index-concurrency` too high and not lower than 2 (default). Too high `index-concurrency` causes too many pipelines to be built, which causes the index-engine import stage to pile up.
 
-The same goes for `table-concurrency`. Ensure that `table-concurrency * the number of source files of each table > region-concurrency` to ensure that the cpu is fully utilized. A recommended value is around `region-concurrency * 4 / the number of source files of each table` and not lower than 4.
+The same goes for `table-concurrency`. Make sure that `table-concurrency * the number of source files of each table > region-concurrency` to ensure that the CPU is fully utilized. A recommended value is around `region-concurrency * 4 / the number of source files of each table` and not lower than 4.
 
 If the table is large, Lightning will split the table into multiple batches of 100 GiB. The concurrency is controlled by `table-concurrency`.
 
@@ -166,6 +167,6 @@ If the table is large, Lightning will split the table into multiple batches of 1
 
 `io-concurrency` controls the concurrency of file read. The default value is 5. At any given time, only 5 handles are performing read operations. Because the file read speed is usually not a bottleneck, you can leave this configuration in the default value.
 
-After the file data is read, Lightning needs to do some post-processing, such as encoding and sorting the data locally. The concurrency of these operations is controlled by `region-concurrency`. The default value is the number of CPUs. You can leave this configuration in the default value. It is recommended to deploy Lightning on a separate servers from other components. If you must deploy Lightning with other components, you may need to lower `region-concurrency` according to the load.
+After the file data is read, Lightning needs to do some post-processing, such as encoding and sorting the data locally. The concurrency of these operations is controlled by `region-concurrency`. The default value is the number of CPUs. You can leave this configuration in the default value. It is recommended to deploy Lightning on a separate server from other components. If you must deploy Lightning together with other components, you need to lower `region-concurrency` according to the load.
 
 The [`num-threads`](/tikv-configuration-file.md#num-threads) configuration of TiKV can also affect the performance. New clusters should set `num-threads` to the number of CPUs.
