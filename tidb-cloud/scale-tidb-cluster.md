@@ -21,7 +21,7 @@ For information about how to determine the size of your TiDB cluster, see [Deter
 
 ## Change node number
 
-You can increase or decrease the number of TiDB, TiKV, or TiFlash nodes.
+You can change the number of TiDB, TiKV, or TiFlash nodes.
 
 ### Increase node number
 
@@ -59,7 +59,7 @@ To submit a support ticket, perform the steps in [TiDB Cloud Support](/tidb-clou
 
 ## Change storage size
 
-You can increase or decrease the storage size of TiKV or TiFlash.
+You can change the storage size of TiKV or TiFlash.
 
 ### Increase storage size
 
