@@ -217,6 +217,10 @@ The result is as follows:
 10 rows in set (0.00 sec)
 ```
 
+> **Tip:**
+>
+> If the efficiency of the default CTE queries is not good, you can use the [`MERGE()`](/optimizer-hints.md#merge) hint to expand the CTE subquery to the outer query to improve the efficiency.
+
 ## Read more
 
 - [WITH](/sql-statements/sql-statement-with.md)
