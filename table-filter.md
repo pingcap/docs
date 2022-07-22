@@ -15,6 +15,8 @@ Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define 
 
 Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage in each tool.
 
+<CustomContent platform="tidb">
+
 * [BR](/br/backup-and-restore-overview.md):
 
     ```shell
@@ -25,17 +27,33 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
     ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
     ```
 
+</CustomContent>
+
 * [Dumpling](/dumpling-overview.md):
 
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
     ```
 
+<CustomContent platform="tidb">
+
 * [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md):
 
     ```shell
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
     ```
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview):
+
+    ```shell
+    ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
+    ```
+
+</CustomContent>
 
 ### TOML configuration files
 
@@ -48,6 +66,8 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     filter = ['foo*.*', 'bar*.*']
     ```
 
+<CustomContent platform="tidb">
+
 * [TiCDC](/ticdc/ticdc-overview.md):
 
     ```toml
@@ -58,6 +78,8 @@ Table filters in TOML files are specified as [array of strings](https://toml.io/
     matcher = ['db1.*', 'db2.*', 'db3.*']
     dispatcher = 'ts'
     ```
+
+</CustomContent>
 
 ## Syntax
 
