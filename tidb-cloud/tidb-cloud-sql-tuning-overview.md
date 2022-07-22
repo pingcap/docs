@@ -31,7 +31,7 @@ You can view some key information in **Statement**.
 
 - SQL statement overview: including SQL digest, SQL template ID, the time range currently viewed, the number of execution plans, and the database where the execution takes place.
 - Execution plan list: if a SQL statement has more than one execution plan, the list is displayed. You can select different execution plans and the details of the selected execution plan are displayed at the bottom of the list. If there is only one execution plan, the list will not be displayed.
-- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plan in details](/dashboard/dashboard-statement-details.md#execution-details-of-plans) (area 3 in the image below).
+- Execution plan details: shows the details of the selected execution plan. It collects the execution plans of such SQL type and the corresponding execution time from several perspectives to help you get more information. See [Execution plan in details](https://docs.pingcap.com/tidb/stable/dashboard-statement-details#statement-execution-details-of-tidb-dashboard) (area 3 in the image below).
 
 ![Details](/media/dashboard/dashboard-statement-detail.png)
 
@@ -73,6 +73,7 @@ See [Guidelines to follow when selecting primary keys](https://docs.pingcap.com/
 
 The speed of creating indexes is conservative by default, and the index creation process can be accelerated by [modifying variables](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices) in some scenarios.
 
+<!--
 ### Use the slow log memory mapping table
 
 You can query the contents of the slow query log by querying the [INFORMATION_SCHEMA.SLOW_QUERY](/identify-slow-queries.md#memory-mapping-in-slow-log) table, and find the structure in the [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md) table. Using this table, you can perform queries using different fields to find potential problems.
@@ -82,6 +83,7 @@ The recommended analysis process for slow queries is as follows.
 1. [Identify the performance bottleneck of the query](/analyze-slow-queries.md#identify-the-performance-bottleneck-of-the-query). That is, identify the part of the query process that takes long time.
 2. [Analyze system issues](/analyze-slow-queries.md#analyze-system-issues). According to the bottleneck point, combine the monitoring, logging and other information at that time to find the possible causes.
 3. [Analyze optimizer issues](/analyze-slow-queries.md#analyze-optimizer-issues). Analyze whether there is a better execution plan.
+-->
 
 ## Optimize schema design
 
@@ -89,21 +91,21 @@ If you still cannot get better performance based on SQL performance tuning, you 
 
 ### Transaction conflicts
 
-For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+For more information on how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts#troubleshoot-lock-conflicts).
 
 ### Hotspot issues
 
-You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer). For specific troubleshooting steps, see [TiDB Hotspot Issues](troubleshoot-hot-spot-issues.md).
+You can analyze hotspot issues using [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer).
 
 You can use Key Visualizer to analyze the usage patterns of TiDB clusters and troubleshoot traffic hotspots. This page provides a visual representation of the TiDB cluster's traffic over time.
 
-You can observe the following information in Key Visualizer. You may need to understand some [basic concepts](/dashboard/dashboard-key-visualizer.md) first.
+You can observe the following information in Key Visualizer. You may need to understand some [basic concepts](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts) first.
 
 - A large heat map that shows the overall traffic over time
 - The detailed information about a coordinate of the heat map
 - The identification information such as tables and indexes that is displayed on the left side
 
-In Key Visualizer, there are [four common heat map results](/dashboard/dashboard-key-visualizer.md#common-heatmap-types).
+In Key Visualizer, there are [four common heat map results](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#common-heatmap-types).
 
 - Evenly distributed workload: desired result
 - Alternating brightness and darkness along the X-axis (time): need to check the resources at peak times
@@ -112,4 +114,4 @@ In Key Visualizer, there are [four common heat map results](/dashboard/dashboard
 
 In both cases of X-axis and Y-axis alternating bright and dark, you need to address read and write pressure.
 
-For more information about SQL performance optimization, see [SQL Optimization](/faq/sql-faq.md#sql-optimization) in SQL FAQs.
+For more information about SQL performance optimization, see [SQL Optimization](https://docs.pingcap.com/tidb/stable/sql-faq#sql-optimization) in SQL FAQs.
