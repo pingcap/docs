@@ -71,6 +71,10 @@ To increase the storage size of TiKV or TiFlash, take the following steps:
 4. In the **Scale** window, increase the storage size of TiKV or TiFlash.
 5. Click **Confirm**.
 
+> **Note:**
+>
+> AWS has a cooldown period of storage size changes. If your TiDB cluster is hosted by AWS, after changing the storage size of TiKV or TiFlash, you must wait at least six hours before you can change it again.
+
 ### Decrease storage size
 
 For a running cluster, AWS and Google Cloud do not allow in-place storage capacity downgrade.
