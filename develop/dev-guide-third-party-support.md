@@ -1,11 +1,11 @@
 ---
 title: Third-Party Libraries Supported by PingCAP
-summary: Support level for Third-Party.
+summary: Learn about third-party libraries supported by PingCAP.
 ---
 
 # Third-Party Libraries Supported by PingCAP
 
-TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frameworks and other tools that adapt to MySQL compatible with TiDB. This page focuses on these tools and their support levels.
+TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frameworks, and other tools that adapt to MySQL compatible with TiDB. This document focuses on these tools and their support levels.
 
 ## Support Level
 
@@ -18,7 +18,7 @@ PingCAP works with community and provides the following levels of support:
 >
 > Unless specified, support for [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) are not included for **Driver** or **ORM frameworks**.
 
-If you are facing problems connecting to TiDB using the tools listed in this article, please submit an [issue](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md) on GitHub with details to promote support on this tool.
+If you encounter problems connecting to TiDB using the tools listed in this document, please submit an [issue](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md) on GitHub with details to promote support on this tool.
 
 ## Driver
 
@@ -28,7 +28,7 @@ If you are facing problems connecting to TiDB using the tools listed in this art
 | C#(.Net)   | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/)       | 8.0.28  | Beta | N/A                                                                                        | N/A                                                                            |
 | C#(.Net)   | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/)     | 8.0.28  | Beta | N/A                                                                                        | N/A                                                                            |
 | Go         | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)            | v1.6.0  | Full | N/A                                                                                        | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
-| Java       | [JDBC](https://dev.mysql.com/downloads/connector/j/)                     | 5.1.46;8.0.29  | Full | 5.1.46：N/A;8.0.29:[pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0)                                                                                     | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)     |
+| Java       | [JDBC](https://dev.mysql.com/downloads/connector/j/)                     | 5.1.46; 8.0.29  | Full | 5.1.46: N/A; 8.0.29: [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0)                                                                                     | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)     |
 | JavaScript | [mysql](https://github.com/mysqljs/mysql)                                | v2.18.1 | Beta | N/A                                                                                        | N/A                                                                            |
 | PHP        | [MySQL Connector/PHP](https://downloads.mysql.com/archives/c-php/)       | 5.0.37  | Beta | N/A                                                                                        | N/A                                                                            |
 | Python     | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0.28  | Beta | N/A                                                                                        | N/A                                                                            |
