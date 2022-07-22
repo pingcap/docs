@@ -29,55 +29,55 @@ hide_commit: true
 
 <LearningPath label="Develop" icon="doc8">
 
-[Overview](https://docs.pingcap.com/tidb/stable/dev-guide-overview)
+[Developer Guide Overview](https://docs.pingcap.com/tidb/stable/dev-guide-overview)
 
 [Quick Start](https://docs.pingcap.com/tidb/stable/dev-guide-build-cluster-in-cloud)
 
-[Example](https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-spring-boot)
+[Example Application](https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-spring-boot)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[Requirements](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements)
+[Software and Hardware Requirements](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements)
 
-[Checklist](https://docs.pingcap.com/tidb/stable/check-before-deployment)
+[Environment and Configuration Checklist](https://docs.pingcap.com/tidb/stable/check-before-deployment)
 
-[Install](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Tools](https://docs.pingcap.com/tidb/stable/migration-tools)
+[Migration Overview](https://docs.pingcap.com/tidb/stable/migration-overview)
 
-[Scenarios](https://docs.pingcap.com/tidb/stable/migrate-aurora-to-tidb)
+[Migration Tools](https://docs.pingcap.com/tidb/stable/migration-tools)
 
-[Overview](https://docs.pingcap.com/tidb/stable/migration-overview)
+[Typical Scenarios](https://docs.pingcap.com/tidb/stable/migrate-aurora-to-tidb)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[Upgrade](https://docs.pingcap.com/tidb/stable/upgrade-tidb-using-tiup)
+[Upgrade a Cluster](https://docs.pingcap.com/tidb/stable/upgrade-tidb-using-tiup)
 
-[Scale](https://docs.pingcap.com/tidb/stable/scale-tidb-using-tiup)
+[Scale a Cluster](https://docs.pingcap.com/tidb/stable/scale-tidb-using-tiup)
 
-[Backup](https://docs.pingcap.com/tidb/stable/br-usage-backup)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/stable/br-usage-backup)
 
-[Restore](https://docs.pingcap.com/tidb/stable/br-usage-restore)
+[Restore Cluster Data](https://docs.pingcap.com/tidb/stable/br-usage-restore)
 
 [Daily Check](https://docs.pingcap.com/tidb/stable/daily-check)
 
-[Use TiUP](https://docs.pingcap.com/tidb/stable/maintain-tidb-using-tiup)
+[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/stable/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Prometheus and Grafana](https://docs.pingcap.com/tidb/stable/tidb-monitoring-framework)
+[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/stable/tidb-monitoring-framework)
 
-[API](https://docs.pingcap.com/tidb/stable/tidb-monitoring-api)
+[Monitoring API](https://docs.pingcap.com/tidb/stable/tidb-monitoring-api)
 
 [Alert Rules](https://docs.pingcap.com/tidb/stable/migration-overview)
 
@@ -116,6 +116,8 @@ hide_commit: true
 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)
 
 [PingCAP Clinic](https://docs.pingcap.com/tidb/stable/clinic-introduction)
+
+[sync-diff-inspector](https://docs.pingcap.com/tidb/stable/sync-diff-inspector-overview)
 
 </LearningPath>
 

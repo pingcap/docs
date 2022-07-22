@@ -81,12 +81,6 @@ Docs for developers of TiDB
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-django" icon="python" label="Python">
-
-Python applications can connect to and communicate with TiDB through native drivers and ORM frameworks.
-
-</DocHomeCard>
-
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-java" icon="java" label="Java">
 
 Java applications can connect to and communicate with TiDB through JDBC or Swing, or with ORM frameworks like Hibernate.
@@ -96,12 +90,6 @@ Java applications can connect to and communicate with TiDB through JDBC or Swing
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="Golang">
 
 Golang applications can connect to and communicate with TiDB through a native driver and ORM frameworks.
-
-</DocHomeCard>
-
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="cloud6" label="OSS Insight">
-
-A powerful insight tool that can help you analyze in depth any single GitHub repository
 
 </DocHomeCard>
 
@@ -146,6 +134,12 @@ Learn events about PingCAP and the community
 <DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
 Download eBooks and Papers
+
+</DocHomeCard>
+
+<DocHomeCard href="https://ossinsight.io/" icon="cloud6" label="OSS Insight">
+
+A powerful insight tool that can help you analyze in depth any single GitHub repository
 
 </DocHomeCard>
 
