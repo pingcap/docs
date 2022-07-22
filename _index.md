@@ -43,7 +43,7 @@ hide_commit: true
 
 [Environment and Configuration Checklist](https://docs.pingcap.com/tidb/stable/check-before-deployment)
 
-[Deploy a TiDB Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
 
 </LearningPath>
 
