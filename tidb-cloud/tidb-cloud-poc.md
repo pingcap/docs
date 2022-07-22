@@ -163,7 +163,7 @@ The following are tips for performance tuning:
     - Check the SQL execution plan on the **Diagnostic > Statements** page.
     - Check hotspot issues on the **Dashboard > Key Visualizer** page.
     - Monitor if the TiDB cluster is running out of capacity on the **Overview > Capacity Metrics** page.
-    - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tidb-cloud/use-htap-cluster.md).
+    - Use the TiFlash feature to optimize analytical processing. See [Use an HTAP Cluster](/tiflash/tiflash-overview.md).
 
 ## Step 7. Explore more features
 
@@ -212,7 +212,7 @@ You can scale out clusters on the console by yourself. If you need to scale in a
 
 Once your application for the PoC is approved, you will receive trial points in your account. Generally, the trial points are sufficient for a 14-day PoC. The trial points are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#trial-points).
 
-To check the points left for your PoC, go to the **Clusters** page, as shown in the following screenshot.
+To check the points left for your PoC, go to the **Active Clusters** page, as shown in the following screenshot.
 
 ![TiDB Cloud PoC Points](/media/tidb-cloud/poc-points.png)
 

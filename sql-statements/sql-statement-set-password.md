@@ -60,4 +60,9 @@ This statement is understood to be fully compatible with MySQL. Any compatibilit
 ## See also
 
 * [CREATE USER](/sql-statements/sql-statement-create-user.md)
+
+<CustomContent platform="tidb">
+
 * [Privilege Management](/privilege-management.md)
+
+</CustomContent>

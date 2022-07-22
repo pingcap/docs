@@ -18,6 +18,8 @@ You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md
 <SimpleTab>
 <div label="Developer Tier">
 
+To create a free Developer Tier cluster, take the following steps:
+
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/free-trial) to sign up for an account.
 
     - For Google users, you can also sign up with Google. To do that, click **Sign up with Google** on the [sign up](https://tidbcloud.com/signup) page. Your email address and password will be managed by Google and cannot be changed using TiDB Cloud console.
@@ -42,6 +44,8 @@ You can either create a free [Developer Tier](/tidb-cloud/select-cluster-tier.md
 </div>
 
 <div label="Dedicated Tier">
+
+To create a Dedicated Tier cluster, take the following steps:
 
 1. If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/signup) to sign up for an account.
 
@@ -132,8 +136,6 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
         - **Password**: enter your root password.
     - **DB/Tables Filter**: leave this field blank.
 
-    Then, click **Validate** to verify whether TiDB Cloud has the access to the sample data in the specified bucket URL. If you encounter the `AccessDenied` error after clicking **Validate**, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
-
     </div>
 
     <div label="GCP">
@@ -153,7 +155,13 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 4. Click **Import**.
 
-    The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
+    A warning message about the database resource consumption is displayed. For a newly created cluster, you can ignore the warning message.
+
+5. Click **Confirm**.
+
+    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically.
+
+The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
 
 ## Step 4. Query data
 

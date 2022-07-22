@@ -26,6 +26,7 @@
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
+      - [Golang](/develop/dev-guide-sample-application-golang.md)
   - Example Applications
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
@@ -79,8 +80,6 @@
     - Archived Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
       - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
-      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
