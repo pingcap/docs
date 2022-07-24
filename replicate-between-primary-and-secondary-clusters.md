@@ -18,7 +18,7 @@ To replicate incremental data from a running TiDB cluster to its secondary clust
 
 1. Deploy TiDB clusters.
 
-    Deploy two TiDB clusters, one upstream and the other downstream by using tiup playground. For production environments, deploy the clusters by referring to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
+    Deploy two TiDB clusters, one upstream and the other downstream by using TiUP Playground. For production environments, deploy the clusters by referring to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
 
     In this document, we deploy the two clusters on two machines:
 
@@ -119,7 +119,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 1. Disable GC.
 
-    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before backup. In this way, history data will not be deleted.
+    To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before backup. In this way, history data is not deleted.
 
     {{< copyable "sql" >}}
 
@@ -173,7 +173,7 @@ After setting up the environment, you can use the backup and restore functions o
     1 row in set (41.85 sec)
     ```
 
-4. (Optional) Check data.
+4. (Optional) Validate data.
 
     Use [sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md) to check data consistency between upstream and downstream at a certain time. The preceding `BACKUP` output shows that the upstream cluster finishes backup at 431434047157698561. The preceding `RESTORE` output shows that the downstream finishes restoration at 431434141450371074.
 
