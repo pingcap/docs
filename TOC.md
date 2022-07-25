@@ -26,6 +26,7 @@
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
+      - [Golang](/develop/dev-guide-sample-application-golang.md)
   - Example Applications
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
@@ -79,10 +80,7 @@
     - Archived Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
       - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
-      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
-      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
 - Deploy
@@ -138,7 +136,7 @@
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   - [Modify Configuration Online](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
-  - [Replicate Data Between Primary and Secondary Clusters](/replicate-betwwen-primary-and-secondary-clusters.md)
+  - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - Monitor and Alert
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
@@ -333,7 +331,7 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - PingCAP Clinic Diagnostic Service (Technical Preview)
+  - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
@@ -832,7 +830,13 @@
       - [Titan Configuration](/storage-engine/titan-configuration.md)
     - TiFlash
       - [Overview](/tiflash/tiflash-overview.md)
-      - [Use TiFlash](/tiflash/use-tiflash.md)
+      - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+      - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+      - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+      - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+      - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+      - [Data Validation](/tiflash/tiflash-data-validation.md)
+      - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Telemetry](/telemetry.md)
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
@@ -856,6 +860,7 @@
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.2](/releases/release-5.4.2.md)
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
