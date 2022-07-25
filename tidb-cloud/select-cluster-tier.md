@@ -31,11 +31,11 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 
 ### Automatic hibernation and resuming
 
-If you do not use a Developer Tier cluster for a few days, the Developer Tier cluster is hibernated automatically.
+If you do not use a Developer Tier cluster for a few days, the cluster hibernates automatically.
 
 The hibernation does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption.
 
-During the hibernation, the status of the cluster is still displayed as **Normal**, and you will see a message about hibernation on the TiDB Cloud console.
+During the hibernation, the status of the cluster is still displayed as **Normal**, and you can see a message about hibernation in the TiDB Cloud console.
 
 Anytime you want to use your Developer Tier cluster again, just connect to your cluster using your MySQL client driver or ORM framework as you usually do. Then the cluster is resumed and back to service automatically.
 
