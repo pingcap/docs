@@ -7,13 +7,13 @@ summary: Use TiSpark to provide an HTAP solution to serve as a one-stop solution
 
 ![TiSpark architecture](/media/tispark-architecture.png)
 
-[TiSpark](https://github.com/pingcap/tispark)は、複雑なOLAPクエリに応答するためにTiDB/TiKV上でApacheSparkを実行するために構築されたシンレイヤーです。 Sparkプラットフォームと分散TiKVクラスタの両方を活用し、分散OLTPデータベースであるTiDBにシームレスに接着して、オンライントランザクションと分析の両方のワンストップソリューションとして機能するハイブリッドトランザクション/分析処理（HTAP）ソリューションを提供します。 。
+[TiSpark](https://github.com/pingcap/tispark)は、TiDB /TiKV上でApacheSparkを実行して、複雑なOLAPクエリに応答するために構築されたシンレイヤーです。 Sparkプラットフォームと分散TiKVクラスタの両方を活用し、分散OLTPデータベースであるTiDBにシームレスに接着して、オンライントランザクションと分析の両方のワンストップソリューションとして機能するハイブリッドトランザクション/分析処理（HTAP）ソリューションを提供します。 。
 
 [TiFlash](/tiflash/tiflash-overview.md)は、HTAPを有効にするもう1つのツールです。 TiFlashとTiSparkはどちらも、複数のホストを使用してOLTPデータに対してOLAPクエリを実行できます。 TiFlashはデータを列形式で保存するため、より効率的な分析クエリが可能になります。 TiFlashとTiSparkは一緒に使用できます。
 
 TiSparkは、TiKVクラスタとPDクラスタに依存しています。また、Sparkクラスタをセットアップする必要があります。このドキュメントでは、TiSparkのセットアップと使用方法について簡単に紹介します。 ApacheSparkの基本的な知識が必要です。詳細については、 [ApacheSparkのWebサイト](https://spark.apache.org/docs/latest/index.html)を参照してください。
 
-Spark Catalyst Engineと緊密に統合されたTiSparkは、コンピューティングを正確に制御します。これにより、SparkはTiKVからデータを効率的に読み取ることができます。 TiSparkは、高速ポイントクエリを可能にするインデックスシークもサポートしています。
+TiSparkはSparkCatalystEngineと緊密に統合されており、コンピューティングを正確に制御します。これにより、SparkはTiKVからデータを効率的に読み取ることができます。 TiSparkは、高速ポイントクエリを可能にするインデックスシークもサポートしています。
 
 TiSparkは、Spark SQLによって処理されるデータの量を減らすために、コンピューティングをTiKVにプッシュすることにより、データクエリを高速化します。一方、TiSparkは、TiDBの組み込み統計を使用して、最適なクエリプランを選択できます。
 
@@ -25,21 +25,22 @@ Sparkエコシステムのツールを使用して、TiDBでのデータ処理�
 -   TiKV：データ検索
 -   スケジューリングシステム：レポート生成
 
-また、TiSparkはTiKVへの分散書き込みをサポートしています。 SparkおよびJDBCを使用したTiDBへの書き込みと比較して、TiKVへの分散書き込みはトランザクションを実装でき（すべてのデータが正常に書き込まれるか、すべての書き込みが失敗します）、書き込みが高速になります。
+また、TiSparkはTiKVへの分散書き込みをサポートしています。 SparkとJDBCを使用したTiDBへの書き込みと比較して、TiKVへの分散書き込みはトランザクションを実装でき（すべてのデータが正常に書き込まれるか、すべての書き込みが失敗します）、書き込みが高速になります。
 
 > **警告：**
 >
-> TiSparkはTiKVに直接アクセスするため、TiDBサーバーで使用されるアクセス制御メカニズムはTiSparkには適用できません。 TiSpark v2.5.0以降、TiSparkはユーザーの認証と承認をサポートしています。詳細については、 [安全](/tispark-overview.md#security)を参照してください。
+> TiSparkはTiKVに直接アクセスするため、TiDBサーバーで使用されるアクセス制御メカニズムはTiSparkには適用されません。 TiSpark v2.5.0以降、TiSparkはユーザーの認証と承認をサポートしています。詳細については、 [安全](/tispark-overview.md#security)を参照してください。
 
 ## 環境設定 {#environment-setup}
 
 次の表に、サポートされているTiSparkバージョンの互換性情報を示します。必要に応じてTiSparkバージョンを選択できます。
 
-| TiSparkバージョン     | TiDB、TiKV、およびPDバージョン | Sparkバージョン  | Scalaバージョン |
-| ---------------- | -------------------- | ----------- | ---------- |
-| 2.4.x-scala_2.11 | 5.x、4.x              | 2.3.x、2.4.x | 2.11       |
-| 2.4.x-scala_2.12 | 5.x、4.x              | 2.4.x       | 2.12       |
-| 2.5.x            | 5.x、4.x              | 3.0.x、3.1.x | 2.12       |
+| TiSparkバージョン     | TiDB、TiKV、およびPDバージョン | Sparkバージョン        | Scalaバージョン |
+| ---------------- | -------------------- | ----------------- | ---------- |
+| 2.4.x-scala_2.11 | 5.x、4.x              | 2.3.x、2.4.x       | 2.11       |
+| 2.4.x-scala_2.12 | 5.x、4.x              | 2.4.x             | 2.12       |
+| 2.5.x            | 5.x、4.x              | 3.0.x、3.1.x       | 2.12       |
+| 3.0.x            | 5.x、4.x              | 3.0.x、3.1.x、3.2.x | 2.12       |
 
 TiSparkは、YARN、Mesos、Standaloneなどの任意のSparkモードで実行されます。
 
@@ -47,7 +48,7 @@ TiSparkは、YARN、Mesos、Standaloneなどの任意のSparkモードで実行�
 
 このセクションでは、TiKVとTiSparkの独立した展開、SparkとTiSparkの独立した展開、およびTiKVとTiSparkの同時展開の推奨構成について説明します。
 
-TiUPを使用してTiSparkを展開する方法の詳細については、 [TiSpark展開トポロジ](/tispark-deployment-topology.md)も参照してください。
+TiUPを使用してTiSparkをデプロイする方法の詳細については、 [TiSpark展開トポロジ](/tispark-deployment-topology.md)も参照してください。
 
 ### TiKVとTiSparkの独立した展開のConfiguration / コンフィグレーション {#configuration-of-independent-deployment-of-tikv-and-tispark}
 
@@ -105,7 +106,7 @@ spark.sql.extensions org.apache.spark.sql.TiExtensions
 
 > **ノート：**
 >
-> TiSparkが正しく通信できなかった場合は、ファイアウォールの構成を確認してください。ファイアウォールルールを調整するか、必要に応じて無効にすることができます。
+> TiSparkが正しく通信できなかった場合は、ファイアウォールの構成を確認してください。必要に応じて、ファイアウォールルールを調整したり、無効にしたりできます。
 
 ### 既存のSparkクラスタにTiSparkをデプロイ {#deploy-tispark-on-an-existing-spark-cluster}
 
@@ -123,7 +124,7 @@ Sparkクラスタがない場合は、スタンドアロンモードを使用す
 
 ## SparkShellとSparkSQLを使用する {#use-spark-shell-and-spark-sql}
 
-上記のように、TiSparkクラスタを正常に開始したと想定します。次に、 `tpch`データベースの`lineitem`という名前のテーブルでOLAP分析にSparkSQLを使用する方法について説明します。
+上記のように、TiSparkクラスタが正常に開始されたと想定します。以下では、 `tpch`データベースの`lineitem`という名前のテーブルでOLAP分析にSparkSQLを使用する方法について説明します。
 
 `192.168.1.101`で利用可能なTiDBサーバーを介してテストデータを生成するには：
 
@@ -150,7 +151,7 @@ SparkShellを起動します。
 ./bin/spark-shell
 ```
 
-次に、ネイティブApache Sparkの場合と同様に、SparkShellに次のコマンドを入力します。
+次に、ネイティブApache Sparkと同様に、SparkShellに次のコマンドを入力します。
 
 {{< copyable "" >}}
 
@@ -219,7 +220,7 @@ JDBCをThriftサーバーに接続するには、beelineなどのJDBC対応ツ�
 Beeline version 1.2.2 by Apache Hive
 ```
 
-次に、クエリコマンドを実行できます。
+次に、queryコマンドを実行できます。
 
 ```
 1: jdbc:hive2://localhost:10000> use testdb;
@@ -248,18 +249,18 @@ tisparkDF.write.saveAsTable("hive_table") // save table to hive
 spark.sql("select * from hive_table a, tispark_table b where a.col1 = b.col1").show // join table across Hive and Tispark
 ```
 
-## TiSparkを使用してDataFrameをTiDBにバッチ書き込みします {#batch-write-dataframes-into-tidb-using-tispark}
+## TiSparkを使用してDataFrameをTiDBにバッチ書き込み {#batch-write-dataframes-into-tidb-using-tispark}
 
 v2.3以降、TiSparkはデータフレームのTiDBクラスターへのバッチ書き込みをネイティブにサポートします。この書き込みモードは、TiKVの2フェーズコミットプロトコルを介して実装されます。
 
 Spark + JDBCを介した書き込みと比較して、TiSparkバッチ書き込みには次の利点があります。
 
-| 比較する側面 | TiSparkバッチ書き込み                            | Spark+JDBC書き込み                                                                                                                                            |
-| ------ | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| アトミシティ | DataFrameはすべて正常に書き込まれるか、すべて失敗します。         | Sparkタスクが失敗し、書き込みプロセス中に終了した場合、データの一部が正常に書き込まれている可能性があります。                                                                                                 |
-| 隔離     | 書き込みプロセス中、書き込まれているデータは他のトランザクションからは見えません。 | 書き込みプロセス中に、正常に書き込まれたデータの一部が他のトランザクションに表示されます。                                                                                                             |
-| エラー回復  | バッチ書き込みが失敗した場合は、Sparkを再実行するだけで済みます。       | べき等を達成するには、アプリケーションが必要です。たとえば、バッチ書き込みが失敗した場合は、正常に書き込まれたデータの一部をクリーンアップして、Sparkを再実行する必要があります。タスクの再試行によるデータの重複を防ぐには、 `spark.task.maxFailures=1`を設定する必要があります。 |
-| スピード   | データはTiKVに直接書き込まれます。TiKVの方が高速です。           | データはTiDBを介してTiKVに書き込まれ、速度に影響します。                                                                                                                          |
+| 比較する側面 | TiSparkバッチ書き込み                          | Spark+JDBC書き込み                                                                                                                                            |
+| ------ | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| アトミシティ | DataFrameはすべて正常に書き込まれるか、すべて書き込みに失敗します。  | 書き込みプロセス中にSparkタスクが失敗して終了した場合、データの一部が正常に書き込まれている可能性があります。                                                                                                 |
+| 隔離     | 書き込みプロセス中、書き込まれるデータは他のトランザクションからは見えません。 | 書き込みプロセス中に、正常に書き込まれたデータの一部が他のトランザクションに表示されます。                                                                                                             |
+| エラー回復  | バッチ書き込みが失敗した場合は、Sparkを再実行するだけで済みます。     | べき等を達成するには、アプリケーションが必要です。たとえば、バッチ書き込みが失敗した場合は、正常に書き込まれたデータの一部をクリーンアップして、Sparkを再実行する必要があります。タスクの再試行によるデータの重複を防ぐには、 `spark.task.maxFailures=1`を設定する必要があります。 |
+| スピード   | データはTiKVに直接書き込まれます。TiKVはより高速です。         | データはTiDBを介してTiKVに書き込まれ、速度に影響します。                                                                                                                          |
 
 次の例は、scalaAPIを介してTiSparkを使用してデータをバッチ書き込みする方法を示しています。
 
@@ -288,7 +289,7 @@ UPDATE mysql.tidb SET VARIABLE_VALUE="6h" WHERE VARIABLE_NAME="tikv_gc_life_time
 
 詳細は[このドキュメント](https://github.com/pingcap/tispark/blob/master/docs/datasource_api_userguide.md)を参照してください。
 
-## JDBCを使用してSparkデータフレームをTiDBにロードします {#load-spark-dataframe-into-tidb-using-jdbc}
+## JDBCを使用してSparkデータフレームをTiDBにロードする {#load-spark-dataframe-into-tidb-using-jdbc}
 
 TiSparkを使用してDataFrameをTiDBクラスタにバッチ書き込みすることに加えて、データ書き込みにSparkのネイティブJDBCサポートを使用することもできます。
 
@@ -348,11 +349,11 @@ spark.sql.tidb.user $your_tidb_server_user
 spark.sql.tidb.password $your_tidb_server_password
 ```
 
-詳細については、 [TiDBサーバーによる承認と認証](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md)を参照してください。
+詳細については、 [TiDBサーバーを介した承認と認証](https://github.com/pingcap/tispark/blob/master/docs/authorization_userguide.md)を参照してください。
 
 > **ノート：**
 >
-> 認証および承認機能を有効にすると、TiSpark Spark SQLはデータソースとしてTiDBのみを使用できるため、他のデータソース（Hiveなど）に切り替えるとテーブルが非表示になります。
+> 認証および承認機能を有効にすると、TiSpark Spark SQLはデータソースとしてTiDBのみを使用できるため、他のデータソース（Hiveなど）に切り替えると、テーブルが非表示になります。
 
 ## TiSpark FAQ {#tispark-faq}
 
@@ -362,19 +363,19 @@ A：個別のデプロイなしで既存のSparkクラスタを使用できま�
 
 Q：SparkをTiKVと混合できますか？
 
-A：TiDBとTiKVが過負荷になり、重要なオンラインタスクを実行する場合は、TiSparkを個別にデプロイすることを検討してください。また、OLTPのネットワークリソースが危険にさらされてオンラインビジネスに影響を与えないように、さまざまなNICの使用を検討する必要があります。オンラインビジネスの要件が高くない場合、または負荷が十分に大きくない場合は、TiSparkとTiKVの展開を混在させることを検討できます。
+A：TiDBとTiKVが過負荷になり、重要なオンラインタスクを実行する場合は、TiSparkを個別に展開することを検討してください。また、OLTPのネットワークリソースが危険にさらされてオンラインビジネスに影響を与えないように、さまざまなNICの使用を検討する必要があります。オンラインビジネスの要件が高くない場合、または負荷が十分に大きくない場合は、TiSparkとTiKVの展開を混在させることを検討できます。
 
-Q：TiSparkを使用してSQLステートメントを実行するときに`warning：WARN ObjectStore:568 - Failed to get database`が返された場合、どうすればよいですか？
+Q：TiSparkを使用してSQLステートメントを実行するときに`warning：WARN ObjectStore:568 - Failed to get database`が返された場合はどうすればよいですか？
 
-A：この警告は無視してかまいません。これは、Sparkがカタログに存在しない2つのデータベース（ `default`と`global_temp` ）を読み込もうとしたために発生します。この警告をミュートする場合は、 `tispark/conf`の`log4j`ファイルに`log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR`を追加して[log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43)を変更します。 Sparkの下の`config`の`log4j`ファイルにパラメータを追加できます。サフィックスが`template`の場合、 `mv`コマンドを使用して`properties`に変更できます。
+A：この警告は無視してかまいません。これは、Sparkがカタログに存在しない2つのデータベース（ `default`と`global_temp` ）を読み込もうとしたために発生します。この警告をミュートする場合は、 `tispark/conf`の`log4j`ファイルに`log4j.logger.org.apache.hadoop.hive.metastore.ObjectStore=ERROR`を追加して[log4j](https://github.com/pingcap/tidb-docker-compose/blob/master/tispark/conf/log4j.properties#L43)を変更します。 Sparkの下の`config`の`log4j`ファイルにパラメーターを追加できます。サフィックスが`template`の場合、 `mv`コマンドを使用して`properties`に変更できます。
 
-Q：TiSparkを使用してSQLステートメントを実行するときに`java.sql.BatchUpdateException: Data Truncated`が返された場合、どうすればよいですか？
+Q：TiSparkを使用してSQLステートメントを実行するときに`java.sql.BatchUpdateException: Data Truncated`が返された場合はどうすればよいですか？
 
 A：このエラーは、書き込まれたデータの長さがデータベースで定義されたデータ型の長さを超えているために発生します。フィールドの長さを確認し、それに応じて調整できます。
 
 Q：TiSparkはデフォルトでHiveメタデータを読み取りますか？
 
-A：デフォルトでは、TiSparkはhive-siteのHiveメタデータを読み取ることによってHiveデータベースを検索します。検索タスクが失敗した場合は、代わりにTiDBメタデータを読み取ってTiDBデータベースを検索します。
+A：デフォルトでは、TiSparkはhiveサイトのHiveメタデータを読み取ることによってHiveデータベースを検索します。検索タスクが失敗した場合は、代わりにTiDBメタデータを読み取ってTiDBデータベースを検索します。
 
 このデフォルトの動作が必要ない場合は、hive-siteでHiveメタデータを構成しないでください。
 
