@@ -24,7 +24,7 @@
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Use Open API](/tidb-cloud/open-api-overview.md)
+  - [Use TiDB Cloud API](/tidb-cloud/open-api-overview.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
@@ -67,6 +67,7 @@
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 - Reference
     - [Explore SQL with TiDB](/basic-sql-operations.md)
+    - [TiDB Cloud API Reference](https://docs.pingcap.com/tidb-cloud/api/v1)
     - [Support](/tidb-cloud/tidb-cloud-support.md)
     - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
