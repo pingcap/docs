@@ -10,10 +10,14 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## July 26, 2022
 
-* Behavior changes to Developer Tier clusters
+* Behavior changes to new Developer Tier clusters
 
     * A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After a few days of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console.
     * The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+
+* Increase the storage size of a Developer Tier cluster from 500 MiB to 1 GiB.
+* Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
+* Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
 
 ## July 12, 2022
 
