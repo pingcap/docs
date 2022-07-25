@@ -18,7 +18,11 @@ This statement executes without blocking the execution of existing SQL statement
 
 This statement only supports changing the mode to tables in TiFlash, so the mode change only affects reads involving the TiFlash table.
 
-The mode change to tables in TiFlash takes effect only if the table has a TiFlash Replica. If the TiFlash Replica of the table is empty when you change the mode, the mode will take effect only after the TiFlash Replica is subsequently reset.
+The mode change to tables in TiFlash takes effect only if the table has a TiFlash Replica. If the TiFlash Replica of the table is empty when you change the mode, the mode will take effect only after the TiFlash Replica is subsequently reset. You can use [`ALTER TABLE ... SET TIFLASH REPLICA ...`](/sql-statements/sql-statement-alter-table.md) to reset the TiFlash Replica.
+
+{{< copyable "sql" >}}
+
+```sql
 
 You can query the current TiFlash table mode of the corresponding table using the system table `information_schema.tiflash_replica`.
 
