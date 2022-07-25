@@ -351,7 +351,9 @@
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
-- [FAQs](/tidb-cloud/tidb-cloud-faq.md)
+- FAQs
+  - [Product FAQs](/tidb-cloud/tidb-cloud-faq.md)
+  - [Security FAQs](/tidb-cloud/tidb-cloud-security-faq.md)
 - Release Notes
   - [2022](/tidb-cloud/release-notes-2022.md)
   - [2021](/tidb-cloud/release-notes-2021.md)
