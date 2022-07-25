@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## July 26, 2022
+## July xx, 2022
 
 * Behavior changes to new Developer Tier clusters
 
