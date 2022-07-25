@@ -9,7 +9,7 @@ summary: An overview of the usage of ALTER TABLE ... SET TIFLASH MODE ... for th
 >
 > This statement is still an experimental feature. It is NOT recommended that you use it in the production environment.
 
-You can use the `ALTER TABLE ... SET TIFLASH MODE ... ` statement to switch the mode of the corresponding table in TiFlash. The following modes are currently supported.
+You can use the `ALTER TABLE...SET TIFLASH MODE...` statement to switch the mode of the corresponding table in TiFlash. The following modes are currently supported.
 
 - `Normal Mode` mode. The default mode. This mode guarantees the accuracy of query results and data consistency.
 - `Fast Mode` mode. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
@@ -78,11 +78,11 @@ ALTER TABLE test SET tiflash mode NORMAL
 
 ## MySQL compatibility
 
-`ALTER TABLE ... .SET TiFLASH MODE ... ` is an extension to the standard SQL syntax introduced by TiDB. Although there is no equivalent MySQL syntax, you can still execute this statement from a MySQL client, or from database drivers that follow the MySQL protocol.
+`ALTER TABLE ... SET TiFLASH MODE ...` is an extension to the standard SQL syntax introduced by TiDB. Although there is no equivalent MySQL syntax, you can still execute this statement from a MySQL client, or from database drivers that follow the MySQL protocol.
 
 ## TiDB Binlog and TiCDC compatibility
 
-When the downstream is also TiDB, `ALTER TABLE ... . . SET TiFLASH MODE ... ` will be synchronized downstream by TiDB Binlog. In other scenarios, neither TiDB Binlog nor TiCDC will synchronize this statement.
+When the downstream is also TiDB, `ALTER TABLE ... SET TiFLASH MODE ...` will be synchronized downstream by TiDB Binlog. In other scenarios, neither TiDB Binlog nor TiCDC will synchronize this statement.
 
 ## See also
 
