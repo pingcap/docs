@@ -13,7 +13,7 @@ Since TiDB 4.0, all TiDB migration tools share a common filter syntax to define 
 
 ### CLI
 
-Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage in each tool.
+Table filters can be applied to the tools using multiple `-f` or `--filter` command line parameters. Each filter is in the form of `db.table`, where each part can be a wildcard (further explained in the [next section](#wildcards)). The following lists the example usage.
 
 <CustomContent platform="tidb">
 
@@ -57,7 +57,7 @@ Table filters can be applied to the tools using multiple `-f` or `--filter` comm
 
 ### TOML configuration files
 
-Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage in each tool.
+Table filters in TOML files are specified as [array of strings](https://toml.io/en/v1.0.0-rc.1#section-15). The following lists the example usage.
 
 * TiDB Lightning:
 
