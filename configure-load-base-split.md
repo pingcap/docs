@@ -35,7 +35,7 @@ The Load Base Split feature is currently controlled by three parameters:
 - `split.byte-threshold`: The threshold of read load for the Region to be split, default is 30 MiB per second.
 - `split.region-cpu-overload-threshold-ratio`: The threshold of CPU usage (the percentage of CPU time of the read thread pool) for the Region to be split, default is `0.25`.
 
-If the sum of all types of read requests per second for a Region exceeds the QPS threshold or traffic threshold for 10 consecutive seconds, PD splits the Region.
+If the sum of all types of read requests per second for a Region exceeds the QPS threshold, traffic threshold, or CPU usage threshold for 10 consecutive seconds, TiKV tries to split the Region.
 
 Load Base Split is enabled by default, but the parameter is set to a rather high value. If you want to disable this feature, set `split.qps-threshold` and `split.byte-threshold` high enough and set `split.region-cpu-overload-threshold-ratio` to `0` at the same time.
 
