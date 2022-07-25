@@ -184,15 +184,13 @@ In general scenarios (less than 1000 tables for backup and restore), the CPU con
 
 ### Best practices
 
-The following are some recommended operations for using BR for backup and restoration:
+The following are some recommended operations for using BR:
 
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- BR supports restore on clusters of different topologies. However, the online applications will be greatly impacted during the restore operation. It is recommended that you perform restore during the off-peak hours or use `rate-limit` to limit the rate.
-- It is recommended that you execute multiple backup operations serially. Running different backup operations in parallel reduces backup performance and also affects the online application.
-- It is recommended that you execute multiple restore operations serially. Running different restore operations in parallel increases Region conflicts and also reduces restore performance.
-- It is recommended that you mount a shared storage (for example, NFS) on the backup path specified by `-s`, to make it easier to collect and manage backup files.
-- It is recommended that you use a storage hardware with high throughput, because the throughput of a storage hardware limits the backup and restoration speed.
-- It is recommended that you disable the checksum feature (`--checksum = false`) during backup operation and only enable it during the restore operation to reduce migration time. This is because BR by default respectively performs checksum calculation after backup and restore operations to compare the stored data with the corresponding cluster data to ensure accuracy.
+- When restoring data, BR consumes resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to new clusters or offline clusters. Do not restore data to a production cluster in service. Otherwise, services might be affected.
+- It is recommended that you execute multiple backup or restoration operations one by one. Running backup or restoration operations in parallel reduces performance and also affects online applications. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
+- Amazon S3, Google Cloud Storage, and Azure Blob Storage are recommended to store backup data.
+- Make sure that the BR and TiKV nodes, and the backup storage backend have sufficient network bandwidth to ensure read and write performance. Insufficient storage capacity might be the bottleneck for a backup or restoration operation.
 
 ### How to use BR
 
