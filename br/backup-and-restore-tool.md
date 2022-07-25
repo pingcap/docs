@@ -187,7 +187,7 @@ In general scenarios (less than 1000 tables for backup and restore), the CPU con
 The following are some recommended operations for using BR:
 
 - It is recommended that you perform the backup operation during off-peak hours to minimize the impact on applications.
-- BR only supports restoring data to a new cluster and uses resources of the target cluster as much as possible. Therefore, it is not recommended that you restore data to a production cluster. Otherwise, services might be affected.
+- When restoring data, BR consumes resources of the target cluster as much as possible. Therefore, it is recommended that you restore data to new clusters or offline clusters. Do not restore data to a production cluster in service. Otherwise, services might be affected.
 - It is recommended that you execute multiple backup or restoration operations one by one. Running backup or restoration operations in parallel reduces performance and also affects online applications. Worse still, lack of collaboration between multiple tasks might result in task failures and affect cluster performance.
 - Amazon S3, Google Cloud Storage, and Azure Blob Storage are recommended to store backup data.
 - Make sure that the BR and TiKV nodes, and the backup storage backend have sufficient network bandwidth to ensure read and write performance. Insufficient storage capacity might be the bottleneck for a backup or restoration operation.
