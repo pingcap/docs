@@ -1,6 +1,7 @@
 ---
 title: Replicate data between primary and secondary clusters
 summary: Learn how to replicate data from a primary cluster to a secondary cluster.
+aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/stable/replicate-betwwen-primary-and-secondary-clusters/']
 ---
 
 # プライマリクラスターとセカンダリクラスター間でデータを複製する {#replicate-data-between-primary-and-secondary-clusters}
@@ -17,7 +18,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 1.  TiDBクラスターをデプロイします。
 
-    デプロイプレイグラウンドを使用して、2つのTiDBクラスターを1つはアップストリームに、もう1つはダウンストリームにデプロイします。実稼働環境の場合は、 [TiUPを使用したオンラインTiDBクラスターのデプロイと管理](/tiup/tiup-cluster.md)を参照してクラスターをデプロイします。
+    デプロイプレイグラウンドを使用して、2つのTiDBクラスターを1つはアップストリームに、もう1つはダウンストリームにデプロイします。実稼働環境の場合は、 [TiUPを使用してオンラインTiDBクラスターをデプロイおよび管理する](/tiup/tiup-cluster.md)を参照してクラスターをデプロイします。
 
     このドキュメントでは、2つのクラスターを2つのマシンにデプロイします。
 
@@ -65,7 +66,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 3.  サービスのワークロードをシミュレートします。
 
-    実際のシナリオでは、サービスデータはアップストリームクラスタに継続的に書き込まれます。このドキュメントでは、sysbenchを使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、10人のワーカーがsbtest1、sbtest2、およびsbtest3の3つのテーブルに、合計TPSが100を超えないようにデータを継続的に書き込むことができるようにします。
+    実際のシナリオでは、サービスデータは継続的にアップストリームクラスタに書き込まれます。このドキュメントでは、sysbenchを使用してこのワークロードをシミュレートします。具体的には、次のコマンドを実行して、10人のワーカーがsbtest1、sbtest2、およびsbtest3の3つのテーブルに、合計TPSが100を超えないようにデータを継続的に書き込むことができるようにします。
 
     {{< copyable "" >}}
 
@@ -110,7 +111,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ2.完全なデータを移行する {#step-2-migrate-full-data}
 
-環境を設定した後、 [BR](https://github.com/pingcap/tidb/tree/master/br) ）のバックアップおよび復元関数を使用して完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
+環境をセットアップした後、 [BR](https://github.com/pingcap/tidb/tree/master/br) ）のバックアップおよび復元関数を使用して、完全なデータを移行できます。 BRは[3つの方法](/br/br-deployment.md#use-br)で開始できます。このドキュメントでは、SQLステートメント`BACKUP`および`RESTORE`を使用します。
 
 > **ノート：**
 >
@@ -220,7 +221,7 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 1.  TiCDCをデプロイします。
 
-    完全なデータ移行が完了したら、増分データを複製するようにTiCDCを展開および構成します。実稼働環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の指示に従ってTiCDCをデプロイします。このドキュメントでは、テストクラスターの作成時にTiCDCノードが開始されています。したがって、TiCDCをデプロイするステップをスキップして、チェンジフィード構成に進みます。
+    完全なデータ移行が完了したら、増分データを複製するようにTiCDCを展開および構成します。実稼働環境では、 [TiCDCをデプロイ](/ticdc/deploy-ticdc.md)の指示に従ってTiCDCをデプロイします。このドキュメントでは、テストクラスターの作成時にTiCDCノードが開始されています。したがって、TiCDCを展開するステップをスキップして、チェンジフィード構成に進みます。
 
 2.  チェンジフィードを作成します。
 
@@ -272,11 +273,11 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 
 ## ステップ4.アップストリームクラスタで災害をシミュレートする {#step-4-simulate-a-disaster-in-the-upstream-cluster}
 
-実行中に、アップストリームクラスタに悲惨なイベントを作成します。たとえば、Ctrl + Cを押すと、tiupプレイグラウンドプロセスを終了できます。
+実行中に、アップストリームクラスタで悲惨なイベントを作成します。たとえば、Ctrl + Cを押すと、tiupプレイグラウンドプロセスを終了できます。
 
-## ステップ5.REDOログを使用して、データの整合性を確保します {#step-5-use-redo-log-to-ensure-data-consistency}
+## 手順5.REDOログを使用して、データの整合性を確保します {#step-5-use-redo-log-to-ensure-data-consistency}
 
-通常、TiCDCはトランザクションをダウンストリームに同時に書き込み、全体を増やします。チェンジフィードが予期せず中断された場合、ダウンストリームはアップストリームにあるため、最新のデータを持っていない可能性があります。不整合に対処するには、次のコマンドを実行して、ダウンストリームデータがアップストリームデータと整合していることを確認します。
+通常、TiCDCはトランザクションをダウンストリームに同時に書き込み、全体的に増加します。チェンジフィードが予期せず中断された場合、ダウンストリームはアップストリームにあるため、最新のデータを持っていない可能性があります。不整合に対処するには、次のコマンドを実行して、ダウンストリームデータがアップストリームデータと整合していることを確認します。
 
 {{< copyable "" >}}
 
@@ -284,15 +285,15 @@ summary: Learn how to replicate data from a primary cluster to a secondary clust
 tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://172.16.6.123:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://root:@172.16.6.124:4000"
 ```
 
--   --storage：S3のREDOログの場所とクレデンシャル
+-   --storage：S3のREDOログの場所と資格情報
 -   --tmp-dir：S3からダウンロードしたREDOログのキャッシュディレクトリ
 -   --sink-uri：ダウンストリームクラスタのURI
 
-## ステップ6.プライマリクラスタとそのサービスを回復する {#step-6-recover-the-primary-cluster-and-its-services}
+## 手順6.プライマリクラスタとそのサービスを回復する {#step-6-recover-the-primary-cluster-and-its-services}
 
-前のステップの後、ダウンストリーム（セカンダリ）クラスタには、特定の時間のアップストリーム（プライマリ）クラスタと整合性のあるデータがあります。データの信頼性を確保するには、新しいプライマリクラスターとセカンダリクラスターを設定する必要があります。
+前のステップの後、ダウンストリーム（セカンダリ）クラスタには、特定の時間にアップストリーム（プライマリ）クラスタと一致するデータがあります。データの信頼性を確保するには、新しいプライマリクラスターとセカンダリクラスターを設定する必要があります。
 
-1.  新しいプライマリクラスタとして、ノードAに新しいTiDBクラスタをデプロイします。
+1.  新しいプライマリクラスタとしてノードAに新しいTiDBクラスタをデプロイします。
 
     {{< copyable "" >}}
 

@@ -5,7 +5,7 @@ summary: An overview of the usage of SET PASSWORD for the TiDB database.
 
 # パスワードを設定してください {#set-password}
 
-このステートメントは、TiDBシステムデータベースのユーザーアカウントのユーザーパスワードを変更します。
+このステートメントは、TiDBシステムデータベース内のユーザーアカウントのユーザーパスワードを変更します。
 
 ## あらすじ {#synopsis}
 
@@ -55,9 +55,14 @@ mysql> SHOW CREATE USER 'newuser';
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
+
+<CustomContent platform="tidb">
+
 -   [権限管理](/privilege-management.md)
+
+</CustomContent>

@@ -9,7 +9,7 @@ summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
 
 ## あなたが始める前に {#before-you-begin}
 
-[`tiup demo`のインポート](/develop/dev-guide-bookshop-schema-design.md#via-tiup-demo)を使用してデータを準備できます。
+[`tiup demo`のインポート](/develop/dev-guide-bookshop-schema-design.md#method-1-via-tiup-demo)を使用してデータを準備できます。
 
 {{< copyable "" >}}
 
@@ -17,13 +17,13 @@ summary: Introduces TiDB's SQL performance tuning scheme and analysis approach.
 tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 ```
 
-または[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#via-tidb-cloud-import)を使用して、事前に準備されたサンプルデータをインポートします。
+または[TiDB Cloudのインポート機能を使用する](/develop/dev-guide-bookshop-schema-design.md#method-2-via-tidb-cloud-import)を使用して、事前に準備されたサンプルデータをインポートします。
 
 ## 問題：全表スキャン {#issue-full-table-scan}
 
 SQLクエリが遅い最も一般的な理由は、 `SELECT`ステートメントが全表スキャンを実行するか、誤ったインデックスを使用することです。
 
-TiDBが主キーまたは二次インデックスではない列に基づいて大きなテーブルから少数の行を取得する場合、通常、パフォーマンスは低下します。
+TiDBが、主キーまたは2次インデックスにない列に基づいて、大きなテーブルから少数の行を取得する場合、通常、パフォーマンスは低下します。
 
 {{< copyable "" >}}
 
@@ -63,7 +63,7 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------+------------+-----------+---------------+-----------------------------------------+
 ```
 
-実行プランの`TableFullScan_5`からわかるように、TiDBは`books`のテーブルに対して全表スキャンを実行し、 `title`が各行の条件を満たすかどうかをチェックします。 `TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザーがこの全表スキャンで`1000000.00`行のデータが必要であると推定していることを意味します。
+実行プランの`TableFullScan_5`からわかるように、TiDBは`books`のテーブルに対して全表スキャンを実行し、 `title`が各行の条件を満たすかどうかを確認します。 `TableFullScan_5`の`estRows`の値は`1000000.00`です。これは、オプティマイザーがこの全表スキャンで`1000000.00`行のデータが必要であると推定していることを意味します。
 
 `EXPLAIN`の使用法の詳細については、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
@@ -117,15 +117,15 @@ EXPLAIN SELECT * FROM books WHERE title = 'Marian Yost';
 +---------------------------+---------+-----------+-------------------------------------+-------------------------------------------------------+
 ```
 
-実行プランの`IndexLookup_10`からわかるように、TiDBは`title_idx`インデックスでデータをクエリします。その`estRows`の値は`1.27`です。これは、オプティマイザーが`1.27`行のみがスキャンされると推定することを意味します。スキャンされた推定行は、全表スキャンの`1000000.00`行のデータよりもはるかに少なくなります。
+実行プランの`IndexLookup_10`からわかるように、TiDBは`title_idx`インデックスでデータをクエリします。その`estRows`の値は`1.27`です。これは、オプティマイザーが`1.27`行のみがスキャンされると推定することを意味します。スキャンされる推定行は、全表スキャンの`1000000.00`行のデータよりもはるかに少なくなります。
 
-`IndexLookup_10`の実行プランでは、最初に`IndexRangeScan_8`演算子を使用して、 `title_idx`インデックスを介して条件を満たすインデックスデータを読み取り、次に`TableLookup_9`演算子を使用して、インデックスデータに格納されている行IDに従って対応する行をクエリします。
+`IndexLookup_10`実行プランでは、最初に`IndexRangeScan_8`演算子を使用して、 `title_idx`インデックスを介して条件を満たすインデックスデータを読み取り、次に`TableLookup_9`演算子を使用して、インデックスデータに格納されている行IDに従って対応する行をクエリします。
 
 TiDB実行プランの詳細については、 [TiDBクエリ実行プランの概要](/explain-overview.md)を参照してください。
 
 ### 解決策：カバーインデックスを使用する {#solution-use-covering-index}
 
-インデックスがカバーインデックスであり、SQLステートメントによってクエリされたすべての列が含まれている場合、クエリにはインデックスデータをスキャンするだけで十分です。
+インデックスが、SQLステートメントによってクエリされたすべての列を含むカバーインデックスである場合、クエリにはインデックスデータをスキャンするだけで十分です。
 
 たとえば、次のクエリでは、 `title`に基づいて対応する`price`をクエリするだけで済みます。
 

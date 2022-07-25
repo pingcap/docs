@@ -7,7 +7,7 @@ summary: This document describes how to query data from a single table in a data
 
 # 単一のテーブルからデータをクエリする {#query-data-from-a-single-table}
 
-このドキュメントでは、SQLおよびさまざまなプログラミング言語を使用して、データベース内の単一のテーブルからデータをクエリする方法について説明します。
+このドキュメントでは、SQLとさまざまなプログラミング言語を使用して、データベース内の単一のテーブルからデータをクエリする方法について説明します。
 
 ## あなたが始める前に {#before-you-begin}
 
@@ -24,7 +24,7 @@ summary: This document describes how to query data from a single table in a data
 Bookshopアプリケーションのデータベースでは、 `authors`テーブルに著者の基本情報が格納されています。 `SELECT ... FROM ...`ステートメントを使用して、データベースからデータを照会できます。
 
 <SimpleTab>
-<div label="SQL" href="simple-sql">
+<div label="SQL">
 
 MySQLクライアントで次のSQLステートメントを実行します。
 
@@ -56,9 +56,9 @@ SELECT id, name FROM authors;
 ```
 
 </div>
-<div label="Java" href="simple-java">
+<div label="Java">
 
-Javaでは、クラス`Author`を宣言することにより、作成者の基本情報を格納できます。データベースの[タイプ](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に応じて適切なJavaデータ型を選択する必要があります。例えば：
+Javaでは、クラス`Author`を宣言することで、作成者の基本情報を格納できます。データベースの[タイプ](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に従って、適切なJavaデータ型を選択する必要があります。例えば：
 
 -   タイプ`Int`の変数を使用して、タイプ`int`のデータを格納します。
 -   タイプ`Long`の変数を使用して、タイプ`bigint`のデータを格納します。
@@ -107,7 +107,7 @@ public class AuthorDAO {
 }
 ```
 
--   [JDBCドライバーを使用したTiDBへの接続](/develop/dev-guide-connect-to-tidb.md#jdbc)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
+-   [JDBCドライバーを使用してTiDBに接続する](/develop/dev-guide-connect-to-tidb.md#jdbc)の後、 `conn.createStatus()`で`Statement`オブジェクトを作成できます。
 -   次に、 `stmt.executeQuery("query_sql")`を呼び出して、TiDBへのデータベースクエリ要求を開始します。
 -   クエリ結果は`ResultSet`のオブジェクトに保存されます。 `ResultSet`をトラバースすることにより、返された結果を`Author`オブジェクトにマップできます。
 
@@ -121,7 +121,7 @@ public class AuthorDAO {
 たとえば、次のコマンドは、すべての作成者の中で1998年に生まれた作成者を照会します。
 
 <SimpleTab>
-<div label="SQL" href="filter-sql">
+<div label="SQL">
 
 `WHERE`ステートメントにフィルター条件を追加します。
 
@@ -132,7 +132,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 ```
 
 </div>
-<div label="Java" href="filter-java">
+<div label="Java">
 
 Javaでは、同じSQLを使用して、動的パラメーターを使用したデータ照会要求を処理できます。
 
@@ -232,13 +232,13 @@ LIMIT 10;
 10 rows in set (0.11 sec)
 ```
 
-`LIMIT`ステートメントを使用すると、この例ではクエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)を参照してください。
+この例では、 `LIMIT`ステートメントを使用すると、クエリ時間が`0.23 sec`から`0.11 sec`に大幅に短縮されます。詳細については、 [TopNとLimit](/topn-limit-push-down.md)を参照してください。
 
 ## クエリの集計 {#aggregate-queries}
 
 全体的なデータの状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-たとえば、著者がさらに生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`の列でグループ化し、各年を数えることができます。
+たとえば、著者がさらに生まれた年を知りたい場合は、 `authors`のテーブルを`birth_year`の列でグループ化して、各年をカウントできます。
 
 {{< copyable "" >}}
 
@@ -270,4 +270,4 @@ ORDER BY author_count DESC;
 71 rows in set (0.00 sec)
 ```
 
-`COUNT`関数に加えて、TiDBは他の集約関数もサポートします。詳細については、 [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。
+`COUNT`の関数に加えて、TiDBは他の集計関数もサポートします。詳細については、 [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)を参照してください。

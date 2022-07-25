@@ -18,7 +18,17 @@ TiDBは複数の認証方法をサポートしています。これらのメソ�
 
 表では、次のサポートされている認証方法のいずれかを使用できます。クライアント/サーバー接続が確立されているときにサーバーがアドバタイズするデフォルトの方法を指定するには、 [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)変数を設定します。
 
+<CustomContent platform="tidb">
+
 TLS認証のサポートは別の方法で構成されます。詳細については、 [TiDBクライアントとサーバー間のTLSを有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TLS認証のサポートは別の方法で構成されます。詳細については、 [TiDBクライアントとサーバー間のTLSを有効にする](https://docs.pingcap.com/tidb/stable/enable-tls-between-clients-and-servers)を参照してください。
+
+</CustomContent>
 
 | 認証方法                    | サポートされています |
 | :---------------------- | :--------- |
@@ -26,11 +36,9 @@ TLS認証のサポートは別の方法で構成されます。詳細につい�
 | `sha256_password`       | いいえ        |
 | `caching_sha2_password` | はい、5.2.0以降 |
 | `auth_socket`           | はい、5.3.0以降 |
-| [TLS Certificates]      | はい         |
+| [TLS証明書]                | はい         |
 | LDAP                    | いいえ        |
 | PAM                     | いいえ        |
 | ed25519（MariaDB）        | いいえ        |
 | GSSAPI（MariaDB）         | いいえ        |
 | FIDO                    | いいえ        |
-
-[TLS Certificates]: /enable-tls-between-clients-and-servers.md

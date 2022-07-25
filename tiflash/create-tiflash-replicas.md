@@ -17,11 +17,11 @@ TiFlashがTiKVクラスタに接続された後、デフォルトではデータ
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-上記のコマンドのパラメータは次のとおりです。
+上記のコマンドのパラメーターは次のとおりです。
 
 -   `count`はレプリカの数を示します。値が`0`の場合、レプリカは削除されます。
 
-同じテーブルで複数のDDLステートメントを実行すると、最後のステートメントのみが有効になります。次の例では、2つのDDLステートメントがテーブル`tpch50`で実行されますが、2番目のステートメント（レプリカを削除するため）のみが有効になります。
+同じテーブルで複数のDDLステートメントを実行すると、最後のステートメントのみが有効になることが保証されます。次の例では、2つのDDLステートメントがテーブル`tpch50`で実行されますが、2番目のステートメント（レプリカを削除するため）のみが有効になります。
 
 テーブルのレプリカを2つ作成します。
 
@@ -51,7 +51,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートが失敗します。テーブルのTiFlashレプリカを作成する前に、データをテーブルにインポートする必要があります。
 
--   TiDBとTiDB Lightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
+-   TiDBとTiDB Lightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightning手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
 -   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製しないことをお勧めします。この制限は、今後のバージョンで削除される予定です。
 
@@ -72,7 +72,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 -   `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`は利用可能、 `0`は利用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。 DDLステートメントを使用してレプリカの数を変更すると、レプリケーションステータスが再計算されます。
 -   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` `1.0` 。 `1`は、少なくとも1つのレプリカが複製されることを意味します。
 
-## データベース用のTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
+## データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
 テーブルのTiFlashレプリカを作成するのと同様に、MySQLクライアントを介してDDLステートメントをTiDBに送信して、特定のデータベース内のすべてのテーブルのTiFlashレプリカを作成できます。
 
@@ -132,6 +132,14 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
 ```
 
 ## 利用可能なゾーンを設定する {#set-available-zones}
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このセクションは、 TiDB Cloudには適用されません。
+
+</CustomContent>
 
 レプリカを構成するときに、ディザスタリカバリのためにTiFlashレプリカを複数のデータセンターに配布する必要がある場合は、以下の手順に従って使用可能なゾーンを構成できます。
 
@@ -197,4 +205,8 @@ SELECT TABLE_NAME FROM information_schema.tables where TABLE_SCHEMA = "<db_name>
         ...
     ```
 
+<CustomContent platform="tidb">
+
 ラベルを使用したレプリカのスケジューリングの詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、および[1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照して[2つの都市に配置された3つのデータセンター](/three-data-centers-in-two-cities-deployment.md) 。
+
+</CustomContent>

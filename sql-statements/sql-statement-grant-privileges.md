@@ -79,11 +79,16 @@ mysql> SHOW GRANTS FOR 'newuser';
 
 -   MySQLと同様に、 `USAGE`特権はTiDBサーバーにログインする機能を示します。
 -   カラムレベルの権限は現在サポートされていません。
--   MySQLと同様に、 `NO_AUTO_CREATE_USER` sqlモードが存在しない場合、ユーザーが存在しない場合、 `GRANT`ステートメントは空のパスワードで新しいユーザーを自動的に作成します。このsql-modeを削除すると（デフォルトで有効になっています）、セキュリティ上のリスクがあります。
+-   MySQLと同様に、 `NO_AUTO_CREATE_USER` sqlモードが存在しない場合、ユーザーが存在しない場合、 `GRANT`ステートメントは空のパスワードで新しいユーザーを自動的に作成します。このSQLモード（デフォルトで有効になっている）を削除すると、セキュリティ上のリスクが発生します。
 
 ## も参照してください {#see-also}
 
 -   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
 -   [`REVOKE &#x3C;privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
 -   [助成金を表示](/sql-statements/sql-statement-show-grants.md)
+
+<CustomContent platform="tidb">
+
 -   [権限管理](/privilege-management.md)
+
+</CustomContent>

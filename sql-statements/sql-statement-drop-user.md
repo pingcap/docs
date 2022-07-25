@@ -5,7 +5,7 @@ summary: An overview of the usage of DROP USER for the TiDB database.
 
 # ドロップユーザー {#drop-user}
 
-このステートメントは、TiDBシステムデータベースからユーザーを削除します。オプションのキーワード`IF EXISTS`は、ユーザーが存在しない場合にエラーを消音するために使用できます。このステートメントには`CREATE USER`の特権が必要です。
+このステートメントは、TiDBシステムデータベースからユーザーを削除します。オプションのキーワード`IF EXISTS`を使用すると、ユーザーが存在しない場合にエラーを消音できます。このステートメントには`CREATE USER`の特権が必要です。
 
 ## あらすじ {#synopsis}
 
@@ -67,5 +67,10 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 -   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 -   [ALTER USER](/sql-statements/sql-statement-alter-user.md)
--   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
+-   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+
+<CustomContent platform="tidb">
+
 -   [権限管理](/privilege-management.md)
+
+</CustomContent>

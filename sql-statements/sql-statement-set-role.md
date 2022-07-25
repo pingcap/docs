@@ -23,7 +23,7 @@ summary: An overview of the usage of SET ROLE for the TiDB database.
 
 ## 例 {#examples}
 
-ユーザー`'u1'@'%'`と3 `'r3'@'%'`の役割を作成し`'r2'@'%'` ： `'r1'@'%'` 。これらの役割を`'u1'@'%'`に付与し、 `'r1'@'%'`をデフォルトの役割`'u1'@'%'`として設定します。
+ユーザー`'u1'@'%'`と`'r3'@'%'`つの役割（ `'r1'@'%'` ）を作成し`'r2'@'%'` 。これらの役割を`'u1'@'%'`に付与し、 `'r1'@'%'`をデフォルトの役割`'u1'@'%'`として設定します。
 
 {{< copyable "" >}}
 
@@ -88,7 +88,7 @@ SELECT CURRENT_ROLE();
 1 row in set (0.000 sec)
 ```
 
-次の`SET ROLE`のステートメントを実行して、有効なすべてのロールをキャンセルします。
+次の`SET ROLE`のステートメントを実行して、有効なすべての役割をキャンセルします。
 
 {{< copyable "" >}}
 
@@ -108,7 +108,7 @@ SELECT CURRENT_ROLE();
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
@@ -117,4 +117,9 @@ SELECT CURRENT_ROLE();
 -   [`GRANT &#x3C;role>`](/sql-statements/sql-statement-grant-role.md)
 -   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
+
+<CustomContent platform="tidb">
+
 -   [ロールベースのアクセス制御](/role-based-access-control.md)
+
+</CustomContent>

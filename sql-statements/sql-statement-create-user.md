@@ -5,7 +5,7 @@ summary: An overview of the usage of CREATE USER for the TiDB database.
 
 # ユーザーを作成 {#create-user}
 
-このステートメントは、パスワードで指定された新しいユーザーを作成します。 MySQL特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することができます。また、2人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
+このステートメントは、パスワードで指定された新しいユーザーを作成します。 MySQL特権システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することができます。 2人のユーザーが同じユーザー部分を持ち、異なるホストからログインするときに異なる権限を持つことも可能です。
 
 ## あらすじ {#synopsis}
 
@@ -71,8 +71,13 @@ Query OK, 1 row affected (0.02 sec)
 
 ## も参照してください {#see-also}
 
+<CustomContent platform="tidb">
+
 -   [MySQLとのセキュリティの互換性](/security-compatibility-with-mysql.md)
--   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
--   [ユーザーの作成を表示](/sql-statements/sql-statement-show-create-user.md)
--   [ALTER USER](/sql-statements/sql-statement-alter-user.md)
 -   [権限管理](/privilege-management.md)
+
+</CustomContent>
+
+-   [ドロップユーザー](/sql-statements/sql-statement-drop-user.md)
+-   [CREATEUSERを表示する](/sql-statements/sql-statement-show-create-user.md)
+-   [ALTER USER](/sql-statements/sql-statement-alter-user.md)

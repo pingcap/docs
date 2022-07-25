@@ -5,11 +5,11 @@ summary: Learn how to use Stale Read to accelerate queries under certain conditi
 
 # 古い読み取り {#stale-read}
 
-Stale Readは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時間または指定された時間範囲内で対応する履歴データを読み取ることができるため、ストレージノード間のデータレプリケーションによって発生する遅延を節約できます。 Steal Readを使用している場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。これは、すべてのレプリカがデータ読み取りに使用できることを意味します。
+Stale Readは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時間または指定した時間範囲内で対応する履歴データを読み取ることができるため、ストレージノード間のデータレプリケーションによって発生する遅延を節約できます。スティールリードを使用している場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。これは、すべてのレプリカがデータ読み取りに使用できることを意味します。
 
-実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいてTiDBでStaleReadを有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイムデータの読み取りを許容できない場合は、StaleReadを有効にしないでください。
+実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいてTiDBでStaleReadを有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイムデータの読み取りに耐えられない場合は、StaleReadを有効にしないでください。
 
-TiDBは、ステートメントレベル、トランザクションレベル、およびセッションレベルの3つのレベルのStaleReadを提供します。
+TiDBは、ステートメントレベル、トランザクションレベル、およびセッションレベルの3つのレベルの古い読み取りを提供します。
 
 ## 序章 {#introduction}
 
@@ -36,7 +36,7 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 5 rows in set (0.02 sec)
 ```
 
-現時点（2022-04-20 15:20:00）のリストでは、 *The Story ofDrooliusCaesar*の価格は100.0です。
+この時点（2022-04-20 15:20:00）のリストでは、 *The Story ofDrooliusCaesar*の価格は100.0です。
 
 同時に、売り手はその本が非常に人気があることを発見し、次のSQLステートメントを通じて本の価格を150.0に引き上げました。
 
@@ -68,16 +68,16 @@ Rows matched: 1  Changed: 1  Warnings: 0
 5 rows in set (0.01 sec)
 ```
 
-最新のデータを使用する必要がない場合は、Stale Readを使用してクエリを実行できます。これにより、古いデータが返される可能性があり、強一貫性のある読み取り中にデータレプリケーションによって発生する遅延を回避できます。
+最新のデータを使用する必要がない場合は、古いデータを返す可能性のあるStale Readを使用してクエリを実行し、一貫性の高い読み取り中にデータレプリケーションによって発生する遅延を回避できます。
 
-Bookshopアプリケーションでは、書籍のリアルタイム価格は書籍リストページでは必要なく、書籍の詳細と注文ページでのみ必要であると想定しています。 Stale Readは、アプリケーション全体を改善するために使用できます。
+Bookshopアプリケーションでは、本のリアルタイム価格は本のリストページでは必要なく、本の詳細と注文ページでのみ必要であると想定しています。 Stale Readは、アプリケーション全体を改善するために使用できます。
 
 ## ステートメントレベル {#statement-level}
 
 <SimpleTab>
-<div label="SQL" href="statement-sql">
+<div label="SQL">
 
-特定の時間より前の本の価格をクエリするには、上記のクエリステートメントに`AS OF TIMESTAMP <datetime>`句を追加します。
+特定の時間より前の本の価格を照会するには、上記の照会ステートメントに`AS OF TIMESTAMP <datetime>`節を追加します。
 
 {{< copyable "" >}}
 
@@ -104,7 +104,7 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 -   `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`は、10秒前の最新データを照会します。
 -   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')`は、 `2016-10-08 16:45:26`から`2016-10-08 16:45:29`までの最新データを照会します。
--   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())`は20秒以内に最新のデータを照会します。
+-   `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())`は、20秒以内に最新のデータを照会します。
 
 指定されたタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしてはならないことに注意してください。
 
@@ -237,7 +237,7 @@ WARN: GC life time is shorter than transaction duration.
 `START TRANSACTION READ ONLY AS OF TIMESTAMP`ステートメントを使用すると、履歴時間に基づいて読み取り専用トランザクションを開始できます。これにより、指定された履歴タイムスタンプから履歴データが読み取られます。
 
 <SimpleTab>
-<div label="SQL" href="txn-sql">
+<div label="SQL">
 
 例えば：
 
@@ -286,9 +286,9 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 ```
 
 </div>
-<div label="Java" href="txn-java">
+<div label="Java">
 
-トランザクションのヘルパークラスを定義できます。これは、ヘルパーメソッドとしてトランザクションレベルでStaleReadを有効にするコマンドをカプセル化します。
+トランザクションのヘルパークラスを定義できます。これは、コマンドをカプセル化して、トランザクションレベルでヘルパーメソッドとしてStaleReadを有効にします。
 
 {{< copyable "" >}}
 
@@ -307,7 +307,7 @@ public static class StaleReadHelper {
 }
 ```
 
-次に、 `BookDAO`クラスのトランザクションを介してStaleRead機能を有効にするメソッドを定義します。クエリステートメントに`AS OF TIMESTAMP`を追加する代わりに、メソッドを使用してクエリを実行します。
+次に、 `BookDAO`クラスのトランザクションを介して古い読み取り機能を有効にするメソッドを定義します。クエリステートメントに`AS OF TIMESTAMP`を追加する代わりに、メソッドを使用してクエリを実行します。
 
 {{< copyable "" >}}
 
@@ -390,7 +390,7 @@ The latest book price (after the transaction commit): 150
 `SET TRANSACTION READ ONLY AS OF TIMESTAMP`ステートメントを使用すると、開いたトランザクションまたは次のトランザクションを、指定した履歴時間に基づいて読み取り専用トランザクションに設定できます。トランザクションは、提供された履歴時間に基づいて履歴データを読み取ります。
 
 <SimpleTab>
-<div label="SQL" href="next-txn-sql">
+<div label="SQL">
 
 たとえば、次の`AS OF TIMESTAMP`のステートメントを使用して、進行中のトランザクションを読み取り専用モードに切り替え、5秒前の履歴データを読み取ることができます。
 
@@ -399,9 +399,9 @@ SET TRANSACTION READ ONLY AS OF TIMESTAMP NOW() - INTERVAL 5 SECOND;
 ```
 
 </div>
-<div label="Java" href="next-txn-java">
+<div label="Java">
 
-トランザクションのヘルパークラスを定義できます。これは、ヘルパーメソッドとしてトランザクションレベルでStaleReadを有効にするコマンドをカプセル化します。
+トランザクションのヘルパークラスを定義できます。これは、コマンドをカプセル化して、トランザクションレベルでヘルパーメソッドとしてStaleReadを有効にします。
 
 {{< copyable "" >}}
 
@@ -419,7 +419,7 @@ public static class TxnHelper {
 }
 ```
 
-次に、 `BookDAO`クラスのトランザクションを介してStaleRead機能を有効にするメソッドを定義します。クエリステートメントに`AS OF TIMESTAMP`を追加する代わりに、メソッドを使用してクエリを実行します。
+次に、 `BookDAO`クラスのトランザクションを介して古い読み取り機能を有効にするメソッドを定義します。クエリステートメントに`AS OF TIMESTAMP`を追加する代わりに、メソッドを使用してクエリを実行します。
 
 {{< copyable "" >}}
 
@@ -475,7 +475,7 @@ public class BookDAO {
 <SimpleTab>
 <div label="SQL">
 
-セッションで古い読み取りを有効にする：
+セッションで古い読み取りを有効にします。
 
 {{< copyable "" >}}
 
@@ -485,7 +485,7 @@ SET @@tidb_read_staleness="-5";
 
 たとえば、値が`-5`に設定されていて、TiKVに対応する履歴データがある場合、TiDBは5秒の時間範囲内で可能な限り新しいタイムスタンプを選択します。
 
-セッションでStaleReadを無効にします。
+セッションで古い読み取りを無効にします。
 
 {{< copyable "" >}}
 

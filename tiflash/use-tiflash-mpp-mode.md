@@ -11,7 +11,7 @@ TiFlashは、MPPモードを使用したクエリの実行をサポートしま�
 
 ## MPPモードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
 
-`tidb_allow_mpp`変数は、TiDBがクエリを実行するためにMPPモードを選択できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視するかどうかを制御し、TiFlashのMPPモードを使用してクエリを強制的に実行します。
+`tidb_allow_mpp`変数は、TiDBがクエリを実行するためにMPPモードを選択できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視し、TiFlashのMPPモードを強制的に使用してクエリを実行するかどうかを制御します。
 
 これら2つの変数のすべての値に対応する結果は次のとおりです。
 
@@ -47,11 +47,15 @@ set @@session.tidb_allow_mpp=1;
 set @@session.tidb_enforce_mpp=1;
 ```
 
+<CustomContent platform="tidb">
+
 `tidb_enforce_mpp`セッション変数の初期値は、このtidb-serverインスタンスの[`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)構成値（デフォルトでは`false` ）と同じです。 TiDBクラスタの複数のtidb-serverインスタンスが分析クエリのみを実行し、これらのインスタンスでMPPモードが使用されていることを確認する場合は、 [`enforce-mpp`](/tidb-configuration-file.md#enforce-mpp)の構成値を`true`に変更できます。
+
+</CustomContent>
 
 > **ノート：**
 >
-> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完成の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
+> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完了の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
 >
 > コスト見積もり以外の理由でTiDBオプティマイザがMPPモードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行プランをチェックアウトすると、理由を説明する警告が返されます。例えば：
 >
@@ -74,9 +78,9 @@ set @@session.tidb_enforce_mpp=1;
 
 ## MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiver演算子が表示されている場合は、MPPモードが有効になっていることを示しています。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiver演算子が表示されている場合は、MPPモードが有効になっていることを示しています。
 
-次のステートメントは、TPC-Hテストセットのテーブル構造を例として取り上げています。
+次のステートメントは、例としてTPC-Hテストセットのテーブル構造を取り上げています。
 
 ```sql
 explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
@@ -101,7 +105,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 TiFlashは、ブロードキャストハッシュ結合を使用するかどうかを制御するために、次の2つのグローバル/セッション変数を提供します。
 
 -   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位はバイトです。テーブルサイズ（バイト単位）が変数の値よりも小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
--   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを推定できないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを見積もることができないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
 ## MPPモードでパーティションテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 

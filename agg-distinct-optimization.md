@@ -9,7 +9,7 @@ summary: Introduce the `distinct` optimization in the TiDB query optimizer.
 
 ## <code>SELECT</code>ステートメントの<code>DISTINCT</code>修飾子 {#code-distinct-code-modifier-in-code-select-code-statements}
 
-`DISTINCT`修飾子は、結果セットからの重複行の削除を指定します。 `SELECT DISTINCT`は`GROUP BY`に変換されます。例：
+`DISTINCT`修飾子は、結果セットから重複行を削除することを指定します。 `SELECT DISTINCT`は`GROUP BY`に変換されます。次に例を示します。
 
 ```sql
 mysql> explain SELECT DISTINCT a from t;
@@ -27,9 +27,19 @@ mysql> explain SELECT DISTINCT a from t;
 
 通常、 `DISTINCT`オプションの集計関数は、シングルスレッド実行モデルのTiDBレイヤーで実行されます。
 
-TiDBの[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)のシステム変数または[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)の構成項目は、個別の集約クエリを書き換えてTiKV/TiFlashコプロセッサーにプッシュするかどうかを制御します。
+<CustomContent platform="tidb">
 
-この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集約関数がTiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分がTiKV /TiFlashコプロセッサーにプッシュされます。TiKVコプロセッサーの列aで重複した値を削除するためのHashAgg_5があります。これにより、TiDBレイヤーでの`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
+TiDBの[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)のシステム変数または[`distinct-agg-push-down`](/tidb-configuration-file.md#distinct-agg-push-down)の構成項目は、個別の集約クエリを書き換えて、それらをTiKVまたはTiFlashコプロセッサーにプッシュするかどうかを制御します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDBの[`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)システム変数は、個別の集計クエリを書き換えて、それらをTiKVまたはTiFlashコプロセッサーにプッシュするかどうかを制御します。
+
+</CustomContent>
+
+この最適化の例として、次のクエリを取り上げます。 `tidb_opt_distinct_agg_push_down`はデフォルトで無効になっています。これは、集計関数がTiDBレイヤーで実行されることを意味します。値を`1`に設定してこの最適化を有効にした後、 `count(distinct a)`の`distinct a`の部分がTiKVまたはTiFlashコプロセッサーにプッシュされます。TiKVコプロセッサーの列aで重複した値を削除するHashAgg_5があります。これにより、TiDBレイヤーでの`HashAgg_8`の計算オーバーヘッドが削減される可能性があります。
 
 ```sql
 mysql> desc select count(distinct a) from test.t;

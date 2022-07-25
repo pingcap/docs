@@ -16,7 +16,7 @@ aliases: ['/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/stabl
 >
 > Golang1.16以降のバージョンを使用することをお勧めします。
 
-## ステップ1.TiDBクラスタを起動します {#step-1-launch-your-tidb-cluster}
+## 手順1.TiDBクラスタを起動します {#step-1-launch-your-tidb-cluster}
 
 以下に、TiDBクラスタを開始する方法を紹介します。
 
@@ -38,7 +38,7 @@ git clone https://github.com/pingcap-inc/tidb-example-golang.git
 
 <SimpleTab>
 
-<div label="Using go-sql-driver/mysql" href="get-code-sql-driver">
+<div label="Using go-sql-driver/mysql">
 
 `sqldriver`ディレクトリに移動します。
 
@@ -488,9 +488,9 @@ const (
 
 </div>
 
-<div label="Using GORM (Recommended)" href="get-code-gorm">
+<div label="Using GORM (Recommended)">
 
-GORMと比較すると、go-sql-driver / mysqlの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+GORMと比較すると、go-sql-driver / mysqlの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じ、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
 GORMは、Golangで人気のあるオープンソースのORMライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
 
@@ -568,7 +568,7 @@ cd gorm
 
 `gorm.go`は`gorm`の本体です。 go-sql-driver / mysqlと比較して、GORMは異なるデータベース間のデータベース作成の違いを回避します。また、オブジェクトのAutoMigrateやCRUDなどの多くの操作を実装しているため、コードが大幅に簡素化されます。
 
-`Player`は、テーブルのマッピングであるデータエンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver / mysqlと比較して、GORMの`Player`は、 `gorm:"primaryKey;type:VARCHAR(36);column:id"`などの詳細情報のマッピング関係を示すためにstructタグを追加します。
+`Player`は、テーブルのマッピングであるデータエンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver / mysqlと比較して、GORMの`Player`は、 `gorm:"primaryKey;type:VARCHAR(36);column:id"`などの詳細情報のマッピング関係を示すstructタグを追加します。
 
 {{< copyable "" >}}
 
@@ -738,7 +738,7 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 <SimpleTab>
 
-<div label="Using go-sql-driver/mysql" href="sql-driver-table-init-sql-driver">
+<div label="Using go-sql-driver/mysql">
 
 go-sql-driver / mysqlを使用する場合は、データベーステーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQLクライアントがローカルにインストールされている場合は、次の`sqldriver`のディレクトリで直接実行できます。
 
@@ -756,11 +756,11 @@ make mysql
 mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続して`sql/dbinit.sql`ファイルのステートメントを実行します。
+非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続し、 `sql/dbinit.sql`ファイルでステートメントを実行します。
 
 </div>
 
-<div label="Using GORM (Recommended)" href="sql-driver-table-init-gorm">
+<div label="Using GORM (Recommended)">
 
 テーブルを手動で初期化する必要はありません。
 
@@ -772,7 +772,7 @@ mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 
 <SimpleTab>
 
-<div label="Using go-sql-driver/mysql" href="tidb-cloud-sql-driver">
+<div label="Using go-sql-driver/mysql">
 
 TiDB Cloudやその他のリモートクラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `sqldriver.go`分の`dsn`の値を変更します。
 
@@ -798,7 +798,7 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 </div>
 
-<div label="Using GORM (Recommended)" href="tidb-cloud-gorm">
+<div label="Using GORM (Recommended)">
 
 TiDB Cloudやその他のリモートクラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `gorm.go`分の`dsn`の値を変更します。
 
@@ -830,7 +830,7 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 <SimpleTab>
 
-<div label="Using go-sql-driver/mysql" href="run-sql-driver">
+<div label="Using go-sql-driver/mysql">
 
 コードを実行するには、それぞれ`make mysql`を`make run`し`make build` 。
 
@@ -856,7 +856,7 @@ go build -o bin/sql-driver-example
 
 </div>
 
-<div label="Using GORM (Recommended)" href="run-gorm">
+<div label="Using GORM (Recommended)">
 
 コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
@@ -886,13 +886,13 @@ go build -o bin/gorm-example
 
 <SimpleTab>
 
-<div label="Using go-sql-driver/mysql" href="output-sql-driver">
+<div label="Using go-sql-driver/mysql">
 
 [go-sql-driver/mysql期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
 
 </div>
 
-<div label="Using GORM (Recommended)" href="output-gorm">
+<div label="Using GORM (Recommended)">
 
 [GORMの期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
 

@@ -15,14 +15,23 @@ TiDBはMySQLと高い互換性があります。データがセルフホスト�
 
 ## 前提条件 {#prerequisites}
 
-TiDBは現在、次のCI照合のみをサポートしています。 MySQL互換データベースからTiDBにデータを移行する前に、サポートされている照合が要件を満たしていることを確認してください。
+MySQL互換データベースからTiDBにデータを移行する前に、サポートされているTiDB Cloudの照合が要件を満たしていることを確認してください。
 
+デフォルトでは、 TiDB Cloudは次のCI照合をサポートします。
+
+-   ascii_bin
+-   バイナリ
+-   latin1_bin
+-   utf8_bin
 -   utf8_general_ci
+-   utf8_unicode_ci
+-   utf8mb4_bin
 -   utf8mb4_general_ci
+-   utf8mb4_unicode_ci
 
 ## 手順1.TiUPをインストールします {#step-1-install-tiup}
 
-TiUPは、TiDBエコシステムのパッケージマネージャーであり、1行のコマンドで任意のTiDBクラスタコンポーネントを実行するのに役立ちます。このドキュメントでは、TiUPを使用して、 DumplingとTiDB Lightningのインストールと実行を支援します。
+TiUPは、TiDBエコシステムのパッケージマネージャーであり、1行のコマンドで任意のTiDBクラスタコンポーネントを実行するのに役立ちます。このドキュメントでは、TiUPを使用してDumplingとTiDB Lightningをインストールして実行します。
 
 1.  TiUPをダウンロードしてインストールします。
 
@@ -36,7 +45,7 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
     > **ノート：**
     >
-    > インストール後、TiUPは対応する`profile`のファイルの絶対パスを表示します。次のコマンドでは、 `.bash_profile`を`profile`ファイルのパスに変更する必要があります。
+    > インストール後、TiUPは対応する`profile`ファイルの絶対パスを表示します。次のコマンドでは、 `.bash_profile`を`profile`ファイルのパスに変更する必要があります。
 
     {{< copyable "" >}}
 
@@ -46,9 +55,9 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
 ## ステップ2.MySQL互換データベースからデータをエクスポートする {#step-2-export-data-from-mysql-compatible-databases}
 
-`mysqldump`または`mydumper`を使用するなど、MySQLからデータをダンプする方法はいくつかあります。パフォーマンスとTiDBとの互換性を高めるために、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用することをお勧めします。TiDBは、PingCAPによって作成されたオープンソースツールの1つでもあります。
+`mysqldump`または`mydumper`を使用するなど、MySQLからデータをダンプする方法はいくつかあります。 PingCAPによって作成されたオープンソースツールの1つでもあるTiDBとのパフォーマンスと互換性を高めるために、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用することをお勧めします。
 
-1.  Dumplingをインストールします：
+1.  Dumplingをインストールします。
 
     {{< copyable "" >}}
 
@@ -146,7 +155,7 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
         ターゲットTiDBクラスタでTLSを構成する場合、またはさらに構成を行う場合は、 [TiDB LightningConfiguration / コンフィグレーション](https://docs.pingcap.com/tidb/stable/tidb-lightning-configuration)を参照してください。
 
-3.  TiDB Lightningを使用してデータをTiDBにインポートします：
+3.  TiDB Lightningを使用してTiDBにデータをインポートします：
 
     {{< copyable "" >}}
 
@@ -157,4 +166,4 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
     インポートタスクが開始された後、次のいずれかの方法でインポートの進行状況を表示できます。
 
     -   コマンドラインを使用して進行状況を取得するには、ログのキーワード`progress`を`grep`にします。これは、デフォルトで5分ごとに更新されます。
-    -   TiDB監視フレームワークを使用してより多くの監視メトリックを取得するには、 [TiDB Lightning Monitoring](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。
+    -   TiDB監視フレームワークを使用してより多くの監視メトリックを取得するには、 [TiDB Lightning監視](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。

@@ -3,7 +3,7 @@ title: RECOVER TABLE
 summary: An overview of the usage of RECOVER TABLE for the TiDB database.
 ---
 
-# 回復表 {#recover-table}
+# 回復テーブル {#recover-table}
 
 `RECOVER TABLE`は、 `DROP TABLE`ステートメントが実行された後、GC（ガベージコレクション）の有効期間内に削除されたテーブルとそのテーブル上のデータを回復するために使用されます。
 
@@ -45,19 +45,23 @@ NUM ::= intLit
 >
 >     -   Binlogのバージョンは3.0.1以降です。
 >     -   TiDB 3.0は、アップストリームクラスタとダウンストリームクラスタの両方で使用されます。
->     -   セカンダリクラスタのGCライフタイムは、プライマリクラスタのGCライフタイムより長くする必要があります。ただし、アップストリームデータベースとダウンストリームデータベース間のデータレプリケーション中に遅延が発生するため、ダウンストリームでデータリカバリが失敗する可能性があります。
+>     -   セカンダリクラスタのGCライフタイムは、プライマリクラスタのGCライフタイムよりも長くする必要があります。ただし、アップストリームデータベースとダウンストリームデータベース間のデータレプリケーション中に遅延が発生するため、ダウンストリームでデータ回復が失敗する可能性があります。
 
-### Binlogレプリケーション中のエラーのトラブルシューティング {#troubleshoot-errors-during-tidb-binlog-replication}
+<CustomContent platform="tidb">
+
+**Binlogレプリケーション中のエラーのトラブルシューティング**
 
 TiDB Binlogレプリケーション中にアップストリームTiDBで`RECOVER TABLE`を使用すると、次の3つの状況でBinlogが中断される可能性があります。
 
 -   ダウンストリームデータベースは`RECOVER TABLE`ステートメントをサポートしていません。エラーインスタンス： `check the manual that corresponds to your MySQL server version for the right syntax to use near 'RECOVER TABLE table_name'` 。
 
--   GCの有効期間は、アップストリームデータベースとダウンストリームデータベースの間で一貫していません。エラーインスタンス： `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
+-   GCの寿命は、アップストリームデータベースとダウンストリームデータベースの間で一貫していません。エラーインスタンス： `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 
 -   レイテンシーは、アップストリームデータベースとダウンストリームデータベース間のレプリケーション中に発生します。エラーインスタンス： `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST` 。
 
 上記の3つの状況では、 Binlogからのデータレプリケーションを[削除されたテーブルの完全インポート](/ecosystem-tool-user-guide.md#backup-and-restore)で再開できます。
+
+</CustomContent>
 
 ## 例 {#examples}
 
@@ -75,7 +79,7 @@ TiDB Binlogレプリケーション中にアップストリームTiDBで`RECOVER
     RECOVER TABLE t;
     ```
 
-    このメソッドは、最近のDDLジョブ履歴を検索し、 `DROP TABLE`タイプの最初のDDL操作を見つけてから、 `RECOVER TABLE`ステートメントで指定された1つのテーブル名と同じ名前で削除されたテーブルをリカバリーします。
+    このメソッドは、最近のDDLジョブ履歴を検索し、 `DROP TABLE`タイプの最初のDDL操作を見つけてから、 `RECOVER TABLE`ステートメントで指定された1つのテーブル名と同じ名前で削除されたテーブルを回復します。
 
 -   使用したテーブルの`DDL JOB ID`に従って、削除したテーブルを回復します。
 
@@ -113,7 +117,7 @@ TiDB Binlogレプリケーション中にアップストリームTiDBで`RECOVER
 
 ## 実装の原則 {#implementation-principle}
 
-テーブルを削除する場合、TiDBはテーブルのメタデータのみを削除し、削除するテーブルデータ（行データとインデックスデータ）を`mysql.gc_delete_range`のテーブルに書き込みます。 TiDBバックグラウンドのGCワーカーは、GCの有効期間を超えるキーを`mysql.gc_delete_range`のテーブルから定期的に削除します。
+テーブルを削除する場合、TiDBはテーブルのメタデータのみを削除し、削除するテーブルデータ（行データとインデックスデータ）を`mysql.gc_delete_range`のテーブルに書き込みます。 TiDBバックグラウンドのGCワーカーは、GCの寿命を超えるキーを`mysql.gc_delete_range`のテーブルから定期的に削除します。
 
 したがって、テーブルをリカバリするには、GCワーカーがテーブルデータを削除する前に、テーブルメタデータをリカバリし、 `mysql.gc_delete_range`のテーブルの対応する行レコードを削除するだけで済みます。 TiDBのスナップショット読み取りを使用して、テーブルのメタデータを回復できます。詳細は[履歴データを読む](/read-historical-data.md)を参照してください。
 

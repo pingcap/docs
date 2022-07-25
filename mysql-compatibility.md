@@ -7,15 +7,31 @@ summary: Learn about the compatibility of TiDB with MySQL, and the unsupported a
 
 TiDBは、 MySQL 5.7プロトコルおよびMySQL 5.7の一般的な機能と構文と高い互換性があります。 MySQL 5.7のエコシステムツール（PHPMyAdmin、Navicat、MySQL Workbench、mysqldump、およびMydumper / myloader）とMySQLクライアントをTiDBに使用できます。
 
-ただし、MySQLの一部の機能はサポートされていません。これは、問題を解決するためのより良い方法（JSONに置き換えられたXML関数など）があるか、現在の需要と必要な労力の不足（ストアドプロシージャや関数など）が原因である可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
+ただし、MySQLの一部の機能はサポートされていません。これは、問題を解決するためのより良い方法があるため（JSONに置き換えられたXML関数など）、または現在の需要と必要な労力の不足（ストアドプロシージャや関数など）が原因である可能性があります。一部の機能は、分散システムとして実装するのが難しい場合もあります。
+
+<CustomContent platform="tidb">
 
 -   さらに、TiDBはMySQLレプリケーションプロトコルをサポートしていませんが、MySQLでデータをレプリケートするための特定のツールを提供します。
     -   MySQLからのデータの複製： [TiDBデータ移行（DM）](/dm/dm-overview.md)は、MySQL/MariaDBからTiDBへの完全なデータ移行と増分データ複製をサポートするツールです。
     -   MySQLへのデータの複製： [TiCDC](/ticdc/ticdc-overview.md)は、TiKV変更ログをプルすることによってTiDBの増分データを複製するためのツールです。 TiCDCは[MySQLシンク](/ticdc/ticdc-overview.md#sink-support)を使用して、TiDBの増分データをMySQLに複製します。
 
+</CustomContent>
+
+<CustomContent platform="tidb">
+
 > **ノート：**
 >
 > このページでは、MySQLとTiDBの一般的な違いについて説明します。 [安全](/security-compatibility-with-mysql.md)と[悲観的なトランザクションモード](/pessimistic-transaction.md#difference-with-mysql-innodb)の互換性については、専用ページを参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> MySQLとTiDBのトランザクションの違いについては、 [悲観的なトランザクションモード](/pessimistic-transaction.md#difference-with-mysql-innodb)を参照してください。
+
+</CustomContent>
 
 ## サポートされていない機能 {#unsupported-features}
 
@@ -46,11 +62,11 @@ TiDBは、 MySQL 5.7プロトコルおよびMySQL 5.7の一般的な機能と構
 
 ### 自動インクリメントID {#auto-increment-id}
 
--   TiDBでは、自動増分列はグローバルに一意です。これらは単一のTiDBサーバーではインクリメンタルですが、複数のTiDBサーバー間でインクリメンタルである必要*はなく*、順番に割り当てられる必要もありません。デフォルト値とカスタム値を混在させないことをお勧めします。そうしないと、 `Duplicated Error`のエラーメッセージが表示される場合があります。
+-   TiDBでは、自動インクリメンタル列はグローバルに一意です。これらは単一のTiDBサーバーでは増分ですが、必ずしも複数のTiDBサーバー間で増分したり、順番に割り当てたりする必要*はありません*。デフォルト値とカスタム値を混在させないことをお勧めします。そうしないと、 `Duplicated Error`エラーメッセージが表示される場合があります。
 
 -   `tidb_allow_remove_auto_inc`システム変数を使用して、 `AUTO_INCREMENT`列属性の削除を許可または禁止できます。列属性を削除する構文は`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`です。
 
--   TiDBは`AUTO_INCREMENT`列属性の追加をサポートしておらず、一度削除するとこの属性を回復することはできません。
+-   TiDBは、 `AUTO_INCREMENT`列属性の追加をサポートしておらず、この属性を削除すると、この属性を回復することはできません。
 
 -   詳細については、 [`AUTO_INCREMENT`](/auto-increment.md)を参照してください。
 
@@ -77,13 +93,35 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
+<CustomContent platform="tidb">
+
 > **ノート：**
 >
 > `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> `AUTO_INCREMENT`属性は、実稼働環境でホットスポットを引き起こす可能性があります。詳細については、 [HotSpotの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)を参照してください。代わりに[`AUTO_RANDOM`](/auto-random.md)を使用することをお勧めします。
+
+</CustomContent>
+
 ### パフォーマンススキーマ {#performance-schema}
 
+<CustomContent platform="tidb">
+
 TiDBは、 [プロメテウスとグラファナ](/tidb-monitoring-api.md)の組み合わせを使用して、パフォーマンス監視メトリックを格納および照会します。パフォーマンススキーマテーブルは、TiDBに空の結果を返します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB Cloudのパフォーマンスメトリックを確認するには、 TiDB Cloudコンソールのクラスタ概要ページを確認するか、 [サードパーティの監視統合](/tidb-cloud/monitor-tidb-cluster.md#third-party-integrations)を使用します。パフォーマンススキーマテーブルは、TiDBに空の結果を返します。
+
+</CustomContent>
 
 ### クエリ実行プラン {#query-execution-plan}
 
@@ -93,9 +131,9 @@ MySQLシステム変数`optimizer_switch`はTiDBでは読み取り専用であ�
 
 詳細については、 [クエリ実行プランを理解する](/explain-overview.md)を参照してください。
 
-### 内蔵関数 {#built-in-functions}
+### 組み込み関数 {#built-in-functions}
 
-TiDBは、MySQLの組み込み関数のほとんどをサポートしていますが、すべてをサポートしているわけではありません。ステートメント`SHOW BUILTINS`は、使用可能な関数のリストを提供します。
+TiDBは、MySQLの組み込み関数のほとんどをサポートしていますが、すべてではありません。ステートメント`SHOW BUILTINS`は、使用可能な関数のリストを提供します。
 
 参照： [TiDB SQL文法](https://pingcap.github.io/sqlgram/#functioncallkeyword) 。
 
@@ -108,7 +146,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 -   `ALGORITHM={INSTANT,INPLACE,COPY}`構文は、TiDBのアサーションとしてのみ関数し、 `ALTER`アルゴリズムを変更しません。詳細については、 [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)を参照してください。
 -   `CLUSTERED`タイプの主キーの追加/削除はサポートされていません。 `CLUSTERED`タイプの主キーの詳細については、 [クラスター化されたインデックス](/clustered-indexes.md)を参照してください。
 -   さまざまなタイプのインデックス（ `HASH|BTREE|RTREE|FULLTEXT` ）はサポートされておらず、指定すると解析されて無視されます。
--   テーブルパーティショニングは、 `HASH` 、および`RANGE`のパーティショニングタイプをサポートし`LIST` 。サポートされていないパーティションタイプの場合、 `Warning: Unsupported partition type %s, treat as normal table`エラーが出力されることがあります。ここで、 `%s`は特定のパーティションタイプです。
+-   テーブルパーティショニングは、 `HASH` 、および`RANGE`のパーティショニングタイプをサポートし`LIST` 。サポートされていないパーティションタイプの場合、 `Warning: Unsupported partition type %s, treat as normal table`エラーが出力されることがあります`%s`は特定のパーティションタイプです。
 -   テーブルパーティショニングは、 `ADD` 、および`DROP`の操作もサポートし`TRUNCATE` 。他のパーティション操作は無視されます。次のテーブルパーティション構文はサポートされていません。
 
     -   `PARTITION BY KEY`
@@ -119,7 +157,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 ### テーブルを分析する {#analyze-table}
 
-[統計収集](/statistics.md#manual-collection)は、MySQLとMySQLでの動作が異なります。つまり、MySQL / InnoDBでは比較的軽量で短期間の操作ですが、TiDBではテーブルの統計を完全に再構築し、完了するまでにはるかに長い時間がかかる可能性があります。
+[統計収集](/statistics.md#manual-collection)は、MySQL / InnoDBでは比較的軽量で短命な操作であるという点でTiDBとMySQLでの動作が異なりますが、TiDBではテーブルの統計を完全に再構築し、完了するまでにはるかに長い時間がかかる可能性があります。
 
 これらの違いについては、 [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)で詳しく説明しています。
 
@@ -139,7 +177,7 @@ TiDBでは、サポートされているすべてのDDL変更はオンライン�
 
 TiDBのビューは更新できません。 `UPDATE`などの`INSERT`操作はサポートして`DELETE`ません。
 
-### 一時的なテーブル {#temporary-tables}
+### 一時テーブル {#temporary-tables}
 
 詳細については、 [TiDBローカル一時テーブルとMySQL一時テーブル間の互換性](/temporary-tables.md#compatibility-with-mysql-temporary-tables)を参照してください。
 
@@ -155,7 +193,11 @@ TiDBのビューは更新できません。 `UPDATE`などの`INSERT`操作は�
 
 互換性の理由から、TiDBは代替ストレージエンジンでテーブルを作成する構文をサポートしています。実装では、TiDBはメタデータをInnoDBストレージエンジンとして記述します。
 
+<CustomContent platform="tidb">
+
 TiDBはMySQLと同様のストレージエンジンの抽象化をサポートしていますが、TiDBサーバーを起動するときに[`--store`](/command-line-flags-for-tidb-configuration.md#--store)オプションを使用してストレージエンジンを指定する必要があります。
+
+</CustomContent>
 
 ### SQLモード {#sql-modes}
 
@@ -172,9 +214,9 @@ TiDBはほとんどの[SQLモード](/sql-mode.md)をサポートします：
     -   MySQL 5.7のデフォルト値は`latin1`です。
     -   MySQL8.0のデフォルト値は`utf8mb4`です。
 -   デフォルトの照合順序：
-    -   TiDBのデフォルトの`utf8mb4`の照合順序は`utf8mb4_bin`です。
+    -   TiDBの`utf8mb4`のデフォルトの照合順序は`utf8mb4_bin`です。
     -   MySQL 5.7の`utf8mb4`のデフォルトの照合順序は`utf8mb4_general_ci`です。
-    -   MySQL8.0のデフォルトの`utf8mb4`の照合順序は`utf8mb4_0900_ai_ci`です。
+    -   MySQL8.0の`utf8mb4`のデフォルトの照合順序は`utf8mb4_0900_ai_ci`です。
 -   デフォルト値`foreign_key_checks` ：
     -   TiDBのデフォルト値は`OFF`で、現在TiDBは`OFF`のみをサポートしています。
     -   MySQL 5.7のデフォルト値は`ON`です。
@@ -199,8 +241,8 @@ TiDBはほとんどの[SQLモード](/sql-mode.md)をサポートします：
 
 #### 名前付きタイムゾーン {#named-timezone}
 
--   TiDBは、現在システムにインストールされているすべてのタイムゾーンルールを計算に使用します（通常は`tzdata`のパッケージ）。タイムゾーンテーブルデータをインポートせずに、すべてのタイムゾーン名を使用できます。タイムゾーンテーブルデータをインポートして計算ルールを変更することはできません。
--   MySQLはデフォルトでローカルタイムゾーンを使用し、計算のためにシステムに組み込まれている現在のタイムゾーンルール（夏時間を開始するタイミングなど）に依存します。また、タイムゾーンは[タイムゾーンテーブルデータのインポート](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation)なしのタイムゾーン名で指定することはできません。
+-   TiDBは、現在システムにインストールされているすべてのタイムゾーンルールを計算に使用します（通常は`tzdata`のパッケージ）。タイムゾーンテーブルデータをインポートせずに、すべてのタイムゾーン名を使用できます。タイムゾーンテーブルのデータをインポートして計算ルールを変更することはできません。
+-   MySQLはデフォルトでローカルタイムゾーンを使用し、計算のためにシステムに組み込まれている現在のタイムゾーンルール（夏時間を開始するタイミングなど）に依存します。また、タイムゾーンを[タイムゾーンテーブルデータのインポート](https://dev.mysql.com/doc/refman/5.7/en/time-zone-support.html#time-zone-installation)なしでタイムゾーン名で指定することはできません。
 
 ### 型システムの違い {#type-system-differences}
 

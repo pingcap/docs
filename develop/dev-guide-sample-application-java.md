@@ -18,7 +18,7 @@ aliases: ['/appdev/dev/for-hibernate-orm','/tidb/stable/dev-guide-outdated-for-h
 >
 > アプリケーション開発にSpringBootを使用する場合は、 [SpringBootを使用してTiDBアプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)を参照してください。
 
-## ステップ1.TiDBクラスタを起動します {#step-1-launch-your-tidb-cluster}
+## 手順1.TiDBクラスタを起動します {#step-1-launch-your-tidb-cluster}
 
 以下に、TiDBクラスタを開始する方法を紹介します。
 
@@ -40,7 +40,7 @@ git clone https://github.com/pingcap-inc/tidb-example-java.git
 
 <SimpleTab>
 
-<div label="Using JDBC" href="get-code-jdbc">
+<div label="Using JDBC">
 
 `plain-java-jdbc`ディレクトリに移動します。
 
@@ -85,7 +85,7 @@ CREATE TABLE player (
 
 `JDBCExample.java`は`plain-java-jdbc`の本体です。 TiDBはMySQLプロトコルとの互換性が高いため、TiDBに接続するにはMySQLソースインスタンス`MysqlDataSource`を初期化する必要があります。次に、オブジェクト管理用に`PlayerDAO`を初期化し、それを使用してデータの読み取り、編集、追加、および削除を行うことができます。
 
-`PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。
+`PlayerDAO`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込む機能を提供するためのデータ操作メソッドのセットを定義します。
 
 `PlayerBean`は、テーブルのマッピングであるデータエンティティクラスです。 `PlayerBean`の各プロパティは、 `player`テーブルのフィールドに対応します。
 
@@ -516,9 +516,9 @@ public class JDBCExample
 
 </div>
 
-<div label="Using Mybatis (Recommended)" href="get-code-mybatis">
+<div label="Using Mybatis (Recommended)">
 
-[Mybatis](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBCの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを手動で作成する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+[Mybatis](https://mybatis.org/mybatis-3/index.html)と比較すると、JDBCの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
 Mybatisは、人気のあるオープンソースのJavaクラス永続化フレームワークです。以下では、永続性レイヤーコードを生成するためのMavenプラグインとして[MyBatisジェネレーター](https://mybatis.org/generator/quickstart.html)を使用しています。
 
@@ -564,7 +564,7 @@ cd plain-java-mybatis
 -   `src/main/java/com/pingcap/model/PlayerMapper.java` ： `PlayerMapper`のインターフェース。
 -   `src/main/resources/mapper/PlayerMapper.xml` ： `Player`のXMLマッピング。 Mybatisはこの構成を使用して、 `PlayerMapper`インターフェースの実装クラスを自動的に生成します。
 
-これらのファイルを生成するための戦略は、 [Mybatisジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`で記述されます。次の設定ファイルには、その使用方法を説明するコメントがあります。
+これらのファイルを生成するための戦略は、 [Mybatisジェネレーター](https://mybatis.org/generator/quickstart.html)の構成ファイルである`mybatis-generator.xml`に記述されています。次の設定ファイルには、その使用方法を説明するコメントがあります。
 
 {{< copyable "" >}}
 
@@ -1103,9 +1103,9 @@ public class MybatisExample {
 
 </div>
 
-<div label="Using Hibernate (Recommended)" href="get-code-hibernate">
+<div label="Using Hibernate (Recommended)">
 
-Hibernateと比較すると、JDBC実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを手動で作成する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+Hibernateと比較すると、JDBC実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを手動で記述する必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
 Hibernateは人気のあるオープンソースのJavaORMであり、TiDBの機能によく適合する`v6.0.0.Beta2`から始まるTiDB方言をサポートします。次の手順では、例として`v6.0.0.Beta2`を取り上げます。
 
@@ -1412,7 +1412,7 @@ public class HibernateExample
 
 <SimpleTab>
 
-<div label="Using JDBC" href="jdbc-table-init-jdbc">
+<div label="Using JDBC">
 
 JDBCを使用する場合は、データベーステーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQLクライアントがローカルにインストールされている場合は、次の`plain-java-jdbc`のディレクトリで直接実行できます。
 
@@ -1430,11 +1430,11 @@ make mysql
 mysql --host 127.0.0.1 --port 4000 -u root<src/main/resources/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続して`src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
+非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続し、 `src/main/resources/dbinit.sql`ファイルでステートメントを実行します。
 
 </div>
 
-<div label="Using Mybatis (Recommended)" href="jdbc-table-init-mybatis">
+<div label="Using Mybatis (Recommended)">
 
 Mybatisを使用する場合は、データベーステーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQLクライアントがローカルにインストールされている場合は、次の`plain-java-mybatis`のディレクトリで直接実行できます。
 
@@ -1452,11 +1452,11 @@ make prepare
 mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続して`src/main/resources/dbinit.sql`ファイルのステートメントを実行します。
+非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続し、 `src/main/resources/dbinit.sql`ファイルでステートメントを実行します。
 
 </div>
 
-<div label="Using Hibernate (Recommended)" href="jdbc-table-init-hibernate">
+<div label="Using Hibernate (Recommended)">
 
 テーブルを手動で初期化する必要はありません。
 
@@ -1468,7 +1468,7 @@ mysql --host 127.0.0.1 --port 4000 -u root < src/main/resources/dbinit.sql
 
 <SimpleTab>
 
-<div label="Using JDBC" href="tidb-cloud-jdbc">
+<div label="Using JDBC">
 
 TiDB Cloudやその他のリモートクラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、ホスト、ポート、ユーザー、およびパスワードのパラメーターを`JDBCExample.java`で変更します。
 
@@ -1502,7 +1502,7 @@ mysqlDataSource.setPassword("123456");
 
 </div>
 
-<div label="Using Mybatis (Recommended)" href="tidb-cloud-mybatis">
+<div label="Using Mybatis (Recommended)">
 
 `dataSource.password` TiDB Cloudや`mybatis-config.xml`のリモートクラスタなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dataSource.url`を変更し`dataSource.username` 。
 
@@ -1583,7 +1583,7 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 
 </div>
 
-<div label="Using Hibernate (Recommended)" href="tidb-cloud-hibernate">
+<div label="Using Hibernate (Recommended)">
 
 `hibernate.connection.password` TiDB Cloudや`hibernate.cfg.xml`のリモートクラスタなど、ローカル以外のデフォルトクラスタを使用している場合は、 `hibernate.connection.url`を変更し`hibernate.connection.username` 。
 
@@ -1661,7 +1661,7 @@ mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
 
 <SimpleTab>
 
-<div label="Using JDBC" href="run-jdbc">
+<div label="Using JDBC">
 
 コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
@@ -1685,9 +1685,9 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 
 </div>
 
-<div label="Using Mybatis (Recommended)" href="run-mybatis">
+<div label="Using Mybatis (Recommended)">
 
-コードを実行するには、 `make run` `make prepare`を`make build`し`make gen` 。
+コードを実行するには、それぞれ`make prepare` 、および`make gen`を`make run`し`make build` 。
 
 {{< copyable "" >}}
 
@@ -1727,7 +1727,7 @@ java -jar target/plain-java-mybatis-0.0.1-jar-with-dependencies.jar
 
 </div>
 
-<div label="Using Hibernate (Recommended)" href="run-hibernate">
+<div label="Using Hibernate (Recommended)">
 
 コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
@@ -1757,19 +1757,19 @@ java -jar target/plain-java-jdbc-0.0.1-jar-with-dependencies.jar
 
 <SimpleTab>
 
-<div label="Using JDBC" href="output-jdbc">
+<div label="Using JDBC">
 
 [JDBCの期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)
 
 </div>
 
-<div label="Using Mybatis (Recommended)" href="output-mybatis">
+<div label="Using Mybatis (Recommended)">
 
 [Mybatisの期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-mybatis)
 
 </div>
 
-<div label="Using Hibernate (Recommended)" href="output-hibernate">
+<div label="Using Hibernate (Recommended)">
 
 [Hibernateの期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-hibernate)
 

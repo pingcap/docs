@@ -5,7 +5,7 @@ summary: This document provides details about the TiDB support of the GBK charac
 
 # GBK {#gbk}
 
-v5.4.0以降、TiDBはGBK文字セットをサポートしています。このドキュメントは、GBK文字セットのTiDBサポートと互換性情報を提供します。
+v5.4.0以降、TiDBはGBK文字セットをサポートします。このドキュメントは、GBK文字セットのTiDBサポートと互換性情報を提供します。
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -33,9 +33,19 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 MySQLのGBK文字セットのデフォルトの照合順序は`gbk_chinese_ci`です。 MySQLとは異なり、TiDBのGBK文字セットのデフォルトの照合順序は`gbk_bin`です。さらに、TiDBはGBKをUTF8MB4に変換してから、バイナリ照合順序を使用するため、TiDBの`gbk_bin`照合順序はMySQLの`gbk_bin`照合順序と同じではありません。
 
+<CustomContent platform="tidb">
+
 TiDBをMySQLGBK文字セットの照合と互換性を持たせるには、最初にTiDBクラスタを初期化するときに、TiDBオプション[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)から`true`を設定して[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にする必要があります。
 
-照合用の新しいフレームワークを有効にした後、GBK文字セットに対応する照合を確認すると、TiDBGBKのデフォルトの照合順序が`gbk_chinese_ci`に変更されていることがわかります。
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDBをMySQLGBK文字セットの照合と互換性を持たせるために、TiDBクラスタを最初に初期化するときに、 TiDB Cloudはデフォルトで[照合のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にします。
+
+</CustomContent>
+
+照合の新しいフレームワークを有効にした後、GBK文字セットに対応する照合を確認すると、TiDBGBKのデフォルトの照合順序が`gbk_chinese_ci`に変更されていることがわかります。
 
 ```sql
 SHOW CHARACTER SET WHERE CHARSET = 'gbk';
@@ -62,7 +72,7 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 -   `character_set_client`と`character_set_connection`の両方が`gbk`に設定されている場合、TiDBはMySQLとは異なる方法で不正な文字を処理します。
 
     -   MySQLは、読み取り操作と書き込み操作で不正なGBK文字セットを異なる方法で処理します。
-    -   TiDBは、読み取りおよび書き込み操作で不正なGBK文字セットを同じ方法で処理します。 SQL strictモードでは、不正なGBK文字の読み取りまたは書き込み時にTiDBがエラーを報告します。非厳密モードでは、TiDBは、不正なGBK文字の読み取りまたは書き込み時に、不正なGBK文字を`?`に置き換えます。
+    -   TiDBは、読み取りおよび書き込み操作で不正なGBK文字セットを同じ方法で処理します。 SQL strictモードでは、TiDBは、不正なGBK文字の読み取りまたは書き込み時にエラーを報告します。非厳密モードでは、TiDBは、不正なGBK文字の読み取りまたは書き込み時に、不正なGBK文字を`?`に置き換えます。
 
 たとえば、 `SET NAMES gbk`の後に、MySQLとTiDBでそれぞれ`CREATE TABLE gbk_table(a VARCHAR(32) CHARACTER SET gbk)`ステートメントを使用してテーブルを作成し、次のテーブルのSQLステートメントを実行すると、詳細な違いを確認できます。
 
@@ -102,4 +112,4 @@ SHOW COLLATION WHERE CHARSET = 'gbk';
 
 -   v6.1.0より前のバージョンのTiCDCは、 `charset=GBK`のテーブルの複製をサポートしていません。 TiCDCのどのバージョンも、v6.1.0より前のTiDBクラスターへの`charset=GBK`のテーブルの複製をサポートしていません。
 
--   v5.4.0より前のバージョンのバックアップと復元（BR）は、 `charset=GBK`のテーブルのリカバリーをサポートしていません。 BRのどのバージョンも、v5.4.0より前のTiDBクラスターへの`charset=GBK`のテーブルのリカバリーをサポートしていません。
+-   v5.4.0より前のバージョンのバックアップと復元（BR）は、 `charset=GBK`のテーブルのリカバリをサポートしていません。 v5.4.0より前のバージョンのBRは、 `charset=GBK`のテーブルをTiDBクラスターにリカバリーすることをサポートしていません。

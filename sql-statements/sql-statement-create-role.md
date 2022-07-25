@@ -155,7 +155,7 @@ mysql> SHOW TABLES IN test;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
@@ -164,4 +164,9 @@ mysql> SHOW TABLES IN test;
 -   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [役割を設定する](/sql-statements/sql-statement-set-role.md)
 -   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
+
+<CustomContent platform="tidb">
+
 -   [ロールベースのアクセス制御](/role-based-access-control.md)
+
+</CustomContent>

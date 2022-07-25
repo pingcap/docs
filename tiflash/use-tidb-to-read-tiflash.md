@@ -52,9 +52,13 @@ explain analyze select count(*) from test.t;
 
 ## エンジンの分離 {#engine-isolation}
 
-エンジンの分離とは、対応する変数を構成することにより、すべてのクエリが指定されたエンジンのレプリカを使用するように指定することです。オプションのエンジンは、「tikv」、「tidb」（一部のTiDBシステムテーブルを格納し、ユーザーがアクティブに使用できないTiDBの内部メモリテーブル領域を示します）、および「tiflash」で、次の2つの構成レベルがあります。
+エンジンの分離とは、対応する変数を構成することにより、すべてのクエリが指定されたエンジンのレプリカを使用するように指定することです。オプションのエンジンは、「tikv」、「tidb」（一部のTiDBシステムテーブルを格納し、ユーザーがアクティブに使用できないTiDBの内部メモリテーブル領域を示します）、および「tiflash」です。
 
--   TiDBインスタンスレベル、つまりINSTANCEレベル。 TiDB構成ファイルに次の構成項目を追加します。
+<CustomContent platform="tidb">
+
+次の2つの構成レベルでエンジンを指定できます。
+
+-   TiDBインスタンスレベル、つまりINSTANCEレベル。次の構成アイテムをTiDB構成ファイルに追加します。
 
     ```
     [isolation-read]
@@ -63,7 +67,7 @@ explain analyze select count(*) from test.t;
 
     **INSTANCEレベルのデフォルト設定は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
 
--   SESSIONレベル。次のステートメントを使用して構成します。
+-   セッションレベル。次のステートメントを使用して構成します。
 
     {{< copyable "" >}}
 
@@ -81,11 +85,29 @@ explain analyze select count(*) from test.t;
 
     SESSIONレベルのデフォルト構成は、TiDBINSTANCEレベルの構成を継承します。
 
-最終的なエンジン構成はセッションレベルの構成です。つまり、セッションレベルの構成はインスタンスレベルの構成をオーバーライドします。たとえば、INSTANCEレベルで「tikv」を構成し、SESSIONレベルで「tiflash」を構成した場合、TiFlashレプリカが読み取られます。最終的なエンジン構成が「tikv」と「tiflash」の場合、TiKVとTiFlashのレプリカが両方とも読み取られ、オプティマイザーは実行するのに適したエンジンを自動的に選択します。
+最終的なエンジン構成はセッションレベルの構成です。つまり、セッションレベルの構成がインスタンスレベルの構成をオーバーライドします。たとえば、INSTANCEレベルで「tikv」を構成し、SESSIONレベルで「tiflash」を構成した場合、TiFlashレプリカが読み取られます。最終的なエンジン構成が「tikv」と「tiflash」の場合、TiKVとTiFlashのレプリカが両方とも読み取られ、オプティマイザーは実行するより適切なエンジンを自動的に選択します。
 
 > **ノート：**
 >
 > [TiDBダッシュボード](/dashboard/dashboard-intro.md)およびその他のコンポーネントは、TiDBメモリテーブル領域に格納されている一部のシステムテーブルを読み取る必要があるため、常に「tidb」エンジンをインスタンスレベルのエンジン構成に追加することをお勧めします。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+次のステートメントを使用してエンジンを指定できます。
+
+```sql
+set @@session.tidb_isolation_read_engines = "engine list separated by commas";
+```
+
+また
+
+```sql
+set SESSION tidb_isolation_read_engines = "engine list separated by commas";
+```
+
+</CustomContent>
 
 クエリされたテーブルに指定されたエンジンのレプリカがない場合（たとえば、エンジンが「tiflash」として構成されているが、テーブルにTiFlashレプリカがない場合）、クエリはエラーを返します。
 
@@ -107,7 +129,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように要求します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。さらに、ヒントはエンジン分離の前提でのみ有効になります。ヒントで指定されたエンジンがエンジン分離リストにない場合、ヒントも無視され、警告が報告されます。
 
@@ -117,8 +139,8 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 ## スマートセレクション、エンジン分離、および手動ヒントの関係 {#the-relationship-of-smart-selection-engine-isolation-and-manual-hint}
 
-上記の3つのTiFlashレプリカの読み取り方法では、エンジン分離により、エンジンの使用可能なレプリカの全体的な範囲が指定されます。この範囲内で、手動ヒントは、よりきめ細かいステートメントレベルおよびテーブルレベルのエンジン選択を提供します。最後に、CBOが決定を下し、指定されたエンジンリスト内のコスト見積もりに基づいてエンジンのレプリカを選択します。
+TiFlashレプリカを読み取る上記の3つの方法では、エンジンの分離により、エンジンの使用可能なレプリカの全体的な範囲が指定されます。この範囲内で、手動ヒントは、よりきめ細かいステートメントレベルおよびテーブルレベルのエンジン選択を提供します。最後に、CBOが決定を下し、指定されたエンジンリスト内のコスト見積もりに基づいてエンジンのレプリカを選択します。
 
 > **ノート：**
 >
-> `UPDATE ...`より前では、非読み取り専用SQLステートメント（たとえば、 `INSERT INTO ... SELECT` ）での`SELECT ... FOR UPDATE`レプリカからの読み取りの`DELETE ...`は定義されていません。 v4.0.3以降のバージョンでは、内部的にTiDBは非読み取り専用SQLステートメントのTiFlashレプリカを無視して、データの正確性を保証します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDBは非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの分離](#engine-isolation)の場合、TiDBはエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDBはヒントを無視します。
+> `DELETE ...`より前では、非読み取り専用SQLステートメント（たとえば、 `INSERT INTO ... SELECT` ）で`SELECT ... FOR UPDATE`レプリカから読み取る動作は定義されて`UPDATE ...`ません。 v4.0.3以降のバージョンでは、内部的にTiDBは非読み取り専用SQLステートメントのTiFlashレプリカを無視して、データの正確性を保証します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDBは非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの分離](#engine-isolation)の場合、TiDBはエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDBはヒントを無視します。

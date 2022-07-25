@@ -5,7 +5,7 @@ summary: Learn about the TiDB system tables.
 
 # <code>mysql</code>スキーマ {#code-mysql-code-schema}
 
-`mysql`スキーマには、TiDBシステムテーブルが含まれています。デザインはMySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能であるいくつかのテーブルも含まれています。
+`mysql`スキーマには、TiDBシステムテーブルが含まれています。設計はMySQLの`mysql`スキーマに似ており、 `mysql.user`などのテーブルを直接編集できます。また、MySQLの拡張機能であるいくつかのテーブルも含まれています。
 
 ## システムテーブルを付与する {#grant-system-tables}
 
@@ -24,8 +24,8 @@ summary: Learn about the TiDB system tables.
 
 -   `stats_buckets` ：統計のバケット
 -   `stats_histograms` ：統計のヒストグラム
--   `stats_meta` ：行の総数や更新された行などのテーブルのメタ情報
--   `analyze_jobs` ：過去7日間の進行中の統計収集タスクと履歴タスクレコード
+-   `stats_meta` ：行の総数や更新された行など、テーブルのメタ情報
+-   `analyze_jobs` ：過去7日以内に進行中の統計収集タスクと履歴タスクレコード
 
 ## GCワーカーシステムテーブル {#gc-worker-system-tables}
 
@@ -34,4 +34,9 @@ summary: Learn about the TiDB system tables.
 ## その他のシステムテーブル {#miscellaneous-system-tables}
 
 -   `GLOBAL_VARIABLES` ：グローバルシステム変数テーブル
+
+<CustomContent platform="tidb">
+
 -   `tidb` ：TiDB実行時のバージョン情報を記録します`bootstrap`
+
+</CustomContent>

@@ -5,7 +5,19 @@ summary: Learn the `TIDB_HOT_REGIONS_HISTORY` information_schema table.
 
 # TIDB_HOT_REGIONS_HISTORY {#tidb-hot-regions-history}
 
-`TIDB_HOT_REGIONS_HISTORY`の表は、PDによってローカルに定期的に記録される履歴ホットリージョンに関する情報を提供します。 [`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を設定することにより、レコード間隔を指定できます。デフォルト値は10分です。 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540)を設定することにより、ホットリージョンに関する履歴情報を予約する期間を指定できます。デフォルト値は7日です。詳細については、 [PD構成ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
+`TIDB_HOT_REGIONS_HISTORY`の表は、PDによってローカルに定期的に記録される履歴ホットリージョンに関する情報を提供します。
+
+<CustomContent platform="tidb">
+
+[`hot-regions-write-interval`](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を設定することにより、レコード間隔を指定できます。デフォルト値は10分です。 [`hot-regions-reserved-days`](/pd-configuration-file.md#hot-regions-reserved-days-new-in-v540)を設定することにより、ホットリージョンに関する履歴情報を予約する期間を指定できます。デフォルト値は7日です。詳細については、 [PD構成ファイルの説明](/pd-configuration-file.md#hot-regions-write-interval-new-in-v540)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+デフォルトでは、記録間隔は10分で、ホットリージョンに関する履歴情報を予約する期間は7日です。
+
+</CustomContent>
 
 {{< copyable "" >}}
 
@@ -53,9 +65,9 @@ DESC tidb_hot_regions_history;
 -   IS_LEADER：PEERがLEADERであるかどうか。
 -   TYPE：ホットリージョンのタイプ。
 -   HOT_DEGREE：ホットリージョンのホット度。
--   FLOW_BYTES：リージョンで書き込まれ、読み取られたバイト数。
+-   FLOW_BYTES：リージョンで書き込まれ読み取られたバイト数。
 -   KEY_RATE：リージョンで書き込まれ、読み取られるキーの数。
--   QUERY_RATE：リージョンで書き込まれ、読み取られたクエリの数。
+-   QUERY_RATE：リージョンで書き込まれ読み取られたクエリの数。
 
 > **ノート：**
 >
@@ -83,7 +95,7 @@ DESC tidb_hot_regions_history;
     SELECT * FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and TABLE_NAME = 'table_name';
     ```
 
--   特定の期間内のホットリージョンの分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
+-   特定の期間内のホットリージョンの分布を照会します。 `update_time`と`table_name`を実際の値に置き換えます。
 
     {{< copyable "" >}}
 
@@ -91,7 +103,7 @@ DESC tidb_hot_regions_history;
     SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' GROUP BY STORE_ID ORDER BY cnt DESC;
     ```
 
--   特定の期間内のホットリーダーリージョンの分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
+-   特定の期間内のホットリーダーリージョンの分布を照会します。 `update_time`と`table_name`を実際の値に置き換えます。
 
     {{< copyable "" >}}
 
@@ -99,7 +111,7 @@ DESC tidb_hot_regions_history;
     SELECT count(region_id) cnt, store_id FROM INFORMATION_SCHEMA.TIDB_HOT_REGIONS_HISTORY WHERE update_time >'2021-08-18 21:40:00' and update_time <'2021-09-19 00:00:00' and table_name = 'table_name' and is_leader=1 GROUP BY STORE_ID ORDER BY cnt DESC;
     ```
 
--   特定の期間内のホットインデックスリージョンの分布をクエリします。 `update_time`と`table_name`を実際の値に置き換えます。
+-   特定の期間内のホットインデックス領域の分布を照会します。 `update_time`と`table_name`を実際の値に置き換えます。
 
     {{< copyable "" >}}
 

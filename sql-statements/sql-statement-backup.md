@@ -7,11 +7,11 @@ summary: An overview of the usage of BACKUP for the TiDB database.
 
 このステートメントは、TiDBクラスタの分散バックアップを実行するために使用されます。
 
-`BACKUP`のステートメントは、バックアッププロセスが個別のBRツールではなく、TiDB自体によって駆動されることを除いて、 [BRツール](/br/backup-and-restore-use-cases.md)と同じエンジンを使用します。 BRのすべての利点と警告は、このステートメントにも適用されます。
+`BACKUP`のステートメントは[BRツール](/br/backup-and-restore-overview.md)と同じエンジンを使用しますが、バックアッププロセスが個別のBRツールではなくTiDB自体によって駆動される点が異なります。 BRのすべての利点と警告は、このステートメントにも適用されます。
 
 `BACKUP`を実行するには、 `BACKUP_ADMIN`または`SUPER`の特権が必要です。さらに、バックアップを実行するTiDBノードとクラスタのすべてのTiKVノードの両方に、宛先への読み取りまたは書き込み権限が必要です。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ（ `local://`で始まるストレージパス）は許可されません。
 
-`BACKUP`ステートメントは、バックアップタスク全体が終了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するために、長続きする接続を準備する必要があります。タスクは、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
+`BACKUP`ステートメントは、バックアップタスク全体が終了するか、失敗するか、キャンセルされるまでブロックされます。 `BACKUP`を実行するために、長期的な接続を準備する必要があります。タスクは、 [`KILL TIDB QUERY`](/sql-statements/sql-statement-kill.md)ステートメントを使用してキャンセルできます。
 
 一度に実行できるタスクは`BACKUP`つと[`RESTORE`](/sql-statements/sql-statement-restore.md)つだけです。 `BACKUP`または`RESTORE`ステートメントが同じTiDBサーバーですでに実行されている場合、新しい`BACKUP`の実行は、前のすべてのタスクが終了するまで待機します。
 
@@ -71,7 +71,7 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/2020/04/';
 | `Size`           | バックアップアーカイブの合計サイズ（バイト単位）                                            |
 | `BackupTS`       | バックアップが作成されたときのスナップショットのTSO（ [増分バックアップ](#incremental-backup)に役立ちます） |
 | `Queue Time`     | `BACKUP`のタスクがキューに入れられたときのタイムスタンプ（現在のタイムゾーン）。                        |
-| `Execution Time` | `BACKUP`のタスクの実行が開始されたときのタイムスタンプ（現在のタイムゾーン）。                         |
+| `Execution Time` | `BACKUP`のタスクが実行を開始したときのタイムスタンプ（現在のタイムゾーン）。                          |
 
 ### テーブルをバックアップする {#back-up-tables}
 
@@ -124,7 +124,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/?region=us-west-2'
 
 デフォルトでは、すべてのTiKVノードが4つのバックアップスレッドを実行します。この値は、 `CONCURRENCY`オプションで調整できます。
 
-バックアップが完了する前に、 `BACKUP`はクラスタ上のデータに対してチェックサムを実行して、正確性を検証します。これが不要であると確信している場合は、 `CHECKSUM`オプションを使用してこの手順を無効にすることができます。
+バックアップが完了する前に、 `BACKUP`はクラスタ上のデータに対してチェックサムを実行して、正確性を検証します。これが不要であると確信できる場合は、 `CHECKSUM`オプションを使用してこの手順を無効にすることができます。
 
 {{< copyable "" >}}
 

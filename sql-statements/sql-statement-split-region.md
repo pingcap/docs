@@ -5,11 +5,11 @@ summary: An overview of the usage of Split Region for the TiDB database.
 
 # スプリットリージョン {#split-region}
 
-TiDBで作成された新しいテーブルごとに、このテーブルのデータを格納するためにデフォルトで[領域](/tidb-storage.md#region)つがセグメント化されます。このデフォルトの動作は、TiDB構成ファイルの`split-table`によって制御されます。このリージョンのデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2つに分割され始めます。
+TiDBで作成された新しいテーブルごとに、このテーブルのデータを格納するために、デフォルトで[領域](/tidb-storage.md#region)つがセグメント化されます。このデフォルトの動作は、TiDB構成ファイルの`split-table`によって制御されます。このリージョンのデータがデフォルトのリージョンサイズ制限を超えると、リージョンは2つに分割され始めます。
 
 上記の場合、最初にリージョンが1つしかないため、すべての書き込み要求は、リージョンが配置されているTiKVで発生します。新しく作成されたテーブルへの書き込みが多い場合、ホットスポットが発生します。
 
-上記のシナリオでのホットスポットの問題を解決するために、TiDBは事前分割機能を導入します。この関数は、指定されたパラメーターに従って特定のテーブルの複数のリージョンを事前分割し、それらを各TiKVノードに分散させることができます。
+上記のシナリオでのホットスポットの問題を解決するために、TiDBは事前分割機能を導入します。この機能は、指定されたパラメーターに従って特定のテーブルの複数のリージョンを事前分割し、それらを各TiKVノードに分散させることができます。
 
 ## あらすじ {#synopsis}
 
@@ -41,7 +41,7 @@ TiDBで作成された新しいテーブルごとに、このテーブルのデ�
 
 ![Int64Num](/media/sqlgram/Int64Num.png)
 
-## 分割領域の使用 {#usage-of-split-region}
+## 分割領域の使用法 {#usage-of-split-region}
 
 分割領域の構文には、次の2つのタイプがあります。
 
@@ -55,7 +55,7 @@ TiDBで作成された新しいテーブルごとに、このテーブルのデ�
 
     `BETWEEN lower_value AND upper_value REGIONS region_num`は、上限、下限、およびリージョンの量を定義します。次に、現在の領域が、上限と下限の間の領域の数（ `region_num`で指定）に均等に流出します。
 
--   不均一な分割の構文：
+-   不均一分割の構文：
 
     {{< copyable "" >}}
 
@@ -63,7 +63,7 @@ TiDBで作成された新しいテーブルごとに、このテーブルのデ�
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-    `BY value_list…`は、現在のリージョンがスピルトされることに基づいて、一連のポイントを手動で指定します。データが不均一に分散しているシナリオに適しています。
+    `BY value_list…`は、現在のリージョンがスピルされることに基づいて、一連のポイントを手動で指定します。データが不均一に分散しているシナリオに適しています。
 
 次の例は、 `SPLIT`ステートメントの結果を示しています。
 
@@ -82,8 +82,8 @@ TiDBで作成された新しいテーブルごとに、このテーブルのデ�
 >
 > 次の2つのセッション変数は、 `SPLIT`ステートメントの動作に影響を与える可能性があります。
 >
-> -   `tidb_wait_split_region_finish` ：リージョンを分散させるのに時間がかかる場合があります。この期間は、PDスケジューリングとTiKV負荷によって異なります。この変数は、 `SPLIT REGION`ステートメントを実行するときに、すべてのリージョンが分散するまで結果をクライアントに返すかどうかを制御するために使用されます。その値が`1` （デフォルト）に設定されている場合、TiDBはスキャッタリングが完了した後にのみ結果を返します。その値が`0`に設定されている場合、TiDBは散乱状態に関係なく結果を返します。
-> -   `tidb_wait_split_region_timeout` ：この変数は、 `SPLIT REGION`ステートメントの実行タイムアウトを秒単位で設定します。デフォルト値は300秒です。 `split`の操作が期間内に完了しない場合、TiDBはタイムアウトエラーを返します。
+> -   `tidb_wait_split_region_finish` ：リージョンを分散させるのに時間がかかる場合があります。この期間は、PDスケジューリングとTiKV負荷によって異なります。この変数は、 `SPLIT REGION`ステートメントを実行するときに、すべてのリージョンが分散するまで結果をクライアントに返すかどうかを制御するために使用されます。その値が`1` （デフォルト）に設定されている場合、TiDBは散乱が完了した後にのみ結果を返します。その値が`0`に設定されている場合、TiDBは散乱状態に関係なく結果を返します。
+> -   `tidb_wait_split_region_timeout` ：この変数は、 `SPLIT REGION`ステートメントの実行タイムアウトを秒単位で設定します。デフォルト値は300秒です。 `split`操作が期間内に完了しない場合、TiDBはタイムアウトエラーを返します。
 
 ### 分割テーブル領域 {#split-table-region}
 
@@ -93,7 +93,7 @@ TiDBで作成された新しいテーブルごとに、このテーブルのデ�
 t[table_id]_r[row_id]
 ```
 
-たとえば、 `table_id`が22で、 `row_id`が11の場合：
+たとえば、 `table_id`が22で、 `row_id`が11の場合、次のようになります。
 
 ```go
 t22_r11
@@ -101,11 +101,11 @@ t22_r11
 
 同じテーブルの行データには同じ`table_id`がありますが、各行には、リージョン分割に使用できる一意の`row_id`があります。
 
-#### スプリットさえ {#even-split}
+#### スプリットも {#even-split}
 
 `row_id`は整数であるため、分割するキーの値は、指定した`lower_value` 、および`upper_value`に従って計算でき`region_num` 。 TiDBは最初にステップ値（ `step = (upper_value - lower_value)/region_num` ）を計算します。次に、 `lower_value`から`upper_value`までの各「ステップ」ごとに均等に分割が行われ、 `region_num`で指定された数のリージョンが生成されます。
 
-たとえば、テーブルtのキー範囲`minInt64`から16の均等に分割されたリージョンが必要な場合は、次のステートメントを使用でき`maxInt64` 。
+たとえば、テーブルtのキー範囲`minInt64`から16の均等に分割されたリージョンを分割する場合は、次のステートメントを使用でき`maxInt64` 。
 
 {{< copyable "" >}}
 
@@ -181,7 +181,7 @@ SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("{") REGIONS 26;
 ```
 
-このステートメントは、テーブル`t`のインデックスidx1をa〜3から26のリージョンに分割し`{` 。リージョン1の範囲は`[minIndexValue, b)`です。リージョン2の範囲は`[b, c)`です。 …リージョン25の範囲は`[y, z)`で、リージョン26の範囲は`[z, maxIndexValue)`です。
+このステートメントは、テーブル`t`のインデックスidx1をa〜3の26のリージョンに分割し`{` 。リージョン1の範囲は`[minIndexValue, b)`です。リージョン2の範囲は`[b, c)`です。 …リージョン25の範囲は`[y, z)`で、リージョン26の範囲は`[z, maxIndexValue)`です。
 
 インデックス`idx2`の列がtimestamp/datetimeのような時間タイプであり、インデックスRegionを年ごとに分割する場合：
 
@@ -207,7 +207,7 @@ SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:
 
 ジョイントインデックスのデータ領域分割の場合、唯一の違いは、複数の列の値を指定できることです。
 
-たとえば、インデックス`idx3 (a, b)`には2つの列があり、列`a`はタイムスタンプタイプで、列`b`はintです。列`a`に従って時間範囲を分割するだけの場合は、SQLステートメントを使用して単一の列の時間インデックスを分割できます。この場合、 `lower_value`列と`upper_velue`列の列`b`の値を指定しないでください。
+たとえば、インデックス`idx3 (a, b)`には2つの列があり、列`a`はタイムスタンプタイプで、列`b`はintです。列`a`に従って時間範囲を分割するだけの場合は、SQLステートメントを使用して単一の列の時間インデックスを分割できます。この場合、 `lower_value`と`upper_velue`の列`b`の値を指定しないでください。
 
 {{< copyable "" >}}
 
@@ -229,7 +229,7 @@ SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 0
 
 インデックスデータは、指定したインデックス値で分割することもできます。
 
-たとえば、varchar型の列`a`とtimestamp型の列`b`を持つ`idx4 (a,b)`があります。
+たとえば、varcharタイプの列`a`とタイムスタンプタイプの列`b`を持つ`idx4 (a,b)`があります。
 
 {{< copyable "" >}}
 
@@ -258,7 +258,7 @@ region4  [("c", "")                    , maxIndexValue               )
     SPLIT [PARTITION] TABLE t [PARTITION] [(partition_name_list...)] [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
--   不均一な分割の構文：
+-   不均一分割の構文：
 
     {{< copyable "" >}}
 
@@ -276,7 +276,7 @@ region4  [("c", "")                    , maxIndexValue               )
     create table t (a int,b int,index idx(a)) partition by hash(a) partitions 2;
     ```
 
-    テーブル`t`を作成した後、リージョンはパーティションごとに分割されます。このテーブルのリージョンを表示するには、次の`SHOW TABLE REGIONS`の構文を使用します。
+    テーブル`t`を作成した後、リージョンはパーティションごとに分割されます。次の`SHOW TABLE REGIONS`の構文を使用して、このテーブルのリージョンを表示します。
 
     {{< copyable "" >}}
 
@@ -305,7 +305,7 @@ region4  [("c", "")                    , maxIndexValue               )
 
     > **ノート：**
     >
-    > この例は、ホットスポットデータが均等に分散されているシナリオにのみ適用されます。ホットスポットデータが指定されたデータ範囲に不均一に分散している場合は、 [パーティション化されたテーブルの分割領域](#split-regions-for-partitioned-tables)の不均一な分割の構文を参照してください。
+    > この例は、ホットスポットデータが均等に分散されているシナリオにのみ適用されます。ホットスポットデータが指定されたデータ範囲に不均一に分散している場合は、 [パーティションテーブルの分割領域](#split-regions-for-partitioned-tables)の不均一分割の構文を参照してください。
 
 3.  `SHOW TABLE REGIONS`構文を使用して、このテーブルのリージョンを再度表示します。このテーブルには10個のリージョンがあり、各パーティションには5つのリージョンがあり、そのうち4つは行データで、1つはインデックスデータであることがわかります。
 
@@ -417,7 +417,7 @@ region4  [("c", "")                    , maxIndexValue               )
 create table t (a int, b int,index idx1(a)) shard_row_id_bits = 4 pre_split_regions=2;
 ```
 
-テーブルを作成した後、このステートメントはテーブルtの`4 + 1`のリージョンを分割します。 `4 (2^2)`のリージョンはテーブルの行データを保存するために使用され、1つのリージョンは`idx1`のインデックスデータを保存するために使用されます。
+テーブルを作成した後、このステートメントはテーブルtの`4 + 1`のリージョンを分割します。 `4 (2^2)`の領域はテーブルの行データを保存するために使用され、1つの領域は`idx1`のインデックスデータを保存するために使用されます。
 
 4つのテーブルリージョンの範囲は次のとおりです。
 
@@ -428,9 +428,13 @@ region3:   [ 2<<61     ,  3<<61 )
 region4:   [ 3<<61     ,  +inf  )
 ```
 
-## ノート {#notes}
+<CustomContent platform="tidb">
 
-Split Regionステートメントによって分割されたRegionは、PDの[リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラーによって制御されます。 PDがすぐに新しく分割されたリージョンを再マージしないようにするには、リージョンマージ機能に関連する[動的に変更する](/pd-control.md)の構成アイテムを作成する必要があります。
+> **ノート：**
+>
+> Split Regionステートメントによって分割されたRegionは、PDの[リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge)スケジューラーによって制御されます。 PDが新しく分割されたリージョンをすぐに再マージしないようにするには、リージョンマージ機能に関連する[動的に変更する](/pd-control.md)の構成アイテムを作成する必要があります。
+
+</CustomContent>
 
 ## MySQLの互換性 {#mysql-compatibility}
 
@@ -439,4 +443,4 @@ Split Regionステートメントによって分割されたRegionは、PDの[�
 ## も参照してください {#see-also}
 
 -   [テーブルの地域を表示する](/sql-statements/sql-statement-show-table-regions.md)
--   セッション変数[`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 、および[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) 。
+-   セッション[`tidb_wait_split_region_finish`](/system-variables.md#tidb_wait_split_region_finish) [`tidb_wait_split_region_timeout`](/system-variables.md#tidb_wait_split_region_timeout) [`tidb_scatter_region`](/system-variables.md#tidb_scatter_region) 。

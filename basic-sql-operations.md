@@ -5,21 +5,11 @@ summary: Learn about the basic SQL statements for the TiDB database.
 
 # TiDBでSQLを探索する {#explore-sql-with-tidb}
 
-<CustomContent platform="tidb">
-
 TiDBはMySQLと互換性があり、ほとんどの場合、MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](/mysql-compatibility.md#unsupported-features)を参照してください。
 
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-TiDBはMySQLと互換性があり、ほとんどの場合、MySQLステートメントを直接使用できます。サポートされていない機能については、 [MySQLとの互換性](https://docs.pingcap.com/tidb/stable/mysql-compatibility#unsupported-features)を参照してください。
-
-</CustomContent>
-
 <CustomContent platform="tidb">
 
-SQLを試し、MySQLクエリとのTiDBの互換性をテストするには、次のようにします[TiDBをインストールせずに、Webブラウザで直接実行します](https://tour.tidb.io/) 。また、最初にTiDBクラスタをデプロイしてから、そのクラスターでSQLステートメントを実行することもできます。
+SQLを試し、MySQLクエリとのTiDBの互換性をテストするには、次のことができます[TiDBをインストールせずにWebブラウザで直接実行する](https://tour.tidb.io/) 。最初にTiDBクラスタをデプロイしてから、その中でSQLステートメントを実行することもできます。
 
 </CustomContent>
 
@@ -35,11 +25,11 @@ SQLは、その関数に応じて次の4つのタイプに分類されます。
 
 -   DQL（データクエリ言語）：条件付きフィルタリング後にレコードをクエリするために使用されます。
 
--   DCL（データ制御言語）：アクセス権限とセキュリティレベルを定義するために使用されます。
+-   DCL（データ制御言語）：アクセス特権とセキュリティレベルを定義するために使用されます。
 
-一般的なDDL機能は、オブジェクト（テーブルやインデックスなど）の作成、変更、および削除です。対応するコマンドは`CREATE` 、および`ALTER` `DROP` 。
+一般的なDDL機能は、オブジェクト（テーブルやインデックスなど）の作成、変更、および削除です。対応するコマンドは、 `CREATE` 、および`ALTER` `DROP` 。
 
-## データベースの表示、作成、削除 {#show-create-and-drop-a-database}
+## データベースを表示、作成、および削除します {#show-create-and-drop-a-database}
 
 TiDBのデータベースは、テーブルやインデックスなどのオブジェクトのコレクションと見なすことができます。
 
@@ -93,7 +83,7 @@ CREATE DATABASE IF NOT EXISTS samp_db;
 DROP DATABASE samp_db;
 ```
 
-## テーブルを作成、表示、およびドロップする {#create-show-and-drop-a-table}
+## テーブルを作成、表示、およびドロップします {#create-show-and-drop-a-table}
 
 テーブルを作成するには、次の`CREATE TABLE`のステートメントを使用します。
 
@@ -123,7 +113,7 @@ CREATE TABLE person (
 SHOW CREATE table person;
 ```
 
-テーブルを削除するには、 `DROP TABLE`ステートメントを使用します。
+テーブルを削除するには、次の`DROP TABLE`のステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -131,7 +121,7 @@ SHOW CREATE table person;
 DROP TABLE person;
 ```
 
-## インデックスの作成、表示、およびドロップ {#create-show-and-drop-an-index}
+## インデックスを作成、表示、削除する {#create-show-and-drop-an-index}
 
 インデックスは、インデックス付きの列に対するクエリを高速化するために使用されます。値が一意でない列のインデックスを作成するには、 `CREATE INDEX`ステートメントを使用します。
 
@@ -191,11 +181,11 @@ ALTER TABLE person DROP INDEX person_unique_id;
 >
 > DDL操作はトランザクションではありません。 DDL操作を実行するときに`COMMIT`ステートメントを実行する必要はありません。
 
-## データの挿入、更新、および削除 {#insert-update-and-delete-data}
+## データの挿入、更新、削除 {#insert-update-and-delete-data}
 
-一般的なDML機能は、テーブルレコードの追加、変更、および削除です。対応するコマンドは`INSERT` 、および`UPDATE` `DELETE` 。
+一般的なDML機能は、テーブルレコードの追加、変更、および削除です。対応するコマンドは、 `INSERT` 、および`UPDATE` `DELETE` 。
 
-テーブルにデータを挿入するには、次の`INSERT`ステートメントを使用します。
+テーブルにデータを挿入するには、次の`INSERT`のステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -203,7 +193,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 INSERT INTO person VALUES(1,'tom','20170912');
 ```
 
-一部のフィールドのデータを含むレコードをテーブルに挿入するには、次の`INSERT`ステートメントを使用します。
+一部のフィールドのデータを含むレコードをテーブルに挿入するには、 `INSERT`ステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -219,7 +209,7 @@ INSERT INTO person(id,name) VALUES('2','bob');
 UPDATE person SET birthday='20180808' WHERE id=2;
 ```
 
-テーブル内のデータを削除するには、次の`DELETE`ステートメントを使用します。
+テーブル内のデータを削除するには、次の`DELETE`のステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -235,7 +225,7 @@ DELETE FROM person WHERE id=2;
 
 DQLは、1つまたは複数のテーブルから目的のデータ行を取得するために使用されます。
 
-テーブル内のデータを表示するには、 `SELECT`ステートメントを使用します。
+テーブル内のデータを表示するには、次の`SELECT`のステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -272,7 +262,7 @@ SELECT * FROM person where id<5;
 
 DCLは通常、ユーザーの作成または削除、およびユーザー特権の管理に使用されます。
 
-ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では、パスワード`123456`を使用して`tiuser`という名前のユーザーを作成します。
+ユーザーを作成するには、 `CREATE USER`ステートメントを使用します。次の例では、パスワード`123456`で`tiuser`という名前のユーザーを作成します。
 
 {{< copyable "" >}}
 
@@ -288,7 +278,7 @@ CREATE USER 'tiuser'@'localhost' IDENTIFIED BY '123456';
 GRANT SELECT ON samp_db.* TO 'tiuser'@'localhost';
 ```
 
-`tiuser`の特権を確認するには：
+`tiuser`の権限を確認するには：
 
 {{< copyable "" >}}
 

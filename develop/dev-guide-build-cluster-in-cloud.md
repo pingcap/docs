@@ -19,11 +19,11 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 3.  1年間無料で開発者層クラスタを作成するには、 [プランページ](https://tidbcloud.com/console/plans)で**開発者層**プランを選択するか、 [クラスターの作成（開発層）](https://tidbcloud.com/console/create-cluster?tier=dev)をクリックします。
 
-4.  [**クラスターの作成（開発者層）]**ページで、クラスタ名、パスワード、クラウドプロバイダー（現時点では、AWSのみが開発者層で利用可能）、およびリージョン（近くのリージョンが推奨されます）を設定します。次に、[<strong>作成</strong>]をクリックしてクラスタを作成します。
+4.  [**クラスターの作成（開発者層）]**ページで、クラスタ名、パスワード、クラウドプロバイダー（現時点では、AWSのみが開発者層で利用可能）、およびリージョン（近くのリージョンを推奨）を設定します。次に、[<strong>作成</strong>]をクリックしてクラスタを作成します。
 
 5.  TiDB Cloudクラスタは約5〜15分で作成されます。作成の進行状況は[アクティブクラスター](https://tidbcloud.com/console/clusters)で確認できます。
 
-6.  クラスタを作成した後、[**アクティブクラスター**]ページで、新しく作成したクラスタの名前をクリックして、クラスタのコントロールパネルに移動します。
+6.  クラスタを作成した後、[**アクティブクラスター**]ページで、新しく作成したクラスタの名前をクリックして、クラスタコントロールパネルに移動します。
 
     ![active clusters](/media/develop/IMG_20220331-232643794.png)
 
@@ -37,7 +37,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
     ![SQL string](/media/develop/IMG_20220331-232800929.png)
 
-## ステップ2.クラスタに接続する {#step-2-connect-to-a-cluster}
+## 手順2.クラスタに接続する {#step-2-connect-to-a-cluster}
 
 1.  MySQLクライアントがインストールされていない場合は、オペレーティングシステムを選択し、以下の手順に従ってインストールします。
 
@@ -45,7 +45,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 <div label="macOS">
 
-[自作](https://brew.sh/index)がない場合はインストールし、次のコマンドを実行してMySQLクライアントをインストールします。
+macOSの場合、 [自作](https://brew.sh/index)がない場合はインストールしてから、次のコマンドを実行してMySQLクライアントをインストールします。
 
 {{< copyable "" >}}
 
@@ -94,7 +94,7 @@ mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 <div label="Linux">
 
-例としてCentOS7を取り上げます。
+Linuxの場合、次にCentOS7を例として取り上げます。
 
 {{< copyable "" >}}
 
@@ -130,7 +130,7 @@ mysql --connect-timeout 15 -u root -h <host> -P 4000 -p
 
 3.  サインインするにはパスワードを入力してください。
 
-## ステップ3.サンプルアプリケーションを実行します {#step-3-run-the-sample-application}
+## 手順3.サンプルアプリケーションを実行します {#step-3-run-the-sample-application}
 
 1.  `tidb-example-java`のプロジェクトのクローンを作成します。
 

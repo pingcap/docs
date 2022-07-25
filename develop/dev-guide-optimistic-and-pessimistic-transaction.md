@@ -5,11 +5,11 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 # 楽観的な取引と悲観的な取引 {#optimistic-transactions-and-pessimistic-transactions}
 
-[楽観的なトランザクション](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合が発生するとロールバックします。対照的に、 [悲観的な取引](/pessimistic-transaction.md)モデルは、実際にトランザクションをコミットする前に変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることを確認した後にのみコミットを開始します。
+[楽観的なトランザクション](/optimistic-transaction.md)モデルはトランザクションを直接コミットし、競合がある場合はロールバックします。対照的に、 [悲観的な取引](/pessimistic-transaction.md)モデルは、実際にトランザクションをコミットする前に変更が必要なリソースをロックしようとし、トランザクションが正常に実行できることを確認した後にのみコミットを開始します。
 
 直接コミットは成功する可能性が高いため、楽観的なトランザクションモデルは競合率が低いシナリオに適しています。ただし、トランザクションの競合が発生すると、ロールバックのコストは比較的高くなります。
 
-悲観的なトランザクションモデルの利点は、競合率が高いシナリオの場合、先にロックするコストが後のロールバックのコストよりも少ないことです。さらに、競合が原因で複数の同時トランザクションがコミットできないという問題を解決できます。ただし、競合率が低いシナリオでは、悲観的なトランザクションモデルは楽観的なトランザクションモデルほど効率的ではありません。
+悲観的なトランザクションモデルの利点は、競合率が高いシナリオの場合、先にロックするコストが後のロールバックのコストよりも少ないことです。さらに、競合が原因で複数の同時トランザクションがコミットに失敗するという問題を解決できます。ただし、競合率が低いシナリオでは、悲観的なトランザクションモデルは楽観的なトランザクションモデルほど効率的ではありません。
 
 悲観的なトランザクションモデルは、アプリケーション側でより直感的で簡単に実装できます。楽観的なトランザクションモデルには、複雑なアプリケーション側の再試行メカニズムが必要です。
 
@@ -19,21 +19,21 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 2.  注文を作成する
 3.  支払いをする
 
-これらの操作は、すべて成功するか、すべて失敗する必要があります。同時トランザクションの場合にオーバーセルが発生しないようにする必要があります。
+これらの操作は、すべて成功するか、すべて失敗する必要があります。同時トランザクションの場合、オーバーセルが発生しないようにする必要があります。
 
 ## 悲観的なトランザクション {#pessimistic-transactions}
 
-次のコードは、2つのスレッドを使用して、2人のユーザーが悲観的なトランザクションモードで同じ本を購入するプロセスをシミュレートします。書店には10冊の本が残っています。ボブは6冊の本を購入し、アリスは4冊の本を購入します。彼らはほぼ同時に注文を完了します。その結果、在庫のある本はすべて売り切れました。
+次のコードは、2つのスレッドを使用して、2人のユーザーが悲観的なトランザクションモードで同じ本を購入するプロセスをシミュレートします。書店には残り10冊の本があります。ボブは6冊の本を購入し、アリスは4冊の本を購入します。彼らはほぼ同時に注文を完了します。その結果、在庫のある本はすべて売り切れました。
 
 <SimpleTab>
 
-<div label="Java" href="pessimstic-concurrent-save-java">
+<div label="Java">
 
 複数のスレッドを使用して、複数のユーザーが同時にデータを挿入する状況をシミュレートするため、安全なスレッドを持つ接続オブジェクトを使用する必要があります。ここでは、Javaで人気のある接続プール[HikariCP](https://github.com/brettwooldridge/HikariCP)をデモに使用します。
 
 </div>
 
-<div label="Golang" href="pessimstic-concurrent-save-golang">
+<div label="Golang">
 
 Golangの`sql.DB`は同時実行に対して安全であるため、サードパーティのパッケージをインポートする必要はありません。
 
@@ -99,7 +99,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 <SimpleTab>
 
-<div label="Java" href="pessimstic-code-java">
+<div label="Java">
 
 **Configuration / コンフィグレーションファイル**
 
@@ -332,7 +332,7 @@ public class TxnExample {
 
 </div>
 
-<div label="Golang" href="pessimstic-code-golang">
+<div label="Golang">
 
 必要なデータベース操作を含む`helper.go`のファイルを作成します。
 
@@ -658,13 +658,13 @@ Golangの例には、すでに楽観的なトランザクションが含まれ�
 
 </SimpleTab>
 
-### 売り過ぎを伴わない例 {#an-example-that-does-not-involve-overselling}
+### 過剰販売を伴わない例 {#an-example-that-does-not-involve-overselling}
 
 サンプルプログラムを実行します。
 
 <SimpleTab>
 
-<div label="Java" href="pessimstic-not-oversell-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -675,7 +675,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang" href="pessimstic-not-oversell-golang">
+<div label="Golang">
 
 {{< copyable "" >}}
 
@@ -707,7 +707,7 @@ SQLログ：
 /* txn 1 */ COMMIT
 ```
 
-最後に、注文が作成され、ユーザー残高が差し引かれ、書籍の在庫が期待どおりに差し引かれていることを確認します。
+最後に、注文が作成され、ユーザー残高が差し引かれ、書籍の在庫が期待どおりに差し引かれることを確認します。
 
 ```sql
 mysql> SELECT * FROM `books`;
@@ -745,7 +745,7 @@ mysql> SELECT * FROM users;
 
 <SimpleTab>
 
-<div label="Java" href="pessimstic-oversell-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -756,7 +756,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang" href="pessimstic-oversell-golang">
+<div label="Golang">
 
 {{< copyable "" >}}
 
@@ -817,13 +817,13 @@ mysql> SELECT * FROM users;
 
 ## 楽観的な取引 {#optimistic-transactions}
 
-次のコードは、2つのスレッドを使用して、悲観的なトランザクションの例のように、2人のユーザーが楽観的なトランザクションで同じ本を購入するプロセスをシミュレートします。在庫は10冊残っています。ボブは6を購入し、アリスは4を購入します。彼らはほぼ同時に注文を完了します。結局、本は在庫に残っていません。
+次のコードは、悲観的なトランザクションの例のように、2つのスレッドを使用して、2人のユーザーが楽観的なトランザクションで同じ本を購入するプロセスをシミュレートします。在庫は10冊残っています。ボブは6を購入し、アリスは4を購入します。彼らはほぼ同時に注文を完了します。結局、本は在庫に残っていません。
 
 ### 楽観的な取引例を書く {#write-an-optimistic-transaction-example}
 
 <SimpleTab>
 
-<div label="Java" href="optimistic-code-java">
+<div label="Java">
 
 **コーディング**
 
@@ -995,7 +995,7 @@ public class TxnExample {
 <mainClass>com.pingcap.txn.TxnExample</mainClass>
 ```
 
-楽観的なトランザクションの例を示すために、次のように変更します。
+楽観的なトランザクションの例を指すように、次のように変更します。
 
 {{< copyable "" >}}
 
@@ -1005,7 +1005,7 @@ public class TxnExample {
 
 </div>
 
-<div label="Golang" href="optimistic-code-golang">
+<div label="Golang">
 
 [悲観的なトランザクションの例を書く](#write-a-pessimistic-transaction-example)セクションのGolangの例は、すでに楽観的なトランザクションをサポートしており、変更せずに直接使用できます。
 
@@ -1013,13 +1013,13 @@ public class TxnExample {
 
 </SimpleTab>
 
-### 売り過ぎを伴わない例 {#an-example-that-does-not-involve-overselling}
+### 過剰販売を伴わない例 {#an-example-that-does-not-involve-overselling}
 
 サンプルプログラムを実行します。
 
 <SimpleTab>
 
-<div label="Java" href="optimistic-not-oversell-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -1030,7 +1030,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang" href="optimistic-not-oversell-golang">
+<div label="Golang">
 
 {{< copyable "" >}}
 
@@ -1068,7 +1068,7 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 /* txn 1 */ COMMIT
 ```
 
-楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように、ステートメントが`affected_rows`を介して正常に実行されたかどうかを判断することはできません。トランザクション全体を考慮し、最後の`COMMIT`のステートメントが例外を返すかどうかをチェックして、現在のトランザクションに書き込みの競合があるかどうかを判断する必要があります。
+楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように、ステートメントが`affected_rows`を介して正常に実行されたかどうかを判断することはできません。トランザクション全体を考慮し、最後の`COMMIT`のステートメントが例外を返すかどうかを確認して、現在のトランザクションに書き込みの競合があるかどうかを判断する必要があります。
 
 上記のSQLログからわかるように、2つのトランザクションが同時に実行され、同じレコードが変更されるため、 `txn 1`のCOMMITの後に`9007 Write conflict`の例外がスローされます。オプティミスティックトランザクションモードでの書き込みの競合については、アプリケーション側で安全に再試行できます。 1回の再試行後、データは正常にコミットされます。最終的な実行結果は期待どおりです。
 
@@ -1102,13 +1102,13 @@ mysql> SELECT * FROM users;
 
 ### 売り過ぎを防ぐ例 {#an-example-that-prevents-overselling}
 
-このセクションでは、売り過ぎを防ぐ楽観的なトランザクションの例について説明します。在庫に10冊の本が残っていると仮定します。ボブは7冊の本を購入し、アリスは4冊の本を購入します。彼らはほぼ同時に注文します。何が起こるか？楽観的なトランザクションの例のコードを再利用して、この要件に対処できます。ボブの購入を6から7に変更します。
+このセクションでは、過剰販売を防ぐ楽観的なトランザクションの例について説明します。在庫に10冊の本が残っているとします。ボブは7冊の本を購入し、アリスは4冊の本を購入します。彼らはほぼ同時に注文します。何が起こるか？楽観的なトランザクションの例のコードを再利用して、この要件に対処できます。ボブの購入を6から7に変更します。
 
 サンプルプログラムを実行します。
 
 <SimpleTab>
 
-<div label="Java" href="optimistic-oversell-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -1119,7 +1119,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang" href="optimistic-oversell-golang">
+<div label="Golang">
 
 {{< copyable "" >}}
 

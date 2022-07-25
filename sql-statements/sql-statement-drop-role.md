@@ -170,7 +170,7 @@ mysql> DROP ROLE analyticsteam;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-Jenniferには、analyticsteamのデフォルトの役割が関連付けられていないか、役割をanalyticsteamに設定できます。
+Jenniferには、関連付けられたanalyticsteamのデフォルトの役割がなくなりました。または、役割をanalyticsteamに設定できます。
 
 ```sql
 $ mysql -ujennifer
@@ -200,7 +200,7 @@ ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQL8.0の機能であるロールと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
@@ -209,4 +209,9 @@ ERROR 3530 (HY000): `analyticsteam`@`%` is is not granted to jennifer@%
 -   [`REVOKE &#x3C;role>`](/sql-statements/sql-statement-revoke-role.md)
 -   [役割を設定する](/sql-statements/sql-statement-set-role.md)
 -   [デフォルトの役割を設定](/sql-statements/sql-statement-set-default-role.md)
+
+<CustomContent platform="tidb">
+
 -   [ロールベースのアクセス制御](/role-based-access-control.md)
+
+</CustomContent>

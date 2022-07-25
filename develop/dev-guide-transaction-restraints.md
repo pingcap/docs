@@ -9,11 +9,11 @@ summary: Learn about transaction restraints in TiDB.
 
 ## 分離レベル {#isolation-levels}
 
-TiDBでサポートされている分離レベルは、 **RC（読み取りコミット）**と<strong>SI（スナップショット分離）</strong>です。ここで、 <strong>SI</strong>は基本的に<strong>RR（繰り返し読み取り）</strong>分離レベルと同等です。
+TiDBでサポートされている分離レベルは、 **RC（Read Committed）**と<strong>SI（Snapshot Isolation）</strong>です。ここで、 <strong>SI</strong>は基本的に<strong>RR（Repeatable Read）</strong>分離レベルと同等です。
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
-## スナップショットアイソレーションはファントムリードを回避できます {#snapshot-isolation-can-avoid-phantom-reads}
+## スナップショットアイソレーションはファントム読み取りを回避できます {#snapshot-isolation-can-avoid-phantom-reads}
 
 TiDBの`SI`の分離レベルは**ファントム読み取り**を回避できますが、ANSI /ISOSQL標準の`RR`は回避できません。
 
@@ -25,17 +25,17 @@ TiDBの`SI`の分離レベルは**ファントム読み取り**を回避でき�
 
 ## SIは書き込みスキューを回避できません {#si-cannot-avoid-write-skew}
 
-TiDBのSI分離レベルでは、**書き込みスキュー**例外を回避できません。 `SELECT FOR UPDATE`の構文を使用して、<strong>書き込みスキュー</strong>の例外を回避できます。
+TiDBのSI分離レベルでは、**書き込みスキュー**の例外を回避できません。 `SELECT FOR UPDATE`の構文を使用して、<strong>書き込みスキュー</strong>の例外を回避できます。
 
-**書き込みスキュー**例外は、2つの同時トランザクションが異なるが関連するレコードを読み取り、各トランザクションが読み取ったデータを更新し、最終的にトランザクションをコミットするときに発生します。これらの関連レコード間に、複数のトランザクションで同時に変更できない制約がある場合、最終結果は制約に違反します。
+**書き込みスキュー**例外は、2つの同時トランザクションが異なるが関連するレコードを読み取るときに発生し、各トランザクションは読み取ったデータを更新して、最終的にトランザクションをコミットします。これらの関連レコード間に、複数のトランザクションで同時に変更できない制約がある場合、最終結果は制約に違反します。
 
-たとえば、病院の医師シフト管理プログラムを作成しているとします。病院では通常、同時に複数の医師が待機している必要がありますが、最小要件は、少なくとも1人の医師が待機していることです。医師は、シフト中に少なくとも1人の医師が待機している限り、シフトをドロップできます（たとえば、気分が悪い場合）。
+たとえば、病院の医師シフト管理プログラムを作成しているとします。病院では通常、複数の医師が同時に待機している必要がありますが、最小要件は、少なくとも1人の医師が待機していることです。医師は、シフト中に少なくとも1人の医師が待機している限り、シフトをドロップできます（たとえば、気分が悪い場合）。
 
 現在、医師`Alice`と`Bob`が待機している状況があります。どちらも気分が悪いので、病気休暇を取ることにしました。彼らはたまたま同時にボタンをクリックします。次のプログラムでこのプロセスをシミュレートしてみましょう。
 
 <SimpleTab>
 
-<div label="Java" href="write-skew-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -160,7 +160,7 @@ public class EffectWriteSkew {
 
 </div>
 
-<div label="Golang" href="write-skew-golang">
+<div label="Golang">
 
 TiDBトランザクションを適応させるには、次のコードに従って[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
 
@@ -370,7 +370,7 @@ mysql> SELECT * FROM doctors;
 
 <SimpleTab>
 
-<div label="Java" href="overcome-write-skew-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -495,7 +495,7 @@ public class EffectWriteSkew {
 
 </div>
 
-<div label="Golang" href="overcome-write-skew-golang">
+<div label="Golang">
 
 {{< copyable "" >}}
 
@@ -695,9 +695,9 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-## <code>savepoint</code>とネストされたトランザクションはサポートされていません {#code-savepoint-code-and-nested-transactions-are-not-supported}
+## <code>savepoint</code>およびネストされたトランザクションはサポートされていません {#code-savepoint-code-and-nested-transactions-are-not-supported}
 
-TiDBは`savepoint`メカニズムをサポートしてい***ない***ため、 `PROPAGATION_NESTED`伝播動作をサポートしていません。アプリケーションが`PROPAGATION_NESTED`伝播動作を使用する<strong>JavaSpring</strong>フレームワークに基づいている場合は、ネストされたトランザクションのロジックを削除するために、アプリケーション側でそれを適応させる必要があります。
+TiDBは`savepoint`メカニズムをサポートしてい***ない***ため、 `PROPAGATION_NESTED`伝播動作をサポートしていません。アプリケーションが`PROPAGATION_NESTED`の伝播動作を使用する<strong>JavaSpring</strong>フレームワークに基づいている場合は、アプリケーション側でそれを適応させて、ネストされたトランザクションのロジックを削除する必要があります。
 
 **Spring**でサポートされている`PROPAGATION_NESTED`の伝播動作は、ネストされたトランザクションをトリガーします。これは、現在のトランザクションとは独立して開始される子トランザクションです。ネストされたトランザクションの開始時に`savepoint`が記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`状態にロールバックします。ネストされたトランザクションは外部トランザクションの一部であり、外部トランザクションと一緒にコミットされます。
 

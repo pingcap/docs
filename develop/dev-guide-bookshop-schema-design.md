@@ -10,14 +10,11 @@ Bookshopは、さまざまなカテゴリの本を購入し、読んだ本を評
 
 ## テーブルの構造とデータをインポートする {#import-table-structures-and-data}
 
-Bookshopのテーブル構造とデータは[TiUP経由](#via-tiup-demo)または[TiDB Cloudのインポート機能を介して](#via-tidb-cloud-import)のいずれかでインポートできます。
+Bookshopのテーブル構造とデータは[TiUP経由](#method-1-via-tiup-demo)または[TiDB Cloudのインポート機能を介して](#method-2-via-tidb-cloud-import)のいずれかでインポートできます。
 
-<SimpleTab>
-<div label="Via `TiUP demo`">
+### 方法1： <code>tiup demo</code>経由 {#method-1-via-code-tiup-demo-code}
 
-### <code>tiup demo</code>経由 {#via-code-tiup-demo-code}
-
-TiDBクラスタが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行することで、Bookshopアプリケーションのサンプルデータをすばやく生成してインポートできます。
+TiDBクラスタが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してデプロイされている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行して、Bookshopアプリケーションのサンプルデータをすばやく生成およびインポートできます。
 
 {{< copyable "" >}}
 
@@ -25,11 +22,11 @@ TiDBクラスタが[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用して
 tiup demo bookshop prepare
 ```
 
-デフォルトでは、このコマンドを使用すると、アプリケーションはアドレス`127.0.0.1`のポート`4000`に接続でき、パスワードなしで`root`ユーザーとしてログインでき、 `bookshop`という名前のデータベースに[テーブル構造](#description-of-the-tables)を作成できます。
+デフォルトでは、このコマンドはアプリケーションがアドレス`127.0.0.1`のポート`4000`に接続できるようにし、パスワードなしで`root`ユーザーとしてログインできるようにし、 `bookshop`という名前のデータベースに[テーブル構造](#description-of-the-tables)を作成します。
 
 #### 接続情報を構成する {#configure-connection-information}
 
-次の表に、接続パラメータを示します。環境に合わせてデフォルト設定を変更できます。
+次の表に、接続パラメーターを示します。環境に合わせてデフォルト設定を変更できます。
 
 | パラメータ        | 略語   | デフォルト値      | 説明              |
 | ------------ | ---- | ----------- | --------------- |
@@ -61,9 +58,9 @@ tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbc
 
 たとえば、次のコマンドを実行して生成します。
 
--   `--users`つのパラメーターを介した200,000行のユーザー情報
+-   `--users`パラメーターを介した200,000行のユーザー情報
 -   `--books`つのパラメータを介した500,000行の書籍情報
--   `--authors`つのパラメータを介した100,000行の著者情報
+-   `--authors`つのパラメーターを介した100,000行の著者情報
 -   `--ratings`パラメータによる1,000,000行の評価レコード
 -   `--orders`パラメータによる1,000,000行の注文レコード
 
@@ -73,14 +70,11 @@ tiup demo bookshop prepare -U root -H tidb.xxx.yyy.ap-northeast-1.prod.aws.tidbc
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
 ```
 
-`--drop-tables`パラメータを使用して、元のテーブル構造を削除できます。パラメータの詳細については、 `tiup demo bookshop --help`コマンドを実行してください。
+`--drop-tables`パラメーターを使用して、元のテーブル構造を削除できます。パラメータの詳細については、 `tiup demo bookshop --help`コマンドを実行してください。
 
-</div>
-<div label="Via TiDB Cloud Import">
+### 方法2： TiDB Cloudインポート経由 {#method-2-via-tidb-cloud-import}
 
-### TiDB Cloudインポート経由 {#via-tidb-cloud-import}
-
-TiDB Cloudのデータベース詳細ページで、[**インポート**]ボタンをクリックして[<strong>データインポートタスク</strong>]ページに入ります。このページで、次の手順を実行して、BookshopサンプルデータをAWSS3からTiDB Cloudにインポートします。
+TiDB Cloudのデータベース詳細ページで、[**インポート**]ボタンをクリックして、[<strong>データインポートタスク</strong>]ページに入ります。このページで、次の手順を実行して、BookshopサンプルデータをAWSS3からTiDB Cloudにインポートします。
 
 1.  次の**バケットURL**と<strong>Role-ARN</strong>を対応する入力ボックスにコピーします。
 
@@ -122,7 +116,7 @@ TiDB Cloudのデータベース詳細ページで、[**インポート**]ボタ�
 
     ![Bookshop data importing](/media/develop/importing_bookshop_data.png)
 
-    インポートプロセス中に次のエラーメッセージが表示された場合は、 `DROP DATABASE bookshop;`コマンドを実行して、以前に作成したサンプルデータベースをクリアしてから、データを再度インポートします。
+    インポート処理中に次のエラーメッセージが表示された場合は、 `DROP DATABASE bookshop;`コマンドを実行して、以前に作成したサンプルデータベースをクリアしてから、データを再度インポートしてください。
 
     > テーブル[ `bookshop` 。 `authors` `bookshop` `book_authors` `bookshop` `books` `bookshop` `orders` `bookshop` `ratings` `bookshop` `users` ]は空ではありません。
 
@@ -161,9 +155,6 @@ WHERE table_schema LIKE 'bookshop';
 +-----------------------+----------------+-----------+------------+---------+
 6 rows in set (0.03 sec)
 ```
-
-</div>
-</SimpleTab>
 
 ## テーブルの説明 {#description-of-the-tables}
 

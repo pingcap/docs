@@ -7,7 +7,7 @@ summary: This document describes how to use multi-table join queries.
 
 多くのシナリオでは、1つのクエリを使用して、複数のテーブルからデータを取得する必要があります。 `JOIN`ステートメントを使用して、2つ以上のテーブルのデータを組み合わせることができます。
 
-## 参加タイプ {#join-types}
+## 結合タイプ {#join-types}
 
 このセクションでは、結合タイプについて詳しく説明します。
 
@@ -20,9 +20,9 @@ summary: This document describes how to use multi-table join queries.
 たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の著者テーブルを`book_authors`という名前の本の著者テーブルに結合する必要があります。
 
 <SimpleTab>
-<div label="SQL" href="inner-join-sql">
+<div label="SQL">
 
-次のSQLステートメントで、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を、結合条件`a.id = ba.author_id`との内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いたことがない場合、 `authors`テーブルの彼のレコードは結合条件を満たさないため、結果セットに表示されません。
+次のSQLステートメントで、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を、結合条件`a.id = ba.author_id`の内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いたことがない場合、 `authors`テーブルの彼のレコードは結合条件を満たさないため、結果セットに表示されません。
 
 {{< copyable "" >}}
 
@@ -56,7 +56,7 @@ LIMIT 10;
 ```
 
 </div>
-<div label="Java" href="inner-join-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -90,18 +90,18 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 
 ### 左アウタージョイン {#left-outer-join}
 
-左外部結合は、左テーブルのすべての行と、結合条件に一致する右テーブルの値を返します。右側のテーブルで一致する行がない場合は、 `NULL`で埋められます。
+左外部結合は、結合条件に一致する左側のテーブルのすべての行と右側のテーブルの値を返します。右側のテーブルで一致する行がない場合は、 `NULL`で埋められます。
 
 ![Left Outer Join](/media/develop/left-outer-join.png)
 
 場合によっては、複数のテーブルを使用してデータクエリを完了したいが、結合条件が満たされていないためにデータセットが小さくなりすぎないようにする必要があります。
 
-たとえば、Bookshopアプリのホームページで、平均評価のある新しい本のリストを表示したいとします。この場合、新しい本はまだ誰にも評価されていない可能性があります。内部結合を使用すると、これらの未評価の書籍の情報が除外されますが、これは期待したものではありません。
+たとえば、Bookshopアプリのホームページで、平均評価のある新しい本のリストを表示したいとします。この場合、新しい本はまだ誰にも評価されていない可能性があります。内部結合を使用すると、これらの評価されていない書籍の情報が除外されますが、これは期待したものではありません。
 
 <SimpleTab>
-<div label="SQL" href="left-join-sql">
+<div label="SQL">
 
-次のSQLステートメントで、 `LEFT JOIN`キーワードを使用して、左側のテーブル`books`が左側の外部結合で右側のテーブル`ratings`に結合されることを宣言します。これにより、 `books`のテーブルのすべての行が返されます。
+次のSQLステートメントで、 `LEFT JOIN`キーワードを使用して、左側のテーブル`books`が左側の外部結合で右側のテーブル`ratings`に結合されることを宣言します。これにより、 `books`テーブルのすべての行が返されます。
 
 {{< copyable "" >}}
 
@@ -165,7 +165,7 @@ DELETE FROM ratings WHERE book_id = 3438991610;
 `INNER JOIN`を使用するとどうなりますか？試してみるのはあなた次第です。
 
 </div>
-<div label="Java" href="left-join-java">
+<div label="Java">
 
 {{< copyable "" >}}
 
@@ -199,28 +199,28 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### 右アウタージョイン {#right-outer-join}
 
-右外部結合は、右テーブルのすべてのレコードと、結合条件に一致する左テーブルの値を返します。一致する値がない場合は、 `NULL`で埋められます。
+右外部結合は、結合条件に一致する右側のテーブルのすべてのレコードと左側のテーブルの値を返します。一致する値がない場合は、 `NULL`で埋められます。
 
 ![Right Outer Join](/media/develop/right-outer-join.png)
 
 ### クロスジョイン {#cross-join}
 
-結合条件が一定の場合、2つのテーブル間の内部結合は[クロスジョイン](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットに`m \* n`のレコードが生成されます。
+結合条件が一定の場合、2つのテーブル間の内部結合は[クロスジョイン](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットに`m \* n`レコードが生成されます。
 
 ### 左半結合 {#left-semi-join}
 
-TiDBは、SQL構文レベルで`LEFT SEMI JOIN table_name`をサポートしていません。ただし、実行プランレベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)は、書き換えられた同等のJOINクエリのデフォルトの結合メソッドとして`semi join`を使用します。
+TiDBは、SQL構文レベルで`LEFT SEMI JOIN table_name`をサポートしていません。ただし、実行プランレベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)は、書き換えられた同等のJOINクエリのデフォルトの結合方法として`semi join`を使用します。
 
-## 暗黙の参加 {#implicit-join}
+## 暗黙的な参加 {#implicit-join}
 
-結合を明示的に宣言した`JOIN`ステートメントがSQL標準に追加される前は、 `FROM t1, t2`節を使用してSQLステートメント内の2つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`節を使用して結合の条件を指定することができました。これは、内部結合を使用してテーブルを結合する暗黙的な結合として理解できます。
+結合を明示的に宣言した`JOIN`ステートメントがSQL標準に追加される前は、 `FROM t1, t2`句を使用してSQLステートメント内の2つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を使用して結合の条件を指定することができました。これは、内部結合を使用してテーブルを結合する暗黙的な結合として理解できます。
 
 ## 関連するアルゴリズムに参加する {#join-related-algorithms}
 
 TiDBは、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
 -   [インデックス参加](/explain-joins.md#index-join)
--   [ハッシュ参加](/explain-joins.md#hash-join)
+-   [ハッシュ結合](/explain-joins.md#hash-join)
 -   [マージ参加](/explain-joins.md#merge-join)
 
 オプティマイザは、結合されたテーブルのデータ量などの要因に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用すると、クエリが結合に使用するアルゴリズムを確認できます。

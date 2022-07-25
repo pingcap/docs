@@ -17,7 +17,7 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 ## SQL構文 {#sql-syntax}
 
-`DELETE`ステートメントは、通常、次の形式です。
+`DELETE`ステートメントは、通常、次の形式になります。
 
 {{< copyable "" >}}
 
@@ -25,25 +25,25 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 DELETE FROM {table} WHERE {filter}
 ```
 
-|   パラメータ名   |      説明      |
-| :--------: | :----------: |
-|  `{table}` |     テーブル名    |
-| `{filter}` | フィルタのマッチング条件 |
+|   パラメータ名   |       説明      |
+| :--------: | :-----------: |
+|  `{table}` |     テーブル名     |
+| `{filter}` | フィルターのマッチング条件 |
 
 この例は、 `DELETE`の単純なユースケースのみを示しています。詳細については、 [DELETE構文](/sql-statements/sql-statement-delete.md)を参照してください。
 
 ## ベストプラクティス {#best-practices}
 
-データを削除するときに従うべきいくつかのベストプラクティスは次のとおりです。
+以下は、データを削除するときに従うべきいくつかのベストプラクティスです。
 
 -   `DELETE`ステートメントでは常に`WHERE`句を指定してください。 `WHERE`句が指定されていない場合、TiDBはテーブル内の***すべて***の行を削除します。
--   TiDBは単一のトランザクションのサイズ（デフォルトでは[txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) MB）を制限しているため、多数の行（たとえば、1万を超える行）を削除する場合は[一括削除](#bulk-delete)を使用します。
+-   TiDBは単一のトランザクションのサイズ（デフォルトでは[txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) MB）を制限しているため、多数の行（たとえば、1万を超える）を削除する場合は[一括削除](#bulk-delete)を使用します。
 -   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 -   パフォーマンスの考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 
 ## 例 {#example}
 
-特定の期間内にアプリケーションエラーが見つかり、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
+特定の期間内にアプリケーションエラーを見つけ、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
 
 {{< copyable "" >}}
 
@@ -56,9 +56,9 @@ SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `r
 10,000未満のレコードが返される場合は、次の例を使用してそれらを削除します。
 
 <SimpleTab>
-<div label="SQL" href="delete-sql">
+<div label="SQL">
 
-{{< copyable "" >}}
+SQLでは、例は次のとおりです。
 
 ```sql
 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
@@ -66,9 +66,9 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 </div>
 
-<div label="Java" href="delete-java">
+<div label="Java">
 
-{{< copyable "" >}}
+Javaでは、例は次のとおりです。
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -93,9 +93,9 @@ try (Connection connection = ds.getConnection()) {
 
 </div>
 
-<div label="Golang" href="delete-golang">
+<div label="Golang">
 
-{{< copyable "" >}}
+Golangでは、例は次のとおりです。
 
 ```go
 package main
@@ -136,7 +136,7 @@ func main() {
 
 > **ノート：**
 >
-> `rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字通りの量としてTiDBに保存されていると見なすことができます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)に別の時間文字列を表示します。
+> `rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字通りの数量としてTiDBに保存されていると見なすことができます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、異なる[タイムゾーン](/configure-time-zone.md)に異なる時間文字列を表示します。
 >
 > また、MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038より大きい値を格納する場合は、 `DATETIME`タイプを使用することをお勧めします。
 
@@ -152,7 +152,7 @@ GCは、デフォルトで10分ごとに1回トリガーされます。各GCは�
 
 ### 統計情報を更新する {#update-statistical-information}
 
-TiDBは[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除した後、インデックスが正しく選択されない可能性が高くなります。 [手動収集](/statistics.md#manual-collection)を使用して統計を更新できます。これは、SQLパフォーマンス最適化のためのより正確な統計情報をTiDBオプティマイザーに提供します。
+TiDBは[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除した後、インデックスが正しく選択されないリスクが高くなります。 [手動収集](/statistics.md#manual-collection)を使用して統計を更新できます。これは、SQLパフォーマンス最適化のためのより正確な統計情報をTiDBオプティマイザーに提供します。
 
 ## 一括削除 {#bulk-delete}
 
@@ -160,15 +160,15 @@ TiDBは[統計情報](/statistics.md)を使用してインデックスの選択�
 
 ただし、多数の行（1万を超える）を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、各反復でデータの一部を削除します。これは、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)が単一のトランザクションのサイズを制限しているためです（デフォルトでは1、100 MB）。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
-このセクションでは、一括削除を完了するために`SELECT`と`DELETE`の組み合わせを実行する方法を示す、反復削除操作を処理するスクリプトを作成する例を示します。
+このセクションでは、一括削除を完了するために`SELECT`と`DELETE`を組み合わせて実行する方法を示す、反復削除操作を処理するスクリプトの作成例を示します。
 
 ### 一括削除ループを作成する {#write-a-bulk-delete-loop}
 
-まず、アプリケーションまたはスクリプトのループに`SELECT`のクエリを記述します。このクエリの戻り値を、削除する必要のある行の主キーとして使用します。この`SELECT`クエリを定義するときは、 `WHERE`句を使用して、削除する必要のある行をフィルタリングする必要があることに注意してください。
+アプリケーションまたはスクリプトのループに`DELETE`ステートメントを記述し、 `WHERE`句を使用してデータをフィルタリングし、 `LIMIT`を使用して1つのステートメントで削除する行数を制限できます。
 
 ### 一括削除の例 {#bulk-delete-example}
 
-特定の期間内にアプリケーションエラーを見つけたとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があり、10,000を超えるレコードが15分で書き込まれます。次のように実行できます。
+特定の期間内にアプリケーションエラーを見つけたとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があり、15分で10,000を超えるレコードが書き込まれます。次のように実行できます。
 
 <SimpleTab>
 <div label="Java">
