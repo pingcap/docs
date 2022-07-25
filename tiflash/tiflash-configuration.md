@@ -201,7 +201,7 @@ delta_index_cache_size = 0
     # Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
 
-    ## Use the thread pool to handle read requests from the storage engine. The default value is false.
+    ## New in v6.2. Use the thread pool to handle read requests from the storage engine. The default value is false.
     # dt_enable_read_thread = false
 
 ## Security settings take effect starting from v4.0.5.
