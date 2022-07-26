@@ -5,6 +5,10 @@ summary: Introduces a way to speed up the querying of AP scenarios by using Fast
 
 # Fast Mode
 
+> **Warning:**
+>
+> This feature is still an experimental feature. It is NOT recommended that you use it in the production environment.
+
 This document describes how to use Fast Mode to speed up queries in Analytical Processing (AP) scenarios.
 
 TiFlash supports the following modes:
