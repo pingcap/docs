@@ -113,6 +113,56 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 
 You can only search the running DDL job corresponding to `job_id` within the last ten results in the DDL history job queue.
 
+### `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`
+
+ To view the original SQL statements of the DDL job within a specified range `(n+1, n+m)` corresponding to `job_id`, use `ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n`:
+
+ {{< copyable "sql" >}}
+
+ ```sql
+ ADMIN SHOW DDL JOB QUERIES LIMIT 3;  # Retrieve first 3 rows
+ ADMIN SHOW DDL JOB QUERIES LIMIT 2, 3;  # Retrieve rows 3-5
+ ADMIN SHOW DDL JOB QUERIES LIMIT 3 OFFSET 2;  # Retrieve rows 3-5
+ ```
+
+ ```sql
+ ADMIN SHOW DDL JOB QUERIES LIMIT 3;  # Retrieve first 3 rows
+ +--------+--------------------------------------------------------------+
+ | JOB_ID | QUERY                                                        | 
+ +--------+--------------------------------------------------------------+
+ |     59 | ALTER TABLE t1 ADD INDEX index1 (col1)                       | 
+ |     60 | ALTER TABLE t2 ADD INDEX index1 (col1)                       | 
+ |     58 | CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment) | 
+ +--------+--------------------------------------------------------------+
+ 3 rows in set (0.00 sec)
+ ```
+
+ ```sql
+ ADMIN SHOW DDL JOB QUERIES LIMIT 2, 3;  # Retrieve rows 3-5
+ +--------+--------------------------------------------------------------+
+ | JOB_ID | QUERY                                                        | 
+ +--------+--------------------------------------------------------------+
+ |     58 | CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment) | 
+ |     56 | CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment) | 
+ |     54 | DROP TABLE IF EXISTS t3                                      | 
+ +--------+--------------------------------------------------------------+
+ 3 rows in set (0.00 sec)
+ ```
+
+ ```sql
+ ADMIN SHOW DDL JOB QUERIES LIMIT 3 OFFSET 2;  # Retrieve rows 3-5
+ +--------+--------------------------------------------------------------+
+ | JOB_ID | QUERY                                                        | 
+ +--------+--------------------------------------------------------------+
+ |     58 | CREATE TABLE t2 (id INT NOT NULL PRIMARY KEY auto_increment) | 
+ |     56 | CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment) | 
+ |     54 | DROP TABLE IF EXISTS t3                                      | 
+ +--------+--------------------------------------------------------------+
+ 3 rows in set (0.00 sec)
+ ```
+
+ You can search the running DDL job corresponding to `job_id` within a arbitrarily specified range of results in the DDL history job queue. This syntax does not have the limitation of the last ten results of `ADMIN SHOW DDL JOB QUERIES`.
+
 ## MySQL compatibility
 
 This statement is a TiDB extension to MySQL syntax.
