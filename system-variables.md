@@ -1921,6 +1921,10 @@ explain select * from t where age=5;
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
+> **Warning:**
+>
+> Prior to v5.3.1, there was a serious bug with this variable. Please use this variable after v5.3.1.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
