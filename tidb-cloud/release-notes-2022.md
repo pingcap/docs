@@ -8,14 +8,23 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## July xx, 2022
+## July 26, 2022
 
-* Supports TiDB Cloud API. TiDB Cloud API is a RESTful-based interface, which can interact with TiDB Cloud services. Through this API, you can manage resources such as clusters automatically and efficiently. For more information, refer to [API Reference](https://docs.pingcap.com/tidbcloud/api/v1).
-* Add the **API Key** tab in the **Organization Settings** page. You can create and manage API keys required for using TiDB Cloud API.
-* Behavior changes for new Developer Tier clusters
+* Support TiDB Cloud API.
 
-    * A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After a few days of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console.
-    * The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+    TiDB Cloud API is a RESTful-based interface, which can interact with TiDB Cloud services. Through this API, you can manage resources such as clusters automatically and efficiently.
+
+    In the TiDB Cloud console, the **API Key** tab is added to the **Organization Settings** page. Using this tab, you can create and manage API keys required for using TiDB Cloud API.
+
+    For more information, refer to [TiDB Cloud API Reference](https://docs.pingcap.com/tidbcloud/api/v1).
+
+* Support automatic hibernation and resuming for new Developer Tier clusters
+
+    A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After a few days of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console.
+
+* Disable the backup and restore feature for Developer Tier clusters
+
+    The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 
 * Increase the storage size of a Developer Tier cluster from 500 MiB to 1 GiB.
 * Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
