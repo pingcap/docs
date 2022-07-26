@@ -1,6 +1,6 @@
 # TiDB Cloud API Overview
 
-The TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that allows you programmatic access to manage administrative objects within TiDB Cloud, including projects, cluster deployments, backups, and so on.
+The TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud, including projects, cluster deployments, and backups.
 
 The API has the following features:
 
@@ -11,4 +11,6 @@ The API has the following features:
 To start using TiDB Cloud API, refer to the following resources:
 
 - [Get Started](https://docs.pingcap.com/tidbcloud/api/v1#section/Get-Started)
+- [Authentication](https://docs.pingcap.com/tidbcloud/api/v1#section/Authentication)
+- [Rate Limiting](https://docs.pingcap.com/tidbcloud/api/v1#section/Rate-Limiting)
 - [API Full References](https://docs.pingcap.com/tidbcloud/api/v1#tag/Project)
