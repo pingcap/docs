@@ -81,7 +81,7 @@ TiDB Lightning offers three strategies for detecting conflicting data:
 
 - `record`: only records conflicting records to the `lightning_task_info.conflict_error_v1` table on the target TiDB. Note that the required version of the target TiKV is v5.2.0 or later versions; otherwise, it falls back to 'none'.
 - `remove` (recommended): records all conflicting records, like the `record` strategy. But it removes all conflicting records from the target table to ensure a consistent state in the target TiDB.
-- `none` : does not detect duplicate records. `none` has the best performance in the three strategies, but might lead to inconsistent data in the target TiDB.
+- `none`: does not detect duplicate records. `none` has the best performance in the three strategies, but might lead to inconsistent data in the target TiDB.
 
 Before v5.3, Lightning does not support conflict detection. If there is conflicting data, the import process fails at the checksum step. When conflict detection is enabled, regardless of the `record` or `remove` strategy, if there is conflicting data, Lightning skips the checksum step (because it always fails).
 
@@ -133,7 +133,7 @@ You can manually identify the records that need to be retained and insert these 
 - **Upgrade the hardware of the node where Lightning is deployed, especially the CPU and the storage device of `sorted-key-dir`.**
 - **Use the [parallel import](/tidb-lightning/tidb-lightning-distributed-import.md) feature to achieve horizontal scaling.**
 
-Lightning provides some concurrency-related configurations to affect Physical Import Mode import performance. However, from long-term experience, it is recommended to keep the following four configuration items in the default value. Adjusting the four configurations does not bring significant performance boost.
+Lightning provides some concurrency-related configurations to affect Physical Import Mode import performance. However, from long-term experience, it is recommended to keep the following four configuration items in the default value. Adjusting the four configuration items does not bring significant performance boost.
 
 ```
 [lightning]
@@ -167,6 +167,6 @@ If the table is large, Lightning will split the table into multiple batches of 1
 
 `io-concurrency` controls the concurrency of file read. The default value is 5. At any given time, only 5 handles are performing read operations. Because the file read speed is usually not a bottleneck, you can leave this configuration in the default value.
 
-After the file data is read, Lightning needs to do some post-processing, such as encoding and sorting the data locally. The concurrency of these operations is controlled by `region-concurrency`. The default value is the number of CPUs. You can leave this configuration in the default value. It is recommended to deploy Lightning on a separate server from other components. If you must deploy Lightning together with other components, you need to lower `region-concurrency` according to the load.
+After the file data is read, Lightning needs to do some post-processing, such as encoding and sorting the data locally. The concurrency of these operations is controlled by `region-concurrency`. The default value is the number of CPU cores. You can leave this configuration in the default value. It is recommended to deploy Lightning on a separate server from other components. If you must deploy Lightning together with other components, you need to lower the value of `region-concurrency` according to the load.
 
-The [`num-threads`](/tikv-configuration-file.md#num-threads) configuration of TiKV can also affect the performance. New clusters should set `num-threads` to the number of CPUs.
+The [`num-threads`](/tikv-configuration-file.md#num-threads) configuration of TiKV can also affect the performance. For new clusters, it is recommended to set `num-threads` to the number of CPU cores.
