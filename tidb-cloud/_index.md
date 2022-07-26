@@ -29,6 +29,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 -   [HTAPクラスターを使用する](/tiflash/tiflash-overview.md)
 -   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
 -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+-   [TiDB Cloudを使用する](/tidb-cloud/api-overview.md)
 
 </NavColumn>
 
@@ -65,6 +66,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 <NavColumn><ColumnTitle>参照</ColumnTitle>
 
 -   [請求する](/tidb-cloud/tidb-cloud-billing.md)
+-   [APIリファレンス](https://docs.pingcap.com/tidbcloud/api/v1)
 -   [サポート](/tidb-cloud/tidb-cloud-support.md)
 -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 

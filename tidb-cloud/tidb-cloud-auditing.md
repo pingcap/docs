@@ -1,9 +1,9 @@
 ---
-title: Audit Logging
+title: Database Audit Logging
 summary: Learn about how to audit a cluster in TiDB Cloud.
 ---
 
-# 監査ログ {#audit-logging}
+# データベース監査ログ {#database-audit-logging}
 
 TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステートメントなど）の履歴をログに記録するためのデータベース監査ログ機能を提供します。
 
@@ -135,7 +135,7 @@ TiDB Cloudが監査ログを書き込む宛先として企業所有のGCPアカ�
 
     はいの場合、後で使用するためにTiDBクラスタの一致した役割を記録します。そうでない場合は、[ **IAMと管理**]&gt;[<strong>ロール</strong>]&gt;[ <strong>CREATE ROLE</strong> ]に移動して、TiDBクラスタのロールを定義します。
 
-3.  [**クラウドストレージ**]&gt;[<strong>ブラウザ</strong>]に移動し、 TiDB CloudがアクセスするGCSバケットを選択して、[<strong>情報</strong>パネルの表示]をクリックします。
+3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、 TiDB CloudがアクセスするGCSバケットを選択して、 <strong>SHOWINFOPANEL</strong>をクリックします。
 
     パネルが表示されます。
 

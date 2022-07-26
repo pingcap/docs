@@ -84,6 +84,8 @@
             -   [mysql-connector-pythonの場合](/develop/dev-guide-outdated-for-python-mysql-connector.md)
     -   クラウドネイティブ開発環境
         -   [Gitpod](/develop/dev-guide-playground-gitpod.md)
+    -   サードパーティのサポート
+        -   [サードパーティライブラリのサポート](/develop/dev-guide-third-party-support.md)
 -   デプロイ
     -   [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境Configuration / コンフィグレーションチェックリスト](/check-before-deployment.md)
@@ -350,6 +352,8 @@
             -   [テーブルフィルター](/table-filter.md)
             -   [CSVサポート](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
             -   [バックエンド](/tidb-lightning/tidb-lightning-backends.md)
+            -   [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+            -   [物理インポートモードの使用法](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
             -   [データを並行してインポートする](/tidb-lightning/tidb-lightning-distributed-import.md)
             -   [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)
             -   [Webインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -680,7 +684,7 @@
             -   [デフォルト値](/data-type-default-values.md)
             -   [数値タイプ](/data-type-numeric.md)
             -   [日付と時刻のタイプ](/data-type-date-and-time.md)
-            -   [文字列型](/data-type-string.md)
+            -   [文字列タイプ](/data-type-string.md)
             -   [JSONタイプ](/data-type-json.md)
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)

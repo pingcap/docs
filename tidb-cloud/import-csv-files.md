@@ -5,7 +5,7 @@ summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 
 # AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする {#import-csv-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
-このドキュメントでは、非圧縮のCSVファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDB Cloudにインポートする方法について説明します。
+このドキュメントでは、圧縮されていないCSVファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDB Cloudにインポートする方法について説明します。
 
 > **ノート：**
 >
@@ -14,15 +14,15 @@ summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 
 ## 手順1.CSVファイルを準備します {#step-1-prepare-the-csv-files}
 
-1.  CSVファイルが256MBより大きい場合は、ファイルをそれぞれ256MB程度の小さなファイルに分割することを検討してください。
+1.  CSVファイルが256MBより大きい場合は、ファイルをそれぞれ256MB前後のサイズの小さなファイルに分割することを検討してください。
 
     TiDB Cloudは、非常に大きなCSVファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
 
 2.  バケット内の既存のオブジェクトの命名規則に従って、インポートするCSVファイルの名前と一致するテキストパターンを特定します。
 
-    たとえば、バケット内のすべてのデータファイルをインポートするには、ワイルドカード記号`*`または`*.csv`をパターンとして使用できます。同様に、パーティション`station=402260`のデータファイルのサブセットをインポートするには、 `*station=402260*`をパターンとして使用できます。 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)でTiDB Cloudに提供する必要があるため、このパターンをメモしてください。
+    たとえば、バケット内のすべてのデータファイルをインポートするには、ワイルドカード記号`*`または`*.csv`をパターンとして使用できます。同様に、パーティション`station=402260`にデータファイルのサブセットをインポートするには、 `*station=402260*`をパターンとして使用できます。 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)でTiDB Cloudに提供する必要があるため、このパターンをメモしてください。
 
-## ステップ2.ターゲットテーブルスキーマを作成します {#step-2-create-the-target-table-schema}
+## 手順2.ターゲットテーブルスキーマを作成します {#step-2-create-the-target-table-schema}
 
 CSVファイルをTiDB Cloudにインポートする前に、ターゲットデータベースとテーブルを作成する必要があります。または、次のようにターゲットデータベースとテーブルスキーマを指定すると、 TiDB Cloudはインポートプロセスの一部としてこれらのオブジェクトを作成できます。
 
@@ -57,13 +57,13 @@ CSVファイルをTiDB Cloudにインポートする前に、ターゲットデ�
 
 TiDBCloudがTiDB CloudまたはGCSバケット内のCSVファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   CSVファイルがAmazonS3にある場合は、 [AmazonS3へのクロスアカウントアクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   CSVファイルがAmazonS3にある場合、 [AmazonS3へのクロスアカウントアクセスを設定します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
 
-    終了したら、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、ロールARN値をメモします。
+    終了したら、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、役割ARN値をメモします。
 
 -   CSVファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
 
-## ステップ4.CSVファイルをTiDB Cloudにインポートします {#step-4-import-csv-files-to-tidb-cloud}
+## ステップ4.CSVファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
 
 CSVファイルをTiDB Cloudにインポートするには、次の手順を実行します。
 
@@ -89,7 +89,7 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
 
     -   **ターゲットデータベース**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
 
-    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
+    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。
 
     -   **オブジェクト名パターン**：インポートするCSVファイルの名前と一致するパターンを入力します。たとえば、 `my-data.csv` 。
 
@@ -107,7 +107,7 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
 
     数値がゼロの場合は、[**オブジェクト名パターン]**フィールドに入力した値と一致するデータファイルがないことを意味します。この場合、「<strong>オブジェクト名パターン」</strong>フィールドにタイプミスがないことを確認して、再試行してください。
 
-インポートタスクの実行時に、サポートされていない、または無効な変換が検出されると、 TiDB Cloudはインポートジョブを自動的に終了し、インポートエラーを報告します。
+インポートタスクの実行時に、サポートされていない変換または無効な変換が検出されると、 TiDB Cloudはインポートジョブを自動的に終了し、インポートエラーを報告します。
 
 インポートエラーが発生した場合は、次の手順を実行してください。
 
