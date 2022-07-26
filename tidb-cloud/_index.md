@@ -72,7 +72,6 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 <ColumnTitle>Reference</ColumnTitle>
 
 - [Billing](/tidb-cloud/tidb-cloud-billing.md)
-- [API Reference](https://docs.pingcap.com/tidbcloud/api/v1)
 - [Support](/tidb-cloud/tidb-cloud-support.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 
