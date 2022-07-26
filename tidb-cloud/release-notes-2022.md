@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     TiDB Cloud API is a RESTful-based interface, which can interact with TiDB Cloud services. Through this API, you can manage resources such as clusters automatically and efficiently.
 
-    In the TiDB Cloud console, you can find the **API Key** tab on the **Organization Settings** page. With this tab, you can create and manage API keys required for using TiDB Cloud API.
+    In the TiDB Cloud console, you can find the **API Keys** tab on the **Organization Settings** page. With this tab, you can create and manage API keys required for using TiDB Cloud API.
 
     For more information, refer to [TiDB Cloud API Reference](https://docs.pingcap.com/tidbcloud/api/v1).
 
