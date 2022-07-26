@@ -1941,7 +1941,7 @@ explain select * from t where age=5;
     - Setting `tidb_restricted_read_only` to `OFF` leaves [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) unchanged.
     - If `tidb_restricted_read_only` is `ON`, [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) cannot be set to `OFF`.
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
-- Users with `SUPER` or `SYSTEM_VARIABLES_ADMIN` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
+- Users with `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
 
 ### tidb_retry_limit
 
@@ -2153,7 +2153,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     - Setting [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) to `OFF` leaves `tidb_super_read_only` unchanged.
     - If [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) is `ON`, `tidb_super_read_only` cannot be set to `OFF`.
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
-- Users with `SUPER` or `SYSTEM_VARIABLES_ADMIN` privileges can modify this variable.
+- Users with `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable.
 
 ### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
 
