@@ -11,10 +11,10 @@ summary: An overview of the usage of ALTER TABLE ... SET TIFLASH MODE ... for th
 
 You can use the `ALTER TABLE...SET TIFLASH MODE...` statement to switch the mode of the corresponding table in TiFlash. The following modes are currently supported.
 
-- `Normal Mode` mode. The default mode. This mode guarantees the accuracy of query results and data consistency.
-- `Fast Mode` mode. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
+- `Normal Mode`. The default mode. This mode guarantees the accuracy of query results and data consistency.
+- `Fast Mode`. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
 
-This statement executes without blocking the execution of existing SQL statements or the running of TiDB features, such as transactions, DDL, and GC, and without changing the data content accessed through the SQL statement. The statement will end normally when the schema switch is completed.
+This statement executes without blocking the execution of existing SQL statements or the running of TiDB features, such as transactions, DDL, and GC, and without changing the data content accessed through the SQL statement. The statement will end normally when the mode switch is completed.
 
 This statement only supports changing the mode to tables in TiFlash, so the mode change only affects reads involving the TiFlash table.
 

@@ -9,10 +9,10 @@ This document describes how to use Fast Mode to speed up queries in Analytical P
 
 TiFlash supports the following modes:
 
-- `Normal Mode` mode. The default mode. This mode guarantees the accuracy of query results and data consistency.
-- `Fast Mode` mode. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
+- `Normal Mode`. The default mode. This mode guarantees the accuracy of query results and data consistency.
+- `Fast Mode`. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
 
-AP allows for some tolerance to the accuracy of the query results. If you need higher query performance, you can switch the corresponding table to TiFlash's Fast Mode for querying.
+Some AP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can switch the corresponding table to TiFlash's Fast Mode for querying.
 
 The mode switch takes effect globally. TiFlash mode switching is only available for tables with TiFlash Replica. TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-utf-8 characters in the column names, and therefore changing TiFlash table mode is not supported for them.
 
@@ -44,7 +44,7 @@ ALTER TABLE table_name SET TIFALSH MODE NORMAL
 
 ## Mechanism of Fast Mode
 
-The data in the stroage layer of TiFlash is stored in two layers: Delta layer and Stable layer.
+The data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer.
 
 The overall TableScan algorithm process in Normal Mode consists of the following steps:
 
@@ -53,4 +53,4 @@ The overall TableScan algorithm process in Normal Mode consists of the following
 3. Range Filter: the data from step 2 is filtered and returned.
 4. MVCC + Column Filter: the data from step 3 is filtered by MVCC, and the unneeded columns are filtered out and the the data is returned.
 
-Fast Mode mode gains faster query performance by sacrificing some data consistency. The TableScan process in Fast Mode omits Step 2 and the MVCC part in Step 4 in the Normal Mode process, thus improving query performance.
+Fast Mode gains faster query performance by sacrificing some data consistency. The TableScan process in Fast Mode omits Step 2 and the MVCC part in Step 4 in the Normal Mode process, thus improving query performance.
