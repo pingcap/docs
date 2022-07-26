@@ -5,7 +5,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 # AuroraからTiDB Cloudに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-このドキュメントでは、 TiDB Cloudコンソールのインポートツールを使用して、 AuroraからTiDB Cloudにデータを一括で移行する方法について説明します。
+このドキュメントでは、 TiDB Cloudコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraTiDB Cloudにデータを一括で移行する方法について説明します。
 
 ## TiDB Cloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
 
@@ -41,7 +41,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 -   [オプション1：Dumplingを使用してソースデータファイルを準備する](#option-1-prepare-source-data-files-using-dumpling)
 
-    EC2で[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を起動し、データをAmazonS3にエクスポートする必要があります。エクスポートするデータは、ソースデータベースの最新のデータです。これはオンラインサービスに影響を与える可能性があります。Dumplingは、データをエクスポートするときにテーブルをロックします。
+    EC2で[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を起動し、データをAmazonS3にエクスポートする必要があります。エクスポートするデータは、ソースデータベースの現在の最新データです。これはオンラインサービスに影響を与える可能性があります。データをエクスポートするときに、Dumplingはテーブルをロックします。
 
 -   [オプション2： Auroraスナップショットを使用してソースデータファイルを準備する](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
 
@@ -75,7 +75,7 @@ select * from ((select table_schema, table_name, column_name, collation_name fro
 Empty set (0.04 sec)
 ```
 
-TiDBが文字セットまたは照合順序をサポートしていない場合は、サポートされているタイプに変換することを検討してください。詳細については、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+TiDBが文字セットまたは照合順序をサポートしていない場合は、それらをサポートされているタイプに変換することを検討してください。詳細については、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 
 ### オプション1：Dumplingを使用してソースデータファイルを準備する {#option-1-prepare-source-data-files-using-dumpling}
 
@@ -110,7 +110,7 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
 
 3.  ソースデータベースをS3にバックアップします。
 
-    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、山かっこ（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
+    Dumplingを使用して、 Auroraからデータをエクスポートします。ご使用の環境に応じて、中括弧（&gt;）で内容を置き換えてから、以下のコマンドを実行してください。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
 
     {{< copyable "" >}}
 
@@ -183,7 +183,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 1.  Amazon RDSコンソールから[スナップショット]を選択し、[**スナップショット**の取得]をクリックして手動スナップ<strong>ショット</strong>を作成します。
 
-2.  [**スナップショット名]**の下の空欄に入力します。 [<strong>スナップショットを撮る]を</strong>クリックします。スナップショットの作成が完了すると、スナップショットがスナップショットテーブルの下に表示されます。
+2.  [**スナップショット名]**の下に空欄を入力します。 [<strong>スナップショットを撮る]を</strong>クリックします。スナップショットの作成が完了すると、スナップショットがスナップショットテーブルの下に表示されます。
 
 3.  作成したスナップショットを選択し、[**アクション**]をクリックします。ドロップダウンボックスで、[ <strong>AmazonS3にエクスポート]を</strong>クリックします。
 
@@ -191,7 +191,7 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 5.  エクスポートするデータの量を選択します。このガイドでは、 **[すべて]**が選択されています。部分を選択して識別子を使用し、データベースのどの部分をエクスポートする必要があるかを決定することもできます。
 
-6.  スナップショットを保存するS3バケットを選択します。新しいバケットを作成して、セキュリティ上の懸念事項のためにデータを保存できます。 TiDBクラスタと同じリージョンでバケットを使用することをお勧めします。リージョン間でデータをダウンロードすると、追加のネットワークコストが発生する可能性があります。
+6.  スナップショットを保存するS3バケットを選択します。セキュリティ上の懸念からデータを保存するための新しいバケットを作成できます。 TiDBクラスタと同じリージョンでバケットを使用することをお勧めします。リージョン間でデータをダウンロードすると、追加のネットワークコストが発生する可能性があります。
 
 7.  適切なIAMロールを選択して、S3バケットへの書き込みアクセスを許可します。後でスナップショットをTiDB Cloudにインポートするときに使用されるため、この役割をメモしてください。
 
@@ -203,13 +203,13 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 ## クロスアカウントアクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
 
-TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
+TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
 
-完了すると、クロスアカウントのポリシーと役割が作成されます。その後、 TiDB Cloudのデータインポートタスクパネルで構成を続行できます。
+完了すると、クロスアカウントのポリシーとロールが作成されます。その後、 TiDB Cloudのデータインポートタスクパネルで設定を続行できます。
 
 ## フィルタルールを設定する方法を学ぶ {#learn-how-to-set-up-filter-rules}
 
-[テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)ドキュメントを参照してください。
+[テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)ドキュメントを参照してください。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
 
 ## 不完全なデータをクリーンアップする方法を学ぶ {#learn-how-to-clean-up-incomplete-data}
 

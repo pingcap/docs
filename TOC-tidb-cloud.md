@@ -29,7 +29,6 @@
         -   [互換性](/tiflash/tiflash-compatibility.md)
     -   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
     -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
-    -   [TiDB Cloudを使用する](/tidb-cloud/api-overview.md)
     -   [TiDBクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
 -   データの移行
     -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
@@ -259,7 +258,7 @@
             -   [デフォルト値](/data-type-default-values.md)
             -   [数値タイプ](/data-type-numeric.md)
             -   [日付と時刻のタイプ](/data-type-date-and-time.md)
-            -   [文字列タイプ](/data-type-string.md)
+            -   [文字列型](/data-type-string.md)
             -   [JSONタイプ](/data-type-json.md)
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)
@@ -346,7 +345,6 @@
                 -   [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
                 -   [`VIEWS`](/information-schema/information-schema-views.md)
     -   [システム変数](/system-variables.md)
-    -   [APIリファレンス](https://docs.pingcap.com/tidbcloud/api/v1)
     -   ストレージエンジン
         -   TiKV
             -   [TiKVの概要](/tikv-overview.md)

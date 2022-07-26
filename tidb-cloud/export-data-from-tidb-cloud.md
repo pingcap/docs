@@ -5,11 +5,13 @@ summary: This page has instructions for exporting data from your TiDB cluster in
 
 # TiDBからデータをエクスポートする {#export-data-from-tidb}
 
-このページでは、 TiDB Cloudのクラスタからデータをエクスポートする方法について説明します。
+このページでは、 TiDB Cloudでクラスタからデータをエクスポートする方法について説明します。
 
-TiDBはデータをロックしません。それでも、TiDBから他のデータプラットフォームにデータを移行できるようにしたい場合があります。 TiDBはMySQLとの互換性が高いため、MySQLに適した任意のエクスポートツールをTiDBにも使用できます。
+毎日のバックアップは、 TiDB CloudのTiDBクラスターに対して自動的にスケジュールされます。バックアップスナップショットを選択して、いつでも新しいTiDBクラスタに復元できます。自動バックアップにより、極端な災害状況での損失を減らすことができます。
 
-ツール[Dumpling](https://github.com/pingcap/dumpling)を使用してデータをエクスポートできます。
+TiDBはデータをロックインしません。それでも、TiDBから他のデータプラットフォームにデータを移行できるようにしたい場合があります。 TiDBはMySQLとの互換性が高いため、MySQLに適した任意のエクスポートツールをTiDBにも使用できます。
+
+同じツール[Dumpling](https://github.com/pingcap/dumpling)をデータのエクスポートに使用できます。
 
 1.  TiUPをダウンロードしてインストールします。
 
@@ -23,7 +25,7 @@ TiDBはデータをロックしません。それでも、TiDBから他のデー
 
     > **ノート：**
     >
-    > インストール後、TiUPは対応する`profile`ファイルの絶対パスを表示します。次のコマンドで`.bash_profile`を`profile`ファイルのパスに変更する必要があります。
+    > インストール後、TiUPは対応する`profile`のファイルの絶対パスを表示します。次のコマンドで`.bash_profile`を`profile`ファイルのパスに変更する必要があります。
 
     {{< copyable "" >}}
 
