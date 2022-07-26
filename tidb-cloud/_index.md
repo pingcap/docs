@@ -32,7 +32,6 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 - [Use an HTAP Cluster](/tiflash/tiflash-overview.md)
 - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
 - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-- [Use TiDB Cloud API](/tidb-cloud/api-overview.md)
 
 </NavColumn>
 
