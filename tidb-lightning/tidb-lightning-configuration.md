@@ -293,10 +293,12 @@ max-allowed-packet = 67_108_864
 # Private key of this service. Default to copy of `security.key-path`
 # key-path = "/path/to/lightning.key"
 
-# When data importing is complete, tidb-lightning can automatically perform
-# the Checksum, Compact and Analyze operations. It is recommended to leave
-# these as true in the production environment.
-# The execution order: Checksum -> Analyze
+# In physical import mode, when data importing is complete, tidb-lightning can
+# automatically perform the Checksum and Analyze operations. It is recommended
+# to leave these as true in the production environment.
+# The execution order: Checksum -> Analyze.
+# In logical import mode, Checksum and Analyze is not needed, and they are always
+# skipped in the actual operation.
 [post-restore]
 # Specifies whether to perform `ADMIN CHECKSUM TABLE <table>` for each table to verify data integrity after importing.
 # The following options are available:
@@ -342,7 +344,7 @@ log-progress = "5m"
 | -d *directory* | Directory or [external storage URL](/br/backup-and-restore-storages.md) of the data dump to read from | `mydumper.data-source-dir` |
 | -L *level* | Log level: debug, info, warn, error, fatal (default = info) | `lightning.log-level` |
 | -f *rule* | [Table filter rules](/table-filter.md) (can be specified multiple times) | `mydumper.filter` |
-| --backend *[backend](/tidb-lightning/tidb-lightning-backends.md)* | Select an import mode. `local` refers to [physical import mode](/tidb-lightning/tidb-lightning-import-import-mode.md); `tidb` refers to [logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md). | `local` |
+| --backend *[backend](/tidb-lightning/tidb-lightning-overview.md)* | Select an import mode. `local` refers to physical import mode; `tidb` refers to logical import mode. | `local` |
 | --log-file *file* | Log file path. By default, it is `/tmp/lightning.log.{timestamp}`. If set to '-', it means that the log files will be output to stdout. | `lightning.log-file` |
 | --status-addr *ip:port* | Listening address of the TiDB Lightning server | `lightning.status-port` |
 | --importer *host:port* | Address of TiKV Importer | `tikv-importer.addr` |

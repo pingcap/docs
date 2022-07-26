@@ -28,7 +28,7 @@ TiDB Lightning supports two import modes, configured by `backend`. The import mo
 
 - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md): TiDB Lightning first encodes data into key-value pairs and stores them in a local temporary directory, then uploads these key-value pairs to each TiKV node, and finally calls the TiKV Ingest interface to insert data into TiKV's RocksDB. If you need to perform initial import, consider physical import mode, which has higher import speed.
 
-- [Logical Import Mode](/tidb-lightning/tidb-lightning-logical-import-mode.md): TiDB Lightning first encodes the data into SQL statements and then runs these SQL statements directly for data import. If the cluster to be imported is in production, or if the target table to be imported already contains data, use logical import mode.
+- [Logical Import Mode](/tidb-lightning/tidb-lightning-backends.md#tidb-backend): TiDB Lightning first encodes the data into SQL statements and then runs these SQL statements directly for data import. If the cluster to be imported is in production, or if the target table to be imported already contains data, use logical import mode.
 
 | Import mode | Physical Import Mode | Logical Import Mode |
 |:---|:---|:---|
