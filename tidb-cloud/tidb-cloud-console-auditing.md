@@ -1,6 +1,6 @@
 ---
 title: Console Audit Logging
-Summary: Learn about the log auditing feature for the TiDB Cloud Console.
+summary: Learn about the log auditing feature for the TiDB Cloud Console.
 ---
 
 # Console Audit Logging
