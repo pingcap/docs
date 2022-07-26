@@ -52,7 +52,13 @@ To improve query performance of various user scenarios, TiDB provides you with s
 - [Expression indexes](/sql-statements/sql-statement-create-index.md#expression-index) (Experimental)
 - [Columnar storage (TiFlash)](/tiflash/tiflash-overview.md)
 - [RocksDB engine](/storage-engine/rocksdb-overview.md)
+
+<CustomContent platform="tidb">
+
 - [Titan plugin](/storage-engine/titan-overview.md)
+
+</CustomContent>
+
 - [Invisible indexes](/sql-statements/sql-statement-add-index.md)
 - [Composite `PRIMARY KEY`](/constraints.md#primary-key)
 - [Unique indexes](/constraints.md#unique-key)
@@ -129,4 +135,14 @@ You can adjust the size limit of a single line via the [**txn-entry-size-limit**
 
 ### Number of rows
 
+<CustomContent platform="tidb">
+
 TiDB supports an **unlimited** number of rows by adding nodes to the cluster. For the relevant principles, see [TiDB Best Practices](/best-practices/tidb-best-practices.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB supports an **unlimited** number of rows by adding nodes to the cluster. For the relevant principles, see [TiDB Best Practices](https://docs.pingcap.com/tidb/stable/tidb-best-practices).
+
+</CustomContent>

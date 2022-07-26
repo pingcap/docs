@@ -185,8 +185,28 @@ For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conf
 
 ## Best practices for developing Java applications with TiDB
 
+<CustomContent platform="tidb">
+
 See [Best Practices for Developing Java Applications with TiDB](/best-practices/java-app-best-practices.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+See [Best Practices for Developing Java Applications with TiDB](https://docs.pingcap.com/tidb/stable/java-app-best-practices).
+
+</CustomContent>
 
 ### See also
 
+<CustomContent platform="tidb">
+
 - [Highly Concurrent Write Best Practices](/best-practices/high-concurrency-best-practices.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Highly Concurrent Write Best Practices](https://docs.pingcap.com/tidb/stable/high-concurrency-best-practices)
+
+</CustomContent>
