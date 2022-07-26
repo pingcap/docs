@@ -89,7 +89,7 @@ The basic fields are as follows:
 | Field name | Data type | Description |
 |---|---|---|
 | timestamp | timestamp | Time of event |
-| Auditeventtype | string | Event type |
+| auditEventType | string | Event type |
 | userID | uint64 | User ID |
 | clientIP | string | Client IP |
 | isSuccess | bool | Event result |
