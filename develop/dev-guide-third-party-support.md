@@ -1,9 +1,9 @@
 ---
-title: Third-Party Libraries Supported by PingCAP
-summary: Learn about third-party libraries supported by PingCAP.
+title: Third-Party Libraries Support Maintained by PingCAP
+summary: Learn about third-party libraries support maintained by PingCAP.
 ---
 
-# Third-Party Libraries Supported by PingCAP
+# Third-Party Libraries Support Maintained by PingCAP
 
 TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frameworks, and other tools that adapt to MySQL compatible with TiDB. This document focuses on these tools and their support levels.
 

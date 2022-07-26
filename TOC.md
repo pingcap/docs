@@ -84,7 +84,7 @@
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-party Support
-    - [Third-Party Libraries Supported by PingCAP](/develop/dev-guide-third-party-support.md)
+    - [Third-Party Libraries Support Maintained by PingCAP](/develop/dev-guide-third-party-support.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
