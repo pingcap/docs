@@ -50,7 +50,7 @@ The overall TableScan algorithm process in Normal Mode consists of the following
 
 1. Read data: separate data streams are created in the Delta layer and Stable layer to read the respective data.
 2. Sort Merge: the data streams created in step 1 are sorted and merged, and the data is returned in (handle, version) order.
-3. Range Filter: the data from step 2 is filtered and returned.
-4. MVCC + Column Filter: the data from step 3 is filtered by MVCC, and the unneeded columns are filtered out and the the data is returned.
+3. Range Filter: according to the data range, filter the data generated in step 2, and then return the data.
+4. MVCC + Column Filter: filter the data generated in step 3 through MVCC. Meanwhile, filter out the unneeded columns, and then return the data.
 
 Fast Mode gains faster query performance by sacrificing some data consistency. The TableScan process in Fast Mode omits Step 2 and the MVCC part in Step 4 in the Normal Mode process, thus improving query performance.
