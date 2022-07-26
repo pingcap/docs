@@ -79,7 +79,7 @@ hide_commit: true
 
 [Monitoring API](https://docs.pingcap.com/tidb/stable/tidb-monitoring-api)
 
-[Alert Rules](https://docs.pingcap.com/tidb/stable/migration-overview)
+[Alert Rules](https://docs.pingcap.com/tidb/stable/alert-rules)
 
 </LearningPath>
 
