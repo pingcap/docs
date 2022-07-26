@@ -171,7 +171,17 @@ SET @@global.tidb_ddl_reorg_batch_size = 128;
 
 ## Transaction conflicts
 
+<CustomContent platform="tidb">
+
 For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For how to locate and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+
+</CustomContent>
 
 ## Best practices for developing Java applications with TiDB
 

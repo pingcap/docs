@@ -410,6 +410,7 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
+  - [Error Codes](/error-codes.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes

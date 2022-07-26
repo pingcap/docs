@@ -116,9 +116,29 @@ while True:
 > Note:
 >
 > If you frequently encounter `Error 9007: Write conflict`, you may need to check your schema design and the data access patterns of your workload to find the root cause of the conflict and try to avoid conflicts by a better design.
-> For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+<CustomContent platform="tidb">
+
+For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For information about how to troubleshoot and resolve transaction conflicts, see [Troubleshoot Lock Conflicts](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts).
+
+</CustomContent>
 
 ## See also
 
-- [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+<CustomContent platform="tidb">
+
 - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- [Troubleshoot Write Conflicts in Optimistic Transactions](https://docs.pingcap.com/tidb/stable/troubleshoot-write-conflicts)
+
+</CustomContent>
