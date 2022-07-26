@@ -12,7 +12,7 @@ TiDB's support for the MySQL protocol makes most of the MySQL drivers, ORM frame
 PingCAP works with the community and provides the following levels of support for third-party tools:
 
 - **_Full_**: Indicates that PingCAP is already compatible with most of the tool's functionalities, and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of third-party tools documented in the table below.
-- **_Compatible_**: Indicates that because the tool is adapted to MySQL, and TiDB is highly compatible with the MySQL protocol. So it can use most of the tool's features. However, PingCAP has not complete test this tool's features. It may lead to some unexpected behavior.
+- **_Compatible_**: Indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
 
 > **Warning:**
 >
