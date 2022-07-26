@@ -1923,7 +1923,7 @@ explain select * from t where age=5;
 
 > **Warning:**
 >
-> Prior to v5.3.1, there was a serious bug with this variable. Please use this variable in and after v5.3.1.
+> Prior to v5.3.1/v5.4.1, there was a serious bug with this variable. Please use this variable in and after v5.3.1/v5.4.1.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
