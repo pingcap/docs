@@ -1,3 +1,8 @@
+---
+title: TiDB Cloud API Overview
+summary: Learn about what is TiDB Cloud API, its features, and how to use API to manage your TiDB Cloud clusters.
+---
+
 # TiDB Cloud API Overview
 
 The TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can manage resources automatically and efficiently:
