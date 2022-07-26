@@ -28,6 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Increase the storage size of a Developer Tier cluster from 500 MiB to 1 GiB.
 * Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
+* Support configuring multiple filter rules when you import data into TiDB Cloud.
 * Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
 
 ## July 19, 2022
