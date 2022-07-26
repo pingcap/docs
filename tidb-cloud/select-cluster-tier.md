@@ -20,8 +20,8 @@ The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://p
 Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
 
 - 1 TiDB shared node
-- 1 TiKV shared node (with 500 MiB of OLTP storage)
-- 1 TiFlash shared node (with 500 MiB of OLAP storage)
+- 1 TiKV shared node (with 1 GiB of OLTP storage)
+- 1 TiFlash shared node (with 1 GiB of OLAP storage)
 
 Developer Tier clusters run on shared nodes. Although each node is run in its own container on a virtual machine (VM), that VM is also running other TiDB, TiKV, or TiFlash nodes. As a result, shared nodes will have reduced performance when compared to standard, dedicated TiDB Cloud nodes. However, as all nodes are running in separate containers and have dedicated cloud disks, data stored in a Developer Tier cluster is isolated and will never be exposed to other TiDB clusters.
 
@@ -29,12 +29,24 @@ For each TiDB Cloud account, you can use one complimentary Developer Tier cluste
 
 The one-year free trial begins the day the first Developer Tier cluster is created.
 
+### Automatic hibernation and resuming
+
+If you do not use a Developer Tier cluster for a few days, the cluster hibernates automatically.
+
+The hibernation does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption.
+
+During the hibernation, the status of the cluster is still displayed as **Normal**, and you can see a message about hibernation in the TiDB Cloud console.
+
+Anytime you want to use your Developer Tier cluster again, just connect to your cluster using your MySQL client driver or ORM framework as you usually do. Then the cluster is resumed and back to service automatically.
+
+Alternatively, you can log in to the TiDB Cloud console, and then click **Resume** for the cluster on the **Active Clusters** page.
+
 ### Developer Tier special terms and conditions
 
 - No uptime SLA guarantee.
 - No high availability or automatic failover.
 - Upgrades to clusters might incur significant downtimes.
-- Each cluster allows one automatic daily backup and two manual backups.
+- The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
 - The maximum number of connections to the Developer Tier cluster is 50.
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering to connect to clusters.
@@ -42,7 +54,6 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 - You cannot use a third-party monitoring service.
 - You cannot customize the port number of a TiDB cluster.
 - The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
-- The cluster will be backed up and shut down after 7 days of inactivity. To use the cluster again, you can restore it from previous backups.
 
 ## Dedicated Tier
 

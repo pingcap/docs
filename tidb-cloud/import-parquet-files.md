@@ -85,7 +85,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     - **Data Format**: select **Parquet**.
     - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **Target Database**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
+    - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli).
     - **Object Name Pattern**: enter a pattern that matches the names of the Parquet files to be imported. For example,`my-data.parquet`.
     - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
 

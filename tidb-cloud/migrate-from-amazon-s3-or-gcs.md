@@ -145,7 +145,7 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the
     - **Bucket URL**: fill in the bucket URL of your source data.
     - **Data Format**: choose the format of your data.
     - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli). Currently, TiDB Cloud only supports one table filter rule.
+    - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidb/stable/table-filter#cli).
 
 2. Click **Import**.
 
