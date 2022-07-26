@@ -10,7 +10,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## July xx, 2022
 
-* Supports TiDB Cloud API. TiDB Cloud API is a RESTful based interface which can interact with TiDB Cloud Service. Through this API, customers can manage resources such as clusters automatically and efficiently. For more information, refer to [API Reference](https://docs.pingcap.com/tidbcloud/api/v1).
+* Supports TiDB Cloud API. TiDB Cloud API is a RESTful based interface, which can interact with TiDB Cloud services. Through this API, you can manage resources such as clusters automatically and efficiently. For more information, refer to [API Reference](https://docs.pingcap.com/tidbcloud/api/v1).
 * //TODO: Add the **API Key** tab in the TiDB Cloud console.
 * Behavior changes to new Developer Tier clusters
 
