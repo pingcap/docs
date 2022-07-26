@@ -1,6 +1,7 @@
 ---
 title: Slow Queries Page of TiDB Dashboard
 summary: Learn the Slow Queries page of TiDB Dashboard.
+aliases: ['/docs/dev/dashboard/dashboard-slow-query/']
 ---
 
 # Slow Queries Page of TiDB Dashboard

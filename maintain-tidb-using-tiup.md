@@ -1,6 +1,7 @@
 ---
 title: TiUP Common Operations
 summary: Learn the common operations to operate and maintain a TiDB cluster using TiUP.
+aliases: ['/docs/dev/maintain-tidb-using-tiup/','/docs/dev/how-to/maintain/tiup-operations/']
 ---
 
 # TiUP Common Operations

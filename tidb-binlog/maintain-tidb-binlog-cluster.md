@@ -1,6 +1,7 @@
 ---
 title: TiDB Binlog Cluster Operations
 summary: Learn how to operate the cluster version of TiDB Binlog.
+aliases: ['/docs/dev/tidb-binlog/maintain-tidb-binlog-cluster/','/docs/dev/reference/tidb-binlog/maintain/','/docs/dev/how-to/maintain/tidb-binlog/','/docs/dev/reference/tools/tidb-binlog/maintain/']
 ---
 
 # TiDB Binlog Cluster Operations
@@ -72,7 +73,7 @@ To view or modify binlog related states, execute corresponding SQL statements in
     | log_bin       |  0   |
     +---------------+-------+
     ```
-
+    
     When the Value is `0`, binlog is enabled. When the Value is `1`, binlog is disabled.
 
 - Check the status of all the Pump or Drainer nodes:

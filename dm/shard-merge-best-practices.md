@@ -1,6 +1,7 @@
 ---
 title: Best Practices of Data Migration in the Shard Merge Scenario
 summary: Learn the best practices of data migration in the shard merge scenario.
+aliases: ['/docs/tidb-data-migration/dev/shard-merge-best-practices/']
 ---
 
 # Best Practices of Data Migration in the Shard Merge Scenario

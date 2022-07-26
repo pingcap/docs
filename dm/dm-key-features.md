@@ -1,6 +1,7 @@
 ---
 title: Key Features
 summary: Learn about the key features of DM and appropriate parameter configurations.
+aliases: ['/docs/tidb-data-migration/dev/feature-overview/']
 ---
 
 # Key Features

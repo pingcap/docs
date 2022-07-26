@@ -1,6 +1,7 @@
 ---
 title: TiCDC Deployment Topology
 summary: Learn the deployment topology of TiCDC based on the minimal TiDB topology.
+aliases: ['/docs/dev/ticdc-deployment-topology/']
 ---
 
 # TiCDC Deployment Topology

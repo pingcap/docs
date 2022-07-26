@@ -1,6 +1,7 @@
 ---
 title: Deploy a TiDB Cluster Using TiUP
 summary: Learn how to easily deploy a TiDB cluster using TiUP.
+aliases: ['/docs/dev/production-deployment-using-tiup/','/docs/dev/how-to/deploy/orchestrated/tiup/','/docs/dev/tiflash/deploy-tiflash/','/docs/dev/reference/tiflash/deploy/','/tidb/dev/deploy-tidb-from-dbdeployer/','/docs/dev/deploy-tidb-from-dbdeployer/','/docs/dev/how-to/get-started/deploy-tidb-from-dbdeployer/','/tidb/dev/deploy-tidb-from-homebrew/','/docs/dev/deploy-tidb-from-homebrew/','/docs/dev/how-to/get-started/deploy-tidb-from-homebrew/','/tidb/dev/production-offline-deployment-using-tiup','/docs/dev/production-offline-deployment-using-tiup/','/tidb/dev/deploy-tidb-from-binary','/tidb/dev/production-deployment-from-binary-tarball','/tidb/dev/test-deployment-from-binary-tarball','/tidb/dev/deploy-test-cluster-using-docker-compose','/tidb/dev/test-deployment-using-docker']
 ---
 
 # Deploy a TiDB Cluster Using TiUP
@@ -23,9 +24,6 @@ Make sure that you have read the following documents:
 ## Step 2. Deploy TiUP on the control machine
 
 You can deploy TiUP on the control machine in either of the two ways: online deployment and offline deployment.
-
-<SimpleTab>
-<div label="Deploy TiUP online">
 
 ### Deploy TiUP online
 
@@ -82,10 +80,6 @@ Log in to the control machine using a regular user account (take the `tidb` user
     ```shell
     tiup --binary cluster
     ```
-
-</div>
-
-<div label="Deploy TiUP offline">
 
 ### Deploy TiUP offline
 
@@ -204,9 +198,6 @@ source /home/tidb/.bash_profile
 The `local_install.sh` script automatically runs the `tiup mirror set tidb-community-server-${version}-linux-amd64` command to set the current mirror address to `tidb-community-server-${version}-linux-amd64`.
 
 To switch the mirror to another directory, run the `tiup mirror set <mirror-dir>` command. To switch the mirror to the online environment, run the `tiup mirror set https://tiup-mirrors.pingcap.com` command.
-
-</div>
-</SimpleTab>
 
 ## Step 3. Initialize cluster topology file
 

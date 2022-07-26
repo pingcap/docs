@@ -1,6 +1,7 @@
 ---
 title: INSERT | TiDB SQL Statement Reference
 summary: An overview of the usage of INSERT for the TiDB database.
+aliases: ['/docs/dev/sql-statements/sql-statement-insert/','/docs/dev/reference/sql/statements/insert/']
 ---
 
 # INSERT

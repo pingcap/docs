@@ -1,6 +1,7 @@
 ---
 title: DROP [GLOBAL|SESSION] BINDING
 summary: Use of DROP BINDING in TiDB database.
+aliases: ['/docs/dev/sql-statements/sql-statement-drop-binding/']
 ---
 
 # DROP [GLOBAL|SESSION] BINDING

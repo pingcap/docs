@@ -1,6 +1,7 @@
 ---
 title: TiDB Features
 summary: Learn about the basic features of TiDB.
+aliases: ['/docs/dev/basic-features/']
 ---
 
 # TiDB Features

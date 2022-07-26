@@ -1,6 +1,7 @@
 ---
 title: PD Configuration File
 summary: Learn the PD configuration file.
+aliases: ['/docs/dev/pd-configuration-file/','/docs/dev/reference/configuration/pd-server/configuration-file/']
 ---
 
 # PD Configuration File
@@ -181,6 +182,7 @@ Configuration items related to scheduling
 
 + Controls the size limit of `Region Merge`. When the Region size is greater than the specified value, PD does not merge the Region with the adjacent Regions.
 + Default value: `20`
++ Unit: MiB
 
 ### `max-merge-region-keys`
 
@@ -272,7 +274,7 @@ Configuration items related to scheduling
 + Determines whether to enable the merging of cross-table Regions
 + Default value: `true`
 
-### `region-score-formula-version` <span class="version-mark">New in v5.0</span>
+### `region-score-formula-version` <span class="version-mark">New in v5.0</span> 
 
 + Controls the version of the Region score formula
 + Default value: `v2`
@@ -293,7 +295,7 @@ Configuration items related to scheduling
 + Default value: `10m`
 
 > **Note:**
->
+> 
 > The information about hot Regions is updated every three minutes. If the interval is set to less than three minutes, updates during the interval might be meaningless.
 
 ### `hot-regions-reserved-days` <span class="version-mark">New in v5.4.0</span>

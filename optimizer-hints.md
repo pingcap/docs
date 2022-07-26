@@ -1,6 +1,7 @@
 ---
 title: Optimizer Hints
 summary: Use Optimizer Hints to influence query execution plans
+aliases: ['/docs/dev/optimizer-hints/','/docs/dev/reference/performance/optimizer-hints/']
 ---
 
 # Optimizer Hints

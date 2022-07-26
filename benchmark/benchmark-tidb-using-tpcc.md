@@ -1,5 +1,6 @@
 ---
 title: How to Run TPC-C Test on TiDB
+aliases: ['/docs/dev/benchmark/benchmark-tidb-using-tpcc/','/docs/dev/benchmark/how-to-run-tpcc/']
 ---
 
 # How to Run TPC-C Test on TiDB

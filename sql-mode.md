@@ -1,6 +1,7 @@
 ﻿---
 title: SQL Mode
 summary: Learn SQL mode.
+aliases: ['/docs/dev/sql-mode/','/docs/dev/reference/sql/sql-mode/']
 ---
 
 # SQL Mode

@@ -1,6 +1,7 @@
 ---
 title: PLACEMENT_POLICIES
 summary: Learn the `PLACEMENT_POLICIES` information_schema table.
+aliases: ['/tidb/dev/information-schema-placement-rules']
 ---
 
 # PLACEMENT_POLICIES
@@ -41,7 +42,7 @@ The `PLACEMENT_POLICIES` table only shows all placement policies. To view the ca
 {{< copyable "sql" >}}
 
 ```sql
-CREATE TABLE t1 (a INT);
+CREATE TABLE t1 (a INT); 
 CREATE PLACEMENT POLICY p1 primary_region="us-east-1" regions="us-east-1";
 CREATE TABLE t3 (a INT) PLACEMENT POLICY=p1;
 SHOW PLACEMENT; -- Shows all information, including table t3.

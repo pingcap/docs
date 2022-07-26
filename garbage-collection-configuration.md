@@ -1,6 +1,7 @@
 ---
 title: Garbage Collection Configuration
 summary: Learn about GC configuration parameters.
+aliases: ['/docs/dev/garbage-collection-configuration/','/docs/dev/reference/garbage-collection/configuration/']
 ---
 
 # Garbage Collection Configuration

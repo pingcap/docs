@@ -1,6 +1,7 @@
 ---
 title: METRICS_TABLES
 summary: Learn the `METRICS_TABLES` system table.
+aliases: ['/docs/dev/system-tables/system-table-metrics-tables/','/docs/dev/reference/system-databases/metrics-tables/','/tidb/dev/system-table-metrics-tables/']
 ---
 
 # METRICS_TABLES
@@ -46,7 +47,7 @@ TABLE_NAME: abnormal_stores
     PROMQL: sum(pd_cluster_status{ type=~"store_disconnected_count|store_unhealth_count|store_low_space_count|store_down_count|store_offline_count|store_tombstone_count"})
     LABELS: instance,type
   QUANTILE: 0
-   COMMENT:
+   COMMENT: 
 *************************** 2. row ***************************
 TABLE_NAME: etcd_disk_wal_fsync_rate
     PROMQL: delta(etcd_disk_wal_fsync_duration_seconds_count{$LABEL_CONDITIONS}[$RANGE_DURATION])

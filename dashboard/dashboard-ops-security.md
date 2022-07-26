@@ -1,6 +1,7 @@
 ---
 title: Secure TiDB Dashboard
 summary: Learn how to improve the security of TiDB Dashboard.
+aliases: ['/docs/dev/dashboard/dashboard-ops-security/']
 ---
 
 # Secure TiDB Dashboard

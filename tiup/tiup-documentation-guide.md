@@ -1,6 +1,7 @@
 ---
 title: TiUP Documentation Map
 summary: Guide you through TiUP documentation with links and introductions.
+aliases: ['/docs/dev/tiup/tiup-documentation-guide/']
 ---
 
 # TiUP Documentation Map

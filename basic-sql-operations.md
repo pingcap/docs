@@ -1,6 +1,7 @@
 ---
 title: Explore SQL with TiDB
 summary: Learn about the basic SQL statements for the TiDB database.
+aliases: ['/docs/dev/basic-sql-operations/','/docs/dev/how-to/get-started/explore-sql/']
 ---
 
 # Explore SQL with TiDB
@@ -188,7 +189,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 ```
 
 > **Note:**
->
+> 
 > DDL operations are not transactions. You don't need to run a `COMMIT` statement when executing DDL operations.
 
 ## Insert, update, and delete data
@@ -228,7 +229,7 @@ DELETE FROM person WHERE id=2;
 ```
 
 > **Note:**
->
+> 
 > The `UPDATE` and `DELETE` statements without the `WHERE` clause as a filter operate on the entire table.
 
 ## Query data

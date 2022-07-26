@@ -1,6 +1,7 @@
 ---
 title: Telemetry
 summary: Learn the telemetry feature, how to disable the feature and view its status.
+aliases: ['/docs/dev/telemetry/']
 ---
 
 # Telemetry

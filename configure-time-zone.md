@@ -1,6 +1,7 @@
 ---
 title: Time Zone Support
 summary: Learn how to set the time zone and its format.
+aliases: ['/docs/dev/configure-time-zone/','/docs/dev/how-to/configure/time-zone/']
 ---
 
 # Time Zone Support

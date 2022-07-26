@@ -1,6 +1,7 @@
 ---
 title: Schema Object Names
 summary: Learn about schema object names in TiDB SQL statements.
+aliases: ['/docs/dev/schema-object-names/','/docs/dev/reference/sql/language-structure/schema-object-names/']
 ---
 
 # Schema Object Names
@@ -28,7 +29,7 @@ CREATE TABLE "test" (a varchar(10));
 ```
 
 ```sql
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 19 near ""test" (a varchar(10))"
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 19 near ""test" (a varchar(10))" 
 ```
 
 {{< copyable "sql" >}}

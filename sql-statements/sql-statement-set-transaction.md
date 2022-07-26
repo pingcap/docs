@@ -1,6 +1,7 @@
 ---
 title: SET TRANSACTION | TiDB SQL Statement Reference
 summary: An overview of the usage of SET TRANSACTION for the TiDB database.
+aliases: ['/docs/dev/sql-statements/sql-statement-set-transaction/','/docs/dev/reference/sql/statements/set-transaction/']
 ---
 
 # SET TRANSACTION

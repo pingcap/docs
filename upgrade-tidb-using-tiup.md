@@ -1,6 +1,7 @@
 ---
 title: Upgrade TiDB Using TiUP
 summary: Learn how to upgrade TiDB using TiUP.
+aliases: ['/docs/dev/upgrade-tidb-using-tiup/','/docs/dev/how-to/upgrade/using-tiup/','/tidb/dev/upgrade-tidb-using-tiup-offline','/docs/dev/upgrade-tidb-using-tiup-offline/']
 ---
 
 # Upgrade TiDB Using TiUP

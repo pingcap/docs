@@ -1,5 +1,6 @@
 ---
 title: TiDB 1.0.2 Release Notes
+aliases: ['/docs/dev/releases/release-1.0.2/','/docs/dev/releases/102/']
 ---
 
 # TiDB 1.0.2 Release Notes

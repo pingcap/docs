@@ -6,8 +6,7 @@
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
   - [High Availability](/tidb-cloud/high-availability-with-multi-az.md)
 - Get Started
-  - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+  - [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
 - Manage Cluster
   - Plan Your Cluster
@@ -24,7 +23,6 @@
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [Use Open API](/tidb-cloud/open-api-overview.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)

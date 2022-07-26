@@ -1,6 +1,7 @@
 ---
 title: Store Limit
 summary: Learn the feature of Store Limit.
+aliases: ['/docs/dev/configure-store-limit/']
 ---
 
 # Store Limit
@@ -40,7 +41,7 @@ To view the limit setting of the current store, run the following commands:
 ```bash
 store limit                         // Shows the speed limit of adding and deleting peers in all stores.
 store limit add-peer                // Shows the speed limit of adding peers in all stores.
-store limit remove-peer             // Shows the speed limit of deleting peers in all stores.
+store limit remove-peer             // Shows the speed limit of deleting peers in all stores. 
 ```
 
 ### Set limit for all stores

@@ -8,23 +8,6 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## July 12, 2022
-
-* Add the **Validate** button to the **Data Import Task** page for Amazon S3, which helps you detect data access issues before the data import starts.
-* Add **Billing Profile** under the **Payment Method** tab. By providing your tax registration number in **Billing Profile**, certain taxes might be exempted from your invoice.
-
-## July 05, 2022
-
-* The columnar storage TiFlash is now in General Availability (GA).
-
-    - TiFlash makes TiDB essentially an Hybrid Transactional/Analytical Processing (HTAP) database. Your application data is first stored in TiKV and then replicated to TiFlash via the Raft consensus algorithm. So it is real time replication from the row storage to the columnar storage.
-    - For tables with TiFlash replicas, the TiDB optimizer automatically determines whether to use either TiKV or TiFlash replicas based on the cost estimation.
-
-    To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
-
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md) of TiKV and TiFlash for a Dedicated Tier cluster.
-* Support showing the memory information in the node size field.
-
 ## June 28, 2022
 
 * Upgrade TiDB Cloud Dedicated Tier from [TiDB v5.4.1](https://docs.pingcap.com/tidb/stable/release-5.4.1) to [TiDB v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0).
@@ -81,7 +64,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## May 1, 2022
 
-* Support configuring vCPU size of TiDB, TiKV, and TiFlash when you create or restore a cluster.
+* Support configuring vCPU size of TiDB, TiKV, and TiFlash<sup>beta</sup> when you create or restore a cluster.
 * Add the support of the AWS region `Mumbai` for cluster creation.
 * Update the compute, storage, and data transfer cost for [TiDB Cloud billing](/tidb-cloud/tidb-cloud-billing.md).
 
@@ -109,11 +92,11 @@ New feature:
 
 General changes:
 
-* No cluster tier with the fixed cluster size any more. You can customize the cluster size of TiDB, TiKV, and TiFlash easily.
-* Support adding TiFlash nodes for an existing cluster without TiFlash.
+* No cluster tier with the fixed cluster size any more. You can customize the cluster size of TiDB, TiKV, and TiFlash<sup>beta</sup> easily.
+* Support adding TiFlash<sup>beta</sup> nodes for an existing cluster without TiFlash.
 * Support specifying the storage size (500 to 2048 GiB) when creating a new cluster. The storage size cannot be changed after the cluster is created.
 * Introduce a new public region: `eu-central-1`.
-* Deprecate 8 vCPU TiFlash and provide 16 vCPU TiFlash.
+* Deprecate 8 vCPU TiFlash<sup>beta</sup> and provide 16 vCPU TiFlash.
 * Separate the price of CPU and storage (both have 30% public preview discount).
 * Update the [billing information](/tidb-cloud/tidb-cloud-billing.md) and the [price table](https://en.pingcap.com/tidb-cloud/#pricing).
 

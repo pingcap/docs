@@ -1,6 +1,7 @@
 ---
 title: Multiple Data Centers in One City Deployment
 summary: Learn the deployment solution to multi-data centers in one city.
+aliases: ['/docs/dev/how-to/deploy/geographic-redundancy/overview/','/docs/dev/geo-redundancy-deployment/','/tidb/dev/geo-redundancy-deployment']
 ---
 
 # Multiple Data Centers in One City Deployment
@@ -71,7 +72,7 @@ member leader_priority pdName3 3
 ```
 
 > **Note:**
->
+> 
 > Since TiDB 5.2, the `label-property` configuration is not supported by default. To set the replica policy, use the [placement rules](/configure-placement-rules.md).
 
 **Disadvantages:**

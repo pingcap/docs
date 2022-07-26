@@ -1,6 +1,7 @@
 ---
 title: Transactions
 summary: Learn transactions in TiDB.
+aliases: ['/docs/dev/transaction-overview/','/docs/dev/reference/transactions/overview/']
 ---
 
 # Transactions

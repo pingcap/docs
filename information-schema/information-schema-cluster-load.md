@@ -1,6 +1,7 @@
 ---
 title: CLUSTER_LOAD
 summary: Learn the `CLUSTER_LOAD` information_schema table.
+aliases: ['/docs/dev/system-tables/system-table-cluster-load/','/docs/dev/reference/system-databases/cluster-load/','/tidb/dev/system-table-cluster-load/']
 ---
 
 # CLUSTER_LOAD

@@ -1,6 +1,7 @@
 ---
 title: DM-master Configuration File
 summary: Learn the configuration file of DM-master.
+aliases: ['/docs/tidb-data-migration/dev/dm-master-configuration-file/']
 ---
 
 # DM-master Configuration File
@@ -33,7 +34,7 @@ join = ""
 ssl-ca = "/path/to/ca.pem"
 ssl-cert = "/path/to/cert.pem"
 ssl-key = "/path/to/key.pem"
-cert-allowed-cn = ["dm"]
+cert-allowed-cn = ["dm"] 
 ```
 
 ## Configuration parameters

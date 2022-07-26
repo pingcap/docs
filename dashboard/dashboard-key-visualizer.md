@@ -1,6 +1,7 @@
 ---
 title: Key Visualizer Page
 summary: Learn how to use Key Visualizer to monitor traffic.
+aliases: ['/docs/dev/dashboard/dashboard-key-visualizer/','/docs/dev/key-visualizer-monitoring-tool/']
 ---
 
 # Key Visualizer Page

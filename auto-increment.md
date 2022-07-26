@@ -1,6 +1,7 @@
 ---
 title: AUTO_INCREMENT
 summary: Learn the `AUTO_INCREMENT` column attribute of TiDB.
+aliases: ['/docs/dev/auto-increment/']
 ---
 
 # AUTO_INCREMENT
@@ -330,7 +331,7 @@ In addition, when the length of consecutive IDs in a batch `INSERT` statement ex
 
 Starting from v3.0.9 and v4.0.0-rc.1, similar to the behavior of MySQL, the value implicitly assigned to the auto-increment column is controlled by the `@@auto_increment_increment` and `@@auto_increment_offset` session variables.
 
-The value (ID) implicitly assigned to auto-increment columns satisfies the following equation:
+The value (ID) implicitly assigned to auto-increment columns satisfies the following equation: 
 
 `(ID - auto_increment_offset) % auto_increment_increment == 0`
 

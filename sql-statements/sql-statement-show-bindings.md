@@ -1,6 +1,7 @@
 ---
 title: SHOW [GLOBAL|SESSION] BINDINGS
 summary: Use of SHOW BINDINGS binding in TiDB database.
+aliases: ['/docs/dev/sql-statements/sql-statement-show-bindings/']
 ---
 
 # SHOW [GLOBAL|SESSION] BINDINGS

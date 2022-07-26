@@ -1,6 +1,7 @@
 ---
 title: Views
 summary: Learn how to use views in TiDB.
+aliases: ['/docs/dev/views/','/docs/dev/reference/sql/views/']
 ---
 
 # Views

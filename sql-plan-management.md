@@ -1,6 +1,7 @@
 ---
 title: SQL Plan Management (SPM)
 summary: Learn about SQL Plan Management in TiDB.
+aliases: ['/docs/dev/sql-plan-management/','/docs/dev/reference/performance/execution-plan-bind/','/docs/dev/execution-plan-binding/']
 ---
 
 # SQL Plan Management (SPM)

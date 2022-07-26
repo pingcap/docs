@@ -1,6 +1,7 @@
 ---
 title: Access TiDB Dashboard
 summary: Learn how to access TiDB Dashboard.
+aliases: ['/docs/dev/dashboard/dashboard-access/']
 ---
 
 # Access TiDB Dashboard

@@ -1,6 +1,7 @@
 ---
 title: Generated Columns
 summary: Learn how to use generated columns.
+aliases: ['/docs/dev/generated-columns/','/docs/dev/reference/sql/generated-columns/']
 ---
 
 # Generated Columns

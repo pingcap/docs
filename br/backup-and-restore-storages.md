@@ -1,6 +1,7 @@
 ---
 title: External Storages
 summary: Describes the storage URL format used in BR, TiDB Lightning, and Dumpling.
+aliases: ['/docs/dev/br/backup-and-restore-storages/']
 ---
 
 # External Storages

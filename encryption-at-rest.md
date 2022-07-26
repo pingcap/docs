@@ -1,6 +1,7 @@
 ---
 title: Encryption at Rest
 summary: Learn how to enable encryption at rest to protect sensitive data.
+aliases: ['/docs/dev/encryption at rest/']
 ---
 
 # Encryption at Rest

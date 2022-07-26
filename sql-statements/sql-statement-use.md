@@ -1,6 +1,7 @@
 ---
 title: USE | TiDB SQL Statement Reference
 summary: An overview of the usage of USE for the TiDB database.
+aliases: ['/docs/dev/sql-statements/sql-statement-use/','/docs/dev/reference/sql/statements/use/']
 ---
 
 # USE

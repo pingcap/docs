@@ -1,6 +1,7 @@
 ---
 title: Key Monitoring Metrics of TiKV
 summary: Learn some key metrics displayed on the Grafana TiKV dashboard.
+aliases: ['/docs/dev/grafana-tikv-dashboard/','/docs/dev/reference/key-monitoring-metrics/tikv-dashboard/']
 ---
 
 # Key Monitoring Metrics of TiKV

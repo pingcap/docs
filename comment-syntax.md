@@ -1,6 +1,7 @@
 ---
 title: Comment Syntax
 summary: This document introduces the comment syntax supported by TiDB.
+aliases: ['/docs/dev/comment-syntax/','/docs/dev/reference/sql/language-structure/comment-syntax/']
 ---
 
 # Comment Syntax
@@ -42,7 +43,7 @@ TiDB supports three comment styles:
     +------+
     1 row in set (0.00 sec)
     ```
-
+    
     And this style requires at least one whitespace after `--`:
 
    {{< copyable "sql" >}}

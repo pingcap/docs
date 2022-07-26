@@ -1,6 +1,7 @@
 ---
 title: SQL Prepare Execution Plan Cache
 summary: Learn about SQL Prepare Execution Plan Cache in TiDB.
+aliases: ['/tidb/dev/sql-prepare-plan-cache']
 ---
 
 # SQL Prepare Execution Plan Cache

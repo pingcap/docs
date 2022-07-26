@@ -1,6 +1,7 @@
 ---
 title: TiUP Troubleshooting Guide
 summary: Introduce the troubleshooting methods and solutions if you encounter issues when using TiUP.
+aliases: ['/docs/dev/tiup/tiup-troubleshooting-guide/']
 ---
 
 # TiUP Troubleshooting Guide
@@ -29,7 +30,7 @@ Because the CDN server has a short cache time, the new checksum file might not m
 
 ### `unable to authenticate, attempted methods [none publickey]` is prompted during deployment
 
-During deployment, component packages are uploaded to the remote host and the initialization is performed. This process requires connecting to the remote host. This error is caused by the failure to find the SSH private key to connect to the remote host.
+During deployment, component packages are uploaded to the remote host and the initialization is performed. This process requires connecting to the remote host. This error is caused by the failure to find the SSH private key to connect to the remote host. 
 
 To solve this issue, confirm whether you have specified the private key by running `tiup cluster deploy -i identity_file`:
 
