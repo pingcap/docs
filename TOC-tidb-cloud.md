@@ -28,6 +28,7 @@
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+  - [Use TiDB Cloud API](/tidb-cloud/api-overview.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
@@ -344,6 +345,7 @@
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
+  - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1)
   - Storage Engines
     - TiKV
         - [TiKV Overview](/tikv-overview.md)

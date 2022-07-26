@@ -32,6 +32,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 - [Use an HTAP Cluster](/tiflash/tiflash-overview.md)
 - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
 - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
+- [Use TiDB Cloud API](/tidb-cloud/api-overview.md)
 
 </NavColumn>
 
@@ -72,6 +73,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 <ColumnTitle>Reference</ColumnTitle>
 
 - [Billing](/tidb-cloud/tidb-cloud-billing.md)
+- [API Reference](https://docs.pingcap.com/tidbcloud/api/v1)
 - [Support](/tidb-cloud/tidb-cloud-support.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
 
