@@ -49,7 +49,7 @@ The data in the storage layer of TiFlash is stored in two layers: Delta layer an
 The overall TableScan algorithm process in Normal Mode consists of the following steps:
 
 1. Read data: separate data streams are created in the Delta layer and Stable layer to read the respective data.
-2. Sort Merge: the data streams created in step 1 are merged and the data is returned in (handle, version) order.
+2. Sort Merge: the data streams created in step 1 are sorted and merged, and the data is returned in (handle, version) order.
 3. Range Filter: the data from step 2 is filtered and returned.
 4. MVCC + Column Filter: the data from step 3 is filtered by MVCC, and the unneeded columns are filtered out and the the data is returned.
 
