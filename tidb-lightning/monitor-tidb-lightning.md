@@ -1,7 +1,6 @@
 ---
 title: TiDB Lightning Monitoring
 summary: Learn about the monitor configuration and monitoring metrics of TiDB Lightning.
-aliases: ['/docs/dev/tidb-lightning/monitor-tidb-lightning/','/docs/dev/reference/tools/tidb-lightning/monitor/']
 ---
 
 # TiDB Lightning Monitoring
@@ -45,6 +44,8 @@ scrape_configs:
 ## Grafana dashboard
 
 [Grafana](https://grafana.com/) is a web interface to visualize Prometheus metrics as dashboards.
+
+When you [deploy a TiDB cluster using TiUP](/production-deployment-using-tiup.md) and have added Grafana and Prometheus in the topology configuration, a set of [Grafana + Prometheus monitoring platform](/tidb-monitoring-framework.md) is deployed simultaneously. In this situation, you must first import [the JSON file of the dashboard](https://raw.githubusercontent.com/pingcap/tidb-ansible/master/scripts/lightning.json).
 
 ### Row 1: Speed
 

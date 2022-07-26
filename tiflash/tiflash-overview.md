@@ -1,7 +1,7 @@
 ---
 title: TiFlash Overview
 summary: Learn the architecture and key features of TiFlash.
-aliases: ['/docs/dev/tiflash/tiflash-overview/','/docs/dev/reference/tiflash/overview/','/docs/dev/tiflash/use-tiflash/','/docs/dev/reference/tiflash/use-tiflash/','/tidb/dev/use-tiflash']
+aliases: ['/tidb/stable/use-tiflash','/tidb/v6.1/use-tiflash']
 ---
 
 # TiFlash Overview

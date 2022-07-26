@@ -1,7 +1,6 @@
 ---
 title: Data Migration Relay Log
 summary: Learn the directory structure, initial migration rules and data purge of DM relay logs.
-aliases: ['/docs/tidb-data-migration/dev/relay-log/']
 ---
 
 # Data Migration Relay Log

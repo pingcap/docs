@@ -1,7 +1,6 @@
 ---
 title: TiKV Configuration File
 summary: Learn the TiKV configuration file.
-aliases: ['/docs/dev/tikv-configuration-file/','/docs/dev/reference/configuration/tikv-server/configuration-file/']
 ---
 
 # TiKV Configuration File
@@ -601,7 +600,7 @@ Configuration items related to Raftstore.
 
 + After the number of ticks set by this configuration item passes, even if the number of residual Raft logs does not reach the value set by `raft-log-gc-threshold`, TiKV still performs garbage collection (GC) to these logs.
 + Default value: `6`
-+ Minimum value: greater than `0` 
++ Minimum value: greater than `0`
 
 ### `raft-entry-cache-life-time`
 

@@ -7,9 +7,9 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
-> **Warning:**
+> **Note:**
 >
-> Currently, the **audit logging** feature is experimental. It is not recommended that you use it for production environments.
+> Currently, the **audit logging** feature is experimental. The interface and output are subject to change.
 
 To assess the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to conduct a periodic analysis of the database audit logs.
 
@@ -193,7 +193,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 
 TiDB Cloud audit logs are readable text files with the cluster ID, Pod ID, and log creation date incorporated into the fully qualified filenames.
 
-For example, `13796619446086334065/0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `0` indicates the Pod ID.
+For example, `13796619446086334065/tidb-0/tidb-audit-2022-04-21T18-16-29.529.log`. In this example, `13796619446086334065` indicates the cluster ID and `tidb-0` indicates the Pod ID.
 
 ## Disable audit logging
 

@@ -66,11 +66,11 @@ Before importing Parquet files into TiDB Cloud, you need to create the target da
 
 To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, do one of the following:
 
-- If your organization is using TiDB Cloud as a service on AWS, [configure cross-account access to Amazon S3](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access).
+- If your Parquet files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access).
 
     Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-parquet-files-to-tidb-cloud).
 
-- If your organization is using TiDB Cloud as a service on Google Cloud Platform (GCP), [configure cross-account access to GCS](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access).
+- If your Parquet files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access).
 
 ## Step 4. Import Parquet files to TiDB Cloud
 
@@ -90,6 +90,8 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
 
 4. Click **Import** to start the import task.
+
+    If your Parquet files are located in Amazon S3, before clicking **Import**, you need to click **Validate** to verify whether TiDB Cloud has the access to the sample data in your specified bucket URL.
 
 5. When the import progress shows success, check the number after **Total Files:**.
 

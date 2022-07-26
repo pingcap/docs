@@ -1,7 +1,6 @@
 ---
 title: System Variables
 summary: Use system variables to optimize performance or alter running behavior.
-aliases: ['/tidb/dev/tidb-specific-system-variables','/docs/dev/system-variables/','/docs/dev/reference/configuration/tidb-server/mysql-variables/', '/docs/dev/tidb-specific-system-variables/','/docs/dev/reference/configuration/tidb-server/tidb-specific-variables/']
 ---
 
 # System Variables
@@ -2013,6 +2012,12 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Range: `[-1, 9223372036854775807]`
 - Unit: Milliseconds
 - This variable is used to output the threshold value of the time consumed by the slow log. When the time consumed by a query is larger than this value, this query is considered as a slow log and its log is output to the slow query log.
+
+Usage example:
+
+```sql
+SET tidb_slow_log_threshold = 200;
+```
 
 ### tidb_max_tiflash_threads <span class="version-mark">New in v6.1.0</span>
 

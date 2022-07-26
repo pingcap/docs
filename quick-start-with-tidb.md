@@ -1,7 +1,6 @@
 ---
 title: Quick Start Guide for the TiDB Database Platform
 summary: Learn how to quickly get started with the TiDB platform and see if TiDB is the right choice for you.
-aliases: ['/docs/dev/quick-start-with-tidb/','/docs/dev/test-deployment-using-docker/']
 ---
 
 # Quick Start Guide for the TiDB Database Platform
@@ -299,7 +298,7 @@ Other requirements for the target machine:
 
 - The `root` user and its password is required
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-and-stop-the-firewall-service-of-target-machines), or open the port needed by the TiDB cluster nodes
-- Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures:
+- Currently, TiUP supports deploying TiDB on the x86_64 (AMD64 and ARM) architectures:
 
     - It is recommended to use CentOS 7.3 or later versions on AMD64
     - It is recommended to use CentOS 7.6 1810 on ARM
