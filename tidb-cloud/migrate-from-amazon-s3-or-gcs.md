@@ -90,6 +90,25 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need
     - `"Resource": "<Your S3 bucket ARN>"`: `<Your S3 bucket ARN>` is the ARN of your S3 bucket. You can go to the **Properties** tab in your S3 bucket, and get the Amazon Resource Name (ARN) value in the **Bucket Overview** area. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test"`.
     - `"Resource": "arn:aws:s3:::<Your customized directory>"`: `<Your customized directory>` is a directory that you can customize in your S3 bucket root level for data storage. For example, `"Resource": "arn:aws:s3:::tidb-cloud-test/mydata/*"`. If you want to store your data in the S3 bucket root directory, just use `"Resource": "arn:aws:s3:::tidb-cloud-test/*"`. Note that this value is expected to end with `/*`; otherwise, you might encounter the `AccessDenied` error.
 
+    In case the exported snapshot is encrypted, you also need to add the following `kms:Decrypt` configuration to the policy template.
+
+    {{< copyable "" >}}
+
+    ```
+    {
+            "Sid": "kms",
+            "Effect": "Allow",
+            "Action": [
+                "kms:Decrypt"
+            ],
+            "Resource": [
+                "<Your AWS KMS key ARN>"
+            ]
+        }
+    ```
+
+    In the `kms:Decrypt` configuration, `<your AWS KMS key ARN>` is KMS key ARN that you use to encrypt the snapshot. For example,  `arn:aws:kms:us-west-2:577523860935:key/1e0eb9a8-c5d5-473c-bca8-43521190ba11`. To get the value, locate the server-side encryption settings of the encrypted objects in your S3 bucket, and check the `AWS KMS key ARN` field.
+
 3. Go to **IAM** > **Access Management** > **Roles**, and then check whether a role whose trust entity corresponds to the TiDB Cloud Account ID of the target TiDB cluster exists. 
 
     - If yes, you can use the matched role for the target TiDB cluster in the following steps. 
@@ -101,21 +120,33 @@ To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need
 
         If not, choose **Attach Policies**, search for the needed policy, and then click **Attach Policy**.
 
-    2. Click the **Trust relationships** tab, click **Edit trust relationship**, and then check whether the value of the **Condition sts:ExternalId** attribute is the TiDB Cloud External ID of the target TiDB cluster. 
+    2. Click the **Trust relationships** tab, click **Edit trust relationship**, and then check whether the value of the **Condition sts:ExternalId** attribute is the TiDB Cloud External ID of the target TiDB cluster.
 
-        If not, update the **Condition sts:ExternalId** attribute in the JSON text editor, and then click **Update Trust Policy**. 
-        
-        The following is a configuration example of the **Condition sts:ExternalId** attribute.
+        If not, update the **Condition sts:ExternalId** attribute in the JSON text editor, and then click **Update Trust Policy**.
+
+        The following is a configuration example.
 
         {{< copyable "" >}}
 
         ```
-        "Condition": {
-            "StringEquals": {
-            "sts:ExternalId": "696e6672612d61706993147c163238a8a7005caaf40e0338fc"
-            }
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "AWS": "arn:aws:iam::380838443567:root"
+                    },
+                    "Action": "sts:AssumeRole",
+                    "Condition": {
+                        "StringEquals": {
+                            "sts:ExternalId": "696e6672612d6170691a5b96ff8a792570aabed751af70120b"
+                        }
+                    }
+                }
+            ]
         }
-        ```         
+        ```
 
     3. Return to the **Summary** page and copy the **Role ARN** value to your clipboard.
 
