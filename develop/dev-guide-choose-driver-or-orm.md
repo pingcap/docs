@@ -38,7 +38,7 @@ You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/5
 
 > **Note:**
 >
-> It is strongly recommended version `5.1.49` which is the last version of JDBC 5.1. Because the current version 8.0.29 has an unmerged [bug fix](https://bugs.mysql.com/bug.php?id=106252) that may cause threads to hang when used with TiDB. It is recommended that you do not upgrade to version 8.0 until MySQL JDBC 8.0 has merged this fix.
+> It is strongly recommended to use version 5.1.49, which is the latest version of JDBC 5.1. Since there is an [unresolved bug](https://bugs.mysql.com/bug.php?id=106252) in the current version 8.0.29, which might cause threads to hang when using TiDB. It is recommended that you do not upgrade to version 8.0 until MySQL JDBC 8.0 merges this fix.
 
 For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
 
