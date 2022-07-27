@@ -1931,7 +1931,7 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
+- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is again checked before SQL statements are committed. This helps prevent a case where long running auto_commit statements could modify data after the server has been placed in read-only mode.
 - When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
     - For uncommitted read-only transactions, you can commit the transactions normally.
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
