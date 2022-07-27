@@ -16,6 +16,7 @@ Before you start working with TiDB, you need to understand some important mechan
 
 - Read the [TiDB Transaction Overview](/transaction-overview.md) to understand how transactions work in TiDB, or check out the [Transaction Notes for Application Developers](/develop/dev-guide-transaction-overview.md) to learn about transaction knowledge required for application development.
 - Understand [the way applications interact with TiDB](#the-way-applications-interact-with-tidb).
+- Get the free online course, [TiDB Architecture Basics](https://freeclasses.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide), to learn the core components and concepts of building up the distributed TiDB cluster and TiDB Cloud.
 
 ## TiDB transaction mechanisms
 
@@ -44,3 +45,4 @@ Since TiDB is compatible with the MySQL protocol and MySQL syntax, most of the O
 - [Transaction](/develop/dev-guide-transaction-overview.md)
 - [Optimize](/develop/dev-guide-optimize-sql-overview.md)
 - [Example Applications](/develop/dev-guide-sample-application-spring-boot.md)
+- Learn TiDB in-depth and get TiDB certified on [PingCAP Education](https://en.pingcap.com/education/?utm_source=docs-dev-guide)
