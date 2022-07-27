@@ -18,7 +18,7 @@ Before you use the physical import mode, make sure to read [Requirements and res
 
 2. TiDB Lightning creates table schemas in the target database and fetches the metadata.
 
-3. Each table is divided into multiple contiguous **blocks**, so that TiDB Lightning can import data data from large tables (200 GB+) in parallel.
+3. Each table is divided into multiple contiguous **blocks**, so that TiDB Lightning can import data from large tables (greater than 200 GB) in parallel.
 
 4. TiDB Lightning prepares an "engine file" for each block to handle key-value pairs. TiDB Lightning reads the SQL dump in parallel, converts the data source to key-value pairs in the same encoding as TiDB, sorts the key-value pairs and writes them to a local temporary storage file.
 
