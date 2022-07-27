@@ -203,7 +203,7 @@ Once finished, you will have created a policy and role for cross-account. You ca
 
 ## Learn how to set up filter rules
 
-Refer to the [Table Filter](/table-filter.md#syntax) document. Currently, TiDB Cloud only supports one table filter rule.
+Refer to the [Table Filter](/table-filter.md#syntax) document.
 
 ## Learn how to clean up incomplete data
 

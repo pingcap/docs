@@ -11,7 +11,7 @@ VPC peering connection is a networking connection between two VPCs that enables 
 
 Currently, TiDB Cloud only supports VPC peering in the same region for the same project. TiDB clusters of the same project in the same region are created in the same VPC. Therefore, once VPC peering is set up in a region of a project, all the TiDB clusters created in the same region of this project can be connected in your VPC. VPC peering setup differs among cloud providers.
 
-## Prerequisites
+## Prerequisite: Set a Project CIDR
 
 Project CIDR (Classless Inter-Domain Routing) is the CIDR block used for network peering in a project.
 
