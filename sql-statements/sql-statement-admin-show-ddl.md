@@ -124,6 +124,7 @@ You can only search the running DDL job corresponding to `job_id` within the las
  ADMIN SHOW DDL JOB QUERIES LIMIT n, m;  # Retrieve rows [n+1, n+m]
  ADMIN SHOW DDL JOB QUERIES LIMIT m OFFSET n;  # Retrieve rows [n+1, n+m]
  ```
+ 
  where n and m are integers greater or equal to 0.
 
  ```sql
