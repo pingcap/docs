@@ -39,4 +39,14 @@ After [tuning SQL performance](#sql-performance-tuning), if your application sti
 
 ### See also
 
+<CustomContent platform="tidb">
+
 * [SQL Performance Tuning](/sql-tuning-overview.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+* [SQL Performance Tuning](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+
+</CustomContent>

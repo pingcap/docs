@@ -156,11 +156,21 @@ The following is an example output.
 
 In the output, **IndexRangeScan** is displayed instead of **TableFullScan**, which means that TiDB is ready to use indexes to do this query.
 
+The words such as **TableFullScan** and **IndexRangeScan** in the execution plan are [operators](/explain-overview.md#operator-overview) in TiDB. For more information about execution plans and operators, see [TiDB Query Execution Plan Overview](/explain-overview.md).
+
+<CustomContent platform="tidb">
+
+The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/sql-tuning-overview.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
+
+</CustomContent>
+
 > **Note:**
->
-> The words such as **TableFullScan** and **IndexRangeScan** in the execution plan are [operators](/explain-overview.md#operator-overview) in TiDB. For more information about execution plans and operators, see [TiDB Query Execution Plan Overview](/explain-overview.md).
->
-> The execution plan does not return the same operator every time. This is because TiDB uses a **Cost-Based Optimization (CBO)** approach, in which an execution plan depends on both rules and data distribution. For more information about TiDB SQL performance, see [SQL Tuning Overview](/sql-tuning-overview.md).
 >
 > TiDB also supports explicit use of indexes when querying, and you can use [Optimizer Hints](/optimizer-hints.md) or [SQL Plan Management (SPM)](/sql-plan-management.md) to artificially control the use of indexes. But if you do not know well about indexes, optimizer hints, or SPM, **DO NOT** use this feature to avoid any unexpected results.
 
