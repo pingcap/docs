@@ -5,7 +5,7 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 # Configure Amazon S3 access and GCS access
 
-When you import or migrate from Amazon S3 or GCS to TiDB Cloud, you need to configure access to the S3 or GCS bucket. This document describes how to do this.
+When you import or migrate from Amazon S3 or GCS to TiDB Cloud, you need to configure access to the Amazon S3 or GCS buckets. This document describes how to do this.
 
 ## Configure Amazon S3 access
 
