@@ -57,7 +57,7 @@ Before migrating data from Amazon S3 to TiDB Cloud, ensure you have administrato
 
 To allow TiDB Cloud to access the source data in your Amazon S3 bucket, you need to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket.
 
-For detailed steps, see [Configure the Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
 ### Step 3. Import data into TiDB Cloud
 
