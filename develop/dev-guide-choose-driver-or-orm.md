@@ -17,7 +17,7 @@ TiDBはMySQLプロトコルとの互換性が高いですが、一部の機能�
 
 -   MySQLとは異なる機能：
 
-    -   自動インクリメントID：自動インクリメンタル列はTiDBでグローバルに一意です。これらは単一のTiDBサーバーではインクリメンタルですが、複数のTiDBサーバー間でインクリメンタルである必要***はなく***、順番に割り当てられる必要もありません。
+    -   自動インクリメントID：自動インクリメント列はTiDBでグローバルに一意です。これらは単一のTiDBサーバーでは増分ですが、必ずしも複数のTiDBサーバー間で増分したり、順番に割り当てたりする必要***はありません***。
 
 互換性の違いの完全なリストについては、 [MySQLの互換性](/mysql-compatibility.md)を参照してください。
 
@@ -34,14 +34,11 @@ TiDBは、Javaに対して次の2つのサポートレベルを提供します�
 
 サポートレベル：**フル**
 
-[MySQLドキュメント](https://dev.mysql.com/doc/connector-j/8.0/en/)に従って、JavaJDBCドライバーをダウンロードして構成できます。
+[MySQLドキュメント](https://dev.mysql.com/doc/connector-j/5.1/en/)に従って、JavaJDBCドライバーをダウンロードして構成できます。
 
 > **ノート：**
 >
-> バージョン`8.0.16`以降を強くお勧めします。これにより、2つのCommon Vulnerabilities and Exposures（CVE）が修正されます。
->
-> -   CVE-2019-2692を直接修正する
-> -   CVE-2021-22569を間接的に修正
+> JDBC5.1の最新バージョンであるバージョン5.1.49を使用することを強くお勧めします。現在のバージョン8.0.29には[未解決のバグ](https://bugs.mysql.com/bug.php?id=106252)があるため、TiDBの使用時にスレッドがハングする可能性があります。 MySQL JDBC 8.0がこの修正をマージするまで、バージョン8.0にアップグレードしないことをお勧めします。
 
 完全なアプリケーションを構築する方法の例については、 [TiDBとJDBCを使用してシンプルなCRUDアプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
@@ -88,7 +85,7 @@ TiDBは、Javaに対して次の2つのサポートレベルを提供します�
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.28</version>
+    <version>5.1.49</version>
 </dependency>
 ```
 
@@ -98,7 +95,7 @@ TiDBは、Javaに対して次の2つのサポートレベルを提供します�
 
 ```gradle
 implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
-implementation 'mysql:mysql-connector-java:8.0.28'
+implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
 -   Hibernateを使用してネイティブJavaでTiDBアプリケーションを構築する例については、 [TiDBとJavaを使用してシンプルなCRUDアプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
@@ -108,4 +105,4 @@ implementation 'mysql:mysql-connector-java:8.0.28'
 
 > **ノート：**
 >
-> `Hibernate`のバージョンをアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などのTiDB固有の機能が失われたりする可能性があります。
+> `Hibernate`バージョンをアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などのTiDB固有の機能が失われたりする可能性があります。

@@ -8,14 +8,15 @@ aliases: ['/tidbcloud/restore-deleted-tidb-cluster']
 
 このドキュメントでは、 TiDB CloudでTiDBクラスタデータをバックアップおよび復元する方法について説明します。
 
+> **ノート：**
+>
+> [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、バックアップと復元の機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
+
 ## バックアップ {#backup}
 
 TiDB Cloudは、自動バックアップと手動バックアップの2種類のデータバックアップを提供します。
 
-[開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、各クラスタで1つの自動バックアップと2つの手動バックアップが可能です。
-
--   自動バックアップの場合、既存のバックアップは新しいバックアップに置き換えられます。
--   手動バックアップの場合、すでに2つのバックアップがある場合は、別のバックアップを作成する前に、少なくとも1つのバックアップを削除する必要があります。
+毎日のバックアップは、 TiDB Cloud内のTiDBクラスターに対して自動的にスケジュールされます。バックアップスナップショットを選択して、いつでも新しいTiDBクラスタに復元できます。自動バックアップにより、極端な災害状況での損失を減らすことができます。
 
 ### 自動バックアップ {#automatic-backup}
 

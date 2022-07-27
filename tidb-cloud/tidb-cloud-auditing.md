@@ -1,9 +1,9 @@
 ---
-title: Audit Logging
+title: Database Audit Logging
 summary: Learn about how to audit a cluster in TiDB Cloud.
 ---
 
-# 監査ログ {#audit-logging}
+# データベース監査ログ {#database-audit-logging}
 
 TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステートメントなど）の履歴をログに記録するためのデータベース監査ログ機能を提供します。
 

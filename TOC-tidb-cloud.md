@@ -124,6 +124,7 @@
         -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
+    -   [TiDB Cloudクラスターの制限と割り当て](/tidb-cloud/limitations-and-quotas.md)
     -   [TiDBの制限](/tidb-limitations.md)
     -   SQL
         -   [TiDBでSQLを探索する](/basic-sql-operations.md)
