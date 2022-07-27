@@ -2148,6 +2148,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_super_read_only` and [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) behave similarly. In most cases, you should use `tidb_super_read_only`.
+- `tidb_super_read_only` aims to be implemented as a replacement for the MySQL's version `super_read_only`. However, because TiDB is a distributed database, `tidb_super_read_only` does not make the database read-only immediately after execution, but eventually.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
 - TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is again checked before SQL statements are committed. This helps prevent a case where long running auto_commit statements could modify data after the server has been placed in read-only mode.
