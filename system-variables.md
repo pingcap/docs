@@ -893,7 +893,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> **DO NOT set this variable**. The risk of disabling this variable is unknown and might cause the metadata of the cluster to go wrong.
+> **DO NOT set this variable**. The risk of disabling this variable is unknown and might corrupt the metadata of the cluster.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
