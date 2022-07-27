@@ -31,7 +31,17 @@ You can start a transaction using [`BEGIN`](/sql-statements/sql-statement-begin.
 
 TiDB guarantees atomicity for all statements between the start of `BEGIN` and the end of `COMMIT` or `ROLLBACK`, that is, all statements that are executed during this period either succeed or fail as a whole. This is used to ensure data consistency you need for application development.
 
+<CustomContent platform="tidb">
+
 If you are not sure what an **optimistic transaction** is, do ***NOT*** use it yet. Because **optimistic transactions** require that the application can correctly handle [all errors](/error-codes.md) returned by the `COMMIT` statement. If you are not sure how your application handles them, use a **pessimistic transaction** instead.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If you are not sure what an **optimistic transaction** is, do ***NOT*** use it yet. Because **optimistic transactions** require that the application can correctly handle [all errors](https://docs.pingcap.com/tidb/stable/error-codes) returned by the `COMMIT` statement. If you are not sure how your application handles them, use a **pessimistic transaction** instead.
+
+</CustomContent>
 
 ## The way applications interact with TiDB
 
