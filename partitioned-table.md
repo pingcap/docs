@@ -166,7 +166,7 @@ Range partitioning is particularly useful when one or more of the following cond
 
 ### Range INTERVAL partitioning
 
-TiDB since 6.3 supports INTERVAL partitioning as syntactic sugar like:
+INTERVAL partitioning is introduced in TiDB v6.3 as syntactic sugar:
 
 ```
 PARTITION BY RANGE [COLUMNS] (<partitioning expression>)
@@ -177,7 +177,7 @@ LAST PARTITION LESS THAN (<expression>)
 [MAXVALUE PARTITION]
 ```
 
-like the example:
+Example:
 
 ```
 CREATE TABLE employees (
@@ -192,7 +192,7 @@ CREATE TABLE employees (
 INTERVAL (100) FIRST PARTITION LESS THAN (100) LAST PARTITION LESS THAN (10000) MAXVALUE PARTITION
 ```
 
-Which would create the following table:
+Which creates the following table:
 
 ```
 CREATE TABLE `employees` (
@@ -225,7 +225,7 @@ PARTITION BY RANGE COLUMNS (report_date)
 INTERVAL (1 MONTH) FIRST PARTITION LESS THAN ('2000-01-01') LAST PARTITION LESS THAN ('2025-01-01')
 ```
 
-Which would create this table:
+Which creates this table:
 
 ```
 CREATE TABLE `monthly_report_status` (
@@ -242,7 +242,7 @@ PARTITION BY RANGE COLUMNS(`report_date`)
  PARTITION `P_LT_2025-01-01` VALUES LESS THAN ('2025-01-01'))
 ```
 
-The optional NULL PARTITION would create a partition where the partitioning expression evaluates to NULL would be placed. In the partitioning expression, NULL is considered to be less than any other value.
+The optional NULL PARTITION would create a partition where the partitioning expression evaluates to NULL would be placed. In the partitioning expression, NULL is considered to be less than any other value, see [Handling of NULL with Range partitioning](#handling-of-null-with-range-partitioning).
 
 The optional MAXVALUE PARTITION would create a last partition as `PARTITION P_MAXVALUE VALUES LESS THAN (MAXVALUE)`
 
