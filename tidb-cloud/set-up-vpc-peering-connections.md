@@ -168,7 +168,7 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
         ![Search all route tables related to VPC](/media/tidb-cloud/vpc-peering/aws-vpc-guide-4.png)
 
-    3. Right click on each route table and select **Edit routes**. On the edit page, add a route with destination to the Project CIDR (by checking the **VPC Peering** configuration page in the TiDB Cloud Console) and fill in your peering connection ID on the **Target** column.
+    3. Right-click on each route table and select **Edit routes**. On the edit page, add a route with a destination to the Project CIDR (by checking the **VPC Peering** configuration page in the TiDB Cloud Console) and fill in your peering connection ID on the **Target** column.
 
         ![Edit all route tables](/media/tidb-cloud/vpc-peering/aws-vpc-guide-5.png)
 
