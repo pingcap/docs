@@ -9,7 +9,7 @@ summary: Learn how to back up and restore RawKV using BR.
 >
 > This feature is deprecated since TiDB v6.2.0 and no support will be provided thereafter.
 
-Backup & Restore (BR) supports data backup and restore for products that uses RawKV (TiKV and PD) without TiDB. This document describes how to back up and restore RawKV.
+Backup & Restore (BR) supports data backup and restore for products that use RawKV (TiKV and PD) without TiDB. This document describes how to back up and restore RawKV.
 
 ## Back up RawKV
 
