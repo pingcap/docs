@@ -7,7 +7,7 @@ summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud
 
 TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud.
 
-This document describes how to use [Dumpling](/dumpling-overview.md) to export data from MySQL-compatible databases and use [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) TiDB-backend to import the data to TiDB Cloud. 
+This document describes how to use [Dumpling](/dumpling-overview.md) to export data from MySQL-compatible databases and use [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) logical import mode to import the data to TiDB Cloud. 
 
 > **Note:**
 >
@@ -97,9 +97,9 @@ Depending on the location and size of your source data, the importing methods ar
 - If your source data is in local files, do one of the following:
 
     - If the data is larger than 1 TB, it is recommended that you use Amazon S3 or GCS as a staging area to import or migrate data into TiDB Cloud. For more information, see [Import or migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md). 
-    - If the data is less than 1 TB, you can use TiDB Lightning TiDB-backend according to the following steps in this document. 
+    - If the data is less than 1 TB, you can use the logical import mode of TiDB Lightning according to the following steps in this document.
 
-The following steps show how to import data to TiDB Cloud using TiDB Lightning TiDB-backend.
+The following steps show how to import local data to TiDB Cloud using the logical import mode of TiDB Lightning.
 
 1. Install TiDB Lightning:
 
