@@ -1929,6 +1929,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
+- `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531).
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
 - TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is again checked before SQL statements are committed. This helps prevent a case where long running auto_commit statements could modify data after the server has been placed in read-only mode.
@@ -1941,7 +1942,8 @@ explain select * from t where age=5;
     - Setting `tidb_restricted_read_only` to `OFF` leaves [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) unchanged.
     - If `tidb_restricted_read_only` is `ON`, [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) cannot be set to `OFF`.
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
-- Users with `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
+- Users with `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
+- When you are a TiDB database provider, your customers use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531). When a TiDB Cluster is downstream of another database, TiDB database provider may need to use `tidb_restricted_read_only` with [Security Enhanced Mode](#tidb_enable_enhanced_security) enabled to make the cluster read-only and control your customers from using [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to make the cluster writable.
 
 ### tidb_retry_limit
 
@@ -2145,6 +2147,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
+- `tidb_super_read_only` and [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) behave similarly. In most cases, you should use `tidb_super_read_only`.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
 - TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is again checked before SQL statements are committed. This helps prevent a case where long running auto_commit statements could modify data after the server has been placed in read-only mode.
