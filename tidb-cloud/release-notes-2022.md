@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Add a user name prefix limitation for new Developer Tier TiDB clusters
 
-    When you connect to a Developer Tier TiDB cluster via standard connection or when you create a database user, you must include a prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    Whenever you use or create a database user name, you must include the prefix in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 * Disable the backup and restore feature for Developer Tier clusters.
 
