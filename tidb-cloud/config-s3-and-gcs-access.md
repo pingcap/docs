@@ -7,6 +7,9 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 When you import or migrate from Amazon S3 or GCS to TiDB Cloud, you need to configure access to the Amazon S3 or GCS buckets. This document describes how to do this.
 
+- [Configure Amazon S3 access](#configure-amazon-s3-access)
+- [Configure GCS access](#configure-gcs-access)
+
 ## Configure Amazon S3 access
 
 To allow TiDB Cloud to access the source data in your Amazon S3 bucket, take the following steps to configure the bucket access for TiDB Cloud and get the Role-ARN. Once the configuration is done for one TiDB cluster in a project, all TiDB clusters in that project can use the same Role-ARN to access your Amazon S3 bucket.
