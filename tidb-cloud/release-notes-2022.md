@@ -14,6 +14,10 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After 24 hours of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console. The cluster will be resumed within 50 seconds and back to service automatically.
 
+* Add an user name prefix limitation for new Developer Tier TiDB clusters
+
+    When you connect to a Developer Tier TiDB cluster via standard connection or when you create a database user, you must include a prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
 * Disable the backup and restore feature for Developer Tier clusters.
 
     The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
