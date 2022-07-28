@@ -45,7 +45,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 
 - To create a database user:
 
-    ```mysql
+    ```sql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
     ```
 
