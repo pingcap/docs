@@ -5,7 +5,7 @@ summary: Learn how to configure the root password and allowed IP addresses to co
 
 # Configure Cluster Security Settings
 
-When you create a cluster, you will be guided by the TiDB Cloud console to configure the root password and IP access list.
+When you create a cluster, the TiDB Cloud console will automatically guide you to configure the root password and allowed IP addresses to connect to your cluster.
 
 If you do not configure the root password or IP access list at that time, or if you want to modify the settings, take the following steps:
 
