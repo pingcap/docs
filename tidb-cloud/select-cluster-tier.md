@@ -40,7 +40,7 @@ Whenever you use or create a database user name, you must include the prefix in 
 - To connect to your cluster
 
     ```shell
-    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h gateway01.ap-northeast-1.prod.aws.tidbcloud.com -P 4000 -D test -p
+    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
     ```
 
 - To create a database user
