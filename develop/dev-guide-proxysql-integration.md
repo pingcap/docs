@@ -16,7 +16,7 @@ This document briefly describes how to integrate **_TiDB_** with **_ProxySQL_** 
 
 ### 1.1 Test Environment - Source compilation
 
-1. Download [TiDB](https://github.com/pingcap/tidb) code, enter `tidb-server` folder and run `go build`.
+1. Download [TiDB](https://github.com/pingcap/tidb) code, change to the `tidb-server` folder and run the `go build` command.
 
     ```sh
     git clone git@github.com:pingcap/tidb.git
@@ -43,7 +43,7 @@ This document briefly describes how to integrate **_TiDB_** with **_ProxySQL_** 
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-2. Test environment start TiDB
+2. Start TiDB in the test environment
 
     ```sh
     tiup playground
@@ -53,13 +53,13 @@ This document briefly describes how to integrate **_TiDB_** with **_ProxySQL_** 
 
 Please read [Build a TiDB cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
 
-### 1.4 Formal Environment - TiDB Cloud
+### 1.4 Production Environment - TiDB Cloud
 
 We recommend using **TiDB Cloud** directly when you need hosting TiDB services (e.g., you can't manage it yourself, or you need a cloud-native environment, etc.) You can check out [TiDB Cloud - Create a TiDB Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster) to get a TiDB cluster in TiDB Cloud for a formal environment.
 
-### 1.5 Formal Environment - Local Deploy
+### 1.5 Production Environment - Local Deploy
 
-The formal environment is much more complex than the test environment, so we recommend reading the article [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) and then deploying it based on hardware conditions.
+The Production environment is much more complex than the test environment. To deploy an on-premises production cluster, it is recommended to refer to the article [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) and then deploy it based on hardware conditions.
 
 ## 2. Startup ProxySQL
 
@@ -91,7 +91,7 @@ The formal environment is much more complex than the test environment, so we rec
 
 ### 2.2 Other
 
-Please read [ProxySQL Github page](https://github.com/sysown/proxysql#installation) or the [official documentation](https://proxysql.com/documentation/) for installation.
+To install ProxySQL, refer to the [ProxySQL Github page](https://github.com/sysown/proxysql#installation) or the [ProxySQL Installation documentation](https://proxysql.com/documentation/).
 
 ## 3. ProxySQL Configuration
 
@@ -128,7 +128,7 @@ Field Explanation:
 
 ### 3.3 Configure Proxy Login User
 
-Add a TiDB backend login user to ProxySQL. ProxySQL will allow this account to login **_ProxySQL MySQL interface_** and ProxySQL will use it to create a connection to TiDB, so make sure this account has the appropriate permissions in TiDB. Please do this at **_ProxySQL Admin interface_**:
+Add a TiDB backend login user to ProxySQL. ProxySQL will allow this account to log in **_ProxySQL MySQL interface_** and ProxySQL will use it to create a connection to TiDB, so make sure this account has the appropriate permissions in TiDB. Please do this at **_ProxySQL Admin interface_**:
 
 ```sql
 insert into mysql_users(username,password,active,default_hostgroup,transaction_persistent) values('root','',1,0,1);
@@ -140,7 +140,7 @@ Field Explanation:
 
 - `username`: username
 - `password`: password
-- `active`: `1` is active, `0` is inactive, only the `active = 1` user can login.
+- `active`: `1` is active, `0` is inactive, only the `active = 1` user can log in.
 - `default_hostgroup`: This user default **hostgroup**, where its traffic will be sent unless query rules route the traffic to a different hostgroup.
 - `transaction_persistent`: A value of `1` indicates transaction persistence, i.e., when a connection opens a transaction using this user, then until the transaction is committed or rolled back, 
 All statements are routed to the same **hostgroup**.
@@ -190,7 +190,7 @@ The above config items are required. You can get all the config items' names and
 
 ## 4. Try Out
 
-You can use Docker and Docker Compose for quick start. Make sure the ports `4000` and `6033` are free.
+You can use Docker and Docker Compose for quick start. Make sure the ports `4000` and `6033` are not allocated.
 
 ```sh
 docker-compose up -d
@@ -202,13 +202,13 @@ This has completed the startup of an integrated TiDB and ProxySQL environment, w
 
 ### 5.1 MySQL Client Connect ProxySQL
 
-Run:
+Run the following command:
 
 ```sh
 mysql -u root -h 127.0.0.1 -P 6033 -e "SELECT VERSION()"
 ```
 
-Result:
+The result is as follows:
 
 ```sql
 +--------------------+
@@ -220,10 +220,10 @@ Result:
 
 ### 5.2 Run Integration Test
 
-If you satisfy the following dependencies:
+Prerequisites:
 
 - Permissions for the [tidb-test](https://github.com/pingcap/tidb-test) code repository tidb-test
-- The machine needs to be connected to the network
+- The machine has access to the Internet
 - Golang SDK
 - Git
 - One of the following:
@@ -240,7 +240,7 @@ If you satisfy the following dependencies:
 
 Then you can clone [integertion test code](https://github.com/Icemap/tidb-proxysql-integration-test) and run locally: `. /proxysql-initial.sh && . /test-local.sh` or use Docker: `. /test-docker.sh` to run integration tests.
 
-There is more information available in the [integration test documentation](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/README.md).
+For more information, refer to the [integration test documentation](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/README.md).
 
 ### 5.3 Example of Load Balancing - Admin Interface
 
