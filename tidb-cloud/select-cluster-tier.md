@@ -37,7 +37,7 @@ For each Developer Tier TiDB cluster, TiDB Cloud generates a unique prefix to di
 
 When you connect to a Developer Tier TiDB cluster via standard connection or when you create a database user, you must include the prefix in the user name and wrap the name with quotation marks.
 
-Take the default `root` user an example. If the prefix for your cluster is `3pTAoNNegb47Uc8`, you need to use `'3pTAoNNegb47Uc8.root'` to connect to your TiDB cluster.
+Take the default `root` user as an example. If the prefix for your cluster is `3pTAoNNegb47Uc8`, you need to use `'3pTAoNNegb47Uc8.root'` to connect to your TiDB cluster.
 
 To get the prefix for your cluster, take the following steps:
 
