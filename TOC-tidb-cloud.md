@@ -32,12 +32,12 @@
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
+    - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
     - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
     - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
     - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
     - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
     - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
-    - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
 - Back Up and Restore Data
