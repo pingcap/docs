@@ -19,10 +19,16 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
 1. If you do not have a TiDB Cloud account, click [TiDB Cloud](https://tidbcloud.com/free-trial) to sign up for an account.
 2. [Sign in](https://tidbcloud.com/) with your TiDB Cloud account.
-3. To create a Developer Tier cluster for one year free, you can either select the **Developer Tier** plan on the [plan page](https://tidbcloud.com/console/plans) or click [Create a Cluster (Dev Tier)](https://tidbcloud.com/console/create-cluster?tier=dev).
-4. On the **Create a Cluster (Dev Tier)** page, set up your cluster name, password, cloud provider (for now, only AWS is available for Developer Tier), and region (a nearby region is recommended). Then click **Create** to create your cluster.
-5. Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes. You can check the creation progress at [Active Clusters](https://tidbcloud.com/console/clusters).
-6. After creating a cluster, on the **Active Clusters** page, click the name of your newly created cluster to navigate to the cluster control panel.
+3. To create a Developer Tier cluster for one year free, select the **Developer Tier** plan on the [plan page](https://tidbcloud.com/console/plans).
+4. On the **Create Cluster** page, set up your cluster name, cloud provider (for now, only AWS is available for Developer Tier), and region (a nearby region is recommended). Then click **Create** to create your cluster.
+
+   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+
+6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+
+    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+
+7. After creating a cluster, on the **Active Clusters** page, click the name of your newly created cluster to navigate to the cluster control panel.
 
     ![active clusters](/media/develop/IMG_20220331-232643794.png)
 
@@ -30,10 +36,13 @@ If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quic
 
     ![connect](/media/develop/IMG_20220331-232726165.png)
 
-8. In the popup window, click **Add Your Current IP Address** to fill in your current IP address, and then click **Create Filter** to create a traffic filter.
-9. Copy the string to connect with a SQL client for later use.
+8. In the popup window, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
 
     ![SQL string](/media/develop/IMG_20220331-232800929.png)
+
+    > **Note:**
+    >
+    > - For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 ## Step 2. Connect to a cluster
 
@@ -123,7 +132,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 {{< copyable "shell-regular" >}}
 
 ```shell
-mysql --connect-timeout 15 -u root -h <host> -P 4000 -p
+mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
 ```
 
 3. Fill in the password to sign in.
@@ -158,7 +167,7 @@ mysql --connect-timeout 15 -u root -h <host> -P 4000 -p
   mysqlDataSource.setServerName("localhost");
   mysqlDataSource.setPortNumber(4000);
   mysqlDataSource.setDatabaseName("test");
-  mysqlDataSource.setUser("root");
+  mysqlDataSource.setUser("<prefix>.root");
   mysqlDataSource.setPassword("");
   ```
 
@@ -167,7 +176,7 @@ mysql --connect-timeout 15 -u root -h <host> -P 4000 -p
   {{< copyable "" >}}
 
   ```shell
-  mysql --connect-timeout 15 -u root -h xxx.tidbcloud.com -P 4000 -p
+  mysql --connect-timeout 15 -u '<prefix>.root' -h xxx.tidbcloud.com -P 4000 -p
   ```
 
   In this case, you can modify the parameters as follows:
@@ -178,7 +187,7 @@ mysql --connect-timeout 15 -u root -h <host> -P 4000 -p
   mysqlDataSource.setServerName("xxx.tidbcloud.com");
   mysqlDataSource.setPortNumber(4000);
   mysqlDataSource.setDatabaseName("test");
-  mysqlDataSource.setUser("root");
+  mysqlDataSource.setUser("<prefix>.root");
   mysqlDataSource.setPassword("123456");
   ```
 
