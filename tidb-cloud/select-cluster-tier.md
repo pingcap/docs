@@ -31,6 +31,8 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 
 ### User name prefix
 
+<!--Important: Do not update the section name "User name prefix" because this section is referenced by the TiDB error messages.-->
+
 For each Developer Tier TiDB cluster, TiDB Cloud generates a unique prefix to distinguish it from others.
 
 When you connect to a Developer Tier TiDB cluster via standard connection or when you create a database user, you must include the prefix in the user name and wrap the name with quotation marks.
