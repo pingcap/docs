@@ -35,15 +35,15 @@ The one-year free trial begins the day the first Developer Tier cluster is creat
 
 For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
 
-Whenever you use or create a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`:
+Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
 
-- To connect to your cluster
+- To connect to your cluster:
 
     ```shell
     mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
     ```
 
-- To create a database user
+- To create a database user:
 
     ```mysql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
