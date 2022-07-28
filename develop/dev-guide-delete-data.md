@@ -56,9 +56,9 @@ If more than 10,000 records are returned, use [Bulk-Delete](#bulk-delete) to del
 If fewer than 10,000 records are returned, use the following example to delete them.
 
 <SimpleTab>
-<div label="SQL" href="delete-sql">
+<div label="SQL">
 
-{{< copyable "sql" >}}
+In SQL, the example is as follows:
 
 ```sql
 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
@@ -66,9 +66,9 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 </div>
 
-<div label="Java" href="delete-java">
+<div label="Java">
 
-{{< copyable "" >}}
+In Java, the example is as follows:
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -93,9 +93,9 @@ try (Connection connection = ds.getConnection()) {
 
 </div>
 
-<div label="Golang" href="delete-golang">
+<div label="Golang">
 
-{{< copyable "" >}}
+In Golang, the example is as follows:
 
 ```go
 package main
@@ -164,7 +164,7 @@ This section provides an example of writing a script to handle an iterative dele
 
 ### Write a bulk-delete loop
 
-First, you write a `SELECT` query in a loop of your application or script. Use the returned value of this query as the primary key for the rows that need to be deleted. Note that when defining this `SELECT` query, you need to use the `WHERE` clause to filter the rows that need to be deleted.
+You can write a `DELETE` statement in the loop of your application or script, use the `WHERE` clause to filter data, and use `LIMIT` to constrain the number of rows to be deleted in a single statement.
 
 ### Bulk-delete example
 

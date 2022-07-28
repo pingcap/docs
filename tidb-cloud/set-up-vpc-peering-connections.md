@@ -15,13 +15,13 @@ Currently, TiDB Cloud only supports VPC peering in the same region for the same 
 >
 > To connect your application to TiDB Cloud, you can also set up [private endpoint connection](/tidb-cloud/set-up-private-endpoint-connections.md) with TiDB Cloud, which is secure and private, and does not expose your data to the public internet. It is recommended to use private endpoints over VPC peering connections.
 
-## Prerequisites
+## Prerequisite: Set a Project CIDR
 
 Project CIDR (Classless Inter-Domain Routing) is the CIDR block used for network peering in a project.
 
-Before adding VPC Peering requests to a region, you need to set a project CIDR for your project's AWS and GCP respectively to establish a peering link to your application's VPC.
+Before adding VPC Peering requests to a region, you need to set a project CIDR for your project's cloud provider (AWS or GCP) to establish a peering link to your application's VPC.
 
-You can set the project CIDR during creating the first Dedicated Tier of your project. If you want to set the project CIDR before creating the tier, do the following:
+You can set the project CIDR when creating the first Dedicated Tier of your project. If you want to set the project CIDR before creating the tier, perform the following operations:
 
 1. On the TiDB Cloud console, choose a target project, and then click the **Project Settings** tab.
 
@@ -101,7 +101,7 @@ Use either of the following two options to approve and configure the VPC peering
     {{< copyable "shell-regular" >}}
 
     ```bash
-    # Set up the related variables.
+    # Sets up the related variables.
     pcx_tidb_to_app_id="<TiDB peering id>"
     app_region="<APP Region>"
     app_vpc_id="<Your VPC ID>"

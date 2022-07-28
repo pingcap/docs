@@ -30,7 +30,6 @@ To connect to your TiDB cluster via standard connection, perform the following s
     1. Click one of the buttons to add some rules quickly.
 
         - **Add My Current IP Address**
-        - **Add Rules from Default Set**
         - **Allow Access from Anywhere**
 
     2. Provide an optional description for the newly added IP address or CIDR range.
