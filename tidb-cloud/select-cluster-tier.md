@@ -29,6 +29,32 @@ For each TiDB Cloud account, you can use one complimentary Developer Tier cluste
 
 The one-year free trial begins the day the first Developer Tier cluster is created.
 
+### User name prefix
+
+<!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
+
+For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+
+Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
+
+- To connect to your cluster:
+
+    ```shell
+    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
+    ```
+
+- To create a database user:
+
+    ```sql
+    CREATE USER '3pTAoNNegb47Uc8.jeffrey';
+    ```
+
+To get the prefix for your cluster, take the following steps:
+
+1. In the TiDB Cloud console, navigate to the **Active Clusters** page of your project and click the name of your cluster.
+2. In the cluster information pane on the left, click **Connect**. The **Connect to TiDB** dialog is displayed.
+3. In the dialog, locate **Step 2: Connect with a SQL client** and get the prefix.
+
 ### Automatic hibernation and resuming
 
 Once a Developer Tier cluster remains idle for 24 hours, the cluster hibernates automatically.

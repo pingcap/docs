@@ -37,6 +37,10 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
 4. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
+> **Note:**
+>
+> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
 ## Connect via VPC peering
 
 > **Note:**
