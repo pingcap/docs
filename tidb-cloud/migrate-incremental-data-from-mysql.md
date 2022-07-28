@@ -42,16 +42,16 @@ Load the data source configuration to the DM cluster using `tiup dmctl` by runni
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
 {
-	"result": true,
-	"msg": "",
-	"sources": [
-    	{
-        	"result": true,
-        	"msg": "",
-        	"source": "mysql-replica-01",
-        	"worker": "dm-172.16.7.154-9262"
-    	}
-	]
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "dm-172.16.7.154-9262"
+        }
+    ]
 }
 ```
 
@@ -72,9 +72,9 @@ Edit the `task.yaml` file. Configure the incremental migration mode and the star
 # cat metadata
 Started dump at: 2022-05-24 11:19:37
 SHOW MASTER STATUS:
-    	Log: mysql-bin.000001
-    	Pos: 77092852
-        GTID:b631bcad-bb10-11ec-9eee-fec83cf2b903:1-640
+    Log: mysql-bin.000001
+    Pos: 77092852
+    GTID:b631bcad-bb10-11ec-9eee-fec83cf2b903:1-640
 
 Finished dump at: 2022-05-24 11:19:53
 ```
@@ -92,49 +92,49 @@ task-mode: incremental
 ## ******** Data Source Configuration **********
 ## (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data migration error.
 ##  This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
-syncers:        	# The running configurations of the sync processing unit.
-  global:       	# Configuration name.
+syncers:         # The running configurations of the sync processing unit.
+  global:        # Configuration name.
   safe-mode: true   # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
 
 mysql-instances:
   - source-id: "mysql-replica-01"
-	block-allow-list:  "bw-rule-1"
-	route-rules: ["route-rule-1"]
-	filter-rules: ["tpcc-filter-rule"]
-	syncer-config-name: "global"                	# You can use the syncers incremental data configuration above.
-	meta:       	                                # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.
-  	binlog-name: "mysql-bin.000001"
-  	binlog-pos: 77092852
-  	binlog-gtid: "b631bcad-bb10-11ec-9eee-fec83cf2b903:1-640"
+    block-allow-list:  "bw-rule-1"
+    route-rules: ["route-rule-1"]
+    filter-rules: ["tpcc-filter-rule"]
+    syncer-config-name: "global"                   # You can use the syncers incremental data configuration above.
+    meta:                                          # When task-mode is "incremental" and the target database does not have a checkpoint, DM uses the binlog position as the starting point. If the target database has a checkpoint, DM uses the checkpoint as the starting point.
+    binlog-name: "mysql-bin.000001"
+    binlog-pos: 77092852
+    binlog-gtid: "b631bcad-bb10-11ec-9eee-fec83cf2b903:1-640"
 
 ## ******** Configuration of the Target TiDB on TiDB Cloud **********
-target-database:   	# the Target TiDB on TiDB Cloud
+target-database:    # the Target TiDB on TiDB Cloud
   host: "tidb.70593805.b973b556.ap-northeast-1.prod.aws.tidbcloud.com"
   port: 4000
   user: "root"
-  password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="     	# If the password is not empty, it is recommended to use a dmctl-encrypted cipher
+  password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="     # If the password is not empty, it is recommended to use a dmctl-encrypted cipher
 
 ## ******** Function Configuration **********
 block-allow-list:
   bw-rule-1:
-	do-dbs: ["~^tpcc.*"]
+    do-dbs: ["~^tpcc.*"]
 
-routes:                       	# Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different tables into a single target table.
-  route-rule-1:               	# Rule name.
-	schema-pattern: "tpcc"    	# Rule for matching upstream schema names. It supports the wildcards "*" and "?".
-	target-schema: "tpcc"     	# Name of the target schema.
+routes:                       # Table renaming rules ('routes') from upstream to downstream tables, in order to support merging different tables into a single target table.
+  route-rule-1:               # Rule name.
+    schema-pattern: "tpcc"    # Rule for matching upstream schema names. It supports the wildcards "*" and "?".
+    target-schema: "tpdd"     # Name of the target schema.
 
 filters:
   tpcc-filter-rule:
-	schema-pattern: "tpcc"
-	events: ["drop database"]
-	action: Ignore
+    schema-pattern: "tpcc"
+    events: ["drop database"]
+    action: Ignore
 
 ##  ******** Ignore check items **********
 ignore-checking-items: ["table_schema"]
 ```
 
-For detailed task configurations, see [DM Task Configurations](/dm/task-configuration-file-full.md).
+For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
 ## Step 3. Check the migration task configuration
 
@@ -145,8 +145,8 @@ Run the following command to check the migration task configuration:
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
 {
-	"result": true,
-	"msg": "check pass!!!"
+    "result": true,
+    "msg": "check pass!!!"
 }
 ```
 
@@ -159,17 +159,17 @@ Run the following command to start the migration task:
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 start-task dm-task1.yaml
 {
-	"result": true,
+    "result": true,
     "msg": "",
-	"sources": [
-    	{
-        	"result": true,
-        	"msg": "",
-        	"source": "mysql-replica-01",
-        	"worker": "dm-172.16.7.154-9262"
-    	}
-	],
-	"checkResult": ""
+    "sources": [
+        {
+           "result": true,
+            "msg": "",
+            "source": "mysql-replica-01",
+            "worker": "dm-172.16.7.154-9262"
+        }
+    ],
+    "checkResult": ""
 }
 
 The parameters used in the command above are described as follows:
@@ -181,7 +181,7 @@ The parameters used in the command above are described as follows:
 
 If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
 
-If you encounter any problem, refer to [DM error handling](/dm/dm-error-handling.md) and [DM FAQ](/dm/dm-faq.md).
+If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
 
 ## Check the migration task status
 
@@ -192,27 +192,27 @@ To learn whether the DM cluster has an ongoing migration task and view the task 
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 query-status test-task1
 {
-	"result": true,
-	"msg": "",
-	"sources": [
-    	{
-        	"result": true,
-        	"msg": "",
+    "result": true,
+    "msg": "",
+    "sources": [
+        {
+            "result": true,
+            "msg": "",
             "sourceStatus": {
-            	"source": "mysql-replica-01",
-            	"worker": "dm-172.16.7.154-9262",
-            	"result": null,
+                "source": "mysql-replica-01",
+                "worker": "dm-172.16.7.154-9262",
+                "result": null,
                 "relayStatus": null
-        	},
+            },
             "subTaskStatus": [
-            	{
+                {
                     "name": "test-task1",
                     "stage": "Running",
                     "unit": "Sync",
                     "result": null,
                     "unresolvedDDLLockID": "",
                     "sync": {
-                    	"totalEvents": "3",
+                        "totalEvents": "3",
                         "totalTps": "0",
                         "recentTps": "0",
                         "masterBinlog": "(mysql-bin.000001, 77093211)",
@@ -220,23 +220,22 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
                         "syncerBinlog": "(mysql-bin.000001, 77093211)",
                         "syncerBinlogGtid": "b631bcad-bb10-11ec-9eee-fec83cf2b903:1-641",
                         "blockingDDLs": [
-                    	],
-             	       "unresolvedGroups": [
-                    	],
+                        ],
+                       "unresolvedGroups": [
+                        ],
                         "synced": true,
                         "binlogType": "remote",
                         "secondsBehindMaster": "0",
                         "blockDDLOwner": "",
-           	         "conflictMsg": ""
-                	}
-            	}
-        	]
-    	}
-	]
+                     "conflictMsg": ""
+                    }
+                }
+            ]
+        ]
 }
 ```
 
-For a detailed interpretation of the results, see [Query Status](/dm/dm-query-status.md).
+For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
 
 ## Step 5. Monitor the task and view logs
 
