@@ -183,6 +183,7 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
+  - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
@@ -410,6 +411,8 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
+  - [Dumpling](/dumpling-overview.md)
+  - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes
