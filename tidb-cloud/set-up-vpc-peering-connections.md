@@ -107,14 +107,14 @@ Use either of the following two options to approve and configure the VPC peering
     For example:
 
     ```
-    # Set up the related variables
+    # Sets up the related variables
     pcx_tidb_to_app_id="pcx-069f41efddcff66c8"
     app_region="us-west-2"
     app_vpc_id="vpc-0039fb90bb5cf8698"
     tidbcloud_project_cidr="10.250.0.0/16"
     ```
 
-4. Execute the following commands.
+4. Run the following commands.
 
     {{< copyable "shell-regular" >}}
 
@@ -127,12 +127,16 @@ Use either of the following two options to approve and configure the VPC peering
 
     ```bash
     # Creates route table rules.
-    aws ec2 describe-route-tables --region "$app_region" --filters Name=vpc-id,Values="$app_vpc_id" --query 'RouteTables[*].RouteTableId' --output text | xargs -n 1 |  while read row
+    aws ec2 describe-route-tables --region "$app_region" --filters Name=vpc-id,Values="$app_vpc_id" --query 'RouteTables[*].RouteTableId' --output text | tr "\t" "\n" | while read row
     do
         app_route_table_id="$row"
         aws ec2 create-route --route-table-id "$app_route_table_id" --destination-cidr-block "$tidbcloud_project_cidr" --vpc-peering-connection-id "$pcx_tidb_to_app_id"
     done
     ```
+
+    > **Note:**
+    >
+    > If the `An error occurred (MissingParameter) when calling the CreateRoute operation: The request must contain the parameter routeTableId` error occurs when you try to create a route table rule, the route table rules might be successfully created. In this case, you can check the rules and ignore the error.
 
     {{< copyable "shell-regular" >}}
 
