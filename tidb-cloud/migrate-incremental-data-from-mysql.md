@@ -171,6 +171,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
     ],
     "checkResult": ""
 }
+```
 
 The parameters used in the command above are described as follows:
 
