@@ -3,7 +3,7 @@ name: Trigger docs site update
 on:
   push:
     branches:
-      - i18n-ja-release-6.1
+      - release-*
 
 jobs:
   trigger:
