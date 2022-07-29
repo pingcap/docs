@@ -50,7 +50,7 @@ Executing `SHOW TABLE REGIONS` returns the following columns:
 * `READ_BYTES`: The estimated amount of data read from the Region within one heartbeat cycle. The unit is byte.
 * `APPROXIMATE_SIZE(MB)`: The estimated amount of data in the Region. The unit is megabytes (MB).
 * `APPROXIMATE_KEYS`: The estimated number of Keys in the Region.
-* `SCHEDULING_CONSTRAINTS`：The [placement rule](/placement-rules-in-sql.md) of the region which belongs to a table or partition with placement setting.
+* `SCHEDULING_CONSTRAINTS`：The [placement policy settings](/placement-rules-in-sql.md) of the region which belongs to a table or partition with placement setting.
 * `SCHEDULING_STATE`：The scheduling state for the region which has a placement policy.
 
 > **Note:**
