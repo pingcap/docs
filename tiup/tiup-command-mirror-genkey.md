@@ -50,6 +50,6 @@ tiup mirror genkey [flags]
     -   `-n/--name`で指定された秘密鍵が存在しない場合：TiUPは`private key have been write to ${TIUP_HOME}/keys/{name}.json`を出力します。
 -   `-p/--public`を指定した場合：
     -   `-n/--name`で指定された秘密鍵が存在しない場合：TiUPはエラー`Error: open ${TIUP_HOME}/keys/{name}.json: no such file or directory`を報告します。
-    -   `-n/--name`で指定した秘密鍵が存在する場合：TiUPは対応する公開鍵の内容を出力します。
+    -   `-n/--name`で指定された秘密鍵が存在する場合：TiUPは対応する公開鍵の内容を出力します。
 
 [&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

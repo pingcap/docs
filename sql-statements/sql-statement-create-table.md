@@ -225,5 +225,5 @@ mysql> DESC t1;
 
 -   [データ型](/data-type-overview.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
--   [CREATE TABLE LIKE](/sql-statements/sql-statement-create-table-like.md)
+-   [テーブルのように作成](/sql-statements/sql-statement-create-table-like.md)
 -   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)

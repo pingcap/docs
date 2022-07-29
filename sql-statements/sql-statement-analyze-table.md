@@ -84,8 +84,8 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 TiDBは、収集する統計とクエリ実行中に統計を利用する方法の**両方**でMySQLとは異なります。このステートメントは構文的にMySQLに似ていますが、次の違いが適用されます。
 
-1.  TiDBは、 `ANALYZE TABLE`を実行しているときに、ごく最近コミットされた変更を含まない場合があります。行のバッチ更新後、統計更新にこれらの変更を反映させるために、 `ANALYZE TABLE`を実行する前に`sleep(1)`を実行する必要がある場合があります。 [＃16570](https://github.com/pingcap/tidb/issues/16570) 。
-2.  `ANALYZE TABLE`は、MySQLよりもTiDBでの実行にかなり時間がかかります。このパフォーマンスの違いは、 `SET GLOBAL tidb_enable_fast_analyze=1`で高速分析を有効にすることで部分的に軽減できます。高速分析はサンプリングを利用するため、統計の精度が低下します。その使用法はまだ実験的と見なされます。
+1.  TiDBは、 `ANALYZE TABLE`を実行しているときに、最近コミットされた変更を含まない場合があります。行のバッチ更新後、統計更新にこれらの変更を反映させるために、 `ANALYZE TABLE`を実行する前に`sleep(1)`にする必要がある場合があります。 [＃16570](https://github.com/pingcap/tidb/issues/16570) 。
+2.  `ANALYZE TABLE`は、MySQLよりもTiDBでの実行にかなり長い時間がかかります。このパフォーマンスの違いは、 `SET GLOBAL tidb_enable_fast_analyze=1`で高速分析を有効にすることで部分的に軽減できます。高速分析はサンプリングを利用するため、統計の精度が低下します。その使用法はまだ実験的と見なされます。
 
 MySQLは`ANALYZE INCREMENTAL TABLE`ステートメントをサポートしていません。 TiDBは、統計の増分収集をサポートしています。詳細な使用法については、 [インクリメンタルコレクション](/statistics.md#incremental-collection)を参照してください。
 

@@ -14,7 +14,7 @@ TiDBは、MySQL5.7で利用可能な[情報関数](https://dev.mysql.com/doc/ref
 | [`BENCHMARK()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_benchmark)                                   | ループで式を実行する                                    |
 | [`CONNECTION_ID()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_connection-id)                           | 接続の接続ID（スレッドID）を返します                          |
 | [`CURRENT_USER()` 、 <code>CURRENT_USER</code>](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_current-user) | 認証されたユーザー名とホスト名を返します                          |
-| [`DATABASE()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_database)                                     | デフォルトの（現在の）データベース名を返す                         |
+| [`DATABASE()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_database)                                     | デフォルトの（現在の）データベース名を返します                       |
 | [`FOUND_ROWS()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_found-rows)                                 | `SELECT`と`LIMIT`の句の場合、 `LIMIT`の句がない場合に返される行の数 |
 | [`LAST_INSERT_ID()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_last-insert-id)                         | 最後の`INSERT`の`AUTOINCREMENT`列の値を返します           |
 | [`ROW_COUNT()`](https://dev.mysql.com/doc/refman/5.7/en/information-functions.html#function_row-count)                                   | 影響を受ける行数                                      |

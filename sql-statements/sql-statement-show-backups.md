@@ -5,9 +5,9 @@ summary: An overview of the usage of SHOW [BACKUPS|RESTORES] for the TiDB databa
 
 # [バックアップ|復元]を表示する {#show-backups-restores}
 
-これらのステートメントは、TiDBインスタンスで実行された、キューに入れられ、実行され、最近終了した[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)のタスクのリストを示します。
+これらのステートメントは、TiDBインスタンスで実行された、キューに入れられ、実行され、最近終了した[`BACKUP`](/sql-statements/sql-statement-backup.md)および[`RESTORE`](/sql-statements/sql-statement-restore.md)のタスクすべてのリストを示します。
 
-両方のステートメントを実行するには、 `SUPER`の特権が必要です。
+どちらのステートメントも、実行するには`SUPER`の特権が必要です。
 
 `SHOW BACKUPS`を使用して`BACKUP`のタスクを照会し、 `SHOW RESTORES`を使用して`RESTORE`のタスクを照会します。
 
@@ -53,16 +53,16 @@ SHOW BACKUPS;
 
 上記の結果の最初の行は次のように説明されています。
 
-| カラム              | 説明                                                               |
-| :--------------- | :--------------------------------------------------------------- |
-| `Destination`    | 宛先URL（秘密鍵の漏洩を防ぐためにすべてのパラメーターが削除されています）                           |
-| `State`          | タスクの状態                                                           |
-| `Progress`       | 現在の状態での推定進捗状況（パーセンテージ）                                           |
-| `Queue_time`     | タスクがキューに入れられたとき                                                  |
-| `Execution_time` | タスクが開始されたとき。キューイングタスクの値は`0000-00-00 00:00:00`です                  |
-| `Finish_time`    | タスクが終了したときのタイムスタンプ。タスクのキューイングおよび実行の場合、値は`0000-00-00 00:00:00`です。 |
-| `Connection`     | このタスクを実行している接続ID                                                 |
-| `Message`        | 詳細を含むメッセージ                                                       |
+| カラム              | 説明                                                            |
+| :--------------- | :------------------------------------------------------------ |
+| `Destination`    | 宛先URL（秘密鍵の漏洩を防ぐためにすべてのパラメーターが削除されています）                        |
+| `State`          | タスクの状態                                                        |
+| `Progress`       | 現在の状態での推定進捗状況（パーセンテージ）                                        |
+| `Queue_time`     | タスクがキューに入れられたとき                                               |
+| `Execution_time` | タスクが開始されたとき。キューイングタスクの値は`0000-00-00 00:00:00`です。              |
+| `Finish_time`    | タスクが終了したときのタイムスタンプ。タスクのキューイングおよび実行の値は`0000-00-00 00:00:00`です。 |
+| `Connection`     | このタスクを実行している接続ID                                              |
+| `Message`        | 詳細を含むメッセージ                                                    |
 
 可能な状態は次のとおりです。
 

@@ -7,7 +7,7 @@ summary: Learn how to analyze and tune performance of your TiDB Cloud cluster.
 
 TiDB Cloudは、パフォーマンスを分析するための[ステートメント分析](#statement-analysis)と[キービジュアライザー](#key-visualizer)を提供します。
 
--   ステートメント分析を使用すると、ページ上のSQL実行を直接観察し、システムテーブルにクエリを実行せずにパフォーマンスの問題を簡単に見つけることができます。
+-   ステートメント分析を使用すると、ページでのSQLの実行を直接観察し、システムテーブルにクエリを実行せずにパフォーマンスの問題を簡単に見つけることができます。
 
 -   Key Visualizerは、TiDBのデータアクセスパターンとデータホットスポットを監視するのに役立ちます。
 
@@ -25,11 +25,11 @@ TiDB Cloudは、パフォーマンスを分析するための[ステートメン
 
 ![Statement Analysis](/media/tidb-cloud/statement-analysis.png)
 
-詳細については、 [TiDBダッシュボードのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)を参照してください。
+詳細については、 [TiDBダッシュボードでのステートメント実行の詳細](https://docs.pingcap.com/tidb/stable/dashboard-statement-details)を参照してください。
 
 ## キービジュアライザー {#key-visualizer}
 
-キー分析を表示するには、次の手順を実行します。
+主要な分析を表示するには、次の手順を実行します。
 
 1.  クラスタの[**診断**]タブに移動します。
 

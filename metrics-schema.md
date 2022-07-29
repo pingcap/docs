@@ -3,7 +3,7 @@ title: Metrics Schema
 summary: Learn the `METRICS_SCHEMA` schema.
 ---
 
-# メトリクススキーマ {#metrics-schema}
+# メトリックスキーマ {#metrics-schema}
 
 `METRICS_SCHEMA`は、Prometheusに保存されているTiDBメトリックの上にある一連のビューです。各テーブルのPromQL（Prometheus Query Language）のソースは、 [`INFORMATION_SCHEMA.METRICS_TABLES`](/information-schema/information-schema-metrics-tables.md)で利用できます。
 
@@ -97,7 +97,7 @@ SHOW TABLES;
 
 ## その他の例 {#additional-examples}
 
-このセクションでは、 `metrics_schema`のうち`tidb_query_duration`の監視テーブルを例として取り上げ、この監視テーブルの使用方法とその動作について説明します。他の監視テーブルの動作原理は`tidb_query_duration`に似ています。
+このセクションでは、 `metrics_schema`のうち`tidb_query_duration`の監視テーブルを例として取り上げ、この監視テーブルの使用方法とその機能について説明します。他の監視テーブルの動作原理は`tidb_query_duration`と同様です。
 
 `information_schema.metrics_tables`の`tidb_query_duration`テーブルに関連する情報を照会します。
 
@@ -119,7 +119,7 @@ SELECT * FROM information_schema.metrics_tables WHERE table_name='tidb_query_dur
 
 -   `TABLE_NAME` ： `metrics_schema`のテーブル名に対応します。この例では、テーブル名は`tidb_query_duration`です。
 -   `PROMQL` ：監視テーブルの動作原理は、最初にSQLステートメントを`PromQL`にマップし、次にPrometheusにデータを要求し、Prometheusの結果をSQLクエリの結果に変換することです。このフィールドは`PromQL`の式テンプレートです。監視テーブルのデータをクエリする場合、クエリ条件を使用してこのテンプレートの変数を書き換え、最終的なクエリ式を生成します。
--   `LABELS` ：監視項目のラベル。 `tidb_query_duration`には2つのラベルがあります： `instance`と`sql_type` 。
+-   `LABELS` ：監視項目のラベル。 `tidb_query_duration`には、 `instance`と`sql_type`の2つのラベルがあります。
 -   `QUANTILE` ：パーセンタイル。ヒストグラムタイプのデータを監視するために、デフォルトのパーセンタイルが指定されています。このフィールドの値が`0`の場合、監視テーブルに対応する監視項目がヒストグラムではないことを意味します。
 -   `COMMENT` ：監視テーブルの説明。 `tidb_query_duration`テーブルは、P999 / P99 / P90のクエリ時間など、TiDBクエリ実行のパーセンタイル時間をクエリするために使用されていることがわかります。単位は2番目です。
 
@@ -174,10 +174,10 @@ SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AND tim
 +---------------------+-------------------+----------+----------+----------------+
 ```
 
-上記のクエリ結果の最初の行は、2020-03-25 23:40:00の時点で、TiDBインスタンス`172.16.5.40:10089`で、 `Insert`タイプのステートメントのP99実行時間が0.509929485256秒であることを意味します。他の行の意味も同様です。 `sql_type`列の他の値は、次のように説明されています。
+上記のクエリ結果の最初の行は、2020-03-25 23:40:00の時点で、TiDBインスタンス`172.16.5.40:10089`で、 `Insert`タイプステートメントのP99実行時間が0.509929485256秒であることを意味します。他の行の意味も同様です。 `sql_type`列の他の値は、次のように説明されています。
 
 -   `Select` ： `select`型ステートメントを実行します。
--   `internal` ：TiDBの内部SQLステートメント。統計情報を更新し、グローバル変数を取得するために使用されます。
+-   `internal` ：統計情報を更新してグローバル変数を取得するために使用されるTiDBの内部SQLステートメント。
 
 上記のステートメントの実行プランを表示するには、次のステートメントを実行します。
 
@@ -248,7 +248,7 @@ DESC SELECT * FROM metrics_schema.tidb_query_duration WHERE value is not null AN
     +---------------------+-------------------+----------+----------+-----------------+
     ```
 
-3.  実行計画をビューします。この結果から、実行プランの`PromQL`と`step`の値が30秒に変更されていることもわかります。
+3.  実行プランをビューします。結果から、実行プランの`PromQL`と`step`の値が30秒に変更されていることもわかります。
 
     {{< copyable "" >}}
 

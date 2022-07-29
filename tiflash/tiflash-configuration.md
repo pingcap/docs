@@ -12,7 +12,7 @@ aliases: ['/docs/dev/tiflash/tiflash-configuration/','/docs/dev/reference/tiflas
 
 [pd-ctl](/pd-control.md)を使用してPDスケジューリングパラメータを調整できます。 tiupを使用してクラスタをデプロイおよび管理する場合は、 `tiup ctl pd`を使用して`pd-ctl -u <pd_ip:pd_port>`を置き換えることができることに注意してください。
 
--   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) ：レプリカ関連の演算子が生成される速度を決定します。このパラメーターは、ノードのオフライン化やレプリカの追加などの操作に影響します。
+-   [`replica-schedule-limit`](/pd-configuration-file.md#replica-schedule-limit) ：レプリカ関連の演算子が生成される速度を決定します。このパラメーターは、ノードをオフラインにしたり、レプリカを追加したりするなどの操作に影響します。
 
     > **ノート：**
     >
@@ -22,11 +22,11 @@ aliases: ['/docs/dev/tiflash/tiflash-configuration/','/docs/dev/reference/tiflas
 
     > **ノート：**
     >
-    > v4.0.2以降、 `store-balance-rate`パラメーターは非推奨になり、 `store limit`コマンドに変更が加えられました。詳細については、 [店舗制限](/configure-store-limit.md)を参照してください。
+    > v4.0.2以降、 `store-balance-rate`パラメーターは非推奨になり、 `store limit`コマンドに変更が加えられました。詳細については、 [ストア制限](/configure-store-limit.md)を参照してください。
 
     -   `pd-ctl -u <pd_ip:pd_port> store limit <store_id> <value>`コマンドを実行して、指定した店舗のスケジューリングレートを設定します。 （ `store_id`を取得するには、 `pd-ctl -u <pd_ip:pd_port> store`コマンドを実行できます。
     -   指定したストアのリージョンのスケジュールレートを設定しない場合、このストアは`store-balance-rate`の設定を継承します。
-    -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行すると、現在の設定値`store-balance-rate`を表示できます。
+    -   `pd-ctl -u <pd_ip:pd_port> store limit`コマンドを実行して、現在の設定値`store-balance-rate`を表示できます。
 
 -   [`replication.location-labels`](/pd-configuration-file.md#location-labels) ：TiKVインスタンスのトポロジー関係を示します。キーの順序は、さまざまなラベルの階層関係を示しています。 TiFlashが有効になっている場合は、 [`pd-ctl config placement-rules`](/pd-control.md#config-show--set-option-value--placement-rules)を使用してデフォルト値を設定する必要があります。詳細については、 [geo-distributed-deployment-topology](/geo-distributed-deployment-topology.md)を参照してください。
 
@@ -246,7 +246,7 @@ delta_index_cache_size = 0
     redact-info-log = false
 ```
 
-上記の項目に加えて、他のパラメータはTiKVのパラメータと同じです。キーが`engine`の`label`は予約されており、手動で構成できないことに注意してください。
+上記の項目に加えて、他のパラメータはTiKVのパラメータと同じです。キーが`engine`である`label`は予約されており、手動で構成できないことに注意してください。
 
 ### マルチディスク展開 {#multi-disk-deployment}
 
@@ -264,11 +264,11 @@ TiFlashノードに異なるI/Oメトリックを持つ複数のディスクが�
 
 #### TiDBv4.0.9以降を使用したマルチディスク展開 {#multi-disk-deployment-with-tidb-v4-0-9-or-later}
 
-v4.0.9以降のバージョンのTiDBクラスターの場合、TiFlashは、ストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートします。 TiFlashノードを複数のディスクに展開する場合は、ノードを最大限に活用するために、 `[storage]`セクションでストレージディレクトリを指定することをお勧めします。 v4.0.9より前の構成（ `path`および`path_realtime_mode` ）は引き続きサポートされることに注意してください。
+v4.0.9以降のバージョンのTiDBクラスターの場合、TiFlashはストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートします。 TiFlashノードを複数のディスクに展開する場合は、ノードを最大限に活用するために、 `[storage]`セクションでストレージディレクトリを指定することをお勧めします。 v4.0.9より前の構成（ `path`および`path_realtime_mode` ）は引き続きサポートされることに注意してください。
 
-TiFlashノードに同様のI/Oメトリックを持つ複数のディスクがある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにしておくことをお勧めします。 TiFlashは、I/O圧力とデータをすべてのディレクトリに分散します。
+TiFlashノードに同様のI/Oメトリックを持つディスクが複数ある場合は、 `storage.main.dir`のリストで対応するディレクトリを指定し、 `storage.latest.dir`を空のままにしておくことをお勧めします。 TiFlashは、I/O圧力とデータをすべてのディレクトリに分散します。
 
-TiFlashノードに異なるI/Oメトリックを持つ複数のディスクがある場合は、 `storage.latest.dir`のリストでメトリックの高いディレクトリを指定し、 `storage.main.dir`のリストでメトリックの低いディレクトリを指定することをお勧めします。たとえば、1つのNVMe-SSDと2つのSATA-SSDの場合、 `storage.latest.dir`から`["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir`から`["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`に設定できます。 TiFlashは、I/O圧力とデータをこれら2つのディレクトリリストにそれぞれ分散します。この場合、 `storage.latest.dir`の容量は、計画された合計容量の10％として計画する必要があることに注意してください。
+TiFlashノードにI/Oメトリックが異なる複数のディスクがある場合は、 `storage.latest.dir`のリストでメトリックの高いディレクトリを指定し、 `storage.main.dir`のリストでメトリックの低いディレクトリを指定することをお勧めします。たとえば、1つのNVMe-SSDと2つのSATA-SSDの場合、 `storage.latest.dir`から`["/nvme_ssd_a/data/tiflash"]`および`storage.main.dir`から`["/sata_ssd_b/data/tiflash", "/sata_ssd_c/data/tiflash"]`に設定できます。 TiFlashは、I/O圧力とデータをこれら2つのディレクトリリストにそれぞれ分散します。この場合、 `storage.latest.dir`の容量は、計画された合計容量の10％として計画する必要があることに注意してください。
 
 > **警告：**
 >

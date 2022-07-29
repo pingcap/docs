@@ -18,7 +18,7 @@ tiup cluster start <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   開始するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `tiup cluster display`コマンドによって返された[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノードIDを取得できます。
+-   開始するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノードIDを取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードがデフォルトで開始されます。
 
@@ -36,7 +36,7 @@ tiup cluster start <cluster-name> [flags]
 >
 > `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが開始されます。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

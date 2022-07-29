@@ -10,13 +10,13 @@ title: tiup mirror rotate
 -   次のファイルを検証するために使用される公開鍵：
     -   root.json
     -   index.json
-    -   snapshot.json
-    -   timestamp.json
+    -   スナップショット.json
+    -   タイムスタンプ.json
 -   有効期限は`root.json`です。オフィシャルミラーの場合、有効期限は作成日`root.json`より1年遅くなります。
 
 TiUPミラーの詳細については、 [TiUPミラーリファレンス](/tiup/tiup-mirror-reference.md)を参照してください。
 
-次の場合は`root.json`を更新する必要があります。
+次の場合は、 `root.json`を更新する必要があります。
 
 -   ミラーのキーを交換してください。
 -   証明書ファイルの有効期限を更新します。
@@ -34,7 +34,7 @@ TiUPは、コマンド`tiup mirror rotate`を使用して上記のプロセス�
 
 > **ノート：**
 >
-> -   v1.5.0より前のバージョンのTiUPの場合、このコマンドを実行しても正しい新しい`root.json`ファイルは返されません。 [＃983](https://github.com/pingcap/tiup/issues/983)を参照してください。
+> -   v1.5.0より前のバージョンのTiUPの場合、このコマンドを実行しても、正しい新しい`root.json`ファイルは返されません。 [＃983](https://github.com/pingcap/tiup/issues/983)を参照してください。
 > -   このコマンドを使用する前に、すべてのTiUPクライアントがv1.5.0以降のバージョンにアップグレードされていることを確認してください。
 
 ## 構文 {#syntax}
@@ -57,6 +57,6 @@ tiup mirror rotate [flags]
 
 ## 出力 {#outputs}
 
-各ミラー管理者の現在の署名状況。
+各ミラー管理者の現在の署名ステータス。
 
 [&lt;&lt;前のページに戻る-TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

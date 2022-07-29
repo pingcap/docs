@@ -9,7 +9,7 @@ title: TiDB 2.0.4 Release Notes
 ## TiDB {#tidb}
 
 -   `ALTER TABLE t DROP COLUMN a CASCADE`構文をサポートする
--   `tidb_snapshot`からTSOへの値の構成をサポート
+-   TSOへの`tidb_snapshot`の値の構成をサポート
 -   監視項目のステートメントタイプの表示を調整する
 -   クエリコスト見積もりの精度を最適化する
 -   gRPCの`backoff max delay`つのパラメーターを構成します
@@ -33,7 +33,7 @@ title: TiDB 2.0.4 Release Notes
 ## TiKV {#tikv}
 
 -   デバッグ用の`PerfContext`インターフェースを追加します
--   `import-mode`つのパラメーターを削除します
+-   `import-mode`つのパラメータを削除します
 -   `tikv-ctl`に`region-properties`コマンドを追加します
 -   多くのRocksDBトゥームストーンが存在する場合に`reverse-seek`が遅いという問題を修正します
 -   `do_sub`によって引き起こされるクラッシュの問題を修正します

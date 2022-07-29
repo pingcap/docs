@@ -36,11 +36,11 @@ TiDBバージョン：4.0.1
 -   TiKV
 
     -   スタートアップログの`use-unified-pool`構成が正しく印刷されない問題を修正します[＃7946](https://github.com/tikv/tikv/pull/7946)
-    -   tikv-ctlが相対パス[＃7963](https://github.com/tikv/tikv/pull/7963)をサポートしない問題を修正します
+    -   tikv-ctlが相対パス[＃7963](https://github.com/tikv/tikv/pull/7963)をサポートしないという問題を修正します
     -   ポイント選択の監視メトリックが不正確であるというバグを修正します[＃8033](https://github.com/tikv/tikv/pull/8033)
     -   ネットワークの分離がなくなった後、ピアが破壊されない可能性があるという問題を修正します[＃8006](https://github.com/tikv/tikv/pull/8006)
     -   読み取りインデックスのリクエストが古いコミットインデックス[＃8043](https://github.com/tikv/tikv/pull/8043)を取得する可能性がある問題を修正します
-    -   S3およびGCSストレージを使用したバックアップと復元の信頼性の向上[＃7917](https://github.com/tikv/tikv/pull/7917)
+    -   S3およびGCSストレージを使用してバックアップと復元の信頼性を向上させる[＃7917](https://github.com/tikv/tikv/pull/7917)
 
 -   PD
 

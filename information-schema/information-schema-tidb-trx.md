@@ -42,7 +42,7 @@ DESC tidb_trx;
 -   `STATE` ：トランザクションの現在の状態。可能な値は次のとおりです：
     -   `Idle` ：トランザクションはアイドル状態です。つまり、ユーザーがクエリを入力するのを待っています。
     -   `Running` ：トランザクションはクエリを実行しています。
-    -   `LockWaiting` ：トランザクションはペシミスティックロックが取得されるのを待機しています。トランザクションは、他のトランザクションによってブロックされているかどうかに関係なく、ペシミスティックロック操作の開始時にこの状態になることに注意してください。
+    -   `LockWaiting` ：トランザクションはペシミスティックロックが取得されるのを待っています。トランザクションは、他のトランザクションによってブロックされているかどうかに関係なく、ペシミスティックロック操作の開始時にこの状態になることに注意してください。
     -   `Committing` ：トランザクションはコミット中です。
     -   `RollingBack` ：トランザクションはロールバックされています。
 -   `WAITING_START_TIME` ： `STATE`の値が`LockWaiting`の場合、この列には待機の開始時刻が表示されます。
@@ -55,9 +55,9 @@ DESC tidb_trx;
 
 > **ノート：**
 >
-> -   この表の完全な情報を取得できるのは、 [処理する](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)の特権を持つユーザーのみです。 PROCESS権限を持たないユーザーは、現在のユーザーによって実行されたトランザクションの情報のみを照会できます。
+> -   このテーブルの完全な情報を取得できるのは、 [処理する](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)の特権を持つユーザーのみです。 PROCESS権限を持たないユーザーは、現在のユーザーによって実行されたトランザクションの情報のみを照会できます。
 > -   `CURRENT_SQL_DIGEST`列と`ALL_SQL_DIGESTS`列の情報（SQLダイジェスト）は、正規化されたSQLステートメントから計算されたハッシュ値です。 `CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返される結果は、ステートメントの要約テーブルから内部的に照会されるため、対応するステートメントが内部で見つからない可能性があります。 SQLダイジェストとステートメントの要約テーブルの詳細については、 [ステートメント要約表](/statement-summary-tables.md)を参照してください。
-> -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)の関数呼び出しには高いオーバーヘッドがあります。多数のトランザクションの履歴SQLステートメントを照会するために関数が呼び出された場合、照会に長い時間がかかる可能性があります。多数の同時トランザクションがあるクラスタが大きい場合は、 `TIDB_TRX`の完全なテーブルを照会するときに、 `ALL_SQL_DIGEST`列でこの関数を直接使用しないでください。これは、 `select *, tidb_decode_sql_digests(all_sql_digests) from tidb_trx`のようなSQLステートメントを回避することを意味します。
+> -   [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)の関数呼び出しには高いオーバーヘッドがあります。多数のトランザクションの履歴SQLステートメントを照会するために関数が呼び出されると、照会に長い時間がかかる場合があります。クラスタが大きく、同時トランザクションが多い場合は、 `TIDB_TRX`のテーブル全体を照会するときに、 `ALL_SQL_DIGEST`列でこの関数を直接使用しないでください。これは、 `select *, tidb_decode_sql_digests(all_sql_digests) from tidb_trx`のようなSQLステートメントを回避することを意味します。
 > -   現在、 `TIDB_TRX`テーブルはTiDB内部トランザクションの情報の表示をサポートしていません。
 
 ## 例 {#example}
@@ -98,7 +98,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-この例のクエリ結果から、次のことがわかります。現在のノードには2つの進行中のトランザクションがあります。 1つのトランザクションがアイドル状態（ `STATE`は`Idle`は`NULL` ）であり、このトランザクションは3 `CURRENT_SQL_DIGEST`のステートメントを実行しました（ `ALL_SQL_DIGESTS`つのリストには実行された3つのSQLステートメントのダイジェストである3つのレコードがあります）。別のトランザクションは、ステートメントを実行してロックを待機しています（ `STATE`は`LockWaiting`で、 `WAITING_START_TIME`は待機中のロックの開始時刻を示します）。トランザクションは2つのステートメントを実行し、現在実行されているステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式です。
+この例のクエリ結果から、次のことがわかります。現在のノードには2つの進行中のトランザクションがあります。 1つのトランザクションはアイドル状態（ `STATE`は`Idle`は`NULL` ）であり、このトランザクションは3 `CURRENT_SQL_DIGEST`のステートメントを実行しました（ `ALL_SQL_DIGESTS`つのリストには実行された3つのSQLステートメントのダイジェストである3つのレコードがあります）。別のトランザクションは、ステートメントを実行してロックを待機しています（ `STATE`は`LockWaiting`で、 `WAITING_START_TIME`は待機中のロックの開始時刻を示します）。トランザクションは2つのステートメントを実行し、現在実行されているステートメントは``"update `t` set `v` = `v` + ? where `id` = ?"``の形式です。
 
 {{< copyable "" >}}
 

@@ -5,7 +5,7 @@ summary: Learn the `KEY_COLUMN_USAGE` information_schema table.
 
 # KEY_COLUMN_USAGE {#key-column-usage}
 
-`KEY_COLUMN_USAGE`の表は、主キー制約などの列のキー制約を示しています。
+`KEY_COLUMN_USAGE`の表は、主キー制約など、列のキー制約を示しています。
 
 {{< copyable "" >}}
 
@@ -79,7 +79,7 @@ POSITION_IN_UNIQUE_CONSTRAINT: NULL
 -   `TABLE_SCHEMA` ：テーブルが属するスキーマの名前。
 -   `TABLE_NAME` ：制約のあるテーブルの名前。
 -   `COLUMN_NAME` ：制約のある列の名前。
--   `ORDINAL_POSITION` ：テーブルではなく、制約内の列の位置。ポジション番号は`1`から始まります。
+-   `ORDINAL_POSITION` ：テーブルではなく、制約内の列の位置。位置番号は`1`から始まります。
 -   `POSITION_IN_UNIQUE_CONSTRAINT` ：一意性制約と主キー制約は空です。外部キー制約の場合、この列は参照されるテーブルのキーの位置です。
 -   `REFERENCED_TABLE_SCHEMA` ：制約によって参照されるスキーマの名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。
 -   `REFERENCED_TABLE_NAME` ：制約によって参照されるテーブルの名前。現在TiDBでは、外部キー制約を除いて、すべての制約におけるこの列の値は`nil`です。

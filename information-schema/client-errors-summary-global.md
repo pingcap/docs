@@ -8,14 +8,14 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_GLOBAL` information_schema table
 表`CLIENT_ERRORS_SUMMARY_GLOBAL`は、TiDBサーバーに接続するクライアントに返されたすべてのSQLエラーと警告のグローバルな要約を示しています。これらには以下が含まれます：
 
 -   不正な形式のSQLステートメント。
--   ゼロ除算エラー。
+-   ゼロ除算。
 -   重複するキー値の範囲外を挿入しようとしました。
 -   権限エラー。
 -   テーブルが存在しません。
 
 クライアントエラーは、MySQLサーバープロトコルを介してクライアントに返されます。このプロトコルでは、アプリケーションが適切なアクションを実行することが期待されます。 `information_schema` 。 `CLIENT_ERRORS_SUMMARY_GLOBAL`表は、概要を示しており、アプリケーションがTiDBサーバーから返されたエラーを正しく処理（またはログ記録）していないシナリオで役立ちます。
 
-要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各TiDBサーバーに対してローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、要約は失われます。
+要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各TiDBサーバーに対してローカルであり、メモリにのみ保持されます。 TiDBサーバーを再起動すると、要約は失われます。
 
 {{< copyable "" >}}
 

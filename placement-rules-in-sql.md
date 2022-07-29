@@ -3,13 +3,13 @@ title: Placement Rules in SQL
 summary: Learn how to schedule placement of tables and partitions using SQL statements.
 ---
 
-# SQLの配置ルール {#placement-rules-in-sql}
+# SQLでの配置ルール {#placement-rules-in-sql}
 
 SQLの配置ルールは、SQLインターフェイスを使用してTiKVクラスタのどこにデータを格納するかを指定できる機能です。この機能を使用して、テーブルとパーティションが特定のリージョン、データセンター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化する、データのローカルレプリカをローカルの古い読み取りに使用できるようにする、データの局所性要件を順守するなどのシナリオで役立ちます。
 
 > **ノート：**
 >
-> *SQLでの配置ルール*の実装は、PDの<em>配置ルール機能</em>に依存しています。詳しくは[配置ルールの構成](/configure-placement-rules.md)をご覧ください。 SQLの配置ルールのコンテキストでは、<em>配置ルール</em>は、他のオブジェクトにアタッチされた<em>配置ポリシー</em>、またはTiDBからPDに送信されるルールを参照する場合があります。
+> *SQLでの配置ルール*の実装は、PDの<em>配置ルール機能</em>に依存しています。詳しくは[配置ルールを構成する](/configure-placement-rules.md)をご覧ください。 SQLの配置ルールのコンテキストでは、<em>配置ルール</em>は、他のオブジェクトにアタッチされた<em>配置ポリシー</em>、またはTiDBからPDに送信されるルールを参照する場合があります。
 
 詳細なユーザーシナリオは次のとおりです。
 
@@ -35,7 +35,7 @@ CREATE TABLE t2 (a INT);
 ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 ```
 
-配置ポリシーはどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるには、 `CREATE TABLE`の特権に追加の特権は必要ありません。
+配置ポリシーはどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるために、 `CREATE TABLE`の特権に対する追加の特権は必要ありません。
 
 配置ポリシーを変更するには、 [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)を使用できます。変更は、対応するポリシーが割り当てられているすべてのオブジェクトに反映されます。
 
@@ -96,7 +96,7 @@ SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT 
 SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
 ```
 
-オブジェクトにアタッチされているルールは*非同期*で適用されます。配置の現在のスケジュールの進行状況を表示するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)を使用します。
+オブジェクトに添付されているルールは*非同期*で適用されます。配置の現在のスケジュールの進行状況を表示するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)を使用します。
 
 ## オプションリファレンス {#option-reference}
 
@@ -116,14 +116,14 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 >     3 rows in set (0.00 sec)
 >     ```
 >
-> -   `CREATE PLACEMENT POLICY`を使用して配置ポリシーを作成すると、TiDBはラベルが存在するかどうかをチェックしません。代わりに、ポリシーをテーブルにアタッチするときにTiDBがチェックを実行します。
+> -   `CREATE PLACEMENT POLICY`を使用して配置ポリシーを作成すると、TiDBはラベルが存在するかどうかをチェックしません。代わりに、ポリシーをテーブルにアタッチすると、TiDBがチェックを実行します。
 
 | オプション名           | 説明                                                                            |
 | ---------------- | ----------------------------------------------------------------------------- |
 | `PRIMARY_REGION` | Raftリーダーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                            |
 | `REGIONS`        | Raftフォロワーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                           |
 | `SCHEDULE`       | フォロワーの配置をスケジュールするために使用される戦略。値のオプションは`EVEN` （デフォルト）または`MAJORITY_IN_PRIMARY`です。 |
-| `FOLLOWERS`      | フォロワーの数。たとえば、 `FOLLOWERS=2`は、データのレプリカが3つあることを意味します（フォロワー2つとリーダー1つ）。           |
+| `FOLLOWERS`      | フォロワーの数。たとえば、 `FOLLOWERS=2`は、データのレプリカが3つあることを意味します（2人のフォロワーと1人のリーダー）。         |
 
 上記の配置オプションに加えて、事前構成を使用することもできます。詳細については、 [アドバンストプレイスメントオプション](#advanced-placement-options)を参照してください。
 
@@ -179,7 +179,7 @@ CREATE TABLE t1 (
 );
 ```
 
-パーティションにポリシーがアタッチされていない場合、パーティションはテーブルに既存のポリシーを適用しようとします。たとえば、 `pEurope`パーティションは`europe`ポリシーを適用しますが、 `pAsia`パーティションは表`t1`の`p1`ポリシーを適用します。 `t1`にポリシーが割り当てられていない場合、 `pAsia`もポリシーを適用しません。
+パーティションにポリシーが添付されていない場合、パーティションはテーブルに既存のポリシーを適用しようとします。たとえば、 `pEurope`パーティションは`europe`ポリシーを適用しますが、 `pAsia`パーティションは表`t1`の`p1`ポリシーを適用します。 `t1`にポリシーが割り当てられていない場合、 `pAsia`もポリシーを適用しません。
 
 特定のパーティションに割り当てられた配置ポリシーを変更することもできます。例えば：
 
@@ -213,7 +213,7 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- The table with policy p3 (t4) will have FOLLOWERS=3.
 ```
 
-これは、パーティションとテーブル間の継承とは異なり、テーブルのポリシーを変更するとパーティションに影響することに注意してください。テーブルは、ポリシーがアタッチされていない状態で作成された場合にのみスキーマのポリシーを継承し、スキーマのポリシーを変更しても、作成されたテーブルには影響しません。
+これは、パーティションとテーブル間の継承とは異なり、テーブルのポリシーを変更するとパーティションに影響することに注意してください。テーブルは、ポリシーが添付されていない状態で作成された場合にのみスキーマのポリシーを継承し、スキーマのポリシーを変更しても、作成されたテーブルには影響しません。
 
 ### 高度な配置オプション {#advanced-placement-options}
 
@@ -241,11 +241,11 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 
 リスト形式では、制約はキーと値のペアのリストとして指定されます。キーは`+`または`-`で始まります。 `+disk=ssd`は、ラベル`disk`を`ssd`に設定する必要があることを示し、 `-disk=nvme`は、ラベル`disk`を`nvme`に設定してはならないことを示します。
 
-ディクショナリ形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、1人のフォロワーがus-east-1にあり、1人のフォロワーがus-east-2にあり、1人のフォロワーがus-west-1にいることを示します。別の例では、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';`は、1人のフォロワーがnvmeディスクを使用してus-east-1にあり、1人のフォロワーがus-west-1にいることを示します。
+辞書形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、1人のフォロワーがus-east-1にあり、1人のフォロワーがus-east-2にあり、1人のフォロワーがus-west-1にいることを示します。別の例として、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';`は、1人のフォロワーがnvmeディスクを使用してus-east-1にあり、1人のフォロワーがus-west-1にいることを示します。
 
 > **ノート：**
 >
-> 辞書とリストの形式はYAMLパーサーに基づいていますが、YAML構文が正しく解析されていない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
+> 辞書とリストの形式はYAMLパーサーに基づいていますが、YAML構文が正しく解析されない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
@@ -262,5 +262,5 @@ SQLの配置ルールの実験的リリースには、次の既知の制限が�
 
 -   一時テーブルは配置オプションをサポートしていません。
 -   設定`PRIMARY_REGION`および`REGIONS`には、構文糖衣規則が許可されています。将来的には、 `PRIMARY_RACK`の`PRIMARY_ZONE`を追加する予定`PRIMARY_HOST` 。 [号18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
--   TiFlashラーナーは、配置ルール構文では構成できません。
--   配置ルールは、保存されているデータが正しいTiKVストアに存在することのみを保証します。このルールは、転送中のデータ（ユーザークエリまたは内部操作のいずれかを介して）が特定のリージョンでのみ発生することを保証するものではありません。
+-   TiFlashラーナーは、配置ルール構文を使用して構成することはできません。
+-   配置ルールは、保存されているデータが正しいTiKVストアに存在することのみを保証します。このルールは、転送中のデータ（ユーザークエリまたは内部操作のいずれかを介して）が特定の地域でのみ発生することを保証するものではありません。

@@ -19,25 +19,25 @@ TiDB Ansibleバージョン：3.0.9
 -   エグゼキュータ
     -   集計関数が`ENUM`列とコレクション列[＃14364](https://github.com/pingcap/tidb/pull/14364)に適用されたときの誤った結果を修正します
 -   サーバ
-    -   `auto_increment_increment`および`auto_increment_offset`のシステム変数をサポートする[＃14396](https://github.com/pingcap/tidb/pull/14396)
+    -   `auto_increment_increment`と`auto_increment_offset`のシステム変数をサポートする[＃14396](https://github.com/pingcap/tidb/pull/14396)
     -   `tidb_tikvclient_ttl_lifetime_reach_total`の監視メトリックを追加して、TTLが10分の悲観的なトランザクションの数を監視します[＃14300](https://github.com/pingcap/tidb/pull/14300)
     -   SQLクエリの実行中にpanicが発生した場合にSQL情報をログに出力する[＃14322](https://github.com/pingcap/tidb/pull/14322)
-    -   ステートメントサマリーテーブルに`plan`フィールドと`plan_digest`フィールドを追加して、実行中の`plan`フィールドと`plan`シグニチャ[＃14285](https://github.com/pingcap/tidb/pull/14285)を記録します。
+    -   ステートメントサマリーテーブルに`plan`フィールドと`plan_digest`フィールドを追加して、実行中の`plan`と`plan`シグニチャ[＃14285](https://github.com/pingcap/tidb/pull/14285)を記録します。
     -   `stmt-summary.max-stmt-count`構成項目のデフォルト値を`100`から[＃14285](https://github.com/pingcap/tidb/pull/14285)に調整し`200` 。
     -   低速クエリテーブルに`plan_digest`フィールドを追加して、 `plan`シグニチャを記録します[＃14292](https://github.com/pingcap/tidb/pull/14292)
 -   DDL
     -   `primary`列に`alter table ... add index`を使用して作成された匿名インデックスの結果が[＃14310](https://github.com/pingcap/tidb/pull/14310)と矛盾する問題を修正します
     -   `drop table`構文[＃14052](https://github.com/pingcap/tidb/pull/14052)によって`VIEW`が誤ってドロップされる問題を修正します。
 -   プランナー
-    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。インデックスが`a`列に存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、全表スキャンを回避します[＃14410](https://github.com/pingcap/tidb/pull/14410)
+    -   `select max(a), min(a) from t`などのステートメントのパフォーマンスを最適化します。 `a`列にインデックスが存在する場合、ステートメントは`select * from (select a from t order by a desc limit 1) as t1, (select a from t order by a limit 1) as t2`に最適化され、全表スキャンを回避します[＃14410](https://github.com/pingcap/tidb/pull/14410)
 
 ## TiKV {#tikv}
 
 -   ラフトストア
-    -   構成変更を高速化して、領域散乱を高速化します[＃6421](https://github.com/tikv/tikv/pull/6421)
+    -   構成変更を高速化して、リージョン散乱を高速化します[＃6421](https://github.com/tikv/tikv/pull/6421)
 -   取引
-    -   `tikv_lock_manager_waiter_lifetime_duration` 、および`tikv_lock_manager_detect_duration`の監視メトリックを追加して、 `tikv_lock_manager_detect_duration`の存続期間、デッドロックの検出にかかる時間コスト、および`Wait` `waiter`テーブル[＃6392](https://github.com/tikv/tikv/pull/6392)のステータスを監視します。
-    -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック検出器のリーダーを変更することによって発生するトランザクション実行の待機時間を短縮します[＃6429](https://github.com/tikv/tikv/pull/6429)
+    -   `tikv_lock_manager_waiter_lifetime_duration` 、および`tikv_lock_manager_detect_duration`の監視メトリックを追加して、 `tikv_lock_manager_detect_duration`の存続期間、デッドロックの検出にかかる時間コスト、および`waiter`の[＃6392](https://github.com/tikv/tikv/pull/6392)を監視し`Wait` 。
+    -   次の構成項目を最適化して、極端な状況でリージョンリーダーまたはデッドロック検出器のリーダーを変更することによって発生するトランザクション実行の待ち時間を短縮します[＃6429](https://github.com/tikv/tikv/pull/6429)
         -   デフォルト値の`wait-for-lock-time`を`3s`から`1s`に変更します
         -   デフォルト値の`wake-up-delay-duration`を`100ms`から`20ms`に変更します
     -   リージョンマージプロセス中にデッドロック検出器のリーダーが正しくない可能性がある問題を修正します[＃6431](https://github.com/tikv/tikv/pull/6431)

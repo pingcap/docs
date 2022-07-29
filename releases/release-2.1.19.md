@@ -22,7 +22,7 @@ TiDB Ansibleバージョン：2.1.19
     -   `WHERE`句に一意キー[＃13385](https://github.com/pingcap/tidb/pull/13385)の等しい条件が含まれている場合に、推定行数が`1`より大きい問題を修正します。
 -   SQL実行エンジン
     -   `ConvertJSONToInt`の`unit64`の中間結果として`int64`を使用する場合の精度オーバーフローを修正します[＃13036](https://github.com/pingcap/tidb/pull/13036)
-    -   `SLEEP`関数がクエリ（たとえば、 `select 1 from (select sleep(1)) t;)` ）にある場合、列のプルーニングによってクエリの`sleep(1)`が無効になる問題を修正します[＃13039](https://github.com/pingcap/tidb/pull/13039)
+    -   `SLEEP`関数がクエリ（たとえば`select 1 from (select sleep(1)) t;)` ）にある場合、列のプルーニングによってクエリの`sleep(1)`が無効になる問題を修正します[＃13039](https://github.com/pingcap/tidb/pull/13039)
     -   `INSERT ON DUPLICATE UPDATE`ステートメント[＃12999](https://github.com/pingcap/tidb/pull/12999)で`Chunk`を再利用することにより、メモリのオーバーヘッドを削減します。
     -   `slow_query`テーブル[＃13129](https://github.com/pingcap/tidb/pull/13129)のトランザクション関連フィールドをさらに追加します。
         -   `Prewrite_time`
@@ -48,7 +48,7 @@ TiDB Ansibleバージョン：2.1.19
     -   `binSearch`関数は[＃13768](https://github.com/pingcap/tidb/pull/13768)の実装でエラーを返さないため、結果が正しくない可能性があるという問題を修正し`builtinIntervalRealSig` 。
     -   `INSERT`ステートメントの実行で文字列型を浮動小数点型に変換するときにエラーが発生する可能性がある問題を修正します[＃14009](https://github.com/pingcap/tidb/pull/14009)
     -   `sum(distinct)`関数[＃13041](https://github.com/pingcap/tidb/pull/13041)から返される誤った結果を修正します
-    -   同じ場所の`union`のデータをマージされた`CAST`に変換するときに`data too long`が返される問題を修正します。これは、 `jsonUnquoteFunction`関数の返された型の長さに誤った値が与えられるためです[＃13645](https://github.com/pingcap/tidb/pull/13645)
+    -   同じ場所の`union`のデータをマージされた`CAST`に変換するときに`data too long`が返される問題を修正します。これは、 `jsonUnquoteFunction`関数の返された型の長さに誤った値[＃13645](https://github.com/pingcap/tidb/pull/13645)が与えられるためです。
     -   特権チェックが厳しすぎるためにパスワードを設定できない問題を修正します[＃13805](https://github.com/pingcap/tidb/pull/13805)
 -   サーバ
     -   `KILL CONNECTION`がゴルーチンリークを引き起こす可能性がある問題を修正します[＃13252](https://github.com/pingcap/tidb/pull/13252)
@@ -73,7 +73,7 @@ TiDB Ansibleバージョン：2.1.19
 
 ## PD {#pd}
 
--   すべてのリージョンを取得するためのHTTPAPIのパフォーマンスを改善する[＃1988](https://github.com/pingcap/pd/pull/1988)
+-   すべてのリージョンを取得するためのHTTPAPIのパフォーマンスを向上させる[＃1988](https://github.com/pingcap/pd/pull/1988)
 -   etcdをアップグレードして、etcd PreVoteがリーダーを選出できない問題を修正します（ダウングレードはサポートされていません） [＃2052](https://github.com/pingcap/pd/pull/2052)
 
 ## ツール {#tools}

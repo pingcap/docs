@@ -23,7 +23,7 @@ fetch.message.max.bytes=1073741824
 
 ## Pumpは<code>no space left on device</code> {#pump-returns-code-no-space-left-on-device-code-error}
 
-原因： Pumpがbinlogデータを正常に書き込むには、ローカルディスク容量が不足しています。
+原因： Pumpがbinlogデータを正常に書き込むには、ローカルディスク領域が不十分です。
 
 解決策：ディスク領域をクリーンアップしてから、 Pumpを再起動します。
 
@@ -31,9 +31,9 @@ fetch.message.max.bytes=1073741824
 
 原因： Pumpが起動すると、 `online`状態にあるすべてのDrainerノードに通知します。 Drainerへの通知に失敗した場合、このエラーログが出力されます。
 
-解決策： [binlogctlツール](/tidb-binlog/binlog-control.md)を使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`の状態にあるすべてのDrainerノードが正常に機能していることを確認するためです。 Drainerノードの状態が実際の動作状態と一致しない場合は、binlogctlツールを使用してその状態を変更してから、 Pumpを再起動します。
+解決策： [binlogctlツール](/tidb-binlog/binlog-control.md)を使用して、各Drainerノードが正常かどうかを確認します。これは、 `online`の状態にあるすべてのDrainerノードが正常に機能していることを確認するためです。 Drainerノードの状態が実際の動作ステータスと一致しない場合は、binlogctlツールを使用してその状態を変更してから、 Pumpを再起動します。
 
-## Binlogレプリケーション中にデータ損失が発生します {#data-loss-occurs-during-the-tidb-binlog-replication}
+## Binlogレプリケーション中にデータ損失が発生する {#data-loss-occurs-during-the-tidb-binlog-replication}
 
 TiDB BinlogがすべてのTiDBインスタンスで有効になっていて、正常に実行されていることを確認する必要があります。クラスタのバージョンがv3.0より後の場合は、 `curl {TiDB_IP}:{STATUS_PORT}/info/all`コマンドを使用して、すべてのTiDBインスタンスのBinlogステータスを確認します。
 
@@ -44,4 +44,4 @@ TiDB BinlogがすべてのTiDBインスタンスで有効になっていて、�
 ## Drainerによって出力されたファイル形式のインクリメンタルデータのクリーニングメカニズムはありますか？データは削除されますか？ {#is-there-any-cleaning-mechanism-for-the-incremental-data-of-the-file-format-output-by-drainer-will-the-data-be-deleted}
 
 -   Drainer v3.0.xには、ファイル形式の増分データのクリーニングメカニズムはありません。
--   v4.0.xバージョンには、時間ベースのデータクリーニングメカニズムがあります。詳しくは[ドレイナーの`retention-time`設定項目](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153)をご覧ください。
+-   v4.0.xバージョンには、時間ベースのデータクリーニングメカニズムがあります。詳しくは[ドレイナーの`retention-time`構成項目](https://github.com/pingcap/tidb-binlog/blob/v4.0.9/cmd/drainer/drainer.toml#L153)をご覧ください。

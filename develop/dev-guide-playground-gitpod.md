@@ -6,7 +6,7 @@ title: Gitpod
 
 # Gitpod {#gitpod}
 
-[Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザで完全な開発環境を取得でき、コードをすぐに記述できます。
+[Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザに完全な開発環境を取得でき、すぐにコードを記述できます。
 
 Gitpodは、コードに直接変換する開発環境向けのオープンソースのKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）であり、クラウド内の各タスクの新しい自動開発環境を数秒で起動します。これにより、開発環境をコードとして記述し、ブラウザーまたはデスクトップIDEから直接、インスタント、リモート、およびクラウドベースの開発環境を開始できます。
 
@@ -32,7 +32,7 @@ Gitpodは、コードに直接変換する開発環境向けのオープンソ�
 
 ![playground gitpod workspace init](/media/develop/playground-gitpod-workspace-init.png)
 
-このページのシナリオでは、 [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview)を使用してTiDBプレイグラウンドを構築しています。ターミナルエリアの左側で進捗状況を確認できます。
+このページのシナリオでは、 [TiUP](https://docs.pingcap.com/zh/tidb/stable/tiup-overview)を使用してTiDBプレイグラウンドを構築します。ターミナルエリアの左側で進行状況を確認できます。
 
 TiDB Playgroundの準備が整うと、別の`Spring JPA Hibernate`つのタスクが実行されます。ターミナルエリア右側で進捗状況を確認できます。
 
@@ -94,7 +94,7 @@ ports:
 
 ### GitpodDockerイメージをカスタマイズする {#customize-gitpod-docker-images}
 
-デフォルトでは、GitpodはWorkspace-Fullという名前の標準のDockerイメージをワークスペースのベースとして使用します。このデフォルトのイメージから起動されたワークスペースには、Docker、Go、Java、Node.js、C / C ++、Python、Ruby、Rust、PHP、およびHomebrew、Tailscale、Nginxなどのツールがプリインストールされています。
+デフォルトでは、GitpodはWorkspace-Fullという名前の標準のDockerイメージをワークスペースのベースとして使用します。このデフォルトイメージから起動されたワークスペースには、Docker、Go、Java、Node.js、C / C ++、Python、Ruby、Rust、PHP、およびHomebrew、Tailscale、Nginxなどのツールがプリインストールされています。
 
 パブリックDockerイメージまたはDockerfileを使用し、プロジェクトに必要な依存関係をインストールすることもできます。
 

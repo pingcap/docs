@@ -3,7 +3,7 @@ title: Prepared Statements
 summary: Learn about how to use the TiDB prepared statements.
 ---
 
-# プリペアドステートメント {#prepared-statements}
+# 準備されたステートメント {#prepared-statements}
 
 [プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数のSQLステートメントをテンプレート化します。 SQLステートメントをパラメーターから分離します。これを使用して、SQLステートメントの次の側面を改善できます。
 

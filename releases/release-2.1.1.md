@@ -17,18 +17,18 @@ title: TiDB 2.1.1 Release Notes
     -   JSON列[＃8660](https://github.com/pingcap/tidb/pull/8660)のデータ競合を修正します
 -   サーバ
     -   PDが故障したときにTSOを取得したトランザクションが正しくない問題を修正します[＃8567](https://github.com/pingcap/tidb/pull/8567)
-    -   ANSI規格に準拠していないステートメントによって引き起こされるブートストラップ障害を修正します[＃8576](https://github.com/pingcap/tidb/pull/8576)
+    -   ANSI規格に準拠していないステートメントによって引き起こされたブートストラップ障害を修正します[＃8576](https://github.com/pingcap/tidb/pull/8576)
     -   トランザクションの再試行で誤ったパラメーターが使用される問題を修正します[＃8638](https://github.com/pingcap/tidb/pull/8638)
 -   DDL
     -   デフォルトの文字セットとテーブルの照合順序を[＃8590](https://github.com/pingcap/tidb/pull/8590)に変更し`utf8mb4`
-    -   `ddl_reorg_batch_size`変数を追加して、インデックスの追加速度を制御します[＃8614](https://github.com/pingcap/tidb/pull/8614)
+    -   `ddl_reorg_batch_size`変数を追加して、インデックス[＃8614](https://github.com/pingcap/tidb/pull/8614)の追加速度を制御します。
     -   文字セットと照合順序オプションのコンテンツをDDLで大文字と小文字を区別しないようにする[＃8611](https://github.com/pingcap/tidb/pull/8611)
     -   生成された列のインデックスを追加する問題を修正します[＃8655](https://github.com/pingcap/tidb/pull/8655)
 
 ## PD {#pd}
 
--   構成ファイル[＃1334](https://github.com/pingcap/pd/pull/1334)で一部の構成項目を`0`に設定できない問題を修正します。
--   [＃1362](https://github.com/pingcap/pd/pull/1362)を開始するときに未定義の構成を確認してください
+-   一部の構成アイテムを構成ファイル[＃1334](https://github.com/pingcap/pd/pull/1334)で`0`に設定できない問題を修正します。
+-   PD [＃1362](https://github.com/pingcap/pd/pull/1362)を開始するときに、未定義の構成を確認してください
 -   遅延の可能性を最適化するために、リーダーを新しく作成されたピアに転送することは避けてください[＃1339](https://github.com/pingcap/pd/pull/1339)
 -   デッドロック[＃1370](https://github.com/pingcap/pd/pull/1370)が原因で`RaftCluster`が停止できない問題を修正します
 

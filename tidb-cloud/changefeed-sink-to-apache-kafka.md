@@ -3,13 +3,13 @@ title: Sink to Apache Kafka
 Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. 
 ---
 
-# ApacheKafkaにシンクします {#sink-to-apache-kafka}
+# ApacheKafkaに沈む {#sink-to-apache-kafka}
 
 > **警告：**
 >
 > 現在、 **Sink toApacheKafka**は実験的機能です。実稼働環境での使用はお勧めしません。
 
-このドキュメントでは、 **Sink** toApacheKafkaチェンジフィードを使用してTiDBCloudからTiDB Cloudにデータをストリーミングする方法について説明します。
+このドキュメントでは、 **Sink to Apache Kafka**チェンジフィードを使用して、TiDBCloudからTiDB Cloudにデータをストリーミングする方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
@@ -19,7 +19,7 @@ TiDBクラスターがApacheKafkaサービスに接続できることを確認�
 
 ApacheKafkaサービスがインターネットにアクセスできないAWSVPCにある場合は、次の手順を実行します。
 
-1.  ApacheKafkaサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  ApacheKafkaサービスのVPCとTiDBクラスタの間は[VPCピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md)です。
 
 2.  ApacheKafkaサービスが関連付けられているセキュリティグループのインバウンドルールを変更します。
 
@@ -32,7 +32,7 @@ ApacheKafkaサービスがインターネットにアクセスできないAWSVPC
 
 ApacheKafkaサービスがインターネットにアクセスできないGCPVPCにある場合は、次の手順を実行します。
 
-1.  ApacheKafkaサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  ApacheKafkaサービスのVPCとTiDBクラスタの間は[VPCピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md)です。
 2.  ApacheKafkaが配置されているVPCの入力ファイアウォールルールを変更します。
 
     TiDB Cloudクラスタが配置されているリージョンのCIDRを入力ファイアウォールルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスタからKafkaブローカーに流れるようになります。

@@ -10,7 +10,7 @@ TiDBは、展開操作、データ管理（インポートとエクスポート�
 
 さまざまなシステム環境での展開と運用のニーズを満たすために、TiDBには、TiUPとTiDB Operatorの2つの導入および運用ツールが用意されています。
 
-### 物理マシンまたは仮想マシンにデプロイを導入して運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
+### 物理マシンまたは仮想マシンにTiDBをデプロイして運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
 [TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上のTiDBパッケージマネージャーです。 TiUPは、TiDB、PD、TiKVなどの複数のTiDBコンポーネントを管理できます。 TiDBエコシステムのコンポーネントを起動するには、1つのTiUPコマンドを実行するだけです。
 
@@ -25,9 +25,9 @@ TiUPの基本は次のとおりです。
 
 ### KubernetesでTiDBをデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator)は、KubernetesのTiDBクラスターの自動オペレーティングシステムです。展開、アップグレード、スケーリング、バックアップ、フェイルオーバー、構成変更など、TiDBの完全なライフサイクル管理を提供します。 TiDB Operatorを使用すると、TiDBはパブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスターでシームレスに実行できます。
+[TiDB Operator](https://github.com/pingcap/tidb-operator)は、KubernetesのTiDBクラスターの自動オペレーティングシステムです。展開、アップグレード、スケーリング、バックアップ、フェイルオーバー、構成の変更など、TiDBの完全なライフサイクル管理を提供します。 TiDB Operatorを使用すると、TiDBはパブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスターでシームレスに実行できます。
 
-TiDB Operatorの基本は次のとおりです。
+以下は、 TiDB Operatorの基本です。
 
 -   [TiDB Operatorアーキテクチャ](https://docs.pingcap.com/tidb-in-kubernetes/stable/architecture)
 -   [KubernetesでTiDB Operatorを使い始める](https://docs.pingcap.com/tidb-in-kubernetes/stable/get-started/)
@@ -50,7 +50,7 @@ Dumplingの基本は次のとおりです。
 
 > **ノート：**
 >
-> PingCAPは、以前はTiDBに固有の拡張機能を備えた[mydumperプロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。その後、このフォークは[Dumpling](/dumpling-overview.md)に置き換えられました。これは、Goで書き直され、TiDBに固有のより多くの最適化をサポートします。 mydumperの代わりにDumplingを使用することを強くお勧めします。
+> PingCAPは以前、TiDBに固有の拡張機能を備えた[mydumperプロジェクト](https://github.com/maxbube/mydumper)のフォークを維持していました。その後、このフォークは[Dumpling](/dumpling-overview.md)に置き換えられました。これは、Goで書き直され、TiDBに固有のより多くの最適化をサポートします。 mydumperの代わりにDumplingを使用することを強くお勧めします。
 
 ### 完全なデータのインポート {#full-data-import}
 
@@ -62,7 +62,7 @@ TiDB Lightningは、次の3つのモードをサポートしています。
 -   `importer` ：このモードは`local`モードに似ています。このモードを使用するには、キーと値のペアのインポートを支援する追加のコンポーネント`tikv-importer`をデプロイする必要があります。ターゲットクラスタがv4.0以降のバージョンの場合は、 `local`モードを使用することをお勧めします。
 -   `tidb` ：このモードはバックエンドとしてTiDB / MySQLを使用します。これは、 `local`モードおよび`importer`モードよりも低速ですが、オンラインで実行できます。また、MySQLへのデータのインポートもサポートしています。
 
-TiDB Lightningの基本は次のとおりです。
+以下は、 TiDB Lightningの基本です。
 
 -   入力データソース：
     -   Dumplingの出力ファイル
@@ -80,9 +80,9 @@ TiDB Lightningの基本は次のとおりです。
 
 以下はBRの基本です。
 
--   [入力および出力データソース](/br/backup-and-restore-design.md#types-of-backup-files) ：SST+ `backupmeta`ファイル
+-   [入出力データソース](/br/backup-and-restore-design.md#types-of-backup-files) ：SST+ `backupmeta`ファイル
 -   サポートされているTiDBバージョン：v3.1およびv4.0
--   Kubernetesのサポート：はい。詳細については、 [BRを使用してS3互換ストレージにデータをバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用してS3互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
+-   Kubernetesのサポート：はい。詳細については、 [BRを使用してデータをS3互換ストレージにバックアップする](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-to-aws-s3-using-br)と[BRを使用してS3互換ストレージからデータを復元する](https://docs.pingcap.com/tidb-in-kubernetes/stable/restore-from-aws-s3-using-br)を参照してください。
 
 ### インクリメンタルデータレプリケーション {#incremental-data-replication}
 
@@ -107,7 +107,7 @@ DMの基本は次のとおりです。
 -   サポートされているTiDBバージョン：すべてのバージョン
 -   Kubernetesのサポート：いいえ、開発中です
 
-データ量がTBレベルを下回っている場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全なデータのインポートとエクスポート、および増分データレプリケーションが含まれます。
+データ量がTBレベルを下回っている場合は、DMを使用してMySQL/MariaDBからTiDBにデータを直接移行することをお勧めします。移行プロセスには、完全なデータのインポートとエクスポート、および増分データレプリケーションが含まれます。
 
 データ量がTBレベルの場合は、次の手順を実行します。
 
@@ -121,8 +121,8 @@ DMの基本は次のとおりです。
 
 ## OLAPクエリツール {#olap-query-tool}
 
-TiDBはOLAPクエリツールTiSparkを提供します。これにより、ネイティブSparkを使用しているかのようにTiDBテーブルをクエリできます。
+TiDBは、OLAPクエリツールTiSparkを提供します。これにより、ネイティブSparkを使用しているかのようにTiDBテーブルにクエリを実行できます。
 
 ### Sparkを使用してTiKVデータソースをクエリする {#query-tikv-data-source-using-spark}
 
-[TiSpark](/tispark-overview.md)は、複雑なOLAPクエリに応答するためにTiKV上でApacheSparkを実行するために構築されたシンレイヤーです。 Sparkプラットフォームと分散TiKVクラスタの両方を活用し、TiDBにシームレスに接着し、ワンストップのハイブリッドトランザクションおよび分析処理（HTAP）ソリューションを提供します。
+[TiSpark](/tispark-overview.md)は、TiKV上でApache Sparkを実行して、複雑なOLAPクエリに応答するために構築されたシンレイヤーです。 Sparkプラットフォームと分散TiKVクラスタの両方を活用し、TiDBにシームレスに接着し、ワンストップのハイブリッドトランザクションおよび分析処理（HTAP）ソリューションを提供します。

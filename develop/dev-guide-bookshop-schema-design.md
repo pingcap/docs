@@ -102,7 +102,7 @@ TiDB Cloudのデータベース詳細ページで、[**インポート**]ボタ�
     -   1,000,000行の評価レコード
     -   1,000,000行の注文レコード
 
-2.  BucketRegionとして**USWest** <strong>（オレゴン）</strong>を選択します。
+2.  BucketRegionとして**リージョン** <strong>（オレゴン）</strong>を選択します。
 
 3.  **データ形式**に<strong>TiDBDumpling</strong>を選択します。
 

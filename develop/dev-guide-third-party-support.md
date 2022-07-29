@@ -50,7 +50,7 @@ PingCAPはコミュニティと連携し、サードパーティツールに対�
 | JavaScript / TypeScript | [Prismaクライアント](https://www.prisma.io/)                         | 3.15.1           | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
 | JavaScript / TypeScript | [TypeORM](https://www.npmjs.com/package/typeorm)               | v0.3.6           | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
 | PHP                     | [laravel](https://laravel.com/)                                | v9.1.10          | 互換性     | [laravel-tidb](https://github.com/colopl/laravel-tidb) | 該当なし                                                                                     |
-| Python                  | [Django](https://pypi.org/project/Django/)                     | v4.0.5           | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
+| Python                  | [ジャンゴ](https://pypi.org/project/Django/)                       | v4.0.5           | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
 | Python                  | [ピーウィー](https://github.com/coleifer/peewee/)                   | v3.14.10         | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
 | Python                  | [PonyORM](https://ponyorm.org/)                                | v0.7.16          | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
 | Python                  | [SQLAlchemy](https://www.sqlalchemy.org/)                      | v1.4.37          | 互換性     | 該当なし                                                   | 該当なし                                                                                     |
@@ -65,4 +65,4 @@ PingCAPはコミュニティと連携し、サードパーティツールに対�
 | IDE                                              | 最新のテスト済みバージョン | サポートレベル | チュートリアル |
 | ------------------------------------------------ | ------------- | ------- | ------- |
 | [DataGrip](https://www.jetbrains.com/datagrip/)  | 該当なし          | 互換性     | 該当なし    |
-| [IntelliJ IDEA](https://www.jetbrains.com/idea/) | 該当なし          | 互換性     | 該当なし    |
+| [IntelliJ アイデア](https://www.jetbrains.com/idea/) | 該当なし          | 互換性     | 該当なし    |

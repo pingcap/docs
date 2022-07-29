@@ -116,7 +116,7 @@ SELECT title, price FROM books WHERE title = 'Marian Yost';
 
 ### 完全なテーブルデータには、 <code>DELETE</code>ではなく<code>TRUNCATE</code>を使用します {#use-code-truncate-code-instead-of-code-delete-code-for-full-table-data}
 
-テーブルからすべてのデータを削除する必要がある場合は、次の`TRUNCATE`ステートメントを使用することをお勧めします。
+テーブルからすべてのデータを削除する必要がある場合は、次の`TRUNCATE`のステートメントを使用することをお勧めします。
 
 {{< copyable "" >}}
 

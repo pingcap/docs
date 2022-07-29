@@ -5,7 +5,7 @@ summary: Learn about the execution plan information returned by the `EXPLAIN` st
 
 # ビューを使用しEXPLAINステートメント {#explain-statements-using-views}
 
-`EXPLAIN`は、ビュー自体の名前ではなく、 [見る](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが仮想テーブルにすぎず、データ自体を格納しないためです。ビューの定義とステートメントの残りの部分は、SQLの最適化中にマージされます。
+`EXPLAIN`は、ビュー自体の名前ではなく、 [見る](/views.md)が参照するテーブルとインデックスを表示します。これは、ビューが仮想テーブルにすぎず、データ自体を格納しないためです。ビューの定義とステートメントの残りの部分は、SQLの最適化中に一緒にマージされます。
 
 <CustomContent platform="tidb">
 

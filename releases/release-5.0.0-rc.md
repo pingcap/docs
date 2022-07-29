@@ -166,7 +166,7 @@ TiDBスケジューリングプロセスは、I / O、ネットワーク、CPU�
 
 -   TiDB Lightningは、AWSS3ストレージからTiDBへのAuroraスナップショットデータのインポートをサポートしています。 （関連する問題： [＃266](https://github.com/pingcap/tidb-lightning/issues/266) ）
 -   1TiBのデータをDBaaST1.standardにインポートするTPC-Cテストでは、パフォーマンスが254 GiB/hから366GiB/ hに40％向上します。
--   Dumplingは、TiDB /MySQLからAWSS3ストレージへのデータのエクスポートをサポートし[ユーザードキュメント](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) （実験的）（関連する問題： [＃8](https://github.com/pingcap/dumpling/issues/8) ）
+-   Dumplingは、TiDB /MySQLからAWSS3ストレージへのデータのエクスポートをサポートし[ユーザードキュメント](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage) （実験的）（関連する問題： [#8](https://github.com/pingcap/dumpling/issues/8) ）
 
 ## 診断 {#diagnostics}
 

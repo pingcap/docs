@@ -11,13 +11,13 @@ DMを使用してMySQLからTiDBにデータを移行する場合、online-ddl�
 
 ## オンラインDDLツールを使用したDMの作業の詳細 {#working-details-for-dm-with-online-ddl-tools}
 
-このセクションでは、online-schema-changeを実装する際のオンラインDDLツール[幽霊](https://github.com/github/gh-ost)および[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用したDMの動作の詳細について説明します。
+このセクションでは、online-schema-changeを実装する際のオンラインDDLツール[幽霊](https://github.com/github/gh-ost)および[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)を使用したDMの作業の詳細について説明します。
 
 ### online-schema-change：gh-ost {#online-schema-change-gh-ost}
 
 gh-ostがonline-schema-changeを実装すると、次の3種類のテーブルが作成されます。
 
--   gho：DDLを適用するために使用されます。データが完全に複製され、ghoテーブルがoriginテーブルと一致している場合、originテーブルは名前変更によって置き換えられます。
+-   gho：DDLを適用するために使用されます。データが完全に複製され、ghoテーブルがoriginテーブルと一致している場合、originテーブルは名前の変更によって置き換えられます。
 -   ghc：online-schema-changeに関連する情報を格納するために使用されます。
 -   del：オリジンテーブルの名前を変更して作成されます。
 
@@ -115,9 +115,9 @@ gh-ostで主に使用されるSQLステートメントとそれに対応するDM
 
 pt-oscがonline-schema-changeを実装すると、次の2種類のテーブルが作成されます。
 
--   `new` ：DDLを適用するために使用されます。データが完全に複製され、 `new`のテーブルが元のテーブルと一致している場合、元のテーブルは名前の変更によって置き換えられます。
+-   `new` ：DDLを適用するために使用されます。データが完全に複製され、 `new`テーブルが元のテーブルと一致する場合、元のテーブルは名前の変更によって置き換えられます。
 -   `old` ：オリジンテーブルの名前を変更して作成されます。
--   `pt_osc_*_upd`種類のトリガー`pt_osc_*_del` `pt_osc_*_ins` 。 pt_oscのプロセスでは、オリジンテーブルによって生成された新しいデータがトリガーによって`new`に複製されます。
+-   `pt_osc_*_upd`種類のトリガー`pt_osc_*_del` `pt_osc_*_ins` 。 pt_oscのプロセスで、オリジンテーブルによって生成された新しいデータがトリガーによって`new`に複製されます。
 
 移行の過程で、DMは上記のテーブルを3つのカテゴリに分類します。
 
@@ -152,7 +152,7 @@ pt-oscで主に使用されるSQLステートメントとそれに対応するDM
     REPLACE INTO dm_meta.{task_name}_onlineddl (id, ghost_schema , ghost_table , ddls) VALUES (......);
     ```
 
-3.  データ移行に使用される3つのトリガーを作成します。
+3.  データ移行に使用する3つのトリガーを作成します。
 
     ```sql
     CREATE TRIGGER `pt_osc_test_test4_del` AFTER DELETE ON `test`.`test4` ...... ;
@@ -214,7 +214,7 @@ pt-oscで主に使用されるSQLステートメントとそれに対応するDM
 
 ## その他のオンラインスキーマ変更ツール {#other-online-schema-change-tools}
 
-場合によっては、オンラインスキーマ変更ツールのデフォルトの動作を変更する必要があります。たとえば、 `ghost table`と`trash table`にカスタマイズされた名前を使用できます。他の場合には、gh-ostまたはpt-oscの代わりに、同じ動作原理と変更プロセスで他のツールを使用することをお勧めします。
+場合によっては、オンラインスキーマ変更ツールのデフォルトの動作を変更する必要があります。たとえば、 `ghost table`と`trash table`にカスタマイズされた名前を使用できます。それ以外の場合は、gh-ostやpt-oscの代わりに、同じ動作原理と変更プロセスで他のツールを使用することをお勧めします。
 
 このようなカスタマイズされたニーズを実現するには、 `ghost table`と`trash table`の名前に一致する正規表現を作成する必要があります。
 

@@ -26,7 +26,7 @@
         -   [TiDB CloudでTiDBクラスターを構築する（DevTier）](/develop/dev-guide-build-cluster-in-cloud.md)
         -   [TiDBのCRUDSQL](/develop/dev-guide-tidb-crud-sql.md)
         -   TiDBを使用してシンプルなCRUDアプリを構築する
-            -   [Java](/develop/dev-guide-sample-application-java.md)
+            -   [ジャワ](/develop/dev-guide-sample-application-java.md)
             -   [ゴラン](/develop/dev-guide-sample-application-golang.md)
     -   アプリケーション例
         -   [SpringBootを使用してTiDBアプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)
@@ -43,7 +43,7 @@
         -   [データを挿入](/develop/dev-guide-insert-data.md)
         -   [データの更新](/develop/dev-guide-update-data.md)
         -   [データの削除](/develop/dev-guide-delete-data.md)
-        -   [プリペアドステートメント](/develop/dev-guide-prepared-statement.md)
+        -   [準備されたステートメント](/develop/dev-guide-prepared-statement.md)
     -   データの読み取り
         -   [単一のテーブルからデータをクエリする](/develop/dev-guide-get-data-from-single-table.md)
         -   [マルチテーブル参加クエリ](/develop/dev-guide-join-tables.md)
@@ -689,7 +689,7 @@
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)
             -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
-            -   [演算子](/functions-and-operators/operators.md)
+            -   [オペレーター](/functions-and-operators/operators.md)
             -   [制御フロー機能](/functions-and-operators/control-flow-functions.md)
             -   [文字列関数](/functions-and-operators/string-functions.md)
             -   [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)

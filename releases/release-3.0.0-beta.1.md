@@ -23,43 +23,43 @@ TiDB Ansibleバージョン：3.0.0-beta.1
     <!---->
 
     -   ウィンドウ関数のサポート
-        -   [＃9682](https://github.com/pingcap/tidb/pull/9682) `NTILE`
+        -   `NTILE` [＃9682](https://github.com/pingcap/tidb/pull/9682)
         -   `LEAD` [＃9672](https://github.com/pingcap/tidb/pull/9672) `LAG`
-        -   [＃9671](https://github.com/pingcap/tidb/pull/9671) `PERCENT_RANK`
-        -   [＃9596](https://github.com/pingcap/tidb/pull/9596) `NTH_VALUE`
-        -   [＃9619](https://github.com/pingcap/tidb/pull/9619) `CUME_DIST`
+        -   `PERCENT_RANK` [＃9671](https://github.com/pingcap/tidb/pull/9671)
+        -   `NTH_VALUE` [＃9596](https://github.com/pingcap/tidb/pull/9596)
+        -   `CUME_DIST` [＃9619](https://github.com/pingcap/tidb/pull/9619)
         -   `FIRST_VALUE` [＃9560](https://github.com/pingcap/tidb/pull/9560) `LAST_VALUE`
         -   `RANK` [＃9500](https://github.com/pingcap/tidb/pull/9500) `DENSE_RANK`
-        -   [＃9450](https://github.com/pingcap/tidb/pull/9450) `RANGE FRAMED`
-        -   [＃9358](https://github.com/pingcap/tidb/pull/9358) `ROW FRAMED`
-        -   [＃9098](https://github.com/pingcap/tidb/pull/9098) `ROW NUMBER`
+        -   `RANGE FRAMED` [＃9450](https://github.com/pingcap/tidb/pull/9450)
+        -   `ROW FRAMED` [＃9358](https://github.com/pingcap/tidb/pull/9358)
+        -   `ROW NUMBER` [＃9098](https://github.com/pingcap/tidb/pull/9098)
 
     <!---->
 
-    -   列とハンドル列[＃9315](https://github.com/pingcap/tidb/pull/9315)の間の順序相関を示すタイプの統計を追加します。
+    -   列とハンドル列[＃9315](https://github.com/pingcap/tidb/pull/9315)の間の順序相関を示す統計のタイプを追加します。
 -   SQL実行エンジン
     -   組み込み関数を追加する
-        -   [＃7832](https://github.com/pingcap/tidb/pull/7832) `JSON_QUOTE`
-        -   [＃9609](https://github.com/pingcap/tidb/pull/9609) `JSON_ARRAY_APPEND`
-        -   [＃8931](https://github.com/pingcap/tidb/pull/8931) `JSON_MERGE_PRESERVE`
-        -   [＃9252](https://github.com/pingcap/tidb/pull/9252) `BENCHMARK`
-        -   [＃9087](https://github.com/pingcap/tidb/pull/9087) `COALESCE`
-        -   [＃9261](https://github.com/pingcap/tidb/pull/9261) `NAME_CONST`
+        -   `JSON_QUOTE` [＃7832](https://github.com/pingcap/tidb/pull/7832)
+        -   `JSON_ARRAY_APPEND` [＃9609](https://github.com/pingcap/tidb/pull/9609)
+        -   `JSON_MERGE_PRESERVE` [＃8931](https://github.com/pingcap/tidb/pull/8931)
+        -   `BENCHMARK` [＃9252](https://github.com/pingcap/tidb/pull/9252)
+        -   `COALESCE` [＃9087](https://github.com/pingcap/tidb/pull/9087)
+        -   `NAME_CONST` [＃9261](https://github.com/pingcap/tidb/pull/9261)
 
     <!---->
 
-    -   クエリコンテキストに基づいてチャンクサイズを最適化し、SQLステートメントの実行時間とクラスタのリソース消費を削減します[＃6489](https://github.com/pingcap/tidb/issues/6489)
+    -   クエリコンテキストに基づいてChunkサイズを最適化し、SQLステートメントの実行時間とクラスタのリソース消費を削減します[＃6489](https://github.com/pingcap/tidb/issues/6489)
 -   特権管理
     -   サポート`SET ROLE` [＃9581](https://github.com/pingcap/tidb/pull/9581) `CURRENT_ROLE`
     -   [＃9616](https://github.com/pingcap/tidb/pull/9616) `DROP ROLE`
     -   [＃9461](https://github.com/pingcap/tidb/pull/9461) `CREATE ROLE`
 -   サーバ
-    -   `/debug/zip`のHTTPインターフェースを追加して、現在のTiDBインスタンス[＃9651](https://github.com/pingcap/tidb/pull/9651)の情報を取得します。
+    -   `/debug/zip`のHTTPインターフェースを追加して、現在のTiDBインスタンスの情報を取得します[＃9651](https://github.com/pingcap/tidb/pull/9651)
     -   `show pump status`および`show drainer status`のSQLステートメントをサポートして、PumpまたはDrainerのステータスを確認します[＃9456](https://github.com/pingcap/tidb/pull/9456)
     -   SQLステートメントを使用したPumpまたはDrainerステータスの変更のサポート[＃9789](https://github.com/pingcap/tidb/pull/9789)
     -   遅いSQLステートメントを簡単に追跡できるようにSQLテキストへのHASHフィンガープリントの追加をサポート[＃9662](https://github.com/pingcap/tidb/pull/9662)
     -   `log_bin`のシステム変数（デフォルトでは「0」）を追加して、binlogの有効化状態を制御します。現在の状態のチェックのみをサポート[＃9343](https://github.com/pingcap/tidb/pull/9343)
-    -   構成ファイルを使用したbinlog送信戦略の管理のサポート[＃9864](https://github.com/pingcap/tidb/pull/9864)
+    -   構成ファイル[＃9864](https://github.com/pingcap/tidb/pull/9864)を使用して、送信binlog戦略の管理をサポートします。
     -   `INFORMATION_SCHEMA.SLOW_QUERY`メモリテーブル[＃9290](https://github.com/pingcap/tidb/pull/9290)を使用した低速ログのクエリのサポート
     -   TiDBに表示されるMySQLのバージョンを5.7.10から[＃9553](https://github.com/pingcap/tidb/pull/9553)に変更します。
     -   ツールによる収集と分析を容易にするために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md)を統合します
@@ -75,11 +75,11 @@ TiDB Ansibleバージョン：3.0.0-beta.1
 
 -   ツールによる収集と分析を容易にするために[ログ形式](https://github.com/tikv/rfcs/blob/master/text/2018-12-19-unified-log-format.md)を統合します
 -   シミュレーター
-    -   さまざまな店舗でさまざまな心拍間隔をサポートする[＃1418](https://github.com/pingcap/pd/pull/1418)
+    -   異なる店舗で異なる心拍間隔をサポートする[＃1418](https://github.com/pingcap/pd/pull/1418)
     -   データのインポートに関するケースを追加する[＃1263](https://github.com/pingcap/pd/pull/1263)
 -   ホットスポットのスケジューリングを構成可能にする[＃1412](https://github.com/pingcap/pd/pull/1412)
 -   以前のストア[＃1429](https://github.com/pingcap/pd/pull/1429)を置き換えるために、ディメンション監視アイテムとしてストアアドレスを追加します
--   `GetStores`のオーバーヘッドを最適化して、リージョンの検査サイクル[＃1410](https://github.com/pingcap/pd/pull/1410)をスピードアップします。
+-   `GetStores`オーバーヘッドを最適化して、リージョン検査サイクル[＃1410](https://github.com/pingcap/pd/pull/1410)をスピードアップします。
 -   トゥームストーンストアを削除するためのインターフェイスを追加する[＃1472](https://github.com/pingcap/pd/pull/1472)
 
 ## TiKV {#tikv}
@@ -94,9 +94,9 @@ TiDB Ansibleバージョン：3.0.0-beta.1
 -   ローカルリーダーを使用したRawReadインターフェイスでの読み取りのサポート[＃4222](https://github.com/tikv/tikv/pull/4222)
 -   構成情報に関するメトリックを追加する[＃4206](https://github.com/tikv/tikv/pull/4206)
 -   境界[＃4255](https://github.com/tikv/tikv/pull/4255)を超えるキーに関するメトリックを追加します
--   バインドされたエラーを超えるキーに遭遇したときにpanicを制御するか、エラーを返すオプションを追加します[＃4254](https://github.com/tikv/tikv/pull/4254)
+-   バインドされたエラーを超えるキーが発生したときにpanicを制御するか、エラーを返すオプションを追加します[＃4254](https://github.com/tikv/tikv/pull/4254)
 -   `INSERT`操作のサポートを追加し、キーが存在しない場合にのみプリライトを成功させ、 [＃4085](https://github.com/tikv/tikv/pull/4085)を削除し`Batch Get` 。
--   バッチシステム[＃4200](https://github.com/tikv/tikv/pull/4200)でより公平なバッチ戦略を使用する
+-   バッチシステムでより公平なバッチ戦略を使用する[＃4200](https://github.com/tikv/tikv/pull/4200)
 -   tikv- [＃3825](https://github.com/tikv/tikv/pull/3825)でRawスキャンをサポートする
 
 ## ツール {#tools}

@@ -15,11 +15,11 @@ TiDBバージョン：5.0.6
 
     -   TiCDC
 
-        -   `cdc server`コマンドエラーの出力をstdoutから[＃3133](https://github.com/pingcap/tiflow/issues/3133)に変更します。
+        -   `cdc server`コマンドエラーの出力をstdoutからstderr3に変更し[＃3133](https://github.com/pingcap/tiflow/issues/3133)
         -   Kafkaシンク`max-message-bytes`のデフォルト値を[＃3081](https://github.com/pingcap/tiflow/issues/3081)に設定し`10M`
         -   Kafka Sink `partition-num`のデフォルト値を3に変更して、TiCDCがKafkaパーティション間でメッセージをより均等に分散するようにします[＃3337](https://github.com/pingcap/ticdc/issues/3337)
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
@@ -28,13 +28,13 @@ TiDBバージョン：5.0.6
 -   TiKV
 
     -   検証プロセスを`Apply`スレッドプールから`Import`スレッドプールに移動して、SSTファイルの挿入速度を上げます[＃11239](https://github.com/tikv/tikv/issues/11239)
-    -   モジュール[＃11374](https://github.com/tikv/tikv/issues/11374)のパフォーマンスの問題を特定するために、 Raftログのガベージコレクションモジュールのメトリックを追加します。
-    -   Grafanaダッシュボード[＃11681](https://github.com/tikv/tikv/issues/11681)でいくつかの一般的でないストレージ関連のメトリックを折りたたむ
+    -   モジュール[＃11374](https://github.com/tikv/tikv/issues/11374)のパフォーマンスの問題を特定するために、 Raftログのガベージコレクションモジュールのメトリックをさらに追加します。
+    -   Grafanaダッシュボード[＃11681](https://github.com/tikv/tikv/issues/11681)でいくつかの珍しいストレージ関連の指標を折りたたむ
 
 -   PD
 
-    -   スケジューラーの終了プロセスを高速化する[＃4146](https://github.com/tikv/pd/issues/4146)
-    -   スケジューラーが空のリージョンをスケジュールし、スケジューラーの構成を修正できるようにすることで、 `scatter-range-scheduler`のスケジューラーのスケジューリング結果をさらに向上させます[＃4497](https://github.com/tikv/pd/issues/4497)
+    -   スケジューラーの終了プロセスをスピードアップする[＃4146](https://github.com/tikv/pd/issues/4146)
+    -   スケジューラーが空のリージョンをスケジュールし、スケジューラー[＃4497](https://github.com/tikv/pd/issues/4497)の構成を修正できるようにすることで、 `scatter-range-scheduler`スケジューラーのスケジューリング結果をさらに向上させます。
     -   エビクトリーダースケジューラが異常なピアを持つリージョンをスケジュールできることをサポートする[＃4093](https://github.com/tikv/pd/issues/4093)
 
 -   ツール
@@ -42,10 +42,10 @@ TiDBバージョン：5.0.6
     -   TiCDC
 
         -   TiKVリロードのレート制限制御を最適化して、チェンジフィード初期化中のgPRC輻輳を低減します[＃3110](https://github.com/pingcap/ticdc/issues/3110)
-        -   EtcdWorkerにティック頻度制限を追加して、頻繁なetcd書き込みがPDサービスに影響を与えないようにします[＃3112](https://github.com/pingcap/ticdc/issues/3112)
+        -   ティック頻度制限をEtcdWorkerに追加して、頻繁なetcd書き込みがPDサービスに影響を与えないようにします[＃3112](https://github.com/pingcap/ticdc/issues/3112)
         -   Kafkaシンク[＃3352](https://github.com/pingcap/tiflow/issues/3352)に`config.Metadata.Timeout`のデフォルト構成を追加します
         -   Kafkaメッセージを送信できない可能性を減らすために、デフォルト値の`max-message-bytes`を設定し[＃3081](https://github.com/pingcap/tiflow/issues/3081) `10M`
-        -   `no owner alert` `buffer sink total row` [＃4054](https://github.com/pingcap/tiflow/issues/4054)など、 [＃1606](https://github.com/pingcap/tiflow/issues/1606)と`mounter row`の監視メトリックとアラートをさらに追加し`table sink total row`
+        -   `no owner alert` `buffer sink total row` [＃4054](https://github.com/pingcap/tiflow/issues/4054)など、 [＃1606](https://github.com/pingcap/tiflow/issues/1606)と`mounter row`のモニタリング指標とアラートをさらに追加し`table sink total row`
 
     -   バックアップと復元（BR）
 
@@ -60,14 +60,14 @@ TiDBバージョン：5.0.6
 
 -   TiDB
 
-    -   楽観的なトランザクションの競合により、トランザクションが互いにブロックする可能性があるという問題を修正します[＃11148](https://github.com/tikv/tikv/issues/11148)
+    -   楽観的なトランザクションの競合により、トランザクションが相互にブロックされる可能性があるという問題を修正します[＃11148](https://github.com/tikv/tikv/issues/11148)
     -   MPPクエリ[＃1791](https://github.com/pingcap/tics/issues/1791)の誤検知エラーログ`invalid cop task execution summaries length`の問題を修正します
-    -   DMLステートメントとDDLステートメントが同時に実行されるときに発生する可能性のあるpanicを修正します[＃30940](https://github.com/pingcap/tidb/issues/30940)
+    -   DMLステートメントとDDLステートメントが同時に実行されたときに発生する可能性のあるpanicを修正します[＃30940](https://github.com/pingcap/tidb/issues/30940)
     -   グローバルレベルの特権を付与および取り消すために`grant`および`revoke`の操作を実行するときの`privilege check fail`のエラーを修正します[＃29675](https://github.com/pingcap/tidb/issues/29675)
     -   場合によっては`ALTER TABLE.. ADD INDEX`ステートメントを実行するときのTiDBpanicを修正します[＃27687](https://github.com/pingcap/tidb/issues/27687)
     -   `enforce-mpp`構成が[＃29252](https://github.com/pingcap/tidb/issues/29252)で有効にならない問題を修正します。
     -   `ENUM`データ型[＃29357](https://github.com/pingcap/tidb/issues/29357)で`CASE WHEN`関数を使用するときのpanicを修正します
-    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の`microsecond`関数の誤った結果を修正します
+    -   ベクトル化された式[＃29244](https://github.com/pingcap/tidb/issues/29244)の`microsecond`関数の誤った結果を修正します。
     -   `auto analyze`の結果からの不完全なログ情報の問題を修正します[＃29188](https://github.com/pingcap/tidb/issues/29188)
     -   ベクトル化された式[＃28643](https://github.com/pingcap/tidb/issues/28643)の`hour`関数の誤った結果を修正します
     -   サポートされていない`cast`がTiFlash5にプッシュダウンされたときの`tidb_cast to Int32 is not supported`のような予期しないエラーを修正し[＃23907](https://github.com/pingcap/tidb/issues/23907)
@@ -77,10 +77,10 @@ TiDBバージョン：5.0.6
     -   無効な日付値を同時に挿入するときのTiDBpanicを修正[＃25393](https://github.com/pingcap/tidb/issues/25393)
     -   MPPモード[＃30980](https://github.com/pingcap/tidb/issues/30980)でのクエリの予期しない`can not found column in Schema column`エラーを修正します
     -   TiFlashがシャットダウンしているときにTiDBがpanicになる可能性がある問題を修正します[＃28096](https://github.com/pingcap/tidb/issues/28096)
-    -   プランナーがjoinreorder3を実行しているときに予期しない`index out of range`エラーを修正し[＃24095](https://github.com/pingcap/tidb/issues/24095)
-    -   `ENUM`種類のデータをそのような関数のパラメーターとして使用する場合の制御関数（ `IF`や`CASE WHEN`など）の誤った結果を修正します[＃23114](https://github.com/pingcap/tidb/issues/23114)
+    -   プランナーが結合再注文[＃24095](https://github.com/pingcap/tidb/issues/24095)を実行しているときに予期しない`index out of range`エラーを修正します
+    -   `ENUM`型データをそのような関数のパラメーターとして使用する場合の制御関数（ `IF`や`CASE WHEN`など）の誤った結果を修正します[＃23114](https://github.com/pingcap/tidb/issues/23114)
     -   [＃29498](https://github.com/pingcap/tidb/issues/29498)の間違った結果を修正し`CONCAT(IFNULL(TIME(3))`
-    -   符号なし`BIGINT`引数を渡すときの`GREATEST`と`LEAST`の誤った結果を修正します[＃30101](https://github.com/pingcap/tidb/issues/30101)
+    -   符号なし`BIGINT`引数を渡すときの`GREATEST`と`LEAST`の間違った結果を修正します[＃30101](https://github.com/pingcap/tidb/issues/30101)
     -   JSON型の列が`CHAR`型の列に結合するとSQL操作がキャンセルされる問題を修正します[＃29401](https://github.com/pingcap/tidb/issues/29401)
     -   怠惰な存在チェックと手つかずのキーの最適化の誤った使用によって引き起こされるデータの不整合の問題を修正します[＃30410](https://github.com/pingcap/tidb/issues/30410)
     -   トランザクションを使用するかどうかにかかわらず、ウィンドウ関数が異なる結果を返す可能性がある問題を修正します[＃29947](https://github.com/pingcap/tidb/issues/29947)
@@ -95,13 +95,13 @@ TiDBバージョン：5.0.6
 
     -   TiKVノードがダウンすると、解決されたタイムスタンプが[＃11351](https://github.com/tikv/tikv/issues/11351)遅れる問題を修正します。
     -   Raftクライアントの実装でバッチメッセージが大きすぎるという問題を修正します[＃9714](https://github.com/tikv/tikv/issues/9714)
-    -   リージョンマージ、ConfChange、およびスナップショットが極端な条件で同時に発生するときに発生するpanicの問題を修正します[＃11475](https://github.com/tikv/tikv/issues/11475)
+    -   リージョンのマージ、ConfChange、およびスナップショットが極端な条件で同時に発生するときに発生するpanicの問題を修正します[＃11475](https://github.com/tikv/tikv/issues/11475)
     -   TiKVが逆テーブルスキャンを実行すると、TiKVがメモリロックを検出できない問題を修正します[＃11440](https://github.com/tikv/tikv/issues/11440)
-    -   10進数の除算結果がゼロの場合の負の符号の問題を修正します[＃29586](https://github.com/pingcap/tidb/issues/29586)
+    -   10進数の除算結果がゼロの場合の負の符号の問題を修正[＃29586](https://github.com/pingcap/tidb/issues/29586)
     -   GCタスクの蓄積によりTiKVがOOM（メモリ不足）になる可能性がある問題を修正します[＃11410](https://github.com/tikv/tikv/issues/11410)
-    -   インスタンスごとのgRPCリクエストの平均レイテンシがTiKVメトリクス[＃11299](https://github.com/tikv/tikv/issues/11299)で不正確であるという問題を修正します
-    -   統計スレッド[＃11195](https://github.com/tikv/tikv/issues/11195)の監視データによって引き起こされるメモリリークを修正します
-    -   ダウンストリームデータベースが欠落しているときに発生するTiCDCpanicの問題を修正します[＃11123](https://github.com/tikv/tikv/issues/11123)
+    -   インスタンスごとのgRPCリクエストの平均レイテンシがTiKVメトリックで不正確であるという問題を修正します[＃11299](https://github.com/tikv/tikv/issues/11299)
+    -   統計スレッドの監視データによって引き起こされるメモリリークを修正します[＃11195](https://github.com/tikv/tikv/issues/11195)
+    -   ダウンストリームデータベースが見つからない場合に発生するTiCDCpanicの問題を修正します[＃11123](https://github.com/tikv/tikv/issues/11123)
     -   輻輳エラー[＃11082](https://github.com/tikv/tikv/issues/11082)が原因でTiCDCがスキャンの再試行を頻繁に追加する問題を修正します
     -   チャネルがいっぱいになるとRaft接続が切断される問題を修正します[＃11047](https://github.com/tikv/tikv/issues/11047)
     -   TiDB Lightningがデータをインポートするときにファイルが存在しない場合に発生するTiKVpanicの問題を修正します[＃10438](https://github.com/tikv/tikv/issues/10438)
@@ -114,15 +114,15 @@ TiDBバージョン：5.0.6
 
     -   TiKVノードが削除された後に発生するpanicの問題を修正します[＃4344](https://github.com/tikv/pd/issues/4344)
     -   ダウンストア[＃3353](https://github.com/tikv/pd/issues/3353)が原因でオペレーターがブロックされる可能性がある問題を修正します
-    -   スタックしたリージョンシンカー[＃3936](https://github.com/tikv/pd/issues/3936)によって引き起こされる遅いリーダー選挙を修正
-    -   ダウンノードを修復するときにピアを削除する速度が制限される問題を修正します[＃4090](https://github.com/tikv/pd/issues/4090)
+    -   リージョンシンカー[＃3936](https://github.com/tikv/pd/issues/3936)のスタックによって引き起こされるリーダー選出の遅延を修正
+    -   ダウンノードを修復するときにピアを削除する速度が制限されるという問題を修正します[＃4090](https://github.com/tikv/pd/issues/4090)
     -   リージョンのハートビートが60秒未満の場合にホットスポットキャッシュをクリアできない問題を修正します[＃4390](https://github.com/tikv/pd/issues/4390)
 
 -   TiFlash
 
-    -   主キー列をより大きなintデータ型に変更した後の潜在的なデータの不整合を修正
+    -   主キー列をより大きなintデータ型に変更した後の潜在的なデータの不整合を修正します
     -   `libnsl.so`のライブラリがないために、ARMなどの一部のプラットフォームでTiFlashが起動しない問題を修正します
-    -   `Store size`メトリックがディスク上の実際のデータサイズと一致しない問題を修正します
+    -   `Store size`のメトリックがディスク上の実際のデータサイズと一致しない問題を修正します
     -   `Cannot open file`のエラーが原因でTiFlashがクラッシュする問題を修正します
     -   MPPクエリが強制終了されたときにTiFlashがクラッシュすることがある問題を修正しました
     -   予期しないエラーを修正する`3rd arguments of function substringUTF8 must be constants`
@@ -141,22 +141,22 @@ TiDBバージョン：5.0.6
         -   `cdc cli`予期しないパラメーターを受信すると、ユーザーパラメーターをサイレントに切り捨てて、ユーザー入力パラメーターが失われる問題を修正します[＃2303](https://github.com/pingcap/tiflow/issues/2303)
         -   Kafkaメッセージの書き込み中にエラーが発生したときにTiCDC同期タスクが一時停止する可能性がある問題を修正します[＃2978](https://github.com/pingcap/tiflow/issues/2978)
         -   一部のタイプの列をOpenProtocol形式にエンコードするときに発生する可能性のあるpanicの問題を修正します[＃2758](https://github.com/pingcap/tiflow/issues/2758)
-        -   デフォルト値の`max-message-bytes`を[＃3081](https://github.com/pingcap/tiflow/issues/3081)に設定することにより、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正し`10M` 。
+        -   デフォルト値の`max-message-bytes`から[＃3081](https://github.com/pingcap/tiflow/issues/3081)に設定することにより、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正し`10M` 。
         -   アップストリームTiDBインスタンスが予期せず終了したときにTiCDCレプリケーションタスクが終了する可能性がある問題を修正します[＃3061](https://github.com/pingcap/tiflow/issues/3061)
-        -   TiKVが同じリージョン[＃2386](https://github.com/pingcap/tiflow/issues/2386)に重複したリクエストを送信すると、TiCDCプロセスがpanicになる可能性がある問題を修正します。
+        -   TiKVが同じリージョン[＃2386](https://github.com/pingcap/tiflow/issues/2386)に重複するリクエストを送信すると、TiCDCプロセスがpanicになる可能性がある問題を修正します。
         -   複数のTiKVがクラッシュしたとき、または強制的に再起動したときのTiCDCレプリケーションの中断の問題を修正します[＃3288](https://github.com/pingcap/ticdc/issues/3288)
-        -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/ticdc/issues/3010)の負の値エラーを修正しました
-        -   MySQLシンクデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)によって引き起こされる過度に頻繁な警告の問題を修正します
+        -   チェンジフィードチェックポイントラグ[＃3010](https://github.com/pingcap/ticdc/issues/3010)の負の値エラーを修正します
+        -   MySQLシンクのデッドロック[＃2706](https://github.com/pingcap/tiflow/issues/2706)によって引き起こされる過度に頻繁な警告の問題を修正します
         -   AvroシンクがJSONタイプの列の解析をサポートしていない問題を修正します[＃3624](https://github.com/pingcap/tiflow/issues/3624)
         -   TiKV所有者が再起動したときにTiCDCがTiKVから誤ったスキーマスナップショットを読み取るバグを修正します[＃2603](https://github.com/pingcap/tiflow/issues/2603)
-        -   DDLの処理後のメモリリークの問題を修正[＃3174](https://github.com/pingcap/ticdc/issues/3174)
+        -   [＃3174](https://github.com/pingcap/ticdc/issues/3174)の処理後のメモリリークの問題を修正
         -   CanalおよびMaxwellプロトコル[＃3676](https://github.com/pingcap/tiflow/issues/3676)で`enable-old-value`の構成アイテムが自動的に`true`に設定されないバグを修正します。
         -   一部のRedHatEnterprise Linuxリリース（6.8や6.9など）で`cdc server`コマンドを実行したときに発生するタイムゾーンエラーを修正します[＃3584](https://github.com/pingcap/tiflow/issues/3584)
         -   Kafkaシンク[＃3431](https://github.com/pingcap/tiflow/issues/3431)の不正確な`txn_batch_size`モニタリングメトリックの問題を修正します
-        -   チェンジフィードがない場合に`tikv_cdc_min_resolved_ts_no_change_for_1m`がアラートを出し続ける問題を修正します[＃11017](https://github.com/tikv/tikv/issues/11017)
+        -   チェンジフィード[＃11017](https://github.com/tikv/tikv/issues/11017)がない場合に`tikv_cdc_min_resolved_ts_no_change_for_1m`がアラートを出し続ける問題を修正します
         -   etcd1のタスクステータスを手動でクリーニングするときに発生するTiCDCpanicの問題を修正し[＃2980](https://github.com/pingcap/tiflow/issues/2980)
         -   ErrGCTTLExceededエラーが発生したときにchangefeedが十分に速く失敗しない問題を修正します[＃3111](https://github.com/pingcap/ticdc/issues/3111)
-        -   ストックデータのスキャンに時間がかかりすぎると、TiKVがGCを実行するためにストックデータのスキャンが失敗する可能性がある問題を修正します[＃2470](https://github.com/pingcap/tiflow/issues/2470)
+        -   株式データのスキャンに時間がかかりすぎると、TiKVがGCを実行するために株式データのスキャンが失敗する可能性がある問題を修正します[＃2470](https://github.com/pingcap/tiflow/issues/2470)
         -   コンテナ環境でのOOMの修正[＃1798](https://github.com/pingcap/ticdc/issues/1798)
 
     -   バックアップと復元（BR）

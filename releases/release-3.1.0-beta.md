@@ -13,14 +13,14 @@ TiDB Ansibleバージョン：3.1.0-ベータ版
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   SQLヒントを強化する[＃12192](https://github.com/pingcap/tidb/pull/12192)
+    -   SQLヒントを充実させる[＃12192](https://github.com/pingcap/tidb/pull/12192)
 -   新機能
-    -   フォロワー読み取り機能をサポートする[＃12535](https://github.com/pingcap/tidb/pull/12535)
+    -   フォロワー読み取り機能のサポート[＃12535](https://github.com/pingcap/tidb/pull/12535)
 
 ## TiKV {#tikv}
 
 -   分散バックアップおよび復元機能のサポート[＃5532](https://github.com/tikv/tikv/pull/5532)
--   フォロワー読み取り機能をサポートする[＃5562](https://github.com/tikv/tikv/pull/5562)
+-   フォロワー読み取り機能のサポート[＃5562](https://github.com/tikv/tikv/pull/5562)
 
 ## PD {#pd}
 

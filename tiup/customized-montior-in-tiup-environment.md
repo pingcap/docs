@@ -5,7 +5,7 @@ summary: Learn how to customize the configurations of monitoring servers managed
 
 # 監視サーバーの構成をカスタマイズする {#customize-configurations-of-monitoring-servers}
 
-TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。それまでの間、このクラスタをスケールアウトすると、TiUPは新しいノードも監視スコープに追加します。
+TiUPを使用してTiDBクラスタをデプロイすると、TiUPはPrometheus、Grafana、Alertmanagerなどの監視サーバーもデプロイします。それまでの間、このクラスタをスケールアウトすると、TiUPは新しいノードも監視スコープに追加します。
 
 上記の監視サーバーの構成をカスタマイズするには、以下の手順に従って、TiDBクラスタのtopology.yamlに関連する構成アイテムを追加します。
 
@@ -19,7 +19,7 @@ TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prome
 
 ## Prometheus構成をカスタマイズする {#customize-prometheus-configurations}
 
-現在、TiUPはPrometheusルールとスクレイプ構成ファイルのカスタマイズをサポートしています。
+現在、TiUPはPrometheusルールのカスタマイズと構成ファイルのスクレイプをサポートしています。
 
 ### Prometheusルール構成をカスタマイズする {#customize-prometheus-rule-configuration}
 
@@ -70,7 +70,7 @@ TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prome
             action: drop
     ```
 
-上記の構成が完了した後、TiDBクラスタを展開、スケールアウト、スケールイン、またはリロードすると、TiUPはPrometheus構成ファイルの対応するパラメーターに`additional_scrape_conf`フィールドを追加します。
+上記の構成が完了した後、TiDBクラスタをデプロイ、スケールアウト、スケールイン、またはリロードすると、TiUPはPrometheus構成ファイルの対応するパラメーターに`additional_scrape_conf`フィールドを追加します。
 
 ## Grafana構成をカスタマイズする {#customize-grafana-configurations}
 
@@ -122,7 +122,7 @@ TiUPを使用してTiDBクラスタをデプロイする場合、TiUPは、Prome
 
 現在、TiUPはAlertmanagerのリスニングアドレスのカスタマイズをサポートしています。
 
-TiUPによってデプロイされたAlertmanagerは、デフォルトで`alertmanager_servers.host`をリッスンします。プロキシを使用している場合、Alertmanagerにアクセスできません。この問題に対処するには、クラスタ構成ファイルtopology.yamlに`listen_host`を追加して、リスニングアドレスを指定できます。推奨値は0.0.0.0です。
+TiUPによってデプロイされたAlertmanagerは、デフォルトで`alertmanager_servers.host`をリッスンします。プロキシを使用している場合、Alertmanagerにアクセスすることはできません。この問題に対処するには、クラスタ構成ファイルtopology.yamlに`listen_host`を追加して、リスニングアドレスを指定できます。推奨値は0.0.0.0です。
 
 次の例では、 `listen_host`フィールドを0.0.0.0に設定します。
 
@@ -135,4 +135,4 @@ alertmanager_servers:
     ssh_port: 22
 ```
 
-上記の設定が完了した後、TiDBクラスタを展開、スケールアウト、スケールイン、またはリロードすると、TiUPはAlertmanagerスタートアップパラメータの`listen_host`フィールドを`--web.listen-address`に追加します。
+上記の構成が完了した後、TiDBクラスタをデプロイ、スケールアウト、スケールイン、またはリロードすると、TiUPはAlertmanagerスタートアップパラメーターの`listen_host`フィールドを`--web.listen-address`に追加します。

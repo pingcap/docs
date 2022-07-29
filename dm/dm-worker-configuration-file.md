@@ -41,15 +41,15 @@ cert-allowed-cn = ["dm"]
 | パラメータ                 | 説明                                                                                                                                    |
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
 | `name`                | DMワーカーの名前。                                                                                                                            |
-| `log-level`           | ログレベルを`debug` 、 `error` `info`から`fatal`し`warn` 。デフォルトのログレベルは`info`です。                                                                 |
+| `log-level`           | `debug` 、 `error` `info`の`fatal`レベルを指定し`warn` 。デフォルトのログレベルは`info`です。                                                                  |
 | `log-file`            | ログファイルディレクトリを指定します。このパラメーターが指定されていない場合、ログは標準出力に出力されます。                                                                                |
-| `worker-addr`         | サービスを提供するDM-workerのアドレスを指定します。 IPアドレスを省略して、「：8262」などのポート番号のみを指定できます。                                                                  |
+| `worker-addr`         | サービスを提供するDM-workerのアドレスを指定します。 IPアドレスを省略して、「：8262」のようにポート番号のみを指定できます。                                                                 |
 | `advertise-addr`      | DM-workerが外部にアドバタイズするアドレスを指定します。                                                                                                      |
-| `join`                | DM-master構成ファイルの1つ以上の[`master-addr` s](/dm/dm-master-configuration-file.md#global-configuration)に対応します。                               |
-| `keepalive-ttl`       | DM-workerノードのアップストリームデータソースがリレーログを有効にしない場合の、DM-workerノードからDM-masterノードまでのキープアライブ時間（秒単位）。デフォルト値は60秒です。                                 |
+| `join`                | DMマスター構成ファイルの1つ以上の[`master-addr` s](/dm/dm-master-configuration-file.md#global-configuration)に対応します。                                  |
+| `keepalive-ttl`       | DM-workerノードのアップストリームデータソースがリレーログを有効にしない場合の、DM-workerノードからDM-masterノードへのキープアライブ時間（秒単位）。デフォルト値は60秒です。                                  |
 | `relay-keepalive-ttl` | DM-workerノードのアップストリームデータソースがリレーログを有効にしている場合の、DM-workerノードからDM-masterノードまでのキープアライブ時間（秒単位）。デフォルト値は1800秒です。このパラメーターは、DMv2.0.2以降に追加されました。 |
 | `relay-dir`           | バインドされたアップストリームデータソースでリレーログが有効になっている場合、DM-workerはリレーログをこのディレクトリに保存します。このパラメーターはv5.4.0の新機能であり、アップストリームデータソースの構成よりも優先されます。              |
 | `ssl-ca`              | DM-workerが他のコンポーネントと接続するための信頼できるSSLCAのリストを含むファイルのパス。                                                                                  |
 | `ssl-cert`            | DM-workerが他のコンポーネントと接続するためのPEM形式のX509証明書を含むファイルのパス。                                                                                   |
 | `ssl-key`             | DM-workerが他のコンポーネントと接続するためのPEM形式のX509キーを含むファイルのパス。                                                                                    |
-| `cert-allowed-cn`     | 一般名リスト。                                                                                                                               |
+| `cert-allowed-cn`     | 共通名リスト。                                                                                                                               |

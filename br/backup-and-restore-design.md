@@ -40,4 +40,4 @@ SSTファイルは`storeID_regionID_regionEpoch_keyHash_cf`の形式で名前が
 ### SSTファイルの保存形式 {#storage-format-of-sst-files}
 
 -   SSTファイルの保存形式の詳細については、 [RocksdbBlockBasedTable形式](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format)を参照してください。
--   SSTファイルのバックアップデータのエンコード形式の詳細については、 [テーブルデータのKey-Valueへのマッピング](/tidb-computing.md#mapping-of-table-data-to-key-value)を参照してください。
+-   SSTファイルのバックアップデータのエンコード形式の詳細については、 [テーブルデータのキー値へのマッピング](/tidb-computing.md#mapping-of-table-data-to-key-value)を参照してください。

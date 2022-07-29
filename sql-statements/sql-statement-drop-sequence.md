@@ -5,7 +5,7 @@ summary: An overview of the usage of DROP SEQUENCE for the TiDB database.
 
 # ドロップシーケンス {#drop-sequence}
 
-`DROP SEQUENCE`ステートメントは、シーケンスオブジェクトをTiDBにドロップします。
+`DROP SEQUENCE`ステートメントは、TiDBのシーケンスオブジェクトを削除します。
 
 ## あらすじ {#synopsis}
 
@@ -46,9 +46,9 @@ Query OK, 0 rows affected (0.03 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントはTiDB拡張です。実装は、MariaDBで利用可能なシーケンスに基づいてモデル化されています。
+このステートメントはTiDB拡張です。実装は、MariaDBで利用可能なシーケンスをモデルにしています。
 
 ## も参照してください {#see-also}
 
 -   [シーケンスの作成](/sql-statements/sql-statement-create-sequence.md)
--   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
+-   [CREATESEQUENCEを表示する](/sql-statements/sql-statement-show-create-sequence.md)

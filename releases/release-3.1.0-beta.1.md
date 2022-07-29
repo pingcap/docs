@@ -22,12 +22,12 @@ TiDB Ansibleバージョン：3.1.0-beta.1
     -   `tikv_import_download_duration`などの監視項目を追加して、 [＃6404](https://github.com/tikv/tikv/pull/6404)ファイルのダウンロードと`tikv_import_ingest_duration`の`tikv_import_error_counter`を監視し`tikv_import_download_bytes` `tikv_import_ingest_bytes`
 
 -   いかだ店
-    -   リーダーが変更されたときにフォロワーが古いデータを読み取るため、トランザクションの分離が解除されるというフォロワー読み取りの問題を修正します[＃6343](https://github.com/tikv/tikv/pull/6343)
+    -   リーダーが変更されたときにフォロワーが古いデータを読み取るというフォロワー読み取りの問題を修正し、トランザクションの分離を解除します[＃6343](https://github.com/tikv/tikv/pull/6343)
 
 ## ツール {#tools}
 
 -   BR（バックアップと復元）
-    -   不正確なバックアップの進行状況情報を修正する[＃127](https://github.com/pingcap/br/pull/127)
+    -   不正確なバックアップの進行状況情報を修正する[#127](https://github.com/pingcap/br/pull/127)
     -   リージョン[＃122](https://github.com/pingcap/br/pull/122)の分割のパフォーマンスを向上させる
     -   パーティションテーブルのバックアップと復元機能を追加する[＃137](https://github.com/pingcap/br/pull/137)
     -   PDスケジューラを自動的にスケジュールする機能を追加する[＃123](https://github.com/pingcap/br/pull/123)
@@ -35,6 +35,6 @@ TiDB Ansibleバージョン：3.1.0-beta.1
 
 ## TiDB Ansible {#tidb-ansible}
 
--   初期化フェーズ[＃1086](https://github.com/pingcap/tidb-ansible/pull/1086)の間にオペレーティングシステムでTransparentHugePages（THP）を自動的に無効にする機能を追加します
+-   初期化フェーズ[＃1086](https://github.com/pingcap/tidb-ansible/pull/1086)の間にオペレーティングシステムで透過的巨大ページ（THP）を自動的に無効にする機能を追加します
 -   BRコンポーネントのGrafanaモニタリングを追加する[＃1093](https://github.com/pingcap/tidb-ansible/pull/1093)
 -   関連するディレクトリを自動的に作成して、 TiDB Lightningの展開を最適化します[＃1104](https://github.com/pingcap/tidb-ansible/pull/1104)

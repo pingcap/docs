@@ -22,7 +22,7 @@ tiup dm restart <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   再起動するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
+-   再起動するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `[tiup dm display](/tiup/tiup-component-dm-display.md)`コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
 -   データ型： `STRING`
 -   このオプションが指定されていない場合、TiUPはデフォルトですべてのノードを再起動します。
 
@@ -40,7 +40,7 @@ tiup dm restart <cluster-name> [flags]
 >
 > オプション`-N, --node`が同時に指定された場合、TiUPは`-N, --node`と`-R, --role`の両方の要件に一致するサービスノードを再起動します。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を印刷します。
 -   データ型： `BOOLEAN`

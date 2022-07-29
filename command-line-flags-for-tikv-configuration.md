@@ -5,7 +5,7 @@ summary: Learn some configuration flags of TiKV.
 
 # TiKVConfiguration / コンフィグレーションフラグ {#tikv-configuration-flags}
 
-TiKVは、コマンドラインパラメータの読み取り可能な単位変換をサポートしています。
+TiKVは、コマンドラインパラメーターの読み取り可能な単位変換をサポートしています。
 
 -   ファイルサイズ（バイトに基づく）：KB、MB、GB、TB、PB（または小文字）
 -   時間（msに基づく）：ms、s、m、h
@@ -58,7 +58,7 @@ TiKVは、コマンドラインパラメータの読み取り可能な単位変�
 
 -   ログレベル
 -   デフォルト： `"info"`
--   `"error"` `"fatal"` `"info"` `"warn"` `"debug"`
+-   `"error"` `"fatal"` `"warn"` `"debug"` `"info"`
 
 ## <code>--log-file</code> {#code-log-file-code}
 

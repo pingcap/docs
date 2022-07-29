@@ -18,7 +18,7 @@ tiup dm disable <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。ノードIDは、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの最初の列から取得できます。
+-   サービスの自動有効化を無効にするノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの最初の列からノードIDを取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべてのノードの自動有効化はデフォルトで無効になっています。
 
@@ -28,7 +28,7 @@ tiup dm disable <cluster-name> [flags]
 
 ### -R、-role {#r-role}
 
--   サービスの自動有効化を無効にするロールを指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。ノードの役割は、 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの2番目の列から取得できます。
+-   サービスの自動有効化を無効にするロールを指定します。このオプションの値は、ノードの役割のコンマ区切りのリストです。 [`tiup dm display`](/tiup/tiup-component-dm-display.md)コマンドによって返されるクラスタステータステーブルの2番目の列からノードの役割を取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、すべての役割の自動有効化はデフォルトで無効になっています。
 
@@ -36,7 +36,7 @@ tiup dm disable <cluster-name> [flags]
 >
 > `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスの自動有効化が無効になります。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 ヘルプ情報を出力します。
 

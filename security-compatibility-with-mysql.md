@@ -10,7 +10,7 @@ TiDBは、次の例外を除いて、 MySQL 5.7と同様のセキュリティ機
 -   カラムレベルの権限はサポートされていません
 -   パスワードの有効期限、およびパスワードの最終変更された追跡とパスワードの有効期間はサポートされていません[＃9709](https://github.com/pingcap/tidb/issues/9709)
 -   権限`max_updated` `max_questions`はサポートさ`max_user_connections`て`max_connections`ません
--   パスワードの検証は現在サポートされていません[＃9741](https://github.com/pingcap/tidb/issues/9741)
+-   パスワード検証は現在サポートされていません[＃9741](https://github.com/pingcap/tidb/issues/9741)
 
 ## 認証プラグインのステータス {#authentication-plugin-status}
 

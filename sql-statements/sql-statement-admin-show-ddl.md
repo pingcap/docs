@@ -44,7 +44,7 @@ mysql> ADMIN SHOW DDL;
 
 ### <code>ADMIN SHOW DDL JOBS</code> {#code-admin-show-ddl-jobs-code}
 
-現在のDDLジョブキュー内のすべての結果（実行中および実行待ちのタスクを含む）と、完了したDDLジョブキュー内の最後の10個の結果を表示するには、 `ADMIN SHOW DDL JOBS`を使用します。
+現在のDDLジョブキュー内のすべての結果（実行中および実行待ちのタスクを含む）と、完了したDDLジョブキュー内の最後の10個の結果を表示するには、次を使用し`ADMIN SHOW DDL JOBS` 。
 
 {{< copyable "" >}}
 
@@ -75,7 +75,7 @@ mysql> ADMIN SHOW DDL JOBS;
 
 上記の出力から：
 
--   ジョブ59は現在進行中`running` `STATE` 。スキーマの状態は現在`write reorganization`ですが、タスクが完了すると`public`に切り替わり、ユーザーセッションによって変更を公に観察できることに注意してください。 `end_time`列も`NULL`であり、ジョブの完了時刻が現在不明であることを示しています。
+-   ジョブ59は現在進行中`running` `STATE` 。スキーマの状態は現在`write reorganization`ですが、タスクが完了すると`public`に切り替わり、ユーザーセッションによって変更を公開で確認できることに注意してください。 `end_time`列も`NULL`であり、ジョブの完了時刻が現在不明であることを示しています。
 
 -   ジョブ60は`add index`のジョブであり、現在、ジョブ59が完了するのを待ってキューに入れられています。ジョブ59が完了すると、ジョブ60の`STATE`が`running`に切り替わります。
 
@@ -111,7 +111,7 @@ mysql> ADMIN SHOW DDL JOB QUERIES 51;
 1 row in set (0.02 sec)
 ```
 
-DDL履歴ジョブキュー内の最後の10件の結果内の`job_id`に対応する実行中のDDLジョブのみを検索できます。
+DDL履歴ジョブキュー内の最後の10件の結果内で`job_id`に対応する実行中のDDLジョブのみを検索できます。
 
 ## MySQLの互換性 {#mysql-compatibility}
 
@@ -119,4 +119,4 @@ DDL履歴ジョブキュー内の最後の10件の結果内の`job_id`に対応�
 
 ## も参照してください {#see-also}
 
--   [ADMIN CANCEL DDL](/sql-statements/sql-statement-admin-cancel-ddl.md)
+-   [管理キャンセルDDL](/sql-statements/sql-statement-admin-cancel-ddl.md)

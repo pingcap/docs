@@ -5,7 +5,7 @@ summary: An overview of the usage of SHOW [GLOBAL|SESSION] STATUS for the TiDB d
 
 # [グローバル|セッション]ステータスを表示 {#show-global-session-status}
 
-このステートメントは、MySQLとの互換性のために含まれています。 `SHOW STATUS`ではなくPrometheusとGrafanaを使用して一元化されたメトリック収集を行うTiDBには影響しません。
+このステートメントは、MySQLとの互換性のために含まれています。 `SHOW STATUS`ではなくPrometheusとGrafanaを一元化されたメトリック収集に使用するTiDBには影響しません。
 
 ## あらすじ {#synopsis}
 

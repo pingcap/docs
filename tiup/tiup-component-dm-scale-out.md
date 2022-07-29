@@ -20,7 +20,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 ### -u、-user {#u-user}
 
--   ターゲットマシンへの接続に使用されるユーザー名を指定します。このユーザーは、ターゲットマシンに対するシークレットフリーのsudoroot権限を持っている必要があります。
+-   ターゲットマシンへの接続に使用されるユーザー名を指定します。このユーザーは、ターゲットマシンでシークレットフリーのsudoroot権限を持っている必要があります。
 -   データ型： `STRING`
 -   デフォルト：コマンドを実行する現在のユーザー。
 
@@ -28,7 +28,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 -   ターゲットマシンへの接続に使用されるキーファイルを指定します。
 -   データ型： `STRING`
--   コマンドでこのオプションが指定されていない場合、デフォルトでは`~/.ssh/id_rsa`ファイルがターゲットマシンへの接続に使用されます。
+-   このオプションがコマンドで指定されていない場合、デフォルトでは`~/.ssh/id_rsa`ファイルがターゲットマシンへの接続に使用されます。
 
 ### -p、-password {#p-password}
 
@@ -36,7 +36,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 -   データ型： `BOOLEAN`
 -   デフォルト：false
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

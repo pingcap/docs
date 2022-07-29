@@ -5,7 +5,7 @@ summary: Use Binlog Consumer Client to consume TiDB secondary binlog data from K
 
 # Binlog Consumer Clientユーザーガイド {#binlog-consumer-client-user-guide}
 
-Binlog Consumer Clientは、KafkaからのTiDBセカンダリbinlogデータを消費し、特定の形式でデータを出力するために使用されます。現在、 Drainerは、MySQL、TiDB、ファイル、Kafkaなどの複数の種類のダウンストリーミングをサポートしています。ただし、ユーザーがデータを他の形式（ElasticsearchやHiveなど）に出力するための要件をカスタマイズしている場合があるため、この機能が導入されています。
+Binlog Consumer Clientは、KafkaからのTiDBセカンダリbinlogデータを消費し、特定の形式でデータを出力するために使用されます。現在、 Drainerは、MySQL、TiDB、ファイル、Kafkaなど、複数の種類のダウンストリーミングをサポートしています。ただし、ElasticsearchやHiveなど、他の形式にデータを出力するための要件をカスタマイズしている場合があるため、この機能が導入されています。
 
 ## Drainerを構成する {#configure-drainer}
 
@@ -134,7 +134,7 @@ Driverを使用する場合は、次の情報を構成する必要がありま�
 -   `ClusterID` ：TiDBクラスタのクラスタID
 -   `Topic` ：カフカのトピック名。トピックが空の場合は、 Drainerの`<ClusterID>_obinlog`名を使用します。
 
-パッケージ内のDriverコードを引用してDriverを使用し、Driverが提供するサンプルコードを参照して、Driverの使用方法とbinlogデータの解析方法を学ぶことができます。
+パッケージ内のDriverコードを引用してDriverを使用し、Driverが提供するサンプルコードを参照して、Driverの使用方法とbinlogデータの解析方法を学習できます。
 
 現在、2つの例が提供されています。
 
@@ -143,5 +143,5 @@ Driverを使用する場合は、次の情報を構成する必要がありま�
 
 > **ノート：**
 >
-> -   サンプルコードは、 Driverの使用方法のみを示しています。本番環境でDriverを使用する場合は、コードを最適化する必要があります。
+> -   サンプルコードは、 Driverの使用方法のみを示しています。実稼働環境でDriverを使用する場合は、コードを最適化する必要があります。
 > -   現在、GolangバージョンのDriverとサンプルコードのみが利用可能です。他の言語を使用する場合は、binlog protoファイルに基づいて対応する言語でコードファイルを生成し、Kafkaでbinlogデータを読み取り、データを解析して、データをダウンストリームに出力するアプリケーションを開発する必要があります。サンプルコードを最適化し、他の言語のサンプルコードを[TiDB-ツール](https://github.com/pingcap/tidb-tools)に送信することもできます。

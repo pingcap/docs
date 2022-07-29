@@ -23,13 +23,13 @@ TiDBは、 MySQL 5.7のGAリリースに付属しているほとんどのJSON関
 
 | 関数名                                                                                     | 説明                                                                                      |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [JSON\_CONTAINS(target, candidate\[, path\])][json_contains]                            | 特定の候補JSONドキュメントがターゲットJSONドキュメント内に含まれているかどうかを1または0で返すことによって示します                          |
-| [JSON\_CONTAINS\_PATH(json\_doc, one\_or\_all, path\[, path\] ...)][json_contains_path] | 0または1を返し、JSONドキュメントに特定のパスにデータが含まれているかどうかを示します                                           |
+| [JSON\_CONTAINS(target, candidate\[, path\])][json_contains]                            | 特定の候補JSONドキュメントがターゲットJSONドキュメントに含まれているかどうかを1または0で返すことによって示します                           |
+| [JSON\_CONTAINS\_PATH(json\_doc, one\_or\_all, path\[, path\] ...)][json_contains_path] | JSONドキュメントに特定のパスにデータが含まれているかどうかを示すために0または1を返します                                         |
 | [JSON\_EXTRACT(json\_doc, path\[, path\] ...)][json_extract]                            | `path`の引数に一致するドキュメントの部分から選択されたJSONドキュメントからデータを返します                                      |
 | [->][json_short_extract]                                                                | 評価パスの後のJSON列から値を返します。 `JSON_EXTRACT(doc, path_literal)`のエイリアス                           |
 | [->>][json_short_extract_unquote]                                                       | パスを評価し、結果の引用符を外した後、JSON列から値を返します。 `JSON_UNQUOTE(JSON_EXTRACT(doc, path_literal))`のエイリアス |
 | [JSON\_KEYS(json\_doc\[, path\])][json_keys]                                            | JSONオブジェクトのトップレベル値からのキーをJSON配列として返します。または、パス引数が指定されている場合は、選択したパスからのトップレベルキーを返します。       |
-| [JSON\_SEARCH(json\_doc, one\_or\_all, search\_string)][json_search]                    | 文字列の1つまたはすべての一致をJSONドキュメントで検索します                                                        |
+| [JSON\_SEARCH(json\_doc, one\_or\_all, search\_string)][json_search]                    | JSONドキュメントで文字列の1つまたはすべての一致を検索します                                                        |
 
 ## JSON値を変更する関数 {#functions-that-modify-json-values}
 
@@ -45,7 +45,7 @@ TiDBは、 MySQL 5.7のGAリリースに付属しているほとんどのJSON関
 | [JSON\_REMOVE(json\_doc, path\[, path\] ...)][json_remove]                            | JSONドキュメントからデータを削除し、結果を返します          |
 | [JSON\_REPLACE(json\_doc, path, val\[, path, val\] ...)][json_replace]                | JSONドキュメントの既存の値を置き換えて、結果を返します        |
 | [JSON\_SET(json\_doc, path, val\[, path, val\] ...)][json_set]                        | JSONドキュメントにデータを挿入または更新し、結果を返します      |
-| [JSON\_UNQUOTE(json\_val)][json_unquote]                                              | JSON値の引用符を解除し、結果を文字列として返します          |
+| [JSON\_UNQUOTE(json\_val)][json_unquote]                                              | JSON値の引用符を外し、結果を文字列として返します           |
 | [JSON\_ARRAY\_APPEND(json\_doc, path, val\[, path, val\] ...)][json_array_append]     | JSONドキュメント内の指定された配列の最後に値を追加し、結果を返します |
 | [JSON\_ARRAY\_INSERT(json\_doc, path, val\[, path, val\] ...)][json_array_insert]     | JSONドキュメントの指定された場所に値を挿入し、結果を返します     |
 

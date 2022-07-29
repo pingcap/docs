@@ -4,15 +4,15 @@ title: TiDB 2.0.9 Release Notes
 
 # TiDB2.0.9リリースノート {#tidb-2-0-9-release-notes}
 
-2018年11月19日、TiDB2.0.9がリリースされました。 TiDB 2.0.8と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
+2018年11月19日、TiDB2.0.9がリリースされました。このリリースでは、TiDB 2.0.8と比較して、システムの互換性と安定性が大幅に向上しています。
 
 ## TiDB {#tidb}
 
 -   空の統計ヒストグラム[＃7927](https://github.com/pingcap/tidb/pull/7927)によって引き起こされる問題を修正します
--   場合によっては`UNION ALL`ステートメントのpanic問題を修正します[＃7942](https://github.com/pingcap/tidb/pull/7942)
--   間違ったDDLジョブによって引き起こされるスタックオーバーフローの問題を修正する[＃7959](https://github.com/pingcap/tidb/pull/7959)
--   `Commit`の操作の低速ログを追加します[＃7983](https://github.com/pingcap/tidb/pull/7983)
--   `Limit`の値が大きすぎるために発生するpanicの問題を修正します[＃8004](https://github.com/pingcap/tidb/pull/8004)
+-   場合によっては`UNION ALL`ステートメントのpanicの問題を修正します[＃7942](https://github.com/pingcap/tidb/pull/7942)
+-   間違ったDDLジョブによって引き起こされるスタックオーバーフローの問題を修正します[＃7959](https://github.com/pingcap/tidb/pull/7959)
+-   `Commit`の操作の遅いログを追加します[＃7983](https://github.com/pingcap/tidb/pull/7983)
+-   `Limit`の値が大きすぎることによって引き起こされるpanicの問題を修正します[＃8004](https://github.com/pingcap/tidb/pull/8004)
 -   `USING`節[＃8048](https://github.com/pingcap/tidb/pull/8048)での`utf8mb4`文字セットの指定のサポート
 -   `TRUNCATE`の組み込み関数が符号なし整数型[＃8069](https://github.com/pingcap/tidb/pull/8069)のパラメーターをサポートするようにします。
 -   場合によっては、統計モジュールの主キーの選択性推定の問題を修正します[＃8150](https://github.com/pingcap/tidb/pull/8150)
@@ -33,13 +33,13 @@ title: TiDB 2.0.9 Release Notes
 
 ## PD {#pd}
 
--   etcdの起動エラーが原因でPDサーバーがスタックする問題を修正します[＃1267](https://github.com/pingcap/pd/pull/1267)
--   `pd-ctl` [＃1308](https://github.com/pingcap/pd/pull/1308)キーの読み取りに関連する問題を修正し[＃1298](https://github.com/pingcap/pd/pull/1298) [＃1299](https://github.com/pingcap/pd/pull/1299)
+-   etcdの起動失敗が原因でPDサーバーがスタックする問題を修正します[＃1267](https://github.com/pingcap/pd/pull/1267)
+-   `pd-ctl`リージョンキーの[＃1308](https://github.com/pingcap/pd/pull/1308)に関連する問題を修正し[＃1298](https://github.com/pingcap/pd/pull/1298) [＃1299](https://github.com/pingcap/pd/pull/1299)
 -   `regions/check`が間違った結果を返す問題を修正します[＃1311](https://github.com/pingcap/pd/pull/1311)
 -   PDの参加に失敗した後、PDが参加を再開できない問題を修正します[＃1279](https://github.com/pingcap/pd/pull/1279)
 
 ## TiKV {#tikv}
 
--   `kv_scan`のインターフェイスに`end-key`の制限を追加します[＃3749](https://github.com/tikv/tikv/pull/3749)
+-   `kv_scan`インターフェイス[＃3749](https://github.com/tikv/tikv/pull/3749)に`end-key`制限を追加します。
 -   `max-tasks-xxx`構成を破棄し、 [＃3093](https://github.com/tikv/tikv/pull/3093)を追加し`max-tasks-per-worker-xxx`
 -   RocksDB3の`CompactFiles`の問題を修正し[＃3789](https://github.com/tikv/tikv/pull/3789)

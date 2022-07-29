@@ -9,7 +9,7 @@ TiDB Cloudは、TiCDCキャパシティユニット（TCU）でチェンジフ�
 
 ## TiCDC容量ユニットの数 {#number-of-ticdc-capacity-units}
 
-TiDBクラスタごとに、TiCDCキャパシティーユニットの数は、クラスタのすべてのTiKVノードの合計vCPU数に応じて、次のようにTiDB Cloudによって設定されます。
+TiDBクラスタごとに、TiCDCキャパシティーユニットの数は、クラスタのすべてのTiKVノードの合計vCPU数に応じて、 TiDB Cloudによって次のように設定されます。
 
 | すべてのTiKVノードの合計vCPU | TCUの数 |
 | ------------------ | ----- |
@@ -22,7 +22,7 @@ TiDBクラスタごとに、TiCDCキャパシティーユニットの数は、�
 
 次の表に、各TiCDCキャパシティユニット（TCU）のTiDB Cloudの価格を示します。
 
-| 領域                    | TCU価格（$ / hr） |
+| リージョン                 | TCU価格（$ / hr） |
 | --------------------- | ------------- |
 | aws / us-west-2       | 0.1307ドル      |
 | aws / us-east-1       | 0.1307ドル      |

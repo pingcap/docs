@@ -17,7 +17,7 @@ title: TiDB 2.1 RC5 Release Notes
 -   SQL実行エンジン
     -   ワイドテーブルの挿入または更新時のTiDBのパフォーマンスを向上させる[＃8024](https://github.com/pingcap/tidb/pull/8024)
     -   `Truncate`組み込み関数`int`でunsigned1フラグをサポートし[＃8068](https://github.com/pingcap/tidb/pull/8068) 。
-    -   JSONデータを10進タイプ[＃8109](https://github.com/pingcap/tidb/pull/8109)に変換するときに発生したエラーを修正します
+    -   JSONデータを10進タイプ[＃8109](https://github.com/pingcap/tidb/pull/8109)に変換中に発生したエラーを修正しました
     -   `Update`フロートタイプ[＃8170](https://github.com/pingcap/tidb/pull/8170)のときに発生したエラーを修正します
 -   統計
     -   場合によっては、ポイントクエリ中の誤った統計の問題を修正します[＃8035](https://github.com/pingcap/tidb/pull/8035)
@@ -32,10 +32,10 @@ title: TiDB 2.1 RC5 Release Notes
     <!---->
 
     -   [＃8096](https://github.com/pingcap/tidb/pull/8096)のテーブルデータを取得するときに発生したエラーを修正し`infoschema.profiling`
-    -   UNIXソケットをpumpsクライアントに置き換えて、 [＃8098](https://github.com/pingcap/tidb/pull/8098)を書き込みます。
+    -   UNIXソケットをpumpsクライアントに置き換えて、binlogを書き込みます[＃8098](https://github.com/pingcap/tidb/pull/8098)
     -   `tidb_slow_log_threshold`の環境変数のしきい値を追加します。これにより、低速ログ[＃8094](https://github.com/pingcap/tidb/pull/8094)が動的に設定されます。
     -   `tidb_query_log_max_len`環境変数がログを動的に設定している間に切り捨てられたSQLステートメントの元の長さを追加します[＃8200](https://github.com/pingcap/tidb/pull/8200)
-    -   `tidb_opt_write_row_id`の環境変数を追加して、書き込みを許可するかどうかを制御し`_tidb_rowid` [＃8218](https://github.com/pingcap/tidb/pull/8218)
+    -   `tidb_opt_write_row_id`環境変数を追加して、書き込みを許可するかどうかを制御します`_tidb_rowid` [＃8218](https://github.com/pingcap/tidb/pull/8218)
     -   オーバーバウンドスキャンを回避するために、ticlientの`Scan`コマンドに上限を追加し[＃8247](https://github.com/pingcap/tidb/pull/8247) [＃8081](https://github.com/pingcap/tidb/pull/8081)
 -   DDL
     -   トランザクションでDDLステートメントを実行するとエラーが発生する場合がある問題を修正します[＃8056](https://github.com/pingcap/tidb/pull/8056)
@@ -57,7 +57,7 @@ title: TiDB 2.1 RC5 Release Notes
 
 -   `WriteConflict`のエラーメッセージを[＃3750](https://github.com/tikv/tikv/pull/3750)する
 -   panicマークファイルを追加する[＃3746](https://github.com/tikv/tikv/pull/3746)
--   grpcioをダウングレードして、新しいバージョンのgRPC1によって引き起こされるセグメンテーション違反の問題を回避し[＃3650](https://github.com/tikv/tikv/pull/3650)
+-   新しいバージョンのgRPC1によって引き起こされるセグメント違反の問題を回避するためにgrpcioをダウングレードし[＃3650](https://github.com/tikv/tikv/pull/3650)
 -   `kv_scan`のインターフェイスに上限を追加します[＃3749](https://github.com/tikv/tikv/pull/3749)
 
 ## ツール {#tools}

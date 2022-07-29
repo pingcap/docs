@@ -7,17 +7,17 @@ summary: Learn the common use cases of TiDB tools and how to choose the tools.
 
 このドキュメントでは、TiDBツールの一般的な使用例と、シナリオに適したツールを選択する方法を紹介します。
 
-## 物理マシンまたは仮想マシンにデプロイを導入して運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
+## 物理マシンまたは仮想マシンにTiDBをデプロイして運用する {#deploy-and-operate-tidb-on-physical-or-virtual-machines}
 
 物理マシンまたは仮想マシンにTiDBを展開して操作する必要がある場合は、 [TiUP](/tiup/tiup-overview.md)をインストールしてから、TiUPを使用してTiDB、PD、TiKVなどのTiDBコンポーネントを管理できます。
 
 ## KubernetesでTiDBをデプロイして運用する {#deploy-and-operate-tidb-in-kubernetes}
 
-KubernetesでTiDBをデプロイして運用する必要がある場合は、Kubernetesクラスタをデプロイしてから、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して、TiDBクラスタをデプロイおよび操作できます。
+KubernetesでTiDBをデプロイして運用する必要がある場合は、Kubernetesクラスタをデプロイしてから[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)をデプロイできます。その後、 TiDB Operatorを使用して、TiDBクラスタをデプロイおよび操作できます。
 
 ## CSVからTiDBにデータをインポートする {#import-data-from-csv-to-tidb}
 
-他のツールによってエクスポートされた互換性のあるCSVファイルをTiDBにインポートする必要がある場合は、 [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)を使用します。
+他のツールでエクスポートされた互換性のあるCSVファイルをTiDBにインポートする必要がある場合は、 [TiDB Lightning](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)を使用します。
 
 ## MySQL/ Auroraから完全なデータをインポートする {#import-full-data-from-mysql-aurora}
 

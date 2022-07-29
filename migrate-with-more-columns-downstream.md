@@ -14,7 +14,7 @@ summary: Learn how to migrate data to a downstream TiDB table with more columns 
 
 ## DMを使用して、より多くの列を持つダウンストリームTiDBテーブルにデータを移行します {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
 
-アップストリームのbinlogを複製する場合、DMはダウンストリームの現在のテーブルスキーマを使用してbinlogを解析し、対応するDMLステートメントを生成しようとします。アップストリームbinlogのテーブルの列番号が、ダウンストリームテーブルスキーマの列番号と一致しない場合、次のエラーが発生します。
+アップストリームのbinlogを複製する場合、DMはダウンストリームの現在のテーブルスキーマを使用してbinlogを解析し、対応するDMLステートメントを生成しようとします。アップストリームbinlogのテーブルの列番号がダウンストリームテーブルスキーマの列番号と一致しない場合、次のエラーが発生します。
 
 ```json
 "errors": [
@@ -40,7 +40,7 @@ CREATE TABLE `messages` (
 )
 ```
 
-次に、ダウンストリームテーブルスキーマの例を示します。
+以下は、ダウンストリームテーブルスキーマの例です。
 
 ```sql
 # Downstream table schema
@@ -80,7 +80,7 @@ DMがダウンストリームテーブルスキーマを使用してアップス
     | `-master-addr`      | dmctlが接続されるクラスタのDMマスターノードの`${advertise-addr}`を指定します。 `${advertise-addr}`は、DMマスターが外部にアドバタイズするアドレスを示します。 |
     | `binlog-schema set` | スキーマ情報を手動で設定します。                                                                                       |
     | `-s`                | ソースを指定します。 `${source-id}`はMySQLデータのソースIDを示します。                                                         |
-    | `${task-name}`      | データ移行タスクの`task.yaml`構成ファイルで定義されている移行タスクの名前を指定します。                                                      |
+    | `${task-name}`      | データ移行タスクの`task.yaml`の構成ファイルで定義されている移行タスクの名前を指定します。                                                     |
     | `${database-name}`  | データベースを指定します。 `${database-name}`は、アップストリームデータベースの名前を示します。                                              |
     | `${table-name}`     | アップストリームテーブルの名前を指定します。                                                                                 |
     | `${schema-file}`    | 設定するテーブルスキーマファイルを指定します。                                                                                |

@@ -13,9 +13,9 @@ summary: Learn how to explore and use the features of TiDB HTAP.
 
 ## ユースケース {#use-cases}
 
-TiDB HTAPは、急速に増加する大量のデータを処理し、DevOpsのコストを削減し、オンプレミス環境またはクラウド環境のいずれかに簡単に導入できるため、データ資産の価値をリアルタイムで実現できます。
+TiDB HTAPは、急速に増加する大量のデータを処理し、DevOpsのコストを削減し、オンプレミス環境またはクラウド環境のいずれかに簡単にデプロイできるため、データ資産の価値をリアルタイムで実現できます。
 
-HTAPの一般的な使用例は次のとおりです。
+以下は、HTAPの一般的な使用例です。
 
 -   ハイブリッドワークロード
 
@@ -23,7 +23,7 @@ HTAPの一般的な使用例は次のとおりです。
 
 -   リアルタイムストリーム処理
 
-    リアルタイムストリーム処理シナリオでTiDBを使用する場合、TiDBは、常に流入するすべてのデータをリアルタイムで照会できるようにします。同時に、TiDBは、同時性の高いデータワークロードとビジネスインテリジェンス（BI）クエリを処理することもできます。
+    リアルタイムストリーム処理シナリオでTiDBを使用する場合、TiDBは、常に流入するすべてのデータをリアルタイムでクエリできるようにします。同時に、TiDBは、同時性の高いデータワークロードとビジネスインテリジェンス（BI）クエリも処理できます。
 
 -   データハブ
 
@@ -39,7 +39,7 @@ TiDBでは、オンライントランザクション処理（OLTP）用の行ベ
 
 ## 環境の準備 {#environment-preparation}
 
-TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応するストレージエンジンを展開する必要があります。データ量が多い場合（たとえば、100 T）、主要なソリューションとしてTiFlash超並列処理（MPP）を使用し、補足的なソリューションとしてTiSparkを使用することをお勧めします。
+TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応するストレージエンジンを展開する必要があります。データ量が多い場合（たとえば、100 T）、プライマリソリューションとしてTiFlash超並列処理（MPP）を使用し、補足ソリューションとしてTiSparkを使用することをお勧めします。
 
 -   TiFlash
 
@@ -49,7 +49,7 @@ TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応す�
 
         -   ユースケースで小規模な分析処理とアドホッククエリを使用するOLTPが必要な場合は、1つまたは複数のTiFlashノードを展開します。それらは分析クエリの速度を劇的に向上させることができます。
         -   OLTPスループットがTiFlashノードのI/O使用率に大きな圧力をかけない場合、各TiFlashノードは計算により多くのリソースを使用するため、TiFlashクラスタはほぼ線形のスケーラビリティを持つことができます。 TiFlashノードの数は、予想されるパフォーマンスと応答時間に基づいて調整する必要があります。
-        -   ネットワークと物理ディスクの書き込み容量が限られているために、OLTPスループットが比較的高い場合（たとえば、書き込みまたは更新のスループットが1,000万ライン/時間より高い場合）、TiKVとTiFlash間のI/Oがボトルネックになります。また、ホットスポットの読み取りと書き込みを行う傾向があります。この場合、TiFlashノードの数は分析処理の計算量と複雑な非線形関係にあるため、システムの実際の状態に基づいてTiFlashノードの数を調整する必要があります。
+        -   ネットワークと物理ディスクの書き込み容量が限られているために、OLTPスループットが比較的高い場合（たとえば、書き込みまたは更新のスループットが1,000万行/時間より高い場合）、TiKVとTiFlash間のI/Oがボトルネックになります。また、ホットスポットの読み取りと書き込みを行う傾向があります。この場合、TiFlashノードの数は分析処理の計算量と複雑な非線形関係にあるため、システムの実際の状態に基づいてTiFlashノードの数を調整する必要があります。
 
 -   TiSpark
 
@@ -60,10 +60,10 @@ TiDB HTAPの機能を調べる前に、データ量に応じてTiDBと対応す�
 
 ## データの準備 {#data-preparation}
 
-TiFlashがデプロイされた後、TiKVはデータをTiFlashに自動的に複製しません。 TiFlashに複製する必要があるテーブルを手動で指定する必要があります。その後、TiDBは対応するTiFlashレプリカを作成します。
+TiFlashが展開された後、TiKVはデータをTiFlashに自動的に複製しません。 TiFlashに複製する必要があるテーブルを手動で指定する必要があります。その後、TiDBは対応するTiFlashレプリカを作成します。
 
 -   TiDBクラスターにデータがない場合は、最初にデータをTiDBに移行します。詳細については、 [データ移行](/migration-overview.md)を参照してください。
--   TiDBクラスタにアップストリームからレプリケートされたデータが既にある場合、TiFlashがデプロイされた後、データレプリケーションは自動的に開始されません。 TiFlashに複製するテーブルを手動で指定する必要があります。詳細については、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)を参照してください。
+-   TiDBクラスタにアップストリームから複製されたデータがすでにある場合、TiFlashがデプロイされた後、データ複製は自動的に開始されません。 TiFlashに複製するテーブルを手動で指定する必要があります。詳細については、 [TiFlashを使用する](/tiflash/tiflash-overview.md#use-tiflash)を参照してください。
 
 ## 情報処理 {#data-processing}
 
@@ -74,14 +74,14 @@ TiDBを使用すると、クエリまたは書き込み要求のSQLステート�
 > TiFlashのMPPモードはデフォルトで有効になっています。 SQLステートメントが実行されると、TiDBはオプティマイザーを介してMPPモードで実行するかどうかを自動的に決定します。
 >
 > -   TiFlashのMPPモードを無効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)システム変数の値を`OFF`に設定します。
-> -   クエリ実行でTiFlashのMPPモードを強制的に有効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)と[tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
-> -   TiDBが特定のクエリを実行するためにMPPモードを選択するかどうかを確認するには、 [MPPモードでのステートメントの説明](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`オペレーターが含まれている場合、MPPモードが使用されています。
+> -   クエリ実行に対してTiFlashのMPPモードを強制的に有効にするには、 [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50)と[tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51)の値を`ON`に設定します。
+> -   TiDBが特定のクエリを実行するためにMPPモードを選択するかどうかを確認するには、 [MPPモードでのステートメントの説明](/explain-mpp.md#explain-statements-in-the-mpp-mode)を参照してください。 `EXPLAIN`ステートメントの出力に`ExchangeSender`および`ExchangeReceiver`演算子が含まれている場合、MPPモードが使用されています。
 
 ## パフォーマンス監視 {#performance-monitoring}
 
 TiDBを使用する場合、次のいずれかの方法でTiDBクラスタのステータスとパフォーマンスメトリックを監視できます。
 
--   [TiDBダッシュボード](/dashboard/dashboard-intro.md) ：TiDBクラスタの全体的な実行状況を確認し、読み取りおよび書き込みトラフィックの分布と傾向を分析し、低速クエリの詳細な実行情報を学習できます。
+-   [TiDBダッシュボード](/dashboard/dashboard-intro.md) ：TiDBクラスタの全体的な実行ステータスを確認し、読み取りおよび書き込みトラフィックの分布と傾向を分析し、低速クエリの詳細な実行情報を学習できます。
 -   [監視システム（Prometheus＆Grafana）](/grafana-overview-dashboard.md) ：PD、TiDB、TiKV、TiFlash、TiCDC、Node_exporterなどのTiDBクラスター関連コンポーネントの監視パラメーターを確認できます。
 
 TiDBクラスタとTiFlashクラスタのアラートルールを確認するには、 [TiDBクラスタアラートルール](/alert-rules.md)と[TiFlashアラートルール](/tiflash/tiflash-alert-rules.md)を参照してください。
@@ -96,7 +96,7 @@ TiDBの使用中に問題が発生した場合は、次のドキュメントを�
 -   [TiDBクラスタトラブルシューティングガイド](/troubleshoot-tidb-cluster.md)
 -   [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 
-[Githubの問題](https://github.com/pingcap/tiflash/issues)を作成するか、 [AskTUG](https://asktug.com/)に質問を送信することもできます。
+[Githubの問題](https://github.com/pingcap/tiflash/issues)を作成するか、 [AskTUG](https://asktug.com/)で質問を送信することもできます。
 
 ## 次は何ですか {#what-s-next}
 

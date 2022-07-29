@@ -5,11 +5,11 @@ summary: Learn steps, rules, and examples to create a database.
 
 # データベースを作成する {#create-a-database}
 
-このドキュメントでは、SQLとさまざまなプログラミング言語を使用してデータベースを作成する方法について説明し、データベース作成のルールを示します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として取り上げ、データベース作成の手順を説明します。
+このドキュメントでは、SQLとさまざまなプログラミング言語を使用してデータベースを作成する方法について説明し、データベース作成のルールを示します。このドキュメントでは、データベース作成の手順を説明するために、 [書店](/develop/dev-guide-bookshop-schema-design.md)のアプリケーションを例として取り上げます。
 
 ## 始める前に {#before-you-start}
 
-データベースを作成する前に、次の手順を実行します。
+データベースを作成する前に、次のことを行ってください。
 
 -   [TiDB Cloud開発者層でTiDBクラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
@@ -22,7 +22,7 @@ TiDBの[データベース](/develop/dev-guide-schema-design-overview.md)個の�
 
 データベースを作成するには、 `CREATE DATABASE`ステートメントを使用できます。
 
-たとえば、データベースが存在しない場合に`bookshop`という名前のデータベースを作成するには、次のステートメントを使用します。
+たとえば、 `bookshop`という名前のデータベースが存在しない場合に作成するには、次のステートメントを使用します。
 
 {{< copyable "" >}}
 
@@ -45,7 +45,7 @@ mysql
     -e "CREATE DATABASE IF NOT EXISTS bookshop;"
 ```
 
-## データベースをビューする {#view-databases}
+## データベースをビュー {#view-databases}
 
 クラスタのデータベースを表示するには、 [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)ステートメントを使用します。
 
@@ -62,7 +62,7 @@ mysql
     -e "SHOW DATABASES;"
 ```
 
-次に、出力例を示します。
+以下は出力例です。
 
 ```
 +--------------------+
@@ -80,9 +80,9 @@ mysql
 
 -   [データベースの命名規則](/develop/dev-guide-object-naming-guidelines.md)に従い、データベースに意味のある名前を付けます。
 -   TiDBには、 `test`という名前のデフォルトデータベースが付属しています。ただし、必要がない場合は、実稼働環境で使用することはお勧めしません。 SQLセッションで`CREATE DATABASE`ステートメントを使用して独自のデータベースを作成し、 [`USE {databasename};`](/sql-statements/sql-statement-use.md)ステートメントを使用して現在のデータベースを変更できます。
--   `root`人のユーザーを使用して、データベース、ロール、ユーザーなどのオブジェクトを作成します。ロールとユーザーに必要な権限のみを付与します。
--   ベストプラクティスとして、データベーススキーマの変更を実行するには、ドライバーまたはORMの代わりに**MySQLコマンドラインクライアント**または<strong>MySQLGUI</strong>クライアントを使用することをお勧めします。
+-   `root`ユーザーを使用して、データベース、ロール、ユーザーなどのオブジェクトを作成します。ロールとユーザーに必要な権限のみを付与します。
+-   ベストプラクティスとして、データベーススキーマの変更を実行するために、ドライバーまたはORMの代わりに**MySQLコマンドラインクライアント**または<strong>MySQLGUI</strong>クライアントを使用することをお勧めします。
 
 ## 次のステップ {#next-step}
 
-データベースを作成したら、それに**テーブル**を追加できます。詳細については、 [テーブルを作成する](/develop/dev-guide-create-table.md)を参照してください。
+データベースを作成した後、それに**テーブル**を追加できます。詳細については、 [テーブルを作成する](/develop/dev-guide-create-table.md)を参照してください。

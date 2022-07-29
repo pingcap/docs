@@ -7,9 +7,9 @@ aliases: ['/tidbcloud/glossary']
 
 # TiDB Cloud用語集 {#tidb-cloud-glossary}
 
-## A {#a}
+## あ {#a}
 
-### 酸 {#acid}
+### ACID {#acid}
 
 ACIDは、トランザクションの4つの主要なプロパティである、アトミック性、一貫性、分離、および耐久性を指します。これらの各プロパティについて、以下で説明します。
 
@@ -73,11 +73,11 @@ TiDB Cloudアカウントを管理するために作成するエンティティ�
 
 -   TiDB Cloudリージョン
 
-    同じ地理的領域に展開された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)ノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンに展開されます。
+    同じ地理的領域に展開された[TiKV](https://docs.pingcap.com/tidb/stable/tidb-storage)ノードのセット。 TiKVノードのセットは、そのリージョン内の少なくとも3つの異なるアベイラビリティーゾーンにデプロイされます。
 
 -   TiDBリージョン
 
-    TiDBのデータの基本単位。 TiKVは、Key-Valueスペースを一連の連続するキーセグメントに分割し、各セグメントはリージョンと呼ばれます。各リージョンのデフォルトのサイズ制限は96MBで、構成できます。
+    TiDBのデータの基本単位。 TiKVは、Key-Valueスペースを一連の連続するKeyセグメントに分割し、各セグメントはリージョンと呼ばれます。各リージョンのデフォルトのサイズ制限は96MBで、構成できます。
 
 ### レプリカ {#replica}
 

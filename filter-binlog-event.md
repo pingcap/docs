@@ -3,7 +3,7 @@ title: Filter Binlog Events
 summary: Learn how to filter binlog events when migrating data.
 ---
 
-# Binlogイベントをフィルタリングする {#filter-binlog-events}
+# Binlogイベントのフィルタリング {#filter-binlog-events}
 
 このドキュメントでは、DMを使用して継続的な増分データレプリケーションを実行するときにbinlogイベントをフィルタリングする方法について説明します。詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 
@@ -14,7 +14,7 @@ summary: Learn how to filter binlog events when migrating data.
 
 ## Configuration / コンフィグレーション {#configuration}
 
-binlogイベントフィルターを使用するには、以下に示すように、DMのタスク構成ファイルに`filter`を追加します。
+binlogイベントフィルターを使用するには、次に示すように、DMのタスク構成ファイルに`filter`を追加します。
 
 ```yaml
 filters:
@@ -26,7 +26,7 @@ filters:
     action: Ignore
 ```
 
--   `table-pattern` ：一致するスキーマまたはテーブルをフィルターし`schema-pattern`
+-   `schema-pattern` ：スキーマまたは`table-pattern`に一致するフィルター
 
 -   `events` ：binlogイベントをフィルタリングします。サポートされているイベントを以下の表に示します。
 
@@ -44,7 +44,7 @@ filters:
     | データベースを作成する  | DDL   | データベースイベントの作成     |
     | データベースを削除します | DDL   | データベースイベントの削除     |
     | テーブルを作成する    | DDL   | テーブルイベントの作成       |
-    | インデックスを作成する  | DDL   | インデックスイベントの作成     |
+    | インデックスを作成する  | DDL   | インデックスイベントを作成する   |
     | ドロップテーブル     | DDL   | ドロップテーブルイベント      |
     | テーブルを切り捨てます  | DDL   | テーブルイベントの切り捨て     |
     | テーブルの名前を変更   | DDL   | テーブルイベントの名前を変更    |
@@ -58,14 +58,14 @@ filters:
     -   `Do` ：許可リスト。次の2つの条件のいずれかを満たす場合、binlogイベントが複製されます。
 
         -   イベントはルール設定と一致します。
-        -   sql-patternが指定されており、イベントのSQLステートメントがいずれかのsql-patternオプションと一致します。
+        -   sql-patternが指定されており、イベントのSQLステートメントがどのsql-patternオプションとも一致します。
 
     -   `Ignore` ：ブロックリスト。次の2つの条件のいずれかを満たす場合、binlogイベントは除外されます。
 
         -   イベントはルール設定と一致します。
-        -   sql-patternが指定されており、イベントのSQLステートメントがいずれかのsql-patternオプションと一致します。
+        -   sql-patternが指定されており、イベントのSQLステートメントがどのsql-patternオプションとも一致します。
 
-    `Do`と`Ignore`の両方が構成されている場合、 `Ignore`は`Do`よりも優先されます。つまり、 `Ignore`と`Do`の両方の条件を満たすイベントが除外されます。
+    `Do`と`Ignore`の両方が構成されている場合、 `Ignore`は`Do`よりも優先されます。つまり、 `Ignore`と`Do`の両方の条件を満たすイベントは除外されます。
 
 ## アプリケーションシナリオ {#application-scenarios}
 

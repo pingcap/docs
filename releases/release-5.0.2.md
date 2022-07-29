@@ -20,9 +20,9 @@ TiDBバージョン：5.0.2
 
 -   TiKV
 
-    -   デフォルトで休止状態機能を有効にする[＃10266](https://github.com/tikv/tikv/pull/10266)
+    -   デフォルトで休止状態リージョン機能を有効にする[＃10266](https://github.com/tikv/tikv/pull/10266)
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
@@ -34,7 +34,7 @@ TiDBバージョン：5.0.2
     -   TiCDCのスキャン速度[＃10151](https://github.com/tikv/tikv/pull/10151)の背圧をサポートする
     -   TiCDCの初期スキャンのメモリ使用量を減らす[＃10133](https://github.com/tikv/tikv/pull/10133)
     -   悲観的なトランザクションでのTiCDCの古い値機能のキャッシュヒット率を改善する[＃10089](https://github.com/tikv/tikv/pull/10089)
-    -   ホットスポット書き込みがある場合にリージョンサイズの増加がスプリット速度を超えるという問題を軽減するために、リージョンをより均等に分割します[＃9785](https://github.com/tikv/tikv/issues/9785)
+    -   ホットスポット書き込みがある場合にリージョンサイズの増加がスプリット速度を超えるという問題を軽減するために、リージョンをより均等に分割する[＃9785](https://github.com/tikv/tikv/issues/9785)
 
 -   TiFlash
 
@@ -45,9 +45,9 @@ TiDBバージョン：5.0.2
 
     -   TiCDC
 
-        -   テーブルのメモリ消費量の監視メトリックを追加します[＃1885](https://github.com/pingcap/tiflow/pull/1885)
-        -   並べ替え段階[＃1863](https://github.com/pingcap/tiflow/pull/1863)でメモリとCPUの使用量を最適化する
-        -   ユーザーの混乱を引き起こす可能性のある不要なログ情報を削除する[＃1759](https://github.com/pingcap/tiflow/pull/1759)
+        -   テーブルのメモリ消費量の監視メトリックを追加する[＃1885](https://github.com/pingcap/tiflow/pull/1885)
+        -   ソート段階でメモリとCPUの使用量を最適化する[＃1863](https://github.com/pingcap/tiflow/pull/1863)
+        -   ユーザーの混乱を引き起こす可能性のあるいくつかの役に立たないログ情報を削除する[＃1759](https://github.com/pingcap/tiflow/pull/1759)
 
     -   バックアップと復元（BR）
 
@@ -57,7 +57,7 @@ TiDBバージョン：5.0.2
 
     -   Dumpling
 
-        -   バックアップ操作が失敗したときにエラーが出力されない問題を修正します[＃280](https://github.com/pingcap/dumpling/pull/280)
+        -   バックアップ操作が失敗してもエラーが出力されない問題を修正します[＃280](https://github.com/pingcap/dumpling/pull/280)
 
 ## バグの修正 {#bug-fixes}
 
@@ -65,12 +65,12 @@ TiDBバージョン：5.0.2
 
     -   場合によっては[＃24717](https://github.com/pingcap/tidb/issues/24717)インデックスとインデックス結合を使用することによって引き起こされるpanicの問題を修正し[＃24547](https://github.com/pingcap/tidb/issues/24547) [＃24716](https://github.com/pingcap/tidb/issues/24716)
     -   準備されたプランキャッシュ`point get`がトランザクション[＃24741](https://github.com/pingcap/tidb/issues/24741)の`point get`ステートメントによって誤って使用される問題を修正します。
-    -   照合順序が`ascii_bin`または[＃24569](https://github.com/pingcap/tidb/issues/24569)の場合に間違ったプレフィックスインデックス値を書き込む問題を修正し`latin1_bin`
+    -   照合順序が`ascii_bin`または[＃24569](https://github.com/pingcap/tidb/issues/24569)の場合に、間違ったプレフィックスインデックス値を書き込む問題を修正し`latin1_bin` 。
     -   進行中のトランザクションがGCワーカーによって中断される可能性があるという問題を修正します[＃24591](https://github.com/pingcap/tidb/issues/24591)
     -   `new-collation`が有効で、 `new-row-format`が無効の場合、クラスター化インデックスでポイントクエリが間違ってしまう可能性があるバグを修正します[＃24541](https://github.com/pingcap/tidb/issues/24541)
-    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングします
-    -   `HAVING`句[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するpanicの問題を修正します
-    -   列プルーニングの改善により、 `Apply`および`Join`の演算子の結果が正しくなくなる問題を修正します[＃23887](https://github.com/pingcap/tidb/issues/23887)
+    -   シャッフルハッシュ結合[＃24490](https://github.com/pingcap/tidb/pull/24490)のパーティションキーの変換をリファクタリングする
+    -   `HAVING`節[＃24045](https://github.com/pingcap/tidb/issues/24045)を含むクエリのプランを作成するときに発生するpanicの問題を修正します
+    -   列プルーニングの改善により、 `Apply`および`Join`の演算子の結果が間違ってしまう問題を修正します[＃23887](https://github.com/pingcap/tidb/issues/23887)
     -   非同期コミットからフォールバックされたプライマリロックを解決できないバグを修正します[＃24384](https://github.com/pingcap/tidb/issues/24384)
     -   fm-sketchレコードの重複を引き起こす可能性のある統計のGCの問題を修正します[＃24357](https://github.com/pingcap/tidb/pull/24357)
     -   悲観的ロックが`ErrKeyExists`エラー[＃23799](https://github.com/pingcap/tidb/issues/23799)を受け取ったときに、不必要な悲観的ロールバックを回避します。
@@ -85,7 +85,7 @@ TiDBバージョン：5.0.2
     -   古い値の読み取りによって引き起こされる[＃9981](https://github.com/tikv/tikv/issues/9981)の問題を修正します[＃9996](https://github.com/tikv/tikv/issues/9996)
     -   照合順序が`latin1_bin`の場合に、クラスター化された主キー列の2次インデックスの値が空になる問題を修正し[＃24548](https://github.com/pingcap/tidb/issues/24548) 。
     -   panicが発生したときにTiKVがコアダンプファイルを生成できるようにする`abort-on-panic`の構成を追加します。ユーザーは、コアダンプ[＃10216](https://github.com/tikv/tikv/pull/10216)を有効にするために環境を正しく構成する必要があります。
-    -   TiKVがビジーでないときに発生する`point get`クエリのパフォーマンスリグレッションの問題を修正します[＃10046](https://github.com/tikv/tikv/issues/10046)
+    -   TiKVがビジーでないときに発生する`point get`クエリのパフォーマンス回帰の問題を修正します[＃10046](https://github.com/tikv/tikv/issues/10046)
 
 -   PD
 
@@ -95,13 +95,13 @@ TiDBバージョン：5.0.2
 
 -   TiFlash
 
-    -   共有デルタインデックスを同時に複製した場合の誤った結果の問題を修正
+    -   共有デルタインデックスを同時に複製するときの誤った結果の問題を修正します
     -   TiFlashが不完全なデータで再起動できないという潜在的な問題を修正します
     -   古いdmファイルが自動的に削除されない問題を修正します
     -   圧縮フィルター機能が有効になっているときに発生する可能性のあるpanicを修正します
     -   `ExchangeSender`が重複データを送信するという潜在的な問題を修正します
-    -   TiFlashが非同期コミットからフォールバックされたロックを解決できない問題を修正します
-    -   `TIMEZONE`タイプのキャスト結果に`TIMESTAMP`タイプが含まれている場合に誤った結果が返される問題を修正しました
+    -   TiFlashが非同期コミットからフォールバックしたロックを解決できない問題を修正します
+    -   `TIMEZONE`タイプのキャスト結果に`TIMESTAMP`タイプが含まれている場合に、誤った結果が返される問題を修正しました
     -   セグメント分割中に発生するTiFlashpanicの問題を修正します
     -   非ルートMPPタスクに関する実行情報が正確でないという問題を修正します
 
@@ -110,10 +110,10 @@ TiDBバージョン：5.0.2
     -   TiCDC
 
         -   Avro出力[＃1712](https://github.com/pingcap/tiflow/pull/1712)でタイムゾーン情報が失われる問題を修正します
-        -   Unified Sorterでの古い一時ファイルのクリーンアップをサポートし、 `sort-dir`ディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
+        -   Unified Sorterで古い一時ファイルのクリーンアップをサポートし、 `sort-dir`のディレクトリの共有を禁止します[＃1742](https://github.com/pingcap/tiflow/pull/1742)
         -   多くの古いリージョンが存在する場合に発生するKVクライアントのデッドロックバグを修正します[＃1599](https://github.com/pingcap/tiflow/issues/1599)
         -   `--cert-allowed-cn`フラグ[＃1697](https://github.com/pingcap/tiflow/pull/1697)の間違ったヘルプ情報を修正します
-        -   [＃1750](https://github.com/pingcap/tiflow/pull/1750)にデータを複製するときに`SUPER`特権を必要とする`explicit_defaults_for_timestamp`の更新を元に戻します。
+        -   [＃1750](https://github.com/pingcap/tiflow/pull/1750)にデータを複製するときに`SUPER`特権を必要とする`explicit_defaults_for_timestamp`の更新を元に戻します
         -   シンクフロー制御をサポートして、メモリオーバーフローのリスクを軽減します[＃1840](https://github.com/pingcap/tiflow/pull/1840)
         -   テーブルを移動するときにレプリケーションタスクが停止する可能性があるバグを修正します[＃1828](https://github.com/pingcap/tiflow/pull/1828)
         -   TiCDCチェンジフィードチェックポイント[＃1759](https://github.com/pingcap/tiflow/pull/1759)の停滞により、TiKVGCセーフポイントがブロックされる問題を修正します。
@@ -121,8 +121,8 @@ TiDBバージョン：5.0.2
     -   バックアップと復元（BR）
 
         -   ログの復元中に`DELETE`のイベントが失われる問題を修正します[＃1063](https://github.com/pingcap/br/issues/1063)
-        -   BRがTiKV1にあまりにも多くの役に立たないRPC要求を送信する原因となるバグを修正し[＃1037](https://github.com/pingcap/br/pull/1037)
-        -   バックアップ操作が失敗したときにエラーが出力されない問題を修正します[＃1043](https://github.com/pingcap/br/pull/1043)
+        -   BRがあまりにも多くの役に立たないRPCリクエストをTiKV1に送信する原因となるバグを修正し[＃1037](https://github.com/pingcap/br/pull/1037)
+        -   バックアップ操作が失敗してもエラーが出力されない問題を修正します[＃1043](https://github.com/pingcap/br/pull/1043)
 
     -   TiDB Lightning
 

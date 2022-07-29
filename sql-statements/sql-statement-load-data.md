@@ -5,7 +5,7 @@ summary: An overview of the usage of LOAD DATA for the TiDB database.
 
 # データを読み込む {#load-data}
 
-`LOAD DATA`ステートメントのバッチは、データをTiDBテーブルにロードします。
+`LOAD DATA`ステートメントバッチはデータをTiDBテーブルにロードします。
 
 ## あらすじ {#synopsis}
 
@@ -41,7 +41,7 @@ LoadDataStmt ::=
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-上記のパラメータを指定しない場合、インポートされたデータはデフォルトで次の方法で処理されます。
+上記のパラメーターを指定しない場合、インポートされたデータはデフォルトで次の方法で処理されます。
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY ''
@@ -50,7 +50,7 @@ LINES TERMINATED BY '\n'
 
 ### <code>IGNORE number LINES</code> {#code-ignore-number-lines-code}
 
-`IGNORE number LINES`パラメータを設定することにより、ファイルの最初の`number`行を無視できます。たとえば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行は無視されます。
+`IGNORE number LINES`パラメーターを構成することにより、ファイルの最初の`number`行を無視できます。たとえば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行は無視されます。
 
 ## 例 {#examples}
 
@@ -77,7 +77,7 @@ Query OK, 0 rows affected (0.14 sec)
 
 次の例では、 `LOAD DATA`を使用してデータをインポートします。区切り文字としてコンマを指定します。データを囲む二重引用符は無視されます。ファイルの最初の行は無視されます。
 
-エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されたコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
+エラーメッセージ`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、 [エラー1148（42000）：使用されているコマンドはこのTiDBバージョンでは許可されていません](/faq/tidb-faq.md#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version)を参照してください。
 
 {{< copyable "" >}}
 
@@ -108,7 +108,7 @@ LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikes
 >
 > TiDBの以前のリリースでは、20000行ごとに`LOAD DATA`コミットされていました。デフォルトでは、TiDBは1つのトランザクションですべての行をコミットするようになりました。これにより、TiDB4.0以前のバージョンからアップグレードした後にエラー`ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する可能性があります。
 >
-> このエラーを解決するための推奨される方法は、 `tidb.toml`ファイルの`txn-total-size-limit`の値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`に設定して、以前の動作を復元することもできます。
+> このエラーを解決するための推奨される方法は、 `tidb.toml`ファイルの`txn-total-size-limit`の値を増やすことです。この制限を増やすことができない場合は、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)を`20000`に設定して以前の動作を復元することもできます。
 
 ## も参照してください {#see-also}
 

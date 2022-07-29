@@ -9,9 +9,9 @@ summary: Learn about frequently asked questions (FAQs) about TiDB Data Migration
 
 ## DMは、Alibaba RDSまたは他のクラウドデータベースからのデータの移行をサポートしていますか？ {#does-dm-support-migrating-data-from-alibaba-rds-or-other-cloud-databases}
 
-現在、DMはMySQLまたはMariaDBbinlogの標準バージョンのデコードのみをサポートしています。 AlibabaCloudRDSまたはその他のクラウドデータベースではテストされていません。 binlogが標準形式であることが確認された場合は、サポートされています。
+現在、DMはMySQLまたはMariaDBbinlogの標準バージョンのデコードのみをサポートしています。これは、AlibabaCloudRDSまたはその他のクラウドデータベースではテストされていません。 binlogが標準形式であることが確認された場合は、サポートされています。
 
-Alibaba Cloud RDSに主キーがないアップストリームテーブルの場合、そのbinlogに非表示の主キー列が含まれていることが既知の問題であり、元のテーブル構造と矛盾しています。
+既知の問題として、Alibaba Cloud RDSに主キーがないアップストリームテーブルの場合、そのbinlogに非表示の主キー列が含まれているため、元のテーブル構造と矛盾しています。
 
 互換性のない既知の問題は次のとおりです。
 
@@ -24,11 +24,11 @@ Alibaba Cloud RDSに主キーがないアップストリームテーブルの場
 
 ## アップストリームで実行されるステートメントに複数のDDL操作が含まれている場合、DMはそのような移行をサポートしますか？ {#if-a-statement-executed-upstream-contains-multiple-ddl-operations-does-dm-support-such-migration}
 
-DMは、複数のDDL変更操作を含む単一のステートメントを1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべてのケースをカバーするわけではありません。アップストリームで実行されるステートメントにDDL操作を1つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、DMリポジトリに[問題](https://github.com/pingcap/dm/issues)をファイルできます。
+DMは、複数のDDL変更操作を含む単一のステートメントを1つのDDL操作のみを含む複数のステートメントに分割しようとしますが、すべての場合をカバーするわけではありません。アップストリームで実行されるステートメントにDDL操作を1つだけ含めるか、テスト環境で検証することをお勧めします。サポートされていない場合は、DMリポジトリに[問題](https://github.com/pingcap/dm/issues)をファイルできます。
 
 ## 互換性のないDDLステートメントを処理する方法は？ {#how-to-handle-incompatible-ddl-statements}
 
-TiDBでサポートされていないDDLステートメントに遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDLステートメントをスキップするか、指定されたDDLステートメントに置き換えます）。詳細については、 [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
+TiDBでサポートされていないDDLステートメントに遭遇した場合は、dmctlを使用して手動で処理する必要があります（DDLステートメントをスキップするか、DDLステートメントを指定されたDDLステートメントに置き換えます）。詳細については、 [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)を参照してください。
 
 > **ノート：**
 >
@@ -118,18 +118,18 @@ MySQLはエクスポート用のスナップショットを指定できないた
 
 ## <code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code>完全なインポート中に発生<code>packet for query is too large. Try adjusting the &#39;max_allowed_packet&#39; variable</code> 。 {#how-to-handle-the-error-code-packet-for-query-is-too-large-try-adjusting-the-max-allowed-packet-variable-code-that-occurs-during-the-full-import}
 
-以下のパラメータをデフォルトの67108864（64M）より大きい値に設定します。
+以下のパラメーターをデフォルトの67108864（64M）より大きい値に設定します。
 
 -   TiDBサーバーのグローバル変数： `max_allowed_packet` 。
--   タスク構成ファイルの構成項目： `target-database.max-allowed-packet` 。詳しくは[DM高度なタスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)をご覧ください。
+-   タスク構成ファイルの構成項目： `target-database.max-allowed-packet` 。詳しくは[DM Advanced Task Configuration / コンフィグレーション File](/dm/task-configuration-file-full.md)をご覧ください。
 
 ## エラー1054の処理方法：DM1.0クラスタの既存のDM移行タスクがDM2.0以降のクラスタで実行されているときに発生する<code>Error 1054: Unknown column &#39;binlog_gtid&#39; in &#39;field list&#39;</code> ？ {#how-to-handle-the-error-code-error-1054-unknown-column-binlog-gtid-in-field-list-code-that-occurs-when-existing-dm-migration-tasks-of-an-dm-1-0-cluster-are-running-on-a-dm-2-0-or-newer-cluster}
 
-DM v2.0以降、DM 1.0クラスタのタスク構成ファイルを使用して`start-task`コマンドを直接実行し、増分データ複製を続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
+DM v2.0以降、DM 1.0クラスタのタスク構成ファイルで`start-task`コマンドを直接実行して増分データ複製を続行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
 このエラーは[DM1.0クラスタのDM移行タスクをDM2.0クラスタに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
-## TiUPがDMの一部のバージョン（v2.0.0-hotfixなど）のデプロイに失敗するのはなぜですか？ {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
+## TiUPがDMの一部のバージョン（v2.0.0-hotfixなど）の展開に失敗するのはなぜですか？ {#why-does-tiup-fail-to-deploy-some-versions-of-dm-for-example-v2-0-0-hotfix}
 
 `tiup list dm-master`コマンドを使用して、TiUPが展開をサポートするDMバージョンを表示できます。 TiUPは、このコマンドで表示されないDMバージョンを管理しません。
 
@@ -139,18 +139,18 @@ DM v2.0以降、DM 1.0クラスタのタスク構成ファイルを使用して`
 
 ## シャーディングされたスキーマとテーブルを複製するときにDMが致命的なエラーを報告しないのに、ダウンストリームデータが失われるのはなぜですか？ {#why-does-dm-report-no-fatal-error-when-replicating-sharded-schemas-and-tables-but-downstream-data-is-lost}
 
-構成項目`block-allow-list`および`table-route`を確認してください。
+構成項目`block-allow-list`と`table-route`を確認してください。
 
--   `block-allow-list`未満のアップストリームデータベースとテーブルの名前を構成する必要があります。 `do-tables`の前に「〜」を追加して、正規表現を使用して名前を照合できます。
+-   アップストリームデータベースとテーブルの名前を`block-allow-list`で構成する必要があります。 `do-tables`の前に「〜」を追加して、正規表現を使用して名前を照合できます。
 -   `table-route`は、正規表現の代わりにワイルドカード文字を使用してテーブル名を照合します。たとえば、 `table_parttern_[0-63]`は`table_parttern_0`から`table_pattern_6`までの7つのテーブルにのみ一致します。
 
-## DMがアップストリームからレプリケートされていないのに、 <code>replicate lag</code>モニターメトリックにデータが表示されないのはなぜですか？ {#why-does-the-code-replicate-lag-code-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
+## DMがアップストリームからレプリケートしていないのに、 <code>replicate lag</code>モニターメトリックにデータが表示されないのはなぜですか？ {#why-does-the-code-replicate-lag-code-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
 DM 1.0では、モニターデータを生成するために`enable-heartbeat`を有効にする必要があります。 DM 2.0以降のバージョンでは、この機能がサポートされていないため、モニターメトリック`replicate lag`にデータがないことが予想されます。
 
 ## DMがタスクを開始しているとき<code>fail to initial unit Sync of subtask</code>たエラーを処理する方法。エラーメッセージの<code>RawCause</code>は、 <code>context deadline exceeded</code>たことを示していますか？ {#how-to-handle-the-error-code-fail-to-initial-unit-sync-of-subtask-code-when-dm-is-starting-a-task-with-the-code-rawcause-code-in-the-error-message-showing-code-context-deadline-exceeded-code}
 
-これはDM2.0.0バージョンの既知の問題であり、DM2.0.1バージョンで修正される予定です。レプリケーションタスクに処理するテーブルが多数ある場合にトリガーされる可能性があります。 TiUPを使用してDMを展開する場合は、DMをナイトリーバージョンにアップグレードしてこの問題を修正できます。または、GitHubで[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から2.0.0-hotfixバージョンをダウンロードして、実行可能ファイルを手動で置き換えることができます。
+これはDM2.0.0バージョンの既知の問題であり、DM2.0.1バージョンで修正される予定です。レプリケーションタスクに処理するテーブルが多数ある場合にトリガーされる可能性があります。 TiUPを使用してDMをデプロイする場合は、DMをナイトリーバージョンにアップグレードしてこの問題を修正できます。または、GitHubの[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から2.0.0-hotfixバージョンをダウンロードして、実行可能ファイルを手動で置き換えることができます。
 
 ## DMがデータを複製しているときにエラー<code>duplicate entry</code>を処理するにはどうすればよいですか？ {#how-to-handle-the-error-code-duplicate-entry-code-when-dm-is-replicating-data}
 
@@ -177,7 +177,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 ## DM v1.0では、タスクにエラーがあるときにコマンド<code>sql-skip</code>が一部のステートメントをスキップできないのはなぜですか？ {#in-dm-v1-0-why-does-the-command-code-sql-skip-code-fail-to-skip-some-statements-when-the-task-is-in-error}
 
-`sql-skip`を実行した後、最初にbinlogの位置がまだ進んでいるかどうかを確認する必要があります。もしそうなら、それは`sql-skip`が有効になったことを意味します。このエラーが発生し続ける理由は、アップストリームがサポートされていない複数のDDLステートメントを送信するためです。 `sql-skip -s <sql-pattern>`を使用して、これらのステートメントに一致するパターンを設定できます。
+`sql-skip`を実行した後、最初にbinlogの位置がまだ進んでいるかどうかを確認する必要があります。もしそうなら、それは`sql-skip`が有効になったことを意味します。このエラーが引き続き発生する理由は、アップストリームがサポートされていない複数のDDLステートメントを送信するためです。 `sql-skip -s <sql-pattern>`を使用して、これらのステートメントに一致するパターンを設定できます。
 
 エラーメッセージに`parse statement`の情報が含まれている場合があります。次に例を示します。
 
@@ -185,23 +185,23 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-このタイプのエラーの理由は、TiDBパーサーが`ALTER EVENT`などのアップストリームによって送信されたDDLステートメントを解析できないため、 `sql-skip`が期待どおりに有効にならないためです。構成ファイルに[binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)を追加して、これらのステートメントをフィルター処理し、 `schema-pattern: "*"`を設定できます。 DM v2.0.1以降、DMは`EVENT`に関連するステートメントを事前フィルター処理します。
+このタイプのエラーの理由は、TiDBパーサーが`ALTER EVENT`などのアップストリームによって送信されたDDLステートメントを解析できないため、 `sql-skip`が期待どおりに有効にならないためです。構成ファイルに[binlogイベントフィルター](/dm/dm-key-features.md#binlog-event-filter)を追加して、これらのステートメントをフィルター処理し、 `schema-pattern: "*"`を設定できます。 DM v2.0.1以降、DMは`EVENT`に関連するステートメントを事前にフィルタリングします。
 
-DM v6.0以降、 `sql-skip`と`handle-error`は`binlog`に置き換えられます。この問題を回避するには、代わりに`binlog`コマンドを使用できます。
+DM v6.0以降、 `sql-skip`と`handle-error`は`binlog`に置き換わります。この問題を回避するには、代わりに`binlog`コマンドを使用できます。
 
-## DMが複製しているときに<code>REPLACE</code>ステートメントがダウンストリームに表示され続けるのはなぜですか？ {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
+## DMが複製しているときに、 <code>REPLACE</code>ステートメントがダウンストリームに表示され続けるのはなぜですか？ {#why-do-code-replace-code-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
 [セーフモード](/dm/dm-glossary.md#safe-mode)がタスクに対して自動的に有効になっているかどうかを確認する必要があります。エラー後にタスクが自動的に再開される場合、または高可用性スケジューリングがある場合、タスクが開始または再開されてから1分以内であるため、セーフモードが有効になります。
 
 DM-workerログファイルを確認して、 `change count`を含む行を検索できます。行の`new count`がゼロでない場合、セーフモードが有効になります。有効になっている理由を確認するには、いつ発生するか、以前にエラーが報告されていないかどうかを確認してください。
 
-## DM v2.0で、タスク中にDMが再起動した場合、完全なインポートタスクが失敗するのはなぜですか？ {#in-dm-v2-0-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
+## DM v2.0では、タスク中にDMが再起動すると、完全なインポートタスクが失敗するのはなぜですか？ {#in-dm-v2-0-why-does-the-full-import-task-fail-if-dm-restarts-during-the-task}
 
-DM v2.0.1以前のバージョンでは、完全なインポートが完了する前にDMが再起動すると、アップストリームデータソースとDMワーカーノード間のバインディングが変更される可能性があります。たとえば、ダンプ・ユニットの中間データがDM-workerノードAにあるが、ロード・ユニットがDM-workerノードBによって実行されているため、操作が失敗する可能性があります。
+DM v2.0.1以前のバージョンでは、完全なインポートが完了する前にDMが再起動すると、アップストリームデータソースとDMワーカーノード間のバインディングが変更される可能性があります。たとえば、ダンプユニットの中間データがDMワーカーノードAにあるが、ロードユニットがDMワーカーノードBによって実行されているため、操作が失敗する可能性があります。
 
-この問題の2つの解決策は次のとおりです。
+この問題に対する2つの解決策は次のとおりです。
 
--   データ量が少ない場合（1 TB未満）、またはタスクがシャーディングされたテーブルをマージする場合は、次の手順を実行します。
+-   データ量が少ない（1 TB未満）場合、またはタスクがシャードテーブルをマージする場合は、次の手順を実行します。
 
     1.  ダウンストリームデータベースにインポートされたデータをクリーンアップします。
     2.  エクスポートされたデータのディレクトリ内のすべてのファイルを削除します。
@@ -220,18 +220,18 @@ DM v2.0.1以前のバージョンでは、完全なインポートが完了す�
 
 ## DMがエラー<code>ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.</code>インクリメンタルタスク中に再起動した場合はどうなりますか？ {#why-does-dm-report-the-error-code-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master-auto-position-1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-code-if-it-restarts-during-an-incremental-task}
 
-このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中にパージされたことを示します。
+このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlog位置が、完全な移行中にパージされたことを示します。
 
 この問題が発生した場合は、タスクを一時停止し、ダウンストリームデータベース内の移行されたすべてのデータを削除して、 `--remove-meta`オプションで新しいタスクを開始する必要があります。
 
 次の方法で構成することにより、この問題を事前に回避できます。
 
-1.  完全な移行タスクが完了する前に必要なbinlogファイルを誤ってパージしないように、アップストリームのMySQLデータベースの値を`expire_logs_days`に増やします。データ量が多い場合は、餃子とTiDB-Lightningを同時に使用してタスクを高速化することをお勧めします。
-2.  このタスクのリレーログ機能を有効にして、binlogの位置が削除されてもDMがリレーログからデータを読み取れるようにします。
+1.  完全な移行タスクが完了する前に必要なbinlogファイルを誤ってパージしないように、アップストリームMySQLデータベースの値を`expire_logs_days`に増やします。データ量が多い場合は、餃子とTiDB-Lightningを同時に使用してタスクを高速化することをお勧めします。
+2.  このタスクのリレーログ機能を有効にして、binlogの位置が削除された場合でも、DMがリレーログからデータを読み取れるようにします。
 
 ## クラスタがTiUPv1.3.0またはv1.3.1を使用してデプロイされている場合、DMクラスタディスプレイのGrafanaダッシュボードがダッシュボードの<code>failed to fetch dashboard</code>たのはなぜですか？ {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-code-failed-to-fetch-dashboard-code-if-the-cluster-is-deployed-using-tiup-v1-3-0-or-v1-3-1}
 
-これはTiUPの既知のバグであり、TiUPv1.3.2で修正されています。この問題の2つの解決策は次のとおりです。
+これはTiUPの既知のバグであり、TiUPv1.3.2で修正されています。この問題に対する2つの解決策は次のとおりです。
 
 -   解決策1：
     1.  コマンド`tiup update --self && tiup update dm`を使用して、TiUPを新しいバージョンにアップグレードします。
@@ -243,11 +243,11 @@ DM v2.0.1以前のバージョンでは、完全なインポートが完了す�
     4.  フォルダ`deploy/grafana-$port/bin/public`を`grafana-v4.0.3-**.tar.gz`の`public`フォルダに置き換えます。
     5.  `tiup dm restart $cluster_name -R grafana`を実行して、Grafanaサービスを再起動します。
 
-## DM v2.0で、コマンド<code>query-status</code>のクエリ結果に、タスクで<code>enable-relay</code>と<code>enable-gtid</code>が同時に有効になっている場合に、SyncerチェックポイントGTIDが連続していないことが示されるのはなぜですか。 {#in-dm-v2-0-why-does-the-query-result-of-the-command-code-query-status-code-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-code-enable-relay-code-and-code-enable-gtid-code-enabled-at-the-same-time}
+## DM v2.0で、コマンド<code>query-status</code>のクエリ結果に、タスクで<code>enable-relay</code>と<code>enable-gtid</code>が同時に有効になっている場合に、SyncerチェックポイントGTIDが連続していないことが示されるのはなぜですか？ {#in-dm-v2-0-why-does-the-query-result-of-the-command-code-query-status-code-show-that-the-syncer-checkpoint-gtids-are-inconsecutive-if-the-task-has-code-enable-relay-code-and-code-enable-gtid-code-enabled-at-the-same-time}
 
 これはDMの既知のバグであり、DMv2.0.2で修正されています。このバグは、次の2つの条件が同時に完全に満たされたときにトリガーされます。
 
-1.  ソース設定ファイルでは、パラメータ`enable-relay`と`enable-gtid`が`true`に設定されています。
+1.  ソース構成ファイルでは、パラメーター`enable-relay`と`enable-gtid`が`true`に設定されています。
 2.  アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`を照会すると、次の例のように、結果は連続しません。
 
 ```
@@ -324,9 +324,9 @@ query-status test
 }
 ```
 
-この例では、データソース`mysql1`の`syncerBinlogGtid`は連続していません。この場合、データ損失を処理するために次のいずれかを実行できます。
+この例では、データソース`mysql1`の`syncerBinlogGtid`は連続していません。この場合、次のいずれかを実行してデータ損失を処理できます。
 
--   現在の時刻から完全エクスポートタスクのメタデータに記録されている位置までのアップストリームbinlogがパージされていない場合は、次の手順を実行できます。
+-   現在の時刻から完全なエクスポートタスクのメタデータに記録されている位置までのアップストリームbinlogがパージされていない場合は、次の手順を実行できます。
     1.  現在のタスクを停止し、GTIDが連続していないすべてのデータソースを削除します。
     2.  すべてのソース構成ファイルで`enable-relay`から`false`に設定します。
     3.  GTIDが連続していないデータソース（上記の例の`mysql1`など）の場合、タスクをインクリメンタルタスクに変更し、 `binlog-name` 、および`binlog-pos`の情報を含む各完全エクスポートタスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成し`binlog-gtid` 。
@@ -337,7 +337,7 @@ query-status test
     1.  現在のタスクを停止します。
     2.  GTIDが連続していないデータソース（上記の例の`mysql1`など）の場合、タスクをインクリメンタルタスクに変更し、 `binlog-name` 、および`binlog-pos`の情報を含む各完全エクスポートタスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成し`binlog-gtid` 。
     3.  インクリメンタルタスクの`task.yaml`で、前の値`binlog-gtid`を前の値`previous_gtids`に変更します。上記の例では、 `1-y`を`6-y`に変更します。
-    4.  `task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
+    4.  `task.yaml`に`syncers.safe-mode`から`true`を設定し、タスクを再開します。
     5.  インクリメンタルタスクが欠落しているすべてのデータをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6.  タスクを再開します。
     7.  データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
@@ -346,13 +346,13 @@ query-status test
     2.  データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
     3.  新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
 
-上記の1番目と2番目のソリューションで正常に複製できるデータソース（上記の例の`mysql2`など）の場合、増分タスクを設定するときに、関連する`mysql-instances.meta`を`subTaskStatus.sync`からの`syncerBinlog`と`syncerBinlogGtid`の情報で構成します。
+上記の第1および第2のソリューションで正常に複製できるデータソース（上記の例の`mysql2`など）の場合、増分タスクを設定するときに、関連する`mysql-instances.meta`を`subTaskStatus.sync`からの`syncerBinlog`および`syncerBinlogGtid`の情報で構成します。
 
-## DM v2.0で、 <code>heartbeat</code>機能が有効になっている仮想IP環境でDMワーカーとMySQLインスタンス間の接続を切り替えるときに、「ハートビート構成が以前に使用されたものと異なります：serverIDが等しくありません」というエラーを処理するにはどうすればよいですか？ {#in-dm-v2-0-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-code-heartbeat-code-feature-enabled}
+## DM v2.0で、 <code>heartbeat</code>機能が有効になっている仮想IP環境でDMワーカーとMySQLインスタンス間の接続を切り替えるときに、「ハートビート構成が以前に使用されたものと異なります：サーバーIDが等しくありません」というエラーを処理するにはどうすればよいですか？ {#in-dm-v2-0-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-code-heartbeat-code-feature-enabled}
 
 DM v2.0以降のバージョンでは、 `heartbeat`機能はデフォルトで無効になっています。タスク構成ファイルでこの機能を有効にすると、高可用性機能が妨げられます。この問題を解決するには、タスク構成ファイルで`enable-heartbeat`を`false`に設定して、 `heartbeat`機能を無効にしてから、タスク構成ファイルを再ロードします。 DMは、以降のリリースで`heartbeat`機能を強制的に無効にします。
 
-## DMマスターが再起動した後、クラスタへの参加に失敗し、DMが「埋め込みetcdの開始に失敗しました、RawCause：メンバーxxxはすでにブートストラップされています」というエラーを報告するのはなぜですか？ {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
+## DMマスターが再起動した後、クラスタへの参加に失敗し、DMが「埋め込みetcdの開始に失敗しました。RawCause：メンバーxxxはすでにブートストラップされています」というエラーを報告するのはなぜですか？ {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
 DMマスターが起動すると、DMはetcd情報を現在のディレクトリに記録します。 DMマスターの再起動後にディレクトリが変更された場合、DMはetcd情報にアクセスできないため、再起動は失敗します。
 
@@ -364,7 +364,7 @@ dmctl executeコマンドを使用すると、DMマスターへの接続が失�
 
 この場合、環境変数`https_proxy`を確認できます（ **https**であることに注意してください）。この変数が構成されている場合、dmctlは`https_proxy`で指定されたホストとポートを自動的に接続します。ホストに対応する転送サービスがない場合、接続は失敗し`proxy` 。
 
-この問題を解決するには、 `https_proxy`が必須かどうかを確認してください。そうでない場合は、設定をキャンセルしてください。それ以外の場合は、oringialdmctlコマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加します。
+この問題を解決するには、 `https_proxy`が必須かどうかを確認してください。そうでない場合は、設定をキャンセルしてください。それ以外の場合は、元のdmctlコマンドの前に環境変数設定`https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"`を追加します。
 
 > **ノート：**
 >
@@ -379,9 +379,9 @@ flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such fi
 上記のエラーは、次の場合に発生する可能性があります。
 
 -   DMはv2.0.1以前からv2.0.2-v2.0.6にアップグレードされており、リレーログはアップグレード前に開始され、アップグレード後に再起動されます。
--   stop-relayコマンドを実行してリレーログを一時停止してから、再起動します。
+-   stop-relayコマンドを実行してリレーログを一時停止してから再起動します。
 
-次のオプションを使用して、このエラーを回避できます。
+次のオプションにより、このエラーを回避できます。
 
 -   リレーログを再起動します。
 

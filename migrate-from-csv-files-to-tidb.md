@@ -21,7 +21,7 @@ TiDB Lightningは、CSVファイルおよびタブ区切り値（TSV）などの
 -   CSVファイルにテーブル全体のデータが含まれている場合は、ファイルに`${db_name}.${table_name}.csv`という名前を付けます。
 -   1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値のサフィックスを追加します。たとえば、 `${db_name}.${table_name}.003.csv` 。数字の接尾辞は連続していない場合がありますが、昇順である必要があります。また、すべてのサフィックスが同じ長さになるように、数値の前にゼロを追加する必要があります。
 
-## ステップ2.ターゲットテーブルスキーマを作成します {#step-2-create-the-target-table-schema}
+## 手順2.ターゲットテーブルスキーマを作成します {#step-2-create-the-target-table-schema}
 
 CSVファイルにはスキーマ情報が含まれていないため、CSVファイルからTiDBにデータをインポートする前に、ターゲットテーブルスキーマを作成する必要があります。次の2つの方法のいずれかによって、ターゲットテーブルスキーマを作成できます。
 
@@ -89,11 +89,11 @@ pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:237
 
 構成ファイルの詳細については、 [TiDB LightningConfiguration / コンフィグレーション](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
-## ステップ4.インポートパフォーマンスを調整します（オプション） {#step-4-tune-the-import-performance-optional}
+## 手順4.インポートパフォーマンスを調整します（オプション） {#step-4-tune-the-import-performance-optional}
 
 約256MiBの均一サイズのCSVファイルからデータをインポートすると、 TiDB Lightningが最高のパフォーマンスで動作します。ただし、単一の大きなCSVファイルからデータをインポートする場合、 TiDB Lightningはデフォルトでインポートを処理するために1つのスレッドしか使用できないため、インポート速度が低下する可能性があります。
 
-インポートを高速化するために、大きなCSVファイルを小さなファイルに分割できます。一般的な形式のCSVファイルの場合、 TiDB Lightningがファイル全体を読み取る前に、各行の開始位置と終了位置をすばやく見つけることは困難です。したがって、 TiDB LightningはデフォルトでCSVファイルを自動的に分割しません。ただし、インポートするCSVファイルが特定の形式の要件を満たしている場合は、 `strict-format`モードを有効にできます。このモードでは、 TiDB Lightningは1つの大きなCSVファイルをそれぞれ約256MiBの複数のファイルに自動的に分割し、それらを並列処理します。
+インポートを高速化するために、大きなCSVファイルを小さなファイルに分割できます。一般的な形式のCSVファイルの場合、 TiDB Lightningがファイル全体を読み取る前に、各行の開始位置と終了位置をすばやく見つけることは困難です。したがって、 TiDB LightningはデフォルトでCSVファイルを自動的に分割しません。ただし、インポートするCSVファイルが特定の形式の要件を満たしている場合は、 `strict-format`モードを有効にできます。このモードでは、 TiDB Lightningは1つの大きなCSVファイルをそれぞれ約256MiBの複数のファイルに自動的に分割し、それらを並行して処理します。
 
 > **ノート：**
 >
@@ -123,7 +123,7 @@ nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
 
 インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
--   `grep`ログのキーワード`progress` 。進行状況は、デフォルトで5分ごとに更新されます。
+-   `grep`ログのキーワード`progress` 。デフォルトでは、進行状況は5分ごとに更新されます。
 -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
 -   [TiDB Lightningインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
@@ -137,7 +137,7 @@ TiDB Lightningがインポートを完了すると、自動的に終了します
 
 ## その他のファイル形式 {#other-file-formats}
 
-データソースが他の形式の場合、データソースからデータを移行するには、ファイル名を`.csv`で終了し、 `tidb-lightning.toml`の構成ファイルの`[mydumper.csv]`のセクションで対応する変更を加える必要があります。一般的な形式の変更例は次のとおりです。
+データソースが他の形式の場合、データソースからデータを移行するには、ファイル名を`.csv`で終了し、 `tidb-lightning.toml`の構成ファイルの`[mydumper.csv]`セクションで対応する変更を加える必要があります。一般的な形式の変更例は次のとおりです。
 
 **TSV：**
 

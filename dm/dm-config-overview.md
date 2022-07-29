@@ -10,7 +10,7 @@ summary: This document gives an overview of Data Migration configuration files.
 ## DMプロセス構成ファイル {#dm-process-configuration-files}
 
 -   `dm-master.toml` ：DMマスタープロセスを実行するための構成ファイル。トポロジー情報とDMマスターのログが含まれます。詳細については、 [DMマスターConfiguration / コンフィグレーションファイル](/dm/dm-master-configuration-file.md)を参照してください。
--   `dm-worker.toml` ：DM-workerプロセスを実行するための構成ファイル。トポロジー情報とDM-workerのログが含まれます。詳細については、 [DM-workerConfiguration / コンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
+-   `dm-worker.toml` ：トポロジ情報とDM-workerのログを含む、DM-workerプロセスを実行するための構成ファイル。詳細については、 [DM-workerConfiguration / コンフィグレーションファイル](/dm/dm-worker-configuration-file.md)を参照してください。
 -   `source.yaml` ：MySQLやMariaDBなどのアップストリームデータベースの構成。詳細については、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 ## DM移行タスクの構成 {#dm-migration-task-configuration}
@@ -30,5 +30,5 @@ summary: This document gives an overview of Data Migration configuration files.
 | 概念          | 説明                                                                           | Configuration / コンフィグレーションファイル                              |
 | :---------- | :--------------------------------------------------------------------------- | :---------------------------------------------------------- |
 | `source-id` | MySQLまたはMariaDBインスタンス、またはプライマリ-セカンダリ構造の移行グループを一意に表します。 `source-id`の最大長は32です。 | `source_id` of `source.yaml` ;<br/> `source-id` `task.yaml` |
-| DMマスターID    | DMマスターを一意に表します（ `dm-master.toml`の`master-addr`パラメーターによる）                     | `master-addr` of `dm-master.toml`                           |
-| DM-ワーカーID   | DMワーカーを一意に表します（ `dm-worker.toml`の`worker-addr`パラメーターによる）                     | `worker-addr` of `dm-worker.toml`                           |
+| DMマスターID    | DMマスターを一意に表します（ `dm-master.toml`の`master-addr`パラメーターによって）                    | `master-addr` of `dm-master.toml`                           |
+| DM-ワーカーID   | DMワーカーを一意に表します（ `dm-worker.toml`の`worker-addr`パラメーターによって）                    | `worker-addr` of `dm-worker.toml`                           |

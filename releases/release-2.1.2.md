@@ -4,7 +4,7 @@ title: TiDB 2.1.2 Release Notes
 
 # TiDB2.1.2リリースノート {#tidb-2-1-2-release-notes}
 
-2018年12月22日、TiDB2.1.2がリリースされました。対応するTiDBAnsible2.1.2もリリースされています。 TiDB 2.1.1と比較して、このリリースではシステムの互換性と安定性が大幅に向上しています。
+2018年12月22日、TiDB2.1.2がリリースされました。対応するTiDBAnsible2.1.2もリリースされています。このリリースでは、TiDB 2.1.1と比較して、システムの互換性と安定性が大幅に向上しています。
 
 ## TiDB {#tidb}
 
@@ -22,7 +22,7 @@ title: TiDB 2.1.2 Release Notes
 
 ## TiKV {#tikv}
 
--   `DAY` （ `d` ）単位の構成形式をサポートし、構成の互換性の問題を修正します[＃3931](https://github.com/tikv/tikv/pull/3931)
+-   `DAY` （ `d` ）の単位で構成形式をサポートし、構成の互換性の問題を修正します[＃3931](https://github.com/tikv/tikv/pull/3931)
 -   `Approximate Size Split`によって引き起こされる可能性のあるpanicの問題を修正し[＃3942](https://github.com/tikv/tikv/pull/3942)
 -   リージョンマージ[＃3822](https://github.com/tikv/tikv/pull/3822)に関する2つの問題を修正し[＃3873](https://github.com/tikv/tikv/pull/3873)
 

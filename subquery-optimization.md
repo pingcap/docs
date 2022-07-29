@@ -17,7 +17,7 @@ summary: Understand optimizations related to subqueries.
 
 サブクエリに`select * from t where t.a in (select * from t2 where t.b=t2.b)`などの非サブクエリ列が含まれる場合があります。サブクエリの`t.b`列はサブクエリに属しておらず、サブクエリの外部から導入されています。この種のサブクエリは通常「相関サブクエリ」と呼ばれ、外部から導入された列は「相関列」と呼ばれます。相関サブクエリの最適化については、 [相関サブクエリの無相関化](/correlated-subquery-optimization.md)を参照してください。この記事では、相関列を含まないサブクエリに焦点を当てています。
 
-デフォルトでは、サブクエリは実行方法として[TiDB実行プランを理解する](/explain-overview.md)で述べた`semi join`を使用します。一部の特別なサブクエリの場合、TiDBは、パフォーマンスを向上させるために論理的な書き換えを行います。
+デフォルトでは、サブクエリは[TiDB実行プランを理解する](/explain-overview.md)で説明した`semi join`を実行方法として使用します。一部の特別なサブクエリでは、TiDBはパフォーマンスを向上させるために論理的な書き換えを行います。
 
 ## <code>... &lt; ALL (SELECT ... FROM ...)</code>または<code>... &gt; ANY (SELECT ... FROM ...)</code> {#code-x3c-all-select-from-code-or-code-any-select-from-code}
 
@@ -63,7 +63,7 @@ explain select * from t1 where t1.a in (select t2.a from t2);
 +------------------------------+---------+-----------+------------------------+----------------------------------------------------------------------------+
 ```
 
-この書き換えは、 `IN`のサブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えがないと、駆動テーブルとしてt2を使用して`index join`を使用することが不可能だからです。ただし、デメリットは、 `t2`中に集計を自動的に削除できず、テーブルが比較的大きい場合、このリライトがクエリのパフォーマンスに影響を与えることです。現在、変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)はこの最適化を制御するために使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
+この書き換えは、 `IN`のサブクエリが比較的小さく、外部クエリが比較的大きい場合にパフォーマンスが向上します。これは、書き換えがないと、駆動テーブルとしてt2を使用して`index join`を使用することができないためです。ただし、デメリットは、リライト中に集計を自動的に削除できず、 `t2`テーブルが比較的大きい場合、このリライトがクエリのパフォーマンスに影響を与えることです。現在、変数[tidb_opt_insubq_to_join_and_agg](/system-variables.md#tidb_opt_insubq_to_join_and_agg)はこの最適化を制御するために使用されています。この最適化が適切でない場合は、手動で無効にすることができます。
 
 ## <code>EXISTS</code>サブクエリおよび<code>... &gt;/&gt;=/&lt;/&lt;=/=/!= (SELECT ... FROM ...)</code> {#code-exists-code-subquery-and-code-x3c-x3c-select-from-code}
 

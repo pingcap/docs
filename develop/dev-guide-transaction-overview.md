@@ -5,7 +5,7 @@ summary: A brief introduction to transactions in TiDB.
 
 # 取引概要 {#transaction-overview}
 
-TiDBは完全な分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)と[悲観的なトランザクション](/pessimistic-transaction.md)を提供します（TiDB 3.0で導入）。この記事では、主にトランザクションステートメント、楽観的なトランザクションと悲観的なトランザクション、トランザクションの分離レベル、および楽観的なトランザクションでのアプリケーション側の再試行とエラー処理について説明します。
+TiDBは完全な分散トランザクションをサポートし、 [楽観的な取引](/optimistic-transaction.md)と[悲観的な取引](/pessimistic-transaction.md)を提供します（TiDB 3.0で導入）。この記事では主に、トランザクションステートメント、楽観的なトランザクションと悲観的なトランザクション、トランザクションの分離レベル、および楽観的なトランザクションでのアプリケーション側の再試行とエラー処理について説明します。
 
 ## 一般的なステートメント {#common-statements}
 
@@ -154,12 +154,12 @@ SQL-92標準では、次の4つの分離レベルが定義されています。
 
 詳細については、以下の表を参照してください。
 
-| 分離レベル          | ダーティライト | ダーティリード | ファジーリード | ファントム |
-| -------------- | ------- | ------- | ------- | ----- |
-| コミットされていない読み取り | ありえない   | 可能      | 可能      | 可能    |
-| コミット済みを読む      | ありえない   | ありえない   | 可能      | 可能    |
-| 繰り返し読む         | ありえない   | ありえない   | ありえない   | 可能    |
-| シリアル化可能        | ありえない   | ありえない   | ありえない   | ありえない |
+| 分離レベル          | ダーティライト | ダーティリード | ファジー読み取り | ファントム |
+| -------------- | ------- | ------- | -------- | ----- |
+| コミットされていない読み取り | ありえない   | 可能      | 可能       | 可能    |
+| コミット済みを読む      | ありえない   | ありえない   | 可能       | 可能    |
+| 繰り返し読む         | ありえない   | ありえない   | ありえない    | 可能    |
+| シリアル化可能        | ありえない   | ありえない   | ありえない    | ありえない |
 
 TiDBは、次の分離レベルをサポートしています`READ COMMITTED`および`REPEATABLE READ` ：
 
@@ -178,4 +178,4 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDBは、MySQLとの整合性のために「反復可能読み取り」とも呼ばれるスナップショットアイソレーション（SI）レベルの整合性を実装します。この分離レベルは、 [ANSIの繰り返し可能な読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQLの繰り返し可能な読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+TiDBは、MySQLとの整合性のために「繰り返し可能な読み取り」とも呼ばれるスナップショットアイソレーション（SI）レベルの整合性を実装します。この分離レベルは、 [ANSI反復可能読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQLの繰り返し可能な読み取り分離レベル](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。

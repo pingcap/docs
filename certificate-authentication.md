@@ -300,7 +300,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
     -   `require san`は現在、次の`Subject Alternative Name`のチェック項目をサポートしています。
 
         -   URI
-        -   IP
+        -   知財
         -   DNS
 
     -   複数のチェック項目は、コンマで接続した後に構成できます。たとえば、 `u1`ユーザーに対して次のように`require san`を構成します。
@@ -313,7 +313,7 @@ mysql -utest -h0.0.0.0 -P4000 --ssl-cert /path/to/client-cert.new.pem --ssl-key 
 
         上記の構成では、 `u1`人のユーザーがURI項目`spiffe://example.org/myservice1`または`spiffe://example.org/myservice2`とDNS項目`d1`の証明書を使用してTiDBにログインすることのみが許可されています。
 
--   `require cipher` ：クライアントがサポートしている暗号方式を確認します。次のステートメントを使用して、サポートされている暗号化方式のリストを確認します。
+-   `require cipher` ：クライアントがサポートしている暗号方式を確認します。次のステートメントを使用して、サポートされている暗号方式のリストを確認します。
 
     {{< copyable "" >}}
 

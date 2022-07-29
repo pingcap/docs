@@ -19,7 +19,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 ## インスタンスリスト {#instance-list}
 
-[**インスタンス**]をクリックして、インスタンスのリストを表示します。
+インスタンスのリストを表示するには、[**インスタンス**]をクリックします。
 
 ![Instance list](/media/dashboard/dashboard-cluster-info-instances.png)
 
@@ -29,7 +29,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 
 -   アドレス：インスタンスアドレス。
 -   ステータス：インスタンスの実行ステータス。
--   アップタイム：インスタンスの開始時間。
+-   稼働時間：インスタンスの開始時間。
 -   バージョン：インスタンスのバージョン番号。
 -   デプロイメントディレクトリ：インスタンスバイナリファイルが配置されているディレクトリ。
 -   Git Hash：インスタンスのバイナリファイルに対応するGitHash値。
@@ -39,7 +39,7 @@ summary: View the running status of TiDB, TiKV, PD, TiFlash components in the en
 -   上：インスタンスは正常に実行されています。
 -   ダウンまたは到達不能：インスタンスが開始されていないか、対応するホストにネットワークの問題が存在します。
 -   トゥームストーン：インスタンスのデータは完全に移行され、スケールインは完了しています。このステータスは、TiKVまたはTiFlashインスタンスにのみ存在します。
--   終了：インスタンス上のデータが移行され、スケールインが進行中です。このステータスは、TiKVまたはTiFlashインスタンスにのみ存在します。
+-   離脱：インスタンス上のデータが移行され、スケールインが進行中です。このステータスは、TiKVまたはTiFlashインスタンスにのみ存在します。
 -   不明：インスタンスの実行状態は不明です。
 
 > **ノート：**

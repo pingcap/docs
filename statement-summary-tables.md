@@ -5,9 +5,9 @@ summary: Learn about Statement Summary Table in TiDB.
 
 # ステートメント要約表 {#statement-summary-tables}
 
-SQLのパフォーマンスの問題をより適切に処理するために、MySQLはSQLを統計で監視するために`performance_schema`の[ステートメント要約表](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中で、 `events_statements_summary_by_digest`は、レイテンシ、実行時間、スキャンされた行、全表スキャンなどの豊富なフィールドでSQLの問題を見つけるのに非常に役立ちます。
+SQLのパフォーマンスの問題をより適切に処理するために、MySQLはSQLを統計で監視するために`performance_schema`の[ステートメント要約テーブル](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html)を提供しています。これらのテーブルの中で、 `events_statements_summary_by_digest`は、レイテンシ、実行時間、スキャンされた行、全表スキャンなどの豊富なフィールドでSQLの問題を見つけるのに非常に役立ちます。
 
-したがって、v4.0.0-rc.1以降、TiDBは、機能の点で`events_statements_summary_by_digest`に類似したシステムテーブルを`information_schema` （ `performance_schema`では*なく*）で提供します。
+したがって、v4.0.0-rc.1以降、TiDBは、機能の点で`events_statements_summary_by_digest`と同様のシステムテーブルを`information_schema` （ `performance_schema`では*なく*）で提供します。
 
 -   [`statements_summary`](#statements_summary)
 -   [`statements_summary_history`](#statements_summary_history)
@@ -19,7 +19,7 @@ SQLのパフォーマンスの問題をより適切に処理するために、My
 
 ## <code>statements_summary</code> {#code-statements-summary-code}
 
-`statements_summary`は`information_schema`のシステムテーブルです。 `statements_summary` SQLステートメントをSQLダイジェストとプランダイジェストでグループ化し、各SQLカテゴリの統計を提供します。
+`statements_summary`は`information_schema`のシステムテーブルです。 `statements_summary`は、SQLステートメントをSQLダイジェストとプランダイジェストでグループ化し、各SQLカテゴリの統計を提供します。
 
 ここでの「SQLダイジェスト」とは、低速ログで使用されるものと同じ意味であり、正規化されたSQLステートメントによって計算される一意の識別子です。正規化プロセスでは、定数の空白文字は無視され、大文字と小文字は区別されません。したがって、構文が一貫しているステートメントのダイジェストは同じです。例えば：
 
@@ -38,7 +38,7 @@ select * from EMPLOYEE where ID in (4, 5) and SALARY between 3000 and 4000;
 select * from employee where id in (...) and salary between ? and ?;
 ```
 
-ここでの「プランダイジェスト」とは、正規化された実行プランによって計算された一意の識別子を指します。正規化プロセスは定数を無視します。同じSQLステートメントの実行プランが異なる可能性があるため、同じSQLステートメントが異なるカテゴリにグループ化される場合があります。同じカテゴリのSQLステートメントの実行プランは同じです。
+ここでの「プランダイジェスト」とは、正規化された実行プランによって計算された一意の識別子を指します。正規化プロセスは定数を無視します。同じSQLステートメントの実行プランが異なる場合があるため、同じSQLステートメントが異なるカテゴリにグループ化される場合があります。同じカテゴリのSQLステートメントの実行プランは同じです。
 
 `statements_summary`は、SQL監視メトリックの集計結果を格納します。一般に、各監視メトリックには、最大値と平均値が含まれます。たとえば、実行待ち時間のメトリックは、 `AVG_LATENCY` （平均待ち時間）と`MAX_LATENCY` （最大待ち時間）の2つのフィールドに対応します。
 
@@ -91,7 +91,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## <code>statements_summary_evicted</code> {#code-statements-summary-evicted-code}
 
-`tidb_stmt_summary_max_stmt_count`変数は、 `statement_summary`のテーブルがメモリに格納するステートメントの最大数を制御します。 `statement_summary`テーブルはLRUアルゴリズムを使用します。 SQLステートメントの数が`tidb_stmt_summary_max_stmt_count`の値を超えると、最も長い未使用のレコードがテーブルから削除されます。各期間中に削除されたSQLステートメントの数は、 `statements_summary_evicted`の表に記録されます。
+`tidb_stmt_summary_max_stmt_count`変数は、 `statement_summary`のテーブルがメモリに格納するステートメントの最大数を制御します。 `statement_summary`テーブルはLRUアルゴリズムを使用します。 SQLステートメントの数が`tidb_stmt_summary_max_stmt_count`の値を超えると、最長の未使用レコードがテーブルから削除されます。各期間中に削除されたSQLステートメントの数は、 `statements_summary_evicted`の表に記録されます。
 
 `statements_summary_evicted`テーブルは、SQLレコードが`statement_summary`テーブルから削除された場合にのみ更新されます。 `statements_summary_evicted`は、削除が発生する期間と削除されたSQLステートメントの数のみを記録します。
 
@@ -99,13 +99,13 @@ select * from employee where id in (...) and salary between ? and ?;
 
 `statements_summary` 、および`statements_summary_history`の表は、単一の`statements_summary_evicted`サーバーのステートメントの要約のみを示しています。クラスタ全体のデータをクエリするには、 `cluster_statements_summary` 、または`cluster_statements_summary_history`のテーブルをクエリする必要があり`cluster_statements_summary_evicted` 。
 
-`cluster_statements_summary`は、各TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用してTiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary`のフィールドと同じです。
+`cluster_statements_summary`は、各TiDBサーバーの`statements_summary`のデータを表示します。 `cluster_statements_summary_history`は、各TiDBサーバーの`statements_summary_history`のデータを表示します。 `cluster_statements_summary_evicted`は、各TiDBサーバーの`statements_summary_evicted`のデータを表示します。これらのテーブルは、 `INSTANCE`フィールドを使用してTiDBサーバーのアドレスを表します。その他のフィールドは`statements_summary`と同じです。
 
 ## パラメータ設定 {#parameter-configuration}
 
 次のシステム変数は、ステートメントの要約を制御するために使用されます。
 
--   `tidb_enable_stmt_summary` ：ステートメント要約機能を有効にするかどうかを決定します。 `1`は`enable`を表し、 `0`は`disable`を意味します。この機能はデフォルトで有効になっています。この機能を無効にすると、システムテーブルの統計がクリアされます。統計は、次にこの機能が有効になったときに再計算されます。テストでは、この機能を有効にしてもパフォーマンスにほとんど影響がないことが示されています。
+-   `tidb_enable_stmt_summary` ：ステートメント要約機能を有効にするかどうかを決定します。 `1`は`enable`を表し、 `0`は`disable`を意味します。この機能はデフォルトで有効になっています。この機能が無効になっている場合、システムテーブルの統計はクリアされます。統計は、次にこの機能が有効になったときに再計算されます。テストでは、この機能を有効にしてもパフォーマンスにほとんど影響がないことが示されています。
 -   `tidb_stmt_summary_refresh_interval` ： `statements_summary`テーブルが更新される間隔。時間の単位は秒です。デフォルト値は`1800`です。
 -   `tidb_stmt_summary_history_size` ： `statements_summary_history`テーブルに格納されている各SQLステートメントカテゴリのサイズ。これは、 `statement_summary_evicted`テーブルのレコードの最大数でもあります。デフォルト値は`24`です。
 -   `tidb_stmt_summary_max_stmt_count` ：ステートメントサマリーテーブルに格納できるSQLステートメントの数を制限します。デフォルト値は`3000`です。制限を超えると、最近未使用のままになっているSQLステートメントがクリアされます。これらのクリアされたSQLステートメントは、 `statement_summary_evicted`の表に記録されます。
@@ -126,7 +126,7 @@ set global tidb_stmt_summary_refresh_interval = 1800;
 set global tidb_stmt_summary_history_size = 24;
 ```
 
-上記の設定が有効になった後、30分ごとに`statements_summary`のテーブルがクリアされます。 `statements_summary_history`のテーブルには、過去12時間に生成されたデータが格納されます。
+上記の設定が有効になった後、30分ごとに`statements_summary`のテーブルがクリアされます。 `statements_summary_history`のテーブルには、最近12時間に生成されたデータが格納されます。
 
 `statements_summary_evicted`の表は、SQLステートメントがステートメントの要約から削除された最近の24期間を記録します。 `statements_summary_evicted`のテーブルは30分ごとに更新されます。
 
@@ -134,7 +134,7 @@ set global tidb_stmt_summary_history_size = 24;
 >
 > `tidb_stmt_summary_history_size` 、および`tidb_stmt_summary_max_stmt_count`の構成項目は、メモリー使用量に影響し`tidb_stmt_summary_max_sql_length` 。ニーズ、SQLサイズ、SQLカウント、およびマシン構成に基づいて、これらの構成を調整することをお勧めします。大きすぎる値を設定することはお勧めしません。 `tidb_stmt_summary_history_size` * `tidb_stmt_summary_max_stmt_count` * `tidb_stmt_summary_max_sql_length` * `3`を使用してメモリ使用量を計算できます。
 
-### ステートメントの要約に適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
+### ステートメントサマリーに適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
 
 システムが一定期間実行された後（システムの負荷に応じて）、 `statement_summary`のテーブルをチェックして、SQLエビクションが発生したかどうかを確認できます。例えば：
 
@@ -186,11 +186,11 @@ select * from information_schema.statements_summary_evicted;
 
 ## トラブルシューティングの例 {#troubleshooting-examples}
 
-このセクションでは、ステートメントの要約機能を使用してSQLパフォーマンスの問題をトラブルシューティングする方法を示す2つの例を示します。
+このセクションでは、ステートメント要約機能を使用してSQLパフォーマンスの問題をトラブルシューティングする方法を示す2つの例を示します。
 
 ### サーバー側が原因でSQLの待ち時間が長くなる可能性はありますか？ {#could-high-sql-latency-be-caused-by-the-server-end}
 
-この例では、クライアントは`employee`テーブルのポイントクエリでパフォーマンスが低下しています。 SQLテキストに対してあいまい検索を実行できます。
+この例では、クライアントは`employee`のテーブルでポイントクエリを実行するとパフォーマンスが低下します。 SQLテキストに対してあいまい検索を実行できます。
 
 {{< copyable "" >}}
 
@@ -200,7 +200,7 @@ SELECT avg_latency, exec_count, query_sample_text
     WHERE digest_text LIKE 'select * from employee%';
 ```
 
-`1ms`と`0.3ms`は、通常の`avg_latency`の範囲内と見なされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークでトラブルシューティングできます。
+`1ms`と`0.3ms`は、通常の`avg_latency`の範囲内と見なされます。したがって、サーバー側が原因ではないと結論付けることができます。クライアントまたはネットワークでトラブルシューティングを行うことができます。
 
 {{< copyable "" >}}
 
@@ -227,7 +227,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
     ORDER BY sum_latency DESC LIMIT 3;
 ```
 
-この結果は、次の3つのカテゴリのSQLステートメントが合計で最も長い時間を消費することを示しています。これらは、高い優先度で最適化する必要があります。
+結果は、次の3つのカテゴリのSQLステートメントが合計で最も長い時間を消費することを示しています。これらは高い優先度で最適化する必要があります。
 
 {{< copyable "" >}}
 
@@ -246,7 +246,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 
 ### <code>statements_summary</code>フィールドの説明 {#code-statements-summary-code-fields-description}
 
-以下は、 `statements_summary`テーブルのフィールドの説明です。
+以下は、 `statements_summary`の表のフィールドの説明です。
 
 基本フィールド：
 
@@ -258,7 +258,7 @@ SELECT sum_latency, avg_latency, exec_count, query_sample_text
 -   `TABLE_NAMES` ：SQLステートメントに関係するすべてのテーブル。複数のテーブルがある場合は、それぞれをコンマで区切ります。
 -   `INDEX_NAMES` ：SQLステートメントで使用されるすべてのSQLインデックス。複数のインデックスがある場合は、それぞれをコンマで区切ります。
 -   `SAMPLE_USER` ：このカテゴリのSQLステートメントを実行するユーザー。 1人のユーザーのみが取得されます。
--   `PLAN_DIGEST` ：実行計画のダイジェスト。
+-   `PLAN_DIGEST` ：実行プランのダイジェスト。
 -   `PLAN` ：元の実行プラン。複数のステートメントがある場合は、1つのステートメントのみの計画が採用されます。
 -   `PLAN_CACHE_HITS` ：このカテゴリのSQLステートメントがプランキャッシュにヒットした合計回数。
 -   `PLAN_IN_CACHE` ：このカテゴリのSQLステートメントの前回の実行がプランキャッシュにヒットしたかどうかを示します。
@@ -275,18 +275,18 @@ TiDBサーバーに関連するフィールド：
 -   `EXEC_COUNT` ：このカテゴリのSQLステートメントの合計実行時間。
 -   `SUM_ERRORS` ：実行中に発生したエラーの合計。
 -   `SUM_WARNINGS` ：実行中に発生した警告の合計。
--   `SUM_LATENCY` ：このカテゴリのSQLステートメントの合計実行レイテンシ。
--   `MAX_LATENCY` ：このカテゴリのSQLステートメントの最大実行レイテンシ。
--   `MIN_LATENCY` ：このカテゴリのSQLステートメントの最小実行レイテンシ。
--   `AVG_LATENCY` ：このカテゴリのSQLステートメントの平均実行レイテンシ。
--   `AVG_PARSE_LATENCY` ：パーサーの平均レイテンシー。
+-   `SUM_LATENCY` ：このカテゴリのSQLステートメントの合計実行待ち時間。
+-   `MAX_LATENCY` ：このカテゴリのSQLステートメントの最大実行待ち時間。
+-   `MIN_LATENCY` ：このカテゴリのSQLステートメントの最小実行待ち時間。
+-   `AVG_LATENCY` ：このカテゴリのSQLステートメントの平均実行待ち時間。
+-   `AVG_PARSE_LATENCY` ：パーサーの平均待ち時間。
 -   `MAX_PARSE_LATENCY` ：パーサーの最大レイテンシー。
--   `AVG_COMPILE_LATENCY` ：コンパイラーの平均レイテンシー。
--   `MAX_COMPILE_LATENCY` ：コンパイラーの最大レイテンシー。
+-   `AVG_COMPILE_LATENCY` ：コンパイラーの平均待ち時間。
+-   `MAX_COMPILE_LATENCY` ：コンパイラーの最大待ち時間。
 -   `AVG_MEM` ：使用された平均メモリ（バイト）。
 -   `MAX_MEM` ：使用される最大メモリ（バイト）。
 -   `AVG_DISK` ：使用された平均ディスク容量（バイト）。
--   `MAX_DISK` ：使用される最大ディスク容量（バイト）。
+-   `MAX_DISK` ：使用されている最大ディスク容量（バイト）。
 
 TiKVコプロセッサータスクに関連するフィールド：
 
@@ -324,10 +324,10 @@ TiKVコプロセッサータスクに関連するフィールド：
 -   `MAX_WRITE_KEYS` ：書き込まれたキーの最大数。
 -   `AVG_WRITE_SIZE` ：書き込まれたデータの平均量（バイト単位）。
 -   `MAX_WRITE_SIZE` ：書き込まれるデータの最大量（バイト単位）。
--   `AVG_PREWRITE_REGIONS` ：プリライトフェーズに関与するリージョンの平均数。
+-   `AVG_PREWRITE_REGIONS` ：プリライトフェーズに関係するリージョンの平均数。
 -   `MAX_PREWRITE_REGIONS` ：プリライトフェーズ中のリージョンの最大数。
 -   `AVG_TXN_RETRY` ：トランザクションの平均再試行回数。
--   `MAX_TXN_RETRY` ：トランザクションの再試行の最大数。
+-   `MAX_TXN_RETRY` ：トランザクションの最大再試行回数。
 -   `SUM_BACKOFF_TIMES` ：このカテゴリのSQLステートメントで再試行が必要なエラーが発生した場合の再試行の合計。
 -   `BACKOFF_TYPES` ：再試行が必要なすべてのタイプのエラーと各タイプの再試行回数。フィールドの形式は`type:number`です。複数のエラータイプがある場合は、それぞれが`txnLock:2,pdRPC:1`のようにコンマで区切られます。
 -   `AVG_AFFECTED_ROWS` ：影響を受ける行の平均数。

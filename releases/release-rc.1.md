@@ -34,11 +34,11 @@ title: TiDB RC1 Release Notes
 -   `add index`ステートメントの速度が向上します。
 -   次のステートメントがサポートされています。
     -   `CHANGE COLUMN`ステートメントを使用して、列の名前を変更します。
-    -   一部の列タイプの転送には、 `ALTER TABLE`のステートメントの`MODIFY COLUMN`と`CHANGE COLUMN`を使用します。
+    -   一部の列タイプの転送には、 `ALTER TABLE`のステートメントのうちの`MODIFY COLUMN`つと`CHANGE COLUMN`を使用します。
 
 ## 新しいツール {#new-tools}
 
--   `Loader`は、Perconaの`mydumper`データ形式と互換性があるように追加され、次の関数を提供します。
+-   Perconaの`mydumper`データ形式と互換性があるように`Loader`が追加され、次の関数が提供されます。
     -   マルチスレッドインポート
     -   エラーが発生した場合は再試行してください
     -   ブレークポイント履歴書

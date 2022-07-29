@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/backup-and-restore-azblob/']
 
 # BRを使用してAzureBlobStorageのデータをバックアップおよび復元する {#back-up-and-restore-data-on-azure-blob-storage-using-br}
 
-Backup＆Restore（BR）ツールは、データのバックアップと復元のための外部ストレージとしてAzureBlobStorageを使用することをサポートしています。
+Backup＆Restore（BR）ツールは、データをバックアップおよび復元するための外部ストレージとしてAzureBlobStorageを使用することをサポートしています。
 
 ## ユーザーシナリオ {#user-scenario}
 
@@ -23,7 +23,7 @@ BRを使用すると、次の2つの方法で、AzureBlobStorage上のデータ�
 
 以下は、前述の2つの方法を使用したAzureBlobStorageでのバックアップと復元の操作の例です。操作の目的は次のとおりです。
 
--   バックアップ： `test`のデータベースを`container=test`のコンテナー内のスペースにバックアップし、AzureBlobStorageのパスプレフィックスとして`t1`を使用します。
+-   バックアップ：Azure Blob Storageのパスプレフィックスとして`t1`を使用して、 `test`のデータベースを`container=test`のコンテナー内のスペースにバックアップします。
 -   復元：AzureBlobStorageのパスプレフィックスとして`t1`を使用する`container=test`コンテナー内のスペースから`test`データベースへのデータを復元します。
 
 > **ノート：**
@@ -86,7 +86,7 @@ BRおよびTiKVの動作環境で、環境変数`$AZURE_CLIENT_ID` 、および`
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&access-tier=Cool'
     ```
 
-    `access-tier`が設定されていない場合（値が空の場合）、デフォルトで値は`Hot`です。
+    `access-tier`が設定されていない（値が空の）場合、値はデフォルトで`Hot`です。
 
 -   コマンドラインパラメータとして`account-name`と`access-tier`を指定します。
 
@@ -112,7 +112,7 @@ BRおよびTiKVの動作環境で、環境変数`$AZURE_CLIENT_ID` 、および`
 
 ### 方法2：アクセスキーを使用してバックアップおよび復元する（簡単） {#method-2-back-up-and-restore-using-an-access-key-easy}
 
-Azure ADを使用したデータのバックアップと復元と比較すると、環境変数を構成する必要がないため、アクセスキーを使用したバックアップと復元が簡単です。その他の手順は、AzureADを使用する手順と同様です。
+Azure ADを使用したデータのバックアップと復元に比べて、環境変数を構成する必要がないため、アクセスキーを使用したバックアップと復元が簡単です。その他の手順は、AzureADを使用する手順と同様です。
 
 #### バックアップ {#back-up}
 

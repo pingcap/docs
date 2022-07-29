@@ -65,9 +65,9 @@ DESC tidb_hot_regions_history;
 -   IS_LEADER：PEERがLEADERであるかどうか。
 -   TYPE：ホットリージョンのタイプ。
 -   HOT_DEGREE：ホットリージョンのホット度。
--   FLOW_BYTES：リージョンで書き込まれ読み取られたバイト数。
+-   FLOW_BYTES：リージョンで書き込まれ、読み取られたバイト数。
 -   KEY_RATE：リージョンで書き込まれ、読み取られるキーの数。
--   QUERY_RATE：リージョンで書き込まれ読み取られたクエリの数。
+-   QUERY_RATE：リージョンで書き込まれ、読み取られたクエリの数。
 
 > **ノート：**
 >

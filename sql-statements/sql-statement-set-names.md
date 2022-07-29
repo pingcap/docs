@@ -3,7 +3,7 @@ title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
 summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
 ---
 
-# SET [NAMES | CHARACTER SET] {#set-names-character-set}
+# セット[名前|文字セット] {#set-names-character-set}
 
 ステートメント`SET NAMES` 、および`SET CHARACTER SET`は、現在の接続の変数`character_set_client` 、および`SET CHARSET`を`character_set_connection`し`character_set_results` 。
 
@@ -94,10 +94,10 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [[グローバル|セッション]変数を表示する](/sql-statements/sql-statement-show-variables.md)
 -   [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
 -   [文字セットと照合のサポート](/character-set-and-collation.md)

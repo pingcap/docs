@@ -3,7 +3,7 @@ title: ALTER INDEX
 summary: An overview of the usage of ALTER INDEX for the TiDB database.
 ---
 
-# ALTER INDEX {#alter-index}
+# ALTERINDEX {#alter-index}
 
 `ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスはDMLステートメントによって維持されますが、クエリオプティマイザでは使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。
 
@@ -102,7 +102,7 @@ ERROR 1176 (42000): Key 'c1' doesn't exist in table 't1'
 
 > **ノート：**
 >
-> ここでの「不可視」とは、オプティマイザにのみ不可視であることを意味します。非表示のインデックスは引き続き変更または削除できます。
+> ここでの「非表示」とは、オプティマイザにのみ非表示であることを意味します。非表示のインデックスは引き続き変更または削除できます。
 
 {{< copyable "" >}}
 
@@ -122,8 +122,8 @@ Query OK, 0 rows affected (0.02 sec)
 
 ## も参照してください {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [インデックスの作成](/sql-statements/sql-statement-create-index.md)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
+-   [インデックスの名前変更](/sql-statements/sql-statement-rename-index.md)

@@ -21,7 +21,7 @@ summary: Learn how to test the performance of DM clusters.
 
 ### テーブルスキーマ {#table-schema}
 
-パフォーマンステストには、次のスキーマを持つテーブルを使用します。
+パフォーマンステストには、次のスキーマのテーブルを使用します。
 
 {{< copyable "" >}}
 
@@ -36,7 +36,7 @@ CREATE TABLE `sbtest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin
 ```
 
-### 完全インポートベンチマークケース {#full-import-benchmark-case}
+### 完全なインポートベンチマークケース {#full-import-benchmark-case}
 
 #### テストデータを生成する {#generate-test-data}
 
@@ -50,7 +50,7 @@ sysbench --test=oltp_insert --tables=4 --mysql-host=172.16.4.40 --mysql-port=330
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームのMySQLソースを作成し、 `source-id`を`source-1`に設定します。詳細については、 [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリームのMySQLソースを作成し、 `source-id`から`source-1`に設定します。詳細については、 [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
 2.  移行タスクを作成します（ `full`モードで）。以下は、タスク構成テンプレートです。
 
@@ -88,12 +88,12 @@ mydumpers:
 
 > **ノート：**
 >
-> -   マルチスレッドを使用して単一のテーブルからデータを同時にエクスポートできるようにするには、 `mydumpers`の構成項目で`rows`のオプションを使用できます。これにより、データのエクスポートが高速化されます。
+> -   マルチスレッドを使用して単一のテーブルからデータを同時にエクスポートできるようにするには、 `mydumpers`の構成項目で`rows`オプションを使用できます。これにより、データのエクスポートが高速化されます。
 > -   さまざまな構成でパフォーマンスをテストするには、 `mysql-instances`の構成で`loader-thread`を調整し、 `mydumpers`の構成項目で`rows`と`threads`を調整します。
 
 #### テスト結果を取得する {#get-test-results}
 
-DMワーカーのログを確認します。 `all data files have been finished`が表示されている場合は、完全なデータがインポートされていることを意味します。この場合、データのインポートにかかった時間を確認できます。サンプルログは次のとおりです。
+DMワーカーのログを確認します。 `all data files have been finished`が表示されている場合は、完全なデータがインポートされていることを意味します。この場合、データのインポートに費やされた時間を確認できます。サンプルログは次のとおりです。
 
 ```
  [INFO] [loader.go:604] ["all data files have been finished"] [task=test] [unit=load] ["cost time"=52.439796ms]
@@ -109,9 +109,9 @@ DMワーカーのログを確認します。 `all data files have been finished`
 
 #### データ移行タスクを作成する {#create-a-data-migration-task}
 
-1.  アップストリームMySQLのソースを作成します。 `source-id`を`source-1`に設定します（ソースが[完全インポートベンチマークケース](#full-import-benchmark-case)で作成されている場合は、再度作成する必要はありません）。詳細については、 [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
+1.  アップストリームMySQLのソースを作成します。 `source-id`から`source-1`に設定します（ソースが[完全なインポートベンチマークケース](#full-import-benchmark-case)で作成されている場合は、再度作成する必要はありません）。詳細については、 [データソース構成をロードする](/dm/dm-manage-source.md#operate-data-source)を参照してください。
 
-2.  DM移行タスクを作成します（ `all`モードで）。次に、タスク構成ファイルの例を示します。
+2.  DM移行タスクを作成します（ `all`モードで）。以下は、タスク構成ファイルの例です。
 
 ```yaml
 ---
@@ -148,7 +148,7 @@ syncers:
 >
 > さまざまな構成でパフォーマンスをテストするために、 `syncers`の構成項目で`worker-count`と`batch`を調整できます。
 
-#### インクリメンタルデータを生成する {#generate-incremental-data}
+#### 増分データを生成する {#generate-incremental-data}
 
 アップストリームでインクリメンタルデータを継続的に生成するには、次の`sysbench`コマンドを実行します。
 

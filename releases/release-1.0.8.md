@@ -22,7 +22,7 @@ title: TiDB 1.0.8 Release Notes
 
 ## PD {#pd}
 
--   [リージョンハートビートのロック過熱を減らします](https://github.com/pingcap/pd/pull/932)
+-   [リージョンのハートビートのロックの過熱を減らします](https://github.com/pingcap/pd/pull/932)
 -   [ホットリージョンスケジューラが間違ったリーダーを選択する問題を修正します](https://github.com/pingcap/pd/pull/939)
 
 ## TiKV {#tikv}
@@ -31,4 +31,4 @@ title: TiDB 1.0.8 Release Notes
 -   [コプロセッサーの合計で`Decimal`を使用する](https://github.com/pingcap/tikv/pull/2754)
 -   [受信したスナップショットのメタデータを強制的に同期して、安全性を確保します](https://github.com/pingcap/tikv/pull/2758)
 
-1.0.7から1.0.8にアップグレードするには、PD-&gt;TiKV-&gt;TiDBのローリングアップグレードの順序に従います。
+1.0.7から1.0.8にアップグレードするには、PD-&gt;TiKV-&gt;TiDBのローリングアップグレード順序に従います。

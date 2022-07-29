@@ -34,17 +34,17 @@ PDサーバーは、クラスタ全体のメタデータ管理コンポーネン
 
 ### TiKVサーバー {#tikv-server}
 
-TiKVサーバーはデータの保存を担当します。 TiKVは、分散トランザクションのKey-Valueストレージエンジンです。
+TiKVサーバーはデータの保存を担当します。 TiKVは、分散型トランザクションキーバリューストレージエンジンです。
 
 <CustomContent platform="tidb">
 
-[領域](/glossary.md#regionpeerraft-group)はデータを格納するための基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉と右開の間隔である特定のキー範囲のデータが格納されます。
+[リージョン](/glossary.md#regionpeerraft-group)はデータを格納するための基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉と右開の間隔である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-[領域](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納するための基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉と右開の間隔である特定のキー範囲のデータが格納されます。
+[リージョン](/tidb-cloud/tidb-cloud-glossary.md#region)はデータを格納するための基本単位です。各リージョンには、StartKeyからEndKeyまでの左閉と右開の間隔である特定のキー範囲のデータが格納されます。
 
 </CustomContent>
 

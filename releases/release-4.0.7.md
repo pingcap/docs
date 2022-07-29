@@ -18,7 +18,7 @@ TiDBバージョン：4.0.7
 
     -   メトリック関係グラフの生成をサポート[＃760](https://github.com/pingcap-incubator/tidb-dashboard/pull/760)
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
@@ -26,7 +26,7 @@ TiDBバージョン：4.0.7
     -   コプロセッサキャッシュのヒット率情報を[＃19972](https://github.com/pingcap/tidb/pull/19972)に追加し`EXPLAIN ANALYZE`
     -   `ROUND`機能を[＃19967](https://github.com/pingcap/tidb/pull/19967)にプッシュダウンすることをサポート
     -   [＃19927](https://github.com/pingcap/tidb/pull/19927)にデフォルト値の`CMSketch`を追加し`ANALYZE`
-    -   エラーメッセージの感度低下を調整する[＃20004](https://github.com/pingcap/tidb/pull/20004)
+    -   エラーメッセージの感度低下を改善する[＃20004](https://github.com/pingcap/tidb/pull/20004)
     -   MySQL8.0のコネクタを使用してクライアントからの接続を受け入れる[＃19959](https://github.com/pingcap/tidb/pull/19959)
 
 -   TiKV
@@ -40,7 +40,7 @@ TiDBバージョン：4.0.7
 
 -   TiFlash
 
-    -   読み取り中に発生するRegionメタ変更のエラー処理を改善します
+    -   読み取り中に発生するリージョンメタ変更のエラー処理を改善します
 
 -   ツール
 
@@ -50,7 +50,7 @@ TiDBバージョン：4.0.7
 
     -   バックアップと復元（BR）
 
-        -   バックアップ中に接続が切断された場合の接続再試行を追加[＃508](https://github.com/pingcap/br/pull/508)
+        -   バックアップ中に接続が切断された場合の接続再試行の追加[＃508](https://github.com/pingcap/br/pull/508)
 
     -   TiDB Lightning
 
@@ -70,15 +70,15 @@ TiDBバージョン：4.0.7
     -   遅いログの`prev_stmt`情報が鈍感にならない問題を修正します[＃20048](https://github.com/pingcap/tidb/pull/20048)
     -   tidb-serverが異常終了したときにテーブルロックを解放しない問題を修正します[＃20020](https://github.com/pingcap/tidb/pull/20020)
     -   `ENUM`および`SET`タイプ[＃19950](https://github.com/pingcap/tidb/pull/19950)のデータを挿入するときに発生する誤ったエラーメッセージを修正します
-    -   状況によっては、 `IsTrue`関数の誤った動作を修正してください[＃19903](https://github.com/pingcap/tidb/pull/19903)
+    -   いくつかの状況で`IsTrue`関数の間違った動作を修正します[＃19903](https://github.com/pingcap/tidb/pull/19903)
     -   PDがスケールインまたはスケールアウトされた後に`CLUSTER_INFO`システムテーブルが正常に機能しない可能性がある問題を修正します[＃20026](https://github.com/pingcap/tidb/pull/20026)
-    -   `control`式で定数を折りたたむときの不要な警告やエラーを回避する[＃19910](https://github.com/pingcap/tidb/pull/19910)
+    -   `control`の式で定数を折りたたむときに不要な警告やエラーを回避する[＃19910](https://github.com/pingcap/tidb/pull/19910)
     -   メモリ不足（OOM） [＃20013](https://github.com/pingcap/tidb/pull/20013)を回避するために、統計を更新する方法を更新します。
 
 -   TiKV
 
-    -   TLSハンドシェイクが失敗したときにステータスAPIが使用できない問題を修正します[＃8649](https://github.com/tikv/tikv/pull/8649)
-    -   潜在的な未定義動作を修正する[＃7782](https://github.com/tikv/tikv/pull/7782)
+    -   TLSハンドシェイクが失敗したときに利用できないステータスAPIの問題を修正します[＃8649](https://github.com/tikv/tikv/pull/8649)
+    -   潜在的な未定義の動作を修正する[＃7782](https://github.com/tikv/tikv/pull/7782)
     -   `UnsafeDestroyRange`の実行時にスナップショットを生成することによって発生する可能性のあるpanicを修正し[＃8681](https://github.com/tikv/tikv/pull/8681)
 
 -   PD

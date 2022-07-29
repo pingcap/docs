@@ -5,7 +5,7 @@ summary: Learn seven tips for efficiently using Grafana to monitor TiDB.
 
 # Grafanaを使用してTiDBを監視するためのベストプラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-[TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を実行し、トポロジ構成にGrafanaとPrometheusを追加すると、 [Grafana+Prometheusモニタリングプラットフォーム](/tidb-monitoring-framework.md)のセットが同時にデプロイされ、TiDBクラスタのさまざまなコンポーネントとマシンのメトリックを収集して表示します。このドキュメントでは、Grafanaを使用してTiDBを監視するためのベストプラクティスについて説明します。これは、メトリックを使用してTiDBクラスタのステータスを分析し、問題を診断するのに役立つことを目的としています。
+[TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)を使用して、トポロジ構成にGrafanaとPrometheusを追加すると、 [Grafana+Prometheusモニタリングプラットフォーム](/tidb-monitoring-framework.md)のセットが同時にデプロイされ、TiDBクラスタのさまざまなコンポーネントとマシンのメトリックが収集および表示されます。このドキュメントでは、Grafanaを使用してTiDBを監視するためのベストプラクティスについて説明します。これは、メトリックを使用してTiDBクラスタのステータスを分析し、問題を診断するのに役立つことを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
@@ -48,7 +48,7 @@ tidb_executor_statement_total{type="Show"} 500531
 tidb_executor_statement_total{type="Use"} 466016
 ```
 
-上記のデータはPrometheusに保存され、Grafanaに表示されます。パネルを右クリックしてから、次の図に示す[**編集**]ボタンをクリックします（または<kbd>E</kbd>キーを直接押します）。
+上記のデータはPrometheusに保存され、Grafanaに表示されます。次の図に示すように、パネルを右クリックして、[**編集**]ボタンをクリックします（または<kbd>E</kbd>キーを直接押します）。
 
 ![The Edit entry for the Metrics tab](/media/best-practices/metric-board-edit-entry.png)
 
@@ -72,11 +72,11 @@ Prometheusは、多くのクエリ式と関数をサポートしています。�
 
 ### ヒント1：すべてのディメンションを確認し、クエリ式を編集します {#tip-1-check-all-dimensions-and-edit-the-query-expression}
 
-[モニタリングデータのソースと表示](#source-and-display-of-monitoring-data)セクションに示されている例では、データはタイプごとにグループ化されています。他のディメンションでグループ化できるかどうかを知り、使用可能なディメンションをすばやく確認する場合は、次の方法を使用でき**ます。クエリ式にメトリック名のみを保持し、計算は行わず、[ `Legend format` ]フィールドは空白のままにします**。このようにして、元のメトリックが表示されます。たとえば、次の図は、 `type`つの次元（ `instance` 、および`job` ）があることを示しています。
+[モニタリングデータのソースと表示](#source-and-display-of-monitoring-data)セクションに示されている例では、データはタイプごとにグループ化されています。他のディメンションでグループ化できるかどうかを知り、使用可能なディメンションをすばやく確認する場合は、次の方法を使用でき**ます。クエリ式でメトリック名のみを保持し、計算は行わず、[ `Legend format` ]フィールドは空白のままにします**。このようにして、元のメトリックが表示されます。たとえば、次の図は、 `type`つの次元（ `instance` 、および`job` ）があることを示しています。
 
 ![Edit query expression and check all dimensions](/media/best-practices/edit-expression-check-dimensions.jpg)
 
-次に、 `type`の後に`instance`ディメンションを追加し、 `Legend format`フィールドに`{{instance}}`を追加することで、クエリ式を変更できます。このようにして、各TiDBサーバーで実行されるさまざまなタイプのSQLステートメントのQPSを確認できます。
+次に、 `type`の後に`instance`次元を追加し、 `Legend format`フィールドに`{{instance}}`を追加することで、クエリ式を変更できます。このようにして、各TiDBサーバーで実行されるさまざまなタイプのSQLステートメントのQPSを確認できます。
 
 ![Add an instance dimension to the query expression](/media/best-practices/add-instance-dimension.jpeg)
 
@@ -96,7 +96,7 @@ Y軸を線形スケールに切り替えます。
 
 > **ヒント：**
 >
-> ヒント2とヒント1を組み合わせると、 `SELECT`ステートメントまたは`UPDATE`ステートメントのどちらが遅いかをすぐに分析するのに役立つ`sql_type`の次元を見つけることができます。遅いSQLステートメントでインスタンスを見つけることもできます。
+> ヒント2とヒント1を組み合わせると、 `sql_type`次元を見つけることができ、 `SELECT`ステートメントまたは`UPDATE`ステートメントのどちらが遅いかをすぐに分析するのに役立ちます。遅いSQLステートメントでインスタンスを見つけることもできます。
 
 ### ヒント3：Y軸のベースラインを変更して、変更を増幅します {#tip-3-modify-the-baseline-of-the-y-axis-to-amplify-changes}
 
@@ -112,23 +112,23 @@ Y軸を線形スケールに切り替えます。
 
 ### ヒント4：共有十字線またはツールチップを使用する {#tip-4-use-shared-crosshair-or-tooltip}
 
-**[設定]**パネルには、デフォルトで[<strong>デフォルト</strong>]になっている<strong>グラフツールチップ</strong>パネルオプションがあります。
+**[設定]**パネルには、デフォルトで[<strong>デフォルト</strong>]に設定されている<strong>グラフツールチップ</strong>パネルオプションがあります。
 
 ![Graphic presentation tools](/media/best-practices/graph-tooltip.jpeg)
 
-次の図に示すように、**共有十字線**と<strong>共有ツールチップ</strong>をそれぞれ使用して、効果をテストできます。次に、スケールがリンクして表示されます。これは、問題を診断するときに2つのメトリックの相関関係を確認するのに便利です。
+次の図に示すように、**共有十字線**と<strong>共有ツールチップ</strong>をそれぞれ使用して、効果をテストできます。次に、スケールがリンクで表示されます。これは、問題を診断するときに2つのメトリックの相関関係を確認するのに便利です。
 
 グラフィックプレゼンテーションツールを**共有十字線**に設定します。
 
 ![Set the graphical presentation tool to Shared crosshair](/media/best-practices/graph-tooltip-shared-crosshair.jpeg)
 
-グラフィックプレゼンテーションツールを**共有ツールチップ**に設定します。
+グラフィカルプレゼンテーションツールを**共有ツールチップ**に設定します。
 
 ![Set the graphic presentation tool to Shared Tooltip](/media/best-practices/graph-tooltip-shared-tooltip.jpg)
 
 ### ヒント5： <code>IP address:port number</code>を入力して、履歴のメトリックを確認します {#tip-5-enter-code-ip-address-port-number-code-to-check-the-metrics-in-history}
 
-PDのダッシュボードには、現在のリーダーの指標のみが表示されます。履歴内のPDリーダーのステータスを確認したいが、 `instance`フィールドのドロップダウンリストに存在しなくなった場合は、手動で`IP address:2379`を入力して、リーダーのデータを確認できます。
+PDのダッシュボードには、現在のリーダーの指標のみが表示されます。履歴内のPDリーダーのステータスを確認する必要があり、 `instance`フィールドのドロップダウンリストに存在しなくなった場合は、手動で`IP address:2379`を入力して、リーダーのデータを確認できます。
 
 ![Check the metrics in history](/media/best-practices/manually-input-check-metric.jpeg)
 

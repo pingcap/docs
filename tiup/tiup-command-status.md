@@ -4,14 +4,14 @@ title: tiup status
 
 # tiup status {#tiup-status}
 
-`tiup status`コマンドは、 `tiup [flags] <component> [args...]`コマンドを使用してコンポーネントを実行した後、コンポーネントの動作情報を表示するために使用されます。
+`tiup status`コマンドは、 `tiup [flags] <component> [args...]`コマンドを使用してコンポーネントを実行した後、コンポーネントの操作情報を表示するために使用されます。
 
 > **ノート：**
 >
 > 次のコンポーネントの情報のみを確認できます。
 >
 > -   まだ稼働中のコンポーネント
-> -   `tiup -T/--tag`で指定されたタグを通過するコンポーネント
+> -   `tiup -T/--tag`で指定されたタグを介して実行されるコンポーネント
 
 ## 構文 {#syntax}
 

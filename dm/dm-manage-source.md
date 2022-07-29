@@ -168,7 +168,7 @@ Global Flags:
   -s, --source strings   MySQL Source ID.
 ```
 
-転送する前に、DMは、バインド解除されるワーカーにまだ実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、最初に[タスクを一時停止します](/dm/dm-pause-task.md)を実行し、バインディングを変更してから[タスクを再開する](/dm/dm-resume-task.md)を実行する必要があります。
+DMは、転送する前に、バインド解除するワーカーにまだ実行中のタスクがあるかどうかを確認します。ワーカーに実行中のタスクがある場合は、最初に[タスクを一時停止します](/dm/dm-pause-task.md)を実行し、バインディングを変更してから[タスクを再開する](/dm/dm-resume-task.md)を実行する必要があります。
 
 ### 使用例 {#usage-example}
 
@@ -208,7 +208,7 @@ list-member --worker
 }
 ```
 
-上記の例では、 `mysql-replica-01`は`dm-worker-1`にバインドされています。次のコマンドは、 `mysql-replica-01`から`dm-worker-2`のバインディングワーカーを転送します。
+上記の例では、 `mysql-replica-01`は`dm-worker-1`にバインドされています。以下のコマンドは、 `mysql-replica-01`から`dm-worker-2`のバインディングワーカーを転送します。
 
 {{< copyable "" >}}
 

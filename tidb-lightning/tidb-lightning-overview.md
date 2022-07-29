@@ -5,7 +5,7 @@ summary: Learn about Lightning and the whole architecture.
 
 # TiDB Lightningの概要 {#tidb-lightning-overview}
 
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、大量のデータをTiDBクラスタに高速に完全にインポートするために使用されるツールです。 TiDB Lightningは[ここ](/download-ecosystem-tools.md)からダウンロードできます。
+[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、TiDBクラスタへの大量のデータの高速フルインポートに使用されるツールです。 TiDB Lightningは[ここ](/download-ecosystem-tools.md)からダウンロードできます。
 
 現在、 TiDB Lightningは、主に次の2つのシナリオで使用できます。
 
@@ -49,7 +49,7 @@ TiDB Lightningは、データのインポートにTiDBバックエンドを使�
 
 -   TiDB LightningをTiFlashと一緒に使用する場合：
 
-    テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
+    テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightning手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
 -   TiDB LightningをTiDBと一緒に使用する場合：
 

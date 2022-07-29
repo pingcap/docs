@@ -9,9 +9,9 @@ Avroは、 [ApacheAvro™](https://avro.apache.org/)で定義され、デフォ�
 
 ## Avroを使用する {#use-avro}
 
-メッセージキュー（MQ）をダウンストリームシンクとして使用する場合、 `sink-uri`でAvroを指定できます。 TiCDCはTiDBDMLイベントをキャプチャし、これらのイベントからAvroメッセージを作成し、メッセージをダウンストリームに送信します。 Avroはスキーマの変更を検出すると、最新のスキーマをスキーマレジストリに登録します。
+メッセージキュー（MQ）をダウンストリームシンクとして使用する場合、 `sink-uri`でAvroを指定できます。 TiCDCは、TiDB DMLイベントをキャプチャし、これらのイベントからAvroメッセージを作成して、メッセージをダウンストリームに送信します。 Avroはスキーマの変更を検出すると、最新のスキーマをスキーマレジストリに登録します。
 
-次に、Avroを使用した構成例を示します。
+以下は、Avroを使用した構成例です。
 
 {{< copyable "" >}}
 
@@ -26,7 +26,7 @@ dispatchers = [
 ]
 ```
 
-値`--schema-registry`は、 `https`プロトコルと`username:password`認証をサポートします（例： `--schema-registry=https://username:password@schema-registry-uri.com` ）。ユーザー名とパスワードはURLエンコードされている必要があります。
+値`--schema-registry`は、 `https`プロトコルと`username:password`認証をサポートします（例： `--schema-registry=https://username:password@schema-registry-uri.com` ）。ユーザー名とパスワードはURLエンコードする必要があります。
 
 ## TiDB拡張フィールド {#tidb-extension-fields}
 
@@ -36,7 +36,7 @@ dispatchers = [
 -   `_tidb_commit_ts` ：トランザクションの一意の識別子。
 -   `_tidb_commit_physical_time` ：トランザクション識別子の物理タイムスタンプ。
 
-次に、構成例を示します。
+構成例を次に示します。
 
 {{< copyable "" >}}
 
@@ -135,7 +135,7 @@ TiCDCはDMLイベントをKafkaイベントに変換し、イベントのキー�
 }
 ```
 
-1つの列がNULLになる可能性がある場合、カラムのデータ形式は次のようになります。
+1つの列をNULLにすることができる場合、カラムのデータ形式は次のようになります。
 
 ```
 {
@@ -190,19 +190,19 @@ TiCDCはDMLイベントをKafkaイベントに変換し、イベントのキー�
 | 設定         | 設定        | ストリング     |                                                                                                  |
 | 10進数       | 10進数      | バイト       | `avro-decimal-handling-mode`が文字列の場合、AVRO_TYPEは文字列です。                                             |
 
-Avroプロトコルでは、他の2つの`sink-uri`パラメーターがカラムデータ形式にも影響を与える可能性があります： `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode` 。
+Avroプロトコルでは、他の2つの`sink-uri`パラメーター（ `avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode` ）もカラムデータ形式に影響を与える可能性があります。
 
 -   `avro-decimal-handling-mode`は、Avroが次のような10進フィールドを処理する方法を制御します。
 
     -   string：Avroは10進フィールドを文字列として処理します。
     -   正確：Avroは10進フィールドをバイトとして処理します。
 
--   `avro-bigint-unsigned-handling-mode`は、AvroがBIGINTUNSIGNEDフィールドを処理する方法を制御します。
+-   `avro-bigint-unsigned-handling-mode`は、Avroが次のようなBIGINTUNSIGNEDフィールドを処理する方法を制御します。
 
     -   文字列：AvroはBIGINTUNSIGNEDフィールドを文字列として処理します。
-    -   long：Avroは、BIGINTUNSIGNEDフィールドを64ビットの符号付き整数として処理します。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
+    -   long：AvroはBIGINTUNSIGNEDフィールドを64ビットの符号付き整数として処理します。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
 
-次に、構成例を示します。
+構成例を次に示します。
 
 {{< copyable "" >}}
 
@@ -270,7 +270,7 @@ DECIMAL（10、4）
 
 AvroはダウンストリームでDDLイベントを生成しません。 DMLイベントが発生するたびにスキーマが変更されるかどうかをチェックします。スキーマが変更されると、Avroは新しいスキーマを生成し、それをスキーマレジストリに登録します。スキーマの変更が互換性チェックに合格しない場合、登録は失敗します。 Avroは、スキーマの互換性の問題を解決しません。
 
-スキーマの変更が互換性チェックに合格し、新しいバージョンが登録された場合でも、データプロデューサーとコンシューマーはシステムの正常な実行を保証するためにアップグレードを実行する必要があることに注意してください。
+スキーマの変更が互換性チェックに合格し、新しいバージョンが登録された場合でも、システムの正常な実行を保証するために、データプロデューサーとコンシューマーはアップグレードを実行する必要があることに注意してください。
 
 Confluent Schema Registryのデフォルトの互換性ポリシーが`BACKWARD`であると想定し、空でない列をソーステーブルに追加します。この状況では、Avroは新しいスキーマを生成しますが、互換性の問題のためにスキーマレジストリへの登録に失敗します。このとき、チェンジフィードはエラー状態になります。
 
@@ -278,4 +278,4 @@ Confluent Schema Registryのデフォルトの互換性ポリシーが`BACKWARD`
 
 ## トピックの配布 {#topic-distribution}
 
-スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、およびTopicRecordNameStrategyの3つの[主題名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートします。現在、TiCDC AvroはTopicNameStrategyのみをサポートしています。つまり、Kafkaトピックは1つのデータ形式のデータしか受信できません。したがって、TiCDC Avroは、複数のテーブルを同じトピックにマッピングすることを禁止しています。チェンジフィードを作成するときに、トピックルールに構成済みの配布ルールに`{schema}`と`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。
+スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、およびTopicRecordNameStrategyの[主題名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)つをサポートします。現在、TiCDC AvroはTopicNameStrategyのみをサポートしています。つまり、Kafkaトピックは1つのデータ形式でのみデータを受信できます。したがって、TiCDC Avroは、複数のテーブルを同じトピックにマッピングすることを禁止しています。チェンジフィードを作成するときに、トピックルールに構成済みの配布ルールに`{schema}`と`{table}`のプレースホルダーが含まれていない場合、エラーが報告されます。

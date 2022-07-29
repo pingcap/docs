@@ -5,7 +5,7 @@ summary: Learn how to use the functions and operators.
 
 # 関数と演算子のリファレンス {#function-and-operator-reference}
 
-TiDBの関数と演算子の使用法は、MySQLと似ています。 [MySQLの関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/functions.html)を参照してください。
+TiDBの関数と演算子の使用法は、MySQLと同様です。 [MySQLの関数と演算子](https://dev.mysql.com/doc/refman/5.7/en/functions.html)を参照してください。
 
 SQLステートメントでは、 `SELECT`ステートメントの`ORDER BY`節と`HAVING`節、 `SELECT` / `DELETE` / `UPDATE`ステートメントの`WHERE`節、および`SET`ステートメントで式を使用できます。
 

@@ -11,7 +11,7 @@ TiDB Cloudは[プロメテウス](https://prometheus.io/)のAPIエンドポイ�
 
 ## 前提条件 {#prerequisites}
 
--   TiDB CloudをPrometheusと統合するには、自己ホスト型または管理型のPrometheusサービスが必要です。
+-   TiDB CloudをPrometheusと統合するには、セルフホストまたはマネージドのPrometheusサービスが必要です。
 
 -   TiDB Cloudのサードパーティ統合設定を編集するには、組織への`Organization Owner`つのアクセス、またはTiDB Cloudのターゲットプロジェクトへの`Project Member`のアクセスが必要です。
 
@@ -23,7 +23,7 @@ PrometheusとGrafanaの統合を[開発者層](/tidb-cloud/select-cluster-tier.m
 
 ### 手順1.Prometheusのscrape_configファイルを取得します {#step-1-get-a-scrape-config-file-for-prometheus}
 
-TiDB Cloudのメトリックを読み取るようにPrometheusサービスを構成する前に、まずTiDBCloudでTiDB Cloudファイルを生成する必要があります。 scare_configファイルには、Prometheusサービスが現在のプロジェクトのデータベースクラスターを監視できるようにする一意のベアラートークンが含まれています。
+TiDB Cloudのメトリックを読み取るようにPrometheusサービスを構成する前に、まずTiDBCloudでTiDB Cloudファイルを生成する必要があります。 scare_configファイルには、Prometheusサービスが現在のプロジェクト内のデータベースクラスターを監視できるようにする一意のベアラートークンが含まれています。
 
 Prometheusのscrape_configファイルを取得するには、次の手順を実行します。
 
@@ -39,7 +39,7 @@ Prometheusのscrape_configファイルを取得するには、次の手順を実
 
     > **ノート：**
     >
-    > セキュリティ上の理由から、 TiDB Cloudは新しく生成されたscrap_configファイルを1回だけ表示します。ファイルウィンドウを閉じる前に、必ずコンテンツをコピーしてください。そうするのを忘れた場合は、 TiDB Cloudのscrape_configファイルを削除して、新しいファイルを生成する必要があります。 scare_configファイルを削除するには、ファイルを選択し、[ **...** ]をクリックして、[<strong>削除</strong>]をクリックします。
+    > セキュリティ上の理由から、 TiDB Cloudは新しく生成されたscrap_configファイルを1回だけ表示します。ファイルウィンドウを閉じる前に、必ずコンテンツをコピーしてください。そうするのを忘れた場合は、 TiDB Cloudのscrap_configファイルを削除して、新しいファイルを生成する必要があります。 scare_configファイルを削除するには、ファイルを選択し、[ **...** ]をクリックして、[<strong>削除</strong>]をクリックします。
 
 ### ステップ2.Prometheusと統合する {#step-2-integrate-with-prometheus}
 
@@ -59,7 +59,7 @@ Grafanaの使用方法の詳細については、 [Grafanaのドキュメント]
 
 ## 回転するscrap_configのベストプラクティス {#best-practice-of-rotating-scrape-config}
 
-データのセキュリティを向上させるには、scrap_configファイルベアラートークンを定期的にローテーションするのが一般的なベストプラクティスです。
+データのセキュリティを向上させるには、scrape_configファイルベアラートークンを定期的にローテーションするのが一般的なベストプラクティスです。
 
 1.  [ステップ1](#step-1-get-a-scrape_config-file-for-prometheus)に従って、Prometheusの新しいscrap_configファイルを作成します。
 2.  新しいファイルの内容をPrometheus構成ファイルに追加します。
@@ -76,7 +76,7 @@ Prometheusは、TiDBクラスターの次のメトリックデータを追跡し
 | tidbcloud_db_failed_queries_total     | カウント     | タイプ： `planner:xxx\|executor:2345\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb` | 実行エラーの総数                        |
 | tidbcloud_db_connections              | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`                                             | TiDBサーバーの現在の接続数                 |
 | tidbcloud_db_query_duration_seconds   | ヒストグラム   | sql_type： `Select\|Insert\|...`<br/> cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…`<br/>コンポーネント： `tidb`        | ステートメントの期間ヒストグラム                |
-| tidbcloud_node_storage_used_bytes     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク使用量バイト      |
+| tidbcloud_node_storage_used_bytes     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク使用バイト       |
 | tidbcloud_node_storage_capacity_bytes | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tikv-0\|tikv-1…\|tiflash-0\|tiflash-1…`<br/>コンポーネント： `tikv\|tiflash`             | TiKV/TiFlashノードのディスク容量バイト       |
 | tidbcloud_node_cpu_seconds_total      | カウント     | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのCPU使用率   |
 | tidbcloud_node_cpu_capacity_cores     | ゲージ      | cluster_name： `<cluster name>`<br/>インスタンス： `tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…`<br/>コンポーネント： `tidb\|tikv\|tiflash`         | TiDB / TiKV/TiFlashノードのCPU制限コア  |

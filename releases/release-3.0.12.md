@@ -35,17 +35,17 @@ TiDB Ansibleバージョン：3.0.12
 
 -   TiDB
     -   複数のユーザーを変更するときに`GRANT`が[＃15092](https://github.com/pingcap/tidb/pull/15092)性を保証するようにする`REVOKE`
-    -   パーティションテーブルでの悲観的ロックのロックが正しい行[＃15114](https://github.com/pingcap/tidb/pull/15114)のロックに失敗した問題を修正します。
+    -   パーティションテーブルでのペシミスティックロックのロックが正しい行[＃15114](https://github.com/pingcap/tidb/pull/15114)のロックに失敗した問題を修正します。
     -   インデックスの長さが制限[＃15130](https://github.com/pingcap/tidb/pull/15130)を超えた場合、構成の値`max-index-length`に従ってエラーメッセージを表示します。
     -   `FROM_UNIXTIME`関数[＃15270](https://github.com/pingcap/tidb/pull/15270)の誤った小数点の問題を修正します
-    -   トランザクションで自分で書き込んだレコードを削除することによって引き起こされる競合検出の失敗またはデータインデックスの不整合の問題を修正します[＃15176](https://github.com/pingcap/tidb/pull/15176)
+    -   トランザクション[＃15176](https://github.com/pingcap/tidb/pull/15176)で自分で書き込んだレコードを削除することによって引き起こされる競合検出の失敗またはデータインデックスの不整合の問題を修正します
 
 -   TiKV
-    -   既存のキーをトランザクションに挿入し、整合性チェックパラメーター[＃7054](https://github.com/tikv/tikv/pull/7054)を無効にしたときにすぐに削除することによって引き起こされる、競合検出の失敗またはデータインデックスの不整合の問題を修正します。
-    -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと、追跡が遅くなり、クラスタがスタックし、トランザクションサイズによってTiKV接続が頻繁に再接続される可能性があるという問題を解決します[＃7072](https://github.com/tikv/tikv/pull/7072) [＃6993](https://github.com/tikv/tikv/pull/6993)
+    -   既存のキーをトランザクションに挿入し、整合性チェックパラメータを無効にしたときにすぐに削除することによって引き起こされる競合検出の失敗またはデータインデックスの不整合の問題を修正します[＃7054](https://github.com/tikv/tikv/pull/7054)
+    -   Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと追跡が遅くなり、クラスタがスタックし、トランザクションサイズによってTiKV接続が頻繁に再接続される可能性があるという問題を解決します[＃7072](https://github.com/tikv/tikv/pull/7072) [＃6993](https://github.com/tikv/tikv/pull/6993)
 
 -   PD
-    -   PDがリージョンハートビートを処理するときにデータ競合によって引き起こされる誤ったリージョン情報の問題を修正します[＃2233](https://github.com/pingcap/pd/pull/2233)
+    -   PDがリージョンハートビートを処理するときにデータ競合が原因で発生するリージョン情報が正しくない問題を修正します[＃2233](https://github.com/pingcap/pd/pull/2233)
 
 -   TiDB Ansible
-    -   クラスタでの複数のGrafana/Prometheus/Alertmanagerのデプロイをサポート[＃1198](https://github.com/pingcap/tidb-ansible/pull/1198)
+    -   クラスタでの複数のGrafana/Prometheus/Alertmanagerのデプロイをサポート[#1198](https://github.com/pingcap/tidb-ansible/pull/1198)

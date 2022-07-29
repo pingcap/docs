@@ -9,7 +9,7 @@ summary: Learn how to tune the performance of TiFlash.
 
 ## リソースを計画する {#plan-resources}
 
-マシンリソースを節約し、分離の要件がない場合は、TiKVとTiFlashの両方の展開を組み合わせた方法を使用できます。 TiKVとTiFlashにそれぞれ十分なリソースを節約し、ディスクを共有しないことをお勧めします。
+マシンリソースを節約したいが、分離の要件がない場合は、TiKVとTiFlashの両方の展開を組み合わせた方法を使用できます。 TiKVとTiFlashにそれぞれ十分なリソースを節約し、ディスクを共有しないことをお勧めします。
 
 ## TiDBパラメータを調整する {#tune-tidb-parameters}
 
@@ -23,7 +23,7 @@ summary: Learn how to tune the performance of TiFlash.
 
 2.  スーパーバッチ機能を有効にします。
 
-    [`tidb_allow_batch_cop`](/system-variables.md#tidb_allow_batch_cop-new-in-v40)変数を使用して、TiFlashから読み取るときにRegionリクエストをマージするかどうかを設定できます。
+    [`tidb_allow_batch_cop`](/system-variables.md#tidb_allow_batch_cop-new-in-v40)変数を使用して、TiFlashから読み取るときにリージョンリクエストをマージするかどうかを設定できます。
 
     クエリに関係するリージョンの数が比較的多い場合は、この変数を`1` （TiFlashにプッシュダウンされる`aggregation`のオペレーターを持つコプロセッサー要求に有効）に設定するか、この変数を`2` （すべてのコプロセッサー要求に有効）に設定してみてください。 TiFlashにプッシュダウン）。
 

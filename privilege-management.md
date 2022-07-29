@@ -18,7 +18,7 @@ TiDBは、構文や特権タイプなど、 MySQL 5.7の特権管理システム
 
 `GRANT`ステートメントは、ユーザーアカウントに特権を付与します。
 
-たとえば、次のステートメントを使用して、 `xxx`人のユーザーに`test`のデータベースを読み取る権限を付与します。
+たとえば、次のステートメントを使用して、 `xxx`ユーザーに`test`データベースを読み取る特権を付与します。
 
 ```sql
 GRANT SELECT ON test.* TO 'xxx'@'%';
@@ -83,7 +83,7 @@ mysql> SELECT user,host,authentication_string FROM mysql.user WHERE user='idonte
 1 row in set (0.01 sec)
 ```
 
-`GRANT`のあいまい一致を使用して、データベースに特権を付与できます。
+`GRANT`であいまい一致を使用して、データベースに特権を付与できます。
 
 ```sql
 mysql> GRANT ALL PRIVILEGES ON `te%`.* TO genius;
@@ -162,7 +162,7 @@ SHOW GRANTS; -- show grants for the current user
 SHOW GRANTS FOR 'root'@'%'; -- show grants for a specific user
 ```
 
-たとえば、ユーザー`rw_user@192.168.%`を作成し、そのユーザーに`test.write_table`テーブルへの書き込み権限とグローバル読み取り権限を付与します。
+たとえば、ユーザー`rw_user@192.168.%`を作成し、 `test.write_table`テーブルに対する書き込み特権とグローバル読み取り特権をユーザーに付与します。
 
 ```sql
 CREATE USER `rw_user`@`192.168.%`;
@@ -187,7 +187,7 @@ SHOW GRANTS FOR `rw_user`@`192.168.%`;
 
 v5.1以降、TiDB機能は動的特権をサポートします。これはMySQL8.0から借用した機能です。動的特権は、特定の操作へのよりきめ細かいアクセスを実装することにより、 `SUPER`の特権を置き換えることを目的としています。たとえば、動的特権を使用して、システム管理者は`BACKUP`および`RESTORE`の操作のみを実行できるユーザーアカウントを作成できます。
 
-動的特権には次のものがあります。
+動的な特権は次のとおりです。
 
 -   `BACKUP_ADMIN`
 -   `RESTORE_ADMIN`
@@ -245,17 +245,17 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 ### ALTER {#alter}
 
 -   `ALTER`のステートメントすべてについて、ユーザーは対応するテーブルに対して`ALTER`の特権を持っている必要があります。
--   `ALTER...DROP`と`ALTER...RENAME TO`を除くステートメントの場合、ユーザーは対応するテーブルに対して`INSERT`と`CREATE`の特権を持っている必要があります。
+-   `ALTER...DROP`と`ALTER...RENAME TO`以外のステートメントの場合、ユーザーは対応するテーブルに対して`INSERT`と`CREATE`の特権を持っている必要があります。
 -   `ALTER...DROP`ステートメントの場合、ユーザーは対応するテーブルに対して`DROP`特権を持っている必要があります。
 -   `ALTER...RENAME TO`ステートメントの場合、ユーザーは、名前を変更する前にテーブルに対して`DROP`の特権を持ち、名前を変更した後にテーブルに対して`CREATE`と`INSERT`の特権を持っている必要があります。
 
 > **ノート：**
 >
-> MySQL 5.7のドキュメントでは、ユーザーはテーブルに対して`ALTER`の操作を実行するために`INSERT`と`CREATE`の特権が必要です。ただし、実際にはMySQL 5.7.25の場合、この場合は`ALTER`の特権のみが必要です。現在、TiDBの`ALTER`特権は、MySQLの実際の動作と一致しています。
+> MySQL 5.7のドキュメントでは、ユーザーはテーブルに対して`ALTER`の操作を実行するために`INSERT`つと`CREATE`の特権が必要です。ただし、実際にはMySQL 5.7.25の場合、この場合は`ALTER`の特権のみが必要です。現在、TiDBの`ALTER`特権は、MySQLの実際の動作と一致しています。
 
 ### バックアップ {#backup}
 
-`SUPER`または`BACKUP_ADMIN`の特権が必要です。
+`SUPER`つまたは`BACKUP_ADMIN`の特権が必要です。
 
 ### データベースの作成 {#create-database}
 
@@ -265,11 +265,11 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 テーブルに`INDEX`の特権が必要です。
 
-### テーブルの作成 {#create-table}
+### CREATE TABLE {#create-table}
 
 テーブルに`CREATE`の特権が必要です。
 
-`CREATE TABLE...LIKE...`ステートメントを実行するには、テーブルに対する`SELECT`特権が必要です。
+`CREATE TABLE...LIKE...`ステートメントを実行するには、テーブルの`SELECT`特権が必要です。
 
 ### ビューの作成 {#create-view}
 
@@ -305,7 +305,7 @@ mysql> SELECT * FROM INFORMATION_SCHEMA.USER_PRIVILEGES WHERE grantee = "'root'@
 
 ### テーブルの分析 {#analyze-table}
 
-テーブルには`INSERT`と`SELECT`の権限が必要です。
+テーブルに`INSERT`と`SELECT`の権限が必要です。
 
 ### 見せる {#show}
 
@@ -386,7 +386,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 1 row in set (0.00 sec)
 ```
 
-このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`表の有効射程はグローバルです。
+このレコードでは、 `Host`と`User`は、任意のホスト（ `%` ）から`root`ユーザーによって送信された接続要求を受け入れることができることを決定します。 `Select_priv`と`Insert_priv`は、ユーザーがグローバル`Select`と`Insert`の特権を持っていることを意味します。 `mysql.user`テーブルの有効範囲はグローバルです。
 
 `mysql.db`の`Host`と`User`は、ユーザーがアクセスできるデータベースを決定します。有効射程はデータベースです。
 
@@ -398,7 +398,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 クライアントが接続要求を送信すると、TiDBサーバーはログイン操作を確認します。 TiDBサーバーは最初に`mysql.user`のテーブルをチェックします。 `User`と`Host`のレコードが接続要求に一致する場合、TiDBサーバーは`authentication_string`を検証します。
 
-ユーザーIDは、接続を開始するホストである`Host`とユーザー名である`User`の2つの情報に基づいています。ユーザー名が空でない場合、指定されたユーザーと完全に一致する必要があります。
+ユーザーIDは、接続を開始するホストである`Host`とユーザー名である`User`の2つの情報に基づいています。ユーザー名が空でない場合は、指定されたユーザーと完全に一致する必要があります。
 
 `User` + `Host`は、 `user`のテーブルの複数の行に一致する場合があります。このシナリオに対処するために、 `user`テーブルの行がソートされます。クライアントが接続すると、テーブルの行が1つずつチェックされます。最初に一致した行が検証に使用されます。並べ替えるとき、ホストはユーザーの前にランク付けされます。
 
@@ -408,7 +408,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 データベース関連の要求（ `INSERT` ）の場合、要求検証プロセスは最初に`UPDATE`テーブル内のユーザーのグローバル特権をチェックし`mysql.user` 。特権が付与されている場合は、直接アクセスできます。そうでない場合は、 `mysql.db`の表を確認してください。
 
-`user`テーブルには、デフォルトのデータベースに関係なくグローバル権限があります。たとえば、 `user`の`DELETE`特権は、任意の行、テーブル、またはデータベースに適用できます。
+`user`のテーブルには、デフォルトのデータベースに関係なくグローバル権限があります。たとえば、 `user`の`DELETE`特権は、任意の行、テーブル、またはデータベースに適用できます。
 
 `db`の表では、空のユーザーは匿名ユーザー名と一致します。 `User`列にワイルドカードを使用することはできません。 `Host`列と`Db`列の値は、パターンマッチングを使用できる`%`列と`_`列を使用できます。
 
@@ -418,7 +418,7 @@ mysql> SELECT User,Host,Select_priv,Insert_priv FROM mysql.user LIMIT 1;
 
 ### 効果の時間 {#time-of-effect}
 
-TiDBが起動すると、いくつかの特権チェックテーブルがメモリにロードされ、キャッシュされたデータが特権の検証に使用されます。 `GRANT`などの`CREATE USER`管理ステートメントの実行はすぐに`DROP USER`になり`REVOKE` 。
+TiDBが起動すると、いくつかの特権チェックテーブルがメモリにロードされ、キャッシュされたデータを使用して特権が検証されます。 `GRANT`などの`CREATE USER`管理ステートメントの実行はすぐに`DROP USER`になり`REVOKE` 。
 
 `INSERT`などの`UPDATE`を使用して`mysql.user`などのテーブルを手動で編集しても、すぐには有効になりませ`DELETE` 。この動作はMySQLと互換性があり、特権キャッシュは次のステートメントで更新できます。
 

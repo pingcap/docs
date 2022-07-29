@@ -15,7 +15,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 -   PDノードの一意の名前
 -   デフォルト値： `"pd"`
--   複数のPDノードを開始するには、ノードごとに一意の名前を使用します。
+-   PDノードの乗算を開始するには、ノードごとに一意の名前を使用します。
 
 ### <code>data-dir</code> {#code-data-dir-code}
 
@@ -26,26 +26,26 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 -   PDがリッスンするクライアントURLのリスト
 -   デフォルト値： `"http://127.0.0.1:2379"`
--   クラスタを展開するときは、現在のホストのIPアドレスを`client-urls` （たとえば、 `"http://192.168.100.113:2379"` ）として指定する必要があります。クラスタがDockerで実行されている場合は、DockerのIPアドレスを`"http://0.0.0.0:2379"`として指定します。
+-   クラスタをデプロイするときは、現在のホストのIPアドレスを`client-urls` （たとえば、 `"http://192.168.100.113:2379"` ）として指定する必要があります。クラスタがDockerで実行されている場合は、DockerのIPアドレスを`"http://0.0.0.0:2379"`として指定します。
 
 ### <code>advertise-client-urls</code> {#code-advertise-client-urls-code}
 
 -   クライアントがPDにアクセスするためのアドバタイズURLのリスト
 -   デフォルト値： `"${client-urls}"`
--   DockerまたはNATネットワーク環境などの一部の状況で、クライアントがPDによってリッスンされるデフォルトのクライアントURLを介してPDにアクセスできない場合は、アドバタイズするクライアントURLを手動で設定する必要があります。
+-   DockerまたはNATネットワーク環境などの一部の状況では、クライアントがPDによってリッスンされたデフォルトのクライアントURLを介してPDにアクセスできない場合、アドバタイズクライアントURLを手動で設定する必要があります。
 -   たとえば、Dockerの内部IPアドレスは`172.17.0.1`ですが、ホストのIPアドレスは`192.168.100.113`で、ポートマッピングは`-p 2380:2380`に設定されています。この場合、 `advertise-client-urls`を設定でき`"http://192.168.100.113:2380"` 。クライアントは`"http://192.168.100.113:2380"`までこのサービスを見つけることができます。
 
 ### <code>peer-urls</code> {#code-peer-urls-code}
 
 -   PDノードがリッスンするピアURLのリスト
 -   デフォルト値： `"http://127.0.0.1:2380"`
--   クラスタを展開するときは、現在のホストのIPアドレスとして`peer-urls` （ `"http://192.168.100.113:2380"`など）を指定する必要があります。クラスタがDockerで実行されている場合は、DockerのIPアドレスを`"http://0.0.0.0:2380"`として指定します。
+-   クラスタをデプロイするときは、現在のホストのIPアドレスとして`peer-urls` （ `"http://192.168.100.113:2380"`など）を指定する必要があります。クラスタがDockerで実行されている場合は、DockerのIPアドレスを`"http://0.0.0.0:2380"`として指定します。
 
 ### <code>advertise-peer-urls</code> {#code-advertise-peer-urls-code}
 
 -   PDノードにアクセスするための他のPDノード（ピア）のアドバタイズURLのリスト
 -   デフォルト： `"${peer-urls}"`
--   DockerまたはNATネットワーク環境などの一部の状況で、他のノード（ピア）がこのPDノードによってリッスンされるデフォルトのピアURLを介してPDノードにアクセスできない場合は、アドバタイズするピアURLを手動で設定する必要があります。
+-   DockerまたはNATネットワーク環境などの一部の状況で、他のノード（ピア）がこのPDノードによってリッスンされるデフォルトのピアURLを介してPDノードにアクセスできない場合は、アドバタイズピアURLを手動で設定する必要があります。
 -   たとえば、Dockerの内部IPアドレスは`172.17.0.1`ですが、ホストのIPアドレスは`192.168.100.113`で、ポートマッピングは`-p 2380:2380`に設定されています。この場合、 `advertise-peer-urls`を設定でき`"http://192.168.100.113:2380"` 。他のPDノードは`"http://192.168.100.113:2380"`を介してこのサービスを見つけることができます。
 
 ### <code>initial-cluster</code> {#code-initial-cluster-code}
@@ -68,11 +68,11 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 -   ブートストラップフェーズ中にさまざまなクラスターを識別します
 -   デフォルト値： `"pd-cluster"`
--   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合は、異なるクラスタノードを分離するために異なるトークンを指定する必要があります。
+-   同じ構成のノードを持つ複数のクラスターが連続してデプロイされる場合は、異なるトークンを指定して、異なるクラスタノードを分離する必要があります。
 
 ### <code>lease</code> {#code-lease-code}
 
--   PDリーダーキーリースのタイムアウト。タイムアウト後、システムはリーダーを再選出します。
+-   PDリーダーキーリースのタイムアウト。タイムアウト後、システムはリーダーを再選します。
 -   デフォルト値： `3`
 -   単位：秒
 
@@ -90,7 +90,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 ### <code>auto-compaction-retention</code> {#code-auto-compaction-retention-code}
 
 -   `auto-compaction-retention`が`periodic`の場合のメタ情報データベースの自動圧縮の時間間隔。圧縮モードが`revision`に設定されている場合、このパラメーターは自動圧縮のバージョン番号を示します。
--   デフォルト値：1h
+-   デフォルト値：1時間
 
 ### <code>force-new-cluster</code> {#code-force-new-cluster-code}
 
@@ -195,7 +195,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ### <code>split-merge-interval</code> {#code-split-merge-interval-code}
 
--   同じリージョンでの`split`回の操作と`merge`の操作の間の時間間隔を制御します。つまり、新しく分割されたリージョンはしばらくの間マージされません。
+-   同じリージョンでの`split`操作と`merge`操作の間の時間間隔を制御します。つまり、新しく分割されたリージョンはしばらくの間マージされません。
 -   デフォルト値： `1h`
 
 ### <code>max-snapshot-count</code> {#code-max-snapshot-count-code}
@@ -205,7 +205,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ### <code>max-pending-peer-count</code> {#code-max-pending-peer-count-code}
 
--   1つのストアで保留中のピアの最大数を制御します。 PDスケジューラーは、この構成に依存して、古いログを持つリージョンが一部のノードで生成されるのを防ぎます。
+-   1つのストアで保留中のピアの最大数を制御します。 PDスケジューラーはこの構成に依存して、古いログを持つリージョンが一部のノードで生成されるのを防ぎます。
 -   デフォルト値： `64`
 
 ### <code>max-store-down-time</code> {#code-max-store-down-time-code}
@@ -275,13 +275,13 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ### <code>region-score-formula-version</code> <span class="version-mark">versionv5.0の新機能</span> {#code-region-score-formula-version-code-span-class-version-mark-new-in-v5-0-span}
 
--   地域スコア式のバージョンを制御します
+-   リージョンスコア式のバージョンを制御します
 -   デフォルト値： `v2`
 -   オプションの値： `v1`および`v2` 。 v1と比較して、v2での変更はよりスムーズであり、スペースの再利用によって引き起こされるスケジューリングジッターが改善されています。
 
 > **ノート：**
 >
-> クラスタをTiDB4.0バージョンから現在のバージョンにアップグレードした場合、アップグレードの前後で一貫したPDの動作を保証するために、新しい数式バージョンはデフォルトで自動的に無効になります。数式のバージョンを変更する場合は、手動で`pd-ctl`の設定を切り替える必要があります。詳しくは[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)をご覧ください。
+> クラスタをTiDB4.0バージョンから現在のバージョンにアップグレードした場合、アップグレードの前後で一貫したPD動作を保証するために、新しい式バージョンはデフォルトで自動的に無効になります。数式のバージョンを変更する場合は、手動で`pd-ctl`の設定を切り替える必要があります。詳しくは[PD Control](/pd-control.md#config-show--set-option-value--placement-rules)をご覧ください。
 
 ### <code>enable-joint-consensus</code><span class="version-mark">の新機能</span> {#code-enable-joint-consensus-code-span-class-version-mark-new-in-v5-0-span}
 
@@ -295,7 +295,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 > **ノート：**
 >
-> ホットリージョンに関する情報は、3分ごとに更新されます。間隔が3分未満に設定されている場合、間隔中の更新は無意味になる可能性があります。
+> ホットリージョンに関する情報は、3分ごとに更新されます。間隔が3分未満に設定されている場合、間隔中の更新は無意味である可能性があります。
 
 ### <code>hot-regions-reserved-days</code> <span class="version-mark">daysv5.4.0の新機能</span> {#code-hot-regions-reserved-days-code-span-class-version-mark-new-in-v5-4-0-span}
 
@@ -319,7 +319,7 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 
 ### <code>isolation-level</code> {#code-isolation-level-code}
 
--   TiKVクラスタの最小トポロジー分離レベル
+-   TiKVクラスタの最小トポロジ分離レベル
 -   デフォルト値： `""`
 -   [クラスタートポロジ構成](/schedule-replicas-by-topology-labels.md)
 
@@ -338,11 +338,11 @@ PD構成ファイルは、コマンドラインパラメーターよりも多く
 ### <code>flow-round-by-digit</code>ごとの<span class="version-mark">フローTiDB5.1の新機能</span> {#code-flow-round-by-digit-code-span-class-version-mark-new-in-tidb-5-1-span}
 
 -   デフォルト値：3
--   PDはフロー番号の最下位桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この構成項目は、リージョンフロー情報を丸める最下位桁数を指定するために使用されます。たとえば、デフォルト値は`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
+-   PDはフロー番号の最下位桁を丸めます。これにより、リージョンフロー情報の変更によって引き起こされる統計の更新が削減されます。この構成項目は、リージョンフロー情報を丸める最下位桁数を指定するために使用されます。たとえば、デフォルト値が`3`であるため、フロー`100512`は`101000`に丸められます。この構成は`trace-region-flow`を置き換えます。
 
 > **ノート：**
 >
-> クラスタをTiDB4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作と、アップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前に`trace-region-flow`の値がfalseの場合、アップグレード後の`flow-round-by-digit`の値は127であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
+> クラスタをTiDB4.0バージョンから現在のバージョンにアップグレードした場合、アップグレード後の`flow-round-by-digit`の動作と、アップグレード前の`trace-region-flow`の動作はデフォルトで一貫しています。これは、アップグレード前の値`trace-region-flow`がfalseの場合、アップグレード後の値`flow-round-by-digit`は127であることを意味します。アップグレード前の`trace-region-flow`の値が`true`の場合、アップグレード後の`flow-round-by-digit`の値は`3`です。
 
 ## <code>label-property</code> {#code-label-property-code}
 

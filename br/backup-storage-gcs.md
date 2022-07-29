@@ -5,7 +5,7 @@ summary: Learn how to use BR to back up and restore data on Google Cloud Storage
 
 # BRを使用してGoogleCloudStorageのデータをバックアップおよび復元する {#back-up-and-restore-data-on-google-cloud-storage-using-br}
 
-Backup＆Restore（BR）ツールは、データをバックアップおよび復元するための外部ストレージとしてGoogle Cloud Storage（GCS）を使用することをサポートしています。
+バックアップと復元（BR）ツールは、データをバックアップおよび復元するための外部ストレージとしてGoogle Cloud Storage（GCS）の使用をサポートします。
 
 ## ユーザーシナリオ {#user-scenario}
 

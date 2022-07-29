@@ -77,7 +77,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 ## も参照してください {#see-also}
 
--   [SQLの配置ルール](/placement-rules-in-sql.md)
+-   [SQLでの配置ルール](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)
 -   [ドロップ配置ポリシー](/sql-statements/sql-statement-drop-placement-policy.md)

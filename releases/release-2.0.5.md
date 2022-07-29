@@ -10,9 +10,9 @@ title: TiDB 2.0.5 Release Notes
 
 -   新機能
     -   トランザクションの自動再試行を無効にするために使用される`tidb_disable_txn_auto_retry`のシステム変数を追加します[＃6877](https://github.com/pingcap/tidb/pull/6877)
--   改善
+-   改善点
     -   `Selection`のコスト計算を最適化して、結果をより正確にします[＃6989](https://github.com/pingcap/tidb/pull/6989)
-    -   一意のインデックスまたは主キーと完全に一致するクエリ条件をクエリパスとして直接選択します[＃6966](https://github.com/pingcap/tidb/pull/6966)
+    -   一意のインデックスまたは主キーに完全に一致するクエリ条件をクエリパスとして直接選択します[＃6966](https://github.com/pingcap/tidb/pull/6966)
     -   サービスの開始に失敗した場合は、必要なクリーンアップを実行してください[＃6964](https://github.com/pingcap/tidb/pull/6964)
     -   `Load Data`ステートメント[＃6962](https://github.com/pingcap/tidb/pull/6962)で`\N`をNULLとして処理します。
     -   CBO1の[＃6953](https://github.com/pingcap/tidb/pull/6953)構造を最適化する
@@ -20,9 +20,9 @@ title: TiDB 2.0.5 Release Notes
     -   SQLステートメントの改行を削除し、ユーザー情報を追加して、低速クエリの形式を最適化します[＃6920](https://github.com/pingcap/tidb/pull/6920)
     -   コメント[＃6858](https://github.com/pingcap/tidb/pull/6858)で複数のアスタリスクをサポートする
 -   バグの修正
-    -   `KILL QUERY`には常にSUPER特権[＃7003](https://github.com/pingcap/tidb/pull/7003)が必要であるという問題を修正します
+    -   `KILL QUERY`は常にSUPER特権[＃7003](https://github.com/pingcap/tidb/pull/7003)を必要とする問題を修正します
     -   ユーザー数が1024を超えるとユーザーがログインに失敗する可能性がある問題を修正します[＃6986](https://github.com/pingcap/tidb/pull/6986)
-    -   署名されて[＃6940](https://github.com/pingcap/tidb/pull/6940)ない`float`データの挿入に関する問題を修正する`double`
+    -   署名されて[＃6940](https://github.com/pingcap/tidb/pull/6940)ない`float`データの挿入に関する問題を修正`double`
     -   `COM_FIELD_LIST`コマンドの互換性を修正して、一部のMariaDBクライアントのpanicの問題を解決します[＃6929](https://github.com/pingcap/tidb/pull/6929)
     -   `CREATE TABLE IF NOT EXISTS LIKE`の動作を修正[＃6928](https://github.com/pingcap/tidb/pull/6928)
     -   TopNプッシュダウン[＃6923](https://github.com/pingcap/tidb/pull/6923)のプロセスの問題を修正します

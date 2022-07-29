@@ -10,7 +10,7 @@ summary: Learn about the key features of DM and appropriate parameter configurat
 異なるDMバージョンの場合、テーブルルーティング、ブロックおよび許可リスト、およびbinlogイベントフィルター機能のスキーマ名またはテーブル名の異なる一致ルールに注意してください。
 
 -   DM v1.0.5以降のバージョンでは、上記のすべての機能が[ワイルドカード一致](https://en.wikipedia.org/wiki/Glob_(programming)#Syntax)をサポートします。 DMのすべてのバージョンで、ワイルドカード式に含めることができる`*`は**1つだけ**であり、 `*`<strong>を最後に配置する必要が</strong>あることに注意してください。
--   v1.0.5より前のバージョンのDMの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`および`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
+-   v1.0.5より前のバージョンのDMの場合、テーブルルーティングとbinlogイベントフィルターはワイルドカードをサポートしますが、 `[...]`式と`[!...]`式はサポートしません。ブロック＆許可リストは正規表現のみをサポートします。
 
 単純なシナリオでの照合には、ワイルドカードを使用することをお勧めします。
 
@@ -20,7 +20,7 @@ summary: Learn about the key features of DM and appropriate parameter configurat
 
 > **ノート：**
 >
-> -   1つのテーブルに複数の異なるルーティングルールを設定することはサポートされていません。
+> -   1つのテーブルに複数の異なるルーティングルールを構成することはサポートされていません。
 > -   スキーマの一致ルールは個別に構成する必要があります。これは、 [パラメータ設定](#parameter-configuration)つのうち`rule-2`に示すように、 `CREATE/DROP SCHEMA xx`を移行するために使用されます。
 
 ### パラメータ設定 {#parameter-configuration}
@@ -72,7 +72,7 @@ DMは、 [テーブルセレクターによって提供される`schema-pattern`
 
 #### シャーディングされたスキーマをマージする {#merge-sharded-schemas}
 
-シャーディングされたスキーマのシナリオで、 `test_{1,2,3...}`を移行するとします。 `test`への2つのアップストリームMySQLインスタンスの`t_{1,2,3...}`のテーブル。ダウンストリームTiDBインスタンスの`t_{1,2,3...}`のテーブル。
+シャードスキーマのシナリオで、 `test_{1,2,3...}`を移行するとします。 `test`への2つのアップストリームMySQLインスタンスの`t_{1,2,3...}`のテーブル。ダウンストリームTiDBインスタンスの`t_{1,2,3...}`のテーブル。
 
 アップストリームスキーマをダウンストリーム`test`に移行するには。 `t_[1,2,3]` 、必要なルーティングルールは1つだけです。
 
@@ -82,7 +82,7 @@ DMは、 [テーブルセレクターによって提供される`schema-pattern`
     target-schema: "test"
 ```
 
-#### 正しくないテーブルルーティング {#incorrect-table-routing}
+#### 不正なテーブルルーティング {#incorrect-table-routing}
 
 次の2つのルーティングルールが構成されていると仮定し`test_1_bak` 。 `t_1_bak`は`rule-1`と`rule-2`の両方に一致します。テーブルルーティング構成が数の制限に違反しているため、エラーが報告されます。
 
@@ -145,7 +145,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 >
 > DMとMySQLでは、許可リストとブロックリストのフィルタリングルールは次の点で異なります。
 >
-> -   MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。 DMでは、一部のパラメーター値は、 `~`文字で始まる正規表現を直接サポートします。
+> -   MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。 DMでは、一部のパラメーター値は`~`文字で始まる正規表現を直接サポートします。
 > -   DMは現在、 `ROW`形式のbinlogのみをサポートしており、 `STATEMENT`または`MIXED`形式のbinlogはサポートしていません。したがって、DMのフィルタリングルールは、MySQLの`ROW`形式のフィルタリングルールに対応しています。
 > -   MySQLは、ステートメントの`USE`セクションで明示的に指定されたデータベース名によってのみDDLステートメントを決定します。 DMは、最初にDDLステートメントのデータベース名セクションに基づいてステートメントを決定します。 DDLステートメントにそのようなセクションが含まれていない場合、DMは`USE`セクションによってステートメントを決定します。決定されるSQLステートメントが`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`であると仮定します。 `replicate-do-db=test_db_1`はMySQLで構成され、 `do-dbs: ["test_db_1"]`はDMで構成されます。その場合、このルールはDMにのみ適用され、MySQLには適用されません。
 
@@ -156,26 +156,26 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
     -   `do-dbs`が空でない場合は、一致するスキーマが`do-dbs`に存在するかどうかを判断します。
 
         -   はいの場合は、引き続きテーブルレベルでフィルタリングします。
-        -   そうでない場合は、フィルター`test` 。 `t` 。
+        -   そうでない場合は、フィルター`test` 。 `t` .
 
     -   `do-dbs`が空で、 `ignore-dbs`が空でない場合は、一致したスキーマが`ignore-dbs`で終了するかどうかを判断します。
 
-        -   はいの場合、フィルター`test` 。 `t` 。
+        -   はいの場合、フィルター`test` 。 `t` .
         -   そうでない場合は、引き続きテーブルレベルでフィルタリングします。
 
-    -   `do-dbs`と`ignore-dbs`の両方が空の場合は、テーブルレベルでフィルタリングを続行します。
+    -   `do-dbs`と`ignore-dbs`の両方が空の場合は、引き続きテーブルレベルでフィルタリングします。
 
 2.  テーブルレベルでのフィルタリング：
 
     1.  `do-tables`が空でない場合は、一致するテーブルが`do-tables`に存在するかどうかを判断します。
 
-        -   はいの場合、 `test`を移行します。 `t` 。
-        -   そうでない場合は、フィルター`test` 。 `t` 。
+        -   はいの場合、 `test`を移行します。 `t` .
+        -   そうでない場合は、フィルター`test` 。 `t` .
 
     2.  `ignore-tables`が空でない場合は、一致するテーブルが`ignore-tables`に存在するかどうかを判断します。
 
-        -   はいの場合、フィルター`test` 。 `t` 。
-        -   そうでない場合は、 `test`を移行します。 `t` 。
+        -   はいの場合、フィルター`test` 。 `t` .
+        -   そうでない場合は、 `test`を移行します。 `t` .
 
     3.  `do-tables`と`ignore-tables`の両方が空の場合は、 `test`を移行します。 `t` 。
 
@@ -217,25 +217,25 @@ block-allow-list:  # Use black-white-list if the DM version is earlier than or e
 
 `bw-rule`のルールを使用した後：
 
-| テーブル                             | フィルタリングするかどうか | なぜフィルタリングするのか                                                                                                                                      |
-| :------------------------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `logs` 。 `messages_2016`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                     |
-| `logs` 。 `messages_2017`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                     |
-| `logs` 。 `messages_2018`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                     |
-| `forum_backup_2016` 。 `messages` | はい            | スキーマ`forum_backup_2016`はどの`do-dbs`とも一致しません。                                                                                                        |
-| `forum_backup_2017` 。 `messages` | はい            | スキーマ`forum_backup_2017`はどの`do-dbs`とも一致しません。                                                                                                        |
-| `forum` 。 `users`                | はい            | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.スキーマとテーブルが`do-tables`と`ignore-tables`のいずれにも一致せず、 `do-tables`は空ではありません。</li>             |
-| `forum` 。 `messages`             | いいえ           | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.表`messages`は`do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`にあります。</li>          |
-| `forum_backup_2018` 。 `messages` | いいえ           | <li>スキーマ`forum_backup_2018`は`do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2.スキーマとテーブルは`do-tables`と一致し`db-name: "~^forum.*",tbl-name: "messages"` 。</li> |
+| テーブル                             | フィルタリングするかどうか | なぜフィルターするのか                                                                                                                                         |
+| :------------------------------- | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `logs` 。 `messages_2016`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                      |
+| `logs` 。 `messages_2017`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                      |
+| `logs` 。 `messages_2018`         | はい            | スキーマ`logs`はどの`do-dbs`とも一致しません。                                                                                                                      |
+| `forum_backup_2016` 。 `messages` | はい            | スキーマ`forum_backup_2016`はどの`do-dbs`とも一致しません。                                                                                                         |
+| `forum_backup_2017` 。 `messages` | はい            | スキーマ`forum_backup_2017`はどの`do-dbs`とも一致しません。                                                                                                         |
+| `forum` 。 `users`                | はい            | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルで引き続きフィルタリングします。<br/> 2.スキーマとテーブルが`do-tables`と`ignore-tables`のいずれにも一致せず、 `do-tables`が空ではありません。</li>             |
+| `forum` 。 `messages`             | いいえ           | <li>スキーマ`forum`は`do-dbs`と一致し、テーブルレベルで引き続きフィルタリングします。<br/> 2.表`messages`は`do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`にあります。</li>          |
+| `forum_backup_2018` 。 `messages` | いいえ           | <li>スキーマ`forum_backup_2018`は`do-dbs`と一致し、テーブルレベルで引き続きフィルタリングします。<br/> 2.スキーマとテーブルは`do-tables`に一致し`db-name: "~^forum.*",tbl-name: "messages"` 。</li> |
 
 ## Binlogイベントフィルター {#binlog-event-filter}
 
-Binlogイベントフィルターは、ブロックおよび許可リストのフィルタリングルールよりもきめ細かいフィルタリングルールです。 `INSERT`や`TRUNCATE TABLE`などのステートメントを使用して、移行またはフィルターで除外する必要がある`schema/table`のbinlogイベントを指定できます。
+Binlogイベントフィルターは、ブロックよりもきめ細かいフィルタリングルールであり、リストフィルタリングルールを許可します。 `INSERT`や`TRUNCATE TABLE`などのステートメントを使用して、移行またはフィルターで除外する必要がある`schema/table`のbinlogイベントを指定できます。
 
 > **ノート：**
 >
 > -   同じテーブルが複数のルールに一致する場合、これらのルールが順番に適用され、ブロックリストが許可リストよりも優先されます。これは、 `Ignore`と`Do`の両方のルールがテーブルに適用される場合、 `Ignore`のルールが有効になることを意味します。
-> -   DM v2.0.2以降では、ソース構成ファイルでbinlogイベントフィルターを構成できます。詳細については、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
+> -   DM v2.0.2以降、ソース構成ファイルでbinlogイベントフィルターを構成できます。詳細については、 [アップストリームデータベースConfiguration / コンフィグレーションファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 ### パラメータ設定 {#parameter-configuration}
 
@@ -282,7 +282,7 @@ filters:
 
     -   `Do` ：許可リスト。 binlogは、次の2つの条件のいずれかでフィルタリングされます。
         -   イベントのタイプは、ルールの`event`リストに含まれていません。
-        -   イベントのSQLステートメントは、ルールの`sql-pattern`と一致することはできません。
+        -   イベントのSQLステートメントは、ルールの`sql-pattern`つと一致することはできません。
     -   `Ignore` ：ブロックリスト。 binlogは、次の2つの条件のいずれかでフィルタリングされます。
         -   イベントのタイプは、ルールの`event`リストにあります。
         -   イベントのSQLステートメントは、ルールの`sql-pattern`つと一致させることができます。
@@ -320,7 +320,7 @@ filters:
 
 > **ノート：**
 >
-> `create database/table`ステートメントがマイグレーションされる理由は、スキーマとテーブルが作成された後にのみDMLステートメントをマイグレーションできるためです。
+> `create database/table`ステートメントが移行される理由は、スキーマとテーブルが作成された後にのみDMLステートメントを移行できるためです。
 
 ```yaml
 filters:
@@ -375,14 +375,14 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 ### 制限 {#restrictions}
 
 -   DMはgh-ostとpt-oscのみをサポートします。
--   `online-ddl`が有効になっている場合、インクリメンタルレプリケーションに対応するチェックポイントはオンラインDDL実行のプロセスにあるべきではありません。たとえば、アップストリームオンラインDDL操作がbinlogの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前または`position-B`より後である必要があります。そうしないと、エラーが発生します。詳しくは[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)をご覧ください。
+-   `online-ddl`が有効になっている場合、増分レプリケーションに対応するチェックポイントは、オンラインDDL実行のプロセスにあるべきではありません。たとえば、アップストリームのオンラインDDL操作がbinlogの`position-A`で開始し、 `position-B`で終了する場合、増分レプリケーションの開始点は`position-A`より前または`position-B`より後である必要があります。そうしないと、エラーが発生します。詳しくは[FAQ](/dm/dm-faq.md#how-to-handle-the-error-returned-by-the-ddl-operation-related-to-the-gh-ost-table-after-online-ddl-scheme-gh-ost-is-set)をご覧ください。
 
 ### パラメータ設定 {#parameter-configuration}
 
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-v2.0.5以降のバージョンでは、 `task`の構成ファイルの`online-ddl`の構成アイテムを使用する必要があります。
+v2.0.5以降のバージョンでは、 `task`の構成ファイルで`online-ddl`の構成アイテムを使用する必要があります。
 
 -   アップストリームのMySQL/MariaDBが（同時に）gh-ostまたはpt-oscツールを使用する場合は、タスク構成ファイルで`online-ddl`から`true`に設定します。
 
@@ -398,7 +398,7 @@ online-ddl: true
 
 <div label="earlier than v2.0.5">
 
-v2.0.5（v2.0.5を含まない）より前では、 `task`構成ファイルの`online-ddl-scheme`構成項目を使用する必要があります。
+v2.0.5（v2.0.5を含まない）より前では、 `task`の構成ファイルで`online-ddl-scheme`の構成アイテムを使用する必要があります。
 
 -   アップストリームのMySQL/MariaDBがgh-ostツールを使用する場合は、タスク構成ファイルで設定します。
 
@@ -433,4 +433,4 @@ shard-mode: "pessimistic" # The shard merge mode. Optional modes are ""/"pessimi
 
 ### シャーディングDDLロックを手動で処理する {#handle-sharding-ddl-locks-manually}
 
-いくつかの異常なシナリオでは、 [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)にする必要があります。
+一部の異常なシナリオでは、 [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)にする必要があります。

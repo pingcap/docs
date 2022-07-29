@@ -7,7 +7,7 @@ summary: Learn about the FAQs related to data migration.
 
 このドキュメントは、TiDBデータ移行に関連するよくある質問（FAQ）をまとめたものです。
 
-移行関連のツールに関するよくある質問については、以下のリストにある対応するリンクをクリックしてください。
+移行関連ツールに関するよくある質問については、以下のリストにある対応するリンクをクリックしてください。
 
 -   [バックアップと復元に関するFAQ](/br/backup-and-restore-faq.md)
 -   [TiDB Binlog FAQ](/tidb-binlog/tidb-binlog-faq.md)
@@ -74,16 +74,16 @@ iperf Done.
 
 TiDBサービスを再起動し、構成ファイルに`-skip-grant-table=true`つのパラメーターを追加します。パスワードなしでクラスタにログインしてユーザーを再作成するか、 `mysql.user`のテーブルを再作成します。特定のテーブルスキーマについては、公式ドキュメントを検索してください。
 
-### TiDBにデータをエクスポートする方法は？ {#how-to-export-the-data-in-tidb}
+### TiDBでデータをエクスポートする方法は？ {#how-to-export-the-data-in-tidb}
 
 次の方法を使用して、TiDBにデータをエクスポートできます。
 
 -   中国語の[MySQLはmysqldumpを使用してテーブルデータの一部をエクスポートします](https://blog.csdn.net/xin_yu_xin/article/details/7574662)を参照し、mysqldumpと`WHERE`句を使用してデータをエクスポートします。
 -   MySQLクライアントを使用して、 `select`の結果をファイルにエクスポートします。
 
-### DB2またはOracleからTiDBに移行する方法は？ {#how-to-migrate-from-db2-or-oracle-to-tidb}
+### DB2またはOracleからTiDBに移行するにはどうすればよいですか？ {#how-to-migrate-from-db2-or-oracle-to-tidb}
 
-すべてのデータを移行するか、DB2またはOracleからTiDBに段階的に移行するには、次の解決策を参照してください。
+すべてのデータをマイグレーションするか、DB2またはOracleからTiDBに段階的にマイグレーションするには、以下のソリューションを参照してください。
 
 -   OGG、Gateway、CDC（Change Data Capture）などのOracleの公式移行ツールを使用します。
 -   データをインポートおよびエクスポートするためのプログラムを開発します。
@@ -94,7 +94,7 @@ TiDBサービスを再起動し、構成ファイルに`-skip-grant-table=true`�
 
 ### エラー： <code>java.sql.BatchUpdateExecption:statement count 5001 exceeds the transaction limitation</code> Sqoopを使用してデータを<code>batches</code>でTiDBに書き込むときに、トランザクション制限を超えています {#error-code-java-sql-batchupdateexecption-statement-count-5001-exceeds-the-transaction-limitation-code-while-using-sqoop-to-write-data-into-tidb-in-code-batches-code}
 
-Sqoopでは、 `--batch`は各バッチで100個の`statement`をコミットすることを意味しますが、デフォルトでは、各`statement`に100個のSQLステートメントが含まれています。したがって、100 * 100 = 10000 SQLステートメント。これは、単一のTiDBトランザクションで許可されるステートメントの最大数である5000を超えます。
+Sqoopでは、 `--batch`は各バッチで100個の`statement`をコミットすることを意味しますが、デフォルトでは、各`statement`に100個のSQLステートメントが含まれています。したがって、100 * 100 = 10000 SQLステートメント。これは5000を超えます。これは、単一のTiDBトランザクションで許可されるステートメントの最大数です。
 
 2つの解決策：
 
@@ -113,7 +113,7 @@ Sqoopでは、 `--batch`は各バッチで100個の`statement`をコミットす
         --batch
     ```
 
--   1つのTiDBトランザクションで制限された数のステートメントを増やすこともできますが、これにより多くのメモリが消費されます。
+-   1つのTiDBトランザクションで制限された数のステートメントを増やすこともできますが、これはより多くのメモリを消費します。
 
 ### Dumpling <code>The local disk space is insufficient</code>はなぜですか、またはテーブルをエクスポートするときにアップストリームデータベースのメモリが不足する原因になりますか？ {#why-does-dumpling-return-code-the-local-disk-space-is-insufficient-code-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
@@ -122,33 +122,33 @@ Sqoopでは、 `--batch`は各バッチで100個の`statement`をコミットす
 -   データベースの主キーが均等に分散されていません（たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を有効にした場合）。
 -   アップストリームデータベースはTiDBであり、エクスポートされたテーブルはパーティションテーブルです。
 
-上記の場合、 Dumplingはエクスポート用に非常に大きなデータチャンクを分割し、非常に大きな結果を持つクエリを送信します。この問題に対処するには、 [お問い合わせ](https://tidbcommunity.slack.com/archives/CH7TTLL7P)ナイトリーバージョンのDumplingを入手します。
+上記の場合、 Dumplingは、エクスポート用に非常に大きなデータチャンクを分割し、非常に大きな結果を持つクエリを送信します。この問題に対処するには、 [お問い合わせ](https://tidbcommunity.slack.com/archives/CH7TTLL7P)ナイトリーバージョンのDumplingを入手します。
 
 ### TiDBにはOracleのフラッシュバッククエリのような機能がありますか？ DDLをサポートしていますか？ {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
 
 はい、そうです。また、DDLもサポートしています。詳細については、 [TiDBが履歴バージョンからデータを読み取る方法](/read-historical-data.md)を参照してください。
 
-## データをオンラインで移行する {#migrate-the-data-online}
+## オンラインでデータを移行する {#migrate-the-data-online}
 
 ### TiDBからHBaseやElasticsearchなどの他のデータベースにデータを複製するための現在のソリューションはありますか？ {#is-there-a-current-solution-to-replicating-data-from-tidb-to-other-databases-like-hbase-and-elasticsearch}
 
-いいえ。現在、データレプリケーションはアプリケーション自体に依存しています。
+いいえ。現在、データ複製はアプリケーション自体に依存しています。
 
 ## トラフィックを移行する {#migrate-the-traffic}
 
 ### トラフィックをすばやく移行するにはどうすればよいですか？ {#how-to-migrate-the-traffic-quickly}
 
-[TiDBデータ移行](/dm/dm-overview.md)のツールを使用してMySQLからTiDBにアプリケーションデータを移行することをお勧めします。必要に応じてネットワーク構成を編集することにより、読み取りおよび書き込みトラフィックをバッチで移行できます。ネットワーク構成を直接編集してシームレスな移行を実装するために、安定したネットワークLB（HAproxy、LVS、F5、DNSなど）を上位層にデプロイします。
+[TiDBデータ移行](/dm/dm-overview.md)のツールを使用してMySQLからTiDBにアプリケーションデータを移行することをお勧めします。必要に応じてネットワーク構成を編集することにより、読み取りトラフィックと書き込みトラフィックをバッチで移行できます。ネットワーク構成を直接編集してシームレスな移行を実装するために、安定したネットワークLB（HAproxy、LVS、F5、DNSなど）を上位層にデプロイします。
 
 ### TiDBの書き込みと読み取りの合計容量に制限はありますか？ {#is-there-a-limit-for-the-total-write-and-read-capacity-in-tidb}
 
-合計読み取り容量に制限はありません。 TiDBサーバーを追加することで、読み取り容量を増やすことができます。通常、書き込み容量にも制限はありません。 TiKVノードを追加することで、書き込み容量を増やすことができます。
+総読み取り容量に制限はありません。 TiDBサーバーを追加することで、読み取り容量を増やすことができます。通常、書き込み容量にも制限はありません。 TiKVノードを追加することで、書き込み容量を増やすことができます。
 
 ### <code>transaction too large</code>というエラーメッセージが表示されます {#the-error-message-code-transaction-too-large-code-is-displayed}
 
-基盤となるストレージエンジンの制限により、TiDBの各Key-Valueエントリ（1行）は6MB以下にする必要があります。 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成値は最大120MBまで調整できます。
+基盤となるストレージエンジンの制限により、TiDBの各Key-Valueエントリ（1行）は6MB以下にする必要があります。 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)の構成値を最大120MBまで調整できます。
 
-分散トランザクションには2フェーズコミットが必要であり、最下層がRaftレプリケーションを実行します。トランザクションが非常に大きい場合、コミットプロセスは非常に遅くなり、書き込みの競合が発生する可能性が高くなります。さらに、失敗したトランザクションのロールバックは、不必要なパフォーマンスの低下につながります。これらの問題を回避するために、デフォルトでは、トランザクションでKey-Valueエントリの合計サイズを100MB以下に制限しています。より大きなトランザクションが必要な場合は、TiDB構成ファイルの値`txn-total-size-limit`を変更してください。この構成アイテムの最大値は最大10Gです。実際の制限は、マシンの物理メモリにも影響されます。
+分散トランザクションには2フェーズコミットが必要であり、最下層がRaftレプリケーションを実行します。トランザクションが非常に大きい場合、コミットプロセスは非常に遅くなり、書き込みの競合が発生する可能性が高くなります。さらに、失敗したトランザクションのロールバックは、不必要なパフォーマンスの低下につながります。これらの問題を回避するために、デフォルトでは、トランザクション内のKey-Valueエントリの合計サイズを100MB以下に制限しています。より大きなトランザクションが必要な場合は、TiDB構成ファイルの値`txn-total-size-limit`を変更します。この構成アイテムの最大値は最大10Gです。実際の制限は、マシンの物理メモリによっても影響を受けます。
 
 GoogleCloudSpannerには[同様の制限](https://cloud.google.com/spanner/docs/limits)あります。
 
@@ -160,7 +160,7 @@ GoogleCloudSpannerには[同様の制限](https://cloud.google.com/spanner/docs/
 
 `DELETE` 、および`TRUNCATE`の操作のいずれも、データをすぐに解放しませ`DROP` 。 `TRUNCATE`および`DROP`の操作では、TiDB GC（ガベージコレクション）時間（デフォルトでは10分）の後、データが削除され、スペースが解放されます。 `DELETE`操作の場合、データは削除されますが、TiDBGCに従ってスペースは解放されません。後続のデータがRocksDBに書き込まれ、 `COMPACT`を実行すると、スペースが再利用されます。
 
-### データをロードするときにターゲットテーブルでDDL操作を実行できますか？ {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
+### データのロード時にターゲットテーブルでDDL操作を実行できますか？ {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
 
 いいえ。データをロードするときに、ターゲットテーブルでDDL操作を実行することはできません。実行しないと、データのロードに失敗します。
 

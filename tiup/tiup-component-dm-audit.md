@@ -17,7 +17,7 @@ tiup dm audit [audit-id] [flags]
 
 ## オプション {#option}
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

@@ -330,7 +330,7 @@ SELECT _utf8mb4'string' COLLATE utf8mb4_general_ci;
 
 `character_set_connection`と`collation_connection`を使用して、各接続の文字セットと照合順序を指定できます。 `character_set_client`変数は、クライアントの文字セットを設定するためのものです。
 
-結果を返す前に、 `character_set_results`システム変数は、サーバーがクエリ結果をクライアントに返す文字セットを示します。これには、結果のメタデータも含まれます。
+結果を返す前に、 `character_set_results`システム変数は、結果のメタデータを含め、サーバーがクエリ結果をクライアントに返す文字セットを示します。
 
 次のステートメントを使用して、クライアントに関連する文字セットと照合順序を設定できます。
 

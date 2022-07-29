@@ -10,7 +10,7 @@ aliases: ['/appdev/dev/for-django']
 >
 > このドキュメントはアーカイブされています。これは、このドキュメントがその後更新されないことを示しています。詳細については、 [開発者ガイドの概要](/develop/dev-guide-overview.md)を参照してください。
 
-このチュートリアルでは、TiDBとDjangoに基づいて単純なPythonアプリケーションを構築する方法を示します。ここで構築するサンプルアプリケーションは、顧客および注文情報を追加、照会、および更新できる単純なCRMツールです。
+このチュートリアルでは、TiDBとDjangoに基づいて簡単なPythonアプリケーションを構築する方法を示します。ここで構築するサンプルアプリケーションは、顧客および注文情報を追加、照会、および更新できる単純なCRMツールです。
 
 ## 手順1.TiDBクラスタを開始します {#step-1-start-a-tidb-cluster}
 
@@ -28,12 +28,12 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 >
 > 「実際の」TiDBクラスタを実稼働環境にデプロイするには、次のガイドを参照してください。
 >
-> -   [オンプレミスにデプロイを使用してTiDBを導入する](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [オンプレミスのTiUPを使用してTiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料トライアルを提供するフルマネージドのサービスとしてのデータベース（ [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) ）を使用することもできます。
+> また、無料トライアルを提供するフルマネージドのDatabase-as- [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) -Service（DBaaS）も可能です。
 
-## ステップ2.データベースを作成する {#step-2-create-a-database}
+## ステップ2.データベースを作成します {#step-2-create-a-database}
 
 1.  SQLシェルで、アプリケーションが使用する`django`のデータベースを作成します。
 
@@ -65,7 +65,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 1.  Pythonの依存関係およびパッケージマネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
 
-    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避することができます。次のコマンドを使用して、Poetryをインストールします。
+    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetryをインストールします。
 
     {{< copyable "" >}}
 
@@ -208,7 +208,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
             return HttpResponse(status=200)
     ```
 
-3.  `urls.py`というファイルでURLルートを定義します。 `django-admin`コマンドラインツールは、Djangoプロジェクトを作成するときにこのファイルを生成したため、ファイルはすでに`tidb_example/tidb_example`に存在しているはずです。以下のサンプルコードをコピーして、既存の`urls.py`ファイルに貼り付けることができます。
+3.  `urls.py`というファイルでURLルートを定義します。 `django-admin`コマンドラインツールはDjangoプロジェクトの作成時にこのファイルを生成したため、ファイルはすでに`tidb_example/tidb_example`に存在しているはずです。以下のサンプルコードをコピーして、既存の`urls.py`ファイルに貼り付けることができます。
 
     {{< copyable "" >}}
 

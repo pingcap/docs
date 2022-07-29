@@ -28,7 +28,7 @@ tiup cluster [command] [flags]
     -   `system` ：現在のオペレーティングシステムのデフォルトのSSHクライアントを使用します。
     -   `none` ：SSHクライアントは使用されません。展開は、現在のマシンのみを対象としています。
 
--   コマンドでこのオプションが指定されていない場合、デフォルト値として`builtin`が使用されます。
+-   このオプションがコマンドで指定されていない場合、デフォルト値として`builtin`が使用されます。
 
 ### --ssh-timeout {#ssh-timeout}
 
@@ -38,9 +38,9 @@ tiup cluster [command] [flags]
 
 ### --wait-timeout {#wait-timeout}
 
--   操作プロセスの各ステップの最大待機時間（秒単位）を指定します。操作プロセスは、サービスを開始または停止するsystemctlの指定や、ポートがオンラインまたはオフラインになるのを待つなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
+-   操作プロセスの各ステップの最大待機時間（秒単位）を指定します。操作プロセスは、サービスを開始または停止するようにsystemctlを指定する、ポートがオンラインまたはオフラインになるのを待つなど、多くのステップで構成されます。各ステップには数秒かかる場合があります。ステップの実行時間が指定されたタイムアウトを超えると、ステップはエラーで終了します。
 -   データ型： `UINT`
--   コマンドでこのオプションが指定されていない場合、各ステップの最大待機時間は`120`秒です。
+-   このオプションがコマンドで指定されていない場合、各ステップの最大待機時間は`120`秒です。
 
 ### -y、-yes {#y-yes}
 
@@ -49,11 +49,11 @@ tiup cluster [command] [flags]
 
 ### -v、-version {#v-version}
 
--   TiUPクラスターの現在のバージョンを印刷します。
+-   TiUPクラスターの現在のバージョンを出力します。
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   関連するコマンドのヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
@@ -66,7 +66,7 @@ tiup cluster [command] [flags]
 -   [小切手](/tiup/tiup-component-cluster-check.md) ：デプロイの前後にクラスタをチェックします
 -   [配備](/tiup/tiup-component-cluster-deploy.md) ：指定されたトポロジに基づいてクラスタをデプロイします
 -   [リスト](/tiup/tiup-component-cluster-list.md) ：デプロイされたクラスターのリストを照会します
--   [画面](/tiup/tiup-component-cluster-display.md) ：指定したクラスタの状態を表示します
+-   [画面](/tiup/tiup-component-cluster-display.md) ：指定したクラスタのステータスを表示します
 -   [始める](/tiup/tiup-component-cluster-start.md) ：指定されたクラスタを開始します
 -   [止まる](/tiup/tiup-component-cluster-stop.md) ：指定されたクラスタを停止します
 -   [再起動](/tiup/tiup-component-cluster-restart.md) ：指定したクラスタを再起動します
@@ -81,7 +81,7 @@ tiup cluster [command] [flags]
 -   [掃除](/tiup/tiup-component-cluster-clean.md) ：指定したクラスタからデータを削除します
 -   [破壊する](/tiup/tiup-component-cluster-destroy.md) ：指定されたクラスタを破棄します
 -   [監査](/tiup/tiup-component-cluster-audit.md) ：指定されたクラスタの操作監査ログを照会します
--   [リプレイ](/tiup/tiup-component-cluster-replay.md) ：指定したコマンドを再試行します
+-   [リプレイ](/tiup/tiup-component-cluster-replay.md) ：指定されたコマンドを再試行します
 -   [有効](/tiup/tiup-component-cluster-enable.md) ：マシンの再起動後にクラスタサービスの自動有効化を有効にします。
 -   [無効にする](/tiup/tiup-component-cluster-disable.md) ：マシンの再起動後にクラスタサービスの自動有効化を無効にします。
 -   [ヘルプ](/tiup/tiup-component-cluster-help.md) ：ヘルプ情報を出力します

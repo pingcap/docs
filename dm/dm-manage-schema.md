@@ -13,24 +13,24 @@ DMを使用してテーブルを移行する場合、DMはテーブルスキー�
 
 -   完全なエクスポートとインポートの場合、DMは現在の時刻のアップストリームテーブルスキーマをSQLファイルに直接エクスポートし、テーブルスキーマをダウンストリームに適用します。
 
--   インクリメンタルレプリケーションの場合、データリンク全体に次のテーブルスキーマが含まれます。これらは同じでも異なる場合もあります。
+-   インクリメンタルレプリケーションの場合、データリンク全体に次のテーブルスキーマが含まれます。これらは同じ場合も異なる場合もあります。
 
     ![schema](/media/dm/operate-schema.png)
 
-    -   `schema-U`として識別される、現時点でのアップストリームテーブルスキーマ。
+    -   現時点でのアップストリームテーブルスキーマ`schema-U`として識別されます。
     -   DMによって現在消費されているbinlogイベントのテーブルスキーマ`schema-B`として識別されます。このスキーマは、履歴時のアップストリームテーブルスキーマに対応します。
-    -   `schema-I`として識別されるDM（スキーマトラッカーコンポーネント）で現在維持されているテーブルスキーマ。
+    -   DM（スキーマトラッカーコンポーネント）で現在維持されているテーブルスキーマ`schema-I`として識別されます。
     -   `schema-D`として識別されるダウンストリームTiDBクラスタのテーブルスキーマ。
 
     ほとんどの場合、上記の4つのテーブルスキーマは同じです。
 
-アップストリームデータベースがDDL操作を実行してテーブルスキーマを変更すると、 `schema-U`が変更されます。内部スキーマトラッカーコンポーネントとダウンストリームTiDBクラスタにDDL操作を適用することにより、DMは`schema-I`と`schema-D`を順番に更新し、 `schema-U`との整合性を維持します。したがって、DMは通常、 `schema-B`テーブルスキーマに対応するbinlogイベントを消費できます。つまり、DDL操作が正常に移行された後でも、 `schema-B` 、および`schema-U`は`schema-I`性があり`schema-D` 。
+アップストリームデータベースがDDL操作を実行してテーブルスキーマを変更すると、 `schema-U`が変更されます。 DDL操作を内部スキーマトラッカーコンポーネントとダウンストリームTiDBクラスタに適用することにより、DMは`schema-I`と`schema-D`を順番に更新して、 `schema-U`との一貫性を保ちます。したがって、DMは通常、 `schema-B`テーブルスキーマに対応するbinlogイベントを消費できます。つまり、DDL操作が正常に移行された後でも、 `schema-B` 、および`schema-U`は`schema-I`性があり`schema-D` 。
 
 ただし、 [オプティミスティックモードシャーディングDDLサポート](/dm/feature-shard-merge-optimistic.md)を有効にして移行中に、ダウンストリームテーブルの`schema-D`が、一部のアップストリームシャードテーブルの`schema-B`および`schema-I`と一致しない場合があります。このような場合でも、DMは`schema-I`と`schema-B`の一貫性を維持して、DMLに対応するbinlogイベントを正常に解析できるようにします。
 
 さらに、一部のシナリオ（ダウンストリームテーブルにアップストリームテーブルよりも多くの列がある場合など）では、 `schema-D`が`schema-B`および`schema-I`と矛盾する場合があります。
 
-上記のシナリオをサポートし、スキーマの不整合によって引き起こされる他の移行の中断を処理するために、DMは、DMに保持されている`schema-I`のテーブルスキーマを取得、変更、および削除する`binlog-schema`のコマンドを提供します。
+上記のシナリオをサポートし、スキーマの不整合によって引き起こされる他の移行の中断を処理するために、DMは、DMに保持されている`schema-I`のテーブルスキーマを取得、変更、および削除する`binlog-schema`コマンドを提供します。
 
 > **ノート：**
 >
@@ -66,7 +66,7 @@ Use "dmctl binlog-schema [command] --help" for more information about a command.
 
 > **ノート：**
 >
-> -   データ移行中にテーブルスキーマが変更される可能性があるため、予測可能なテーブルスキーマを取得するには、現在、データ移行タスクが`Paused`状態の場合にのみ`binlog-schema`コマンドを使用できます。
+> -   テーブルスキーマはデータ移行中に変更される可能性があるため、予測可能なテーブルスキーマを取得するために、現在`binlog-schema`コマンドは、データ移行タスクが`Paused`状態の場合にのみ使用できます。
 > -   誤った取り扱いによるデータの損失を避けるために、スキーマを変更する前に、まずテーブルスキーマを取得してバックアップすることを**強くお勧め**します。
 
 ## パラメーター {#parameters}
@@ -82,7 +82,7 @@ Use "dmctl binlog-schema [command] --help" for more information about a command.
 
 ### テーブルスキーマを取得する {#get-the-table-schema}
 
-テーブルスキーマを取得するには、 `binlog-schema list`コマンドを実行します。
+テーブルスキーマを取得するには、次の`binlog-schema list`のコマンドを実行します。
 
 ```bash
 help binlog-schema list
@@ -126,7 +126,7 @@ binlog-schema list -s mysql-replica-01 task_single db_single t1
 
 ### テーブルスキーマを更新します {#update-the-table-schema}
 
-テーブルスキーマを更新するには、次の`binlog-schema update`コマンドを実行します。
+テーブルスキーマを更新するには、 `binlog-schema update`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -186,7 +186,7 @@ operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.
 
 ### テーブルスキーマを削除します {#delete-the-table-schema}
 
-テーブルスキーマを削除するには、次の`binlog-schema delete`コマンドを実行します。
+テーブルスキーマを削除するには、 `binlog-schema delete`コマンドを実行します。
 
 ```bash
 help binlog-schema delete

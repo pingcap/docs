@@ -8,7 +8,7 @@ summary: Learn about the FAQs related to TiDB Monitoring.
 このドキュメントは、TiDBモニタリングに関連するFAQをまとめたものです。
 
 -   Prometheusモニタリングフレームワークの詳細については、 [モニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
--   監視の主要なメトリックの詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
+-   モニタリングの主要な指標の詳細については、 [主要な指標](/grafana-overview-dashboard.md)を参照してください。
 
 ## 主要な指標を監視するためのより良い方法はありますか？ {#is-there-a-better-way-of-monitoring-the-key-metrics}
 
@@ -22,9 +22,9 @@ TiDBの監視システムは、PrometheusとGrafanaで構成されています�
 --storage.tsdb.retention="60d"
 ```
 
-## 地域の健康モニター {#region-health-monitor}
+## リージョンの健康モニター {#region-health-monitor}
 
-TiDB 2.0では、リージョンの状態はPDメトリック監視ページで監視されます。このページでは、 `Region Health`の監視項目にすべてのリージョンレプリカステータスの統計が表示されます。 `miss`はレプリカの不足を意味し、 `extra`は余分なレプリカが存在することを意味します。さらに、 `Region Health`は`label`による分離レベルも示します。 `level-1`は、リージョンレプリカが最初の`label`レベルで物理的に分離されていることを意味します。 `location label`が構成されていない場合、すべてのリージョンは`level-0`になります。
+TiDB 2.0では、リージョンの状態はPDメトリックモニタリングページでモニタリングされます。このページでは、 `Region Health`のモニタリング項目にすべてのリージョンレプリカステータスの統計が表示されます。 `miss`はレプリカの不足を意味し、 `extra`は余分なレプリカが存在することを意味します。さらに、 `Region Health`は`label`による分離レベルも示します。 `level-1`は、リージョンレプリカが最初の`label`レベルで物理的に分離されていることを意味します。 `location label`が構成されていない場合、すべてのリージョンは`level-0`になります。
 
 ## ステートメントカウントモニターの<code>selectsimplefull</code>の意味は何ですか？ {#what-is-the-meaning-of-code-selectsimplefull-code-in-statement-count-monitor}
 
@@ -34,4 +34,4 @@ TiDB 2.0では、リージョンの状態はPDメトリック監視ページで�
 
 `QPS`の`begin`は、 `use database` 、 `show` `load data`を`insert`すべてのSQLステートメント`select` `set` `commit` 。
 
-`Statement OPS`の統計は、 `select` 、および`insert`を含むアプリケーション関連のSQLステートメントに関するものであるため、 `Statement OPS` `update`統計はアプリケーションとよりよく一致します。
+`Statement OPS`の統計は、 `select` 、および`insert`を含むアプリケーション関連のSQLステートメントに関するものであるため、 `Statement OPS` `update`統計はアプリケーションとの一致度が高くなります。

@@ -5,13 +5,13 @@ summary: Learn the command-line startup flags of TiFlash.
 
 # TiFlashコマンドラインフラグ {#tiflash-command-line-flags}
 
-このドキュメントでは、TiFlashを起動するときに使用できるコマンドラインフラグを紹介します。
+このドキュメントでは、TiFlashの起動時に使用できるコマンドラインフラグを紹介します。
 
 ## <code>server --config-file</code> {#code-server-config-file-code}
 
 -   TiFlash構成ファイルのパスを指定します
 -   デフォルト： &quot;&quot;
--   構成ファイルを指定する必要があります。構成項目の詳細については、 [TiFlash構成パラメーター](/tiflash/tiflash-configuration.md)を参照してください。
+-   構成ファイルを指定する必要があります。詳細な構成項目については、 [TiFlash構成パラメーター](/tiflash/tiflash-configuration.md)を参照してください。
 
 ## <code>dttool migrate</code> {#code-dttool-migrate-code}
 
@@ -19,8 +19,8 @@ summary: Learn the command-line startup flags of TiFlash.
 
 -   ユーザーシナリオ：
 
-    -   データ検証を有効にしたバージョン&gt;=v5.4.0からバージョン&lt;v5.4.0にTiFlashをダウングレードする必要がある場合は、このツールを使用してDTFileのデータ形式をダウングレードできます。
-    -   TiFlashをバージョン&gt;=v5.4.0にアップグレードし、既存のデータのデータ検証を有効にしたい場合は、このツールを使用してDTFileのデータ形式をアップグレードできます。
+    -   データ検証が有効になっているバージョン&gt;=v5.4.0からバージョン&lt;v5.4.0にTiFlashをダウングレードする必要がある場合は、このツールを使用してDTFileのデータ形式をダウングレードできます。
+    -   TiFlashをバージョン&gt;=v5.4.0にアップグレードし、既存のデータのデータ検証を有効にする場合は、このツールを使用してDTFileのデータ形式をアップグレードできます。
     -   さまざまな構成でDTFileのスペース使用量と読み取り速度をテストします。
 
 -   パラメーター：
@@ -34,7 +34,7 @@ summary: Learn the command-line startup flags of TiFlash.
     -   `--file-id` ：DTFileのID。たとえば、 `dmf_123`のIDは`123`です。
     -   `--workdir` ： `dmf_xxx`の親ディレクトリ。
     -   `--dry` ：ドライランモード。移行プロセスのみが出力されます。
-    -   `--nokeep` ：元のデータを保持しません。このオプションを有効にしない場合、 `dmf_xxx.old`のファイルが作成されます。
+    -   `--nokeep` ：元のデータを保持しません。このオプションが有効になっていない場合、 `dmf_xxx.old`のファイルが作成されます。
 
 > **警告：**
 >
@@ -42,7 +42,7 @@ summary: Learn the command-line startup flags of TiFlash.
 
 > **ノート：**
 >
-> セキュリティ上の理由から、DTToolは移行モードで作業ディレクトリにロックを追加しようとします。したがって、同じディレクトリ内で、同時に移行タスクを実行できるのは1つのDTToolだけです。ロックが解除されていない状態でDTToolを強制的に停止した場合、後でDTToolを再実行しようとすると、移行タスクの実行が拒否される可能性があります。
+> セキュリティ上の理由から、DTToolは移行モードで作業ディレクトリにロックを追加しようとします。したがって、同じディレクトリ内で、同時に移行タスクを実行できるのは1つのDTToolだけです。ロックが解除されていない状態でDTToolを強制的に停止した場合、後でDTToolを再実行しようとすると、移行タスクの実行を拒否する可能性があります。
 >
 > このような状況が発生し、LOCKファイルを削除してもデータが破損しないことがわかっている場合は、作業ディレクトリのLOCKファイルを手動で削除してロックを解除できます。
 
@@ -51,8 +51,8 @@ summary: Learn the command-line startup flags of TiFlash.
 -   DTFileの基本的なI/O速度テストを提供します。
 -   パラメーター：
 
-    -   `--version` ：DTFileのバージョン。 [`--version`のバージョンは<code>dttool migrate</code>します](#dttool-migrate)を参照してください。
-    -   `--algorithm` ：データ検証に使用されるハッシュアルゴリズム。 [`--algorithm`のアルゴリズムは<code>dttool migrate</code>します](#dttool-migrate)を参照してください。
+    -   `--version` ：DTFileのバージョン。 [`--version`の<code>dttool migrate</code>](#dttool-migrate)を参照してください。
+    -   `--algorithm` ：データ検証に使用されるハッシュアルゴリズム。 [`--algorithm`の<code>dttool migrate</code>](#dttool-migrate)を参照してください。
     -   `--frame` ：検証フレームのサイズ。 [`--frame`のフレームは<code>dttool migrate</code>します](#dttool-migrate)を参照してください。
     -   `--column` ：テストするテーブルの列。デフォルト値は`100`です。
     -   `--size` ：テストするテーブルの行。デフォルト値は`1000`です。
@@ -77,4 +77,4 @@ summary: Learn the command-line startup flags of TiFlash.
     -   `--check` ：ハッシュ検証を実行します。
     -   `--file-id` ：DTFileのID。 [`dttool migrate` <code>--file-id</code>](#dttool-migrate)を参照してください。
     -   `--imitative` ：データベースコンテキストを模倣します。 [`--imitative`の<code>dttool migrate</code>](#dttool-migrate)を参照してください。
-    -   `--workdir` ：データディレクトリ。 [`--workdir`のworkdirは<code>dttool migrate</code>します](#dttool-migrate)を参照してください。
+    -   `--workdir` ：データディレクトリ。 [`--workdir`の<code>dttool migrate</code>](#dttool-migrate)を参照してください。

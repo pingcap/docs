@@ -24,8 +24,8 @@ tiup [flags] <component> [args...]      # Runs a component
 
 -   このオプションを有効にすると、指定したバイナリファイルパスが出力されます。
 
-    -   `tiup -B/--binary <component>`を実行すると、最新の安定してインストールされた`<component>`コンポーネントのパスが印刷されます。 `<component>`がインストールされていない場合、エラーが返されます。
-    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされている`<component>`のコンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合、エラーが返されます。
+    -   `tiup -B/--binary <component>`を実行すると、最新の安定したインストール済み`<component>`コンポーネントのパスが印刷されます。 `<component>`がインストールされていない場合、エラーが返されます。
+    -   `tiup -B/--binary <component>:<version>`を実行すると、インストールされている`<component>`コンポーネントの`<version>`のパスが出力されます。この`<version>`が出力されない場合、エラーが返されます。
 
 -   データ型： `BOOLEAN`
 
@@ -56,7 +56,7 @@ tiup [flags] <component> [args...]      # Runs a component
 
 ### -T、-tag {#t-tag}
 
--   開始するコンポーネントのタグを指定します。一部のコンポーネントは実行中にディスクストレージを使用する必要があり、TiUPはこの実行のために一時ストレージディレクトリを割り当てます。 TiUPに固定ディレクトリを割り当てたい場合は、 `-T/--tag`を使用してディレクトリの名前を指定し、同じタグを使用して同じバッチのファイルを複数回実行して読み書きできるようにします。
+-   開始するコンポーネントのタグを指定します。一部のコンポーネントは実行中にディスクストレージを使用する必要があり、TiUPはこの実行のために一時ストレージディレクトリを割り当てます。 TiUPに固定ディレクトリを割り当てたい場合は、 `-T/--tag`を使用してディレクトリの名前を指定し、同じタグを使用して複数の実行で同じバッチのファイルを読み書きできるようにします。
 -   データ型： `STRING`
 
 ### -v、-version {#v-version}
@@ -75,7 +75,7 @@ TiUPには複数のコマンドがあり、これらのコマンドには複数�
 -   [リスト](/tiup/tiup-command-list.md) ：コンポーネントリストを表示します。
 -   [アンインストール](/tiup/tiup-command-uninstall.md) ：コンポーネントをアンインストールします。
 -   [アップデート](/tiup/tiup-command-update.md) ：インストールされているコンポーネントを更新します。
--   [状態](/tiup/tiup-command-status.md) ：コンポーネントの実行ステータスを示します。
+-   [状態](/tiup/tiup-command-status.md) ：コンポーネントの実行ステータスを表示します。
 -   [掃除](/tiup/tiup-command-clean.md) ：コンポーネントのデータディレクトリをクリーンアップします。
 -   [鏡](/tiup/tiup-command-mirror.md) ：ミラーを管理します。
 -   [テレメトリー](/tiup/tiup-command-telemetry.md) ：テレメトリを有効または無効にします。

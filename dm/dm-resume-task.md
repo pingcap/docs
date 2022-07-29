@@ -3,7 +3,7 @@ title: Resume a Data Migration Task
 summary: Learn how to resume a data migration task.
 ---
 
-# データ移行タスクを再開します {#resume-a-data-migration-task}
+# データ移行タスクを再開する {#resume-a-data-migration-task}
 
 `resume-task`コマンドを使用して、 `Paused`状態でデータ移行タスクを再開できます。これは通常、タスクを一時停止するエラーを処理した後、データ移行タスクを手動で再開するシナリオで使用されます。
 

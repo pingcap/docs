@@ -7,9 +7,9 @@ summary: Use of CREATE BINDING in TiDB database.
 
 このステートメントは、TiDBに新しい実行プランバインディングを作成します。バインディングを使用すると、基になるクエリを変更せずに、ステートメントにヒントを挿入できます。
 
-`BINDING`は、 `GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
+`BINDING`は、 `GLOBAL`または`SESSION`のいずれかになります。デフォルトは`SESSION`です。
 
-バインドされたSQLステートメントはパラメーター化され、システムテーブルに格納されます。 SQLクエリが処理されるとき、パラメーター化されたSQLステートメントとシステムテーブル内のバインドされたステートメントが一貫していて、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザーヒントを使用できます。複数の実行プランが使用可能な場合、オプティマイザーは最小のコストでプランをバインドすることを選択します。
+バインドされたSQLステートメントはパラメーター化され、システムテーブルに格納されます。 SQLクエリが処理されるとき、パラメーター化されたSQLステートメントとシステムテーブル内のバインドされたステートメントが一貫していて、システム変数`tidb_use_plan_baselines`が`ON` （デフォルト）に設定されている限り、対応するオプティマイザーヒントを使用できます。複数の実行プランが利用可能な場合、オプティマイザーは最小のコストでプランをバインドすることを選択します。
 
 ## あらすじ {#synopsis}
 
@@ -137,7 +137,7 @@ mysql> EXPLAIN ANALYZE  SELECT * FROM t1 WHERE b = 123;
 ## も参照してください {#see-also}
 
 -   [ドロップ[グローバル|セッション]バインディング](/sql-statements/sql-statement-drop-binding.md)
--   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [[グローバル|セッション]バインディングを表示する](/sql-statements/sql-statement-show-bindings.md)
 -   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザーのヒント](/optimizer-hints.md)
 -   [SQL計画管理](/sql-plan-management.md)

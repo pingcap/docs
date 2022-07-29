@@ -61,7 +61,7 @@ tiup cluster scale-in <cluster-name> [flags]
 >
 > リーダーの転送が完了するのを待たずにPDまたはTiKVノードを直接オフラインにすると、サービスのパフォーマンスが変動する可能性があります。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

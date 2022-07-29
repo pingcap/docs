@@ -39,7 +39,7 @@ TiDB Cloudコンソールには、[**診断**]タブに[<strong><a href="/tidb-c
 
 ### 実行計画を確認する {#check-the-execution-plan}
 
-[`EXPLAIN`](/explain-overview.md)を使用して、コンパイル中にステートメントのTiDBによって計算された実行プランを確認できます。つまり、TiDBは数百または数千の可能な実行プランを推定し、リソースの消費が最も少なく、実行が最も速い最適な実行プランを選択します。
+[`EXPLAIN`](/explain-overview.md)を使用して、コンパイル中にステートメントのTiDBによって計算された実行プランを確認できます。言い換えると、TiDBは数百または数千の可能な実行プランを推定し、リソースの消費が最も少なく、実行が最も速い最適な実行プランを選択します。
 
 TiDBによって選択された実行プランが最適でない場合は、 EXPLAINまたは[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)を使用して診断できます。
 
@@ -69,7 +69,7 @@ SQLクエリが遅い最も一般的な理由は、 `SELECT`ステートメン�
 
 ### インデックスのベストプラクティス {#index-best-practices}
 
-[インデックス作成のベストプラクティス](https://docs.pingcap.com/tidb/stable/dev-guide-index-best-practice)には、インデックスの作成とインデックスの使用に関するベストプラクティスが含まれています。
+[インデックス作成のベストプラクティス](https://docs.pingcap.com/tidb/stable/dev-guide-index-best-practice)には、インデックスを作成してインデックスを使用するためのベストプラクティスが含まれています。
 
 インデックスの作成速度はデフォルトでは控えめであり、シナリオによってはインデックス作成プロセスを[変数の変更](https://docs.pingcap.com/tidb/stable/dev-guide-optimize-sql-best-practices#add-index-best-practices)加速できます。
 

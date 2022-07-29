@@ -13,7 +13,7 @@ summary: Learn how to handle failed DDL statements when you're using the TiDB Da
 
 次の状況では、このコマンドを使用しないでください。
 
--   実際の実稼働環境では、失敗したDDLステートメントがダウンストリームTiDBでスキップされることは受け入れられません。
+-   失敗したDDLステートメントがダウンストリームTiDBでスキップされることは、実際の実稼働環境では受け入れられません。
 -   失敗したDDLステートメントを他のDDLステートメントで置き換えることはできません。
 -   他のDDLステートメントをダウンストリームTiDBに挿入しないでください。
 
@@ -71,16 +71,16 @@ Use "dmctl binlog [command] --help" for more information about a command.
 `binlog`は、次のサブコマンドをサポートします。
 
 -   `inject` ：現在のエラーイベントまたは特定のbinlog位置にDDLステートメントを挿入します。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `list` ：現在のbinlog位置または現在のbinlog位置の後のすべての有効な`inject` 、および`skip`操作をリストし`replace` 。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `list` ：現在のビンログ位置または現在のビンログ位置の後のすべての有効な`inject` 、および`skip`操作をリストし`replace` 。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 -   `replace` ：特定のbinlog位置にあるDDLステートメントを別のDDLステートメントに置き換えます。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
--   `revert` ：前の操作が有効にならない場合にのみ、指定された`replace` `inject` `skip`を元に戻します。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+-   `revert` ：前の操作が有効にならない場合にのみ、指定された`replace` `inject` `skip`元に戻します。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 -   `skip` ：特定のbinlog位置でDDLステートメントをスキップします。 binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 
 `binlog`は、次のフラグをサポートします。
 
 -   `-b, --binlog-pos` ：
     -   タイプ：文字列。
-    -   binlogの位置を指定します。 binlogイベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DMは自動的に`binlog-pos`を現在失敗しているDDLステートメントに設定します。
+    -   binlogの位置を指定します。 binlogイベントの位置が`binlog-pos`に一致すると、操作が実行されます。指定されていない場合、DMは現在失敗しているDDLステートメントに自動的に`binlog-pos`を設定します。
     -   形式： `binlog-filename:binlog-pos` 、たとえば`mysql-bin|000001.000003:3270` 。
     -   移行でエラーが返された後、binlogの位置は`query-status`で返された`startLocation`の`position`から取得できます。移行でエラーが返される前に、アップストリームのMySQLインスタンスで[`SHOW BINLOG EVENTS`](https://dev.mysql.com/doc/refman/5.7/en/show-binlog-events.html)を使用してbinlogの位置を取得できます。
 
@@ -148,7 +148,7 @@ ALTER TABLE db1.tbl1 CHANGE c2 c2 DECIMAL (10, 3);
 ERROR 8200 (HY000): Unsupported modify column: can't change decimal column precision
 ```
 
-実際の実稼働環境では、このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが許容できると想定します。次に、 `binlog skip <task-name>`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
+このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが実際の実稼働環境で許容できると想定します。次に、 `binlog skip <task-name>`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
 1.  `binlog skip <task-name>`を実行して、現在失敗しているDDLステートメントをスキップします。
 
@@ -280,7 +280,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
 }
 ```
 
-実際の実稼働環境では、このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが許容できると想定します。次に、 `binlog skip <task-name>`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
+このDDLステートメントがダウンストリームTiDBで実行されない（つまり、元のテーブルスキーマが保持される）ことが実際の実稼働環境で許容できると想定します。次に、 `binlog skip <task-name>`を使用してこのDDLステートメントをスキップし、移行を再開できます。手順は次のとおりです。
 
 1.  `binlog skip <task-name>`を実行して、MySQLインスタンス1および2で現在失敗しているDDLステートメントをスキップします。
 
@@ -364,7 +364,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
     » query-status test
     ```
 
-    <details><summary>実行結果を参照してください。</summary>
+    <details><summary>実行結果をご覧ください。</summary>
 
     ```
     {
@@ -445,11 +445,11 @@ ALTER TABLE `shard_db_*`.`shard_table_*` CHARACTER SET LATIN1 COLLATE LATIN1_DAN
 
     </details>
 
-    タスクがエラーなしで正常に実行され、4つの間違ったDDLステートメントがすべてスキップされていることがわかります。
+    タスクはエラーなしで正常に実行され、4つの間違ったDDLステートメントはすべてスキップされていることがわかります。
 
 ### 移行が中断された場合は、DDLを置き換えます {#replace-ddl-if-the-migration-gets-interrupted}
 
-移行が中断されたときにDDLステートメントを置き換える必要がある場合は、次の`binlog replace`コマンドを実行します。
+移行が中断されたときにDDLステートメントを置き換える必要がある場合は、次の`binlog replace`のコマンドを実行します。
 
 ```bash
 binlog replace -h
@@ -490,7 +490,7 @@ SHOW CREATE TABLE db1.tbl1;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、アップストリームで次のDDL操作を実行して、UNIQUE制約を持つ新しい列を追加します。
+次に、アップストリームで次のDDL操作を実行して、UNIQUE制約のある新しい列を追加します。
 
 {{< copyable "" >}}
 
@@ -509,7 +509,7 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 
 このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
 
-1.  間違ったDDLステートメントを次のコマンドに置き換えます。
+1.  間違ったDDLステートメントを次のコマンドで置き換えます。
 
     {{< copyable "" >}}
 
@@ -615,7 +615,7 @@ SHOW CREATE TABLE shard_db.shard_table;
 +-------+-----------------------------------------------------------------------------------------------------------+
 ```
 
-次に、すべてのアップストリームシャードテーブルに対して次のDDL操作を実行して、UNIQUE制約を持つ新しい列を追加します。
+次に、すべてのアップストリームシャードテーブルに対して次のDDL操作を実行して、UNIQUE制約のある新しい列を追加します。
 
 {{< copyable "" >}}
 
@@ -641,7 +641,7 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 
 このDDLステートメントを2つの同等のDDLステートメントに置き換えることができます。手順は次のとおりです。
 
-1.  MySQLインスタンス1とMySQLインスタンス2のそれぞれ間違ったDDLステートメントを次のコマンドで置き換えます。
+1.  次のコマンドで、MySQLインスタンス1とMySQLインスタンス2のそれぞれ間違ったDDLステートメントを置き換えます。
 
     {{< copyable "" >}}
 

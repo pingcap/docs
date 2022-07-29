@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_CONFIG` information_schema table.
 
 # CLUSTER_CONFIG {#cluster-config}
 
-`CLUSTER_CONFIG`クラスタ構成テーブルを使用して、クラスタのすべてのサーバーコンポーネントの現在の構成を取得できます。これにより、TiDBの以前のリリースよりも使用が簡素化され、同様の情報を取得するには、各インスタンスのHTTPAPIエンドポイントにアクセスする必要があります。
+`CLUSTER_CONFIG`クラスタ構成テーブルを使用して、クラスタのすべてのサーバーコンポーネントの現在の構成を取得できます。これにより、同様の情報を取得するには各インスタンスのHTTP APIエンドポイントにアクセスする必要がある、以前のリリースのTiDBよりも使用が簡単になります。
 
 {{< copyable "" >}}
 
@@ -27,7 +27,7 @@ DESC cluster_config;
 
 フィールドの説明：
 
--   `TYPE` ：インスタンスタイプ。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `TYPE` ：インスタンスタイプ。オプションの値は、 `tidb` 、および`pd` `tikv` 。
 -   `INSTANCE` ：インスタンスのサービスアドレス。
 -   `KEY` ：構成アイテム名。
 -   `VALUE` ：構成アイテムの値。

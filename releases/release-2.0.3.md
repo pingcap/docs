@@ -17,7 +17,7 @@ title: TiDB 2.0.3 Release Notes
 -   一意のインデックスとしての`YEAR`タイプに関する問題を修正します
 -   一意のインデックスがない条件での`ON DUPLICATE KEY UPDATE`に関する問題を修正します
 -   `CEIL`関数の互換性の問題を修正します
--   `DECIMAL`タイプの`DIV`計算の精度の問題を修正します
+-   `DECIMAL`タイプの`DIV`計算の精度の問題を修正しました
 -   `ADMIN CHECK TABLE`の誤警報を修正
 -   特定の式パラメーターの下での`MAX`のpanicの問題を修正し`MIN`
 -   特別な条件で`JOIN`の結果がnullになる問題を修正します

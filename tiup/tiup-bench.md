@@ -5,7 +5,7 @@ summary: Learns how to stress test TiDB with TPC-C and TPC-H workloads using TiU
 
 # TiUPベンチコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
 
-データベースのパフォーマンスをテストする場合、データベースのストレステストが必要になることがよくあります。これを容易にするために、TiUPはベンチコンポーネントを統合しました。これは、ストレステスト用の2つのワークロードを提供します： [TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/) 。コマンドとフラグは次のとおりです。詳細については、 [TPC公式サイト](http://www.tpc.org)を参照してください。
+データベースのパフォーマンスをテストする場合、データベースのストレステストが必要になることがよくあります。これを容易にするために、TiUPはベンチコンポーネントを統合しました。これは、ストレステスト用に[TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/)の2つのワークロードを提供します。コマンドとフラグは次のとおりです。詳細については、 [TPC公式サイト](http://www.tpc.org)を参照してください。
 
 {{< copyable "" >}}
 
@@ -51,7 +51,7 @@ Flags:
 
 ## TiUPを使用してTPC-Cテストを実行します {#run-tpc-c-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-Cテストを実行するために次のコマンドとフラグをサポートしています。
+TiUPベンチコンポーネントは、TPC-Cテストを実行するために次のコマンドとフラグをサポートします。
 
 ```bash
 Available Commands:
@@ -137,7 +137,7 @@ Flags:
 
 ## TiUPを使用してTPC-Hテストを実行します {#run-tpc-h-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-Hテストを実行するために次のコマンドとパラメータをサポートしています。
+TiUPベンチコンポーネントは、TPC-Hテストを実行するために次のコマンドとパラメーターをサポートします。
 
 ```bash
 Available Commands:

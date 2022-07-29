@@ -7,7 +7,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 # TiDBクラスターアラートルール {#tidb-cluster-alert-rules}
 
-このドキュメントでは、TiDB、TiKV、PD、TiFlash、TiDB Binlog 、TiCDC、Node_exporter、Blackbox_exporterのアラート項目のルールの説明と解決策を含め、TiDBクラスタのさまざまなコンポーネントのアラートルールについて説明します。
+このドキュメントでは、TiDB、TiKV、PD、TiFlash、TiDB Binlog 、TiCDC、Node_exporter、Blackbox_exporterのアラート項目のルールの説明と解決策など、TiDBクラスタのさまざまなコンポーネントのアラートルールについて説明します。
 
 重大度レベルに応じて、アラートルールは、緊急レベル、クリティカルレベル、および警告レベルの3つのカテゴリ（高から低）に分類されます。この重大度レベルの区分は、以下の各コンポーネントのすべてのアラート項目に適用されます。
 
@@ -19,7 +19,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 ## TiDBアラートルール {#tidb-alert-rules}
 
-このセクションでは、TiDBコンポーネントのアラートルールを示します。
+このセクションでは、TiDBコンポーネントのアラートルールについて説明します。
 
 ### 緊急レベルのアラート {#emergency-level-alerts}
 
@@ -35,7 +35,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    多くの場合、使用できないリージョンまたはTiKVタイムアウトが原因です。 TiKV監視項目を確認して問題を特定する必要があります。
+    多くの場合、使用できないリージョンまたはTiKVタイムアウトが原因です。 TiKVの監視項目を確認して、問題を特定する必要があります。
 
 #### <code>TiDB_tikvclient_region_err_total</code> {#code-tidb-tikvclient-region-err-total-code}
 
@@ -73,7 +73,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    TiDBプロセスがまだ存在するかどうかを示します。 `tidb_monitor_keep_alive_total`の回数が10分間に100回未満増加した場合、TiDBプロセスはすでに終了している可能性があり、アラートがトリガーされます。
+    TiDBプロセスがまだ存在するかどうかを示します。 `tidb_monitor_keep_alive_total`の回数が10分間で100未満に増加した場合、TiDBプロセスはすでに終了している可能性があり、アラートがトリガーされます。
 
 -   解決：
 
@@ -120,11 +120,11 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    TiDBでリクエストを処理するまでのレイテンシ。 99パーセンタイル遅延が1秒を超えると、アラートがトリガーされます。
+    TiDBでリクエストを処理する際のレイテンシ。 99パーセンタイル遅延が1秒を超えると、アラートがトリガーされます。
 
 -   解決：
 
-    TiDBログをビューし、 `SLOW_QUERY`と`TIME_COP_PROCESS`のキーワードを検索して、遅いSQLクエリを見つけます。
+    TiDBログをビューし、 `SLOW_QUERY`および`TIME_COP_PROCESS`キーワードを検索して、遅いSQLクエリを見つけます。
 
 #### <code>TiDB_server_event_error</code> {#code-tidb-server-event-error-code}
 
@@ -137,7 +137,7 @@ summary: Learn the alert rules in a TiDB cluster.
     TiDBサービスで発生するイベントの数。次のイベントが発生すると、アラートがトリガーされます。
 
     1.  start：TiDBサービスが開始されます。
-    2.  ハング：クリティカルレベルのイベント（現在、シナリオは1つだけです：TiDBはbinlogを書き込めません）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
+    2.  ハング：クリティカルレベルのイベント（現在、TiDBがbinlogを書き込めないというシナリオは1つだけです）が発生すると、TiDBは`hang`モードに入り、手動で強制終了されるのを待ちます。
 
 -   解決：
 
@@ -166,7 +166,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    TiDBを保持しているマシンの時刻が巻き戻されると、アラートがトリガーされます。
+    TiDBを保持しているマシンの時間が巻き戻されると、アラートがトリガーされます。
 
 -   解決：
 
@@ -180,7 +180,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    TiDBで実行が保留されているDDLタスクの数が5を超えると、アラートがトリガーされます。
+    TiDBで実行を保留しているDDLタスクの数が5を超えると、アラートがトリガーされます。
 
 -   解決：
 
@@ -217,13 +217,13 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    fsync操作の待ち時間が1秒を超える場合は、etcdが通常よりも低速でデータをディスクに書き込んでいることを示しています。 PDリーダーがタイムアウトしたり、TSOを時間内にディスクに保存できなかったりして、クラスタ全体のサービスがシャットダウンする可能性があります。
+    fsync操作の待ち時間が1秒を超える場合は、etcdが通常よりも低速でデータをディスクに書き込むことを示しています。 PDリーダーのタイムアウトが発生したり、TSOを時間内にディスクに保存できなかったりして、クラスタ全体のサービスがシャットダウンする可能性があります。
 
 -   解決：
 
     -   書き込みが遅い原因を見つけます。システムに過負荷をかけるのは他のサービスである可能性があります。 PD自体が大量のCPUまたはI/Oリソースを占有しているかどうかを確認できます。
     -   PDを再起動するか、リーダーを別のPDに手動で転送して、サービスを回復してください。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
 
 #### <code>PD_miss_peer_region_count</code> {#code-pd-miss-peer-region-count-code}
 
@@ -238,7 +238,7 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     -   ダウンしているかオフラインになっているTiKVマシンがあるかどうかを確認して、問題の原因を特定します。
-    -   地域のヘルスパネルを見て、 `miss_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   リージョンのヘルスパネルを見て、 `miss_peer_region_count`が継続的に減少しているかどうかを確認します。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -271,11 +271,11 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    -   クラスタのスペースが一般的に不十分であるかどうかを確認します。その場合は、容量を増やします。
+    -   クラスタのスペースが一般的に不十分であるかどうかを確認してください。もしそうなら、その容量を増やします。
     -   リージョンバランスのスケジューリングに問題がないか確認してください。その場合、データの分散が不均一になります。
-    -   ログ、スナップショット、コアダンプなど、大量のディスク容量を占めるファイルがないか確認してください。
+    -   ログ、スナップショット、コアダンプなど、ディスク容量を大量に消費するファイルがないか確認してください。
     -   ノードのリージョンの重みを下げて、データ量を減らします。
-    -   スペースを解放できない場合は、ノードを事前にオフラインにすることを検討してください。これにより、ダウンタイムにつながるディスク容量の不足を防ぎます。
+    -   スペースを解放できない場合は、ノードを事前にオフラインにすることを検討してください。これにより、ダウンタイムにつながる不十分なディスク容量を防ぐことができます。
 
 #### <code>PD_etcd_network_peer_latency</code> {#code-pd-etcd-network-peer-latency-code}
 
@@ -290,7 +290,7 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     -   ネットワークとシステムの負荷状態を確認してください。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
 
 #### <code>PD_tidb_handle_requests_duration</code> {#code-pd-tidb-handle-requests-duration-code}
 
@@ -307,7 +307,7 @@ summary: Learn the alert rules in a TiDB cluster.
     -   サーバーのロードステータスを確認してください。
     -   pprofを使用して、PDのCPUプロファイルを分析します。
     -   PDリーダーを手動で切り替えます。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
 
 #### <code>PD_down_peer_region_nums</code> {#code-pd-down-peer-region-nums-code}
 
@@ -317,12 +317,12 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Raftリーダーによって報告された応答しないピアを持つリージョンの数。
+    Raftリーダーによって報告された、応答しないピアを持つリージョンの数。
 
 -   解決：
 
     -   ダウンしている、または再起動したばかりの、またはビジー状態のTiKVがあるかどうかを確認します。
-    -   地域のヘルスパネルを見て、 `down_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   リージョンのヘルスパネルを見て、 `down_peer_region_count`が継続的に減少しているかどうかを確認します。
     -   TiKVサーバー間のネットワークを確認してください。
 
 #### <code>PD_pending_peer_region_count</code> {#code-pd-pending-peer-region-count-code}
@@ -333,11 +333,11 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Raftログが遅れているリージョンが多すぎます。スケジューリングによって保留中のピアの数が少なくなるのは通常のことですが、その数が多いままの場合は、問題が発生している可能性があります。
+    Raftログが遅れているリージョンが多すぎます。スケジューリングによって保留中のピアの数が少なくなるのは正常ですが、その数が多いままの場合は、問題が発生している可能性があります。
 
 -   解決：
 
-    -   地域のヘルスパネルを見て、 `pending_peer_region_count`が継続的に減少しているかどうかを確認します。
+    -   リージョンのヘルスパネルを見て、 `pending_peer_region_count`が継続的に減少しているかどうかを確認します。
     -   TiKVサーバー間のネットワークを確認します。特に、十分な帯域幅があるかどうかを確認します。
 
 #### <code>PD_leader_change</code> {#code-pd-leader-change-code}
@@ -352,9 +352,9 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    -   PDの再起動、リーダーの手動転送、リーダーの優先順位の調整などの人的要因を除外します。
+    -   PDの再起動、リーダーの手動転送、リーダーの優先度の調整などの人的要因を除外します。
     -   ネットワークとシステムの負荷状態を確認してください。
-    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換します。
+    -   問題のあるPDインスタンスが環境要因のために回復できない場合は、オフラインにして交換してください。
 
 #### <code>TiKV_space_used_more_than_80%</code> {#code-tikv-space-used-more-than-80-code}
 
@@ -369,7 +369,7 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     -   容量を増やす必要があるかどうかを確認します。
-    -   ログ、スナップショット、コアダンプなど、大量のディスク容量を占めるファイルがないか確認してください。
+    -   ログ、スナップショット、コアダンプなど、ディスク容量を大量に消費するファイルがないか確認してください。
 
 #### <code>PD_system_time_slow</code> {#code-pd-system-time-slow-code}
 
@@ -398,11 +398,11 @@ summary: Learn the alert rules in a TiDB cluster.
 -   解決：
 
     -   店舗に十分なスペースがあるかどうかを確認してください。
-    -   ラベル構成が構成されている場合は、ラベル構成に従って追加のレプリカのストアがあるかどうかを確認します。
+    -   構成されている場合は、ラベル構成に従って追加のレプリカのストアがあるかどうかを確認します。
 
 ## TiKVアラートルール {#tikv-alert-rules}
 
-このセクションでは、TiKVコンポーネントのアラートルールを示します。
+このセクションでは、TiKVコンポーネントのアラートルールについて説明します。
 
 ### 緊急レベルのアラート {#emergency-level-alerts}
 
@@ -452,7 +452,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
     1.  ネットワークがクリアであるかどうかを確認します。
     2.  リモートTiKVがダウンしているかどうかを確認します。
-    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎないかどうかを確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
+    3.  リモートTiKVがダウンしていない場合は、圧力が高すぎるかどうかを確認してください。 [`TiKV_channel_full_total`](#tikv_channel_full_total)の解決策を参照してください。
 
 #### <code>TiKV_channel_full_total</code> {#code-tikv-channel-full-total-code}
 
@@ -466,8 +466,8 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    1.  Raft Proposeモニターを見て、アラートされたTiKVノードが他のTiKVノードよりもはるかに高いRaft提案を持っているかどうかを確認します。もしそうなら、それはこのTiKVに1つ以上のホットスポットがあることを意味します。ホットスポットのスケジューリングが正しく機能するかどうかを確認する必要があります。
-    2.  Raft I / Oモニターを監視し、レイテンシーが増加するかどうかを確認します。待ち時間が長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。実行可能であるが安全でない解決策の1つは、 `sync-log`を`false`に設定することです。
+    1.  Raft Proposeモニターを見て、アラートされたTiKVノードが他のTiKVノードよりもはるかに高いRaft提案を持っているかどうかを確認します。もしそうなら、それはこのTiKVに1つ以上のホットスポットがあることを意味します。ホットスポットスケジューリングが正しく機能するかどうかを確認する必要があります。
+    2.  Raft I / Oモニターを監視し、レイテンシーが増加するかどうかを確認します。待ち時間が長い場合は、ディスクにボトルネックが存在する可能性があることを意味します。実行可能であるが安全でない解決策の1つは、 `sync-log`から`false`に設定することです。
     3.  Raft Processモニターを監視し、ティック期間が長いかどうかを確認します。その場合、 `[raftstore]`構成の下に`raft-base-tick-interval = "2s"`を追加する必要があります。
 
 #### <code>TiKV_write_stall</code> {#code-tikv-write-stall-code}
@@ -563,7 +563,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Raftログを追加するための時間コストを示します。高い場合は、通常、I/Oがビジー状態であることを意味します。
+    Raftログを追加するための時間コストを示します。高い場合は、通常、I/Oがビジーすぎることを意味します。
 
 #### <code>TiKV_raft_apply_log_duration_secs</code> {#code-tikv-raft-apply-log-duration-secs-code}
 
@@ -573,7 +573,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Raftログを適用するための時間コストを示します。高い場合は、通常、I/Oがビジー状態であることを意味します。
+    Raftログを適用するための時間コストを示します。高い場合は、通常、I/Oがビジーすぎることを意味します。
 
 #### <code>TiKV_scheduler_latch_wait_duration_seconds</code> {#code-tikv-scheduler-latch-wait-duration-seconds-code}
 
@@ -583,12 +583,12 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    書き込み操作がスケジューラのメモリロックを取得するまでの待機時間。これが高い場合、書き込みの競合が多く発生するか、競合につながる一部の操作が終了して同じロックを待機する他の操作をブロックするのに長い時間がかかる可能性があります。
+    書き込み操作がスケジューラのメモリロックを取得するまでの待機時間。高い場合は、書き込みの競合が多く発生するか、競合につながる一部の操作が終了して同じロックを待機する他の操作をブロックするのに長い時間がかかる可能性があります。
 
 -   解決：
 
-    1.  Scheduler-Allモニターでスケジューラー・コマンドの期間をビューし、どのコマンドに最も時間がかかるかを確認します。
-    2.  Scheduler-Allモニターでスケジューラースキャンの詳細をビューし、 `total`と`process`が一致するかどうかを確認します。それらが大きく異なる場合、多くの無効なスキャンがあります。 `over seek bound`があるかどうかも確認できます。多すぎる場合は、GCが時間内に機能しないことを示します。
+    1.  Scheduler-Allモニターでスケジューラーコマンドの期間をビューし、どのコマンドに最も時間がかかるかを確認します。
+    2.  Scheduler-Allモニターでスケジューラースキャンの詳細をビューし、 `total`と`process`が一致するかどうかを確認します。それらが大きく異なる場合、多くの無効なスキャンがあります。 `over seek bound`があるかどうかも確認できます。多すぎる場合は、GCが時間内に機能していないことを示しています。
     3.  ストレージモニターでストレージ非同期スナップショット/書き込み期間をビューし、Raft操作が時間内に実行されているかどうかを確認します。
 
 #### <code>TiKV_thread_apply_worker_cpu_seconds</code> {#code-tikv-thread-apply-worker-cpu-seconds-code}
@@ -599,7 +599,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    アプライRaftログスレッドは大きな圧力を受けており、制限に近づいているか、制限を超えています。これは多くの場合、書き込みのバーストによって引き起こされます。
+    アプライRaftログスレッドに大きな圧力がかかっており、制限に近づいているか、制限を超えています。これは多くの場合、書き込みのバーストによって引き起こされます。
 
 ### 警告レベルのアラート {#warning-level-alerts}
 
@@ -626,7 +626,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   説明：
 
-    Raftの準備ができた状態で処理するための時間コストを示します。この値が大きい場合は、ログの追加タスクがスタックしていることが原因であることがよくあります。
+    Raftを処理するための時間コストを示します。この値が大きい場合は、ログの追加タスクがスタックしていることが原因であることがよくあります。
 
 #### <code>TiKV_raft_process_tick_duration_secs</code> {#code-tikv-raft-process-tick-duration-secs-code}
 
@@ -721,7 +721,7 @@ summary: Learn the alert rules in a TiDB cluster.
 
 -   解決：
 
-    どの種類のタスクの方が価値が高いかを確認してください。通常、コプロセッサーの解決策を見つけて、他のメトリックからワーカータスクを適用できます。
+    どの種類のタスクの値が高いかを確認してください。通常、コプロセッサーの解決策を見つけて、他のメトリックからワーカータスクを適用できます。
 
 #### <code>TiKV_low_space</code> {#code-tikv-low-space-code}
 
@@ -813,7 +813,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 -   解決：
 
     -   マシンにログインし、ファイルを作成して、正常かどうかをテストします。
-    -   ディスクLEDが正常か確認してください。そうでない場合は、ディスクを交換して、マシンのファイルシステムを修復します。
+    -   ディスクのLEDが正常か確認してください。そうでない場合は、ディスクを交換して、マシンのファイルシステムを修復します。
 
 ### クリティカルレベルのアラート {#critical-level-alerts}
 
@@ -825,7 +825,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
 -   説明：
 
-    本機のメモリー使用量が80％を超えています。
+    マシンのメモリ使用量が80％を超えています。
 
 -   解決：
 
@@ -913,7 +913,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
 ## Blackbox_exporter TCP、ICMP、およびHTTPアラートルール {#blackbox-exporter-tcp-icmp-and-http-alert-rules}
 
-このセクションでは、Blackbox_exporter TCP、ICMP、およびHTTPのアラートルールを示します。
+このセクションでは、Blackbox_exporter TCP、ICMP、およびHTTPのアラートルールについて説明します。
 
 ### 緊急レベルのアラート {#emergency-level-alerts}
 
@@ -947,7 +947,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
     -   TiFlashサービスを提供するマシンがダウンしていないか確認してください。
     -   TiFlashプロセスが存在するかどうかを確認します。
-    -   監視マシンとTiFlashマシン間のネットワークが正常かどうかを確認します。
+    -   監視機とTiFlash機間のネットワークが正常か確認してください。
 
 #### <code>Pump_server_is_down</code> {#code-pump-server-is-down-code}
 
@@ -995,7 +995,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
     -   TiKVサービスを提供するマシンがダウンしていないか確認してください。
     -   TiKVプロセスが存在するかどうかを確認します。
-    -   監視機とTiKV機のネットワークが正常か確認してください。
+    -   監視機とTiKV機間のネットワークが正常か確認してください。
 
 #### <code>PD_server_is_down</code> {#code-pd-server-is-down-code}
 
@@ -1041,7 +1041,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
 -   解決：
 
-    -   Blackbox_Exporterサービスを提供するマシンがダウンしていないか確認してください。
+    -   Blackbox_Exporterサービスを提供するマシンがダウンしていないかどうかを確認します。
     -   Blackbox_Exporterプロセスが存在するかどうかを確認します。
     -   監視マシンとBlackbox_Exporterマシン間のネットワークが正常かどうかを確認します。
 
@@ -1057,7 +1057,7 @@ TiCDCアラートルールの詳細については、 [TiCDCアラートルー�
 
 -   解決：
 
-    -   Grafanaサービスを提供するマシンがダウンしていないかどうかを確認します。
+    -   Grafanaサービスを提供するマシンがダウンしていないか確認してください。
     -   Grafanaプロセスが存在するかどうかを確認します。
     -   監視マシンとGrafanaマシン間のネットワークが正常かどうかを確認します。
 

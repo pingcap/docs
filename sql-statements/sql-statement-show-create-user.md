@@ -3,7 +3,7 @@ title: SHOW CREATE USER | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE USER for the TiDB database.
 ---
 
-# ユーザーの作成を表示 {#show-create-user}
+# CREATEUSERを表示する {#show-create-user}
 
 このステートメントは、 `CREATE USER`構文を使用してユーザーを再作成する方法を示しています。
 

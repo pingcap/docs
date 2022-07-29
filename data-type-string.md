@@ -5,13 +5,13 @@ summary: Learn about the string types supported in TiDB.
 
 # 文字列型 {#string-types}
 
-`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列タイプを`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列タイプ](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
+`VARCHAR`は、 `CHAR` 、 `TEXT` `BINARY`を`ENUM`すべての`BLOB`文字列型を`SET`し`VARBINARY` 。詳細については、 [MySQLの文字列タイプ](https://dev.mysql.com/doc/refman/5.7/en/string-types.html)を参照してください。
 
 ## サポートされているタイプ {#supported-types}
 
 ### <code>CHAR</code>タイプ {#code-char-code-type}
 
-`CHAR`は固定長の文字列です。 Mは、列の長さを文字数（バイトではなく）で表します。 Mの範囲は0〜255です`VARCHAR`タイプとは異なり、データが`CHAR`列に挿入されると、末尾のスペースが切り捨てられます。
+`CHAR`は固定長の文字列です。 Mは、列の長さを文字（バイトではなく）で表します。 Mの範囲は0〜255です`VARCHAR`タイプとは異なり、データが`CHAR`列に挿入されると、末尾のスペースが切り捨てられます。
 
 ```sql
 [NATIONAL] CHAR[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -19,7 +19,7 @@ summary: Learn about the string types supported in TiDB.
 
 ### <code>VARCHAR</code>タイプ {#code-varchar-code-type}
 
-`VARCHAR`は可変長の文字列です。 Mは、列の最大長を文字数（バイトではなく）で表します。 `VARCHAR`の最大サイズは65,535バイトを超えることはできません。行の最大長と使用される文字セットによって、 `VARCHAR`の長さが決まります。
+`VARCHAR`は可変長の文字列です。 Mは、列の最大長を文字数（バイトではない）で表します。 `VARCHAR`の最大サイズは65,535バイトを超えることはできません。最大行長と使用されている文字セットによって、 `VARCHAR`の長さが決まります。
 
 1つの文字が占めるスペースは、文字セットによって異なる場合があります。次の表は、1文字で消費されるバイト数と、各文字セットの`VARCHAR`列の長さの範囲を示しています。
 
@@ -37,7 +37,7 @@ summary: Learn about the string types supported in TiDB.
 
 ### <code>TEXT</code>タイプ {#code-text-code-type}
 
-`TEXT`は可変長の文字列です。 Mは、0から65,535の範囲の最大列長を文字数で表します。行の最大長と使用されている文字セットによって、 `TEXT`の長さが決まります。
+`TEXT`は可変長の文字列です。 Mは、0から65,535の範囲の最大列長を文字数で表します。最大行長と使用されている文字セットによって、 `TEXT`の長さが決まります。
 
 ```sql
 TEXT[(M)] [CHARACTER SET charset_name] [COLLATE collation_name]
@@ -126,7 +126,7 @@ ENUM('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name
 ENUM('apple', 'orange', 'pear')
 ```
 
-`ENUM`データ型の値は数値として格納されます。各値は、定義順に数値に変換されます。前の例では、各文字列は数値にマップされています。
+`ENUM`データ型の値は数値として格納されます。各値は、定義順序に従って数値に変換されます。前の例では、各文字列は数値にマップされています。
 
 | 価値             | 番号 |
 | -------------- | -- |
@@ -149,7 +149,7 @@ SET('value1','value2',...) [CHARACTER SET charset_name] [COLLATE collation_name]
 SET('1', '2') NOT NULL
 ```
 
-この例では、次の値のいずれかが有効である可能性があります。
+この例では、次の値のいずれかが有効です。
 
 ```
 ''
@@ -158,11 +158,11 @@ SET('1', '2') NOT NULL
 '1,2'
 ```
 
-TiDBでは、 `SET`タイプの値は内部で`Int64`に変換されます。各要素の存在は、0または1の2進数を使用して表されます`SET('a','b','c','d')`として指定された列の場合、メンバーには次の10進数値と2進数値があります。
+TiDBでは、 `SET`タイプの値は内部で`Int64`に変換されます。各要素の存在は、0または1のバイナリを使用して表されます`SET('a','b','c','d')`として指定された列の場合、メンバーには次の10進値と2進値があります。
 
 | メンバー        | 10進値 | バイナリ値 |
 | ----------- | ---- | ----- |
-| &#39;a&#39; | 1    | 0001  |
+| 「a」         | 1    | 0001  |
 | &#39;b&#39; | 2    | 0010  |
 | &#39;c&#39; | 4    | 0100  |
 | &#39;d&#39; | 8    | 1000  |

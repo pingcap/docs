@@ -5,9 +5,9 @@ summary: Use TiDB Control to obtain TiDB status information for debugging.
 
 # TiDBControlユーザーガイド {#tidb-control-user-guide}
 
-TiDB Controlは、TiDBのコマンドラインツールであり、通常、デバッグのためにTiDBのステータス情報を取得するために使用されます。このドキュメントでは、TiDB Controlの機能と、これらの機能の使用方法を紹介します。
+TiDB Controlは、TiDBのコマンドラインツールであり、通常、デバッグのためにTiDBのステータス情報を取得するために使用されます。このドキュメントでは、TiDBControlの機能とこれらの機能の使用方法を紹介します。
 
-## TiDBコントロールを入手する {#get-tidb-control}
+## TiDBコントロールを取得する {#get-tidb-control}
 
 TiDB Controlは、TiUPを使用してインストールするか、ソースコードからコンパイルすることで入手できます。
 
@@ -49,13 +49,13 @@ TiUPをインストールした後、 `tiup ctl tidb`のコマンドを使用し
 -   `tidb-ctl etcd` ：etcdの操作に使用
 -   `tidb-ctl log` ：単一行のスタック情報を展開するためにログファイルをフォーマットするために使用されます
 -   `tidb-ctl mvcc` ：MVCC情報を取得するために使用されます
--   `tidb-ctl region` ：地域情報を取得するために使用されます
+-   `tidb-ctl region` ：リージョン情報を取得するために使用されます
 -   `tidb-ctl schema` ：スキーマ情報を取得するために使用されます
 -   `tidb-ctl table` ：テーブル情報を取得するために使用されます
 
 ### 助けを得ます {#get-help}
 
-`tidb-ctl -h/--help`を使用して、使用情報を取得します。
+`tidb-ctl -h/--help`を使用して使用情報を取得します。
 
 TiDB Controlは、コマンドの複数のレイヤーで構成されています。各コマンド/サブコマンドの後に`-h/--help`を使用して、それぞれの使用法情報を取得できます。
 
@@ -116,7 +116,7 @@ tidb-ctl schema in <database name>
 
 -   テーブル名を指定する場合は、 `tidb-ctl schema in <database> -n <table name>`を使用してフィルタリングします。
 
-    たとえば、 `tidb-ctl schema in mysql -n db`は`mysql`データベースの`db`テーブルのテーブルスキーマを返します。
+    たとえば、 `tidb-ctl schema in mysql -n db`は、 `mysql`データベース内の`db`テーブルのテーブルスキーマを返します。
 
     ```json
     {
@@ -138,7 +138,7 @@ tidb-ctl schema in <database name>
 
 `tid`は、データベース全体で一意の`table_id`を使用してテーブルスキーマを取得するために使用されます。 `in`サブコマンドを使用して特定のスキーマのすべてのテーブルIDを取得し、 `tid`サブコマンドを使用して詳細なテーブル情報を取得できます。
 
-たとえば、 `mysql.stat_meta`のテーブルIDは`21`です。 `tidb-ctl schema tid -i 21`を使用して、 `mysql.stat_meta`の詳細を取得できます。
+たとえば、 `mysql.stat_meta`のテーブルIDは`21`です。 `tidb-ctl schema tid -i 21`を使用して`mysql.stat_meta`の詳細を取得できます。
 
 ```json
 {

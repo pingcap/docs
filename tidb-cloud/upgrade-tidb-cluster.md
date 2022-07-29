@@ -9,7 +9,7 @@ summary: Learn how to upgrade a TiDB cluster.
 
 ## 定期的にアップグレードする {#regularly-upgrade}
 
-低すぎるTiDBバージョンの場合、 TiDB Cloudは定期的にそれを均一にアップグレードし、アップグレードの前後に電子メールでユーザーに通知します。
+低すぎるTiDBバージョンの場合、 TiDB Cloudは定期的に均一にアップグレードし、アップグレードの前後に電子メールでユーザーに通知します。
 
 ## アップグレードするにはサポートに連絡してください {#contact-support-to-upgrade}
 

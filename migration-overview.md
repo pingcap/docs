@@ -16,9 +16,9 @@ summary: Learn the overview of data migration scenarios and the solutions.
 
 -   インクリメンタルレプリケーション。 TiDB DMを使用して、MySQL、MariaDB、またはAuroraからTiDBにbinlogを複製できます。これにより、複製期間中のウィンドウのダウンタイムが大幅に短縮されます。
 
--   TiDBクラスター間のデータレプリケーション。 TiDBはバックアップと復元をサポートしています。この機能により、既存のTiDBクラスタのスナップショットを新しいTiDBクラスタに初期化できます。
+-   TiDBクラスター間のデータ複製。 TiDBはバックアップと復元をサポートしています。この機能により、既存のTiDBクラスタのスナップショットを新しいTiDBクラスタに初期化できます。
 
-データベースの種類、展開場所、アプリケーションデータのサイズ、およびアプリケーションのニーズに応じて、さまざまな移行ソリューションを選択できます。次のセクションでは、いくつかの一般的な移行シナリオを紹介します。これらのセクションを参照して、ニーズに応じて最適なソリューションを決定できます。
+データベースの種類、展開場所、アプリケーションのデータサイズ、およびアプリケーションのニーズに応じて、さまざまな移行ソリューションを選択できます。次のセクションでは、いくつかの一般的な移行シナリオを紹介します。これらのセクションを参照して、ニーズに応じて最適なソリューションを決定できます。
 
 ## AuroraMySQLからAuroraにデータを移行する {#migrate-data-from-aurora-mysql-to-tidb}
 
@@ -26,7 +26,7 @@ AuroraからAWSにデプロイされたTiDBクラスタにデータを移行す�
 
 -   [AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md) 。
 
-## MySQLからTiDBにデータを移行する {#migrate-data-from-mysql-to-tidb}
+## MySQLからTiDBへのデータの移行 {#migrate-data-from-mysql-to-tidb}
 
 クラウドストレージ（S3）サービスが使用されておらず、ネットワーク接続が良好で、ネットワークレイテンシが低い場合は、次の方法を使用して、MySQLからTiDBにデータを移行できます。
 
@@ -42,7 +42,7 @@ AuroraからAWSにデプロイされたTiDBクラスタにデータを移行す�
 
 -   [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
 
-シャーディングされたテーブルのデータサイズが大きく（たとえば、1 TiBより大きい）、移行期間中に他のアプリケーションがTiDBに書き込むことを許可しない場合は、 TiDB Lightningを使用して、シャーディングされたテーブルをすばやくマージしてインポートできます。次に、DMを使用して、アプリケーションのニーズに基づいて増分シャーディングデータ（binlog）を複製できます。
+シャードテーブルのデータサイズが大きく（たとえば、1 TiBより大きい）、移行期間中に他のアプリケーションがTiDBに書き込むことを許可しない場合は、 TiDB Lightningを使用してシャードテーブルをすばやくマージおよびインポートできます。次に、DMを使用して、アプリケーションのニーズに基づいて増分シャーディングデータ（binlog）を複製できます。
 
 -   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
@@ -57,5 +57,5 @@ AuroraからAWSにデプロイされたTiDBクラスタにデータを移行す�
 
 -   [gh-ostまたはpt-oscを使用するデータベースからの継続的なレプリケーション](/migrate-with-pt-ghost.md)
 -   [より多くの列を持つダウンストリームTiDBテーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
--   [Binlogイベントをフィルタリングする](/filter-binlog-event.md)
+-   [Binlogイベントのフィルタリング](/filter-binlog-event.md)
 -   [SQL式を使用してDMLイベントをフィルタリングする](/filter-dml-event.md)

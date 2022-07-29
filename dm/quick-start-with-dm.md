@@ -5,7 +5,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 # TiDBデータ移行のクイックスタートガイド {#quick-start-guide-for-tidb-data-migration}
 
-このドキュメントでは、 [TiDBデータ移行](https://github.com/pingcap/dm) （DM）を使用してMySQLからTiDBにデータを移行する方法について説明します。このガイドはDM機能の簡単なデモであり、実稼働環境にはお勧めしません。
+このドキュメントでは、 [TiDBデータ移行](https://github.com/pingcap/dm) （DM）を使用してMySQLからTiDBにデータを移行する方法について説明します。このガイドはDM機能の簡単なデモであり、本番環境にはお勧めしません。
 
 ## ステップ1：DMクラスタをデプロイする {#step-1-deploy-a-dm-cluster}
 
@@ -26,7 +26,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
     tiup dm template
     ```
 
-3.  出力の構成情報をコピーし、変更したIPアドレスを持つ`topology.yaml`ファイルとして保存します。 TiUPを使用して、 `topology.yaml`のファイルでDMクラスタをデプロイします。
+3.  出力の構成情報をコピーし、変更されたIPアドレスを持つ`topology.yaml`ファイルとして保存します。 TiUPを使用して、 `topology.yaml`のファイルでDMクラスタをデプロイします。
 
     {{< copyable "" >}}
 
@@ -106,7 +106,7 @@ summary: Learn how to quickly deploy a DM cluster using binary packages.
 
 データ移行のターゲットとして既存のTiDBクラスタを選択できます。
 
-テスト用のTiDBクラスタがない場合は、次のコマンドを実行してデモ環境をすばやく構築できます。
+テスト用のTiDBクラスタがない場合は、次のコマンドを実行して、デモ環境をすばやく構築できます。
 
 {{< copyable "" >}}
 
@@ -166,7 +166,7 @@ insert into t2 (id, uid, name) values (3, 20001, 'José Arcadio Buendía'), (4, 
 
 これで、 `mysql-01`のデータベースからTiDBにデータを移行するタスクが正常に作成されました。
 
-## ステップ6：タスクのステータスを確認します {#step-6-check-the-status-of-the-task}
+## 手順6：タスクのステータスを確認する {#step-6-check-the-status-of-the-task}
 
 タスクが作成されたら、 `dmctl query-status`コマンドを使用してタスクのステータスを確認できます。
 

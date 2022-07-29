@@ -5,7 +5,7 @@ summary: Learn how to enable TLS for DM connections.
 
 # DM接続のTLSを有効にする {#enable-tls-for-dm-connections}
 
-このドキュメントでは、DM-master、DM-worker、およびdmctlコンポーネント間の接続、DMとアップストリームまたはダウンストリームデータベース間の接続など、DM接続の暗号化されたデータ送信を有効にする方法について説明します。
+このドキュメントでは、DMマスター、DMワーカー、およびdmctlコンポーネント間の接続、DMとアップストリームまたはダウンストリームデータベース間の接続など、DM接続の暗号化されたデータ送信を有効にする方法について説明します。
 
 ## DM-master、DM-worker、およびdmctl間の暗号化されたデータ送信を有効にする {#enable-encrypted-data-transmission-between-dm-master-dm-worker-and-dmctl}
 
@@ -83,7 +83,7 @@ summary: Learn how to enable TLS for DM connections.
 
 証明書とキーを再ロードするために、DM-master、DM-worker、およびdmctlは、新しい接続が作成されるたびに、現在の証明書とキーファイルを再読み取りします。
 
-`ssl-ca` 、または`ssl-cert`で指定されたファイルが更新されたら、DMコンポーネントを再始動して、証明書と鍵ファイルを再`ssl-key`し、相互に再接続します。
+`ssl-ca` 、または`ssl-cert`で指定されたファイルが更新されたら、DMコンポーネントを再起動して、証明書とキーファイルを再`ssl-key`し、相互に再接続します。
 
 ## DMコンポーネントとアップストリームまたはダウンストリームデータベース間の暗号化されたデータ送信を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
 
@@ -111,7 +111,7 @@ summary: Learn how to enable TLS for DM connections.
 
 1.  暗号化された接続を使用するようにダウンストリームTiDBを構成します。詳細な操作については、 [安全な接続を使用するようにTiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
-2.  タスク構成ファイルにTiDBクライアント証明書を設定します。
+2.  タスク構成ファイルでTiDBクライアント証明書を設定します。
 
     > **ノート：**
     >

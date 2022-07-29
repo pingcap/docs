@@ -25,7 +25,7 @@ summary: An overview of the usage of SHOW STATS_HEALTHY for TiDB database.
 
 ## 例 {#examples}
 
-サンプルデータをロードして`ANALYZE`を実行します：
+サンプルデータをロードして実行`ANALYZE` ：
 
 {{< copyable "" >}}
 

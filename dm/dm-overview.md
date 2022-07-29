@@ -11,7 +11,7 @@ summary: Learn about the Data Migration tool, the architecture, the key componen
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
 -->
 
-[TiDBデータ移行](https://github.com/pingcap/dm) （DM）は統合データ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへの完全なデータ移行と増分データ複製をサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。
+[TiDBデータ移行](https://github.com/pingcap/dm) （DM）は、統合されたデータ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへの完全なデータ移行と増分データ複製をサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。
 
 ## 基本的な機能 {#basic-features}
 
@@ -65,7 +65,7 @@ DMツールを使用する前に、次の制限に注意してください。
 
 ## 貢献 {#contributing}
 
-DMオープンソーシングプロジェクトにご参加いただけます。どうぞよろしくお願いいたします。詳細については、 [CONTRIBUTING.md](https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md)を参照してください。
+DMオープンソーシングプロジェクトへの参加を歓迎します。どうぞよろしくお願いいたします。詳細については、 [CONTRIBUTING.md](https://github.com/pingcap/tiflow/blob/master/dm/CONTRIBUTING.md)を参照してください。
 
 ## コミュニティサポート {#community-support}
 

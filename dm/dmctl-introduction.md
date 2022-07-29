@@ -77,7 +77,7 @@ Use "dmctl [command] --help" for more information about a command.
 
 > **ノート：**
 >
-> -   dmctlコマンドの後には、1つのタスク操作のみを続ける必要があります。
+> -   dmctlコマンドの後には、1つのタスク操作のみが続く必要があります。
 > -   v2.0.4以降、DMは環境変数`DM_MASTER_ADDR`からの`-master-addr`パラメーターの読み取りをサポートします。
 
 {{< copyable "" >}}

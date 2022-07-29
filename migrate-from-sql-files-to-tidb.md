@@ -5,7 +5,7 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 # SQLファイルからTiDBへのデータの移行 {#migrate-data-from-sql-files-to-tidb}
 
-このドキュメントでは、TiDBLightningを使用してTiDB LightningファイルからTiDBにデータを移行する方法について説明します。 MySQL SQLファイルの生成方法については、 [Dumplingを使用してSQLファイルにエクスポート](/dumpling-overview.md#export-to-sql-files)を参照してください。
+このドキュメントでは、TiDBLightningを使用してTiDB LightningファイルからTiDBにデータを移行する方法について説明します。 MySQL SQLファイルの生成方法については、 [Dumplingを使用してSQLファイルにエクスポートする](/dumpling-overview.md#export-to-sql-files)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -16,7 +16,7 @@ summary: Learn how to migrate data from SQL files to TiDB.
 
 すべてのSQLファイルを`/data/my_datasource/`や`s3://my-bucket/sql-backup?region=us-west-2`などの同じディレクトリに配置します。 TiDB Lightingは、このディレクトリとそのサブディレクトリ内の`.sql`のファイルすべてを再帰的に検索します。
 
-## ステップ2.ターゲットテーブルスキーマを定義する {#step-2-define-the-target-table-schema}
+## 手順2.ターゲットテーブルスキーマを定義する {#step-2-define-the-target-table-schema}
 
 データをTiDBにインポートするには、ターゲットデータベースのテーブルスキーマを作成する必要があります。
 
@@ -86,11 +86,11 @@ TiDB Lightningは、 `~/.aws/credentials`からのクレデンシャルファイ
 インポートが開始されたら、次のいずれかの方法で進行状況を確認できます。
 
 -   デフォルトで5分ごとに更新される`grep`ログで`progress`キーワードを検索します。
--   Grafanaダッシュボードを使用します。詳細については、 [TiDB Lightning Monitoring](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
+-   Grafanaダッシュボードを使用します。詳細については、 [TiDB Lightning監視](/tidb-lightning/monitor-tidb-lightning.md)を参照してください。
 -   Webインターフェイスを使用します。詳細については、 [TiDB Lightningインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)を参照してください。
 
 インポートが完了すると、 TiDB Lightningは自動的に終了します。ログの最後の5行に`the whole procedure completed`が含まれている場合は、インポートが正常に完了したことを意味します。
 
 > **ノート：**
 >
-> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、 TiDB Lightningが正常に終了したことを意味するだけであり、タスクの完了ではありません。インポートプロセス中に問題が発生した場合は、トラブルシューティングについて[TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
+> インポートが成功したかどうかに関係なく、最後の行には`tidb lightning exit`が表示されます。これは、タスクの完了ではなく、 TiDB Lightningが正常に終了したことを意味するだけです。インポートプロセス中に問題が発生した場合は、トラブルシューティングについて[TiDB Lightning FAQ](/tidb-lightning/tidb-lightning-faq.md)を参照してください。

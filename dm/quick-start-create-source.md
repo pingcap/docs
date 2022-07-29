@@ -80,7 +80,7 @@ tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.y
 
 ## ステップ3：作成したデータソースをクエリする {#step-3-query-the-data-source-you-created}
 
-データソースを作成したら、次のコマンドを使用してデータソースをクエリできます。
+データソースを作成した後、次のコマンドを使用してデータソースをクエリできます。
 
 -   データソースの`source-id`を知っている場合は、 `dmctl config source <source-id>`コマンドを使用して、データソースの構成を直接確認できます。
 

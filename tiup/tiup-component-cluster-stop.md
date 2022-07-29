@@ -8,7 +8,7 @@ title: tiup cluster stop
 
 > **ノート：**
 >
-> クラスタのコアサービスが停止すると、クラスタはサービスを提供できなくなりクラスタ。
+> クラスターのコアサービスが停止すると、クラスタはサービスを提供できなくなりクラスタ。
 
 ## 構文 {#syntax}
 
@@ -22,7 +22,7 @@ tiup cluster stop <cluster-name> [flags]
 
 ### -N、-node {#n-node}
 
--   停止するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `tiup cluster display`コマンドによって返された[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノードIDを取得できます。
+-   停止するノードを指定します。このオプションの値は、ノードIDのコンマ区切りのリストです。 `tiup cluster display`コマンドによって返される[クラスタステータステーブル](/tiup/tiup-component-cluster-display.md)の最初の列からノードIDを取得できます。
 -   データ型： `STRINGS`
 -   このオプションがコマンドで指定されていない場合、コマンドはデフォルトですべてのノードを停止します。
 
@@ -40,7 +40,7 @@ tiup cluster stop <cluster-name> [flags]
 >
 > `-N, --node`オプションを同時に指定すると、 `-N, --node`と`-R, --role`の両方の仕様に一致するサービスノードのみが停止します。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

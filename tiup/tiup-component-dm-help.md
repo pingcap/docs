@@ -14,7 +14,7 @@ tiup dm help [command] [flags]
 
 `[command]`は、ユーザーが表示する必要のあるコマンドのヘルプ情報を指定するために使用されます。指定しない場合は、 `tiup-dm`のヘルプ情報が表示されます。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

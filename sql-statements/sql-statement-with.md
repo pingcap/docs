@@ -5,7 +5,7 @@ summary: An overview of the usage of WITH (Common Table Expression) for the TiDB
 
 # と {#with}
 
-Common Table Expression（CTE）は、SQLステートメント内で複数回参照できる一時的な結果セットであり、ステートメントの可読性と実行効率を向上させます。 `WITH`ステートメントを適用して、共通テーブル式を使用できます。
+共通テーブル式（CTE）は、SQLステートメント内で複数回参照して、ステートメントの可読性と実行効率を向上させることができる一時的な結果セットです。 `WITH`ステートメントを適用して、共通テーブル式を使用できます。
 
 ## あらすじ {#synopsis}
 
@@ -81,7 +81,7 @@ WITH RECURSIVE cte(a) AS (SELECT 1 UNION SELECT a+1 FROM cte WHERE a < 5) SELECT
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   厳密モードでは、再帰的に計算されたデータ長がシード部分のデータ長を超えると、TiDBは警告を返し、MySQLはエラーを返します。非厳密モードでは、TiDBの動作はMySQLの動作と一致しています。
+-   strictモードでは、再帰的に計算されたデータ長がシード部分のデータ長を超えると、TiDBは警告を返し、MySQLはエラーを返します。非厳密モードでは、TiDBの動作はMySQLの動作と一致しています。
 -   再帰CTEのデータ型は、シード部分によって決定されます。シード部分のデータ型は、場合によってはMySQLと完全に一致していません（関数など）。
 -   複数の`UNION`演算子の場合、MySQLでは`UNION ALL`の後に`UNION`を続けることはできませんが、 `UNION ALL`では許可されています。
 -   CTEの定義に問題がある場合、TiDBはエラーを報告しますが、CTEが参照されていない場合はMySQLは報告しません。

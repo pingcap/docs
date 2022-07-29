@@ -54,7 +54,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 | パラメーター      | デフォルト値                       | 説明                                                                                                                                   |
 | :---------- | :--------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
-| `TEMPORARY` | `false`                      | TiDBは現在、 `TEMPORARY`オプションをサポートしておらず、構文の互換性のみを提供しています。                                                                                |
+| `TEMPORARY` | `false`                      | TiDBは現在、 `TEMPORARY`オプションをサポートしておらず、構文互換性のみを提供しています。                                                                                 |
 | `INCREMENT` | `1`                          | シーケンスの増分を指定します。その正または負の値は、シーケンスの成長方向を制御できます。                                                                                         |
 | `MINVALUE`  | `1`または`-9223372036854775807` | シーケンスの最小値を指定します。 `INCREMENT` &gt; `0`の場合、デフォルト値は`1`です。 `INCREMENT` &lt; `0`の場合、デフォルト値は`-9223372036854775807`です。                      |
 | `MAXVALUE`  | `9223372036854775806`または`-1` | シーケンスの最大値を指定します。 `INCREMENT` &gt; `0`の場合、デフォルト値は`9223372036854775806`です。 `INCREMENT` &lt; `0`の場合、デフォルト値は`-1`です。                      |
@@ -84,7 +84,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 ## 例 {#examples}
 
--   デフォルトのパラメータを使用してシーケンスオブジェクトを作成します。
+-   デフォルトのパラメータでシーケンスオブジェクトを作成します。
 
     {{< copyable "" >}}
 
@@ -113,7 +113,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.02 sec)
     ```
 
--   `lastval()`関数を使用して、このセッションでのシーケンスオブジェクトへの最後の呼び出しによって生成された値を取得します。
+-   `lastval()`関数を使用して、このセッションのシーケンスオブジェクトへの最後の呼び出しによって生成された値を取得します。
 
     {{< copyable "" >}}
 
@@ -227,7 +227,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
--   `nextval()`を使用して次の値を取得すると、次の値はシーケンスで定義された等差数列の規則に従います。
+-   `nextval()`を使用して次の値を取得すると、次の値はシーケンスで定義された等差数列規則に従います。
 
     {{< copyable "" >}}
 
@@ -297,9 +297,9 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントはTiDB拡張です。実装は、MariaDBで利用可能なシーケンスに基づいてモデル化されています。
+このステートメントはTiDB拡張です。実装は、MariaDBで利用可能なシーケンスをモデルにしています。
 
-`SETVAL`の関数を除いて、他のすべての関数はMariaDBと同じ*進行*をします。ここで「進行」とは、シーケンス内の数値が、シーケンスによって定義された特定の等差数列規則に従うことを意味します。 `SETVAL`を使用してシーケンスの現在の値を設定できますが、シーケンスの後続の値は元の進行規則に従います。
+`SETVAL`の関数を除いて、他のすべての関数はMariaDBと同じ*進行*をします。ここで「進行」とは、シーケンス内の数値が、シーケンスによって定義された特定の等差数列規則に従うことを意味します。 `SETVAL`を使用してシーケンスの現在の値を設定できますが、シーケンスの後続の値は元の進行ルールに従います。
 
 例えば：
 
@@ -314,4 +314,4 @@ select setval(seq, 6)   // Sets the current value of a sequence to 6.
 ## も参照してください {#see-also}
 
 -   [ドロップシーケンス](/sql-statements/sql-statement-drop-sequence.md)
--   [シーケンスの作成を表示](/sql-statements/sql-statement-show-create-sequence.md)
+-   [CREATESEQUENCEを表示する](/sql-statements/sql-statement-show-create-sequence.md)

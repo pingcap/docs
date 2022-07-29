@@ -12,13 +12,13 @@ title: TiDB 2.1 GA Release Notes
 
     -   選択範囲`Index Join`を最適化して、実行パフォーマンスを向上させます
 
-    -   `Index Join`の外部テーブルの選択を最適化し、行カウントの推定値が小さいテーブルを外部テーブルとして使用します
+    -   外側のテーブルの選択を`Index Join`に最適化し、行数の推定値が小さいテーブルを外側のテーブルとして使用します
 
-    -   結合ヒント`TIDB_SMJ`を最適化して、適切なインデックスが利用できない場合でもマージ結合を使用できるようにします
+    -   結合ヒント`TIDB_SMJ`を最適化して、適切なインデックスが使用できない場合でもマージ結合を使用できるようにします
 
     -   結合ヒント`TIDB_INLJ`を最適化して、結合する内部テーブルを指定します
 
-    -   相関サブクエリを最適化し、フィルタを押し下げ、インデックスの選択範囲を拡張して、一部のクエリの効率を桁違いに向上させます
+    -   相関サブクエリを最適化し、フィルタをプッシュダウンし、インデックスの選択範囲を拡張して、一部のクエリの効率を桁違いに向上させます
 
     -   `UPDATE`および`DELETE`ステートメントでのインデックスヒントと結合ヒントの使用のサポート
 
@@ -36,7 +36,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   並列`Project`演算子を実装し、一部のシナリオでパフォーマンスを74％向上させます
 
-    -   実行性能を向上させるために、 `Hash Join`の内部テーブルと外部テーブルのデータを同時に読み取ります。
+    -   `Hash Join`の内部テーブルと外部テーブルのデータを同時に読み取り、実行パフォーマンスを向上させます。
 
     -   `REPLACE INTO`ステートメントの実行速度を最適化し、パフォーマンスをほぼ10倍向上させます
 
@@ -50,7 +50,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   ハッシュ結合の実行を最適化します。結合タイプが内部結合または半結合であり、内部テーブルが空の場合、外部テーブルからデータを読み取らずに結果を返します。
 
-    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、実行時間や各オペレーターの返された行数などの実行時統計を確認することをサポートします
+    -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md)を使用して、実行時間や各演算子の返される行数などの実行時統計を確認することをサポートします。
 
 -   統計
 
@@ -98,7 +98,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   [`tidb_disable_txn_auto_retry`システム変数を追加して、トランザクションが自動的に再試行するかどうかを制御します](/system-variables.md#tidb_disable_txn_auto_retry)
 
-    -   [遅いクエリを取得するための`admin show slow`ステートメントの使用をサポート](/identify-slow-queries.md#admin-show-slow-command)
+    -   [`admin show slow`ステートメントを使用して遅いクエリを取得することをサポート](/identify-slow-queries.md#admin-show-slow-command)
 
     -   [`tidb_slow_log_threshold`環境変数を追加して、低速ログのしきい値を自動的に設定します](/system-variables.md#tidb_slow_log_threshold)
 
@@ -134,7 +134,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   `LOAD DATA IGNORE LINES`のステートメントをサポートする
 
-    -   `Show ProcessList`ステートメントは、より正確な情報を返します
+    -   `Show ProcessList`ステートメントはより正確な情報を返します
 
 ## 配置Driver（PD） {#placement-driver-pd}
 
@@ -146,13 +146,13 @@ title: TiDB 2.1 GA Release Notes
 
     -   デフォルトで`raft learner`を有効にすると、スケジューリング中のマシン障害によってデータが利用できなくなるリスクが低くなります。
 
-    -   TSOの割り当ては、システムクロックが逆方向になることによる影響を受けなくなりました。
+    -   TSOの割り当ては、システムクロックが逆方向に進むことによる影響を受けなくなりました。
 
     -   `Region merge`つの機能をサポートして、メタデータによってもたらされるオーバーヘッドを削減します
 
 -   スケジューラーを最適化する
 
-    -   ダウンストアの処理を最適化して、レプリカの作成を高速化します
+    -   ダウンストアの処理を最適化して、レプリカの作成をスピードアップします
 
     -   ホットスポットスケジューラを最適化して、トラフィック統計情報がジッターするときの適応性を向上させます
 
@@ -166,11 +166,11 @@ title: TiDB 2.1 GA Release Notes
 
     -   [PDシミュレーター](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)を改善して、スケジューリングシナリオをシミュレートします
 
--   APIおよび操作ツール
+-   APIと操作ツール
 
-    -   `TiDB reverse scan`機能をサポートするために[`GetPrevRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
+    -   `TiDB reverse scan`機能をサポートするために[`GetPrevRegion`インターフェイス](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L40)を追加します
 
-    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加すると、TiKVリージョンの分割が高速化されます
+    -   [`BatchSplitRegion`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L54)を追加して、TiKVリージョンの分割を高速化します
 
     -   TiDBで分散GCをサポートするために[`GCSafePoint`インターフェース](https://github.com/pingcap/kvproto/blob/8e3f33ac49297d7c93b61a955531191084a2f685/proto/pdpb.proto#L64-L66)を追加します
 
@@ -179,15 +179,15 @@ title: TiDB 2.1 GA Release Notes
     <!---->
 
     -   pd-ctlは以下をサポートします：
-        -   [リージョン分割の統計を使用する](/pd-control.md#operator-check--show--add--remove)
+        -   [リージョン分割の統計の使用](/pd-control.md#operator-check--show--add--remove)
 
         -   [`jq`を呼び出してJSON出力をフォーマットする](/pd-control.md#jq-formatted-json-output-usage)
 
-        -   [指定店舗の地域情報を確認する](/pd-control.md#region-store-store_id)
+        -   [指定店舗のリージョン情報を確認する](/pd-control.md#region-store-store_id)
 
-        -   [バージョン別にソートされたtopNリージョンリストをチェックする](/pd-control.md#region-topconfver-limit)
+        -   [バージョンでソートされたtopNリージョンリストを確認する](/pd-control.md#region-topconfver-limit)
 
-        -   [サイズでソートされたtopNリージョンリストをチェック](/pd-control.md#region-topsize-limit)
+        -   [サイズでソートされたtopNリージョンリストをチェックする](/pd-control.md#region-topsize-limit)
 
         -   [より正確なTSOエンコーディング](/pd-control.md#tso)
 
@@ -215,7 +215,7 @@ title: TiDB 2.1 GA Release Notes
 
     -   組み込み関数を追加する
 
-    -   [コプロセッサー`ReadPool`を追加して、要求の処理における同時実行性を向上させます](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
+    -   [コプロセッサー`ReadPool`を追加して、要求処理の並行性を向上させます](https://github.com/tikv/rfcs/blob/master/text/0010-read-pool.md)
 
     -   時間関数の解析の問題とタイムゾーンに関連する問題を修正します
 
@@ -239,13 +239,13 @@ title: TiDB 2.1 GA Release Notes
 
     -   [`LocalReader`スレッドを追加して、読み取り要求を処理し、読み取り要求の遅延を減らします](https://github.com/tikv/rfcs/pull/17)
 
-    -   [大量の書き込みによってもたらされる大きな領域を回避するために`BatchSplit`をサポートする](https://github.com/tikv/rfcs/pull/6)
+    -   [大量の書き込みによってもたらされる大きなリージョンを回避するために`BatchSplit`をサポートする](https://github.com/tikv/rfcs/pull/6)
 
     -   I / Oオーバーヘッドを削減するために、統計に従って`Region Split`をサポートします
 
-    -   キーの数に応じて`Region Split`をサポートし、インデックススキャンの同時実行性を向上させます
+    -   インデックススキャンの同時実行性を向上させるために、キーの数に応じて`Region Split`をサポートします
 
-    -   Raftメッセージプロセスを改善して、 `Region Split`による不要な遅延を回避します
+    -   Raftメッセージプロセスを改善して、 `Region Split`による不要な遅延を回避します。
 
     -   ネットワーク分離がサービスに与える影響を減らすために、デフォルトで`PreVote`機能を有効にします
 
@@ -267,7 +267,7 @@ title: TiDB 2.1 GA Release Notes
 
 -   大量のデータの高速フルインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)
 
--   新しい[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)をサポートする
+-   新しい[TiDB Binlog](/tidb-binlog/tidb-binlog-overview.md)をサポート
 
 ## アップグレードの警告 {#upgrade-caveat}
 

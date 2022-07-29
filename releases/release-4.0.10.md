@@ -18,7 +18,7 @@ TiDBバージョン：4.0.10
 
     -   ログからユーザーデータを編集するために`security.redact_info_log`の構成アイテムを追加します
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
@@ -38,7 +38,7 @@ TiDBバージョン：4.0.10
 
     -   Dumpling
 
-        -   認識されない引数のチェックと、ダンプ中の現在の進行状況の出力をサポート[＃228](https://github.com/pingcap/dumpling/pull/228)
+        -   認識されない引数のチェックとダンプ中の現在の進行状況の出力をサポート[＃228](https://github.com/pingcap/dumpling/pull/228)
 
     -   TiDB Lightning
 
@@ -58,12 +58,12 @@ TiDBバージョン：4.0.10
     -   スキーマの変更によって引き起こされる誤った結果の問題を修正します[＃21596](https://github.com/pingcap/tidb/pull/21596)
     -   `ALTER TABLE`での不要な列フラグの変更を[＃21474](https://github.com/pingcap/tidb/pull/21474)する
     -   オプティマイザヒントで使用されるクエリブロックのテーブルエイリアスのデータベース名を設定します[＃21380](https://github.com/pingcap/tidb/pull/21380)
-    -   `IndexHashJoin`および[＃21020](https://github.com/pingcap/tidb/pull/21020)の適切なオプティマイザヒントを生成し`IndexMergeJoin`
+    -   `IndexHashJoin`と[＃21020](https://github.com/pingcap/tidb/pull/21020)の適切なオプティマイザヒントを生成し`IndexMergeJoin`
 
 -   TiKV
 
     -   レディとピア[＃9409](https://github.com/tikv/tikv/pull/9409)の間の間違ったマッピングを修正
-    -   `security.redact-info-log`が[＃9314](https://github.com/tikv/tikv/pull/9314)に設定されている場合、一部のログが編集されない問題を修正し`true` 。
+    -   `security.redact-info-log`を[＃9314](https://github.com/tikv/tikv/pull/9314)に設定すると、一部のログが編集されない問題を修正し`true` 。
 
 -   PD
 
@@ -75,8 +75,8 @@ TiDBバージョン：4.0.10
     -   TiFlashが古いバージョンのTiDBスキーマを処理できないためにTiFlashが起動しない問題を修正します
     -   RedHatシステムで`cpu_time`が正しく処理されないためにTiFlashが起動しない問題を修正します
     -   `path_realtime_mode`が`true`に設定されているとTiFlashが起動しない問題を修正します
-    -   3つのパラメーターで`substr`つの関数を呼び出すときの誤った結果の問題を修正します
-    -   変更がロスレスであっても、TiFlashが`Enum`タイプの変更をサポートしない問題を修正します
+    -   3つのパラメーターを使用して`substr`つの関数を呼び出すと誤った結果が発生する問題を修正します
+    -   変更がロスレスであっても、TiFlashが`Enum`タイプの変更をサポートしないという問題を修正します
 
 -   ツール
 
@@ -85,10 +85,10 @@ TiDBバージョン：4.0.10
         -   `base64`のデータ出力の問題やUNIXタイムスタンプ[＃1173](https://github.com/pingcap/tiflow/pull/1173)へのTSOの出力の問題など、 `maxwell`のプロトコルの問題を修正します。
         -   古いメタデータが新しく作成されたチェンジフィードの異常を引き起こす可能性があるバグを修正します[＃1184](https://github.com/pingcap/tiflow/pull/1184)
         -   閉じた通知機能[＃1199](https://github.com/pingcap/tiflow/pull/1199)でレシーバーを作成する問題を修正します
-        -   TiCDC所有者がetcdウォッチクライアントで大量のメモリを消費する可能性があるバグを修正します[＃1227](https://github.com/pingcap/tiflow/pull/1227)
+        -   TiCDC所有者がetcdウォッチクライアントでメモリを過剰に消費する可能性があるバグを修正します[＃1227](https://github.com/pingcap/tiflow/pull/1227)
         -   `max-batch-size`が有効にならない問題を修正します[＃1253](https://github.com/pingcap/tiflow/pull/1253)
         -   キャプチャ情報が構築される前に古いタスクをクリーンアップする問題を修正します[＃1280](https://github.com/pingcap/tiflow/pull/1280)
-        -   MySQLシンク[＃1285](https://github.com/pingcap/tiflow/pull/1285)で`rollback`が呼び出されないため、dbconnのリサイクルがブロックされる問題を修正します。
+        -   MySQLシンク[＃1285](https://github.com/pingcap/tiflow/pull/1285)で`rollback`が呼び出されないため、dbconnのリサイクルがブロックされる問題を修正します
 
     -   Dumpling
 
@@ -102,10 +102,10 @@ TiDBバージョン：4.0.10
 
     -   TiDB Binlog
 
-        -   `AMEND TRANSACTION`つの機能が有効になっている場合、 DrainerがSQLステートメントを生成するために誤ったスキーマバージョンを選択する可能性があるという問題を修正します[＃1033](https://github.com/pingcap/tidb-binlog/pull/1033)
+        -   `AMEND TRANSACTION`機能が有効になっている場合、 DrainerがSQLステートメントを生成するために誤ったスキーマバージョンを選択する可能性があるという問題を修正します[＃1033](https://github.com/pingcap/tidb-binlog/pull/1033)
 
     -   TiDB Lightning
 
         -   リージョンキーが正しくエンコードされていないためにリージョンが分割されないバグを修正します[＃531](https://github.com/pingcap/tidb-lightning/pull/531)
-        -   複数のテーブルが作成されたときに`CREATE TABLE`の失敗が失われる可能性があるという問題を修正します[＃530](https://github.com/pingcap/tidb-lightning/pull/530)
+        -   複数のテーブルが作成されると`CREATE TABLE`の失敗が失われる可能性があるという問題を修正します[＃530](https://github.com/pingcap/tidb-lightning/pull/530)
         -   TiDBバックエンド[＃535](https://github.com/pingcap/tidb-lightning/pull/535)を使用する場合の`column count mismatch`の問題を修正します

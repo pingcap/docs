@@ -3,13 +3,13 @@ title: Troubleshoot High Disk I/O Usage in TiDB
 summary: Learn how to locate and address the issue of high TiDB storage I/O usage.
 ---
 
-# TiDBでの高ディスクI/O使用量のトラブルシューティング {#troubleshoot-high-disk-i-o-usage-in-tidb}
+# TiDBでの高ディスクI/O使用率のトラブルシューティング {#troubleshoot-high-disk-i-o-usage-in-tidb}
 
 このドキュメントでは、TiDBでのディスクI/Oの使用率が高い問題を特定して対処する方法を紹介します。
 
 ## 現在のI/Oメトリックを確認します {#check-the-current-i-o-metrics}
 
-CPUのボトルネックとトランザクションの競合によって引き起こされたボトルネックをトラブルシューティングした後、TiDBの応答が遅くなる場合は、現在のシステムのボトルネックを特定するためにI/Oメトリックを確認する必要があります。
+CPUのボトルネックとトランザクションの競合によって引き起こされたボトルネックをトラブルシューティングした後、TiDBの応答が遅くなる場合は、I / Oメトリックをチェックして、現在のシステムのボトルネックを特定する必要があります。
 
 ### モニターからI/Oの問題を特定する {#locate-i-o-issues-from-monitor}
 
@@ -26,9 +26,9 @@ I / Oの問題を見つける最も簡単な方法は、TiUPによってデフ�
 
 #### 2番目のタイプの監視パネル {#the-second-type-of-monitoring-panels}
 
-TiDBクラスタの主なストレージコンポーネントはTiKVです。 1つのTiKVインスタンスには2つのRocksDBインスタンスが含まれています。1つは`data/raft`にあるRaftログを保存するためのもので、もう1つは`data/db`にある実際のデータを保存するためのものです。
+TiDBクラスタの主なストレージコンポーネントはTiKVです。 1つのTiKVインスタンスには2つのRocksDBインスタンスが含まれています。1つは`data/raft`にあるRaftログを格納するためのもので、もう1つは`data/db`にある実際のデータを格納するためのものです。
 
-**TiKV-Details** &gt; <strong>Raft IO</strong>で、これら2つのインスタンスのディスク書き込みに関連するメトリックを確認できます。
+**TiKV-Details** &gt; <strong>Raft IO</strong>で、次の2つのインスタンスのディスク書き込みに関連するメトリックを確認できます。
 
 -   `Append log duration` ：このメトリックは、 Raftログを格納するRockDBへの書き込みの応答時間を示します。 `.99`の応答時間は50ミリ秒以内である必要があります。
 -   `Apply log duration` ：このメトリックは、実際のデータを格納するRockDBへの書き込みの応答時間を示します。 `.99`の応答は100ミリ秒以内である必要があります。
@@ -40,13 +40,13 @@ TiDBクラスタの主なストレージコンポーネントはTiKVです。 1�
 **TiKV-詳細**&gt;<strong>ストレージ</strong>には、ストレージに関連する監視メトリックがあります。
 
 -   `Storage command total` ：受信したさまざまなコマンドの数を示します。
--   `Storage async write duration` ： Raft I/Oに関連する可能性のある`disk sync duration`などの監視メトリックが含まれます。異常が発生した場合は、ログを確認して関連部品の動作状態を確認してください。
+-   `Storage async write duration` ： Raft I/Oに関連する可能性のある`disk sync duration`などの監視メトリックが含まれます。異常が発生した場合は、ログを確認して関連コンポーネントの動作状態を確認してください。
 
 #### その他のパネル {#other-panels}
 
 さらに、他のいくつかのパネルメトリックは、ボトルネックがI / Oであるかどうかを判断するのに役立つ場合があり、いくつかのパラメーターを設定してみることができます。 TiKVgRPC期間のprewrite/commit / raw-put（rawキー値クラスターの場合のみ）を確認することで、ボトルネックが実際に遅いTiKV書き込みであると判断できます。 TiKVの書き込みが遅い一般的な状況は次のとおりです。
 
--   `append log`は遅いです。 TiKV Grafanaの`Raft I/O`および`append log duration`メトリックは比較的高く、これは多くの場合、ディスク書き込みが遅いことが原因です。 **RocksDB-raft**で`WAL Sync Duration max`の値を確認して、 `append log`が遅い原因を特定できます。そうしないと、バグを報告する必要があるかもしれません。
+-   `append log`は遅いです。 TiKV Grafanaの`Raft I/O`および`append log duration`メトリックは比較的高く、これは多くの場合、ディスク書き込みが遅いことが原因です。 **RocksDB-raft**で`WAL Sync Duration max`の値を確認して、 `append log`が遅い原因を特定できます。それ以外の場合は、バグを報告する必要があります。
 
 -   `raftstore`のスレッドがビジーです。 TiKV Grafanaでは、 `Raft Propose` / `propose wait duration`は`append log duration`よりも大幅に高くなっています。トラブルシューティングについては、次の側面を確認してください。
 
@@ -57,17 +57,17 @@ TiDBクラスタの主なストレージコンポーネントはTiKVです。 1�
 
     -   `[raftstore]`の`apply-pool-size`の値が小さすぎます。この値は`[1, 5]`から大きすぎないように設定することをお勧めします。 `Thread CPU`の`apply cpu`も比較的高いです。
     -   マシンのCPUリソースが不足しています。
-    -   単一のリージョンのホットスポットの問題を記述します（現在、この問題の解決策はまだ進行中です）。単一の`apply`スレッドのCPU使用率は高くなります（これは、 `by (instance, name)`を追加したGrafana式を変更することで表示できます）。
+    -   単一のリージョンのホットスポットの問題を記述します（現在、この問題の解決策はまだ進行中です）。単一の`apply`スレッドのCPU使用率が高い（ `by (instance, name)`を追加したGrafana式を変更することで表示できます）。
     -   RocksDBへの書き込みが遅く、 `RocksDB kv` / `max write duration`が高い。単一のRaftログには、複数のキーと値のペア（kv）が含まれる場合があります。 128 kvがバッチでRocksDBに書き込まれるため、1つの`apply`ログに複数のRocksDB書き込みが含まれる場合があります。
     -   その他の原因については、バグとして報告してください。
 
 -   `raft commit log`は遅いです。 TiKV Grafanaでは、 `Raft I/O`と`commit log duration` （Grafana 4.xでのみ使用可能）のメトリックが比較的高くなっています。各リージョンは、独立したRaftグループに対応しています。 Raftには、TCPのスライディングウィンドウメカニズムと同様のフロー制御メカニズムがあります。スライディングウィンドウのサイズを制御するには、 `[raftstore] raft-max-inflight-msgs`パラメータを調整します。書き込みホットスポットがあり、 `commit log duration`が高い場合は、このパラメーターを`1024`などのより大きな値に適切に設定できます。
 
-### ログからI/Oの問題を特定する {#locate-i-o-issues-from-log}
+### ログからI/Oの問題を特定します {#locate-i-o-issues-from-log}
 
--   クライアントが`server is busy`または特に`raftstore is busy`などのエラーを報告した場合、エラーはI/Oの問題に関連している可能性があります。
+-   クライアントが`server is busy`または特に`raftstore is busy`などのエラーを報告する場合、エラーはI/Oの問題に関連している可能性があります。
 
-    監視パネル（ **Grafana-** &gt; <strong>TiKV-</strong> &gt;<strong>エラー</strong>）をチェックして、 `busy`エラーの具体的な原因を確認できます。 `server is busy`はTiKVのフロー制御メカニズムです。このようにして、TiKVは`tidb/ti-client`の現在の圧力が高すぎることを通知し、クライアントは後で試す必要があります。
+    モニタリングパネル（ **Grafana-** &gt; <strong>TiKV-</strong> &gt;<strong>エラー</strong>）をチェックして、 `busy`エラーの具体的な原因を確認できます。 `server is busy`はTiKVのフロー制御メカニズムです。このようにして、TiKVは`tidb/ti-client`に、TiKVの現在の圧力が高すぎることを通知し、クライアントは後で試す必要があります。
 
 -   `Write stall`はTiKVRocksDBログに表示されます。
 
@@ -75,7 +75,7 @@ TiDBクラスタの主なストレージコンポーネントはTiKVです。 1�
 
     ディスクのI/O機能が書き込みに追いつかない場合は、ディスクをスケールアップすることをお勧めします。ディスクのスループットが上限に達した場合（たとえば、SATASSDのスループットがNVMeSSDのスループットよりもはるかに低い場合）、書き込みストールが発生しますが、CPUリソースが比較的十分である場合は、圧縮を使用してみてください。ディスクへの圧力を軽減するためのより高い圧縮率のアルゴリズム。つまり、CPUリソースを使用してディスクリソースを補います。
 
-    たとえば、 `default cf compaction`の圧力が比較的高い場合は、パラメータ`[rocksdb.defaultcf] compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd" , "zstd"]`を`compression-per-level = ["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`に変更できます。
+    たとえば、 `default cf compaction`の圧力が比較的高い場合、パラメータ`[rocksdb.defaultcf] compression-per-level = ["no", "no", "lz4", "lz4", "lz4", "zstd" , "zstd"]`を`compression-per-level = ["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`に変更できます。
 
 ### アラートで見つかったI/Oの問題 {#i-o-issues-found-in-alerts}
 

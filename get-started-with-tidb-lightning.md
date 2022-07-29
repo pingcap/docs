@@ -5,10 +5,10 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 
 # TiDB Lightningチュートリアル {#tidb-lightning-tutorial}
 
-[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、大量のデータをTiDBクラスタに高速に完全にインポートするために使用されるツールです。現在、 TiDB Lightningは、SQLまたはCSVデータソースを介してエクスポートされたSQLダンプの読み取りをサポートしています。次の2つのシナリオで使用できます。
+[TiDB Lightning](https://github.com/pingcap/tidb-lightning)は、TiDBクラスタへの大量のデータの高速フルインポートに使用されるツールです。現在、 TiDB Lightningは、SQLまたはCSVデータソースを介してエクスポートされたSQLダンプの読み取りをサポートしています。次の2つのシナリオで使用できます。
 
 -   **大量**の<strong>新しい</strong>データ<strong>をすばやく</strong>インポートする
--   すべてのデータをバックアップおよび復元する
+-   すべてのデータをバックアップおよび復元します
 
 ![Architecture of TiDB Lightning tool set](/media/tidb-lightning-architecture.png)
 
@@ -43,7 +43,7 @@ summary: Learn how to deploy TiDB Lightning and import full backup data to TiDB.
 
 ### ステップ1：TiDBクラスタをデプロイ {#step-1-deploy-tidb-cluster}
 
-データをインポートする前に、TiDBクラスタをデプロイする必要があります。このチュートリアルでは、例としてTiDBv5.4.0を使用します。展開方法については、 [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+データをインポートする前に、TiDBクラスタをデプロイする必要があります。このチュートリアルでは、TiDBv5.4.0を例として使用します。展開方法については、 [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
 ### ステップ2： TiDB Lightningインストールパッケージをダウンロードする {#step-2-download-tidb-lightning-installation-package}
 

@@ -43,7 +43,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   説明：
 
-    読み取りインデックス期間が3秒を超える確率が99％を超えると、アラートがトリガーされます。
+    読み取りインデックスの期間が3秒を超える確率が99％を超えると、アラートがトリガーされます。
 
     > **ノート：**
     >
@@ -61,7 +61,7 @@ summary: Learn the alert rules of the TiFlash cluster.
 
 -   説明：
 
-    RaftのRegionRaftIndexの待機時間が2秒を超える確率が99％を超えると、アラートがトリガーされます。
+    Raftのリージョンの待機時間が2秒を超える確率が99％を超えると、アラートがトリガーされます。
 
 -   解決：
 

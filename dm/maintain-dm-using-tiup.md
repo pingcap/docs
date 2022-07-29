@@ -5,9 +5,9 @@ summary: Learn how to maintain a DM cluster using TiUP.
 
 # TiUPを使用してDMクラスターを管理する {#maintain-a-dm-cluster-using-tiup}
 
-このドキュメントでは、 TiUP DMコンポーネントを使用してDMクラスタを保守する方法を紹介します。
+このドキュメントでは、 TiUP DMコンポーネントを使用してDMクラスタを維持する方法を紹介します。
 
-DMクラスタをまだデプロイしていない場合は、 [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を参照して手順を確認できます。
+DMクラスタをまだ展開していない場合は、 [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)を参照して手順を確認できます。
 
 > **ノート：**
 >
@@ -77,7 +77,7 @@ prod-cluster  tidb  ${version}  /root/.tiup/storage/dm/clusters/test  /root/.tiu
 
 ## クラスタを開始します {#start-the-cluster}
 
-クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを開始します。
+クラスタが正常にデプロイされたら、次のコマンドを実行してクラスタを起動します。
 
 {{< copyable "" >}}
 
@@ -89,7 +89,7 @@ tiup dm start prod-cluster
 
 ## クラスタのステータスを確認する {#check-the-cluster-status}
 
-TiUPは、クラスタの各コンポーネントのステータスを表示するための`tiup dm display`のコマンドを提供します。このコマンドを使用すると、コンポーネントのステータスを確認するために各マシンにログインする必要はありません。コマンドの使用法は次のとおりです。
+TiUPは、クラスタの各コンポーネントのステータスを表示する`tiup dm display`のコマンドを提供します。このコマンドを使用すると、コンポーネントのステータスを確認するために各マシンにログインする必要はありません。コマンドの使用法は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -113,7 +113,7 @@ ID                 Role          Host          Ports      OS/Arch       Status  
 172.19.0.101:9090  prometheus    172.19.0.101  9090       linux/x86_64  Up         /home/tidb/data/prometheus-9090    /home/tidb/deploy/prometheus-9090
 ```
 
-`Status`列は、サービスが正常に実行されているかどうかを示すために`Up`または`Down`を使用します。
+`Status`列は、 `Up`または`Down`を使用して、サービスが正常に実行されているかどうかを示します。
 
 DMマスターコンポーネントの場合、ステータスに`|L`が追加されることがあります。これは、DMマスターノードがリーダーであることを示します。 DM-workerコンポーネントの場合、 `Free`は、現在のDM-workerノードがアップストリームにバインドされていないことを示します。
 
@@ -127,7 +127,7 @@ DMマスターコンポーネントの場合、ステータスに`|L`が追加�
 2.  DMマスターのAPIを呼び出して、 `member`を削除します。
 3.  ノードに関連するデータファイルをクリーンアップします。
 
-スケールインコマンドの基本的な使用法：
+scale-inコマンドの基本的な使用法：
 
 ```bash
 tiup dm scale-in <cluster-name> -N <node-id>
@@ -147,13 +147,13 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 スケールアウト操作には、展開と同様の内部ロジックがありますTiUP DMコンポーネントは、最初にノードのSSH接続を確認し、ターゲットノードに必要なディレクトリを作成してから、展開操作を実行し、ノードサービスを開始します。
 
-たとえば、 `prod-cluster`クラスタのDM-workerノードをスケールアウトするには、次の手順を実行します（DM-masterのスケールアウトにも同様の手順があります）。
+たとえば、 `prod-cluster`のクラスタのDM-workerノードをスケールアウトするには、次の手順を実行します（DM-masterのスケールアウトにも同様の手順があります）。
 
 1.  `scale.yaml`のファイルを作成し、新しいワーカーノードの情報を追加します。
 
     > **ノート：**
     >
-    > トポロジファイルを作成する必要があります。このファイルには、既存のノードではなく、新しいノードの説明のみが含まれています。その他の構成項目（デプロイメントディレクトリなど）については、この[TiUP構成パラメーターの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+    > 既存のノードではなく、新しいノードの説明のみを含むトポロジファイルを作成する必要があります。その他の構成項目（デプロイメントディレクトリなど）については、この[TiUP構成パラメーターの例](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 
     ```yaml
     ---
@@ -163,7 +163,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
     ```
 
-2.  スケールアウト操作を実行します。 TiUP DMは、ポート、ディレクトリ、および`scale.yaml`で説明されているその他の情報に従って、対応するノードをクラスタに追加します。
+2.  スケールアウト操作を実行します。 TiUP DMは、 `scale.yaml`で説明されているポート、ディレクトリ、およびその他の情報に従って、対応するノードをクラスタに追加します。
 
     {{< copyable "" >}}
 
@@ -171,7 +171,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
     tiup dm scale-out prod-cluster scale.yaml
     ```
 
-    コマンドの実行後、 `tiup dm display prod-cluster`を実行することにより、スケールアウトされたクラスタのステータスを確認できます。
+    コマンドの実行後、 `tiup dm display prod-cluster`を実行することで、スケールアウトされたクラスタのステータスを確認できます。
 
 ## ローリングアップグレード {#rolling-upgrade}
 
@@ -217,7 +217,7 @@ tiup dm reload prod-cluster
 
 このコマンドは、構成をターゲットマシンに送信し、クラスタを再起動して構成を有効にします。
 
-## コンポーネントを更新 {#update-component}
+## コンポーネントを更新します {#update-component}
 
 通常のアップグレードでは、 `upgrade`コマンドを使用できます。ただし、デバッグなどの一部のシナリオでは、現在実行中のコンポーネントを一時パッケージに置き換える必要がある場合があります。これを実現するには、次の`patch`のコマンドを使用します。
 
@@ -276,9 +276,9 @@ tiup dm patch prod-cluster /tmp/dm--hotfix.tar.gz -N 172.16.4.5:8261
 > -   インポートする前に`tiup update --self && tiup update dm`を実行して、 TiUP DMコンポーネントが最新バージョンであることを確認します。
 > -   インポート後、クラスタにはDMマスターノードが1つだけ存在します。 DMマスターをスケールアウトするには、 [クラスタをスケールアウトする](#scale-out-a-cluster)を参照してください。
 
-TiUPがリリースされる前は、DM-Ansibleを使用してDMクラスターをデプロイすることがよくあります。 TiUPがDM-AnsibleによってデプロイされたDM1.0クラスタを引き継ぐことができるようにするには、 `import`コマンドを使用します。
+TiUPがリリースされる前は、DM-Ansibleを使用してDMクラスターをデプロイすることがよくあります。 TiUPがDM-AnsibleによってデプロイされたDM1.0クラスタを引き継ぐことを有効にするには、 `import`コマンドを使用します。
 
-たとえば、DM Ansibleを使用してデプロイされたクラスタをインポートするには、次のようにします。
+たとえば、DMAnsibleを使用してデプロイされたクラスタをインポートするには：
 
 {{< copyable "" >}}
 
@@ -323,7 +323,7 @@ ID      Time                  Command
 4D5kNr  2020-08-13T05:36:10Z  tiup dm deploy -p prod-cluster ${version} ./examples/dm/minimal.yaml
 ```
 
-最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`の引数を渡します。
+最初の列は`audit-id`です。特定のコマンドの実行ログを表示するには、次のように`audit-id`引数を渡します。
 
 {{< copyable "" >}}
 
@@ -359,7 +359,7 @@ tiup dm exec prod-cluster --command='ls /tmp'
 
 TiUPはDMクラスタコントローラー`dmctl`を統合します。
 
-次のコマンドを実行して、dmctlを使用します。
+dmctlを使用するには、次のコマンドを実行します。
 
 ```bash
 tiup dmctl [args]
@@ -371,7 +371,7 @@ dmctlのバージョンを指定します。このコマンドを実行する前
 tiup dmctl:${version} [args]
 ```
 
-ソースを追加するための以前のdmctlコマンドは`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`です。 dmctlがTiUPに統合された後、コマンドは次のようになります。
+ソースを追加するための前のdmctlコマンドは`dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml`です。 dmctlがTiUPに統合された後、コマンドは次のようになります。
 
 {{< copyable "" >}}
 
@@ -388,7 +388,7 @@ tiup dmctl --master-addr master1:8261 operate-source create /tmp/source1.yml
 
 次に、 `--native-ssh`コマンドラインフラグを使用して、システムネイティブのコマンドラインツールを有効にします。
 
--   クラスタのデプロイ： `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`
+-   クラスタをデプロイする： `tiup dm deploy <cluster-name> <version> <topo> --native-ssh`
 -   クラスタを開始します： `tiup dm start <cluster-name> --native-ssh`
 -   クラスタのアップグレード： `tiup dm upgrade ... --native-ssh`
 

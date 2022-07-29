@@ -45,9 +45,9 @@ http://192.168.0.123:2379/dashboard/
 
 <details><summary><strong>HAProxyを使用する</strong></summary>
 
-リバースプロキシとして[HAProxy](https://www.haproxy.org/)を使用する場合は、次の手順を実行します。
+[HAProxy](https://www.haproxy.org/)をリバースプロキシとして使用する場合は、次の手順を実行します。
 
-1.  たとえば、 `8033`ポートでTiDBダッシュボードにリバースプロキシを使用します。 HAProxy構成ファイルに、次の構成を追加します。
+1.  たとえば、 `8033`ポートでTiDBダッシュボードにリバースプロキシを使用します。 HAProxy構成ファイルで、次の構成を追加します。
 
     {{< copyable "" >}}
 
@@ -75,9 +75,9 @@ http://192.168.0.123:2379/dashboard/
 
 <details><summary><strong>NGINXを使用する</strong></summary>
 
-リバースプロキシとして[NGINX](https://nginx.org/)を使用する場合は、次の手順を実行します。
+[NGINX](https://nginx.org/)をリバースプロキシとして使用する場合は、次の手順を実行します。
 
-1.  たとえば、 `8033`ポートでTiDBダッシュボードにリバースプロキシを使用します。 NGINX構成ファイルに、次の構成を追加します。
+1.  たとえば、 `8033`ポートでTiDBダッシュボードにリバースプロキシを使用します。 NGINX構成ファイルで、次の構成を追加します。
 
     {{< copyable "" >}}
 
@@ -104,7 +104,7 @@ http://192.168.0.123:2379/dashboard/
     sudo nginx -s reload
     ```
 
-3.  リバースプロキシが有効かどうかをテストします。NGINXが配置されているマシンの`8033`ポート（ `http://example.com:8033/dashboard/`など）の`/dashboard/`アドレスにアクセスして、TiDBダッシュボードにアクセスします。
+3.  リバースプロキシが有効かどうかをテストします。NGINXが配置されているマシンの`8033`ポートの`/dashboard/`アドレス（ `http://example.com:8033/dashboard/`など）にアクセスして、TiDBダッシュボードにアクセスします。
 
 </details>
 
@@ -112,9 +112,9 @@ http://192.168.0.123:2379/dashboard/
 
 TiDBダッシュボードは、デフォルトで`http://example.com:8033/dashboard/`などの`/dashboard/`のパスでサービスを提供します。これは、リバースプロキシの場合にも当てはまります。 TiDBダッシュボードサービスに`http://example.com:8033/foo/`や`http://example.com:8033/`などのデフォルト以外のパスを提供するようにリバースプロキシを構成するには、次の手順を実行します。
 
-### ステップ1：PD構成を変更して、TiDBダッシュボードサービスのパスプレフィックスを指定します {#step-1-modify-pd-configuration-to-specify-the-path-prefix-of-tidb-dashboard-service}
+### 手順1：PD構成を変更して、TiDBダッシュボードサービスのパスプレフィックスを指定します {#step-1-modify-pd-configuration-to-specify-the-path-prefix-of-tidb-dashboard-service}
 
-PD構成の`[dashboard]`のカテゴリーの`public-path-prefix`の構成項目を変更して、TiDBダッシュボードサービスのパスプレフィックスを指定します。この項目を変更した後、PDインスタンスを再起動して、変更を有効にします。
+PD構成の`[dashboard]`カテゴリーの`public-path-prefix`構成項目を変更して、TiDBダッシュボードサービスのパスプレフィックスを指定します。この項目を変更した後、PDインスタンスを再起動して、変更を有効にします。
 
 たとえば、クラスタがTiUPを使用してデプロイされ、サービスを`http://example.com:8033/foo/`で実行する場合は、次の構成を指定できます。
 
@@ -128,7 +128,7 @@ server_configs:
 
 <details><summary><strong>TiUPを使用して新しいクラスタをデプロイするときに構成を変更する</strong></summary>
 
-新しいクラスタをデプロイする場合は、上記の構成を`topology.yaml` TiUPトポロジファイルに追加して、クラスタをデプロイできます。具体的な手順については、 [TiUP導入ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
+新しいクラスタをデプロイする場合は、上記の構成を`topology.yaml` TiUPトポロジファイルに追加して、クラスタをデプロイできます。具体的な手順については、 [TiUP展開ドキュメント](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。
 
 </details>
 
@@ -146,7 +146,7 @@ server_configs:
     tiup cluster edit-config CLUSTER_NAME
     ```
 
-2.  `server_configs`の`pd`構成で構成アイテムを変更または追加します。 `server_configs`が存在しない場合は、トップレベルに追加します。
+2.  `server_configs`の`pd`構成で構成アイテムを変更または追加します。 `server_configs`が存在しない場合は、最上位に追加します。
 
     {{< copyable "" >}}
 

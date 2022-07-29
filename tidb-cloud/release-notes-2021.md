@@ -36,11 +36,11 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 バグの修正：
 
 -   開発者層のディスクがいっぱいになることによるTiKVクラッシュの問題を修正します
--   HTMLインジェクションの脆弱性を修正
+-   HTMLインジェクションの脆弱性を修正します
 
 ## 2021年11月8日 {#november-8-2021}
 
--   Launch [開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)は、 TiDB Cloudの1年間の無料トライアルを提供します
+-   ローンチ[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)は、 TiDB Cloudの1年間の無料トライアルを提供します
 
     各開発者層クラスタはフル機能のTiDBクラスタであり、次のものが付属しています。
 
@@ -50,12 +50,12 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
     はじめに[ここ](/tidb-cloud/tidb-cloud-quickstart.md) 。
 
-## 2021年10月21日 {#october-21-2021}
+## 2021 年 10 月 21 日 {#october-21-2021}
 
--   個人の電子メールアカウントへのユーザー登録を開く
+-   個人の電子メールアカウントへのオープンユーザー登録
 -   サポート[AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 
-## 2021年10月11日 {#october-11-2021}
+## 2021 年 10 月 11 日 {#october-11-2021}
 
 -   各サービスおよび各プロジェクトのコストを含むサポート[TiDB Cloudの請求詳細の表示とエクスポート](/tidb-cloud/tidb-cloud-billing.md#billing-details)
 -   TiDB Cloudの内部機能のいくつかの問題を修正します
@@ -64,7 +64,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 -   新しくデプロイされたクラスターのデフォルトのTiDBバージョンを5.2.0から5.2.1にアップグレードします。 5.2.1での詳細な変更については、 [5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1)リリースノートを参照してください。
 
-## 2021年9月2日 {#september-2-2021}
+## 2021 年 9 月 2 日 {#september-2-2021}
 
 -   新しくデプロイされたクラスターのデフォルトのTiDBバージョンを5.0.2から5.2.0にアップグレードします。 TiDB 5.1.0および5.2.0の機能の詳細については、 [5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)のリリースノートを参照してください。
 -   TiDB Cloudの内部機能のいくつかの問題を修正します。
@@ -75,7 +75,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 ## 2021年8月5日 {#august-5-2021}
 
--   組織の役割管理をサポートします。組織の所有者は、必要に応じて組織のメンバーの権限を構成できます。
+-   組織の役割管理をサポートします。組織の所有者は、必要に応じて組織メンバーの権限を構成できます。
 -   組織内の複数のプロジェクトの分離をサポートします。組織の所有者は必要に応じてプロジェクトを作成および管理でき、プロジェクト間のメンバーとインスタンスはネットワークと権限の分離をサポートします。
 -   請求書を最適化して、当月と前月の各アイテムの請求額を表示します。
 
@@ -85,22 +85,22 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 -   クレジットカードのセキュリティ管理を強化する
 -   バックアップから回復したクラスタが正常に充電できない問題を修正します
 
-## 2021年7月6日 {#july-6-2021}
+## 2021 年 7 月 6 日 {#july-6-2021}
 
 -   新しくデプロイされたクラスターのデフォルトのTiDBバージョンを4.0.11から5.0.2にアップグレードします。アップグレードにより、パフォーマンスと機能が大幅に向上します。詳細については、 [ここ](https://docs.pingcap.com/tidb/stable/release-5.0.0)を参照してください。
 
-## 2021年6月25日 {#june-25-2021}
+## 2021 年 6 月 25 日 {#june-25-2021}
 
--   [TiDB Cloudの価格](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**地域の選択**が機能しない問題を修正
+-   [TiDB Cloudの価格](https://en.pingcap.com/products/tidbcloud/pricing/)ページで**リージョンの選択**が機能しない問題を修正
 
 ## 2021年6月24日 {#june-24-2021}
 
--   AuroraスナップショットをTiDBインスタンスにインポートするときの寄木細工のファイルの解析エラーを修正します
--   PoCユーザーがクラスタクラスタを変更したときに推定時間が更新されない問題を修正
+-   AuroraスナップショットをTiDBインスタンスにインポートするときの寄木細工のファイルの解析エラーを修正しました
+-   PoCユーザーがクラスターを作成し、クラスタ構成を変更したときに推定時間が更新されない問題を修正しクラスタ
 
 ## 2021年6月16日 {#june-16-2021}
 
--   アカウントにサインアップすると、**中国**が[<strong>国/地域</strong>]ドロップダウンリストに追加されます
+-   アカウントにサインアップすると、**中国**が[<strong>国/リージョン</strong>]ドロップダウンリストに追加されます
 
 ## 2021年6月14日 {#june-14-2021}
 
@@ -110,7 +110,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 
 全般的
 
--   TiDB Cloudは現在パブリックプレビューになっています。 1して、試用オプションの[サインアップ](https://tidbcloud.com/signup)つを選択できます。
+-   TiDB Cloudは現在パブリックプレビューになっています。 1つを選択して、試用オプションの[サインアップ](https://tidbcloud.com/signup)つを選択できます。
 
     -   48時間無料トライアル
     -   2週間のPoC無料トライアル
@@ -122,7 +122,7 @@ summary: Learn about the release notes of TiDB Cloud in 2021.
 -   [TiDB Cloudサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAPプライバシーポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
 -   コンソールで申し込みフォームに記入することで、 [PoC](/tidb-cloud/tidb-cloud-poc.md)を申し込むことができます
 -   UIを介してサンプルデータをTiDB Cloudクラスタにインポートできます
--   同じ名前のクラスターは、混乱を避けるために許可されていません
+-   同じ名前のクラスターは混乱を避けるために許可されていません
 -   [**サポート**]メニューの[<strong>フィードバック</strong>を送信]をクリックすると、フィードバックを送信できます
 -   データのバックアップおよび復元機能は、PoCおよびオンデマンドの試用オプションで利用できます
 -   無料トライアルとPoCにポイント計算機とポイント使用ダッシュボードが追加されました。すべてのトライアルオプションで、データの保存と転送のコストが免除されます

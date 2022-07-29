@@ -47,6 +47,6 @@ tiup update [component1][:version] [component2..N] [flags]
 ## 出力 {#outputs}
 
 -   更新が成功すると、 `Updated successfully!`が出力されます。
--   ターゲットバージョンが存在しない場合は、 `Error: version %s not supported by component %s`エラーが報告されます。
+-   ターゲットバージョンが存在しない場合、 `Error: version %s not supported by component %s`エラーが報告されます。
 
 [&lt;&lt;前のページに戻る-TiUPリファレンスコマンドリスト](/tiup/tiup-reference.md#command-list)

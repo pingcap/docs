@@ -29,6 +29,32 @@ TiDB Cloudアカウントごとに、1つの無料の開発者層クラスタを
 
 1年間の無料トライアルは、最初の開発者層クラスタが作成された日から始まります。
 
+### ユーザー名のプレフィックス {#user-name-prefix}
+
+<!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
+
+開発者層クラスタごとに、 TiDB Cloudは他のクラスターと区別するために一意のプレフィックスを生成します。
+
+データベースのユーザー名を使用または設定するときは常に、ユーザー名にプレフィックスを含める必要があります。たとえば、クラスタのプレフィックスが`3pTAoNNegb47Uc8`であると想定します。
+
+-   クラスタに接続するには：
+
+    ```shell
+    mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
+    ```
+
+-   データベースユーザーを作成するには：
+
+    ```sql
+    CREATE USER '3pTAoNNegb47Uc8.jeffrey';
+    ```
+
+クラスタのプレフィックスを取得するには、次の手順を実行します。
+
+1.  TiDB Cloudコンソールで、プロジェクトの[**アクティブクラスター**]ページに移動し、クラスタの名前をクリックします。
+2.  左側のクラスタ情報ペインで、[**接続**]をクリックします。 [ <strong>TiDBに接続</strong>]ダイアログが表示されます。
+3.  ダイアログで、[**ステップ2：SQLクライアントに接続し**てプレフィックスを取得する]を見つけます。
+
 ### 自動休止状態と再開 {#automatic-hibernation-and-resuming}
 
 開発者層クラスタが24時間アイドル状態のままになると、クラスタは自動的に休止状態になります。

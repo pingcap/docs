@@ -7,9 +7,9 @@ summary: Keywords and Reserved Words
 
 この記事では、TiDBのキーワード、予約語と非予約語の違いを紹介し、クエリのすべてのキーワードを要約します。
 
-キーワードは、 `SELECT`などのSQLステートメントで特別な意味を持つ`DELETE` `UPDATE` 。それらのいくつかは、**非予約キーワード**と呼ばれる識別子として直接使用できます。それらのいくつかは、<strong>予約キーワード</strong>と呼ばれる識別子として使用される前に特別な処理を必要とします。
+キーワードは、 `SELECT`など、SQLステートメントで特別な意味を持つ`DELETE` `UPDATE` 。それらのいくつかは、**予約されていないキーワード**と呼ばれる識別子として直接使用できます。それらのいくつかは、<strong>予約済みキーワード</strong>と呼ばれる識別子として使用される前に特別な処理を必要とします。
 
-予約されたキーワードを識別子として使用するには、それらをバッククォート`` ` ``で囲む必要があります。
+予約済みのキーワードを識別子として使用するには、それらをバッククォート`` ` ``で囲む必要があります。
 
 {{< copyable "" >}}
 
@@ -31,7 +31,7 @@ CREATE TABLE `select` (a INT);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-予約されていないキーワードには、 `BEGIN`や`END`などのバッククォートは必要ありません。これらは、次のステートメントで識別子として正常に使用できます。
+予約されていないキーワードは、 `BEGIN`や`END`などのバッククォートを必要としません。これらは、次のステートメントで識別子として正常に使用できます。
 
 {{< copyable "" >}}
 
@@ -43,7 +43,7 @@ CREATE TABLE `select` (BEGIN int, END int);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-特別な場合、予約されたキーワードが`.`の区切り文字とともに使用される場合、バッククォートは必要ありません。
+特別な場合、予約されたキーワードが`.`の区切り文字とともに使用されている場合、バッククォートは必要ありません。
 
 {{< copyable "" >}}
 
@@ -55,7 +55,7 @@ CREATE TABLE test.select (BEGIN int, END int);
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-次のリストは、TiDBのキーワードを示しています。予約済みのキーワードは`(R)`でマークされています。 [ウィンドウ関数](/functions-and-operators/window-functions.md)の予約キーワードは`(R-Window)`でマークされています：
+次のリストは、TiDBのキーワードを示しています。予約済みのキーワードには`(R)`のマークが付いています。 [ウィンドウ関数](/functions-and-operators/window-functions.md)の予約キーワードは`(R-Window)`でマークされています：
 
 <TabsPanel letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ" />
 
@@ -229,13 +229,13 @@ Query OK, 0 rows affected (0.08 sec)
 -   両替
 -   エクスクルーシブ
 -   実行する
--   EXISTS（R）
+-   存在する（R）
 -   拡張
 -   期限切れ
 -   EXPLAIN（R）
 -   拡張
 
-<a id="F" class="letter" href="#F">F</a>
+<a id="F" class="letter" href="#F">ふ</a>
 
 -   FALSE（R）
 -   障害
@@ -259,7 +259,7 @@ Query OK, 0 rows affected (0.08 sec)
 <a id="G" class="letter" href="#G">G</a>
 
 -   全般的
--   生成された（R）
+-   生成（R）
 -   グローバル
 -   GRANT（R）
 -   助成金
@@ -302,10 +302,10 @@ Query OK, 0 rows affected (0.08 sec)
 -   INT4（R）
 -   INT8（R）
 -   整数（R）
--   インターバル（R）
+-   間隔（R）
 -   INTO（R）
 -   見えない
--   INVOKER
+-   発動者
 -   IO
 -   IPC
 -   IS（R）
@@ -335,7 +335,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   LASTVAL
 -   LAST_BACKUP
 -   LAST_VALUE（Rウィンドウ）
--   LEAD（Rウィンドウ）
+-   リード（Rウィンドウ）
 -   リーディング（R）
 -   左（R）
 -   以下
@@ -350,10 +350,10 @@ Query OK, 0 rows affected (0.08 sec)
 -   現地時間（R）
 -   LOCALTIMESTAMP（R）
 -   位置
--   LOCK（R）
+-   ロック（R）
 -   ログ
 -   ロング（R）
--   LONGBLOB（R）
+-   ロングブロブ（R）
 -   ロングテキスト（R）
 -   LOW_PRIORITY（R）
 
@@ -370,9 +370,9 @@ Query OK, 0 rows affected (0.08 sec)
 -   MAX_UPDATES_PER_HOUR
 -   MAX_USER_CONNECTIONS
 -   MB
--   MEDIUMBLOB（R）
--   MEDIUMINT（R）
--   MEDIUMTEXT（R）
+-   ミディアムブロブ（R）
+-   ミディアムイント（R）
+-   ミディアムテキスト（R）
 -   メモリー
 -   マージ
 -   マイクロ秒
@@ -411,7 +411,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   NTILE（Rウィンドウ）
 -   NULL（R）
 -   NULLS
--   NUMERIC（R）
+-   数値（R）
 -   NVARCHAR
 
 <a id="O" class="letter" href="#O">O</a>
@@ -448,7 +448,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   悲観的（R）
 -   プラグイン
 -   先行
--   プレシジョン（R）
+-   精度（R）
 -   準備
 -   PRE_SPLIT_REGIONS
 -   プライマリー（R）
@@ -457,14 +457,14 @@ Query OK, 0 rows affected (0.08 sec)
 -   処理する
 -   プロセスリスト
 -   プロフィール
--   プロファイル
+-   プロフィール
 -   ポンプ（R）
 
 <a id="Q" class="letter" href="#Q">Q</a>
 
 -   クォーター
 -   クエリ
--   QUERY
+-   クエリ
 -   素早い
 
 <a id="R" class="letter" href="#R">R</a>
@@ -484,7 +484,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   リリース（R）
 -   リロード
 -   削除する
--   名前を変更（R）
+-   名前の変更（R）
 -   再編成
 -   修理
 -   リピート（R）
@@ -498,9 +498,9 @@ Query OK, 0 rows affected (0.08 sec)
 -   復元
 -   制限（R）
 -   逆行する
--   REVOKE（R）
+-   取り消し（R）
 -   右（R）
--   RLIKE（R）
+-   ライク（R）
 -   役割
 -   ロールバック
 -   ルーティーン
@@ -537,9 +537,9 @@ Query OK, 0 rows affected (0.08 sec)
 -   署名済み
 -   単純
 -   SKIP_SCHEMA_FILES
--   奴隷
+-   スレーブ
 -   スロー
--   SMALLINT（R）
+-   スマリント（R）
 -   スナップショット
 -   いくつか
 -   ソース
@@ -588,14 +588,14 @@ Query OK, 0 rows affected (0.08 sec)
 
 -   表（R）
 -   テーブル
--   テーブルスペース
+-   TABLESPACE
 -   TABLE_CHECKSUM
 -   一時的
 -   誘惑
 -   終了（R）
 -   文章
 -   よりも
--   THEN（R）
+-   その後（R）
 -   TIDB（R）
 -   TIFLASH（R）
 -   TIKV_IMPORTER
@@ -626,7 +626,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   ユニーク（R）
 -   わからない
 -   ロック解除（R）
--   未署名（R）
+-   署名なし（R）
 -   更新（R）
 -   使用法（R）
 -   使用（R）
@@ -668,7 +668,7 @@ Query OK, 0 rows affected (0.08 sec)
 -   X509
 -   XOR（R）
 
-<a id="Y" class="letter" href="#Y">Y</a>
+<a id="Y" class="letter" href="#Y">よ</a>
 
 -   年
 -   YEAR_MONTH（R）

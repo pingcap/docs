@@ -26,13 +26,13 @@ Binlogを使用してTiDBBinlogをデプロイすることをお勧めします�
 
 ### 公式バイナリパッケージをダウンロードする {#download-the-official-binary-package}
 
-TiDB Binlogのバイナリパッケージは、 Binlogに含まれてTiDB Toolkit。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+TiDB Binlogのバイナリパッケージは、 TiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
 ### 使用例 {#the-usage-example}
 
 3つのPDノード、1つのTiDBノード、2つのPumpノード、および1つのDrainerノードがあるとすると、各ノードの情報は次のようになります。
 
-| ノード     | IP           |
+| ノード     | 知財           |
 | :------ | :----------- |
 | TiDB    | 192.168.0.10 |
 | PD1     | 192.168.0.16 |
@@ -136,7 +136,7 @@ TiDB Binlogのバイナリパッケージは、 Binlogに含まれてTiDB Toolki
         # write-L0-slowdown-trigger = 17
         ```
 
-    -   Pumpの起動例：
+    -   Pumpの始動例：
 
         {{< copyable "" >}}
 
@@ -366,7 +366,7 @@ TiDB Binlogのバイナリパッケージは、 Binlogに含まれてTiDB Toolki
 
 3.  TiDBサーバーの起動：
 
-    -   PumpとDrainer and Drainerを起動した後、このセクションをTiDBサーバーの構成ファイルに追加して、binlogを有効にしてTiDBサーバーを起動します。
+    -   PumpとDrainer and Drainerを起動した後、TiDBサーバーの構成ファイルに次のセクションを追加して、binlogを有効にしてTiDBサーバーを起動します。
 
         ```
         [binlog]
@@ -379,8 +379,8 @@ TiDB Binlogのバイナリパッケージは、 Binlogに含まれてTiDB Toolki
 >
 > -   TiDBが実行されているときは、少なくとも1つのPumpが正常に実行されていることを保証する必要があります。
 > -   TiDBサーバーでBinlogサービスを有効にするには、TiDBで`-enable-binlog`スタートアップパラメーターを使用するか、TiDBサーバー構成ファイルの[binlog]セクションにenable=trueを追加します。
-> -   同じクラスタのすべてのTiDBインスタンスでBinlogサービスが有効になっていることを確認してください。有効になっていないと、データ複製中にアップストリームとダウンストリームのデータの不整合が発生する可能性があります。 TiDB Binlogサービスが有効になっていないTiDBインスタンスを一時的に実行する場合は、TiDB構成ファイルに`run_ddl=false`を設定します。
+> -   同じクラスタのすべてのTiDBインスタンスでBinlogサービスが有効になっていることを確認してください。有効になっていないと、データ複製中にアップストリームとダウンストリームのデータの不整合が発生する可能性があります。 TiDB Binlogサービスが有効になっていないTiDBインスタンスを一時的に実行する場合は、TiDB構成ファイルで`run_ddl=false`を設定します。
 > -   Drainerは、 `ignore schemas`のテーブル（フィルターリスト内のスキーマ）での`rename`操作をサポートしていません。
 > -   既存のTiDBクラスタでDrainerを起動する場合は、通常、クラスタデータの完全バックアップを作成し、**スナップショットタイムスタンプ**を取得し、データをターゲットデータベースにインポートしてから、 Drainerを起動して、対応する<strong>スナップショット</strong>から増分データを複製する必要があります。<strong>タイムスタンプ</strong>。
-> -   ダウンストリームデータベースがTiDBまたはMySQLの場合、アップストリームデータベースとダウンストリームデータベースの`sql_mode`が一致していることを確認してください。つまり、各SQLステートメントがアップストリームで実行され、ダウンストリームにレプリケートされる場合、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して、 `sql_mode`を比較できます。
-> -   DDLステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、 Drainerはデータの複製に失敗します。例として、ダウンストリームデータベースMySQLがInnoDBエンジンを使用する場合に`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製します。この場合、 Drainerで[トランザクションをスキップする](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)を構成し、ダウンストリームデータベースで互換性のあるステートメントを手動で実行できます。
+> -   ダウンストリームデータベースがTiDBまたはMySQLの場合、アップストリームデータベースとダウンストリームデータベースの`sql_mode`が一致していることを確認してください。つまり、各SQLステートメントがアップストリームで実行され、ダウンストリームにレプリケートされる場合、 `sql_mode`は同じである必要があります。アップストリームとダウンストリームでそれぞれ`select @@sql_mode;`ステートメントを実行して`sql_mode`を比較できます。
+> -   DDLステートメントがアップストリームでサポートされているが、ダウンストリームと互換性がない場合、 Drainerはデータの複製に失敗します。例は、ダウンストリームデータベースMySQLがInnoDBエンジンを使用するときに`CREATE TABLE t1(a INT) ROW_FORMAT=FIXED;`ステートメントを複製することです。この場合、 Drainerで[トランザクションをスキップする](/tidb-binlog/tidb-binlog-faq.md#what-can-i-do-when-some-ddl-statements-supported-by-the-upstream-database-cause-error-when-executed-in-the-downstream-database)を構成し、ダウンストリームデータベースで互換性のあるステートメントを手動で実行できます。

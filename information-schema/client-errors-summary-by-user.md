@@ -8,7 +8,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema tabl
 表`CLIENT_ERRORS_SUMMARY_BY_USER`は、TiDBサーバーに接続するクライアントに返されたSQLエラーと警告の要約を示しています。これらには以下が含まれます：
 
 -   不正な形式のSQLステートメント。
--   ゼロ除算エラー。
+-   ゼロ除算。
 -   範囲外または重複するキー値を挿入しようとしました。
 -   権限エラー。
 -   存在しないテーブル。
@@ -21,7 +21,7 @@ summary: Learn about the `CLIENT_ERRORS_SUMMARY_BY_USER` information_schema tabl
 -   欠落しているテーブル、またはリレーショナルオブジェクト。
 -   正しくないSQL構文、またはアプリケーションとTiDBのバージョン間の非互換性。
 
-要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各TiDBサーバーに対してローカルであり、メモリにのみ保持されます。 TiDBサーバーが再起動すると、要約は失われます。
+要約されたカウントは、ステートメント`FLUSH CLIENT_ERRORS_SUMMARY`でリセットできます。要約は各TiDBサーバーに対してローカルであり、メモリにのみ保持されます。 TiDBサーバーを再起動すると、要約は失われます。
 
 {{< copyable "" >}}
 
@@ -52,7 +52,7 @@ DESC CLIENT_ERRORS_SUMMARY_BY_USER;
 -   `ERROR_MESSAGE` ：エラー番号と一致するエラーメッセージ（プリペアドステートメント形式）。
 -   `ERROR_COUNT` ：このエラーがユーザーに返された回数。
 -   `WARNING_COUNT` ：この警告がユーザーに返された回数。
--   `FIRST_SEEN` ：このエラー（または警告）が初めてユーザーに送信されたとき。
+-   `FIRST_SEEN` ：このエラー（または警告）がユーザーに初めて送信されたとき。
 -   `LAST_SEEN` ：このエラー（または警告）がユーザーに送信された最新の時刻。
 
 次の例は、クライアントがローカルTiDBサーバーに接続したときに生成される警告を示しています。要約は`FLUSH CLIENT_ERRORS_SUMMARY`を実行した後にリセットされます：

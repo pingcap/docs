@@ -5,7 +5,7 @@ summary: Learn about the FAQs related to high reliability of TiDB.
 
 # 信頼性の高いFAQ {#high-reliability-faqs}
 
-このドキュメントは、TiDBの高信頼性に関連するFAQをまとめたものです。
+このドキュメントは、TiDBの高い信頼性に関連するFAQをまとめたものです。
 
 ## TiDBは、サーバーのMySQLバージョン文字列をセキュリティ脆弱性スキャンツールで必要とされる特定のバージョン文字列に変更することをサポートしていますか？ {#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool}
 

@@ -7,7 +7,7 @@ summary: An overview of the usage of CHANGE COLUMN for the TiDB database.
 
 `ALTER TABLE.. CHANGE COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、列の名前の変更と、データ型の互換性のある型への変更の両方が含まれる場合があります。
 
-v5.1.0以降、TiDBはReorgデータ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
+v5.1.0以降、TiDBは、以下を含むがこれらに限定されないReorgデータ型の変更をサポートしています。
 
 -   `VARCHAR`から`BIGINT`に変更
 -   `DECIMAL`精度の変更
@@ -152,12 +152,12 @@ ERROR 8200 (HY000): Unsupported modify column: change from original type decimal
 -   主キー列の[Reorg-データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)タイプの変更はサポートされていません。
 -   パーティション表の列タイプの変更はサポートされていません。
 -   生成された列の列タイプの変更はサポートされていません。
--   一部のデータ型（たとえば、一部のTIME、Bit、Set、Enum、およびJSON型）の変更は、TiDBとMySQL間の`CAST`関数の動作の互換性の問題のためにサポートされていません。
+-   一部のデータ型（たとえば、一部のTIME、Bit、Set、Enum、およびJSON型）の変更は、TiDBとMySQL間の`CAST`関数の動作の互換性の問題のため、サポートされていません。
 
 ## も参照してください {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップ列](/sql-statements/sql-statement-drop-column.md)
 -   [列の変更](/sql-statements/sql-statement-modify-column.md)

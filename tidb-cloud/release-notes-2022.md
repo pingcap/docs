@@ -14,6 +14,10 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
     開発者層クラスタは、7日間使用されなかった後も削除されないため、1年間の無料試用期間が終了するまでいつでも使用できます。 24時間非アクティブになると、開発者層クラスタは自動的に休止状態になります。クラスターを再開するには、クラスタに新しい接続を送信するか、 TiDB Cloudコンソールの[**再開**]ボタンをクリックしクラスタ。クラスタは50秒以内に再開され、自動的にサービスに戻ります。
 
+-   新しい開発者層クラスターのユーザー名プレフィックス制限を追加します
+
+    データベースのユーザー名を使用または設定する場合は常に、クラスタのプレフィックスをユーザー名に含める必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+
 -   開発者層クラスターのバックアップと復元機能を無効にします。
 
     開発者層クラスターでは、バックアップと復元機能（自動バックアップと手動バックアップの両方を含む）が無効になっています。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートすることもできます。
@@ -33,9 +37,9 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 -   **[データインポートタスク**]ページでインポートタスクを確認した後、 TiDB Cloudがソースデータにアクセスできるかどうかの自動検証をサポートします。
 -   TiDB Cloudコンソールのテーマの色を変更して、 [PingCAPWebサイト](https://en.pingcap.com/)のテーマの色と一致させます。
 
-## 2022年7月12日 {#july-12-2022}
+## 2022 年 7 月 12 日 {#july-12-2022}
 
--   Amazon S3の**[データインポートタスク**]ページに[<strong>検証</strong>]ボタンを追加します。これは、データインポートが開始される前にデータアクセスの問題を検出するのに役立ちます。
+-   Amazon S3の**[データインポートタスク**]ページに[<strong>検証</strong>]ボタンを追加します。これは、データインポートを開始する前にデータアクセスの問題を検出するのに役立ちます。
 -   [**支払い方法**]タブで<strong>請求プロファイル</strong>を追加します。<strong>請求プロファイル</strong>に税登録番号を入力すると、特定の税が請求書から免除される場合があります。
 
 ## 2022年7月5日 {#july-05-2022}
@@ -65,7 +69,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022年6月21日 {#june-21-2022}
 
 -   専用層クラスタを作成するためのGCPリージョン`Taiwan`のサポートを追加します。
--   TiDB Cloudコンソールで[ユーザープロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします。これには、名、前回、会社名、国、電話番号が含まれます。
+-   名、前回、会社名、国、電話番号など、 TiDB Cloudコンソールで[ユーザープロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします。
 -   TiDB CloudコンソールでMySQL、MyCLI、JDBC、Python、Go、Node.jsの接続文字列を提供して、TiDBクラスタに簡単に接続できるようにします。
 -   データのインポート中にバケットURLからバケット領域を自動的に取得することをサポートして、そのような情報を入力する手間を省きます。
 
@@ -93,25 +97,25 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   専用層クラスタを作成または復元するときに、TiDBポート番号のカスタマイズをサポートします。
 
-## 2022年5月19日 {#may-19-2022}
+## 2022 年 5 月 19 日 {#may-19-2022}
 
 -   開発者層クラスタの作成のためにAWSリージョン`Frankfurt`のサポートを追加します。
 
-## 2022年5月18日 {#may-18-2022}
+## 2022 年 5 月 18 日 {#may-18-2022}
 
 -   GitHubアカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDB Cloudをサポートします。
 
-## 2022年5月13日 {#may-13-2022}
+## 2022 年 5 月 13 日 {#may-13-2022}
 
 -   Googleアカウントで[サインアップ](https://tidbcloud.com/signup)つのTiDB Cloudをサポートします。
 
-## 2022年5月1日 {#may-1-2022}
+## 2022 年 5 月 1 日 {#may-1-2022}
 
 -   クラスタを作成または復元するときに、TiDB、TiKV、およびTiFlashのvCPUサイズの構成をサポートします。
 -   クラスタ作成のためのAWSリージョン`Mumbai`のサポートを追加します。
 -   コンピューティング、ストレージ、およびデータ転送のコストを[TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md)に更新します。
 
-## 2022年4月7日 {#april-7-2022}
+## 2022 年 4 月 7 日 {#april-7-2022}
 
 -   開発者層向けにTiDB Cloudを[TiDB v6.0.0](https://docs.pingcap.com/tidb/v6.0/release-6.0.0-dmr)にアップグレードします。
 
@@ -123,7 +127,7 @@ TiDB Cloudが一般提供になりました。 [サインアップ](https://tidb
 -   14日間のPoCトライアルを無料で申請してください。
 -   専用層でフルアクセスを取得します。
 
-## 2022年3月25日 {#march-25-2022}
+## 2022 年 3 月 25 日 {#march-25-2022}
 
 新機能：
 
@@ -131,7 +135,7 @@ TiDB Cloudが一般提供になりました。 [サインアップ](https://tidb
 
     TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスタがTiDB Cloudの組み込みアラート条件の1つをトリガーするたびに、電子メールで通知を受けることができます。
 
-## 2022年3月15日 {#march-15-2022}
+## 2022 年 3 月 15 日 {#march-15-2022}
 
 一般的な変更：
 
@@ -161,7 +165,7 @@ TiDB Cloudが一般提供になりました。 [サインアップ](https://tidb
 
     Datadog統合を使用すると、TiDBクラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成できます。その後、Datadogダッシュボードでこれらのメトリックを直接表示できます。
 
-## 2022年2月15日 {#february-15-2022}
+## 2022 年 2 月 15 日 {#february-15-2022}
 
 一般的な変更：
 
@@ -169,9 +173,9 @@ TiDB Cloudが一般提供になりました。 [サインアップ](https://tidb
 
 改善：
 
--   [CSVファイル](/tidb-cloud/import-csv-files.md)または[ApacheParquetファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートするときにカスタムファイル名を使用することをサポートします。
+-   [CSVファイル](/tidb-cloud/import-csv-files.md)または[ApacheParquetファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートするときのカスタムファイル名の使用をサポートします。
 
-## 2022年1月11日 {#january-11-2022}
+## 2022 年 1 月 11 日 {#january-11-2022}
 
 一般的な変更：
 
@@ -184,4 +188,4 @@ TiDB Cloudが一般提供になりました。 [サインアップ](https://tidb
 バグの修正：
 
 -   パスワードに一重引用符が含まれている場合、ユーザーがクラスタを作成できない問題を修正します。
--   組織に所有者が1人しかいない場合でも、所有者を削除したり、別の役割に変更したりできるという問題を修正します。
+-   組織に所有者が1人しかない場合でも、所有者を削除したり、別の役割に変更したりできるという問題を修正します。

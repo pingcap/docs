@@ -5,7 +5,7 @@ summary: Deploy TiDB Lightning to quickly import large amounts of new data.
 
 # TiDB Lightningの導入 {#tidb-lightning-deployment}
 
-このドキュメントでは、ローカルバックエンドを使用したTiDB Lightningのハードウェア要件と、それを手動で展開する方法について説明します。
+このドキュメントでは、ローカルバックエンドを使用したTiDB Lightningのハードウェア要件と、手動でデプロイする方法について説明します。
 
 ## ノート {#notes}
 
@@ -25,11 +25,11 @@ TiDB Lightningを開始する前に、次の点に注意してください。
 -   20GB以上のメモリ
 -   データソース全体を保存するのに十分な大きさのSSDで、より高速な読み取り速度を優先します
 -   10ギガビットネットワークカード（1GB /秒以上で転送可能）
--   `tidb-lightning`は、実行時にすべてのCPUコアを完全に消費するため、専用マシンにデプロイすることを強くお勧めします。不可能な場合は、 `tidb-lightning`を`tidb-server`などの他のコンポーネントと一緒にデプロイし、CPU使用率を`region-concurrency`設定で制限することができます。
+-   `tidb-lightning`は、実行時にすべてのCPUコアを完全に消費するため、専用マシンにデプロイすることを強くお勧めします。不可能な場合は、 `tidb-lightning`を`tidb-server`などの他のコンポーネントと一緒に展開し、CPU使用率を`region-concurrency`設定で制限することができます。
 
 > **ノート：**
 >
-> -   `tidb-lightning`はCPUを集中的に使用するプログラムです。コンポーネントが混在する環境では、 `tidb-lightning`に割り当てられるリソースを制限する必要があります。そうしないと、他のコンポーネントを実行できない可能性があります。 CPU論理コアの`region-concurrency` ％を設定することをお勧めします。たとえば、CPUに32個の論理コアがある場合、 `region-concurrency`を24に設定できます。
+> -   `tidb-lightning`はCPUを集中的に使用するプログラムです。コンポーネントが混在する環境では、 `tidb-lightning`に割り当てられるリソースを制限する必要があります。そうしないと、他のコンポーネントを実行できない可能性があります。 CPU論理コアの`region-concurrency` ％を設定することをお勧めします。たとえば、CPUに32個の論理コアがある場合、 `region-concurrency`に設定できます。
 
 さらに、ターゲットTiKVクラスタには、新しいデータを吸収するのに十分なスペースが必要です。 [標準要件](/hardware-and-software-requirements.md)に加えて、ターゲットTiKVクラスタの合計空き領域は、**データソースのサイズ× <a href="/faq/manage-cluster-faq.md#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it">レプリカの数</a>×2**よりも大きくする必要があります。
 
@@ -127,4 +127,4 @@ TiDB Lightningパッケージをダウンロードするには、 [TiDBツール
 
 バイナリのみを置き換えることで、 TiDB Lightningをアップグレードできます。これ以上の構成は必要ありません。 TiDB Lightningを再起動する詳細な手順については、 [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)を参照してください。
 
-インポートタスクが実行されている場合は、 TiDB Lightningをアップグレードする前に、インポートタスクが完了するまで待つことをお勧めします。そうしないと、チェックポイントがバージョン間で機能する保証がないため、最初から再インポートする必要がある可能性があります。
+インポートタスクが実行されている場合は、終了するまで待ってからTiDB Lightningをアップグレードすることをお勧めします。そうしないと、チェックポイントがバージョン間で機能する保証がないため、最初から再インポートする必要がある可能性があります。

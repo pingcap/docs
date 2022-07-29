@@ -21,7 +21,7 @@ tiup cluster edit-config <cluster-name> [flags]
 
 ## オプション {#option}
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を印刷します。
 -   データ型： `BOOLEAN`

@@ -5,7 +5,7 @@ summary: Learn how to use views in TiDB.
 
 # ビュー {#views}
 
-TiDBはビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。ビューを使用すると、次の利点があります。
+TiDBはビューをサポートします。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。ビューを使用すると、次の利点があります。
 
 -   基になるテーブルに格納されている機密フィールドとデータのセキュリティを確保するために、安全なフィールドとデータのみをユーザーに公開します。
 -   ビューとして頻繁に表示される複雑なクエリを定義して、複雑なクエリをより簡単かつ便利にします。
@@ -39,7 +39,7 @@ show create view v;
 1 row in set (0.00 sec)
 ```
 
-### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルを照会します {#query-the-code-information-schema-views-code-table}
+### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルをクエリします {#query-the-code-information-schema-views-code-table}
 
 使用例：
 
@@ -49,7 +49,7 @@ show create view v;
 select * from information_schema.views;
 ```
 
-`TABLE_CATALOG` `CHECK_OPTION` 、 `IS_UPDATABLE` `VIEW_DEFINITION`に`TABLE_NAME`を`SECURITY_TYPE`することで、 `DEFINER`の関連する`CHARACTER_SET_CLIENT`情報を`COLLATION_CONNECTION`でき`TABLE_SCHEMA` 。
+`TABLE_CATALOG` `CHECK_OPTION` 、 `IS_UPDATABLE` `VIEW_DEFINITION`に`TABLE_NAME`を`SECURITY_TYPE`すると、 `DEFINER`の関連する`CHARACTER_SET_CLIENT`情報を`COLLATION_CONNECTION`でき`TABLE_SCHEMA` 。
 
 ```sql
 +---------------+--------------+------------+------------------------------------------------------------------------+--------------+--------------+----------------+---------------+----------------------+----------------------+
@@ -152,7 +152,7 @@ curl http://127.0.0.1:10080/schema/test/v
 
 ## 例 {#example}
 
-次の例では、ビューを作成し、このビューをクエリして、このビューを削除します。
+次の例では、ビューを作成し、このビューにクエリを実行して、このビューを削除します。
 
 {{< copyable "" >}}
 
@@ -237,7 +237,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 現在、TiDBのビューには次の制限があります。
 
--   マテリアライズド・ビューはまだサポートされていません。
+-   マテリアライズドビューはまだサポートされていません。
 -   `INSERT`のビューは読み取り専用であり、 `UPDATE`などの書き込み操作をサポートして`DELETE`ませ`TRUNCATE` 。
 -   作成されたビューの場合、サポートされるDDL操作は`DROP [VIEW | TABLE]`のみです。
 

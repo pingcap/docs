@@ -40,16 +40,16 @@ summary: Learn how to query the status of a data replication task.
 }
 ```
 
-`tasks`セクションの`taskStatus`の詳細については、 [タスクのステータス](#task-status)を参照してください。
+`tasks`セクションの`taskStatus`の詳細な説明については、 [タスクのステータス](#task-status)を参照してください。
 
 次の手順で`query-status`を使用することをお勧めします。
 
 1.  `query-status`を使用して、進行中の各タスクが正常な状態にあるかどうかを確認します。
-2.  タスクでエラーが発生した場合は、 `query-status <taskName>`コマンドを使用して詳細なエラー情報を確認してください。このコマンドの`<taskName>`は、エラーが発生したタスクの名前を示します。
+2.  タスクでエラーが発生した場合は、 `query-status <taskName>`コマンドを使用して詳細なエラー情報を表示します。このコマンドの`<taskName>`は、エラーが発生したタスクの名前を示します。
 
 ## タスクのステータス {#task-status}
 
-DM移行タスクのステータスは、DM-workerに割り当てられた各サブタスクのステータスによって異なります。サブタスクステータスの詳細については、 [サブタスクのステータス](#subtask-status)を参照してください。次の表は、サブタスクのステータスがタスクのステータスとどのように関連しているかを示しています。
+DM移行タスクのステータスは、DMワーカーに割り当てられた各サブタスクのステータスによって異なります。サブタスクステータスの詳細については、 [サブタスクのステータス](#subtask-status)を参照してください。次の表は、サブタスクのステータスがタスクのステータスにどのように関連しているかを示しています。
 
 | タスクのサブタスクステータス                                                                   | タスクのステータス                                      |
 | :------------------------------------------------------------------------------- | :--------------------------------------------- |
@@ -192,9 +192,9 @@ DM移行タスクのステータスは、DM-workerに割り当てられた各サ
 
 ```
 
-「sources」の「subTaskStatus」の「stage」のステータスの説明とステータススイッチの関係については、 [サブタスクステータス](#subtask-status)を参照してください。
+「sources」の「subTaskStatus」の「stage」のステータスの説明とステータス切り替えの関係については、 [サブタスクステータス](#subtask-status)を参照してください。
 
-「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作内容は[シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+「sources」の「subTaskStatus」の「unresolvedDDLLockID」の操作内容については、 [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
 
 ## サブタスクのステータス {#subtask-status}
 

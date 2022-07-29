@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-alter-table/','/docs/dev/refer
 
 # 他の机 {#alter-table}
 
-このステートメントは、新しいテーブル構造に準拠するように既存のテーブルを変更します。ステートメント`ALTER TABLE`は、次の目的で使用できます。
+このステートメントは、既存のテーブルを変更して、新しいテーブル構造に準拠させます。ステートメント`ALTER TABLE`は、次の目的で使用できます。
 
 -   [`ADD`](/sql-statements/sql-statement-add-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md) [`DROP`](/sql-statements/sql-statement-drop-index.md)インデックス
 -   [`ADD`](/sql-statements/sql-statement-add-column.md) [`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
@@ -109,7 +109,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDBは、DDLの変更が特定の`ALTER`アルゴリズムを使用することを表明する機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムを変更するものではありません。クラスタのピーク時にのみインスタントDDL変更を許可する場合に便利です。
+TiDBは、DDLの変更が特定の`ALTER`アルゴリズムを使用することを表明する機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムを変更するものではありません。クラスタのピーク時にのみ即時のDDL変更を許可する場合に役立ちます。
 
 {{< copyable "" >}}
 
@@ -165,13 +165,13 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 -   生成された列の列タイプの変更はサポートされていません。
 
--   一部のデータ型（たとえば、一部のTIME、Bit、Set、Enum、およびJSON型）の変更は、TiDBとMySQL間の`CAST`関数の動作の互換性の問題のためにサポートされていません。
+-   一部のデータ型（たとえば、一部のTIME、Bit、Set、Enum、およびJSON型）の変更は、TiDBとMySQL間の`CAST`関数の動作の互換性の問題のため、サポートされていません。
 
 -   空間データ型はサポートされていません。
 
 -   `ALTER TABLE t CACHE | NOCACHE`はMySQL構文のTiDB拡張です。詳細については、 [キャッシュされたテーブル](/cached-tables.md)を参照してください。
 
-さらなる制限については、 [MySQLの互換性](/mysql-compatibility.md#ddl)を参照してください。
+その他の制限については、 [MySQLの互換性](/mysql-compatibility.md#ddl)を参照してください。
 
 ## も参照してください {#see-also}
 
@@ -180,8 +180,8 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 -   [ドロップ列](/sql-statements/sql-statement-drop-column.md)
 -   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
 -   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
--   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)
--   [ALTER INDEX](/sql-statements/sql-statement-alter-index.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [インデックスの名前変更](/sql-statements/sql-statement-rename-index.md)
+-   [ALTERINDEX](/sql-statements/sql-statement-alter-index.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
--   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)

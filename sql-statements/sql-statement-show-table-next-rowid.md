@@ -3,13 +3,13 @@ title: SHOW TABLE NEXT_ROW_ID
 summary: Learn the usage of `SHOW TABLE NEXT_ROW_ID` in TiDB.
 ---
 
-# テーブルNEXT_ROW_IDを表示 {#show-table-next-row-id}
+# SHOW TABLE NEXT_ROW_ID {#show-table-next-row-id}
 
 `SHOW TABLE NEXT_ROW_ID`は、次のようなテーブルのいくつかの特別な列の詳細を示すために使用されます。
 
 -   TiDBによって自動的に作成される`AUTO_INCREMENT`列、つまり`_tidb_rowid`列。
--   `AUTO_INCREMENT`列はユーザーによって作成されました。
--   [`AUTO_RANDOM`](/auto-random.md)列はユーザーによって作成されました。
+-   ユーザーによって作成された`AUTO_INCREMENT`列。
+-   ユーザーによって作成された[`AUTO_RANDOM`](/auto-random.md)列。
 -   [`SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)ユーザーによって作成されました。
 
 ## あらすじ {#synopsis}
@@ -67,6 +67,6 @@ show table t next_row_id;
 
 ## も参照してください {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [AUTO_RANDOM](/auto-random.md)
 -   [CREATE_SEQUENCE](/sql-statements/sql-statement-create-sequence.md)

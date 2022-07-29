@@ -4,22 +4,22 @@ title: TiDB 2.1 RC1 Release Notes
 
 # TiDB2.1RC1リリースノート {#tidb-2-1-rc1-release-notes}
 
-2018年8月24日、TiDB 2.1 RC1がリリースされました！ TiDB 2.1ベータ版と比較して、このリリースでは、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
+2018年8月24日、TiDB 2.1 RC1がリリースされました！このリリースでは、TiDB 2.1ベータ版と比較して、安定性、SQLオプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
     -   相関サブクエリが非相関化された後に間違った結果が返される問題を修正します[＃6972](https://github.com/pingcap/tidb/pull/6972)
     -   [＃7011](https://github.com/pingcap/tidb/pull/7011)の`Explain`結果を[＃7041](https://github.com/pingcap/tidb/pull/7041)化する
-    -   `IndexJoin`の外部テーブルの選択戦略を[＃7019](https://github.com/pingcap/tidb/pull/7019)化する
+    -   [＃7019](https://github.com/pingcap/tidb/pull/7019)の外側のテーブルの選択戦略を最適化し`IndexJoin`
     -   `PREPARE`以外のステートメントのプランキャッシュを削除します[＃7040](https://github.com/pingcap/tidb/pull/7040)
     -   `INSERT`ステートメントが解析および実行されない場合があるという問題を修正します[＃7068](https://github.com/pingcap/tidb/pull/7068)
-    -   `IndexJoin`の結果が正しくない場合があるという問題を修正します[＃7150](https://github.com/pingcap/tidb/pull/7150)
+    -   `IndexJoin`結果が正しくない場合があるという問題を修正します[＃7150](https://github.com/pingcap/tidb/pull/7150)
     -   場合によっては一意のインデックスを使用して`NULL`の値が見つからないという問題を修正します[＃7163](https://github.com/pingcap/tidb/pull/7163)
     -   UTF [＃7194](https://github.com/pingcap/tidb/pull/7194) 81のプレフィックスインデックスの範囲計算の問題を修正します。
     -   場合によっては`Project`演算子を削除することにより、結果が正しくないという問題を修正します[＃7257](https://github.com/pingcap/tidb/pull/7257)
     -   主キーが整数[＃7316](https://github.com/pingcap/tidb/pull/7316)の場合に`USE INDEX(PRIMARY)`を使用できない問題を修正します
-    -   場合によっては、相関列を使用してインデックス範囲を計算できない問題を修正します[＃7357](https://github.com/pingcap/tidb/pull/7357)
+    -   場合によっては、相関列を使用してインデックス範囲を計算できないという問題を修正します[＃7357](https://github.com/pingcap/tidb/pull/7357)
 -   SQL実行エンジン
     -   夏時間が正しく計算されない場合があるという問題を修正します[＃6823](https://github.com/pingcap/tidb/pull/6823)
     -   集計関数フレームワークをリファクタリングして、 `Stream`および`Hash`の集計演算子の実行効率を向上させます[＃6852](https://github.com/pingcap/tidb/pull/6852)
@@ -40,23 +40,23 @@ title: TiDB 2.1 RC1 Release Notes
     -   範囲が多すぎるコプロセッサー要求を分割する[＃7454](https://github.com/pingcap/tidb/pull/7454)
 -   統計
     -   統計動的収集のメカニズムを最適化する[＃6796](https://github.com/pingcap/tidb/pull/6796)
-    -   データが頻繁に更新されるときに`Auto Analyze`が機能しないという問題を修正します[＃7022](https://github.com/pingcap/tidb/pull/7022)
+    -   データが頻繁に更新されると`Auto Analyze`が機能しないという問題を修正します[＃7022](https://github.com/pingcap/tidb/pull/7022)
     -   統計の動的更新プロセス中の書き込みの競合を減らす[＃7124](https://github.com/pingcap/tidb/pull/7124)
     -   統計が正しくない場合のコスト見積もりを最適化する[＃7175](https://github.com/pingcap/tidb/pull/7175)
     -   `AccessPath`コスト見積もり戦略を最適化する[＃7233](https://github.com/pingcap/tidb/pull/7233)
 -   サーバ
     -   特権情報をロードする際のバグを修正する[＃6976](https://github.com/pingcap/tidb/pull/6976)
     -   特権チェック[＃6954](https://github.com/pingcap/tidb/pull/6954)で`Kill`コマンドが厳しすぎる問題を修正します
-    -   一部の2進数タイプを削除する問題を修正[＃6922](https://github.com/pingcap/tidb/pull/6922)
+    -   一部の2進数タイプ[＃6922](https://github.com/pingcap/tidb/pull/6922)を削除する問題を修正します。
     -   出力ログを短くする[＃7029](https://github.com/pingcap/tidb/pull/7029)
     -   `mismatchClusterID`の問題を処理する[＃7053](https://github.com/pingcap/tidb/pull/7053)
     -   `advertise-address`の構成アイテム[＃7078](https://github.com/pingcap/tidb/pull/7078)を追加します
     -   `GrpcKeepAlive`のオプションを追加します[＃7100](https://github.com/pingcap/tidb/pull/7100)
     -   接続または`Token`回のモニターを追加します[＃7110](https://github.com/pingcap/tidb/pull/7110)
-    -   データデコードパフォーマンスを最適化する[＃7149](https://github.com/pingcap/tidb/pull/7149)
+    -   データデコードパフォーマンスの最適化[＃7149](https://github.com/pingcap/tidb/pull/7149)
     -   35に`PROCESSLIST` [＃7236](https://github.com/pingcap/tidb/pull/7236)テーブルを追加し`INFORMMATION_SCHEMA`
     -   特権の検証で複数のルールがヒットした場合の順序の問題を修正します[＃7211](https://github.com/pingcap/tidb/pull/7211)
-    -   エンコーディング関連のシステム変数のデフォルト値をUTF [＃7198](https://github.com/pingcap/tidb/pull/7198) 81に変更します。
+    -   エンコーディング関連のシステム変数のいくつかのデフォルト値をUTF [＃7198](https://github.com/pingcap/tidb/pull/7198) 81に変更します。
     -   遅いクエリログに詳細情報を表示させる[＃7302](https://github.com/pingcap/tidb/pull/7302)
     -   PDへのtidb-server関連情報の登録と[＃7082](https://github.com/pingcap/tidb/pull/7082)によるこの情報の取得をサポートします。
 -   互換性
@@ -68,13 +68,13 @@ title: TiDB 2.1 RC1 Release Notes
     -   `Prepare`ステートメント[＃7162](https://github.com/pingcap/tidb/pull/7162)に`PlaceHolder`の数の検証を追加します。
     -   [＃7353](https://github.com/pingcap/tidb/pull/7353) `set character_set_results = null`
     -   `flush status`構文[＃7369](https://github.com/pingcap/tidb/pull/7369)をサポートします
-    -   [＃7347](https://github.com/pingcap/tidb/pull/7347)で`SET`および`ENUM`タイプの列サイズを修正し`information_schema`
+    -   [＃7347](https://github.com/pingcap/tidb/pull/7347)の`SET`および`ENUM`タイプの列サイズを修正し`information_schema`
     -   テーブルを作成するためのステートメントの`NATIONAL CHARACTER`構文をサポートする[＃7378](https://github.com/pingcap/tidb/pull/7378)
     -   `LOAD DATA`ステートメント[＃7391](https://github.com/pingcap/tidb/pull/7391)で`CHARACTER SET`構文をサポートします。
     -   `SET`および`ENUM`タイプの列情報を修正します[＃7417](https://github.com/pingcap/tidb/pull/7417)
     -   `CREATE USER`ステートメント[＃7402](https://github.com/pingcap/tidb/pull/7402)で`IDENTIFIED WITH`構文をサポートします。
-    -   `TIMESTAMP`の計算プロセス[＃7418](https://github.com/pingcap/tidb/pull/7418)での精度低下の問題を修正
-    -   より多くの`SYSTEM`変数の妥当性検証をサポートします[＃7196](https://github.com/pingcap/tidb/pull/7196)
+    -   `TIMESTAMP`の計算プロセス[＃7418](https://github.com/pingcap/tidb/pull/7418)での精度低下の問題を修正します。
+    -   `SYSTEM`つ以上の変数の有効性検証をサポート[＃7196](https://github.com/pingcap/tidb/pull/7196)
     -   `CHAR_LENGTH`関数がバイナリ文字列[＃7410](https://github.com/pingcap/tidb/pull/7410)を計算するときの誤った結果を修正します
     -   [＃7448](https://github.com/pingcap/tidb/pull/7448)を含むステートメントの誤った`CONCAT`の結果を修正し`GROUP BY`
     -   `DECIMAL`タイプを`STRING`タイプ[＃7451](https://github.com/pingcap/tidb/pull/7451)にキャストするときの不正確なタイプの長さの問題を修正します
@@ -106,24 +106,24 @@ title: TiDB 2.1 RC1 Release Notes
     -   `GetPrevRegion`のインターフェースをサポート
     -   リージョンのバッチ分割をサポート
     -   GCセーフポイントの保存をサポート
--   改善
-    -   TSO割り当てがシステムクロックの逆方向に影響を受けるという問題を最適化します
+-   改善点
+    -   TSO割り当てがシステムクロックの逆行によって影響を受けるという問題を最適化します
     -   リージョンハートビートの処理のパフォーマンスを最適化する
     -   リージョンツリーのパフォーマンスを最適化する
     -   ホットスポット統計の計算のパフォーマンスを最適化する
-    -   APIインターフェースのエラーコードを返すように最適化する
+    -   APIインターフェースのエラーコードを返すことを最適化する
     -   スケジューリング戦略を制御するオプションを追加する
     -   `label`で特殊文字を使用することを禁止する
-    -   スケジューリングシミュレーターを改善する
+    -   スケジューリングシミュレータを改善する
     -   pd-ctlの統計を使用したリージョンの分割をサポート
     -   pd-ctlで`jq`を呼び出すことにより、JSON出力のフォーマットをサポートします
     -   Raftステートマシンに関するメトリックを追加します
 -   バグの修正
     -   リーダーを切り替えた後に名前空間が再ロードされない問題を修正します
-    -   名前空間のスケジューリングがスケジュールの制限を超える問題を修正します
+    -   名前空間のスケジューリングがスケジュール制限を超える問題を修正します
     -   ホットスポットのスケジュールがスケジュールの制限を超える問題を修正します
-    -   PDクライアントを閉じたときに間違ったログが出力される問題を修正します
-    -   リージョンハートビートレイテンシの誤った統計を修正
+    -   PDクライアントを閉じると間違ったログが出力される問題を修正します
+    -   リージョンハートビートレイテンシの誤った統計を修正します
 
 ## TiKV {#tikv}
 
@@ -133,13 +133,13 @@ title: TiDB 2.1 RC1 Release Notes
 -   パフォーマンス
     -   `LocalReader`を使用して、読み取り操作をraftstoreスレッドから分離し、読み取り待ち時間を短縮します
     -   MVCCフレームワークをリファクタリングし、メモリ使用量を最適化し、スキャン読み取りパフォーマンスを向上させます
-    -   統計推定に基づくリージョンの分割をサポートして、I/Oの使用量を削減します
+    -   I / O使用量を削減するために、統計推定に基づくリージョンの分割をサポートします
     -   ロールバックレコードに対する継続的な書き込み操作によって読み取りパフォーマンスが影響を受けるという問題を最適化します
     -   プッシュダウンアグリゲーションコンピューティングのメモリ使用量を削減します
--   改善
+-   改善点
     -   多数の組み込み関数のプッシュダウンサポートとより優れた文字セットサポートを追加します
-    -   GCワークフローを最適化し、GC速度を向上させ、システムへのGCの影響を減らします
-    -   ネットワークが異常な場合にサービスリカバリを高速化するには、 `prevote`を有効にします
+    -   GCワークフローを最適化し、GC速度を向上させ、システムへのGCの影響を減らします。
+    -   ネットワークが異常な場合にサービスの回復を高速化するには、 `prevote`を有効にします
     -   RocksDBログファイルの関連する構成アイテムを追加します
     -   `scheduler_latch`のデフォルト構成を調整します
     -   tikv-ctlを使用してデータを手動で圧縮するときにRocksDBの最下層のデータを圧縮するかどうかの設定をサポート

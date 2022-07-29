@@ -5,13 +5,13 @@ summary: Learn how to migrate and merge small datasets of shards from MySQL to T
 
 # 小さなデータセットのMySQLシャードをTiDBに移行およびマージする {#migrate-and-merge-mysql-shards-of-small-datasets-to-tidb}
 
-複数のMySQLデータベースインスタンスをアップストリームで1つのTiDBデータベースダウンストリームに移行およびマージする必要があり、データ量が多すぎない場合は、DMを使用してMySQLシャードを移行できます。このドキュメントの「小さなデータセット」とは、通常、1TiB前後またはそれ未満のデータを意味します。このドキュメントの例を通じて、移行の操作手順、注意事項、およびトラブルシューティングを学ぶことができます。
+複数のMySQLデータベースインスタンスをアップストリームで1つのTiDBデータベースダウンストリームに移行およびマージする必要があり、データ量が多すぎない場合は、DMを使用してMySQLシャードを移行できます。このドキュメントの「小さなデータセット」とは、通常、TiBが1つ以下のデータを意味します。このドキュメントの例を通じて、移行の操作手順、注意事項、およびトラブルシューティングを学ぶことができます。
 
 このドキュメントは、合計1TiB未満のMySQLシャードの移行に適用されます。合計1TiBを超えるデータを含むMySQLシャードを移行する場合、DMのみを使用して移行するには長い時間がかかります。この場合、 [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)で紹介した操作に従って移行することをお勧めします。
 
 このドキュメントでは、移行手順を説明するための簡単な例を取り上げます。この例の2つのデータソースMySQLインスタンスのMySQLシャードは、ダウンストリームTiDBクラスタに移行されます。
 
-この例では、MySQLインスタンス1とMySQLインスタンス2の両方に次のスキーマとテーブルが含まれています。この例では、両方のインスタンスでプレフィックスが`sale`の`store_01`および`store_02`スキーマから、 `store`スキーマのダウンストリーム`sale`テーブルにテーブルを移行してマージします。
+この例では、MySQLインスタンス1とMySQLインスタンス2の両方に次のスキーマとテーブルが含まれています。この例では、両方のインスタンスでプレフィックスが`sale`の`store_01`および`store_02`スキーマから、 `store`スキーマのダウンストリーム`sale`テーブルにテーブルを移行およびマージします。
 
 | スキーマ     | テーブル            |
 | :------- | :-------------- |
@@ -65,7 +65,7 @@ CREATE TABLE `sale` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-## ステップ1.データソースをロードする {#step-1-load-data-sources}
+## 手順1.データソースをロードする {#step-1-load-data-sources}
 
 DMへのアップストリームデータソースを構成する`source1.yaml`という名前の新しいデータソースファイルを作成し、次のコンテンツを追加します。
 
@@ -102,7 +102,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 すべてのデータソースがDMクラスタに追加されるまで、上記の手順を繰り返します。
 
-## ステップ2.移行タスクを構成します {#step-2-configure-the-migration-task}
+## 手順2.移行タスクを構成する {#step-2-configure-the-migration-task}
 
 `task1.yaml`という名前のタスク構成ファイルを作成し、それに次のコンテンツを書き込みます。
 
@@ -166,7 +166,7 @@ block-allow-list:           # filter or only migrate all operations of some data
     do-dbs: ["store_*"]     # The allow list of the schemas to be migrated, similar to replicate-do-db in MySQL.
 ```
 
-上記の例は、移行タスクを実行するための最小構成です。詳細については、 [DM高度なタスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+上記の例は、移行タスクを実行するための最小構成です。詳細については、 [DM Advanced Task Configuration / コンフィグレーション File](/dm/task-configuration-file-full.md)を参照してください。
 
 タスクファイルの`routes` 、 `filters`その他の構成の詳細については、次のドキュメントを参照してください。
 
@@ -198,7 +198,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 | --master-addr | dmctlが接続するクラスタのDMマスターノードの{advertise-addr}。例：172.16.10.71：8261 |
 | 開始タスク         | データ移行タスクを開始します。                                               |
 
-移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更してから、 `start-task task.yaml`を再度実行して移行タスクを開始します。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)および[FAQ](/dm/dm-faq.md)を参照してください。
+移行タスクの開始に失敗した場合は、エラー情報に従って構成情報を変更してから、もう一度`start-task task.yaml`を実行して移行タスクを開始します。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)を参照してください。
 
 ## ステップ4.タスクを確認します {#step-4-check-the-task}
 
@@ -210,7 +210,7 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-エラーが発生した場合は、 `query-status <name of the error task>`を使用してより詳細な情報を表示します。 `query-status`コマンドのクエリ結果、タスクステータス、サブタスクステータスの詳細については、 [TiDBデータ移行クエリのステータス](/dm/dm-query-status.md)を参照してください。
+エラーが発生した場合は、 `query-status <name of the error task>`を使用してより詳細な情報を表示してください。 `query-status`コマンドのクエリ結果、タスクステータス、およびサブタスクステータスの詳細については、 [TiDBデータ移行クエリステータス](/dm/dm-query-status.md)を参照してください。
 
 ## 手順5.タスクを監視してログを確認する（オプション） {#step-5-monitor-tasks-and-check-logs-optional}
 
@@ -230,7 +230,7 @@ Grafanaまたはログを介して、移行タスクの履歴と内部運用メ�
 ## も参照してください {#see-also}
 
 -   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md) 。
--   [シャーディングされたテーブルからのデータのマージと移行](/dm/feature-shard-merge.md)
+-   [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge.md)
 -   [シャードマージシナリオでのデータ移行のベストプラクティス](/dm/shard-merge-best-practices.md)
 -   [エラーの処理](/dm/dm-error-handling.md)
 -   [パフォーマンスの問題を処理する](/dm/dm-handle-performance-issues.md)

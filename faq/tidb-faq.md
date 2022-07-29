@@ -7,7 +7,7 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 <!-- markdownlint-disable MD026 -->
 
-このドキュメントには、TiDBに関する最もよくある質問がリストされています。
+このドキュメントには、TiDBに関して最もよく寄せられる質問がリストされています。
 
 ## TiDBについて {#about-tidb}
 
@@ -43,7 +43,7 @@ TiDBクラスタには、TiDBサーバー、PD（配置Driver）サーバー、�
 
 はい。 TiDBは、単一の場所にある少数のノードであろうと多数の[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md)であろうと、クラスタ全体にトランザクションを分散します。
 
-Googleのパーコレーターに触発されたTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルであり、いくつかの実用的な最適化が施されています。このモデルは、タイムスタンプアロケータに依存して、トランザクションごとに単調増加タイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタのタイムスタンプアロケータとして機能します。
+Googleのパーコレーターに触発されたTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルであり、いくつかの実用的な最適化が施されています。このモデルは、タイムスタンプアロケータに依存して、トランザクションごとに単調に増加するタイムスタンプを割り当てるため、競合を検出できます。 [PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタのタイムスタンプアロケータとして機能します。
 
 #### TiDBを操作するために使用できるプログラミング言語は何ですか？ {#what-programming-language-can-i-use-to-work-with-tidb}
 
@@ -76,9 +76,9 @@ Usage of ./bin/tidb-server:
   ......
 ```
 
-#### TiDBのドキュメントに加えて、TiDBの知識を習得する方法はありますか？ {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
+#### TiDBのドキュメントに加えて、TiDBの知識を習得する方法は他にありますか？ {#in-addition-to-the-tidb-documentation-are-there-any-other-ways-to-acquire-tidb-knowledge}
 
-現在、 [TiDBドキュメント](/overview.md#tidb-introduction)は、TiDB関連の知識を取得するための最も重要でタイムリーな方法です。さらに、いくつかのテクニカルコミュニケーショングループもあります。必要な場合は、 [info@pingcap.com](mailto:info@pingcap.com)に連絡してください。
+現在、 [TiDBドキュメント](/overview.md#tidb-introduction)は、TiDB関連の知識を取得するための最も重要でタイムリーな方法です。さらに、いくつかのテクニカルコミュニケーショングループもあります。必要な場合は、 [info@pingcap.com](mailto:info@pingcap.com)にお問い合わせください。
 
 #### TiDBユーザー名の長さの制限は何ですか？ {#what-is-the-length-limit-for-the-tidb-user-name}
 
@@ -86,9 +86,9 @@ Usage of ./bin/tidb-server:
 
 #### TiDBはXAをサポートしていますか？ {#does-tidb-support-xa}
 
-いいえ。TiDBのJDBCドライバーはMySQLJDBC（Connector / J）です。 Atomikosを使用する場合は、データソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定します。 TiDBは、MySQLJDBCXADataSourceとの接続をサポートしていません。 MySQL JDBC XADataSourceは、MySQLに対してのみ機能します（たとえば、DMLを使用して`redo`のログを変更します）。
+いいえ。TiDBのJDBCドライバーはMySQLJDBC（Connector / J）です。 Atomikosを使用する場合は、データソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定します。 TiDBは、MySQLJDBCXADataSourceとの接続をサポートしていません。 MySQL JDBC XADataSourceはMySQLでのみ機能します（たとえば、DMLを使用して`redo`のログを変更します）。
 
-Atomikosの2つのデータソースを構成した後、JDBCドライブをXAに設定します。 AtomikosがTMおよびRM（DB）を操作する場合、AtomikosはXAを含むコマンドをJDBCレイヤーに送信します。 MySQLを例にとると、JDBCレイヤーでXAが有効になっている場合、JDBCはDMLを使用して`redo`のログを変更するなど、一連のXAロジック操作をInnoDBに送信します。これは、2フェーズコミットの操作です。現在のTiDBバージョンは、上位アプリケーション層のJTA / XAをサポートしておらず、Atomikosによって送信されたXA操作を解析しません。
+Atomikosの2つのデータソースを構成した後、JDBCドライブをXAに設定します。 AtomikosがTMおよびRM（DB）を操作すると、AtomikosはXAを含むコマンドをJDBCレイヤーに送信します。 MySQLを例にとると、JDBCレイヤーでXAが有効になっている場合、JDBCはDMLを使用して`redo`のログを変更するなど、一連のXAロジック操作をInnoDBに送信します。これは、2フェーズコミットの操作です。現在のTiDBバージョンは、上位アプリケーション層のJTA / XAをサポートしておらず、Atomikosによって送信されたXA操作を解析しません。
 
 スタンドアロンデータベースとして、MySQLはXAを使用してデータベース間トランザクションのみを実装できます。 TiDBはGooglePercolatorトランザクションモデルを使用した分散トランザクションをサポートし、そのパフォーマンスの安定性はXAよりも高いため、TiDBはXAをサポートせず、TiDBがXAをサポートする必要はありません。
 
@@ -106,13 +106,13 @@ Atomikosの2つのデータソースを構成した後、JDBCドライブをXA�
 
 [TiDB内部（III）-スケジューリング](https://en.pingcap.com/blog/tidb-internal-scheduling/)を参照してください。
 
-## クラウドへの導入 {#deployment-on-the-cloud}
+## クラウドへの展開 {#deployment-on-the-cloud}
 
 ### パブリッククラウド {#public-cloud}
 
 #### 現在TiDBでサポートされているクラウドベンダーは何ですか？ {#what-cloud-vendors-are-currently-supported-by-tidb}
 
-TiDBは、 [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、および[AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks)での展開をサポートし[Alibaba Cloud ACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud) 。
+TiDBは、 [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、および[AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks)での展開をサポートし[アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud) 。
 
 さらに、TiDBは現在JD CloudとUCloudで利用可能であり、それらに第1レベルのデータベースエントリがあります。
 
@@ -126,11 +126,11 @@ TiDBは、 [Google GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deplo
 
 #### エラー9001（HY000）：PDサーバーのタイムアウト {#error-9001-hy000-pd-server-timeout}
 
-PD要求のタイムアウト。 PDサーバーの状態、監視データ、ログ、およびTiDBサーバーとPDサーバー間のネットワークを確認してください。
+PD要求のタイムアウト。 PDサーバーのステータス、監視データ、ログ、およびTiDBサーバーとPDサーバー間のネットワークを確認してください。
 
 #### エラー9002（HY000）：TiKVサーバーのタイムアウト {#error-9002-hy000-tikv-server-timeout}
 
-TiKV要求のタイムアウト。 TiKVサーバーの状態、監視データ、ログ、およびTiDBサーバーとTiKVサーバー間のネットワークを確認してください。
+TiKV要求のタイムアウト。 TiKVサーバーのステータス、監視データ、ログ、およびTiDBサーバーとTiKVサーバー間のネットワークを確認してください。
 
 #### エラー9003（HY000）：TiKVサーバーがビジーです {#error-9003-hy000-tikv-server-is-busy}
 
@@ -144,7 +144,7 @@ TiKVサーバーがビジーです。これは通常、データベースの負�
 
 アクセスされたリージョンは利用できません。レプリカの数が不十分であるなどの理由により、Raftグループは利用できません。これは通常、TiKVサーバーがビジーであるか、TiKVノードがシャットダウンされている場合に発生します。 TiKVサーバーのステータス、監視データ、ログを確認してください。
 
-#### エラー9006（HY000）：GCの有効期間がトランザクション期間よりも短い {#error-9006-hy000-gc-life-time-is-shorter-than-transaction-duration}
+#### エラー9006（HY000）：GCの寿命がトランザクション期間よりも短い {#error-9006-hy000-gc-life-time-is-shorter-than-transaction-duration}
 
 `GC Life Time`の間隔が短すぎます。長いトランザクションで読み取られるはずだったデータが削除される可能性があります。次のコマンドを使用して[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)を調整できます。
 
@@ -164,7 +164,7 @@ SET GLOBAL tidb_gc_life_time = '30m';
 
 #### エラー8130（HY000）：クライアントでマルチステートメント機能が無効になっています {#error-8130-hy000-client-has-multi-statement-capability-disabled}
 
-このエラーは、以前のバージョンのTiDBからアップグレードした後に発生する可能性があります。 SQLインジェクション攻撃の影響を減らすために、TiDBは、デフォルトで同じ`COM_QUERY`の呼び出しで複数のクエリが実行されるのを防ぐようになりました。
+このエラーは、以前のバージョンのTiDBからアップグレードした後に発生する可能性があります。 SQLインジェクション攻撃の影響を減らすために、TiDBは、デフォルトで同じ`COM_QUERY`の呼び出しで複数のクエリが実行されないようにしました。
 
 システム変数[`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)を使用して、この動作を制御できます。
 
@@ -174,13 +174,13 @@ SET GLOBAL tidb_gc_life_time = '30m';
 
 -   panicがログにあるかどうかを確認します。
 -   `dmesg -T | grep -i oom`を使用して、OOMがdmesgに存在するかどうかを確認します。
--   長時間アクセスできない場合も、このエラーが発生する可能性があります。これは通常、TCPタイムアウトが原因で発生します。 TCPが長期間使用されていない場合、オペレーティングシステムはTCPを強制終了します。
+-   長時間アクセスできない場合も、このエラーが発生する可能性があります。これは通常、TCPタイムアウトが原因で発生します。 TCPが長期間使用されない場合、オペレーティングシステムはTCPを強制終了します。
 
-#### エラー1105（HY000）：その他のエラー：不明なエラーワイヤエラー（InvalidEnumValue（4004）） {#error-1105-hy000-other-error-unknown-error-wire-error-invalidenumvalue-4004}
+#### エラー1105（HY000）：その他のエラー：不明なエラーワイヤーエラー（InvalidEnumValue（4004）） {#error-1105-hy000-other-error-unknown-error-wire-error-invalidenumvalue-4004}
 
 このエラーは通常、TiDBのバージョンがTiKVのバージョンと一致しない場合に発生します。バージョンの不一致を回避するには、バージョンをアップグレードするときにすべてのコンポーネントをアップグレードします。
 
-#### エラー1148（42000）：使用されたコマンドはこのTiDBバージョンでは許可されていません {#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version}
+#### エラー1148（42000）：使用されているコマンドはこのTiDBバージョンでは許可されていません {#error-1148-42000-the-used-command-is-not-allowed-with-this-tidb-version}
 
 `LOAD DATA LOCAL`ステートメントを実行したが、MySQLクライアントがこのステートメントの実行を許可していない場合（ `local_infile`オプションの値は0）、このエラーが発生します。
 
@@ -188,10 +188,10 @@ SET GLOBAL tidb_gc_life_time = '30m';
 
 #### エラー9001（HY000）：PDサーバーのタイムアウト開始タイムスタンプが安全ポイントより遅れる可能性があります {#error-9001-hy000-pd-server-timeout-start-timestamp-may-fall-behind-safe-point}
 
-このエラーは、TiDBがPDにアクセスできない場合に発生します。 TiDBバックグラウンドのワーカーは、PDからセーフポイントを継続的にクエリします。このエラーは、100秒以内にクエリに失敗した場合に発生します。一般に、PDのディスクが低速でビジーであるか、TiDBとPD間のネットワークに障害が発生したことが原因です。一般的なエラーの詳細については、 [エラー番号と障害診断](/error-codes.md)を参照してください。
+このエラーは、TiDBがPDにアクセスできない場合に発生します。 TiDBバックグラウンドのワーカーは、PDからセーフポイントを継続的にクエリします。このエラーは、100秒以内にクエリに失敗した場合に発生します。一般に、PDのディスクが低速でビジーであるか、TiDBとPDの間のネットワークに障害が発生したことが原因です。一般的なエラーの詳細については、 [エラー番号と障害診断](/error-codes.md)を参照してください。
 
-### TiDBログのエラーメッセージ {#tidb-log-error-messages}
+### TiDBログエラーメッセージ {#tidb-log-error-messages}
 
 #### EOFエラー {#eof-error}
 
-クライアントまたはプロキシがTiDBから切断されても、TiDBは接続が切断されたことをすぐには認識しません。代わりに、TiDBは、接続にデータを返し始めたときにのみ切断に気付くことができます。このとき、ログにはEOFエラーが出力されます。
+クライアントまたはプロキシがTiDBから切断しても、TiDBは接続が切断されたことをすぐには認識しません。代わりに、TiDBは、接続にデータを返し始めたときにのみ切断に気付くことができます。このとき、ログにはEOFエラーが出力れます。

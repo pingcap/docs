@@ -7,13 +7,13 @@ summary: Learn about the transaction isolation levels in TiDB.
 
 <CustomContent platform="tidb">
 
-トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[酸](/glossary.md#acid)と呼ばれます）。
+トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[ACID](/glossary.md#acid)と呼ばれます）。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[酸](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます）。
+トランザクション分離は、データベーストランザクション処理の基盤の1つです。分離は、トランザクションの4つの主要なプロパティの1つです（一般に[ACID](/tidb-cloud/tidb-cloud-glossary.md#acid)と呼ばれます）。
 
 </CustomContent>
 

@@ -5,7 +5,7 @@ summary: Learn how to use SHOW TABLE REGIONS in TiDB.
 
 # テーブルの地域を表示する {#show-table-regions}
 
-`SHOW TABLE REGIONS`ステートメントは、TiDBのテーブルのリージョン情報を表示するために使用されます。
+`SHOW TABLE REGIONS`ステートメントは、TiDB内のテーブルのリージョン情報を表示するために使用されます。
 
 ## 構文 {#syntax}
 
@@ -40,19 +40,19 @@ SHOW TABLE [table_name] INDEX [index_name] REGIONS [WhereClauseOptional];
 
 -   `REGION_ID` ：リージョンID。
 -   `START_KEY` ：リージョンの開始キー。
--   `END_KEY` ：リージョンのエンドキー。
+-   `END_KEY` ：リージョンの終了キー。
 -   `LEADER_ID` ：リージョンのリーダーID。
 -   `LEADER_STORE_ID` ：リージョンリーダーが配置されているストア（TiKV）のID。
 -   `PEERS` ：すべてのリージョンレプリカのID。
 -   `SCATTERING` ：リージョンがスケジュールされているかどうか。 `1`は真を意味します。
--   `WRITTEN_BYTES` ：1つのハートビートサイクル内にリージョンに書き込まれるデータの推定量。単位はバイトです。
--   `READ_BYTES` ：1心拍サイクル内にリージョンから読み取られたデータの推定量。単位はバイトです。
+-   `WRITTEN_BYTES` ：1心周期内にリージョンに書き込まれるデータの推定量。単位はバイトです。
+-   `READ_BYTES` ：1心周期内にリージョンから読み取られたデータの推定量。単位はバイトです。
 -   `APPROXIMATE_SIZE(MB)` ：リージョン内の推定データ量。単位はメガバイト（MB）です。
 -   `APPROXIMATE_KEYS` ：リージョン内のキーの推定数。
 
 > **ノート：**
 >
-> `WRITTEN_BYTES`の`READ_BYTES`は`APPROXIMATE_KEYS`なデータではありませ`APPROXIMATE_SIZE(MB)` 。これらは、PDが地域から受信する心拍情報に基づいてPDから推定されたデータです。
+> `WRITTEN_BYTES`の`READ_BYTES`は`APPROXIMATE_KEYS`なデータではありませ`APPROXIMATE_SIZE(MB)` 。これらは、PDがリージョンから受信する心拍情報に基づいてPDから推定されたデータです。
 
 ## 例 {#examples}
 
@@ -84,7 +84,7 @@ SELECT SLEEP(5);
 SHOW TABLE t1 REGIONS;
 ```
 
-出力には、テーブルがリージョンに分割されていることが示されます。 `REGION_ID` 、および`START_KEY`は正確に一致しない場合があり`END_KEY` 。
+出力には、テーブルがリージョンに分割されていることが示されているはずです。 `REGION_ID` 、および`START_KEY`は正確に一致しない場合があり`END_KEY` 。
 
 ```sql
 ...
@@ -99,7 +99,7 @@ mysql> SHOW TABLE t1 REGIONS;
 3 rows in set (0.00 sec)
 ```
 
-上記の`START_KEY`では、 `t_75_r_31717`および`END_KEY`は、 `63434` KEYが`31717`のデータがこのリージョンに保管されていることを示してい`t_75_r_63434` 。プレフィックス`t_75_`は、これが`75`の内部テーブルIDを持つテーブル（ `t` ）のリージョンであることを示します。 `START_KEY`または`END_KEY`の空のキー値は、それぞれ負の無限大または正の無限大を示します。
+上記の`START_KEY`では、 `t_75_r_31717`および`END_KEY`は、 `63434` KEYが`31717`のデータがこのリージョンに格納されていることを示してい`t_75_r_63434` 。プレフィックス`t_75_`は、これが内部テーブルIDが`75`のテーブル（ `t` ）のリージョンであることを示します。 `START_KEY`または`END_KEY`の空のキー値は、それぞれ負の無限大または正の無限大を示します。
 
 TiDBは、必要に応じてリージョンを自動的にリバランスします。手動でリバランスするには、次の`SPLIT TABLE REGION`のステートメントを使用します。
 
@@ -127,7 +127,7 @@ mysql> SHOW TABLE t1 REGIONS;
 上記の出力は、リージョン96が分割され、新しいリージョン98が作成されたことを示しています。テーブル内の残りのリージョンは、分割操作の影響を受けませんでした。これは、出力統計によって確認されます。
 
 -   `TOTAL_SPLIT_REGION`は、新しく分割されたリージョンの数を示します。この例では、番号は1です。
--   `SCATTER_FINISH_RATIO`は、新しく分割されたリージョンが正常に分散される割合を示します。 `1.0`は、すべてのリージョンが分散していることを意味します。
+-   `SCATTER_FINISH_RATIO`は、新しく分割されたリージョンが正常に分散される速度を示します。 `1.0`は、すべてのリージョンが分散していることを意味します。
 
 より詳細な例については：
 
@@ -150,10 +150,10 @@ mysql> show table t regions;
 
 -   表tは6つの地域に対応しています。これらのリージョンでは、 `102` 、および`106`が行データを`3`し、 `114`が`98`データを格納し`110` 。
 -   リージョン`102`の`START_KEY`と`END_KEY`の場合、 `t_43`はテーブルプレフィックスとIDを示します。 `_r`は、テーブルtのレコードデータのプレフィックスです。 `_i`はインデックスデータのプレフィックスです。
--   リージョン`102` 、および`START_KEY`は、 `[-inf, 20000)`の範囲のレコード・データが保管されることを意味し`END_KEY` 。同様に、 `110` （ `106` ）の`3` `114`の範囲も計算できます。
+-   リージョン`102` 、および`START_KEY`は、 `[-inf, 20000)`の範囲のレコードデータが格納されることを意味し`END_KEY` 。同様に、 `110` （ `106` ）の`3` `114`の範囲も計算できます。
 -   リージョン`98`はインデックスデータを格納します。テーブルtのインデックスデータの開始キーは`t_43_i`で、リージョン`98`の範囲内にあります。
 
-ストア1のテーブルtに対応するリージョンを確認するには、 `WHERE`節を使用します。
+ストア1のテーブルtに対応するリージョンを確認するには、 `WHERE`句を使用します。
 
 ```sql
 test> show table t regions where leader_store_id =1;
@@ -201,4 +201,4 @@ test> show table t regions;
 ## も参照してください {#see-also}
 
 -   [スプリットリージョン](/sql-statements/sql-statement-split-region.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)

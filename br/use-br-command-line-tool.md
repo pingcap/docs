@@ -30,7 +30,7 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 -   `backup` ： `br`のサブコマンド。
 -   `full` ： `backup`のサブコマンド。
 -   `-s` （または`--storage` ）：バックアップファイルが保存されるパスを指定するオプション。
--   `"s3://backup-data/2022-01-30/"` ：パラメータ`-s`これは、バックアップデータがAmazonS3の`backup-data`バケットの`2022-01-30/`ディレクトリに保存されていることを示します。
+-   `"s3://backup-data/2022-01-30/"` ：パラメータ`-s`バックアップデータがAmazonS3の`backup-data`バケットの`2022-01-30/`ディレクトリに保存されていることを示します。
 -   `--pd` ：配置Driver（PD）サービスアドレスを指定するオプション。
 -   `"${PDIP}:2379"` ： `--pd`のパラメータ。
 
@@ -49,7 +49,7 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 
 ### 一般的なオプション {#common-options}
 
--   `--pd` ：接続に使用され、PDサーバーアドレスを指定します。たとえば、 `"${PDIP}:2379"` 。
+-   `--pd` ：接続に使用し、PDサーバーのアドレスを指定します。たとえば、 `"${PDIP}:2379"` 。
 -   `-h` （または`--help` ）：すべてのサブコマンドのヘルプを取得するために使用されます。たとえば、 `br backup --help` 。
 -   `-V` （または`--version` ）：BRのバージョンを確認するために使用されます。
 -   `--ca` ：信頼できるCA証明書へのパスをPEM形式で指定します。
@@ -65,7 +65,7 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 -   [データベースをバックアップする](/br/br-usage-backup.md#back-up-a-database)
 -   [テーブルをバックアップする](/br/br-usage-backup.md#back-up-a-table)
 -   [テーブルフィルターを使用して複数のテーブルをバックアップする](/br/br-usage-backup.md#back-up-multiple-tables-with-table-filter)
--   [BRを使用してAmazonS3でデータをバックアップする](/br/backup-storage-S3.md)
+-   [BRを使用してAmazonS3のデータをバックアップする](/br/backup-storage-S3.md)
 -   [BRを使用してGoogleCloudStorageにデータをバックアップする](/br/backup-storage-gcs.md)
 -   [BRを使用してAzureBlobStorageのデータをバックアップする](/br/backup-storage-azblob.md)
 -   [インクリメンタルデータをバックアップする](/br/br-usage-backup.md#back-up-incremental-data)
@@ -80,7 +80,7 @@ summary: Learn how to use the BR command line to back up and restore cluster dat
 -   [テーブルを復元する](/br/br-usage-restore.md#restore-a-table)
 -   [テーブルフィルターを使用して複数のテーブルを復元する](/br/br-usage-restore.md#restore-multiple-tables-with-table-filter)
 -   [BRを使用してAmazonS3でデータを復元する](/br/backup-storage-S3.md)
--   [BRを使用してGoogleCloudStorageのデータを復元する](/br/backup-storage-gcs.md)
--   [BRを使用してAzureBlobStorageのデータを復元する](/br/backup-storage-azblob.md)
+-   [BRを使用してGoogleCloudStorageにデータを復元する](/br/backup-storage-gcs.md)
+-   [BRを使用してAzureBlobStorageにデータを復元する](/br/backup-storage-azblob.md)
 -   [増分データを復元する](/br/br-usage-restore.md#restore-incremental-data)
 -   [暗号化されたバックアップデータを復元する](/br/br-usage-restore.md#restore-encrypted-backup-data)

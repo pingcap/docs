@@ -61,7 +61,7 @@ ERROR 1141 (42000): There is no such grant defined for user 'newuser' on host '%
 
 ## MySQLの互換性 {#mysql-compatibility}
 
--   `IF EXISTS`で存在しないユーザーを削除しても、TiDBに警告は作成されません。 [問題＃10196](https://github.com/pingcap/tidb/issues/10196) 。
+-   `IF EXISTS`で存在しないユーザーを削除しても、TiDBに警告は作成されません。 [問題＃10196](https://github.com/pingcap/tidb/issues/10196) .
 
 ## も参照してください {#see-also}
 

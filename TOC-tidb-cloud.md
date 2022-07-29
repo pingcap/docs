@@ -33,6 +33,7 @@
 -   データの移行
     -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
     -   データをTiDBに移行する
+        -   [AmazonS3AccessとGCSAccessを設定します](/tidb-cloud/config-s3-and-gcs-access.md)
         -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
         -   [Auroraから一括で移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
         -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
@@ -99,17 +100,8 @@
         -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
     -   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
 -   ユーザーアクセスの管理
-    -   [ログイン](/tidb-cloud/manage-user-access.md)
-    -   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
-    -   [ユーザーパスワードの管理](/tidb-cloud/manage-user-access.md#manage-user-passwords)
-    -   [ユーザープロファイルの管理](/tidb-cloud/manage-user-access.md#manage-user-profiles)
-    -   [組織とプロジェクトをビューする](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
-    -   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
-    -   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
-    -   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)
-    -   [組織メンバーを削除する](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
-    -   [プロジェクトメンバーを削除する](/tidb-cloud/manage-user-access.md#remove-a-project-member)
-    -   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+    -   [コンソールユーザーアクセスの管理](/tidb-cloud/manage-user-access.md)
+    -   [クラスタセキュリティ設定を構成する](/tidb-cloud/configure-security-settings.md)
 -   請求する
     -   [ノードコスト](/tidb-cloud/tidb-cloud-billing.md)
     -   [バックアップストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
@@ -264,7 +256,7 @@
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)
             -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
-            -   [演算子](/functions-and-operators/operators.md)
+            -   [オペレーター](/functions-and-operators/operators.md)
             -   [制御フロー機能](/functions-and-operators/control-flow-functions.md)
             -   [文字列関数](/functions-and-operators/string-functions.md)
             -   [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)
@@ -352,6 +344,8 @@
             -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
         -   TiFlash
             -   [TiFlashの概要](/tiflash/tiflash-overview.md)
+    -   [Dumpling](/dumpling-overview.md)
+    -   [テーブルフィルター](/table-filter.md)
     -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
 -   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
 -   リリースノート

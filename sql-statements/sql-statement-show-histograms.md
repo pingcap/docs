@@ -3,7 +3,7 @@ title: SHOW STATS_HISTOGRAMS
 summary: An overview of the usage of SHOW HISTOGRAMS for TiDB database.
 ---
 
-# SHOW STATS_HISTOGRAMS {#show-stats-histograms}
+# STATS_HISTOGRAMSを表示する {#show-stats-histograms}
 
 このステートメントは、 `ANALYZE`ステートメントによって収集されたヒストグラム情報を示しています。
 

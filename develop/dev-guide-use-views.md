@@ -9,9 +9,9 @@ summary: Learn how to use views in TiDB.
 
 ## 概要 {#overview}
 
-TiDBはビューをサポートしています。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
+TiDBはビューをサポートします。ビューは仮想テーブルとして機能し、そのスキーマはビューを作成する`SELECT`ステートメントによって定義されます。
 
--   ビューを作成して、安全なフィールドとデータのみをユーザーに公開できます。これにより、基になるテーブルの機密フィールドとデータのセキュリティが確保されます。
+-   ビューを作成して、安全なフィールドとデータのみをユーザーに公開できます。これにより、基になるテーブル内の機密フィールドとデータのセキュリティが確保されます。
 -   複雑なクエリをより簡単かつ便利にするために頻繁に使用される複雑なクエリのビューを作成できます。
 
 ## ビューを作成する {#create-a-view}
@@ -40,7 +40,7 @@ GROUP BY b.id;
 
 ## クエリビュー {#query-views}
 
-ビューが作成されると、 `SELECT`ステートメントを使用して、通常のテーブルと同じようにビューを照会できます。
+ビューが作成されると、 `SELECT`ステートメントを使用して、通常のテーブルと同じようにビューをクエリできます。
 
 {{< copyable "" >}}
 
@@ -50,9 +50,9 @@ SELECT * FROM book_with_ratings LIMIT 10;
 
 TiDBがビューを照会するとき、ビューに関連付けられた`SELECT`のステートメントを照会します。
 
-## ビューを更新 {#update-views}
+## ビューを更新する {#update-views}
 
-現在、TiDBのビューは`ALTER VIEW view_name AS query;`をサポートしていません。次の2つの方法で、ビューを「更新」できます。
+現在、TiDBのビューは`ALTER VIEW view_name AS query;`をサポートしていません。次の2つの方法でビューを「更新」できます。
 
 -   `DROP VIEW view_name;`ステートメントで古いビューを削除してから、 `CREATE VIEW view_name AS query;`ステートメントで新しいビューを作成してビューを更新します。
 -   `CREATE OR REPLACE VIEW view_name AS query;`ステートメントを使用して、同じ名前の既存のビューを上書きします。
@@ -88,7 +88,7 @@ collation_connection: utf8mb4_general_ci
 1 row in set (0.00 sec)
 ```
 
-### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルを照会します {#query-the-code-information-schema-views-code-table}
+### <code>INFORMATION_SCHEMA.VIEWS</code>テーブルをクエリします {#query-the-code-information-schema-views-code-table}
 
 {{< copyable "" >}}
 

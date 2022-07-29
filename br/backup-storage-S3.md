@@ -20,11 +20,11 @@ S3を使用してバックアップまたは復元を実行する前に、S3に�
 バックアップする前に、S3のバックアップディレクトリにアクセスするために次の権限を設定します。
 
 -   バックアップ中に`s3:ListBucket` 、および`s3:PutObject`のバックアップディレクトリにアクセスするための`s3:AbortMultipartUpload`およびBRの最小特権
--   復元中に`s3:ListBucket`と`s3:GetObject`のバックアップディレクトリにアクセスするためのTiKVとBRの最小権限
+-   復元中にTiKVとBRが`s3:ListBucket`と`s3:GetObject`のバックアップディレクトリにアクセスするための最小権限
 
 バックアップディレクトリをまだ作成していない場合は、 [AWS公式ドキュメント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンにS3バケットを作成します。必要に応じて、 [AWS公式ドキュメント-フォルダの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
 
-### S3にアクセスするようにユーザーを設定する {#configure-a-user-to-access-s3}
+### S3にアクセスするようにユーザーを設定します {#configure-a-user-to-access-s3}
 
 次のいずれかの方法を使用して、S3へのアクセスを設定することをお勧めします。
 
@@ -44,9 +44,9 @@ S3を使用してバックアップまたは復元を実行する前に、S3に�
     br backup full --pd "${PDIP}:2379" --storage "s3://${Bucket}/${Folder}?access-key=${accessKey}&secret-access-key=${secretAccessKey}" --s3.region "${region}" --send-credentials-to-tikv=true
     ```
 
-コマンドのアクセスキーはリークに対して脆弱であるため、 IAMロールをEC2インスタンスに関連付けてS3にアクセスすることをお勧めします。
+コマンドのアクセスキーはリークに対して脆弱であるため、S3にアクセスするにはIAMロールをEC2インスタンスに関連付けることをお勧めします。
 
-## データをS3にバックアップします {#back-up-data-to-s3}
+## データをS3にバックアップする {#back-up-data-to-s3}
 
 {{< copyable "" >}}
 
@@ -60,9 +60,9 @@ br backup full \
     --log-file backuptable.log
 ```
 
-前のコマンドで：
+前のコマンドの場合：
 
--   `--s3.region` ：S3のリージョンを指定します。
+-   `--s3.region` ：S3の領域を指定します。
 -   `--send-credentials-to-tikv` ：アクセスキーがTiKVノードに渡されることを指定します。
 
 ## S3からデータを復元する {#restore-data-from-s3}

@@ -81,11 +81,11 @@ Max_data_length: 0
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
--   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)

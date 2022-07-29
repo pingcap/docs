@@ -35,7 +35,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   説明：
 
-    レプリケーションタスクの解決済みTSが10分以上遅延しています。
+    レプリケーションタスクの解決済みTSが10分以上遅れています。
 
 -   解決：
 
@@ -71,7 +71,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    TiCDCログを収集して、根本的な原因を特定します。
+    TiCDCログを収集して、根本原因を特定します。
 
 ### <code>ticdc_mounter_unmarshal_and_mount_time_more_than_1s</code> {#code-ticdc-mounter-unmarshal-and-mount-time-more-than-1s-code}
 
@@ -85,7 +85,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    TiCDCログを収集して、根本的な原因を特定します。
+    TiCDCログを収集して、根本原因を特定します。
 
 ### <code>cdc_sink_execute_duration_time_more_than_10s</code> {#code-cdc-sink-execute-duration-time-more-than-10s-code}
 
@@ -127,7 +127,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    TiCDCログを収集して、根本的な原因を特定します。
+    TiCDCログを収集して、根本原因を特定します。
 
 ### <code>ticdc_puller_entry_sorter_merge_bucket</code> {#code-ticdc-puller-entry-sorter-merge-bucket-code}
 
@@ -141,7 +141,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    TiCDCログを収集して、根本的な原因を特定します。
+    TiCDCログを収集して、根本原因を特定します。
 
 ### <code>tikv_cdc_min_resolved_ts_no_change_for_1m</code> {#code-tikv-cdc-min-resolved-ts-no-change-for-1m-code}
 
@@ -155,7 +155,7 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    TiKVログを収集して、根本的な原因を特定します。
+    TiKVログを収集して、根本原因を特定します。
 
 ### <code>tikv_cdc_scan_duration_seconds_more_than_10min</code> {#code-tikv-cdc-scan-duration-seconds-more-than-10min-code}
 
@@ -197,4 +197,4 @@ summary: Learn about TiCDC alert rules and how to handle the alerts.
 
 -   解決：
 
-    TiCDCログを収集して、根本的な原因を特定します。
+    TiCDCログを収集して、根本原因を特定します。

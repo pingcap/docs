@@ -5,7 +5,7 @@ summary: Learn how to check data for TiDB upstream and downstream clusters.
 
 # TiDBアップストリームおよびダウンストリームクラスターのデータチェック {#data-check-for-tidb-upstream-and-downstream-clusters}
 
-TiDB Binlogを使用して、TiDBのアップストリームおよびダウンストリームクラスターを構築できます。 DrainerがデータをTiDBに複製すると、チェックポイントが保存され、アップストリームとダウンストリーム間のTSOマッピング関係も`ts-map`として保存されます。アップストリームとダウンストリーム間のデータをチェックするには、sync-diff-inspectorで`snapshot`を設定します。
+TiDB Binlogを使用して、TiDBのアップストリームおよびダウンストリームクラスターを構築できます。 DrainerがデータをTiDBに複製すると、チェックポイントが保存され、アップストリームとダウンストリーム間のTSOマッピング関係も`ts-map`として保存されます。アップストリームとダウンストリームの間でデータをチェックするには、sync-diff-inspectorで`snapshot`を設定します。
 
 ## ステップ1： <code>ts-map</code>を取得する {#step-1-obtain-code-ts-map-code}
 
@@ -22,7 +22,7 @@ mysql> select * from tidb_binlog.checkpoint;
 
 ## ステップ2：スナップショットを構成する {#step-2-configure-snapshot}
 
-次に、 [ステップ1](#step-1-obtain-ts-map)で取得した`ts-map`の情報を使用して、アップストリームおよびダウンストリームデータベースのスナップショット情報を構成します。
+次に、 [ステップ1](#step-1-obtain-ts-map)で取得した`ts-map`情報を使用して、アップストリームデータベースとダウンストリームデータベースのスナップショット情報を構成します。
 
 `Datasource config`セクションの構成例を次に示します。
 

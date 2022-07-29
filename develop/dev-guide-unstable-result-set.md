@@ -13,8 +13,8 @@ summary: Learn how to handle the error of an unstable result set.
 
 たとえば、次の2つのテーブルがあります。
 
--   `stu_info`は学生情報を保存します
--   `stu_score`は学生のテストスコアを保存します。
+-   `stu_info`は学生情報を格納します
+-   `stu_score`は学生のテストスコアを格納します。
 
 次に、次のようなSQLクエリステートメントを記述できます。
 
@@ -96,7 +96,7 @@ ORDER BY
 
 `a`の値を取得する***方法***を指定しなかったため、2つの結果があります。 SQLの`stuname`フィールド、および2つの結果は両方ともSQLセマンティクスによって満たされます。結果セットが不安定になります。したがって、 `GROUP BY`ステートメントの結果セットの安定性を保証する場合は、 `FULL GROUP BY`構文を使用してください。
 
-MySQLには、構文をチェックするかどうかを制御するための`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`が用意されて`FULL GROUP BY`ます。 TiDBはこの`sql_mode`スイッチとも互換性があります。
+MySQLは、 `FULL GROUP BY`の構文をチェックするかどうかを制御するための`sql_mode`のスイッチ`ONLY_FULL_GROUP_BY`を提供します。 TiDBはこの`sql_mode`スイッチとも互換性があります。
 
 {{< copyable "" >}}
 
@@ -181,7 +181,7 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 
 TiDBはストレージレイヤーからデータを並列に読み取るため、結果セットは不安定です。したがって、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は、不安定であると簡単に認識されます。
 
-`GROUP_CONCAT()`が結果セットの出力を順番に取得できるようにするには、SQLセマンティクスに準拠する`ORDER BY`句に並べ替えフィールドを追加する必要があります。次の例では、 `ORDER BY`なしで`customer_id`をスプライスする`GROUP_CONCAT()`は、不安定な結果セットを引き起こします。
+`GROUP_CONCAT()`が結果セットの出力を順番に取得できるようにするには、SQLセマンティクスに準拠するソートフィールドを`ORDER BY`句に追加する必要があります。次の例では、 `ORDER BY`なしで`customer_id`をスプライスする`GROUP_CONCAT()`は、不安定な結果セットを引き起こします。
 
 1.  除外`ORDER BY`
 
@@ -241,4 +241,4 @@ TiDBはストレージレイヤーからデータを並列に読み取るため�
 
 ## 不安定な結果は<code>SELECT * FROM T LIMIT N</code> TLIMITNになります {#unstable-results-in-code-select-from-t-limit-n-code}
 
-返される結果は、ストレージノード（TiKV）でのデータの分散に関連しています。複数のクエリが実行されると、ストレージノード（TiKV）の異なるストレージユニット（リージョン）が異なる速度で結果を返し、不安定な結果を引き起こす可能性があります。
+返される結果は、ストレージノード（TiKV）でのデータの分散に関連しています。複数のクエリが実行されると、ストレージノード（TiKV）の異なるストレージユニット（Regions）が異なる速度で結果を返すため、結果が不安定になる可能性があります。

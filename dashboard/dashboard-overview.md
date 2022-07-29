@@ -58,23 +58,23 @@ TiDBダッシュボードにログインした後、デフォルトで概要ペ�
 
 ![Recent slow queries](/media/dashboard/dashboard-overview-slow-query.png)
 
-デフォルトでは、300ミリ秒より長く実行されたSQLクエリは低速クエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold)変数または[遅いしきい値](/tidb-configuration-file.md#slow-threshold)パラメーターを変更することで変更できます。
+デフォルトでは、300ミリ秒より長く実行されたSQLクエリは、低速クエリとしてカウントされ、テーブルに表示されます。このしきい値は、 [tidb_slow_log_threshold](/system-variables.md#tidb_slow_log_threshold)変数または[遅いしきい値](/tidb-configuration-file.md#slow-threshold)パラメーターを変更することで変更できます。
 
 この領域に表示されるコンテンツは、より詳細な[遅いクエリページ](/dashboard/dashboard-slow-query.md)と一致しています。 [**最近の低速クエリ**]タイトルをクリックして、完全なリストを表示できます。この表の列の詳細については、この[遅いクエリページ](/dashboard/dashboard-slow-query.md)を参照してください。
 
 > **ノート：**
 >
-> この機能は、低速のクエリログが有効になっているクラスタでのみ使用できます。デフォルトでは、低速クエリログはTiUPを使用してデプロイされたクラスタで有効になっています。
+> この機能は、遅いクエリログが有効になっているクラスタでのみ使用できます。デフォルトでは、TiUPを使用してデプロイされたクラスタで低速クエリログが有効になっています。
 
 ## インスタンス {#instances}
 
-この領域には、クラスタ全体でのTiDB、TiKV、PD、およびTiFlashのインスタンスと異常なインスタンスの総数が要約されています。
+この領域には、クラスタ全体でのTiDB、TiKV、PD、およびTiFlashのインスタンスと異常なインスタンスの総数がまとめられています。
 
 ![Instances](/media/dashboard/dashboard-overview-instances.png)
 
 上の画像のステータスは次のとおりです。
 
--   Up：インスタンスは正常に実行されています（オフラインストレージインスタンスを含む）。
+-   アップ：インスタンスは正常に実行されています（オフラインストレージインスタンスを含む）。
 -   ダウン：インスタンスは、ネットワークの切断、プロセスのクラッシュなど、異常に実行されています。
 
 **インスタンス**のタイトルをクリックして、各インスタンスの詳細な実行ステータスを示す[クラスター情報ページ](/dashboard/dashboard-cluster-info.md)を入力します。
@@ -85,7 +85,7 @@ TiDBダッシュボードにログインした後、デフォルトで概要ペ�
 
 ![Monitor and alert](/media/dashboard/dashboard-overview-monitor.png)
 
--   **メトリックのビュー**：このリンクをクリックして、クラスタの詳細な監視情報を表示できるGrafanaダッシュボードにジャンプします。 Grafanaダッシュボードの各モニタリング指標の詳細については、 [モニタリング指標](/grafana-overview-dashboard.md)を参照してください。
+-   **指標のビュー**：このリンクをクリックして、クラスタの詳細な監視情報を表示できるGrafanaダッシュボードにジャンプします。 Grafanaダッシュボードの各モニタリング指標の詳細については、 [モニタリング指標](/grafana-overview-dashboard.md)を参照してください。
 -   **アラートのビュー**：このリンクをクリックして、クラスタの詳細なアラート情報を表示できるAlertManagerページにジャンプします。アラートがクラスタに存在する場合、アラートの数はリンクテキストに直接表示されます。
 -   **診断の実行**：このリンクをクリックして、より詳細な[クラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)にジャンプします。
 

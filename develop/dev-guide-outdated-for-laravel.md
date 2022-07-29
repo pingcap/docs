@@ -28,12 +28,12 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 >
 > 「実際の」TiDBクラスタを実稼働環境にデプロイするには、次のガイドを参照してください。
 >
-> -   [オンプレミスにデプロイを使用してTiDBを導入する](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [オンプレミスのTiUPを使用してTiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料トライアルを提供するフルマネージドのサービスとしてのデータベース（ [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) ）を使用することもできます。
+> また、無料トライアルを提供するフルマネージドのDatabase-as- [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) -Service（DBaaS）も可能です。
 
-## ステップ2.データベースを作成する {#step-2-create-a-database}
+## ステップ2.データベースを作成します {#step-2-create-a-database}
 
 1.  SQLシェルで、アプリケーションが使用する`laravel_demo`のデータベースを作成します。
 
@@ -65,7 +65,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 1.  Composerをインストールします。
 
-    Laravelは、PHPの依存関係マネージャーである[作曲](https://getcomposer.org/)を使用して、依存関係を管理します。 Laravelを使用する前に、Composerがマシンにインストールされていることを確認してください。
+    Laravelは、PHPの依存関係マネージャーである[作曲](https://getcomposer.org/)を使用して、その依存関係を管理します。 Laravelを使用する前に、Composerがマシンにインストールされていることを確認してください。
 
     {{< copyable "" >}}
 
@@ -118,7 +118,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 ### モジュールを定義する {#define-modules}
 
-Laravelは、ORMフレームワークである[雄弁](https://laravel.com/docs/8.x/eloquent)モデルを使用して、テーブルを操作します。モデルは通常、 `app\Models`ディレクトリに配置されます。次の手順を実行してモデルを作成し、モデルを対応するテーブルにマップします。
+Laravelは、ORMフレームワークである[雄弁](https://laravel.com/docs/8.x/eloquent)モデルを使用してテーブルを操作します。モデルは通常、 `app\Models`ディレクトリに配置されます。次の手順を実行してモデルを作成し、モデルを対応するテーブルにマップします。
 
 1.  `make:model` [職人コマンド](https://laravel.com/docs/8.x/artisan)を使用して新しいモデルを生成し、 [データベースの移行](https://laravel.com/docs/8.x/migrations)を生成します。
 
@@ -131,7 +131,7 @@ Laravelは、ORMフレームワークである[雄弁](https://laravel.com/docs/
 
     新しい移行は`database/migrations`のディレクトリに配置されます。
 
-2.  `database/migrations/2021_10_08_064043_order.php`のファイルを編集して、注文テーブルを作成します。ファイル名は時間の経過とともに変化します。
+2.  `database/migrations/2021_10_08_064043_order.php`のファイルを編集して、注文テーブルを作成します。ファイル名は時間とともに変化します。
 
     {{< copyable "" >}}
 
@@ -170,7 +170,7 @@ Laravelは、ORMフレームワークである[雄弁](https://laravel.com/docs/
     }
     ```
 
-3.  `database/migrations/2021_10_08_064056_customer.php`のファイルを編集してcustomerテーブルを作成します。ファイル名は時間の経過とともに変化します。
+3.  `database/migrations/2021_10_08_064056_customer.php`のファイルを編集してcustomerテーブルを作成します。ファイル名は時間とともに変化します。
 
     {{< copyable "" >}}
 
@@ -345,7 +345,7 @@ Laravelは、ORMフレームワークである[雄弁](https://laravel.com/docs/
 
 3.  `app/Http/Controllers/OrderController.php`を編集して、 `order`テーブルに対するアクションを制御します。
 
-    {{&lt;コピー可能&quot;&quot;&gt;}}
+    {{&lt;コピー可能&quot;&gt;}}
 
     ```php
     <?php
@@ -381,7 +381,7 @@ Laravelは、ORMフレームワークである[雄弁](https://laravel.com/docs/
 
 ### URLルートを更新します {#update-the-url-routes}
 
-URLルーティングを使用すると、要求URLを受け入れるようにアプリケーションを構成できます。アプリケーションの[ルート](https://laravel.com/docs/8.x/routing)のほとんどは、 `app/api.php`ファイルで定義されています。最も単純なLaravelルートは、URIとClosureコールバックで構成されています。 `api.php`ファイルには、このデモのすべてのコードが含まれています。
+URLルーティングを使用すると、要求URLを受け入れるようにアプリケーションを構成できます。アプリケーションの[ルート](https://laravel.com/docs/8.x/routing)のほとんどは、 `app/api.php`ファイルで定義されています。最も単純なLaravelルートは、URIとクロージャコールバックで構成されています。 `api.php`ファイルには、このデモのすべてのコードが含まれています。
 
 {{< copyable "" >}}
 

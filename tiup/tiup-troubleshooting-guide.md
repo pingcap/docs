@@ -5,7 +5,7 @@ summary: Introduce the troubleshooting methods and solutions if you encounter is
 
 # TiUPトラブルシューティングガイド {#tiup-troubleshooting-guide}
 
-このドキュメントでは、TiUPを使用する際の一般的な問題とトラブルシューティング方法を紹介します。このドキュメントに遭遇した問題が含まれていない場合は、GithubTiUPリポジトリに[新しい問題を提出する](https://github.com/pingcap/tiup/issues)つ。
+このドキュメントでは、TiUPを使用する際の一般的な問題とトラブルシューティング方法をいくつか紹介します。このドキュメントに遭遇した問題が含まれていない場合は、GithubTiUPリポジトリに[新しい問題を提出する](https://github.com/pingcap/tiup/issues)つ。
 
 ## TiUPコマンドのトラブルシューティング {#troubleshoot-tiup-commands}
 
@@ -27,9 +27,9 @@ CDNサーバーのキャッシュ時間は短いため、新しいチェック�
 
 ## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
-### <code>unable to authenticate, attempted methods [none publickey]</code>は、デプロイメント中にプロンプトが表示されます {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
+### <code>unable to authenticate, attempted methods [none publickey]</code>が要求されます {#code-unable-to-authenticate-attempted-methods-none-publickey-code-is-prompted-during-deployment}
 
-展開中に、コンポーネントパッケージがリモートホストにアップロードされ、初期化が実行されます。このプロセスでは、リモートホストに接続する必要があります。このエラーは、リモートホストに接続するためのSSH秘密鍵が見つからなかったことが原因で発生します。
+展開中に、コンポーネントパッケージがリモートホストにアップロードされ、初期化が実行されます。このプロセスでは、リモートホストに接続する必要があります。このエラーは、リモートホストに接続するためのSSH秘密鍵が見つからないことが原因で発生します。
 
 この問題を解決するには、 `tiup cluster deploy -i identity_file`を実行して秘密鍵を指定したかどうかを確認します。
 

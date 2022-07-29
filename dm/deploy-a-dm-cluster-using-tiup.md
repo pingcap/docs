@@ -5,7 +5,7 @@ summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 
 # TiUPを使用してDMクラスターをデプロイする {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタの運用および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DMクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなど、毎日のTiDBデータ移行（DM）操作を簡単に実行し、DMクラスタパラメーターを管理できクラスタ。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB4.0で導入されたクラスタ操作および保守ツールです。 TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。 TiUP DMを使用すると、DMクラスターの展開、開始、停止、破棄、スケーリング、アップグレードなど、毎日のTiDBデータ移行（DM）操作を簡単に実行し、DMクラスタパラメーターを管理できクラスタ。
 
 TiUPは、DMv2.0以降のDMバージョンの展開をサポートします。このドキュメントでは、さまざまなトポロジのDMクラスターを展開する方法を紹介します。
 
@@ -15,13 +15,13 @@ TiUPは、DMv2.0以降のDMバージョンの展開をサポートします。�
 
 ## 前提条件 {#prerequisites}
 
-DMが完全なデータレプリケーションタスクを実行する場合、DMワーカーは1つのアップストリームデータベースのみにバインドされます。 DMワーカーは、最初に全量のデータをローカルにエクスポートし、次にデータをダウンストリームデータベースにインポートします。したがって、ワーカーのホストスペースは、エクスポートするすべてのアップストリームテーブルを格納するのに十分な大きさである必要があります。ストレージパスは、後でタスクを作成するときに指定されます。
+DMが完全なデータ複製タスクを実行する場合、DMワーカーは1つのアップストリームデータベースのみにバインドされます。 DMワーカーは、最初に全量のデータをローカルにエクスポートし、次にデータをダウンストリームデータベースにインポートします。したがって、ワーカーのホストスペースは、エクスポートするすべてのアップストリームテーブルを格納するのに十分な大きさである必要があります。ストレージパスは、後でタスクを作成するときに指定されます。
 
 さらに、DMクラスタをデプロイするときに[ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
-## ステップ1：制御マシンにTiUPをインストールします {#step-1-install-tiup-on-the-control-machine}
+## ステップ1：制御マシンにTiUPをインストールする {#step-1-install-tiup-on-the-control-machine}
 
-通常のユーザーアカウントを使用してコントロールマシンにログインします（例として`tidb`人のユーザーを取り上げます）。以下のすべてのTiUPインストールおよびクラスタ管理操作は、 `tidb`のユーザーが実行できます。
+通常のユーザーアカウントを使用してコントロールマシンにログインします（例として`tidb`ユーザーを取り上げます）。以下のすべてのTiUPインストールおよびクラスタ管理操作は、 `tidb`ユーザーが実行できます。
 
 1.  次のコマンドを実行して、TiUPをインストールします。
 
@@ -143,7 +143,7 @@ alertmanager_servers:
 >     -   TiUPノードは、すべてのDMマスターノードの`port`つ（デフォルトでは`8261` ）に接続できます。
 >     -   TiUPノードは、すべてのDMワーカーノードの`port`つ（デフォルトでは`8262` ）に接続できます。
 
-`master_servers.host.config`つのパラメーターの説明については、 [マスターパラメーター](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`のパラメーターの説明については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
+`master_servers.host.config`つのパラメータの説明については、 [マスターパラメーター](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)を参照してください。 `worker_servers.host.config`パラメータの詳細については、 [ワーカーパラメータ](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
 
 ## 手順3：展開コマンドを実行する {#step-3-execute-the-deployment-command}
 
@@ -167,7 +167,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | ------------------------ | --------------------------------------------------------------------- |
 | `${name}`                | DMクラスタの名前。例：dm-test                                                   |
 | `${version}`             | DMクラスタのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。    |
-| `./topology.yaml`        | トポロジー構成ファイルのパス。                                                       |
+| `./topology.yaml`        | トポロジ構成ファイルのパス。                                                        |
 | `-u`または`--user`          | rootユーザーまたはsshおよびsudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインし、クラスタの展開を完了します。 |
 | `-p`または`--password`      | ターゲットホストのパスワード。指定した場合、パスワード認証が使用されます。                                 |
 | `-i`または`--identity_file` | SSHIDファイルのパス。指定した場合、公開鍵認証が使用されます（デフォルトは「/root/.ssh/id_rsa」）。          |

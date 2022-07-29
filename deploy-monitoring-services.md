@@ -42,7 +42,7 @@ tar -xzf node_exporter-0.17.0.linux-amd64.tar.gz
 tar -xzf grafana-6.1.6.linux-amd64.tar.gz
 ```
 
-### ステップ2：Node1、Node2、Node3、およびNode4で<code>node_exporter</code>を開始します {#step-2-start-code-node-exporter-code-on-node1-node2-node3-and-node4}
+### ステップ2：Node1、Node2、Node3、およびNode4で<code>node_exporter</code>を起動します {#step-2-start-code-node-exporter-code-on-node1-node2-node3-and-node4}
 
 {{< copyable "" >}}
 
@@ -227,7 +227,7 @@ PDサーバー、TiKVサーバー、およびTiDBサーバーのGrafanaダッシ
 
 2.  サイドバーメニューで、[**ダッシュボード**]-&gt; [<strong>インポート</strong>]をクリックして、[ダッシュボードの<strong>インポート</strong>]ウィンドウを開きます。
 
-3.  [ **.jsonファイルのアップロード]**をクリックして、JSONファイルをアップロードし[tikv / tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) （ [pingcap / tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、および[tikv / pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からTiDB Grafana構成ファイルをダウンロードします）。
+3.  [ **.jsonファイルのアップロード]**をクリックしてJSONファイルをアップロードし[tikv / tikv](https://github.com/tikv/tikv/tree/master/metrics/grafana) （ [pingcap / tidb](https://github.com/pingcap/tidb/tree/master/metrics/grafana) 、および[tikv / pd](https://github.com/tikv/pd/tree/master/metrics/grafana)からTiDB Grafana構成ファイルをダウンロードします）。
 
     > **ノート：**
     >
@@ -256,7 +256,7 @@ PDサーバー、TiKVサーバー、およびTiDBサーバーのGrafanaダッシ
 
 -   **PDサーバー：**
 
-    -   コマンドが実行される合計回数
+    -   コマンドが実行された合計回数
     -   特定のコマンドが失敗した合計回数
     -   コマンドが成功する期間
     -   コマンドが失敗する期間

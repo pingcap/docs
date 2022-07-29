@@ -30,7 +30,7 @@ SHOW PUMP STATUS;
 2 rows in set (0.00 sec)
 ```
 
-pump1の状態が1日以上更新されておらず、 Pumpが異常な状態になっていることがわかりますが、 `State`は`Online`のままです。 `CHANGE PUMP`を使用した後、Pumpの`State`は「一時停止」に変更されます。
+pump1の状態が1日以上更新されておらず、 Pumpが異常な状態になっていることがわかりますが、 `State`は`Online`のままです。 `CHANGE PUMP`を使用した後、ポンプの`State`は「一時停止」に変更されます。
 
 {{< copyable "" >}}
 

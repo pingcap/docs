@@ -39,7 +39,7 @@ DESC cluster_hardware;
     -   `disk` ：ディスク名。
     -   `net` ：ネットワークカード名。
 -   `NAME` ：ハードウェアの異なる情報名。たとえば、CPUには2つの情報名があります`cpu-logical-cores`と`cpu-physical-cores`は、それぞれ論理コア番号と物理コア番号を意味します。
--   `VALUE` ：ディスクボリュームやCPUコア番号などの対応するハードウェア情報の値。
+-   `VALUE` ：ディスクボリュームやCPUコア番号など、対応するハードウェア情報の値。
 
 次の例は、 `CLUSTER_HARDWARE`テーブルを使用してCPU情報を照会する方法を示しています。
 

@@ -55,7 +55,7 @@ Query OK, 1 row affected (0.03 sec)
 
 -   `AUTO_INCREMENT`列に`NULL`を割り当てることができるため、最初の`INSERT`ステートメントは成功します。 TiDBはシーケンス番号を自動的に生成します。
 -   `age`列が`NOT NULL`として定義されているため、2番目の`INSERT`ステートメントは失敗します。
--   `last_login`列が`NOT NULL`として明示的に定義されていないため、3番目の`INSERT`ステートメントは成功します。デフォルトではNULL値が許可されています。
+-   `last_login`列が`NOT NULL`として明示的に定義されていないため、3番目の`INSERT`ステートメントは成功します。 NULL値はデフォルトで許可されています。
 
 ## 小切手 {#check}
 
@@ -79,7 +79,7 @@ SELECT * FROM users;
 
 ## ユニークキー {#unique-key}
 
-トランザクションモードと`tidb_constraint_check_in_place`の値に応じて、TiDBは`UNIQUE`の制約をチェックする場合があります[怠惰に](/transaction-overview.md#lazy-check-of-constraints) 。これは、ネットワークアクセスをバッチ処理することでパフォーマンスを向上させるのに役立ちます。
+トランザクションモードと`tidb_constraint_check_in_place`の値に応じて、TiDBは`UNIQUE`の制約をチェックする場合があります[怠惰に](/transaction-overview.md#lazy-check-of-constraints) 。これは、ネットワークアクセスをバッチ処理することにより、パフォーマンスの向上に役立ちます。
 
 例えば：
 
@@ -147,7 +147,7 @@ ERROR 1062 (23000): Duplicate entry 'bill' for key 'username'
 
 楽観的な例では、トランザクションがコミットされるまで一意のチェックが遅延されました。値`bill`がすでに存在していたため、これにより重複キーエラーが発生しました。
 
-`tidb_constraint_check_in_place`を`1`に設定すると、この動作を無効にできます。悲観的トランザクションモードでは、ステートメントの実行時に制約が常にチェックされるため、この変数設定は悲観的トランザクションには影響しません。 `tidb_constraint_check_in_place=1`の場合、ステートメントの実行時に一意性制約がチェックされます。
+`tidb_constraint_check_in_place`から`1`に設定すると、この動作を無効にできます。悲観的トランザクションモードでは、ステートメントの実行時に制約が常にチェックされるため、この変数設定は悲観的トランザクションには影響しません。 `tidb_constraint_check_in_place=1`の場合、ステートメントの実行時に一意性制約がチェックされます。
 
 例えば：
 
@@ -241,7 +241,7 @@ Query OK, 0 rows affected (0.10 sec)
 ```
 
 -   列`a`が主キーとして定義されており、NULL値を許可していないため、表`t2`を作成できませんでした。
--   テーブルには主キーが1つしかないため、テーブル`t3`を作成できませんでした。
+-   テーブルは主キーを1つしか持つことができないため、テーブル`t3`の作成に失敗しました。
 -   表`t4`は正常に作成されました。これは、主キーが1つしかない場合でも、TiDBは複数の列を複合主キーとして定義することをサポートしているためです。
 
 上記のルールに加えて、TiDBは現在、 `NONCLUSTERED`タイプの主キーの追加と削除のみをサポートしています。例えば：
@@ -274,7 +274,7 @@ Query OK, 0 rows affected (0.10 sec)
 
 > **ノート：**
 >
-> TiDBは、外部キー制約のサポートを制限しています。
+> TiDBは、外部キー制約のサポートが制限されています。
 
 TiDBは、DDLコマンドでの`FOREIGN KEY`の制約の作成をサポートしています。
 
@@ -311,7 +311,7 @@ FROM information_schema.key_column_usage WHERE table_name IN ('users', 'orders')
 3 rows in set (0.00 sec)
 ```
 
-TiDBは、 `ALTER TABLE`コマンドを介した`DROP FOREIGN KEY`および`ADD FOREIGN KEY`の構文もサポートしています。
+TiDBは、 `ALTER TABLE`コマンドを介して`DROP FOREIGN KEY`と`ADD FOREIGN KEY`の構文もサポートしています。
 
 {{< copyable "" >}}
 
@@ -322,7 +322,7 @@ ALTER TABLE orders ADD FOREIGN KEY fk_user_id (user_id) REFERENCES users(id);
 
 ### ノート {#notes}
 
--   TiDBは外部キーをサポートして、他のデータベースからTiDBにデータを移行するときにこの構文によって引き起こされるエラーを回避します。
+-   TiDBは、他のデータベースからTiDBにデータを移行するときにこの構文によって引き起こされるエラーを回避するために、外部キーをサポートしています。
 
     ただし、TiDBはDMLステートメントの外部キーに対して制約チェックを実行しません。たとえば、usersテーブルにid = 123のレコードがない場合でも、次のトランザクションを正常に送信できます。
 

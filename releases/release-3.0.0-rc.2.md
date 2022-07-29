@@ -17,7 +17,7 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 ## TiDB {#tidb}
 
 -   SQLオプティマイザー
-    -   より多くのシナリオに参加するインデックスをサポートする[＃10540](https://github.com/pingcap/tidb/pull/10540)
+    -   より多くのシナリオでインデックスに参加をサポート[＃10540](https://github.com/pingcap/tidb/pull/10540)
     -   履歴統計のエクスポートをサポート[＃10291](https://github.com/pingcap/tidb/pull/10291)
     -   単調に増加するインデックス列[＃10355](https://github.com/pingcap/tidb/pull/10355)でインクリメンタル`Analyze`操作をサポートします。
     -   `Order By`節[＃10488](https://github.com/pingcap/tidb/pull/10488)のNULL値を無視します
@@ -35,14 +35,14 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 -   サーバ
     -   TiKV [＃10301](https://github.com/pingcap/tidb/pull/10301)で障害が発生したときに、TiDBがTiKVへの新しい接続を継続的に作成する問題を修正します。
     -   書き込み競合エラーだけでなく、 `tidb_disable_txn_auto_retry`をすべての再試行可能なエラーに影響させる[＃10339](https://github.com/pingcap/tidb/pull/10339)
-    -   パラメータなしの`execute` [＃10144](https://github.com/pingcap/tidb/pull/10144)を`prepare`を使用して実行できるようにする
+    -   パラメータのない`execute` [＃10144](https://github.com/pingcap/tidb/pull/10144)を`prepare`を使用して実行できるようにする
     -   `tidb_back_off_weight`変数を追加して、バックオフ時間を制御します[＃10266](https://github.com/pingcap/tidb/pull/10266)
     -   デフォルト値の`tidb_disable_txn_auto_retry`から35を設定することにより、 `on`がデフォルト条件で自動コミットされていないトランザクションを再試行することを禁止し[＃10266](https://github.com/pingcap/tidb/pull/10266) 。
-    -   `RBAC`分の`role`のデータベース特権判断を修正[＃10261](https://github.com/pingcap/tidb/pull/10261)
+    -   `RBAC`人に`role`人のデータベース特権の判断を修正[＃10261](https://github.com/pingcap/tidb/pull/10261)
     -   悲観的なトランザクションモードをサポートする（実験的） [＃10297](https://github.com/pingcap/tidb/pull/10297)
     -   場合によっては、ロックの競合を処理するための待機時間を短縮します[＃10006](https://github.com/pingcap/tidb/pull/10006)
     -   リーダーノード[＃10256](https://github.com/pingcap/tidb/pull/10256)で障害が発生したときに、リージョンキャッシュがフォロワーノードにアクセスできるようにします。
-    -   `tidb_low_resolution_tso`の変数を追加して、バッチで取得されるTSOの数を制御し、TSOを取得するトランザクションの時間を短縮して、データの一貫性がそれほど厳密に要求されないシナリオに適応させます[＃10428](https://github.com/pingcap/tidb/pull/10428)
+    -   `tidb_low_resolution_tso`の変数を追加して、バッチで取得されるTSOの数を制御し、TSOを取得するトランザクションの時間を短縮して、データの整合性がそれほど厳密に要求されないシナリオに適応します[＃10428](https://github.com/pingcap/tidb/pull/10428)
 
 -   DDL
     -   古いバージョンの[＃10272](https://github.com/pingcap/tidb/pull/10272)のストレージにある文字セット名の大文字の問題を修正しました
@@ -59,7 +59,7 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 ## PD {#pd}
 
 -   リージョンメタデータを保存するには、デフォルトでリージョンストレージを有効にします[＃1524](https://github.com/pingcap/pd/pull/1524)
--   ホットリージョンスケジューリングが別のスケジューラによってプリエンプトされる問題を修正します[＃1522](https://github.com/pingcap/pd/pull/1522)
+-   ホットリージョンのスケジューリングが別のスケジューラーによってプリエンプトされる問題を修正します[＃1522](https://github.com/pingcap/pd/pull/1522)
 -   リーダーの優先順位が有効にならない問題を修正します[＃1533](https://github.com/pingcap/pd/pull/1533)
 -   13の[＃1535](https://github.com/pingcap/pd/pull/1535)インターフェースを追加し`ScanRegions`
 -   オペレーターを積極的にプッシュする[＃1536](https://github.com/pingcap/pd/pull/1536)
@@ -77,23 +77,23 @@ TiDB Ansibleバージョン：3.0.0-rc.2
 
 -   ラフトストア
     -   休止状態のリージョンをサポートして、raftstoreCPU1の消費を削減し[＃4591](https://github.com/tikv/tikv/pull/4591)
-    -   リーダーが学習者の`ReadIndex`の要求に応答しない問題を修正します[＃4653](https://github.com/tikv/tikv/pull/4653)
+    -   リーダーが学習者`ReadIndex`の要求に応答しない問題を修正します[＃4653](https://github.com/tikv/tikv/pull/4653)
     -   場合によってはリーダーの転送の失敗を修正[＃4684](https://github.com/tikv/tikv/pull/4684)
     -   場合によってはダーティリードの問題を修正します[＃4688](https://github.com/tikv/tikv/pull/4688)
     -   スナップショットが適用されたデータを失う場合があるという問題を修正します[＃4716](https://github.com/tikv/tikv/pull/4716)
 
 -   コプロセッサー
-    -   RPN関数を追加する
-        -   [＃4691](https://github.com/tikv/tikv/pull/4601) `LogicalOr`
-        -   [＃4602](https://github.com/tikv/tikv/pull/4602) `LTReal`
-        -   [＃4602](https://github.com/tikv/tikv/pull/4602) `LEReal`
-        -   [＃4602](https://github.com/tikv/tikv/pull/4602) `GTReal`
-        -   [＃4602](https://github.com/tikv/tikv/pull/4602) `GEReal`
-        -   [＃4602](https://github.com/tikv/tikv/pull/4602) `NEReal`
-        -   [＃4602](https://github.com/tikv/tikv/pull/4602) `EQReal`
-        -   [＃4720](https://github.com/tikv/tikv/pull/4720) `IsNull`
-        -   [＃4720](https://github.com/tikv/tikv/pull/4720) `IsTrue`
-        -   [＃4720](https://github.com/tikv/tikv/pull/4720) `IsFalse`
+    -   RPN関数をさらに追加する
+        -   `LogicalOr` [＃4691](https://github.com/tikv/tikv/pull/4601)
+        -   `LTReal` [＃4602](https://github.com/tikv/tikv/pull/4602)
+        -   `LEReal` [＃4602](https://github.com/tikv/tikv/pull/4602)
+        -   `GTReal` [＃4602](https://github.com/tikv/tikv/pull/4602)
+        -   `GEReal` [＃4602](https://github.com/tikv/tikv/pull/4602)
+        -   `NEReal` [＃4602](https://github.com/tikv/tikv/pull/4602)
+        -   `EQReal` [＃4602](https://github.com/tikv/tikv/pull/4602)
+        -   `IsNull` [＃4720](https://github.com/tikv/tikv/pull/4720)
+        -   `IsTrue` [＃4720](https://github.com/tikv/tikv/pull/4720)
+        -   `IsFalse` [＃4720](https://github.com/tikv/tikv/pull/4720)
         -   `Int`の比較演算を[＃4625](https://github.com/tikv/tikv/pull/4625)
         -   `Decimal`の比較演算を[＃4625](https://github.com/tikv/tikv/pull/4625)
         -   `String`の比較演算を[＃4625](https://github.com/tikv/tikv/pull/4625)
@@ -106,9 +106,9 @@ TiDB Ansibleバージョン：3.0.0-rc.2
         -   `Int`のMOD関数を[＃4727](https://github.com/tikv/tikv/pull/4727)
         -   `Real`のMOD関数を[＃4727](https://github.com/tikv/tikv/pull/4727)
         -   `Decimal`のMOD関数を[＃4727](https://github.com/tikv/tikv/pull/4727)
-        -   `Int`のマイナス演算を[＃4746](https://github.com/tikv/tikv/pull/4746)
-        -   `Real`のマイナス演算を[＃4746](https://github.com/tikv/tikv/pull/4746)
-        -   `Decimal`のマイナス演算を[＃4746](https://github.com/tikv/tikv/pull/4746)
+        -   `Int`のマイナス算術を[＃4746](https://github.com/tikv/tikv/pull/4746)
+        -   `Real`のマイナス算術を[＃4746](https://github.com/tikv/tikv/pull/4746)
+        -   `Decimal`のマイナス算術を[＃4746](https://github.com/tikv/tikv/pull/4746)
 
 ## ツール {#tools}
 
@@ -120,4 +120,4 @@ TiDB Ansibleバージョン：3.0.0-rc.2
     -   シャーディングされたデータベースとテーブルのマージをサポート[＃95](https://github.com/pingcap/tidb-lightning/pull/95)
     -   KV書き込み失敗の再試行メカニズムを追加します[＃176](https://github.com/pingcap/tidb-lightning/pull/176)
     -   デフォルト値の`table-concurrency`を63に更新し[＃175](https://github.com/pingcap/tidb-lightning/pull/175) 。
-    -   提供されていない場合は`tidb.pd-addr`と`tidb.port`を自動的に検出して、必要な構成アイテムを減らします[＃173](https://github.com/pingcap/tidb-lightning/pull/173)
+    -   必要な構成アイテムが提供されていない場合は、 `tidb.pd-addr`と`tidb.port`を自動的に検出して、必要な構成アイテムを減らします[＃173](https://github.com/pingcap/tidb-lightning/pull/173)

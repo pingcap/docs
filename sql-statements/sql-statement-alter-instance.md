@@ -5,7 +5,7 @@ summary: Learn the overview of the `ALTER INSTANCE` usage in TiDB.
 
 # ALTER INSTANCE {#alter-instance}
 
-`ALTER INSTANCE`ステートメントは、単一のTiDBインスタンスに変更を加えるために使用されます。現在、TiDBは`RELOAD TLS`句のみをサポートしています。
+`ALTER INSTANCE`ステートメントは、単一のTiDBインスタンスに変更を加えるために使用されます。現在、TiDBは`RELOAD TLS`節のみをサポートしています。
 
 ## TLSをリロード {#reload-tls}
 

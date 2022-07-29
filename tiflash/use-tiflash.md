@@ -6,7 +6,7 @@ title: Use TiFlash
 
 # TiFlashを使用する {#use-tiflash}
 
-TiFlashがデプロイされた後、データレプリケーションは自動的に開始されません。複製するテーブルを手動で指定する必要があります。
+TiFlashが展開された後、データ複製は自動的に開始されません。複製するテーブルを手動で指定する必要があります。
 
 TiDBを使用して中規模の分析処理用のTiFlashレプリカを読み取るか、TiSparkを使用して大規模な分析処理用のTiFlashレプリカを読み取ることができます。これは独自のニーズに基づいています。詳細については、次のセクションを参照してください。
 
@@ -27,11 +27,11 @@ TiFlashがTiKVクラスタに接続された後、デフォルトではデータ
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-上記のコマンドのパラメータは次のとおりです。
+上記のコマンドのパラメーターは次のとおりです。
 
 -   `count`はレプリカの数を示します。値が`0`の場合、レプリカは削除されます。
 
-同じテーブルで複数のDDLステートメントを実行すると、最後のステートメントのみが有効になります。次の例では、2つのDDLステートメントがテーブル`tpch50`で実行されますが、2番目のステートメント（レプリカを削除するため）のみが有効になります。
+同じテーブルで複数のDDLステートメントを実行すると、最後のステートメントのみが有効になることが保証されます。次の例では、2つのDDLステートメントがテーブル`tpch50`で実行されますが、2番目のステートメント（レプリカを削除するため）のみが有効になります。
 
 テーブルのレプリカを2つ作成します。
 
@@ -61,7 +61,7 @@ ALTER TABLE `tpch50`.`lineitem` SET TIFLASH REPLICA 0;
 
 -   v4.0.6より前のバージョンでは、 TiDB Lightningを使用してデータをインポートする前にTiFlashレプリカを作成すると、データのインポートが失敗します。テーブルのTiFlashレプリカを作成する前に、データをテーブルにインポートする必要があります。
 
--   TiDBとTiDB Lightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightningの手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
+-   TiDBとTiDB Lightningの両方がv4.0.6以降の場合、テーブルにTiFlashレプリカがあるかどうかに関係なく、 TiDB Lightningを使用してそのテーブルにデータをインポートできます。これにより、 TiDB Lightning手順が遅くなる可能性があることに注意してください。これは、LightningホストのNIC帯域幅、TiFlashノードのCPUとディスクの負荷、およびTiFlashレプリカの数によって異なります。
 
 -   PDスケジューリングのパフォーマンスが低下するため、1,000を超えるテーブルを複製しないことをお勧めします。この制限は、今後のバージョンで削除される予定です。
 
@@ -82,7 +82,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = '<db_name>
 -   `AVAILABLE`は、このテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`は利用可能、 `0`は利用不可を意味します。レプリカが使用可能になると、このステータスは変更されません。 DDLステートメントを使用してレプリカの数を変更すると、レプリケーションステータスが再計算されます。
 -   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` `1.0` 。 `1`は、少なくとも1つのレプリカが複製されることを意味します。
 
-### データベース用のTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
+### データベースのTiFlashレプリカを作成する {#create-tiflash-replicas-for-databases}
 
 テーブルのTiFlashレプリカを作成するのと同様に、MySQLクライアントを介してDDLステートメントをTiDBに送信して、特定のデータベース内のすべてのテーブルのTiFlashレプリカを作成できます。
 
@@ -94,7 +94,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 
 このステートメントで、 `count`はレプリカの数を示します。 `0`に設定すると、レプリカが削除されます。
 
-例：
+例:
 
 -   データベース内のすべてのテーブルに対して2つのレプリカを作成します`tpch50` ：
 
@@ -258,7 +258,7 @@ explain analyze select count(*) from test.t;
 
 エンジンの分離とは、対応する変数を構成することにより、すべてのクエリが指定されたエンジンのレプリカを使用するように指定することです。オプションのエンジンは、「tikv」、「tidb」（一部のTiDBシステムテーブルを格納し、ユーザーがアクティブに使用できないTiDBの内部メモリテーブル領域を示します）、および「tiflash」で、次の2つの構成レベルがあります。
 
--   TiDBインスタンスレベル、つまりINSTANCEレベル。 TiDB構成ファイルに次の構成項目を追加します。
+-   TiDBインスタンスレベル、つまりINSTANCEレベル。次の構成アイテムをTiDB構成ファイルに追加します。
 
     ```
     [isolation-read]
@@ -267,7 +267,7 @@ explain analyze select count(*) from test.t;
 
     **INSTANCEレベルのデフォルト設定は`[&quot;tikv&quot;, &quot;tidb&quot;, &quot;tiflash&quot;]`です。**
 
--   SESSIONレベル。次のステートメントを使用して構成します。
+-   セッションレベル。次のステートメントを使用して構成します。
 
     {{< copyable "" >}}
 
@@ -285,7 +285,7 @@ explain analyze select count(*) from test.t;
 
     SESSIONレベルのデフォルト構成は、TiDBINSTANCEレベルの構成を継承します。
 
-最終的なエンジン構成はセッションレベルの構成です。つまり、セッションレベルの構成はインスタンスレベルの構成をオーバーライドします。たとえば、INSTANCEレベルで「tikv」を構成し、SESSIONレベルで「tiflash」を構成した場合、TiFlashレプリカが読み取られます。最終的なエンジン構成が「tikv」と「tiflash」の場合、TiKVとTiFlashのレプリカが両方とも読み取られ、オプティマイザーは実行するのに適したエンジンを自動的に選択します。
+最終的なエンジン構成はセッションレベルの構成です。つまり、セッションレベルの構成はインスタンスレベルの構成をオーバーライドします。たとえば、INSTANCEレベルで「tikv」を構成し、SESSIONレベルで「tiflash」を構成した場合、TiFlashレプリカが読み取られます。最終的なエンジン構成が「tikv」と「tiflash」の場合、TiKVとTiFlashのレプリカが両方とも読み取られ、オプティマイザーは実行するより適切なエンジンを自動的に選択します。
 
 > **ノート：**
 >
@@ -311,7 +311,7 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように促します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記のステートメントで、 `tiflash[]`はオプティマイザにTiFlashレプリカを読み取るように要求します。 `tikv[]`を使用して、必要に応じてオプティマイザにTiKVレプリカを読み取るように求めることもできます。ヒント構文の詳細については、 [READ_FROM_STORAGE](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカがない場合、ヒントは無視され、警告が報告されます。さらに、ヒントはエンジン分離の前提でのみ有効になります。ヒントで指定されたエンジンがエンジン分離リストにない場合、ヒントも無視され、警告が報告されます。
 
@@ -321,11 +321,11 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 ### スマートセレクション、エンジン分離、および手動ヒントの関係 {#the-relationship-of-smart-selection-engine-isolation-and-manual-hint}
 
-上記の3つのTiFlashレプリカの読み取り方法では、エンジン分離により、エンジンの使用可能なレプリカの全体的な範囲が指定されます。この範囲内で、手動ヒントは、よりきめ細かいステートメントレベルおよびテーブルレベルのエンジン選択を提供します。最後に、CBOが決定を下し、指定されたエンジンリスト内のコスト見積もりに基づいてエンジンのレプリカを選択します。
+TiFlashレプリカを読み取る上記の3つの方法では、エンジンの分離により、エンジンの使用可能なレプリカの全体的な範囲が指定されます。この範囲内で、手動ヒントは、よりきめ細かいステートメントレベルおよびテーブルレベルのエンジン選択を提供します。最後に、CBOが決定を下し、指定されたエンジンリスト内のコスト見積もりに基づいてエンジンのレプリカを選択します。
 
 > **ノート：**
 >
-> `UPDATE ...`より前では、非読み取り専用SQLステートメント（たとえば、 `INSERT INTO ... SELECT` ）での`SELECT ... FOR UPDATE`レプリカからの読み取りの`DELETE ...`は定義されていません。 v4.0.3以降のバージョンでは、内部的にTiDBは非読み取り専用SQLステートメントのTiFlashレプリカを無視して、データの正確性を保証します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDBは非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの分離](#engine-isolation)の場合、TiDBはエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDBはヒントを無視します。
+> `DELETE ...`より前では、非読み取り専用SQLステートメント（たとえば、 `INSERT INTO ... SELECT` ）で`SELECT ... FOR UPDATE`レプリカから読み取る動作は定義されて`UPDATE ...`ません。 v4.0.3以降のバージョンでは、内部的にTiDBは非読み取り専用SQLステートメントのTiFlashレプリカを無視して、データの正確性を保証します。つまり、 [スマートセレクション](#smart-selection)の場合、TiDBは非TiFlashレプリカを自動的に選択します。 TiFlashレプリカ**のみ**を指定する[エンジンの分離](#engine-isolation)の場合、TiDBはエラーを報告します。 [手動ヒント](#manual-hint)の場合、TiDBはヒントを無視します。
 
 ## TiSparkを使用してTiFlashレプリカを読み取ります {#use-tispark-to-read-tiflash-replicas}
 
@@ -333,7 +333,7 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 > **ノート**
 >
-> このパラメーターが`tiflash`に設定されている場合、クエリに関係するすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカを持たないテーブルの場合、エラーが報告されます。このパラメーターが`tikv`に設定されている場合、TiKVレプリカのみが読み取られます。
+> このパラメーターが`tiflash`に設定されている場合、クエリに関係するすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカを持たないテーブルの場合、エラーが報告されます。このパラメーターを`tikv`に設定すると、TiKVレプリカのみが読み取られます。
 
 このパラメーターは、次のいずれかの方法で構成できます。
 
@@ -347,7 +347,7 @@ select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 
 
 -   リアルタイムでSparkシェルに`spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")`を設定します。
 
--   サーバーがbeeline経由で接続された後、Thriftサーバーに`set spark.tispark.isolation_read_engines=tiflash`を設定します。
+-   サーバーがbeeline経由で接続された後、Thriftサーバーで`set spark.tispark.isolation_read_engines=tiflash`を設定します。
 
 ## サポートされているプッシュダウン計算 {#supported-push-down-calculations}
 
@@ -360,10 +360,10 @@ TiFlashは、次の演算子のプッシュダウンをサポートしていま�
 -   TopN：TopN計算を実行します。
 -   制限：制限計算を実行します。
 -   プロジェクト：投影計算を実行します。
--   HashJoin： [ハッシュ参加](/explain-joins.md#hash-join)アルゴリズムを使用して結合計算を実行しますが、次の条件があります。
+-   HashJoin： [ハッシュ結合](/explain-joins.md#hash-join)アルゴリズムを使用して結合計算を実行しますが、次の条件があります。
     -   オペレーターは[MPPモード](#use-the-mpp-mode)でのみ押し下げることができます。
     -   サポートされている結合は、内部結合、左結合、半結合、反半結合、左半結合、および反左半結合です。
-    -   上記の結合は、等式結合と非等式結合（デカルト結合）の両方をサポートします。デカルト結合を計算するときは、シャッフルハッシュ結合アルゴリズムの代わりにブロードキャストアルゴリズムが使用されます。
+    -   上記の結合は、等結合と非等結合（デカルト結合）の両方をサポートします。デカルト結合を計算するときは、シャッフルハッシュ結合アルゴリズムの代わりにブロードキャストアルゴリズムが使用されます。
 -   ウィンドウ関数：現在、TiFlashはrow_number（）、rank（）、dense_rank（）をサポートしています。
 
 TiDBでは、演算子はツリー構造で編成されています。オペレーターをTiFlashにプッシュダウンするには、次のすべての前提条件が満たされている必要があります。
@@ -405,7 +405,7 @@ TiFlashは、MPPモードを使用したクエリの実行をサポートしま�
 
 ### MPPモードを選択するかどうかを制御します {#control-whether-to-select-the-mpp-mode}
 
-`tidb_allow_mpp`変数は、TiDBがクエリを実行するためにMPPモードを選択できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視するかどうかを制御し、TiFlashのMPPモードを使用してクエリを強制的に実行します。
+`tidb_allow_mpp`変数は、TiDBがクエリを実行するためにMPPモードを選択できるかどうかを制御します。 `tidb_enforce_mpp`変数は、オプティマイザーのコスト見積もりを無視し、TiFlashのMPPモードを強制的に使用してクエリを実行するかどうかを制御します。
 
 これら2つの変数のすべての値に対応する結果は次のとおりです。
 
@@ -445,7 +445,7 @@ set @@session.tidb_enforce_mpp=1;
 
 > **ノート：**
 >
-> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完成の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
+> `tidb_enforce_mpp=1`が有効になると、TiDBオプティマイザはコスト見積もりを無視してMPPモードを選択します。ただし、他の要因がMPPモードをブロックしている場合、TiDBはMPPモードを選択しません。これらの要因には、TiFlashレプリカの欠如、TiFlashレプリカの未完了の複製、およびMPPモードでサポートされていない演算子または関数を含むステートメントが含まれます。
 >
 > コスト見積もり以外の理由でTiDBオプティマイザがMPPモードを選択できない場合、 `EXPLAIN`ステートメントを使用して実行プランをチェックアウトすると、理由を説明する警告が返されます。例えば：
 >
@@ -468,9 +468,9 @@ set @@session.tidb_enforce_mpp=1;
 
 ### MPPモードのアルゴリズムサポート {#algorithm-support-for-the-mpp-mode}
 
-MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiver演算子が表示されている場合は、MPPモードが有効になっていることを示しています。
+MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitの物理アルゴリズムをサポートします。オプティマイザーは、クエリで使用するアルゴリズムを自動的に決定します。特定のクエリ実行プランを確認するには、 `EXPLAIN`ステートメントを実行します。 `EXPLAIN`ステートメントの結果にExchangeSenderおよびExchangeReceiver演算子が表示されている場合は、MPPモードが有効になっていることを示しています。
 
-次のステートメントは、TPC-Hテストセットのテーブル構造を例として取り上げています。
+次のステートメントは、例としてTPC-Hテストセットのテーブル構造を取り上げています。
 
 ```sql
 explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
@@ -495,7 +495,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 TiFlashは、ブロードキャストハッシュ結合を使用するかどうかを制御するために、次の2つのグローバル/セッション変数を提供します。
 
 -   [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位はバイトです。テーブルサイズ（バイト単位）が変数の値よりも小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
--   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを推定できないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+-   [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) ：値の単位は行です。結合操作のオブジェクトがサブクエリに属している場合、オプティマイザはサブクエリ結果セットのサイズを見積もることができないため、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値よりも少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
 ## MPPモードでパーティションテーブルにアクセスする {#access-partitioned-tables-in-the-mpp-mode}
 
@@ -589,7 +589,7 @@ v5.4.0以降、TiFlashはより高度なデータ検証機能を導入してい�
 | V2    | バージョン&lt;v6.0.0のデフォルト  | ハッシュはデータファイルに埋め込まれています。                                   | V1と比較して、V2は列データの統計を追加します。 |
 | V3    | バージョン&gt;=v6.0.0のデフォルト | V3には、メタデータとトークンデータのチェックサムが含まれており、複数のハッシュアルゴリズムをサポートしています。 | v5.4.0の新機能。               |
 
-DTFileは、データファイルディレクトリの`stable`フォルダに保存されます。現在有効になっているすべての形式はフォルダ形式です。つまり、データは`dmf_<file id>`のような名前のフォルダの下にある複数のファイルに保存されます。
+DTFileは、データファイルディレクトリの`stable`フォルダに保存されます。現在有効になっているすべての形式はフォルダー形式です。つまり、データは`dmf_<file id>`のような名前のフォルダーの下にある複数のファイルに保存されます。
 
 #### データ検証を使用する {#use-data-validation}
 
@@ -598,16 +598,16 @@ TiFlashは、自動データ検証と手動データ検証の両方をサポー�
 -   自動データ検証：
     -   v6.0.0以降のバージョンでは、デフォルトでV3検証メカニズムが使用されます。
     -   v6.0.0より前のバージョンでは、デフォルトでV2検証メカニズムが使用されます。
-    -   検証メカニズムを手動で切り替えるには、 [TiFlash構成ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルトの構成はテストによって検証されているため、推奨されます。
+    -   検証メカニズムを手動で切り替えるには、 [TiFlash構成ファイル](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)を参照してください。ただし、デフォルトの構成はテストによって検証されるため、推奨されます。
 -   手動データ検証。 [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect)を参照してください。
 
 > **警告：**
 >
-> V3検証メカニズムを有効にすると、新しく生成されたDTFileをv5.4.0より前のTiFlashで直接読み取ることはできません。 v5.4.0以降、TiFlashはV2とV3の両方をサポートし、バージョンを積極的にアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で[バージョンの切り替え](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を実行する必要があります。
+> V3検証メカニズムを有効にすると、新しく生成されたDTFileをv5.4.0より前のTiFlashで直接読み取ることはできません。 v5.4.0以降、TiFlashはV2とV3の両方をサポートし、バージョンを積極的にアップグレードまたはダウングレードしません。既存のファイルのバージョンをアップグレードまたはダウングレードする必要がある場合は、手動で[バージョンの切り替え](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を行う必要があります。
 
 #### 検証ツール {#validation-tool}
 
-TiFlashがデータを読み取るときに実行される自動データ検証に加えて、データの整合性を手動でチェックするためのツールがv5.4.0で導入されています。詳しくは[DTTool](/tiflash/tiflash-command-line-flags.md#dttool-inspect)をご覧ください。
+TiFlashがデータを読み取るときに実行される自動データ検証に加えて、データの整合性を手動でチェックするためのツールがv5.4.0で導入されました。詳しくは[DTTool](/tiflash/tiflash-command-line-flags.md#dttool-inspect)をご覧ください。
 
 ## ノート {#notes}
 
@@ -618,7 +618,7 @@ TiFlashがデータを読み取るときに実行される自動データ検証�
     -   ウィンドウ関数はサポートされていません。
     -   TiKVからのデータの読み取りはサポートされていません。
     -   現在、TiFlashの`sum`関数は文字列型引数をサポートしていません。ただし、TiDBは、コンパイル中に文字列型の引数が`sum`関数に渡されたかどうかを識別できません。したがって、 `select sum(string_col) from t`と同様のステートメントを実行すると、TiFlashは`[FLASH:Coprocessor:Unimplemented] CastStringAsReal is not supported.`エラーを返します。この場合のこのようなエラーを回避するには、このSQLステートメントを`select sum(cast(string_col as double)) from t`に変更する必要があります。
-    -   現在、TiFlashの小数除算の計算はTiDBの計算と互換性がありません。たとえば、小数を除算する場合、TiFlashは常にコンパイルから推測されたタイプを使用して計算を実行します。ただし、TiDBは、コンパイルから推測されるタイプよりも正確なタイプを使用してこの計算を実行します。したがって、10進数の除算を含む一部のSQLステートメントは、TiDB+TiKVとTiDB+TiFlashで実行されたときに異なる実行結果を返します。例えば：
+    -   現在、TiFlashの小数除算の計算はTiDBの計算と互換性がありません。たとえば、小数を除算する場合、TiFlashは常にコンパイルから推測されたタイプを使用して計算を実行します。ただし、TiDBは、コンパイルから推測されるタイプよりも正確なタイプを使用してこの計算を実行します。したがって、10進除算を含む一部のSQLステートメントは、TiDB+TiKVおよびTiDB+TiFlashで実行されたときに異なる実行結果を返します。例えば：
 
         ```sql
         mysql> create table t (a decimal(3,0), b decimal(10, 0));
@@ -642,4 +642,4 @@ TiFlashがデータを読み取るときに実行される自動データ検証�
         Empty set (0.01 sec)
         ```
 
-        上記の例では、コンパイルから推測される`a/b`の型は、TiDBとTiFlashの両方で`Decimal(7,4)`です。 `Decimal(7,4)`によって制約され、 `a/b`の返されるタイプは`0.0000`である必要があります。 TiDBでは、 `a/b`の実行時精度は`Decimal(7,4)`よりも高いため、元のテーブルデータは`where a/b`条件によってフィルタリングされません。ただし、TiFlashでは、 `a/b`の計算では結果タイプとして`Decimal(7,4)`が使用されるため、元のテーブルデータは`where a/b`条件でフィルタリングされます。
+        上記の例では、コンパイルから推測される`a/b`の型は、TiDBとTiFlashの両方で`Decimal(7,4)`です。 `Decimal(7,4)`によって制約され、 `a/b`の返されるタイプは`0.0000`である必要があります。 TiDBでは、 `a/b`の実行時精度は`Decimal(7,4)`よりも高いため、元のテーブルデータは`where a/b`条件でフィルタリングされません。ただし、TiFlashでは、 `a/b`の計算では結果タイプとして`Decimal(7,4)`が使用されるため、元のテーブルデータは`where a/b`条件でフィルタリングされます。

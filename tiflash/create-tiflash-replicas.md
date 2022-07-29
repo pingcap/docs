@@ -84,7 +84,7 @@ ALTER DATABASE db_name SET TIFLASH REPLICA count;
 
 このステートメントで、 `count`はレプリカの数を示します。 `0`に設定すると、レプリカが削除されます。
 
-例：
+例:
 
 -   データベース内のすべてのテーブルに対して2つのレプリカを作成します`tpch50` ：
 

@@ -27,7 +27,7 @@ title: TiDB 1.0 release notes
 
 -   コプロセッサーは、より多くのプッシュダウン関数をサポートするようになりました
 -   サンプリング操作のプッシュダウンをサポート
--   データコンパクトの手動トリガーをサポートして、スペースをすばやく収集します
+-   スペースをすばやく収集するためのデータコンパクトの手動トリガーをサポート
 -   パフォーマンスと安定性を向上させる
 -   デバッグ用のデバッグAPIを追加します
 -   TiSparkベータリリース：
@@ -76,8 +76,8 @@ title: TiDB 1.0 release notes
 -   白揚
 -   バイラオヘ
 -   ビン劉
--   宇宙を非難する
--   Breezewish
+-   宇宙のせい
+-   そよ風
 -   カルロス・フェレイラ
 -   セガオ
 -   Changjian Zhang
@@ -98,7 +98,7 @@ title: TiDB 1.0 release notes
 -   ディタン
 -   ディスク
 -   ドンシュ
--   dreamquster
+-   ドリームクスター
 -   ドラゴン
 -   デュチュアン
 -   ディラン・ウェン
@@ -116,12 +116,12 @@ title: TiDB 1.0 release notes
 -   グレゴリー・イアン
 -   Guanqun Lu
 -   GuilhermeHübnerFranco
--   Haibin Xie
+-   ハイビン謝
 -   韓非
 -   ホーキングレイ
 -   中村博昭
 -   hiwjd
--   王宏源
+-   王紅源
 -   胡明
 -   胡Ziming
 -   Huachao Huang
@@ -129,7 +129,7 @@ title: TiDB 1.0 release notes
 -   ハクスリーフー
 -   iamxy
 -   イアン
--   インション
+-   インシオン
 -   iroi44
 -   Ivan.Yang
 -   ジャック・ユー
@@ -142,8 +142,8 @@ title: TiDB 1.0 release notes
 -   Jiaxing Liang
 -   Jie Zhou
 -   ジンヘリン
--   ジョナサン・ブール
--   カール・オステンドルフ
+-   ジョナサンブール
+-   カールオステンドルフ
 -   knarfeh
 -   クイバ
 -   leixuechun
@@ -151,10 +151,10 @@ title: TiDB 1.0 release notes
 -   李志海
 -   遼強
 -   光
--   リージェン
+-   リジアン
 -   リリアン・リー
 -   リキュールLibrazy
--   劉琶
+-   劉琢
 -   劉Shaohui
 -   liubo0127
 -   liyanan
@@ -209,7 +209,7 @@ title: TiDB 1.0 release notes
 -   sllt
 -   スープ
 -   スフィンクス
--   ステフェン
+-   シュテファン
 -   sumBug
 -   sunhao2017
 -   タオメン
@@ -217,12 +217,12 @@ title: TiDB 1.0 release notes
 -   テニックス
 -   tiancaiamao
 -   TianGuangyu
--   トリスタン・スー
+-   トリスタンスー
 -   ueizhou
 -   UncP
 -   Unknwon
 -   v01dstar
--   バン
+-   ヴァン
 -   WangXiangUSTC
 -   ワンヤンジュン
 -   wangyisong1996

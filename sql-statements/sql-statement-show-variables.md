@@ -3,7 +3,7 @@ title: SHOW [GLOBAL|SESSION] VARIABLES | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW [GLOBAL|SESSION] VARIABLES for the TiDB database.
 ---
 
-# [グローバル|セッション]変数を表示 {#show-global-session-variables}
+# [グローバル|セッション]変数を表示する {#show-global-session-variables}
 
 このステートメントは、 `GLOBAL`または`SESSION`のスコープの変数のリストを示しています。スコープが指定されていない場合、デフォルトのスコープ`SESSION`が適用されます。
 
@@ -150,7 +150,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'time_zone%';
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 

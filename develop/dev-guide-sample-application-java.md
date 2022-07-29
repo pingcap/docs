@@ -911,7 +911,7 @@ public interface PlayerMapperEx extends PlayerMapper {
 </mapper>
 ```
 
-`PlayerDAO.java`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。その中で、Mybatisは、オブジェクトマッピングや基本オブジェクトのCRUDなどの多数の操作をカプセル化し、コードを大幅に簡素化します。
+`PlayerDAO.java`はデータの管理に使用されるクラスで、 `DAO`は[データアクセスオブジェクト](https://en.wikipedia.org/wiki/Data_access_object)を意味します。このクラスは、データを書き込むための一連のデータ操作メソッドを定義します。 Mybatisには、オブジェクトマッピングや基本オブジェクトのCRUDなどの多数の操作がカプセル化されているため、コードが大幅に簡素化されます。
 
 {{< copyable "" >}}
 

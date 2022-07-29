@@ -5,7 +5,7 @@ summary: An overview of the usage of CREATE DATABASE for the TiDB database.
 
 # データベースの作成 {#create-database}
 
-このステートメントは、TiDBに新しいデータベースを作成します。 &#39;データベース&#39;のMySQL用語は、SQL標準のスキーマに最も近いものです。
+このステートメントは、TiDBに新しいデータベースを作成します。 &#39;データベース&#39;のMySQL用語は、SQL標準のスキーマに最も密接に対応しています。
 
 ## あらすじ {#synopsis}
 
@@ -62,7 +62,7 @@ mysql> SHOW TABLES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 

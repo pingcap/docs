@@ -9,7 +9,7 @@ summary: Learn how to replicate data from TiDB to Apache Kafka
 
 -   TiCDCクラスタとKafkaクラスタをデプロイします。
 -   Kafkaをシンクとしてチェンジフィードを作成します。
--   go-tpcを使用してTiDBクラスタにデータを書き込みます。 Kafkaコンソールコンシューマーで、データが指定されたKafkaトピックにレプリケートされていることを確認します。
+-   go-tpcを使用して、TiDBクラスタにデータを書き込みます。 Kafkaコンソールコンシューマーで、データが指定されたKafkaトピックにレプリケートされていることを確認します。
 
 これらの手順は、ラボ環境で実行されます。これらの手順を参照して、実稼働環境にクラスタをデプロイすることもできます。
 
@@ -35,7 +35,7 @@ summary: Learn how to replicate data from TiDB to Apache Kafka
     -   Kafkaクラスタをすばやくデプロイするには、 [ApacheKakfaクイックスタート](https://kafka.apache.org/quickstart)を参照してください。
     -   Kafkaクラスタを実稼働環境にデプロイするには、 [Kafkaを本番環境で実行する](https://docs.confluent.io/platform/current/kafka/deployment.html)を参照してください。
 
-## ステップ2.チェンジフィードを作成する {#step-2-create-a-changefeed}
+## 手順2.チェンジフィードを作成する {#step-2-create-a-changefeed}
 
 tiup ctlを使用して、Kafkaをダウンストリームノードとして変更フィードを作成します。
 
@@ -57,7 +57,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092/kafka-topic-name?protocol=canal-json",
 
 コマンドが情報を返さない場合は、コマンドが実行されたサーバーからターゲットのKafkaクラスタへのネットワーク接続を確認する必要があります。
 
-実稼働環境では、Kafkaクラスタには複数のブローカーノードがあります。したがって、複数のブローカーのアドレスをシンクUIRに追加できます。これにより、Kafkaクラスタへの安定したアクセスが向上します。 Kafkaクラスタに障害が発生しても、チェンジフィードは引き続き機能します。 Kafkaクラスタに3つのブローカーノードがあり、IPアドレスがそれぞれ127.0.0.1:9092、127.0.0.2:9092、および127.0.0.3:9092であるとします。次のシンクURIを使用してチェンジフィードを作成できます。
+実稼働環境では、Kafkaクラスタには複数のブローカーノードがあります。したがって、複数のブローカーのアドレスをシンクUIRに追加できます。これにより、Kafkaクラスタへの安定したアクセスが向上します。 Kafkaクラスタに障害が発生した場合でも、チェンジフィードは機能します。 Kafkaクラスタに3つのブローカーノードがあり、IPアドレスがそれぞれ127.0.0.1:9092、127.0.0.2:9092、および127.0.0.3:9092であるとします。次のシンクURIを使用してチェンジフィードを作成できます。
 
 {{< copyable "" >}}
 
@@ -73,11 +73,11 @@ tiup ctl cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://
 tiup ctl cdc changefeed list --pd="http://127.0.0.1:2379"
 ```
 
-[レプリケーションタスクの管理（ `changefeed` ）](/ticdc/manage-ticdc.md#manage-replication-tasks-changefeed)で指示されているように、チェンジフィードのステータスを管理できます。
+[レプリケーションタスクの管理（ `changefeed` ）](/ticdc/manage-ticdc.md#manage-replication-tasks-changefeed)の指示に従って、チェンジフィードのステータスを管理できます。
 
 ## ステップ3.TiDBクラスタでデータ変更を生成する {#step-3-generate-data-changes-in-the-tidb-cluster}
 
-チェンジフィードが作成された後、 `DELETE`クラスタで`INSERT` 、または`UPDATE`操作などのイベント変更が発生すると、データ変更がTiCDCで生成されます。次に、TiCDCはデータ変更をチェンジフィードで指定されたシンクに複製します。このドキュメントでは、シンクはKafkaであり、データ変更は指定されたKafkaトピックに書き込まれます。
+チェンジフィードが作成された後、 `DELETE`クラスタで`INSERT` 、または`UPDATE`操作などのイベント変更が発生すると、データ変更がTiCDCで生成されます。次に、TiCDCは、変更フィードで指定されたシンクにデータ変更を複製します。このドキュメントでは、シンクはKafkaであり、データの変更は指定されたKafkaトピックに書き込まれます。
 
 1.  サービスのワークロードをシミュレートします。
 

@@ -9,7 +9,7 @@ TiDBには、システムの障害や隠れた問題を検出するための診�
 
 `INSPECTION_RESULT`の診断機能は、問題をすばやく見つけて、繰り返しの手作業を減らすのに役立ちます。 `select * from information_schema.inspection_result`ステートメントを使用して、内部診断をトリガーできます。
 
-`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構成は次のとおりです。
+`information_schema.inspection_result`診断結果表`information_schema.inspection_result`の構造は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -38,19 +38,19 @@ DESC inspection_result;
 フィールドの説明：
 
 -   `RULE` ：診断ルールの名前。現在、次のルールを使用できます。
-    -   `config` ：構成が一貫していて適切かどうかを確認します。同じ構成が異なるインスタンスで一貫していない場合、 `warning`の診断結果が生成されます。
+    -   `config` ：構成が一貫していて適切かどうかを確認します。同じ構成が異なるインスタンスで矛盾している場合、 `warning`の診断結果が生成されます。
     -   `version` ：バージョンの整合性チェック。同じバージョンが異なるインスタンスで一貫していない場合、 `warning`の診断結果が生成されます。
     -   `node-load` ：サーバーの負荷を確認します。現在のシステム負荷が高すぎる場合、対応する`warning`の診断結果が生成されます。
-    -   `critical-error` ：システムの各モジュールは重大なエラーを定義します。対応する期間内に重大なエラーがしきい値を超えると、警告診断結果が生成されます。
+    -   `critical-error` ：システムの各モジュールは重大なエラーを定義します。重大なエラーが対応する期間内にしきい値を超えると、警告診断結果が生成されます。
     -   `threshold-check` ：診断システムは主要なメトリックのしきい値をチェックします。しきい値を超えると、対応する診断情報が生成されます。
 -   `ITEM` ：各ルールは異なるアイテムを診断します。このフィールドは、各ルールに対応する特定の診断項目を示します。
--   `TYPE` ：診断のインスタンスタイプ。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `TYPE` ：診断のインスタンスタイプ。オプションの値は、 `tidb` 、および`pd` `tikv` 。
 -   `INSTANCE` ：診断されたインスタンスの特定のアドレス。
 -   `STATUS_ADDRESS` ：インスタンスのHTTPAPIサービスアドレス。
 -   `VALUE` ：特定の診断項目の値。
--   `REFERENCE` ：この診断項目の基準値（しきい値）。 `VALUE`がしきい値を超えると、対応する診断情報が生成されます。
+-   `REFERENCE` ：この診断項目の参照値（しきい値）。 `VALUE`がしきい値を超えると、対応する診断情報が生成されます。
 -   `SEVERITY` ：重大度レベル。オプションの値は`warning`と`critical`です。
--   `DETAILS` ：診断の詳細。さらに診断するためのSQLステートメントまたはドキュメントリンクが含まれている場合があります。
+-   `DETAILS` ：診断の詳細。これには、さらに診断するためのSQLステートメントまたはドキュメントリンクも含まれる場合があります。
 
 ## 診断例 {#diagnostics-example}
 
@@ -220,7 +220,7 @@ select * from information_schema.inspection_rules where type='inspection';
     storage.block-cache.capacity
     ```
 
--   次の構成項目の値が期待どおりかどうかを確認してください。
+-   以下の構成項目の値が期待どおりかどうかを確認してください。
 
     | 成分   | Configuration / コンフィグレーション項目 | 期待値      |
     | ---- | ---------------------------- | -------- |
@@ -229,7 +229,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 ### <code>version</code>診断ルール {#code-version-code-diagnostic-rule}
 
-`version`診断ルールは、 `CLUSTER_INFO`システムテーブルをクエリすることにより、同じコンポーネントのバージョンハッシュが一貫しているかどうかをチェックします。次の例を参照してください。
+`version`診断ルールは、 `CLUSTER_INFO`システムテーブルにクエリを実行して、同じコンポーネントのバージョンハッシュが一貫しているかどうかを確認します。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -253,27 +253,27 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `critical-error`つの診断ルールでは、次の2つの診断ルールが実行されます。
 
--   メトリックスキーマ内の関連する監視システムテーブルをクエリして、クラスタに次のエラーがあるかどうかを検出します。
+-   メトリックスキーマ内の関連する監視システムテーブルにクエリを実行して、クラスタに次のエラーがあるかどうかを検出します。
 
     | 成分   | エラー名                    | モニタリングテーブル                           | エラーの説明                                     |
     | ---- | ----------------------- | ------------------------------------ | ------------------------------------------ |
     | TiDB | パニックカウント                | tidb_panic_count_total_count         | パニックはTiDBで発生します。                           |
     | TiDB | binlog-エラー              | tidb_binlog_error_total_count        | TiDBがbinlogを書き込むときにエラーが発生します。              |
     | TiKV | クリティカル・エラー              | tikv_critical_error_total_coun       | TiKVの重大なエラー。                               |
-    | TiKV | スケジューラーは忙しい             | tikv_scheduler_is_busy_total_count   | TiKVスケジューラがビジー状態であるため、TiKVが一時的に使用できなくなります。 |
+    | TiKV | スケジューラーはビジーです           | tikv_scheduler_is_busy_total_count   | TiKVスケジューラがビジー状態であるため、TiKVが一時的に使用できなくなります。 |
     | TiKV | コプロセッサーはビジーです           | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジーすぎます。                       |
     | TiKV | チャネルがいっぱいです             | tikv_channel_full_total_count        | 「チャネルフル」エラーはTiKVで発生します。                    |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall              | 「ストール」エラーはTiKVで発生します。                      |
 
--   `metrics_schema.up`の監視テーブルと`CLUSTER_LOG`のシステムテーブルを照会して、コンポーネントが再起動されているかどうかを確認します。
+-   `metrics_schema.up`の監視テーブルと`CLUSTER_LOG`のシステムテーブルにクエリを実行して、コンポーネントが再起動されているかどうかを確認します。
 
 ### <code>threshold-check</code>診断ルール {#code-threshold-check-code-diagnostic-rule}
 
-`threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルをクエリすることにより、クラスタの次のメトリックがしきい値を超えているかどうかをチェックします。
+`threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルにクエリを実行して、クラスタの次のメトリックがしきい値を超えているかどうかを確認します。
 
 | 成分   | モニタリングメトリック            | モニタリングテーブル                          | 期待値       | 説明                                                                                                                 |
 | :--- | :--------------------- | :---------------------------------- | :-------- | :----------------------------------------------------------------------------------------------------------------- |
-| TiDB | tso-期間                 | pd_tso_wait_duration                | &lt;50ms  | トランザクションのTSOを取得するための待機時間。                                                                                          |
+| TiDB | tso-duration           | pd_tso_wait_duration                | &lt;50ms  | トランザクションのTSOを取得するための待機時間。                                                                                          |
 | TiDB | get-token-duration     | tidb_get_token_duration             | &lt;1ms   | トークンの取得にかかる時間を照会します。関連するTiDB構成アイテムは[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
 | TiDB | load-schema-duration   | tidb_load_schema_duration           | &lt;1秒    | TiDBがスキーマメタデータを更新するのにかかる時間。                                                                                        |
 | TiKV | スケジューラー-cmd-期間         | tikv_scheduler_command_duration     | &lt;0.1秒  | TiKVが`cmd`要求を実行するのにかかる時間。                                                                                          |
@@ -281,24 +281,24 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | ストレージ-書き込み-期間          | tikv_storage_async_request_duration | &lt;0.1秒  | TiKVの書き込みレイテンシ。                                                                                                    |
 | TiKV | ストレージ-スナップショット-期間      | tikv_storage_async_request_duration | &lt;50ms  | TiKVがスナップショットを取得するのにかかる時間。                                                                                         |
 | TiKV | rocksdb-書き込み-期間        | tikv_engine_write_duration          | &lt;100ms | TiKVRocksDBの書き込みレイテンシ。                                                                                             |
-| TiKV | rocksdb-get-duration   | tikv_engine_max_get_duration        | &lt;50ms  | TiKVRocksDBの読み取りレイテンシ。                                                                                             |
+| TiKV | rocksdb-get-duration   | tikv_engine_max_get_duration        | &lt;50ms  | TiKVRocksDBの読み取りレイテンシー。                                                                                            |
 | TiKV | rocksdb-seek-duration  | tikv_engine_max_seek_duration       | &lt;50ms  | TiKVRocksDBが`seek`を実行するまでの待ち時間。                                                                                    |
 | TiKV | スケジューラー保留中のcmd-coun    | tikv_scheduler_pending_commands     | &lt;1000  | TiKVで停止したコマンドの数。                                                                                                   |
 | TiKV | index-block-cache-hit  | tikv_block_index_cache_hit          | 0.95      | TiKVのインデックスブロックキャッシュのヒット率。                                                                                         |
 | TiKV | filter-block-cache-hit | tikv_block_filter_cache_hit         | 0.95      | TiKVのフィルターブロックキャッシュのヒット率。                                                                                          |
-| TiKV | data-block-cache-hit   | tikv_block_data_cache_hit           | 0.80      | TiKVのデータブロックキャッシュのヒット率。                                                                                            |
+| TiKV | データブロックキャッシュヒット        | tikv_block_data_cache_hit           | 0.80      | TiKVのデータブロックキャッシュのヒット率。                                                                                            |
 | TiKV | リーダー-スコア-バランス          | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのリーダースコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                   |
-| TiKV | リージョンスコアバランス           | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのRegionスコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                 |
+| TiKV | リージョン-スコア-バランス         | pd_scheduler_store_status           | &lt;0.05  | 各TiKVインスタンスのリージョンスコアのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は5％未満です。                                                  |
 | TiKV | 店舗利用可能残高               | pd_scheduler_store_status           | &lt;0.2   | 各TiKVインスタンスの使用可能なストレージのバランスが取れているかどうかを確認します。インスタンス間の予想される差異は20％未満です。                                               |
 | TiKV | リージョンカウント              | pd_scheduler_store_status           | &lt;20000 | 各TiKVインスタンスのリージョン数を確認します。 1つのインスタンスで予想されるリージョンの数は20,000未満です。                                                       |
-| PD   | 地域の健康                  | pd_region_health                    | &lt;100   | クラスタでスケジューリング中のリージョンの数を検出します。予想される数は合計で100未満です。                                                                    |
+| PD   | 地域の健康                  | pd_region_health                    | &lt; 100  | クラスタでスケジューリングを処理しているリージョンの数を検出します。予想される数は合計で100未満です。                                                               |
 
 さらに、このルールは、TiKVインスタンス内の次のスレッドのCPU使用率が高すぎるかどうかもチェックします。
 
 -   スケジューラー-ワーカー-CPU
 -   コプロセッサー-通常-CPU
 -   コプロセッサー-high-cpu
--   コプロセッサー-low-cpu
+-   コプロセッサー-低CPU
 -   grpc-cpu
 -   raftstore-cpu
 -   apply-cpu

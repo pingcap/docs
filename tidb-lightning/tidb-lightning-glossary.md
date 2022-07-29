@@ -9,7 +9,7 @@ summary: List of special terms used in TiDB Lightning.
 
 <!-- A -->
 
-## A {#a}
+## あ {#a}
 
 ### 分析する {#analyze}
 
@@ -21,7 +21,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 すべてのテーブルには、自動インクリメント列のデフォルト値を提供する`AUTO_INCREMENT_ID`のカウンターが関連付けられています。 TiDBでは、このカウンターは行IDを割り当てるために追加で使用されます。
 
-TiDB LightningはTiDBを経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンターは自動的に更新されません。したがって、 TiDB Lightningは`AUTO_INCREMENT_ID`を有効な値に明示的に変更します。テーブルに`AUTO_INCREMENT`の列がない場合でも、このステップは常に実行されます。
+TiDB LightningはTiDBを経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンターは自動的に更新されません。したがって、 TiDB Lightningは明示的に`AUTO_INCREMENT_ID`を有効な値に変更します。テーブルに`AUTO_INCREMENT`の列がない場合でも、このステップは常に実行されます。
 
 <!-- B -->
 
@@ -29,7 +29,7 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### バックエンド {#back-end}
 
-バックエンドは、 TiDB Lightningが解析結果を送信する宛先です。 「バックエンド」とも表記されます。
+バックエンドは、 TiDB Lightningが解析結果を送信する宛先です。 「バックエンド」とも呼ばれます。
 
 詳細については、 [TiDB Lightningエンド](/tidb-lightning/tidb-lightning-backends.md)を参照してください。
 
@@ -53,11 +53,11 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 
 チェックサムの不一致を適切に処理する方法については、 [よくある質問](/tidb-lightning/tidb-lightning-faq.md#checksum-failed-checksum-mismatched-remote-vs-local)も参照してください。
 
-### かたまり {#chunk}
+### Chunk {#chunk}
 
 ソースデータの連続範囲。通常、データソース内の単一のファイルに相当します。
 
-ファイルが大きすぎる場合、 TiDB Lightningはファイルを複数のチャンクに分割する場合があります。
+ファイルが大きすぎると、 TiDB Lightningがファイルを複数のチャンクに分割する場合があります。
 
 ### 圧縮 {#compaction}
 
@@ -65,7 +65,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 
 > **ノート：**
 >
-> 従来の理由から、テーブルがインポートされるたびに圧縮を明示的にトリガーするようにTiDB Lightningを構成することもできます。ただし、これは推奨されておらず、対応する設定はデフォルトで無効になっています。
+> 従来の理由から、テーブルがインポートされるたびに明示的に圧縮をトリガーするようにTiDB Lightningを構成することもできます。ただし、これは推奨されておらず、対応する設定はデフォルトで無効になっています。
 
 技術的な詳細については、 [圧縮に関するRocksDBのwikiページ](https://github.com/facebook/rocksdb/wiki/Compaction)を参照してください。
 
@@ -77,7 +77,7 @@ TiDB Lightningでは、テーブルのチェックサムは、そのテーブル
 
 実際の行データをソートするための[エンジン](/tidb-lightning/tidb-lightning-glossary.md#engine) 。
 
-テーブルが非常に大きい場合、そのデータは複数のデータエンジンに配置され、タスクのパイプライン化を改善し、TiKVImporterのスペースを節約します。デフォルトでは、100 GBのSQLデータごとに新しいデータエンジンが開かれます。これは、 `mydumper.batch-size`の設定で構成できます。
+テーブルが非常に大きい場合、そのデータは複数のデータエンジンに配置され、タスクのパイプライン化が改善され、TiKVインポーターのスペースが節約されます。デフォルトでは、100 GBのSQLデータごとに新しいデータエンジンが開かれます。これは、 `mydumper.batch-size`の設定で構成できます。
 
 TiDB Lightningは、複数のデータエンジンを同時に処理します。これは`lightning.table-concurrency`の設定で制御されます。
 
@@ -89,7 +89,7 @@ TiDB Lightningは、複数のデータエンジンを同時に処理します。
 
 TiKV Importerでは、エンジンはKVペアを並べ替えるためのRocksDBインスタンスです。
 
-TiDB Lightningは、エンジンを介してデータをTiKVImporterに転送します。最初にエンジンを開き、KVペアを（順不同で）送信し、最後にエンジンを閉じます。エンジンは、受信したKVペアを閉じた後にソートします。これらのクローズドエンジンは、取り込みのためにTiKVストアにさらにアップロードできます。
+TiDB Lightningは、エンジンを介してデータをTiKVImporterに転送します。最初にエンジンを開き、KVペアを（特定の順序なしで）送信し、最後にエンジンを閉じます。エンジンは、受信したKVペアを閉じた後にソートします。これらのクローズドエンジンは、取り込みのためにTiKVストアにさらにアップロードできます。
 
 エンジンは、TiKV Importerの`import-dir`を一時ストレージとして使用します。これは、「エンジンファイル」と呼ばれることもあります。
 
@@ -111,9 +111,9 @@ TiDB Lightningは、エンジンを介してデータをTiKVImporterに転送し
 
 ### インポートモード {#import-mode}
 
-読み取り速度とスペース使用量が低下する代わりに、書き込み用にTiKVを最適化する構成。
+読み取り速度とスペース使用量の低下を犠牲にして、書き込み用にTiKVを最適化する構成。
 
-TiDB Lightningは、実行中にインポートモードのオンとオフを自動的に切り替えます。ただし、 [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)がインポートモードでスタックした場合は、 `tidb-lightning-ctl`を使用でき[強制的に元に戻す](/tidb-lightning/tidb-lightning-faq.md#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning) 。
+TiDB Lightningは、実行中に自動的にインポートモードのオンとオフを切り替えます。ただし、 [ノーマルモード](/tidb-lightning/tidb-lightning-glossary.md#normal-mode)がインポートモードでスタックした場合は、 `tidb-lightning-ctl`を使用でき[強制的に元に戻す](/tidb-lightning/tidb-lightning-faq.md#why-my-tidb-cluster-is-using-lots-of-cpu-resources-and-running-very-slowly-after-using-tidb-lightning) 。
 
 ### インデックスエンジン {#index-engine}
 
@@ -123,11 +123,11 @@ TiDB Lightningは、実行中にインポートモードのオンとオフを自
 
 TiDB Lightningは、複数のインデックスエンジンを同時に処理します。これは`lightning.index-concurrency`の設定で制御されます。すべてのテーブルには1つのインデックスエンジンがあるため、これにより、同時に処理するテーブルの最大数も構成されます。
 
-### 摂取する {#ingest}
+### 取り込み {#ingest}
 
 [SSTファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file)のコンテンツ全体をRocksDB（TiKV）ストアに挿入する操作。
 
-取り込みは、KVペアを1つずつ挿入する場合に比べて非常に高速な操作です。この操作は、 TiDB Lightningのパフォーマンスを決定する要因です。
+取り込みは、KVペアを1つずつ挿入する場合に比べて非常に高速です。この操作は、 TiDB Lightningのパフォーマンスを決定する要因です。
 
 技術的な詳細については、 [SSTファイルの作成と取り込みに関するRocksDBのwikiページ](https://github.com/facebook/rocksdb/wiki/Creating-and-Ingesting-SST-files)を参照してください。
 
@@ -165,7 +165,7 @@ KVペアをTiKVImporterに送信する前にTiDB Lightning自体によって計�
 
 ### 後処理 {#post-processing}
 
-データソース全体が解析されてTiKVインポーターに送信されてからの期間。 TiDB Lightningは、TiKVImporterがアップロードして[摂取する](/tidb-lightning/tidb-lightning-glossary.md#ingest)を待機してい[SSTファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) 。
+データソース全体が解析され、TiKVインポーターに送信されてからの期間。 TiDB Lightningは、TiKVImporterがアップロードして[摂取する](/tidb-lightning/tidb-lightning-glossary.md#ingest)を待機してい[SSTファイル](/tidb-lightning/tidb-lightning-glossary.md#sst-file) 。
 
 <!-- R -->
 
@@ -179,9 +179,9 @@ KVペアをTiKVImporterに送信する前にTiDB Lightning自体によって計�
 
 ## S {#s}
 
-### 散乱 {#scattering}
+### Scattering {#scattering}
 
-[領域](/glossary.md#regionpeerraft-group)のリーダーとピアをランダムに再割り当てする操作。スキャッタリングにより、インポートされたデータがTiKVストア間で均等に分散されます。これにより、PDへのストレスが軽減されます。
+[リージョン](/glossary.md#regionpeerraft-group)のリーダーとピアをランダムに再割り当てする操作。Scatteringリングにより、インポートされたデータがTiKVストア間で均等に分散されます。これにより、PDへのストレスが軽減されます。
 
 ### 分割 {#splitting}
 

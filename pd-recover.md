@@ -3,9 +3,9 @@ title: PD Recover User Guide
 summary: Use PD Recover to recover a PD cluster which cannot start or provide services normally.
 ---
 
-# PDRecoverユーザーガイド {#pd-recover-user-guide}
+# PDリカバリユーザーガイド {#pd-recover-user-guide}
 
-PD Recoverは、PDのディザスタリカバリツールであり、サービスを正常に開始または提供できないPDクラスタをリカバリするために使用されます。
+PDリカバリはPDのディザスタリカバリツールであり、正常にサービスを開始または提供できないPDクラスタをリカバリするために使用されます。
 
 ## ソースコードからコンパイルする {#compile-from-source-code}
 
@@ -16,7 +16,7 @@ PD Recoverは、PDのディザスタリカバリツールであり、サービ�
 >
 > 通常、 PD ControlツールはリリースされたバイナリまたはDockerにすでに存在するため、ソースコードをコンパイルする必要はありません。ただし、開発者ユーザーは、ソースコードのコンパイルについて上記の手順を参照できます。
 
-## TiDB Toolkitをダウンロードする {#download-tidb-toolkit}
+## TiDB Toolkitをダウンロード {#download-tidb-toolkit}
 
 PDRecoverインストールパッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
 
@@ -58,7 +58,7 @@ cat {{/path/to}}/tidb.log | grep "init cluster id"
 ...
 ```
 
-#### TiKVログからクラスタIDを取得する {#get-cluster-id-from-tikv-log}
+#### TiKVログからクラスタIDを取得します {#get-cluster-id-from-tikv-log}
 
 TiKVログからクラスタIDを取得するには、次のコマンドを実行します。
 
@@ -73,7 +73,7 @@ cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
 ...
 ```
 
-### 割り当てられたIDを取得します {#get-allocated-id}
+### 割り当てられたIDを取得する {#get-allocated-id}
 
 指定する割り当て済みID値は、現在最大の割り当て済みID値よりも大きくする必要があります。割り当てられたIDを取得するには、モニターから取得するか、サーバーで直接ログを表示します。
 
@@ -96,7 +96,7 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 ...
 ```
 
-または、すべてのPDサーバーで上記のコマンドを実行するだけで、最大のサーバーを見つけることができます。
+または、すべてのPDサーバーで上記のコマンドを実行して、最大のサーバーを見つけることもできます。
 
 ### 新しいPDクラスタをデプロイします {#deploy-a-new-pd-cluster}
 

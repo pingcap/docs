@@ -52,13 +52,8 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 <NavColumn><ColumnTitle>ユーザーアクセスの管理</ColumnTitle>
 
--   [ログイン](/tidb-cloud/manage-user-access.md#sign-in)
--   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
--   [組織とプロジェクトをビューする](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
--   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
--   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
--   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)
--   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+-   [コンソールユーザーアクセスの管理](/tidb-cloud/manage-user-access.md)
+-   [クラスタセキュリティ設定を構成する](/tidb-cloud/configure-security-settings.md)
 
 </NavColumn>
 

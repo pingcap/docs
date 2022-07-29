@@ -41,6 +41,6 @@ DESC tidb_hot_regions;
 -   `INDEX_NAME` ：ホットリージョンが配置されているインデックスの名前。
 -   `REGION_ID` ：ホットリージョンのID。
 -   `TYPE` ：ホットリージョンのタイプ。
--   `MAX_HOT_DEGREE` ：地域の最大高温度。
+-   `MAX_HOT_DEGREE` ：リージョンの最大高温度。
 -   `REGION_COUNT` ：インスタンス内のホットリージョンの数。
 -   `FLOW_BYTES` ：リージョンで書き込まれ、読み取られたバイト数。

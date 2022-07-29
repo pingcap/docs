@@ -5,7 +5,7 @@ summary: Learn the telemetry feature, how to disable the feature and view its st
 
 # テレメトリー {#telemetry}
 
-デフォルトでは、TiDB、TiUP、およびTiDBダッシュボードは使用情報を収集し、その情報をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます。たとえば、この使用法情報は、新機能の優先順位付けに役立ちます。
+デフォルトでは、TiDB、TiUP、およびTiDBダッシュボードは使用情報を収集し、その情報をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます。たとえば、この使用情報は、新機能の優先順位付けに役立ちます。
 
 ## 何が共有されますか？ {#what-is-shared}
 
@@ -13,7 +13,7 @@ summary: Learn the telemetry feature, how to disable the feature and view its st
 
 > **ノート：**
 >
-> **すべて**の場合において、TiDBクラスタに保存されているユーザーデータは共有され<strong>ません</strong>。 [PingCAPプライバシーポリシー](https://pingcap.com/privacy-policy)も参照できます。
+> **すべて**の場合において、TiDBクラスタに保存されているユーザーデータは共有され<strong>ません</strong>。 [PingCAPプライバシーポリシー](https://pingcap.com/privacy-policy)を参照することもできます。
 
 ### TiDB {#tidb}
 
@@ -25,7 +25,7 @@ TiDBでテレメトリ収集機能が有効になっている場合、TiDBクラ
 -   コンポーネントの使用法、たとえば、非同期コミット機能が使用されているかどうか。
 -   TiDBテレメトリデータ送信者の仮名化されたIPアドレス。
 
-PingCAPに共有される使用情報の全内容を表示するには、次のSQLステートメントを実行します。
+PingCAPに共有されている使用情報の全内容を表示するには、次のSQLステートメントを実行します。
 
 {{< copyable "" >}}
 
@@ -35,7 +35,7 @@ ADMIN SHOW TELEMETRY;
 
 ### TiDBダッシュボード {#tidb-dashboard}
 
-テレメトリ収集機能がTiDBダッシュボードで有効になっている場合、TiDBダッシュボードWeb UIの使用情報が共有されます（ただし、これらに限定されません）。
+テレメトリ収集機能がTiDBダッシュボードで有効になっている場合、TiDBダッシュボードWeb UIの使用情報が共有されます。これには以下が含まれます（ただしこれらに限定されません）。
 
 -   ランダムに生成されたテレメトリID。
 -   ユーザーがアクセスしたTiDBダッシュボードWebページの名前などのユーザー操作情報。
@@ -63,7 +63,7 @@ TIUP_CLUSTER_DEBUG=enable tiup cluster list
 
 ### 展開時にTiDBテレメトリを無効にする {#disable-tidb-telemetry-at-deployment}
 
-TiDBクラスターを展開するときは、すべてのTiDBインスタンスでTiDBテレメトリコレクションを無効にするように[`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を構成します。この設定を使用して、既存のTiDBクラスタでテレメトリを無効にすることもできます。テレメトリは、クラスタを再起動するまで有効になりません。
+TiDBクラスターを展開するときは、すべてのTiDBインスタンスでTiDBテレメトリコレクションを無効にするように[`enable-telemetry = false`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)を構成します。この設定を使用して、既存のTiDBクラスタでテレメトリを無効にすることもできます。テレメトリはクラスタを再起動するまで有効になりません。
 
 さまざまな展開ツールでテレメトリを無効にする詳細な手順を以下に示します。
 
@@ -93,7 +93,7 @@ enable-telemetry = false
 enable-telemetry = false
 ```
 
-TiUP Playgroundを起動するときは、上記の構成ファイルの`--db.config tidb_config.toml`コマンドラインパラメーターを指定して有効にします。例えば：
+TiUP Playgroundを起動するときに、上記の構成ファイルの`--db.config tidb_config.toml`コマンドラインパラメーターを指定して有効にします。例えば：
 
 {{< copyable "" >}}
 
@@ -162,7 +162,7 @@ SET GLOBAL tidb_enable_telemetry = 0;
 enable-telemetry = false
 ```
 
-PDを開始するときに、 `--config=pd_config.toml`のコマンドラインパラメータを指定して有効にします。
+PDを開始して有効にするときに、 `--config=pd_config.toml`のコマンドラインパラメータを指定します。
 
 詳細については、 [PDConfiguration / コンフィグレーションフラグ](/command-line-flags-for-pd-configuration.md#--config)と[PDConfiguration / コンフィグレーションファイル](/pd-configuration-file.md#enable-telemetry)を参照してください。
 
@@ -219,7 +219,7 @@ server_configs:
 
 ### TiUPテレメトリを無効にする {#disable-tiup-telemetry}
 
-TiUPテレメトリ収集を無効にするには、次のコマンドを実行します。
+TiUPテレメトリコレクションを無効にするには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -237,7 +237,7 @@ TiDBテレメトリの場合、次のSQLステートメントを実行してテ�
 ADMIN SHOW TELEMETRY;
 ```
 
-実行結果の`DATA_PREVIEW`列が空の場合、TiDBテレメトリは無効になります。そうでない場合、TiDBテレメトリが有効になります。また、 `LAST_STATUS`列目で以前に利用情報を共有した時期や共有に成功したかどうかを確認することもできます。
+実行結果の`DATA_PREVIEW`列が空の場合、TiDBテレメトリは無効になります。そうでない場合、TiDBテレメトリが有効になります。また、 `LAST_STATUS`列目で、以前に利用情報を共有した時期や、共有に成功したかどうかを確認することもできます。
 
 TiUPテレメトリの場合、次のコマンドを実行してテレメトリステータスを確認します。
 
@@ -249,9 +249,9 @@ tiup telemetry status
 
 ## コンプライアンス {#compliance}
 
-さまざまな国または地域のコンプライアンス要件を満たすために、使用情報は送信者のマシンのIPアドレスに従ってさまざまな国にあるサーバーに送信されます。
+さまざまな国または地域のコンプライアンス要件を満たすために、使用情報は、送信側マシンのIPアドレスに従ってさまざまな国にあるサーバーに送信されます。
 
 -   中国本土からのIPアドレスの場合、使用情報は中国本土のクラウドサーバーに送信されて保存されます。
--   中国本土以外のIPアドレスの場合、使用情報は米国のクラウドサーバーに送信されて保存されます。
+-   中国本土以外からのIPアドレスの場合、使用情報は米国のクラウドサーバーに送信されて保存されます。
 
 詳細については、 [PingCAPプライバシーポリシー](https://en.pingcap.com/privacy-policy/)を参照してください。

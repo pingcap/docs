@@ -5,7 +5,7 @@ summary: An overview of the usage of FLUSH PRIVILEGES for the TiDB database.
 
 # フラッシュ特権 {#flush-privileges}
 
-このステートメントは、TiDBをトリガーして、特権テーブルから特権のメモリ内コピーを再ロードします。 `mysql.user`などのテーブルを手動で編集した後、 `FLUSH PRIVILEGES`を実行する必要があります。 `GRANT`や`REVOKE`などの特権ステートメントを使用した後は、このステートメントを実行する必要はありません。このステートメントを実行するには、 `RELOAD`特権が必要です。
+このステートメントは、TiDBをトリガーして、特権テーブルから特権のメモリー内コピーを再ロードします。 `mysql.user`などのテーブルを手動で編集した後、 `FLUSH PRIVILEGES`を実行する必要があります。 `GRANT`や`REVOKE`などの特権ステートメントを使用した後は、このステートメントを実行する必要はありません。このステートメントを実行するには、 `RELOAD`特権が必要です。
 
 ## あらすじ {#synopsis}
 

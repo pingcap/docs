@@ -35,7 +35,7 @@ summary: Learn about the command-line flags in DM.
 
 ### <code>--initial-cluster</code> {#code-initial-cluster-code}
 
--   DMマスタークラスタのブートストラップに使用される`"{node name}={external address}"`のリスト
+-   DMマスタークラスタをブートストラップするために使用される`"{node name}={external address}"`のリスト
 -   デフォルト値は`"{name}={advertise-peer-urls}"`です
 -   `join`フラグが指定されていない場合は、このフラグを指定する必要があります。 3ノードクラスタの構成例は`"dm-master-1=http://172.16.15.11:8291,dm-master-2=http://172.16.15.12:8291,dm-master-3=http://172.16.15.13:8291"`です。
 
@@ -79,7 +79,7 @@ summary: Learn about the command-line flags in DM.
 
 ### <code>--advertise-addr</code> {#code-advertise-addr-code}
 
--   クライアント要求の受信に使用されるDM-workerの外部アドレス
+-   クライアントリクエストの受信に使用されるDMワーカーの外部アドレス
 -   デフォルト値は`"{worker-addr}"`です
 -   オプションのフラグ。 `"domain-name:port"`の形式にすることができます
 
@@ -93,7 +93,7 @@ summary: Learn about the command-line flags in DM.
 
 -   DMワーカーがこのクラスタに登録するときのクラスタのDMマスターノードの`{advertise-addr}`のリスト
 -   デフォルト値は`""`です
--   必要なフラグ。 3ノード（DMマスターノード）クラスタの構成例は`"172.16.15.11:8261,172.16.15.12:8261,172.16.15.13:8261"`です。
+-   必須フラグ。 3ノード（DMマスターノード）クラスタの構成例は`"172.16.15.11:8261,172.16.15.12:8261,172.16.15.13:8261"`です。
 
 ### <code>--log-file</code> {#code-log-file-code}
 

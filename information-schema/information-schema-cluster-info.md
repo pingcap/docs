@@ -5,7 +5,7 @@ summary: Learn the `CLUSTER_INFO` cluster topology information table.
 
 # CLUSTER_INFO {#cluster-info}
 
-`CLUSTER_INFO`クラスタトポロジテーブルは、クラスタの現在のトポロジ情報、各インスタンスのバージョン情報、インスタンスバージョンに対応するGitハッシュ、各インスタンスの開始時間、および各インスタンスの実行時間を提供します。
+`CLUSTER_INFO`クラスタトポロジテーブルは、クラスタの現在のトポロジ情報、各インスタンスのバージョン情報、インスタンスのバージョンに対応するGitハッシュ、各インスタンスの開始時間、および各インスタンスの実行時間を提供します。
 
 {{< copyable "" >}}
 
@@ -31,7 +31,7 @@ desc cluster_info;
 
 フィールドの説明：
 
--   `TYPE` ：インスタンスタイプ。オプションの値は`tidb` 、および`pd` `tikv` 。
+-   `TYPE` ：インスタンスタイプ。オプションの値は、 `tidb` 、および`pd` `tikv` 。
 -   `INSTANCE` ：インスタンスアドレス`IP:PORT`の形式の文字列です。
 -   `STATUS_ADDRESS` ：HTTPAPIのサービスアドレス。 tikv-ctl、pd-ctl、またはtidb-ctlの一部のコマンドは、このAPIとこのアドレスを使用する場合があります。このアドレスを介して、より多くのクラスタ情報を取得することもできます。詳細は[TiDBHTTPAPIドキュメント](https://github.com/pingcap/tidb/blob/master/docs/tidb_http_api.md)を参照してください。
 -   `VERSION` ：対応するインスタンスのセマンティックバージョン番号。 MySQLのバージョン番号と互換性を持たせるために、TiDBのバージョンは`${mysql-version}-${tidb-version}`の形式で表示されます。

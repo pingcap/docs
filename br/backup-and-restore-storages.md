@@ -16,7 +16,7 @@ Backup＆Restore（BR）、 TiDB Lightning、およびDumplingは、ローカル
 | すべてのノードに分散されたローカルファイルシステム | ローカル      | `local:///path/to/dest/`                 |
 | AmazonS3と互換性のあるサービス       | s3        | `s3://bucket-name/prefix/of/dest/`       |
 | Google Cloud Storage（GCS） | gcs、gs    | `gcs://bucket-name/prefix/of/dest/`      |
-| Azure Blob Storage        | 紺碧、azblob | `azure://container-name/prefix/of/dest/` |
+| Azure ブロブ ストレージ           | 紺碧、azblob | `azure://container-name/prefix/of/dest/` |
 | どこにも書きません（ベンチマークのみ）       | noop      | `noop://`                                |
 
 ## URLパラメータ {#url-parameters}
@@ -68,7 +68,7 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
         -s 'azure://container-name/prefix'
     ```
 
-### S3URLパラメータ {#s3-url-parameters}
+### S3URLパラメーター {#s3-url-parameters}
 
 | URLパラメータ                  | 説明                                                         |
 | :------------------------ | :--------------------------------------------------------- |
@@ -91,12 +91,12 @@ S3、GCS、Azblobなどのクラウドストレージでは、接続のために
 
 1.  `$AWS_ACCESS_KEY_ID`および`$AWS_SECRET_ACCESS_KEY`の環境変数
 2.  `$AWS_ACCESS_KEY`および`$AWS_SECRET_KEY`の環境変数
-3.  `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにあるツールノードの共有クレデンシャルファイル
-4.  `~/.aws/credentials`のツールノードにある共有クレデンシャルファイル
+3.  `$AWS_SHARED_CREDENTIALS_FILE`の環境変数で指定されたパスにあるツールノードの共有クレデンシャルファイル
+4.  `~/.aws/credentials`のツールノード上の共有クレデンシャルファイル
 5.  AmazonEC2コンテナの現在のIAMロール
 6.  AmazonECSタスクの現在のIAMロール
 
-### GCSURLパラメータ {#gcs-url-parameters}
+### GCSURLパラメーター {#gcs-url-parameters}
 
 | URLパラメータ           | 説明                                                 |
 | :----------------- | :------------------------------------------------- |

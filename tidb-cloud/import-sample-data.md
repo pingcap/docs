@@ -20,7 +20,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
     -   **データソースタイプ**： `AWS S3` 。
     -   **バケットURL** ：サンプルデータ`s3://tidbcloud-samples/data-ingestion/`を入力します。
-    -   **データ形式**： <strong>TiDBDumpling</strong>を選択します。
+    -   **データ形式**： <strong>Dumpling</strong>を選択します。
     -   **クレデンシャルの設定**：Role-ARNに`arn:aws:iam::385595570414:role/import-sample-access`を入力します。
     -   **ターゲットデータベース**：
         -   **ユーザー名**： `root` 。
@@ -35,7 +35,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
     -   **データソースタイプ**： `Google Cloud Stroage` 。
     -   **バケットURL** ：サンプルデータ`gcs://tidbcloud-samples-us-west1`を入力します。
-    -   **データ形式**： <strong>TiDBDumpling</strong>を選択します。
+    -   **データ形式**： <strong>Dumpling</strong>を選択します。
     -   **ターゲットデータベース**：
         -   **ユーザー名**： `root` 。
         -   **パスワード**：rootパスワードを入力します。
@@ -52,7 +52,7 @@ summary: Learn how to import sample data into TiDB Cloud via UI.
 
     TiDB Cloudは、指定されたバケットURLのサンプルデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポートタスクが自動的に開始されます。
 
-データのインポートプロセスには5〜10分かかります。データインポートの進行状況バーに[**成功**]と表示されたら、サンプルデータとデータベーススキーマがTiDB Cloudのデータベースに正常にインポートされています。
+データのインポートプロセスには5〜10分かかります。データインポートの進行状況バーに「**成功**」と表示されたら、サンプルデータとデータベーススキーマをTiDB Cloudのデータベースに正常にインポートしています。
 
 クラスタがデータのインポートプロセスを完了すると、データベースにサンプルデータが取得されます。
 

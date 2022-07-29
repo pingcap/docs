@@ -5,7 +5,7 @@ summary: Learn how to create SQL users to access TiDB Dashboard.
 
 # TiDBダッシュボードユーザー管理 {#tidb-dashboard-user-management}
 
-TiDBダッシュボードは、TiDBと同じユーザー特権システムとサインイン認証を使用します。 TiDB SQLユーザーを制御および管理して、TiDBダッシュボードへのアクセスを制限できます。このドキュメントでは、 TiDB SQLユーザーがTiDBダッシュボードにアクセスするために必要な最小特権について説明し、最小特権SQLユーザーを作成する方法とRBACを介して認証する方法を例示します。
+TiDBダッシュボードは、TiDBと同じユーザー特権システムとサインイン認証を使用します。 TiDB SQLユーザーを制御および管理して、TiDBダッシュボードへのアクセスを制限できます。このドキュメントでは、 TiDB SQLユーザーがTiDBダッシュボードにアクセスするために必要な最小特権について説明し、最小特権のSQLユーザーを作成する方法とRBACを介して認証する方法を例示します。
 
 TiDB SQLユーザーを制御および管理する方法の詳細については、 [TiDBユーザーアカウント管理](/user-account-management.md)を参照してください。
 
@@ -28,7 +28,7 @@ TiDB SQLユーザーを制御および管理する方法の詳細については
     -   RESTRICTED_STATUS_ADMIN
     -   RESTRICTED_VARIABLES_ADMIN
 
--   TiDBダッシュボードにサインインした後にインターフェイスの構成を変更するには、SQLユーザーには次の権限も必要です。
+-   TiDBダッシュボードにサインインした後にインターフェイスの構成を変更するには、SQLユーザーに次の権限も必要です。
 
     -   SYSTEM_VARIABLES_ADMIN
 
@@ -71,7 +71,7 @@ SQLユーザーが前述の特権要件を満たしていない場合、以下�
 
 ## 例：SQLユーザーにRBAC経由でTiDBダッシュボードにアクセスすることを許可します {#example-authorize-sql-user-to-access-tidb-dashboard-via-rbac}
 
-次の例は、 [ロールベースのアクセス制御（RBAC）](/role-based-access-control.md)メカニズムを介してTiDBダッシュボードにアクセスするためのロールとユーザーを作成する方法を示しています。
+次の例は、 [役割ベースのアクセス制御（RBAC）](/role-based-access-control.md)メカニズムを介してTiDBダッシュボードにアクセスするためのロールとユーザーを作成する方法を示しています。
 
 1.  TiDBダッシュボードの特権要件を満たす`dashboard_access`の役割を作成します。
 
@@ -94,6 +94,6 @@ SQLユーザーが前述の特権要件を満たしていない場合、以下�
 
 上記の手順の後、 `dashboardAdmin`人のユーザーを使用してTiDBダッシュボードにサインインできます。
 
-## TiDBダッシュボードにサインインします {#sign-in-to-tidb-dashboard}
+## TiDBダッシュボードにサインインする {#sign-in-to-tidb-dashboard}
 
 TiDBダッシュボードの特権要件を満たすSQLユーザーを作成した後、このユーザーをTiDBダッシュボードに[ログイン](/dashboard/dashboard-access.md#sign-in)対1で使用できます。

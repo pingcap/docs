@@ -8,14 +8,14 @@ title: TiDB 3.0.17 Release Notes
 
 TiDBバージョン：3.0.17
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
     -   `query-feedback-limit`構成項目のデフォルト値を1024から512に減らし、統計フィードバックメカニズムを改善して、クラスタ[＃18770](https://github.com/pingcap/tidb/pull/18770)への影響を緩和します。
     -   1つのリクエストのバッチ分割数を制限する[＃18694](https://github.com/pingcap/tidb/pull/18694)
-    -   TiDBクラスタ[＃18386](https://github.com/pingcap/tidb/pull/18386)に多くの履歴DDLジョブがある場合、 `/tiflash/replica`つのHTTPAPIを高速化します。
-    -   インデックスが等しい条件[＃17609](https://github.com/pingcap/tidb/pull/17609)の行数の推定を改善します
+    -   `/tiflash/replica`クラスタに履歴DDLジョブが多数ある場合に1HTTPAPIを高速化[＃18386](https://github.com/pingcap/tidb/pull/18386)
+    -   インデックスが等しい条件[＃17609](https://github.com/pingcap/tidb/pull/17609)の行数の推定を改善する
     -   `kill tidb conn_id`の実行を[＃18506](https://github.com/pingcap/tidb/pull/18506)アップ
 
 -   TiKV
@@ -26,13 +26,13 @@ TiDBバージョン：3.0.17
 
     -   TiDB Lightning
 
-        -   `[black-white-list]`は、より新しく、理解しやすいフィルター形式[＃332](https://github.com/pingcap/tidb-lightning/pull/332)で非推奨になりました。
+        -   `[black-white-list]`は、新しい、理解しやすいフィルター形式[＃332](https://github.com/pingcap/tidb-lightning/pull/332)で非推奨になりました。
 
 ## バグの修正 {#bug-fixes}
 
 -   TiDB
 
-    -   `IndexHashJoin`つまたは`IndexMergeJoin`を含むクエリでpanicが発生した場合は、空のセットではなく実際のエラーメッセージを返します[＃18498](https://github.com/pingcap/tidb/pull/18498)
+    -   `IndexHashJoin`つまたは`IndexMergeJoin`を含むクエリでpanicが発生した場合、空のセットではなく実際のエラーメッセージを返します[＃18498](https://github.com/pingcap/tidb/pull/18498)
     -   `SELECT a FROM t HAVING t.a`のようなSQLステートメントの不明な列エラーを修正し[＃18432](https://github.com/pingcap/tidb/pull/18432)
     -   テーブルに主キーがない場合、またはテーブルにすでに整数の主キーがある場合は、テーブルに主キーを追加することを禁止します[＃18342](https://github.com/pingcap/tidb/pull/18342)
     -   `EXPLAIN FORMAT="dot" FOR CONNECTION`を実行すると空のセットを返し[＃17157](https://github.com/pingcap/tidb/pull/17157)

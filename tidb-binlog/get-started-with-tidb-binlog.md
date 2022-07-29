@@ -159,7 +159,7 @@ sleep 3
 [4]+  Running                 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
-サービスの1つが開始に失敗した場合（たとえば、「 `Running` 」ではなく「 `Exit 1` 」が表示された場合）、その個々のサービスを再起動してみてください。
+サービスの1つが開始に失敗した場合（たとえば、「 `Running` 」ではなく「 `Exit 1` 」が表示されている場合）、その個々のサービスを再起動してみてください。
 
 ## 接続する {#connecting}
 
@@ -321,7 +321,7 @@ MariaDB [tidbtest]> select * from t1;
 5 rows in set (0.00 sec)
 ```
 
-MariaDBサーバーにクエリを実行するときにTiDBに挿入したのと同じ行が表示されます。おめでとう！ Binlogを設定しました。
+MariaDBサーバーにクエリを実行したときにTiDBに挿入したのと同じ行が表示されます。おめでとう！ Binlogを設定しました。
 
 ## binlogctl {#binlogctl}
 
@@ -359,7 +359,7 @@ pkill drainer
 [2019/04/11 17:44:22.640 -04:00] [INFO] [nodes.go:47] ["query node"] [type=drainer] [node="{NodeID: localhost.localdomain:8249, Addr: 192.168.236.128:8249, State: paused, MaxCommitTS: 407638915597467649, UpdateTime: 2019-04-11 17:44:18 -0400 EDT}"]
 ```
 
-「NodeIDs」を`binlogctl`とすると、個々のノードを制御できます。この場合、drainerのNodeIDは「localhost.localdomain：8249」であり、PumpのNodeIDは「localhost.localdomain：8250」です。
+「NodeIDs」を`binlogctl`で使用して、個々のノードを制御できます。この場合、drainerのNodeIDは「localhost.localdomain：8249」であり、PumpのNodeIDは「localhost.localdomain：8250」です。
 
 このチュートリアルでの`binlogctl`の主な使用法は、クラスタの再起動の場合である可能性があります。 TiDBクラスタのすべてのプロセスを終了して再起動しようとすると（ダウンストリームのMySQL / MariaDBサーバーまたはDrainerを除く）、 PumpはDrainerに接続できず、 Drainerがまだ「オンライン」であると信じているため、起動を拒否します。
 
@@ -382,7 +382,7 @@ pkill drainer
 
 ## 掃除 {#cleanup}
 
-TiDBクラスタおよびBinlogプロセスを停止するには、クラスタを形成するすべてのプロセス（pd-server、tikv-server、pump、tidb-server、 drainer）を開始したシェルで`pkill -P $$`を実行できます。各コンポーネントをクリーンにシャットダウンするのに十分な時間を与えるには、特定の順序でコンポーネントを停止すると便利です。
+TiDBクラスタおよびBinlogプロセスを停止するには、クラスタを形成するすべてのプロセス（pd-server、tikv-server、pump、tidb-server、 drainer）を開始したシェルで`pkill -P $$`を実行します。各コンポーネントを完全にシャットダウンするのに十分な時間を与えるには、特定の順序でコンポーネントを停止すると便利です。
 
 ```bash
 for p in tidb-server drainer pump tikv-server pd-server; do pkill "$p"; sleep 1; done
@@ -411,10 +411,10 @@ sleep 3
 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 ```
 
-コンポーネントのいずれかが起動に失敗した場合は、障害が発生した個々のコンポーネントを再起動してみてください。
+コンポーネントのいずれかが起動に失敗した場合は、失敗した個々のコンポーネントを再起動してみてください。
 
 ## 結論 {#conclusion}
 
 このチュートリアルでは、単一のPumpと単一のDrainerを備えたクラスタを使用して、TiDBクラスタからダウンストリームのMariaDBサーバーに複製するようにBinlogを設定しました。これまで見てきたように、TiDB Binlogは、TiDBクラスタへの変更をキャプチャして処理するための包括的なプラットフォームです。
 
-より堅牢な開発、テスト、または実稼働展開では、高可用性とスケーリングの目的で複数のTiDBサーバーを使用し、複数のPumpインスタンスを使用して、TiDBサーバーインスタンスへのアプリケーショントラフィックがPumpの問題の影響を受けないようにします。クラスタ。追加のDrainerインスタンスを使用して、更新をさまざまなダウンストリームプラットフォームにプッシュしたり、増分バックアップを実装したりすることもできます。
+より堅牢な開発、テスト、または本番デプロイメントでは、高可用性とスケーリングを目的として複数のTiDBサーバーを使用し、複数のPumpインスタンスを使用して、TiDBサーバーインスタンスへのアプリケーショントラフィックがPumpの問題の影響を受けないようにします。クラスタ。追加のDrainerインスタンスを使用して、更新をさまざまなダウンストリームプラットフォームにプッシュしたり、増分バックアップを実装したりすることもできます。

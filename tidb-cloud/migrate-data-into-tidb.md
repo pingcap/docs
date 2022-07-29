@@ -7,7 +7,7 @@ summary: Learn how to migrate data from MySQL-compatible databases to TiDB Cloud
 
 TiDBはMySQLと高い互換性があります。データがセルフホストのMySQLインスタンスからのものであるか、パブリッククラウドによって提供されるRDSサービスからのものであるかに関係なく、MySQL互換データベースからTiDBにデータをスムーズに移行できます。
 
-このドキュメントでは、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してMySQL互換データベースからデータをエクスポートし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)バックエンドを使用してデータをTiDB Cloudにインポートする方法について説明します。
+このドキュメントでは、 [Dumpling](/dumpling-overview.md)を使用してMySQL互換データベースからデータをエクスポートし、 [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)論理インポートモードを使用してデータをTiDB Cloudにインポートする方法について説明します。
 
 > **ノート：**
 >
@@ -55,7 +55,7 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
 ## ステップ2.MySQL互換データベースからデータをエクスポートする {#step-2-export-data-from-mysql-compatible-databases}
 
-`mysqldump`または`mydumper`を使用するなど、MySQLからデータをダンプする方法はいくつかあります。 PingCAPによって作成されたオープンソースツールの1つでもあるTiDBとのパフォーマンスと互換性を高めるために、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用することをお勧めします。
+`mysqldump`または`mydumper`を使用するなど、MySQLからデータをダンプする方法はいくつかあります。 PingCAPによって作成されたオープンソースツールの1つでもあるTiDBとのパフォーマンスと互換性を高めるために、 [Dumpling](/dumpling-overview.md)を使用することをお勧めします。
 
 1.  Dumplingをインストールします。
 
@@ -67,7 +67,7 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
 2.  Dumplingを使用してMySQLデータベースをエクスポートします。
 
-    -   データをAmazonS3クラウドストレージにエクスポートするには、 [AmazonS3クラウドストレージにデータをエクスポートする](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)を参照してください。
+    -   データをAmazonS3クラウドストレージにエクスポートするには、 [AmazonS3クラウドストレージにデータをエクスポートする](/dumpling-overview.md#export-data-to-amazon-s3-cloud-storage)を参照してください。
     -   データをローカルデータファイルにエクスポートするには、次のコマンドを使用します。
 
         {{< copyable "" >}}
@@ -91,15 +91,15 @@ TiUPは、TiDBエコシステムのパッケージマネージャーであり、
 
 -   ソースデータがAmazonS3クラウドストレージにある場合は、次の手順を実行します。
 
-    1.  TiDBクラウドがAmazonS3バケット内のソースデータにアクセスできるようにAmazonS3アクセスを設定します。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
+    1.  TiDBクラウドがAmazonS3バケット内のソースデータにアクセスできるようにAmazonS3アクセスを設定します。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
     2.  TiDB Cloudコンソールから、[TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックして、独自の概要ページに移動します。左側のクラスタ情報ペインで、[**インポート**]をクリックし、[<strong>データインポートタスク</strong>]ページでインポート関連情報を入力します。
 
 -   ソースデータがローカルファイルにある場合は、次のいずれかを実行します。
 
     -   データが1TBを超える場合は、データをTiDB Cloudにインポートまたは移行するためのステージング領域としてAmazonS3またはGCSを使用することをお勧めします。詳細については、 [AmazonS3またはGCSからTiDB Cloudにインポートまたは移行します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)を参照してください。
-    -   データが1TB未満の場合は、このドキュメントの次の手順に従ってTiDB Lightningバックエンドを使用できます。
+    -   データが1TB未満の場合は、このドキュメントの次の手順に従って、 TiDB Lightningの論理インポートモードを使用できます。
 
-次の手順は、 TiDB Lightningバックエンドを使用してデータをTiDB Cloudにインポートする方法を示しています。
+次の手順は、 TiDB Lightningの論理インポートモードを使用してローカルデータをTiDB Cloudにインポートする方法を示しています。
 
 1.  TiDB Lightningをインストールします：
 

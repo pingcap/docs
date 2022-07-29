@@ -11,7 +11,7 @@ summary: Learn the experimental features of TiDB.
 
 -   [`PREDICATE COLUMNS`の統計収集をサポート](/statistics.md#collect-statistics-on-some-columns) （v5.4で導入）
 -   [統計の同期ロードをサポート](/statistics.md#load-statistics) 。 （v5.4で導入）
--   [統計を収集するためのメモリ割り当てを制御する](/statistics.md#the-memory-quota-for-collecting-statistics) 。 （v6.1.0で導入）
+-   [統計を収集するためのメモリクォータを制御する](/statistics.md#the-memory-quota-for-collecting-statistics) 。 （v6.1.0で導入）
 
 ## 安定性 {#stability}
 

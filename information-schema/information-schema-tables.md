@@ -5,7 +5,7 @@ summary: Learn the `TABLES` information_schema table.
 
 # テーブル {#tables}
 
-`TABLES`テーブルは、データベース内のテーブルに関する情報を提供します。
+`TABLES`のテーブルは、データベース内のテーブルに関する情報を提供します。
 
 {{< copyable "" >}}
 
@@ -98,7 +98,7 @@ SHOW TABLES
 -   `TABLE_NAME` ：テーブルの名前。
 -   `TABLE_TYPE` ：テーブルのタイプ。
 -   `ENGINE` ：ストレージエンジンのタイプ。値は現在`InnoDB`です。
--   `VERSION` ：バージョン。デフォルト値は`10`です。
+-   `VERSION` ：バージョン。デフォルトの値は`10`です。
 -   `ROW_FORMAT` ：行フォーマット。値は現在`Compact`です。
 -   `TABLE_ROWS` ：統計のテーブルの行数。
 -   `AVG_ROW_LENGTH` ：テーブルの平均行長。 `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` 。
@@ -120,7 +120,7 @@ SHOW TABLES
 -   `TIDB_TABLE_ID` ：テーブルの内部IDを示します。このIDは、TiDBクラスタで一意です。
 -   `TIDDB_ROW_ID_SHARDING_INFO` ：テーブルのシャーディングタイプを示します。可能な値は次のとおりです。
     -   `"NOT_SHARDED"` ：テーブルはシャーディングされていません。
-    -   `"NOT_SHARDED(PK_IS_HANDLE)"` ：行IDとして整数主キーを定義するテーブルはシャーディングされません。
-    -   `"PK_AUTO_RANDOM_BITS={bit_number}"` ：主キーに`AUTO_RANDOM`属性が割り当てられているため、行IDとして整数主キーを定義するテーブルがシャーディングされます。
+    -   `"NOT_SHARDED(PK_IS_HANDLE)"` ：行IDとして整数の主キーを定義するテーブルはシャーディングされません。
+    -   `"PK_AUTO_RANDOM_BITS={bit_number}"` ：主キーに`AUTO_RANDOM`属性が割り当てられているため、行IDとして整数の主キーを定義するテーブルがシャーディングされます。
     -   `"SHARD_BITS={bit_number}"` ：テーブルは`SHARD_ROW_ID_BITS={bit_number}`を使用してシャーディングされます。
     -   NULL：テーブルはシステムテーブルまたはビューであるため、シャーディングできません。

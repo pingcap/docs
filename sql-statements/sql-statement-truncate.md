@@ -5,7 +5,7 @@ summary: An overview of the usage of TRUNCATE for the TiDB database.
 
 # 切り捨てる {#truncate}
 
-`TRUNCATE`ステートメントは、非トランザクション的な方法でテーブルからすべてのデータを削除します。 `TRUNCATE`は、前の定義の`DROP TABLE` + `CREATE TABLE`と意味的に同じであると考えることができます。
+`TRUNCATE`ステートメントは、トランザクション以外の方法でテーブルからすべてのデータを削除します。 `TRUNCATE`は、前の定義の`DROP TABLE` + `CREATE TABLE`と意味的に同じであると考えることができます。
 
 `TRUNCATE TABLE tableName`と`TRUNCATE tableName`はどちらも有効な構文です。
 
@@ -61,11 +61,11 @@ Query OK, 0 rows affected (0.11 sec)
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
 -   [消去](/sql-statements/sql-statement-delete.md)
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)

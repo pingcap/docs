@@ -7,7 +7,7 @@ summary: Learn how to monitor your TiDB cluster.
 
 このドキュメントでは、 TiDB CloudでTiDBクラスタを監視する方法について説明します。
 
-## クラスタステータスとノードステータス {#cluster-status-and-node-status}
+## クラスターステータスとノードステータス {#cluster-status-and-node-status}
 
 実行中の各クラスタの現在のステータスは、クラスタページで確認できます。
 
@@ -31,7 +31,7 @@ summary: Learn how to monitor your TiDB cluster.
 | **普通**        | 通常のランニング        |
 | **作成**        | ノードの作成          |
 | **利用できません**   | TiDBノードは利用できません |
-| **終了**        | TiDBノードが終了しています |
+| **終了中**       | TiDBノードが終了しています |
 
 ### TiKVノードのステータス {#tikv-node-status}
 
@@ -40,7 +40,7 @@ summary: Learn how to monitor your TiDB cluster.
 | **普通**        | 通常のランニング         |
 | **作成**        | ノードの作成           |
 | **利用できません**   | TiKVノードは利用できません  |
-| **終了**        | TiKVノードが終了しています  |
+| **終了中**       | TiKVノードが終了しています  |
 | **去る**        | 終了前の現在のノードデータの移行 |
 
 ## モニタリング指標 {#monitoring-metrics}
@@ -55,7 +55,7 @@ summary: Learn how to monitor your TiDB cluster.
 
 ## 組み込みのアラート {#built-in-alerting}
 
-TiDB Cloudには、いくつかのアラート条件が組み込まれています。プロジェクト内のTiDB CloudクラスタがTiDB Cloudの組み込みアラート条件をトリガーするたびに、電子メール通知を受信するようにTiDB Cloudを構成できます。
+TiDB Cloudには、いくつかのアラート条件が組み込まれています。プロジェクト内のTiDB CloudクラスタがTiDB Cloudの組み込みアラート条件をトリガーするたびに電子メール通知を受信するようにTiDB Cloudを構成できます。
 
 詳細については、 [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 

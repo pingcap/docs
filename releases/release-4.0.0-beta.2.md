@@ -26,7 +26,7 @@ TiDB Ansibleバージョン：4.0.0-beta.2
 
 -   ツール
     -   TiDB Binlog
-        -   TiDBクラスター間の双方向データレプリケーションをサポートする[＃879](https://github.com/pingcap/tidb-binlog/pull/879) [＃903](https://github.com/pingcap/tidb-binlog/pull/903)
+        -   [＃903](https://github.com/pingcap/tidb-binlog/pull/903)クラスター間の双方向データレプリケーションをサポート[＃879](https://github.com/pingcap/tidb-binlog/pull/879)
     -   TiDB Lightning
         -   TLS構成をサポートする[＃40](https://github.com/tikv/importer/pull/40) [＃270](https://github.com/pingcap/tidb-lightning/pull/270)
     -   TiCDC
@@ -39,17 +39,17 @@ TiDB Ansibleバージョン：4.0.0-beta.2
         -   増分バックアップや[＃175](https://github.com/pingcap/br/pull/175)へのファイルのバックアップなどの実験的機能を有効にする
 
 -   TiDB Ansible
-    -   [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)へのノード情報の注入をサポート
-    -   ARMプラットフォームでのTiDBサービスの展開のサポート[＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)
+    -   [＃1196](https://github.com/pingcap/tidb-ansible/pull/1196)へのノード情報の挿入をサポートします。
+    -   ARMプラットフォームでのTiDBサービスの展開をサポートする[＃1204](https://github.com/pingcap/tidb-ansible/pull/1204)
 
 ## バグの修正 {#bug-fixes}
 
 -   TiKV
-    -   バックアップ中に空の短い値を満たすときに発生する可能性のあるpanicの問題を修正します[＃6718](https://github.com/tikv/tikv/pull/6718)
+    -   バックアップ中に空の短い値を満たすときに発生する可能性があるpanicの問題を修正します[＃6718](https://github.com/tikv/tikv/pull/6718)
     -   場合によっては休止状態の[＃6772](https://github.com/tikv/tikv/pull/6672)が正しく起動されない可能性があるという問題を修正し[＃6648](https://github.com/tikv/tikv/pull/6648) [＃6376](https://github.com/tikv/tikv/pull/6736)
 
 -   PD
-    -   ルールチェッカーがリージョン[＃2160](https://github.com/pingcap/pd/pull/2160)にストアを割り当てられないというpanicの問題を修正します
+    -   ルールチェッカーがリージョン[＃2160](https://github.com/pingcap/pd/pull/2160)へのストアの割り当てに失敗するというpanicの問題を修正します
     -   動的構成を有効にした後、リーダーが切り替えられているときに構成に複製遅延が発生する可能性があるという問題を修正します[＃2154](https://github.com/pingcap/pd/pull/2154)
 
 -   ツール

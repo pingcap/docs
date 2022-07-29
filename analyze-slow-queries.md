@@ -14,12 +14,12 @@ summary: Learn how to locate and analyze slow queries.
 
 このドキュメントでは、ステップ2の実行方法に焦点を当てています。このタイプのクエリが遅い理由を分析してください。
 
-一般に、遅いクエリには次の主な原因があります。
+一般に、クエリが遅い場合、主な原因は次のとおりです。
 
 -   間違ったインデックスが選択された、間違った結合タイプまたはシーケンスが選択されたなどのオプティマイザの問題。
--   システムの問題。オプティマイザが原因ではないすべての問題は、システムの問題です。たとえば、ビジー状態のTiKVインスタンスはリクエストをゆっくり処理します。古くなった地域情報により、クエリが遅くなります。
+-   システムの問題。オプティマイザが原因ではないすべての問題は、システムの問題です。たとえば、ビジー状態のTiKVインスタンスはリクエストをゆっくり処理します。リージョン情報が古くなると、クエリが遅くなります。
 
-実際の状況では、オプティマイザの問題がシステムの問題を引き起こす可能性があります。たとえば、特定のタイプのクエリの場合、オプティマイザはインデックスの代わりに全表スキャンを使用します。その結果、SQLクエリは多くのリソースを消費し、一部のTiKVインスタンスのCPU使用率が急上昇します。これはシステムの問題のように見えますが、本質的にはオプティマイザの問題です。
+実際の状況では、オプティマイザの問題がシステムの問題を引き起こす可能性があります。たとえば、特定のタイプのクエリの場合、オプティマイザはインデックスの代わりに全表スキャンを使用します。その結果、SQLクエリは多くのリソースを消費し、一部のTiKVインスタンスのCPU使用率が急上昇します。これはシステムの問題のように見えますが、本質的にはオプティマイザーの問題です。
 
 システムの問題を特定するのは比較的簡単です。オプティマイザの問題を分析するには、実行プランが妥当かどうかを判断する必要があります。したがって、次の手順に従って、遅いクエリを分析することをお勧めします。
 
@@ -35,7 +35,7 @@ summary: Learn how to locate and analyze slow queries.
 
 次の方法を使用して、期間情報を取得できます。
 
--   [遅いログ](/identify-slow-queries.md) 。 [TiDBダッシュボード](/dashboard/dashboard-overview.md)で遅いログインを表示することをお勧めします。
+-   [遅いログ](/identify-slow-queries.md) 。遅いログを[TiDBダッシュボード](/dashboard/dashboard-overview.md)で表示することをお勧めします。
 -   [`EXPLAIN ANALYZE`ステートメント](/sql-statements/sql-statement-explain-analyze.md) 。
 
 上記の方法は、次の点で異なります。
@@ -51,8 +51,8 @@ summary: Learn how to locate and analyze slow queries.
 
 システムの問題は、SQLステートメントのさまざまな実行段階に応じて次のタイプに分類できます。
 
-1.  TiKVはデータ処理が遅いです。たとえば、TiKVコプロセッサーはデータをゆっくりと処理します。
-2.  TiDBの実行は遅いです。たとえば、 `Join`人のオペレーターはデータをゆっくりと処理します。
+1.  TiKVはデータ処理が遅いです。たとえば、TiKVコプロセッサーはデータの処理に時間がかかります。
+2.  TiDBの実行が遅い。たとえば、 `Join`オペレーターはデータをゆっくりと処理します。
 3.  他の重要な段階は遅いです。たとえば、タイムスタンプの取得には長い時間がかかります。
 
 遅いクエリごとに、最初にクエリが属するタイプを判別してから、詳細に分析します。
@@ -74,7 +74,7 @@ TiKVのデータ処理が遅い場合は、 `EXPLAIN ANALYZE`の結果で簡単�
 
 さらに、低速ログの`Cop_process`フィールドと`Cop_wait`フィールドも分析に役立ちます。次の例では、クエリの合計時間は約`180.85ms`で、最大の`coptask`は`171ms`になります。これは、このクエリのボトルネックがTiKV側にあることを示しています。
 
-スローログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
+低速ログの各フィールドの説明については、 [フィールドの説明](/identify-slow-queries.md#fields-description)を参照してください。
 
 ```log
 # Query_time: 0.18085
@@ -122,9 +122,9 @@ TiKVインスタンスには多くの古いデータがあり、データスキ�
 # Wait_TS: 0.02500000
 ```
 
-#### 古くなった地域情報 {#outdated-region-information}
+#### 古くなったリージョン情報 {#outdated-region-information}
 
-TiDB側の地域情報が古くなっている可能性があります。この状況では、TiKVは`regionMiss`エラーを返す可能性があります。次に、TiDBはPDからリージョン情報を再度取得します。これは`Cop_backoff`の情報に反映されます。失敗した時間と合計期間の両方が記録されます。
+TiDB側のリージョン情報が古くなっている可能性があります。この状況では、TiKVが`regionMiss`エラーを返す場合があります。次に、TiDBはPDからリージョン情報を再度取得します。これは`Cop_backoff`の情報に反映されます。失敗した時間と合計期間の両方が記録されます。
 
 ```
 # Cop_backoff_regionMiss_total_times: 200 Cop_backoff_regionMiss_total_time: 0.2 Cop_backoff_regionMiss_max_time: 0.2 Cop_backoff_regionMiss_max_addr: 127.0.0.1 Cop_backoff_regionMiss_avg_time: 0.2 Cop_backoff_regionMiss_p90_time: 0.2
@@ -133,7 +133,7 @@ TiDB側の地域情報が古くなっている可能性があります。この�
 
 #### サブクエリは事前に実行されます {#subqueries-are-executed-in-advance}
 
-相関のないサブクエリを含むステートメントの場合、サブクエリ部分が事前に実行される場合があります。たとえば、 `select * from t1 where a = (select max(a) from t2)`では、最適化段階で`select max(a) from t2`の部分が事前に実行される場合があります。 `EXPLAIN ANALYZE`の結果は、このタイプのサブクエリの期間を示していません。
+相関のないサブクエリを持つステートメントの場合、サブクエリ部分が事前に実行される場合があります。たとえば、 `select * from t1 where a = (select max(a) from t2)`では、 `select max(a) from t2`の部分が最適化段階で事前に実行される場合があります。 `EXPLAIN ANALYZE`の結果は、このタイプのサブクエリの期間を示していません。
 
 ```sql
 mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t1, t t2 where t1.a=t2.a);
@@ -149,7 +149,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 5 rows in set (7.77 sec)
 ```
 
-ただし、このタイプのサブクエリの実行は、低速ログで識別できます。
+ただし、このタイプのサブクエリの実行は、遅いログで識別できます。
 
 ```
 # Query_time: 7.770634843
@@ -161,7 +161,7 @@ mysql> explain analyze select count(*) from t where a=(select max(t1.a) from t t
 
 ### TiDBの実行が遅い {#tidb-is-slow-in-execution}
 
-TiDBの実行プランは正しいが、実行が遅いと仮定します。このタイプの問題を解決するには、SQLステートメントの`EXPLAIN ANALYZE`の結果に応じて、パラメーターを調整するか、ヒントを使用できます。
+TiDBの実行プランは正しいが、実行が遅いと仮定します。このタイプの問題を解決するには、SQLステートメントの`EXPLAIN ANALYZE`の結果に従って、パラメーターを調整するか、ヒントを使用します。
 
 実行計画が正しくない場合は、 [オプティマイザの問題を分析する](#analyze-optimizer-issues)セクションを参照してください。
 
@@ -189,7 +189,7 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 
 上に示したように、 `HashJoin_14`と`Projection_24`は実行時間の多くを消費します。実行を高速化するために、SQL変数を使用して同時実行性を高めることを検討してください。
 
-すべてのシステム変数は[システム変数](/system-variables.md)で文書化されています。 `HashJoin_14`の並行性を高めるために、 `tidb_hash_join_concurrency`システム変数を変更できます。
+すべてのシステム変数は[システム変数](/system-variables.md)に記載されています。 `HashJoin_14`の並行性を高めるために、 `tidb_hash_join_concurrency`システム変数を変更できます。
 
 #### データがディスクに流出する {#data-is-spilled-to-disk}
 
@@ -213,7 +213,7 @@ mysql> explain analyze select sum(t1.a) from t t1, t t2 where t1.a=t2.a;
 
 #### デカルト積で操作に参加する {#join-operations-with-cartesian-product}
 
-デカルト積を使用した結合操作により、最大`left child row count * right child row count`のデータ量が生成されます。これは非効率的であり、避ける必要があります。
+デカルト積との結合操作により、最大`left child row count * right child row count`のデータ量が生成されます。これは非効率的であり、避ける必要があります。
 
 このタイプの結合操作は、実行プランで`CARTESIAN`とマークされています。例えば：
 
@@ -244,7 +244,7 @@ mysql> explain select * from t t1, t t2 where t1.a>t2.a;
 4.  `select b from t where c=3` ：プレフィックス条件がないと、複数列のインデックスは使用できません。したがって、 `IndexFullScan`が使用されます。
 5.  ..。
 
-上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [TiDB実行計画を理解する](/explain-overview.md)を参照してください。
+上記の例は、データの読み取りに使用される演算子です。その他の演算子については、 [TiDB実行プランを理解する](/explain-overview.md)を参照してください。
 
 さらに、 [SQLチューニングの概要](/sql-tuning-overview.md)を読むと、TiDBオプティマイザーをよりよく理解し、実行プランが妥当かどうかを判断するのに役立ちます。
 

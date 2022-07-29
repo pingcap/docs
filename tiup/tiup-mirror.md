@@ -5,7 +5,7 @@ summary: Learn how to create a private mirror.
 
 # プライベートミラーを作成する {#create-a-private-mirror}
 
-プライベートクラウドを作成するときは、通常、TiUPの公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドによって実装されるプライベートミラーを作成できます。オフライン展開には`mirror`コマンドを使用することもできます。プライベートミラーを使用すると、自分で作成してパッケージ化したコンポーネントを使用することもできます。
+プライベートクラウドを作成するときは、通常、TiUPの公式ミラーにアクセスできない分離されたネットワーク環境を使用する必要があります。したがって、主に`mirror`コマンドで実装されるプライベートミラーを作成できます。 `mirror`コマンドを使用してオフライン展開することもできます。プライベートミラーを使用すると、自分で作成してパッケージ化したコンポーネントを使用することもできます。
 
 ## TiUP <code>mirror</code>の概要 {#tiup-code-mirror-code-overview}
 
@@ -79,7 +79,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     特定のプラットフォームのパッケージのみを複製する場合は、 `-os`と`-arch`を使用してプラットフォームを指定します。例えば：
 
-    -   `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行して、Linuxのクローンを作成します。
+    -   Linux用にクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行します。
     -   `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行して、amd64のクローンを作成します。
     -   `tiup mirror clone <target-dir> [global-version] --os=linux --arch=amd64`コマンドを実行して、linux/amd64のクローンを作成します。
 
@@ -88,7 +88,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
     コンポーネントの1つのバージョン（すべてのバージョンではない）のみを複製する場合は、 `--<component>=<version>`を使用してこのバージョンを指定します。例えば：
 
     -   `tiup mirror clone <target-dir> --tidb v6.1.0`コマンドを実行して、TiDBコンポーネントのv6.1.0バージョンのクローンを作成します。
-    -   `tiup mirror clone <target-dir> --tidb v6.1.0 --tikv all`コマンドを実行して、v6.1.0バージョンのTiDBコンポーネントとすべてのバージョンのTiKVコンポーネントのクローンを作成します。
+    -   `tiup mirror clone <target-dir> --tidb v6.1.0 --tikv all`コマンドを実行して、TiDBコンポーネントのv6.1.0バージョンとTiKVコンポーネントのすべてのバージョンのクローンを作成します。
     -   `tiup mirror clone <target-dir> v6.1.0`コマンドを実行して、クラスタのすべてのコンポーネントのv6.1.0バージョンのクローンを作成します。
 
 クローン作成後、署名キーが自動的に設定されます。
@@ -107,7 +107,7 @@ tiup mirror set https://tiup-mirror.example.com/
 
 > **ノート：**
 >
-> `tiup mirror clone`を実行しているマシンで`tiup mirror set...`を実行すると、次に`tiup mirror clone...`を実行すると、マシンはリモートミラーではなく、ローカルミラーからクローンを作成します。したがって、プライベートミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
+> `tiup mirror clone`を実行するマシンで`tiup mirror set...`を実行すると、次に`tiup mirror clone...`を実行するときに、マシンはリモートミラーではなくローカルミラーからクローンを作成します。したがって、プライベートミラーを更新する前に、 `tiup mirror set --reset`を実行してミラーをリセットする必要があります。
 
 ミラーを使用する別の方法は、 `TIUP_MIRRORS`の環境変数を使用することです。プライベートリポジトリで`tiup list`を実行する例を次に示します。
 
@@ -120,7 +120,7 @@ tiup list
 
 ### プライベートリポジトリを更新する {#update-the-private-repository}
 
-同じ`target-dir`で`tiup mirror clone`コマンドを再度実行すると、マシンは新しいマニフェストを作成し、利用可能なコンポーネントの最新バージョンをダウンロードします。
+同じ`target-dir`を使用して`tiup mirror clone`コマンドを再度実行すると、マシンは新しいマニフェストを作成し、使用可能なコンポーネントの最新バージョンをダウンロードします。
 
 > **ノート：**
 >

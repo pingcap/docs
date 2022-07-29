@@ -30,7 +30,7 @@ DELETE FROM {table} WHERE {filter}
 |  `{table}` |     テーブル名     |
 | `{filter}` | フィルターのマッチング条件 |
 
-この例は、 `DELETE`の単純なユースケースのみを示しています。詳細については、 [DELETE構文](/sql-statements/sql-statement-delete.md)を参照してください。
+この例は、 `DELETE`の単純な使用例のみを示しています。詳細については、 [DELETE構文](/sql-statements/sql-statement-delete.md)を参照してください。
 
 ## ベストプラクティス {#best-practices}
 
@@ -168,7 +168,7 @@ TiDBは[統計情報](/statistics.md)を使用してインデックスの選択�
 
 ### 一括削除の例 {#bulk-delete-example}
 
-特定の期間内にアプリケーションエラーを見つけたとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があり、15分で10,000を超えるレコードが書き込まれます。次のように実行できます。
+特定の期間内にアプリケーションエラーを見つけたとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があり、10,000を超えるレコードが15分で書き込まれます。次のように実行できます。
 
 <SimpleTab>
 <div label="Java">

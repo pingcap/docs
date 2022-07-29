@@ -3,7 +3,7 @@ title: Handle Alerts
 summary: Understand how to deal with the alert information in DM.
 ---
 
-# アラートを処理する {#handle-alerts}
+# アラートの処理 {#handle-alerts}
 
 このドキュメントでは、DMでアラート情報を処理する方法を紹介します。
 
@@ -34,7 +34,7 @@ summary: Understand how to deal with the alert information in DM.
 
     1.  対応するDM-workerノードの動作ステータスをビューします。
     2.  ノードが接続されているか確認してください。
-    3.  ログを介してエラーをトラブルシューティングします。
+    3.  ログを介してエラーのトラブルシューティングを行います。
 
 ### <code>DM_DDL_error</code> {#code-dm-ddl-error-code}
 
@@ -54,7 +54,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   解決：
 
-    一部のシナリオでは、保留中のシャーディングDDL操作がユーザーの期待どおりになる場合があります。それ以外の場合、解決策については[DMでシャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
+    シナリオによっては、保留中のシャーディングDDL操作がユーザーの期待どおりになる場合があります。それ以外の場合、解決策については[DMでシャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
 
 ## タスクステータスに関連するアラートルール {#alert-rules-related-to-task-status}
 
@@ -90,7 +90,7 @@ summary: Understand how to deal with the alert information in DM.
 
     アラートを処理するには、次の方法を使用できます。
 
-    -   不要なデータを手動で削除して、空きディスク容量を増やします。
+    -   不要なデータを手動で削除して、ディスクの空き容量を増やします。
     -   [リレーログの自動データパージ戦略](/dm/relay-log.md#automatic-data-purge)または[データを手動でパージする](/dm/relay-log.md#manual-data-purge)を再構成します。
     -   コマンド`pause-relay`を実行して、リレーログプルプロセスを一時停止します。十分な空きディスク容量ができたら、コマンド`resume-relay`を実行してプロセスを再開します。リレーログプルプロセスが一時停止した後、プルされていないアップストリームbinlogファイルをパージしてはならないことに注意してください。
 
@@ -182,7 +182,7 @@ summary: Understand how to deal with the alert information in DM.
 
 -   説明：
 
-    現在のリレーログ処理装置内のbinlogファイルの数が、binlog複製処理装置によって処理された最新のbinlogファイルの数を10分間1**以上超える**と、アラートがトリガーされます。
+    現在のリレーログ処理ユニット内のbinlogファイルの数が、binlogレプリケーション処理ユニットによって処理された最新のbinlogファイルの数を10分間1**以上超える**と、アラートがトリガーされます。
 
 -   解決：
 

@@ -19,10 +19,10 @@ TiDB Ansibleバージョン：2.1.10
 -   遅いログの1行が長すぎると、 `SLOW_QUERY`のテーブルを使用して遅いログをクエリするときにエラーレポートが発生する問題を修正します[＃10412](https://github.com/pingcap/tidb/pull/10412)
 -   `DATETIME` + `INTERVAL`の結果がMySQLの結果と同じでない場合があるという問題を修正し[＃10418](https://github.com/pingcap/tidb/pull/10418) [＃10416](https://github.com/pingcap/tidb/pull/10416)
 -   うるう年の2月の無効な時間のチェックを追加します[＃10417](https://github.com/pingcap/tidb/pull/10417)
--   DDL所有者でのみ内部初期化操作制限を実行して、クラスタ[＃10426](https://github.com/pingcap/tidb/pull/10426)を初期化するときに多数の競合エラーレポートを回避します。
+-   DDL所有者でのみ内部初期化操作の制限を実行して、クラスタ[＃10426](https://github.com/pingcap/tidb/pull/10426)を初期化するときに多数の競合エラーレポートを回避します。
 -   出力タイムスタンプ列のデフォルト値が[＃10337](https://github.com/pingcap/tidb/issues/10337)の場合、 `DESC`がMySQLと互換性がないという問題を修正し`default current_timestamp on update current_timestamp` 。
 -   `Update`ステートメント[＃10439](https://github.com/pingcap/tidb/pull/10439)の特権チェック中にエラーが発生する問題を修正します。
--   `RANGE`の計算が間違っていると、場合によっては`CHAR`列に間違った結果が生じるという問題を修正します[＃10455](https://github.com/pingcap/tidb/pull/10455)
+-   `RANGE`の計算を間違えると、場合によっては`CHAR`列に間違った結果が生じる問題を修正します[＃10455](https://github.com/pingcap/tidb/pull/10455)
 -   `SHARD_ROW_ID_BITS`を減らした後にデータが上書きされる可能性がある問題を修正し[＃9868](https://github.com/pingcap/tidb/pull/9868)
 -   `ORDER BY RAND()`が乱数[＃10064](https://github.com/pingcap/tidb/pull/10064)を返さない問題を修正します
 -   小数の精度を変更する`ALTER`ステートメントを禁止する[＃10458](https://github.com/pingcap/tidb/pull/10458)
@@ -30,7 +30,7 @@ TiDB Ansibleバージョン：2.1.10
 -   `PERIOD_ADD`のパラメータの有効性を確認して[＃10430](https://github.com/pingcap/tidb/pull/10430)
 -   TiDBの無効な`YEAR`文字列の動作がMySQL3の動作と互換性がないという問題を修正し[＃10493](https://github.com/pingcap/tidb/pull/10493)
 -   `ALTER DATABASE`構文[＃10503](https://github.com/pingcap/tidb/pull/10503)をサポートします
--   遅いクエリステートメント[＃10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合に、 `SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正します。
+-   遅いクエリステートメント[＃10536](https://github.com/pingcap/tidb/pull/10536)に`;`が存在しない場合、 `SLOW_QUERY`メモリエンジンがエラーを報告する問題を修正します。
 -   パーティションテーブルの`Add index`操作をキャンセルできない場合があるという問題を修正します[＃10533](https://github.com/pingcap/tidb/pull/10533)
 -   OOMpanicが回復できない場合がある問題を修正します[＃10545](https://github.com/pingcap/tidb/pull/10545)
 -   テーブルメタデータを書き換えるDDL操作のセキュリティを向上させる[＃10547](https://github.com/pingcap/tidb/pull/10547)
@@ -42,9 +42,9 @@ TiDB Ansibleバージョン：2.1.10
 ## TiKV {#tikv}
 
 -   転送の失敗を回避するために、最近構成が変更されたリージョンでリーダーの転送を拒否する[＃4684](https://github.com/tikv/tikv/pull/4684)
--   コプロセッサーメトリックス[＃4643](https://github.com/tikv/tikv/pull/4643)の優先ラベルを追加します
+-   コプロセッサーメトリックの優先ラベルを追加する[＃4643](https://github.com/tikv/tikv/pull/4643)
 -   リーダー[＃4724](https://github.com/tikv/tikv/pull/4724)の転送中に発生する可能性があったダーティリードの問題を修正します
--   `CommitMerge`が場合によってはTiKVの再起動エラーを引き起こすという問題を修正します[＃4615](https://github.com/tikv/tikv/pull/4615)
+-   `CommitMerge`がTiKVの再起動エラーを引き起こす場合があるという問題を修正します[＃4615](https://github.com/tikv/tikv/pull/4615)
 -   不明なログを修正する[＃4730](https://github.com/tikv/tikv/pull/4730)
 
 ## ツール {#tools}

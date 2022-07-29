@@ -19,7 +19,7 @@ summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
 
 ## 完全なデータをTiDBにインポートする {#import-full-data-to-tidb}
 
-### ステップAuroraスナップショットをAmazonS3にエクスポートします {#step-1-export-an-aurora-snapshot-to-amazon-s3}
+### 手順AuroraスナップショットをAmazonS3にエクスポートします {#step-1-export-an-aurora-snapshot-to-amazon-s3}
 
 1.  Auroraで、次のコマンドを実行して、現在のbinlogの位置を照会します。
 
@@ -27,7 +27,7 @@ summary: Learn how to migrate data from Amazon Aurora to TiDB using DB snapshot.
     mysql> SHOW MASTER STATUS;
     ```
 
-    出力は次のようになります。後で使用するために、binlogの名前と位置を記録します。
+    出力は次のようになります。後で使用できるように、binlogの名前と位置を記録します。
 
     ```
     +------------------+----------+--------------+------------------+-------------------+
@@ -59,7 +59,7 @@ AuroraのスナップショットファイルにはDDLステートメントが�
 tiup dumpling --host ${host} --port 3306 --user root --password ${password} --filter 'my_db1.table[12]' --no-data --output 's3://my-bucket/schema-backup?region=us-west-2' --filter "mydb.*"
 ```
 
-上記のコマンドで使用されるパラメータは次のとおりです。その他のパラメータについては、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
+上記のコマンドで使用されるパラメーターは次のとおりです。その他のパラメータについては、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
 | パラメータ                  | 説明                                                                                              |
 | ---------------------- | ----------------------------------------------------------------------------------------------- |
@@ -68,7 +68,7 @@ tiup dumpling --host ${host} --port 3306 --user root --password ${password} --fi
 | `-P`または`--port`        | MySQLポート                                                                                        |
 | `-h`または`--host`        | MySQLIPアドレス                                                                                     |
 | `-t`または`--thread`      | エクスポートに使用されるスレッドの数                                                                              |
-| `-o`または`--output`      | エクスポートされたファイルを保存するディレクトリ。ローカルパスまたは[外部ストレージURL](/br/backup-and-restore-storages.md)をサポート         |
+| `-o`または`--output`      | エクスポートされたファイルを格納するディレクトリ。ローカルパスまたは[外部ストレージURL](/br/backup-and-restore-storages.md)をサポート         |
 | `-r`または`--row`         | 1つのファイルの最大行数                                                                                    |
 | `-F`                   | MiBでの単一ファイルの最大サイズ。推奨値：256MiB。                                                                   |
 | `-B`または`--database`    | エクスポートするデータベースを指定します                                                                            |
@@ -145,9 +145,9 @@ TiDBクラスタでTLSを有効にする必要がある場合は、 [TiDB Lightn
 
 3.  インポートの開始後、次のいずれかの方法でインポートの進行状況を確認できます。
 
-    -   `grep`ログのキーワード`progress` 。進行状況は、デフォルトで5分ごとに更新されます。
+    -   `grep`ログのキーワード`progress` 。デフォルトでは、進行状況は5分ごとに更新されます。
     -   [監視ダッシュボード](/tidb-lightning/monitor-tidb-lightning.md)で進捗状況を確認します。
-    -   [TiDB Lightningインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
+    -   [TiDB Lightningインターフェイス](/tidb-lightning/tidb-lightning-web-interface.md)で進捗状況を確認します。
 
 4.  TiDB Lightningがインポートを完了すると、自動的に終了します。ログ印刷`the whole procedure completed`の最後の5行が見つかった場合、インポートは成功しています。
 
@@ -193,10 +193,10 @@ TiDBクラスタでTLSを有効にする必要がある場合は、 [TiDB Lightn
 
     上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-    | パラメータ                   | 説明                                                                |
-    | ----------------------- | ----------------------------------------------------------------- |
-    | `--master-addr`         | `dmctl`が接続されるクラスタの任意のDMマスターの`{advertise-addr}`例：172.16.10.71：8261 |
-    | `operate-source create` | データソースをDMクラスタにロードします。                                             |
+    | パラメータ                   | 説明                                                                  |
+    | ----------------------- | ------------------------------------------------------------------- |
+    | `--master-addr`         | `dmctl`が接続されるクラスタの任意のDMマスターの`{advertise-addr}` 、例：172.16.10.71：8261 |
+    | `operate-source create` | データソースをDMクラスタにロードします。                                               |
 
 ### ステップ2：移行タスクを作成する {#step-2-create-the-migration-task}
 
@@ -243,9 +243,9 @@ mysql-instances:
    #     safe-mode: true  # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental replication task, DM automatically enables the safe mode.
 ```
 
-上記のYAMLファイルは、移行タスクに必要な最小限の構成です。その他の設定項目については、 [DM高度なタスクConfiguration / コンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+上記のYAMLファイルは、移行タスクに必要な最小限の構成です。その他の構成項目については、 [DM Advanced Task Configuration / コンフィグレーション File](/dm/task-configuration-file-full.md)を参照してください。
 
-### ステップ3.移行タスクを実行します {#step-3-run-the-migration-task}
+### 手順3.移行タスクを実行します {#step-3-run-the-migration-task}
 
 移行タスクを開始する前に、エラーの可能性を減らすために、次の`check-task`コマンドを実行して、構成がDMの要件を満たしていることを確認することをお勧めします。
 
@@ -265,16 +265,16 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-| パラメータ           | 説明                                                                |
-| --------------- | ----------------------------------------------------------------- |
-| `--master-addr` | `dmctl`が接続されるクラスタの任意のDMマスターの`{advertise-addr}`例：172.16.10.71：8261 |
-| `start-task`    | 移行タスクを開始します。                                                      |
+| パラメータ           | 説明                                                                  |
+| --------------- | ------------------------------------------------------------------- |
+| `--master-addr` | `dmctl`が接続されるクラスタの任意のDMマスターの`{advertise-addr}` 、例：172.16.10.71：8261 |
+| `start-task`    | 移行タスクを開始します。                                                        |
 
 タスクの開始に失敗した場合は、プロンプトメッセージを確認し、構成を修正してください。その後、上記のコマンドを再実行してタスクを開始できます。
 
 問題が発生した場合は、 [DMエラー処理](/dm/dm-error-handling.md)と[DM FAQ](/dm/dm-faq.md)を参照してください。
 
-### 手順4.移行タスクのステータスを確認します {#step-4-check-the-migration-task-status}
+### 手順4.移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
 DMクラスタに進行中の移行タスクがあるかどうかとタスクのステータスを確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 
@@ -286,11 +286,11 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 結果の詳細な解釈については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
 
-### 手順5.タスクを監視してログを表示する {#step-5-monitor-the-task-and-view-logs}
+### 手順5.タスクを監視し、ログを表示する {#step-5-monitor-the-task-and-view-logs}
 
 移行タスクの履歴ステータスおよびその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUPを使用してDMをデプロイしたときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合は、デプロイメント中に指定されたIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
+TiUPを使用してDMをデプロイしたときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合は、デプロイ中に指定したIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
 
 DMの実行中、DM-worker、DM-master、およびdmctlは、関連情報をログに出力します。これらのコンポーネントのログディレクトリは次のとおりです。
 

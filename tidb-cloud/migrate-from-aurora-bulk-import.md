@@ -5,7 +5,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 # AuroraからTiDB Cloudに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-このドキュメントでは、 TiDB Cloudコンソールのインポートツールを使用して、AmazonAuroraMySQLからAuroraTiDB Cloudにデータを一括で移行する方法について説明します。
+このドキュメントでは、 TiDB Cloudコンソールのインポートツールを使用して、 AuroraからTiDB Cloudにデータを一括で移行する方法について説明します。
 
 ## TiDB Cloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
 
@@ -41,7 +41,7 @@ summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bul
 
 -   [オプション1：Dumplingを使用してソースデータファイルを準備する](#option-1-prepare-source-data-files-using-dumpling)
 
-    EC2で[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を起動し、データをAmazonS3にエクスポートする必要があります。エクスポートするデータは、ソースデータベースの最新のデータです。これはオンラインサービスに影響を与える可能性があります。Dumplingは、データをエクスポートするときにテーブルをロックします。
+    EC2で[Dumpling](/dumpling-overview.md)を起動し、データをAmazonS3にエクスポートする必要があります。エクスポートするデータは、ソースデータベースの最新のデータです。これはオンラインサービスに影響を与える可能性があります。Dumplingは、データをエクスポートするときにテーブルをロックします。
 
 -   [オプション2： Auroraスナップショットを使用してソースデータファイルを準備する](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
 
@@ -110,7 +110,7 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
 
 3.  ソースデータベースをS3にバックアップします。
 
-    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、山かっこ（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を参照してください。
+    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、山かっこ（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](/table-filter.md#syntax)を参照してください。
 
     {{< copyable "" >}}
 
@@ -203,13 +203,13 @@ Auroraからデータを移行するには、データベースのスキーマ�
 
 ## クロスアカウントアクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
 
-TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access)を参照してください。
+TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
 完了すると、クロスアカウントのポリシーと役割が作成されます。その後、 TiDB Cloudのデータインポートタスクパネルで構成を続行できます。
 
 ## フィルタルールを設定する方法を学ぶ {#learn-how-to-set-up-filter-rules}
 
-[テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)ドキュメントを参照してください。
+[テーブルフィルター](/table-filter.md#syntax)ドキュメントを参照してください。
 
 ## 不完全なデータをクリーンアップする方法を学ぶ {#learn-how-to-clean-up-incomplete-data}
 

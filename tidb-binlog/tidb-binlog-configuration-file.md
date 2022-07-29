@@ -61,7 +61,7 @@ summary: Learn the configuration items of TiDB Binlog.
 -   ログレベルを指定します。
 -   デフォルト値： `info`
 
-### node-id {#node-id}
+### ノードID {#node-id}
 
 -   PumpノードIDを指定します。このIDを使用すると、このPumpプロセスをクラスタで識別できます。
 -   デフォルト値： `hostname:port number` 。たとえば、 `node-1:8250` 。
@@ -72,7 +72,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### ssl-ca {#ssl-ca}
 
--   トラステッドSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
+-   信頼できるSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
 -   デフォルト値： &quot;&quot;
 
 #### ssl-cert {#ssl-cert}
@@ -96,7 +96,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### kv_chan_cap {#kv-chan-cap}
 
--   Pumpがこれらの要求を受信する前に、バッファーが保管できる書き込み要求の数を指定します。
+-   Pumpがこれらの要求を受信する前にバッファが保存できる書き込み要求の数を指定します。
 -   デフォルト値： `1048576` （つまり、2の20乗）
 
 #### slow_write_threshold {#slow-write-threshold}
@@ -106,20 +106,20 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### stop-write-at-available-space {#stop-write-at-available-space}
 
--   使用可能なストレージ容量がこの指定された値を下回ると、 Binlog書き込み要求は受け入れられなくなります。 `900 MB`などの形式を使用して、 `12 GiB`スペースを指定でき`5 GB` 。クラスタに複数のPumpノードがある場合、スペースが不足しているためにPumpノードが書き込み要求を拒否すると、TiDBは自動的に他のPumpノードにbinlogを書き込みます。
+-   使用可能なストレージスペースがこの指定された値を下回ると、 Binlog書き込み要求は受け入れられなくなります。 `900 MB`などの形式を使用して、 `12 GiB`スペースを指定でき`5 GB` 。クラスタに複数のPumpノードがある場合、スペースが不足しているためにPumpノードが書き込み要求を拒否すると、TiDBは自動的にbinlogを他のPumpノードに書き込みます。
 -   デフォルト値： `10 GiB`
 
 #### kv {#kv}
 
-現在、 Pumpのストレージは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel構成を調整するために使用される`kv`のサブグループもあります。サポートされている構成項目は次のとおりです。
+現在、 Pumpのストレージは[GoLevelDB](https://github.com/syndtr/goleveldb)に基づいて実装されています。 `storage`の下には、GoLevel構成を調整するために使用される`kv`のサブグループもあります。サポートされている構成アイテムを以下に示します。
 
 -   ブロックキャッシュ容量
 -   block-restart-interval
 -   ブロックサイズ
--   圧縮-L0トリガー
+-   圧縮-L0-トリガー
 -   圧縮テーブルサイズ
 -   圧縮-合計サイズ
--   圧縮-合計サイズ-乗数
+-   圧縮-合計-サイズ-乗数
 -   書き込みバッファ
 -   書き込み-L0-一時停止-トリガー
 -   書き込み-L0-スローダウン-トリガー
@@ -150,7 +150,7 @@ summary: Learn the configuration items of TiDB Binlog.
 -   ログレベルを指定します。
 -   デフォルト値： `info`
 
-### node-id {#node-id}
+### ノードID {#node-id}
 
 -   DrainerノードIDを指定します。このIDを使用すると、このDrainerプロセスをクラスタで識別できます。
 -   デフォルト値： `hostname:port number` 。たとえば、 `node-1:8249` 。
@@ -173,15 +173,15 @@ summary: Learn the configuration items of TiDB Binlog.
 ### initial-commit-ts {#initial-commit-ts}
 
 -   トランザクションのどのコミットタイムスタンプからレプリケーションプロセスを開始するかを指定します。この構成は、初めてレプリケーションプロセスにあるDrainerノードにのみ適用できます。チェックポイントがダウンストリームにすでに存在する場合、レプリケーションはチェックポイントに記録された時間に従って実行されます。
--   commit ts（コミットタイムスタンプ）は、TiDBでの[取引](/transaction-overview.md#transactions)のコミットの特定の時点です。これは、現在のトランザクションの一意のIDとして、グローバルに一意であり、PDから増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`の構成を取得できます。
-    -   BRを使用する場合、BR（backupmeta）によってバックアップされたメタデータに記録されたバックアップTSから`initial-commit-ts`を取得できます。
+-   commit ts（コミットタイムスタンプ）は、TiDBでの[取引](/transaction-overview.md#transactions)のコミットの特定の時点です。これは、現在のトランザクションの一意のIDとして、PDからのグローバルに一意で増加するタイムスタンプです。次の一般的な方法で`initial-commit-ts`の構成を取得できます。
+    -   BRを使用する場合、BRによってバックアップされたメタデータ（backupmeta）に記録されたバックアップTSから`initial-commit-ts`を取得できます。
     -   Dumplingを使用する場合、Dumpling（メタデータ）によってバックアップされたメタデータに記録されたPosから`initial-commit-ts`を取得できます。
-    -   PD Controlを使用する場合、 `tso`コマンドの出力に`initial-commit-ts`が含まれます。
+    -   PD Controlが使用されている場合、 `initial-commit-ts`は`tso`コマンドの出力にあります。
 -   デフォルト値： `-1` 。 Drainerは、開始時刻としてPDから新しいタイムスタンプを取得します。これは、レプリケーションプロセスが現在の時刻から開始されることを意味します。
 
 ### 同期チェック時間 {#synced-check-time}
 
--   HTTP APIを介して`/status`のパスにアクセスし、 Drainerレプリケーションのステータスを照会できます。 `synced-check-time`は、最後に成功したレプリケーションから`synced`分、つまりレプリケーションが完了したと見なされる分数を指定します。
+-   HTTP APIを介して`/status`のパスにアクセスし、 Drainerレプリケーションのステータスを照会できます。 `synced-check-time`は、最後に成功したレプリケーションから何分が`synced`と見なされるか、つまりレプリケーションが完了したかを指定します。
 -   デフォルト値： `5`
 
 ### コンプレッサー {#compressor}
@@ -195,7 +195,7 @@ summary: Learn the configuration items of TiDB Binlog.
 
 #### ssl-ca {#ssl-ca}
 
--   トラステッドSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
+-   信頼できるSSL証明書リストまたはCAリストのファイルパスを指定します。たとえば、 `/path/to/ca.pem` 。
 -   デフォルト値： &quot;&quot;
 
 #### ssl-cert {#ssl-cert}
@@ -263,7 +263,7 @@ binlogファイル内のすべての変更がフィルタリングされると�
 -   複製するデータベースを指定します。たとえば、 `[db1, db2]` 。
 -   デフォルト値： `[]`
 
-#### 複製-実行-テーブル {#replicate-do-table}
+#### レプリケート-実行-テーブル {#replicate-do-table}
 
 複製するテーブルを指定します。例えば：
 
@@ -307,7 +307,7 @@ tbl-name = "~^a.*"
 
 ### syncer.to {#syncer-to}
 
-`syncer.to`のセクションでは、構成タイプに応じて、さまざまなタイプのダウンストリーム構成アイテムを紹介します。
+`syncer.to`セクションでは、構成タイプに応じて、さまざまなタイプのダウンストリーム構成アイテムを紹介します。
 
 #### mysql / tidb {#mysql-tidb}
 
@@ -337,7 +337,7 @@ tbl-name = "~^a.*"
 
 -   `type` ：レプリケーションの進行状況を保存する方法を指定します。現在、使用可能なオプションは`mysql` 、および`tidb` `file` 。
 
-    この構成項目は、デフォルトでダウンストリームタイプと同じです。たとえば、ダウンストリームが`file`の場合、チェックポイントの進行状況はローカルファイル`<data-dir>/savepoint`に保存されます。ダウンストリームが`mysql`の場合、進行状況はダウンストリームデータベースに保存されます。進行状況を保存するために`mysql`または`tidb`を使用して明示的に指定する必要がある場合は、次の構成を行います。
+    この構成アイテムは、デフォルトでダウンストリームタイプと同じです。たとえば、ダウンストリームが`file`の場合、チェックポイントの進行状況はローカルファイル`<data-dir>/savepoint`に保存されます。ダウンストリームが`mysql`の場合、進行状況はダウンストリームデータベースに保存されます。進行状況を保存するために`mysql`または`tidb`を使用して明示的に指定する必要がある場合は、次の構成を行います。
 
 -   デフォルトでは`schema` ： `"tidb_binlog"` 。
 

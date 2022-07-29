@@ -5,7 +5,7 @@ summary: This document describes best practices for configuration and usage of H
 
 # TiDBでHAProxyを使用するためのベストプラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-このドキュメントでは、TiDBでの[HAProxy](https://github.com/haproxy/haproxy)の構成と使用に関するベストプラクティスについて説明します。 HAProxyは、TCPベースのアプリケーションに負荷分散を提供します。 TiDBクライアントからは、HAProxyによって提供されるフローティング仮想IPアドレスに接続するだけでデータを操作できます。これは、TiDBサーバー層での負荷分散を実現するのに役立ちます。
+このドキュメントでは、TiDBでの[HAProxy](https://github.com/haproxy/haproxy)の構成と使用に関するベストプラクティスについて説明します。 HAProxyは、TCPベースのアプリケーションに負荷分散を提供します。 TiDBクライアントから、HAProxyによって提供されるフローティング仮想IPアドレスに接続するだけでデータを操作できます。これは、TiDBサーバー層での負荷分散を実現するのに役立ちます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
@@ -13,16 +13,16 @@ summary: This document describes best practices for configuration and usage of H
 
 HAProxyは、C言語で記述された無料のオープンソースソフトウェアであり、TCPおよびHTTPベースのアプリケーションに高可用性ロードバランサーとプロキシサーバーを提供します。 CPUとメモリを高速かつ効率的に使用するため、HAProxyは現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）などの多くの有名なWebサイトで広く使用されています。
 
-HAProxyは、2000年にLinuxカーネルのコアコントリビューターであるWilly Tarreauによって作成されました。彼は、プロジェクトのメンテナンスを引き続き担当し、オープンソースコミュニティで無料のソフトウェアアップデートを提供しています。このガイドでは、 [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定バージョンを使用することをお勧めします。詳細については、 [リリースされたバージョンのHAProxy](http://www.haproxy.org/)を参照してください。
+HAProxyは、2000年にLinuxカーネルのコアコントリビューターであるWilly Tarreauによって作成されました。彼は、プロジェクトのメンテナンスを引き続き担当し、オープンソースコミュニティで無料のソフトウェアアップデートを提供しています。このガイドでは、 [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定バージョンを使用することをお勧めします。詳細については、 [HAProxyのリリースバージョン](http://www.haproxy.org/)を参照してください。
 
 ## 基本的な機能 {#basic-features}
 
 -   [高可用性](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.4) ：HAProxyは、正常なシャットダウンとシームレスなスイッチオーバーをサポートする高可用性を提供します。
--   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) ：2つの主要なプロキシモードがサポートされています。TCP（レイヤー4とも呼ばれます）とHTTP（レイヤー7とも呼ばれます）。ラウンドロビン、leastconn、ランダムなど、9つ以上の負荷分散アルゴリズムがサポートされています。
+-   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) ：2つの主要なプロキシモードがサポートされています。TCP（レイヤー4とも呼ばれます）とHTTP（レイヤー7とも呼ばれます）。ラウンドロビン、最小接続、ランダムなど、9つ以上の負荷分散アルゴリズムがサポートされています。
 -   [健康診断](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#5.2-check) ：HAProxyは、サーバーのHTTPまたはTCPモードのステータスを定期的にチェックします。
 -   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.6) ：HAProxyは、アプリケーションがスティッキーセッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
 -   [SSL](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.2) ：HTTPS通信と解決がサポートされています。
--   [監視と統計](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.3) ：Webページを通じて、サービスの状態とトラフィックの流れをリアルタイムで監視できます。
+-   [監視と統計](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.3) ：Webページを通じて、サービスの状態とトラフィックフローをリアルタイムで監視できます。
 
 ## あなたが始める前に {#before-you-begin}
 
@@ -41,7 +41,7 @@ HAProxyをデプロイする前に、ハードウェアとソフトウェアの�
 
 ### ソフトウェア要件 {#software-requirements}
 
-次のオペレーティングシステムを使用して、必要な依存関係がインストールされていることを確認できます。 yumを使用してHAProxyをインストールする場合、依存関係はそれと一緒にインストールされるため、それらを個別に再度インストールする必要はありません。
+次のオペレーティングシステムを使用して、必要な依存関係がインストールされていることを確認できます。 yumを使用してHAProxyをインストールする場合、依存関係はそれと一緒にインストールされるため、個別に再度インストールする必要はありません。
 
 #### オペレーティングシステム {#operating-systems}
 
@@ -54,7 +54,7 @@ HAProxyをデプロイする前に、ハードウェアとソフトウェアの�
 
 > **ノート：**
 >
-> -   サポートされている他のオペレーティングシステムの詳細については、 [HAProxyのドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
+> -   サポートされている他のオペレーティングシステムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 
@@ -148,7 +148,7 @@ haproxy --help
 | `-L <name>`                     | ローカルピア名を`<name>`に変更します。これは、デフォルトでローカルホスト名になります。                                                                                                      |
 | `-p <file>`                     | 起動時にすべてのプロセスのPIDを`<file>`に書き込みます。                                                                                                                    |
 | `-de`                           | epoll（7）の使用を無効にします。 epoll（7）は、Linux2.6および一部のカスタムLinux2.4システムでのみ使用できます。                                                                               |
-| `-dp`                           | poll（2）の使用を無効にします。代わりにselect（2）を使用できます。                                                                                                              |
+| `-dp`                           | poll（2）の使用を無効にします。代わりにselect（2）が使用される場合があります。                                                                                                        |
 | `-dS`                           | 古いカーネルでは壊れているsplice（2）の使用を無効にします。                                                                                                                    |
 | `-dR`                           | SO_REUSEPORTの使用を無効にします。                                                                                                                              |
 | `-dr`                           | サーバーアドレス解決の失敗を無視します。                                                                                                                                 |

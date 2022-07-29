@@ -5,7 +5,7 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 
 # <code>AS OF TIMESTAMP</code>句を使用して履歴データを読み取る {#read-historical-data-using-the-code-as-of-timestamp-code-clause}
 
-このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[古い読み取り](/stale-read.md)機能を実行し、TiDBの履歴データを読み取る方法について説明します。これには、履歴データを保存するための具体的な使用例と戦略が含まれます。
+このドキュメントでは、 `AS OF TIMESTAMP`句を使用して[古い読み取り](/stale-read.md)機能を実行し、TiDBの履歴データを読み取る方法について説明します。これには、特定の使用例と履歴データを保存するための戦略が含まれます。
 
 > **警告：**
 >
@@ -14,13 +14,13 @@ summary: Learn how to read historical data using the `AS OF TIMESTAMP` statement
 > この問題を解決するには、StaleReadクエリのTiFlashレプリカを無効にします。これを行うには、次のいずれかの操作を実行します。
 >
 > -   `set session tidb_isolation_read_engines='tidb,tikv'`変数を使用します。
-> -   [ヒント](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を使用して、TiDBがTiKVからデータを読み取るように強制します。
+> -   [ヒント](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を使用して、TiDBにTiKVからデータを読み取るように強制します。
 
-TiDBは、特別なクライアントやドライバーを必要とせずに、 `AS OF TIMESTAMP`のSQL句である標準SQLインターフェイスを介した履歴データの読み取りをサポートします。データが更新または削除された後、このSQLインターフェイスを使用して、更新または削除前の履歴データを読み取ることができます。
+TiDBは、特別なクライアントやドライバーを必要とせずに、 `AS OF TIMESTAMP`のSQL句である標準のSQLインターフェイスを介した履歴データの読み取りをサポートします。データが更新または削除された後、このSQLインターフェイスを使用して、更新または削除前の履歴データを読み取ることができます。
 
 > **ノート：**
 >
-> 履歴データを読み取る場合、TiDBは、現在のテーブル構造が異なっていても、古いテーブル構造のデータを返します。
+> TiDBは、履歴データを読み取るときに、現在のテーブル構造が異なっていても、古いテーブル構造のデータを返します。
 
 ## 構文 {#syntax}
 
@@ -30,7 +30,7 @@ TiDBは、特別なクライアントやドライバーを必要とせずに、 
 -   [`START TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-start-transaction.md)
 -   [`SET TRANSACTION READ ONLY AS OF TIMESTAMP`](/sql-statements/sql-statement-set-transaction.md)
 
-正確な時点を指定する場合は、日時値を設定するか、 `AS OF TIMESTAMP`句で時刻関数を使用できます。日時の形式は「2016-10-0816：45：26.999」のようにミリ秒が最小時間単位ですが、ほとんどの場合、「2016-10-08 16：45：26.999」のように、秒の時間単位で日時を指定できます。 -10-0816:45:26&quot;。 `NOW(3)`関数を使用して、現在の時刻をミリ秒まで取得することもできます。数秒前のデータを読みたい場合は、 `NOW() - INTERVAL 10 SECOND`などの式を使用することを**お勧め**します。
+正確な時点を指定する場合は、日時値を設定するか、 `AS OF TIMESTAMP`句で時間関数を使用できます。日時の形式は「2016-10-0816：45：26.999」のようで、最小時間単位はミリ秒ですが、「2016-10-08 16：45：26.999」のように、ほとんどの場合、秒の時間単位で十分です。 -10-0816:45:26&quot;。 `NOW(3)`関数を使用して、現在の時刻をミリ秒まで取得することもできます。数秒前のデータを読み取りたい場合は、 `NOW() - INTERVAL 10 SECOND`などの式を使用することを**お勧め**します。
 
 時間範囲を指定する場合は、句で`TIDB_BOUNDED_STALENESS()`関数を使用できます。この関数を使用すると、TiDBは指定された時間範囲内で適切なタイムスタンプを選択します。 「適切」とは、このタイムスタンプより前に開始され、アクセスされたレプリカでコミットされていないトランザクションがないことを意味します。つまり、TiDBはアクセスされたレプリカで読み取り操作を実行でき、読み取り操作はブロックされません。この関数を呼び出すには、 `TIDB_BOUNDED_STALENESS(t1, t2)`を使用する必要があります。 `t1`と`t2`は時間範囲の両端であり、日時値または時間関数のいずれかを使用して指定できます。
 
@@ -49,7 +49,7 @@ TiDBは、特別なクライアントやドライバーを必要とせずに、 
 
 ## 使用例 {#usage-examples}
 
-このセクションでは、いくつかの例を使用して`AS OF TIMESTAMP`句を使用するさまざまな方法について説明します。最初に、リカバリ用のデータを準備する方法を紹介し、次に、それぞれ`SELECT` 、および`START TRANSACTION READ ONLY AS OF TIMESTAMP`で`AS OF TIMESTAMP`を使用する方法を示し`SET TRANSACTION READ ONLY AS OF TIMESTAMP` 。
+このセクションでは、いくつかの例を使用して`AS OF TIMESTAMP`句を使用するさまざまな方法について説明します。最初に、リカバリ用にデータを準備する方法を紹介し、次に、それぞれ`SELECT` 、および`START TRANSACTION READ ONLY AS OF TIMESTAMP`で`AS OF TIMESTAMP`を使用する方法を示し`SET TRANSACTION READ ONLY AS OF TIMESTAMP` 。
 
 ### データサンプルを準備する {#prepare-data-sample}
 

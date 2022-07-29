@@ -31,7 +31,7 @@ tiup cluster clean <cluster-name> [flags]
 
 ### &#x20;--data {#data}
 
--   データをクリーンアップします。 `--all`も指定されていない場合、データはクリーンアップされません。
+-   データをクリーンアップします。それも`--all`も指定されていない場合、データはクリーンアップされません。
 -   データ型： `BOOLEAN`
 -   このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加して、 `true`の値を渡すか、値を渡さないようにします。
 
@@ -43,7 +43,7 @@ tiup cluster clean <cluster-name> [flags]
 
 ### --ignore-node {#ignore-node}
 
--   クリーニングが不要なノードを指定します。複数のノードを指定するには、このオプションを複数回使用できます。たとえば、 `--ignore-node <node-A> --ignore-node <node-B>` 。
+-   クリーニングを必要としないノードを指定します。複数のノードを指定するには、このオプションを複数回使用できます。たとえば、 `--ignore-node <node-A> --ignore-node <node-B>` 。
 -   データ型： `StringArray`
 -   デフォルト：空
 
@@ -53,7 +53,7 @@ tiup cluster clean <cluster-name> [flags]
 -   データ型： `StringArray`
 -   デフォルト：空
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を印刷します。
 -   データ型： `BOOLEAN`

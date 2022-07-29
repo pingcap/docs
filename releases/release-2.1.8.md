@@ -13,7 +13,7 @@ TiDB Ansibleバージョン：2.1.8
 ## TiDB {#tidb}
 
 -   NULL値のパラメーター[＃9930](https://github.com/pingcap/tidb/pull/9930)がある場合、 `GROUP_CONCAT`の関数の処理ロジックがMySQLと互換性がないという問題を修正します。
--   `Distinct`モード[＃9931](https://github.com/pingcap/tidb/pull/9931)での10進値の等価性チェックの問題を修正しました
+-   `Distinct`モード[＃9931](https://github.com/pingcap/tidb/pull/9931)での10進値の等価性チェックの問題を修正しました。
 -   `SHOW FULL COLUMNS`ステートメントの日付、日時、およびタイムスタンプタイプの照合順序互換性の問題を修正します
     -   [＃9938](https://github.com/pingcap/tidb/pull/9938)
     -   [＃10114](https://github.com/pingcap/tidb/pull/10114)
@@ -23,8 +23,8 @@ TiDB Ansibleバージョン：2.1.8
     -   [＃9966](https://github.com/pingcap/tidb/pull/9966)
 -   互換性を向上させるために、 `STR_TO_DATE`関数の`%H`形式をサポートします[＃9964](https://github.com/pingcap/tidb/pull/9964)
 -   `GROUP_CONCAT`の関数が一意のインデックスでグループ化されている場合に結果が間違っているという問題を修正します[＃9969](https://github.com/pingcap/tidb/pull/9969)
--   オプティマイザのヒントに一致しないテーブル名が含まれている場合に警告を返します[＃9970](https://github.com/pingcap/tidb/pull/9970)
--   ログ形式を統合して、分析用ツールを使用したログの収集を容易にします統合ログ形式
+-   オプティマイザーのヒントに一致しないテーブル名が含まれている場合に警告を返します[＃9970](https://github.com/pingcap/tidb/pull/9970)
+-   ログ形式を統合して、分析用のツールを使用したログの収集を容易にします。統合ログ形式
 -   多くのNULL値が不正確な統計推定を引き起こす問題を修正します[＃9979](https://github.com/pingcap/tidb/pull/9979)
 -   TIMESTAMPタイプのデフォルト値が境界値[＃9987](https://github.com/pingcap/tidb/pull/9987)の場合にエラーが報告される問題を修正します
 -   13の[＃10000](https://github.com/pingcap/tidb/pull/10000)を検証し`time_zone`
@@ -50,14 +50,14 @@ TiDB Ansibleバージョン：2.1.8
 ## ツール {#tools}
 
 -   Lightningのテーブルのインポート順序を最適化して、インポートプロセス中にクラスタで`Checksum`と`Analyze`を実行する大きなテーブルの影響を減らし、 `Checksum`と[＃156](https://github.com/pingcap/tidb-lightning/pull/156)の成功率を向上させ`Analyze` 。
--   KVエンコーダー[＃145](https://github.com/pingcap/tidb-lightning/pull/145)の追加の解析作業を回避するために、データソースファイルのコンテンツをTiDBの`types.Datum`に直接解析することにより、LightningのエンコードSQLパフォーマンスを50％向上させます。
+-   データソースファイルのコンテンツをTiDBの`types.Datum`に直接解析して、KVエンコーダー[＃145](https://github.com/pingcap/tidb-lightning/pull/145)の追加の解析作業を回避することにより、LightningのエンコードSQLパフォーマンスを50％向上させます。
 -   PiDB Binlog Pumpに`storage.sync-log`の構成アイテムを追加して、 Pumpでローカルストレージのディスクの非同期フラッシュをサポートし[＃529](https://github.com/pingcap/tidb-binlog/pull/529) 。
 -   TiDBBinlogPumpとBinlog間の通信のトラフィック圧縮をサポートし[＃530](https://github.com/pingcap/tidb-binlog/pull/530)
 -   TiDB Binlogに`syncer.sql-mode`の構成アイテムを追加して、異なる`sql-mode`秒を使用したDDLクエリの解析をサポートします[＃513](https://github.com/pingcap/tidb-binlog/pull/513)
--   複製さDrainerないフィルタリングテーブルをサポートするために、 Binlogに`syncer.ignore-table`の構成アイテムを追加します[＃526](https://github.com/pingcap/tidb-binlog/pull/526)
+-   複製さDrainerないフィルタリングテーブルをサポートするために、 Binlogに`syncer.ignore-table`の構成アイテムを追加します[#526](https://github.com/pingcap/tidb-binlog/pull/526)
 
 ## TiDB Ansible {#tidb-ansible}
 
 -   オペレーティングシステムのバージョン制限を変更し、CentOS7.0以降およびRedHat7.0以降のみをサポートします[＃734](https://github.com/pingcap/tidb-ansible/pull/734)
--   すべてのOS3で`epollexclusive`がサポートされているかどうかをチェックする機能を追加し[＃728](https://github.com/pingcap/tidb-ansible/pull/728)
--   ローリングアップデートのバージョン制限を追加して、2.0.1以前のバージョンから2.1以前のバージョンへのアップグレードを禁止します[＃728](https://github.com/pingcap/tidb-ansible/pull/728)
+-   すべてのOS3で`epollexclusive`がサポートされているかどうかを確認する機能を追加し[＃728](https://github.com/pingcap/tidb-ansible/pull/728)
+-   ローリングアップデートのバージョン制限を追加して、2.0.1以前のバージョンから2.1以降のバージョンへのアップグレードを禁止します[＃728](https://github.com/pingcap/tidb-ansible/pull/728)

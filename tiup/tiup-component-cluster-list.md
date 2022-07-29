@@ -18,7 +18,7 @@ tiup cluster list [flags]
 
 ## オプション {#options}
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を印刷します。
 -   データ型： `BOOLEAN`
@@ -31,7 +31,7 @@ tiup cluster list [flags]
 -   名前：クラスタ名
 -   ユーザー：デプロイメントユーザー
 -   バージョン：クラスタバージョン
--   パス：コントロールマシン上のクラスタ展開データのパス
+-   パス：制御マシン上のクラスタ展開データのパス
 -   PrivateKey：クラスタの接続に使用される秘密鍵のパス
 
 [&lt;&lt;前のページに戻る-TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

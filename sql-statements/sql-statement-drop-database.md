@@ -5,7 +5,7 @@ summary: An overview of the usage of DROP DATABASE for the TiDB database.
 
 # ドロップデータベース {#drop-database}
 
-`DROP DATABASE`ステートメントは、指定されたデータベーススキーマ、および内部で作成されたすべてのテーブルとビューを完全に削除します。ドロップされたデータベースに関連付けられているユーザー権限は影響を受けません。
+`DROP DATABASE`ステートメントは、指定されたデータベーススキーマ、および内部で作成されたすべてのテーブルとビューを完全に削除します。ドロップされたデータベースに関連付けられているユーザー特権は影響を受けません。
 
 ## あらすじ {#synopsis}
 
@@ -46,7 +46,7 @@ mysql> SHOW DATABASES;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 

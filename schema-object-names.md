@@ -96,7 +96,7 @@ CREATE TABLE t (i int);
 CREATE TABLE test.t (i int);
 ```
 
-空白は`.`の周りに存在できます。 `table_name.col_name`と`table_name . col_name`は同等です。
+空白は約`.`に存在する可能性があります。 `table_name.col_name`と`table_name . col_name`は同等です。
 
 この識別子を引用するには、次を使用します。
 

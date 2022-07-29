@@ -12,7 +12,7 @@ TiDBバージョン：4.0.2
 
 -   TiDB
 
-    -   遅いクエリログとステートメントサマリーテーブル[＃18130](https://github.com/pingcap/tidb/pull/18130)の機密情報を削除します
+    -   遅いクエリログとステートメントサマリーテーブルの機密情報を削除する[＃18130](https://github.com/pingcap/tidb/pull/18130)
     -   シーケンスキャッシュ[＃18103](https://github.com/pingcap/tidb/pull/18103)で負の値を禁止する
     -   `CLUSTER_INFO`のテーブルからトゥームストーンTiKVおよびTiFlashストアを削除します[＃17953](https://github.com/pingcap/tidb/pull/17953)
     -   診断ルールを`current-load`から[＃17660](https://github.com/pingcap/tidb/pull/17660)に変更し`node-check`
@@ -23,25 +23,25 @@ TiDBバージョン：4.0.2
 
 ## 新しい変更 {#new-change}
 
--   デフォルトでは、TiDBおよびTiDBダッシュボードは使用法の詳細をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます[＃18180](https://github.com/pingcap/tidb/pull/18180) 。共有される内容と共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
+-   デフォルトでは、TiDBとTiDBダッシュボードは使用法の詳細をPingCAPと共有して、製品を改善する方法を理解するのに役立ちます[＃18180](https://github.com/pingcap/tidb/pull/18180) 。共有されるものと共有を無効にする方法の詳細については、 [テレメトリー](/telemetry.md)を参照してください。
 
 ## 新機能 {#new-features}
 
 -   TiDB
 
     -   `INSERT`のステートメントで`MEMORY_QUOTA()`のヒントをサポートする[＃18101](https://github.com/pingcap/tidb/pull/18101)
-    -   TLS証明書の`SAN`フィールドに基づく認証をサポート[＃17698](https://github.com/pingcap/tidb/pull/17698)
-    -   `REGEXP()`関数[＃17581](https://github.com/pingcap/tidb/pull/17581)の照合順序をサポートします
+    -   TLS証明書[＃17698](https://github.com/pingcap/tidb/pull/17698)の`SAN`フィールドに基づく認証をサポートします
+    -   `REGEXP()`関数[＃17581](https://github.com/pingcap/tidb/pull/17581)の照合順序をサポート
     -   `sql_select_limit`セッションとグローバル変数[＃17604](https://github.com/pingcap/tidb/pull/17604)をサポートします
     -   デフォルトで新しく追加されたパーティションのリージョンの分割をサポート[＃17665](https://github.com/pingcap/tidb/pull/17665)
     -   `BITXOR()`関数の`IF()` `BITNEG()` `JSON_LENGTH()`への[＃17592](https://github.com/pingcap/tidb/pull/17592)をサポート[＃17651](https://github.com/pingcap/tidb/pull/17651)
     -   `COUNT(DISTINCT)` [＃18120](https://github.com/pingcap/tidb/pull/18120)の近似結果を計算するために、新しい集計関数`APPROX_COUNT_DISTINCT()`をサポートします。
     -   TiFlashでの照合順序をサポートし、照合関連関数を[＃17705](https://github.com/pingcap/tidb/pull/17705)にプッシュします。
-    -   サーバー[＃17695](https://github.com/pingcap/tidb/pull/17695)のステータスアドレスを示すために、 `INFORMATION_SCHEMA.INSPECTION_RESULT`のテーブルに`STATUS_ADDRESS`の列を追加します。
-    -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングがどのように作成されるかを示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
+    -   サーバー[＃17695](https://github.com/pingcap/tidb/pull/17695)のステータスアドレスを示すために、 `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加します。
+    -   `MYSQL.BIND_INFO`テーブルに`SOURCE`列を追加して、バインディングの作成方法を示します[＃17587](https://github.com/pingcap/tidb/pull/17587)
     -   `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`テーブルに`PLAN_IN_CACHE`列と`PLAN_CACHE_HITS`列を追加して、SQLステートメントのプランキャッシュ使用量を示します[＃17493](https://github.com/pingcap/tidb/pull/17493)
     -   `enable-collect-execution-info`の構成アイテムと`tidb_enable_collect_execution_info`のセッション変数を追加して、各オペレーターの実行情報を収集し、その情報を低速クエリログに記録するかどうかを制御します[＃18073](https://github.com/pingcap/tidb/pull/18073) [＃18072](https://github.com/pingcap/tidb/pull/18072)
-    -   `tidb_slow_log_masking`のグローバル変数を追加して、遅いクエリログ[＃17694](https://github.com/pingcap/tidb/pull/17694)のクエリの感度を下げるかどうかを制御します
+    -   `tidb_slow_log_masking`のグローバル変数を追加して、遅いクエリログ[＃17694](https://github.com/pingcap/tidb/pull/17694)のクエリの感度を下げるかどうかを制御します。
     -   3TiKV構成アイテム`storage.block-cache.capacity`の`INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに診断ルールを追加し[＃17671](https://github.com/pingcap/tidb/pull/17671) 。
     -   `BACKUP`と`RESTORE`のSQLステートメントを追加して、データをバックアップおよび復元します[＃15274](https://github.com/pingcap/tidb/pull/15274)
 
@@ -52,7 +52,7 @@ TiDBバージョン：4.0.2
 
 -   PD
 
-    -   リーダーピア[＃2551](https://github.com/pingcap/pd/pull/2551)を削除しようとしたときに、オペレーターがすぐに失敗するようにサポートします。
+    -   リーダーピアを削除しようとしたときにすぐに失敗するようにオペレーターをサポートする[＃2551](https://github.com/pingcap/pd/pull/2551)
     -   TiFlashストアに適切なデフォルトのストア制限を設定する[＃2559](https://github.com/pingcap/pd/pull/2559)
 
 -   TiFlash
@@ -70,13 +70,13 @@ TiDBバージョン：4.0.2
         -   `cli`コマンドを追加して、TiCDC [＃652](https://github.com/pingcap/tiflow/pull/652)を削除します。
         -   MQシンク[＃649](https://github.com/pingcap/tiflow/pull/649)で運河プロトコルをサポート
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
     -   CM-Sketchが大量のメモリを消費する場合にGolangのメモリ割り当てによって引き起こされるクエリの待ち時間を短縮する[＃17545](https://github.com/pingcap/tidb/pull/17545)
-    -   TiKVサーバーが障害回復プロセスにある場合、クラスタのQPS回復期間を短縮します[＃17681](https://github.com/pingcap/tidb/pull/17681)
-    -   パーティションテーブル[＃17655](https://github.com/pingcap/tidb/pull/17655)のTiKV/TiFlashコプロセッサーへの集約関数のプッシュをサポート
+    -   TiKVサーバーが障害回復プロセスにある場合のクラスタのQPS回復期間を短縮する[＃17681](https://github.com/pingcap/tidb/pull/17681)
+    -   パーティションテーブル上のTiKV/TiFlashコプロセッサーへの集計関数のプッシュをサポート[＃17655](https://github.com/pingcap/tidb/pull/17655)
     -   インデックスが等しい条件の行数推定の精度を向上させる[＃17611](https://github.com/pingcap/tidb/pull/17611)
 
 -   TiKV
@@ -101,7 +101,7 @@ TiDBバージョン：4.0.2
 -   TiDB
 
     -   `tidb_isolation_read_engines`が変更された後にプランキャッシュから取得された誤った実行プランの問題を修正します[＃17570](https://github.com/pingcap/tidb/pull/17570)
-    -   `EXPLAIN FOR CONNECTION`ステートメント[＃18124](https://github.com/pingcap/tidb/pull/18124)の実行時に発生するときどき発生するランタイムエラーを修正します。
+    -   `EXPLAIN FOR CONNECTION`ステートメント[＃18124](https://github.com/pingcap/tidb/pull/18124)の実行時に発生する時折発生するランタイムエラーを修正します。
     -   場合によっては`last_plan_from_cache`セッション変数の誤った結果を修正します[＃18111](https://github.com/pingcap/tidb/pull/18111)
     -   プランキャッシュから`UNIX_TIMESTAMP()`関数を実行するときに発生するランタイムエラーを修正し[＃18002](https://github.com/pingcap/tidb/pull/18002) [＃17673](https://github.com/pingcap/tidb/pull/17673)
     -   `HashJoin`のエグゼキュータの子が`NULL`列[＃17937](https://github.com/pingcap/tidb/pull/17937)を返すときのランタイムエラーを修正します
@@ -111,16 +111,16 @@ TiDBバージョン：4.0.2
     -   メモリクォータが不足し、クエリのキャンセルがトリガーされた場合の`IndexMergeJoin`エグゼキュータのハングの問題を修正します[＃17654](https://github.com/pingcap/tidb/pull/17654)
     -   `Insert`および`Replace`エグゼキュータの過剰なカウントメモリ使用量を修正します[＃18062](https://github.com/pingcap/tidb/pull/18062)
     -   同じデータベースで`DROP DATABASE`と`DROP TABLE`が同時に実行されると、TiFlashストレージへのデータレプリケーションが停止する問題を修正します[＃17901](https://github.com/pingcap/tidb/pull/17901)
-    -   TiDBとオブジェクトストレージサービス間の`BACKUP`障害を修正し[＃17844](https://github.com/pingcap/tidb/pull/17844) `RESTORE`
-    -   アクセスが拒否されたときに特権チェックが失敗するという誤ったエラーメッセージを修正します[＃17724](https://github.com/pingcap/tidb/pull/17724)
+    -   TiDBとオブジェクトストレージサービスの間の`BACKUP`障害を修正し[＃17844](https://github.com/pingcap/tidb/pull/17844) `RESTORE`
+    -   アクセスが拒否された場合の特権チェックの失敗の誤ったエラーメッセージを修正します[＃17724](https://github.com/pingcap/tidb/pull/17724)
     -   `DELETE`ステートメントから生成されたクエリフィードバックを破棄し[＃17843](https://github.com/pingcap/tidb/pull/17843) `UPDATE`
-    -   `AUTO_RANDOM`のプロパティがないテーブルの`AUTO_RANDOM_BASE`を変更することを禁止します[＃17828](https://github.com/pingcap/tidb/pull/17828)
+    -   `AUTO_RANDOM`のプロパティがないテーブルの`AUTO_RANDOM_BASE`を変更することを禁止する[＃17828](https://github.com/pingcap/tidb/pull/17828)
     -   テーブルがデータベース間で[＃18243](https://github.com/pingcap/tidb/pull/18243)移動すると、 `AUTO_RANDOM`列に誤った結果が割り当てられる問題を修正し`ALTER TABLE ... RENAME` 。
-    -   [＃17719](https://github.com/pingcap/tidb/pull/17719)なしで`tidb_isolation_read_engines`の値を設定すると、一部のシステムテーブルにアクセスできない問題を修正し`tidb` 。
-    -   大きな整数と浮動小数点値でのJSON比較の不正確な結果を修正します[＃17717](https://github.com/pingcap/tidb/pull/17717)
+    -   `tidb` [＃17719](https://github.com/pingcap/tidb/pull/17719)なしで`tidb_isolation_read_engines`の値を設定すると、一部のシステムテーブルにアクセスできない問題を修正します。
+    -   大きな整数と浮動小数点値のJSON比較の不正確な結果を修正します[＃17717](https://github.com/pingcap/tidb/pull/17717)
     -   `COUNT()`関数[＃17704](https://github.com/pingcap/tidb/pull/17704)の結果の誤ったdecimalプロパティを修正します
     -   入力のタイプがバイナリ文字列[＃17620](https://github.com/pingcap/tidb/pull/17620)の場合の`HEX()`関数の誤った結果を修正します
-    -   フィルタ条件[＃17697](https://github.com/pingcap/tidb/pull/17697)なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`のテーブルをクエリすると、空の結果が返される問題を修正します。
+    -   フィルタ条件[＃17697](https://github.com/pingcap/tidb/pull/17697)なしで`INFORMATION_SCHEMA.INSPECTION_SUMMARY`テーブルをクエリすると、空の結果が返される問題を修正します。
     -   `ALTER USER`ステートメントがユーザー情報を更新するために使用するハッシュパスワードが予期しないものであるという問題を修正します[＃17646](https://github.com/pingcap/tidb/pull/17646)
     -   `ENUM`と`SET`の値の照合順序をサポート[＃17701](https://github.com/pingcap/tidb/pull/17701)
     -   テーブル[＃17619](https://github.com/pingcap/tidb/pull/17619)を作成するときに、リージョンを事前分割するためのタイムアウトメカニズムが機能しない問題を修正します。
@@ -129,7 +129,7 @@ TiDBバージョン：4.0.2
     -   `max_execution_time`ヒントがときどき機能しない問題を修正します[＃17536](https://github.com/pingcap/tidb/pull/17536)
     -   13の結果で同時実行情報が冗長に`EXPLAIN ANALYZE`される問題を修正し[＃17350](https://github.com/pingcap/tidb/pull/17350)
     -   `STR_TO_DATE`関数[＃17498](https://github.com/pingcap/tidb/pull/17498)の`%h`の互換性のない動作を修正します
-    -   `tidb_replica_read`が`follower`に設定されていて、リーダーとフォロワー/学習者の間にネットワークパーティションがある場合に、フォロワー/学習者が再試行し続ける問題を修正します[＃17443](https://github.com/pingcap/tidb/pull/17443)
+    -   `tidb_replica_read`が`follower`に設定されていて、リーダーとフォロワー/学習者の間にネットワークパーティションがある場合にフォロワー/学習者が再試行し続ける問題を修正します[＃17443](https://github.com/pingcap/tidb/pull/17443)
     -   TiDBがPDフォロワーに送信するpingが多すぎる場合がある問題を修正します[＃17947](https://github.com/pingcap/tidb/pull/17947)
     -   古いバージョンの範囲パーティションテーブルを[＃17983](https://github.com/pingcap/tidb/pull/17983)にロードできない問題を修正します。
     -   リージョン[＃17585](https://github.com/pingcap/tidb/pull/17585)ごとに異なる`Backoffer`を割り当てることにより、複数のリージョンリクエストが同時に失敗した場合のSQLステートメントのタイムアウトの問題を修正します。
@@ -142,10 +142,10 @@ TiDBバージョン：4.0.2
     -   ステータスサーバー[＃8101](https://github.com/tikv/tikv/pull/8101)のメモリ安全性の問題を修正します
     -   JSON数値比較で精度が失われる問題を修正[＃8087](https://github.com/tikv/tikv/pull/8087)
     -   間違ったクエリの遅いログを修正する[＃8050](https://github.com/tikv/tikv/pull/8050)
-    -   複数のマージプロセス中にストアが分離されている場合にピアを削除できない問題を修正します[＃8048](https://github.com/tikv/tikv/pull/8048)
+    -   複数のマージプロセス中にストアが分離されている場合、ピアを削除できない問題を修正します[＃8048](https://github.com/tikv/tikv/pull/8048)
     -   `tikv-ctl recover-mvcc`が無効な悲観的ロックを削除しないという問題を修正します[＃8047](https://github.com/tikv/tikv/pull/8047)
     -   一部のTitanヒストグラムメトリックが欠落している問題を修正します[＃7997](https://github.com/tikv/tikv/pull/7997)
-    -   TiKVが`duplicated error`をTiCDC3に返す問題を修正し[＃7887](https://github.com/tikv/tikv/pull/7887)
+    -   TiKVがTiCDC3に`duplicated error`を返す問題を修正し[＃7887](https://github.com/tikv/tikv/pull/7887)
 
 -   PD
 

@@ -5,9 +5,9 @@ summary: An overview of the usage of MODIFY COLUMN for the TiDB database.
 
 # 列の変更 {#modify-column}
 
-`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更を含めることができます。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してください。
+`ALTER TABLE.. MODIFY COLUMN`ステートメントは、既存のテーブルの列を変更します。変更には、データ型と属性の変更が含まれる場合があります。同時に名前を変更するには、代わりに[`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)ステートメントを使用してください。
 
-v5.1.0以降、TiDBはReorgデータのデータ型の変更をサポートしています。これには以下が含まれますが、これらに限定されません。
+v5.1.0以降、TiDBは、以下を含むがこれらに限定されないReorgデータのデータ型の変更をサポートしています。
 
 -   `VARCHAR`から`BIGINT`に変更
 -   `DECIMAL`精度の変更
@@ -221,8 +221,8 @@ CREATE TABLE `t1` (
 
 ## も参照してください {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
--   [作成テーブルを表示](/sql-statements/sql-statement-show-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
+-   [CREATETABLEを表示する](/sql-statements/sql-statement-show-create-table.md)
 -   [列を追加](/sql-statements/sql-statement-add-column.md)
 -   [ドロップ列](/sql-statements/sql-statement-drop-column.md)
 -   [列を変更する](/sql-statements/sql-statement-change-column.md)

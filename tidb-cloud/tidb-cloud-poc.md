@@ -175,13 +175,13 @@ SQLステートメントの場合、データソースとTiDBとの互換性の�
 
 -   バックアップ
 
-    ベンダーロックインを回避するために、毎日の完全バックアップを使用してデータを新しいクラスタに移行し、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してデータをエクスポートできます。詳細については、 [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)を参照してください。
+    ベンダーロックインを回避するために、毎日の完全バックアップを使用してデータを新しいクラスタに移行し、 [Dumpling](/dumpling-overview.md)を使用してデータをエクスポートできます。詳細については、 [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)を参照してください。
 
 ## ステップ8.環境をクリーンアップし、PoCを終了します {#step-8-clean-up-the-environment-and-finish-the-poc}
 
 実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得した後、PoCの全サイクルを完了しました。これらの結果は、 TiDB Cloudが期待を満たしているかどうかを判断するのに役立ちます。その間、 TiDB Cloudを使用するためのベストプラクティスを蓄積しました。
 
-TiDB Cloudをより大規模に試してみたい場合は、 TiDB Cloudが提供する他のストレージサイズでの展開など、新しいラウンドの展開とテストのために、 [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)を作成してTiDB Cloudへのフルアクセスを取得します。
+TiDB Cloudをより大規模に試してみたい場合は、 TiDB Cloudが提供する他のストレージサイズでのデプロイなど、新しいラウンドのデプロイとテストのために、 [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)を作成してTiDB Cloudへのフルアクセスを取得します。
 
 トライアルポイントが不足していて、PoCを続行したい場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に相談してください。
 

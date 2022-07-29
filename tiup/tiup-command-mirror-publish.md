@@ -25,14 +25,14 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 -   コンポーネント所有者の秘密鍵を指定します。クライアントは秘密鍵を使用して`{component}.json`のファイルに署名します。
 -   データ型： `STRING`
--   デフォルト：「${TIUP_HOME}/keys/private.json」
+-   デフォルト： &quot;$ {TIUP_HOME}/keys/private.json&quot;
 
 ### - アーチ {#arch}
 
 -   `<tarball>`のバイナリファイルを実行できるプラットフォームを指定します。単一の`<tarball>`パッケージの場合、プラットフォームは次のオプションからのみ選択できます。
 
-    -   `amd64` ：ファイルがAMD64マシンで実行されていることを示します。
-    -   `arm64` ：ファイルがARM64マシンで実行されていることを示します。
+    -   `amd64` ：ファイルがAMD64マシンで実行されることを示します。
+    -   `arm64` ：ファイルがARM64マシンで実行されることを示します。
     -   `any` ：スクリプトなどのファイルがAMD64マシンとARM64マシンの両方で実行されることを示します。
 
 -   データ型： `STRING`
@@ -41,7 +41,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 > **ノート：**
 >
-> `--arch`が`any`に設定されている場合、 `--os`も`any`に設定する必要があります。
+> `--arch`を`any`に設定する場合は、 `--os`も`any`に設定する必要があります。
 
 ### --os {#os}
 
@@ -49,7 +49,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
     -   `linux` ：ファイルがLinuxオペレーティングシステムで実行されていることを示します。
     -   `darwin` ：ファイルがDarwinオペレーティングシステムで実行されていることを示します。
-    -   `any` ：スクリプトなどのファイルがLinuxとDarwinの両方のオペレーティングシステムで実行されていることを示します。
+    -   `any` ：スクリプトなどのファイルがLinuxオペレーティングシステムとDarwinオペレーティングシステムの両方で実行されることを示します。
 
 -   データ型： `STRING`
 
@@ -57,9 +57,9 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 > **ノート：**
 >
-> `--os`が`any`に設定されている場合、 `--arch`も`any`に設定する必要があります。
+> `--os`を`any`に設定する場合は、 `--arch`も`any`に設定する必要があります。
 
-### --desc {#desc}
+### --説明 {#desc}
 
 -   コンポーネントの説明を指定します。
 -   データ型： `String`
@@ -80,7 +80,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 ## 出力 {#outputs}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   コンポーネントの所有者がターゲットコンポーネントを変更する権限を持っていない場合：
+-   コンポーネントの所有者がターゲットコンポーネントの変更を許可されていない場合：
     -   ミラーがリモートミラーの場合、TiUPはエラー`Error: The server refused, make sure you have access to this component`を報告します。
     -   ミラーがローカルミラーの場合、TiUPはエラー`Error: the signature is not correct`を報告します。
 

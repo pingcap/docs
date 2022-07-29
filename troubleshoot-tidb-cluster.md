@@ -9,8 +9,8 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
 -   正確なエラーメッセージとエラー発生時の操作
 -   すべてのコンポーネントの状態
--   `fatal`を報告するコンポーネントの`panic`の`error`情報
--   構成と展開のトポロジー
+-   `fatal`を報告するコンポーネントのログ内の`error` `panic`
+-   構成と展開のトポロジ
 -   `dmesg`のTiDBコンポーネント関連の問題
 
 その他の情報については、 [よくある質問（FAQ）](/faq/tidb-faq.md)を参照してください。
@@ -32,7 +32,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 3.  データがクリアされ、サービスが再デプロイされた場合は、次のことを確認してください。
 
     -   `tikv-server`と`pd-server`のすべてのデータがクリアされます。特定のデータは`tikv-server`に格納され、メタデータは`pd-server`に格納されます。 2つのサーバーのうち1つだけがクリアされると、データに一貫性がなくなります。
-    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`が再起動された後、 `tidb-server`も再起動する必要があります。クラスタIDは、 `pd-server`が初期化されるときにランダムに割り当てられます。したがって、クラスタが再デプロイされると、クラスタIDが変更され、 `tidb-server`を再起動して新しいクラスタIDを取得する必要があります。
+    -   `pd-server`と`tikv-server`のデータがクリアされ、 `pd-server`と`tikv-server`が再起動された後、 `tidb-server`も再起動する必要があります。クラスタIDは、 `pd-server`が初期化されるときにランダムに割り当てられます。したがって、クラスタが再デプロイされると、クラスタIDが変更され、新しいクラスタIDを取得するために`tidb-server`を再起動する必要があります。
 
 ## <code>tidb-server</code>を起動できません {#cannot-start-code-tidb-server-code}
 
@@ -51,7 +51,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 -   `pd-server`に接続できません。
 
     -   TiDBとPDの間のネットワークがスムーズに実行されているかどうかを確認します。これには、ネットワークにpingを実行できるかどうか、ファイアウォールの構成に問題があるかどうかなどが含まれます。
-    -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認してください。
+    -   ネットワークに問題がない場合は、 `pd-server`のプロセスの状態とログを確認してください。
 
 ## <code>tikv-server</code>を起動できません {#cannot-start-code-tikv-server-code}
 
@@ -67,7 +67,7 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
     -   TiDBとPDの間のネットワークがスムーズに実行されているかどうかを確認します。これには、ネットワークにpingを実行できるかどうか、ファイアウォールの構成に問題があるかどうかなどが含まれます。
 
-    -   ネットワークに問題がない場合は、 `pd-server`プロセスの状態とログを確認してください。
+    -   ネットワークに問題がない場合は、 `pd-server`のプロセスの状態とログを確認してください。
 
 <!---->
 
@@ -87,11 +87,11 @@ summary: Learn how to diagnose and resolve issues when you use TiDB.
 
     `lsof -i:port`コマンドを使用して、特定のポートに関連するすべてのネットワークを表示し、 `pd-server`を開始するポートが占有されていないことを確認します。
 
-## TiDB / TiKV/PDプロセスが予期せず中止されます {#the-tidb-tikv-pd-process-aborts-unexpectedly}
+## TiDB / TiKV/PDプロセスが予期せず中止される {#the-tidb-tikv-pd-process-aborts-unexpectedly}
 
 -   プロセスはフォアグラウンドで開始されていますか？クライアントが異常終了したため、プロセスが終了する場合があります。
 
--   コマンドラインで`nohup+&`実行されていますか？これにより、プロセスがhup信号を受信するため、プロセスが中止される可能性があります。スタートアップコマンドをスクリプトで記述して実行することをお勧めします。
+-   コマンドラインで`nohup+&`実行されていますか？これにより、プロセスがhup信号を受信するため、プロセスが中止される可能性があります。スクリプトで起動コマンドを記述して実行することをお勧めします。
 
 ## TiDBpanic {#tidb-panic}
 
@@ -112,12 +112,12 @@ panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new
 
 まず、 [遅いクエリログ](/identify-slow-queries.md)をチェックして、不適切なSQLステートメントが原因であるかどうかを確認します。
 
-問題を解決できなかった場合は、次の情報を提供してください。
+問題の解決に失敗した場合は、次の情報を提供してください。
 
 -   展開トポロジ
 
     -   `tidb-server`インスタンスはいくつデプロイされて`tikv-server` `pd-server`か？
-    -   これらのインスタンスはマシンにどのように分散されていますか？
+    -   これらのインスタンスはマシンでどのように配布されますか？
 
 -   これらのインスタンスがデプロイされているマシンのハードウェア構成：
 
@@ -129,7 +129,7 @@ panicログと[問題を作成する](https://github.com/pingcap/tidb/issues/new
 <!---->
 
 -   TiDBクラスタ以外に他のサービスはありますか？
--   `pd-server`秒と`tikv-server`秒は別々に展開されていますか？
+-   `pd-server`と`tikv-server`は別々に展開されていますか？
 -   現在の操作は何ですか？
 -   `top -H`コマンドでCPUスレッド名を確認してください。
 -   最近、ネットワークまたはIO監視データに例外はありますか？

@@ -5,7 +5,7 @@ summary: Learn how to enable SSO to sign into TiDB Dashboard.
 
 # TiDBダッシュボードのSSOを構成する {#configure-sso-for-tidb-dashboard}
 
-TiDBダッシュボードは、 [OIDC](https://openid.net/connect/)ベースのシングルサインオン（SSO）をサポートします。 TiDBダッシュボードのSSO機能を有効にすると、構成されたSSOサービスがサインイン認証に使用され、SQLユーザーパスワードを入力せずにTiDBダッシュボードにアクセスできるようになります。
+TiDBダッシュボードは、 [OIDC](https://openid.net/connect/)ベースのシングルサインオン（SSO）をサポートします。 TiDBダッシュボードのSSO機能を有効にすると、構成済みのSSOサービスがサインイン認証に使用され、SQLユーザーパスワードを入力せずにTiDBダッシュボードにアクセスできるようになります。
 
 ## OIDCSSOを構成する {#configure-oidc-sso}
 
@@ -15,9 +15,9 @@ TiDBダッシュボードは、 [OIDC](https://openid.net/connect/)ベースの�
 
 2.  左側のサイドバーのユーザー名をクリックして、構成ページにアクセスします。
 
-3.  [**シングルサインオン**]セクションで、[ <strong>TiDBダッシュボードにサインインするときにSSOを使用できるようにする]を</strong>選択します。
+3.  [**シングルサインオン**]セクションで、[ <strong>TiDBダッシュボードにサインインするときにSSOを使用するに</strong>は[有効にする]]を選択します。
 
-4.  フォームの**OIDCクライアントID**と<strong>OIDCディスカバリーURL</strong>フィールドに入力します。
+4.  フォームの**OIDCクライアントID**フィールドと<strong>OIDCディスカバリーURL</strong>フィールドに入力します。
 
     通常、SSOサービスプロバイダーから2つのフィールドを取得できます。
 
@@ -26,7 +26,7 @@ TiDBダッシュボードは、 [OIDC](https://openid.net/connect/)ベースの�
 
 5.  [**偽装の承認]**をクリックして、SQLパスワードを入力します。
 
-    TiDBダッシュボードはこのSQLパスワードを保存し、SSOサインインが完了した後に通常のSQLサインインを偽装するために使用します。
+    TiDBダッシュボードはこのSQLパスワードを保存し、SSOサインインが完了した後、これを使用して通常のSQLサインインになりすます。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-enable-1.png)
 
@@ -84,13 +84,13 @@ TiDBダッシュボード用にSSOを構成したら、次の手順を実行し�
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-signin.png)
 
-2.  SSOサービスが構成されているシステムにサインインします。
+2.  SSOサービスが構成された状態でシステムにサインインします。
 
 3.  サインインを完了するために、TiDBダッシュボードにリダイレクトされます。
 
 ## 例1：TiDBダッシュボードのSSOサインインにOktaを使用する {#example-1-use-okta-for-tidb-dashboard-sso-sign-in}
 
-[オクタ](https://www.okta.com/)はOIDCSSOIDサービスであり、TiDBダッシュボードのSSO機能と互換性があります。以下の手順は、OktaをTiDBダッシュボードSSOプロバイダーとして使用できるようにOktaおよびTiDBダッシュボードを構成する方法を示しています。
+[オクタ](https://www.okta.com/)はOIDCSSOIDサービスであり、TiDBダッシュボードのSSO機能と互換性があります。以下の手順は、OktaをTiDBダッシュボードSSOプロバイダーとして使用できるようにOktaとTiDBダッシュボードを構成する方法を示しています。
 
 ### ステップ1：Oktaを構成する {#step-1-configure-okta}
 
@@ -194,7 +194,7 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDCSSOIDサービスを提供
 
 1.  Auth0の**[設定**]タブの[<strong>基本情報</strong>]に、TiDBダッシュボードの<strong>OIDCクライアントID</strong>に<strong>クライアント</strong>IDを入力します。
 
-2.  **OIDC Discovery URL**に、プレフィックスが`https://`でサフィックスが`/`の<strong>Domain</strong>フィールド値を入力します（例： `https://example.us.auth0.com/` ）。承認を完了し、構成を保存します。
+2.  **OIDC Discovery URL**に、プレフィックス`https://`とサフィックス`/`の<strong>ドメイン</strong>フィールド値を入力します（例： `https://example.us.auth0.com/` ）。承認を完了し、構成を保存します。
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-3.png)
 
@@ -202,17 +202,17 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDCSSOIDサービスを提供
 
 ## 例3：TiDBダッシュボードのSSOサインインにCasdoorを使用する {#example-3-use-casdoor-for-tidb-dashboard-sso-sign-in}
 
-[キャスドア](https://casdoor.org/)は、独自のホストに展開できるオープンソースのSSOプラットフォームです。 TiDBダッシュボードのSSO機能と互換性があります。次の手順では、CasdoorをTiDBダッシュボードSSOプロバイダーとして使用できるようにCasdoorおよびTiDBダッシュボードを構成する方法について説明します。
+[キャスドア](https://casdoor.org/)は、独自のホストに展開できるオープンソースのSSOプラットフォームです。 TiDBダッシュボードのSSO機能と互換性があります。次の手順では、CasdoorをTiDBダッシュボードSSOプロバイダーとして使用できるようにCasdoorとTiDBダッシュボードを構成する方法について説明します。
 
 ### ステップ1：Casdoorを構成する {#step-1-configure-casdoor}
 
 1.  Casdoor管理サイトをデプロイしてアクセスします。
 
-2.  トップサイドバーの**アプリケーション**から移動します。
+2.  上部のサイドバー**アプリケーション**から移動します。
 
 3.  [**アプリケーション]-[追加]を**クリックします。 ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-1.png)
 
-4.  **名前**と<strong>表示名</strong>を入力します（例： <strong>TiDBダッシュボード</strong>）。
+4.  塗りつぶし**名**と<strong>表示名</strong>（ <strong>TiDBダッシュボード</strong>など）。
 
 5.  次のように**リダイレクトURL**を追加します。
 
@@ -232,7 +232,7 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDCSSOIDサービスを提供
 
 1.  TiDBダッシュボードの**OIDCクライアントID**に、前の手順で保存した<strong>クライアントID</strong>を入力します。
 
-2.  **OIDC Discovery URL**に、プレフィックスが`https://`でサフィックスが`/`の<strong>Domain</strong>フィールド値を入力します（例： `https://casdoor.example.com/` ）。承認を完了し、構成を保存します。
+2.  **OIDC Discovery URL**に、プレフィックス`https://`とサフィックス`/`の<strong>ドメイン</strong>フィールド値を入力します（例： `https://casdoor.example.com/` ）。承認を完了し、構成を保存します。
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-3.png)
 

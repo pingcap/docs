@@ -37,7 +37,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
     クラスタ作成プロセスが開始され、[**セキュリティクイックスタート**]ダイアログボックスが表示されます。
 
-6.  [**セキュリティのクイックスタート**]ダイアログボックスで、ルートパスワードと、クラスタへの接続を許可するIPアドレスを設定し、[<strong>適用</strong>]をクリックします。
+6.  [**セキュリティクイックスタート**]ダイアログボックスで、ルートパスワードと、クラスタへの接続を許可するIPアドレスを設定し、[<strong>適用</strong>]をクリックします。
 
     TiDB Cloudクラスタは約5〜15分で作成されます。
 
@@ -81,7 +81,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
     クラスタ作成プロセスが開始され、[**セキュリティクイックスタート**]ダイアログボックスが表示されます。
 
-10. [**セキュリティのクイックスタート**]ダイアログボックスで、ルートパスワードと、クラスタへの接続を許可するIPアドレスを設定し、[<strong>適用</strong>]をクリックします。
+10. [**セキュリティクイックスタート**]ダイアログボックスで、ルートパスワードと、クラスタへの接続を許可するIPアドレスを設定し、[<strong>適用</strong>]をクリックします。
 
     TiDB Cloudクラスタは約5〜15分で作成されます。
 
@@ -96,11 +96,12 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 2.  [**接続]**をクリックします。 [ <strong>TiDBに接続</strong>]ダイアログボックスが表示されます。
 
-3.  [**手順2：ダイアログボックスのSQLクライアントに接続**する]で、希望する接続方法のタブをクリックし、接続文字列を使用してクラスタに接続します。
+3.  [**ステップ2：ダイアログボックスのSQLクライアントに接続**する]で、希望する接続方法のタブをクリックし、接続文字列を使用してクラスタに接続します。
 
-    > **ヒント：**
+    > **ノート：**
     >
-    > TiDB CloudはMySQLと互換性があるため、任意のMySQLクライアントツールを使用してクラスタに接続できます。 [mysql —MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)または[mysql —MariaDBのMySQLコマンドラインクライアント](https://mariadb.com/kb/en/mysql-command-line-client/)の使用をお勧めします。
+    > -   [開発者層クラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、クラスタに接続するときは、クラスタのプレフィックスをユーザー名に含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+    > -   TiDB CloudはMySQLと互換性があるため、任意のMySQLクライアントツールを使用してクラスタに接続できます。 [mysql —MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)または[mysql —MariaDBのMySQLコマンドラインクライアント](https://mariadb.com/kb/en/mysql-command-line-client/)の使用をお勧めします。
 
 4.  TiDBクラスタにログインした後、次のSQLステートメントを使用して接続を検証できます。
 

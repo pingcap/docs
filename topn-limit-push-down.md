@@ -3,13 +3,13 @@ title: TopN and Limit Operator Push Down
 summary: Learn the implementation of TopN and Limit operator pushdown.
 ---
 
-# TopNおよびLimitOperatorプッシュダウン {#topn-and-limit-operator-push-down}
+# TopNとLimitOperatorのプッシュダウン {#topn-and-limit-operator-push-down}
 
 このドキュメントでは、TopNおよびLimit演算子のプッシュダウンの実装について説明します。
 
-TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子は、TopN演算子ノードとして結合されます。これは、特定の並べ替え規則に従って、上位N個のレコードが返されることを意味します。つまり、Limit演算子は、nullの並べ替えルールを持つTopN演算子ノードと同等です。
+TiDB実行プランツリーでは、SQLの`LIMIT`句はLimit演算子ノードに対応し、 `ORDER BY`句はSort演算子ノードに対応します。隣接するLimit演算子とSort演算子は、TopN演算子ノードとして結合されます。つまり、特定の並べ替えルールに従って、上位N個のレコードが返されます。つまり、Limit演算子は、nullの並べ替えルールを持つTopN演算子ノードと同等です。
 
-述語のプッシュダウンと同様に、TopNとLimitは、実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされるため、必要なデータが早期にフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
+述語のプッシュダウンと同様に、TopNとLimitは、実行プランツリー内でデータソースにできるだけ近い位置にプッシュダウンされるため、必要なデータが早い段階でフィルタリングされます。このように、プッシュダウンはデータ送信と計算のオーバーヘッドを大幅に削減します。
 
 このルールを無効にするには、 [式プッシュダウンの最適化ルールとブロックリスト](/blocklist-control-plan.md)を参照してください。
 
@@ -66,7 +66,7 @@ explain select * from t left join s on t.a = s.a order by t.a limit 10;
 8 rows in set (0.01 sec)
 ```
 
-このクエリでは、TopN演算子の並べ替えルールは、外部テーブル`t`の列のみに依存するため、TopNをJoinにプッシュダウンする前に計算を実行して、Join操作の計算コストを削減できます。さらに、TiDBはTopNをストレージレイヤーにプッシュダウンします。
+このクエリでは、TopN演算子の並べ替えルールは外部テーブル`t`の列にのみ依存するため、TopNをJoinにプッシュダウンする前に計算を実行して、Join操作の計算コストを削減できます。さらに、TiDBはTopNをストレージレイヤーにプッシュダウンします。
 
 ### 例3：参加する前にTopNをプッシュダウンすることはできません {#example-3-topn-cannot-be-pushed-down-before-join}
 
@@ -94,7 +94,7 @@ explain select * from t join s on t.a = s.a order by t.id limit 10;
 
 TopNは`Inner Join`より前にプッシュダウンすることはできません。上記のクエリを例にとると、Join後に100レコードを取得した場合、TopNの後に10レコードを残すことができます。ただし、最初にTopNを実行して10レコードを取得すると、Join後に5レコードしか残りません。このような場合、プッシュダウンの結果は異なります。
 
-同様に、TopNは、外部結合の内部テーブルにプッシュダウンすることも、ソート規則が`t.a+s.a`などの複数のテーブルの列に関連している場合にプッシュダウンすることもできません。 TopNの並べ替えルールが外部テーブルの列のみに依存している場合にのみ、TopNをプッシュダウンできます。
+同様に、TopNは、外部結合の内部テーブルにプッシュダウンすることも、ソートルールが`t.a+s.a`などの複数のテーブルの列に関連している場合にプッシュダウンすることもできません。 TopNの並べ替えルールが外部テーブルの列のみに依存している場合にのみ、TopNをプッシュダウンできます。
 
 ### 例4：TopNを制限に変換する {#example-4-convert-topn-to-limit}
 

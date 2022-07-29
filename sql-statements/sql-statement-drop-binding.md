@@ -5,9 +5,9 @@ summary: Use of DROP BINDING in TiDB database.
 
 # ドロップ[グローバル|セッション]バインディング {#drop-global-session-binding}
 
-このステートメントは、特定のSQLステートメントからバインディングを削除します。バインディングを使用すると、基になるクエリに変更を加えることなく、ステートメントにヒントを挿入できます。
+このステートメントは、特定のSQLステートメントからバインディングを削除します。バインディングを使用すると、基になるクエリを変更せずに、ステートメントにヒントを挿入できます。
 
-`BINDING`は、 `GLOBAL`または`SESSION`ベースのいずれかになります。デフォルトは`SESSION`です。
+`BINDING`は、 `GLOBAL`または`SESSION`のいずれかになります。デフォルトは`SESSION`です。
 
 ## あらすじ {#synopsis}
 
@@ -136,7 +136,7 @@ Empty set (0.00 sec)
 ## も参照してください {#see-also}
 
 -   [[グローバル|セッション]バインディングを作成する](/sql-statements/sql-statement-create-binding.md)
--   [[グローバル|セッション]バインディングを表示](/sql-statements/sql-statement-show-bindings.md)
+-   [[グローバル|セッション]バインディングを表示する](/sql-statements/sql-statement-show-bindings.md)
 -   [テーブルの分析](/sql-statements/sql-statement-analyze-table.md)
 -   [オプティマイザーのヒント](/optimizer-hints.md)
 -   [SQL計画管理](/sql-plan-management.md)

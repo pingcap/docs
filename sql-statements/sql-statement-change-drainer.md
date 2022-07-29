@@ -30,7 +30,7 @@ SHOW DRAINER STATUS;
 2 rows in set (0.00 sec)
 ```
 
-ドレイナー1の状態は1日以上更新されておらず、Drainerは異常な状態ですが、 `State`は`Online`のままであることがわかります。 `CHANGE DRAINER`を使用した後、Drainerの`State`は「一時停止」に変更されます。
+ドレイナー1の状態が1日以上更新されておらず、Drainerが異常な状態にあるが、 `State`は`Online`のままであることがわかります。 `CHANGE DRAINER`を使用した後、Drainerの`State`は「一時停止」に変更されます。
 
 {{< copyable "" >}}
 

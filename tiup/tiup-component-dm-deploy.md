@@ -2,7 +2,7 @@
 title: tiup dm deploy
 ---
 
-# tiup dm deploy {#tiup-dm-deploy}
+# tiupdmデプロイ {#tiup-dm-deploy}
 
 `tiup dm deploy`コマンドは、新しいクラスタをデプロイするために使用されます。
 
@@ -20,7 +20,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -u、-user {#u-user}
 
--   ターゲットマシンへの接続に使用されるユーザー名を指定します。このユーザーは、ターゲットマシンに対するシークレットフリーのsudoroot権限を持っている必要があります。
+-   ターゲットマシンへの接続に使用されるユーザー名を指定します。このユーザーは、ターゲットマシンでシークレットフリーのsudoroot権限を持っている必要があります。
 -   データ型： `STRING`
 -   デフォルト：コマンドを実行する現在のユーザー。
 
@@ -36,7 +36,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 -   データ型： `BOOLEAN`
 -   デフォルト：false
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

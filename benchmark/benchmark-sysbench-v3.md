@@ -102,7 +102,7 @@ block-cache-size = "20GB"
 
 上記の統計によると、TiDB 2.1の`Point Select`クエリのパフォーマンスは、TiDB 2.0のパフォーマンスよりも**50％**向上しています。
 
-### <code>Update Non-Index</code>する {#code-update-non-index-code-test}
+### <code>Update Non-Index</code> {#code-update-non-index-code-test}
 
 | バージョン | スレッド |    QPS   | 95％の遅延（ミリ秒） |
 | :---: | :--: | :------: | :---------: |

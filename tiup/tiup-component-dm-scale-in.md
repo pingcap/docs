@@ -28,7 +28,7 @@ tiup dm scale-in <cluster-name> [flags]
 -   データ型： `BOOLEAN`
 -   デフォルト：false。コマンドでこのオプションが指定されていない場合、指定されたノードは強制的に削除されません。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`
@@ -36,6 +36,6 @@ tiup dm scale-in <cluster-name> [flags]
 
 ## 出力 {#output}
 
-のスケールインのログ。
+のスケーリングのログ。
 
 [&lt;&lt;前のページに戻るTiUP DMコマンドリスト](/tiup/tiup-component-dm.md#command-list)

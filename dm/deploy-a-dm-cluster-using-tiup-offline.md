@@ -51,7 +51,7 @@ summary: Introduce how to deploy a DM cluster offline using TiUP.
 
         上記のコマンドは、現在のディレクトリに`tidb-dm-${version}-linux-amd64`という名前のディレクトリを作成します。このディレクトリには、TiUPによって管理されるコンポーネントパッケージが含まれています。
 
-    2.  `tar`コマンドを使用してコンポーネントパッケージをパックし、分離された環境の制御マシンにパッケージを送信します。
+    2.  `tar`コマンドを使用してコンポーネントパッケージをパックし、隔離された環境の制御マシンにパッケージを送信します。
 
         {{< copyable "" >}}
 
@@ -74,7 +74,7 @@ sh tidb-dm-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
 ```
 
-`local_install.sh`スクリプトは、 `tiup mirror set tidb-dm-${version}-linux-amd64`コマンドを自動的に実行して、現在のミラーアドレスを`tidb-dm-${version}-linux-amd64`に設定します。
+`local_install.sh`スクリプトは、自動的に`tiup mirror set tidb-dm-${version}-linux-amd64`コマンドを実行して、現在のミラーアドレスを`tidb-dm-${version}-linux-amd64`に設定します。
 
 ミラーを別のディレクトリに切り替えるには、 `tiup mirror set <mirror-dir>`コマンドを手動で実行します。公式ミラーに戻す場合は、 `tiup mirror set https://tiup-mirrors.pingcap.com`を実行します。
 
@@ -82,7 +82,7 @@ source /home/tidb/.bash_profile
 
 さまざまなクラスタトポロジに従って、クラスタ初期化構成ファイルを編集する必要があります。
 
-完全な構成テンプレートについては、 [TiUP構成パラメーターテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。構成ファイルを作成します`topology.yaml` 。他の組み合わせたシナリオでは、テンプレートに従って必要に応じて構成ファイルを編集します。
+完全な構成テンプレートについては、 [TiUP構成パラメーターテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。構成ファイルを作成します`topology.yaml` 。他の組み合わせシナリオでは、テンプレートに従って必要に応じて構成ファイルを編集します。
 
 3つのDMマスター、3つのDMワーカー、および1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
@@ -117,7 +117,7 @@ alertmanager_servers:
 
 > **ノート：**
 >
-> -   DMクラスタの高可用性を確保する必要がない場合は、DM-masterノードを1つだけデプロイし、デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL/MariaDBインスタンスの数以上である必要があります。
+> -   DMクラスタの高可用性を確保する必要がない場合は、DMマスターノードを1つだけデプロイし、デプロイされるDMワーカーノードの数は、移行するアップストリームMySQL/MariaDBインスタンスの数以上である必要があります。
 >
 > -   DMクラスタの高可用性を確保するには、3つのDM-masterノードをデプロイすることをお勧めします。デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL / MariaDBインスタンスの数（たとえば、 DMワーカーノードの数は、アップストリームインスタンスの数より2つ多くなります）。
 >
@@ -125,7 +125,7 @@ alertmanager_servers:
 >
 > -   特定のノードで有効になるはずのパラメーターについては、このノードの`config`つでこれらのパラメーターを構成します。
 >
-> -   `.`を使用して、構成のサブカテゴリ（ `log.slow-threshold`など）を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
+> -   `.`を使用して、 `log.slow-threshold`などの構成のサブカテゴリを示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
 > -   パラメータの詳細については、 [マスター`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/master/dm-master.toml)および[ワーカー`config.toml.example`](https://github.com/pingcap/dm/blob/master/dm/worker/dm-worker.toml)を参照してください。
 >
@@ -156,9 +156,9 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 
 -   デプロイされたDMクラスタの名前は`dm-test`です。
 -   DMクラスタのバージョンは`${version}`です。 `tiup list dm-master`を実行すると、TiUPでサポートされている最新バージョンを表示できます。
--   初期化構成ファイルは`topology.yaml`です。
+-   初期化設定ファイルは`topology.yaml`です。
 -   `--user root` ： `root`キーを使用してターゲットマシンにログインしてクラスタの展開を完了するか、 `ssh`および`sudo`の特権を持つ他のユーザーを使用して展開を完了することができます。
--   `[-i]`および`[-p]` ：オプション。パスワードなしでターゲットマシンへのログインを設定した場合、これらのパラメータは必要ありません。そうでない場合は、2つのパラメーターのいずれかを選択してください。 `[-i]`は、ターゲットマシンにアクセスできる`root`のユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。 `[-p]`は、ユーザーパスワードをインタラクティブに入力するために使用されます。
+-   `[-i]`および`[-p]` ：オプション。パスワードなしでターゲットマシンへのログインを構成した場合、これらのパラメーターは必要ありません。そうでない場合は、2つのパラメーターのいずれかを選択します。 `[-i]`は、ターゲットマシンにアクセスできる`root`のユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。 `[-p]`は、ユーザーパスワードをインタラクティブに入力するために使用されます。
 -   TiUP DMは、組み込みSSHクライアントを使用します。制御マシンシステムにネイティブなSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスタに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って構成を編集します。
 
 出力ログの最後に、 ``Deployed cluster `dm-test` successfully``が表示されます。これは、展開が成功したことを示します。

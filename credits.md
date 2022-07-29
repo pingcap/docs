@@ -5,11 +5,11 @@ summary: Learn about the list and roles of contributors to the TiDB community.
 
 # クレジット {#credits}
 
-各貢献者は、TiDBの強力な開発を促進する上で重要な役割を果たしてきました。 TiDBのコードを提出し、文書を作成および翻訳してくださったすべての貢献者に心から感謝します。
+各寄稿者は、TiDBの強力な開発を促進する上で重要な役割を果たしてきました。 TiDBのコードを提出し、文書を作成および翻訳してくださったすべての貢献者に心から感謝します。
 
 ## TiDB開発者 {#tidb-developers}
 
-TiDB開発者は、新機能の開発、パフォーマンスの向上、安定性の保証、およびバグ修正に貢献します。以下は、TiDB関連のリポジトリの貢献者のリストです。
+TiDB開発者は、新機能の開発、パフォーマンスの向上、安定性の保証、およびバグ修正に貢献します。以下は、TiDB関連リポジトリの寄稿者のリストです。
 
 -   [pingcap / tidb](https://github.com/pingcap/tidb/graphs/contributors)
 -   [tikv / tikv](https://github.com/tikv/tikv/graphs/contributors)
@@ -24,7 +24,7 @@ TiDB開発者は、新機能の開発、パフォーマンスの向上、安定�
 -   [pingcap/tidb-ダッシュボード](https://github.com/pingcap/tidb-dashboard/graphs/contributors)
 -   [pingcap / tiflow](https://github.com/pingcap/tiflow/graphs/contributors)
 -   [pingcap / tidb-tools](https://github.com/pingcap/tidb-tools/graphs/contributors)
--   [pingcap /tidb-lightning](https://github.com/pingcap/tidb-lightning/graphs/contributors)
+-   [pingcap / tidb-lightning](https://github.com/pingcap/tidb-lightning/graphs/contributors)
 -   [pingcap / tispark](https://github.com/pingcap/tispark/graphs/contributors)
 -   [pingcap/餃子](https://github.com/pingcap/dumpling/graphs/contributors)
 -   [tikv / client-java](https://github.com/tikv/client-java/graphs/contributors)

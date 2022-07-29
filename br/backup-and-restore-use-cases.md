@@ -11,7 +11,7 @@ summary: Learn the use cases of backing up and restoring data using BR.
 
 -   [単一のテーブルをネットワークディスクにバックアップします（実稼働環境に推奨）](#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)
 -   [ネットワークディスクからデータを復元する（実稼働環境に推奨）](#restore-data-from-a-network-disk-recommended-for-production-environments)
--   [1つのテーブルをローカルディスクにバックアップします](#back-up-a-single-table-to-a-local-disk-recommended-for-testing-environments)
+-   [単一のテーブルをローカルディスクにバックアップします](#back-up-a-single-table-to-a-local-disk-recommended-for-testing-environments)
 -   [ローカルディスクからデータを復元する](#restore-data-from-a-local-disk-recommended-for-testing-environments)
 
 このドキュメントは、次の目標の達成を支援することを目的としています。
@@ -23,7 +23,7 @@ summary: Learn the use cases of backing up and restoring data using BR.
 
 ## 観客 {#audience}
 
-TiDBと[TiKV](https://tikv.org/)の基本的な知識が必要です。
+TiDBと[TiKV](https://tikv.org/)の基本を理解している必要があります。
 
 読み進める前に、 [BRの概要](/br/backup-and-restore-overview.md) 、特に[使用制限](/br/backup-and-restore-overview.md#usage-restrictions)と[いくつかのヒント](/br/backup-and-restore-overview.md#some-tips)を読んだことを確認してください。
 
@@ -72,11 +72,11 @@ BRはコマンドをTiKVクラスタに直接送信し、TiDBサーバーに依�
 [`br backup`コマンド](/br/use-br-command-line-tool.md#br-command-line-description)を実行する前に、次の条件が満たされていることを確認してください。
 
 -   TiDBクラスタで実行されているDDLステートメントはありません。
--   ターゲットストレージデバイスに必要なスペースがあります（バックアップクラスタのディスクスペースの1/3以上）。
+-   ターゲットストレージデバイスには必要なスペースがあります（バックアップクラスタのディスクスペースの1/3以上）。
 
 #### 復元前に確認してください {#check-before-restoration}
 
-[`br restore`コマンド](/br/use-br-command-line-tool.md#br-command-line-description)を実行する前に、ターゲットクラスタをチェックして、このクラスタのテーブルに重複した名前がないことを確認してください。
+[`br restore`コマンド](/br/use-br-command-line-tool.md#br-command-line-description)を実行する前に、ターゲットクラスタをチェックして、このクラスタのテーブルに重複する名前がないことを確認してください。
 
 ## 単一のテーブルをネットワークディスクにバックアップします（実稼働環境に推奨） {#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments}
 
@@ -86,7 +86,7 @@ BRはコマンドをTiKVクラスタに直接送信し、TiDBサーバーに依�
 
 -   [バックアップ前に確認してください](#check-before-backup)
 -   高性能SSDハードディスクホストをデータを格納するNFSサーバーとして構成し、すべてのBRノード、TiKVノード、およびTiFlashノードをNFSクライアントとして構成します。 NFSクライアントがサーバーにアクセスできるように、同じパス（たとえば、 `/br_data` ）をNFSサーバーにマウントします。
--   NFSサーバーとすべてのNFSクライアント間の合計転送速度は、少なくとも`the number of TiKV instances * 150MB/s`に達する必要があります。そうしないと、ネットワークI/Oがパフォーマンスのボトルネックになる可能性があります。
+-   NFSサーバーとすべてのNFSクライアント間の合計転送速度は少なくとも`the number of TiKV instances * 150MB/s`に達する必要があります。そうしないと、ネットワークI/Oがパフォーマンスのボトルネックになる可能性があります。
 
 > **ノート：**
 >
@@ -147,7 +147,7 @@ bin/br backup table \
 
 ![img](/media/br/backup-errors.png)
 
-**チェックサム要求期間**：バックアップクラスタでの管理チェックサム要求の期間。
+**チェックサム要求期間**：バックアップクラスタの管理チェックサム要求の期間。
 
 ![img](/media/br/checksum-duration.png)
 
@@ -155,7 +155,7 @@ bin/br backup table \
 
 バックアップが完了すると、BRはバックアップの概要をコンソールに出力します。
 
-バックアップコマンドを実行する前に指定されたログで、このログからバックアップ操作の統計情報を取得できます。このログで「概要」を検索すると、次の情報が表示されます。
+backupコマンドを実行する前に指定されたログで、このログからバックアップ操作の統計情報を取得できます。このログで「概要」を検索すると、次の情報が表示されます。
 
 ```
 ["Full backup Success summary:
@@ -191,7 +191,7 @@ bin/br backup table \
 
 ### 性能調整 {#performance-tuning}
 
-バックアッププロセス中にTiKVのリソース使用量が明らかなボトルネックにならない場合（たとえば、 [バックアップの監視メトリック](#monitoring-metrics-for-the-backup)では、バックアップワーカーのCPU使用率の最高値は約`1500%`であり、全体的なI / O使用率は`30%`未満です）、パフォーマンスを調整するために、 `--concurrency` （デフォルトでは`4` ）の値を増やすことを試みることができます。ただし、このパフォーマンス調整方法は、多くの小さなテーブルのユースケースには適していません。次の例を参照してください。
+バックアッププロセス中にTiKVのリソース使用率が明らかなボトルネックにならない場合（たとえば、 [バックアップの監視メトリック](#monitoring-metrics-for-the-backup)では、バックアップワーカーの最大CPU使用率は約`1500%`であり、全体的なI / O使用率は`30%`未満です）、パフォーマンスを調整するために、 `--concurrency` （デフォルトでは`4` ）の値を増やすことを試みることができます。ただし、このパフォーマンス調整方法は、多くの小さなテーブルのユースケースには適していません。次の例を参照してください。
 
 {{< copyable "" >}}
 
@@ -251,11 +251,11 @@ bin/br restore table --db batchmark --table order_line -s local:///br_data --pd 
 
 ![img](/media/br/restore-io.png)
 
-**地域**：地域の分布。リージョンが均等に分散されるほど、復元リソースがより適切に使用されます。
+**リージョン**：リージョン分布。リージョンが均等に分散されるほど、復元リソースがより適切に使用されます。
 
 ![img](/media/br/restore-region.png)
 
-SSTの処理**時間**：SSTファイルの処理の遅延。テーブルを復元するときに、 `tableID`が変更された場合は、 `tableID`を書き直す必要があります。それ以外の場合、 `tableID`は名前が変更されます。一般的に、書き換えの遅延は名前変更の遅延よりも長くなります。
+SSTの処理**期間**：SSTファイルの処理の遅延。テーブルを復元するときに、 `tableID`が変更された場合は、 `tableID`を書き換える必要があります。それ以外の場合、 `tableID`は名前が変更されます。一般に、書き換えの遅延は名前変更の遅延よりも長くなります。
 
 ![img](/media/br/restore-process-sst.png)
 
@@ -310,7 +310,7 @@ SSTの処理**時間**：SSTファイルの処理の遅延。テーブルを復�
 
 #### 性能調整 {#performance-tuning}
 
-復元プロセス中にTiKVのリソース使用量が明らかなボトルネックにならない場合は、値を`--concurrency`に増やすことができます（デフォルトは`128` ）。次の例を参照してください。
+復元プロセス中にTiKVのリソース使用量が明らかなボトルネックにならない場合は、値`--concurrency` （デフォルトは`128` ）を増やすことができます。次の例を参照してください。
 
 {{< copyable "" >}}
 

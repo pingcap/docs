@@ -14,7 +14,7 @@ TiDB Ansibleバージョン：3.1.0 GA
 
 -   TiDB
 
-    -   `report-status`構成項目が有効になっているときにHTTPリスニングポートが使用できない場合にTiDBの起動を直接停止することをサポートします[＃16291](https://github.com/pingcap/tidb/pull/16291)
+    -   `report-status`構成項目が有効になっているときにHTTPリスニングポートが使用できない場合、TiDBの起動を直接停止することをサポートします[＃16291](https://github.com/pingcap/tidb/pull/16291)
 
 -   ツール
 
@@ -52,30 +52,30 @@ TiDB Ansibleバージョン：3.1.0 GA
     -   一部のシナリオでのマージ結合操作によって引き起こされるpanicの問題を修正します[＃15920](https://github.com/pingcap/tidb/pull/15920)
     -   選択性の計算で一部の式が繰り返しカウントされる問題を修正[＃16052](https://github.com/pingcap/tidb/pull/16052)
     -   極端な場合に統計情報をロードするときに発生したpanicの問題を修正します[＃15710](https://github.com/pingcap/tidb/pull/15710)
-    -   SQLクエリ[＃16015](https://github.com/pingcap/tidb/pull/16015)で同等の式を認識できない場合にエラーが返される問題を修正します
+    -   SQLクエリ[＃16015](https://github.com/pingcap/tidb/pull/16015)で同等の式を認識できない場合にエラーが返される問題を修正しました
     -   あるデータベースの`view`つを別のデータベースからクエリするとエラーが返される問題を修正します[＃15867](https://github.com/pingcap/tidb/pull/15867)
     -   列が[＃16080](https://github.com/pingcap/tidb/pull/16080)を使用して処理されるときに発生するpanicの問題を修正し`fast analyze`
     -   `current_role`印刷結果[＃16084](https://github.com/pingcap/tidb/pull/16084)の誤った文字セットを修正します
     -   MySQL接続ハンドシェイクエラー[＃15799](https://github.com/pingcap/tidb/pull/15799)のログを調整します
     -   監査プラグインがロードされた後のポートプロービングによって引き起こされるpanicの問題を修正します[＃16065](https://github.com/pingcap/tidb/pull/16065)
-    -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のpanic問題を修正します。
-    -   モニタリングセッションの再試行エラーのカウントが不正確になる問題を修正します[＃16120](https://github.com/pingcap/tidb/pull/16120)
-    -   `ALLOW_INVALID_DATES`モード[＃16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の誤った結果の問題を修正します
+    -   `TypeNull`クラスが可変長タイプ[＃15739](https://github.com/pingcap/tidb/pull/15739)と間違えられるため、左結合の`sort`演算子のpanicの問題を修正します。
+    -   監視セッションの再試行エラーのカウントが不正確になる問題を修正します[＃16120](https://github.com/pingcap/tidb/pull/16120)
+    -   `ALLOW_INVALID_DATES`モード[＃16171](https://github.com/pingcap/tidb/pull/16171)で`weekday`の間違った結果の問題を修正します
     -   クラスタにTiFlashノードがある場合にガベージコレクション（GC）が正常に機能しない可能性がある問題を修正します[＃15761](https://github.com/pingcap/tidb/pull/15761)
     -   ユーザーがハッシュパーティションテーブル[＃16219](https://github.com/pingcap/tidb/pull/16219)を作成するときに大きなパーティションカウントを設定すると、TiDBがメモリ（OOM）を使い果たす問題を修正します。
-    -   警告がエラーと誤解される問題を修正し、 `UNION`ステートメントが`SELECT`ステートメントと同じ動作をするようにします[＃16138](https://github.com/pingcap/tidb/pull/16138)
-    -   `TopN`がmocktikv3にプッシュダウンされたときの実行エラーを修正し[＃16200](https://github.com/pingcap/tidb/pull/16200)
+    -   警告がエラーと間違われる問題を修正し、 `UNION`ステートメントが`SELECT`ステートメントと同じ動作をするようにします[＃16138](https://github.com/pingcap/tidb/pull/16138)
+    -   `TopN`が[＃16200](https://github.com/pingcap/tidb/pull/16200)にプッシュダウンされたときの実行エラーを修正しました
     -   `runtime.growslice` [＃16142](https://github.com/pingcap/tidb/pull/16142)の不要なオーバーヘッドを回避するために、初期長を`chunk.column.nullBitMap`に増やします。
 
 -   TiKV
 
     -   レプリカ読み取りによって引き起こされるpanicの問題を修正し[＃7369](https://github.com/tikv/tikv/pull/7369) [＃7418](https://github.com/tikv/tikv/pull/7418)
     -   復元プロセスで空のリージョンが作成される問題を修正します[＃7419](https://github.com/tikv/tikv/pull/7419)
-    -   ロック要求の解決を繰り返すと、悲観的なトランザクションのアトミック性が損なわれる可能性があるという問題を修正します[＃7389](https://github.com/tikv/tikv/pull/7389)
+    -   ロック要求の解決を繰り返すと、悲観的なトランザクションの原子性が損なわれる可能性があるという問題を修正します[＃7389](https://github.com/tikv/tikv/pull/7389)
 
 -   TiFlash
 
-    -   TiDBからスキーマを複製するときの`rename table`操作の潜在的な問題を修正します
+    -   TiDBからスキーマを複製するときの`rename table`の操作の潜在的な問題を修正します
     -   複数のデータパス構成での`rename table`の操作によって引き起こされるデータ損失の問題を修正します
     -   一部のシナリオでTiFlashが誤ったストレージスペースを報告する問題を修正します
     -   リージョンマージが有効になっているときにTiFlashから読み取ることによって引き起こされる潜在的な問題を修正します
@@ -89,4 +89,4 @@ TiDB Ansibleバージョン：3.1.0 GA
     -   バックアップと復元（BR）
 
         -   `checksum`操作が無効になっても実行される問題を修正します[＃223](https://github.com/pingcap/br/pull/223)
-        -   `alter-pk`が`auto-random`または[＃231](https://github.com/pingcap/br/pull/231)を有効にすると増分バックアップが失敗する問題を修正し[＃230](https://github.com/pingcap/br/pull/230)
+        -   `alter-pk`が`auto-random`または[＃231](https://github.com/pingcap/br/pull/231)を有効にすると、増分バックアップが失敗する問題を修正し[＃230](https://github.com/pingcap/br/pull/230) 。

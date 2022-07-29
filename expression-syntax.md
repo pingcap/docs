@@ -13,7 +13,7 @@ summary: Learn about the expression syntax in TiDB.
 
 -   述語、数値、文字列、日付式。これらのタイプの[リテラル値](/literal-values.md)つも式です。
 
--   関数呼び出しとウィンドウ関数。参考までに、 [関数と演算子の概要](/functions-and-operators/functions-and-operators-overview.md)と[ウィンドウ関数](/functions-and-operators/window-functions.md)を参照してください。
+-   関数呼び出しとウィンドウ関数。参考までに、 [関数と演算子の概要](/functions-and-operators/functions-and-operators-overview.md)と[ウィンドウ関数](/functions-and-operators/window-functions.md)を参照してください
 
 -   ParamMarker（ `?` ）、システム変数、ユーザー変数、およびCASE式。
 

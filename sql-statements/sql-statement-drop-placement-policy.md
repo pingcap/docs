@@ -63,7 +63,7 @@ Query OK, 0 rows affected (0.21 sec)
 
 ## も参照してください {#see-also}
 
--   [SQLの配置ルール](/placement-rules-in-sql.md)
+-   [SQLでの配置ルール](/placement-rules-in-sql.md)
 -   [配置を表示](/sql-statements/sql-statement-show-placement.md)
 -   [プレースメントポリシーを作成する](/sql-statements/sql-statement-create-placement-policy.md)
 -   [配置ポリシーの変更](/sql-statements/sql-statement-alter-placement-policy.md)

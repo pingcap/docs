@@ -66,11 +66,11 @@ ParquetファイルをTiDB Cloudにインポートする前に、ターゲット
 
 TiDBCloudがTiDB CloudまたはGCSバケット内のParquetファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   ParquetファイルがAmazonS3にある場合、 [AmazonS3へのクロスアカウントアクセスを設定します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   ParquetファイルがAmazonS3にある場合、 [AmazonS3へのクロスアカウントアクセスを設定します](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、役割ARN値をメモします。
 
--   ParquetファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
+-   ParquetファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
 
 ## ステップ4.ParquetファイルをTiDB Cloudにインポートする {#step-4-import-parquet-files-to-tidb-cloud}
 
@@ -87,7 +87,7 @@ ParquetファイルをTiDB Cloudにインポートするには、次の手順を
     -   **データ形式**：<strong>寄木細工</strong>を選択します。
     -   **クレデンシャルのセットアップ**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
     -   **ターゲットデータベース**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
-    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。
+    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](/table-filter.md#syntax)を指定できます。複数のフィルタールールを構成する場合は、 `,`を使用してルールを区切ります。
     -   **オブジェクト名パターン**：インポートするParquetファイルの名前と一致するパターンを入力します。たとえば、 `my-data.parquet` 。
     -   **ターゲットテーブル名**：ターゲットテーブルの名前を入力します。たとえば、 `mydb.mytable` 。
 

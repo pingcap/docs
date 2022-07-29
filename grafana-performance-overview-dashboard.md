@@ -5,7 +5,7 @@ summary: Learn key metrics displayed on the Performance Overview dashboard.
 
 # パフォーマンスの概要に関する主要な指標 {#key-metrics-on-performance-overview}
 
-TiUPを使用してTiDBクラスタをデプロイする場合、監視システム（Prometheus＆Grafana）が同時にデプロイされます。詳細については、 [TiDBモニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
+TiUPを使用してTiDBクラスタをデプロイする場合、監視システム（Prometheus＆Grafana）も同時にデプロイされます。詳細については、 [TiDBモニタリングフレームワークの概要](/tidb-monitoring-framework.md)を参照してください。
 
 Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、PerformanceOverviewなどを含む一連のサブダッシュボードに分割されています。診断に役立つ多くのメトリックがあります。
 
@@ -15,16 +15,16 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 -   負荷プロファイル：データベースQPS、接続情報、アプリケーションがTiDBと対話するMySQLコマンドタイプ、データベース内部TSOおよびKV要求OPS、TiKVおよびTiDBのリソース使用量などの主要なメトリックとリソース使用量。
 
--   トップダウンレイテンシの内訳：クエリレイテンシと接続アイドル時間の比率、クエリレイテンシの内訳、実行中のTSO / KVリクエストのレイテンシ、TiKV内の書き込みレイテンシの内訳。
+-   トップダウンレイテンシーの内訳：クエリレイテンシーと接続アイドル時間の比率、クエリレイテンシーの内訳、実行中のTSO / KVリクエストのレイテンシー、TiKV内の書き込みレイテンシーの内訳。
 
-パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザーの応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要、ワークロードプロファイル、およびSQL遅延の内訳を使用して、データベース内のボトルネックを特定できます。詳細については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)を参照してください。
+パフォーマンス概要ダッシュボードを使用すると、パフォーマンスを効率的に分析し、ユーザーの応答時間のボトルネックがデータベースにあるかどうかを確認できます。ボトルネックがデータベースにある場合は、データベース時間の概要、ワークロードプロファイル、およびSQLレイテンシの内訳を使用して、データベース内のボトルネックを特定できます。詳細については、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)を参照してください。
 
 次のセクションでは、パフォーマンスの概要ダッシュボードの指標について説明します。
 
 ## SQLタイプ別のデータベース時間 {#database-time-by-sql-type}
 
 -   データベース時間：1秒あたりの合計データベース時間
--   sql_type：1秒あたりの各タイプのSQLステートメントによって消費されるデータベース時間
+-   sql_type：1秒あたりのSQLステートメントの各タイプによって消費されるデータベース時間
 
 ## SQLフェーズごとのデータベース時間 {#database-time-by-sql-phase}
 
@@ -37,7 +37,7 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 -   実行時間：1秒あたりのSQL実行中に消費されたデータベース時間
 -   tso_wait：SQL実行中の1秒あたりの同時TSO待機時間
--   kv要求タイプ：SQL実行中の1秒あたりの各KV要求タイプの待機時間。 KV要求は同時実行であるため、KV要求の合計待機時間はSQL実行時間を超える可能性があります。
+-   kv要求タイプ：SQL実行中の1秒あたりの各KV要求タイプの待機時間。 KV要求は同時であるため、KV要求の合計待機時間はSQL実行時間を超える可能性があります。
 
 緑のメトリックは一般的なKV書き込み要求（プリライトやコミットなど）を表し、青のメトリックは一般的な読み取り要求を表し、他の色のメトリックは注意が必要な予期しない状況を表します。たとえば、ペシミスティックロックKV要求は赤でマークされ、TSO待機はダークブラウンでマークされます。
 
@@ -52,7 +52,7 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 ## タイプ別のCPS {#cps-by-type}
 
-タイプに基づいて、1秒あたりにすべてのTiDBインスタンスによって処理されるコマンドの数
+タイプに基づいて、1秒あたりにすべてのTiDBインスタンスによって処理されたコマンドの数
 
 ## プランキャッシュOPSを使用したクエリ {#queries-using-plan-cache-ops}
 
@@ -60,10 +60,10 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 ## KV/TSOリクエストOPS {#kv-tso-request-ops}
 
--   kvリクエストの合計：すべてのTiDBインスタンスでの1秒あたりのKVリクエストの総数
+-   kvリクエストの合計：すべてのTiDBインスタンスにおける1秒あたりのKVリクエストの総数
 -   タイプ別のkvリクエスト： `Get`などのタイプに基づくすべての`Prewrite`インスタンスでの`Commit`秒あたりのKVリクエストの数。
--   tso --cmd：すべてのTiDBインスタンスでの1秒あたりの`tso cmd`リクエストの数
--   tso --request：すべてのTiDBインスタンスで1秒あたり`tso request`リクエストの数
+-   tso-cmd：すべてのTiDBインスタンスで1秒あたり`tso cmd`リクエストの数
+-   tso-リクエスト：すべてのTiDBインスタンスで1秒あたり`tso request`リクエストの数
 
 一般に、 `tso - cmd`を`tso - request`で割ると、1秒あたりのリクエストの平均バッチサイズが得られます。
 
@@ -76,7 +76,7 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 ## TiDB CPU {#tidb-cpu}
 
 -   avg：すべてのTiDBインスタンスの平均CPU使用率
--   delta：すべてのTiDBインスタンスの最大CPU使用率からすべてのTiDBインスタンスの最小CPU使用率を引いたもの
+-   デルタ：すべてのTiDBインスタンスの最大CPU使用率からすべてのTiDBインスタンスの最小CPU使用率を引いたもの
 -   max：すべてのTiDBインスタンスでの最大CPU使用率
 
 ## TiKV CPU / IO MBps {#tikv-cpu-io-mbps}
@@ -103,24 +103,24 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 ## 接続アイドル期間 {#connection-idle-duration}
 
-接続アイドル期間は、接続がアイドル状態である期間を示します。
+接続アイドル期間は、接続がアイドル状態の期間を示します。
 
 -   avg-in-txn：接続がトランザクション内にある場合の平均接続アイドル期間
 -   avg-not-in-txn：接続がトランザクション内にない場合の平均接続アイドル期間
 -   99-in-txn：接続がトランザクション内にある場合のP99接続のアイドル期間
--   99-not-in-txn：接続がトランザクション内にない場合のP99接続アイドル期間
+-   99-not-in-txn：接続がトランザクション内にない場合のP99接続のアイドル期間
 
 ## 解析期間、コンパイル期間、および実行期間 {#parse-duration-compile-duration-and-execute-duration}
 
 -   解析時間：SQLステートメントの解析に費やされた時間
 -   コンパイル時間：解析されたSQLASTを実行プランにコンパイルするのにかかる時間
--   実行時間：SQLステートメントの実行プランの実行にかかる時間
+-   実行時間：SQLステートメントの実行プランの実行に費やされた時間
 
 これら3つのメトリックにはすべて、すべてのTiDBインスタンスの平均期間と99パーセンタイル期間が含まれます。
 
 ## 平均TiDBKVリクエスト期間 {#avg-tidb-kv-request-duration}
 
-`Get` 、および`Prewrite`を含むタイプに基づいて、すべての`Commit`インスタンスでKVリクエストを実行するのに費やされた平均時間。
+`Get`を含むタイプに基づいて、すべての`Prewrite`インスタンスでKVリクエストを実行するのに`Commit`れた平均時間。
 
 ## 平均TiKVGRPC期間 {#avg-tikv-grpc-duration}
 
@@ -128,14 +128,14 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 
 ## PDTSO待機/RPC期間 {#pd-tso-wait-rpc-duration}
 
--   wait --avg：すべてのTiDBインスタンスでPDがTSOを返すのを待機する平均時間
+-   wait-avg：すべてのTiDBインスタンスでPDがTSOを返すのを待機する平均時間
 -   rpc --avg：すべてのTiDBインスタンスでTSO要求をPDに送信してからTSOを受信するまでの平均時間
 -   待機-99：すべてのTiDBインスタンスでPDがTSOを返すのを待機するP99時間
 -   rpc-99：すべてのTiDBインスタンスでTSO要求をPDに送信してからTSOを受信するまでのP99時間
 
-## ストレージ非同期書き込み期間、保存期間、および適用期間 {#storage-async-write-duration-store-duration-and-apply-duration}
+## ストレージ非同期書き込み期間、ストア期間、および適用期間 {#storage-async-write-duration-store-duration-and-apply-duration}
 
--   ストレージ非同期書き込み期間：非同期書き込みにかかる時間
+-   ストレージ非同期書き込み期間：非同期書き込みに費やされた時間
 -   ストア期間：非同期書き込み中にストアループで消費された時間
 -   適用期間：非同期書き込み中に適用ループで消費された時間
 
@@ -146,8 +146,8 @@ Grafanaダッシュボードは、PD、TiDB、TiKV、Node_exporter、Overview、
 ## ログ期間の追加、ログ期間のコミット、およびログ期間の適用 {#append-log-duration-commit-log-duration-and-apply-log-duration}
 
 -   ログの追加期間： Raftがログを追加するために費やした時間
--   コミットログ期間： Raftがログをコミットするために消費した時間
--   ログの適用期間： Raftがログを適用するために費やした時間
+-   コミットログ期間： Raftがログをコミットするために費やした時間
+-   ログの適用期間： Raftがログを適用するのに費やした時間
 
 これら3つのメトリックにはすべて、すべてのTiKVインスタンスの平均期間とP99期間が含まれます。
 

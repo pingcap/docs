@@ -3,7 +3,7 @@ title: SHOW CREATE TABLE | TiDB SQL Statement Reference
 summary: An overview of the usage of SHOW CREATE TABLE for the TiDB database.
 ---
 
-# 作成テーブルを表示 {#show-create-table}
+# CREATETABLEを表示する {#show-create-table}
 
 このステートメントは、SQLを使用して既存のテーブルを再作成するための正確なステートメントを示しています。
 
@@ -36,11 +36,11 @@ mysql> SHOW CREATE TABLE t1;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントは、MySQLと完全に互換性があると理解されています。互換性の違いは、GitHubでは[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 
--   [テーブルの作成](/sql-statements/sql-statement-create-table.md)
+-   [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
 -   [ドロップテーブル](/sql-statements/sql-statement-drop-table.md)
 -   [テーブルを表示](/sql-statements/sql-statement-show-tables.md)
 -   [から列を表示](/sql-statements/sql-statement-show-columns-from.md)

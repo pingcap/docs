@@ -30,7 +30,7 @@ Google翻訳を使用して、さまざまな言語でドキュメントを表�
 | [`release-5.3`](https://github.com/pingcap/docs/tree/release-5.3) | 5.3安定バージョン               |
 | [`release-5.2`](https://github.com/pingcap/docs/tree/release-5.2) | 5.2安定バージョン               |
 | [`release-5.1`](https://github.com/pingcap/docs/tree/release-5.1) | 5.1安定バージョン               |
-| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0安定バージョン               |
+| [`release-5.0`](https://github.com/pingcap/docs/tree/release-5.0) | 5.0安定版                   |
 | [`release-4.0`](https://github.com/pingcap/docs/tree/release-4.0) | 4.0安定バージョン               |
 | [`release-3.1`](https://github.com/pingcap/docs/tree/release-3.1) | 3.1安定バージョン               |
 | [`release-3.0`](https://github.com/pingcap/docs/tree/release-3.0) | 3.0安定版                   |
@@ -40,4 +40,4 @@ Google翻訳を使用して、さまざまな言語でドキュメントを表�
 
 [<img src="media/contribution-map.png" alt="コントリビューションマップ" width="180">](https://github.com/pingcap/docs/blob/master/credits.md)
 
-寄稿者になるには[TiDBドキュメント寄稿ガイド](/CONTRIBUTING.md)を参照してください。 🤓
+寄稿者になるには[TiDBドキュメント寄稿ガイド](/CONTRIBUTING.md)を参照してください！ 🤓

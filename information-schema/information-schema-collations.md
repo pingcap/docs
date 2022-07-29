@@ -5,7 +5,7 @@ summary: Learn the `COLLATIONS` information_schema table.
 
 # 照合 {#collations}
 
-`COLLATIONS`の表は、 `CHARACTER_SETS`の表の文字セットに対応する照合のリストを提供します。現在、このテーブルはMySQLとの互換性のためにのみ含まれています。
+`COLLATIONS`テーブルは、 `CHARACTER_SETS`テーブルの文字セットに対応する照合のリストを提供します。現在、このテーブルはMySQLとの互換性のためにのみ含まれています。
 
 {{< copyable "" >}}
 

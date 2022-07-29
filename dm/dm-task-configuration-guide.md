@@ -11,7 +11,7 @@ summary: Learn how to configure a data migration task in Data Migration (DM).
 
 タスク用に移行するデータソースを構成する前に、まずDMが対応するデータソースの構成ファイルをロードしていることを確認する必要があります。以下は、いくつかの操作リファレンスです。
 
--   データソースを表示するには、 [データソースの構成を確認してください](/dm/dm-manage-source.md#check-data-source-configurations)を参照してください。
+-   データソースを表示するには、 [データソースの構成を確認してください](/dm/dm-manage-source.md#check-data-source-configurations)を参照できます。
 -   データソースを作成するには、 [データソースを作成する](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照できます。
 -   データソース構成ファイルを生成するには、 [ソース構成ファイルの紹介](/dm/dm-source-configuration-file.md)を参照できます。
 
@@ -98,7 +98,7 @@ target-database:       # Configuration of target TiDB database.
 
 データ移行タスクのbinlogイベントのフィルターを構成するには、次の手順を実行します。
 
-1.  タスク構成ファイルでbinlogイベントのグローバルフィルタールールセットを構成します。
+1.  タスク構成ファイルで、binlogイベントのグローバルフィルタールールセットを構成します。
 
     ```yaml
     filters:                                        # The filter rule set of data source binlog events. You can set multiple rules at the same time.
@@ -131,7 +131,7 @@ target-database:       # Configuration of target TiDB database.
 
 > **ノート：**
 >
-> -   データソースの特定のテーブルをダウンストリームTiDBインスタンスの別の名前のテーブルに移行する必要がない場合は、この構成をスキップしてください。
+> -   データソースの特定のテーブルをダウンストリームTiDBインスタンス内の別の名前のテーブルに移行する必要がない場合は、この構成をスキップしてください。
 >
 > -   シャードマージタスクの場合は、タスク構成ファイルでマッピングルールを設定する**必要**があります。
 
@@ -166,7 +166,7 @@ target-database:       # Configuration of target TiDB database.
         filter-rules: ["filter-rule-2"]                   # The name of the rule that filters specific binlog events of the data source. You can configure multiple rules here.
     ```
 
-## シャードマージタスクを構成する {#configure-a-shard-merge-task}
+## シャードマージタスクを構成します {#configure-a-shard-merge-task}
 
 > **ノート：**
 >

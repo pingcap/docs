@@ -41,7 +41,7 @@ TiDB Cloudの場合、この変数のデフォルト値は`1`です。
 
 これらの2つのバージョンには、TiDBに異なる情報が含まれています。
 
-| 情報                | バージョン1                            | バージョン2                                              |
+| 情報                | バージョン 1                           | バージョン2                                              |
 | ----------------- | --------------------------------- | --------------------------------------------------- |
 | テーブルの行の総数         | √                                 | √                                                   |
 | カラム数-最小スケッチ       | √                                 | ××                                                  |
@@ -399,7 +399,7 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用してバックグ�
 
     <CustomContent platform="tidb">
 
-    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` （デフォルトでは`true` ）の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます`${id}`は前のステップで取得したバックグラウンド`ANALYZE`タスクの`ID`です。
+    -   [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が`true` （デフォルトでは`true` ）の場合、 `KILL TIDB ${id};`ステートメントを直接実行できます。ここで、 `${id}`は、前のステップで取得したバックグラウンド`ANALYZE`タスクの`ID`です。
     -   `enable-global-kill`が`false`の場合、クライアントを使用して、バックエンド`ANALYZE`タスクを実行しているTiDBインスタンスに接続してから、 `KILL TIDB ${id};`ステートメントを実行する必要があります。クライアントを使用して別のTiDBインスタンスに接続する場合、またはクライアントとTiDBクラスタの間にプロキシがある場合、 `KILL`ステートメントはバックグラウンド`ANALYZE`タスクを終了できません。
 
     </CustomContent>
@@ -422,11 +422,11 @@ TiDB v6.0以降、TiDBは`KILL`ステートメントを使用してバックグ�
 
 #### <code>tidb_distsql_scan_concurrency</code> {#code-tidb-distsql-scan-concurrency-code}
 
-通常の列を分析する場合、 `tidb_distsql_scan_concurrency`パラメーターを使用して、一度に読み取る領域の数を制御できます。デフォルト値は`15`です。
+通常の列を分析する場合、 `tidb_distsql_scan_concurrency`パラメーターを使用して、一度に読み取るリージョンの数を制御できます。デフォルト値は`15`です。
 
 #### <code>tidb_index_serial_scan_concurrency</code> {#code-tidb-index-serial-scan-concurrency-code}
 
-インデックス列を分析する場合、 `tidb_index_serial_scan_concurrency`パラメータを使用して、一度に読み取る領域の数を制御できます。デフォルト値は`1`です。
+インデックス列を分析する場合、 `tidb_index_serial_scan_concurrency`パラメータを使用して、一度に読み取るリージョンの数を制御できます。デフォルト値は`1`です。
 
 ### ANALYZE構成を永続化する {#persist-analyze-configurations}
 
@@ -436,7 +436,7 @@ v5.4.0以降、TiDBはいくつかの`ANALYZE`構成の永続化をサポート�
 
 | 構成            | 対応するANALYZE構文                                                                                                  |
 | ------------- | -------------------------------------------------------------------------------------------------------------- |
-| ヒストグラムバケットの数  | 多数のバケット付き                                                                                                      |
+| ヒストグラムバケットの数  | NUM個のバケット付き                                                                                                    |
 | トップNの数        | NUMTOPN付き                                                                                                      |
 | サンプル数         | NUMサンプル付き                                                                                                      |
 | サンプリングレート     | FLOATNUMSAMPLERATEを使用                                                                                          |
@@ -521,7 +521,7 @@ TiDB v6.1.0以降、 `SHOW ANALYZE STATUS`ステートメントはクラスタ�
 
 [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610)が設定され、TiDBバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値よりも多くのメモリを使用する場合、タスクは再試行されます。 `SHOW ANALYZE STATUS`ステートメントの出力で、失敗したタスクと再試行されたタスクを確認できます。
 
-[`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が0より大きく、TiDBバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値よりも長い時間がかかる場合、タスクは終了します。
+[`tidb_max_auto_analyze_time`](/system-variables.md#tidb_max_auto_analyze_time-new-in-v610)が0より大きく、TiDBバックグラウンドで実行されている自動`ANALYZE`タスクがこのしきい値よりも時間がかかる場合、タスクは終了します。
 
 ```sql
 mysql> SHOW ANALYZE STATUS [ShowLikeOrWhere];
@@ -567,7 +567,7 @@ SHOW STATS_META [ShowLikeOrWhere];
 
 ### テーブルのヘルス状態 {#health-state-of-tables}
 
-`SHOW STATS_HEALTHY`ステートメントを使用して、テーブルの正常性状態を確認し、統計の精度を概算できます。 `modify_count` &gt; = `row_count`の場合、ヘルス状態は0です。 `modify_count` &lt; `row_count`の場合、ヘルス状態は（ `modify_count` / `row_count` ）*100です。
+`SHOW STATS_HEALTHY`ステートメントを使用して、テーブルの正常性状態を確認し、統計の精度を大まかに見積もることができます。 `modify_count` &gt; = `row_count`の場合、ヘルス状態は0です。 `modify_count` &lt; `row_count`の場合、ヘルス状態は（ `modify_count` / `row_count` ）*100です。
 
 構文は次のとおりです。
 
@@ -602,7 +602,7 @@ SHOW STATS_HEALTHY [ShowLikeOrWhere];
 SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
 ```
 
-このステートメントは、すべての列の異なる値の数と`NULL`の数を返します。 `ShowLikeOrWhere`を使用して、必要な情報をフィルタリングできます。
+このステートメントは、異なる値の数と、すべての列の`NULL`の数を返します。 `ShowLikeOrWhere`を使用して、必要な情報をフィルタリングできます。
 
 現在、 `SHOW STATS_HISTOGRAMS`ステートメントは次の10列を返します。
 
@@ -617,7 +617,7 @@ SHOW STATS_HISTOGRAMS [ShowLikeOrWhere]
 | `distinct_count` | 異なる値の数                                               |
 | `null_count`     | `NULL`の数                                             |
 | `avg_col_size`   | 列の平均の長さ                                              |
-| 相関               | 列のピアソン相関係数と、2つの列間の関連度を示す整数主キー                        |
+| 相関               | 列と整数の主キーのピアソン相関係数。これは、2つの列間の関連度を示します。                |
 
 ### ヒストグラムのバケット {#buckets-of-histogram}
 

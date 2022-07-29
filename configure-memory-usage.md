@@ -37,7 +37,7 @@ SET tidb_mem_quota_query = 8 << 10;
 
 ## tidb-serverインスタンスのメモリ使用量のしきい値を構成します {#configure-the-memory-usage-threshold-of-a-tidb-server-instance}
 
-TiDB構成ファイルでは、 [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)を構成することにより、tidb-serverインスタンスのメモリ使用量のしきい値を設定できます。
+TiDB構成ファイルで、 [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)を構成することにより、tidb-serverインスタンスのメモリ使用量のしきい値を設定できます。
 
 次の例では、tidb-serverインスタンスの合計メモリ使用量を32GBに設定します。
 
@@ -57,7 +57,7 @@ server-memory-quota = 34359738368
 
 ## 過度のメモリ使用量のアラームをトリガーします {#trigger-the-alarm-of-excessive-memory-usage}
 
-デフォルトの構成では、マシンのメモリ使用量が合計メモリの80％に達すると、tidb-serverインスタンスがアラームログを出力し、関連するステータスファイルを記録します。 `memory-usage-alarm-ratio`を設定することにより、メモリ使用率のしきい値を設定できます。詳細なアラームルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
+デフォルトの構成では、マシンのメモリ使用量が合計メモリの80％に達すると、tidb-serverインスタンスはアラームログを出力し、関連するステータスファイルを記録します。 `memory-usage-alarm-ratio`を設定することにより、メモリ使用率のしきい値を設定できます。詳細なアラームルールについては、 [`memory-usage-alarm-ratio`](/tidb-configuration-file.md#memory-usage-alarm-ratio-new-in-v409)の説明を参照してください。
 
 アラームが1回トリガーされた後、メモリ使用率が10秒を超えてしきい値を下回り、再びしきい値に達した場合にのみ、アラームが再度トリガーされることに注意してください。さらに、アラームによって生成された過剰なステータスファイルの保存を回避するために、現在、TiDBは最近の5つのアラーム中に生成されたステータスファイルのみを保持します。
 
@@ -97,24 +97,24 @@ server-memory-quota = 34359738368
 
 ### フロー制御 {#flow-control}
 
--   TiDBは、データを読み取るオペレーターの動的メモリ制御をサポートしています。デフォルトでは、この演算子は[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)がデータの読み取りを許可するスレッドの最大数を使用します。 1回のSQL実行のメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターが1つのスレッドを停止します。
+-   TiDBは、データを読み取るオペレーターの動的メモリ制御をサポートしています。デフォルトでは、この演算子は[`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)がデータの読み取りを許可するスレッドの最大数を使用します。 1回のSQL実行のメモリ使用量が毎回[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を超えると、データを読み取るオペレーターは1つのスレッドを停止します。
 
--   このフロー制御の動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
+-   このフロー制御動作は、システム変数[`tidb_enable_rate_limit_action`](/system-variables.md#tidb_enable_rate_limit_action)によって制御されます。
 
 -   フロー制御動作がトリガーされると、TiDBはキーワード`memory exceeds quota, destroy one token now`を含むログを出力します。
 
 ### ディスクの流出 {#disk-spill}
 
-TiDBは、実行オペレーターのディスクスピルをサポートしています。 SQL実行のメモリ使用量がメモリクォータを超えると、tidb-serverは実行演算子の中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスクスピルをサポートする演算子には、Sort、MergeJoin、HashJoin、およびHashAggが含まれます。
+TiDBは、実行オペレーターのディスクスピルをサポートします。 SQL実行のメモリ使用量がメモリクォータを超えると、tidb-serverは実行演算子の中間データをディスクにスピルして、メモリの負荷を軽減できます。ディスクスピルをサポートする演算子には、Sort、MergeJoin、HashJoin、およびHashAggが含まれます。
 
--   ディスク[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)によって共同で制御され[`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 。
+-   ディスクの流出動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、および[`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)のパラメーターによって共同で制御さ[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota) [`oom-use-tmp-storage`](/tidb-configuration-file.md#oom-use-tmp-storage) 。
 -   ディスクスピルがトリガーされると、TiDBはキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
--   Sort、MergeJoin、およびHashJoin演算子のディスクスピルはv4.0.0で導入されました。 HashAggオペレーターのディスクスピルはv5.2.0で導入されました。
--   Sort、MergeJoin、またはHashJoinを含むSQL実行によってOOMが発生すると、TiDBはデフォルトでディスクスピルをトリガーします。 HashAggを含むSQL実行がOOMを引き起こす場合、TiDBはデフォルトでディスクスピルをトリガーしません。 HashAggのディスクスピルをトリガーするようにシステム変数`tidb_executor_concurrency = 1`を構成できます。
+-   Sort、MergeJoin、およびHashJoinオペレーターのディスクスピルはv4.0.0で導入されました。 HashAggオペレーターのディスクスピルはv5.2.0で導入されました。
+-   Sort、MergeJoin、またはHashJoinを含むSQL実行によってOOMが発生すると、TiDBはデフォルトでディスクスピルをトリガーします。 HashAggを含むSQL実行によってOOMが発生した場合、TiDBはデフォルトでディスクスピルをトリガーしません。 HashAggのディスクスピルをトリガーするようにシステム変数`tidb_executor_concurrency = 1`を構成できます。
 
 > **ノート：**
 >
-> HashAggのディスクスピルは、 `DISTINCT`集約関数を含むSQL実行をサポートしていません。 `DISTINCT`集計関数を含むSQL実行が大量のメモリを使用する場合、ディスクスピルは適用されません。
+> HashAggのディスクスピルは、 `DISTINCT`の集計関数を含むSQL実行をサポートしていません。 `DISTINCT`集計関数を含むSQL実行が大量のメモリを使用する場合、ディスクスピルは適用されません。
 
 次の例では、メモリを消費するSQLステートメントを使用して、HashAggのディスクスピル機能を示しています。
 
@@ -136,7 +136,7 @@ TiDBは、実行オペレーターのディスクスピルをサポートして�
     [tidb]> explain analyze select /*+ HASH_AGG() */ count(*) from t t1 join t t2 join t t3 group by t1.a, t2.a, t3.a;
     ```
 
-    このSQLステートメントを実行するとメモリを大量に消費するため、次の「メモリ不足クォータ」エラーメッセージが返されます。
+    このSQLステートメントの実行はメモリを大量に消費するため、次の「メモリ不足クォータ」エラーメッセージが返されます。
 
     ```sql
     ERROR 1105 (HY000): Out Of Memory Quota![conn_id=3]

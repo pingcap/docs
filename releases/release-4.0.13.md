@@ -15,7 +15,7 @@ TiDBバージョン：4.0.13
     -   `AUTO_INCREMENT`列から`AUTO_RANDOM`列への変更をサポート[＃24608](https://github.com/pingcap/tidb/pull/24608)
     -   `infoschema.client_errors_summary`のテーブルを追加して、ユーザーがクライアントに返されたエラーを追跡できるようにします[＃23267](https://github.com/pingcap/tidb/pull/23267)
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
@@ -46,7 +46,7 @@ TiDBバージョン：4.0.13
 
     -   TiCDC
 
-        -   メモリオーバーフロー（OOM） [＃1751](https://github.com/pingcap/tiflow/pull/1751)を回避するためにプロセッサフロー制御を実装する
+        -   メモリオーバーフロー（OOM）を回避するためにプロセッサフロー制御を実装する[＃1751](https://github.com/pingcap/tiflow/pull/1751)
         -   Unified Sorterで古い一時ファイルのクリーンアップをサポートし、複数の`cdc server`インスタンスが同じ`sort-dir`ディレクトリを共有しないようにします[＃1741](https://github.com/pingcap/tiflow/pull/1741)
         -   フェイルポイント[＃1732](https://github.com/pingcap/tiflow/pull/1732)のHTTPハンドラーを追加します
 
@@ -59,11 +59,11 @@ TiDBバージョン：4.0.13
     -   DIV式[＃24266](https://github.com/pingcap/tidb/pull/24266)の除数として`BIT`型定数を使用すると、誤ったクエリ結果が発生する問題を修正します。
     -   `NO_ZERO_IN_DATE`モードがDDLステートメントで設定されたデフォルトの列値に対して有効にならない問題を修正します[＃24185](https://github.com/pingcap/tidb/pull/24185)
     -   `BIT`タイプの列と`INTEGER`タイプの列の間に`UNION`を使用すると、誤ったクエリ結果が発生する問題を修正します[＃24026](https://github.com/pingcap/tidb/pull/24026)
-    -   `BINARY`タイプと`CHAR`タイプ[＃23917](https://github.com/pingcap/tidb/pull/23917)を比較すると、 `TableDual`のプランが誤って作成される問題を修正します。
+    -   `BINARY`タイプと`CHAR`タイプ[＃23917](https://github.com/pingcap/tidb/pull/23917)を比較するときに`TableDual`プランが誤って作成される問題を修正します
     -   `insert ignore on duplicate`ステートメントがテーブルレコードを予期せず削除する可能性がある問題を修正します[＃23825](https://github.com/pingcap/tidb/pull/23825)
     -   監査プラグインがTiDBpanicを引き起こす問題を修正します[＃23819](https://github.com/pingcap/tidb/pull/23819)
     -   `HashJoin`オペレーターが照合順序[＃23812](https://github.com/pingcap/tidb/pull/23812)を誤って処理する問題を修正します
-    -   `batch_point_get`が悲観的なトランザクション[＃23778](https://github.com/pingcap/tidb/pull/23778)で異常な値を誤って処理するときに発生する切断の問題を修正します
+    -   `batch_point_get`がペシミスティックトランザクション[＃23778](https://github.com/pingcap/tidb/pull/23778)で異常な値を誤って処理するときに発生する切断の問題を修正します。
     -   `tidb_row_format_version`構成値が`1`に設定され、 `enable_new_collation`値が`true` [＃23772](https://github.com/pingcap/tidb/pull/23772)に設定されている場合に発生する、一貫性のないインデックスの問題を修正します。
     -   `INTEGER`タイプの列を`STRING`定数値[＃23705](https://github.com/pingcap/tidb/pull/23705)と比較するときに発生するバグを修正します
     -   `BIT`タイプの列が`approx_percent`関数に渡されたときに発生するエラーを修正します[＃23702](https://github.com/pingcap/tidb/pull/23702)
@@ -74,13 +74,13 @@ TiDBバージョン：4.0.13
     -   比較式[＃23474](https://github.com/pingcap/tidb/pull/23474)で`NULL`定数を使用すると、TiFlashが誤った結果を返す原因となる問題を修正します。
     -   `YEAR`タイプの列を`STRING`定数[＃23335](https://github.com/pingcap/tidb/pull/23335)と比較するときの間違った結果の問題を修正します
     -   `session.group_concat_max_len`の設定が小さすぎると`group_concat`がパニックになる問題を修正します[＃23257](https://github.com/pingcap/tidb/pull/23257)
-    -   `TIME`タイプの列[＃23233](https://github.com/pingcap/tidb/pull/23233)に`BETWEEN`式を使用したときに発生する誤ったクエリ結果の問題を修正します
-    -   `DELETE`ステートメントの特権チェックの問題を修正します[＃23215](https://github.com/pingcap/tidb/pull/23215)
+    -   `TIME`タイプの列[＃23233](https://github.com/pingcap/tidb/pull/23233)に`BETWEEN`式を使用するときに発生する誤ったクエリ結果の問題を修正します
+    -   `DELETE`ステートメント[＃23215](https://github.com/pingcap/tidb/pull/23215)の特権チェックの問題を修正します。
     -   `DECIMAL`タイプの列[＃23196](https://github.com/pingcap/tidb/pull/23196)に無効な文字列を挿入したときにエラーが報告されない問題を修正します
     -   `DECIMAL`タイプの列にデータを挿入するときに発生した解析エラーの問題を修正します[＃23152](https://github.com/pingcap/tidb/pull/23152)
     -   `USE_INDEX_MERGE`ヒントが有効にならない問題を修正します[＃22924](https://github.com/pingcap/tidb/pull/22924)
     -   `WHERE`句の`ENUM`列または`SET`列をフィルターとして使用すると、クエリが誤った結果を返すバグを修正します[＃22814](https://github.com/pingcap/tidb/pull/22814)
-    -   クラスタ化されたインデックスと新しい照合順序を同時に使用すると、クエリが間違った結果を返すバグを修正します[＃21408](https://github.com/pingcap/tidb/pull/21408)
+    -   クラスター化されたインデックスと新しい照合順序を同時に使用すると、クエリが間違った結果を返すバグを修正します[＃21408](https://github.com/pingcap/tidb/pull/21408)
     -   `enable_new_collation`を有効にして`ANALYZE`を実行したときに発生するpanicを修正します[＃21299](https://github.com/pingcap/tidb/pull/21299)
     -   SQLビューが[＃24531](https://github.com/pingcap/tidb/pull/24531)に関連付けられたデフォルトのロールを正しく処理しない問題を修正します。
     -   DDLジョブのキャンセルがスタックする問題を修正します[＃24445](https://github.com/pingcap/tidb/pull/24445)
@@ -89,10 +89,10 @@ TiDBバージョン：4.0.13
     -   `TableScan`が降順[＃23974](https://github.com/pingcap/tidb/pull/23974)の場合に、オプティマイザによってTiFlashが誤って選択されるバグを修正します。
     -   `point_get`プランがMySQL3の列名と矛盾する列名を返すバグを修正し[＃23970](https://github.com/pingcap/tidb/pull/23970)
     -   大文字の名前のデータベースで`show table status`ステートメントを実行すると、間違った結果が返される問題を修正します[＃23958](https://github.com/pingcap/tidb/pull/23958)
-    -   テーブルに対する`INSERT`と`DELETE`の特権を同時に持たないユーザーが`REPLACE`の操作を実行できるというバグを修正します[＃23938](https://github.com/pingcap/tidb/pull/23938)
+    -   テーブルに対する`INSERT`と`DELETE`の特権を同時に持たないユーザーが`REPLACE`の操作を実行できるバグを修正します[＃23938](https://github.com/pingcap/tidb/pull/23938)
     -   照合順序が正しく処理されないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正します[＃23878](https://github.com/pingcap/tidb/pull/23878)
     -   `RANGE`つのパーティションを持つテーブルでクエリを実行するときに発生するpanicを修正します[＃23689](https://github.com/pingcap/tidb/pull/23689)
-    -   問題の修正：以前のバージョンのクラスタでは、 `tidb_enable_table_partition`変数が`false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして処理されます。クラスタが新しいバージョンにアップグレードされたときに、このテーブルで`batch point get`のクエリを実行すると、接続panicが発生します。 [＃23682](https://github.com/pingcap/tidb/pull/23682)
+    -   問題の修正：以前のバージョンのクラスタで、 `tidb_enable_table_partition`変数が`false`に設定されている場合、パーティションを含むテーブルはパーティション化されていないテーブルとして処理されます。クラスタが新しいバージョンにアップグレードされたときに、このテーブルで`batch point get`のクエリを実行すると、接続panicが発生します。 [＃23682](https://github.com/pingcap/tidb/pull/23682)
     -   TiDBがTCPおよびUNIXソケットでリッスンするように構成されている場合、TCP接続を介したリモートホストが接続[＃23513](https://github.com/pingcap/tidb/pull/23513)に対して正しく検証されない問題を修正します。
     -   デフォルト以外の照合順序が誤ったクエリ結果を引き起こすバグを修正します[＃22923](https://github.com/pingcap/tidb/pull/22923)
     -   Grafanaの**コプロセッサーキャッシュ**パネルが機能しないバグを修正します[＃22617](https://github.com/pingcap/tidb/pull/22617)
@@ -122,10 +122,10 @@ TiDBバージョン：4.0.13
     -   ドロップされたテーブルにデータを書き込むときに発生するTiFlashpanicの問題を修正します
     -   BRの復元中に発生するTiFlashpanicの問題を修正します
     -   一般的なCI照合順序を使用するときに一部の文字の重みが間違っているバグを修正します
-    -   トゥームストーンされたテーブルでデータが失われるという潜在的な問題を修正します
+    -   トゥームストーンテーブルでデータが失われるという潜在的な問題を修正します
     -   ゼロバイトを含む文字列を比較するときの誤った結果の問題を修正します
     -   入力列にnull定数が含まれている場合、論理関数が誤った結果を返す問題を修正します
-    -   論理関数が数値型のみを受け入れるという問題を修正します
+    -   論理関数が数値タイプのみを受け入れるという問題を修正します
     -   タイムスタンプ値が`1970-01-01`で、タイムゾーンオフセットが負の場合に発生する誤った結果の問題を修正します
     -   `Decimal256`のハッシュ値が安定しない問題を修正します
 
@@ -139,4 +139,4 @@ TiDBバージョン：4.0.13
 
     -   TiDB Lightning
 
-        -   自動コミットが無効になっている場合、TiDBLightningのTiDBバックエンドがデータをロードできないバグを修正します
+        -   自動コミットが無効になっていると、TiDBLightningのTiDBバックエンドがデータを読み込めないバグを修正します

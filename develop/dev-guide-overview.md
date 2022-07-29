@@ -14,12 +14,12 @@ aliases: ['/appdev/dev/app-dev-overview','/tidb/stable/dev-guide-outdated-for-la
 
 TiDBの使用を開始する前に、TiDBがどのように機能するかについてのいくつかの重要なメカニズムを理解する必要があります。
 
--   [TiDBトランザクションの概要](/transaction-overview.md)を読んでTiDBでトランザクションがどのように機能するかを理解するか、 [アプリケーション開発者向けのトランザクションノート](/develop/dev-guide-transaction-overview.md)をチェックしてアプリケーション開発に必要なトランザクションの知識を学んでください。
+-   [TiDBトランザクションの概要](/transaction-overview.md)を読んでTiDBでトランザクションがどのように機能するかを理解するか、 [アプリケーション開発者向けのトランザクションノート](/develop/dev-guide-transaction-overview.md)をチェックしてアプリケーション開発に必要なトランザクションの知識について学びます。
 -   [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)を理解します。
 
 ## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 
-TiDBは分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)モードと[悲観的な取引](/pessimistic-transaction.md)モードの両方を提供します。現在のバージョンのTiDBは、デフォルトで**悲観的トランザクション**モードを使用します。これにより、従来のモノリシックデータベース（MySQLなど）と同じようにTiDBでトランザクションを実行できます。
+TiDBは分散トランザクションをサポートし、 [楽観的なトランザクション](/optimistic-transaction.md)モードと[悲観的な取引](/pessimistic-transaction.md)モードの両方を提供します。現在のバージョンのTiDBは、デフォルトで**ペシミスティックトランザクション**モードを使用します。これにより、従来のモノリシックデータベース（MySQLなど）と同じようにTiDBとトランザクションを実行できます。
 
 [`BEGIN`](/sql-statements/sql-statement-begin.md)を使用してトランザクションを開始するか、 `BEGIN PESSIMISTIC`を使用して**悲観的なトランザクション**を明示的に指定するか、 `BEGIN OPTIMISTIC`を使用して<strong>楽観的なトランザクション</strong>を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）またはロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）することができます。
 
@@ -29,7 +29,7 @@ TiDBは、 `BEGIN`の開始から`COMMIT`または`ROLLBACK`の終了までの�
 
 ## アプリケーションがTiDBと対話する方法 {#the-way-applications-interact-with-tidb}
 
-TiDBはMySQLプロトコルとの互換性が高く、 [ほとんどのMySQL構文と機能](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility)をサポートしているため、ほとんどのMySQL接続ライブラリはTiDBと互換性があります。アプリケーションフレームワークまたは言語にPingCAPからの正式な適応がない場合は、MySQLのクライアントライブラリを使用することをお勧めします。ますます多くのサードパーティライブラリがTiDBのさまざまな機能を積極的にサポートしています。
+TiDBはMySQLプロトコルとの互換性が高く、 [ほとんどのMySQLの構文と機能](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility)をサポートしているため、ほとんどのMySQL接続ライブラリはTiDBと互換性があります。アプリケーションフレームワークまたは言語にPingCAPからの正式な適応がない場合は、MySQLのクライアントライブラリを使用することをお勧めします。ますます多くのサードパーティライブラリがTiDBのさまざまな機能を積極的にサポートしています。
 
 TiDBはMySQLプロトコルおよびMySQL構文と互換性があるため、MySQLをサポートするほとんどのORMはTiDBとも互換性があります。
 
@@ -38,7 +38,7 @@ TiDBはMySQLプロトコルおよびMySQL構文と互換性があるため、MyS
 -   [クイックスタート](/develop/dev-guide-build-cluster-in-cloud.md)
 -   [DriverまたはORMを選択します](/develop/dev-guide-choose-driver-or-orm.md)
 -   [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)
--   [データベーススキーマ設計](/develop/dev-guide-schema-design-overview.md)
+-   [データベーススキーマの設計](/develop/dev-guide-schema-design-overview.md)
 -   [データの書き込み](/develop/dev-guide-insert-data.md)
 -   [データの読み取り](/develop/dev-guide-get-data-from-single-table.md)
 -   [取引](/develop/dev-guide-transaction-overview.md)

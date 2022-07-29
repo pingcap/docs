@@ -43,7 +43,7 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 1 row in set (0.00 sec)
 ```
 
-`sql_mode`の値をグローバルに更新します。更新後に`SQL_mode`の値を確認すると、 `SESSION`レベルの値が更新されていないことがわかります。
+`sql_mode`の値をグローバルに更新します。更新後に値`SQL_mode`を確認すると、 `SESSION`レベルの値が更新されていないことがわかります。
 
 ```sql
 mysql> SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER';
@@ -86,9 +86,9 @@ mysql> SHOW SESSION VARIABLES LIKE 'sql_mode';
 次の動作の違いが適用されます。
 
 -   `SET GLOBAL`で行った変更は、クラスタのすべてのTiDBインスタンスに伝播されます。これは、変更がレプリカに伝播されないMySQLとは異なります。
--   TiDBは、いくつかの変数を読み取り可能と設定可能の両方として提示します。これは、アプリケーションとコネクタの両方がMySQL変数を読み取るのが一般的であるため、MySQLの互換性のために必要です。例：JDBCコネクタは、動作に依存していなくても、クエリキャッシュ設定の読み取りと設定の両方を行います。
--   `SET GLOBAL`で行った変更は、TiDBサーバーの再起動後も保持されます。これは、TiDBの`SET GLOBAL`は、MySQL8.0以降で利用可能な`SET PERSIST`と同様に動作することを意味します。
+-   TiDBは、いくつかの変数を読み取り可能と設定可能の両方として提示します。これは、アプリケーションとコネクタの両方がMySQL変数を読み取ることが一般的であるため、MySQLの互換性のために必要です。次に例を示します。JDBCコネクタは、動作に依存していなくても、クエリキャッシュ設定の読み取りと設定の両方を行います。
+-   `SET GLOBAL`で行われた変更は、TiDBサーバーの再起動後も保持されます。これは、TiDBの`SET GLOBAL`は、MySQL8.0以降で利用可能な`SET PERSIST`と同様に動作することを意味します。
 
 ## も参照してください {#see-also}
 
--   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [[グローバル|セッション]変数を表示する](/sql-statements/sql-statement-show-variables.md)

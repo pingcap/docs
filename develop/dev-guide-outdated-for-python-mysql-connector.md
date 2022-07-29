@@ -28,12 +28,12 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 >
 > 「実際の」TiDBクラスタを実稼働環境にデプロイするには、次のガイドを参照してください。
 >
-> -   [オンプレミスにデプロイを使用してTiDBを導入する](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
+> -   [オンプレミスのTiUPを使用してTiDBをデプロイ](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 > -   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
 >
-> また、無料トライアルを提供するフルマネージドのサービスとしてのデータベース（ [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) ）を使用することもできます。
+> また、無料トライアルを提供するフルマネージドのDatabase-as- [TiDB Cloudを使用する](https://pingcap.com/products/tidbcloud/) -Service（DBaaS）も可能です。
 
-## ステップ2.データベースを作成する {#step-2-create-a-database}
+## ステップ2.データベースを作成します {#step-2-create-a-database}
 
 1.  SQLシェルで、アプリケーションが使用する`tidb_example`のデータベースを作成します。
 
@@ -65,7 +65,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
 
 1.  Pythonの依存関係およびパッケージマネージャーである[詩](https://python-poetry.org/docs/)を使用して、仮想環境を設定し、プロジェクトを初期化します。
 
-    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避することができます。次のコマンドを使用して、Poetryをインストールします。
+    詩は、システムの依存関係を他の依存関係から分離し、依存関係の汚染を回避できます。次のコマンドを使用して、Poetryをインストールします。
 
     {{< copyable "" >}}
 
@@ -83,7 +83,7 @@ docker run -p 127.0.0.1:$LOCAL_PORT:4000 pingcap/tidb:v5.1.0
     poetry init --no-interaction --dependency mysql-connector-python
     ```
 
-## ステップ4.アプリケーションコードを取得して実行します {#step-4-get-and-run-the-application-code}
+## ステップ4.アプリケーションコードを取得して実行する {#step-4-get-and-run-the-application-code}
 
 このチュートリアルのサンプルアプリケーションコード（ `main.py` ）は、mysql-connector-pythonを使用して、Pythonメソッドをコードコメントで説明されているSQL操作にマップします。サンプルアプリケーションコードを`main.py`という名前のPythonファイルとしてローカルマシンに保存できます。
 
@@ -159,7 +159,7 @@ mycursor.close()
 mydb.close()
 ```
 
-### ステップ1.接続パラメーターを更新し、TiDBに接続します {#step-1-update-the-connection-parameters-and-connect-to-tidb}
+### 手順1.接続パラメーターを更新し、TiDBに接続します {#step-1-update-the-connection-parameters-and-connect-to-tidb}
 
 `mysql.connector.connect()`に渡された文字列を、データベースの作成時に取得した接続文字列に置き換えます。
 

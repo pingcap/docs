@@ -174,14 +174,4 @@ SET GLOBAL tidb_gc_life_time="60m";
 
 -   単純なケースでは、 `tidb_snapshot`変数を設定して出力をコピーアンドペーストした後に`SELECT`を使用するか、 `SELECT ... INTO LOCAL OUTFLE`を使用して後でデータをインポートするために`LOAD DATA`を使用します。
 
-<CustomContent platform="tidb">
-
 -   [Dumpling](/dumpling-overview.md#export-historical-data-snapshot-of-tidb)を使用して、履歴スナップショットをエクスポートします。Dumplingは、より大きなデータセットのエクスポートでうまく機能します。
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
--   [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、履歴スナップショットをエクスポートします。Dumplingは、より大きなデータセットのエクスポートでうまく機能します。
-
-</CustomContent>

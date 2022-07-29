@@ -16,7 +16,7 @@ summary: Learn about how to insert data.
 -   [TiDB CloudでTiDBクラスターを構築する（DevTier）](/develop/dev-guide-build-cluster-in-cloud.md) 。
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、および[データベースを作成する](/develop/dev-guide-create-database.md) [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md) [テーブルを作成する](/develop/dev-guide-create-table.md)
 
-## 行を挿入する {#insert-rows}
+## 行を挿入します {#insert-rows}
 
 複数行のデータを挿入する方法は2つあります。たとえば、 **3**人のプレーヤーのデータを挿入する必要がある場合。
 
@@ -89,13 +89,13 @@ try (Connection connection = ds.getConnection()) {
 |            パラメータ           |                意味                |                                                                   推奨シナリオ                                                                  | 推奨されるConfiguration / コンフィグレーション |
 | :------------------------: | :------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------: |
 |    `useServerPrepStmts`    | サーバー側を使用してプリペアドステートメントを有効にするかどうか |                                                        プリペアドステートメントを複数回使用する必要がある場合                                                        |              `true`             |
-|      `cachePrepStmts`      |  クライアントがプリペアドステートメントをキャッシュするかどうか |                                                         `useServerPrepStmts=true`時                                                        |              `true`             |
+|      `cachePrepStmts`      |  クライアントがプリペアドステートメントをキャッシュするかどうか |                                                        `useServerPrepStmts=true`時間                                                        |              `true`             |
 |   `prepStmtCacheSqlLimit`  | プリペアドステートメントの最大サイズ（デフォルトでは256文字） |                                                          プリペアドステートメントが256文字を超える場合                                                         |  プリペアドステートメントの実際のサイズに従って構成されます  |
-|     `prepStmtCacheSize`    | プリペアドステートメントキャッシュの最大数（デフォルトでは25） |                                                          プリペアドステートメントの数が25を超える場合                                                          |   プリペアドステートメントの実際の数に応じて構成されます   |
+|     `prepStmtCacheSize`    | プリペアドステートメントキャッシュの最大数（デフォルトでは25） |                                                          プリペアドステートメントの数が25を超える場合                                                          |   準備されたステートメントの実際の数に従って構成されます   |
 | `rewriteBatchedStatements` |     **バッチ**ステートメントを書き換えるかどうか     |                                                                バッチ操作が必要な場合                                                                |              `true`             |
-|     `allowMultiQueries`    |            バッチ操作を開始します           | [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)は、 `rewriteBatchedStatements = true`と`useServerPrepStmts = true`のときにこれを設定する必要があるためです。 |              `true`             |
+|     `allowMultiQueries`    |            バッチ操作を開始します           | `rewriteBatchedStatements = true`と`useServerPrepStmts = true`の場合、 [クライアントのバグ](https://bugs.mysql.com/bug.php?id=96623)ではこれを設定する必要があるためです。 |              `true`             |
 
-MySQL JDBC Driverは、統合構成も提供します： `useConfigs` 。 `maxPerformance`で構成されている場合は、一連の構成を構成するのと同じです。 `mysql:mysql-connector-java:8.0.28`を例にとると、 `useConfigs=maxPerformance`には次のものが含まれます。
+MySQL JDBC Driverは、統合された構成も提供します： `useConfigs` 。 `maxPerformance`で構成されている場合は、一連の構成を構成することと同じです。 `mysql:mysql-connector-java:8.0.28`を例にとると、 `useConfigs=maxPerformance`には次のものが含まれます。
 
 {{< copyable "" >}}
 
@@ -199,8 +199,8 @@ func buildBulkInsertSQL(amount int) string {
 
 Golangの完全な例については、以下を参照してください。
 
--   [go-sql-driver / mysqlを使用して、TiDBとGolangを使用した単純なCRUDアプリを構築します](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
--   [GORMを使用して、TiDBとGolangを使用したシンプルなCRUDアプリを構築します](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [go-sql-driver / mysqlを使用して、TiDBとGolangを使用して単純なCRUDアプリを構築します](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
+-   [GORMを使用して、TiDBとGolangを使用してシンプルなCRUDアプリを構築します](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
 
 </div>
 
@@ -208,18 +208,18 @@ Golangの完全な例については、以下を参照してください。
 
 ## 一括挿入 {#bulk-insert}
 
-大量のデータをTiDBクラスタにすばやくインポートする必要がある場合は、データ移行に**PingCAP**が提供するさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントを使用するのは効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最善の方法ではありません。
+大量のデータをTiDBクラスタにすばやくインポートする必要がある場合は、データ移行用に**PingCAP**が提供するさまざまなツールを使用することをお勧めします。 `INSERT`ステートメントを使用するのは効率的ではなく、例外やその他の問題を自分で処理する必要があるため、最善の方法ではありません。
 
 一括挿入に推奨されるツールは次のとおりです。
 
 -   データのエクスポート： [Dumpling](/dumpling-overview.md) 。 MySQLまたはTiDBデータをローカルまたはAmazonS3にエクスポートできます。
--   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**のエクスポートされたデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
--   データ複製： [TiDBデータ移行](/dm/dm-overview.md) 。 MySQL、MariaDB、およびAuroraデータベースをTiDBに複製できます。また、シャーディングされたインスタンスとテーブルのソースデータベースからのマージと移行もサポートしています。
+-   データのインポート： [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**エクスポートデータ、 <strong>CSV</strong>ファイル、または[AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカルディスクまたは[AmazonS3クラウドディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
+-   データ複製： [TiDBデータ移行](/dm/dm-overview.md) 。 MySQL、MariaDB、およびAuroraデータベースをTiDBに複製できます。また、シャードされたインスタンスとテーブルをソースデータベースからマージおよび移行することもサポートします。
 -   データのバックアップと復元： [バックアップと復元（BR）](/br/backup-and-restore-overview.md) 。**Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオに適しています。
 
 ## ホットスポットを避ける {#avoid-hotspots}
 
-テーブルを設計するときは、挿入操作が多数あるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを回避する必要があります。 [主キーを選択します](/develop/dev-guide-create-table.md#select-primary-key)のセクションを参照し、 [主キーを選択する際のルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
+テーブルを設計するときは、挿入操作が多数あるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを回避する必要があります。 [主キーを選択します](/develop/dev-guide-create-table.md#select-primary-key)セクションを参照し、 [主キーを選択する際のルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
 ホットスポットの問題を処理する方法の詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
@@ -264,4 +264,4 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
 
 ## HTAPを使用する {#use-htap}
 
-TiDBでは、HTAP機能により、データを挿入するときに追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDBは、データの一貫性を自動的に保証します。テーブルを作成した後は[列指向のレプリカ同期をオンにする](/develop/dev-guide-create-table.md#use-htap-capabilities)を実行するだけで、列指向のレプリカを使用してクエリを直接高速化できます。
+TiDBでは、HTAP機能により、データを挿入するときに追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDBは、データの一貫性を自動的に保証します。テーブルを作成した後、 [列指向のレプリカ同期をオンにする](/develop/dev-guide-create-table.md#use-htap-capabilities)を実行するだけで、列指向のレプリカを使用してクエリを直接高速化できます。

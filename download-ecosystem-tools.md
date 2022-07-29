@@ -7,7 +7,7 @@ summary: Download the most officially maintained versions of TiDB tools.
 
 このドキュメントでは、 TiDB Toolkitをダウンロードする方法について説明します。
 
-TiDB Toolkitには、データエクスポートツールDumpling、データインポートツールTiDB Lightning、バックアップと復元ツールBRなどの頻繁に使用されるTiDBツールが含まれています。
+TiDB Toolkitには、データエクスポートツールDumpling、データインポートツールTiDB Lightning、バックアップおよび復元ツールBRなどの頻繁に使用されるTiDBツールが含まれています。
 
 > **ヒント：**
 >

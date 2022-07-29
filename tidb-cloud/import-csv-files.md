@@ -57,11 +57,11 @@ CSVファイルをTiDB Cloudにインポートする前に、ターゲットデ�
 
 TiDBCloudがTiDB CloudまたはGCSバケット内のCSVファイルにアクセスできるようにするには、次のいずれかを実行します。
 
--   CSVファイルがAmazonS3にある場合、 [AmazonS3へのクロスアカウントアクセスを設定します](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-amazon-s3-access) 。
+-   CSVファイルがAmazonS3にある場合、 [AmazonS3へのクロスアカウントアクセスを設定します](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) 。
 
     終了したら、 [ステップ4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、役割ARN値をメモします。
 
--   CSVファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md#step-2-configure-gcs-access) 。
+-   CSVファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
 
 ## ステップ4.CSVファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
 
@@ -89,7 +89,7 @@ CSVファイルをTiDB Cloudにインポートするには、次の手順を実�
 
     -   **ターゲットデータベース**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
 
-    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter#cli)を指定できます。
+    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](/table-filter.md#syntax)を指定できます。複数のフィルタールールを構成する場合は、 `,`を使用してルールを区切ります。
 
     -   **オブジェクト名パターン**：インポートするCSVファイルの名前と一致するパターンを入力します。たとえば、 `my-data.csv` 。
 

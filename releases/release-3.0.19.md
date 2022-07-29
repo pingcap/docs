@@ -15,12 +15,12 @@ TiDBバージョン：3.0.19
     -   インポートパスを`pingcap/pd`から[＃2779](https://github.com/pingcap/pd/pull/2779)に変更し`tikv/pd`
     -   著作権情報を`PingCAP, Inc`から[＃2777](https://github.com/pingcap/pd/pull/2777)に変更し`TiKV Project Authors`
 
-## 改善 {#improvements}
+## 改善点 {#improvements}
 
 -   TiDB
 
     -   QPSパフォーマンスに対する障害回復の影響を軽減する[＃19764](https://github.com/pingcap/tidb/pull/19764)
-    -   `union`演算子の同時実行性の調整をサポート[＃19885](https://github.com/pingcap/tidb/pull/19885)
+    -   `union`演算子[＃19885](https://github.com/pingcap/tidb/pull/19885)の同時実行性の調整をサポート
 
 -   TiKV
 
@@ -36,7 +36,7 @@ TiDBバージョン：3.0.19
 
     -   `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正します[＃20050](https://github.com/pingcap/tidb/pull/20050)
     -   `SHOW STATS_META`と[＃19759](https://github.com/pingcap/tidb/pull/19759)の特権チェックを追加し`SHOW STATS_BUCKET`
-    -   10進数型を整数型[＃19681](https://github.com/pingcap/tidb/pull/19681)に変更することを禁止します
+    -   10進型を整数型[＃19681](https://github.com/pingcap/tidb/pull/19681)に変更することを禁止します
     -   `ENUM`タイプの列`SET`を変更するときに制約がチェックされない問題を修正し[＃20045](https://github.com/pingcap/tidb/pull/20045)
     -   panic後にtidb-serverがテーブルロックを解放しないバグを修正します[＃20021](https://github.com/pingcap/tidb/pull/20021)
     -   `WHERE`節[＃19901](https://github.com/pingcap/tidb/pull/19901)で`OR`演算子が正しく処理されないバグを修正します。
@@ -49,4 +49,4 @@ TiDBバージョン：3.0.19
 
     -   TiDB Lightning
 
-        -   厳密モード[＃378](https://github.com/pingcap/tidb-lightning/pull/378)でCSVで不正なUTF文字に遭遇したときに、 TiDB Lightningプロセスが時間内に終了しない問題を修正します。
+        -   厳密モードでCSVで不正なUTF文字が検出されたときに、 TiDB Lightningプロセスが時間内に終了しない問題を修正します[＃378](https://github.com/pingcap/tidb-lightning/pull/378)

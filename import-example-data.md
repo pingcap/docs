@@ -9,7 +9,7 @@ TiDBマニュアルで使用されている例は、 [CapitalBikeshareデータ�
 
 ## すべてのデータファイルをダウンロードする {#download-all-data-files}
 
-システムデータは、1年に[.zipファイルでダウンロードする](https://s3.amazonaws.com/capitalbikeshare-data/index.html)編成されて利用できます。すべてのファイルをダウンロードして抽出するには、約3GBのディスク容量が必要です。 bashスクリプトを使用して2010〜2017年のすべてのファイルをダウンロードするには：
+システムデータは、1年に[.zipファイルでダウンロードする](https://s3.amazonaws.com/capitalbikeshare-data/index.html)整理して入手できます。すべてのファイルをダウンロードして抽出するには、約3GBのディスク容量が必要です。 bashスクリプトを使用して2010〜2017年のすべてのファイルをダウンロードするには：
 
 ```bash
 mkdir -p bikeshare-data && cd bikeshare-data

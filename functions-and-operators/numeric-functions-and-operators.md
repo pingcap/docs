@@ -42,7 +42,7 @@ TiDBは、 MySQL 5.7で利用可能な[数値関数と演算子](https://dev.mys
 | [`ACOS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_acos)           | アークコサインを返す           |
 | [`RADIANS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_radians)     | ラジアンに変換された引数を返す      |
 | [`DEGREES()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_degrees)     | ラジアンを度に変換する          |
-| [`MOD()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_mod)             | 残りを返す                |
+| [`MOD()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_mod)             | 余りを返す                |
 | [`ABS()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_abs)             | 絶対値を返す               |
 | [`CEIL()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceil)           | 引数以上の最小の整数値を返します     |
 | [`CEILING()`](https://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_ceiling)     | 引数以上の最小の整数値を返します     |

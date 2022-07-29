@@ -5,7 +5,7 @@ summary: Learn the `ENGINES` information_schema table.
 
 # エンジン {#engines}
 
-`ENGINES`の表は、ストレージエンジンに関する情報を提供します。互換性のために、TiDBは常にInnoDBを唯一のサポートされているエンジンとして記述します。また、 `ENGINES`の表の他の列の値も固定値です。
+`ENGINES`の表は、ストレージエンジンに関する情報を提供します。互換性のために、TiDBは常にInnoDBを唯一のサポートされているエンジンとして説明します。また、 `ENGINES`の表の他の列の値も固定値です。
 
 {{< copyable "" >}}
 

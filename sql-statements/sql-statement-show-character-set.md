@@ -35,7 +35,7 @@ mysql> SHOW CHARACTER SET;
 
 ## MySQLの互換性 {#mysql-compatibility}
 
-このステートメントの使用法は、MySQLと完全に互換性があると理解されています。ただし、TiDBの文字セットは、MySQLと比較してデフォルトの照合が異なる場合があります。詳しくは[MySQLとの互換性](/mysql-compatibility.md)をご覧ください。その他の互換性の違いは、GitHub [問題を介して報告](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
+このステートメントの使用法は、MySQLと完全に互換性があると理解されています。ただし、TiDBの文字セットは、MySQLと比較してデフォルトの照合が異なる場合があります。詳しくは[MySQLとの互換性](/mysql-compatibility.md)をご覧ください。その他の互換性の違いは、GitHub [問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)である必要があります。
 
 ## も参照してください {#see-also}
 

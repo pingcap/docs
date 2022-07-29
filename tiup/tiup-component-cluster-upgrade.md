@@ -25,7 +25,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 > **ノート：**
 >
-> サービスを提供しているクラスタのアップグレードを強制すると、サービスが使用できなくなる可能性があります。未起動のクラスターは、アップグレードが成功すると自動的に開始されます。
+> サービスを提供しているクラスタのアップグレードを強制すると、サービスが使用できなくなる可能性があります。未開始のクラスターは、アップグレードが成功すると自動的に開始されます。
 
 ### --transfer-timeout {#transfer-timeout}
 
@@ -35,7 +35,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 > **ノート：**
 >
-> 待機をスキップしてサービスを直接アップグレードすると、サービスのパフォーマンスが低下する可能性があります。
+> 待機をスキップしてサービスを直接アップグレードすると、サービスのパフォーマンスが変動する可能性があります。
 
 ### --ignore-config-check {#ignore-config-check}
 
@@ -49,7 +49,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 -   データ型： `BOOLEAN`
 -   このオプションは、デフォルトで`false`の値で無効になっています。このオプションを有効にするには、このオプションをコマンドに追加し、 `true`の値を渡すか、値を渡さないようにします。
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `BOOLEAN`

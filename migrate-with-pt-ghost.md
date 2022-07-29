@@ -7,7 +7,7 @@ summary: Learn how to use DM to replicate incremental data from databases that u
 
 本番シナリオでは、DDL実行中のテーブルロックにより、データベースからの読み取りまたはデータベースへの書き込みがある程度ブロックされる可能性があります。したがって、オンラインDDLツールは、読み取りと書き込みへの影響を最小限に抑えるためにDDLを実行するためによく使用されます。一般的なDDLツールは[幽霊](https://github.com/github/gh-ost)と[pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html)です。
 
-DMを使用してMySQLからTiDBにデータを移行する場合、DMとgh-ostまたはpt-oscのコラボレーションを可能にするために`online-ddl`をエンベールできます。
+DMを使用してMySQLからTiDBにデータを移行する場合、 `online-ddl`をエンベールして、DMとgh-ostまたはpt-oscのコラボレーションを許可できます。
 
 詳細なレプリケーション手順については、シナリオごとに次のドキュメントを参照してください。
 
@@ -32,7 +32,7 @@ online-ddl: true                # Enable online-ddl support on DM to support aut
 
 ## online-ddlを有効にした後のワークフロー {#workflow-after-enabling-online-ddl}
 
-DMでonline-ddlを有効にすると、DMがgh-ostまたはpt-oscを複製することによって生成されるDDLステートメントが変更されます。
+DMでonline-ddlを有効にすると、gh-ostまたはpt-oscを複製するDMによって生成されるDDLステートメントが変更されます。
 
 gh-ostまたはpt-oscのワークフロー：
 
@@ -40,7 +40,7 @@ gh-ostまたはpt-oscのワークフロー：
 
 -   ゴーストテーブルにDDLを適用します。
 
--   DDL実表のデータをゴースト表に複製します。
+-   DDL実テーブルのデータをゴーストテーブルに複製します。
 
 -   2つのテーブル間でデータの整合性が取れたら、renameステートメントを使用して、実際のテーブルをゴーストテーブルに置き換えます。
 
@@ -58,9 +58,9 @@ DMのワークフロー：
 
 ワークフローの変更により、次の利点がもたらされます。
 
--   ダウンストリームTiDBは、ゴーストテーブルを作成して複製する必要がないため、ストレージスペースとネットワーク伝送のオーバーヘッドを節約できます。
+-   ダウンストリームのTiDBは、ゴーストテーブルを作成して複製する必要がないため、ストレージスペースとネットワーク伝送のオーバーヘッドを節約できます。
 
--   シャーディングされたテーブルからデータを移行およびマージする場合、レプリケーションの正確性を確保するために、シャーディングされたゴーストテーブルごとにRENAME操作は無視されます。
+-   シャードテーブルからデータを移行およびマージする場合、レプリケーションの正確性を確保するために、シャードゴーストテーブルごとにRENAME操作は無視されます。
 
 ## も参照してください {#see-also}
 

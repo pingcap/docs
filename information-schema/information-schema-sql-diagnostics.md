@@ -9,12 +9,12 @@ summary: Understand SQL diagnostics in TiDB.
 >
 > SQL診断はまだ実験的機能です。実稼働環境で使用することはお勧めし**ません**。
 
-SQL診断は、TiDBv4.0で導入された機能です。この機能を使用すると、TiDBの問題をより効率的に見つけることができます。 TiDB v4.0より前では、さまざまなツールを使用してさまざまな情報を取得する必要がありました。
+SQL診断は、TiDBv4.0で導入された機能です。この機能を使用すると、TiDBの問題をより効率的に見つけることができます。 TiDB v4.0より前は、さまざまなツールを使用してさまざまな情報を取得する必要がありました。
 
 SQL診断システムには次の利点があります。
 
 -   システム全体のすべてのコンポーネントからの情報を統合します。
--   これは、システムテーブルを介して上位層への一貫したインターフェイスを提供します。
+-   システムテーブルを介して上位層への一貫したインターフェイスを提供します。
 -   監視の概要と自動診断を提供します。
 -   クラスタ情報の照会が簡単になります。
 
@@ -32,12 +32,12 @@ SQL診断システムは、次の3つの主要部分で構成されています�
 
 クラスタ情報テーブルは、クラスタのすべてのインスタンスとインスタンスの情報をまとめたものです。これらのテーブルを使用すると、1つのSQLステートメントのみを使用してすべてのクラスタ情報を照会できます。以下は、クラスタ情報テーブルのリストです。
 
--   クラスタトポロジテーブル[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)から、クラスタの現在のトポロジ情報、各インスタンスのバージョン、バージョンに対応するGitハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時刻を取得できます。
+-   クラスタトポロジテーブル[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)から、クラスタの現在のトポロジ情報、各インスタンスのバージョン、バージョンに対応するGitハッシュ、各インスタンスの開始時間、および各インスタンスの実行時間を取得できます。
 -   クラスタ構成テーブル[`information_schema.cluster_config`](/information-schema/information-schema-cluster-config.md)から、クラスタ内のすべてのインスタンスの構成を取得できます。 4.0より前のバージョンの場合、これらの構成情報を取得するには、各インスタンスのHTTPAPIに1つずつアクセスする必要があります。
 -   クラスタハードウェアテーブル[`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md)で、クラスタハードウェア情報をすばやく照会できます。
--   クラスタ負荷テーブル[`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md)では、クラスタのさまざまなインスタンスとハードウェアタイプの負荷情報を照会できます。
+-   クラスタ負荷テーブル[`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md)で、クラスタのさまざまなインスタンスとハードウェアタイプの負荷情報を照会できます。
 -   カーネルパラメータテーブル[`information_schema.cluster_systeminfo`](/information-schema/information-schema-cluster-systeminfo.md)で、クラスタのさまざまなインスタンスのカーネル構成情報をクエリできます。現在、TiDBはsysctl情報のクエリをサポートしています。
--   クラスタログテーブル[`information_schema.cluster_log`](/information-schema/information-schema-cluster-log.md)で、クラスタログをクエリできます。クエリ条件を各インスタンスにプッシュダウンすることにより、クラスタのパフォーマンスに対するクエリの影響は、 `grep`コマンドの影響よりも少なくなります。
+-   クラスタログテーブル[`information_schema.cluster_log`](/information-schema/information-schema-cluster-log.md)で、クラスタログを照会できます。クエリ条件を各インスタンスにプッシュダウンすることにより、クラスタのパフォーマンスに対するクエリの影響は、 `grep`コマンドの影響よりも少なくなります。
 
 TiDB v4.0より前のシステムテーブルでは、現在のインスタンスのみを表示できます。 TiDB v4.0では、対応するクラスタテーブルが導入されており、単一のTiDBインスタンスでクラスタ全体のグローバルビューを表示できます。これらのテーブルは現在`information_schema`にあり、クエリ方法は他の`information_schema`のシステムテーブルと同じです。
 
@@ -54,7 +54,7 @@ TiDBクラスタには多くの監視メトリックがあるため、TiDBはv4.
 
 ## 自動診断 {#automatic-diagnostics}
 
-上記のクラスタ情報テーブルとクラスタ監視テーブルでは、SQLステートメントを手動で実行してクラスタのトラブルシューティングを行う必要があります。 TiDB v4.0は、自動診断をサポートしています。既存の基本情報テーブルに基づいた診断関連のシステムテーブルを使用して、診断が自動的に実行されるようにすることができます。自動診断に関連するシステムテーブルは次のとおりです。
+上記のクラスタ情報テーブルとクラスタ監視テーブルで、SQLステートメントを手動で実行してクラスタのトラブルシューティングを行う必要があります。 TiDB v4.0は、自動診断をサポートしています。既存の基本情報テーブルに基づいた診断関連のシステムテーブルを使用して、診断が自動的に実行されるようにすることができます。自動診断に関連するシステムテーブルは次のとおりです。
 
 -   診断結果表[`information_schema.inspection_result`](/information-schema/information-schema-inspection-result.md)は、システムの診断結果を示しています。診断は受動的にトリガーされます。 `select * from inspection_result`を実行すると、システムを診断するためのすべての診断ルールがトリガーされ、システムの障害またはリスクが結果に表示されます。
--   診断要約表[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)は、特定のリンクまたはモジュールの監視情報を要約したものです。モジュール全体またはリンクのコンテキストに基づいて、問題のトラブルシューティングと特定を行うことができます。
+-   診断要約表[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)は、特定のリンクまたはモジュールの監視情報を要約したものです。モジュール全体またはリンク全体のコンテキストに基づいて、問題のトラブルシューティングと特定を行うことができます。

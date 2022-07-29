@@ -57,7 +57,7 @@ tiup mirror modify <component>[:version] [flags]
 ## 出力 {#outputs}
 
 -   コマンドが正常に実行された場合、出力はありません。
--   コンポーネントの所有者がターゲットコンポーネントを変更する権限を持っていない場合：
+-   コンポーネントの所有者がターゲットコンポーネントの変更を許可されていない場合：
     -   ミラーがリモートミラーの場合、TiUPはエラー`Error: The server refused, make sure you have access to this component`を報告します。
     -   ミラーがローカルミラーの場合、TiUPはエラー`Error: the signature is not correct`を報告します。
 

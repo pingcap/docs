@@ -7,13 +7,13 @@ summary: Learn how to use relay log to maintain data consistency in extreme case
 
 binlogを複製する場合、 Drainerはトランザクションをアップストリームから分割し、分割されたトランザクションを同時にダウンストリームに複製します。
 
-アップストリームクラスターが使用できず、 Drainerが異常終了する極端な場合、ダウンストリームクラスター（MySQLまたはTiDB）は、データに一貫性がない中間状態になる可能性があります。このような場合、 Drainerはリレーログを使用して、ダウンストリームクラスターが一貫した状態にあることを確認できます。
+アップストリームクラスターが使用できず、 Drainerが異常終了する極端な場合、ダウンストリームクラスター（MySQLまたはTiDB）は、データに一貫性がない中間状態にある可能性があります。このような場合、 Drainerはリレーログを使用して、ダウンストリームクラスターが一貫した状態にあることを確認できます。
 
 ## Drainerレプリケーション中の一貫した状態 {#consistent-state-during-drainer-replication}
 
 ダウンストリームクラスターが一貫した状態に達するということは、ダウンストリームクラスターのデータが`tidb_snapshot = ts`を設定するアップストリームのスナップショットと同じであることを意味します。
 
-チェックポイントの整合性とは、 Drainerチェックポイントがレプリケーションの整合性のある状態を`consistent`に保存することを意味します。 Drainerを実行すると、 `consistent`は`false`になります。Drainerが正常に終了した後、 `consistent`は`true`に設定されます。
+チェックポイントの整合性は、 Drainerチェックポイントがレプリケーションの整合性のある状態を`consistent`に保存することを意味します。 Drainerが実行されると、 `consistent`は`false`になります。Drainerが正常に終了した後、 `consistent`は`true`に設定されます。
 
 次のように、ダウンストリームチェックポイントテーブルをクエリできます。
 
@@ -41,9 +41,9 @@ Drainerはリレーログを有効にした後、最初にbinlogイベントを�
 >
 > リレーログデータが同時に失われる場合、この方法は機能しませんが、その発生率は非常に低くなります。さらに、ネットワークファイルシステムを使用して、リレーログのデータの安全性を確保できます。
 
-### DrainerがDrainerからbinlogを消費するシナリオをトリガーする {#trigger-scenarios-where-drainer-consumes-binlogs-from-the-relay-log}
+### DrainerがDrainerからbinlogを消費するシナリオをトリガーします {#trigger-scenarios-where-drainer-consumes-binlogs-from-the-relay-log}
 
-Drainerの起動時に、アップストリームクラスターの配置Driver（PD）への接続に失敗し、チェックポイントで`consistent = false`を検出すると、 Drainerはリレーログを読み取ろうとし、ダウンストリームクラスターを一貫した状態に復元します。その後、 Drainerプロセスはチェックポイント`consistent`を`true`に設定し、終了します。
+Drainerの起動時に、アップストリームクラスターの配置Driver（PD）への接続に失敗し、チェックポイントで`consistent = false`を検出すると、 Drainerはリレーログを読み取って、ダウンストリームクラスターを一貫性のある状態に復元しようとします。その後、 Drainerプロセスはチェックポイント`consistent`を`true`に設定し、終了します。
 
 ### リレーログのGCメカニズム {#gc-mechanism-of-relay-log}
 

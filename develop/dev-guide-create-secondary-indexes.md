@@ -18,9 +18,9 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 ## 二次インデックスとは {#what-is-secondary-index}
 
-セカンダリインデックスは、TiDBクラスタの論理オブジェクトです。これは、TiDBがクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと単純に見なすことができます。 TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。 TiDBは、インデックスごとに、テーブル内の各行の参照を作成し、データではなく、選択した列で参照を並べ替えます。詳細については、 [二次インデックス](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
+セカンダリインデックスは、TiDBクラスタの論理オブジェクトです。これは、TiDBがクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと単純に見なすことができます。 TiDBでは、セカンダリインデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。 TiDBは、インデックスごとに、テーブルの各行の参照を作成し、データから直接ではなく、選択した列で参照を並べ替えます。詳細については、 [二次インデックス](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
 
-TiDBでは、 [既存のテーブルにセカンダリインデックスを追加します](#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリインデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)のいずれかを使用できます。
+TiDBでは、 [既存のテーブルにセカンダリインデックスを追加します](#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリインデックスを作成します](#create-a-secondary-index-when-creating-a-new-table)のいずれかを使用できます。
 
 ## 既存のテーブルにセカンダリインデックスを追加します {#add-a-secondary-index-to-an-existing-table}
 
@@ -38,9 +38,9 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 -   `{table_name}` ：テーブル名。
 -   `{column_names}` ：セミコロンコンマで区切られた、インデックス付けされる列の名前。
 
-## 新しいテーブルを作成するときにセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
+## 新しいテーブルを作成するときにセカンダリインデックスを作成します {#create-a-secondary-index-when-creating-a-new-table}
 
-テーブルの作成と同時にセカンダリインデックスを作成するには、 [テーブルの作成](/sql-statements/sql-statement-create-table.md)ステートメントの最後に`KEY`キーワードを含む句を追加します。
+テーブルの作成と同時にセカンダリインデックスを作成するには、 [CREATE TABLE](/sql-statements/sql-statement-create-table.md)ステートメントの最後に`KEY`キーワードを含む句を追加します。
 
 {{< copyable "" >}}
 
@@ -65,7 +65,7 @@ KEY `{index_name}` (`{column_names}`)
 
 | フィールド名         | タイプ          | フィールドの説明              |
 | -------------- | ------------ | --------------------- |
-| id             | bigint（20）   | 本の一意のID               |
+| id             | bigint（20）   | 書籍の一意のID              |
 | 題名             | varchar（100） | 本のタイトル                |
 | タイプ            | 列挙型          | 本の種類（雑誌、アニメーション、教材など） |
 | 株式             | bigint（20）   | ストック                  |
@@ -104,7 +104,7 @@ SQLステートメントの実行プランを確認するには、 [`EXPLAIN`](/
 EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:00:00' AND `published_at` < '2023-01-01 00:00:00';
 ```
 
-次に、実行プランの出力例を示します。
+以下は、実行プランの出力例です。
 
 ```
 +-------------------------+----------+-----------+---------------+--------------------------------------------------------------------------------------------------------------------------+
@@ -152,7 +152,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 >
 > TiDBは、クエリ時のインデックスの明示的な使用もサポートしており、 [オプティマイザーのヒント](/optimizer-hints.md)または[SQL計画管理（SPM）](/sql-plan-management.md)を使用して、インデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザヒント、またはSPMについてよく知らない場合は、予期しない結果を回避するためにこの機能を使用し**ない**でください。
 
-テーブルのインデックスをクエリするには、次の[インデックスを表示](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
+テーブルのインデックスをクエリするには、次の[インデックスを表示](/sql-statements/sql-statement-show-indexes.md)のステートメントを使用できます。
 
 {{< copyable "" >}}
 
@@ -160,7 +160,7 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 SHOW INDEXES FROM `bookshop`.`books`;
 ```
 
-次に、出力例を示します。
+以下は出力例です。
 
 ```
 +-------+------------+-----------------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+-----------+

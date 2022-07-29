@@ -354,6 +354,6 @@ v3.0.9およびv4.0.0-rc.1以降、MySQLの動作と同様に、自動インク�
 -   `INTEGER` 、または`FLOAT`タイプの列で定義する必要があり`DOUBLE` 。
 -   `DEFAULT`列の値と同じ列に指定することはできません。
 -   `ALTER TABLE`を使用して`AUTO_INCREMENT`属性を追加することはできません。
--   `ALTER TABLE`は、 `AUTO_INCREMENT`属性を削除するために使用できます。ただし、v2.1.18およびv3.0.4以降、TiDBはセッション変数`@@tidb_allow_remove_auto_inc`を使用して、列の`AUTO_INCREMENT`属性を削除するために`ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`属性を削除することはできません。
+-   `ALTER TABLE`は、 `AUTO_INCREMENT`属性を削除するために使用できます。ただし、v2.1.18およびv3.0.4以降、TiDBはセッション変数`@@tidb_allow_remove_auto_inc`を使用して、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して列の`AUTO_INCREMENT`属性を削除できるかどうかを制御します。デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`を使用して`AUTO_INCREMENT`属性を削除することはできません。
 -   `ALTER TABLE`では、 `AUTO_INCREMENT`の値を小さい値に設定するために`FORCE`オプションが必要です。
 -   `AUTO_INCREMENT`を`MAX(<auto_increment_column>)`より小さい値に設定すると、既存の値がスキップされないため、キーが重複します。

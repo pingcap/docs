@@ -5,7 +5,7 @@ summary: Learn how to deploy a Data Migration cluster using DM binary.
 
 # DMバイナリを使用したデータ移行のデプロイ {#deploy-data-migration-using-dm-binary}
 
-このドキュメントでは、DMバイナリを使用してデータ移行（DM）クラスタをすばやく展開する方法を紹介します。
+このドキュメントでは、DMバイナリを使用してデータ移行（DM）クラスタを迅速に展開する方法を紹介します。
 
 > **ノート：**
 >
@@ -37,7 +37,7 @@ DMバイナリはTiDB Toolkitに含まれています。 TiDB Toolkitをダウ�
 >
 > -   複数のDM-masterまたはDM-workerインスタンスを単一のサーバーにデプロイする場合、各インスタンスのポートと作業ディレクトリは一意である必要があります。
 >
-> -   DMクラスタの高可用性を確保する必要がない場合は、DM-masterノードを1つだけデプロイし、デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL/MariaDBインスタンスの数以上である必要があります。
+> -   DMクラスタの高可用性を確保する必要がない場合は、DMマスターノードを1つだけデプロイし、デプロイされるDMワーカーノードの数は、移行するアップストリームMySQL/MariaDBインスタンスの数以上である必要があります。
 >
 > -   DMクラスタの高可用性を確保するには、3つのDM-masterノードをデプロイすることをお勧めします。デプロイされるDM-workerノードの数は、移行するアップストリームのMySQL / MariaDBインスタンスの数（たとえば、 DMワーカーノードの数は、アップストリームインスタンスの数より2つ多くなります）。
 >
@@ -125,11 +125,11 @@ Usage of dm-master:
 
     > **ノート：**
     >
-    > このコマンドが実行された後、コンソールはログを出力しません。ランタイムログを表示したい場合は、 `tail -f dm-master.log`を実行できます。
+    > このコマンドの実行後、コンソールはログを出力しません。ランタイムログを表示したい場合は、 `tail -f dm-master.log`を実行できます。
 
 3.  DM-master2とDM-master3の場合、構成ファイルの`name`をそれぞれ`master2`と`master3`に変更し、 `peer-urls`をそれぞれ`192.168.0.5:8291`と`192.168.0.6:8291`に変更します。次に、手順2を繰り返します。
 
-### DM-workerをデプロイ {#deploy-dm-worker}
+### DMワーカーをデプロイ {#deploy-dm-worker}
 
 [コマンドラインパラメータ](#dm-worker-command-line-parameters)または[構成ファイル](#dm-worker-configuration-file)を使用してDM-workerを構成できます。
 

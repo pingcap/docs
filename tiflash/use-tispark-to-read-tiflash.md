@@ -11,7 +11,7 @@ summary: Learn how to use TiSpark to read TiFlash replicas.
 
 > **ノート**
 >
-> このパラメーターが`tiflash`に設定されている場合、クエリに関係するすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカを持たないテーブルの場合、エラーが報告されます。このパラメーターが`tikv`に設定されている場合、TiKVレプリカのみが読み取られます。
+> このパラメーターが`tiflash`に設定されている場合、クエリに関係するすべてのテーブルのTiFlashレプリカのみが読み取られ、これらのテーブルにはTiFlashレプリカが必要です。 TiFlashレプリカを持たないテーブルの場合、エラーが報告されます。このパラメーターを`tikv`に設定すると、TiKVレプリカのみが読み取られます。
 
 このパラメーターは、次のいずれかの方法で構成できます。
 
@@ -25,4 +25,4 @@ summary: Learn how to use TiSpark to read TiFlash replicas.
 
 -   リアルタイムでSparkシェルに`spark.conf.set("spark.tispark.isolation_read_engines", "tiflash")`を設定します。
 
--   サーバーがbeeline経由で接続された後、Thriftサーバーに`set spark.tispark.isolation_read_engines=tiflash`を設定します。
+-   サーバーがbeeline経由で接続された後、Thriftサーバーで`set spark.tispark.isolation_read_engines=tiflash`を設定します。

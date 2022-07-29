@@ -5,7 +5,7 @@ summary: Learn the `TIKV_REGION_PEERS` information_schema table.
 
 # TIKV_REGION_PEERS {#tikv-region-peers}
 
-`TIKV_REGION_PEERS`の表は、学習者かリーダーかなど、TiKVの単一のリージョンノードの詳細情報を示しています。
+`TIKV_REGION_PEERS`の表は、TiKVの単一のリージョンノードの詳細情報（学習者かリーダーかなど）を示しています。
 
 {{< copyable "" >}}
 
@@ -55,6 +55,6 @@ WHERE
 -   IS_LEADER：ピアがリーダーであるかどうか。
 -   ステータス：ピアのステータス：
     -   保留中：一時的に利用できません。
-    -   DOWN：オフラインで変換されました。このピアはサービスを提供しなくなります。
+    -   DOWN：オフラインで変換されました。このピアはサービスを提供しなくなりました。
     -   NORMAL：正常に動作しています。
 -   DOWN_SECONDS：オフラインの期間（秒単位）。

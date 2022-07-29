@@ -4,7 +4,7 @@ title: tiup cluster destroy
 
 # tiup cluster destroy {#tiup-cluster-destroy}
 
-アプリケーションがオフラインになった後、他のアプリケーションで使用するためにクラスタによって占有されているマシンを解放する場合は、クラスタ上のデータとデプロイされたバイナリファイルをクリーンアップする必要があります。クラスタを破棄するには、 `tiup cluster destroy`コマンドで次の操作を実行します。
+アプリケーションがオフラインになった後、他のアプリケーションで使用するためにクラスタによって占有されているマシンを解放する場合は、クラスタ上のデータとデプロイされたバイナリファイルをクリーンアップする必要があります。クラスタを破棄するために、 `tiup cluster destroy`コマンドは次の操作を実行します。
 
 -   クラスタを停止します。
 -   サービスごとに、ログディレクトリ、デプロイメントディレクトリ、およびデータディレクトリを削除します。
@@ -34,11 +34,11 @@ tiup cluster destroy <cluster-name> [flags]
 
 ### --retain-role-data {#retain-role-data}
 
--   データを保持する必要があるロールを指定します。複数の役割を指定する必要がある場合は、このオプションを複数回使用します： `--retain-role-data <role-A> --retain-role-data <role-B>` 。
+-   データを保持する必要がある役割を指定します。複数の役割を指定する必要がある場合は、このオプションを複数回使用します： `--retain-role-data <role-A> --retain-role-data <role-B>` 。
 -   データ型： `StringArray`
 -   デフォルト：空
 
-### -h、-help {#h-help}
+### -h, --help {#h-help}
 
 -   ヘルプ情報を出力します。
 -   データ型： `Boolean`

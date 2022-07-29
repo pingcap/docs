@@ -7,13 +7,15 @@ summary: Usage of table filter feature in TiDB tools.
 
 TiDB移行ツールはデフォルトですべてのデータベースで動作しますが、多くの場合、サブセットのみが必要です。たとえば、 `foo*`と`bar*`の形式のスキーマのみを操作し、それ以外は何も操作したくないとします。
 
-TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義するための共通のフィルター構文を共有しています。このドキュメントでは、テーブルフィルタ機能の使用方法について説明します。
+TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義するための共通のフィルター構文を共有しています。このドキュメントでは、テーブルフィルター機能の使用方法について説明します。
 
 ## 使用法 {#usage}
 
 ### CLI {#cli}
 
-テーブルフィルターは、複数の`-f`または`--filter`コマンドラインパラメーターを使用してツールに適用できます。各フィルターは`db.table`の形式であり、各部分はワイルドカードにすることができます（ [次のセクション](#wildcards)でさらに説明されています）。以下に、各ツールの使用例を示します。
+テーブルフィルターは、複数の`-f`つまたは`--filter`のコマンドラインパラメーターを使用してツールに適用できます。各フィルターは`db.table`の形式であり、各部分はワイルドカードにすることができます（ [次のセクション](#wildcards)でさらに説明されています）。以下に使用例を示します。
+
+<CustomContent platform="tidb">
 
 -   [BR](/br/backup-and-restore-overview.md) ：
 
@@ -25,11 +27,15 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
     ./br restore full -f 'foo*.*' -f 'bar*.*' -s 'local:///tmp/backup'
     ```
 
+</CustomContent>
+
 -   [Dumpling](/dumpling-overview.md) ：
 
     ```shell
     ./dumpling -f 'foo*.*' -f 'bar*.*' -P 3306 -o /tmp/data/
     ```
+
+<CustomContent platform="tidb">
 
 -   [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) ：
 
@@ -37,9 +43,21 @@ TiDB 4.0以降、すべてのTiDB移行ツールは、サブセットを定義�
     ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
     ```
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview) ：
+
+    ```shell
+    ./tidb-lightning -f 'foo*.*' -f 'bar*.*' -d /tmp/data/ --backend tidb
+    ```
+
+</CustomContent>
+
 ### TOML構成ファイル {#toml-configuration-files}
 
-TOMLファイルのテーブルフィルターは[文字列の配列](https://toml.io/en/v1.0.0-rc.1#section-15)として指定されます。以下に、各ツールの使用例を示します。
+TOMLファイルのテーブルフィルターは[文字列の配列](https://toml.io/en/v1.0.0-rc.1#section-15)として指定されます。以下に使用例を示します。
 
 -   TiDB Lightning：
 
@@ -47,6 +65,8 @@ TOMLファイルのテーブルフィルターは[文字列の配列](https://to
     [mydumper]
     filter = ['foo*.*', 'bar*.*']
     ```
+
+<CustomContent platform="tidb">
 
 -   [TiCDC](/ticdc/ticdc-overview.md) ：
 
@@ -58,6 +78,8 @@ TOMLファイルのテーブルフィルターは[文字列の配列](https://to
     matcher = ['db1.*', 'db2.*', 'db3.*']
     dispatcher = 'ts'
     ```
+
+</CustomContent>
 
 ## 構文 {#syntax}
 
@@ -73,13 +95,13 @@ db3.tbl3
 
 プレーン名は、次のように有効な[識別子文字](/schema-object-names.md)のみで構成されている必要があります。
 
--   `9` `0`
+-   数字（ `0`から`9` ）
 -   文字（ `a`から`z` `Z` `A`
 -   `$`
 -   `_`
 -   非ASCII文字（U+0080からU+10FFFF）
 
-他のすべてのASCII文字は予約されています。次のセクションで説明するように、句読点の中には特別な意味を持つものがあります。
+他のすべてのASCII文字は予約されています。次のセクションで説明するように、一部の句読点には特別な意味があります。
 
 ### ワイルドカード {#wildcards}
 
@@ -124,7 +146,7 @@ employees.*
 
 ### コメントと空白行 {#comments-and-blank-lines}
 
-フィルタファイル内では、すべての行の先頭と末尾の空白がトリミングされます。さらに、空白行（空の文字列）は無視されます。
+フィルタファイル内では、すべての行の先頭と末尾の空白が削除されます。さらに、空白行（空の文字列）は無視されます。
 
 先頭の`#`はコメントをマークし、無視されます。 `#`行の先頭にない場合は、構文エラーと見なされます。
 
@@ -159,14 +181,14 @@ db\.with\.dots.*
 
 ### 引用された識別子 {#quoted-identifier}
 
-`\`の他に、 `"`または`` ` ``を使用して引用符で囲むことにより、特殊文字を抑制することもできます。
+`\`の他に、 `"`または`` ` ``を使用して引用することにより、特殊文字を抑制することもできます。
 
 ```
 "db.with.dots"."tbl\1"
 `db.with.dots`.`tbl\2`
 ```
 
-引用符は、それ自体を2倍にすることで識別子に含めることができます。
+引用符は、それ自体を2倍にすることにより、識別子内に含めることができます。
 
 ```
 "foo""bar".`foo``bar`
@@ -198,6 +220,14 @@ foo\"bar.foo\`bar
 
 ## 複数のルール {#multiple-rules}
 
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このセクションは、 TiDB Cloudには適用されません。現在、 TiDB Cloudは1つのテーブルフィルタールールのみをサポートしています。
+
+</CustomContent>
+
 テーブル名がフィルターリストのどのルールにも一致しない場合、デフォルトの動作では、そのような一致しないテーブルは無視されます。
 
 ブロックリストを作成するには、最初のルールとして明示的な`*.*`を使用する必要があります。そうしないと、すべてのテーブルが除外されます。
@@ -223,13 +253,13 @@ employees.*
 
 フィルタリングされた結果は次のとおりです。
 
-| テーブル名                 | ルール1 | ルール2 | ルール3 | 結果          |
-| --------------------- | ---- | ---- | ---- | ----------- |
-| irrelevant.table      |      |      |      | デフォルト（拒否）   |
-| 従業員。従業員               | ✓✓   |      |      | ルール1（受け入れる） |
-| employees.dept_emp    | ✓✓   | ✓✓   |      | ルール2（拒否）    |
-| employees.departments | ✓✓   | ✓✓   | ✓✓   | ルール3（受け入れる） |
-| else.departments      |      | ✓✓   | ✓✓   | ルール3（受け入れる） |
+| テーブル名             | ルール1 | ルール2 | ルール3 | 結果          |
+| ----------------- | ---- | ---- | ---- | ----------- |
+| irrelevant.table  |      |      |      | デフォルト（拒否）   |
+| 従業員。従業員           | ✓✓   |      |      | ルール1（受け入れる） |
+| employee.dept_emp | ✓✓   | ✓✓   |      | ルール2（拒否）    |
+| 従業員。部門            | ✓✓   | ✓✓   | ✓✓   | ルール3（受け入れる） |
+| else.departments  |      | ✓✓   | ✓✓   | ルール3（受け入れる） |
 
 > **ノート：**
 >
