@@ -1,9 +1,9 @@
 ---
-title: Audit Logging
+title: Database Audit Logging
 summary: Learn about how to audit a cluster in TiDB Cloud.
 ---
 
-# Audit Logging
+# Database Audit Logging
 
 TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
@@ -21,15 +21,12 @@ The audit logging feature is disabled by default. To audit a cluster, you need t
 
 ## Prerequisites
 
-- You are using a TiDB Cloud Dedicated tier or POC tier. Audit logging is not available for TiDB Cloud Developer Tier clusters.
+- You are using a TiDB Cloud Dedicated tier. Audit logging is not available for TiDB Cloud Developer Tier clusters.
 - You are the audit administrator of your organization in TiDB Cloud. Otherwise, you cannot see the audit-related options in the TiDB Cloud console. For more information, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
 
 ## Enable audit logging for AWS or GCP
 
 To allow TiDB Cloud to write audit logs to your cloud bucket, you need to enable audit logging first.
-
-<SimpleTab>
-<div label="AWS">
 
 ### Enable audit logging for AWS
 
@@ -106,10 +103,6 @@ In the TiDB Cloud console, go back to the **Audit Logging** dialog box where you
 > - After enabling audit logging, if you make any new changes to the bucket URL, location, or ARN, you must click **Restart** to load the changes and rerun the **Test Connectivity** check to make the changes effective.
 > - To remove Amazon S3 access from TiDB Cloud, simply delete the trust policy that you added.
 
-</div>
-
-<div label="GCP">
-
 ### Enable audit logging for GCP
 
 To enable audit logging for GCP, take the following steps:
@@ -171,9 +164,6 @@ In the TiDB Cloud console, go back to the **Audit Logging** dialog box where you
 >
 > - After enabling audit logging, if you make any new changes to bucket URL or location, you must click **Restart** to load the changes and rerun the **Test Connectivity** check to make the changes effective.
 > - To remove GCS access from TiDB Cloud, simply delete the principal that you added.
-
-</div>
-</SimpleTab>
 
 ## Specify auditing filter rules
 
