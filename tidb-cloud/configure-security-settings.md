@@ -13,7 +13,7 @@ If you do not configure the root password or allowed IP addresses at that time, 
 2. Click **Security Quick Start** in the pane. The **Security Quick Start** dialog is displayed.
 3. In the dialog, configure the root password and allowed IP addresses.
 
-    To allow your cluster to be accessible by any IP addresses, click **Allow Access From Anywhere**.
+    To allow your cluster to be accessible by any IP addresses, click **Allow Access from Anywhere**.
 
 4. Click **Apply**.
 
