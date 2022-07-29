@@ -7,9 +7,8 @@ summary: Learn how to configure Amazon Simple Storage Service (Amazon S3) access
 
 If your source data is stored in Amazon S3 or GCS buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. This document describes how to do this.
 
-- [Configure Amazon S3 Access and GCS Access](#configure-amazon-s3-access-and-gcs-access)
-  - [Configure Amazon S3 access](#configure-amazon-s3-access)
-  - [Configure GCS access](#configure-gcs-access)
+- [Configure Amazon S3 access](#configure-amazon-s3-access)
+- [Configure GCS access](#configure-gcs-access)
 
 ## Configure Amazon S3 access
 
