@@ -8,6 +8,37 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## July 26, 2022
+
+* Support automatic hibernation and resuming for new Developer Tier clusters.
+
+    A Developer Tier cluster will not be deleted after 7 days of inactivity so you can still use it at any time until the one-year free trial ends. After 24 hours of inactivity, the Developer Tier cluster will hibernate automatically. To resume the cluster, either send a new connection to the cluster or click the **Resume** button in the TiDB Cloud console. The cluster will be resumed within 50 seconds and back to service automatically.
+
+* Add a user name prefix limitation for new Developer Tier clusters
+
+    Whenever you use or set a database user name, you must include the prefix for your cluster in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+* Disable the backup and restore feature for Developer Tier clusters.
+
+    The backup and restore feature (including both automatic backup and manual backup) is disabled for Developer Tier clusters. You can still use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
+
+* Increase the storage size of a Developer Tier cluster from 500 MiB to 1 GiB.
+* Add breadcrumbs to the TiDB Cloud console to improve the navigation experience.
+* Support configuring multiple filter rules when you import data into TiDB Cloud.
+* Remove the **Traffic Filters** page from **Project Settings**, and remove the **Add Rules from Default Set** button from the **Connect to TiDB** dialog.
+
+## July 19, 2022
+
+* Provide a new option for TiKV node size: `8 vCPU, 32 GiB`. You can choose either `8 vCPU, 32 GiB` or `8 vCPU, 64 GiB` for an 8 vCPU TiKV node.
+* Support syntax highlighting in sample code provided in the **Connect to TiDB** dialog to improve code readability. You can easily identify the parameters that you need to replace in the sample code.
+* Support automatically validating whether TiDB Cloud can access your source data after you confirm the import task on the **Data Import Task** page.
+* Change the theme color of the TiDB Cloud console to make it consistent with that of [PingCAP website](https://en.pingcap.com/).
+
+## July 12, 2022
+
+* Add the **Validate** button to the **Data Import Task** page for Amazon S3, which helps you detect data access issues before the data import starts.
+* Add **Billing Profile** under the **Payment Method** tab. By providing your tax registration number in **Billing Profile**, certain taxes might be exempted from your invoice.
+
 ## July 05, 2022
 
 * The columnar storage TiFlash is now in General Availability (GA).

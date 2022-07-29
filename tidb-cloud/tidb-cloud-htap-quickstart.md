@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud HTAP Quick Start
 summary: Learn how to get started with HTAP in TiDB Cloud.
+aliases: ['/tidbcloud/use-htap-cluster']
 ---
 
 # TiDB Cloud HTAP Quick Start
@@ -110,3 +111,11 @@ In this step, you can compare the execution statistics between TiKV (row-based s
 > **Note:**
 >
 > Because the size of sample data is small and the query in this document is very simple, if you have already forced the optimizer to choose TiKV for this query and run the same query again, TiKV will reuse its cache, so the query might be much faster. If the data is updated frequently, the cache will be missed.
+
+## Learn more
+
+- [TiFlash Overview](/tiflash/tiflash-overview.md)
+- [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+- [Read Data from TiFlash](/tiflash/use-tidb-to-read-tiflash.md)
+- [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+- [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
