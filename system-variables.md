@@ -1921,10 +1921,6 @@ explain select * from t where age=5;
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
-> **Warning:**
->
-> Prior to v5.3.1/v5.4.1, there was a serious bug with this variable. Please only use this variable with v5.3.1/v5.4.1 and later.
-
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
@@ -2138,10 +2134,6 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
-
-> **Warning:**
->
-> Prior to v5.3.1/v5.4.1, there was a serious bug with this variable. Please only use this variable with v5.3.1/v5.4.1 and later.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
