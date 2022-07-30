@@ -16,7 +16,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
 Because CSV files do not contain schema information, before importing data from CSV files into TiDB, you need to create the corresponding database schema files (optional) and table schema files (mandatory), and place all the files in the same directory. The following steps show you how to create the schema files and how to prepare the CSV files.
 
-1. Create database schema files for your source data.
+1. (Optional) Create database schema files for your source data.
 
     Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud will create the `${db_name}` database to store your data when you import the data.
 
