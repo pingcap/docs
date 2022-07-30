@@ -27,11 +27,11 @@ To create a free Developer Tier cluster, take the following steps:
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The plan selection page is displayed by default.
+    The **Active Clusters** page is displayed by default.
 
-3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
+3. On the **Active Clusters** page, click **Create Cluster**.
 
-4. On the **Create a Cluster (Developer Tier)** page, update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create a Cluster** page, select **Developer Tier**, update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
@@ -55,15 +55,15 @@ To create a Dedicated Tier cluster, take the following steps:
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The plan selection page is displayed by default.
+    The **Active Clusters** page is displayed by default.
 
-3. On the plan selection page, click **Get Full Access Today** in the **Dedicated Tier** plan.
+3. On the **Active Clusters** page, click **Create Cluster**.
+
+4. On the **Create a Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
     > **Note:**
     >
     > If you want to get a 14-day free trial of TiDB Cloud Dedicated Tier first, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
-
-4. On the **Create a Cluster** page, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
 5. If this is the first cluster of your current project and CIDR has not been configured for this project, you need to set the project CIDR, and then click **Next**. If you do not see the **project CIDR** field, it means that CIDR has already been configured for this project.
 
@@ -73,9 +73,9 @@ To create a Dedicated Tier cluster, take the following steps:
 
 6. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
-7. Confirm the cluster information in the middle area and also the billing information in the right pane.
+7. Confirm the cluster information on the page and also the billing information in the lower-left corner.
 
-8. Click **Add Credit Card** in the right pane to add a credit card for your account.
+8. Click **Add Credit Card** in the lower-right corner to add a credit card for your account.
 
 9. Click **Create**.
 

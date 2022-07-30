@@ -64,9 +64,9 @@ If you are a project member, you can access only the specific projects to which 
 
 To create a Developer Tier cluster, take the following steps:
 
-1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Developer Tier**.
+1. On the TiDB Cloud cluster page, click **Create Cluster**.
 
-2. On the **Create a Cluster** page, update the default cluster name if necessary.
+2. On the **Create a Cluster** page, select **Developer Tier**, and update the default cluster name if necessary.
 
 3. Note that the cloud provider of Developer Tier is AWS, and then select the region where you want to create your cluster.
 
@@ -84,9 +84,9 @@ To create a Developer Tier cluster, take the following steps:
 
 To create a Dedicated Tier cluster, take the following steps:
 
-1. On the TiDB Cloud cluster page, click **Create Cluster**, and then click **Dedicated Tier**.
+1. On the TiDB Cloud cluster page, click **Create Cluster**.
 
-2. On the **Create a Cluster** page, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
+2. On the **Create a Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
     > **Note:**
     >
@@ -96,13 +96,13 @@ To create a Dedicated Tier cluster, take the following steps:
 
     > **Note:**
     >
-    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
+    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. This means that you need to set a project CIDR different from the CIDR of your VPC. You cannot modify your project CIDR once it is set.
 
 4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 
-5. Confirm the cluster information in the middle area and the billing information in the right pane.
+5. Confirm the cluster information on the page and the billing information in the lower-left corner.
 
-6. If you have not added a payment method, click **Add Credit Card** in the right pane.
+6. If you have not added a payment method, click **Add Credit Card** in the lower-right corner.
 
     > **Note:**
     >
