@@ -12,23 +12,15 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 > - If your CSV source files are compressed, you must uncompress the files first before the import.
 > - To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
 
-## Step 1. Prepare the CSV files
+## Step 1. Prepare the source files
 
-1. If a CSV file is larger than 256 MB, consider splitting the file into smaller files, each with a size around 256 MB.
+Because CSV files do not contain schema information, before importing data from CSV files into TiDB, you need to create the corresponding database schema files (optional) and table schema files (mandatory), and place all the files in the same directory. The following steps show you how to create the schema files and how to prepare the CSV files.
 
-    TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel which can greatly improve the import speed.
+1. Create database schema files for your source data.
 
-2. According to the naming convention of existing objects in your bucket, identify a text pattern that matches the names of the CSV files to be imported.
+    Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud will create the `${db_name}` database to store your data when you import the data.
 
-    For example, to import all data files in a bucket, you can use the wildcard symbol `*` or `*.csv` as a pattern. Similarly, to import the subset of data files in partition `station=402260`, you can use `*station=402260*` as a pattern. Make a note of this pattern as you will need to provide it to TiDB Cloud in [Step 4](#step-4-import-csv-files-to-tidb-cloud).
-
-## Step 2. Create the target table schema
-
-Before importing CSV files into TiDB Cloud, you need to create the target database and table. Alternatively, TiDB Cloud can create these objects for you as part of the import process if you provide the target database and table schema as follows:
-
-1. In the Amazon S3 or GCS directory where the CSV files are located, create a `${db_name}-schema-create.sql` file that contains the `CREATE DATABASE` DDL statement.
-
-    For example, you can create a `mydb-scehma-create.sql` file that contains the following statement:
+    For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud will create the `mydb` database when you import the data.
 
     {{< copyable "sql" >}}
 
@@ -36,9 +28,13 @@ Before importing CSV files into TiDB Cloud, you need to create the target databa
     CREATE DATABASE mydb;
     ```
 
-2. In the Amazon S3 or GCS directory where the CSV files are located, create a `${db_name}.${table_name}-schema.sql` file that contains the `CREATE TABLE` DDL statement.
+    The database schema files are optional. If you do not include the files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will automatically create a database and name it according to the CSV filenames.
 
-    For example, you can create a `mydb.mytable-schema.sql` file that contains the following statement:
+2. Create table schema files for your source data.
+
+    Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud will create the `${db_table}` table in the `${db_name}` database when you import the data.
+
+    For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud will create the `mytable` table in the `mydb` database when you import the data.
 
     {{< copyable "sql" >}}
 
@@ -49,21 +45,34 @@ Before importing CSV files into TiDB Cloud, you need to create the target databa
     COUNT INT );
     ```
 
+    The table schema files are mandatory. If you do not include the files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will return a error when you import the data.
+
     > **Note:**
     >
-    > The `${db_name}.${table_name}-schema.sql` file should only contain a single DDL statement. If the file contains multiple DDL statements, only the first statement takes effect.
+    > If the `${db_name}.${table_name}-schema.sql` file contains multiple DDL statements, only the first one takes effect.
 
-## Step 3. Configure cross-account access
+3. Prepare the CSV files.
+
+    1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+
+        TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
+
+    2. Name the CSV files as follows:
+
+        - If a CSV file contains all data of an entire table, name the file `${db_name}.${table_name}.csv`, which maps to the `${db_name}.${table_name}` table when you import the data.
+        - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+
+## Step 2. Configure cross-account access
 
 To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do one of the following:
 
 - If your CSV files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
-    Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud).
+    Once finished, make a note of the Role ARN value as you will need it in [Step 3](#step-4-import-csv-files-to-tidb-cloud).
 
 - If your CSV files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 
-## Step 4. Import CSV files to TiDB Cloud
+## Step 3. Import CSV files to TiDB Cloud
 
 To import the CSV files to TiDB Cloud, take the following steps:
 
@@ -82,9 +91,31 @@ To import the CSV files to TiDB Cloud, take the following steps:
         > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
 
     - **Target Database**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
-    - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example,`my-data.csv`.
-    - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
+    - **DB/Tables Filter**: if you want to import certain tables only, you can specify one or more table filters in this field, separated by `,`.
+
+        For example:
+
+        - `db01.*`: all the tables in `db01` database will be imported
+        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
+        - `*.*` : all tables will be imported
+
+        For more information, see [table filter snytax](/table-filter.md#syntax).
+
+    - **Custom Pattern**: specify a custom mapping rule between certain CSV files and a single target table. Enable this feature only if you want to merge and import data from multiple CSV files into the same target table.
+
+        > **Note:**
+        >
+        > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
+        > - It is recommend to first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import those tables one at a time.
+
+    When **Custom Pattern** is enabled, you are required to fill in the following fields:
+
+    - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example:
+
+        - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
+        - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+
+    - **Target Table Name**: enter the name of the target table, which must be in the `${db_name}.${table_name}` or ``${db_name}`.`${table_name}`` format. For example, `mydb.mytable`.
 
 4. Click **Import**.
 
