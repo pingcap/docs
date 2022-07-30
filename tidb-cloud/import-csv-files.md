@@ -91,7 +91,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
         > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
 
     - **Target Database**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if you want to import certain tables only, you can specify one or more table filters in this field, separated by `,`.
+    - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
         For example:
 
@@ -101,21 +101,21 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: specify a custom mapping rule between certain CSV files and a single target table. Enable this feature only if you want to merge and import data from multiple CSV files into the same target table.
+    - **Custom Pattern**: specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if you want to merge and import data from multiple CSV files into the same target table.
 
         > **Note:**
         >
         > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
         > - It is recommend to first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import those tables one at a time.
 
-    When **Custom Pattern** is enabled, you are required to fill in the following fields:
+        When **Custom Pattern** is enabled, you are required to fill in the following fields:
 
-    - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example:
+        - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example:
 
-        - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-        - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
+            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
 
-    - **Target Table Name**: enter the name of the target table, which must be in the `${db_name}.${table_name}` or ``${db_name}`.`${table_name}`` format. For example, `mydb.mytable`.
+        - **Target Table Name**: enter the name of the target table, which must be in the `${db_name}.${table_name}` or ``${db_name}`.`${table_name}`` format. For example, `mydb.mytable`.
 
 4. Click **Import**.
 
