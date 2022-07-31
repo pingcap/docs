@@ -1,0 +1,98 @@
+---
+title: TiDB Cloud Built-in Monitoring
+summary: Learn how to monitor your TiDB cluster by metrics.
+---
+
+# TiDB Cloud Built-in Monitoring
+
+TiDB Cloud collects and displays metrics for your databases.
+
+Monitor these metrics to point out performance issues and to determine if your current database deployment is meeting your requirements.
+
+> **Note:**
+>
+> The time zones shown on the chart are based on the time zones you set for your organization.
+
+The following sections illustrate the metrics on the Monitoring page.
+
+## Database Time
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Database Time | database time | Total database time per second. |
+| Database Time by SQL types | Select, Insert, Use, etc. | Database time consumed by each type of SQL statements per second. |
+| Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token/parse/compile/execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. |
+| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example:
+- If serious lock conflicts occur, the red area will take a large proportion.
+- If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
+
+## Application Connection
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. Active connections: the number of active connections to all TiDB instances. |
+| Disconnection | Instances | The number of clients disconnected to each TiDB instance. |
+
+## SQL Count
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Query Per Second | Select, Insert, Use, etc. | The number of SQL statements executed per second in all TiDB instances, collected by type: such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per minute on each TiDB instance. It contains the module in which the error occurs and the error code. |
+| Command Per Second | Qeruy, StmtExecute, StmtPrepare, etc. | The number of commands processed by all TiDB instances per second based on type. |
+| Queries Using Plan Cache OPS | hit, miss | The number of queries using plan cache per second in all TiDB instances. |
+
+
+## Latency Break Down
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. 
+- avg/99: The average time or P99 duration to execute all requests.
+- avg/99 by type: The average time or P99 duration to execute all requests in all TiDB instances, collected by type: `SELECT`, `INSERT`, and `UPDATE`. |
+| Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection Idle Duration indicates the duration of a connection being idle.
+- avg-in-txn: The average connection idle duration when the connection is within a transaction.
+- avg-not-in-txn: The average connection idle duration when the connection is not within a transaction. |
+| Get Token Duration | avg, 99 | The average Time or P99 duraion consumed in get token SQL statements. |
+| Parse Duration | avg, 99 | The average Time or P99 duraion consumed in parsing SQL statements. |
+| Compile Duration | avg, 99 | The average Time or P99 duraion consumed in compiling the parsed SQL AST to execution plans. |
+| Execute Duration | avg, 99 | The average Time or P99 duraion consumed in executing execution plans of SQL statements. |
+
+## Transaction
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
+| Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
+
+## Core Path Duration
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| Avg TiDB KV Request Duration | Get, Prewirite, Commit, PessimisticLock, etc. | The average time consumed in executing KV requests in all TiDB instances based on the type, including `Get`, `Prewrite`, and `Commit`. |
+| Avg TiKV GRPC Duration | kv_get, kv_prewirite, kv_commit, kv_pessimisticLock, etc. | The average time consumed in executing gRPC requests in all TiKV instances based on the type, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
+| Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average time or P99 duration in waiting for PD to return TSO in all TiDB instances. RPC: the average time or P99 duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
+| Average / P99 Storage Async Write Duration | avg, 99 | The average time or P99 duration consumed in asynchronous writing. Average storage async write duration = Average store duration + Average apply duration. |
+| Average / P99 Store Duration | avg, 99 | The average time or P99 duration consumed in storing loop during asynchronously writing. |
+| Average / P99 Apply Duration | avg, 99 | The average time or P99 duration consumed in applying loop during asynchronously writing. |
+| Average / P99 Append Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to append logs. |
+| Average / P99 Commit Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to commit logs. |
+| Average / P99 Apply Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to apply logs. |
+
+## Server
+
+| Metric name  | Labels | Description                                   |
+| :------------| :------| :-------------------------------------------- |
+| TiDB Uptime | instances | The runtime of each TiDB instance since last restart. |
+| TiDB CPU Usage | instances | The statistics of CPU usage of each TiDB instance. |
+| TiDB Memory Usage | instances | The memory usage statistics of each TiDB instance. |
+| TiKV Uptime | instances | The runtime of each TiKV instance since last restart. |
+| TiKV CPU Usage | instances | The statistics of CPU usage of each TiKV instance. |
+| TiKV Memory Usage | instances | The memory usage statistics of each TiKV instance. |
+| TiKV IO MBps | instances-write, instances-read | The total bytes of read and write in each TiKV instance. |
+| TiKV Storage Usage | instances | The storage size per TiKV instance. |
+| TiFlash Uptime | instances | The runtime of each TiFlash instance since last restart. |
+| TiFlash CPU Usage | instances | The statistics of CPU usage of each TiFlash instance. |
+| TiFlash Memory Usage | instances | The memory usage statistics of each TiFlash instance. |
+| TiFlash IO MBps | instances-write, instances-read | The total bytes of read and write in each TiFlash instance. |
+| TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
