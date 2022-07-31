@@ -26,9 +26,7 @@ The following sections illustrate the metrics on the Monitoring page.
 | Database Time | database time | Total database time per second. |
 | Database Time by SQL types | Select, Insert, Use, etc. | Database time consumed by each type of SQL statements per second. |
 | Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token/parse/compile/execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. |
-| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example:
-- If serious lock conflicts occur, the red area will take a large proportion.
-- If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
+| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example: - If serious lock conflicts occur, the red area will take a large proportion. - If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
 
 ## Application Connection
 
@@ -51,12 +49,8 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. 
-- avg/99: The average time or P99 duration to execute all requests.
-- avg/99 by type: The average time or P99 duration to execute all requests in all TiDB instances, collected by type: `SELECT`, `INSERT`, and `UPDATE`. |
-| Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection Idle Duration indicates the duration of a connection being idle.
-- avg-in-txn: The average connection idle duration when the connection is within a transaction.
-- avg-not-in-txn: The average connection idle duration when the connection is not within a transaction. |
+| Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. - avg/99: The average time or P99 duration to execute all requests. - avg/99 by type: The average time or P99 duration to execute all requests in all TiDB instances, collected by type: `SELECT`, `INSERT`, and `UPDATE`. |
+| Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection Idle Duration indicates the duration of a connection being idle. - avg-in-txn: The average connection idle duration when the connection is within a transaction. - avg-not-in-txn: The average connection idle duration when the connection is not within a transaction. |
 | Get Token Duration | avg, 99 | The average Time or P99 duraion consumed in get token SQL statements. |
 | Parse Duration | avg, 99 | The average Time or P99 duraion consumed in parsing SQL statements. |
 | Compile Duration | avg, 99 | The average Time or P99 duraion consumed in compiling the parsed SQL AST to execution plans. |
