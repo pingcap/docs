@@ -1,9 +1,9 @@
 ---
-title: Read data from TiFlash
-summary: Learn how to use an HTAP cluster to read data from TiFlash.
+title: Use an HTAP Cluster
+summary: Learn how to use HTAP cluster in TiDB Cloud.
 ---
 
-# TiFlashからデータを読み取る {#read-data-from-tiflash}
+# HTAPクラスターを使用する {#use-an-htap-cluster}
 
 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)は、ハイブリッドトランザクション/分析処理を意味します。 TiDB CloudのHTAPクラスタは、トランザクション処理用に設計された行ベースのストレージエンジンである[TiKV](https://tikv.org)と、分析処理用に設計された列型ストレージである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータは最初にTiKVに保存され、次にRaftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ストアから列ストアへのリアルタイムレプリケーションです。
 
@@ -21,7 +21,7 @@ TiDB Cloudを使用すると、HTAPワークロードに応じて1つ以上のTi
 ALTER TABLE table_name SET TIFLASH REPLICA 1;
 ```
 
-レプリカの数は、TiFlashノードの数よりも少なくする必要があります。レプリカの数を`0`に設定すると、TiFlashでレプリカを削除することになります。
+レプリカ数は、TiFlashノードの数を超えてはなりません。レプリカの数を`0`に設定すると、TiFlashでレプリカが削除されます。
 
 レプリケーションの進行状況を確認するには、次のコマンドを使用します。
 
@@ -69,7 +69,7 @@ set @@session.tidb_isolation_read_engines = "engine list separated by commas";
 
 ### 手動ヒント {#manual-hint}
 
-手動のヒントにより、TiDBは、エンジンの分離を満たすことを前提として、1つ以上の特定のテーブルに指定されたレプリカを使用するように強制できます。手動ヒントの使用例を次に示します。
+手動ヒントにより、TiDBは、エンジンの分離を満たすことを前提として、1つ以上の特定のテーブルに指定されたレプリカを使用するように強制できます。手動ヒントの使用例を次に示します。
 
 {{< copyable "" >}}
 

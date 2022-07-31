@@ -22,11 +22,11 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 <NavColumn><ColumnTitle>クラスターの管理</ColumnTitle>
 
--   [クラスタ層を選択する](/tidb-cloud/select-cluster-tier.md)
+-   [クラスター層を選択する](/tidb-cloud/select-cluster-tier.md)
 -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
 -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 -   [TiDBクラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)
--   [HTAPクラスターを使用する](/tidb-cloud/use-htap-cluster.md)
+-   [HTAPクラスターを使用する](/tiflash/tiflash-overview.md)
 -   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
 -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
 
@@ -36,7 +36,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
 -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
--   [Auroraから一括移行](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+-   [Auroraから一括で移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
 -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 -   [TiDB Cloudからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
 
@@ -52,13 +52,8 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 
 <NavColumn><ColumnTitle>ユーザーアクセスの管理</ColumnTitle>
 
--   [ログイン](/tidb-cloud/manage-user-access.md#sign-in)
--   [サインアウト](/tidb-cloud/manage-user-access.md#sign-out)
--   [組織とプロジェクトを表示する](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
--   [組織のメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
--   [プロジェクトメンバーを招待する](/tidb-cloud/manage-user-access.md#invite-a-project-member)
--   [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)
--   [ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+-   [コンソールユーザーアクセスの管理](/tidb-cloud/manage-user-access.md)
+-   [クラスタセキュリティ設定を構成する](/tidb-cloud/configure-security-settings.md)
 
 </NavColumn>
 

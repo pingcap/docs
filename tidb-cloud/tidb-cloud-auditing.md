@@ -1,9 +1,9 @@
 ---
-title: Audit Logging
+title: Database Audit Logging
 summary: Learn about how to audit a cluster in TiDB Cloud.
 ---
 
-# 監査ログ {#audit-logging}
+# データベース監査ログ {#database-audit-logging}
 
 TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステートメントなど）の履歴をログに記録するためのデータベース監査ログ機能を提供します。
 
@@ -21,15 +21,12 @@ TiDB Cloudは、ユーザーアクセスの詳細（実行されたSQLステー�
 
 ## 前提条件 {#prerequisites}
 
--   TiDB Cloud専用層またはPOC層を使用しています。監査ログは、 TiDB Cloud開発者層クラスターでは使用できません。
+-   TiDB Cloud専用層を使用しています。監査ログは、 TiDB Cloud開発者層クラスターでは使用できません。
 -   あなたはTiDB Cloudの組織の監査管理者です。そうしないと、 TiDB Cloudコンソールに監査関連のオプションが表示されません。詳細については、 [メンバーの役割を構成する](/tidb-cloud/manage-user-access.md#configure-member-roles)を参照してください。
 
 ## AWSまたはGCPの監査ログを有効にする {#enable-audit-logging-for-aws-or-gcp}
 
 TiDB Cloudが監査ログをクラウドバケットに書き込めるようにするには、最初に監査ログを有効にする必要があります。
-
-<SimpleTab>
-<div label="AWS">
 
 ### AWSの監査ログを有効にする {#enable-audit-logging-for-aws}
 
@@ -37,7 +34,7 @@ AWSの監査ログを有効にするには、次の手順を実行します。
 
 #### ステップ1.AmazonS3バケットを作成します {#step-1-create-an-amazon-s3-bucket}
 
-TiDB Cloudバケットを指定します。
+TiDB Cloudが監査ログを書き込む宛先として企業所有のAWSアカウントのAmazonS3バケットを指定します。
 
 詳細については、AWSユーザーガイドの[バケットの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。
 
@@ -50,11 +47,11 @@ TiDB Cloudバケットを指定します。
 1.  監査ログを有効にするTiDB CloudアカウントIDとTiDBクラスタの外部IDを取得します。
 
     1.  TiDB Cloudコンソールで、AWSにデプロイされたプロジェクトとクラスタを選択します。
-    2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>ログの監査</strong>]ダイアログボックスが表示されます。
-    3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>ShowAWSIAMポリシー設定</strong>]をクリックします。対応するTiDB CloudアカウントIDとTiDBクラスタのTiDB Cloud外部IDが表示されます。
+    2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>監査ログ</strong>]ダイアログボックスが表示されます。
+    3.  [ **Audit Logging** ]ダイアログボックスで、[ <strong>IAMポリシー設定</strong>]をクリックします。 TiDBクラスタの対応するTiDB CloudアカウントIDとTiDB Cloud外部IDが表示されます。
     4.  後で使用するために、 TiDB CloudアカウントIDと外部IDを記録します。
 
-2.  AWSマネジメントコンソールで、[ **IAM]** &gt; [<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、 `s3:PutObject`の書き込み専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
+2.  AWS管理コンソールで、[ **IAM]** &gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー</strong>]に移動し、 `s3:PutObject`の書き込み専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために、一致したストレージバケットポリシーを記録します。
     -   そうでない場合は、[ **IAM]** &gt;[<strong>アクセス管理</strong>]&gt;[<strong>ポリシー]</strong> &gt;[ポリシーの<strong>作成]</strong>に移動し、次のポリシーテンプレートに従ってバケットポリシーを定義します。
@@ -76,7 +73,7 @@ TiDB Cloudバケットを指定します。
 
         テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれるS3バケットのAmazonリソース名（ARN）です。 S3バケットの[**プロパティ**]タブに移動し、[<strong>バケットの概要</strong>]領域でAmazonリソース名（ARN）の値を取得できます。 `"Resource"`フィールドでは、ARNの後に`/*`を追加する必要があります。たとえば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`として構成する必要があります。
 
-3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがTiDB CloudアカウントIDと以前に記録した外部IDに対応するロールが既に存在するかどうかを確認します。
+3.  [ **IAM** ]&gt;[<strong>アクセス管理</strong>]&gt;[<strong>ロール</strong>]に移動し、信頼エンティティがTiDB CloudアカウントIDおよび以前に記録した外部IDに対応するロールが既に存在するかどうかを確認します。
 
     -   はいの場合、後で使用するために一致した役割を記録します。
     -   そうでない場合は、[**ロールの作成**]をクリックし、信頼エンティティタイプとして[<strong>別のAWSアカウント</strong>]を選択してから、[<strong>アカウントID]</strong>フィールドにTiDB CloudアカウントIDの値を入力します。次に、[<strong>外部IDが必要</strong>]オプションを選択し、[外部ID]フィールドにTiDB Cloudの<strong>外部</strong>ID値を入力します。
@@ -88,7 +85,7 @@ TiDB Cloudバケットを指定します。
 
 #### 手順3.監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDと外部ID値を取得した[TiDB Cloud ]ダイアログボックスに戻り、次の手順を実行します。
+TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部ID値を取得した[**監査ログ**]ダイアログボックスに戻り、次の手順を実行します。
 
 1.  [**バケットURL]**フィールドに、監査ログファイルが書き込まれるS3バケットのURLを入力します。
 
@@ -106,12 +103,8 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDと外部ID値を�
 
 > **ノート：**
 >
-> -   監査ログを有効にした後、バケットのURL、場所、またはARNに新しい変更を加えた場合は、[**再起動**]をクリックして変更をロードし、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
+> -   監査ログを有効にした後、バケットのURL、場所、またはARNに新しい変更を加えた場合は、[**再起動**]をクリックして変更を読み込み、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
 > -   TiDB CloudからAmazonS3アクセスを削除するには、追加した信頼ポリシーを削除するだけです。
-
-</div>
-
-<div label="GCP">
 
 ### GCPの監査ログを有効にする {#enable-audit-logging-for-gcp}
 
@@ -119,11 +112,11 @@ GCPの監査ログを有効にするには、次の手順を実行します。
 
 #### 手順1.GCSバケットを作成する {#step-1-create-a-gcs-bucket}
 
-TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPアカウントでGoogle Cloud Storage（GCS）バケットを指定します。
+TiDB Cloudが監査ログを書き込む宛先として企業所有のGCPアカウントのGoogleCloudStorage（GCS）バケットを指定します。
 
-詳細については、GoogleCloudStorageのドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)をご覧ください。
+詳細については、GoogleCloudStorageのドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)を参照してください。
 
-#### ステップ2.GCSアクセスを構成する {#step-2-configure-gcs-access}
+#### 手順2.GCSアクセスを構成する {#step-2-configure-gcs-access}
 
 > **ノート：**
 >
@@ -132,7 +125,7 @@ TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPア�
 1.  監査ログを有効にするTiDBクラスタのGoogleCloudServiceアカウントIDを取得します。
 
     1.  TiDB Cloudコンソールで、GoogleCloudPlatformにデプロイされたプロジェクトとクラスタを選択します。
-    2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>ログの監査</strong>]ダイアログボックスが表示されます。
+    2.  [**設定]** &gt;[<strong>監査設定]</strong>を選択します。 [<strong>監査ログ</strong>]ダイアログボックスが表示されます。
     3.  [ **Google CloudサービスアカウントIDを表示]**をクリックし、後で使用できるようにサービスアカウントIDをコピーします。
 
 2.  Google Cloud Platform（GCP）管理コンソールで、[ **IAMと管理**]&gt; [<strong>ロール</strong>]に移動し、ストレージコンテナの次の書き込み専用権限を持つロールが存在するかどうかを確認します。
@@ -142,7 +135,7 @@ TiDB Cloudが監査ログを書き込む宛先として、企業所有のGCPア�
 
     はいの場合、後で使用するためにTiDBクラスタの一致した役割を記録します。そうでない場合は、[ **IAMと管理**]&gt;[<strong>ロール</strong>]&gt;[ <strong>CREATE ROLE</strong> ]に移動して、TiDBクラスタのロールを定義します。
 
-3.  **Cloud Storage** &gt; <strong>Browser</strong>に移動し、 TiDB CloudがアクセスするGCSバケットを選択して、 <strong>SHOWINFOPANEL</strong>をクリックします。
+3.  [**クラウドストレージ**]&gt;[<strong>ブラウザ</strong>]に移動し、 TiDB CloudがアクセスするGCSバケットを選択して、[<strong>情報</strong>パネルの表示]をクリックします。
 
     パネルが表示されます。
 
@@ -162,7 +155,7 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[Ti
 
 1.  [**バケットURL]**フィールドに、完全なGCSバケット名を入力します。
 
-2.  [**バケット領域**]フィールドで、バケットが配置されているGCS領域を選択します。
+2.  [**バケットリージョン**]フィールドで、バケットが配置されているGCS領域を選択します。
 
 3.  [**接続のテスト**]をクリックして、 TiDB Cloudがバケットにアクセスして書き込むことができるかどうかを確認します。
 
@@ -174,11 +167,8 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[Ti
 
 > **ノート：**
 >
-> -   監査ログを有効にした後、バケットのURLまたは場所に新しい変更を加えた場合は、[**再起動**]をクリックして変更をロードし、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
+> -   監査ログを有効にした後、バケットのURLまたは場所に新しい変更を加えた場合は、[**再起動**]をクリックして変更を読み込み、[<strong>接続のテスト</strong>]チェックを再実行して変更を有効にする必要があります。
 > -   TiDB CloudからGCSアクセスを削除するには、追加したプリンシパルを削除するだけです。
-
-</div>
-</SimpleTab>
 
 ## 監査フィルタールールを指定する {#specify-auditing-filter-rules}
 
@@ -187,12 +177,12 @@ TiDB Cloudコンソールで、 **TiDBCloud**アカウントIDを取得した[Ti
 クラスタの監査フィルタルールを指定するには、次の手順を実行します。
 
 1.  **監査ログを有効にする[監査ログ**]ダイアログボックスで、下にスクロールして[<strong>フィルタールール</strong>]セクションを見つけます。
-2.  1つ以上のフィルタールールを1行に1つずつ追加します。各ルールは、ユーザー式、データベース式、テーブル式、およびアクセスタイプを指定します。
+2.  1つ以上のフィルタールールを追加します（行ごとに1つのルール）。各ルールは、ユーザー式、データベース式、テーブル式、およびアクセスタイプを指定します。
 
 > **ノート：**
 >
 > -   フィルタルールは正規表現であり、大文字と小文字が区別されます。ワイルドカードルール`.*`を使用すると、クラスタのすべてのユーザー、データベース、またはテーブルイベントがログに記録されます。
-> -   監査ログはクラスタリソースを消費するため、フィルタールールを指定するときは慎重に行ってください。消費を最小限に抑えるために、可能な場合は、監査ログの範囲を特定のデータベースオブジェクト、ユーザー、およびアクションに制限するフィルタールールを指定することをお勧めします。
+> -   監査ログはクラスタリソースを消費するため、フィルタールールを指定するときは慎重に行ってください。消費を最小限に抑えるために、可能であれば、監査ログの範囲を特定のデータベースオブジェクト、ユーザー、およびアクションに制限するフィルタールールを指定することをお勧めします。
 
 ## 監査ログをビューする {#view-audit-logs}
 
@@ -206,11 +196,11 @@ TiDB Cloud監査ログは、クラスタID、ポッドID、およびログ作成
 
 ## 監査ログフィールド {#audit-log-fields}
 
-監査ログのデータベースイベントレコードごとに、TiDBは次のフィールドを提供します。
+TiDBは、監査ログのデータベースイベントレコードごとに、次のフィールドを提供します。
 
 > **ノート：**
 >
-> 次の表で、フィールドの最大長が空であることは、このフィールドのデータ型が明確に定義された一定の長さ（たとえば、INTEGERの場合は4バイト）であることを意味します。
+> 次の表で、フィールドの最大長が空であることは、このフィールドのデータ型が明確に定義された定数長（たとえば、INTEGERの場合は4バイト）であることを意味します。
 
 | 列＃ | フィールド名         | TiDBデータ型 | 最大長   | 説明                                 |
 | -- | -------------- | -------- | ----- | ---------------------------------- |
@@ -227,7 +217,7 @@ TiDB Cloud監査ログは、クラスタID、ポッドID、およびログ作成
 | 11 | CLIENT_IP      | VARCHAR  | 16    | クライアントIP                           |
 | 12 | ユーザー           | VARCHAR  | 17    | ログインユーザー名                          |
 | 13 | データベース         | VARCHAR  | 64    | イベント関連データベース                       |
-| 14 | テーブル           | VARCHAR  | 64    | イベント関連のテーブル名                       |
+| 14 | 表              | VARCHAR  | 64    | イベント関連のテーブル名                       |
 | 15 | SQL_TEXT       | VARCHAR  | 64 KB | マスクされたSQLステートメント                   |
 | 16 | 行              | 整数       |       | 影響を受ける行の数（ `0`は、影響を受ける行がないことを示します） |
 

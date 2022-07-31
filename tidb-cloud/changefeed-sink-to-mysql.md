@@ -19,7 +19,7 @@ TiDBクラスターがMySQLサービスに接続できることを確認して�
 
 MySQLサービスがパブリックインターネットアクセスのないAWSVPCにある場合は、次の手順を実行します。
 
-1.  MySQLサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  MySQLサービスのVPCとTiDBクラスタの間は[VPCピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md)です。
 
 2.  MySQLサービスが関連付けられているセキュリティグループのインバウンドルールを変更します。
 
@@ -32,20 +32,20 @@ MySQLサービスがパブリックインターネットアクセスのないAWS
 
 MySQLサービスがパブリックインターネットアクセスのないGCPVPCにある場合は、次の手順を実行します。
 
-1.  MySQLサービスがGoogleCloudSQLの場合、GoogleCloudSQLインスタンスの関連付けられたVPCでMySQLエンドポイントを公開する必要があります。 Googleが開発した[**CloudSQLAuthプロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要があるかもしれません。
-2.  MySQLサービスのVPCとTiDBクラスタの間の[VPCピアリング接続を設定します](/tidb-cloud/set-up-vpc-peering-connections.md) 。
+1.  MySQLサービスがGoogleCloudSQLの場合、GoogleCloudSQLインスタンスの関連付けられたVPCでMySQLエンドポイントを公開する必要があります。 Googleが開発した[**クラウドSQL認証プロキシ**](https://cloud.google.com/sql/docs/mysql/sql-proxy)を使用する必要があるかもしれません。
+2.  MySQLサービスのVPCとTiDBクラスタの間は[VPCピアリング接続をセットアップする](/tidb-cloud/set-up-vpc-peering-connections.md)です。
 3.  MySQLが配置されているVPCの入力ファイアウォールルールを変更します。
 
     TiDB Cloudクラスタが配置されているリージョンのCIDRを入力ファイアウォールルールに追加する必要があります。 CIDRは、VPCピアリングページにあります。そうすることで、トラフィックがTiDBクラスターからMySQLエンドポイントに流れるようになります。
 
 ### 全負荷データ {#full-load-data}
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプの後にのみ、TiDBクラスタからMySQLに増分データをシンクできます。 TiDBクラスタにすでにデータがある場合は、 <strong>Sink to MySQL</strong>を有効にする前に、TiDBクラスタのフルロードデータをエクスポートしてMySQLにロードする必要があります。
+**Sink to MySQL**コネクタは、特定のタイムスタンプの後にのみ、TiDBクラスタからMySQLに増分データをシンクできます。 TiDBクラスタに既にデータがある場合は、 <strong>Sink to MySQL</strong>を有効にする前に、TiDBクラスタの全ロードデータをエクスポートしてMySQLにロードする必要があります。
 
-1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を次の2つの操作の合計時間より長くするように拡張して、その間の履歴データがTiDBによってガベージコレクションされないようにします。
+1.  [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を拡張して、次の2つの操作の合計時間より長くし、その間の履歴データがTiDBによってガベージコレクションされないようにします。
 
     -   全負荷データをエクスポートおよびインポートする時間
-    -   **SinktoMySQL**を作成する時間
+    -   **SinktoMySQL**を作成するとき
 
     例えば：
 
@@ -55,9 +55,9 @@ MySQLサービスがパブリックインターネットアクセスのないGCP
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2.  [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用してTiDBクラスタからデータをエクスポートしてから、 [mydumper / myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してMySQLサービスにデータをロードします。
+2.  [Dumpling](/dumpling-overview.md)を使用してTiDBクラスタからデータをエクスポートしてから、 [mydumper / myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してMySQLサービスにデータをロードします。
 
-3.  [Dumplingのエクスポートファイル](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files)から、メタデータファイルからTSOを取得します。
+3.  [Dumplingのエクスポートファイル](/dumpling-overview.md#format-of-exported-files)から、メタデータファイルからTSOを取得します。
 
     {{< copyable "" >}}
 

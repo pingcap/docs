@@ -1,13 +1,14 @@
 ---
 title: TiDB Cloud HTAP Quick Start
 summary: Learn how to get started with HTAP in TiDB Cloud.
+aliases: ['/tidbcloud/use-htap-cluster']
 ---
 
 # TiDB CloudHTAPクイックスタート {#tidb-cloud-htap-quick-start}
 
 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)は、ハイブリッドトランザクションおよび分析処理を意味します。 TiDB CloudのHTAPクラスタは、トランザクション処理用に設計された行ベースのストレージエンジンである[TiKV](https://tikv.org)と、分析処理用に設計された列型ストレージである[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータは最初にTiKVに保存され、次にRaftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ストレージから列ストレージへのリアルタイムレプリケーションです。
 
-このチュートリアルでは、 TiDB Cloudのハイブリッドトランザクションおよび分析処理（HTAP）機能を簡単に体験する方法について説明します。コンテンツには、テーブルをTiFlashに複製する方法、TiFlashを使用してクエリを実行する方法、およびパフォーマンスの向上を体験する方法が含まれています。
+このチュートリアルでは、 TiDB Cloudのハイブリッドトランザクション分析処理（HTAP）機能を簡単に体験する方法について説明します。コンテンツには、テーブルをTiFlashに複製する方法、TiFlashを使用してクエリを実行する方法、およびパフォーマンスの向上を体験する方法が含まれています。
 
 ## あなたが始める前に {#before-you-begin}
 
@@ -15,9 +16,9 @@ HTAP機能を体験する前に、 [TiDB Cloudクイックスタート](/tidb-cl
 
 ## 手順 {#steps}
 
-### 手順1.サンプルデータを列型ストレージエンジンに複製します {#step-1-replicate-the-sample-data-to-the-columnar-storage-engine}
+### 手順1.サンプルデータを列指向ストレージエンジンに複製します {#step-1-replicate-the-sample-data-to-the-columnar-storage-engine}
 
-TiFlashノードを持つクラスタが作成された後、TiKVはデフォルトでデータをTiFlashに複製しません。レプリケートするテーブルを指定するには、TiDBのMySQLクライアントでDDLステートメントを実行する必要があります。その後、TiDBはそれに応じて指定されたテーブルレプリカをTiFlashに作成します。
+TiFlashノードを持つクラスタが作成された後、TiKVはデフォルトでデータをTiFlashに複製しません。レプリケートするテーブルを指定するには、TiDBのMySQLクライアントでDDLステートメントを実行する必要があります。その後、TiDBはそれに応じてTiFlashで指定されたテーブルレプリカを作成します。
 
 たとえば、 `trips`のテーブル（Capital Bikeshareサンプルデータ内）をTiFlashに複製するには、次のステートメントを実行します。
 
@@ -37,7 +38,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'bikeshare
 -   `AVAILABLE`は、特定のテーブルのTiFlashレプリカが使用可能かどうかを示します。 `1`は利用可能、 `0`は利用不可を意味します。レプリカが使用可能になると、このステータスは変更されなくなります。
 -   `PROGRESS`は、レプリケーションの進行状況を意味します。値は`0.0` `1.0` 。 `1.0`は、少なくとも1つのレプリカが複製されることを意味します。
 
-### 手順2.HTAPを使用してデータをクエリする {#step-2-query-data-using-htap}
+### ステップ2.HTAPを使用してデータをクエリする {#step-2-query-data-using-htap}
 
 レプリケーションのプロセスが完了すると、いくつかのクエリの実行を開始できます。
 
@@ -61,7 +62,7 @@ ORDER BY count ASC;
     ORDER BY count ASC;
     ```
 
-    TiFlashレプリカを含むテーブルの場合、TiDBオプティマイザは、コスト見積もりに基づいて、TiKVレプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。前の`EXPLAIN ANALYZE`のステートメントでは、 `HINT /*+ READ_FROM_STORAGE(TIKV[trips]) */`を使用してオプティマイザーにTiKVを選択させ、TiKVの実行統計を確認できるようにします。
+    TiFlashレプリカを含むテーブルの場合、TiDBオプティマイザは、コスト見積もりに基づいて、TiKVレプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。前の`EXPLAIN ANALYZE`ステートメントでは、 `HINT /*+ READ_FROM_STORAGE(TIKV[trips]) */`を使用してオプティマイザーにTiKVを選択させ、TiKVの実行統計を確認できるようにします。
 
     > **ノート：**
     >
@@ -110,3 +111,11 @@ ORDER BY count ASC;
 > **ノート：**
 >
 > サンプルデータのサイズが小さく、このドキュメントのクエリは非常に単純であるため、オプティマイザにこのクエリにTiKVを選択させて同じクエリを再度実行するように強制している場合、TiKVはキャッシュを再利用するため、クエリが多くなる可能性があります。もっと早く。データが頻繁に更新されると、キャッシュが失われます。
+
+## もっと詳しく知る {#learn-more}
+
+-   [TiFlashの概要](/tiflash/tiflash-overview.md)
+-   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
+-   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
+-   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+-   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
