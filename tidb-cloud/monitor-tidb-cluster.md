@@ -64,7 +64,7 @@ To open the cluster overview page, take the following steps:
 
 The cluster monitoring page provides a full standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-To open the cluster monitoring page, take the following steps:
+To view metrics on the cluster monitoring page, take the following steps:
 
 1. Navigate to the **Diagnostics** tab of a cluster.
 
