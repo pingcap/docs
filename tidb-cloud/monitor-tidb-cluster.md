@@ -45,13 +45,29 @@ You can see the current status of each running cluster on the cluster page.
 
 ## Monitoring metrics
 
-On the cluster overview page, you can view the commonly used metrics of the cluster.
+On the cluster overview page and the cluster monotoring page, you can view the commonly used metrics of the cluster.
+
+### metrics on the cluster overview page
+
+To entry the cluster overview page, perform the following steps:
 
 1. Navigate to the **Active Clusters** page.
 
 2. Click the name of a cluster to go to the cluster overview page.
 
-    Currently, the metrics include Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write.
+Currently, the metrics include Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write.
+    
+### metrics on the cluster monitoring page
+
+To entry the cluster monitoring page, perform the following steps:
+
+1. Navigate to the **Diagnostics** tab of a cluster.
+
+2. Select the **Monitoring** tab.
+
+The monitoring page provides a full standard metrics. Monitor these metrics to point out performance issues and to determine if your current database deployment is meeting your requirements.
+
+For more information, see [Built-in Monitoring](/tidb-cloud/monitor-built-in-monitoring.md).
 
 ## Built-in alerting
 
