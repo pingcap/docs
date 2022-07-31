@@ -1,21 +1,21 @@
 ---
 title: TiDB Cloud Built-in Monitoring
-summary: Learn how to monitor your TiDB cluster by metrics.
+summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand the meanings of these metrics.
 ---
 
 # TiDB Cloud Built-in Monitoring
 
-TiDB Cloud collects and displays metrics for your databases. Monitor these metrics to point out performance issues and to determine if your current database deployment is meeting your requirements.
+TiDB Cloud collects and displays a full standard metrics of your cluster in TiDB Cloud console. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
-To view these metrics, perform the following steps:
+To view these metrics, take the following steps:
 
 1. Navigate to the **Diagnostics** tab of a cluster.
 
-2. Select the **Monitoring** tab.
+2. Click the **Monitoring** tab.
 
 > **Note:**
 >
-> The time zones shown on the chart are based on the time zones you set for your organization.
+> The time zone information shown on the charts is based on the [time zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone) you set for your organization.
 
 The following sections illustrate the metrics on the Monitoring page.
 
@@ -25,36 +25,35 @@ The following sections illustrate the metrics on the Monitoring page.
 | :------------| :------| :-------------------------------------------- |
 | Database Time | database time | Total database time per second. |
 | Database Time by SQL types | Select, Insert, Use, etc. | Database time consumed by each type of SQL statements per second. |
-| Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token/parse/compile/execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas are large, it means much database time is consumed in other phases than the execution phase and further cause analysis is required. |
-| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas are large, it means there is a bottleneck during SQL execution. For example: If serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
+| Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token, parse, compile, and execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas take a large proportion, it means most database time is consumed by other phases than the execution phase and further cause analysis is required. |
+| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas take a large proportion, it means there is a bottleneck during SQL execution. For example, if serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
 
 ## Application Connection
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. Active connections: the number of active connections to all TiDB instances. |
+| Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
 | Disconnection | Instances | The number of clients disconnected to each TiDB instance. |
 
 ## SQL Count
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Per Second | Select, Insert, Use, etc. | The number of SQL statements executed per second in all TiDB instances, collected by type: such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the errors occurred when executing SQL statements per minute on each TiDB instance. It contains the module in which the error occurs and the error code. |
-| Command Per Second | Qeruy, StmtExecute, StmtPrepare, etc. | The number of commands processed by all TiDB instances per second based on type. |
+| Query Per Second | Select, Insert, Use, etc. | The number of SQL statements executed per second in all TiDB instances, which are collected by types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
+| Command Per Second | Query, StmtExecute, StmtPrepare, etc. | The number of commands processed by all TiDB instances per second based on command types. |
 | Queries Using Plan Cache OPS | hit, miss | The number of queries using plan cache per second in all TiDB instances. |
-
 
 ## Latency Break Down
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Query Duration | avg-{SQL Types}, 99-{SQL Types} | The duration from receiving a request from the client to TiDB till TiDB executing the request and returning the result to the client. In general, client requests are sent in the form of SQL statements; however, this duration can include the execution time of commands such as `COM_PING`, `COM_SLEEP`, `COM_STMT_FETCH`, and `COM_SEND_LONG_DATA`. TiDB supports Multi-Query, which means the client can send multiple SQL statements at one time, such as `select 1; select 1; select 1;`. In this case, the total execution time of this query includes the execution time of all SQL statements. |
-| Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection Idle Duration indicates the duration of a connection being idle. avg-in-txn: The average connection idle duration when the connection is within a transaction. avg-not-in-txn: The average connection idle duration when the connection is not within a transaction. |
-| Get Token Duration | avg, 99 | The average Time or P99 duraion consumed in get token SQL statements. |
-| Parse Duration | avg, 99 | The average Time or P99 duraion consumed in parsing SQL statements. |
-| Compile Duration | avg, 99 | The average Time or P99 duraion consumed in compiling the parsed SQL AST to execution plans. |
-| Execute Duration | avg, 99 | The average Time or P99 duraion consumed in executing execution plans of SQL statements. |
+| Average Idle Connection Duration | avg-in-txn, avg-not-in-txn | The connection idle duration indicates the duration of a connection being idle.<br/> avg-in-txn: The average connection idle duration when a connection is within a transaction. <br/>avg-not-in-txn: The average connection idle duration when a connection is not within a transaction. |
+| Get Token Duration | avg, 99 | The average time or P99 duration consumed in getting tokens of SQL statements. |
+| Parse Duration | avg, 99 | The average time or P99 duration consumed in parsing SQL statements. |
+| Compile Duration | avg, 99 | The average time or P99 duration consumed in compiling the parsed SQL AST to execution plans. |
+| Execute Duration | avg, 99 | The average time or P99 duration consumed in executing execution plans of SQL statements. |
 
 ## Transaction
 
@@ -67,9 +66,9 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Avg TiDB KV Request Duration | Get, Prewirite, Commit, PessimisticLock, etc. | The average time consumed in executing KV requests in all TiDB instances based on the type, including `Get`, `Prewrite`, and `Commit`. |
-| Avg TiKV GRPC Duration | kv_get, kv_prewirite, kv_commit, kv_pessimisticLock, etc. | The average time consumed in executing gRPC requests in all TiKV instances based on the type, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
-| Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average time or P99 duration in waiting for PD to return TSO in all TiDB instances. RPC: the average time or P99 duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
+| Avg TiDB KV Request Duration | Get, Prewirite, Commit, PessimisticLock, etc. | The average time consumed in executing KV requests in all TiDB instances based on request types, including `Get`, `Prewrite`, and `Commit`. |
+| Avg TiKV GRPC Duration | kv_get, kv_prewirite, kv_commit, kv_pessimisticLock, etc. | The average time consumed in executing gRPC requests in all TiKV instances based request types, including `kv_get`, `kv_prewrite`, and `kv_commit`. |
+| Average / P99 PD TSO Wait/RPC Duration | wait-avg/99, rpc-avg/99 | Wait: the average time or P99 duration in waiting for PD to return TSO in all TiDB instances. <br/> RPC: the average time or P99 duration from sending TSO requests to PD to receiving TSO in all TiDB instances. |
 | Average / P99 Storage Async Write Duration | avg, 99 | The average time or P99 duration consumed in asynchronous writing. Average storage async write duration = Average store duration + Average apply duration. |
 | Average / P99 Store Duration | avg, 99 | The average time or P99 duration consumed in storing loop during asynchronously writing. |
 | Average / P99 Apply Duration | avg, 99 | The average time or P99 duration consumed in applying loop during asynchronously writing. |

@@ -15,9 +15,9 @@ TiDB Cloud provides [Statement Analysis](#statement-analysis) and [Key Visualize
 
 To use the statement analysis, perform the following steps:
 
-1. Navigate to the **Diagnostics** tab of a cluster. 
+1. Navigate to the **Diagnostics** tab of a cluster.
 
-2. Select the **Statement** tab.
+2. Click the **Statement** sub-tab.
 
 3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
 
@@ -35,7 +35,7 @@ To view the key analytics, perform the following steps:
 
 1. Navigate to the **Diagnostics** tab of a cluster.
 
-2. Select the **Key Visualizer** tab.
+2. Click the **Key Visualizer** sub-tab.
 
 ![Key Visualizer](/media/tidb-cloud/key-visualizer.png)
 
