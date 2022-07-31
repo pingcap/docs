@@ -9,9 +9,9 @@ TiDB Cloud collects and displays metrics for your databases. Monitor these metri
 
 To view these metrics, perform the following steps:
 
-1. Navigate to the Diagnostics tab of a cluster.
+1. Navigate to the **Diagnostics** tab of a cluster.
 
-2. Select the Monitoring tab.
+2. Select the **Monitoring** tab.
 
 > **Note:**
 >
