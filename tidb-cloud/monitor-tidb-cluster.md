@@ -47,7 +47,7 @@ You can see the current status of each running cluster on the cluster page.
 
 On the cluster overview page and the cluster monotoring page, you can view the commonly used metrics of the cluster.
 
-### metrics on the cluster overview page
+### Metrics on the cluster overview page
 
 To entry the cluster overview page, perform the following steps:
 
@@ -57,7 +57,7 @@ To entry the cluster overview page, perform the following steps:
 
 Currently, the metrics include Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write.
     
-### metrics on the cluster monitoring page
+### Metrics on the cluster monitoring page
 
 To entry the cluster monitoring page, perform the following steps:
 
