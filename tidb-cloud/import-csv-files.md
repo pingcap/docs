@@ -110,14 +110,14 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: after enabling this feature, you can specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) and you want to import source data into the same target table.
+    - **Custom Pattern**: enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) or you want to import source data into the same target table.
 
         > **Note:**
         >
-        > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
-        > - It is recommended that you first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
+        > - After enabling this feature, one import task can only import data to a single table at a time. If you want to import data into different tables, you need to import several times, each time specifying a different target table.
+        > - If you have multiple CSV files and some of the files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) while some do not follow that, it is recommended that you first use **DB/Tables Filter** to import the files that follow the naming rules. After that, you can start a new import task and enable **Custom Pattern** to import the files that do not follow the naming rules.
 
-        When **Custom Pattern** is enabled, you are required to fill in the following fields:
+        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between multiple CSV files and a single target table in the following fields:
 
         - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example:
 
