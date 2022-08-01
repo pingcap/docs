@@ -37,7 +37,7 @@ Because CSV files do not contain schema information, before importing data from 
 
     1. Create database schema files for your source data.
 
-        If your CSV files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files), the database schema files are optional. Othewise, the database schema files are mandatory.
+        If your CSV files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files), the database schema files are optional. Otherwise, the database schema files are mandatory.
 
         Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud will create the `${db_name}` database to store your data when you import the data.
 
@@ -51,7 +51,7 @@ Because CSV files do not contain schema information, before importing data from 
 
     2. Create table schema files for your source data.
 
-        The table schema files are mandatory. If you do not include the files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will return a error when you import the data.
+        The table schema files are mandatory. If you do not include the files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will return an error when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
@@ -114,7 +114,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
         > **Note:**
         >
         > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
-        > - It is recommend to first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
+        > - It is recommended to first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
 
         When **Custom Pattern** is enabled, you are required to fill in the following fields:
 
