@@ -231,6 +231,14 @@ The result is as follows:
 +--------------------+
 ```
 
+> **Note:**
+>
+> Example Dependencies:
+>
+> - Docker
+> - Docker Compose
+> - MySQL Client
+
 ## 5. Example of Load Balancing - Admin Interface
 
 ### 5.1 Operation Steps
@@ -251,12 +259,6 @@ Use **_ProxySQL Admin Interface_** to configure a load balancing traffic as an e
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
 ### 5.2 Run
-
-Dependencies:
-
-- Docker
-- Docker Compose
-- MySQL Client
 
 ```sh
 cd example/load-balance-admin-interface/
@@ -331,12 +333,6 @@ Use **_ProxySQL Admin Interface_** to configure a user split traffic as an examp
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
 ### 6.2 Run
-
-Dependencies:
-
-- Docker
-- Docker Compose
-- MySQL Client
 
 ```sh
 cd example/user-split-admin-interface/
@@ -415,12 +411,6 @@ Use **_ProxySQL Admin Interface_** to configure a common read/write separation t
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
 ### 7.2 Run
-
-依赖：
-
-- Docker
-- Docker Compose
-- MySQL Client
 
 ```sh
 cd example/proxy-rule-admin-interface/
