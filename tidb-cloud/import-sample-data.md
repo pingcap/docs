@@ -22,9 +22,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
     - **Data Format**: select **TiDB Dumpling**.
     - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
-    - **Target Database**:
-        - **Username**: `root`.
-        - **Password**: enter your root password.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: leave this field blank.
 
     </div>
@@ -36,9 +34,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
     - **Data Source Type**: `Google Cloud Stroage`.
     - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
     - **Data Format**: select **TiDB Dumpling**.
-    - **Target Database**:
-        - **Username**: `root`.
-        - **Password**: enter your root password.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: leave this field blank.
 
     </div>
