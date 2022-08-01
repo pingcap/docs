@@ -45,6 +45,8 @@ hide_commit: true
 
 [Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
 
+[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/stable/tidb-in-kubernetes)
+
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
@@ -111,13 +113,13 @@ hide_commit: true
 
 [Backup & Restore (BR)](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)
 
-[TiDB Binlog](https://docs.pingcap.com/tidb/stable/tidb-binlog-overview)
-
 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)
 
 [PingCAP Clinic](https://docs.pingcap.com/tidb/stable/clinic-introduction)
 
-[sync-diff-inspector](https://docs.pingcap.com/tidb/stable/sync-diff-inspector-overview)
+[TiDB Operator](https://docs.pingcap.com/zh/tidb/stable/tidb-operator-overview)
+
+[TiSpark](https://docs.pingcap.com/zh/tidb/stable/tispark-overview)
 
 </LearningPath>
 
