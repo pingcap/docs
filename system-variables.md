@@ -2271,8 +2271,8 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Scope: SESSION | GLOBAL
 - Default value: `8192`
 - Range: `[1, 18446744073709551616]`
-- When Fine Grained Shuffle is enabled, this variable controls the batch size of the data sent by the sender. The sender will send data once the cumulative number of rows exceeds this value.
-- Impact on performance: set a reasonable size according to your business requirements. Improper setting will affect the performance. If the value is set too small, it will cause data to be sent too often and reduce the vectorization effect. If the value is set too large, it will cause a low sending frequency, and the receiving end will spend most of the time waiting for data, which will affect the performance.
+- When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender. The sender will send data once the cumulative number of rows exceeds this value.
+- Impact on performance: set a reasonable size according to your business requirements. Improper setting will affect the performance. If the value is set too small, for example `1`,  it will cause one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it will cause the receiving end to spend most of the time waiting for data, and the piplelined computation can not work. You can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
 
 ### `tiflash_fine_grained_shuffle_stream_count` <span class="version-mark">New in v6.2.0</span>
 
@@ -2281,9 +2281,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Range: `[-1, 1024]`
 - When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The values are as follows.
 
-    * 0: means that the Fine Grained Shuffle function is disabled. The window function pushed down to TiFlash is executed in a single thread.
+    * -1 means that the Fine Grained Shuffle function is disabled. The window function pushed down to TiFlash is executed in a single thread.
+    * 0: means that the Fine Grained Shuffle function is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) takes effect (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
     * Integer greater than 0: means that the Fine Grained Shuffle function is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
-    * -1: means that the Fine Grained Shuffle function is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) takes effect (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
 - Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it will instead lead to performance degradation.
 
 ### time_zone
