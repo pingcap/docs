@@ -5,7 +5,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers support services to your organization. You can use the free Basic support plan in TiDB Cloud or upgrade to a paid plan for extended services.
+TiDB Cloud offers support services to your organization. You can use the free **Basic** support plan in TiDB Cloud or upgrade to a paid plan for extended services.
 
 The service information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
 
@@ -18,6 +18,7 @@ To request support for your organization or project, perform the following steps
     > **Note:**
     >
     > You can also directly click the **Help** icon on the lower right.
+
 2. On the **Submit a request** page, select **TiDB Cloud Support** from the dropdown list.
 
 3. Fill in the boxes below.
@@ -44,13 +45,13 @@ Alternatively, you can also access the [Customer Support](https://support.pingca
 
 ## Check or upgrade your support plan
 
-To check or upgrade your support plan, perform the following steps:
+To check and upgrade your support plan, perform the following steps:
 
 1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
 
     The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
 
-2. Choose your desired support plan and upgrade.
+2. Choose your desired support plan.
 
     <SimpleTab>
     <div label="Upgrade to Standard">
