@@ -51,7 +51,7 @@ Because CSV files do not contain schema information, before importing data from 
 
     2. Create table schema files for your source data.
 
-        The table schema files are mandatory. If you do not include the files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will return an error when you import the data.
+        If you do not include the table schema files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
 
         Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud will create the `${db_table}` table in the `${db_name}` database when you import the data.
 
