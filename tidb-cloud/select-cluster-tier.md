@@ -77,7 +77,8 @@ Alternatively, you can log in to the TiDB Cloud console, and then click **Resume
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering to connect to clusters.
 - You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
-- You cannot use a third-party monitoring service.
+- You cannot entry the [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to use the standard monitoring service.
+- You cannot use the third-party monitoring service.
 - You cannot customize the port number of a TiDB cluster.
 - The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
 
