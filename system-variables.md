@@ -478,25 +478,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
-<<<<<<< HEAD
-=======
-### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `ON`
-- Determines whether TiDB automatically updates table statistics as a background operation.
-- This setting was previously a `tidb.toml` option (`performance.run-auto-analyze`), but changed to a system variable starting from TiDB v6.1.0.
-
-### tidb_enable_auto_increment_in_generated
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
-
 ### tidb_enable_change_multi_schema
 
 > **Warning:**
@@ -512,8 +493,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
     - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
     - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
-
->>>>>>> 42c832f0b (sql: align 3 oncall prs (#9270))
+    
 ### tidb_enable_cascades_planner
 
 > **Warning:**
