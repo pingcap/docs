@@ -45,7 +45,7 @@ hide_commit: true
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Import sample data](https://docs.pingcap.com/tidbcloud/import-sample-data)
+[Import Sample Data](https://docs.pingcap.com/tidbcloud/import-sample-data)
 
 [From MySQL](https://docs.pingcap.com/tidbcloud/migrate-data-into-tidb)
 
@@ -79,7 +79,7 @@ hide_commit: true
 
 [View Organization and Project](https://docs.pingcap.com/tidbcloud/manage-user-access#view-the-organization-and-project)
 
-[Invite a member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
+[Invite a Member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
 
 [Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
 

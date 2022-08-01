@@ -21,13 +21,13 @@ See the documentation of TiDB Cloud
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart" icon="cloud5" label="Get Started with TiDB Cloud">
 
-Guides you through an easy way to get started with your TiDB Cloud
+Guides you through an easy way to get started with TiDB Cloud
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-poc" icon="cloud3" label="Perform a PoC with TiDB Cloud">
 
-Helps you quickly complete a TiDB Cloud PoC.
+Helps you quickly complete a TiDB Cloud PoC
 
 </DocHomeCard>
 
@@ -41,7 +41,7 @@ Get the power of a cloud-native, distributed SQL database built for real-time an
 
 <DocHomeSection label="TiDB" anchor="tidb" id="tidb">
 
-TiDB  is an open-source, distributed, NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. TiDB can be deployed on-premise or in-cloud.
+TiDB is an open-source, distributed, NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. You can deploy TiDB on premises or in the cloud.
 
 <DocHomeCardContainer>
 
@@ -65,7 +65,7 @@ Learn how to deploy TiDB locally in production
 
 </DocHomeCardContainer>
 
-The open source TiDB platform released under the Apache 2.0 license, and supported by the community
+The open source TiDB platform is released under the Apache 2.0 license, and supported by the community.
 
 <a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Download</a>
 
@@ -77,19 +77,19 @@ The open source TiDB platform released under the Apache 2.0 license, and support
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Guide">
 
-Docs for application developers
+Documentation for application developers
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-java" icon="java" label="Java">
 
-Java applications can connect to and communicate with TiDB through JDBC or Swing, or with ORM frameworks like Hibernate.
+Java applications can connect to and communicate with TiDB through JDBC or Swing, or with ORM frameworks like Hibernate
 
 </DocHomeCard>
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="Golang">
 
-Golang applications can connect to and communicate with TiDB through a native driver and ORM frameworks.
+Golang applications can connect to and communicate with TiDB through a native driver and ORM frameworks
 
 </DocHomeCard>
 
@@ -103,7 +103,7 @@ Golang applications can connect to and communicate with TiDB through a native dr
 
 <DocHomeCard href="https://en.pingcap.com/education/" icon="cloud1" label="PingCAP Education">
 
-Well-designed online courses and instructor led-training to teach you TiDB and TiDB Cloud
+Learn TiDB and TiDB Cloud through well-designed online courses and instructor-led training
 
 </DocHomeCard>
 
@@ -139,7 +139,7 @@ Download eBooks and Papers
 
 <DocHomeCard href="https://ossinsight.io/" icon="cloud6" label="OSS Insight">
 
-A powerful insight tool that can help you analyze in depth any single GitHub repository
+A powerful insight tool that can help you analyze in depth any GitHub repository
 
 </DocHomeCard>
 
