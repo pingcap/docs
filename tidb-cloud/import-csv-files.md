@@ -20,7 +20,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
 2. Name the CSV files as follows:
 
-    - If a CSV file contains all data of an entire table, name the file `${db_name}.${table_name}.csv`, which maps to the `${db_name}.${table_name}` table when you import the data.
+    - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
     - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
 
     > **Note:**
@@ -103,7 +103,8 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         For example:
 
-        - `db01.*`: all the tables in `db01` database will be imported.
+        - `db01.*`: all tables in the `db01` database will be imported.
+        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
         - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
         - `*.*` : all tables will be imported.
 
