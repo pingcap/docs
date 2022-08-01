@@ -31,7 +31,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
 Because CSV files do not contain schema information, before importing data from CSV files into TiDB Cloud, you need to create the table schemas using either of the following methods:
 
-- Method 1: In TiDB Cloud, create the target database and tables for your source data.
+- Method 1: In TiDB Cloud, create the target databases and tables for your source data.
 
 - Method 2: In the Amazon S3 or GCS directory where the CSV files are located, create the target table schema files for your source data.
 
@@ -76,7 +76,7 @@ To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do o
 
 - If your CSV files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
-    Once finished, make a note of the Role ARN value as you will need it in [Step 3](#step-4-import-csv-files-to-tidb-cloud).
+    Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud).
 
 - If your CSV files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
 
@@ -98,18 +98,18 @@ To import the CSV files to TiDB Cloud, take the following steps:
         >
         > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
 
-    - **Target Database**: fill in the **Username** and **Password** fields.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
         For example:
 
         - `db01.*`: all the tables in `db01` database will be imported.
         - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
-        - `*.*` : all tables will be imported
+        - `*.*` : all tables will be imported.
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if you want to merge and import data from multiple CSV files into the same target table.
+    - **Custom Pattern**: specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) and you want to merge and import data from multiple CSV files into the same target table.
 
         > **Note:**
         >
