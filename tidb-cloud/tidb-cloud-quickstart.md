@@ -119,7 +119,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
 
-2. In the cluster information pane on the left, click **Import**. The **Data Import Task** page is displayed.
+2. In the upper-right corner, click **Load Data**. The **Data Import Task** page is displayed.
 
 3. Fill in the import parameters:
 
