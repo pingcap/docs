@@ -42,7 +42,7 @@ Because Parquet files do not contain schema information, before importing data f
 
 - Method 1: In TiDB Cloud, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3 or GCS directory where the Parquet files are located, create the target table schema files for your source data.
+- Method 2: In the Amazon S3 or GCS directory where the Parquet files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 

@@ -33,7 +33,7 @@ Because CSV files do not contain schema information, before importing data from 
 
 - Method 1: In TiDB Cloud, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3 or GCS directory where the CSV files are located, create the target table schema files for your source data.
+- Method 2: In the Amazon S3 or GCS directory where the CSV files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
