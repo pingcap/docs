@@ -2279,12 +2279,12 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Scope: SESSION | GLOBAL
 - Default value: `-1`
 - Range: `[-1, 1024]`
-- When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The values are as follows.
+- When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The possible values are as follows:
 
-    * -1 means that the Fine Grained Shuffle function is disabled. The window function pushed down to TiFlash is executed in a single thread.
+    * -1: the Fine Grained Shuffle feature is disabled. The window function pushed down to TiFlash is executed in a single thread.
     * 0: means that the Fine Grained Shuffle function is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) takes effect (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
-    * Integer greater than 0: means that the Fine Grained Shuffle function is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
-- Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it will instead lead to performance degradation.
+    * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
+- Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
 
 ### time_zone
 
