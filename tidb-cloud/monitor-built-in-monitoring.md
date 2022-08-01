@@ -7,15 +7,25 @@ summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand
 
 TiDB Cloud collects and displays a full standard metrics of your cluster in TiDB Cloud console. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
+> **Note:**
+>
+> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), the Monitoring page is unavailable. You can upgrade to [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier) to use it.
+
+## How to use feature 
+
 To view these metrics, take the following steps:
 
 1. Navigate to the **Diagnostics** tab of a cluster.
 
 2. Click the **Monitoring** tab.
 
+
+## Metrics Content
+
 The following sections illustrate the metrics on the Monitoring page.
 
-## Database Time
+
+### Database Time
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -24,14 +34,14 @@ The following sections illustrate the metrics on the Monitoring page.
 | Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token, parse, compile, and execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas take a large proportion, it means most database time is consumed by other phases than the execution phase and further cause analysis is required. |
 | SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas take a large proportion, it means there is a bottleneck during SQL execution. For example, if serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
 
-## Application Connection
+### Application Connection
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Connection Count | Total, active connection | Total: the number of connections to all TiDB instances. <br/> Active connections: the number of active connections to all TiDB instances. |
 | Disconnection | Instances | The number of clients disconnected to each TiDB instance. |
 
-## SQL Count
+### SQL Count
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -40,7 +50,7 @@ The following sections illustrate the metrics on the Monitoring page.
 | Command Per Second | Query, StmtExecute, StmtPrepare, etc. | The number of commands processed by all TiDB instances per second based on command types. |
 | Queries Using Plan Cache OPS | hit, miss | The number of queries using plan cache per second in all TiDB instances. |
 
-## Latency Break Down
+### Latency Break Down
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -51,14 +61,14 @@ The following sections illustrate the metrics on the Monitoring page.
 | Compile Duration | avg, 99 | The average time or P99 duration consumed in compiling the parsed SQL AST to execution plans. |
 | Execute Duration | avg, 99 | The average time or P99 duration consumed in executing execution plans of SQL statements. |
 
-## Transaction
+### Transaction
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Transaction Per Second | {types}-{transaction model} | The number of transactions executed per second. |
 | Transaction Duration | avg-{transaction model}, 99-{transaction model} | The execution duration of a transaction. |
 
-## Core Path Duration
+### Core Path Duration
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -72,7 +82,7 @@ The following sections illustrate the metrics on the Monitoring page.
 | Average / P99 Commit Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to commit logs. |
 | Average / P99 Apply Log Duration | avg, 99 | The average time or P99 duration consumed by Raft to apply logs. |
 
-## Server
+### Server
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
@@ -89,3 +99,10 @@ The following sections illustrate the metrics on the Monitoring page.
 | TiFlash Memory Usage | instances | The memory usage statistics of each TiFlash instance. |
 | TiFlash IO MBps | instances-write, instances-read | The total bytes of read and write in each TiFlash instance. |
 | TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
+
+## FAQ
+1. Why are some panels empty on this page？
+If there is no value in the panel, there may be several scenarios.
+- The cluster's workload does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The cluster version is low, please upgrade to the latest version of TiDB to see these metrics.
+- If all the above scenarios are excluded, please contact technical support.
