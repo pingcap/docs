@@ -1,6 +1,6 @@
 ---
 title: Fast Mode
-summary: Introduces a way to speed up the querying of AP scenarios by using Fast Mode.
+summary: Introduces a way to speed up the querying of OLAP scenarios by using Fast Mode.
 ---
 
 # Fast Mode
@@ -9,16 +9,16 @@ summary: Introduces a way to speed up the querying of AP scenarios by using Fast
 >
 > This feature is still an experimental feature. It is NOT recommended that you use it in the production environment.
 
-This document describes how to use Fast Mode to speed up queries in Analytical Processing (AP) scenarios.
+This document describes how to use Fast Mode to speed up queries in Online Analytical Processing (OLAP) scenarios.
 
 TiFlash supports the following modes:
 
-- `Normal Mode`. The default mode. This mode guarantees the accuracy of query results and data consistency.
+- `Normal Mode`. The default mode. This mode guarantees the precision of query results and data consistency.
 - `Fast Mode`. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
 
 Some AP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can switch the corresponding table to TiFlash's Fast Mode for querying.
 
-The mode switch takes effect globally. TiFlash mode switching is only available for tables with TiFlash Replica. TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-utf-8 characters in the column names, and therefore changing TiFlash table mode is not supported for them.
+The mode switch takes effect globally only for those tables whose mode is set to Fast Mode by [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md). TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-utf-8 characters in the column names, and therefore changing TiFlash table mode is not supported for them.
 
 For more information, see [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md).
 
@@ -35,7 +35,7 @@ Use the following statement to switch the corresponding table to Fast Mode.
 {{< copyable "sql" >}}
 
 ```sql
-ALTER TABLE table_name SET TIFALSH MODE FAST
+ALTER TABLE table_name SET TIFLASH MODE FAST
 ```
 
 Once the switch is complete, subsequent queries in TiFlash will be performed in Fast Mode.
@@ -43,7 +43,7 @@ Once the switch is complete, subsequent queries in TiFlash will be performed in 
 You can switch back to Normal Mode using the following statement.
 
 ```sql
-ALTER TABLE table_name SET TIFALSH MODE NORMAL
+ALTER TABLE table_name SET TIFLASH MODE NORMAL
 ```
 
 ## Mechanism of Fast Mode

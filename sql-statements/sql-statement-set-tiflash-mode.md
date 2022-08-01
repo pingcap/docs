@@ -31,7 +31,7 @@ AlterTableSetTiFlashModeStmt ::=
 
 ## Example
 
-Assume that the table `test` has a TiFlash copy.
+Assume that the `test` table has a TiFlash replica.
 
 {{< copyable "sql" >}}
 
@@ -41,7 +41,7 @@ CREATE TABLE test (a INT NOT NULL, b INT);
 ALTER TABLE test SET TIFLASH REPLICA 1;
 ```
 
-The default mode of the `test` table is Normal Mode. You can query it with the following statement.
+The default mode of the `test` table is Normal Mode. You can query the table mode with the following statement.
 
 ```sql
 SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'test' AND table_schema = 'test'
@@ -82,7 +82,9 @@ ALTER TABLE test SET tiflash mode NORMAL
 
 ## TiDB Binlog and TiCDC compatibility
 
-When the downstream is also TiDB, `ALTER TABLE ... SET TiFLASH MODE ...` will be synchronized downstream by TiDB Binlog. In other scenarios, neither TiDB Binlog nor TiCDC will synchronize this statement.
+When the downstream is also TiDB, `ALTER TABLE ... SET TiFLASH MODE ...` will be synchronized downstream by TiDB Binlog. In other scenarios, TiDB Binlog does not synchronize this statement.
+
+Fast mode does not support TiCDC.
 
 ## See also
 
