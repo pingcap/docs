@@ -102,6 +102,7 @@ The following sections illustrate the metrics on the Monitoring page.
 
 ## FAQ
 1. Why are some panels empty on this page？
+
 If there is no value in the panel, there may be several scenarios.
 - The cluster's workload does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
 - The cluster version is low, please upgrade to the latest version of TiDB to see these metrics.
