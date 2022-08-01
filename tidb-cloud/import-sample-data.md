@@ -9,7 +9,7 @@ This document describes how to import sample data into TiDB Cloud via the UI. Th
 
 1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
 
-2. In the upper-right corner, click **Load Data**. The **Data Import Task** page is displayed.
+2. In the upper-right corner, click **Import Data**. The **Data Import Task** page is displayed.
 
 3. Fill in the import parameters:
 

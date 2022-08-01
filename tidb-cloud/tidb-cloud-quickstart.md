@@ -35,9 +35,9 @@ To create a free Developer Tier cluster, take the following steps:
 
 5. Click **Create**.
 
-   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+   The cluster creation process starts and the **Security Settings** dialog box is displayed.
 
-6. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
     Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
@@ -79,9 +79,9 @@ To create a Dedicated Tier cluster, take the following steps:
 
 9. Click **Create**.
 
-   The cluster creation process starts and the **Security Quick Start** dialog box is displayed.
+   The cluster creation process starts and the **Security Settings** dialog box is displayed.
 
-10. In the **Security Quick Start** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+10. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
     Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
@@ -94,7 +94,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
     The overview page of your newly created cluster is displayed.
 
-2. Click **Connect** in the upper-right corner. The **Connect to TiDB** dialog box is displayed.
+2. Click **Connect** in the upper-right corner. The connection dialog box is displayed.
 
 3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
@@ -119,7 +119,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
 1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
 
-2. In the upper-right corner, click **Load Data**. The **Data Import Task** page is displayed.
+2. In the upper-right corner, click **Import Data**. The **Data Import Task** page is displayed.
 
 3. Fill in the import parameters:
 
