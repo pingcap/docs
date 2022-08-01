@@ -20,7 +20,7 @@ AlterTableCompactStmt ::=
     'ALTER' 'TABLE' TableName 'COMPACT' ( 'TIFLASH' 'REPLICA' )?
 ```
 
-Since v6.2.0, the `TIFLASH REPLICA` part of the syntax can be omitted. The meaning of the statement remains the same after omission, and takes effect only for TiFlash.
+Since v6.2.0, the `TIFLASH REPLICA` part of the syntax can be omitted. When omitted, the semantic of the statement remains unchanged, and takes effect only for TiFlash.
 
 ## Examples
 
