@@ -14,7 +14,9 @@ This document briefly describes how to integrate **_TiDB_** with **_ProxySQL_** 
 
 ## 1. Startup TiDB
 
-### 1.1 Test Environment - Source compilation
+<SimpleTab>
+
+<div label="Test Environment - Source compilation">
 
 1. Download [TiDB](https://github.com/pingcap/tidb) code, change to the `tidb-server` folder and run the `go build` command.
 
@@ -33,7 +35,9 @@ This document briefly describes how to integrate **_TiDB_** with **_ProxySQL_** 
     ${TIDB_SERVER_PATH} -config ./tidb-config.toml -store unistore -path "" -lease 0s > ${LOCAL_TIDB_LOG} 2>&1 &
     ```
 
-### 1.2 Test Environment - TiUP startup
+</div>
+
+<div label="Test Environment - TiUP startup">
 
 [TiUP](/tiup/tiup-overview.md), as the package manager, makes it far easier to manage different cluster components in the TiDB ecosystem.
 
@@ -49,17 +53,27 @@ This document briefly describes how to integrate **_TiDB_** with **_ProxySQL_** 
     tiup playground
     ```
 
-### 1.3 Test Environment - TiDB Cloud Developer Tier
+</div>
+
+<div label="Test Environment - TiDB Cloud Developer Tier">
 
 Please read [Build a TiDB cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
 
-### 1.4 Production Environment - TiDB Cloud
+</div>
+
+<div label="Production Environment - TiDB Cloud">
 
 We recommend using **TiDB Cloud** directly when you need hosting TiDB services (e.g., you can't manage it yourself, or you need a cloud-native environment, etc.) You can check out [TiDB Cloud - Create a TiDB Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster) to get a TiDB cluster in TiDB Cloud for a formal environment.
 
-### 1.5 Production Environment - Local Deploy
+</div>
+
+<div label="Production Environment - Local Deploy">
 
 The Production environment is much more complex than the test environment. To deploy an on-premises production cluster, it is recommended to refer to the article [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md) and then deploy it based on hardware conditions.
+
+</div>
+
+</SimpleTab>
 
 ## 2. Startup ProxySQL
 
