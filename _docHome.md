@@ -5,7 +5,7 @@ hide_commit: true
 hide_leftNav: true
 ---
 
-<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the tutorials, instructions, and references that you are looking for to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
+<DocHomeContainer title="PingCAP Documentation" subTitle="Explore the how-to guides and references you need to use TiDB Cloud and TiDB, migrate data, and build your applications on the database.">
 
 <DocHomeSection label="TiDB Cloud" anchor="tidb-cloud" id="tidb-cloud">
 
