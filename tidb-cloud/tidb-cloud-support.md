@@ -18,7 +18,6 @@ To request support for your organization or project, perform the following steps
     > **Note:**
     >
     > You can also directly click the **Help** icon on the lower right.
-å
 2. On the **Submit a request** page, select **TiDB Cloud Support** from the dropdown list.
 
 3. Fill in the boxes below.
