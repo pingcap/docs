@@ -5,7 +5,7 @@ summary: Learn how to use the physical import mode in TiDB Lightning.
 
 # Use Physical Import Mode
 
-This document introduces how to use the physical import mode in TiDB Lightning, including writing the configuration file, tuning performance and configuring disk quota.
+This document introduces how to use the physical import mode in TiDB Lightning, including writing the configuration file, tuning performance, and configuring disk quota.
 
 ## Configure and use the physical import mode
 
@@ -241,6 +241,6 @@ backend = "local"
 check-disk-quota = "30s"
 ```
 
-`disk-quota` sets the quota for TiDB Lightning. The default value is MaxInt64, which is 9223372036854775807 bytes. This value is much larger than the disk space you might need for the import, so leaving it as the default value is equivalent to not setting disk quota.
+`disk-quota` limits the storage space used by TiDB Lightning. The default value is MaxInt64, which is 9223372036854775807 bytes. This value is much larger than the disk space you might need for the import, so leaving it as the default value is equivalent to not setting the disk quota.
 
 `check-disk-quota` is the interval of checking disk quota. The default value is 60 seconds. When TiDB Lightning checks the disk quota, it adds a lock to the relevant data, which pauses all the import threads. Therefore, if TiDB Lightning checks the disk quota before every write, it will significantly slow down the write efficiency (as slow as a single-thread write). To achieve efficient write, disk quota is not checked before every write. Every `check-disk-quota` interval, TiDB Lightning pauses all the import threads and checks the disk quota. That is, if the value of `check-disk-quota` is set to a large value, the disk space used by TiDB Lightning might exceed the disk quota you set, which leaves the disk quota ineffective. Therefore, it is recommended to set the value of `check-disk-quota` to a small value. The specific value range is determined by the environment in which TiDB Lightning is running. In different environments, TiDB Lightning writes temporary files at different speeds. Theoretically, the faster the speed, the smaller the value of `check-disk-quota` should be.
