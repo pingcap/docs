@@ -110,7 +110,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) and you want to import source data into the same target table.
+    - **Custom Pattern**: after enabling this feature, you can specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) and you want to import source data into the same target table.
 
         > **Note:**
         >

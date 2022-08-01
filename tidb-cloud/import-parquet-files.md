@@ -113,7 +113,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: specify a custom mapping rule between multiple Parquet files and a single target table. Enable this feature only if your Parquet files do not follow the naming rules in [Step 1](#step-1-prepare-the-parquet-files) and you want to import source data into the same target table.
+    - **Custom Pattern**: after enabling this feature, you can specify a custom mapping rule between multiple Parquet files and a single target table. Enable this feature only if your Parquet files do not follow the naming rules in [Step 1](#step-1-prepare-the-parquet-files) and you want to import source data into the same target table.
 
         > **Note:**
         >
