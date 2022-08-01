@@ -31,6 +31,17 @@ To request support for your organization or project, perform the following steps
     - Replying to the email sent by the support team directly
     - Clicking the ticket link attached in the email to go to the support portal to check and add comments to your ticket
 
+## Check your submitted request
+
+After you have submitted a request, to check the status of your request, perform the following steps:
+
+1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**. The support page is displayed.
+2. In the **Request Support** area, click **View Support Portal**. The **My request** page is displayed.
+
+    On the **My request** page, you can view the status of your request.
+
+Alternatively, you can also access the [Customer Support](https://support.pingcap.com/hc/en-us) page, log in to the support portal, and then click **View my requests**.
+
 ## Check or upgrade your support plan
 
 To check or upgrade your support plan, perform the following steps:
@@ -66,3 +77,10 @@ To check or upgrade your support plan, perform the following steps:
 
     </div>
     </SimpleTab>
+
+## Downgrade your support plan
+
+To downgrade your support plan to **Basic**, perform the following steps:
+
+1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
+2. At the lower part of the **Support** page, click **Downgrade to basic plan**.
