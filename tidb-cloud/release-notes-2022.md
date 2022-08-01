@@ -8,6 +8,14 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## Aug xx, 2022
+
+* 1. Add **Connect** and **Import data** buttons to cluster list page; 2. Move **Connect** and **Import data** buttons to top-right on cluster details page
+
+* Optimize UX/UI of cluster creation process
+
+* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, Premium) to meet different support requirements of customers' organization.
+
 ## July 28, 2022
 
 * Add the **Allow Access from Anywhere** button to the **Security Quick Start** dialog, which allows your cluster to be accessible by any IP addresses. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
