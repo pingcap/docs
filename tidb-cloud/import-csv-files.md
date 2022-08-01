@@ -25,7 +25,7 @@ This document describes how to import uncompressed CSV files from Amazon Simple 
 
     > **Note:**
     >
-    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Custom Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import multiple CSV files to a single table.
+    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Custom Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
 
 ## Step 2. Create the target table schemas
 
@@ -110,12 +110,12 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) and you want to merge and import data from multiple CSV files into the same target table.
+    - **Custom Pattern**: specify a custom mapping rule between multiple CSV files and a single target table. Enable this feature only if your CSV files do not follow the naming rules in [Step 1](#step-1-prepare-the-csv-files) and you want to import source data into the same target table.
 
         > **Note:**
         >
         > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
-        > - It is recommended to first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
+        > - It is recommended that you first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
 
         When **Custom Pattern** is enabled, you are required to fill in the following fields:
 
