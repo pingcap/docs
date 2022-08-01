@@ -32,20 +32,20 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time based on each region. The following table lists the default backup time for each region:
 
-| Cloud provider | Region name              | Region          | Default backup time |
-|----------------|--------------------------|-----------------|---------------------|
-| AWS            | US East (N. Virginia)    | us-east-1       | 07:00 UTC           |
-| AWS            | US West (Oregon)         | us-west-2       | 10:00 UTC           |
-| AWS            | Asia Pacific (Tokyo)     | ap-northeast-1  | 17:00 UTC           |
-| AWS            | Asia Pacific (Seoul)     | ap-northeast-2  | 17:00 UTC           |
-| AWS            | Asia Pacific (Singapore) | ap-southeast-1  | 18:00 UTC           |
-| AWS            | Asia Pacific (Mumbai)    | ap-south-1      | 20:30 UTC           |
-| AWS            | Europe (Frankfurt)       | eu-central-1    | 03:00 UTC           |
-| GCP            | Iowa                     | us-central1     | 08:00 UTC           |
-| GCP            | Oregon                   | us-west1        | 10:00 UTC           |
-| GCP            | Tokyo                    | asia-northeast1 | 17:00 UTC           |
-| GCP            | Singapore                | asia-southeast1 | 18:00 UTC           |
-| GCP            | Taiwan                   | asia-east1      | 18:00 UTC           |
+| Cloud provider | Region name                 | Region          | Default backup time |
+|----------------|-----------------------------|-----------------|---------------------|
+| AWS            | N. Virginia (us-east-1)     | us-east-1       | 07:00 UTC           |
+| AWS            | Oregon (us-west-2)          | us-west-2       | 10:00 UTC           |
+| AWS            | Tokyo (ap-northeast-1)      | ap-northeast-1  | 17:00 UTC           |
+| AWS            | Seoul (AP-Northeast-2)      | ap-northeast-2  | 17:00 UTC           |
+| AWS            | Singapore (ap-southeast-1)  | ap-southeast-1  | 18:00 UTC           |
+| AWS            | Mumbai (ap-south-1)         | ap-south-1      | 20:30 UTC           |
+| AWS            | Frankfurt (eu-central-1)    | eu-central-1    | 03:00 UTC           |
+| GCP            | Iowa (us-central1)          | us-central1     | 08:00 UTC           |
+| GCP            | Oregon (us-west1)           | us-west1        | 10:00 UTC           |
+| GCP            | Tokyo (asia-northeast1)     | asia-northeast1 | 17:00 UTC           |
+| GCP            | Singapore (asia-southeast1) | asia-southeast1 | 18:00 UTC           |
+| GCP            | Taiwan (asia-east1)         | asia-east1      | 18:00 UTC           |
 
 Note that you can not disable automatic backup.
 
