@@ -215,10 +215,6 @@ docker-compose up -d
 
 This has completed the startup of an integrated TiDB and ProxySQL environment, which will start two containers. **_DO NOT_** use it to create cluster in a production environment. You can connect to the port `6033` (ProxySQL) using the username `root` and an empty password. The container specific configuration can be found in [docker-compose.yaml](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/docker-compose.yaml) and the ProxySQL specific configuration can be found in [proxysql-docker.cnf](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/proxysql-docker.cnf).
 
-## 5. Use
-
-### 5.1 MySQL Client Connect ProxySQL
-
 Run the following command:
 
 ```sh
@@ -235,33 +231,9 @@ The result is as follows:
 +--------------------+
 ```
 
-### 5.2 Run Integration Test
+## 5. Example of Load Balancing - Admin Interface
 
-Prerequisites:
-
-- Permissions for the [tidb-test](https://github.com/pingcap/tidb-test) code repository tidb-test
-- The machine has access to the Internet
-- Golang SDK
-- Git
-- One of the following:
-
-    1. Local Startup
-
-        - CentOS 7 machine (can be a physical or virtual machine)
-        - Yum
-
-    2. Docker Startup
-
-        - Docker
-        - Docker Compose
-
-Then you can clone [integertion test code](https://github.com/Icemap/tidb-proxysql-integration-test) and run locally: `. /proxysql-initial.sh && . /test-local.sh` or use Docker: `. /test-docker.sh` to run integration tests.
-
-For more information, refer to the [integration test documentation](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/README.md).
-
-### 5.3 Example of Load Balancing - Admin Interface
-
-#### 5.3.1 Operation Steps
+### 5.1 Operation Steps
 
 Use **_ProxySQL Admin Interface_** to configure a load balancing traffic as an example. The example will do:
 
@@ -278,7 +250,7 @@ Use **_ProxySQL Admin Interface_** to configure a load balancing traffic as an e
 5. Log in to **_ProxySQL MySQL Interface_** with the `root` user and query 5 times, expecting three different returns: `'tidb-0'`, `'tidb-1'` and `'tidb-2'`.
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
-#### 5.3.2 Run
+### 5.2 Run
 
 Dependencies:
 
@@ -291,7 +263,7 @@ cd example/load-balance-admin-interface/
 ./test-load-balance.sh
 ```
 
-#### 5.3.3 Expect Output
+### 5.3 Expect Output
 
 Because of load balancing, it is expected that the output will have three different results: `'tidb-0'`, `'tidb-1'`, and `'tidb-2'`. But the exact order cannot be expected. One of the expected outputs is:
 
@@ -338,9 +310,9 @@ Removing load-balance-admin-interface_tidb-1_1   ... done
 Removing network load-balance-admin-interface_default
 ```
 
-### 5.4 Example of User Split - Admin Interface
+## 6. Example of User Split - Admin Interface
 
-#### 5.4.1 Operation Steps
+### 6.1 Operation Steps
 
 Use **_ProxySQL Admin Interface_** to configure a user split traffic as an example. The different users will use their own TiDB backend. The example will do:
 
@@ -358,7 +330,7 @@ Use **_ProxySQL Admin Interface_** to configure a user split traffic as an examp
 5. Log in to **_ProxySQL MySQL Interface_** with the `root` user and `root1` user. The expected return is `'tidb-0'` and `'tidb-1'`.
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
-#### 5.4.2 Run
+### 6.2 Run
 
 Dependencies:
 
@@ -371,7 +343,7 @@ cd example/user-split-admin-interface/
 ./test-user-split.sh
 ```
 
-#### 5.4.3 Expect Output
+### 6.3 Expect Output
 
 ```
 # ./test-user-split.sh 
@@ -398,9 +370,9 @@ Removing user-split-admin-interface_tidb-1_1   ... done
 Removing network user-split-admin-interface_default
 ```
 
-### 5.5 Example of Proxy Rules - Admin Interface
+## 7. Example of Proxy Rules - Admin Interface
 
-#### 5.5.1 Operation Steps
+### 7.1 Operation Steps
 
 Use **_ProxySQL Admin Interface_** to configure a common read/write separation traffic as an example. It will use the rules to match the SQL that will be run, thus forwarding the read and write SQL to different TiDB backends (if neither match, the user's `default_hostgroup` will be used). The example will do:
 
@@ -442,7 +414,7 @@ Use **_ProxySQL Admin Interface_** to configure a common read/write separation t
 
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
-#### 5.5.2 Run
+### 7.2 Run
 
 依赖：
 
@@ -455,7 +427,7 @@ cd example/proxy-rule-admin-interface/
 ./proxy-rule-split.sh
 ```
 
-#### 5.5.3 Expect Output
+### 7.3 Expect Output
 
 ```
 # ./proxy-rule-split.sh 
@@ -488,7 +460,7 @@ Removing proxy-rule-admin-interface_tidb-1_1   ... done
 Removing network proxy-rule-admin-interface_default
 ```
 
-### 5.6 Example of Load Balancing - Config File
+## 8. Example of Load Balancing - Config File
 
 Use config file to configure a load balancing traffic as an example. Achieves the same as [5.3 Example of Load Balancing - Admin Interface](#53-example-of-load-balancing---admin-interface), only changed using config file to initializing the ProxySQL configuration.
 
