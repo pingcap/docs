@@ -27,11 +27,11 @@ To create a free Developer Tier cluster, take the following steps:
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The **Active Clusters** page is displayed by default.
+    The plan selection page is displayed by default.
 
-3. On the **Active Clusters** page, click **Create Now**.
+3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
 
-4. On the **Create a Cluster** page, select **Developer Tier**, update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create a Cluster** page, **Developer Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
@@ -55,11 +55,11 @@ To create a Dedicated Tier cluster, take the following steps:
 
 2. [Log in](https://tidbcloud.com/) to your TiDB Cloud account.
 
-    The **Active Clusters** page is displayed by default.
+    The plan selection page is displayed by default.
 
-3. On the **Active Clusters** page, click **Create Now**.
+3. On the plan selection page, click **Get Full Access Today** in the **Dedicated Tier** plan.
 
-4. On the **Create a Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
+4. On the **Create a Cluster** page, **Dedicated Tier** is selected by default. Update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
     > **Note:**
     >
