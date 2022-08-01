@@ -46,7 +46,7 @@
   - [Restore](/tidb-cloud/backup-and-restore.md#restore)
 - Monitor and Alert
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
-  - [Built-in Monitoring](/tidb-cloud/monitor-built-in-monitoring)
+  - [Built-in Monitoring](/tidb-cloud/monitor-built-in-monitoring.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
   - Third-Party Monitoring Integrations
     - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
