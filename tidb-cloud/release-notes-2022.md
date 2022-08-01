@@ -14,6 +14,18 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Optimize UX/UI of cluster creation process
 
+* Adds a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to provide a system-level entry for overall performance diagnosis.
+
+    The Monitoring page provides a system-level entry for overall performance diagnosis. According to the top-down performance analysis methodology, the Monitoring page organizes TiDB performance metrics based on database time breakdown and displays these metrics in different colors. By checking these colors, you can identify performance bottlenecks of the entire system at the first glance, which significantly reduces performance diagnosis time and simplifies performance analysis and diagnosis.
+
+* Add a switch to enable or disable **Custom Pattern** on the **Data Import** page for CSV and Parquet source files.
+
+    The **Custom Pattern** feature is disabled by default. You can enable it when you are going to import CSV or Parquet files whose filenames match a certain pattern to a single target table.
+
+    For more information, see [Import CSV Files](/tidb-cloud/import-csv-files.md) and [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md).
+
+* Optimize the help information on the **Data Import** page to make it more clear.
+
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, Premium) to meet different support requirements of customers' organization.
 
 ## July 28, 2022
