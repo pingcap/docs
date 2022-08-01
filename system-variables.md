@@ -482,7 +482,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
+> Currently, multi-schema change is an experimental feature. It is not recommended that you use it in the production environment. TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
