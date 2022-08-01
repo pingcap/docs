@@ -64,7 +64,7 @@ If you are a project member, you can access only the specific projects to which 
 
 To create a Developer Tier cluster, take the following steps:
 
-1. On the TiDB Cloud cluster page, click **Create Cluster**.
+1. On the TiDB Cloud cluster page, click **Create Now**.
 
 2. On the **Create a Cluster** page, select **Developer Tier**, and update the default cluster name if necessary.
 
@@ -84,7 +84,7 @@ To create a Developer Tier cluster, take the following steps:
 
 To create a Dedicated Tier cluster, take the following steps:
 
-1. On the TiDB Cloud cluster page, click **Create Cluster**.
+1. On the TiDB Cloud cluster page, click **Create Now**.
 
 2. On the **Create a Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
@@ -96,7 +96,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
     > **Note:**
     >
-    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. This means that you need to set a project CIDR different from the CIDR of your VPC. You cannot modify your project CIDR once it is set.
+    > When setting the project CIDR, avoid any conflicts with the CIDR of the VPC where your application is located. You cannot modify your project CIDR once it is set.
 
 4. Configure the [cluster size](/tidb-cloud/size-your-cluster.md) for TiDB, TiKV, and TiFlash (optional) respectively, and then click **Next**.
 

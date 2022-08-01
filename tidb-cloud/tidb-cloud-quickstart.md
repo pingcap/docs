@@ -29,7 +29,7 @@ To create a free Developer Tier cluster, take the following steps:
 
     The **Active Clusters** page is displayed by default.
 
-3. On the **Active Clusters** page, click **Create Cluster**.
+3. On the **Active Clusters** page, click **Create Now**.
 
 4. On the **Create a Cluster** page, select **Developer Tier**, update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
@@ -57,7 +57,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
     The **Active Clusters** page is displayed by default.
 
-3. On the **Active Clusters** page, click **Create Cluster**.
+3. On the **Active Clusters** page, click **Create Now**.
 
 4. On the **Create a Cluster** page, select **Dedicated Tier**, update the default cluster name and port number if necessary, choose a cloud provider and a region, and then click **Next**.
 
