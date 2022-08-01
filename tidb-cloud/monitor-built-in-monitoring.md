@@ -13,10 +13,6 @@ To view these metrics, take the following steps:
 
 2. Click the **Monitoring** tab.
 
-> **Note:**
->
-> The time zone information shown on the charts is based on the [time zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone) you set for your organization.
-
 The following sections illustrate the metrics on the Monitoring page.
 
 ## Database Time
