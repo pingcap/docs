@@ -115,7 +115,7 @@ hide_commit: true
 
 [PingCAP Clinic](https://docs.pingcap.com/tidb/stable/clinic-introduction)
 
-[TiDB Operator](https://docs.pingcap.com/zh/tidb/stable/tidb-operator-overview)
+[TiDB Operator](https://docs.pingcap.com/tidb/stable/tidb-operator-overview)
 
 [TiSpark](https://docs.pingcap.com/zh/tidb/stable/tispark-overview)
 
