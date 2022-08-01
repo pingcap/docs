@@ -5,7 +5,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers support services to your organization. You can use the Basic support plan already available in TiDB Cloud or upgrade to a paid plan for extended services.
+TiDB Cloud offers support services to your organization. You can use the free Basic support plan in TiDB Cloud or upgrade to a paid plan for extended services.
 
 The service information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
 
@@ -18,10 +18,10 @@ To request support for your organization or project, perform the following steps
     > **Note:**
     >
     > You can also directly click the **Help** icon on the lower right.
+å
+2. On the **Submit a request** page, select **TiDB Cloud Support** from the dropdown list.
 
-2. On the **Submit a request** page, select **TiDB Cluster on DBaaS** from the dropdown list.
-
-3. Fill in the boxes displayed below.
+3. Fill in the boxes below.
 
 4. Click **Submit** to submit your ticket. After the support team receives your ticket, they will reply to you via email.
 
@@ -36,25 +36,34 @@ To request support for your organization or project, perform the following steps
 
 To check or upgrade your support plan, perform the following steps:
 
-1. On your TiDB Cloud console, click **Support** on the upper right corner of the top navigation bar, and click **View Support Plan**.
+1. On your TiDB Cloud console, click **Support** in the upper-right corner of the top navigation bar, and click **View Support Plan**.
 
-    The support page is displayed. On this page, you can see your current plan. By default, the **Basic** free plan is selected.
+    The support page is displayed. On this page, you can see your **Current Plan**. By default, the **Basic** free plan is selected.
 
 2. Choose your desired support plan and upgrade.
 
-    - To upgrade to **Standard**:
+    <SimpleTab>
+    <div label="Upgrade to Standard">
 
-        1. Click **Select Plan** in the **Standard** area. A **Finish and Start Using Support** page is displayed.
-        2. Check the billing information in the lower-left corner of the page.
-        3. Add your payment information in the **Billing Profile** and **Credit Card** areas.
+    To upgrade to **Standard**:
 
-            For more information about billing, see [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method).
+    1. Click **Select Plan** in the **Standard** pane. A **Finish and Start Using Support** page is displayed.
+    2. Check the billing information in the lower-left corner of the page.
+    3. Add your payment information in the **Billing Profile** and **Credit Card** areas.
 
-        4. Click **Confirm and Pay** in the lower-right corner of the page.
+        For more information about billing, see [TiDB Cloud Payment Method](/tidb-cloud/tidb-cloud-billing.md#payment-method).
 
-        After the payment is finished, you have upgraded you plan to **Standard**.
+    4. Click **Confirm and Pay** in the lower-right corner of the page.
 
-    - To upgrade your plan to **Enterprise** or **Premium**:
+    After the payment is finished, you have upgraded you plan to **Standard**.
 
-        1. Click **Contact Sales** in the **Enterprise** or **Premium** area. A **Contact Us** page is displayed.
-        2. Fill in your information in the **Get in Touch** area and click **SUBMIT**. Then, we will contact you and help your further your subscription.
+    </div>
+    <div label="Upgrade to Enterprise or Premium">
+
+    To upgrade your plan to **Enterprise** or **Premium**:
+
+    1. Click **Contact Sales** in the **Enterprise** or **Premium** pane. A **Contact Us** page is displayed.
+    2. Fill in your information in the **Get in Touch** area and click **SUBMIT**. Then, we will contact you and help your further your subscription.
+
+    </div>
+    </SimpleTab>
