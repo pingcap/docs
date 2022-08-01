@@ -101,6 +101,7 @@ The following sections illustrate the metrics on the Monitoring page.
 | TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
 
 ## FAQ
+
 ### 1. Why are some panels empty on this page？
 
 If there is no value in the panel, there may be several scenarios.
