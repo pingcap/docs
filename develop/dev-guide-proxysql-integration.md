@@ -243,7 +243,7 @@ The result is as follows:
 
 ### 5.1 Run the Example Script
 
-Use **_ProxySQL Admin Interface_** to configure a load balancing traffic as an example. The script can be download and run using the following command.
+Use **_ProxySQL Admin Interface_** to configure a load balancing traffic as an example. The script can be download and run using the following command:
 
 ```sh
 git clone https://github.com/Icemap/tidb-proxysql-integration-test.git
@@ -253,7 +253,7 @@ cd tidb-proxysql-integration-test/example/load-balance-admin-interface
 
 ### 5.2 Explanation of Key Steps
 
-1. Start 3 TiDB containers through **Docker Compose**, all the  ports in the container are `4000`, and mapped to host ports `4001`, `4002`, `4003`. After the TiDB container instance is started, start one container of ProxySQL through **Docker Compose**, the port `6033` in the container is for **_ProxySQL MySQL Interface_**, and mapped host port 6034. The **_ProxySQL Admin Interface_** port is not exposed because it can only log in locally (i.e., inside the container). This process is written in [docker-compose.yaml](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/load-balance-admin-interface/docker-compose.yaml).
+1. Start 3 TiDB containers through **Docker Compose**, all the  ports in the container are `4000`, and mapped to host ports `4001`, `4002`, `4003`. After the TiDB container instances are started, start one container of ProxySQL through **Docker Compose**, the port `6033` in the container is for **_ProxySQL MySQL Interface_**, and mapped host port 6034. The **_ProxySQL Admin Interface_** port is not exposed because it can only log in locally (i.e., inside the container). This process is written in [docker-compose.yaml](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/load-balance-admin-interface/docker-compose.yaml).
 
     ```sh
     docker-compose up -d
@@ -299,13 +299,6 @@ cd tidb-proxysql-integration-test/example/load-balance-admin-interface
     ```sh
     trap 'docker-compose down' EXIT
     ```
-
-### 5.2 Run
-
-```sh
-cd example/load-balance-admin-interface/
-./test-load-balance.sh
-```
 
 ### 5.3 Expect Output
 
@@ -356,14 +349,51 @@ Removing network load-balance-admin-interface_default
 
 ## 6. Example of User Split - Admin Interface
 
-### 6.1 Operation Steps
+### 6.1 Run the Example Script
 
-Use **_ProxySQL Admin Interface_** to configure a user split traffic as an example. The different users will use their own TiDB backend. The example will do:
+Use **_ProxySQL Admin Interface_** to configure a user split traffic as an example. The different users will use their own TiDB backend.  The script can be download and run using the following command:
 
-1. Start 2 TiDB containers through **Docker Compose**,  all the ports in the container are `4000`, and mapped to host ports `4001` and `4002`.
-2. Start one container of ProxySQL through **Docker Compose**, the port `6033` in the container is for **_ProxySQL MySQL Interface_**, and mapped host port 6034. The **_ProxySQL Admin Interface_** port is not exposed because it can only log in locally (i.e., inside the container).
-3. Within the 2 TiDB instances, create the same table structure but write different data: `'tidb-0'`, `'tidb-1'`, in order to distinguish between the different database instances.
-4. Use the `docker-compose exec` command to run the prepared SQL file for configuring ProxySQL in **_ProxySQL Admin Interface_**, this SQL file will run:
+```sh
+git clone https://github.com/Icemap/tidb-proxysql-integration-test.git
+cd tidb-proxysql-integration-test/example/user-split-admin-interface
+./test-user-split.sh
+```
+
+### 6.2 Explanation of Key Steps
+
+1. Start 2 TiDB containers through **Docker Compose**,  all the ports in the container are `4000`, and mapped to host ports `4001` and `4002`. After the TiDB container instances are started, start one container of ProxySQL through **Docker Compose**, the port `6033` in the container is for **_ProxySQL MySQL Interface_**, and mapped host port 6034. The **_ProxySQL Admin Interface_** port is not exposed because it can only log in locally (i.e., inside the container). This process is written in [docker-compose.yaml](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/example/user-split-admin-interface/docker-compose.yaml).
+
+    ```sh
+    docker-compose up -d
+    ```
+
+2. Within the 2 TiDB instances, create the same table structure but write different data: `'tidb-0'`, `'tidb-1'`, in order to distinguish between the different database instances. The command to write data to one of the TiDB instances is shown here, and the same for the other one instances.
+
+    ```sh
+    mysql -u root -h 127.0.0.1 -P 4001 << EOF
+    DROP TABLE IF EXISTS test.test;
+    CREATE TABLE test.test (db VARCHAR(255));
+    INSERT INTO test.test (db) VALUES ('tidb-0');
+    EOF
+    ```
+
+3. Create a new user for ProxySQL in the `tidb-1` instance:
+
+    ```sh
+    mysql -u root -h 127.0.0.1 -P 4002 << EOF
+    CREATE USER 'root1' IDENTIFIED BY '';
+    GRANT ALL PRIVILEGES ON *.* TO 'root1'@'%';
+    FLUSH PRIVILEGES;
+    EOF
+    ```
+
+4. Use the `docker-compose exec` command to run the prepared SQL file for configuring ProxySQL in **_ProxySQL Admin Interface_**:
+
+    ```sh
+    docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
+    ```
+
+    this SQL file will run:
 
     1. Add 2 TiDB backend hosts. `hostgroup_id` of `tidb-0` is `0`, and `hostgroup_id` of `tidb-1` is `1`.
     2. Take effect the TiDB backend configuration and save it on disk.
@@ -372,14 +402,17 @@ Use **_ProxySQL Admin Interface_** to configure a user split traffic as an examp
     5. Take effect the user configuration and save it on disk.
 
 5. Log in to **_ProxySQL MySQL Interface_** with the `root` user and `root1` user. The expected return is `'tidb-0'` and `'tidb-1'`.
+
+    ```sh
+    mysql -u root -h 127.0.0.1 -P 6034 -e "select * from test.test;"
+    mysql -u root1 -h 127.0.0.1 -P 6034 -e "select * from test.test;"
+    ```
+
 6. Stop and clear Docker Compose started resources, such as: containers and network topologies.
 
-### 6.2 Run
-
-```sh
-cd example/user-split-admin-interface/
-./test-user-split.sh
-```
+    ```sh
+    trap 'docker-compose down' EXIT
+    ```
 
 ### 6.3 Expect Output
 
