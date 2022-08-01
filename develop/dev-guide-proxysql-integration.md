@@ -207,10 +207,13 @@ The above config items are required. You can get all the config items' names and
 You can use Docker and Docker Compose for quick start. Make sure the ports `4000` and `6033` are not allocated.
 
 ```sh
+git clone https://github.com/Icemap/tidb-proxysql-integration-test.git
+cd tidb-proxysql-integration-test && docker-compose pull # Get the latest Docker images
+sudo setenforce 0 # Only on Linux
 docker-compose up -d
 ```
 
-This has completed the startup of an integrated TiDB and ProxySQL environment, which will start two containers. **_DO NOT_** use it to create  in a production environment. You can connect to the port `6033` (ProxySQL) using the username `root` and an empty password. The container specific configuration can be found in [docker-compose.yaml](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/docker-compose.yaml) and the ProxySQL specific configuration can be found in [proxysql-docker.cnf](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/proxysql-docker.cnf).
+This has completed the startup of an integrated TiDB and ProxySQL environment, which will start two containers. **_DO NOT_** use it to create cluster in a production environment. You can connect to the port `6033` (ProxySQL) using the username `root` and an empty password. The container specific configuration can be found in [docker-compose.yaml](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/docker-compose.yaml) and the ProxySQL specific configuration can be found in [proxysql-docker.cnf](https://github.com/Icemap/tidb-proxysql-integration-test/blob/main/proxysql-docker.cnf).
 
 ## 5. Use
 
