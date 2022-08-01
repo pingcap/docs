@@ -26,6 +26,7 @@
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
+      - [Golang](/develop/dev-guide-sample-application-golang.md)
   - Example Applications
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
@@ -79,12 +80,11 @@
     - Archived Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
       - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
-      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
-      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
+  - Third-party Support
+    - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -138,7 +138,7 @@
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   - [Modify Configuration Online](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
-  - [Replicate Data Between Primary and Secondary Clusters](/replicate-betwwen-primary-and-secondary-clusters.md)
+  - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - Monitor and Alert
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
@@ -333,7 +333,7 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - PingCAP Clinic Diagnostic Service (Technical Preview)
+  - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
@@ -351,6 +351,8 @@
       - [Table Filter](/table-filter.md)
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
+      - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+      - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
