@@ -33,6 +33,7 @@ This document introduces the experimental features of TiDB in different versions
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
 + [View](/information-schema/information-schema-views.md) (Introduced in v2.1)
 + [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
++ [Using `ALTER TABLE` to modify multiple columns or indexes](/system-variables.md#tidb_enable_change_multi_schema) (Introduced in v5.0.0)
 
 ## Configuration management
 
