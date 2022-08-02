@@ -52,11 +52,11 @@ Whenever you use or set a database user name, you must include the prefix in the
 To get the prefix for your cluster, take the following steps:
 
 1. Navigate to the **Active Clusters** page.
-2. Find the area of your newly created cluster, and click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+2. Click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
 3. In the dialog, locate **Step 2: Connect with a SQL client** and get the prefix.
 
 ### Automatic hibernation and resuming

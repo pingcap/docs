@@ -81,7 +81,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
+    > Alternatively, you can also click the name of your target cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
 
 3. On the **Data Import Task** page, provide the following information.
 
