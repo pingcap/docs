@@ -37,7 +37,6 @@ If you do not specify a preferred backup time, TiDB Cloud assigns a default back
 | AWS            | N. Virginia (us-east-1)     | 07:00 UTC           |
 | AWS            | Oregon (us-west-2)          | 10:00 UTC           |
 | AWS            | Tokyo (ap-northeast-1)      | 17:00 UTC           |
-| AWS            | Seoul (AP-Northeast-2)      | 17:00 UTC           |
 | AWS            | Singapore (ap-southeast-1)  | 18:00 UTC           |
 | AWS            | Mumbai (ap-south-1)         | 20:30 UTC           |
 | AWS            | Frankfurt (eu-central-1)    | 03:00 UTC           |
