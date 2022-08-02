@@ -90,11 +90,13 @@ To create a Dedicated Tier cluster, take the following steps:
 
 ## Step 2. Connect to your TiDB cluster
 
-1. On the **Active Clusters** page, click the name of your newly created cluster.
+1. Navigate to the **Active Clusters** page.
 
-    The overview page of your newly created cluster is displayed.
+2. Find the area of your newly created cluster, and click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
 
-2. Click **Connect** in the upper-right corner. The connection dialog box is displayed.
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
 
 3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 

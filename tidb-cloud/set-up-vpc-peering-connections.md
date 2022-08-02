@@ -186,9 +186,12 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 ### Step 3: Connect to the TiDB cluster on TiDB Cloud
 
-1. Navigate to the **Active Clusters** page and click the name of your cluster.
+1. Navigate to the **Active Clusters** page.
+2. Find the area of your newly created cluster, and click **Connect** in the upper-right corner of the area. The connection dialog is displayed. You can see the **Status** of the VPC peering is **active**.
 
-2. Click **Connect** in the upper-right corner. The connection dialog displays. You could see the **Status** of the VPC peering is **active**.
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
 
 3. Access the TiDB Cluster from the instance within the VPC. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
