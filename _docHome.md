@@ -133,7 +133,7 @@ Learn events about PingCAP and the community
 
 <DocHomeCard href="https://en.pingcap.com/ebook-whitepaper/" icon="papers" label="eBooks & Papers">
 
-Download eBooks and Papers
+Download eBooks and papers
 
 </DocHomeCard>
 
