@@ -33,7 +33,7 @@ Helps you quickly complete a Proof of Concept (PoC) of TiDB Cloud
 
 </DocHomeCardContainer>
 
-Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully managed service.
+Get the power of a cloud-native, distributed SQL database built for real-time analytics in a fully-managed service.
 
 <a href="https://tidbcloud.com/free-trial" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Try Free</a>
 
@@ -65,7 +65,7 @@ Learn how to deploy TiDB locally in production
 
 </DocHomeCardContainer>
 
-The open source TiDB platform is released under the Apache 2.0 license, and supported by the community.
+The open-source TiDB platform is released under the Apache 2.0 license, and supported by the community.
 
 <a href="https://en.pingcap.com/download/" class="button" target="_blank" referrerpolicy="no-referrer-when-downgrade">Download</a>
 
@@ -87,7 +87,7 @@ Java applications can connect to and communicate with TiDB through JDBC or Swing
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql" icon="go" label="Golang">
+<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-golang" icon="go" label="Golang">
 
 Golang applications can connect to and communicate with TiDB through a native driver and ORM frameworks
 
