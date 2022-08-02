@@ -20,7 +20,7 @@ To import data, perform the following steps:
 
 3. Prepare source data according to [Learn how to create an Amazon S3 Bucket and prepare source data files](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files). You can see the advantages and disadvantages of different **Data Format** in the preparing data part.
 4. Fill in the **Data Source Type**, **Bucket URL**, and **Data Format** fields according to the specification of your source data.
-5. Fill in the **Username** and **Password** fields of the **Target Database** according to the connection settings of your cluster.
+5. Fill in the **Username** and **Password** fields of the **Target Cluster**.
 6. Create the bucket policy and role for cross-account access according to [Learn how to configure cross-account access](#learn-how-to-configure-cross-account-access).
 7. Click **Import**.
 
