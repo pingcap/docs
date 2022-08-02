@@ -9,6 +9,12 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
 ## Aug 2, 2022
+* "4 vCPU, 16 GiB" node size of TiDB and TiKV is now in General Availability (GA).
+    - Storage size is between 200GiB and 2TiB per TiKV node
+    - Suggested scenarios:
+        - low workload production environment for SMB 
+        - PoC and staging environment
+        - development environment
 
 * Optimize the UI of the [**Active Clusters**](https://staging.tidbcloud.com/console/clusters) page and the cluster details page:
     * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
