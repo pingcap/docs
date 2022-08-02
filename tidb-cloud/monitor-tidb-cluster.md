@@ -70,7 +70,7 @@ To view metrics on the cluster monitoring page, take the following steps:
 
 2. Click the **Monitoring** tab.
 
-For more information, see [Built-in Monitoring](/tidb-cloud/monitor-built-in-monitoring.md).
+For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
 
 ## Built-in alerting
 
