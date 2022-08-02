@@ -8,13 +8,15 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## Aug xx, 2022
+## Aug 2, 2022
 
-* 1. Add **Connect** and **Import data** buttons to cluster list page; 2. Move **Connect** and **Import data** buttons to top-right on cluster details page
+* Optimize the UI of the [**Active Clusters**](https://staging.tidbcloud.com/console/clusters) page and the cluster details page:
+    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
+    * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
 
-* Optimize UX/UI of cluster creation process
+* Optimize the UI of cluster creation process. Now you can select your cluster Tier on the **Create Cluster** page.
 
-* Adds a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to provide a system-level entry for overall performance diagnosis.
+* Add a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to the **Diagnostics** tab for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier)
 
     The Monitoring page provides a system-level entry for overall performance diagnosis. According to the top-down performance analysis methodology, the Monitoring page organizes TiDB performance metrics based on database time breakdown and displays these metrics in different colors. By checking these colors, you can identify performance bottlenecks of the entire system at the first glance, which significantly reduces performance diagnosis time and simplifies performance analysis and diagnosis.
 
@@ -26,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Optimize the help information on the **Data Import** page to make it more clear.
 
-* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, Premium) to meet different support requirements of customers' organization.
+* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## July 28, 2022
 
