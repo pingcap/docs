@@ -92,7 +92,7 @@ To create a Dedicated Tier cluster, take the following steps:
 
 1. Navigate to the **Active Clusters** page.
 
-2. Find the area of your newly created cluster, and click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
     > **Tip:**
     >
