@@ -119,9 +119,12 @@ To create a Dedicated Tier cluster, take the following steps:
 
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-1. Navigate to the **Active Clusters** page and click the name of your newly created cluster. The overview page of your cluster is displayed.
+1. Navigate to the **Active Clusters** page.
+2. Find the area of your newly created cluster and click **Import Data** in the upper-right corner of the area. The **Data Import Task** page is displayed.
 
-2. In the upper-right corner, click **Import Data**. The **Data Import Task** page is displayed.
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
 
 3. Fill in the import parameters:
 
