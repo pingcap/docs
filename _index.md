@@ -85,7 +85,7 @@ hide_commit: true
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-overview)
+[Tuning Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-overview)
 
 [Tuning Methods](https://docs.pingcap.com/tidb/stable/performance-tuning-methods)
 
