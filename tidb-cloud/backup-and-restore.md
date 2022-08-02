@@ -30,21 +30,21 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 4. Click **Confirm**.
 
-If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time based on each region. The following table lists the default backup time for each region:
+If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time based on each region. The following table lists the default backup time for each region: 
 
 | Cloud provider | Region                      | Default backup time |
 |----------------|-----------------------------|---------------------|
-| AWS            | N. Virginia (us-east-1)     | 07:00 UTC           |
 | AWS            | Oregon (us-west-2)          | 10:00 UTC           |
-| AWS            | Tokyo (ap-northeast-1)      | 17:00 UTC           |
-| AWS            | Singapore (ap-southeast-1)  | 18:00 UTC           |
+| AWS            | N. Virginia (us-east-1)     | 07:00 UTC           |
 | AWS            | Mumbai (ap-south-1)         | 20:30 UTC           |
+| AWS            | Singapore (ap-southeast-1)  | 18:00 UTC           |
+| AWS            | Tokyo (ap-northeast-1)      | 17:00 UTC           |
 | AWS            | Frankfurt (eu-central-1)    | 03:00 UTC           |
-| GCP            | Iowa (us-central1)          | 08:00 UTC           |
 | GCP            | Oregon (us-west1)           | 10:00 UTC           |
-| GCP            | Tokyo (asia-northeast1)     | 17:00 UTC           |
+| GCP            | Iowa (us-central1)          | 08:00 UTC           |
 | GCP            | Singapore (asia-southeast1) | 18:00 UTC           |
 | GCP            | Taiwan (asia-east1)         | 18:00 UTC           |
+| GCP            | Tokyo (asia-northeast1)     | 17:00 UTC           |
 
 Note that you can not disable automatic backup.
 
