@@ -32,7 +32,7 @@ The following sections illustrate the metrics on the Monitoring page.
 | Database Time | database time | Total database time per second. |
 | Database Time by SQL types | Select, Insert, Use, etc. | Database time consumed by each type of SQL statements per second. |
 | Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token, parse, compile, and execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas take a large proportion, it means most database time is consumed by other phases than the execution phase and further cause analysis is required. |
-| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown.If non-blue or non-green areas take a large proportion, it means there is a bottleneck during SQL execution. For example, if serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
+| SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. If non-blue or non-green areas take a large proportion, it means there is a bottleneck during SQL execution. For example, if serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
 
 ### Application Connection
 
@@ -96,15 +96,15 @@ The following sections illustrate the metrics on the Monitoring page.
 | TiKV Storage Usage | instances | The storage size per TiKV instance. |
 | TiFlash Uptime | instances | The runtime of each TiFlash instance since last restart. |
 | TiFlash CPU Usage | instances | The statistics of CPU usage of each TiFlash instance. |
-| TiFlash Memory Usage | instances | The memory usage statistics of each TiFlash instance. |
+| TiFlash Memory  | instances | The memory usage statistics of each TiFlash instance. |
 | TiFlash IO MBps | instances-write, instances-read | The total bytes of read and write in each TiFlash instance. |
 | TiFlash Storage Usage | instances | The storage size per TiFlash instance. |
 
 ## FAQ
 
-### 1. Why are some panels empty on this page？
+**1. Why are some panes empty on this page?**
 
-If there is no value in the panel, there may be several scenarios.
-- The cluster's workload does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The cluster version is low, please upgrade to the latest version of TiDB to see these metrics.
+If a pane does not provide any metrics, the possible reasons are as follows:
+- The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
+- The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
 - If all the above scenarios are excluded, please contact technical support.
