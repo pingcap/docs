@@ -48,7 +48,7 @@ The following sections illustrate the metrics on the Monitoring page.
 | Query Per Second | Select, Insert, Use, etc. | The number of SQL statements executed per second in all TiDB instances, which are collected by types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
 | Command Per Second | Query, StmtExecute, StmtPrepare, etc. | The number of commands processed by all TiDB instances per second based on command types. |
-| Queries Using Plan Cache OPS | hit, miss | The number of queries using plan cache per second in all TiDB instances. |
+| Queries Using Plan Cache OPS | hit, miss | The number of queries using or missing plan cache per second in all TiDB instances. |
 
 ### Latency Break Down
 
