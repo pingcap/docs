@@ -25,7 +25,7 @@ You can import both uncompressed and Snappy compressed [Apache Parquet](https://
 
 1. If a Parquet file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
 
-    TiDB Cloud supports importing very large Parquet files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel which can greatly improve the import speed.
+    TiDB Cloud supports importing very large Parquet files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
 
 2. Name the Parquet files as follows:
 
@@ -118,7 +118,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
         > **Note:**
         >
         > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
-        > - It is recommended that you first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
+        > - It is recommended that you first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to one target table at a time.
 
         When **Custom Pattern** is enabled, you are required to fill in the following fields:
 
