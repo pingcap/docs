@@ -66,7 +66,7 @@ The cluster monitoring page provides a full set of standard metrics of a cluster
 
 To view metrics on the cluster monitoring page, take the following steps:
 
-1. Navigate to the **Diagnostics** tab of a cluster.
+1. Navigate to the **Diagnosis** tab of a cluster.
 
 2. Click the **Monitoring** tab.
 
