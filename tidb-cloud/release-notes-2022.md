@@ -19,7 +19,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
         * PoC and staging environment
         * Development environment
 
-* Add a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to the **Diagnostics** tab for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+* Add a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to the **Diagnostics** tab for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
     The Monitoring page provides a system-level entry for overall performance diagnosis. According to the top-down performance analysis methodology, the Monitoring page organizes TiDB performance metrics based on database time breakdown and displays these metrics in different colors. By checking these colors, you can identify performance bottlenecks of the entire system at the first glance, which significantly reduces performance diagnosis time and simplifies performance analysis and diagnosis.
 
