@@ -59,7 +59,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
 
 3. Set up VPC peering. See [Set up VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
 
@@ -79,11 +79,11 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 
 1. Navigate to the **Active Clusters** page.
 
-2. Find the area of your newly created cluster, click **Connect** in the upper-right corner of the area, and select the **Web SQL Shell** tab in the connection dialog.
+2. Find the area of your cluster, click **Connect** in the upper-right corner of the area, and select the **Web SQL Shell** tab in the connection dialog.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
 
 3. Click **Open SQL Shell**.
 
