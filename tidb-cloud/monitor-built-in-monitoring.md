@@ -5,7 +5,7 @@ summary: Learn how to view TiDB Cloud built-in monitoring metrics and understand
 
 # TiDB Cloud Built-in Monitoring
 
-TiDB Cloud collects and displays a full standard metrics of your cluster in TiDB Cloud console. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+TiDB Cloud collects and displays a full set of standard metrics of your cluster on the Monitoring page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 > **Note:**
 >
