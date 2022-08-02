@@ -8,16 +8,16 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## Aug 2, 2022
+## August 2, 2022
 
 * The `4 vCPU, 16 GiB` node size of TiDB and TiKV is now in General Availability (GA).
 
     * For each `4 vCPU, 16 GiB` TiKV node, the storage size is between 200 GiB and 2 TiB.
     * Suggested usage scenarios:
 
-        * Low workload production environment for SMB
-        * PoC and staging environment
-        * Development environment
+        * Low workload production environments for SMB
+        * PoC and staging environments
+        * Development environments
 
 * Add a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to the **Diagnosis** tab for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
@@ -31,7 +31,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-* Optimize the UI of the [**Active Clusters**](https://tidbcloud.com/console/clusters) page and the cluster details page:
+* Optimize the UI of the [Active Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
 
     * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
