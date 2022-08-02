@@ -107,4 +107,5 @@ The following sections illustrate the metrics on the Monitoring page.
 If a pane does not provide any metrics, the possible reasons are as follows:
 - The workload of the corresponding cluster does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
 - The cluster version is low. You need to upgrade it to the latest version of TiDB to see these metrics.
-- If all the above scenarios are excluded, please contact technical support.
+
+If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.

@@ -62,7 +62,7 @@ To view metrics on the cluster overview page, take the following steps:
 
 ### Metrics on the cluster monitoring page
 
-The cluster monitoring page provides a full standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+The cluster monitoring page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
 To view metrics on the cluster monitoring page, take the following steps:
 
