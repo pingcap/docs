@@ -33,6 +33,6 @@ The following table lists the price of TiDB Cloud for each TiCDC Capacity Unit (
 | gcp/us-west1        |          $0.1452 |
 | gcp/us-central1     |          $0.1452 |
 | gcp/asia-northeast1 |          $0.1868 |
+| gcp/asia-northeast2 |          $0.1868 |
 | gcp/asia-southeast1 |          $0.1746 |
 | gcp/asia-east1      |          $0.1628 |
-| gcp/asia-northeast2 |          $0.1868 |
