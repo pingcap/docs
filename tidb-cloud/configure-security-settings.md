@@ -19,4 +19,4 @@ If you do not configure the root password or allowed IP addresses at that time, 
 
 > **Tip:**
 >
-> If you are viewing the overview page of your cluster, you can click the **Quick Start** tab on the page and configure these settings, too.
+> If you are viewing the overview page of your cluster, you can click the **Security Settings** tab on the page and configure these settings, too.
