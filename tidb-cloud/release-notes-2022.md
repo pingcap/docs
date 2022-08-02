@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## Aug xx, 2022
+## Aug 2, 2022
 
 * Optimize the UI of the [**Active Clusters**](https://staging.tidbcloud.com/console/clusters) page and the cluster details page:
     * Add **Connect** and **Import data** buttons to the **Active Clusters** page
