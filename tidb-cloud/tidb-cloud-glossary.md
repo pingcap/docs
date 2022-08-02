@@ -103,7 +103,7 @@ The storage node that stores the online transactional processing (OLTP) data. It
 
 ### traffic filter
 
-A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access the TiDB Cloud cluster via a SQL client. The traffic filter is empty by default.
+A list of IP addresses and Classless Inter-Domain Routing (CIDR) addresses that are allowed to access a TiDB Cloud cluster via [standard connection](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-standard-connection).
 
 ## V
 
