@@ -113,21 +113,22 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: after enabling this feature, you can specify a custom mapping rule between multiple Parquet files and a single target table. Enable this feature only if your Parquet files do not follow the naming rules in [Step 1](#step-1-prepare-the-parquet-files) and you want to import source data into the same target table.
+    - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import Parquet files whose filenames match a certain pattern to a single target table.
 
         > **Note:**
         >
-        > - After enabling this feature, one import task can only import one table at a time. If you want to merge and import data into different tables, you need to import several times, each time specifying a different target table.
-        > - It is recommended that you first import the majority of tables using **DB/Tables Filter**. After that, start several more import tasks, specifying the custom mapping rules to import data to target tables one at a time.
+        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-        When **Custom Pattern** is enabled, you are required to fill in the following fields:
+        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between Parquet files and a single target table in the following fields:
 
-        - **Object Name Pattern**: enter a pattern that matches the names of the Parquet files to be imported. For example:
+        - **Object Name Pattern**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly.
+
+            For example:
 
             - `my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) will be imported into the same target table.
             - `my-data*.parquet`: all Parquet files starting with `my-data` will be imported into the same target table.
 
-        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field accepts one specific table name only so wildcards are not supported.
+        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
 4. Click **Import**.
 
