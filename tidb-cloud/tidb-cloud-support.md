@@ -5,7 +5,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers support services to your organization. You can use the free **Basic** support plan in TiDB Cloud or upgrade to a paid plan for extended services.
+TiDB Cloud offers a free **Basic** support plan for each user and you can upgrade to a paid plan for extended services.
 
 The information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
 
@@ -23,7 +23,7 @@ To request support for your organization, project, or cluster, perform the follo
 
 3. Fill in the request information.
 
-4. Click **Submit** to submit your ticket. After the support team receives your ticket, they will reply to you via email. The response time depends on the support plan of your organization.
+4. Click **Submit** to submit your ticket. After the support team receives your ticket, they will reply to you via email. The response time depends on the [support plan](#check-or-upgrade-your-support-plan) of your organization.
 
 ## Check your submitted request
 
@@ -67,7 +67,7 @@ To check or upgrade your support plan, perform the following steps:
     To upgrade your plan to **Enterprise** or **Premium**:
 
     1. Click **Contact Sales** in the **Enterprise** or **Premium** pane. A **Contact Us** page is displayed.
-    2. Fill in and submit your contact information on the page. Then, the support team will contact you and help your further your subscription.
+    2. Fill in and submit your contact information on the page. Then, the support team will contact you and help you with your subscription.
 
     </div>
     </SimpleTab>
