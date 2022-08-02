@@ -25,13 +25,6 @@ To request support for your organization, project, or cluster, perform the follo
 
 4. Click **Submit** to submit your ticket. After the support team receives your ticket, they will reply to you via email. The response time depends on the support plan of your organization.
 
-5. Check your email to view the reply, your ticket history, and communication records.
-
-    Before the ticket is closed, you can continue to communicate with the support team via either of the following two methods:
-
-    - Replying to the email sent by the support team directly
-    - Clicking the ticket link attached in the email to go to the support portal to check and add comments to your ticket
-
 ## Check your submitted request
 
 After you have submitted a request, to check the status of your request, perform the following steps:
