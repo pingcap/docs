@@ -10,7 +10,7 @@ This document describes how to delete a TiDB cluster on TiDB Cloud.
 You can delete a cluster at any time by performing the following steps:
 
 1. Navigate to the **Active Clusters** page.
-2. Find the area of the cluster that you want to delete, and click **...** button in the upper-right corner of the area.
+2. Find the area of the cluster that you want to delete, and click **...** in the upper-right corner of the area.
 
     > **Tip:**
     >
