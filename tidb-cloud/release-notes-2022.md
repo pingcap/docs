@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Optimize the help information on the **Data Import** page to make it more clear.
 
-* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, Premium) to meet different support requirements of customers' organization.
+* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## July 28, 2022
 
