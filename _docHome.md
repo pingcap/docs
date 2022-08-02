@@ -27,7 +27,7 @@ Guides you through an easy way to get started with TiDB Cloud
 
 <DocHomeCard href="https://docs.pingcap.com/tidbcloud/tidb-cloud-poc" icon="cloud3" label="Perform a PoC with TiDB Cloud">
 
-Helps you quickly complete a TiDB Cloud PoC
+Helps you quickly complete a Proof of Concept (PoC) of TiDB Cloud
 
 </DocHomeCard>
 

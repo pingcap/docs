@@ -87,15 +87,15 @@ hide_commit: true
 
 [Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-overview)
 
-[Performance Tuning](https://docs.pingcap.com/tidb/stable/performance-tuning-methods)
+[Tuning Methods](https://docs.pingcap.com/tidb/stable/performance-tuning-methods)
 
-[Tune OLTP](https://docs.pingcap.com/tidb/stable/performance-tuning-practices)
+[Tune OLTP Performance](https://docs.pingcap.com/tidb/stable/performance-tuning-practices)
 
 [Tune Operating System](https://docs.pingcap.com/tidb/stable/tune-operating-system)
 
 [Tune Configurations](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
 
-[Tune SQL](https://docs.pingcap.com/tidb/stable/sql-tuning-overview)
+[Tune SQL Performance](https://docs.pingcap.com/tidb/stable/sql-tuning-overview)
 
 </LearningPath>
 

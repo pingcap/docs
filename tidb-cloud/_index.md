@@ -71,7 +71,7 @@ hide_commit: true
 
 </LearningPath>
 
-<LearningPath label="User Access" icon="users">
+<LearningPath label="Manage Access" icon="users">
 
 [Manage Passwords](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-passwords)
 
@@ -82,6 +82,8 @@ hide_commit: true
 [Invite a Member](https://docs.pingcap.com/tidbcloud/manage-user-access#invite-an-organization-member)
 
 [Configure Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#configure-member-roles)
+
+[Configure Security Settings](https://docs.pingcap.com/tidbcloud/configure-security-settings)
 
 </LearningPath>
 
