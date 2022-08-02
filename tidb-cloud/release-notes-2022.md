@@ -10,9 +10,11 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## Aug xx, 2022
 
-* 1. Add **Connect** and **Import data** buttons to cluster list page; 2. Move **Connect** and **Import data** buttons to top-right on cluster details page
+* Optimize the UI of the **Active Clusters** page and the cluster details page:
+    * Add **Connect** and **Import data** buttons to the **Active Clusters** page
+    * Move **Connect** and **Import data** buttons to the upper-right corner on cluster details page
 
-* Optimize UX/UI of cluster creation process
+* Optimize the UI of cluster creation process
 
 * Adds a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to provide a system-level entry for overall performance diagnosis.
 
