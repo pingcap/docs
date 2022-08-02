@@ -14,7 +14,8 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
     * Add **Connect** and **Import data** buttons to the **Active Clusters** page
     * Move **Connect** and **Import data** buttons to the upper-right corner on cluster details page
 
-* Optimize the UI of cluster creation process
+* Optimize the UI of cluster creation process. Now you can select your cluster Tier on the **Create Cluster
+** page.
 
 * Add a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to the **Diagnostics** tab for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier)
 
