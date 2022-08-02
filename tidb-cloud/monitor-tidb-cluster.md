@@ -64,6 +64,10 @@ To view metrics on the cluster overview page, take the following steps:
 
 The cluster monitoring page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
+> **Note:**
+>
+> Currently, the cluster monitoring page is unavailable for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+
 To view metrics on the cluster monitoring page, take the following steps:
 
 1. Navigate to the **Diagnosis** tab of a cluster.
