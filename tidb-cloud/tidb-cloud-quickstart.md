@@ -31,7 +31,7 @@ To create a free Developer Tier cluster, take the following steps:
 
 3. On the plan selection page, click **Get Started for Free** in the **Developer Tier** plan.
 
-4. On the **Create a Cluster** page, **Developer Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
+4. On the **Create Cluster** page, **Developer Tier** is selected by default. Update the default cluster name if necessary, and then select the region where you want to create your cluster.
 
 5. Click **Create**.
 
