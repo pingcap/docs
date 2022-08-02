@@ -49,6 +49,7 @@ aliases: ['/tidbcloud/beta/privacy-policy', '/tidbcloud/beta/terms-of-service', 
 <NavColumn>
 <ColumnTitle>Monitor and Alert</ColumnTitle>
 
+- [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
 - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
 - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
 - [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
