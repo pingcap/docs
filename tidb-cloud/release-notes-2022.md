@@ -36,8 +36,6 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
     * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
 
-* Optimize the UI of cluster creation process. Now you can select your cluster Tier on the **Create Cluster** page.
-
 ## July 28, 2022
 
 * Add the **Allow Access from Anywhere** button to the **Security Quick Start** dialog, which allows your cluster to be accessible by any IP addresses. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
