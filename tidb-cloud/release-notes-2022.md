@@ -8,6 +8,34 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## August 2, 2022
+
+* The `4 vCPU, 16 GiB` node size of TiDB and TiKV is now in General Availability (GA).
+
+    * For each `4 vCPU, 16 GiB` TiKV node, the storage size is between 200 GiB and 2 TiB.
+    * Suggested usage scenarios:
+
+        * Low workload production environments for SMB
+        * PoC and staging environments
+        * Development environments
+
+* Add a [Monitoring page](/tidb-cloud/built-in-monitoring.md) to the **Diagnosis** tab for [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
+
+    The Monitoring page provides a system-level entry for overall performance diagnosis. According to the top-down performance analysis methodology, the Monitoring page organizes TiDB performance metrics based on database time breakdown and displays these metrics in different colors. By checking these colors, you can identify performance bottlenecks of the entire system at the first glance, which significantly reduces performance diagnosis time and simplifies performance analysis and diagnosis.
+
+* Add a switch to enable or disable **Custom Pattern** on the **Data Import** page for CSV and Parquet source files.
+
+    The **Custom Pattern** feature is disabled by default. You can enable it when you are going to import CSV or Parquet files whose filenames match a certain pattern to a single target table.
+
+    For more information, see [Import CSV Files](/tidb-cloud/import-csv-files.md) and [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md).
+
+* Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+* Optimize the UI of the [Active Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+
+    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
+    * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
+
 ## July 28, 2022
 
 * Add the **Allow Access from Anywhere** button to the **Security Quick Start** dialog, which allows your cluster to be accessible by any IP addresses. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
