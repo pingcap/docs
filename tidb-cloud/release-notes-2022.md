@@ -9,18 +9,15 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
 ## Aug 2, 2022
-* "4 vCPU, 16 GiB" node size of TiDB and TiKV is now in General Availability (GA).
-    - Storage size is between 200GiB and 2TiB per TiKV node
-    - Suggested scenarios:
-        - low workload production environment for SMB 
-        - PoC and staging environment
-        - development environment
 
-* Optimize the UI of the [**Active Clusters**](https://staging.tidbcloud.com/console/clusters) page and the cluster details page:
-    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
-    * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
+* The `4 vCPU, 16 GiB` node size of TiDB and TiKV is now in General Availability (GA).
 
-* Optimize the UI of cluster creation process. Now you can select your cluster Tier on the **Create Cluster** page.
+    * For each `4 vCPU, 16 GiB` TiKV node, the storage size is between 200 GiB and 2 TiB.
+    * Suggested usage scenarios:
+
+        * Low workload production environment for SMB
+        * PoC and staging environment
+        * Development environment
 
 * Add a [Monitoring page](/tidb-cloud/monitor-built-in-monitoring.md) to the **Diagnostics** tab for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier)
 
@@ -32,9 +29,14 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     For more information, see [Import CSV Files](/tidb-cloud/import-csv-files.md) and [Import Apache Parquet Files](/tidb-cloud/import-parquet-files.md).
 
-* Optimize the help information on the **Data Import** page to make it more clear.
-
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+* Optimize the UI of the [**Active Clusters**](https://staging.tidbcloud.com/console/clusters) page and the cluster details page:
+
+    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
+    * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
+
+* Optimize the UI of cluster creation process. Now you can select your cluster Tier on the **Create Cluster** page.
 
 ## July 28, 2022
 
