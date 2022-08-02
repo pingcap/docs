@@ -3,65 +3,69 @@ title: Migrate from Amazon Aurora MySQL to TiDB Cloud in Bulk
 summary: Learn how to migrate data from Amazon Aurora MySQL to TiDB Cloud in bulk.
 ---
 
-# AuroraからTiDB Cloudに一括で移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
+# Amazon Aurora MySQL からTiDB Cloudに一括移行する {#migrate-from-amazon-aurora-mysql-to-tidb-cloud-in-bulk}
 
-このドキュメントでは、 TiDB Cloudコンソールのインポートツールを使用して、 AuroraからTiDB Cloudにデータを一括で移行する方法について説明します。
+このドキュメントでは、 TiDB Cloudコンソールのインポート ツールを使用して、Amazon Aurora MySQL からTiDB Cloudにデータを一括移行する方法について説明します。
 
-## TiDB Cloudコンソールでインポートタスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
+## TiDB Cloudコンソールでインポート タスクを作成する方法を学ぶ {#learn-how-to-create-an-import-task-on-the-tidb-cloud-console}
 
 データをインポートするには、次の手順を実行します。
 
-1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
+1.  [**アクティブなクラスター]**ページに移動します。
 
-2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
+2.  ターゲットクラスタの領域を見つけて、領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
 
-3.  [Amazon S3バケットを作成し、ソースデータファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソースデータを準備します。データの準備の部分で、さまざまな**データ形式**の長所と短所を確認できます。
+    > **ヒント：**
+    >
+    > または、[**アクティブなクラスター**] ページでターゲットクラスタの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
 
-4.  ソースデータの仕様に従って、[**データソースタイプ**]、[<strong>バケットURL</strong> ]、および<strong>[データ形式]</strong>フィールドに入力します。
+3.  [Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学びます](#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files)に従ってソース データを準備します。データの準備部分で、さまざまな**データ形式**の長所と短所を確認できます。
 
-5.  クラスタの接続設定に従って、**ターゲットデータベース**の<strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
+4.  ソース データの仕様に従って、 **Data Source Type** 、 <strong>Bucket URL</strong> 、および<strong>Data Format</strong>フィールドに入力します。
 
-6.  [クロスアカウントアクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウントアクセスのバケットポリシーとロールを作成します。
+5.  **ターゲット クラスタ**の<strong>[ユーザー名]</strong>フィールドと [<strong>パスワード</strong>] フィールドに入力します。
+
+6.  [クロスアカウント アクセスを構成する方法を学ぶ](#learn-how-to-configure-cross-account-access)に従って、クロスアカウント アクセス用のバケット ポリシーとロールを作成します。
 
 7.  [**インポート]**をクリックします。
 
-    データベースリソースの消費に関する警告メッセージが表示されます。
+    データベース リソースの消費に関する警告メッセージが表示されます。
 
 8.  [**確認]**をクリックします。
 
-    TiDB Cloudは、指定されたバケットURLのデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポートタスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URL のデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポート タスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
 > **ノート：**
 >
 > タスクが失敗した場合は、 [不完全なデータをクリーンアップする方法を学ぶ](#learn-how-to-clean-up-incomplete-data)を参照してください。
 
-## Amazon S3バケットを作成し、ソースデータファイルを準備する方法を学びます {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
+## Amazon S3 バケットを作成し、ソース データ ファイルを準備する方法を学びます {#learn-how-to-create-an-amazon-s3-bucket-and-prepare-source-data-files}
 
-データを準備するには、次の2つのオプションから1つを選択できます。
+データを準備するには、次の 2 つのオプションから 1 つを選択できます。
 
--   [オプション1：Dumplingを使用してソースデータファイルを準備する](#option-1-prepare-source-data-files-using-dumpling)
+-   [オプション 1: Dumplingを使用してソース データ ファイルを準備する](#option-1-prepare-source-data-files-using-dumpling)
 
-    EC2で[Dumpling](/dumpling-overview.md)を起動し、データをAmazonS3にエクスポートする必要があります。エクスポートするデータは、ソースデータベースの最新のデータです。これはオンラインサービスに影響を与える可能性があります。Dumplingは、データをエクスポートするときにテーブルをロックします。
+    EC2 で[Dumpling](/dumpling-overview.md)を起動し、データを Amazon S3 にエクスポートする必要があります。エクスポートするデータは、ソース データベースの現在の最新データです。これは、オンライン サービスに影響を与える可能性があります。 Dumplingは、データをエクスポートするときにテーブルをロックします。
 
--   [オプション2： Auroraスナップショットを使用してソースデータファイルを準備する](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
+-   [オプション 2: Amazon Auroraスナップショットを使用してソース データ ファイルを準備する](#option-2-prepare-source-data-files-using-amazon-aurora-snapshots)
 
-    これはオンラインサービスに影響します。 Amazon Auroraのエクスポートタスクは、データをAmazon S3にエクスポートする前に、最初にデータベースを復元してスケーリングするため、データをエクスポートするときに時間がかかる場合があります。詳細については、 [DBスナップショットデータをAmazonS3にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。
+    これはオンライン サービスに影響します。 Amazon Auroraのエクスポート タスクは、データを Amazon S3 にエクスポートする前に、最初にデータベースを復元してスケーリングするため、データのエクスポートには時間がかかる場合があります。詳細については、 [DB スナップショット データを Amazon S3 にエクスポートする](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_ExportSnapshot.html)を参照してください。
 
 ### 事前チェックと準備 {#prechecks-and-preparations}
 
 > **ノート：**
 >
-> 現在、2TBを超えるデータをインポートすることはお勧めしません。
+> 現在、2 TB を超えるデータをインポートすることはお勧めしません。
 >
 > 移行を開始する前に、次の事前チェックと準備を行う必要があります。
 
 #### 十分な空き容量を確保する {#ensure-enough-free-space}
 
-TiDBクラスタの空き領域がデータのサイズよりも大きいことを確認してください。各TiKVノードに600GBの空き領域を予約することをお勧めします。需要を満たすために、TiKVノードをさらに追加できます。
+TiDBクラスタの空き容量がデータのサイズよりも大きいことを確認してください。各 TiKV ノードに 600 GB の空き容量を確保することをお勧めします。需要を満たすために、さらに TiKV ノードを追加できます。
 
-#### データベースの照合順序セット設定を確認してください {#check-the-database-s-collation-set-settings}
+#### データベースの照合順序セットの設定を確認してください {#check-the-database-s-collation-set-settings}
 
-現在、TiDBは`utf8_general_ci`と`utf8mb4_general_ci`の照合順序のみをサポートしています。データベースの照合順序設定を確認するには、 Auroraに接続されているMySQLターミナルで次のコマンドを実行します。
+現在、TiDB は`utf8_general_ci`と`utf8mb4_general_ci`の照合順序のみをサポートしています。データベースの照合順序設定を確認するには、 Auroraに接続された MySQL ターミナルで次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -75,13 +79,13 @@ select * from ((select table_schema, table_name, column_name, collation_name fro
 Empty set (0.04 sec)
 ```
 
-TiDBが文字セットまたは照合順序をサポートしていない場合は、サポートされているタイプに変換することを検討してください。詳細については、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+TiDB が文字セットまたは照合順序をサポートしていない場合は、サポートされている型に変換することを検討してください。詳細については、 [文字セットと照合順序](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 
-### オプション1：Dumplingを使用してソースデータファイルを準備する {#option-1-prepare-source-data-files-using-dumpling}
+### オプション 1: Dumplingを使用してソース データ ファイルを準備する {#option-1-prepare-source-data-files-using-dumpling}
 
-次のデータエクスポートタスクを実行するには、EC2を準備する必要があります。追加料金を回避するために、 AuroraおよびS3と同じネットワーク上で実行することをお勧めします。
+次のデータ エクスポート タスクを実行するには、EC2 を準備する必要があります。追加料金を避けるために、 Auroraと S3 を同じネットワークで実行することをお勧めします。
 
-1.  EC2にDumplingをインストールします。
+1.  Dumplingを EC2 にインストールします。
 
     {{< copyable "" >}}
 
@@ -91,15 +95,15 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
     tiup install dumpling 
     ```
 
-    上記のコマンドでは、プロファイルファイルのパスに`~/.bash_profile`を変更する必要があります。
+    上記のコマンドでは、 `~/.bash_profile`をプロファイル ファイルのパスに変更する必要があります。
 
-2.  S3を書き込むためのDumplingに書き込み権限を付与します。
+2.  Dumplingに S3 を書き込むための書き込み権限を付与します。
 
     > **ノート：**
     >
-    > EC2にIAMロールを割り当てている場合は、アクセスキーとセキュリティキーの設定をスキップして、このEC2で直接Dumplingを実行できます。
+    > IAMロールを EC2 に割り当てている場合は、アクセス キーとセキュリティ キーの構成をスキップして、この EC2 でDumplingを直接実行できます。
 
-    環境内のAWSアカウントのアクセスキーとセキュリティキーを使用して、書き込み権限を付与できます。データを準備するための特定のキーペアを作成し、準備が完了したらすぐにアクセスキーを取り消します。
+    環境内の AWS アカウントのアクセス キーとセキュリティ キーを使用して、書き込み権限を付与できます。データを準備するための特定のキー ペアを作成し、準備が完了したらすぐにアクセス キーを無効にします。
 
     {{< copyable "" >}}
 
@@ -108,9 +112,9 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
     export AWS_SECRET_ACCESS_KEY=SecretKey
     ```
 
-3.  ソースデータベースをS3にバックアップします。
+3.  ソース データベースを S3 にバックアップします。
 
-    Dumplingを使用して、 Auroraからデータをエクスポートします。環境に応じて、山かっこ（&gt;）でコンテンツを置き換えてから、次のコマンドを実行します。データをエクスポートするときにフィルタールールを使用する場合は、 [テーブルフィルター](/table-filter.md#syntax)を参照してください。
+    Dumplingを使用して、Amazon Auroraからデータをエクスポートします。環境に基づいて、山括弧 (&gt;) 内の内容を置き換えてから、次のコマンドを実行します。データのエクスポート時にフィルター規則を使用する場合は、 [テーブル フィルター](/table-filter.md#syntax)を参照してください。
 
     {{< copyable "" >}}
 
@@ -137,15 +141,15 @@ TiDBが文字セットまたは照合順序をサポートしていない場合�
     -F 256MiB
     ```
 
-4.  TiDB Cloudのデータインポートタスクパネルで、**データ形式**として<strong>Dumpling</strong>を選択します。
+4.  TiDB Cloudのデータ インポート タスク パネルで、**データ形式**として<strong>TiDB Dumpling</strong>を選択します。
 
-### オプション2： Auroraスナップショットを使用してソースデータファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
+### オプション 2: Amazon Auroraスナップショットを使用してソース データ ファイルを準備する {#option-2-prepare-source-data-files-using-amazon-aurora-snapshots}
 
-#### データベースのスキーマをバックアップし、 TiDB Cloudで復元します {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
+#### データベースのスキーマをバックアップし、 TiDB Cloudで復元する {#back-up-the-schema-of-the-database-and-restore-on-tidb-cloud}
 
 Auroraからデータを移行するには、データベースのスキーマをバックアップする必要があります。
 
-1.  MySQLクライアントをインストールします。
+1.  MySQL クライアントをインストールします。
 
     {{< copyable "" >}}
 
@@ -177,40 +181,40 @@ Auroraからデータを移行するには、データベースのスキーマ�
     mysql -u ${dest_username} -h ${dest_endpoint} -P ${dest_port_number} -p -D${dest_database}<db.sql
     ```
 
-4.  TiDB Cloudのデータインポートタスクパネルで、**データ形式**として<strong>Aurora</strong>を選択します。
+4.  TiDB Cloudのデータ インポート タスク パネルで、 **Aurora Backup Snapshot**を<strong>Data Format</strong>として選択します。
 
-#### スナップショットを取り、S3にエクスポートします {#take-a-snapshot-and-export-it-to-s3}
+#### スナップショットを作成して S3 にエクスポートする {#take-a-snapshot-and-export-it-to-s3}
 
-1.  Amazon RDSコンソールから[スナップショット]を選択し、[**スナップショット**の取得]をクリックして手動スナップ<strong>ショット</strong>を作成します。
+1.  Amazon RDS コンソールから [スナップショット] を選択し、[**スナップショット**の取得] をクリックして手動スナップ<strong>ショット</strong>を作成します。
 
-2.  [**スナップショット名]**の下の空欄に入力します。 [<strong>スナップショットを撮る]を</strong>クリックします。スナップショットの作成が完了すると、スナップショットがスナップショットテーブルの下に表示されます。
+2.  [**スナップショット名]**の下の空白を埋めます。 [<strong>スナップショットを撮る] を</strong>クリックします。スナップショットの作成が完了すると、スナップショットがスナップショット テーブルの下に表示されます。
 
-3.  作成したスナップショットを選択し、[**アクション**]をクリックします。ドロップダウンボックスで、[ <strong>AmazonS3にエクスポート]を</strong>クリックします。
+3.  取得したスナップショットを選択し、[**アクション**] をクリックします。ドロップダウン ボックスで、[ <strong>Amazon S3 にエクスポート] を</strong>クリックします。
 
-4.  **エクスポート識別子**の下の空白を埋めます。
+4.  [**エクスポート識別子**] の下の空白を埋めます。
 
-5.  エクスポートするデータの量を選択します。このガイドでは、 **[すべて]**が選択されています。部分を選択して識別子を使用し、データベースのどの部分をエクスポートする必要があるかを決定することもできます。
+5.  エクスポートするデータの量を選択します。このガイドでは、**すべて**が選択されています。データベースのどの部分をエクスポートする必要があるかを決定するために識別子を使用する部分を選択することもできます。
 
-6.  スナップショットを保存するS3バケットを選択します。新しいバケットを作成して、セキュリティ上の懸念事項のためにデータを保存できます。 TiDBクラスタと同じリージョンでバケットを使用することをお勧めします。リージョン間でデータをダウンロードすると、追加のネットワークコストが発生する可能性があります。
+6.  スナップショットを保存する S3 バケットを選択します。セキュリティ上の懸念から、新しいバケットを作成してデータを保存できます。 TiDBクラスタと同じリージョンでバケットを使用することをお勧めします。リージョン間でデータをダウンロードすると、追加のネットワーク コストが発生する可能性があります。
 
-7.  適切なIAMロールを選択して、S3バケットへの書き込みアクセスを許可します。後でスナップショットをTiDB Cloudにインポートするときに使用されるため、この役割をメモしてください。
+7.  S3 バケットへの書き込みアクセスを許可する適切なIAMロールを選択します。後でスナップショットをTiDB Cloudにインポートするときに使用するため、このロールをメモしておきます。
 
-8.  適切なAWSKMSキーを選択し、 IAMロールがKMSキーユーザーにすでに追加されていることを確認します。ロールを追加するには、KSMサービスを選択し、キーを選択して、[**追加**]をクリックします。
+8.  適切な AWS KMS キーを選択し、 IAMロールが KMS キー ユーザーに既に追加されていることを確認します。役割を追加するには、KSM サービスを選択し、キーを選択して、[**追加**] をクリックします。
 
-9.  [ **AmazonS3のエクスポート]**をクリックします。タスクテーブルで進行状況を確認できます。
+9.  [ **Amazon S3 のエクスポート]**をクリックします。タスク テーブルで進行状況を確認できます。
 
-10. タスクテーブルから、宛先バケットを記録します（たとえば、 `s3://snapshot-bucket/snapshot-samples-1` ）。
+10. タスク テーブルから、宛先バケットを記録します (たとえば、 `s3://snapshot-bucket/snapshot-samples-1` )。
 
-## クロスアカウントアクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
+## クロスアカウント アクセスを構成する方法を学ぶ {#learn-how-to-configure-cross-account-access}
 
-TiDB CloudクラスタとS3バケットは異なるAWSアカウントにあります。 TiDB CloudクラスタがS3バケット内のソースデータファイルにアクセスできるようにするには、AmazonS3へのクロスアカウントアクセスを設定する必要があります。詳細については、 [AmazonS3アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
+TiDB Cloudクラスタと S3 バケットは、別の AWS アカウントにあります。 TiDB Cloudクラスタが S3 バケット内のソース データ ファイルにアクセスできるようにするには、Amazon S3 へのクロスアカウント アクセスを構成する必要があります。詳細については、 [Amazon S3 アクセスの構成](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access)を参照してください。
 
-完了すると、クロスアカウントのポリシーと役割が作成されます。その後、 TiDB Cloudのデータインポートタスクパネルで構成を続行できます。
+完了すると、クロスアカウントのポリシーとロールが作成されます。その後、 TiDB Cloudのデータ インポート タスク パネルで構成を続行できます。
 
-## フィルタルールを設定する方法を学ぶ {#learn-how-to-set-up-filter-rules}
+## フィルター ルールの設定方法を確認する {#learn-how-to-set-up-filter-rules}
 
-[テーブルフィルター](/table-filter.md#syntax)ドキュメントを参照してください。
+[テーブル フィルター](/table-filter.md#syntax)ドキュメントを参照してください。
 
 ## 不完全なデータをクリーンアップする方法を学ぶ {#learn-how-to-clean-up-incomplete-data}
 
-要件を再度確認できます。すべての問題が解決したら、不完全なデータベースを削除して、インポートプロセスを再開できます。
+要件を再度確認できます。すべての問題が解決したら、不完全なデータベースを削除して、インポート プロセスを再開できます。

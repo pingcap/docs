@@ -5,33 +5,33 @@ summary: Learn about billing for changefeeds in TiDB Cloud.
 
 # チェンジフィード請求 {#changefeed-billing}
 
-TiDB Cloudは、TiCDCキャパシティユニット（TCU）でチェンジフィードのキャパシティを測定します。クラスタの最初のチェンジフィードを作成すると、 TiDB Cloudは自動的にTiCDCキャパシティーユニット（TCU）をセットアップし、これらのTiCDCキャパシティーユニットの料金が請求されます。単一のクラスタで作成されたすべてのチェンジフィードは、同じTiCDCキャパシティーユニットを共有します。
+TiDB Cloudは、変更フィードの容量を TiCDC 容量単位 (TCU) で測定します。クラスタの最初の変更フィードを作成すると、 TiDB Cloudは TiCDC キャパシティー ユニット (TCU) を自動的にセットアップし、これらの TiCDC キャパシティー ユニットに対して課金されます。 1 つのクラスタで作成されたすべての変更フィードは、同じ TiCDC キャパシティー ユニットを共有します。
 
-## TiCDC容量ユニットの数 {#number-of-ticdc-capacity-units}
+## TiCDC キャパシティーユニットの数 {#number-of-ticdc-capacity-units}
 
-TiDBクラスタごとに、TiCDCキャパシティーユニットの数は、クラスタのすべてのTiKVノードの合計vCPU数に応じて、 TiDB Cloudによって次のように設定されます。
+TiDBクラスタごとに、クラスタ内のすべての TiKV ノードの合計 vCPU 数に従って、TiCDC キャパシティー ユニットの数がTiDB Cloudによって次のように設定されます。
 
-| すべてのTiKVノードの合計vCPU | TCUの数 |
-| ------------------ | ----- |
-| &lt;48             | 16    |
-| = 48、および&lt;120    | 24    |
-| = 120、および&lt;= 168 | 32    |
-| 168                | 40    |
+| すべての TiKV ノードの合計 vCPU | TCUの数 |
+| --------------------- | ----- |
+| &lt; 48               | 16    |
+| = 48、および &lt; 120     | 24    |
+| = 120、および &lt;= 168   | 32    |
+| 168                   | 40    |
 
 ## 価格 {#price}
 
-次の表に、各TiCDCキャパシティユニット（TCU）のTiDB Cloudの価格を示します。
+次の表に、各 TiCDC キャパシティ ユニット (TCU) のTiDB Cloudの価格を示します。
 
-| リージョン                 | TCU価格（$ / hr） |
-| --------------------- | ------------- |
-| aws / us-west-2       | 0.1307ドル      |
-| aws / us-east-1       | 0.1307ドル      |
-| aws / ap-northeast-1  | 0.1669ドル      |
-| aws / ap-southeast-1  | 0.1623ドル      |
-| aws / eu-central-1    | 0.1564ドル      |
-| aws / ap-south-1      | 0.1393ドル      |
-| gcp / us-west1        | 0.1452ドル      |
-| gcp / us-central1     | 0.1452ドル      |
-| gcp / asia-northeast1 | 0.1868ドル      |
-| gcp / asia-southeast1 | 0.1746ドル      |
-| gcp / asia-east1      | 0.1628ドル      |
+| クラウド プロバイダー | リージョン                    | TCU 料金 ($/時) |
+| ----------- | ------------------------ | ------------ |
+| AWS         | オレゴン (us-west-2)         | $0.1307      |
+| AWS         | 北バージニア (us-east-1)       | $0.1307      |
+| AWS         | ムンバイ (ap-south-1)        | $0.1393      |
+| AWS         | シンガポール (ap-southeast-1)  | $0.1623      |
+| AWS         | 東京 (ap-northeast-1)      | $0.1669      |
+| AWS         | フランクフルト (eu-central-1)   | $0.1564      |
+| GCP         | オレゴン (us-west1)          | $0.1452      |
+| GCP         | アイオワ (us-central1)       | $0.1452      |
+| GCP         | シンガポール (asia-southeast1) | $0.1746      |
+| GCP         | 台湾 (asia-east1)          | $0.1628      |
+| GCP         | 東京 (asia-northeast1)     | $0.1868      |

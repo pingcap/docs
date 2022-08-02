@@ -3,19 +3,19 @@ title:  Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud
 summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiDB Cloud.
 ---
 
-# AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}
+# Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする {#import-apache-parquet-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
-非圧縮データファイルとSnappy圧縮[アパッチパーケット](https://parquet.apache.org/)形式データファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、ParquetファイルをAmazon Simple Storage Service（Amazon S3）またはGoogle Cloud Storage（GCS）からTiDB Cloudにインポートする方法について説明します。
-
-> **ノート：**
->
-> TiDB Cloudは、Parquetファイルの空のテーブルへのインポートのみをサポートします。すでにデータが含まれている既存のテーブルにデータをインポートするには、 TiDB Cloudを使用して、このドキュメントに従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
-
-## ステップ1.寄木細工のファイルを準備します {#step-1-prepare-the-parquet-files}
+非圧縮および Snappy 圧縮[アパッチ寄木細工](https://parquet.apache.org/)形式のデータ ファイルの両方をTiDB Cloudにインポートできます。このドキュメントでは、Amazon Simple Storage Service (Amazon S3) または Google Cloud Storage (GCS) からTiDB Cloudに Parquet ファイルをインポートする方法について説明します。
 
 > **ノート：**
 >
-> 現在、 TiDB Cloudは、次のデータ型のいずれかを含むParquetファイルのインポートをサポートしていません。インポートするParquetファイルにそのようなデータ型が含まれている場合は、最初に[サポートされているデータ型](#supported-data-types) （たとえば、 `STRING` ）を使用してParquetファイルを再生成する必要があります。または、AWS Glueなどのサービスを使用して、データ型を簡単に変換することもできます。
+> TiDB Cloudは、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従って、 TiDB Cloudを使用してデータを一時的な空のテーブルにインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
+
+## ステップ 1.Parquet ファイルを準備する {#step-1-prepare-the-parquet-files}
+
+> **ノート：**
+>
+> 現在、 TiDB Cloudは、次のデータ型のいずれかを含む Parquet ファイルのインポートをサポートしていません。インポートする Parquet ファイルにそのようなデータ型が含まれている場合は、最初に[サポートされているデータ型](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。または、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
 >
 > -   `LIST`
 > -   `NEST STRUCT`
@@ -23,117 +23,168 @@ summary: Learn how to import Apache Parquet files from Amazon S3 or GCS into TiD
 > -   `ARRAY`
 > -   `MAP`
 
-1.  Parquetファイルが256MBより大きい場合は、ファイルをそれぞれ256MB前後のサイズの小さなファイルに分割することを検討してください。
+1.  Parquet ファイルが 256 MB より大きい場合は、それぞれのサイズが約 256 MB の小さなファイルに分割することを検討してください。
 
-    TiDB Cloudは、非常に大きなParquetファイルのインポートをサポートしていますが、サイズが約256MBの複数の入力ファイルで最高のパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上するためです。
+    TiDB Cloudは、非常に大きな Parquet ファイルのインポートをサポートしていますが、サイズが 256 MB 前後の複数の入力ファイルで最高のパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上する可能性があるためです。
 
-2.  バケット内の既存のオブジェクトの命名規則に従って、インポートする寄木細工のファイルの名前と一致するテキストパターンを特定します。
+2.  次のように Parquet ファイルに名前を付けます。
 
-    たとえば、バケット内のすべてのデータファイルをインポートするには、ワイルドカード記号`*`または`*.parquet`をパターンとして使用できます。同様に、パーティション`station=402260`にデータファイルのサブセットをインポートするには、 `*station=402260*`をパターンとして使用できます。 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)でTiDB Cloudに提供する必要があるため、このパターンをメモしてください。
+    -   Parquet ファイルにテーブル全体のすべてのデータが含まれている場合は、ファイルに`${db_name}.${table_name}.parquet`形式の名前を付けます。これは、データをインポートするときに`${db_name}.${table_name}`テーブルにマップされます。
 
-## 手順2.ターゲットデータベースとテーブルスキーマを作成します {#step-2-create-the-target-database-and-table-schema}
-
-ParquetファイルをTiDB Cloudにインポートする前に、ターゲットデータベースとテーブルを作成する必要があります。または、次のようにターゲットデータベースとテーブルスキーマを指定すると、 TiDB Cloudはインポートプロセスの一部としてこれらのオブジェクトを作成できます。
-
-1.  寄木細工のファイルが配置されているAmazonS3またはGCSディレクトリに、 `CREATE DATABASE`ステートメントを含む`${db_name}-schema-create.sql`ファイルを作成します。
-
-    たとえば、次のステートメントを含む`mydb-scehma-create.sql`のファイルを作成できます。
-
-    {{< copyable "" >}}
-
-    ```sql
-    CREATE DATABASE mydb;
-    ```
-
-2.  寄木細工のファイルが配置されているAmazonS3またはGCSディレクトリに、 `CREATE TABLE`ステートメントを含む`${db_name}.${table_name}-schema.sql`ファイルを作成します。
-
-    たとえば、次のステートメントを含む`mydb.mytable-schema.sql`のファイルを作成できます。
-
-    {{< copyable "" >}}
-
-    ```sql
-    CREATE TABLE mytable (
-    ID INT,
-    REGION VARCHAR(20),
-    COUNT INT );
-    ```
+    -   1 つのテーブルのデータが複数の Parquet ファイルに分割されている場合は、これらの Parquet ファイルに数値のサフィックスを追加します。たとえば、 `${db_name}.${table_name}.000001.parquet`と`${db_name}.${table_name}.000002.parquet`です。数値サフィックスは連続していなくてもかまいませんが、昇順でなければなりません。また、数字の前にゼロを追加して、すべてのサフィックスが同じ長さになるようにする必要もあります。
 
     > **ノート：**
     >
-    > `${db_name}.${table_name}-schema.sql`のファイルには、1つのDDLステートメントのみを含める必要があります。ファイルに複数のDDLステートメントが含まれている場合、最初のステートメントのみが有効になります。
+    > 上記のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合など) は、ファイル名を変更せずに[ステップ 4](#step-4-import-parquet-files-to-tidb-cloud)の**カスタム パターン**を使用してソース データをインポートできます。単一のターゲット テーブルに。
 
-## 手順3.クロスアカウントアクセスを構成する {#step-3-configure-cross-account-access}
+## ステップ 2. ターゲット表スキーマを作成する {#step-2-create-the-target-table-schemas}
 
-TiDBCloudがTiDB CloudまたはGCSバケット内のParquetファイルにアクセスできるようにするには、次のいずれかを実行します。
+Parquet ファイルにはスキーマ情報が含まれていないため、Parquet ファイルからTiDB Cloudにデータをインポートする前に、次のいずれかの方法を使用してテーブル スキーマを作成する必要があります。
 
--   ParquetファイルがAmazonS3にある場合、 [AmazonS3へのクロスアカウントアクセスを設定します](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) 。
+-   方法 1: TiDB Cloudで、ソース データのターゲット データベースとテーブルを作成します。
 
-    終了したら、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、役割ARN値をメモします。
+-   方法 2: Parquet ファイルが配置されている Amazon S3 または GCS ディレクトリで、ソース データのターゲット テーブル スキーマ ファイルを次のように作成します。
 
--   ParquetファイルがGCSにある場合は、 [GCSへのクロスアカウントアクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) 。
+    1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-## ステップ4.ParquetファイルをTiDB Cloudにインポートする {#step-4-import-parquet-files-to-tidb-cloud}
+        Parquet ファイルが[ステップ1](#step-1-prepare-the-parquet-files)の命名規則に従っている場合、データベース スキーマ ファイルはデータ インポートのオプションです。それ以外の場合、データベース スキーマ ファイルは必須です。
 
-ParquetファイルをTiDB Cloudにインポートするには、次の手順を実行します。
+        各データベース スキーマ ファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDL ステートメントを含む必要があります。このファイルを使用すると、 TiDB Cloudは、データをインポートするときにデータを格納するための`${db_name}`のデータベースを作成します。
 
-1.  [TiDBクラスター]ページに移動し、ターゲットクラスタの名前をクリックします。ターゲットクラスタの概要ページが表示されます。
+        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、データをインポートするときにTiDB Cloudによって`mydb`データベースが作成されます。
 
-2.  左側のクラスタ情報ペインで、[**インポート**]をクリックします。 [<strong>データインポートタスク]</strong>ページが表示されます。
+        {{< copyable "" >}}
 
-3.  [**データインポートタスク]**ページで、次の情報を入力します。
+        ```sql
+        CREATE DATABASE mydb;
+        ```
 
-    -   **データソースタイプ**：データソースのタイプを選択します。
-    -   **バケットURL** ：Parquetファイルが配置されているバケットURLを選択します。
-    -   **データ形式**：<strong>寄木細工</strong>を選択します。
-    -   **クレデンシャルのセットアップ**（このフィールドはAWS S3でのみ表示されます）： <strong>Role-ARNの</strong>RoleARN値を入力します。
-    -   **ターゲットデータベース**： <strong>[ユーザー名]</strong>フィールドと[<strong>パスワード</strong>]フィールドに入力します。
-    -   **DB /テーブルフィルター**：必要に応じて、 [テーブルフィルター](/table-filter.md#syntax)を指定できます。複数のフィルタールールを構成する場合は、 `,`を使用してルールを区切ります。
-    -   **オブジェクト名パターン**：インポートするParquetファイルの名前と一致するパターンを入力します。たとえば、 `my-data.parquet` 。
-    -   **ターゲットテーブル名**：ターゲットテーブルの名前を入力します。たとえば、 `mydb.mytable` 。
+    2.  ソース データのテーブル スキーマ ファイルを作成します。
+
+        Parquet ファイルが配置されている Amazon S3 または GCS ディレクトリにテーブル スキーマ ファイルを含めない場合、データをインポートするときに、 TiDB Cloudは対応するテーブルを作成しません。
+
+        各テーブル スキーマ ファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL ステートメントを含む必要があります。このファイルを使用すると、データをインポートすると、 TiDB Cloudは`${db_name}`データベースに`${db_table}`テーブルを作成します。
+
+        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、データをインポートすると、 TiDB Cloudは`mydb`データベースに`mytable`テーブルを作成します。
+
+        {{< copyable "" >}}
+
+        ```sql
+        CREATE TABLE mytable (
+        ID INT,
+        REGION VARCHAR(20),
+        COUNT INT );
+        ```
+
+        > **ノート：**
+        >
+        > 各`${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL ステートメントのみを含める必要があります。ファイルに複数の DDL ステートメントが含まれている場合、最初のステートメントのみが有効になります。
+
+## ステップ 3. クロスアカウント アクセスを構成する {#step-3-configure-cross-account-access}
+
+TiDB Cloudが Amazon S3 または GCS バケット内の Parquet ファイルにアクセスできるようにするには、次のいずれかを実行します。
+
+-   Parquet ファイルが Amazon S3 にある場合、 [Amazon S3 へのクロスアカウント アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) .
+
+    完了したら、 [ステップ 4](#step-4-import-parquet-files-to-tidb-cloud)で必要になるため、Role ARN の値を書き留めます。
+
+-   Parquet ファイルが GCS にある場合は、 [GCS へのクロスアカウント アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) .
+
+## ステップ 4. Parquet ファイルをTiDB Cloudにインポートする {#step-4-import-parquet-files-to-tidb-cloud}
+
+Parquet ファイルをTiDB Cloudにインポートするには、次の手順を実行します。
+
+1.  [**アクティブなクラスター]**ページに移動します。
+
+2.  ターゲットクラスタの領域を見つけて、領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
+
+    > **ヒント：**
+    >
+    > または、[**アクティブなクラスター**] ページでターゲットクラスタの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
+
+3.  [**データ インポート タスク]**ページで、次の情報を指定します。
+
+    -   **データ ソース タイプ**: データ ソースのタイプを選択します。
+
+    -   **バケット URL** : Parquet ファイルが配置されているバケット URL を選択します。
+
+    -   **データ形式**: <strong>Parquet</strong>を選択します。
+
+    -   **資格情報の設定**(このフィールドは AWS S3 でのみ表示されます): <strong>Role-ARN</strong>の Role ARN 値を入力します。
+
+    -   **ターゲット クラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
+
+    -   **DB/Tables Filter** : インポートするテーブルをフィルタリングする場合は、このフィールドに`,`で区切られた 1 つ以上のテーブル フィルターを指定できます。
+
+        例えば：
+
+        -   `db01.*` : `db01`データベース内のすべてのテーブルがインポートされます。
+        -   `db01.table01*,db01.table02*` : `db01`データベースの`table01`と`table02`で始まるすべてのテーブルがインポートされます。
+        -   `!db02.*` : `db02`データベースのテーブルを除き、他のすべてのテーブルがインポートされます。 `!`は、インポートする必要のないテーブルを除外するために使用されます。
+        -   `*.*` : すべてのテーブルがインポートされます。
+
+        詳細については、 [テーブル フィルター snytax](/table-filter.md#syntax)を参照してください。
+
+    -   **カスタム パターン**: ファイル名が特定のパターンに一致する Parquet ファイルを単一のターゲット テーブルにインポートする場合は、<strong>カスタム パターン</strong>機能を有効にします。
+
+        > **ノート：**
+        >
+        > この機能を有効にすると、1 つのインポート タスクで一度に 1 つのテーブルにのみデータをインポートできます。この機能を使用してデータを別のテーブルにインポートする場合は、インポートするたびに別のターゲット テーブルを指定して、複数回インポートする必要があります。
+
+        **カスタム パターン**が有効になっている場合、次のフィールドで、Parquet ファイルと単一のターゲット テーブルとの間のカスタム マッピング ルールを指定する必要があります。
+
+        -   **オブジェクト名パターン**: インポートする Parquet ファイルの名前と一致するパターンを入力します。 Parquet ファイルが 1 つしかない場合は、ここにファイル名を直接入力できます。
+
+            例えば：
+
+            -   `my-data?.parquet` : `my-data`と 1 文字 ( `my-data1.parquet`と`my-data2.parquet`など) で始まるすべての Parquet ファイルが同じターゲット テーブルにインポートされます。
+            -   `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルが同じターゲット テーブルにインポートされます。
+
+        -   **ターゲット テーブル名**: TiDB Cloudのターゲット テーブルの名前を入力します。これは`${db_name}.${table_name}`形式である必要があります。たとえば、 `mydb.mytable`です。このフィールドは特定のテーブル名を 1 つしか受け付けないため、ワイルドカードはサポートされていないことに注意してください。
 
 4.  [**インポート]**をクリックします。
 
-    データベースリソースの消費に関する警告メッセージが表示されます。
+    データベース リソースの消費に関する警告メッセージが表示されます。
 
 5.  [**確認]**をクリックします。
 
-    TiDB Cloudは、指定されたバケットURLのデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポートタスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
+    TiDB Cloudは、指定されたバケット URL のデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポート タスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
-6.  インポートの進行状況が成功を示したら、TotalFilesの後の数を確認し**ます**。
+6.  インポートの進行状況が成功を示したら、 **Total Files:**の後の数字を確認します。
 
-    数値がゼロの場合は、[**オブジェクト名パターン]**フィールドに入力した値と一致するデータファイルがないことを意味します。この場合、「<strong>オブジェクト名パターン」</strong>フィールドにタイプミスがあるかどうかを確認して、再試行してください。
+    数値がゼロの場合は、[**オブジェクト名パターン]**フィールドに入力した値と一致するデータ ファイルがないことを意味します。この場合、[<strong>オブジェクト名のパターン]</strong>フィールドに入力ミスがないかどうかを確認し、再試行してください。
 
-インポートタスクの実行時に、サポートされていない変換または無効な変換が検出されると、 TiDB Cloudはインポートジョブを自動的に終了し、インポートエラーを報告します。
+インポート タスクの実行時に、サポートされていない変換または無効な変換が検出された場合、 TiDB Cloudはインポート ジョブを自動的に終了し、インポート エラーを報告します。
 
-インポートエラーが発生した場合は、次の手順を実行してください。
+インポート エラーが発生した場合は、次の手順を実行します。
 
 1.  部分的にインポートされたテーブルを削除します。
 
-2.  テーブルスキーマファイルを確認してください。エラーがある場合は、テーブルスキーマファイルを修正してください。
+2.  テーブル スキーマ ファイルを確認してください。エラーがある場合は、テーブル スキーマ ファイルを修正します。
 
-3.  Parquetファイルのデータ型を確認してください。
+3.  Parquet ファイルのデータ型を確認します。
 
-    Parquetファイルにサポートされていないデータ型（たとえば、 `NEST STRUCT` 、または`ARRAY` ）が含まれている場合は、 `MAP` （たとえば、 [サポートされているデータ型](#supported-data-types) ）を使用して`STRING`ファイルを再生成する必要があります。
+    サポートされていないデータ型 ( `NEST STRUCT` 、 `ARRAY` 、または`MAP`など) が Parquet ファイルに含まれている場合は、 [サポートされているデータ型](#supported-data-types) ( `STRING`など) を使用して Parquet ファイルを再生成する必要があります。
 
-4.  インポートタスクを再試行してください。
+4.  インポート タスクを再試行します。
 
 ## サポートされているデータ型 {#supported-data-types}
 
-次の表に、TiDBCloudにインポートできるサポートされているTiDB Cloudデータ型を示します。
+次の表に、 TiDB Cloudにインポートできる、サポートされている Parquet データ型を示します。
 
-| 寄木細工のプリミティブタイプ          | 寄木細工の論理タイプ       | TiDBまたはMySQLのタイプ                                                                                                                                                                               |
-| ----------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ダブル                     | ダブル              | ダブル<br/>浮く                                                                                                                                                                                     |
-| FIXED_LEN_BYTE_ARRAY（9） | DECIMAL（20,0）    | BIGINT UNSIGNED                                                                                                                                                                                |
-| FIXED_LEN_BYTE_ARRAY（N） | DECIMAL（p、s）     | 10進数<br/>数値                                                                                                                                                                                    |
-| INT32                   | DECIMAL（p、s）     | 10進数<br/>数値                                                                                                                                                                                    |
-| INT32                   | 該当なし             | INT<br/> MEDIUMINT<br/>年                                                                                                                                                                       |
-| INT64                   | DECIMAL（p、s）     | 10進数<br/>数値                                                                                                                                                                                    |
-| INT64                   | 該当なし             | BIGINT<br/> INT UNSIGNED<br/> MEDIUMINT UNSIGNED                                                                                                                                               |
-| INT64                   | TIMESTAMP_MICROS | 日付時刻<br/>タイムスタンプ                                                                                                                                                                               |
-| BYTE_ARRAY              | 該当なし             | バイナリ<br/>少し<br/>BLOB<br/> CHAR<br/> LINESTRING<br/> LONGBLOB<br/> MEDIUMBLOB<br/> MULTILINESTRING<br/> TINYBLOB<br/> VARBINARY                                                                 |
-| BYTE_ARRAY              | ストリング            | ENUM<br/>日にち<br/>10進数<br/>幾何学<br/>GEOMETRYCOLLECTION<br/> JSON<br/> LONGTEXT<br/> MEDIUMTEXT<br/>マルチポイント<br/>MULTIPOLYGON<br/>数値<br/>点<br/>ポリゴン<br/>設定<br/>文章<br/>時間<br/>TINYTEXT<br/> VARCHAR |
-| SMALLINT                | 該当なし             | INT32                                                                                                                                                                                          |
-| SMALLINT UNSIGNED       | 該当なし             | INT32                                                                                                                                                                                          |
-| TINYINT                 | 該当なし             | INT32                                                                                                                                                                                          |
-| TINYINT UNSIGNED        | 該当なし             | INT32                                                                                                                                                                                          |
+| 寄木細工プリミティブ型             | 寄木細工の論理型         | TiDB または MySQL の型                                                                                                                                                   |
+| ----------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ダブル                     | ダブル              | ダブル<br/>浮く                                                                                                                                                          |
+| FIXED_LEN_BYTE_ARRAY(9) | 10 進数 (20,0)     | BIGINT 未署名                                                                                                                                                          |
+| FIXED_LEN_BYTE_ARRAY(N) | DECIMAL(p,s)     | 小数<br/>数値                                                                                                                                                           |
+| INT32                   | DECIMAL(p,s)     | 小数<br/>数値                                                                                                                                                           |
+| INT32                   | なし               | INT<br/>ミディアムミント<br/>年                                                                                                                                              |
+| INT64                   | DECIMAL(p,s)     | 小数<br/>数値                                                                                                                                                           |
+| INT64                   | なし               | BIGINT<br/>符号なし整数<br/>ミディアムミント 未署名                                                                                                                                  |
+| INT64                   | TIMESTAMP_MICROS | 日付時刻<br/>タイムスタンプ                                                                                                                                                    |
+| バイト配列                   | なし               | バイナリ<br/>少し<br/>BLOB<br/> CHAR<br/> LINESTRING<br/>ロングブロブ<br/>ミディアムブロブ<br/>複数行文字列<br/>小さな塊<br/>VARBINARY                                                            |
+| バイト配列                   | ストリング            | 列挙型<br/>日にち<br/>小数<br/>ジオメトリ<br/>ジオメトリコレクション<br/>JSON<br/>ロングテキスト<br/>中文<br/>マルチポイント<br/>マルチポリゴン<br/>数値<br/>点<br/>ポリゴン<br/>設定<br/>文章<br/>時間<br/>小さなテキスト<br/>VARCHAR |
+| SMALLINT                | なし               | INT32                                                                                                                                                               |
+| SMALLINT 未署名            | なし               | INT32                                                                                                                                                               |
+| TINYINT                 | なし               | INT32                                                                                                                                                               |
+| TINYINT UNSIGNED        | なし               | INT32                                                                                                                                                               |

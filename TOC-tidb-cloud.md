@@ -3,83 +3,84 @@
 <!-- markdownlint-disable MD041 -->
 
 -   TiDB Cloudについて
-    -   [TiDB Cloudが選ばれる理由](/tidb-cloud/tidb-cloud-intro.md)
+    -   [TiDB Cloudを選ぶ理由](/tidb-cloud/tidb-cloud-intro.md)
     -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
     -   [高可用性](/tidb-cloud/high-availability-with-multi-az.md)
-    -   [MySQLの互換性](/mysql-compatibility.md)
--   はじめに
-    -   [TiDB Cloud試しください](/tidb-cloud/tidb-cloud-quickstart.md)
-    -   [HTAPをお試しください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-    -   [PoCを実行する](/tidb-cloud/tidb-cloud-poc.md)
+    -   [MySQL の互換性](/mysql-compatibility.md)
+-   始めましょう
+    -   [TiDB Cloudを試す](/tidb-cloud/tidb-cloud-quickstart.md)
+    -   [HTAP を試す](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+    -   [PoC を実施する](/tidb-cloud/tidb-cloud-poc.md)
 -   クラスターの管理
     -   クラスターを計画する
         -   [クラスター層を選択する](/tidb-cloud/select-cluster-tier.md)
-        -   [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
-    -   [TiDBクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
-    -   TiDBクラスターに接続する
-        -   [SQLクライアントを介して接続する](/tidb-cloud/connect-to-tidb-cluster.md)
-        -   [SQLシェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)
-    -   TiFlashでHTAPクラスターを使用する
-        -   [TiFlashの概要](/tiflash/tiflash-overview.md)
-        -   [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
-        -   [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
-        -   [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
+        -   [TiDB のサイズを決定する](/tidb-cloud/size-your-cluster.md)
+    -   [TiDB クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
+    -   TiDB クラスターに接続する
+        -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
+        -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
+    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   TiFlash で HTAP クラスターを使用する
+        -   [TiFlash の概要](/tiflash/tiflash-overview.md)
+        -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
+        -   [TiFlash からのデータの読み取り](/tiflash/use-tidb-to-read-tiflash.md)
+        -   [MPP モードを使用する](/tiflash/use-tiflash-mpp-mode.md)
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
-    -   [TiDBクラスターをスケーリングする](/tidb-cloud/scale-tidb-cluster.md)
-    -   [TiDBクラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
-    -   [TiDBクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
+    -   [TiDB クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)
+    -   [TiDB クラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
+    -   [TiDB クラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
 -   データの移行
-    -   [サンプルデータのインポート](/tidb-cloud/import-sample-data.md)
-    -   データをTiDBに移行する
-        -   [AmazonS3AccessとGCSAccessを設定します](/tidb-cloud/config-s3-and-gcs-access.md)
-        -   [MySQL互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
-        -   [Auroraから一括で移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
-        -   [AmazonS3またはGCSからTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
-        -   [AmazonS3またはGCSからTiDB CloudにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)
-        -   [AmazonS3またはGCSからTiDB CloudにApacheParquetファイルをインポートします](/tidb-cloud/import-parquet-files.md)
-        -   [AmazonS3からのデータインポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
-    -   [TiDBからデータをエクスポートする](/tidb-cloud/export-data-from-tidb-cloud.md)
+    -   [サンプル データのインポート](/tidb-cloud/import-sample-data.md)
+    -   データを TiDB に移行する
+        -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
+        -   [MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
+        -   [Amazon Aurora MySQL から一括で移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
+        -   [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
+        -   [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
+        -   [Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
+        -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+    -   [TiDB からのデータのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)
 -   データのバックアップと復元
     -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
     -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
     -   [戻す](/tidb-cloud/backup-and-restore.md#restore)
 -   監視と警告
     -   [概要](/tidb-cloud/monitor-tidb-cluster.md)
-    -   [組み込みのアラート](/tidb-cloud/monitor-built-in-alerting.md)
+    -   [ビルトインモニタリング](/tidb-cloud/built-in-monitoring.md)
+    -   [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
     -   サードパーティの監視統合
-        -   [Datadogの統合](/tidb-cloud/monitor-datadog-integration.md)
-        -   [PrometheusとGrafanaの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
+        -   [Datadog 統合](/tidb-cloud/monitor-datadog-integration.md)
+        -   [Prometheus と Grafana の統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 -   パフォーマンスの調整
     -   [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
-    -   パフォーマンスの分析
+    -   パフォーマンスを分析する
         -   [ステートメント分析](/tidb-cloud/tune-performance.md)
-        -   [キービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
+        -   [キー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
         -   [ステートメント要約表](/statement-summary-tables.md)
-    -   SQLチューニング
+    -   SQL チューニング
         -   [概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
-        -   クエリ実行プランを理解する
+        -   クエリ実行プランについて
             -   [概要](/explain-overview.md)
             -   [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
             -   [インデックス](/explain-indexes.md)
             -   [テーブル結合](/explain-joins.md)
-            -   [MPPクエリ](/explain-mpp.md)
+            -   [MPP クエリ](/explain-mpp.md)
             -   [サブクエリ](/explain-subqueries.md)
             -   [集計](/explain-aggregation.md)
             -   [ビュー](/explain-views.md)
             -   [パーティション](/explain-partitions.md)
-        -   SQL最適化プロセス
+        -   SQL 最適化プロセス
             -   [概要](/sql-optimization-concepts.md)
             -   ロジックの最適化
                 -   [概要](/sql-logical-optimization.md)
                 -   [サブクエリ関連の最適化](/subquery-optimization.md)
                 -   [カラムの剪定](/column-pruning.md)
-                -   [相関サブクエリの無相関化](/correlated-subquery-optimization.md)
-                -   [最大/最小を排除する](/max-min-eliminate.md)
+                -   [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+                -   [最大/最小を削除](/max-min-eliminate.md)
                 -   [Predicate Push Down](/predicate-push-down.md)
-                -   [パーティションプルーニング](/partition-pruning.md)
-                -   [TopNとLimitプッシュダウン](/topn-limit-push-down.md)
+                -   [パーティションのプルーニング](/partition-pruning.md)
+                -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
             -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
@@ -87,51 +88,51 @@
                 -   [統計](/statistics.md)
                 -   [インデックス問題の解決方法](/wrong-index-solution.md)
                 -   [クエリの最適化](/agg-distinct-optimization.md)
-            -   [実行プランキャッシュの準備](/sql-prepared-plan-cache.md)
+            -   [実行計画キャッシュの準備](/sql-prepared-plan-cache.md)
         -   実行計画の管理
             -   [概要](/control-execution-plan.md)
             -   [オプティマイザーのヒント](/optimizer-hints.md)
             -   [SQL計画管理](/sql-plan-management.md)
-            -   [最適化ルールと式のプッシュダウンのブロックリスト](/blocklist-control-plan.md)
+            -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
     -   [TiKV Follower Readの調整](/follower-read.md)
-    -   [コプロセッサーキャッシュ](/coprocessor-cache.md)
-    -   ガベージコレクション（GC）
+    -   [コプロセッサ キャッシュ](/coprocessor-cache.md)
+    -   ガベージ コレクション (GC)
         -   [概要](/garbage-collection-overview.md)
         -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
-    -   [TiFlashのパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
--   ユーザーアクセスの管理
-    -   [コンソールユーザーアクセスの管理](/tidb-cloud/manage-user-access.md)
-    -   [クラスタセキュリティ設定を構成する](/tidb-cloud/configure-security-settings.md)
+    -   [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
+-   ユーザー アクセスの管理
+    -   [コンソール ユーザー アクセスの管理](/tidb-cloud/manage-user-access.md)
+    -   [クラスタ セキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)
 -   請求する
     -   [ノードコスト](/tidb-cloud/tidb-cloud-billing.md)
-    -   [バックアップストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
-    -   [データ転送コスト](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
+    -   [バックアップ ストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
+    -   [データ転送料金](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
     -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
     -   [トライアルポイント](/tidb-cloud/tidb-cloud-billing.md#trial-points)
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 -   参照
-    -   TiDBクラスターアーキテクチャ
+    -   TiDB クラスターのアーキテクチャ
         -   [概要](/tidb-architecture.md)
         -   [保管所](/tidb-storage.md)
         -   [コンピューティング](/tidb-computing.md)
         -   [スケジューリング](/tidb-scheduling.md)
-    -   [TiDB Cloudクラスターの制限と割り当て](/tidb-cloud/limitations-and-quotas.md)
-    -   [TiDBの制限](/tidb-limitations.md)
+    -   [TiDB Cloudクラスターの制限とクォータ](/tidb-cloud/limitations-and-quotas.md)
+    -   [TiDB の制限事項](/tidb-limitations.md)
     -   SQL
-        -   [TiDBでSQLを探索する](/basic-sql-operations.md)
-        -   SQL言語の構造と構文
+        -   [TiDB で SQL を調べる](/basic-sql-operations.md)
+        -   SQL 言語の構造と構文
             -   属性
                 -   [自動増加](/auto-increment.md)
-                -   [AUTO_RANDOM](/auto-random.md)
+                -   [自動ランダム](/auto-random.md)
                 -   [SHARD_ROW_ID_BITS](/shard-row-id-bits.md)
             -   [リテラル値](/literal-values.md)
-            -   [スキーマオブジェクト名](/schema-object-names.md)
+            -   [スキーマ オブジェクト名](/schema-object-names.md)
             -   [キーワードと予約語](/keywords.md)
             -   [ユーザー定義変数](/user-defined-variables.md)
             -   [式の構文](/expression-syntax.md)
-            -   [コメント構文](/comment-syntax.md)
-        -   SQLステートメント
+            -   [コメントの構文](/comment-syntax.md)
+        -   SQL ステートメント
             -   [`ADD COLUMN`](/sql-statements/sql-statement-add-column.md)
             -   [`ADD INDEX`](/sql-statements/sql-statement-add-index.md)
             -   [`ADMIN`](/sql-statements/sql-statement-admin.md)
@@ -249,58 +250,58 @@
         -   データ型
             -   [概要](/data-type-overview.md)
             -   [デフォルト値](/data-type-default-values.md)
-            -   [数値タイプ](/data-type-numeric.md)
-            -   [日付と時刻のタイプ](/data-type-date-and-time.md)
+            -   [数値型](/data-type-numeric.md)
+            -   [日付と時刻の種類](/data-type-date-and-time.md)
             -   [文字列型](/data-type-string.md)
-            -   [JSONタイプ](/data-type-json.md)
+            -   [JSON タイプ](/data-type-json.md)
         -   関数と演算子
             -   [概要](/functions-and-operators/functions-and-operators-overview.md)
             -   [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
             -   [オペレーター](/functions-and-operators/operators.md)
-            -   [制御フロー機能](/functions-and-operators/control-flow-functions.md)
+            -   [制御フロー関数](/functions-and-operators/control-flow-functions.md)
             -   [文字列関数](/functions-and-operators/string-functions.md)
             -   [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)
-            -   [日付と時刻の関数](/functions-and-operators/date-and-time-functions.md)
+            -   [日付と時刻関数](/functions-and-operators/date-and-time-functions.md)
             -   [ビット関数と演算子](/functions-and-operators/bit-functions-and-operators.md)
             -   [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
-            -   [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
+            -   [暗号化・圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
             -   [ロック機能](/functions-and-operators/locking-functions.md)
             -   [情報機能](/functions-and-operators/information-functions.md)
-            -   [JSON関数](/functions-and-operators/json-functions.md)
-            -   [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)
+            -   [JSON 関数](/functions-and-operators/json-functions.md)
+            -   [集計 (GROUP BY) 関数](/functions-and-operators/aggregate-group-by-functions.md)
             -   [ウィンドウ関数](/functions-and-operators/window-functions.md)
             -   [その他の機能](/functions-and-operators/miscellaneous-functions.md)
             -   [精密計算](/functions-and-operators/precision-math.md)
             -   [セット操作](/functions-and-operators/set-operators.md)
-            -   [プッシュダウンの式のリスト](/functions-and-operators/expressions-pushed-down.md)
+            -   [プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md)
             -   [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
-        -   [クラスター化インデックス](/clustered-indexes.md)
+        -   [クラスタ化インデックス](/clustered-indexes.md)
         -   [制約](/constraints.md)
         -   [生成された列](/generated-columns.md)
-        -   [SQLモード](/sql-mode.md)
+        -   [SQL モード](/sql-mode.md)
         -   [テーブル属性](/table-attributes.md)
-        -   トランザクション
+        -   取引
             -   [概要](/transaction-overview.md)
             -   [分離レベル](/transaction-isolation-levels.md)
-            -   [楽観的なトランザクション](/optimistic-transaction.md)
-            -   [悲観的なトランザクション](/pessimistic-transaction.md)
-            -   [非トランザクションDMLステートメント](/non-transactional-dml.md)
+            -   [楽観的な取引](/optimistic-transaction.md)
+            -   [悲観的な取引](/pessimistic-transaction.md)
+            -   [非トランザクション DML ステートメント](/non-transactional-dml.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
-        -   [一時的なテーブル](/temporary-tables.md)
+        -   [一時テーブル](/temporary-tables.md)
         -   [キャッシュされたテーブル](/cached-tables.md)
-        -   文字セットと照合
+        -   文字セットと照合順序
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
-        -   履歴データを読む
-            -   古い読み取りを使用する（推奨）
-                -   [古い読み取りの使用シナリオ](/stale-read.md)
+        -   履歴データの読み取り
+            -   古い読み取りを使用する (推奨)
+                -   [Stale Read の使用シナリオ](/stale-read.md)
                 -   [`As OF TIMESTAMP`を使用して古い読み取りを実行する](/as-of-timestamp.md)
                 -   [`tidb_read_staleness`を使用して古い読み取りを実行する](/tidb-read-staleness.md)
             -   [`tidb_snapshot`システム変数を使用する](/read-historical-data.md)
-        -   システムテーブル
+        -   システム テーブル
             -   [`mysql`](/mysql-schema.md)
-            -   INFORMATION_SCHEMA
+            -   情報_スキーマ
                 -   [概要](/information-schema/information-schema.md)
                 -   [`ANALYZE_STATUS`](/information-schema/information-schema-analyze-status.md)
                 -   [`CLIENT_ERRORS_SUMMARY_BY_HOST`](/information-schema/client-errors-summary-by-host.md)
@@ -338,19 +339,19 @@
                 -   [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
                 -   [`VIEWS`](/information-schema/information-schema-views.md)
     -   [システム変数](/system-variables.md)
-    -   ストレージエンジン
+    -   ストレージ エンジン
         -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
-            -   [RocksDBの概要](/storage-engine/rocksdb-overview.md)
-        -   TiFlash
-            -   [TiFlashの概要](/tiflash/tiflash-overview.md)
+            -   [RocksDB の概要](/storage-engine/rocksdb-overview.md)
+        -   ティフラッシュ
+            -   [TiFlash の概要](/tiflash/tiflash-overview.md)
     -   [Dumpling](/dumpling-overview.md)
-    -   [テーブルフィルター](/table-filter.md)
-    -   [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
+    -   [テーブル フィルター](/table-filter.md)
+    -   [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
 -   [よくある質問](/tidb-cloud/tidb-cloud-faq.md)
 -   リリースノート
     -   [2022年](/tidb-cloud/release-notes-2022.md)
     -   [2021年](/tidb-cloud/release-notes-2021.md)
-    -   [2020](/tidb-cloud/release-notes-2020.md)
+    -   [2020年](/tidb-cloud/release-notes-2020.md)
 -   [サポート](/tidb-cloud/tidb-cloud-support.md)
 -   [用語集](/tidb-cloud/tidb-cloud-glossary.md)
