@@ -27,9 +27,8 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Database Time | database time | Total database time per second. |
-| Database Time by SQL types | Select, Insert, Use, etc. | Database time consumed by each type of SQL statements per second. |
-| Database Time by SQL Phase | get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token, parse, compile, and execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas take a large proportion, it means most database time is consumed by other phases than the execution phase and further cause analysis is required. |
+| Database Time by SQL types | database time, {SQL type} | database time: total database time per second. <br/> {SQL type}: database time consumed by SQL statements per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Database Time by SQL Phase | database time, get token, parse, compile, execute | Database time consumed in four SQL processing phases: get token, parse, compile, and execute. The SQL execution phase is in green and other phases are in red on general. If non-green areas take a large proportion, it means most database time is consumed by other phases than the execution phase and further cause analysis is required. |
 | SQL Execute Time Overview | tso_wait, Get, Cop, Commit, etc. | Green metrics stand for common KV write requests (such as prewrite and commit), blue metrics stand for common read requests, and metrics in other colors stand for unexpected situations which you need to pay attention to. For example, pessimistic lock KV requests are marked red and TSO waiting is marked dark brown. If non-blue or non-green areas take a large proportion, it means there is a bottleneck during SQL execution. For example, if serious lock conflicts occur, the red area will take a large proportion. If excessive time is consumed in waiting TSO, the dark brown area will take a large proportion. |
 
 ### Application Connection
@@ -43,7 +42,7 @@ The following sections illustrate the metrics on the Monitoring page.
 
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
-| Query Per Second | Select, Insert, Use, etc. | The number of SQL statements executed per second in all TiDB instances, which are collected by types, such as `SELECT`, `INSERT`, and `UPDATE`. |
+| Query Per Second | {SQL type} | The number of SQL statements executed per second in all TiDB instances, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
 | Failed Queries | Error types | The statistics of error types (such as syntax errors and primary key conflicts) according to the SQL statement execution errors per minute on each TiDB instance. It contains the module in which an error occurs and the error code. |
 | Command Per Second | Query, StmtExecute, StmtPrepare, etc. | The number of commands processed by all TiDB instances per second based on command types. |
 | Queries Using Plan Cache OPS | hit, miss | hit: the number of queries using plan cache per second in all TiDB instances. <br/> miss: the number of queries missing plan cache per second in all TiDB instances. |
