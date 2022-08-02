@@ -19,11 +19,9 @@ To view the metrics on the Monitoring page, take the following steps:
 
 2. Click the **Monitoring** tab.
 
-
 ## Monitoring metrics
 
 The following sections illustrate the metrics on the Monitoring page.
-
 
 ### Database Time
 
