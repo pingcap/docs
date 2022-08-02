@@ -9,11 +9,11 @@ TiDB Cloud collects and displays a full set of standard metrics of your cluster 
 
 > **Note:**
 >
-> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), the Monitoring page is unavailable. You can upgrade to [Dedicated Tier clusters](/tidb-cloud/select-cluster-tier.md#dedicated-tier) to use it.
+> Currently, the Monitoring page is unavailable for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
 
-## How to use feature 
+## View the Monitoring page
 
-To view these metrics, take the following steps:
+To view the metrics on the Monitoring page, take the following steps:
 
 1. Navigate to the **Diagnostics** tab of a cluster.
 
