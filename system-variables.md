@@ -1747,7 +1747,7 @@ SET tidb_slow_log_threshold = 200;
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
 - When the [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) system variable is set to `ON`, `tidb_super_read_only` is affected by [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) in some cases. For detailed impact, see the description of [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520).
 
-### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
+### tidb_sysdate_is_now （New in v6.0.0）
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
