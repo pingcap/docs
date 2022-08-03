@@ -63,11 +63,25 @@ hide_commit: true
 
 [Status and Metrics](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster)
 
+[Built-in Monitoring](https://docs.pingcap.com/tidbcloud/built-in-monitoring)
+
 [Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting)
 
 [Use Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration)
 
 [Use Prometheus and Grafana](https://docs.pingcap.com/tidbcloud/monitor-prometheus-and-grafana-integration)
+
+</LearningPath>
+
+<LearningPath label="Tune" icon="tidb-cloud-tune">
+
+[Tuning Overview](https://docs.pingcap.com/tidbcloud/tidb-cloud-tune-performance-overview)
+
+[Analyze Performance](https://docs.pingcap.com/tidbcloud/tune-performance)
+
+[Tune SQL Performance](https://docs.pingcap.com/tidbcloud/tidb-cloud-sql-tuning-overview)
+
+[Tune TiFlash Performance](https://docs.pingcap.com/tidbcloud/tune-tiflash-performance)
 
 </LearningPath>
 
