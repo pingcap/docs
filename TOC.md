@@ -220,6 +220,7 @@
         - [Extended Statistics](/extended-statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
+        - [Cost Model](/cost-model.md)
       - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
