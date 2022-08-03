@@ -586,7 +586,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
     >
     > - For full parameters, see [mysql_query_rules](https://proxysql.com/documentation/main-runtime/#mysql_query_rules).
 
-4. Log in to **_ProxySQL MySQL Interface_** with the `root`:
+4. Log in to **_ProxySQL MySQL Interface_** with the `root` user:
 
     ```shell
     mysql -u root -h 127.0.0.1 -P 6034
@@ -600,7 +600,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
         SELECT * FROM test.test;
         ```
 
-        The statement is expected to match rules with `rule_id` of `2` and forward the statement to the TiDB Server `tidb-1` with `hostgroup` of `1`.
+        The statement is expected to match rules with `rule_id` of `2` and forward the statement to the TiDB server `tidb-1` with `hostgroup` of `1`.
 
     - `SELECT ... FOR UPDATE` statement:
 
@@ -608,7 +608,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
         SELECT * FROM test.test for UPDATE;
         ```
 
-        The statement is expected to match rules with `rule_id` of `1` and forward the statement to the TiDB Server `tidb-0` with `hostgroup` of `0`.
+        The statement is expected to match rules with `rule_id` of `1` and forward the statement to the TiDB server `tidb-0` with `hostgroup` of `0`.
 
     - Transaction:
 
@@ -619,7 +619,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
         ROLLBACK;
         ```
 
-        The `INSERT` statement is expected to not match all rules. It uses the `default_hostgroup` of the user (It is `0`) and thus forward to the TiDB Server `tidb-0`(`hostgroup` is `0`). And ProxySQL turns on user `transaction_persistent` by default, this will cause all statements within the same transaction to run in the same `hostgroup`. So `SELECT * FROM test.test;` will also be forwarded to the TiDB Server `tidb-0`(`hostgroup` is `0`).
+        The `INSERT` statement is expected to not match all rules. It uses the `default_hostgroup` of the user (It is `0`) and thus forwards to the TiDB server `tidb-0`(`hostgroup` is `0`). And ProxySQL enables user `transaction_persistent` by default, which will cause all statements within the same transaction to run in the same `hostgroup`. So `SELECT * FROM test.test;` will also be forwarded to the TiDB Server `tidb-0`(`hostgroup` is `0`).
 
 5. To stop and remove containers and networks, you can use the following command:
 
@@ -662,16 +662,16 @@ Removing network proxy-rule-admin-interface_default
 
 ### Use the configuration file to configure load balancing
 
-To configure load balancing using the configuration file, you can run with the `test-load-balance` using the following command:
+To configure load balancing using the configuration file, you can run `test-load-balance.sh` using the following command:
 
 ```shell
 cd example/load-balance-config-file
 ./test-load-balance.sh
 ```
 
-The expected output is the same of [Use Admin Interface to configure load balancing](#use-the-configuration-file-to-configure-load-balancing) and the only change is using the configuration file to initialize the ProxySQL configuration.
+The expected output is the same as that of [Use Admin Interface to configure load balancing](#use-the-configuration-file-to-configure-load-balancing). The only change is using the configuration file to initialize the ProxySQL configuration.
 
 > **Note:**
 >
-> - The configuration of ProxySQL stores in SQLite. The configuration file is only used when the SQLite is not created.
+> - The configuration of ProxySQL is stored in SQLite. The configuration file is only used when the SQLite is not created.
 > - It is recommended to use the configuration file only for initialization and **NOT** recommended to modify configuration items using it.
