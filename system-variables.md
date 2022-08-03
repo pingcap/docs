@@ -335,6 +335,16 @@ This variable is an alias for `last_insert_id`.
 >
 > Unlike in MySQL, the `max_execution_time` system variable currently works on all kinds of statements in TiDB, not only restricted to the `SELECT` statement. The precision of the timeout value is roughly 100ms. This means the statement might not be terminated in accurate milliseconds as you specify.
 
+### max_prepared_stmt_count
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `-1`
+- Range: `[-1, 1048576]`
+- Indicates the maximum number of [`PREPARE` statement](/sql-statements/sql-statement-prepare.md) of a session.
+- `-1` means no limitation.
+
 ### plugin_dir
 
 - Scope: GLOBAL
@@ -996,6 +1006,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior, and the default value is `ON`.
 - For a cluster upgraded from a version earlier than v6.1.0, the default value is still `TRUE`.
 
+### tidb_enable_ordered_result_mode
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `OFF`
+- Indicates whether to sort the final output result automatically.
+- For example, if enable this feature, TiDB will process `select a, max(b) from t group by a` as `select a, max(b) from t group by a order by a, max(b)`.
+
+
 ### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1637,6 +1656,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `OFF`
 - This variable is used to set whether the optimizer executes the optimization operation of pushing down the aggregate function to the position before Join, Projection, and UnionAll.
 - When the aggregate operation is slow in query, you can set the variable value to ON.
+
+### tidb_opt_cartesian_bcj
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Integer
+- Default value: `1`
+- Range: `[0, 2]`
+- Indicates whether to allow broadcast CARTESIAN join. 
+- `0` means that it's not allowed, `1` means that it's allow based on `tidb_broadcast_join_threshold_count`, and `2` means it's always allowed even if the table size exceeds the threshold.
 
 ### tidb_opt_correlation_exp_factor
 
