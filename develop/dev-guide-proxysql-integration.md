@@ -171,7 +171,7 @@ Field description:
 
 ### Configure by a configuration file
 
-In addition to configuring using **_ProxySQL Admin interface_**, you can also configure using a configuration file. In the [Configuring ProxySQL through the config file](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file) document, configuration file should only be considered as a secondary way of initializing ProxySQL and is not the primary way. The configuration files is only used when the SQLite is not created and will not be used after the SQLite is created. When using the configuration file to configure, you should delete SQLite first using the following command. But this **loses** configuration changes in **_ProxySQL Admin interface_**.
+In addition to configuring using **_ProxySQL Admin interface_**, you can also configure using a configuration file. In the [Configuring ProxySQL through the config file](https://github.com/sysown/proxysql#configuring-proxysql-through-the-config-file) document, configuration file should only be considered as a secondary way of initializing ProxySQL and is not the primary way. The configuration file is only used when the SQLite is not created and will not be used after the SQLite is created. When using the configuration file to configure, you should delete SQLite first using the following command. But this **loses** configuration changes in **_ProxySQL Admin interface_**.
 
 ```shell
 rm /var/lib/proxysql/proxysql.db
@@ -673,5 +673,5 @@ The expected output is the same of [Use Admin Interface to configure load balanc
 
 > **Note:**
 >
-> - The configuration of ProxySQL is stored in SQLite. Configuration file is only read when SQLite database does not exist.
-> - ProxySQL does **NOT** recommend using configuration file for configuration changes, use them only for initial configuration, do not rely too much on configuration files.
+> - The configuration of ProxySQL stores in SQLite. The configuration file is only used when the SQLite is not created.
+> - It is recommended to use the configuration file only for initialization and **NOT** recommended to modify configuration items using it.
