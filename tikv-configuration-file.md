@@ -1619,7 +1619,7 @@ Configuration items related to TiCDC.
 > **Warning:**
 >
 > - This configuration item will be deprecated in a future release. To avoid upgrade compatibility issues, it is not recommended to set this configuration item.
-> - In most scenarios, you do not need to modify this configuration. If this configuration value is set too small, the anomaly detection process might trigger false alarms, which causes data replication jitter.
+> - In most scenarios, you do not need to modify this configuration, because the slow lock resolution rarely happens. If this configuration value is set too small, the anomaly detection process might trigger false alarms, which causes data replication jitter.
 
 ## resolved-ts
 
