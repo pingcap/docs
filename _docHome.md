@@ -137,7 +137,7 @@ Download eBooks and papers
 
 </DocHomeCard>
 
-<DocHomeCard href="https://ossinsight.io/" icon="cloud6" label="OSS Insight">
+<DocHomeCard href="https://ossinsight.io/" icon="ossinsight" label="OSS Insight">
 
 A powerful insight tool that analyzes in depth any GitHub repository, powered by TiDB Cloud
 
