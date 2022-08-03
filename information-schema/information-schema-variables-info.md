@@ -1,6 +1,6 @@
 ---
 title: VARIABLES_INFO
-summary: Learn the `USER_PRIVILEGES` information_schema table.
+summary: Learn the `VARIABLES_INFO` information_schema table.
 ---
 
 # VARIABLES_INFO
