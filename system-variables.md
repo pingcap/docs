@@ -2037,6 +2037,10 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
 
+> **Warning:**
+>
+> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you only use this variable in TiDB versions later than v5.3.1 or v5.4.1.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
