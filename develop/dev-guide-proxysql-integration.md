@@ -456,7 +456,7 @@ The preceding `test-user-split.sh` script can be run step by step as follows:
     docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
     ```
 
-    The preceding SQL file runs:
+    The preceding SQL file runs and triggers the following operations:
 
     1. Add hosts of two TiDB Servers. The `hostgroup_id` of `tidb-0` is `0` and `hostgroup_id` of `tidb-1` is `1`.
     2. Make the configuration of TiDb Servers effective and save it on disk.
@@ -559,7 +559,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
     docker-compose exec proxysql sh -c "mysql -uadmin -padmin -h127.0.0.1 -P6032 < ./proxysql-prepare.sql"
     ```
 
-    The preceding SQL file runs:
+    The preceding SQL file runs and triggers the following operations:
 
     1. Add hosts of two TiDB Servers. The `hostgroup_id` of `tidb-0` is `0` and `hostgroup_id` of `tidb-1` is `1`.
     2. Make the configuration of TiDb Servers effective and save it on disk.
