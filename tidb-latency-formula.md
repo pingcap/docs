@@ -4,7 +4,12 @@ This document breaks down the latency into metrics, for those who have interests
 
 Generally, OLTP workload can be divided into read and write queries, they share some critical code.
 This document will break down the latency and then analyze it from user's perspective. It's better to read [Performance Analysis and Tuning](/performance-tuning-methods.md) before this document.
-Note when breaking down latency through metrics in this document, we are calculation the average duration or latency instead of some specific slow queries.
+Note when breaking down latency through metrics in this document, we are calculating the average duration or latency instead of some specific slow queries.
+Many metrics are collected as histogram, which is a distribution of the duration or latency, when calculating the average latency, you need to use the sum and count counter.
+
+```
+avg = ${metric_name}_sum / ${metric_name}_count
+```
 
 Metrics in this document can be read directly from prometheus of TiDB.
 
@@ -13,7 +18,7 @@ Metrics in this document can be read directly from prometheus of TiDB.
 This part of latency is on the top level of TiDB and shared by any queries.
 
 ```
-e2e duration = 
+e2e duration =
     tidb_server_get_token_duration_seconds +
     tidb_session_parse_duration_seconds +
     tidb_session_compile_duration_seconds +
@@ -38,12 +43,12 @@ We start from read queries, which is processed in a single form.
 
 ```
 tidb_session_execute_duration_seconds{type="general"} =
-    pd_client_cmd_handle_cmds_duration_seconds_bucket{type="wait"} +
+    pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
     read handle duration +
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds_bucket{type="wait"}` records the duration of fetching TSO from PD, it will be skipped with in-txn snapshot read or reading with clustered primary index.
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching TSO from PD, it will be skipped with in-txn snapshot read or reading with clustered primary index.
 
 ```
 read handle duration = read value duration =
@@ -60,7 +65,7 @@ Get requests are sent directly to TiKV via a batched gRPC wrapper. The detail is
 
 ```
 tikv_grpc_msg_duration_seconds{type="kv_get"} =
-    tikv_storage_engine_async_request_duration_seconds_bucket{type="snapshot"} +
+    tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
     tikv_engine_seek_micro_seconds{type="seek_max"} +
     read value duration +
     read value duration
@@ -73,13 +78,13 @@ read value duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="get/batch_get_command"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="get/batch_get_command"}))
 ```
 
-TiKV uses RocksDB as its storage engine, when the required value is missing in block cache, it need to load value from disk. Get request can be either `get` and `batch_get_command`.
+TiKV uses RocksDB as its storage engine, when the required value is missing in block cache, it need to load value from disk. Get request can be either `get` or `batch_get_command`.
 
 ### Batch Point Get
 
 ```
 tidb_session_execute_duration_seconds{type="general"} =
-    pd_client_cmd_handle_cmds_duration_seconds_bucket{type="wait"} +
+    pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
     read handles duration +
     read values duration
 ```
@@ -101,7 +106,7 @@ The durations in batch client are explained in [batch client section](#batch-cli
 
 ```
 tikv_grpc_msg_duration_seconds{type="kv_batch_get"} =
-    tikv_storage_engine_async_request_duration_seconds_bucket{type="snapshot"} +
+    tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
     n * (
         tikv_engine_seek_micro_seconds{type="seek_max"} +
         read value duration +
@@ -119,15 +124,15 @@ When loading data from disk, the average duration can be calculated by `tikv_sto
 
 ```
 tidb_session_execute_duration_seconds{type="general"} =
-    pd_client_cmd_handle_cmds_duration_seconds_bucket{type="wait"} +
+    pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
     n * (
-        tidb_distsql_handle_query_duration_seconds_bucket{sql_type="general"}
+        tidb_distsql_handle_query_duration_seconds{sql_type="general"}
     )
-    tidb_distsql_handle_query_duration_seconds_bucket{sql_type="general"} <= send request duration
+    tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
 Table scan and index scan are processed in the same way. `n` is the distributed task count.
-Because coprocessor execution and data responsing to client are in different threads, `tidb_distsql_handle_query_duration_seconds_bucket{sql_type="general"}` is the wait time and it's less than the send request duration.
+Because coprocessor execution and data responsing to client are in different threads, `tidb_distsql_handle_query_duration_seconds{sql_type="general"}` is the wait time and it's less than the send request duration.
 
 ```
 send request duration =
@@ -137,10 +142,10 @@ send request duration =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 
 tikv_grpc_msg_duration_seconds{type="coprocessor"} =
-    tikv_coprocessor_request_wait_seconds_bucket{type="snapshot"} +
-    tikv_coprocessor_request_wait_seconds_bucket{type="schedule"} +
-    tikv_coprocessor_request_handler_build_seconds_bucket{type="index/select"} +
-    tikv_coprocessor_request_handle_seconds_bucket{type="index/select"}
+    tikv_coprocessor_request_wait_seconds{type="snapshot"} +
+    tikv_coprocessor_request_wait_seconds{type="schedule"} +
+    tikv_coprocessor_request_handler_build_seconds{type="index/select"} +
+    tikv_coprocessor_request_handle_seconds{type="index/select"}
 ```
 
 In TiKV, table scan is the type `select` and index scan is the type `index`, the duration details are same.
@@ -149,16 +154,16 @@ In TiKV, table scan is the type `select` and index scan is the type `index`, the
 
 ```
 tidb_session_execute_duration_seconds{type="general"} =
-    pd_client_cmd_handle_cmds_duration_seconds_bucket{type="wait"} +
+    pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
     n * (
-        tidb_distsql_handle_query_duration_seconds_bucket{sql_type="general"}
+        tidb_distsql_handle_query_duration_seconds{sql_type="general"}
     ) +
     m * (
-        tidb_distsql_handle_query_duration_seconds_bucket{sql_type="general"}
+        tidb_distsql_handle_query_duration_seconds{sql_type="general"}
     )
 ```
 
-Index look up combines index scan and table scan, they are processed in a pipeline way.
+Index look up combines index scan and table scan, they are processed in a pipelined way.
 
 ## Write Queries
 
@@ -172,7 +177,7 @@ Write queries are much more complex, there are some variants.
 We seperate the write into 3 phases:
 
 - execute phase, execute and write mutation into the memory of TiDB.
-- lock phase, acquire pessimistic locks for the execution result. 
+- lock phase, acquire pessimistic locks for the execution result.
 - commit phase, commit the transaction via 2PC protocol.
 
 In execution phase, TiDB manipulate data in memory, the main latency comes from reading the required data.
@@ -219,7 +224,7 @@ lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
     ratio * tidb_tikvclient_request_seconds{type="PessimisticLock"}
 ```
 
-Locks are acquired through the 2PC struct, which has a flow control mechanism. The flow control limit the concurreny on-fly requests, the default value is `128`. For simplicity, the flow control can be treat as an amplification of request latency(`ratio`).
+Locks are acquired through the 2PC struct, which has a flow control mechanism. The flow control limit the concurrent on-fly requests, the default value is `128`. For simplicity, the flow control can be treat as an amplification of request latency(`ratio`).
 
 ```
 tidb_tikvclient_request_seconds{type="PessimisticLock"} =
@@ -234,7 +239,7 @@ The detail of batch client is in [batch client section](#batch-client).
 ```
 tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
     tikv_scheduler_latch_wait_duration_seconds{type="acquire_pessimistic_lock"} +
-    tikv_storage_engine_async_request_duration_seconds_bucket{type="snapshot"} +
+    tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
     (lock in-mem key count + lock on-disk key count) * lock read duration +
     lock on-disk key count / (lock in-mem key count + lock on-disk key count) *
     lock write duration
@@ -254,14 +259,14 @@ lock on-disk key count =
     sum(rate(tikv_grpc_msg_duration_seconds_count{type="kv_pessimistic_lock"}}))
 ```
 
-The count of in-mem and on-disk locked keys can be calculated in by in-mem lock counter.
+The count of in-mem and on-disk locked keys can be calculated by in-mem lock counter.
 
 ```
 lock read duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="acquire_pessimistic_lock"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="acquire_pessimistic_lock"}))
 ```
 
-TiKV read the value of the key before acquiring the lock, the read duration can be calculated by RocksDB perf context.
+TiKV reads the value of the keys before acquiring the locks, the read duration can be calculated by RocksDB perf context.
 
 ### Commit
 
@@ -333,7 +338,7 @@ prewrite read duration(from disk) =
 ```
 
 Like lock in TiKV, prewrite is processed in read and write 2 phases. The read duration can be calculated from RocksDB perf context.
-The write duration is explained in async write.
+The write duration is explained in [async write](#async-write).
 
 ```
 tikv_grpc_msg_duration_seconds{type="kv_commit"} =
@@ -348,7 +353,7 @@ commit read duration(from disk) =
     sum(rate(tikv_storage_rocksdb_perf{metric="block_read_time",req="commit"})) / sum(rate(tikv_storage_rocksdb_perf{metric="block_read_count",req="commit"})) (storage)
 ```
 
-The duration of commit is almost same as prewrite, also the write duration is explained in async write.
+The duration of commit is almost same as prewrite, also the write duration is explained in [async write](#async-write).
 
 ### Async Write
 
@@ -399,7 +404,7 @@ async io enabled commit = max(
 )
 ```
 
-TiKV support Async IO Raft since v5.3.0, which changes the process of commit.
+TiKV supports Async IO Raft since v5.3.0, which changes the process of commit.
 
 ```
 persist log locally duration =
@@ -451,10 +456,10 @@ raft db write duration(raft engine enabled) =
     raft_engine_write_apply_duration_seconds
 
 raft db write duration(raft engine disabled) =
-    tikv_raftstore_store_perf_context_time_duration_secs_bucket{type="write_thread_wait"} +
-    tikv_raftstore_store_perf_context_time_duration_secs_bucket{type="write_scheduling_flushes_compactions_time"} +
-    tikv_raftstore_store_perf_context_time_duration_secs_bucket{type="write_wal_time"} +
-    tikv_raftstore_store_perf_context_time_duration_secs_bucket{type="write_memtable_time"}
+    tikv_raftstore_store_perf_context_time_duration_secs{type="write_thread_wait"} +
+    tikv_raftstore_store_perf_context_time_duration_secs{type="write_scheduling_flushes_compactions_time"} +
+    tikv_raftstore_store_perf_context_time_duration_secs{type="write_wal_time"} +
+    tikv_raftstore_store_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
 Because `commit log wait duration` is the slowest duration of quorum peers, it may be larger than `raft db write duration`.
@@ -465,10 +470,10 @@ From v6.1.0, TiKV uses [Raft Engine](/tikv-configuration-file.md#raft-engine) as
 
 ```
 tikv_raftstore_apply_log_duration_seconds =
-    tikv_raftstore_apply_perf_context_time_duration_secs_bucket{type="write_thread_wait"} +
-    tikv_raftstore_apply_perf_context_time_duration_secs_bucket{type="write_scheduling_flushes_compactions_time"} +
-    tikv_raftstore_apply_perf_context_time_duration_secs_bucket{type="write_wal_time"} +
-    tikv_raftstore_apply_perf_context_time_duration_secs_bucket{type="write_memtable_time"}
+    tikv_raftstore_apply_perf_context_time_duration_secs{type="write_thread_wait"} +
+    tikv_raftstore_apply_perf_context_time_duration_secs{type="write_scheduling_flushes_compactions_time"} +
+    tikv_raftstore_apply_perf_context_time_duration_secs{type="write_wal_time"} +
+    tikv_raftstore_apply_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
 In the async write process, committed log need to be applied into KV DB, the duration of apply can be calculated from the RocksDB perf context.
@@ -476,8 +481,8 @@ In the async write process, committed log need to be applied into KV DB, the dur
 ## TiKV Snapshot
 
 ```
-tikv_storage_engine_async_request_duration_seconds_bucket{type="snapshot"} =
-    tikv_coprocessor_request_wait_seconds_bucket{type="snapshot"} =
+tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
+    tikv_coprocessor_request_wait_seconds{type="snapshot"} =
     tikv_raftstore_request_wait_time_duration_secs +
     tikv_raftstore_commit_log_duration_seconds +
     get snapshot from rocksdb duration
@@ -502,3 +507,27 @@ tidb_tikvclient_request_seconds{type="?"} =
 - `tidb_tikvclient_batch_send_latency` records the encode duration in the batch system.
 - `tikv_grpc_msg_duration_seconds{type="kv_?"}` is TiKV processing duration.
 - `tidb_tikvclient_rpc_net_latency_seconds` records the network latency.
+
+## Diagnosis
+
+We've explained the details of query duration above. This section will describe the duration analysis of real use cases.
+
+It would be hard for users to engage in the duration break down since they may not know where to start. So we analyze this problem from two obvious appearance, the system is slow at read queries or write queries, which can be checked by the DB time panel in performance overview dashboard.
+
+### Slow Read Queries
+
+If select statements account for a significant portion of the DB time, we can assume that the DB is slow at read queries.
+
+It's good to know the execute plan of your read queries when diagnosing with slow read queries. You can find the plan from [SQL statements panel](/dashboard/dashboard-overview.md#top-sql-statements) in TiDB dashboard.
+For [point get](#point-get), [batch point get](#batch-point-get) and some [simple coprocessor queries](#table-scan--index-scan), go on analyze the duration as the description above.
+
+### Slow Write Queries
+
+Before investigating slow writes, you need to troubleshoot the cause of the conflict. Check `tikv_scheduler_latch_wait_duration_seconds_sum{type="acquire_pessimistic_lock"} by (instance)`.
+
+- If this metric is high in some specific TiKV instances, there may be some conflict hot regions.
+- If this metric is high across all instances, there may be conflict in the application.
+
+After investigating the conflict and make sure it's reasonable, you can goon analyzing the duration of [lock](#lock) and [commit](#commit).
+
+
