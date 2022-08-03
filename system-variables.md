@@ -898,7 +898,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
-- This variable controls whether TiDB uses concurrent DDL statements. When concurrent DDL statements are used, the DDL execution flow is changed, and DDL statements are not blocked by other DDL statements. In addition, multiple indexes can be added at the same time.
+- This variable controls whether to allow TiDB to use concurrent DDL statements. When concurrent DDL statements are used, the DDL execution flow is changed, and DDL statements are not easily blocked by other DDL statements. In addition, multiple indexes can be added at the same time.
 
 ### tidb_enable_enhanced_security
 
