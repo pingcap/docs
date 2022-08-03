@@ -5,23 +5,23 @@ summary: Learn the definitions, rules, and guidelines in table creation.
 
 # テーブルを作成する {#create-a-table}
 
-このドキュメントでは、SQLステートメントと関連するベストプラクティスを使用してテーブルを作成する方法を紹介します。ベストプラクティスを説明するために、TiDBベースの[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションの例が提供されています。
+このドキュメントでは、SQL ステートメントを使用してテーブルを作成する方法と、関連するベスト プラクティスを紹介します。ベスト プラクティスを説明するために、TiDB ベースのアプリケーション[書店](/develop/dev-guide-bookshop-schema-design.md)の例を示します。
 
 ## 始める前に {#before-you-start}
 
 このドキュメントを読む前に、次のタスクが完了していることを確認してください。
 
--   [TiDB CloudでTiDBクラスターを構築する（DevTier）](/develop/dev-guide-build-cluster-in-cloud.md) 。
+-   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md) .
 -   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)を読んでください。
--   [データベースを作成する](/develop/dev-guide-create-database.md) 。
+-   [データベースを作成する](/develop/dev-guide-create-database.md) .
 
 ## テーブルとは {#what-is-a-table}
 
-[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、 [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属するTiDBクラスタの論理オブジェクトです。 SQLステートメントから送信されたデータを格納するために使用されます。テーブルは、データレコードを行と列の形式で保存します。テーブルには少なくとも1つの列があります。 `n`列を定義した場合、データの各行には`n`列とまったく同じフィールドがあります。
+[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、 [データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDBクラスタの論理オブジェクトです。 SQL ステートメントから送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータ レコードを保存します。テーブルには少なくとも 1 つの列があります。 `n`の列を定義した場合、データの各行には`n`の列とまったく同じフィールドがあります。
 
 ## テーブルに名前を付ける {#name-a-table}
 
-テーブルを作成するための最初のステップは、テーブルに名前を付けることです。将来、自分自身や同僚に大きな苦痛を与えるような意味のない名前を使用しないでください。会社または組織のテーブル命名規則に従うことをお勧めします。
+テーブルを作成するための最初のステップは、テーブルに名前を付けることです。将来、自分自身や同僚に大きな苦痛を与えるような意味のない名前は使用しないでください。会社または組織のテーブル命名規則に従うことをお勧めします。
 
 `CREATE TABLE`ステートメントは通常、次の形式を取ります。
 
@@ -33,12 +33,12 @@ CREATE TABLE {table_name} ( {elements} );
 
 **パラメータの説明**
 
--   `{table_name}` ：作成するテーブルの名前。
--   `{elements}` ：列定義や主キー定義などのテーブル要素のコンマ区切りリスト。
+-   `{table_name}` : 作成するテーブルの名前。
+-   `{elements}` : 列定義や主キー定義などのテーブル要素のコンマ区切りリスト。
 
-`bookshop`のデータベースにユーザー情報を格納するためのテーブルを作成する必要があるとします。
+`bookshop`データベースにユーザー情報を格納するためのテーブルを作成する必要があるとします。
 
-列が1つも追加されていないため、次のSQLステートメントはまだ実行できないことに注意してください。
+列が 1 つも追加されていないため、次の SQL ステートメントはまだ実行できないことに注意してください。
 
 {{< copyable "" >}}
 
@@ -49,9 +49,9 @@ CREATE TABLE `bookshop`.`users` (
 
 ## 列を定義する {#define-columns}
 
-**列**はテーブルに従属します。各テーブルには少なくとも1つの列があります。列は、各行の値を単一のデータ型の小さなセルに分割することにより、テーブルに構造を提供します。
+**列**はテーブルに従属しています。各テーブルには少なくとも 1 つの列があります。列は、各行の値を 1 つのデータ型の小さなセルに分割することで、テーブルに構造を提供します。
 
-カラム定義は通常、次の形式を取ります。
+カラムの定義は通常、次の形式を取ります。
 
 ```
 {column_name} {data_type} {column_qualification}
@@ -59,11 +59,11 @@ CREATE TABLE `bookshop`.`users` (
 
 **パラメータの説明**
 
--   `{column_name}` ：列名。
--   `{data_type}` ：列[データ・タイプ](/basic-features.md#data-types-functions-and-operators) 。
--   `{column_qualification}` ：カラム**レベルの制約**や[生成された列（実験的特徴）](/generated-columns.md)の句などの列の修飾。
+-   `{column_name}` : 列名。
+-   `{data_type}` : 列[データ・タイプ](/basic-features.md#data-types-functions-and-operators) 。
+-   `{column_qualification}` :カラム**レベルの制約**や[生成された列 (実験的機能)](/generated-columns.md)の句などの列の修飾。
 
-`nickname`の識別子`id`など、いくつかの列を`users`テーブルに追加でき`balance` 。
+一意の識別子`id` 、 `balance` 、および`nickname`など、いくつかの列を`users`テーブルに追加できます。
 
 {{< copyable "" >}}
 
@@ -75,15 +75,15 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-上記のステートメントでは、フィールドは名前`id`とタイプ[bigint](/data-type-numeric.md#bigint-type)で定義されています。これは、一意のユーザー識別子を表すために使用されます。これは、すべてのユーザーIDが`bigint`タイプでなければならないことを意味します。
+上記のステートメントでは、フィールドは名前`id`とタイプ[bigint](/data-type-numeric.md#bigint-type)で定義されています。これは、一意のユーザー識別子を表すために使用されます。これは、すべてのユーザー ID が`bigint`型である必要があることを意味します。
 
-次に、 `nickname`という名前のフィールドが定義されます。これは[varchar](/data-type-string.md#varchar-type)タイプで、長さの制限は100文字です。これは、 `nicknames`人のユーザーが`varchar`タイプを使用し、100文字以下であることを意味します。
+次に、 `nickname`という名前のフィールドが定義されます。これは[varchar](/data-type-string.md#varchar-type)型で、長さ制限は 100 文字です。これは、 `nicknames`人のユーザーが`varchar`タイプを使用し、100 文字以内であることを意味します。
 
-最後に、**精度**`15` 、<strong>スケール</strong>`2`の[10進数](/data-type-numeric.md#decimal-type)タイプの`balance`という名前のフィールドが追加されます。<strong>精度</strong>はフィールドの合計桁数を表し、<strong>スケール</strong>は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲が`-999.99`であることを`999.99`します。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`であることを`99999.9`します。 <strong>10進数</strong>は[固定小数点タイプ](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ（たとえば、ユーザープロパティ関連）では、必ず<strong>10進</strong>型を使用してください。
+最後に、**精度**が`15`で<strong>位取り</strong>が`2`の[小数](/data-type-numeric.md#decimal-type)型である`balance`という名前のフィールドが追加されます。<strong>精度</strong>はフィールド内の合計桁数を表し、<strong>スケール</strong>は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5`でスケールが`2`で、範囲が`-999.99`から`999.99`であることを意味します。 `decimal(6,1)`は、精度`6`とスケール`1`を意味し、範囲は`-99999.9`から`99999.9`です。 <strong>decimal</strong>は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (ユーザー プロパティ関連など) では、必ず<strong>decimal</strong>型を使用してください。
 
-[浮動小数点型](/data-type-numeric.md#floating-point-types)は、 [整数型](/data-type-numeric.md#integer-types) 、および[固定小数点タイプ](/data-type-numeric.md#fixed-point-types)を含む他の多くの列データ型を[列挙型](/data-type-string.md#enum-type)し[日付と時刻のタイプ](/data-type-date-and-time.md) 。サポートされている列[データ型](/basic-features.md#data-types-functions-and-operators)を参照して、データベースに保存するデータと一致する**データ型**を使用できます。
+TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の種類](/data-type-date-and-time.md) 、および[列挙型](/data-type-string.md#enum-type)を含む、他の多くの列データ型をサポートしています。サポートされている列[データ型](/basic-features.md#data-types-functions-and-operators)を参照して、データベースに保存するデータに一致する**データ型**を使用できます。
 
-もう少し複雑にするために、 `bookshop`のデータのコアとなる`books`のテーブルを定義できます。 `books`のテーブルには、本のID、タイトル、タイプ（雑誌、小説、生活、芸術など）、株価、価格、発行日のフィールドが含まれています。
+もう少し複雑にするために、 `bookshop`のデータのコアとなる`books`のテーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、人生、芸術など)、在庫、価格、および出版日のフィールドが含まれています。
 
 {{< copyable "" >}}
 
@@ -100,31 +100,31 @@ CREATE TABLE `bookshop`.`books` (
 
 このテーブルには、 `users`のテーブルよりも多くのデータ型が含まれています。
 
--   [int](/data-type-numeric.md#integer-types) ：ディスクの使用量が多すぎたり、パフォーマンス（タイプ範囲が大きすぎる）やデータオーバーフロー（データタイプ範囲が小さすぎる）に影響を与えたりしないように、適切なサイズのタイプを使用することをお勧めします。
--   [日付時刻](/data-type-date-and-time.md) ：**日時**タイプを使用して時刻値を格納できます。
--   [列挙型](/data-type-string.md#enum-type) ：列挙型を使用して、限られた値の選択を格納できます。
+-   [整数](/data-type-numeric.md#integer-types) : ディスクの使用量が多すぎたり、パフォーマンスへの影響 (型の範囲が大きすぎる) やデータのオーバーフロー (データ型の範囲が小さすぎる) を避けるために、適切なサイズの型を使用することをお勧めします。
+-   [日付時刻](/data-type-date-and-time.md) : **datetime**型を使用して時刻値を格納できます。
+-   [列挙](/data-type-string.md#enum-type) : 列挙型を使用して、限定された値の選択を格納できます。
 
-## 主キーを選択します {#select-primary-key}
+## 主キーを選択 {#select-primary-key}
 
-[主キー](/constraints.md#primary-key)は、テーブル内の1つの列または列のセットであり、その値はテーブル内の行を一意に識別します。
+[主キー](/constraints.md#primary-key)は、テーブル内の行を一意に識別する値を持つテーブル内の列または列のセットです。
 
 > **ノート：**
 >
-> TiDBの**主キー**のデフォルト定義は、 [InnoDB](https://mariadb.com/kb/en/innodb/) （MySQLの一般的なストレージエンジン）の定義とは異なります。
+> TiDB の**主キー**のデフォルト定義は、 [InnoDB](https://mariadb.com/kb/en/innodb/) (MySQL の共通ストレージ エンジン) とは異なります。
 >
-> -   **InnoDB**の場合：<strong>主キー</strong>は一意であり、nullではなく、<strong>インデックスがクラスター化</strong>されています。
+> -   **InnoDB**の場合:<strong>主キー</strong>は一意であり、null ではなく、<strong>インデックスがクラスター化</strong>されています。
 >
-> -   TiDBの場合：**主キー**は一意であり、nullではありません。ただし、主キーが<strong>クラスター化インデックス</strong>であるとは限りません。代わりに、キーワード`NONCLUSTERED`の別のセットが、<strong>主キー</strong>が<strong>クラスター化インデックス</strong>であるかどうかをさらに制御し`CLUSTERED` 。キーワードが指定されていない場合、 [クラスター化インデックス](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes)で説明されているように、キーワードはシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。
+> -   TiDB の場合:**主キー**は一意であり、null ではありません。ただし、主キーが<strong>クラスター化インデックス</strong>であるとは限りません。代わりに、別の一連のキーワード`NONCLUSTERED`が追加で<strong>主キー</strong>が<strong>クラスター化インデックス</strong>かどうかを制御し`CLUSTERED` 。キーワードが指定されていない場合は、 [クラスター化インデックス](https://docs.pingcap.com/zh/tidb/stable/clustered-indexes)で説明されているように、システム変数`@@global.tidb_enable_clustered_index`によって制御されます。
 
-**主キー**は`CREATE TABLE`ステートメントで定義されています。 [主キーの制約](/constraints.md#primary-key)では、すべての制約付き列にNULL以外の値のみが含まれている必要があります。
+**主キー**は`CREATE TABLE`ステートメントで定義されています。 [主キー制約](/constraints.md#primary-key)では、すべての制約された列に非 NULL 値のみが含まれている必要があります。
 
-テーブルは、**主キー**なしで、または非整数の<strong>主キー</strong>を使用して作成できます。この場合、TiDBは<strong>暗黙の主キー</strong>として`_tidb_rowid`を作成します。暗黙の主キー`_tidb_rowid`は、その単調に増加する性質のため、書き込みが集中するシナリオで書き込みホットスポットを引き起こす可能性があります。したがって、アプリケーションが書き込みを多用する場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメーターを使用してデータをシャーディングすることを検討してください。ただし、これは読み取りの増幅につながる可能性があるため、独自のトレードオフを行う必要があります。
+テーブルは、**主キー**なしで作成することも、整数以外の主キーを使用して作成することもでき<strong>ます</strong>。この場合、TiDB は<strong>暗黙の主キー</strong>として`_tidb_rowid`を作成します。暗黙的な主キー`_tidb_rowid`は、単調に増加する性質があるため、書き込みが集中するシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み集中型の場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメーターを使用してデータをシャーディングすることを検討してください。ただし、これは読み取り増幅につながる可能性があるため、独自のトレードオフを行う必要があります。
 
-テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)であり、 `AUTO_INCREMENT`が使用されている場合、 `SHARD_ROW_ID_BITS`を使用してホットスポットを回避することはできません。ホットスポットを回避する必要があり、連続および増分の主キーが必要ない場合は、 `AUTO_INCREMENT`ではなく[`AUTO_RANDOM`](/auto-random.md)を使用して、行IDの連続性を排除できます。
+テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で`AUTO_INCREMENT`が使用されている場合、ホットスポットは`SHARD_ROW_ID_BITS`を使用しても回避できません。ホットスポットを回避する必要があり、継続的な増分主キーが必要ない場合は、 `AUTO_INCREMENT`の代わりに[`AUTO_RANDOM`](/auto-random.md)を使用して行 ID の連続性を排除できます。
 
 ホットスポットの問題を処理する方法の詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
-[主キーを選択するためのガイドライン](#guidelines-to-follow-when-selecting-primary-key)に続いて、次の例は、 `users`テーブルで`AUTO_RANDOM`主キーがどのように定義されているかを示しています。
+[主キーを選択するためのガイドライン](#guidelines-to-follow-when-selecting-primary-key)に続いて、次の例は`AUTO_RANDOM`主キーが`users`テーブルでどのように定義されるかを示しています。
 
 {{< copyable "" >}}
 
@@ -139,25 +139,25 @@ CREATE TABLE `bookshop`.`users` (
 
 ## クラスター化されているかどうか {#clustered-or-not}
 
-TiDBは、v5.0以降の[クラスター化されたインデックス](/clustered-indexes.md)つの機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。 TiDBは、特定のクエリのパフォーマンスを向上させる方法でテーブルを整理する機能を提供します。
+TiDB は v5.0 以降、 [クラスター化インデックス](/clustered-indexes.md)つの機能をサポートしています。この機能は、主キーを含むテーブルにデータを格納する方法を制御します。特定のクエリのパフォーマンスを向上させる方法でテーブルを編成する機能を TiDB に提供します。
 
-このコンテキストでのクラスター化という用語は、データが格納される方法の編成を指し、一緒に動作するデータベースサーバーのグループではありません。一部のデータベース管理システムでは、クラスター化インデックスをインデックス編成テーブル（IOT）と呼びます。
+このコンテキストでのクラスタ化という用語は、データがどのように格納されるかの編成を指し、連携して動作するデータベース サーバーのグループを指すわけではありません。一部のデータベース管理システムでは、クラスター化インデックスをインデックス構成テーブル (IOT) と呼んでいます。
 
-現在、TiDBの***主キーを含む***テーブルは、次の2つのカテゴリに分類されます。
+現在、TiDB の***主キーを含む***テーブルは、次の 2 つのカテゴリに分類されます。
 
--   `NONCLUSTERED` ：テーブルの主キーは非クラスター化インデックスです。非クラスター化インデックスを持つテーブルでは、行データのキーは、TiDBによって暗黙的に割り当てられた内部`_tidb_rowid`で構成されます。主キーは本質的に一意のインデックスであるため、非クラスター化インデックスを持つテーブルには、行を格納するために少なくとも2つのキーと値のペアが必要です。
-    -   `_tidb_rowid` （キー）-行データ（値）
-    -   主キーデータ（キー） `_tidb_rowid` （値）
--   `CLUSTERED` ：テーブルの主キーはクラスター化インデックスです。クラスター化インデックスを持つテーブルでは、行データのキーは、ユーザーが指定した主キーデータで構成されます。したがって、クラスター化インデックスを持つテーブルは、行を格納するために1つのキーと値のペアのみを必要とします。
-    -   主キーデータ（キー）-行データ（値）
+-   `NONCLUSTERED` : テーブルの主キーは非クラスター化インデックスです。非クラスター化インデックスを持つテーブルでは、行データのキーは、TiDB によって暗黙的に割り当てられた内部`_tidb_rowid`で構成されます。主キーは基本的に一意のインデックスであるため、非クラスター化インデックスを含むテーブルには、行を格納するために少なくとも 2 つのキーと値のペアが必要です。
+    -   `_tidb_rowid` (キー) - 行データ (値)
+    -   主キー データ (キー) - `_tidb_rowid` (値)
+-   `CLUSTERED` : テーブルの主キーはクラスター化インデックスです。クラスタ化インデックスを持つテーブルでは、行データのキーは、ユーザーが指定した主キー データで構成されます。したがって、クラスター化されたインデックスを持つテーブルでは、行を格納するために必要なキーと値のペアは 1 つだけです。
+    -   主キーデータ（キー） - 行データ（値）
 
-[主キーを選択します](#select-primary-key)で説明したように、**クラスター化インデックス**は、キーワード`CLUSTERED`および`NONCLUSTERED`を使用してTiDBで制御されます。
+[主キーを選択](#select-primary-key)で説明したように、**クラスター化インデックス**はキーワード`CLUSTERED`と`NONCLUSTERED`を使用して TiDB で制御されます。
 
 > **ノート：**
 >
-> TiDBは、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`という用語と<em>クラスター化インデックス</em>は同じ意味で使用される場合があります。 `PRIMARY KEY`は制約（論理プロパティ）を示し、クラスター化されたインデックスはデータの格納方法の物理的な実装を示します。
+> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`と<em>クラスター化インデックス</em>という用語が同じ意味で使用される場合があります。 `PRIMARY KEY`は制約 (論理プロパティ) を参照し、クラスター化インデックスはデータの格納方法の物理的な実装を記述します。
 
-[クラスター化されたインデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `book`の`ratings`を`users`ます。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
+[クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `book` x `users`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
 
 {{< copyable "" >}}
 
@@ -173,13 +173,13 @@ CREATE TABLE `bookshop`.`ratings` (
 
 ## 列の制約を追加する {#add-column-constraints}
 
-[主キーの制約](#select-primary-key)に加えて、TiDBは、 [NULLではありません](/constraints.md#not-null)制約、 [ユニークキー](/constraints.md#unique-key)制約、 `DEFAULT`などの他の**列制約**もサポートします。完全な制約については、 [TiDBの制約](/constraints.md)のドキュメントを参照してください。
+[主キー制約](#select-primary-key)に加えて、TiDB は[ヌルではない](/constraints.md#not-null)制約、 [ユニークキー](/constraints.md#unique-key)制約、および`DEFAULT`などの他の**列制約**もサポートしています。完全な制約については、 [TiDB の制約](/constraints.md)ドキュメントを参照してください。
 
-### デフォルト値を設定する {#set-default-value}
+### デフォルト値を設定 {#set-default-value}
 
-列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値では、各列に値を指定せずにデータを挿入できます。
+列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値を使用すると、各列の値を指定せずにデータを挿入できます。
 
-`DEFAULT`を[サポートされているSQL関数](/basic-features.md#data-types-functions-and-operators)と一緒に使用して、デフォルトの計算をアプリケーション層の外に移動し、アプリケーション層のリソースを節約できます。計算によって消費されたリソースは消えず、TiDBクラスタに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルのデフォルト値の設定の例です。
+`DEFAULT`と[サポートされている SQL関数](/basic-features.md#data-types-functions-and-operators)を一緒に使用して、デフォルトの計算をアプリケーション層の外に移動し、アプリケーション層のリソースを節約できます。計算によって消費されたリソースは消えず、TiDBクラスタに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
 
 {{< copyable "" >}}
 
@@ -193,7 +193,7 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-さらに、データの更新時にデフォルトで現在時刻も入力される場合は、次のステートメントを使用できます（ただし、 `ON UPDATE`の後には[現在の時間に関連するステートメント](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)のみを入力でき、 `DEFAULT`の後には[より多くのオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされます）。
+さらに、データの更新時にデフォルトで現在時刻も入力される場合は、次のステートメントを使用できます (ただし、 `ON UPDATE`の後に入力できるのは[現在時刻関連のステートメント](https://pingcap.github.io/sqlgram/#NowSymOptionFraction)のみであり、 `DEFAULT`の後には[より多くのオプション](https://pingcap.github.io/sqlgram/#DefaultValueExpr)がサポートされています)。
 
 {{< copyable "" >}}
 
@@ -207,11 +207,11 @@ CREATE TABLE `bookshop`.`ratings` (
 );
 ```
 
-### 重複する値を防ぐ {#prevent-duplicate-values}
+### 値の重複を防ぐ {#prevent-duplicate-values}
 
-列内の値の重複を防ぐ必要がある場合は、 `UNIQUE`制約を使用できます。
+列で値が重複しないようにする必要がある場合は、 `UNIQUE`制約を使用できます。
 
-たとえば、ユーザーのニックネームが一意であることを確認するには、次のように`users`のテーブルのテーブル作成SQLステートメントを書き直すことができます。
+たとえば、ユーザーのニックネームが一意であることを確認するには、次のように`users`テーブルのテーブル作成 SQL ステートメントを書き直すことができます。
 
 {{< copyable "" >}}
 
@@ -226,11 +226,11 @@ CREATE TABLE `bookshop`.`users` (
 
 同じ`nickname`を`users`テーブルに挿入しようとすると、エラーが返されます。
 
-### null値を防ぐ {#prevent-null-values}
+### null 値を防ぐ {#prevent-null-values}
 
-列のnull値を防ぐ必要がある場合は、 `NOT NULL`制約を使用できます。
+列の null 値を防ぐ必要がある場合は、 `NOT NULL`制約を使用できます。
 
-例としてユーザーのニックネームを取り上げます。ニックネームが一意であるだけでなくnullでもないことを確認するには、次のように`users`テーブルを作成するためのSQLステートメントを書き直すことができます。
+例として、ユーザーのニックネームを取り上げます。ニックネームが固有であるだけでなく、NULL でもないことを確認するには、 `users`表を作成するための SQL ステートメントを次のように書き直すことができます。
 
 {{< copyable "" >}}
 
@@ -243,23 +243,23 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-## HTAP機能を使用する {#use-htap-capabilities}
+## HTAP 機能を使用する {#use-htap-capabilities}
 
 > **ノート：**
 >
-> このガイドに記載されている手順は、テスト環境でのクイックスタート***のみ***を目的としています。実稼働環境については、 [HTAPを探索する](/explore-htap.md)を参照してください。
+> このガイドに記載されている手順は、テスト環境での***クイック***スタート専用です。本番環境については、 [HTAP を調べる](/explore-htap.md)を参照してください。
 
-たとえば、 `bookshop`のアプリケーションを使用して`ratings`のテーブルでOLAP分析を実行**し、本の評価が評価の時間と有意な相関関係があるかどうか**を照会するとします。これは、ユーザーの本の評価を分析することです。客観的かどうか。次に、 `ratings`個のテーブル全体の`score`個と`rated_at`のフィールドを照会する必要があります。この操作は、OLTPのみのデータベースではリソースを大量に消費します。または、ETLまたはその他のデータ同期ツールを使用して、分析のためにOLTPデータベースから専用のOLAPデータベースにデータをエクスポートすることもできます。
+`bookshop`アプリケーションを使用して`ratings`テーブルで OLAP 分析を実行するとします。たとえば、**書籍の評価が評価の時間と有意な相関関係があるかどうか**をクエリするために、ユーザーの書籍の評価が客観的かどうか。次に、 `ratings`テーブル全体の`score`フィールドと`rated_at`フィールドを照会する必要があります。この操作は、OLTP のみのデータベースではリソースを集中的に使用します。または、ETL またはその他のデータ同期ツールを使用して、分析のために OLTP データベースから専用の OLAP データベースにデータをエクスポートすることもできます。
 
-このシナリオでは、OLTPシナリオとOLAPシナリオの両方をサポートする**HTAP（Hybrid Transactional and Analytical Processing）**データベースであるTiDBは、理想的なワンストップデータベースソリューションです。
+このシナリオでは、OLTP と OLAP の両方のシナリオをサポートする**HTAP (Hybrid Transactional and Analytical Processing)**データベースである TiDB が、理想的なワンストップ データベース ソリューションです。
 
 ### 列ベースのデータを複製する {#replicate-column-based-data}
 
-現在、TiDBは**TiFlash**と<strong>TiSpark</strong>の2つのデータ分析エンジンをサポートしています。大規模なデータシナリオ（100 T）の場合、HTAPの主要なソリューションとして<strong>TiFlash MPP</strong>を推奨し、補完的なソリューションとして<strong>TiSpark</strong>を推奨します。 TiDB HTAP機能の詳細については、次のドキュメントを参照してください： [TiDB HTAPのクイックスタートガイド](/quick-start-with-htap.md)および[HTAPを探索する](/explore-htap.md) 。
+現在、TiDB は**TiFlash**と<strong>TiSpark</strong>の 2 つのデータ分析エンジンをサポートしています。大規模なデータ シナリオ (100 T) では、 <strong>TiFlash MPP</strong>が HTAP の主要なソリューションとして推奨され、 <strong>TiSpark</strong>が補完的なソリューションとして推奨されます。 TiDB HTAP機能の詳細については、次のドキュメントを参照してください: [TiDB HTAPのクイック スタート ガイド](/quick-start-with-htap.md)および[HTAP を調べる](/explore-htap.md) 。
 
-この例では、 `bookshop`データベースのデータ分析エンジンとして[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)が選択されています。
+この例では、 `bookshop`データベースのデータ分析エンジンとして[ティフラッシュ](https://docs.pingcap.com/tidb/stable/tiflash-overview)が選択されています。
 
-TiFlashは、展開後にデータを自動的に複製しません。したがって、複製するテーブルを手動で指定する必要があります。
+TiFlash は、展開後にデータを自動的に複製しません。したがって、レプリケートするテーブルを手動で指定する必要があります。
 
 {{< copyable "" >}}
 
@@ -269,14 +269,14 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 
 **パラメータの説明**
 
--   `{table_name}` ：テーブル名。
--   `{count}` ：複製されたレプリカの数。 0の場合、複製されたレプリカは削除されます。
+-   `{table_name}` : テーブル名。
+-   `{count}` : レプリケートされたレプリカの数。 0 の場合、複製されたレプリカは削除されます。
 
-その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDBは、コストの最適化に基づいて、クエリに対してTiKV（行ベース）またはTiFlash（列ベース）を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
+その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいて、クエリに対して TiKV (行ベース) または TiFlash (列ベース) を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDB を使用して TiFlash レプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
-### HTAP機能の使用例 {#an-example-of-using-htap-capabilities}
+### HTAP 機能の使用例 {#an-example-of-using-htap-capabilities}
 
-`ratings`のテーブルは、TiFlashの`1`のレプリカを開きます。
+`ratings`のテーブルは、TiFlash の`1`のレプリカを開きます。
 
 {{< copyable "" >}}
 
@@ -286,7 +286,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **ノート：**
 >
-> クラスタに**TiFlash**ノードが含まれていない場合、このSQLステートメントはエラーを報告します： `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB CloudでTiDBクラスターを構築する（DevTier）](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を使用して、 <strong>TiFlash</strong>を含む無料のクラスタを作成できます。
+> クラスタに**TiFlash**ノードが含まれていない場合、この SQL ステートメントはエラーを報告します: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0` 。 [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を使用して、 <strong>TiFlash</strong>を含む無料のクラスタを作成できます。
 
 次に、次のクエリを実行できます。
 
@@ -304,7 +304,7 @@ SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`r
 EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` GROUP BY HOUR(`rated_at`);
 ```
 
-実行結果：
+実行結果:
 
 ```sql
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
@@ -318,13 +318,13 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 +-----------------------------+-----------+---------+--------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------+----------+------+
 ```
 
-フィールド`cop[tiflash]`が表示されている場合は、タスクが処理のために**TiFlash**に送信されていることを意味します。
+フィールド`cop[tiflash]`が表示される場合、タスクが処理のために**TiFlash**に送信されることを意味します。
 
-## <code>CREATE TABLE</code>ステートメントを実行します {#execute-the-code-create-table-code-statement}
+## <code>CREATE TABLE</code>ステートメントを実行する {#execute-the-code-create-table-code-statement}
 
-上記のルールに従ってすべてのテーブルを作成すると、 [データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)のスクリプトは次のようになります。表の詳細を確認する必要がある場合は、 [テーブルの説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
+上記のルールに従ってすべてのテーブルを作成すると、 [データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)のスクリプトは次のようになります。テーブル情報を詳しく見る必要がある場合は、 [表の説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
 
-データベース初期化スクリプト`init.sql`に名前を付けて保存するには、次のステートメントを実行してデータベースを初期化します。
+データベース初期化スクリプトに`init.sql`という名前を付けて保存するには、次のステートメントを実行してデータベースを初期化します。
 
 {{< copyable "" >}}
 
@@ -345,7 +345,7 @@ mysql
 SHOW TABLES IN `bookshop`;
 ```
 
-実行結果：
+実行結果:
 
 ```
 +--------------------+
@@ -360,56 +360,56 @@ SHOW TABLES IN `bookshop`;
 +--------------------+
 ```
 
-## テーブルを作成するときに従うべきガイドライン {#guidelines-to-follow-when-creating-a-table}
+## 表を作成する際に従うべきガイドライン {#guidelines-to-follow-when-creating-a-table}
 
-このセクションでは、テーブルを作成するときに従う必要のあるガイドラインを示します。
+このセクションでは、テーブルを作成する際に従う必要があるガイドラインを示します。
 
-### テーブルに名前を付けるときに従うべきガイドライン {#guidelines-to-follow-when-naming-a-table}
+### テーブルに名前を付ける際に従うべきガイドライン {#guidelines-to-follow-when-naming-a-table}
 
--   **完全修飾**テーブル名（たとえば、 `CREATE TABLE {database_name}. {table_name}` ）を使用します。データベース名を指定しない場合、TiDBは<strong>SQLセッション</strong>で現在のデータベースを使用します。 SQLセッションでデータベースを指定するために`USE {databasename};`を使用しない場合、TiDBはエラーを返します。
--   意味のあるテーブル名を使用してください。たとえば、ユーザーテーブルを作成する必要がある場合は、 `user`の`users`を使用するか、会社または組織の命名規則に従うことができ`t_user` 。会社または組織に命名規則がない場合は、 [テーブルの命名規則](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention)を参照できます。 `t1`などのテーブル`table1`は使用しないでください。
--   複数の単語はアンダースコアで区切られます。名前は32文字以内にすることをお勧めします。
--   異なるビジネスモジュールのテーブル用に個別の`DATABASE`を作成し、それに応じてコメントを追加します。
+-   **完全修飾**されたテーブル名 (たとえば、 `CREATE TABLE {database_name}. {table_name}` ) を使用します。データベース名を指定しない場合、TiDB は<strong>SQL セッション</strong>で現在のデータベースを使用します。 SQL セッションでデータベースを指定するために`USE {databasename};`を使用しない場合、TiDB はエラーを返します。
+-   意味のあるテーブル名を使用してください。たとえば、ユーザー テーブルを作成する必要がある場合は、名前`user` 、 `t_user` 、 `users`を使用するか、会社または組織の命名規則に従うことができます。会社または組織に命名規則がない場合は、 [テーブルの命名規則](/develop/dev-guide-object-naming-guidelines.md#table-naming-convention)を参照できます。 `t1` 、 `table1`などのテーブル名は使用しないでください。
+-   複数の単語はアンダースコアで区切ります。名前は 32 文字以内にすることをお勧めします。
+-   異なるビジネス モジュールのテーブル用に別の`DATABASE`を作成し、それに応じてコメントを追加します。
 
-### 列を定義するときに従うべきガイドライン {#guidelines-to-follow-when-defining-columns}
+### 列を定義する際に従うべきガイドライン {#guidelines-to-follow-when-defining-columns}
 
--   列でサポートされている[データ型](/basic-features.md#data-types-functions-and-operators)を確認し、データ型の制限に従ってデータを整理します。列に保存する予定のデータに適切なタイプを選択します。
--   主キーを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)をチェックし、主キー列を使用するかどうかを決定します。
--   クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)をチェックし、クラスター化**インデックス**を指定するかどうかを決定します。
--   [列制約の追加](#add-column-constraints)をチェックして、列に制約を追加するかどうかを決定します。
+-   列でサポートされている[データ型](/basic-features.md#data-types-functions-and-operators)を確認し、データ型の制限に従ってデータを整理します。列に格納する予定のデータに適したタイプを選択します。
+-   主キーを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)を確認し、主キー列を使用するかどうかを決定します。
+-   クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)を確認し、クラスター化**インデックス**を指定するかどうかを決定します。
+-   [列の制約を追加する](#add-column-constraints)を確認し、列に制約を追加するかどうかを決定します。
 -   意味のある列名を使用してください。会社または組織のテーブル命名規則に従うことをお勧めします。会社または組織に対応する命名規則がない場合は、 [列の命名規則](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention)を参照してください。
 
 ### 主キーを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-primary-key}
 
--   テーブル内で**主キー**または<strong>一意のインデックス</strong>を定義します。
--   **主キー**として意味のある<strong>列</strong>を選択してみてください。
--   パフォーマンス上の理由から、幅の広いテーブルの保存は避けてください。テーブルフィールドの数が`60`を超え、単一行の合計データサイズが`64K`を超えることはお勧めしません。データ長が長すぎるフィールドを別のテーブルに分割することをお勧めします。
+-   テーブル内に**主キー**または<strong>一意のインデックス</strong>を定義します。
+-   **主キー**として意味のある<strong>列</strong>を選択するようにしてください。
+-   パフォーマンス上の理由から、幅の広いテーブルを格納しないようにしてください。テーブル フィールドの数が`60`を超え、1 行の合計データ サイズが`64K`を超えることはお勧めしません。データ長が多すぎるフィールドを別のテーブルに分割することをお勧めします。
 -   複雑なデータ型を使用することはお勧めしません。
--   結合するフィールドについては、データ型に一貫性があることを確認し、暗黙的な変換を回避してください。
--   単一の単調なデータ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して<strong>主キー</strong>を定義すると、書き込みパフォーマンスに影響を与える可能性があります。可能であれば、 `AUTO_INCREMENT`の代わりに`AUTO_RANDOM`を使用します。これにより、主キーの連続属性と増分属性が破棄されます。
--   書き込みが集中するシナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの<strong>主キー</strong>を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用できます。シャード`_tidb_rowid`に。
+-   フィールドを結合するには、データ型が一貫していることを確認し、暗黙的な変換を避けてください。
+-   単一の単調なデータ列に**主キー**を定義することは避けてください。単一のモノトニック データ列 (たとえば、 `AUTO_INCREMENT`属性を持つ列) を使用して<strong>主キー</strong>を定義すると、書き込みパフォーマンスに影響を与える可能性があります。可能であれば、主キーの連続属性と増分属性を破棄する`AUTO_INCREMENT`の代わりに`AUTO_RANDOM`を使用してください。
+-   書き込みが集中するシナリオで単一のモノトニック データ列にインデックスを作成する必要がある場合は、このモノトニック データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの<strong>主キー</strong>を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用できます。破片へ`_tidb_rowid` 。
 
-### クラスター化されたインデックスを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
+### クラスター化インデックスを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
 
--   [主キーを選択するためのガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従って、**クラスター化インデックス**を作成します。
+-   **クラスター化インデックス**を作成するには、 [主キーを選択するためのガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
--   非クラスター化インデックスを持つテーブルと比較して、クラスター化インデックスを持つテーブルは、次のシナリオでパフォーマンスとスループットの利点が向上します。
-    -   データが挿入されると、クラスター化されたインデックスにより、ネットワークからのインデックスデータの書き込みが1回減ります。
-    -   同等の条件のクエリに主キーのみが含まれる場合、クラスター化インデックスはネットワークからのインデックスデータの読み取りを1回減らします。
-    -   範囲条件を含むクエリに主キーのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックスデータの複数の読み取りを削減します。
-    -   同等または範囲の条件を持つクエリに主キープレフィックスのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックスデータの複数の読み取りを削減します。
+-   クラスター化されていないインデックスを含むテーブルと比較して、クラスター化されたインデックスを含むテーブルは、次のシナリオでより優れたパフォーマンスとスループットの利点を提供します。
+    -   データが挿入されると、クラスター化インデックスは、ネットワークからのインデックス データの 1 回の書き込みを減らします。
+    -   同等の条件を持つクエリに主キーのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックス データの 1 回の読み取りを減らします。
+    -   範囲条件を含むクエリに主キーのみが含まれる場合、クラスター化インデックスにより、ネットワークからのインデックス データの複数回の読み取りが削減されます。
+    -   同等または範囲条件を含むクエリに主キー プレフィックスのみが含まれる場合、クラスター化インデックスは、ネットワークからのインデックス データの複数回の読み取りを減らします。
 
--   一方、クラスター化インデックスを持つテーブルには、次の問題がある可能性があります。
-    -   近い値を持つ多数の主キーを挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択するときに従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってください。
-    -   主キーのデータ型が64ビットより大きい場合、特に複数のセカンダリインデックスがある場合、テーブルデータはより多くのストレージスペースを占有します。
+-   一方、クラスター化インデックスを含むテーブルには、次の問題がある場合があります。
+    -   近い値を持つ多数の主キーを挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってください。
+    -   主キーのデータ型が 64 ビットより大きい場合、特に複数のセカンダリ インデックスがある場合、テーブル データはより多くのストレージ領域を占有します。
 
--   [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するために、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key`を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
+-   [クラスタ化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key`を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
 
-### <code>CREATE TABLE</code>ステートメントを実行するときに従うべきガイドライン {#guidelines-to-follow-when-executing-the-code-create-table-code-statement}
+### <code>CREATE TABLE</code>ステートメントを実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-code-create-table-code-statement}
 
--   データベーススキーマの変更を実行するためにクライアント側のDriverまたはORMを使用することはお勧めしません。 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用するか、GUIクライアントを使用してデータベーススキーマの変更を実行することをお勧めします。このドキュメントでは、 **MySQLクライアント**を使用してSQLファイルを渡し、ほとんどのシナリオでデータベーススキーマの変更を実行します。
--   SQL開発[テーブルの作成と削除の仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)に従ってください。判断ロジックを追加するために、ビジネスアプリケーション内でビルドステートメントと削除ステートメントをラップすることをお勧めします。
+-   クライアント側のDriverまたは ORM を使用してデータベース スキーマの変更を実行することはお勧めしません。 [MySQL クライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)を使用するか、GUI クライアントを使用してデータベース スキーマの変更を実行することをお勧めします。このドキュメントでは、 **MySQL クライアント**を使用して SQL ファイルを渡し、ほとんどのシナリオでデータベース スキーマの変更を実行します。
+-   SQL 開発に従ってください[テーブルの作成と削除の仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables) 。 build 文と delete 文をビジネス アプリケーション内にラップして、判断ロジックを追加することをお勧めします。
 
-## もう1つのステップ {#one-more-step}
+## もう一歩 {#one-more-step}
 
-このドキュメントで作成されたすべてのテーブルには、セカンダリインデックスが含まれていないことに注意してください。セカンダリインデックスを追加するためのガイドについては、 [セカンダリインデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を参照してください。
+このドキュメントで作成されたすべてのテーブルにセカンダリ インデックスが含まれているわけではないことに注意してください。副次索引を追加するためのガイドについては、 [セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を参照してください。

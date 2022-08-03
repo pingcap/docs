@@ -5,19 +5,19 @@ summary: Learn about the SQL syntax, best practices, and examples for deleting d
 
 # データの削除 {#delete-data}
 
-このドキュメントでは、 [消去](/sql-statements/sql-statement-delete.md)ステートメントを使用してTiDBのデータを削除する方法について説明します。
+このドキュメントでは、 [消去](/sql-statements/sql-statement-delete.md) SQL ステートメントを使用して TiDB 内のデータを削除する方法について説明します。
 
 ## 始める前に {#before-you-start}
 
-このドキュメントを読む前に、以下を準備する必要があります。
+このドキュメントを読む前に、次の準備が必要です。
 
--   [TiDB CloudでTiDBクラスターを構築する（DevTier）](/develop/dev-guide-build-cluster-in-cloud.md)
--   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、および[データベースを作成する](/develop/dev-guide-create-database.md) [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md) [テーブルを作成する](/develop/dev-guide-create-table.md)
--   [データを挿入](/develop/dev-guide-insert-data.md)
+-   [TiDB Cloud(開発者層) で TiDB クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+-   [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md) 、 [データベースを作成する](/develop/dev-guide-create-database.md) 、 [テーブルを作成する](/develop/dev-guide-create-table.md) 、および[セカンダリ インデックスの作成](/develop/dev-guide-create-secondary-indexes.md)を読み取る
+-   [データの挿入](/develop/dev-guide-insert-data.md)
 
-## SQL構文 {#sql-syntax}
+## SQL 構文 {#sql-syntax}
 
-`DELETE`ステートメントは、通常、次の形式になります。
+`DELETE`ステートメントは通常、次の形式です。
 
 {{< copyable "" >}}
 
@@ -30,20 +30,20 @@ DELETE FROM {table} WHERE {filter}
 |  `{table}` |     テーブル名     |
 | `{filter}` | フィルターのマッチング条件 |
 
-この例は、 `DELETE`の単純な使用例のみを示しています。詳細については、 [DELETE構文](/sql-statements/sql-statement-delete.md)を参照してください。
+この例は、 `DELETE`の単純な使用例のみを示しています。詳細については、 [DELETE 構文](/sql-statements/sql-statement-delete.md)を参照してください。
 
 ## ベストプラクティス {#best-practices}
 
-以下は、データを削除するときに従うべきいくつかのベストプラクティスです。
+データを削除するときに従うべきいくつかのベスト プラクティスを次に示します。
 
--   `DELETE`ステートメントでは常に`WHERE`句を指定してください。 `WHERE`句が指定されていない場合、TiDBはテーブル内の***すべて***の行を削除します。
--   TiDBは単一のトランザクションのサイズ（デフォルトでは[txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit) MB）を制限しているため、多数の行（たとえば、1万を超える）を削除する場合は[一括削除](#bulk-delete)を使用します。
+-   `DELETE`文には必ず`WHERE`節を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべて***の行を削除します。
+-   多数の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。これは、TiDB が 1 つのトランザクションのサイズを制限しているためです (デフォルトでは[txn-合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。
 -   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
--   パフォーマンスの考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
+-   パフォーマンスに関する考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 
 ## 例 {#example}
 
-特定の期間内にアプリケーションエラーを見つけ、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
+特定の期間内にアプリケーション エラーが見つかり、この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで) を削除する必要があるとします。この場合、 `SELECT`ステートメントを使用して、削除するレコードの数を確認できます。
 
 {{< copyable "" >}}
 
@@ -51,14 +51,14 @@ DELETE FROM {table} WHERE {filter}
 SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
 ```
 
-10,000を超えるレコードが返された場合は、 [一括削除](#bulk-delete)を使用してそれらを削除します。
+10,000 を超えるレコードが返された場合は、 [一括削除](#bulk-delete)を使用してそれらを削除します。
 
-10,000未満のレコードが返される場合は、次の例を使用してそれらを削除します。
+返されるレコードが 10,000 件未満の場合は、次の例を使用してそれらを削除します。
 
 <SimpleTab>
 <div label="SQL">
 
-SQLでは、例は次のとおりです。
+SQL では、例は次のとおりです。
 
 ```sql
 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
@@ -68,7 +68,7 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 <div label="Java">
 
-Javaでは、例は次のとおりです。
+Java では、例は次のとおりです。
 
 ```java
 // ds is an entity of com.mysql.cj.jdbc.MysqlDataSource
@@ -95,7 +95,7 @@ try (Connection connection = ds.getConnection()) {
 
 <div label="Golang">
 
-Golangでは、例は次のとおりです。
+Golang では、例は次のとおりです。
 
 ```go
 package main
@@ -136,44 +136,44 @@ func main() {
 
 > **ノート：**
 >
-> `rated_at`フィールドは[日付と時刻のタイプ](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字通りの数量としてTiDBに保存されていると見なすことができます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、異なる[タイムゾーン](/configure-time-zone.md)に異なる時間文字列を表示します。
+> `rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字どおりの数量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)には別の時間文字列が表示されます。
 >
-> また、MySQLと同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038より大きい値を格納する場合は、 `DATETIME`タイプを使用することをお勧めします。
+> また、MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
 
 ## パフォーマンスに関する考慮事項 {#performance-considerations}
 
-### TiDBGCメカニズム {#tidb-gc-mechanism}
+### TiDB GC メカニズム {#tidb-gc-mechanism}
 
-TiDBは、 `DELETE`ステートメントを実行した直後にデータを削除しません。代わりに、データを削除の準備ができているとマークします。次に、TiDB GC（ガベージコレクション）が古いデータをクリーンアップするのを待ちます。したがって、 `DELETE`ステートメントはディスク使用量をすぐには削減し***ません***。
+TiDB は、 `DELETE`ステートメントを実行した直後にデータを削除しません。代わりに、データを削除の準備ができているとマークします。次に、TiDB GC (ガベージ コレクション) が古いデータをクリーンアップするのを待ちます。したがって、 `DELETE`ステートメントは、ディスク使用量をすぐには削減し***ません***。
 
-GCは、デフォルトで10分ごとに1回トリガーされます。各GCは、 **safe_point**と呼ばれる時点を計算します。この時点より前のデータは再度使用されないため、TiDBは安全にデータをクリーンアップできます。
+デフォルトでは、GC は 10 分ごとに 1 回トリガーされます。各 GC は、 **safe_point**と呼ばれる時点を計算します。この時点より前のデータは再使用されないため、TiDB は安全にクリーンアップできます。
 
-詳細については、 [GCメカニズム](/garbage-collection-overview.md)を参照してください。
+詳細については、 [GC メカニズム](/garbage-collection-overview.md)を参照してください。
 
-### 統計情報を更新する {#update-statistical-information}
+### 統計情報の更新 {#update-statistical-information}
 
-TiDBは[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除した後、インデックスが正しく選択されないリスクが高くなります。 [手動収集](/statistics.md#manual-collection)を使用して統計を更新できます。これは、SQLパフォーマンス最適化のためのより正確な統計情報をTiDBオプティマイザーに提供します。
+TiDB は[統計情報](/statistics.md)を使用してインデックスの選択を決定します。大量のデータを削除すると、インデックスが正しく選択されない可能性が高くなります。 [手動収集](/statistics.md#manual-collection)を使用して統計を更新できます。これは、TiDB オプティマイザーに SQL パフォーマンス最適化のためのより正確な統計情報を提供します。
 
 ## 一括削除 {#bulk-delete}
 
-テーブルから複数行のデータを削除する必要がある場合は、 [`DELETE`例](#example)を選択し、 `WHERE`句を使用して、削除する必要のあるデータをフィルタリングできます。
+テーブルから複数行のデータを削除する必要がある場合は、 [`DELETE`例](#example)句を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
 
-ただし、多数の行（1万を超える）を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、各反復でデータの一部を削除します。これは、 [`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)が単一のトランザクションのサイズを制限しているためです（デフォルトでは1、100 MB）。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、繰り返しごとにデータの一部を削除します。これは、TiDB が[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
 
-このセクションでは、一括削除を完了するために`SELECT`と`DELETE`を組み合わせて実行する方法を示す、反復削除操作を処理するスクリプトの作成例を示します。
+このセクションでは、一括削除を完了するために`SELECT`と`DELETE`の組み合わせを実行する方法を示す、反復的な削除操作を処理するスクリプトを作成する例を示します。
 
 ### 一括削除ループを作成する {#write-a-bulk-delete-loop}
 
-アプリケーションまたはスクリプトのループに`DELETE`ステートメントを記述し、 `WHERE`句を使用してデータをフィルタリングし、 `LIMIT`を使用して1つのステートメントで削除する行数を制限できます。
+アプリケーションまたはスクリプトのループに`DELETE`ステートメントを記述し、 `WHERE`句を使用してデータをフィルター処理し、 `LIMIT`句を使用して 1 つのステートメントで削除する行数を制限できます。
 
 ### 一括削除の例 {#bulk-delete-example}
 
-特定の期間内にアプリケーションエラーを見つけたとします。この期間内の[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ（たとえば、 `2022-04-15 00:00:00`から`2022-04-15 00:15:00` ）を削除する必要があり、10,000を超えるレコードが15分で書き込まれます。次のように実行できます。
+特定の期間内にアプリケーション エラーが見つかったとします。この期間内に[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば`2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで) を削除する必要があり、15 分間で 10,000 を超えるレコードが書き込まれます。次のように実行できます。
 
 <SimpleTab>
 <div label="Java">
 
-Javaでは、一括削除の例は次のとおりです。
+Java での一括削除の例は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -229,13 +229,13 @@ public class BatchDeleteExample
 }
 ```
 
-各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大1000行を削除します。
+各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
 
 </div>
 
 <div label="Golang">
 
-Golangでは、一括削除の例は次のとおりです。
+Golang での一括削除の例は次のとおりです。
 
 {{< copyable "" >}}
 
@@ -286,7 +286,7 @@ func deleteBatch(db *sql.DB, startTime, endTime time.Time) (int64, error) {
 }
 ```
 
-各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大1000行を削除します。
+各反復で、 `DELETE`は`2022-04-15 00:00:00`から`2022-04-15 00:15:00`までの最大 1000 行を削除します。
 
 </div>
 

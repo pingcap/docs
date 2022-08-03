@@ -1,13 +1,13 @@
 ---
-title: Build a TiDB Cluster in TiDB Cloud (DevTier)
+title: Build a TiDB Cluster in TiDB Cloud (Developer Tier)
 summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and connect to a TiDB Cloud cluster.
 ---
 
 <!-- markdownlint-disable MD029 -->
 
-# TiDB Cloud (DevTier) で TiDBクラスタを構築する {#build-a-tidb-cluster-in-tidb-cloud-devtier}
+# TiDB Cloud(開発者層) で TiDB クラスターを構築する {#build-a-tidb-cluster-in-tidb-cloud-developer-tier}
 
-このドキュメントでは、TiDB を開始するための最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して、無料の TiDBクラスタを作成し、それに接続して、サンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して、無料の TiDBクラスタを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカル マシンで TiDB を実行する必要がある場合は、 [TiDB をローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
@@ -31,7 +31,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
     ![connect](/media/develop/IMG_20220331-232726165.png)
 
-8.  ポップアップ ウィンドウで、[**現在の IP アドレスを追加**] をクリックして現在の IP アドレスを入力し、[<strong>フィルター</strong>の作成] をクリックしてトラフィック フィルターを作成します。
+8.  ポップアップ ウィンドウで、[**現在の IP アドレスを追加**] をクリックして現在の IP アドレスを入力し、[<strong>フィルタ</strong>を作成] をクリックしてトラフィック フィルタを作成します。
 
 9.  後で使用するために、文字列をコピーして SQL クライアントに接続します。
 
