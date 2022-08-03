@@ -143,7 +143,7 @@ A powerful insight tool that analyzes in depth any GitHub repository, powered by
 
 </DocHomeCard>
 
-<DocHomeCard href="https://github.com/pingcap/docs-cn/blob/master/CONTRIBUTING.md" icon="contributor" label="Contribute to PingCAP Documentation">
+<DocHomeCard href="https://github.com/pingcap/docs/blob/master/CONTRIBUTING.md" icon="contributor" label="Contribute to PingCAP Documentation">
 
 Let’s work together to make the documentation better!
 
