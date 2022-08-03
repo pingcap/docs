@@ -43,7 +43,7 @@ validators:
     row-error-delay: 30m # If a row is not validated within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
 ```
 
-The configuration item are described as follows:
+The configuration items are described as follows:
 
 * `mode`: validation mode. The possible values are `none`, `full`, and `fast`.
     * `none`: the default value, which means no validation is performed.
@@ -195,7 +195,7 @@ Example output:
 
 After continuous data validation returns error rows, you need to manually handle the error rows.
 
-When continuous data validation finds error rows, the validation does not stop immediately. Instead, it records the error rows for you to handle. Before the error rows are processed, the default status is `unprocessed`. If you manually correct the error rows in the downstream, the validation does not automatically retrieve the corrected data. The error rows are still recorded in the `error` field.
+When continuous data validation finds error rows, the validation does not stop immediately. Instead, it records the error rows for you to handle. Before the error rows are processed, the default status is `unprocessed`. If you manually correct the error rows in the downstream, the validation does not automatically retrieve the latest status of the corrected data. The error rows are still recorded in the `error` field.
 
 If you do not want to see an error row in the validation status, or if you want to mark an error row as resolved, you can locate the error row id using the `validation show-error` command:
 
