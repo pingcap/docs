@@ -2271,7 +2271,19 @@ explain select * from t where age=5;
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
+
+<CustomContent platform="tidb">
+
 - Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- For TiDB Cloud, users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege and also the additional `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
+
+</CustomContent>
+
 - `tidb_restricted_read_only` affects [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) in the following cases:
     - Setting `tidb_restricted_read_only` to `ON` will update [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to `ON`.
     - Setting `tidb_restricted_read_only` to `OFF` leaves [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) unchanged.
@@ -2285,21 +2297,6 @@ explain select * from t where age=5;
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
     - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
-<<<<<<< HEAD
-
-<CustomContent platform="tidb">
-
-- Users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
-=======
->>>>>>> cd6f834f0 (Add tidb_super_read_only (#9718))
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- For TiDB Cloud, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
-
-</CustomContent>
 
 ### tidb_retry_limit
 
