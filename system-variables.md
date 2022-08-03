@@ -1450,12 +1450,11 @@ SET tidb_query_log_max_len = 20
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
+> **Warning:**
+>
+> For TiDB versions earlier than v5.3.1, this variable has a defect and using it might cause unexpected results. Ensure that you only use this variable in TiDB versions later than v5.3.1.
+
 - Scope: GLOBAL
-<<<<<<< HEAD
-- Default value: `0`
-- Value options: `0`, `1`
-- This variable controls the read-only status of the entire cluster. If the variable is enabled (which means that the value is `1`), all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
-=======
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
@@ -1467,9 +1466,8 @@ SET tidb_query_log_max_len = 20
     - If `tidb_restricted_read_only` is `ON`, [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) cannot be set to `OFF`.
 - For DBaaS providers of TiDB, if a TiDB cluster is a downstream database of another database, to make the TiDB cluster read-only, you might need to use `tidb_restricted_read_only` with [Security Enhanced Mode](#tidb_enable_enhanced_security) enabled, which prevents your customers from using [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to make the cluster writable. To achieve this, you need to enable [Security Enhanced Mode](#tidb_enable_enhanced_security), use an admin user with the `SYSTEM_VARIABLES_ADMIN` and `RESTRICTED_VARIABLES_ADMIN` privileges to control `tidb_restricted_read_only`, and let your database users use the root user with the `SUPER` privilege to control [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
->>>>>>> cd6f834f0 (Add tidb_super_read_only (#9718))
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is also checked before SQL statements are committed. This helps prevent the case where long-running [auto commit](/transaction-overview.md#autocommit) statements might modify data after the server has been placed in read-only mode.
+- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
 - When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
     - For uncommitted read-only transactions, you can commit the transactions normally.
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
@@ -1597,9 +1595,11 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
-<<<<<<< HEAD
-=======
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
+
+> **Warning:**
+>
+> For TiDB versions earlier than v5.3.1, this variable has a defect and using it might cause unexpected results. Ensure that you only use this variable in TiDB versions later than v5.3.1.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
@@ -1609,7 +1609,7 @@ SET tidb_slow_log_threshold = 200;
 - Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is also checked before SQL statements are committed. This helps prevent the case where long-running [auto commit](/transaction-overview.md#autocommit) statements might modify data after the server has been placed in read-only mode.
+- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
 - When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
     - For uncommitted read-only transactions, you can commit the transactions normally.
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
@@ -1617,25 +1617,6 @@ SET tidb_slow_log_threshold = 200;
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
 - When the [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) system variable is set to `ON`, `tidb_super_read_only` is affected by [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) in some cases. For detailed impact, see the description of [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520).
 
-### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
-
-- Scope: SESSION | GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether the `SYSDATE` function can be replaced by the `NOW` function. This configuration item has the same effect as the MySQL option [`sysdate-is-now`](https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now).
-
-### tidb_table_cache_lease <span class="version-mark">New in v6.0.0</span>
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Integer
-- Default value: `3`
-- Range: `[1, 10]`
-- Unit: Seconds
-- This variable is used to control the lease time of [cached tables](/cached-tables.md) with a default value of `3`. The value of this variable affects the modification to cached tables. After a modification is made to cached tables, the longest waiting time might be `tidb_table_cache_lease` seconds. If the table is read-only or can accept a high write latency, you can increase the value of this variable to increase the valid time for caching tables and to reduce the frequency of lease renewal.
-
->>>>>>> cd6f834f0 (Add tidb_super_read_only (#9718))
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
 - Scope: SESSION | GLOBAL
