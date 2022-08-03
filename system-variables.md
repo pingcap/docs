@@ -1729,9 +1729,6 @@ SET tidb_slow_log_threshold = 200;
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
-<<<<<<< HEAD
-### tidb_sysdate_is_now （New in v6.0.0）
-=======
 ### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
 
 - Scope: GLOBAL
@@ -1751,7 +1748,6 @@ SET tidb_slow_log_threshold = 200;
 - When the [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) system variable is set to `ON`, `tidb_super_read_only` is affected by [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) in some cases. For detailed impact, see the description of [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520).
 
 ### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
->>>>>>> cd6f834f0 (Add tidb_super_read_only (#9718))
 
 - Scope: SESSION | GLOBAL
 - Default value: `OFF`
