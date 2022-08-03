@@ -15,7 +15,7 @@ RELEASE SAVEPOINT identifier
 
 > **Warning:**
 >
-> You cannot use `SAVEPOINT` together with TiDB Binlog enabled.
+> You cannot use `SAVEPOINT` with TiDB Binlog enabled.
 
 - `SAVEPOINT` is used to set a savepoint of a specified name in the current transaction. If a savepoint with the same name already exists, it will be deleted and a new savepoint with the same name will be set.
 
@@ -27,7 +27,7 @@ RELEASE SAVEPOINT identifier
     ERROR 1305 (42000): SAVEPOINT identifier does not exist
     ```
 
-- `RELEASE SAVEPOINT` statement removes the named savepoint and **all savepoints** after this savepoint from the current transaction,  without committing or rolling back the current transaction. If the savepoint of the specified name does not exist, the following error is returned:
+- `RELEASE SAVEPOINT` statement removes the named savepoint and **all savepoints** after this savepoint from the current transaction, without committing or rolling back the current transaction. If the savepoint of the specified name does not exist, the following error is returned:
 
     ```
     ERROR 1305 (42000): SAVEPOINT identifier does not exist
