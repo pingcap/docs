@@ -92,7 +92,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Auto increment](/auto-increment.md)                         | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Auto random](/auto-random.md)                               | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Multi schema change: add column(s)                           | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Multi-schema change: add column(s)](/system-variables.md#tidb_enable_change_multi_schema)                           | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Change column type](/sql-statements/sql-statement-modify-column.md) | Y | Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
 | [Temporary tables](/temporary-tables.md)                    | Y | Y   | Y            |      Y       |      N       |      N       |      N       |      N       |
 
@@ -175,7 +175,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Global Kill](/sql-statements/sql-statement-kill.md)       | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Lock View](/information-schema/information-schema-data-lock-waits.md) | Y | Y | Y            |      Y       |      Y       | Experimental | Experimental | Experimental |
-| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Y | Y | Y | Y | Y | Y | Y | Y |
 | [`SET CONFIG`](/dynamic-config.md)                           | Y | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [DM WebUI](/dm/dm-webui-guide.md) | Experimental | Experimental | N | N | N | N | N | N |
 
