@@ -174,7 +174,7 @@ Write queries are much more complex, there are some variants.
 | Auto-commit | execute + lock + commit | execute + commit |
 | Non auto-commit | execute + lock | execute |
 
-We seperate the write into 3 phases:
+We divide the write into 3 phases:
 
 - execute phase, execute and write mutation into the memory of TiDB.
 - lock phase, acquire pessimistic locks for the execution result.
