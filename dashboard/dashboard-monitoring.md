@@ -1,11 +1,11 @@
 ---
 title: TiDB Dashboard Monitoring Page
-summary: Learn how to view the Performance Overview panel on TiDB Dashboard and understand key metrics displayed on the Performance Overview panel.
+summary: Learn how to view the Performance Overview dashboard on TiDB Dashboard and understand key metrics displayed on the Performance Overview dashboard.
 ---
 
 # TiDB Dashboard Monitoring Page
 
-On the monitoring page, you can view the Performance Overview dashboard, a performance analysis and tuning tool introduced in TiDB v6.1.0. With the Performance Overview dashboard, you can analyze performance efficiently, and confirm whether the bottleneck of user response time is in the database. If the bottleneck is in the database, you can identify the bottleneck inside the database, with database time overview, workload profile and SQL latency breakdown. For details, see [Performance Analysis and Tuning]((/performance-tuning-methods.md)).
+On the monitoring page, you can view the Performance Overview dashboard, a performance analysis and tuning tool introduced in TiDB v6.1.0. With the Performance Overview dashboard, you can analyze performance efficiently, and confirm whether the bottleneck of user response time is in the database. If the bottleneck is in the database, you can identify the bottleneck inside the database, with database time overview, workload profile and SQL latency breakdown. For details, see [Performance Analysis and Tuning](/performance-tuning-methods.md).
 
 ## Access the page
 
