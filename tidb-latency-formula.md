@@ -529,5 +529,3 @@ Before investigating slow writes, you need to troubleshoot the cause of the conf
 - If this metric is high across all instances, there may be conflict in the application.
 
 After investigating the conflict and make sure it's reasonable, you can goon analyzing the duration of [lock](#lock) and [commit](#commit).
-
-
