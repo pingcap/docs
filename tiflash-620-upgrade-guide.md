@@ -16,9 +16,9 @@ To learn the standard upgrade process, see the following documents:
 > 
 > - It is not recommended that you upgrade TiFlash across major versions, for example, from v4.x.x to v6.x.x. Instead, you need to upgrade from v4.x.x to v5.x.x first, and then to v6.x.x.
 >
-> - v4.x.x is near the end of its life cycle. Please upgrade to v5.x.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
+> - v4.x.x is near the end of its life cycle. It is recommended that you upgrade to v5.x.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
 >
-> - As a non-LTS version, v6.0.0 will not release subsequent bug-fix versions. Please use v6.1.0 and later LTS versions whenever possible.
+> - PingCAP does not provide bug fixes for non-LTS versions, such as v6.0.0. It is recommended that you v6.1.0 and later LTS versions whenever possible.
 >
 > - To upgrade TiFlash from versions earlier than V5.3.0 to V5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
 > 
@@ -34,7 +34,7 @@ When you upgrade TiFlash from v5.x.x or v6.0.0 to v6.1.0, pay attention to the f
 
 TiFlash Proxy is upgraded in v6.1.0 (aligned with TiKV v6.0.0). The new version has upgraded the RocksDB version. After you upgrade TiFlash to v6.1.0, the data format is converted to the new version automatically.
 
-In normal upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1.0 to any earlier version in special scenarios (for example, testing or verification scenarios), note that the RocksDB configuration of the newer version might fail to be parsed. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
+In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1.0 to any earlier version in special scenarios (for example, testing or verification scenarios), note that the RocksDB configuration of the newer version might fail to be parsed. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
@@ -46,7 +46,7 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 - Newly installed TiDB v6.1.0: Dynamic pruning is enabled by default.
 
-- TiDB v6.0.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning inherits the previous version after an upgrade. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
+- TiDB v6.0.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning after an upgrade inherits that of the previous version. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
 
     After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update GlobalStats of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
 
@@ -58,10 +58,10 @@ In TiDB v6.2.0, TiFlash upgrades its data storage format to the V3 version. Ther
 
 By default, TiFlash v6.2.0 uses PageStorage V3 version [`format_version = 4`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). This version significantly reduces the peak write I/O traffic and relieves excessive CPU usage caused by TiFlash data GC in scenarios with high update traffic and high concurrency or heavy queries.
 
-- With more data written to the existing TiFlash nodes following the upgrade to v6.2.0, earlier data will be gradually converted to the new format.
-- However, earlier data cannot be completely converted to the new format, because the conversion consumes certain amount of system overhead (services are not affected, but you still need to pay attention). After the upgrade, it is recommended that you run the [`Compact` command](/sql-statements/sql-statement-alter-table-compact.md) to convert the data to the new format. The steps are as follows:
+- With more data written to the existing TiFlash nodes after an upgrade to v6.2.0, earlier data will be gradually converted to the new format.
+- However, earlier data cannot be completely converted to the new format during the upgrade, because the conversion consumes a certain amount of system overhead (services are not affected, but you still need to pay attention). After the upgrade, it is recommended that you run the [`Compact` command](/sql-statements/sql-statement-alter-table-compact.md) to convert the data to the new format. The steps are as follows:
 
-    1. Run the following command to each table containing TiFlash replicas:
+    1. Run the following command for each table containing TiFlash replicas:
 
         ```sql
         ALTER TABLE <table_name> compact tiflash replica;
@@ -69,7 +69,7 @@ By default, TiFlash v6.2.0 uses PageStorage V3 version [`format_version = 4`](/t
 
     2. Restart the TiFlash node.
 
-You can check for tables using the old data format on Grafana in the following path: Tiflash summary > storage pool > Storage Pool Run Mode.
+You can check whether there are tables still using the old data format on Grafana: Tiflash summary > storage pool > Storage Pool Run Mode.
 
 - Only V2: Number of tables using PageStorage V2 (including partitions)
 - Only V3: Number of tables using PageStorage V3 (including partitions)
