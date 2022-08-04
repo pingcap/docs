@@ -2270,7 +2270,7 @@ explain select * from t where age=5;
 
 > **Note:**
 >
-> For TiDB Cloud, this variable is controlled by the PingCAP Support Team. `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. To control the read-only status of the entire cluster, you can use use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) instead.
+> This TiDB variable is not applicable to TiDB Cloud.
 
 </CustomContent>
 
@@ -2278,13 +2278,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-
-<CustomContent platform="tidb">
-
 - `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
-
-</CustomContent>
-
 - Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
 - `tidb_restricted_read_only` affects [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) in the following cases:
     - Setting `tidb_restricted_read_only` to `ON` will update [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to `ON`.
