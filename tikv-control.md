@@ -463,6 +463,26 @@ success!
 > - The argument of the `-p` option specifies the PD endpoints without the `http` prefix. Specifying the PD endpoints is to query whether the specified `region_id` is validated or not.
 > - You need to run this command for all stores where specified Regions' peers are located.
 
+### Recover from ACID inconsistency data
+
+To recover data from ACID inconsistency, such as the loss of most replicas or incomplete data synchronization, you can use the `reset-to-version` command. When using this command, you need to provide an old version number that can promise the ACID consistency. Then, `tikv-ctl` cleans up all data after the specified version.
+
+- The `-v` option is used to specify the version number to restore. To get the value of the `-v` parameter, you can use the `pd-ctl min-resolved-ts` command.
+
+```shell
+tikv-ctl --host 127.0.0.1:20160 reset-to-version -v 430315739761082369
+```
+
+```
+success!
+```
+
+> **Note:**
+>
+> - The preceding command only supports the online mode. Before executing the command, you need to stop processes that will write data to TiKV, such as TiDB. After the command is executed successfully, it will return `success!`.
+> - You need to execute the same command for all TiKV nodes in the cluster.
+> - All PD scheduling tasks should be stopped before executing the command.
+
 ### Ldb Command
 
 The `ldb` command line tool offers multiple data access and database administration commands. Some examples are listed below. For more information, refer to the help message displayed when running `tikv-ctl ldb` or check the documents from RocksDB.

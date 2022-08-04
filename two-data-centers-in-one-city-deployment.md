@@ -212,7 +212,6 @@ The replication mode is controlled by PD. You can configure the replication mode
     primary-replicas = 2
     dr-replicas = 1
     wait-store-timeout = "1m"
-    wait-sync-timeout = "1m"
     ```
 
 - Method 2: If you have deployed a cluster, use pd-ctl commands to modify the configurations of PD.
@@ -274,14 +273,32 @@ The details for the status switch are as follows:
 
 ### Disaster recovery
 
-This section introduces the disaster recovery solution of the two data centers in one city deployment.
+This section introduces the disaster recovery solution of the two data centers in one city deployment. The disaster discussed in this section is the overall failure of the primary data center, or multiple TiKV nodes in the primary/secondary data center fail, resulting in the loss of most replicas and it is unable to provide services.
 
-When a disaster occurs to a cluster in the synchronous replication mode, you can perform data recovery with `RPO = 0`:
+#### Overall failure of the primary data center
 
-- If the primary data center fails and most of the Voter replicas are lost, but complete data exists in the DR data center, the lost data can be recovered from the DR data center. At this time, manual intervention is required with professional tools. You can contact the TiDB team for a recovery solution.
+In this situation, all Regions in the primary data center have lost most of their replicas, so the cluster is unable to use. At this time, it is necessary to use the secondary data center to recover the service. The replication status before failure determines the recovery ability:
 
-- If the DR center fails and a few Voter replicas are lost, the cluster automatically switches to the asynchronous replication mode.
+- If the status before failure is in the synchronous replication mode (the status code is `sync` or `async_wait`), you can use the secondary data center to recover using `RPO = 0`.
 
-When a disaster occurs to a cluster that is not in the synchronous replication mode and you cannot perform data recovery with `RPO = 0`:
+- If the status before failure is in the asynchronous replication mode (the status code is `async`), the written data in the primary data center in the asynchronous replication mode is lost after using the secondary data center to recover. A typical scenario is that the primary data center disconnects from the secondary data center and the primary data center switches to the asynchronous replication mode and provides service for a while before the overall failure.
 
-- If most of the Voter replicas are lost, manual intervention is required with professional tools. You can contact the TiDB team for a recovery solution.
+- If the status before failure is switching from the asynchronous to synchronous (the status code is `sync-recover`), part of the written data in the primary data center in the asynchronous replication mode is lost after using the secondary data center to recover. This might cause the ACID inconsistency, and you need to recover it additionally. A typical scenario is that the primary data center disconnects from the secondary data center, the connection is restored after switching to the asynchronous mode, and data is written. But during the data synchronization between primary and secondary, something goes wrong and causes the overall failure of the primary data center.
+
+The process of disaster recovery is as follows:
+
+1. Stop all PD, TiKV, and TiDB services of the secondary data center.
+
+2. Start PD nodes of the secondary data center using the single replica mode with the [`--force-new-cluster`](/command-line-flags-for-pd-configuration.md#--force-new-cluster) flag.
+
+3. Use the [Online Unsafe Recovery](/online-unsafe-recovery.md) to process the TiKV data in the secondary data center and the parameters are the list of all Store IDs in the primary data center.
+
+4. Write a new configuration of placement rule using [PD Control](/pd-control.md), and the Voter replica configuration of the Region is the same as the original cluster in the secondary data center.
+
+5. Start the PD and TiKV services of the primary data center.
+
+6. To recover ACID consistency (the status of `DR_STATE` in the old PD is `sync-recover`), you can use [`reset-to-version`](/tikv-control.md#recover-from-acid-inconsistency-data) to process TiKV data and the `version` parameter used can be obtained from `pd-ctl min-resolved-ts`.
+
+7. Start the TiDB service in the primary data center and check the data integrity and consistency.
+
+If you need support for disaster recovery, you can contact the TiDB team for a recovery solution.

@@ -105,3 +105,13 @@ PD is configurable using command-line flags and environment variables.
 
 - The address of Prometheus Pushgateway, which does not push data to Prometheus by default.
 - Default: `""`
+
+## `--force-new-cluster`
+
+- Force to create a new cluster using current nodes.
+- Default: `false`
+- It is recommended to use this flag only when recovering services due to PD losing most replicas, which might cause data loss.
+
+## `-V`, `--version`
+
+- Output the version of PD and then exit.
