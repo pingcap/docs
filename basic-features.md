@@ -80,7 +80,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## Data definition language (DDL)
 
-<<<<<<< HEAD
 | **Data definition language (DDL)**                                                                       | **5.3**      | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|:------------:|
 | Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`                                                    | Y            | Y            | Y            | Y            | Y            |
@@ -90,23 +89,9 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Auto increment](/auto-increment.md)                                                                     | Y            | Y            | Y            | Y            | Y            |
 | [Auto random](/auto-random.md)                                                                           | Y            | Y            | Y            | Y            | Y            |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md)                                 | Y            | Y            | Y            | Y            | Y            |
-| Multi schema change: add column(s)                                                                       | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [Multi-schema change: add columns](/system-variables.md#tidb_enable_change_multi_schema)                                                                       | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Change column type](/sql-statements/sql-statement-modify-column.md)                                     | Y            | Y            | Y            | N            | N            |
 | [Temporary tables](/temporary-tables.md)                                                                 | Y            | N            | N            | N            | N            |
-=======
-| Data definition language (DDL)                           | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
-| ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`        | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Generated columns](/generated-columns.md)                  | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Views](/views.md)                                           | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Auto increment](/auto-increment.md)                         | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Auto random](/auto-random.md)                               | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md) | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Multi-schema change: add columns](/system-variables.md#tidb_enable_change_multi_schema)                           | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Change column type](/sql-statements/sql-statement-modify-column.md) | Y | Y  | Y            |      Y       |      Y       |      Y       |      N       |      N       |
-| [Temporary tables](/temporary-tables.md)                    | Y | Y   | Y            |      Y       |      N       |      N       |      N       |      N       |
->>>>>>> b8b52cc17 (correct experimental information in docs (#9803))
 
 ## Transactions
 
@@ -133,25 +118,13 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## Statistics
 
-<<<<<<< HEAD
 | **Statistics**                                                                                           | **5.3**      | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|:------------:|
 | [CMSketch](/statistics.md)                                                                               | Deprecated   | Deprecated   | Deprecated   | Deprecated   | Y            |
 | [Histograms](/statistics.md)                                                                             | Y            | Y            | Y            | Y            | Y            |
-| [Extended statistics (multiple columns)](/statistics.md)                                                 | Experimental | Experimental | Experimental | Experimental | N            |
+| Extended statistics (multiple columns)                                                 | Experimental | Experimental | Experimental | Experimental | N            |
 | [Statistics Feedback](/statistics.md#automatic-update)                                                   | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze)                                            | Experimental | Experimental | Experimental | Experimental | Experimental |
-=======
-| Statistics                                               | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1   |   5.0    |   4.0    |
-| ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [CMSketch](/statistics.md)                                   | Disabled by default | Disabled by default | Disabled by default | Disabled by default | Y | Y | Y |      Y       |
-| [Histograms](/statistics.md)                                 | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Extended statistics (multiple columns)     | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental |      N       |
-| [Statistics feedback](/statistics.md#automatic-update)       | Deprecated | Deprecated | Deprecated   | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Automatically update statistics](/statistics.md#automatic-update) | Y | Y | Y | Y | Y | Y | Y | Y |
-| [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Dynamic pruning](/partitioned-table.md#dynamic-pruning-mode) | Y | Experimental | Experimental | Experimental | Experimental | Experimental | N | N |
->>>>>>> b8b52cc17 (correct experimental information in docs (#9803))
 
 ## Security
 
@@ -181,7 +154,6 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 ## Management, observability, and tools
 
-<<<<<<< HEAD
 | **Management, observability, and tools**                                                                  | **5.3**      | **5.2**      | **5.1**      | **5.0**      | **4.0**      |
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|:------------:|
 | [TiDB Dashboard](/dashboard/dashboard-intro.md)                                                          | Y            | Y            | Y            | Y            | Y            |
@@ -197,29 +169,8 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Global Kill](/sql-statements/sql-statement-kill.md)                                                     | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Lock View](/information-schema/information-schema-data-lock-waits.md)                                   | Y            | Y            | Experimental | Experimental | Experimental |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)                                            | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [`SET CONFIG`](/dynamic-config.md)                                                                       | Experimental | Experimental | Experimental | Experimental | Experimental |
+| [`SET CONFIG`](/dynamic-config.md)                                                                       | Y | Y | Y | Y | Y |
 | [Continuous Profiling](/dashboard/continuous-profiling.md)                                               | Experimental | N            | N            | N            | N            |
-=======
-| Management, observability, and tools                     | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
-| ------------------------------------------------------------ | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| [TiDB Dashboard UI](/dashboard/dashboard-intro.md)              | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [TiDB Dashboard Continuous Profiling](/dashboard/continuous-profiling.md)   | Y | Y | Experimental | Experimental |      N       |      N       |      N       |      N       |
-| [TiDB Dashboard Top SQL](/dashboard/top-sql.md)                             | Y | Y | Experimental |      N       |      N       |      N       |      N       |      N       |
-| [TiDB Dashboard SQL Diagnostics](/information-schema/information-schema-sql-diagnostics.md) | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Information schema](/information-schema/information-schema.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Metrics schema](/metrics-schema.md)                        | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Statements summary tables](/statement-summary-tables.md)    | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Slow query log](/identify-slow-queries.md)                 | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [TiUP deployment](/tiup/tiup-overview.md)                   | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| Ansible deployment                                           | N | N | N            |      N       |      N       |      N       |      N       |  Deprecated  |
-| [Kubernetes operator](https://docs.pingcap.com/tidb-in-kubernetes/) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Built-in physical backup](/br/backup-and-restore-use-cases.md) | Y | Y | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
-| [Global Kill](/sql-statements/sql-statement-kill.md)       | Y | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [Lock View](/information-schema/information-schema-data-lock-waits.md) | Y | Y | Y            |      Y       |      Y       | Experimental | Experimental | Experimental |
-| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md) | Y | Y | Y | Y | Y | Y | Y | Y |
-| [`SET CONFIG`](/dynamic-config.md)                           | Y | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
-| [DM WebUI](/dm/dm-webui-guide.md) | Experimental | Experimental | N | N | N | N | N | N |
->>>>>>> b8b52cc17 (correct experimental information in docs (#9803))
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
 
