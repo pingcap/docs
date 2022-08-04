@@ -22,9 +22,9 @@ To learn the standard upgrade process, see the following documents:
 >
 > - To upgrade TiFlash from versions earlier than V5.3.0 to V5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
 > 
->    - Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
->    - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
->    - Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
+>     - Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
+>     - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
+>     - Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
 
 ## From 5.x.x or v6.0.0 to v6.1.0
 
