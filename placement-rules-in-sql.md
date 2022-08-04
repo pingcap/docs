@@ -171,7 +171,7 @@ In dictionary format, constraints also indicate a number of instances that apply
 
 ## Known limitations
 
-The following known limitations exist in the experimental release of Placement Rules in SQL:
+The following known limitations are as follows:
 
 * Dumpling does not support dumping placement policies. See [issue #29371](https://github.com/pingcap/tidb/issues/29371).
 * TiDB tools, including Backup & Restore (BR), TiCDC, TiDB Lightning, and TiDB Data Migration (DM), do not yet support placement rules.
