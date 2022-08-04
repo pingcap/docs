@@ -2266,24 +2266,20 @@ explain select * from t where age=5;
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is disabled and cannot be edited in TiDB Cloud.
+
+</CustomContent>
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
 - `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
-
-<CustomContent platform="tidb">
-
 - Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
-
-</CustomContent>
-
-<CustomContent platform="tidb-cloud">
-
-- For TiDB Cloud, users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege and also the additional `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
-
-</CustomContent>
-
 - `tidb_restricted_read_only` affects [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) in the following cases:
     - Setting `tidb_restricted_read_only` to `ON` will update [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to `ON`.
     - Setting `tidb_restricted_read_only` to `OFF` leaves [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) unchanged.
