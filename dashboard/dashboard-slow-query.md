@@ -26,19 +26,19 @@ You can use one of the following two methods to access the slow query page:
 
 All data displayed on the slow query page comes from TiDB slow query system tables and slow query logs. See [slow query logs](/identify-slow-queries.md) for details.
 
-### Change Filters
+### Change filters
 
 You can filter slow queries based on the time range, the related database, SQL keywords, SQL types, the number of slow queries to be displayed. In the image below, 100 slow queries over the recent 30 minutes are displayed by default.
 
 ![Modify list filters](/media/dashboard/dashboard-slow-queries-list1-v620.png)
 
-### Display More Columns
+### Display more columns
 
 Click **Columns** on the page and you can choose to see more columns. You can move your mouse to the **(i)** icon at the right side of a column name to view the description of this column:
 
 ![Show more columns](/media/dashboard/dashboard-slow-queries-list2-v620.png)
 
-### Sort by Column
+### Sort by column
 
 By default, the list is sorted by **Finish Time** in the descending order. Click column headings to sort by the column or switch the sorting order:
 
@@ -48,9 +48,9 @@ By default, the list is sorted by **Finish Time** in the descending order. Click
 
 Click any item in the list to display detailed execution information of the slow query, including:
 
-- Query: The text of the SQL statement (see area 1 in the following figure)
-- Plan: The execution plan of the slow query (see area 2 in the following figure)
-- Other sorted SQL execution information (see area 3 in the following figure)
+- Query: The text of the SQL statement (area 1 in the following figure)
+- Plan: The execution plan of the slow query (area 2 in the following figure)
+- Other sorted SQL execution information (area 3 in the following figure)
 
 ![View execution details](/media/dashboard/dashboard-slow-queries-detail1-v620.png)
 
