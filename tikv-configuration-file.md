@@ -855,7 +855,7 @@ Configuration items related to Raftstore.
 
 ### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.2.0</span>
 
-+ If you set the value greater than `0`, TiKV checks the minimum ResolvedTS regularly for all Regions on the current node, and reports to PD.
++ If you set this configuration value greater than `0`, TiKV checks the minimum ResolvedTS regularly for all Regions on the current node and reports the information to PD.
 + Default value: `0s`
 + Minimum value: `0s`
 
