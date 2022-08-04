@@ -33,7 +33,6 @@ AlterTableSetTiFlashModeStmt ::=
 
 Assume that the `test` table has a TiFlash replica.
 
-{{< copyable "sql" >}}
 
 ```sql
 USE TEST;
