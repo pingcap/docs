@@ -40,9 +40,9 @@ This document walks you through the quickest way to get started with TiDB Cloud.
     >
     > Alternatively, you can also click the name of your newly created cluster to go to the cluster details page, and then click **Connect** in the upper-right corner.
 
-8. In the dialog box, locate **Step 2: Connect with a SQL client**, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
+8. In the dialog box, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
 
-    ![SQL string](/media/develop/IMG_20220331-232800929.png)
+    ![SQL string](/media/develop/tidb-cloud-connect.png)
 
     > **Note:**
     >
