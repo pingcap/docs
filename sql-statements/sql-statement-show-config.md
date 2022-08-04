@@ -3,27 +3,23 @@ title: SHOW CONFIG
 summary: Overview of the use of SHOW CONFIG in the TiDB database
 ---
 
-# 設定を表示 {#show-config}
+# 構成を表示 {#show-config}
 
-> **警告：**
->
-> この機能は現在実験的機能です。この機能を実稼働環境で使用することはお勧めしません。
-
-`SHOW CONFIG`ステートメントは、TiDBのさまざまなコンポーネントの現在の構成を示すために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないでください。システム変数情報を取得する場合は、 [変数を表示する](/sql-statements/sql-statement-show-variables.md)構文を使用します。
+`SHOW CONFIG`ステートメントは、TiDB のさまざまなコンポーネントの現在の構成を表示するために使用されます。構成変数とシステム変数は異なる次元で機能するため、混同しないでください。システム変数情報を取得する場合は、 [変数を表示](/sql-statements/sql-statement-show-variables.md)構文を使用します。
 
 ## あらすじ {#synopsis}
 
-**ShowStmt：**
+**表示ステートメント:**
 
 ![ShowStmt](/media/sqlgram/ShowStmt.png)
 
-**ShowTargetFilterable：**
+**ShowTargetFilterable:**
 
 ![ShowTargetFilterable](/media/sqlgram/ShowTargetFilterable.png)
 
 ## 例 {#examples}
 
-すべての構成を表示：
+すべての構成を表示:
 
 {{< copyable "" >}}
 
@@ -59,7 +55,7 @@ SHOW CONFIG WHERE type = 'tidb' AND name = 'advertise-address';
 1 row in set (0.05 sec)
 ```
 
-`LIKE`句を使用して、 `type`が`tidb`である構成を表示することもできます。
+`LIKE`節を使用して、 `type`が`tidb`である構成を示すこともできます。
 
 {{< copyable "" >}}
 
@@ -78,10 +74,10 @@ SHOW CONFIG LIKE 'tidb';
 40 rows in set (0.01 sec)
 ```
 
-## MySQLの互換性 {#mysql-compatibility}
+## MySQL の互換性 {#mysql-compatibility}
 
-このステートメントは、MySQL構文のTiDB拡張です。
+このステートメントは、MySQL 構文に対する TiDB 拡張です。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [変数を表示する](/sql-statements/sql-statement-show-variables.md)
+-   [変数を表示](/sql-statements/sql-statement-show-variables.md)
