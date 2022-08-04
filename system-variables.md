@@ -967,7 +967,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `ON`
 - Value options: `OFF` and `ON`
 - TiDB v6.2.0 refactors the previous cost model and introduces [Cost Model Version 2](/cost-model.md#cost-model-version-2). This variable controls whether to enable the Cost Model Version 2.
-- This variable is enabled by default because the refactored cost model uses the same cost formula as before, which does not change the plan decision.
+- This variable is enabled by default because the refactored Cost Model Version 2 uses the same cost formula as before, which does not change the plan decision.
 - If your cluster is upgraded from a version earlier than v6.2.0 to v6.2.0 or later, this variable remains `OFF`, which is the setting before the upgrade.
 
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
