@@ -29,13 +29,17 @@ The Region split by Load Base Split will not be merged quickly. On the one hand,
 
 ## Usage
 
-The Load Base Split feature is currently controlled by three parameters:
+The Load Base Split feature is currently controlled by the following parameters:
 
-- `split.qps-threshold`: The threshold of QPS for the Region to be split, default is `3000` per second.
-- `split.byte-threshold`: The threshold of read load for the Region to be split, default is 30 MiB per second.
-- `split.region-cpu-overload-threshold-ratio`: The threshold of CPU usage (the percentage of CPU time of the read thread pool) for the Region to be split, default is `0.25`.
+- `split.qps-threshold`: The QPS threshold at which a Region is identified as a hotspot. The default value is `3000` per second.
+- `split.byte-threshold`: The traffic threshold at which a Region is identified as a hotspot. The unit is byte and the default value is 30 MiB per second. (Introduced in v5.0)
+- `split.region-cpu-overload-threshold-ratio`: The CPU usage threshold (the percentage of CPU time of the read thread pool) at which a Region is identified as a hotspot. The default value is `0.25`. (Introduced in v6.2.0)
 
-If the sum of all types of read requests per second for a Region exceeds the QPS threshold, traffic threshold, or CPU usage threshold for 10 consecutive seconds, TiKV tries to split the Region.
+If a Region meets one of the following conditions for 10 consecutive seconds, TiKV tries to split the Region:
+
+- the sum of its read requests exceeds `split.qps-threshold`.
+- its traffic exceeds `split.byte-threshold`.
+- its CPU usage in the Unified Read Pool exceeds `split.region-cpu-overload-threshold-ratio`.
 
 Load Base Split is enabled by default, but the parameter is set to a rather high value. If you want to disable this feature, set `split.qps-threshold` and `split.byte-threshold` high enough and set `split.region-cpu-overload-threshold-ratio` to `0` at the same time.
 
