@@ -1815,9 +1815,21 @@ SET tidb_query_log_max_len = 20
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
+<CustomContent platform="tidb">
+
 > **Warning:**
 >
 > For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you only use this variable in TiDB versions later than v5.3.1 or v5.4.1.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> This TiDB variable is not applicable to TiDB Cloud.
+
+</CustomContent>
 
 - Scope: GLOBAL
 - Default value: `OFF`
