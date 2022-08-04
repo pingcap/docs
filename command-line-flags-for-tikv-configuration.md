@@ -52,9 +52,9 @@ TiKV supports some readable unit conversions for command line parameters.
 
 ## `--config-info <FORMAT>`
 
-- List available configuration values according to `FORMAT` and then exit.
-- Value options for `FORMAT`: `json`. Currently, only JSON format is supported.
-- Only the configuration name (Name), default value (DefaultValue) and current value (ValueInFile) is listed in the output JSON. If the `-C` or `--config` is specified, the current value and the default value of configuration items in the file are listed together, and other items only have default values. The following is an example:
+- When this flag is used, available configuration values are listed according to `FORMAT` and then exit.
+- Value option for `FORMAT`: `json`. Currently, only JSON format is supported.
+- Only the configuration name (Name), default value (DefaultValue) and current value (ValueInFile) are listed in the output JSON. If the `-C` or `--config` is specified, the current value and the default value of configuration items in the file are listed together, and other items without `-C` or `--config` specified only have default values. The following is an example:
 
     ```json
     {
