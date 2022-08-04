@@ -15,8 +15,7 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Scheduling
 
-+ Cascading Placement Rules feature. It is a replica rule system that guides PD to generate corresponding schedules for different types of data. By combining different scheduling rules, you can finely control the attributes of any continuous data range, such as the number of replicas, the storage location, the host type, whether to participate in Raft election, and whether to act as the Raft leader. See [Cascading Placement Rules](/configure-placement-rules.md) for details. (Introduced in v4.0)
-+ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out and in on Kubernetes based on real-time workloads, which effectively reduces the stress during your application's peak hours and saves overheads. See [Enable TidbCluster Auto-scaling](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling) for details. (Introduced in v4.0)
+Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out and in on Kubernetes based on real-time workloads, which effectively reduces the stress during your application's peak hours and saves overheads. See [Enable TidbCluster Auto-scaling](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling) for details. (Introduced in v4.0)
 
 ## SQL
 
@@ -28,12 +27,10 @@ This document introduces the experimental features of TiDB in different versions
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
-+ [View](/information-schema/information-schema-views.md) (Introduced in v2.1)
 
 ## Configuration management
 
 + Persistently store configuration parameters in PD, and support dynamically modifying configuration items. (Introduced in v4.0)
-+ [SHOW CONFIG](/sql-statements/sql-statement-show-config.md) (Introduced in v4.0)
 
 ## Data sharing and subscription
 
