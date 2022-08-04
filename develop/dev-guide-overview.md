@@ -8,11 +8,17 @@ aliases: ['/appdev/dev/app-dev-overview','/tidb/stable/dev-guide-outdated-for-la
 
 This guide is written for application developers, but if you are interested in the inner workings of TiDB or want to get involved in TiDB development, read the [TiDB Kernel Development Guide](https://pingcap.github.io/tidb-dev-guide/) for more information about TiDB.
 
-This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
-
 <CustomContent platform="tidb">
 
+This tutorial shows how to quickly build an application using TiDB, the possible use cases of TiDB and how to handle common problems.
+
 Before reading this page, it is recommended that you read the [Quick Start Guide for the TiDB Database Platform](/quick-start-with-tidb.md).
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+This tutorial shows how to quickly build an application using TiDB Cloud, the possible use cases of TiDB Cloud and how to handle common problems.
 
 </CustomContent>
 

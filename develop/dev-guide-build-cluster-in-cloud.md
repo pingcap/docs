@@ -133,11 +133,11 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 2. Run the connection string obtained in [Step 1](#step-1-create-a-free-cluster).
 
-{{< copyable "shell-regular" >}}
+    {{< copyable "shell-regular" >}}
 
-```shell
-mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
-```
+    ```shell
+    mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
+    ```
 
 3. Fill in the password to sign in.
 
@@ -153,51 +153,37 @@ mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
 
 2. Change connection parameters.
 
-  <SimpleTab>
+    In `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`, modify the parameters of the host, port, user, and password:
 
-  <div label="Local default cluster">
+    {{< copyable "" >}}
 
-  No changes are required.
+    ```java
+    mysqlDataSource.setServerName("localhost");
+    mysqlDataSource.setPortNumber(4000);
+    mysqlDataSource.setDatabaseName("test");
+    mysqlDataSource.setUser("<prefix>.root");
+    mysqlDataSource.setPassword("");
+    ```
 
-  </div>
+    Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
 
-  <div label="Non-local default cluster, TiDB Cloud, or other remote cluster">
+    {{< copyable "" >}}
 
-  In `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`, modify the parameters of the host, port, user, and password:
+    ```shell
+    mysql --connect-timeout 15 -u '<prefix>.root' -h xxx.tidbcloud.com -P 4000 -p
+    ```
 
-  {{< copyable "" >}}
+    In this case, you can modify the parameters as follows:
 
-  ```java
-  mysqlDataSource.setServerName("localhost");
-  mysqlDataSource.setPortNumber(4000);
-  mysqlDataSource.setDatabaseName("test");
-  mysqlDataSource.setUser("<prefix>.root");
-  mysqlDataSource.setPassword("");
-  ```
+    {{< copyable "" >}}
 
-  Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
-
-  {{< copyable "" >}}
-
-  ```shell
-  mysql --connect-timeout 15 -u '<prefix>.root' -h xxx.tidbcloud.com -P 4000 -p
-  ```
-
-  In this case, you can modify the parameters as follows:
-
-  {{< copyable "" >}}
-
-  ```java
-  mysqlDataSource.setServerName("xxx.tidbcloud.com");
-  mysqlDataSource.setPortNumber(4000);
-  mysqlDataSource.setDatabaseName("test");
-  mysqlDataSource.setUser("<prefix>.root");
-  mysqlDataSource.setPassword("123456");
-  ```
-
-  </div>
-
-  </SimpleTab>
+    ```java
+    mysqlDataSource.setServerName("xxx.tidbcloud.com");
+    mysqlDataSource.setPortNumber(4000);
+    mysqlDataSource.setDatabaseName("test");
+    mysqlDataSource.setUser("<prefix>.root");
+    mysqlDataSource.setPassword("123456");
+    ```
 
 3. Run `make plain-java-jdbc`.
 
