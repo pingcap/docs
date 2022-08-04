@@ -16,7 +16,7 @@ TiFlash supports the following modes:
 - `Normal Mode`. The default mode. This mode guarantees the precision of query results and data consistency.
 - `Fast Mode`. This mode does not guarantee the accuracy of query results and data consistency, but provides more efficient query performance.
 
-Some AP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can switch the corresponding table to TiFlash's Fast Mode for querying.
+Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can switch the corresponding table to TiFlash's Fast Mode for querying.
 
 The mode switch takes effect globally only for those tables whose mode is set to Fast Mode by [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md). TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-utf-8 characters in the column names, and therefore changing TiFlash table mode is not supported for them.
 
