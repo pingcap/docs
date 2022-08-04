@@ -92,6 +92,7 @@
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
+    - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
     - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
     - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
     - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
@@ -105,6 +106,7 @@
   - [Restore](/tidb-cloud/backup-and-restore.md#restore)
 - Monitor and Alert
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
+  - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
   - Third-Party Monitoring Integrations
     - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
@@ -158,17 +160,8 @@
      - [Configuration](/garbage-collection-configuration.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
 - Manage User Access
-  - [Sign In](/tidb-cloud/manage-user-access.md)
-  - [Sign Out](/tidb-cloud/manage-user-access.md#sign-out)
-  - [Manage User Passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords)
-  - [Manage User Profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles)
-  - [View the Organization and Project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
-  - [Invite an Organization Member](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
-  - [Invite a Project Member](/tidb-cloud/manage-user-access.md#invite-a-project-member)
-  - [Configure Member Roles](/tidb-cloud/manage-user-access.md#configure-member-roles)
-  - [Remove an Organization Member](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
-  - [Remove a Project Member](/tidb-cloud/manage-user-access.md#remove-a-project-member)
-  - [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+  - [Manage Console User Access](/tidb-cloud/manage-user-access.md)
+  - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
 - Billing
   - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
   - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
