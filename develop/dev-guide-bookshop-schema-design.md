@@ -18,7 +18,7 @@ You can import Bookshop table structures and data either [via TiUP](#method-1-vi
 
 <CustomContent platform="tidb-cloud">
 
-For TiDB Cloud, you can skip [Method 1: Via `tiup demo](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
 
 </CustomContent>
 
