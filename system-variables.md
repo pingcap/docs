@@ -2277,7 +2277,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 ### `tiflash_fine_grained_shuffle_stream_count` <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
-- Default value: `-1`
+- Default value: `0`
 - Range: `[-1, 1024]`
 - When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The possible values are as follows:
 
