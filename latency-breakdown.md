@@ -1,4 +1,9 @@
-# TiDB Latency Formula
+---
+title: Latency Breakdown
+summary: Latency breakdown of TiDB.
+---
+
+# Latency Breakdown
 
 This document breaks down the latency into metrics, for those who have interests in observation of the metrics, it's a guide of TiDB's critical path diagnosis.
 
@@ -17,6 +22,32 @@ Metrics in this document can be read directly from prometheus of TiDB.
 
 This part of latency is on the top level of TiDB and shared by any queries.
 
+```railroad+diagram
+Diagram(
+    NonTerminal("Token wait duration"),
+    Choice(
+        0,
+        Comment("Prepared statement"),
+        NonTerminal("Parse duration"),
+    ),
+    OneOrMore(
+        Sequence(
+        Choice(
+            0,
+            NonTerminal("Optimize prepared plan duration"),
+            Sequence(
+            Comment("Plan cache miss"),
+            NonTerminal("Compile duration"),
+            ),
+        ),
+        NonTerminal("TSO wait duration"),
+        NonTerminal("Execution duration"),
+        ),
+        Comment("Retry"),
+    ),
+)
+```
+
 ```
 e2e duration =
     tidb_server_get_token_duration_seconds +
@@ -27,7 +58,7 @@ e2e duration =
 
 `tidb_server_get_token_duration_seconds` should be small enough to be ignored, usually less than 1 microsecond.
 
-`tidb_session_parse_duration_seconds` records the duration pf parsing sql query text to AST, which can be skipped by `prepare/execute` statements.
+`tidb_session_parse_duration_seconds` records the duration pf parsing sql query text to AST, which can be skipped by [`prepare/execute` statements](/dev-guide-optimize-sql-best-practices.md#use-prepare).
 
 `tidb_session_compile_duration_seconds` records the duration of compiling AST to physical plan, which can be skipped by [plan cache](/sql-prepared-plan-cache.md).
 
@@ -41,6 +72,22 @@ We start from read queries, which is processed in a single form.
 
 ### Point Get
 
+```railroad+diagram
+Diagram(
+    Choice(
+        0,
+        NonTerminal("Resolve TSO"),
+        Comment("Read by clustered PK in auto-commit-txn mode or snapshot read"),
+    ),
+    Choice(
+        0,
+        NonTerminal("Read handle by index key"),
+        Comment("Read by clustered PK, encode handle by key"),
+    ),
+    NonTerminal("Read value by handle"),
+)
+```
+
 ```
 tidb_session_execute_duration_seconds{type="general"} =
     pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
@@ -48,7 +95,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching TSO from PD, it will be skipped with in-txn snapshot read or reading with clustered primary index.
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}` records the duration of fetching TSO from PD, it will be skipped with in-txn auto-commit reading with clustered primary index or snapshot read.
 
 ```
 read handle duration = read value duration =
@@ -66,7 +113,7 @@ Get requests are sent directly to TiKV via a batched gRPC wrapper. The detail is
 ```
 tikv_grpc_msg_duration_seconds{type="kv_get"} =
     tikv_storage_engine_async_request_duration_seconds{type="snapshot"} +
-    tikv_engine_seek_micro_seconds{type="seek_max"} +
+    tikv_engine_seek_micro_seconds{type="seek_average"} +
     read value duration +
     read value duration
 ```
@@ -81,6 +128,18 @@ read value duration(from disk) =
 TiKV uses RocksDB as its storage engine, when the required value is missing in block cache, it need to load value from disk. Get request can be either `get` or `batch_get_command`.
 
 ### Batch Point Get
+
+```railroad+diagram
+Diagram(
+  NonTerminal("Resolve TSO"),
+  Choice(
+    0,
+    NonTerminal("Read all handles by index keys"),
+    Comment("Read by clustered PK, encode handle by keys"),
+  ),
+  NonTerminal("Read values by handles"),
+)
+```
 
 ```
 tidb_session_execute_duration_seconds{type="general"} =
@@ -122,6 +181,19 @@ When loading data from disk, the average duration can be calculated by `tikv_sto
 
 ### Table Scan & Index Scan
 
+```railroad+diagram
+Diagram(
+    Stack(
+        NonTerminal("Resolve TSO"),
+        NonTerminal("Load region cache for related table/index ranges"),
+        OneOrMore(
+            NonTerminal("Wait for result"),
+            Comment("Next loop: drain the result"),
+        ),
+    ),
+)
+```
+
 ```
 tidb_session_execute_duration_seconds{type="general"} =
     pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
@@ -152,6 +224,22 @@ In TiKV, table scan is the type `select` and index scan is the type `index`, the
 
 ### Index Look Up
 
+```railroad+diagram
+Diagram(
+    Stack(
+        NonTerminal("Resolve TSO"),
+        NonTerminal("Load region cache for related index ranges"),
+        OneOrMore(
+        Sequence(
+            NonTerminal("Wait for index scan result"),
+            NonTerminal("Wait for table scan result"),
+        ),
+        Comment("Next loop: drain the result"),
+        ),
+    ),
+)
+```
+
 ```
 tidb_session_execute_duration_seconds{type="general"} =
     pd_client_cmd_handle_cmds_duration_seconds{type="wait"} +
@@ -169,6 +257,22 @@ Index look up combines index scan and table scan, they are processed in a pipeli
 
 Write queries are much more complex, there are some variants.
 
+```railroad+diagram
+Diagram(
+    NonTerminal("Execute write query"),
+    Choice(
+        0,
+        NonTerminal("Pessimistic lock keys"),
+        Comment("bypass in optimistic transaction"),
+    ),
+    Choice(
+        0,
+        NonTerminal("Auto Commit Transaction"),
+        Comment("bypass in non-auto-commit or explicit transaction"),
+    ),
+)
+```
+
 || Pessimistic Txn | Optimistic Txn |
 |-|-|-|
 | Auto-commit | execute + lock + commit | execute + commit |
@@ -183,9 +287,24 @@ We divide the write into 3 phases:
 In execution phase, TiDB manipulate data in memory, the main latency comes from reading the required data.
 Like update and delete, TiDB read data from TiKV first, then update or delete the row in-mem.
 
-The exception is cursor operations(`select for update`), cursor operation with point get and batch point get, which performs read and lock in a single RPC.
+The exception is lock-time read operations(`select for update`) with point get and batch point get, which performs read and lock in a single RPC.
 
-### Cursor Point Get
+### Lock-time Point Get
+
+```railroad+diagram
+Diagram(
+    Choice(
+        0,
+        Sequence(
+            NonTerminal("Read handle key by index key"),
+            NonTerminal("Lock index key"),
+        ),
+        Comment("Clustered index"),
+    ),
+    NonTerminal("Lock handle key"),
+    NonTerminal("Raed value from pessimistic lock cache"),
+)
+```
 
 ```
 execution(clustered PK) =
@@ -194,9 +313,21 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Cursor point get locks key with value returned, compare with lock phase after execution, this save 1 round RPC. The duration of cursor point get can be treat same as lock duration.
+Lock-time point get locks key with value returned, compare with lock phase after execution, this save 1 round RPC. The duration of lock-time point get can be treat same as lock duration.
 
-### Cursor Batch Point Get
+### Lock-time Batch Point Get
+
+```railroad+diagram
+Diagram(
+    Choice(
+        0,
+        NonTerminal("Read handle keys by index keys"),
+        Comment("Clustered index"),
+    ),
+    NonTerminal("Lock index and handle keys"),
+    NonTerminal("Raed values from pessimistic lock cache"),
+)
+```
 
 ```
 execution(clustered PK) =
@@ -206,7 +337,7 @@ execution(non-clustered PK or UK) =
     tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-Cursor batch point get executes similar to cursor point get, but read multiple values in a single RPC.
+Lock-time batch point get executes similar to lock-time point get, but read multiple values in a single RPC.
 The details of `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}` can be found in [batch point get section](#batch-point-get).
 
 ### Lock
@@ -214,11 +345,11 @@ The details of `tidb_tikvclient_txn_cmd_duration_seconds{type="batch_get"}` can 
 This section describes the lock duration.
 
 ```
-ratio = [
+ratio = ceil(
     sum(rate(tidb_tikvclient_txn_regions_num_sum{type="2pc_pessimistic_lock"})) /
     sum(rate(tidb_tikvclient_txn_regions_num_count{type="2pc_pessimistic_lock"})) /
     128
-] + 1
+)
 
 lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
     ratio * tidb_tikvclient_request_seconds{type="PessimisticLock"}
@@ -270,6 +401,45 @@ TiKV reads the value of the keys before acquiring the locks, the read duration c
 
 ### Commit
 
+```railroad+diagram
+Diagram(
+    Stack(
+        Sequence(
+            Choice(
+                0,
+                Comment("use 2pc or causal consistency"),
+                NonTerminal("Get min-commit-ts"),
+            ),
+            Optional("Async prewrite binlog"),
+            NonTerminal("Prewrite mutations"),
+            Optional("Wait prewrite binlog result"),
+        ),
+        Sequence(
+            Choice(
+                1,
+                Comment("1pc"),
+                Sequence(
+                    Comment("2pc"),
+                    NonTerminal("Get commit-ts"),
+                    NonTerminal("Check schema, try to amend if needed"),
+                    NonTerminal("Commit PK mutation"),
+                ),
+                Sequence(
+                    Comment("async-commit"),
+                    NonTerminal("Commit mutations asynchronously"),
+                ),
+            ),
+            Choice(
+                0,
+                Comment("committed"),
+                NonTerminal("Async cleanup"),
+            ),
+            Optional("Commit binlog"),
+        ),
+    ),
+)
+```
+
 ```
 commit =
     Get_latest_ts_time +
@@ -280,17 +450,17 @@ commit =
 Get_latest_ts_time = Get_commit_ts_time =
     pd_client_cmd_handle_cmds_duration_seconds{type="wait"}
 
-prewrite_ratio = [
+prewrite_ratio = ceil(
     sum(rate(tidb_tikvclient_txn_regions_num_sum{type="2pc_prewrite"})) /
     sum(rate(tidb_tikvclient_txn_regions_num_count{type="2pc_prewrite"})) /
     128
-] + 1
+)
 
-commit_ratio = [
+commit_ratio = ceil(
     sum(rate(tidb_tikvclient_txn_regions_num_sum{type="2pc_commit"})) /
     sum(rate(tidb_tikvclient_txn_regions_num_count{type="2pc_commit"})) /
     128
-] + 1
+)
 
 Prewrite_time =
     prewrite_ratio * tidb_tikvclient_request_seconds{type="Prewrite"}
@@ -355,7 +525,123 @@ commit read duration(from disk) =
 
 The duration of commit is almost same as prewrite, also the write duration is explained in [async write](#async-write).
 
-### Async Write
+## Batch Client
+
+```railroad+diagram
+Diagram(
+    NonTerminal("Get conn pool to the target store"),
+    Choice(
+        0,
+        Sequence(
+            Comment("Batch enabled"),
+                NonTerminal("Push request to channel"),
+                NonTerminal("Wait response"),
+            ),
+            Sequence(
+            NonTerminal("Get conn from pool"),
+            NonTerminal("Call RPC"),
+            Choice(
+                0,
+                Comment("Unary call"),
+                NonTerminal("Recv first"),
+            ),
+        ),
+    ),
+)
+```
+
+- The overall duration of sending a request is observed as `tidb_tikvclient_request_seconds`.
+- RPC client maintains connection pools (named ConnArray) to each store, and each pool has a BatchConn with a batch request(send) channal.
+- Batch is enabled when the store is tikv and batch size is positive, which is true in most cases.
+- The size of batch request channel is tikv-client.max-batch-size (default: 128), the duration of enqueue is observed as `tidb_tikvclient_batch_wait_duration`.
+- There are three kinds of stream request: `CmdBatchCop`, `CmdCopStream`, `CmdMPPConn`, which involve an additional recv call to fetch the first response from the stream.
+
+Though there is still some latency missed observed, we can get this approximate formula.
+
+```
+tidb_tikvclient_request_seconds{type="?"} =
+    tidb_tikvclient_batch_wait_duration +
+    tidb_tikvclient_batch_send_latency +
+    tikv_grpc_msg_duration_seconds{type="kv_?"} +
+    tidb_tikvclient_rpc_net_latency_seconds{store="?"}
+```
+
+- `tidb_tikvclient_batch_wait_duration` records the waiting duration in the batch system.
+- `tidb_tikvclient_batch_send_latency` records the encode duration in the batch system.
+- `tikv_grpc_msg_duration_seconds{type="kv_?"}` is TiKV processing duration.
+- `tidb_tikvclient_rpc_net_latency_seconds` records the network latency.
+
+## TiKV Snapshot
+
+```railroad+diagram
+Diagram(
+    Choice(
+        0,
+        Comment("Local Read"),
+        Sequence(
+            NonTerminal("Propose Wait"),
+            NonTerminal("Read index Read Wait"),
+        ),
+    ),
+    NonTerminal("Fetch A Snapshot From KV Engine"),
+)
+```
+
+```
+tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
+    tikv_coprocessor_request_wait_seconds{type="snapshot"} =
+    tikv_raftstore_request_wait_time_duration_secs +
+    tikv_raftstore_commit_log_duration_seconds +
+    get snapshot from rocksdb duration
+```
+
+When leader lease is expired, TiKV will propose a read index command before getting a snapshot from rocksdb.
+`tikv_raftstore_request_wait_time_duration_secs` and `tikv_raftstore_commit_log_duration_seconds` are the duration of committing read index command.
+
+Getting snapshot from rocksdb duration is usually a fast operation, so we do not record such duration.
+
+## Async Write
+
+- Async IO Disabled
+
+```railroad+diagram
+Diagram(
+    NonTerminal("Propose Wait"),
+    NonTerminal("Process Command"),
+    Choice(
+        0,
+        Sequence(
+            NonTerminal("Wait Current Batch"),
+            NonTerminal("Write to Log Engine"),
+        ),
+        Sequence(
+            NonTerminal("RaftMsg Send Wait"),
+            NonTerminal("Commit Log Wait"),
+        ),
+    ),
+    NonTerminal("Apply Wait"),
+    NonTerminal("Apply Log"),
+)
+```
+
+- Async IO Enabled
+
+```railroad+diagram
+Diagram(
+    NonTerminal("Propose Wait"),
+    NonTerminal("Process Command"),
+    Choice(
+        0,
+        NonTerminal("Wait Until Persisted by Write Worker"),
+        Sequence(
+            NonTerminal("RaftMsg Send Wait"),
+            NonTerminal("Commit Log Wait"),
+        ),
+    ),
+    NonTerminal("Apply Wait"),
+    NonTerminal("Apply Log"),
+)
+```
 
 ```
 async write duration(async io disabled) =
@@ -446,6 +732,14 @@ which contains an RPC duration and the duration of log persisting in majority.
 
 ### Raft DB
 
+```railroad+diagram
+Diagram(
+    NonTerminal("Wait for Writer Leader"),
+    NonTerminal("Write and Sync Log"),
+    NonTerminal("Apply Log to Memtable"),
+)
+```
+
 ```
 write to raft db duration = raft db write duration
 commit log wait duration >= raft db write duration
@@ -468,6 +762,20 @@ From v6.1.0, TiKV uses [Raft Engine](/tikv-configuration-file.md#raft-engine) as
 
 ### KV DB
 
+```railroad+diagram
+Diagram(
+    NonTerminal("Wait for Writer Leader"),
+    NonTerminal("Preprocess"),
+    Choice(
+        0,
+        Comment("No Need to Switch"),
+        NonTerminal("Switch WAL or Memtable"),
+    ),
+    NonTerminal("Write and Sync WAL"),
+    NonTerminal("Apply to Memtable"),
+)
+```
+
 ```
 tikv_raftstore_apply_log_duration_seconds =
     tikv_raftstore_apply_perf_context_time_duration_secs{type="write_thread_wait"} +
@@ -477,36 +785,6 @@ tikv_raftstore_apply_log_duration_seconds =
 ```
 
 In the async write process, committed log need to be applied into KV DB, the duration of apply can be calculated from the RocksDB perf context.
-
-## TiKV Snapshot
-
-```
-tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
-    tikv_coprocessor_request_wait_seconds{type="snapshot"} =
-    tikv_raftstore_request_wait_time_duration_secs +
-    tikv_raftstore_commit_log_duration_seconds +
-    get snapshot from rocksdb duration
-```
-
-When leader lease is expired, TiKV will propose a read index command before getting a snapshot from rocksdb.
-`tikv_raftstore_request_wait_time_duration_secs` and `tikv_raftstore_commit_log_duration_seconds` are the duration of committing read index command.
-
-Getting snapshot from rocksdb duration is usually a fast operation, so we do not record such duration.
-
-## Batch Client
-
-```
-tidb_tikvclient_request_seconds{type="?"} =
-    tidb_tikvclient_batch_wait_duration +
-    tidb_tikvclient_batch_send_latency +
-    tikv_grpc_msg_duration_seconds{type="kv_?"} +
-    tidb_tikvclient_rpc_net_latency_seconds{store="?"}
-```
-
-- `tidb_tikvclient_batch_wait_duration` records the waiting duration in the batch system.
-- `tidb_tikvclient_batch_send_latency` records the encode duration in the batch system.
-- `tikv_grpc_msg_duration_seconds{type="kv_?"}` is TiKV processing duration.
-- `tidb_tikvclient_rpc_net_latency_seconds` records the network latency.
 
 ## Diagnosis
 
