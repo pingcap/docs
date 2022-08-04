@@ -88,7 +88,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Auto increment](/auto-increment.md)                                                                     | Y            | Y            | Y            | Y            |
 | [Auto random](/auto-random.md)                                                                           | Y            | Y            | Y            | Y            |
 | [DDL algorithm assertions](/sql-statements/sql-statement-alter-table.md)                                 | Y            | Y            | Y            | Y            |
-| Multi schema change: add column(s)                                                                       | Experimental | Experimental | Experimental | Experimental |
+| [Multi-schema change: add columns](/system-variables.md#tidb_enable_change_multi_schema)                                                                       | Experimental | Experimental | Experimental | Experimental |
 | [Change column type](/sql-statements/sql-statement-modify-column.md)                                     | Y            | Y            | N            | N            |
 
 ## Transactions
@@ -120,7 +120,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 |----------------------------------------------------------------------------------------------------------|:------------:|:------------:|:------------:|:------------:|
 | [CMSketch](/statistics.md)                                                                               | Deprecated   | Deprecated   | Deprecated   | Y            |
 | [Histograms](/statistics.md)                                                                             | Y            | Y            | Y            | Y            |
-| [Extended statistics (multiple columns)](/statistics.md)                                                 | Experimental | Experimental | Experimental | N            |
+| Extended statistics (multiple columns)                                                 | Experimental | Experimental | Experimental | N            |
 | [Statistics Feedback](/statistics.md#automatic-update)                                                   | Experimental | Experimental | Experimental | Experimental |
 | [Fast Analyze](/system-variables.md#tidb_enable_fast_analyze)                                            | Experimental | Experimental | Experimental | Experimental |
 
@@ -166,7 +166,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 | [Built-in physical backup](/br/backup-and-restore-use-cases.md)                                          | Y            | Y            | Y            | Y            |
 | [Global Kill](/sql-statements/sql-statement-kill.md)                                                     | Experimental | Experimental | Experimental | Experimental |
 | [Lock View](/information-schema/information-schema-data-lock-waits.md)                                   | Y            | Experimental | Experimental | Experimental |
-| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)                                            | Experimental | Experimental | Experimental | Experimental |
+| [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)                                            | Y | Y | Y | Y |
 | [`SET CONFIG`](/dynamic-config.md)                                                                       | Experimental | Experimental | Experimental | Experimental |
 
 [^1]: TiDB incorrectly treats latin1 as a subset of utf8. See [TiDB #18955](https://github.com/pingcap/tidb/issues/18955) for more details.
