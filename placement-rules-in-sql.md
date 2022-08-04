@@ -3,31 +3,31 @@ title: Placement Rules in SQL
 summary: Learn how to schedule placement of tables and partitions using SQL statements.
 ---
 
-# SQLでの配置ルール {#placement-rules-in-sql}
+# SQL の配置規則 {#placement-rules-in-sql}
 
-SQLの配置ルールは、SQLインターフェイスを使用してTiKVクラスタのどこにデータを格納するかを指定できる機能です。この機能を使用して、テーブルとパーティションが特定のリージョン、データセンター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化する、データのローカルレプリカをローカルの古い読み取りに使用できるようにする、データの局所性要件を順守するなどのシナリオで役立ちます。
+SQL の配置ルールは、SQL インターフェイスを使用して TiKVクラスタのデータの保存場所を指定できるようにする機能です。この機能を使用すると、テーブルとパーティションが特定の地域、データ センター、ラック、またはホストにスケジュールされます。これは、低コストで高可用性戦略を最適化したり、データのローカル レプリカをローカルの古い読み取りに使用できるようにしたり、データの局所性要件を順守したりするなどのシナリオに役立ちます。
 
 > **ノート：**
 >
-> *SQLでの配置ルール*の実装は、PDの<em>配置ルール機能</em>に依存しています。詳しくは[配置ルールを構成する](/configure-placement-rules.md)をご覧ください。 SQLの配置ルールのコンテキストでは、<em>配置ルール</em>は、他のオブジェクトにアタッチされた<em>配置ポリシー</em>、またはTiDBからPDに送信されるルールを参照する場合があります。
+> *SQL での配置ルール*の実装は、PD の<em>配置ルール機能</em>に依存しています。詳細は[配置ルールの構成](/configure-placement-rules.md)を参照してください。 SQL の配置ルールのコンテキストでは、<em>配置ルール</em>は、他のオブジェクトにアタッチされた<em>配置ポリシー</em>、または TiDB から PD に送信されるルールを参照する場合があります。
 
-詳細なユーザーシナリオは次のとおりです。
+詳細なユーザー シナリオは次のとおりです。
 
--   異なるアプリケーションの複数のデータベースをマージして、データベースの保守コストを削減します
+-   異なるアプリケーションの複数のデータベースをマージして、データベース メンテナンスのコストを削減します。
 -   重要なデータのレプリカ数を増やして、アプリケーションの可用性とデータの信頼性を向上させます
--   新しいデータをNVMeストレージに保存し、古いデータをSSDに保存して、データのアーカイブとストレージのコストを削減します
--   ホットスポットデータのリーダーを高性能TiKVインスタンスにスケジュールする
--   コールドデータを低コストのストレージメディアに分離して、コスト効率を向上させます
+-   新しいデータを NVMe ストレージに保存し、古いデータを SSD に保存して、データのアーカイブとストレージのコストを削減します
+-   ホットスポット データのリーダーを高性能 TiKV インスタンスにスケジュールする
+-   コールド データを低コストのストレージ メディアに分離して、コスト効率を向上させる
 
 ## 配置ルールを指定する {#specify-placement-rules}
 
-配置ルールを指定するには、最初に[`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)を使用して配置ポリシーを作成します。
+配置ルールを指定するには、まず[`CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-create-placement-policy.md)を使用して配置ポリシーを作成します。
 
 ```sql
 CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1";
 ```
 
-次に、 `CREATE TABLE`または`ALTER TABLE`を使用して、ポリシーをテーブルまたはパーティションにアタッチします。次に、配置ルールがテーブルまたはパーティションで指定されます。
+次に、 `CREATE TABLE`または`ALTER TABLE`のいずれかを使用して、ポリシーをテーブルまたはパーティションにアタッチします。次に、配置ルールがテーブルまたはパーティションで指定されます。
 
 ```sql
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=myplacementpolicy;
@@ -35,23 +35,23 @@ CREATE TABLE t2 (a INT);
 ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
 ```
 
-配置ポリシーはどのデータベーススキーマにも関連付けられておらず、グローバルスコープを持っています。したがって、配置ポリシーを割り当てるために、 `CREATE TABLE`の特権に対する追加の特権は必要ありません。
+配置ポリシーは、どのデータベース スキーマにも関連付けられておらず、グローバル スコープを持ちます。したがって、配置ポリシーの割り当てには、 `CREATE TABLE`の権限以外の追加の権限は必要ありません。
 
-配置ポリシーを変更するには、 [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)を使用できます。変更は、対応するポリシーが割り当てられているすべてのオブジェクトに反映されます。
+配置ポリシーを変更するには、 [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)を使用できます。変更は、対応するポリシーが割り当てられたすべてのオブジェクトに反映されます。
 
 ```sql
 ALTER PLACEMENT POLICY myplacementpolicy FOLLOWERS=5;
 ```
 
-テーブルまたはパーティションに接続されていないポリシーを削除するには、 [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)を使用できます。
+どのテーブルまたはパーティションにもアタッチされていないポリシーを削除するには、 [`DROP PLACEMENT POLICY`](/sql-statements/sql-statement-drop-placement-policy.md)を使用できます。
 
 ```sql
 DROP PLACEMENT POLICY myplacementpolicy;
 ```
 
-## 現在の配置ルールをビューする {#view-current-placement-rules}
+## 現在の配置ルールをビュー {#view-current-placement-rules}
 
-テーブルに配置ルールが添付されている場合は、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを表示できます。使用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
+テーブルに配置ルールがアタッチされている場合は、 [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)の出力で配置ルールを表示できます。利用可能なポリシーの定義を表示するには、 [`SHOW CREATE PLACEMENT POLICY`](/sql-statements/sql-statement-show-create-placement-policy.md)を実行します。
 
 ```sql
 tidb> SHOW CREATE TABLE t1\G
@@ -69,7 +69,7 @@ Create Policy: CREATE PLACEMENT POLICY myplacementpolicy PRIMARY_REGION="us-east
 1 row in set (0.00 sec)
 ```
 
-[`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)の表を使用して、配置ポリシーの定義を表示することもできます。
+[`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)テーブルを使用して配置ポリシーの定義を表示することもできます。
 
 ```sql
 tidb> select * from information_schema.placement_policies\G
@@ -89,20 +89,20 @@ LEARNERS             | 0
 1 row in set
 ```
 
-`information_schema.tables`と`information_schema.partitions`のテーブルには、配置ルールが添付されたすべてのオブジェクトを示す`tidb_placement_policy_name`の列も含まれています。
+`information_schema.tables`および`information_schema.partitions`テーブルには`tidb_placement_policy_name`の列も含まれており、配置ルールがアタッチされたすべてのオブジェクトが表示されます。
 
 ```sql
 SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT NULL;
 SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
 ```
 
-オブジェクトに添付されているルールは*非同期*で適用されます。配置の現在のスケジュールの進行状況を表示するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)を使用します。
+オブジェクトに関連付けられたルールは、*非同期的*に適用されます。配置の現在のスケジューリングの進行状況を表示するには、 [`SHOW PLACEMENT`](/sql-statements/sql-statement-show-placement.md)を使用します。
 
-## オプションリファレンス {#option-reference}
+## オプション参照 {#option-reference}
 
 > **ノート：**
 >
-> -   配置オプションは、各TiKVノードの構成で正しく指定されたラベルによって異なります。たとえば、 `PRIMARY_REGION`オプションはTiKVの`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの要約を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
+> -   配置オプションは、各 TiKV ノードの構成で正しく指定されたラベルに依存します。たとえば、 `PRIMARY_REGION`オプションは TiKV の`region`ラベルに依存します。 TiKVクラスタで使用可能なすべてのラベルの概要を表示するには、ステートメント[`SHOW PLACEMENT LABELS`](/sql-statements/sql-statement-show-placement-labels.md)を使用します。
 >
 >     ```sql
 >     mysql> show placement labels;
@@ -116,37 +116,37 @@ SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS 
 >     3 rows in set (0.00 sec)
 >     ```
 >
-> -   `CREATE PLACEMENT POLICY`を使用して配置ポリシーを作成すると、TiDBはラベルが存在するかどうかをチェックしません。代わりに、ポリシーをテーブルにアタッチすると、TiDBがチェックを実行します。
+> -   `CREATE PLACEMENT POLICY`を使用して配置ポリシーを作成すると、TiDB はラベルが存在するかどうかをチェックしません。代わりに、TiDB は、ポリシーをテーブルにアタッチするときにチェックを実行します。
 
-| オプション名           | 説明                                                                            |
-| ---------------- | ----------------------------------------------------------------------------- |
-| `PRIMARY_REGION` | Raftリーダーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                            |
-| `REGIONS`        | Raftフォロワーは、このオプションの値と一致する`region`のラベルを持つストアに配置されます。                           |
-| `SCHEDULE`       | フォロワーの配置をスケジュールするために使用される戦略。値のオプションは`EVEN` （デフォルト）または`MAJORITY_IN_PRIMARY`です。 |
-| `FOLLOWERS`      | フォロワーの数。たとえば、 `FOLLOWERS=2`は、データのレプリカが3つあることを意味します（2人のフォロワーと1人のリーダー）。         |
+| オプション名           | 説明                                                                             |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `PRIMARY_REGION` | Raftのリーダーは、このオプションの値に一致する`region`のラベルを持つストアに配置されます。                            |
+| `REGIONS`        | Raftフォロワーは、このオプションの値に一致する`region`のラベルを持つストアに配置されます。                            |
+| `SCHEDULE`       | フォロワーの配置をスケジュールするために使用される戦略。値のオプションは`EVEN` (デフォルト) または`MAJORITY_IN_PRIMARY`です。 |
+| `FOLLOWERS`      | フォロワー数。たとえば、 `FOLLOWERS=2`は、データのレプリカが 3 つあることを意味します (フォロワー 2 つとリーダー 1 つ)。      |
 
-上記の配置オプションに加えて、事前構成を使用することもできます。詳細については、 [アドバンストプレイスメントオプション](#advanced-placement-options)を参照してください。
+上記の配置オプションに加えて、高度な構成も使用できます。詳細については、 [高度な配置オプション](#advanced-placement-options)を参照してください。
 
-| オプション名                 | 説明                                                     |
-| ---------------------- | ------------------------------------------------------ |
-| `CONSTRAINTS`          | すべての役割に適用される制約のリスト。たとえば、 `CONSTRAINTS="[+disk=ssd]"` 。 |
-| `LEADER_CONSTRAINTS`   | リーダーにのみ適用される制約のリスト。                                    |
-| `FOLLOWER_CONSTRAINTS` | フォロワーにのみ適用される制約のリスト。                                   |
-| `LEARNER_CONSTRAINTS`  | 学習者にのみ適用される制約のリスト。                                     |
-| `LEARNERS`             | 学習者の数。                                                 |
+| オプション名                 | 説明                                                       |
+| ---------------------- | -------------------------------------------------------- |
+| `CONSTRAINTS`          | すべてのロールに適用される制約のリスト。たとえば、 `CONSTRAINTS="[+disk=ssd]"`です。 |
+| `LEADER_CONSTRAINTS`   | リーダーのみに適用される制約のリスト。                                      |
+| `FOLLOWER_CONSTRAINTS` | フォロワーのみに適用される制約のリスト。                                     |
+| `LEARNER_CONSTRAINTS`  | 学習者のみに適用される制約のリスト。                                       |
+| `LEARNERS`             | 学習者の数。                                                   |
 
 ## 例 {#examples}
 
 ### レプリカの数を増やす {#increase-the-number-of-replicas}
 
-[`max-replicas`](/pd-configuration-file.md#max-replicas)のデフォルト構成は`3`です。特定のテーブルセットに対してこれを増やすには、次のように配置ポリシーを使用できます。
+[`max-replicas`](/pd-configuration-file.md#max-replicas)のデフォルト設定は`3`です。特定のテーブル セットでこれを増やすには、次のように配置ポリシーを使用できます。
 
 ```sql
 CREATE PLACEMENT POLICY fivereplicas FOLLOWERS=4;
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=fivereplicas;
 ```
 
-PD構成にはリーダーとフォロワーの数が含まれているため、4つのフォロワー+1つのリーダーは合計5つのレプリカに相当することに注意してください。
+PD 構成にはリーダーとフォロワーの数が含まれていることに注意してください。したがって、4 つのフォロワー + 1 つのリーダーは、合計で 5 つのレプリカに相当します。
 
 この例を拡張するために、 `PRIMARY_REGION`と`REGIONS`の配置オプションを使用して、フォロワーの配置を説明することもできます。
 
@@ -155,13 +155,13 @@ CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-
 CREATE TABLE t1 (a INT) PLACEMENT POLICY=eastandwest;
 ```
 
-`SCHEDULE`オプションは、フォロワーのバランスをとる方法についてTiDBに指示します。デフォルトのスケジュールである`EVEN`は、すべての地域でフォロワーのバランスを確保します。
+`SCHEDULE`オプションは、フォロワーのバランスを取る方法を TiDB に指示します。デフォルトのスケジュール`EVEN`では、すべての地域でフォロワーのバランスが確保されます。
 
-クォーラムを達成できるように十分なフォロワーがプライマリリージョン（ `us-east-1` ）に配置されるようにするには、 `MAJORITY_IN_PRIMARY`のスケジュールを使用できます。このスケジュールは、可用性をいくらか犠牲にして、待ち時間の短いトランザクションを提供するのに役立ちます。プライマリリージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`は自動フェイルオーバーを提供できません。
+クォーラムを達成できるように十分な数のフォロワーがプライマリ リージョン ( `us-east-1` ) に配置されるようにするには、 `MAJORITY_IN_PRIMARY`スケジュールを使用できます。このスケジュールは、ある程度の可用性を犠牲にして、より低いレイテンシーのトランザクションを提供するのに役立ちます。プライマリ リージョンに障害が発生した場合、 `MAJORITY_IN_PRIMARY`は自動フェールオーバーを提供できません。
 
-### パーティションテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
+### 分割されたテーブルに配置を割り当てる {#assign-placement-to-a-partitioned-table}
 
-テーブルに配置オプションを割り当てるだけでなく、テーブルパーティションにオプションを割り当てることもできます。例えば：
+配置オプションをテーブルに割り当てるだけでなく、オプションをテーブル パーティションに割り当てることもできます。例えば：
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=5;
@@ -179,7 +179,7 @@ CREATE TABLE t1 (
 );
 ```
 
-パーティションにポリシーが添付されていない場合、パーティションはテーブルに既存のポリシーを適用しようとします。たとえば、 `pEurope`パーティションは`europe`ポリシーを適用しますが、 `pAsia`パーティションは表`t1`の`p1`ポリシーを適用します。 `t1`にポリシーが割り当てられていない場合、 `pAsia`もポリシーを適用しません。
+パーティションにポリシーがアタッチされていない場合、既存のポリシーをテーブルに適用しようとします。たとえば、 `pEurope`パーティションは`europe`ポリシーを適用しますが、 `pAsia`パーティションは表`t1`の`p1`ポリシーを適用します。 `t1`にポリシーが割り当てられていない場合、 `pAsia`にもポリシーは適用されません。
 
 特定のパーティションに割り当てられた配置ポリシーを変更することもできます。例えば：
 
@@ -189,7 +189,7 @@ ALTER TABLE t1 PARTITION pEurope PLACEMENT POLICY=p1;
 
 ### スキーマのデフォルトの配置を設定する {#set-the-default-placement-for-a-schema}
 
-デフォルトの配置ルールをデータベーススキーマに直接アタッチできます。これは、スキーマのデフォルトの文字セットまたは照合順序を設定するのと同様に機能します。指定した配置オプションは、他のオプションが指定されていない場合に適用されます。例えば：
+デフォルトの配置ルールをデータベース スキーマに直接アタッチできます。これは、スキーマのデフォルトの文字セットまたは照合順序を設定するのと同様に機能します。指定した配置オプションは、他のオプションが指定されていない場合に適用されます。例えば：
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2";  -- Create placement policies
@@ -213,13 +213,13 @@ CREATE TABLE t4 (a INT);  -- Creates a table t4 with the default policy p3.
 ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- The table with policy p3 (t4) will have FOLLOWERS=3.
 ```
 
-これは、パーティションとテーブル間の継承とは異なり、テーブルのポリシーを変更するとパーティションに影響することに注意してください。テーブルは、ポリシーが添付されていない状態で作成された場合にのみスキーマのポリシーを継承し、スキーマのポリシーを変更しても、作成されたテーブルには影響しません。
+これは、テーブルのポリシーを変更するとパーティションに影響するパーティションとテーブル間の継承とは異なることに注意してください。テーブルは、ポリシーがアタッチされていない状態で作成された場合にのみ、スキーマのポリシーを継承します。スキーマのポリシーを変更しても、作成されたテーブルには影響しません。
 
 ### 高度な配置オプション {#advanced-placement-options}
 
-配置オプション`PRIMARY_REGION` 、および`REGIONS`は、ある程度の柔軟性を失いながら、データ配置の基本的なニーズを満たし`SCHEDULE` 。より高い柔軟性が必要なより複雑なシナリオでは、 `CONSTRAINTS`および`FOLLOWER_CONSTRAINTS`の高度な配置オプションを使用することもできます。 `PRIMARY_REGION` 、または`REGIONS`オプションと`SCHEDULE`オプションを`CONSTRAINTS`指定することはできません。両方を同時に指定すると、エラーが返されます。
+配置オプション`PRIMARY_REGION` 、 `REGIONS` 、および`SCHEDULE`は、データ配置の基本的なニーズを満たしますが、ある程度の柔軟性が失われます。より高い柔軟性が必要なより複雑なシナリオでは、 `CONSTRAINTS`および`FOLLOWER_CONSTRAINTS`の高度な配置オプションを使用することもできます。 `PRIMARY_REGION` 、 `REGIONS` 、または`SCHEDULE`オプションを`CONSTRAINTS`オプションと同時に指定することはできません。両方を同時に指定すると、エラーが返されます。
 
-たとえば、データがラベル`disk`が値と一致する必要があるTiKVストアに存在する必要があるという制約を設定するには、次のようにします。
+たとえば、ラベル`disk`が値と一致する必要がある TiKV ストアにデータが存在する必要があるという制約を設定するには、次のようにします。
 
 ```sql
 CREATE PLACEMENT POLICY storageonnvme CONSTRAINTS="[+disk=nvme]";
@@ -237,30 +237,30 @@ PARTITION BY RANGE( YEAR(purchased) ) (
 );
 ```
 
-制約は、リスト形式（ `[+disk=ssd]` ）またはディクショナリ形式（ `{+disk=ssd: 1,+disk=nvme: 2}` ）のいずれかで指定できます。
+リスト形式 ( `[+disk=ssd]` ) または辞書形式 ( `{+disk=ssd: 1,+disk=nvme: 2}` ) で制約を指定できます。
 
-リスト形式では、制約はキーと値のペアのリストとして指定されます。キーは`+`または`-`で始まります。 `+disk=ssd`は、ラベル`disk`を`ssd`に設定する必要があることを示し、 `-disk=nvme`は、ラベル`disk`を`nvme`に設定してはならないことを示します。
+リスト形式では、制約はキーと値のペアのリストとして指定されます。キーは`+`または`-`で始まります。 `+disk=ssd`はラベル`disk`を`ssd`に設定する必要があることを示し、 `-disk=nvme`はラベル`disk`を`nvme`に設定してはならないことを示します。
 
-辞書形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、1人のフォロワーがus-east-1にあり、1人のフォロワーがus-east-2にあり、1人のフォロワーがus-west-1にいることを示します。別の例として、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';`は、1人のフォロワーがnvmeディスクを使用してus-east-1にあり、1人のフォロワーがus-west-1にいることを示します。
+ディクショナリ形式では、制約はそのルールに適用されるインスタンスの数も示します。たとえば、 `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、1 人のフォロワーが us-east-1 に、1 人のフォロワーが us-east-2 に、1 人のフォロワーが us-west-1 にあることを示します。別の例として、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+disk=nvme":1,"+region=us-west-1":1}';`は、1 人のフォロワーが nvme ディスクを持つ us-east-1 にあり、1 人のフォロワーが us-west-1 にあることを示します。
 
 > **ノート：**
 >
-> 辞書とリストの形式はYAMLパーサーに基づいていますが、YAML構文が正しく解析されない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は誤って`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として解析されます。ただし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
+> ディクショナリとリストの形式は YAML パーサーに基づいていますが、YAML 構文は正しく解析されない可能性があります。たとえば、 `"{+disk=ssd:1,+disk=nvme:2}"`は`'{"+disk=ssd:1": null, "+disk=nvme:1": null}'`として誤って解析されます。しかし、 `"{+disk=ssd: 1,+disk=nvme: 1}"`は`'{"+disk=ssd": 1, "+disk=nvme": 1}'`として正しく解析されます。
 
 ## ツールとの互換性 {#compatibility-with-tools}
 
-| ツール名           | サポートされている最小バージョン | 説明                                                                                                 |
-| -------------- | ---------------- | -------------------------------------------------------------------------------------------------- |
-| バックアップと復元（BR）  | 6.0              | 配置ルールのインポートとエクスポートをサポートします。詳細は[BRの互換性](/br/backup-and-restore-overview.md#compatibility)を参照してください。 |
-| TiDB Lightning | まだ互換性がありません      | TiDB Lightningが配置ポリシーを含むバックアップデータをインポートすると、エラーが報告されます                                              |
-| TiCDC          | 6.0              | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                      |
-| TiDB Binlog    | 6.0              | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                      |
+| ツール名           | サポートされる最小バージョン | 説明                                                                                                 |
+| -------------- | -------------- | -------------------------------------------------------------------------------------------------- |
+| バックアップと復元 (BR) | 6.0            | 配置ルールのインポートとエクスポートをサポートします。詳細は[BR 互換性](/br/backup-and-restore-overview.md#compatibility)を参照してください。 |
+| TiDB Lightning | まだ対応していません     | TiDB Lightningが配置ポリシーを含むバックアップ データをインポートすると、エラーが報告される                                              |
+| TiCDC          | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                      |
+| Binlog         | 6.0            | 配置ルールを無視し、ルールをダウンストリームに複製しません                                                                      |
 
 ## 既知の制限 {#known-limitations}
 
-SQLの配置ルールの実験的リリースには、次の既知の制限があります。
+次の既知の制限事項は次のとおりです。
 
 -   一時テーブルは配置オプションをサポートしていません。
--   設定`PRIMARY_REGION`および`REGIONS`には、構文糖衣規則が許可されています。将来的には、 `PRIMARY_RACK`の`PRIMARY_ZONE`を追加する予定`PRIMARY_HOST` 。 [号18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
--   TiFlashラーナーは、配置ルール構文を使用して構成することはできません。
--   配置ルールは、保存されているデータが正しいTiKVストアに存在することのみを保証します。このルールは、転送中のデータ（ユーザークエリまたは内部操作のいずれかを介して）が特定の地域でのみ発生することを保証するものではありません。
+-   設定`PRIMARY_REGION`および`REGIONS` 、構文糖衣規則が許可されます。今後、 `PRIMARY_RACK`・`PRIMARY_ZONE`・`PRIMARY_HOST`の品種追加を予定しております。 [問題 #18030](https://github.com/pingcap/tidb/issues/18030)を参照してください。
+-   TiFlash 学習者は、配置規則の構文では構成できません。
+-   配置ルールは、保管中のデータが正しい TiKV ストアに存在することのみを保証します。ルールは、(ユーザー クエリまたは内部操作のいずれかを介して) 転送中のデータが特定のリージョンでのみ発生することを保証するものではありません。
