@@ -31,8 +31,8 @@ mysql> SHOW CREATE TABLE t;
 
 When executing the `SELECT * FROM t WHERE b < 100 and c < 100` statement, suppose that TiDB estimates 20 rows meet the `b < 100` condition and 500 rows meet `c < 100`, the length of `INT` type indexes is 8. Then TiDB calculates the cost for two indexes:
 
-+ The cost of index `b` = `row count of b < 100` * `length of index b` = 20 * 8 = 160
-+ The cost of index `c` = `row count of c < 100` * `length of index c` = 500 * 8 = 4000
++ The cost of index `b` = row count of `b < 100` * length of index `b` = 20 * 8 = 160
++ The cost of index `c` = row count of `c < 100` * length of index `c` = 500 * 8 = 4000
 
 Because the cost of index `b` is lower, TiDB chooses `b` as the index.
 
