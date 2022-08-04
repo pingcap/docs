@@ -27,7 +27,7 @@ The following are the procedures of using PiTR in your business:
 
 To achieve PiTR, you need to perform the following backup tasks:
 
-- Start a log backup job. You can run the `br log start` command to start a log backup job. This job runs in the background of your TiDB cluster and automatically backs up the change log of KV storage to the backup storage.
+- Start a log backup task. You can run the `br log start` command to start a log backup task. This task runs in the background of your TiDB cluster and automatically backs up the change log of KV storage to the backup storage.
 - Perform [snapshot (full) backup](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots) regularly. You can run the `br backup full` command to back up the cluster snapshot to the backup storage at, for example, 00:00 every day.
 
 ### Restore data with one click
@@ -37,8 +37,6 @@ To restore data using PiTR, you need to run the `br restore point` command to ex
 When you run the `br restore point` command, you need to specify the latest snapshot backup data before the time point you want to restore and log backup data. BR first restores the snapshot data, and then reads the log backup data from the snapshot time point to the specified restoration time point.
 
 ### Manage backup data
-
-在管理备份数据时，你需要设计备份数据的存放目录结构，定期删除过期的或不再需要的备份数据。
 
 To manage backup data for PiTR, you need to design a backup directory structure to store your backup data and regularly delete outdated or no longer needed backup data.
 
@@ -83,7 +81,7 @@ Testing scenario 2 (on-premises):
 
 ## Limitations
 
-- A single cluster can only start one log backup job.
+- A single cluster can only start one log backup task.
 - You can only restore data to an empty cluster. To avoid impact on the services and data of the cluster, you cannot perform PiTR in-place or on a non-empty cluster.
 - You can use Amazon S3 or a shared filesystem (such as NFS) to store the backup data. Currently, GCS and Azure Blob Storage are not supported.
 - You can only perform PiTR on cluster level. Database-level and table-level PiTR are not supported.
