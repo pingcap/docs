@@ -1819,7 +1819,7 @@ SET tidb_query_log_max_len = 20
 
 > **Warning:**
 >
-> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you only use this variable in TiDB versions later than v5.3.1 or v5.4.1.
+> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you use this variable ONLY in TiDB versions later than v5.3.1 or v5.4.1.
 
 </CustomContent>
 
@@ -2051,7 +2051,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 > **Warning:**
 >
-> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you only use this variable in TiDB versions later than v5.3.1 or v5.4.1.
+> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you use this variable ONLY in TiDB versions later than v5.3.1 or v5.4.1.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
