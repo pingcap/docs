@@ -458,11 +458,11 @@ The preceding `test-user-split.sh` script can be run step by step as follows:
 
     The preceding SQL file runs and triggers the following operations:
 
-    1. Add hosts of two TiDB Servers. The `hostgroup_id` of `tidb-0` is `0` and `hostgroup_id` of `tidb-1` is `1`.
-    2. Make the configuration of TiDb Servers effective and save it on disk.
-    3. Add a `root` user with an empty password and set `default_hostgroup` as `0`. It indicates that the SQL routes to `tidb-0` by default.
-    4. Add a user `root1` with an empty password and set `default_hostgroup` as `1`. It indicates that the SQL routes to `tidb-1` by default.
-    5. Make the configuration of the user effective and save it on disk.
+    1. Adds hosts of two TiDB Servers. The `hostgroup_id` of `tidb-0` is `0` and `hostgroup_id` of `tidb-1` is `1`.
+    2. Makes the configuration of TiDb Servers effective and saves it on disk.
+    3. Adds a `root` user with an empty password and sets `default_hostgroup` as `0`. It indicates that the SQL routes to `tidb-0` by default.
+    4. Adds a user `root1` with an empty password and sets `default_hostgroup` as `1`. It indicates that the SQL routes to `tidb-1` by default.
+    5. Makes the configuration of the user effective and saves it on disk.
 
 5. Log in to **_ProxySQL MySQL Interface_** with the `root` user and `root1` user. The expected output contains `'tidb-0'` and `'tidb-1'` two different values.
 
