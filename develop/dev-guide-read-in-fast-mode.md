@@ -32,7 +32,6 @@ SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'ta
 
 Use the following statement to switch the corresponding table to Fast Mode.
 
-
 ```sql
 ALTER TABLE table_name SET TIFLASH MODE FAST
 ```
