@@ -33,7 +33,6 @@ AlterTableSetTiFlashModeStmt ::=
 
 Assume that the `test` table has a TiFlash replica.
 
-
 ```sql
 USE TEST;
 CREATE TABLE test (a INT NOT NULL, b INT);
