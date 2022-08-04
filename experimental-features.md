@@ -16,14 +16,7 @@ This document introduces the experimental features of TiDB in different versions
 
 ## Stability
 
-<<<<<<< HEAD
-+ Improve the stability of the optimizer's choice of indexes (Introduced in v5.0)
-    + Extend the statistics feature by collecting the multi-column order dependency information.
-    + Refactor the statistics module, including deleting the `TopN` value from `CMSKetch` and the histogram, and adding NDV information for histogram buckets of each table index. For details, see descriptions about [Statistics - `tidb_analyze_version = 2`](/statistics.md).
-=======
 + Improve the stability of the optimizer's choice of indexes: extend the statistics feature by collecting the multi-column order dependency information (Introduced in v5.0).
-+ When TiKV is deployed with limited resources, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the [Quota Limiter](/tikv-configuration-file.md#quota) to limit the CPU resources to be used by the foreground. (Introduced in v6.0)
->>>>>>> b8b52cc17 (correct experimental information in docs (#9803))
 
 ## Scheduling
 
@@ -39,22 +32,15 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
-<<<<<<< HEAD
-+ [View](/information-schema/information-schema-views.md) (Introduced in v2.1)
 
 ## Configuration management
 
 + Persistently store configuration parameters in PD, and support dynamically modifying configuration items. (Introduced in v4.0)
-+ [SHOW CONFIG](/sql-statements/sql-statement-show-config.md) (Introduced in v4.0)
 
 ## Data sharing and subscription
 
 + [Integrate TiCDC with Kafka Connect (Confluent Platform)](/ticdc/integrate-confluent-using-ticdc.md) (Introduced in v5.0)
 
-=======
-+ [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
-
->>>>>>> b8b52cc17 (correct experimental information in docs (#9803))
 ## Storage
 
 + [Disable Titan](/storage-engine/titan-configuration.md#disable-titan-experimental) (Introduced in v4.0)
