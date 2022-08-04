@@ -561,13 +561,13 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
 
     The preceding SQL file runs and triggers the following operations:
 
-    1. Add hosts of two TiDB Servers. The `hostgroup_id` of `tidb-0` is `0` and `hostgroup_id` of `tidb-1` is `1`.
-    2. Make the configuration of TiDb Servers effective and save it on disk.
-    3. Add a user `root` with an empty password and set `default_hostgroup` as `0`. It indicates that the SQL routes to `tidb-0` by default.
-    4. Make the configuration of the user effective and save it on disk.
-    5. Add the rule `^SELECT.*FOR UPDATE$` with `rule_id` as `1` and `destination_hostgroup` as `0`. If a SQL statement match this rule, it used the TiDB Server with `hostgroup` as `0` (this rule forwards `SELECT ... FOR UPDATE` to the written database).
-    6. Add the rule `^SELECT` with `rule_id` as `2` and `destination_hostgroup` as `1`. If a SQL statements match this rule, it uses the TiDB Server with `hostgroup` as `1`.
-    7. Make the configuration of rule effective and save it on disk.
+    1. Adds hosts of two TiDB Servers. The `hostgroup_id` of `tidb-0` is `0` and `hostgroup_id` of `tidb-1` is `1`.
+    2. Makes the configuration of TiDB Servers effective and saves it on disk.
+    3. Adds a user `root` with an empty password and sets `default_hostgroup` as `0`. It indicates that the SQL routes to `tidb-0` by default.
+    4. Makes the configuration of the user effective and save it on disk.
+    5. Adds the rule `^SELECT.*FOR UPDATE$` with `rule_id` as `1` and `destination_hostgroup` as `0`. If a SQL statement match this rule, it used the TiDB Server with `hostgroup` as `0` (this rule forwards `SELECT ... FOR UPDATE` to the written database).
+    6. Adds the rule `^SELECT` with `rule_id` as `2` and `destination_hostgroup` as `1`. If SQL statements match this rule, it uses the TiDB Server with `hostgroup` as `1`.
+    7. Makes the configuration of the rule effective and saves it on disk.
 
     > **Note:**
     >
