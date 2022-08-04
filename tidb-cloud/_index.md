@@ -9,115 +9,115 @@ hide_commit: true
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB](https://docs.pingcap.com/tidb/stable/overview)
+[What is TiDB](https://docs.pingcap.com/tidb/dev/overview)
 
-[Features](https://docs.pingcap.com/tidb/stable/basic-features)
+[Features](https://docs.pingcap.com/tidb/dev/basic-features)
 
-[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)
+[TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB](https://docs.pingcap.com/tidb/stable/quick-start-with-tidb)
+[Try Out TiDB](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
 
-[Try Out HTAP](https://docs.pingcap.com/tidb/stable/quick-start-with-htap)
+[Try Out HTAP](https://docs.pingcap.com/tidb/dev/quick-start-with-htap)
 
-[Import Example Database](https://docs.pingcap.com/tidb/stable/import-example-data)
+[Import Example Database](https://docs.pingcap.com/tidb/dev/import-example-data)
 
 </LearningPath>
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidb/stable/dev-guide-overview)
+[Developer Guide Overview](https://docs.pingcap.com/tidb/dev/dev-guide-overview)
 
-[Quick Start](https://docs.pingcap.com/tidb/stable/dev-guide-build-cluster-in-cloud)
+[Quick Start](https://docs.pingcap.com/tidb/dev/dev-guide-build-cluster-in-cloud)
 
-[Example Application](https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-spring-boot)
+[Example Application](https://docs.pingcap.com/tidb/dev/dev-guide-sample-application-spring-boot)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[Software and Hardware Requirements](https://docs.pingcap.com/tidb/stable/hardware-and-software-requirements)
+[Software and Hardware Requirements](https://docs.pingcap.com/tidb/dev/hardware-and-software-requirements)
 
-[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/stable/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/dev/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/stable/tidb-in-kubernetes)
+[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/dev/tidb-in-kubernetes)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migration Overview](https://docs.pingcap.com/tidb/stable/migration-overview)
+[Migration Overview](https://docs.pingcap.com/tidb/dev/migration-overview)
 
-[Migration Tools](https://docs.pingcap.com/tidb/stable/migration-tools)
+[Migration Tools](https://docs.pingcap.com/tidb/dev/migration-tools)
 
-[Typical Scenarios](https://docs.pingcap.com/tidb/stable/migrate-aurora-to-tidb)
+[Typical Scenarios](https://docs.pingcap.com/tidb/dev/migrate-aurora-to-tidb)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[Upgrade a Cluster](https://docs.pingcap.com/tidb/stable/upgrade-tidb-using-tiup)
+[Upgrade a Cluster](https://docs.pingcap.com/tidb/dev/upgrade-tidb-using-tiup)
 
-[Scale a Cluster](https://docs.pingcap.com/tidb/stable/scale-tidb-using-tiup)
+[Scale a Cluster](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/stable/br-usage-backup)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-backup)
 
-[Restore Cluster Data](https://docs.pingcap.com/tidb/stable/br-usage-restore)
+[Restore Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-restore)
 
-[Daily Check](https://docs.pingcap.com/tidb/stable/daily-check)
+[Daily Check](https://docs.pingcap.com/tidb/dev/daily-check)
 
-[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/stable/maintain-tidb-using-tiup)
+[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/stable/tidb-monitoring-framework)
+[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/dev/tidb-monitoring-framework)
 
-[Monitoring API](https://docs.pingcap.com/tidb/stable/tidb-monitoring-api)
+[Monitoring API](https://docs.pingcap.com/tidb/dev/tidb-monitoring-api)
 
-[Alert Rules](https://docs.pingcap.com/tidb/stable/alert-rules)
+[Alert Rules](https://docs.pingcap.com/tidb/dev/alert-rules)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/stable/performance-tuning-overview)
+[Tuning Overview](https://docs.pingcap.com/tidb/dev/performance-tuning-overview)
 
-[Tuning Methods](https://docs.pingcap.com/tidb/stable/performance-tuning-methods)
+[Tuning Methods](https://docs.pingcap.com/tidb/dev/performance-tuning-methods)
 
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/stable/performance-tuning-practices)
+[Tune OLTP Performance](https://docs.pingcap.com/tidb/dev/performance-tuning-practices)
 
-[Tune Operating System](https://docs.pingcap.com/tidb/stable/tune-operating-system)
+[Tune Operating System](https://docs.pingcap.com/tidb/dev/tune-operating-system)
 
-[Tune Configurations](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
+[Tune Configurations](https://docs.pingcap.com/tidb/dev/configure-memory-usage)
 
-[Tune SQL Performance](https://docs.pingcap.com/tidb/stable/sql-tuning-overview)
+[Tune SQL Performance](https://docs.pingcap.com/tidb/dev/sql-tuning-overview)
 
 </LearningPath>
 
 <LearningPath label="Tools" icon="doc7">
 
-[TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)
+[TiUP](https://docs.pingcap.com/tidb/dev/tiup-overview)
 
-[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)
+[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)
 
-[TiDB Lightning](https://docs.pingcap.com/tidb/stable/tidb-lightning-overview)
+[TiDB Lightning](https://docs.pingcap.com/tidb/dev/tidb-lightning-overview)
 
-[Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview)
+[Data Migration](https://docs.pingcap.com/tidb/dev/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
 
-[TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)
+[TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview)
 
-[PingCAP Clinic](https://docs.pingcap.com/tidb/stable/clinic-introduction)
+[PingCAP Clinic](https://docs.pingcap.com/tidb/dev/clinic-introduction)
 
-[TiDB Operator](https://docs.pingcap.com/tidb/stable/tidb-operator-overview)
+[TiDB Operator](https://docs.pingcap.com/tidb/dev/tidb-operator-overview)
 
-[TiSpark](https://docs.pingcap.com/tidb/stable/tispark-overview)
+[TiSpark](https://docs.pingcap.com/tidb/dev/tispark-overview)
 
 </LearningPath>
 
