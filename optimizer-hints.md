@@ -135,11 +135,11 @@ select /*+ HASH_JOIN(t1, t2) */ * from t1, t2 where t1.id = t2.id;
 
 ### SEMI_JOIN_REWRITE()
 
-The `SEMI_JOIN_REWRITE()` hint tells the optimizer to rewrite the semi join query to an ordinary join query. Currently, this hint only works for `EXISTS` subqueries.
+The `SEMI_JOIN_REWRITE()` hint tells the optimizer to rewrite the semi-join query to an ordinary join query. Currently, this hint only works for `EXISTS` subqueries.
 
-If this hint is not used to rewrite the query, when the hash join is selected in the execution plan, the semi join query can only use the subquery to build a hash table. In this case, when the result set of the subquery is bigger than that of the outer query, the execution speed might be slower than expected.
+If this hint is not used to rewrite the query, when the hash join is selected in the execution plan, the semi-join query can only use the subquery to build a hash table. In this case, when the result of the subquery is bigger than that of the outer query, the execution speed might be slower than expected.
 
-Similarly, when the index join is selected in the execution plan, the semi join query can only use the outer query as the driving table. In this case, when the result set of the subquery is smaller than that of the outer query, the execution speed might be slower than expected.
+Similarly, when the index join is selected in the execution plan, the semi-join query can only use the outer query as the driving table. In this case, when the result of the subquery is smaller than that of the outer query, the execution speed might be slower than expected.
 
 When `SEMI_JOIN_REWRITE()` is used to rewrite the query, the optimizer can extend the selection range to select a better execution plan.
 
@@ -147,7 +147,7 @@ When `SEMI_JOIN_REWRITE()` is used to rewrite the query, the optimizer can exten
 
 ```sql
 -- Does not use SEMI_JOIN_REWRITE() to rewrite the query.
-EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 from t1 where t1.a=t.a);
+EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 FROM t1 WHERE t1.a = t.a);
 ```
 
 ```sql
@@ -166,7 +166,7 @@ EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT 1 from t1 where t1.a=t.a);
 
 ```sql
 -- Uses SEMI_JOIN_REWRITE() to rewrite the query.
-EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 from t1 where t1.a=t.a);
+EXPLAIN SELECT * FROM t WHERE EXISTS (SELECT /*+ SEMI_JOIN_REWRITE() */ 1 FROM t1 WHERE t1.a = t.a);
 ```
 
 ```sql
