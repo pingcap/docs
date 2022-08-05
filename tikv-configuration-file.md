@@ -1662,6 +1662,7 @@ Configuration items related to Quota Limiter.
 
 + The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
 + Default value: `500ms`
++ Recommended setting: It is recommended to use the default value in most cases. If out of memory (OOM) or violent performance jitter occurs in the instance, you can set the value to 1S to make the request waiting time shorter than 1 second.
 
 ### Foreground Quota Limiter
 
@@ -1669,26 +1670,24 @@ Configuration items related to foreground Quota Limiter.
 
 Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the foreground of TiKV might process too many read and write requests so that the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the foreground quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
 
-> **Warning:**
->
-> - Foreground Quota Limiter is an experimental feature introduced in TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
-> - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
-
 #### `foreground-cpu-time` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the CPU resources used by TiKV foreground to process read and write requests.
 + Default value: `0` (which means no limit)
 + Unit: millicpu (for example, `1500` means that the foreground requests consume 1.5v CPU)
++ Recommended setting: For the instance with more than 4 cores, use the default value `0`. For the instance with 4 cores, setting the value to the range of `1000` and `1500` can make a balance. For the instance with 2 cores, keep the value smaller than `1200`.
 
 #### `foreground-write-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions write data.
 + Default value: `0KB` (which means no limit)
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the write bandwidth. For such an exception, it is recommended to set the value smaller than 50M in the instance with 4 or less cores.
 
 #### `foreground-read-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
++ + Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than 20M in the instance with 4 or less cores.
 
 ### Background Quota Limiter
 
