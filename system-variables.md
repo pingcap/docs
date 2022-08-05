@@ -799,13 +799,14 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
+- Type: Boolean
 - Default value: `OFF`
 - This variable controls whether to read historical data or the latest data when performing `ANALYZE`. If this variable is set to `ON`, `ANALYZE` reads the historical data available at the time of `ANALYZE`. If this variable is set to `OFF`, `ANALYZE` reads the latest data.
 - Before v5.2, `ANALYZE` reads the latest data. From v5.2 to v6.1, `ANALYZE` reads the historical data available at the time of `ANALYZE`.
 
 > **Warning:**
 >
-> If `ANALYZE` reads the historical data availiable at the time of `ANALYZE`, the long duration of `AUTO ANALYZE` might cause the `GC life time is shorter than transaction duration` error because the historical data is garbage-collected.
+> If `ANALYZE` reads the historical data available at the time of `ANALYZE`, the long duration of `AUTO ANALYZE` might cause the `GC life time is shorter than transaction duration` error because the historical data is garbage-collected.
 
 ### tidb_enable_async_commit <span class="version-mark">New in v5.0</span>
 
@@ -893,7 +894,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 > **Warning:**
 >
-> **DO NOT set this variable**. The risk of disabling this variable is unknown and might corrupt the metadata of the cluster.
+> **DO NOT modify this variable**. The risk of disabling this variable is unknown and might corrupt the metadata of the cluster.
 
 - Scope: GLOBAL
 - Persists to cluster: Yes
