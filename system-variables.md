@@ -977,7 +977,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Default value: `ON`
-- After setting the variable value to `OFF`, TiDB has the following behaviors:
+- If you set the variable value to `OFF`, TiDB behaves as follows:
     * When you use `SET` to set a `noop` variable, TiDB returns the `"setting *variable_name* has no effect in TiDB"` warning.
     * The result of `SHOW [SESSION | GLOBAL] VARIABLES` does not include `noop` variables.
     * When you use `SELECT` to read a `noop` variable, TiDB returns the `"variable *variable_name* has no effect in TiDB"` warning.
