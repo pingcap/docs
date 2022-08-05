@@ -21,8 +21,6 @@ hide_commit: true
 
 [Try Out TiDB](https://docs.pingcap.com/tidb/v5.0/quick-start-with-tidb)
 
-[Try Out HTAP](https://docs.pingcap.com/tidb/v5.0/quick-start-with-htap)
-
 [Import Example Database](https://docs.pingcap.com/tidb/v5.0/import-example-data)
 
 </LearningPath>
