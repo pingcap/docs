@@ -274,7 +274,7 @@ The `LEADING` hint does not take effect in the following situations:
 + The optimizer cannot perform join operations according to the order as specified by the `LEADING` hint.
 + The `straight_join()` hint already exists.
 + The query contains an outer join together with the Cartesian product.
-+ Any of the `MERGE_JOIN`, `INL_JOIN`, `INL_HASH_JOIN`, `HASH_JOIN`, and `ORDERED_HASH_JOIN` hints is used at the same time.
++ Any of the `MERGE_JOIN`, `INL_JOIN`, `INL_HASH_JOIN`, and `HASH_JOIN` hints is used at the same time.
 
 In the above situations, a warning is generated.
 
