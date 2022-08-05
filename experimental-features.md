@@ -13,11 +13,17 @@ This document introduces the experimental features of TiDB in different versions
 + [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
 + [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
 + [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics). (Introduced in v6.1.0)
++ [Use the thread pool to handle read requests from the storage engine](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). (Introduced in v6.2.0)
++ [Cost Model Version 2](/cost-model.md#cost-model-version-2). (Introduced in v6.2.0)
++ [Fast Mode](/develop/dev-guide-read-in-fast-mode.md). (Introduced in v6.2.0)
+
 
 ## Stability
 
 + Improve the stability of the optimizer's choice of indexes: extend the statistics feature by collecting the multi-column order dependency information (Introduced in v5.0).
-+ When TiKV is deployed with limited resources, if the foreground of TiKV processes too many read and write requests, the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the [Quota Limiter](/tikv-configuration-file.md#quota) to limit the CPU resources to be used by the foreground. (Introduced in v6.0)
++ [Background Quota Limiter](/tikv-configuration-file.md#background-quota-limiter) (Introduced in v6.2.0):
+
+    You can use the background quota-related configuration items to limit the CPU resources to be used by the background. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources.
 
 ## Scheduling
 
@@ -29,7 +35,6 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
-+ [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
 
 ## Storage
 
@@ -38,13 +43,15 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + Divide Regions are divided into buckets. [Buckets are used as the unit of concurrent query](/tune-region-performance.md#use-bucket-to-increase-concurrency) to improve the scan concurrency. (Introduced in v6.1.0)
 + TiKV introduces [API V2](/tikv-configuration-file.md#api-version-new-in-v610). (Introduced in v6.1.0)
 
-## Backup and restoration
-
-+ [Back up and restore RawKV](/br/rawkv-backup-and-restore.md) (Introduced in v3.1)
-
 ## Data migration
 
 + [Use WebUI](/dm/dm-webui-guide.md) to manage migration tasks in DM. (Introduced in v6.0)
++ [Configure disk quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) (Introduced in v6.2.0)
++ [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md) (Introduced in v6.2.0)
+
+## 数据共享订阅
+
++ [Cross-cluster RawKV replication](tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
 
 ## Garbage collection
 
