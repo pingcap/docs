@@ -80,7 +80,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md) of TiKV and TiFlash for a Dedicated Tier cluster.
+* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size) of TiKV and TiFlash for a Dedicated Tier cluster.
 * Support showing the memory information in the node size field.
 
 ## June 28, 2022
@@ -152,7 +152,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 TiDB Cloud is now in General Availability. You can [sign up](https://tidbcloud.com/signup) and select one of the following options:
 
 * Get started with [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) for free.
-* [Apply for a 14-day PoC trial for free](https://en.pingcap.com/apply-for-poc/).
+* Apply for [a 14-day PoC trial for free](https://en.pingcap.com/apply-for-poc/).
 * Get full access with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
 ## March 25, 2022
