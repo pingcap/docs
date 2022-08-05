@@ -122,6 +122,7 @@ The following TiKV configuration items can be modified online:
 
 | Configuration item | Description |
 | :--- | :--- |
+| log.level | The log level. |
 | `raftstore.raft-max-inflight-msgs` | The number of Raft logs to be confirmed. If this number is exceeded, the Raft state machine slows down log sending. |
 | `raftstore.raft-log-gc-tick-interval` | The time interval at which the polling task of deleting Raft logs is scheduled |
 | `raftstore.raft-log-gc-threshold` | The soft limit on the maximum allowable number of residual Raft logs |
@@ -169,8 +170,12 @@ The following TiKV configuration items can be modified online:
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
 | `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
-| `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which transactions write data |
-| `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which transactions and the Coprocessor read data |
+| `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
+| `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
+| `quota.background-cpu-time` | The soft limit on the CPU resources used by TiKV background to process read and write requests |
+| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data (not effective yet) |
+| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective yet) |
+| `quota.enable-auto-tune` | Whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.  |
 | `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
 | `gc.batch-keys` | The number of keys processed in one batch |
@@ -205,8 +210,9 @@ The following TiKV configuration items can be modified online:
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
-| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for a consecutive period of time, this Region should be split.|
-| `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for a consecutive period of time, this Region should be split. |
+| `split.qps-threshold` | The threshold to execute `load-base-split` on a Region. If the QPS of read requests for a Region exceeds `qps-threshold` for 10 consecutive seconds, this Region should be split.|
+| `split.byte-threshold` | The threshold to execute `load-base-split` on a Region. If the traffic of read requests for a Region exceeds the `byte-threshold` for 10 consecutive seconds, this Region should be split. |
+| `split.region-cpu-overload-threshold-ratio` | The threshold to execute `load-base-split` on a Region. If the CPU usage in the Unified Read Pool for a Region exceeds the `region-cpu-overload-threshold-ratio` for 10 consecutive seconds, this Region should be split. (supported since v6.2.0) |
 | `split.split-balance-score` | The parameter of `load-base-split`, which ensures the load of the two split Regions is as balanced as possible. The smaller the value is, the more balanced the load is. But setting it too small might cause split failure. |
 | `split.split-contained-score` | The parameter of `load-base-split`. The smaller the value, the fewer cross-Region visits after Region split. |
 | `cdc.min-ts-interval` | The time interval at which Resolved TS is forwarded  |

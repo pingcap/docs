@@ -681,6 +681,21 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 Constraint checking is always performed in place for pessimistic transactions (default).
 
+### tidb_cost_model_version <span class="version-mark">New in v6.2.0</span>
+
+> **Warning:**
+>
+> - Cost Model Version 2 is currently an experimental feature. It is not recommended that you use it for production environments.
+> - Switching the version of the cost model might cause changes to query plans.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `1`
+- Value options: `1`, `2`
+- TiDB v6.2.0 introduces the [Cost Model Version 2](/cost-model.md#cost-model-version-2), which is more accurate than the previous version in internal tests.
+- To enable the Cost Model Version 2, you can set the `tidb_cost_model_version` to `2`. If you set this variable to `1`, the Cost Model Version 1 will be used.
+- The version of cost model affects the plan decision of optimizer. For more details, see [Cost Model](/cost-model.md).
+
 ### tidb_current_ts
 
 - Scope: SESSION
@@ -724,6 +739,18 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Range: `[1, 256]`
 - Unit: Threads
 - This variable is used to set the concurrency of the DDL operation in the `re-organize` phase.
+
+### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `0.8`
+- Range: `[0, 1]`
+- This variable is used to set the default selectivity of `like`, `rlike`, and `regexp` functions in the filter condition when estimating the number of rows. This variable also controls whether to enable TopN to help estimate these functions.
+- TiDB tries to estimate `like` in the filter condition using statistics. But when `like` matches a complex string, or when using `rlike` or `regexp`, TiDB often fails to fully use statistics, and the default value `0.8` is set as the selectivity rate instead, resulting in inaccurate estimation.
+- This variable is used to change the preceding behavior. If the variable is set to a value other than `0`, the selectivity rate is the specified variable value instead of `0.8`.
+- If the variable is set to `0`, TiDB tries to evaluate using TopN in statistics to improve the accuracy and consider the NULL number in statistics when estimating the preceding three functions. The prerequisite is that statistics are collected when [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510) is set to `2`. Such evaluation might slightly affect the performance.
+- If the variable is set to a value other than the `0.8`, TiDB adjusts the estimation for `not like`, `not rlike`, and `not regexp` accordingly.
 
 ### tidb_disable_txn_auto_retry
 
@@ -825,22 +852,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Type: Boolean
 - Default value: `OFF`
 - This variable is used to determine whether to include the `AUTO_INCREMENT` columns when creating a generated column or an expression index.
-
-### tidb_enable_change_multi_schema
-
-> **Warning:**
->
-> TiDB will support more types of multi-schema changes in the future. This system variable will be deleted in a future release of TiDB.
-
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Type: Boolean
-- Default value: `OFF`
-- This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. When the value of this variable is `ON`, only the following multi-schema changes are supported:
-    - Add multiple columns. For example, `ATLER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT;`.
-    - Drop multiple columns. For example, `ATLER TABLE t DROP COLUMN c1, DROP COLUMN c2;`.
-    - Drop multiple indexes. For example, `ATLER TABLE t DROP INDEX i1, DROP INDEX i2;`.
-    - Drop a column covered by a single-column index. For example, `ALTER TABLE t DROP COLUMN c1`, in which the schema contains `INDEX idx(c1)`.
 
 ### tidb_enable_cascades_planner
 
@@ -960,6 +971,17 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - This variable is used to control whether to enable TiDB mutation checker, which is a tool used to check consistency between data and indexes during the execution of DML statements. If the checker returns an error for a statement, TiDB rolls back the execution of the statement. Enabling this variable causes a slight increase in CPU usage. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md ).
 - For new clusters of v6.0.0 or later versions, the default value is `ON`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
+### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- Value options: `OFF` and `ON`
+- TiDB v6.2.0 refactors the implementation of previous cost model. This variable controls whether to enable the refactored Cost Model implementation.
+- This variable is enabled by default because the refactored Cost Model uses the same cost formula as before, which does not change the plan decision.
+- If your cluster is upgraded from v6.1 to v6.2, this variable remains `OFF`, and it is recommended to enable it manually. If your cluster is upgraded from a version earlier than v6.1, this variable sets to `ON` by default.
+
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -987,6 +1009,17 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > **Warning:**
 >
 > Only the default value of `OFF` can be considered safe. Setting `tidb_enable_noop_functions=1` might lead to unexpected behaviors in your application, because it permits TiDB to ignore certain syntax without providing an error. For example, the syntax `START TRANSACTION READ ONLY` is permitted, but the transaction remains in read-write mode.
+
+### tidb_enable_noop_variables <span class="version-mark">New in v6.2.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- If you set the variable value to `OFF`, TiDB behaves as follows:
+    * When you use `SET` to set a `noop` variable, TiDB returns the `"setting *variable_name* has no effect in TiDB"` warning.
+    * The result of `SHOW [SESSION | GLOBAL] VARIABLES` does not include `noop` variables.
+    * When you use `SELECT` to read a `noop` variable, TiDB returns the `"variable *variable_name* has no effect in TiDB"` warning.
+- To check whether a TiDB instance has set and read the `noop` variable, you can use the `SELECT * FROM INFORMATION_SCHEMA.CLIENT_ERRORS_SUMMARY_GLOBAL;` statement.
 
 ### tidb_enable_outer_join_reorder <span class="version-mark">New in v6.1.0</span>
 
@@ -1925,15 +1958,21 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
+- `tidb_restricted_read_only` and [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) behave similarly. In most cases, you should use [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
+- Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable. However, if the [Security Enhanced Mode](#tidb_enable_enhanced_security) is enabled, the additional `RESTRICTED_VARIABLES_ADMIN` privilege is required to read or modify this variable.
+- `tidb_restricted_read_only` affects [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) in the following cases:
+    - Setting `tidb_restricted_read_only` to `ON` will update [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to `ON`.
+    - Setting `tidb_restricted_read_only` to `OFF` leaves [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) unchanged.
+    - If `tidb_restricted_read_only` is `ON`, [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) cannot be set to `OFF`.
+- For DBaaS providers of TiDB, if a TiDB cluster is a downstream database of another database, to make the TiDB cluster read-only, you might need to use `tidb_restricted_read_only` with [Security Enhanced Mode](#tidb_enable_enhanced_security) enabled, which prevents your customers from using [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) to make the cluster writable. To achieve this, you need to enable [Security Enhanced Mode](#tidb_enable_enhanced_security), use an admin user with the `SYSTEM_VARIABLES_ADMIN` and `RESTRICTED_VARIABLES_ADMIN` privileges to control `tidb_restricted_read_only`, and let your database users use the root user with the `SUPER` privilege to control [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531) only.
 - This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
 - Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
-- When this variable is enabled, the SQL statements being executed are not affected. TiDB only performs the read-only check for the SQL statements **to be** executed.
+- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is also checked before SQL statements are committed. This helps prevent the case where long-running [auto commit](/transaction-overview.md#autocommit) statements might modify data after the server has been placed in read-only mode.
 - When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
     - For uncommitted read-only transactions, you can commit the transactions normally.
     - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
     - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
 - After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
-- Users with `RESTRICTED_VARIABLES_ADMIN` or `SUPER` privileges can modify this variable. However, if the [security enhanced mode](#tidb_enable_enhanced_security) is enabled, only the users with the `RESTRICTED_VARIABLES_ADMIN` privilege can modify this variable.
 
 ### tidb_retry_limit
 
@@ -2127,6 +2166,24 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Range: `[0, 9223372036854775807]`
 - This variable is used to limit the maximum number of requests TiDB can send to TiKV at the same time. 0 means no limit.
 
+### tidb_super_read_only <span class="version-mark">New in v5.3.1</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- `tidb_super_read_only` aims to be implemented as a replacement of the MySQL variable `super_read_only`. However, because TiDB is a distributed database, `tidb_super_read_only` does not make the database read-only immediately after execution, but eventually.
+- Users with the `SUPER` or `SYSTEM_VARIABLES_ADMIN` privilege can modify this variable.
+- This variable controls the read-only status of the entire cluster. When the variable is `ON`, all TiDB servers in the entire cluster are in the read-only mode. In this case, TiDB only executes the statements that do not modify data, such as `SELECT`, `USE`, and `SHOW`. For other statements such as `INSERT` and `UPDATE`, TiDB rejects executing those statements in the read-only mode.
+- Enabling the read-only mode using this variable only ensures that the entire cluster finally enters the read-only status. If you have changed the value of this variable in a TiDB cluster but the change has not yet propagated to other TiDB servers, the un-updated TiDB servers are still **not** in the read-only mode.
+- TiDB checks the read-only flag before SQL statements are executed. Since v6.2.0, the flag is also checked before SQL statements are committed. This helps prevent the case where long-running [auto commit](/transaction-overview.md#autocommit) statements might modify data after the server has been placed in read-only mode.
+- When this variable is enabled, TiDB handles the uncommitted transactions in the following ways:
+    - For uncommitted read-only transactions, you can commit the transactions normally.
+    - For uncommitted transactions that are not read-only, SQL statements that perform write operations in these transactions are rejected.
+    - For uncommitted read-only transactions with modified data, the commit of these transactions is rejected.
+- After the read-only mode is enabled, all users (including the users with the `SUPER` privilege) cannot execute the SQL statements that might write data unless the user is explicitly granted the `RESTRICTED_REPLICA_WRITER_ADMIN` privilege.
+- When the [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) system variable is set to `ON`, `tidb_super_read_only` is affected by [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520) in some cases. For detailed impact, see the description of [`tidb_restricted_read_only`](#tidb_restricted_read_only-new-in-v520).
+
 ### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2265,6 +2322,26 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Unit: Threads
 - This variable is used to set the concurrency degree of the window operator.
 - A value of `-1` means that the value of `tidb_executor_concurrency` will be used instead.
+
+### `tiflash_fine_grained_shuffle_batch_size` <span class="version-mark">New in v6.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `8192`
+- Range: `[1, 18446744073709551616]`
+- When Fine Grained Shuffle is enabled, the window function pushed down to TiFlash can be executed in parallel. This variable controls the batch size of the data sent by the sender. The sender will send data once the cumulative number of rows exceeds this value.
+- Impact on performance: set a reasonable size according to your business requirements. Improper setting affects the performance. If the value is set too small, for example `1`,  it causes one network transfer per Block. If the value is set too large, for example, the total number of rows of the table, it causes the receiving end to spend most of the time waiting for data, and the piplelined computation can not work. To set a proper value, you can observe the distribution of the number of rows received by the TiFlash receiver. If most threads receive only a few rows, for example a few hundred, you can increase this value to reduce the network overhead.
+
+### `tiflash_fine_grained_shuffle_stream_count` <span class="version-mark">New in v6.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Default value: `0`
+- Range: `[-1, 1024]`
+- When the window function is pushed down to TiFlash for execution, you can use this variable to control the concurrency level of the window function execution. The possible values are as follows:
+
+    * -1: the Fine Grained Shuffle feature is disabled. The window function pushed down to TiFlash is executed in a single thread.
+    * 0: the Fine Grained Shuffle feature is enabled. If [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) is set to a valid value (greater than 0), then `tiflash_fine_grained_shuffle_stream_count` is set to the value of [`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610). Otherwise, it is set to 8. The actual concurrency level of the window function on TiFlash is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
+    * Integer greater than 0: the Fine Grained Shuffle feature is enabled. The window function pushed down to TiFlash is executed in multiple threads. The concurrency level is: min(`tiflash_fine_grained_shuffle_stream_count`, the number of physical threads on TiFlash nodes).
+- Theoretically, the performance of the window function increases linearly with this value. However, if the value exceeds the actual number of physical threads, it instead leads to performance degradation.
 
 ### time_zone
 
