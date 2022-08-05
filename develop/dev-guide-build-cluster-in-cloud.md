@@ -170,7 +170,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     {{< copyable "" >}}
 
     ```shell
-    mysql --connect-timeout 15 -u '<prefix>.root' -h xxx.tidbcloud.com -P 4000 -p
+    mysql --connect-timeout 15 -u '4JC1i9KroBMFRwW.root' -h xxx.tidbcloud.com -P 4000 -D test -p
     ```
 
     In this case, you can modify the parameters as follows:
@@ -181,7 +181,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysqlDataSource.setServerName("xxx.tidbcloud.com");
     mysqlDataSource.setPortNumber(4000);
     mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("<prefix>.root");
+    mysqlDataSource.setUser("4JC1i9KroBMFRwW.root");
     mysqlDataSource.setPassword("123456");
     ```
 
