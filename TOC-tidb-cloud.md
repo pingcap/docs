@@ -11,7 +11,7 @@
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
-- Develop
+- Develop Applications
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
     - [Build a TiDB Developer Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
