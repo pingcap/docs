@@ -53,9 +53,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/v5.1/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.1/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/v5.1/br-usage-restore)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.1/use-br-command-line-tool)
 
 [Daily Check](https://docs.pingcap.com/tidb/v5.1/daily-check)
 
@@ -93,7 +91,7 @@ hide_commit: true
 
 [Data Migration](https://docs.pingcap.com/tidb/v5.1/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.1/backup-and-restore-overview)
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.1/backup-and-restore-tool)
 
 [TiCDC](https://docs.pingcap.com/tidb/v5.1/ticdc-overview)
 
