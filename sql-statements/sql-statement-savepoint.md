@@ -37,10 +37,10 @@ RELEASE SAVEPOINT identifier
 
 ## Examples
 
-Create table `t1`:
+Create a table `t1`:
 
 ```sql
-CREATE TABLE t1 (a int NOT NULL PRIMARY KEY);
+CREATE TABLE t1 (a INT NOT NULL PRIMARY KEY);
 ```
 
 ```sql
@@ -145,5 +145,5 @@ When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified s
 * [COMMIT](/sql-statements/sql-statement-commit.md)
 * [ROLLBACK](/sql-statements/sql-statement-rollback.md)
 * [START TRANSACTION](/sql-statements/sql-statement-start-transaction.md)
-* [TiDB Optimistic Transaction Model](/optimistic-transaction.md)
+* [TiDB Optimistic Transaction Mode](/optimistic-transaction.md)
 * [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md)
