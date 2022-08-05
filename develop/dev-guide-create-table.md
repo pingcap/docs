@@ -261,7 +261,7 @@ CREATE TABLE `bookshop`.`users` (
 
 > **Note:**
 >
-> The steps provided in this guide is **_ONLY_** for quick start in the test environment. For production environments, refer to [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
+> The steps provided in this guide is **_ONLY_** for quick start. For more instructions, refer to [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
 
 </CustomContent>
 
@@ -281,7 +281,7 @@ To learn more about TiDB HTAP capabilities, refer to the following documents: [Q
 
 <CustomContent platform="tidb-cloud">
 
-To learn more about TiDB HTAP capabilities, see [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md).
+To learn more about TiDB HTAP capabilities, see [TiDB Cloud HTAP Quick Start](/tidb-cloud/tidb-cloud-htap-quickstart.md) and [Use an HTAP Cluster with TiFlash](/tiflash/tiflash-overview.md).
 
 </CustomContent>
 
