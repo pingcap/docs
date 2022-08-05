@@ -303,7 +303,7 @@ Using the `MERGE()` hint in queries with common table expressions (CTE) can disa
 WITH CTE AS (SELECT /*+ MERGE() */ * FROM tc WHERE tc.a < 60) SELECT * FROM CTE WHERE CTE.a < 18;
 
 -- Uses the hint in a nested CTE query to expand a CTE inline into the outer query.
-WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * FROM t2) ,CTE4 AS (SELECT * FROM t3) SELECT * FROM CTE3,CTE4) SELECT * FROM CTE1,CTE2;
+WITH CTE1 AS (SELECT * FROM t1), CTE2 AS (WITH CTE3 AS (SELECT /*+ MERGE() */ * FROM t2), CTE4 AS (SELECT * FROM t3) SELECT * FROM CTE3, CTE4) SELECT * FROM CTE1, CTE2;
 ```
 
 > **Note:**
