@@ -187,7 +187,6 @@ However, if you need to update a large number of rows (for example, more than te
 
 </CustomContent>
 
-
 This section provides examples of writing scripts to handle iterative updates. This example shows how a combination of `SELECT` and `UPDATE` should be done to complete a bulk-update.
 
 ### Write bulk-update loop
