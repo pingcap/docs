@@ -37,7 +37,19 @@ DELETE FROM {table} WHERE {filter}
 データを削除するときに従うべきいくつかのベスト プラクティスを次に示します。
 
 -   `DELETE`文には必ず`WHERE`節を指定してください。 `WHERE`句が指定されていない場合、TiDB はテーブル内の***すべて***の行を削除します。
+
+<CustomContent platform="tidb">
+
 -   多数の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。これは、TiDB が 1 つのトランザクションのサイズを制限しているためです (デフォルトでは[txn-合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、多数の行 (たとえば、1 万行以上) を削除する場合は[一括削除](#bulk-delete)を使用します。
+
+</CustomContent>
+
 -   テーブル内のすべてのデータを削除する場合は、 `DELETE`ステートメントを使用しないでください。代わりに、 [`TRUNCATE`](/sql-statements/sql-statement-truncate.md)ステートメントを使用してください。
 -   パフォーマンスに関する考慮事項については、 [パフォーマンスに関する考慮事項](#performance-considerations)を参照してください。
 
@@ -134,11 +146,21 @@ func main() {
 
 </SimpleTab>
 
+<CustomContent platform="tidb">
+
+`rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、文字どおりの数量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)には別の時間文字列が表示されます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+`rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプです。タイムゾーンに関係なく、文字どおりの数量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別のタイム ゾーンでは別の時刻文字列を表示します。
+
+</CustomContent>
+
 > **ノート：**
 >
-> `rated_at`フィールドは[日付と時刻の種類](/data-type-date-and-time.md)の`DATETIME`タイプであることに注意してください。タイムゾーンに関係なく、文字どおりの数量として TiDB に格納されていると想定できます。一方、 `TIMESTAMP`タイプはタイムスタンプを格納するため、別の[タイムゾーン](/configure-time-zone.md)には別の時間文字列が表示されます。
->
-> また、MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
+> MySQL と同様に、 `TIMESTAMP`データ型は[2038年問題](https://en.wikipedia.org/wiki/Year_2038_problem)の影響を受けます。 2038 より大きい値を格納する場合は、 `DATETIME`型を使用することをお勧めします。
 
 ## パフォーマンスに関する考慮事項 {#performance-considerations}
 
@@ -158,7 +180,17 @@ TiDB は[統計情報](/statistics.md)を使用してインデックスの選択
 
 テーブルから複数行のデータを削除する必要がある場合は、 [`DELETE`例](#example)句を選択し、 `WHERE`句を使用して、削除する必要があるデータをフィルタリングできます。
 
+<CustomContent platform="tidb">
+
 ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、繰り返しごとにデータの一部を削除します。これは、TiDB が[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+ただし、多数の行 (1 万行以上) を削除する必要がある場合は、データを反復的に削除することをお勧めします。つまり、削除が完了するまで、繰り返しごとにデータの一部を削除します。これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。プログラムまたはスクリプトでループを使用して、このような操作を実行できます。
+
+</CustomContent>
 
 このセクションでは、一括削除を完了するために`SELECT`と`DELETE`の組み合わせを実行する方法を示す、反復的な削除操作を処理するスクリプトを作成する例を示します。
 

@@ -84,7 +84,7 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-デフォルトの MySQL JDBCDriver設定により、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
+デフォルトの MySQL JDBCDriver設定のため、一括挿入のパフォーマンスを向上させるには、いくつかのパラメーターを変更する必要があります。
 
 |            パラメータ           |                 意味                 |                                                                   推奨シナリオ                                                                  |  推奨Configuration / コンフィグレーション |
 | :------------------------: | :--------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
@@ -213,15 +213,32 @@ Golang での完全な例については、以下を参照してください。
 一括挿入に推奨されるツールは次のとおりです。
 
 -   データのエクスポート: [Dumpling](/dumpling-overview.md) . MySQL または TiDB データをローカルまたは Amazon S3 にエクスポートできます。
+
+<CustomContent platform="tidb">
+
 -   データのインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) . **Dumpling**のエクスポート データ、 <strong>CSV</strong>ファイル、または[Amazon Auroraから TiDB にデータを移行する](/migrate-aurora-to-tidb.md)をインポートできます。また、ローカル ディスクまたは[Amazon S3 クラウド ディスク](/br/backup-and-restore-storages.md)からのデータの読み取りもサポートしています。
 -   データの複製: [TiDB データ移行](/dm/dm-overview.md) . MySQL、MariaDB、および Amazon Auroraデータベースを TiDB に複製できます。また、シャードされたインスタンスとテーブルをソース データベースからマージおよび移行することもサポートしています。
 -   データのバックアップと復元: [バックアップと復元 (BR)](/br/backup-and-restore-overview.md) . **Dumpling**と比較して、 <strong>BR</strong>は*<strong>ビッグデータ</strong>*のシナリオにより適しています。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   データのインポート: TiDB Cloudコンソールの[データ インポート タスク](/tidb-cloud/import-sample-data.md)ページ。 **Dumpling**のエクスポート データ、 <strong>CSV</strong>ファイル、または[Amazon Auroraから TiDB にデータを移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)をインポートできます。また、ローカル ディスク、Amazon S3 クラウド ディスク、または GCS クラウド ディスクからのデータの読み取りもサポートしています。
+-   データの複製: [TiDB データ移行](https://docs.pingcap.com/tidb/stable/dm-overview) . MySQL、MariaDB、および Amazon Auroraデータベースを TiDB に複製できます。また、シャードされたインスタンスとテーブルをソース データベースからマージおよび移行することもサポートしています。
+-   データのバックアップと復元: TiDB Cloudコンソールの[バックアップ](/tidb-cloud/backup-and-restore.md)ページ。 **Dumpling**と比較して、バックアップと復元は*<strong>ビッグ データ</strong>*のシナリオにより適しています。
+
+</CustomContent>
 
 ## ホットスポットを避ける {#avoid-hotspots}
 
 テーブルを設計するときは、多数の挿入操作があるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを避ける必要があります。 [主キーを選択](/develop/dev-guide-create-table.md#select-primary-key)セクションを参照し、 [主キー選択時のルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
+<CustomContent platform="tidb">
+
 ホットスポットの問題を処理する方法の詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
+
+</CustomContent>
 
 ## <code>AUTO_RANDOM</code>主キーを持つテーブルにデータを挿入する {#insert-data-to-a-table-with-the-code-auto-random-code-primary-key}
 

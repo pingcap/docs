@@ -8,7 +8,19 @@ aliases: ['/appdev/dev/app-dev-overview','/tidb/stable/dev-guide-outdated-for-la
 
 このガイドはアプリケーション開発者向けに書かれていますが、TiDB の内部動作に興味がある場合、または TiDB 開発に参加したい場合は、TiDB の詳細について[TiDB カーネル開発ガイド](https://pingcap.github.io/tidb-dev-guide/)をお読みください。
 
-このチュートリアルでは、TiDB を使用してアプリケーションをすばやく構築する方法、TiDB の使用例、および一般的な問題の処理方法を示します。したがって、このページを読む前に、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)を読むことをお勧めします。
+<CustomContent platform="tidb">
+
+このチュートリアルでは、TiDB を使用してアプリケーションをすばやく構築する方法、TiDB の使用例、および一般的な問題の処理方法を示します。
+
+このページを読む前に、 [TiDB データベース プラットフォームのクイック スタート ガイド](/quick-start-with-tidb.md)を読むことをお勧めします。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+このチュートリアルでは、TiDB Cloud を使用してアプリケーションを迅速に構築する方法、 TiDB Cloud TiDB Cloudの考えられる使用例、および一般的な問題を処理する方法を示します。
+
+</CustomContent>
 
 ## TiDB の基本 {#tidb-basics}
 
@@ -25,11 +37,21 @@ TiDB は分散トランザクションをサポートし、 [楽観的な取引]
 
 TiDB は、 `BEGIN`の開始と`COMMIT`または`ROLLBACK`の終了の間のすべてのステートメントの原子性を保証します。つまり、この期間中に実行されるすべてのステートメントは、全体として成功または失敗します。これは、アプリケーション開発に必要なデータの一貫性を確保するために使用されます。
 
+<CustomContent platform="tidb">
+
 **楽観的トランザクション**が何であるかわから*<strong>ない</strong>*場合は、まだ使用しないでください。<strong>オプティミスティック トランザクション</strong>では、アプリケーションが`COMMIT`ステートメントによって返される[すべてのエラー](/error-codes.md)を正しく処理できる必要があるためです。アプリケーションがそれらをどのように処理するかわからない場合は、代わりに<strong>ペシミスティック トランザクション</strong>を使用してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+**楽観的トランザクション**が何であるかわから*<strong>ない</strong>*場合は、まだ使用しないでください。<strong>オプティミスティック トランザクション</strong>では、アプリケーションが`COMMIT`ステートメントによって返される[すべてのエラー](https://docs.pingcap.com/tidb/stable/error-codes)を正しく処理できる必要があるためです。アプリケーションがそれらをどのように処理するかわからない場合は、代わりに<strong>ペシミスティック トランザクション</strong>を使用してください。
+
+</CustomContent>
 
 ## アプリケーションが TiDB と対話する方法 {#the-way-applications-interact-with-tidb}
 
-TiDB は MySQL プロトコルとの互換性が高く、 [ほとんどの MySQL 構文と機能](https://docs.pingcap.com/zh/tidb/stable/mysql-compatibility)をサポートしているため、ほとんどの MySQL 接続ライブラリは TiDB と互換性があります。アプリケーション フレームワークまたは言語に PingCAP からの公式の適応がない場合は、MySQL のクライアント ライブラリを使用することをお勧めします。ますます多くのサードパーティ ライブラリが、TiDB のさまざまな機能を積極的にサポートしています。
+TiDB は MySQL プロトコルとの互換性が高く、 [ほとんどの MySQL 構文と機能](/mysql-compatibility.md)をサポートしているため、ほとんどの MySQL 接続ライブラリは TiDB と互換性があります。アプリケーション フレームワークまたは言語に PingCAP からの公式の適応がない場合は、MySQL のクライアント ライブラリを使用することをお勧めします。ますます多くのサードパーティ ライブラリが、TiDB のさまざまな機能を積極的にサポートしています。
 
 TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため、MySQL をサポートするほとんどの ORM は TiDB とも互換性があります。
 

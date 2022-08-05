@@ -18,7 +18,19 @@ summary: Learn steps, rules, and examples to create a secondary index.
 
 ## 二次索引とは {#what-is-secondary-index}
 
-セカンダリ インデックスは、TiDBクラスタの論理オブジェクトです。これは単に、TiDB がクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと見なすことができます。 TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。インデックスごとに、TiDB はテーブル内の各行の参照を作成し、直接データではなく選択した列で参照を並べ替えます。詳細については、 [二次索引](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
+セカンダリ インデックスは、TiDBクラスタの論理オブジェクトです。これは、TiDB がクエリのパフォーマンスを向上させるために使用するデータの並べ替えタイプと単純に見なすことができます。 TiDB では、セカンダリ インデックスの作成はオンライン操作であり、テーブルに対するデータの読み取りおよび書き込み操作をブロックしません。インデックスごとに、TiDB はテーブル内の各行の参照を作成し、直接データではなく、選択した列で参照を並べ替えます。
+
+<CustomContent platform="tidb">
+
+副次索引について詳しくは、 [二次索引](/best-practices/tidb-best-practices.md#secondary-index)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+副次索引について詳しくは、 [二次索引](https://docs.pingcap.com/tidb/stable/tidb-best-practices#secondary-index)を参照してください。
+
+</CustomContent>
 
 TiDB では、 [セカンダリ インデックスを既存のテーブルに追加する](#add-a-secondary-index-to-an-existing-table)または[新しいテーブルを作成するときにセカンダリ インデックスを作成する](#create-a-secondary-index-when-creating-a-new-table)のいずれかを使用できます。
 
@@ -88,7 +100,7 @@ CREATE TABLE `bookshop`.`books` (
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 ```
 
-年による検索機能をサポートする**には、特定の年に発行されたすべての書籍を検索**する SQL ステートメントを作成する必要があります。 2022 年を例にとると、次のように SQL ステートメントを記述します。
+年による検索機能をサポートする**には、特定の年に発行されたすべての書籍を検索**する SQL ステートメントを作成する必要があります。 2022 年を例に取ると、次のように SQL ステートメントを記述します。
 
 {{< copyable "" >}}
 
@@ -144,11 +156,21 @@ CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`
 
 出力では、 **TableFullScan**の代わりに<strong>IndexRangeScan</strong>が表示されます。これは、TiDB がこのクエリを実行するためにインデックスを使用する準備ができていることを意味します。
 
+実行計画の**TableFullScan**や<strong>IndexRangeScan</strong>などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行計画と演算子の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
+
+<CustomContent platform="tidb">
+
+実行計画は、毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しているためです。このアプローチでは、実行計画はルールとデータ分散の両方に依存します。 TiDB SQLパフォーマンスの詳細については、 [SQL チューニングの概要](/sql-tuning-overview.md)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+実行計画は、毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しているためです。このアプローチでは、実行計画はルールとデータ分散の両方に依存します。 TiDB SQLパフォーマンスの詳細については、 [SQL チューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
+
+</CustomContent>
+
 > **ノート：**
->
-> 実行計画の**TableFullScan**や<strong>IndexRangeScan</strong>などの単語は、TiDB では[オペレーター](/explain-overview.md#operator-overview)です。実行計画と演算子の詳細については、 [TiDB クエリ実行計画の概要](/explain-overview.md)を参照してください。
->
-> 実行計画は、毎回同じ演算子を返すわけではありません。これは、TiDB が**コストベースの最適化 (CBO)**アプローチを使用しているためです。このアプローチでは、実行計画はルールとデータ分散の両方に依存します。 TiDB SQLパフォーマンスの詳細については、 [SQL チューニングの概要](/sql-tuning-overview.md)を参照してください。
 >
 > TiDB はクエリ時の明示的なインデックスの使用もサポートしており、 [オプティマイザーのヒント](/optimizer-hints.md)または[SQL 計画管理 (SPM)](/sql-plan-management.md)を使用して人為的にインデックスの使用を制御できます。ただし、インデックス、オプティマイザ ヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用し**ない**でください。
 

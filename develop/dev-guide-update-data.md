@@ -51,7 +51,18 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 以下は、データを更新するためのいくつかのベスト プラクティスです。
 
 -   `UPDATE`文には必ず`WHERE`節を指定してください。 `UPDATE`ステートメントに`WHERE`句がない場合、TiDB はテーブル内の***すべて***の行を更新します。
+
+<CustomContent platform="tidb">
+
 -   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)を使用します。 TiDB は 1 つのトランザクションのサイズを制限しているため (デフォルトでは[txn-合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit) MB)、一度に多くのデータを更新すると、ロックが長時間保持されたり ( [悲観的な取引](/pessimistic-transaction.md) )、競合が発生したりします ( [楽観的な取引](/optimistic-transaction.md) )。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)を使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に多くのデータ更新を行うと、ロックが長時間保持されたり ( [悲観的な取引](/pessimistic-transaction.md) )、競合が発生したりします ( [楽観的な取引](/optimistic-transaction.md) )。
+
+</CustomContent>
 
 ### <code>UPDATE</code>例 {#code-update-code-example}
 
@@ -112,7 +123,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code>のベスト プラクティス {#code-insert-on-duplicate-key-update-code-best-practices}
 
--   一意のキーが 1 つのテーブルにのみ`INSERT ON DUPLICATE KEY UPDATE`を使用します。 ***UNIQUE KEY*** (主キーを含む) の競合が検出された場合、このステートメントはデータを更新します。競合の行が複数ある場合は、1 つの行のみが更新されます。したがって、競合する行が 1 行だけであることを保証できない限り、複数の一意のキーを持つテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
+-   一意のキーが 1 つのテーブルにのみ`INSERT ON DUPLICATE KEY UPDATE`を使用します。 ***UNIQUE KEY*** (主キーを含む) の競合が検出された場合、このステートメントはデータを更新します。複数行の競合がある場合は、1 行のみが更新されます。したがって、競合する行が 1 行だけであることを保証できない限り、複数の一意のキーを持つテーブルで`INSERT ON DUPLICATE KEY UPDATE`ステートメントを使用することはお勧めしません。
 -   データを作成または更新するときに、このステートメントを使用します。
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#code-insert-on-duplicate-key-update-code-example}
@@ -163,7 +174,17 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 テーブル内の複数行のデータを更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)と`WHERE`句を使用して、更新が必要なデータをフィルター処理できます。
 
+<CustomContent platform="tidb">
+
 ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 .これは、TiDB が[txn-合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)つのトランザクションのサイズを制限しているためです (デフォルトでは 1、100 MB)。一度に多くのデータを更新すると、ロックが長時間保持される ( [悲観的な取引](/pessimistic-transaction.md) 、または競合が発生する ( [楽観的な取引](/optimistic-transaction.md) ) ) ことになります。プログラムまたはスクリプトでループを使用して、操作を完了することができます。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新することをお勧めします。つまり、更新が完了するまで、各繰り返しでデータの一部のみを更新します。 .これは、TiDB がデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているためです。一度に多くのデータを更新すると、ロックが長時間保持される ( [悲観的な取引](/pessimistic-transaction.md) 、または競合が発生する ( [楽観的な取引](/optimistic-transaction.md) ) ) ことになります。プログラムまたはスクリプトでループを使用して、操作を完了することができます。
+
+</CustomContent>
 
 このセクションでは、反復的な更新を処理するスクリプトの記述例を示します。この例は、一括更新を完了するために`SELECT`と`UPDATE`の組み合わせを実行する方法を示しています。
 
@@ -177,7 +198,7 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 前の 5 ポイント スケールの`ratings`テーブルのデータに`2`を掛け、評価テーブルに新しい列を追加して、行が更新されたかどうかを示す必要があります。この列を使用すると、 `SELECT`で更新された行を除外できます。これにより、スクリプトがクラッシュして複数回行を更新し、不合理なデータが生成されるのを防ぐことができます。
 
-たとえば、10 ポイント スケールかどうかの識別子としてデータ型[ブール](/data-type-numeric.md#boolean-type)を使用して、 `ten_point`という名前の列を作成します。
+たとえば、10 ポイント スケールかどうかの識別子としてデータ型[ブール](/data-type-numeric.md#boolean-type)を持つ`ten_point`という名前の列を作成します。
 
 {{< copyable "" >}}
 

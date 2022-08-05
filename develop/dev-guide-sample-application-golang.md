@@ -8,27 +8,37 @@ aliases: ['/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/stabl
 
 <!-- markdownlint-disable MD029 -->
 
-# TiDBとGolangを使用してシンプルなCRUDアプリを構築する {#build-a-simple-crud-app-with-tidb-and-golang}
+# TiDB と Golang を使用して単純な CRUD アプリを構築する {#build-a-simple-crud-app-with-tidb-and-golang}
 
-このドキュメントでは、TiDBとGolangを使用して単純なCRUDアプリケーションを構築する方法について説明します。
+このドキュメントでは、TiDB と Golang を使用して単純な CRUD アプリケーションを構築する方法について説明します。
 
 > **ノート：**
 >
-> Golang1.16以降のバージョンを使用することをお勧めします。
+> Golang 1.16 以降のバージョンを使用することをお勧めします。
 
-## 手順1.TiDBクラスタを起動します {#step-1-launch-your-tidb-cluster}
+## ステップ 1. TiDBクラスタを起動する {#step-1-launch-your-tidb-cluster}
 
-以下に、TiDBクラスタを開始する方法を紹介します。
+<CustomContent platform="tidb">
 
-### TiDB Cloudの無料クラスタを使用する {#use-a-tidb-cloud-free-cluster}
+以下にTiDBクラスタの起動方法を紹介します。
+
+**TiDB Cloudの無料クラスタを使用する**
 
 詳細な手順については、 [無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
 
-### ローカルクラスタを使用する {#use-a-local-cluster}
+**ローカルクラスタを使用する**
 
-詳細な手順については、 [ローカルテストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
+詳細な手順については、 [ローカル テストクラスタをデプロイする](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[TiUP を使用して TiDB クラスターをデプロイする](/production-deployment-using-tiup.md)を参照してください。
 
-## ステップ2.コードを取得する {#step-2-get-the-code}
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[無料のクラスタを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster)を参照してください。
+
+</CustomContent>
+
+## ステップ 2. コードを取得する {#step-2-get-the-code}
 
 {{< copyable "" >}}
 
@@ -78,7 +88,7 @@ CREATE TABLE player (
 );
 ```
 
-`sqldriver.go`は`sqldriver`の本体です。 TiDBはMySQLプロトコルとの互換性が高いため、TiDBに接続するにはMySQLソースインスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用して、データの読み取り、編集、追加、および削除を行うことができます。
+`sqldriver.go`は`sqldriver`の本体です。 TiDB は MySQL プロトコルとの互換性が高いため、TiDB に接続するには MySQL ソース インスタンス`db, err := sql.Open("mysql", dsn)`を初期化する必要があります。次に、 `dao.go`を使用して、データの読み取り、編集、追加、および削除を行うことができます。
 
 {{< copyable "" >}}
 
@@ -181,7 +191,7 @@ func openDB(driverName, dataSourceName string, runnable func(db *sql.DB)) {
 }
 ```
 
-TiDBトランザクションを適応させるには、次のコードに従ってツールキット[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 {{< copyable "" >}}
 
@@ -235,7 +245,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 }
 ```
 
-`dao.go`は、データを書き込む機能を提供するためのデータ操作メソッドのセットを定義します。これは、この例のコア部分でもあります。
+`dao.go`は、データを書き込む機能を提供する一連のデータ操作メソッドを定義します。これは、この例のコア部分でもあります。
 
 {{< copyable "" >}}
 
@@ -469,7 +479,7 @@ func randomPlayers(amount int) []Player {
 }
 ```
 
-`sql.go`は、SQLステートメントを定数として定義します。
+`sql.go`は、SQL ステートメントを定数として定義します。
 
 {{< copyable "" >}}
 
@@ -490,11 +500,11 @@ const (
 
 <div label="Using GORM (Recommended)">
 
-GORMと比較すると、go-sql-driver / mysqlの実装はベストプラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じ、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
+GORM と比較すると、go-sql-driver/mysql の実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
-GORMは、Golangで人気のあるオープンソースのORMライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
+GORM は、Golang 向けの人気のあるオープンソース ORM ライブラリです。次の手順では、例として`v1.23.5`を取り上げます。
 
-TiDBトランザクションを適応させるには、次のコードに従ってツールキット[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 {{< copyable "" >}}
 
@@ -566,9 +576,9 @@ cd gorm
 └── gorm.go
 ```
 
-`gorm.go`は`gorm`の本体です。 go-sql-driver / mysqlと比較して、GORMは異なるデータベース間のデータベース作成の違いを回避します。また、オブジェクトのAutoMigrateやCRUDなどの多くの操作を実装しているため、コードが大幅に簡素化されます。
+`gorm.go`は`gorm`の本体です。 go-sql-driver/mysql と比較して、GORM は異なるデータベース間のデータベース作成の違いを回避します。また、AutoMigrate やオブジェクトの CRUD などの多くの操作を実装しているため、コードが大幅に簡素化されます。
 
-`Player`は、テーブルのマッピングであるデータエンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver / mysqlと比較して、GORMの`Player`は、 `gorm:"primaryKey;type:VARCHAR(36);column:id"`などの詳細情報のマッピング関係を示すstructタグを追加します。
+`Player`は、テーブルのマッピングであるデータ エンティティ構造体です。 `Player`の各プロパティは、 `player`テーブルのフィールドに対応します。 go-sql-driver/mysql と比較して、GORM の`Player`は`gorm:"primaryKey;type:VARCHAR(36);column:id"`などの詳細情報のマッピング関係を示す構造タグを追加します。
 
 {{< copyable "" >}}
 
@@ -730,17 +740,19 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 </SimpleTab>
 
-## ステップ3.コードを実行します {#step-3-run-the-code}
+## ステップ 3. コードを実行する {#step-3-run-the-code}
 
-次のコンテンツでは、コードを段階的に実行する方法を紹介します。
+次のコンテンツでは、コードを実行する方法を順を追って紹介します。
 
-### ステップ3.1テーブルの初期化 {#step-3-1-table-initialization}
+### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
 <SimpleTab>
 
 <div label="Using go-sql-driver/mysql">
 
-go-sql-driver / mysqlを使用する場合は、データベーステーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQLクライアントがローカルにインストールされている場合は、次の`sqldriver`のディレクトリで直接実行できます。
+<CustomContent platform="tidb">
+
+go-sql-driver/mysql を使用する場合、データベース テーブルを手動で初期化する必要があります。ローカルクラスタを使用していて、MySQL クライアントがローカルにインストールされている場合は、 `sqldriver`ディレクトリで直接実行できます。
 
 {{< copyable "" >}}
 
@@ -756,7 +768,15 @@ make mysql
 mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 ```
 
-非ローカルクラスタを使用している場合、またはMySQLクライアントがインストールされていない場合は、クラスタに接続し、 `sql/dbinit.sql`ファイルでステートメントを実行します。
+非ローカルクラスタを使用している場合、または MySQL クライアントがインストールされていない場合は、クラスタに接続し、 `sql/dbinit.sql`ファイルのステートメントを実行します。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+go-sql-driver/mysql を使用する場合、クラスタに接続し、 `sql/dbinit.sql`のファイルでステートメントを実行して、データベース テーブルを手動で初期化する必要があります。
+
+</CustomContent>
 
 </div>
 
@@ -768,13 +788,13 @@ mysql --host 127.0.0.1 --port 4000 -u root<sql/dbinit.sql
 
 </SimpleTab>
 
-### ステップTiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
+### ステップ 3.2 TiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
 <SimpleTab>
 
 <div label="Using go-sql-driver/mysql">
 
-TiDB Cloudやその他のリモートクラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `sqldriver.go`分の`dsn`の値を変更します。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
 {{< copyable "" >}}
 
@@ -800,7 +820,7 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 <div label="Using GORM (Recommended)">
 
-TiDB Cloudやその他のリモートクラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `gorm.go`分の`dsn`の値を変更します。
+TiDB Cloudやその他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
 
 {{< copyable "" >}}
 
@@ -826,13 +846,13 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 </SimpleTab>
 
-### ステップ3.3実行 {#step-3-3-run}
+### ステップ 3.3 実行 {#step-3-3-run}
 
 <SimpleTab>
 
 <div label="Using go-sql-driver/mysql">
 
-コードを実行するには、それぞれ`make mysql`を`make run`し`make build` 。
+コードを実行するには、それぞれ`make mysql` 、 `make build` 、および`make run`を実行します。
 
 {{< copyable "" >}}
 
@@ -842,7 +862,7 @@ make build # this command executes `go build -o bin/sql-driver-example`
 make run # this command executes `./bin/sql-driver-example`
 ```
 
-または、ネイティブコマンドを使用できます。
+または、ネイティブ コマンドを使用できます。
 
 {{< copyable "" >}}
 
@@ -852,7 +872,7 @@ go build -o bin/sql-driver-example
 ./bin/sql-driver-example
 ```
 
-または、 `make mysql`の`make run`である`make all`コマンドを直接実行し`make build` 。
+または、 `make mysql` 、 `make build` 、および`make run`の組み合わせである`make all`コマンドを直接実行します。
 
 </div>
 
@@ -867,7 +887,7 @@ make build # this command executes `go build -o bin/gorm-example`
 make run # this command executes `./bin/gorm-example`
 ```
 
-または、ネイティブコマンドを使用できます。
+または、ネイティブ コマンドを使用できます。
 
 {{< copyable "" >}}
 
@@ -882,19 +902,19 @@ go build -o bin/gorm-example
 
 </SimpleTab>
 
-## ステップ4.期待される出力 {#step-4-expected-output}
+## ステップ 4. 期待される出力 {#step-4-expected-output}
 
 <SimpleTab>
 
 <div label="Using go-sql-driver/mysql">
 
-[go-sql-driver/mysql期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
+[go-sql-driver/mysql 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
 
 </div>
 
 <div label="Using GORM (Recommended)">
 
-[GORMの期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
+[GORM 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
 
 </div>
 

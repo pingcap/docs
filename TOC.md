@@ -2,6 +2,7 @@
 
 <!-- markdownlint-disable MD041 -->
 
+-   [ドキュメント ホーム](https://docs.pingcap.com/)
 -   TiDBについて
     -   [TiDB の紹介](/overview.md)
     -   [TiDB 6.1 リリースノート](/releases/release-6.1.0.md)
@@ -206,7 +207,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -490,7 +491,7 @@
         -   [デプロイ](/ticdc/deploy-ticdc.md)
         -   [管理](/ticdc/manage-ticdc.md)
         -   監視と警告
-            -   [指標のモニタリング](/ticdc/monitor-ticdc.md)
+            -   [指標の監視](/ticdc/monitor-ticdc.md)
             -   [アラート ルール](/ticdc/ticdc-alert-rules.md)
         -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
         -   参照

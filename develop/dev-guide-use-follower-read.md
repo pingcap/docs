@@ -3,30 +3,42 @@ title: Follower Read
 summary: Learn how to use Follower Read to optimize query performance.
 ---
 
-# フォロワーの読み取り {#follower-read}
+# フォロワー読み取り {#follower-read}
 
-このドキュメントでは、フォロワー読み取りを使用してクエリのパフォーマンスを最適化する方法を紹介します。
+このドキュメントでは、Follower Read を使用してクエリのパフォーマンスを最適化する方法を紹介します。
 
 ## 序章 {#introduction}
 
-TiDBは、 [リージョン](/tidb-storage.md#region)を基本単位として使用して、クラスタのすべてのノードにデータを分散します。リージョンには複数のレプリカを含めることができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDBはデータをフォロワーに同期的に更新します。
+TiDB は、クラスタのすべてのノードにデータを配布するための基本単位として[リージョン](/tidb-storage.md#region)を使用します。リージョンは複数のレプリカを持つことができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDB はフォロワーのデータを同期的に更新します。
 
-デフォルトでは、TiDBは同じリージョンのリーダーでのみデータの読み取りと書き込みを行います。リージョンリージョンがシステム全体の読み取りボトルネックになる可能性があります。この状況で、フォロワー読み取り機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
+デフォルトでは、TiDB は同じリージョンのリーダーでのみデータの読み取りと書き込みを行います。 リージョンリージョンがシステム全体の読み取りボトルネックになる可能性があります。この状況では、フォロワー読み取り機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
 
 ## いつ使用するか {#when-to-use}
 
-アプリケーションのホットスポットリージョンが[TiDBダッシュボードキービジュアライザーページ](/dashboard/dashboard-key-visualizer.md)にあるかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
+<CustomContent platform="tidb">
 
-ホットスポットの処理の詳細については、 [TiDBホットスポットの問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
+アプリケーションが[TiDB ダッシュボード キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)にホットスポットリージョンを持っているかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
 
-読み取りホットスポットが避けられない場合、またはコストの変更が非常に高い場合は、フォロワー読み取り機能を使用して、フォロワーリージョンへの読み取り要求のバランスをより適切にロードしてみてください。
+ホットスポットの処理の詳細については、 [TiDB Hotspot の問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+アプリケーションが[TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)にホットスポットリージョンを持っているかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
+
+ホットスポットの処理の詳細については、 [TiDB Hotspot の問題処理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
+
+</CustomContent>
+
+読み取りホットスポットが避けられない場合、または変更コストが非常に高い場合は、フォロワー読み取り機能を使用して、フォロワーリージョンへの読み取り要求のバランスを改善することができます。
 
 ## フォロワー読み取りを有効にする {#enable-follower-read}
 
 <SimpleTab>
 <div label="SQL">
 
-フォロワー読み取りを有効にするには、変数`tidb_replica_read` （デフォルト値は`leader` ）を`follower`または`leader-and-follower`に設定します。
+Follower Read を有効にするには、変数`tidb_replica_read` (デフォルト値は`leader` ) を`follower`または`leader-and-follower`に設定します。
 
 {{< copyable "" >}}
 
@@ -34,12 +46,12 @@ TiDBは、 [リージョン](/tidb-storage.md#region)を基本単位として使
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-この変数の詳細については、 [フォロワー読み取りの使用法](/follower-read.md#usage)を参照してください。
+この変数の詳細については、 [フォロワーの読み取りの使用](/follower-read.md#usage)を参照してください。
 
 </div>
 <div label="Java">
 
-Javaでは、フォロワー読み取りを有効にするには、 `FollowerReadHelper`のクラスを定義します。
+Java で Follower Read を有効にするには、 `FollowerReadHelper`クラスを定義します。
 
 {{< copyable "" >}}
 
@@ -83,7 +95,7 @@ public class FollowerReadHelper {
 }
 ```
 
-フォロワーノードからデータを読み取るときは、 `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)`つの方法を使用してフォロワー読み取り機能を有効にします。これにより、現在のセッションでリーダーノードとフォロワーノードの間の負荷を分散できます。接続が切断されると、元のモードに戻ります。
+フォロワー ノードからデータを読み取る場合は、 `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)`メソッドを使用してフォロワー読み取り機能を有効にします。これにより、現在のセッションでリーダー ノードとフォロワー ノード間の負荷を分散できます。接続が切断されると、元のモードに戻ります。
 
 {{< copyable "" >}}
 
@@ -130,6 +142,18 @@ public static class AuthorDAO {
 
 ## 続きを読む {#read-more}
 
--   [フォロワーの読み取り](/follower-read.md)
+-   [フォロワー読み取り](/follower-read.md)
+
+<CustomContent platform="tidb">
+
 -   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
--   [TiDBダッシュボード-主要なビジュアライザーページ](/dashboard/dashboard-key-visualizer.md)
+-   [TiDB ダッシュボード - キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
+-   [TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)
+
+</CustomContent>

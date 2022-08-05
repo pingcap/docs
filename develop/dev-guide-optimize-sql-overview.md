@@ -23,9 +23,30 @@ summary: Provides an overview of SQL performance tuning for TiDB application dev
 
 [SQL パフォーマンスのチューニング](#sql-performance-tuning)の後、アプリケーションがまだ良好なパフォーマンスを得られない場合は、次の問題を回避するために、スキーマの設計とデータ アクセス パターンを確認する必要がある場合があります。
 
+<CustomContent platform="tidb">
+
 -   トランザクション競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 -   ホットスポット。ホット スポットを診断して解決する方法については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   トランザクション競合。トランザクションの競合を診断して解決する方法については、 [ロック競合のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-lock-conflicts)を参照してください。
+-   ホットスポット。ホット スポットを診断して解決する方法については、 [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
+
+</CustomContent>
+
 ### こちらもご覧ください {#see-also}
 
+<CustomContent platform="tidb">
+
 -   [SQL性能チューニング](/sql-tuning-overview.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+-   [SQL性能チューニング](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
+
+</CustomContent>

@@ -2,6 +2,7 @@
 
 <!-- markdownlint-disable MD041 -->
 
+-   [ドキュメント ホーム](https://docs.pingcap.com/)
 -   TiDB Cloudについて
     -   [TiDB Cloudを選ぶ理由](/tidb-cloud/tidb-cloud-intro.md)
     -   [建築](/tidb-cloud/tidb-cloud-intro.md#architecture)
@@ -11,6 +12,66 @@
     -   [TiDB Cloudを試す](/tidb-cloud/tidb-cloud-quickstart.md)
     -   [HTAP を試す](/tidb-cloud/tidb-cloud-htap-quickstart.md)
     -   [PoC を実施する](/tidb-cloud/tidb-cloud-poc.md)
+-   アプリケーションの開発
+    -   [概要](/develop/dev-guide-overview.md)
+    -   クイックスタート
+        -   [TiDB 開発者クラスターを構築する](/develop/dev-guide-build-cluster-in-cloud.md)
+        -   [TiDB の CRUD SQL](/develop/dev-guide-tidb-crud-sql.md)
+        -   TiDB でシンプルな CRUD アプリを構築する
+            -   [ジャワ](/develop/dev-guide-sample-application-java.md)
+            -   [ゴラン](/develop/dev-guide-sample-application-golang.md)
+    -   応用例
+        -   [Spring Boot を使用して TiDB アプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)
+    -   TiDB に接続する
+        -   [Driverまたは ORM を選択](/develop/dev-guide-choose-driver-or-orm.md)
+        -   [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md)
+        -   [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
+    -   データベース スキーマの設計
+        -   [概要](/develop/dev-guide-schema-design-overview.md)
+        -   [データベースを作成する](/develop/dev-guide-create-database.md)
+        -   [テーブルを作成する](/develop/dev-guide-create-table.md)
+        -   [セカンダリ インデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
+    -   書き込みデータ
+        -   [データの挿入](/develop/dev-guide-insert-data.md)
+        -   [データの更新](/develop/dev-guide-update-data.md)
+        -   [データの削除](/develop/dev-guide-delete-data.md)
+        -   [準備されたステートメント](/develop/dev-guide-prepared-statement.md)
+    -   データの読み取り
+        -   [単一のテーブルからのデータのクエリ](/develop/dev-guide-get-data-from-single-table.md)
+        -   [マルチテーブル結合クエリ](/develop/dev-guide-join-tables.md)
+        -   [サブクエリ](/develop/dev-guide-use-subqueries.md)
+        -   [結果のページ付け](/develop/dev-guide-paginate-results.md)
+        -   [ビュー](/develop/dev-guide-use-views.md)
+        -   [一時テーブル](/develop/dev-guide-use-temporary-tables.md)
+        -   [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)
+        -   レプリカ データの読み取り
+            -   [フォロワー読み取り](/develop/dev-guide-use-follower-read.md)
+            -   [古い読み取り](/develop/dev-guide-use-stale-read.md)
+        -   [HTAP クエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+    -   取引
+        -   [概要](/develop/dev-guide-transaction-overview.md)
+        -   [楽観的および悲観的なトランザクション](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+        -   [取引制限](/develop/dev-guide-transaction-restraints.md)
+        -   [トランザクション エラーの処理](/develop/dev-guide-transaction-troubleshoot.md)
+    -   最適化
+        -   [概要](/develop/dev-guide-optimize-sql-overview.md)
+        -   [SQL性能チューニング](/develop/dev-guide-optimize-sql.md)
+        -   [性能チューニングのベスト プラクティス](/develop/dev-guide-optimize-sql-best-practices.md)
+        -   [インデックス作成のベスト プラクティス](/develop/dev-guide-index-best-practice.md)
+        -   その他の最適化方法
+            -   [暗黙の型変換を避ける](/develop/dev-guide-implicit-type-conversion.md)
+            -   [一意のシリアル番号の生成](/develop/dev-guide-unique-serial-number-generation.md)
+    -   トラブルシューティング
+        -   [SQL またはトランザクションの問題](/develop/dev-guide-troubleshoot-overview.md)
+        -   [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
+        -   [タイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
+    -   参照
+        -   [書店のサンプル アプリケーション](/develop/dev-guide-bookshop-schema-design.md)
+        -   ガイドライン
+            -   [オブジェクト命名規則](/develop/dev-guide-object-naming-guidelines.md)
+            -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
+    -   クラウドネイティブ開発環境
+        -   [ギットポッド](/develop/dev-guide-playground-gitpod.md)
 -   クラスターの管理
     -   クラスターを計画する
         -   [クラスター層を選択する](/tidb-cloud/select-cluster-tier.md)
@@ -19,7 +80,7 @@
     -   TiDB クラスターに接続する
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAP クラスターを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -41,7 +102,7 @@
         -   [Amazon S3 または GCS からTiDB Cloudに Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files.md)
         -   [Amazon S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     -   [TiDB からのデータのエクスポート](/tidb-cloud/export-data-from-tidb-cloud.md)
--   データのバックアップと復元
+-   バックアップと復元
     -   [自動バックアップ](/tidb-cloud/backup-and-restore.md)
     -   [手動バックアップ](/tidb-cloud/backup-and-restore.md#manual-backup)
     -   [戻す](/tidb-cloud/backup-and-restore.md#restore)
@@ -82,7 +143,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)

@@ -15,7 +15,18 @@ summary: This document describes how to query data from a single table in a data
 
 データのクエリを実行する前に、次の手順を完了していることを確認してください。
 
+<CustomContent platform="tidb">
+
 1.  TiDBクラスタを構築します ( [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)または[TiUP](/production-deployment-using-tiup.md)を使用することをお勧めします)。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+1.  [TiDB Cloud](/develop/dev-guide-build-cluster-in-cloud.md)を使用して TiDBクラスタを構築します。
+
+</CustomContent>
+
 2.  [Bookshop アプリケーションのテーブル スキーマとサンプル データをインポートする](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data) .
 3.  [TiDB に接続する](/develop/dev-guide-connect-to-tidb.md) .
 

@@ -60,7 +60,7 @@ CREATE TABLE `bookshop`.`users` (
 **パラメータの説明**
 
 -   `{column_name}` : 列名。
--   `{data_type}` : 列[データ・タイプ](/basic-features.md#data-types-functions-and-operators) 。
+-   `{data_type}` : 列[データ・タイプ](/data-type-overview.md) 。
 -   `{column_qualification}` :カラム**レベルの制約**や[生成された列 (実験的機能)](/generated-columns.md)の句などの列の修飾。
 
 一意の識別子`id` 、 `balance` 、および`nickname`など、いくつかの列を`users`テーブルに追加できます。
@@ -81,7 +81,7 @@ CREATE TABLE `bookshop`.`users` (
 
 最後に、**精度**が`15`で<strong>位取り</strong>が`2`の[小数](/data-type-numeric.md#decimal-type)型である`balance`という名前のフィールドが追加されます。<strong>精度</strong>はフィールド内の合計桁数を表し、<strong>スケール</strong>は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5`でスケールが`2`で、範囲が`-999.99`から`999.99`であることを意味します。 `decimal(6,1)`は、精度`6`とスケール`1`を意味し、範囲は`-99999.9`から`99999.9`です。 <strong>decimal</strong>は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (ユーザー プロパティ関連など) では、必ず<strong>decimal</strong>型を使用してください。
 
-TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の種類](/data-type-date-and-time.md) 、および[列挙型](/data-type-string.md#enum-type)を含む、他の多くの列データ型をサポートしています。サポートされている列[データ型](/basic-features.md#data-types-functions-and-operators)を参照して、データベースに保存するデータに一致する**データ型**を使用できます。
+TiDB は、 [整数型](/data-type-numeric.md#integer-types) 、 [浮動小数点型](/data-type-numeric.md#floating-point-types) 、 [固定小数点型](/data-type-numeric.md#fixed-point-types) 、 [日付と時刻の種類](/data-type-date-and-time.md) 、および[列挙型](/data-type-string.md#enum-type)を含む、他の多くの列データ型をサポートしています。サポートされている列[データ型](/data-type-overview.md)を参照して、データベースに保存するデータに一致する**データ型**を使用できます。
 
 もう少し複雑にするために、 `bookshop`のデータのコアとなる`books`のテーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、人生、芸術など)、在庫、価格、および出版日のフィールドが含まれています。
 
@@ -122,7 +122,11 @@ CREATE TABLE `bookshop`.`books` (
 
 テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で`AUTO_INCREMENT`が使用されている場合、ホットスポットは`SHARD_ROW_ID_BITS`を使用しても回避できません。ホットスポットを回避する必要があり、継続的な増分主キーが必要ない場合は、 `AUTO_INCREMENT`の代わりに[`AUTO_RANDOM`](/auto-random.md)を使用して行 ID の連続性を排除できます。
 
+<CustomContent platform="tidb">
+
 ホットスポットの問題を処理する方法の詳細については、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照してください。
+
+</CustomContent>
 
 [主キーを選択するためのガイドライン](#guidelines-to-follow-when-selecting-primary-key)に続いて、次の例は`AUTO_RANDOM`主キーが`users`テーブルでどのように定義されるかを示しています。
 
@@ -157,7 +161,7 @@ TiDB は v5.0 以降、 [クラスター化インデックス](/clustered-indexe
 >
 > TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートします。クラスター化インデックスを有効にすると*、* `PRIMARY KEY`と<em>クラスター化インデックス</em>という用語が同じ意味で使用される場合があります。 `PRIMARY KEY`は制約 (論理プロパティ) を参照し、クラスター化インデックスはデータの格納方法の物理的な実装を記述します。
 
-[クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `book` x `users`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
+[クラスタ化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に続いて、次の例では`books`と`users`の間の関連付けを持つテーブルを作成します。これは`book` x `users`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを作成し、その**主キー**に<strong>クラスター化インデックス</strong>を作成します。
 
 {{< copyable "" >}}
 
@@ -179,7 +183,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値を使用すると、各列の値を指定せずにデータを挿入できます。
 
-`DEFAULT`と[サポートされている SQL関数](/basic-features.md#data-types-functions-and-operators)を一緒に使用して、デフォルトの計算をアプリケーション層の外に移動し、アプリケーション層のリソースを節約できます。計算によって消費されたリソースは消えず、TiDBクラスタに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
+`DEFAULT`と[サポートされている SQL関数](/functions-and-operators/functions-and-operators-overview.md)を一緒に使用して、デフォルトの計算をアプリケーション層の外に移動し、アプリケーション層のリソースを節約できます。計算によって消費されたリソースは消えず、TiDBクラスタに移動されます。通常、デフォルトの時間でデータを挿入できます。以下は、 `ratings`テーブルにデフォルト値を設定する例です。
 
 {{< copyable "" >}}
 
@@ -245,17 +249,41 @@ CREATE TABLE `bookshop`.`users` (
 
 ## HTAP 機能を使用する {#use-htap-capabilities}
 
+<CustomContent platform="tidb">
+
 > **ノート：**
 >
 > このガイドに記載されている手順は、テスト環境での***クイック***スタート専用です。本番環境については、 [HTAP を調べる](/explore-htap.md)を参照してください。
 
-`bookshop`アプリケーションを使用して`ratings`テーブルで OLAP 分析を実行するとします。たとえば、**書籍の評価が評価の時間と有意な相関関係があるかどうか**をクエリするために、ユーザーの書籍の評価が客観的かどうか。次に、 `ratings`テーブル全体の`score`フィールドと`rated_at`フィールドを照会する必要があります。この操作は、OLTP のみのデータベースではリソースを集中的に使用します。または、ETL またはその他のデータ同期ツールを使用して、分析のために OLTP データベースから専用の OLAP データベースにデータをエクスポートすることもできます。
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+> **ノート：**
+>
+> このガイドに記載されている手順は、***クイック***スタート専用です。詳細については、 [TiFlash で HTAP クラスターを使用する](/tiflash/tiflash-overview.md)を参照してください。
+
+</CustomContent>
+
+`bookshop`アプリケーションを使用して`ratings`テーブルで OLAP 分析を実行するとします。たとえば、**書籍の評価が評価の時間と有意な相関関係があるかどうか**をクエリするために、ユーザーの書籍の評価が客観的かどうか。次に、 `ratings`テーブル全体の`score`フィールドと`rated_at`フィールドをクエリする必要があります。この操作は、OLTP のみのデータベースではリソースを集中的に使用します。または、ETL またはその他のデータ同期ツールを使用して、分析のために OLTP データベースから専用の OLAP データベースにデータをエクスポートすることもできます。
 
 このシナリオでは、OLTP と OLAP の両方のシナリオをサポートする**HTAP (Hybrid Transactional and Analytical Processing)**データベースである TiDB が、理想的なワンストップ データベース ソリューションです。
 
 ### 列ベースのデータを複製する {#replicate-column-based-data}
 
-現在、TiDB は**TiFlash**と<strong>TiSpark</strong>の 2 つのデータ分析エンジンをサポートしています。大規模なデータ シナリオ (100 T) では、 <strong>TiFlash MPP</strong>が HTAP の主要なソリューションとして推奨され、 <strong>TiSpark</strong>が補完的なソリューションとして推奨されます。 TiDB HTAP機能の詳細については、次のドキュメントを参照してください: [TiDB HTAPのクイック スタート ガイド](/quick-start-with-htap.md)および[HTAP を調べる](/explore-htap.md) 。
+現在、TiDB は**TiFlash**と<strong>TiSpark</strong>の 2 つのデータ分析エンジンをサポートしています。大規模なデータ シナリオ (100 T) では、 <strong>TiFlash MPP</strong>が HTAP の主要なソリューションとして推奨され、 <strong>TiSpark</strong>が補完的なソリューションとして推奨されます。
+
+<CustomContent platform="tidb">
+
+TiDB HTAP機能の詳細については、次のドキュメントを参照してください: [TiDB HTAPのクイック スタート ガイド](/quick-start-with-htap.md)および[HTAP を調べる](/explore-htap.md) 。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB HTAP機能の詳細については、 [TiDB CloudHTAP クイック スタート](/tidb-cloud/tidb-cloud-htap-quickstart.md)および[TiFlash で HTAP クラスターを使用する](/tiflash/tiflash-overview.md)を参照してください。
+
+</CustomContent>
 
 この例では、 `bookshop`データベースのデータ分析エンジンとして[ティフラッシュ](https://docs.pingcap.com/tidb/stable/tiflash-overview)が選択されています。
 
@@ -272,7 +300,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 -   `{table_name}` : テーブル名。
 -   `{count}` : レプリケートされたレプリカの数。 0 の場合、複製されたレプリカは削除されます。
 
-その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいて、クエリに対して TiKV (行ベース) または TiFlash (列ベース) を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDB を使用して TiFlash レプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
+その後、 **TiFlash**はテーブルを複製します。クエリが実行されると、TiDB はコストの最適化に基づいてクエリに対して TiKV (行ベース) または TiFlash (列ベース) を自動的に選択します。または、クエリで<strong>TiFlash</strong>レプリカを使用するかどうかを手動で指定することもできます。指定方法については、 [TiDB を使用して TiFlash レプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)を参照してください。
 
 ### HTAP 機能の使用例 {#an-example-of-using-htap-capabilities}
 
@@ -373,7 +401,7 @@ SHOW TABLES IN `bookshop`;
 
 ### 列を定義する際に従うべきガイドライン {#guidelines-to-follow-when-defining-columns}
 
--   列でサポートされている[データ型](/basic-features.md#data-types-functions-and-operators)を確認し、データ型の制限に従ってデータを整理します。列に格納する予定のデータに適したタイプを選択します。
+-   列でサポートされている[データ型](/data-type-overview.md)を確認し、データ型の制限に従ってデータを整理します。列に格納する予定のデータに適したタイプを選択します。
 -   主キーを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)を確認し、主キー列を使用するかどうかを決定します。
 -   クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)を確認し、クラスター化**インデックス**を指定するかどうかを決定します。
 -   [列の制約を追加する](#add-column-constraints)を確認し、列に制約を追加するかどうかを決定します。
