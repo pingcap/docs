@@ -86,7 +86,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 
 | Data definition language (DDL)                           | 6.2 | 6.1 | 6.0 | 5.4          |   5.3    |   5.2    |   5.1    |   5.0    |   4.0    |
 | ------------------------------------------------------------ | :--: | :--: | :--: | ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
-| Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`        | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
+| Basic `CREATE`, `DROP`, `ALTER`, `RENAME`, `TRUNCATE`        | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Generated columns](/generated-columns.md)                  | Experimental | Experimental | Experimental| Experimental | Experimental | Experimental | Experimental | Experimental | Experimental |
 | [Views](/views.md)                                           | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
 | [Sequences](/sql-statements/sql-statement-create-sequence.md) | Y | Y | Y  | Y            |      Y       |      Y       |      Y       |      Y       |      Y       |
