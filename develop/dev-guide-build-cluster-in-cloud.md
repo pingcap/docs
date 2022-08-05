@@ -44,9 +44,22 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
     ![SQL string](/media/develop/tidb-cloud-connect.png)
 
+    <CustomContent platform="tidb">
+
+    > **Note:**
+    >
+    > For [Developer Tier clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+
+    </CustomContent>
+
+    <CustomContent platform="tidb-cloud">
+
     > **Note:**
     >
     > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+
+    </CustomContent>
 
 ## Step 2. Connect to a cluster
 
