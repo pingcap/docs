@@ -40,7 +40,7 @@ This document walks you through the quickest way to get started with TiDB Cloud.
     >
     > Alternatively, you can also click the name of your newly created cluster to go to the cluster details page, and then click **Connect** in the upper-right corner.
 
-8. In the dialog box, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
+7. In the dialog box, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
 
     ![SQL string](/media/develop/tidb-cloud-connect.png)
 
@@ -173,7 +173,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysqlDataSource.setServerName("localhost");
     mysqlDataSource.setPortNumber(4000);
     mysqlDataSource.setDatabaseName("test");
-    mysqlDataSource.setUser("<prefix>.root");
+    mysqlDataSource.setUser("root");
     mysqlDataSource.setPassword("");
     ```
 
