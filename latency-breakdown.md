@@ -58,7 +58,7 @@ e2e duration =
 
 `tidb_server_get_token_duration_seconds` should be small enough to be ignored, usually less than 1 microsecond.
 
-`tidb_session_parse_duration_seconds` records the duration pf parsing sql query text to AST, which can be skipped by [`prepare/execute` statements](/dev-guide-optimize-sql-best-practices.md#use-prepare).
+`tidb_session_parse_duration_seconds` records the duration pf parsing sql query text to AST, which can be skipped by [`prepare/execute` statements](/develop/dev-guide-optimize-sql-best-practices.md#use-prepare).
 
 `tidb_session_compile_duration_seconds` records the duration of compiling AST to physical plan, which can be skipped by [plan cache](/sql-prepared-plan-cache.md).
 
