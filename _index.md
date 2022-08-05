@@ -41,9 +41,9 @@ hide_commit: true
 
 [Migration Overview](https://docs.pingcap.com/tidb/v5.2/migration-overview)
 
-[Migration Tools](https://docs.pingcap.com/tidb/v5.2/migration-tools)
+[Migrate from Amazon Aurora MySQL](https://docs.pingcap.com/tidb/v5.2/migrate-from-aurora-using-lightning)
 
-[Typical Scenarios](https://docs.pingcap.com/tidb/v5.2/migrate-aurora-to-tidb)
+[Migrate from MySQL SQL Files](https://docs.pingcap.com/tidb/v5.2/migrate-from-mysql-dumpling-files)
 
 </LearningPath>
 
@@ -53,9 +53,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/v5.2/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.2/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/v5.2/br-usage-restore)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.2/use-br-command-line-tool)
 
 [Daily Check](https://docs.pingcap.com/tidb/v5.2/daily-check)
 
@@ -75,12 +73,6 @@ hide_commit: true
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/v5.2/performance-tuning-overview)
-
-[Tuning Methods](https://docs.pingcap.com/tidb/v5.2/performance-tuning-methods)
-
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/v5.2/performance-tuning-practices)
-
 [Tune Operating System](https://docs.pingcap.com/tidb/v5.2/tune-operating-system)
 
 [Tune Configurations](https://docs.pingcap.com/tidb/v5.2/configure-memory-usage)
@@ -99,7 +91,7 @@ hide_commit: true
 
 [Data Migration](https://docs.pingcap.com/tidb/v5.2/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.2/backup-and-restore-overview)
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.2/backup-and-restore-tool)
 
 [TiCDC](https://docs.pingcap.com/tidb/v5.2/ticdc-overview)
 
