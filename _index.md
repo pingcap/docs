@@ -53,9 +53,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/v5.4/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.4/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/v5.4/br-usage-restore)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.4/use-br-command-line-tool)
 
 [Daily Check](https://docs.pingcap.com/tidb/v5.4/daily-check)
 
@@ -75,12 +73,6 @@ hide_commit: true
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/v5.4/performance-tuning-overview)
-
-[Tuning Methods](https://docs.pingcap.com/tidb/v5.4/performance-tuning-methods)
-
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/v5.4/performance-tuning-practices)
-
 [Tune Operating System](https://docs.pingcap.com/tidb/v5.4/tune-operating-system)
 
 [Tune Configurations](https://docs.pingcap.com/tidb/v5.4/configure-memory-usage)
@@ -99,7 +91,7 @@ hide_commit: true
 
 [Data Migration](https://docs.pingcap.com/tidb/v5.4/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.4/backup-and-restore-overview)
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.4/backup-and-restore-tool)
 
 [TiCDC](https://docs.pingcap.com/tidb/v5.4/ticdc-overview)
 
