@@ -75,12 +75,6 @@ hide_commit: true
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/v6.0/performance-tuning-overview)
-
-[Tuning Methods](https://docs.pingcap.com/tidb/v6.0/performance-tuning-methods)
-
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/v6.0/performance-tuning-practices)
-
 [Tune Operating System](https://docs.pingcap.com/tidb/v6.0/tune-operating-system)
 
 [Tune Configurations](https://docs.pingcap.com/tidb/v6.0/configure-memory-usage)
