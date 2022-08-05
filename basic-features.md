@@ -135,7 +135,7 @@ This document lists the features supported in each TiDB version. Note that suppo
 ## Security
 
 | Security                                                 | 6.2 | 6.1 | 6.0 | 5.4  | 5.3 | 5.2 | 5.1 | 5.0 | 4.0 |
-| ------------------------------------------------------------ | :--: | :--: | ---- | :-----: | :-----: | :-----: | :-----: | :-----: |
+| ------------------------------------------------------------ | :--: | :--: | :--: | ---- | :-----: | :-----: | :-----: | :-----: | :-----: |
 | [Transparent layer security (TLS)](/enable-tls-between-clients-and-servers.md) | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [Encryption at rest (TDE)](/encryption-at-rest.md)           | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
 | [Role-based authentication (RBAC)](/role-based-access-control.md) | Y | Y | Y | Y    |    Y    |    Y    |    Y    |    Y    |    Y    |
