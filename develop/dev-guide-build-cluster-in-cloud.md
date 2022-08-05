@@ -58,7 +58,6 @@ This document walks you through the quickest way to get started with TiDB Cloud.
     >
     > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
-
     </CustomContent>
 
 ## Step 2. Connect to a cluster
