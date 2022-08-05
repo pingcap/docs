@@ -1681,13 +1681,13 @@ Suppose that your machine on which TiKV is deployed has limited resources, for e
 
 + The soft limit on the bandwidth with which transactions write data.
 + Default value: `0KB` (which means no limit)
-+ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the write bandwidth. For such an exception, it is recommended to set the value smaller than 50M in the instance with 4 or less cores.
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the write bandwidth. For such an exception, it is recommended to set the value smaller than `50MB` in the instance with 4 or less cores.
 
 #### `foreground-read-bandwidth` <span class="version-mark">New in v6.0.0</span>
 
 + The soft limit on the bandwidth with which transactions and the Coprocessor read data.
 + Default value: `0KB` (which means no limit)
-+ + Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than 20M in the instance with 4 or less cores.
++ + Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
 
 ### Background Quota Limiter
 
