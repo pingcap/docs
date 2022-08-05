@@ -1,108 +1,104 @@
 ---
 title: TiDB Introduction
-summary: Learn about the NewSQL database TiDB that supports HTAP workloads.
-aliases: ['/tidb/v5.4/adopters','/tidb/stable/adopters']
+aliases: ["/docs/dev/", "/docs/dev/adopters/", "/tidb/dev/adopters"]
+hide_sidebar: true
+hide_commit: true
 ---
 
-# TiDBの紹介 {#tidb-introduction}
+<LearningPathContainer platform="tidb" title="TiDB" subTitle="TiDB is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. Find the guide, samples, and references you need to use TiDB.">
 
-[TiDB](https://github.com/pingcap/tidb) （/&#39;taɪdiːbi：/、「Ti」はTitaniumの略）は、Hybrid Transactional and Analytical Processing（HTAP）ワークロードをサポートするオープンソースの分散型NewSQLデータベースです。 MySQLと互換性があり、水平方向のスケーラビリティ、強力な一貫性、および高可用性を備えています。 TiDBは、オンプレミスまたはクラウド内にデプロイできます。
+<LearningPath label="Learn" icon="cloud1">
 
-クラウド向けに設計されたTiDBは、クラウドプラットフォームで柔軟なスケーラビリティ、信頼性、セキュリティを提供します。ユーザーは、変化するワークロードの要件を満たすためにTiDBを柔軟にスケーリングできます。 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.1/tidb-operator-overview)は、KubernetesでのTiDBの管理を支援し、運用タスクを自動化します。これにより、管理対象のKubernetesを提供するクラウドへのTiDBのデプロイが容易になります。フルマネージドのTiDBサービスである[TiDB Cloud](https://pingcap.com/tidb-cloud/)は、 [クラウド内のTiDB](https://docs.pingcap.com/tidbcloud/)の全力を解き放つ最も簡単で、最も経済的で、最も回復力のある方法であり、数回クリックするだけでTiDBクラスターを展開および実行できます。
+[TiDBとは](https://docs.pingcap.com/tidb/v5.4/overview)
 
-<NavColumns><NavColumn><ColumnTitle>TiDBについて</ColumnTitle>
+[特徴](https://docs.pingcap.com/tidb/v5.4/basic-features)
 
--   [TiDBの紹介](/overview.md)
--   [基本的な機能](/basic-features.md)
--   [TiDB5.4リリースノート](/releases/release-5.4.0.md)
--   [TiDBリリースタイムライン](/releases/release-timeline.md)
--   [MySQLとの互換性](/mysql-compatibility.md)
--   [使用制限](/tidb-limitations.md)
+[ティフラッシュ](https://docs.pingcap.com/tidb/v5.4/tiflash-overview)
 
-</NavColumn>
+</LearningPath>
 
-<NavColumn><ColumnTitle>クイックスタート</ColumnTitle>
+<LearningPath label="Try" icon="cloud5">
 
--   [TiDBのクイックスタート](/quick-start-with-tidb.md)
--   [HTAPのクイックスタート](/quick-start-with-htap.md)
--   [TiDBでSQLを探索する](/basic-sql-operations.md)
--   [HTAPを探索する](/explore-htap.md)
+[TiDB を試す](https://docs.pingcap.com/tidb/v5.4/quick-start-with-tidb)
 
-</NavColumn>
+[HTAP を試す](https://docs.pingcap.com/tidb/v5.4/quick-start-with-htap)
 
-<NavColumn><ColumnTitle>デプロイして使用する</ColumnTitle>
+[サンプル データベースのインポート](https://docs.pingcap.com/tidb/v5.4/import-example-data)
 
--   [ハードウェアとソフトウェアの要件](/hardware-and-software-requirements.md)
--   [環境とConfiguration / コンフィグレーションを確認する](/check-before-deployment.md)
--   [TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)
--   [分析処理にTiFlashを使用する](/tiflash/tiflash-overview.md)
--   [KubernetesにTiDBをデプロイ](https://docs.pingcap.com/tidb-in-kubernetes/stable)
+</LearningPath>
 
-</NavColumn>
+<LearningPath label="Deploy" icon="deploy">
 
-<NavColumn><ColumnTitle>データの移行</ColumnTitle>
+[ソフトウェアとハードウェアの要件](https://docs.pingcap.com/tidb/v5.4/hardware-and-software-requirements)
 
--   [移行の概要](/migration-overview.md)
--   [CSVファイルからTiDBへのデータの移行](/migrate-from-csv-files-to-tidb.md)
--   [SQLファイルからTiDBへのデータの移行](/migrate-from-sql-files-to-tidb.md)
--   [AuroraからTiDBへのデータの移行](/migrate-aurora-to-tidb.md)
+[TiUP を使用して TiDB クラスターをデプロイする (推奨)](https://docs.pingcap.com/tidb/v5.4/production-deployment-using-tiup)
 
-</NavColumn>
+[Kubernetes に TiDB クラスターをデプロイする](https://docs.pingcap.com/tidb/v5.4/tidb-in-kubernetes)
 
-<NavColumn><ColumnTitle>管理</ColumnTitle>
+</LearningPath>
 
--   [TiUPを使用してTiDBをアップグレードする](/upgrade-tidb-using-tiup.md)
--   [TiUPを使用してTiDBをスケーリングする](/scale-tidb-using-tiup.md)
--   [データのバックアップと復元](/br/backup-and-restore-tool.md)
--   [デプロイの導入と管理](/ticdc/manage-ticdc.md)
--   [TiUPを使用してTiDBを管理する](/maintain-tidb-using-tiup.md)
--   [TiFlashを管理する](/tiflash/maintain-tiflash.md)
+<LearningPath label="Migrate" icon="cloud3">
 
-</NavColumn>
+[移行の概要](https://docs.pingcap.com/tidb/v5.4/migration-overview)
 
-<NavColumn><ColumnTitle>監視と警告</ColumnTitle>
+[移行ツール](https://docs.pingcap.com/tidb/v5.4/migration-tools)
 
--   [モニタリングフレームワーク](/tidb-monitoring-framework.md)
--   [モニタリングAPI](/tidb-monitoring-api.md)
--   [監視サービスのデプロイ](/deploy-monitoring-services.md)
--   [Grafanaスナップショットのエクスポート](/exporting-grafana-snapshots.md)
--   [アラートルールとソリューション](/alert-rules.md)
--   [TiFlashアラートルールとソリューション](/tiflash/tiflash-alert-rules.md)
+[典型的なシナリオ](https://docs.pingcap.com/tidb/v5.4/migrate-aurora-to-tidb)
 
-</NavColumn>
+</LearningPath>
 
-<NavColumn><ColumnTitle>トラブルシューティング</ColumnTitle>
+<LearningPath label="Maintain" icon="maintain">
 
--   [TiDBトラブルシューティングマップ](/tidb-troubleshooting-map.md)
--   [遅いクエリを特定する](/identify-slow-queries.md)
--   [遅いクエリを分析する](/analyze-slow-queries.md)
--   [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
--   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
--   [TiDBクラスターのトラブルシューティング](/troubleshoot-tidb-cluster.md)
--   [TiCDCのトラブルシューティング](/ticdc/troubleshoot-ticdc.md)
--   [TiFlashのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
+[クラスターをアップグレードする](https://docs.pingcap.com/tidb/v5.4/upgrade-tidb-using-tiup)
 
-</NavColumn>
+[クラスターのスケーリング](https://docs.pingcap.com/tidb/v5.4/scale-tidb-using-tiup)
 
-<NavColumn><ColumnTitle>参照</ColumnTitle>
+[クラスタ データのバックアップ](https://docs.pingcap.com/tidb/v5.4/use-br-command-line-tool)
 
--   [TiDBアーキテクチャ](/tidb-architecture.md)
--   [主要な監視指標](/grafana-overview-dashboard.md)
--   [TLSを有効にする](/enable-tls-between-clients-and-servers.md)
--   [権限管理](/privilege-management.md)
--   [ロールベースのアクセス制御](/role-based-access-control.md)
--   [証明書ベースの認証](/certificate-authentication.md)
+[毎日のチェック](https://docs.pingcap.com/tidb/v5.4/daily-check)
 
-</NavColumn>
+[TiUP を使用して TiDB を管理する](https://docs.pingcap.com/tidb/v5.4/maintain-tidb-using-tiup)
 
-<NavColumn><ColumnTitle>よくある質問</ColumnTitle>
+</LearningPath>
 
--   [製品に関するよくある質問](/faq/tidb-faq.md)
--   [高可用性に関するFAQ](/faq/high-availability-faq.md)
--   [SQLに関するFAQ](/faq/sql-faq.md)
--   [FAQのデプロイと管理](/faq/deploy-and-maintain-faq.md)
--   [アップグレードおよびアップグレード後のFAQ](/faq/upgrade-faq.md)
--   [移行に関するよくある質問](/faq/migration-tidb-faq.md)
+<LearningPath label="Monitor" icon="cloud6">
 
-</NavColumn>
-</NavColumns>
+[Prometheus と Grafana を使用する](https://docs.pingcap.com/tidb/v5.4/tidb-monitoring-framework)
+
+[モニタリング API](https://docs.pingcap.com/tidb/v5.4/tidb-monitoring-api)
+
+[アラート ルール](https://docs.pingcap.com/tidb/v5.4/alert-rules)
+
+</LearningPath>
+
+<LearningPath label="Tune" icon="tidb-cloud-tune">
+
+[オペレーティング システムの調整](https://docs.pingcap.com/tidb/v5.4/tune-operating-system)
+
+[構成の調整](https://docs.pingcap.com/tidb/v5.4/configure-memory-usage)
+
+[SQL パフォーマンスの調整](https://docs.pingcap.com/tidb/v5.4/sql-tuning-overview)
+
+</LearningPath>
+
+<LearningPath label="Tools" icon="doc7">
+
+[TiUP](https://docs.pingcap.com/tidb/v5.4/tiup-overview)
+
+[Dumpling](https://docs.pingcap.com/tidb/v5.4/dumpling-overview)
+
+[TiDB Lightning](https://docs.pingcap.com/tidb/v5.4/tidb-lightning-overview)
+
+[データ移行](https://docs.pingcap.com/tidb/v5.4/dm-overview)
+
+[バックアップと復元 (BR)](https://docs.pingcap.com/tidb/v5.4/backup-and-restore-tool)
+
+[TiCDC](https://docs.pingcap.com/tidb/v5.4/ticdc-overview)
+
+[TiDB Operator](https://docs.pingcap.com/tidb/v5.4/tidb-operator-overview)
+
+[ティスパーク](https://docs.pingcap.com/tidb/v5.4/tispark-overview)
+
+</LearningPath>
+
+</LearningPathContainer>
