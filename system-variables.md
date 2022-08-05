@@ -1363,6 +1363,10 @@ SET tidb_query_log_max_len = 20
 
 ### tidb_restricted_read_only <span class="version-mark">New in v5.2.0</span>
 
+> **Warning:**
+>
+> For TiDB versions earlier than v5.3.1 or v5.4.1, this variable has a defect and using it might cause unexpected results. Ensure that you use this variable ONLY in TiDB versions later than v5.3.1 or v5.4.1.
+
 - Scope: GLOBAL
 - Default value: `0`
 - Value options: `0`, `1`
