@@ -9,103 +9,103 @@ hide_commit: true
 
 <LearningPath label="Learn" icon="cloud1">
 
-[What is TiDB](https://docs.pingcap.com/tidb/dev/overview)
+[What is TiDB](https://docs.pingcap.com/tidb/v5.1/overview)
 
-[Features](https://docs.pingcap.com/tidb/dev/basic-features)
+[Features](https://docs.pingcap.com/tidb/v5.1/basic-features)
 
-[TiFlash](https://docs.pingcap.com/tidb/dev/tiflash-overview)
+[TiFlash](https://docs.pingcap.com/tidb/v5.1/tiflash-overview)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB](https://docs.pingcap.com/tidb/dev/quick-start-with-tidb)
+[Try Out TiDB](https://docs.pingcap.com/tidb/v5.1/quick-start-with-tidb)
 
-[Try Out HTAP](https://docs.pingcap.com/tidb/dev/quick-start-with-htap)
+[Try Out HTAP](https://docs.pingcap.com/tidb/v5.1/quick-start-with-htap)
 
-[Import Example Database](https://docs.pingcap.com/tidb/dev/import-example-data)
+[Import Example Database](https://docs.pingcap.com/tidb/v5.1/import-example-data)
 
 </LearningPath>
 
 <LearningPath label="Deploy" icon="deploy">
 
-[Software and Hardware Requirements](https://docs.pingcap.com/tidb/dev/hardware-and-software-requirements)
+[Software and Hardware Requirements](https://docs.pingcap.com/tidb/v5.1/hardware-and-software-requirements)
 
-[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/dev/production-deployment-using-tiup)
+[Deploy a TiDB Cluster Using TiUP (Recommended)](https://docs.pingcap.com/tidb/v5.1/production-deployment-using-tiup)
 
-[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/dev/tidb-in-kubernetes)
+[Deploy a TiDB Cluster in Kubernetes](https://docs.pingcap.com/tidb/v5.1/tidb-in-kubernetes)
 
 </LearningPath>
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migration Overview](https://docs.pingcap.com/tidb/dev/migration-overview)
+[Migration Overview](https://docs.pingcap.com/tidb/v5.1/migration-overview)
 
-[Migration Tools](https://docs.pingcap.com/tidb/dev/migration-tools)
+[Migrate from Amazon Aurora MySQL](https://docs.pingcap.com/tidb/v5.1/migrate-from-aurora-using-lightning)
 
-[Typical Scenarios](https://docs.pingcap.com/tidb/dev/migrate-aurora-to-tidb)
+[Migrate from MySQL SQL Files](https://docs.pingcap.com/tidb/v5.1/migrate-from-mysql-dumpling-files)
 
 </LearningPath>
 
 <LearningPath label="Maintain" icon="maintain">
 
-[Upgrade a Cluster](https://docs.pingcap.com/tidb/dev/upgrade-tidb-using-tiup)
+[Upgrade a Cluster](https://docs.pingcap.com/tidb/v5.1/upgrade-tidb-using-tiup)
 
-[Scale a Cluster](https://docs.pingcap.com/tidb/dev/scale-tidb-using-tiup)
+[Scale a Cluster](https://docs.pingcap.com/tidb/v5.1/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-backup)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.1/br-usage-backup)
 
-[Restore Cluster Data](https://docs.pingcap.com/tidb/dev/br-usage-restore)
+[Restore Cluster Data](https://docs.pingcap.com/tidb/v5.1/br-usage-restore)
 
-[Daily Check](https://docs.pingcap.com/tidb/dev/daily-check)
+[Daily Check](https://docs.pingcap.com/tidb/v5.1/daily-check)
 
-[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/maintain-tidb-using-tiup)
+[Maintain TiDB Using TiUP](https://docs.pingcap.com/tidb/v5.1/maintain-tidb-using-tiup)
 
 </LearningPath>
 
 <LearningPath label="Monitor" icon="cloud6">
 
-[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/dev/tidb-monitoring-framework)
+[Use Prometheus and Grafana](https://docs.pingcap.com/tidb/v5.1/tidb-monitoring-framework)
 
-[Monitoring API](https://docs.pingcap.com/tidb/dev/tidb-monitoring-api)
+[Monitoring API](https://docs.pingcap.com/tidb/v5.1/tidb-monitoring-api)
 
-[Alert Rules](https://docs.pingcap.com/tidb/dev/alert-rules)
+[Alert Rules](https://docs.pingcap.com/tidb/v5.1/alert-rules)
 
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
 
-[Tuning Overview](https://docs.pingcap.com/tidb/dev/performance-tuning-overview)
+[Tuning Overview](https://docs.pingcap.com/tidb/v5.1/performance-tuning-overview)
 
-[Tuning Methods](https://docs.pingcap.com/tidb/dev/performance-tuning-methods)
+[Tuning Methods](https://docs.pingcap.com/tidb/v5.1/performance-tuning-methods)
 
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/dev/performance-tuning-practices)
+[Tune OLTP Performance](https://docs.pingcap.com/tidb/v5.1/performance-tuning-practices)
 
-[Tune Operating System](https://docs.pingcap.com/tidb/dev/tune-operating-system)
+[Tune Operating System](https://docs.pingcap.com/tidb/v5.1/tune-operating-system)
 
-[Tune Configurations](https://docs.pingcap.com/tidb/dev/configure-memory-usage)
+[Tune Configurations](https://docs.pingcap.com/tidb/v5.1/configure-memory-usage)
 
-[Tune SQL Performance](https://docs.pingcap.com/tidb/dev/sql-tuning-overview)
+[Tune SQL Performance](https://docs.pingcap.com/tidb/v5.1/sql-tuning-overview)
 
 </LearningPath>
 
 <LearningPath label="Tools" icon="doc7">
 
-[TiUP](https://docs.pingcap.com/tidb/dev/tiup-overview)
+[TiUP](https://docs.pingcap.com/tidb/v5.1/tiup-overview)
 
-[Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)
+[Dumpling](https://docs.pingcap.com/tidb/v5.1/dumpling-overview)
 
-[TiDB Lightning](https://docs.pingcap.com/tidb/dev/tidb-lightning-overview)
+[TiDB Lightning](https://docs.pingcap.com/tidb/v5.1/tidb-lightning-overview)
 
-[Data Migration](https://docs.pingcap.com/tidb/dev/dm-overview)
+[Data Migration](https://docs.pingcap.com/tidb/v5.1/dm-overview)
 
-[Backup & Restore (BR)](https://docs.pingcap.com/tidb/dev/backup-and-restore-overview)
+[Backup & Restore (BR)](https://docs.pingcap.com/tidb/v5.1/backup-and-restore-overview)
 
-[TiCDC](https://docs.pingcap.com/tidb/dev/ticdc-overview)
+[TiCDC](https://docs.pingcap.com/tidb/v5.1/ticdc-overview)
 
-[TiDB Operator](https://docs.pingcap.com/tidb/dev/tidb-operator-overview)
+[TiDB Operator](https://docs.pingcap.com/tidb/v5.1/tidb-operator-overview)
 
-[TiSpark](https://docs.pingcap.com/tidb/dev/tispark-overview)
+[TiSpark](https://docs.pingcap.com/tidb/v5.1/tispark-overview)
 
 </LearningPath>
 
