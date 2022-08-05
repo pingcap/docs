@@ -53,9 +53,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidb/v5.4/scale-tidb-using-tiup)
 
-[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.4/br-usage-backup)
-
-[Restore Cluster Data](https://docs.pingcap.com/tidb/v5.4/br-usage-restore)
+[Back Up Cluster Data](https://docs.pingcap.com/tidb/v5.4/use-br-command-line-tool)
 
 [Daily Check](https://docs.pingcap.com/tidb/v5.4/daily-check)
 
@@ -74,12 +72,6 @@ hide_commit: true
 </LearningPath>
 
 <LearningPath label="Tune" icon="tidb-cloud-tune">
-
-[Tuning Overview](https://docs.pingcap.com/tidb/v5.4/performance-tuning-overview)
-
-[Tuning Methods](https://docs.pingcap.com/tidb/v5.4/performance-tuning-methods)
-
-[Tune OLTP Performance](https://docs.pingcap.com/tidb/v5.4/performance-tuning-practices)
 
 [Tune Operating System](https://docs.pingcap.com/tidb/v5.4/tune-operating-system)
 
