@@ -1,7 +1,6 @@
 name: Links (Fail Fast)
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -18,6 +17,8 @@ jobs:
         uses: lycheeverse/lychee-action@v1.5.0
         with:
           fail: true
-          args: -E --exclude-mail -v -i -n -t 45 -- **/*.md
+          # Accept 429 for now due to github rate limit.
+          # See https://github.com/lycheeverse/lychee/issues/634
+          args: -E --exclude-mail -v -i -n -t 45 -a 429 -- **/*.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
