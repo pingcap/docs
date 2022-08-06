@@ -11,7 +11,7 @@ This document introduces how to create tables using the SQL statement and the re
 
 Before reading this document, make sure that the following tasks are completed:
 
-- [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 
@@ -272,7 +272,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 - `{table_name}`: The table name.
 - `{count}`: The number of replicated replicas. If it is 0, replicated replicas are deleted.
 
-**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas).
+**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
 
 ### An example of using HTAP capabilities
 
@@ -286,7 +286,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster that includes **TiFlash**.
+> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster that includes **TiFlash**.
 
 Then you can go on to perform the following query:
 

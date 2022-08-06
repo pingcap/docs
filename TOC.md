@@ -1,6 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
+- [Docs Home](/_docHome.md)
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
@@ -22,10 +23,11 @@
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
+      - [Golang](/develop/dev-guide-sample-application-golang.md)
   - Example Applications
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
@@ -79,12 +81,11 @@
     - Archived Docs
       - [For Django](/develop/dev-guide-outdated-for-django.md)
       - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
-      - [For go-sql-driver/mysql](/develop/dev-guide-outdated-for-go-sql-driver-mysql.md)
-      - [For GORM](/develop/dev-guide-outdated-for-gorm.md)
       - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
-      - [For Laravel](/develop/dev-guide-outdated-for-laravel.md)
   - Cloud Native Development Environment
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
+  - Third-party Support
+    - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -138,7 +139,7 @@
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   - [Modify Configuration Online](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
-  - [Replicate Data Between Primary and Secondary Clusters](/replicate-betwwen-primary-and-secondary-clusters.md)
+  - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - Monitor and Alert
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
@@ -211,6 +212,7 @@
         - [Statistics](/statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
+        - [Cost Model](/cost-model.md)
       - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
@@ -333,7 +335,7 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - PingCAP Clinic Diagnostic Service (Technical Preview)
+  - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
     - [Quick Start](/clinic/quick-start-with-clinic.md)
     - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
@@ -351,6 +353,8 @@
       - [Table Filter](/table-filter.md)
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
+      - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+      - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -362,6 +366,7 @@
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
     - [About TiDB Data Migration](/dm/dm-overview.md)
+    - [Architecture](/dm/dm-arch.md)
     - [Quick Start](/dm/quick-start-with-dm.md)
     - Deploy a DM cluster
       - [Hardware and Software Requirements](/dm/dm-hardware-and-software-requirements.md)
@@ -414,7 +419,6 @@
       - [Daily Check](/dm/dm-daily-check.md)
     - Reference
       - Architecture
-        - [DM Architecture](/dm/dm-arch.md)
         - [DM-worker](/dm/dm-worker-intro.md)
         - [Relay Log](/dm/relay-log.md)
       - Command Line
@@ -619,6 +623,7 @@
       - [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
       - [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
       - [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
+      - [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md)
       - [`SELECT`](/sql-statements/sql-statement-select.md)
       - [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
@@ -832,7 +837,13 @@
       - [Titan Configuration](/storage-engine/titan-configuration.md)
     - TiFlash
       - [Overview](/tiflash/tiflash-overview.md)
-      - [Use TiFlash](/tiflash/use-tiflash.md)
+      - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+      - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+      - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+      - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+      - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+      - [Data Validation](/tiflash/tiflash-data-validation.md)
+      - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Telemetry](/telemetry.md)
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
@@ -856,6 +867,7 @@
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.2](/releases/release-5.4.2.md)
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3

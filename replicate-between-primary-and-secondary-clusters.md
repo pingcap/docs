@@ -1,7 +1,7 @@
 ---
 title: Replicate data between primary and secondary clusters
 summary: Learn how to replicate data from a primary cluster to a secondary cluster.
-aliases: ['/docs/dev/incremental-replication-between-clusters/']
+aliases: ['/docs/dev/incremental-replication-between-clusters/', '/tidb/dev/replicate-betwwen-primary-and-secondary-clusters/']
 ---
 
 # Replicate Data Between Primary and Secondary Clusters
@@ -111,7 +111,7 @@ To replicate incremental data from a running TiDB cluster to its secondary clust
 
 ## Step 2. Migrate full data
 
-After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/br) to migrate full data. BR can be started in [three ways](/br/br-deployment.md#use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
+After setting up the environment, you can use the backup and restore functions of [BR](https://github.com/pingcap/tidb/tree/master/br)) to migrate full data. BR can be started in [three ways](/br/br-deployment.md#use-br). In this document, we use the SQL statements, `BACKUP` and `RESTORE`.
 
 > **Note:**
 >

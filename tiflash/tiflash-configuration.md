@@ -76,8 +76,9 @@ delta_index_cache_size = 0
     ## DTFile format
     ## * format_version = 1, the old format, deprecated.
     ## * format_version = 2, the default format for versions < v6.0.0.
-    ## * format_version = 3, the default format for versions >= v6.0.0, which provides more data validation features.
-    # format_version = 3
+    ## * format_version = 3, the default format for v6.0.0 and v6.1.x, which provides more data validation features.
+    ## * format_version = 4, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption
+    # format_version = 4
 
     [storage.main]
     ## The list of directories to store the main data. More than 90% of the total data is stored in
@@ -200,6 +201,11 @@ delta_index_cache_size = 0
     dt_compression_method = "LZ4"
     # Compression level of the TiFlash storage engine. The default value is 1. It is recommended that you set this value to 1 if dt_compression_method is LZ4, -1 (smaller compression rate, but better read performance) or 1 if dt_compression_method is zstd, and 9 if dt_compression_method is LZ4HC.
     dt_compression_level = 1
+
+    ## New in v6.2.0. Use the thread pool to handle read requests from the storage engine. The default value is false. 
+    ## Warning: This is still an experimental feature. It is NOT recommended that you use it in the production environment.
+
+    # dt_enable_read_thread = false
 
 ## Security settings take effect starting from v4.0.5.
 [security]
