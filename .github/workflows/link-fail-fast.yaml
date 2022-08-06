@@ -19,6 +19,6 @@ jobs:
           fail: true
           # Accept 429 for now due to github rate limit.
           # See https://github.com/lycheeverse/lychee/issues/634
-          args: -E --exclude-mail -v -i -n -t 45 -a 429 -- **/*.md
+          args: -E --exclude-mail -v -i -n -t 45 -a 429 -- **/*.md *.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
