@@ -13,7 +13,7 @@ TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everythi
 
 <DocHomeCardContainer>
 
-<DocHomeCard href="https://docs.pingcap.com/tidbcloud" icon="doc2" label="TiDB Cloud Docs">
+<DocHomeCard href="https://docs.pingcap.com/tiud" icon="doc2" label="TiDB Cloud Docs">
 
 See the documentation of TiDB Cloud
 
