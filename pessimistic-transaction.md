@@ -139,6 +139,20 @@ TiDB supports the following two isolation levels in the pessimistic transaction 
 
 - [Read Committed](/transaction-isolation-levels.md#read-committed-isolation-level). You can set this isolation level using the [`SET TRANSACTION`](/sql-statements/sql-statement-set-transaction.md) statement.
 
+## Pessimistic transaction commit process
+
+The commit phase of the pessimistic transaction mode and the optimistic transaction mode in TiDB has the same logic, and both commits are in the 2PC mode. The important adaptation of pessimistic transactions is DML execution.
+
+![TiDB pessimistic transaction commit logic](/media/pessimistic-transaction-commit.png)
+
+The pessimistic transaction adds an `Acquire Pessimistic Lock` phase before 2PC. This phase includes the following steps:
+
+1. (Same as the optimistic transaction mode) Receive the `begin` request from the client, and the current timestamp is this transaction's start_ts.
+2. When the TiDB server receives an `update` request from the client, the TiDB server initiates a pessimistic lock request to the TiKV server, and the lock is persisted to the TiKV server.
+3. (Same as the optimistic transaction mode) When the client sends the commit request, TiDB starts to perform the 2PC similar to the optimistic transaction mode.
+
+![Pessimistic transactions in TiDB](/media/pessimistic-transaction-in-tidb.png)
+
 ## Pipelined locking process
 
 Adding a pessimistic lock requires writing data into TiKV. The response of successfully adding a lock can only be returned to TiDB after commit and apply through Raft. Therefore, compared with optimistic transactions, the pessimistic transaction mode inevitably has higher latency.
