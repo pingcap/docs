@@ -36,12 +36,11 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
     Create a Basic cluster and make it accessible via Internet. For details, see [Quick Start for Confluent Cloud](https://docs.confluent.io/cloud/current/get-started/index.html).
 
-
 ### Step 2. Create an access key pair
 
 1. Create a cluster API key.
 
-    Sign in to Confluent Cloud at https://confluent.cloud. Choose **Data Integration** > **API Keys** > **Create key** to create a cluster API key. After creation, a key pair file is generated, as shown below.
+    Sign in to [Confluent Cloud](https://confluent.cloud). Choose **Data Integration** > **API Keys** > **Create key** to create a cluster API key. After creation, a key pair file is generated, as shown below.
 
     ```
     === Confluent Cloud API key: xxx-xxxxx ===
@@ -115,8 +114,8 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
     ```
 
     - Execute the configuration file.
-    
-            - If the file is successfully executed, information about the created changefeed, such as changefeed ID, is displayed, as shown below:
+
+        - If the file is successfully executed, information about the created changefeed, such as changefeed ID, is displayed, as shown below:
 
             ```shell
             Create changefeed successfully!
@@ -124,7 +123,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
             Info: {... changfeed info json struct ...}
             ```
 
-            - If no result is returned after you execute the file, check the network connectivity between the server where you execute the file and Confluent Cloud. For details, see [Test connectivity to Confluent Cloud](https://docs.confluent.io/cloud/current/networking/testing.html).
+        - If no result is returned after you execute the file, check the network connectivity between the server where you execute the file and Confluent Cloud. For details, see [Test connectivity to Confluent Cloud](https://docs.confluent.io/cloud/current/networking/testing.html).
 
 3. After creating the changefeed, run the following command to check the changefeed status:
 
@@ -133,7 +132,6 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
     ```
 
     You can refer to [Manage TiCDC Cluster and Replication Tasks](/ticdc/manage-ticdc.md) to manage the changefeed.
-
 
 ### Step 4. Write data to generate change logs
 
@@ -237,7 +235,7 @@ SQL server is an RDBMS provided by Microsoft. With Confluent, you can replicate 
     (6 rows affected)
     ```
 
-2. In the Confluent Cloud Console, choose **Data Integration** > ***Connectors** > **Microsoft SQL Server Sink**. The page shown below is displayed.
+2. In the Confluent Cloud Console, choose **Data Integration** > **Connectors** > **Microsoft SQL Server Sink**. The page shown below is displayed.
 
     ![Topic selection](/media/integrate/topic-selection.png)
 
@@ -247,7 +245,7 @@ SQL server is an RDBMS provided by Microsoft. With Confluent, you can replicate 
 
 4. Fill in the connection and authentication information. Then go to the next page.
 
-    ![Configuration](/media/integrate/SQL Server configuration.png)
+    ![Configuration](/media/integrate/sql-server-configuration.png)
 
 5. On the **Configuration** page, configure the fields as follows:
 
