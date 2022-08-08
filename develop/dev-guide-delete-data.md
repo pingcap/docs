@@ -40,6 +40,7 @@ The following are some best practices to follow when you delete data:
 - Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
 - If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
 - For performance considerations, see [Performance Considerations](#performance-considerations).
+- If your delete statement do not need transactional, you can use [Non-Transactional Bulk-delete](#non-transactional-bulk-delete) to improve performance.
 
 ## Example
 
@@ -291,3 +292,41 @@ In each iteration, `DELETE` deletes up to 1000 rows from `2022-04-15 00:00:00` t
 </div>
 
 </SimpleTab>
+
+## Non-Transactional Bulk-delete
+
+> **Note:**
+>
+> TiDB supports the [Non-Transactional DML Statements](/non-transactional-dml.md) feature starting with `v6.1.0`. This feature is not available on lower versions.
+
+### Prerequisites of Non-Transactional Bulk-delete
+
+Please ***carefully*** read the [Non-Transactional DML Statements](/non-transactional-dml.md) first. It enhances the performance and ease of use in batch data processing at the expense of transactional atomicity and isolation.
+
+Therefore, extreme care is required during use. Otherwise, the non-transactional feature of the operation can lead to serious consequences (e.g., data loss) in case of mishandling.
+
+### SQL syntax of Non-Transactional Bulk-delete
+
+The non-transactional bulk-delete statement is generally in the following form:
+
+{{< copyable "sql" >}}
+
+```sql
+BATCH ON {dividing_column} LIMIT {batch_size} {delete_statement};
+```
+
+| Parameter Name | Description |
+| :--------: | :------------: |
+| `{dividing_column}`  |      The column used to divide batches.      |
+| `{batch_size}` | Used to control the size of each batch. |
+| `{delete_statement}` | Delete statement. |
+
+This example only shows a simple use case of non-transactional bulk-delete statement. For detailed information, see [Non-Transactional DML Statements](/non-transactional-dml.md).
+
+### Example of Non-Transactional Bulk-delete
+
+In the same scenario as the [Bulk-delete example](#bulk-delete-example), the following SQL statement can be used to perform a non-transactional bulk-delete:
+
+```sql
+BATCH ON `rated_at` LIMIT 1000 DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` <= "2022-04-15 00:15:00";
+```
