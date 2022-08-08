@@ -7,7 +7,7 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 > **Note**
 >
-> Database Audit Logging has not been opened for all regions. Please log a support ticket if you don't have the setting in console.
+> The database audit logging feature has not been opened for all regions. If you want to use this feature but do not see **Audit Settings** in the TiDB Cloud console, you can contact the [TiDB Cloud support team](/tidb-cloud/tidb-cloud-support.md) for help.
 
 TiDB Cloud provides you with a database audit logging feature to record a history of user access details (such as any SQL statements executed) in logs.
 
