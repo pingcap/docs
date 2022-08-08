@@ -1604,7 +1604,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Seconds
 - This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`.
 
-### tidb_min_paging_size
+### tidb_min_paging_size <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
