@@ -87,18 +87,6 @@ Documentation for TiDB Cloud application developers
 
 </DocHomeCard>
 
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-java" icon="java" label="Java">
-
-Java applications can connect to and communicate with TiDB through JDBC or Swing, or with ORM frameworks like Hibernate
-
-</DocHomeCard>
-
-<DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-golang" icon="go" label="Golang">
-
-Golang applications can connect to and communicate with TiDB through a native driver and ORM frameworks
-
-</DocHomeCard>
-
 </DocHomeCardContainer>
 
 </DocHomeSection>
