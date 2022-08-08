@@ -46,14 +46,14 @@ from:
 Load the data source configuration to the DM cluster using `tiup dmctl` by running the following command:
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
 ```
 
 The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+|`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.7.140:9261|
 |`operate-source create`|Loads the data source to the DM cluster.|
 
 The following is an example output:
@@ -154,7 +154,7 @@ For detailed task configurations, see [DM Task Configurations](https://docs.ping
 To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the `check-task` command.
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} check-task dm-task1.yaml
 ```
 
 The following is an example output:
@@ -173,14 +173,14 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 Run the following command to start the migration task:
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 start-task dm-task1.yaml
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} start-task dm-task1.yaml
 ```
 
 The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
-|`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+|`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.7.140:9261|
 |`start-task`           |Starts the migration task.|
 
 The following is an example output:
@@ -212,7 +212,7 @@ If you encounter any problem, refer to [DM error handling](https://docs.pingcap.
 To learn whether the DM cluster has an ongoing migration task and view the task status, run the `query-status` command using `tiup dmctl`:
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 query-status test-task1
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
 The following is an example output:
