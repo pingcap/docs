@@ -293,7 +293,7 @@ The process of disaster recovery is as follows:
 
 1. Stop all PD, TiKV, and TiDB services of the secondary DC.
 
-2. Start PD nodes of the secondary DC using a replica with the [`--force-new-cluster`](/command-line-flags-for-pd-configuration.md#--force-new-cluster) flag.
+2. Start PD nodes of the secondary DC with a replica using the [`--force-new-cluster`](/command-line-flags-for-pd-configuration.md#--force-new-cluster) flag.
 
 3. Follow the instructions in [Online Unsafe Recovery](/online-unsafe-recovery.md) to process the TiKV data of the secondary DC. The parameters are the list of all Store IDs in the primary DC.
 
