@@ -5,7 +5,7 @@ summary: Learn about how to audit a cluster in TiDB Cloud.
 
 # Database Audit Logging
 
-> **Note**
+> **Note: **
 >
 > The database audit logging feature has not been opened for all regions. If you want to use this feature but do not see **Audit Settings** in the TiDB Cloud console, you can contact the [TiDB Cloud support team](/tidb-cloud/tidb-cloud-support.md) for help.
 
