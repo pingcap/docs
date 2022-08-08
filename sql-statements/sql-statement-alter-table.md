@@ -161,7 +161,7 @@ The following major restrictions apply to `ALTER TABLE` in TiDB:
 
     - Modifying the same object in multiple changes is not supported.
     - TiDB validates statements according to the table schema **before execution**. For example, an error returns when `ALTER TABLE ADD INDEX i(b), DROP INDEX i;` is executed because the index `i` does not exist in the table.
-    - The execution order of TiDB is to execute changes one by one from left to right, which is incompatible with MySQL in some cases.
+    - For an `ALTER TABLE` statement, the order of execution in TiDB is one change after another from left to right, which is incompatible with MySQL in some cases.
 
 - Changes of the [Reorg-Data](/sql-statements/sql-statement-modify-column.md#reorg-data-change) types on primary key columns are not supported.
 
