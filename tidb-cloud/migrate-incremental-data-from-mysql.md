@@ -47,6 +47,11 @@ Load the data source configuration to the DM cluster using `tiup dmctl` by runni
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
+```
+
+The following is an example output:
+
+```
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
 {
