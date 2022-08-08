@@ -479,7 +479,7 @@ success!
 
 > **Note:**
 >
-> - The preceding command only supports the online mode. Before running the command, you need to stop the processes that will write data to TiKV, such as TiDB. After the command is run successfully, `success!` is returned in the output.
+> - The preceding command only supports the online mode. Before running the command, you need to stop the processes that will write data to TiKV, such as the TiDB processes. After the command is run successfully, `success!` is returned in the output.
 > - You need to run the same command for all TiKV nodes in the cluster.
 > - Stop all PD scheduling tasks before running the command.
 

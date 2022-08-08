@@ -277,27 +277,27 @@ This section introduces the disaster recovery solution of the two data centers (
 
 > **Tip:**
 >
-> If you need support for disaster recovery, you can contact the TiDB team for a recovery solution.
+> If you need support for disaster recovery, contact the TiDB team for a recovery solution.
 
 #### Overall failure of the primary data center
 
 In this situation, all Regions in the primary DC have lost most of their replicas, so the cluster is down. At this time, to recover the service, the secondary DC is needed. The recovery capability is determined by the replication status before the failure:
 
-- If the cluster before failure is in the synchronous replication mode (the status code is `sync` or `async_wait`), you can use the secondary DC to recover with `RPO = 0`.
+- If the cluster before failure is in the synchronous replication mode (the status code is `sync` or `async_wait`), you can use the secondary DC to recover data with `RPO = 0`.
 
 - If the cluster before failure is in the asynchronous replication mode (the status code is `async`), after recovering the primary DC with the data of the secondary DC, the data written from the primary DC to the secondary DC before the failure in the asynchronous replication mode will be lost. A typical scenario is that the primary DC disconnects from the secondary DC and the primary DC switches to the asynchronous replication mode and provides service for a while before the overall failure.
 
-- If the cluster before failure is in synchronous recovery mode (the status code is `sync-recover`). After using the secondary DC to recover the service, some data written by the primary DC in the asynchronous replication mode might be lost. This might break the ACID consistency and you need to recover the ACID-inconsistent data additionally. A typical scenario is that the primary DC disconnects from the secondary DC and the connection is recovered after some data is written to the primary DC in the asynchronous replication mode. But during the asynchronous replication between primary and secondary, something goes wrong and causes the primary DC to fail as a whole.
+- If the cluster before failure is switching from asynchronous to synchronous mode (the status code is `sync-recover`), after using the secondary DC to recover the service, some data asynchronously replicated from the primary DC to the secondary DC will be lost. This might break the ACID consistency, and you need to recover the ACID-inconsistent data accordingly. A typical scenario is that the primary DC disconnects from the secondary DC. After some data is replicated to the primary DC in the asynchronous mode, the connection is recovered. But during the asynchronous replication, errors occur again and cause the primary DC to fail as a whole.
 
 The process of disaster recovery is as follows:
 
 1. Stop all PD, TiKV, and TiDB services of the secondary DC.
 
-2. Start PD nodes of the secondary DC in the single replica mode with the [`--force-new-cluster`](/command-line-flags-for-pd-configuration.md#--force-new-cluster) flag.
+2. Start PD nodes of the secondary DC using a replica with the [`--force-new-cluster`](/command-line-flags-for-pd-configuration.md#--force-new-cluster) flag.
 
 3. Follow the instructions in [Online Unsafe Recovery](/online-unsafe-recovery.md) to process the TiKV data of the secondary DC. The parameters are the list of all Store IDs in the primary DC.
 
-4. Write a new  placement rule configuration file and use it in [PD Control](/pd-control.md). In the configuration file, the Voter replica count of the Region is the same as that of the original cluster in the secondary DC.
+4. Write a new placement rule configuration file and use it in [PD Control](/pd-control.md). In the configuration file, the Voter replica count of the Region is the same as that of the original cluster in the secondary DC.
 
 5. Start the PD and TiKV services of the primary DC.
 

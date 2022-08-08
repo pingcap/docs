@@ -108,9 +108,9 @@ PD is configurable using command-line flags and environment variables.
 
 ## `--force-new-cluster`
 
-- Force to create a new cluster using current nodes.
+- Forcibly creates a new cluster using current nodes.
 - Default: `false`
-- It is recommended to use this flag only when recovering services due to PD losing most replicas, which might cause data loss.
+- It is recommended to use this flag only for recovering services when PD loses most of its replicas, which might cause data loss.
 
 ## `-V`, `--version`
 
