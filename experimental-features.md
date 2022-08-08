@@ -27,6 +27,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [Generated Columns](/generated-columns.md) (Introduced in v2.1)
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
+<<<<<<< HEAD
 
 ## Configuration management
 
@@ -35,6 +36,10 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 ## Data sharing and subscription
 
 + [Integrate TiCDC with Kafka Connect (Confluent Platform)](/ticdc/integrate-confluent-using-ticdc.md) (Introduced in v5.0)
+=======
++ [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
++ [Using `ALTER TABLE` to modify multiple columns or indexes](/system-variables.md#tidb_enable_change_multi_schema) (Introduced in v5.0.0)
+>>>>>>> f2c2320cd (add multi-schema change to experimental feature page (#9790))
 
 ## Storage
 
