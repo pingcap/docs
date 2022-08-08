@@ -245,16 +245,15 @@ SQL server is an RDBMS provided by Microsoft. With Confluent, you can replicate 
 
 4. Fill in the connection and authentication information. Then go to the next page.
 
-    ![Configuration](/media/integrate/sql-server-configuration.png)
+5. On the **Configuration** page, configure the following fields and click **Continue**.
 
-5. On the **Configuration** page, configure the fields as follows:
-
-    | Input Kafka record value format | AVRO |
+    | Field | Value |
     | :- | :- |
+    | Input Kafka record value format | AVRO |
     | Insert mode | UPSERT |
     | Auto create table | true |
     | Auto add columns | true |
-    | PK mode | record\_key |
+    | PK mode | record_key |
     | Input Kafka record key format | AVRO |
     | Delete on null | true |
 
