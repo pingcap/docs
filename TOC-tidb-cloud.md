@@ -1,6 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
+- [Docs Home](https://docs.pingcap.com/)
 - About TiDB Cloud
   - [Why TiDB Cloud](/tidb-cloud/tidb-cloud-intro.md)
   - [Architecture](/tidb-cloud/tidb-cloud-intro.md#architecture)
@@ -10,6 +11,66 @@
   - [Try Out TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [Try Out HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [Perform a PoC](/tidb-cloud/tidb-cloud-poc.md)
+- Develop Applications
+  - [Overview](/develop/dev-guide-overview.md)
+  - Quick Start
+    - [Build a TiDB Developer Cluster](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
+    - Build a Simple CRUD App with TiDB
+      - [Java](/develop/dev-guide-sample-application-java.md)
+      - [Golang](/develop/dev-guide-sample-application-golang.md)
+  - Example Applications
+    - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
+  - Connect to TiDB
+    - [Choose Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
+    - [Connect to TiDB](/develop/dev-guide-connect-to-tidb.md)
+    - [Connection Pools and Connection Parameters](/develop/dev-guide-connection-parameters.md)
+  - Design Database Schema
+    - [Overview](/develop/dev-guide-schema-design-overview.md)
+    - [Create a Database](/develop/dev-guide-create-database.md)
+    - [Create a Table](/develop/dev-guide-create-table.md)
+    - [Create a Secondary Index](/develop/dev-guide-create-secondary-indexes.md)
+  - Write Data
+    - [Insert Data](/develop/dev-guide-insert-data.md)
+    - [Update Data](/develop/dev-guide-update-data.md)
+    - [Delete Data](/develop/dev-guide-delete-data.md)
+    - [Prepared Statements](/develop/dev-guide-prepared-statement.md)
+  - Read Data
+    - [Query Data from a Single Table](/develop/dev-guide-get-data-from-single-table.md)
+    - [Multi-table Join Queries](/develop/dev-guide-join-tables.md)
+    - [Subquery](/develop/dev-guide-use-subqueries.md)
+    - [Paginate Results](/develop/dev-guide-paginate-results.md)
+    - [Views](/develop/dev-guide-use-views.md)
+    - [Temporary Tables](/develop/dev-guide-use-temporary-tables.md)
+    - [Common Table Expression](/develop/dev-guide-use-common-table-expression.md)
+    - Read Replica Data
+      - [Follower Read](/develop/dev-guide-use-follower-read.md)
+      - [Stale Read](/develop/dev-guide-use-stale-read.md)
+    - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+  - Transaction
+    - [Overview](/develop/dev-guide-transaction-overview.md)
+    - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
+    - [Transaction Restraints](/develop/dev-guide-transaction-restraints.md)
+    - [Handle Transaction Errors](/develop/dev-guide-transaction-troubleshoot.md)
+  - Optimize
+    - [Overview](/develop/dev-guide-optimize-sql-overview.md)
+    - [SQL Performance Tuning](/develop/dev-guide-optimize-sql.md)
+    - [Best Practices for Performance Tuning](/develop/dev-guide-optimize-sql-best-practices.md)
+    - [Best Practices for Indexing](/develop/dev-guide-index-best-practice.md)
+    - Other Optimization Methods
+      - [Avoid Implicit Type Conversions](/develop/dev-guide-implicit-type-conversion.md)
+      - [Unique Serial Number Generation](/develop/dev-guide-unique-serial-number-generation.md)
+  - Troubleshoot
+    - [SQL or Transaction Issues](/develop/dev-guide-troubleshoot-overview.md)
+    - [Unstable Result Set](/develop/dev-guide-unstable-result-set.md)
+    - [Timeouts](/develop/dev-guide-timeouts-in-tidb.md)
+  - Reference
+    - [Bookshop Example Application](/develop/dev-guide-bookshop-schema-design.md)
+    - Guidelines
+      - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
+      - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+  - Cloud Native Development Environment
+    - [Gitpod](/develop/dev-guide-playground-gitpod.md)
 - Manage Cluster
   - Plan Your Cluster
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
@@ -32,6 +93,7 @@
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
+    - [Configure Amazon S3 Access and GCS Access](/tidb-cloud/config-s3-and-gcs-access.md)
     - [Migrate from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
     - [Migrate from Amazon Aurora MySQL in Bulk](/tidb-cloud/migrate-from-aurora-bulk-import.md)
     - [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
@@ -39,12 +101,13 @@
     - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
   - [Export Data from TiDB](/tidb-cloud/export-data-from-tidb-cloud.md)
-- Back Up and Restore Data
+- Back Up and Restore
   - [Automatic Backup](/tidb-cloud/backup-and-restore.md)
   - [Manual Backup](/tidb-cloud/backup-and-restore.md#manual-backup)
   - [Restore](/tidb-cloud/backup-and-restore.md#restore)
 - Monitor and Alert
   - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
+  - [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md)
   - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
   - Third-Party Monitoring Integrations
     - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
@@ -98,17 +161,8 @@
      - [Configuration](/garbage-collection-configuration.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
 - Manage User Access
-  - [Sign In](/tidb-cloud/manage-user-access.md)
-  - [Sign Out](/tidb-cloud/manage-user-access.md#sign-out)
-  - [Manage User Passwords](/tidb-cloud/manage-user-access.md#manage-user-passwords)
-  - [Manage User Profiles](/tidb-cloud/manage-user-access.md#manage-user-profiles)
-  - [View the Organization and Project](/tidb-cloud/manage-user-access.md#view-the-organization-and-project)
-  - [Invite an Organization Member](/tidb-cloud/manage-user-access.md#invite-an-organization-member)
-  - [Invite a Project Member](/tidb-cloud/manage-user-access.md#invite-a-project-member)
-  - [Configure Member Roles](/tidb-cloud/manage-user-access.md#configure-member-roles)
-  - [Remove an Organization Member](/tidb-cloud/manage-user-access.md#remove-an-organization-member)
-  - [Remove a Project Member](/tidb-cloud/manage-user-access.md#remove-a-project-member)
-  - [Set the Local Time Zone](/tidb-cloud/manage-user-access.md#set-the-local-time-zone)
+  - [Manage Console User Access](/tidb-cloud/manage-user-access.md)
+  - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
 - Billing
   - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
   - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
@@ -123,6 +177,7 @@
     - [Storage](/tidb-storage.md)
     - [Computing](/tidb-computing.md)
     - [Scheduling](/tidb-scheduling.md)
+  - [TiDB Cloud Cluster Limits and Quotas](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - SQL
     - [Explore SQL with TiDB](/basic-sql-operations.md)
@@ -350,6 +405,8 @@
         - [RocksDB Overview](/storage-engine/rocksdb-overview.md)
     - TiFlash
         - [TiFlash Overview](/tiflash/tiflash-overview.md)
+  - [Dumpling](/dumpling-overview.md)
+  - [Table Filter](/table-filter.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - [FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - Release Notes

@@ -11,7 +11,7 @@ VPC peering connection is a networking connection between two VPCs that enables 
 
 Currently, TiDB Cloud only supports VPC peering in the same region for the same project. TiDB clusters of the same project in the same region are created in the same VPC. Therefore, once VPC peering is set up in a region of a project, all the TiDB clusters created in the same region of this project can be connected in your VPC. VPC peering setup differs among cloud providers.
 
-## Prerequisites
+## Prerequisite: Set a Project CIDR
 
 Project CIDR (Classless Inter-Domain Routing) is the CIDR block used for network peering in a project.
 
@@ -190,9 +190,12 @@ You can also use the AWS dashboard to configure the VPC peering connection.
 
 ### Step 3: Connect to the TiDB cluster on TiDB Cloud
 
-1. Navigate to the **Active Clusters** page and click the name of your cluster.
+1. Navigate to the **Active Clusters** page.
+2. Find the area of your target cluster, and click **Connect** in the upper-right corner of the area. The connection dialog is displayed. You can see the **Status** of the VPC peering is **active**. If **Status** is still **system checking**, wait for about 5 minutes and open the dialog again.
 
-2. Click **Connect**. The **Connect to TiDB** dialog displays. You could see the **Status** of the VPC peering is **active**. If **Status** is still **system checking**, wait for about 5 minutes and open the dialog again.
+    > **Tip:**
+    >
+    > Alternatively, you can also click the name of your target cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
 
 3. Access the TiDB Cluster from the instance within the VPC. See [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 

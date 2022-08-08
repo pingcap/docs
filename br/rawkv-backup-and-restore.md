@@ -5,7 +5,7 @@ summary: Learn how to back up and restore RawKV using BR.
 
 # Back Up and Restore RawKV
 
-Backup & Restore (BR) supports backing up and restoring RawKV (used by TiKV and PD) in particular. This document describes how to back up and restore RawKV.
+Backup & Restore (BR) supports data backup and restore for products that use RawKV (TiKV and PD) without TiDB. This document describes how to back up and restore RawKV.
 
 > **Warning:**
 >
