@@ -170,4 +170,4 @@ The following steps show how to import data to TiDB Cloud using TiDB Lightning T
 
 ## See also
 
-- [Migrate Incremental Data from MySQL](/tidb-cloud/migrate-incremental-data-from-mysql.md)
+- [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
