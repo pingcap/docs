@@ -260,3 +260,7 @@ When DM is running, DM-worker, DM-master, and dmctl print the related informatio
 
 - DM-master: specified by the DM-master process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
 - DM-worker: specified by the DM-worker process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
+
+## See also
+
+- [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
