@@ -1505,7 +1505,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[100, 16384]`
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
-### tidb_max_paging_size
+### tidb_max_paging_size <span class="version-mark">New in v6.2.0</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
