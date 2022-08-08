@@ -5,7 +5,7 @@ summary: Learn how to migrate incremental data from MySQL to TiDB Cloud.
 
 # Migrate Incremental Data from MySQL-Compatible Databases
 
-This document describes how to migrate incremental data from MySQL to TiDB Cloud. You can perform the following steps to migrate incremental data from MySQL to TiDB Cloud.
+This document describes how to migrate incremental data from MySQL-compatible databases to TiDB Cloud.
 
 ## Before you begin
 
@@ -13,11 +13,11 @@ Before you perform incremental data migration, you should have finished full dat
 
 ## Step 1. Deploy a DM Cluster
 
-TiDB Cloud does not provide incremental data migration feature yet. You need to deploy TiDB Data Migration (DM) manually to perform incremental migration to TiDB Cloud. For installation steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+The TiDB Cloud console does not provide incremental data migration feature yet. You need to deploy TiDB Data Migration (DM) manually to perform incremental migration to TiDB Cloud. For installation steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
-## Step 2. Create the data source
+## Step 2. Create a data source configuration file
 
-You need to create a data source first. The data source is a MySQL instance that you want to migrate data from. The following is an example of creating a data source. You need to replace the values of MySQL IP, Port, user name and password with your own values.
+You need to create a data source configuration file first. The data source is a MySQL instance that you want to migrate data from. The following is an example of creating a data source configuration file. You need to replace the MySQL IP address, port, user name, and password values in the file with your own values.
 
 ```shell
 # Encrypt MySQL password
@@ -70,9 +70,11 @@ The parameters used in the command above are described as follows:
 |`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
 |`operate-source create`|Loads the data source to the DM cluster.|
 
-## Step 3. Crate a migration task
+## Step 3. Create a migration task
 
-Edit the `task.yaml` file. Configure the incremental migration mode and the starting point of the data source. You can find the starting point in the metadata file in the file exported by Dumpling.
+Create a `task.yaml` file for the migration. Configure the incremental migration mode and the starting point of the data source in the file. 
+
+You can find the starting point in the metadata file exported by [Dumpling](/dumpling-overview.md). For example:
 
 ```toml
 # Get the contents of the metadata in the file exported by Dumpling
@@ -87,7 +89,7 @@ SHOW MASTER STATUS:
 Finished dump at: 2022-05-24 11:19:53
 ```
 
-Based on the above starting point information, create a migration task as follows.
+Based on the above starting point information, create a migration task as follows:
 
 ```toml
 ## ********* Task Configuration *********
@@ -115,12 +117,12 @@ mysql-instances:
     binlog-pos: 77092852
     binlog-gtid: "b631bcad-bb10-11ec-9eee-fec83cf2b903:1-640"
 
-## ******** Configuration of the Target TiDB on TiDB Cloud **********
-target-database:    # the Target TiDB on TiDB Cloud
+## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
+target-database:    # The target TiDB cluster on TiDB Cloud
   host: "tidb.70593805.b973b556.ap-northeast-1.prod.aws.tidbcloud.com"
   port: 4000
   user: "root"
-  password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="     # If the password is not empty, it is recommended to use a dmctl-encrypted cipher
+  password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="     # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
 ## ******** Function Configuration **********
 block-allow-list:
@@ -144,7 +146,7 @@ ignore-checking-items: ["table_schema"]
 
 For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
-To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the check-task command.
+To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the `check-task` command.
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
