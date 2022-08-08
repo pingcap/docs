@@ -5,9 +5,21 @@ summary: Learn how to migrate incremental data from MySQL to TiDB Cloud.
 
 # Migrate Incremental Data from MySQL
 
+This document describes how to migrate incremental data from MySQL to TiDB Cloud. You can perform the following steps to migrate incremental data from MySQL to TiDB Cloud.
+
+1. Deploy a DM Cluster
+2. Create the data source
+3. Crate a migration task
+4. Check the migration task configuration
+5. Start the migration task
+6. Check the migration task status
+7. Monitor the task and view logs
+
+## Step 1. Deploy a DM Cluster
+
 TiDB Cloud does not provide incremental data migration feature yet. You need to deploy TiDB Data Migration (DM) manually to perform incremental migration to TiDB Cloud. For installation steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
-## Step 1. Create the data source
+## Step 2. Create the data source
 
 You need to create a data source first. The data source is a MySQL instance that you want to migrate data from. The following is an example of creating a data source. You need to replace the values of MySQL IP, Port, user name and password with your own values.
 
@@ -62,7 +74,7 @@ The parameters used in the command above are described as follows:
 |`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
 |`operate-source create`|Loads the data source to the DM cluster.|
 
-## Step 2. Crate a migration task
+## Step 3. Crate a migration task
 
 Edit the `task.yaml` file. Configure the incremental migration mode and the starting point of the data source. You can find the starting point in the metadata file in the file exported by Dumpling.
 
@@ -136,7 +148,7 @@ ignore-checking-items: ["table_schema"]
 
 For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
-## Step 3. Check the migration task configuration
+## Step 4. Check the migration task configuration
 
 Run the following command to check the migration task configuration:
 
@@ -150,7 +162,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-## Step 4. Start the migration task
+## Step 5. Start the migration task
 
 Run the following command to start the migration task:
 
@@ -184,7 +196,7 @@ If the task fails to start, check the prompt message and fix the configuration. 
 
 If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
 
-## Step 5. Check the migration task status
+## Step 6. Check the migration task status
 
 To learn whether the DM cluster has an ongoing migration task and view the task status, run the `query-status` command using `tiup dmctl`:
 
@@ -238,7 +250,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
 
-## Step 6. Monitor the task and view logs
+## Step 7. Monitor the task and view logs
 
 To view the history status of the migration task and other internal metrics, take the following steps.
 
