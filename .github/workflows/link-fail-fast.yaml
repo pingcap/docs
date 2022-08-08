@@ -27,6 +27,6 @@ jobs:
           fail: true
           # Accept 429 for now due to github rate limit.
           # See https://github.com/lycheeverse/lychee/issues/634
-          args: -E --exclude-mail -i -n -t 45 -a 429 -- '${{ steps.changed-files.outputs.all_changed_files }}'
+          args: -E --exclude-mail -i -n -t 45 -- '${{ steps.changed-files.outputs.all_changed_files }}'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
