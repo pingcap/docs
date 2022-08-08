@@ -29,6 +29,7 @@ summary: Learn the experimental features of TiDB.
 -   [ユーザー定義変数](/user-defined-variables.md) (v2.1 で導入)
 -   [JSON データ型](/data-type-json.md)と[JSON関数](/functions-and-operators/json-functions.md) (v2.1 で導入)
 -   [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (v6.1.0 で導入)
+-   [`ALTER TABLE`を使用して複数の列またはインデックスを変更する](/system-variables.md#tidb_enable_change_multi_schema) (v5.0.0 で導入)
 
 ## 保管所 {#storage}
 
