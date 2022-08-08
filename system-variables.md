@@ -1772,7 +1772,7 @@ explain select * from t where age=5;
 
 > **Note:**
 >
-> The optimization enabled by this variable is effective **only for TiFlash**.
+> The query performance optimization by enabling this variable is effective **only for TiFlash**.
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
