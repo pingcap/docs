@@ -24,10 +24,18 @@ This document introduces the experimental features of TiDB in different versions
 + List COLUMNS Partition (Introduced in v5.0)
 + [Dynamic Pruning Mode for Partitioned Tables](/partitioned-table.md#dynamic-pruning-mode). (Introduced in v5.1)
 + The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
+<<<<<<< HEAD
 + [Generated Columns](/generated-columns.md).
 + [User-Defined Variables](/user-defined-variables.md).
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
 + [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
+=======
++ [Generated Columns](/generated-columns.md) (Introduced in v2.1)
++ [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
++ [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
++ [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
++ [Using `ALTER TABLE` to modify multiple columns or indexes](/system-variables.md#tidb_enable_change_multi_schema) (Introduced in v5.0.0)
+>>>>>>> f2c2320cd (add multi-schema change to experimental feature page (#9790))
 
 ## Configuration management
 
