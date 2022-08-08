@@ -184,7 +184,7 @@ If the task fails to start, check the prompt message and fix the configuration. 
 
 If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
 
-## Check the migration task status
+## Step 5. Check the migration task status
 
 To learn whether the DM cluster has an ongoing migration task and view the task status, run the `query-status` command using `tiup dmctl`:
 
@@ -238,7 +238,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
 
-## Step 5. Monitor the task and view logs
+## Step 6. Monitor the task and view logs
 
 To view the history status of the migration task and other internal metrics, take the following steps.
 
