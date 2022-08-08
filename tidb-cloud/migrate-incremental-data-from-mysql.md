@@ -7,13 +7,9 @@ summary: Learn how to migrate incremental data from MySQL to TiDB Cloud.
 
 This document describes how to migrate incremental data from MySQL to TiDB Cloud. You can perform the following steps to migrate incremental data from MySQL to TiDB Cloud.
 
-1. Deploy a DM Cluster
-2. Create the data source
-3. Crate a migration task
-4. Check the migration task configuration
-5. Start the migration task
-6. Check the migration task status
-7. Monitor the task and view logs
+## Before you begin
+
+Before you perform incremental data migration, you should have finished full data migration from MySQL to TiDB Cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
 ## Step 1. Deploy a DM Cluster
 
