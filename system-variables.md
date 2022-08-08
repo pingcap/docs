@@ -1612,7 +1612,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `128`
 - Range: `[1, 2147483647]`
 - Unit: Rows
-- This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to too small a value increases the RPC request count between TiDB and TiKV, while setting to too large a value might cause performance decrease when executing queries using IndexLookup with Limit.
+- This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to too small a value increases the RPC request count between TiDB and TiKV, while setting it to too large a value might cause performance decrease when executing queries using IndexLookup with Limit.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
