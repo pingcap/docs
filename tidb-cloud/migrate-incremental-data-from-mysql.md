@@ -1,9 +1,9 @@
 ---
-title: Migrate Incremental Data from MySQL
+title: Migrate Incremental Data from MySQL-Compatible Databases
 summary: Learn how to migrate incremental data from MySQL to TiDB Cloud.
 ---
 
-# Migrate Incremental Data from MySQL
+# Migrate Incremental Data from MySQL-Compatible Databases
 
 This document describes how to migrate incremental data from MySQL to TiDB Cloud. You can perform the following steps to migrate incremental data from MySQL to TiDB Cloud.
 
@@ -144,9 +144,7 @@ ignore-checking-items: ["table_schema"]
 
 For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
-## Step 4. Check the migration task configuration
-
-Run the following command to check the migration task configuration:
+To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the check-task command.
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
@@ -158,7 +156,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-## Step 5. Start the migration task
+## Step 4. Start the migration task
 
 Run the following command to start the migration task:
 
@@ -192,7 +190,7 @@ If the task fails to start, check the prompt message and fix the configuration. 
 
 If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
 
-## Step 6. Check the migration task status
+## Step 5. Check the migration task status
 
 To learn whether the DM cluster has an ongoing migration task and view the task status, run the `query-status` command using `tiup dmctl`:
 
@@ -246,7 +244,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
 
-## Step 7. Monitor the task and view logs
+## (Optional) Step 6. Monitor the task and view logs
 
 To view the history status of the migration task and other internal metrics, take the following steps.
 
@@ -256,7 +254,3 @@ When DM is running, DM-worker, DM-master, and dmctl print the related informatio
 
 - DM-master: specified by the DM-master process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-master-8261/log/` by default.
 - DM-worker: specified by the DM-worker process parameter `--log-file`. If you deploy DM using TiUP, the log directory is `/dm-deploy/dm-worker-8262/log/` by default.
-
-## See also
-
-- [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md)
