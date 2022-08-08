@@ -77,7 +77,13 @@ The open-source TiDB platform is released under the Apache 2.0 license, and supp
 
 <DocHomeCard href="https://docs.pingcap.com/tidb/stable/dev-guide-overview" icon="doc8" label="Developer Guide">
 
-Documentation for application developers
+Documentation for TiDB application developers
+
+</DocHomeCard>
+
+<DocHomeCard href="https://docs.pingcap.com/tidbcloud/dev-guide-overview" icon="cloud-dev" label="Developer Guide">
+
+Documentation for TiDB Cloud application developers
 
 </DocHomeCard>
 
