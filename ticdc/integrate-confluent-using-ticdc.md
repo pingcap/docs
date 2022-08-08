@@ -193,7 +193,7 @@ Snowflake is a cloud native data warehouse. With Confluent, you can replicate Ti
 
     In the Snowflake control console, choose **Data** > **Database**. Create a database named `TPCC` and a schema named `TiCDC`.
 
-2. In the Confluent Cloud Console, choose **Data Integration** > ***Connectors** > **Snowflake Sink**. The page shown below is displayed.
+2. In the Confluent Cloud Console, choose **Data Integration** > **Connectors** > **Snowflake Sink**. The page shown below is displayed.
 
     ![Add snowflake sink connector](/media/integrate/add-snowflake-sink-connector.png)
 
