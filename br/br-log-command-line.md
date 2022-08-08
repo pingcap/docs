@@ -1,11 +1,11 @@
 ---
-title: Perform Log Backup and Restore Using BR
-summary: Learn how to perform log backup and restore data from the log backup data using the br log command line tool.
+title: Perform Log Backup and Restoration Using BR
+summary: Learn how to perform log backup and restore from the log backup data using the br log command line tool.
 ---
 
-# Perform Log Backup and Restore Using BR
+# Perform Log Backup and Restoration Using BR
 
-You can perform log backup on the TiDB cluster by using the `br log` command. This document describes the usage of the `br log` command.
+You can perform log backup and restoration on a TiDB cluster by using the `br log` command. This document describes the usage of the `br log` command.
 
 ## Prerequisites
 
@@ -16,12 +16,12 @@ Before performing log backup, you need to install Backup & Restore (BR). You can
 
 ## Perform log backup
 
-You can perform log backup using the `br log` command. This command has a set of subcommands that helps you with the following operations:
+You can perform log backup using the `br log` command. This command has a set of subcommands that help you with the following operations:
 
 * Start a log backup
 * Query the backup status
 * Pause and resume the backup
-* Stop the backup and delete the backup data
+* Stop the backup task and delete the backup data
 * Clean up the backup data
 * View the metadata
 
@@ -85,10 +85,10 @@ Global Flags:
  -s, --storage string         specify the url where backup storage, eg, "s3://bucket/path/prefix"
 ```
 
-The example output only shows the common flags. These flags are described as follows:
+The example output only shows the common parameters. These parameters are described as follows:
 
-- `task-name`: specify the task name for the log backup. This name is also used to query the status, pause, and resume the backup task.
-- `--start-ts`: specify the start timestamp for the log backup. If this is not specified, the backup program uses the current time as start-ts.
+- `task-name`: specify the task name for the log backup. This name is also used to query, pause, and resume the backup task.
+- `--start-ts`: specify the start timestamp for the log backup. If this is not specified, the backup program uses the current time as `start-ts`.
 - `--pd`: specify the PD address for the backup cluster. BR needs to access PD to start the log backup task.
 - `ca`, `cert`, `key`: specify the mTLS encryption method to communicate with TiKV and PD.
 - `--storage`: specify the backup storage address. Currently, BR only supports shared file systems and Amazon S3 as storage for log backup. For details, see [Amazon S3 storage](/br/backup-storage-S3.md).
@@ -140,7 +140,7 @@ Usage example:
 checkpoint[global]: 2022-07-25 22:52:15.518 +0800; gap=2m52s
 ```
 
-The fields are described as follows:
+The output fields are described as follows:
 
 - `status`: the status of the backup task. The status can be `NORMAL`, `ERROR`, or `PAUSE`.
 - `start`: the start time of the backup task. It is the `start-ts` value specified when the backup task is started.
@@ -151,7 +151,7 @@ The fields are described as follows:
 
 ### Pause and resume the backup task
 
-You can run the `br log pause` command to pause the running backup task.
+You can run the `br log pause` command to pause a running backup task.
 
 Run `br log pause --help` to see the help information:
 
@@ -174,10 +174,10 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-<Note>
-- After the log backup task is paused, to prevent the MVCC data that generates the change log from being deleted, the backup program automatically sets the current backup checkpoint as the service safepoint, which retains MVCC data within the latest 24 hours. If the backup task is paused for more than 24 hours, the corresponding data is garbage collected and is backed up successfully.
-- Retaining too much MVCC data has impact on the storage capacity and performance of the TiDB cluster. Therefore, it is recommended to resume the backup task in time.
-</Note>
+> **Note:**
+>
+> - After the log backup task is paused, to prevent the MVCC data that generates the change log from being deleted, the backup program automatically sets the current backup checkpoint as the service safepoint, which retains MVCC data within the latest 24 hours. If the backup task is paused for more than 24 hours, the corresponding data is garbage collected and is not backed up.
+> - Retaining too much MVCC data has negative impact on the storage capacity and performance of the TiDB cluster. Therefore, it is recommended to resume the backup task in time.
 
 Usage example:
 
@@ -207,7 +207,7 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [恢复日志备份任务失败](/br/pitr-troubleshoot.md#执行-br-log-resume-命令恢复处于暂停状态的任务时报-errbackupgcsafepointexceeded-错误该如何处理)。//TODO
+After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [Troubleshoot PiTR Log Backup](/br/pitr-troubleshoot.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-executing-the-br-log-resume-command-to-resume-the-suspended-task).
 
 Usage example:
 
@@ -239,10 +239,10 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-<Warning>
-- Use this command with caution. Stop a log backup task only when you are sure that you do not need PiTR any more. If you need to pause a log backup, use `br log pause` and `br log resume` instead.
-- If you stop a log backup task using `br log stop`, when you use `br log start` to restart the task, you must specify a log backup storage path that is different from the original path. However, different log backup paths results in a situation where you cannot restore data using `br restore point`.
-</Warning>
+> **Warning:**
+>
+> - Use this command with caution. Stop a log backup task only when you are sure that you do not need PiTR any more. If you need to pause a log backup task, use `br log pause` and `br log resume` instead.
+> - If you stop a log backup task using `br log stop`, when you use `br log start` to restart the task, you must specify a log backup storage path that is different from the original path. However, different log backup paths results in a situation where you cannot restore data using `br restore point`.
 
 Usage example:
 
@@ -275,7 +275,7 @@ Global Flags:
 
 This command only accesses the backup storage, but does not access the TiDB cluster.
 
-Some flags are described as follows:
+Some parameters are described as follows:
 
 - `--dry-run`: run the command but do not really delete the files.
 - `--until`: delete all log backup data before the specified timestamp.
@@ -319,7 +319,7 @@ Global Flags:
 
 This command only accesses the backup storage, but does not access the TiDB cluster.
 
-`--storage` is used to specify the backup storage address. The log backup data can only be stored in shared file systems or Amazon S3. For details, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
+The `--storage` parameter is used to specify the backup storage address. The log backup data can only be stored in shared file systems or Amazon S3. For details, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
 
 Usage example:
 
@@ -335,7 +335,7 @@ Expected output:
 
 ## Restore the log backup data
 
-You can run the `br restore point` command to perform a PiTR, or just restore the log backup data, on a new cluster.
+You can run the `br restore point` command to perform a PiTR on a new cluster or just restore the log backup data.
 
 Run `br restore point --help` to see the help information:
 
@@ -360,14 +360,14 @@ Global Flags:
  -s, --storage string         specify the url where backup storage, eg, "s3://bucket/path/prefix"
 ```
 
-The example output only shows the common flags. These flags are described as follows:
+The example output only shows the common parameters. These parameters are described as follows:
 
-- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PiTR, you must specify this flag and choose the latest snapshot backup before the restoration timestamp. If you only need to restore log backup data, you can omit this flag. To use Amazon S3 as storage, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
-- `--restored-ts`: the timestamp for restoration. If this flag is not specified, BR restores data from the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
-- `--start-ts`: the start timestamp of restoring log backup data. If you only need to restore log backup data and do not need snapshot backup data, you must specify this flag.
+- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PiTR, you must specify this parameter and choose the latest snapshot backup before the restoration timestamp. If you only need to restore log backup data, you can omit this parameter. To use Amazon S3 as storage, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
+- `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
+- `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data and do not need snapshot backup data, you must specify this parameter.
 - `--pd`: the PD address of the restoration cluster.
 - `ca`, `cert`, `key`: specify the mTLS encryption method to communicate with TiKV and PD.
-- `--storage`: the backup storage address. The log backup data can only be stored in shared file systems or Amazon S3. For details, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
+- `--storage`: the storage address for the log backup. The log backup data can only be stored in shared file systems or Amazon S3. For details, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
 
 Usage example:
 
@@ -382,9 +382,8 @@ Restore KV Files <--------------------------------------------------------------
 [2022/07/19 18:15:39.325 +08:00] [INFO] [collector.go:69] ["restore log success summary"] [total-take=192.955533ms] [restore-from=434693681289625602] [restore-to=434693753549881345] [total-kv-count=33] [total-size=21551]
 ```
 
-<Note>
-- It is recommended to use `br restore point` to perform PiTR (refer to [PiTR Overview](/br/point-in-time-recovery.md)). It is not recommended to restore log data of a time period directly in a cluster.
-- You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
-- When you restore log data of different time periods in multiple batches, you must ensure the log data is restored in a consecutive order. If you restore the log backup data of [t1, t2), [t2, t3) and [t3, t4) in a consecutive order, the restored data is consistent. However, if you restore [t1, t2) and then skip [t2, t3) to restore [t3, t4), the restored data might be inconsistent.
-</Note>
-
+> **Note:**
+>
+> - It is recommended to use `br restore point` to perform PiTR (refer to [PiTR Overview](/br/point-in-time-recovery.md)). It is not recommended to restore log data of a time period directly in a cluster.
+> - You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
+> - When you restore log data of different time periods in multiple batches, you must ensure the log data is restored in a consecutive order. If you restore the log backup data of [t1, t2), [t2, t3) and [t3, t4) in a consecutive order, the restored data is consistent. However, if you restore [t1, t2) and then skip [t2, t3) to restore [t3, t4), the restored data might be inconsistent.
