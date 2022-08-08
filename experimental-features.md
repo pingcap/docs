@@ -17,7 +17,6 @@ This document introduces the experimental features of TiDB in different versions
 + [Cost Model Version 2](/cost-model.md#cost-model-version-2). (Introduced in v6.2.0)
 + [Fast Mode](/develop/dev-guide-read-in-fast-mode.md). (Introduced in v6.2.0)
 
-
 ## Stability
 
 + Improve the stability of the optimizer's choice of indexes: extend the statistics feature by collecting the multi-column order dependency information (Introduced in v5.0).
@@ -51,7 +50,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 
 ## 数据共享订阅
 
-+ [Cross-cluster RawKV replication](tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
++ [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
 
 ## Garbage collection
 
