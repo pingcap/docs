@@ -49,6 +49,13 @@ Load the data source configuration to the DM cluster using `tiup dmctl` by runni
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
 ```
 
+The parameters used in the command above are described as follows:
+
+|Parameter              |Description    |
+|-                      |-              |
+|`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+|`operate-source create`|Loads the data source to the DM cluster.|
+
 The following is an example output:
 
 ```
@@ -68,16 +75,9 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-The parameters used in the command above are described as follows:
-
-|Parameter              |Description    |
-|-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
-|`operate-source create`|Loads the data source to the DM cluster.|
-
 ## Step 3. Create a migration task
 
-Create a `task.yaml` file for the migration. Configure the incremental migration mode and the starting point of the data source in the file. 
+Create a `dm-task1.yaml` file for the migration. Configure the incremental migration mode and the starting point of the data source in the file.
 
 You can find the starting point in the metadata file exported by [Dumpling](/dumpling-overview.md). For example:
 
@@ -155,6 +155,11 @@ To run a data migration task smoothly, DM triggers a precheck automatically at t
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
+```
+
+The following is an example output:
+
+```
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
 {
@@ -169,6 +174,18 @@ Run the following command to start the migration task:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 start-task dm-task1.yaml
+```
+
+The parameters used in the command above are described as follows:
+
+|Parameter              |Description    |
+|-                      |-              |
+|`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
+|`start-task`           |Starts the migration task.|
+
+The following is an example output:
+
+```
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 start-task dm-task1.yaml
 {
@@ -186,13 +203,6 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-The parameters used in the command above are described as follows:
-
-|Parameter              |Description    |
-|-                      |-              |
-|`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.10.71:8261|
-|`start-task`           |Starts the migration task.|
-
 If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
 
 If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
@@ -203,6 +213,11 @@ To learn whether the DM cluster has an ongoing migration task and view the task 
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 query-status test-task1
+```
+
+The following is an example output:
+
+```
 tiup is checking updates for component dmctl ...
 Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 query-status test-task1
 {
