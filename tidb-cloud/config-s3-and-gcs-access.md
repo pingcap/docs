@@ -112,7 +112,7 @@ To allow TiDB cloud to access the source data in your GCS bucket, you need to co
 
     - storage.buckets.get
     - storage.objects.get
-    - storage.objects. list
+    - storage.objects.list
 
     If yes, you can use the matched role for the target TiDB cluster in the following steps. If not, go to **IAM & Admin** > **Roles** > **CREATE ROLE** to define a role for the target TiDB cluster.
 
