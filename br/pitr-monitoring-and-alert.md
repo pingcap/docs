@@ -1,11 +1,11 @@
 ---
-title: PiTR Monitoring and Alert
-summary: Learn the monitoring and alert of the PiTR feature.
+title: PITR Monitoring and Alert
+summary: Learn the monitoring and alert of the PITR feature.
 ---
 
-# PiTR Monitoring and Alert
+# PITR Monitoring and Alert
 
-PiTR supports using [Prometheus](https://prometheus.io/) to collect monitoring metrics. Currently all monitoring metrics are built into TiKV.
+PITR supports using [Prometheus](https://prometheus.io/) to collect monitoring metrics. Currently all monitoring metrics are built into TiKV.
 
 ## Monitoring configuration
 
@@ -40,12 +40,12 @@ PiTR supports using [Prometheus](https://prometheus.io/) to collect monitoring m
 
 ## Grafana configuration
 
-- For clusters deployed using TiUP, the [Grafana](https://grafana.com/) dashboard contains the PiTR panel. The **Backup Log** panel in the TiKV-Details dashboard is the PiTR panel.
+- For clusters deployed using TiUP, the [Grafana](https://grafana.com/) dashboard contains the PITR panel. The **Backup Log** panel in the TiKV-Details dashboard is the PITR panel.
 - For clusters deployed manually, refer to [Import a Grafana dashboard](/deploy-monitoring-services.md#step-2-import-a-grafana-dashboard) and upload the [tikv_details](https://github.com/tikv/tikv/blob/master/metrics/grafana/tikv_details.json) JSON file to Grafana. Then find the **Backup Log** panel in the TiKV-Details dashboard.
 
 ## Alert configuration
 
-Currently, PiTR does not have built-in alert items, but the following alert items are recommended.
+Currently, PITR does not have built-in alert items, but the following alert items are recommended.
 
 ### LogBackupRunningRPOMoreThan10m
 

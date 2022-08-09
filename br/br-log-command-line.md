@@ -207,7 +207,7 @@ Global Flags:
  -u, --pd strings             PD address (default [127.0.0.1:2379])
 ```
 
-After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [Troubleshoot PiTR Log Backup](/br/pitr-troubleshoot.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-executing-the-br-log-resume-command-to-resume-the-suspended-task).
+After the backup task is paused for more than 24 hours, running `br log resume` reports an error, and BR prompts that backup data is lost. To handle this error, refer to [Troubleshoot PITR Log Backup](/br/pitr-troubleshoot.md#what-should-i-do-if-the-error-message-errbackupgcsafepointexceeded-is-returned-when-executing-the-br-log-resume-command-to-resume-the-suspended-task).
 
 Usage example:
 
@@ -241,7 +241,7 @@ Global Flags:
 
 > **Warning:**
 >
-> - Use this command with caution. Stop a log backup task only when you are sure that you do not need PiTR any more. If you need to pause a log backup task, use `br log pause` and `br log resume` instead.
+> - Use this command with caution. Stop a log backup task only when you are sure that you do not need PITR any more. If you need to pause a log backup task, use `br log pause` and `br log resume` instead.
 > - If you stop a log backup task using `br log stop`, when you use `br log start` to restart the task, you must specify a log backup storage path that is different from the original path. However, different log backup paths results in a situation where you cannot restore data using `br restore point`.
 
 Usage example:
@@ -335,7 +335,7 @@ Expected output:
 
 ## Restore the log backup data
 
-You can run the `br restore point` command to perform a PiTR on a new cluster or just restore the log backup data.
+You can run the `br restore point` command to perform a PITR on a new cluster or just restore the log backup data.
 
 Run `br restore point --help` to see the help information:
 
@@ -362,7 +362,7 @@ Global Flags:
 
 The example output only shows the common parameters. These parameters are described as follows:
 
-- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PiTR, you must specify this parameter and choose the latest snapshot backup before the restoration timestamp. If you only need to restore log backup data, you can omit this parameter. To use Amazon S3 as storage, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
+- `--full-backup-storage`: the storage address for the snapshot (full) backup. If you need to use PITR, you must specify this parameter and choose the latest snapshot backup before the restoration timestamp. If you only need to restore log backup data, you can omit this parameter. To use Amazon S3 as storage, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
 - `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
 - `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data and do not need snapshot backup data, you must specify this parameter.
 - `--pd`: the PD address of the restoration cluster.
@@ -384,6 +384,6 @@ Restore KV Files <--------------------------------------------------------------
 
 > **Note:**
 >
-> - It is recommended to use `br restore point` to perform PiTR (refer to [PiTR Overview](/br/point-in-time-recovery.md)). It is not recommended to restore log data of a time period directly in a cluster.
+> - It is recommended to use `br restore point` to perform PITR (refer to [PITR Overview](/br/point-in-time-recovery.md)). It is not recommended to restore log data of a time period directly in a cluster.
 > - You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 > - When you restore log data of different time periods in multiple batches, you must ensure the log data is restored in a consecutive order. If you restore the log backup data of [t1, t2), [t2, t3) and [t3, t4) in a consecutive order, the restored data is consistent. However, if you restore [t1, t2) and then skip [t2, t3) to restore [t3, t4), the restored data might be inconsistent.

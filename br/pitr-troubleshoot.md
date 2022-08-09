@@ -1,15 +1,15 @@
 ---
-title: Troubleshoot PiTR Log Backup
-summary: Learn about common failures of log backup and solutions of the PiTR feature.
+title: Troubleshoot PITR Log Backup
+summary: Learn about common failures of log backup and solutions of the PITR feature.
 ---
 
-# Troubleshoot PiTR Log Backup
+# Troubleshoot PITR Log Backup
 
-This document summarizes some common issues when performing PiTR log backup and the solutions.
+This document summarizes some common issues when performing PITR log backup and the solutions.
 
 ## What should I do if the data cannot be queried from the TiFlash engine when using the `br restore point` command to restore the downstream cluster?
 
-In v6.2.0, it is not recommended to restore the downstream TiFlash replicas when using PiTR. After restoring data, you need to execute the following statement to set the TiFlash replica of the schema or table.
+In v6.2.0, it is not recommended to restore the downstream TiFlash replicas when using PITR. After restoring data, you need to execute the following statement to set the TiFlash replica of the schema or table.
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;
@@ -71,14 +71,14 @@ After pausing the log backup task, the pausing task program set the current chec
 The solution to the preceding scenario is:
 
 1. Delete the current task using `br log stop`.
-2. Create a new log backup task using `br log start` and make a full backup at the same time for subsequent PiTR recovery operations.
+2. Create a new log backup task using `br log start` and make a full backup at the same time for subsequent PITR recovery operations.
 
-## What should I do if an error occurs when executing the Exchange Partition DDL during PiTR recovery?
+## What should I do if an error occurs when executing the Exchange Partition DDL during PITR recovery?
 
-If the following error occurs when executing the PiTR recover log:
+If the following error occurs when executing the PITR recover log:
 
 ```
 restore of ddl `exchange-table-partition` is not supported
 ```
 
-Since the log backup feature of v6.2.0 is not compatible with Exchange Partition DDL, it is recommended to avoid using exchange partition DDL during log backup. If you have executed the DDL, you must make a full backup immediately, and then PiTR can restore the log data after the full backup checkpoint.
+Since the log backup feature of v6.2.0 is not compatible with Exchange Partition DDL, it is recommended to avoid using exchange partition DDL during log backup. If you have executed the DDL, you must make a full backup immediately, and then PITR can restore the log data after the full backup checkpoint.
