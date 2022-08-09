@@ -905,6 +905,13 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - `RESTRICTED_VARIABLES_ADMIN`: The ability to see and set sensitive variables in `SHOW [GLOBAL] VARIABLES` and `SET`.
     - `RESTRICTED_USER_ADMIN`: The ability to prevent other users from making changes or dropping a user account.
 
+### tidb_enable_extended_stats
+
+- Scope: SESSION | GLOBAL
+- Type: Boolean
+- Default value: `OFF`
+- This variable indicates whether TiDB can collect the extended statistic to guide the optimizer. Refer to the chapter [Introduction to Extended Statistics](./extended-statistics.md) for more information.
+
 ### tidb_enable_fast_analyze
 
 > **Warning:**
