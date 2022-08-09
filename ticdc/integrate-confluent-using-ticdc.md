@@ -5,14 +5,14 @@ summary: Learn how to stream TiDB data to the Confluent Cloud using TiCDC, and h
 
 # Integrate Data with Confluent Cloud
 
-Confluent is a Apache Kafka-compatible streaming data platform that provides strong integration capabilities. On this platform, you can access, store, and manage non-stop real-time streaming data.
+Confluent is an Apache Kafka-compatible streaming data platform that provides strong integration capabilities. On this platform, you can access, store, and manage non-stop real-time streaming data.
 
 Starting from TiDB v6.1.0, TiCDC supports replicating incremental data to Confluent in Avro format. This document introduces how to replicate TiDB incremental data to Confluent using [TiCDC](/ticdc/ticdc-overview.md), and further replicate data to ksqlDB, Snowflake, and SQL Server via Confluent Cloud. The organization of this document is as follows:
 
-- Quickly deploy a TiDB cluster with TiCDC included
-- Create a changefeed that replicates data from TiDB to Confluent Cloud
-- Create Connectors that replicate data from Confluent Cloud to ksqlDB, Snowflake, and SQL Server.
-- Write data to TiDB using go-tpc, and observe data changes in ksqlDB, Snowflake, and SQL Server.
+1. Quickly deploy a TiDB cluster with TiCDC included.
+2. Create a changefeed that replicates data from TiDB to Confluent Cloud.
+3. Create Connectors that replicate data from Confluent Cloud to ksqlDB, Snowflake, and SQL Server.
+4. Write data to TiDB using go-tpc, and observe data changes in ksqlDB, Snowflake, and SQL Server.
 
 The preceding steps are performed in a lab environment. You can also deploy a cluster for a production environment by referring to these steps.
 
@@ -40,7 +40,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 1. Create a cluster API key.
 
-    Sign in to [Confluent Cloud](https://confluent.cloud). Choose **Data Integration** > **API Keys** > **Create key** to create a cluster API key. After creation, a key pair file is generated, as shown below.
+    Sign in to [Confluent Cloud](https://confluent.cloud). Choose **Data integration** > **API keys** > **Add key** to create a cluster API key. After creation, a key pair file is generated, as shown below.
 
     ```
     === Confluent Cloud API key: xxx-xxxxx ===
@@ -113,9 +113,9 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
     tiup ctl:v6.1.0 cdc changefeed create --pd="http://127.0.0.1:2379" --sink-uri="kafka://xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092/ticdc-meta?protocol=avro&replication-factor=3&enable-tls=true&auto-create-topic=true&sasl-mechanism=plain&sasl-user=L5WWA4GK4NAT2EQV&sasl-password=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" --schema-registry="https://7NBH2CAFM2LMGTH7:xxxxxxxxxxxxxxxxxx@yyy-yyyyy.us-east-2.aws.confluent.cloud" --changefeed-id="confluent-changefeed" --config changefeed.conf
     ```
 
-    - Execute the configuration file.
+    - Run the command to create a changefeed.
 
-        - If the file is successfully executed, information about the created changefeed, such as changefeed ID, is displayed, as shown below:
+        - If the changefeed is successfully created, changefeed information, such as changefeed ID, is displayed, as shown below:
 
             ```shell
             Create changefeed successfully!
@@ -123,7 +123,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
             Info: {... changfeed info json struct ...}
             ```
 
-        - If no result is returned after you execute the file, check the network connectivity between the server where you execute the file and Confluent Cloud. For details, see [Test connectivity to Confluent Cloud](https://docs.confluent.io/cloud/current/networking/testing.html).
+        - If no result is returned after you run the command, check the network connectivity between the server where you run the command and Confluent Cloud. For details, see [Test connectivity to Confluent Cloud](https://docs.confluent.io/cloud/current/networking/testing.html).
 
 3. After creating the changefeed, run the following command to check the changefeed status:
 
@@ -135,11 +135,11 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 ### Step 4. Write data to generate change logs
 
-After the preceding steps are done, TiCDC sends change logs of incremental data in the TiDB cluster to Confluent Cloud. This section describes how write data to generate change logs.
+After the preceding steps are done, TiCDC sends change logs of incremental data in the TiDB cluster to Confluent Cloud. This section describes how to write data to generate change logs.
 
 1. Simulate service workload.
 
-    In the lab environment, to generate change logs, you can use go-tpc to write data to the TiDB cluster. Specifically, run the following command to create a database `tpcc` in the TiDB cluster. Then use TiUP bench to write data to this new database.
+    To generate change logs in a lab environment, you can use go-tpc to write data to the TiDB cluster. Specifically, run the following command to create a database `tpcc` in the TiDB cluster. Then, use TiUP bench to write data to this new database.
 
     ```shell
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 prepare
@@ -160,7 +160,7 @@ ksqlDB is a database purpose-built for stream processing applications. You can c
 
 1. Select **ksqlDB** in the Confluent Cloud Console and create a ksqlDB cluster as instructed.
 
-    Wait until the ksqlDB cluster status is **Running**. This will takes several minutes.
+    Wait until the ksqlDB cluster status is **Running**. This process takes several minutes.
 
 2. In the ksqlDB Editor, run the following command to create a stream to access the `tidb_tpcc_orders` topic:
 
@@ -193,7 +193,7 @@ Snowflake is a cloud native data warehouse. With Confluent, you can replicate Ti
 
     In the Snowflake control console, choose **Data** > **Database**. Create a database named `TPCC` and a schema named `TiCDC`.
 
-2. In the Confluent Cloud Console, choose **Data Integration** > **Connectors** > **Snowflake Sink**. The page shown below is displayed.
+2. In the Confluent Cloud Console, choose **Data integration** > **Connectors** > **Snowflake Sink**. The page shown below is displayed.
 
     ![Add snowflake sink connector](/media/integrate/add-snowflake-sink-connector.png)
 
@@ -213,9 +213,9 @@ Snowflake is a cloud native data warehouse. With Confluent, you can replicate Ti
 
 ## Integrate data with SQL Server
 
-SQL server is an RDBMS provided by Microsoft. With Confluent, you can replicate TiDB incremental data to SQL server by creating SQL Server Sink Connectors.
+Microsoft SQL Server is a relational database management system (RDBMS) developed by Microsoft. With Confluent, you can replicate TiDB incremental data to SQL Server by creating SQL Server Sink Connectors.
 
-1. Connect to the SQL Server and create a database named `tpcc`.
+1. Connect to SQL Server and create a database named `tpcc`.
 
     ```shell
     [ec2-user@ip-172-1-1-1 bin]$ sqlcmd -S 10.61.43.14,1433 -U admin
@@ -235,7 +235,7 @@ SQL server is an RDBMS provided by Microsoft. With Confluent, you can replicate 
     (6 rows affected)
     ```
 
-2. In the Confluent Cloud Console, choose **Data Integration** > **Connectors** > **Microsoft SQL Server Sink**. The page shown below is displayed.
+2. In the Confluent Cloud Console, choose **Data integration** > **Connectors** > **Microsoft SQL Server Sink**. The page shown below is displayed.
 
     ![Topic selection](/media/integrate/topic-selection.png)
 
@@ -257,8 +257,8 @@ SQL server is an RDBMS provided by Microsoft. With Confluent, you can replicate 
     | Input Kafka record key format | AVRO |
     | Delete on null | true |
 
-6. After configuration, select **Continue**. Wait until the connector status becomes **Running**, which might take several minutes.
+6. After configuration, click **Continue**. Wait until the connector status becomes **Running**, which might take several minutes.
 
     ![Results](/media/integrate/results.png)
 
-7. Connect the SQL Server. Observe the data status. You can see that the incremental data has been replicated to SQL Server, as shown in the preceding figure. Data integration with SQL Server is done.
+7. Connect SQL Server and observe the data. You can see that the incremental data has been replicated to SQL Server, as shown in the preceding figure. Data integration with SQL Server is done.
