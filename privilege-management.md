@@ -12,6 +12,14 @@ TiDB supports MySQL 5.7's privilege management system, including the syntax and 
 
 This document introduces privilege-related TiDB operations, privileges required for TiDB operations and implementation of the privilege system.
 
+<CustomContent platform="tidb-cloud">
+
+> **Note:**
+>
+> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+</CustomContent>
+
 ## Privilege-related operations
 
 ### Grant privileges
