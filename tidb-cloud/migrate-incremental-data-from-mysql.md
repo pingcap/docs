@@ -1,6 +1,6 @@
 ---
 title: Migrate Incremental Data from MySQL-Compatible Databases
-summary: Learn how to migrate incremental data from MySQL to TiDB Cloud.
+summary: Learn how to migrate incremental data from MySQL-compatible databases to TiDB Cloud.
 ---
 
 # Migrate Incremental Data from MySQL-Compatible Databases
@@ -9,7 +9,7 @@ This document describes how to migrate incremental data from MySQL-compatible da
 
 ## Before you begin
 
-Before you perform incremental data migration, you should have finished full data migration from MySQL to TiDB Cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+Before you perform incremental data migration, you should have finished full data migration from MySQL-compatible databases to TiDB Cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
 ## Step 1. Deploy a DM Cluster
 
@@ -37,8 +37,8 @@ source-id: "mysql-replica-01"
 enable-gtid: true
 
 from:
-  host: "172.16.5.138"
-  user: "lzy"
+  host: "192.168.10.101"
+  user: "user01"
   password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
   port: 3307
 ```
@@ -60,7 +60,7 @@ The following is an example output:
 
 ```
 tiup is checking updates for component dmctl ...
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
 {
     "result": true,
     "msg": "",
@@ -69,7 +69,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
             "result": true,
             "msg": "",
             "source": "mysql-replica-01",
-            "worker": "dm-172.16.7.154-9262"
+            "worker": "dm-192.168.11.120-9262"
         }
     ]
 }
@@ -161,7 +161,7 @@ The following is an example output:
 
 ```
 tiup is checking updates for component dmctl ...
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 check-task dm-task1.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task1.yaml
 {
     "result": true,
     "msg": "check pass!!!"
@@ -187,7 +187,7 @@ The following is an example output:
 
 ```
 tiup is checking updates for component dmctl ...
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 start-task dm-task1.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task1.yaml
 {
     "result": true,
     "msg": "",
@@ -196,7 +196,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
            "result": true,
             "msg": "",
             "source": "mysql-replica-01",
-            "worker": "dm-172.16.7.154-9262"
+            "worker": "dm-192.168.11.120-9262"
         }
     ],
     "checkResult": ""
@@ -219,7 +219,7 @@ The following is an example output:
 
 ```
 tiup is checking updates for component dmctl ...
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 query-status test-task1
+Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 query-status test-task1
 {
     "result": true,
     "msg": "",
@@ -229,7 +229,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
             "msg": "",
             "sourceStatus": {
                 "source": "mysql-replica-01",
-                "worker": "dm-172.16.7.154-9262",
+                "worker": "dm-192.168.11.120-9262",
                 "result": null,
                 "relayStatus": null
             },
