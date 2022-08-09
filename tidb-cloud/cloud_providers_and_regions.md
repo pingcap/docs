@@ -10,6 +10,8 @@ This document lists the supported cloud providers and regions of TiDB Cloud.
 <SimpleTab>
 <div label="Developer Tier">
 
+You can create a Developer Tier cluster in the following regions of AWS.
+
 | Cloud provider | Region                      |
 |----------------|-----------------------------|
 | AWS            | Oregon (us-west-2)          |
@@ -21,6 +23,8 @@ This document lists the supported cloud providers and regions of TiDB Cloud.
 </div>
 
 <div label="Dedicated Tier">
+
+You can create a Dedicated Tier cluster in the following regions of AWS and GCP.
 
 | Cloud provider | Region                      |
 |----------------|-----------------------------|
