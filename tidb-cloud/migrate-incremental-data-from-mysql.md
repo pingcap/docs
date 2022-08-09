@@ -13,7 +13,7 @@ Before you perform incremental data migration, you should have finished full dat
 
 ## Step 1. Deploy a DM Cluster
 
-The TiDB Cloud console does not provide incremental data migration feature yet. You need to deploy TiDB Data Migration (DM) manually to perform incremental migration to TiDB Cloud. For installation steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+The TiDB Cloud console does not provide incremental data migration feature yet. You need to deploy [TiDB Data Migration](https://docs.pingcap.com/tidb/stable/dm-overview) (DM) manually to perform incremental migration to TiDB Cloud. For installation steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ## Step 2. Create a data source configuration file
 
@@ -53,7 +53,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.7.140:9261|
+|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
 |`operate-source create`|Loads the data source to the DM cluster.|
 
 The following is an example output:
@@ -151,7 +151,7 @@ ignore-checking-items: ["table_schema"]
 
 For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
-To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the `check-task` command.
+To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the `check-task` command:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} check-task dm-task1.yaml
@@ -180,7 +180,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
-|`--master-addr`        |The {advertise-addr} of any DM-master in the cluster where `dmctl` is to be connected, e.g.: 172.16.7.140:9261|
+|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
 |`start-task`           |Starts the migration task.|
 
 The following is an example output:
