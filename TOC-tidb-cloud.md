@@ -160,9 +160,13 @@
      - [Overview](/garbage-collection-overview.md)
      - [Configuration](/garbage-collection-configuration.md)
   - [Tune TiFlash performance](/tiflash/tune-tiflash-performance.md)
-- Manage User Access
+- Security
   - [Manage Console User Access](/tidb-cloud/manage-user-access.md)
   - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
+  - Manage Cluster Privileges
+    - [Overview](/privilege-management.md)
+    - [User Account Management](/user-account-management.md)
+    - [Role-Based Access Control](/role-based-access-control.md)
 - Billing
   - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
   - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
