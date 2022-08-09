@@ -2913,6 +2913,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](/dashboard/top-sql.md) per minute.
 
+<<<<<<< HEAD
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
@@ -2920,6 +2921,19 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) per minute.
 
 </CustomContent>
+=======
+### tidb_track_aggregate_memory_usage
+
+- Scope: SESSION ｜ GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `true`
+- This variable controls whether TiDB tracks the memory usage of aggregate functions.
+
+> **Warning:**
+>
+> If you disable this variable, TiDB might not accurately track the memory usage and cannot control the memory usage of the corresponding SQL statements.
+>>>>>>> 8f81c4222 (add doc for tidb_track_aggregate_memory_usage (#9875))
 
 ### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
 
