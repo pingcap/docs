@@ -256,8 +256,7 @@ Changing the first partition, meaning dropping partitions with lower ranges/olde
 ALTER TABLE table_name FIRST PARTITION LESS THAN (<expression>)
 ```
 
-Will drop all partitions whose value is lower than the given expression, making the matched partition the new first partition.
-(It will not affect a NULL PARTITION)
+Will drop all partitions whose value is lower than the given expression, making the matched partition the new first partition. (It will not affect a NULL PARTITION)
 
 Changing the last partition, meaning adding more partitions with higher ranges/room for new data.
 
@@ -265,8 +264,7 @@ Changing the last partition, meaning adding more partitions with higher ranges/r
 ALTER TABLE table_name LAST PARTITION LESS THAN (<expression>)
 ```
 
-Will add new partitions with the current INTERVAL up to and including the given expression.
-(It will not work if a MAXVALUE PARTITION exists, since that would need data reorganisation).
+Will add new partitions with the current INTERVAL up to and including the given expression. (It will not work if a MAXVALUE PARTITION exists, since that would need data reorganisation).
 
 #### INTERVAL Partitioning details and limitations
 
