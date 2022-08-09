@@ -35,3 +35,4 @@ The following table lists the price of TiDB Cloud for each TiCDC Capacity Unit (
 | GCP            | Singapore (asia-southeast1) |          $0.1746 |
 | GCP            | Taiwan (asia-east1)         |          $0.1628 |
 | GCP            | Tokyo (asia-northeast1)     |          $0.1868 |
+| GCP            | Osaka (asia-northeast2)     |          $0.1868 |
