@@ -5,12 +5,12 @@ summary: Learn the design, capabilities, and architecture of Point-in-Time Recov
 
 # Point-in-Time Recovery
 
-Point-in-Time Recovery (PiTR) allows you to restore a snapshot of a TiDB cluster to a new cluster from any given time in the past. TiDB v6.2.0 introduces PiTR in [Backup and Restore](/br/backup-and-restore-overview.md) (BR).
+Point-in-Time Recovery (PiTR) allows you to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past. In v6.2.0, TiDB introduces PiTR in [Backup & Restore](/br/backup-and-restore-overview.md) (BR).
 
 You can use PiTR to meet the following business requirements:
 
 - Reduce the RPO of disaster recovery to less than 20 minutes.
-- Handle the cases of incorrect writes from applications by, for example, rolling back data to before the error event.
+- Handle the cases of incorrect writes from applications by rolling back data to before the error event.
 - Perform history data auditing to meet the requirements of laws and regulations.
 
 This document introduces the design, capabilities, and architecture of PiTR. If you need to learn how to use PiTR, refer to [PiTR Usage Scenarios](/br/pitr-usage.md).
@@ -32,9 +32,9 @@ To achieve PiTR, you need to perform the following backup tasks:
 
 ### Restore data with one click
 
-To restore data using PiTR, you need to run the `br restore point` command to execute the restoration program. The program reads data from snapshot backup and log backup and restores the data of the specified time point to the new cluster.
+To restore data using PiTR, you need to run the `br restore point` command to execute the restoration program. The program reads data from snapshot backup and log backup and restores the data of the specified time point to a new cluster.
 
-When you run the `br restore point` command, you need to specify the latest snapshot backup data before the time point you want to restore and log backup data. BR first restores the snapshot data, and then reads the log backup data from the snapshot time point to the specified restoration time point.
+When you run the `br restore point` command, you need to specify the latest snapshot backup data before the time point you want to restore and specify the log backup data. BR first restores the snapshot data, and then reads the log backup data between the snapshot time point and the specified restoration time point.
 
 ### Manage backup data
 
@@ -56,14 +56,14 @@ To manage backup data for PiTR, you need to design a backup directory structure 
 - PiTR log backup has a 5% impact on the cluster.
 - When you run log backup and snapshot backup at the same time, it has a less than 20% impact on the cluster.
 - On each TiKV node, PiTR can restore snapshot data at 280 GB/h and log data at 30 GB/h.
-- With PiTR, the RPO of disaster recovery is less than 20 minutes.Depending on the data size to be restored, the RTO varies from several minutes to several hours.
+- With PiTR, the RPO of disaster recovery is less than 20 minutes. Depending on the data size to be restored, the RTO varies from several minutes to several hours.
 - BR deletes outdated log backup data at a speed of 600 GB/h.
 
-<Note>
-- The preceding data is based on test results from the following two testing scenarios. The actual data may be different.
-- Snapshot data restoration speed = Snapshot data size / (duration * the number of TiKV nodes)
-- Log data restoration speed = Restored log data size / (duration * the number of TiKV nodes)
-</Note>
+> **Note:**
+>
+> - The preceding functional specification is based on test results from the following two testing scenarios. The actual data may be different.
+> - Snapshot data restoration speed = Snapshot data size / (duration * the number of TiKV nodes)
+> - Log data restoration speed = Restored log data size / (duration * the number of TiKV nodes)
 
 Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
 
@@ -84,10 +84,10 @@ Testing scenario 2 (on-premises):
 - A single cluster can only start one log backup task.
 - You can only restore data to an empty cluster. To avoid impact on the services and data of the cluster, you cannot perform PiTR in-place or on a non-empty cluster.
 - You can use Amazon S3 or a shared filesystem (such as NFS) to store the backup data. Currently, GCS and Azure Blob Storage are not supported.
-- You can only perform PiTR on cluster level. Database-level and table-level PiTR are not supported.
+- You can only perform cluster-level PiTR. Database-level and table-level PiTR are not supported.
 - You cannot restore data in the user tables or the privilege tables.
-- If the backup cluster has a TiFlash replica, after you perform PiTR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to [manually configure the TiFlash replica in the schema or the table](/br/pitr-troubleshoot.md#在使用-br-restore-point-命令恢复下游集群后无法从-tiflash-引擎中查询到数据该如何处理). //TODO
-- If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For details, refer to [上游数据库使用 TiDB Lightning Physical 方式导入数据的恢复](/br/pitr-known-issues.md#上游数据库使用-tidb-lightning-physical-方式导入数据导致无法使用日志备份功能). //TODO
-- During the backup process, you cannot exchange partition. For details, refer to [日志备份过程中执行分区交换](/br/pitr-troubleshoot.md#日志备份过程中执行分区交换-exchange-partition-ddl在-pitr-恢复时会报错该如何处理). //TODO
+- If the backup cluster has a TiFlash replica, after you perform PiTR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to [manually configure the TiFlash replica in the schema or the table](/br/pitr-troubleshoot.md#what-should-i-do-if-the-data-cannot-be-queried-from-the-tiflash-engine-when-using-the-br-restore-point-command-to-restore-the-downstream-cluster).
+- If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For details, refer to [The upstream database uses TiDB Lightning Physical Mode to import data](/br/pitr-known-issues.md#the-upstream-database-uses-tidb-lightning-physical-mode-to-import-data-which-makes-it-impossible-to-use-the-log-backup-feature).
+- During the backup process, you cannot exchange partition. For details, refer to [Executing the Exchange Partition DDL during PiTR recovery](/br/pitr-troubleshoot.md#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-recovery).
 - You cannot restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
 - For other known limitations, refer to [PiTR Known Issues](/br/pitr-known-issues.md).
