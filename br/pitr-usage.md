@@ -1,24 +1,24 @@
 ---
-title: Use PiTR
-summary: Learn how to use PiTR.
+title: Use PITR
+summary: Learn how to use PITR.
 ---
 
-# Use PiTR
+# Use PITR
 
-This document describe how to deploy the relevant tool and use point-in-time recovery (PiTR). It aims to help you get started with this feature.
+This document describe how to deploy the relevant tool and use point-in-time recovery (PITR). It aims to help you get started with this feature.
 
 Assume that you have deployed a TiDB cluster in the production environment on AWS, and the business team puts forward the following requirements:
 
 - Back up the data changes in time. When the database encounters an exception, you can quickly recover the business data quickly with a minimum data loss (only a few minutes of data loss is tolerable).
 - Perform business audits every month at no specific time. When an audit request is received, you must provide a database to query the data at a certain time point in the past month as requested.
 
-With PiTR, you can satisfy the above requirements.
+With PITR, you can satisfy the above requirements.
 
 ## Deploy the TiDB cluster and BR
 
-To use PiTR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v6.2.0 as an example.
+To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the same version as the TiDB cluster. This document uses v6.2.0 as an example.
 
-The following table shows the recommended hardware resources for using PiTR in a TiDB cluster.
+The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
 | Component | CPU | Memory | Local Storage  | AWS Instance  | Number of Instances |
 | --- | --- | --- | --- | --- | --- |
@@ -118,9 +118,9 @@ The following are two snapshot backup examples:
     tiup br backup full --pd=172.16.102.95:2379 --storage='s3://tidb-pitr-bucket/backup-data/snapshot-20220516000000' --backupts='2022/05/16 00:00:00'
     ```
 
-## Run PiTR
+## Run PITR
 
-Assume that you need to query data at 2022/05/15 18:00:00. You can use PiTR to restore a cluster to that timestamp by restoring a snapshot backup taken at 2022/05/14 and a log backup between the snapshot and 2022/05/15 18:00:00.
+Assume that you need to query data at 2022/05/15 18:00:00. You can use PITR to restore a cluster to that timestamp by restoring a snapshot backup taken at 2022/05/14 and a log backup between the snapshot and 2022/05/15 18:00:00.
 
 The command is as follows:
 
@@ -157,5 +157,5 @@ For example, you can run the following commands to clean up outdated data:
 
 ## Learn more
 
-- [Use PiTR via CLI](/br/br-log-command-line.md)
-- [PiTR Overview](/br/point-in-time-recovery.md)
+- [Use PITR via CLI](/br/br-log-command-line.md)
+- [PITR Overview](/br/point-in-time-recovery.md)

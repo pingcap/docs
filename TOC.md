@@ -469,8 +469,8 @@
       - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
       - [BR FAQs](/br/backup-and-restore-faq.md)
   - Point-in-Time Recovery
-    - [PiTR Overview](/br/point-in-time-recovery.md)
-    - [Use PiTR via CLI](/br/br-log-command-line.md)
+    - [PITR Overview](/br/point-in-time-recovery.md)
+    - [Use PITR via CLI](/br/br-log-command-line.md)
     - [Usage Scenarios](/br/pitr-usage.md)
     - [Monitoring and Alert](/br/pitr-monitoring-and-alert.md)
     - [Troubleshooting](/br/pitr-troubleshoot.md)
