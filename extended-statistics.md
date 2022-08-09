@@ -26,7 +26,7 @@ This statement indicates that you want to collect the specified type of extended
 - `stats_type` is the type of the extended statistics. Now it only has one possible value `correlation`.
 - `column_name` specifies the column group. It can be multiple columns. For `correlation` type, there should be and only be two columns.
 
-The extended statistics will be collected if the `mysql.stats_extended` has the corresponding record when we run the `ANALYZE` command. And the `status` column will be set to `1`, and the `version`` column will be set to the new timestamp.
+The extended statistics will be collected if the `mysql.stats_extended` has the corresponding record when we run the `ANALYZE` command. And the `status` column will be set to `1`, and the `version` column will be set to the new timestamp.
 
 ## The type of the Extended Statistics
 
