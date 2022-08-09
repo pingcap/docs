@@ -78,7 +78,7 @@ After registration, the TiDB will collect the extended statistic after triggerin
 
 ## The cache of the Extended Statistics
 
-Each TiDB node will maintain a cache for the extended statistics to improve the efficiency of visiting the extended statistics. TiDB will load the table `mysql.`stats_extended` periodically to ensure that the cache is kept the same as the data in the table. Each row in the table `mysql.stats_extended` records a column `version`. Once the row is updated, the value of the column `version` will be increased so that we can load the table into the memory incrementally instead of a full loading.
+Each TiDB node will maintain a cache for the extended statistics to improve the efficiency of visiting the extended statistics. TiDB will load the table `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table. Each row in the table `mysql.stats_extended` records a column `version`. Once the row is updated, the value of the column `version` will be increased so that we can load the table into the memory incrementally instead of a full loading.
 To delete a record of the extended statistics, TiDB provides the following command:
 
 {{< copyable "sql" >}}
