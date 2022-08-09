@@ -21,7 +21,7 @@ For information about how to determine the size of your TiDB cluster, see [Deter
 
 > **Note:**
 >
-> If the node size of TiDB or TiKV is set as **4 vCPU, 16 GiB**, note the following restrictions. To get rid of these restrictions, you can [increase your node size](#increase-node-size) first.
+> If the node size of TiDB or TiKV is set as **4 vCPU, 16 GiB**, note the following restrictions. To bypass these restrictions, you can [increase your node size](#increase-node-size) first.
 >
 > - The node quantity of TiDB can only be set to 1 or 2, and the node quantity of TiKV is fixed to 3.
 > - 4 vCPU TiDB can only be used with 4 vCPU TiKV, and vice versa.
