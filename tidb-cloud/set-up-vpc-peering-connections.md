@@ -136,7 +136,7 @@ Use either of the following two options to approve and configure the VPC peering
 
     > **Note:**
     >
-    > If the `An error occurred (MissingParameter) when calling the CreateRoute operation: The request must contain the parameter routeTableId` error occurs when you try to create a route table rule, the route table rules might be successfully created. In this case, you can check the rules and ignore the error.
+    > Sometimes, even if the route table rules are successfully created, you might still get the `An error occurred (MissingParameter) when calling the CreateRoute operation: The request must contain the parameter routeTableId` error. In this case, you can check the created rules and ignore the error.
 
     {{< copyable "shell-regular" >}}
 
