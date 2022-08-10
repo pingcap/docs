@@ -170,8 +170,12 @@ The following TiKV configuration items can be modified online:
 | `pessimistic-txn.pipelined` | Determines whether to enable the pipelined pessimistic locking process |
 | `pessimistic-txn.in-memory` | Determines whether to enable the in-memory pessimistic lock |
 | `quota.foreground-cpu-time` | The soft limit on the CPU resources used by TiKV foreground to process read and write requests |
-| `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which transactions write data |
-| `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which transactions and the Coprocessor read data |
+| `quota.foreground-write-bandwidth` | The soft limit on the bandwidth with which foreground transactions write data |
+| `quota.foreground-read-bandwidth` | The soft limit on the bandwidth with which foreground transactions and the Coprocessor read data |
+| `quota.background-cpu-time` | The soft limit on the CPU resources used by TiKV background to process read and write requests |
+| `quota.background-write-bandwidth` | The soft limit on the bandwidth with which background transactions write data (not effective yet) |
+| `quota.background-read-bandwidth` | The soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective yet) |
+| `quota.enable-auto-tune` | Whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.  |
 | `quota.max-delay-duration` | The maximum time that a single read or write request is forced to wait before it is processed in the foreground |
 | `gc.ratio-threshold` | The threshold at which Region GC is skipped (the number of GC versions/the number of keys) |
 | `gc.batch-keys` | The number of keys processed in one batch |
@@ -203,6 +207,7 @@ The following TiKV configuration items can be modified online:
 | `server.grpc-memory-pool-quota` | Limits the memory size that can be used by gRPC |
 | `server.max-grpc-send-msg-len` | Sets the maximum length of a gRPC message that can be sent |
 | `server.raft-msg-max-batch-size` | Sets the maximum number of Raft messages that are contained in a single gRPC message |
+| `server.simplify-metrics`        | Controls whether to simplify the sampling monitoring metrics                   |
 | `storage.block-cache.capacity` | The size of shared block cache (supported since v4.0.3) |
 | `storage.scheduler-worker-pool-size` | The number of threads in the Scheduler thread pool |
 | `backup.num-threads` | The number of backup threads (supported since v4.0.3) |
