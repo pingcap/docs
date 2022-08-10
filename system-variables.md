@@ -1863,7 +1863,7 @@ explain select * from t where age=5;
 - Persists to cluster: No
 - Type: Boolean
 - Default value: `OFF`
-- Specifies whether to allow optimizer to push `Projection` to TiKV or TiFlash coprocessor.
+- Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
 
@@ -2017,7 +2017,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `OFF`
-- Specifies whether to remove `ORDER BY` clause in subquery.
+- Specifies whether to remove `ORDER BY` clause in a subquery.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
