@@ -342,17 +342,17 @@ Lock-time batch point get executes similar to lock-time point get, but read mult
 This section describes the lock duration.
 
 ```text
-ratio = ceil(
+round = ceil(
     sum(rate(tidb_tikvclient_txn_regions_num_sum{type="2pc_pessimistic_lock"})) /
     sum(rate(tidb_tikvclient_txn_regions_num_count{type="2pc_pessimistic_lock"})) /
-    128
+    committer-concurrency
 )
 
 lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
-    ratio * tidb_tikvclient_request_seconds{type="PessimisticLock"}
+    round * tidb_tikvclient_request_seconds{type="PessimisticLock"}
 ```
 
-Locks are acquired through the 2PC struct, which has a flow control mechanism. The flow control limit the concurrent on-fly requests, the default value is `128`. For simplicity, the flow control can be treat as an amplification of request latency(`ratio`).
+Locks are acquired through the 2PC struct, which has a flow control mechanism. The flow control limit the concurrent on-fly requests by `committer-concurrency`, default as `128`. For simplicity, the flow control can be treat as an amplification of request latency(`ratio`).
 
 ```text
 tidb_tikvclient_request_seconds{type="PessimisticLock"} =
@@ -445,23 +445,23 @@ commit =
 Get_latest_ts_time = Get_commit_ts_time =
     pd_client_cmd_handle_cmds_duration_seconds{type="wait"}
 
-prewrite_ratio = ceil(
+prewrite_round = ceil(
     sum(rate(tidb_tikvclient_txn_regions_num_sum{type="2pc_prewrite"})) /
     sum(rate(tidb_tikvclient_txn_regions_num_count{type="2pc_prewrite"})) /
-    128
+    committer-concurrency
 )
 
-commit_ratio = ceil(
+commit_round = ceil(
     sum(rate(tidb_tikvclient_txn_regions_num_sum{type="2pc_commit"})) /
     sum(rate(tidb_tikvclient_txn_regions_num_count{type="2pc_commit"})) /
-    128
+    committer-concurrency
 )
 
 Prewrite_time =
-    prewrite_ratio * tidb_tikvclient_request_seconds{type="Prewrite"}
+    prewrite_round * tidb_tikvclient_request_seconds{type="Prewrite"}
 
 Commit_time =
-    commit_ratio * tidb_tikvclient_request_seconds{type="Commit"}
+    commit_round * tidb_tikvclient_request_seconds{type="Commit"}
 ```
 
 The commit duration can be broken down as for sections:
@@ -471,7 +471,7 @@ The commit duration can be broken down as for sections:
 - `Get_commit_ts_time` records the duration of common 2PC transaction.
 - `Commit_time` records the duration of commit phase, async-commit or 1PC transaction does not have this phase.
 
-Like pessimistic lock, flow control acts as an amplification of latency(`prewrite_ratio` and `commit_ratio`).
+Like pessimistic lock, flow control acts as an amplification of latency(`prewrite_round` and `commit_round`).
 
 ```text
 tidb_tikvclient_request_seconds{type="Prewrite"} =
@@ -683,7 +683,7 @@ async io enabled commit = max(
 )
 ```
 
-TiKV supports Async IO Raft since v5.3.0, which changes the process of commit.
+TiKV supports Async IO Raft since v5.3.0(only enabled when [`store-io-pool-size > 0`](tikv-configuration-file#store-io-pool-size-span-classversion-marknew-in-v530span)), which changes the process of commit.
 
 ```text
 persist log locally duration =
