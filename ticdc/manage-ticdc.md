@@ -675,7 +675,7 @@ The following is an example of event filter rules:
 
 ```toml
 [filter]
-# The event filter rules must be under the filter configuration. You can configure multiple event filters at the same time.
+# The event filter rules must be under the `[filter]` configuration. You can configure multiple event filters at the same time.
 
 [[filter.event-filters]]
 matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
@@ -689,7 +689,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
 The event filter rules must be under the `[filter]` configuration. For detailed configuration, refer to [Task configuration file](#task-configuration-file).
 
-Configuration parameters description:
+Description of configuration parameters :
 
 - `matcher`: the database and table that this event filter rule applies to. The syntax is the same as [table filter](/table-filter.md).
 - `ignore-event`: the event type to be ignored. This parameter accepts an array of strings. You can configure multiple event types. Currently, the following event types are supported:
@@ -707,7 +707,7 @@ Configuration parameters description:
 | drop table      | DDL  | |Matches `drop table` event      |
 | rename table    | DDL  | |Matches `rename table` event    |
 | truncate table  | DDL  | |Matches `truncate table` event  |
-| alter table     | DDL  | |Matches `alter table` event, including all clauses of `alter table` and `create index`/`drop index`   |
+| alter table     | DDL  | |Matches `alter table` event, including all clauses of `alter table`, `create index` and `drop index`   |
 | add table partition    | DDL  | |Matches `add table partition` event     |
 | drop table partition    | DDL  | |Matches `drop table partition` event     |
 | truncate table partition    | DDL  | |Matches `truncate table partition` event     |
@@ -722,8 +722,8 @@ Configuration parameters description:
 
 > **Note:**
 >
-> - When TiDB updates a value in the column of the clustered index, TiDB splits a UPDATE event into a DELETE event and an INSERT event. TiCDC does not identify such events as an UPDATE event and thus cannot correctly filter out such events.
-> - When you configure a SQL expression, make sure all tables that matches `matcher` contain the columns specified in the SQL expression. Otherwise, the replication task cannot be created. In addition, if the table schema changes during the replication, which results in a table no longer containing a required column, the replication task enters an error state that cannot be resumed automatically. In such a situation, you must manually modify the configuration and resume the task.
+> - When TiDB updates a value in the column of the clustered index, TiDB splits an `UPDATE` event into a `DELETE` event and an `INSERT` event. TiCDC does not identify such events as an `UPDATE` event and thus cannot correctly filter out such events.
+> - When you configure a SQL expression, make sure all tables that matches `matcher` contain all the columns specified in the SQL expression. Otherwise, the replication task cannot be created. In addition, if the table schema changes during the replication, which results in a table no longer containing a required column, the replication task fails and cannot be resumed automatically. In such a situation, you must manually modify the configuration and resume the task.
 
 ### Notes for compatibility
 
