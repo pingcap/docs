@@ -167,3 +167,7 @@ The following steps show how to import local data to TiDB Cloud using the logica
 
     - To get the progress using command lines, `grep` the keyword `progress` in logs, which is updated every 5 minutes by default.
     - To get more monitoring metrics using the TiDB monitoring framework, see [TiDB Lightning Monitoring](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning).
+
+## See also
+
+- [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md)
