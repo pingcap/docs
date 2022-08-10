@@ -192,7 +192,7 @@ If you specify `FORMAT = "brief"` in `EXPLAIN`, the operator IDs in the output a
 {{< copyable "sql" >}}
 
 ```sql
-EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1=3;
+EXPLAIN FORMAT = "brief" DELETE FROM t1 WHERE c1 = 3;
 ```
 
 ```sql
