@@ -173,12 +173,13 @@ delta_index_cache_size = 0
 [profiles]
 
 [profiles.default]
-    ## [Deprecated] The default value is false. This parameter determines whether the segment
+    ## The default value is false. This parameter determines whether the segment
     ## of DeltaTree Storage Engine uses logical split.
     ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
-    ## Note that logical split has compatibility issues with other features since v6.2.0 and
-    ## it is not recommended to set the value to true.
+    ## Note that logical split has known issue on v6.2.0 and later versions
+    ## (https://github.com/pingcap/tiflash/issues/5576),
+    ## it is strongly not recommended to set the value to true.
     # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
