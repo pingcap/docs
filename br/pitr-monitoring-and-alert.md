@@ -45,40 +45,63 @@ PITR supports using [Prometheus](https://prometheus.io/) to collect monitoring m
 
 ## Alert configuration
 
-Currently, PITR does not have built-in alert items, but the following alert items are recommended.
+Currently, PITR does not have built-in alert items. This section introduces how to configure alert items in PITR and recommends some items.
+
+To configure alert items in PITR, follow these steps:
+
+1. Create a configuration file (for example, `pitr.rules.yml`) for the alert rules on the node where Prometheus is located. In the file, fill in the alert rules according to the [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/), the following recommended alert items, and configuration sample.
+2. In the `rule_files` field of the Prometheus configuration file, add the path of the alert rule file.
+3. Send `SIGHUP` signal to the Prometheus process (`kill -HUP pid`) or send HTTP POST request to `http://prometheus-addr/-/reload` (before you send the HTTP request, add the `--web.enable-lifecycle` parameter when starting Prometheus).
+
+The recommended alert items are as follows:
 
 ### LogBackupRunningRPOMoreThan10m
 
-- Alert item: `max(time() - tikv_stream_store_checkpoint_ts / 262144000) by (task) / 60 > 10 and max(tikv_stream_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
+- Alert item: `max(time() - tikv_log_backup_store_checkpoint_ts / 262144000) by (task) / 60 > 10 and max(tikv_log_backup_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
 - Alert level: warning
 - Description: The log data is not persisted to the storage for more than 10 minutes. This alert item is a reminder. In most cases, it does not affect log backup.
 
+A configuration sample of this alert rule is as follows:
+
+```yaml
+groups:
+- name: PiTR
+  rules:
+  - alert: LogBackupRunningRPOMoreThan10m
+    expr: max(time() - tikv_log_backup_store_checkpoint_ts / 262144000) by (task) / 60 > 10 and max(tikv_log_backup_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0
+    labels:
+      severity: warning
+    annotations:
+      summary: RPO of log backup is high
+      message: RPO of the log backup task {{ $labels.task }} is more than 10m
+```
+
 ### LogBackupRunningRPOMoreThan30m
 
-- Alert item: `max(time() - tikv_stream_store_checkpoint_ts / 262144000) by (task) / 60 > 30 and max(tikv_stream_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
+- Alert item: `max(time() - tikv_log_backup_store_checkpoint_ts / 262144000) by (task) / 60 > 30 and max(tikv_log_backup_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 0`
 - Alert level: critical
 - Description: The log data is not persisted to the storage for more than 30 minutes. This alert often indicates anomalies. You can check the TiKV logs to find the cause.
 
 ### LogBackupPausingMoreThan2h
 
-- Alert item: `max(time() - tikv_stream_store_checkpoint_ts / 262144000) by (task) / 3600 > 2 and max(tikv_stream_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
+- Alert item: `max(time() - tikv_log_backup_store_checkpoint_ts / 262144000) by (task) / 3600 > 2 and max(tikv_log_backup_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 - Alert level: warning
 - Description: The log backup task is paused for more than 2 hours. This alert item is a reminder and you are expected to run `br log resume` as soon as possible.
 
 ### LogBackupPausingMoreThan12h
 
-- Alert item: `max(time() - tikv_stream_store_checkpoint_ts / 262144000) by (task) / 3600 > 12 and max(tikv_stream_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
+- Alert item: `max(time() - tikv_log_backup_store_checkpoint_ts / 262144000) by (task) / 3600 > 12 and max(tikv_log_backup_store_checkpoint_ts) by (task) > 0 and max(tikv_log_backup_task_status) by (task) == 1`
 - Alert level: critical
 - Description: The log backup task is paused for more than 12 hours. You are expected to run `br log resume` as soon as possible to resume the task. Log tasks paused for too long have the risk of data loss.
 
 ### LogBackupFailed
 
-- Alert item: `max(tikv_log_backup_task_status) by (task) == 2 and max(tikv_stream_store_checkpoint_ts) by (task) > 0`
+- Alert item: `max(tikv_log_backup_task_status) by (task) == 2 and max(tikv_log_backup_store_checkpoint_ts) by (task) > 0`
 - Alert level: critical
 - Description: The log backup task fails. You need to run `br log status` to see the failure reason. If necessary, you need to further check the TiKV logs.
 
 ### LogBackupGCSafePointExceedsCheckpoint
 
-- Alert item: `min(tikv_stream_store_checkpoint_ts) by (instance) - max(tikv_gcworker_autogc_safe_point) by (instance) < 0`
+- Alert item: `min(tikv_log_backup_store_checkpoint_ts) by (instance) - max(tikv_gcworker_autogc_safe_point) by (instance) < 0`
 - Alert level: critical
 - Description: Some data has been garbage-collected before the backup. This means that some data has been lost and are very likely to affect your application.
