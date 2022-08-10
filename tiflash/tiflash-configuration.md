@@ -178,8 +178,8 @@ delta_index_cache_size = 0
     ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
     ## Note that logical split has known issue on v6.2.0 and later versions
-    ## (https://github.com/pingcap/tiflash/issues/5576),
-    ## it is strongly not recommended to set the value to true.
+    ## [#5576](https://github.com/pingcap/tiflash/issues/5576),
+    ## it is strongly not recommended to set the value to `true`.
     # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
