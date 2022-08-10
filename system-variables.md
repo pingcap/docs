@@ -1824,7 +1824,6 @@ mysql> desc select count(distinct a) from test.t;
 - Default value: `ON`
 - Specifies whether to allow using outer table as the build side in outer join for TiFlash.
 
-
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
