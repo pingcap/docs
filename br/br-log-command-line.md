@@ -1,6 +1,6 @@
 ---
 title: Perform Log Backup and Restoration Using BR
-summary: Learn how to perform log backup and restore from the log backup data using the br log command line tool.
+summary: Learn how to perform log backup and restoration from the log backup data using the br log command line tool.
 ---
 
 # Perform Log Backup and Restoration Using BR
@@ -87,10 +87,10 @@ Global Flags:
 
 The example output only shows the common parameters. These parameters are described as follows:
 
-- `task-name`: specify the task name for the log backup. This name is also used to query, pause, and resume the backup task.
+- `--task-name`: specify the task name for the log backup. This name is also used to query, pause, and resume the backup task.
 - `--start-ts`: specify the start timestamp for the log backup. If this is not specified, the backup program uses the current time as `start-ts`.
 - `--pd`: specify the PD address for the backup cluster. BR needs to access PD to start the log backup task.
-- `ca`, `cert`, `key`: specify the mTLS encryption method to communicate with TiKV and PD.
+- `--ca`, `--cert`, `--key`: specify the mTLS encryption method to communicate with TiKV and PD.
 - `--storage`: specify the backup storage address. Currently, BR only supports shared file systems and Amazon S3 as storage for log backup. For details, see [Amazon S3 storage](/br/backup-storage-S3.md).
 
 Usage example:
@@ -129,6 +129,7 @@ In the example output, `task-name` is used to specify the name of the backup tas
 Usage example:
 
 ```shell
+./br log status --task-name=pitr --pd=172.16.102.95:2379
 ● Total 1 Tasks.
 > #1 <
               name: pitr
@@ -177,7 +178,7 @@ Global Flags:
 > **Note:**
 >
 > - After the log backup task is paused, to prevent the MVCC data that generates the change log from being deleted, the backup program automatically sets the current backup checkpoint as the service safepoint, which retains MVCC data within the latest 24 hours. If the backup task is paused for more than 24 hours, the corresponding data is garbage collected and is not backed up.
-> - Retaining too much MVCC data has negative impact on the storage capacity and performance of the TiDB cluster. Therefore, it is recommended to resume the backup task in time.
+> - Retaining too much MVCC data has a negative impact on the storage capacity and performance of the TiDB cluster. Therefore, it is recommended to resume the backup task in time.
 
 Usage example:
 
@@ -366,7 +367,7 @@ The example output only shows the common parameters. These parameters are descri
 - `--restored-ts`: the timestamp that you want to restore data to. If this parameter is not specified, BR restores data to the latest timestamp available in the log backup, that is, the checkpoint of the backup data.
 - `--start-ts`: the start timestamp that you want to restore log backup data from. If you only need to restore log backup data and do not need snapshot backup data, you must specify this parameter.
 - `--pd`: the PD address of the restoration cluster.
-- `ca`, `cert`, `key`: specify the mTLS encryption method to communicate with TiKV and PD.
+- `--ca`, `--cert`, `--key`: specify the mTLS encryption method to communicate with TiKV and PD.
 - `--storage`: the storage address for the log backup. The log backup data can only be stored in shared file systems or Amazon S3. For details, refer to [Amazon S3 storage](/br/backup-storage-S3.md).
 
 Usage example:
