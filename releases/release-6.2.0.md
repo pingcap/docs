@@ -4,7 +4,7 @@ title: TiDB 6.2.0 Release Notes
 
 # TiDB v6.2.0 Release Notes
 
-Release date：August 16, 2022
+Release date: August 16, 2022
 
 TiDB version: 6.2.0
 
@@ -347,11 +347,11 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
     - Backup & Restore (BR)
 
-        - Adjust the backup organization structure to fix backup failure caused by S3 rate limiting in large cluster backup. ([#30087](https://github.com/pingcap/tidb/issues/30087), @[MoCuishle28](https://github.com/MoCuishle28))
+        - Adjust the backup data directory structure to fix backup failure caused by S3 rate limiting in large cluster backup ([#30087](https://github.com/pingcap/tidb/issues/30087), @[MoCuishle28](https://github.com/MoCuishle28))
 
     - TiCDC
 
-        - Reduce performance overhead caused by runtime context switch in multi-Region scenarios ([#5610](https://github.com/pingcap/tiflow/issues/5610), @[hicqu](https://github.com/hicqu))
+        - Reduce performance overhead caused by runtime context switching in multi-Region scenarios ([#5610](https://github.com/pingcap/tiflow/issues/5610), @[hicqu](https://github.com/hicqu))
 
         - Optimize redo log performance, and fix meta and data inconsistency problems ([#6011](https://github.com/pingcap/tiflow/issues/6011), @[CharlesCheung96](https://github.com/CharlesCheung96), [#5924](https://github.com/pingcap/tiflow/issues/5924), @[zhaoxinyu](https://github.com/zhaoxinyu), [#6277](https://github.com/pingcap/tiflow/issues/6277), @[hicqu](https://github.com/hicqu))
 
@@ -361,7 +361,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
     - TiUP
 
-        - When a new cluster is deployed using TiUP,  node-exporter will use the [1.3.1](https://github.com/prometheus/node_exporter/releases/tag/v1.3.1) version while  blackbox-exporter will use the [0.21.1](https://github.com/prometheus/blackbox_exporter/releases/tag/v0.21.1) version, which ensures successful deployment in different systems and environments
+        - When a new cluster is deployed using TiUP,  node-exporter will use the [1.3.1](https://github.com/prometheus/node_exporter/releases/tag/v1.3.1) version, and blackbox-exporter will use the [0.21.1](https://github.com/prometheus/blackbox_exporter/releases/tag/v0.21.1) version, which ensures successful deployment in different systems and environments
 
 ## Bug fixes
 
@@ -413,10 +413,10 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Fix the issue that PD does not reconnect to TiKV after the Region heartbeat is interrupted ([#12934](https://github.com/tikv/tikv/issues/12934), @[bufferflies](https://github.com/bufferflies))
 
 + Tools
-    - Backup & Restore (BR)
 
-        - Fix the issue that BR does not clear the rate limit after finishing a rate-limited backup task
-([#31722](https://github.com/pingcap/tidb/issues/31722), @[MoCuishle28](https://github.com/MoCuishle28))
+    + Backup & Restore (BR)
+
+        - Fix the issue that BR does not reset the rate limit after finishing a rate-limited backup task ([#31722](https://github.com/pingcap/tidb/issues/31722), @[MoCuishle28](https://github.com/MoCuishle28))
 
 ## Contributors
 
