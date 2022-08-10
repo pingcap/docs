@@ -398,6 +398,7 @@
         - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
       - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
       - [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md)
+      - [Continuous Data Validation](/dm/dm-continuous-data-validation.md)
     - Maintain
       - Cluster Upgrade
         - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
@@ -808,6 +809,7 @@
         - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
         - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
+      - [Monitoring Page](/dashboard/dashboard-monitoring.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
       - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
