@@ -5,7 +5,21 @@ summary: Learn how to manage a TiDB user account.
 
 # TiDB User Account Management
 
+<CustomContent platform="tidb">
+
 This document describes how to manage a TiDB user account.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+This document describes how to manage a database user account for TiDB Cloud.
+
+> **Note:**
+>
+> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+
+</CustomContent>
 
 ## User names and passwords
 
@@ -154,7 +168,20 @@ This operation clears the user's records in the `mysql.user` table and the relat
 
 ## Reserved user accounts
 
+<CustomContent platform="tidb">
+
 TiDB creates the `'root'@'%'` default account during the database initialization.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+TiDB Cloud creates the following default accounts during the database initialization.
+
+- `'root'@'%'` for Dedicated Tier clusters or `'<user_name_prefix>.root'@'%'` for Developer Tier clusters
+- `cloud_admin`
+
+</CustomContent>
 
 ## Set account resource limits
 
@@ -184,6 +211,8 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
 
 ## Forget the `root` password
 
+<CustomContent platform="tidb">
+
 1. Modify the configuration file by adding `skip-grant-table` in the `security` part:
 
     ```
@@ -198,6 +227,17 @@ TiDB stores passwords in the `mysql.user` system database. Operations that assig
     ```
 
 When the `skip-grant-table` is set, starting the TiDB process will check whether the user is an administrator of the operating system, and only the `root` user of the operating system can start the TiDB process.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+1. In the TiDB Cloud console, navigate to the **Active Clusters** page of your project, and then find the area of your cluster.
+2. Click **Security Settings** in the upper-right corner of the area. The **Security Settings** dialog is displayed.
+3. In the dialog, configure the root password.
+4. Click **Apply**.
+
+</CustomContent>
 
 ## `FLUSH PRIVILEGES`
 
