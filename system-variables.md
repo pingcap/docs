@@ -849,6 +849,15 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls whether the calculated commit ts would be used for async commit. By default the two phase committer would request a new ts from the pd server and use it as the commit ts, and linearizability is guaranteed for all the concurrent transactions. This ts fetching cost could be saved if this variable is set to 'ON' which means the calculated commit is used, the cost is that causal consistency could not be guaranteed but not linearizability, more details could be referenced in this [document](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/). If the usage scenario requires only causal consistency, this vairable could be set to 'ON' to improve performance.
+
+
 ### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL
