@@ -186,7 +186,7 @@ BR can restore data in **the following system tables**:
 When you restore data related to system privileges, note the following:
 
 - BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Do not create a user or role named `cloud_admin` in your environment, because the user privileges related to `cloud_admin` cannot be restored correctly.
-- Before BR restores data, it checks whether the system tables in the target cluster are compatible with those in the backup data. "compatible" means that all the following conditions are met:
+- Before BR restores data, it checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 
     - The target cluster has the same system tables as the backup data.
     - The **number of columns** in the system privilege table of the target cluster is consistent with that of the backup data. The order of the columns can be different.
