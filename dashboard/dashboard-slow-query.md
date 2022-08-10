@@ -56,7 +56,7 @@ Click any item in the list to display detailed execution information of the slow
 
 ### SQL
 
-Click the **Expand** link to view the detailed information of an item. Click the **Copy** link to copy the detailed information to the clipboard.
+Click the **Expand** button to view the detailed information of an item. Click the **Copy** button to copy the detailed information to the clipboard.
 
 ### Execution plans
 
@@ -73,7 +73,8 @@ The following figure shows a visual execution plan.
 - The color of the title bar indicates the component where the operator is executed: yellow stands for TiDB, blue stands for TiKV, and pink stands for TiFlash.
 - The title bar shows the operator name and the text shown below is the basic information of the operator. 
 
-Click the node area. Detailed operator information is displayed on the right.
+Click the node area, and the detailed operator information is displayed on the right sidebar.
+
 ![Visual execution plan - sidebar](/media/dashboard/dashboard-visual-plan-popup.png)
 
 ### SQL execution details
