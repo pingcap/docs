@@ -108,7 +108,7 @@ You can add corresponding parameters and subcommands after `tiup ctl tikv`.
 
 - Local mode:
 
-    * Use the `--data-dir` option to specify the local TiKV data directory path;
+    * Use the `--data-dir` option to specify the local TiKV data directory path.
     * Use the `--config` option to specify the local TiKV configuration file path.
 
   In this mode, you need to stop the running TiKV instance.
