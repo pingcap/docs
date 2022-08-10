@@ -40,7 +40,7 @@ validators:
   global:
     mode: full # "fast" is also allowed. "none" is the default mode, which means no validation is performed.
     worker-count: 4 # The number of validation workers in the background. The default value is 4.
-    row-error-delay: 30m # If a row is not validated within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
+    row-error-delay: 30m # If a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
 ```
 
 The configuration items are described as follows:
@@ -50,7 +50,7 @@ The configuration items are described as follows:
     * `full`: compares the changed row and the row obtained in the downstream database.
     * `fast`: only checks if the changed row exists in the downstream database.
 * `worker-count`: the number of validation workers in the background. Each worker is a goroutine.
-* `row-error-delay`: if a row is not validated within the specified time, it will be marked as an error row. The default value is 30 minutes.
+* `row-error-delay`: if a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30 minutes.
 
 For the complete configuration, refer to [DM Advanced Task Configuration File](/dm/task-configuration-file-full.md).
 
@@ -197,7 +197,7 @@ After continuous data validation returns error rows, you need to manually handle
 
 When continuous data validation finds error rows, the validation does not stop immediately. Instead, it records the error rows for you to handle. Before the error rows are processed, the default status is `unprocessed`. If you manually correct the error rows in the downstream, the validation does not automatically retrieve the latest status of the corrected data. The error rows are still recorded in the `error` field.
 
-If you do not want to see an error row in the validation status, or if you want to mark an error row as resolved, you can locate the error row id using the `validation show-error` command:
+If you do not want to see an error row in the validation status, or if you want to mark an error row as resolved, you can locate the error row id using the `validation show-error` command and subsequently handle it with the given error id:
 
 dmctl provides three error handling commands:
 
@@ -268,13 +268,13 @@ The detailed implementation of continuous data validation is as follows:
 3. The validation worker merges the changed rows that affect the same table and the same primary key to avoid validating "expired" data. The changed rows are cached in memory.
 4. When the validation worker has accumulated a certain number of changed rows or when a certain time interval is passed, the validation worker queries the downstream database using the primary keys to get the current data and compares it with the changed rows.
 5. The validation worker performs the data validation. If the validation mode is `full`, the validation worker compares data of the changed rows with data of the downstream database. if the validation mode is `fast`, the validation worker only checks the existence of the changed rows.
-    - If the validation succeeds, the changed row is removed from the memory.
-    - If the validation fails, the validator does not report an error immediately but waits for a certain time interval before validating the row again.
+    - If the changed rows pass the validation, the changed row is removed from the memory.
+    - If the changed rows fail the validation, the validator does not report an error immediately but waits for a certain time interval before validating the row again.
     - If a row has not been validated successfully for a long time (specified by the user), the validator marks the row as an error row and writes it to the meta database in the downstream. You can view the information of error rows by querying the migration task. For details, refer to [View the validation status](#view-the-validation-status) and [Handle error rows](#handle-error-rows).
 
 ## Limitations
 
-- The source table to be validated must have a primary key or a unique key with the not null constraint.
+- The source table to be validated must have a primary key or a not-null unique key.
 - When DM migrates DDL from the upstream database, the following limitations apply:
     - The DDL must not change the primary key, or change the order of columns, or delete existing columns.
     - The table must not be dropped.

@@ -148,7 +148,7 @@ validators:
     # none: does not validate the data.
     mode: full           # Possible values are "full", "fast", and "none". The default value is "none", which does not validate the data.
     worker-count: 4      # The number of validation workers in the background. The default value is 4.
-    row-error-delay: 30m # If a row is not validated within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
+    row-error-delay: 30m # If a row cannot pass the validation within the specified time, it will be marked as an error row. The default value is 30m, which means 30 minutes.
 
 # ----------- Instance configuration -----------
 mysql-instances:
