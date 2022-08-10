@@ -857,6 +857,17 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable controls whether the calculated commit ts would be used for async commit. By default the two phase committer would request a new ts from the pd server and use it as the commit ts, and linearizability is guaranteed for all the concurrent transactions. This ts fetching cost could be saved if this variable is set to 'ON' which means the calculated commit is used, the cost is that causal consistency could not be guaranteed but not linearizability, more details could be referenced in this [document](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/). If the usage scenario requires only causal consistency, this vairable could be set to 'ON' to improve performance.
 
+### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: String
+- This variable is used to get the last transaction info within the current session. The information includes:
+    - The transaction scope.
+    - The start and commit ts.
+    - The transaction commit mode, 2pc/1pc/async commit.
+    - The transaction fallback information from async commit or 1pc to 2pc.
+    - The error encountered.
 
 ### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
 
