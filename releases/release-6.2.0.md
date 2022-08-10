@@ -45,7 +45,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     @[Hawkson-jee](https://github.com/Hawkson-jee)
 
-* *iDB Dashboard adds a Monitoring page
+* TiDB Dashboard adds a Monitoring page
 
     The new Monitoring page shows key indicators required for performance tuning, based on which you can analyze and tune performance with reference to [Performance tuning by database time](/performance-tuning-methods.md).
 
@@ -65,7 +65,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     Too many lock conflicts might cause serious performance problems, and detecting the lock conflicts is a necessary way to troubleshoot such problems. Before v6.2.0, TiDB supported viewing the lock conflict relationships using the `INFORMATION_SCHEMA.DATA_LOCK_WAITS` system view, but it does not show the waiting information of optimistic transactions. TiDB v6.2.0 extends the `DATA_LOCK_WAITS` view and lists the optimistic transactions blocked by pessimistic locks in the view. This feature helps users detect lock conflicts quickly, and provides a basis for improving the application, thus reducing the frequency of lock conflicts and improving the overall performance.
 
-    [User document](/information-schema/information-schema-data-lock-waits.md), [#34609](https://github.com/pingcap/tidb/issues/34609), @[longfangsong](https://github.com/longfangsong))
+    [User document](/information-schema/information-schema-data-lock-waits.md), ([#34609](https://github.com/pingcap/tidb/issues/34609), @[longfangsong](https://github.com/longfangsong))
 
 ### Performance
 
@@ -341,7 +341,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
     - Refine error handling of the TiFlash MPP engine, thereby enhancing stability ([#5095](https://github.com/pingcap/tiflash/issues/5095), @[windtalker](https://github.com/windtalker), @[yibin87](https://github.com/yibin87))
 
-    - Optimize the comparison and sorting of UTF8_BIN and UTF8MB4_BIN collations [#5294](https://github.com/pingcap/tiflash/issues/5294), @[solotzg](https://github.com/solotzg)
+    - Optimize the comparison and sorting of UTF8_BIN and UTF8MB4_BIN collations ([#5294](https://github.com/pingcap/tiflash/issues/5294), @[solotzg](https://github.com/solotzg))
 
 + Tools
 
@@ -353,7 +353,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
         - Reduce performance overhead caused by runtime context switch in multi-Region scenarios ([#5610](https://github.com/pingcap/tiflow/issues/5610), @[hicqu](https://github.com/hicqu))
 
-        - Optimize redo log performance, and fix meta and data inconsistency problems ([#6011](https://github.com/pingcap/tiflow/issues/6011), @[CharlesCheung96](https://github.com/CharlesCheung96), [#5924](https://github.com/pingcap/tiflow/issues/5924), @[zhaoxinyu](https://github.com/zhaoxinyu), [#6277] https://github.com/pingcap/tiflow/issues/6277, @[hicqu](https://github.com/hicqu))
+        - Optimize redo log performance, and fix meta and data inconsistency problems ([#6011](https://github.com/pingcap/tiflow/issues/6011), @[CharlesCheung96](https://github.com/CharlesCheung96), [#5924](https://github.com/pingcap/tiflow/issues/5924), @[zhaoxinyu](https://github.com/zhaoxinyu), [#6277](https://github.com/pingcap/tiflow/issues/6277), @[hicqu](https://github.com/hicqu))
 
     - TiDB Lightning
 
