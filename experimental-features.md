@@ -13,11 +13,7 @@ This document introduces the experimental features of TiDB in different versions
 + [Raft Engine](/tikv-configuration-file.md#raft-engine). (Introduced in v5.4)
 + [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
 + [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
-<<<<<<< HEAD
-=======
-+ [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics). (Introduced in v6.1.0)
 + [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
->>>>>>> 37d1de492 (Add fast analyze to experimental document (#9905))
 
 ## Stability
 
