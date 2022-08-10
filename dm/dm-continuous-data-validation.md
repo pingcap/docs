@@ -270,7 +270,7 @@ The detailed implementation of continuous data validation is as follows:
 5. The validation worker performs the data validation. If the validation mode is `full`, the validation worker compares data of the changed rows with data of the downstream database. if the validation mode is `fast`, the validation worker only checks the existence of the changed rows.
     - If the changed rows pass the validation, the changed row is removed from the memory.
     - If the changed rows fail the validation, the validator does not report an error immediately but waits for a certain time interval before validating the row again.
-    - If a row has not been validated successfully for a long time (specified by the user), the validator marks the row as an error row and writes it to the meta database in the downstream. You can view the information of error rows by querying the migration task. For details, refer to [View the validation status](#view-the-validation-status) and [Handle error rows](#handle-error-rows).
+    - If a changed row cannot pass the validation within the specified time (specified by the user), the validator marks the row as an error row and writes it to the meta database in the downstream. You can view the information of error rows by querying the migration task. For details, refer to [View the validation status](#view-the-validation-status) and [Handle error rows](#handle-error-rows).
 
 ## Limitations
 
