@@ -108,6 +108,7 @@ You need to prepare an EC2 to run the following data export task. It's better to
     export_endpoint="<the endpoint for Amazon Aurora MySQL>"
     # You will use the s3 url when you create importing task
     backup_dir="s3://<bucket name>/<backup dir>"
+    s3_bucket_region="<bucket_region>"
 
     # Use `tiup -- dumpling` instead if "flag needs an argument: 'h' in -h" is prompted for TiUP versions earlier than v1.8
     tiup dumpling \
@@ -119,6 +120,7 @@ You need to prepare an EC2 to run the following data export task. It's better to
     --threads 8 \
     -o "$backup_dir" \
     --consistency="none" \
+    --s3.region="$s3_bucket_region" \
     -r 200000 \
     -F 256MiB
     ```
