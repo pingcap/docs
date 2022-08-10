@@ -973,6 +973,16 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
+
+### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: String
+- Default value: `strict`
+- This variable is used to control the read consistency for an auto-commit read statement. If the value is set to `weak`, the transaction semantics like atomicity and distributed consistency like linearizability are not guaranteed. The locks countered by the read statment would be skipped directly and the read execution could be faster. For user scenario the auto-commit read needs to return results fast and weak consistency read results is accpeted this variable, the weak consistency read mode could be used. 
+
+
 ### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL
