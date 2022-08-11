@@ -979,7 +979,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Persists to cluster: No
 - Type: String
 - Default value: `strict`
-- This variable is used to control the read consistency for an auto-commit read statement. If the value is set to `weak`, the transaction semantics like atomicity and distributed consistency like linearizability are not guaranteed. The locks encountered by the read statement would be skipped directly and the read execution could be faster. For user scenario the auto-commit read needs to return fast and weak consistency read results are acceptable. The weak consistency read mode could be used.
++ This variable is used to control the read consistency for an auto-commit read statement.
++ If the variable value is set to `weak`, the locks encountered by the read statement are skipped directly and the read execution might be faster, which is the weak consistency read mode. However, the transaction semantics (such as atomicity) and distributed consistency (such as linearizability) are not guaranteed.
++ For user scenarios where the auto-commit read needs to return fast and weak consistency read results are acceptable, you can use the weak consistency read mode.
 
 ### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
 
