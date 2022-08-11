@@ -20,7 +20,7 @@ With TiDB Cloud, you can get the massive scale and resiliency of TiDB databases 
 
 - **Productivity Boosting**
 
-    Deploy, scale, monitor, and manage TiDB clusters in just a few clicks, through an easy-to-use web-based management platform.
+    Boost your productivity with easy deployment, operations, and monitoring on TiDB Cloud in just a few clicks, through an easy-to-use web-based management platform.
 
 - **Real-Time Analytics**
 
