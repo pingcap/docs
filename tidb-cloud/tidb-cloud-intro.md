@@ -14,7 +14,7 @@ TiDB Cloud allows users with no training to handle complex tasks such as infrast
 
 - **Fully-Managed TiDB Service**
 
-    Deploy, scale, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
+    Deploy, scale, monitor, and manage TiDB clusters in just a few clicks, through an easy-to-use web-based management platform.
 
 - **Enterprise Grade Security**
 
@@ -28,25 +28,13 @@ TiDB Cloud allows users with no training to handle complex tasks such as infrast
 
     Increase productivity and shorten time-to-market for your applications without the need to rewrite your SQL code.
 
-- **More Control Over Scaling**
+- **Fast and Customized Scaling**
 
-    Scale your performance and storage nodes separately to custom tailor to your business needs.
-
-- **Multi-Cloud Support**
-
-    Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP, with more platforms on the way.
+    Elastically and transparently scale to hundreds of nodes for critical workloads without changing business logic. And you can scale your performance and storage nodes separately to custom tailor to your business needs.
 
 - **High Availability and Reliability**
 
     Data is replicated across multiple Availability Zones and backed up daily to ensure business continuity for mission-critical applications.
-
-- **Scalable Multi-Master**
-
-    Scale without restrictions and avoid bottlenecks with read and write capability on every node
-
-- **Productivity Boosting**
-
-    Boost your productivity with easy deployment, operations, and monitoring on TiDB Cloud in just a few clicks.
 
 - **High Concurrency**
 
