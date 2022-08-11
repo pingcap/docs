@@ -109,7 +109,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     By enabling the Fine Grained Shuffle feature, the window function can be executed from in a single thread to in multiple threads. It reduces the query response time significantly. This feature does not change user behavior. You can control the granularity of the shuffle by adjusting the value of the variables.
 
-    [User document](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620) [4631](https://github.com/pingcap/tiflash/issues/4631) @[guo-shaoge](https://github.com/guo-shaoge)
+    [User document](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620) [#4631](https://github.com/pingcap/tiflash/issues/4631) @[guo-shaoge](https://github.com/guo-shaoge)
 
 * TiFlash supports a newer version of storage format
 
@@ -306,8 +306,8 @@ In 6.2.0, the key new features or improvements are as follows:
 - Since TiDB v6.2.0, the `SELECT tidb_version()` statement also returns Store type (tikv or unistore).
 - TiDB no longer has hidden system variables.
 - TiDB v6.2.0 introduces two new system tables:
-    - `information_schema.variables_info`: used for viewing information about TiDB system variables.
-    - `performance_schema.session_variables`: used for viewing information about TiDB session-level system variables.
+    - `INFORMATION_SCHEMA.VARIABLES_INFO`: used for viewing information about TiDB system variables.
+    - `PERFORMANCE_SCHEMA.SESSION_VARIABLES`: used for viewing information about TiDB session-level system variables.
 
 ## Removed feature
 
@@ -380,20 +380,20 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Fix the issue that `SHOW DATABASES LIKE …` is case-sensitive [#34766](https://github.com/pingcap/tidb/issues/34766) @[e11jah](https://github.com/e11jah)
     - Fix the issue that `SHOW TABLE STATUS LIKE ...` is case-sensitive [#7518](https://github.com/pingcap/tidb/issues/7518) @[likzn](https://github.com/likzn)
     - Fix the issue that `max-index-length` still reports an error in non-strict mode [#34931](https://github.com/pingcap/tidb/issues/34931) @[e11jah](https://github.com/e11jah)
-    - Fix the issue that `alter column xx drop default` does not work [#35018](https://github.com/pingcap/tidb/issues/35018) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that `ALTER COLUMN XX DROP DEFAULT` does not work [#35018](https://github.com/pingcap/tidb/issues/35018) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that when you create a table, the default value and the type of a column are not consistent and are not automatically corrected [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - Fix the issue that data in the `mysql.columns_priv` table is not deleted synchronously after you run `DROP USER`  [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
+    - Fix the issue that data in the `mysql.columns_priv` table is not deleted synchronously after you run `DROP USER` [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue of DDL jam by disallowing creating tables within the schemas of some systems [#35205](https://github.com/pingcap/tidb/issues/35205) @[tangenta](https://github.com/tangenta)
     - Fix the issue that querying partitioned tables might report "index-out-of-range" and "non used index" errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
     - Fix the issue that `INTERVAL expr unit + expr` might report an error [#30253](https://github.com/pingcap/tidb/issues/30253) @[mjonss](https://github.com/mjonss)
     - Fix a bug that a temporary table cannot be found after being created in a transaction [#35644](https://github.com/pingcap/tidb/issues/35644) @[djshow832](https://github.com/djshow832)
-    - Fix the panic issue that occurs when setting collation to the enum column [#31637](https://github.com/pingcap/tidb/issues/31637) @[wjhuang2016](https://github.com/wjhuang2016)
+    - Fix the panic issue that occurs when setting collation to the `ENUM` column [#31637](https://github.com/pingcap/tidb/issues/31637) @[wjhuang2016](https://github.com/wjhuang2016)
     - Fix the issue that when one PD node goes down, the query of `information_schema.TIKV_REGION_STATUS` fails due to not retrying other PD nodes [#35708](https://github.com/pingcap/tidb/issues/35708) @[tangenta](https://github.com/tangenta)
-    - Fix the issue that `SHOW CREATE TABLE …` cannot correctly display set or enum columns after `set character_set_results = GBK` [#31338](https://github.com/pingcap/tidb/issues/31338) @[tangenta](https://github.com/tangenta)
+    - Fix the issue that `SHOW CREATE TABLE …` cannot correctly display set or `ENUM` columns after `SET character_set_results = GBK` [#31338](https://github.com/pingcap/tidb/issues/31338) @[tangenta](https://github.com/tangenta)
     - Fix the incorrect scope of the system variables `tidb_log_file_max_days` and `tidb_config` [#35190](https://github.com/pingcap/tidb/issues/35190) @[morgo](https://github.com/morgo)
-    - Fix the issue that the output of `SHOW CREATE TABLE` is not compatible with MySQL for the enum or set column [#36317](https://github.com/pingcap/tidb/issues/36317) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that the output of `SHOW CREATE TABLE` is not compatible with MySQL for the `ENUM` or `SET` column [#36317](https://github.com/pingcap/tidb/issues/36317) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that when creating a table, the behavior of a `LONG BYTE` column is not compatible with MySQL [#36239](https://github.com/pingcap/tidb/issues/36239) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that `auto_increment=x` does not take effect on temporary tables [#36224](https://github.com/pingcap/tidb/issues/36224) @[djshow832](https://github.com/djshow832)
+    - Fix the issue that `auto_increment = x` does not take effect on temporary tables [#36224](https://github.com/pingcap/tidb/issues/36224) @[djshow832](https://github.com/djshow832)
     - Fix the wrong default value when modifying columns concurrently [#35846](https://github.com/pingcap/tidb/issues/35846) @[wjhuang2016](https://github.com/wjhuang2016)
     - Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906) @[sticnarf](https://github.com/sticnarf)
     - Fix the issue that the column list does not work in the LOAD DATA statement [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
