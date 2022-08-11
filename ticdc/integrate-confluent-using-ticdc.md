@@ -5,7 +5,7 @@ summary: Learn how to stream TiDB data to the Confluent Cloud using TiCDC, and h
 
 # Integrate Data with Confluent Cloud
 
-Confluent is an Apache Kafka-compatible streaming data platform that provides strong integration capabilities. On this platform, you can access, store, and manage non-stop real-time streaming data.
+Confluent is an Apache Kafka-compatible streaming data platform that provides strong data integration capabilities. On this platform, you can access, store, and manage non-stop real-time streaming data.
 
 Starting from TiDB v6.1.0, TiCDC supports replicating incremental data to Confluent in Avro format. This document introduces how to replicate TiDB incremental data to Confluent using [TiCDC](/ticdc/ticdc-overview.md), and further replicate data to ksqlDB, Snowflake, and SQL Server via Confluent Cloud. The organization of this document is as follows:
 
@@ -14,7 +14,7 @@ Starting from TiDB v6.1.0, TiCDC supports replicating incremental data to Conflu
 3. Create Connectors that replicate data from Confluent Cloud to ksqlDB, Snowflake, and SQL Server.
 4. Write data to TiDB using go-tpc, and observe data changes in ksqlDB, Snowflake, and SQL Server.
 
-The preceding steps are performed in a lab environment. You can also deploy a cluster for a production environment by referring to these steps.
+The preceding steps are performed in a lab environment. You can also deploy a cluster in a production environment by referring to these steps.
 
 ## Replicate incremental data to Confluent Cloud
 
@@ -22,7 +22,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 1. Deploy a TiDB cluster with TiCDC included.
 
-    In a lab or testing environment, you can deploy a TiCDC quickly by using TiUP Playground.
+    In a lab or testing environment, you can deploy a TiDB cluster with TiCDC quickly by using TiUP Playground.
 
     ```shell
     tiup playground --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
@@ -81,7 +81,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 1. Create a changefeed configuration file.
 
-    As required by Avro and Confluent Connector, incremental data of each table should be sent to an independent topic, and a partition should be dispatched for each event based on the primary key value. Therefore, you need to create a changefeed configuration file `changefeed.conf` with the following contents:
+    As required by Avro and Confluent Connector, incremental data of each table must be sent to an independent topic, and a partition must be dispatched for each event based on the primary key value. Therefore, you need to create a changefeed configuration file `changefeed.conf` with the following contents:
 
     ```
     [sink]
@@ -135,7 +135,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 ### Step 4. Write data to generate change logs
 
-After the preceding steps are done, TiCDC sends change logs of incremental data in the TiDB cluster to Confluent Cloud. This section describes how to write data to generate change logs.
+After the preceding steps are done, TiCDC sends change logs of incremental data in the TiDB cluster to Confluent Cloud. This section describes how to write data into TiDB to generate change logs.
 
 1. Simulate service workload.
 
