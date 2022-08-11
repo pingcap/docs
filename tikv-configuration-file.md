@@ -1592,12 +1592,12 @@ Configuration items related to log backup.
 
 ### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
 
-+ The size limit on log backup data. Once this limit is reached, data is automatically flushed to external storage.
++ The size limit on log backup data. Once this limit is reached, the backup data is automatically flushed to external storage.
 + Default value: 256MB
 
 ### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
 
-+ The quota of cache used for storing incremental scan data.
++ The quota of cache used for storing incremental scan data during log backup.
 + Default value: `min(Total machine memory * 10%, 512 MB)`
 
 ### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
