@@ -33,6 +33,7 @@ This document introduces the experimental features of TiDB in different versions
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md).
 + [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
 + [Using `ALTER TABLE` to modify multiple columns or indexes](/system-variables.md#tidb_enable_change_multi_schema) (Introduced in v5.0.0)
++ [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 
 ## Configuration management
 
