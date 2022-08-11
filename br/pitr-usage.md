@@ -9,7 +9,7 @@ This document describe how to deploy the relevant tool and use point-in-time rec
 
 Assume that you have deployed a TiDB cluster in the production environment on AWS, and the business team puts forward the following requirements:
 
-- Back up the data changes in time. When the database encounters an exception, you can quickly recover the business data quickly with a minimum data loss (only a few minutes of data loss is tolerable).
+- Back up the data changes in time. When the database encounters an error, you can quickly recover the application data with a minimum data loss (only a few minutes of data loss is tolerable).
 - Perform business audits every month at no specific time. When an audit request is received, you must provide a database to query the data at a certain time point in the past month as requested.
 
 With PITR, you can satisfy the above requirements.
@@ -20,7 +20,7 @@ To use PITR, you need to deploy a TiDB cluster >= v6.2.0 and update BR to the sa
 
 The following table shows the recommended hardware resources for using PITR in a TiDB cluster.
 
-| Component | CPU | Memory | Local Storage  | AWS Instance  | Number of Instances |
+| Component | CPU | Memory | Local storage  | AWS instance  | Number of instances |
 | --- | --- | --- | --- | --- | --- |
 | TiDB | 8 core+ | 16 GB+ | SAS | c5.2xlarge | 2 |
 | PD | 8 core+ | 16 GB+ | SSD | c5.2xlarge | 3 |
@@ -31,7 +31,7 @@ The following table shows the recommended hardware resources for using PITR in a
 > **Note:**
 >
 > - When BR runs the backup and restoration tasks, it needs to access PD and TiKV. Make sure that BR and all PD and TiKV servers are connected.
-> - BR and PD servers must set the same time zone.
+> - BR and PD servers must use the same time zone.
 
 Deploy or upgrade a TiDB cluster using TiUP:
 
@@ -55,10 +55,10 @@ The detailed steps are as follows:
 
 1. Create a directory in S3 to store the backup data. The directory in this example is `s3://tidb-pitr-bucket/backup-data`.
 
-    1. Create a bucket. You can choose an existing S3 to store the backup data. If there is none, refer to [AWS official documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and create an S3 bucket. In this example, the bucket name is `tidb-pitr-bucket`.
-    2. Create a directory. In the bucket (`tidb-pitr-bucket`), create a directory named `backup-data`. For detailed steps, refer to [AWS official documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+    1. Create a bucket. You can choose an existing S3 to store the backup data. If there is none, refer to [AWS documentation - Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and create an S3 bucket. In this example, the bucket name is `tidb-pitr-bucket`.
+    2. Create a directory for your backup data. In the bucket (`tidb-pitr-bucket`), create a directory named `backup-data`. For detailed steps, refer to [AWS documentation -  Organizing objects in the Amazon S3 console using folders](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
 
-2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions by the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS official documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
+2. Configure permissions for BR and TiKV to access the S3 directory. It is recommended to grant permissions using the IAM method, which is the most secure way to access the S3 bucket. For detailed steps, refer to [AWS documentation -  Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html). The required permissions are as follows:
 
     - TiKV and BR in the backup cluster need `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
     - TiKV and BR in the restoration cluster need `s3:ListBucket` and `s3:GetObject` permissions of the `s3://tidb-pitr-bucket/backup-data` directory.
@@ -70,7 +70,7 @@ The detailed steps are as follows:
 
 ## Determine the backup policy
 
-To achieve the requirements of minimum data loss, quick recovery, and business audits, you can set the backup policy as follows:
+To meet the requirements of minimum data loss, quick recovery, and business audits within a month, you can set the backup policy as follows:
 
 - Run the log backup to continuously back up the data change in the database.
 - Run a snapshot backup at 00:00 every two days.
@@ -78,7 +78,7 @@ To achieve the requirements of minimum data loss, quick recovery, and business a
 
 ## Run log backup
 
-After the log backup task is started, the log backup program runs in the TiKV cluster to continuously send the data change in the database to the S3 storage. To start a log backup task, run the following command:
+After the log backup task is started, the log backup process runs in the TiKV cluster to continuously send the data change in the database to the S3 storage. To start a log backup task, run the following command:
 
 ```shell
 tiup br log start --task-name=pitr --pd=172.16.102.95:2379 --storage='s3://tidb-pitr-bucket/backup-data/log-backup'
@@ -102,7 +102,7 @@ checkpoint[global]: 2022-05-13 11:31:47.2 +0800; gap=4m53s
 
 ## Run snapshot backup
 
-You can run snapshot backup tasks at a regular basis using an automatic tool such as crontab. For example, you can run a snapshot backup at 00:00 every two days.
+You can run snapshot backup tasks on a regular basis using an automatic tool such as crontab. For example, run a snapshot backup at 00:00 every two days.
 
 The following are two snapshot backup examples:
 
@@ -120,7 +120,7 @@ The following are two snapshot backup examples:
 
 ## Run PITR
 
-Assume that you need to query data at 2022/05/15 18:00:00. You can use PITR to restore a cluster to that timestamp by restoring a snapshot backup taken at 2022/05/14 and a log backup between the snapshot and 2022/05/15 18:00:00.
+Assume that you need to query the data at 2022/05/15 18:00:00. You can use PITR to restore a cluster to that timestamp by restoring a snapshot backup taken at 2022/05/14 and a log backup between the snapshot and 2022/05/15 18:00:00.
 
 The command is as follows:
 
