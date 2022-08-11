@@ -22,10 +22,10 @@ In 6.2.0, the key new features or improvements are as follows:
 * BR supports restoring user and privilege data, making backup and restore smoother.
 * TiCDC unlocks more data replication scenarios by supporting filtering specific types of DDL events.
 * A `SAVEPOINT` mechanism is introduced, with which you can flexibly control the rollback points within a transaction.
-* TiDB supports adding, dropping, and modifying multiple columns or indexes with merely one `ALTER TABLE` statement.
+* TiDB supports adding, dropping, and modifying multiple columns or indexes with only one `ALTER TABLE` statement.
 * Backing up and restoring RawKV across clusters is now supported.
 
-## New Features
+## New features
 
 ### SQL
 
@@ -376,7 +376,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Fix the issue that a partition is incorrectly pruned if a partition key is used in the query condition and the collate is different from the one in the query partition table [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
     - Fix the issue that `SET ROLE` cannot match the granted role if there are capital letters in the host [#33061](https://github.com/pingcap/tidb/issues/33061) @[morgo](https://github.com/morgo)
     - Fix the issue that columns with `auto_increment` cannot be dropped [#34891](https://github.com/pingcap/tidb/issues/34891) @[Defined2014](https://github.com/Defined2014)
-    - Fix the issue that `SHOW CONFIG` shows some configuration items that have been removed  [#34867](https://github.com/pingcap/tidb/issues/34867) @[morgo](https://github.com/morgo)
+    - Fix the issue that `SHOW CONFIG` shows some configuration items that have been removed [#34867](https://github.com/pingcap/tidb/issues/34867) @[morgo](https://github.com/morgo)
     - Fix the issue that `SHOW DATABASES LIKE …` is case-sensitive [#34766](https://github.com/pingcap/tidb/issues/34766) @[e11jah](https://github.com/e11jah)
     - Fix the issue that `SHOW TABLE STATUS LIKE ...` is case-sensitive [#7518](https://github.com/pingcap/tidb/issues/7518) @[likzn](https://github.com/likzn)
     - Fix the issue that `max-index-length` still reports an error in non-strict mode [#34931](https://github.com/pingcap/tidb/issues/34931) @[e11jah](https://github.com/e11jah)
