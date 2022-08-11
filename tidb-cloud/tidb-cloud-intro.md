@@ -12,51 +12,51 @@ category: intro
 
 TiDB Cloud allows users with no training to handle complex tasks such as infrastructure management and cluster deployment. You will also get the massive scale and resiliency of TiDB databases in a fully managed Database as a Service (DBaaS), as well as:
 
-- Real-Time Analytics
+- **Real-Time Analytics**
 
     Run real-time analytical queries with our Hybrid Transactional and Analytical Processing (HTAP) capabilities.
 
-- MySQL Compatible
+- **MySQL Compatible**
 
     Increase productivity and shorten time-to-market for your applications without the need to rewrite your SQL code.
 
-- More Control Over Scaling
+- **More Control Over Scaling**
 
     Scale your performance and storage nodes separately to custom tailor to your business needs.
 
-- Fully-Managed TiDB Service
+- **Fully-Managed TiDB Service**
 
     Deploy, scale, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
 
-- Multi-Cloud Support
+- **Multi-Cloud Support**
 
     Stay flexible without cloud vendor lock-in. TiDB Cloud is currently available on AWS and GCP, with more platforms on the way.
 
-- High Availability and Reliability
+- **High Availability and Reliability**
 
     Data is replicated across multiple Availability Zones and backed up daily to ensure business continuity for mission-critical applications.
 
-- Scalable Multi-Master
+- **Scalable Multi-Master**
 
     Scale without restrictions and avoid bottlenecks with read and write capability on every node
 
-- Productivity Boosting
+- **Productivity Boosting**
 
     Boost your productivity with easy deployment, operations, and monitoring on TiDB Cloud in just a few clicks.
 
-- High Concurrency
+- **High Concurrency**
 
     Allow thousands of users to simultaneously query your data without losing performance standards.
 
-- Enterprise Grade Security
+- **Enterprise Grade Security**
 
     Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is SOC 2 Type 2 certified.
 
-- World-Class Support
+- **World-Class Support**
 
     Get the same world-class support through our support portal, email, chat, or video conferencing.
 
-- Simple Pricing Plans
+- **Simple Pricing Plans**
 
     Pay only for what you use, with transparent and upfront pricing with no hidden fees.
 
