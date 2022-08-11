@@ -16,17 +16,9 @@ TiDB Cloud allows users with no training to handle complex tasks such as infrast
 
     Deploy, scale, monitor, and manage TiDB clusters in just a few clicks, through an easy-to-use web-based management platform.
 
-- **Enterprise Grade Security**
-
-    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is SOC 2 Type 2 certified.
-
 - **Real-Time Analytics**
 
     Run real-time analytical queries with our Hybrid Transactional and Analytical Processing (HTAP) capabilities.
-
-- **MySQL Compatible**
-
-    Increase productivity and shorten time-to-market for your applications without the need to rewrite your SQL code.
 
 - **Fast and Customized Scaling**
 
@@ -39,6 +31,14 @@ TiDB Cloud allows users with no training to handle complex tasks such as infrast
 - **High Concurrency**
 
     Allow thousands of users to simultaneously query your data without losing performance standards.
+
+- **MySQL Compatibility**
+
+    Increase productivity and shorten time-to-market for your applications without the need to rewrite your SQL code.
+
+- **Enterprise Grade Security**
+
+    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is SOC 2 Type 2 certified.
 
 - **World-Class Support**
 
