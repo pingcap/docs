@@ -10,9 +10,9 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## August 16, 2022
 
-* Add 2 vCPU, 8 GiB node size of TiDB and TiKV as beta.
+* Add `2 vCPU, 8 GiB` node size of TiDB and TiKV as beta.
 
-    * For each 2 vCPU, 8 GiB TiKV node, the storage size is between 200 GiB and 500 GiB.
+    * For each `2 vCPU, 8 GiB` TiKV node, the storage size is between 200 GiB and 500 GiB.
 
     * Suggested usage scenarios:
 
