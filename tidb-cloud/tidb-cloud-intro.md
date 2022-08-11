@@ -10,7 +10,13 @@ category: intro
 
 ## Why TiDB Cloud
 
-TiDB Cloud allows developers, DevOps, and DBAs with little or no training to handle once-complex tasks such as infrastructure management and cluster deployment. You will also get the massive scale and resiliency of TiDB databases in a fully managed Database as a Service (DBaaS), as well as:
+TiDB Cloud allows users with little or no training to handle once-complex tasks such as infrastructure management and cluster deployment easily.
+
+- Developers and DBAs can rapidly analyze large amounts of data across multiple datasets.
+
+- Enterprises of all sizes can easily deploy and manage TiDB Cloud while eliminating friction to their business growth all without prepayment.
+
+You will also get the massive scale and resiliency of TiDB databases in a fully managed Database as a Service (DBaaS), as well as:
 
 - **Fully-Managed TiDB Service**
 
