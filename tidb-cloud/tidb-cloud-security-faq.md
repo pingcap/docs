@@ -25,7 +25,7 @@ TiDB Cloud provides multi-layer encryption protection measures for data at restï
 - In the data storage layer, TiDB Cloud enables in-cloud service encryption by default, which protects the default encryption of EBS hard drives and S3 storage buckets.
 - In the data dumping layer, TiDB Cloud supports users to export data to S3 storage buckets under their cloud accounts.
 
-## What are SSO login methods supported by TiDB Cloud?
+## What SSO login methods are supported by TiDB Cloud?
 
 TiDB Cloud supports SSO login using Google or GitHub accounts.
 
