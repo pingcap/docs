@@ -8,6 +8,10 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## August 9, 2022
+
+* Add the support of the GCP region `Osaka` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
+
 ## August 2, 2022
 
 * The `4 vCPU, 16 GiB` node size of TiDB and TiKV is now in General Availability (GA).

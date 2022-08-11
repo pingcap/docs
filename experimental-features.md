@@ -12,6 +12,7 @@ This document introduces the experimental features of TiDB in different versions
 + [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
 + [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
 + [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics). (Introduced in v6.1.0)
++ [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
 
 ## Stability
 
@@ -29,6 +30,7 @@ Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out
 + [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
 + [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
 + [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
++ [Using `ALTER TABLE` to modify multiple columns or indexes](/system-variables.md#tidb_enable_change_multi_schema) (Introduced in v5.0.0)
 
 ## Storage
 

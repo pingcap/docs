@@ -70,6 +70,10 @@ To make these charges easier to view, your TiDB Cloud bills and invoices aggrega
 
 If you are using the private endpoint connection with AWS PrivateLink, the cost is $0.01/hour per VPC per endpoint. For details, see [AWS PrivateLink pricing - Interface Endpoint pricing](https://aws.amazon.com/privatelink/pricing/?nc1=h_ls).
 
+## Support service cost
+
+If you have subscribed to one of the **Standard**, **Enterprise**, or **Premium** [support plan](/tidb-cloud/tidb-cloud-support.md), you are charged for the support service on a monthly basis. The billing information is included in your monthly bill.
+
 ## Invoices
 
 If you are the owner or billing administrator of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
@@ -78,7 +82,7 @@ If you are the owner or billing administrator of your organization, you can mana
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, and data transmission costs in your organization.
+After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, and data transmission costs in your organization.
 
 - TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
@@ -98,7 +102,7 @@ To view the list of invoices, perform the following steps:
 
 If you are the owner or billing administrator of the organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, and project splitting information.
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, and project splitting information.
 
 > **Note:**
 >
