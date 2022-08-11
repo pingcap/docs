@@ -683,7 +683,7 @@ async io enabled commit = max(
 )
 ```
 
-TiKV supports Async IO Raft since v5.3.0(only enabled when [`store-io-pool-size > 0`](/tikv-configuration-file#store-io-pool-size-span-classversion-marknew-in-v530span)), which changes the process of commit.
+TiKV supports Async IO Raft since v5.3.0(only enabled when [`store-io-pool-size > 0`](/tikv-configuration-file.md#store-io-pool-size-span-classversion-marknew-in-v530span)), which changes the process of commit.
 
 ```text
 persist log locally duration =
