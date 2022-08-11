@@ -849,7 +849,6 @@ Constraint checking is always performed in place for pessimistic transactions (d
 > - If you have enabled TiDB Binlog, enabling this variable cannot improve the performance. To improve the performance, it is recommended to use [TiCDC](/ticdc/ticdc-overview.md) instead.
 > - Enabling this parameter only means that Async Commit becomes an optional mode of transaction commit. In fact, the most suitable mode of transaction commit is determined by TiDB.
 
-
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
 - Scope: SESSION
