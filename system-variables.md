@@ -868,7 +868,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
     - The transaction scope.
     - The start and commit TS.
     - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
-    - The transaction fallback information from async commit or 1pc to 2pc.
+    - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
     - The error encountered.
 
 ### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
