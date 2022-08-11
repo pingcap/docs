@@ -1758,8 +1758,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
 - Type: Float
-- Default value: ``
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost of a Golang goroutine in TiDB. It's used by the [Cost Model](/cost-model.md).
 
+### tidb_opt_cop_cpu_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost of TiKV Coprocessor to process one row. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_correlation_exp_factor
 
@@ -1782,6 +1792,33 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `0.9`
 - Range: `[0, 1]`
 - This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
+
+### tidb_opt_cop_cpu_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the CPU cost of TiDB to process one row. It's used by the [Cost Model](/cost-model.md).
+
+### tidb_opt_desc_scan_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `3.0`
+- Indicates the cost of TiKV to scan one row in descending order. It's used by the [Cost Model](/cost-model.md).
+
+### tidb_opt_disk_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.5`
+- Indicates the I/O cost of TiDB to read/write one byte from/to temporary disk. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_distinct_agg_push_down
 
@@ -1862,6 +1899,15 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
 - If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
 
+### tidb_opt_memory_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `0.001`
+- Indicates the memory cost of TiDB to store one row. It's used by the [Cost Model](/cost-model.md).
+
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1869,6 +1915,15 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Boolean
 - Default value: `ON`
 - Specifies whether to allow using outer table as the build side in outer join for TiFlash.
+
+### tidb_opt_network_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.0`
+- Indicates the net cost of transferring 1 byte through the network. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
@@ -1910,6 +1965,24 @@ explain select * from t where age=5;
 - Type: Boolean
 - Default value: `OFF`
 - Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
+
+### tidb_opt_scan_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `1.5`
+- Indicates the cost of TiKV to scan one row in ascending order. It's used by the [Cost Model](/cost-model.md).
+
+### tidb_opt_seek_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Range: `[0, 2147483647]`
+- Default value: `20`
+- Indicates the start-up cost of TiDB to request data from TiKV. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
 
