@@ -16,7 +16,7 @@ TiDB Cloud allows users with little or no training to handle complex tasks such 
 
 - Enterprises of all sizes can easily deploy and manage TiDB Cloud while eliminating friction to their business growth all without prepayment.
 
-You will also get the massive scale and resiliency of TiDB databases in a fully managed Database as a Service (DBaaS), as well as:
+You will get the massive scale and resiliency of TiDB databases in a fully managed Database as a Service (DBaaS), as well as:
 
 - **Fully-Managed TiDB Service**
 
