@@ -42,18 +42,18 @@ TiDB Cloud supports private endpoints only Dedicated Tier clusters. You are expe
 
 #### Step 1. Find the entrance
 
-To find the entrance to creating a private endpoint, take one of the following methods:
+To find the entrance to creating a private endpoint, take the following steps:
 
-- From the **Project Settings** page:
+1. On the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
+2. Click **Add** in the upper-right corner to open the creation page.
 
-    1. On the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
-    2. Click **Add** in the upper-right corner to open the creation page.
-
-- From the **Connect to TiDB** dialog of an active cluster:
-
-    1. In the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
-    2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
-    3. Select the **Private Endpoint** tab. If no private endpoint has been created, click **Create** on the dialog to open the creation page.
+> **Tip:**
+>
+> Alternatively, you can find the entrance by following these steps:
+>
+> 1. In the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
+> 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
+> 3. Select the **Private Endpoint** tab. If no private endpoint has been created, click **Create** on the dialog to open the creation page.
 
 On the creation page, a flow bar is displayed indicating the stages of creating a private endpoint: **Choose Cluster** > **Service Endpoint** > **Interface Endpoint** > **Accept Endpoint Connection** > **Enable Private DNS**.
 
@@ -63,7 +63,7 @@ Click the drop-down list to choose a TiDB cluster for which you want to create a
 
 > **Note:**
 >
-> Before a cluster is created, it is not displayed in the drop-down list. You cannot create a private endpoint for a cluster that is not created.
+> Before a cluster is created, it is not displayed in the drop-down list.
 
 #### Step 3. Choose Service Endpoint Region
 
