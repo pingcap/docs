@@ -49,7 +49,7 @@ TiDB Cloud accounts consist of TiDB Cloud console accounts and TiDB database acc
 
         - Passwords are stored after being encrypted by bcrypt, not in plain text.
         - TiDB Cloud supports password policy management, including password complexity management, password reuse management, and password validity management.
-        - TiDB Cloud supports anti-brute force cracking of passwords. After several consecutive failed login attempts of a account, the account will be locked.
+        - TiDB Cloud supports anti-brute force cracking of passwords. After several consecutive failed login attempts of an account, the account will be locked.
 
     - SSO: GitHub and Google are currently supported. For SSO users, the account security is guaranteed by GitHub or Google.
 
@@ -65,7 +65,7 @@ TiDB Cloud manage roles at the following two levels:
 
     - To help you manage your organization securely, TiDB Cloud defines the following roles: Owner, Member, Billing Admin, and Billing Admin. For permissions of each role, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
 
-    Each user has a unique role in an organization and participates in the organization and project management based on the previleges of the role.
+        Each user has a unique role in an organization and participates in the organization and project management based on the previleges of the role.
 
     - Console user-defined roles are not supported.
 
