@@ -12,14 +12,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.1.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.2.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v6.1.0
+tiup cluster upgrade <cluster-name> v6.2.0
 ```
 
 ### Notes for upgrade
@@ -522,9 +522,14 @@ Execute the following command to resume a paused replication task:
 cdc cli changefeed resume --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
 ```
 
-In the above command:
-
 - `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to resume.
+- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default.
+- `--no-confirm`: when the replication is resumed, you do not need to confirm the related information. Defaults to `false`.
+
+> **Note:**
+>
+> - If the TSO specified in `--overwrite-checkpoint-ts` (`t2`) is larger than the current checkpoint TSO in the changefeed (`t1`), data between `t1` and `t2` will not be replicated to the downstream. This causes data loss. You can obtain `t1` by running `cdc cli changefeed query`.
+> - If the TSO specified in `--overwrite-checkpoint-ts` (`t2`) is smaller than the current checkpoint TSO in the changefeed (`t1`), TiCDC pulls data from an old time point (`t2`), which might cause data duplication (for example, if the downstream is MQ sink).
 
 #### Remove a replication task
 
@@ -633,9 +638,23 @@ ignore-txn-start-ts = [1, 2]
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
 rules = ['*.*', '!test.*']
 
-[mounter]
-# mounter thread counts, which is used to decode the TiKV output data.
-worker-num = 16
+# Event filter rules.
+# The detailed syntax is described in the event filter rules section.
+# The first event filter rule.
+[[filter.event-filters]]
+matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
+ignore-event = ["insert"] # Ignore insert events.
+ignore-sql = ["^drop", "add column"] # Ignore DDLs that start with "drop" or contain "add column".
+ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the condition "name = 'john'".
+ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
+ignore-update-old-value-expr = "age < 18" # Ignore update DMLs whose old value contains "age < 18".
+ignore-update-new-value-expr = "gender = 'male'" # Ignore update DMLs whose new value contains "gender = 'male'".
+
+# The second event filter rule.
+matcher = ["test.fruit"] # matcher is an allow list, which means this rule only applies to the fruit table in the test database.
+ignore-event = ["drop table"] # Ignore drop table events.
+ignore-sql = ["delete"] # Ignore delete DMLs.
+ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
@@ -653,10 +672,69 @@ dispatchers = [
 protocol = "canal-json"
 ```
 
+### Event filter rules <span class="version-mark">New in v6.2.0</span>
+
+Starting in v6.2.0, TiCDC supports event filter. You can configure event filter rules to filter out the DML and DDL events that meet the specified conditions.
+
+The following is an example of event filter rules:
+
+```toml
+[filter]
+# The event filter rules must be under the `[filter]` configuration. You can configure multiple event filters at the same time.
+
+[[filter.event-filters]]
+matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
+ignore-event = ["insert"] # Ignore insert events.
+ignore-sql = ["^drop", "add column"] # Ignore DDLs that start with "drop" or contain "add column".
+ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the condition "name = 'john'".
+ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
+ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs whose old value contains "age < 18" or "name = 'lili'".
+ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
+```
+
+The event filter rules must be under the `[filter]` configuration. For detailed configuration, refer to [Task configuration file](#task-configuration-file).
+
+Description of configuration parameters :
+
+- `matcher`: the database and table that this event filter rule applies to. The syntax is the same as [table filter](/table-filter.md).
+- `ignore-event`: the event type to be ignored. This parameter accepts an array of strings. You can configure multiple event types. Currently, the following event types are supported:
+
+| Event           | Type | Alias | Description         |
+| --------------- | ---- | -|--------------------------|
+| all dml         |      | |Matches all DML events       |
+| all ddl         |      | |Matches all DDL events         |
+| insert          | DML  | |Matches `insert` DML event      |
+| update          | DML  | |Matches `update` DML event      |
+| delete          | DML  | |Matches `delete` DML event      |
+| create schema   | DDL  | create database |Matches `create database` event |
+| drop schema     | DDL  | drop database  |Matches `drop database` event |
+| create table    | DDL  | |Matches `create table` event    |
+| drop table      | DDL  | |Matches `drop table` event      |
+| rename table    | DDL  | |Matches `rename table` event    |
+| truncate table  | DDL  | |Matches `truncate table` event  |
+| alter table     | DDL  | |Matches `alter table` event, including all clauses of `alter table`, `create index` and `drop index`   |
+| add table partition    | DDL  | |Matches `add table partition` event     |
+| drop table partition    | DDL  | |Matches `drop table partition` event     |
+| truncate table partition    | DDL  | |Matches `truncate table partition` event     |
+| create view     | DDL  | |Matches `create view`event     |
+| drop view     | DDL  | |Matches `drop view` event     |
+
+- `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
+- `ignore-delete-value-expr`: this parameter accepts a SQL expression. This rule only applies to delete DML events with the specified value.
+- `ignore-insert-value-expr`: this parameter accepts a SQL expression. This rule only applies to insert DML events with the specified value.
+- `ignore-update-old-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose old value contains the specified value.
+- `ignore-update-new-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose new value contains the specified value.
+
+> **Note:**
+>
+> - When TiDB updates a value in the column of the clustered index, TiDB splits an `UPDATE` event into a `DELETE` event and an `INSERT` event. TiCDC does not identify such events as an `UPDATE` event and thus cannot correctly filter out such events.
+> - When you configure a SQL expression, make sure all tables that matches `matcher` contain all the columns specified in the SQL expression. Otherwise, the replication task cannot be created. In addition, if the table schema changes during the replication, which results in a table no longer containing a required column, the replication task fails and cannot be resumed automatically. In such a situation, you must manually modify the configuration and resume the task.
+
 ### Notes for compatibility
 
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
+* In TiCDC v6.1.0, `mounter` is removed. If you configure `mounter`, TiCDC does not report an error, but the configuration does not take effect.
 
 ## Customize the rules for Topic and Partition dispatchers of Kafka Sink
 
