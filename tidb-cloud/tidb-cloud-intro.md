@@ -10,7 +10,7 @@ category: intro
 
 ## Why TiDB Cloud
 
-TiDB Cloud allows users with little or no training to handle once-complex tasks such as infrastructure management and cluster deployment easily.
+TiDB Cloud allows users with little or no training to handle complex tasks such as infrastructure management and cluster deployment easily.
 
 - Developers and database administrators (DBAs) can rapidly analyze large amounts of data across multiple datasets.
 
