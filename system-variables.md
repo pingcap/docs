@@ -187,7 +187,7 @@ mysql> SELECT * FROM t1;
 ### ddl_slow_threshold
 
 - Scope: GLOBAL
-- Persists to cluster: No, only apply to the local TiDB instance
+- Persists to cluster: No, only applicable to local TiDB instances.
 - Default value: `300`
 - Unit: Milliseconds
 - Log DDL operations whose execution time exceeds the threshold value.
