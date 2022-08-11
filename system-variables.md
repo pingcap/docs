@@ -1760,7 +1760,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost of a Golang goroutine in TiDB. It's used by the [Cost Model](/cost-model.md).
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_cop_cpu_factor
 
@@ -1793,7 +1793,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[0, 1]`
 - This variable is used to set the threshold value that determines whether to enable estimating the row count by using column order correlation. If the order correlation between the current column and the `handle` column exceeds the threshold value, this method is enabled.
 
-### tidb_opt_cop_cpu_factor
+### tidb_opt_cpu_factor
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: YES
@@ -1809,7 +1809,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the cost of TiKV to scan one row in descending order. It's used by the [Cost Model](/cost-model.md).
+- Indicates the cost of TiKV to scan one row from the disk in descending order. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_disk_factor
 
@@ -1818,7 +1818,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the I/O cost of TiDB to read/write one byte from/to temporary disk. It's used by the [Cost Model](/cost-model.md).
+- Indicates the I/O cost of TiDB to read/write one byte from/to the temporary disk. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_distinct_agg_push_down
 
@@ -1973,7 +1973,7 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the cost of TiKV to scan one row in ascending order. It's used by the [Cost Model](/cost-model.md).
+- Indicates the cost of TiKV to scan one row from the disk in ascending order. It's used by the [Cost Model](/cost-model.md).
 
 ### tidb_opt_seek_factor
 
