@@ -8,6 +8,10 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2022 年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 8 月 9 日 {#august-9-2022}
+
+-   GCP リージョン`Osaka` for [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
+
 ## 2022 年 8 月 2 日 {#august-2-2022}
 
 -   TiDB と TiKV の`4 vCPU, 16 GiB`ノード サイズは、一般提供 (GA) になりました。
@@ -42,7 +46,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 7 月 26 日 {#july-26-2022}
 
--   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に対して[自動休止状態と再開](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)をサポートします。
+-   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に対して[自動ハイバネーションとレジューム](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)をサポートします。
 
     Developer Tierクラスタは、非アクティブ状態が 7 日間続いても削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、Developer Tierクラスタは自動的に休止状態になります。クラスターを再開するには、クラスタに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックしクラスタ。クラスタは 50 秒以内に再開され、自動的にサービスに戻ります。
 
@@ -78,7 +82,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   カラムナ ストレージ[ティフラッシュ](/tiflash/tiflash-overview.md)は、一般提供 (GA) になりました。
 
-    -   TiFlash により、TiDB は本質的に Hybrid Transactional/Analytical Processing (HTAP) データベースになります。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
+    -   TiFlash は、本質的に TiDB を Hybrid Transactional/Analytical Processing (HTAP) データベースにします。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
     -   TiFlash レプリカを含むテーブルの場合、TiDB オプティマイザーは、コストの見積もりに基づいて、TiKV または TiFlash レプリカのどちらを使用するかを自動的に決定します。
 
     TiFlash がもたらす利点を体験するには、 [TiDB CloudHTAP クイック スタート ガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)を参照してください。
@@ -173,7 +177,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 -   クラスタサイズが固定されたクラスタ層はなくなりました。 TiDB、TiKV、TiFlashの[クラスタサイズ](/tidb-cloud/size-your-cluster.md)台を簡単にカスタマイズできます。
 -   TiFlash を使用しない既存のクラスタに[ティフラッシュ](/tiflash/tiflash-overview.md)のノードを追加することをサポートします。
--   [新しいクラスタの作成](/tidb-cloud/create-tidb-cluster.md)の場合、ストレージ サイズ (500 ～ 2048 GiB) の指定をサポートします。クラスタの作成後にストレージ サイズを変更することはできません。
+-   [新しいクラスタの作成](/tidb-cloud/create-tidb-cluster.md)の場合のストレージ サイズ (500 から 2048 GiB) の指定をサポートします。クラスタの作成後にストレージ サイズを変更することはできません。
 -   新しいパブリック リージョンを導入する: `eu-central-1` .
 -   8 vCPU TiFlash を廃止し、16 vCPU TiFlash を提供します。
 -   CPU とストレージの価格を分けます (どちらも 30% のパブリック プレビュー割引があります)。
@@ -205,7 +209,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
+-   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache Parquet ファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
 ## 2022 年 1 月 11 日 {#january-11-2022}
 
@@ -220,4 +224,4 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 バグの修正：
 
 -   パスワードに一重引用符が含まれていると、ユーザーがクラスタを作成できないという問題を修正します。
--   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別の役割に変更されたりする可能性があるという問題を修正します。
+-   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別のロールに変更されたりする可能性があるという問題を修正します。

@@ -167,3 +167,7 @@ TiUP は TiDB エコシステムのパッケージ マネージャーであり�
 
     -   コマンド ラインを使用して進行状況を取得するには、ログにキーワード`grep`を入力します。これは、デフォルトで`progress`分ごとに更新されます。
     -   TiDB モニタリング フレームワークを使用してその他のモニタリング メトリックを取得するには、 [TiDB Lightningモニタリング](https://docs.pingcap.com/tidb/stable/monitor-tidb-lightning)を参照してください。
+
+## こちらもご覧ください {#see-also}
+
+-   [MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)

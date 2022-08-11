@@ -19,6 +19,14 @@ aliases: ['/tidbcloud/beta/scale-tidb-cluter']
 
 TiDBクラスタのサイズを決定する方法については、 [TiDB のサイズを決定する](/tidb-cloud/size-your-cluster.md) . を参照してください。
 
+> **ノート：**
+>
+> TiDB または TiKV のノード サイズを**4 vCPU、16 GiB**に設定する場合は、次の制限事項に注意してください。これらの制限を回避するには、まず[ノードサイズを増やす](#increase-node-size)を実行します。
+>
+> -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
+> -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用でき、4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
+> -   TiFlash は利用できません。
+
 ## ノード番号の変更 {#change-node-number}
 
 TiDB、TiKV、または TiFlash ノードの数を変更できます。

@@ -5,7 +5,7 @@ summary: Learn how to set up VPC peering connections.
 
 # VPC ピアリング接続のセットアップ {#set-up-vpc-peering-connections}
 
-アプリケーションをTiDB Cloudに接続するには、TiDB TiDB Cloudで[VPC ピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)をセットアップする必要があります。 [TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)の 1 ステップです。このドキュメントでは、VPC ピアリング接続[AWS で](#on-aws)および[GCP 上](#on-gcp)の設定について説明します。
+アプリケーションをTiDB Cloudに接続するには、TiDB TiDB Cloudで[VPC ピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)をセットアップする必要があります。 [TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)段1段です。このドキュメントでは、VPC ピアリング接続[AWS で](#on-aws)および[GCP 上](#on-gcp)の設定について説明します。
 
 VPC ピアリング接続は、プライベート IP アドレスを使用してそれらの間でトラフィックをルーティングできるようにする 2 つの VPC 間のネットワーク接続です。どちらの VPC のインスタンスも、同じネットワーク内にあるかのように相互に通信できます。
 
@@ -27,7 +27,7 @@ VPC ピアリング リクエストをリージョンに追加する前に、プ
 
     > **ノート：**
     >
-    > プロジェクトの CIDR を設定するときは、アプリケーションが配置されている VPC の CIDR と競合しないようにしてください。
+    > アプリケーションが配置されている VPC の CIDR との競合を回避するには、このフィールドに別のプロジェクト CIDR を設定する必要があります。
 
     -   10.250.0.0/16
     -   10.250.0.0/17
@@ -107,7 +107,7 @@ VPC ピアリング リクエストをリージョンに追加する前に、プ
     例えば：
 
     ```
-    # Set up the related variables
+    # Sets up the related variables
     pcx_tidb_to_app_id="pcx-069f41efddcff66c8"
     app_region="us-west-2"
     app_vpc_id="vpc-0039fb90bb5cf8698"
@@ -127,12 +127,16 @@ VPC ピアリング リクエストをリージョンに追加する前に、プ
 
     ```bash
     # Creates route table rules.
-    aws ec2 describe-route-tables --region "$app_region" --filters Name=vpc-id,Values="$app_vpc_id" --query 'RouteTables[*].RouteTableId' --output text | xargs -n 1 |  while read row
+    aws ec2 describe-route-tables --region "$app_region" --filters Name=vpc-id,Values="$app_vpc_id" --query 'RouteTables[*].RouteTableId' --output text | tr "\t" "\n" | while read row
     do
         app_route_table_id="$row"
         aws ec2 create-route --route-table-id "$app_route_table_id" --destination-cidr-block "$tidbcloud_project_cidr" --vpc-peering-connection-id "$pcx_tidb_to_app_id"
     done
     ```
+
+    > **ノート：**
+    >
+    > ルート テーブル ルールが正常に作成された場合でも、 `An error occurred (MissingParameter) when calling the CreateRoute operation: The request must contain the parameter routeTableId`エラーが発生する場合があります。この場合、作成されたルールを確認し、エラーを無視できます。
 
     {{< copyable "" >}}
 
@@ -156,7 +160,7 @@ AWS ダッシュボードを使用して、VPC ピアリング接続を構成す
 
     2.  左側のナビゲーション バーから、[**ピアリング接続]**ページを開きます。 [<strong>ピアリング接続の作成</strong>] タブで、ピアリング接続は<strong>[承認待ち</strong>] ステータスになっています。
 
-    3.  リクエスタの所有者がTiDB Cloud ( `380838443567` ) であることを確認します。ピアリング接続を右クリックし、[**要求**を受け入れる] をクリックして要求を受け入れます。
+    3.  リクエスタの所有者がTiDB Cloud ( `380838443567` ) であることを確認します。ピアリング接続を右クリックし、[ **Accept Request** ] を選択して、[ <strong>Accept VPC peering connection request</strong> ] ダイアログでリクエストを受け入れます。
 
         ![AWS VPC peering requests](/media/tidb-cloud/vpc-peering/aws-vpc-guide-3.png)
 
@@ -168,7 +172,7 @@ AWS ダッシュボードを使用して、VPC ピアリング接続を構成す
 
         ![Search all route tables related to VPC](/media/tidb-cloud/vpc-peering/aws-vpc-guide-4.png)
 
-    3.  各ルート テーブルを編集して宛先を含むルートをプロジェクト CIDR に追加し、[**ターゲット**] 列でピアリング ID を選択します。
+    3.  各ルート テーブルを右クリックし、[ルートの**編集**] を選択します。編集ページで、プロジェクト CIDR への宛先を含むルートを追加し ( TiDB Cloudコンソールの<strong>VPC Peering</strong>構成ページを確認して)、[<strong>ターゲット</strong>] 列にピアリング接続 ID を入力します。
 
         ![Edit all route tables](/media/tidb-cloud/vpc-peering/aws-vpc-guide-5.png)
 
@@ -188,7 +192,7 @@ AWS ダッシュボードを使用して、VPC ピアリング接続を構成す
 
 1.  [**アクティブなクラスター]**ページに移動します。
 
-2.  ターゲットクラスタの領域を見つけて、領域の右上隅にある [**接続**] をクリックします。接続ダイアログが表示されます。 VPC ピアリングの<strong>Status</strong>が<strong>active</strong>であることを確認できます。
+2.  ターゲットクラスタの領域を見つけて、領域の右上隅にある [**接続**] をクリックします。接続ダイアログが表示されます。 VPC ピアリングの<strong>Status</strong>が<strong>active</strong>であることを確認できます。<strong>ステータス</strong>がまだ<strong>システム チェック</strong>中の場合は、約 5 分間待ってから、もう一度ダイアログを開きます。
 
     > **ヒント：**
     >

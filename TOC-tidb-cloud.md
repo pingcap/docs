@@ -80,7 +80,7 @@
     -   TiDB クラスターに接続する
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAP クラスターを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -96,6 +96,7 @@
     -   データを TiDB に移行する
         -   [Amazon S3 アクセスと GCS アクセスの設定](/tidb-cloud/config-s3-and-gcs-access.md)
         -   [MySQL 互換データベースからの移行](/tidb-cloud/migrate-data-into-tidb.md)
+        -   [MySQL 互換データベースからの増分データの移行](/tidb-cloud/migrate-incremental-data-from-mysql.md)
         -   [Amazon Aurora MySQL から一括で移行する](/tidb-cloud/migrate-from-aurora-bulk-import.md)
         -   [Amazon S3 または GCS からTiDB Cloudへのインポートまたは移行](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
         -   [Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする](/tidb-cloud/import-csv-files.md)
@@ -143,7 +144,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -351,7 +352,7 @@
         -   [パーティショニング](/partitioned-table.md)
         -   [一時テーブル](/temporary-tables.md)
         -   [キャッシュされたテーブル](/cached-tables.md)
-        -   文字セットと照合順序
+        -   文字セットと照合
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
         -   履歴データの読み取り
