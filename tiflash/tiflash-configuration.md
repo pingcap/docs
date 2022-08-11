@@ -177,8 +177,9 @@ delta_index_cache_size = 0
     ## of DeltaTree Storage Engine uses logical split.
     ## Using the logical split can reduce the write amplification.
     ## However, these are at the cost of disk space waste.
-    ## It is strongly not recommended to set `dt_enable_logical_split` to `true` in v6.2.0
-    ## and later versions. For details, see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
+    ## It is strongly recommended to keep the default value `false` and
+    ## not to change it to `true` in v6.2.0 and later versions. For details,
+    ## see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
     # dt_enable_logical_split = false
 
     ## The memory usage limit for the generated intermediate data when a single
