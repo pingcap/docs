@@ -19,7 +19,7 @@ The FastScan takes effect globally only for those tables who enables FastScan by
 
 For more information, see [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md).
 
-## Switch to Fast Mode
+## Enable FastScan
 
 By default, FastScan is disabled for all tables. You can use the following statement to view the FastScan status.
 
