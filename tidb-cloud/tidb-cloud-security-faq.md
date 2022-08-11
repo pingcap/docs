@@ -13,7 +13,7 @@ TiDB Cloud has obtained ISO 27701, ISO27001, GDPR, SOC2, and other security and 
 
 ## How does TiDB Cloud ensure the security of data transfer between client applications and TiDB clusters?
 
-TiDB Cloud provides the encryption ability of data transfer between client applications and TiDB Cluster as follows:
+TiDB Cloud provides the encryption ability of data transfer between client applications and TiDB clusters as follows:
 
 - TiDB Cloud supports [VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md), which ensures the security of the data transfer between applications and TiDB cluster.
 - For the connection to a TiDB Cloud cluster via a MySQL client, TiDB Cloud enables data transfer encryption by default.
@@ -59,13 +59,13 @@ TiDB Cloud accounts consist of TiDB Cloud console accounts and TiDB database acc
 
 ## How does TiDB Cloud do role management?
 
-TiDB Cloud manage roles at the following two levels:
+TiDB Cloud manages roles at the following two levels:
 
 - Role management of TiDB Cloud web console
 
     - To help you manage your organization securely, TiDB Cloud defines the following roles: Owner, Member, Billing Admin, and Billing Admin. For permissions of each role, see [Configure member roles](/tidb-cloud/manage-user-access.md#configure-member-roles).
 
-        Each user has a unique role in an organization and participates in the organization and project management based on the previleges of the role.
+        Each user has a unique role in an organization and participates in the organization and project management based on the privileges of the role.
 
     - Console user-defined roles are not supported.
 
