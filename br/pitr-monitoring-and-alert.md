@@ -16,22 +16,22 @@ PITR supports using [Prometheus](https://prometheus.io/) to collect monitoring m
 
 | Metrics                                                | Type    |  Description                                                                                                                                                 |
 |-------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **tikv_log_backup_interal_actor_acting_duration_sec** | Histogram | The duration of handling all internal message events. <br/>`message :: TaskType`                                                                                                            |
+| **tikv_log_backup_interal_actor_acting_duration_sec** | Histogram | The duration of handling all internal messages and events. <br/>`message :: TaskType`                                                                                                            |
 | **tikv_log_backup_initial_scan_reason**               | Counter   | Statistics of the reasons why initial scan is triggered. The main reason is leader transfer or Region version change. <br/> `reason :: {"leader-changed", "region-changed", "retry"}`                                           |
 | **tikv_log_backup_event_handle_duration_sec**         | Histogram | The duration of handling KV events. Compared with `tikv_log_backup_on_event_duration_seconds`, this metric also includes the duration of internal conversion. <br/>`stage :: {"to_stream_event", "save_to_temp_file"}` |
 | **tikv_log_backup_handle_kv_batch**                   | Histogram |  Region-level statistics of the sizes of KV pair batches sent by Raftstore.                                                                                                    |
-| **tikv_log_backup_initial_scan_disk_read**            | Counter   | The size of data read from the disk during initial scan. In Linux, this information is from procfs, which is the data size actually read from the block device. The configuration item `initial-scan-rate-limit` also imposes limit on this data size value.                                   |
+| **tikv_log_backup_initial_scan_disk_read**            | Counter   | The size of data read from the disk during initial scan. In Linux, this information is from procfs, which is the size of data actually read from the block device. The configuration item `initial-scan-rate-limit` applies to this metric.                                   |
 | **tikv_log_backup_incremental_scan_bytes**            | Histogram | The size of KV pairs actually generated during initial scan. Because of compression and read amplification, this value might be different from that of `tikv_log_backup_initial_scan_disk_read`.                                                                  |
 | **tikv_log_backup_skip_kv_count**                     | Counter   |  The number of Raft events being skipped during the log backup because they are not helpful to the backup.                                                                                                                   |
 | **tikv_log_backup_errors**                            | Counter   | The errors that can be retried or ignored during the log backup. <br/>`type :: ErrorType`                                                                                                       |
 | **tikv_log_backup_fatal_errors**                      | Counter   | The errors that cannot be retried or ignored during the log backup. When an error of this type occurs, the log backup is paused. <br/>`type :: ErrorType`                                                                                   |
 | **tikv_log_backup_heap_memory**                       | Gauge     |  The memory occupied by events that are unconsumed and found by initial scan during log backup.                                                                                                                         |
 | **tikv_log_backup_on_event_duration_seconds**         | Histogram |  The duration of storing KV events to temporary files. <br/>`stage :: {"write_to_tempfile", "syscall_write"}`                                                                        |
-| **tikv_log_backup_store_checkpoint_ts**               | Gauge     | The store-level Checkpoint TS, which is deprecated. It is close to the GC safepoint registered by the current store. <br/>`task :: string`                                                                    |
+| **tikv_log_backup_store_checkpoint_ts**               | Gauge     | The store-level checkpoint TS, which is deprecated. It is close to the GC safepoint registered by the current store. <br/>`task :: string`                                                                    |
 | **tikv_log_backup_flush_duration_sec**                | Histogram |  The duration of moving local temporary files to the external storage. <br/>`stage :: {"generate_metadata", "save_files", "clear_temp_files"}`                                                                |
 | **tikv_log_backup_flush_file_size**                   | Histogram |  Statistics of the sizes of files generated during the backup.                                                                                                                                          |
 | **tikv_log_backup_initial_scan_duration_sec**         | Histogram | The statistics of the overall duration of initial scan.                                                                                                                                           |
-| **tikv_log_backup_skip_retry_observe**                | Counter   | Statistics of the errors that can be ignored during log backup, which skips the retries.  <br/>`reason :: {"region-absent", "not-leader", "stale-command"}`                                                   |
+| **tikv_log_backup_skip_retry_observe**                | Counter   | Statistics of the errors that can be ignored during log backup, or the reasons why retry is skipped.  <br/>`reason :: {"region-absent", "not-leader", "stale-command"}`                                                   |
 | **tikv_log_backup_initial_scan_operations**           | Counter   | Statistics of RocksDB-related operations during initial scan. <br/>`cf :: {"default", "write", "lock"}, op :: RocksDBOP`                                                                       |
 | **tikv_log_backup_enabled**                           | Counter   |  Whether to enable log backup. If the value is greater than `0`, log backup is enabled.                                                                                                                                |
 | **tikv_log_backup_observed_region**                   | Gauge     | The number of Regions being listened to.                                                                                                                                        |
@@ -49,9 +49,9 @@ Currently, PITR does not have built-in alert items. This section introduces how 
 
 To configure alert items in PITR, follow these steps:
 
-1. Create a configuration file (for example, `pitr.rules.yml`) for the alert rules on the node where Prometheus is located. In the file, fill in the alert rules according to the [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/), the following recommended alert items, and configuration sample.
+1. Create a configuration file (for example, `pitr.rules.yml`) for the alert rules on the node where Prometheus is located. In the file, fill in the alert rules according to the [Prometheus documentation](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/), the following recommended alert items, and the configuration sample.
 2. In the `rule_files` field of the Prometheus configuration file, add the path of the alert rule file.
-3. Send `SIGHUP` signal to the Prometheus process (`kill -HUP pid`) or send HTTP POST request to `http://prometheus-addr/-/reload` (before you send the HTTP request, add the `--web.enable-lifecycle` parameter when starting Prometheus).
+3. Send `SIGHUP` signal to the Prometheus process (`kill -HUP pid`) or send an HTTP POST request to `http://prometheus-addr/-/reload` (before you send the HTTP request, add the `--web.enable-lifecycle` parameter when starting Prometheus).
 
 The recommended alert items are as follows:
 
@@ -61,7 +61,7 @@ The recommended alert items are as follows:
 - Alert level: warning
 - Description: The log data is not persisted to the storage for more than 10 minutes. This alert item is a reminder. In most cases, it does not affect log backup.
 
-A configuration sample of this alert rule is as follows:
+A configuration sample of this alert item is as follows:
 
 ```yaml
 groups:
@@ -104,4 +104,4 @@ groups:
 
 - Alert item: `min(tikv_log_backup_store_checkpoint_ts) by (instance) - max(tikv_gcworker_autogc_safe_point) by (instance) < 0`
 - Alert level: critical
-- Description: Some data has been garbage-collected before the backup. This means that some data has been lost and are very likely to affect your application.
+- Description: Some data has been garbage-collected before the backup. This means that some data has been lost and is very likely to affect your services.
