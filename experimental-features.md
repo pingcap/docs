@@ -13,6 +13,7 @@ summary: Learn the experimental features of TiDB.
 -   [Raft Engine](/tikv-configuration-file.md#raft-engine) . (v5.4 で導入)
 -   [`PREDICATE COLUMNS`の統計収集のサポート](/statistics.md#collect-statistics-on-some-columns) (v5.4 で導入)
 -   [統計の同期ロードをサポート](/statistics.md#load-statistics) . (v5.4 で導入)
+-   [統計をすばやく作成するために、約 10000 行のデータをランダムにサンプリングします](/system-variables.md#tidb_enable_fast_analyze) (v3.0 で導入)
 
 ## 安定性 {#stability}
 
@@ -32,6 +33,8 @@ summary: Learn the experimental features of TiDB.
 -   [生成された列](/generated-columns.md) (v2.1 で導入)
 -   [ユーザー定義変数](/user-defined-variables.md) (v2.1 で導入)
 -   [JSON データ型](/data-type-json.md)と[JSON関数](/functions-and-operators/json-functions.md) (v2.1 で導入)
+-   [`ALTER TABLE`を使用して複数の列またはインデックスを変更する](/system-variables.md#tidb_enable_change_multi_schema) (v5.0.0 で導入)
+-   [カスケード プランナー](/system-variables.md#tidb_enable_cascades_planner) : カスケード フレームワーク ベースのトップダウン クエリ オプティマイザー (v3.0 で導入)
 
 ## Configuration / コンフィグレーション管理 {#configuration-management}
 
