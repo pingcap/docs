@@ -16,13 +16,12 @@ This document introduces the experimental features of TiDB in different versions
 + [Use the thread pool to handle read requests from the storage engine](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). (Introduced in v6.2.0)
 + [Cost Model Version 2](/cost-model.md#cost-model-version-2). (Introduced in v6.2.0)
 + [Fast Mode](/develop/dev-guide-read-in-fast-mode.md). (Introduced in v6.2.0)
++ [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
 
 ## Stability
 
 + Improve the stability of the optimizer's choice of indexes: extend the statistics feature by collecting the multi-column order dependency information (Introduced in v5.0).
-+ [Background Quota Limiter](/tikv-configuration-file.md#background-quota-limiter) (Introduced in v6.2.0):
-
-    You can use the background quota-related configuration items to limit the CPU resources to be used by the background. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources.
++ [Background Quota Limiter](/tikv-configuration-file.md#background-quota-limiter) (Introduced in v6.2.0): You can use the background quota-related configuration items to limit the CPU resources to be used by the background. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources.
 
 ## Scheduling
 

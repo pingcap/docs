@@ -199,6 +199,11 @@ This document only describes the parameters that are not included in command-lin
 + Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
 + Default value: `8192`
 
+### `simplify-metrics` <span class="version-mark">New in v6.2.0</span>
+
++ Specifies whether to simplify the returned monitoring metrics. After you set the value to `true`, TiKV reduces the amount of data returned for each request by filtering out some metrics.
++ Default value: `false`
+
 ## readpool.unified
 
 Configuration items related to the single thread pool serving read requests. This thread pool supersedes the original storage thread pool and coprocessor thread pool since the 4.0 version.
@@ -852,12 +857,6 @@ Configuration items related to Raftstore.
 + Determines the threshold at which Raft data is written into the disk. If the data size is larger than the value of this configuration item, the data is written to the disk. When the value of `store-io-pool-size` is `0`, this configuration item does not take effect.
 + Default value: `1MB`
 + Minimum value: `0`
-
-### `report-min-resolved-ts-interval` <span class="version-mark">New in v6.2.0</span>
-
-+ If you set this configuration value greater than `0`, TiKV checks the minimum ResolvedTS regularly for all Regions on the current node and reports the information to PD.
-+ Default value: `0s`
-+ Minimum value: `0s`
 
 ## Coprocessor
 
@@ -1610,6 +1609,17 @@ Configuration items related to TiCDC.
 + The maximum number of concurrent executions for the tasks of incrementally scanning historical data.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
 + Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
+
+### `raw-min-ts-outlier-threshold` <span class="version-mark">New in v6.2.0</span>
+
++ The threshold at which TiKV checks whether the Resolved TS of RawKV is abnormal.
++ If the Resolved TS latency of a Region exceeds this threshold, the anomaly detection process is triggered. At this time, the Region whose Resolved TS latency exceeds 3 x [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) is considered as slow in lock resolution, and triggers TiKV-CDC to re-subscribe the data changes of the Region, which resets the lock resource status.
++ Default value: `60s`
+
+> **Warning:**
+>
+> - This configuration item will be deprecated in a future release. To avoid upgrade compatibility issues, it is **NOT** recommended to set this configuration item.
+> - In most scenarios, you do not need to modify this configuration, because the slow lock resolution rarely happens. If this configuration value is set too small, the anomaly detection process might trigger false alarms, which causes data replication jitter.
 
 ## resolved-ts
 
