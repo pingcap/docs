@@ -193,7 +193,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
 * TiDB Lightning supports importing data to production clusters in physical import mode
 
-    Previously, the physical import mode of TiDB Lightning (backend=’local’) had a significant impact on the target cluster. For example, during the migration, PD global scheduling is paused. Therefore, the previous physical import mode is only suitable for initial data import.
+    Previously, the physical import mode of TiDB Lightning (backend='local') had a significant impact on the target cluster. For example, during the migration, PD global scheduling is paused. Therefore, the previous physical import mode is only suitable for initial data import.
 
     TiDB Lightning improves on the existing physical import mode. The impact of import is reduced from cluster level to table level. That is, you can read and write tables that are not being imported.
 
