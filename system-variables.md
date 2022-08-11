@@ -1782,6 +1782,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Indicates whether to allow broadcast CARTESIAN join. 
 - `0` means that it's not allowed, `1` means that it's allow based on `tidb_broadcast_join_threshold_count`, and `2` means it's always allowed even if the table size exceeds the threshold.
 
+### tidb_opt_concurrency_factor
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: YES
+- Type: Float
+- Default value: ``
+
+
 ### tidb_opt_correlation_exp_factor
 
 - Scope: SESSION | GLOBAL
