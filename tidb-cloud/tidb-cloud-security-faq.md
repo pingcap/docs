@@ -16,7 +16,7 @@ TiDB Cloud has obtained the following security and privacy protection certificat
 - ISO/IEC 27701
 - General Data Protection Regulation (GDPR)
 
-For more information, see [PingCAP Trust & Compliance Center](https://en.pingcap.com/trust-compliance-center/.)
+For more information, see [PingCAP Trust & Compliance Center](https://en.pingcap.com/trust-compliance-center).
 
 ## How does TiDB Cloud ensure the security of data transfer between client applications and TiDB clusters?
 
