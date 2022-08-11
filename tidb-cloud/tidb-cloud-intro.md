@@ -6,7 +6,7 @@ category: intro
 
 # TiDB Cloud Introduction
 
-[TiDB Cloud](https://pingcap.com/products/tidbcloud) is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud, and lets you focus on your applications, not the complexities of your database.
+[TiDB Cloud](https://en.pingcap.com/tidb-cloud/) is a fully-managed Database-as-a-Service (DBaaS) that brings [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open source Hybrid Transactional and Analytical Processing (HTAP) database, to your cloud, and lets you focus on your applications, not the complexities of your database. You can run TiDB clusters on Google Cloud Platform (GCP) and Amazon Web Services (AWS).
 
 ## Why TiDB Cloud
 
