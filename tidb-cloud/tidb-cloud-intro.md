@@ -12,6 +12,14 @@ category: intro
 
 TiDB Cloud allows users with no training to handle complex tasks such as infrastructure management and cluster deployment. You will also get the massive scale and resiliency of TiDB databases in a fully managed Database as a Service (DBaaS), as well as:
 
+- **Fully-Managed TiDB Service**
+
+    Deploy, scale, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
+
+- **Enterprise Grade Security**
+
+    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is SOC 2 Type 2 certified.
+
 - **Real-Time Analytics**
 
     Run real-time analytical queries with our Hybrid Transactional and Analytical Processing (HTAP) capabilities.
@@ -23,10 +31,6 @@ TiDB Cloud allows users with no training to handle complex tasks such as infrast
 - **More Control Over Scaling**
 
     Scale your performance and storage nodes separately to custom tailor to your business needs.
-
-- **Fully-Managed TiDB Service**
-
-    Deploy, scale, and manage TiDB clusters with a few clicks, through an easy-to-use web-based management platform.
 
 - **Multi-Cloud Support**
 
@@ -47,10 +51,6 @@ TiDB Cloud allows users with no training to handle complex tasks such as infrast
 - **High Concurrency**
 
     Allow thousands of users to simultaneously query your data without losing performance standards.
-
-- **Enterprise Grade Security**
-
-    Secure your data in dedicated networks and machines, with support for encryption both in-flight and at-rest. TiDB Cloud is SOC 2 Type 2 certified.
 
 - **World-Class Support**
 
