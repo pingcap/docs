@@ -56,4 +56,4 @@ The following video introduces key features of TiDB.
 - [TiDB Architecture](/tidb-architecture.md)
 - [TiDB Storage](/tidb-storage.md)
 - [TiDB Computing](/tidb-computing.md)
-- [TiDB Scheduling](/tidb-scheduling.md)
+- [TiDB Scheduling](/tidb-scheduling.md) 
