@@ -18,6 +18,7 @@ This document introduces the experimental features of TiDB v4.0. It is **NOT** r
 - Support the expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details.
 - [Prepare Plan cache](/sql-prepare-plan-cache.md). (Introduced in v4.0)
 - [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze). (Introduced in v3.0)
+- [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
 
 ## Service-level features
 
