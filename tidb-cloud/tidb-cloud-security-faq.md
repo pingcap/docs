@@ -9,7 +9,14 @@ This document lists the most frequently asked questions about TiDB Cloud securit
 
 ## What security and privacy certifications has TiDB Cloud obtained?
 
-TiDB Cloud has obtained ISO 27701, ISO27001, GDPR, SOC2, and other security and privacy protection certifications.
+TiDB Cloud has obtained the following security and privacy protection certifications:
+
+- SOC 2 Type II
+- ISO/IEC 27001:2013
+- ISO/IEC 27701
+- General Data Protection Regulation (GDPR)
+
+For more information, see [PingCAP Trust & Compliance Center](https://en.pingcap.com/trust-compliance-center/.)
 
 ## How does TiDB Cloud ensure the security of data transfer between client applications and TiDB clusters?
 
