@@ -7,7 +7,13 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
 [TiDB](https://github.com/pingcap/tidb) (/’taɪdiːbi:/, "Ti" stands for Titanium) is an open-source NewSQL database that supports Hybrid Transactional and Analytical Processing (HTAP) workloads. It is MySQL compatible and features horizontal scalability, strong consistency, and high availability. The goal of TiDB is to provide users with a one-stop database solution that covers OLTP (Online Transactional Processing), OLAP (Online Analytical Processing), and HTAP services. TiDB is suitable for various use cases that require high availability and strong consistency with large-scale data.
 
+<<<<<<< HEAD
 <video src="https://tidb-docs.s3.us-east-2.amazonaws.com/ENG+TiDB+Intro+2.mp4" width="600px" height="450px" controls="controls" poster="https://tidb-docs.s3.us-east-2.amazonaws.com/Thumbnail+-+ENG.png"></video>
+=======
+The following video introduces key features of TiDB.
+
+<iframe width="424" height="238" src="https://www.youtube.com/embed/aWBNNPm21zg" title="Why TiDB?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>>>>>>> 740fa263b (tidb overview: updated video links (#9921))
 
 ## Key features
 
@@ -31,8 +37,11 @@ summary: Learn about the key features and usage scenarios of TiDB.
 
     TiDB is compatible with the MySQL 5.7 protocol, common features of MySQL, and the MySQL ecosystem. To migrate your applications to TiDB, you do not need to change a single line of code in many cases or only need to modify a small amount of code. In addition, TiDB provides a series of [data migration tools](/ecosystem-tool-user-guide.md) to help easily migrate application data into TiDB.
 
+<<<<<<< HEAD
   <video src="https://tidb-docs.s3.us-east-2.amazonaws.com/ENG+TiDB+Intro+1.mp4" width="600px" height="450px" controls="controls" poster="https://tidb-docs.s3.us-east-2.amazonaws.com/Thumbnail+-+ENG.png"></video>
 
+=======
+>>>>>>> 740fa263b (tidb overview: updated video links (#9921))
 ## Use cases
 
 - **Financial industry scenarios with high requirements for data consistency, reliability, availability, scalability, and disaster tolerance**
