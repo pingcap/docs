@@ -40,7 +40,6 @@ The following are some best practices to follow when you delete data:
 - Use [bulk-delete](#bulk-delete) when you delete a large number of rows (for example, more than ten thousand), because TiDB limits the size of a single transaction ([txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit), 100 MB by default).
 - If you delete all the data in a table, do not use the `DELETE` statement. Instead, use the [`TRUNCATE`](/sql-statements/sql-statement-truncate.md) statement.
 - For performance considerations, see [Performance Considerations](#performance-considerations).
-- If your delete statement do not need transactional, you can use [Non-Transactional Bulk-delete](#non-transactional-bulk-delete) to improve performance.
 - In scenarios where large batches of data need to be deleted, [Non-Transactional Bulk-delete](#non-transactional-bulk-delete) can significantly improve performance. However, in contrast, this will lose the transactional of the deletion and therefore ***CANNOT*** be rollback, so make sure you select the correct operation.
 
 ## Example
