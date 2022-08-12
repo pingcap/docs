@@ -300,8 +300,8 @@ In 6.2.0, the key new features or improvements are as follows:
 - When you execute the `ALTER TABLE` statement to add, drop, or modify multiple columns or indexes, TiDB checks table consistency by comparing the table before and after statement execution, regardless of the change in the same DDL statement. The execution order of the DDLs is not fully compatible with MySQL in some scenarios.
 - If the TiDB component is v6.2.0 or later, the TiKV component should not be earlier than v6.2.0.
 - TiKV adds a configuration item `split.region-cpu-overload-threshold-ratio` that supports [online configuration](/dynamic-config.md#modify-tikv-configuration-online).
-- Slow query logs, `information_schema.statements_summary`, and `information_schema.slow_query`can export `binary_plan`, execution plans encoded in the binary format.
-- Two columns are added to the `SHOW TABLE xx REGIONS` statement: `SCHEDULING_CONSTRAINTS` and `SCHEDULING_STATE`, which respectively indicate Region scheduling constraints in Placement in SQL and the current scheduling state.
+- Slow query logs, `information_schema.statements_summary`, and `information_schema.slow_query`can export `binary_plan`, or execution plans encoded in the binary format.
+- Two columns are added to the `SHOW TABLE ... REGIONS` statement: `SCHEDULING_CONSTRAINTS` and `SCHEDULING_STATE`, which respectively indicate Region scheduling constraints in Placement in SQL and the current scheduling state.
 - Since TiDB v6.2.0, you can capture data changes of RawKV via [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc).
 - When `ROLLBACK TO SAVEPOINT` is used to roll back a transaction to a specified savepoint, MySQL releases the locks held only after the specified savepoint, while in TiDB pessimistic transaction, TiDB does not immediately release the locks held after the specified savepoint. Instead, TiDB releases all locks when the transaction is committed or rolled back.
 - Since TiDB v6.2.0, the `SELECT tidb_version()` statement also returns Store type (tikv or unistore).
