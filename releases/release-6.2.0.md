@@ -129,9 +129,9 @@ In 6.2.0, the key new features or improvements are as follows:
 
 * TiFlash adds FastScan for data scanning to increase read and write speed by sacrificing data consistency (experimental)
 
-    TiDB introduces Fast Mode in v6.2.0. It supports skipping consistency checks to increase the speed significantly. The Fast Mode is suitable for scenarios that do not require high accuracy and consistency of data such as offline analysis tasks. Previously, to ensure data consistency, TiFlash needed to perform data consistency checks during the data scanning process to find the required data from multiple different versions (called Normal Mode).
+    TiDB introduces FastScan in v6.2.0. It supports skipping consistency checks to increase the speed significantly. FastScan is suitable for scenarios that do not require high accuracy and consistency of data such as offline analysis tasks. Previously, to ensure data consistency, TiFlash needed to perform data consistency checks during the data scanning process to find the required data from multiple different versions.
 
-    When you upgrade from an earlier version to TiDB v6.2.0, the default mode is Normal Mode for all tables, which ensures data consistency. You can set the Fast Mode or Normal Mode for each table independently. If the table is set to Fast Mode in TiDB v6.2.0, the mode setting will be disabled when you downgrade to a lower version, but this does not affect the normal data read. In this case, it is equivalent to Normal Mode that offers strong consistency read.
+    When you upgrade from an earlier version to TiDB v6.2.0, FastScan is not enabled by default for all tables, which ensures data consistency. You can enable FastScan for each table independently. If the table is set to FastScan in TiDB v6.2.0, it will be disabled when you downgrade to a lower version, but this does not affect the normal data read. In this case, it is equivalent to strong consistency read.
 
     [User document](/develop/dev-guide-use-fastscan.md) [#5252](https://github.com/pingcap/tiflash/issues/5252) @[hongyunyan](https://github.com/hongyunyan)
 
