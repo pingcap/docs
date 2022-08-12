@@ -19,7 +19,7 @@ TiDB は、クラスタのすべてのノードにデータを配布するため
 
 アプリケーションが[TiDB ダッシュボード キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)にホットスポットリージョンを持っているかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
 
-ホットスポットの処理の詳細については、 [TiDB Hotspot の問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
+ホットスポットの処理の詳細については、 [TiDB ホットスポットの問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
@@ -27,7 +27,7 @@ TiDB は、クラスタのすべてのノードにデータを配布するため
 
 アプリケーションが[TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)にホットスポットリージョンを持っているかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
 
-ホットスポットの処理の詳細については、 [TiDB Hotspot の問題処理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
+ホットスポットの処理の詳細については、 [TiDB ホットスポットの問題処理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 </CustomContent>
 
@@ -35,8 +35,8 @@ TiDB は、クラスタのすべてのノードにデータを配布するため
 
 ## フォロワー読み取りを有効にする {#enable-follower-read}
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Follower Read を有効にするには、変数`tidb_replica_read` (デフォルト値は`leader` ) を`follower`または`leader-and-follower`に設定します。
 
@@ -49,7 +49,7 @@ SET [GLOBAL] tidb_replica_read = 'follower';
 この変数の詳細については、 [フォロワーの読み取りの使用](/follower-read.md#usage)を参照してください。
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 Java で Follower Read を有効にするには、 `FollowerReadHelper`クラスを定義します。
 

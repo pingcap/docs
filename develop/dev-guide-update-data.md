@@ -60,7 +60,7 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 <CustomContent platform="tidb-cloud">
 
--   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)を使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に多くのデータ更新を行うと、ロックが長時間保持されたり ( [悲観的な取引](/pessimistic-transaction.md) )、競合が発生したりします ( [楽観的な取引](/optimistic-transaction.md) )。
+-   多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、 [一括更新](#bulk-update)を使用します。 TiDB はデフォルトで 1 つのトランザクションのサイズを 100 MB に制限しているため、一度に多くのデータを更新すると、ロックが長時間保持されたり ( [悲観的な取引](/pessimistic-transaction.md) )、競合が発生したりします ( [楽観的な取引](/optimistic-transaction.md) )。
 
 </CustomContent>
 
@@ -68,8 +68,8 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 
 著者が名前を**Helen Haruki**に変更したとします。 [著者](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルを変更する必要があります。彼女の一意の`id`が<strong>1</strong>で、フィルターが`id = 1`であるとします。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 {{< copyable "" >}}
 
@@ -79,7 +79,7 @@ UPDATE `authors` SET `name` = "Helen Haruki" WHERE `id` = 1;
 
 </div>
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -128,12 +128,12 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### <code>INSERT ON DUPLICATE KEY UPDATE</code>例 {#code-insert-on-duplicate-key-update-code-example}
 
-たとえば、書籍に対するユーザーの評価を含めるように[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合、以前の評価が更新されます。
+たとえば、書籍に対するユーザーの評価を含めるように[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新する必要があります。ユーザーがまだ本を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合、以前の評価が更新されます。
 
 次の例では、主キーは`book_id`と`user_id`の結合主キーです。ユーザ`user_id = 1`は本`book_id = 1000`に`5`の評価を与える。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 {{< copyable "" >}}
 
@@ -147,7 +147,7 @@ ON DUPLICATE KEY UPDATE `score` = 5, `rated_at` = NOW();
 
 </div>
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -210,8 +210,8 @@ ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FA
 >
 > この一括更新アプリケーションは、 **DDL**ステートメントを使用して、データ テーブルにスキーマの変更を加えます。 TiDB のすべての DDL 変更操作はオンラインで実行されます。詳細については、 [列を追加](/sql-statements/sql-statement-add-column.md)を参照してください。
 
-<SimpleTab>
-<div label="Golang">
+<SimpleTab groupId="language">
+<div label="Golang" value="golang">
 
 Golang では、一括更新アプリケーションは次のようになります。
 
@@ -293,7 +293,7 @@ func placeHolder(n int) string {
 
 </div>
 
-<div label="Java (JDBC)">
+<div label="Java (JDBC)" value="jdbc">
 
 Java (JDBC) では、一括更新アプリケーションは次のようになります。
 

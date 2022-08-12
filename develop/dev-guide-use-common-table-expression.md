@@ -5,23 +5,23 @@ summary: Learn the CTE feature of TiDB, which help you write SQL statements more
 
 # 共通テーブル式 {#common-table-expression}
 
-一部のトランザクションシナリオでは、アプリケーションが複雑なため、最大2,000行の単一のSQLステートメントを作成する必要がある場合があります。このステートメントには、おそらく多くの集計とマルチレベルのサブクエリのネストが含まれています。このような長いSQLステートメントを維持することは、開発者にとって悪夢になる可能性があります。
+一部のトランザクション シナリオでは、アプリケーションの複雑さが原因で、最大 2,000 行の単一の SQL ステートメントを記述する必要がある場合があります。ステートメントには、多くの集計と複数レベルのサブクエリのネストが含まれている可能性があります。このような長い SQL ステートメントを維持することは、開発者にとって悪夢になる可能性があります。
 
-このような長いSQLステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)を使用してクエリを簡略化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
+このような長い SQL ステートメントを回避するには、 [ビュー](/develop/dev-guide-use-views.md)を使用してクエリを簡素化するか、 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)を使用して中間クエリ結果をキャッシュします。
 
-このドキュメントでは、クエリ結果を再利用するためのより便利な方法であるTiDBの共通テーブル式（CTE）構文を紹介します。
+このドキュメントでは、クエリ結果を再利用するためのより便利な方法である、TiDB の Common Table Expression (CTE) 構文を紹介します。
 
-TiDB v5.1以降、TiDBはANSISQL99規格のCTEと再帰をサポートしています。 CTEを使用すると、複雑なアプリケーションロジックのSQLステートメントをより効率的に記述し、コードをはるかに簡単に保守できます。
+TiDB v5.1 以降、TiDB は ANSI SQL99 標準の CTE と再帰をサポートしています。 CTE を使用すると、複雑なアプリケーション ロジックの SQL ステートメントをより効率的に記述し、コードをより簡単に維持できます。
 
 ## 基本的な使い方 {#basic-use}
 
-Common Table Expression（CTE）は、SQLステートメント内で複数回参照できる一時的な結果セットであり、ステートメントの可読性と実行効率を向上させます。 `WITH`ステートメントを適用してCTEを使用できます。
+Common Table Expression (CTE) は、ステートメントの読みやすさと実行効率を向上させるために、SQL ステートメント内で複数回参照できる一時的な結果セットです。 `WITH`ステートメントを適用して CTE を使用できます。
 
-共通テーブル式は、非再帰CTEと再帰CTEの2つのタイプに分類できます。
+共通テーブル式は、非再帰 CTE と再帰 CTE の 2 つのタイプに分類できます。
 
-### 非再帰CTE {#non-recursive-cte}
+### 非再帰 CTE {#non-recursive-cte}
 
-非再帰CTEは、次の構文を使用して定義できます。
+非再帰 CTE は、次の構文を使用して定義できます。
 
 {{< copyable "" >}}
 
@@ -32,10 +32,10 @@ WITH <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-たとえば、50人の最も古い著者のそれぞれが何冊の本を書いたかを知りたい場合は、次の手順を実行します。
+たとえば、最も古い 50 人の著者のそれぞれが何冊の本を書いたかを知りたい場合は、次の手順を実行します。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 [一時テーブル](/develop/dev-guide-use-temporary-tables.md)のステートメントを次のように変更します。
 
@@ -74,7 +74,7 @@ GROUP BY ta.id;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value = "java">
 
 {{< copyable "" >}}
 
@@ -115,7 +115,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-著者「RayMacejkovic」が4冊の本を書いたことがわかります。 CTEクエリを使用すると、次のようにこれら4冊の本の注文と評価の情報をさらに取得できます。
+著者「Ray Macejkovic」が 4 冊の本を書いたことがわかります。 CTE クエリを使用すると、次のように、これら 4 冊の書籍の注文と評価の情報をさらに取得できます。
 
 {{< copyable "" >}}
 
@@ -166,15 +166,15 @@ FROM
 4 rows in set (0.06 sec)
 ```
 
-このSQLステートメントでは、 `,`で区切られた3つのCTEブロックが定義されています。
+この SQL ステートメントでは、 `,`で区切られた 3 つの CTE ブロックが定義されています。
 
-まず、CTEブロック`books_authored_by_rm`で著者（IDは`2299112019` ）によって書かれた本をチェックしてください。次に、これらの本の平均評価と順序をそれぞれ`books_with_average_ratings`と`books_with_orders`で見つけます。最後に、 `JOIN`ステートメントで結果を集計します。
+まず、CTE ブロック`books_authored_by_rm`で著者 (ID は`2299112019` ) によって書かれた本を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの本の平均評価と注文をそれぞれ見つけます。最後に、 `JOIN`ステートメントで結果を集計します。
 
-1のクエリは`books_authored_by_rm`回だけ実行され、TiDBはその結果をキャッシュするための一時スペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照している場合、TiDBはこの一時スペースから直接結果を取得します。
+1 のクエリは`books_authored_by_rm`回だけ実行され、TiDB はその結果をキャッシュするための一時スペースを作成することに注意してください。 `books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時スペースから直接結果を取得します。
 
-### 再帰CTE {#recursive-cte}
+### 再帰的 CTE {#recursive-cte}
 
-再帰CTEは、次の構文を使用して定義できます。
+再帰 CTE は、次の構文を使用して定義できます。
 
 ```sql
 WITH RECURSIVE <query_name> AS (
@@ -183,7 +183,7 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-典型的な例は、再帰CTEを使用して[フィボナッチ数](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
+古典的な例は、再帰的な CTE を使用して[フィボナッチ数](https://en.wikipedia.org/wiki/Fibonacci_number)のセットを生成することです。
 
 {{< copyable "" >}}
 

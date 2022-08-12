@@ -3,26 +3,26 @@ title: Multi-table Join Queries
 summary: This document describes how to use multi-table join queries.
 ---
 
-# マルチテーブル参加クエリ {#multi-table-join-queries}
+# マルチテーブル結合クエリ {#multi-table-join-queries}
 
-多くのシナリオでは、1つのクエリを使用して、複数のテーブルからデータを取得する必要があります。 `JOIN`ステートメントを使用して、2つ以上のテーブルのデータを組み合わせることができます。
+多くのシナリオでは、1 つのクエリを使用して複数のテーブルからデータを取得する必要があります。 `JOIN`ステートメントを使用して、2 つ以上のテーブルのデータを組み合わせることができます。
 
-## 結合タイプ {#join-types}
+## 結合の種類 {#join-types}
 
-このセクションでは、結合タイプについて詳しく説明します。
+このセクションでは、結合の種類について詳しく説明します。
 
-### インナージョイン {#inner-join}
+### 内部結合 {#inner-join}
 
 内部結合の結合結果は、結合条件に一致する行のみを返します。
 
 ![Inner Join](/media/develop/inner-join.png)
 
-たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の著者テーブルを`book_authors`という名前の本の著者テーブルに結合する必要があります。
+たとえば、最も多作な著者を知りたい場合は、 `authors`という名前の author テーブルと`book_authors`という名前の書籍の author テーブルを結合する必要があります。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
-次のSQLステートメントで、キーワード`JOIN`を使用して、左側のテーブル`authors`と右側のテーブル`book_authors`の行を、結合条件`a.id = ba.author_id`の内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いたことがない場合、 `authors`テーブルの彼のレコードは結合条件を満たさないため、結果セットに表示されません。
+次の SQL ステートメントでは、キーワード`JOIN`を使用して、左のテーブル`authors`と右のテーブル`book_authors`の行を結合条件`a.id = ba.author_id`で内部結合として結合することを宣言します。結果セットには、結合条件を満たす行のみが含まれます。著者が本を書いていない場合、テーブル`authors`のレコードは結合条件を満たさないため、結果セットには表示されません。
 
 {{< copyable "" >}}
 
@@ -56,7 +56,7 @@ LIMIT 10;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -88,20 +88,20 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 </div>
 </SimpleTab>
 
-### 左アウタージョイン {#left-outer-join}
+### 左外部結合 {#left-outer-join}
 
-左外部結合は、結合条件に一致する左側のテーブルのすべての行と右側のテーブルの値を返します。右側のテーブルで一致する行がない場合は、 `NULL`で埋められます。
+左外部結合は、結合条件に一致する、左側のテーブルのすべての行と右側のテーブルの値を返します。右側のテーブルに一致する行がない場合は、 `NULL`で埋められます。
 
 ![Left Outer Join](/media/develop/left-outer-join.png)
 
-場合によっては、複数のテーブルを使用してデータクエリを完了したいが、結合条件が満たされていないためにデータセットが小さくなりすぎないようにする必要があります。
+場合によっては、複数のテーブルを使用してデータ クエリを完了したいが、結合条件が満たされていないためにデータ セットが小さくなりすぎないようにしたい場合があります。
 
-たとえば、Bookshopアプリのホームページで、平均評価のある新しい本のリストを表示したいとします。この場合、新しい本はまだ誰にも評価されていない可能性があります。内部結合を使用すると、これらの評価されていない書籍の情報が除外されますが、これは期待したものではありません。
+たとえば、Bookshop アプリのホームページで、平均評価の新しい本のリストを表示したいとします。この場合、新しい本はまだ誰にも評価されていない可能性があります。内部結合を使用すると、これらの評価されていない書籍の情報が除外されますが、これは予期したことではありません。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
-次のSQLステートメントで、 `LEFT JOIN`キーワードを使用して、左側のテーブル`books`が左側の外部結合で右側のテーブル`ratings`に結合されることを宣言します。これにより、 `books`テーブルのすべての行が返されます。
+次の SQL ステートメントでは、 `LEFT JOIN`キーワードを使用して、左側のテーブル`books`が右側のテーブル`ratings`に左外部結合で結合されることを宣言し、テーブル`books`のすべての行が確実に返されるようにします。
 
 {{< copyable "" >}}
 
@@ -134,7 +134,7 @@ LIMIT 10;
 10 rows in set (0.30 sec)
 ```
 
-最新の出版された本はすでに多くの評価を持っているようです。上記の方法を確認するために、SQLステートメントを使用して本*The Documentaryoflionの*すべての評価を削除しましょう。
+最近出版された本はすでに多くの評価を得ているようです。上記の方法を確認するために、次の SQL ステートメントを使用して*The Documentary of lion*という書籍のすべての評価を削除してみましょう。
 
 {{< copyable "" >}}
 
@@ -142,7 +142,7 @@ LIMIT 10;
 DELETE FROM ratings WHERE book_id = 3438991610;
 ```
 
-もう一度クエリします。*ライオンのドキュメンタリー*という本はまだ結果セットに表示されていますが、右の表`ratings`の`score`から計算された`average_score`列は`NULL`で埋められています。
+再度クエリします。 The *Documentary of lion*という本は結果セットに引き続き表示されますが、右側のテーブル`ratings`の`score`から計算された`average_score`列は`NULL`で埋められます。
 
 ```
 +------------+---------------------------------+---------------+
@@ -162,10 +162,10 @@ DELETE FROM ratings WHERE book_id = 3438991610;
 10 rows in set (0.30 sec)
 ```
 
-`INNER JOIN`を使用するとどうなりますか？試してみるのはあなた次第です。
+`INNER JOIN`を使用するとどうなりますか?試してみるかどうかはあなた次第です。
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -197,37 +197,37 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 </div>
 </SimpleTab>
 
-### 右アウタージョイン {#right-outer-join}
+### 右外部結合 {#right-outer-join}
 
-右外部結合は、結合条件に一致する右側のテーブルのすべてのレコードと左側のテーブルの値を返します。一致する値がない場合は、 `NULL`で埋められます。
+右外部結合は、右側のテーブルのすべてのレコードと、結合条件に一致する左側のテーブルの値を返します。一致する値がない場合は、 `NULL`で埋められます。
 
 ![Right Outer Join](/media/develop/right-outer-join.png)
 
 ### クロスジョイン {#cross-join}
 
-結合条件が一定の場合、2つのテーブル間の内部結合は[クロスジョイン](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットに`m \* n`レコードが生成されます。
+結合条件が一定の場合、2 つのテーブル間の内部結合は[交差結合](https://en.wikipedia.org/wiki/Join_(SQL)#Cross_join)と呼ばれます。クロス結合は、左側のテーブルのすべてのレコードを右側のテーブルのすべてのレコードに結合します。左側のテーブルのレコード数が`m`で、右側のテーブルのレコード数が`n`の場合、結果セットには`m \* n`のレコードが生成されます。
 
-### 左半結合 {#left-semi-join}
+### 左セミジョイン {#left-semi-join}
 
-TiDBは、SQL構文レベルで`LEFT SEMI JOIN table_name`をサポートしていません。ただし、実行プランレベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)は、書き換えられた同等のJOINクエリのデフォルトの結合方法として`semi join`を使用します。
+TiDB は、SQL 構文レベルで`LEFT SEMI JOIN table_name`をサポートしていません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)は、書き換えられた同等の JOIN クエリのデフォルトの結合方法として`semi join`を使用します。
 
-## 暗黙的な参加 {#implicit-join}
+## 暗黙の結合 {#implicit-join}
 
-結合を明示的に宣言した`JOIN`ステートメントがSQL標準に追加される前は、 `FROM t1, t2`句を使用してSQLステートメント内の2つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を使用して結合の条件を指定することができました。これは、内部結合を使用してテーブルを結合する暗黙的な結合として理解できます。
+結合を明示的に宣言する`JOIN`ステートメントが SQL 標準に追加される前は、 `FROM t1, t2`句を使用して SQL ステートメントで 2 つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を使用して結合の条件を指定することができました。内部結合を使用してテーブルを結合する暗黙的な結合として理解できます。
 
 ## 関連するアルゴリズムに参加する {#join-related-algorithms}
 
-TiDBは、次の一般的なテーブル結合アルゴリズムをサポートしています。
+TiDB は、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
--   [インデックス参加](/explain-joins.md#index-join)
+-   [インデックス結合](/explain-joins.md#index-join)
 -   [ハッシュ結合](/explain-joins.md#hash-join)
--   [マージ参加](/explain-joins.md#merge-join)
+-   [マージ ジョイン](/explain-joins.md#merge-join)
 
-オプティマイザは、結合されたテーブルのデータ量などの要因に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用すると、クエリが結合に使用するアルゴリズムを確認できます。
+オプティマイザーは、結合されたテーブルのデータ量などの要因に基づいて、実行する適切な結合アルゴリズムを選択します。 `EXPLAIN`ステートメントを使用して、クエリが Join に使用するアルゴリズムを確認できます。
 
-TiDBのオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用して、TiDBに適切な結合アルゴリズムを使用させることができます。
+TiDB のオプティマイザが最適な結合アルゴリズムに従って実行されない場合は、 [オプティマイザーのヒント](/optimizer-hints.md)を使用して、TiDB がより適切な結合アルゴリズムを使用するように強制できます。
 
-たとえば、上記の左結合クエリの例が、オプティマイザによって選択されていないハッシュ結合アルゴリズムを使用してより高速に実行されると仮定すると、 `SELECT`キーワードの後にヒント`/*+ HASH_JOIN(b, r) */`を追加できます。テーブルにエイリアスがある場合は、ヒントでエイリアスを使用することに注意してください。
+たとえば、上記の左結合クエリの例が、オプティマイザによって選択されないハッシュ結合アルゴリズムを使用して高速に実行されると仮定すると、 `SELECT`キーワードの後にヒント`/*+ HASH_JOIN(b, r) */`を追加できます。テーブルにエイリアスがある場合は、ヒントでエイリアスを使用することに注意してください。
 
 {{< copyable "" >}}
 
@@ -240,18 +240,18 @@ ORDER BY b.published_at DESC
 LIMIT 10;
 ```
 
-結合アルゴリズムに関連するヒント：
+結合アルゴリズムに関するヒント:
 
--   [MERGE_JOIN（t1_name [、tl_name ...]）](/optimizer-hints.md#merge_joint1_name--tl_name-)
--   [INL_JOIN（t1_name [、tl_name ...]）](/optimizer-hints.md#inl_joint1_name--tl_name-)
--   [INL_HASH_JOIN（t1_name [、tl_name ...]）](/optimizer-hints.md#inl_hash_join)
--   [HASH_JOIN（t1_name [、tl_name ...]）](/optimizer-hints.md#hash_joint1_name--tl_name-)
+-   [MERGE_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#merge_joint1_name--tl_name-)
+-   [INL_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_joint1_name--tl_name-)
+-   [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
+-   [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
-## 注文に参加する {#join-orders}
+## 結合注文 {#join-orders}
 
-実際のビジネスシナリオでは、複数のテーブルの結合ステートメントが非常に一般的です。結合の実行効率は、結合内の各テーブルの順序に関連しています。 TiDBは、 結合したテーブルの再配置 Reorderアルゴリズムを使用して、複数のテーブルが結合される順序を決定します。
+実際のビジネス シナリオでは、複数のテーブルの結合ステートメントは非常に一般的です。ジョインの実行効率は、ジョイン内の各テーブルの順序に関係しています。 TiDB は結合したテーブルの再配置 Reorder アルゴリズムを使用して、複数のテーブルを結合する順序を決定します。
 
-オプティマイザによって選択された結合順序が期待どおりに最適でない場合は、 `STRAIGHT_JOIN`を使用して、 `FROM`句で使用されているテーブルの順序でクエリを結合するようにTiDBを強制できます。
+オプティマイザーによって選択された結合順序が期待どおりに最適でない場合は、 `STRAIGHT_JOIN`を使用して、 `FROM`節で使用されるテーブルの順序でクエリを結合するように TiDB を強制できます。
 
 {{< copyable "" >}}
 
@@ -261,9 +261,9 @@ FROM authors a STRAIGHT_JOIN book_authors ba STRAIGHT_JOIN books b
 WHERE b.id = ba.book_id AND ba.author_id = a.id;
 ```
 
-この結合したテーブルの再配置アルゴリズムの実装の詳細と制限の詳細については、 [結合したテーブルの再配置アルゴリズムの概要](/join-reorder.md)を参照してください。
+この結合したテーブルの再配置アルゴリズムの実装の詳細と制限事項の詳細については、 [結合したテーブルの再配置 Algorithm の概要](/join-reorder.md)を参照してください。
 
-## も参照してください {#see-also}
+## こちらもご覧ください {#see-also}
 
--   [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
--   [再注文に結合したテーブルの再配置ための概要](/join-reorder.md)
+-   [テーブル結合を使用するステートメントの説明](/explain-joins.md)
+-   [結合したテーブルの再配置の概要](/join-reorder.md)

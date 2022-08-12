@@ -3,39 +3,39 @@ title: Transaction Restraints
 summary: Learn about transaction restraints in TiDB.
 ---
 
-# トランザクションの制限 {#transaction-restraints}
+# 取引制限 {#transaction-restraints}
 
-このドキュメントでは、TiDBのトランザクション制限について簡単に紹介します。
+このドキュメントでは、TiDB におけるトランザクションの制限について簡単に紹介します。
 
 ## 分離レベル {#isolation-levels}
 
-TiDBでサポートされている分離レベルは、 **RC（Read Committed）**と<strong>SI（Snapshot Isolation）</strong>です。ここで、 <strong>SI</strong>は基本的に<strong>RR（Repeatable Read）</strong>分離レベルと同等です。
+TiDB がサポートする分離レベルは**RC (Read Committed)**と<strong>SI (Snapshot Isolation)</strong>で、 <strong>SI</strong>は基本的に<strong>RR (Repeatable Read)</strong>分離レベルと同等です。
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
-## スナップショットアイソレーションはファントム読み取りを回避できます {#snapshot-isolation-can-avoid-phantom-reads}
+## スナップショット分離はファントム読み取りを回避できます {#snapshot-isolation-can-avoid-phantom-reads}
 
-TiDBの`SI`の分離レベルは**ファントム読み取り**を回避できますが、ANSI /ISOSQL標準の`RR`は回避できません。
+TiDB の分離レベル`SI`は**Phantom Reads**を回避できますが、ANSI/ISO SQL 標準の`RR`は回避できません。
 
-次の2つの例は、**ファントムの読み取り**が何であるかを示しています。
+次の 2 つの例は、**ファントム読み取り**とは何かを示しています。
 
--   例1：**トランザクションA**は最初にクエリに従って`n`行を取得し、次に<strong>トランザクションB</strong>はこれらの`n`行以外の`m`行を変更するか、<strong>トランザクションA</strong>のクエリに一致する`m`行を追加します。<strong>トランザクションA</strong>がクエリを再度実行すると、条件に一致する行が`n+m`行あることがわかります。ファントムのようなものなので、<strong>ファントムリード</strong>と呼ばれます。
+-   例 1:**トランザクション A**が最初にクエリに従って`n`行を取得し、次に<strong>トランザクション B</strong>がこれらの`n`行以外の`m`行を変更するか、<strong>トランザクション A</strong>のクエリに一致する`m`行を追加します。<strong>トランザクション A</strong>がクエリを再度実行すると、条件に一致する行が`n+m`行あることがわかります。幻のようなものなので<strong>幻読</strong>と呼ぶ。
 
--   例2：**管理者A**は、データベース内のすべての学生の成績を特定のスコアからABCDEの成績に変更しますが、<strong>管理者B</strong>は、この時点で特定のスコアのレコードを挿入します。<strong>管理者A</strong>が変更を終了し、まだ変更されていないレコード（<strong>管理者B</strong>によって挿入されたレコード）がまだあることを検出したとき。それは<strong>幻の読み取り</strong>です。
+-   例 2:**管理者 A**は、データベース内のすべての学生の成績を特定のスコアから ABCDE の成績に変更しますが、<strong>管理者 B</strong>はこの時点で特定のスコアを持つレコードを挿入します。<strong>管理者 A</strong>が変更を完了し、まだ変更されていないレコード (<strong>管理者 B</strong>によって挿入されたもの) がまだあることに気付いた場合。それは<strong>ファントムリード</strong>です。
 
-## SIは書き込みスキューを回避できません {#si-cannot-avoid-write-skew}
+## SI はライト スキューを回避できない {#si-cannot-avoid-write-skew}
 
-TiDBのSI分離レベルでは、**書き込みスキュー**例外を回避できません。 `SELECT FOR UPDATE`の構文を使用して、<strong>書き込みスキュー</strong>の例外を回避できます。
+TiDB の SI 分離レベルでは、**書き込みスキュー**例外を回避できません。 `SELECT FOR UPDATE`構文を使用して、<strong>書き込みスキュー</strong>の例外を回避できます。
 
-**書き込みスキュー**例外は、2つの同時トランザクションが異なるが関連するレコードを読み取るときに発生し、各トランザクションは読み取ったデータを更新して、最終的にトランザクションをコミットします。これらの関連レコード間に、複数のトランザクションで同時に変更できない制約がある場合、最終結果は制約に違反します。
+**書き込みスキュー**例外は、2 つの同時トランザクションが異なるが関連するレコードを読み取り、各トランザクションが読み取ったデータを更新し、最終的にトランザクションをコミットする場合に発生します。複数のトランザクションで同時に変更できないこれらの関連レコード間に制約がある場合、最終結果は制約に違反します。
 
-たとえば、病院の医師シフト管理プログラムを作成しているとします。病院では通常、複数の医師が同時に待機している必要がありますが、最小要件は、少なくとも1人の医師が待機していることです。医師は、シフト中に少なくとも1人の医師が待機している限り、シフトをドロップできます（たとえば、気分が悪い場合）。
+たとえば、病院の医師シフト管理プログラムを作成しているとします。病院では通常、複数の医師が同時に待機する必要がありますが、少なくとも 1 人の医師が待機している必要があります。医師は、そのシフト中に少なくとも 1 人の医師が待機している限り、シフトを取り下げることができます (気分が悪い場合など)。
 
-現在、医師`Alice`と`Bob`が待機している状況があります。どちらも気分が悪いので、病気休暇を取ることにしました。彼らはたまたま同時にボタンをクリックします。次のプログラムでこのプロセスをシミュレートしてみましょう。
+現在、医師`Alice`と`Bob`が待機している状況があります。どちらも気分が悪いので、病気休暇を取ることにしました。彼らはたまたま同時にボタンをクリックします。次のプログラムでこのプロセスをシミュレートしましょう。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -160,9 +160,9 @@ public class EffectWriteSkew {
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
-TiDBトランザクションを適応させるには、次のコードに従って[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を記述します。
+TiDB トランザクションを適応させるには、次のコードに従って[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を書き込みます。
 
 {{< copyable "" >}}
 
@@ -332,7 +332,7 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 </SimpleTab>
 
-SQLログ：
+SQL ログ:
 
 {{< copyable "" >}}
 
@@ -347,7 +347,7 @@ SQLログ：
 /* txn 1 */ COMMIT
 ```
 
-実行結果：
+実行結果:
 
 {{< copyable "" >}}
 
@@ -362,15 +362,15 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-どちらのトランザクションでも、アプリケーションは最初に2人以上の医師が待機しているかどうかを確認します。もしそうなら、それは一人の医者が安全に休暇を取ることができると仮定します。データベースはスナップショットアイソレーションを使用するため、両方のチェックで`2`が返され、両方のトランザクションが次のステージに進みます。 `Alice`は彼女の記録を非番に更新し、 `Bob`も同様に更新します。両方のトランザクションが正常にコミットされます。現在、少なくとも1人の医師が待機している必要があるという要件に違反する当直医はいない。次の図（***データ集約型アプリケーションの設計***から引用）は、実際に何が起こるかを示しています。
+どちらのトランザクションでも、アプリケーションは最初に 2 人以上の医師が待機しているかどうかを確認します。その場合、1 人の医師が安全に休暇を取ることができると想定しています。データベースはスナップショット分離を使用するため、両方のチェックで`2`が返され、両方のトランザクションが次の段階に進みます。 `Alice`は自分の記録を非番に更新し、 `Bob`も同様に更新します。両方のトランザクションが正常にコミットされます。現在、少なくとも 1 人の医師が待機している必要があるという要件に違反する勤務中の医師はいません。次の図 ( ***Designing Data-Intensive Applications***から引用) は、実際に何が起こるかを示しています。
 
 ![Write Skew](/media/develop/write-skew.png)
 
-次に、書き込みスキューの問題を回避するために、サンプルプログラムを`SELECT FOR UPDATE`を使用するように変更しましょう。
+ここで、書き込みスキューの問題を回避するために、サンプル プログラムを`SELECT FOR UPDATE`を使用するように変更しましょう。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -495,7 +495,7 @@ public class EffectWriteSkew {
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 {{< copyable "" >}}
 
@@ -665,7 +665,7 @@ func createDoctor(db *sql.DB, id int, name string, onCall bool, shiftID int) err
 
 </SimpleTab>
 
-SQLログ：
+SQL ログ:
 
 {{< copyable "" >}}
 
@@ -680,7 +680,7 @@ At least one doctor is on call
 /* txn 1 */ ROLLBACK
 ```
 
-実行結果：
+実行結果:
 
 {{< copyable "" >}}
 
@@ -695,13 +695,13 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-## <code>savepoint</code>およびネストされたトランザクションはサポートされていません {#code-savepoint-code-and-nested-transactions-are-not-supported}
+## <code>savepoint</code>とネストされたトランザクションはサポートされていません {#code-savepoint-code-and-nested-transactions-are-not-supported}
 
-TiDBは`savepoint`メカニズムをサポートしてい***ない***ため、 `PROPAGATION_NESTED`伝播動作をサポートしていません。アプリケーションが`PROPAGATION_NESTED`の伝播動作を使用する<strong>JavaSpring</strong>フレームワークに基づいている場合は、アプリケーション側でそれを適応させて、ネストされたトランザクションのロジックを削除する必要があります。
+TiDB は`savepoint`のメカニズムをサポートしてい***ない***ため、 `PROPAGATION_NESTED`の伝播動作をサポートしていません。アプリケーションが`PROPAGATION_NESTED`の伝播動作を使用する<strong>Java Spring</strong>フレームワークに基づいている場合は、ネストされたトランザクションのロジックを削除するために、アプリケーション側でそれを適応させる必要があります。
 
-**Spring**でサポートされている`PROPAGATION_NESTED`の伝播動作は、ネストされたトランザクションをトリガーします。これは、現在のトランザクションとは独立して開始される子トランザクションです。ネストされたトランザクションの開始時に`savepoint`が記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`状態にロールバックします。ネストされたトランザクションは外部トランザクションの一部であり、外部トランザクションと一緒にコミットされます。
+**Spring**がサポートする`PROPAGATION_NESTED`の伝搬動作は、ネストされたトランザクションをトリガーします。これは、現在のトランザクションとは独立して開始される子トランザクションです。ネストされたトランザクションが開始されると、 `savepoint`が記録されます。ネストされたトランザクションが失敗した場合、トランザクションは`savepoint`状態にロールバックします。ネストされたトランザクションは外部トランザクションの一部であり、外部トランザクションとともにコミットされます。
 
-次の例は、 `savepoint`のメカニズムを示しています。
+次の例は、 `savepoint`メカニズムを示しています。
 
 {{< copyable "" >}}
 
@@ -721,19 +721,19 @@ mysql> SELECT * FROM T2;
 +------+
 ```
 
-## 大規模な取引制限 {#large-transaction-restrictions}
+## 大口取引制限 {#large-transaction-restrictions}
 
-基本的な原則は、トランザクションのサイズを制限することです。 KVレベルでは、TiDBには単一のトランザクションのサイズに制限があります。 SQLレベルでは、1行のデータが1つのKVエントリにマップされ、インデックスを追加するたびに1つのKVエントリが追加されます。 SQLレベルでの制限は次のとおりです。
+基本原則は、トランザクションのサイズを制限することです。 KV レベルでは、TiDB には 1 つのトランザクションのサイズに制限があります。 SQL レベルでは、1 行のデータが 1 つの KV エントリにマップされ、追加のインデックスごとに 1 つの KV エントリが追加されます。 SQL レベルでの制限は次のとおりです。
 
--   単一行の最大レコードサイズは`120 MB`です。 TiDBv5.0以降のバージョンでは`performance.txn-entry-size-limit`で構成できます。以前のバージョンの値は`6 MB`です。
--   サポートされる単一トランザクションの最大サイズは`10 GB`です。 TiDBv4.0以降のバージョンでは`performance.txn-total-size-limit`で構成できます。以前のバージョンの値は`100 MB`です。
+-   単一行レコードの最大サイズは`120 MB`です。 TiDB v5.0 以降のバージョンでは`performance.txn-entry-size-limit`で構成できます。以前のバージョンの値は`6 MB`です。
+-   サポートされる単一トランザクションの最大サイズは`10 GB`です。 TiDB v4.0 以降のバージョンでは`performance.txn-total-size-limit`で構成できます。以前のバージョンの値は`100 MB`です。
 
-サイズ制限と行制限の両方について、トランザクション実行中のトランザクションのエンコードと追加キーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100〜500行ごとに1つのトランザクションを書き込むことをお勧めします。
+サイズ制限と行制限の両方について、トランザクション実行中のトランザクションのエンコードと追加のキーのオーバーヘッドも考慮する必要があることに注意してください。最適なパフォーマンスを実現するには、100 ～ 500 行ごとに 1 つのトランザクションを書き込むことをお勧めします。
 
 ## 自動コミットされた<code>SELECT FOR UPDATE</code>ステートメントはロックを待機しません {#auto-committed-code-select-for-update-code-statements-do-not-wait-for-locks}
 
-現在、自動コミットされた`SELECT FOR UPDATE`ステートメントにロックは追加されていません。その効果を次の図に示します。
+現在、ロックは自動コミットされた`SELECT FOR UPDATE`ステートメントに追加されていません。この効果を次の図に示します。
 
 ![The situation in TiDB](/media/develop/autocommit_selectforupdate_nowaitlock.png)
 
-これは、MySQLとの既知の非互換性の問題です。この問題は、明示的な`BEGIN;COMMIT;`ステートメントを使用して解決できます。
+これは、MySQL との既知の非互換性の問題です。この問題は、明示的な`BEGIN;COMMIT;`ステートメントを使用して解決できます。

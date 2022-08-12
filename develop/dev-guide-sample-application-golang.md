@@ -46,9 +46,9 @@ aliases: ['/tidb/stable/dev-guide-outdated-for-go-sql-driver-mysql','/tidb/stabl
 git clone https://github.com/pingcap-inc/tidb-example-golang.git
 ```
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql">
+<div label="Using go-sql-driver/mysql" value="sqldriver">
 
 `sqldriver`ディレクトリに移動します。
 
@@ -498,7 +498,7 @@ const (
 
 </div>
 
-<div label="Using GORM (Recommended)">
+<div label="Using GORM (Recommended)" value="gorm">
 
 GORM と比較すると、go-sql-driver/mysql の実装はベスト プラクティスではない可能性があります。これは、エラー処理ロジックを記述し、 `*sql.Rows`を手動で閉じる必要があり、コードを簡単に再利用できないため、コードがわずかに冗長になるためです。
 
@@ -746,9 +746,9 @@ func buyGoods(db *gorm.DB, sellID, buyID string, amount, price int) error {
 
 ### ステップ 3.1 テーブルの初期化 {#step-3-1-table-initialization}
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql">
+<div label="Using go-sql-driver/mysql" value="sqldriver">
 
 <CustomContent platform="tidb">
 
@@ -780,7 +780,7 @@ go-sql-driver/mysql を使用する場合、クラスタに接続し、 `sql/dbi
 
 </div>
 
-<div label="Using GORM (Recommended)">
+<div label="Using GORM (Recommended)" value="gorm">
 
 テーブルを手動で初期化する必要はありません。
 
@@ -790,9 +790,9 @@ go-sql-driver/mysql を使用する場合、クラスタに接続し、 `sql/dbi
 
 ### ステップ 3.2 TiDB Cloudのパラメーターを変更する {#step-3-2-modify-parameters-for-tidb-cloud}
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql">
+<div label="Using go-sql-driver/mysql" value="sqldriver">
 
 TiDB Cloudやその他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dsn` in `sqldriver.go`の値を変更します。
 
@@ -818,7 +818,7 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 </div>
 
-<div label="Using GORM (Recommended)">
+<div label="Using GORM (Recommended)" value="gorm">
 
 TiDB Cloudやその他のリモート クラスターなど、ローカル以外のデフォルトクラスタを使用している場合は、 `dsn` in `gorm.go`の値を変更します。
 
@@ -848,9 +848,9 @@ dsn := "root:123456@tcp(xxx.tidbcloud.com:4000)/test?charset=utf8mb4"
 
 ### ステップ 3.3 実行 {#step-3-3-run}
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql">
+<div label="Using go-sql-driver/mysql" value="sqldriver">
 
 コードを実行するには、それぞれ`make mysql` 、 `make build` 、および`make run`を実行します。
 
@@ -876,7 +876,7 @@ go build -o bin/sql-driver-example
 
 </div>
 
-<div label="Using GORM (Recommended)">
+<div label="Using GORM (Recommended)" value="gorm">
 
 コードを実行するには、それぞれ`make build`と`make run`を実行します。
 
@@ -904,15 +904,15 @@ go build -o bin/gorm-example
 
 ## ステップ 4. 期待される出力 {#step-4-expected-output}
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Using go-sql-driver/mysql">
+<div label="Using go-sql-driver/mysql" value="sqldriver">
 
 [go-sql-driver/mysql 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#sqldriver)
 
 </div>
 
-<div label="Using GORM (Recommended)">
+<div label="Using GORM (Recommended)" value="gorm">
 
 [GORM 期待される出力](https://github.com/pingcap-inc/tidb-example-golang/blob/main/Expected-Output.md#gorm)
 

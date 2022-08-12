@@ -34,8 +34,8 @@ summary: This document describes how to query data from a single table in a data
 
 Bookshop アプリケーションのデータベースでは、 `authors`テーブルに著者の基本情報が格納されます。 `SELECT ... FROM ...`ステートメントを使用して、データベースからデータを照会できます。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 MySQL クライアントで次の SQL ステートメントを実行します。
 
@@ -67,7 +67,7 @@ SELECT id, name FROM authors;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 Java では、クラス`Author`を宣言することで作成者の基本情報を格納できます。データベースの[タイプ](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に従って、適切な Java データ型を選択する必要があります。例えば：
 
@@ -131,8 +131,8 @@ public class AuthorDAO {
 
 たとえば、次のコマンドは、すべての著者の中で 1998 年生まれの著者を照会します。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 `WHERE`ステートメントにフィルター条件を追加します。
 
@@ -143,7 +143,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value="java">
 
 Java では、同じ SQL を使用して、動的パラメーターを使用したデータ クエリ要求を処理できます。
 

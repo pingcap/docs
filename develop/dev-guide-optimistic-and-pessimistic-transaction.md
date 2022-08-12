@@ -11,7 +11,7 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 悲観的トランザクション モデルの利点は、競合率が高いシナリオでは、先にロックするコストが後でロールバックするコストよりも少ないことです。さらに、複数の同時トランザクションが競合のためにコミットに失敗するという問題を解決できます。ただし、競合率が低いシナリオでは、悲観的なトランザクション モデルは楽観的なトランザクション モデルほど効率的ではありません。
 
-悲観的なトランザクション モデルは、より直感的で、アプリケーション側での実装が容易です。楽観的なトランザクション モデルには、複雑なアプリケーション側の再試行メカニズムが必要です。
+悲観的なトランザクション モデルは、アプリケーション側での実装がより直感的で簡単です。楽観的なトランザクション モデルには、複雑なアプリケーション側の再試行メカニズムが必要です。
 
 以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に、楽観的な取引と悲観的な取引の長所と短所を示します。本を購入するプロセスは、主に次のとおりです。
 
@@ -23,17 +23,17 @@ summary: Learn about optimistic and pessimistic transactions in TiDB.
 
 ## 悲観的な取引 {#pessimistic-transactions}
 
-次のコードは、2 つのスレッドを使用して、2 人のユーザーが悲観的なトランザクション モードで同じ本を購入するプロセスをシミュレートします。書店に10冊残っています。ボブは 6 冊の本を購入し、アリスは 4 冊の本を購入します。彼らはほぼ同時に注文を完了します。その結果、在庫の本はすべて売り切れました。
+次のコードは、2 つのスレッドを使用して、2 人のユーザーが悲観的なトランザクション モードで同じ本を購入するプロセスをシミュレートします。書店に残っている本は10冊です。ボブは 6 冊の本を購入し、アリスは 4 冊の本を購入します。彼らはほぼ同時に注文を完了します。その結果、在庫の本はすべて売り切れました。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 複数のスレッドを使用して複数のユーザーが同時にデータを挿入する状況をシミュレートするため、安全なスレッドで接続オブジェクトを使用する必要があります。ここでは、Java の一般的な接続プール[光CP](https://github.com/brettwooldridge/HikariCP)をデモに使用します。
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 Golang の`sql.DB`は同時実行セーフであるため、サードパーティのパッケージをインポートする必要はありません。
 
@@ -97,9 +97,9 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 ### 悲観的なトランザクションの例を書く {#write-a-pessimistic-transaction-example}
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 **Configuration / コンフィグレーションファイル**
 
@@ -332,7 +332,7 @@ public class TxnExample {
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 必要なデータベース操作を含む`helper.go`のファイルを作成します。
 
@@ -584,7 +584,7 @@ func createUser(txn *util.TiDBSqlTx, id int, nickname string, balance decimal.De
 }
 ```
 
-次に、 `main`関数で`txn.go`を書き込んで`helper.go`を呼び出し、着信コマンド ライン引数を処理します。
+次に、 `main`関数で`txn.go`を記述して`helper.go`を呼び出し、着信コマンド ライン引数を処理します。
 
 {{< copyable "" >}}
 
@@ -662,9 +662,9 @@ Golang の例には、楽観的トランザクションが既に含まれてい�
 
 サンプル プログラムを実行します。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -675,7 +675,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 {{< copyable "" >}}
 
@@ -739,13 +739,13 @@ mysql> SELECT * FROM users;
 
 ### 売り過ぎ防止の例 {#an-example-that-prevents-overselling}
 
-この例のタスクは、より困難です。在庫が10冊残っているとします。ボブは 7 冊、アリスは 4 冊の本を購入し、ほぼ同時に注文します。何が起こるか？前の例のコードを再利用してこの課題を解決し、ボブの購入数量を 6 から 7 に変更できます。
+この例のタスクは、より困難です。在庫が10冊残っているとします。ボブは本を 7 冊、アリスは本を 4 冊購入し、ほぼ同時に注文します。何が起こるか？前の例のコードを再利用してこの課題を解決し、ボブの購入数量を 6 から 7 に変更できます。
 
 サンプル プログラムを実行します。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -756,7 +756,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 {{< copyable "" >}}
 
@@ -821,9 +821,9 @@ mysql> SELECT * FROM users;
 
 ### 楽観的なトランザクションの例を書く {#write-an-optimistic-transaction-example}
 
-<SimpleTab>
+<SimpleTab  groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 **コーディング**
 
@@ -1005,7 +1005,7 @@ public class TxnExample {
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 [悲観的なトランザクションの例を書く](#write-a-pessimistic-transaction-example)節の Golang の例は、すでに楽観的トランザクションをサポートしており、変更なしで直接使用できます。
 
@@ -1017,9 +1017,9 @@ public class TxnExample {
 
 サンプル プログラムを実行します。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -1030,7 +1030,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 {{< copyable "" >}}
 
@@ -1100,15 +1100,15 @@ mysql> SELECT * FROM users;
 2 rows in set (0.00 sec)
 ```
 
-### 過剰販売を防ぐ例 {#an-example-that-prevents-overselling}
+### 売り過ぎ防止の例 {#an-example-that-prevents-overselling}
 
 このセクションでは、過剰販売を防止する楽観的なトランザクションの例について説明します。在庫に10冊の本が残っているとします。ボブは本を 7 冊購入し、アリスは本を 4 冊購入します。彼らはほぼ同時に注文を出します。何が起こるか？オプティミスティック トランザクションの例のコードを再利用して、この要件に対処できます。ボブの購入数を 6 から 7 に変更します。
 
 サンプル プログラムを実行します。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -1119,7 +1119,7 @@ java -jar target/plain-java-txn-0.0.1-jar-with-dependencies.jar ALICE_NUM=4 BOB_
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 {{< copyable "" >}}
 

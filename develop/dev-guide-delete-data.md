@@ -67,8 +67,8 @@ SELECT COUNT(*) FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `r
 
 返されるレコードが 10,000 件未満の場合は、次の例を使用してそれらを削除します。
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 SQL では、例は次のとおりです。
 
@@ -78,7 +78,7 @@ DELETE FROM `ratings` WHERE `rated_at` >= "2022-04-15 00:00:00" AND  `rated_at` 
 
 </div>
 
-<div label="Java">
+<div label="Java" value="java">
 
 Java では、例は次のとおりです。
 
@@ -105,7 +105,7 @@ try (Connection connection = ds.getConnection()) {
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 Golang では、例は次のとおりです。
 
@@ -202,8 +202,8 @@ TiDB は[統計情報](/statistics.md)を使用してインデックスの選択
 
 特定の期間内にアプリケーション エラーが見つかったとします。この期間内に[評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)のすべてのデータ (たとえば`2022-04-15 00:00:00`から`2022-04-15 00:15:00`まで) を削除する必要があり、15 分間で 10,000 を超えるレコードが書き込まれます。次のように実行できます。
 
-<SimpleTab>
-<div label="Java">
+<SimpleTab groupId="language">
+<div label="Java" value="java">
 
 Java での一括削除の例は次のとおりです。
 
@@ -265,7 +265,7 @@ public class BatchDeleteExample
 
 </div>
 
-<div label="Golang">
+<div label="Golang" value="golang">
 
 Golang での一括削除の例は次のとおりです。
 

@@ -5,16 +5,16 @@ summary: Learn about how to use the TiDB prepared statements.
 
 # 準備されたステートメント {#prepared-statements}
 
-[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数のSQLステートメントをテンプレート化します。 SQLステートメントをパラメーターから分離します。これを使用して、SQLステートメントの次の側面を改善できます。
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数の SQL ステートメントをテンプレート化します。これにより、SQL ステートメントがパラメーターから分離されます。これを使用して、SQL ステートメントの次の側面を改善できます。
 
--   **セキュリティ**：パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)の攻撃のリスクが回避されます。
--   **パフォーマンス**：ステートメントはTiDBサーバーで事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQLステートメント全体の解析、SQLステートメント文字列のスプライシング、およびネットワーク送信のコストが節約されます。
+-   **セキュリティ**: パラメータとステートメントが分離されているため、 [SQL インジェクション](https://en.wikipedia.org/wiki/SQL_injection)の攻撃のリスクが回避されます。
+-   **パフォーマンス**: ステートメントは TiDB サーバーで事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQL ステートメント全体の解析、SQL ステートメント文字列のスプライシング、およびネットワーク送信のコストが節約されます。
 
-ほとんどのアプリケーションでは、SQLステートメントを列挙できます。限られた数のSQLステートメントを使用して、アプリケーション全体のデータクエリを完了することができます。したがって、プリペアドステートメントを使用することがベストプラクティスです。
+ほとんどのアプリケーションでは、SQL ステートメントを列挙できます。限られた数の SQL ステートメントを使用して、アプリケーション全体のデータ クエリを完了することができます。そのため、プリペアドステートメントを使用することがベスト プラクティスです。
 
-## SQL構文 {#sql-syntax}
+## SQL 構文 {#sql-syntax}
 
-このセクションでは、プリペアドステートメントを作成、実行、および削除するためのSQL構文について説明します。
+このセクションでは、プリペアドステートメントを作成、実行、および削除するための SQL 構文について説明します。
 
 ### プリペアドステートメントを作成する {#create-a-prepared-statement}
 
@@ -24,16 +24,16 @@ summary: Learn about how to use the TiDB prepared statements.
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
 
-|            パラメータ名           |                 説明                |
-| :-------------------------: | :-------------------------------: |
-| `{prepared_statement_name}` |          プリペアドステートメントの名前          |
-|  `{prepared_statement_sql}` | プレースホルダーとして疑問符が付いたプリペアドステートメントSQL |
+|            パラメータ名           |                説明                |
+| :-------------------------: | :------------------------------: |
+| `{prepared_statement_name}` |          プリペアドステートメントの名前         |
+|  `{prepared_statement_sql}` | プレースホルダーとして疑問符を含むプリペアドステートメントSQL |
 
-詳細については、 [PREPAREステートメント](/sql-statements/sql-statement-prepare.md)を参照してください。
+詳細については、 [PREPARE ステートメント](/sql-statements/sql-statement-prepare.md)を参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは**ユーザー変数**のみをパラメーターとして使用できるため、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
+プリペアドステートメントは**ユーザー変数**のみをパラメーターとして使用できるため、 [`SET`ステートメント](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定してから、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出すことができます。
 
 {{< copyable "" >}}
 
@@ -46,11 +46,11 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 | :-------------------------: | :----------------------------------------------------------------------------------------: |
 |      `{parameter_name}`     |                                           ユーザー変数名                                          |
 |     `{parameter_value}`     |                                           ユーザー変数値                                          |
-| `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
+| `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じでなければなりません。 |
 
 詳細については、 [`EXECUTE`ステートメント](/sql-statements/sql-statement-execute.md)を参照してください。
 
-### プリペアドステートメントを削除します {#delete-the-prepared-statement}
+### プリペアドステートメントを削除する {#delete-the-prepared-statement}
 
 {{< copyable "" >}}
 
@@ -60,21 +60,21 @@ DEALLOCATE PREPARE {prepared_statement_name};
 
 |            パラメータ名           |                                             説明                                             |
 | :-------------------------: | :----------------------------------------------------------------------------------------: |
-| `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
+| `{prepared_statement_name}` | 前処理ステートメントの名前。これは、 [プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じでなければなりません。 |
 
 詳細については、 [`DEALLOCATE`ステートメント](/sql-statements/sql-statement-deallocate.md)を参照してください。
 
 ## 例 {#examples}
 
-このセクションでは、プリペアドステートメントの2つの例について説明します`SELECT`つのデータと`INSERT`のデータです。
+このセクションでは、準備済みステートメントの 2 つの例 ( `SELECT`データと`INSERT`データ) について説明します。
 
 ### <code>SELECT</code>例 {#code-select-code-example}
 
-たとえば、 [`bookshop`アプリケーション](/develop/dev-guide-bookshop-schema-design.md#books-table)の`id = 1`の本をクエリする必要があります。
+たとえば、 [`bookshop`申し込み](/develop/dev-guide-bookshop-schema-design.md#books-table)中`id = 1`の本を照会する必要があります。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="SQL">
+<div label="SQL" value="sql">
 
 {{< copyable "" >}}
 
@@ -82,7 +82,7 @@ DEALLOCATE PREPARE {prepared_statement_name};
 PREPARE `books_query` FROM 'SELECT * FROM `books` WHERE `id` = ?';
 ```
 
-実行結果：
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.01 sec)
@@ -94,7 +94,7 @@ Query OK, 0 rows affected (0.01 sec)
 SET @id = 1;
 ```
 
-実行結果：
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.04 sec)
@@ -106,7 +106,7 @@ Query OK, 0 rows affected (0.04 sec)
 EXECUTE `books_query` USING @id;
 ```
 
-実行結果：
+実行結果:
 
 ```
 +---------+---------------------------------+--------+---------------------+-------+--------+
@@ -119,7 +119,7 @@ EXECUTE `books_query` USING @id;
 
 </div>
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -149,11 +149,11 @@ try (Connection connection = ds.getConnection()) {
 
 ### <code>INSERT</code>例 {#code-insert-code-example}
 
-[`books`テーブル](/develop/dev-guide-bookshop-schema-design.md#books-table)を例に`published_at = NOW()` `title = TiDB Developer Guide` `stock = 100`の挿入時刻）の`type = Science & Technology`を挿入する必要があり`price = 0.0` 。 `books`テーブルの**主キー**で`AUTO_RANDOM`属性を指定する必要はないことに注意してください。データの挿入の詳細については、 [データを挿入](/develop/dev-guide-insert-data.md)を参照してください。
+例として[`books`テーブル](/develop/dev-guide-bookshop-schema-design.md#books-table)を使用すると、 `title = TiDB Developer Guide` 、 `type = Science & Technology` 、 `stock = 100` 、 `price = 0.0` 、および`published_at = NOW()` (現在の挿入時間) の本を挿入する必要があります。 `books`テーブルの**主キー**に`AUTO_RANDOM`属性を指定する必要がないことに注意してください。データの挿入の詳細については、 [データの挿入](/develop/dev-guide-insert-data.md)を参照してください。
 
-<SimpleTab>
+<SimpleTab groupId="language">
 
-<div label="SQL">
+<div label="SQL" value="sql">
 
 {{< copyable "" >}}
 
@@ -161,7 +161,7 @@ try (Connection connection = ds.getConnection()) {
 PREPARE `books_insert` FROM 'INSERT INTO `books` (`title`, `type`, `stock`, `price`, `published_at`) VALUES (?, ?, ?, ?, ?);';
 ```
 
-実行結果：
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.03 sec)
@@ -177,7 +177,7 @@ SET @price = 0.0;
 SET @published_at = NOW();
 ```
 
-実行結果：
+実行結果:
 
 ```
 Query OK, 0 rows affected (0.04 sec)
@@ -189,7 +189,7 @@ Query OK, 0 rows affected (0.04 sec)
 EXECUTE `books_insert` USING @title, @type, @stock, @price, @published_at;
 ```
 
-実行結果：
+実行結果:
 
 ```
 Query OK, 1 row affected (0.03 sec)
@@ -197,7 +197,7 @@ Query OK, 1 row affected (0.03 sec)
 
 </div>
 
-<div label="Java">
+<div label="Java" value="java">
 
 {{< copyable "" >}}
 
@@ -218,30 +218,30 @@ try (Connection connection = ds.getConnection()) {
 }
 ```
 
-ご覧のとおり、JDBCはプリペアドステートメントのライフサイクルを制御するのに役立ち、アプリケーションでプリペアドステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDBはMySQLと互換性があるため、クライアント側でMySQL JDBC Driverを使用するためのデフォルト構成では、***サーバー側の***プリペアドステートメントオプションを有効にするのではなく、クライアント側のプリペアドステートメントを使用することに注意してください。
+ご覧のとおり、JDBC は準備済みステートメントのライフサイクルを制御するのに役立ち、アプリケーションで準備済みステートメントを手動で作成、使用、または削除する必要はありません。ただし、TiDB は MySQL と互換性があるため、クライアント側で MySQL JDBCDriverを使用するためのデフォルトの構成は、***サーバー側の***プリペアドステートメントオプションを有効にするのではなく、クライアント側のプリペアドステートメントを使用することです。
 
-次の構成は、JDBCでTiDBサーバー側のプリペアドステートメントを使用するのに役立ちます。
+次の構成は、JDBC で TiDB サーバー側の準備済みステートメントを使用するのに役立ちます。
 
-|          パラメータ          |                意味                |            推奨シナリオ           | 推奨されるConfiguration / コンフィグレーション |
-| :---------------------: | :------------------------------: | :-------------------------: | :-----------------------------: |
-|   `useServerPrepStmts`  | サーバー側を使用してプリペアドステートメントを有効にするかどうか | プリペアドステートメントを複数回使用する必要がある場合 |              `true`             |
-|     `cachePrepStmts`    |  クライアントがプリペアドステートメントをキャッシュするかどうか | `useServerPrepStmts=true`時間 |              `true`             |
-| `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ（デフォルトでは256文字） |   プリペアドステートメントが256文字を超える場合  |  プリペアドステートメントの実際のサイズに従って構成されます  |
-|   `prepStmtCacheSize`   |    プリペアドステートメントの最大数（デフォルトでは25）   |   プリペアドステートメントの数が25を超える場合   |   準備されたステートメントの実際の数に従って構成されます   |
+|          パラメータ          |                 意味                 |            推奨シナリオ           |  推奨Configuration / コンフィグレーション |
+| :---------------------: | :--------------------------------: | :-------------------------: | :---------------------------: |
+|   `useServerPrepStmts`  |   サーバー側を使用して準備済みステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
+|     `cachePrepStmts`    |   クライアントが準備済みステートメントをキャッシュするかどうか   |  `useServerPrepStmts=true`時 |             `true`            |
+| `prepStmtCacheSqlLimit` | プリペアドステートメントの最大サイズ (デフォルトで 256 文字) |   プリペアドステートメントが256文字を超える場合  | プリペアドステートメントの実際のサイズに従って構成されます |
+|   `prepStmtCacheSize`   |    準備済みステートメントの最大数 (デフォルトでは 25)    |   準備済みステートメントの数が 25 を超える場合  |  準備されたステートメントの実際の数に従って構成されます  |
 
-以下は、JDBC接続文字列構成の一般的なシナリオです。ホスト： `127.0.0.1` 、ポート： `4000` 、ユーザー名： `root` 、パスワード：null、デフォルトデータベース： `test` ：
+以下は、JDBC 接続文字列構成の一般的なシナリオです。ホスト: `127.0.0.1` 、ポート: `4000` 、ユーザー名: `root` 、パスワード: null、デフォルト データベース: `test` :
 
 ```
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-データを挿入するときに他のJDBCパラメータを変更する必要がある場合は、 [行を挿入](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
+データを挿入するときに他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
 
-Javaの完全な例については、以下を参照してください。
+Java での完全な例については、以下を参照してください。
 
--   [TiDBとJavaを使用してシンプルなCRUDアプリを構築する-JDBCを使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
--   [TiDBとJavaを使用してシンプルなCRUDアプリを構築する-Hibernateを使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
--   [SpringBootを使用してTiDBアプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)
+-   [TiDB と Java を使用して単純な CRUD アプリを構築する - JDBC を使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [TiDB と Java を使用して単純な CRUD アプリを構築する - Hibernate を使用する](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+-   [Spring Boot を使用して TiDB アプリケーションをビルドする](/develop/dev-guide-sample-application-spring-boot.md)
 
 </div>
 
