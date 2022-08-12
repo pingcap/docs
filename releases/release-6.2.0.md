@@ -127,7 +127,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     [User document](/tiflash/tiflash-configuration.md#configure-the-tiflash-toml-file) [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
 
-* TiFlash adds Fast Mode for data scanning to increase read and write speed by sacrificing data consistency (experimental)
+* TiFlash adds FastScan for data scanning to increase read and write speed by sacrificing data consistency (experimental)
 
     TiDB introduces Fast Mode in v6.2.0. It supports skipping consistency checks to increase the speed significantly. The Fast Mode is suitable for scenarios that do not require high accuracy and consistency of data such as offline analysis tasks. Previously, to ensure data consistency, TiFlash needed to perform data consistency checks during the data scanning process to find the required data from multiple different versions (called Normal Mode).
 
