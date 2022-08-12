@@ -4,7 +4,7 @@ on:
   push:
     branches:
       # - master
-      - release-*
+      # - release-*
       - i18n-ja-release-5.4
 
 jobs:
