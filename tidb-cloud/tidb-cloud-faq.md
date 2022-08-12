@@ -91,9 +91,6 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ## How does TiDB protect data privacy and ensure security?
 
-<<<<<<< HEAD
-Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
-=======
 Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are included for encryption at rest. There are two different network planes: the application to the TiDB server and the plane for data communication. We include extended syntax to compare Subject Alternative Name for verification of certificates and TLS context for internal communication.
 
 ## Can I import my data directly to TiFlash?
@@ -103,4 +100,3 @@ No. When you import data to TiDB Cloud, the data is imported to TiKV. After the 
 ## Can I export TiFlash data in the CSV format?
 
 No. TiFlash data cannot be exported.
->>>>>>> 81f07d13d (cloud: add SQL and TiFlash related docs (#9001) (#9479))

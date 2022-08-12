@@ -91,3 +91,7 @@ You can adjust the size limit via the [`txn-entry-size-limit`](/tidb-configurati
 You can modify the limit via the [`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit) configuration item.
 
 </CustomContent>
+
+## Limitations on TiKV version
+
+In your cluster, if the version of the TiDB component is v6.2.0 or later, the version of TiKV must be v6.2.0 or later.
