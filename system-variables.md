@@ -195,7 +195,7 @@ mysql> SELECT * FROM t1;
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `300`
 - Unit: Milliseconds
 - Log DDL operations whose execution time exceeds the threshold value.
@@ -351,14 +351,14 @@ This variable is an alias for `last_insert_id`.
 ### plugin_dir
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: ""
 - Indicates the directory to load plugins as specified by a command-line flag.
 
 ### plugin_load
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: ""
 - Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
 
@@ -564,7 +564,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
 <CustomContent platform="tidb">
 
-- In v5.3.0 and later versions, the default value of this variable is `2`, which serves as an experimental feature. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
+- In v5.3.0 and later versions, the default value of this variable is `2`. If your cluster is upgraded from a version earlier than v5.3.0 to v5.3.0 or later, the default value of `tidb_analyze_version` does not change. For detailed introduction, see [Introduction to Statistics](/statistics.md).
 
 </CustomContent>
 
@@ -683,7 +683,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
@@ -990,7 +990,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
@@ -1237,7 +1237,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the slow log feature.
@@ -1475,7 +1475,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Integer
 - Default value: `60`
 - Range: `[10, 2147483647]`
@@ -1495,10 +1495,19 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
+
+### `tidb_generate_binary_plan` <span class="version-mark">New in v6.2.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `ON`
+- This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries.  
+- When this variable is set to `ON`, you can view visual execution plans in TiDB Dashboard. Note that TiDB Dashboard only provides visual display for execution plans generated after this variable is enabled.
+- You can execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific plan from a binary plan.
 
 ### tidb_gc_concurrency <span class="version-mark">New in v5.0</span>
 
@@ -1589,7 +1598,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `OFF`
 
@@ -1798,6 +1807,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[100, 16384]`
 - This variable is used to set the maximum number of schema versions (the table IDs modified for corresponding versions) allowed to be cached. The value range is 100 ~ 16384.
 
+### tidb_max_paging_size <span class="version-mark">New in v6.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `50000`
+- Range: `[1, 2147483647]`
+- Unit: Rows
+- This variable is used to set the maximum number of rows during the coprocessor paging request process. Setting it to too small a value increases the RPC count between TiDB and TiKV, while setting it to too large a value results in excessive memory usage in some cases, such as loading data and full table scan.
+
 ### tidb_mem_oom_action <span class="version-mark">New in v6.1.0</span>
 
 - Scope: GLOBAL
@@ -1893,7 +1912,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Float
 - Default value: `0.8`
 - Range: `[0, 1]`
@@ -1944,6 +1963,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[10, 216000]`
 - Unit: Seconds
 - This variable is used to set the step of the Prometheus statement generated when querying `METRICS_SCHEMA`.
+
+### tidb_min_paging_size <span class="version-mark">New in v6.2.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Integer
+- Default value: `128`
+- Range: `[1, 2147483647]`
+- Unit: Rows
+- This variable is used to set the minimum number of rows during the coprocessor paging request process. Setting it to too small a value increases the RPC request count between TiDB and TiKV, while setting it to too large a value might cause performance decrease when executing queries using IndexLookup with Limit.
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
@@ -2090,6 +2119,14 @@ mysql> desc select count(distinct a) from test.t;
 - This variable is used to set the threshold that determines whether to push the Limit or TopN operator down to TiKV.
 - If the value of the Limit or TopN operator is smaller than or equal to this threshold, these operators are forcibly pushed down to TiKV. This variable resolves the issue that the Limit or TopN operator cannot be pushed down to TiKV partly due to wrong estimation.
 
+### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `ON`
+- Specifies whether to allow using outer table as the build side in outer join for TiFlash.
+
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -2122,6 +2159,26 @@ explain select * from t where age=5;
 +-------------------------------+------------+-----------+-----------------------------+-------------------------------+
 3 rows in set (0.00 sec)
 ```
+
+### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: Boolean
+- Default value: `OFF`
+- Specifies whether to allow the optimizer to push `Projection` down to the TiKV or TiFlash coprocessor.
+
+### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
+
+> **Note:**
+>
+> The query performance optimization by enabling this variable is effective **only for TiFlash**.
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. When the aggregation column has serious skew and the `DISTINCT` column has many different values, this rewriting can avoid the data skew in the query execution and improve the query performance.
 
 ### tidb_opt_write_row_id
 
@@ -2193,7 +2250,7 @@ explain select * from t where age=5;
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 1]`
@@ -2278,7 +2335,7 @@ explain select * from t where age=5;
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
@@ -2308,6 +2365,14 @@ explain select * from t where age=5;
 - Default value: `ON`
 - This variable controls whether the optimizer can use a query condition including null equivalence as a prefix condition for index access.
 - This variable is enabled by default. When it is enabled, the optimizer can reduce the volume of index data to be accessed, which accelerates query execution. For example, if a query involves multiple-column indexes `index(a, b)` and the query condition contains `a<=>null and b=1`, the optimizer can use both `a<=>null` and `b=1` in the query condition for index access. If the variable is disabled, because `a<=>null and b=1` includes the null equivalence condition, the optimizer does not use `b=1` for index access.
+
+### tidb_remove_orderby_in_subquery <span class="version-mark">New in v6.1.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- Specifies whether to remove `ORDER BY` clause in a subquery.
 
 ### tidb_replica_read <span class="version-mark">New in v4.0</span>
 
@@ -2440,7 +2505,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Integer
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`
@@ -2679,6 +2744,18 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - This variable is used to control how many SQL statements that contribute the most to the load (that is, top N) can be recorded by [Top SQL](https://docs.pingcap.com/tidb/stable/top-sql) per minute.
 
 </CustomContent>
+
+### tidb_track_aggregate_memory_usage
+
+- Scope: SESSION ｜ GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `true`
+- This variable controls whether TiDB tracks the memory usage of aggregate functions.
+
+> **Warning:**
+>
+> If you disable this variable, TiDB might not accurately track the memory usage and cannot control the memory usage of the corresponding SQL statements.
 
 ### tidb_tso_client_batch_max_wait_time <span class="version-mark">New in v5.3.0</span>
 
