@@ -7,7 +7,7 @@ summary: An overview of the usage of ALTER TABLE ... SET TIFLASH MODE ... for th
 
 > **Warning:**
 >
-> This statement is still an experimental feature. It is NOT recommended that you use it in the production environment.
+> This statement is still an experimental feature.
 > The form and usage of related experimental features may change in subsequent versions.
 
 You can use the `ALTER TABLE...SET TIFLASH MODE...` statement to switch the FastScan option for the corresponding table in TiFlash. The following options are currently supported.
