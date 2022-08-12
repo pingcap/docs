@@ -30,11 +30,11 @@ CREATE TABLE sale_01 (
  UNIQUE KEY ind_uid (uid)
 );
 
-### DM 
+### DM
 
 DM 的版本为 v5.3.0。具体信息如下：
 
-![storage-architecture](/media/xxx.png)
+![DM Details](/media/dm-details.png)
 
 ## 存量数据迁移
 
