@@ -16,7 +16,7 @@ By default, TiFlash guarantees the precision of query results and data consisten
 
 Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable FastScan for the corresponding table for querying.
 
-The FastScan takes effect globally only for those tables who enables FastScan by [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md). TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-utf-8 characters in the column names, and therefore enabling FastScan is not supported for them.
+The FastScan takes effect globally only for those tables for which you enable FastScan by running [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md). TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-utf-8 characters in the column names, and therefore enabling FastScan is not supported for them.
 
 For more information, see [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md).
 
