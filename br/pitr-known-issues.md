@@ -15,7 +15,7 @@ Consider the following possible causes:
 
 - PITR experiences OOM because the log range to be recovered is too large.
     It is recommended that you recover logs of no more than two days, and one week to maximum. That is, perform a full backup operation at least once in two days or once in up to one week during PITR backup process.
-- OOM occurs when you delete a log because the interval of the deleted log is too large.
+- OOM occurs when you delete logs because the range of logs to be deleted is too large.
     To resolve this issue, reduce the range of logs to be deleted first and delete the target logs in several batches instead of deleting them once.
 - The memory allocation of the node where the BR process is located is too low.
     It is recommended to scale up the node memory configuration to at least 16 GB to ensure that PITR has sufficient memory resources for recovery.
