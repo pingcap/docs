@@ -83,7 +83,7 @@ ALTER TABLE test SET tiflash mode NORMAL
 
 When the downstream is also TiDB, `ALTER TABLE ... SET TiFLASH MODE ...` will be synchronized downstream by TiDB Binlog. In other scenarios, TiDB Binlog does not synchronize this statement.
 
-Fast mode does not support TiCDC.
+FastScan does not support TiCDC.
 
 ## See also
 
