@@ -15,7 +15,7 @@ This document introduces the experimental features of TiDB in different versions
 + [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics). (Introduced in v6.1.0)
 + [Use the thread pool to handle read requests from the storage engine](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). (Introduced in v6.2.0)
 + [Cost Model Version 2](/cost-model.md#cost-model-version-2). (Introduced in v6.2.0)
-+ [Fast Mode](/develop/dev-guide-read-in-fast-mode.md). (Introduced in v6.2.0)
++ [FastScan](/develop/dev-guide-read-in-fast-mode.md). (Introduced in v6.2.0)
 + [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
 
 ## Stability
