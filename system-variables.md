@@ -857,7 +857,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Default value: `OFF`
 - This variable controls the way commit TS is calculated for async commit. By default (with the `OFF` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
 - If you set this variable to `ON`, the TS fetched from the PD server is saved, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
-+ For scenarios that require only causal consistency, you can set this variable to `ON` to improve performance.
+- For scenarios that require only causal consistency, you can set this variable to `ON` to improve performance.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
