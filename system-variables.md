@@ -864,7 +864,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Scope: SESSION
 - Persists to cluster: No
 - Type: String
-- This variable is used to get the last transaction information within the current session. it is a read-only variable. The transaction information includes:
+- This variable is used to get the last transaction information within the current session. It is a read-only variable. The transaction information includes:
     - The transaction scope.
     - The start and commit TS.
     - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
