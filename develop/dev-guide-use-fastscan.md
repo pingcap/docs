@@ -7,7 +7,8 @@ summary: Introduces a way to speed up the querying of OLAP scenarios by using Fa
 
 > **Warning:**
 >
-> This feature is still an experimental feature. It is NOT recommended that you use it in the production environment.
+> This feature is still an experimental feature. 
+> The form and usage of related experimental features may change in subsequent versions.
 
 This document describes how to use FastScan to speed up queries in Online Analytical Processing (OLAP) scenarios.
 
