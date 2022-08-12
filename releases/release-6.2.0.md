@@ -119,7 +119,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     For more information about upgrading TiFlash, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade.md).
 
-    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) [#3594](https://github.com/pingcap/tiflash/issues/3594) @[JaySon-Huang](https://github.com/JaySon-Huang) @[jiaqizho](https://github.com/jiaqizho) @[lidezhu](https://github.com/lidezhu)
+    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) [#3594](https://github.com/pingcap/tiflash/issues/3594) @[JaySon-Huang](https://github.com/JaySon-Huang) @[lidezhu](https://github.com/lidezhu) @[jiaqizho](https://github.com/jiaqizho)
 
 * TiFlash optimizes data scanning performance in multiple concurrency scenarios (experimental)
 
@@ -282,6 +282,7 @@ In 6.2.0, the key new features or improvements are as follows:
 | PD | replication-mode.dr-auto-sync.wait-sync-timeout | Deleted | This configuration does not take effect and is deleted. |
 | TiFlash | [`storage.format_version`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Modified | The default value of `format_version` changes to `4`, the default format for v6.2.0 and later versions, which reduces write amplification and background task resource consumption. |
 | TiFlash | [profiles.default.dt_enable_read_thread](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | This configuration controls whether to use the thread pool to handle read requests from the storage engine. The default value is `false`. |
+| TiFlash | [profiles.default.dt_page_gc_threshold](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) | Newly added | This configuration specifies the minimum ratio of valid data in a PageStorage data file. |
 | TiCDC | [--overwrite-checkpoint-ts](/ticdc/manage-ticdc.md#resume-a-replication-task) | Newly added | This configuration is added to the `cdc cli changefeed resume` sub-command. |
 | TiCDC | [--no-confirm](/ticdc/manage-ticdc.md#resume-a-replication-task) | Newly added | This configuration is added to the `cdc cli changefeed resume` sub-command.|
 | DM | [mode](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced) | Newly added | This configuration is a validator parameter. Optional values are `full`, `fast`, and `none`. The default value is `none`, which does not validate the data. |
@@ -293,7 +294,7 @@ In 6.2.0, the key new features or improvements are as follows:
 ### Others
 
 - TiFlash `format_version` cannot be downgraded from `4` to `3`. For details, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md).
-- In v6.2.0, it is **strongly not recommended** that you set `dt_enable_logical_split` to `true` because of a known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
+- In v6.2.0 and later versions, it is strongly recommended to keep the default value `false` of `dt_enable_logical_split` and not to change it to `true`. For details, see known issue [#5576](https://github.com/pingcap/tiflash/issues/5576).
 - If the backup cluster has a TiFlash replica, after you perform PITR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to manually configure TiFlash replicas. Executing the `exchange partition` DDL statement might result in a failure of PITR. If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For other compatibility issues of PITR, see [PITR limitations](/br/point-in-time-recovery.md#limitations).
 - Since TiDB v6.2.0, you need to specify the parameter `--with-sys-table=true` when restoring data from MySQL schemas.
 - When you execute the `ALTER TABLE` statement to add, drop, or modify multiple columns or indexes, TiDB checks table consistency by comparing the table before and after statement execution, regardless of the change in the same DDL statement. The execution order of the DDLs is not fully compatible with MySQL in some scenarios.
