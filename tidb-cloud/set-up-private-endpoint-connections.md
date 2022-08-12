@@ -38,13 +38,13 @@ Take the following steps to set up a private endpoint. If you have multiple clus
 
 ### Prerequisites
 
-TiDB Cloud supports private endpoints only Dedicated Tier clusters. You are expected to create a Dedicated Tier cluster before creating a private endpoint. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
+TiDB Cloud supports private endpoints only for Dedicated Tier clusters. You are expected to create a Dedicated Tier cluster before creating a private endpoint. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
 
 #### Step 1. Find the entrance
 
 To find the entrance to creating a private endpoint, take the following steps:
 
-1. On the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed. If there is any existing private endpoint, it is displayed on this page.
+1. On the TiDB Cloud console, click the **Project Settings** tab, then click **Private Endpoint** on the left menu, and the **Private Endpoint** page is displayed.
 2. Click **Add** in the upper-right corner to open the creation page.
 
 > **Tip:**
@@ -79,7 +79,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
 1. Provide your VPC ID and subnet IDs that are available from your AWS Management Console.
 
-    If you do not know how to get these IDs, click **Show Instruction** and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs. To fold the snapshots, click the **Hide instruction**.
+    If you do not know how to get these IDs, click **Show Instruction** and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs.
 
     After the endpoint service creation is complete, the endpoint service name and the **Next** button are available, and the placeholders in the command in the **Create VPC Interface Endpoint** area are automatically replaced with the real values.
 
@@ -98,9 +98,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
     > **Tip:**
     >
-    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. To solve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
-    >
-    > In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+    > If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. To solve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
 
     </div>
     <div label="AWS CLI">
@@ -121,20 +119,22 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
         aws configure
         ```
 
-    3. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint.
+    3. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint. Then click **Next**.
 
     > **Tip:**
     >
-    > - If your service is spanning across more than three availability zones (AZs), an error is returned. To resolve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > - If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. The returned error message is as follows:
     >
-    >     In addition to the AZs where your TiDB cluster is located, if there is an extra AZ in your selected region, this issue will occur.
+    >    ```
+    >    An error occurred (InvalidParameter) when calling the CreateVpcEndpoint operation: The VPC endpoint service com.amazonaws.vpce.<your region>.<vpce-id> does not support the availability zone of the subnet: <corresponding subnet>
+    >    ```
+    >
+    >    To solve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
     >
     > - You cannot copy the command until TiDB Cloud finishes creating endpoint service in the background.
 
     </div>
     </SimpleTab>
-
-    Then click **Next**.
 
 #### Step 5. Accept the endpoint connection
 
