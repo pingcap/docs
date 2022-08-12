@@ -11,17 +11,17 @@ TiDB version: 6.2.0
 In 6.2.0, the key new features or improvements are as follows:
 
 * TiDB Dashboard supports visual execution plans, allowing more intuitive display of execution plans.
-* TiDB Dashboard adds a Monitoring page for more efficient performance analysis and tuning.
-* TiDB supports lock view to show the waiting information of optimistic transactions, facilitating quick locating of lock conflicts.
+* Add a Monitoring page in TiDB Dashboard for more efficient performance analysis and tuning.
+* The Lock View of TiDB feature supports showing the waiting information of optimistic transactions, facilitating quick locating of lock conflicts.
 * TiFlash supports a newer version of storage format, enhancing stability and performance.
 * The Fine Grained Shuffle feature allows parallel execution of window functions in multiple threads.
-* A new concurrent DDL framework: Less DDLs blocked and higher execution efficiency.
-* TiKV supports automatically tuning the CPU usage, thus ensuring stable and efficient database running.
+* A new concurrent DDL framework: Less DDL statements blocked and higher execution efficiency.
+* TiKV supports automatically tuning the CPU usage, thus ensuring stable and efficient database operations.
 * Point-in-Time Recovery (PITR) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
-* TiDB Lightning supports importing data to productions clusters in physical import mode.
+* TiDB Lightning supports importing data to production clusters in the table-level physical import mode.
 * BR supports restoring user and privilege data, making backup and restore smoother.
 * TiCDC unlocks more data replication scenarios by supporting filtering specific types of DDL events.
-* A `SAVEPOINT` mechanism is introduced, with which you can flexibly control the rollback points within a transaction.
+* The `SAVEPOINT` mechanism is supported, with which you can flexibly control the rollback points within a transaction.
 * TiDB supports adding, dropping, and modifying multiple columns or indexes with only one `ALTER TABLE` statement.
 * Backing up and restoring RawKV across clusters is now supported.
 
@@ -115,7 +115,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     The new storage format relieves high CPU usage caused by GC in high-concurrency and heavy workload scenarios. This significantly reduces IO traffic of background tasks, thereby boosting stability under high concurrencies and heavy workloads. At the same time, space amplification and disk waste can be significantly reduced.
 
-    In TiDB v6.2.0, data is stored in the new storage format by default. When you upgrade TiFlash from earlier versions to v6.2.0, existing data inherits the previous storage format, and newly written data is stored in the new format. Note that if TiFlash is upgraded from earlier versions to v6.2.0 and has received new data, you cannot perform in-place downgrade on TiFlash, because earlier TiFlash versions cannot recognize the new storage format.
+    In TiDB v6.2.0, data is stored in the new storage format by default. Note that if TiFlash is upgraded from earlier versions to v6.2.0, you cannot perform in-place downgrade on TiFlash, because earlier TiFlash versions cannot recognize the new storage format.
 
     For more information about upgrading TiFlash, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade.md).
 
