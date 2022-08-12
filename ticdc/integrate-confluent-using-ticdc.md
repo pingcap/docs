@@ -40,7 +40,9 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 1. Create a cluster API key.
 
-    Sign in to [Confluent Cloud](https://confluent.cloud). Choose **Data integration** > **API keys** > **Add key** to create a cluster API key. After creation, a key pair file is generated, as shown below.
+    Sign in to [Confluent Cloud](https://confluent.cloud). Choose **Data integration** > **API keys** > **Create key**. On the **Select scope for API key** page that is displayed, select **Global access**.
+
+    After creation, a key pair file is generated, as shown below.
 
     ```
     === Confluent Cloud API key: xxx-xxxxx ===
@@ -65,7 +67,9 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
 
 3. Create a Schema Registry API key.
 
-    In the Confluent Cloud Console, choose **Schema Registry** > **API credentials**. Click **Edit** and then **Create key**. After creation, a key pair file is generated, as shown below:
+    In the Confluent Cloud Console, choose **Schema Registry** > **API credentials**. Click **Edit** and then **Create key**.
+
+    After creation, a key pair file is generated, as shown below:
 
      ```
     === Confluent Cloud API key: yyy-yyyyy ===
