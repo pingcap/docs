@@ -38,7 +38,6 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
 3. Simulate service workload.
 
     In the lab environment, you can use `go-tpc` to write data to the TiDB cluster upstream. This is to generate event changes in the TiDB cluster. Run the following command to create a database named `tpcc` in the TiDB cluster, and then use TiUP bench to write data to this database.
-    ```shell
 
     ```shell
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 prepare
@@ -136,7 +135,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 1. Deploy TiCDC.
 
-    After finishing full data migration, deploy and configure a TiCDC to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test clusters. Therefore, you can skip the step of deploying TiCDC and proceed with changefeed configuration.
+    After finishing full data migration, deploy and configure a TiCDC to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test cluster. Therefore, you can skip the step of deploying TiCDC and proceed with changefeed configuration.
 
 2. Create a changefeed.
 
@@ -158,7 +157,6 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 3. Enable GC.
 
     In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint). 
-
 
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;

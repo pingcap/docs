@@ -247,9 +247,9 @@ After setting up the environment, you can use the backup and restore functions o
 
     In this command, the parameters are as follows:
 
-    - --pd: PD address of the upstream cluster
-    - --sink-uri: URI of the downstream cluster
-    - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in [Step 2. Migrate full data](#step-2-migrate-full-data))
+    - `--pd`: PD address of the upstream cluster
+    - `--sink-uri`: URI of the downstream cluster
+    - `--start-ts`: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in [Step 2. Migrate full data](#step-2-migrate-full-data))
 
     For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
 
@@ -285,9 +285,9 @@ Normally, TiCDC concurrently writes transactions to downstream to increase throu
 tiup cdc redo apply --storage "s3://redo?access-key=minio&secret-access-key=miniostorage&endpoint=http://172.16.6.123:6060&force-path-style=true" --tmp-dir /tmp/redo --sink-uri "mysql://root:@172.16.6.124:4000"
 ```
 
-- --storage: Location and credential of the redo log in S3
-- --tmp-dir: Cache directory of the redo log downloaded from S3
-- --sink-uri: URI of the downstream cluster
+- `--storage`: Location and credential of the redo log in S3
+- `--tmp-dir`: Cache directory of the redo log downloaded from S3
+- `--sink-uri`: URI of the downstream cluster
 
 ## Step 6. Recover the primary cluster and its services
 
