@@ -97,7 +97,7 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 The parameters are described as follows.
 
 |Parameter      | Description |
-|-              |-         `   |
+|-              |-            |
 |`--master-addr`         | `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
 |`operate-source create` | Load data sources to the DM clusters. |
 
@@ -211,7 +211,7 @@ After starting the migration task, you can use `dmtcl tiup` to run `query-status
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-If you encounter errors, use `query-status <name of the error task>` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](/dm/dm-query-status.md).
+If you encounter errors, use `query-status ${task-name}` to view more detailed information. For details about the query results, task status and sub task status of the `query-status` command, see [TiDB Data Migration Query Status](/dm/dm-query-status.md).
 
 ## Step 5. Monitor tasks and check logs (optional)
 
