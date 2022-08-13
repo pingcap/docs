@@ -124,8 +124,6 @@ At this time, incremental data of the TiDB database is successfully replicated t
     In the directory where Flink is installed, run the following command to start the Flink SQL client:
 
     ```shell
-
-    ```shell
     [root@flink flink-1.15.0]# ./bin/sql-client.sh
     ```
 

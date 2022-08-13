@@ -96,9 +96,9 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 The parameters are described as follows.
 
 |Parameter      | Description |
-|-              |-            |
-|--master-addr         | {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
-|operate-source create | Load data sources to the DM clusters. |
+|-              |-         `   |
+|`--master-addr`         | `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261|
+|`operate-source create` | Load data sources to the DM clusters. |
 
 Repeat the above steps until all data sources are added to the DM cluster.
 
@@ -195,8 +195,8 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 | Parameter | Description|
 |-|-|
-|--master-addr| {advertise-addr} of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
-|start-task   | Starts the data migration task. |
+|`--master-addr`| `{advertise-addr}` of any DM-master node in the cluster that dmctl connects to. For example: 172.16.10.71:8261 |
+|`start-task`   | Starts the data migration task. |
 
 If the migration task fails to start, modify the configuration information according to the error information, and then run `start-task task.yaml` again to start the migration task. If you encounter problems, see [Handle Errors](/dm/dm-error-handling.md) and [FAQ](/dm/dm-faq.md).
 

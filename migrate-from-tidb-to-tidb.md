@@ -232,7 +232,7 @@ After setting up the environment, you can use the backup and restore functions o
     - --pd: PD address of the upstream cluster
     - --sink-uri: URI of the downstream cluster
     - --changefeed-id: changefeed ID, must be in the format of a regular expression, ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
-    - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS mentioned in the previous step)
+    - --start-ts: start timestamp of the changefeed, must be the backup time (or BackupTS in the "Back up data" section in [Step 2. Migrate full data](#step-2-migrate-full-data))
 
     For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
 
@@ -256,7 +256,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 ## Step 4. Switch services to the new TiDB cluster
 
-After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read stream to the downstream cluster gradually. Observe a period. If the downstream cluster is stable, you can switch write stream to the downstream cluster as well in three steps:
+After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read stream to the downstream cluster gradually. Observe a period. If the downstream cluster is stable, you can switch write stream to the downstream cluster by performing the following steps:
 
 1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
 
