@@ -116,7 +116,7 @@ To view the billing details, perform the following steps:
 
 You can use credits to pay TiDB cluster fees before the credits become expired. One credit is equivalent to one U.S. dollar.
 
-Different credit types can be used to pay different fees.
+Different types of credits can be used to pay different fees.
 
 The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, the status, the credit type, and the expiry date.
 
