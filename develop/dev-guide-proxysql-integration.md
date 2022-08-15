@@ -5,9 +5,9 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 
 # Integrate TiDB with ProxySQL
 
-This document briefly describes how to integrate **TiDB** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
+This document describes how to integrate **TiDB** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
 
-- [TiDB Documentation](https://docs.pingcap.com/)
+- [TiDB Documentation](/overview.md)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 - [TiDB with ProxySQL Integration Test](https://github.com/Icemap/tidb-proxysql-integration-test)
@@ -151,7 +151,7 @@ Field description:
 - `hostname`: The IP or domain of the TiDB server.
 - `port`: The port of the TiDB server.
 
-### Configure Proxy login user
+### Configure Proxy login users
 
 After adding a TiDB server user to ProxySQL, ProxySQL allows this user to log in **_ProxySQL MySQL Interface_** and create a connection with TiDB. Make sure that the user has appropriate permissions in TiDB. To add a TiDB server user, perform the following at **_ProxySQL Admin interface_**:
 
@@ -674,8 +674,7 @@ The expected output is the same as that of [Use Admin Interface to configure loa
 > **Note:**
 >
 > - The configuration of ProxySQL is stored in SQLite. The configuration file is only used when the SQLite is not created.
-> - It is recommended to use the configuration file only for initialization and **NOT** recommended to modify configuration items using it.
-> - It is because configuration through the **_ProxySQL Admin Interface_** allows:
+> - It is recommended that you use the configuration file only for initialization but not for modifying configuration items, because configuration through the **_ProxySQL Admin Interface_** supports the following features:
 >
 >     - Input validation.
 >     - Remote configuration by any MySQL client.
