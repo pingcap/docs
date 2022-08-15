@@ -619,7 +619,7 @@ The preceding `proxy-rule-split.sh` script can be run step by step as follows:
         ROLLBACK;
         ```
 
-        The `INSERT` statement is expected to not match all rules. It uses the `default_hostgroup` of the user (It is `0`) and thus forwards to the TiDB server `tidb-0`(`hostgroup` is `0`). And ProxySQL enables user `transaction_persistent` by default, which will cause all statements within the same transaction to run in the same `hostgroup`. So `SELECT * FROM test.test;` will also be forwarded to the TiDB Server `tidb-0`(`hostgroup` is `0`).
+        The `BEGIN` statement is expected to not match all rules. It uses the `default_hostgroup` of the user (It is `0`) and thus forwards to the TiDB server `tidb-0`(`hostgroup` is `0`). And ProxySQL enables user `transaction_persistent` by default, which will cause all statements within the same transaction to run in the same `hostgroup`. So the `INSERT` statement and `SELECT * FROM test.test;` will also be forwarded to the TiDB Server `tidb-0`(`hostgroup` is `0`).
 
 5. To stop and remove containers and networks, you can use the following command:
 
@@ -675,3 +675,9 @@ The expected output is the same as that of [Use Admin Interface to configure loa
 >
 > - The configuration of ProxySQL is stored in SQLite. The configuration file is only used when the SQLite is not created.
 > - It is recommended to use the configuration file only for initialization and **NOT** recommended to modify configuration items using it.
+> - It is because configuration through the **_ProxySQL Admin Interface_** allows:
+>
+>     - Input validation.
+>     - Remote configuration by any MySQL client.
+>     - Runtime configuration for maximum uptime (no need to restart).
+>     - Propagation the configuration to other ProxySQL nodes if [ProxySQL Cluster](https://proxysql.com/documentation/proxysql-cluster/) is configured.
