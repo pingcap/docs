@@ -634,6 +634,14 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 
     In the case of a poor network environment, appropriately increasing the value of this variable can effectively alleviate error reporting to the application end caused by timeout. If the application end wants to receive the error information more quickly, minimize the value of this variable.
 
+### tidb_batch_pending_tiflash_count <span class="version-mark">New in v6.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `4000`
+- Scope: `[0, 2147483647]`
+- Specifies the maximum number of permitted unavailable tables when you use `ALTER DATABASE SET TIFLASH REPLICA` to add TiFlash replicas. If the number of unavailable tables exceeds this limit, the operation will be stopped or setting TiFlash replicas for the remaining tables will be very slow.
+
 ### tidb_broadcast_join_threshold_count <span class="version-mark">New in v5.0</span>
 
 - Scope: SESSION | GLOBAL
@@ -1625,6 +1633,16 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 </CustomContent>
 
+### tidb_guarantee_linearizability <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Type: Boolean
+- Default value: `OFF`
+- This variable controls the way commit TS is calculated for async commit. By default (with the `OFF` value), the two-phase commit requests a new TS from the PD server and uses the TS to calculate the final commit TS. In this situation, linearizability is guaranteed for all the concurrent transactions.
+- If you set this variable to `ON`, the TS fetched from the PD server is saved, with the cost that only causal consistency is guaranteed but not linearizability. For more details, see the blog post [Async Commit, the Accelerator for Transaction Commit in TiDB 5.0](https://en.pingcap.com/blog/async-commit-the-accelerator-for-transaction-commit-in-tidb-5-0/).
+- For scenarios that require only causal consistency, you can set this variable to `ON` to improve performance.
+
 ### tidb_hash_join_concurrency
 
 > **Warning:**
@@ -1760,6 +1778,18 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Scope: SESSION
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
+
+### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: String
+- This variable is used to get the last transaction information within the current session. It is a read-only variable. The transaction information includes:
+    - The transaction scope.
+    - The start and commit TS.
+    - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
+    - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
+    - The error encountered.
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
@@ -2125,7 +2155,7 @@ mysql> desc select count(distinct a) from test.t;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- Specifies whether to allow using outer table as the build side in outer join for TiFlash.
+- When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
@@ -2315,6 +2345,16 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - This variable is used to optimize the timestamp acquisition, which is suitable for scenarios with read-committed isolation level where read-write conflicts are rare. Enabling this variable can avoid the latency and cost of getting the global timestamp, and can optimize the transaction-level read latency.
 - If read-write conflicts are severe, enabling this feature will increase the cost and latency of getting the global timestamp, and might cause performance regression. For details, see [Read Committed isolation level](/transaction-isolation-levels.md#read-committed-isolation-level).
+
+### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Type: String
+- Default value: `strict`
+- This variable is used to control the read consistency for an auto-commit read statement.
+- If the variable value is set to `weak`, the locks encountered by the read statement are skipped directly and the read execution might be faster, which is the weak consistency read mode. However, the transaction semantics (such as atomicity) and distributed consistency (such as linearizability) are not guaranteed.
+- For user scenarios where the auto-commit read needs to return fast and weak consistency read results are acceptable, you can use the weak consistency read mode.
 
 ### tidb_read_staleness <span class="version-mark">New in v5.4.0</span>
 
@@ -2750,7 +2790,7 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 - Scope: SESSION ｜ GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `true`
+- Default value: `ON`
 - This variable controls whether TiDB tracks the memory usage of aggregate functions.
 
 > **Warning:**
