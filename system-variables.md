@@ -1861,7 +1861,7 @@ mysql> desc select count(distinct a) from test.t;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- Specifies whether to allow using outer table as the build side in outer join for TiFlash.
+- When the variable value is `ON`, left join operations always use inner tables as the build side and right join operations always use outer tables as the build side. If you set the value to `OFF`, outer join operations can use either side of the tables as the build side.
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
