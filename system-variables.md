@@ -343,6 +343,28 @@ This variable is an alias for `last_insert_id`.
 - Range: `[-1, 1048576]`
 - Indicates the maximum number of [`PREPARE` statement](/sql-statements/sql-statement-prepare.md) of a session.
 - `-1` means no limitation.
+- If you set it to a value that exceeds the maximum number, `1048576` will be used:
+
+```sql
+mysql> set global max_prepared_stmt_count=1048577;
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> show warnings;
++---------+------+--------------------------------------------------------------+
+| Level   | Code | Message                                                      |
++---------+------+--------------------------------------------------------------+
+| Warning | 1292 | Truncated incorrect max_prepared_stmt_count value: '1048577' |
++---------+------+--------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> show global variables like 'max_prepared_stmt_count';
++-------------------------+---------+
+| Variable_name           | Value   |
++-------------------------+---------+
+| max_prepared_stmt_count | 1048576 |
++-------------------------+---------+
+1 row in set (0.00 sec)
+```
 
 ### plugin_dir
 
@@ -1780,7 +1802,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `1`
 - Range: `[0, 2]`
 - Indicates whether to allow broadcast CARTESIAN join. 
-- `0` means that it's not allowed, `1` means that it's allow based on `tidb_broadcast_join_threshold_count`, and `2` means it's always allowed even if the table size exceeds the threshold.
+- `0` means that it's not allowed, `1` means that it's allowed based on `tidb_broadcast_join_threshold_count`, and `2` means it's always allowed even if the table size exceeds the threshold.
 
 ### tidb_opt_concurrency_factor
 
