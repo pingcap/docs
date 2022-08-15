@@ -14,7 +14,7 @@ To learn the standard upgrade process, see the following documents:
 
 > **Note:**
 >
-> - [FastScan](/develop/dev-guide-use-fastscan.md) is experimental and its form and usage may change in subsequent versions. Pay attention when you upgrade TiFlash.
+> - An experimental feature introduced in v6.2.0, [FastScan](/develop/dev-guide-use-fastscan.md) provides more efficient query performance at the cost of strong data consistency. Note that the form and usage of this feature might change in subsequent versions.
 >
 > - It is not recommended that you upgrade TiFlash across major versions, for example, from v4.x.x to v6.x.x. Instead, you need to upgrade from v4.x.x to v5.x.x first, and then to v6.x.x.
 >
