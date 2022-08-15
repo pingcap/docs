@@ -7,19 +7,18 @@ summary: An overview of the usage of ALTER TABLE ... SET TIFLASH MODE ... for th
 
 > **Warning:**
 >
-> This statement is still an experimental feature.
-> The form and usage of related experimental features may change in subsequent versions.
+> This statement is experimental and its form and usage may change in subsequent versions.
 
-You can use the `ALTER TABLE...SET TIFLASH MODE...` statement to switch the FastScan option for the corresponding table in TiFlash. The following options are currently supported.
+You can use the `ALTER TABLE...SET TIFLASH MODE...` statement to enable or disable FastScan on the corresponding table in TiFlash:
 
-- `Normal Mode`. The default option, means disabling FastScan. In this option, TiFlash guarantees the accuracy of query results and data consistency.
-- `Fast Mode`. The FastScan option, means enableing FastScan. In this option, TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
+- `Normal Mode`: the default option. In this mode, FastScan is disabled and the accuracy of query results and data consistency are guaranteed.
+- `Fast Mode`: in this mode, FastScan is enabled. TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
 
-This statement executes without blocking the execution of existing SQL statements or the running of TiDB features, such as transactions, DDL, and GC, and without changing the data content accessed through the SQL statement. The statement will end normally when the option switch is completed.
+The execution of `ALTER TABLE ... SET TIFLASH MODE ...` does not block existing SQL statements or interrupt other TiDB features, such as transactions, DDL, and GC. At the same time, data accessed through SQL statements is not altered. This statement ends normally when the mode is switched.
 
-This statement only supports switching the FastScan option for tables in TiFlash, so the switch only affects reads involving the TiFlash table.
+You can only execute this statement to switch the FastScan option for tables in TiFlash. Therefore, option change only affects reading tables in TiFlash.
 
-The FastScan switch takes effect only if the table has a TiFlash Replica. If the TiFlash Replica of the table is empty when you switch the option, the option will take effect only after the TiFlash Replica is subsequently reset. You can use [`ALTER TABLE ... SET TIFLASH REPLICA ...`](/sql-statements/sql-statement-alter-table.md) to reset the TiFlash Replica.
+The FastScan switch takes effect only if the table has TiFlash replicas. If no TiFlash replica is present when you switch the option, the option takes effect only after TiFlash replicas are configured. You can use [`ALTER TABLE ... SET TIFLASH REPLICA ...`](/sql-statements/sql-statement-alter-table.md) to configure TiFlash replicas.
 
 You can query the current TiFlash table switch of the corresponding table using the system table `information_schema.tiflash_replica`.
 
@@ -54,7 +53,7 @@ SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'te
 +------------+
 ```
 
-If you want to enable FastScan to query the `test` table, execute the following statement to switch the option, and you can query the option of the current table.
+To enable FastScan for the `test` table, execute the following statement and then check whether FastScan is enabled for this table.
 
 ```sql
 ALTER TABLE test SET tiflash mode FAST
@@ -69,7 +68,7 @@ SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'te
 +------------+
 ```
 
-If you want to disable FastScan, execute the following statement to switch.
+To disable FastScan, execute the following statement.
 
 ```sql
 ALTER TABLE test SET tiflash mode NORMAL
