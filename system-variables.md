@@ -2368,7 +2368,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - Scope: SESSION ｜ GLOBAL
 - Persists to cluster: Yes
 - Type: Boolean
-- Default value: `true`
+- Default value: `ON`
 - This variable controls whether TiDB tracks the memory usage of aggregate functions.
 
 > **Warning:**
