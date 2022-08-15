@@ -17,7 +17,7 @@ TiUP を使用してデプロイされた TiDB クラスターおよび DM ク�
 
 -   [クラスタの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
-    -   クラスタに問題が発生し、PingCAP テクニカル サポートに連絡する必要がある場合は、次の操作を実行してリモート トラブルシューティングを容易にすることができます: Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクを提供します。テクニカルサポートスタッフ。
+    -   クラスタに問題が発生し、PingCAP テクニカル サポートに連絡する必要がある場合は、次の操作を実行して、リモート トラブルシューティングを容易にすることができます。Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データ アクセス リンクを提供します。テクニカルサポートスタッフ。
     -   クラスタに何らかの問題があり、すぐに問題を分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存できます。
 
 -   [クラスタのステータスをローカルで簡単に確認する](#perform-a-quick-check-on-the-cluster-status-locally)
@@ -94,8 +94,8 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
     > -   Diag v0.9.0 以降のバージョンは設定`region`をサポートします。
     > -   Diag v0.9.0 より前のバージョンでは、データはデフォルトで中国地域の Clinic Server にアップロードされます。これらのバージョンで`region`を設定するには、 `tiup update diag`コマンドを実行して Diag を最新バージョンにアップグレードしてから、Diag で`region`を設定します。
 
-    <SimpleTab>
-     <div label="Clinic Server in the US">
+    <SimpleTab groupId="clinicServer">
+     <div label="Clinic Server in the US" value="clinic-us">
 
     米国の Clinic Server の場合、次のコマンドを使用して`region`から`US`を設定します。
 
@@ -104,7 +104,7 @@ PingCAPクリニックを利用する前に、Diag（ PingCAPクリニックが�
     ```
 
     </div>
-     <div label="Clinic Server in the Chinese mainland">
+     <div label="Clinic Server in the Chinese mainland" value="clinic-cn">
 
     中国本土の Clinic Server の場合、次のコマンドを使用して`region`から`CN`を設定します。
 
@@ -276,7 +276,7 @@ tiup diag upload
     tiup diag upload ${filepath}
     ```
 
-    次に出力例を示します。
+    次に、出力例を示します。
 
     ```bash
     [root@Copy-of-VM-EE-CentOS76-v1 qiaodan]# tiup diag upload /home/qiaodan/diag-fNTnz5MGhr6
