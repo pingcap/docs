@@ -376,6 +376,10 @@ If the specified character set is `utf8` or `utf8mb4`, TiDB only supports the va
 
 To disable this error reporting, use `set @@tidb_skip_utf8_check=1;` to skip the character check.
 
+> **Note:**
+>
+> If the character check is skipped, TiDB might fail to detect illegal UTF-8 characters written by the application, cause decoding errors when `ANALYZE` is executed, and introduce other unknown encoding issues. If your application cannot guarantee the validity of the written string, it is not recommended to skip the character check.
+
 ## Collation support framework
 
 The syntax support and semantic support for the collation are influenced by the [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) configuration item. The syntax support and semantic support are different. The former indicates that TiDB can parse and set collations. The latter indicates that TiDB can correctly use collations when comparing strings.
@@ -386,7 +390,7 @@ Since v4.0, TiDB supports a [new framework for collations](#new-framework-for-co
 
 ### Old framework for collations
 
-Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB deletes the space at the end of the character according to the `PADDING` attribute of the collation before comparing characters, which causes the following behavior differences:
+Before v4.0, you can specify most of the MySQL collations in TiDB, and these collations are processed according to the default collations, which means that the byte order determines the character order. Different from MySQL, TiDB does not handle the trailing spaces of a character, which causes the following behavior differences:
 
 {{< copyable "sql" >}}
 

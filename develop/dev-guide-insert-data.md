@@ -13,14 +13,14 @@ This document describes how to insert data into TiDB by using the SQL language w
 
 Before reading this document, you need to prepare the following:
 
-- [Build a TiDB Cluster in TiDB Cloud(DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md), [Create a Database](/develop/dev-guide-create-database.md), [Create a Table](/develop/dev-guide-create-table.md), and [Create Secondary Indexes](/develop/dev-guide-create-secondary-indexes.md)
 
 ## Insert rows
 
 There are two ways to insert multiple rows of data. For example, if you need to insert **3** players' data.
 
-- A **multi-line insertion statement**：
+- A **multi-line insertion statement**:
 
     {{< copyable "sql" >}}
 
@@ -28,7 +28,7 @@ There are two ways to insert multiple rows of data. For example, if you need to 
     INSERT INTO `player` (`id`, `coins`, `goods`) VALUES (1, 1000, 1), (2, 230, 2), (3, 300, 5);
     ```
 
-- Multiple **single-line insertion statements**：
+- Multiple **single-line insertion statements**:
 
     {{< copyable "sql" >}}
 
@@ -129,6 +129,81 @@ For a complete example in Java, see:
 
 </div>
 
+<div label="Golang">
+
+```go
+package main
+
+import (
+    "database/sql"
+    "strings"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+type Player struct {
+    ID    string
+    Coins int
+    Goods int
+}
+
+func bulkInsertPlayers(db *sql.DB, players []Player, batchSize int) error {
+    tx, err := db.Begin()
+    if err != nil {
+        return err
+    }
+
+    stmt, err := tx.Prepare(buildBulkInsertSQL(batchSize))
+    if err != nil {
+        return err
+    }
+
+    defer stmt.Close()
+
+    for len(players) > batchSize {
+        if _, err := stmt.Exec(playerToArgs(players[:batchSize])...); err != nil {
+            tx.Rollback()
+            return err
+        }
+
+        players = players[batchSize:]
+    }
+
+    if len(players) != 0 {
+        if _, err := tx.Exec(buildBulkInsertSQL(len(players)), playerToArgs(players)...); err != nil {
+            tx.Rollback()
+            return err
+        }
+    }
+
+    if err := tx.Commit(); err != nil {
+        tx.Rollback()
+        return err
+    }
+
+    return nil
+}
+
+func playerToArgs(players []Player) []interface{} {
+    var args []interface{}
+    for _, player := range players {
+        args = append(args, player.ID, player.Coins, player.Goods)
+    }
+    return args
+}
+
+func buildBulkInsertSQL(amount int) string {
+    return "INSERT INTO player (id, coins, goods) VALUES (?, ?, ?)" + strings.Repeat(",(?,?,?)", amount-1)
+}
+```
+
+For a complete example in Golang, see:
+
+- [Use go-sql-driver/mysql to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-golang.md#step-2-get-the-code)
+- [Use GORM to build a simple CRUD app with TiDB and Golang](/develop/dev-guide-sample-application-java.md#step-2-get-the-code)
+
+</div>
+
 </SimpleTab>
 
 ## Bulk-Insert
@@ -140,7 +215,7 @@ The following are the recommended tools for bulk-insert:
 - Data export: [Dumpling](/dumpling-overview.md). You can export MySQL or TiDB data to local or Amazon S3.
 - Data import: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md). You can import **Dumpling** exported data, a **CSV** file, or [Migrate Data from Amazon Aurora to TiDB](/migrate-aurora-to-tidb.md). It also supports reading data from a local disk or [Amazon S3 cloud disk](/br/backup-and-restore-storages.md).
 - Data replication: [TiDB Data Migration](/dm/dm-overview.md). You can replicate MySQL, MariaDB, and Amazon Aurora databases to TiDB. It also supports merging and migrating the sharded instances and tables from the source databases.
-- Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-tool.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
+- Data backup and restore: [Backup & Restore (BR)](/br/backup-and-restore-overview.md). Compared to **Dumpling**, **BR** is more suitable for **_big data_** scenario.
 
 ## Avoid hotspots
 
@@ -160,7 +235,7 @@ In this case, you **cannot** use SQL like the following to insert:
 INSERT INTO `bookshop`.`users` (`id`, `balance`, `nickname`) VALUES (1, 0.00, 'nicky');
 ```
 
-An error will occur：
+An error will occur:
 
 ```
 ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random column is disabled. Try to set @@allow_auto_random_explicit_insert = true.

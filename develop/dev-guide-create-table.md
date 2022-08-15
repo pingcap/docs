@@ -11,7 +11,7 @@ This document introduces how to create tables using the SQL statement and the re
 
 Before reading this document, make sure that the following tasks are completed:
 
-- [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md).
+- [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
 - Read [Schema Design Overview](/develop/dev-guide-schema-design-overview.md).
 - [Create a Database](/develop/dev-guide-create-database.md).
 
@@ -179,7 +179,7 @@ In addition to [primary key constraints](#select-primary-key), TiDB also support
 
 To set a default value on a column, use the `DEFAULT` constraint. The default value allows you to insert data without specifying a value for each column.
 
-You can use `DEFAULT` together with [supported SQL functions](/basic-features.md#data-types-functions-and-operators) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `rating` table:
+You can use `DEFAULT` together with [supported SQL functions](/basic-features.md#data-types-functions-and-operators) to move the calculation of defaults out of the application layer, thus saving resources of the application layer. The resources consumed by the calculation do not disappear and are moved to the TiDB cluster. Commonly, you can insert data with the default time. The following exemplifies setting the default value in the `ratings` table:
 
 {{< copyable "sql" >}}
 
@@ -272,7 +272,7 @@ ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 - `{table_name}`: The table name.
 - `{count}`: The number of replicated replicas. If it is 0, replicated replicas are deleted.
 
-**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tiflash.md#use-tidb-to-read-tiflash-replicas).
+**TiFlash** will then replicate the table. When a query is performed, TiDB automatically selects TiKV (row-based) or TiFlash (column-based) for the query based on cost optimization. Alternatively, you can manually specify whether the query uses a **TiFlash** replica. To learn how to specify it, refer to [Use TiDB to read TiFlash replicas](/tiflash/use-tidb-to-read-tiflash.md).
 
 ### An example of using HTAP capabilities
 
@@ -286,7 +286,7 @@ ALTER TABLE `bookshop`.`ratings` SET TIFLASH REPLICA 1;
 
 > **Note:**
 >
-> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster that includes **TiFlash**.
+> If your cluster does not contain **TiFlash** nodes, this SQL statement will report an error: `1105 - the tiflash replica count: 1 should be less than the total tiflash server count: 0`. You can use [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-free-cluster) to create a free cluster that includes **TiFlash**.
 
 Then you can go on to perform the following query:
 

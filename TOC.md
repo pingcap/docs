@@ -1,15 +1,16 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
+- [Docs Home](/_docHome.md)
 - About TiDB
   - [TiDB Introduction](/overview.md)
-  - [TiDB 6.0 Release Notes](/releases/release-6.0.0-dmr.md)
+  - [TiDB 6.1 Release Notes](/releases/release-6.1.0.md)
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v6.0 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.0.0-vs-v5.4.0.md)
-    - [v6.0 TPC-C Performance Test Report](/benchmark/v6.0-performance-benchmarking-with-tpcc.md)
-    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.0-performance-benchmarking-with-tpch.md)
+    - [v6.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
+    - [v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
+    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.1-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
@@ -22,10 +23,11 @@
 - Develop
   - [Overview](/develop/dev-guide-overview.md)
   - Quick Start
-    - [Build a TiDB Cluster in TiDB Cloud (DevTier)](/develop/dev-guide-build-cluster-in-cloud.md)
+    - [Build a TiDB Cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md)
     - [CRUD SQL in TiDB](/develop/dev-guide-tidb-crud-sql.md)
     - Build a Simple CRUD App with TiDB
       - [Java](/develop/dev-guide-sample-application-java.md)
+      - [Golang](/develop/dev-guide-sample-application-golang.md)
   - Example Applications
     - [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)
   - Connect to TiDB
@@ -54,6 +56,7 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
+    - [FastScan](/develop/dev-guide-use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -76,6 +79,14 @@
     - Guidelines
       - [Object Naming Convention](/develop/dev-guide-object-naming-guidelines.md)
       - [SQL Development Specifications](/develop/dev-guide-sql-development-specification.md)
+    - Archived Docs
+      - [For Django](/develop/dev-guide-outdated-for-django.md)
+      - [For SQLAlchemy](/develop/dev-guide-outdated-for-sqlalchemy.md)
+      - [For mysql-connector-python](/develop/dev-guide-outdated-for-python-mysql-connector.md)
+  - Cloud Native Development Environment
+    - [Gitpod](/develop/dev-guide-playground-gitpod.md)
+  - Third-party Support
+    - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -121,24 +132,16 @@
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
-    - Use BR Tool (Recommended)
-      - [BR Tool Overview](/br/backup-and-restore-tool.md)
-      - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
-      - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-      - External Storages
-        - [External Storages Overview](/br/backup-and-restore-storages.md)
-        - [Back up and Restore Data on Azure Blob Storage](/br/backup-and-restore-azblob.md)
-      - BR Features
-        - [Auto Tune](/br/br-auto-tune.md)
-        - [Batch Create Table](/br/br-batch-create-table.md)
-      - [BR FAQ](/br/backup-and-restore-faq.md)
+    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
+    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
+    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
   - [Maintain TiDB Using TiUP](/maintain-tidb-using-tiup.md)
   - [Modify Configuration Online](/dynamic-config.md)
   - [Online Unsafe Recovery](/online-unsafe-recovery.md)
-  - [Replicate Data Between Primary and Secondary Clusters](/replicate-betwwen-primary-and-secondary-clusters.md)
+  - [Replicate Data Between Primary and Secondary Clusters](/replicate-between-primary-and-secondary-clusters.md)
 - Monitor and Alert
   - [Monitoring Framework Overview](/tidb-monitoring-framework.md)
   - [Monitoring API](/tidb-monitoring-api.md)
@@ -165,16 +168,22 @@
   - [Troubleshoot Write Conflicts in Optimistic Transactions](/troubleshoot-write-conflicts.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
 - Performance Tuning
-  - System Tuning
-    - [Operating System Tuning](/tune-operating-system.md)
-  - Software Tuning
-    - Configuration
-      - [Tune TiDB Memory](/configure-memory-usage.md)
-      - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
-      - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
-      - [TiKV Follower Read](/follower-read.md)
-      - [TiFlash Tuning](/tiflash/tune-tiflash-performance.md)
-    - [Coprocessor Cache](/coprocessor-cache.md)
+  - Tuning Guide
+    - [Performance Tuning Overview](/performance-tuning-overview.md)
+    - [Performance Analysis and Tuning](/performance-tuning-methods.md)
+    - [Performance Tuning Practices for OLTP Scenarios](/performance-tuning-practices.md)
+  - Configuration Tuning
+    - System Tuning
+      - [Operating System Tuning](/tune-operating-system.md)
+    - Software Tuning
+      - Configuration
+        - [Tune TiDB Memory](/configure-memory-usage.md)
+        - [Tune TiKV Threads](/tune-tikv-thread-performance.md)
+        - [Tune TiKV Memory](/tune-tikv-memory-performance.md)
+        - [TiKV Follower Read](/follower-read.md)
+        - [Tune Region Performance](/tune-region-performance.md)
+        - [Tune TiFlash Performance](/tiflash/tune-tiflash-performance.md)
+      - [Coprocessor Cache](/coprocessor-cache.md)
   - SQL Tuning
     - [Overview](/sql-tuning-overview.md)
     - Understanding the Query Execution Plan
@@ -205,6 +214,7 @@
         - [Statistics](/statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
+        - [Cost Model](/cost-model.md)
       - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
@@ -327,9 +337,10 @@
       - [tiup-cluster](/tiup/tiup-cluster.md)
       - [tiup-mirror](/tiup/tiup-mirror.md)
       - [tiup-bench](/tiup/tiup-bench.md)
-  - PingCAP Clinic Diagnostic Service (Technical Preview)
+  - PingCAP Clinic Diagnostic Service
     - [Overview](/clinic/clinic-introduction.md)
-    - [Use PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
+    - [Quick Start](/clinic/quick-start-with-clinic.md)
+    - [Troubleshoot TiDB Cluster Using PingCAP Clinic](/clinic/clinic-user-guide-for-tiup.md)
     - [PingCAP Clinic Diagnostic Data](/clinic/clinic-data-instruction-for-tiup.md)
   - [TiDB Operator](/tidb-operator-overview.md)
   - [Dumpling](/dumpling-overview.md)
@@ -344,6 +355,8 @@
       - [Table Filter](/table-filter.md)
       - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
+      - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
+      - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
       - [Import Data in Parallel](/tidb-lightning/tidb-lightning-distributed-import.md)
       - [Error Resolution](/tidb-lightning/tidb-lightning-error-resolution.md)
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -355,6 +368,7 @@
     - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
     - [About TiDB Data Migration](/dm/dm-overview.md)
+    - [Architecture](/dm/dm-arch.md)
     - [Quick Start](/dm/quick-start-with-dm.md)
     - Deploy a DM cluster
       - [Hardware and Software Requirements](/dm/dm-hardware-and-software-requirements.md)
@@ -385,6 +399,7 @@
         - [Manually Handle Sharding DDL Lock](/dm/manually-handling-sharding-ddl-locks.md)
       - [Migrate from MySQL Databases that Use GH-ost/PT-osc](/dm/feature-online-ddl.md)
       - [Migrate Data to a Downstream TiDB Table with More Columns](/migrate-with-more-columns-downstream.md)
+      - [Continuous Data Validation](/dm/dm-continuous-data-validation.md)
     - Maintain
       - Cluster Upgrade
         - [Maintain DM Clusters Using TiUP (Recommended)](/dm/maintain-dm-using-tiup.md)
@@ -407,7 +422,6 @@
       - [Daily Check](/dm/dm-daily-check.md)
     - Reference
       - Architecture
-        - [DM Architecture](/dm/dm-arch.md)
         - [DM-worker](/dm/dm-worker-intro.md)
         - [Relay Log](/dm/relay-log.md)
       - Command Line
@@ -438,13 +452,23 @@
       - [Handle Errors](/dm/dm-error-handling.md)
     - [Release Notes](/dm/dm-release-notes.md)
   - Backup & Restore (BR)
-    - [BR Tool Overview](/br/backup-and-restore-tool.md)
-    - [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
+    - [BR Overview](/br/backup-and-restore-overview.md)
+    - [Deploy and Use BR](/br/br-deployment.md)
+    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
+    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
     - [BR Use Cases](/br/backup-and-restore-use-cases.md)
-    - [External Storages](/br/backup-and-restore-storages.md)
     - BR Features
       - [Auto Tune](/br/br-auto-tune.md)
-    - [BR FAQ](/br/backup-and-restore-faq.md)
+      - [Batch Create Table](/br/br-batch-create-table.md)
+    - References
+      - [BR Design Principles](/br/backup-and-restore-design.md)
+      - [BR Command-line](/br/use-br-command-line-tool.md)
+      - [External Storages](/br/backup-and-restore-storages.md)
+      - [Back Up and Restore Data on Amazon S3 Using BR](/br/backup-storage-S3.md)
+      - [Back Up and Restore Data on Azure Blob Storage Using BR](/br/backup-storage-azblob.md)
+      - [Back Up and Restore Data on Google Cloud Storage Using BR](/br/backup-storage-gcs.md)
+      - [Back Up and Restore RawKV](/br/rawkv-backup-and-restore.md)
+      - [BR FAQs](/br/backup-and-restore-faq.md)
   - TiDB Binlog
     - [Overview](/tidb-binlog/tidb-binlog-overview.md)
     - [Quick Start](/tidb-binlog/get-started-with-tidb-binlog.md)
@@ -469,14 +493,17 @@
     - [Overview](/ticdc/ticdc-overview.md)
     - [Deploy](/ticdc/deploy-ticdc.md)
     - [Maintain](/ticdc/manage-ticdc.md)
+    - Monitor and Alert
+      - [Monitoring Metrics](/ticdc/monitor-ticdc.md)
+      - [Alert Rules](/ticdc/ticdc-alert-rules.md)
     - [Troubleshoot](/ticdc/troubleshoot-ticdc.md)
-    - [Monitor](/ticdc/monitor-ticdc.md)
-    - [Alert Rules](/ticdc/ticdc-alert-rules.md)
-    - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
-    - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
-    - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
-    - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-    - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    - Reference
+      - [TiCDC OpenAPI](/ticdc/ticdc-open-api.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
+      - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
+      - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
+      - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+    - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
   - sync-diff-inspector
@@ -495,6 +522,7 @@
     - [Scheduling](/tidb-scheduling.md)
   - Key Monitoring Metrics
     - [Overview](/grafana-overview-dashboard.md)
+    - [Performance Overview](/grafana-performance-overview-dashboard.md)
     - [TiDB](/grafana-tidb-dashboard.md)
     - [PD](/grafana-pd-dashboard.md)
     - [TiKV](/grafana-tikv-dashboard.md)
@@ -539,10 +567,12 @@
       - [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)
       - [`ALTER PLACEMENT POLICY`](/sql-statements/sql-statement-alter-placement-policy.md)
       - [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)
-        - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+      - [`ALTER TABLE COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)
+      - [`ALTER TABLE SET TIFLASH MODE`](/sql-statements/sql-statement-set-tiflash-mode.md)
       - [`ALTER USER`](/sql-statements/sql-statement-alter-user.md)
       - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
       - [`BACKUP`](/sql-statements/sql-statement-backup.md)
+      - [`BATCH`](/sql-statements/sql-statement-batch.md)
       - [`BEGIN`](/sql-statements/sql-statement-begin.md)
       - [`CHANGE COLUMN`](/sql-statements/sql-statement-change-column.md)
       - [`COMMIT`](/sql-statements/sql-statement-commit.md)
@@ -597,6 +627,7 @@
       - [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
       - [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
       - [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
+      - [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md)
       - [`SELECT`](/sql-statements/sql-statement-select.md)
       - [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
@@ -692,6 +723,7 @@
       - [Isolation Levels](/transaction-isolation-levels.md)
       - [Optimistic Transactions](/optimistic-transaction.md)
       - [Pessimistic Transactions](/pessimistic-transaction.md)
+      - [Non-Transactional DML Statements](/non-transactional-dml.md)
     - Garbage Collection (GC)
       - [Overview](/garbage-collection-overview.md)
       - [Configuration](/garbage-collection-configuration.md)
@@ -753,6 +785,7 @@
         - [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)
         - [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
+        - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
       - [`METRICS_SCHEMA`](/metrics-schema.md)
   - UI
@@ -777,6 +810,7 @@
         - [Access Cluster Diagnostics Page](/dashboard/dashboard-diagnostics-access.md)
         - [View Diagnostics Report](/dashboard/dashboard-diagnostics-report.md)
         - [Use Diagnostics](/dashboard/dashboard-diagnostics-usage.md)
+      - [Monitoring Page](/dashboard/dashboard-monitoring.md)
       - [Search Logs Page](/dashboard/dashboard-log-search.md)
       - Instance Profiling
         - [Manual Profiling](/dashboard/dashboard-profiling.md)
@@ -809,7 +843,13 @@
       - [Titan Configuration](/storage-engine/titan-configuration.md)
     - TiFlash
       - [Overview](/tiflash/tiflash-overview.md)
-      - [Use TiFlash](/tiflash/use-tiflash.md)
+      - [Create TiFlash Replicas](/tiflash/create-tiflash-replicas.md)
+      - [Use TiDB to Read TiFlash Replicas](/tiflash/use-tidb-to-read-tiflash.md)
+      - [Use TiSpark to Read TiFlash Replicas](/tiflash/use-tispark-to-read-tiflash.md)
+      - [Use MPP Mode](/tiflash/use-tiflash-mpp-mode.md)
+      - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
+      - [Data Validation](/tiflash/tiflash-data-validation.md)
+      - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Telemetry](/telemetry.md)
   - [Errors Codes](/error-codes.md)
   - [Table Filter](/table-filter.md)
@@ -828,12 +868,16 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - v6.1
+    - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
     - [6.0.0-DMR](/releases/release-6.0.0-dmr.md)
   - v5.4
+    - [5.4.2](/releases/release-5.4.2.md)
     - [5.4.1](/releases/release-5.4.1.md)
     - [5.4.0](/releases/release-5.4.0.md)
   - v5.3
+    - [5.3.2](/releases/release-5.3.2.md)
     - [5.3.1](/releases/release-5.3.1.md)
     - [5.3.0](/releases/release-5.3.0.md)
   - v5.2

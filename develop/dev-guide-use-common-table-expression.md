@@ -5,7 +5,7 @@ summary: Learn the CTE feature of TiDB, which help you write SQL statements more
 
 # Common Table Expression
 
-In some transaction scenarios, due to application complexity, you might need to write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such a long SQL statement can be a developer’s nightmare.
+In some transaction scenarios, due to application complexity, you might need to write a single SQL statement of up to 2,000 lines. The statement probably contains a lot of aggregations and multi-level subquery nesting. Maintaining such a long SQL statement can be a developer's nightmare.
 
 To avoid such a long SQL statement, you can simplify queries by using [Views](/develop/dev-guide-use-views.md) or cache intermediate query results by using [Temporary tables](/develop/dev-guide-use-temporary-tables.md).
 
@@ -34,8 +34,8 @@ SELECT ... FROM <query_name>;
 
 For example, if you want to know how many books each of the 50 oldest authors have written, take the following steps:
 
-<SimpleTab>
-<div label="SQL">
+<SimpleTab groupId="language">
+<div label="SQL" value="sql">
 
 Change the statement in [temporary tables](/develop/dev-guide-use-temporary-tables.md) to the following:
 
@@ -74,7 +74,7 @@ The result is as follows:
 ```
 
 </div>
-<div label="Java">
+<div label="Java" value = "java">
 
 {{< copyable "java" >}}
 
@@ -172,6 +172,10 @@ First, check out the books written by the author (ID is `2299112019`) in the CTE
 
 Note that the query in `books_authored_by_rm` executes only once, and then TiDB creates a temporary space to cache its result. When the queries in `books_with_average_ratings` and `books_with_orders` refer to `books_authored_by_rm`, TiDB gets its result directly from this temporary space.
 
+> **Tip:**
+>
+> If the efficiency of the default CTE queries is not good, you can use the [`MERGE()`](/optimizer-hints.md#merge) hint to expand the CTE subquery to the outer query to improve the efficiency.
+
 ### Recursive CTE
 
 Recursive CTE can be defined using the following syntax:
@@ -183,7 +187,7 @@ WITH RECURSIVE <query_name> AS (
 SELECT ... FROM <query_name>;
 ```
 
-A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE：
+A classic example is to generate a set of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) with recursive CTE:
 
 {{< copyable "sql" >}}
 

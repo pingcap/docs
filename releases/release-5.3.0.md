@@ -63,9 +63,9 @@ In v5.3, the key new features or improvements are as follows:
     - Since v5.3.0, TiCDC and BR support [global temporary tables](/temporary-tables.md#global-temporary-tables). If you use TiCDC and BR of a version earlier than v5.3.0 to replicate global temporary tables to the downstream, a table definition error occurs.
     - The following clusters are expected to be v5.3.0 or later; otherwise, data error is reported when you create a global temporary table:
 
-        - the cluster to be imported using TiDB ecosystem tools
-        - the cluster restored using TiDB ecosystem tools
-        - the downstream cluster in a replication task using TiDB ecosystem tools
+        - the cluster to be imported using TiDB migration tools
+        - the cluster restored using TiDB migration tools
+        - the downstream cluster in a replication task using TiDB migration tools
     - For the compatibility information of temporary tables, refer to [Compatibility with MySQL temporary tables](/temporary-tables.md#compatibility-with-mysql-temporary-tables) and [Compatibility restrictions with other TiDB features](/temporary-tables.md#compatibility-restrictions-with-other-tidb-features).
 
 - For releases earlier than v5.3.0, TiDB reports an error when a system variable is set to an illegal value. For v5.3.0 and later releases, TiDB returns success with a warning such as "|Warning | 1292 | Truncated incorrect xxx: 'xx'" when a system variable is set to an illegal value.
@@ -117,7 +117,7 @@ In v5.3, the key new features or improvements are as follows:
 
     Support the `ALTER TABLE [PARTITION] ATTRIBUTES` statement that allows you to set attributes for a table or partition. Currently, TiDB only supports setting the `merge_option` attribute. By adding this attribute, you can explicitly control the Region merge behavior.
 
-    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time, the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
+    User scenarios: When you perform the `SPLIT TABLE` operation, if no data is inserted after a certain period of time (controlled by the PD parameter [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval)), the empty Regions are automatically merged by default. In this case, you can set the table attribute to `merge_option=deny` to avoid the automatic merging of Regions.
 
     [User document](/table-attributes.md), [#3839](https://github.com/tikv/pd/issues/3839)
 

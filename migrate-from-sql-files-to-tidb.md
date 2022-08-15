@@ -15,7 +15,7 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 
 ## Step 1. Prepare SQL files
 
-Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup?region=us-west-2`. TiDB Lighting recursively searches for all `.sql` files in this directory and its subdirectories.
+Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lighting recursively searches for all `.sql` files in this directory and its subdirectories.
 
 ## Step 2. Define the target table schema
 
@@ -45,8 +45,8 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local"：Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
-# "tidb"：The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
+# "local": Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
+# "tidb": The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
 
 backend = "local"
 # Sets the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
@@ -54,7 +54,7 @@ sorted-kv-dir = "${sorted-kv-dir}"
 
 [mydumper]
 # Directory of the data source
-data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql-backup?region=us-west-2'
+data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql-backup'
 
 [tidb]
 # The information of target cluster

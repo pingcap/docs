@@ -137,17 +137,11 @@ tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 
 The TiDB Lightning toolset is best used with a 10-Gigabit network card. 1-Gigabit network cards are *not recommended*, especially for `tikv-importer`.
 
-1-Gigabit network cards can only provide a total bandwidth of 120 MB/s, which has to be shared among all target TiKV stores. TiDB Lightning can easily saturate all bandwidth of the 1-Gigabit network and bring down the cluster because PD is unable to be contacted anymore. To avoid this, set an *upload speed limit* in [Importer's configuration](/tidb-lightning/tidb-lightning-configuration.md#tikv-importer):
-
-```toml
-[import]
-# Restricts the total upload speed to TiKV to 100 MB/s or less
-upload-speed-limit = "100MB"
-```
+1-Gigabit network cards can only provide a total bandwidth of 120 MB/s, which has to be shared among all target TiKV stores. TiDB Lightning can easily saturate all bandwidth of the 1-Gigabit network and bring down the cluster because PD is unable to be contacted anymore.
 
 ## Why TiDB Lightning requires so much free space in the target TiKV cluster?
 
-With the default settings of 3 replicas, the space requirement of the target TiKV cluster is 6 times the size of data source. The extra multiple of “2” is a conservative estimation because the following factors are not reflected in the data source:
+With the default settings of 3 replicas, the space requirement of the target TiKV cluster is 6 times the size of data source. The extra multiple of "2" is a conservative estimation because the following factors are not reflected in the data source:
 
 - The space occupied by indices
 - Space amplification in RocksDB

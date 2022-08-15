@@ -17,40 +17,41 @@ tiup cluster
 ```
 
 ```
-Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.9.3/cluster
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.0/cluster
 Deploy a TiDB cluster for production
 
 Usage:
-  cluster [flags]
-  cluster [command]
+  tiup cluster [command]
 
 Available Commands:
-  check       Perform preflight checks for the cluster
+  check       Precheck a cluster
   deploy      Deploy a cluster for production
   start       Start a TiDB cluster
   stop        Stop a TiDB cluster
   restart     Restart a TiDB cluster
   scale-in    Scale in a TiDB cluster
   scale-out   Scale out a TiDB cluster
-  clean       Clean up cluster data
   destroy     Destroy a specified cluster
+  clean       (Experimental) Clean up a specified cluster
   upgrade     Upgrade a specified TiDB cluster
-  exec        Run shell command on host in the tidb cluster
   display     Display information of a TiDB cluster
   list        List all clusters
   audit       Show audit log of cluster operation
-  import      Import an exist TiDB cluster from TiDB Ansible
+  import      Import an existing TiDB cluster from TiDB-Ansible
   edit-config Edit TiDB cluster config
   reload      Reload a TiDB cluster's config and restart if needed
   patch       Replace the remote package with a specified package and restart the service
   help        Help about any command
 
 Flags:
-  -h, --help              help for cluster
-      --native-ssh        Use the system's native SSH client
-      --wait-timeout int  Timeout of waiting the operation
-      --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
-  -y, --yes               Skip all confirmations and assumes 'yes'
+  -c, --concurrency int     Maximum number of concurrent tasks allowed (defaults to `5`)
+      --format string       (EXPERIMENTAL) The format of output, available values are [default, json] (default "default")
+  -h, --help                help for tiup
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
+      --ssh-timeout uint    Timeout in seconds to connect a host via SSH. Operations that don't need an SSH connection are ignored. (default 5)
+  -v, --version            TiUP version
+      --wait-timeout uint   Timeout in seconds to wait for an operation to complete. Inapplicable operations are ignored. (defaults to `120`)
+  -y, --yes                 Skip all confirmations and assumes 'yes'
 ```
 
 ## Deploy the cluster
@@ -113,12 +114,12 @@ tidb_servers:
 ...
 ```
 
-Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.0.0 and your cluster name is `prod-cluster`, run the following command:
+Save the file as `/tmp/topology.yaml`. If you want to use TiDB v6.1.0 and your cluster name is `prod-cluster`, run the following command:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
-tiup cluster deploy -p prod-cluster v6.0.0 /tmp/topology.yaml
+tiup cluster deploy -p prod-cluster v6.1.0 /tmp/topology.yaml
 ```
 
 During the execution, TiUP asks you to confirm your topology again and requires the root password of the target machine (the `-p` flag means inputting password):
@@ -126,7 +127,7 @@ During the execution, TiUP asks you to confirm your topology again and requires 
 ```bash
 Please confirm your topology:
 TiDB Cluster: prod-cluster
-TiDB Version: v6.0.0
+TiDB Version: v6.1.0
 Type        Host          Ports        Directories
 ----        ----          -----        -----------
 pd          172.16.5.134  2379/2380    deploy/pd-2379,data/pd-2379
@@ -163,10 +164,10 @@ tiup cluster list
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.9.3/cluster list
+Starting /root/.tiup/components/cluster/v1.10.0/cluster list
 Name          User  Version    Path                                               PrivateKey
 ----          ----  -------    ----                                               ----------
-prod-cluster  tidb  v6.0.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
+prod-cluster  tidb  v6.1.0    /root/.tiup/storage/cluster/clusters/prod-cluster  /root/.tiup/storage/cluster/clusters/prod-cluster/ssh/id_rsa
 ```
 
 ## Start the cluster
@@ -194,9 +195,9 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.9.3/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.0.0
+TiDB Version: v6.1.0
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -220,7 +221,7 @@ For the PD component, `|L` or `|UI` might be appended to `Up` or `Down`. `|L` in
 
 > **Note:**
 >
-> This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
+> This section describes only the syntax of the scale-in command. For detailed steps of online scaling, refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
 Scaling in a cluster means making some node(s) offline. This operation removes the specific node(s) from the cluster and deletes the remaining files.
 
@@ -265,9 +266,9 @@ tiup cluster display prod-cluster
 ```
 
 ```
-Starting /root/.tiup/components/cluster/v1.9.3/cluster display prod-cluster
+Starting /root/.tiup/components/cluster/v1.10.0/cluster display prod-cluster
 TiDB Cluster: prod-cluster
-TiDB Version: v6.0.0
+TiDB Version: v6.1.0
 ID                  Role        Host          Ports        Status     Data Dir              Deploy Dir
 --                  ----        ----          -----        ------     --------              ----------
 172.16.5.134:3000   grafana     172.16.5.134  3000         Up         -                     deploy/grafana-3000
@@ -289,7 +290,7 @@ After PD schedules the data on the node to other TiKV nodes, this node will be d
 
 > **Note:**
 >
-> This section describes only the syntax of the scale-out command. For detailed steps of online scaling, refer to [Scale the TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
+> This section describes only the syntax of the scale-out command. For detailed steps of online scaling, refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
 
 The scale-out operation has an inner logic similar to that of deployment: the TiUP cluster component firstly ensures the SSH connection of the node, creates the required directories on the target node, then executes the deployment operation, and starts the node service.
 
@@ -309,10 +310,10 @@ To add a TiKV node and a PD node in the `tidb-test` cluster, take the following 
     ---
 
     pd_servers:
-      - ip: 172.16.5.140
+      - host: 172.16.5.140
 
     tikv_servers:
-      - ip: 172.16.5.140
+      - host: 172.16.5.140
     ```
 
 2. Perform the scale-out operation. TiUP cluster adds the corresponding nodes to the cluster according to the port, directory, and other information described in `scale.yaml`.
@@ -369,18 +370,18 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --native-ssh        Use the system's native SSH client
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-For example, the following command upgrades the cluster to v6.0.0:
+For example, the following command upgrades the cluster to v6.1.0:
 
 {{< copyable "shell-regular" >}}
 
 ```bash
-tiup cluster upgrade tidb-test v6.0.0
+tiup cluster upgrade tidb-test v6.1.0
 ```
 
 ## Update configuration
@@ -465,7 +466,7 @@ Flags:
       --transfer-timeout int   Timeout in seconds when transferring PD and TiKV store leaders (default 300)
 
 Global Flags:
-      --native-ssh        Use the system's native SSH client
+      --ssh string          (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
@@ -517,7 +518,7 @@ Flags:
   -r, --rename NAME        Rename the imported cluster to NAME
 
 Global Flags:
-      --native-ssh        Use the system's native SSH client
+      --ssh string        (Experimental) The executor type. Optional values are 'builtin', 'system', and 'none'.
       --wait-timeout int  Timeout of waiting the operation
       --ssh-timeout int   Timeout in seconds to connect host via SSH, ignored for operations that don't need an SSH connection. (default 5)
   -y, --yes               Skip all confirmations and assumes 'yes'
@@ -559,14 +560,14 @@ tiup cluster audit
 ```
 
 ```
-Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.9.3/cluster audit
+Starting component `cluster`: /home/tidb/.tiup/components/cluster/v1.10.0/cluster audit
 ID      Time                       Command
 --      ----                       -------
-4BLhr0  2022-03-01T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.9.3/cluster deploy test v6.0.0 /tmp/topology.yaml
-4BKWjF  2022-02-28T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.3/cluster deploy test v6.0.0 /tmp/topology.yaml
-4BKVwH  2022-02-28T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.9.3/cluster deploy test v6.0.0 /tmp/topology.yaml
-4BKKH1  2022-02-28T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.9.3/cluster destroy test
-4BKKDx  2022-02-28T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.9.3/cluster deploy test v6.0.0 /tmp/topology.yaml
+4BLhr0  2022-06-10T13:25:09+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
+4BKWjF  2022-06-08T23:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
+4BKVwH  2022-06-08T23:02:08+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
+4BKKH1  2022-06-08T16:39:04+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster destroy test
+4BKKDx  2022-06-08T16:36:57+08:00  /home/tidb/.tiup/components/cluster/v1.10.0/cluster deploy test v6.1.0 /tmp/topology.yaml
 ```
 
 The first column is `audit-id`. To view the execution log of a certain command, pass the `audit-id` of a command as the flag as follows:
@@ -680,13 +681,13 @@ All operations above performed on the cluster machine use the SSH client embedde
 - To use a SSH plug-in for authentication
 - To use a customized SSH client
 
-Then you can use the `--native-ssh` command-line flag to enable the system-native command-line tool:
+Then you can use the `--ssh=system` command-line flag to enable the system-native command-line tool:
 
-- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --native-ssh`
-- Start a cluster: `tiup cluster start <cluster-name> --native-ssh`
-- Upgrade a cluster: `tiup cluster upgrade ... --native-ssh`
+- Deploy a cluster: `tiup cluster deploy <cluster-name> <version> <topo> --ssh=system`
+- Start a cluster: `tiup cluster start <cluster-name> --ssh=system`
+- Upgrade a cluster: `tiup cluster upgrade ... --ssh=system`
 
-You can add `--native-ssh` in all cluster operation commands above to use the system's native SSH client.
+You can add `--ssh=system` in all cluster operation commands above to use the system's native SSH client.
 
 To avoid adding such a flag in every command, you can use the `TIUP_NATIVE_SSH` system variable to specify whether to use the local SSH client:
 
@@ -698,7 +699,7 @@ export TIUP_NATIVE_SSH=1
 export TIUP_NATIVE_SSH=enable
 ```
 
-If you specify this environment variable and `--native-ssh` at the same time, `--native-ssh` has higher priority.
+If you specify this environment variable and `--ssh` at the same time, `--ssh` has higher priority.
 
 > **Note:**
 >
