@@ -5,80 +5,93 @@ summary: Learn how to migrate and merge MySQL shards to TiDB Cloud.
 
 # Migrate and Merge MySQL Shards to TiDB Cloud
 
-本文档介绍了如何完成上游的 MySQL 存量数据迁移和增量数据同步，并要将分库分表数据合并至 TiDB Cloud 集群的单库单表中。
+This document describes how to migrate and merge MySQL shards from different partitions into TiDB Cloud. After migration, you can use TiDB DM to perform incremental replication according to your business needs.
 
-本文档中的示例使用了较为复杂的跨多个实例之间的分库分表迁移，同时涉及到自增主键冲突处理。本案例中的方案也适用于单实例内的分库分表迁移的场景。
+The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in self-incremental primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single instance.
 
-## 环境信息
+## Environment information in the example
 
-### 上游集群
+This section describes the basic information of the upstream cluster, DM, and downstream cluster used in the example.
 
-上游集群的版本为 MySQL v5.7.18。具体信息如下：
+### Upstream cluster
 
-1. MySQL 实例 1:
-  - 库 store_01，表 [sale_01, sale_02]
-  - 库 store_02，表 [sale_01, sale_02]
-2. MySQL 实例 2：
-  - 库 store_01，表 [sale_01, sale_02]
-  - 库 store_02，表 [sale_01, sale_02]
-3. 表结构：
+The version of the upstream cluster is MySQL v5.7.18. The specific information is as follows.
 
-```sql
-CREATE TABLE sale_01 (
- id bigint(20) NOT NULL auto_increment,
- uid varchar(40) NOT NULL,
- sale_num bigint DEFAULT NULL,
- PRIMARY KEY (id),
- UNIQUE KEY ind_uid (uid)
-);
-```
+- MySQL instance1:
+  - schema `store_01` and table `[sale_01, sale_02]`
+  - schema `store_02` and table `[sale_01, sale_02]`
+- MySQL instance2:
+  - schema `store_01`and table `[sale_01, sale_02]`
+  - schema `store_02`and table `[sale_01, sale_02]`
+- Table structure：
+  ```sql
+  CREATE TABLE sale_01 (
+  id bigint(20) NOT NULL auto_increment,
+  uid varchar(40) NOT NULL,
+  sale_num bigint DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY ind_uid (uid)
+  );
+  ```
 
-### DM 信息
+### DM
 
-DM 的版本为 v5.3.0。具体信息如下：
+The version of DM is v5.3.0. The details are as follows:
 
 ![DM Details](/media/tidb-cloud/shard-dm-details.png)
 
-## 存量数据迁移
+### Downstream cluster
 
-## 从多个 MySQL 源导出存量数据
+采用的 TiDB Cloud 上集群的版本为 v6.0.0，合库合表至表 store.sales。
+The version of TiDB Cloud cluster is v6.0.0, and the combined library and tables are merged to the table `store.sales`.
 
-**注意**：
+## Perform full data migration from MySQL to TiDB Cloud
 
-* **只导出表数据**，必须导出为 **CSV** 格式，DBaaS 平台合库合表的限制
-* 在 AWS S3 Bucket 内创建**一级子目录** `store`（对应库级别），**二级子目录** `sales`（对应表级别），在目录 `sales` 中为每个 MySQL 实例创建一个**三级子目录**（对应实例级别），即：
-    * 将 MySQL 实例 1 数据导出至 `s3://dumpling-s3/store/sales/instance01/`
-    * 将 MySQL 实例 2 数据导出至 `s3://dumpling-s3/store/sales/instance02/`
-* 若存在多实例上的多种分库分表规则，则建议在 s3 bucket 中为分库建一个一级子目录，为分表创建一个二级子目录，在二级子目录下按照实例数创建多个三级子目录，方便管理和一次性导入数据。示例：
-    * 将 MySQL 实例 1 和实例 2 中的多个库表 `stock_N.product_N` 合表至 TiDB Cloud 中的表 `stock.products`，则创建 `s3://dumpling-s3/stock/products/instance01/`和 `s3://dumpling-s3/stock/products/instance02/`
+The following is the procedure to migrate and merge MySQL shards to TiDB Cloud.
 
-#### 设置 AWS S3 Bucket  目录层级
+Note that in this example, you only need to export tables and they must be in the **CSV** format.
 
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+### Step 1. Create directories in the Amazon S3 bucket
 
-![alt_text](images/image2.png "image_tooltip")
+Create a first level directory `store` (corresponding to the level of schemas)and a second level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third level directory for each MySQL instance (corresponding to the level of instances). For example:
 
-#### 使用 Dumpling  导数至 AWS S3
+- Migrate the data in MySQL instance1 to `s3://dumpling-s3/store/sales/instance01/`
+- Migrate the data in MySQL instance2 to `s3://dumpling-s3/store/sales/instance02/`
 
-**说明**： 
+If there are shards across multiple instances, you can create a first level directory for each schema and create a second level directory for each sharded table. Then create a third level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
 
-* 详细操作方法如下：
-    * 通过 AWS S3 方式参考：[Dumpling 导数至 AWS S3 操作步骤](https://pingcap.feishu.cn/docs/doccnunXi04QOo0A8rbOn06vXXd)
-    * 通过 GCS 方式参考：[ Dumling 导数至 Google Cloud Storage 操作步骤](https://pingcap.feishu.cn/docs/doccntzVHCWTM8tv0iilQSgd2yg#)
-* 常见 Dumpling 导出问题，参考：[各 RDS For MySQL 常见 Dumpling 导出问题](https://pingcap.feishu.cn/docs/doccnvJ6S5TJ6A8va3oW2X9jVcb#)
+- `s3://dumpling-s3/stock/products/instance01/`
+- `s3://dumpling-s3/stock/products/instance02/`
 
-```shell
-# 上游集群需要开启 binlog
-# 注意选择正确的 S3 目录和 region 区域
-# 选择合适的 dumpling 并发度 -t，尽量减少对上游集群的影响，或者直接从备库导出
-# 注意设置选项 --filetype csv 和 --no-schemas
-[root@localhost ~]# export AWS_ACCESS_KEY_ID={your_aws_access_key_id}
-[root@localhost ~]# export AWS_SECRET_ACCESS_KEY= {your_aws_secret_access_key}
-# 导出 MySQL 实例 1 数据
-[root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
-# 导出 MySQL 实例 2 数据
-[root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql02-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance02/" --s3.region "ap-northeast-1"
-```
+### Step 2. Use Dumpling to export data to Amazon S3
+
+When you use Dumpling to export data to Amazon S3, note the following:
+
+- Enable binlog for upstream clusters.
+- Choose the correct Amazon S3 directory and Region zone.
+- Choose the appropriate concurrency by configuring `-t` to minimize the impact on the upstream cluster, or export directly from the backup database.
+- Set appropriate values for `--filetype csv` and `--no-schemas`.
+
+To export data to Amazon S3, do the following:
+
+1. Get the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` on the Amazon S3 bucket.
+
+    ```shell
+    [root@localhost ~]# export AWS_ACCESS_KEY_ID={your_aws_access_key_id}
+    [root@localhost ~]# export AWS_SECRET_ACCESS_KEY= {your_aws_secret_access_key}
+    ```
+
+2. Export data from MySQL instance1 to the `s3://dumpling-s3/store/sales/instance01/` directory in the Amazon S3 bucket.
+
+    ```shell
+    [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
+    ```
+
+3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
+
+    ```shell
+    [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql02-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance02/" --s3.region "ap-northeast-1"
+    ```
 
 <p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
@@ -88,11 +101,11 @@ DM 的版本为 v5.3.0。具体信息如下：
 
 ![alt_text](images/image4.png "image_tooltip")
 
-### 将 AWS S3 (GCS) 数据导入至 TiDB Cloud
+For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
 
-#### 预先在 TiDB Cloud  创建 Schema
+### Step 3. Create a schema in TiDB Cloud cluster
 
-说明：示例中表 `sale_01` 和 `sale_02` 的列 id 为主键（假设业务不依赖于该列），且具有自增属性，在同步下游进行合表时会发生主键冲突，参考[去掉自增主键属性进行处理](https://docs.pingcap.com/zh/tidb-data-migration/v5.3/shard-merge-best-practices#%E5%8E%BB%E6%8E%89%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE%E7%9A%84%E4%B8%BB%E9%94%AE%E5%B1%9E%E6%80%A7)
+Create a schema in the TiDB Cloud cluster as follows:
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -101,7 +114,9 @@ mysql> use store;
 Database changed
 ```
 
-去掉 id 自增属性，并设置为普通索引
+In this example, the column IDs of  `sale_01` and `sale_02` are auto-increment primary keys.  conflicts might occur when you merge sharded tables in the downstream database. For solutoins to solve conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+
+Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index.
 
 ```sql
 mysql> CREATE TABLE `sales` (
@@ -114,14 +129,11 @@ mysql> CREATE TABLE `sales` (
 Query OK, 0 rows affected (0.17 sec)
 ```
 
-#### 设置导入权限
+### Step 4. Configure Amazon S3 access
 
-**说明**：
+To configure Amazon S3 access, follow the instructions in [Configure Amazon S3 access](/tidbcloud/config-s3-and-gcs-access#configure-amazon-s3-access).
 
-* 操作方法如下：
-    * 若通过 AWS S3 导入，可参考[ AWS S3 导入 TiDB Cloud 集群操作手册](https://pingcap.feishu.cn/docs/doccnaE2au5qdHUh6ayjNozZ86c)
-    * 若通过 GCS 导入，可参考[ GCS 导入 TiDB Cloud 集群操作手册](https://pingcap.feishu.cn/docs/doccn4Mewev7pgQa0pyfKRgQu5b)
-* 本文档以 AWS S3 方式为示例做说明，这里仅列出最关键的 AWS S3 策略配置（请根据实际情况替换 S3 路径）：
+This document uses the Amazon S3 as an example. The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
 
 ```yaml
 {
@@ -152,34 +164,29 @@ Query OK, 0 rows affected (0.17 sec)
 }
 ```
 
-#### 执行数据导入
+### Step 5. Perform the data import task
 
-确认 IAM Role 配置无误后，在 TiDB Cloud 集群页面执行数据导入。
+After configuring the IAM Role, you can perform the data import task on the Data Import Task page.
 
-填写内容：
+Fill in the following information:
 
-* Bucket URL： Dumpling 数据导出的位置
-* Data Format：选择 TiDB Dumpling
-* Role-ARN：填写创建好的 IAM Role，请确认已经具备正确的访问权限
-* Target Database Username：建议使用 root
-* Object Name Pattern：填写文件匹配规则，例如 *store*.sale*
-* Target Table Name：填写目标 schema 名称，所有匹配的文件都将导入该表。例如 store.sales
-
-执行导入即可
+- Data Source Type: AWS S3.
+- Bucket URL: fill in the bucket URL of your source data.
+- Data Format: choose the format of your data.
+- Target Cluster: fill in the Username and Password fields.
+- DB/Tables Filter: if necessary, you can specify a table filter. If you want to configure multiple filter rules, use , to separate the rules.
 
 <p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image5.png "image_tooltip")
 
-注意：
-
-* Bucket URL 建议写到表级别对应的二级目录（这里为 `s3://dumpling-s3/store/sales`），这样合表 `store.sales` 所需要的全部 MySQL 实例数据都被包含在内，并可以一次性导入
+For **Bucket URL**, you can use the second level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that is to be merged into `store.sales` can be imported in one go.
 
 <p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
 ![alt_text](images/image6.png "image_tooltip")
 
-注意：Object Name Pattern 格式为： *{schema 前缀}*.{table 前缀}*，例如 *store*.sale*
+The format of Object Name Pattern is `*{schema prefix}*.{table prefix}*`, for example `*store*.sale*`
 
 <p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
 
