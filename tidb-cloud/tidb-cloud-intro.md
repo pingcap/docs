@@ -44,7 +44,7 @@ With TiDB Cloud, you can get the following key features:
 
 - **World-Class Support**
 
-    Get the same world-class support through our support portal, email, chat, or video conferencing.
+    Get the same world-class support through our support portal, <a href="mailto:tidbcloud-support@pingcap.com">email</a>, chat, or video conferencing.
 
 - **Simple Pricing Plans**
 
