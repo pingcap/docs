@@ -13,7 +13,9 @@ To learn the standard upgrade process, see the following documents:
 - [Upgrade TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
 
 > **Note:**
-> 
+>
+> - [FastScan](/develop/dev-guide-use-fastscan.md) is experimental and its form and usage may change in subsequent versions. Please pay attention when you upgrade TiFlash.
+>
 > - It is not recommended that you upgrade TiFlash across major versions, for example, from v4.x.x to v6.x.x. Instead, you need to upgrade from v4.x.x to v5.x.x first, and then to v6.x.x.
 >
 > - v4.x.x is near the end of its life cycle. It is recommended that you upgrade to v5.x.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
@@ -21,7 +23,7 @@ To learn the standard upgrade process, see the following documents:
 > - PingCAP does not provide bug fixes for non-LTS versions, such as v6.0.0. It is recommended that you upgrade to v6.1.0 and later LTS versions whenever possible.
 >
 > - To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
-> 
+>
 >     - Stop the TiFlash instance: `tiup cluster stop <cluster-name> -R tiflash`
 >     - Upgrade the TiDB cluster without restarting it (only updating the files): `tiup cluster upgrade <cluster-name> <version> --offline`
 >     - Reload the TiDB cluster: `tiup cluster reload <cluster-name>`. After the reload, the TiFlash instance is started and you do not need to manually start it.
