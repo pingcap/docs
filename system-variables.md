@@ -1861,7 +1861,7 @@ mysql> desc select count(distinct a) from test.t;
 - Persists to cluster: Yes
 - Type: Boolean
 - Default value: `ON`
-- When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, outer join operations can use either side of the tables as the build side.
+- When the variable value is `ON`, the left join operator always uses inner table as the build side and the right join operator always uses outer table as the build side. If you set the value to `OFF`, the outer join operator can use either side of the tables as the build side.
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
