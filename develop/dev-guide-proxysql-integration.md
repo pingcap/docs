@@ -18,6 +18,12 @@ This document briefly describes how to integrate **TiDB** with **ProxySQL** usin
 
 <SimpleTab grouId="startup-tidb">
 
+<div label="TiDB Cloud" value="tidb-cloud">
+
+You can refer to [Build a TiDB cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
+
+</div>
+
 <div label="Source compilation" value="source-code">
 
 1. Download the [TiDB](https://github.com/pingcap/tidb) source code, change to the `tidb-server` folder and run the `go build` command.
@@ -57,12 +63,6 @@ This document briefly describes how to integrate **TiDB** with **ProxySQL** usin
     ```shell
     tiup playground
     ```
-
-</div>
-
-<div label="TiDB Cloud" value="tidb-cloud">
-
-You can refer to [Build a TiDB cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
 
 </div>
 
