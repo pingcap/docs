@@ -8,10 +8,10 @@ Release date: August 16, 2022
 
 TiDB version: 6.2.0
 
-In 6.2.0, the key new features or improvements are as follows:
+In v6.2.0, the key new features or improvements are as follows:
 
 * TiDB Dashboard supports visual execution plans, allowing more intuitive display of execution plans.
-* Add a Monitoring page in TiDB Dashboard for more efficient performance analysis and tuning.
+* Add a Monitoring page in TiDB Dashboard to make the performance analysis and tuning more efficient.
 * The Lock View of TiDB feature supports showing the waiting information of optimistic transactions, facilitating quick locating of lock conflicts.
 * TiFlash supports a newer version of storage format, enhancing stability and performance.
 * The Fine Grained Shuffle feature allows parallel execution of window functions in multiple threads.
@@ -35,7 +35,7 @@ In 6.2.0, the key new features or improvements are as follows:
 
     There is often a certain amount of useless data in TiFlash tables before data compaction is automatically triggered. This feature lets you choose the right timing and manually execute SQL statements to immediately compact the physical data in TiFlash, thus reducing storage space usage and improving query performance. This feature is experimental in TiDB v6.1, and now is in General Availability (GA) in TiDB v6.2.0.
 
-    [User document](/sql-statements/sql-statement-alter-table-compact.md#ALTER-TABLE-COMPACT) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
+    [User document](/sql-statements/sql-statement-alter-table-compact.md#alter-table-compact) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
 
 ### Observability
 
