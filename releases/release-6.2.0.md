@@ -254,8 +254,9 @@ In v6.2.0, the key new features or improvements are as follows:
 | [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620) | Newly added | This variable controls whether to generate binary-encoded execution plans in slow logs and statement summaries. |
 | [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620) | Newly added | This variable sets whether the optimizer rewrites the aggregate functions with `DISTINCT` to the two-level aggregate functions, such as rewriting `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b` to `SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`. |
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620) | Newly added | This variable controls whether to show `noop` variables in the result of `SHOW [GLOBAL] VARIABLES`. |
-| [tidb_max_paging_size](/system-variables.md#tidb_min_paging_size) | Newly added | This variable is used to set the minimum number of rows during the coprocessor paging request process. |
-| [tidb_min_paging_size](/system-variables.md#tidb_max_paging_size) | Newly added | This variable is used to set the maximum number of rows during the coprocessor paging request process. |
+| [tidb_max_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620) | Newly added | This variable is used to set the minimum number of rows during the coprocessor paging request process. |
+| [tidb_min_paging_size](/system-variables.md#tidb_max_paging_size-new-in-v620) | Newly added | This variable is used to set the maximum number of rows during the coprocessor paging request process. |
+| [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620) | Newly added | TBP |
 | tidb_enable_change_multi_schema | Deleted | This variable is used to control whether multiple columns or indexes can be altered in one `ALTER TABLE` statement. |
 
 ### Configuration file parameters
@@ -322,7 +323,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Add validation check for some system variables [#35048](https://github.com/pingcap/tidb/issues/35048) @[morgo](https://github.com/morgo)
     - Optimize the error messages for some type conversions [#32447](https://github.com/pingcap/tidb/issues/32744) @[fanrenhoo](https://github.com/fanrenhoo)
     - The `KILL` command now supports DDL operations [#24144](https://github.com/pingcap/tidb/issues/24144) @[morgo](https://github.com/morgo)
-    - Make the output of `SHOW TABLES/DATABASES LIKE …` more MySQL-compatible. The column names in the output contain the `LIKE` value. [#35116](https://github.com/pingcap/tidb/issues/35116) @[likzn](https://github.com/likzn)
+    - Make the output of `SHOW TABLES/DATABASES LIKE …` more MySQL-compatible. The column names in the output contain the `LIKE` value [#35116](https://github.com/pingcap/tidb/issues/35116) @[likzn](https://github.com/likzn)
     - Improve the performance of JSON-related functions [#35859](https://github.com/pingcap/tidb/issues/35859) @[wjhuang2016](https://github.com/wjhuang2016)
     - Improve the verification speed of password login using SHA-2 [#35998](https://github.com/pingcap/tidb/issues/35998) @[virusdefender](https://github.com/virusdefender)
     - Simplify some log outputs [#36011](https://github.com/pingcap/tidb/issues/36011) @[dveeden](https://github.com/dveeden)
@@ -337,7 +338,6 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
     - Improve the readability of the TiKV panel in Grafana Dashboard [#12007](https://github.com/tikv/tikv/issues/12007) @[kevin-xianliu](https://github.com/kevin-xianliu)
     - Optimize the commit pipeline performance of the Apply operator [#12898](https://github.com/tikv/tikv/issues/12898) @[ethercflow](https://github.com/ethercflow)
-    - Support a new command-line flag `--config-info` in tikv-server that lists default and current values of all TiKV configuration items [#12492](https://github.com/tikv/tikv/issues/12492) @[glorv](https://github.com/glorv)
     - Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145) @[ethercflow](https://github.com/ethercflow)
 
 + PD
