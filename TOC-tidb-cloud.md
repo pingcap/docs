@@ -54,7 +54,6 @@
     - [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md)
     - [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)
 - Tune Performance
-  - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
   - Analyze Performance
     - [Statement Analysis](/tidb-cloud/tune-performance.md)
     - [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)
