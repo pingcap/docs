@@ -116,6 +116,10 @@ To view the billing details, perform the following steps:
 
 TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
 
+> **Tip:**
+>
+> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md)
+
 Different types of credits can be used to pay different fees.
 
 The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, the status, the credit type, and the expiry date.
