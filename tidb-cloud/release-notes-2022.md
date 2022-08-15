@@ -20,7 +20,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
         * PoC and staging environments
         * Development environments
 
-* Introduce Credits.
+* Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits).
 
     You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can [contact us](https://en.pingcap.com/apply-for-poc/) to get credits.
 
