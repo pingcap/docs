@@ -411,7 +411,7 @@ In special cases (such as when a node needs to be forcibly taken down), or if th
 
 4. Manually delete TiFlash data files (the location can be found in the `data_dir` directory under the TiFlash configuration of the cluster topology file).
 
-5. Delete the information of the TiFlash node that goes down using the following command:
+5. Delete information about the TiFlash node that goes down from the cluster topology using the following command:
 
     {{< copyable "shell-regular" >}}
 
