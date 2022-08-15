@@ -135,6 +135,10 @@ To view this page, perform the following steps:
 > - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
 > - Credits cannot be used to pay the support plan fees.
 
+> **Warning:**
+>
+> During a PoC process, if all your credits become expired before you add a payment method, your ongoing PoC process will be automatically closed. In this case, you cannot creat a new cluster. After 3 days, all your created clusters will be recycled. After 7 days, all your backups will be recycled.
+
 ## Payment method
 
 If you are the owner or billing administrator of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
