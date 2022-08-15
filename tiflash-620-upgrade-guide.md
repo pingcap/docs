@@ -1,11 +1,11 @@
 ---
-title: TiFlash v6.2.0 Upgrade Guide
-summary: Learn the precautions when you upgrade TiFlash to v6.2.0.
+title: TiFlash v6.2 Upgrade Guide
+summary: Learn the precautions when you upgrade TiFlash to v6.2.
 ---
 
-# TiFlash v6.2.0 Upgrade Guide
+# TiFlash v6.2 Upgrade Guide
 
-This document describes the functional changes in TiFlash modules you need to pay attention to when you upgrade TiFlash from earlier versions to v6.2.0, and recommended actions for you to take.
+This document describes the functional changes in TiFlash modules you need to pay attention to when you upgrade TiFlash from earlier versions to v6.2, and recommended actions for you to take.
 
 To learn the standard upgrade process, see the following documents:
 
@@ -16,11 +16,11 @@ To learn the standard upgrade process, see the following documents:
 >
 > - An experimental feature introduced in v6.2.0, [FastScan](/develop/dev-guide-use-fastscan.md) provides more efficient query performance at the cost of strong data consistency. Note that the form and usage of this feature might change in subsequent versions.
 >
-> - It is not recommended that you upgrade TiFlash across major versions, for example, from v4.x.x to v6.x.x. Instead, you need to upgrade from v4.x.x to v5.x.x first, and then to v6.x.x.
+> - It is not recommended that you upgrade TiFlash across major versions, for example, from v4.x to v6.x. Instead, you need to upgrade from v4.x to v5.x first, and then to v6.x.
 >
-> - v4.x.x is near the end of its life cycle. It is recommended that you upgrade to v5.x.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
+> - v4.x is near the end of its life cycle. It is recommended that you upgrade to v5.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
 >
-> - PingCAP does not provide bug fixes for non-LTS versions, such as v6.0.0. It is recommended that you upgrade to v6.1.0 and later LTS versions whenever possible.
+> - PingCAP does not provide bug fixes for non-LTS versions, such as v6.0. It is recommended that you upgrade to v6.1 and later LTS versions whenever possible.
 >
 > - To upgrade TiFlash from versions earlier than v5.3.0 to v5.3.0 or later, you should stop TiFlash and then upgrade it. The following steps help you upgrade TiFlash without interrupting other components:
 >
@@ -30,13 +30,13 @@ To learn the standard upgrade process, see the following documents:
 
 ## From 5.x or v6.0 to v6.1
 
-When you upgrade TiFlash from v5.x.x or v6.0.0 to v6.1.0, pay attention to the functional changes in TiFlash Proxy and dynamic pruning.
+When you upgrade TiFlash from v5.x or v6.0 to v6.1, pay attention to the functional changes in TiFlash Proxy and dynamic pruning.
 
 ### TiFlash Proxy
 
-TiFlash Proxy is upgraded in v6.1.0 (aligned with TiKV v6.0.0). The new version has upgraded the RocksDB version. After you upgrade TiFlash to v6.1.0, the data format is converted to the new version automatically.
+TiFlash Proxy is upgraded in v6.1.0 (aligned with TiKV v6.0.0). The new version has upgraded the RocksDB version. After you upgrade TiFlash to v6.1, the data format is converted to the new version automatically.
 
-In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1.0 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
+In regular upgrades, the data conversion does not involve any risks. However, if you need to downgrade TiFlash from v6.1 to any earlier version in special scenarios (for example, testing or verification scenarios), the earlier version might fail to parse the new RocksDB configuration. As as result, TiFlash will fail to restart. It is recommended that you fully test and verify the upgrade process and prepare an emergency plan.
 
 **Workaround for downgrading TiFlash in testing or other special scenarios**
 
@@ -48,13 +48,13 @@ If you do not enable [dynamic pruning mode](/partitioned-table.md#dynamic-prunin
 
 - Newly installed TiDB v6.1.0: Dynamic pruning is enabled by default.
 
-- TiDB v6.0.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning after an upgrade inherits that of the previous version. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
+- TiDB v6.0 and earlier: Dynamic pruning is disabled by default. The setting of dynamic pruning after an upgrade inherits that of the previous version. That is, dynamic pruning will not be enabled (or disabled) automatically after an upgrade.
 
     After an upgrade, to enable dynamic pruning, set `tidb_partition_prune_mode` to `dynamic` and manually update GlobalStats of partitioned tables. For details, see [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode).
 
 ## From v5.x or v6.0 to v6.2
 
-In TiDB v6.2.0, TiFlash upgrades its data storage format to the V3 version. Therefore, when you upgrade TiFlash from v5.x.x or v6.0.0 to v6.2.0, besides functional changes in [TiFlash Proxy](#tiflash-proxy) and [Dynamic pruning](#dynamic-pruning), you also need to pay attention to the functional change in PageStorage.
+In TiDB v6.2, TiFlash upgrades its data storage format to the V3 version. Therefore, when you upgrade TiFlash from v5.x or v6.0 to v6.2, besides functional changes in [TiFlash Proxy](#tiflash-proxy) and [Dynamic pruning](#dynamic-pruning), you also need to pay attention to the functional change in PageStorage.
 
 ### PageStorage
 
@@ -83,4 +83,4 @@ You can forcibly scale in the target TiFlash node and then replicate data from T
 
 ## From v6.1 to v6.2
 
-When you upgrade TiFlash from v6.1.0 to v6.2.0, pay attention to the change in data storage format. For details, see [PageStorage](#pagestorage).
+When you upgrade TiFlash from v6.1 to v6.2, pay attention to the change in data storage format. For details, see [PageStorage](#pagestorage).
