@@ -219,7 +219,7 @@ Follow these steps to start `tidb-lightning`:
    - View progress via the monitoring dashboard. For more information, see [TiDB Lightning Monitoring]( /tidb-lightning/monitor-tidb-lightning.md).
    - View the progress via the Web page. See [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
-After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error, address the error as instructed in the error message.
+After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 
 > **Note:**
 >
