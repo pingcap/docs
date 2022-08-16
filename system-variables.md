@@ -1994,7 +1994,7 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the cost of TiKV to scan one row from the disk in ascending order. It's used by the [Cost Model](/cost-model.md).
+- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_seek_factor
 
