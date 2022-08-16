@@ -718,15 +718,6 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + Controls whether the [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md) table collects the information of retryable deadlock errors. For the description of retryable deadlock errors, see [Retryable deadlock errors](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors).
 + Default value: `false`
 
-<<<<<<< HEAD
-=======
-### pessimistic-auto-commit (New in v6.0.0)
-
-+ Determines the transaction mode that the auto-commit transaction uses when the pessimistic transaction mode is globally enabled (`tidb_txn_mode='pessimistic'`). By default, even if the pessimistic transaction mode is globally enabled, the auto-commit transaction still uses the optimistic transaction mode. After enabling `pessimistic-auto-commit` (set to `true`), the auto-commit transaction also uses pessimistic mode, which is consistent with the other explicitly committed pessimistic transactions.
-+ For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
-+ For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
-+ Default value: `false`
-
 ## isolation-read
 
 Configuration items related to read isolation.
@@ -752,7 +743,6 @@ Configuration items related to the PROXY protocol.
 >
 > Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
 
->>>>>>> f6536e43b (add configuration description about isolation-read.engines & proxy-pr… (#9689))
 ## experimental
 
 The `experimental` section, introduced in v3.1.0, describes the configurations related to the experimental features of TiDB.
