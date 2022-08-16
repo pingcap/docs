@@ -113,7 +113,7 @@ hide_commit: true
 
 <LearningPath label="Billing" icon="cloud2">
 
-[Costs](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing)
+[Pricing](https://en.pingcap.com/tidb-cloud-pricing/)
 
 [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
