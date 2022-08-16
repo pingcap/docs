@@ -16,7 +16,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     * Suggested usage scenarios:
 
-        * Low workload production environments for SMB
+        * Low-workload production environments for SMB
         * PoC and staging environments
         * Development environments
 
