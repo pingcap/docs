@@ -276,6 +276,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
        }
    ]
 }
+```
 
 ### Step 2. Create a migration task
 
