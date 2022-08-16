@@ -52,6 +52,13 @@ This document only describes the parameters that are not included in command-lin
 + The threshold for outputing slow logs. If the processing time is longer than this threshold, slow logs are output.
 + Default value: "1s"
 
+### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ## server
 
 + Configuration items related to the server
@@ -147,6 +154,11 @@ This document only describes the parameters that are not included in command-lin
 + The time threshold for a TiDB's push-down request to output slow log. If the processing time is longer than this threshold, the slow logs are output.
 + Default value: `"1s"`
 + Minimum value: `0`
+
+### `forward-max-connections-per-address` <span class="version-mark">New in v5.0.0</span>
+
++ Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
++ Default value: `4`
 
 ## readpool.unified
 
