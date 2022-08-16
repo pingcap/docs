@@ -1927,7 +1927,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
-- Indicates the memory cost of TiDB to store one row. It's used by the [Cost Model](/cost-model.md).
+- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
