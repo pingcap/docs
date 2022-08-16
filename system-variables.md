@@ -350,7 +350,7 @@ This variable is an alias for `last_insert_id`.
 mysql> SET GLOBAL max_prepared_stmt_count=1048577;
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
-mysql> show warnings;
+mysql> SHOW WARNINGS;
 +---------+------+--------------------------------------------------------------+
 | Level   | Code | Message                                                      |
 +---------+------+--------------------------------------------------------------+
