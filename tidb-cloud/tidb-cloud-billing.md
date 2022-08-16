@@ -120,7 +120,7 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 >
 > To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md)
 
-The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, the status, and the expiry date.
+The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, and the status.
 
 To view this page, perform the following steps:
 
