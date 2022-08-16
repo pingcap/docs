@@ -204,7 +204,7 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect TiDB.
+To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
 
 ```yaml
    server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
@@ -214,7 +214,7 @@ To check the source IP address using `SHOW PROCESSLIST`, you need to configure t
 
 > **Note:**
 >
-> Before using the PROXY protocol, you need to add target parameters in the `proxy-protocol.networks` configuration file of the TiDB server.
+> Before using the PROXY protocol, you need to configure [`proxy-protocol.networks`](/tidb-configuration-file.md#networks) in the configuration file of the TiDB server.
 
 ### Start HAProxy
 
