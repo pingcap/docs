@@ -94,7 +94,7 @@ This document only describes the parameters that are not included in command-lin
 
 + Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
 + Default value: `false`
-+ If the environment might have network isolation, enabling this parameter can reduce the window of service unavailability.
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
 + If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ## server

@@ -162,8 +162,8 @@ The TiDB configuration file supports more options than command-line parameters. 
 ### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
 
 + Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
-+ Default value: false
-+ If the environment might have network isolation, enabling this parameter can reduce the window of service unavailability.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
 + If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
 
 ## Log
