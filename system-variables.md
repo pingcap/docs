@@ -1810,7 +1810,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost of starting a Golang goroutine in TiDB. It's used by the [Cost Model](/cost-model.md).
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_cop_cpu_factor
 
