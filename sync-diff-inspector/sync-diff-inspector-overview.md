@@ -3,14 +3,14 @@ title: sync-diff-inspector User Guide
 summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 ---
 
-# sync-diff-inspectorユーザーガイド {#sync-diff-inspector-user-guide}
+# sync-diff-inspector ユーザーガイド {#sync-diff-inspector-user-guide}
 
-[sync-diff-inspector](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector)は、データベースに保存されているデータをMySQLプロトコルと比較するために使用されるツールです。たとえば、MySQLのデータとTiDBのデータ、MySQLのデータとMySQLのデータ、またはTiDBのデータとTiDBのデータを比較できます。さらに、このツールを使用して、少量のデータに一貫性がないシナリオでデータを修復することもできます。
+[同期差分インスペクター](https://github.com/pingcap/tidb-tools/tree/master/sync_diff_inspector)は、データベースに保存されているデータを MySQL プロトコルと比較するために使用されるツールです。たとえば、MySQL のデータと TiDB のデータ、MySQL のデータと MySQL のデータ、TiDB のデータと TiDB のデータを比較できます。さらに、このツールを使用して、少量のデータに一貫性がないシナリオでデータを修復することもできます。
 
-このガイドでは、sync-diff-inspectorの主な機能を紹介し、このツールを構成して使用する方法について説明します。 sync-diff-inspectorをダウンロードするには、次のいずれかの方法を使用します。
+このガイドでは、sync-diff-inspector の主な機能を紹介し、このツールを構成して使用する方法について説明します。 sync-diff-inspector をダウンロードするには、次のいずれかの方法を使用します。
 
--   バイナリパッケージ。 [tidb-community-toolkit-v5.4.2-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.4.2-linux-amd64.tar.gz)をクリックしてダウンロードします。
--   Dockerイメージ。次のコマンドを実行してダウンロードします。
+-   バイナリパッケージ。 [tidb-community-toolkit-v5.4.2-linux-amd64](https://download.pingcap.org/tidb-community-toolkit-v5.4.2-linux-amd64.tar.gz)をクリックしてダウンロードしてください。
+-   Docker イメージ。次のコマンドを実行してダウンロードします。
 
     {{< copyable "" >}}
 
@@ -20,49 +20,49 @@ summary: Use sync-diff-inspector to compare data and repair inconsistent data.
 
 ## 主な機能 {#key-features}
 
--   テーブルスキーマとデータを比較します
--   データの不整合が存在する場合にデータを修復するために使用されるSQLステートメントを生成します
--   サポート[スキーマ名またはテーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)
--   サポート[シャーディングシナリオでのデータチェック](/sync-diff-inspector/shard-diff.md)
--   サポート[TiDBアップストリーム-ダウンストリームクラスターのデータチェック](/sync-diff-inspector/upstream-downstream-diff.md)
--   サポート[DMレプリケーションシナリオでのデータチェック](/sync-diff-inspector/dm-diff.md)
+-   テーブル スキーマとデータを比較する
+-   データの不整合が存在する場合にデータを修復するために使用される SQL ステートメントを生成する
+-   サポート[スキーマまたはテーブル名が異なるテーブルのデータ チェック](/sync-diff-inspector/route-diff.md)
+-   サポート[シャーディング シナリオでのデータ チェック](/sync-diff-inspector/shard-diff.md)
+-   サポート[TiDB アップストリーム-ダウンストリーム クラスタのデータ チェック](/sync-diff-inspector/upstream-downstream-diff.md)
+-   サポート[DM レプリケーション シナリオでのデータ チェック](/sync-diff-inspector/dm-diff.md)
 
-## sync-diff-inspectorの制限 {#restrictions-of-sync-diff-inspector}
+## sync-diff-inspector の制限事項 {#restrictions-of-sync-diff-inspector}
 
--   MySQLとTiDB間のデータ移行では、オンラインチェックはサポートされていません。アップストリーム-ダウンストリームチェックリストにデータが書き込まれていないこと、および特定の範囲のデータが変更されていないことを確認してください。 `range`を設定すると、この範囲のデータを確認できます。
+-   MySQL と TiDB 間のデータ移行では、オンライン チェックはサポートされていません。上流下流チェックリストにデータが書き込まれていないこと、および特定の範囲のデータが変更されていないことを確認します。 `range`を設定すると、この範囲のデータを確認できます。
 
--   `JSON` 、 `BINARY` `BIT`はサポートさ`BLOB`ていません。データチェックを実行する場合、これらのタイプのデータのチェックをスキップするには、 `ignore-columns`を設定する必要があります。
+-   `JSON`種類のデータはサポートされていません。データ チェックを実行する場合、このタイプのデータのチェックをスキップするには`ignore-columns`を設定する必要があります。
 
--   TiDBとMySQL `DOUBLE` `FLOAT`およびその他の浮動小数点型の実装が異なります。 `FLOAT`と`DOUBLE`は、チェックサムの計算にそれぞれ6桁と15桁の有効数字を使用します。この機能を使用したくない場合は、 `ignore-columns`を設定して、これらの列のチェックをスキップします。
+-   TiDB と MySQL では、 `FLOAT` 、 `DOUBLE` 、およびその他の浮動小数点型の実装が異なります。 `FLOAT`と`DOUBLE`は、チェックサムの計算にそれぞれ 6 桁と 15 桁の有効数字を使用します。この機能を使用しない場合は、 `ignore-columns`を設定してこれらの列のチェックをスキップします。
 
--   主キーまたは一意のインデックスを含まないテーブルのチェックをサポートします。ただし、データに一貫性がない場合、生成されたSQLステートメントはデータを正しく修復できない可能性があります。
+-   主キーまたは一意のインデックスを含まないテーブルのチェックをサポートします。ただし、データに一貫性がない場合、生成された SQL ステートメントはデータを正しく修復できない可能性があります。
 
-## sync-diff-inspectorのデータベース権限 {#database-privileges-for-sync-diff-inspector}
+## sync-diff-inspector のデータベース権限 {#database-privileges-for-sync-diff-inspector}
 
-sync-diff-inspectorは、テーブルスキーマの情報を取得し、データをクエリする必要があります。必要なデータベース権限は次のとおりです。
+sync-diff-inspector は、テーブル スキーマの情報を取得し、データをクエリする必要があります。必要なデータベース権限は次のとおりです。
 
--   アップストリームデータベース
-    -   `SELECT` （比較のためにデータをチェックします）
-    -   `SHOW_DATABASES` （データベース名を表示）
-    -   `RELOAD` （テーブルスキーマを表示）
--   下流データベース
-    -   `SELECT` （比較のためにデータをチェックします）
-    -   `SHOW_DATABASES` （データベース名を表示）
-    -   `RELOAD` （テーブルスキーマを表示）
+-   アップストリーム データベース
+    -   `SELECT` (比較のためにデータをチェック)
+    -   `SHOW_DATABASES` (ビュー データベース名)
+    -   `RELOAD` (ビュー テーブル スキーマ)
+-   ダウンストリーム データベース
+    -   `SELECT` (比較のためにデータをチェック)
+    -   `SHOW_DATABASES` (ビュー データベース名)
+    -   `RELOAD` (ビュー テーブル スキーマ)
 
 ## Configuration / コンフィグレーションファイルの説明 {#configuration-file-description}
 
-sync-diff-inspectorの構成は、次の部分で構成されています。
+sync-diff-inspector の構成は、次の部分で構成されます。
 
--   `Global config` ：チェックするスレッドの数、矛盾するテーブルを修正するためにSQLステートメントをエクスポートするかどうか、データをキャンプするかどうかなどの一般的な構成。
--   `Databases config` ：アップストリームおよびダウンストリームデータベースのインスタンスを構成します。
--   `Routes` ：ダウンストリームの単一スキーマ名と一致するアップストリームの複数のスキーマ名のルール**（オプション）** 。
--   `Task config` ：チェックするテーブルを構成します。一部のテーブルにアップストリームデータベースとダウンストリームデータベースの間に特定のマッピング関係がある場合、または特別な要件がある場合は、これらのテーブルを設定する必要があります。
--   `Table config` ：無視する指定された範囲や列など、特定のテーブルの特別な構成**（オプション）** 。
+-   `Global config` : チェックするスレッドの数、矛盾したテーブルを修正するために SQL ステートメントをエクスポートするかどうか、データをキャンプするかどうかなどの一般的な構成。
+-   `Databases config` : アップストリーム データベースとダウンストリーム データベースのインスタンスを構成します。
+-   `Routes` : アップストリームの複数のスキーマ名がダウンストリームの単一のスキーマ名と一致するためのルール**(オプション)** 。
+-   `Task config` : チェック用のテーブルを構成します。アップストリーム データベースとダウンストリーム データベースの間に特定のマッピング関係があるテーブルや、特別な要件があるテーブルがある場合は、これらのテーブルを構成する必要があります。
+-   `Table config` : 指定された範囲や列を無視するなど、特定のテーブルの特別な構成**(オプション)** 。
 
 以下は、完全な構成ファイルの説明です。
 
--   注：名前の後に`s`が付いている構成には複数の値が含まれる可能性があるため、構成値を含めるには角括弧`[]`を使用する必要があります。
+-   注: 名前の後に`s`が付いている構成は複数の値を持つことができるため、構成値を含めるには角括弧`[]`を使用する必要があります。
 
 ```toml
 # Diff Configuration.
@@ -152,7 +152,7 @@ chunk-size = 0
 collation = ""
 ```
 
-## sync-diff-inspectorを実行します {#run-sync-diff-inspector}
+## sync-diff-inspector を実行する {#run-sync-diff-inspector}
 
 次のコマンドを実行します。
 
@@ -162,15 +162,15 @@ collation = ""
 ./bin/sync_diff_inspector --config=./config.toml
 ```
 
-このコマンドは、 `output-dir`のチェックレポート`summary.txt`とログ`sync_diff.log`を出力し`config.toml` 。 `output-dir`では、 `config. toml`ファイルのハッシュ値で指定されたフォルダも生成されます。このフォルダーには、ブレークポイントのチェックポイントノード情報と、データに一貫性がない場合に生成されるSQLファイルが含まれます。
+このコマンドは、 `output-dir` of `config.toml`とログ`sync_diff.log`でチェック レポート`summary.txt`を出力します。 `output-dir`では、 `config. toml`ファイルのハッシュ値で名前が付けられたフォルダーも生成されます。このフォルダーには、ブレークポイントのチェックポイント ノード情報と、データが矛盾している場合に生成される SQL ファイルが含まれます。
 
 ### 進捗情報 {#progress-information}
 
-sync-diff-inspectorは、実行時に進行状況情報を`stdout`に送信します。進行状況情報には、テーブル構造の比較結果、テーブルデータの比較結果、および進行状況バーが含まれます。
+sync-diff-inspector は、実行時に進捗情報を`stdout`に送信します。進行状況情報には、テーブル構造の比較結果、テーブル データの比較結果、進行状況バーが含まれます。
 
 > **ノート：**
 >
-> 表示効果を確保するには、表示ウィンドウの幅を80文字以上に保ちます。
+> 表示効果を確保するには、表示ウィンドウの幅を 80 文字以上にしてください。
 
 ```progress
 A total of 2 tables need to be compared
@@ -223,15 +223,15 @@ output/
 
 ### ログ {#log}
 
-sync-diff-inspectorのログは`${output}/sync_diff.log`に保存され、そのうち`${output}`は`config.toml`ファイルの`output-dir`の値です。
+sync-diff-inspector のログは`${output}/sync_diff.log`に保存され、そのうち`${output}`は`config.toml`ファイルの`output-dir`の値です。
 
 ### 進捗 {#progress}
 
-実行中のsync-diff-inspectorは、定期的に（10秒ごとに）チェックポイントの進行状況を出力します。チェックポイントは`${output}/checkpoint/sync_diff_checkpoints.pb`にあり、そのうち`${output}`は`config.toml`ファイルの`output-dir`の値です。
+実行中の sync-diff-inspector は定期的に (10 秒ごとに) チェックポイントの進行状況を出力します。これは`${output}/checkpoint/sync_diff_checkpoints.pb`にあり、そのうち`${output}`は`config.toml`ファイルの`output-dir`の値です。
 
 ### 結果 {#result}
 
-チェックが終了すると、sync-diff-inspectorはレポートを出力します。これは`${output}/summary.txt`にあり、 `${output}`は`config.toml`ファイルの`output-dir`の値です。
+チェックが完了すると、sync-diff-inspector がレポートを出力します。これは`${output}/summary.txt`にあり、 `${output}`は`config.toml`ファイルの`output-dir`の値です。
 
 ```summary
 +---------------------+--------------------+----------------+
@@ -244,21 +244,21 @@ Time Cost: 16.75370462s
 Average Speed: 113.277149MB/s
 ```
 
--   TABLE：対応するデータベースとテーブルの名前
+-   TABLE: 対応するデータベース名とテーブル名
 
--   構造の同等性：テーブルの構造が同じかどうかを確認します
+-   STRUCTURE EQUALITY: テーブル構造が同じかどうかをチェックします
 
--   データ差分`rowDelete` ： `rowAdd` 。テーブルを修正するために追加/削除する必要がある行数を示します
+-   データ差分行: `rowAdd` / `rowDelete` .テーブルを修正するために追加/削除する必要がある行の数を示します
 
-### 一貫性のないデータを修正するSQLステートメント {#sql-statements-to-fix-inconsistent-data}
+### 不整合データを修正するための SQL ステートメント {#sql-statements-to-fix-inconsistent-data}
 
-データチェックプロセス中に異なる行が存在する場合、それらを修正するためにSQLステートメントが生成されます。データの不整合がチャンクに存在する場合、 `chunk.Index`という名前のSQLファイルが生成されます。 SQLファイルは`${output}/fix-on-${instance}`にあり、 `${instance}`は`config.toml`ファイルの`task.target-instance`の値です。
+データ チェック プロセス中に異なる行が存在する場合、それらを修正するために SQL ステートメントが生成されます。チャンク内にデータの不整合が存在する場合、 `chunk.Index`という名前の SQL ファイルが生成されます。 SQL ファイルは`${output}/fix-on-${instance}`にあり、 `${instance}`は`config.toml`ファイルの`task.target-instance`の値です。
 
-SQLファイルには、チャンクが属する物語と範囲情報が含まれています。 SQLファイルの場合、次の3つの状況を考慮する必要があります。
+SQL ファイルには、チャンクが属する tale と範囲情報が含まれています。 SQL ファイルについては、次の 3 つの状況を考慮する必要があります。
 
--   ダウンストリームデータベースの行が欠落している場合、REPLACEステートメントが適用されます
--   ダウンストリームデータベースの行が冗長である場合、DELETEステートメントが適用されます
--   ダウンストリームデータベースの行の一部のデータに一貫性がない場合、REPLACEステートメントが適用され、一貫性のない列にSQLファイルの注釈が付けられます。
+-   ダウンストリーム データベースの行が欠落している場合、REPLACE ステートメントが適用されます。
+-   ダウンストリーム データベースの行が冗長な場合、DELETE ステートメントが適用されます。
+-   ダウンストリーム データベースの行の一部のデータに一貫性がない場合、REPLACE ステートメントが適用され、一貫性のない列は SQL ファイル内の注釈でマークされます。
 
 ```SQL
 -- table: sbtest.sbtest99
@@ -276,8 +276,8 @@ REPLACE INTO `sbtest`.`sbtest99`(`id`,`k`,`c`,`pad`) VALUES (3700000,2501808,'he
 
 ## ノート {#note}
 
--   sync-diff-inspectorは、データをチェックするときに一定量のサーバーリソースを消費します。ピーク営業時間中にデータをチェックするためにsync-diff-inspectorを使用することは避けてください。
--   MySQLのデータをTiDBのデータと比較する前に、テーブルの照合順序構成に注意してください。主キーまたは一意キーが`varchar`タイプであり、MySQLの照合順序構成がTiDBの構成と異なる場合、照合順序の問題が原因で最終チェック結果が正しくない可能性があります。 sync-diff-inspector構成ファイルに照合順序を追加する必要があります。
--   sync-diff-inspectorは、最初にTiDB統計に従ってデータをチャンクに分割し、統計の精度を保証する必要があります。 TiDBサーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
--   `table-rules`に特に注意してください。 `schema-pattern="test1"` 、および`table-pattern = "t_1"`を`target-table = "t_2"`する`test1` `target-schema="test2"`ソースデータベースの`t_1`スキーマと`test2` 。ターゲットデータベースの`t_2`のスキーマが比較されます。シャーディングはsync-diff-inspectorでデフォルトで有効になっているため、ソースデータベースに`test2`がある場合。 `t_2`テーブル、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソースデータベースの`t_2`テーブルが`test2`と比較されます。ターゲットデータベースの`t_2`テーブル。
--   生成されたSQLファイルは、データを修復するための参照としてのみ使用され、データを修復するためにこれらのSQLステートメントを実行する前に確認する必要があります。
+-   sync-diff-inspector は、データをチェックするときに一定量のサーバー リソースを消費します。営業時間のピーク時に sync-diff-inspector を使用してデータをチェックすることは避けてください。
+-   MySQL のデータと TiDB のデータを比較する前に、テーブルの照合順序構成に注意してください。主キーまたはユニークキーが`varchar`型で、MySQL と TiDB の照合順序構成が異なる場合、照合順序の問題により、最終的なチェック結果が正しくない可能性があります。 sync-diff-inspector 構成ファイルに照合順序を追加する必要があります。
+-   sync-diff-inspector は、最初に TiDB 統計に従ってデータをチャンクに分割します。統計の正確性を保証する必要があります。 TiDB サーバーの*ワークロードが軽い*場合は、 `analyze table {table_name}`コマンドを手動で実行できます。
+-   `table-rules`に特に注意してください。 `schema-pattern="test1"` 、および`table-pattern = "t_1"`を`target-table = "t_2"`する`test1` `target-schema="test2"`ソース データベースの`t_1`スキーマと`test2` .ターゲット データベースの`t_2`個のスキーマが比較されます。シャーディングは sync-diff-inspector でデフォルトで有効になっているため、ソース データベースに`test2`がある場合。 `t_2`テーブル、 `test1` 。 `t_1`テーブルと`test2` 。シャーディングとして機能するソース データベースの`t_2`のテーブルが`test2`と比較されます。ターゲット データベースの`t_2`テーブル。
+-   生成された SQL ファイルは、データを修復するための参照としてのみ使用され、これらの SQL ステートメントを実行してデータを修復する前に確認する必要があります。
