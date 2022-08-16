@@ -1830,7 +1830,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the cost of TiKV to scan one row from the disk in descending order. It's used by the [Cost Model](/cost-model.md).
+- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_disk_factor
 
