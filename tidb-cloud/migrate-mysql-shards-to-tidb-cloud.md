@@ -23,7 +23,8 @@ The version of the upstream cluster is MySQL v5.7.18. The specific information i
 - MySQL instance2:
   - schema `store_01`and table `[sale_01, sale_02]`
   - schema `store_02`and table `[sale_01, sale_02]`
-- Table structure：
+- Table structure:
+
   ```sql
   CREATE TABLE sale_01 (
   id bigint(20) NOT NULL auto_increment,
@@ -42,7 +43,6 @@ The version of DM is v5.3.0. The details are as follows:
 
 ### Downstream cluster
 
-采用的 TiDB Cloud 上集群的版本为 v6.0.0，合库合表至表 store.sales。
 The version of TiDB Cloud cluster is v6.0.0, and the combined library and tables are merged to the table `store.sales`.
 
 ## Perform full data migration from MySQL to TiDB Cloud
@@ -198,6 +198,7 @@ from:
  user: "lzy"
  password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
  port: 3307
+```
 
 Create another new data source file called `dm-source2.yaml`, and add the following content:
 
@@ -220,6 +221,7 @@ Run the following command in a terminal. Use `tiup dmctl` to load the first data
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
 ```
+
 The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
@@ -301,7 +303,7 @@ SHOW MASTER STATUS:
 Finished dump at: 2022-05-25 10:20:32
 ```
 
-根据 metadata 文件中的位点信息，创建增量同步任务
+Edit a task configuration file called ·test-task1·, to configure the incremental replication mode and replication starting point for each data source.
 
 ```yaml
 ## ********* Task Configuration *********
@@ -395,8 +397,10 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ### Step 3. Start the migration task
 
+Use `tiup dmctl` to run the following command to start the data migration task.
+
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 start-task dm-task.yaml
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  start-task dm-task.yaml
 ```
 
 The parameters used in the command above are described as follows:
