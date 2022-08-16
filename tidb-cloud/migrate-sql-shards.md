@@ -18,11 +18,11 @@ This section describes the basic information of the upstream cluster, DM, and do
 The version of the upstream cluster is MySQL v5.7.18. The specific information is as follows.
 
 - MySQL instance1:
-  - schema `store_01` and table `[sale_01, sale_02]`
-  - schema `store_02` and table `[sale_01, sale_02]`
+    - schema `store_01` and table `[sale_01, sale_02]`
+    - schema `store_02` and table `[sale_01, sale_02]`
 - MySQL instance2:
-  - schema `store_01`and table `[sale_01, sale_02]`
-  - schema `store_02`and table `[sale_01, sale_02]`
+    - schema `store_01`and table `[sale_01, sale_02]`
+    - schema `store_02`and table `[sale_01, sale_02]`
 - Table structure:
 
   ```sql
