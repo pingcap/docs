@@ -87,6 +87,7 @@
         - [Statistics](/statistics.md)
         - [Wrong Index Solution](/wrong-index-solution.md)
         - [Distinct Optimization](/agg-distinct-optimization.md)
+        - [Cost Model](/cost-model.md)
       - [Prepare Execution Plan Cache](/sql-prepared-plan-cache.md)
     - Control Execution Plans
       - [Overview](/control-execution-plan.md)
@@ -195,6 +196,7 @@
       - [`REVOKE <privileges>`](/sql-statements/sql-statement-revoke-privileges.md)
       - [`REVOKE <role>`](/sql-statements/sql-statement-revoke-role.md)
       - [`ROLLBACK`](/sql-statements/sql-statement-rollback.md)
+      - [`SAVEPOINT`](/sql-statements/sql-statement-savepoint.md)
       - [`SELECT`](/sql-statements/sql-statement-select.md)
       - [`SET DEFAULT ROLE`](/sql-statements/sql-statement-set-default-role.md)
       - [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)
@@ -336,6 +338,7 @@
         - [`TIKV_REGION_STATUS`](/information-schema/information-schema-tikv-region-status.md)
         - [`TIKV_STORE_STATUS`](/information-schema/information-schema-tikv-store-status.md)
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
+        - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
   - Storage Engines
