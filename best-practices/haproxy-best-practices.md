@@ -3,58 +3,58 @@ title: Best Practices for Using HAProxy in TiDB
 summary: This document describes best practices for configuration and usage of HAProxy in TiDB.
 ---
 
-# TiDBでHAProxyを使用するためのベストプラクティス {#best-practices-for-using-haproxy-in-tidb}
+# TiDB で HAProxy を使用するためのベスト プラクティス {#best-practices-for-using-haproxy-in-tidb}
 
-このドキュメントでは、TiDBでの[HAProxy](https://github.com/haproxy/haproxy)の構成と使用に関するベストプラクティスについて説明します。 HAProxyは、TCPベースのアプリケーションに負荷分散を提供します。 TiDBクライアントから、HAProxyによって提供されるフローティング仮想IPアドレスに接続するだけでデータを操作できます。これは、TiDBサーバー層での負荷分散を実現するのに役立ちます。
+このドキュメントでは、TiDB での[HAProxy](https://github.com/haproxy/haproxy)の構成と使用に関するベスト プラクティスについて説明します。 HAProxy は、TCP ベースのアプリケーションの負荷分散を提供します。 TiDB クライアントからは、HAProxy が提供するフローティング仮想 IP アドレスに接続するだけでデータを操作できるため、TiDB サーバー層での負荷分散を実現できます。
 
 ![HAProxy Best Practices in TiDB](/media/haproxy.jpg)
 
-## HAProxyの概要 {#haproxy-overview}
+## HAProxy の概要 {#haproxy-overview}
 
-HAProxyは、C言語で記述された無料のオープンソースソフトウェアであり、TCPおよびHTTPベースのアプリケーションに高可用性ロードバランサーとプロキシサーバーを提供します。 CPUとメモリを高速かつ効率的に使用するため、HAProxyは現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）などの多くの有名なWebサイトで広く使用されています。
+HAProxy は、C 言語で記述された無料のオープンソース ソフトウェアで、TCP および HTTP ベースのアプリケーションに高可用性のロード バランサーとプロキシ サーバーを提供します。 CPU とメモリを高速かつ効率的に使用するため、HAProxy は現在、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS (Amazon Web Services) など、多くの有名な Web サイトで広く使用されています。
 
-HAProxyは、2000年にLinuxカーネルのコアコントリビューターであるWilly Tarreauによって作成されました。彼は、プロジェクトのメンテナンスを引き続き担当し、オープンソースコミュニティで無料のソフトウェアアップデートを提供しています。このガイドでは、 [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定バージョンを使用することをお勧めします。詳細については、 [HAProxyのリリースバージョン](http://www.haproxy.org/)を参照してください。
+HAProxy は 2000 年に Linux カーネルの中心的貢献者である Willy Tarreau によって書かれました。Willy Tarreau は現在もプロジェクトの保守を担当しており、オープンソース コミュニティで無料のソフトウェア アップデートを提供しています。このガイドでは、HAProxy [2.5.0](https://www.haproxy.com/blog/announcing-haproxy-2-5/)を使用します。最新の安定版を使用することをお勧めします。詳細は[HAProxy のリリース バージョン](http://www.haproxy.org/)を参照してください。
 
 ## 基本的な機能 {#basic-features}
 
--   [高可用性](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.4) ：HAProxyは、正常なシャットダウンとシームレスなスイッチオーバーをサポートする高可用性を提供します。
--   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) ：2つの主要なプロキシモードがサポートされています。TCP（レイヤー4とも呼ばれます）とHTTP（レイヤー7とも呼ばれます）。ラウンドロビン、最小接続、ランダムなど、9つ以上の負荷分散アルゴリズムがサポートされています。
--   [健康診断](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#5.2-check) ：HAProxyは、サーバーのHTTPまたはTCPモードのステータスを定期的にチェックします。
--   [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.6) ：HAProxyは、アプリケーションがスティッキーセッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
--   [SSL](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.2) ：HTTPS通信と解決がサポートされています。
--   [監視と統計](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.3) ：Webページを通じて、サービスの状態とトラフィックフローをリアルタイムで監視できます。
+-   [高可用性](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.4) : HAProxy は、グレースフル シャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
+-   [負荷分散](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#4.2-balance) : レイヤー 4 とも呼ばれる TCP と、レイヤー 7 とも呼ばれる HTTP の 2 つの主要なプロキシ モードがサポートされています。
+-   [健康診断](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
+-   [スティッキー セッション](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.6) : HAProxy は、アプリケーションがスティッキー セッションをサポートしていない間、クライアントを特定のサーバーに固定できます。
+-   [SSL](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.2) : HTTPS 通信と解決がサポートされています。
+-   [モニタリングと統計](http://cbonte.github.io/haproxy-dconv/2.5/intro.html#3.3.3) : Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
 
 ## あなたが始める前に {#before-you-begin}
 
-HAProxyをデプロイする前に、ハードウェアとソフトウェアの要件を満たしていることを確認してください。
+HAProxy をデプロイする前に、ハードウェアとソフトウェアの要件を満たしていることを確認してください。
 
 ### ハードウェア要件 {#hardware-requirements}
 
-サーバーについては、次のハードウェア要件を満たすことをお勧めします。負荷分散環境に応じてサーバーの仕様を改善することもできます。
+サーバーについては、次のハードウェア要件を満たすことをお勧めします。負荷分散環境に合わせてサーバーのスペックを向上させることもできます。
 
-| ハードウェアリソース        | 最小仕様         |
-| :---------------- | :----------- |
-| CPU               | 2コア、3.5 GHz  |
-| メモリー              | 16ギガバイト      |
-| 保管所               | 50 GB（SATA）  |
-| ネットワークインターフェースカード | 10Gネットワークカード |
+| ハードウェア リソース       | 最小仕様           |
+| :---------------- | :------------- |
+| CPU               | 2コア、3.5GHz     |
+| メモリー              | 16ギガバイト        |
+| 保管所               | 50GB (SATA)    |
+| ネットワークインターフェースカード | 10G ネットワーク カード |
 
 ### ソフトウェア要件 {#software-requirements}
 
-次のオペレーティングシステムを使用して、必要な依存関係がインストールされていることを確認できます。 yumを使用してHAProxyをインストールする場合、依存関係はそれと一緒にインストールされるため、個別に再度インストールする必要はありません。
+次のオペレーティング システムを使用して、必要な依存関係がインストールされていることを確認できます。 yum を使用して HAProxy をインストールすると、依存関係が一緒にインストールされるため、個別に再度インストールする必要はありません。
 
 #### オペレーティングシステム {#operating-systems}
 
-| Linuxディストリビューション         | バージョン         |
-| :----------------------- | :------------ |
-| Red Hat Enterprise Linux | 7または8         |
-| CentOS                   | 7または8         |
-| Oracle Enterprise Linux  | 7または8         |
-| Ubuntu LTS               | 18.04以降のバージョン |
+| Linux ディストリビューション     | バージョン          |
+| :-------------------- | :------------- |
+| レッドハット エンタープライズ リナックス | 7または8          |
+| CentOS                | 7または8          |
+| オラクル エンタープライズ Linux   | 7または8          |
+| Ubuntu LTS            | 18.04 以降のバージョン |
 
 > **ノート：**
 >
-> -   サポートされている他のオペレーティングシステムの詳細については、 [HAProxyドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
+> -   サポートされているその他のオペレーティング システムの詳細については、 [HAProxy ドキュメント](https://github.com/haproxy/haproxy/blob/master/INSTALL)を参照してください。
 
 #### 依存関係 {#dependencies}
 
@@ -70,13 +70,13 @@ HAProxyをデプロイする前に、ハードウェアとソフトウェアの�
 yum -y install epel-release gcc systemd-devel
 ```
 
-## HAProxyをデプロイ {#deploy-haproxy}
+## HAProxy をデプロイ {#deploy-haproxy}
 
-HAProxyを使用して、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[構成ファイル](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html)をカスタマイズできます。
+HAProxy を使用すると、負荷分散されたデータベース環境を簡単に構成およびセットアップできます。このセクションでは、一般的な展開操作について説明します。実際のシナリオに基づいて[構成ファイル](http://cbonte.github.io/haproxy-dconv/2.5/configuration.html)をカスタマイズできます。
 
-### HAProxyをインストールする {#install-haproxy}
+### HAProxy をインストールする {#install-haproxy}
 
-1.  HAProxy2.5.0ソースコードのパッケージをダウンロードします。
+1.  HAProxy 2.5.0 ソース コードのパッケージをダウンロードします。
 
     {{< copyable "" >}}
 
@@ -92,7 +92,7 @@ HAProxyを使用して、負荷分散されたデータベース環境を簡単�
     unzip v2.5.0.zip
     ```
 
-3.  ソースコードからアプリケーションをコンパイルします。
+3.  ソース コードからアプリケーションをコンパイルします。
 
     {{< copyable "" >}}
 
@@ -119,9 +119,9 @@ HAProxyを使用して、負荷分散されたデータベース環境を簡単�
     which haproxy
     ```
 
-#### HAProxyコマンド {#haproxy-commands}
+#### HAProxy コマンド {#haproxy-commands}
 
-次のコマンドを実行して、キーワードとその基本的な使用法のリストを印刷します。
+次のコマンドを実行して、キーワードのリストとその基本的な使用方法を出力します。
 
 {{< copyable "" >}}
 
@@ -129,40 +129,40 @@ HAProxyを使用して、負荷分散されたデータベース環境を簡単�
 haproxy --help
 ```
 
-| オプション                           | 説明                                                                                                                                                   |
-| :------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-v`                            | バージョンとビルド日を報告します。                                                                                                                                    |
-| `-vv`                           | バージョン、ビルドオプション、ライブラリバージョン、および使用可能なポーラーを表示します。                                                                                                        |
-| `-d`                            | デバッグモードを有効にします。                                                                                                                                      |
-| `-db`                           | バックグラウンドモードとマルチプロセスモードを無効にします。                                                                                                                       |
-| `-dM [<byte>]`                  | メモリポイズニングを強制します。つまり、malloc（）またはpool_alloc2（）で割り当てられたすべてのメモリ領域は、呼び出し元に渡される前に`<byte>`で埋められます。                                                          |
-| `-V`                            | 詳細モードを有効にします（クワイエットモードを無効にします）。                                                                                                                      |
-| `-D`                            | デーモンとして起動します。                                                                                                                                        |
-| `-C <dir>`                      | 構成ファイルをロードする前に、ディレクトリー`<dir>`に変更します。                                                                                                                 |
-| `-W`                            | マスターワーカーモード。                                                                                                                                         |
-| `-q`                            | 「クワイエット」モードを設定します。これにより、構成の解析中および起動中に一部のメッセージが無効になります。                                                                                               |
-| `-c`                            | バインドを試みる前に、構成ファイルのチェックのみを実行して終了します。                                                                                                                  |
-| `-n <limit>`                    | プロセスごとの接続制限を`<limit>`に制限します。                                                                                                                         |
-| `-m <limit>`                    | 割り当て可能なメモリの合計を、すべてのプロセスで`<limit>`メガバイトに制限します。                                                                                                        |
-| `-N <limit>`                    | 組み込みのデフォルト値（通常は2000）ではなく、デフォルトのプロキシごとのmaxconnを`<limit>`に設定します。                                                                                       |
-| `-L <name>`                     | ローカルピア名を`<name>`に変更します。これは、デフォルトでローカルホスト名になります。                                                                                                      |
-| `-p <file>`                     | 起動時にすべてのプロセスのPIDを`<file>`に書き込みます。                                                                                                                    |
-| `-de`                           | epoll（7）の使用を無効にします。 epoll（7）は、Linux2.6および一部のカスタムLinux2.4システムでのみ使用できます。                                                                               |
-| `-dp`                           | poll（2）の使用を無効にします。代わりにselect（2）が使用される場合があります。                                                                                                        |
-| `-dS`                           | 古いカーネルでは壊れているsplice（2）の使用を無効にします。                                                                                                                    |
-| `-dR`                           | SO_REUSEPORTの使用を無効にします。                                                                                                                              |
-| `-dr`                           | サーバーアドレス解決の失敗を無視します。                                                                                                                                 |
-| `-dV`                           | サーバー側でSSL検証を無効にします。                                                                                                                                  |
-| `-sf <pidlist>`                 | 起動後、pidlistのPIDに「終了」信号を送信します。このシグナルを受信するプロセスは、すべてのセッションが終了するのを待ってから終了します。このオプションは最後に指定する必要があり、その後に任意の数のPIDを指定する必要があります。技術的には、SIGTTOUとSIGUSR1が送信されます。 |
-| `-st <pidlist>`                 | 起動後、pidlistのPIDに「終了」信号を送信します。このシグナルを受信したプロセスはすぐに終了し、アクティブなすべてのセッションを閉じます。このオプションは最後に指定する必要があり、その後に任意の数のPIDを指定する必要があります。技術的には、SIGTTOUとSIGTERMが送信されます。 |
-| `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからすべてのリスニングソケットを取得します。次に、これらのソケットは、新しいソケットをバインドする代わりに使用されます。                                                                     |
-| `-S <bind>[,<bind_options>...]` | マスターワーカーモードで、マスターCLIを作成します。このCLIにより、すべてのワーカーのCLIにアクセスできます。デバッグに役立ちます。これは、離脱プロセスにアクセスするための便利な方法です。                                                    |
+| オプション                           | 説明                                                                                                                                                              |
+| :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-v`                            | バージョンとビルド日を報告します。                                                                                                                                               |
+| `-vv`                           | バージョン、ビルド オプション、ライブラリ バージョン、使用可能なポーラーを表示します。                                                                                                                    |
+| `-d`                            | デバッグ モードを有効にします。                                                                                                                                                |
+| `-db`                           | バックグラウンド モードとマルチプロセス モードを無効にします。                                                                                                                                |
+| `-dM [<byte>]`                  | メモリ ポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域が、呼び出し元に渡される前に`<byte>`で埋められます。                                                                 |
+| `-V`                            | verbose モードを有効にします (quiet モードを無効にします)。                                                                                                                          |
+| `-D`                            | デーモンとして起動します。                                                                                                                                                   |
+| `-C <dir>`                      | 構成ファイルをロードする前にディレクトリ`<dir>`に変更します。                                                                                                                              |
+| `-W`                            | マスターワーカーモード。                                                                                                                                                    |
+| `-q`                            | 「quiet」モードを設定します。これにより、構成の解析中および起動中の一部のメッセージが無効になります。                                                                                                           |
+| `-c`                            | 構成ファイルのチェックのみを実行し、バインドを試行する前に終了します。                                                                                                                             |
+| `-n <limit>`                    | プロセスごとの接続制限を`<limit>`に制限します。                                                                                                                                    |
+| `-m <limit>`                    | すべてのプロセスで割り当て可能なメモリの合計を`<limit>`メガバイトに制限します。                                                                                                                    |
+| `-N <limit>`                    | デフォルトのプロキシごとの maxconn を、組み込みのデフォルト値 (通常は 2000) ではなく`<limit>`に設定します。                                                                                             |
+| `-L <name>`                     | ローカル ピア名を`<name>`に変更します。デフォルトはローカル ホスト名です。                                                                                                                      |
+| `-p <file>`                     | 起動時にすべてのプロセスの PID を`<file>`に書き込みます。                                                                                                                             |
+| `-de`                           | epoll(7) の使用を無効にします。 epoll(7) は、Linux 2.6 および一部のカスタム Linux 2.4 システムでのみ使用できます。                                                                                   |
+| `-dp`                           | poll(2) の使用を無効にします。代わりに select(2) を使用できます。                                                                                                                      |
+| `-dS`                           | 古いカーネルでは機能しない splice(2) の使用を無効にします。                                                                                                                             |
+| `-dR`                           | SO_REUSEPORT の使用を無効にします。                                                                                                                                        |
+| `-dr`                           | サーバー アドレス解決の失敗を無視します。                                                                                                                                           |
+| `-dV`                           | サーバー側で SSL 検証を無効にします。                                                                                                                                           |
+| `-sf <pidlist>`                 | 始動後に pidlist 内の PID に「終了」シグナルを送信します。このシグナルを受信したプロセスは、終了する前にすべてのセッションが終了するのを待ちます。このオプションは最後に指定し、その後に任意の数の PID を指定する必要があります。技術的に言えば、SIGTTOU と SIGUSR1 が送信されます。    |
+| `-st <pidlist>`                 | 始動後に pidlist 内の PID に「終了」シグナルを送信します。このシグナルを受信したプロセスはただちに終了し、すべてのアクティブなセッションが閉じられます。このオプションは最後に指定し、その後に任意の数の PID を指定する必要があります。技術的に言えば、SIGTTOU と SIGTERM が送信されます。 |
+| `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからリッスンしているすべてのソケットを取得します。次に、新しいソケットをバインドする代わりに、これらのソケットが使用されます。                                                                             |
+| `-S <bind>[,<bind_options>...]` | マスター ワーカー モードで、マスター CLI を作成します。この CLI を使用すると、すべてのワーカーの CLI にアクセスできます。デバッグに便利で、終了プロセスにアクセスする便利な方法です。                                                             |
 
-HAProxyコマンドラインオプションの詳細については、 [HAProxyの管理ガイド](http://cbonte.github.io/haproxy-dconv/2.5/management.html)および[HAProxyの一般的なコマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
+HAProxy コマンド ライン オプションの詳細については、 [HAProxy管理ガイド](http://cbonte.github.io/haproxy-dconv/2.5/management.html)および[HAProxy の一般的なコマンド マニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
-### HAProxyを構成する {#configure-haproxy}
+### HAProxy の構成 {#configure-haproxy}
 
-yumを使用してHAProxyをインストールすると、構成テンプレートが生成されます。シナリオに応じて、以下の構成項目をカスタマイズすることもできます。
+yum を使用して HAProxy をインストールすると、構成テンプレートが生成されます。シナリオに応じて、次の構成項目をカスタマイズすることもできます。
 
 ```yaml
 global                                     # Global configuration.
@@ -204,9 +204,21 @@ listen tidb-cluster                        # Database load balancing.
    server tidb-3 10.9.64.166:4000 check inter 2000 rise 2 fall 3
 ```
 
-### HAProxyを起動します {#start-haproxy}
+`SHOW PROCESSLIST`を使用して送信元 IP アドレスを確認するには、TiDB に接続するように[プロキシ プロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を構成する必要があります。
 
-HAProxyを起動するには、 `haproxy`を実行します。デフォルトでは`/etc/haproxy/haproxy.cfg`が読み取られます（推奨）。
+```yaml
+   server tidb-1 10.9.18.229:4000 send-proxy check inter 2000 rise 2 fall 3       
+   server tidb-2 10.9.39.208:4000 send-proxy check inter 2000 rise 2 fall 3
+   server tidb-3 10.9.64.166:4000 send-proxy check inter 2000 rise 2 fall 3
+```
+
+> **ノート：**
+>
+> PROXY プロトコルを使用する前に、TiDB サーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
+
+### HAProxy を開始する {#start-haproxy}
+
+HAProxy を開始するには、 `haproxy`を実行します。デフォルトでは`/etc/haproxy/haproxy.cfg`が読み取られます (推奨)。
 
 {{< copyable "" >}}
 
@@ -214,9 +226,9 @@ HAProxyを起動するには、 `haproxy`を実行します。デフォルトで
 haproxy -f /etc/haproxy/haproxy.cfg
 ```
 
-### HAProxyを停止します {#stop-haproxy}
+### HAProxy を停止する {#stop-haproxy}
 
-HAProxyを停止するには、 `kill -9`コマンドを使用します。
+HAProxy を停止するには、 `kill -9`コマンドを使用します。
 
 1.  次のコマンドを実行します。
 
@@ -226,7 +238,7 @@ HAProxyを停止するには、 `kill -9`コマンドを使用します。
     ps -ef | grep haproxy
     ```
 
-2.  HAProxyのプロセスを終了します。
+2.  HAProxy のプロセスを終了します。
 
     {{< copyable "" >}}
 

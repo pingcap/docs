@@ -8,6 +8,22 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2022 年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 8 月 16 日 {#august-16-2022}
+
+-   ベータとして TiDB と TiKV の`2 vCPU, 8 GiB (Beta)`ノード サイズを追加します。
+
+    -   `2 vCPU, 8 GiB (Beta)`つの TiKV ノードごとに、ストレージ サイズは 200 GiB から 500 GiB の間です。
+
+    -   推奨される使用シナリオ:
+
+        -   SMB 向けの低ワークロード本番環境
+        -   PoC とステージング環境
+        -   開発環境
+
+-   PoC ユーザー向けに[クレジット](/tidb-cloud/tidb-cloud-billing.md#credits) (以前はトレイル ポイントと呼ばれていました) を導入します。
+
+    [**請求**] ページの [<strong>クレジット</strong>] タブで、組織のクレジットに関する情報を表示できるようになりました。クレジットは、 TiDB Cloud料金の支払いに使用できます。 [お問い合わせ](https://en.pingcap.com/apply-for-poc/)クレジットを獲得できます。
+
 ## 2022 年 8 月 9 日 {#august-9-2022}
 
 -   GCP リージョン`Osaka` for [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタ作成のサポートを追加します。
@@ -25,7 +41,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   [専用層クラスター](/tidb-cloud/select-cluster-tier.md#dedicated-tier)の [**診断**] タブに[モニタリングページ](/tidb-cloud/built-in-monitoring.md)を追加します。
 
-    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色を確認することで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
+    [監視] ページには、全体的なパフォーマンス診断のためのシステム レベルのエントリが表示されます。トップダウンのパフォーマンス分析方法に従って、監視ページは、データベース時間の内訳に基づいて TiDB パフォーマンス メトリックを整理し、これらのメトリックを異なる色で表示します。これらの色をチェックすることで、システム全体のパフォーマンスのボトルネックを一目で特定できるため、パフォーマンスの診断時間が大幅に短縮され、パフォーマンスの分析と診断が簡素化されます。
 
 -   CSV および Parquet ソース ファイルの [**データ インポート]**ページで<strong>カスタム パターン</strong>を有効または無効にするスイッチを追加します。
 
@@ -42,11 +58,11 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 7 月 28 日 {#july-28-2022}
 
--   **[どこからでもアクセスを許可]**ボタンを [<strong>セキュリティ クイック スタート</strong>] ダイアログに追加すると、任意の IP アドレスからクラスタにアクセスできるようになります。詳細については、 [クラスタ セキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)を参照してください。
+-   **[どこからでもアクセスを許可]**ボタンを [<strong>セキュリティ クイック スタート</strong>] ダイアログに追加します。これにより、任意の IP アドレスからクラスタにアクセスできるようになります。詳細については、 [クラスタ セキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)を参照してください。
 
 ## 2022 年 7 月 26 日 {#july-26-2022}
 
--   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に対して[自動ハイバネーションとレジューム](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)をサポートします。
+-   新しい[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)に対して[自動休止状態と再開](/tidb-cloud/select-cluster-tier.md#automatic-hibernation-and-resuming)をサポートします。
 
     Developer Tierクラスタは、非アクティブ状態が 7 日間続いても削除されないため、1 年間の無料試用期間が終了するまでいつでも使用できます。非アクティブ状態が 24 時間続くと、Developer Tierクラスタは自動的に休止状態になります。クラスターを再開するには、クラスタに新しい接続を送信するか、 TiDB Cloudコンソールの [**再開**] ボタンをクリックしクラスタ。クラスタは 50 秒以内に再開され、自動的にサービスに戻ります。
 
@@ -82,7 +98,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 -   カラムナ ストレージ[ティフラッシュ](/tiflash/tiflash-overview.md)は、一般提供 (GA) になりました。
 
-    -   TiFlash は、本質的に TiDB を Hybrid Transactional/Analytical Processing (HTAP) データベースにします。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
+    -   TiFlash により、TiDB は本質的に Hybrid Transactional/Analytical Processing (HTAP) データベースになります。アプリケーション データはまず TiKV に保存され、次にRaftコンセンサス アルゴリズムを介して TiFlash に複製されます。つまり、行ストレージから列ストレージへのリアルタイム レプリケーションです。
     -   TiFlash レプリカを含むテーブルの場合、TiDB オプティマイザーは、コストの見積もりに基づいて、TiKV または TiFlash レプリカのどちらを使用するかを自動的に決定します。
 
     TiFlash がもたらす利点を体験するには、 [TiDB CloudHTAP クイック スタート ガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)を参照してください。
@@ -126,7 +142,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022 年 6 月 7 日 {#june-7-2022}
 
 -   [無料で試す](https://tidbcloud.com/free-trial)登録ページを追加して、 TiDB Cloudにすばやくサインアップします。
--   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間のPoC無料トライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+-   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間の無料PoCトライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
 -   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90 日ごとにパスワードをリセットするよう求めることで、システムのセキュリティを向上させます。詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
 
 ## 2022 年 5 月 24 日 {#may-24-2022}
@@ -147,7 +163,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 5 月 1 日 {#may-1-2022}
 
--   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
+-   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
 -   クラスタ作成のための AWS リージョン`Mumbai`のサポートを追加します。
 -   [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md)のコンピューティング、ストレージ、およびデータ転送のコストを更新します。
 
@@ -177,7 +193,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 -   クラスタサイズが固定されたクラスタ層はなくなりました。 TiDB、TiKV、TiFlashの[クラスタサイズ](/tidb-cloud/size-your-cluster.md)台を簡単にカスタマイズできます。
 -   TiFlash を使用しない既存のクラスタに[ティフラッシュ](/tiflash/tiflash-overview.md)のノードを追加することをサポートします。
--   [新しいクラスタの作成](/tidb-cloud/create-tidb-cluster.md)の場合のストレージ サイズ (500 から 2048 GiB) の指定をサポートします。クラスタの作成後にストレージ サイズを変更することはできません。
+-   [新しいクラスタの作成](/tidb-cloud/create-tidb-cluster.md)の場合、ストレージ サイズ (500 ～ 2048 GiB) の指定をサポートします。クラスタの作成後にストレージ サイズを変更することはできません。
 -   新しいパブリック リージョンを導入する: `eu-central-1` .
 -   8 vCPU TiFlash を廃止し、16 vCPU TiFlash を提供します。
 -   CPU とストレージの価格を分けます (どちらも 30% のパブリック プレビュー割引があります)。
@@ -209,7 +225,7 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 
 改善：
 
--   [CSV ファイル](/tidb-cloud/import-csv-files.md)または[Apache Parquet ファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
+-   [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache 寄木細工のファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートする際のカスタム ファイル名の使用をサポートします。
 
 ## 2022 年 1 月 11 日 {#january-11-2022}
 

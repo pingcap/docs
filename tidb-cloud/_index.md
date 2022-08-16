@@ -117,7 +117,7 @@ hide_commit: true
 
 [請求書](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
-[トライアルポイント](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#trial-points)
+[クレジット](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
 
 </LearningPath>
 

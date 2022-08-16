@@ -21,9 +21,10 @@ TiDBクラスタのサイズを決定する方法については、 [TiDB のサ
 
 > **ノート：**
 >
-> TiDB または TiKV のノード サイズを**4 vCPU、16 GiB**に設定する場合は、次の制限事項に注意してください。これらの制限を回避するには、まず[ノードサイズを増やす](#increase-node-size)を実行します。
+> TiDB または TiKV のノード サイズが**2 vCPU、8 GiB (ベータ)**または<strong>4 vCPU、16 GiB</strong>に設定されている場合は、次の制限に注意してください。これらの制限を回避するには、最初に[ノードサイズを増やす](#increase-node-size)を実行します。
 >
 > -   TiDB のノード数は 1 または 2 にのみ設定でき、TiKV のノード数は 3 に固定されています。
+> -   2 vCPU TiDB は 2 vCPU TiKV でのみ使用でき、2 vCPU TiKV は 2 vCPU TiDB でのみ使用できます。
 > -   4 vCPU TiDB は 4 vCPU TiKV でのみ使用でき、4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > -   TiFlash は利用できません。
 

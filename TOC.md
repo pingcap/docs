@@ -87,6 +87,7 @@
         -   [ギットポッド](/develop/dev-guide-playground-gitpod.md)
     -   サードパーティのサポート
         -   [サードパーティ ライブラリのサポート](/develop/dev-guide-third-party-support.md)
+        -   [ProxySQL と統合する](/develop/dev-guide-proxysql-integration.md)
 -   デプロイ
     -   [ソフトウェアとハードウェアの要件](/hardware-and-software-requirements.md)
     -   [環境Configuration / コンフィグレーションチェックリスト](/check-before-deployment.md)
@@ -380,7 +381,7 @@
             -   [タスクの構成](/dm/dm-task-configuration-guide.md)
             -   [テーブル ルーティング](/dm/dm-key-features.md)
             -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-            -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+            -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   [SQL 式を使用した DML のフィルタリング](/dm/feature-expression-filter.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -436,7 +437,7 @@
                 -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
                 -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
             -   モニタリングとアラート
-                -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
+                -   [指標の監視](/dm/monitor-a-dm-cluster.md)
                 -   [アラート ルール](/dm/dm-alert-rules.md)
             -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
             -   [用語集](/dm/dm-glossary.md)

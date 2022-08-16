@@ -3,19 +3,19 @@ title: TiKV Control User Guide
 summary: Use TiKV Control to manage a TiKV cluster.
 ---
 
-# TiKV Controlユーザーガイド {#tikv-control-user-guide}
+# TiKV Controlユーザー ガイド {#tikv-control-user-guide}
 
-TiKV Control （ `tikv-ctl` ）は、クラスタの管理に使用されるTiKVのコマンドラインツールです。そのインストールディレクトリは次のとおりです。
+TiKV Control ( `tikv-ctl` ) は TiKV のコマンド ライン ツールで、クラスタの管理に使用されます。そのインストール ディレクトリは次のとおりです。
 
--   クラスタがTiUPを使用して展開されている場合、 `tikv-ctl`のディレクトリが`~/.tiup/components/ctl/{VERSION}/`のディレクトリにあります。
+-   クラスタが TiUP を使用してデプロイされている場合、 `tikv-ctl`のディレクトリは`~/.tiup/components/ctl/{VERSION}/`のディレクトリにあります。
 
-## TiUPでTiKV Controlを使用する {#use-tikv-control-in-tiup}
+## TiUP でTiKV Controlを使用する {#use-tikv-control-in-tiup}
 
 > **ノート：**
 >
-> 使用するコントロールツールのバージョンは、クラスタのバージョンと一致していることをお勧めします。
+> 使用するコントロール ツールのバージョンは、クラスタのバージョンと一致していることが推奨されます。
 
-`tikv-ctl`も`tiup`コマンドに統合されています。次のコマンドを実行して、 `tikv-ctl`ツールを呼び出します。
+`tiup`コマンドにも`tikv-ctl`が組み込まれています。次のコマンドを実行して、 `tikv-ctl`ツールを呼び出します。
 
 {{< copyable "" >}}
 
@@ -43,18 +43,18 @@ FLAGS:
         --skip-paranoid-checks    Skip paranoid checks when open rocksdb
     -V, --version                 Prints version information
 OPTIONS:
-        --ca-path <ca_path>              Set the CA certificate path
-        --cert-path <cert_path>          Set the certificate path
-        --config <config>                Set the config for rocksdb
-        --db <db>                        Set the rocksdb path
+        --ca-path <ca-path>              Set the CA certificate path
+        --cert-path <cert-path>          Set the certificate path
+        --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
+        --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
         --decode <decode>                Decode a key in escaped format
         --encode <encode>                Encode a key in escaped format
         --to-hex <escaped-to-hex>        Convert an escaped key to hex key
         --to-escaped <hex-to-escaped>    Convert a hex key to escaped key
         --host <host>                    Set the remote host
-        --key-path <key_path>            Set the private key path
+        --key-path <key-path>            Set the private key path
+        --log-level <log-level>          Set the log level [default: warn]
         --pd <pd>                        Set the address of pd
-        --raftdb <raftdb>                Set the raft rocksdb path
 SUBCOMMANDS:
     bad-regions           Get all regions with corrupt raft
     cluster               Print the cluster id
@@ -85,34 +85,39 @@ SUBCOMMANDS:
     unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 ```
 
-`tiup ctl tikv`の後に、対応するパラメータとサブコマンドを追加できます。
+`tiup ctl tikv`の後に、対応するパラメーターとサブコマンドを追加できます。
 
-## 一般的なオプション {#general-options}
+## 一般オプション {#general-options}
 
-`tikv-ctl`は、次の2つの動作モードを提供します。
+`tikv-ctl`は 2 つの操作モードを提供します。
 
--   リモートモード： `--host`オプションを使用して、TiKVのサービスアドレスを引数として受け入れます
+-   リモート モード: `--host`オプションを使用して、TiKV のサービス アドレスを引数として受け入れます。
 
-    このモードでは、TiKVでSSLが有効になっている場合、 `tikv-ctl`は関連する証明書ファイルも指定する必要があります。例えば：
+    このモードでは、 `tikv-ctl`で SSL が有効になっている場合、関連する証明書ファイルも指定する必要があります。例えば：
 
     ```
     $ tikv-ctl --ca-path ca.pem --cert-path client.pem --key-path client-key.pem --host 127.0.0.1:20160 <subcommands>
     ```
 
-    ただし、 `tikv-ctl`がTiKVではなくPDと通信する場合があります。この場合、 `--host`ではなく`--pd`オプションを使用する必要があります。次に例を示します。
+    ただし、 `tikv-ctl`ではなく PD と通信する場合もあります。この場合、 `--host`の代わりに`--pd`オプションを使用する必要があります。以下に例を示します。
 
     ```
     $ tikv-ctl --pd 127.0.0.1:2379 compact-cluster
     store:"127.0.0.1:20160" compact db:KV cf:default range:([], []) success!
     ```
 
--   ローカルモード： `--db`オプションを使用して、ローカルTiKVデータディレクトリパスを指定します。このモードでは、実行中のTiKVインスタンスを停止する必要があります。
+-   ローカルモード:
 
-特に明記されていない限り、すべてのコマンドはリモートモードとローカルモードの両方をサポートしています。
+    -   `--data-dir`オプションを使用して、ローカルの TiKV データ ディレクトリ パスを指定します。
+    -   `--config`オプションを使用して、ローカルの TiKV 構成ファイル パスを指定します。
 
-さらに、 `tikv-ctl`には2つの簡単なコマンド`--to-hex`と`--to-escaped`があり、これらはキーの形式に簡単な変更を加えるために使用されます。
+    このモードでは、実行中の TiKV インスタンスを停止する必要があります。
 
-通常、キーの`escaped`の形式を使用します。例えば：
+特に明記しない限り、すべてのコマンドはリモート モードとローカル モードの両方をサポートします。
+
+さらに、 `tikv-ctl`には 2 つの単純なコマンド`--to-hex`と`--to-escaped`があり、キーの形状を単純に変更するために使用されます。
+
+通常、キーの`escaped`形式を使用します。例えば：
 
 ```bash
 $ tikv-ctl --to-escaped 0xaaff
@@ -123,17 +128,17 @@ AAFF
 
 > **ノート：**
 >
-> コマンドラインでキーの`escaped`形式を指定する場合は、二重引用符で囲む必要があります。それ以外の場合、bashはバックスラッシュを食いつぶし、間違った結果が返されます。
+> コマンド ラインでキーの`escaped`形式を指定する場合は、二重引用符で囲む必要があります。そうしないと、bash がバックスラッシュを食べてしまい、間違った結果が返されます。
 
 ## サブコマンド、いくつかのオプションとフラグ {#subcommands-some-options-and-flags}
 
-このセクションでは、 `tikv-ctl`がサポートするサブコマンドについて詳しく説明します。一部のサブコマンドは多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`を実行してください。
+このセクションでは、 `tikv-ctl`がサポートするサブコマンドについて詳しく説明します。一部のサブコマンドは、多くのオプションをサポートしています。詳細については、 `tikv-ctl --help <subcommand>`を実行してください。
 
-### Raftステートマシンの情報をビューする {#view-information-of-the-raft-state-machine}
+### Raftステート マシンの情報をビューする {#view-information-of-the-raft-state-machine}
 
-`raft`サブコマンドを使用して、特定の時点でのRaftステートマシンのステータスを表示します。ステータス情報には、3つの構造体（ **RegionLocalState** 、 <strong>RaftLocalState</strong> 、および<strong>RegionApplyState</strong> ）と、特定のログの対応するエントリの2つの部分が含まれます。
+`raft`サブコマンドを使用して、特定の時点でのRaftステート マシンのステータスを表示します。ステータス情報には、3 つの構造体 ( **RegionLocalState** 、 <strong>RaftLocalState</strong> 、および<strong>RegionApplyState</strong> ) と、特定のログ片の対応するエントリの 2 つの部分が含まれます。
 
-`region`および`log`サブコマンドを使用して、それぞれ上記の情報を取得します。 2つのサブコマンドは両方とも、リモートモードとローカルモードを同時にサポートします。それらの使用法と出力は次のとおりです。
+`region`および`log`サブコマンドを使用して、上記の情報をそれぞれ取得します。 2 つのサブコマンドは両方とも、リモート モードとローカル モードを同時にサポートします。それらの使用法と出力は次のとおりです。
 
 ```bash
 $ tikv-ctl --host 127.0.0.1:20160 raft region -r 2
@@ -158,9 +163,9 @@ cf write region size: 41.250 MB
 cf lock region size: 27616
 ```
 
-### 特定の範囲のMVCCを表示するためにスキャンします {#scan-to-view-mvcc-of-a-specific-range}
+### スキャンして特定範囲の MVCC を表示 {#scan-to-view-mvcc-of-a-specific-range}
 
-`scan`コマンドの`--from`および`--to`オプションは、2つのエスケープされた形式のrawキーを受け入れ、 `--show-cf`フラグを使用して、表示する必要のある列ファミリーを指定します。
+`scan`コマンドの`--from`および`--to`オプションは、未加工のキーの 2 つのエスケープ形式を受け入れ、 `--show-cf`フラグを使用して、表示する必要がある列ファミリーを指定します。
 
 ```bash
 $ tikv-ctl --data-dir /path/to/tikv scan --from 'zm' --limit 2 --show-cf lock,default,write
@@ -171,9 +176,9 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
 ```
 
-### 特定のキーのMVCCをビューする {#view-mvcc-of-a-given-key}
+### 特定のキーの MVCC をビューする {#view-mvcc-of-a-given-key}
 
-`scan`コマンドと同様に、 `mvcc`コマンドを使用して特定のキーのMVCCを表示できます。
+`scan`コマンドと同様に、 `mvcc`コマンドを使用して、特定のキーの MVCC を表示できます。
 
 ```bash
 $ tikv-ctl --data-dir /path/to/tikv mvcc -k "zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\000\000\000\371" --show-cf=lock,write,default
@@ -182,13 +187,13 @@ key: zmDB:29\000\000\377\000\374\000\000\000\000\000\000\377\000H\000\000\000\00
          write cf value: start_ts: 399650105199951882 commit_ts: 399650105213059076 short_value: "\000\000\000\000\000\000\000\001"
 ```
 
-このコマンドでは、キーはエスケープされた形式のrawキーでもあります。
+このコマンドでは、キーは raw キーのエスケープ形式でもあります。
 
 ### 生のキーをスキャンする {#scan-raw-keys}
 
-`raw-scan`コマンドはRocksDBから直接スキャンします。データキーをスキャンするには、キーに`'z'`のプレフィックスを追加する必要があることに注意してください。
+`raw-scan`コマンドは、RocksDB から直接スキャンします。データ キーをスキャンするには、キーに`'z'`プレフィックスを追加する必要があることに注意してください。
 
-`--from`と`--to`のオプションを使用して、スキャンする範囲を指定します（デフォルトでは無制限）。印刷するキーの最大数を制限するには、 `--limit`を使用します（デフォルトでは30）。 `--cf`を使用して、スキャンするcfを指定します（ `default` 、または`write`の場合があり`lock` ）。
+`--from`と`--to`のオプションを使用して、スキャンする範囲を指定します (デフォルトでは無制限)。印刷するキーの数を最大で`--limit`に制限するには、5 を使用します (デフォルトでは 30)。 `--cf`を使用して、スキャンする cf を指定します ( `default` 、 `write`または`lock`のいずれか)。
 
 ```bash
 $ ./tikv-ctl --data-dir /var/lib/tikv raw-scan --from 'zt' --limit 2 --cf default
@@ -200,11 +205,11 @@ Total scanned keys: 2
 
 ### 特定のキー値を出力する {#print-a-specific-key-value}
 
-キーの値を出力するには、 `print`コマンドを使用します。
+キーの値を表示するには、 `print`コマンドを使用します。
 
 ### リージョンに関するいくつかのプロパティを印刷する {#print-some-properties-about-region}
 
-リージョンの状態の詳細を記録するために、TiKVはリージョンのSSTファイルにいくつかの統計を書き込みます。これらのプロパティを表示するには、 `region-properties`サブコマンドで`tikv-ctl`を実行します。
+リージョンの状態の詳細を記録するために、TiKV はいくつかの統計をリージョンの SST ファイルに書き込みます。これらのプロパティを表示するには、 `region-properties`サブコマンドで`tikv-ctl`を実行します。
 
 ```bash
 $ tikv-ctl --host localhost:20160 region-properties -r 2
@@ -220,34 +225,34 @@ mvcc.max_row_versions: 0
 middle_key_by_approximate_size:
 ```
 
-プロパティを使用して、リージョンが正常であるかどうかを確認できます。そうでない場合は、それらを使用してリージョンを修正できます。たとえば、リージョンを手動で`middle_key_approximate_size`で分割します。
+プロパティを使用して、リージョンが正常かどうかを確認できます。そうでない場合は、それらを使用してリージョンを修正できます。たとえば、 リージョンを`middle_key_approximate_size`で手動で分割します。
 
-### 各TiKVのコンパクトなデータを手動で {#compact-data-of-each-tikv-manually}
+### 各 TiKV のデータを手動で圧縮する {#compact-data-of-each-tikv-manually}
 
-`compact`コマンドを使用して、各TiKVのデータを手動で圧縮します。 `--from`および`--to`オプションを指定すると、それらのフラグもエスケープされたrawキーの形式になります。
+`compact`コマンドを使用して、各 TiKV のデータを手動で圧縮します。 `--from`と`--to`のオプションを指定すると、それらのフラグもエスケープされた raw キーの形式になります。
 
--   `--host`オプションを使用して、圧縮を実行する必要があるTiKVを指定します。
--   `-d`オプションを使用して、圧縮を実行するRocksDBを指定します。オプションの値は`kv`と`raft`です。
--   `--threads`オプションを使用すると、TiKV圧縮の同時実行性を指定でき、そのデフォルト値は`8`です。一般に、同時実行性が高いほど圧縮速度が速くなりますが、それでもサービスに影響を与える可能性があります。シナリオに基づいて、適切な同時実行数を選択する必要があります。
--   TiKVが圧縮を実行するときに最下部のファイルを含めるか除外するには、 `--bottommost`オプションを使用します。値のオプションは`default` 、および`skip` `force` 。デフォルト値は`default`です。
-    -   `default`は、圧縮フィルター機能が有効になっている場合にのみ、最下部のファイルが含まれることを意味します。
-    -   `skip`は、TiKVが圧縮を実行するときに最下部のファイルが除外されることを意味します。
-    -   `force`は、TiKVが圧縮を実行するときに、最下部のファイルが常に含まれることを意味します。
+-   `--host`オプションを使用して、圧縮を実行する必要がある TiKV を指定します。
+-   `-d`オプションを使用して、圧縮を実行する RocksDB を指定します。オプションの値は`kv`と`raft`です。
+-   `--threads`オプションを使用すると、TiKV 圧縮の同時実行数を指定できます。デフォルト値は`8`です。一般に、コンカレンシーが高いほど圧縮速度が速くなりますが、サービスに影響を与える可能性があります。シナリオに基づいて、適切な同時実行数を選択する必要があります。
+-   `--bottommost`オプションを使用して、TiKV が圧縮を実行するときに一番下のファイルを含めたり除外したりします。値のオプションは`default` 、 `skip` 、および`force`です。デフォルト値は`default`です。
+    -   `default`は、圧縮フィルター機能が有効になっている場合にのみ、一番下のファイルが含まれることを意味します。
+    -   `skip`は、TiKV が圧縮を実行するときに、一番下のファイルが除外されることを意味します。
+    -   `force`は、TiKV が圧縮を実行するときに、一番下のファイルが常に含まれることを意味します。
 
 ```bash
 $ tikv-ctl --data-dir /path/to/tikv compact -d kv
 success!
 ```
 
-### TiKVクラスタ全体のコンパクトなデータを手動で {#compact-data-of-the-whole-tikv-cluster-manually}
+### TiKVクラスタ全体のデータを手動で圧縮する {#compact-data-of-the-whole-tikv-cluster-manually}
 
-`compact-cluster`コマンドを使用して、TiKVクラスタ全体のデータを手動で圧縮します。このコマンドのフラグは、 `compact`コマンドのフラグと同じ意味と使用法を持っています。
+`compact-cluster`コマンドを使用して、TiKVクラスタ全体のデータを手動で圧縮します。このコマンドのフラグの意味と使用法は、 `compact`コマンドのフラグと同じです。
 
 ### リージョンをトゥームストーンに設定する {#set-a-region-to-tombstone}
 
-`tombstone`コマンドは通常、同期ログが有効になっておらず、電源を切るとRaftステートマシンに書き込まれたデータの一部が失われる状況で使用されます。
+`tombstone`コマンドは通常、sync-log が有効になっておらず、 Raftステート マシンに書き込まれた一部のデータが電源切断によって失われる状況で使用されます。
 
-TiKVインスタンスでは、このコマンドを使用して、一部のリージョンのステータスをトゥームストーンに設定できます。次に、インスタンスを再起動すると、それらのリージョンのRaftステートマシンの損傷によって引き起こされる再起動の失敗を回避するために、それらのリージョンはスキップされます。これらのリージョンには、 Raftメカニズムを介して読み取りと書き込みを続行できるように、他のTiKVインスタンスに十分な正常なレプリカが必要です。
+TiKV インスタンスでは、このコマンドを使用して、一部のリージョンのステータスをトゥームストーンに設定できます。その後、インスタンスを再起動すると、それらのリージョンのRaftステート マシンの損傷によって引き起こされる再起動の失敗を回避するために、それらのリージョンはスキップされます。これらのリージョンでは、 Raftメカニズムを介して読み取りと書き込みを続行できるように、他の TiKV インスタンスに十分な健全なレプリカが必要です。
 
 通常、 `remove-peer`コマンドを使用して、このリージョンの対応するピアを削除できます。
 
@@ -257,7 +262,7 @@ TiKVインスタンスでは、このコマンドを使用して、一部のリ�
 pd-ctl operator add remove-peer <region_id> <store_id>
 ```
 
-次に、 `tikv-ctl`ツールを使用して、対応するTiKVインスタンスでリージョンをトゥームストーンに設定し、起動時にこのリージョンのヘルスチェックをスキップします。
+次に、 `tikv-ctl`ツールを使用して、リージョンを対応する TiKV インスタンスのトゥームストーンに設定し、起動時にこのリージョンのヘルス チェックをスキップします。
 
 {{< copyable "" >}}
 
@@ -269,7 +274,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
 success!
 ```
 
-ただし、場合によっては、このリージョンのこのピアをPDから簡単に削除できないため、 `tikv-ctl`の`--force`オプションを指定して、ピアをトゥームストーンに強制的に設定できます。
+ただし、場合によっては、このリージョンのピアを PD から簡単に削除できないため、 `tikv-ctl`の`--force`オプションを指定して、ピアを強制的にトゥームストーンに設定できます。
 
 {{< copyable "" >}}
 
@@ -283,12 +288,12 @@ success!
 
 > **ノート：**
 >
-> -   `tombstone`コマンドは、ローカルモードのみをサポートします。
-> -   `-p`オプションの引数は、 `http`プレフィックスなしのPDエンドポイントを指定します。 PDエンドポイントを指定することは、PDがTombstoneに安全に切り替えることができるかどうかを照会することです。
+> -   `tombstone`コマンドは、ローカル モードのみをサポートします。
+> -   `-p`オプションの引数は、 `http`プレフィックスなしで PD エンドポイントを指定します。 PD エンドポイントを指定することは、PD が安全に Tombstone に切り替えることができるかどうかを照会することです。
 
-### TiKVに<code>consistency-check</code>要求を送信します {#send-a-code-consistency-check-code-request-to-tikv}
+### <code>consistency-check</code>リクエストを TiKV に送信する {#send-a-code-consistency-check-code-request-to-tikv}
 
-`consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間の整合性チェックを実行します。チェックが失敗すると、TiKV自体がパニックになります。 `--host`で指定されたTiKVインスタンスがリージョンリーダーでない場合、エラーが報告されます。
+`consistency-check`コマンドを使用して、特定のリージョンの対応するRaft内のレプリカ間で整合性チェックを実行します。チェックが失敗すると、TiKV 自体がパニックになります。 `--host`で指定された TiKV インスタンスがリージョンリーダーでない場合、エラーが報告されます。
 
 ```bash
 $ tikv-ctl --host 127.0.0.1:20160 consistency-check -r 2
@@ -299,47 +304,47 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 
 > **ノート：**
 >
-> -   `consistency-check`コマンドは、TiDBのガベージコレクションと互換性がなく、誤ってエラーを報告する可能性があるため、使用することはお勧めし**ません**。
-> -   このコマンドは、リモートモードのみをサポートします。
-> -   このコマンドが`success!`を返した場合でも、TiKVがパニックになるかどうかを確認する必要があります。これは、このコマンドがリーダーの整合性チェックを要求する提案にすぎず、チェックプロセス全体が成功したかどうかをクライアントから知ることができないためです。
+> -   `consistency-check`コマンドの使用はお勧めし**ません**。TiDB のガベージ コレクションと互換性がなく、誤ってエラーを報告する可能性があるためです。
+> -   このコマンドは、リモート モードのみをサポートします。
+> -   このコマンドが`success!`を返す場合でも、TiKV がパニックするかどうかを確認する必要があります。これは、このコマンドがリーダーに対して整合性チェックを要求する提案にすぎず、チェック プロセス全体が成功したかどうかをクライアントから知ることができないためです。
 
-### スナップショットメタをダンプ {#dump-snapshot-meta}
+### スナップショット メタのダンプ {#dump-snapshot-meta}
 
-このサブコマンドは、指定されたパスでスナップショットメタファイルを解析し、結果を出力するために使用されます。
+このサブコマンドは、指定されたパスにあるスナップショット メタ ファイルを解析し、結果を出力するために使用されます。
 
-### Raftステートマシンが破損しているリージョンを印刷します {#print-the-regions-where-the-raft-state-machine-corrupts}
+### Raftステート マシンが破損している領域を出力します。 {#print-the-regions-where-the-raft-state-machine-corrupts}
 
-TiKVの起動中にリージョンをチェックしないようにするには、 `tombstone`コマンドを使用して、 RaftステートマシンがTombstoneにエラーを報告するリージョンを設定します。このコマンドを実行する前に、 `bad-regions`コマンドを使用してエラーのあるリージョンを見つけ、自動処理のために複数のツールを組み合わせます。
+TiKV の開始中にリージョンをチェックしないようにするために、 `tombstone`コマンドを使用して、 Raftステート マシンがエラーをトゥームストーンに報告するリージョンを設定できます。このコマンドを実行する前に、 `bad-regions`コマンドを使用してエラーのあるリージョンを見つけ、複数のツールを組み合わせて自動処理を行います。
 
 ```bash
 $ tikv-ctl --data-dir /path/to/tikv bad-regions
 all regions are healthy
 ```
 
-コマンドが正常に実行されると、上記の情報が出力されます。コマンドが失敗すると、不良リージョンのリストが出力されます。現在、検出できるエラーには、 `last index`の間の不一致、および`apply index`ログの損失がRaftれ`commit index` 。スナップショットファイルの損傷などの他の条件については、さらにサポートが必要です。
+コマンドが正常に実行されると、上記の情報が出力されます。コマンドが失敗すると、不正なリージョンのリストが出力されます。現在、検出できるエラーには、 `last index` 、 `commit index` 、および`apply index`の不一致、およびRaftログの損失が含まれます。スナップショット ファイルの損傷などのその他の状態については、さらにサポートが必要です。
 
-### リージョンのプロパティをビューする {#view-region-properties}
+### リージョンのプロパティをビュー {#view-region-properties}
 
--   `/path/to/tikv`でデプロイされたTiKVインスタンスのリージョン2のプロパティをローカルで表示するには：
+-   `/path/to/tikv`にデプロイされた TiKV インスタンスのリージョン2 のプロパティをローカルで表示するには:
 
     ```bash
     $ tikv-ctl --data-dir /path/to/tikv/data region-properties -r 2
     ```
 
--   `127.0.0.1:20160`で実行されているTiKVインスタンスのリージョン2のプロパティをオンラインで表示するには：
+-   `127.0.0.1:20160`で実行されている TiKV インスタンスのリージョン2 のプロパティをオンラインで表示するには、次のようにします。
 
     ```bash
     $ tikv-ctl --host 127.0.0.1:20160 region-properties -r 2
     ```
 
-### TiKV構成を動的に変更する {#modify-the-tikv-configuration-dynamically}
+### TiKV 構成を動的に変更する {#modify-the-tikv-configuration-dynamically}
 
-`modify-tikv-config`コマンドを使用して、構成引数を動的に変更できます。現在、動的に変更できるTiKV構成項目と詳細な変更は、SQLステートメントを使用した構成の変更と一致しています。詳細については、 [TiKV構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を参照してください。
+`modify-tikv-config`コマンドを使用して、構成引数を動的に変更できます。現在、動的に変更できる TiKV の構成項目と詳細な変更は、SQL ステートメントを使用した構成の変更と一致しています。詳細については、 [TiKV 構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を参照してください。
 
--   `-n`は、構成アイテムのフルネームを指定するために使用されます。オンラインで変更できる構成項目のリストについては、 [TiKV構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を参照してください。
+-   `-n`は、構成アイテムの完全な名前を指定するために使用されます。オンラインで変更できる構成アイテムのリストについては、 [TiKV 構成をオンラインで変更する](/dynamic-config.md#modify-tikv-configuration-online)を参照してください。
 -   `-v`は、構成値を指定するために使用されます。
 
-`shared block cache`のサイズを設定します：
+`shared block cache`のサイズを設定します。
 
 {{< copyable "" >}}
 
@@ -351,7 +356,7 @@ tikv-ctl --host ip:port modify-tikv-config -n storage.block-cache.capacity -v 10
 success
 ```
 
-`shared block cache`が無効になっている場合は、 `write`に`block cache size`を設定します。
+`shared block cache`が無効の場合、 `write` CF に`block cache size`を設定します。
 
 {{< copyable "" >}}
 
@@ -383,7 +388,7 @@ tikv-ctl --host ip:port modify-tikv-config -n raftstore.sync-log -v false
 success
 ```
 
-圧縮率の制限により累積圧縮保留バイトが発生する場合は、 `rate-limiter-auto-tuned`モードを無効にするか、圧縮フローの上限を設定します。
+圧縮レート制限により圧縮保留中のバイトが蓄積される場合は、 `rate-limiter-auto-tuned`モードを無効にするか、圧縮フローの制限を高く設定します。
 
 {{< copyable "" >}}
 
@@ -405,21 +410,21 @@ tikv-ctl --host ip:port modify-tikv-config -n rocksdb.rate-bytes-per-sec -v "1GB
 success
 ```
 
-### 複数のレプリカの障害からサービスを回復するようにリージョンに強制する（非推奨） {#force-regions-to-recover-services-from-failure-of-multiple-replicas-deprecated}
+### 複数のレプリカの障害からサービスを回復するようにリージョンを強制する (非推奨) {#force-regions-to-recover-services-from-failure-of-multiple-replicas-deprecated}
 
 > **警告：**
 >
-> この機能の使用はお勧めしません。代わりに、ワンストップ自動回復機能を提供するOnline Unsafe Recoveryin1を使用でき`pd-ctl` 。サービスの停止などの追加操作は必要ありません。詳細な紹介については、 [オンラインの安全でない回復](/online-unsafe-recovery.md)を参照してください。
+> この機能を使用することはお勧めしません。代わりに、ワンストップの自動回復機能を提供する Online Unsafe Recovery in `pd-ctl`を使用できます。サービスの停止などの余分な操作は必要ありません。詳細な紹介については、 [オンラインの安全でない回復](/online-unsafe-recovery.md)を参照してください。
 
-`unsafe-recover remove-fail-stores`コマンドを使用して、障害が発生したマシンをリージョンのピアリストから削除できます。このコマンドを実行する前に、ターゲットTiKVストアのサービスを停止して、ファイルロックを解除する必要があります。
+`unsafe-recover remove-fail-stores`コマンドを使用して、失敗したマシンをリージョンのピア リストから削除できます。このコマンドを実行する前に、対象の TiKV ストアのサービスを停止してファイル ロックを解除する必要があります。
 
-`-s`オプションは、コンマで区切られた複数の`store_id`を受け入れ、 `-r`フラグを使用して関連するリージョンを指定します。特定のストア内のすべてのリージョンでこの操作を実行する必要がある場合は、 `--all-regions`を指定するだけです。
+`-s`オプションは、コンマで区切られた複数の`store_id`を受け入れ、 `-r`フラグを使用して関連するリージョンを指定します。特定のストアのすべてのリージョンでこの操作を実行する必要がある場合は、単純に`--all-regions`を指定できます。
 
 > **警告：**
 >
-> -   誤操作が発生した場合、クラスタの復旧が困難になる可能性があります。潜在的なリスクに注意し、本番環境でこの機能を使用しないようにしてください。
-> -   `--all-regions`オプションを使用する場合、クラスタに接続されている残りのすべてのストアでこのコマンドを実行する必要があります。損傷した店舗を復旧する前に、これらの健全な店舗がサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカのピアリストに一貫性がないため、 `split-region`または`remove-peer`を実行したときにエラーが発生します。これにより、他のメタデータ間の不整合がさらに発生し、最終的にリージョンが使用できなくなります。
-> -   `remove-fail-stores`を実行すると、削除したノードを再起動したり、これらのノードをクラスタに追加したりすることはできません。そうしないと、メタデータに一貫性がなくなり、最終的にリージョンが使用できなくなります。
+> -   操作を誤ると、クラスタの復旧が困難になる場合があります。潜在的なリスクを認識し、本番環境でこの機能を使用しないようにしてください。
+> -   `--all-regions`オプションを使用する場合、クラスタに接続されている残りのすべてのストアでこのコマンドを実行する必要があります。損傷したストアを回復する前に、これらの健全なストアがサービスの提供を停止することを確認する必要があります。そうしないと、リージョンレプリカの一貫性のないピア リストが原因で、 `split-region`または`remove-peer`を実行したときにエラーが発生します。これにより、他のメタデータ間の不一致がさらに発生し、最終的にリージョンが使用できなくなります。
+> -   `remove-fail-stores`を実行すると、削除されたノードを再起動したり、これらのノードをクラスタに追加したりすることはできません。そうしないと、メタデータに一貫性がなくなり、最終的にリージョンが使用できなくなります。
 
 {{< copyable "" >}}
 
@@ -437,58 +442,58 @@ success!
 tikv-ctl --data-dir /path/to/tikv unsafe-recover remove-fail-stores -s 4,5 --all-regions
 ```
 
-次に、TiKVを再起動した後、リージョンは残りの正常なレプリカでサービスを提供し続けることができます。このコマンドは通常、複数のTiKVストアが破損または削除された場合に使用されます。
+次に、TiKV を再起動した後、リージョンは残りの正常なレプリカでサービスを提供し続けることができます。このコマンドは、複数の TiKV ストアが破損または削除された場合によく使用されます。
 
 > **ノート：**
 >
-> -   このコマンドは、指定されたリージョンのピアが配置されているすべてのストアに対して実行する必要があります。
-> -   このコマンドはローカルモードのみをサポートします。正常に実行されると`success!`を出力します。
+> -   指定されたリージョンのピアが配置されているすべてのストアに対して、このコマンドを実行する必要があります。
+> -   このコマンドは、ローカル モードのみをサポートします。正常に実行されると`success!`が出力されます。
 
-### MVCCデータの破損から回復する {#recover-from-mvcc-data-corruption}
+### MVCC データ破損からの回復 {#recover-from-mvcc-data-corruption}
 
-MVCCデータの破損が原因でTiKVが正常に実行できない状況では、 `recover-mvcc`コマンドを使用します。 3つのCF（「デフォルト」、「書き込み」、「ロック」）をクロスチェックして、さまざまな種類の不整合から回復します。
+MVCC のデータ破損により TiKV が正常に動作しない場合は、 `recover-mvcc`コマンドを使用してください。 3 つの CF (「デフォルト」、「書き込み」、「ロック」) をクロスチェックして、さまざまな種類の不整合から回復します。
 
 -   `-r`オプションを使用して、関係するリージョンを`region_id`で指定します。
--   `-p`オプションを使用して、PDエンドポイントを指定します。
+-   PD エンドポイントを指定するには、 `-p`オプションを使用します。
 
 ```bash
 $ tikv-ctl --data-dir /path/to/tikv recover-mvcc -r 1001,1002 -p 127.0.0.1:2379
 success!
 ```
 
-> **注**：
+> **注**:
 >
-> -   このコマンドはローカルモードのみをサポートします。正常に実行されると`success!`を出力します。
-> -   `-p`オプションの引数は、 `http`プレフィックスなしのPDエンドポイントを指定します。 PDエンドポイントを指定することは、指定された`region_id`が検証されているかどうかを照会することです。
-> -   このコマンドは、指定されたリージョンのピアが配置されているすべてのストアに対して実行する必要があります。
+> -   このコマンドは、ローカル モードのみをサポートします。正常に実行されると`success!`が出力されます。
+> -   `-p`オプションの引数は、 `http`プレフィックスなしで PD エンドポイントを指定します。 PD エンドポイントを指定すると、指定された`region_id`が検証されているかどうかを照会します。
+> -   指定したリージョンのピアが配置されているすべてのストアに対して、このコマンドを実行する必要があります。
 
-### Ldbコマンド {#ldb-command}
+### Ldb コマンド {#ldb-command}
 
-`ldb`コマンドラインツールは、複数のデータアクセスおよびデータベース管理コマンドを提供します。いくつかの例を以下に示します。詳細については、 `tikv-ctl ldb`の実行時に表示されるヘルプメッセージを参照するか、RocksDBのドキュメントを確認してください。
+`ldb`コマンド ライン ツールは、複数のデータ アクセスおよびデータベース管理コマンドを提供します。以下にいくつかの例を示します。詳細については、 `tikv-ctl ldb`の実行時に表示されるヘルプ メッセージを参照するか、RocksDB のドキュメントを確認してください。
 
-データアクセスシーケンスの例：
+データ アクセス シーケンスの例:
 
-既存のRocksDBをHEXにダンプするには：
+既存の RocksDB を HEX でダンプするには:
 
 ```bash
 $ tikv-ctl ldb --hex --db=/tmp/db dump
 ```
 
-既存のRocksDBのマニフェストをダンプするには：
+既存の RocksDB のマニフェストをダンプするには:
 
 ```bash
 $ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 ```
 
-`--column_family=<string>`コマンドラインを使用して、クエリの対象となる列ファミリを指定できます。
+`--column_family=<string>`コマンド ラインを使用して、クエリの対象となる列ファミリーを指定できます。
 
-`--try_load_options`は、データベースオプションファイルをロードしてデータベースを開きます。データベースの実行中は、このオプションを常にオンにしておくことをお勧めします。デフォルトのオプションでデータベースを開くと、LSMツリーが混乱する可能性があり、自動的に回復することはできません。
+`--try_load_options`は、データベース オプション ファイルをロードしてデータベースを開きます。データベースの実行中は、このオプションを常にオンにしておくことをお勧めします。デフォルトのオプションでデータベースを開くと、LSM ツリーが混乱する可能性があり、自動的に回復することはできません。
 
-### 暗号化メタデータをダンプします {#dump-encryption-metadata}
+### 暗号化メタデータのダンプ {#dump-encryption-metadata}
 
-`encryption-meta`サブコマンドを使用して、暗号化メタデータをダンプします。サブコマンドは、データファイルの暗号化情報と使用されるデータ暗号化キーのリストの2種類のメタデータをダンプできます。
+`encryption-meta`サブコマンドを使用して、暗号化メタデータをダンプします。このサブコマンドは、データ ファイルの暗号化情報と、使用されているデータ暗号化キーのリストの 2 種類のメタデータをダンプできます。
 
-データファイルの暗号化情報をダンプするには、 `encryption-meta dump-file`サブコマンドを使用します。 TiKV構成ファイルを作成して、TiKV展開に`data-dir`を指定する必要があります。
+データファイルの暗号化情報をダンプするには、 `encryption-meta dump-file`サブコマンドを使用します。 TiKV 展開用に`data-dir`を指定するには、TiKV 構成ファイルを作成する必要があります。
 
 ```
 # conf.toml
@@ -496,14 +501,14 @@ $ tikv-ctl ldb --hex manifest_dump --path=/tmp/db/MANIFEST-000001
 data-dir = "/path/to/tikv/data"
 ```
 
-`--path`オプションを使用して、対象のデータファイルへの絶対パスまたは相対パスを指定できます。データファイルが暗号化されていない場合、コマンドは空の出力を与える可能性があります。 `--path`が指定されていない場合、すべてのデータファイルの暗号化情報が出力されます。
+`--path`オプションを使用して、目的のデータ ファイルへの絶対パスまたは相対パスを指定できます。データ ファイルが暗号化されていない場合、コマンドは空の出力を返す可能性があります。 `--path`が指定されていない場合、すべてのデータ ファイルの暗号化情報が出力されます。
 
 ```bash
 $ tikv-ctl --config=./conf.toml encryption-meta dump-file --path=/path/to/tikv/data/db/CURRENT
 /path/to/tikv/data/db/CURRENT: key_id: 9291156302549018620 iv: E3C2FDBF63FC03BFC28F265D7E78283F method: Aes128Ctr
 ```
 
-データ暗号化キーをダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスターキーも指定する必要があります。マスターキーの設定方法については、 [暗号化の停止](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`構成は無視され、マスターキーのローテーションはトリガーされません。
+データ暗号鍵をダンプするには、 `encryption-meta dump-key`サブコマンドを使用します。 `data-dir`に加えて、構成ファイルで使用されている現在のマスター キーも指定する必要があります。マスターキーの設定方法については、 [保存時の暗号化](/encryption-at-rest.md)を参照してください。また、このコマンドを使用すると、 `security.encryption.previous-master-key`構成は無視され、マスター キーのローテーションはトリガーされません。
 
 ```
 # conf.toml
@@ -516,9 +521,9 @@ key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
 ```
 
-マスターキーがAWSKMSキーの場合、 `tikv-ctl`はKMSキーにアクセスできる必要があることに注意してください。 AWS KMSキーへのアクセスは、環境変数、AWSデフォルト設定ファイル、またはIAMロールのいずれか適切な方を介して`tikv-ctl`に付与できます。使用法については、AWSドキュメントを参照してください。
+マスター キーが AWS KMS キーの場合、 `tikv-ctl`キーにアクセスできる必要があることに注意してください。 AWS KMS キーへのアクセスは、環境変数、AWS デフォルト設定ファイル、またはIAMロールのいずれか適切なものを介して`tikv-ctl`に付与できます。使用方法については、AWS のドキュメントを参照してください。
 
-`--ids`オプションを使用して、印刷するコンマ区切りのデータ暗号化キーIDのリストを指定できます。 `--ids`が指定されていない場合、すべてのデータ暗号化キーが、最新のアクティブなデータ暗号化キーのIDである現在のキーIDとともに出力されます。
+`--ids`オプションを使用して、出力するコンマ区切りのデータ暗号化キー ID のリストを指定できます。 `--ids`が指定されていない場合、すべてのデータ暗号化キーが、最新のアクティブなデータ暗号化キーの ID である現在のキー ID と共に出力されます。
 
 コマンドを使用すると、アクションによって機密情報が公開されることを警告するプロンプトが表示されます。 「同意します」と入力して続行します。
 
@@ -539,17 +544,17 @@ Type "I consent" to continue, anything else to exit: I consent
 
 > **ノート**
 >
-> このコマンドは、データ暗号化キーをプレーンテキストとして公開します。本番環境では、出力をファイルにリダイレクトしないでください。後で出力ファイルを削除しても、ディスクからコンテンツを完全に消去できない場合があります。
+> このコマンドは、データ暗号化キーをプレーンテキストとして公開します。本番環境では、出力をファイルにリダイレクトしないでください。後で出力ファイルを削除しても、コンテンツがディスクから完全に消去されない場合があります。
 
-### 破損したSSTファイルに関連する情報を印刷する {#print-information-related-to-damaged-sst-files}
+### 破損した SST ファイルに関する情報の出力 {#print-information-related-to-damaged-sst-files}
 
-TiKV内の破損したSSTファイルにより、TiKVプロセスがpanicになる可能性があります。 TiDB v6.1.0より前では、これらのファイルによりTiKVはすぐにpanicになります。 TiDB v6.1.0以降、TiKVプロセスはSSTファイルが破損してから1時間後にpanicになります。
+TiKV の破損した SST ファイルにより、TiKV プロセスがpanicに陥る可能性があります。 TiDB v6.1.0 より前では、これらのファイルが原因で TiKV が即座にpanicに陥ります。 TiDB v6.1.0 以降、TiKV プロセスは SST ファイルが破損してから 1 時間後にpanicを起こします。
 
-破損したSSTファイルをクリーンアップするには、 TiKV Controlで`bad-ssts`コマンドを実行して、必要な情報を表示します。以下は、コマンドと出力の例です。
+破損した SST ファイルをクリーンアップするには、 TiKV Controlで`bad-ssts`コマンドを実行して、必要な情報を表示します。以下は、コマンドと出力の例です。
 
 > **ノート：**
 >
-> このコマンドを実行する前に、実行中のTiKVインスタンスを停止してください。
+> このコマンドを実行する前に、実行中の TiKV インスタンスを停止してください。
 
 ```bash
 $ tikv-ctl bad-ssts --data-dir </path/to/tikv> --pd <endpoint>
@@ -574,8 +579,8 @@ tikv-ctl --db=data/tikv-21107/db tombstone -r 4 --pd <endpoint>
 corruption analysis has completed
 ```
 
-上記の出力から、破損したSSTファイルの情報が最初に印刷され、次にメタ情報が印刷されていることがわかります。
+上記の出力から、破損した SST ファイルの情報が最初に出力され、次にメタ情報が出力されていることがわかります。
 
--   `sst meta`の部分で、 `14`はSSTファイル番号を意味します。 `552997`はファイルサイズを意味し、その後に最小および最大のシーケンス番号とその他のメタ情報が続きます。
--   `overlap region`部は関係するリージョンの情報を示しています。この情報は、PDサーバーを介して取得されます。
--   `suggested operations`の部分は、破損したSSTファイルをクリーンアップするための提案を提供します。ファイルをクリーンアップしてTiKVインスタンスを再起動するという提案を受け入れることができます。
+-   `sst meta`の部分で、 `14`は SST ファイル番号を意味します。 `552997`はファイル サイズを意味し、その後に最小および最大のシーケンス番号とその他のメタ情報が続きます。
+-   `overlap region`番目の部分は、関係するリージョンの情報を示します。この情報は、PD サーバーを介して取得されます。
+-   最初の部分は、破損した SST ファイルをクリーンアップするための提案を提供し`suggested operations` 。ファイルをクリーンアップして TiKV インスタンスを再起動するという提案を受け入れることができます。

@@ -80,7 +80,7 @@
     -   TiDB クラスターに接続する
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAP クラスターを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -144,7 +144,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -171,7 +171,7 @@
     -   [データ転送料金](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
     -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-    -   [トライアルポイント](/tidb-cloud/tidb-cloud-billing.md#trial-points)
+    -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
     -   [お支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 -   参照
     -   TiDB クラスターのアーキテクチャ
@@ -352,7 +352,7 @@
         -   [パーティショニング](/partitioned-table.md)
         -   [一時テーブル](/temporary-tables.md)
         -   [キャッシュされたテーブル](/cached-tables.md)
-        -   文字セットと照合
+        -   文字セットと照合順序
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
         -   履歴データの読み取り
