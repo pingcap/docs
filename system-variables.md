@@ -343,7 +343,7 @@ This variable is an alias for `last_insert_id`.
 - Range: `[-1, 1048576]`
 - Specifies the maximum number of [`PREPARE`](/sql-statements/sql-statement-prepare.md)  statements in a session.
 - The value of `-1` means no limit on the maximum number of `PREPARE` statements in a session.
-- If you set it to a value that exceeds the maximum number, `1048576` will be used:
+- If you set the variable to a value that exceeds the upper limit `1048576`, `1048576` is used instead:
 
 ```sql
 mysql> set global max_prepared_stmt_count=1048577;
