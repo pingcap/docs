@@ -218,8 +218,14 @@ from:
 Run the following command in a terminal. Use `tiup dmctl` to load the first data source configuration into the DM cluster:
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  operate-source create dm-source1.yaml
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
 ```
+The parameters used in the command above are described as follows:
+
+|Parameter              |Description    |
+|-                      |-              |
+|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
+|`operate-source create`|Loads the data source to the DM cluster.|
 
 The following is an example output:
 
@@ -271,11 +277,11 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ### Step 2. Create a migration task
 
-增量同步任务需要显式指定起始位置，可以从 Dumpling 导出文件的 metadata 文件中找到。
+Create a test-task1.yaml file for the migration. Configure the incremental migration mode and the starting point of the data source in the file.
 
-获取 MySQL 实例 1 Dumpling 导出文件 metadata 内容，用于配置增量同步起始点
+Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
 
-```shell
+```toml
 Started dump at: 2022-05-25 10:16:26
 SHOW MASTER STATUS:
        Log: mysql-bin.000002
@@ -284,9 +290,9 @@ SHOW MASTER STATUS:
 Finished dump at: 2022-05-25 10:16:27
 ```
 
-获取 MySQL 实例 2 Dumpling 导出文件 metadata 内容，用于配置增量同步起始点
+Find the starting point in the metadata file of MySQL instance2 exported by Dumpling. For example:
 
-```shell
+```toml
 Started dump at: 2022-05-25 10:20:32
 SHOW MASTER STATUS:
        Log: mysql-bin.000001
@@ -298,19 +304,19 @@ Finished dump at: 2022-05-25 10:20:32
 根据 metadata 文件中的位点信息，创建增量同步任务
 
 ```yaml
-## ********* 任务信息配置 *********
+## ********* Task Configuration *********
 name: test-task1
 shard-mode: "pessimistic"
-# 任务模式，可设为 "full" - "只进行全量数据迁移"、"incremental" - "Binlog 实时同步"、"all" - "全量 + Binlog 迁移"
+# Task mode. The "incremental" mode only performs incremental data migration.
 task-mode: incremental
 # timezone: "UTC"
 
-## ******** 数据源配置 **********
-## 【可选配置】如果增量数据迁移需要重复迁移已经在全量数据迁移中完成迁移的数据，则需要开启 safe mode 避免增量数据迁移报错
-## 该场景多见于，全量迁移的数据不属于数据源的一个一致性快照，随后从一个早于全量迁移数据之前的位置开始同步增量数据
-syncers:            # sync 处理单元的运行配置参数
- global:           # 配置名称
-   safe-mode: true # 设置为 true，则将来自数据源的 `INSERT` 改写为 `REPLACE`，将 `UPDATE` 改写为 `DELETE` 与 `REPLACE`；在增量同步稳定后可以关闭 safe-mode
+## ******** Data Source Configuration **********
+## (Optional) If you need to incrementally replicate data that has already been migrated in the full data migration, you need to enable the safe mode to avoid the incremental data migration error.
+##  This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
+syncers:           # The running configurations of the sync processing unit.
+ global:           # Configuration name.
+   safe-mode: false # # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
 mysql-instances:
  - source-id: "mysql-replica-01"
    block-allow-list:  "bw-rule-1"
@@ -331,14 +337,14 @@ mysql-instances:
      binlog-pos: 1312659
      binlog-gtid: "cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036"
 
-## ******** 目标 TiDB 配置 **********
-target-database:       # 目标 TiDB Cloud 配置
+## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
+target-database:       # The target TiDB cluster on TiDB Cloud
  host: "tidb.70593805.b973b556.ap-northeast-1.prod.aws.tidbcloud.com"
  port: 4000
  user: "root"
- password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="         # 如果密码不为空，则推荐使用经过 dmctl 加密的密文
+ password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="         # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
-## ******** 功能配置 **********
+## ******** Function Configuration **********
 routes:
  store-route-rule:
    schema-pattern: "store_*"
@@ -362,11 +368,13 @@ block-allow-list:
  bw-rule-1:
    do-dbs: ["store_*"]
 
-##  ******** 忽略检查项 **********
+##  ******** Ignore check items **********
 ignore-checking-items: ["table_schema","auto_increment_ID"]
 ```
 
-### 检查同步任务配置
+For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
+
+To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the check-task command:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task.yaml
@@ -385,11 +393,18 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-### 启动任务
+### Step 3. Start the migration task
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 start-task dm-task.yaml
 ```
+
+The parameters used in the command above are described as follows:
+
+|Parameter              |Description    |
+|-                      |-              |
+|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
+|`start-task`           |Starts the migration task.|
 
 The following is an example output:
 
@@ -419,6 +434,14 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
    "checkResult": ""
 }
 ```
+
+If the task fails to start, check the prompt message and fix the configuration. After that, you can re-run the command above to start the task.
+
+If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
+
+### Step 4. Check the migration task status
+
+To learn whether the DM cluster has an ongoing migration task and view the task status, run the `query-status` command using `tiup dmctl`:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 query-status test-task1
@@ -522,3 +545,5 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
    ]
 }
 ```
+
+For a detailed interpretation of the results, see [Query Status](https://docs.pingcap.com/tidb/stable/dm-query-status).
