@@ -5,7 +5,7 @@ summary: Learn how to migrate and merge MySQL shards to TiDB Cloud.
 
 # Migrate and Merge MySQL Shards to TiDB Cloud
 
-This document describes how to migrate and merge MySQL shards from different partitions into TiDB Cloud. After migration, you can use TiDB DM to perform incremental replication according to your business needs.
+This document describes how to migrate and merge MySQL shards from different partitions into TiDB Cloud. After migration, you can use TiDB DM to perform incremental migration according to your business needs.
 
 The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in self-incremental primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single instance.
 
@@ -106,7 +106,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of  `sale_01` and `sale_02` are auto-increment primary keys.  conflicts might occur when you merge sharded tables in the downstream database. For solutoins to solve conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+In this example, the column IDs of  `sale_01` and `sale_02` are auto-increment primary keys.  conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
 
 Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index.
 
@@ -166,13 +166,13 @@ After configuring the IAM Role, you can perform the data import task on the [TiD
 - Target Cluster: fill in the Username and Password fields.
 - DB/Tables Filter: if necessary, you can specify a table filter. If you want to configure multiple filter rules, use , to separate the rules.
 
-## Perform incremental data replication from MySQL to TiDB Cloud
+## Perform incremental data migration from MySQL to TiDB Cloud
 
-To replicate the data changes based on binlog from a specified position in the source database to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
+To replicate the data changes based on binlog from a specified position in the source database to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental migration.
 
 ### Before you begin
 
-TiDB Cloud does not provide any feature about incremental data replication yet. You need to deploy TiDB Data Migration (DM) manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+TiDB Cloud does not provide any feature about incremental data migration yet. You need to deploy TiDB Data Migration (DM) manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Step 1. Add the data source
 
@@ -296,7 +296,7 @@ SHOW MASTER STATUS:
 Finished dump at: 2022-05-25 10:20:32
 ```
 
-Edit a task configuration file called ·test-task1·, to configure the incremental replication mode and replication starting point for each data source.
+Edit a task configuration file called ·test-task1·, to configure the incremental migration mode and migration starting point for each data source.
 
 ```yaml
 ## ********* Task Configuration *********
