@@ -363,7 +363,7 @@ block-allow-list:
  bw-rule-1:
    do-dbs: ["store_*"]
 
-##  ******** Ignore check items **********
+## ******** Ignore check items **********
 ignore-checking-items: ["table_schema","auto_increment_ID"]
 ```
 
