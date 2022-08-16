@@ -20,7 +20,7 @@ To use PD Control, execute the `tiup ctl:<cluster-version> pd -u http://<pd_ip>:
 
 ### Download the installation package
 
-You can obtain the latest `pd-ctl` by downloading the TiDB server installation package. `pd-ctl` is included in the `ctl-{version}-linux-amd64.tar.gz` package.
+To obtain`pd-ctl` of the latest version, download the TiDB server installation package. `pd-ctl` is included in the `ctl-{version}-linux-amd64.tar.gz` package.
 
 | Installation package                                                                    | OS | Architecture | SHA256 checksum                                                    |
 | :------------------------------------------------------------------------ | :------- | :---- | :--------------------------------------------------------------- |
