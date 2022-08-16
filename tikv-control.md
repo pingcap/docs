@@ -235,14 +235,14 @@ Use the `compact` command to manually compact data of each TiKV.
     - `skip` means that the bottommost files are excluded when TiKV performs compaction.
     - `force` means that the bottommost files are always included when TiKV performs compaction.
 
-- For local mode
+- To compact data in the local mode, use the following command:
 
 ```shell
 $ tikv-ctl --data-dir /path/to/tikv compact --db kv
 success!
 ```
 
-- For remote mode
+- To compact data in the remote mode, use the following command:
 
 ```shell
 $ tikv-ctl --host ip:port compact --db kv
