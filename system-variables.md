@@ -346,7 +346,7 @@ This variable is an alias for `last_insert_id`.
 - If you set the variable to a value that exceeds the upper limit `1048576`, `1048576` is used instead:
 
 ```sql
-mysql> set global max_prepared_stmt_count=1048577;
+mysql> SET GLOBAL max_prepared_stmt_count=1048577;
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
 mysql> show warnings;
