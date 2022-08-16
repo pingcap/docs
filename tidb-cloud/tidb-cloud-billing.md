@@ -80,7 +80,7 @@ If you are the owner or billing administrator of your organization, you can mana
 >
 > If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
 
-After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, and data transmission costs in your organization.
+After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, credit consumption, and data transmission costs in your organization.
 
 - TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
 - The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
@@ -100,7 +100,7 @@ To view the list of invoices, perform the following steps:
 
 If you are the owner or billing administrator of the organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, and project splitting information.
+After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, credit consumption, and project splitting information.
 
 > **Note:**
 >
@@ -112,13 +112,33 @@ To view the billing details, perform the following steps:
 2. Click **Billing**.
 3. Click **Bills**. The billing details page is displayed.
 
-## Trial points
+## Credits
 
-During the [PoC](/tidb-cloud/tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
+TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. One credit is equivalent to one U.S. dollar. You can use credits to pay TiDB cluster fees before the credits become expired.
+
+> **Tip:**
+>
+> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
+
+The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, and the status.
+
+To view this page, perform the following steps:
+
+1. Click the account name in the upper-right corner of the TiDB Cloud console.
+2. Click **Billing**.
+3. Click **Credits**. The credit details page is displayed.
 
 > **Note:**
 >
-> Once you set up the payment method successfully, the unused trial points will become invalid. The cluster fees that have been deducted from trial points will not be included in your new bill.
+> - After you set up your payment method, the cluster fees are first deducted from your unused credits, then from your payment method.
+> - Credits cannot be used to pay the support plan fees.
+
+> **Warning:**
+>
+> During a PoC process:
+>
+> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
+> - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
 ## Payment method
 

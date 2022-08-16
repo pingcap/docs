@@ -170,7 +170,7 @@
   - [Data Transfer Cost](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-  - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
+  - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 - Reference
   - TiDB Cluster Architecture
