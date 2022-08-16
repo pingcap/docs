@@ -357,7 +357,7 @@ mysql> SHOW WARNINGS;
 +---------+------+--------------------------------------------------------------+
 1 row in set (0.00 sec)
 
-mysql> show global variables like 'max_prepared_stmt_count';
+mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 +-------------------------+---------+
 | Variable_name           | Value   |
 +-------------------------+---------+
