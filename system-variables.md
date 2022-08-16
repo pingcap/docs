@@ -1944,7 +1944,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
-- Indicates the net cost of transferring 1 byte through the network. It's used by the [Cost Model](/cost-model.md).
+- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
