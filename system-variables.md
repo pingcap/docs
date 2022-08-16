@@ -1098,7 +1098,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 - Persists to cluster: Yes
 - Default value: `OFF`
 - Specifies whether to sort the final output result automatically.
-- For example, if enable this feature, TiDB will process `select a, max(b) from t group by a` as `select a, max(b) from t group by a order by a, max(b)`.
+- For example, with this variable enabled, TiDB processes `SELECT a, MAX(b) FROM t GROUP BY a` as `SELECT a, MAX(b) FROM t GROUP BY a ORDER BY a, MAX(b)`.
 
 ### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
 
