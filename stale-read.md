@@ -7,7 +7,7 @@ summary: Learn about Stale Read and its usage scenarios.
 
 This document describes the usage scenarios of Stale Read. Stale Read is a mechanism that TiDB applies to read historical versions of data stored in TiDB. Using this mechanism, you can read the corresponding historical data of a specific point in time or within a specified time range, and thus save the latency brought by data replication between storage nodes.
 
-When you are using Steal Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading. If your application cannot tolerate reading non-real-time data, do not use Stale Read; otherwise, the data read from the replica might not be the latest data written into TiDB.
+When you are using Stale Read, TiDB will randomly select a replica for data reading, which means that all replicas are available for data reading. If your application cannot tolerate reading non-real-time data, do not use Stale Read; otherwise, the data read from the replica might not be the latest data written into TiDB.
 
 ## Scenario examples
 
@@ -19,5 +19,13 @@ When you are using Steal Read, TiDB will randomly select a replica for data read
 
 In TiDB, you can specify either an exact point in time or a time range when performing stale reads:
 
+<<<<<<< HEAD
 - Specifying an exact point in time (recommended): If you need TiDB to read data that follows the global transaction consistency from a specific point in time without damaging the isolation level, you can specify the corresponding timestamp of that point in time in the query statement. For detailed usage, see [`AS OF TIMESTAMP` Clause](/as-of-timestamp.md#syntax).
 - Specifying a time range: If you need TiDB to read data as new as possible within a time range without damaging the isolation level, you can specify the time range in the query statement. Then, TiDB selects a suitable timestamp within the specified time range to read the corresponding data. "Suitable" means there are no transactions that start before this timestamp and have not been committed on the accessed replica, that is, TiDB can perform read operations on the accessed replica and the read operations are not blocked. For detailed usage, refer to the introduction of the [`AS OF TIMESTAMP` clause](/as-of-timestamp.md#syntax) and the [`TIDB_BOUNDED_STALENESS` function](/as-of-timestamp.md#syntax).
+=======
+- Statement level
+    - Specifying an exact point in time (**recommended**): If you need TiDB to read data that is globally consistent from a specific point in time without violating the isolation level, you can specify the corresponding timestamp of that point in time in the query statement. For detailed usage, see [`AS OF TIMESTAMP` clause](/as-of-timestamp.md#syntax).
+    - Specifying a time range: If you need TiDB to read the data as new as possible within a time range without violating the isolation level, you can specify the time range in the query statement. Within the specified time range, TiDB selects a suitable timestamp to read the corresponding data. "Suitable" means there are no transactions that start before this timestamp and have not been committed on the accessed replica, that is, TiDB can perform read operations on the accessed replica and the read operations are not blocked. For detailed usage, refer to the introduction of the [`AS OF TIMESTAMP` Clause](/as-of-timestamp.md#syntax) and the [`TIDB_BOUNDED_STALENESS` function](/as-of-timestamp.md#syntax).
+- Session level
+    - Specifying a time range: In a session, if you need TiDB to read the data as new as possible within a time range in subsequent queries without violating the isolation level, you can specify the time range by setting the `tidb_read_staleness` system variable. For detailed usage, refer to [`tidb_read_staleness`](/tidb-read-staleness.md).
+>>>>>>> b05c8ad56 (Fix typo in stale-read.md (#9988))
