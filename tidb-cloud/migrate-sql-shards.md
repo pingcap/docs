@@ -125,7 +125,6 @@ Query OK, 0 rows affected (0.17 sec)
 
 To configure Amazon S3 access, follow the instructions in [Configure Amazon S3 access](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
 
-
 This document uses the Amazon S3 as an example. The following example only lists key policy configurations. Replace the Amazon S3 path with your own values.
 
 ```yaml
