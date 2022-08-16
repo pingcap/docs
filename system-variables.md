@@ -1868,7 +1868,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the I/O cost of TiDB to read/write one byte from/to the temporary disk. It's used by the [Cost Model](/cost-model.md).
+- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_distinct_agg_push_down
 
