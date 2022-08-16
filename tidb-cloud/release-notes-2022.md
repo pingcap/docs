@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
-## August 16, 2022
+## August xx, 2022
 
 * Add `2 vCPU, 8 GiB (Beta)` node size of TiDB and TiKV as beta.
 
@@ -19,10 +19,6 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
         * Low-workload production environments for SMB
         * PoC and staging environments
         * Development environments
-
-* Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
-
-    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can [contact us](https://en.pingcap.com/apply-for-poc/) to get credits.
 
 ## August 9, 2022
 
