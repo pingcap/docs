@@ -174,44 +174,54 @@ After configuring the IAM Role, you can perform the data import task on the [TiD
 - Target Cluster: fill in the Username and Password fields.
 - DB/Tables Filter: if necessary, you can specify a table filter. If you want to configure multiple filter rules, use , to separate the rules.
 
-## 增量数据同步
+## Perform incremental data replication from MySQL to TiDB Cloud
 
-TiDB Cloud 尚未提供增量数据同步功能，需要手动搭建 DM 进行。安装步骤请参考[ Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)。
+To replicate the data changes based on binlog from a specified position in the source database to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
 
-### 创建数据源
+### Before you begin
 
-```shell
-[root@localhost ~]# cat dm-source1.yaml
-```
+TiDB Cloud does not provide any feature about incremental data replication yet. You need to deploy TiDB Data Migration (DM) manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+
+### Step 1. Add the data source
+
+Create a new data source file called `dm-source1.yaml`, which configures an upstream data source into DM, and add the following content:
 
 ```yaml
 # MySQL Configuration.
 source-id: "mysql-replica-01"
-# DM-worker 是否使用全局事务标识符 (GTID) 拉取 binlog。使用前提是在上游 MySQL 已开启 GTID 模式。
+# Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
+# The prerequisite is that you have already enabled GTID in the upstream MySQL.
+# If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
 enable-gtid: true
 from:
  host: "172.16.5.138"
  user: "lzy"
  password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
  port: 3307
-[root@localhost ~]# cat dm-source2.yaml
-```
+
+Create another new data source file called `dm-source2.yaml`, and add the following content:
 
 ```yaml
 # MySQL Configuration.
 source-id: "mysql-replica-02"
-# DM-worker 是否使用全局事务标识符 (GTID) 拉取 binlog。使用前提是在上游 MySQL 已开启 GTID 模式。
+# Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
+# The prerequisite is that you have already enabled GTID in the upstream MySQL.
+# If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
 enable-gtid: true
 from:
  host: "172.16.5.138"
  user: "lzy"
  password: "3O8fCPEnwO87cIal32bpO0AuTsJyBJ0="
- port: 3308 
+ port: 3308
 ```
 
+Run the following command in a terminal. Use `tiup dmctl` to load the first data source configuration into the DM cluster:
+
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
+[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  operate-source create dm-source1.yaml
 ```
+
+The following is an example output:
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -233,9 +243,13 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ```
 
+Run the following command in a terminal. Use `tiup dmctl` to load the second data source configuration into the DM cluster:
+
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
 ```
+
+The following is an example output:
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -255,7 +269,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
    ]
 }
 
-### 配置同步任务
+### Step 2. Create a migration task
 
 增量同步任务需要显式指定起始位置，可以从 Dumpling 导出文件的 metadata 文件中找到。
 
@@ -282,10 +296,6 @@ Finished dump at: 2022-05-25 10:20:32
 ```
 
 根据 metadata 文件中的位点信息，创建增量同步任务
-
-```shell
-[root@localhost ~]# cat dm-task.yaml
-```
 
 ```yaml
 ## ********* 任务信息配置 *********
@@ -362,6 +372,8 @@ ignore-checking-items: ["table_schema","auto_increment_ID"]
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task.yaml
 ```
 
+The following is an example output:
+
 ```shell
 tiup is checking updates for component dmctl ...
 
@@ -378,6 +390,8 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 start-task dm-task.yaml
 ```
+
+The following is an example output:
 
 ```shell
 tiup is checking updates for component dmctl ...
@@ -409,6 +423,8 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 query-status test-task1
 ```
+
+The following is an example output:
 
 ```shell
 {
