@@ -1800,7 +1800,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Integer
 - Default value: `1`
 - Range: `[0, 2]`
-- Indicates whether to allow broadcast CARTESIAN join. 
+- Indicates whether to allow the broadcast CARTESIAN join. 
 - `0` means that it's not allowed, `1` means that it's allowed based on `tidb_broadcast_join_threshold_count`, and `2` means it's always allowed even if the table size exceeds the threshold.
 
 ### tidb_opt_concurrency_factor
