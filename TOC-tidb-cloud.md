@@ -165,9 +165,6 @@
   - [Manage Console User Access](/tidb-cloud/manage-user-access.md)
   - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
 - Billing
-  - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
-  - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
-  - [Data Transfer Cost](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
   - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
