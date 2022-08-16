@@ -131,7 +131,9 @@ TiFlash supports up to 2 TiB storage capacity.
 
 ## Performance reference
 
-This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of five popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
+This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of several popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
+
+### 4 vCPU, 8 vCPU, and 16 vCPU performance references
 
 Test environment:
 
@@ -345,5 +347,60 @@ You can click any of the following scales to check its performance data.
     | Read Write        | 2,400   | 146,526 | 7,326   | 172           |
     | Update Index      | 6,000   | 58,856  | 58,856  | 51            |
     | Update Non-index  | 6,000   | 128,601 | 128,601 | 24            |
+
+</details>
+
+### 2 vCPU performance reference
+
+Currently, the 2 vCPU support of TiDB and TiKV is still in beta.
+
+Test environment:
+
+- TiDB version: v6.1.0
+- Warehouses: 1000
+- Data size: 80 G
+- Table size: 10000000
+- Table count: 32
+
+You can check its performance data as follows:
+
+<details>
+<summary>TiDB: 2 vCPU * 2; TiKV: 2 vCPU * 3</summary>
+
+- Optimal performance with low latency
+
+    TPC-C performance:
+
+    | Transaction model | Threads | tpmC   | Latency (ms) |
+    |-------------------|---------|--------|--------|
+    | TPCC              | 25      | 4486 | 2.24 |
+
+    Sysbench OLTP performance:
+
+    | Transaction model | Threads | TPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|
+    | Insert            | 25   | 2508  | 7.92         |
+    | Point Select      | 50      | 16858 | 1.72         |
+    | Read Write        | 50      | 360   | 4.95         |
+    | Update Index      | 25      | 1653  | 14.05        |
+    | Update Non-index  | 25      | 2800  | 8.02 |
+
+- Maximum TPS and QPS
+
+    TPC-C performance:
+
+    | Transaction model | Threads | tpmC | Latency (ms) |
+    | ----------------- | ------- | ---- | ------------ |
+    | TPCC              | 100     | 7592 | 6.68         |
+
+    Sysbench OLTP performance:
+
+    | Transaction model | Threads | TPS    | Latency (ms) |
+    |-------------------|---------|--------|--------|
+    | Insert            | 100     | 6147  | 14.77        |
+    | Point Select      | 100     | 19462 | 3.21         |
+    | Read Write        | 100     | 378 | 9.58         |
+    | Update Index      | 100     | 3140 | 30.34        |
+    | Update Non-index  | 100     | 5805  | 15.92 |
 
 </details>
