@@ -118,7 +118,7 @@ TiDB Cloud offers a certain number of credits for Proof of Concept (PoC) users. 
 
 > **Tip:**
 >
-> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md)
+> To apply for a PoC, see [Perform a Proof of Concept (PoC) with TiDB Cloud](/tidb-cloud/tidb-cloud-poc.md).
 
 The detailed information of your credits is available on the **Credits** page, including your total credits, available credits, current usage, and the status.
 
@@ -137,8 +137,8 @@ To view this page, perform the following steps:
 >
 > During a PoC process:
 >
-> - if all your credits become expired before you add a payment method, you cannot creat a new cluster. After 3 days, all your created clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
-> - if all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
+> - If all your credits become expired before you add a payment method, you cannot create a new cluster. After 3 days, all your existing clusters will be recycled. After 7 days, all your backups will be recycled. To resume the process, you can add a payment method.
+> - If all your credits become expired after you add a payment method, your PoC process goes on, and fees are deducted from your payment method.
 
 ## Payment method
 
