@@ -2003,7 +2003,7 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
-- Indicates the start-up cost of TiDB to request data from TiKV. It's used by the [Cost Model](/cost-model.md).
+- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md).
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
 
