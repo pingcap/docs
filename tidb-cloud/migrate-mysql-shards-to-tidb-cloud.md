@@ -166,31 +166,13 @@ This document uses the Amazon S3 as an example. The following example only lists
 
 ### Step 5. Perform the data import task
 
-After configuring the IAM Role, you can perform the data import task on the Data Import Task page.
-
-Fill in the following information:
+After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters). You need to fill in the following information:
 
 - Data Source Type: AWS S3.
-- Bucket URL: fill in the bucket URL of your source data.
+- Bucket URL: fill in the bucket URL of your source data. you can use the second level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that is to be merged into `store.sales` can be imported in one go.
 - Data Format: choose the format of your data.
 - Target Cluster: fill in the Username and Password fields.
 - DB/Tables Filter: if necessary, you can specify a table filter. If you want to configure multiple filter rules, use , to separate the rules.
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image5.png "image_tooltip")
-
-For **Bucket URL**, you can use the second level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that is to be merged into `store.sales` can be imported in one go.
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image6.png "image_tooltip")
-
-The format of Object Name Pattern is `*{schema prefix}*.{table prefix}*`, for example `*store*.sale*`
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-![alt_text](images/image7.png "image_tooltip")
 
 ## 增量数据同步
 
