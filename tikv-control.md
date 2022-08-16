@@ -46,7 +46,7 @@ OPTIONS:
         --ca-path <ca-path>              Set the CA certificate path
         --cert-path <cert-path>          Set the certificate path
         --config <config>                TiKV config path, by default it's <deploy-dir>/conf/tikv.toml
-        --data-dir <data-dir>            TiKV data-dir, check <deploy-dir>/scripts/run.sh to get it
+        --data-dir <data-dir>            TiKV data directory path, check <deploy-dir>/scripts/run.sh to get it
         --decode <decode>                Decode a key in escaped format
         --encode <encode>                Encode a key in escaped format
         --to-hex <escaped-to-hex>        Convert an escaped key to hex key
