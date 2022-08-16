@@ -341,7 +341,7 @@ This variable is an alias for `last_insert_id`.
 - Type: Integer
 - Default value: `-1`
 - Range: `[-1, 1048576]`
-- Indicates the maximum number of [`PREPARE` statement](/sql-statements/sql-statement-prepare.md) of a session.
+- Specifies the maximum number of [`PREPARE`](/sql-statements/sql-statement-prepare.md)  statements in a session.
 - The value of `-1` means no limit on the maximum number of `PREPARE` statements in a session.
 - If you set it to a value that exceeds the maximum number, `1048576` will be used:
 
