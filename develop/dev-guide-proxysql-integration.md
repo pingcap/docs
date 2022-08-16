@@ -5,7 +5,17 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 
 # Integrate TiDB with ProxySQL
 
+<CustomContent platform="tidb">
+
 This document describes how to integrate **TiDB** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+This document describes how to integrate **TiDB Cloud** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
+
+</CustomContent>
 
 - [TiDB Documentation](/overview.md)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
@@ -15,6 +25,8 @@ This document describes how to integrate **TiDB** with **ProxySQL** using CentOS
 ## 1. Start TiDB
 
 ### Test environment
+
+<CustomContent platform="tidb">
 
 <SimpleTab groupId="startup-tidb">
 
@@ -68,7 +80,17 @@ You can refer to [Build a TiDB cluster in TiDB Cloud (Developer Tier)](/develop/
 
 </SimpleTab>
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+You can refer to [Build a TiDB cluster in TiDB Cloud (Developer Tier)](/develop/dev-guide-build-cluster-in-cloud.md).
+
+</CustomContent>
+
 ### Production environment
+
+<CustomContent platform="tidb">
 
 <SimpleTab groupId="startup-tidb">
 
@@ -85,6 +107,14 @@ The production environment requires more steps than the test environment. To dep
 </div>
 
 </SimpleTab>
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+It is recommended to use [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) directly when you need hosting TiDB services (for example, you cannot manage it yourself, or you need a cloud-native environment). To build a TiDB cluster in a production environment, refer to [Create a TiDB cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
+
+</CustomContent>
 
 ## 2. Start ProxySQL
 
