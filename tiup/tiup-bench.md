@@ -117,14 +117,6 @@ Flags:
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
     ```
 
-7. Clean up data:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup bench tpcc cleanup
-    ```
-
 ## Run TPC-H test using TiUP
 
 The TiUP bench component supports the following commands and parameters to run the TPC-H test:
