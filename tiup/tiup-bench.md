@@ -64,9 +64,7 @@ Available Commands:
 Flags:
       --check-all        Run all consistency checks
   -h, --help             help for tpcc
-      --output-dir string    Output directory for generating csv file when preparing data
       --parts int        Number to partition warehouses (default 1)
-      --tables string    Specified tables for generating file, separated by ','. Valid only if output is set. If this flag is not set, generate all tables by default.
       --warehouses int   Number of warehouses (default 10)
 ```
 
