@@ -16,7 +16,7 @@ To learn the standard upgrade process, see the following documents:
 >
 > - An experimental feature introduced in v6.2.0, [FastScan](/develop/dev-guide-use-fastscan.md) provides more efficient query performance at the cost of strong data consistency. Note that the form and usage of this feature might change in subsequent versions.
 >
-> - It is not recommended that you upgrade TiFlash across major versions, for example, from v4.x to v6.x. Instead, you need to upgrade from v4.x to v5.x first, and then to v6.x.
+> - It is not recommended that you upgrade TiDB that includes TiFlash across major versions, for example, from v4.x to v6.x. Instead, you need to upgrade from v4.x to v5.x first, and then to v6.x.
 >
 > - v4.x is near the end of its life cycle. It is recommended that you upgrade to v5.x or later as soon as possible. For more information, see [TiDB Release Support Policy](https://en.pingcap.com/tidb-release-support-policy/).
 >
