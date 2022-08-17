@@ -47,18 +47,18 @@ The version of TiDB Cloud cluster is v6.0.0. The sharded schemas and tables are 
 
 ## Perform full data migration from MySQL to TiDB Cloud
 
-The following is the procedure to migrate and merge MySQL shards to TiDB Cloud.
+The following is the procedure to migrate and merge full data of MySQL shards to TiDB Cloud.
 
-Note that in this example, you only need to export tables and they must be in the **CSV** format.
+In the following example, you only need to export tables and they must be in the **CSV** format.
 
 ### Step 1. Create directories in the Amazon S3 bucket
 
-Create a first level directory `store` (corresponding to the level of schemas)and a second level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third level directory for each MySQL instance (corresponding to the level of instances). For example:
+Create a first-level directory `store` (corresponding to the level of schemas) and a second-level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third-level directory for each MySQL instance (corresponding to the level of instances). For example:
 
 - Migrate the data in MySQL instance1 to `s3://dumpling-s3/store/sales/instance01/`
 - Migrate the data in MySQL instance2 to `s3://dumpling-s3/store/sales/instance02/`
 
-If there are shards across multiple instances, you can create a first level directory for each schema and create a second level directory for each sharded table. Then create a third level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
+If there are shards across multiple instances, you can create a first-level directory for each schema and create a second-level directory for each sharded table. Then create a third-level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
 
 - `s3://dumpling-s3/stock/products/instance01/`
 - `s3://dumpling-s3/stock/products/instance02/`
@@ -161,7 +161,7 @@ This document uses the Amazon S3 as an example. The following example only lists
 After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters). You need to fill in the following information:
 
 - Data Source Type: AWS S3.
-- Bucket URL: fill in the bucket URL of your source data. you can use the second level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that is to be merged into `store.sales` can be imported in one go.
+- Bucket URL: fill in the bucket URL of your source data. you can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that is to be merged into `store.sales` can be imported in one go.
 - Data Format: choose the format of your data.
 - Target Cluster: fill in the Username and Password fields.
 - DB/Tables Filter: if necessary, you can specify a table filter. If you want to configure multiple filter rules, use , to separate the rules.
