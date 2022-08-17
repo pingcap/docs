@@ -153,7 +153,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 -   デフォルト値: `64`
 -   現在、有効な値の範囲は`[64, 512]`です。
 
-### <code>enable-telemetry</code><span class="version-mark">新機能</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-span}
+### <code>enable-telemetry</code> <span class="version-mark">telemetry v4.0.2 の新機能</span> {#code-enable-telemetry-code-span-class-version-mark-new-in-v4-0-2-span}
 
 -   TiDB でのテレメトリ収集を有効または無効にします。
 -   デフォルト値: `true`
@@ -235,7 +235,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   実行計画をスロー ログに記録するかどうかを決定します。
 -   デフォルト値: `1`
--   `0`は無効を意味し、 `1` (デフォルト) は有効を意味します。このパラメータの値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の初期値です。
+-   `0`は無効にすることを意味し、 `1` (デフォルト) は有効にすることを意味します。このパラメータの値は、システム変数[`tidb_record_plan_in_slow_log`](/system-variables.md#tidb_record_plan_in_slow_log)の初期値です。
 
 ### <code>expensive-threshold</code> {#code-expensive-threshold-code}
 
@@ -291,20 +291,20 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
 
 -   セキュリティ拡張モード (SEM) を有効にします。
 -   デフォルト値: `false`
--   SEM のステータスは、システム変数[`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)で取得できます。
+-   SEM のステータスは、システム変数[`tidb_enable_enhanced_security`](/system-variables.md#tidb_enable_enhanced_security)から取得できます。
 
 ### <code>ssl-ca</code> {#code-ssl-ca-code}
 
 -   PEM 形式の信頼できる CA 証明書のファイル パス。
 -   デフォルト値: &quot;&quot;
--   このオプションと`--ssl-cert` 、 `--ssl-key`を同時に設定すると、TiDB は、クライアントが証明書を提示するときに、このオプションで指定された信頼できる CA のリストに基づいてクライアント証明書を認証します。認証に失敗すると、接続が終了します。
+-   このオプションと`--ssl-cert` 、 `--ssl-key`を同時に設定すると、TiDB は、クライアントが証明書を提示するときに、このオプションで指定された信頼できる CA のリストに基づいてクライアント証明書を認証します。認証に失敗すると、接続は終了します。
 -   このオプションを設定してもクライアントが証明書を提示しない場合、クライアント証明書認証なしでセキュア接続が続行されます。
 
 ### <code>ssl-cert</code> {#code-ssl-cert-code}
 
 -   PEM 形式の SSL 証明書のファイル パス。
 -   デフォルト値: &quot;&quot;
--   このオプションと`--ssl-key`を同時に設定すると、TiDB はクライアントが TLS を使用して TiDB に安全に接続することを許可します (強制はしません)。
+-   このオプションと`--ssl-key`を同時に設定すると、TiDB は、クライアントが TLS を使用して TiDB に安全に接続することを許可します (強制はしません)。
 -   指定された証明書または秘密鍵が無効な場合、TiDB は通常どおり起動しますが、安全な接続を受け取ることができません。
 
 ### <code>ssl-key</code> {#code-ssl-key-code}
@@ -431,7 +431,7 @@ TiDB 構成ファイルは、コマンドライン パラメーターよりも�
     -   `5 * stats-lease`の間隔で、TiDB はシステム テーブルのフィードバックを読み取り、メモリにキャッシュされた統計を更新します。
 -   `stats-lease`を 0 に設定すると、TiDB は定期的にシステム テーブルのフィードバックを読み取り、メモリにキャッシュされた統計を 3 秒ごとに更新します。ただし、TiDB は次の統計関連のシステム テーブルを自動的に変更しなくなりました。
     -   `mysql.stats_meta` : TiDB は、トランザクションによって変更されたテーブル行の数を自動的に記録しなくなり、それをこのシステム テーブルに更新します。
-    -   `mysql.stats_histograms` / `mysql.stats_buckets`および`mysql.stats_top_n` : TiDB は統計を自動的に分析し、積極的に更新しなくなりました。
+    -   `mysql.stats_histograms` / `mysql.stats_buckets`および`mysql.stats_top_n` : TiDB は統計を自動的に分析し、プロアクティブに更新しなくなりました。
     -   `mysql.stats_feedback` : TiDB は、クエリされたデータによって返された統計の一部に従って、テーブルとインデックスの統計を更新しなくなりました。
 
 ### <code>run-auto-analyze</code> {#code-run-auto-analyze-code}
@@ -590,7 +590,7 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 
 -   トランザクションコミット実行時の最大タイムアウト。
 -   デフォルト値: `41s`
--   この値をRaft選択タイムアウトの 2 倍より大きく設定する必要があります。
+-   この値をRaft選択タイムアウトの 2 倍よりも大きく設定する必要があります。
 
 ### <code>max-batch-size</code> {#code-max-batch-size-code}
 
@@ -616,7 +616,7 @@ opentracing.reporter に関するConfiguration / コンフィグレーション�
 
 ## tikv-client.copr-cache v4.0.0 の<span class="version-mark">新機能</span> {#tikv-client-copr-cache-span-class-version-mark-new-in-v4-0-0-span}
 
-このセクションでは、コプロセッサ キャッシュ機能に関連する設定項目を紹介します。
+このセクションでは、コプロセッサ キャッシュ機能に関連する構成アイテムを紹介します。
 
 ### <code>capacity-mb</code> {#code-capacity-mb-code}
 
@@ -719,13 +719,38 @@ TiDB サービスのステータスに関するConfiguration / コンフィグ�
 -   [`INFORMATION_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロック エラーの情報を収集するかどうかを制御します。再試行可能なデッドロック エラーの説明については、 [再試行可能なデッドロック エラー](/information-schema/information-schema-deadlocks.md#retryable-deadlock-errors)を参照してください。
 -   デフォルト値: `false`
 
+## 分離読み取り {#isolation-read}
+
+読み取り分離に関連するConfiguration / コンフィグレーション項目。
+
+### <code>engines</code> {#code-engines-code}
+
+-   TiDB がデータの読み取りを許可するエンジンを制御します。
+-   デフォルト値: [&quot;tikv&quot;, &quot;tiflash&quot;, &quot;tidb&quot;]。エンジンがオプティマイザによって自動的に選択されることを示します。
+-   値のオプション: 「tikv」、「tiflash」、および「tidb」の任意の組み合わせ。たとえば、[&quot;tikv&quot;, &quot;tidb&quot;] または [&quot;tiflash&quot;, &quot;tidb&quot;]
+
+## プロキシプロトコル {#proxy-protocol}
+
+PROXY プロトコルに関するConfiguration / コンフィグレーション項目です。
+
+### <code>networks</code> {#code-networks-code}
+
+-   [プロキシ プロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト
+-   デフォルト値: &quot;&quot;
+-   一般に、リバース プロキシの背後にある TiDB にアクセスすると、TiDB はリバース プロキシ サーバーの IP アドレスをクライアントの IP アドレスとして取得します。 PROXY プロトコルを有効にすることで、このプロトコルをサポートする HAProxy などのリバース プロキシは、実際のクライアント IP アドレスを TiDB に渡すことができます。
+-   このパラメータを設定すると、TiDB は、設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続できるようにします。 PROXY 以外のプロトコルが使用されている場合、この接続は拒否されます。このパラメーターを空のままにすると、PROXY プロトコルを使用して IP アドレスが TiDB に接続できなくなります。値は、IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) で、区切り記号として`,`を使用できます。 `*`は任意の IP アドレスを意味します。
+
+> **警告：**
+>
+> `*`を使用すると、任意の IP アドレスのクライアントがその IP アドレスを報告できるようになり、セキュリティ上のリスクが生じる可能性があるため、注意して使用してください。さらに、 `*`を使用すると、TiDB に直接接続する内部コンポーネント (TiDB ダッシュボードなど) が使用できなくなる可能性もあります。
+
 ## 実験的 {#experimental}
 
 v3.1.0 で導入された`experimental`セクションでは、TiDB の実験的機能に関連する構成について説明します。
 
 ### <code>allow-expression-index</code> <span class="version-mark">v4.0.0 の新機能</span> {#code-allow-expression-index-code-span-class-version-mark-new-in-v4-0-0-span}
 
--   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0 以降、式の関数が安全な場合、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が存在する可能性があります。 `tidb_allow_function_for_expression_index`変数を照会することにより、式の作成に直接使用しても安全な関数を取得できます。
+-   式インデックスを作成できるかどうかを制御します。 TiDB v5.2.0 以降、式の関数が安全な場合、この構成を有効にしなくても、この関数に基づいて式インデックスを直接作成できます。他の関数に基づいて式インデックスを作成する場合は、この構成を有効にできますが、正確性の問題が存在する可能性があります。 `tidb_allow_function_for_expression_index`変数を照会することで、式の作成に直接使用しても安全な関数を取得できます。
 -   デフォルト値: `false`
 
 ### <code>stats-load-concurrency</code> <span class="version-mark">v5.4.0 の新機能</span> {#code-stats-load-concurrency-code-span-class-version-mark-new-in-v5-4-0-span}
@@ -742,7 +767,7 @@ v3.1.0 で導入された`experimental`セクションでは、TiDB の実験的
 
 > **警告：**
 >
-> 現在、統計の同期読み込みは実験的機能です。本番環境で使用することはお勧めしません。
+> 現在、統計の同期読み込みは実験的機能です。実稼働環境で使用することはお勧めしません。
 
 -   TiDB 同期ロード統計機能がキャッシュできる列リクエストの最大数。
 -   デフォルト値: `1000`
