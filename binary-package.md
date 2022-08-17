@@ -5,13 +5,13 @@ summary: Learn about TiDB installation packages and the specific components incl
 
 # TiDB Installation Packages
 
-Before [deploying TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline), navigate to the [official download interface](https://en.pingcap.com/download/) to download the offline mirror packages of the TiDB server.
+Before [deploying TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline), you need to download the binary packages of TiDB at the [official download page](https://en.pingcap.com/download/).
 
-TiDB provides two binary offline packages: `TiDB-community-server` and `TiDB-community-toolkit`
+TiDB provides two binary packages: `TiDB-community-server` and `TiDB-community-toolkit`
 
-The `TiDB-community-server` package contains the following components.
+The `TiDB-community-server` package contains the following contents.
 
-| Component | Change History |
+| Content | Change History |
 |---|---|
 | tidb-{version}-linux-amd64.tar.gz |  |
 | tikv-{version}-linux-amd64.tar.gz |  |
@@ -32,9 +32,9 @@ The `TiDB-community-server` package contains the following components.
 | influxdb-{version}-linux-amd64.tar.gz |  |
 | playground-{version}-linux-amd64.tar.gz |  |
 
-The `TiDB-community-toolkit` package contains the following components.
+The `TiDB-community-toolkit` package contains the following contents.
 
-| Component | Change History |
+| contents | Change History |
 |---|---|
 | tikv-importer-{version}-linux-amd64.tar.gz |  |
 | pd-recover-{version}-linux-amd64.tar.gz |  |
