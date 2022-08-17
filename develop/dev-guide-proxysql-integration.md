@@ -9,15 +9,16 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 
 This document describes how to integrate **TiDB** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
 
+- [TiDB Documentation](/overview.md)
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 This document describes how to integrate **TiDB Cloud** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
 
+- [TiDB Cloud Documentation](/tidb-cloud-intro.md)
 </CustomContent>
 
-- [TiDB Documentation](/overview.md)
 - [TiDB Developer Guide](/develop/dev-guide-overview.md)
 - [ProxySQL Documentation](https://proxysql.com/documentation/)
 - [TiDB with ProxySQL Integration Test](https://github.com/Icemap/tidb-proxysql-integration-test)
