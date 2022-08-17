@@ -112,7 +112,7 @@ The production environment requires more steps than the test environment. To dep
 
 <CustomContent platform="tidb-cloud">
 
-It is recommended to use [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) directly when you need hosting TiDB services (for example, you cannot manage it yourself, or you need a cloud-native environment). To build a TiDB cluster in a production environment, refer to [Create a TiDB cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
+To build a TiDB cluster in a production environment, refer to [Create a TiDB cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
 
 </CustomContent>
 
