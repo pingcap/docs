@@ -115,19 +115,7 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
-<<<<<<< HEAD
-    tiup bench tpcc --warehouses 4 prepare --output data --tables history,orders
-    ```
-
-7. Enable pprof:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data --pprof :10111
-=======
     tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
->>>>>>> 03bc01f14 (tiup bench: modify command from --output to --output-dir (#10028))
     ```
 
 ## Run TPC-H test using TiUP
