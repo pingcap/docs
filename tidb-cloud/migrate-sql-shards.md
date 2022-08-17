@@ -43,7 +43,7 @@ The version of DM is v5.3.0. The details are as follows:
 
 ### Downstream cluster
 
-The version of TiDB Cloud cluster is v6.0.0, and the combined library and tables are merged to the table `store.sales`.
+The version of TiDB Cloud cluster is v6.0.0. The sharded schemas and tables are merged into the table `store.sales`.
 
 ## Perform full data migration from MySQL to TiDB Cloud
 
@@ -106,7 +106,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys.  conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
 
 Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index.
 
