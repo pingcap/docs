@@ -42,7 +42,7 @@ To connect to a cluster in TiDB Cloud, you can use one of the following methods:
 
 - Connect via standard connection, which allows you to create [traffic filters](/tidb-cloud/tidb-cloud-glossary.md#traffic-filter) for the cluster to secure user access.
 - Connect via VPC peering connection, which is a networking connection between two VPCs that enables you to route traffic between them using private IP addresses.
-- Connect via web SQL shell in the TiDB Cloud console
+- Connect via web SQL shell in the TiDB Cloud console.
 
 For more information, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
 
