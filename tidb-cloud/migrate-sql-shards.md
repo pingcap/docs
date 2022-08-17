@@ -15,7 +15,7 @@ This section describes the basic information of the upstream cluster, DM, and do
 
 ### Upstream cluster
 
-The version of the upstream cluster is MySQL v5.7.18. The specific information is as follows.
+The version of the upstream cluster is MySQL v5.7.18. The specific information is as follows:
 
 - MySQL instance1:
     - schema `store_01` and table `[sale_01, sale_02]`
@@ -68,8 +68,8 @@ If there are shards across multiple instances, you can create a first-level dire
 When you use Dumpling to export data to Amazon S3, note the following:
 
 - Enable binlog for upstream clusters.
-- Choose the correct Amazon S3 directory and Region zone.
-- Choose the appropriate concurrency by configuring `-t` to minimize the impact on the upstream cluster, or export directly from the backup database.
+- Choose the correct Amazon S3 directory and region.
+- Choose the appropriate concurrency by configuring `-t` to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Dumpling Overview](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 - Set appropriate values for `--filetype csv` and `--no-schemas`.
 
 To export data to Amazon S3, do the following:
@@ -86,6 +86,7 @@ To export data to Amazon S3, do the following:
     ```shell
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
+    For more information about the parameters, see [Dumpling Overview](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
 
@@ -108,7 +109,7 @@ Database changed
 
 In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
 
-Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index.
+Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index:
 
 ```sql
 mysql> CREATE TABLE `sales` (
@@ -160,19 +161,19 @@ This document uses the Amazon S3 as an example. The following example only lists
 
 After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters). You need to fill in the following information:
 
-- Data Source Type: AWS S3.
-- Bucket URL: fill in the bucket URL of your source data. you can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that is to be merged into `store.sales` can be imported in one go.
-- Data Format: choose the format of your data.
-- Target Cluster: fill in the Username and Password fields.
-- DB/Tables Filter: if necessary, you can specify a table filter. If you want to configure multiple filter rules, use , to separate the rules.
+- **Data Source Type**: `AWS S3`.
+- **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that will be merged into `store.sales` can be imported in one go.
+- **Data Format**: choose the format of your data.
+- **Target Cluster**: fill in the **Username** and **Password** fields.
+- **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidbcloud/table-filter#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
 
-## Perform incremental data migration from MySQL to TiDB Cloud
+## Perform incremental data replication from MySQL to TiDB Cloud
 
-To replicate the data changes based on binlog from a specified position in the source database to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental migration.
+To replicate the data changes based on binlog from a specified position in the source database to TiDB Cloud, you can use TiDB Data Migration (DM) to perform incremental replication.
 
 ### Before you begin
 
-TiDB Cloud does not provide any feature about incremental data migration yet. You need to deploy TiDB Data Migration (DM) manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+TiDB Cloud does not provide any feature about incremental data replication yet. You need to deploy TiDB Data Migration (DM) manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Step 1. Add the data source
 
@@ -390,7 +391,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 
 ### Step 3. Start the migration task
 
-Use `tiup dmctl` to run the following command to start the data migration task.
+Use `tiup dmctl` to run the following command to start the data migration task:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  start-task dm-task.yaml
