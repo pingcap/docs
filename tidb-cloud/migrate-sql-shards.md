@@ -106,7 +106,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of  `sale_01` and `sale_02` are auto-increment primary keys.  conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
+In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys.  conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
 
 Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index.
 
