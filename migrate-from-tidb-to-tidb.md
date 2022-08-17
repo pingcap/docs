@@ -274,7 +274,7 @@ After creating a changefeed, data written to the upstream cluster is replicated 
         "summary": {
         "state": "stopped",  # Ensure that the status is stopped
         "tso": 431747241184329729,
-        "checkpoint": "2022-03-11 15:50:20.387", # This time should be later than the time of stopping writing
+        "checkpoint": "2022-03-11 15:50:20.387", # This time must be later than the time of stopping writing
         "error": null
         }
       }

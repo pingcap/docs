@@ -1,9 +1,9 @@
 ---
-title: Migrate Dta from TiDB to MySQL-compatible Databases
+title: Migrate Data from TiDB to MySQL-compatible Databases
 summary: Learn how to migrate data from TiDB to MySQL-compatible databases.
 ---
 
-# Migrate Dta from TiDB to MySQL-compatible Databases
+# Migrate Data from TiDB to MySQL-compatible Databases
 
 This document describes how to migrate data from TiDB clusters to MySQL-compatible databases, such as Aurora, MySQL, and MariaDB. The whole process contains four steps:
 
@@ -78,7 +78,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
         tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o ./dumpling_output -r 200000 -F256MiB
         ```
 
-    2. After finishing exporting data，run the following command to check the metadata. `Pos` in the metadata is the TSO of the export snapshot and can be recorded as the BackupTS.
+    2. After finishing exporting data, run the following command to check the metadata. `Pos` in the metadata is the TSO of the export snapshot and can be recorded as the BackupTS.
 
         ```shell
         [root@test ~]# cat dumpling_output/metadata
@@ -135,7 +135,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 1. Deploy TiCDC.
 
-    After finishing full data migration, deploy and configure a TiCDC to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test cluster. Therefore, you can skip the step of deploying TiCDC and proceed with changefeed configuration.
+    After finishing full data migration, deploy and configure a TiCDC cluster to replicate incremental data. In production environments, deploy TiCDC as instructed in [Deploy TiCDC](/ticdc/deploy-ticdc.md). In this document, a TiCDC node has been started upon the creation of the test cluster. Therefore, you can skip the step of deploying TiCDC and proceed with the next step to create a changefeed.
 
 2. Create a changefeed.
 
@@ -149,14 +149,14 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
     - `--pd`: PD address of the upstream cluster
     - `--sink-uri`: URI of the downstream cluster
-    - `--changefeed-id`: changefeed ID, must be in the format of a regular expression, ^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$
+    - `--changefeed-id`: changefeed ID, must be in the format of a regular expression, `^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`
     - `--start-ts`: start timestamp of the changefeed, must be the backup time (or BackupTS in the "Back up data" section in [Step 2. Migrate full data](#step-2-migrate-full-data))
 
     For more information about the changefeed configurations, see [Task configuration file](/ticdc/manage-ticdc.md#task-configuration-file).
 
 3. Enable GC.
 
-    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint). 
+    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint). 
 
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
@@ -172,7 +172,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 ## Step 4. Switch services
 
-After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read stream to the downstream cluster gradually. Observe a period. If the downstream cluster is stable, you can switch write stream to the downstream cluster as well in the following steps:
+After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read stream to the downstream cluster gradually. Observe the read stream for a period. If the downstream cluster is stable, you can switch write stream to the downstream cluster as well in the following steps:
 
 1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
 
