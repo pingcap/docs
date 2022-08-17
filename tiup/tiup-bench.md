@@ -106,7 +106,7 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output-dir data
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
 6. Generate the CSV file for the specified table:
@@ -114,18 +114,10 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output-dir data --tables history,orders
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
     ```
 
-7. Enable pprof:
-
-    {{< copyable "shell-regular" >}}
-
-    ```shell
-    tiup bench tpcc --warehouses 4 prepare --output-dir data --pprof :10111
-    ```
-
-8. Clean up data:
+7. Clean up data:
 
     {{< copyable "shell-regular" >}}
 
