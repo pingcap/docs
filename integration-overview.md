@@ -9,8 +9,8 @@ Data integration means the flow, transfer, and consolidation of data among vario
 
 ## Integrate with Confluent Cloud
 
-You can use TiCDC to replicate TiDB incremental data to Confluent Cloud, and replicate the data to to ksqlDB, Snowflake, and SQL Server via Confluent Cloud. For details, see [Integrate with Confluent Cloud](/ticdc/integrate-confluent-using-ticdc.md).
+You can use TiCDC to replicate incremental data from TiDB to Confluent Cloud, and replicate the data to ksqlDB, Snowflake, and SQL Server via Confluent Cloud. For details, see [Integrate with Confluent Cloud](/ticdc/integrate-confluent-using-ticdc.md).
 
 ## Integrate with Apache Kafka and Apache Flink
 
-You can use TiCDC to replicate TiDB incremental data to Apache Kafka, and consume the data using Apache Flink. For details, see [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md).
+You can use TiCDC to replicate incremental data from TiDB to Apache Kafka, and consume the data using Apache Flink. For details, see [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md).
