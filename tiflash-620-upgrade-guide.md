@@ -71,7 +71,7 @@ By default, TiFlash v6.2.0 uses PageStorage V3 version [`format_version = 4`](/t
 
     2. Restart the TiFlash node.
 
-You can check whether there are tables still using the old data format on Grafana: Tiflash summary > storage pool > Storage Pool Run Mode.
+You can check whether tables still use the old data format on Grafana: **TiFlash-Summary** > **Storage Pool** > **Storage Pool Run Mode**.
 
 - Only V2: Number of tables using PageStorage V2 (including partitions)
 - Only V3: Number of tables using PageStorage V3 (including partitions)
