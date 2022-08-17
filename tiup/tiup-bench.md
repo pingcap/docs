@@ -64,9 +64,7 @@ Available Commands:
 Flags:
       --check-all        Run all consistency checks
   -h, --help             help for tpcc
-      --output string    Output directory for generating csv file when preparing data
       --parts int        Number to partition warehouses (default 1)
-      --tables string    Specified tables for generating file, separated by ','. Valid only if output is set. If this flag is not set, generate all tables by default.
       --warehouses int   Number of warehouses (default 10)
 ```
 
@@ -109,7 +107,7 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
 6. Generate the CSV file for the specified table:
@@ -117,6 +115,7 @@ Flags:
     {{< copyable "shell-regular" >}}
 
     ```shell
+<<<<<<< HEAD
     tiup bench tpcc --warehouses 4 prepare --output data --tables history,orders
     ```
 
@@ -126,6 +125,9 @@ Flags:
 
     ```shell
     tiup bench tpcc --warehouses 4 prepare --output data --pprof :10111
+=======
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
+>>>>>>> 03bc01f14 (tiup bench: modify command from --output to --output-dir (#10028))
     ```
 
 ## Run TPC-H test using TiUP
