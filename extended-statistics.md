@@ -5,9 +5,9 @@ summary: Learn how to use extended statistics to guide the optimizer.
 
 # Introduction to Extended Statistics
 
-The statistics mentioned in the [Introduction to Statistics](/statistics.md) section, including histograms and Count-Min Sketch, are regular statistics. This information is collected each time statistics are collected manually or automatically. Another class of statistics, as opposed to common statistics, is extended statistics, which are only helpful for optimizer estimation in a specific scenario.
+The statistics mentioned in the [Introduction to Statistics](/statistics.md) section, including histograms and Count-Min Sketch, are common statistics. This information is collected each time statistics are collected manually or automatically. Another class of statistics, as opposed to common statistics, is extended statistics, which are only helpful for optimizer estimation in a specific scenario.
 
-Since they are only helpful in specific scenarios, extended statistics are not collected during the default manual or automatic `ANALYZE` to avoid the overhead of managing statistics. If you want to collect extended statistics, you need to "register" them with SQL commands first. Then TiDB will collect these registered extended statistics in addition to the regular statistics the next time you manually or automatically `ANALYZE`.
+Since they are only helpful in specific scenarios, extended statistics are not collected during the default manual or automatic `ANALYZE` to avoid the overhead of managing statistics. If you want to collect extended statistics, you need to "register" them with SQL commands first. Then TiDB will collect these registered extended statistics in addition to the common statistics the next time you manually or automatically `ANALYZE`.
 
 # The registration of the Extended Statistics
 
@@ -32,7 +32,7 @@ The extended statistics will be collected if the `mysql.stats_extended` has the 
 
 ### Correlation
 
-This is the only supported type of extended statistics. The registration SQL is like the following:
+The registration SQL is like the following:
 
 {{< copyable "sql" >}}
 
@@ -52,7 +52,7 @@ For a table `t` described below：
 CREATE TABLE t(col1 INT, col2 INT, KEY(col1), KEY(col2));
 ```
 
-Suppose that the `col1` and `col2` of the table `t` both obey monotonically increasing constraints in row order, i.e., the values of `col1` and `col2` are strictly correlated in order (correlation value of 1):
+Suppose that the `col1` and `col2` of the table `t` both obey monotonically increasing constraints in row order, i.e., the values of `col1` and `col2` are strictly correlated in order (the value of the correlation is 1):
 
 {{< copyable "sql" >}}
 
@@ -74,11 +74,17 @@ The above estimation plus one will be the final estimation for the condition. Th
 The optimizer will use the independent assumption if the correlation factor is less than the system variable `tidb_opt_correlation_threshold`. But it will increase the estimation heuristically. The larger the system variable `tidb_opt_correlation_exp_factor` is, the larger the estimation result is. The larger the absolute value of the correlation factor is, the larger the estimation result is.
 
 ## The collection of the Extended Statistics
-After registration, the TiDB will collect the extended statistic after triggering the ANALYZE command manually or automatically. TiDB will not collect the extended statistics if we only collect the indexes' statistics. It also will not collect it if it's `ANALYZE INCREMENTAL` or the `tidb_enable_fast_analyze` is true.
 
-## The cache of the Extended Statistics
+After registration, TiDB collects the extended statistic with the ANALYZE command manually or automatically, except below scenarios:
+
+- Statistics collection on indexes only
+- Statistics collection with `ANALYZE INCREMENTAL` command
+- Statistics collection with variable `tidb_enable_fast_analyze` is true
+
+## The deletion of the Extended Statistics
 
 Each TiDB node will maintain a cache for the extended statistics to improve the efficiency of visiting the extended statistics. TiDB will load the table `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table. Each row in the table `mysql.stats_extended` records a column `version`. Once the row is updated, the value of the column `version` will be increased so that we can load the table into the memory incrementally instead of a full loading.
+
 To delete a record of the extended statistics, TiDB provides the following command:
 
 {{< copyable "sql" >}}
