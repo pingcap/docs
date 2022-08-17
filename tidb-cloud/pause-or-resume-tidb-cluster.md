@@ -22,12 +22,13 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 > **Note:**
 >
-> - You can only pause a cluster that is in the **Normal** state. If a cluster is in other states such as **Importing** or **Scaling**, you must wait for the current operation to be completed before pausing the cluster.
-> - When a cluster is paused:
->
->     - TiDB Cloud stops collecting the monitoring information of the cluster, and you cannot read data from or write data to the cluster.
->     - TiDB Cloud only charges the cluster for storage cost and does not charge for any other costs.
->     - TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
+> You can only pause a cluster that is in the **Normal** state. If a cluster is in other states such as **Importing** or **Scaling**, you must wait for the current operation to be completed before pausing the cluster.
+
+When a cluster is paused:
+
+- TiDB Cloud stops collecting the monitoring information of the cluster, and you cannot read data from or write data to the cluster.
+- TiDB Cloud only charges the cluster for storage cost and does not charge for any other costs.
+- TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
 
 To pause a cluster, take the following steps:
 
@@ -45,13 +46,11 @@ Depending on your cluster size, it can take up to xxx minutes for the cluster to
 
 ## Resume a TiDB cluster
 
-> **Note:**
->
-> After a paused cluster is resumed:
->
-> - TiDB Cloud resumes collecting the monitoring information of the cluster, and you can read data from or write data to the cluster.
-> - TiDB Cloud resumes charging both compute and storage costs.
-> - TiDB Cloud resumes [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
+After a paused cluster is resumed:
+
+- TiDB Cloud resumes collecting the monitoring information of the cluster, and you can read data from or write data to the cluster.
+- TiDB Cloud resumes charging both compute and storage costs.
+- TiDB Cloud resumes [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
 
 To resume a paused cluster, take the following steps:
 
