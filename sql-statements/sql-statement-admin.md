@@ -10,7 +10,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 
 - [`ADMIN RELOAD`](#admin-reload-statement)
 - [`ADMIN PLUGINS`](#admin-plugins-related-statement)
-- [`ADMIN ... BINDINGS`](#admin-bindings-statement)
+- [`ADMIN ... BINDINGS`](#admin-bindings-related-statement)
 - [`ADMIN REPAIR`](#admin-repair-statement)
 - [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
