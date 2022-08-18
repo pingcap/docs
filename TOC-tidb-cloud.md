@@ -75,6 +75,7 @@
   - Plan Your Cluster
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
+    - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
   - Connect to Your TiDB Cluster
     - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
