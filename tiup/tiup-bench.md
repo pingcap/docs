@@ -3,9 +3,9 @@ title: Stress Test TiDB Using TiUP Bench Component
 summary: Learns how to stress test TiDB with TPC-C and TPC-H workloads using TiUP.
 ---
 
-# TiUPベンチコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
+# TiUP ベンチ コンポーネントを使用した TiDB のストレス テスト {#stress-test-tidb-using-tiup-bench-component}
 
-データベースのパフォーマンスをテストする場合、データベースのストレステストが必要になることがよくあります。これを容易にするために、TiUPはベンチコンポーネントを統合しました。これは、ストレステスト用に[TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/)の2つのワークロードを提供します。コマンドとフラグは次のとおりです。詳細については、 [TPC公式サイト](http://www.tpc.org)を参照してください。
+データベースのパフォーマンスをテストする場合、多くの場合、データベースのストレス テストが必要になります。これを容易にするために、TiUP はストレス テスト用の 2 つのワークロードを提供するベンチ コンポーネントを統合しました: [TPC-C](http://www.tpc.org/tpcc/)と[TPC-H](http://www.tpc.org/tpch/) 。コマンドとフラグは次のとおりです。詳細については、 [TPC公式サイト](http://www.tpc.org)を参照してください。
 
 {{< copyable "" >}}
 
@@ -47,11 +47,11 @@ Flags:
   -U, --user string         Database user (default "root")
 ```
 
-次のセクションでは、TiUPを使用してTPC-CおよびTPC-Hテストを実行する方法について説明します。
+次のセクションでは、TiUP を使用して TPC-C および TPC-H テストを実行する方法について説明します。
 
-## TiUPを使用してTPC-Cテストを実行します {#run-tpc-c-test-using-tiup}
+## TiUP を使用して TPC-C テストを実行する {#run-tpc-c-test-using-tiup}
 
-TiUPベンチコンポーネントは、TPC-Cテストを実行するために次のコマンドとフラグをサポートします。
+TiUP ベンチ コンポーネントは、TPC-C テストを実行するために次のコマンドとフラグをサポートしています。
 
 ```bash
 Available Commands:
@@ -63,15 +63,13 @@ Available Commands:
 Flags:
       --check-all        Run all consistency checks
   -h, --help             help for tpcc
-      --output string    Output directory for generating csv file when preparing data
       --parts int        Number to partition warehouses (default 1)
-      --tables string    Specified tables for generating file, separated by ','. Valid only if output is set. If this flag is not set, generate all tables by default.
       --warehouses int   Number of warehouses (default 10)
 ```
 
-### テスト手順 {#test-procedures}
+### 試験手順 {#test-procedures}
 
-1.  ハッシュを介して4つのパーティションを使用して4つのウェアハウスを作成します。
+1.  ハッシュを介して 4 つのパーティションを使用して 4 つのウェアハウスを作成します。
 
     {{< copyable "" >}}
 
@@ -79,7 +77,7 @@ Flags:
     tiup bench tpcc --warehouses 4 --parts 4 prepare
     ```
 
-2.  TPC-Cテストを実行します。
+2.  TPC-C テストを実行します。
 
     {{< copyable "" >}}
 
@@ -87,7 +85,7 @@ Flags:
     tiup bench tpcc --warehouses 4 run
     ```
 
-3.  データのクリーンアップ：
+3.  データのクリーンアップ:
 
     {{< copyable "" >}}
 
@@ -103,41 +101,25 @@ Flags:
     tiup bench tpcc --warehouses 4 check
     ```
 
-5.  CSVファイルを生成します。
+5.  CSV ファイルを生成します。
 
     {{< copyable "" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv
     ```
 
-6.  指定されたテーブルのCSVファイルを生成します。
+6.  指定したテーブルの CSV ファイルを生成します。
 
     {{< copyable "" >}}
 
     ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data --tables history,orders
+    tiup bench tpcc --warehouses 4 prepare --output-dir data --output-type=csv --tables history,orders
     ```
 
-7.  pprofを有効にします。
+## TiUP を使用して TPC-H テストを実行する {#run-tpc-h-test-using-tiup}
 
-    {{< copyable "" >}}
-
-    ```shell
-    tiup bench tpcc --warehouses 4 prepare --output data --pprof :10111
-    ```
-
-8.  データのクリーンアップ：
-
-    {{< copyable "" >}}
-
-    ```shell
-    tiup bench tpcc cleanup
-    ```
-
-## TiUPを使用してTPC-Hテストを実行します {#run-tpc-h-test-using-tiup}
-
-TiUPベンチコンポーネントは、TPC-Hテストを実行するために次のコマンドとパラメーターをサポートします。
+TiUP ベンチ コンポーネントは、TPC-H テストを実行するために、次のコマンドとパラメーターをサポートしています。
 
 ```bash
 Available Commands:
@@ -152,9 +134,9 @@ Flags:
       --sf int           scale factor
 ```
 
-### テスト手順 {#test-procedures}
+### 試験手順 {#test-procedures}
 
-1.  データを準備する：
+1.  データを準備します。
 
     {{< copyable "" >}}
 
@@ -162,7 +144,7 @@ Flags:
     tiup bench tpch --sf=1 prepare
     ```
 
-2.  次のいずれかのコマンドを実行して、TPC-Hテストを実行します。
+2.  次のいずれかのコマンドを実行して、TPC-H テストを実行します。
 
     -   結果を確認する場合は、次のコマンドを実行します。
 
@@ -180,7 +162,7 @@ Flags:
         tiup bench tpch --sf=1 run
         ```
 
-3.  データのクリーンアップ：
+3.  データのクリーンアップ:
 
     {{< copyable "" >}}
 
