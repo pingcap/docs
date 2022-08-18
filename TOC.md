@@ -56,7 +56,7 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    - [Fast Mode](/develop/dev-guide-read-in-fast-mode.md)
+    - [FastScan](/develop/dev-guide-use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -87,6 +87,7 @@
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-party Support
     - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
+    - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -132,13 +133,14 @@
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
+    - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
-    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
-    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
-    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    - [Use BR to Back Up Cluster Data](/br-usage-backup-for-maintain.md)
+    - [Use BR to Restore Cluster Data](/br-usage-restore-for-maintain.md)
+    - [BR Use Cases](/backup-and-restore-use-cases-for-maintain.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -871,6 +873,7 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - [TiDB Installation Packages](/binary-package.md)
   - v6.1
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
