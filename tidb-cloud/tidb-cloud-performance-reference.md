@@ -123,7 +123,7 @@ Test environment:
 - Table size: 10000000
 - Table count: 16
 
-Test scale:
+Test scales:
 
 - TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3
 - TiDB: 8 vCPU * 4; TiKV: 8 vCPU * 6
@@ -224,8 +224,6 @@ Test scales:
 Test results:
 
 **TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3**
-
-The following is the test results:
 
 - Optimal performance with low latency
 
