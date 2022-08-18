@@ -49,7 +49,7 @@ hide_commit: true
 
 [Upgrade a Cluster](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
 
-[Delete a Cluster](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
+[Pause or Resume a TiDB Cluster](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
 </LearningPath>
 
