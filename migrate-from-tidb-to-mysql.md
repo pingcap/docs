@@ -50,6 +50,10 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
 
 After setting up the environment, you can use [Dumpling](/dumpling-overview.md) to export the full data from the upstream TiDB cluster.
 
+> **Note:**
+>
+> In production clusters, performing a backup with GC disabled might affect cluster performance. It is recommended that you complete this step in off-peak hours.
+
 1. Disable Garbage Collection (GC).
 
     To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted.
@@ -58,6 +62,9 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
     Query OK, 0 rows affected (0.01 sec)
     MySQL [test]> SELECT @@global.tidb_gc_enable;
+    ```
+
+    ```
     +-------------------------+：
     | @@global.tidb_gc_enable |
     +-------------------------+
@@ -65,10 +72,6 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     +-------------------------+
     1 row in set (0.00 sec)
     ```
-
-    > **Note:**
-    >
-    > In production clusters, exporting data with GC disabled might affect cluster performance. It is recommended that you export data in off-peak hours.
 
 2. Back up data.
 
@@ -81,7 +84,10 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     2. After finishing exporting data, run the following command to check the metadata. `Pos` in the metadata is the TSO of the export snapshot and can be recorded as the BackupTS.
 
         ```shell
-        [root@test ~]# cat dumpling_output/metadata
+        cat dumpling_output/metadata
+        ```
+
+        ```
         Started dump at: 2022-06-28 17:49:54
         SHOW MASTER STATUS:
                 Log: tidb-binlog
@@ -156,12 +162,15 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Enable GC.
 
-    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint). 
+    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
 
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
     Query OK, 0 rows affected (0.01 sec)
     MySQL [test]> SELECT @@global.tidb_gc_enable;
+    ```
+
+    ```
     +-------------------------+
     | @@global.tidb_gc_enable |
     +-------------------------+
@@ -181,6 +190,9 @@ After creating a changefeed, data written to the upstream cluster is replicated 
     tiup cdc cli changefeed pause -c "upstream-to-downstream" --pd=http://172.16.6.122:2379
     # View the changefeed status
     tiup cdc cli changefeed list
+    ```
+
+    ```
     [
       {
         "id": "upstream-to-downstream",
