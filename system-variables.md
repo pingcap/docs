@@ -347,7 +347,7 @@ This variable is an alias for `last_insert_id`.
 - If you set the variable to a value that exceeds the upper limit `1048576`, `1048576` is used instead:
 
 ```sql
-mysql> SET GLOBAL max_prepared_stmt_count=1048577;
+mysql> SET GLOBAL max_prepared_stmt_count = 1048577;
 Query OK, 0 rows affected, 1 warning (0.01 sec)
 
 mysql> SHOW WARNINGS;
@@ -1773,7 +1773,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Range: `[0, 2]`
 - Indicates whether to allow the Broadcast Cartesian Join. 
 - `0` means that the Broadcast Cartesian Join is not allowed. `1` means that it is allowed based on [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50). `2` means that it is always allowed even if the table size exceeds the threshold.
-- This variable is internally used in TiDB, and it is not recommended to modify its value.
+- This variable is internally used in TiDB, and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_concurrency_factor
 
@@ -1782,7 +1782,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the CPU cost of starting a Golang goroutine in TiDB. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_cop_cpu_factor
 
@@ -1791,7 +1791,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the CPU cost for TiKV Coprocessor to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_correlation_exp_factor
 
@@ -1822,7 +1822,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the CPU cost for TiDB to process one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_desc_scan_factor
 
@@ -1831,7 +1831,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `3.0`
-- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the cost for TiKV to scan one row from the disk in descending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_disk_factor
 
@@ -1840,7 +1840,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the I/O cost for TiDB to read or write one byte of data from or to the temporary disk. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_distinct_agg_push_down
 
@@ -1928,7 +1928,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `0.001`
-- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the memory cost for TiDB to store one row. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
@@ -1945,7 +1945,7 @@ mysql> desc select count(distinct a) from test.t;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.0`
-- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the net cost of transferring 1 byte of data through the network. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_prefer_range_scan <span class="version-mark">New in v5.0</span>
 
@@ -1995,7 +1995,7 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `1.5`
-- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the cost for TiKV to scan one row of data from the disk in ascending order. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_seek_factor
 
@@ -2004,7 +2004,7 @@ explain select * from t where age=5;
 - Type: Float
 - Range: `[0, 2147483647]`
 - Default value: `20`
-- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is not recommended to modify its value.
+- Indicates the start-up cost for TiDB to request data from TiKV. This variable is internally used in the [Cost Model](/cost-model.md), and it is **NOT** recommended to modify its value.
 
 ### tidb_opt_skew_distinct_agg <span class="version-mark">New in v6.2.0</span>
 
