@@ -11,7 +11,7 @@ TiDB provides two binary packages: `TiDB-community-server` and `TiDB-community-t
 
 The `TiDB-community-server` package contains the following contents.
 
-| Content | Change History |
+| Content | Change history |
 |---|---|
 | tidb-{version}-linux-amd64.tar.gz |  |
 | tikv-{version}-linux-amd64.tar.gz |  |
@@ -34,7 +34,7 @@ The `TiDB-community-server` package contains the following contents.
 
 The `TiDB-community-toolkit` package contains the following contents.
 
-| contents | Change History |
+| Content | Change history |
 |---|---|
 | tikv-importer-{version}-linux-amd64.tar.gz |  |
 | pd-recover-{version}-linux-amd64.tar.gz |  |
