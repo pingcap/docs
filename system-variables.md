@@ -429,7 +429,7 @@ This variable is an alias for `last_insert_id`.
 - Default value: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
 - This variable controls a number of MySQL compatibility behaviors. See [SQL Mode](/sql-mode.md) for more information.
 
-### sql_require_primary_key <span class="version-mark">New in TBD</span>
+### sql_require_primary_key <span class="version-mark">New in v6.3</span>
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
