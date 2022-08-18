@@ -17,6 +17,8 @@ TiDB is for computing only and does not store data. It is horizontally scalable.
 
 You can configure both node size and node quantity for TiDB.
 
+To learn performance test results of different cluster scales, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
+
 ### TiDB node size
 
 The supported node sizes include the following:
@@ -38,13 +40,13 @@ The supported node sizes include the following:
 
 For high availability, it is recommended that you configure at least two TiDB nodes for each TiDB Cloud cluster.
 
-For more information about how to determine the TiDB size, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
-
 ## Size TiKV
 
 TiKV is responsible for storing data. It is horizontally scalable.
 
 You can configure node size, node quantity, and storage size for TiKV.
+
+To learn performance test results of different cluster scales, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
 
 ### TiKV node size
 
@@ -81,8 +83,6 @@ Supposing the size of your MySQL dump files is 5 TB and the TiDB compression rat
 For example, if you configure the storage size of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
 
 Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
-
-For more information about how to determine the TiKV size, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
 
 ### TiKV storage size
 
