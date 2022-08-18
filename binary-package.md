@@ -64,12 +64,12 @@ The `TiDB-community-toolkit` package contains the following contents.
 | reparo |  |
 | arbiter |  |
 | mydumper | New in v6.0.0 |
-| server-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| grafana-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| alertmanager-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| prometheus-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| blackbox_exporter-{version}-linux-amd64.tar.gz | New in v6.2.0  |
-| node_exporter-{version}-linux-amd64.tar.gz | New in v6.2.0  |
+| server-{version}-linux-amd64.tar.gz | New in v6.1.1 |
+| grafana-{version}-linux-amd64.tar.gz | New in v6.1.1 |
+| alertmanager-{version}-linux-amd64.tar.gz | New in v6.1.1 |
+| prometheus-{version}-linux-amd64.tar.gz | New in v6.1.1 |
+| blackbox_exporter-{version}-linux-amd64.tar.gz | New in v6.1.1 |
+| node_exporter-{version}-linux-amd64.tar.gz | New in v6.1.1 |
 
 ## See also
 
