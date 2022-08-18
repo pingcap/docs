@@ -130,7 +130,7 @@ Test scales:
 
 Test results:
 
-**TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3**
+TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3
 
 - Optimal performance with low latency
 
@@ -168,7 +168,7 @@ Test results:
     | Update Index      | 2,000   | 15,146 | 15,146 | 132           |
     | Update Non-index  | 2,000   | 34,505 | 34,505 | 58            |
 
-**TiDB: 8 vCPU * 4; TiKV: 8 vCPU * 6**
+TiDB: 8 vCPU * 4; TiKV: 8 vCPU * 6
 
 - Optimal performance with low latency
 
@@ -223,7 +223,7 @@ Test scales:
 
 Test results:
 
-**TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3**
+TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3
 
 - Optimal performance with low latency
 
@@ -261,7 +261,7 @@ Test results:
     | Update Index      | 3,000   | 29,576  | 29,576  | 101           |
     | Update Non-index  | 3,000   | 64,624  | 64,624  | 46            |
 
-**TiDB: 16 vCPU * 4; TiKV: 16 vCPU * 6**
+TiDB: 16 vCPU * 4; TiKV: 16 vCPU * 6
 
 - Optimal performance with low latency
 
