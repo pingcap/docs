@@ -174,7 +174,7 @@ To replicate the data changes based on binlog from a specified position in the s
 
 ### Before you begin
 
-TiDB Cloud does not provide any feature about incremental data replication yet. You need to deploy TiDB Data Migration (DM) manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
+TiDB Cloud does not provide any feature about incremental data replication yet. You need to deploy TiDB DM manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Step 1. Add the data source
 
@@ -272,9 +272,9 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     }
     ```
 
-### Step 2. Create a migration task
+### Step 2. Create a replication task
 
-1. Create a test-task1.yaml file for the migration. Configure the incremental migration mode and the starting point of the data source in the file.
+1. Create a `test-task1.yaml` file for the replication task. Configure the incremental replication mode and the starting point of the data source in the file.
 
 2. Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
 
@@ -298,7 +298,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     Finished dump at: 2022-05-25 10:20:32
     ```
 
-4. Edit a task configuration file called ·test-task1·, to configure the incremental migration mode and migration starting point for each data source.
+4. Edit the task configuration file `test-task1`, to configure the incremental replication mode and replication starting point for each data source.
 
 ```yaml
 ## ********* Task Configuration *********
@@ -313,7 +313,10 @@ task-mode: incremental
 ##  This scenario is common in the following case: the full migration data does not belong to the data source's consistency snapshot, and after that, DM starts to replicate incremental data from a position earlier than the full migration.
 syncers:           # The running configurations of the sync processing unit.
  global:           # Configuration name.
-   safe-mode: false # # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database, and changes UPDATE of the data source to DELETE and REPLACE for the target database. This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly. In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
+   safe-mode: false # # If this field is set to true, DM changes INSERT of the data source to REPLACE for the target database,
+                    # # and changes UPDATE of the data source to DELETE and REPLACE for the target database.
+                    # # This is to ensure that when the table schema contains a primary key or unique index, DML statements can be imported repeatedly.
+                    # # In the first minute of starting or resuming an incremental migration task, DM automatically enables the safe mode.
 mysql-instances:
  - source-id: "mysql-replica-01"
    block-allow-list:  "bw-rule-1"
@@ -339,7 +342,7 @@ target-database:       # The target TiDB cluster on TiDB Cloud
  host: "tidb.70593805.b973b556.ap-northeast-1.prod.aws.tidbcloud.com"
  port: 4000
  user: "root"
- password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="         # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
+ password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
 
 ## ******** Function Configuration **********
 routes:
@@ -371,7 +374,7 @@ ignore-checking-items: ["table_schema","auto_increment_ID"]
 
 For detailed task configurations, see [DM Task Configurations](https://docs.pingcap.com/tidb/stable/task-configuration-file-full).
 
-To run a data migration task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the migration only after the precheck is passed. To trigger a precheck manually, run the check-task command:
+To run a data replication task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the replication only after the precheck is passed. To trigger a precheck manually, run the check-task command:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task.yaml
@@ -390,9 +393,9 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
 }
 ```
 
-### Step 3. Start the migration task
+### Step 3. Start the replication task
 
-Use `tiup dmctl` to run the following command to start the data migration task:
+Use `tiup dmctl` to run the following command to start the data replication task:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  start-task dm-task.yaml
@@ -438,9 +441,9 @@ If the task fails to start, check the prompt message and fix the configuration. 
 
 If you encounter any problem, refer to [DM error handling](https://docs.pingcap.com/tidb/stable/dm-error-handling) and [DM FAQ](https://docs.pingcap.com/tidb/stable/dm-faq).
 
-### Step 4. Check the migration task status
+### Step 4. Check the replication task status
 
-To learn whether the DM cluster has an ongoing migration task and view the task status, run the `query-status` command using `tiup dmctl`:
+To learn whether the DM cluster has an ongoing replication task and view the task status, run the `query-status` command using `tiup dmctl`:
 
 ```shell
 [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 query-status test-task1
