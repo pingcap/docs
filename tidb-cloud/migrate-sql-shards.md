@@ -178,7 +178,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
 
 ### Step 1. Add the data source
 
-1. Create a new data source file called `dm-source1.yaml`, which configures an upstream data source into DM, and add the following content:
+1. Create a new data source file `dm-source1.yaml` to configure an upstream data source into DM. Add the following content:
 
     ```yaml
     # MySQL Configuration.
@@ -194,7 +194,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
      port: 3307
     ```
 
-2. Create another new data source file called `dm-source2.yaml`, and add the following content:
+2. Create another new data source file `dm-source2.yaml`, and add the following content:
 
     ```yaml
     # MySQL Configuration.
