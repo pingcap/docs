@@ -131,7 +131,7 @@ TiFlash supports up to 2 TiB storage capacity.
 
 ## Performance reference
 
-This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of several popular TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
+This section provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of several TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
 
 ### 2 vCPU performance
 
@@ -145,7 +145,7 @@ Test environment:
 - Table size: 10000000
 - Table count: 32
 
-You can check the performance data of 2 vCPU as follows:
+Click the following scale to check the test results:
 
 <details>
 <summary>TiDB: 2 vCPU * 2; TiKV: 2 vCPU * 3</summary>
@@ -198,7 +198,7 @@ Test environment:
 - Table size: 10000000
 - Table count: 16
 
-You can check the performance data of 4 vCPU as follows:
+Click the following scale to check the test results:
 
 <details>
 <summary>TiDB: 4 vCPU * 2; TiKV: 4 vCPU * 3</summary>
@@ -251,7 +251,7 @@ Test environment:
 - Table size: 10000000
 - Table count: 16
 
-You can check the performance data of 8 vCPU as follows:
+Click the following scales to check the test results:
 
 <details>
 <summary>TiDB: 8 vCPU * 2; TiKV: 8 vCPU * 3</summary>
@@ -345,7 +345,7 @@ Test environment:
 - Table size: 10000000
 - Table count: 16
 
-You can check the performance data of 16 vCPU as follows:
+Click the following scales to check the test results:
 
 <details>
 <summary>TiDB: 16 vCPU * 2; TiKV: 16 vCPU * 3</summary>
