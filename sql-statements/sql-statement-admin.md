@@ -6,7 +6,13 @@ aliases: ['/docs/dev/sql-statements/sql-statement-admin/','/docs/dev/reference/s
 
 # ADMIN
 
-This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB.
+This statement is a TiDB extension syntax, used to view the status of TiDB and check the data of tables in TiDB. This document introduces the following `ADMIN` related statements:
+
+- [`ADMIN RELOAD`](#admin-reload-statement)
+- [`ADMIN PLUGINS`](#admin-plugins-related-statement)
+- [`ADMIN ... BINDINGS`](#admin-bindings-statement)
+- [`ADMIN REPAIR`](#admin-repair-statement)
+- [`ADMIN SHOW SLOW`](#admin-show-slow-statement)
 
 ## DDL related statement
 
@@ -16,6 +22,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)          | Calculates the CRC64 of all rows + indexes of a table. |
 | [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | Checks for consistency of a table or index. |
 | [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | Shows details about currently running or recently completed DDL jobs. |
+| [`ADMIN SHOW TELEMETRY`](/sql-statements/sql-statement-admin-show-telemetry.md)      | Shows information that will be reported back to PingCAP as part of the telemetry feature. |
 
 ## `ADMIN RELOAD` statement
 
@@ -58,7 +65,7 @@ The above statement is used to disable the `plugin_name` plugin.
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN FLUSH bindings;
+ADMIN FLUSH BINDINGS;
 ```
 
 The above statement is used to persist SQL Plan binding information.
@@ -66,7 +73,7 @@ The above statement is used to persist SQL Plan binding information.
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN CAPTURE bindings;
+ADMIN CAPTURE BINDINGS;
 ```
 
 The above statement can generate the binding of SQL Plan from the `SELECT` statement that occurs more than once.
@@ -74,7 +81,7 @@ The above statement can generate the binding of SQL Plan from the `SELECT` state
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN EVOLVE bindings;
+ADMIN EVOLVE BINDINGS;
 ```
 
 After the automatic binding feature is enabled, the evolution of SQL Plan binding information is triggered every `bind-info-leave` (the default value is `3s`). The above statement is used to proactively trigger this evolution.
@@ -82,7 +89,7 @@ After the automatic binding feature is enabled, the evolution of SQL Plan bindin
 {{< copyable "sql" >}}
 
 ```sql
-ADMIN RELOAD bindings;
+ADMIN RELOAD BINDINGS;
 ```
 
 The above statement is used to reload SQL Plan binding information.
@@ -129,7 +136,7 @@ Run the following command to view the last 10 completed DDL jobs in the currentl
 {{< copyable "sql" >}}
 
 ```sql
-admin show ddl jobs;
+ADMIN SHOW DDL JOBS;
 ```
 
 ```
@@ -155,7 +162,7 @@ Run the following command to view the last 5 completed DDL jobs in the currently
 {{< copyable "sql" >}}
 
 ```sql
-admin show ddl jobs 5;
+ADMIN SHOW DDL JOBS 5;
 ```
 
 ```
@@ -176,7 +183,7 @@ Run the following command to view the uncompleted DDL jobs in the test database.
 {{< copyable "sql" >}}
 
 ```sql
-admin show ddl jobs 5 where state!='synced' and db_name='test';
+ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
 ```
 
 ```
