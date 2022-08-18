@@ -435,7 +435,7 @@ This variable is an alias for `last_insert_id`.
 - Default value: "OFF"
 - This variable, when turned "ON" will prevent table creation without primary keys and dropping of primary keys in a cluster. Behaves similar to sysvar
   [sql_require_primary_key](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_sql_require_primary_key) in MySQL 8.0
-- Can be useful with TiCDC based replication, as TiCDC silently ignores tables without primary keys atm
+- It is strongly recommended to enable this variable when using TiCDC. This is because replicating changes to a MySQL sink requires that tables have a primary key.
 
 ### sql_select_limit <span class="version-mark">New in v4.0.2</span>
 
