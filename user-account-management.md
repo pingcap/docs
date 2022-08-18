@@ -17,7 +17,7 @@ This document describes how to manage a database user account for TiDB Cloud.
 
 > **Note:**
 >
-> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the user name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+> For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters. If you are using a Developer Tier cluster, whenever you use or set a database user name or role name, you must include the prefix (for example, `3pTAoNNegb47Uc8`) in the name. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
 
 </CustomContent>
 
@@ -96,31 +96,45 @@ If the specified user does not exist, the behavior of automatically creating use
 
 For example, assume that the `sql_mode` does not include `NO_AUTO_CREATE_USER`, and you use the following `CREATE USER` and `GRANT` statements to create four accounts:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE USER 'finley'@'localhost' IDENTIFIED BY 'some_pass';
 ```
 
-{{< copyable "sql" >}}
+<CustomContent platform="tidb">
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'finley'@'localhost' WITH GRANT OPTION;
 ```
 
-{{< copyable "sql" >}}
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+```sql
+GRANT RELOAD,PROCESS ON *.* TO 'finley'@'localhost' WITH GRANT OPTION;
+```
+
+</CustomContent>
 
 ```sql
 CREATE USER 'finley'@'%' IDENTIFIED BY 'some_pass';
 ```
 
-{{< copyable "sql" >}}
+<CustomContent platform="tidb">
 
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO 'finley'@'%' WITH GRANT OPTION;
 ```
 
-{{< copyable "sql" >}}
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+```sql
+GRANT RELOAD,PROCESS ON *.* TO 'finley'@'%' WITH GRANT OPTION;
+```
+
+</CustomContent>
 
 ```sql
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin_pass';
@@ -178,7 +192,7 @@ TiDB creates the `'root'@'%'` default account during the database initialization
 
 TiDB Cloud creates the following default accounts during the database initialization.
 
-- `'root'@'%'` for Dedicated Tier clusters or `'<user_name_prefix>.root'@'%'` for Developer Tier clusters
+- `root` for a Dedicated Tier cluster or `<user_name_prefix>.root` for a Developer Tier cluster
 - `cloud_admin`
 
 </CustomContent>
