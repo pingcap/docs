@@ -7,7 +7,7 @@ summary: Learn how to pause or resume a TiDB cluster.
 
 TiDB Cloud allows you to easily pause and resume a cluster that is not in operation at all times.
 
-The pause does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption.
+The pause does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption. After the pause, you can resume your cluster at any time.
 
 Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster state information (including cluster version, cluster configurations, and TiDB user accounts).
 
