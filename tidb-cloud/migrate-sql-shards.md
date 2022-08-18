@@ -69,8 +69,8 @@ When you use Dumpling to export data to Amazon S3, note the following:
 
 - Enable binlog for upstream clusters.
 - Choose the correct Amazon S3 directory and region.
-- Choose the appropriate concurrency by configuring `-t` to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Dumpling Overview](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
-- Set appropriate values for `--filetype csv` and `--no-schemas`.
+- Choose the appropriate concurrency by configuring `-t` to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use thess parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 To export data to Amazon S3, do the following:
 
@@ -87,7 +87,7 @@ To export data to Amazon S3, do the following:
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
 
-    For more information about the parameters, see [Dumpling Overview](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+    For more information about the parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
 
@@ -108,9 +108,7 @@ mysql> use store;
 Database changed
 ```
 
-In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. For the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
-
-Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index:
+In this example, the column IDs of `sale_01` and `sale_02` are auto-increment primary keys. Conflicts might occur when you merge sharded tables in the downstream database. Execute the following SQL statement to modify the PRIMARY KEY attribute of the ID column to normal index:
 
 ```sql
 mysql> CREATE TABLE `sales` (
@@ -122,6 +120,8 @@ mysql> CREATE TABLE `sales` (
    -> );
 Query OK, 0 rows affected (0.17 sec)
 ```
+
+For more information about the solutions to solve such conflicts, see [Remove the PRIMARY KEY attribute from the column](https://docs.pingcap.com/tidb-data-migration/v5.3/shard-merge-best-practices#remove-the-primary-key-attribute-from-the-column).
 
 ### Step 4. Configure Amazon S3 access
 
@@ -163,7 +163,7 @@ This document uses the Amazon S3 as an example. The following example only lists
 After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters). You need to fill in the following information:
 
 - **Data Source Type**: `AWS S3`.
-- **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. The data in all MySQL instances that will be merged into `store.sales` can be imported in one go.
+- **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. You can import the data in all MySQL instances that will be merged into `store.sales` in one go.
 - **Data Format**: choose the format of your data.
 - **Target Cluster**: fill in the **Username** and **Password** fields.
 - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidbcloud/table-filter#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
@@ -178,127 +178,127 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
 
 ### Step 1. Add the data source
 
-Create a new data source file called `dm-source1.yaml`, which configures an upstream data source into DM, and add the following content:
+1. Create a new data source file called `dm-source1.yaml`, which configures an upstream data source into DM, and add the following content:
 
-```yaml
-# MySQL Configuration.
-source-id: "mysql-replica-01"
-# Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
-# The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
-enable-gtid: true
-from:
- host: "172.16.5.138"
- user: "lzy"
- password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
- port: 3307
-```
+    ```yaml
+    # MySQL Configuration.
+    source-id: "mysql-replica-01"
+    # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
+    # The prerequisite is that you have already enabled GTID in the upstream MySQL.
+    # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
+    enable-gtid: true
+    from:
+     host: "172.16.5.138"
+     user: "lzy"
+     password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
+     port: 3307
+    ```
 
-Create another new data source file called `dm-source2.yaml`, and add the following content:
+2. Create another new data source file called `dm-source2.yaml`, and add the following content:
 
-```yaml
-# MySQL Configuration.
-source-id: "mysql-replica-02"
-# Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
-# The prerequisite is that you have already enabled GTID in the upstream MySQL.
-# If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
-enable-gtid: true
-from:
- host: "172.16.5.138"
- user: "lzy"
- password: "3O8fCPEnwO87cIal32bpO0AuTsJyBJ0="
- port: 3308
-```
+    ```yaml
+    # MySQL Configuration.
+    source-id: "mysql-replica-02"
+    # Specifies whether DM-worker pulls binlogs with GTID (Global Transaction Identifier).
+    # The prerequisite is that you have already enabled GTID in the upstream MySQL.
+    # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
+    enable-gtid: true
+    from:
+     host: "172.16.5.138"
+     user: "lzy"
+     password: "3O8fCPEnwO87cIal32bpO0AuTsJyBJ0="
+     port: 3308
+    ```
 
-Run the following command in a terminal. Use `tiup dmctl` to load the first data source configuration into the DM cluster:
+3. Run the following command in a terminal. Use `tiup dmctl` to load the first data source configuration into the DM cluster:
 
-```shell
-[root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
-```
+    ```shell
+    [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
+    ```
 
-The parameters used in the command above are described as follows:
+    The parameters used in the command above are described as follows:
 
-|Parameter              |Description    |
-|-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
-|`operate-source create`|Loads the data source to the DM cluster.|
+    |Parameter              |Description    |
+    |-                      |-              |
+    |`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
+    |`operate-source create`|Loads the data source to the DM cluster.|
 
-The following is an example output:
+    The following is an example output:
 
-```shell
-tiup is checking updates for component dmctl ...
+    ```shell
+    tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
 
-{
-   "result": true,
-   "msg": "",
-   "sources": [
-       {
-           "result": true,
-           "msg": "",
-           "source": "mysql-replica-01",
-           "worker": "dm-172.16.7.154-9262"
-       }
-   ]
-}
+    {
+       "result": true,
+       "msg": "",
+       "sources": [
+           {
+               "result": true,
+               "msg": "",
+               "source": "mysql-replica-01",
+               "worker": "dm-172.16.7.154-9262"
+           }
+       ]
+    }
 
-```
+    ```
 
-Run the following command in a terminal. Use `tiup dmctl` to load the second data source configuration into the DM cluster:
+4. Run the following command in a terminal. Use `tiup dmctl` to load the second data source configuration into the DM cluster:
 
-```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
-```
+    ```shell
+    [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
+    ```
 
-The following is an example output:
+    The following is an example output:
 
-```shell
-tiup is checking updates for component dmctl ...
+    ```shell
+    tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
 
-{
-   "result": true,
-   "msg": "",
-   "sources": [
-       {
-           "result": true,
-           "msg": "",
-           "source": "mysql-replica-02",
-           "worker": "dm-172.16.7.214-9262"
-       }
-   ]
-}
-```
+    {
+       "result": true,
+       "msg": "",
+       "sources": [
+           {
+               "result": true,
+               "msg": "",
+               "source": "mysql-replica-02",
+               "worker": "dm-172.16.7.214-9262"
+           }
+       ]
+    }
+    ```
 
 ### Step 2. Create a migration task
 
-Create a test-task1.yaml file for the migration. Configure the incremental migration mode and the starting point of the data source in the file.
+1. Create a test-task1.yaml file for the migration. Configure the incremental migration mode and the starting point of the data source in the file.
 
-Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
+2. Find the starting point in the metadata file of MySQL instance1 exported by Dumpling. For example:
 
-```toml
-Started dump at: 2022-05-25 10:16:26
-SHOW MASTER STATUS:
-       Log: mysql-bin.000002
-       Pos: 246546174
-       GTID:b631bcad-bb10-11ec-9eee-fec83cf2b903:1-194801
-Finished dump at: 2022-05-25 10:16:27
-```
+    ```toml
+    Started dump at: 2022-05-25 10:16:26
+    SHOW MASTER STATUS:
+           Log: mysql-bin.000002
+           Pos: 246546174
+           GTID:b631bcad-bb10-11ec-9eee-fec83cf2b903:1-194801
+    Finished dump at: 2022-05-25 10:16:27
+    ```
 
-Find the starting point in the metadata file of MySQL instance2 exported by Dumpling. For example:
+3. Find the starting point in the metadata file of MySQL instance2 exported by Dumpling. For example:
 
-```toml
-Started dump at: 2022-05-25 10:20:32
-SHOW MASTER STATUS:
-       Log: mysql-bin.000001
-       Pos: 1312659
-       GTID:cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036
-Finished dump at: 2022-05-25 10:20:32
-```
+    ```toml
+    Started dump at: 2022-05-25 10:20:32
+    SHOW MASTER STATUS:
+           Log: mysql-bin.000001
+           Pos: 1312659
+           GTID:cd21245e-bb10-11ec-ae16-fec83cf2b903:1-4036
+    Finished dump at: 2022-05-25 10:20:32
+    ```
 
-Edit a task configuration file called ·test-task1·, to configure the incremental migration mode and migration starting point for each data source.
+4. Edit a task configuration file called ·test-task1·, to configure the incremental migration mode and migration starting point for each data source.
 
 ```yaml
 ## ********* Task Configuration *********
