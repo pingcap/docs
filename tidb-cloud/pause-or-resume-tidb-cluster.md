@@ -7,7 +7,7 @@ summary: Learn how to pause or resume a TiDB cluster.
 
 TiDB Cloud allows you to easily pause and resume a cluster that is not in operation at all times.
 
-Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster state information (including cluster version, cluster configuration, and TiDB user accounts).
+Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster state information (including cluster version, cluster configurations, and TiDB user accounts).
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 - You cannot pause your cluster if it has any [Changefeeds](/tidb-cloud/changefeed-overview.md). You need to delete the existing Changefeeds ([Delete Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#delete-a-sink) or [Delete Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink)) before pausing the cluster.
 - You can pause your cluster only when it is in the **Normal** state. If a cluster is in other states such as **Importing** or **Scaling**, you must wait for the current operation to be completed before pausing the cluster.
-- You cannot pause your cluster if it is backing up data, you can either wait for the current backup jobs to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
+- You cannot pause your cluster when it is backing up data, you can either wait for the current backup jobs to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 
 ## Pause a TiDB cluster
 
@@ -30,7 +30,7 @@ When a cluster is paused, note the following:
 To pause a cluster, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the **Active Clusters** page of your project.
-2. For the cluster you want to pause, click **...** in the upper-right corner of the cluster area.
+2. For the cluster that you want to pause, click **...** in the upper-right corner of the cluster area.
 
     > **Tip:**
     >
@@ -53,7 +53,7 @@ After a paused cluster is resumed, note the following:
 To resume a paused cluster, take the following steps:
 
 1. In the TiDB Cloud console, navigate to the **Active Clusters** page of your project.
-2. For the cluster you want to resume, click **Resume**.
+2. For the cluster that you want to resume, click **Resume**.
 
     The **Resume your cluster** dialog is displayed.
 
