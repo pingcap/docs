@@ -44,9 +44,9 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 8005
 
-    Transactions in TiDB encounter write conflicts.
+    The complete error message: `ERROR 8005 (HY000): Write Conflict, txnStartTS is stale`
 
-    See [the Troubleshoot section](/faq/tidb-faq.md#troubleshoot) for the cause and solution.
+    Transactions in TiDB encounter write conflicts. To handle this error, check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
 
 * Error Number: 8018
 
@@ -328,6 +328,14 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     TiDB does not yet support JSON objects with the key length >= 65536.
 
+* ERROR 8130 (HY000): client has multi-statement capability disabled
+
+    The complete error message: `ERROR 8130 (HY000): client has multi-statement capability disabled`
+
+    This error might occur after upgrading from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
+
+    The system variable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) can be used to control this behavior.
+
 * Error Number: 8138
 
     The transaction attempts to write an incorrect row value. For more information, see [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md#error-8138).
@@ -414,39 +422,59 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9001
 
+    The complete error message: `ERROR 9001 (HY000): PD Server Timeout`
+
     The PD request timed out.
 
-    Check the state/monitor/log of the PD server and the network between the TiDB server and the PD server.
+    Check the status, monitoring data and log of the PD server, and the network between the TiDB server and the PD server.
 
 * Error Number: 9002
 
+    The complete error message: `ERROR 9002 (HY000): TiKV Server Timeout`
+
     The TiKV request timed out.
 
-    Check the state/monitor/log of the TiKV server and the network between the TiDB server and the TiKV server.
+    Check the status, monitoring data and log of the TiKV server, and the network between the TiDB server and the TiKV server.
 
 * Error Number: 9003
 
+    The complete error message: `ERROR 9003 (HY000): TiKV Server is Busy`
+
     The TiKV server is busy and this usually occurs when the workload is too high.
 
-    Check the state/monitor/log of the TiKV server.
+    Check the status, monitoring data, and log of the TiKV server.
 
 * Error Number: 9004
 
-    This error occurs when a large number of transactional conflicts exist in the database.
+    The complete error message: `ERROR 9004 (HY000): Resolve Lock Timeout`
 
-    Check the code of application.
+    A lock resolving timeout. This error occurs when a large number of transactional conflicts exist in the database.
+
+    Check the application code to see whether lock contention exists in the database.
 
 * Error Number: 9005
 
-    A certain Raft Group is not available, such as the number of replicas is not enough. This error usually occurs when the TiKV server is busy or the TiKV node is down.
+    The complete error message: `ERROR 9005 (HY000): Region is unavailable`
 
-    Check the state/monitor/log of the TiKV server.
+    The accessed Region is not available. A certain Raft Group is not available, with possible reasons such as the number of replicas is not enough. This error usually occurs when the TiKV server is busy or the TiKV node is down.
+
+    Check the status, monitoring data and log of the TiKV server.
 
 * Error Number: 9006
 
-    The interval of GC Life Time is too short and the data that should be read by the long transactions might be cleared.
+    The complete error message: `ERROR 9006 (HY000): GC life time is shorter than transaction duration`
 
-    Extend the interval of GC Life Time.
+    The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can adjust [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) using the following command:
+
+    {{< copyable "sql" >}}
+
+    ```sql
+    SET GLOBAL tidb_gc_life_time = '30m';
+    ```
+
+    > **Note:**
+    >
+    > "30m" means only cleaning up the data generated 30 minutes ago, which might consume some extra storage space.
 
 * Error Number: 9500
 
@@ -456,9 +484,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 * Error Number: 9007
 
+    The complete error message: `ERROR 9007 (HY000): Write Conflict`
+
     Transactions in TiKV encounter write conflicts.
 
-    See [the Troubleshoot section](/faq/tidb-faq.md#troubleshoot) for the cause and solution.
+    Check whether `tidb_disable_txn_auto_retry` is set to `on`. If so, set it to `off`; if it is already `off`, increase the value of `tidb_retry_limit` until the error no longer occurs.
 
 * Error Number: 9008
 
@@ -483,6 +513,42 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
     The TiFlash server is busy and this usually occurs when the workload is too high.
 
     Check the state/monitor/log of the TiFlash server.
+
+### MySQL native error messages
+
+* ERROR 2013 (HY000): Lost connection to MySQL server during query
+
+    The complete error message: `ERROR 2013 (HY000): Lost connection to MySQL server during query`
+
+    You can handle the error in the following ways:
+
+    - Check whether panic is in the log.
+    - Check whether OOM exists in dmesg using `dmesg -T | grep -i oom`.
+    - A long time of no access might also lead to this error. It is usually caused by TCP timeout. If TCP is not used for a long time, the operating system kills it.
+
+* ERROR 1105 (HY000): other error: unknown error Wire Error(InvalidEnumValue(4004))
+
+    The complete error message: `ERROR 1105 (HY000): other error: unknown error Wire Error(InvalidEnumValue(4004))`
+
+    This error usually occurs when the version of TiDB does not match with the version of TiKV. To avoid version mismatch, upgrade all components when you upgrade the version.
+
+* ERROR 1148 (42000): the used command is not allowed with this TiDB version
+
+    The complete error message: `ERROR 1148 (42000): the used command is not allowed with this TiDB version`
+
+    When you execute the `LOAD DATA LOCAL` statement but the MySQL client does not allow executing this statement (the value of the `local_infile` option is 0), this error occurs.
+
+    The solution is to use the `--local-infile=1` option when you start the MySQL client. For example, use command like `mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000`. The default value of `local-infile` is different in different versions of MySQL client, therefore you need to configure it in some MySQL clients and do not need to configure it in some others.
+
+* ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point
+
+    The complete error message: `ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point`
+
+    This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and this error occurs if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/error-codes.md).
+
+* TiDB log error messages: EOF error
+
+    When the client or proxy disconnects from TiDB, TiDB does not immediately notice that the connection has been disconnected. Instead, TiDB can only notice the disconnection when it begins to return data to the connection. At this time, the log prints an EOF error.
 
 ## Troubleshooting
 
