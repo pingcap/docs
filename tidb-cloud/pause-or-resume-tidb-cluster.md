@@ -26,7 +26,7 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 When a cluster is paused, note the following:
 
 - TiDB Cloud stops collecting monitoring information of the cluster, you cannot read data from or write data to the cluster, and you cannot import or back up data.
-- Only the following costs are charged:
+- Only the following costs will be charged:
 
     - Node Storage Cost
     - Data Backup Cost
