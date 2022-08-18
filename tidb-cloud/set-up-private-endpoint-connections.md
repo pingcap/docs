@@ -77,13 +77,17 @@ From the **Region** List, select the region in which you want to create the priv
 
 At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 4 minutes. During the creation process, perform the following operations:
 
-1. Provide your VPC ID and subnet IDs that are available from your AWS Management Console.
+1. Fill in the **VPC ID** and **Subnet IDs** fields. You can get the IDs from your AWS Management Console.
 
     If you do not know how to get these IDs, click **Show Instruction** and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs.
 
-    After the endpoint service creation is complete, the endpoint service name and the **Next** button are available, and the placeholders in the command in the **Create VPC Interface Endpoint** area are automatically replaced with the real values.
+2. Take a note of the endpoint service name after the endpoint service creation is complete.
 
-2. Create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
+    After the endpoint service is created, the endpoint service name is available in the command in the **Create VPC Interface Endpoint** area.
+
+    ![Endpoint service name](/media/tidb-cloud/private-endpoint/private-endpoint-service-name.png)
+
+3. Create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
 
     <SimpleTab>
     <div label="Use AWS Console">
@@ -91,10 +95,18 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
     To use the AWS Management Console to create the VPC interface, perform the following steps:
 
     1. In your AWS Management Console, go to **VPC** > **Endpoints**, and click **Create Endpoint** in the upper-right corner. The **Create endpoint** page is displayed.
+
+        ![Create endpoint](/media/tidb-cloud/private-endpoint/create-endpoint-1.png)
+
     2. Under **Service category**, select **Other endpoint services**.
     3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console, and click **Verify service**.
+
+        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+
     4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
-    5. In the **Subnets** area, select the availabilty zones where your TiDB cluster is located. Then click **Create endpoint**.
+    5. In the **Subnets** area, select the availabilty zones where your TiDB cluster is located. Then click **Create endpoint** at the bottom of the page.
+
+        ![Create endpoint service 2](/media/tidb-cloud/private-endpoint/create-endpoint-3.png)
 
     > **Tip:**
     >
@@ -121,6 +133,8 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
     3. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint. Then click **Next**.
 
+    After the endpoint service is created, the placeholders in the command are automatically replaced with the real values.
+
     > **Tip:**
     >
     > - If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. The returned error message is as follows:
@@ -143,6 +157,8 @@ Fill in the box with the your VPC endpoint ID and click **Next**.
 #### Step 6. Enable Private DNS
 
 Click the **Copy** button to copy the command and run it in your AWS CLI. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
+
+Alternatively, you can enable private DNS in your AWS Management Console. If you do not know how to get these IDs, click **Show Instruction** and you will see a snapshots of the AWS Management Console that illustrates how to enable private DNS.
 
 Then click **Create** to finalize the creation of the private endpoint.
 
