@@ -246,10 +246,7 @@ When the `skip-grant-table` is set, starting the TiDB process will check whether
 
 <CustomContent platform="tidb-cloud">
 
-1. In the TiDB Cloud console, navigate to the **Active Clusters** page of your project, and then find the area of your cluster.
-2. Click **Security Settings** in the upper-right corner of the area. The **Security Settings** dialog is displayed.
-3. In the dialog, configure the root password.
-4. Click **Apply**.
+If you forget the root password, you can log in to the TiDB Cloud console, and change the password in security settings. For more information, see [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md).
 
 </CustomContent>
 
