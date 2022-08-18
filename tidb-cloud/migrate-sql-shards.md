@@ -86,6 +86,7 @@ To export data to Amazon S3, do the following:
     ```shell
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
+
     For more information about the parameters, see [Dumpling Overview](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 3. Export data from MySQL instance2 to the `s3://dumpling-s3/store/sales/instance02/` directory in the Amazon S3 bucket.
