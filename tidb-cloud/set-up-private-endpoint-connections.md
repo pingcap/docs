@@ -158,7 +158,7 @@ Fill in the box with the your VPC endpoint ID and click **Next**.
 
 Click the **Copy** button to copy the command and run it in your AWS CLI. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
 
-Alternatively, you can enable private DNS in your AWS Management Console. If you do not know how to get these IDs, click **Show Instruction** and you will see a snapshots of the AWS Management Console that illustrates how to enable private DNS.
+Alternatively, you can enable private DNS in your AWS Management Console. If you do not know how to do it, click **Show Instruction** and you will see a snapshots of the AWS Management Console that illustrates how to enable private DNS.
 
 Then click **Create** to finalize the creation of the private endpoint.
 
