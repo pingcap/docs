@@ -15,9 +15,7 @@ This document describes how to integrate **TiDB** with **ProxySQL** using CentOS
 
 <CustomContent platform="tidb-cloud">
 
-This document describes how to integrate **TiDB Cloud** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. For more information, refer to:
-
-- [TiDB Cloud Documentation](/tidb-cloud/tidb-cloud-intro.md)
+This document describes how to integrate **TiDB Cloud** with **ProxySQL** using CentOS 7 as an example. If you want to integrate using other systems, refer to the [Try Out](#4-try-out) section, which introduces how to deploy a test integration environment using **Docker** and **Docker Compose**. 
 
 </CustomContent>
 
@@ -115,7 +113,7 @@ The production environment requires more steps than the test environment. To dep
 
 <CustomContent platform="tidb-cloud">
 
-To build a TiDB cluster in a production environment, refer to [Create a TiDB cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster).
+To build a TiDB cluster in a production environment, refer to [Create a TiDB cluster](/tidb-cloud/create-tidb-cluster.md).
 
 </CustomContent>
 
