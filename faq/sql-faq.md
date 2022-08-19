@@ -17,7 +17,7 @@ Yes. If a column in TiDB meets all of the following conditions, it can work as a
 
 ## How does TiDB perform when executing DDL operations on a large table?
 
-DDL operations of TiDB on large tables are not an issue. TiDB supports online DDL operations, and these DDL operations do not block DML operations.
+DDL operations of TiDB on large tables are usually not an issue. TiDB supports online DDL operations, and these DDL operations do not block DML operations.
 
 For some DDL operations such as adding columns, deleting columns or dropping indexes, TiDB can perform these operations quickly.
 
