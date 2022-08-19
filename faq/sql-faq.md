@@ -313,7 +313,7 @@ To learn the scenarios that cause hotspots, refer to [common hotpots](/troublesh
 
 - Set the [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) attribute. Then row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
 - For hotspots brought by auto-increment primary keys, use the [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute.
-- For read hotspots of small tables, use [Coprocessor Cache](/coprocessor-cache.md).
+- For read hotspots on small tables, use [Coprocessor Cache](/coprocessor-cache.md).
 - For hotspot issues caused by unbalanced access between Regions, such as full table scans for small tables, use [Load Base Split](/configure-load-base-split.md).
 
 If you have a performance issue caused by hotspot, refer to the [troubleshoot guide](/troubleshoot-hot-spot-issues.md) to get it resolved.
