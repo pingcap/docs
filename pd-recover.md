@@ -3,34 +3,34 @@ title: PD Recover User Guide
 summary: Use PD Recover to recover a PD cluster which cannot start or provide services normally.
 ---
 
-# PDリカバリユーザーガイド {#pd-recover-user-guide}
+# PD リカバリ ユーザー ガイド {#pd-recover-user-guide}
 
-PDリカバリはPDのディザスタリカバリツールであり、正常にサービスを開始または提供できないPDクラスタをリカバリするために使用されます。
+PD Recover は PD のディザスタリカバリツールであり、サービスを正常に開始または提供できない PDクラスタを回復するために使用されます。
 
-## ソースコードからコンパイルする {#compile-from-source-code}
+## ソースコードからコンパイル {#compile-from-source-code}
 
--   [行け](https://golang.org/) Goモジュールを使用するため、バージョン1.13以降が必要です。
--   [PDプロジェクト](https://github.com/pingcap/pd)のルートディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
+-   [行け](https://golang.org/) Go モジュールを使用するため、バージョン 1.16 以降が必要です。
+-   [PDプロジェクト](https://github.com/pingcap/pd)のルート ディレクトリで、 `make pd-recover`コマンドを使用して`bin/pd-recover`をコンパイルおよび生成します。
 
 > **ノート：**
 >
-> 通常、 PD ControlツールはリリースされたバイナリまたはDockerにすでに存在するため、ソースコードをコンパイルする必要はありません。ただし、開発者ユーザーは、ソースコードのコンパイルについて上記の手順を参照できます。
+> 通常、 PD Controlツールはリリース済みのバイナリまたは Docker に既に存在するため、ソース コードをコンパイルする必要はありません。ただし、開発者ユーザーは、ソース コードのコンパイルについて上記の手順を参照できます。
 
 ## TiDB Toolkitをダウンロード {#download-tidb-toolkit}
 
-PDRecoverインストールパッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDBツールをダウンロードする](/download-ecosystem-tools.md)を参照してください。
+PD Recover インストール パッケージはTiDB Toolkitに含まれています。 TiDB Toolkitをダウンロードするには、 [TiDB ツールをダウンロード](/download-ecosystem-tools.md)を参照してください。
 
 ## クイックスタート {#quick-start}
 
-このセクションでは、PDリカバリを使用してPDクラスタをリカバリする方法について説明します。
+このセクションでは、PD Recover を使用して PDクラスタを回復する方法について説明します。
 
-### クラスタIDを取得する {#get-cluster-id}
+### クラスタID を取得する {#get-cluster-id}
 
-クラスタIDは、PD、TiKV、またはTiDBのログから取得できます。クラスタIDを取得するには、サーバーでログを直接表示できます。
+クラスタID は、PD、TiKV、または TiDB のログから取得できます。クラスタID を取得するには、サーバーで直接ログを表示できます。
 
-#### PDログからクラスタIDを取得する（推奨） {#get-cluster-id-from-pd-log-recommended}
+#### PD ログからクラスタID を取得する (推奨) {#get-cluster-id-from-pd-log-recommended}
 
-PDログからクラスタIDを取得するには、次のコマンドを実行します。
+PD ログからクラスタID を取得するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -43,9 +43,9 @@ cat {{/path/to}}/pd.log | grep "init cluster id"
 ...
 ```
 
-#### TiDBログからクラスタIDを取得する {#get-cluster-id-from-tidb-log}
+#### TiDB ログからクラスタID を取得する {#get-cluster-id-from-tidb-log}
 
-TiDBログからクラスタIDを取得するには、次のコマンドを実行します。
+TiDB ログからクラスタID を取得するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -58,9 +58,9 @@ cat {{/path/to}}/tidb.log | grep "init cluster id"
 ...
 ```
 
-#### TiKVログからクラスタIDを取得します {#get-cluster-id-from-tikv-log}
+#### TiKV ログからクラスタID を取得する {#get-cluster-id-from-tikv-log}
 
-TiKVログからクラスタIDを取得するには、次のコマンドを実行します。
+TiKV ログからクラスタID を取得するには、次のコマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -73,17 +73,17 @@ cat {{/path/to}}/tikv.log | grep "connect to PD cluster"
 ...
 ```
 
-### 割り当てられたIDを取得する {#get-allocated-id}
+### 割り当てられた ID を取得する {#get-allocated-id}
 
-指定する割り当て済みID値は、現在最大の割り当て済みID値よりも大きくする必要があります。割り当てられたIDを取得するには、モニターから取得するか、サーバーで直接ログを表示します。
+指定する割り当て済み ID 値は、現在割り当てられている最大の ID 値よりも大きくする必要があります。割り当てられた ID を取得するには、モニターから取得するか、サーバーで直接ログを表示します。
 
-#### モニターから割り当てられたIDを取得します（推奨） {#get-allocated-id-from-the-monitor-recommended}
+#### モニターから割り当てられた ID を取得する (推奨) {#get-allocated-id-from-the-monitor-recommended}
 
-モニターから割り当てられたIDを取得するには、表示しているメトリックが**最後のPDリーダー**のメトリックであることを確認する必要があります。また、PDダッシュボードの[<strong>現在のID割り当て</strong>]パネルから最大の割り当てIDを取得できます。
+モニターから割り当てられた ID を取得するには、表示しているメトリックが**最後の PD リーダー**のメトリックであることを確認する必要があり、PD ダッシュボードの<strong>現在の ID 割り当て</strong>パネルから最大の割り当て ID を取得できます。
 
-#### PDログから割り当てられたIDを取得します {#get-allocated-id-from-pd-log}
+#### PD ログから割り当てられた ID を取得する {#get-allocated-id-from-pd-log}
 
-PDログから割り当てられたIDを取得するには、表示しているログが**最後のPDリーダー**のログであることを確認する必要があります。次のコマンドを実行して、割り当てられた最大IDを取得できます。
+PD ログから割り当てられた ID を取得するには、表示しているログが**最後の PD リーダー**のログであることを確認する必要があります。次のコマンドを実行すると、割り当てられた最大 ID を取得できます。
 
 {{< copyable "" >}}
 
@@ -96,15 +96,15 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 ...
 ```
 
-または、すべてのPDサーバーで上記のコマンドを実行して、最大のサーバーを見つけることもできます。
+または、すべての PD サーバーで上記のコマンドを実行して、最大の PD サーバーを見つけることもできます。
 
-### 新しいPDクラスタをデプロイします {#deploy-a-new-pd-cluster}
+### 新しい PDクラスタをデプロイする {#deploy-a-new-pd-cluster}
 
-新しいPDクラスタをデプロイする前に、既存のPDクラスタを停止してから、前のデータディレクトリを削除するか、 `--data-dir`を使用して新しいデータディレクトリを指定する必要があります。
+新しい PDクラスタをデプロイする前に、既存の PDクラスタを停止してから、以前のデータ ディレクトリを削除するか、 `--data-dir`を使用して新しいデータ ディレクトリを指定する必要があります。
 
-### pd-recoverを使用する {#use-pd-recover}
+### pd-recover を使用する {#use-pd-recover}
 
-1つのPDノードで`pd-recover`つだけ実行する必要があります。
+1 つの PD ノードで`pd-recover`つだけ実行する必要があります。
 
 {{< copyable "" >}}
 
@@ -114,14 +114,14 @@ cat {{/path/to}}/pd*.log | grep "idAllocator allocates a new id" |  awk -F'=' '{
 
 ### クラスタ全体を再起動します {#restart-the-whole-cluster}
 
-リカバリが成功したというプロンプト情報が表示されたら、クラスタ全体を再起動します。
+リカバリが成功したというプロンプトが表示されたら、クラスタ全体を再起動します。
 
 ## FAQ {#faq}
 
-### クラスタIDを取得すると、複数のクラスタIDが見つかります {#multiple-cluster-ids-are-found-when-getting-the-cluster-id}
+### クラスタID の取得時に複数のクラスタID が検出される {#multiple-cluster-ids-are-found-when-getting-the-cluster-id}
 
-PDクラスタが作成されると、新しいクラスタIDが生成されます。ログを表示することで、古いクラスタのクラスタIDを確認できます。
+PDクラスタが作成されると、新しいクラスタID が生成されます。ログを表示することで、古いクラスタのクラスタID を特定できます。
 
-### エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code> <code>pd-recover</code>実行時に接続が拒否されました {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
+### <code>pd-recover</code>を実行すると、エラー<code>dial tcp 10.0.1.13:2379: connect: connection refused</code>されました。 {#the-error-code-dial-tcp-10-0-1-13-2379-connect-connection-refused-code-is-returned-when-executing-code-pd-recover-code}
 
-`pd-recover`を実行する場合はPDサービスが必要です。 PDリカバリを使用する前に、PDクラスタをデプロイして開始します。
+`pd-recover`を実行する場合、PD サービスが必要です。 PD Recover を使用する前に、PDクラスタをデプロイして開始します。

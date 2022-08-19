@@ -3,22 +3,22 @@ title: Migrate MySQL of Small Datasets to TiDB
 summary: Learn how to migrate MySQL of small datasets to TiDB.
 ---
 
-# 小さなデータセットのMySQLをTiDBに移行する {#migrate-mysql-of-small-datasets-to-tidb}
+# 小さなデータセットの MySQL を TiDB に移行する {#migrate-mysql-of-small-datasets-to-tidb}
 
-このドキュメントでは、TiDBデータ移行（DM）を使用して、小さなデータセットのMySQLを完全移行モードと増分レプリケーションモードでTiDBに移行する方法について説明します。このドキュメントの「小さなデータセット」とは、データサイズが1TiB未満であることを意味します。
+このドキュメントでは、TiDB Data Migration (DM) を使用して、小さなデータセットの MySQL を完全移行モードおよび増分レプリケーション モードで TiDB に移行する方法について説明します。このドキュメントの「小さなデータセット」とは、1 TiB 未満のデータ サイズを意味します。
 
-移行速度は、テーブルスキーマ、ハードウェア、ネットワーク環境のインデックス数などの複数の要因に応じて、30 GB/hから50GB/hまで変化します。<!--The migration process using DM is shown in the figure below.-->
+移行速度は、テーブル スキーマのインデックス数、ハードウェア、ネットワーク環境などの複数の要因に応じて、30 GB/h から 50 GB/h までさまざまです。<!--The migration process using DM is shown in the figure below.-->
 
 <!--/media/dm/migrate-with-dm.png-->
 
 ## 前提条件 {#prerequisites}
 
--   [TiUPを使用してDMクラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
--   [DMのソースデータベースとターゲットデータベースに必要な権限を付与します](/dm/dm-worker-intro.md)
+-   [TiUP を使用して DM クラスターをデプロイする](/dm/deploy-a-dm-cluster-using-tiup.md)
+-   [DM のソース データベースとターゲット データベースに必要な権限を付与します。](/dm/dm-worker-intro.md)
 
-## 手順1.データソースを作成する {#step-1-create-the-data-source}
+## 手順 1. データ ソースを作成する {#step-1-create-the-data-source}
 
-まず、次のように`source1.yaml`のファイルを作成します。
+まず、次のように`source1.yaml`ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -36,7 +36,7 @@ from:
   port: 3306
 ```
 
-次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータソース構成をDMクラスタにロードします。
+次に、次のコマンドを実行して、 `tiup dmctl`を使用してデータ ソース構成を DMクラスタに読み込みます。
 
 {{< copyable "" >}}
 
@@ -46,14 +46,14 @@ tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 
 上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-| パラメータ                   | 説明                                                                    |
-| :---------------------- | :-------------------------------------------------------------------- |
-| `--master-addr`         | `dmctl`が接続するクラスタのDMマスターノードの{advertise-addr}。たとえば、172.16.10.71：8261です。 |
-| `operate-source create` | データソースをDMクラスタにロードします。                                                 |
+| パラメータ                   | 説明                                                                              |
+| :---------------------- | :------------------------------------------------------------------------------ |
+| `--master-addr`         | `dmctl`が接続するクラスタの任意の DM マスター ノードの`{advertise-addr}` 。たとえば、172.16.10.71:8261 です。 |
+| `operate-source create` | データ ソースを DMクラスタにロードします。                                                         |
 
-## 手順2.移行タスクを作成する {#step-2-create-the-migration-task}
+## ステップ 2.移行タスクを作成する {#step-2-create-the-migration-task}
 
-次のように`task1.yaml`のファイルを作成します。
+次のように`task1.yaml`ファイルを作成します。
 
 {{< copyable "" >}}
 
@@ -89,11 +89,11 @@ block-allow-list:
 
 ```
 
-上記は、移行を実行するための最小タスク構成です。タスクに関するその他の構成項目については、 [DMタスクの完全な構成ファイルの紹介](/dm/task-configuration-file-full.md)を参照してください。
+上記は、移行を実行するための最小タスク構成です。タスクに関するその他の構成項目については、 [DM タスク完了構成ファイルの紹介](/dm/task-configuration-file-full.md)を参照してください。
 
-## 手順3.移行タスクを開始します {#step-3-start-the-migration-task}
+## ステップ 3. 移行タスクを開始する {#step-3-start-the-migration-task}
 
-エラーを回避するために、移行タスクを開始する前に、 `check-task`コマンドを使用して、構成がDM構成の要件を満たしているかどうかを確認することをお勧めします。
+エラーを回避するために、移行タスクを開始する前に、 `check-task`コマンドを使用して、構成が DM 構成の要件を満たしているかどうかを確認することをお勧めします。
 
 {{< copyable "" >}}
 
@@ -111,16 +111,16 @@ tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 
 上記のコマンドで使用されるパラメーターは、次のとおりです。
 
-| パラメータ           | 説明                                                               |
-| --------------- | ---------------------------------------------------------------- |
-| `--master-addr` | `dmctl`が接続するクラスタのDMマスターノードの{advertise-addr}。例：172.16.10.71：8261。 |
-| `start-task`    | 移行タスクを開始します                                                      |
+| パラメータ           | 説明                                                                         |
+| --------------- | -------------------------------------------------------------------------- |
+| `--master-addr` | `dmctl`が接続するクラスタの任意の DM マスター ノードの`{advertise-addr}` 。例: 172.16.10.71:8261。 |
+| `start-task`    | 移行タスクを開始する                                                                 |
 
-タスクの開始に失敗した場合は、返された結果に従って構成を変更した後、 `start-task task.yaml`コマンドを実行してタスクを再開できます。問題が発生した場合は、 [エラーの処理](/dm/dm-error-handling.md)と[FAQ](/dm/dm-faq.md)を参照してください。
+タスクの開始に失敗した場合は、返された結果に従って構成を変更した後、 `start-task task.yaml`コマンドを実行してタスクを再開できます。問題が発生した場合は、 [エラー処理](/dm/dm-error-handling.md)および[FAQ](/dm/dm-faq.md)を参照してください。
 
-## 手順4：移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
+## ステップ 4: 移行タスクのステータスを確認する {#step-4-check-the-migration-task-status}
 
-DMクラスタに進行中の移行タスク、タスクステータス、およびその他の情報があるかどうかを確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
+DMクラスタに進行中の移行タスクがあるかどうか、タスクのステータス、およびその他の情報を確認するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 
 {{< copyable "" >}}
 
@@ -128,21 +128,21 @@ DMクラスタに進行中の移行タスク、タスクステータス、およ
 tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 ```
 
-結果の詳細な解釈については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
+結果の詳細な解釈については、 [クエリのステータス](/dm/dm-query-status.md)を参照してください。
 
-## ステップ5.タスクを監視し、ログを表示します（オプション） {#step-5-monitor-the-task-and-view-logs-optional}
+## ステップ 5. タスクの監視とログの表示 (オプション) {#step-5-monitor-the-task-and-view-logs-optional}
 
-移行タスクの履歴ステータスおよびその他の内部メトリックを表示するには、次の手順を実行します。
+移行タスクの履歴ステータスとその他の内部メトリックを表示するには、次の手順を実行します。
 
-TiUPを使用してDMをデプロイするときにPrometheus、Alertmanager、およびGrafanaをデプロイした場合、デプロイ中に指定されたIPアドレスとポートを使用してGrafanaにアクセスできます。次に、DMダッシュボードを選択して、DM関連の監視メトリックを表示できます。
+TiUP を使用して DM を展開するときに Prometheus、Alertmanager、および Grafana を展開した場合は、展開中に指定された IP アドレスとポートを使用して Grafana にアクセスできます。次に、DM ダッシュボードを選択して、DM 関連のモニタリング メトリックを表示できます。
 
--   DM-masterのログディレクトリ：DM-masterプロセスパラメータ`--log-file`で指定されます。 TiUPを使用してDMを展開した場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
--   DM-workerのログディレクトリ：DM-workerプロセスパラメータ`--log-file`で指定されます。 TiUPを使用してDMを展開した場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`です。
+-   DM-master のログ ディレクトリ: DM-master プロセス パラメータ`--log-file`によって指定されます。 TiUP を使用して DM を展開した場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`です。
+-   DM-worker のログ ディレクトリ: DM-worker プロセス パラメータ`--log-file`で指定されます。 TiUP を使用して DM を展開した場合、ログ ディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 次は何ですか {#what-s-next}
 
 -   [移行タスクを一時停止します](/dm/dm-pause-task.md)
 -   [移行タスクを再開します](/dm/dm-resume-task.md)
--   [移行タスクを停止します](/dm/dm-stop-task.md)
--   [クラスタデータソースとタスク構成をエクスポートおよびインポートします](/dm/dm-export-import-config.md)
--   [失敗したDDLステートメントを処理する](/dm/handle-failed-ddl-statements.md)
+-   [移行タスクを停止する](/dm/dm-stop-task.md)
+-   [クラスタデータ ソースとタスク構成のエクスポートとインポート](/dm/dm-export-import-config.md)
+-   [失敗した DDL ステートメントを処理する](/dm/handle-failed-ddl-statements.md)

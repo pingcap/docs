@@ -1,18 +1,18 @@
 ---
-title: Integrate Data with Confluent Cloud
-summary: Learn how to stream TiDB data to the Confluent Cloud using TiCDC, and how to replicate incremental data to ksqlDB, Snowflake, and SQL Server.
+title: Integrate Data with Confluent Cloud and Snowflake
+summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
 ---
 
-# Confluent Cloud とのデータ統合 {#integrate-data-with-confluent-cloud}
+# Confluent Cloud および Snowflake とデータを統合する {#integrate-data-with-confluent-cloud-and-snowflake}
 
 Confluent は、強力なデータ統合機能を提供する Apache Kafka 互換のストリーミング データ プラットフォームです。このプラットフォームでは、ノンストップのリアルタイム ストリーミング データにアクセス、保存、および管理できます。
 
-TiDB v6.1.0 以降、TiCDC は、増分データを Avro 形式で Confluent に複製することをサポートしています。このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用して TiDB の増分データを Confluent に複製し、さらに Confluent Cloud を介して ksqlDB、Snowflake、および SQL Server にデータを複製する方法を紹介します。このドキュメントの構成は次のとおりです。
+TiDB v6.1.0 以降、TiCDC は、増分データを Avro 形式で Confluent に複製することをサポートしています。このドキュメントでは、 [TiCDC](/ticdc/ticdc-overview.md)を使用して TiDB の増分データを Confluent に複製し、さらに Confluent Cloud を介して Snowflake、ksqlDB、および SQL Server にデータを複製する方法を紹介します。このドキュメントの構成は次のとおりです。
 
 1.  TiCDC を含む TiDBクラスタをすばやくデプロイします。
 2.  TiDB から Confluent Cloud にデータをレプリケートする変更フィードを作成します。
-3.  Confluent Cloud から ksqlDB、Snowflake、および SQL Server にデータをレプリケートするコネクタを作成します。
-4.  go-tpc を使用して TiDB にデータを書き込み、ksqlDB、Snowflake、および SQL Server でデータの変更を観察します。
+3.  Confluent Cloud から Snowflake、ksqlDB、および SQL Server にデータをレプリケートするコネクタを作成します。
+4.  go-tpc を使用して TiDB にデータを書き込み、Snowflake、ksqlDB、および SQL Server でデータの変更を観察します。
 
 上記の手順は、ラボ環境で実行されます。これらの手順を参照して、本番環境にクラスタをデプロイすることもできます。
 
@@ -22,7 +22,7 @@ TiDB v6.1.0 以降、TiCDC は、増分データを Avro 形式で Confluent に
 
 1.  TiCDC を含む TiDBクラスタをデプロイします。
 
-    ラボまたはテスト環境では、TiUP Playground を使用して、TiCDC を備えた TiDBクラスタをすばやくデプロイできます。
+    ラボまたはテスト環境では、TiUP Playground を使用して、TiCDC を含む TiDBクラスタをすばやくデプロイできます。
 
     ```shell
     tiup playground --host 0.0.0.0 --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
@@ -158,30 +158,6 @@ TiDB v6.1.0 以降、TiCDC は、増分データを Avro 形式で Confluent に
 
     Confluent Cloud Console で、[**トピック**] をクリックします。ターゲット トピックが作成され、データを受信していることがわかります。この時点で、TiDB データベースの増分データが Confluent Cloud に正常に複製されます。
 
-## データを ksqlDB と統合する {#integrate-data-with-ksqldb}
-
-ksqlDB は、ストリーム処理アプリケーション専用のデータベースです。 Confluent Cloud で ksqlDB クラスターを作成し、TiCDC によって複製された増分データにアクセスできます。
-
-1.  Confluent Cloud Console で**ksqlDB**を選択し、指示に従って ksqlDBクラスタを作成します。
-
-    ksqlDBクラスタのステータスが**Running**になるまで待ちます。このプロセスには数分かかります。
-
-2.  ksqlDB エディターで、次のコマンドを実行して、 `tidb_tpcc_orders`トピックにアクセスするためのストリームを作成します。
-
-    ```sql
-    CREATE STREAM orders (o_id INTEGER, o_d_id INTEGER, o_w_id INTEGER, o_c_id INTEGER, o_entry_d STRING, o_carrier_id INTEGER, o_ol_cnt INTEGER, o_all_local INTEGER) WITH (kafka_topic='tidb_tpcc_orders', partitions=3, value_format='AVRO');
-    ```
-
-3.  次のコマンドを実行して、注文の STREAM データを確認します。
-
-    ```sql
-    SELECT * FROM ORDERS EMIT CHANGES;
-    ```
-
-    ![Select from orders](/media/integrate/select-from-orders.png)
-
-    前の図に示すように、増分データが ksqlDB に複製されていることがわかります。 ksqlDB とのデータ統合が行われます。
-
 ## データを Snowflake と統合する {#integrate-data-with-snowflake}
 
 Snowflake は、クラウド ネイティブのデータ ウェアハウスです。 Confluent では、Snowflake シンク コネクタを作成することで、TiDB の増分データを Snowflake にレプリケートできます。
@@ -214,6 +190,30 @@ Snowflake は、クラウド ネイティブのデータ ウェアハウスで�
     ![Data preview](/media/integrate/data-preview.png)
 
 6.  Snowflake コンソールで、 [**データ**] &gt; [<strong>データベース</strong>] &gt; [ <strong>TPCC]</strong> &gt; [ <strong>TiCDC</strong> ] を選択します。 TiDB の増分データが Snowflake にレプリケートされていることがわかります。 Snowflake とのデータ統合が完了しました。
+
+## データを ksqlDB と統合する {#integrate-data-with-ksqldb}
+
+ksqlDB は、ストリーム処理アプリケーション専用のデータベースです。 Confluent Cloud で ksqlDB クラスターを作成し、TiCDC によって複製された増分データにアクセスできます。
+
+1.  Confluent Cloud Console で**ksqlDB**を選択し、指示に従って ksqlDBクラスタを作成します。
+
+    ksqlDBクラスタのステータスが**Running**になるまで待ちます。このプロセスには数分かかります。
+
+2.  ksqlDB エディターで、次のコマンドを実行して、 `tidb_tpcc_orders`トピックにアクセスするためのストリームを作成します。
+
+    ```sql
+    CREATE STREAM orders (o_id INTEGER, o_d_id INTEGER, o_w_id INTEGER, o_c_id INTEGER, o_entry_d STRING, o_carrier_id INTEGER, o_ol_cnt INTEGER, o_all_local INTEGER) WITH (kafka_topic='tidb_tpcc_orders', partitions=3, value_format='AVRO');
+    ```
+
+3.  次のコマンドを実行して、注文の STREAM データを確認します。
+
+    ```sql
+    SELECT * FROM ORDERS EMIT CHANGES;
+    ```
+
+    ![Select from orders](/media/integrate/select-from-orders.png)
+
+    前の図に示すように、増分データが ksqlDB に複製されていることがわかります。 ksqlDB とのデータ統合が行われます。
 
 ## データを SQL Server と統合する {#integrate-data-with-sql-server}
 

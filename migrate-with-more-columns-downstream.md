@@ -3,18 +3,18 @@ title: Migrate Data to a Downstream TiDB Table with More Columns
 summary: Learn how to migrate data to a downstream TiDB table with more columns than the corresponding upstream table.
 ---
 
-# より多くの列を持つダウンストリームTiDBテーブルにデータを移行する {#migrate-data-to-a-downstream-tidb-table-with-more-columns}
+# より多くの列を持つ下流の TiDB テーブルにデータを移行する {#migrate-data-to-a-downstream-tidb-table-with-more-columns}
 
-このドキュメントでは、対応するアップストリームテーブルよりも多くの列を持つダウンストリームTiDBテーブルにデータを移行するときに実行する追加の手順について説明します。通常の移行手順については、次の移行シナリオを参照してください。
+このドキュメントでは、対応する上流のテーブルよりも多くの列を持つ下流の TiDB テーブルにデータを移行するときに実行する追加の手順について説明します。通常の移行手順については、次の移行シナリオを参照してください。
 
--   [小さなデータセットのMySQLをTiDBに移行する](/migrate-small-mysql-to-tidb.md)
--   [大規模なデータセットのMySQLをTiDBに移行する](/migrate-large-mysql-to-tidb.md)
--   [小さなデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
--   [大規模なデータセットのMySQLシャードをTiDBに移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
+-   [小さなデータセットの MySQL を TiDB に移行する](/migrate-small-mysql-to-tidb.md)
+-   [大規模なデータセットの MySQL を TiDB に移行する](/migrate-large-mysql-to-tidb.md)
+-   [小さなデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-small-mysql-shards-to-tidb.md)
+-   [大規模なデータセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-## DMを使用して、より多くの列を持つダウンストリームTiDBテーブルにデータを移行します {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
+## DM を使用して、より多くの列を持つ下流の TiDB テーブルにデータを移行する {#use-dm-to-migrate-data-to-a-downstream-tidb-table-with-more-columns}
 
-アップストリームのbinlogを複製する場合、DMはダウンストリームの現在のテーブルスキーマを使用してbinlogを解析し、対応するDMLステートメントを生成しようとします。アップストリームbinlogのテーブルの列番号がダウンストリームテーブルスキーマの列番号と一致しない場合、次のエラーが発生します。
+アップストリーム バイナリログをレプリケートするとき、DM はダウンストリームの現在のテーブル スキーマを使用してバイナリログを解析し、対応する DML ステートメントを生成しようとします。アップストリーム バイナリログのテーブルの列番号がダウンストリーム テーブル スキーマの列番号と一致しない場合、次のエラーが発生します。
 
 ```json
 "errors": [
@@ -30,7 +30,7 @@ summary: Learn how to migrate data to a downstream TiDB table with more columns 
 ]
 ```
 
-次に、アップストリームテーブルスキーマの例を示します。
+以下は、アップストリーム テーブル スキーマの例です。
 
 ```sql
 # Upstream table schema
@@ -40,7 +40,7 @@ CREATE TABLE `messages` (
 )
 ```
 
-以下は、ダウンストリームテーブルスキーマの例です。
+以下は、ダウンストリーム テーブル スキーマの例です。
 
 ```sql
 # Downstream table schema
@@ -51,11 +51,11 @@ CREATE TABLE `messages` (
 )
 ```
 
-DMがダウンストリームテーブルスキーマを使用してアップストリームによって生成されたbinlogイベントを解析しようとすると、DMは上記の`Column count doesn't match`のエラーを報告します。
+DM がダウンストリーム テーブル スキーマを使用して、アップストリームによって生成された binlog イベントを解析しようとすると、DM は上記の`Column count doesn't match`のエラーを報告します。
 
-このような場合、 `binlog-schema`コマンドを使用して、データソースから移行するテーブルのテーブルスキーマを設定できます。指定されたテーブルスキーマは、DMによって複製されるbinlogイベントデータに対応している必要があります。シャードテーブルを移行する場合は、シャードテーブルごとに、binlogイベントデータを解析するためにDMでテーブルスキーマを設定する必要があります。手順は次のとおりです。
+このような場合は、 `binlog-schema`コマンドを使用して、データ ソースから移行するテーブルのテーブル スキーマを設定できます。指定されたテーブル スキーマは、DM によってレプリケートされるバイナリ ログ イベント データに対応している必要があります。シャード テーブルを移行する場合は、シャード テーブルごとに、DM でテーブル スキーマを設定して binlog イベント データを解析する必要があります。手順は次のとおりです。
 
-1.  DMでSQLファイルを作成し、アップストリームテーブルスキーマに対応する`CREATE TABLE`ステートメントをファイルに追加します。たとえば、次のテーブルスキーマを`log.messages.sql`に保存します。
+1.  DM で SQL ファイルを作成し、上流のテーブル スキーマに対応する`CREATE TABLE`のステートメントをファイルに追加します。たとえば、次のテーブル スキーマを`log.messages.sql`に保存します。
 
     ```sql
     # Upstream table schema
@@ -65,7 +65,7 @@ DMがダウンストリームテーブルスキーマを使用してアップス
     )
     ```
 
-2.  `binlog-schema`コマンドを使用して、データソースから移行するテーブルのテーブルスキーマを設定します。このとき、上記の`Column count doesn't match`のエラーにより、データ移行タスクは一時停止状態になっているはずです。
+2.  `binlog-schema`コマンドを使用して、データ ソースから移行するテーブルのテーブル スキーマを設定します。この時点で、データ移行タスクは上記`Column count doesn't match`のエラーにより一時停止状態になっているはずです。
 
     {{< copyable "" >}}
 
@@ -73,17 +73,17 @@ DMがダウンストリームテーブルスキーマを使用してアップス
     tiup dmctl --master-addr ${advertise-addr} binlog-schema update -s ${source-id} ${task-name} ${database-name} ${table-name} ${schema-file}
     ```
 
-    このコマンドのパラメーターの説明は次のとおりです。
+    このコマンドのパラメータの説明は次のとおりです。
 
-    | パラメータ               | 説明                                                                                                     |
-    | :------------------ | :----------------------------------------------------------------------------------------------------- |
-    | `-master-addr`      | dmctlが接続されるクラスタのDMマスターノードの`${advertise-addr}`を指定します。 `${advertise-addr}`は、DMマスターが外部にアドバタイズするアドレスを示します。 |
-    | `binlog-schema set` | スキーマ情報を手動で設定します。                                                                                       |
-    | `-s`                | ソースを指定します。 `${source-id}`はMySQLデータのソースIDを示します。                                                         |
-    | `${task-name}`      | データ移行タスクの`task.yaml`の構成ファイルで定義されている移行タスクの名前を指定します。                                                     |
-    | `${database-name}`  | データベースを指定します。 `${database-name}`は、アップストリームデータベースの名前を示します。                                              |
-    | `${table-name}`     | アップストリームテーブルの名前を指定します。                                                                                 |
-    | `${schema-file}`    | 設定するテーブルスキーマファイルを指定します。                                                                                |
+    | パラメータ               | 説明                                                                                                                |
+    | :------------------ | :---------------------------------------------------------------------------------------------------------------- |
+    | `-master-addr`      | dmctl が接続されるクラスタの任意の DM マスター ノードの`${advertise-addr}`を指定します。 `${advertise-addr}`は、DM-master が外部にアドバタイズするアドレスを示します。 |
+    | `binlog-schema set` | スキーマ情報を手動で設定します。                                                                                                  |
+    | `-s`                | ソースを指定します。 `${source-id}`は MySQL データのソース ID を示します。                                                                |
+    | `${task-name}`      | データ移行タスクの`task.yaml`の構成ファイルで定義されている移行タスクの名前を指定します。                                                                |
+    | `${database-name}`  | データベースを指定します。 `${database-name}`は上流データベースの名前を示します。                                                                |
+    | `${table-name}`     | アップストリーム テーブルの名前を指定します。                                                                                           |
+    | `${schema-file}`    | 設定するテーブルスキーマファイルを指定します。                                                                                           |
 
     例えば：
 
@@ -93,7 +93,7 @@ DMがダウンストリームテーブルスキーマを使用してアップス
     tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
     ```
 
-3.  `resume-task`コマンドを使用して、一時停止状態で移行タスクを再開します。
+3.  `resume-task`コマンドを使用して、一時停止状態の移行タスクを再開します。
 
     {{< copyable "" >}}
 

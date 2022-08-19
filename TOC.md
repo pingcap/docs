@@ -118,12 +118,17 @@
         -   [CSV ファイルからの移行](/migrate-from-csv-files-to-tidb.md)
         -   [SQL ファイルからの移行](/migrate-from-sql-files-to-tidb.md)
         -   [ある TiDB クラスターから別の TiDB クラスターに移行する](/migrate-from-tidb-to-tidb.md)
-        -   [TiDB から Kafka にデータを複製する](/replicate-data-to-kafka.md)
+        -   [TiDB から MySQL 互換データベースへの移行](/migrate-from-tidb-to-mysql.md)
     -   高度な移行
         -   [gh-ost または pt-osc による連続レプリケーション](/migrate-with-pt-ghost.md)
         -   [より多くの列を含むダウンストリーム テーブルに移行する](/migrate-with-more-columns-downstream.md)
         -   [Binlogイベントのフィルタリング](/filter-binlog-event.md)
         -   [SQL 式を使用した DML イベントのフィルタリング](/filter-dml-event.md)
+-   統合
+    -   [概要](/integration-overview.md)
+    -   統合シナリオ
+        -   [Confluent Cloud および Snowflake との統合](/ticdc/integrate-confluent-using-ticdc.md)
+        -   [Apache Kafka および Apache Flink と統合する](/replicate-data-to-kafka.md)
 -   管理
     -   アップグレード
         -   [TiUP を使用する (推奨)](/upgrade-tidb-using-tiup.md)
@@ -132,14 +137,14 @@
         -   [TiUP を使用する (推奨)](/scale-tidb-using-tiup.md)
         -   [TiDB Operatorを使用する](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
     -   バックアップと復元
-        -   [Use BR to Back Up Cluster Data](/br-usage-backup-for-maintain.md)
-        -   [Use BR to Restore Cluster Data](/br-usage-restore-for-maintain.md)
+        -   [BR を使用してクラスタ データをバックアップする](/br-usage-backup-for-maintain.md)
+        -   [BR を使用してクラスター データを復元する](/br-usage-restore-for-maintain.md)
         -   [BR ユースケース](/backup-and-restore-use-cases-for-maintain.md)
     -   [タイムゾーンの構成](/configure-time-zone.md)
     -   [毎日のチェックリスト](/daily-check.md)
     -   [TiFlashの管理](/tiflash/maintain-tiflash.md)
     -   [TiUP を使用して TiDB を管理する](/maintain-tidb-using-tiup.md)
-    -   [Modify Configuration Online](/dynamic-config.md)
+    -   [Configuration / コンフィグレーションをオンラインで変更する](/dynamic-config.md)
     -   [オンラインの安全でない回復](/online-unsafe-recovery.md)
     -   [プライマリ クラスタとセカンダリ クラスタの間でデータをレプリケートする](/replicate-between-primary-and-secondary-clusters.md)
 -   監視と警告
@@ -158,12 +163,12 @@
     -   [Top SQLを使用して高価なクエリを特定する](/dashboard/top-sql.md)
     -   [ログを使用して高価なクエリを特定する](/identify-expensive-queries.md)
     -   [ステートメント要約表](/statement-summary-tables.md)
-    -   [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
+    -   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
     -   [増加した読み取りおよび書き込み遅延のトラブルシューティング](/troubleshoot-cpu-issues.md)
     -   [クラスターのオンサイト情報の保存と復元](/sql-plan-replayer.md)
     -   [クラスタ セットアップのトラブルシューティング](/troubleshoot-tidb-cluster.md)
-    -   [Troubleshoot High Disk I/O Usage](/troubleshoot-high-disk-io.md)
-    -   [Troubleshoot Lock Conflicts](/troubleshoot-lock-conflicts.md)
+    -   [高いディスク I/O 使用率のトラブルシューティング](/troubleshoot-high-disk-io.md)
+    -   [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)
     -   [TiFlash のトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
     -   [オプティミスティック トランザクションでの書き込み競合のトラブルシューティング](/troubleshoot-write-conflicts.md)
     -   [データとインデックス間の不一致のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
@@ -208,7 +213,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -219,7 +224,7 @@
             -   [概要](/control-execution-plan.md)
             -   [オプティマイザーのヒント](/optimizer-hints.md)
             -   [SQL計画管理](/sql-plan-management.md)
-            -   [The Blocklist of Optimization Rules and Expression Pushdown](/blocklist-control-plan.md)
+            -   [最適化ルールのブロックリストと式のプッシュダウン](/blocklist-control-plan.md)
 -   チュートリアル
     -   [1 つの地域展開における複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)
     -   [2 つの都市に配置された 3 つのデータ センター](/three-data-centers-in-two-cities-deployment.md)
@@ -237,7 +242,7 @@
         -   [高度な同時書き込み](/best-practices/high-concurrency-best-practices.md)
         -   [グラファナの監視](/best-practices/grafana-monitor-best-practices.md)
         -   [PD スケジューリング](/best-practices/pd-scheduling-best-practices.md)
-        -   [](/best-practices/massive-regions-best-practices.md)
+        -   [大規模なリージョンでの TiKV性能チューニング](/best-practices/massive-regions-best-practices.md)
         -   [3 ノードのハイブリッド展開](/best-practices/three-nodes-hybrid-deployment.md)
         -   [3 つのデータ センター展開でのローカル読み取り](/best-practices/three-dc-local-read.md)
     -   [配置ルールを使用する](/configure-placement-rules.md)
@@ -355,7 +360,7 @@
             -   [CSV サポート](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
             -   [バックエンド](/tidb-lightning/tidb-lightning-backends.md)
             -   [物理インポート モード](/tidb-lightning/tidb-lightning-physical-import-mode.md)
-            -   [物理インポート モードの使用法](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
+            -   [物理インポート モードの使用](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
             -   [並行してデータをインポートする](/tidb-lightning/tidb-lightning-distributed-import.md)
             -   [エラー解決](/tidb-lightning/tidb-lightning-error-resolution.md)
             -   [ウェブインターフェース](/tidb-lightning/tidb-lightning-web-interface.md)
@@ -381,7 +386,7 @@
             -   [タスクの構成](/dm/dm-task-configuration-guide.md)
             -   [テーブル ルーティング](/dm/dm-key-features.md)
             -   [ブロックリストと許可リスト](/dm/dm-key-features.md#block-and-allow-table-lists)
-            -   [Binlogイベント フィルター](/dm/dm-key-features.md#binlog-event-filter)
+            -   [Binlogイベント フィルタ](/dm/dm-key-features.md#binlog-event-filter)
             -   [SQL 式を使用した DML のフィルタリング](/dm/feature-expression-filter.md)
             -   データ移行タスクの管理
                 -   [タスクの事前チェック](/dm/dm-precheck.md)
@@ -437,7 +442,7 @@
                 -   [DM 接続の TLS を有効にする](/dm/dm-enable-tls.md)
                 -   [自己署名証明書の生成](/dm/dm-generate-self-signed-certificates.md)
             -   モニタリングとアラート
-                -   [指標の監視](/dm/monitor-a-dm-cluster.md)
+                -   [指標のモニタリング](/dm/monitor-a-dm-cluster.md)
                 -   [アラート ルール](/dm/dm-alert-rules.md)
             -   [エラーコード](/dm/dm-error-handling.md#handle-common-errors)
             -   [用語集](/dm/dm-glossary.md)
@@ -492,7 +497,7 @@
         -   [デプロイ](/ticdc/deploy-ticdc.md)
         -   [管理](/ticdc/manage-ticdc.md)
         -   監視と警告
-            -   [指標のモニタリング](/ticdc/monitor-ticdc.md)
+            -   [指標の監視](/ticdc/monitor-ticdc.md)
             -   [アラート ルール](/ticdc/ticdc-alert-rules.md)
         -   [トラブルシューティング](/ticdc/troubleshoot-ticdc.md)
         -   参照
@@ -500,7 +505,6 @@
             -   [TiCDC オープン プロトコル](/ticdc/ticdc-open-protocol.md)
             -   [TiCDC Avro プロトコル](/ticdc/ticdc-avro-protocol.md)
             -   [TiCDC Canal- JSON プロトコル](/ticdc/ticdc-canal-json.md)
-            -   [TiDB をコンフルエント プラットフォームと統合する](/ticdc/integrate-confluent-using-ticdc.md)
         -   [よくある質問](/ticdc/ticdc-faq.md)
         -   [用語集](/ticdc/ticdc-glossary.md)
     -   [Dumpling](/dumpling-overview.md)
@@ -716,8 +720,8 @@
         -   [テーブル属性](/table-attributes.md)
         -   取引
             -   [概要](/transaction-overview.md)
-            -   [Isolation Levels](/transaction-isolation-levels.md)
-            -   [Optimistic Transactions](/optimistic-transaction.md)
+            -   [分離レベル](/transaction-isolation-levels.md)
+            -   [楽観的な取引](/optimistic-transaction.md)
             -   [悲観的な取引](/pessimistic-transaction.md)
             -   [非トランザクション DML ステートメント](/non-transactional-dml.md)
         -   ガベージ コレクション (GC)
@@ -725,8 +729,8 @@
             -   [Configuration / コンフィグレーション](/garbage-collection-configuration.md)
         -   [ビュー](/views.md)
         -   [パーティショニング](/partitioned-table.md)
-        -   [Temporary Tables](/temporary-tables.md)
-        -   [Cached Tables](/cached-tables.md)
+        -   [一時テーブル](/temporary-tables.md)
+        -   [キャッシュされたテーブル](/cached-tables.md)
         -   文字セットと照合順序
             -   [概要](/character-set-and-collation.md)
             -   [GBK](/character-set-gbk.md)
@@ -924,9 +928,9 @@
         -   [3.1.1](/releases/release-3.1.1.md)
         -   [3.1.0 一般提供](/releases/release-3.1.0-ga.md)
         -   [3.1.0-rc](/releases/release-3.1.0-rc.md)
-        -   [3.1.0-beta.2](/releases/release-3.1.0-beta.2.md)
-        -   [3.1.0-beta.1](/releases/release-3.1.0-beta.1.md)
-        -   [3.1.0-beta](/releases/release-3.1.0-beta.md)
+        -   [3.1.0-ベータ.2](/releases/release-3.1.0-beta.2.md)
+        -   [3.1.0-ベータ.1](/releases/release-3.1.0-beta.1.md)
+        -   [3.1.0-ベータ版](/releases/release-3.1.0-beta.md)
     -   v3.0
         -   [3.0.20](/releases/release-3.0.20.md)
         -   [3.0.19](/releases/release-3.0.19.md)
