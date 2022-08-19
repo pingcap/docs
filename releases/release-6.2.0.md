@@ -4,7 +4,7 @@ title: TiDB 6.2.0 Release Notes
 
 # TiDB v6.2.0 Release Notes
 
-Release date: August 16, 2022
+Release date: August 23, 2022
 
 TiDB version: 6.2.0
 
@@ -270,7 +270,7 @@ In v6.2.0, the key new features or improvements are as follows:
 | TiKV | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620) | Newly added | This configuration specifies the soft limit on the bandwidth with which background transactions write data (not effective currently). |
 | TiKV | [quota.background-read-bandwidth](/tikv-configuration-file.md#background-read-bandwidth-new-in-v620) | Newly added | This configuration specifies the soft limit on the bandwidth with which background transactions and the Coprocessor read data (not effective currently). |
 | TiKV | [quota.enable-auto-tune](/tikv-configuration-file.md#enable-auto-tune-new-in-v620) | Newly added | This configuration specifies whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances. |
-| TiKV | rocksdb.enable-pipelined-commit | Deleted | |
+| TiKV | rocksdb.enable-pipelined-commit | Deleted | This configuration is no longer effective. |
 | TiKV | gc-merge-rewrite | Deleted | This configuration is no longer effective. |
 | TiKV | [log-backup.enable](/tikv-configuration-file.md#enable-2-new-in-v620) | Newly added | This configuration controls whether to enable log backup on TiKV. |
 | TiKV | [log-backup.file-size-limit](/tikv-configuration-file.md#file-size-limit-new-in-v620) | Newly added | This configuration specifies the size limit on log backup data. Once this limit is reached, data is automatically flushed to external storage. |
