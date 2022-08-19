@@ -307,7 +307,7 @@ This section describes common problems you might encounter during TiKV server ma
 
 You can use [Placement Rules](/placement-rules-in-sql.md) to specify the location of data for compliance or multi-tenant applications.
 
-Placement Rules in SQL is designed to control the attributes of any continuous data range, such as the number of replicas, the Raft role, the placement location, abd the key ranges in which the rules take effect.
+Placement Rules in SQL is designed to control the attributes of any continuous data range, such as the number of replicas, the Raft role, the placement location, and the key ranges in which the rules take effect.
 
 ### What is the recommended number of replicas in the TiKV cluster? Is it better to keep the minimum number for high availability?
 
