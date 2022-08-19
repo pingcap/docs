@@ -327,7 +327,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     TiDB does not yet support JSON objects with the key length >= 65536.
 
-* ERROR 8130 (HY000): client has multi-statement capability disabled
+* Error Number: 8130
 
     The complete error message: `ERROR 8130 (HY000): client has multi-statement capability disabled`
 
