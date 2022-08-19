@@ -151,7 +151,7 @@ In v6.2.0, the key new features or improvements are as follows:
 
 * TiKV supports listing detailed configuration information using command-line flags
 
-    The TiKV configuration file can be used to manage TiKV instances. However, for instances that run for a long time and are managed by different users, it is difficult to know which configuration item has been modified and what the default value is. This might cause confusion when you upgrade the cluster or migrate data. Since TiDB v6.2.0, tikv-server supports a new command-line flag `-config-info` that lists default and current values of all TiKV configuration items, helps users to quickly verify the startup parameters of the TiKV process, and improves usability.
+    The TiKV configuration file can be used to manage TiKV instances. However, for instances that run for a long time and are managed by different users, it is difficult to know which configuration item has been modified and what the default value is. This might cause confusion when you upgrade the cluster or migrate data. Since TiDB v6.2.0, tikv-server supports a new command-line flag [`—config-info`](/command-line-flags-for-tikv-configuration.md#--config-info-format) that lists default and current values of all TiKV configuration items, helps users to quickly verify the startup parameters of the TiKV process, and improves usability.
 
     [User document](/command-line-flags-for-tikv-configuration.md#--config-info-format) [#12492](https://github.com/tikv/tikv/issues/12492) @[glorv](https://github.com/glorv)
 
@@ -360,7 +360,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
 
         - Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
 
-        - Optimize redo log performance, and fix meta and data inconsistency problems ([#6011](https://github.com/pingcap/tiflow/issues/6011)@[CharlesCheung96](https://github.com/CharlesCheung96)) ([#5924](https://github.com/pingcap/tiflow/issues/5924) @[zhaoxinyu](https://github.com/zhaoxinyu)) ([#6277](https://github.com/pingcap/tiflow/issues/6277) @[hicqu](https://github.com/hicqu))
+        - Optimize redo log performance, and fix meta and data inconsistency problems ([#6011](https://github.com/pingcap/tiflow/issues/6011) @[CharlesCheung96](https://github.com/CharlesCheung96)) ([#5924](https://github.com/pingcap/tiflow/issues/5924) @[zhaoxinyu](https://github.com/zhaoxinyu)) ([#6277](https://github.com/pingcap/tiflow/issues/6277) @[hicqu](https://github.com/hicqu))
 
     - TiDB Lightning
 
@@ -381,7 +381,7 @@ Since TiDB v6.2.0, backing up and restoring RawKV using BR is deprecated.
     - Fix the issue that `SHOW DATABASES LIKE …` is case-sensitive [#34766](https://github.com/pingcap/tidb/issues/34766) @[e11jah](https://github.com/e11jah)
     - Fix the issue that `SHOW TABLE STATUS LIKE ...` is case-sensitive [#7518](https://github.com/pingcap/tidb/issues/7518) @[likzn](https://github.com/likzn)
     - Fix the issue that `max-index-length` still reports an error in non-strict mode [#34931](https://github.com/pingcap/tidb/issues/34931) @[e11jah](https://github.com/e11jah)
-    - Fix the issue that `ALTER COLUMN XX DROP DEFAULT` does not work [#35018](https://github.com/pingcap/tidb/issues/35018) @[Defined2014](https://github.com/Defined2014)
+    - Fix the issue that `ALTER COLUMN ... DROP DEFAULT` does not work [#35018](https://github.com/pingcap/tidb/issues/35018) @[Defined2014](https://github.com/Defined2014)
     - Fix the issue that when you create a table, the default value and the type of a column are not consistent and are not automatically corrected [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - Fix the issue that data in the `mysql.columns_priv` table is not deleted synchronously after you run `DROP USER` [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
     - Fix the issue of DDL jam by disallowing creating tables within the schemas of some systems [#35205](https://github.com/pingcap/tidb/issues/35205) @[tangenta](https://github.com/tangenta)
