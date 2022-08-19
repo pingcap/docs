@@ -58,9 +58,18 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
     To ensure that newly written data is not deleted during incremental migration, you should disable GC for the upstream cluster before exporting full data. In this way, history data is not deleted.
 
+    Run the following command to disable GC:
+
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
+
+    ```
     Query OK, 0 rows affected (0.01 sec)
+    ```
+
+    To verify that the change takes effect, query the value of `tidb_gc_enable`:
+
+    ```sql
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
@@ -164,9 +173,19 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
     In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
 
+   To enable GC, run the following command:
+
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=TRUE;
+    ```
+
+    ```
     Query OK, 0 rows affected (0.01 sec)
+    ```
+
+    To verify that the change takes effect, query the value of `tidb_gc_enable`:
+
+    ```sql
     MySQL [test]> SELECT @@global.tidb_gc_enable;
     ```
 
