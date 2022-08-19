@@ -7,6 +7,28 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 This document summarizes the FAQs related to SQL operations in TiDB.
 
+## Does TiDB support secondary key?
+
+Yes. If a column in TiDB meets all of the following conditions, it can work as a secondary key:
+
+- Not the primary key column
+- Have the [`NOT NULL` constraint](/constraints.md#not-null)
+- Have a [secondary index](/develop/dev-guide-create-secondary-indexes.md)
+
+## How does TiDB perform when executing DDL operations on a large table?
+
+DDL operations of TiDB on large tables are not an issue. TiDB supports online DDL operations, and these DDL operations do not block DML operations.
+
+For some DDL operations such as adding columns, deleting columns or dropping indexes, TiDB can perform these operations quickly.
+
+For some heavy DDL operations such as adding indexes, TiDB needs to backfill data, which takes a longer time (depending on the size of the table) and consumes additional resources. The impact on online traffic is tunable. TiDB can do the backfill with multiple threads, and you can tune the number of threads.
+
+## How to choose the right query plan? Do I need to use hints? Or can I use hint?
+
+TiDB includes a cost-based optimizer. In most cases, the optimizer chooses the optimal query plan for you. If the optimizer does not do its job well, you can still use [optimizer hints](/optimizer-hints.md) to intervene with the optimizer.
+
+In addition, you can also use the [SQL binding](/sql-plan-management.md#sql-binding) to fix the query plan for a particular SQL statement.
+
 ## What are the MySQL variables that TiDB is compatible with?
 
 See [System Variables](/system-variables.md).
@@ -284,6 +306,17 @@ Generally the input data of `root task` comes from `cop task`; when `root task` 
 ### Edit TiDB options
 
 See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
+
+### How to avoid hotspot issues and achieve load balancing? Is hot partition or range an issue in TiDB?
+
+To learn the scenarios that cause hotspots, refer to [common hotpots](/troubleshoot-hot-spot-issues.md#common-hotspots). To resolve hotspot issues, you can use the following built-in TiDB features:
+
+- Set the [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) attribute. Then row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
+- For hotspots brought by auto-increment primary keys, use the [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute.
+- For read hotspots of small tables, use [Coprocessor Cache](/coprocessor-cache.md).
+- For hotspot issues caused by unbalanced access between Regions, such as full table scans for small tables, use [Load Base Split](/configure-load-base-split.md).
+
+If you have a performance issue caused by hotspot, refer to the [troubleshoot guide](/troubleshoot-hot-spot-issues.md) to get it resolved.
 
 ### How to scatter the hotspots?
 
