@@ -1,6 +1,6 @@
 ---
 title: Integrate Data with Confluent Cloud and Snowflake
-summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, and other platforms using TiCDC.
+summary: Learn how to stream TiDB data to Confluent Cloud, Snowflake, ksqlDB, and SQL Server.
 ---
 
 # Integrate Data with Confluent Cloud and Snowflake
