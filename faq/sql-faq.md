@@ -25,7 +25,7 @@ For some heavy DDL operations such as adding indexes, TiDB needs to backfill dat
 
 ## How to choose the right query plan? Do I need to use hints? Or can I use hint?
 
-TiDB includes a cost-based optimizer. In most cases, the optimizer chooses the optimal query plan for you. If the optimizer does not do its job well, you can still use [optimizer hints](/optimizer-hints.md) to intervene with the optimizer.
+TiDB includes a cost-based optimizer. In most cases, the optimizer chooses the optimal query plan for you. If the optimizer does not work well, you can still use [optimizer hints](/optimizer-hints.md) to intervene with the optimizer.
 
 In addition, you can also use the [SQL binding](/sql-plan-management.md#sql-binding) to fix the query plan for a particular SQL statement.
 
