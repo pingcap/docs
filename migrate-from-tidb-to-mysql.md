@@ -62,6 +62,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
     ```sql
     MySQL [test]> SET GLOBAL tidb_gc_enable=FALSE;
+    ```
 
     ```
     Query OK, 0 rows affected (0.01 sec)
