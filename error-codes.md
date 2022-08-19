@@ -523,13 +523,13 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
     - Check whether OOM exists in dmesg using `dmesg -T | grep -i oom`.
     - A long time of no access might also lead to this error. It is usually caused by TCP timeout. If TCP is not used for a long time, the operating system kills it.
 
-* ERROR 1105 (HY000)
+* Error Number: 1105 (HY000)
 
     The complete error message: `ERROR 1105 (HY000): other error: unknown error Wire Error(InvalidEnumValue(4004))`
 
     This error usually occurs when the version of TiDB does not match with that of TiKV. To avoid version mismatch, upgrade all components when you upgrade the version.
 
-* ERROR 1148 (42000)
+* Error Number: 1148 (42000)
 
     The complete error message: `ERROR 1148 (42000): the used command is not allowed with this TiDB version`
 
@@ -537,7 +537,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The solution is to use the `--local-infile=1` option when you start the MySQL client. For example, run the command `mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000`. The default value of `local-infile` varies in different versions of the MySQL client. Therefore, you need to configure it in specific MySQL clients.
 
-* ERROR 9001 (HY000)
+* Error Number: 9001 (HY000)
 
     The complete error message: `ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point`
 
