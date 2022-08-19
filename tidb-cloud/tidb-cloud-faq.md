@@ -100,3 +100,11 @@ No. When you import data to TiDB Cloud, the data is imported to TiKV. After the 
 ## Can I export TiFlash data in the CSV format?
 
 No. TiFlash data cannot be exported.
+
+## Can TiDB Cloud run in our VPC?
+
+No. TiDB Cloud runs on the PingCAP VPC, but the data and traffic are encrypted by default. So you do not need to worry about data privacy issues.
+
+## What does the SLA look like?
+
+TiDB Cloud provides 99.99% SLA. For details, see [Service Level Agreement for TiDB Cloud Services](https://en.pingcap.com/legal/service-level-agreement-for-tidb-cloud-services/).
