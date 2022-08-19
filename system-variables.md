@@ -2658,6 +2658,29 @@ For details, see [Identify Slow Queries](/identify-slow-queries.md).
 
 - For new clusters of v6.0.0 or later versions, the default value is `FAST`. For existing clusters that upgrade from versions earlier than v6.0.0, the default value is `OFF`.
 
+<<<<<<< HEAD
+=======
+### `tidb_txn_commit_batch_size` <span class="version-mark">New in v6.2.0</span>
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- Default value: `16384`
+- Range: `[1, 1073741824]`
+- Unit: Bytes
+
+<CustomContent platform="tidb">
+
+- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size), the commits might fail.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+- This variable is used to control the batch size of transaction commit requests that TiDB sends to TiKV. If most of the transactions in the application workload have a large number of write operations, adjusting this variable to a larger value can improve the performance of batch processing. However, if this variable is set to too large a value and exceeds the limit of TiKV's maximum size of a single log (which is 8 MB by default), the commits might fail.
+
+</CustomContent>
+
+>>>>>>> 5a907a641 (ticdc: highlight integrate with snowflake (#10075))
 ### tidb_txn_mode
 
 - Scope: SESSION | GLOBAL
