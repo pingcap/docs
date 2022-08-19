@@ -28,7 +28,7 @@ You can download TiDB Toolkit from the following link:
 https://download.pingcap.org/tidb-community-toolkit-{version}-linux-amd64.tar.gz
 ```
 
-`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.1.0` is `https://download.pingcap.org/tidb-community-toolkit-v6.1.0-linux-amd64.tar.gz`.
+`{version}` in the link indicates the version number of TiDB. For example, the download link for `v6.2.0` is `https://download.pingcap.org/tidb-community-toolkit-v6.2.0-linux-amd64.tar.gz`.
 
 ## TiDB Toolkit description
 
@@ -36,7 +36,7 @@ Depending on which tools you want to use, you can install the corresponding offl
 
 | Tool | Offline package name |
 |:------|:----------|
-| [TiUP](/tiup/tiup-overview.md)  | `tiup-linux-amd64.tar.gz` <br/>`tiup-{tiup-version}-linux-amd64.tar.gz` <br/>`dm-{tiup-version}-linux-amd64.tar.gz`  |
+| [TiUP](/tiup/tiup-overview.md)  | `tiup-linux-amd64.tar.gz` <br/>`tiup-{tiup-version}-linux-amd64.tar.gz` <br/>`dm-{tiup-version}-linux-amd64.tar.gz` <br/> `server-{version}-linux-amd64.tar.gz` |
 | [Dumpling](/dumpling-overview.md)  | `dumpling-{version}-linux-amd64.tar.gz`  |
 | [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)  | `tidb-lightning-ctl` <br/>`tidb-lightning-{version}-linux-amd64.tar.gz`  |
 | [TiDB Data Migration (DM)](/dm/dm-overview.md)  | `dm-worker-{version}-linux-amd64.tar.gz` <br/>`dm-master-{version}-linux-amd64.tar.gz` <br/>`dmctl-{version}-linux-amd64.tar.gz`  |
