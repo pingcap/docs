@@ -332,7 +332,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message: `ERROR 8130 (HY000): client has multi-statement capability disabled`
 
-    This error might occur after upgrading from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
+    This error might occur after you upgrade from an earlier version of TiDB. To reduce the impact of SQL injection attacks, TiDB now prevents multiple queries from being executed in the same `COM_QUERY` call by default.
 
     The system variable [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011) can be used to control this behavior.
 
@@ -456,7 +456,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message: `ERROR 9005 (HY000): Region is unavailable`
 
-    The accessed Region is not available. A certain Raft Group is not available, with possible reasons such as the number of replicas is not enough. This error usually occurs when the TiKV server is busy or the TiKV node is down.
+    The accessed Region or a certain Raft Group is not available, with possible reasons such as insufficient replicas. This error usually occurs when the TiKV server is busy or the TiKV node is down.
 
     Check the status, monitoring data and log of the TiKV server.
 
@@ -465,8 +465,6 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
     The complete error message: `ERROR 9006 (HY000): GC life time is shorter than transaction duration`
 
     The interval of `GC Life Time` is too short. The data that should have been read by long transactions might be deleted. You can adjust [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) using the following command:
-
-    {{< copyable "sql" >}}
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '30m';
@@ -516,11 +514,11 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
 ### MySQL native error messages
 
-* ERROR 2013 (HY000): Lost connection to MySQL server during query
+* Error Number: 2013 (HY000)
 
     The complete error message: `ERROR 2013 (HY000): Lost connection to MySQL server during query`
 
-    You can handle the error in the following ways:
+    You can handle this error as follows:
 
     - Check whether panic is in the log.
     - Check whether OOM exists in dmesg using `dmesg -T | grep -i oom`.
@@ -530,7 +528,7 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     The complete error message: `ERROR 1105 (HY000): other error: unknown error Wire Error(InvalidEnumValue(4004))`
 
-    This error usually occurs when the version of TiDB does not match with the version of TiKV. To avoid version mismatch, upgrade all components when you upgrade the version.
+    This error usually occurs when the version of TiDB does not match with that of TiKV. To avoid version mismatch, upgrade all components when you upgrade the version.
 
 * ERROR 1148 (42000): the used command is not allowed with this TiDB version
 
@@ -538,17 +536,17 @@ TiDB is compatible with the error codes in MySQL, and in most cases returns the 
 
     When you execute the `LOAD DATA LOCAL` statement but the MySQL client does not allow executing this statement (the value of the `local_infile` option is 0), this error occurs.
 
-    The solution is to use the `--local-infile=1` option when you start the MySQL client. For example, use command like `mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000`. The default value of `local-infile` is different in different versions of MySQL client, therefore you need to configure it in some MySQL clients and do not need to configure it in some others.
+    The solution is to use the `--local-infile=1` option when you start the MySQL client. For example, run the command `mysql --local-infile=1 -u root -h 127.0.0.1 -P 4000`. The default value of `local-infile` varies in different versions of the MySQL client. Therefore, you need to configure it in specific MySQL clients.
 
 * ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point
 
     The complete error message: `ERROR 9001 (HY000): PD server timeout start timestamp may fall behind safe point`
 
-    This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and this error occurs if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/error-codes.md).
+    This error occurs when TiDB fails to access PD. A worker in the TiDB background continuously queries the safepoint from PD and reports this error if it fails to query within 100s. Generally, it is because the disk on PD is slow and busy or the network failed between TiDB and PD. For the details of common errors, see [Error Number and Fault Diagnosis](/error-codes.md).
 
-* TiDB log error messages: EOF error
+* TiDB log error message: EOF error
 
-    When the client or proxy disconnects from TiDB, TiDB does not immediately notice that the connection has been disconnected. Instead, TiDB can only notice the disconnection when it begins to return data to the connection. At this time, the log prints an EOF error.
+    When the client or proxy disconnects from TiDB, TiDB does not immediately notice the disconnection. Instead, TiDB notices the disconnection only when it begins to return data to the connection. At this time, the log prints an EOF error.
 
 ## Troubleshooting
 
