@@ -25,19 +25,12 @@ This document walks you through the quickest way to get started with TiDB Cloud.
 
 1. If you do not have a TiDB Cloud account, click [TiDB Cloud](https://tidbcloud.com/free-trial) to sign up for an account.
 2. [Sign in](https://tidbcloud.com/) with your TiDB Cloud account.
-<<<<<<< HEAD
-3. To create a Developer Tier cluster for one year free, you can either select the **Developer Tier** plan on the [plan page](https://tidbcloud.com/console/plans) or click [Create a Cluster (Developer Tier)](https://tidbcloud.com/console/create-cluster?tier=dev).
-4. On the **Create a Cluster (Developer Tier)** page, set up your cluster name, password, cloud provider (for now, only AWS is available for Developer Tier), and region (a nearby region is recommended). Then click **Create** to create your cluster.
-5. Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes. You can check the creation progress at [Active Clusters](https://tidbcloud.com/console/clusters).
-6. After creating a cluster, on the **Active Clusters** page, click the name of your newly created cluster to navigate to the cluster control panel.
-=======
 3. To create a Developer Tier cluster for one year free, you can either select the **Developer Tier** plan on the [plan page](https://tidbcloud.com/console/plans) or click **Create Cluster** on the [**Active Clusters**](https://tidbcloud.com/console/clusters) page.
 4. On the **Create Cluster** page, set up your cluster name, cloud provider (for now, only AWS is available for Developer Tier), and region (a nearby region is recommended). Then click **Create** to create your cluster.
->>>>>>> ba53a2c23 (cloud: add developer guides (#9676))
 
     The cluster creation process starts and the **Security Settings** dialog box is displayed.
 
-6. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
 
     Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
 
