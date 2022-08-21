@@ -106,7 +106,6 @@ To import the Parquet files to TiDB Cloud, take the following steps:
     - **Bucket URL**: select the bucket URL where your Parquet files are located.
     - **Data Format**: select **Parquet**.
     - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
-<<<<<<< HEAD
     - **Target Cluster**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
@@ -117,7 +116,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
         - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
         - `*.*` : all tables will be imported.
 
-        For more information, see [table filter snytax](https://docs.pingcap.com/tidb/stable/table-filter#syntax).
+        For more information, see [table filter snytax](/table-filter.md#syntax).
 
     - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import Parquet files whose filenames match a certain pattern to a single target table.
 
@@ -135,12 +134,6 @@ To import the Parquet files to TiDB Cloud, take the following steps:
             - `my-data*.parquet`: all Parquet files starting with `my-data` will be imported into the same target table.
 
         - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
-=======
-    - **Target Database**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
-    - **Object Name Pattern**: enter a pattern that matches the names of the Parquet files to be imported. For example,`my-data.parquet`.
-    - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
->>>>>>> b677fb1dc (cloud: add table filters and dumpling docs (#9687))
 
 4. Click **Import**.
 
