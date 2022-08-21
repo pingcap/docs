@@ -109,11 +109,7 @@ You need to prepare an EC2 to run the following data export task. It's better to
 
 3. Back up the source database to S3.
 
-<<<<<<< HEAD
-    Use Dumpling to export the data from Amazon Aurora. Based on your environment, replace the content in angle brackets (>), and then execute the following commands. If you want to use filter rules when exporting the data, refer to [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter#syntax).
-=======
     Use Dumpling to export the data from Amazon Aurora. Based on your environment, replace the content in angle brackets (>), and then execute the following commands. If you want to use filter rules when exporting the data, refer to [Table Filter](/table-filter.md#syntax).
->>>>>>> b677fb1dc (cloud: add table filters and dumpling docs (#9687))
 
     {{< copyable "shell-regular" >}}
 
@@ -212,11 +208,7 @@ Once finished, you will have created a policy and role for cross-account. You ca
 
 ## Learn how to set up filter rules
 
-<<<<<<< HEAD
-Refer to the [Table Filter](https://docs.pingcap.com/tidb/stable/table-filter#syntax) document.
-=======
 Refer to the [Table Filter](/table-filter.md#syntax) document.
->>>>>>> b677fb1dc (cloud: add table filters and dumpling docs (#9687))
 
 ## Learn how to clean up incomplete data
 
