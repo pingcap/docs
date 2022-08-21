@@ -81,10 +81,41 @@ To import the CSV files to TiDB Cloud, take the following steps:
         >
         > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
 
+<<<<<<< HEAD
     - **Target Database**: fill in the **Username** and **Password** fields.
     - **DB/Tables Filter**: if necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
     - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. For example,`my-data.csv`.
     - **Target Table Name**: enter the name of the target table. For example, `mydb.mytable`.
+=======
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
+    - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+
+        For example:
+
+        - `db01.*`: all tables in the `db01` database will be imported.
+        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
+        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
+        - `*.*` : all tables will be imported.
+
+        For more information, see [table filter snytax](/table-filter.md#syntax).
+
+    - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import CSV files whose filenames match a certain pattern to a single target table.
+
+        > **Note:**
+        >
+        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+
+        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between CSV files and a single target table in the following fields:
+
+        - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, you can enter the filename here directly.
+
+            For example:
+
+            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
+            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+
+        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+>>>>>>> b111c33ba (cloud: add table filters and dumpling docs (#9687) (#10091))
 
 4. Click **Import**.
 
