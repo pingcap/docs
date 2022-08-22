@@ -2148,7 +2148,7 @@ explain select * from t where age=5;
 - Persists to cluster: Yes
 - Default value: `9223372036854775807`
 - Range: `[1, 9223372036854775807]`
-- This variable controls the max number of the continous IDs. Generally, the allocating [`AUTO_RANDOM`](/auto-random.md) IDs or the [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) annotated row IDs are incremental and continuous in one transaction. This variable can be used to solve the hotspot issue in the large transaction scenario.
+- This variable controls the maximum number of continuous IDs to be allocated for the [`AUTO_RANDOM`](/auto-random.md) or [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) attribute. Generally, `AUTO_RANDOM` IDs or the `SHARD_ROW_ID_BITS` annotated row IDs are incremental and continuous in one transaction. You can use this variable to solve the hotspot issue in large transaction scenarios.
 
 ### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
 
