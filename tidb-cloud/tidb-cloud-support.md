@@ -24,6 +24,8 @@ To request support for your organization, project, or cluster, perform the follo
 
 Alternatively, you can click **Support** in the upper-right corner and click **Create New Case** to request support. If you go with this way, you need to provide your Organization ID in the request form as well. To get the Organization ID, click your account name in the upper-right corner of the TiDB Cloud console and click **Organization Settings**.
 
+After the support team receives your request, they will reply to you via email.
+
 ## Check your submitted request
 
 After you have submitted a request, to check the status of your request, perform the following steps:
