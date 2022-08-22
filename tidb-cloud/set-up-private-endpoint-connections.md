@@ -32,7 +32,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 
 ## Set up private endpoint with AWS
 
-This section describes how to set up a private endpoint.
+This section describes how to set up a private endpoint with AWS PrivateLink.
 
 Take the following steps to set up a private endpoint. If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
