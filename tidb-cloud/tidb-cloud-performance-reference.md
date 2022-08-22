@@ -5,7 +5,7 @@ summary: Learn TiDB Cloud performance test results.
 
 # TiDB Cloud Performance Reference
 
-This document provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of several TiDB cluster scales, which can be taken as a reference when you determine the cluster size.
+This document provides [TPC-C](https://www.tpc.org/tpcc/) and [Sysbench](https://github.com/akopytov/sysbench) performance test results of several TiDB cluster scales, which can be taken as a reference when you [determine the cluster size](/tidb-cloud/size-your-cluster.md).
 
 ## 2 vCPU performance
 
@@ -14,9 +14,9 @@ Currently, the 2 vCPU support of TiDB and TiKV is still in beta.
 Test environment:
 
 - TiDB version: v6.1.0
-- Warehouses: 1000
-- Data size: 80 G
-- Table size: 10000000
+- Warehouses: 1,000
+- Data size: 80 GiB
+- Table size: 10,000,000
 - Table count: 32
 
 Test scale:
@@ -31,17 +31,17 @@ Test results:
 
     | Transaction model | Threads | tpmC   | Latency (ms) |
     |-------------------|---------|--------|--------|
-    | TPCC              | 25      | 4486 | 2.24 |
+    | TPCC              | 25      | 4,486 | 2.24 |
 
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS    | Latency (ms) |
     |-------------------|---------|--------|--------|
-    | Insert            | 25   | 2508  | 7.92         |
-    | Point Select      | 50      | 16858 | 1.72         |
+    | Insert            | 25   | 2,508  | 7.92         |
+    | Point Select      | 50      | 16,858 | 1.72         |
     | Read Write        | 50      | 360   | 4.95         |
-    | Update Index      | 25      | 1653  | 14.05        |
-    | Update Non-index  | 25      | 2800  | 8.02 |
+    | Update Index      | 25      | 1,653  | 14.05        |
+    | Update Non-index  | 25      | 2,800  | 8.02 |
 
 - Maximum TPS and QPS
 
@@ -49,26 +49,26 @@ Test results:
 
     | Transaction model | Threads | tpmC | Latency (ms) |
     | ----------------- | ------- | ---- | ------------ |
-    | TPCC              | 100     | 7592 | 6.68         |
+    | TPCC              | 100     | 7,592 | 6.68         |
 
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS    | Latency (ms) |
     |-------------------|---------|--------|--------|
-    | Insert            | 100     | 6147  | 14.77        |
-    | Point Select      | 100     | 19462 | 3.21         |
+    | Insert            | 100     | 6,147  | 14.77        |
+    | Point Select      | 100     | 19,462 | 3.21         |
     | Read Write        | 100     | 378 | 9.58         |
-    | Update Index      | 100     | 3140 | 30.34        |
-    | Update Non-index  | 100     | 5805  | 15.92 |
+    | Update Index      | 100     | 3,140 | 30.34        |
+    | Update Non-index  | 100     | 5,805  | 15.92 |
 
 ## 4 vCPU performance
 
 Test environment:
 
 - TiDB version: v5.4.0
-- Warehouses: 5000
-- Data size: 366 G
-- Table size: 10000000
+- Warehouses: 5,000
+- Data size: 366 GiB
+- Table size: 10,000,000
 - Table count: 16
 
 Test scale:
@@ -118,9 +118,9 @@ Test results:
 Test environment:
 
 - TiDB version: v5.4.0
-- Warehouses: 5000
-- Data size: 366 G
-- Table size: 10000000
+- Warehouses: 5,000
+- Data size: 366 GiB
+- Table size: 10,000,000
 - Table count: 16
 
 Test scales:
@@ -211,9 +211,9 @@ Test results:
 Test environment:
 
 - TiDB version: v5.4.0
-- Warehouses: 5000
-- Data size: 366 G
-- Table size: 10000000
+- Warehouses: 5,000
+- Data size: 366 GiB
+- Table size: 10,000,000
 - Table count: 16
 
 Test scales:
