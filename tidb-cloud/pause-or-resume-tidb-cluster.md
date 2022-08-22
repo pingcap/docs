@@ -5,9 +5,9 @@ summary: Learn how to pause or resume a TiDB cluster.
 
 # Pause or Resume a TiDB Cluster
 
-TiDB Cloud allows you to easily pause and resume a cluster that is not in operation at all times.
+You can easily pause and resume a cluster that is not in operation at all times in TiDB Cloud.
 
-The pause does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption. After the pause, you can resume your cluster at any time.
+The pause does not affect your data stored in the cluster but only stops the collection of monitoring information and the consumption of computing resources. After the pause, you can resume your cluster at any time.
 
 Comparing with backup and restore, pausing and resuming a cluster takes less time and keeps your cluster state information (including cluster version, cluster configurations, and TiDB user accounts).
 
@@ -18,8 +18,8 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 ## Limitations
 
 - You can pause your cluster only when it is in the **Normal** state. If your cluster is in other states such as **Scaling**, you must wait for the current operation to be completed before pausing the cluster.
-- You cannot pause your cluster when it is importing data. You can either wait for the import task to be completed or cancel the import task.
-- You cannot pause your cluster when it is backing up data. You can either wait for the current backup jobs to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
+- You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
+- You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 
 <!--- - You cannot pause your cluster if it has any [Changefeeds](/tidb-cloud/changefeed-overview.md). You need to delete the existing Changefeeds ([Delete Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md#delete-a-sink) or [Delete Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink)) before pausing the cluster. --->
 
@@ -27,7 +27,9 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 
 When a cluster is paused, note the following:
 
-- TiDB Cloud stops collecting monitoring information of the cluster, you cannot read data from or write data to the cluster, and you cannot import or back up data.
+- TiDB Cloud stops collecting monitoring information of the cluster.
+- You cannot read data from or write data to the cluster.
+- You cannot import or back up data.
 - Only the following costs will be charged:
 
     - Node Storage Cost
