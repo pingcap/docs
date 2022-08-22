@@ -1561,7 +1561,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
     - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
     - `start_ts`: The start timestamp of the transaction.
-    - `for_update_ts`: The for_update_ts of the previously executed DML statement, which is an internal term of TiDB used for tests, usually, the end-user doesn't need to care about it.
+    - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
     - `error`: The error message if any.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
