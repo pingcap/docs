@@ -447,5 +447,5 @@ We would like to thank the following contributors from the TiDB community:
 - [wirybeaver](https://github.com/wirybeaver)
 - [hey-kong](https://github.com/hey-kong)
 - [fatelei](https://github.com/fatelei)
-- [eastfisher](https://github.com/eastfisher): First-time contributer
-- [Juneezee](https://github.com/Juneezee): First-time contributer
+- [eastfisher](https://github.com/eastfisher): First-time contributor
+- [Juneezee](https://github.com/Juneezee): First-time contributor
