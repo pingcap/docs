@@ -8,7 +8,7 @@ Release date: August 23, 2022
 
 TiDB version: 6.2.0
 
-In v6.2.0, the key new features or improvements are as follows:
+In v6.2.0, the key new features and improvements are as follows:
 
 * TiDB Dashboard supports visual execution plans, allowing more intuitive display of execution plans.
 * Add a Monitoring page in TiDB Dashboard to make the performance analysis and tuning more efficient.
@@ -18,18 +18,18 @@ In v6.2.0, the key new features or improvements are as follows:
 * A new concurrent DDL framework: Less DDL statements blocked and higher execution efficiency.
 * TiKV supports automatically tuning the CPU usage, thus ensuring stable and efficient database operations.
 * Point-in-Time Recovery (PITR) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
-* TiDB Lightning supports importing data to production clusters in the table-level physical import mode.
+* TiDB Lightning supports importing data to production clusters in the physical import mode.
 * BR supports restoring user and privilege data, making backup and restore smoother.
 * TiCDC unlocks more data replication scenarios by supporting filtering specific types of DDL events.
 * The `SAVEPOINT` mechanism is supported, with which you can flexibly control the rollback points within a transaction.
 * TiDB supports adding, dropping, and modifying multiple columns or indexes with only one `ALTER TABLE` statement.
-* Backing up and restoring RawKV across clusters is now supported.
+* Cross-cluster RawKV replication is now supported.
 
 ## New features
 
 ### SQL
 
-* The physical data compaction feature is in General Availability (GA)
+* The physical data compaction feature is GA
 
     The TiFlash backend automatically compacts physical data based on specific conditions to reduce the backlog of useless data and optimize the data storage structure.
 
@@ -71,7 +71,7 @@ In v6.2.0, the key new features or improvements are as follows:
 
 * Improve the `LEADING` optimizer hint to support outer join ordering
 
-    In v6.1.0, the optimizer hint `LEADING` was introduced to modify the join order of tables. But this hint was not applicable to queries that contain outer joins. For more information, see [`LEADING` document](/optimizer-hints.md#leadingt1_name--tl_name-). In v6.2.0, TiDB lifts this restriction. In a query that contains outer join, now you can use this hint to specify the join order of tables to get better SQL execution performance and to avoid the sudden change of execution plan.
+    In v6.1.0, the optimizer hint `LEADING` was introduced to modify the join order of tables. But this hint was not applicable to queries that contain outer joins. For more information, see [`LEADING` document](/optimizer-hints.md#leadingt1_name--tl_name-). In v6.2.0, TiDB lifts this restriction. In a query that contains outer join, now you can use this hint to specify the join order of tables to get better SQL execution performance and to avoid the sudden change of execution plans.
 
     [User document](/optimizer-hints.md#leadingt1_name--tl_name-) [#29932](https://github.com/pingcap/tidb/issues/29932) @[Reminiscent](https://github.com/Reminiscent)
 
@@ -117,7 +117,7 @@ In v6.2.0, the key new features or improvements are as follows:
 
     In TiDB v6.2.0, data is stored in the new storage format by default. Note that if TiFlash is upgraded from earlier versions to v6.2.0, you cannot perform in-place downgrade on TiFlash, because earlier TiFlash versions cannot recognize the new storage format.
 
-    For more information about upgrading TiFlash, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade.md).
+    For more information about upgrading TiFlash, see [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md).
 
     [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) [#3594](https://github.com/pingcap/tiflash/issues/3594) @[JaySon-Huang](https://github.com/JaySon-Huang) @[lidezhu](https://github.com/lidezhu) @[jiaqizho](https://github.com/jiaqizho)
 
@@ -191,11 +191,11 @@ In v6.2.0, the key new features or improvements are as follows:
 
     [#34275](https://github.com/pingcap/tidb/issues/34275) @[WangLe1321](https://github.com/WangLe1321)
 
-* TiDB Lightning supports importing data to production clusters in physical import mode
+* TiDB Lightning supports importing data to production clusters in the physical import mode
 
     Previously, the physical import mode of TiDB Lightning (backend='local') had a significant impact on the target cluster. For example, during the migration, PD global scheduling is paused. Therefore, the previous physical import mode is only suitable for initial data import.
 
-    TiDB Lightning improves on the existing physical import mode. The impact of import is reduced from cluster level to table level. That is, you can read and write tables that are not being imported.
+    TiDB Lightning improves the existing physical import mode. By allowing pausing the scheduling of tables, the impact of import is reduced from cluster level to table level. That is, you can read and write tables that are not being imported.
 
     This feature does not need manual configuration. If your TiDB cluster is v6.1.0 or later versions and TiDB Lightning is v6.2.0 or later versions, the new physical import mode takes effect automatically.
 
