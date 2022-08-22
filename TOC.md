@@ -8,9 +8,9 @@
   - [Basic Features](/basic-features.md)
   - [Experimental Features](/experimental-features.md)
   - Benchmarks
-    - [v6.1 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.1.0-vs-v6.0.0.md)
-    - [v6.1 TPC-C Performance Test Report](/benchmark/v6.1-performance-benchmarking-with-tpcc.md)
-    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.1-performance-benchmarking-with-tpch.md)
+    - [v6.2 Sysbench Performance Test Report](/benchmark/benchmark-sysbench-v6.2.0-vs-v6.1.0.md)
+    - [v6.2 TPC-C Performance Test Report](/benchmark/v6.2-performance-benchmarking-with-tpcc.md)
+    - [Performance Comparison between TiFlash and Greenplum/Spark](/benchmark/v6.2-performance-benchmarking-with-tpch.md)
   - [MySQL Compatibility](/mysql-compatibility.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [Credits](/credits.md)
@@ -56,7 +56,7 @@
       - [Follower Read](/develop/dev-guide-use-follower-read.md)
       - [Stale Read](/develop/dev-guide-use-stale-read.md)
     - [HTAP Queries](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)
-    - [Fast Mode](/develop/dev-guide-read-in-fast-mode.md)
+    - [FastScan](/develop/dev-guide-use-fastscan.md)
   - Transaction
     - [Overview](/develop/dev-guide-transaction-overview.md)
     - [Optimistic and Pessimistic Transactions](/develop/dev-guide-optimistic-and-pessimistic-transaction.md)
@@ -87,6 +87,7 @@
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-party Support
     - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
+    - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -117,23 +118,29 @@
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
     - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
     - [Migrate from One TiDB Cluster to Another TiDB Cluster](/migrate-from-tidb-to-tidb.md)
-    - [Replicate Data from TiDB to Kafka](/replicate-data-to-kafka.md)
+    - [Migrate from TiDB to MySQL-compatible Databases](/migrate-from-tidb-to-mysql.md)
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md)
     - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
     - [Filter Binlog Events](/filter-binlog-event.md)
     - [Filter DML Events Using SQL Expressions](/filter-dml-event.md)
+- Integrate
+  - [Overview](/integration-overview.md)
+  - Integration Scenarios
+    - [Integrate with Confluent Cloud](/ticdc/integrate-confluent-using-ticdc.md)
+    - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/upgrade-a-tidb-cluster)
+    - [TiFlash v6.2.0 Upgrade Guide](/tiflash-620-upgrade-guide.md)
   - Scale
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
-    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
-    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
-    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    - [Use BR to Back Up Cluster Data](/br-usage-backup-for-maintain.md)
+    - [Use BR to Restore Cluster Data](/br-usage-restore-for-maintain.md)
+    - [BR Use Cases](/backup-and-restore-use-cases-for-maintain.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -501,7 +508,7 @@
       - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
       - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-      - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
+      - [Integrate TiDB with Confluent and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
@@ -867,6 +874,7 @@
   - [All Releases](/releases/release-notes.md)
   - [Release Timeline](/releases/release-timeline.md)
   - [TiDB Versioning](/releases/versioning.md)
+  - [TiDB Installation Packages](/binary-package.md)
   - v6.1
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
