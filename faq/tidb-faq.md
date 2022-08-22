@@ -90,11 +90,6 @@ Currently [TiDB documentation](/overview.md#tidb-introduction) is the most impor
 
 For more information, see [TiDB Limitations](/tidb-limitations.md).
 
-### Does TiDB support JSON or protocal buffers (protobuf)?
-
-- TiDB supports the native JSON type and JSON functions, which is MySQL-compatible.
-- Currently, TiDB does not support protocal buffers.
-
 ### Does TiDB support XA?
 
 No. The JDBC driver of TiDB is MySQL JDBC (Connector/J). When using Atomikos, set the data source to `type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`. TiDB does not support the connection with MySQL JDBC XADataSource. MySQL JDBC XADataSource only works for MySQL (for example, using DML to modify the `redo` log).
