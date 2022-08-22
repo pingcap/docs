@@ -9,11 +9,7 @@ This document summarizes the FAQs related to SQL operations in TiDB.
 
 ## Does TiDB support secondary key?
 
-Yes. If a column in TiDB meets all of the following conditions, it can work as a secondary key:
-
-- Not the primary key column
-- Have the [`NOT NULL` constraint](/constraints.md#not-null)
-- Have a [secondary index](/develop/dev-guide-create-secondary-indexes.md)
+Yes. You can have the [`NOT NULL` constraint](/constraints.md#not-null) on a non-primary key column with a unique [secondary index](/develop/dev-guide-create-secondary-indexes.md). In this case, the column works as a secondary key.
 
 ## How does TiDB perform when executing DDL operations on a large table?
 
@@ -21,7 +17,12 @@ DDL operations of TiDB on large tables are usually not an issue. TiDB supports o
 
 For some DDL operations such as adding columns, deleting columns or dropping indexes, TiDB can perform these operations quickly.
 
-For some heavy DDL operations such as adding indexes, TiDB needs to backfill data, which takes a longer time (depending on the size of the table) and consumes additional resources. The impact on online traffic is tunable. TiDB can do the backfill with multiple threads, and you can tune the number of threads.
+For some heavy DDL operations such as adding indexes, TiDB needs to backfill data, which takes a longer time (depending on the size of the table) and consumes additional resources. The impact on online traffic is tunable. TiDB can do the backfill with multiple threads, and the number of threads is set by the following system variables:
+
+- [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
+- [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
+- [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
+- [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
 ## How to choose the right query plan? Do I need to use hints? Or can I use hint?
 
@@ -309,7 +310,7 @@ See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
 
 ### How to avoid hotspot issues and achieve load balancing? Is hot partition or range an issue in TiDB?
 
-To learn the scenarios that cause hotspots, refer to [common hotpots](/troubleshoot-hot-spot-issues.md#common-hotspots). To resolve hotspot issues, you can use the following built-in TiDB features:
+To learn the scenarios that cause hotspots, refer to [common hotpots](/troubleshoot-hot-spot-issues.md#common-hotspots). To resolve hotspot issues, you can try the following built-in TiDB features:
 
 - Set the [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) attribute. Then row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
 - For hotspots brought by auto-increment primary keys, use the [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute.
