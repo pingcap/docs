@@ -171,36 +171,6 @@ In v6.2.0, the key new features and improvements are as follows:
 
 ### Data migration
 
-* Support configuring disk quota for TiDB Lightning (experimental)
-
-    When TiDB Lightning imports data in physical import mode (backend='local'), sorted-kv-dir must have enough space to store the source data. Insufficient disk space might cause the import task to fail. Now you can use the new `disk_quota` configuration to limit the total amount of disk space used by TiDB Lightning, so that the import task can be completed normally even when sorted-kv-dir does not have enough storage space.
-
-    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
-
-* DM supports continuous data validation (experimental)
-
-    Continuous data validation is used to continuously compare the upstream binlog with the data written into the downstream during data migration. The validator identifies data exceptions, such as inconsistent data and missing records.
-
-    This feature solves the issues of lagging validation and excessive resource consumption in common full data validation schemes.
-
-    [User document](/dm/dm-continuous-data-validation.md) [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) @[buchuitoudegou](https://github.com/buchuitoudegou)
-
-* Automatically identify the region of Amazon S3 buckets
-
-    Data migration tasks can automatically identify the region of Amazon S3 buckets. You do not need to explicitly pass the region parameter.
-
-    [#34275](https://github.com/pingcap/tidb/issues/34275) @[WangLe1321](https://github.com/WangLe1321)
-
-* TiDB Lightning supports importing data to production clusters in the physical import mode
-
-    Previously, the physical import mode of TiDB Lightning (backend='local') had a significant impact on the target cluster. For example, during the migration, PD global scheduling is paused. Therefore, the previous physical import mode is only suitable for initial data import.
-
-    TiDB Lightning improves the existing physical import mode. By allowing pausing the scheduling of tables, the impact of import is reduced from cluster level to table level. That is, you can read and write tables that are not being imported.
-
-    This feature does not need manual configuration. If your TiDB cluster is v6.1.0 or later versions and TiDB Lightning is v6.2.0 or later versions, the new physical import mode takes effect automatically.
-
-    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production) [#35148](https://github.com/pingcap/tidb/issues/35148) @[gozssky](https://github.com/gozssky)
-
 * BR supports restoring user and privilege data
 
     BR supports restoring user and privilege data when it performs a normal restoration. You do not need any additional restoration plan to restore user and privilege data. To enable this feature, specify the `--with-sys-table` parameter when you use BR to restore data.
@@ -218,6 +188,36 @@ In v6.2.0, the key new features and improvements are as follows:
     This feature has usage limitations. For details, refer to the user document.
 
     [User document](/br/point-in-time-recovery.md) [#29501](https://github.com/pingcap/tidb/issues/29501) @[joccau](https://github.com/joccau)
+
+* DM supports continuous data validation (experimental)
+
+    Continuous data validation is used to continuously compare the upstream binlog with the data written into the downstream during data migration. The validator identifies data exceptions, such as inconsistent data and missing records.
+
+    This feature solves the issues of lagging validation and excessive resource consumption in common full data validation schemes.
+
+    [User document](/dm/dm-continuous-data-validation.md) [#4426](https://github.com/pingcap/tiflow/issues/4426) @[D3Hunter](https://github.com/D3Hunter) @[buchuitoudegou](https://github.com/buchuitoudegou)
+
+* Automatically identify the region of Amazon S3 buckets
+
+    Data migration tasks can automatically identify the region of Amazon S3 buckets. You do not need to explicitly pass the region parameter.
+
+    [#34275](https://github.com/pingcap/tidb/issues/34275) @[WangLe1321](https://github.com/WangLe1321)
+
+* Support configuring disk quota for TiDB Lightning (experimental)
+
+    When TiDB Lightning imports data in physical import mode (backend='local'), sorted-kv-dir must have enough space to store the source data. Insufficient disk space might cause the import task to fail. Now you can use the new `disk_quota` configuration to limit the total amount of disk space used by TiDB Lightning, so that the import task can be completed normally even when sorted-kv-dir does not have enough storage space.
+
+    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
+
+* TiDB Lightning supports importing data to production clusters in the physical import mode
+
+    Previously, the physical import mode of TiDB Lightning (backend='local') had a significant impact on the target cluster. For example, during the migration, PD global scheduling is paused. Therefore, the previous physical import mode is only suitable for initial data import.
+
+    TiDB Lightning improves the existing physical import mode. By allowing pausing the scheduling of tables, the impact of import is reduced from cluster level to table level. That is, you can read and write tables that are not being imported.
+
+    This feature does not need manual configuration. If your TiDB cluster is v6.1.0 or later versions and TiDB Lightning is v6.2.0 or later versions, the new physical import mode takes effect automatically.
+
+    [User document](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production) [#35148](https://github.com/pingcap/tidb/issues/35148) @[gozssky](https://github.com/gozssky)
 
 * Refactor the [user documentation of TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) to make its structure more reasonable and clear. The terms for “backend” is also modified to lower the understanding barrier for new users:
 
