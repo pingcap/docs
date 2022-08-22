@@ -35,7 +35,7 @@ In v6.2.0, the key new features and improvements are as follows:
 
     There is often a certain amount of useless data in TiFlash tables before data compaction is automatically triggered. This feature lets you choose the right timing and manually execute SQL statements to immediately compact the physical data in TiFlash, thus reducing storage space usage and improving query performance. This feature is experimental in TiDB v6.1, and now is in General Availability (GA) in TiDB v6.2.0.
 
-    [User document](/sql-statements/sql-statement-alter-table-compact.md#alter-table-compact) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
+    [User document](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
 
 ### Observability
 
@@ -125,7 +125,7 @@ In v6.2.0, the key new features and improvements are as follows:
 
     TiFlash reduces duplicate reads of the same data by merging read operations of the same data, and optimizes the resource overhead in the case of multiple concurrent tasks to improve data scanning performance. It avoids the situation where the same data has to be read separately in each task, or even the same data may be read multiple times at the same time, if the same data is involved in multiple concurrent tasks.
 
-    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflash-toml-file) [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
+    [User document](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) [#5376](https://github.com/pingcap/tiflash/issues/5376) @[JinheLin](https://github.com/JinheLin)
 
 * TiFlash adds FastScan for data scanning to increase read and write speed by sacrificing data consistency (experimental)
 
@@ -272,12 +272,12 @@ In v6.2.0, the key new features and improvements are as follows:
 | TiKV | [quota.enable-auto-tune](/tikv-configuration-file.md#enable-auto-tune-new-in-v620) | Newly added | This configuration specifies whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances. |
 | TiKV | rocksdb.enable-pipelined-commit | Deleted | This configuration is no longer effective. |
 | TiKV | gc-merge-rewrite | Deleted | This configuration is no longer effective. |
-| TiKV | [log-backup.enable](/tikv-configuration-file.md#enable-2-new-in-v620) | Newly added | This configuration controls whether to enable log backup on TiKV. |
+| TiKV | [log-backup.enable](/tikv-configuration-file.md#enable-new-in-v620) | Newly added | This configuration controls whether to enable log backup on TiKV. |
 | TiKV | [log-backup.file-size-limit](/tikv-configuration-file.md#file-size-limit-new-in-v620) | Newly added | This configuration specifies the size limit on log backup data. Once this limit is reached, data is automatically flushed to external storage. |
 | TiKV | [log-backup.initial-scan-pending-memory-quota](/tikv-configuration-file.md#initial-scan-pending-memory-quota-new-in-v620) | Newly added | This configuration specifies the quota of cache used for storing incremental scan data. |
 | TiKV | [log-backup.max-flush-interval](/tikv-configuration-file.md#max-flush-interval-new-in-v620) | Newly added | This configuration specifies the maximum interval for writing backup data to external storage in log backup. |
 | TiKV | [log-backup.initial-scan-rate-limit](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620) | Newly added | This configuration specifies the rate limit on throughput in an incremental data scan in log backup. |
-| TiKV | [log-backup.num-threads](/tikv-configuration-file.md#num-threads-2-new-in-v620) | Newly added | This configuration specifies the number of threads used in log backup. |
+| TiKV | [log-backup.num-threads](/tikv-configuration-file.md#num-threads-new-in-v620) | Newly added | This configuration specifies the number of threads used in log backup. |
 | TiKV | [log-backup.temp-path](/tikv-configuration-file.md#temp-path-new-in-v620) | Newly added | This configuration specifies temporary path to which log files are written before being flushed to external storage. |
 | PD | replication-mode.dr-auto-sync.wait-async-timeout | Deleted | This configuration does not take effect and is deleted. |
 | PD | replication-mode.dr-auto-sync.wait-sync-timeout | Deleted | This configuration does not take effect and is deleted. |
