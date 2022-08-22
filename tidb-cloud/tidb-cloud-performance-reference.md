@@ -30,36 +30,36 @@ Test results:
     TPC-C performance:
 
     | Transaction model | Threads | tpmC   | Latency (ms) |
-    |-------------------|---------|--------|--------|
-    | TPCC              | 25      | 4,486 | 2.24 |
+    |-------------------|---------|--------|--------------|
+    | TPCC              | 25      | 4,486 | 2.24          |
 
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS    | Latency (ms) |
-    |-------------------|---------|--------|--------|
-    | Insert            | 25   | 2,508  | 7.92         |
+    |-------------------|---------|--------|--------------|
+    | Insert            | 25      | 2,508  | 7.92         |
     | Point Select      | 50      | 16,858 | 1.72         |
-    | Read Write        | 50      | 360   | 4.95         |
+    | Read Write        | 50      | 360    | 4.95         |
     | Update Index      | 25      | 1,653  | 14.05        |
-    | Update Non-index  | 25      | 2,800  | 8.02 |
+    | Update Non-index  | 25      | 2,800  | 8.02         |
 
 - Maximum TPS and QPS
 
     TPC-C performance:
 
-    | Transaction model | Threads | tpmC | Latency (ms) |
-    | ----------------- | ------- | ---- | ------------ |
+    | Transaction model | Threads | tpmC  | Latency (ms) |
+    | ----------------- | ------- | ----- | ------------ |
     | TPCC              | 100     | 7,592 | 6.68         |
 
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS    | Latency (ms) |
-    |-------------------|---------|--------|--------|
+    |-------------------|---------|--------|--------------|
     | Insert            | 100     | 6,147  | 14.77        |
     | Point Select      | 100     | 19,462 | 3.21         |
-    | Read Write        | 100     | 378 | 9.58         |
-    | Update Index      | 100     | 3,140 | 30.34        |
-    | Update Non-index  | 100     | 5,805  | 15.92 |
+    | Read Write        | 100     | 378    | 9.58         |
+    | Update Index      | 100     | 3,140  | 30.34        |
+    | Update Non-index  | 100     | 5,805  | 15.92        |
 
 ## 4 vCPU performance
 
@@ -82,18 +82,18 @@ Test results:
     TPC-C performance:
 
     | Transaction model | Threads | tpmC   | QPS    | Latency (ms) |
-    |-------------------|---------|--------|--------|---------------|
-    | TPCC              | 300     | 14,532 | 13,137 | 608           |
+    |-------------------|---------|--------|--------|--------------|
+    | TPCC              | 300     | 14,532 | 13,137 | 608          |
 
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
-    |-------------------|---------|--------|--------|---------------|
-    | Insert            | 300     | 8,848  | 8,848  | 36            |
-    | Point Select      | 600     | 46,224 | 46,224 | 13            |
-    | Read Write        | 150     | 719    | 14,385 | 209           |
-    | Update Index      | 150     | 4,346  | 4,346  | 35            |
-    | Update Non-index  | 600     | 13,603 | 13,603 | 44            |
+    |-------------------|---------|--------|--------|--------------|
+    | Insert            | 300     | 8,848  | 8,848  | 36           |
+    | Point Select      | 600     | 46,224 | 46,224 | 13           |
+    | Read Write        | 150     | 719    | 14,385 | 209          |
+    | Update Index      | 150     | 4,346  | 4,346  | 35           |
+    | Update Non-index  | 600     | 13,603 | 13,603 | 44           |
 
 - Maximum TPS and QPS
 
@@ -143,12 +143,12 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS    | QPS    | Latency (ms) |
-    |-------------------|---------|--------|--------|---------------|
-    | Insert            | 600     | 17,831 | 17,831 | 34            |
-    | Point Select      | 600     | 93,287 | 93,287 | 6             |
-    | Read Write        | 300     | 1,486  | 29,729 | 202           |
-    | Update Index      | 300     | 9,415  | 9,415  | 32            |
-    | Update Non-index  | 1,200   | 31,092 | 31,092 | 39            |
+    |-------------------|---------|--------|--------|--------------|
+    | Insert            | 600     | 17,831 | 17,831 | 34           |
+    | Point Select      | 600     | 93,287 | 93,287 | 6            |
+    | Read Write        | 300     | 1,486  | 29,729 | 202          |
+    | Update Index      | 300     | 9,415  | 9,415  | 32           |
+    | Update Non-index  | 1,200   | 31,092 | 31,092 | 39           |
 
 - Maximum TPS and QPS
 
@@ -181,12 +181,12 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
-    |-------------------|---------|---------|---------|---------------|
-    | Insert            | 1,200   | 33,892  | 33,892  | 23            |
-    | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
-    | Read Write        | 600     | 2,958   | 59,160  | 127           |
-    | Update Index      | 600     | 18,735  | 18,735  | 21            |
-    | Update Non-index  | 2,400   | 60,629  | 60,629  | 23            |
+    |-------------------|---------|---------|---------|--------------|
+    | Insert            | 1,200   | 33,892  | 33,892  | 23           |
+    | Point Select      | 1,200   | 185,574 | 181,255 | 4            |
+    | Read Write        | 600     | 2,958   | 59,160  | 127          |
+    | Update Index      | 600     | 18,735  | 18,735  | 21           |
+    | Update Non-index  | 2,400   | 60,629  | 60,629  | 23           |
 
 - Maximum TPS and QPS
 
@@ -199,12 +199,12 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
-    |-------------------|---------|---------|---------|---------------|
-    | Insert            | 4,000   | 47,029  | 47,029  | 43            |
-    | Point Select      | 1,200   | 185,574 | 181,255 | 4             |
-    | Read Write        | 1,200   | 3,030   | 60,624  | 197           |
-    | Update Index      | 4,000   | 30,140  | 30,140  | 67            |
-    | Update Non-index  | 4,000   | 68,664  | 68,664  | 29            |
+    |-------------------|---------|---------|---------|--------------|
+    | Insert            | 4,000   | 47,029  | 47,029  | 43           |
+    | Point Select      | 1,200   | 185,574 | 181,255 | 4            |
+    | Read Write        | 1,200   | 3,030   | 60,624  | 197          |
+    | Update Index      | 4,000   | 30,140  | 30,140  | 67           |
+    | Update Non-index  | 4,000   | 68,664  | 68,664  | 29           |
 
 ## 16 vCPU performance
 
@@ -236,12 +236,12 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
-    |-------------------|---------|---------|---------|---------------|
-    | Insert            | 1,200   | 35,096  | 35,096  | 34            |
-    | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
-    | Read Write        | 600     | 3,658   | 73,150  | 164           |
-    | Update Index      | 600     | 18,886  | 18,886  | 32            |
-    | Update Non-index  | 2,000   | 63,837  | 63,837  | 31            |
+    |-------------------|---------|---------|---------|--------------|
+    | Insert            | 1,200   | 35,096  | 35,096  | 34           |
+    | Point Select      | 1,200   | 228,600 | 228,600 | 5            |
+    | Read Write        | 600     | 3,658   | 73,150  | 164          |
+    | Update Index      | 600     | 18,886  | 18,886  | 32           |
+    | Update Non-index  | 2,000   | 63,837  | 63,837  | 31           |
 
 - Maximum TPS and QPS
 
@@ -254,12 +254,12 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
-    |-------------------|---------|---------|---------|---------------|
-    | Insert            | 2,000   | 43,338  | 43,338  | 46            |
-    | Point Select      | 1,200   | 228,600 | 228,600 | 5             |
-    | Read Write        | 1,200   | 3,682   | 73,631  | 326           |
-    | Update Index      | 3,000   | 29,576  | 29,576  | 101           |
-    | Update Non-index  | 3,000   | 64,624  | 64,624  | 46            |
+    |-------------------|---------|---------|---------|--------------|
+    | Insert            | 2,000   | 43,338  | 43,338  | 46           |
+    | Point Select      | 1,200   | 228,600 | 228,600 | 5            |
+    | Read Write        | 1,200   | 3,682   | 73,631  | 326          |
+    | Update Index      | 3,000   | 29,576  | 29,576  | 101          |
+    | Update Non-index  | 3,000   | 64,624  | 64,624  | 46           |
 
 **TiDB: 16 vCPU \* 4; TiKV: 16 vCPU \* 6**
 
@@ -274,12 +274,12 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
-    |-------------------|---------|---------|---------|---------------|
-    | Insert            | 2,400   | 69,139  | 69,139  | 22            |
-    | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
-    | Read Write        | 1,200   | 7,310   | 145,568 | 97            |
-    | Update Index      | 1,200   | 36,638  | 36,638  | 20            |
-    | Update Non-index  | 4,000   | 125,129 | 125,129 | 17            |
+    |-------------------|---------|---------|---------|--------------|
+    | Insert            | 2,400   | 69,139  | 69,139  | 22           |
+    | Point Select      | 2,400   | 448,056 | 448,056 | 4            |
+    | Read Write        | 1,200   | 7,310   | 145,568 | 97           |
+    | Update Index      | 1,200   | 36,638  | 36,638  | 20           |
+    | Update Non-index  | 4,000   | 125,129 | 125,129 | 17           |
 
 - Maximum TPS and QPS
 
@@ -292,9 +292,9 @@ Test results:
     Sysbench OLTP performance:
 
     | Transaction model | Threads | TPS     | QPS     | Latency (ms) |
-    |-------------------|---------|---------|---------|---------------|
-    | Insert            | 4,000   | 86,242  | 86,242  | 25            |
-    | Point Select      | 2,400   | 448,056 | 448,056 | 4             |
-    | Read Write        | 2,400   | 7,326   | 146,526 | 172           |
-    | Update Index      | 6,000   | 58,856  | 58,856  | 51            |
-    | Update Non-index  | 6,000   | 128,601 | 128,601 | 24            |
+    |-------------------|---------|---------|---------|--------------|
+    | Insert            | 4,000   | 86,242  | 86,242  | 25           |
+    | Point Select      | 2,400   | 448,056 | 448,056 | 4            |
+    | Read Write        | 2,400   | 7,326   | 146,526 | 172          |
+    | Update Index      | 6,000   | 58,856  | 58,856  | 51           |
+    | Update Non-index  | 6,000   | 128,601 | 128,601 | 24           |
