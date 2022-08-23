@@ -90,13 +90,13 @@ To create a Dedicated Tier cluster, take the following steps:
 
 ## Step 2. Connect to your TiDB cluster
 
-1. Navigate to the **Cluster List** page.
+1. Navigate to the Clusters page.
 
 2. In the area of your newly created cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Cluster List** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your newly created cluster on the Clusters page and click **Connect** in the upper-right corner.
 
 3. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
@@ -119,12 +119,12 @@ To create a Dedicated Tier cluster, take the following steps:
 
 We provide Capital Bikeshare sample data for you to easily import data and run sample queries.
 
-1. Navigate to the **Cluster List** page.
+1. Navigate to the Clusters page.
 2. In the area of your newly created cluster, click **Import Data** in the upper-right corner. The **Data Import Task** page is displayed.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your newly created cluster on the **Cluster List** page and click **Import Data** in the upper-right corner.
+    > Alternatively, you can also click the name of your newly created cluster on the Clusters page and click **Import Data** in the upper-right corner.
 
 3. Fill in the import parameters:
 
