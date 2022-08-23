@@ -53,7 +53,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Optimize the UI of the [Cluster List](https://tidbcloud.com/console/clusters) page and the cluster details page:
 
-    * Add **Connect** and **Import data** buttons to the Clusters page.
+    * Add **Connect** and **Import data** buttons to the **Cluster List** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
 
 ## July 28, 2022
