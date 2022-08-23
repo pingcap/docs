@@ -1819,6 +1819,14 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Default value: `tikv,tiflash,tidb`
 - This variable is used to set the storage engine list that TiDB can use when reading data.
 
+### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
+
+- Scope: SESSION
+- Persists to cluster: No
+- Default value：‘’
+- Type: String
+- This is a read only variable, it is used to get the last ddl info within the current session.
+
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
 - Scope: SESSION
@@ -1830,12 +1838,6 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - The transaction commit mode, which might be a two-phase, one-phase, or async commit.
     - The information of transaction fallback from async commit or one-phase commit to two-phase commit.
     - The error encountered.
-
-### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
-
-- Scope: SESSION
-- Default value：‘’
-- This variable is used to get the last ddl info within the current session.
 
 ### tidb_log_file_max_days <span class="version-mark">New in v5.3.0</span>
 
