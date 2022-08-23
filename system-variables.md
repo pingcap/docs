@@ -1557,6 +1557,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
 - Scope: SESSION
+- Persists to cluster: No
 - Default value: ""
 - This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
     - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
