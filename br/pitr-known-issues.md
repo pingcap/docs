@@ -69,7 +69,7 @@ To resolve this issue, you need to manually execute the `br log resume` command 
 
 Issue: [#13306](https://github.com/tikv/tikv/issues/13306)
 
-This issue occurs because the monitoring metrics show the size of data after RocksDB compaction, while log backup stores KV data in a customized encoding format. The different storage methods lead to different data compression ratios, the difference of which is 2~3 times.
+This issue occurs because log backup data use a customized encoding format. The different format leads to different data compression ratios, the difference of which is 2~3 times.
 
 Log backup does not store data the way RocksDB generates SST files, because the data generated during log backup might have a large range and a small content. In such cases, restoring data by ingesting SST files cannot improve the restoration performance.
 
