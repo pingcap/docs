@@ -17,7 +17,7 @@ DDL operations of TiDB on large tables are usually not an issue. TiDB supports o
 
 For some DDL operations such as adding columns, deleting columns or dropping indexes, TiDB can perform these operations quickly.
 
-For some heavy DDL operations such as adding indexes, TiDB needs to backfill data, which takes a longer time (depending on the size of the table) and consumes additional resources. The impact on online traffic is tunable. TiDB can do the backfill with multiple threads, and the number of threads is set by the following system variables:
+For some heavy DDL operations such as adding indexes, TiDB needs to backfill data, which takes a longer time (depending on the size of the table) and consumes additional resources. The impact on online traffic is tunable. TiDB can do the backfill with multiple threads, and the resource consumed can be set by the following system variables:
 
 - [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)
 - [`tidb_ddl_reorg_priority`](/system-variables.md#tidb_ddl_reorg_priority)
@@ -310,12 +310,12 @@ See [The TiDB Command Options](/command-line-flags-for-tidb-configuration.md).
 
 ### How to avoid hotspot issues and achieve load balancing? Is hot partition or range an issue in TiDB?
 
-To learn the scenarios that cause hotspots, refer to [common hotpots](/troubleshoot-hot-spot-issues.md#common-hotspots). To resolve hotspot issues, you can try the following built-in TiDB features:
+To learn the scenarios that cause hotspots, refer to [common hotpots](/troubleshoot-hot-spot-issues.md#common-hotspots). The following TiDB features are designed to help you solve hotspot issues:
 
-- Set the [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) attribute. Then row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
-- For hotspots brought by auto-increment primary keys, use the [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute.
-- For read hotspots on small tables, use [Coprocessor Cache](/coprocessor-cache.md).
-- For hotspot issues caused by unbalanced access between Regions, such as full table scans for small tables, use [Load Base Split](/configure-load-base-split.md).
+- The [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots) attribute. After setting this attribute, row IDs are scattered and written into multiple Regions, which can alleviate the write hotspot issue.
+- The [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random) attribute, which helps resolve hotspots brought by auto-increment primary keys.
+- [Coprocessor Cache](/coprocessor-cache.md), for read hotspots on small tables.
+- [Load Base Split](/configure-load-base-split.md), for hotspots caused by unbalanced access between Regions, such as full table scans for small tables.
 
 If you have a performance issue caused by hotspot, refer to the [troubleshoot guide](/troubleshoot-hot-spot-issues.md) to get it resolved.
 
