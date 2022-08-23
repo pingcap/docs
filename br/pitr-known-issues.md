@@ -79,7 +79,7 @@ Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
 
 This issue usually occurs when you enable log backup during a full data import and afterwards perform a PITR to restore data at a time point during the data import.
 
-If there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**), there is a probability that this issue occurs.
+Specifically, there is a probability that this issue occurs if there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**).
 
 For the current version, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
 
