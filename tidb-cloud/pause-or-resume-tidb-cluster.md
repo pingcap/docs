@@ -34,7 +34,6 @@ When a cluster is paused, note the following:
 
     - Node Storage Cost
     - Data Backup Cost
-    - Data Transfer – Load Balancing
 
 - TiDB Cloud stops [automatic backup](/tidb-cloud/backup-and-restore.md#automatic-backup) of the cluster.
 
