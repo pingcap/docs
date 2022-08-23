@@ -91,6 +91,7 @@
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
+  - [Use TiDB Cloud API (Beta)](/tidb-cloud/api-overview.md)
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
@@ -401,6 +402,7 @@
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
+  - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
   - Storage Engines
     - TiKV
         - [TiKV Overview](/tikv-overview.md)
