@@ -1,7 +1,7 @@
 # TiDB and Retool Integration
 1. Get TiDB Details & Whitelist Retool IP Address
 
-    You can get your database connection details from whoever set up the database. You'll also need to get them to [whitelist][1] the Retool IP address.
+    You can get your database connection details from whoever set up the database. You'll also need to get them to [whitelist][https://docs.retool.com/docs/connect-database-resource#connecting-your-database] the Retool IP address.
 
 2. Add TiDB as a resource in Retool
 
