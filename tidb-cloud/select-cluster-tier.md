@@ -51,12 +51,12 @@ Whenever you use or set a database user name, you must include the prefix in the
 
 To get the prefix for your cluster, take the following steps:
 
-1. Navigate to the **Active Clusters** page.
+1. Navigate to the **Clusters** page.
 2. Click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
 
     > **Tip:**
     >
-    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
+    > Alternatively, you can also click the name of your cluster on the **Clusters** page and click **Connect** in the upper-right corner.
 3. In the dialog, locate **Step 2: Connect with a SQL client** and get the prefix.
 
 ### Automatic hibernation and resuming
@@ -69,7 +69,7 @@ During the hibernation, the status of the cluster is still displayed as **Normal
 
 Anytime you want to use your Developer Tier cluster again, just [connect to your cluster](/tidb-cloud/connect-to-tidb-cluster.md) using your MySQL client driver or ORM framework as you usually do. The cluster will be resumed within 50 seconds and back to service automatically.
 
-Alternatively, you can log in to the TiDB Cloud console, and then click **Resume** for the cluster on the **Active Clusters** page.
+Alternatively, you can log in to the TiDB Cloud console, and then click **Resume** for the cluster on the **Clusters** page.
 
 ### Developer Tier special terms and conditions
 

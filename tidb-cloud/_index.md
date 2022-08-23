@@ -117,7 +117,7 @@ hide_commit: true
 
 [Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices)
 
-[Trial Points](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#trial-points)
+[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits)
 
 </LearningPath>
 

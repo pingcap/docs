@@ -65,7 +65,7 @@ To create a dedicated cluster for the PoC, take the following steps:
     - If you have already [created a Developer Tier](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster) (one-year free trial), an prompt bar about submitting your PoC application is displayed in the TiDB Cloud console. You can click the PoC application link in the bar to fill in the PoC application form.
     - If you have not created a Developer Tier yet, go to the [Apply for PoC](https://en.pingcap.com/apply-for-poc/) page to fill in the PoC application form.
 
-    Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer trial points to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
+    Once you submit the form, the TiDB Cloud support team will review your application, contact you, and transfer credits to your account once the application is approved. You can also contact a PingCAP support engineer to assist with your PoC procedures to ensure the PoC runs as smoothly as possible.
 
 2. Refer to [Quick Start](/tidb-cloud/tidb-cloud-quickstart.md) to create a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster for the PoC.
 
@@ -73,7 +73,7 @@ Capacity planning is recommended for cluster sizing before you create a cluster.
 
 - For more information about estimation practice, see [Size Your TiDB](/tidb-cloud/size-your-cluster.md).
 - For configurations of the dedicated cluster, see [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md). Configure the cluster size for TiDB, TiKV, and TiFlash (optional) respectively.
-- For how to plan and optimize your PoC trial points consumption effectively, see [FAQ](#faq) in this document.
+- For how to plan and optimize your PoC credits consumption effectively, see [FAQ](#faq) in this document.
 - For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md).
 
 Once a dedicated PoC cluster is created, you are ready to load data and perform a series of tests. For how to connect to a TiDB cluster, see [Connect to Your TiDB Cluster](/tidb-cloud/connect-to-tidb-cluster.md).
@@ -87,7 +87,7 @@ For a newly created cluster, note the following configurations:
 
 Next, you can load your database schemas to the TiDB cluster, including tables and indexes.
 
-Because the amount of PoC trial points is limited, to maximize the value of trial points, it is recommended that you create a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) (one-year free trial) for compatibility tests and preliminary analysis on TiDB Cloud.
+Because the amount of PoC credits is limited, to maximize the value of credits, it is recommended that you create a [Developer Tier cluster](/tidb-cloud/select-cluster-tier.md#developer-tier) (one-year free trial) for compatibility tests and preliminary analysis on TiDB Cloud.
 
 TiDB Cloud is highly compatible with MySQL 5.7. You can directly import your data into TiDB if it is MySQL-compatible or can be adapted to be compatible with MySQL.
 
@@ -183,7 +183,7 @@ You have completed the full cycle of a PoC after you test TiDB Cloud using real 
 
 If you want to try TiDB Cloud on a larger scale, for a new round of deployments and tests, such as deploying with other storage sizes offered by TiDB Cloud, get full access to TiDB Cloud by creating a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier).
 
-If your trial points are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
+If your credits are running out and you want to continue with the PoC, contact the [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for consultation.
 
 You can end the PoC and remove the test environment anytime. For more information, see [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md).
 
@@ -208,19 +208,23 @@ The following are some considerations about scaling:
 
 You can scale out clusters on the console by yourself. If you need to scale in a cluster, you need to contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help. For more information about scaling, see [Scale Your TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md). You can keep in touch with the support team to track the exact progress. You must wait for the scaling operation to finish before starting your test because it can impact the performance due to data rebalancing.
 
-### 3. How to make the best use of my PoC trial points?
+### 3. How to make the best use of my PoC credits?
 
-Once your application for the PoC is approved, you will receive trial points in your account. Generally, the trial points are sufficient for a 14-day PoC. The trial points are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#trial-points).
+Once your application for the PoC is approved, you will receive credits in your account. Generally, the credits are sufficient for a 14-day PoC. The credits are charged by the type of nodes and the number of nodes, on an hourly basis. For more information, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md#credits).
 
-To check the points left for your PoC, go to the **Active Clusters** page, as shown in the following screenshot.
+To check the credits left for your PoC, go to the **Clusters** page, as shown in the following screenshot.
 
-![TiDB Cloud PoC Points](/media/tidb-cloud/poc-points.png)
+![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 
-To save points, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
+Alternatively, you can also click the account name in the upper-right corner of the TiDB Cloud console, click **Billing**, and click **Credits** to see the credit details page.
+
+To save credits, remove the cluster that you are not using. Currently, you cannot stop a cluster. You need to ensure that your backups are up to date before removing a cluster, so you can restore the cluster later when you want to resume your PoC.
+
+If you still have unused credits after your PoC process is completed, you can continue using the credits to pay TiDB cluster fees as long as these credits are not expired.
 
 ### 4. Can I take more than 2 weeks to complete a PoC?
 
-If you want to extend the PoC trial period or are running out of trial points, contact [PingCAP](https://en.pingcap.com/contact-us/) for help.
+If you want to extend the PoC trial period or are running out of credits, contact [PingCAP](https://en.pingcap.com/contact-us/) for help.
 
 ### 5. I'm stuck with a technical problem. How do I get help for my PoC?
 

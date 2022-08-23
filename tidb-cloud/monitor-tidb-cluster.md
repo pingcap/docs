@@ -56,7 +56,7 @@ The cluster overview page provides general metrics of a cluster, including Total
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. Navigate to the **Active Clusters** page.
+1. Navigate to the **Clusters** page.
 
 2. Click the name of a cluster to go to its cluster overview page.
 
