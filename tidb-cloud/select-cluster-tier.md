@@ -96,4 +96,4 @@ To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-clo
 
 > **Note:**
 >
-> You cannot decrease the cluster storage size after your cluster is created.
+> You cannot decrease the node storage after your cluster is created.
