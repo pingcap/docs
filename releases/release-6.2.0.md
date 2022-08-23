@@ -6,9 +6,9 @@ title: TiDB 6.2.0 Release Notes
 
 Release date: August 23, 2022
 
-TiDB version: 6.2.0
+TiDB version: 6.2.0-DMR
 
-In v6.2.0, the key new features and improvements are as follows:
+In v6.2.0-DMR, the key new features and improvements are as follows:
 
 * TiDB Dashboard supports [visual execution plans](/dashboard/dashboard-slow-query.md#visual-execution-plans), allowing more intuitive display of execution plans.
 * Add a [Monitoring page](/dashboard/dashboard-monitoring.md) in TiDB Dashboard to make the performance analysis and tuning more efficient.
