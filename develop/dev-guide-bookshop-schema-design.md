@@ -10,14 +10,31 @@ To make your reading on the application developer guide more smoothly, we presen
 
 ## Import table structures and data
 
-You can import Bookshop table structures and data either [via TiUP](#via-tiup-demo) or [via the import feature of TiDB Cloud](#via-tidb-cloud-import).
+<CustomContent platform="tidb">
 
-<SimpleTab>
-<div label="Via `TiUP demo`">
+You can import Bookshop table structures and data either [via TiUP](#method-1-via-tiup-demo) or [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
 
-### Via `tiup demo`
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+For TiDB Cloud, you can skip [Method 1: Via `tiup demo`](#method-1-via-tiup-demo) and import Bookshop table structures [via the import feature of TiDB Cloud](#method-2-via-tidb-cloud-import).
+
+</CustomContent>
+
+### Method 1: Via `tiup demo`
+
+<CustomContent platform="tidb">
 
 If your TiDB cluster is deployed using [TiUP](/tiup/tiup-reference.md#tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+If your TiDB cluster is deployed using [TiUP](https://docs.pingcap.com/tidb/stable/tiup-reference) or you can connect to your TiDB server, you can quickly generate and import sample data for the Bookshop application by running the following command:
+
+</CustomContent>
 
 {{< copyable "shell" >}}
 
@@ -75,10 +92,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
 You can delete the original table structure through the `--drop-tables` parameter. For more parameter descriptions, run the `tiup demo bookshop --help` command.
 
-</div>
-<div label="Via TiDB Cloud Import">
-
-### Via TiDB Cloud Import
+### Method 2: Via TiDB Cloud Import
 
 On the database details page of TiDB Cloud, click the **Import** button to enter the **Data Import Task** page. On this page, perform the following steps to import the Bookshop sample data from AWS S3 to TiDB Cloud.
 
@@ -158,9 +172,6 @@ The result is as follows:
 +-----------------------+----------------+-----------+------------+---------+
 6 rows in set (0.03 sec)
 ```
-
-</div>
-</SimpleTab>
 
 ## Description of the tables
 

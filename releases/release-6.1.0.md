@@ -39,7 +39,7 @@ In 6.1.0, the key new features or improvements are as follows:
     * `DENSE_RANK()`
     * `ROW_NUMBER()`
 
-  [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#33072](https://github.com/pingcap/tidb/issues/33072)
+  [User document](/tiflash/tiflash-supported-pushdown-calculations.md), [#33072](https://github.com/pingcap/tidb/issues/33072)
 
 ### Observability
 
@@ -83,13 +83,13 @@ In 6.1.0, the key new features or improvements are as follows:
     * `TO_SECONDS`
     * `WEEKOFYEAR`
 
-    [User document](/tiflash/use-tiflash.md#supported-push-down-calculations), [#4679](https://github.com/pingcap/tiflash/issues/4679), [#4678](https://github.com/pingcap/tiflash/issues/4678), [#4677](https://github.com/pingcap/tiflash/issues/4677)
+    [User document](/tiflash/tiflash-supported-pushdown-calculations.md), [#4679](https://github.com/pingcap/tiflash/issues/4679), [#4678](https://github.com/pingcap/tiflash/issues/4678), [#4677](https://github.com/pingcap/tiflash/issues/4677)
 
 * TiFlash supports partitioned tables in dynamic pruning mode.
 
     To enhance performance in OLAP scenarios, dynamic pruning mode is supported for partitioned tables. If your TiDB is upgraded from versions earlier than v6.0.0, it is recommended that you manually update statistics of existing partitioned tables, so as to maximize the performance (not required for new installations or new partitions created after upgrade to v6.1.0).
 
-    User documents: [Access partitioned tables in the MPP mode](/tiflash/use-tiflash.md#access-partitioned-tables-in-the-mpp-mode), [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
+    User documents: [Access partitioned tables in the MPP mode](/tiflash/use-tiflash-mpp-mode.md#access-partitioned-tables-in-the-mpp-mode), [Dynamic pruning mode](/partitioned-table.md#dynamic-pruning-mode), [#3873](https://github.com/pingcap/tiflash/issues/3873)
 
 ### Stability
 
@@ -236,7 +236,7 @@ In 6.1.0, the key new features or improvements are as follows:
 | [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`oom-action`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_mem_quota_analyze`](/system-variables.md#tidb_mem_quota_analyze-new-in-v610) | Newly added | This variable controls the maximum memory usage when TiDB updates statistics, including manually executed [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) by users and automatic analyze tasks in the TiDB background. |
 | [`tidb_nontransactional_ignore_error`](/system-variables.md#tidb_nontransactional_ignore_error-new-in-v610) | Newly added | This variable specifies whether to return error immediately when an error occurs in a non-transactional DML statement. |
-| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) |  | This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0. |
+| [`tidb_prepared_plan_cache_memory_guard_ratio`](/system-variables.md#tidb_prepared_plan_cache_memory_guard_ratio-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.memory-guard-ratio`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610) | Newly added | This setting was previously a `tidb.toml` option (`prepared-plan-cache.capacity`), but changed to a system variable starting from TiDB v6.1.0. |
 | [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610) | Newly added | This variable sets the memory quota for the TiDB statistics cache. |
 

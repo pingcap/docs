@@ -159,6 +159,13 @@ The TiDB configuration file supports more options than command-line parameters. 
 + Default value: `true`
 + When the value is `true`, both `KILL` and `KILL TIDB` statements can terminate queries or connections across instances so you do not need to worry about erroneously terminating queries or connections. When you use a client to connect to any TiDB instance and execute the `KILL` or `KILL TIDB` statement, the statement will be forwarded to the target TiDB instance. If there is a proxy between the client and the TiDB cluster, the `KILL` and `KILL TIDB` statements will also be forwarded to the target TiDB instance for execution. Currently, using the MySQL command line <kbd>ctrl</kbd>+<kbd>c</kbd> to terminate a query or connection in TiDB is not supported when `enable-global-kill` is `true`. For more information on the `KILL` statement, see [KILL](/sql-statements/sql-statement-kill.md).
 
+### `enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client and TiKV client in TiDB forward requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ## Log
 
 Configuration items related to log.
@@ -391,17 +398,6 @@ Configuration items related to performance.
     - `mysql.stats_meta`: TiDB no longer automatically records the number of table rows that are modified by the transaction and updates it to this system table.
     - `mysql.stats_histograms`/`mysql.stats_buckets` and `mysql.stats_top_n`: TiDB no longer automatically analyzes and proactively updates statistics.
     - `mysql.stats_feedback`: TiDB no longer updates the statistics of the tables and indexes according to a part of statistics returned by the queried data.
-
-### `feedback-probability`
-
-- The probability that TiDB collects the feedback statistics of each query.
-- Default value: `0`
-- This feature is disabled by default, and it is not recommended to enable this feature. If it is enabled, TiDB collects the feedback of each query at the probability of `feedback-probability`, to update statistics.
-
-### `query-feedback-limit`
-
-- The maximum pieces of query feedback that can be cached in memory. Extra pieces of feedback that exceed this limit are discarded.
-- Default value: `1024`
 
 ### `pseudo-estimate-ratio`
 
@@ -678,6 +674,31 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 + For scenarios with conflicts, after enabling this configuration, TiDB includes auto-commit transactions into the global lock-waiting management, which avoids deadlocks and mitigates the latency spike brought by deadlock-causing conflicts.
 + For scenarios with no conflicts, if there are many auto-commit transactions (the specific number is determined by the real scenarios. For example, the number of auto-commit transactions accounts for more than half of the total number of applications), and a single transaction operates a large data volume, enabling this configuration causes performance regression. For example, the auto-commit `INSERT INTO SELECT` statement.
 + Default value: `false`
+
+## isolation-read
+
+Configuration items related to read isolation.
+
+### `engines`
+
+- Controls from which engine TiDB allows to read data.
+- Default value: ["tikv", "tiflash", "tidb"], indicating that the engine is automatically selected by the optimizer.
+- Value options: Any combinations of "tikv", "tiflash", and "tidb", for example, ["tikv", "tidb"] or ["tiflash", "tidb"]
+
+## proxy-protocol
+
+Configuration items related to the PROXY protocol.
+
+### `networks`
+
+- The list of proxy server's IP addresses allowed to connect to TiDB using the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
+- Default value: ""
+- In general cases, when you access TiDB behind a reverse proxy, TiDB takes the IP address of the reverse proxy server as the IP address of the client. By enabling the PROXY protocol, reverse proxies that support this protocol, such as HAProxy, can pass the real client IP address to TiDB.
+- After configuring this parameter, TiDB allows the configured source IP address to connect to TiDB using the PROXY protocol; if a protocol other than PROXY is used, this connection will be denied. If this parameter is left empty, no IP address can connect to TiDB using the PROXY protocol. The value can be an IP address (192.168.1.50) or CIDR (192.168.1.0/24) with `,` as the separator. `*` means any IP addresses.
+
+> **Warning:**
+>
+> Use `*` with caution because it might introduce security risks by allowing a client of any IP address to report its IP address. In addition, using `*` might also cause the internal component that directly connects to TiDB (such as TiDB Dashboard) to be unavailable.
 
 ## experimental
 
