@@ -23,8 +23,6 @@ You can see the current status of each running cluster on the cluster page.
 | **Unavailable** | The TiDB Cloud service is not available |
 | **Unhealthy** | Part of nodes are unavailable, not enough replicas, and so on |
 | **Recovering** | Backup recovery |
-| **Paused** | The cluster is paused |
-| **Resuming** | Resuming the cluster |
 
 ### TiDB node status
 
