@@ -8,6 +8,19 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## August 23, 2022
+
+**API changes**
+
+* Introduce TiDB Cloud API as beta.
+
+    Through this API, you can manage TiDB Cloud resources such as clusters automatically and efficiently. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+
+    Currently, TiDB Cloud API is still in beta and only available upon request. You can apply for API access by submitting a request:
+
+    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+    * In the dialog, fill in "Apply for TiDB Cloud API" in the **Description** field and click **Send**.
+
 ## August 16, 2022
 
 * Add `2 vCPU, 8 GiB (Beta)` node size of TiDB and TiKV as beta.
