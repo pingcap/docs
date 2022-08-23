@@ -51,9 +51,9 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-* Optimize the UI of the [Active Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
 
-    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
+    * Add **Connect** and **Import data** buttons to the **Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
 
 ## July 28, 2022
