@@ -1,11 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-<<<<<<< HEAD
-- [Docs Home](/_docHome.md)
-=======
 - [Docs Home](https://docs.pingcap.com/)
->>>>>>> 13462166b (toc: add docs home in tidb toc and tidb cloud toc (#9850))
 - About TiDB
   - [TiDB Introduction](/overview.md)
   - [TiDB 6.2 Release Notes](/releases/release-6.2.0.md)
