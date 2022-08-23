@@ -9,68 +9,7 @@ summary: Learn about TiDB Cloud billing.
 >
 > [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) are free to use for up to one year. You will not be charged for the use of your Developer Tier cluster, and your TiDB Cloud bill will not display any Developer Tier charges.
 
-TiDB Cloud charges according to the resources that you consume, which include:
-
-- Cluster node compute
-- Primary data storage
-- Data backup storage
-- Data transfers in to, out from, and within your cluster
-
-These charges appear as separate items on your monthly TiDB Cloud bills.
-
-## Compute cost
-
-TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
-
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash.
-
-The specified node quantity and associated vCPUs determine your hourly compute cost.
-
-Note that the compute cost of TiDB, TiKV, and TiFlash nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
-
-## Storage cost
-
-Both TiKV and TiFlash nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash nodes in your cluster consume.
-
-TiDB Cloud passes the costs onto customers as they are incurred. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
-
-## Backup storage cost
-
-TiDB Cloud provides automatic backup and ad-hoc backup, both backups consume the storage. We will charge you based on the maximum capacity of total backups per month.
-
-The storage prices for different cloud providers are as follows:
-
-- AWS
-
-    All backups will be saved in Amazon Simple Storage Service (Amazon S3). You only need to pay the S3 fee and we will not charge you an additional fee. For details, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/).
-
-- GCP
-
-    All backups will be saved in GCP cloud storage. You only need to pay the Cloud Storage fee and we will not charge you an additional fee. For details, see [GCP Cloud Storage pricing](https://cloud.google.com/storage/pricing).
-
-## Data transfer cost
-
-Both AWS and GCP might charge for data transfer, calculated per GB, whenever data moves within or leaves its cloud. Examples of when these charges are incurred with TiDB Cloud include the following:
-
-- When data moves between the TiDB cluster load balancer and your cluster
-- When data moves across different availability zones in the same region within your cluster
-- When you perform cluster backup and recovery operations
-- When you use TiCDC to stream data to or from your cluster
-- Fixed cost of the load balancer
-
-TiDB Cloud passes these charges onto customers as they are incurred, calculated using the published [AWS](https://aws.amazon.com/ec2/pricing/on-demand/) and [GCP](https://cloud.google.com/vpc/network-pricing) price tables as applicable, and without any additional fees.
-
-This cost policy applies to all TiDB Cloud customers with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, regardless of how those clusters are licensed.
-
-To make these charges easier to view, your TiDB Cloud bills and invoices aggregate and organize all data transfer charges under the following categories:
-
-- Data transfer – Same Region
-- Data transfer – Cross Region
-- Data transfer – Internet
-
-## Support service cost
-
-If you have subscribed to one of the **Standard**, **Enterprise**, or **Premium** [support plan](/tidb-cloud/tidb-cloud-support.md), you are charged for the support service on a monthly basis. The billing information is included in your monthly bill.
+TiDB Cloud charges according to the resources that you consume. You can visit [TiDB Cloud Pricing Details](https://en.pingcap.com/tidb-cloud-pricing-details/) to get more information.
 
 ## Invoices
 
