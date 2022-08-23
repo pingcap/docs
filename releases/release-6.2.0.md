@@ -10,20 +10,20 @@ TiDB version: 6.2.0
 
 In v6.2.0, the key new features and improvements are as follows:
 
-* TiDB Dashboard supports visual execution plans, allowing more intuitive display of execution plans.
-* Add a Monitoring page in TiDB Dashboard to make the performance analysis and tuning more efficient.
-* The Lock View of TiDB feature supports showing the waiting information of optimistic transactions, facilitating quick locating of lock conflicts.
-* TiFlash supports a newer version of storage format, enhancing stability and performance.
-* The Fine Grained Shuffle feature allows parallel execution of window functions in multiple threads.
-* A new concurrent DDL framework: Less DDL statements blocked and higher execution efficiency.
-* TiKV supports automatically tuning the CPU usage, thus ensuring stable and efficient database operations.
-* Point-in-Time Recovery (PITR) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
-* TiDB Lightning supports importing data to production clusters in the physical import mode.
-* BR supports restoring user and privilege data, making backup and restore smoother.
-* TiCDC unlocks more data replication scenarios by supporting filtering specific types of DDL events.
-* The `SAVEPOINT` mechanism is supported, with which you can flexibly control the rollback points within a transaction.
-* TiDB supports adding, dropping, and modifying multiple columns or indexes with only one `ALTER TABLE` statement.
-* Cross-cluster RawKV replication is now supported.
+* TiDB Dashboard supports [visual execution plans](/dashboard/dashboard-slow-query.md#visual-execution-plans), allowing more intuitive display of execution plans.
+* Add a [Monitoring page](/dashboard/dashboard-monitoring.md) in TiDB Dashboard to make the performance analysis and tuning more efficient.
+* The [Lock View](/information-schema/information-schema-data-lock-waits.md) of TiDB feature supports showing the waiting information of optimistic transactions, facilitating quick locating of lock conflicts.
+* TiFlash supports [a newer version of storage format](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file), enhancing stability and performance.
+* The [Fine Grained Shuffle feature](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620) allows parallel execution of window functions in multiple threads.
+* A [new concurrent DDL framework](/system-variables.md#tidb_enable_concurrent_ddl-new-in-v620): Less DDL statements blocked and higher execution efficiency.
+* TiKV supports [automatically tuning the CPU usage](/tikv-configuration-file.md#background-quota-limiter), thus ensuring stable and efficient database operations.
+* [Point-in-Time Recovery (PITR)](/br/point-in-time-recovery.md) is introduced to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past.
+* TiDB Lightning supports [importing data to production clusters in the physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#import-data-into-a-cluster-in-production).
+* BR supports [restoring user and privilege data](/br/br-usage-restore.md#restore-tables-in-the-mysql-schema), making backup and restore smoother.
+* TiCDC unlocks more data replication scenarios by supporting [filtering specific types of DDL events](/ticdc/manage-ticdc.md).
+* The [`SAVEPOINT` mechanism](/sql-statements/sql-statement-savepoint.md) is supported, with which you can flexibly control the rollback points within a transaction.
+* TiDB supports [adding, dropping, and modifying multiple columns or indexes with only one `ALTER TABLE` statement](/sql-statements/sql-statement-alter-table.md).
+* [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) is now supported.
 
 ## New features
 
