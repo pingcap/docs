@@ -65,7 +65,7 @@ After a network partition failure in the cluster, the backup task cannot continu
 
 To resolve this issue, you need to manually execute the `br log resume` command to resume the log backup task.
 
-## The actual storage space used by log backup is 2~3 times that of the incremental data displayed in the cluster monitoring metrics
+## The actual storage space used by log backup is 2~3 times the volume of the incremental data displayed in the cluster monitoring metrics
 
 Issue: [#13306](https://github.com/tikv/tikv/issues/13306)
 
@@ -77,11 +77,11 @@ Log backup does not store data the way RocksDB generates SST files, because the 
 
 Issue: [#37207](https://github.com/pingcap/tidb/issues/37207)
 
-This issue occurs when you enable log backup during a full data import and afterwards perform a PITR to restore data at a time point during the data import.
+This issue usually occurs when you enable log backup during a full data import and afterwards perform a PITR to restore data at a time point during the data import.
 
 If there are a large number of hotspot writes for a long time (such as 24 hours) and if the OPS of each TiKV node is larger than 50k/s (you can view the metrics in Grafana: **TiKV-Details** -> **Backup Log** -> **Handle Event Rate**), there is a probability that this issue occurs.
 
-For the current version, it is recommended that you perform a valid snapshot backup after the initial data import and perform PITR based on this snapshot backup.
+For the current version, it is recommended that you perform a snapshot backup after the data import and perform PITR based on this snapshot backup.
 
 ## The commit time of a large transaction affects the checkpoint lag of log backup
 
