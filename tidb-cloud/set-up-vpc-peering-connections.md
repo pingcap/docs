@@ -74,7 +74,7 @@ VPC ピアリング リクエストをリージョンに追加する前に、プ
 
 #### オプション 1: AWS CLI を使用する {#option-1-use-aws-cli}
 
-1.  AWS コマンドライン インターフェイス (AWS CLI) をインストールします。
+1.  AWS コマンド ライン インターフェイス (AWS CLI) をインストールします。
 
     {{< copyable "" >}}
 
@@ -172,7 +172,7 @@ AWS ダッシュボードを使用して、VPC ピアリング接続を構成す
 
         ![Search all route tables related to VPC](/media/tidb-cloud/vpc-peering/aws-vpc-guide-4.png)
 
-    3.  各ルート テーブルを右クリックし、[ルートの**編集**] を選択します。編集ページで、プロジェクト CIDR への宛先を含むルートを追加し ( TiDB Cloudコンソールの<strong>VPC Peering</strong>構成ページを確認して)、[<strong>ターゲット</strong>] 列にピアリング接続 ID を入力します。
+    3.  各ルート テーブルを右クリックし、[ルートの**編集**] を選択します。編集ページで、宛先を含むルートをプロジェクト CIDR に追加し ( TiDB Cloudコンソールの<strong>VPC Peering</strong>構成ページを確認して)、[<strong>ターゲット</strong>] 列にピアリング接続 ID を入力します。
 
         ![Edit all route tables](/media/tidb-cloud/vpc-peering/aws-vpc-guide-5.png)
 
@@ -190,13 +190,13 @@ AWS ダッシュボードを使用して、VPC ピアリング接続を構成す
 
 ### ステップ 3: TiDB Cloud上の TiDBクラスタに接続する {#step-3-connect-to-the-tidb-cluster-on-tidb-cloud}
 
-1.  [**アクティブなクラスター]**ページに移動します。
+1.  [**クラスター]**ページに移動します。
 
 2.  ターゲットクラスタの領域を見つけて、領域の右上隅にある [**接続**] をクリックします。接続ダイアログが表示されます。 VPC ピアリングの<strong>Status</strong>が<strong>active</strong>であることを確認できます。<strong>ステータス</strong>がまだ<strong>システム チェック</strong>中の場合は、約 5 分間待ってから、もう一度ダイアログを開きます。
 
     > **ヒント：**
     >
-    > または、[**アクティブなクラスター**] ページでターゲットクラスタの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
+    > または、[**クラスター**] ページでターゲットクラスタの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
 
 3.  VPC 内のインスタンスから TiDB クラスターにアクセスします。 [TiDB クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 

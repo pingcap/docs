@@ -27,7 +27,7 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントで。
 
-3.  Developer Tierクラスタを 1 年間無料で作成するには、 [プランページ](https://tidbcloud.com/console/plans)ページで**Developer Tier**プランを選択するか、 [**アクティブなクラスター**](https://tidbcloud.com/console/clusters)ページで [<strong>クラスターの作成</strong>] をクリックします。
+3.  Developer Tierクラスタを 1 年間無料で作成するには、 [プランページ](https://tidbcloud.com/console/plans)ページで**Developer Tier**プランを選択するか、 [**クラスター**](https://tidbcloud.com/console/clusters)ページで [<strong>クラスターの作成</strong>] をクリックします。
 
 4.  [**クラスターの作成]**ページで、クラスタ名、クラウド プロバイダー (現時点では、開発者層で使用できるのは AWS のみ)、およびリージョン (近くのリージョンをお勧めします) を設定します。次に、[<strong>作成</strong>] をクリックしてクラスタを作成します。
 

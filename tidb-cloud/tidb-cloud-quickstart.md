@@ -13,7 +13,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 
 ## ステップ 1. TiDBクラスタを作成する {#step-1-create-a-tidb-cluster}
 
-無料の[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスタまたは[専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)のいずれかを作成できます。
+無料の[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスタまたは[専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)のいずれかを作成できます。
 
 <SimpleTab>
 <div label="Developer Tier">
@@ -23,7 +23,7 @@ aliases: ['/tidbcloud/beta/tidb-cloud-quickstart']
 1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
     -   Google ユーザーの場合は、Google でサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Google にサインアップ**] をクリックします。メールアドレスとパスワードは Google によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
-    -   GitHub ユーザーは、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHub ユーザーの場合は、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
@@ -51,7 +51,7 @@ Dedicated Tierクラスタを作成するには、次の手順を実行します
 
     -   Google ユーザーの場合は、Google でサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Google にサインアップ**] をクリックします。メールアドレスとパスワードは Google によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
     -   GitHub ユーザーの場合は、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
-    -   AWS Marketplace ユーザーは、AWS Marketplace からサインアップすることもできます。これを行うには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントをセットアップします。
+    -   AWS Marketplace のユーザーは、AWS Marketplace からサインアップすることもできます。これを行うには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントをセットアップします。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
 
@@ -90,13 +90,13 @@ Dedicated Tierクラスタを作成するには、次の手順を実行します
 
 ## ステップ 2. TiDBクラスタに接続する {#step-2-connect-to-your-tidb-cluster}
 
-1.  [**アクティブなクラスター]**ページに移動します。
+1.  [**クラスター]**ページに移動します。
 
 2.  新しく作成したクラスタの領域で、右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
 
     > **ヒント：**
     >
-    > または、[**アクティブなクラスター**] ページで新しく作成したクラスタの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
+    > または、[**クラスター**] ページで新しく作成したクラスタの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
 
 3.  ダイアログ ボックスの [**ステップ 2: SQL クライアントに接続**する] で、希望する接続方法のタブをクリックし、接続文字列を使用してクラスタに接続します。
 
@@ -119,13 +119,13 @@ Dedicated Tierクラスタを作成するには、次の手順を実行します
 
 データを簡単にインポートしてサンプル クエリを実行できるように、Capital Bikeshare のサンプル データを提供しています。
 
-1.  [**アクティブなクラスター]**ページに移動します。
+1.  [**クラスター]**ページに移動します。
 
 2.  新しく作成したクラスタの領域で、右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
 
     > **ヒント：**
     >
-    > または、[**アクティブなクラスター**] ページで新しく作成したクラスタの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
+    > または、[**クラスター**] ページで新しく作成したクラスタの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
 
 3.  インポート パラメータを入力します。
 

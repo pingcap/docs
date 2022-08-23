@@ -9,68 +9,7 @@ summary: Learn about TiDB Cloud billing.
 >
 > [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)は最大 1 年間無料で使用できます。 Developer Tierクラスタの使用に対して課金されることはなく、 TiDB Cloudの請求書には Developer Tier の料金は表示されません。
 
-TiDB Cloudは、消費したリソースに応じて課金されます。これには次のものが含まれます。
-
--   クラスタ ノード コンピューティング
--   プライマリ データ ストレージ
--   データのバックアップ ストレージ
--   クラスターとの間、およびクラスタ内でのデータ転送
-
-これらの料金は、毎月のTiDB Cloud請求書に個別の項目として表示されます。
-
-## 計算コスト {#compute-cost}
-
-TiDB Cloudでは、データベースクラスタのコンピューティング リソースを時間単位で支払うことができるため、動的なワークロードに最適です。
-
-TiDB Cloudでは、TiDB、TiKV、TiFlash のノード数とノード サイズを指定することで、クラスタサイズを簡単に制御できます。
-
-指定されたノード数と関連する vCPU によって、1 時間あたりのコンピューティング コストが決まります。
-
-TiDB、TiKV、TiFlash ノードのコンピューティング コストは、クラウド プロバイダーや地域によって異なる場合があることに注意してください。詳細については、 [TiDB Cloudの料金](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
-
-## 保管コスト {#storage-cost}
-
-TiKV ノードと TiFlash ノードはどちらも、データを永続的なブロック ストレージに保存します。ストレージ コストは、クラスタのすべての TiKV および TiFlash ノードが消費するストレージの総量に応じて生成されます。
-
-TiDB Cloudは、発生したコストを顧客に転嫁します。詳細については、 [TiDB Cloudの料金](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
-
-## バックアップ ストレージのコスト {#backup-storage-cost}
-
-TiDB Cloudは自動バックアップとアドホック バックアップを提供します。どちらのバックアップもストレージを消費します。 1 か月あたりの合計バックアップの最大容量に基づいて課金されます。
-
-さまざまなクラウド プロバイダーのストレージ料金は次のとおりです。
-
--   AWS
-
-    すべてのバックアップは Amazon Simple Storage Service (Amazon S3) に保存されます。 S3 料金のみを支払う必要があり、追加料金は請求されません。詳細については、 [Amazon S3 の料金](https://aws.amazon.com/s3/pricing/)を参照してください。
-
--   GCP
-
-    すべてのバックアップは GCP クラウド ストレージに保存されます。 Cloud Storage 料金のみを支払う必要があり、追加料金は請求されません。詳細については、 [GCP クラウド ストレージの料金](https://cloud.google.com/storage/pricing)を参照してください。
-
-## データ転送料金 {#data-transfer-cost}
-
-AWS と GCP はどちらも、データがクラウド内またはクラウドから移動するたびに、GB 単位で計算されたデータ転送に対して課金される場合があります。 TiDB Cloudでこれらの料金が発生する例としては、次のようなものがあります。
-
--   TiDBクラスタロード バランサーとクラスタの間でデータが移動するとき
--   クラスタ内の同じリージョン内の異なるアベイラビリティー ゾーン間でデータが移動する場合
--   クラスタのバックアップおよびリカバリ操作を実行する場合
--   TiCDC を使用してクラスタとの間でデータをストリーミングする場合
--   ロードバランサーの固定費
-
-TiDB Cloudは、これらの料金が発生したときに、公開されている[AWS](https://aws.amazon.com/ec2/pricing/on-demand/)および[GCP](https://cloud.google.com/vpc/network-pricing)の価格表を適宜使用して計算し、追加料金なしで顧客に渡します。
-
-このコスト ポリシーは、クラスターのライセンス方法に関係なく、 [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)つのクラスターを持つすべてのTiDB Cloudのお客様に適用されます。
-
-これらの料金を簡単に確認できるようにするために、 TiDB Cloudの請求書と請求書では、すべてのデータ転送料金を次のカテゴリにまとめて整理しています。
-
--   データ転送 – 同じリージョン
--   データ転送 – クロスリージョン
--   データ転送 – インターネット
-
-## サポートサービス費用 {#support-service-cost}
-
-**Standard** 、 <strong>Enterprise</strong> 、または<strong>Premium</strong> [サポートプラン](/tidb-cloud/tidb-cloud-support.md)のいずれかに加入している場合は、月単位でサポート サービスの料金が請求されます。請求情報は、毎月の請求書に含まれています。
+TiDB Cloudは、消費したリソースに応じて課金されます。詳細については、 [TiDB Cloudの価格詳細](https://en.pingcap.com/tidb-cloud-pricing-details/)にアクセスしてください。
 
 ## 請求書 {#invoices}
 

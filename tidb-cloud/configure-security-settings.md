@@ -9,7 +9,7 @@ summary: Learn how to configure the root password and allowed IP addresses to co
 
 その時点で root パスワードまたは許可された IP アドレスを構成しない場合、またはクラスタのセキュリティ設定を変更する場合は、次の手順を実行します。
 
-1.  TiDB Cloudコンソールで、プロジェクトの**Active Clusters**ページに移動し、クラスタの領域を見つけます。
+1.  TiDB Cloudコンソールで、プロジェクトの [クラスター] ページに移動し、**クラスター**の領域を見つけクラスタ。
 
 2.  領域の右上隅にある [**セキュリティ設定]**をクリックします。<strong>セキュリティ設定</strong>ダイアログが表示されます。
 

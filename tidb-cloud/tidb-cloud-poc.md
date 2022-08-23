@@ -17,7 +17,7 @@ PoC に興味がある場合は、始める前に<a href="mailto:tidbcloud-suppo
 
 ## PoC手順の概要 {#overview-of-the-poc-procedures}
 
-PoC の目的は、 TiDB Cloudがビジネス要件を満たしているかどうかをテストすることです。一般的な PoC は通常 14 日間続きます。その間、PoC の完了に集中することが期待されます。
+PoC の目的は、 TiDB Cloudがビジネス要件を満たしているかどうかをテストすることです。典型的な PoC は通常 14 日間続きます。その間、PoC の完了に集中することが期待されます。
 
 典型的なTiDB Cloud PoC は、次の手順で構成されます。
 
@@ -63,7 +63,7 @@ PoC 用の専用クラスタを作成するには、次の手順を実行しま�
 1.  次のいずれかを実行して、PoC アプリケーション フォームに入力します。
 
     -   すでに[開発者層を作成しました](/tidb-cloud/tidb-cloud-quickstart.md#step-1-create-a-tidb-cluster)つ (1 年間の無料トライアル) をお持ちの場合は、PoC アプリケーションの送信に関するプロンプト バーがTiDB Cloudコンソールに表示されます。バーの PoC アプリケーション リンクをクリックして、PoC アプリケーション フォームに入力できます。
-    -   Developer Tier をまだ作成していない場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページに移動して PoC 申請フォームに記入してください。
+    -   Developer Tier をまだ作成していない場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページに移動して PoC 申請書に記入してください。
 
     フォームを送信すると、 TiDB Cloudサポート チームがアプリケーションを確認して連絡し、アプリケーションが承認されたらアカウントにクレジットを転送します。 PingCAP サポート エンジニアに連絡して、PoC 手順をサポートし、PoC が可能な限りスムーズに実行されるようにすることもできます。
 
@@ -181,7 +181,7 @@ SQL ステートメントの場合、データ ソースと TiDB との互換性
 
 実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得したら、PoC の完全なサイクルを完了しました。これらの結果は、 TiDB Cloudが期待を満たしているかどうかを判断するのに役立ちます。その間、 TiDB Cloudを使用するためのベスト プラクティスを蓄積してきました。
 
-TiDB Cloudを大規模に試してみたい場合は、 TiDB Cloudが提供する他のストレージ サイズでのデプロイなど、新しいラウンドのデプロイとテストのために、 [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)を作成してTiDB Cloudへのフル アクセスを取得します。
+TiDB Cloudを大規模に試してみたい場合は、 TiDB Cloudが提供する他のノード ストレージ サイズでのデプロイなど、新しいラウンドのデプロイとテストのために、 [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)を作成してTiDB Cloudへのフル アクセスを取得します。
 
 クレジットがなくなり、PoC を続行したい場合は、 [TiDB Cloudのサポート](/tidb-cloud/tidb-cloud-support.md)に連絡して相談してください。
 
@@ -212,7 +212,7 @@ TiDB Cloudは、自動バックアップと手動バックアップの 2 種類�
 
 PoC の申請が承認されると、アカウントにクレジットが付与されます。通常、クレジットは 14 日間の PoC に十分です。クレジットは、ノードのタイプとノードの数によって、時間単位で課金されます。詳細については、 [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md#credits)を参照してください。
 
-PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、[**アクティブなクラスター]**ページに移動します。
+PoC に残っているクレジットを確認するには、次のスクリーンショットに示すように、[**クラスター]**ページに移動します。
 
 ![TiDB Cloud PoC Credits](/media/tidb-cloud/poc-points.png)
 

@@ -4,9 +4,13 @@ title: Changefeed
 
 # チェンジフィード {#changefeed}
 
-TiDB Cloud TiDB Cloudは、TiDBCloudからデータをストリーミングするのに役立つ次のチェンジフィードを提供します。
+TiDB Cloudは、 TiDB Cloudからデータをストリーミングするのに役立つ次の変更フィードを提供します。
 
--   [ApacheKafkaに沈む](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
--   [MySQLにシンク](/tidb-cloud/changefeed-sink-to-mysql.md)
+-   [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+-   [MySQL にシンク](/tidb-cloud/changefeed-sink-to-mysql.md)
 
-TiDB Cloudでのチェンジフィードの課金については、 [チェンジフィード請求](/tidb-cloud/tidb-cloud-billing-tcu.md)を参照してください。
+TiDB Cloudでの変更フィードの課金については、 [変更フィードの請求](/tidb-cloud/tidb-cloud-billing-tcu.md)を参照してください。
+
+> **ノート：**
+>
+> 変更フィードがある場合は[クラスタを一時停止します](/tidb-cloud/pause-or-resume-tidb-cluster.md)できません。クラスタを一時停止する前に、既存の変更フィード ( [Apache Kafka へのシンクの削除](/tidb-cloud/changefeed-sink-to-apache-kafka.md#delete-a-sink)または[MySQL へのシンクの削除](/tidb-cloud/changefeed-sink-to-mysql.md#delete-a-sink) ) を削除する必要があります。

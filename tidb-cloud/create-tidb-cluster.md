@@ -12,7 +12,7 @@ summary: Learn how to create your TiDB cluster.
 1.  TiDB Cloudアカウントを持っていない場合は、 [ここ](https://tidbcloud.com/signup)をクリックしてアカウントにサインアップします。
 
     -   Google ユーザーの場合は、Google でサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Google にサインアップ**] をクリックします。メールアドレスとパスワードは Google によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
-    -   GitHub ユーザーの場合は、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+    -   GitHub ユーザーは、GitHub にサインアップすることもできます。これを行うには、 [サインアップ](https://tidbcloud.com/signup)ページで [ **Sign up with GitHub** ] をクリックします。メールアドレスとパスワードは GitHub によって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
     -   AWS Marketplace のユーザーは、AWS Marketplace からサインアップすることもできます。これを行うには、 `TiDB Cloud` in [AWS マーケットプレイス](https://aws.amazon.com/marketplace)を検索し、 TiDB Cloudにサブスクライブしてから、画面の指示に従ってTiDB Cloudアカウントをセットアップします。
 
 2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントに追加します。
@@ -64,7 +64,7 @@ TiDB Cloudは、次の 2 つのクラスタ層オプションを提供します�
 
 Developer Tierクラスタを作成するには、次の手順を実行します。
 
-1.  [**アクティブなクラスター**] ページで、[<strong>クラスターの作成</strong>] をクリックします。
+1.  [**クラスター**] ページで、[<strong>クラスターの作成</strong>] をクリックします。
 
 2.  [クラスターの**作成]**ページで、必要に応じてデフォルトのクラスタ名を更新します。
 
@@ -84,7 +84,7 @@ Developer Tierクラスタを作成するには、次の手順を実行します
 
 Dedicated Tierクラスタを作成するには、次の手順を実行します。
 
-1.  [**アクティブなクラスター**] ページで、[<strong>クラスターの作成</strong>] をクリックします。
+1.  [**クラスター**] ページで、[<strong>クラスターの作成</strong>] をクリックします。
 
 2.  [**クラスターの作成**] ページで [<strong>専用層</strong>] を選択し、必要に応じて既定のクラスタ名とポート番号を更新し、クラウド プロバイダーとリージョンを選択して、 [<strong>次へ</strong>] をクリックします。
 

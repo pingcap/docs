@@ -76,11 +76,12 @@
     -   クラスターを計画する
         -   [クラスター層を選択する](/tidb-cloud/select-cluster-tier.md)
         -   [TiDB のサイズを決定する](/tidb-cloud/size-your-cluster.md)
+        -   [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
     -   [TiDB クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
     -   TiDB クラスターに接続する
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAP クラスターを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -89,8 +90,10 @@
         -   [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
         -   [互換性](/tiflash/tiflash-compatibility.md)
     -   [TiDB クラスターのスケーリング](/tidb-cloud/scale-tidb-cluster.md)
+    -   [TiDB クラスターを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)
     -   [TiDB クラスターをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
     -   [TiDB クラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
+    -   [TiDB CloudAPI (ベータ) を使用する](/tidb-cloud/api-overview.md)
 -   データの移行
     -   [サンプル データのインポート](/tidb-cloud/import-sample-data.md)
     -   データを TiDB に移行する
@@ -144,7 +147,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的な最適化
+            -   物理的最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)
@@ -166,9 +169,6 @@
     -   [コンソール ユーザー アクセスの管理](/tidb-cloud/manage-user-access.md)
     -   [クラスタ セキュリティ設定の構成](/tidb-cloud/configure-security-settings.md)
 -   請求する
-    -   [ノードコスト](/tidb-cloud/tidb-cloud-billing.md)
-    -   [バックアップ ストレージのコスト](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
-    -   [データ転送料金](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
     -   [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
     -   [支払明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
     -   [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
@@ -401,6 +401,7 @@
                 -   [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
                 -   [`VIEWS`](/information-schema/information-schema-views.md)
     -   [システム変数](/system-variables.md)
+    -   [API リファレンス](https://docs.pingcap.com/tidbcloud/api/v1beta)
     -   ストレージ エンジン
         -   TiKV
             -   [TiKVの概要](/tikv-overview.md)
