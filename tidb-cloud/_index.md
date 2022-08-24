@@ -47,7 +47,7 @@ hide_commit: true
 
 [Scale a Cluster](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[Upgrade a TiDB Cluster](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
+[Pause or Resume a TiDB Cluster](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
 [Use API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta)
 
