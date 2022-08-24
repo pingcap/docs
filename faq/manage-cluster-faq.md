@@ -71,9 +71,9 @@ Take `Release Version: v1.0.3-1-ga80e796` as an example of version number descri
 
 TiDB provides a few features and [tools](/ecosystem-tool-user-guide.md), with which you can manage the clusters easily at a low cost:
 
-- For maintenance operations, [TiUP](/tiup/tiup-documentation-guide.md) works as the package manager, which simplifies the deployment, scaling capacity, upgrade, and other maintenance tasks.
+- For maintenance operations, [TiUP](/tiup/tiup-documentation-guide.md) works as the package manager, which simplifies the deployment, scaling, upgrade, and other maintenance tasks.
 - For monitoring, the [TiDB monitoring framework](/tidb-monitoring-framework.md) uses [Prometheus](https://prometheus.io/) to store the monitoring and performance metrics, and uses [Grafana](https://grafana.com/grafana/) to visualize these metrics. There are already dozens of built-in panels available with hundreds of metrics.
-- For troubleshooting, the [Troubleshooting map](/tidb-troubleshooting-map.md) summarizes common issues of TiDB and its components. You can use this map to diagnose and resolve issues when you encounter related problems.
+- For troubleshooting, the [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md) summarizes common issues of the TiDB server and other components. You can use this map to diagnose and resolve issues when you encounter related problems.
 
 ### What's the difference between various TiDB master versions?
 
@@ -92,9 +92,8 @@ Currently no.
 
 You can scale out your TiDB cluster without interrupting the online services.
 
-If your cluster is deployed using [TiUP](/production-deployment-using-tiup.md), refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
-
-If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) in Kubernetes, refer to [Manually Scale TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
+- If your cluster is deployed using [TiUP](/production-deployment-using-tiup.md), refer to [Scale a TiDB Cluster Using TiUP](/scale-tidb-using-tiup.md).
+- If your cluster is deployed using [TiDB Operator](/tidb-operator-overview.md) in Kubernetes, refer to [Manually Scale TiDB in Kubernetes](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster).
 
 ### How to scale TiDB horizontally?
 
@@ -455,4 +454,4 @@ For more FAQs about BR, see [BR FAQs](/br/backup-and-restore-faq.md).
 
 ### How is the speed of backup and restore?
 
-When BR is used to perform backup and restore tasks, the backup is processed at about 40 MB/s per TiKV instance, and restore is processed at about 100 MB/s per TiKV instance.
+When [BR](/br/backup-and-restore-overview.md) is used to perform backup and restore tasks, the backup is processed at about 40 MB/s per TiKV instance, and restore is processed at about 100 MB/s per TiKV instance.
