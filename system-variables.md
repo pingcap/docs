@@ -1822,12 +1822,21 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 ### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
 
 - Scope: SESSION
-- Persists to cluster: No
-- Default value：‘’
+- Default value: ""
 - Type: String
 - This is a read only variable, it is used to get the last ddl info within the current session. The DDL informaiton includes:
     - "query": the last DDL query string.
     - "seq_num": seq_num is the total order in all DDLs, it's used to identify the order of DDL. 
+
+### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
+
+- Scope: SESSION
+- Default value: ""
+- This is a read-only variable. It is internally used in TiDB to query the transaction information of the last DML statement. The information includes:
+    - `txn_scope`: The scope of the transaction, which can be `global` or `local`.
+    - `start_ts`: The start timestamp of the transaction.
+    - `for_update_ts`: The `for_update_ts` of the previously executed DML statement. This is an internal term of TiDB used for tests. Usually, you can ignore this information.
+    - `error`: The error message, if any.
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
@@ -2635,6 +2644,14 @@ explain select * from t where age=5;
 - Default value: `OFF`
 - By default, Regions are split for a new table when it is being created in TiDB. After this variable is enabled, the newly split Regions are scattered immediately during the execution of the `CREATE TABLE` statement. This applies to the scenario where data need to be written in batches right after the tables are created in batches, because the newly split Regions can be scattered in TiKV beforehand and do not have to wait to be scheduled by PD. To ensure the continuous stability of writing data in batches, the `CREATE TABLE` statement returns success only after the Regions are successfully scattered. This makes the statement's execution time multiple times longer than that when you disable this variable.
 - Note that if `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` have been set when a table is created, the specified number of Regions are evenly split after the table creation.
+
+### `tidb_shard_allocate_step` <span class="version-mark">New in v5.0</span>
+
+- Scope: SESSION | GLOBAL
+- Persists to cluster: Yes
+- Default value: `9223372036854775807`
+- Range: `[1, 9223372036854775807]`
+- This variable controls the maximum number of continuous IDs to be allocated for the [`AUTO_RANDOM`](/auto-random.md) or [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) attribute. Generally, `AUTO_RANDOM` IDs or the `SHARD_ROW_ID_BITS` annotated row IDs are incremental and continuous in one transaction. You can use this variable to solve the hotspot issue in large transaction scenarios.
 
 ### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
 
