@@ -436,7 +436,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 <CustomContent platform="tidb-cloud">
 
 - This variable ensures that all connections to TiDB are either on a local socket, or using TLS.
-
+LastDDLInfo
 </CustomContent>
 
 - Setting this variable to `ON` requires you to connect to TiDB from a session that has TLS enabled. This helps prevent lock-out scenarios when TLS is not configured correctly.
@@ -1825,7 +1825,9 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Persists to cluster: No
 - Default value：‘’
 - Type: String
-- This is a read only variable, it is used to get the last ddl info within the current session.
+- This is a read only variable, it is used to get the last ddl info within the current session. The DDL informaiton includes:
+    - "query": the last DDL query string.
+    - "seq_num": seq_num is the total order in all DDLs, it's used to identify the order of DDL. 
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
