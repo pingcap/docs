@@ -30,7 +30,7 @@ By the automatic backup, you can back up the cluster data every day at the backu
 
 4. Click **Confirm**.
 
-If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, that is 2 a.m. in the time zone of the region where the cluster is located.
+If you do not specify a preferred backup time, TiDB Cloud assigns a default backup time, that is 2:00 AM in the time zone of the region where the cluster is located.
 
 Note that you can not disable automatic backup.
 
