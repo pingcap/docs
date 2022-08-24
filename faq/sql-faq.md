@@ -7,7 +7,7 @@ summary: Learn about the FAQs related to TiDB SQL.
 
 This document summarizes the FAQs related to SQL operations in TiDB.
 
-## Does TiDB support secondary key?
+## Does TiDB support the secondary key?
 
 Yes. You can have the [`NOT NULL` constraint](/constraints.md#not-null) on a non-primary key column with a unique [secondary index](/develop/dev-guide-create-secondary-indexes.md). In this case, the column works as a secondary key.
 
@@ -24,7 +24,7 @@ For some heavy DDL operations such as adding indexes, TiDB needs to backfill dat
 - [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
 - [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)
 
-## How to choose the right query plan? Do I need to use hints? Or can I use hint?
+## How to choose the right query plan? Do I need to use hints? Or can I use hints?
 
 TiDB includes a cost-based optimizer. In most cases, the optimizer chooses the optimal query plan for you. If the optimizer does not work well, you can still use [optimizer hints](/optimizer-hints.md) to intervene with the optimizer.
 
@@ -317,7 +317,7 @@ To learn the scenarios that cause hotspots, refer to [common hotpots](/troublesh
 - [Coprocessor Cache](/coprocessor-cache.md), for read hotspots on small tables.
 - [Load Base Split](/configure-load-base-split.md), for hotspots caused by unbalanced access between Regions, such as full table scans for small tables.
 
-If you have a performance issue caused by hotspot, refer to the [troubleshoot guide](/troubleshoot-hot-spot-issues.md) to get it resolved.
+If you have a performance issue caused by hotspot, refer to [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md) to get it resolved.
 
 ### How to scatter the hotspots?
 
