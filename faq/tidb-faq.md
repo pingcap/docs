@@ -82,9 +82,9 @@ Currently [TiDB documentation](/overview.md#tidb-introduction) is the most impor
 
 32 characters at most.
 
-### What are the limits on the column number and row size in TiDB?
+### What are the limits on the number of columns and row size in TiDB?
 
-- The maximum number of columns TiDB defaults to 1017. You can adjust the number up to 4096.
+- The maximum number of columns in TiDB defaults to 1017. You can adjust the number up to 4096.
 - The maximum size of a single row defaults to 6 MB. You can increase the number up to 120 MB.
 
 For more information, see [TiDB Limitations](/tidb-limitations.md).
