@@ -29,7 +29,8 @@ jobs:
       - name: Publish result
         run: |
           curl \
-            -fsSL \
+            --fail-with-body \
+            -sSL \
             -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token ${{ github.token }}" \
