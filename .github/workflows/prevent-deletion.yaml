@@ -5,6 +5,8 @@ on:
 
 jobs:
   check:
+    permissions:
+      checks: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out
@@ -27,6 +29,7 @@ jobs:
       - name: Publish result
         run: |
           curl \
+            -fsSL \
             -X POST \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: token $GITHUB_TOKEN" \
