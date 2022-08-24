@@ -72,7 +72,7 @@ Take `Release Version: v1.0.3-1-ga80e796` as an example of version number descri
 TiDB provides a few features and [tools](/ecosystem-tool-user-guide.md), with which you can manage the clusters easily at a low cost:
 
 - For maintenance operations, [TiUP](/tiup/tiup-documentation-guide.md) works as the package manager, which simplifies the deployment, scaling, upgrade, and other maintenance tasks.
-- For monitoring, the [TiDB monitoring framework](/tidb-monitoring-framework.md) uses [Prometheus](https://prometheus.io/) to store the monitoring and performance metrics, and uses [Grafana](https://grafana.com/grafana/) to visualize these metrics. There are already dozens of built-in panels available with hundreds of metrics.
+- For monitoring, the [TiDB monitoring framework](/tidb-monitoring-framework.md) uses [Prometheus](https://prometheus.io/) to store the monitoring and performance metrics, and uses [Grafana](https://grafana.com/grafana/) to visualize these metrics. Dozens of built-in panels are available with hundreds of metrics.
 - For troubleshooting, the [TiDB Troubleshooting Map](/tidb-troubleshooting-map.md) summarizes common issues of the TiDB server and other components. You can use this map to diagnose and resolve issues when you encounter related problems.
 
 ### What's the difference between various TiDB master versions?
