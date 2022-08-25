@@ -90,6 +90,13 @@ This document only describes the parameters that are not included in command-lin
     + If the configuration item is set to a value other than `0`, TiKV keeps at most the number of old log files specified by `max-backups`. For example, if the value is set to `7`, TiKV keeps up to 7 old log files.
 + Default value: `0`
 
+### `pd.enable-forwarding` <span class="version-mark">New in v5.0.0</span>
+
++ Controls whether the PD client in TiKV forwards requests to the leader via the followers in the case of possible network isolation.
++ Default value: `false`
++ If the environment might have isolated network, enabling this parameter can reduce the window of service unavailability.
++ If you cannot accurately determine whether isolation, network interruption, or downtime has occurred, using this mechanism has the risk of misjudgment and causes reduced availability and performance. If network failure has never occurred, it is not recommended to enable this parameter.
+
 ## server
 
 + Configuration items related to the server.
@@ -198,6 +205,16 @@ This document only describes the parameters that are not included in command-lin
 
 + Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
 + Default value: `8192`
+
+### `simplify-metrics` <span class="version-mark">New in v6.2.0</span>
+
++ Specifies whether to simplify the returned monitoring metrics. After you set the value to `true`, TiKV reduces the amount of data returned for each request by filtering out some metrics.
++ Default value: `false`
+
+### `forward-max-connections-per-address` <span class="version-mark">New in v5.0.0</span>
+
++ Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
++ Default value: `4`
 
 ## readpool.unified
 
@@ -400,6 +417,7 @@ Configuration items related to storage.
         + When API V2 is used, you are expected to set `storage.enable-ttl = true` at the same time. Because API V2 supports the TTL feature, you must turn on `enable-ttl` explicitly. Otherwise, it will be in conflict because `storage.enable-ttl` defaults to `false`.
         + When API V2 is enabled, you need to deploy at least one tidb-server instance to reclaim expired data. Note that this tidb-server instance cannot provide read or write services. To ensure high availability, you can deploy multiple tidb-server instances.
         + Client support is required for API V2. For details, see the corresponding instruction of the client for the API V2.
+        + Since v6.2.0, Change Data Capture (CDC) for RawKV is supported using the component [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc).
 + Default value: `1`
 
 > **Warning:**
@@ -1389,11 +1407,6 @@ Configuration items related to `rocksdb.defaultcf.titan`.
 + Determines whether to optimize the read performance. When `level-merge` is enabled, there is more write amplification.
 + Default value: `false`
 
-### `gc-merge-rewrite`
-
-+ Determines whether to use the merge operator to write back blob indexes for Titan GC. When `gc-merge-rewrite` is enabled, it reduces the effect of Titan GC on the writes in the foreground.
-+ Default value: `false`
-
 ## raftdb
 
 Configuration items related to `raftdb`
@@ -1574,6 +1587,46 @@ Configuration items related to BR backup.
 + Controls whether to limit the resources used by backup tasks to reduce the impact on the cluster when the cluster resource utilization is high. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
 + Default value: `true`
 
+## log-backup
+
+Configuration items related to log backup.
+
+### `enable` <span class="version-mark">New in v6.2.0</span>
+
++ Determines whether to enable log backup.
++ Default value: `false`
+
+### `file-size-limit` <span class="version-mark">New in v6.2.0</span>
+
++ The size limit on log backup data. Once this limit is reached, the backup data is automatically flushed to external storage.
++ Default value: 256MB
+
+### `initial-scan-pending-memory-quota` <span class="version-mark">New in v6.2.0</span>
+
++ The quota of cache used for storing incremental scan data during log backup.
++ Default value: `min(Total machine memory * 10%, 512 MB)`
+
+### `initial-scan-rate-limit` <span class="version-mark">New in v6.2.0</span>
+
++ The rate limit on throughput in an incremental data scan during log backup.
++ Default value: 60, indicating that the rate limit is 60 MB/s by default.
+
+### `max-flush-interval` <span class="version-mark">New in v6.2.0</span>
+
++ The maximum interval for writing backup data to external storage in log backup.
++ Default value: 5min
+
+### `num-threads` <span class="version-mark">New in v6.2.0</span>
+
++ The number of threads used in log backup.
++ Default value: CPU * 0.5
++ Value range: [2, 12]
+
+### `temp-path` <span class="version-mark">New in v6.2.0</span>
+
++ The temporary path to which log files are written before being flushed to external storage.
++ Default value: `${deploy-dir}/data/log-backup-temp`
+
 ## cdc
 
 Configuration items related to TiCDC.
@@ -1608,6 +1661,17 @@ Configuration items related to TiCDC.
 + The maximum number of concurrent executions for the tasks of incrementally scanning historical data.
 + Default value: `6`, which means 6 tasks can be concurrent executed at most.
 + Note: The value of `incremental-scan-concurrency` must be greater than or equal to that of `incremental-scan-threads`; otherwise, TiKV will report an error at startup.
+
+### `raw-min-ts-outlier-threshold` <span class="version-mark">New in v6.2.0</span>
+
++ The threshold at which TiKV checks whether the Resolved TS of RawKV is abnormal.
++ If the Resolved TS latency of a Region exceeds this threshold, the anomaly detection process is triggered. At this time, the Region whose Resolved TS latency exceeds 3 x [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) is considered as slow in lock resolution, and triggers TiKV-CDC to re-subscribe the data changes of the Region, which resets the lock resource status.
++ Default value: `60s`
+
+> **Warning:**
+>
+> - This configuration item will be deprecated in a future release. To avoid upgrade compatibility issues, it is **NOT** recommended to set this configuration item.
+> - In most scenarios, you do not need to modify this configuration, because the slow lock resolution rarely happens. If this configuration value is set too small, the anomaly detection process might trigger false alarms, which causes data replication jitter.
 
 ## resolved-ts
 
@@ -1658,33 +1722,76 @@ For pessimistic transaction usage, refer to [TiDB Pessimistic Transaction Mode](
 
 Configuration items related to Quota Limiter.
 
-Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the foreground of TiKV might process too many read and write requests so that the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
-
-> **Warning:**
->
-> - Quota Limiter is an experimental feature introduced in TiDB v6.0.0, and it is **NOT** recommended to use it in the production environment.
-> - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
-
-### `foreground-cpu-time` (new in v6.0.0)
-
-+ The soft limit on the CPU resources used by TiKV foreground to process read and write requests.
-+ Default value: `0` (which means no limit)
-+ Unit: millicpu (for example, `1500` means that foreground requests consume 1.5v CPU)
-
-### `foreground-write-bandwidth` (new in v6.0.0)
-
-+ The soft limit on the bandwidth with which transactions write data.
-+ Default value: `0KB` (which means no limit)
-
-### `foreground-read-bandwidth` (new in v6.0.0)
-
-+ The soft limit on the bandwidth with which transactions and the Coprocessor read data.
-+ Default value: `0KB` (which means no limit)
-
-### `max-delay-duration` (new in v6.0.0)
+### `max-delay-duration` <span class="version-mark">New in v6.0.0</span>
 
 + The maximum time that a single read or write request is forced to wait before it is processed in the foreground.
 + Default value: `500ms`
++ Recommended setting: It is recommended to use the default value in most cases. If out of memory (OOM) or violent performance jitter occurs in the instance, you can set the value to 1S to make the request waiting time shorter than 1 second.
+
+### Foreground Quota Limiter
+
+Configuration items related to foreground Quota Limiter.
+
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the foreground of TiKV might process too many read and write requests so that the CPU resources used by the background are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the foreground quota-related configuration items to limit the CPU resources to be used by the foreground. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+
+#### `foreground-cpu-time` <span class="version-mark">New in v6.0.0</span>
+
++ The soft limit on the CPU resources used by TiKV foreground to process read and write requests.
++ Default value: `0` (which means no limit)
++ Unit: millicpu (for example, `1500` means that the foreground requests consume 1.5v CPU)
++ Recommended setting: For the instance with more than 4 cores, use the default value `0`. For the instance with 4 cores, setting the value to the range of `1000` and `1500` can make a balance. For the instance with 2 cores, keep the value smaller than `1200`.
+
+#### `foreground-write-bandwidth` <span class="version-mark">New in v6.0.0</span>
+
++ The soft limit on the bandwidth with which transactions write data.
++ Default value: `0KB` (which means no limit)
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the write bandwidth. For such an exception, it is recommended to set the value smaller than `50MB` in the instance with 4 or less cores.
+
+#### `foreground-read-bandwidth` <span class="version-mark">New in v6.0.0</span>
+
++ The soft limit on the bandwidth with which transactions and the Coprocessor read data.
++ Default value: `0KB` (which means no limit)
++ Recommended setting: Use the default value `0` in most cases unless the `foreground-cpu-time` setting is not enough to limit the read bandwidth. For such an exception, it is recommended to set the value smaller than `20MB` in the instance with 4 or less cores.
+
+### Background Quota Limiter
+
+Configuration items related to background Quota Limiter.
+
+Suppose that your machine on which TiKV is deployed has limited resources, for example, with only 4v CPU and 16 G memory. In this situation, the background of TiKV might process too many calculations and read and write requests, so that the CPU resources used by the foreground are occupied to help process such requests, which affects the performance stability of TiKV. To avoid this situation, you can use the background quota-related configuration items to limit the CPU resources to be used by the background. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources. The exact waiting time depends on the number of requests, and the maximum waiting time is no longer than the value of [`max-delay-duration`](#max-delay-duration-new-in-v600).
+
+> **Warning:**
+>
+> - Background Quota Limiter is an experimental feature introduced in TiDB v6.2.0, and it is **NOT** recommended to use it in the production environment.
+> - This feature is only suitable for environments with limited resources to ensure that TiKV can run stably in those environments. If you enable this feature in an environment with rich resources, performance degradation might occur when the amount of requests reaches a peak.
+
+#### `background-cpu-time` <span class="version-mark">New in v6.2.0</span>
+
++ The soft limit on the CPU resources used by TiKV background to process read and write requests.
++ Default value: `0` (which means no limit)
++ Unit: millicpu (for example, `1500` means that the background requests consume 1.5v CPU)
+
+#### `background-write-bandwidth` <span class="version-mark">New in v6.2.0</span>
+
+> **Note:**
+>
+> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
+
++ The soft limit on the bandwidth with which background transactions write data.
++ Default value: `0KB` (which means no limit)
+
+#### `background-read-bandwidth` <span class="version-mark">New in v6.2.0</span>
+
+> **Note:**
+>
+> This configuration item is returned in the result of `SHOW CONFIG`, but currently setting it does not take any effect.
+
++ The soft limit on the bandwidth with which background transactions and the Coprocessor read data.
++ Default value: `0KB` (which means no limit)
+
+#### `enable-auto-tune` <span class="version-mark">New in v6.2.0</span>
+
++ Determines whether to enable the auto-tuning of quota. If this configuration item is enabled, TiKV dynamically adjusts the quota for the background requests based on the load of TiKV instances.
++ Default value: `false` (which means that the auto-tuning is disabled)
 
 ## causal-ts <span class="version-mark">New in v6.1.0</span>
 
