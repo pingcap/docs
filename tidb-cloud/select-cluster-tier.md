@@ -52,7 +52,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 To get the prefix for your cluster, take the following steps:
 
 1. Navigate to the **Clusters** page.
-2. Click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+2. Click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
     > **Tip:**
     >
