@@ -202,8 +202,8 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
     enable-gtid: true
     from:
-     host: "172.16.5.138"
-     user: "lzy"
+     host: "192.168.10.102"
+     user: "user02"
      password: "3O8fCPEnwO87cIal32bpO0AuTsJyBJ0="
      port: 3308
     ```
@@ -218,7 +218,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
 
     |Parameter              |Description    |
     |-                      |-              |
-    |`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
+    |`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 192.168.11.110:9261|
     |`operate-source create`|Loads the data source to the DM cluster.|
 
     The following is an example output:
@@ -226,7 +226,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source1.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source1.yaml
 
     {
        "result": true,
@@ -236,7 +236,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
                "result": true,
                "msg": "",
                "source": "mysql-replica-01",
-               "worker": "dm-172.16.7.154-9262"
+               "worker": "dm-192.168.11.111-9262"
            }
        ]
     }
@@ -246,7 +246,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
 4. Run the following command in a terminal. Use `tiup dmctl` to load the second data source configuration into the DM cluster:
 
     ```shell
-    [root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
+    [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
     ```
 
     The following is an example output:
@@ -254,7 +254,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     ```shell
     tiup is checking updates for component dmctl ...
 
-    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 operate-source create dm-source2.yaml
+    Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
 
     {
        "result": true,
@@ -264,7 +264,7 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
                "result": true,
                "msg": "",
                "source": "mysql-replica-02",
-               "worker": "dm-172.16.7.214-9262"
+               "worker": "dm-192.168.11.112-9262"
            }
        ]
     }
@@ -337,7 +337,7 @@ mysql-instances:
 
 ## ******** Configuration of the target TiDB cluster on TiDB Cloud **********
 target-database:       # The target TiDB cluster on TiDB Cloud
- host: "tidb.70593805.b973b556.ap-northeast-1.prod.aws.tidbcloud.com"
+ host: "tidb.xxxxxxx.xxxxxxxxx.ap-northeast-1.prod.aws.tidbcloud.com"
  port: 4000
  user: "root"
  password: "oSWRLvR3F5GDIgm+l+9h3kB72VFWBUwzOw=="  # If the password is not empty, it is recommended to use a dmctl-encrypted cipher.
@@ -375,7 +375,7 @@ For detailed task configurations, see [DM Task Configurations](https://docs.ping
 To run a data replication task smoothly, DM triggers a precheck automatically at the start of the task and returns the check results. DM starts the replication only after the precheck is passed. To trigger a precheck manually, run the check-task command:
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 check-task dm-task.yaml
+[root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 ```
 
 The following is an example output:
@@ -383,7 +383,7 @@ The following is an example output:
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 check-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 check-task dm-task.yaml
 
 {
    "result": true,
@@ -403,7 +403,7 @@ The parameters used in the command above are described as follows:
 
 |Parameter              |Description    |
 |-                      |-              |
-|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 172.16.7.140:9261|
+|`--master-addr`        |The `{advertise-addr}` of any DM-master node in the cluster where `dmctl` is to be connected. For example: 192.168.11.110:9261|
 |`start-task`           |Starts the migration task.|
 
 The following is an example output:
@@ -411,7 +411,7 @@ The following is an example output:
 ```shell
 tiup is checking updates for component dmctl ...
 
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 start-task dm-task.yaml
+Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 192.168.11.110:9261 start-task dm-task.yaml
 
 {
    "result": true,
@@ -421,14 +421,14 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
            "result": true,
            "msg": "",
            "source": "mysql-replica-01",
-           "worker": "dm-172.16.7.154-9262"
+           "worker": "dm-192.168.11.111-9262"
        },
 
        {
            "result": true,
            "msg": "",
            "source": "mysql-replica-02",
-           "worker": "dm-172.16.7.214-9262"
+           "worker": "dm-192.168.11.112-9262"
        }
    ],
    "checkResult": ""
@@ -444,7 +444,7 @@ If you encounter any problem, refer to [DM error handling](https://docs.pingcap.
 To learn whether the DM cluster has an ongoing replication task and view the task status, run the `query-status` command using `tiup dmctl`:
 
 ```shell
-[root@localhost ~]# tiup dmctl --master-addr 172.16.7.140:9261 query-status test-task1
+[root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 query-status test-task1
 ```
 
 The following is an example output:
@@ -457,22 +457,9 @@ The following is an example output:
        {
            "result": true,
            "msg": "",
-           "source": "mysql-replica-01",
-           "worker": "dm-
-tiup is checking updates for component dmctl ...
-
-Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl --master-addr 172.16.7.140:9261 query-status test-task1
-
-{
-   "result": true,
-   "msg": "",
-   "sources": [
-       {
-           "result": true,
-           "msg": "",
            "sourceStatus": {
                "source": "mysql-replica-01",
-               "worker": "dm-172.16.7.154-9262",
+               "worker": "dm-192.168.11.111-9262",
                "result": null,
                "relayStatus": null
            },
@@ -510,7 +497,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/v6.0.0/dmctl/dmctl /roo
            "msg": "",
            "sourceStatus": {
                "source": "mysql-replica-02",
-               "worker": "dm-172.16.7.214-9262",
+               "worker": "dm-192.168.11.112-9262",
                "result": null,
                "relayStatus": null
            },
