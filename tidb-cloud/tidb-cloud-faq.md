@@ -121,4 +121,4 @@ No. TiDB Cloud runs on the PingCAP VPC, but the data and traffic are encrypted b
 
 ### What support is available for customers?
 
-TiDB Cloud is supported by the same team behind TiDB, which has run mission-critical use cases for over 1500 global enterprises across industries including financial services, e-commerce, enterprise applications, and gaming. Support is available 24/7 for TiDB Cloud users.
+TiDB Cloud is supported by the same team behind TiDB, which has run mission-critical use cases for over 1500 global enterprises across industries including financial services, e-commerce, enterprise applications, and gaming. Support is available 24/7 for TiDB Cloud customers.
