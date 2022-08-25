@@ -5,7 +5,7 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 # TiDB Cloud Support
 
-TiDB Cloud offers a free **Basic** support plan for each user and you can upgrade to a paid plan for extended services.
+TiDB Cloud offers a free basic support plan for each user and you can upgrade to a paid plan for extended services.
 
 The information of each support plan is available on the support page of the TiDB Cloud console. To access the page, see [Check or upgrade your support plan](#check-or-upgrade-your-support-plan).
 
