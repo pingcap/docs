@@ -8,14 +8,19 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 このページでは、2022 年の[TiDB Cloud](https://en.pingcap.com/tidb-cloud/)のリリース ノートを一覧表示します。
 
+## 2022 年 8 月 24 日 {#august-24-2022}
+
+**一般的な変更**
+
+-   Dedicated Tierクラスタの一時停止または再開をサポートします。
+
+    TiDB Cloudで[Dedicated Tierクラスタを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)できます。クラスタが一時停止されている場合、ノード コンピューティング コストは課金されません。
+
 ## 2022 年 8 月 23 日 {#august-23-2022}
 
 **一般的な変更**
 
 -   新しい[開発者層](/tidb-cloud/select-cluster-tier.md#developer-tier)クラスターのデフォルトの TiDB バージョンを[v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0)から[v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0)にアップグレードします。
--   Dedicated Tierクラスタの一時停止または再開をサポートします。
-
-    TiDB Cloudで[Dedicated Tierクラスタを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)できます。クラスタが一時停止されている場合、ノード コンピューティング コストは課金されません。
 
 **API の変更**
 
@@ -162,7 +167,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 ## 2022 年 6 月 7 日 {#june-7-2022}
 
 -   [無料で試す](https://tidbcloud.com/free-trial)登録ページを追加して、 TiDB Cloudにすばやくサインアップします。
--   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間の無料PoCトライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
+-   プラン選択ページから**概念実証プラン**オプションを削除します。 14日間のPoC無料トライアルを申し込む場合は、 [PoCに申し込む](https://en.pingcap.com/apply-for-poc/)ページへ。詳細については、 [TiDB Cloudで概念実証 (PoC) を実行する](/tidb-cloud/tidb-cloud-poc.md)を参照してください。
 -   電子メールとパスワードを使用してTiDB Cloudにサインアップするユーザーに、90 日ごとにパスワードをリセットするよう求めることで、システムのセキュリティを向上させます。詳細については、 [ユーザーのパスワードを管理する](/tidb-cloud/manage-user-access.md#manage-user-passwords)を参照してください。
 
 ## 2022 年 5 月 24 日 {#may-24-2022}
@@ -183,7 +188,7 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 ## 2022 年 5 月 1 日 {#may-1-2022}
 
--   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用層](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
+-   [作成](/tidb-cloud/create-tidb-cluster.md)または[戻す](/tidb-cloud/backup-and-restore.md#restore) a [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)クラスタの場合、TiDB、TiKV、および TiFlash の vCPU サイズの構成をサポートします。
 -   クラスタ作成のための AWS リージョン`Mumbai`のサポートを追加します。
 -   [TiDB Cloud請求](/tidb-cloud/tidb-cloud-billing.md)のコンピューティング、ストレージ、およびデータ転送のコストを更新します。
 
@@ -260,4 +265,4 @@ TiDB Cloudは一般提供になりました。次のいずれかのオプショ�
 バグの修正：
 
 -   パスワードに一重引用符が含まれていると、ユーザーがクラスタを作成できないという問題を修正します。
--   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別の役割に変更されたりする可能性があるという問題を修正します。
+-   組織に所有者が 1 人しかいない場合でも、所有者が削除されたり、別のロールに変更されたりする可能性があるという問題を修正します。

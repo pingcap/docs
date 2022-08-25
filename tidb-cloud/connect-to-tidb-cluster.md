@@ -93,4 +93,4 @@ SQL シェルを使用して TiDBクラスタに接続するには、次の手�
 
 ## 次は何ですか {#what-s-next}
 
-TiDBクラスタに正常に接続したら、次のことができ[TiDB で SQL ステートメントを調べる](https://docs.pingcap.com/tidb/stable/basic-sql-operations) 。
+TiDBクラスタに正常に接続したら、次のことができ[TiDB で SQL ステートメントを調べる](/basic-sql-operations.md) 。

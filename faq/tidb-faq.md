@@ -7,7 +7,7 @@ summary: Learn about the most frequently asked questions (FAQs) relating to TiDB
 
 <!-- markdownlint-disable MD026 -->
 
-このドキュメントには、TiDB に関する最もよくある質問が記載されています。
+このドキュメントでは、TiDB に関する最もよくある質問を一覧表示します。
 
 ## TiDB の紹介とアーキテクチャ {#tidb-introduction-and-architecture}
 
@@ -82,6 +82,13 @@ Usage of ./bin/tidb-server:
 
 最大 32 文字。
 
+### TiDB の列数と行サイズの制限は何ですか? {#what-are-the-limits-on-the-number-of-columns-and-row-size-in-tidb}
+
+-   TiDB の列の最大数のデフォルトは 1017 です。この数は最大 4096 まで調整できます。
+-   1 行の最大サイズのデフォルトは 6 MB です。この数は最大 120 MB まで増やすことができます。
+
+詳細については、 [TiDB の制限事項](/tidb-limitations.md)を参照してください。
+
 ### TiDB は XA をサポートしていますか? {#does-tidb-support-xa}
 
 いいえ。TiDB の JDBC ドライバーは MySQL JDBC (Connector/J) です。 Atomikos を使用する場合は、データ ソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定します。 TiDB は、MySQL JDBC XADataSource との接続をサポートしていません。 MySQL JDBC XADataSource は MySQL でのみ機能します (たとえば、DML を使用して`redo`のログを変更します)。
@@ -89,6 +96,15 @@ Usage of ./bin/tidb-server:
 Atomikos の 2 つのデータ ソースを構成したら、JDBC ドライブを XA に設定します。 Atomikos が TM と RM (DB) を操作する場合、Atomikos は XA を含むコマンドを JDBC 層に送信します。 MySQL を例にとると、JDBC レイヤーで XA が有効になっている場合、JDBC は、DML を使用して`redo`のログを変更するなど、一連の XA ロジック操作を InnoDB に送信します。これが 2 フェーズ コミットの動作です。現在の TiDB バージョンは、上位アプリケーション層の JTA/XA をサポートしておらず、Atomikos から送信された XA 操作を解析していません。
 
 スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクション モデルを使用した分散トランザクションをサポートし、そのパフォーマンスの安定性は XA よりも高いため、TiDB は XA をサポートしておらず、TiDB が XA をサポートする必要はありません。
+
+### TiDB は、パフォーマンスを損なうことなく、カラムナ ストレージ エンジン (TiFlash) への同時<code>INSERT</code>または<code>UPDATE</code>操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-code-insert-code-or-code-update-code-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
+
+-   [ティフラッシュ](/tiflash/tiflash-overview.md)は、列エンジンの変更を処理するために DeltaTree という名前の特別な構造を導入します。
+-   TiFlash はRaftグループの学習者の役割として機能するため、ログのコミットまたは書き込みには投票しません。これは、DML 操作が TiFlash の確認応答を待つ必要がないことを意味します。これが、TiFlash が OLTP パフォーマンスを低下させない理由です。さらに、TiFlash と TiKV は別々のインスタンスで動作するため、互いに影響しません。
+
+### TiFlash は最終的に整合性がありますか? {#is-tiflash-eventually-consistent}
+
+はい。 TiFlash は、デフォルトで強力なデータ整合性を維持します。
 
 ## TiDB テクニック {#tidb-techniques}
 

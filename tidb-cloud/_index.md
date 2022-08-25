@@ -47,9 +47,9 @@ hide_commit: true
 
 [クラスターのスケーリング](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster)
 
-[クラスターをアップグレードする](https://docs.pingcap.com/tidbcloud/upgrade-tidb-cluster)
+[TiDB クラスターを一時停止または再開する](https://docs.pingcap.com/tidbcloud/pause-or-resume-tidb-cluster)
 
-[クラスターを削除する](https://docs.pingcap.com/tidbcloud/delete-tidb-cluster)
+[API (ベータ) を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta)
 
 </LearningPath>
 

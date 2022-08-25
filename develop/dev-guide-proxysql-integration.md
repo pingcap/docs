@@ -5,9 +5,20 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 
 # TiDB を ProxySQL と統合する {#integrate-tidb-with-proxysql}
 
+<CustomContent platform="tidb">
+
 このドキュメントでは、例として CentOS 7 を使用して**TiDB**と<strong>ProxySQL</strong>を統合する方法について説明します。他のシステムを使用して統合する場合は、 <strong>Docker</strong>および<strong>Docker Compose</strong>を使用してテスト統合環境をデプロイする方法を紹介する[試してみる](#4-try-out)セクションを参照してください。詳細については、次を参照してください。
 
 -   [TiDB ドキュメント](/overview.md)
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+このドキュメントでは、例として CentOS 7 を使用して**TiDB Cloud**と<strong>ProxySQL</strong>を統合する方法について説明します。他のシステムを使用して統合する場合は、 <strong>Docker</strong>および<strong>Docker Compose</strong>を使用してテスト統合環境をデプロイする方法を紹介する[試してみる](#4-try-out)セクションを参照してください。
+
+</CustomContent>
+
 -   [TiDB 開発者ガイド](/develop/dev-guide-overview.md)
 -   [ProxySQL ドキュメント](https://proxysql.com/documentation/)
 -   [TiDB と ProxySQL の統合テスト](https://github.com/Icemap/tidb-proxysql-integration-test)
@@ -15,6 +26,8 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 ## 1.TiDBを起動 {#1-start-tidb}
 
 ### テスト環境 {#test-environment}
+
+<CustomContent platform="tidb">
 
 <SimpleTab groupId="startup-tidb">
 
@@ -68,7 +81,17 @@ summary: Introduce how to integrate TiDB with ProxySQL step by step.
 
 </SimpleTab>
 
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+[TiDB Cloud(開発者層) で TiDBクラスタを構築する](/develop/dev-guide-build-cluster-in-cloud.md)を参照できます。
+
+</CustomContent>
+
 ### 本番環境 {#production-environment}
+
+<CustomContent platform="tidb">
 
 <SimpleTab groupId="startup-tidb">
 
@@ -85,6 +108,14 @@ TiDB サービスをホストする必要がある場合は、 [TiDB Cloud](http
 </div>
 
 </SimpleTab>
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+実稼働環境で TiDBクラスタを構築するには、 [TiDBクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+
+</CustomContent>
 
 ## 2.ProxySQL を開始します。 {#2-start-proxysql}
 
@@ -127,7 +158,7 @@ ProxySQL を TiDB のプロキシとして使用するには、ProxySQL を構�
 ProxySQL は、構成を管理するためのポート ( ***ProxySQL Admin インターフェイス***) と、プロキシへのポート ( <em><strong>ProxySQL MySQL Interface</strong></em> ) を使用します。
 
 -   ***ProxySQL 管理インターフェイス***: 管理インターフェイスに接続するには、 `admin`ユーザーを使用して構成の読み取りと書き込みを行うか、 `stats`ユーザーを使用して統計の一部を読み取ることができます (構成の読み取りまたは書き込みはできません)。デフォルトの資格証明は`admin:admin`および`stats:stats`です。セキュリティ上の理由から、既定の資格情報を使用してローカルに接続できますが、リモートで接続するには、多くの場合`radmin`という名前の新しいユーザーを構成する必要があります。
--   ***ProxySQL MySQL Interface*** : SQL を設定済みのサービスに転送するためのプロキシとして使用されます。
+-   ***ProxySQL MySQL Interface*** : SQL を構成されたサービスに転送するためのプロキシとして使用されます。
 
 ![proxysql config flow](/media/develop/proxysql_config_flow.png)
 
@@ -579,7 +610,7 @@ cd example/proxy-rule-admin-interface
     >
     > 一致ルールの詳細:
     >
-    > -   ProxySQL は、小さいものから大きいものへ`rule_id`の順序でルールを 1 つずつ照合しようとします。
+    > -   ProxySQL は、最小から最大の順に`rule_id`つずつルールを照合しようとします。
     > -   `^`は SQL ステートメントの先頭に一致し、 `$`は末尾に一致します。
     > -   `match_digest`は、パラメーター化された SQL ステートメントに一致します。詳細については、 [query_processor_regex](https://proxysql.com/documentation/global-variables/mysql-variables/#mysql-query_processor_regex)を参照してください。
     > -   重要なパラメータ:

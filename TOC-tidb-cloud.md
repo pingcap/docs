@@ -72,6 +72,8 @@
             -   [SQL開発仕様](/develop/dev-guide-sql-development-specification.md)
     -   クラウドネイティブ開発環境
         -   [ギットポッド](/develop/dev-guide-playground-gitpod.md)
+    -   サードパーティのサポート
+        -   [ProxySQL と統合する](/develop/dev-guide-proxysql-integration.md)
 -   クラスターの管理
     -   クラスターを計画する
         -   [クラスター層を選択する](/tidb-cloud/select-cluster-tier.md)
@@ -81,7 +83,7 @@
     -   TiDB クラスターに接続する
         -   [SQL クライアント経由で接続する](/tidb-cloud/connect-to-tidb-cluster.md)
         -   [SQL シェル経由で接続](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
-    -   [VPC ピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)
+    -   [VPC ピアリング接続のセットアップ](/tidb-cloud/set-up-vpc-peering-connections.md)
     -   TiFlash で HTAP クラスターを使用する
         -   [TiFlash の概要](/tiflash/tiflash-overview.md)
         -   [TiFlash レプリカの作成](/tiflash/create-tiflash-replicas.md)
@@ -147,7 +149,7 @@
                 -   [パーティションのプルーニング](/partition-pruning.md)
                 -   [TopN とリミット プッシュ ダウン](/topn-limit-push-down.md)
                 -   [結合したテーブルの再配置](/join-reorder.md)
-            -   物理的最適化
+            -   物理的な最適化
                 -   [概要](/sql-physical-optimization.md)
                 -   [インデックスの選択](/choose-index.md)
                 -   [統計](/statistics.md)

@@ -9,7 +9,7 @@ summary: Learn about the FAQs related to TiDB cluster management.
 
 ## 日常管理 {#daily-management}
 
-このセクションでは、日常のクラスタ管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
+このセクションでは、日常のクラスタ管理中に発生する可能性がある一般的な問題、その原因、および解決策について説明します。
 
 ### TiDB にログインするには？ {#how-to-log-into-tidb}
 
@@ -21,7 +21,7 @@ mysql -h 127.0.0.1 -uroot -P4000
 
 ### TiDB でシステム変数を変更するには? {#how-to-modify-the-system-variables-in-tidb}
 
-MySQL と同様に、TiDB には静的パラメーターと固体パラメーターが含まれています。 `set global xxx = n`を使用して静的パラメーターを直接変更できますが、パラメーターの新しい値は、このインスタンスのライフサイクル内でのみ有効です。
+MySQL と同様に、TiDB には静的パラメーターと固体パラメーターが含まれています。 `SET GLOBAL xxx = n`を使用して静的パラメーターを直接変更できますが、パラメーターの新しい値は、このインスタンスのライフサイクル内でのみ有効です。
 
 ### TiDB (TiKV) のデータ ディレクトリはどこにあり、どのようなものですか? {#where-and-what-are-the-data-directories-in-tidb-tikv}
 
@@ -67,11 +67,19 @@ TiDB は現在、 [`wait_timeout`](/system-variables.md#wait_timeout)と[`intera
 -   `-1`は、現在のバージョンに 1 つのコミットがあることを示します。
 -   `ga80e796`はバージョン`git-hash`を示します。
 
+### TiDBクラスタをデプロイして維持するための運用コストはどうですか? {#how-about-the-operating-cost-of-deploying-and-maintaining-a-tidb-cluster}
+
+TiDB は、低コストで簡単にクラスターを管理できるいくつかの機能と[ツール](/ecosystem-tool-user-guide.md)を提供します。
+
+-   メンテナンス操作の場合、 [TiUP](/tiup/tiup-documentation-guide.md)はパッケージ マネージャーとして機能し、デプロイ、スケーリング、アップグレード、およびその他のメンテナンス タスクを簡素化します。
+-   モニタリングの場合、 [TiDB 監視フレームワーク](/tidb-monitoring-framework.md)は[プロメテウス](https://prometheus.io/)を使用してモニタリングおよびパフォーマンス メトリックを保存し、 [グラファナ](https://grafana.com/grafana/)を使用してこれらのメトリックを視覚化します。数百のメトリックを備えた数十の組み込みパネルが利用可能です。
+-   トラブルシューティングのために、 [TiDB トラブルシューティング マップ](/tidb-troubleshooting-map.md)に TiDB サーバーとその他のコンポーネントの一般的な問題をまとめます。このマップを使用して、関連する問題が発生したときに問題を診断して解決できます。
+
 ### さまざまな TiDB マスター バージョンの違いは何ですか? {#what-s-the-difference-between-various-tidb-master-versions}
 
-TiDB コミュニティは非常に活発です。 1.0 GA リリース後、エンジニアは最適化とバグ修正を続けてきました。したがって、TiDB のバージョンは非常に高速に更新されます。最新バージョンの情報を入手したい場合は、 [TiDB 毎週更新](https://pingcap.com/weekly/)を参照してください。
+TiDB コミュニティは非常に活発です。エンジニアはバグの最適化と修正を続けています。したがって、TiDB のバージョンは非常に高速に更新されます。最新バージョンの情報を入手したい場合は、 [TiDB リリースのタイムライン](/releases/release-timeline.md)を参照してください。
 
-[TiUP を使用して TiDB をデプロイする](/production-deployment-using-tiup.md)を推奨します。 TiDB は 1.0 GA リリース以降、バージョン番号を一元管理しています。次の 2 つの方法を使用して、バージョン番号を表示できます。
+[TiUP を使用して TiDB をデプロイする](/production-deployment-using-tiup.md)を推奨します。 TiDB は、バージョン番号の管理が一元化されています。次の 2 つの方法を使用して、バージョン番号を表示できます。
 
 -   `select tidb_version()`
 -   `tidb-server -V`
@@ -79,6 +87,13 @@ TiDB コミュニティは非常に活発です。 1.0 GA リリース後、エ�
 ### TiDB 用のグラフィカルな展開ツールはありますか? {#is-there-a-graphical-deployment-tool-for-tidb}
 
 現在No.
+
+### TiDBクラスタをスケールアウトする方法は? {#how-to-scale-out-a-tidb-cluster}
+
+オンライン サービスを中断することなく、TiDBクラスタをスケールアウトできます。
+
+-   [TiUP](/production-deployment-using-tiup.md)を使用してクラスタをデプロイする場合は、 [TiUP を使用して TiDB クラスターをスケーリングする](/scale-tidb-using-tiup.md)を参照してください。
+-   Kubernetes で[TiDB Operator](/tidb-operator-overview.md)を使用してクラスタをデプロイする場合は、 [Kubernetes で TiDB を手動でスケーリングする](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)を参照してください。
 
 ### TiDB を水平方向にスケーリングするには? {#how-to-scale-tidb-horizontally}
 
@@ -188,7 +203,7 @@ pd-ctl ツールを使用して、クラスタの一般的なステータスを�
 2.  対応するデータ テーブルの行数が比較的多い`Add Index`操作: 処理時間は、特定の行数とその時の QPS によって異なります ( `Add Index`操作は、通常の SQL 操作よりも優先度が低くなります)。
 3.  その他の DDL 操作: 約 1 秒
 
-DDL 要求を受け取る TiDB サーバー インスタンスが、DDL 所有者がいる TiDB サーバー インスタンスと同じである場合、上記の最初と 3 番目のシナリオでは、数十から数百ミリ秒しかかからない可能性があります。
+DDL 要求を受信する TiDB サーバー インスタンスが、DDL 所有者がいる TiDB サーバー インスタンスと同じ場合、上記の最初と 3 番目のシナリオでは、数十から数百ミリ秒しかかかりません。
 
 ### DDL ステートメントの実行が時々非常に遅いのはなぜですか? {#why-it-is-very-slow-to-run-ddl-statements-sometimes}
 
@@ -286,6 +301,12 @@ GROUP BY
 ## TiKV サーバー管理 {#tikv-server-management}
 
 このセクションでは、TiKV サーバーの管理中に発生する可能性のある一般的な問題、その原因、および解決策について説明します。
+
+### コンプライアンスまたはマルチテナント アプリケーションのデータの場所を指定する方法は? {#how-to-specify-the-location-of-data-for-compliance-or-multi-tenant-applications}
+
+[配置ルール](/placement-rules-in-sql.md)を使用して、コンプライアンスまたはマルチテナント アプリケーションのデータの場所を指定できます。
+
+SQL の配置ルールは、レプリカの数、 Raftロール、配置場所、ルールが有効になるキー範囲など、連続するデータ範囲の属性を制御するように設計されています。
 
 ### TiKVクラスタで推奨されるレプリカの数は?高可用性のために最小数を維持する方が良いですか? {#what-is-the-recommended-number-of-replicas-in-the-tikv-cluster-is-it-better-to-keep-the-minimum-number-for-high-availability}
 
@@ -427,6 +448,10 @@ TiDB は、小さなサイズのテーブル (1,000 万レベル以下など) �
 
 ### TiDB でデータをバックアップするには? {#how-to-back-up-data-in-tidb}
 
-現在、大量のデータ (1 TB を超える) のバックアップの場合、推奨される方法は[ブラジル](/br/backup-and-restore-overview.md)を使用することです。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式の MySQL ツール`mysqldump`も TiDB でデータのバックアップと復元にサポートされていますが、そのパフォーマンスは BR に劣らず、大量のデータのバックアップと復元にはさらに多くの時間を必要とします。
+現在、大量のデータ (1 TB を超える) のバックアップの場合、推奨される方法は[バックアップと復元 (BR)](/br/backup-and-restore-overview.md)を使用することです。それ以外の場合、推奨されるツールは[Dumpling](/dumpling-overview.md)です。公式の MySQL ツール`mysqldump`も TiDB でデータのバックアップと復元にサポートされていますが、そのパフォーマンスは BR に劣らず、大量のデータのバックアップと復元にはさらに多くの時間を必要とします。
 
 BR に関するその他の FAQ については、 [ブラジルのよくある質問](/br/backup-and-restore-faq.md)を参照してください。
+
+### バックアップと復元の速度はどうですか? {#how-is-the-speed-of-backup-and-restore}
+
+[ブラジル](/br/backup-and-restore-overview.md)を使用してバックアップおよび復元タスクを実行すると、バックアップは TiKV インスタンスあたり約 40 MB/秒で処理され、復元は TiKV インスタンスあたり約 100 MB/秒で処理されます。
