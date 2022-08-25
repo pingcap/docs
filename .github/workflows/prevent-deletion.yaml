@@ -1,7 +1,9 @@
 name: Prevent Deletion
 
 on:
-  pull_request:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+  # pull_request:
 
 jobs:
   check:
@@ -29,7 +31,6 @@ jobs:
       - name: Publish result
         run: |
           curl \
-            --fail-with-body \
             -sSL \
             -X POST \
             -H "Accept: application/vnd.github+json" \
