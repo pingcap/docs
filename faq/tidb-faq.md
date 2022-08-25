@@ -1,9 +1,9 @@
 ---
-title: TiDB FAQ
+title: TiDB Architecture FAQs
 summary: Learn about the most frequently asked questions (FAQs) relating to TiDB.
 ---
 
-# TiDB FAQ
+# TiDB Architecture FAQs
 
 <!-- markdownlint-disable MD026 -->
 

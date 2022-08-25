@@ -1,9 +1,11 @@
 ---
-title: TiUP FAQ
+title: TiUP FAQs
 summary: Provide answers to common questions asked by TiUP users.
 ---
 
-# TiUP FAQ
+# TiUP FAQs
+
+This document collects the frequently asked questions (FAQs) about TiUP.
 
 ## Can TiUP not use the official mirror source?
 
