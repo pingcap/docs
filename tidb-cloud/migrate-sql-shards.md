@@ -37,9 +37,7 @@ The version of the upstream cluster is MySQL v5.7.18. The specific information i
 
 ### DM
 
-The version of DM is v5.3.0. The details are as follows:
-
-![DM Details](/media/tidb-cloud/shard-dm-details.png)
+The version of DM is v5.3.0. You need to deploy TiDB DM manually. For detailed steps, see [Deploy a DM Cluster Using TiUP](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup).
 
 ### Downstream cluster
 
