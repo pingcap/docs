@@ -1,9 +1,7 @@
 name: Prevent Deletion
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
-  # pull_request:
+  pull_request:
 
 jobs:
   check:
@@ -26,7 +24,7 @@ jobs:
               '.output.title = "Found " + $count + " deleted images" | .output.summary = $summary' \
             /tmp/body.json > /tmp/body2.json
           else
-            echo '{"name":"Image","head_sha":"${{ github.event.pull_request.head.sha }}","status":"completed","conclusion":"success","output":{"title":"OK","summary":"No deleted images"}}' > /tmp/body2.json
+            echo '{"name":"Image Deletion Check","head_sha":"${{ github.event.pull_request.head.sha }}","status":"completed","conclusion":"success","output":{"title":"OK","summary":"No deleted images"}}' > /tmp/body2.json
           fi
       - name: Publish result
         run: |
