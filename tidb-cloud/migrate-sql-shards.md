@@ -47,16 +47,16 @@ The version of TiDB Cloud cluster is v6.0.0. The sharded schemas and tables are 
 
 The following is the procedure to migrate and merge full data of MySQL shards to TiDB Cloud.
 
-In the following example, you only need to export tables and they must be in the **CSV** format.
+In the following example, you only need to export the data in tables to **CSV** format.
 
 ### Step 1. Create directories in the Amazon S3 bucket
 
-Create a first-level directory `store` (corresponding to the level of schemas) and a second-level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third-level directory for each MySQL instance (corresponding to the level of instances). For example:
+Create a first-level directory `store` (corresponding to the level of databases) and a second-level directory `sales` (corresponding to the level of tables) in the Amazon S3 bucket. In `sales`, create a third-level directory for each MySQL instance (corresponding to the level of MySQL instances). For example:
 
 - Migrate the data in MySQL instance1 to `s3://dumpling-s3/store/sales/instance01/`
 - Migrate the data in MySQL instance2 to `s3://dumpling-s3/store/sales/instance02/`
 
-If there are shards across multiple instances, you can create a first-level directory for each schema and create a second-level directory for each sharded table. Then create a third-level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
+If there are shards across multiple instances, you can create a first-level directory for each database and create a second-level directory for each sharded table. Then create a third-level directory for each MySQL instance for easy management. For example, if you want to migrate and merge tables `stock_N.product_N` from MySQL instance1 and MySQL instance2 into the table `stock.products` in TiDB Cloud, you can create the following directories:
 
 - `s3://dumpling-s3/stock/products/instance01/`
 - `s3://dumpling-s3/stock/products/instance02/`
@@ -95,9 +95,9 @@ To export data to Amazon S3, do the following:
 
 For detailed steps, see [Export data to Amazon S3 cloud storage](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage).
 
-### Step 3. Create a schema in TiDB Cloud cluster
+### Step 3. Create schemas in TiDB Cloud cluster
 
-Create a schema in the TiDB Cloud cluster as follows:
+Create schemas in the TiDB Cloud cluster as follows:
 
 ```sql
 mysql> CREATE DATABASE store;
@@ -162,7 +162,7 @@ After configuring the IAM Role, you can perform the data import task on the [TiD
 
 - **Data Source Type**: `AWS S3`.
 - **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. You can import the data in all MySQL instances that will be merged into `store.sales` in one go.
-- **Data Format**: choose the format of your data.
+- **Data Format**: choose the **CSV** format of your data.
 - **Target Cluster**: fill in the **Username** and **Password** fields.
 - **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidbcloud/table-filter#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
 
@@ -186,8 +186,8 @@ TiDB Cloud does not provide any feature about incremental data replication yet. 
     # If you have configured the upstream database service to switch master between different nodes automatically, you must enable GTID.
     enable-gtid: true
     from:
-     host: "172.16.5.138"
-     user: "lzy"
+     host: "192.168.10.101"
+     user: "user01"
      password: "mZMkdjbRztSag6qEgoh8UkDY6X13H48="
      port: 3307
     ```
