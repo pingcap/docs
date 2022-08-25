@@ -3,11 +3,11 @@ title: ALTER INDEX
 summary: An overview of the usage of ALTER INDEX for the TiDB database.
 ---
 
-# ALTER INDEX
+# インデックスの変更 {#alter-index}
 
-The `ALTER INDEX` statement is used to modify the visibility of the index to `Visible` or `Invisible`. Invisible indexes are maintained by DML statements, but will not be used by the query optimizer. This is useful in scenarios where you want to double-check before removing an index permanently.
+`ALTER INDEX`ステートメントは、インデックスの可視性を`Visible`または`Invisible`に変更するために使用されます。非表示のインデックスは DML ステートメントによって維持されますが、クエリ オプティマイザーでは使用されません。これは、インデックスを完全に削除する前に再確認する必要があるシナリオで役立ちます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableStmt
@@ -17,11 +17,11 @@ AlterIndexSpec
          ::= 'ALTER' 'INDEX' Identifier ( 'VISIBLE' | 'INVISIBLE' )
 ```
 
-## Examples
+## 例 {#examples}
 
-You can modify the visibility of an index using the `ALTER TABLE ... ALTER INDEX ...` statement.
+`ALTER TABLE ... ALTER INDEX ...`ステートメントを使用して、インデックスの可視性を変更できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (c1 INT, UNIQUE(c1));
@@ -32,7 +32,7 @@ ALTER TABLE t1 ALTER INDEX c1 INVISIBLE;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SHOW CREATE TABLE t1;
@@ -51,9 +51,9 @@ SHOW CREATE TABLE t1;
 1 row in set (0.00 sec)
 ```
 
-The optimizer cannot use the **invisible index** of `c1`.
+オプティマイザは`c1`の非表示**インデックス**を使用できません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
@@ -70,9 +70,9 @@ EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
 3 rows in set (0.00 sec)
 ```
 
-By comparison, `c2` is a **visible index** and can be used by the optimizer.
+比較すると、 `c2`は**可視インデックス**であり、オプティマイザーで使用できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
@@ -88,9 +88,9 @@ EXPLAIN SELECT c2 FROM t1 ORDER BY c2;
 2 rows in set (0.00 sec)
 ```
 
-Even if you use the `USE INDEX` SQL hint to forcibly use indexes, the optimizer still cannot use invisible indexes; otherwise, an error is returned.
+`USE INDEX` SQL ヒントを使用してインデックスを強制的に使用しても、オプティマイザは非表示のインデックスを使用できません。そうでない場合は、エラーが返されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM t1 USE INDEX(c1);
@@ -100,11 +100,11 @@ SELECT * FROM t1 USE INDEX(c1);
 ERROR 1176 (42000): Key 'c1' doesn't exist in table 't1'
 ```
 
-> **Note:**
+> **ノート：**
 >
-> "Invisible" here means invisible only to the optimizer. You can still modify or delete invisible indexes.
+> ここでの「見えない」とは、オプティマイザーだけに見えないことを意味します。非表示のインデックスを変更または削除することはできます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1;
@@ -114,16 +114,16 @@ ALTER TABLE t1 DROP INDEX c1;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-* Invisible indexes in TiDB are modeled on the equivalent feature from MySQL 8.0.
-* Similiar to MySQL, TiDB does not permit `PRIMARY KEY` indexes to be made invisible.
-* MySQL provides an optimizer switch `use_invisible_indexes=on` to make all invisible indexes _visible_ again. This functionality is not available in TiDB.
+-   TiDB の不可視インデックスは、MySQL 8.0 の同等の機能をモデルにしています。
+-   MySQL と同様に、TiDB では`PRIMARY KEY`のインデックスを非表示にすることはできません。
+-   MySQL は、オプティマイザ スイッチ`use_invisible_indexes=on`を提供して、すべての非表示のインデックスを再び*表示できるよう*にします。この機能は TiDB では利用できません。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [CREATE TABLE](/sql-statements/sql-statement-create-table.md)
-* [CREATE INDEX](/sql-statements/sql-statement-create-index.md)
-* [ADD INDEX](/sql-statements/sql-statement-add-index.md)
-* [DROP INDEX](/sql-statements/sql-statement-drop-index.md)
-* [RENAME INDEX](/sql-statements/sql-statement-rename-index.md)
+-   [テーブルを作成](/sql-statements/sql-statement-create-table.md)
+-   [インデックスを作成](/sql-statements/sql-statement-create-index.md)
+-   [インデックスを追加](/sql-statements/sql-statement-add-index.md)
+-   [ドロップインデックス](/sql-statements/sql-statement-drop-index.md)
+-   [インデックスの名前を変更](/sql-statements/sql-statement-rename-index.md)

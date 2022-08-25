@@ -3,61 +3,62 @@ title:  Import CSV Files from Amazon S3 or GCS into TiDB Cloud
 summary: Learn how to import CSV files from Amazon S3 or GCS into TiDB Cloud.
 ---
 
-# Import CSV Files from Amazon S3 or GCS into TiDB Cloud
+# Amazon S3 または GCS からTiDB Cloudに CSV ファイルをインポートする {#import-csv-files-from-amazon-s3-or-gcs-into-tidb-cloud}
 
-This document describes how to import uncompressed CSV files from Amazon Simple Storage Service (Amazon S3) or Google Cloud Storage (GCS) into TiDB Cloud.
+このドキュメントでは、圧縮されていない CSV ファイルを Amazon Simple Storage Service (Amazon S3) または Google Cloud Storage (GCS) からTiDB Cloudにインポートする方法について説明します。
 
-> **Note:**
+> **ノート：**
 >
-> - If your CSV source files are compressed, you must uncompress the files first before the import.
-> - To ensure data consistency, TiDB Cloud allows to import CSV files into empty tables only. To import data into an existing table that already contains data, you can use TiDB Cloud to import the data into a temporary empty table by following this document, and then use the `INSERT SELECT` statement to copy the data to the target existing table.
+> -   CSV ソース ファイルが圧縮されている場合は、インポートする前にまずファイルを解凍する必要があります。
+> -   データの一貫性を確保するために、 TiDB Cloudでは CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントに従って、 TiDB Cloudを使用してデータを一時的な空のテーブルにインポートし、 `INSERT SELECT`ステートメントを使用してデータをターゲットの既存のテーブルにコピーします。
 
-## Step 1. Prepare the CSV files
+## ステップ 1.CSV ファイルを準備する {#step-1-prepare-the-csv-files}
 
-1. If a CSV file is larger than 256 MB, consider splitting it into smaller files, each with a size around 256 MB.
+1.  CSV ファイルが 256 MB より大きい場合は、それぞれのサイズが約 256 MB の小さなファイルに分割することを検討してください。
 
-    TiDB Cloud supports importing very large CSV files but performs best with multiple input files around 256 MB in size. This is because TiDB Cloud can process multiple files in parallel, which can greatly improve the import speed.
+    TiDB Cloudは、非常に大きな CSV ファイルのインポートをサポートしていますが、サイズが 256 MB 前後の複数の入力ファイルで最高のパフォーマンスを発揮します。これは、 TiDB Cloudが複数のファイルを並行して処理できるため、インポート速度が大幅に向上する可能性があるためです。
 
-2. Name the CSV files as follows:
+2.  次のように CSV ファイルに名前を付けます。
 
-    - If a CSV file contains all data of an entire table, name the file in the `${db_name}.${table_name}.csv` format, which maps to the `${db_name}.${table_name}` table when you import the data.
-    - If the data of one table is separated into multiple CSV files, append a numeric suffix to these CSV files. For example, `${db_name}.${table_name}.000001.csv` and `${db_name}.${table_name}.000002.csv`. The numeric suffixes can be inconsecutive but must be in ascending order. You also need to add extra zeros before the number to ensure all the suffixes are in the same length.
+    -   CSV ファイルにテーブル全体のすべてのデータが含まれている場合は、ファイルに`${db_name}.${table_name}.csv`形式の名前を付けます。これは、データをインポートするときに`${db_name}.${table_name}`テーブルにマップされます。
 
-    > **Note:**
+    -   1 つのテーブルのデータが複数の CSV ファイルに分割されている場合は、これらの CSV ファイルに数値のサフィックスを追加します。たとえば、 `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`です。数値サフィックスは連続していなくてもかまいませんが、昇順でなければなりません。また、数字の前にゼロを追加して、すべてのサフィックスが同じ長さになるようにする必要もあります。
+
+    > **ノート：**
     >
-    > If you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Custom Pattern** in [Step 4](#step-4-import-csv-files-to-tidb-cloud) to import your source data to a single target table.
+    > 上記のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイルのリンクが他のプログラムでも使用されている場合など) は、ファイル名を変更せずに[ステップ 4](#step-4-import-csv-files-to-tidb-cloud)の**カスタム パターン**を使用してソース データをインポートできます。単一のターゲット テーブルに。
 
-## Step 2. Create the target table schemas
+## ステップ 2. ターゲット表スキーマを作成する {#step-2-create-the-target-table-schemas}
 
-Because CSV files do not contain schema information, before importing data from CSV files into TiDB Cloud, you need to create the table schemas using either of the following methods:
+CSV ファイルにはスキーマ情報が含まれていないため、CSV ファイルからTiDB Cloudにデータをインポートする前に、次のいずれかの方法を使用してテーブル スキーマを作成する必要があります。
 
-- Method 1: In TiDB Cloud, create the target databases and tables for your source data.
+-   方法 1: TiDB Cloudで、ソース データのターゲット データベースとテーブルを作成します。
 
-- Method 2: In the Amazon S3 or GCS directory where the CSV files are located, create the target table schema files for your source data as follows:
+-   方法 2: CSV ファイルが配置されている Amazon S3 または GCS ディレクトリで、ソース データのターゲット テーブル スキーマ ファイルを次のように作成します。
 
-    1. Create database schema files for your source data.
+    1.  ソース データのデータベース スキーマ ファイルを作成します。
 
-        If your CSV files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files), the database schema files are optional for the data import. Otherwise, the database schema files are mandatory.
+        CSV ファイルが[ステップ1](#step-1-prepare-the-csv-files)の命名規則に従っている場合、データベース スキーマ ファイルはデータ インポートのオプションです。それ以外の場合、データベース スキーマ ファイルは必須です。
 
-        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, TiDB Cloud will create the `${db_name}` database to store your data when you import the data.
+        各データベース スキーマ ファイルは`${db_name}-schema-create.sql`形式で、 `CREATE DATABASE` DDL ステートメントを含む必要があります。このファイルを使用すると、 TiDB Cloudは、データをインポートするときにデータを格納するための`${db_name}`のデータベースを作成します。
 
-        For example, if you create a `mydb-scehma-create.sql` file that contains the following statement, TiDB Cloud will create the `mydb` database when you import the data.
+        たとえば、次のステートメントを含む`mydb-scehma-create.sql`ファイルを作成すると、データをインポートするときにTiDB Cloudによって`mydb`データベースが作成されます。
 
-        {{< copyable "sql" >}}
+        {{< copyable "" >}}
 
         ```sql
         CREATE DATABASE mydb;
         ```
 
-    2. Create table schema files for your source data.
+    2.  ソース データのテーブル スキーマ ファイルを作成します。
 
-        If you do not include the table schema files in the Amazon S3 or GCS directory where the CSV files are located, TiDB Cloud will not create the corresponding tables for you when you import the data.
+        CSV ファイルが配置されている Amazon S3 または GCS ディレクトリにテーブル スキーマ ファイルを含めない場合、データをインポートするときに、 TiDB Cloudは対応するテーブルを作成しません。
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, TiDB Cloud will create the `${db_table}` table in the `${db_name}` database when you import the data.
+        各テーブル スキーマ ファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL ステートメントを含む必要があります。このファイルを使用すると、データをインポートすると、 TiDB Cloudは`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
-        For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, TiDB Cloud will create the `mytable` table in the `mydb` database when you import the data.
+        たとえば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、データをインポートすると、 TiDB Cloudは`mydb`データベースに`mytable`テーブルを作成します。
 
-        {{< copyable "sql" >}}
+        {{< copyable "" >}}
 
         ```sql
         CREATE TABLE mytable (
@@ -66,89 +67,95 @@ Because CSV files do not contain schema information, before importing data from 
         COUNT INT );
         ```
 
-        > **Note:**
+        > **ノート：**
         >
-        > Each `${db_name}.${table_name}-schema.sql` file should only contain a single DDL statement. If the file contains multiple DDL statements, only the first one takes effect.
+        > 各`${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL ステートメントのみを含める必要があります。ファイルに複数の DDL ステートメントが含まれている場合、最初のステートメントのみが有効になります。
 
-## Step 3. Configure cross-account access
+## ステップ 3. クロスアカウント アクセスを構成する {#step-3-configure-cross-account-access}
 
-To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do one of the following:
+TiDB Cloudが Amazon S3 または GCS バケット内の CSV ファイルにアクセスできるようにするには、次のいずれかを実行します。
 
-- If your CSV files are located in Amazon S3, [configure cross-account access to Amazon S3](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access).
+-   CSV ファイルが Amazon S3 にある場合、 [Amazon S3 へのクロスアカウント アクセスを設定する](/tidb-cloud/config-s3-and-gcs-access.md#configure-amazon-s3-access) .
 
-    Once finished, make a note of the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files-to-tidb-cloud).
+    完了したら、 [ステップ 4](#step-4-import-csv-files-to-tidb-cloud)で必要になるため、Role ARN 値を書き留めます。
 
-- If your CSV files are located in GCS, [configure cross-account access to GCS](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access).
+-   CSV ファイルが GCS にある場合は、 [GCS へのクロスアカウント アクセスを構成する](/tidb-cloud/config-s3-and-gcs-access.md#configure-gcs-access) .
 
-## Step 4. Import CSV files to TiDB Cloud
+## ステップ 4.CSV ファイルをTiDB Cloudにインポートする {#step-4-import-csv-files-to-tidb-cloud}
 
-To import the CSV files to TiDB Cloud, take the following steps:
+CSV ファイルをTiDB Cloudにインポートするには、次の手順を実行します。
 
-1. Navigate to the **Active Clusters** page.
-2. Find the area of your target cluster and click **Import Data** in the upper-right corner of the area. The **Data Import Task** page is displayed.
+1.  [**アクティブなクラスター]**ページに移動します。
 
-    > **Tip:**
+2.  ターゲットクラスタの領域を見つけて、領域の右上隅にある [**データのインポート**] をクリックします。 [<strong>データ インポート タスク]</strong>ページが表示されます。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of your target cluster on the **Active Clusters** page and click **Import Data** in the upper-right corner.
+    > または、[**アクティブなクラスター**] ページでターゲットクラスタの名前をクリックし、右上隅にある [<strong>データのインポート</strong>] をクリックすることもできます。
 
-3. On the **Data Import Task** page, provide the following information.
+3.  [**データ インポート タスク]**ページで、次の情報を指定します。
 
-    - **Data Source Type**: select the type of the data source.
-    - **Bucket URL**: select the bucket URL where your CSV files are located.
-    - **Data Format**: select **CSV**.
-    - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
-    - **CSV Configuration**: check and update the CSV specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator. You can find the explanation of each CSV configuration right beside these fields.
+    -   **データ ソース タイプ**: データ ソースのタイプを選択します。
 
-        > **Note:**
+    -   **バケット URL** : CSV ファイルが配置されているバケット URL を選択します。
+
+    -   **データ形式**: <strong>CSV</strong>を選択します。
+
+    -   **資格情報の設定**(このフィールドは AWS S3 でのみ表示されます): <strong>Role-ARN</strong>の Role ARN 値を入力します。
+
+    -   **CSVConfiguration / コンフィグレーション**: 区切り記号、区切り記号、ヘッダー、非 null、null、バックスラッシュ エスケープ、trim-last-separator など、CSV 固有の構成を確認して更新します。これらのフィールドのすぐ横に、各 CSV 構成の説明があります。
+
+        > **ノート：**
         >
-        > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
+        > 区切り記号、区切り記号、およびヌルの構成では、英数字と特定の特殊文字の両方を使用できます。サポートされている特殊文字には、 `\t` 、 `\b` 、 `\n` 、 `\r` 、 `\f` 、および`\u0001`が含まれます。
 
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+    -   **ターゲット クラスタ**: <strong>[ユーザー名]</strong>および [<strong>パスワード</strong>] フィールドに入力します。
 
-        For example:
+    -   **DB/Tables Filter** : インポートするテーブルをフィルタリングする場合は、このフィールドに`,`で区切られた 1 つ以上のテーブル フィルターを指定できます。
 
-        - `db01.*`: all tables in the `db01` database will be imported.
-        - `db01.table01*,db01.table02*`: all tables starting with `table01` and `table02` in the `db01` database will be imported.
-        - `!db02.*`: except the tables in the `db02` database, all other tables will be imported. `!` is used to exclude tables that do not need to be imported.
-        - `*.*` : all tables will be imported.
+        例えば：
 
-        For more information, see [table filter snytax](/table-filter.md#syntax).
+        -   `db01.*` : `db01`データベース内のすべてのテーブルがインポートされます。
+        -   `db01.table01*,db01.table02*` : `db01`データベースの`table01`と`table02`で始まるすべてのテーブルがインポートされます。
+        -   `!db02.*` : `db02`データベースのテーブルを除き、他のすべてのテーブルがインポートされます。 `!`は、インポートする必要のないテーブルを除外するために使用されます。
+        -   `*.*` : すべてのテーブルがインポートされます。
 
-    - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import CSV files whose filenames match a certain pattern to a single target table.
+        詳細については、 [テーブル フィルター snytax](/table-filter.md#syntax)を参照してください。
 
-        > **Note:**
+    -   **カスタム パターン**: ファイル名が特定のパターンに一致する CSV ファイルを単一のターゲット テーブルにインポートする場合は、<strong>カスタム パターン</strong>機能を有効にします。
+
+        > **ノート：**
         >
-        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+        > この機能を有効にすると、1 つのインポート タスクで一度に 1 つのテーブルにのみデータをインポートできます。この機能を使用してデータを別のテーブルにインポートする場合は、インポートするたびに別のターゲット テーブルを指定して、複数回インポートする必要があります。
 
-        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between CSV files and a single target table in the following fields:
+        **カスタム パターン**が有効になっている場合、次のフィールドで CSV ファイルと単一のターゲット テーブルとの間のカスタム マッピング ルールを指定する必要があります。
 
-        - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, you can enter the filename here directly.
+        -   **オブジェクト名パターン**: インポートする CSV ファイルの名前と一致するパターンを入力します。 CSV ファイルが 1 つしかない場合は、ここにファイル名を直接入力できます。
 
-            For example:
+            例えば：
 
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+            -   `my-data?.csv` : `my-data`と 1 文字 ( `my-data1.csv`と`my-data2.csv`など) で始まるすべての CSV ファイルが同じターゲット テーブルにインポートされます。
+            -   `my-data*.csv` : `my-data`で始まるすべての CSV ファイルが同じターゲット テーブルにインポートされます。
 
-        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+        -   **ターゲット テーブル名**: TiDB Cloudのターゲット テーブルの名前を入力します。これは`${db_name}.${table_name}`形式である必要があります。たとえば、 `mydb.mytable`です。このフィールドは特定のテーブル名を 1 つしか受け付けないため、ワイルドカードはサポートされていないことに注意してください。
 
-4. Click **Import**.
+4.  [**インポート]**をクリックします。
 
-    A warning message about the database resource consumption is displayed.
+    データベース リソースの消費に関する警告メッセージが表示されます。
 
-5. Click **Confirm**.
+5.  [**確認]**をクリックします。
 
-    TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+    TiDB Cloudは、指定されたバケット URL のデータにアクセスできるかどうかの検証を開始します。検証が完了して成功すると、インポート タスクが自動的に開始されます。 `AccessDenied`エラーが発生した場合は、 [S3 からのデータ インポート中のアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。
 
-6. When the import progress shows success, check the number after **Total Files:**.
+6.  インポートの進行状況が成功を示したら、 **Total Files:**の後の数字を確認します。
 
-    If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, ensure that there are no typos in the **Object Name Pattern** field and try again.
+    数値がゼロの場合は、[**オブジェクト名パターン]**フィールドに入力した値に一致するデータ ファイルがないことを意味します。この場合、[<strong>オブジェクト名パターン]</strong>フィールドにタイプミスがないことを確認してから、再試行してください。
 
-When running an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
+インポート タスクの実行時に、サポートされていない変換または無効な変換が検出された場合、 TiDB Cloudはインポート ジョブを自動的に終了し、インポート エラーを報告します。
 
-If you get an importing error, do the following:
+インポート エラーが発生した場合は、次の手順を実行します。
 
-1. Drop the partially imported table.
-2. Check the table schema file. If there are any errors, correct the table schema file.
-3. Check the data types in the CSV files.
-4. Try the import task again.
+1.  部分的にインポートされたテーブルを削除します。
+2.  テーブル スキーマ ファイルを確認してください。エラーがある場合は、テーブル スキーマ ファイルを修正します。
+3.  CSV ファイルのデータ型を確認してください。
+4.  インポート タスクを再試行します。

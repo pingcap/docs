@@ -3,35 +3,35 @@ title: ALTER TABLE ... SET TIFLASH MODE ...
 summary: An overview of the usage of ALTER TABLE ... SET TIFLASH MODE ... for the TiDB database.
 ---
 
-# `ALTER TABLE ... SET TIFLASH MODE ...`
+# <code>ALTER TABLE ... SET TIFLASH MODE ...</code> {#code-alter-table-set-tiflash-mode-code}
 
-> **Warning:**
+> **警告：**
 >
-> This statement is experimental and its form and usage may change in subsequent versions.
+> このステートメントは実験的であり、その形式と使用法は後続のバージョンで変更される可能性があります。
 
-You can use the `ALTER TABLE...SET TIFLASH MODE...` statement to enable or disable FastScan on the corresponding table in TiFlash:
+`ALTER TABLE...SET TIFLASH MODE...`ステートメントを使用して、TiFlash の対応するテーブルで FastScan を有効または無効にできます。
 
-- `Normal Mode`: the default option. In this mode, FastScan is disabled and the accuracy of query results and data consistency are guaranteed.
-- `Fast Mode`: in this mode, FastScan is enabled. TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
+-   `Normal Mode` : デフォルトのオプション。このモードでは、FastScan が無効になり、クエリ結果の精度とデータの一貫性が保証されます。
+-   `Fast Mode` : このモードでは、FastScan が有効になります。 TiFlash はより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度とデータの一貫性を保証するものではありません。
 
-The execution of `ALTER TABLE ... SET TIFLASH MODE ...` does not block existing SQL statements or interrupt other TiDB features, such as transactions, DDL, and GC. At the same time, data accessed through SQL statements is not altered. This statement ends normally when the mode is switched.
+`ALTER TABLE ... SET TIFLASH MODE ...`を実行しても、既存の SQL ステートメントがブロックされたり、トランザクション、DDL、GC などの他の TiDB 機能が中断されたりすることはありません。同時に、SQL ステートメントを介してアクセスされるデータは変更されません。モードを切り替えると、このステートメントは正常に終了します。
 
-You can only execute this statement to switch the FastScan option for tables in TiFlash. Therefore, option change only affects reading tables in TiFlash.
+このステートメントは、TiFlash 内のテーブルの FastScan オプションを切り替えるためにのみ実行できます。したがって、オプションの変更は、TiFlash の読み取りテーブルにのみ影響します。
 
-The FastScan switch takes effect only if the table has TiFlash replicas. If no TiFlash replica is present when you switch the option, the option takes effect only after TiFlash replicas are configured. You can use [`ALTER TABLE ... SET TIFLASH REPLICA ...`](/sql-statements/sql-statement-alter-table.md) to configure TiFlash replicas.
+FastScan スイッチは、テーブルに TiFlash レプリカがある場合にのみ有効になります。オプションを切り替えたときに TiFlash レプリカが存在しない場合、オプションは TiFlash レプリカが構成された後にのみ有効になります。 [`ALTER TABLE ... SET TIFLASH REPLICA ...`](/sql-statements/sql-statement-alter-table.md)を使用して、TiFlash レプリカを構成できます。
 
-You can query the current TiFlash table switch of the corresponding table using the system table `information_schema.tiflash_replica`.
+システム テーブル`information_schema.tiflash_replica`を使用して、対応するテーブルの現在の TiFlash テーブル スイッチを照会できます。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 ```ebnf+diagram
 AlterTableSetTiFlashModeStmt ::=
     'ALTER' 'TABLE' TableName 'SET' 'TIFLASH' 'MODE' mode
 ```
 
-## Example
+## 例 {#example}
 
-Assume that the `test` table has a TiFlash replica.
+`test`テーブルに TiFlash レプリカがあるとします。
 
 ```sql
 USE TEST;
@@ -39,7 +39,7 @@ CREATE TABLE test (a INT NOT NULL, b INT);
 ALTER TABLE test SET TIFLASH REPLICA 1;
 ```
 
-The default option of the `test` table is Normal Mode. You can query the table option with the following statement.
+`test`テーブルのデフォルト オプションは通常モードです。次のステートメントを使用して、テーブル オプションをクエリできます。
 
 ```sql
 SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'test' AND table_schema = 'test'
@@ -53,7 +53,7 @@ SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'te
 +------------+
 ```
 
-To enable FastScan for the `test` table, execute the following statement and then check whether FastScan is enabled for this table.
+`test`テーブルに対して FastScan を有効にするには、次のステートメントを実行し、このテーブルに対して FastScan が有効になっているかどうかを確認します。
 
 ```sql
 ALTER TABLE test SET tiflash mode FAST
@@ -68,22 +68,22 @@ SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'te
 +------------+
 ```
 
-To disable FastScan, execute the following statement.
+FastScan を無効にするには、次のステートメントを実行します。
 
 ```sql
 ALTER TABLE test SET tiflash mode NORMAL
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-`ALTER TABLE ... SET TiFLASH MODE ...` is an extension to the standard SQL syntax introduced by TiDB. Although there is no equivalent MySQL syntax, you can still execute this statement from a MySQL client, or from database drivers that follow the MySQL protocol.
+`ALTER TABLE ... SET TiFLASH MODE ...`は、TiDB によって導入された標準 SQL 構文の拡張です。同等の MySQL 構文はありませんが、MySQL クライアントから、または MySQL プロトコルに従うデータベース ドライバーから、このステートメントを実行できます。
 
-## TiDB Binlog and TiCDC compatibility
+## TiDB Binlogと TiCDC の互換性 {#tidb-binlog-and-ticdc-compatibility}
 
-When the downstream is also TiDB, `ALTER TABLE ... SET TiFLASH MODE ...` will be synchronized downstream by TiDB Binlog. In other scenarios, TiDB Binlog does not synchronize this statement.
+下流も TiDB の場合、 `ALTER TABLE ... SET TiFLASH MODE ...`は TiDB Binlogによって下流に同期されます。他のシナリオでは、TiDB Binlogはこのステートメントを同期しません。
 
-FastScan does not support TiCDC.
+FastScan は TiCDC をサポートしていません。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-- [ALTER TABLE](/sql-statements/sql-statement-alter-table.md)
+-   [他の机](/sql-statements/sql-statement-alter-table.md)

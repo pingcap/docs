@@ -3,52 +3,52 @@ title: Back Up and Restore Data on Amazon S3 Using BR
 summary: Learn how to use BR to back up data to and restore data from Amazon S3 storage.
 ---
 
-# Back Up and Restore Data on Amazon S3 Using BR
+# BR を使用して Amazon S3 でデータをバックアップおよび復元する {#back-up-and-restore-data-on-amazon-s3-using-br}
 
-The Backup & Restore (BR) tool supports using Amazon S3 or other Amazon S3-compatible file storages as the external storage for backing up and restoring data.
+バックアップと復元 (BR) ツールは、Amazon S3 またはその他の Amazon S3 互換ファイル ストレージを、データのバックアップと復元用の外部ストレージとして使用することをサポートしています。
 
-## Application scenarios
+## アプリケーション シナリオ {#application-scenarios}
 
-By using Amazon S3, you can quickly back up the data of a TiDB cluster deployed on Amazon EC2 to Amazon S3, or quickly restore a TiDB cluster from the backup data in Amazon S3.
+Amazon S3 を使用すると、Amazon EC2 にデプロイされた TiDBクラスタのデータを Amazon S3 にすばやくバックアップしたり、Amazon S3 のバックアップ データから TiDBクラスタをすばやく復元したりできます。
 
-## Configure privileges to access S3
+## S3 にアクセスする権限を設定する {#configure-privileges-to-access-s3}
 
-Before performing backup or restoration using S3, you need to configure the privileges required to access S3.
+S3 を使用してバックアップまたは復元を実行する前に、S3 へのアクセスに必要な権限を構成する必要があります。
 
-### Configure access to the S3 directory
+### S3 ディレクトリへのアクセスを構成する {#configure-access-to-the-s3-directory}
 
-Before backup, configure the following privileges to access the backup directory on S3.
+バックアップの前に、S3 のバックアップ ディレクトリにアクセスするために次の権限を設定します。
 
-- Minimum privileges for TiKV and BR to access the backup directories of `s3:ListBucket`, `s3:PutObject`, and `s3:AbortMultipartUpload` during backup
-- Minimum privileges for TiKV and BR to access the backup directories of `s3:ListBucket` and `s3:GetObject` during restoration
+-   バックアップ中に TiKV および BR が`s3:ListBucket` 、 `s3:PutObject` 、および`s3:AbortMultipartUpload`のバックアップ ディレクトリにアクセスするための最小権限
+-   TiKV と BR が復元時に`s3:ListBucket`と`s3:GetObject`のバックアップ ディレクトリにアクセスするための最小限の権限
 
-If you have not yet created a backup directory, refer to [AWS Official Document](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) to create an S3 bucket in the specified region. If necessary, you can also create a folder in the bucket by referring to [AWS official documentation - Create Folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html).
+バックアップ ディレクトリをまだ作成していない場合は、 [AWS 公式ドキュメント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して、指定したリージョンに S3 バケットを作成します。必要に応じて、 [AWS 公式ドキュメント - フォルダーの作成](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケットにフォルダーを作成することもできます。
 
-### Configure a user to access S3
+### S3 にアクセスするようにユーザーを構成する {#configure-a-user-to-access-s3}
 
-It is recommended that you configure access to S3 using either of the following ways:
+次のいずれかの方法を使用して、S3 へのアクセスを構成することをお勧めします。
 
-- Associate an IAM role that can access S3 with the EC2 instances where the TiKV and BR nodes run. After the association, BR can access the backup directories of S3.
+-   S3 にアクセスできるIAMロールを、TiKV および BR ノードが実行される EC2 インスタンスに関連付けます。関連付け後、BR は S3 のバックアップ ディレクトリにアクセスできます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     br backup full --pd "${PDIP}:2379" --storage "s3://${Bucket}/${Folder}"
     ```
 
-- Configure `access-key` and `secret-access-key` for accessing S3 in the `br` CLI, and set `--send-credentials-to-tikv=true` to pass the access key from BR to each TiKV.
+-   `br` CLI で S3 にアクセスするために`access-key`と`secret-access-key`を設定し、 `--send-credentials-to-tikv=true`を設定して BR から各 TiKV にアクセス キーを渡します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     br backup full --pd "${PDIP}:2379" --storage "s3://${Bucket}/${Folder}?access-key=${accessKey}&secret-access-key=${secretAccessKey}" --send-credentials-to-tikv=true
     ```
 
-Because the access key in a command is vulnerable to leakage, you are recommended to associate an IAM role to EC2 instances to access S3.
+コマンドのアクセス キーは漏洩しやすいため、 IAMロールを EC2 インスタンスに関連付けて S3 にアクセスすることをお勧めします。
 
-## Back up data to S3
+## データを S3 にバックアップする {#back-up-data-to-s3}
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full \
@@ -59,11 +59,11 @@ br backup full \
     --log-file backuptable.log
 ```
 
-In the preceding command:
+前述のコマンドでは:
 
-- `--send-credentials-to-tikv`: specifies that access key is passed to the TiKV nodes.
+-   `--send-credentials-to-tikv` : アクセス キーが TiKV ノードに渡されることを指定します。
 
-## Restore data from S3
+## S3 からデータを復元する {#restore-data-from-s3}
 
 ```shell
 br restore full \
@@ -74,6 +74,6 @@ br restore full \
     --log-file restorefull.log
 ```
 
-## See also
+## こちらもご覧ください {#see-also}
 
-To know more information about external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
+BR がサポートする外部ストレージの詳細については、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。

@@ -3,23 +3,23 @@ title: Partitioning
 summary: Learn how to use partitioning in TiDB.
 ---
 
-# Partitioning
+# パーティショニング {#partitioning}
 
-This document introduces TiDB's implementation of partitioning.
+このドキュメントでは、TiDB のパーティショニングの実装について紹介します。
 
-## Partitioning types
+## パーティショニングの種類 {#partitioning-types}
 
-This section introduces the types of partitioning in TiDB. Currently, TiDB supports [Range partitioning](#range-partitioning), [List partitioning](#list-partitioning), [List COLUMNS partitioning](#list-columns-partitioning), and [Hash partitioning](#hash-partitioning).
+このセクションでは、TiDB のパーティショニングの種類を紹介します。現在、TiDB は[範囲分割](#range-partitioning) 、 [List パーティショニング](#list-partitioning) 、 [List COLUMNS パーティショニング](#list-columns-partitioning) 、および[ハッシュパーティショニング](#hash-partitioning)をサポートしています。
 
-Range partitioning, List partitioning and List COLUMNS partitioning are used to resolve the performance issues caused by a large amount of deletions in the application, and support fast drop partition operations. Hash partitioning is used to scatter the data when there are a large amount of writes.
+レンジ パーティション分割、List パーティショニング、およびList COLUMNS パーティショニングを使用して、アプリケーションでの大量の削除によって引き起こされるパフォーマンスの問題を解決し、パーティションの高速削除操作をサポートします。ハッシュ パーティショニングは、大量の書き込みがある場合にデータを分散させるために使用されます。
 
-### Range partitioning
+### 範囲分割 {#range-partitioning}
 
-When a table is partitioned by Range, each partition contains rows for which the partitioning expression value lies within a given Range. Ranges have to be contiguous but not overlapping. You can define it by using `VALUES LESS THAN`.
+テーブルが範囲でパーティション分割されている場合、各パーティションには、パーティション式の値が特定の範囲内にある行が含まれます。範囲は連続している必要がありますが、重複してはなりません。 `VALUES LESS THAN`を使用して定義できます。
 
-Assume you need to create a table that contains personnel records as follows:
+次のように、人事レコードを含むテーブルを作成する必要があるとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -33,9 +33,9 @@ CREATE TABLE employees (
 );
 ```
 
-You can partition a table by Range in various ways as needed. For example, you can partition it by using the `store_id` column:
+必要に応じて、さまざまな方法で範囲によってテーブルを分割できます。たとえば、 `store_id`列を使用して分割できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -56,11 +56,11 @@ PARTITION BY RANGE (store_id) (
 );
 ```
 
-In this partition scheme, all rows corresponding to employees whose `store_id` is 1 through 5 are stored in the `p0` partition while all employees whose `store_id` is 6 through 10 are stored in `p1`. Range partitioning requires the partitions to be ordered, from lowest to highest.
+このパーティション・スキームでは、 `store_id`が 1 から 5 である従業員に対応するすべての行が`p0`パーティションに格納され、 `store_id`が 6 から 10 であるすべての従業員が`p1`に格納されます。レンジ・パーティション化では、パーティションを最低から最高の順に並べる必要があります。
 
-If you insert a row of data `(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`, it falls in the `p2` partition. But if you insert a record whose `store_id` is larger than 20, an error is reported because TiDB can not know which partition this record should be inserted into. In this case, you can use `MAXVALUE` when creating a table:
+データ`(72, 'Tom', 'John', '2015-06-25', NULL, NULL, 15)`の行を挿入すると、それは`p2`パーティションに分類されます。しかし、 `store_id`が 20 より大きいレコードを挿入すると、エラーが報告されます。これは、TiDB がこのレコードを挿入する必要があるパーティションを認識できないためです。この場合、テーブルを作成するときに`MAXVALUE`を使用できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -81,11 +81,11 @@ PARTITION BY RANGE (store_id) (
 );
 ```
 
-`MAXVALUE` represents an integer value that is larger than all other integer values. Now, all records whose `store_id` is equal to or larger than 16 (the highest value defined) are stored in the `p3` partition.
+`MAXVALUE`は、他のすべての整数値より大きい整数値を表します。これで、 `store_id`が 16 (定義された最大値) 以上のすべてのレコードが`p3`パーティションに格納されます。
 
-You can also partition a table by employees' job codes, which are the values of the `job_code` column. Assume that two-digit job codes stand for regular employees, three-digit codes stand for office and customer support personnel, and four-digit codes stand for managerial personnel. Then you can create a partitioned table like this:
+従業員の職務コード ( `job_code`列の値) でテーブルを分割することもできます。 2 桁のジョブ コードは正社員、3 桁のコードはオフィスおよびカスタマー サポート担当者、4 桁のコードは管理職を表すとします。次に、次のようにパーティション分割されたテーブルを作成できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -105,11 +105,11 @@ PARTITION BY RANGE (job_code) (
 );
 ```
 
-In this example, all rows relating to regular employees are stored in the `p0` partition, all office and customer support personnel in the `p1` partition, and all managerial personnel in the `p2` partition.
+この例では、正社員に関連するすべての行が`p0`パーティションに格納され、すべてのオフィスおよび顧客サポート担当者が`p1`パーティションに格納され、すべての管理職が`p2`パーティションに格納されます。
 
-Besides splitting up the table by `store_id`, you can also partition a table by dates. For example, you can partition by employees' separation year:
+テーブルを`store_id`で分割する以外に、テーブルを日付で分割することもできます。たとえば、従業員の離職年で分割できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -130,9 +130,9 @@ PARTITION BY RANGE ( YEAR(separated) ) (
 );
 ```
 
-In Range partitioning, you can partition based on the values of the `timestamp` column and use the `unix_timestamp()` function, for example:
+範囲分割では、 `timestamp`列の値に基づいて分割し、 `unix_timestamp()`関数を使用できます。次に例を示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE quarterly_report_status (
@@ -155,31 +155,31 @@ PARTITION BY RANGE ( UNIX_TIMESTAMP(report_updated) ) (
 );
 ```
 
-It is not allowed to use any other partitioning expression that contains the timestamp column.
+タイムスタンプ列を含む他のパーティション式を使用することはできません。
 
-Range partitioning is particularly useful when one or more of the following conditions are satisfied:
+レンジ パーティション分割は、次の条件の 1 つ以上が満たされている場合に特に役立ちます。
 
-* You want to delete the old data. If you use the `employees` table in the previous example, you can delete all records of employees who left this company before the year 1991 by simply using `ALTER TABLE employees DROP PARTITION p0;`. It is faster than executing the `DELETE FROM employees WHERE YEAR(separated) <= 1990;` operation.
-* You want to use a column that contains time or date values, or containing values arising from some other series.
-* You need to frequently run queries on the columns used for partitioning. For example, when executing a query like `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`, TiDB can quickly know that only the data in the `p2` partition needs to be scanned, because the other partitions do not match the `WHERE` condition.
+-   古いデータを削除したい。前の例で`employees`テーブルを使用すると、 `ALTER TABLE employees DROP PARTITION p0;`を使用するだけで、1991 年より前にこの会社を退職した従業員のすべてのレコードを削除できます。 `DELETE FROM employees WHERE YEAR(separated) <= 1990;`の操作を実行するよりも高速です。
+-   時刻または日付の値を含む列、または他の系列から生じる値を含む列を使用したい。
+-   パーティション分割に使用される列に対してクエリを頻繁に実行する必要があります。たとえば、 `EXPLAIN SELECT COUNT(*) FROM employees WHERE separated BETWEEN '2000-01-01' AND '2000-12-31' GROUP BY store_id;`のようなクエリを実行すると、TiDB は`p2`パーティションのデータのみをスキャンする必要があることをすぐに認識できます。これは、他のパーティションが`WHERE`条件に一致しないためです。
 
-### List partitioning
+### List パーティショニング {#list-partitioning}
 
-Before creating a List partitioned table, you need to set the value of the session variable `tidb_enable_list_partition` to `ON`.
+リスト分割テーブルを作成する前に、セッション変数`tidb_enable_list_partition`の値を`ON`に設定する必要があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set @@session.tidb_enable_list_partition = ON
 ```
 
-Also, make sure that `tidb_enable_table_partition` is set to `ON`, which is the default setting.
+また、 `tidb_enable_table_partition`がデフォルト設定の`ON`に設定されていることを確認してください。
 
-List partitioning is similar to Range partitioning. Unlike Range partitioning, in List partitioning, the partitioning expression values for all rows in each partition are in a given value set. This value set defined for each partition can have any number of values but cannot have duplicate values. You can use the `PARTITION ... VALUES IN (...)` clause to define a value set.
+List パーティショニングは、レンジ パーティショニングに似ています。レンジ パーティション分割とは異なり、List パーティショニングでは、各パーティション内のすべての行のパーティション式の値が特定の値セットに含まれます。各パーティションに定義されたこの値セットは、任意の数の値を持つことができますが、重複する値を持つことはできません。 `PARTITION ... VALUES IN (...)`句を使用して、値セットを定義できます。
 
-Suppose that you want to create a personnel record table. You can create a table as follows:
+人事記録表を作成するとします。次のようにテーブルを作成できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -189,7 +189,7 @@ CREATE TABLE employees (
 );
 ```
 
-Suppose that there are 20 stores distributed in 4 districts, as shown in the table below:
+次の表に示すように、4 つの地区に 20 の店舗が分布しているとします。
 
 ```
 | Region  | Store ID Numbers     |
@@ -200,9 +200,9 @@ Suppose that there are 20 stores distributed in 4 districts, as shown in the tab
 | Central | 16, 17, 18, 19, 20   |
 ```
 
-If you want to store the personnel data of employees of the same region in the same partition, you can create a List partitioned table based on `store_id`:
+同じ地域の従業員の人事データを同じパーティションに格納する場合は、 `store_id`に基づいてリスト パーティション テーブルを作成できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -218,11 +218,11 @@ PARTITION BY LIST (store_id) (
 );
 ```
 
-After creating the partitions as above, you can easily add or delete records related to a specific region in the table. For example, suppose that all stores in the East region (East) are sold to another company. Then all the row data related to the store employees of this region can be deleted by executing `ALTER TABLE employees TRUNCATE PARTITION pEast`, which is much more efficient than the equivalent statement `DELETE FROM employees WHERE store_id IN (6, 7, 8, 9, 10)`.
+上記のようにパーティションを作成した後、テーブル内の特定の地域に関連するレコードを簡単に追加または削除できます。たとえば、East リージョン (East) のすべての店舗が別の会社に売却されたとします。次に、この地域の店舗従業員に関連するすべての行データを`ALTER TABLE employees TRUNCATE PARTITION pEast`を実行することで削除できます。これは、同等のステートメント`DELETE FROM employees WHERE store_id IN (6, 7, 8, 9, 10)`よりもはるかに効率的です。
 
-You can also execute `ALTER TABLE employees DROP PARTITION pEast` to delete all related rows, but this statement also deletes the `pEast` partition from the table definition. In this situation, you must execute the `ALTER TABLE ... ADD PARTITION` statement to recover the original partitioning scheme of the table.
+`ALTER TABLE employees DROP PARTITION pEast`を実行して関連するすべての行を削除することもできますが、このステートメントはテーブル定義から`pEast`パーティションも削除します。この状況では、 `ALTER TABLE ... ADD PARTITION`ステートメントを実行して、テーブルの元のパーティション スキームを復元する必要があります。
 
-Unlike Range partitioning, List partitioning does not have a similar `MAXVALUE` partition to store all values that do not belong to other partitions. Instead, all expected values of the partition expression must be included in the `PARTITION ... VALUES IN (...)` clause. If the value to be inserted in an `INSERT` statement does not match the column value set of any partition, the statement fails to execute and an error is reported. See the following example:
+レンジ パーティション分割とは異なり、List パーティショニングには、他のパーティションに属さないすべての値を格納するための同様の`MAXVALUE`つのパーティションはありません。代わりに、パーティション式のすべての予期される値を`PARTITION ... VALUES IN (...)`句に含める必要があります。 `INSERT`ステートメントに挿入される値がどのパーティションの列値セットとも一致しない場合、ステートメントは実行に失敗し、エラーが報告されます。次の例を参照してください。
 
 ```sql
 test> CREATE TABLE t (
@@ -239,7 +239,7 @@ test> INSERT INTO t VALUES (7, 7);
 ERROR 1525 (HY000): Table has no partition for value 7
 ```
 
-To ignore the error type above, you can use the `IGNORE` keyword. After using this keyword, if a row contains values that do not match the column value set of any partition, this row will not be inserted. Instead, any row with matched values is inserted, and no error is reported:
+上記のエラー タイプを無視するには、 `IGNORE`キーワードを使用できます。このキーワードを使用した後、どのパーティションの列値セットとも一致しない値が行に含まれている場合、この行は挿入されません。代わりに、値が一致する行が挿入され、エラーは報告されません。
 
 ```sql
 test> TRUNCATE t;
@@ -260,11 +260,11 @@ test> select * from t;
 3 rows in set (0.01 sec)
 ```
 
-### List COLUMNS partitioning
+### List COLUMNS パーティショニング {#list-columns-partitioning}
 
-List COLUMNS partitioning is a variant of List partitioning. You can use multiple columns as partition keys. Besides the integer data type, you can also use the columns in the string, `DATE`, and `DATETIME` data types as partition columns.
+List COLUMNS パーティショニングは、 List パーティショニングの一種です。複数の列をパーティション キーとして使用できます。整数データ型のほかに、string、 `DATE` 、および`DATETIME`データ型の列をパーティション列として使用することもできます。
 
-Suppose that you want to divide the store employees from the following 12 cities into 4 regions, as shown in the following table:
+次の表に示すように、次の 12 都市の従業員を 4 つの地域に分割するとします。
 
 ```
 | Region | Cities                         |
@@ -275,9 +275,9 @@ Suppose that you want to divide the store employees from the following 12 cities
 | 4      | Atlanta, Raleigh, Cincinnati   |
 ```
 
-You can use List COLUMNS partitioning to create a table and store each row in the partition that corresponds to the employee's city, as shown below:
+以下に示すように、 List COLUMNS パーティショニングを使用してテーブルを作成し、各行を従業員の都市に対応するパーティションに格納できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees_1 (
@@ -298,11 +298,11 @@ PARTITION BY LIST COLUMNS(city) (
 );
 ```
 
-Unlike List partitioning, in List COLUMNS partitioning, you do not need to use the expression in the `COLUMNS()` clause to convert column values to integers.
+List パーティショニングとは異なり、 List COLUMNS パーティショニングでは、列の値を整数に変換するために`COLUMNS()`句で式を使用する必要はありません。
 
-List COLUMNS partitioning can also be implemented using columns of the `DATE` and `DATETIME` types, as shown in the following example. This example uses the same names and columns as the previous `employees_1` table, but uses List COLUMNS partitioning based on the `hired` column:
+List COLUMNS パーティショニングは、次の例に示すように、 `DATE`型と`DATETIME`型の列を使用して実装することもできます。この例では、前の`employees_1`テーブルと同じ名前と列を使用していますが、 `hired`列に基づいてList COLUMNS パーティショニングを使用しています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees_2 (
@@ -327,9 +327,9 @@ PARTITION BY LIST COLUMNS(hired) (
 );
 ```
 
-In addition, you can also add multiple columns in the `COLUMNS()` clause. For example:
+さらに、 `COLUMNS()`句に複数の列を追加することもできます。例えば：
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (
@@ -343,15 +343,15 @@ PARTITION BY LIST COLUMNS(id,name) (
 );
 ```
 
-### Hash partitioning
+### ハッシュパーティショニング {#hash-partitioning}
 
-Hash partitioning is used to make sure that data is evenly scattered into a certain number of partitions. With Range partitioning, you must specify the range of the column values for each partition when you use Range partitioning, while you just need to specify the number of partitions when you use Hash partitioning.
+ハッシュ パーティショニングは、データが特定の数のパーティションに均等に分散されるようにするために使用されます。レンジ パーティショニングでは、レンジ パーティショニングを使用する場合は各パーティションの列値の範囲を指定する必要がありますが、ハッシュ パーティショニングを使用する場合はパーティションの数を指定するだけで済みます。
 
-Partitioning by Hash requires you to append a `PARTITION BY HASH (expr)` clause to the `CREATE TABLE` statement. `expr` is an expression that returns an integer. It can be a column name if the type of this column is integer. In addition, you might also need to append `PARTITIONS num`, where `num` is a positive integer indicating how many partitions a table is divided into.
+ハッシュによるパーティション分割では、 `PARTITION BY HASH (expr)`句を`CREATE TABLE`ステートメントに追加する必要があります。 `expr`は整数を返す式です。この列のタイプが整数の場合は、列名にすることができます。さらに、 `PARTITIONS num`を追加する必要がある場合もあります。ここで`num`は、テーブルが分割されているパーティションの数を示す正の整数です。
 
-The following operation creates a Hash partitioned table, which is divided into 4 partitions by `store_id`:
+次の操作では、 `store_id`で 4 つのパーティションに分割されたハッシュ パーティション テーブルが作成されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -368,11 +368,11 @@ PARTITION BY HASH(store_id)
 PARTITIONS 4;
 ```
 
-If `PARTITIONS num` is not specified, the default number of partitions is 1.
+`PARTITIONS num`が指定されていない場合、デフォルトのパーティション数は 1 です。
 
-You can also use an SQL expression that returns an integer for `expr`. For example, you can partition a table by the hire year:
+`expr`の整数を返す SQL 式を使用することもできます。たとえば、雇用年でテーブルを分割できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE employees (
@@ -389,19 +389,19 @@ PARTITION BY HASH( YEAR(hired) )
 PARTITIONS 4;
 ```
 
-The most efficient Hash function is one which operates upon a single table column, and whose value increases or decreases consistently with the column value.
+最も効率的なハッシュ関数は、単一のテーブル列で動作し、その値が列の値に応じて一貫して増加または減少するものです。
 
-For example, `date_col` is a column whose type is `DATE`, and the value of the `TO_DAYS(date_col)` expression varies with the value of `date_col`. `YEAR(date_col)` is different from `TO_DAYS(date_col)`, because not every possible change in `date_col` produces an equivalent change in `YEAR(date_col)`.
+たとえば、 `date_col`は型が`DATE`の列であり、 `TO_DAYS(date_col)`式の値は`date_col`の値によって異なります。 `YEAR(date_col)`は`TO_DAYS(date_col)`とは異なります。これは、 `date_col`で考えられるすべての変更が`YEAR(date_col)`で同等の変更を生成するわけではないためです。
 
-In contrast, assume that you have an `int_col` column whose type is `INT`. Now consider about the expression `POW(5-int_col,3) + 6`. It is not a good Hash function though, because as the value of `int_col` changes, the result of the expression does not change proportionally. A value change in `int_col` might result in a huge change in the expression result. For example, when `int_col` changes from 5 to 6, the change of the expression result is -1. But the result change might be -7 when `int_col` changes from 6 to 7.
+対照的に、タイプが`INT`の`int_col`列があるとします。式`POW(5-int_col,3) + 6`について考えてみましょう。ただし、 `int_col`の値が変化しても式の結果が比例して変化しないため、これは適切なハッシュ関数ではありません。 `int_col`での値の変更は、式の結果に大きな変化をもたらす可能性があります。たとえば、 `int_col`が 5 から 6 に変化すると、式の結果の変化は -1 になります。しかし、 `int_col`が 6 から 7 に変わると、結果の変化は -7 になる可能性があります。
 
-In conclusion, when the expression has a form that is closer to `y = cx`, it is more suitable to be a Hash function. Because the more non-linear an expression is, the more unevenly scattered the data among the partitions tends to be.
+結論から言うと、式が`y = cx`に近い形であればハッシュ関数の方が適しています。式が非線形であるほど、パーティション間でデータが不均一に分散される傾向があります。
 
-In theory, pruning is also possible for expressions involving more than one column value, but determining which of such expressions are suitable can be quite difficult and time-consuming. For this reason, the use of hashing expressions involving multiple columns is not particularly recommended.
+理論的には、プルーニングは複数の列値を含む式でも可能ですが、そのような式のどれが適切かを判断することは非常に難しく、時間がかかる場合があります。このため、複数の列を含むハッシュ式の使用は特にお勧めしません。
 
-When using `PARTITION BY HASH`, TiDB decides which partition the data should fall into based on the modulus of the result of the expression. In other words, if a partitioning expression is `expr` and the number of partitions is `num`, `MOD(expr, num)` decides the partition in which the data is stored. Assume that `t1` is defined as follows:
+`PARTITION BY HASH`を使用すると、TiDB は、式の結果のモジュラスに基づいて、データがどのパーティションに分類されるかを決定します。つまり、分割式が`expr`で分割数が`num`の場合、データを格納する分割は`MOD(expr, num)`で決まります。 `t1`が次のように定義されているとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (col1 INT, col2 CHAR(5), col3 DATE)
@@ -409,7 +409,7 @@ CREATE TABLE t1 (col1 INT, col2 CHAR(5), col3 DATE)
     PARTITIONS 4;
 ```
 
-When you insert a row of data into `t1` and the value of `col3` is '2005-09-15', then this row is inserted into partition 1:
+データ行を`t1`に挿入し、 `col3`の値が「2005-09-15」の場合、この行はパーティション 1 に挿入されます。
 
 ```
 MOD(YEAR('2005-09-01'),4)
@@ -417,19 +417,19 @@ MOD(YEAR('2005-09-01'),4)
 =  1
 ```
 
-### How TiDB partitioning handles NULL
+### TiDB パーティショニングが NULL を処理する方法 {#how-tidb-partitioning-handles-null}
 
-It is allowed in TiDB to use `NULL` as the calculation result of a partitioning expression.
+TiDB では、分割式の計算結果として`NULL`を使用できます。
 
-> **Note:**
+> **ノート：**
 >
-> `NULL` is not an integer. TiDB's partitioning implementation treats `NULL` as being less than any other integer values, just as `ORDER BY` does.
+> `NULL`は整数ではありません。 TiDB のパーティショニングの実装では、 `ORDER BY`と同様に、 `NULL`を他の整数値より小さいものとして扱います。
 
-#### Handling of NULL with Range partitioning
+#### レンジ分割でのNULLの扱い {#handling-of-null-with-range-partitioning}
 
-When you insert a row into a table partitioned by Range, and the column value used to determine the partition is `NULL`, then this row is inserted into the lowest partition.
+範囲によってパーティション化されたテーブルに行を挿入し、パーティションを決定するために使用される列の値が`NULL`である場合、この行は最下位のパーティションに挿入されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -448,7 +448,7 @@ PARTITION BY RANGE(c1) (
 Query OK, 0 rows affected (0.09 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from t1 partition(p0);
@@ -463,7 +463,7 @@ select * from t1 partition(p0);
 1 row in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from t1 partition(p1);
@@ -473,7 +473,7 @@ select * from t1 partition(p1);
 Empty set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from t1 partition(p2);
@@ -483,9 +483,9 @@ select * from t1 partition(p2);
 Empty set (0.00 sec)
 ```
 
-Drop the `p0` partition and verify the result:
+`p0`つのパーティションを削除し、結果を確認します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 alter table t1 drop partition p0;
@@ -495,7 +495,7 @@ alter table t1 drop partition p0;
 Query OK, 0 rows affected (0.08 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from t1;
@@ -505,11 +505,11 @@ select * from t1;
 Empty set (0.00 sec)
 ```
 
-#### Handling of NULL with Hash partitioning
+#### ハッシュ分割によるNULLの扱い {#handling-of-null-with-hash-partitioning}
 
-When partitioning tables by Hash, there is a different way of handling `NULL` value - if the calculation result of the partitioning expression is `NULL`, it is considered as `0`.
+テーブルを Hash で分割する場合、 `NULL`の値を処理する別の方法があります。分割式の計算結果が`NULL`の場合、それは`0`と見なされます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE th (
@@ -525,7 +525,7 @@ PARTITIONS 2;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 INSERT INTO th VALUES (NULL, 'mothra'), (0, 'gigan');
@@ -535,7 +535,7 @@ INSERT INTO th VALUES (NULL, 'mothra'), (0, 'gigan');
 Query OK, 2 rows affected (0.04 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from th partition (p0);
@@ -551,7 +551,7 @@ select * from th partition (p0);
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from th partition (p1);
@@ -561,37 +561,37 @@ select * from th partition (p1);
 Empty set (0.00 sec)
 ```
 
-You can see that the inserted record `(NULL, 'mothra')` falls into the same partition as `(0, 'gigan')`.
+挿入されたレコード`(NULL, 'mothra')`が`(0, 'gigan')`と同じパーティションに分類されることがわかります。
 
-> **Note:**
+> **ノート：**
 >
-> `NULL` values by Hash partitions in TiDB are handled in the same way as described in [How MySQL Partitioning Handles NULL](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html), which, however, is not consistent with the actual behavior of MySQL. In other words, MySQL's implementation in this case is not consistent with its documentation.
+> TiDB のハッシュ パーティションによる`NULL`値は[MySQL パーティショニングが NULL を処理する方法](https://dev.mysql.com/doc/refman/8.0/en/partitioning-handling-nulls.html)で説明されているのと同じ方法で処理されますが、これは MySQL の実際の動作とは一致しません。つまり、この場合の MySQL の実装は、そのドキュメントと一致していません。
 >
-> In this case, the actual behavior of TiDB is in line with the description of this document.
+> この場合、TiDB の実際の動作は、このドキュメントの説明に沿っています。
 
-## Partition management
+## パーティション管理 {#partition-management}
 
-For `LIST` and `RANGE` partitioned tables, you can add and drop partitions using the `ALTER TABLE <table name> ADD PARTITION (<partition specification>)` or `ALTER TABLE <table name> DROP PARTITION <list of partitions>` statement.
+`LIST`および`RANGE`パーティション テーブルの場合、 `ALTER TABLE <table name> ADD PARTITION (<partition specification>)`または`ALTER TABLE <table name> DROP PARTITION <list of partitions>`ステートメントを使用してパーティションを追加および削除できます。
 
-For `LIST` and `RANGE` partitioned tables, `REORGANIZE PARTITION` is not yet supported.
+`LIST`および`RANGE`分割テーブルの場合、 `REORGANIZE PARTITION`はまだサポートされていません。
 
-For `HASH` partitioned tables, `COALESCE PARTITION` and `ADD PARTITION` are not yet supported.
+`HASH`分割テーブルの場合、 `COALESCE PARTITION`と`ADD PARTITION`はまだサポートされていません。
 
-`EXCHANGE PARTITION` works by swapping a partition and a non-partitioned table, similar to how renaming a table like `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2` works.
+`EXCHANGE PARTITION`は、 `RENAME TABLE t1 TO t1_tmp, t2 TO t1, t1_tmp TO t2`のようにテーブルの名前を変更するのと同様に、パーティションとパーティション化されていないテーブルを交換することで機能します。
 
-For example, `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table` swaps the `non_partitioned_table` table in the `p1` partition with the `partitioned_table` table.
+たとえば、 `ALTER TABLE partitioned_table EXCHANGE PARTITION p1 WITH TABLE non_partitioned_table`は`p1`パーティションの`non_partitioned_table`テーブルを`partitioned_table`テーブルとスワップします。
 
-Ensure that all rows that you are exchanging into the partition match the partition definition; otherwise, these rows will not be found and cause unexpected issues.
+パーティションに交換するすべての行がパーティション定義と一致していることを確認してください。そうしないと、これらの行が見つからず、予期しない問題が発生します。
 
-> **Warning:**
+> **警告：**
 >
-> `EXCHANGE PARTITION` is an experimental feature. It is not recommended to use it in a production environment. To enable it, set the `tidb_enable_exchange_partition` system variable to `ON`.
+> `EXCHANGE PARTITION`は実験的機能です。本番環境で使用することはお勧めしません。有効にするには、システム変数`tidb_enable_exchange_partition`を`ON`に設定します。
 
-### Range partition management
+### レンジパーティション管理 {#range-partition-management}
 
-Create a partitioned table:
+分割テーブルを作成します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE members (
@@ -608,9 +608,9 @@ PARTITION BY RANGE( YEAR(dob) ) (
 );
 ```
 
-Drop a partition:
+パーティションをドロップします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE members DROP PARTITION p2;
@@ -620,9 +620,9 @@ ALTER TABLE members DROP PARTITION p2;
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-Empty a partition:
+パーティションを空にします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE members TRUNCATE PARTITION p1;
@@ -632,21 +632,21 @@ ALTER TABLE members TRUNCATE PARTITION p1;
 Query OK, 0 rows affected (0.03 sec)
 ```
 
-> **Note:**
+> **ノート：**
 >
-> `ALTER TABLE ... REORGANIZE PARTITION` is currently unsupported in TiDB.
+> `ALTER TABLE ... REORGANIZE PARTITION`は現在、TiDB ではサポートされていません。
 
-Add a partition:
+パーティションを追加します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE members ADD PARTITION (PARTITION p3 VALUES LESS THAN (2010));
 ```
 
-When partitioning tables by Range, `ADD PARTITION` can be only appended to the very end of a partition list. If it is appended to an existing Range partition, an error is reported:
+テーブルを範囲で分割する場合、 `ADD PARTITION`はパーティション リストの最後にのみ追加できます。既存の Range パーティションに追加すると、エラーが報告されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 ALTER TABLE members
@@ -659,13 +659,13 @@ ERROR 1463 (HY000): VALUES LESS THAN value must be strictly »
    increasing for each partition
 ```
 
-### Hash partition management
+### ハッシュパーティション管理 {#hash-partition-management}
 
-Unlike Range partitioning, `DROP PARTITION` is not supported in Hash partitioning.
+レンジ パーティショニングとは異なり、ハッシュ パーティショニングでは`DROP PARTITION`はサポートされません。
 
-Currently, `ALTER TABLE ... COALESCE PARTITION` is not supported in TiDB as well. For partition management statements that are not currently supported, TiDB returns an error.
+現在、 `ALTER TABLE ... COALESCE PARTITION`は TiDB でもサポートされていません。現在サポートされていないパーティション管理ステートメントの場合、TiDB はエラーを返します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 alter table members optimize partition p0;
@@ -675,13 +675,13 @@ alter table members optimize partition p0;
 ERROR 8200 (HY000): Unsupported optimize partition
 ```
 
-## Partition pruning
+## パーティションの剪定 {#partition-pruning}
 
-[Partition pruning](/partition-pruning.md) is an optimization which is based on a very simple idea - do not scan the partitions that do not match.
+[パーティションの剪定](/partition-pruning.md)は、非常に単純なアイデアに基づく最適化です。一致しないパーティションはスキャンしません。
 
-Assume that you create a partitioned table `t1`:
+パーティション化されたテーブル`t1`を作成するとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -699,9 +699,9 @@ PARTITION BY RANGE( region_code ) (
 );
 ```
 
-If you want to get the result of this `SELECT` statement:
+この`SELECT`ステートメントの結果を取得したい場合:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT fname, lname, region_code, dob
@@ -709,22 +709,22 @@ SELECT fname, lname, region_code, dob
     WHERE region_code > 125 AND region_code < 130;
 ```
 
-It is evident that the result falls in either the `p1` or the `p2` partition, that is, you just need to search for the matching rows in `p1` and `p2`. Excluding the unneeded partitions is so-called "pruning". If the optimizer is able to prune a part of partitions, the execution of the query in the partitioned table will be much faster than that in a non-partitioned table.
+結果が`p1`または`p2`パーティションのいずれかに該当することは明らかです。つまり、 `p1`および`p2`で一致する行を検索するだけで済みます。不要なパーティションを除外することは、いわゆる「プルーニング」です。オプティマイザがパーティションの一部をプルーニングできる場合、パーティション化されたテーブルでのクエリの実行は、パーティション化されていないテーブルでのクエリの実行よりもはるかに高速になります。
 
-The optimizer can prune partitions through `WHERE` conditions in the following two scenarios:
+オプティマイザは、次の 2 つのシナリオで`WHERE`つの条件を使用してパーティションをプルーニングできます。
 
-* partition_column = constant
-* partition_column IN (constant1, constant2, ..., constantN)
+-   partition_column = 定数
+-   partition_column IN (定数 1、定数 2、...、定数 N)
 
-Currently, partition pruning does not work with `LIKE` conditions.
+現在、パーティションプルーニングは`LIKE`の条件では機能しません。
 
-### Some cases for partition pruning to take effect
+### パーティションのプルーニングが有効になるケース {#some-cases-for-partition-pruning-to-take-effect}
 
-1. Partition pruning uses the query conditions on the partitioned table, so if the query conditions can not be pushed down to the partitioned table according to the planner's optimization rules, partition pruning does not apply for this query.
+1.  パーティション プルーニングは、パーティション テーブルのクエリ条件を使用するため、プランナーの最適化ルールに従ってクエリ条件をパーティション テーブルにプッシュ ダウンできない場合、パーティション プルーニングはこのクエリには適用されません。
 
-    For example:
+    例えば：
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     create table t1 (x int) partition by range (x) (
@@ -733,25 +733,25 @@ Currently, partition pruning does not work with `LIKE` conditions.
     create table t2 (x int);
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     explain select * from t1 left join t2 on t1.x = t2.x where t2.x > 5;
     ```
 
-    In this query, the left out join is converted to the inner join, and then `t1.x > 5` is derived from `t1.x = t2.x` and `t2.x > 5`, so it could be used in partition pruning and only the partition `p1` remains.
+    このクエリでは、左アウト結合が内部結合に変換され、次に`t1.x = t2.x`と`t2.x > 5`から`t1.x > 5`が導出されるため、パーティションのプルーニングで使用でき、パーティション`p1`のみが残ります。
 
     ```sql
     explain select * from t1 left join t2 on t1.x = t2.x and t2.x > 5;
     ```
 
-    In this query, `t2.x > 5` can not be pushed down to the `t1` partitioned table, so partition pruning would not take effect for this query.
+    このクエリでは、 `t2.x > 5`を`t1`パーティション テーブルにプッシュ ダウンできないため、このクエリではパーティションのプルーニングは有効になりません。
 
-2. Since partition pruning is done during the plan optimizing phase, it does not apply for those cases that filter conditions are unknown until the execution phase.
+2.  パーティションのプルーニングはプランの最適化フェーズで行われるため、実行フェーズまでフィルター条件が不明な場合には適用されません。
 
-    For example:
+    例えば：
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     create table t1 (x int) partition by range (x) (
@@ -759,36 +759,36 @@ Currently, partition pruning does not work with `LIKE` conditions.
             partition p1 values less than (10));
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     explain select * from t2 where x < (select * from t1 where t2.x < t1.x and t2.x < 2);
     ```
 
-    This query reads a row from `t2` and uses the result for the subquery on `t1`. Theoretically, partition pruning could benefit from `t1.x > val` expression in the subquery, but it does not take effect there as that happens in the execution phase.
+    このクエリは`t2`から行を読み取り、その結果を`t1`のサブクエリに使用します。理論的には、パーティションのプルーニングはサブクエリの`t1.x > val`の式の恩恵を受ける可能性がありますが、実行フェーズで発生するため、そこでは効果がありません。
 
-3. As a result of a limitation from current implementation, if a query condition can not be pushed down to TiKV, it can not be used by the partition pruning.
+3.  現在の実装の制限により、クエリ条件を TiKV にプッシュダウンできない場合、パーティションプルーニングで使用できません。
 
-    Take the `fn(col)` expression as an example. If the TiKV coprocessor supports this `fn` function, `fn(col)` may be pushed down to the the leaf node (that is, partitioned table) according to the predicate push-down rule during the plan optimizing phase, and partition pruning can use it.
+    例として`fn(col)`式を取り上げます。 TiKV コプロセッサがこの`fn`機能をサポートしている場合、 `fn(col)`は、プラン最適化フェーズ中に述語プッシュダウン規則に従ってリーフ ノード (つまり、分割されたテーブル) にプッシュ ダウンされる可能性があり、パーティション プルーニングで使用できます。
 
-    If the TiKV coprocessor does not support this `fn` function, `fn(col)` would not be pushed down to the leaf node. Instead, it becomes a `Selection` node above the leaf node. The current partition pruning implementation does not support this kind of plan tree.
+    TiKV コプロセッサがこの`fn`の機能をサポートしていない場合、 `fn(col)`はリーフ ノードにプッシュされません。代わりに、リーフ ノードの`Selection`ノード上になります。現在のパーティション プルーニングの実装では、この種のプラン ツリーはサポートされていません。
 
-4. For Hash partition, the only query supported by partition pruning is the equal condition.
+4.  ハッシュ パーティションの場合、パーティションのプルーニングでサポートされる唯一のクエリは、等しい条件です。
 
-5. For Range partition, for partition pruning to take effect, the partition expression must be in those forms: `col` or `fn(col)`, and the query condition must be one of `>`, `<`, `=`, `>=`, and `<=`. If the partition expression is in the form of `fn(col)`, the `fn` function must be monotonous.
+5.  範囲パーティションの場合、パーティションのプルーニングを有効にするには、パーティション式が`col`または`fn(col)`の形式である必要があり、クエリ条件が`>` 、 `<` 、 `=` 、 `>=` 、および`<=`のいずれかである必要があります。パーティション式が`fn(col)`の形式の場合、 `fn`関数は単調でなければなりません。
 
-    If the `fn` function is monotonous, for any `x` and `y`, if `x > y`, then `fn(x) > fn(y)`. Then this `fn` function can be called strictly monotonous. For any `x` and `y`, if `x > y`, then `fn(x) >= fn(y)`. In this case, `fn` could also be called "monotonous". In theory, all monotonous functions are supported by partition pruning.
+    `fn`関数が単調な場合、任意の`x`および`y`に対して、 `x > y`の場合、 `fn(x) > fn(y)` .すると、この`fn`関数は厳密に単調であると言えます。任意の`x`および`y`の場合、 `x > y`の場合は`fn(x) >= fn(y)` 。この場合、 `fn`は「単調」とも言えます。理論的には、すべての単調な関数はパーティション プルーニングによってサポートされます。
 
-    Currently, partition pruning in TiDB only support those monotonous functions:
+    現在、TiDB でのパーティションのプルーニングは、次のような単調な関数のみをサポートしています。
 
     ```
     unix_timestamp
     to_days
     ```
 
-    For example, the partition expression is a simple column:
+    たとえば、パーティション式は単純な列です。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     create table t (id int) partition by range (id) (
@@ -797,9 +797,9 @@ Currently, partition pruning does not work with `LIKE` conditions.
     select * from t where t > 6;
     ```
 
-    Or the partition expression is in the form of `fn(col)` where `fn` is `to_days`:
+    または、パーティション式は`fn(col)`の形式で、 `fn`は`to_days`です。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     create table t (dt datetime) partition by range (to_days(id)) (
@@ -808,9 +808,9 @@ Currently, partition pruning does not work with `LIKE` conditions.
     select * from t where t > '2020-04-18';
     ```
 
-    An exception is `floor(unix_timestamp())` as the partition expression. TiDB does some optimization for that case by case, so it is supported by partition pruning.
+    例外は、パーティション式として`floor(unix_timestamp())`です。 TiDB はケースバイケースで最適化を行うため、パーティションのプルーニングによってサポートされます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     create table t (ts timestamp(3) not null default current_timestamp(3))
@@ -820,11 +820,11 @@ Currently, partition pruning does not work with `LIKE` conditions.
     select * from t where t > '2020-04-18 02:00:42.123';
     ```
 
-## Partition selection
+## パーティションの選択 {#partition-selection}
 
-`SELECT` statements support partition selection, which is implemented by using a `PARTITION` option.
+`SELECT`ステートメントは、 `PARTITION`オプションを使用して実装されるパーティション選択をサポートします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET @@sql_mode = '';
@@ -856,9 +856,9 @@ INSERT INTO employees VALUES
     ('', 'Mark', 'Morgan', 3, 3), ('', 'Karen', 'Cole', 3, 2);
 ```
 
-You can view the rows stored in the `p1` partition:
+`p1`パーティションに格納されている行を表示できます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM employees PARTITION (p1);
@@ -877,11 +877,11 @@ SELECT * FROM employees PARTITION (p1);
 5 rows in set (0.00 sec)
 ```
 
-If you want to get the rows in multiple partitions, you can use a list of partition names which are separated by commas. For example, `SELECT * FROM employees PARTITION (p1, p2)` returns all rows in the `p1` and `p2` partitions.
+複数のパーティションの行を取得する場合は、コンマで区切られたパーティション名のリストを使用できます。たとえば、 `SELECT * FROM employees PARTITION (p1, p2)`は`p1`および`p2`パーティションのすべての行を返します。
 
-When you use partition selection, you can still use `WHERE` conditions and options such as `ORDER BY` and `LIMIT`. It is also supported to use aggregation options such as `HAVING` and `GROUP BY`.
+パーティション選択を使用する場合でも、 `WHERE`条件と`ORDER BY`や`LIMIT`などのオプションを使用できます。 `HAVING`や`GROUP BY`などの集計オプションの使用もサポートされています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT * FROM employees PARTITION (p0, p2)
@@ -898,7 +898,7 @@ SELECT * FROM employees PARTITION (p0, p2)
 2 rows in set (0.00 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT id, CONCAT(fname, ' ', lname) AS name
@@ -917,7 +917,7 @@ SELECT id, CONCAT(fname, ' ', lname) AS name
 4 rows in set (0.06 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT store_id, COUNT(department_id) AS c
@@ -935,21 +935,21 @@ SELECT store_id, COUNT(department_id) AS c
 2 rows in set (0.00 sec)
 ```
 
-Partition selection is supported for all types of table partitioning, including Range partitioning and Hash partitioning. For Hash partitions, if partition names are not specified, `p0`, `p1`, `p2`,..., or `pN-1` is automatically used as the partition name.
+パーティションの選択は、レンジ パーティション分割やハッシュ パーティション分割など、すべてのタイプのテーブル パーティション分割でサポートされています。ハッシュ パーティションの場合、パーティション名が指定されていない場合、 `p0` 、 `p1` 、 `p2` 、...、または`pN-1`がパーティション名として自動的に使用されます。
 
-`SELECT` in `INSERT ... SELECT` can also use partition selection.
+`SELECT` in `INSERT ... SELECT`はパーティション選択も使用できます。
 
-## Restrictions and limitations on partitions
+## パーティションに関する制限と制限 {#restrictions-and-limitations-on-partitions}
 
-This section introduces some restrictions and limitations on partitioned tables in TiDB.
+このセクションでは、TiDB のパーティション分割されたテーブルに関するいくつかの制限と制限を紹介します。
 
-### Partitioning keys, primary keys and unique keys
+### 分割キー、主キー、一意キー {#partitioning-keys-primary-keys-and-unique-keys}
 
-This section discusses the relationship of partitioning keys with primary keys and unique keys. The rule governing this relationship can be expressed as follows: **Every unique key on the table must use every column in the table's partitioning expression**. This also includes the table's primary key, because it is by definition a unique key.
+このセクションでは、分割キーと主キーおよび一意キーとの関係について説明します。この関係を管理するルールは、次のように表現できます。**テーブルのすべての一意のキーは、テーブルのパーティション式のすべての列を使用する必要があります**。これにはテーブルの主キーも含まれます。これは定義上、一意のキーであるためです。
 
-For example, the following table creation statements are invalid:
+たとえば、次のテーブル作成ステートメントは無効です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -976,11 +976,11 @@ PARTITION BY HASH(col1 + col3)
 PARTITIONS 4;
 ```
 
-In each case, the proposed table has at least one unique key that does not include all columns used in the partitioning expression.
+いずれの場合も、提案されたテーブルには、パーティション式で使用されるすべての列を含まない一意のキーが少なくとも 1 つあります。
 
-The valid statements are as follows:
+有効なステートメントは次のとおりです。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t1 (
@@ -1006,9 +1006,9 @@ PARTITION BY HASH(col1 + col3)
 PARTITIONS 4;
 ```
 
-The following example displays an error:
+次の例では、エラーが表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t3 (
@@ -1028,9 +1028,9 @@ PARTITIONS 4;
 ERROR 1491 (HY000): A PRIMARY KEY must include all columns in the table's partitioning function
 ```
 
-The `CREATE TABLE` statement fails because both `col1` and `col3` are included in the proposed partitioning key, but neither of these columns is part of both of unique keys on the table. After the following modifications, the `CREATE TABLE` statement becomes valid:
+`col1`と`col3`の両方が提案されたパーティション化キーに含まれているため、 `CREATE TABLE`ステートメントは失敗しますが、これらの列はどちらもテーブルの両方の一意のキーの一部ではありません。次の変更後、 `CREATE TABLE`ステートメントが有効になります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t3 (
@@ -1045,9 +1045,9 @@ PARTITION BY HASH(col1 + col3)
     PARTITIONS 4;
 ```
 
-The following table cannot be partitioned at all, because there is no way to include in a partitioning key any columns that belong to both unique keys:
+両方の一意のキーに属する列をパーティション化キーに含める方法がないため、次のテーブルはまったくパーティション化できません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t4 (
@@ -1060,9 +1060,9 @@ CREATE TABLE t4 (
 );
 ```
 
-Because every primary key is by definition a unique key, so the next two statements are invalid:
+すべての主キーは定義上一意のキーであるため、次の 2 つのステートメントは無効です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t5 (
@@ -1089,9 +1089,9 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-In the above examples, the primary key does not include all columns referenced in the partitioning expression. After adding the missing column in the primary key, the  `CREATE TABLE` statement becomes valid:
+上記の例では、パーティション式で参照されるすべての列が主キーに含まれているわけではありません。主キーに欠落している列を追加すると、 `CREATE TABLE`ステートメントが有効になります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t5 (
@@ -1115,11 +1115,11 @@ PARTITION BY HASH( YEAR(col2) )
 PARTITIONS 4;
 ```
 
-If a table has neither unique keys nor primary keys, then this restriction does not apply.
+テーブルに一意キーも主キーもない場合、この制限は適用されません。
 
-When you change tables using DDL statements, you also need to consider this restriction when adding a unique index. For example, when you create a partitioned table as shown below:
+DDL ステートメントを使用してテーブルを変更する場合、一意のインデックスを追加するときに、この制限も考慮する必要があります。たとえば、次のようにパーティション テーブルを作成するとします。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t_no_pk (c1 INT, c2 INT)
@@ -1135,11 +1135,11 @@ CREATE TABLE t_no_pk (c1 INT, c2 INT)
 Query OK, 0 rows affected (0.12 sec)
 ```
 
-You can add a non-unique index by using `ALTER TABLE` statements. But if you want to add a unique index, the `c1` column must be included in the unique index.
+`ALTER TABLE`ステートメントを使用して、一意でないインデックスを追加できます。ただし、一意のインデックスを追加する場合は、 `c1`列を一意のインデックスに含める必要があります。
 
-When using a partitioned table, you cannot specify the prefix index as a unique attribute:
+分割されたテーブルを使用する場合、プレフィックス インデックスを一意の属性として指定することはできません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 CREATE TABLE t (a varchar(20), b blob,
@@ -1154,9 +1154,9 @@ CREATE TABLE t (a varchar(20), b blob,
 ERROR 1503 (HY000): A UNIQUE INDEX must include all columns in the table's partitioning function
 ```
 
-### Partitioning limitations relating to functions
+### 関数に関するパーティショニングの制限事項 {#partitioning-limitations-relating-to-functions}
 
-Only the functions shown in the following list are allowed in partitioning expressions:
+パーティショニング式では、次のリストに示す関数のみを使用できます。
 
 ```
 ABS()
@@ -1184,43 +1184,43 @@ YEAR()
 YEARWEEK()
 ```
 
-### Compatibility with MySQL
+### MySQL との互換性 {#compatibility-with-mysql}
 
-Currently, TiDB supports Range partitioning, List partitioning, List COLUMNS partitioning, and Hash partitioning. Other partitioning types that are available in MySQL such as key partitioning are not supported yet in TiDB.
+現在、TiDB は、Range パーティショニング、 List パーティショニング、 List COLUMNS パーティショニング、および Hash パーティショニングをサポートしています。キー パーティショニングなど、MySQL で利用可能な他のパーティショニング タイプは、TiDB ではまだサポートされていません。
 
-For a table partitioned by `RANGE COLUMNS`, currently TiDB only supports using a single partitioning column.
+`RANGE COLUMNS`で分割されたテーブルの場合、現在 TiDB は単一の分割列の使用のみをサポートしています。
 
-With regard to partition management, any operation that requires moving data in the bottom implementation is not supported currently, including but not limited to: adjust the number of partitions in a Hash partitioned table, modify the Range of a Range partitioned table, merge partitions and exchange partitions.
+パーティション管理に関しては、下位の実装でデータを移動する必要がある操作は現在サポートされていません。これには、ハッシュ パーティション テーブルのパーティション数の調整、レンジ パーティション テーブルの範囲の変更、パーティションのマージ、およびパーティションを交換します。
 
-For the unsupported partitioning types, when you create a table in TiDB, the partitioning information is ignored and the table is created in the regular form with a warning reported.
+サポートされていないパーティショニング タイプの場合、TiDB でテーブルを作成すると、パーティショニング情報は無視され、通常の形式でテーブルが作成され、警告が報告されます。
 
-The `LOAD DATA` syntax does not support partition selection currently in TiDB.
+`LOAD DATA`構文は、現在 TiDB でのパーティション選択をサポートしていません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t (id int, val int) partition by hash(id) partitions 4;
 ```
 
-The regular `LOAD DATA` operation is supported:
+通常の`LOAD DATA`操作がサポートされています。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 load local data infile "xxx" into t ...
 ```
 
-But `Load Data` does not support partition selection:
+ただし、 `Load Data`はパーティションの選択をサポートしていません。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 load local data infile "xxx" into t partition (p1)...
 ```
 
-For a partitioned table, the result returned by `select * from t` is unordered between the partitions. This is different from the result in MySQL, which is ordered between the partitions but unordered inside the partitions.
+パーティション化されたテーブルの場合、 `select * from t`によって返される結果はパーティション間で順序付けされていません。これは、パーティション間では順序付けされているが、パーティション内では順序付けられていない MySQL の結果とは異なります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 create table t (id int, val int) partition by range (id) (
@@ -1233,7 +1233,7 @@ create table t (id int, val int) partition by range (id) (
 Query OK, 0 rows affected (0.10 sec)
 ```
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 insert into t values (1, 2), (3, 4),(5, 6),(7,8),(9,10);
@@ -1244,9 +1244,9 @@ Query OK, 5 rows affected (0.01 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 ```
 
-TiDB returns a different result every time, for example:
+TiDB は毎回異なる結果を返します。次に例を示します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from t;
@@ -1265,9 +1265,9 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-The result returned in MySQL:
+MySQL に返される結果:
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 select * from t;
@@ -1286,27 +1286,27 @@ select * from t;
 5 rows in set (0.00 sec)
 ```
 
-The `tidb_enable_list_partition` environment variable controls whether to enable the partitioned table feature. If this variable is set to `OFF`, the partition information will be ignored when a table is created, and this table will be created as a normal table.
+`tidb_enable_list_partition`環境変数は、分割テーブル機能を有効にするかどうかを制御します。この変数が`OFF`に設定されている場合、テーブルの作成時にパーティション情報は無視され、このテーブルは通常のテーブルとして作成されます。
 
-This variable is only used in table creation. After the table is created, modify this variable value takes no effect. For details, see [system variables](/system-variables.md#tidb_enable_list_partition-new-in-v50).
+この変数は、テーブルの作成でのみ使用されます。テーブルが作成された後、この変数の値を変更しても効果はありません。詳細については、 [システム変数](/system-variables.md#tidb_enable_list_partition-new-in-v50)を参照してください。
 
-### Dynamic pruning mode
+### 動的プルーニングモード {#dynamic-pruning-mode}
 
-TiDB accesses partitioned tables in one of the two modes: `dynamic` mode and `static` mode. Currently, `static` mode is used by default. If you want to enable `dynamic` mode, you need to manually set the `tidb_partition_prune_mode` variable to `dynamic`.
+TiDB は、 `dynamic`モードと`static`モードの 2 つのモードのいずれかで、分割されたテーブルにアクセスします。現在、デフォルトで`static`モードが使用されています。 `dynamic`モードを有効にする場合は、手動で`tidb_partition_prune_mode`変数を`dynamic`に設定する必要があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set @@session.tidb_partition_prune_mode = 'dynamic'
 ```
 
-Manual ANALYZE and normal queries use the session-level `tidb_partition_prune_mode` setting. The `auto-analyze` operation in the background uses the global `tidb_partition_prune_mode` setting.
+手動の ANALYZE と通常のクエリでは、セッション レベル`tidb_partition_prune_mode`の設定が使用されます。バックグラウンドでの`auto-analyze`操作は、グローバル`tidb_partition_prune_mode`設定を使用します。
 
-In `static` mode, partitioned tables use partition-level statistics. In `dynamic` mode, partitioned tables use table-level statistics (that is, GlobalStats). For detailed information about GlobalStats, see [Collect statistics of partitioned tables in dynamic pruning mode](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+`static`モードでは、パーティション テーブルはパーティション レベルの統計を使用します。 `dynamic`モードでは、分割されたテーブルはテーブル レベルの統計 (つまり、GlobalStats) を使用します。 GlobalStats の詳細については、 [動的プルーニング モードで分割されたテーブルの統計を収集する](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
 
-When switching from `static` mode to `dynamic` mode, you need to check and collect statistics manually. This is because after the switch to `dynamic` mode, partitioned tables have only partition-level statistics but no table-level statistics. GlobalStats are collected only upon the next `auto-analyze` operation.
+`static`モードから`dynamic`モードに切り替える場合は、手動で統計を確認して収集する必要があります。これは、 `dynamic`モードに切り替えた後、パーティション化されたテーブルにはパーティション レベルの統計のみがあり、テーブル レベルの統計がないためです。 GlobalStats は、次の`auto-analyze`操作時にのみ収集されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set session tidb_partition_prune_mode = 'dynamic';
@@ -1324,9 +1324,9 @@ show stats_meta where table_name like "t";
 3 rows in set (0.01 sec)
 ```
 
-To make sure that the statistics used by SQL statements are correct after you enable global `dynamic` pruning mode, you need to manually trigger `analyze` on the tables or on a partition of the table to obtain GlobalStats.
+グローバル`dynamic`プルーニング モードを有効にした後、SQL ステートメントで使用される統計が正しいことを確認するには、テーブルまたはテーブルのパーティションで`analyze`を手動でトリガーして、GlobalStats を取得する必要があります。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 analyze table t partition p1;
@@ -1345,25 +1345,25 @@ show stats_meta where table_name like "t";
 4 rows in set (0.00 sec)
 ```
 
-If the following warning is displayed during the `analyze` process, partition statistics are inconsistent, and you need to collect statistics of these partitions or the entire table again.
+`analyze`の処理中に次の警告が表示された場合は、パーティションの統計に一貫性がないため、これらのパーティションまたはテーブル全体の統計を再度収集する必要があります。
 
 ```
 | Warning | 8244 | Build table: `t` column: `a` global-level stats failed due to missing partition-level column stats, please run analyze table to refresh columns of all partitions
 ```
 
-You can also use scripts to update statistics of all partitioned tables. For details, see [Update statistics of partitioned tables in dynamic pruning mode](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode).
+スクリプトを使用して、分割されたすべてのテーブルの統計を更新することもできます。詳細については、 [動的プルーニング モードで分割されたテーブルの統計を更新する](#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode)を参照してください。
 
-After table-level statistics are ready, you can enable the global dynamic pruning mode, which is effective to all SQL statements and `auto-analyze` operations.
+テーブル レベルの統計の準備ができたら、グローバルな動的プルーニング モードを有効にできます。これは、すべての SQL ステートメントと`auto-analyze`の操作に有効です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 set global tidb_partition_prune_mode = dynamic
 ```
 
-In `static` mode, TiDB accesses each partition separately using multiple operators, and then merges the results using `Union`. The following example is a simple read operation where TiDB merges the results of two corresponding partitions using `Union`:
+`static`モードでは、TiDB は複数の演算子を使用して各パーティションに個別にアクセスし、次に`Union`を使用して結果をマージします。次の例は、TiDB が`Union`を使用して 2 つの対応するパーティションの結果をマージする単純な読み取り操作です。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> create table t1(id int, age int, key(id)) partition by range(id) (
@@ -1391,9 +1391,9 @@ mysql> explain select * from t1 where id < 150;
 7 rows in set (0.00 sec)
 ```
 
-In `dynamic` mode, each operator supports direct access to multiple partitions, so TiDB no longer uses `Union`.
+`dynamic`モードでは、各オペレーターが複数のパーティションへの直接アクセスをサポートするため、TiDB は`Union`を使用しなくなりました。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> set @@session.tidb_partition_prune_mode = 'dynamic';
@@ -1410,13 +1410,13 @@ mysql> explain select * from t1 where id < 150;
 3 rows in set (0.00 sec)
 ```
 
-From the above query results, you can see that the `Union` operator in the execution plan disappears while the partition pruning still takes effect and the execution plan only accesses `p0` and `p1`.
+上記のクエリ結果から、パーティションのプルーニングがまだ有効であり、実行プランが`p0`と`p1`にのみアクセスしている間に、実行プランの`Union`演算子が消えていることがわかります。
 
-`dynamic` mode makes execution plans simpler and clearer. Omitting the Union operation can improve the execution efficiency and avoid the problem of Union concurrent execution. In addition, `dynamic` mode also allows execution plans with IndexJoin which cannot be used in `static` mode. (See examples below)
+`dynamic`モードでは、実行計画がより単純かつ明確になります。 Union 操作を省略すると、実行効率が向上し、Union 同時実行の問題を回避できます。さらに、 `dynamic`モードでは、 `static`モードでは使用できない IndexJoin を使用した実行プランも可能です。 (以下の例を参照)
 
-**Example 1**: In the following example, a query is performed in `static` mode using the execution plan with IndexJoin:
+**例 1** : 次の例では、IndexJoin を使用した実行プランを使用して、クエリが`static`モードで実行されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> create table t1 (id int, age int, key(id)) partition by range(id)
@@ -1465,11 +1465,11 @@ mysql> show warnings;
 1 row in set (0,00 sec)
 ```
 
-From example 1, you can see that even if the `TIDB_INLJ` hint is used, the query on the partitioned table cannot select the execution plan with IndexJoin.
+例 1 から、 `TIDB_INLJ`ヒントを使用しても、分割テーブルに対するクエリは IndexJoin で実行プランを選択できないことがわかります。
 
-**Example 2**: In the following example, the query is performed in `dynamic` mode using the execution plan with IndexJoin:
+**例 2** : 次の例では、クエリは IndexJoin を使用した実行プランを使用して`dynamic`モードで実行されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 mysql> set @@tidb_partition_prune_mode = 'dynamic';
@@ -1491,15 +1491,15 @@ mysql> explain select /*+ TIDB_INLJ(t1, t2) */ t1.* from t1, t2 where t2.code = 
 8 rows in set (0.00 sec)
 ```
 
-From example 2, you can see that in `dynamic` mode, the execution plan with IndexJoin is selected when you execute the query.
+例 2 から、 `dynamic`モードでは、クエリを実行すると IndexJoin を使用した実行プランが選択されることがわかります。
 
-Currently, neither `static` nor `dynamic` pruning mode supports prepared statements plan cache.
+現在、プルーニング モード`static`と`dynamic`のどちらも、準備済みステートメントのプラン キャッシュをサポートしていません。
 
-#### Update statistics of partitioned tables in dynamic pruning mode
+#### 動的プルーニング モードで分割されたテーブルの統計を更新する {#update-statistics-of-partitioned-tables-in-dynamic-pruning-mode}
 
-1. Locate all partitioned tables:
+1.  分割されたすべてのテーブルを見つけます。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select distinct concat(TABLE_SCHEMA,'.',TABLE_NAME)
@@ -1516,9 +1516,9 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
     1 row in set (0.02 sec)
     ```
 
-2. Generate the statements for updating the statistics of all partitioned tables:
+2.  すべての分割テーブルの統計を更新するためのステートメントを生成します。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;')
@@ -1532,11 +1532,11 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
     1 row in set (0.01 sec)
     ```
 
-    You can change `ALL COLUMNS` to the columns you need.
+    `ALL COLUMNS`を必要な列に変更できます。
 
-3. Export the batch update statements to a file:
+3.  バッチ更新ステートメントをファイルにエクスポートします。
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     mysql --host xxxx --port xxxx -u root -p -e "select distinct concat('ANALYZE TABLE ',TABLE_SCHEMA,'.',TABLE_NAME,' ALL COLUMNS;') \
@@ -1544,16 +1544,16 @@ Currently, neither `static` nor `dynamic` pruning mode supports prepared stateme
         where TABLE_SCHEMA not in ('INFORMATION_SCHEMA','mysql','sys','PERFORMANCE_SCHEMA','METRICS_SCHEMA');" | tee gatherGlobalStats.sql
     ```
 
-4. Execute a batch update:
+4.  バッチ更新を実行します。
 
-    Process SQL statements before executing the `source` command:
+    `source`コマンドを実行する前に SQL ステートメントを処理します。
 
     ```
     sed -i "" '1d' gatherGlobalStats.sql --- mac
     sed -i '1d' gatherGlobalStats.sql --- linux
     ```
 
-    {{< copyable "sql" >}}
+    {{< copyable "" >}}
 
     ```sql
     SET session tidb_partition_prune_mode = dynamic;

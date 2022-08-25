@@ -3,66 +3,66 @@ title: Third-Party Libraries Support Maintained by PingCAP
 summary: Learn about third-party libraries support maintained by PingCAP.
 ---
 
-# Third-Party Libraries Support Maintained by PingCAP
+# PingCAP が維持するサードパーティ ライブラリのサポート {#third-party-libraries-support-maintained-by-pingcap}
 
-TiDB is highly compatible with the MySQL 5.7 protocol, so most of the MySQL drivers, ORM frameworks, and other tools that adapt to MySQL are compatible with TiDB. This document focuses on these tools and their support levels for TiDB.
+TiDB はMySQL 5.7プロトコルとの互換性が高いため、MySQL ドライバー、ORM フレームワーク、および MySQL に適応するその他のツールのほとんどは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポート レベルに焦点を当てています。
 
-## Support Level
+## サポートレベル {#support-level}
 
-PingCAP works with the community and provides the following support levels for third-party tools:
+PingCAP はコミュニティと協力して、サードパーティ ツールに次のサポート レベルを提供します。
 
-- **_Full_**: Indicates that TiDB is already compatible with most functionalities of the corresponding third-party tool, and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of the tool.
-- **_Compatible_**: Indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
+-   ***Full*** : TiDB は、対応するサードパーティ ツールのほとんどの機能と既に互換性があり、新しいバージョンとの互換性を維持していることを示します。 PingCAP は、ツールの最新バージョンとの互換性テストを定期的に実施します。
+-   ***互換性***: 対応するサードパーティ ツールは MySQL に適合しており、TiDB は MySQL プロトコルとの互換性が高いため、TiDB はツールのほとんどの機能を使用できることを示します。ただし、PingCAP はツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
 
-> **Warning:**
+> **警告：**
 >
-> Unless specified, support for [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) is not included for **Driver** or **ORM frameworks**.
+> 指定されていない限り、 [アプリケーションの再試行とエラー処理](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling)のサポートは**Driver**または<strong>ORM フレームワーク</strong>には含まれていません。
 
-If you encounter problems when connecting to TiDB using the tools listed in this document, please submit an [issue](https://github.com/pingcap/tidb/issues/new?assignees=&labels=type%2Fquestion&template=general-question.md) on GitHub with details to promote support on this tool.
+このドキュメントに記載されているツールを使用して[問題](https://github.com/pingcap/tidb/issues/new?assignees=&#x26;labels=type%2Fquestion&#x26;template=general-question.md)に接続するときに問題が発生した場合は、このツールのサポートを促進するための詳細を GitHub に送信してください。
 
-## Driver
+## Driver {#driver}
 
-| Language       | Driver                                                                       | Latest tested version | Support level | TiDB adapter                                                                                   | Tutorial                                                                             |
-|------------|--------------------------------------------------------------------------|---------|------|--------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| C          | [MySQL Connector/C](https://downloads.mysql.com/archives/c-c/)           | 6.1.11  | Full | N/A                                                                                        | N/A                                                                            |
-| C#(.Net)   | [MySQL Connector/NET](https://downloads.mysql.com/archives/c-net/)       | 8.0.28  | Compatible | N/A                                                                                        | N/A                                                                            |
-| C#(.Net)   | [MySQL Connector/ODBC](https://downloads.mysql.com/archives/c-odbc/)     | 8.0.28  | Compatible | N/A                                                                                        | N/A                                                                            |
-| Go         | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)            | v1.6.0  | Full | N/A                                                                                        | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
-| Java       | [JDBC](https://dev.mysql.com/downloads/connector/j/)                     | 5.1.46; 8.0.29  | Full | 5.1.46: N/A; 8.0.29: [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0)                                                                                     | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)     |
-| JavaScript | [mysql](https://github.com/mysqljs/mysql)                                | v2.18.1 | Compatible | N/A                                                                                        | N/A                                                                            |
-| PHP        | [MySQL Connector/PHP](https://downloads.mysql.com/archives/c-php/)       | 5.0.37  | Compatible | N/A                                                                                        | N/A                                                                            |
-| Python     | [MySQL Connector/Python](https://downloads.mysql.com/archives/c-python/) | 8.0.28  | Compatible | N/A                                                                                        | N/A                                                                            |
+| 言語         | Driver                                                              | テスト済みの最新バージョン  | サポートレベル | TiDB アダプター                                                                                                       | チュートリアル                                                                                 |
+| ---------- | ------------------------------------------------------------------- | -------------- | ------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| C          | [MySQL コネクタ/C](https://downloads.mysql.com/archives/c-c/)           | 6.1.11         | 満杯      | なし                                                                                                               | なし                                                                                      |
+| C#(.Net)   | [MySQL コネクタ/NET](https://downloads.mysql.com/archives/c-net/)       | 8.0.28         | 互換性     | なし                                                                                                               | なし                                                                                      |
+| C#(.Net)   | [MySQL コネクタ/ODBC](https://downloads.mysql.com/archives/c-odbc/)     | 8.0.28         | 互換性     | なし                                                                                                               | なし                                                                                      |
+| 行け         | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql)       | v1.6.0         | 満杯      | なし                                                                                                               | [TiDB と Golang を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md) |
+| ジャワ        | [JDBC](https://dev.mysql.com/downloads/connector/j/)                | 5.1.46; 8.0.29 | 満杯      | 5.1.46: 該当なし。 8.0.29: [pingcap/mysql-connector-j](https://github.com/pingcap/mysql-connector-j/tree/release/8.0) | [TiDB と Java を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)     |
+| JavaScript | [mysql](https://github.com/mysqljs/mysql)                           | v2.18.1        | 互換性     | なし                                                                                                               | なし                                                                                      |
+| PHP        | [MySQL コネクタ/PHP](https://downloads.mysql.com/archives/c-php/)       | 5.0.37         | 互換性     | なし                                                                                                               | なし                                                                                      |
+| パイソン       | [MySQL コネクタ/Python](https://downloads.mysql.com/archives/c-python/) | 8.0.28         | 互換性     | なし                                                                                                               | なし                                                                                      |
 
-## ORM
+## ORM {#orm}
 
-| Language                  | ORM framework                                                                                                                                                                        | Latest tested version     | Support level | TiDB adapter                                               | Tutorial                                                                             |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|------|--------------------------------------------------------|--------------------------------------------------------------------------------|
-| Go                    | [gorm](https://github.com/go-gorm/gorm)                                                                                                                                       | v1.23.5     | Full | N/A                                                    | [Build a Simple CRUD App with TiDB and Golang](/develop/dev-guide-sample-application-golang.md) |
-| Go                    | [beego](https://github.com/beego/beego)                                                                                                                                       | v2.0.3      | Full | N/A                                                    | N/A                                                                            |
-| Go                    | [upper/db](https://github.com/upper/db)                                                                                                                                       | v4.5.2      | Full | N/A                                                    | N/A                                                                            |
-| Go                    | [xorm](https://gitea.com/xorm/xorm)                                                                                                                                           | v1.3.1      | Full | N/A                                                    | N/A                                                                            |
-| Java                  | [Hibernate](https://hibernate.org/orm/) | 6.1.0.Final | Full | N/A                                                    | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)     |
-| Java                  | [MyBatis](https://mybatis.org/mybatis-3/)                                                                                                                                     | v3.5.10     | Full | N/A                                                    | [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md)                                                                            |
-| Java                  | [Spring Data JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2 | Full | N/A                                                    |  [Build a TiDB Application Using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md)   |
-| Java                  | [jOOQ](https://github.com/jOOQ/jOOQ)                                                                                                                                     | v3.16.7 (Open Source)     | Full | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [sequelize](https://www.npmjs.com/package/sequelize)                                                                                                                          | v6.20.1     | Compatible | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [Knex.js](https://knexjs.org/)                                                                                                                                                | v1.0.7      | Compatible | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [Prisma Client](https://www.prisma.io/)                                                                                                                                       | 3.15.1      | Compatible | N/A                                                    | N/A                                                                            |
-| JavaScript/TypeScript | [TypeORM](https://www.npmjs.com/package/typeorm)                                                                                                                              | v0.3.6      | Compatible | N/A                                                    | N/A                                                                            |
-| PHP                   | [laravel](https://laravel.com/)                                                                                                                                               | v9.1.10     | Compatible | [laravel-tidb](https://github.com/colopl/laravel-tidb) | N/A                                                                            |
-| Python                | [Django](https://pypi.org/project/Django/)                                                  | v4.0.5      | Compatible | N/A                                                    | N/A                                                                            |
-| Python                | [peewee](https://github.com/coleifer/peewee/)                                                                                                                                 | v3.14.10    | Compatible | N/A                                                    | N/A                                                                            |
-| Python                | [PonyORM](https://ponyorm.org/)                                                                                                                                               | v0.7.16     | Compatible | N/A                                                    | N/A                                                                            |
-| Python                | [SQLAlchemy](https://www.sqlalchemy.org/)                                                                                                                                     | v1.4.37     | Compatible | N/A                                                    | N/A                                                                            |
+| 言語                    | ORM フレームワーク                                              | テスト済みの最新バージョン     | サポートレベル | TiDB アダプター                                             | チュートリアル                                                                                      |
+| --------------------- | -------------------------------------------------------- | ----------------- | ------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| 行け                    | [ゴーム](https://github.com/go-gorm/gorm)                   | v1.23.5           | 満杯      | なし                                                     | [TiDB と Golang を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-golang.md)      |
+| 行け                    | [ビーゴ](https://github.com/beego/beego)                    | v2.0.3            | 満杯      | なし                                                     | なし                                                                                           |
+| 行け                    | [アッパー/デシベル](https://github.com/upper/db)                 | v4.5.2            | 満杯      | なし                                                     | なし                                                                                           |
+| 行け                    | [ゾーム](https://gitea.com/xorm/xorm)                       | v1.3.1            | 満杯      | なし                                                     | なし                                                                                           |
+| ジャワ                   | [休止状態](https://hibernate.org/orm/)                       | 6.1.0.最終          | 満杯      | なし                                                     | [TiDB と Java を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)          |
+| ジャワ                   | [マイバティス](https://mybatis.org/mybatis-3/)                 | v3.5.10           | 満杯      | なし                                                     | [TiDB と Java を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)          |
+| ジャワ                   | [春のデータ JPA](https://spring.io/projects/spring-data-jpa/) | 2.7.2             | 満杯      | なし                                                     | [Spring Boot を使用して TiDB アプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md) |
+| ジャワ                   | [jOOQ](https://github.com/jOOQ/jOOQ)                     | v3.16.7 (オープンソース) | 満杯      | なし                                                     | なし                                                                                           |
+| JavaScript/TypeScript | [続編](https://www.npmjs.com/package/sequelize)            | v6.20.1           | 互換性     | なし                                                     | なし                                                                                           |
+| JavaScript/TypeScript | [Knex.js](https://knexjs.org/)                           | v1.0.7            | 互換性     | なし                                                     | なし                                                                                           |
+| JavaScript/TypeScript | [Prisma クライアント](https://www.prisma.io/)                  | 3.15.1            | 互換性     | なし                                                     | なし                                                                                           |
+| JavaScript/TypeScript | [タイプORM](https://www.npmjs.com/package/typeorm)          | v0.3.6            | 互換性     | なし                                                     | なし                                                                                           |
+| PHP                   | [ララベル](https://laravel.com/)                             | v9.1.10           | 互換性     | [laravel-tidb](https://github.com/colopl/laravel-tidb) | なし                                                                                           |
+| パイソン                  | [ジャンゴ](https://pypi.org/project/Django/)                 | v4.0.5            | 互換性     | なし                                                     | なし                                                                                           |
+| パイソン                  | [ピーウィー](https://github.com/coleifer/peewee/)             | v3.14.10          | 互換性     | なし                                                     | なし                                                                                           |
+| パイソン                  | [ポニーORM](https://ponyorm.org/)                           | v0.7.16           | 互換性     | なし                                                     | なし                                                                                           |
+| パイソン                  | [SQL錬金術](https://www.sqlalchemy.org/)                    | v1.4.37           | 互換性     | なし                                                     | なし                                                                                           |
 
-## GUI
+## GUI {#gui}
 
-| GUI                                           | Latest tested version  | Support level | Tutorial  |
-|-----------------------------------------------|---------|------|-----|
-| [DBeaver](https://dbeaver.io/)                | 22.1.0  | Compatible | N/A |
-| [Navicat for MySQL](https://www.navicat.com/) | 16.0.14 | Compatible | N/A |
+| GUI                                         | テスト済みの最新バージョン | サポートレベル | チュートリアル |
+| ------------------------------------------- | ------------- | ------- | ------- |
+| [DBeaver](https://dbeaver.io/)              | 22.1.0        | 互換性     | なし      |
+| [MySQL 用 Navicat](https://www.navicat.com/) | 16.0.14       | 互換性     | なし      |
 
-| IDE                                              | Latest tested version | Support level | Tutorial |
-| ------------------------------------------------ | ------- | ---- | ---- |
-| [DataGrip](https://www.jetbrains.com/datagrip/)  | N/A     | Compatible | N/A  |
-| [IntelliJ IDEA](https://www.jetbrains.com/idea/) | N/A     | Compatible | N/A  |
+| IDE                                              | テスト済みの最新バージョン | サポートレベル | チュートリアル |
+| ------------------------------------------------ | ------------- | ------- | ------- |
+| [データグリップ](https://www.jetbrains.com/datagrip/)   | なし            | 互換性     | なし      |
+| [IntelliJ アイデア](https://www.jetbrains.com/idea/) | なし            | 互換性     | なし      |

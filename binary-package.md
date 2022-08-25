@@ -3,74 +3,74 @@ title: TiDB Installation Packages
 summary: Learn about TiDB installation packages and the specific components included.
 ---
 
-# TiDB Installation Packages
+# TiDB インストール パッケージ {#tidb-installation-packages}
 
-Before [deploying TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline), you need to download the binary packages of TiDB at the [official download page](https://en.pingcap.com/download/).
+[TiUP のオフライン展開](/production-deployment-using-tiup.md#deploy-tiup-offline)の前に、 [公式ダウンロードページ](https://en.pingcap.com/download/)で TiDB のバイナリ パッケージをダウンロードする必要があります。
 
-TiDB provides two binary packages: `TiDB-community-server` and `TiDB-community-toolkit`
+TiDB は`TiDB-community-server`と`TiDB-community-toolkit`の 2 つのバイナリ パッケージを提供します。
 
-The `TiDB-community-server` package contains the following contents.
+`TiDB-community-server`包の内容は以下の通りです。
 
-| Content | Change history |
-|---|---|
-| tidb-{version}-linux-amd64.tar.gz |  |
-| tikv-{version}-linux-amd64.tar.gz |  |
-| tiflash-{version}-linux-amd64.tar.gz |  |
-| pd-{version}-linux-amd64.tar.gz |  |
-| ctl-{version}-linux-amd64.tar.gz |  |
-| grafana-{version}-linux-amd64.tar.gz |  |
-| alertmanager-{version}-linux-amd64.tar.gz |  |
-| blackbox_exporter-{version}-linux-amd64.tar.gz |  |
-| prometheus-{version}-linux-amd64.tar.gz |  |
-| node_exporter-{version}-linux-amd64.tar.gz |  |
-| tiup-linux-amd64.tar.gz |  |
-| tiup-{version}-linux-amd64.tar.gz |  |
-| local_install.sh |  |
-| cluster-{version}-linux-amd64.tar.gz |  |
-| insight-{version}-linux-amd64.tar.gz |  |
-| diag-{version}-linux-amd64.tar.gz | New in v6.0.0 |
-| influxdb-{version}-linux-amd64.tar.gz |  |
-| playground-{version}-linux-amd64.tar.gz |  |
+| コンテンツ                                        | 変更履歴        |
+| -------------------------------------------- | ----------- |
+| tidb-{バージョン}-linux-amd64.tar.gz              |             |
+| tikv-{バージョン}-linux-amd64.tar.gz              |             |
+| tiflash-{バージョン}-linux-amd64.tar.gz           |             |
+| pd-{バージョン}-linux-amd64.tar.gz                |             |
+| ctl-{バージョン}-linux-amd64.tar.gz               |             |
+| grafana-{バージョン}-linux-amd64.tar.gz           |             |
+| alertmanager-{バージョン}-linux-amd64.tar.gz      |             |
+| blackbox_exporter-{バージョン}-linux-amd64.tar.gz |             |
+| プロメテウス-{バージョン}-linux-amd64.tar.gz            |             |
+| node_exporter-{バージョン}-linux-amd64.tar.gz     |             |
+| tiup-linux-amd64.tar.gz                      |             |
+| tiup-{バージョン}-linux-amd64.tar.gz              |             |
+| local_install.sh                             |             |
+| クラスタ-{バージョン}-linux-amd64.tar.gz              |             |
+| インサイト-{バージョン}-linux-amd64.tar.gz             |             |
+| diag-{バージョン}-linux-amd64.tar.gz              | v6.0.0 の新機能 |
+| influxdb-{バージョン}-linux-amd64.tar.gz          |             |
+| 遊び場-{バージョン}-linux-amd64.tar.gz               |             |
 
-The `TiDB-community-toolkit` package contains the following contents.
+`TiDB-community-toolkit`包の内容は以下の通りです。
 
-| Content | Change history |
-|---|---|
-| tikv-importer-{version}-linux-amd64.tar.gz |  |
-| pd-recover-{version}-linux-amd64.tar.gz |  |
-| etcdctl | New in v6.0.0 |
-| tiup-linux-amd64.tar.gz |  |
-| tiup-{version}-linux-amd64.tar.gz |  |
-| tidb-lightning-{version}-linux-amd64.tar.gz |  |
-| tidb-lightning-ctl |  |
-| dumpling-{version}-linux-amd64.tar.gz |  |
-| cdc-{version}-linux-amd64.tar.gz |  |
-| dm-{version}-linux-amd64.tar.gz |  |
-| dm-worker-{version}-linux-amd64.tar.gz |  |
-| dm-master-{version}-linux-amd64.tar.gz |  |
-| dmctl-{version}-linux-amd64.tar.gz |  |
-| br-{version}-linux-amd64.tar.gz |  |
-| spark-{version}-any-any.tar.gz |  |
-| tispark-{version}-any-any.tar.gz |  |
-| package-{version}-linux-amd64.tar.gz |  |
-| bench-{version}-linux-amd64.tar.gz |  |
-| errdoc-{version}-linux-amd64.tar.gz |  |
-| dba-{version}-linux-amd64.tar.gz |  |
-| PCC-{version}-linux-amd64.tar.gz |  |
-| pump-{version}-linux-amd64.tar.gz |  |
-| drainer-{version}-linux-amd64.tar.gz |  |
-| binlogctl | New in v6.0.0 |
-| sync_diff_inspector |  |
-| reparo |  |
-| arbiter |  |
-| mydumper | New in v6.0.0 |
-| server-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| grafana-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| alertmanager-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| prometheus-{version}-linux-amd64.tar.gz | New in v6.2.0 |
-| blackbox_exporter-{version}-linux-amd64.tar.gz | New in v6.2.0  |
-| node_exporter-{version}-linux-amd64.tar.gz | New in v6.2.0  |
+| コンテンツ                                        | 変更履歴        |
+| -------------------------------------------- | ----------- |
+| tikv-importer-{バージョン}-linux-amd64.tar.gz     |             |
+| pd-recover-{バージョン}-linux-amd64.tar.gz        |             |
+| etcdctl                                      | v6.0.0 の新機能 |
+| tiup-linux-amd64.tar.gz                      |             |
+| tiup-{バージョン}-linux-amd64.tar.gz              |             |
+| tidb-lightning-{バージョン}-linux-amd64.tar.gz    |             |
+| tidb-lightning-ctl                           |             |
+| dumpling-{バージョン}-linux-amd64.tar.gz          |             |
+| cdc-{バージョン}-linux-amd64.tar.gz               |             |
+| dm-{バージョン}-linux-amd64.tar.gz                |             |
+| dm-worker-{バージョン}-linux-amd64.tar.gz         |             |
+| dm-master-{バージョン}-linux-amd64.tar.gz         |             |
+| dmctl-{バージョン}-linux-amd64.tar.gz             |             |
+| br-{バージョン}-linux-amd64.tar.gz                |             |
+| spark-{バージョン}-any-any.tar.gz                 |             |
+| tispark-{バージョン}-any-any.tar.gz               |             |
+| パッケージ-{バージョン}-linux-amd64.tar.gz             |             |
+| ベンチ-{バージョン}-linux-amd64.tar.gz               |             |
+| errdoc-{バージョン}-linux-amd64.tar.gz            |             |
+| dba-{バージョン}-linux-amd64.tar.gz               |             |
+| PCC-{バージョン}-linux-amd64.tar.gz               |             |
+| ポンプ-{バージョン}-linux-amd64.tar.gz               |             |
+| ドレーン -{バージョン}-linux- drainer                 |             |
+| binlogctl                                    | v6.0.0 の新機能 |
+| sync_diff_inspector                          |             |
+| レパロ                                          |             |
+| アービタ                                         |             |
+| マイダンパー                                       | v6.0.0 の新機能 |
+| サーバー-{バージョン}-linux-amd64.tar.gz              | v6.2.0 の新機能 |
+| grafana-{バージョン}-linux-amd64.tar.gz           | v6.2.0 の新機能 |
+| alertmanager-{バージョン}-linux-amd64.tar.gz      | v6.2.0 の新機能 |
+| プロメテウス-{バージョン}-linux-amd64.tar.gz            | v6.2.0 の新機能 |
+| blackbox_exporter-{バージョン}-linux-amd64.tar.gz | v6.2.0 の新機能 |
+| node_exporter-{バージョン}-linux-amd64.tar.gz     | v6.2.0 の新機能 |
 
-## See also
+## こちらもご覧ください {#see-also}
 
-[Deploy TiUP offline](/production-deployment-using-tiup.md#deploy-tiup-offline)
+[TiUP をオフラインでデプロイ](/production-deployment-using-tiup.md#deploy-tiup-offline)

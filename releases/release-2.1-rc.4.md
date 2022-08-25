@@ -2,52 +2,52 @@
 title: TiDB 2.1 RC4 Release Notes
 ---
 
-# TiDB 2.1 RC4 Release Notes
+# TiDB 2.1 RC4 リリースノート {#tidb-2-1-rc4-release-notes}
 
-On October 23, 2018, TiDB 2.1 RC4 is released. Compared with TiDB 2.1 RC3, this release has great improvement in stability, SQL optimizer, statistics information, and execution engine.
+2018 年 10 月 23 日に、TiDB 2.1 RC4 がリリースされました。 TiDB 2.1 RC3 と比較して、このリリースでは、安定性、SQL オプティマイザー、統計情報、および実行エンジンが大幅に改善されています。
 
-## TiDB
+## TiDB {#tidb}
 
-+ SQL Optimizer
-    - Fix the issue that column pruning of `UnionAll` is incorrect in some cases [#7941](https://github.com/pingcap/tidb/pull/7941)
-    - Fix the issue that the result of the `UnionAll` operator is incorrect in some cases [#8007](https://github.com/pingcap/tidb/pull/8007)
-+ SQL Execution Engine
-    - Fix the precision issue of the `AVG` function [#7874](https://github.com/pingcap/tidb/pull/7874)
-    - Support using the `EXPLAIN ANALYZE` statement to check the runtime statistics including the execution time and the number of returned rows of each operator during the query execution process [#7925](https://github.com/pingcap/tidb/pull/7925)
-    - Fix the panic issue of the `PointGet` operator when a column of a table appears multiple times in the result set [#7943](https://github.com/pingcap/tidb/pull/7943)
-    - Fix the panic issue caused by too large values in the `Limit` subclause [#8002](https://github.com/pingcap/tidb/pull/8002)
-    - Fix the panic issue during the execution process of the `AddDate`/`SubDate` statement in some cases [#8009](https://github.com/pingcap/tidb/pull/8009)
-+ Statistics
-    - Fix the issue of judging the prefix of the histogram low-bound of the combined index as out of range [#7856](https://github.com/pingcap/tidb/pull/7856)
-    - Fix the memory leak issue caused by statistics collecting [#7873](https://github.com/pingcap/tidb/pull/7873)
-    - Fix the panic issue when the histogram is empty [#7928](https://github.com/pingcap/tidb/pull/7928)
-    - Fix the issue that the histogram bound is out of range when the statistics is being uploaded [#7944](https://github.com/pingcap/tidb/pull/7944)
-    - Limit the maximum length of values in the statistics sampling process [#7982](https://github.com/pingcap/tidb/pull/7982)
-+ Server
-    - Refactor Latch to avoid misjudgment of transaction conflicts and improve the execution performance of concurrent transactions [#7711](https://github.com/pingcap/tidb/pull/7711)
-    - Fix the panic issue caused by collecting slow queries in some cases [#7874](https://github.com/pingcap/tidb/pull/7847)
-    - Fix the panic issue when `ESCAPED BY` is an empty string in the `LOAD DATA` statement [#8005](https://github.com/pingcap/tidb/pull/8005)
-    - Complete the “coprocessor error” log information [#8006](https://github.com/pingcap/tidb/pull/8006)
-+ Compatibility
-    - Set the `Command` field of the `SHOW PROCESSLIST` result to `Sleep` when the query is empty [#7839](https://github.com/pingcap/tidb/pull/7839)
-+ Expressions
-    - Fix the constant folding issue of the `SYSDATE` function [#7895](https://github.com/pingcap/tidb/pull/7895)
-    - Fix the issue that `SUBSTRING_INDEX` panics in some cases [#7897](https://github.com/pingcap/tidb/pull/7897)
-+ DDL
-    - Fix the stack overflow issue caused by throwing the `invalid ddl job type` error [#7958](https://github.com/pingcap/tidb/pull/7958)
-    - Fix the issue that the result of `ADMIN CHECK TABLE` is incorrect in some cases [#7975](https://github.com/pingcap/tidb/pull/7975)
+-   SQL オプティマイザー
+    -   `UnionAll`の列の刈り込みが正しくない場合がある問題を修正[#7941](https://github.com/pingcap/tidb/pull/7941)
+    -   `UnionAll`演算子の結果が正しくない場合がある問題を修正[#8007](https://github.com/pingcap/tidb/pull/8007)
+-   SQL 実行エンジン
+    -   `AVG`関数[#7874](https://github.com/pingcap/tidb/pull/7874)の精度の問題を修正
+    -   `EXPLAIN ANALYZE`ステートメントを使用して、クエリ実行プロセス中に実行時間と各演算子の返された行数を含むランタイム統計をチェックするサポート[#7925](https://github.com/pingcap/tidb/pull/7925)
+    -   テーブルの列が結果セットに複数回表示される場合の`PointGet`演算子のpanicの問題を修正します[#7943](https://github.com/pingcap/tidb/pull/7943)
+    -   `Limit`節[#8002](https://github.com/pingcap/tidb/pull/8002)の値が大きすぎるために発生するpanicの問題を修正します。
+    -   場合によっては`AddDate` / `SubDate`ステートメントの実行プロセス中のpanicの問題を修正します[#8009](https://github.com/pingcap/tidb/pull/8009)
+-   統計
+    -   総合指数のヒストグラム下限の接頭辞が範囲[#7856](https://github.com/pingcap/tidb/pull/7856)外と判定される問題を修正
+    -   統計収集[#7873](https://github.com/pingcap/tidb/pull/7873)によって引き起こされるメモリ リークの問題を修正します。
+    -   ヒストグラムが空の場合のpanicの問題を修正します[#7928](https://github.com/pingcap/tidb/pull/7928)
+    -   統計のアップロード時にヒストグラム バウンドが範囲外になる問題を修正します[#7944](https://github.com/pingcap/tidb/pull/7944)
+    -   統計サンプリング プロセスで値の最大長を制限する[#7982](https://github.com/pingcap/tidb/pull/7982)
+-   サーバ
+    -   ラッチをリファクタリングして、トランザクション競合の誤判断を回避し、同時トランザクションの実行パフォーマンスを向上させます[#7711](https://github.com/pingcap/tidb/pull/7711)
+    -   場合によっては遅いクエリを収集することによって引き起こされるpanicの問題を修正します[#7874](https://github.com/pingcap/tidb/pull/7847)
+    -   `LOAD DATA`ステートメント[#8005](https://github.com/pingcap/tidb/pull/8005)で`ESCAPED BY`が空の文字列の場合のpanicの問題を修正します。
+    -   「コプロセッサー・エラー」ログ情報を完成させる[#8006](https://github.com/pingcap/tidb/pull/8006)
+-   互換性
+    -   クエリが空の場合、 `SHOW PROCESSLIST`結果の`Command`フィールドを`Sleep`に設定します[#7839](https://github.com/pingcap/tidb/pull/7839)
+-   式
+    -   `SYSDATE`関数[#7895](https://github.com/pingcap/tidb/pull/7895)の一定の折り畳みの問題を修正します。
+    -   `SUBSTRING_INDEX`場合によってはパニックになる問題を修正[#7897](https://github.com/pingcap/tidb/pull/7897)
+-   DDL
+    -   `invalid ddl job type`エラー[#7958](https://github.com/pingcap/tidb/pull/7958)をスローすることによって引き起こされるスタック オーバーフローの問題を修正します。
+    -   `ADMIN CHECK TABLE`の結果が正しくない場合がある問題を修正[#7975](https://github.com/pingcap/tidb/pull/7975)
 
-## PD
+## PD {#pd}
 
-- Fix the issue that the tombstone TiKV is not removed from Grafana [#1261](https://github.com/pingcap/pd/pull/1261)
-- Fix the data race issue when grpc-go configures the status [#1265](https://github.com/pingcap/pd/pull/1265)
-- Fix the issue that the PD server gets stuck caused by etcd startup failure [#1267](https://github.com/pingcap/pd/pull/1267)
-- Fix the issue that data race might occur during leader switching [#1273](https://github.com/pingcap/pd/pull/1273)
-- Fix the issue that extra warning logs might be output when TiKV becomes tombstone [#1280](https://github.com/pingcap/pd/pull/1273)
+-   Tombstone TiKV が Grafana [#1261](https://github.com/pingcap/pd/pull/1261)から削除されない問題を修正
+-   grpc-go がステータス[#1265](https://github.com/pingcap/pd/pull/1265)を構成するときのデータ競合の問題を修正します
+-   etcdの起動失敗によりPDサーバーが動かなくなる問題を修正[#1267](https://github.com/pingcap/pd/pull/1267)
+-   リーダーの切り替え時にデータ競合が発生する可能性がある問題を修正[#1273](https://github.com/pingcap/pd/pull/1273)
+-   TiKV が tombstone [#1280](https://github.com/pingcap/pd/pull/1273)になると余分な警告ログが出力されることがある問題を修正
 
-## TiKV
+## TiKV {#tikv}
 
-- Optimize the RocksDB Write stall issue caused by applying snapshots [#3606](https://github.com/tikv/tikv/pull/3606)
-- Add raftstore `tick` metrics [#3657](https://github.com/tikv/tikv/pull/3657)
-- Upgrade RocksDB and fix the Write block issue and that the source file might be damaged by the Write operation when performing `IngestExternalFile` [#3661](https://github.com/tikv/tikv/pull/3661)
-- Upgrade grpcio and fix the issue that “too many pings” is wrongly reported [#3650](https://github.com/tikv/tikv/pull/3650)
+-   スナップショットの適用によって発生する RocksDB の書き込み停止の問題を最適化する[#3606](https://github.com/tikv/tikv/pull/3606)
+-   raftstore の追加`tick`メトリクス[#3657](https://github.com/tikv/tikv/pull/3657)
+-   RocksDB をアップグレードし、書き込みブロックの問題を修正し、実行時に書き込み操作によってソース ファイルが破損する可能性があることを確認します`IngestExternalFile` [#3661](https://github.com/tikv/tikv/pull/3661)
+-   grpcio をアップグレードし、「too many pings」が誤って報告される問題を修正します[#3650](https://github.com/tikv/tikv/pull/3650)

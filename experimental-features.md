@@ -3,60 +3,60 @@ title: TiDB Experimental Features
 summary: Learn the experimental features of TiDB.
 ---
 
-# TiDB Experimental Features
+# TiDB の実験的機能 {#tidb-experimental-features}
 
-This document introduces the experimental features of TiDB in different versions. It is **NOT** recommended to use these features in the production environment.
+このドキュメントでは、さまざまなバージョンの TiDB の実験的機能を紹介します。これらの機能を本番環境で使用することはお勧めし**ません**。
 
-## Performance
+## パフォーマンス {#performance}
 
-+ [Support collecting statistics for `PREDICATE COLUMNS`](/statistics.md#collect-statistics-on-some-columns) (Introduced in v5.4)
-+ [Support synchronously loading statistics](/statistics.md#load-statistics). (Introduced in v5.4)
-+ [Control the memory quota for collecting statistics](/statistics.md#the-memory-quota-for-collecting-statistics). (Introduced in v6.1.0)
-+ [Use the thread pool to handle read requests from the storage engine](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). (Introduced in v6.2.0)
-+ [Cost Model Version 2](/cost-model.md#cost-model-version-2). (Introduced in v6.2.0)
-+ [FastScan](/develop/dev-guide-use-fastscan.md). (Introduced in v6.2.0)
-+ [Randomly sample about 10000 rows of data to quickly build statistics](/system-variables.md#tidb_enable_fast_analyze) (Introduced in v3.0)
+-   [`PREDICATE COLUMNS`の統計収集のサポート](/statistics.md#collect-statistics-on-some-columns) (v5.4 で導入)
+-   [統計の同期ロードをサポート](/statistics.md#load-statistics) . (v5.4 で導入)
+-   [統計を収集するためのメモリ クォータを制御する](/statistics.md#the-memory-quota-for-collecting-statistics) . (v6.1.0 で導入)
+-   [スレッド プールを使用してストレージ エンジンからの読み取り要求を処理する](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) . (v6.2.0 で導入)
+-   [コスト モデル バージョン 2](/cost-model.md#cost-model-version-2) . (v6.2.0 で導入)
+-   [ファストスキャン](/develop/dev-guide-use-fastscan.md) . (v6.2.0 で導入)
+-   [統計をすばやく作成するために、約 10000 行のデータをランダムにサンプリングします](/system-variables.md#tidb_enable_fast_analyze) (v3.0 で導入)
 
-## Stability
+## 安定性 {#stability}
 
-+ Improve the stability of the optimizer's choice of indexes: extend the statistics feature by collecting the multi-column order dependency information (Introduced in v5.0).
-+ [Background Quota Limiter](/tikv-configuration-file.md#background-quota-limiter) (Introduced in v6.2.0): You can use the background quota-related configuration items to limit the CPU resources to be used by the background. When a request triggers Quota Limiter, the request is forced to wait for a while for TiKV to free up CPU resources.
+-   オプティマイザーが選択するインデックスの安定性を向上させます。複数列の順序依存情報を収集して統計機能を拡張します (v5.0 で導入)。
+-   [バックグラウンド クォータ リミッター](/tikv-configuration-file.md#background-quota-limiter) (v6.2.0 で導入): バックグラウンド クォータ関連の構成アイテムを使用して、バックグラウンドで使用される CPU リソースを制限できます。リクエストが Quota Limiter をトリガーすると、リクエストは TiKV が CPU リソースを解放するまでしばらく待機する必要があります。
 
-## Scheduling
+## スケジューリング {#scheduling}
 
-Elastic scheduling feature. It enables the TiDB cluster to dynamically scale out and in on Kubernetes based on real-time workloads, which effectively reduces the stress during your application's peak hours and saves overheads. See [Enable TidbCluster Auto-scaling](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling) for details. (Introduced in v4.0)
+エラスティック スケジューリング機能。これにより、TiDBクラスタは、リアルタイムのワークロードに基づいて Kubernetes で動的にスケールアウトおよびスケールインできます。これにより、アプリケーションのピーク時のストレスが効果的に軽減され、オーバーヘッドが節約されます。詳細は[TidbCluster 自動スケーリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/stable/enable-tidb-cluster-auto-scaling)を参照してください。 (v4.0 で導入)
 
-## SQL
+## SQL {#sql}
 
-+ The expression index feature. The expression index is also called the function-based index. When you create an index, the index fields do not have to be a specific column but can be an expression calculated from one or more columns. This feature is useful for quickly accessing the calculation-based tables. See [Expression index](/sql-statements/sql-statement-create-index.md) for details. (Introduced in v4.0)
-+ [Generated Columns](/generated-columns.md) (Introduced in v2.1)
-+ [User-Defined Variables](/user-defined-variables.md) (Introduced in v2.1)
-+ [JSON data type](/data-type-json.md) and [JSON functions](/functions-and-operators/json-functions.md) (Introduced in v2.1)
-+ [Cascades Planner](/system-variables.md#tidb_enable_cascades_planner): a cascades framework-based top-down query optimizer (Introduced in v3.0)
-+ [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (Introduced in v6.1.0)
+-   表情インデックス機能。式インデックスは、関数ベースのインデックスとも呼ばれます。インデックスを作成する場合、インデックス フィールドは特定の列である必要はありませんが、1 つ以上の列から計算された式にすることができます。この機能は、計算ベースのテーブルにすばやくアクセスするのに役立ちます。詳細は[発現指数](/sql-statements/sql-statement-create-index.md)を参照してください。 (v4.0 で導入)
+-   [生成された列](/generated-columns.md) (v2.1 で導入)
+-   [ユーザー定義変数](/user-defined-variables.md) (v2.1 で導入)
+-   [JSON データ型](/data-type-json.md)と[JSON関数](/functions-and-operators/json-functions.md) (v2.1 で導入)
+-   [カスケード プランナー](/system-variables.md#tidb_enable_cascades_planner) : カスケード フレームワーク ベースのトップダウン クエリ オプティマイザー (v3.0 で導入)
+-   [`ALTER TABLE ... COMPACT`](/sql-statements/sql-statement-alter-table-compact.md) (v6.1.0 で導入)
 
-## Storage
+## 保管所 {#storage}
 
-+ [Disable Titan](/storage-engine/titan-configuration.md#disable-titan-experimental) (Introduced in v4.0)
-+ [Titan Level Merge](/storage-engine/titan-configuration.md#level-merge-experimental) (Introduced in v4.0)
-+ Divide Regions are divided into buckets. [Buckets are used as the unit of concurrent query](/tune-region-performance.md#use-bucket-to-increase-concurrency) to improve the scan concurrency. (Introduced in v6.1.0)
-+ TiKV introduces [API V2](/tikv-configuration-file.md#api-version-new-in-v610). (Introduced in v6.1.0)
+-   [タイタンを無効にする](/storage-engine/titan-configuration.md#disable-titan-experimental) (v4.0 で導入)
+-   [タイタン レベル マージ](/storage-engine/titan-configuration.md#level-merge-experimental) (v4.0 で導入)
+-   分割 リージョンはバケットに分割されます。 [バケットは同時クエリの単位として使用されます](/tune-region-performance.md#use-bucket-to-increase-concurrency)スキャンの同時実行性を向上させます。 (v6.1.0 で導入)
+-   TiKV は[API V2](/tikv-configuration-file.md#api-version-new-in-v610)を紹介します。 (v6.1.0 で導入)
 
-## Data migration
+## データ移行 {#data-migration}
 
-+ [Use WebUI](/dm/dm-webui-guide.md) to manage migration tasks in DM. (Introduced in v6.0)
-+ [Configure disk quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) for TiDB Lightning. (Introduced in v6.2.0)
-+ [Continuous Data Validation in DM](/dm/dm-continuous-data-validation.md) (Introduced in v6.2.0)
+-   DM で移行タスクを管理する場合は[WebUI を使用する](/dm/dm-webui-guide.md) 。 (v6.0 で導入)
+-   TiDB Lightningの場合は[ディスク クォータの構成](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) 。 (v6.2.0 で導入)
+-   [DM での継続的なデータ検証](/dm/dm-continuous-data-validation.md) (v6.2.0 で導入)
 
-## 数据共享订阅
+## 数据共有订阅
 
-+ [Cross-cluster RawKV replication](/tikv-configuration-file.md#api-version-new-in-v610) (Introduced in v6.2.0)
+-   [クラスタ間の RawKV レプリケーション](/tikv-configuration-file.md#api-version-new-in-v610) (v6.2.0 で導入)
 
-## Garbage collection
+## ガベージ コレクション {#garbage-collection}
 
-+ [Green GC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) (Introduced in v5.0)
+-   [グリーンGC](/system-variables.md#tidb_gc_scan_lock_mode-new-in-v50) (v5.0 で導入)
 
-## Diagnostics
+## 診断 {#diagnostics}
 
-+ [SQL diagnostics](/information-schema/information-schema-sql-diagnostics.md) (Introduced in v4.0)
-+ [Cluster diagnostics](/dashboard/dashboard-diagnostics-access.md) (Introduced in v4.0)
+-   [SQL 診断](/information-schema/information-schema-sql-diagnostics.md) (v4.0 で導入)
+-   [クラスタ診断](/dashboard/dashboard-diagnostics-access.md) (v4.0 で導入)

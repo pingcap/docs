@@ -5,78 +5,81 @@ summary: Learn how to build a TiDB cluster in TiDB Cloud (Developer Tier) and co
 
 <!-- markdownlint-disable MD029 -->
 
-# Build a TiDB Cluster in TiDB Cloud (Developer Tier)
+# TiDB Cloud(開発者層) で TiDB クラスターを構築する {#build-a-tidb-cluster-in-tidb-cloud-developer-tier}
 
 <CustomContent platform="tidb">
 
-This document walks you through the quickest way to get started with TiDB. You will use [TiDB Cloud](https://en.pingcap.com/tidb-cloud) to create a free TiDB cluster, connect to it, and run a sample application on it.
+このドキュメントでは、TiDB を使い始める最も簡単な方法について説明します。 [TiDB Cloud](https://en.pingcap.com/tidb-cloud)を使用して、無料の TiDBクラスタを作成し、それに接続して、サンプル アプリケーションを実行します。
 
-If you need to run TiDB on your local machine, see [Starting TiDB Locally](/quick-start-with-tidb.md).
+ローカル マシンで TiDB を実行する必要がある場合は、 [TiDB をローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-This document walks you through the quickest way to get started with TiDB Cloud. You will create a free TiDB cluster, connect to it, and run a sample application on it.
+このドキュメントでは、 TiDB Cloudを開始するための最も簡単な方法について説明します。無料の TiDBクラスタを作成して接続し、サンプル アプリケーションを実行します。
 
 </CustomContent>
 
-## Step 1. Create a free cluster
+## ステップ 1.無料のクラスタを作成する {#step-1-create-a-free-cluster}
 
-1. If you do not have a TiDB Cloud account, click [TiDB Cloud](https://tidbcloud.com/free-trial) to sign up for an account.
-2. [Sign in](https://tidbcloud.com/) with your TiDB Cloud account.
-3. To create a Developer Tier cluster for one year free, you can either select the **Developer Tier** plan on the [plan page](https://tidbcloud.com/console/plans) or click **Create Cluster** on the [**Active Clusters**](https://tidbcloud.com/console/clusters) page.
-4. On the **Create Cluster** page, set up your cluster name, cloud provider (for now, only AWS is available for Developer Tier), and region (a nearby region is recommended). Then click **Create** to create your cluster.
+1.  TiDB Cloudアカウントを持っていない場合は、 [TiDB Cloud](https://tidbcloud.com/free-trial)をクリックしてアカウントにサインアップします。
 
-    The cluster creation process starts and the **Security Settings** dialog box is displayed.
+2.  [ログイン](https://tidbcloud.com/)をTiDB Cloudアカウントで。
 
-5. In the **Security Settings** dialog box, set the root password and allowed IP addresses to connect to your cluster, and then click **Apply**.
+3.  Developer Tierクラスタを 1 年間無料で作成するには、 [プランページ](https://tidbcloud.com/console/plans)ページで**Developer Tier**プランを選択するか、 [**アクティブなクラスター**](https://tidbcloud.com/console/clusters)ページで [<strong>クラスターの作成</strong>] をクリックします。
 
-    Your TiDB Cloud cluster will be created in approximately 5 to 15 minutes.
+4.  [**クラスターの作成]**ページで、クラスタ名、クラウド プロバイダー (現時点では、開発者層で使用できるのは AWS のみ)、およびリージョン (近くのリージョンをお勧めします) を設定します。次に、[<strong>作成</strong>] をクリックしてクラスタを作成します。
 
-6. After creating a cluster, click **Connect** in the upper-right corner. A connection dialog box is displayed.
+    クラスタの作成プロセスが開始され、 **[セキュリティの設定**] ダイアログ ボックスが表示されます。
 
-    > **Tip:**
+5.  [**セキュリティの設定**] ダイアログ ボックスで、root パスワードと許可された IP アドレスを設定してクラスタに接続し、[<strong>適用</strong>] をクリックします。
+
+    TiDB Cloudクラスタは、約 5 ～ 15 分で作成されます。
+
+6.  クラスタを作成したら、右上隅にある [**接続**] をクリックします。接続ダイアログボックスが表示されます。
+
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of your newly created cluster to go to the cluster details page, and then click **Connect** in the upper-right corner.
+    > または、新しく作成したクラスタの名前をクリックしてクラスタの詳細ページに移動し、右上隅にある [**接続**] をクリックすることもできます。
 
-7. In the dialog box, locate **Step 2: Connect with a SQL client**, and then copy the string to connect with a SQL client for later use.
+7.  ダイアログ ボックスで、 [**ステップ 2: SQL クライアントに接続**する] を探し、文字列をコピーして SQL クライアントに接続し、後で使用できるようにします。
 
     ![SQL string](/media/develop/tidb-cloud-connect.png)
 
     <CustomContent platform="tidb">
 
-    > **Note:**
+    > **ノート：**
     >
-    > For [Developer Tier clusters](https://docs.pingcap.com/tidbcloud/select-cluster-tier#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix).
+    > [開発者層のクラスター](https://docs.pingcap.com/tidbcloud/select-cluster-tier#developer-tier)の場合、クラスタに接続するときに、ユーザー名にクラスタのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
     </CustomContent>
 
     <CustomContent platform="tidb-cloud">
 
-    > **Note:**
+    > **ノート：**
     >
-    > For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), when you connect to your cluster, you must include the prefix for your cluster in the user name and wrap the name with quotation marks. For more information, see [User name prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix).
+    > [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)の場合、クラスタに接続するときに、ユーザー名にクラスタのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
     </CustomContent>
 
-## Step 2. Connect to a cluster
+## ステップ 2.クラスタに接続する {#step-2-connect-to-a-cluster}
 
-1. If the MySQL client is not installed, select your operating system and follow the steps below to install it.
+1.  MySQL クライアントがインストールされていない場合は、オペレーティング システムを選択し、以下の手順に従ってインストールします。
 
 <SimpleTab>
 
 <div label="macOS">
 
-For macOS, install [Homebrew](https://brew.sh/index) if you do not have it, and then run the following command to install the MySQL client:
+macOS の場合、 [自作](https://brew.sh/index)がない場合はインストールしてから、次のコマンドを実行して MySQL クライアントをインストールします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 brew install mysql-client
 ```
 
-The output is as follows:
+出力は次のとおりです。
 
 ```
 mysql-client is keg-only, which means it was not symlinked into /opt/homebrew,
@@ -90,24 +93,24 @@ For compilers to find mysql-client you may need to set:
   export CPPFLAGS="-I/opt/homebrew/opt/mysql-client/include"
 ```
 
-To add the MySQL client to your PATH, locate the following command in the above output (if your output is inconsistent with the above output in the document, use the corresponding command in your output instead) and run it:
+MySQL クライアントを PATH に追加するには、上記の出力で次のコマンドを見つけて (出力がドキュメントの上記の出力と一致しない場合は、代わりに出力で対応するコマンドを使用してください)、それを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 echo 'export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"' >> ~/.zshrc
 ```
 
-Then, declare the global environment variable by the `source` command and verify that the MySQL client is installed successfully:
+次に、 `source`コマンドでグローバル環境変数を宣言し、MySQL クライアントが正常にインストールされていることを確認します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 source ~/.zshrc
 mysql --version
 ```
 
-An example of the expected output:
+予想される出力の例:
 
 ```
 mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
@@ -117,23 +120,23 @@ mysql  Ver 8.0.28 for macos12.0 on arm64 (Homebrew)
 
 <div label="Linux">
 
-For Linux, the following takes CentOS 7 as an example:
+Linux の場合、次の例では CentOS 7 を使用しています。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 yum install mysql
 ```
 
-Then, verify that the MySQL client is installed successfully:
+次に、MySQL クライアントが正常にインストールされたことを確認します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 mysql --version
 ```
 
-An example of the expected output:
+予想される出力の例:
 
 ```
 mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
@@ -143,29 +146,29 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
 
 </SimpleTab>
 
-2. Run the connection string obtained in [Step 1](#step-1-create-a-free-cluster).
+2.  [ステップ1](#step-1-create-a-free-cluster)で取得した接続文字列を実行します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```shell
     mysql --connect-timeout 15 -u '<prefix>.root' -h <host> -P 4000 -p
     ```
 
-3. Fill in the password to sign in.
+3.  パスワードを入力してサインインします。
 
-## Step 3. Run the sample application
+## ステップ 3. サンプル アプリケーションを実行する {#step-3-run-the-sample-application}
 
-1. Clone the `tidb-example-java` project:
+1.  `tidb-example-java`のプロジェクトを複製します。
 
-  {{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
-  ```shell
-  git clone https://github.com/pingcap-inc/tidb-example-java.git
-  ```
+```shell
+git clone https://github.com/pingcap-inc/tidb-example-java.git
+```
 
-2. Change connection parameters.
+2.  接続パラメーターを変更します。
 
-    In `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`, modify the parameters of the host, port, user, and password:
+    `plain-java-jdbc/src/main/java/com/pingcap/JDBCExample.java`で、ホスト、ポート、ユーザー、およびパスワードのパラメーターを変更します。
 
     {{< copyable "" >}}
 
@@ -177,7 +180,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysqlDataSource.setPassword("");
     ```
 
-    Suppose that the password you set is `123456` and the connection string you get from TiDB Cloud is the following:
+    設定したパスワードが`123456`で、 TiDB Cloudから取得した接続文字列が次のとおりであるとします。
 
     {{< copyable "" >}}
 
@@ -185,7 +188,7 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysql --connect-timeout 15 -u '4JC1i9KroBMFRwW.root' -h xxx.tidbcloud.com -P 4000 -D test -p
     ```
 
-    In this case, you can modify the parameters as follows:
+    この場合、次のようにパラメータを変更できます。
 
     {{< copyable "" >}}
 
@@ -197,6 +200,6 @@ mysql  Ver 15.1 Distrib 5.5.68-MariaDB, for Linux (x86_64) using readline 5.1
     mysqlDataSource.setPassword("123456");
     ```
 
-3. Run `make plain-java-jdbc`.
+3.  `make plain-java-jdbc`を実行します。
 
-  Here is an example of the [expected output](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc).
+[期待される出力](https://github.com/pingcap-inc/tidb-example-java/blob/main/Expected-Output.md#plain-java-jdbc)の例を次に示します。

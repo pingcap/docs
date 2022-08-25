@@ -3,168 +3,168 @@ title: TiDB Cloud Billing
 summary: Learn about TiDB Cloud billing.
 ---
 
-# TiDB Cloud Billing
+# TiDB Cloud請求 {#tidb-cloud-billing}
 
-> **Note:**
+> **ノート：**
 >
-> [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier) are free to use for up to one year. You will not be charged for the use of your Developer Tier cluster, and your TiDB Cloud bill will not display any Developer Tier charges.
+> [開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)は最大 1 年間無料で使用できます。 Developer Tierクラスタの使用に対して課金されることはなく、 TiDB Cloudの請求書には Developer Tier の料金は表示されません。
 
-TiDB Cloud charges according to the resources that you consume, which include:
+TiDB Cloudは、消費したリソースに応じて課金されます。これには次のものが含まれます。
 
-- Cluster node compute
-- Primary data storage
-- Data backup storage
-- Data transfers in to, out from, and within your cluster
+-   クラスタ ノード コンピューティング
+-   プライマリ データ ストレージ
+-   データのバックアップ ストレージ
+-   クラスターとの間、およびクラスタ内でのデータ転送
 
-These charges appear as separate items on your monthly TiDB Cloud bills.
+これらの料金は、毎月のTiDB Cloud請求書に個別の項目として表示されます。
 
-## Compute cost
+## 計算コスト {#compute-cost}
 
-TiDB Cloud lets you pay for database cluster compute resources by hour, which is ideal for dynamic workloads.
+TiDB Cloudでは、データベースクラスタのコンピューティング リソースを時間単位で支払うことができるため、動的なワークロードに最適です。
 
-In TiDB Cloud, you can control your cluster size easily by specifying the node quantity and node size of TiDB, TiKV, and TiFlash.
+TiDB Cloudでは、TiDB、TiKV、TiFlash のノード数とノード サイズを指定することで、クラスタサイズを簡単に制御できます。
 
-The specified node quantity and associated vCPUs determine your hourly compute cost.
+指定されたノード数と関連する vCPU によって、1 時間あたりのコンピューティング コストが決まります。
 
-Note that the compute cost of TiDB, TiKV, and TiFlash nodes might vary depending on different cloud providers and different regions. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
+TiDB、TiKV、TiFlash ノードのコンピューティング コストは、クラウド プロバイダーや地域によって異なる場合があることに注意してください。詳細については、 [TiDB Cloudの料金](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 
-## Storage cost
+## 保管コスト {#storage-cost}
 
-Both TiKV and TiFlash nodes save your data to persistent block storage. The storage costs are generated according to the total volume of storage that all TiKV and TiFlash nodes in your cluster consume.
+TiKV ノードと TiFlash ノードはどちらも、データを永続的なブロック ストレージに保存します。ストレージ コストは、クラスタのすべての TiKV および TiFlash ノードが消費するストレージの総量に応じて生成されます。
 
-TiDB Cloud passes the costs onto customers as they are incurred. For details, see [TiDB Cloud pricing](https://en.pingcap.com/tidb-cloud-pricing/).
+TiDB Cloudは、発生したコストを顧客に転嫁します。詳細については、 [TiDB Cloudの料金](https://en.pingcap.com/tidb-cloud-pricing/)を参照してください。
 
-## Backup storage cost
+## バックアップ ストレージのコスト {#backup-storage-cost}
 
-TiDB Cloud provides automatic backup and ad-hoc backup, both backups consume the storage. We will charge you based on the maximum capacity of total backups per month.
+TiDB Cloudは自動バックアップとアドホック バックアップを提供します。どちらのバックアップもストレージを消費します。 1 か月あたりの合計バックアップの最大容量に基づいて課金されます。
 
-The storage prices for different cloud providers are as follows:
+さまざまなクラウド プロバイダーのストレージ料金は次のとおりです。
 
-- AWS
+-   AWS
 
-    All backups will be saved in Amazon Simple Storage Service (Amazon S3). You only need to pay the S3 fee and we will not charge you an additional fee. For details, see [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/).
+    すべてのバックアップは Amazon Simple Storage Service (Amazon S3) に保存されます。 S3 料金のみを支払う必要があり、追加料金は請求されません。詳細については、 [Amazon S3 の料金](https://aws.amazon.com/s3/pricing/)を参照してください。
 
-- GCP
+-   GCP
 
-    All backups will be saved in GCP cloud storage. You only need to pay the Cloud Storage fee and we will not charge you an additional fee. For details, see [GCP Cloud Storage pricing](https://cloud.google.com/storage/pricing).
+    すべてのバックアップは GCP クラウド ストレージに保存されます。 Cloud Storage 料金のみを支払う必要があり、追加料金は請求されません。詳細については、 [GCP クラウド ストレージの料金](https://cloud.google.com/storage/pricing)を参照してください。
 
-## Data transfer cost
+## データ転送料金 {#data-transfer-cost}
 
-Both AWS and GCP might charge for data transfer, calculated per GB, whenever data moves within or leaves its cloud. Examples of when these charges are incurred with TiDB Cloud include the following:
+AWS と GCP はどちらも、データがクラウド内またはクラウドから移動するたびに、GB 単位で計算されたデータ転送に対して課金される場合があります。 TiDB Cloudでこれらの料金が発生する例としては、次のようなものがあります。
 
-- When data moves between the TiDB cluster load balancer and your cluster
-- When data moves across different availability zones in the same region within your cluster
-- When you perform cluster backup and recovery operations
-- When you use TiCDC to stream data to or from your cluster
-- Fixed cost of the load balancer
+-   TiDBクラスタロード バランサーとクラスタの間でデータが移動するとき
+-   クラスタ内の同じリージョン内の異なるアベイラビリティー ゾーン間でデータが移動する場合
+-   クラスタのバックアップおよびリカバリ操作を実行する場合
+-   TiCDC を使用してクラスタとの間でデータをストリーミングする場合
+-   ロードバランサーの固定費
 
-TiDB Cloud passes these charges onto customers as they are incurred, calculated using the published [AWS](https://aws.amazon.com/ec2/pricing/on-demand/) and [GCP](https://cloud.google.com/vpc/network-pricing) price tables as applicable, and without any additional fees.
+TiDB Cloudは、これらの料金が発生したときに、公開されている[AWS](https://aws.amazon.com/ec2/pricing/on-demand/)および[GCP](https://cloud.google.com/vpc/network-pricing)の価格表を適宜使用して計算し、追加料金なしで顧客に渡します。
 
-This cost policy applies to all TiDB Cloud customers with [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) clusters, regardless of how those clusters are licensed.
+このコスト ポリシーは、クラスターのライセンス方法に関係なく、 [専用ティア](/tidb-cloud/select-cluster-tier.md#dedicated-tier)つのクラスターを持つすべてのTiDB Cloudのお客様に適用されます。
 
-To make these charges easier to view, your TiDB Cloud bills and invoices aggregate and organize all data transfer charges under the following categories:
+これらの料金を簡単に確認できるようにするために、 TiDB Cloudの請求書と請求書では、すべてのデータ転送料金を次のカテゴリにまとめて整理しています。
 
-- Data transfer – Same Region
-- Data transfer – Cross Region
-- Data transfer – Internet
+-   データ転送 – 同じリージョン
+-   データ転送 – クロスリージョン
+-   データ転送 – インターネット
 
-## Support service cost
+## サポートサービス費用 {#support-service-cost}
 
-If you have subscribed to one of the **Standard**, **Enterprise**, or **Premium** [support plan](/tidb-cloud/tidb-cloud-support.md), you are charged for the support service on a monthly basis. The billing information is included in your monthly bill.
+**Standard** 、 <strong>Enterprise</strong> 、または<strong>Premium</strong> [サポートプラン](/tidb-cloud/tidb-cloud-support.md)のいずれかに加入している場合は、月単位でサポート サービスの料金が請求されます。請求情報は、毎月の請求書に含まれています。
 
-## Invoices
+## 請求書 {#invoices}
 
-If you are the owner or billing administrator of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.
+組織の所有者または課金管理者であれば、 TiDB Cloudの請求書情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
-> **Note:**
+> **ノート：**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップすると、AWS アカウントから直接支払うことができますが、支払い方法を追加したり、 TiDB Cloudポータルで請求書をダウンロードしたりすることはできません。
 
-After you set up the payment method, TiDB Cloud will generate the invoice for the previous month at the beginning of each month. Invoice costs include TiDB cluster usage consumption, discounts, backup storage costs, support service cost, and data transmission costs in your organization.
+支払い方法を設定すると、 TiDB Cloudは毎月の初めに前月の請求書を生成します。請求書のコストには、組織内の TiDBクラスタの使用量、割引、バックアップ ストレージのコスト、サポート サービスのコスト、およびデータ転送のコストが含まれます。
 
-- TiDB Cloud provides the invoice to you on the ninth of each month. From the first to the ninth day, you cannot view the last month's cost details, but can obtain the cluster usage information of this month via the billing console.
-- The default method for paying invoices is credit card deduction. If you want to use other payment methods, please send a ticket request to let us know.
-- After the invoice is generated, please finish the payment within 30 days.
-- You can view the summary and details of charges for the current month and the previous month.
+-   TiDB Cloudは毎月 9 日に請求書を発行します。 1 日目から 9 日目までは、前月のコストの詳細を表示することはできませんが、課金コンソールを介して今月のクラスタの使用状況情報を取得できます。
+-   請求書の支払いのデフォルトの方法は、クレジット カードによる控除です。他の支払い方法を使用したい場合は、チケットリクエストを送信してお知らせください。
+-   請求書発行後、30日以内にお支払いを完了してください。
+-   今月と前月の料金の概要と詳細を表示できます。
 
-> **Note:**
+> **ノート：**
 >
-> All billing deductions will be completed through the third-party platform Stripe.
+> すべての請求控除は、サードパーティのプラットフォームである Stripe を通じて行われます。
 
-To view the list of invoices, perform the following steps:
+請求書のリストを表示するには、次の手順を実行します。
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Click **Billing**. The invoices page is displayed.
+1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
+2.  [**請求]**をクリックします。請求書ページが表示されます。
 
-## Billing details
+## 支払明細 {#billing-details}
 
-If you are the owner or billing administrator of the organization, you can view and export the billing details of TiDB Cloud. Otherwise, skip this section.
+組織の所有者または請求管理者である場合は、 TiDB Cloudの請求の詳細を表示およびエクスポートできます。それ以外の場合は、このセクションをスキップしてください。
 
-After setting the payment method, TiDB Cloud will generate the invoice and billing details of the historical months, and generate the bill details of the current month at the beginning of each month. The billing details include your organization's TiDB cluster usage consumption, discounts, backup storage costs, data transmission costs, support service cost, and project splitting information.
+支払い方法を設定した後、 TiDB Cloudは過去の月の請求書と請求の詳細を生成し、各月の初めに当月の請求の詳細を生成します。請求の詳細には、組織の TiDBクラスタの使用量、割引、バックアップ ストレージのコスト、データ転送コスト、サポート サービスのコスト、およびプロジェクト分割情報が含まれます。
 
-> **Note:**
+> **ノート：**
 >
-> Due to delays and other reasons, the billing details of the current month are for reference only, not guaranteed to be accurate. TiDB Cloud ensures the accuracy of historical bills so that you can perform cost accounting and meet other needs.
+> 遅延やその他の理由により、当月の請求明細は参考用であり、正確であることを保証するものではありません。 TiDB Cloudは、原価計算を実行し、他のニーズを満たすことができるように、過去の請求書の正確性を保証します。
 
-To view the billing details, perform the following steps:
+請求の詳細を表示するには、次の手順を実行します。
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Click **Billing**.
-3. Click **Bills**. The billing details page is displayed.
+1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
+2.  [**請求]**をクリックします。
+3.  **請求書**をクリックします。請求の詳細ページが表示されます。
 
-## Trial points
+## トライアルポイント {#trial-points}
 
-During the [PoC](/tidb-cloud/tidb-cloud-poc.md) period, you can use trial points to pay the TiDB cluster fees. One point is equivalent to one U.S. dollar. All your TiDB clusters will be automatically terminated when the trial points are used up.
+[PoC](/tidb-cloud/tidb-cloud-poc.md)期間中、トライアルポイントを使ってTiDBクラスタ料金を支払うことができます。 1ポイントは1米ドルに相当します。試用ポイントが使い果たされると、すべての TiDB クラスターは自動的に終了します。
 
-> **Note:**
+> **ノート：**
 >
-> Once you set up the payment method successfully, the unused trial points will become invalid. The cluster fees that have been deducted from trial points will not be included in your new bill.
+> お支払い方法の設定が完了すると、未使用のお試しポイントは無効になります。試用ポイントから差し引かれたクラスタ料金は、新しい請求書には含まれません。
 
-## Payment method
+## 支払方法 {#payment-method}
 
-If you are the owner or billing administrator of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
+組織の所有者または課金管理者であれば、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
-> **Note:**
+> **ノート：**
 >
-> If you sign up for TiDB Cloud through [AWS Marketplace](https://aws.amazon.com/marketplace), you can pay through your AWS account directly but cannot add payment methods or download invoices in the TiDB Cloud portal.
+> [AWS マーケットプレイス](https://aws.amazon.com/marketplace)からTiDB Cloudにサインアップすると、AWS アカウントから直接支払うことができますが、支払い方法を追加したり、 TiDB Cloudポータルで請求書をダウンロードしたりすることはできません。
 
-### Add a credit card
+### クレジットカードを追加 {#add-a-credit-card}
 
-The fee is deducted from a bound credit card according to your cluster usage. To add a valid credit card, you can use either of the following methods:
+料金は、クラスタの使用状況に応じて、バインドされたクレジット カードから差し引かれます。有効なクレジット カードを追加するには、次のいずれかの方法を使用できます。
 
-- When you are creating a cluster:
+-   クラスタを作成する場合:
 
-    1. Before you click **Create Cluster** on the **Create a Cluster** page, click **Add Credit Card** at the bottom of the **Billing Calculator** pane.
-    2. In the **Add a Card** dialog box, fill in the card information and billing address.
-    3. Click **Save Card**.
+    1.  [ **Create a Cluster** ] ページで [ <strong>Create Cluster</strong> ] をクリックする前に、[ <strong>Billing Calculator</strong> ] ウィンドウの下部にある [ <strong>Add Credit Card</strong> ] をクリックします。
+    2.  [**カードを追加**] ダイアログ ボックスで、カード情報と請求先住所を入力します。
+    3.  [**カードを保存]**をクリックします。
 
-- Anytime in the billing console:
+-   請求コンソールでいつでも:
 
-    1. Click the account name in the upper-right corner of the TiDB Cloud console.
-    2. Click **Billing**.
-    3. Under the **Payment Method** tab, click **Add a New Card**.
-    4. Fill in the billing address and card information, and then click **Save**.
+    1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
+    2.  [**請求]**をクリックします。
+    3.  [**支払い方法**] タブで、[<strong>新しいカードを追加</strong>] をクリックします。
+    4.  請求先住所とカード情報を入力し、[**保存**] をクリックします。
 
-> **Note:**
+> **ノート：**
 >
-> To ensure the security of credit card sensitive data, TiDB Cloud does not save any customer credit card information and saves them in the third-party payment platform Stripe. All billing deductions are completed through Stripe.
+> クレジット カードの機密データのセキュリティを確保するために、 TiDB Cloudは顧客のクレジット カード情報を保存せず、サードパーティの支払いプラットフォームである Stripe に保存します。すべての課金控除は、Stripe を通じて完了します。
 
-You can bind multiple credit cards, and set one of them as the default credit card in the payment method of the billing console. After setting, subsequent billings will be automatically deducted from the default credit card.
+複数のクレジット カードをバインドし、そのうちの 1 つを課金コンソールの支払い方法の既定のクレジット カードとして設定できます。設定後、以降の請求はデフォルトのクレジットカードから自動的に引き落とされます。
 
-To set the default credit card, perform the following steps:
+デフォルトのクレジット カードを設定するには、次の手順を実行します。
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Select a credit card in the credit card list, and click **Set as default**.
+1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
+2.  [**請求]**をクリックします。
+3.  [**お支払い方法**] タブをクリックします。
+4.  クレジット カード リストでクレジット カードを選択し、[**既定に設定**] をクリックします。
 
-### Edit billing profile information
+### 請求プロファイル情報の編集 {#edit-billing-profile-information}
 
-The billing profile information includes the business legal address and tax registration information. By providing your tax registration number, certain taxes might be exempted from your invoice.
+請求プロファイル情報には、会社の正式な住所と税務登録情報が含まれます。税務登録番号を提供することにより、特定の税金が請求書から免除される場合があります。
 
-To edit the billing profile information, perform the following steps:
+請求プロファイル情報を編集するには、次の手順を実行します。
 
-1. Click the account name in the upper-right corner of the TiDB Cloud console.
-2. Click **Billing**.
-3. Click the **Payment Method** tab.
-4. Edit the billing profile information, and then click **Save**.
+1.  TiDB Cloudコンソールの右上隅にあるアカウント名をクリックします。
+2.  [**請求]**をクリックします。
+3.  [**お支払い方法**] タブをクリックします。
+4.  請求プロファイル情報を編集し、[**保存**] をクリックします。

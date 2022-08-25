@@ -3,99 +3,99 @@ title: Monitor a TiDB Cluster
 summary: Learn how to monitor your TiDB cluster.
 ---
 
-# Monitor a TiDB Cluster
+# TiDB クラスターを監視する {#monitor-a-tidb-cluster}
 
-This document describes how to monitor a TiDB cluster on TiDB Cloud.
+このドキュメントでは、 TiDB Cloudで TiDBクラスタを監視する方法について説明します。
 
-## Cluster status and node status
+## クラスタのステータスとノードのステータス {#cluster-status-and-node-status}
 
-You can see the current status of each running cluster on the cluster page.
+クラスタページで、実行中の各クラスタの現在の状態を確認できます。
 
-### Cluster Status
+### クラスタ ステータス {#cluster-status}
 
-| Cluster status | Description |
-|:--|:--|
-| **Normal** | Normal running (including data migration) |
-| **Creating** | Creating the cluster |
-| **Importing** | The cluster is importing data |
-| **Scaling** | Scaling the TiDB, TiKV, or TiFlash nodes |
-| **Upgrading** | Upgrading the TiDB version |
-| **Unavailable** | The TiDB Cloud service is not available |
-| **Unhealthy** | Part of nodes are unavailable, not enough replicas, and so on |
-| **Recovering** | Backup recovery |
+| クラスターの状態     | 説明                               |
+| :----------- | :------------------------------- |
+| **普通**       | 通常稼働（データ移行含む）                    |
+| **作成**       | クラスタの作成                          |
+| **輸入中**      | クラスタはデータをインポートしています              |
+| **スケーリング**   | TiDB、TiKV、または TiFlash ノードのスケーリング |
+| **アップグレード中** | TiDB のバージョンアップ                   |
+| **利用不可**     | TiDB Cloudサービスは利用できません           |
+| **不健康**      | ノードの一部が利用できない、十分なレプリカがないなど       |
+| **回復**       | バックアップの回復                        |
 
-### TiDB node status
+### TiDB ノードのステータス {#tidb-node-status}
 
-| TiDB node status | Description |
-|:--|:--|
-| **Normal** | Normal running |
-| **Creating** | Creating the node |
-| **Unavailable** | The TiDB node is not available |
-| **Terminating** | The TiDB node is terminating |
+| TiDB ノードのステータス | 説明               |
+| :------------- | :--------------- |
+| **普通**         | 通常走行             |
+| **作成**         | ノードの作成           |
+| **利用不可**       | TiDB ノードが利用できない  |
+| **終了中**        | TiDB ノードが終了しています |
 
-### TiKV node status
+### TiKV ノードのステータス {#tikv-node-status}
 
-| TiKV node status | Description |
-|:--|:--|
-| **Normal** | Normal running |
-| **Creating** | Creating the node |
-| **Unavailable** | The TiKV node is not available |
-| **Terminating** | The TiKV node is terminating |
-| **Leaving** | Migrating the current node data before termination |
+| TiKV ノードのステータス | 説明                |
+| :------------- | :---------------- |
+| **普通**         | 通常走行              |
+| **作成**         | ノードの作成            |
+| **利用不可**       | TiKV ノードは利用できません  |
+| **終了中**        | TiKV ノードが終了しています  |
+| **出発**         | 終了前の現在のノード データの移行 |
 
-## Monitoring metrics
+## 指標のモニタリング {#monitoring-metrics}
 
-In TiDB Cloud, you can view the commonly used metrics of a cluster from the following pages:
+TiDB Cloudでは、次のページからクラスタの一般的に使用されるメトリックを表示できます。
 
-- Cluster overview page
-- Cluster monitoring page
+-   クラスタの概要ページ
+-   クラスタ監視ページ
 
-### Metrics on the cluster overview page
+### クラスタの概要ページの指標 {#metrics-on-the-cluster-overview-page}
 
-The cluster overview page provides general metrics of a cluster, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write.
+クラスタの概要ページには、合計 QPS、レイテンシー、接続、TiFlash 要求 QPS、TiFlash 要求期間、TiFlash ストレージ サイズ、TiKV ストレージ サイズ、TiDB CPU、TiKV CPU、TiKV IO 読み取り、TiKV IO 書き込みなど、クラスタの一般的なメトリックが表示されます。
 
-To view metrics on the cluster overview page, take the following steps:
+クラスタの概要ページでメトリックを表示するには、次の手順を実行します。
 
-1. Navigate to the **Active Clusters** page.
+1.  [**アクティブなクラスター]**ページに移動します。
 
-2. Click the name of a cluster to go to its cluster overview page.
+2.  クラスタの名前をクリックして、そのクラスタの概要ページに移動します。
 
-### Metrics on the cluster monitoring page
+### クラスタ監視ページの指標 {#metrics-on-the-cluster-monitoring-page}
 
-The cluster monitoring page provides a full set of standard metrics of a cluster. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
+クラスタ監視ページには、クラスタの標準メトリックの完全なセットが表示されます。これらのメトリックを表示することで、パフォーマンスの問題を簡単に特定し、現在のデータベースの展開が要件を満たしているかどうかを判断できます。
 
-> **Note:**
+> **ノート：**
 >
-> Currently, the cluster monitoring page is unavailable for [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier).
+> 現在、クラスタ監視ページは[開発者層のクラスター](/tidb-cloud/select-cluster-tier.md#developer-tier)で利用できません。
 
-To view metrics on the cluster monitoring page, take the following steps:
+クラスタ監視ページでメトリックを表示するには、次の手順を実行します。
 
-1. Navigate to the **Diagnosis** tab of a cluster.
+1.  クラスタの [**診断**] タブに移動します。
 
-2. Click the **Monitoring** tab.
+2.  [**監視**] タブをクリックします。
 
-For more information, see [Built-in Monitoring](/tidb-cloud/built-in-monitoring.md).
+詳細については、 [ビルトインモニタリング](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
-## Built-in alerting
+## 組み込みのアラート {#built-in-alerting}
 
-TiDB Cloud has some built-in alerting conditions. You can configure TiDB Cloud to receive an email notification whenever a TiDB Cloud cluster in your project triggers a TiDB Cloud built-in alert condition.
+TiDB Cloudには、組み込みのアラート条件がいくつかあります。プロジェクト内のTiDB CloudクラスタがTiDB Cloud組み込みアラート条件をトリガーするたびに、電子メール通知を受信するようにTiDB Cloudを構成できます。
 
-For more information, see [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+詳細については、 [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)を参照してください。
 
-## Third-party integrations
+## サードパーティの統合 {#third-party-integrations}
 
-### Required access
+### 必要なアクセス {#required-access}
 
-To edit third-party integration settings, you must have the `Organization Owner` access to your organization or `Project Member` access to the target project.
+サードパーティの統合設定を編集するには、組織への`Organization Owner`つのアクセス権またはターゲット プロジェクトへの`Project Member`のアクセス権が必要です。
 
-### View or modify third-party integrations
+### サードパーティの統合をビューまたは変更する {#view-or-modify-third-party-integrations}
 
-1. On the TiDB Cloud console, choose a target project that you want to view or modify, and then click the **Project Settings** tab.
-2. In the left pane, click **Integrations**. The available third-party integrations are displayed.
+1.  TiDB Cloudコンソールで、表示または変更するターゲット プロジェクトを選択し、[**プロジェクト設定**] タブをクリックします。
+2.  左ペインで [**統合**] をクリックします。利用可能なサードパーティ統合が表示されます。
 
-### Available integrations
+### 利用可能な統合 {#available-integrations}
 
-| Third-party service  | Configuration details                                        |
-| :------------------- | :----------------------------------------------------------- |
-| **Datadog integration** | Configures TiDB Cloud to send metric data about your TiDB clusters to [Datadog](https://www.datadoghq.com/). You can view these metrics in your Datadog dashboards. To get a detailed list of all metrics that Datadog tracks, refer to [Datadog Integration](/tidb-cloud/monitor-datadog-integration.md). |
-| **Prometheus and Grafana integration** | Get a scrape_config file for Prometheus from TiDB Cloud and use the content from the file to configure Prometheus. You can view these metrics in your Grafana dashboards. To get a detailed list of all metrics that Prometheus tracks, refer to [Prometheus and Grafana Integration](/tidb-cloud/monitor-prometheus-and-grafana-integration.md). |
+| サードパーティ サービス                 | Configuration / コンフィグレーションの詳細                                                                                                                                                                                                                                 |
+| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Datadog の統合**              | TiDB クラスターに関するメトリック データを[データドッグ](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成します。これらのメトリクスは、Datadog ダッシュボードで表示できます。 Datadog が追跡するすべてのメトリクスの詳細なリストを取得するには、 [Datadog 統合](/tidb-cloud/monitor-datadog-integration.md)を参照してください。                              |
+| **Prometheus と Grafana の統合** | TiDB Cloudから Prometheus の Scrape_config ファイルを取得し、そのファイルの内容を使用して Prometheus を構成します。これらのメトリックは、Grafana ダッシュボードで表示できます。 Prometheus が追跡するすべてのメトリックの詳細なリストを取得するには、 [Prometheus と Grafana の統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。 |

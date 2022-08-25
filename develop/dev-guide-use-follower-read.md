@@ -3,55 +3,55 @@ title: Follower Read
 summary: Learn how to use Follower Read to optimize query performance.
 ---
 
-# Follower Read
+# フォロワー読み取り {#follower-read}
 
-This document introduces how to use Follower Read to optimize query performance.
+このドキュメントでは、Follower Read を使用してクエリのパフォーマンスを最適化する方法を紹介します。
 
-## Introduction
+## 序章 {#introduction}
 
-TiDB uses [Region](/tidb-storage.md#region) as the basic unit to distribute data to all nodes in the cluster. A Region can have multiple replicas, and the replicas are divided into a leader and multiple followers. When the data on the leader changes, TiDB will update the data to the followers synchronously.
+TiDB は、クラスタのすべてのノードにデータを分散するための基本単位として[リージョン](/tidb-storage.md#region)を使用します。リージョンは複数のレプリカを持つことができ、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDB はフォロワーのデータを同期的に更新します。
 
-By default, TiDB only reads and writes data on the leader of the same Region. When a read hotspot occurs in a Region, the Region leader can become a read bottleneck for the entire system. In this situation, enabling the Follower Read feature can significantly reduce the load of the leader and improve the throughput of the whole system by balancing the load among multiple followers.
+デフォルトでは、TiDB は同じリージョンのリーダーでのみデータの読み取りと書き込みを行います。 リージョンリージョンがシステム全体の読み取りボトルネックになる可能性があります。このような状況では、フォロワー読み取り機能を有効にすると、リーダーの負荷が大幅に軽減され、複数のフォロワー間で負荷が分散されるため、システム全体のスループットが向上します。
 
-## When to use
+## いつ使用するか {#when-to-use}
 
 <CustomContent platform="tidb">
 
-You can visually analyze whether your application has a hotspot Region on the [TiDB Dashboard Key Visualizer Page](/dashboard/dashboard-key-visualizer.md). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+アプリケーションが[TiDB ダッシュボード キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)にホットスポットリージョンを持っているかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
 
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](/troubleshoot-hot-spot-issues.md).
+ホットスポットの処理の詳細については、 [TiDB Hotspot の問題処理](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-You can visually analyze whether your application has a hotspot Region on the [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer). You can check whether a read hotspot occurs by selecting the "metrics selection box" to `Read (bytes)` or `Read (keys)`.
+アプリケーションが[TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)にホットスポットリージョンを持っているかどうかを視覚的に分析できます。 「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択すると、読み取りホットスポットが発生するかどうかを確認できます。
 
-For more information about handling hotspot, see [TiDB Hotspot Problem Handling](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues).
+ホットスポットの処理の詳細については、 [TiDB Hotspot の問題処理](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 </CustomContent>
 
-If read hotspots are unavoidable or the changing cost is very high, you can try using the Follower Read feature to better load the balance of reading requests to the follower Region.
+読み取りホットスポットが避けられない場合、または変更コストが非常に高い場合は、フォロワー読み取り機能を使用して、フォロワーリージョンへの読み取り要求のバランスを改善することができます。
 
-## Enable Follower Read
+## フォロワー読み取りを有効にする {#enable-follower-read}
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-To enable Follower Read, set the variable `tidb_replica_read` (default value is `leader`) to `follower` or `leader-and-follower`:
+Follower Read を有効にするには、変数`tidb_replica_read` (デフォルト値は`leader` ) を`follower`または`leader-and-follower`に設定します。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-For more details about this variable, see [Follower Read Usage](/follower-read.md#usage).
+この変数の詳細については、 [フォロワーの読み取りの使用](/follower-read.md#usage)を参照してください。
 
 </div>
 <div label="Java" value="java">
 
-In Java, to enable Follower Read, define a `FollowerReadHelper` class.
+Java で Follower Read を有効にするには、 `FollowerReadHelper`クラスを定義します。
 
 {{< copyable "" >}}
 
@@ -95,7 +95,7 @@ public class FollowerReadHelper {
 }
 ```
 
-When reading data from the Follower node, use the `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)` method to enable the Follower Read feature, which can balance the load between the Leader node and the Follower node in the current session. When the connection is disconnected, it will be restored to the original mode.
+フォロワー ノードからデータを読み取る場合は、 `setSessionReplicaRead(conn, FollowReadMode.LEADER_AND_FOLLOWER)`メソッドを使用してフォロワー読み取り機能を有効にします。これにより、現在のセッションでリーダー ノードとフォロワー ノード間の負荷を分散できます。接続が切断されると、元のモードに戻ります。
 
 {{< copyable "" >}}
 
@@ -140,20 +140,20 @@ public static class AuthorDAO {
 </div>
 </SimpleTab>
 
-## Read more
+## 続きを読む {#read-more}
 
-- [Follower Read](/follower-read.md)
+-   [フォロワー読み取り](/follower-read.md)
 
 <CustomContent platform="tidb">
 
-- [Troubleshoot Hotspot Issues](/troubleshoot-hot-spot-issues.md)
-- [TiDB Dashboard - Key Visualizer Page](/dashboard/dashboard-key-visualizer.md)
+-   [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
+-   [TiDB ダッシュボード - キー ビジュアライザー ページ](/dashboard/dashboard-key-visualizer.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- [Troubleshoot Hotspot Issues](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
-- [TiDB Cloud Key Visualizer Page](/tidb-cloud/tune-performance.md#key-visualizer)
+-   [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)
+-   [TiDB Cloudキー ビジュアライザー ページ](/tidb-cloud/tune-performance.md#key-visualizer)
 
 </CustomContent>

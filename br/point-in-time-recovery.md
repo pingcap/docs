@@ -3,91 +3,91 @@ title: Point-in-Time Recovery
 summary: Learn the design, capabilities, and architecture of Point-in-Time Recovery (PITR).
 ---
 
-# Point-in-Time Recovery
+# ポイントインタイム リカバリ {#point-in-time-recovery}
 
-Point-in-Time Recovery (PITR) allows you to restore a snapshot of a TiDB cluster to a new cluster from any given time point in the past. In v6.2.0, TiDB introduces PITR in [Backup & Restore](/br/backup-and-restore-overview.md) (BR).
+ポイントインタイム リカバリ (PITR) を使用すると、TiDBクラスタのスナップショットを過去の任意の時点から新しいクラスタに復元できます。 v6.2.0 で、TiDB は PITR in [復元する](/br/backup-and-restore-overview.md) (BR) を導入します。
 
-You can use PITR to meet the following business requirements:
+PITR を使用して、次のビジネス要件を満たすことができます。
 
-- Reduce the Recovery Point Objective (RPO) of disaster recovery to less than 20 minutes.
-- Handle the cases of incorrect writes from applications by rolling back data to a time point before the error event.
-- Perform history data auditing to meet the requirements of laws and regulations.
+-   災害復旧の目標復旧時点 (RPO) を 20 分未満に短縮します。
+-   エラー イベントの前の時点にデータをロールバックすることにより、アプリケーションからの誤った書き込みのケースを処理します。
+-   履歴データの監査を実施し、法規制の要件を満たします。
 
-This document introduces the design, capabilities, and architecture of PITR. If you need to learn how to use PITR, refer to [PITR Usage Scenarios](/br/pitr-usage.md).
+このドキュメントでは、PITR の設計、機能、およびアーキテクチャについて紹介します。 PITR の使用方法を学習する必要がある場合は、 [PITR の使用シナリオ](/br/pitr-usage.md)を参照してください。
 
-## Use PITR in your business
+## ビジネスで PITR を使用する {#use-pitr-in-your-business}
 
-[BR](/br/backup-and-restore-overview.md) provides the PITR feature. With BR, you can perform all operations of PITR, including data backup (snapshot backup and log backup), one-click restoration to a specified time point, and backup data management.
+[ブラジル](/br/backup-and-restore-overview.md)は PITR 機能を提供します。 BRでは、データのバックアップ（スナップショットバックアップ、ログバックアップ）、指定時点へのワンクリックリストア、バックアップデータの管理など、PITRのすべての操作を行うことができます。
 
-The following are the procedures of using PITR in your business:
+ビジネスでPITRを使用する手順は次のとおりです。
 
 ![Point-in-Time Recovery](/media/br/pitr-usage.png)
 
-### Back up data
+### バックアップデータ {#back-up-data}
 
-To achieve PITR, you need to perform the following backup tasks:
+PITR を達成するには、次のバックアップ タスクを実行する必要があります。
 
-- Start a log backup task. You can run the `br log start` command to start a log backup task. This task runs in the background of your TiDB cluster and automatically backs up the change log of KV storage to the backup storage.
-- Perform [snapshot (full) backup](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots) regularly. You can run the `br backup full` command to back up the cluster snapshot to the backup storage at a specified time point, for example, 00:00 every day.
+-   ログ バックアップ タスクを開始します。 `br log start`コマンドを実行して、ログ バックアップ タスクを開始できます。このタスクは、TiDBクラスタのバックグラウンドで実行され、KV ストレージの変更ログをバックアップ ストレージに自動的にバックアップします。
+-   [スナップショット (フル) バックアップ](/br/br-usage-backup.md#back-up-tidb-cluster-snapshots)を定期的に実行します。 `br backup full`コマンドを実行して、指定した時点 (毎日 00:00 など) にクラスタスナップショットをバックアップ ストレージにバックアップできます。
 
-### Restore data with one click
+### ワンクリックでデータを復元 {#restore-data-with-one-click}
 
-To restore data using PITR, you need to run the `br restore point` command to execute the restoration program. The program reads data from snapshot backup and log backup and restores the data of the specified time point to a new cluster.
+PITR を使用してデータを復元するには、 `br restore point`コマンドを実行して復元プログラムを実行する必要があります。プログラムは、スナップショット バックアップとログ バックアップからデータを読み取り、指定された時点のデータを新しいクラスタに復元します。
 
-When you run the `br restore point` command, you need to specify the latest snapshot backup data before the time point you want to restore and specify the log backup data. BR first restores the snapshot data, and then reads the log backup data between the snapshot time point and the specified restoration time point.
+`br restore point`コマンドを実行する場合、復元したい時点より前の最新のスナップショット バックアップ データを指定し、ログ バックアップ データを指定する必要があります。 BR は、最初にスナップショット データを復元し、次にスナップショット時点と指定された復元時点の間のログ バックアップ データを読み取ります。
 
-### Manage backup data
+### バックアップ データの管理 {#manage-backup-data}
 
-To manage backup data for PITR, you need to design a backup directory structure to store your backup data and regularly delete outdated or no longer needed backup data.
+PITR のバックアップ データを管理するには、バックアップ データを格納するためのバックアップ ディレクトリ構造を設計し、古くなったバックアップ データや不要になったバックアップ データを定期的に削除する必要があります。
 
-- Organize the backup data in the following structure:
+-   バックアップ データを次の構造で編成します。
 
-    - Store the snapshot backup and log backup in the same directory for unified management. For example, `backup-${cluster-id}`.
-    - Store each snapshot backup in a directory whose name includes the backup date. For example, `backup-${cluster-id}/snapshot-20220512000130`.
-    - Store the log backup in a fixed directory. For example, `backup-${cluster-id}/log-backup`.
+    -   スナップショット バックアップとログ バックアップを同じディレクトリに格納して、一元管理します。たとえば、 `backup-${cluster-id}`です。
+    -   各スナップショット バックアップは、名前にバックアップ日付が含まれるディレクトリに保存します。たとえば、 `backup-${cluster-id}/snapshot-20220512000130`です。
+    -   ログ バックアップを固定ディレクトリに保存します。たとえば、 `backup-${cluster-id}/log-backup`です。
 
-- Delete the outdated or no longer needed backup data:
+-   古くなった、または不要になったバックアップ データを削除します。
 
-    - When you delete the snapshot backup, you can delete the directory of the snapshot backup.
-    - To delete the log backup before a specified time point, run the `br log truncate` command.
+    -   スナップショット バックアップを削除すると、スナップショット バックアップのディレクトリを削除できます。
+    -   指定した時点より前のログ バックアップを削除するには、 `br log truncate`コマンドを実行します。
 
-## Capabilities
+## 機能 {#capabilities}
 
-- PITR log backup has a 5% impact on the cluster.
-- When you back up logs and snapshots at the same time, it has a less than 20% impact on the cluster.
-- On each TiKV node, PITR can restore snapshot data at 280 GB/h and log data at 30 GB/h.
-- With PITR, the RPO of disaster recovery is less than 20 minutes. Depending on the data size to be restored, the Recovery Time Objective (RTO) varies from several minutes to several hours.
-- BR deletes outdated log backup data at a speed of 600 GB/h.
+-   PITR ログ バックアップは、クラスタに 5% の影響を与えます。
+-   ログとスナップショットを同時にバックアップする場合、クラスタへの影響は 20% 未満です。
+-   各 TiKV ノードで、PITR は 280 GB/h でスナップショット データを復元し、30 GB/h でログ データを復元できます。
+-   PITR を使用すると、ディザスタ リカバリの RPO は 20 分未満になります。復元するデータのサイズに応じて、目標復旧時間 (RTO) は数分から数時間まで異なります。
+-   BR は、600 GB/h の速度で古いログ バックアップ データを削除します。
 
-> **Note:**
+> **ノート：**
 >
-> - The preceding functional specification is based on test results from the following two testing scenarios. The actual data may be different.
-> - Snapshot data restoration speed = Snapshot data size / (duration * the number of TiKV nodes)
-> - Log data restoration speed = Restored log data size / (duration * the number of TiKV nodes)
+> -   上記の機能仕様は、次の 2 つのテスト シナリオのテスト結果に基づいています。実際のデータは異なる場合があります。
+> -   スナップショット データの復元速度 = スナップショット データのサイズ / (期間 * TiKV ノードの数)
+> -   ログデータの復元速度 = 復元されたログデータのサイズ / (期間 * TiKV ノードの数)
 
-Testing scenario 1 (on [TiDB Cloud](https://tidbcloud.com)):
+テスト シナリオ 1 ( [TiDB Cloud](https://tidbcloud.com)で):
 
-- The number of TiKV nodes (8 core, 16 GB memory): 21
-- The number of Regions: 183,000
-- New log created in the cluster: 10 GB/h
-- Write (insert/update/delete) QPS: 10,000
+-   TiKV ノード数 (8 コア、16 GB メモリ): 21
+-   リージョン数: 183,000
+-   クラスタで作成された新しいログ: 10 GB/h
+-   書き込み (挿入/更新/削除) QPS: 10,000
 
-Testing scenario 2 (on-premises):
+テスト シナリオ 2 (オンプレミス):
 
-- The number of TiKV nodes (8 core, 64 GB memory): 6
-- The number of Regions: 50,000
-- New log created in the cluster: 10 GB/h
-- Write (insert/update/delete) QPS: 10,000
+-   TiKV ノード数 (8 コア、64 GB メモリ): 6
+-   リージョン数: 50,000
+-   クラスタで作成された新しいログ: 10 GB/h
+-   書き込み (挿入/更新/削除) QPS: 10,000
 
-## Limitations
+## 制限事項 {#limitations}
 
-- A single cluster can only run one log backup task.
-- You can only restore data to an empty cluster. To avoid impact on the services and data of the cluster, do not perform PITR in-place or on a non-empty cluster.
-- You can use Amazon S3 or a shared filesystem (such as NFS) to store the backup data. Currently, GCS and Azure Blob Storage are not supported.
-- You can only perform cluster-level PITR. Database-level and table-level PITR are not supported.
-- You cannot restore data in the user tables or the privilege tables.
-- If the backup cluster has a TiFlash replica, after you perform PITR, the restoration cluster does not contain the data in the TiFlash replica. To restore data from the TiFlash replica, you need to [manually configure the TiFlash replica in the schema or the table](/br/pitr-troubleshoot.md#after-restoring-a-downstream-cluster-using-the-br-restore-point-command-data-cannot-be-accessed-from-tiflash-what-should-i-do).
-- If the upstream database uses TiDB Lightning's physical import mode to import data, the data cannot be backed up in log backup. It is recommended to perform a full backup after the data import. For details, refer to [The upstream database uses TiDB Lightning Physical Mode to import data](/br/pitr-known-issues.md#the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-which-makes-it-impossible-to-use-the-log-backup-feature).
-- During the backup process, do not exchange partition. For details, refer to [Executing the Exchange Partition DDL during PITR recovery](/br/pitr-troubleshoot.md#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-log-restoration).
-- Do not restore the log backup data of a certain time period repeatedly. If you restore the log backup data of a range `[t1=10, t2=20)` repeatedly, the restored data might be inconsistent.
-- For other known limitations, refer to [PITR Known Issues](/br/pitr-known-issues.md).
+-   1 つのクラスタで実行できるログ バックアップ タスクは 1 つだけです。
+-   空のクラスタにのみデータを復元できます。クラスタで実行したりしないでください。
+-   Amazon S3 または共有ファイルシステム (NFS など) を使用して、バックアップ データを保存できます。現在、GCS と Azure Blob Storage はサポートされていません。
+-   クラスター レベルの PITR のみを実行できます。データベース レベルおよびテーブル レベルの PITR はサポートされていません。
+-   ユーザー テーブルまたは権限テーブルのデータを復元することはできません。
+-   バックアップクラスタに TiFlash レプリカがある場合、PITR を実行した後、復元クラスタには TiFlash レプリカのデータが含まれません。 TiFlash レプリカからデータを復元するには、 [スキーマまたはテーブルで TiFlash レプリカを手動で構成する](/br/pitr-troubleshoot.md#after-restoring-a-downstream-cluster-using-the-br-restore-point-command-data-cannot-be-accessed-from-tiflash-what-should-i-do)を実行する必要があります。
+-   アップストリーム データベースが TiDB Lightning の物理インポート モードを使用してデータをインポートする場合、ログ バックアップでデータをバックアップすることはできません。データのインポート後に完全バックアップを実行することをお勧めします。詳細については、 [アップストリーム データベースはTiDB Lightning Physical Mode を使用してデータをインポートします](/br/pitr-known-issues.md#the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-which-makes-it-impossible-to-use-the-log-backup-feature)を参照してください。
+-   バックアップ プロセス中は、パーティションを交換しないでください。詳細については、 [PITR リカバリ中の Exchange パーティション DDL の実行](/br/pitr-troubleshoot.md#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-log-restoration)を参照してください。
+-   一定期間のログバックアップデータを繰り返し復元しないでください。範囲`[t1=10, t2=20)`のログ バックアップ データを繰り返し復元すると、復元されたデータが不整合になる可能性があります。
+-   その他の既知の制限については、 [PITR の既知の問題](/br/pitr-known-issues.md)を参照してください。

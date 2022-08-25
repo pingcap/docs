@@ -3,16 +3,16 @@ title: High Availability FAQs
 summary: Learn about the FAQs related to high availability of TiDB.
 ---
 
-# High Availability FAQs
+# 高可用性に関するよくある質問 {#high-availability-faqs}
 
-This document summarizes the FAQs related to high availability of TiDB.
+このドキュメントは、TiDB の高可用性に関する FAQ をまとめたものです。
 
-## How is TiDB strongly consistent?
+## TiDB の強整合性はどのようになっていますか? {#how-is-tidb-strongly-consistent}
 
-Data is redundantly copied between TiKV nodes using the [Raft consensus algorithm](https://raft.github.io/) to ensure recoverability should a node failure occur.
+[Raftコンセンサスアルゴリズム](https://raft.github.io/)を使用して TiKV ノード間でデータが冗長にコピーされ、ノード障害が発生した場合の回復可能性を確保します。
 
-At the bottom layer, TiKV uses a model of replication log + State Machine to replicate data. For the write requests, the data is written to a Leader and the Leader then replicates the command to its Followers in the form of log. When the majority of nodes in the cluster receive this log, this log is committed and can be applied into the State Machine.
+最下層では、TiKV はレプリケーション ログ + ステート マシンのモデルを使用してデータをレプリケートします。書き込みリクエストの場合、データはリーダーに書き込まれ、リーダーはコマンドをログの形式でフォロワーに複製します。クラスタの大部分のノードがこのログを受信すると、このログがコミットされ、ステート マシンに適用できます。
 
-## What's the recommended solution for the deployment of three geo-distributed data centers?
+## 地理的に分散した 3 つのデータ センターの展開に推奨されるソリューションは何ですか? {#what-s-the-recommended-solution-for-the-deployment-of-three-geo-distributed-data-centers}
 
-The architecture of TiDB guarantees that it fully supports geo-distribution and multi-activeness. Your data and applications are always-on. All the outages are transparent to your applications and your data can recover automatically. The operation depends on the network latency and stability. It is recommended to keep the latency within 5ms. Currently, we already have similar use cases. For details, contact [info@pingcap.com](mailto:info@pingcap.com).
+TiDB のアーキテクチャは、地理的分散とマルチアクティブ性を完全にサポートすることを保証します。データとアプリケーションは常時稼働しています。すべての停止はアプリケーションに対して透過的であり、データは自動的に回復できます。操作は、ネットワークの遅延と安定性に依存します。レイテンシを 5 ミリ秒以内に保つことをお勧めします。現在、すでに同様のユースケースがあります。詳しくは[info@pingcap.com](mailto:info@pingcap.com)までお問い合わせください。

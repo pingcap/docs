@@ -3,104 +3,104 @@ title: Backup & Restore FAQs
 summary: Learn about Frequently Asked Questions (FAQs) and the solutions of BR.
 ---
 
-# Backup & Restore FAQs
+# バックアップと復元に関するよくある質問 {#backup-x26-restore-faqs}
 
-This document lists the frequently asked questions (FAQs) and the solutions about Backup & Restore (BR).
+このドキュメントには、バックアップと復元 (BR) に関するよくある質問 (FAQ) と解決策が記載されています。
 
-## In TiDB v5.4.0 and later versions, when backup tasks are performed on the cluster under high workload, why does the speed of backup tasks become slow?
+## TiDB v5.4.0 以降のバージョンで、ワークロードの高いクラスタでバックアップ タスクを実行すると、バックアップ タスクの速度が遅くなるのはなぜですか? {#in-tidb-v5-4-0-and-later-versions-when-backup-tasks-are-performed-on-the-cluster-under-high-workload-why-does-the-speed-of-backup-tasks-become-slow}
 
-Starting from TiDB v5.4.0, BR introduces the auto-tune feature for backup tasks. For clusters in v5.4.0 or later versions, this feature is enabled by default. When the cluster workload is heavy, the feature limits the resources used by backup tasks to reduce the impact on the online cluster. For more information, refer to [BR Auto-Tune](/br/br-auto-tune.md).
+TiDB v5.4.0 から、BR はバックアップ タスクの自動調整機能を導入します。 v5.4.0 以降のバージョンのクラスターの場合、この機能はデフォルトで有効になっています。クラスタのワークロードが重い場合、この機能はバックアップ タスクで使用されるリソースを制限して、オンラインクラスタへの影響を軽減します。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。
 
-TiKV supports [dynamically configuring](/tikv-control.md#modify-the-tikv-configuration-dynamically) the auto-tune feature. You can enable or disable the feature by the following methods without restarting your cluster:
+TiKV は[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically)自動調整機能をサポートしています。クラスタを再起動せずに、次の方法で機能を有効または無効にすることができます。
 
-- Disable auto-tune: Set the TiKV configuration item [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540) to `false`.
-- Enable auto-tune: Set `backup.enable-auto-tune` to `true`. For clusters upgraded from v5.3.x to v5.4.0 or later versions, the auto-tune feature is disabled by default. You need to manually enable it.
+-   自動調整を無効にする: TiKV 構成項目[`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)から`false`を設定します。
+-   自動調整を有効にする: `backup.enable-auto-tune` ～ `true`を設定します。 v5.3.x から v5.4.0 以降のバージョンにアップグレードされたクラスターの場合、自動調整機能はデフォルトで無効になっています。手動で有効にする必要があります。
 
-To use `tikv-ctl` to enable or disable auto-tune, refer to [Use auto-tune](/br/br-auto-tune.md#use-auto-tune).
+`tikv-ctl`を使用して自動調整を有効または無効にするには、 [自動調整を使用する](/br/br-auto-tune.md#use-auto-tune)を参照してください。
 
-In addition, auto-tune reduces the default number of threads used by backup tasks. For details, see `backup.num-threads`](/tikv-configuration-file.md#num-threads-1). Therefore, on the Grafana Dashboard, the speed, CPU usage, and I/O resource utilization used by backup tasks are lower than those of versions earlier than v5.4.0. Before v5.4.0, the default value of `backup.num-threads` was `CPU * 0.75`, that is, the number of threads used by backup tasks makes up 75% of the logical CPU cores. The maximum value of it was `32`. Starting from v5.4.0, the default value of this configuration item is `CPU * 0.5`, and its maximum value is `8`.
+さらに、自動調整により、バックアップ タスクで使用されるデフォルトのスレッド数が減少します。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップ タスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。 v5.4.0 より前では、デフォルト値の`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップ タスクで使用されるスレッドの数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。 v5.4.0 以降、この構成項目のデフォルト値は`CPU * 0.5`で、最大値は`8`です。
 
-When you perform backup tasks on an offline cluster, to speed up the backup, you can modify the value of `backup.num-threads` to a larger number using `tikv-ctl`.
+オフラインクラスタでバックアップ タスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
-## What should I do if the error message `could not read local://...:download sst failed` is returned during data restoration?
+## データの復元中にエラー メッセージ<code>could not read local://...:download sst failed</code>が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-code-could-not-read-local-download-sst-failed-code-is-returned-during-data-restoration}
 
-When you restore data, each node must have access to **all** backup files (SST files). By default, if `local` storage is used, you cannot restore data because the backup files are scattered among different nodes. Therefore, you have to copy the backup file of each TiKV node to the other TiKV nodes.
+データを復元する場合、各ノードは**すべての**バックアップ ファイル (SST ファイル) にアクセスできる必要があります。デフォルトでは、 `local`のストレージが使用されている場合、バックアップ ファイルが異なるノードに分散しているため、データを復元できません。したがって、各 TiKV ノードのバックアップ ファイルを他の TiKV ノードにコピーする必要があります。
 
-It is recommended that you mount an NFS disk as a backup disk during backup. For details, see [Back up a single table to a network disk](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments).
+バックアップ中は、NFS ディスクをバックアップ ディスクとしてマウントすることをお勧めします。詳細については、 [1 つのテーブルをネットワーク ディスクにバックアップする](/br/backup-and-restore-use-cases.md#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)を参照してください。
 
-## How much impact does a backup operation have on the cluster?
+## バックアップ操作はクラスタにどの程度の影響を与えますか? {#how-much-impact-does-a-backup-operation-have-on-the-cluster}
 
-For TiDB v5.4.0 or later versions, BR not only reduces the default CPU utilization used by backup tasks, but also introduces the [BR Auto-tune](/br/br-auto-tune.md) feature to limit the resources used by backup tasks in the cluster with heavy workloads. Therefore, when you use the default configuration for backup tasks in a v5.4.0 cluster with heavy workloads, the impact of the tasks on the cluster performance is significantly less than that on the clusters earlier than v5.4.0.
+TiDB v5.4.0 以降のバージョンの場合、BR はバックアップ タスクで使用されるデフォルトの CPU 使用率を削減するだけでなく、負荷の高いクラスタのバックアップ タスクで使用されるリソースを制限する[BR オートチューン](/br/br-auto-tune.md)つの機能も導入します。したがって、負荷の高い v5.4.0クラスタでバックアップ タスクのデフォルト構成を使用すると、タスクがクラスタのパフォーマンスに与える影響は、v5.4.0 より前のクラスターよりも大幅に小さくなります。
 
-The following is an internal test on a single node. The test results show that when you use the default configuration of v5.4.0 and v5.3.0 in the **full-speed backup** scenario, the impact of backup using BR on cluster performance is quite different. The detailed test results are as follows:
+以下は、単一ノードでの内部テストです。テスト結果は、**全速バックアップ**シナリオで v5.4.0 と v5.3.0 のデフォルト構成を使用する場合、BR を使用したバックアップがクラスタパフォーマンスに与える影響がまったく異なることを示しています。詳細なテスト結果は次のとおりです。
 
-- When BR uses the default configuration of v5.3.0, the QPS of write-only workload is reduced by 75%.
-- When BR uses the default configuration of v5.4.0, the QPS for the same workload is reduced by 25%. However, when this configuration is used, the duration of backup tasks using BR becomes correspondingly longer. The time required is 1.7 times that of the v5.3.0 configuration.
+-   BR が v5.3.0 のデフォルト構成を使用する場合、書き込み専用ワークロードの QPS は 75% 減少します。
+-   BR が v5.4.0 のデフォルト構成を使用する場合、同じワークロードの QPS は 25% 減少します。ただし、この構成を使用すると、BR を使用したバックアップ タスクの期間がそれに応じて長くなります。所要時間は v5.3.0 構成の 1.7 倍です。
 
-You can use either of the following solutions to manually control the impact of backup tasks on cluster performance. Note that these methods reduce the impact of backup tasks on the cluster, but they also reduce the speed of backup tasks.
+次のいずれかのソリューションを使用して、クラスタのパフォーマンスに対するバックアップ タスクの影響を手動で制御できます。これらの方法は、クラスタに対するバックアップ タスクの影響を軽減しますが、バックアップ タスクの速度も低下させることに注意してください。
 
-- Use the `--ratelimit` parameter to limit the speed of backup tasks. Note that this parameter limits the speed of **saving backup files to external storage**. When calculating the total size of backup files, use the `backup data size(after compressed)` in the backup log as a benchmark.
-- Adjust the TiKV configuration item [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) to limit the number of threads used by backup tasks. When BR uses no more than `8` threads for backup tasks, and the total CPU utilization of the cluster does not exceed 60%, the backup tasks have little impact on the cluster, regardless of the read and write workload.
+-   `--ratelimit`パラメータを使用して、バックアップ タスクの速度を制限します。このパラメータは、**バックアップ ファイルを外部ストレージに保存**する速度を制限することに注意してください。バックアップ ファイルの合計サイズを計算するときは、バックアップ ログの`backup data size(after compressed)`をベンチマークとして使用します。
+-   TiKV 構成項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップ タスクで使用されるスレッドの数を制限します。 BR がバックアップ タスクに`8`以下のスレッドを使用し、クラスタの合計 CPU 使用率が 60% を超えない場合、読み取りおよび書き込みワークロードに関係なく、バックアップ タスクはクラスタにほとんど影響を与えません。
 
-## Does BR back up system tables? During data restoration, do they raise conflicts?
+## BR はシステム テーブルをバックアップしますか?データの復元中に競合が発生しますか? {#does-br-back-up-system-tables-during-data-restoration-do-they-raise-conflicts}
 
-Before v5.1.0, BR filters out data from the system schemas `mysql.*` during the backup. Since v5.1.0, BR **backs up** all data by default, including the system schemas `mysql.*`.
+v5.1.0 より前では、BR はバックアップ中にシステム スキーマ`mysql.*`からデータを除外します。 v5.1.0 以降、BR はデフォルトで、システム スキーマを含むすべてのデータを**バックアップ**します`mysql.*` 。
 
-The technical implementation of restoring the system tables in `mysql.*` is not complete yet, so the tables in the system schema `mysql` are **not restored** by default, which means no conflicts will be raised. For more details, refer to [Restore tables in the `mysql` schema (experimental)](/br/br-usage-restore.md#restore-tables-in-the-mysql-schema).
+`mysql.*`のシステム テーブルを復元する技術的な実装はまだ完了していないため、システム スキーマ`mysql`のテーブルはデフォルトで**は復元されません**。つまり、競合は発生しません。詳細については、 [`mysql`スキーマのテーブルを復元します (実験的)](/br/br-usage-restore.md#restore-tables-in-the-mysql-schema)を参照してください。
 
-## What should I do to handle the `Permission denied` or `No such file or directory` error, even if I have tried to run BR using root in vain?
+## root を使用して BR を実行しようとしても失敗した場合でも、 <code>Permission denied</code>または<code>No such file or directory</code>エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-code-permission-denied-code-or-code-no-such-file-or-directory-code-error-even-if-i-have-tried-to-run-br-using-root-in-vain}
 
-You need to confirm whether TiKV has access to the backup directory. To back up data, confirm whether TiKV has the write permission. To restore data, confirm whether it has the read permission.
+TiKV がバックアップ ディレクトリにアクセスできるかどうかを確認する必要があります。データをバックアップするには、TiKV に書き込み権限があるかどうかを確認します。データを復元するには、読み取り権限があるかどうかを確認してください。
 
-During the backup operation, if the storage medium is the local disk or a network file system (NFS), make sure that the user to start BR and the user to start TiKV are consistent (if BR and TiKV are on different machines, the users' UIDs must be consistent). Otherwise, the `Permission denied` issue might occur.
+バックアップ操作中、ストレージ メディアがローカル ディスクまたはネットワーク ファイル システム (NFS) の場合、BR を起動するユーザーと TiKV を起動するユーザーが一致していることを確認します (BR と TiKV が異なるマシン上にある場合、ユーザーは&#39; UID は一貫している必要があります)。そうしないと、 `Permission denied`の問題が発生する可能性があります。
 
-Running BR with the root access might fail due to the disk permission, because the backup files (SST files) are saved by TiKV.
+バックアップ ファイル (SST ファイル) は TiKV によって保存されるため、root アクセスで BR を実行すると、ディスクのアクセス許可が原因で失敗する場合があります。
 
-> **Note:**
+> **ノート：**
 >
-> You might encounter the same problem during data restoration. When the SST files are read for the first time, the read permission is verified. The execution duration of DDL suggests that there might be a long interval between checking the permission and running BR. You might receive the error message `Permission denied` after waiting for a long time.
+> データの復元中に同じ問題が発生する可能性があります。 SST ファイルが初めて読み取られるときに、読み取り許可が検証されます。 DDL の実行時間は、権限のチェックと BR の実行の間に長い間隔がある可能性があることを示唆しています。長時間待機すると、エラー メッセージ`Permission denied`が表示される場合があります。
 >
-> Therefore, it is recommended to check the permission before data restore according to the following steps:
+> したがって、次の手順に従って、データを復元する前に権限を確認することをお勧めします。
 
-1. Run the Linux-native command for process query:
+1.  プロセス クエリの Linux ネイティブ コマンドを実行します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     ps aux | grep tikv-server
     ```
 
-    The output of the above command:
+    上記のコマンドの出力:
 
     ```shell
     tidb_ouo  9235 10.9  3.8 2019248 622776 ?      Ssl  08:28   1:12 bin/tikv-server --addr 0.0.0.0:20162 --advertise-addr 172.16.6.118:20162 --status-addr 0.0.0.0:20188 --advertise-status-addr 172.16.6.118:20188 --pd 172.16.6.118:2379 --data-dir /home/user1/tidb-data/tikv-20162 --config conf/tikv.toml --log-file /home/user1/tidb-deploy/tikv-20162/log/tikv.log
     tidb_ouo  9236  9.8  3.8 2048940 631136 ?      Ssl  08:28   1:05 bin/tikv-server --addr 0.0.0.0:20161 --advertise-addr 172.16.6.118:20161 --status-addr 0.0.0.0:20189 --advertise-status-addr 172.16.6.118:20189 --pd 172.16.6.118:2379 --data-dir /home/user1/tidb-data/tikv-20161 --config conf/tikv.toml --log-file /home/user1/tidb-deploy/tikv-20161/log/tikv.log
     ```
 
-    Or you can run the following command:
+    または、次のコマンドを実行できます。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     ps aux | grep tikv-server | awk '{print $1}'
     ```
 
-    The output of the above command:
+    上記のコマンドの出力:
 
     ```shell
     tidb_ouo
     tidb_ouo
     ```
 
-2. Query the startup information of the cluster using the TiUP command:
+2.  TiUP コマンドを使用して、クラスタの起動情報を照会します。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     tiup cluster list
     ```
 
-    The output of the above command:
+    上記のコマンドの出力:
 
     ```shell
     [root@Copy-of-VM-EE-CentOS76-v1 br]# tiup cluster list
@@ -110,15 +110,15 @@ Running BR with the root access might fail due to the disk permission, because t
     tidb_cluster  tidb_ouo  v5.0.2   /root/.tiup/storage/cluster/clusters/tidb_cluster  /root/.tiup/storage/cluster/clusters/tidb_cluster/ssh/id_rsa
     ```
 
-3. Check the permission for the backup directory. For example, `backup` is for backup data storage:
+3.  バックアップディレクトリの権限を確認してください。たとえば、 `backup`はバックアップ データ ストレージ用です。
 
-    {{< copyable "shell-regular" >}}
+    {{< copyable "" >}}
 
     ```bash
     ls -al backup
     ```
 
-    The output of the above command:
+    上記のコマンドの出力:
 
     ```shell
     [root@Copy-of-VM-EE-CentOS76-v1 user1]# ls -al backup
@@ -127,110 +127,110 @@ Running BR with the root access might fail due to the disk permission, because t
     drwxr-xr-x 11 root root 310 Jul  4 10:35 ..
     ```
 
-    From the above output, you can find that the `tikv-server` instance is started by the user `tidb_ouo`. But the user `tidb_ouo` does not have the write permission for `backup`. Therefore, the backup fails.
+    上記の出力から、 `tikv-server`インスタンスがユーザー`tidb_ouo`によって開始されていることがわかります。しかし、ユーザー`tidb_ouo`には`backup`に対する書き込み権限がありません。したがって、バックアップは失敗します。
 
-## What should I do to handle the `Io(Os...)` error?
+## <code>Io(Os...)</code>エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-code-io-os-code-error}
 
-Almost all of these problems are system call errors that occur when TiKV writes data to the disk, for example, `Io(Os {code: 13, kind: PermissionDenied...})` or `Io(Os {code: 2, kind: NotFound...})`.
+これらの問題のほとんどは、TiKV がディスクにデータを書き込むときに発生するシステム コール エラーです (例: `Io(Os {code: 13, kind: PermissionDenied...})`または`Io(Os {code: 2, kind: NotFound...})` )。
 
-To address such problems, first check the mounting method and the file system of the backup directory, and try to back up data to another folder or another hard disk.
+このような問題を解決するには、まずバックアップ ディレクトリのマウント方法とファイル システムを確認し、別のフォルダまたは別のハードディスクにデータをバックアップしてみてください。
 
-For example, you might encounter the `Code: 22(invalid argument)` error when backing up data to the network disk built by `samba`.
+たとえば、 `samba`によって構築されたネットワーク ディスクにデータをバックアップするときに、 `Code: 22(invalid argument)`エラーが発生する場合があります。
 
-## What should I do to handle the `rpc error: code = Unavailable desc =...` error occurred in BR?
+## <code>rpc error: code = Unavailable desc =...</code> BR でエラーが発生しましたか? {#what-should-i-do-to-handle-the-code-rpc-error-code-unavailable-desc-code-error-occurred-in-br}
 
-This error might occur when the capacity of the cluster to restore (using BR) is insufficient. You can further confirm the cause by checking the monitoring metrics of this cluster or the TiKV log.
+このエラーは、リストア (BR を使用) するクラスタの容量が不足している場合に発生する可能性があります。このクラスタの監視メトリクスまたは TiKV ログを確認することで、原因をさらに確認できます。
 
-To handle this issue, you can try to scale out the cluster resources, reduce the concurrency during restoration, and enable the `RATE_LIMIT` option.
+この問題を処理するには、クラスタリソースをスケールアウトし、復元中の同時実行数を減らして、 `RATE_LIMIT`オプションを有効にします。
 
-## Where are the backed up files stored when I use `local` storage?
+## <code>local</code>ストレージを使用する場合、バックアップ ファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-code-local-code-storage}
 
-When you use `local` storage, `backupmeta` is generated on the node where BR is running, and backup files are generated on the Leader nodes of each Region.
+`local`のストレージを使用すると、BR が実行されているノードに`backupmeta`が生成され、各リージョンのリーダー ノードにバックアップ ファイルが生成されます。
 
-## How about the size of the backup data? Are there replicas of the backup?
+## バックアップデータのサイズはどうですか？バックアップのレプリカはありますか? {#how-about-the-size-of-the-backup-data-are-there-replicas-of-the-backup}
 
-During data backup, backup files are generated on the Leader nodes of each Region. The size of the backup is equal to the data size, with no redundant replicas. Therefore, the total data size is approximately the total number of TiKV data divided by the number of replicas.
+データのバックアップ中に、各リージョンのリーダー ノードでバックアップ ファイルが生成されます。バックアップのサイズはデータ サイズと同じで、冗長レプリカはありません。したがって、データの合計サイズは、ほぼ TiKV データの合計数をレプリカの数で割ったものになります。
 
-However, if you want to restore data from local storage, the number of replicas is equal to that of the TiKV nodes, because each TiKV must have access to all backup files.
+ただし、ローカル ストレージからデータを復元する場合は、各 TiKV がすべてのバックアップ ファイルにアクセスできる必要があるため、レプリカの数は TiKV ノードの数と同じになります。
 
-## What should I do when BR restores data to the upstream cluster of TiCDC/Drainer?
+## BR が TiCDC/ Drainerの上流クラスタにデータを復元する場合、どうすればよいですか? {#what-should-i-do-when-br-restores-data-to-the-upstream-cluster-of-ticdc-drainer}
 
-+ **The data restored using BR cannot be replicated to the downstream**. This is because BR directly imports SST files but the downstream cluster currently cannot obtain these files from the upstream.
+-   **BR を使用して復元されたデータは、ダウンストリームに複製できません**。これは、BR は SST ファイルを直接インポートしますが、現在、ダウンストリームクラスタはこれらのファイルをアップストリームから取得できないためです。
 
-+ Before v4.0.3, DDL jobs generated during the BR restore might cause unexpected DDL executions in TiCDC/Drainer. Therefore, if you need to perform restore on the upstream cluster of TiCDC/Drainer, add all tables restored using BR to the TiCDC/Drainer block list.
+-   v4.0.3 より前では、BR 復元中に生成された DDL ジョブにより、TiCDC/ Drainerで予期しない DDL が実行される場合がありました。したがって、TiCDC/ Drainer の上流クラスタで復元を実行する必要がある場合は、BR を使用して復元されたすべてのテーブルをDrainer / Drainerブロック リストに追加します。
 
-You can use [`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16) to configure the block list for TiCDC and use [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table) to configure the block list for Drainer.
+[`filter.rules`](https://github.com/pingcap/tiflow/blob/7c3c2336f98153326912f3cf6ea2fbb7bcc4a20c/cmd/changefeed.toml#L16)を使用して TiCDC のブロック リストを構成し、 [`syncer.ignore-table`](/tidb-binlog/tidb-binlog-configuration-file.md#ignore-table)を使用してDrainerのブロック リストを構成できます。
 
-## Does BR back up the `SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS` information of a table? Does the restored table have multiple Regions?
+## BR は、テーブルの<code>SHARD_ROW_ID_BITS</code>および<code>PRE_SPLIT_REGIONS</code>情報をバックアップしますか?復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-code-shard-row-id-bits-code-and-code-pre-split-regions-code-information-of-a-table-does-the-restored-table-have-multiple-regions}
 
-Yes. BR backs up the [`SHARD_ROW_ID_BITS` and `PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions) information of a table. The data of the restored table is also split into multiple Regions.
+はい。 BR は、テーブルの[`SHARD_ROW_ID_BITS`および<code>PRE_SPLIT_REGIONS</code>](/sql-statements/sql-statement-split-region.md#pre_split_regions)の情報をバックアップします。復元されたテーブルのデータも複数のリージョンに分割されます。
 
-## What should I do if the restore fails with the error message `the entry too large, the max entry size is 6291456, the size of data is 7690800`?
+## <code>the entry too large, the max entry size is 6291456, the size of data is 7690800</code>というエラー メッセージで復元が失敗した場合はどうすればよいですか? {#what-should-i-do-if-the-restore-fails-with-the-error-message-code-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800-code}
 
-You can try to reduce the number of tables to be created in a batch by setting `--ddl-batch-size` to `128` or a smaller value.
+`--ddl-batch-size` ～ `128`以下の値を設定することで、一度に作成するテーブルの数を減らすことができます。
 
-When using BR to restore the backup data with the value of [`--ddl-batch-size`](/br/br-batch-create-table.md#how to use) greater than `1`, TiDB writes a DDL job of table creation to the DDL jobs queue that is maintained by TiKV. At this time, the total size of all tables schema sent by TiDB at one time should not exceed 6 MB, because the maximum value of job messages is `6 MB` by default (it is **not recommended** to modify this value. For details, see [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50) and [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)). Therefore, if you set `--ddl-batch-size` to an excessively large value, the schema size of the tables sent by TiDB in a batch at one time exceeds the specified value, which causes BR to report the `entry too large, the max entry size is 6291456, the size of data is 7690800` error.
+BR を使用して [ `--ddl-batch-size` ](/br/br-batch-create-table.md#how to use) の値が`1`より大きいバックアップ データを復元する場合、TiDB はテーブル作成の DDL ジョブを DDL ジョブ キューに書き込みます。これは TiKV によって維持されます。現時点では、TiDB が一度に送信するすべてのテーブル スキーマの合計サイズは 6 MB を超えてはなりません。これは、ジョブ メッセージの最大値がデフォルトで`6 MB`であるためです (この値を変更することは**お勧め**しません。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v50)および を参照してください)。 [`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size) ）。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB によって一度にバッチで送信されるテーブルのスキーマ サイズが指定された値を超えるため、BR は`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
 
-## Why is the `region is unavailable` error reported for a SQL query after I use BR to restore the backup data?
+## BR を使用してバックアップ データを復元した後、SQL クエリで the <code>region is unavailable</code>エラーが報告されるのはなぜですか? {#why-is-the-code-region-is-unavailable-code-error-reported-for-a-sql-query-after-i-use-br-to-restore-the-backup-data}
 
-If the cluster backed up using BR has TiFlash, `TableInfo` stores the TiFlash information when BR restores the backup data. If the cluster to be restored does not have TiFlash, the `region is unavailable` error is reported.
+BR を使用してバックアップされたクラスタに TiFlash がある場合、 `TableInfo`は BR がバックアップ データを復元するときに TiFlash 情報を格納します。復元するクラスタに TiFlash がない場合、 `region is unavailable`エラーが報告されます。
 
-## Does BR support in-place full restoration of some historical backup?
+## BR は、一部の履歴バックアップのインプレース完全復元をサポートしていますか? {#does-br-support-in-place-full-restoration-of-some-historical-backup}
 
-No. BR does not support in-place full restoration of some historical backup.
+いいえ。BR は、一部の履歴バックアップのインプレース完全復元をサポートしていません。
 
-## How can I use BR for incremental backup in the Kubernetes environment?
+## Kubernetes 環境で増分バックアップに BR を使用するにはどうすればよいですか? {#how-can-i-use-br-for-incremental-backup-in-the-kubernetes-environment}
 
-To get the `commitTs` field of the last BR backup, run the `kubectl -n ${namespace} get bk ${name}` command using kubectl. You can use the content of this field as `--lastbackupts`.
+最後の BR バックアップの`commitTs`フィールドを取得するには、kubectl を使用して`kubectl -n ${namespace} get bk ${name}`コマンドを実行します。このフィールドの内容を`--lastbackupts`として使用できます。
 
-## How can I convert BR backupTS to Unix time?
+## BR backupTS を Unix 時間に変換するにはどうすればよいですか? {#how-can-i-convert-br-backupts-to-unix-time}
 
-BR `backupTS` defaults to the latest timestamp obtained from PD before the backup starts. You can use `pd-ctl tso timestamp` to parse the timestamp to obtain an accurate value, or use `backupTS >> 18` to quickly obtain an estimated value.
+BR `backupTS`のデフォルトは、バックアップ開始前に PD から取得した最新のタイムスタンプです。 `pd-ctl tso timestamp`を使用してタイムスタンプを解析して正確な値を取得するか、 `backupTS >> 18`を使用して推定値をすばやく取得できます。
 
-## After BR restores the backup data, do I need to execute the `ANALYZE` statement on the table to update the statistics of TiDB on the tables and indexes?
+## BR がバックアップ データを復元した後、テーブルとインデックスの TiDB の統計を更新するためにテーブルで<code>ANALYZE</code>ステートメントを実行する必要がありますか? {#after-br-restores-the-backup-data-do-i-need-to-execute-the-code-analyze-code-statement-on-the-table-to-update-the-statistics-of-tidb-on-the-tables-and-indexes}
 
-BR does not back up statistics (except in v4.0.9). Therefore, after restoring the backup data, you need to manually execute `ANALYZE TABLE` or wait for TiDB to automatically execute `ANALYZE`.
+BR は統計をバックアップしません (v4.0.9 を除く)。したがって、バックアップデータを復元した後、手動で実行するか`ANALYZE TABLE` 、または TiDB が自動的に実行されるのを待つ必要があります`ANALYZE` 。
 
-In v4.0.9, BR backs up statistics by default, which consumes too much memory. To ensure that the backup process goes well, the backup for statistics is disabled by default starting from v4.0.10.
+v4.0.9 では、BR はデフォルトで統計をバックアップしますが、これは大量のメモリを消費します。バックアップ プロセスが正常に行われるようにするため、v4.0.10 以降、統計のバックアップはデフォルトで無効になっています。
 
-If you do not execute `ANALYZE` on the table, TiDB will fail to select the optimized execution plan due to inaccurate statistics. If query performance is not a key concern, you can ignore `ANALYZE`.
+テーブルで`ANALYZE`を実行しない場合、TiDB は不正確な統計のために最適化された実行計画を選択できません。クエリのパフォーマンスが重要な問題でない場合は、 `ANALYZE`を無視できます。
 
-## Can I use multiple BR processes at the same time to restore the data of a single cluster?
+## 複数の BR プロセスを同時に使用して、1 つのクラスタのデータを復元できますか? {#can-i-use-multiple-br-processes-at-the-same-time-to-restore-the-data-of-a-single-cluster}
 
-**It is strongly not recommended** to use multiple BR processes at the same time to restore the data of a single cluster for the following reasons:
+次の理由により、複数の BR プロセスを同時に使用して 1 つのクラスタのデータを復元する**ことは強くお勧め**しません。
 
-+ When BR restores data, it modifies some global configurations of PD. Therefore, if you use multiple BR processes for data restore at the same time, these configurations might be mistakenly overwritten and cause abnormal cluster status.
-+ BR consumes a lot of cluster resources to restore data, so in fact, running BR processes in parallel improves the restore speed only to a limited extent.
-+ There has been no test for running multiple BR processes in parallel for data restore, so it is not guaranteed to succeed.
+-   BR がデータを復元すると、PD の一部のグローバル構成が変更されます。そのため、複数の BR プロセスを同時にデータ復元に使用すると、これらの構成が誤って上書きされ、クラスタ状態が異常になる可能性があります。
+-   BR はデータを復元するために多くのクラスタリソースを消費するため、実際には、BR プロセスを並行して実行しても、復元速度は限られた範囲でしか改善されません。
+-   データ復元のために複数の BR プロセスを並行して実行するテストは行われていないため、成功することは保証されていません。
 
-## What should I do if the backup log reports `key locked Error`?
+## バックアップ ログで<code>key locked Error</code>が報告された場合はどうすればよいですか? {#what-should-i-do-if-the-backup-log-reports-code-key-locked-error-code}
 
-Error message in the log: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
+ログのエラー メッセージ: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
 
-If a key is locked during the backup process, BR tries to resolve the lock. If this error occurs only occasionally, the correctness of the backup is not affected.
+バックアップ プロセス中にキーがロックされている場合、BR はロックの解決を試みます。このエラーがたまにしか発生しない場合は、バックアップの正確性に影響はありません。
 
-## What should I do if a backup operation fails?
+## バックアップ操作が失敗した場合はどうすればよいですか? {#what-should-i-do-if-a-backup-operation-fails}
 
-Error message in the log: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
+ログのエラー メッセージ: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
 
-If a backup operation fails and the preceding message occurs, perform one of the following operations and then start the backup again:
+バックアップ操作が失敗し、前述のメッセージが表示された場合は、次のいずれかの操作を実行してから、バックアップを再度開始します。
 
-- Change the directory for the backup. For example, change `/dir/backup_local/` to `/dir/backup-2020-01-01/`.
-- Delete the backup directories of all TiKV nodes and BR nodes.
+-   バックアップのディレクトリを変更します。たとえば、 `/dir/backup_local/`を`/dir/backup-2020-01-01/`に変更します。
+-   すべての TiKV ノードと BR ノードのバックアップ ディレクトリを削除します。
 
-## What should I do if the disk usage shown on the monitoring node is inconsistent after BR backup or restoration?
+## BR バックアップまたは復元後に、監視ノードに表示されるディスク使用量が一貫していない場合はどうすればよいですか? {#what-should-i-do-if-the-disk-usage-shown-on-the-monitoring-node-is-inconsistent-after-br-backup-or-restoration}
 
-This inconsistency is caused by the fact that the data compression rate used in backup is different from the default rate used in restoration. If the checksum succeeds, you can ignore this issue.
+この不一致は、バックアップで使用されるデータ圧縮率が、復元で使用されるデフォルトの圧縮率と異なることが原因で発生します。チェックサムが成功した場合、この問題は無視できます。
 
-## Why does an error occur when I restore placement rules to a cluster?
+## 配置ルールをクラスタに復元するとエラーが発生するのはなぜですか? {#why-does-an-error-occur-when-i-restore-placement-rules-to-a-cluster}
 
-Before v6.0.0, BR does not support [placement rules](/placement-rules-in-sql.md). Starting from v6.0.0, BR supports placement rules and introduces a command-line option `--with-tidb-placement-mode=strict/ignore` to control the backup and restore mode of placement rules. With the default value `strict`, BR imports and validates placement rules, but ignores all placement rules when the value is `ignore`.
+v6.0.0 より前では、BR は[配置ルール](/placement-rules-in-sql.md)をサポートしていません。 v6.0.0 以降、BR は配置ルールをサポートし、コマンドライン オプション`--with-tidb-placement-mode=strict/ignore`を導入して、配置ルールのバックアップおよび復元モードを制御します。デフォルト値`strict`では、BR は配置ルールをインポートして検証しますが、値が`ignore`の場合はすべての配置ルールを無視します。
 
-## Why does BR report `new_collations_enabled_on_first_bootstrap` mismatch?
+## BR が<code>new_collations_enabled_on_first_bootstrap</code>不一致を報告するのはなぜですか? {#why-does-br-report-code-new-collations-enabled-on-first-bootstrap-code-mismatch}
 
-Since TiDB v6.0.0, the default value of [`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap) has changed from `false` to `true`. BR backs up the `new_collations_enabled_on_first_bootstrap` configuration of the upstream cluster and then checks whether the value of this configuration is consistent between the upstream and downstream clusters. If the value is consistent, BR safely restores the data backed up in the upstream cluster to the downstream cluster. If the value is inconsistent, BR does not perform the data restore and reports an error.
+TiDB v6.0.0 以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が`false`から`true`に変更されました。 BR は上流クラスタの`new_collations_enabled_on_first_bootstrap`構成をバックアップし、この構成の値が上流クラスタと下流クラスタの間で一致しているかどうかを確認します。値が一致していれば、BR は上流のクラスタにバックアップされたデータを下流のクラスタに安全に復元します。値が一致しない場合、BR はデータの復元を実行せず、エラーを報告します。
 
-Suppose that you have backed up the data in a TiDB cluster of an earlier version of v6.0.0, and you want to restore this data to a TiDB cluster of v6.0.0 or later versions. In this situation, you need to manually check whether the value of `new_collations_enabled_on_first_bootstrap` is consistent between the upstream and downstream clusters:
+v6.0.0 の以前のバージョンの TiDBクラスタのデータをバックアップしており、このデータを v6.0.0 以降のバージョンの TiDBクラスタに復元するとします。この状況では、 `new_collations_enabled_on_first_bootstrap`の値がアップストリーム クラスターとダウンストリーム クラスター間で一貫しているかどうかを手動で確認する必要があります。
 
-- If the value is consistent, you can add `--check-requirements=false` to the restoration command to skip this configuration check.
-- If the value is inconsistent, and you forcibly perform the restoration, BR reports a data validation error.
+-   値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
+-   値に矛盾があり、強制的に復元を実行すると、BR はデータ検証エラーを報告します。

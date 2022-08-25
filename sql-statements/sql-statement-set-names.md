@@ -3,41 +3,41 @@ title: SET [NAMES|CHARACTER SET] |  TiDB SQL Statement Reference
 summary: An overview of the usage of SET [NAMES|CHARACTER SET] for the TiDB database.
 ---
 
-# SET [NAMES|CHARACTER SET]
+# [名前|キャラクターセット]を設定 {#set-names-character-set}
 
-The statements `SET NAMES`, `SET CHARACTER SET` and `SET CHARSET` modify the variables `character_set_client`, `character_set_results` and `character_set_connection` for the current connection.
+ステートメント`SET NAMES` 、 `SET CHARACTER SET` 、および`SET CHARSET`は、現在の接続の変数`character_set_client` 、 `character_set_results` 、および`character_set_connection`を変更します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **SetNamesStmt:**
 
 ![SetNamesStmt](/media/sqlgram/SetNamesStmt.png)
 
-**VariableAssignmentList:**
+**変数割り当てリスト:**
 
 ![VariableAssignmentList](/media/sqlgram/VariableAssignmentList.png)
 
-**VariableAssignment:**
+**変数割り当て:**
 
 ![VariableAssignment](/media/sqlgram/VariableAssignment.png)
 
-**CharsetName:**
+**文字セット名:**
 
 ![CharsetName](/media/sqlgram/CharsetName.png)
 
-**StringName:**
+**文字列名:**
 
 ![StringName](/media/sqlgram/StringName.png)
 
-**CharsetKw:**
+**文字セットKw:**
 
 ![CharsetKw](/media/sqlgram/CharsetKw.png)
 
-**CharsetNameOrDefault:**
+**文字セット名またはデフォルト:**
 
 ![CharsetNameOrDefault](/media/sqlgram/CharsetNameOrDefault.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SHOW VARIABLES LIKE 'character_set%';
@@ -92,12 +92,12 @@ mysql> SHOW VARIABLES LIKE 'character_set%';
 8 rows in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [SHOW \[GLOBAL|SESSION\] VARIABLES](/sql-statements/sql-statement-show-variables.md)
-* [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)
-* [Character Set and Collation Support](/character-set-and-collation.md)
+-   [[グローバル|セッション]変数を表示](/sql-statements/sql-statement-show-variables.md)
+-   [`SET &#x3C;variable>`](/sql-statements/sql-statement-set-variable.md)
+-   [文字セットと照合のサポート](/character-set-and-collation.md)

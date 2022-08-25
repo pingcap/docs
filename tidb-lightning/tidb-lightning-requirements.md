@@ -3,118 +3,54 @@ title: Prerequisites for using TiDB Lightning
 summary: Learn prerequisites for running TiDB Lightning.
 ---
 
-# Prerequisites for using TiDB Lightning
+# TiDB Lightningを使用するための前提条件 {#prerequisites-for-using-tidb-lightning}
 
-Before using TiDB Lightning, you need to check whether the environment meets the requirements. This helps reduce errors during import and ensures import success.
+TiDB Lightningを使用する前に、環境が要件を満たしているかどうかを確認する必要があります。これにより、インポート中のエラーを減らし、インポートを確実に成功させることができます。
 
-## Downstream privilege requirements
+## ダウンストリーム権限の要件 {#downstream-privilege-requirements}
 
-Based on the import mode and features enabled, downstream database users should be granted with different privileges. The following table provides a reference.
+インポート モードと有効な機能に基づいて、ダウンストリーム データベース ユーザーに異なる権限を付与する必要があります。次の表に参考情報を示します。
 
-<table border="1">
-   <tr>
-      <td></td>
-      <td>Feature</td>
-      <td>Scope</td>
-      <td>Required privilege</td>
-      <td>Remarks</td>
-   </tr>
-   <tr>
-      <td rowspan="2">Mandatory</td>
-      <td rowspan="2">Basic functions</td>
-      <td>Target table</td>
-      <td>CREATE, SELECT, INSERT, UPDATE, DELETE, DROP, ALTER</td>
-      <td>DROP is required only when tidb-lightning-ctl runs the checkpoint-destroy-all command</td>
-   </tr>
-   <tr>
-      <td>Target database</td>
-      <td>CREATE</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td rowspan="4">Mandatory</td>
-      <td>tidb-backend</td>
-      <td>information_schema.columns</td>
-      <td>SELECT</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td  rowspan="3">local-backend</td>
-      <td>mysql.tidb</td>
-      <td>SELECT</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>-</td>
-      <td>SUPER</td>
-      <td></td>
-   </tr>
-   <tr>
-      <td>-</td>
-      <td>RESTRICTED_VARIABLES_ADMIN,RESTRICTED_TABLES_ADMIN</td>
-      <td>Required when the target TiDB enables SEM</td>
-   </tr>
-   <tr>
-      <td>Recommended</td>
-      <td>Conflict detection, max-error</td>
-      <td>Schema configured for lightning.task-info-schema-name</td>
-      <td>SELECT, INSERT, UPDATE, DELETE, CREATE, DROP</td>
-      <td>If not required, the value must be set to ""</td>
-   </tr>
-   <tr>
-      <td>Optional</td>
-      <td>Parallel import</td>
-      <td>Schema configured for lightning.meta-schema-name</td>
-      <td>SELECT, INSERT, UPDATE, DELETE, CREATE, DROP</td>
-      <td>If not required, the value must be set to ""</td>
-   </tr>
-   <tr>
-      <td>Optional</td>
-      <td>checkpoint.driver = "mysql"</td>
-      <td>checkpoint.schema setting</td>
-      <td>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP</td>
-      <td>Required when checkpoint information is stored in databases, instead of files</td>
-   </tr>
-</table>
+<table border="1"><tr><td></td><td>特徴</td><td>範囲</td><td>必要な権限</td><td>備考</td></tr><tr><td rowspan="2">必須</td><td rowspan="2">基本関数</td><td>対象表</td><td>作成、選択、挿入、更新、削除、削除、変更</td><td>DROP は、tidb-lightning-ctl が checkpoint-destroy-all コマンドを実行する場合にのみ必要です。</td></tr><tr><td>対象データベース</td><td>作成</td><td></td></tr><tr><td rowspan="4">必須</td><td>tidb バックエンド</td><td>information_schema.columns</td><td>選択する</td><td></td></tr><tr><td  rowspan="3">ローカル バックエンド</td><td>mysql.tidb</td><td>選択する</td><td></td></tr><tr><td>-</td><td>素晴らしい</td><td></td></tr><tr><td>-</td><td> RESTRICTED_VARIABLES_ADMIN、RESTRICTED_TABLES_ADMIN</td><td>対象の TiDB で SEM が有効になっている場合に必要</td></tr><tr><td>おすすめされた</td><td>競合検出、最大エラー</td><td>lightning.task-info-schema-name 用に設定されたスキーマ</td><td>選択、挿入、更新、削除、作成、削除</td><td>必要ない場合は、値を &quot;&quot; に設定する必要があります。</td></tr><tr><td>オプション</td><td>並行輸入</td><td>lightning.meta-schema-name 用に構成されたスキーマ</td><td>選択、挿入、更新、削除、作成、削除</td><td>必要ない場合は、値を &quot;&quot; に設定する必要があります。</td></tr><tr><td>オプション</td><td>checkpoint.driver = &quot;mysql&quot;</td><td> checkpoint.schema 設定</td><td>選択、挿入、更新、削除、作成、削除</td><td>チェックポイント情報がファイルではなくデータベースに格納されている場合に必要</td></tr></table>
 
-## Downstream storage space requirements
+## ダウンストリームのストレージ容量要件 {#downstream-storage-space-requirements}
 
-The target TiKV cluster must have enough disk space to store the imported data. In addition to the [standard hardware requirements](/hardware-and-software-requirements.md), the storage space of the target TiKV cluster must be larger than **the size of the data source x the number of replicas x 2**. For example, if the cluster uses 3 replicas by default, the target TiKV cluster must have a storage space larger than 6 times the size of the data source. The formula has x 2 because:
+ターゲットの TiKVクラスタには、インポートされたデータを保存するのに十分なディスク容量が必要です。 [標準のハードウェア要件](/hardware-and-software-requirements.md)に加えて、ターゲット TiKVクラスタのストレージ容量は**、データ ソースのサイズ x レプリカの数 x 2**より大きくなければなりません。たとえば、クラスタがデフォルトで 3 つのレプリカを使用する場合、ターゲット TiKVクラスタには、データ ソースのサイズの 6 倍を超えるストレージ スペースが必要です。次の理由により、式には x 2 があります。
 
-- Indexes might take extra space.
-- RocksDB has a space amplification effect.
+-   インデックスは余分なスペースを必要とする場合があります。
+-   RocksDB には空間増幅効果があります。
 
-It is difficult to calculate the exact data volume exported by Dumpling from MySQL. However, you can estimate the data volume by using the following SQL statement to summarize the data-length field in the information_schema.tables table:
+Dumplingによって MySQL からエクスポートされた正確なデータ量を計算することは困難です。ただし、次の SQL ステートメントを使用して information_schema.tables テーブルのデータ長フィールドを要約することにより、データ量を見積もることができます。
 
-Calculate the size of all schemas, in MiB. Replace ${schema_name} with your schema name.
+すべてのスキーマのサイズを MiB で計算します。 ${schema_name} をスキーマ名に置き換えます。
 
 ```sql
 SELECT table_schema, SUM(data_length)/1024/1024 AS data_length, SUM(index_length)/1024/1024 AS index_length, SUM(data_length+index_length)/1024/1024 AS sum FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_schema;
 ```
 
-Calculate the size of the largest table, in MiB. Replace ${schema_name} with your schema name.
+最大テーブルのサイズを MiB で計算します。 ${schema_name} をスキーマ名に置き換えます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 SELECT table_name, table_schema, SUM(data_length)/1024/1024 AS data_length, SUM(index_length)/1024/1024 AS index_length,sum(data_length+index_length)/1024/1024 AS sum FROM information_schema.tables WHERE table_schema = "${schema_name}" GROUP BY table_name,table_schema ORDER BY sum DESC LIMIT 5;
 ```
 
-## Resource requirements
+## リソース要件 {#resource-requirements}
 
-**Operating system**: The example in this document uses fresh CentOS 7 instances. You can deploy a virtual machine either on your local host or in the cloud. Because TiDB Lightning consumes as much CPU resources as needed by default, it is recommended that you deploy it on a dedicated server. If this is not possible, you can deploy it on a single server together with other TiDB components (for example, tikv-server) and then configure `region-concurrency` to limit the CPU usage from TiDB Lightning. Usually, you can configure the size to 75% of the logical CPU.
+**オペレーティング システム**: このドキュメントの例では、新しい CentOS 7 インスタンスを使用しています。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。 TiDB Lightningはデフォルトで必要なだけ多くの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。これが不可能な場合は、他の TiDB コンポーネント (tikv-server など) と共に単一のサーバーにデプロイし、 TiDB Lightningからの CPU 使用を制限するように`region-concurrency`を構成できます。通常、サイズは論理 CPU の 75% に設定できます。
 
-**Memory and CPU**:
+**メモリと CPU** :
 
-The CPU and memory consumed by TiDB Lightning vary with the backend mode. Run TiDB Lightning in an environment that supports the optimal import performance based on the backend you use.
+TiDB Lightningが消費する CPU とメモリは、バックエンド モードによって異なります。使用するバックエンドに基づいて最適なインポート パフォーマンスをサポートする環境でTiDB Lightningを実行します。
 
-- Local-backend: TiDB lightning consumes much CPU and memory in this mode. It is recommended that you allocate CPU higher than 32 cores and memory greater than 64 GiB.
+-   ローカル バックエンド: TiDB ライトニングは、このモードで多くの CPU とメモリを消費します。 32 コアを超える CPU と 64 GiB を超えるメモリを割り当てることをお勧めします。
 
-> **Note**:
+> **注**:
 >
-> When data to be imported is large, one parallel import may consume about 2 GiB memory. In this case, the total memory usage can be `region-concurrency` x 2 GiB. `region-concurrency` is the same as the number of logical CPUs. If the memory size (GiB) is less than twice of the CPU or OOM occurs during the import, you can decrease `region-concurrency` to address OOM.
+> インポートするデータが大きい場合、1 回の並列インポートで 2 GiB 程度のメモリを消費する場合があります。この場合、合計メモリ使用量は`region-concurrency` x 2 GiB になる可能性があります。 `region-concurrency`は、論理 CPU の数と同じです。メモリ サイズ (GiB) が CPU の 2 倍未満であるか、インポート中に OOM が発生した場合は、 `region-concurrency`を減らして OOM に対処できます。
 
-- TiDB-backend: In this mode, the performance bottleneck lies in TiDB. It is recommended that you allocate 4-core CPU and 8 GiB memory for TiDB Lightning. If the TiDB cluster does not reach the write threshold in an import, you can increase `region-concurrency`.
-- Importer-backend: In this mode, resource consumption is nearly the same as that in Local-backend. Importer-backend is not recommended and you are advised to use Local-backend if you have no particular requirements.
+-   TiDB バックエンド: このモードでは、パフォーマンスのボトルネックは TiDB にあります。 TiDB Lightningには 4 コアの CPU と 8 GiB のメモリを割り当てることをお勧めします。インポートで TiDBクラスタが書き込みしきい値に達しない場合は、 `region-concurrency`を増やすことができます。
+-   Importer-backend: このモードでは、リソース消費は Local-backend とほぼ同じです。 Importer-backend は推奨されません。特に要件がない場合は、Local-backend を使用することをお勧めします。
 
-**Storage space**: The `sorted-kv-dir` configuration item specifies the temporary storage directory for the sorted key-value files. The directory must be empty, and the storage space must be greater than the size of the dataset to be imported. For better import performance, it is recommended to use a directory different from `data-source-dir` and use flash storage and exclusive I/O for the directory.
+**ストレージ スペース**: `sorted-kv-dir`構成アイテムは、並べ替えられたキー値ファイルの一時ストレージ ディレクトリを指定します。ディレクトリは空である必要があり、ストレージ スペースはインポートするデータセットのサイズより大きくなければなりません。インポートのパフォーマンスを向上させるには、 `data-source-dir`以外のディレクトリを使用し、そのディレクトリにフラッシュ ストレージと排他的 I/O を使用することをお勧めします。

@@ -3,53 +3,53 @@ title: Back up and Restore Data on Azure Blob Storage Using BR
 summary: Learn how to use BR to back up and restore data on Azure Blob Storage.
 ---
 
-# Back up and Restore Data on Azure Blob Storage Using BR
+# BR を使用して Azure Blob Storage のデータをバックアップおよび復元する {#back-up-and-restore-data-on-azure-blob-storage-using-br}
 
-The Backup & Restore (BR) tool supports using Azure Blob Storage as the external storage for backing up and restoring data.
+バックアップと復元 (BR) ツールは、データのバックアップと復元のための外部ストレージとして Azure Blob Storage の使用をサポートしています。
 
-## User scenario
+## ユーザーシナリオ {#user-scenario}
 
-Azure virtual machines can quickly store large-scale data on Azure Blob Storage. If you are using Azure virtual machines to deploy your cluster, you can back up your data on Azure Blob Storage.
+Azure 仮想マシンは、大規模なデータを Azure Blob Storage にすばやく格納できます。 Azure 仮想マシンを使用してクラスタをデプロイしている場合は、Azure Blob Storage にデータをバックアップできます。
 
-## Usage
+## 使用法 {#usage}
 
-With BR, you can back up and restore data on Azure Blob Storage by the following two methods:
+BR を使用すると、次の 2 つの方法で Azure Blob Storage のデータをバックアップおよび復元できます。
 
-- Back up and restore data using Azure AD (Azure Active Directory)
-- Back up and restore data using an access key
+-   Azure AD (Azure Active Directory) を使用してデータをバックアップおよび復元する
+-   アクセス キーを使用してデータをバックアップおよび復元する
 
-In common cases, to avoid exposing the key information (such as `account-key`) in command lines, it is recommended to use Azure AD.
+一般的なケースでは、コマンド ラインでキー情報 ( `account-key`など) を公開しないようにするために、Azure AD を使用することをお勧めします。
 
-The following is an example of backup and restoration operations on Azure Blob Storage using the preceding two methods. The purpose of the operations are as follows:
+上記の 2 つの方法を使用した Azure Blob Storage でのバックアップおよび復元操作の例を次に示します。操作の目的は次のとおりです。
 
-- Back up: Back up the `test` database to a space in the `container=test` container with `t1` as the path prefix in Azure Blob Storage.
-- Restore: Restore data from a space in the `container=test` container with `t1` as the path prefix in Azure Blob Storage to the `test` database.
+-   バックアップ: Azure Blob Storage のパス プレフィックスとして`t1`を使用して、 `test`データベースを`container=test`コンテナー内のスペースにバックアップします。
+-   復元: Azure Blob Storage のパス プレフィックスとして`t1`を使用して、 `container=test`コンテナー内のスペースから`test`データベースにデータを復元します。
 
-> **Note:**
+> **ノート：**
 >
-> When backing up data to the Azure Blob Storage using Azure AD or an access key, you need to set `send-credentials-to-tikv = true` (which is `true` by default). Otherwise, the backup task will fail.
+> Azure AD またはアクセス キーを使用して Azure Blob Storage にデータをバックアップする場合は、 `send-credentials-to-tikv = true` (既定では`true` ) を設定する必要があります。そうしないと、バックアップ タスクが失敗します。
 
-### Method 1: Back up and restore data using Azure AD (recommended)
+### 方法 1: Azure AD を使用してデータをバックアップおよび復元する (推奨) {#method-1-back-up-and-restore-data-using-azure-ad-recommended}
 
-This section describes how to back up and restore data using Azure AD. Before performing backup or restoration, you need to configure environment variables.
+このセクションでは、Azure AD を使用してデータをバックアップおよび復元する方法について説明します。バックアップまたは復元を実行する前に、環境変数を構成する必要があります。
 
-#### Configure environment variables
+#### 環境変数の構成 {#configure-environment-variables}
 
-In the operating environment of BR and TiKV, configure the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET`.
+BR と TiKV の動作環境で、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`を設定します。
 
-- When you start a cluster using TiUP, TiKV uses the "systemd" service. The following example introduces how to configure the preceding three environment variables as parameters for TiKV:
+-   TiUP を使用してクラスタを起動すると、TiKV は「systemd」サービスを使用します。次の例では、前述の 3 つの環境変数を TiKV のパラメーターとして構成する方法を紹介します。
 
-    > **Note:**
+    > **ノート：**
     >
-    > You need to restart TiKV in Step 3. If your TiKV cannot be restarted, use [Method 2](#method-2-back-up-and-restore-using-an-access-key-easy) to back up and restore data.
+    > 手順 3 で TiKV を再起動する必要があります。TiKV を再起動できない場合は、 [方法 2](#method-2-back-up-and-restore-using-an-access-key-easy)を使用してデータをバックアップおよび復元します。
 
-    1. Suppose that the TiKV port on this node is 24000, that is, the name of the "systemd" service is "tikv-24000":
+    1.  このノードの TiKV ポートが 24000、つまり「systemd」サービスの名前が「tikv-24000」であるとします。
 
         ```
         systemctl edit tikv-24000
         ```
 
-    2. Fill in the environment variable information:
+    2.  環境変数情報を入力します。
 
         ```
         [Service]
@@ -58,14 +58,14 @@ In the operating environment of BR and TiKV, configure the environment variables
         Environment="AZURE_CLIENT_SECRET=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         ```
 
-    3. Reload the configuration and restart TiKV:
+    3.  構成をリロードし、TiKV を再起動します。
 
         ```
         systemctl daemon-reload
         systemctl restart tikv-24000
         ```
 
-- To configure the Azure AD information for TiKV and BR started with command lines, you only need to check whether the environment variables `$AZURE_CLIENT_ID`, `$AZURE_TENANT_ID`, and `$AZURE_CLIENT_SECRET` are configured in the operating environment by running the following commands:
+-   コマンド ラインで開始された TiKV および BR の Azure AD 情報を構成するには、次のコマンドを実行して、環境変数`$AZURE_CLIENT_ID` 、 `$AZURE_TENANT_ID` 、および`$AZURE_CLIENT_SECRET`が動作環境で構成されているかどうかを確認するだけです。
 
     ```
     echo $AZURE_CLIENT_ID
@@ -73,82 +73,82 @@ In the operating environment of BR and TiKV, configure the environment variables
     echo $AZURE_CLIENT_SECRET
     ```
 
-For more information about the environment variables, see [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters).
+環境変数の詳細については、 [Azblob URL パラメーター](/br/backup-and-restore-storages.md#azblob-url-parameters)を参照してください。
 
-#### Back up
+#### バックアップする {#back-up}
 
-This section shows backing up data to `cool tier`, that is, the access tier of the uploaded object is `Cool`. You can specify `account-name` and `access-tier` in two ways. The backup operations differ depending on the way you choose:
+このセクションは、データを`cool tier`にバックアップすることを示しています。つまり、アップロードされたオブジェクトのアクセス層は`Cool`です。 `account-name`と`access-tier`は 2 つの方法で指定できます。バックアップ操作は、選択した方法によって異なります。
 
-- Specify `account-name` and `access-tier` as parameters in URL:
+-   URL のパラメーターとして`account-name`と`access-tier`を指定します。
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&access-tier=Cool'
     ```
 
-    If `access-tier` is not set (the value is empty), the value is `Hot` by default.
+    `access-tier`が設定されていない (値が空である) 場合、値はデフォルトで`Hot`になります。
 
-- Specify `account-name` and `access-tier` as command-line parameters:
+-   コマンドライン パラメータとして`account-name`と`access-tier`を指定します。
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1 --azblob.access-tier=Cool
     ```
 
-#### Restore
+#### 戻す {#restore}
 
-Similar to how `account-name` is specified in [Back up](#back-up), you can restore data either using URLs or command-line parameters:
+[バックアップする](#back-up)で`account-name`を指定する方法と同様に、URL またはコマンドライン パラメーターを使用してデータを復元できます。
 
-- Specify `account-name` as a parameter in URL:
+-   URL のパラメーターとして`account-name`を指定します。
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1'
     ```
 
-- Specify `account-name` as a command-line parameter:
+-   コマンドライン パラメータとして`account-name`を指定します。
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1
     ```
 
-### Method 2: Back up and restore using an access key (easy)
+### 方法 2: アクセス キーを使用してバックアップおよび復元する (簡単) {#method-2-back-up-and-restore-using-an-access-key-easy}
 
-Compared with backing up and restoring data using Azure AD, backup and restoration using an access key is easier because you do not need to configure environment variables. Other steps are similar to those of using Azure AD.
+Azure AD を使用したデータのバックアップと復元に比べて、アクセス キーを使用したバックアップと復元は、環境変数を構成する必要がないため簡単です。その他の手順は、Azure AD を使用する場合と同様です。
 
-#### Back up
+#### バックアップする {#back-up}
 
-- Specify `account-name`, `account-key`, and `access-tier` as parameters in URL:
+-   URL のパラメーターとして`account-name` 、 `account-key` 、および`access-tier`を指定します。
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==&access-tier=Cool'
     ```
 
-- Specify `account-name`, `account-key`, and `access-tier` as command-line parameters:
+-   コマンドライン パラメータとして`account-name` 、 `account-key` 、および`access-tier`を指定します。
 
     ```
     tiup br backup db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1 --azblob.account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw== --azblob.access-tier=Cool
     ```
 
-#### Restore
+#### 戻す {#restore}
 
-- Specify `account-name` and `account-key` as parameters in URL:
+-   URL のパラメーターとして`account-name`と`account-key`を指定します。
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?account-name=devstoreaccount1&account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw=='
     ```
 
-- Specify `account-name` and `account-key` as command-line parameters:
+-   コマンドライン パラメータとして`account-name`と`account-key`を指定します。
 
     ```
     tiup br restore db --db test -u 127.0.0.1:2379 -s 'azure://test/t1?' --azblob.account-name=devstoreaccount1 --azblob.account-key=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
     ```
 
-## Compatibility
+## 互換性 {#compatibility}
 
-This feature is **only compatible** with v5.4.0 and later versions.
+この機能は、v5.4.0 以降のバージョンとの**み互換性**があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-- To learn other external storages supported by BR, see [External storages](/br/backup-and-restore-storages.md).
-- To learn more about the parameters, see the following documents:
+-   BR でサポートされているその他の外部ストレージについては、 [外部ストレージ](/br/backup-and-restore-storages.md)を参照してください。
+-   パラメータの詳細については、次のドキュメントを参照してください。
 
-    - [Azblob URL parameters](/br/backup-and-restore-storages.md#azblob-url-parameters)
-    - [Azblob command-line parameters](/br/backup-and-restore-storages.md#azblob-command-line-parameters)
+    -   [Azblob URL パラメーター](/br/backup-and-restore-storages.md#azblob-url-parameters)
+    -   [Azblob コマンド ライン パラメーター](/br/backup-and-restore-storages.md#azblob-command-line-parameters)

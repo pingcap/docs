@@ -3,21 +3,21 @@ title: Troubleshoot Log Backup
 summary: Learn about common problems of log backup and how to fix them.
 ---
 
-# Troubleshoot Log Backup
+# ログ バックアップのトラブルシューティング {#troubleshoot-log-backup}
 
-This document summarizes common problems during log backup and the solutions.
+このドキュメントでは、ログ バックアップ中の一般的な問題とその解決策をまとめています。
 
-## After restoring a downstream cluster using the `br restore point` command, data cannot be accessed from TiFlash. What should I do?
+## <code>br restore point</code>コマンドを使用してダウンストリームクラスタを復元した後、TiFlash からデータにアクセスできません。私は何をすべきか？ {#after-restoring-a-downstream-cluster-using-the-code-br-restore-point-code-command-data-cannot-be-accessed-from-tiflash-what-should-i-do}
 
-In v6.2.0, PITR does not support restoring the TiFlash replicas of a cluster. After restoring data, you need to execute the following statement to set the TiFlash replica of the schema or table.
+v6.2.0 では、PITR はクラスタの TiFlash レプリカの復元をサポートしていません。データを復元した後、次のステートメントを実行して、スキーマまたはテーブルの TiFlash レプリカを設定する必要があります。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-## What should I do if the `status` of a log backup task becomes `ERROR`?
+## ログ バックアップ タスクの<code>status</code>が<code>ERROR</code>になった場合はどうすればよいですか? {#what-should-i-do-if-the-code-status-code-of-a-log-backup-task-becomes-code-error-code}
 
-During a log backup task, the task status becomes `ERROR` if it fails and cannot be recovered after retrying. The following is an example:
+ログ バックアップ タスク中に失敗し、再試行後に回復できない場合、タスク ステータスは`ERROR`になります。次に例を示します。
 
 ```shell
 br log status --pd x.x.x.x:2379
@@ -36,13 +36,13 @@ error-happen-at[store=1]: 2022-07-25 14:54:44.467 +0000; gap=11h23m35s
   error-message[store=1]: retry time exceeds: and error failed to get initial snapshot: failed to get the snapshot (region_id = 94812): Error during requesting raftstore: message: "read index not ready, reason can not read index due to merge, region 94812" read_index_not_ready { reason: "can not read index due to merge" region_id: 94812 }: failed to get initial snapshot: failed to get the snapshot (region_id = 94812): Error during requesting raftstore: message: "read index not ready, reason can not read index due to merge, region 94812" read_index_not_ready { reason: "can not read index due to merge" region_id: 94812 }: failed to get initial snapshot: failed to get the snapshot (region_id = 94812): Error during requesting raftstore: message: "read index not ready, reason can not read index due to merge, region 94812" read_index_not_ready { reason: "can not read index due to merge" region_id: 94812 }
 ```
 
-To address this problem, check the error message for the cause and perform as instructed. After the problem is addressed, run the following command to resume the task:
+この問題を解決するには、エラー メッセージで原因を確認し、指示に従ってください。問題が解決したら、次のコマンドを実行してタスクを再開します。
 
 ```shell
 br log resume --task-name=task1 --pd x.x.x.x:2379
 ```
 
-After the backup task is resumed, you can check the status using `br log status`. The backup task continues when the task status becomes `NORMAL`.
+バックアップ タスクが再開されたら、 `br log status`を使用してステータスを確認できます。タスクのステータスが`NORMAL`になると、バックアップ タスクは続行されます。
 
 ```shell
 ● Total 1 Tasks.
@@ -56,26 +56,26 @@ After the backup task is resumed, you can check the status using `br log status`
 checkpoint[global]: 2022-07-25 14:46:50.118 +0000; gap=6m28s
 ```
 
-> **Note:**
+> **ノート：**
 >
-> This feature backs up multiple versions of data. When a long backup task fails and the status becomes `ERROR`, the checkpoint data of this task is set as a `safe point`, and the data of the `safe point` will not be garbage collected within 24 hours. Therefore, the backup task continues from the last checkpoint after resuming the error. If the task fails for more than 24 hours and the last checkpoint data has been garbage collected, an error will be reported when you resume the task. In this case, you can only run the `br log stop` command to stop the task first and then start a new backup task.
+> この機能は、複数のバージョンのデータをバックアップします。長時間のバックアップ タスクが失敗し、ステータスが`ERROR`になると、このタスクのチェックポイント データは`safe point`に設定され、 `safe point`のデータは 24 時間以内にガベージ コレクションされません。したがって、エラーが再開された後、バックアップ タスクは最後のチェックポイントから続行されます。タスクが 24 時間以上失敗し、最後のチェックポイント データがガベージ コレクションされている場合、タスクを再開するとエラーが報告されます。この場合、最初にタスクを停止してから新しいバックアップ タスクを開始する`br log stop`コマンドしか実行できません。
 
-## What should I do if the error message `ErrBackupGCSafepointExceeded` is returned when using the `br log resume` command to resume the suspended task?
+## <code>br log resume</code>コマンドを使用して中断されたタスクを再開するときに、エラー メッセージ<code>ErrBackupGCSafepointExceeded</code>が返された場合はどうすればよいですか? {#what-should-i-do-if-the-error-message-code-errbackupgcsafepointexceeded-code-is-returned-when-using-the-code-br-log-resume-code-command-to-resume-the-suspended-task}
 
 ```shell
 Error: failed to check gc safePoint, checkpoint ts 433177834291200000: GC safepoint 433193092308795392 exceed TS 433177834291200000: [BR:Backup:ErrBackupGCSafepointExceeded]backup GC safepoint exceeded
 ```
 
-After you pause a log backup task, to prevent the MVCC data from being garbage collected, the pausing task program sets the current checkpoint as the service safepoint automatically. This ensures that the MVCC data generated within 24 hours can remain. If the MVCC data of the backup checkpoint has been generated for more than 24 hours, the data of the checkpoint will be garbage collected, and the backup task is unable to resume.
+ログ バックアップ タスクを一時停止した後、MVCC データがガベージ コレクションされるのを防ぐために、一時停止中のタスク プログラムは、現在のチェックポイントをサービス セーフポイントとして自動的に設定します。これにより、24 時間以内に生成された MVCC データを確実に残すことができます。バックアップ チェックポイントの MVCC データが 24 時間以上生成されている場合、チェックポイントのデータはガベージ コレクションされ、バックアップ タスクは再開できません。
 
-To address this problem, delete the current task using `br log stop`, and then create a log backup task using `br log start`. At the same time, you can perform a full backup for subsequent PITR.
+この問題に対処するには、 `br log stop`を使用して現在のタスクを削除し、 `br log start`を使用してログ バックアップ タスクを作成します。同時に、後続の PITR のフル バックアップを実行できます。
 
-## What should I do if an error occurs when executing the Exchange Partition DDL during PITR log restoration?
+## PITR ログの復元中に Exchange Partition DDL を実行したときにエラーが発生した場合はどうすればよいですか? {#what-should-i-do-if-an-error-occurs-when-executing-the-exchange-partition-ddl-during-pitr-log-restoration}
 
-The following error occurs during PITR log restoration:
+PITR ログの復元中に次のエラーが発生します。
 
 ```
 restore of ddl `exchange-table-partition` is not supported
 ```
 
-In v6.2.0, the log backup feature is not compatible with the Exchange Partition DDL. It is recommended not to use this DDL during log backup. If you have executed the DDL, you must perform a full backup immediately. Then, PITR can restore the log data after the full backup checkpoint.
+v6.2.0 では、ログ バックアップ機能は Exchange パーティション DDL と互換性がありません。ログのバックアップ中は、この DDL を使用しないことをお勧めします。 DDL を実行した場合は、すぐに完全バックアップを実行する必要があります。その後、PITR は完全バックアップ チェックポイントの後にログ データを復元できます。

@@ -2,36 +2,36 @@
 title: tiup cluster rename
 ---
 
-# tiup cluster rename
+# tiup cluster rename {#tiup-cluster-rename}
 
-The cluster name is specified when [the cluster is deployed](/tiup/tiup-component-cluster-deploy.md). If you want to change the cluster name after the cluster is deployed, you can use the command `tiup cluster rename`.
+[クラスタがデプロイされました](/tiup/tiup-component-cluster-deploy.md)の場合はクラスタ名を指定します。クラスタのデプロイ後にクラスタ名を変更する場合は、コマンド`tiup cluster rename`を使用できます。
 
-> **Note:**
+> **ノート：**
 >
-> If the `dashboard_dir` field of `grafana_servers` is configured for the TiUP cluster, after you execute the command `tiup cluster rename` to rename the cluster, the following additional steps are required:
+> `grafana_servers`のフィールドのうち`dashboard_dir`のフィールドが TiUPクラスタに構成されている場合、コマンド`tiup cluster rename`を実行してクラスタの名前を変更した後、次の追加の手順が必要です。
 >
-> + For the `*.json` files in the local dashboards directory, update the `datasource` field of each file to the new cluster name, because the value of `datasource` must be the name of the cluster.
-> + Execute the command `tiup cluster reload -R grafana`.
+> -   ローカル ダッシュボード ディレクトリの`*.json`ファイルについて、各ファイルの`datasource`フィールドを新しいクラスタ名に更新します。これは、 `datasource`の値がクラスタの名前でなければならないためです。
+> -   コマンド`tiup cluster reload -R grafana`を実行します。
 
-## Syntax
+## 構文 {#syntax}
 
 ```shell
 tiup cluster rename <old-cluster-name> <new-cluster-name> [flags]
 ```
 
-- `<old-cluster-name>`: The old cluster name.
-- `<new-cluster-name>`: The new cluster name.
+-   `<old-cluster-name>` : 古いクラスタ名。
+-   `<new-cluster-name>` : 新しいクラスタ名。
 
-## Options
+## オプション {#options}
 
-### -h, --help
+### -h, --help {#h-help}
 
-- Prints help information.
-- Data type: `BOOLEAN`
-- This option is disabled by default with the `false` value. To enable this option, add this option to the command, and either pass the `true` value or do not pass any value.
+-   ヘルプ情報を出力します。
+-   データ型: `BOOLEAN`
+-   このオプションはデフォルトで無効になっており、値は`false`です。このオプションを有効にするには、このオプションをコマンドに追加し、値`true`を渡すか、値を何も渡さないでください。
 
-## Outputs
+## 出力 {#outputs}
 
-The execution log of the tiup-cluster.
+tiup-cluster の実行ログ。
 
-[<< Back to the previous page - TiUP Cluster command list](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUP Clusterコマンド一覧](/tiup/tiup-component-cluster.md#command-list)

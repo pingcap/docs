@@ -3,53 +3,53 @@ title: FastScan
 summary: Introduces a way to speed up querying in OLAP scenarios by using FastScan.
 ---
 
-# FastScan
+# ファストスキャン {#fastscan}
 
-> **Warning:**
+> **警告：**
 >
-> This feature is experimental and its form and usage may change in subsequent versions.
+> この機能は実験的であり、その形式と使用法は後続のバージョンで変更される可能性があります。
 
-This document describes how to use FastScan to speed up queries in Online Analytical Processing (OLAP) scenarios.
+このドキュメントでは、オンライン分析処理 (OLAP) シナリオで FastScan を使用してクエリを高速化する方法について説明します。
 
-By default, TiFlash guarantees the precision of query results and data consistency. With the feature FastScan, TiFlash provides more efficient query performance, but does not guarantee the accuracy of query results and data consistency.
+デフォルトでは、TiFlash はクエリ結果の精度とデータの一貫性を保証します。 FastScan 機能を使用すると、TiFlash はより効率的なクエリ パフォーマンスを提供しますが、クエリ結果の精度とデータの一貫性を保証するものではありません。
 
-Some OLAP scenarios allow for some tolerance to the accuracy of the query results. In these cases, if you need higher query performance, you can enable FastScan for the corresponding table for querying.
+一部の OLAP シナリオでは、クエリ結果の精度に対してある程度の許容範囲が許容されます。このような場合、より高いクエリ パフォーマンスが必要な場合は、対応するテーブルの FastScan を有効にしてクエリを実行できます。
 
-FastScan takes effect globally on tables that you enable FastScan by running [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md). TiFlash-related operations are not supported for temporary tables, in-memory tables, system tables, and tables with non-UTF-8 characters in column names.
+FastScan は、 [ALTER TABLE SET TIFLASH モード](/sql-statements/sql-statement-set-tiflash-mode.md)を実行して FastScan を有効にしたテーブルでグローバルに有効になります。 TiFlash 関連の操作は、一時テーブル、メモリ内テーブル、システム テーブル、および列名に UTF-8 以外の文字を含むテーブルではサポートされていません。
 
-For more information, see [ALTER TABLE SET TIFLASH MODE](/sql-statements/sql-statement-set-tiflash-mode.md).
+詳細については、 [ALTER TABLE SET TIFLASH モード](/sql-statements/sql-statement-set-tiflash-mode.md)を参照してください。
 
-## Enable FastScan
+## FastScan を有効にする {#enable-fastscan}
 
-By default, FastScan is disabled for all tables. You can use the following statement to view the FastScan status.
+デフォルトでは、FastScan はすべてのテーブルで無効になっています。次のステートメントを使用して、FastScan のステータスを表示できます。
 
 ```sql
 SELECT table_mode FROM information_schema.tiflash_replica WHERE table_name = 'table_name' AND table_schema = 'database_name'
 ```
 
-Use the following statement to enable FastScan for the corresponding table.
+次のステートメントを使用して、対応するテーブルの FastScan を有効にします。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH MODE FAST
 ```
 
-Once enabled, subsequent queries of this table in TiFlash will use the function of FastScan.
+有効にすると、TiFlash のこのテーブルの後続のクエリで FastScan の機能が使用されます。
 
-You can disable FastScan using the following statement.
+次のステートメントを使用して、FastScan を無効にすることができます。
 
 ```sql
 ALTER TABLE table_name SET TIFLASH MODE NORMAL
 ```
 
-## Mechanism of FastScan
+## FastScanの仕組み {#mechanism-of-fastscan}
 
-Data in the storage layer of TiFlash is stored in two layers: Delta layer and Stable layer.
+TiFlash のストレージ層のデータは、Delta 層と Stable 層の 2 つの層に格納されます。
 
-In Normal Mode, the TableScan operator processes data in the following steps:
+通常モードでは、TableScan オペレーターは次の手順でデータを処理します。
 
-1. Read data: create separate data streams in the Delta layer and Stable layer to read the respective data.
-2. Sort Merge: merge the data streams created in step 1. Then return the data after sorting in (handle, version) order.
-3. Range Filter: according to the data range, filter the data generated in step 2, and then return the data.
-4. MVCC + Column Filter: filter the data generated in step 3 through MVCC and filter out unneeded columns, and then return the data.
+1.  データの読み取り: Delta レイヤーと Stable レイヤーに個別のデータ ストリームを作成して、それぞれのデータを読み取ります。
+2.  Sort Merge: 手順 1 で作成したデータ ストリームをマージします。次に、(ハンドル、バージョン) 順に並べ替えた後にデータを返します。
+3.  範囲フィルター: データ範囲に従って、手順 2 で生成されたデータをフィルター処理し、データを返します。
+4.  MVCC +カラムフィルター: 手順 3 で生成されたデータを MVCC でフィルター処理し、不要な列をフィルターで除外してから、データを返します。
 
-FastScan gains faster query speed by sacrificing some data consistency. Step 2 and the MVCC part in step 4 in the normal scan process are omitted in FastScan, thus improving query performance.
+FastScan は、データの一貫性をいくらか犠牲にすることで、クエリ速度を向上させます。 FastScan では、通常のスキャン プロセスのステップ 2 とステップ 4 の MVCC 部分が省略されるため、クエリのパフォーマンスが向上します。

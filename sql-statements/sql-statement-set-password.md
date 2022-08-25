@@ -3,17 +3,17 @@ title: SET PASSWORD | TiDB SQL Statement Reference
 summary: An overview of the usage of SET PASSWORD for the TiDB database.
 ---
 
-# SET PASSWORD
+# パスワードを設定してください {#set-password}
 
-This statement changes the user password for a user account in the TiDB system database.
+このステートメントは、TiDB システム データベース内のユーザー アカウントのユーザー パスワードを変更します。
 
-## Synopsis
+## あらすじ {#synopsis}
 
 **SetStmt:**
 
 ![SetStmt](/media/sqlgram/SetStmt.png)
 
-## Examples
+## 例 {#examples}
 
 ```sql
 mysql> SET PASSWORD='test'; -- change my password
@@ -53,16 +53,16 @@ mysql> SHOW CREATE USER 'newuser';
 1 row in set (0.00 sec)
 ```
 
-## MySQL compatibility
+## MySQL の互換性 {#mysql-compatibility}
 
-This statement is understood to be fully compatible with MySQL. Any compatibility differences should be [reported via an issue](https://github.com/pingcap/tidb/issues/new/choose) on GitHub.
+このステートメントは、MySQL と完全に互換性があると理解されています。互換性の違いは、GitHub で[問題を介して報告された](https://github.com/pingcap/tidb/issues/new/choose)にする必要があります。
 
-## See also
+## こちらもご覧ください {#see-also}
 
-* [CREATE USER](/sql-statements/sql-statement-create-user.md)
+-   [ユーザーを作成](/sql-statements/sql-statement-create-user.md)
 
 <CustomContent platform="tidb">
 
-* [Privilege Management](/privilege-management.md)
+-   [権限管理](/privilege-management.md)
 
 </CustomContent>

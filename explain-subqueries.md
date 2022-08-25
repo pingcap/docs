@@ -3,11 +3,11 @@ title: Explain Statements That Use Subqueries
 summary: Learn about the execution plan information returned by the EXPLAIN statement in TiDB.
 ---
 
-# Explain Statements That Use Subqueries
+# サブクエリを使用するステートメントの説明 {#explain-statements-that-use-subqueries}
 
-TiDB performs [several optimizations](/subquery-optimization.md) to improve the performance of subqueries. This document describes some of these optimizations for common subqueries and how to interpret the output of `EXPLAIN`.
+TiDB はサブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力を解釈する方法について説明します。
 
-The examples in this document are based on the following sample data:
+このドキュメントの例は、次のサンプル データに基づいています。
 
 ```sql
 CREATE TABLE t1 (id BIGINT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB, int_col INT NOT NULL DEFAULT 0);
@@ -45,9 +45,9 @@ SELECT SLEEP(1);
 ANALYZE TABLE t1, t2, t3;
 ```
 
-## Inner join (non-unique subquery)
+## 内部結合 (一意でないサブクエリ) {#inner-join-non-unique-subquery}
 
-In the following example, the `IN` subquery searches for a list of IDs from the table `t2`. For semantic correctness, TiDB needs to guarantee that the column `t1_id` is unique. Using `EXPLAIN`, you can see the execution plan used to remove duplicates and perform an `INNER JOIN` operation:
+次の例では、 `IN`サブクエリがテーブル`t2`から ID のリストを検索します。セマンティックの正確性のために、TiDB は列`t1_id`が一意であることを保証する必要があります。 `EXPLAIN`を使用すると、重複を削除して`INNER JOIN`操作を実行するために使用される実行計画を確認できます。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
@@ -69,16 +69,16 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2);
 8 rows in set (0.00 sec)
 ```
 
-From the query results above, you can see that TiDB uses the index join operation `| IndexJoin_14` to join and transform the subquery. In the execution plan, the execution process is as follows:
+上記のクエリ結果から、TiDB がインデックス結合操作`| IndexJoin_14`を使用してサブクエリを結合および変換していることがわかります。実行計画では、実行プロセスは次のとおりです。
 
-1. The index scanning operator `└─IndexFullScan_31` at the TiKV side reads the values of the `t2.t1_id` column.
-2. Some tasks of the `└─StreamAgg_39` operator deduplicate the values of `t1_id` in TiKV.
-3. Some tasks of the `├─StreamAgg_49(Build)` operator deduplicate the values of `t1_id` in TiDB. The deduplication is performed by the aggregate function `firstrow(test.t2.t1_id)`.
-4. The operation results are joined with the primary key of the `t1` table. The join condition is `eq(test.t1.id, test.t2.t1_id)`.
+1.  TiKV 側のインデックススキャンオペレータ`└─IndexFullScan_31`は、 `t2.t1_id`列の値を読み取ります。
+2.  `└─StreamAgg_39`オペレーターの一部のタスクは、TiKV の`t1_id`の値を重複除去します。
+3.  `├─StreamAgg_49(Build)`オペレーターのいくつかのタスクは、TiDB で`t1_id`の値を重複除去します。重複排除は集約機能`firstrow(test.t2.t1_id)`によって行われる。
+4.  演算結果は`t1`テーブルの主キーに結合されます。結合条件は`eq(test.t1.id, test.t2.t1_id)`です。
 
-## Inner join (unique subquery)
+## 内部結合 (一意のサブクエリ) {#inner-join-unique-subquery}
 
-In the previous example, aggregation is required to ensure that the values of `t1_id` are unique before joining against the table `t1`. But in the following example, `t3.t1_id` is already guaranteed unique because of a `UNIQUE` constraint:
+前の例では、テーブル`t1`に対して結合する前に、 `t1_id`の値が一意であることを確認するために集計が必要です。ただし、次の例では、 `UNIQUE`の制約により、 `t3.t1_id`は既に一意であることが保証されています。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
@@ -98,13 +98,13 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t3);
 6 rows in set (0.01 sec)
 ```
 
-Semantically because `t3.t1_id` is guaranteed unique, it can be executed directly as an `INNER JOIN`.
+意味的に`t3.t1_id`は一意であることが保証されているため、 `INNER JOIN`として直接実行できます。
 
-## Semi join (correlated subquery)
+## 準結合 (相関サブクエリ) {#semi-join-correlated-subquery}
 
-In the previous two examples, TiDB is able to perform an `INNER JOIN` operation after the data inside the subquery is made unique (via `StreamAgg`) or guaranteed unique. Both joins are performed using an Index Join.
+前の 2 つの例では、TiDB は、サブクエリ内のデータが ( `StreamAgg`によって) 一意になるか、一意であることが保証された後、 `INNER JOIN`操作を実行できます。両方の結合は、Index Join を使用して実行されます。
 
-In this example, TiDB chooses a different execution plan:
+この例では、TiDB は別の実行計画を選択します。
 
 ```sql
 EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int_col);
@@ -124,13 +124,13 @@ EXPLAIN SELECT * FROM t1 WHERE id IN (SELECT t1_id FROM t2 WHERE t1_id != t1.int
 6 rows in set (0.00 sec)
 ```
 
-From the result above, you can see that TiDB uses a `Semi Join` algorithm. Semi-join differs from inner join: semi-join only permits the first value on the right key (`t2.t1_id`), which means that the duplicates are eliminated as a part of the join operator task. The join algorithm is also Merge Join, which is like an efficient zipper-merge as the operator reads data from both the left and the right side in sorted order.
+上記の結果から、TiDB が`Semi Join`アルゴリズムを使用していることがわかります。半結合は内部結合とは異なります。半結合は右側のキー ( `t2.t1_id` ) の最初の値のみを許可します。つまり、重複は結合演算子タスクの一部として削除されます。結合アルゴリズムも Merge Join です。これは、演算子がソートされた順序で左側と右側の両方からデータを読み取るため、効率的なジッパー マージのようなものです。
 
-The original statement is considered a _correlated subquery_, because the subquery refers to a column (`t1.int_col`) that exists outside of the subquery. However, the output of `EXPLAIN` shows the execution plan after the [subquery decorrelation optimization](/correlated-subquery-optimization.md) has been applied. The condition `t1_id != t1.int_col` is rewritten to `t1.id != t1.int_col`. TiDB can perform this in `└─Selection_21` as it is reading data from the table `t1`, so this decorrelation and rewriting make the execution a lot more efficient.
+サブクエリはサブクエリの外部に存在する列 ( `t1.int_col` ) を参照するため、元のステートメントは*相関サブクエリ*と見なされます。ただし、 `EXPLAIN`の出力は、 [サブクエリ非相関最適化](/correlated-subquery-optimization.md)が適用された後の実行計画を示しています。条件`t1_id != t1.int_col`を`t1.id != t1.int_col`に書き換える。 TiDB は、テーブルからデータを読み取るときに`└─Selection_21`でこれを実行できます`t1` 。
 
-## Anti semi join (`NOT IN` subquery)
+## 反準結合 ( <code>NOT IN</code>サブクエリ) {#anti-semi-join-code-not-in-code-subquery}
 
-In the following example, the query semantically returns all rows from the table `t3` _unless_ `t3.t1_id` is in the subquery:
+次の例では、サブクエリに`t3.t1_id`が*ない限り*、クエリは意味的にテーブル`t3`からすべての行を返します。
 
 ```sql
 EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 100);
@@ -150,4 +150,4 @@ EXPLAIN SELECT * FROM t3 WHERE t1_id NOT IN (SELECT id FROM t1 WHERE int_col < 1
 6 rows in set (0.00 sec)
 ```
 
-This query starts by reading the table `t3` and then probes the table `t1` based on the `PRIMARY KEY`. The join type is an _anti semi join_; anti because this example is for the non-existence of the value (`NOT IN`) and semi-join because only the first row needs to match before the join is rejected.
+このクエリは、最初にテーブル`t3`を読み取り、次に`PRIMARY KEY`に基づいてテーブル`t1`をプローブします。結合タイプは*アンチセミ結合*です。 anti-この例は値 ( `NOT IN` ) が存在しないためであり、半結合は、結合が拒否される前に最初の行のみが一致する必要があるためです。

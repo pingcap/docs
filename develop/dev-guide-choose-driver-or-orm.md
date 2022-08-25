@@ -3,60 +3,60 @@ title: Choose Driver or ORM
 summary: Learn how to choose a driver or ORM framework to connect to TiDB.
 ---
 
-# Choose Driver or ORM
+# Driverまたは ORM を選択 {#choose-driver-or-orm}
 
-TiDB is highly compatible with the MySQL protocol but some features are incompatible with MySQL.
+TiDB は MySQL プロトコルと高い互換性がありますが、一部の機能は MySQL と互換性がありません。
 
-For example:
+例えば：
 
-- Features that are not supported by TiDB:
+-   TiDB でサポートされていない機能:
 
-    - Stored procedures and functions
-    - Triggers
-    - `FOREIGN KEY` constraints
+    -   ストアド プロシージャと関数
+    -   トリガー
+    -   `FOREIGN KEY`制約
 
-- Features that are different from MySQL:
+-   MySQL とは異なる機能:
 
-    - Auto-increment ID: auto-incremental columns are globally unique in TiDB. They are incremental on a single TiDB server, but ***not*** necessarily incremental among multiple TiDB servers or allocated sequentially.
+    -   自動インクリメント ID: 自動インクリメント列は、TiDB 内でグローバルに一意です。それらは単一の TiDB サーバー上では増分ですが***、必ずしも***複数の TiDB サーバー間で増分されたり、順次割り当てられるとは限りません。
 
-For a full list of compatibility differences, see [MySQL Compatibility](/mysql-compatibility.md).
+互換性の相違点の完全なリストについては、 [MySQL の互換性](/mysql-compatibility.md)を参照してください。
 
-## Java
+## ジャワ {#java}
 
-TiDB provides the following two support levels for Java:
+TiDB は、Java に対して次の 2 つのサポート レベルを提供します。
 
-- **Full**: indicates that using this driver or ORM does not have any known issues.
-- **Verified**: indicates that using this driver or ORM might get errors because of compatibility differences between TiDB and MySQL.
+-   **完全**: このドライバーまたは ORM を使用しても、既知の問題がないことを示します。
+-   **検証済み**: TiDB と MySQL の互換性の違いにより、このドライバーまたは ORM を使用するとエラーが発生する可能性があることを示します。
 
-### Java Drivers
+### Java ドライバー {#java-drivers}
 
 **JDBC**
 
-Support level: **Full**
+サポートレベル:**フル**
 
-You can follow the [MySQL documentation](https://dev.mysql.com/doc/connector-j/5.1/en/) to download and configure a Java JDBC driver.
+[MySQL ドキュメント](https://dev.mysql.com/doc/connector-j/5.1/en/)に従って、Java JDBC ドライバーをダウンロードして構成できます。
 
-> **Note:**
+> **ノート：**
 >
-> It is strongly recommended to use version 5.1.49, which is the latest version of JDBC 5.1. Since there is an [unresolved bug](https://bugs.mysql.com/bug.php?id=106252) in the current version 8.0.29, which might cause threads to hang when using TiDB. It is recommended that you do not upgrade to version 8.0 until MySQL JDBC 8.0 merges this fix.
+> JDBC 5.1 の最新バージョンであるバージョン 5.1.49 を使用することを強くお勧めします。現在のバージョン 8.0.29 には[未解決のバグ](https://bugs.mysql.com/bug.php?id=106252)があるため、TiDB の使用時にスレッドがハングする可能性があります。 MySQL JDBC 8.0 がこの修正をマージするまで、バージョン 8.0 にアップグレードしないことをお勧めします。
 
-For an example of how to build a complete application, see [Build a Simple CRUD App with TiDB and JDBC](/develop/dev-guide-sample-application-java.md).
+完全なアプリケーションを構築する方法の例については、 [TiDB と JDBC を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
 
-### Java ORM framework
+### Java ORM フレームワーク {#java-orm-framework}
 
-#### Hibernate
+#### 休止状態 {#hibernate}
 
-Support level: `Full`
+サポートレベル: `Full`
 
-> **Note:**
+> **ノート：**
 >
-> Currently, Hibernate does [not support nested transactions](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres). Since v6.2.0, TiDB supports [savepoint](/sql-statements/sql-statement-savepoint.md).
+> 現在、Hibernate は[ネストされたトランザクションをサポートしない](https://stackoverflow.com/questions/37927208/nested-transaction-in-spring-app-with-jpa-postgres)を実行します。 v6.2.0 以降、TiDB は[セーブポイント](/sql-statements/sql-statement-savepoint.md)をサポートしています。
 >
-> If you are using a framework such as `Spring Data JPA`, do not use the `Propagation.NESTED` transaction propagation option in `@Transactional`, that is, do not set `@Transactional( propagation = Propagation.NESTED)`.
+> `Spring Data JPA`などのフレームワークを使用している場合は、 `@Transactional`で`Propagation.NESTED`トランザクション伝播オプションを使用しないでください。つまり、 `@Transactional( propagation = Propagation.NESTED)`を設定しないでください。
 
-To avoid manually managing complex relationships between different dependencies of an application, you can use [Gradle](https://gradle.org/install) or [Maven](https://maven.apache.org/install.html) to get all dependencies of your application, including those indirect ones. Note that only Hibernate `6.0.0.Beta2` or above supports the TiDB dialect.
+アプリケーションの異なる依存関係間の複雑な関係を手動で管理することを避けるために、 [グラドル](https://gradle.org/install)または[メイヴン](https://maven.apache.org/install.html)を使用して、間接的なものを含むアプリケーションのすべての依存関係を取得できます。 Hibernate `6.0.0.Beta2`以降のみが TiDB ダイアレクトをサポートすることに注意してください。
 
-If you are using **Maven**, add the following to your `<dependencies></dependencies>`:
+**Maven**を使用している場合は、次を`<dependencies></dependencies>`に追加します。
 
 {{< copyable "" >}}
 
@@ -74,7 +74,7 @@ If you are using **Maven**, add the following to your `<dependencies></dependenc
 </dependency>
 ```
 
-If you are using **Gradle**, add the following to your `dependencies`:
+**Gradle**を使用している場合は、以下を`dependencies`に追加します。
 
 {{< copyable "" >}}
 
@@ -83,11 +83,11 @@ implementation 'org.hibernate:hibernate-core:6.0.0.CR2'
 implementation 'mysql:mysql-connector-java:5.1.49'
 ```
 
-- For an example of using Hibernate to build a TiDB application by native Java, see [Build a Simple CRUD App with TiDB and Java](/develop/dev-guide-sample-application-java.md).
-- For an example of using Spring Data JPA or Hibernate to build a TiDB application by Spring, see [Build a TiDB Application using Spring Boot](/develop/dev-guide-sample-application-spring-boot.md).
+-   Hibernate を使用してネイティブ Java で TiDB アプリケーションを構築する例については、 [TiDB と Java を使用して単純な CRUD アプリを構築する](/develop/dev-guide-sample-application-java.md)を参照してください。
+-   Spring Data JPA または Hibernate を使用して Spring で TiDB アプリケーションを構築する例については、 [Spring Boot を使用して TiDB アプリケーションを構築する](/develop/dev-guide-sample-application-spring-boot.md)を参照してください。
 
-In addition, you need to specify the TiDB dialect in your [Hibernate configuration file](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm): `org.hibernate.dialect.TiDBDialect`, which is only supported by Hibernate `6.0.0.Beta2` or above. If your `Hibernate` version is earlier than `6.0.0.Beta2`, upgrade it first.
+さらに、 [ハイバネート構成ファイル](https://www.tutorialspoint.com/hibernate/hibernate_configuration.htm) : `org.hibernate.dialect.TiDBDialect`で TiDB ダイアレクトを指定する必要があります。これは、Hibernate `6.0.0.Beta2`以降でのみサポートされています。 `Hibernate`バージョンが`6.0.0.Beta2`より前の場合は、最初にアップグレードしてください。
 
-> **Note:**
+> **ノート：**
 >
-> If you are unable to upgrade your `Hibernate` version, use the MySQL 5.7 dialect `org.hibernate.dialect.MySQL57Dialect` instead. However, this setting might cause unpredictable results and the absence of some TiDB-specific features, such as [sequences](/sql-statements/sql-statement-create-sequence.md).
+> バージョン`Hibernate`をアップグレードできない場合は、代わりにMySQL 5.7ダイアレクト`org.hibernate.dialect.MySQL57Dialect`を使用してください。ただし、この設定により、予期しない結果が発生したり、 [シーケンス](/sql-statements/sql-statement-create-sequence.md)などの TiDB 固有の機能が一部失われたりする可能性があります。

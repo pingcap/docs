@@ -3,31 +3,31 @@ title: Use BR to Restore Cluster Data
 summary: Learn how to restore data using BR commands
 ---
 
-# Use BR to Restore Cluster Data
+# BR を使用してクラスター データを復元する {#use-br-to-restore-cluster-data}
 
-This document describes how to restore cluster data using BR in the following scenarios:
+このドキュメントでは、次のシナリオで BR を使用してクラスタデータを復元する方法について説明します。
 
-- [Restore TiDB cluster snapshots](#restore-tidb-cluster-snapshots)
-- [Restore a database](#restore-a-database)
-- [Restore a table](#restore-a-table)
-- [Restore multiple tables with table filter](#restore-multiple-tables-with-table-filter)
-- [Restore backup data from external storage](#restore-backup-data-from-external-storage)
-- [Restore incremental data](#restore-incremental-data)
-- [Restore encrypted backup data](#restore-encrypted-backup-data)
-- [Restore tables in the `mysql` schema](#restore-tables-in-the-mysql-schema)
+-   [TiDBクラスタのスナップショットを復元する](#restore-tidb-cluster-snapshots)
+-   [データベースを復元する](#restore-a-database)
+-   [テーブルを復元する](#restore-a-table)
+-   [テーブル フィルターを使用して複数のテーブルを復元する](#restore-multiple-tables-with-table-filter)
+-   [外部ストレージからバックアップ データを復元する](#restore-backup-data-from-external-storage)
+-   [増分データの復元](#restore-incremental-data)
+-   [暗号化されたバックアップ データを復元する](#restore-encrypted-backup-data)
+-   [`mysql`スキーマのテーブルを復元する](#restore-tables-in-the-mysql-schema)
 
-If you are not familiar with Backup & Restore (BR), it is recommended that you read the following documents to fully understand BR usage principles and methods:
+バックアップと復元 (BR) に慣れていない場合は、次のドキュメントを読んで、BR の使用原理と方法を完全に理解することをお勧めします。
 
-- [BR Overview](/br/backup-and-restore-overview.md)
-- [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
+-   [BRの概要](/br/backup-and-restore-overview.md)
+-   [バックアップと復元に BR コマンドラインを使用する](/br/use-br-command-line-tool.md)
 
-## Restore TiDB cluster snapshots
+## TiDBクラスタのスナップショットを復元する {#restore-tidb-cluster-snapshots}
 
-BR supports restoring snapshot backup on an empty cluster to restore the target cluster to the latest state when the snapshot is backed up.
+BR は、空のクラスタでのスナップショット バックアップの復元をサポートし、スナップショットのバックアップ時にターゲットクラスタを最新の状態に復元します。
 
-Example: Restore the snapshot generated at `2022-01-30 07:42:23` from the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3 to the target cluster.
+例: Amazon S3 の`backup-data`バケットの`2022-01-30/`ディレクトリから`2022-01-30 07:42:23`で生成されたスナップショットをターゲットクラスタに復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full \
@@ -37,12 +37,12 @@ br restore full \
     --log-file restorefull.log
 ```
 
-In the preceding command,
+前のコマンドでは、
 
-- `--ratelimit`: The maximum speed for **each TiKV** to perform a restoration task (unit: MiB/s)
-- `--log-file` The target file for BR logging
+-   `--ratelimit` :**各 TiKV**が復元タスクを実行する最大速度 (単位: MiB/s)
+-   `--log-file` BR ロギングの対象ファイル
 
-During restoration, a progress bar is displayed in the terminal, as shown below. When the progress bar advances to 100%, the restoration is complete. To ensure data security, BR performs a check on the restored data.
+復元中は、以下に示すように、進行状況バーがターミナルに表示されます。プログレス バーが 100% まで進むと、復元は完了です。データのセキュリティを確保するために、BR は復元されたデータに対してチェックを実行します。
 
 ```shell
 br restore full \
@@ -53,17 +53,17 @@ br restore full \
 Full Restore <---------/...............................................> 17.12%.
 ```
 
-## Restore a database or a table
+## データベースまたはテーブルを復元する {#restore-a-database-or-a-table}
 
-BR supports restoring partial data of a specified database or table from backup data. This feature allows you to filter out unwanted data and back up only a specific database or table.
+BR は、指定されたデータベースまたはテーブルの部分データをバックアップ データから復元することをサポートします。この機能を使用すると、不要なデータを除外して、特定のデータベースまたはテーブルのみをバックアップできます。
 
-### Restore a database
+### データベースを復元する {#restore-a-database}
 
-To restore a database to the cluster, run the `br restore db` command. To get help on this command, run the `br restore db --help` command.
+データベースをクラスタに復元するには、 `br restore db`コマンドを実行します。このコマンドのヘルプを表示するには、 `br restore db --help`コマンドを実行します。
 
-Example: Restore the `test` database from the `db-test/2022-01-30/` directory in the `backup-data` bucket of Amazon S3 to the target cluster.
+例: Amazon S3 の`backup-data`バケットの`db-test/2022-01-30/`ディレクトリから`test`データベースをターゲットクラスタに復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore db \
@@ -74,19 +74,19 @@ br restore db \
     --log-file restore_db.log
 ```
 
-In the preceding command, `--db` specifies the name of the database to be restored, and other parameters are the same as those in [Restore TiDB cluster snapshots](#restore-tidb-cluster-snapshots).
+上記のコマンドで、 `--db`は復元するデータベースの名前を指定し、その他のパラメーターは[TiDBクラスタのスナップショットを復元する](#restore-tidb-cluster-snapshots)と同じです。
 
-> **Note:**
+> **ノート：**
 >
-> When you restore the backup data, the database name specified by `--db` must be the same as the one specified by `-- db` in the backup command. Otherwise, the restoration fails. This is because the metafile of the backup data ( `backupmeta` file) records the database name, and you can only restore data to the database with the same name. The recommended method is to restore the backup data to the database with the same name in another cluster.
+> バックアップデータを復元する場合、 `--db`で指定したデータベース名は、バックアップコマンドの`-- db`で指定したデータベース名と同じでなければなりません。そうしないと、復元は失敗します。これは、バックアップ データのメタファイル ( `backupmeta`ファイル) にデータベース名が記録されており、同じ名前のデータベースにしかデータを復元できないためです。推奨される方法は、バックアップ データを別のクラスタの同じ名前のデータベースに復元することです。
 
-### Restore a table
+### テーブルを復元する {#restore-a-table}
 
-To restore a single table to the cluster, run the `br restore table` command. To get help on this command, run the `br restore table --help` command.
+1 つのテーブルをクラスタに復元するには、 `br restore table`コマンドを実行します。このコマンドのヘルプを表示するには、 `br restore table --help`コマンドを実行します。
 
-Example: Restore `test`.`usertable` from the `table-db-usertable/2022-01-30/`directory in the `backup-data` bucket of Amazon S3 to the target cluster.
+例: `test`を復元します。 `usertable` Amazon S3 の`backup-data`バケット内の`table-db-usertable/2022-01-30/`ディレクトリからターゲットクラスタへ。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore table \
@@ -98,15 +98,15 @@ br restore table \
     --log-file restore_table.log
 ```
 
-In the preceding command, `--table` specifies the name of the table to be restored, and other parameters are the same as those in [Restore TiDB cluster snapshots](#restore-tidb-cluster-snapshots).
+上記のコマンドで、 `--table`は復元するテーブルの名前を指定し、その他のパラメーターは[TiDBクラスタのスナップショットを復元する](#restore-tidb-cluster-snapshots)と同じです。
 
-### Restore multiple tables with table filter
+### テーブル フィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
-To restore multiple tables with more criteria, run the `br restore full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+複数の基準で複数のテーブルを復元するには、 `br restore full`コマンドを実行し、 `--filter`または`-f`で[テーブル フィルター](/table-filter.md)を指定します。
 
-Example: Restore data matching the `db*.tbl*` table from the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3 to the target cluster.
+例: Amazon S3 の`backup-data`バケットの`table-filter/2022-01-30/`ディレクトリから`db*.tbl*`テーブルに一致するデータをターゲットクラスタに復元します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full \
@@ -116,21 +116,21 @@ br restore full \
     --log-file restorefull.log
 ```
 
-## Restore backup data from external storage
+## 外部ストレージからバックアップ データを復元する {#restore-backup-data-from-external-storage}
 
-BR supports restoring data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, or other S3-compatible file storage services. For details, see the following documents:
+BR は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS、またはその他の S3 互換ファイル ストレージ サービスへのデータの復元をサポートしています。詳細については、次のドキュメントを参照してください。
 
-- [Restore data on Amazon S3 using BR](/br/backup-storage-S3.md)
-- [Restore data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
-- [Restore data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
+-   [BR を使用して Amazon S3 にデータを復元する](/br/backup-storage-S3.md)
+-   [BR を使用して Google Cloud Storage にデータを復元する](/br/backup-storage-gcs.md)
+-   [BR を使用して Azure Blob Storage にデータを復元する](/br/backup-storage-azblob.md)
 
-## Restore incremental data
+## 増分データの復元 {#restore-incremental-data}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-Restoring incremental data is similar to restoring full data using BR. When restoring incremental data, make sure that all the data backed up before `last backup ts` has been restored to the target cluster. Also, because incremental restoration updates ts data, you need to ensure that there are no other writes during the restoration. Otherwise, conflicts might occur.
+増分データの復元は、BR を使用した完全なデータの復元に似ています。増分データを復元する場合は、 `last backup ts`より前にバックアップされたすべてのデータがターゲットクラスタに復元されていることを確認してください。また、増分復元では ts データが更新されるため、復元中に他の書き込みが行われないようにする必要があります。そうしないと、競合が発生する可能性があります。
 
 ```shell
 br restore full \
@@ -140,15 +140,15 @@ br restore full \
     --log-file restorefull.log
 ```
 
-## Restore encrypted backup data
+## 暗号化されたバックアップ データを復元する {#restore-encrypted-backup-data}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-After encrypting the backup data, you need to pass in the corresponding decryption parameters to restore the data. Ensure that the decryption algorithm and key are correct. If the decryption algorithm or key is incorrect, the data cannot be restored.
+バックアップ データを暗号化したら、対応する復号化パラメータを渡してデータを復元する必要があります。復号化アルゴリズムとキーが正しいことを確認してください。復号化アルゴリズムまたはキーが正しくない場合、データは復元できません。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full\
@@ -158,11 +158,11 @@ br restore full\
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-## Restore tables in the `mysql` schema
+## <code>mysql</code>スキーマのテーブルを復元する {#restore-tables-in-the-code-mysql-code-schema}
 
-Starting from BR v5.1.0, when you perform a full backup, BR backs up the **system tables**. Before BR v6.2.0, under default configuration, BR only restores user data, but does not restore data in the system tables. Starting from BR v6.2.0, if the backup data contains system tables, and if you configure `--with-sys-table`, BR restores **data in some system tables**.
+BR v5.1.0 以降、フル バックアップを実行すると、BR は**システム テーブル**をバックアップします。 BR v6.2.0 より前のデフォルト構成では、BR はユーザー データのみを復元し、システム テーブル内のデータは復元しません。 BR v6.2.0 以降、バックアップ データにシステム テーブルが含まれている場合、 `--with-sys-table`を構成すると、BR は<strong>一部のシステム テーブルのデータを</strong>復元します。
 
-BR can restore data in **the following system tables**:
+BR は**、次のシステム テーブルの**データを復元できます。
 
 ```
 +----------------------------------+
@@ -177,22 +177,22 @@ BR can restore data in **the following system tables**:
 +----------------------------------+
 ```
 
-**BR does not restore the following system tables**:
+**BR は、次のシステム テーブルを復元しません**。
 
-- Statistics tables (`mysql.stat_*`)
-- System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+-   統計表 ( `mysql.stat_*` )
+-   システム変数テーブル ( `mysql.tidb` 、 `mysql.global_variables` )
+-   [その他のシステム テーブル](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
 
-When you restore data related to system privileges, note the following:
+システム権限に関連するデータを復元する場合は、次の点に注意してください。
 
-- BR does not restore user data with `user` as `cloud_admin` and `host` as `'%'`. This user is reserved for TiDB Cloud. Do not create a user or role named `cloud_admin` in your environment, because the user privileges related to `cloud_admin` cannot be restored correctly.
-- Before BR restores data, it checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
+-   BR は、 `user`を`cloud_admin`として、 `host`を`'%'`としてユーザー データを復元しません。このユーザーはTiDB Cloud用に予約されています。 `cloud_admin`に関連するユーザー特権を正しく復元できないため、ご使用の環境で`cloud_admin`という名前のユーザーまたはロールを作成しないでください。
+-   BR は、データを復元する前に、ターゲットクラスタのシステム テーブルがバックアップ データ内のシステム テーブルと互換性があるかどうかをチェックします。 「互換性がある」とは、次のすべての条件が満たされていることを意味します。
 
-    - The target cluster has the same system tables as the backup data.
-    - The **number of columns** in the system privilege table of the target cluster is consistent with that of the backup data. The order of the columns can be different.
-    - The columns in the system privilege table of the target cluster are compatible with those in the backup data. If the data type of the column is a type with length (for example, int or char), the length in the target cluster must be >= the length in the backup data. If the data type of the column is an enum type, the enum values in the target cluster must be a superset of the enum values in the backup data.
+    -   ターゲットクラスタには、バックアップ データと同じシステム テーブルがあります。
+    -   対象クラスタのシステム権限テーブル**の列数が**バックアップデータの列数と一致している。列の順序は異なる場合があります。
+    -   ターゲットクラスタのシステム権限テーブルの列は、バックアップ データの列と互換性があります。列のデータ型が長さのある型 (int や char など) の場合、ターゲットクラスタの長さはバックアップ データの長さ以上である必要があります。列のデータ型が列挙型の場合、ターゲットクラスタの列挙値は、バックアップ データの列挙値のスーパーセットである必要があります。
 
-If the target cluster is not empty or the target cluster is not compatible with the backup data, BR returns the following information. You can remove `--with-sys-table` to skip restoring system tables.
+ターゲットクラスタが空でない場合、またはターゲットクラスタがバックアップ データと互換性がない場合、BR は次の情報を返します。 `--with-sys-table`を削除すると、システム テーブルの復元をスキップできます。
 
 ```
 #######################################################################
@@ -202,31 +202,31 @@ If the target cluster is not empty or the target cluster is not compatible with 
 #######################################################################
 ```
 
-To restore a table created by the user in the `mysql` schema (not system tables), you can explicitly include the table using [table filters](/table-filter.md#syntax). The following example shows how to restore the `mysql.usertable` table when BR performs a normal restoration.
+`mysql`スキーマ (システム テーブルではない) でユーザーが作成したテーブルを復元するには、 [テーブル フィルター](/table-filter.md#syntax)を使用して明示的にテーブルを含めることができます。次の例は、BR が通常の復元を実行するときに`mysql.usertable`テーブルを復元する方法を示しています。
 
 ```shell
 br restore full -f '*.*' -f '!mysql.*' -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-In the preceding command,
+前のコマンドでは、
 
-- `-f '*.*'` is used to override the default rules
-- `-f '!mysql.*'` instructs BR not to restore tables in `mysql` unless otherwise stated.
-- `-f 'mysql.usertable'` indicates that `mysql.usertable` should be restored.
+-   `-f '*.*'`は、デフォルトのルールをオーバーライドするために使用されます
+-   `-f '!mysql.*'`は、特に明記されていない限り、 `mysql`でテーブルを復元しないように BR に指示します。
+-   `-f 'mysql.usertable'`は、 `mysql.usertable`を復元する必要があることを示します。
 
-If you only need to restore `mysql.usertable`, run the following command:
+`mysql.usertable`のみを復元する必要がある場合は、次のコマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 ```
 
-## Restoration performance and impact
+## 復元性能と影響 {#restoration-performance-and-impact}
 
-- TiDB fully uses TiKV CPU, disk IO, network bandwidth, and other resources when restoring data. Therefore, it is recommended that you restore backup data on an empty cluster to avoid affecting running services.
-- The restoration speed depends much on cluser configuration, deployment, and running services. Generally, the restoration speed can reach 100 MB/s (per TiKV node).
+-   TiDB は、データの復元時に TiKV CPU、ディスク IO、ネットワーク帯域幅、およびその他のリソースを完全に使用します。したがって、実行中のサービスに影響を与えないように、空のクラスタにバックアップ データを復元することをお勧めします。
+-   復元速度は、クラスター構成、展開、および実行中のサービスに大きく依存します。通常、復元速度は 100 MB/秒 (TiKV ノードあたり) に達することがあります。
 
-> **Note:**
+> **ノート：**
 >
-> The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, are worthy of reference. However, the restoration speed may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
+> 多くのシナリオでのシミュレーション テストに基づき、一部の顧客サイトで検証された前述のテストの結論は、参照に値します。ただし、復元速度はシナリオによって異なる場合があります。したがって、常にテストを実行し、テスト結果を確認する必要があります。

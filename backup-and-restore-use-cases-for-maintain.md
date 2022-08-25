@@ -3,107 +3,107 @@ title: BR Use Cases
 summary: Learn the use cases of backing up and restoring data using BR.
 ---
 
-# BR Use Cases
+# BR ユースケース {#br-use-cases}
 
-[Backup & Restore (BR)](/br/backup-and-restore-overview.md) is a tool for distributed backup and restoration of the TiDB cluster data.
+[バックアップと復元 (BR)](/br/backup-and-restore-overview.md)は、TiDBクラスタデータの分散バックアップおよび復元用のツールです。
 
-This document describes common backup and restoration scenarios:
+このドキュメントでは、一般的なバックアップと復元のシナリオについて説明します。
 
-- [Back up a single table to a network disk (recommended for production environments)](#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)
-- [Restore data from a network disk (recommended for production environments)](#restore-data-from-a-network-disk-recommended-for-production-environments)
-- [Back up a single table to a local disk](#back-up-a-single-table-to-a-local-disk-recommended-for-testing-environments)
-- [Restore data from a local disk](#restore-data-from-a-local-disk-recommended-for-testing-environments)
+-   [1 つのテーブルをネットワーク ディスクにバックアップする (運用環境に推奨)](#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments)
+-   [ネットワーク ディスクからのデータの復元 (本番環境に推奨)](#restore-data-from-a-network-disk-recommended-for-production-environments)
+-   [1 つのテーブルをローカル ディスクにバックアップする](#back-up-a-single-table-to-a-local-disk-recommended-for-testing-environments)
+-   [ローカル ディスクからデータを復元する](#restore-data-from-a-local-disk-recommended-for-testing-environments)
 
-This document aims to help you achieve the following goals:
+このドキュメントは、次の目標の達成を支援することを目的としています。
 
-- Back up and restore data using a network disk or local disk correctly.
-- Get the status of a backup or restoration operation through monitoring metrics.
-- Learn how to tune performance during the backup or restoration operation.
-- Troubleshoot the possible anomalies during the backup operation.
+-   ネットワーク ディスクまたはローカル ディスクを正しく使用して、データのバックアップと復元を行ってください。
+-   メトリックを監視して、バックアップまたは復元操作のステータスを取得します。
+-   バックアップまたは復元操作中にパフォーマンスを調整する方法を学びます。
+-   バックアップ操作中に発生する可能性のある異常をトラブルシューティングします。
 
-## Audience
+## 観客 {#audience}
 
-You are expected to have a basic understanding of TiDB and [TiKV](https://tikv.org/).
+TiDB と[TiKV](https://tikv.org/)の基本的な知識が必要です。
 
-Before reading on, make sure you have read [BR Overview](/br/backup-and-restore-overview.md), especially [Usage Restrictions](/br/backup-and-restore-overview.md#usage-restrictions) and [Some tips](/br/backup-and-restore-overview.md#some-tips).
+読み進める前に、 [BRの概要](/br/backup-and-restore-overview.md) 、特に[使用制限](/br/backup-and-restore-overview.md#usage-restrictions)と[いくつかのヒント](/br/backup-and-restore-overview.md#some-tips)を読んだことを確認してください。
 
-## Prerequisites
+## 前提条件 {#prerequisites}
 
-This section introduces the recommended method of deploying TiDB, cluster versions, the hardware information of the TiKV cluster, and the cluster configuration for the use case demonstrations.
+このセクションでは、TiDB の推奨デプロイ方法、クラスタバージョン、TiKVクラスタのハードウェア情報、およびユース ケース デモンストレーション用のクラスタ構成を紹介します。
 
-You can estimate the performance of your backup or restoration operation based on your own hardware and configuration. It is recommended that you use a network disk to back up and restore data. This spares you from collecting backup files and greatly improves the backup efficiency especially when the TiKV cluster is in a large scale.
+独自のハードウェアと構成に基づいて、バックアップまたは復元操作のパフォーマンスを見積もることができます。データのバックアップと復元には、ネットワーク ディスクを使用することをお勧めします。これにより、バックアップ ファイルを収集する手間が省け、特に TiKVクラスタが大規模な場合にバックアップ効率が大幅に向上します。
 
-### Deployment method
+### 導入方法 {#deployment-method}
 
-It is recommended that you deploy the TiDB cluster using [TiUP](/tiup/tiup-cluster.md) and install BR using TiUP.
+[TiUP](/tiup/tiup-cluster.md)を使用して TiDBクラスタをデプロイし、TiUP を使用して BR をインストールすることをお勧めします。
 
-### Cluster versions
+### クラスターのバージョン {#cluster-versions}
 
-- TiDB: v6.2.0
-- TiKV: v6.2.0
-- PD: v6.2.0
-- BR: v6.2.0
+-   TiDB: v6.2.0
+-   TiKV: v6.2.0
+-   PD: v6.2.0
+-   BR: v6.2.0
 
-> **Note:**
+> **ノート：**
 >
-> It is recommended that you use the latest version of [TiDB/TiKV/PD/BR](/releases/release-notes.md) and make sure that the BR version is **consistent with** the TiDB version.
+> [TiDB/TiKV/PD/BR](/releases/release-notes.md)の最新バージョンを使用し、BR バージョンが TiDB バージョンと**一致して**いることを確認することをお勧めします。
 
-### TiKV hardware information
+### TiKV ハードウェア情報 {#tikv-hardware-information}
 
-- Operating system: CentOS Linux release 7.6.1810 (Core)
-- CPU: 16-Core Common KVM processor
-- RAM: 32 GB
-- Disk: 500 GB SSD * 2
-- NIC: 10 Gigabit network card
+-   オペレーティング システム: CentOS Linux リリース 7.6.1810 (コア)
+-   CPU: 16 コア共通 KVM プロセッサ
+-   RAM: 32GB
+-   ディスク: 500 GB SSD * 2
+-   NIC: 10 ギガビット ネットワーク カード
 
-### Cluster configuration
+### クラスタ構成 {#cluster-configuration}
 
-BR directly sends commands to the TiKV cluster and are not dependent on the TiDB server, so you do not need to configure the TiDB server when using BR.
+BR は直接 TiKVクラスタにコマンドを送信し、TiDB サーバーに依存しないため、BR を使用する場合に TiDB サーバーを構成する必要はありません。
 
-- TiKV: default configuration
-- PD: default configuration
+-   TiKV: デフォルト設定
+-   PD: デフォルト設定
 
-### Others
+### その他 {#others}
 
-In addition to the preceding prerequisites, you should also perform the following checks before performing the backup and restoration.
+上記の前提条件に加えて、バックアップと復元を実行する前に、次のチェックも実行する必要があります。
 
-#### Check before backup
+#### バックアップ前の確認 {#check-before-backup}
 
-Before running the [`br backup` command](/br/use-br-command-line-tool.md#br-command-line-description), make sure the following conditions are met:
+[`br backup`コマンド](/br/use-br-command-line-tool.md#br-command-line-description)を実行する前に、次の条件が満たされていることを確認してください。
 
-- No DDL statements are running on the TiDB cluster.
-- The target storage device has required space (no less than 1/3 of the disk space of the backup cluster).
+-   TiDBクラスタで実行されている DDL ステートメントはありません。
+-   ターゲット ストレージ デバイスに必要な容量がある（バックアップクラスタのディスク容量の 1/3 以上）。
 
-#### Check before restoration
+#### 復旧前の確認 {#check-before-restoration}
 
-Before running the [`br restore` command](/br/use-br-command-line-tool.md#br-command-line-description), check the target cluster to ensure that the table in this cluster does not have a duplicate name.
+[`br restore`コマンド](/br/use-br-command-line-tool.md#br-command-line-description)を実行する前に、ターゲットクラスタをチェックして、このクラスタのテーブルに重複した名前がないことを確認します。
 
-## Back up a single table to a network disk (recommended for production environments)
+## 1 つのテーブルをネットワーク ディスクにバックアップする (運用環境に推奨) {#back-up-a-single-table-to-a-network-disk-recommended-for-production-environments}
 
-Run the `br backup` command to back up the single table data `--db batchmark --table order_line` to the specified path `local:///br_data` in the network disk.
+`br backup`コマンドを実行して、単一テーブル データ`--db batchmark --table order_line`をネットワーク ディスクの指定されたパス`local:///br_data`にバックアップします。
 
-### Backup prerequisites
+### バックアップの前提条件 {#backup-prerequisites}
 
-- [Check before backup](#check-before-backup)
-- Configure a high-performance SSD hard disk host as the NFS server to store data, and all BR nodes, TiKV nodes, and TiFlash nodes as NFS clients. Mount the same path (for example, `/br_data`) to the NFS server for NFS clients to access the server.
-- The total transfer rate between the NFS server and all NFS clients must reach at least `the number of TiKV instances * 150MB/s`. Otherwise, the network I/O might become the performance bottleneck.
+-   [バックアップ前の確認](#check-before-backup)
+-   高性能 SSD ハードディスク ホストを NFS サーバーとして構成してデータを保存し、すべての BR ノード、TiKV ノード、および TiFlash ノードを NFS クライアントとして構成します。 NFS クライアントがサーバーにアクセスできるように、NFS サーバーに同じパス (たとえば、 `/br_data` ) をマウントします。
+-   NFS サーバーとすべての NFS クライアント間の合計転送速度は、少なくとも`the number of TiKV instances * 150MB/s`に達する必要があります。そうしないと、ネットワーク I/O がパフォーマンスのボトルネックになる可能性があります。
 
-> **Note:**
+> **ノート：**
 >
-> - During data backup, because only the data of leader replicas are backed up, even if there is a TiFlash replica in the cluster, BR can complete the backup without mounting TiFlash nodes.
-> - When restoring data, BR will restore the data of all replicas. Also, TiFlash nodes need access to the backup data for BR to complete the restore. Therefore, before the restore, you must mount TiFlash nodes to the NFS server.
+> -   データバックアップ時は、リーダーレプリカのデータのみをバックアップするため、クラスタにTiFlashレプリカが存在する場合でも、BRはTiFlashノードをマウントせずにバックアップを完了できます。
+> -   データを復元する場合、BR はすべてのレプリカのデータを復元します。また、TiFlash ノードは、リストアを完了するために BR のバックアップ データにアクセスする必要があります。したがって、リストアの前に、TiFlash ノードを NFS サーバーにマウントする必要があります。
 
-### Topology
+### トポロジー {#topology}
 
-The following diagram shows the typology of BR:
+次の図は、BR の類型を示しています。
 
 ![img](/media/br/backup-nfs-deploy.png)
 
-### Backup operation
+### バックアップ操作 {#backup-operation}
 
-Run the `br backup` command:
+`br backup`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 bin/br backup table \
@@ -114,48 +114,48 @@ bin/br backup table \
     --log-file backup-nfs.log
 ```
 
-### Monitoring metrics for the backup
+### バックアップのモニタリング メトリック {#monitoring-metrics-for-the-backup}
 
-During the backup process, pay attention to the following metrics on the monitoring panels to get the status of the backup process.
+バックアップ プロセス中は、監視パネルの次のメトリックに注意して、バックアップ プロセスのステータスを取得します。
 
-**Backup CPU Utilization**: the CPU usage rate of each working TiKV node in the backup operation (for example, backup-worker and backup-endpoint).
+**バックアップ CPU 使用率**: バックアップ操作で動作している各 TiKV ノードの CPU 使用率 (たとえば、バックアップ ワーカーとバックアップ エンドポイント)。
 
 ![img](/media/br/backup-cpu.png)
 
-**IO Utilization**: the I/O usage rate of each working TiKV node in the backup operation.
+**IO 使用率**: バックアップ操作で動作している各 TiKV ノードの I/O 使用率。
 
 ![img](/media/br/backup-io.png)
 
-**BackupSST Generation Throughput**: the backupSST generation throughput of each working TiKV node in the backup operation, which is normally around 150 MB/s.
+**BackupSST Generation Throughput** : バックアップ操作で動作している各 TiKV ノードの backupSST 生成スループット。通常は約 150 MB/秒です。
 
 ![img](/media/br/backup-throughput.png)
 
-**One Backup Range Duration**: the duration of backing up a range, which is the total time cost of scanning KVs and storing the range as the backupSST file.
+**One Backup Range Duration** : 範囲をバックアップする期間。これは、KV をスキャンし、範囲を backupSST ファイルとして保存するための合計時間コストです。
 
 ![img](/media/br/backup-range-duration.png)
 
-**One Backup Subtask Duration**: the duration of each sub-task into which a backup task is divided.
+**1 つのバックアップ サブタスク期間**: バックアップ タスクが分割された各サブタスクの期間。
 
-> **Note:**
+> **ノート：**
 >
-> - In this task, the single table to be backed up has three indexes and the task is normally divided into four sub-tasks.
-> - The panel in the following image has 20 points on it, 10 blue and 10 yellow, indicating that there are 10 sub-tasks. Region scheduling might occur during the backup process, so a few retries is normal.
+> -   このタスクでは、バックアップする 1 つのテーブルに 3 つのインデックスがあり、タスクは通常 4 つのサブタスクに分割されます。
+> -   次の画像のパネルには 20 個のポイントがあり、10 個が青、10 個が黄色であり、10 個のサブタスクがあることを示しています。リージョンのスケジューリングはバックアップ プロセス中に発生する可能性があるため、数回の再試行は正常です。
 
 ![img](/media/br/backup-subtask-duration.png)
 
-**Backup Errors**: the errors occurred during the backup process. No error occurs in normal situations. Even if a few errors occur, the backup operation has the retry mechanism which might increase the backup time but does not affect the operation correctness.
+**バックアップ エラー**: バックアップ プロセス中に発生したエラー。通常の状況ではエラーは発生しません。多少のエラーが発生した場合でも、バックアップ操作には再試行メカニズムがあり、バックアップ時間が長くなる可能性がありますが、操作の正確性には影響しません。
 
 ![img](/media/br/backup-errors.png)
 
-**Checksum Request Duration**: the duration of the admin checksum request in the backup cluster.
+**Checksum Request Duration** : バックアップクラスタでの管理チェックサム リクエストの期間。
 
 ![img](/media/br/checksum-duration.png)
 
-### Backup results explanation
+### バックアップ結果の説明 {#backup-results-explanation}
 
-When finishing the backup, BR outputs the backup summary to the console.
+バックアップが完了すると、BR はバックアップの概要をコンソールに出力します。
 
-In the log specified before running the backup command, you can get the statistical information of the backup operation from this log. Search "summary" in this log, you can see the following information:
+バックアップコマンドを実行する前に指定したログでは、このログからバックアップ操作の統計情報を取得できます。このログで「概要」を検索すると、次の情報が表示されます。
 
 ```
 ["Full backup Success summary:
@@ -174,26 +174,26 @@ In the log specified before running the backup command, you can get the statisti
     [Size=826765915]
 ```
 
-The preceding log includes the following information:
+上記のログには、次の情報が含まれています。
 
-- `total take(Full backup time)`: Backup duration
-- `total take(real time)`: Total runtime of the application
-- `total size(MB)`: The size of the backup data
-- `avg speed(MB/s)`: Backup throughput
-- `total kv`: The number of backed-up KV pairs
-- `backup checksum`: Backup checksum duration
-- `backup fast checksum`: The total duration of calculating the checksum, KV pairs, and bytes of each table
-- `backup total regions`: The total number of backup Regions
-- `BackupTS`: The snapshot timestamp of the backup data
-- `Size`: The actual size of the backup data in the disk after compression
+-   `total take(Full backup time)` : バックアップ期間
+-   `total take(real time)` : アプリケーションの総実行時間
+-   `total size(MB)` : バックアップ データのサイズ
+-   `avg speed(MB/s)` : バックアップ スループット
+-   `total kv` : バックアップされた KV ペアの数
+-   `backup checksum` : バックアップ チェックサム期間
+-   `backup fast checksum` : 各テーブルのチェックサム、KV ペア、およびバイトを計算する合計時間
+-   `backup total regions` : バックアップ リージョンの総数
+-   `BackupTS` : バックアップ データのスナップショット タイムスタンプ
+-   `Size` : 圧縮後のディスク内のバックアップ データの実際のサイズ
 
-From the preceding information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `62.86`.
+上記の情報から、単一の TiKV インスタンスのスループットを計算できます: `avg speed(MB/s)` / `tikv_count` = `62.86` 。
 
-### Performance tuning
+### 性能調整 {#performance-tuning}
 
-If the resource usage of TiKV does not become an obvious bottleneck during the backup process (for example, in the [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup), the highest CPU usage rate of backup-worker is around `1500%` and the overall I/O usage rate is below `30%`), you can try to increase the value of `--concurrency` (`4` by default) to tune the performance. But this performance tuning method is not suitable for the use cases of many small tables. See the following example:
+バックアップ プロセス中に TiKV のリソース使用率が明らかなボトルネックにならない場合 (たとえば、 [バックアップのモニタリング メトリック](#monitoring-metrics-for-the-backup)で、backup-worker の最大 CPU 使用率が`1500%`前後で、全体の I/O 使用率が`30%`未満である場合)、 `--concurrency` (デフォルトでは`4` ) の値を増やして、パフォーマンスを調整できます。ただし、このパフォーマンス チューニング方法は、多くの小さなテーブルのユース ケースには適していません。次の例を参照してください。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 bin/br backup table \
@@ -209,71 +209,71 @@ bin/br backup table \
 
 ![img](/media/br/backup-diff2.png)
 
-The tuned performance results are as follows (with the same data size):
+チューニングされたパフォーマンスの結果は次のとおりです (データ サイズは同じです)。
 
-- Backup duration (`total take(s)`): reduced from `986.43` to `535.53`
-- Backup throughput (`avg speed(MB/s)`): increased from `358.09` to `659.59`
-- Throughput of a single TiKV instance (`avg speed(MB/s)/tikv_count`): increased from `89` to `164.89`
+-   バックアップ期間 ( `total take(s)` ): `986.43`から`535.53`に短縮
+-   バックアップ スループット ( `avg speed(MB/s)` ): `358.09`から`659.59`に増加
+-   単一の TiKV インスタンスのスループット ( `avg speed(MB/s)/tikv_count` ): `89`から`164.89`に増加
 
-## Restore data from a network disk (recommended for production environments)
+## ネットワーク ディスクからのデータの復元 (本番環境に推奨) {#restore-data-from-a-network-disk-recommended-for-production-environments}
 
-Use the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
+`br restore`コマンドを使用して、完全なバックアップ データをオフラインクラスタに復元します。現在、BR はオンラインクラスタへのデータの復元をサポートしていません。
 
-### Restoration prerequisites
+### 復元の前提条件 {#restoration-prerequisites}
 
-- [Check before restore](#check-before-restoration)
+-   [復元前の確認](#check-before-restoration)
 
-### Topology
+### トポロジー {#topology}
 
-The following diagram shows the typology of BR:
+次の図は、BR の類型を示しています。
 
 ![img](/media/br/restore-nfs-deploy.png)
 
-### Restoration operation
+### 復旧作業 {#restoration-operation}
 
-Run the `br restore` command:
+`br restore`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 bin/br restore table --db batchmark --table order_line -s local:///br_data --pd 172.16.5.198:2379 --log-file restore-nfs.log
 ```
 
-### Monitoring metrics for the restoration
+### 復元のモニタリング メトリック {#monitoring-metrics-for-the-restoration}
 
-During the restoration process, pay attention to the following metrics on the monitoring panels to get the status of the restoration process.
+復元プロセス中は、監視パネルの次のメトリックに注意して、復元プロセスのステータスを取得してください。
 
-**CPU**: the CPU usage rate of each working TiKV node in the restoration operation.
+**CPU** : 復元操作における各稼働中の TiKV ノードの CPU 使用率。
 
 ![img](/media/br/restore-cpu.png)
 
-**IO Utilization**: the I/O usage rate of each working TiKV node in the restoration operation.
+**IO 使用率**: 復元操作で動作している各 TiKV ノードの I/O 使用率。
 
 ![img](/media/br/restore-io.png)
 
-**Region**: the Region distribution. The more even Regions are distributed, the better the restoration resources are used.
+**リージョン**:リージョン分布。リージョンが均等に分散されているほど、復元リソースがより適切に使用されます。
 
 ![img](/media/br/restore-region.png)
 
-**Process SST Duration**: the delay of processing the SST files. When restoring a table, if `tableID` is changed, you need to rewrite `tableID`. Otherwise, `tableID` is renamed. Generally, the delay of rewriting is longer than that of renaming.
+**Process SST Duration** : SST ファイルの処理の遅延。テーブルを復元する場合、 `tableID`を変更した場合は`tableID`を書き換える必要があります。それ以外の場合、 `tableID`は名前が変更されます。一般に、書き換えの遅延は、名前の変更の遅延よりも長くなります。
 
 ![img](/media/br/restore-process-sst.png)
 
-**DownLoad SST Throughput**: the throughput of downloading SST files from External Storage.
+**ダウンロード SST スループット**: 外部ストレージから SST ファイルをダウンロードするスループット。
 
 ![img](/media/br/restore-download-sst.png)
 
-**Restore Errors**: the errors occurred during the restoration process.
+**復元エラー**: 復元プロセス中に発生したエラー。
 
 ![img](/media/br/restore-errors.png)
 
-**Checksum Request Duration**: the duration of the admin checksum request. This duration for the restoration is longer than that for the backup.
+**Checksum Request Duration** : 管理チェックサム要求の期間。このリストアの所要時間は、バックアップの所要時間よりも長くなります。
 
 ![img](/media/br/restore-checksum.png)
 
-### Restoration results explanation
+### 復元結果の説明 {#restoration-results-explanation}
 
-In the log specified before running the restoration command, you can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
+リストアコマンドを実行する前に指定したログでは、このログからリストア操作の統計情報を取得できます。このログで「概要」を検索すると、次の情報が表示されます。
 
 ```
 ["Table Restore summary:
@@ -292,61 +292,61 @@ In the log specified before running the restoration command, you can get the sta
     [Size=48693068713]
 ```
 
-The preceding log includes the following information:
+上記のログには、次の情報が含まれています。
 
-- `total take(Full restore time)`: The restoration duration
-- `total take(real time)`: The total runtime of the application
-- `total size(MB)`: The size of the data to be restored
-- `total kv`: The number of restored KV pairs
-- `avg speed(MB/s)`: The restoration throughput
-- `split region`: The Region split duration
-- `restore checksum`: The restoration checksum duration
-- `Size`: The actual size of the restored data in the disk
+-   `total take(Full restore time)` : 復元期間
+-   `total take(real time)` : アプリケーションの総実行時間
+-   `total size(MB)` : 復元するデータのサイズ
+-   `total kv` : 復元された KV ペアの数
+-   `avg speed(MB/s)` : 復元スループット
+-   `split region` :リージョン分割デュレーション
+-   `restore checksum` : 復元チェックサム期間
+-   `Size` : ディスク内の復元されたデータの実際のサイズ
 
-From the preceding information, the following items can be calculated:
+上記の情報から、次の項目を計算できます。
 
-- The throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` = `91.8`
-- The average restore speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` = `87.4`
+-   単一の TiKV インスタンスのスループット: `avg speed(MB/s)` / `tikv_count` = `91.8`
+-   単一の TiKV インスタンスの平均復元速度: `total size(MB)` /( `split time` + `restore time` )/ `tikv_count` = `87.4`
 
-#### Performance tuning
+#### 性能調整 {#performance-tuning}
 
-If the resource usage of TiKV does not become an obvious bottleneck during the restore process, you can increase the value of `--concurrency` (defaults to `128`). See the following example:
+復元プロセス中に TiKV のリソース使用量が明らかなボトルネックにならない場合は、値`--concurrency`を増やすことができます (デフォルトは`128` )。次の例を参照してください。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 bin/br restore table --db batchmark --table order_line -s local:///br_data/ --pd 172.16.5.198:2379 --log-file restore-concurrency.log --concurrency 1024
 ```
 
-The tuned performance results are as follows (with the same data size):
+チューニングされたパフォーマンスの結果は次のとおりです (データ サイズは同じです)。
 
-- Restoration duration (`total take(s)`): reduced from `961.37` to `443.49`
-- Restoration throughput (`avg speed(MB/s)`): increased from `367.42` to `796.47`
-- Throughput of a single TiKV instance (`avg speed(MB/s)`/`tikv_count`): increased from `91.8` to `199.1`
-- Average restore speed of a single TiKV instance (`total size(MB)`/(`split time` + `restore time`)/`tikv_count`): increased from `87.4` to `162.3`
+-   回復時間 ( `total take(s)` ): `961.37`から`443.49`に減少
+-   復元スループット ( `avg speed(MB/s)` ): `367.42`から`796.47`に増加
+-   単一の TiKV インスタンスのスループット ( `avg speed(MB/s)` / `tikv_count` ): `91.8`から`199.1`に増加
+-   単一の TiKV インスタンスの平均復元速度 ( `total size(MB)` /( `split time` + `restore time` )/ `tikv_count` ): `87.4`から`162.3`に増加
 
-## Back up a single table to a local disk (recommended for testing environments)
+## 1 つのテーブルをローカル ディスクにバックアップする (テスト環境に推奨) {#back-up-a-single-table-to-a-local-disk-recommended-for-testing-environments}
 
-Run the `br backup` command to back up a single table `--db batchmark --table order_line` to the specified path `local:///home/tidb/backup_local` in the local disk.
+`br backup`コマンドを実行して、単一のテーブル`--db batchmark --table order_line`をローカル ディスクの指定されたパス`local:///home/tidb/backup_local`にバックアップします。
 
-### Backup prerequisites
+### バックアップの前提条件 {#backup-prerequisites}
 
-* [Check before backup](#check-before-backup)
-* Each TiKV node has a separate disk to store backupSST files.
-* The `backup_endpoint` node has a separate disk to store `backupmeta` files.
-* TiKV and the `backup_endpoint` node share the same directory (for example, `/home/tidb/backup_local`) for backup.
+-   [バックアップ前の確認](#check-before-backup)
+-   各 TiKV ノードには、backupSST ファイルを格納するための個別のディスクがあります。
+-   `backup_endpoint`のノードには、 `backupmeta`のファイルを格納するための個別のディスクがあります。
+-   TiKV と`backup_endpoint`ノードは、バックアップ用に同じディレクトリ (たとえば、 `/home/tidb/backup_local` ) を共有します。
 
-### Topology
+### トポロジー {#topology}
 
-The following diagram shows the typology of BR:
+次の図は、BR の類型を示しています。
 
 ![img](/media/br/backup-local-deploy.png)
 
-### Backup operation
+### バックアップ操作 {#backup-operation}
 
-Run the `br backup` command:
+`br backup`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 bin/br backup table \
@@ -357,11 +357,11 @@ bin/br backup table \
     --log-file backup_local.log
 ```
 
-During the backup process, pay attention to the metrics on the monitoring panels to get the status of the backup process. See [Monitoring metrics for the backup](#monitoring-metrics-for-the-backup) for details.
+バックアップ プロセス中は、監視パネルのメトリックに注意して、バックアップ プロセスのステータスを取得します。詳細は[バックアップのモニタリング メトリック](#monitoring-metrics-for-the-backup)を参照してください。
 
-#### Backup results explanation
+#### バックアップ結果の説明 {#backup-results-explanation}
 
-In the log specified before running the backup command, you can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
+バックアップコマンドを実行する前に指定したログでは、このログからリストア操作の統計情報を取得できます。このログで「概要」を検索すると、次の情報が表示されます。
 
 ```
 ["Table backup summary:
@@ -377,54 +377,54 @@ In the log specified before running the backup command, you can get the statisti
     ["backup fast checksum"=22.995552ms]
 ```
 
-The preceding log includes the following information:
+上記のログには、次の情報が含まれています。
 
-- `total take(s)`: The backup duration
-- `total size(MB)`: The data size
-- `avg speed(MB/s)`: The backup throughput
-- `backup checksum`: The backup checksum duration
+-   `total take(s)` : バックアップ期間
+-   `total size(MB)` : データサイズ
+-   `avg speed(MB/s)` : バックアップのスループット
+-   `backup checksum` : バックアップ チェックサム期間
 
-From the preceding information, the throughput of a single TiKV instance can be calculated: `avg speed(MB/s)`/`tikv_count` = `160`.
+上記の情報から、単一の TiKV インスタンスのスループットを計算できます: `avg speed(MB/s)` / `tikv_count` = `160` 。
 
-## Restore data from a local disk (recommended for testing environments)
+## ローカル ディスクからデータを復元する (テスト環境に推奨) {#restore-data-from-a-local-disk-recommended-for-testing-environments}
 
-Run the `br restore` command to restore the complete backup data to an offline cluster. Currently, BR does not support restoring data to an online cluster.
+`br restore`コマンドを実行して、完全なバックアップ データをオフラインクラスタに復元します。現在、BR はオンラインクラスタへのデータの復元をサポートしていません。
 
-### Restoration prerequisites
+### 復元の前提条件 {#restoration-prerequisites}
 
-- [Check before restore](#check-before-restoration)
-- The TiKV cluster and the backup data do not have a duplicate database or table. Currently, BR does not support table route.
-- Each TiKV node has a separate disk to store backupSST files.
-- The `restore_endpoint` node has a separate disk to store `backupmeta` files.
-- TiKV and the `restore_endpoint` node share the same directory (for example, `/home/tidb/backup_local/`) for restoration.
+-   [復元前の確認](#check-before-restoration)
+-   TiKVクラスタとバックアップ データには、重複するデータベースまたはテーブルがありません。現在、BR はテーブル ルートをサポートしていません。
+-   各 TiKV ノードには、backupSST ファイルを格納するための個別のディスクがあります。
+-   `restore_endpoint`のノードには、 `backupmeta`のファイルを格納するための個別のディスクがあります。
+-   TiKV と`restore_endpoint`ノードは、復元のために同じディレクトリ (たとえば、 `/home/tidb/backup_local/` ) を共有します。
 
-Before the restoration, follow these steps:
+復元する前に、次の手順に従います。
 
-1. Collect all backupSST files into the same directory.
-2. Copy the collected backupSST files to all TiKV nodes of the cluster.
-3. Copy the `backupmeta` files to the `restore endpoint` node.
+1.  すべての backupSST ファイルを同じディレクトリーに集めます。
+2.  収集した backupSST ファイルをクラスタのすべての TiKV ノードにコピーします。
+3.  `backupmeta`ファイルを`restore endpoint`ノードにコピーします。
 
-### Topology
+### トポロジー {#topology}
 
-The following diagram shows the typology of BR:
+次の図は、BR の類型を示しています。
 
 ![img](/media/br/restore-local-deploy.png)
 
-### Restoration operation
+### 復旧作業 {#restoration-operation}
 
-Run the `br restore` command:
+`br restore`コマンドを実行します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 bin/br restore table --db batchmark --table order_line -s local:///home/tidb/backup_local/ --pd 172.16.5.198:2379 --log-file restore_local.log
 ```
 
-During the restoration process, pay attention to the metrics on the monitoring panels to get the status of the restoration process. See [Monitoring metrics for the restoration](#monitoring-metrics-for-the-restoration) for details.
+復元プロセス中は、監視パネルのメトリックに注意して、復元プロセスのステータスを取得してください。詳細は[復元のモニタリング メトリック](#monitoring-metrics-for-the-restoration)を参照してください。
 
-### Restoration results explanation
+### 復元結果の説明 {#restoration-results-explanation}
 
-In the log specified before running the restoration command, you can get the statistical information of the restoration operation from this log. Search "summary" in this log, you can see the following information:
+リストアコマンドを実行する前に指定したログでは、このログからリストア操作の統計情報を取得できます。このログで「概要」を検索すると、次の情報が表示されます。
 
 ```
 ["Table Restore summary:
@@ -441,34 +441,34 @@ In the log specified before running the restoration command, you can get the sta
     ["restore checksum"=6m19.349067937s]
 ```
 
-The preceding log includes the following information:
+上記のログには、次の情報が含まれています。
 
-- `total take(s)`: The restoration duration
-- `total size(MB)`: The data size
-- `avg speed(MB/s)`: The restoration throughput
-- `split region`: The region split duration
-- `restore checksum`: The restoration checksum duration
+-   `total take(s)` : 復元期間
+-   `total size(MB)` : データサイズ
+-   `avg speed(MB/s)` : 復元スループット
+-   `split region` : リージョン分割のデュレーション
+-   `restore checksum` : 復元チェックサム期間
 
-From the preceding information, the following items can be calculated:
+上記の情報から、次の項目を計算できます。
 
-- The throughput of a single TiKV instance: `avg speed(MB/s)`/`tikv_count` = `97.2`
-- The average restoration speed of a single TiKV instance: `total size(MB)`/(`split time` + `restore time`)/`tikv_count` = `92.4`
+-   単一の TiKV インスタンスのスループット: `avg speed(MB/s)` / `tikv_count` = `97.2`
+-   単一の TiKV インスタンスの平均復元速度: `total size(MB)` /( `split time` + `restore time` )/ `tikv_count` = `92.4`
 
-## Error handling during backup
+## バックアップ中のエラー処理 {#error-handling-during-backup}
 
-This section introduces the common errors that might occur during the backup process.
+このセクションでは、バックアップ プロセス中に発生する可能性のある一般的なエラーについて説明します。
 
-### `key locked Error` in the backup log
+### <code>key locked Error</code> {#code-key-locked-error-code-in-the-backup-log}
 
-Error message in the log: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
+ログのエラー メッセージ: `log - ["backup occur kv error"][error="{\"KvError\":{\"locked\":`
 
-If a key is locked during the backup process, BR tries to resolve the lock. A small number of this error do not affect the correctness of the backup.
+バックアップ プロセス中にキーがロックされている場合、BR はロックの解決を試みます。少数のこのエラーは、バックアップの正確性には影響しません。
 
-### Backup failure
+### バックアップの失敗 {#backup-failure}
 
-Error message in the log: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
+ログのエラー メッセージ: `log - Error: msg:"Io(Custom { kind: AlreadyExists, error: \"[5_5359_42_123_default.sst] is already exists in /dir/backup_local/\" })"`
 
-If the backup operation fails and the preceding message occurs, perform one of the following operations and then start the backup operation again:
+バックアップ操作が失敗し、前述のメッセージが表示された場合は、次の操作のいずれかを実行してから、バックアップ操作を再度開始します。
 
-- Change the directory for the backup. For example, change `/dir/backup-2020-01-01/` to `/dir/backup_local/`.
-- Delete the backup directory of all TiKV nodes and BR nodes.
+-   バックアップのディレクトリを変更します。たとえば、 `/dir/backup-2020-01-01/`を`/dir/backup_local/`に変更します。
+-   すべての TiKV ノードと BR ノードのバックアップ ディレクトリを削除します。

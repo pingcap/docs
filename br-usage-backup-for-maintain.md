@@ -3,30 +3,30 @@ title: Use BR to Back Up Cluster Data
 summary: Learn how to back up data using BR commands
 ---
 
-# Use BR to Back Up Cluster Data
+# BR を使用してクラスタ データをバックアップする {#use-br-to-back-up-cluster-data}
 
-This document describes how to back up cluster data using BR in the following scenarios:
+このドキュメントでは、次のシナリオで BR を使用してクラスタデータをバックアップする方法について説明します。
 
-- [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots)
-- [Back up a database](#back-up-a-database)
-- [Back up a table](#back-up-a-table)
-- [Back up multiple tables with table filter](#back-up-multiple-tables-with-table-filter)
-- [Back up data to external storage](#back-up-data-to-external-storage)
-- [Back up incremental data](#back-up-incremental-data)
-- [Encrypt backup data](#encrypt-backup-data)
+-   [TiDBクラスタのスナップショットをバックアップする](#back-up-tidb-cluster-snapshots)
+-   [データベースのバックアップ](#back-up-a-database)
+-   [テーブルをバックアップする](#back-up-a-table)
+-   [テーブル フィルターを使用して複数のテーブルをバックアップする](#back-up-multiple-tables-with-table-filter)
+-   [データを外部ストレージにバックアップする](#back-up-data-to-external-storage)
+-   [増分データのバックアップ](#back-up-incremental-data)
+-   [バックアップ データの暗号化](#encrypt-backup-data)
 
-If you are not familiar with Backup & Restore (BR), it is recommended that you read the following documents to fully understand BR usage principles and methods:
+バックアップと復元 (BR) に慣れていない場合は、次のドキュメントを読んで、BR の使用原理と方法を完全に理解することをお勧めします。
 
-- [BR Overview](/br/backup-and-restore-overview.md)
-- [Use BR Command-line for Backup and Restoration](/br/use-br-command-line-tool.md)
+-   [BRの概要](/br/backup-and-restore-overview.md)
+-   [バックアップと復元に BR コマンドラインを使用する](/br/use-br-command-line-tool.md)
 
-## Back up TiDB cluster snapshots
+## TiDBクラスタのスナップショットをバックアップする {#back-up-tidb-cluster-snapshots}
 
-A snapshot of a TiDB cluster contains only the latest and transactionally consistent data at a specific time. You can back up the latest or specified snapshot data of a TiDB cluster by running the `br backup full` command. To get help on this command, run the `br backup full --help` command.
+TiDBクラスタのスナップショットには、特定の時点における最新でトランザクション的に一貫性のあるデータのみが含まれます。 `br backup full`コマンドを実行して、TiDBクラスタの最新または指定したスナップショット データをバックアップできます。このコマンドのヘルプを表示するには、 `br backup full --help`コマンドを実行します。
 
-Example: Back up the snapshot generated at `2022-01-30 07:42:23` to the `2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+例: `2022-01-30 07:42:23`で生成されたスナップショットを Amazon S3 の`backup-data`バケットの`2022-01-30/`ディレクトリにバックアップします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full \
@@ -37,13 +37,13 @@ br backup full \
     --log-file backupfull.log
 ```
 
-In the preceding command:
+前述のコマンドでは:
 
-- `--backupts`: The physical time of the snapshot. If data of this snapshot is processed by Garbage Collection (GC), the `br backup` command will exit with an error. If you leave this parameter unspecified, BR picks the snapshot corresponding to the backup start time.
-- `--ratelimit`: The maximum speed **per TiKV** performing backup tasks (in MiB/s).
-- `--log-file`: The target file for BR logging.
+-   `--backupts` : スナップショットの物理時間。このスナップショットのデータがガベージ コレクション (GC) によって処理される場合、 `br backup`コマンドはエラーで終了します。このパラメーターを指定しない場合、BR はバックアップの開始時刻に対応するスナップショットを選択します。
+-   `--ratelimit` : バックアップ タスクを実行する**TiKV ごと**の最大速度 (MiB/秒)。
+-   `--log-file` : BR ロギングの対象ファイル。
 
-During backup, a progress bar is displayed in the terminal, as shown below. When the progress bar advances to 100%, the backup is complete.
+バックアップ中は、以下に示すように、進行状況バーがターミナルに表示されます。プログレス バーが 100% まで進むと、バックアップは完了です。
 
 ```shell
 br backup full \
@@ -54,19 +54,19 @@ br backup full \
 Full Backup <---------/................................................> 17.12%.
 ```
 
-After the backup is completed, BR compares the checksum of the backup data with the [admin checksum table](/sql-statements/sql-statement-admin-checksum-table.md) of the cluster to ensure data correctness and security.
+バックアップが完了すると、BR はバックアップ データのチェックサムとクラスタのチェックサムを比較して、データの正確性とセキュリティを確保し[管理者チェックサム テーブル](/sql-statements/sql-statement-admin-checksum-table.md) 。
 
-## Back up a database or a table
+## データベースまたはテーブルのバックアップ {#back-up-a-database-or-a-table}
 
-BR supports backing up partial data of a specified database or table from a cluster snapshot or incremental data backup. This feature allows you to filter out unwanted data from snapshot backup and incremental data backup, and back up only business-critical data.
+BR は、クラスタスナップショットまたは増分データ バックアップから、指定されたデータベースまたはテーブルの部分的なデータのバックアップをサポートします。この機能を使用すると、スナップショット バックアップと増分データ バックアップから不要なデータを除外し、ビジネス クリティカルなデータのみをバックアップできます。
 
-### Back up a database
+### データベースのバックアップ {#back-up-a-database}
 
-To back up a database in a cluster, run the `br backup db` command. To get help on this command, run the `br backup db --help` command.
+クラスタのデータベースをバックアップするには、 `br backup db`コマンドを実行します。このコマンドのヘルプを表示するには、 `br backup db --help`コマンドを実行します。
 
-Example: Back up the `test` database to the `db-test/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+例: `test`データベースを Amazon S3 の`backup-data`バケットの`db-test/2022-01-30/`ディレクトリにバックアップします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup db \
@@ -77,15 +77,15 @@ br backup db \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` specifies the database name, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots).
+上記のコマンドで、 `--db`はデータベース名を指定し、他のパラメーターは[TiDBクラスタのスナップショットをバックアップする](#back-up-tidb-cluster-snapshots)と同じです。
 
-### Back up a table
+### テーブルをバックアップする {#back-up-a-table}
 
-To back up a table in a cluster, run the `br backup table` command. To get help on this command, run the `br backup table --help` command.
+クラスタのテーブルをバックアップするには、 `br backup table`コマンドを実行します。このコマンドのヘルプを表示するには、 `br backup table --help`コマンドを実行します。
 
-Example: Back up `test.usertable` to the `table-db-usertable/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+例: Amazon S3 の`backup-data`バケットの`table-db-usertable/2022-01-30/`ディレクトリに`test.usertable`をバックアップします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup table \
@@ -97,15 +97,15 @@ br backup table \
     --log-file backuptable.log
 ```
 
-In the preceding command, `--db` and `--table` specify the database name and table name respectively, and other parameters are the same as those in [Back up TiDB cluster snapshots](#back-up-tidb-cluster-snapshots).
+上記のコマンドで、 `--db`と`--table`はそれぞれデータベース名とテーブル名を指定し、その他のパラメーターは[TiDBクラスタのスナップショットをバックアップする](#back-up-tidb-cluster-snapshots)と同じです。
 
-### Back up multiple tables with table filter
+### テーブル フィルターを使用して複数のテーブルをバックアップする {#back-up-multiple-tables-with-table-filter}
 
-To back up multiple tables with more criteria, run the `br backup full` command and specify the [table filters](/table-filter.md) with `--filter` or `-f`.
+複数の基準で複数のテーブルをバックアップするには、 `br backup full`コマンドを実行し、 `--filter`または`-f`で[テーブル フィルター](/table-filter.md)を指定します。
 
-Example: Back up `db*.tbl*` data of a table to  the `table-filter/2022-01-30/` directory in the `backup-data` bucket of Amazon S3.
+例: テーブルの`db*.tbl*`データを Amazon S3 の`backup-data`バケットの`table-filter/2022-01-30/`ディレクトリにバックアップします。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full \
@@ -116,36 +116,36 @@ br backup full \
     --log-file backupfull.log
 ```
 
-## Back up data to external storage
+## データを外部ストレージにバックアップする {#back-up-data-to-external-storage}
 
-BR supports backing up data to Amazon S3, Google Cloud Storage (GCS), Azure Blob Storage, NFS, or other S3-compatible file storage services. For details, see the following documents:
+BR は、Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、NFS、またはその他の S3 互換ファイル ストレージ サービスへのデータのバックアップをサポートしています。詳細については、次のドキュメントを参照してください。
 
-- [Back up data on Amazon S3 using BR](/br/backup-storage-S3.md)
-- [Back up data on Google Cloud Storage using BR](/br/backup-storage-gcs.md)
-- [Back up data on Azure Blob Storage using BR](/br/backup-storage-azblob.md)
+-   [BR を使用して Amazon S3 のデータをバックアップする](/br/backup-storage-S3.md)
+-   [BR を使用して Google Cloud Storage にデータをバックアップする](/br/backup-storage-gcs.md)
+-   [BR を使用して Azure Blob Storage 上のデータをバックアップする](/br/backup-storage-azblob.md)
 
-## Back up incremental data
+## 増分データのバックアップ {#back-up-incremental-data}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-Incremental data of a TiDB cluster is differentiated data between the snapshot of a starting point and that of an end point. Compared with snapshot data, incremental data is smaller and therefore it is a supplementary to snapshot backup, which reduces the volume of backup data.
+TiDBクラスタの増分データは、開始点のスナップショットと終了点のスナップショットの差分データです。増分データは、スナップショット データと比較してサイズが小さいため、スナップショット バックアップを補完するものであり、バックアップ データの量を削減します。
 
-To back up incremental data, run the `br backup` command with **the last backup timestamp** `--lastbackupts` specified. To get `--lastbackupts`, run the `validate` command. The following is an example:
+増分データをバックアップするに**は、最後のバックアップ タイムスタンプ**`--lastbackupts`を指定して`br backup`コマンドを実行します。 `--lastbackupts`を取得するには、 `validate`コマンドを実行します。次に例を示します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 LAST_BACKUP_TS=`br validate decode --field="end-version" -s s3://backup-data/2022-01-30/ | tail -n1`
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - You need to save the incremental backup data under a different path from the previous snapshot backup.
-> - GC safepoint must be prior to `lastbackupts`. The defalt GC lifetime is 10 minutes in TiDB, which means that TiDB only backs up incremental data generated in the last 10 minutes. To back up earlier incremental data, you need to [adjust TiDB GC Lifetime setting](/system-variables.md#tidb_gc_life_time-new-in-v50).
+> -   増分バックアップ データは、以前のスナップショット バックアップとは別のパスに保存する必要があります。
+> -   GC セーフポイントは`lastbackupts`より前でなければなりません。デフォルトの GC ライフタイムは TiDB で 10 分です。つまり、TiDB は過去 10 分間に生成された増分データのみをバックアップします。以前の増分データをバックアップするには、 [TiDB GC ライフタイム設定を調整する](/system-variables.md#tidb_gc_life_time-new-in-v50)を行う必要があります。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full\
@@ -155,27 +155,27 @@ br backup full\
     --lastbackupts ${LAST_BACKUP_TS}
 ```
 
-The preceding command backs up the incremental data between `(LAST_BACKUP_TS, current PD timestamp]` and the DDLs generated during this time period. When restoring incremental data, BR restores all DDLs first, and then restores data.
+上記のコマンドは、 `(LAST_BACKUP_TS, current PD timestamp]`からこの期間中に生成された DDL までの増分データをバックアップします。増分データを復元する場合、BR は最初にすべての DDL を復元し、次にデータを復元します。
 
-## Encrypt backup data
+## バックアップ データの暗号化 {#encrypt-backup-data}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-BR supports encrypting backup data at the backup end and at the storage end when backing up to Amazon S3. You can choose either encryption method as required.
+BR は、Amazon S3 へのバックアップ時に、バックアップ側とストレージ側でバックアップ データの暗号化をサポートします。必要に応じて、いずれかの暗号化方式を選択できます。
 
-### Encrypt backup data at the backup end
+### バックアップ終了時にバックアップ データを暗号化する {#encrypt-backup-data-at-the-backup-end}
 
-Since TiDB v5.3.0, you can encrypt backup data by configuring the following parameters:
+TiDB v5.3.0 以降、次のパラメータを設定することでバックアップ データを暗号化できます。
 
-- `--crypter.method`: Encryption algorithm, which can be `aes128-ctr`, `aes192-ctr`, or `aes256-ctr`. The default value is `plaintext`, indicating that data is not encrypted.
-- `--crypter.key`: Encryption key in hexadecimal string format. It is a  128-bit (16 bytes) key for the algorithm `aes128-ctr`, 24-byte key for the algorithm `aes192-ctr`, and 32-byte key for the algorithm `aes256-ctr`.
-- `--crypter.key-file`: The key file. You can directly pass in the file path where the key is stored as a parameter without passing in "crypter.key".
+-   `--crypter.method` : 暗号化アルゴリズム。 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`のいずれかです。デフォルト値は`plaintext`で、データが暗号化されていないことを示します。
+-   `--crypter.key` : 16 進文字列形式の暗号化キー。これは、アルゴリズム 2 では 128 ビット (16 バイト) の鍵、アルゴリズム`aes128-ctr`では 24 バイトの鍵、アルゴリズム`aes192-ctr`では`aes256-ctr`バイトの鍵です。
+-   `--crypter.key-file` : 鍵ファイル。 「crypter.key」を渡さずに、キーが格納されているファイル パスをパラメータとして直接渡すことができます。
 
-Example: Encrypt backup data at the backup end.
+例: バックアップの最後にバックアップ データを暗号化します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 br backup full\
@@ -185,30 +185,30 @@ br backup full\
     --crypter.key 0123456789abcdef0123456789abcdef
 ```
 
-> **Note:**
+> **ノート：**
 >
-> - If the key is lost, the backup data cannot be restored to the cluster.
-> - The encryption feature needs to be used on BR tools and TiDB clusters v5.3.0 or later versions. The encrypted backup data cannot be restored on clusters earlier than v5.3.0.
+> -   キーを紛失すると、バックアップ データをクラスタに復元できなくなります。
+> -   暗号化機能は、BR ツールおよび TiDB クラスター v5.3.0 以降のバージョンで使用する必要があります。暗号化されたバックアップ データは、v5.3.0 より前のクラスターでは復元できません。
 
-### Encrypt backup data when backing up to Amazon S3
+### Amazon S3 へのバックアップ時にバックアップ データを暗号化する {#encrypt-backup-data-when-backing-up-to-amazon-s3}
 
-BR supports server-side encryption (SSE) when backing up data to S3. In this scenario, you can use AWS KMS keys you have created to encrypt data. For details, see [BR S3 server-side encryption](/encryption-at-rest.md#br-s3-server-side-encryption).
+BR は、データを S3 にバックアップするときにサーバー側の暗号化 (SSE) をサポートします。このシナリオでは、作成した AWS KMS キーを使用してデータを暗号化できます。詳細については、 [BR S3 サーバー側の暗号化](/encryption-at-rest.md#br-s3-server-side-encryption)を参照してください。
 
-## Backup performance and impact
+## バックアップのパフォーマンスと影響 {#backup-performance-and-impact}
 
-The backup feature has some impact on cluster performance (transaction latency and QPS). However, you can mitigate the impact by adjusting the number of backup threads [`backup.num-threads`](/tikv-configuration-file.md#num-threads-1) or by adding more clusters.
+バックアップ機能は、クラスタのパフォーマンス (トランザクションの待ち時間と QPS) に影響を与えます。ただし、バックアップ スレッド[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)の数を調整するか、クラスターを追加することで、影響を軽減できます。
 
-To illustrate the impact of backup, this document lists the test conclusions of several snapshot backup tests:
+バックアップの影響を説明するために、このドキュメントではいくつかのスナップショット バックアップ テストの結果を示します。
 
-- (5.3.0 and earlier) When the backup threads of BR on a TiKV node takes up 75% of the total CPU of the node, the QPS is reduced by 30% of the original QPS.
-- (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 80%, the impact of BR tasks on the cluster (write and read) is 20% at most.
-- (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 75%, the impact of BR tasks on the cluster (write and read) is 10% at most.
-- (5.4.0 and later) When there are no more than `8` threads of BR on a TiKV node and the cluster's total CPU utilization does not exceed 60%, BR tasks has little impact on the cluster (write and read).
+-   (5.3.0 以前) TiKV ノード上の BR のバックアップ スレッドがノードの合計 CPU の 75% を占める場合、QPS は元の QPS の 30% 減少します。
+-   (5.4.0 以降) TiKV ノードに BR のスレッドが`8`しかなく、クラスターの合計 CPU 使用率が 80% を超えない場合、クラスタに対する BR タスク (書き込みおよび読み取り) の影響は 20% です。多くの。
+-   (5.4.0 以降) TiKV ノードに BR のスレッドが`8`しかなく、クラスターの合計 CPU 使用率が 75% を超えない場合、クラスタに対する BR タスク (書き込みおよび読み取り) の影響は 10% です。多くの。
+-   (5.4.0 以降) TiKV ノードに BR のスレッドが`8`しかなく、クラスターの合計 CPU 使用率が 60% を超えない場合、BR タスクはクラスタ(書き込みと読み取り) にほとんど影響を与えません。
 
-You can mitigate impact on cluster performance by reducing the number of backup threads. However, this might cause backup performance to deteriorate. Based on the preceding test results: (On a single TiKV node) the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MB/thread. For example, a single node with 5 backup threads can deliver a backup speed of 100 MB/s.
+バックアップ スレッドの数を減らすことで、クラスタのパフォーマンスへの影響を軽減できます。ただし、これによりバックアップのパフォーマンスが低下する可能性があります。前述のテスト結果に基づくと、(単一の TiKV ノードで) バックアップ速度はバックアップ スレッドの数に比例します。スレッド数が少ない場合、バックアップ速度は約 20MB/スレッドです。たとえば、5 つのバックアップ スレッドを持つ単一ノードは、100 MB/秒のバックアップ速度を実現できます。
 
-> **Note:**
+> **ノート：**
 >
-> The impact and speed of backup depends much on cluser configuration, deployment, and running services. The preceding test conclusions, based on simulation tests in many scenarios and verified in some customer sites, are worthy of reference. However, the exact impact and performance cap may vary depending on the scenarios. Therefore, you should always run the test and verify the test results.
+> バックアップの影響と速度は、クラスタ構成、展開、および実行中のサービスに大きく依存します。多くのシナリオでのシミュレーション テストに基づき、一部の顧客サイトで検証された前述のテストの結論は、参照に値します。ただし、正確な影響とパフォーマンスの上限は、シナリオによって異なる場合があります。したがって、常にテストを実行し、テスト結果を確認する必要があります。
 
- Since v5.3.0, BR introduces the auto tunning feature (enabled by default) to adjust the number of backup threads. It can maintain the CPU utilization of the cluster below 80% during backup tasks. For details, see [BR Auto-Tune](/br/br-auto-tune.md).
+v5.3.0 以降、BR は自動チューニング機能 (デフォルトで有効) を導入して、バックアップ スレッドの数を調整します。バックアップ タスク中にクラスタの CPU 使用率を 80% 未満に維持できます。詳細については、 [BR オートチューン](/br/br-auto-tune.md)を参照してください。

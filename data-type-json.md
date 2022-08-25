@@ -3,18 +3,18 @@ title: TiDB Data Type
 summary: Learn about the JSON data type in TiDB.
 ---
 
-# JSON Type
+# JSON タイプ {#json-type}
 
-> **Warning:**
+> **警告：**
 >
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+> これはまだ実験的機能です。本番環境で使用することはお勧めし**ません**。
 
-TiDB supports the `JSON` (JavaScript Object Notation) data type, which is useful for storing semi-structured data.  The `JSON` data type provides the following advantages over storing `JSON`-format strings in a string column:
+TiDB は、半構造化データの格納に役立つ`JSON` (JavaScript Object Notation) データ型をサポートしています。 `JSON`データ型には、文字列列に`JSON`形式の文字列を格納する場合と比較して、次の利点があります。
 
-- Use the Binary format for serialization. The internal format permits quick read access to `JSON` document elements.
-- Automatic validation of the JSON documents stored in `JSON` columns. Only valid documents can be stored.
+-   シリアル化には Binary 形式を使用します。内部フォーマットにより、 `JSON`のドキュメント要素への迅速な読み取りアクセスが可能になります。
+-   `JSON`列に格納された JSON ドキュメントの自動検証。有効なドキュメントのみを保存できます。
 
-`JSON` columns, like columns of other binary types, are not indexed directly, but you can index the fields in the `JSON` document in the form of generated column:
+`JSON`列は、他のバイナリ型の列と同様に直接インデックス付けされませんが、生成された列の形式で`JSON`ドキュメントのフィールドにインデックスを付けることができます。
 
 ```sql
 CREATE TABLE city (
@@ -27,4 +27,4 @@ INSERT INTO city (id,detail) VALUES (1, '{"name": "Beijing", "population": 100}'
 SELECT id FROM city WHERE population >= 100;
 ```
 
-For more information, see [JSON Functions](/functions-and-operators/json-functions.md) and [Generated Columns](/generated-columns.md).
+詳細については、 [JSON 関数](/functions-and-operators/json-functions.md)および[生成された列](/generated-columns.md)を参照してください。

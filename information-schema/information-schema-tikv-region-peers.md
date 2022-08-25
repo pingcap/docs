@@ -3,11 +3,11 @@ title: TIKV_REGION_PEERS
 summary: Learn the `TIKV_REGION_PEERS` information_schema table.
 ---
 
-# TIKV_REGION_PEERS
+# TIKV_REGION_PEERS {#tikv-region-peers}
 
-The `TIKV_REGION_PEERS` table shows detailed information of a single Region node in TiKV, such as whether it is a learner or leader.
+`TIKV_REGION_PEERS`テーブルには、学習者かリーダーかなど、TiKV の単一のリージョンノードの詳細情報が表示されます。
 
-{{< copyable "sql" >}}
+{{< copyable "" >}}
 
 ```sql
 USE information_schema;
@@ -29,7 +29,7 @@ DESC tikv_region_peers;
 7 rows in set (0.01 sec)
 ```
 
-For example, you can query the specific TiKV addresses for the top 3 Regions with the maximum value of `WRITTEN_BYTES` using the following SQL statement:
+たとえば、次の SQL ステートメントを使用して、最大値`WRITTEN_BYTES`で上位 3 つのリージョンの特定の TiKV アドレスをクエリできます。
 
 ```sql
 SELECT
@@ -46,15 +46,15 @@ WHERE
  AND peer.store_id = tikv.store_id;
 ```
 
-Fields in the `TIKV_REGION_PEERS` table are described as follows:
+`TIKV_REGION_PEERS`テーブルのフィールドは次のとおりです。
 
-* REGION_ID: The Region ID.
-* PEER_ID: The ID of the Region peer.
-* STORE_ID: The ID of the TiKV store where the Region is located.
-* IS_LEARNER: Whether the peer is learner.
-* IS_LEADER: Whether the peer is leader.
-* STATUS: The statuses of a peer:
-    * PENDING: Temporarily unavailable.
-    * DOWN: Offline and converted. This peer no longer provides service.
-    * NORMAL: Running normally.
-* DOWN_SECONDS: The duration of being offline, in seconds.
+-   REGION_ID:リージョンID。
+-   PEER_ID:リージョンピアの ID。
+-   STORE_ID:リージョンが配置されている TiKV ストアの ID。
+-   IS_LEARNER: ピアが学習者かどうか。
+-   IS_LEADER: ピアがリーダーかどうか。
+-   STATUS: ピアのステータス:
+    -   保留中: 一時的に利用できません。
+    -   DOWN: オフラインで変換済み。このピアはサービスを提供しなくなりました。
+    -   NORMAL：正常に動作しています。
+-   DOWN_SECONDS: オフラインの期間 (秒単位)。

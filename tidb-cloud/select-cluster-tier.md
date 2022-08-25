@@ -3,96 +3,96 @@ title: Select Your Cluster Tier
 summary: Learn how to select your cluster tier on TiDB Cloud.
 ---
 
-# Select Your Cluster Tier
+# クラスター層を選択する {#select-your-cluster-tier}
 
-The cluster tier determines the throughput and performance of your cluster.
+クラスタ層によって、クラスタのスループットとパフォーマンスが決まります。
 
-TiDB Cloud provides the following two options of cluster tiers. Before creating a cluster, you need to consider which option suits your need better.
+TiDB Cloudは、クラスタ層の次の 2 つのオプションを提供します。クラスタを作成する前に、どのオプションがニーズにより適しているかを検討する必要があります。
 
-- [Developer Tier](#developer-tier)
-- [Dedicated Tier](#dedicated-tier)
+-   [開発者層](#developer-tier)
+-   [専用ティア](#dedicated-tier)
 
-## Developer Tier
+## 開発者層 {#developer-tier}
 
-The TiDB Cloud Developer Tier is a one-year free trial of [TiDB Cloud](https://pingcap.com/products/tidbcloud), the fully managed service of TiDB. You can use Developer Tier clusters for non-production workloads such as prototype applications, hackathons, academic courses, or to provide a temporary data service for non-commercial datasets.
+TiDB Cloud Developer Tier は、TiDB のフル マネージド サービスである 1 の[TiDB Cloud](https://pingcap.com/products/tidbcloud)年間の無料トライアルです。開発者層クラスターは、プロトタイプ アプリケーション、ハッカソン、アカデミック コースなどの非運用ワークロードに使用したり、非商用データセットに一時的なデータ サービスを提供したりするために使用できます。
 
-Each Developer Tier cluster is a full-featured TiDB cluster and comes with the following:
+各 Developer Tierクラスタはフル機能の TiDBクラスタであり、以下が付属しています。
 
-- 1 TiDB shared node
-- 1 TiKV shared node (with 1 GiB of OLTP storage)
-- 1 TiFlash shared node (with 1 GiB of OLAP storage)
+-   1 つの TiDB 共有ノード
+-   1 つの TiKV 共有ノード (1 GiB の OLTP ストレージを使用)
+-   1 つの TiFlash 共有ノード (1 GiB の OLAP ストレージを使用)
 
-Developer Tier clusters run on shared nodes. Although each node is run in its own container on a virtual machine (VM), that VM is also running other TiDB, TiKV, or TiFlash nodes. As a result, shared nodes will have reduced performance when compared to standard, dedicated TiDB Cloud nodes. However, as all nodes are running in separate containers and have dedicated cloud disks, data stored in a Developer Tier cluster is isolated and will never be exposed to other TiDB clusters.
+開発者層クラスターは共有ノードで実行されます。各ノードは仮想マシン (VM) 上の独自のコンテナーで実行されますが、その VM は他の TiDB、TiKV、または TiFlash ノードも実行しています。その結果、共有ノードは、標準の専用TiDB Cloudノードと比較してパフォーマンスが低下します。ただし、すべてのノードが個別のコンテナーで実行され、専用のクラウド ディスクがあるため、Developer Tierクラスタに格納されたデータは分離され、他の TiDB クラスターに公開されることはありません。
 
-For each TiDB Cloud account, you can use one complimentary Developer Tier cluster to use for one year. Although you can only run one Developer Tier cluster at a time, you can delete and recreate the cluster as many times as you wish.
+TiDB Cloudアカウントごとに、無料の Developer Tierクラスタを 1 つ使用して 1 年間使用できます。一度に実行できる Developer Tierクラスタは 1 つだけですが、クラスタの削除と再作成は何度でも行うことができます。
 
-The one-year free trial begins the day the first Developer Tier cluster is created.
+1 年間の無料トライアルは、最初の Developer Tierクラスタが作成された日から始まります。
 
-### User name prefix
+### ユーザー名のプレフィックス {#user-name-prefix}
 
 <!--Important: Do not update the section name "User name prefix" because this section is referenced by TiDB backend error messages.-->
 
-For each Developer Tier cluster, TiDB Cloud generates a unique prefix to distinguish it from other clusters.
+各 Developer Tierクラスタに対して、 TiDB Cloudは一意のプレフィックスを生成して、他のクラスターと区別します。
 
-Whenever you use or set a database user name, you must include the prefix in the user name. For example, assume that the prefix of your cluster is `3pTAoNNegb47Uc8`.
+データベース ユーザー名を使用または設定するときは常に、ユーザー名にプレフィックスを含める必要があります。たとえば、クラスタのプレフィックスが`3pTAoNNegb47Uc8`であるとします。
 
-- To connect to your cluster:
+-   クラスタに接続するには:
 
     ```shell
     mysql --connect-timeout 15 -u '3pTAoNNegb47Uc8.root' -h <host> -P 4000 -D test -p
     ```
 
-- To create a database user:
+-   データベース ユーザーを作成するには:
 
     ```sql
     CREATE USER '3pTAoNNegb47Uc8.jeffrey';
     ```
 
-To get the prefix for your cluster, take the following steps:
+クラスタのプレフィックスを取得するには、次の手順を実行します。
 
-1. Navigate to the **Active Clusters** page.
-2. Click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+1.  [**アクティブなクラスター]**ページに移動します。
+2.  領域の右上隅にある [**接続]**をクリックします。接続ダイアログボックスが表示されます。
 
-    > **Tip:**
+    > **ヒント：**
     >
-    > Alternatively, you can also click the name of your cluster on the **Active Clusters** page and click **Connect** in the upper-right corner.
-3. In the dialog, locate **Step 2: Connect with a SQL client** and get the prefix.
+    > または、[**アクティブなクラスター**] ページでクラスタの名前をクリックし、右上隅にある [<strong>接続</strong>] をクリックすることもできます。
+3.  ダイアログで、[**ステップ 2: SQL クライアントに接続し**てプレフィックスを取得する] を見つけます。
 
-### Automatic hibernation and resuming
+### 自動ハイバネーションとレジューム {#automatic-hibernation-and-resuming}
 
-Once a Developer Tier cluster remains idle for 24 hours, the cluster hibernates automatically.
+Developer Tierクラスタが 24 時間アイドル状態になると、クラスタは自動的に休止状態になります。
 
-The hibernation does not affect your data stored in the cluster but only stops the monitoring information collection and computing resource consumption.
+休止状態は、クラスタに保存されているデータには影響しませんが、監視情報の収集とコンピューティング リソースの消費を停止するだけです。
 
-During the hibernation, the status of the cluster is still displayed as **Normal**, and you can see a message about hibernation in the TiDB Cloud console.
+ハイバネーション中、クラスタのステータスは引き続き**Normal**として表示され、 TiDB Cloudコンソールでハイバネーションに関するメッセージを確認できます。
 
-Anytime you want to use your Developer Tier cluster again, just [connect to your cluster](/tidb-cloud/connect-to-tidb-cluster.md) using your MySQL client driver or ORM framework as you usually do. The cluster will be resumed within 50 seconds and back to service automatically.
+Developer Tierクラスタを再び使用したいときはいつでも、通常どおり MySQL クライアントドライバーまたは ORM フレームワークを使用するだけで済み[クラスタに接続する](/tidb-cloud/connect-to-tidb-cluster.md) 。クラスタは 50 秒以内に再開され、自動的にサービスに戻ります。
 
-Alternatively, you can log in to the TiDB Cloud console, and then click **Resume** for the cluster on the **Active Clusters** page.
+または、 TiDB Cloudコンソールにログインし、[**アクティブなクラスター**] ページでクラスタの [<strong>再開</strong>] をクリックすることもできます。
 
-### Developer Tier special terms and conditions
+### 開発者層の特別利用規約 {#developer-tier-special-terms-and-conditions}
 
-- No uptime SLA guarantee.
-- No high availability or automatic failover.
-- Upgrades to clusters might incur significant downtimes.
-- The backup and restore feature is unavailable. You can use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export your data as a backup.
-- The maximum number of connections to the Developer Tier cluster is 50.
-- You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
-- You cannot use VPC Peering to connect to clusters.
-- You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
-- You cannot view the [Monitoring page](/tidb-cloud/built-in-monitoring.md).
-- You cannot use the third-party monitoring service.
-- You cannot customize the port number of a TiDB cluster.
-- The data transfer is limited to a total of 20 GiB in and out per week. If the 20 GiB limit is reached, the network traffic will be throttled to 10 KB/s.
+-   アップタイム SLA 保証なし。
+-   高可用性や自動フェイルオーバーはありません。
+-   クラスターへのアップグレードでは、大幅なダウンタイムが発生する可能性があります。
+-   バックアップおよび復元機能は使用できません。 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)を使用して、データをバックアップとしてエクスポートできます。
+-   Developer Tierクラスタへの接続の最大数は 50 です。
+-   変更フィード (Apache Kafka Sink および MySQL Sink) を作成したり、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)を使用して増分データを複製したりすることはできません。
+-   VPC ピアリングを使用してクラスターに接続することはできません。
+-   クラスターをより大きなストレージや標準ノードにスケーリングしたり、ノード数を増やしたりすることはできません。
+-   [モニタリングページ](/tidb-cloud/built-in-monitoring.md)は表示できません。
+-   サードパーティの監視サービスは使用できません。
+-   TiDBクラスタのポート番号はカスタマイズできません。
+-   データ転送は、1 週間あたり合計 20 GiB に制限されています。 20 GiB の制限に達すると、ネットワーク トラフィックは 10 KB/秒に調整されます。
 
-## Dedicated Tier
+## 専用ティア {#dedicated-tier}
 
-The TiDB Cloud Dedicated Tier is dedicated for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
+TiDB Cloud Dedicated Tier は、クロスゾーンの高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた、実動使用専用です。
 
-For Dedicated Tier clusters, you can customize the cluster size of TiDB, TiKV, and TiFlash easily according to your business need. For each TiKV node and TiFlash node, the data on the node is replicated and distributed in different availability zones for [high availability](/tidb-cloud/high-availability-with-multi-az.md).
+Dedicated Tier クラスターの場合、ビジネス ニーズに応じて、TiDB、TiKV、および TiFlash のクラスタサイズを簡単にカスタマイズできます。 TiKV ノードと TiFlash ノードごとに、ノード上のデータが複製され、異なるアベイラビリティ ゾーンに分散され[高可用性](/tidb-cloud/high-availability-with-multi-az.md) 。
 
-To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-cloud/tidb-cloud-billing.md#payment-method) or [apply for a Proof of Concept (PoC) trial](/tidb-cloud/tidb-cloud-poc.md).
+Dedicated Tierクラスタを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)または[概念実証 (PoC) トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)が必要です。
 
-> **Note:**
+> **ノート：**
 >
-> You cannot decrease the cluster storage size after your cluster is created.
+> クラスタの作成後にクラスタのストレージ サイズを減らすことはできません。

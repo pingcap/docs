@@ -3,42 +3,42 @@ title: Deploy TiCDC
 summary: Learn how to deploy TiCDC and the hardware and software recommendations for deploying and running it.
 ---
 
-# Deploy TiCDC
+# TiCDC をデプロイ {#deploy-ticdc}
 
-This document describes how to deploy a TiCDC cluster and the hardware and software recommendations for deploying and running it. You can either deploy TiCDC along with a new TiDB cluster or add the TiCDC component to an existing TiDB cluster. Generally, it is recommended that you deploy TiCDC using TiUP. In addition, you can also deploy it using binary as needed.
+このドキュメントでは、TiCDCクラスタをデプロイする方法と、それをデプロイして実行するためのハードウェアとソフトウェアの推奨事項について説明します。 TiCDC を新しい TiDBクラスタと共にデプロイするか、TiCDC コンポーネントを既存の TiDBクラスタに追加することができます。一般に、TiUP を使用して TiCDC を展開することをお勧めします。また、必要に応じてバイナリを使用してデプロイすることもできます。
 
-## Software and hardware recommendations
+## ソフトウェアとハードウェアの推奨事項 {#software-and-hardware-recommendations}
 
-In production environments, the recommendations of software and hardware for TiCDC are as follows:
+本番環境では、TiCDC のソフトウェアとハードウェアの推奨事項は次のとおりです。
 
-| Linux OS       | Version         |
-| :----------------------- | :----------: |
-| Red Hat Enterprise Linux | 7.3 or later versions   |
-| CentOS                   | 7.3 or later versions   |
+| Linux OS              |     バージョン    |
+| :-------------------- | :----------: |
+| レッドハット エンタープライズ リナックス | 7.3 以降のバージョン |
+| CentOS                | 7.3 以降のバージョン |
 
-| CPU | Memory | Disk type | Network | Number of TiCDC cluster instances (minimum requirements for production environment) |
-| :--- | :--- | :--- | :--- | :--- |
-| 16 core+ | 64 GB+ | SSD | 10 Gigabit network card (2 preferred） | 2 |
+| CPU   | メモリー   | ディスクタイプ | 通信網                    | TiCDCクラスタインスタンスの数 (本番環境の最小要件) |
+| :---- | :----- | :------ | :--------------------- | :---------------------------- |
+| 16コア+ | 64GB以上 | SSD     | 10ギガビットネットワークカード（2枚推奨） | 2                             |
 
-For more information, see [Software and Hardware Recommendations](/hardware-and-software-requirements.md).
+詳細については、 [ソフトウェアおよびハードウェアの推奨事項](/hardware-and-software-requirements.md)を参照してください。
 
-## Deploy a new TiDB cluster that includes TiCDC using TiUP
+## TiUP を使用して TiCDC を含む新しい TiDBクラスタをデプロイする {#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup}
 
-When you deploy a new TiDB cluster using TiUP, you can also deploy TiCDC at the same time. You only need to add the `cdc_servers` section in the initialization configuration file that TiUP uses to start the TiDB cluster. For detailed operations, see [Edit the initialization configuration file](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file). For detailed configurable fields, see [Configure `cdc_servers` using TiUP](/tiup/tiup-cluster-topology-reference.md#cdc_servers).
+TiUP を使用して新しい TiDBクラスタをデプロイすると、TiCDC も同時にデプロイできます。 TiUP が TiDBクラスタを開始するために使用する初期化構成ファイルに`cdc_servers`セクションを追加するだけで済みます。詳細な操作については、 [初期設定ファイルの編集](/production-deployment-using-tiup.md#step-3-initialize-cluster-topology-file)を参照してください。構成可能なフィールドの詳細については、 [`cdc_servers`を使用して cdc_server を構成する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
 
-## Add TiCDC to an existing TiDB cluster using TiUP
+## TiUP を使用して既存の TiDBクラスタに TiCDC を追加する {#add-ticdc-to-an-existing-tidb-cluster-using-tiup}
 
-You can also use TiUP to add the TiCDC component to an existing TiDB cluster. Take the following procedures:
+TiUP を使用して、TiCDC コンポーネントを既存の TiDBクラスタに追加することもできます。次の手順を実行します。
 
-1. Make sure that the current TiDB version supports TiCDC; otherwise, you need to upgrade the TiDB cluster to `v4.0.0-rc.1` or later versions. Since v4.0.6, TiCDC has become a feature for general availability (GA). It is recommended that you use v4.0.6 or later versions.
+1.  現在の TiDB バージョンが TiCDC をサポートしていることを確認してください。それ以外の場合は、TiDBクラスタを`v4.0.0-rc.1`以降のバージョンにアップグレードする必要があります。 v4.0.6 以降、TiCDC は一般提供 (GA) の機能になりました。 v4.0.6 以降のバージョンを使用することをお勧めします。
 
-2. To deploy TiCDC, refer to [Scale out a TiCDC cluster](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster).
+2.  TiCDC をデプロイするには、 [TiCDCクラスタをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster)を参照してください。
 
-## Add TiCDC to an existing TiDB cluster using binary (not recommended)
+## バイナリを使用して TiCDC を既存の TiDBクラスタに追加する (非推奨) {#add-ticdc-to-an-existing-tidb-cluster-using-binary-not-recommended}
 
-Suppose that the PD cluster has a PD node (the client URL is `10.0.10.25:2379`) that can provide services. If you want to deploy three TiCDC nodes, start the TiCDC cluster by executing the following commands. You only need to specify the same PD address, and the newly started nodes automatically join the TiCDC cluster.
+PDクラスタに、サービスを提供できる PD ノード (クライアント URL は`10.0.10.25:2379` ) があるとします。 3 つの TiCDC ノードをデプロイする場合は、次のコマンドを実行して TiCDCクラスタを起動します。同じ PD アドレスを指定するだけで、新しく開始されたノードが自動的に TiCDCクラスタに参加します。
 
-{{< copyable "shell-regular" >}}
+{{< copyable "" >}}
 
 ```shell
 cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_1.log --addr=0.0.0.0:8301 --advertise-addr=127.0.0.1:8301
@@ -46,20 +46,20 @@ cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_2.log --addr=0.0.0.0:830
 cdc server --pd=http://10.0.10.25:2379 --log-file=ticdc_3.log --addr=0.0.0.0:8303 --advertise-addr=127.0.0.1:8303
 ```
 
-## Description of TiCDC `cdc server` command-line parameters
+## TiCDC <code>cdc server</code>のコマンドライン パラメータの説明 {#description-of-ticdc-code-cdc-server-code-command-line-parameters}
 
-The following are descriptions of options available in the `cdc server` command:
+以下は、 `cdc server`コマンドで使用可能なオプションの説明です。
 
-- `addr`: The listening address of TiCDC, the HTTP API address, and the Prometheus address of the TiCDC service. The default value is `127.0.0.1:8300`.
-- `advertise-addr`: The advertised address via which clients access TiCDC. If unspecified, the value is the same as that of `addr`.
-- `pd`: A comma-separated list of PD endpoints.
-- `config`: The address of the configuration file that TiCDC uses (optional). This option is supported since TiCDC v5.0.0. This option can be used in the TiCDC deployment since TiUP v1.4.0.
-- `data-dir`: Specifies the directory that TiCDC uses when it needs to use disks to store files. Unified Sorter uses this directory to store temporary files. It is recommended to ensure that the free disk space for this directory is greater than or equal to 500 GiB. For more details, see [Unified Sorter](/ticdc/manage-ticdc.md#unified-sorter). If you are using TiUP, you can configure `data_dir` in the [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers) section, or directly use the default `data_dir` path in `global`.
-- `gc-ttl`: The TTL (Time To Live) of the service level `GC safepoint` in PD set by TiCDC, and the duration that the replication task can suspend, in seconds. The default value is `86400`, which means 24 hours. Note: Suspending of the TiCDC replication task affects the progress of TiCDC GC safepoint, which means that it affects the progress of upstream TiDB GC, as detailed in [Complete Behavior of TiCDC GC safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
-- `log-file`: The path to which logs are output when the TiCDC process is running. If this parameter is not specified, logs are written to the standard output (stdout).
-- `log-level`: The log level when the TiCDC process is running. The default value is `"info"`.
-- `ca`: Specifies the path of the CA certificate file in PEM format for TLS connection (optional).
-- `cert`: Specifies the path of the certificate file in PEM format for TLS connection (optional).
-- `cert-allowed-cn`: Specifies the path of the common name in PEM format for TLS connection (optional).
-- `key`: Specifies the path of the private key file in PEM format for TLS connection (optional).
-- `tz`: Time zone used by the TiCDC service. TiCDC uses this time zone when it internally converts time data types such as `TIMESTAMP` or when it replicates data to the downstream. The default is the local time zone in which the process runs. If you specify `time-zone` (in `sink-uri`) and `tz` at the time, the internal TiCDC processes use the time zone specified by `tz`, and the sink uses the time zone specified by `time-zone` for replicating data to the downstream.
+-   `addr` : TiCDC のリッスン アドレス、HTTP API アドレス、および TiCDC サービスの Prometheus アドレス。デフォルト値は`127.0.0.1:8300`です。
+-   `advertise-addr` : クライアントが TiCDC にアクセスするために使用するアドバタイズされたアドレス。指定しない場合、値は`addr`の値と同じです。
+-   `pd` : PD エンドポイントのコンマ区切りリスト。
+-   `config` : TiCDC が使用する構成ファイルのアドレス (オプション)。このオプションは、TiCDC v5.0.0 以降でサポートされています。このオプションは、TiUP v1.4.0 以降の TiCDC 展開で使用できます。
+-   `data-dir` : ファイルを格納するためにディスクを使用する必要がある場合に TiCDC が使用するディレクトリを指定します。 Unified Sorter は、このディレクトリを使用して一時ファイルを保存します。このディレクトリの空きディスク容量が 500 GiB 以上であることを確認することをお勧めします。詳細については、 [ユニファイドソーター](/ticdc/manage-ticdc.md#unified-sorter)を参照してください。 TiUP を使用している場合は、 [`cdc_servers`](/tiup/tiup-cluster-topology-reference.md#cdc_servers)セクションで`data_dir`を構成するか、 `global`でデフォルトの`data_dir`パスを直接使用できます。
+-   `gc-ttl` : TiCDC によって設定された PD のサービス レベル`GC safepoint`の TTL (Time To Live) と、レプリケーション タスクが中断できる期間 (秒単位)。デフォルト値は`86400`で、これは 24 時間を意味します。注: TiCDC レプリケーション タスクの一時停止は、TiCDC GC セーフポイントの進行状況に影響を与えます。つまり、 [TiCDC GC セーフポイントの完全な動作](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint)で詳述されているように、上流の TiDB GC の進行状況に影響を与えます。
+-   `log-file` : TiCDC プロセスの実行時にログが出力されるパス。このパラメーターが指定されていない場合、ログは標準出力 (stdout) に書き込まれます。
+-   `log-level` : TiCDC プロセスが実行されているときのログ レベル。デフォルト値は`"info"`です。
+-   `ca` : TLS 接続用の PEM 形式の CA 証明書ファイルのパスを指定します (オプション)。
+-   `cert` : TLS 接続用の PEM 形式の証明書ファイルのパスを指定します (オプション)。
+-   `cert-allowed-cn` : TLS 接続の共通名のパスを PEM 形式で指定します (オプション)。
+-   `key` : TLS 接続用の PEM 形式の秘密鍵ファイルのパスを指定します (オプション)。
+-   `tz` : TiCDC サービスが使用するタイムゾーン。 TiCDC は、 `TIMESTAMP`などの時間データ タイプを内部で変換するとき、またはデータをダウンストリームにレプリケートするときに、このタイム ゾーンを使用します。デフォルトは、プロセスが実行されるローカル タイム ゾーンです。 `time-zone` ( `sink-uri` ) と`tz`を同時に指定すると、内部の TiCDC プロセスは`tz`で指定されたタイム ゾーンを使用し、シンクは`time-zone`で指定されたタイム ゾーンを使用してデータをダウンストリームにレプリケートします。
