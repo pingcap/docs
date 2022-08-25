@@ -94,7 +94,7 @@ To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, 
 To import the Parquet files to TiDB Cloud, take the following steps:
 
 1. Navigate to the **Clusters** page.
-2. Find the area of your target cluster and click **Import Data** in the upper-right corner of the area. The **Data Import Task** page is displayed.
+2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import Task** page is displayed.
 
     > **Tip:**
     >
