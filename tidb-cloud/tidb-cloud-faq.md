@@ -81,7 +81,7 @@ Each data change is recorded as a Raft log. Through Raft log replication, data i
 
 TiDB uses the Raft consensus algorithm to ensure that data is highly available and safely replicated throughout storage in Raft Groups. Data is redundantly copied between TiKV nodes and placed in different Availability Zones to protect against machine or data center failure. With automatic failover, TiDB ensures that your service is always on.
 
-As a Software as a Service (SaaS) provider, we take data security seriously. We have established strict information security policies and procedures required by the [Service Organization Control (SOC) 2 Type 1 compliance](https://pingcap.com/blog/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud). This ensures that your data is secure, available, and confidential.
+As a Software as a Service (SaaS) provider, we take data security seriously. We have established strict information security policies and procedures required by the [Service Organization Control (SOC) 2 Type 1 compliance](https://en.pingcap.com/press-release/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud/). This ensures that your data is secure, available, and confidential.
 
 ## Migration FAQ
 
