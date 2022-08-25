@@ -355,7 +355,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     + TiCDC
 
-        - TiCDC supports splitting large transactions during replication. This helps reduce replication latency caused by large transactions significantly [#5280](https://github.com/pingcap/tiflow/issues/5280)
+        - TiCDC supports splitting large transactions during replication. This helps significantly reduce replication latency caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
 
 ## Bug fixes
 
