@@ -83,7 +83,7 @@ TiDB uses the Raft consensus algorithm to ensure that data is highly available a
 
 As a Software as a Service (SaaS) provider, we take data security seriously. We have established strict information security policies and procedures required by the [Service Organization Control (SOC) 2 Type 1 compliance](https://pingcap.com/blog/pingcap-successfully-completes-soc-2-type-1-examination-for-tidb-cloud). This ensures that your data is secure, available, and confidential.
 
-## Migration FAQs
+## Migration FAQ
 
 ### Is there an easy migration path from another RDBMS to TiDB Cloud?
 
@@ -91,7 +91,7 @@ TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compat
 
 ## Feature FAQs
 
-### How do I make use of TiDB Cloud’s HTAP capabilities?
+### How do I make use of TiDB Cloud's HTAP capabilities?
 
 Traditionally, there are two types of databases: Online Transactional Processing (OLTP) databases and Online Analytical Processing (OLAP) databases. OLTP and OLAP requests are often processed in different and isolated databases. With this traditional architecture, migrating data from an OLTP database to a data warehouse or data lake for OLAP is a long and error-prone process.
 
@@ -117,7 +117,7 @@ Transport Layer Security (TLS) and Transparent Data Encryption (TDE) are include
 
 No. TiDB Cloud runs on the PingCAP VPC, but the data and traffic are encrypted by default. So you do not need to worry about data privacy issues.
 
-## Support FAQs
+## Support FAQ
 
 ### What support is available for customers?
 
