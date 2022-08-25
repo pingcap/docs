@@ -7,7 +7,7 @@ summary: Summarizes frequently asked questions (FAQs) about TiDB.
 
 This document summarizes frequently asked questions (FAQs) about TiDB.
 
-|   Category     |           Releted documents          |
+|   Category     |           Related documents          |
 |   :-------   |   :-------------------   |
 |   TiDB architecture and principles    |       [TiDB Architecture FAQs](/faq/tidb-faq.md)   |
 |   Deployment           |     <ul><li>[Deployment FAQs](/faq/deploy-and-maintain-faq.md)</li><li>[TiUP FAQs](/tiup/tiup-faq.md)</li><li>[TiDB in Kubernetes FAQs](https://docs.pingcap.com/tidb-in-kubernetes/stable/faq)</li></ul> |
