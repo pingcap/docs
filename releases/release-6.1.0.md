@@ -17,7 +17,7 @@ In 6.1.0, the key new features or improvements are as follows:
 * TiFlash supports on-demand data compaction
 * MPP introduces the window function framework
 * TiCDC supports replicating changelogs to Kafka via Avro
-* By splitting large transactions during replication, TiCDC can significantly reduce replication latency caused by large transactions
+* TiCDC supports splitting large transactions during replication, which significantly reduces replication latency caused by large transactions
 * The optimistic mode for merging and migrating sharded tables becomes GA
 
 ## New Features
@@ -355,7 +355,7 @@ In 6.1.0, the key new features or improvements are as follows:
 
     + TiCDC
 
-        - TiCDC supports splitting large transactions during replication. This helps significantly reduce replication latency caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
+        - TiCDC supports splitting large transactions during replication, which significantly reduces replication latency caused by large transactions [#5280](https://github.com/pingcap/tiflow/issues/5280)
 
 ## Bug fixes
 
