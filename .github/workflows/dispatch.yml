@@ -7,6 +7,7 @@ on:
     branches:
       - master
       - release-*
+      - i18n-ja-release-*
 
 jobs:
   trigger:
