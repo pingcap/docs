@@ -75,7 +75,7 @@ TiDB uses the Raft consensus algorithm to replicate data by Regions. Multiple re
 
 Each data change is recorded as a Raft log. Through Raft log replication, data is safely and reliably replicated to multiple nodes of the Raft Group.
 
-## High Availability FAQ
+## High availability FAQ
 
 ### How does TiDB Cloud ensure high availability?
 
