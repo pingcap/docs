@@ -9,7 +9,7 @@ This document introduces how to use the physical import mode in TiDB Lightning, 
 
 ## Configure and use the physical import mode
 
-You can use the following configuration file to execute data import using Physical Import Mode:
+You can use the following configuration file to execute data import using physical import mode:
 
 ```toml
 [lightning]
@@ -52,7 +52,7 @@ password = ""
 status-port = 10080
 # Required. The address of any pd-server from the cluster.
 pd-addr = "172.16.31.4:2379"
-# tidb-lightning import the TiDB library, and generates some logs.
+# tidb-lightning imports the TiDB library, and generates some logs.
 # Set the log level of the TiDB library.
 log-level = "error"
 
@@ -77,7 +77,7 @@ analyze = "optional"
 
 For the complete configuration file, refer to [the configuration file and command line parameters](/tidb-lightning/tidb-lightning-configuration.md).
 
-### Conflict detection
+## Conflict detection
 
 Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
