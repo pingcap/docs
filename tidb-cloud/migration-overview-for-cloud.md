@@ -27,7 +27,7 @@ You can use Amazon Simple Storage Service (Amazon S3) or Google Cloud Storage (G
 
 For more information, see [Import or Migrate from Amazon S3 or GCS to TiDB Cloud](/tidb-cloud/migrate-from-amazon-s3-or-gcs.md)
 
-## Migrate data from files to TiDB
+## Migrate data from files to TiDB Cloud
 
 - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
 - [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](tidb-cloud/import-parquet-files.md)
