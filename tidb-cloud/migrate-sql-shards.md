@@ -1,11 +1,11 @@
 ---
-title: Migrate and Merge MySQL Shards to TiDB Cloud
-summary: Learn how to migrate and merge MySQL shards to TiDB Cloud.
+title: Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
+summary: Learn how to migrate and merge MySQL shards of Large Datasets to TiDB Cloud.
 ---
 
-# Migrate and Merge MySQL Shards to TiDB Cloud
+# Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
 
-This document describes how to migrate and merge MySQL shards from different partitions into TiDB Cloud. After full data migration, you can use TiDB Data Migration (DM) to perform incremental migration according to your business needs.
+This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use TiDB Data Migration (DM) to perform incremental migration according to your business needs. "Large datasets" in this document usually mean data around one TiB or more.
 
 The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single instance.
 
