@@ -7,7 +7,7 @@ summary: Learn how to migrate and merge MySQL shards of Large Datasets to TiDB C
 
 This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use TiDB Data Migration (DM) to perform incremental migration according to your business needs. 
 
-The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single instance.
+The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single MySQL instance.
 
 ## Environment information in the example
 
@@ -68,7 +68,7 @@ When you use Dumpling to export data to Amazon S3, note the following:
 - Enable binlog for upstream clusters.
 - Choose the correct Amazon S3 directory and region.
 - Choose the appropriate concurrency by configuring `-t` to minimize the impact on the upstream cluster, or export directly from the backup database. For more information about how to use this parameter, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
-- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use thess parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
+- Set appropriate values for `--filetype csv` and `--no-schemas`. For more information about how to use these parameters, see [Option list of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling).
 
 To export data to Amazon S3, do the following:
 
