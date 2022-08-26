@@ -7,9 +7,13 @@ summary: Learn the overview of data migration scenarios and the solutions for Ti
 
 You can migrate data from a wide variety of data sources to TiDB Cloud. This document gives an overview of the data migration scenarios.
 
+## Configure Amazon S3 access and GCS access
+
+If your source data is stored in Amazon S3 or GCS buckets, before importing or migrating the data to TiDB Cloud, you need to configure cross-account access to the buckets. For more information, see [Configure Amazon S3 access and GCS access](/tidb-cloud/config-s3-and-gcs-access.md).
+
 ## Migrate data from MySQL-compatible databases
 
-TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
+TiDB is highly compatible with MySQL. You can migrate data from any MySQL-compatible databases to TiDB Cloud smoothly, whether the data is from a self-hosted MySQL instance or RDS service provided by the public cloud. For more information, see [Migrate Data from MySQL-Compatible Databases](/tidb-cloud/migrate-data-into-tidb.md).
 
 After full data migration, you can also perform incremental data migration from MySQL-compatible databases to TiDB Cloud. For more information, see [Migrate Incremental Data from MySQL-Compatible Databases](/tidb-cloud/migrate-incremental-data-from-mysql.md).
 
