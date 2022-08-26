@@ -30,4 +30,4 @@ For more information, see [Import or Migrate from Amazon S3 or GCS to TiDB Cloud
 ## Migrate data from files to TiDB Cloud
 
 - [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md)
-- [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](tidb-cloud/import-parquet-files.md)
+- [Import Apache Parquet Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-parquet-files.md)
