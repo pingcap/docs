@@ -5,7 +5,7 @@ summary: Learn how to migrate and merge MySQL shards of Large Datasets to TiDB C
 
 # Migrate and Merge MySQL Shards of Large Datasets to TiDB Cloud
 
-This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use TiDB Data Migration (DM) to perform incremental migration according to your business needs. 
+This document describes how to migrate and merge a large MySQL dataset (for example, more than 1 TiB) from different partitions into TiDB Cloud. After full data migration, you can use TiDB Data Migration (DM) to perform incremental migration according to your business needs.
 
 The example in this document uses a complex shard migration task across multiple MySQL instances, and involves handling conflicts in auto-increment primary keys. The scenario in this example is also applicable to the scenario of merging data from different sharded tables within a single MySQL instance.
 
@@ -62,6 +62,8 @@ If there are shards across multiple instances, you can create a first-level dire
 - `s3://dumpling-s3/stock/products/instance02/`
 
 ### Step 2. Use Dumpling to export data to Amazon S3
+
+For information about how to install Dumpling, see [Dumpling Introduction](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction).
 
 When you use Dumpling to export data to Amazon S3, note the following:
 
