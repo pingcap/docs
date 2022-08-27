@@ -68,14 +68,11 @@ You are welcome to participate in the DM open sourcing project. Your contributio
 
 ## Community support
 
-You can learn about DM through the online documentation. If you have any questions, contact us in one of the following ways.
-
-- [GitHub](https://github.com/pingcap/tiflow/tree/master/dm)
-- [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=sig-migrate&ref=pingcap-docs)
+You can learn about DM through the online documentation. If you have any questions, contact us on [GitHub](https://github.com/pingcap/tiflow/tree/master/dm).
 
 ## License
 
-DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/dm/LICENSE).
+DM complies with the Apache 2.0 license. For more details, see [LICENSE](https://github.com/pingcap/tiflow/blob/master/LICENSE).
 
 ## DM versions
 
@@ -83,7 +80,7 @@ Before v5.4, the DM documentation is independent of the TiDB documentation. To a
 
 - [DM v5.3 documentation](https://docs.pingcap.com/tidb-data-migration/v5.3)
 - [DM v2.0 documentation](https://docs.pingcap.com/tidb-data-migration/v2.0/)
-- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/) 
+- [DM v1.0 documentation](https://docs.pingcap.com/tidb-data-migration/v1.0/)
 
 > **Note:**
 >

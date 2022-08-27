@@ -11,13 +11,12 @@ It is recommended to use Sysbench 1.0 or later, which can be [downloaded here](h
 
 ### TiDB configuration
 
-Higher log level means fewer logs to be printed and thus positively influences TiDB performance. Enable `prepared plan cache` in the TiDB configuration to lower the cost of optimizing execution plan. Specifically, you can add the following command in the TiUP configuration file:
+Higher log level means fewer logs to be printed and thus positively influences TiDB performance. Specifically, you can add the following command in the TiUP configuration file:
 
 ```yaml
 server_configs:
   tidb:
     log.level: "error"
-    prepared-plan-cache.enabled: true
 ```
 
 ### TiKV configuration
@@ -28,7 +27,7 @@ There are multiple Column Families on TiKV cluster which are mainly used to stor
 
 Default CF : Write CF = 4 : 1
 
-Configuring the block cache of RocksDB on TiKV should be based on the machine’s memory size, in order to make full use of the memory. To deploy a TiKV cluster on a 40GB virtual machine, it is recommended to configure the block cache as follows:
+Configuring the block cache of RocksDB on TiKV should be based on the machine's memory size, in order to make full use of the memory. To deploy a TiKV cluster on a 40GB virtual machine, it is recommended to configure the block cache as follows:
 
 ```yaml
 server_configs:
@@ -131,7 +130,7 @@ sysbench --config-file=config oltp_point_select --tables=32 --table-size=1000000
 
 To warm data, we load data from disk into the block cache of memory. The warmed data has significantly improved the overall performance of the system. It is recommended to warm data once after restarting the cluster.
 
-Sysbench 1.0.14 does not provide data warming, so it must be done manually. If you are using a later version of Sysbench, you can use the data warming feature included in the tool itself.
+Sysbench 1.0.14 does not provide data warming, so it must be done manually. If you are using [Sysbench of the master version](https://github.com/akopytov/sysbench/tree/master), you can use the data warming feature included in the tool itself.
 
 Take a table sbtest7 in Sysbench as an example. Execute the following SQL to warming up data:
 

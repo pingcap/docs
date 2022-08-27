@@ -23,7 +23,7 @@ The file extension must be `*.csv`, even if the content is not separated by comm
 CSV files are schema-less. To import them into TiDB, a table schema must be provided. This could be done either by:
 
 * Providing a file named `db_name.table_name-schema.sql` containing the `CREATE TABLE` DDL statement, and also a file named `db_name-schema-create.sql` containing the `CREATE DATABASE` DDL statement.
-* Creating the empty tables directly in TiDB in the first place, and then setting `[mydumper] no-schema = true` in `tidb-lightning.toml`.
+* Manually creating the table schema in TiDB.
 
 ## Configuration
 
@@ -193,7 +193,7 @@ The default setting is already tuned for CSV following RFC 4180.
 
 ```toml
 [mydumper.csv]
-separator = ',' # It is not recommended to use the default ‘,’. It is recommended to use ‘\|+\|‘ or other uncommon character combinations.
+separator = ',' # It is not recommended to use the default ','. It is recommended to use '\|+\|' or other uncommon character combinations.
 delimiter = '"'
 header = true
 not-null = false

@@ -62,7 +62,8 @@ Slow query basics:
 * `Index_ids`: The IDs of the indexes involved in a statement.
 * `Succ`: Whether a statement is executed successfully.
 * `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
-* `Plan`: The execution plan of the statement. Use the `select tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
+* `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
+* `Binary_plan`: The execution plan of a binary-encoded statement. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan. The `Plan` and `Binary_plan` fields carry the same information. However, the format of execution plans parsed from the two fields are different.
 * `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
 * `Plan_from_cache`: Whether this statement hits the execution plan cache.
 * `Rewrite_time`: The time consumed for rewriting the query of this statement.
@@ -102,11 +103,11 @@ TiKV Coprocessor Task fields:
 * `Process_time`: The total processing time of a SQL statement in TiKV. Because data is sent to TiKV concurrently, this value might exceed `Query_time`.
 * `Wait_time`: The total waiting time of a statement in TiKV. Because the Coprocessor of TiKV runs a limited number of threads, requests might queue up when all threads of Coprocessor are working. When a request in the queue takes a long time to process, the waiting time of the subsequent requests increases.
 * `Process_keys`: The number of keys that Coprocessor has processed. Compared with `total_keys`, `processed_keys` does not include the old versions of MVCC. A great difference between `processed_keys` and `total_keys` indicates that many old versions exist.
-* `Cop_proc_avg`: The average execution time of cop-tasks.
+* `Cop_proc_avg`: The average execution time of cop-tasks, including some waiting time that cannot be counted, such as the mutex in RocksDB.
 * `Cop_proc_p90`: The P90 execution time of cop-tasks.
 * `Cop_proc_max`: The maximum execution time of cop-tasks.
 * `Cop_proc_addr`: The address of the cop-task with the longest execution time.
-* `Cop_wait_avg`: The average waiting time of cop-tasks.
+* `Cop_wait_avg`: The average waiting time of cop-tasks, including the time of request queueing and getting snapshots.
 * `Cop_wait_p90`: The P90 waiting time of cop-tasks.
 * `Cop_wait_max`: The maximum waiting time of cop-tasks.
 * `Cop_wait_addr`: The address of the cop-task whose waiting time is the longest.

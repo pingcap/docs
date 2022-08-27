@@ -6,7 +6,7 @@ aliases: ['/docs/dev/statement-summary-tables/','/docs/dev/reference/performance
 
 # Statement Summary Tables
 
-To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.6/en/statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
+To better handle SQL performance issues, MySQL has provided [statement summary tables](https://dev.mysql.com/doc/refman/5.7/en/performance-schema-statement-summary-tables.html) in `performance_schema` to monitor SQL with statistics. Among these tables, `events_statements_summary_by_digest` is very useful in locating SQL problems with its abundant fields such as latency, execution times, rows scanned, and full table scans.
 
 Therefore, starting from v4.0.0-rc.1, TiDB provides system tables in `information_schema` (_not_ `performance_schema`) that are similar to `events_statements_summary_by_digest` in terms of features.
 
@@ -131,20 +131,13 @@ After the configuration above takes effect, every 30 minutes the `statements_sum
 
 The `statements_summary_evicted` table records the recent 24 periods during which SQL statements are evicted from the statement summary. The `statements_summary_evicted` table is updated every 30 minutes.
 
-The system variables above have two scopes: global and session. These scopes work differently from other system variables:
-
-- After setting the global variable, your setting applies to the whole cluster immediately.
-- After setting the session variable, your setting applies to the current TiDB server immediately. This is useful when you debug on a single TiDB server instance.
-- The session variable has a higher read priority. The global variable is read only when no session variable is set.
-- If you set the session variable to a blank string, the global variable is re-read.
-
 > **Note:**
 >
-> The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs. It is not recommended to set them too large values.
+> The `tidb_stmt_summary_history_size`, `tidb_stmt_summary_max_stmt_count`, and `tidb_stmt_summary_max_sql_length` configuration items affect memory usage. It is recommended that you adjust these configurations based on your needs, the SQL size, SQL count, and machine configuration. It is not recommended to set them too large values. You can calculate the memory usage using `tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3`.
 
 ### Set a proper size for statement summary
 
-After the system has run for a period of time, you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
+After the system has run for a period of time (depending on the system load), you can check the `statement_summary` table to see whether SQL eviction has occurred. For example:
 
 ```sql
 select @@global.tidb_stmt_summary_max_stmt_count;
@@ -268,6 +261,7 @@ Basic fields:
 - `SAMPLE_USER`: The users who execute SQL statements of this category. Only one user is taken.
 - `PLAN_DIGEST`: The digest of the execution plan.
 - `PLAN`: The original execution plan. If there are multiple statements, the plan of only one statement is taken.
+- `BINARY_PLAN`: The original execution plan encoded in binary format. If there are multiple statements, the plan of only one statement is taken. Execute the `SELECT tidb_decode_binary_plan('xxx...')` statement to parse the specific execution plan.
 - `PLAN_CACHE_HITS`: The total number of times that SQL statements of this category hit the plan cache.
 - `PLAN_IN_CACHE`: Indicates whether the previous execution of SQL statements of this category hit the plan cache.
 

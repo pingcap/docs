@@ -12,14 +12,14 @@ You can also use the HTTP interface (the TiCDC OpenAPI feature) to manage the Ti
 
 ## Upgrade TiCDC using TiUP
 
-This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.0.0.
+This section introduces how to upgrade the TiCDC cluster using TiUP. In the following example, assume that you need to upgrade TiCDC and the entire TiDB cluster to v6.2.0.
 
 {{< copyable "shell-regular" >}}
 
 ```shell
 tiup update --self && \
 tiup update --all && \
-tiup cluster upgrade <cluster-name> v6.0.0
+tiup cluster upgrade <cluster-name> v6.2.0
 ```
 
 ### Notes for upgrade
@@ -199,7 +199,7 @@ Sample configuration:
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
 The following are descriptions of parameters and parameter values that can be configured for the sink URI with `kafka`:
@@ -216,17 +216,28 @@ The following are descriptions of parameters and parameter values that can be co
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default)                       |
 | `protocol` | The protocol with which messages are output to Kafka. The value options are `canal-json`, `open-protocol`, `canal`, `avro` and `maxwell`.   |
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default) |
-| `enable-tidb-extension` | When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. (optional, `false` by default)|
+| `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends Resolved events and adds the TiDB extension field to the Kafka message. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds three TiDB extension fields to the Kafka message. |
 | `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol`. (optional, `16` by default) |
+| `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default) |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional)  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional) |
 | `key` | The path of the certificate key file needed to connect to the downstream Kafka instance (optional) |
 | `sasl-user` | The identity (authcid) of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
 | `sasl-password` | The password of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional) |
-| `sasl-mechanism` | The name of SASL/PLAIN or SASL/SCRAM authentication needed to connect to the downstream Kafka instance (optional)  |
+| `sasl-mechanism` | The name of SASL authentication needed to connect to the downstream Kafka instance. The value can be `plain`, `scram-sha-256`, `scram-sha-512`, or `gssapi`. |
+| `sasl-gssapi-auth-type` | The gssapi authentication type. Values can be `user` or `keytab` (optional) |
+| `sasl-gssapi-keytab-path` | The gssapi keytab path (optional)|
+| `sasl-gssapi-kerberos-config-path` | The gssapi kerberos configuration path (optional) |
+| `sasl-gssapi-service-name` | The gssapi service name (optional) |
+| `sasl-gssapi-user` | The user name of gssapi authentication (optional) |
+| `sasl-gssapi-password` | The password of gssapi authentication (optional)  |
+| `sasl-gssapi-realm` | The gssapi realm name (optional) |
+| `sasl-gssapi-disable-pafxfast` | Whether to disable the gssapi PA-FX-FAST (optional) |
 | `dial-timeout` | The timeout in establishing a connection with the downstream Kafka. The default value is `10s` |
 | `read-timeout` | The timeout in getting a response returned by the downstream Kafka. The default value is `10s` |
-| `write-timeout`| The timeout in sending a request to the downstream Kafka. The default value is `10s` |
+| `write-timeout` | The timeout in sending a request to the downstream Kafka. The default value is `10s` |
+| `avro-decimal-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the DECIMAL field. The value can be `string` or `precise`, indicating either mapping the DECIMAL field to a string or a precise floating number.  |
+| `avro-bigint-unsigned-handling-mode` | Only effective with the `avro` protocol. Determines how Avro handles the BIGINT UNSIGNED field. The value can be `string` or `long`, indicating either mapping the BIGINT UNSIGNED field to a 64-bit signed number or a string.  |
 
 Best practices:
 
@@ -238,26 +249,75 @@ Best practices:
 >
 > When `protocol` is `open-protocol`, TiCDC tries to avoid generating messages that exceed `max-message-bytes` in length. However, if a row is so large that a single change alone exceeds `max-message-bytes` in length, to avoid silent failure, TiCDC tries to output this message and prints a warning in the log.
 
+#### TiCDC uses the authentication and authorization of Kafka
+
+The following are examples when using Kafka SASL authentication:
+
+- SASL/PLAIN
+
+    ```shell
+    --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-user=alice-user&sasl-password=alice-secret&sasl-mechanism=plain"
+    ```
+
+- SASL/SCRAM
+
+    SCRAM-SHA-256 and SCRAM-SHA-512 are similar to the PLAIN method. You just need to specify `sasl-mechanism` as the corresponding authentication method.
+
+- SASL/GSSAPI
+
+    SASL/GSSAPI `user` authentication:
+
+    ```shell
+    --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=user&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-password=alice-secret&sasl-gssapi-realm=example.com"
+    ```
+
+    Values of `sasl-gssapi-user` and `sasl-gssapi-realm` are related to the [principle](https://web.mit.edu/kerberos/krb5-1.5/krb5-1.5.4/doc/krb5-user/What-is-a-Kerberos-Principal_003f.html) specified in kerberos. For example, if the principle is set as `alice/for-kafka@example.com`, then `sasl-gssapi-user` and `sasl-gssapi-realm` are specified as `alice/for-kafka` and `example.com` respectively.
+
+    SASL/GSSAPI `keytab` authentication:
+
+    ```shell
+    --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&sasl-mechanism=gssapi&sasl-gssapi-auth-type=keytab&sasl-gssapi-kerberos-config-path=/etc/krb5.conf&sasl-gssapi-service-name=kafka&sasl-gssapi-user=alice/for-kafka&sasl-gssapi-keytab-path=/var/lib/secret/alice.key&sasl-gssapi-realm=example.com"
+    ```
+
+    For more information about SASL/GSSAPI authentication methods, see [Configuring GSSAPI](https://docs.confluent.io/platform/current/kafka/authentication_sasl/authentication_sasl_gssapi.html).
+
+- TLS/SSL encryption
+
+    If the Kafka broker has TLS/SSL encryption enabled, you need to add the `-enable-tls=true` parameter to `--sink-uri`. If you want to use self-signed certificates, you also need to specify `ca`, `cert` and `key` in `--sink-uri`.
+
+- ACL authorization
+
+    The minimum set of permissions required for TiCDC to function properly is as follows.
+
+    - The `Create` and `Write` permissions for the Topic [resource type](https://docs.confluent.io/platform/current/kafka/authorization.html#resources).
+    - The `DescribeConfigs` permission for the Cluster resource type.
+
 #### Integrate TiCDC with Kafka Connect (Confluent Platform)
 
-> **Warning:**
->
-> This is still an experimental feature. Do **NOT** use it in a production environment.
+To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you need to use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `schema-registry`.
 
 Sample configuration:
 
 {{< copyable "shell-regular" >}}
 
 ```shell
---sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&protocol=avro&partition-num=6&max-message-bytes=67108864&replication-factor=1"
---opts registry="http://127.0.0.1:8081"
+--sink-uri="kafka://127.0.0.1:9092/topic-name?&protocol=avro&replication-factor=3" --schema-registry="http://127.0.0.1:8081" --config changefeed_config.toml
 ```
 
-To use the [data connectors](https://docs.confluent.io/current/connect/managing/connectors.html) provided by Confluent to stream data to relational or non-relational databases, you should use the `avro` protocol and provide a URL for [Confluent Schema Registry](https://www.confluent.io/product/confluent-platform/data-compatibility/) in `opts`. Note that the `avro` protocol and Confluent integration are **experimental**.
+```shell
+[sink]
+dispatchers = [
+ {matcher = ['*.*'], topic = "tidb_{schema}_{table}"},
+]
+```
 
 For detailed integration guide, see [Quick Start Guide on Integrating TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md).
 
 #### Configure sink URI with `pulsar`
+
+> **Warning:**
+>
+> This is still an experimental feature. Do **NOT** use it in a production environment.
 
 Sample configuration:
 
@@ -280,6 +340,7 @@ The following are descriptions of parameters that can be configured for the sink
 | `auth.tls` | Uses the TLS mode to verify the downstream Pulsar (optional). For example, `auth=tls&auth.tlsCertFile=/path/to/cert&auth.tlsKeyFile=/path/to/key`. |
 | `auth.token` | Uses the token mode to verify the downstream Pulsar (optional). For example, `auth=token&auth.token=secret-token` or `auth=token&auth.file=path/to/secret-token-file`. |
 | `name` | The name of Pulsar producer in TiCDC (optional) |
+| `protocol` | The protocol with which messages are output to Pulsar. The value options are `canal-json`, `open-protocol`, `canal`, `avro`, and `maxwell`. |
 | `maxPendingMessages` | Sets the maximum size of the pending message queue, which is optional and defaults to 1000. For example, pending for the confirmation message from Pulsar. |
 | `disableBatching` |  Disables automatically sending messages in batches (optional) |
 | `batchingMaxPublishDelay` | Sets the duration within which the messages sent are batched (default: 10ms) |
@@ -461,9 +522,14 @@ Execute the following command to resume a paused replication task:
 cdc cli changefeed resume --pd=http://10.0.10.25:2379 --changefeed-id simple-replication-task
 ```
 
-In the above command:
-
 - `--changefeed-id=uuid` represents the ID of the `changefeed` that corresponds to the replication task you want to resume.
+- `--overwrite-checkpoint-ts`: starting from v6.2.0, you can specify the starting TSO of resuming the replication task. TiCDC starts pulling data from the specified TSO. The argument accepts `now` or a specific TSO (such as 434873584621453313). The specified TSO must be in the range of (GC safe point, CurrentTSO]. If this argument is not specified, TiCDC replicates data from the current `checkpoint-ts` by default.
+- `--no-confirm`: when the replication is resumed, you do not need to confirm the related information. Defaults to `false`.
+
+> **Note:**
+>
+> - If the TSO specified in `--overwrite-checkpoint-ts` (`t2`) is larger than the current checkpoint TSO in the changefeed (`t1`), data between `t1` and `t2` will not be replicated to the downstream. This causes data loss. You can obtain `t1` by running `cdc cli changefeed query`.
+> - If the TSO specified in `--overwrite-checkpoint-ts` (`t2`) is smaller than the current checkpoint TSO in the changefeed (`t1`), TiCDC pulls data from an old time point (`t2`), which might cause data duplication (for example, if the downstream is MQ sink).
 
 #### Remove a replication task
 
@@ -572,41 +638,186 @@ ignore-txn-start-ts = [1, 2]
 # Filter syntax: https://docs.pingcap.com/tidb/stable/table-filter#syntax.
 rules = ['*.*', '!test.*']
 
-[mounter]
-# mounter thread counts, which is used to decode the TiKV output data.
-worker-num = 16
+# Event filter rules.
+# The detailed syntax is described in the event filter rules section.
+# The first event filter rule.
+[[filter.event-filters]]
+matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
+ignore-event = ["insert"] # Ignore insert events.
+ignore-sql = ["^drop", "add column"] # Ignore DDLs that start with "drop" or contain "add column".
+ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the condition "name = 'john'".
+ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
+ignore-update-old-value-expr = "age < 18" # Ignore update DMLs whose old value contains "age < 18".
+ignore-update-new-value-expr = "gender = 'male'" # Ignore update DMLs whose new value contains "gender = 'male'".
+
+# The second event filter rule.
+matcher = ["test.fruit"] # matcher is an allow list, which means this rule only applies to the fruit table in the test database.
+ignore-event = ["drop table"] # Ignore drop table events.
+ignore-sql = ["delete"] # Ignore delete DMLs.
+ignore-insert-value-expr = "price > 1000 and origin = 'no where'" # Ignore insert DMLs that contain the conditions "price > 1000" and "origin = 'no where'".
 
 [sink]
 # For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
-# Supports four dispatchers: default, ts, rowid, and table.
-# The dispatcher rules are as follows:
-# - default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the rowid mode.
-# - ts: Use the commitTs of the row change to create Hash and dispatch events.
-# - index-value: Use the value of the primary key or the unique index of the table to create Hash and dispatch events.
-# - table: Use the schema name of the table and the table name to create Hash and dispatch events.
-# The matching syntax of matcher is the same as the filter rule syntax.
+# Since v6.1, TiDB supports two types of event dispatchers: partition and topic. For more information, see the following section.
+# The matching syntax of matcher is the same as the filter rule syntax. For details about the matcher rules, see the following section.
+
 dispatchers = [
-    {matcher = ['test1.*', 'test2.*'], dispatcher = "ts"},
-    {matcher = ['test3.*', 'test4.*'], dispatcher = "rowid"},
+    {matcher = ['test1.*', 'test2.*'], topic = "Topic expression 1", partition = "ts" },
+    {matcher = ['test3.*', 'test4.*'], topic = "Topic expression 2", partition = "index-value" },
+    {matcher = ['test1.*', 'test5.*'], topic = "Topic expression 3", partition = "table"},
+    {matcher = ['test6.*'], partition = "ts"}
 ]
 # For the sink of MQ type, you can specify the protocol format of the message.
 # Currently the following protocols are supported: canal-json, open-protocol, canal, avro, and maxwell.
 protocol = "canal-json"
-
 ```
+
+### Event filter rules <span class="version-mark">New in v6.2.0</span>
+
+Starting in v6.2.0, TiCDC supports event filter. You can configure event filter rules to filter out the DML and DDL events that meet the specified conditions.
+
+The following is an example of event filter rules:
+
+```toml
+[filter]
+# The event filter rules must be under the `[filter]` configuration. You can configure multiple event filters at the same time.
+
+[[filter.event-filters]]
+matcher = ["test.worker"] # matcher is an allow list, which means this rule only applies to the worker table in the test database.
+ignore-event = ["insert"] # Ignore insert events.
+ignore-sql = ["^drop", "add column"] # Ignore DDLs that start with "drop" or contain "add column".
+ignore-delete-value-expr = "name = 'john'" # Ignore delete DMLs that contain the condition "name = 'john'".
+ignore-insert-value-expr = "id >= 100" # Ignore insert DMLs that contain the condition "id >= 100".
+ignore-update-old-value-expr = "age < 18 or name = 'lili'" # Ignore update DMLs whose old value contains "age < 18" or "name = 'lili'".
+ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DMLs whose new value contains "gender = 'male'" and "age > 18".
+```
+
+The event filter rules must be under the `[filter]` configuration. For detailed configuration, refer to [Task configuration file](#task-configuration-file).
+
+Description of configuration parameters :
+
+- `matcher`: the database and table that this event filter rule applies to. The syntax is the same as [table filter](/table-filter.md).
+- `ignore-event`: the event type to be ignored. This parameter accepts an array of strings. You can configure multiple event types. Currently, the following event types are supported:
+
+| Event           | Type | Alias | Description         |
+| --------------- | ---- | -|--------------------------|
+| all dml         |      | |Matches all DML events       |
+| all ddl         |      | |Matches all DDL events         |
+| insert          | DML  | |Matches `insert` DML event      |
+| update          | DML  | |Matches `update` DML event      |
+| delete          | DML  | |Matches `delete` DML event      |
+| create schema   | DDL  | create database |Matches `create database` event |
+| drop schema     | DDL  | drop database  |Matches `drop database` event |
+| create table    | DDL  | |Matches `create table` event    |
+| drop table      | DDL  | |Matches `drop table` event      |
+| rename table    | DDL  | |Matches `rename table` event    |
+| truncate table  | DDL  | |Matches `truncate table` event  |
+| alter table     | DDL  | |Matches `alter table` event, including all clauses of `alter table`, `create index` and `drop index`   |
+| add table partition    | DDL  | |Matches `add table partition` event     |
+| drop table partition    | DDL  | |Matches `drop table partition` event     |
+| truncate table partition    | DDL  | |Matches `truncate table partition` event     |
+| create view     | DDL  | |Matches `create view`event     |
+| drop view     | DDL  | |Matches `drop view` event     |
+
+- `ignore-sql`: the DDL statements to be ignored. This parameter accepts an array of strings, in which you can configure multiple regular expressions. This rule only applies to DDL events.
+- `ignore-delete-value-expr`: this parameter accepts a SQL expression. This rule only applies to delete DML events with the specified value.
+- `ignore-insert-value-expr`: this parameter accepts a SQL expression. This rule only applies to insert DML events with the specified value.
+- `ignore-update-old-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose old value contains the specified value.
+- `ignore-update-new-value-expr`: this parameter accepts a SQL expression. This rule only applies to update DML events whose new value contains the specified value.
+
+> **Note:**
+>
+> - When TiDB updates a value in the column of the clustered index, TiDB splits an `UPDATE` event into a `DELETE` event and an `INSERT` event. TiCDC does not identify such events as an `UPDATE` event and thus cannot correctly filter out such events.
+> - When you configure a SQL expression, make sure all tables that matches `matcher` contain all the columns specified in the SQL expression. Otherwise, the replication task cannot be created. In addition, if the table schema changes during the replication, which results in a table no longer containing a required column, the replication task fails and cannot be resumed automatically. In such a situation, you must manually modify the configuration and resume the task.
 
 ### Notes for compatibility
 
 * In TiCDC v4.0.0, `ignore-txn-commit-ts` is removed and `ignore-txn-start-ts` is added, which uses start_ts to filter transactions.
 * In TiCDC v4.0.2, `db-dbs`/`db-tables`/`ignore-dbs`/`ignore-tables` are removed and `rules` is added, which uses new filter rules for databases and tables. For detailed filter syntax, see [Table Filter](/table-filter.md).
+* In TiCDC v6.1.0, `mounter` is removed. If you configure `mounter`, TiCDC does not report an error, but the configuration does not take effect.
+
+## Customize the rules for Topic and Partition dispatchers of Kafka Sink
+
+### Matcher rules
+
+In the example of the previous section:
+
+- For the tables that match the matcher rule, they are dispatched according to the policy specified by the corresponding topic expression. For example, the `test3.aa` table is dispatched according to "Topic expression 2"; the `test5.aa` table is dispatched according to "Topic expression 3".
+- For a table that matches multiple matcher rules, it is dispatched according to the first matching topic expression. For example, the `test1.aa` table is distributed according to "Topic expression 1".
+- For tables that do not match any matcher rule, the corresponding data change events are sent to the default topic specified in `--sink-uri`. For example, the `test10.aa` table is sent to the default topic.
+- For tables that match the matcher rule but do not specify a topic dispatcher, the corresponding data changes are sent to the default topic specified in `--sink-uri`. For example, the `test6.aa` table is sent to the default topic.
+
+### Topic dispatchers
+
+You can use topic = "xxx" to specify a Topic dispatcher and use topic expressions to implement flexible topic dispatching policies. It is recommended that the total number of topics be less than 1000.
+
+The format of the Topic expression is `[prefix]{schema}[middle][{table}][suffix]`.
+
+- `prefix`: optional. Indicates the prefix of the Topic Name.
+- `{schema}`: required. Used to match the schema name.
+- `middle`: optional. Indicates the delimiter between schema name and table name.
+- `{table}`: optional. Used to match the table name.
+- `suffix`: optional. Indicates the suffix of the Topic Name.
+
+`prefix`, `middle` and `suffix` can only include the following characters: `a-z`, `A-Z`, `0-9`, `.`, `_` and `-`. `{schema}` and `{table}` are both lowercase. Placeholders such as `{Schema}` and `{TABLE}` are invalid.
+
+Some examples:
+
+- `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
+    - The data change events corresponding to `test1.table1` are sent to the topic named `hello_test1_table1`.
+    - The data change events corresponding to `test2.table2` are sent to the topic named `hello_test2_table2`.
+- `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
+    - The data change events corresponding to all tables in `test3` are sent to the topic named `hello_test3_world`.
+    - The data change events corresponding to all tables in `test4` are sent to the topic named `hello_test4_world`.
+- `matcher = ['*.*'], topic = "{schema}_{table}"`
+    - All tables listened by TiCDC are dispatched to separate topics according to the "schema_table" rule. For example, for the `test.account` table, TiCDC dispatches its data change log to a Topic named `test_account`.
+
+### Dispatch DDL events
+
+#### Schema-level DDLs
+
+DDLs that are not related to a specific table are called schema-level DDLs, such as `create database` and `drop database`. The events corresponding to schema-level DDLs are sent to the default topic specified in `--sink-uri`.
+
+#### Table-level DDLs
+
+DDLs that are related to a specific table are called table-level DDLs, such as `alter table` and `create table`. The events corresponding to table-level DDLs are sent to the corresponding topic according to dispatcher configurations.
+
+For example, for a dispatcher like `matcher = ['test.*'], topic = {schema}_{table}`, DDL events are dispatched as follows:
+
+- If a single table is involved in the DDL event, the DDL event is sent to the corresponding topic as is. For example, for the DDL event `drop table test.table1`, the event is sent to the topic named `test_table1`.
+- If multiple tables are involved in the DDL event (`rename table` / `drop table` / `drop view` may involve multiple tables), the DDL event is split into multiple events and sent to the corresponding topics. For example, for the DDL event `rename table test.table1 to test.table10, test.table2 to test.table20`, the event `rename table test.table1 to test.table10` is sent to the topic named `test_table1` and the event `rename table test.table2 to test.table20` is sent to the topic named `test.table2`.
+
+### Partition dispatchers
+
+You can use `partition = "xxx"` to specify a partition dispatcher. It supports four dispatchers: default, ts, index-value, and table. The dispatcher rules are as follows:
+
+- default: When multiple unique indexes (including the primary key) exist or the Old Value feature is enabled, events are dispatched in the table mode. When only one unique index (or the primary key) exists, events are dispatched in the index-value mode.
+- ts: Use the commitTs of the row change to hash and dispatch events.
+- index-value: Use the value of the primary key or the unique index of the table to hash and dispatch events.
+- table: Use the schema name of the table and the table name to hash and dispatch events.
+
+> **Note:**
+>
+>
+> Since v6.1, to clarify the meaning of the configuration, the configuration used to specify the partition dispatcher has been changed from `dispatcher` to `partition`, with `partition` being an alias for `dispatcher`. For example, the following two rules are exactly equivalent.
+>
+> ```
+> [sink]
+> dispatchers = [
+>    {matcher = ['*.*'], dispatcher = "ts"},
+>    {matcher = ['*.*'], partition = "ts"},
+> ]
+> ```
+>
+> However, `dispatcher` and `partition` cannot appear in the same rule. For example, the following rule is invalid.
+>
+> ```
+> {matcher = ['*.*'], dispatcher = "ts", partition = "table"},
+> ```
 
 ## Output the historical value of a Row Changed Event <span class="version-mark">New in v4.0.5</span>
 
-> **Warning:**
->
-> Currently, outputting the historical value of a Row Changed Event is still an experimental feature. It is **NOT** recommended to use it in the production environment.
-
-In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value neither supports the [new collation framework](/character-set-and-collation.md#new-framework-for-collations) introduced in TiDB v4.0, nor can be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
+In the default configuration, the Row Changed Event of TiCDC Open Protocol output in a replication task only contains the changed value, not the value before the change. Therefore, the output value cannot be used by the consumer ends of TiCDC Open Protocol as the historical value of a Row Changed Event.
 
 Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Changed Event. To enable this feature, specify the following configuration in the `changefeed` configuration file at the root level:
 
@@ -616,7 +827,11 @@ Starting from v4.0.5, TiCDC supports outputting the historical value of a Row Ch
 enable-old-value = true
 ```
 
-After this feature is enabled, you can see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event) for the detailed output format. The new TiDB v4.0 collation framework will also be supported when you use the MySQL sink.
+This feature is enabled by default since v5.0. To learn the output format of the TiCDC Open Protocol after this feature is enabled, see [TiCDC Open Protocol - Row Changed Event](/ticdc/ticdc-open-protocol.md#row-changed-event).
+
+## Replicate tables with the new framework for collations enabled
+
+Starting from v4.0.15, v5.0.4, v5.1.1 and v5.2.0, TiCDC supports tables that have enabled [new framework for collations](/character-set-and-collation.md#new-framework-for-collations).
 
 ## Replicate tables without a valid index
 
@@ -657,15 +872,27 @@ In the output of the above command, if the value of `sort-engine` is "unified", 
 > + If your servers use mechanical hard drives or other storage devices that have high latency or limited bandwidth, use the unified sorter with caution.
 > + By default, Unified Sorter uses `data_dir` to store temporary files. It is recommended to ensure that the free disk space is greater than or equal to 500 GiB. For production environments, it is recommended to ensure that the free disk space on each node is greater than (the maximum `checkpoint-ts` delay allowed by the business) * (upstream write traffic at business peak hours). In addition, if you plan to replicate a large amount of historical data after `changefeed` is created, make sure that the free space on each node is greater than the amount of replicated data.
 > + Unified sorter is enabled by default. If your servers do not match the above requirements and you want to disable the unified sorter, you need to manually set `sort-engine` to `memory` for the changefeed.
-> + To enable Unified Sorter on an existing changefeed that uses `memory` to sort, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption). 
+> + To enable Unified Sorter on an existing changefeed that uses `memory` to sort, see the methods provided in [How do I handle the OOM that occurs after TiCDC is restarted after a task interruption?](/ticdc/troubleshoot-ticdc.md#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption).
 
 ## Eventually consistent replication in disaster scenarios
 
-Starting from v5.3.0, TiCDC provides the eventually consistent replication capability in disaster scenarios. When a disaster occurs in the primary TiDB cluster and the service cannot be resumed in a short period of time, TiCDC needs to provide the ability to ensure the consistency of data in the secondary cluster. Meanwhile, TiCDC needs to allow the business to quickly switch the traffic to the secondary cluster to avoid the database being unavailable for a long time and affecting the business.
+> **Warning:**
+>
+> Currently, it is not recommended that you use eventually consistent replication in disaster scenarios. For details, see [critical bug #6189](https://github.com/pingcap/tiflow/issues/6189).
 
-This feature supports TiCDC to replicate incremental data from a TiDB cluster to the secondary relational database TiDB/Aurora/MySQL/MariaDB. In case the primary cluster crashes, TiCDC can recover the secondary cluster to a certain snapshot in the primary cluster within 5 minutes, given the condition that before disaster the replication status of TiCDC is normal and replication lag is small. It allows data loss of less than 30 minutes, that is, RTO <= 5min, and RPO <= 30min.
+Starting from v5.3.0, TiCDC supports backing up incremental data from an upstream TiDB cluster to S3 storage or an NFS file system of a downstream cluster. When the upstream cluster encounters a disaster and becomes unavailable, TiCDC can restore the downstream data to the recent eventually consistent state. This is the eventually consistent replication capability provided by TiCDC. With this capability, you can switch applications to the downstream cluster quickly, avoiding long-time downtime and improving service continuity.
 
-### Prerequisites 
+Currently, TiCDC can replicate incremental data from a TiDB cluster to another TiDB cluster or a MySQL-compatible database system (including Aurora, MySQL, and MariaDB). In case the upstream cluster crashes, TiCDC can restore data in the downstream cluster within 5 minutes, given the conditions that before the disaster the replication status of TiCDC is normal and the replication lag is small. It allows data loss of 10s at most, that is, RTO <= 5 min, and P95 RPO <= 10s.
+
+TiCDC replication lag increases in the following scenarios:
+
+- The TPS increases significantly in a short time
+- Large or long transactions occur in the upstream
+- The TiKV or TiCDC cluster in the upstream is reloaded or upgraded
+- Time-consuming DDL statements, such as `add index`, are executed in the upstream
+- The PD is configured with aggressive scheduling strategies, resulting in frequent transfer of Region leaders, or frequent Region merge or Region split
+
+### Prerequisites
 
 - Prepare a highly available Amazon S3 storage or NFS system for storing TiCDC's real-time incremental data backup files. These files can be accessed in case of an primary cluster disaster.
 - Enable this feature for changefeeds that need to have eventual consistency in disaster scenarios. To enable it, you can add the following configuration to the changefeed configuration file.
@@ -673,8 +900,8 @@ This feature supports TiCDC to replicate incremental data from a TiDB cluster to
 ```toml
 [consistent]
 # Consistency level. Options include:
-# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified. 
-# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters. 
+# - none: the default value. In a non-disaster scenario, eventual consistency is only guaranteed if and only if finished-ts is specified.
+# - eventual: Uses redo log to guarantee eventual consistency in case of the primary cluster disasters.
 level = "eventual"
 
 # Individual redo log file size, in MiB. By default, it's 64. It is recommended to be no more than 128.

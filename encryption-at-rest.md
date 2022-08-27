@@ -151,7 +151,7 @@ To monitor encryption at rest, if you deploy TiKV with Grafana, you can look at 
 * Encryption meta file size: size of the encryption meta data files.
 * Read/Write encryption meta duration: the extra overhead to operate on metadata for encryption.
 
-For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata] document.
+For debugging, the `tikv-ctl` command can be used to dump encryption metadata such as encryption method and data key id used to encryption the file, as well as list of data keys. Since the operation can expose sensitive data, it is not recommended to use in production. Please refer to [TiKV Control](/tikv-control.md#dump-encryption-metadata) document.
 
 ### Compatibility between TiKV versions
 
@@ -177,11 +177,11 @@ To enable S3 server-side encryption when backup to S3 using BR, pass `--s3.sse` 
 To use a custom AWS KMS CMK that you created and owned, pass `--s3.sse-kms-key-id` in addition. In this case, both the BR process and all the TiKV nodes in the cluster would need access to the KMS CMK (for example, via AWS IAM), and the KMS CMK needs to be in the same AWS region as the S3 bucket used to store the backup. It is advised to grant access to the KMS CMK to BR process and TiKV nodes via AWS IAM. Refer to AWS documentation for usage of [IAM](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html). For example:
 
 ```
-./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.region <region> --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
+./br backup full --pd <pd-address> --storage "s3://<bucket>/<prefix>" --s3.sse aws:kms --s3.sse-kms-key-id 0987dcba-09fe-87dc-65ba-ab0987654321
 ```
 
 When restoring the backup, both `--s3.sse` and `--s3.sse-kms-key-id` should NOT be used. S3 will figure out encryption settings by itself. The BR process and TiKV nodes in the cluster to restore the backup to would also need access to the KMS CMK, or the restore will fail. Example:
 
 ```
-./br restore full --pd <pd-address> --storage "s3://<bucket>/<prefix> --s3.region <region>"
+./br restore full --pd <pd-address> --storage "s3://<bucket>/<prefix>"
 ```

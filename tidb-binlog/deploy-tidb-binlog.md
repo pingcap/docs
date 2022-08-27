@@ -23,42 +23,11 @@ In environments of development, testing and production, the requirements on serv
 
 It is recommended to deploy TiDB Binlog using TiUP. To do that, when deploying TiDB using TiUP, you need to add the node information of `drainer` and `pump` of TiDB Binlog in [TiDB Binlog Deployment Topology](/tidb-binlog-deployment-topology.md). For detailed deployment information, refer to [Deploy a TiDB Cluster Using TiUP](/production-deployment-using-tiup.md).
 
-## Deploy TiDB Binlog using a Binary package
+## Deploy TiDB Binlog using a binary package
 
-### Download the official Binary package
+### Download the official binary package
 
-Run the following commands to download the packages:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-version="latest" for nightly builds &&
-wget https://download.pingcap.org/tidb-latest-linux-amd64.{tar.gz,sha256}
-```
-
-Check the file integrity. If the result is OK, the file is correct.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-sha256sum -c tidb-latest-linux-amd64.sha256
-```
-
-For TiDB v2.1.0 GA or later versions, Pump and Drainer are already included in the TiDB download package. For other TiDB versions, you need to download Pump and Drainer separately using the following command:
-
-{{< copyable "shell-regular" >}}
-
-```bash
-wget https://download.pingcap.org/tidb-binlog-$version-linux-amd64.{tar.gz,sha256}
-```
-
-Check the file integrity. If the result is OK, the file is correct.
-
-{{< copyable "shell-regular" >}}
-
-```bash
-sha256sum -c tidb-binlog-$version-linux-amd64.sha256
-```
+The binary package of TiDB Binlog is included in the TiDB Toolkit. To download the TiDB Toolkit, see [Download TiDB Tools](/download-ecosystem-tools.md).
 
 ### The usage example
 
@@ -78,7 +47,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
 
 1. Deploy Pump using the binary.
 
-    - To view the command line parameters of Pump, execute `./bin/pump -help`:
+    - To view the command line parameters of Pump, execute `./pump -help`:
 
         ```bash
         Usage of Pump:
@@ -173,14 +142,14 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        ./bin/pump -config pump.toml
+        ./pump -config pump.toml
         ```
 
         If the command line parameters is the same with the configuration file parameters, the values of command line parameters are used.
 
 2. Deploy Drainer using binary.
 
-    - To view the command line parameters of Drainer, execute `./bin/drainer -help`:
+    - To view the command line parameters of Drainer, execute `./drainer -help`:
 
         ```bash
         Usage of Drainer:
@@ -391,7 +360,7 @@ The following part shows how to use Pump and Drainer based on the nodes above.
         {{< copyable "shell-regular" >}}
 
         ```bash
-        ./bin/drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
+        ./drainer -config drainer.toml -initial-commit-ts {initial-commit-ts}
         ```
 
         If the command line parameter and the configuration file parameter are the same, the parameter value in the command line is used.
