@@ -52,7 +52,7 @@ In TiDB Cloud, you can view the commonly used metrics of a cluster from the foll
 
 ### Metrics on the cluster overview page
 
-The cluster overview page provides general metrics of a cluster, including Total QPS, Latency, Connections, TiFlash Request QPS, TiFlash Request Duration, TiFlash Storage Size, TiKV Storage Size, TiDB CPU, TiKV CPU, TiKV IO Read, and TiKV IO Write.
+The cluster overview page provides general metrics of a cluster, including Total QPS, Query Duration, Active Connections, TiDB CPU, TiKV CPU, TiFlash CPU, TiDB Memory, TiKV Memory, TiFlash Memory, TiKV Storage Size, TiFlash Storage Size.
 
 To view metrics on the cluster overview page, take the following steps:
 
