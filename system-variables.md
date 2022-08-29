@@ -194,7 +194,7 @@ mysql> SELECT * FROM t1;
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `300`
 - Unit: Milliseconds
 - Log DDL operations whose execution time exceeds the threshold value.
@@ -350,14 +350,14 @@ This variable is an alias for `last_insert_id`.
 ### plugin_dir
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: ""
 - Indicates the directory to load plugins as specified by a command-line flag.
 
 ### plugin_load
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: ""
 - Indicates the plugins to load when TiDB is started. These plugins are specified by a command-line flag and separated by commas.
 
@@ -682,7 +682,7 @@ MPP is a distributed computing framework provided by the TiFlash engine, which a
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to enforce that the `utf8` character set only stores values from the [Basic Multilingual Plane (BMP)](https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane). To store characters outside the BMP, it is recommended to use the `utf8mb4` character set.
@@ -965,7 +965,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable controls whether to record the execution information of each operator in the slow query log.
@@ -1179,7 +1179,7 @@ Constraint checking is always performed in place for pessimistic transactions (d
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to enable the slow log feature.
@@ -1417,7 +1417,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Integer
 - Default value: `60`
 - Range: `[10, 2147483647]`
@@ -1437,7 +1437,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Default value: `NO_PRIORITY`
 - This variable is used to change the default priority for statements executed on a TiDB server. A use case is to ensure that a particular user that is performing OLAP queries receives lower priority than users performing OLTP queries.
 - You can set the value of this variable to `NO_PRIORITY`, `LOW_PRIORITY`, `DELAYED` or `HIGH_PRIORITY`.
@@ -1531,7 +1531,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `OFF`
 
@@ -1835,7 +1835,7 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Float
 - Default value: `0.8`
 - Range: `[0, 1]`
@@ -2135,7 +2135,7 @@ explain select * from t where age=5;
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Integer
 - Default value: `0`
 - Range: `[0, 1]`
@@ -2220,7 +2220,7 @@ explain select * from t where age=5;
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Boolean
 - Default value: `ON`
 - This variable is used to control whether to include the execution plan of slow queries in the slow log.
@@ -2382,7 +2382,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 </CustomContent>
 
 - Scope: GLOBAL
-- Persists to cluster: No
+- Persists to cluster: No, only applicable to the current TiDB instance that you are connecting to.
 - Type: Integer
 - Default value: `300`
 - Range: `[-1, 9223372036854775807]`

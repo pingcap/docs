@@ -86,6 +86,7 @@
     - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - Third-party Support
     - [Third-Party Libraries Support](/develop/dev-guide-third-party-support.md)
+    - [Integrate with ProxySQL](/develop/dev-guide-proxysql-integration.md)
 - Deploy
   - [Software and Hardware Requirements](/hardware-and-software-requirements.md)
   - [Environment Configuration Checklist](/check-before-deployment.md)
@@ -116,12 +117,17 @@
     - [Migrate from CSV Files](/migrate-from-csv-files-to-tidb.md)
     - [Migrate from SQL Files](/migrate-from-sql-files-to-tidb.md)
     - [Migrate from One TiDB Cluster to Another TiDB Cluster](/migrate-from-tidb-to-tidb.md)
-    - [Replicate Data from TiDB to Kafka](/replicate-data-to-kafka.md)
+    - [Migrate from TiDB to MySQL-compatible Databases](/migrate-from-tidb-to-mysql.md)
   - Advanced Migration
     - [Continuous Replication with gh-ost or pt-osc](/migrate-with-pt-ghost.md)
     - [Migrate to a Downstream Table with More Columns](/migrate-with-more-columns-downstream.md)
     - [Filter Binlog Events](/filter-binlog-event.md)
     - [Filter DML Events Using SQL Expressions](/filter-dml-event.md)
+- Integrate
+  - [Overview](/integration-overview.md)
+  - Integration Scenarios
+    - [Integrate with Confluent Cloud and Snowflake](/ticdc/integrate-confluent-using-ticdc.md)
+    - [Integrate with Apache Kafka and Apache Flink](/replicate-data-to-kafka.md)
 - Maintain
   - Upgrade
     - [Use TiUP (Recommended)](/upgrade-tidb-using-tiup.md)
@@ -130,9 +136,9 @@
     - [Use TiUP (Recommended)](/scale-tidb-using-tiup.md)
     - [Use TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable/scale-a-tidb-cluster)
   - Backup and Restore
-    - [Use BR to Back Up Cluster Data](/br/br-usage-backup.md)
-    - [Use BR to Restore Cluster Data](/br/br-usage-restore.md)
-    - [BR Use Cases](/br/backup-and-restore-use-cases.md)
+    - [Use BR to Back Up Cluster Data](/br-usage-backup-for-maintain.md)
+    - [Use BR to Restore Cluster Data](/br-usage-restore-for-maintain.md)
+    - [BR Use Cases](/backup-and-restore-use-cases-for-maintain.md)
   - [Configure Time Zone](/configure-time-zone.md)
   - [Daily Checklist](/daily-check.md)
   - [Maintain TiFlash](/tiflash/maintain-tiflash.md)
@@ -498,7 +504,6 @@
       - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Avro Protocol](/ticdc/ticdc-avro-protocol.md)
       - [TiCDC Canal-JSON Protocol](/ticdc/ticdc-canal-json.md)
-      - [Integrate TiDB with Confluent Platform](/ticdc/integrate-confluent-using-ticdc.md)
     - [FAQs](/ticdc/ticdc-faq.md)
     - [Glossary](/ticdc/ticdc-glossary.md)
   - [Dumpling](/dumpling-overview.md)
@@ -847,6 +852,7 @@
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 - FAQs
+  - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [SQL FAQs](/faq/sql-faq.md)
   - [Deployment FAQs](/faq/deploy-and-maintain-faq.md)

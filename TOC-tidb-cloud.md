@@ -75,6 +75,7 @@
   - Plan Your Cluster
     - [Select Your Cluster Tier](/tidb-cloud/select-cluster-tier.md)
     - [Determine Your TiDB Size](/tidb-cloud/size-your-cluster.md)
+    - [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md)
   - [Create a TiDB Cluster](/tidb-cloud/create-tidb-cluster.md)
   - Connect to Your TiDB Cluster
     - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
@@ -89,8 +90,10 @@
     - [Supported Push-down Calculations](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
   - [Scale a TiDB Cluster](/tidb-cloud/scale-tidb-cluster.md)
+  - [Pause or Resume a TiDB Cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [Upgrade a TiDB Cluster](/tidb-cloud/upgrade-tidb-cluster.md)
   - [Delete a TiDB Cluster](/tidb-cloud/delete-tidb-cluster.md)
+  - [Use TiDB Cloud API (Beta)](/tidb-cloud/api-overview.md)
 - Migrate Data
   - [Import Sample Data](/tidb-cloud/import-sample-data.md)
   - Migrate Data into TiDB
@@ -166,12 +169,9 @@
   - [Manage Console User Access](/tidb-cloud/manage-user-access.md)
   - [Configure Cluster Security Settings](/tidb-cloud/configure-security-settings.md)
 - Billing
-  - [Node Cost](/tidb-cloud/tidb-cloud-billing.md)
-  - [Backup Storage Cost](/tidb-cloud/tidb-cloud-billing.md#backup-storage-cost)
-  - [Data Transfer Cost](/tidb-cloud/tidb-cloud-billing.md#data-transfer-cost)
   - [Invoices](/tidb-cloud/tidb-cloud-billing.md#invoices)
   - [Billing Details](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-  - [Trial Points](/tidb-cloud/tidb-cloud-billing.md#trial-points)
+  - [Credits](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [Payment Method Setting](/tidb-cloud/tidb-cloud-billing.md#payment-method)
 - Reference
   - TiDB Cluster Architecture
@@ -401,6 +401,7 @@
         - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
         - [`VIEWS`](/information-schema/information-schema-views.md)
   - [System Variables](/system-variables.md)
+  - [API Reference](https://docs.pingcap.com/tidbcloud/api/v1beta)
   - Storage Engines
     - TiKV
         - [TiKV Overview](/tikv-overview.md)

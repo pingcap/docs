@@ -23,6 +23,8 @@ You can see the current status of each running cluster on the cluster page.
 | **Unavailable** | The TiDB Cloud service is not available |
 | **Unhealthy** | Part of nodes are unavailable, not enough replicas, and so on |
 | **Recovering** | Backup recovery |
+| **Paused** | The cluster is paused |
+| **Resuming** | Resuming the cluster |
 
 ### TiDB node status
 
@@ -56,7 +58,7 @@ The cluster overview page provides general metrics of a cluster, including Total
 
 To view metrics on the cluster overview page, take the following steps:
 
-1. Navigate to the **Active Clusters** page.
+1. Navigate to the **Clusters** page.
 
 2. Click the name of a cluster to go to its cluster overview page.
 

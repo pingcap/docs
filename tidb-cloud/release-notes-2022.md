@@ -8,6 +8,47 @@ aliases: ['/tidbcloud/beta/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cloud/) in 2022.
 
+## August 24, 2022
+
+**General changes**
+
+* Support pausing or resuming a Dedicated Tier cluster.
+
+    You can [pause or resume your Dedicated Tier cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md) in TiDB Cloud. When a cluster is paused, Node Compute Cost will not be charged.
+
+## August 23, 2022
+
+**General changes**
+
+* Upgrade the default TiDB version of new [Developer Tier](/tidb-cloud/select-cluster-tier.md#developer-tier) clusters from [v6.1.0](https://docs.pingcap.com/tidb/stable/release-6.1.0) to [v6.2.0](https://docs.pingcap.com/tidb/v6.2/release-6.2.0).
+
+**API changes**
+
+* Introduce TiDB Cloud API as beta.
+
+    Through this API, you can manage TiDB Cloud resources such as clusters automatically and efficiently. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+
+    Currently, TiDB Cloud API is still in beta and only available upon request. You can apply for API access by submitting a request:
+
+    * Click **Help** in the lower-right corner of [TiDB Cloud console](https://tidbcloud.com/console/clusters).
+    * In the dialog, fill in "Apply for TiDB Cloud API" in the **Description** field and click **Send**.
+
+## August 16, 2022
+
+* Add `2 vCPU, 8 GiB (Beta)` node size of TiDB and TiKV as beta.
+
+    * For each `2 vCPU, 8 GiB (Beta)` TiKV node, the storage size is between 200 GiB and 500 GiB.
+
+    * Suggested usage scenarios:
+
+        * Low-workload production environments for SMB
+        * PoC and staging environments
+        * Development environments
+
+* Introduce [Credits](/tidb-cloud/tidb-cloud-billing.md#credits) (previously named as trail points) for PoC users.
+
+    You can now view information about your organization's credits on the **Credits** tab of the **Billing** page, the credits can be used to pay for TiDB Cloud fees. You can [contact us](https://en.pingcap.com/apply-for-poc/) to get credits.
+
 ## August 9, 2022
 
 * Add the support of the GCP region `Osaka` for [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#dedicated-tier) cluster creation.
@@ -35,9 +76,9 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 * Add TiDB Cloud Support Plans (Basic, Standard, Enterprise, and Premium) to meet different support needs of customers' organizations. For more information, see [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-* Optimize the UI of the [Active Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
+* Optimize the UI of the [Clusters](https://tidbcloud.com/console/clusters) page and the cluster details page:
 
-    * Add **Connect** and **Import data** buttons to the **Active Clusters** page.
+    * Add **Connect** and **Import data** buttons to the **Clusters** page.
     * Move **Connect** and **Import data** buttons to the upper-right corner on the cluster details page.
 
 ## July 28, 2022
@@ -84,7 +125,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
     To experience the benefits brought by TiFlash, see [TiDB Cloud HTAP Quick Start Guide](/tidb-cloud/tidb-cloud-htap-quickstart.md).
 
-* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#increase-storage-size) of TiKV and TiFlash for a Dedicated Tier cluster.
+* Support [increasing the storage size](/tidb-cloud/scale-tidb-cluster.md#increase-node-storage) of TiKV and TiFlash for a Dedicated Tier cluster.
 * Support showing the memory information in the node size field.
 
 ## June 28, 2022
@@ -93,7 +134,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
 ## June 23, 2022
 
-* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-storage-size) on TiDB Cloud.
+* Increase the maximum [storage capacity of TiKV](/tidb-cloud/size-your-cluster.md#tikv-node-storage) on TiDB Cloud.
 
     * 8 vCPU or 16 vCPU TiKV: support up to 4 TiB storage capacity.
     * 4 vCPU TiKV: support up to 2 TiB storage capacity.
