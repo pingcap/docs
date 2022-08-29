@@ -133,7 +133,7 @@ TiDB version: 6.1.1
         - Fix a data race in black hole sink. [#6206](https://github.com/pingcap/tiflow/issues/6206)
         - Fix TiCDC panic issue when disable the old value of changefeed [#6198](https://github.com/pingcap/tiflow/issues/6198)
         - Fix some data consistency problems when enabling redo log  feature.
-        [#6189](https://github.com/pingcap/tiflow/issues/6189)[#6368](https://github.com/pingcap/tiflow/issues/6368)[#6277](https://github.com/pingcap/tiflow/issues/6277)[#6456](https://github.com/pingcap/tiflow/issues/6456)[#6695](https://github.com/pingcap/tiflow/issues/6695)[#6764](https://github.com/pingcap/tiflow/issues/6764)[#6859](https://github.com/pingcap/tiflow/issues/6859)
+        [#6189](https://github.com/pingcap/tiflow/issues/6189) [#6368](https://github.com/pingcap/tiflow/issues/6368) [#6277](https://github.com/pingcap/tiflow/issues/6277) [#6456](https://github.com/pingcap/tiflow/issues/6456) [#6695](https://github.com/pingcap/tiflow/issues/6695) [#6764](https://github.com/pingcap/tiflow/issues/6764) [#6859](https://github.com/pingcap/tiflow/issues/6859)
         - Fix the performance problem about the redo log by
         writing redo event asynchronously [#6011](https://github.com/pingcap/tiflow/issues/6011)
         - Fix the changefeed stuck problem when enabling sync-point in some special situation [#6827](https://github.com/pingcap/tiflow/issues/6827)
