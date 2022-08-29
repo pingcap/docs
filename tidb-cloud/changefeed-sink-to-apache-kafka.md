@@ -1,22 +1,26 @@
 ---
-title: Create a changefeed to stream data from TiDB Cloud to Apache Kafka
-Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka. 
+title: Sink to Apache Kafka
+Summary: Learn how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
 ---
 
-# Create a changefeed to stream data from TiDB Cloud to Apache Kafka
+# Sink to Apache Kafka
 
-This document describes how to stream data from TiDB Cloud to Apache Kafka using the changefeed.
+This document describes how to create a changefeed to stream data from TiDB Cloud to Apache Kafka.
+
+> **Note:**
+>
+> For [Developer Tier clusters](/tidb-cloud/select-cluster-tier.md#developer-tier), the changefeed feature is unavailable.
 
 ## Prerequisites
 
 ### Network
 
-Make sure that your TiDB Cluster can connect to the Apache Kafka service.
+Make sure that your TiDB cluster can connect to the Apache Kafka service.
 
 If your Apache Kafka service is in an AWS VPC that has no internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
-2. Modify the inbound rules of the security group that the Apache Kafka service is associated with. 
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
+2. Modify the inbound rules of the security group that the Apache Kafka service is associated with.
 
     You must add the CIDR of the region where your TiDB Cloud cluster is located to the inbound rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
 
@@ -27,62 +31,106 @@ If your Apache Kafka service is in an AWS VPC that has no internet access, take 
 
 If your Apache Kafka service is in a GCP VPC that has no internet access, take the following steps:
 
-1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster. 
-2. Modify the ingress firewall rules of the VPC where Apache Kafka is located. 
+1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
+2. Modify the ingress firewall rules of the VPC where Apache Kafka is located.
 
     You must add the CIDR of the Region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
 
 ### Kafka ACL authorization
 
-To write stream data to Apache Kafka, and create topics automatically, there are the minimum set of permissions required for TiDB Cloud Changefeed:
+To allow TiDB Cloud changefeeds to stream data to Apache Kafka and create Kafka topics automatically, ensure that the following permissions are added in Kafka:
 
- - The Create and Write permissions for the Topic resource type.
- - The DescribeConfigs permission for the Cluster resource type.
+- The `Create` and `Write` permissions are added for the topic resource type in Kafka.
+- The `DescribeConfigs` permission is added for the cluster resource type in Kafka.
 
-## Step 1. Go to the creation wizard page
+For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources](https://docs.confluent.io/platform/current/kafka/authorization.html#resources) and [Adding ACLs](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls) in Confluent documentation for more information.
 
-1. Navigate to the **Changefeed** tab of your TiDB cluster.
-2. Click **Sink to Apache Kafka**.
+## Step 1. Open the changefeed page for Apache Kafka
+
+1. In the TiDB Cloud console, navigate to the **Clusters** page for your project.
+2. Click the name of the cluster that you want to create a changefeed for.
+3. Click the **Changefeed** tab.
+4. Click **Sink to Apache Kafka**.
 
 ## Step 2. Configure the changefeed target
 
-1. Select the **Kafka** target in the **Target Type** field set, and then you can see the **Brokers Configuration** field set under the **Target Type** field set.
-2. Fill the Kafka Endpoints. You can use commas(',') to separate multiple endpoints.
-3. Select the Kafka Version. If you don't known what the version of Kafka is, you can use the Kafka V2.
-4. Select the Kafka connection compression type.
-5. Switch on the **TLS Encryption** option if you want to use TLS encryption. And the Kafka connection will be required to use TLS encryption.
-6. Select the **Authentication** option you want to use.
-   - Disable means that no authentication is required.
-   - SASL/PLAIN means that the Kafka connection will be required to use SASL/PLAIN authentication.
-   - SASL/SCRAM-SHA-256 means that the Kafka connection will be required to use SASL/SCRAM-SHA-256 authentication.
-   - SASL/SCRAM-SHA-512 means that the Kafka connection will be required to use SASL/SCRAM-SHA-512 authentication.
-7. Fill the **Username** and **Password** fields under the **Authentication** field set if you select the SASL/PLAIN, SASL/SCRAM-SHA-256 or SASL/SCRAM-SHA-512 authentication type.
-8. Click **Next** to check the current input and go to the next page.
-   
+1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
+2. Select your Kafka version. If you do not known that, use Kafka V2.
+3. Select a desired compression type for the stream data.
+4. Enable the **TLS Encryption** option if your Kafka have enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+5. Select the **Authentication** option according to your Kafka authentication configuration.
+
+    - If your Kafka does not require authentication, keep the default option **Disable**.
+    - If your Kafka requires authentication, select the corresponding authentication type, and then fill in the user name and password of your Kafka account for authentication.
+
+6. Click **Next** to check the configurations you set and go to the next page.
+
 ## Step 3. Set the changefeed
 
-1. You can select the data format you want in **Date Format** field set.
-   - Avro is a compact, fast, binary data format with the rich data structures. Widely used in various flow systems. Also see [Avro data format]()
-   - Canal-JSON is a plain JSON text format, easy to parse. Also see [Canal-JSON Data format]()
-2. You can switch on the TiDB Extension option if you want add some TiDB-extension fields to the message body. Alse see [TiDB extension fields in Avro data format]() and [TiDB extension fields in Canal-JSON data format]()
-3. There are two another options when you use the Avro data format: Handle Decimal and Handle Bigint Unsigned option specified how to handle the decimal and Bigint data type.
-4. You will see the **Schema Registry** field set under the **Data Format** field set when you use Avro data format. You should fill the schema registry endpoints and the username and password if you enable the HTTP Authentication.
-5. In **Topic Distribution** field set, you can decide which topic a kafka message should be sent to:
-   - Distribute changelogs by table to Kafka Topics. Kafka messages of a table will be sent to a Kafka topic. The topic name is depended on the prefix, separator, suffix you set and the name of table and database.
-   - Distribute changelogs by database to Kafka Topics. Kafka messages of a database will be sent to a Kafka topic. The topic name is depended on the prefix, suffix you set and the name of database.
-   - Send all changelogs to one specified Kafka Topic. All Kafka messages will be sent to the specified Kafka Topic.
-6. In **Partition Distribution** field set, you can decide which partition a kafka message should be sent to:
-   - Distribute changelogs by index value to Kafka partition. Kafka messages of a table will be sent to many diffierent partitions. The partition number is depended on the index value of the row changedlog. This kind of distribution method will get a better partition balance and ensures row-level orderliness.
-   - Distribute changelogs by table to Kafka Partitions. Kafka messages of a table will be sent to one Kafka partition. The partition number is depended on the table name of the row changedlog. This kind of distribution method may cause partitions to be unbalanced, but better orderliness is guaranteed.
-7. In **Topic Configuration** field set, this two fields are used to create the Kafka topic automatically by this changefeed.
-   - The replication factor controls how many servers will replicate each message that is written. 
-   - The partition number controls how many partitions exist.
-8. Click **Next** to check the current input and go to the next page.
+1. In the **Data Format** area, select your desired format of Kafka messages.
 
-## Step 4. Review
+   - Avro is a compact, fast, binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
+   - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
 
-In this page, you can review the configuration you have set. If there is any error, you can go back to the previous page to fix the error. If there is no error, you can click **Create** to create the changefeed.
+2. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
 
+    For more information about TiDB-extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
+
+3. If you select **Avro** as your data format, you will see some Avro specific configurations on the page, and you can fill in these configurations as follows:
+
+    - In the **Handle Decimal** and **Handle Bigint Unsigned** configurations, specify how TiDB Cloud handles the decimal and Bigint data types in Kafka messages.
+    - In the **Schema Registry** area, fill in your schema registry endpoints. If you enable **HTTP Authentication**, you also need to fill in the username and password for the schema registry.
+
+4. In the **Topic Distribution** area, select a distribution mode, specify a default Kafka topic name, and set the corresponding topic prefix, separator, and suffix.
+
+    The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or cerating one topic for all changelogs. If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
+
+   - **Distribute changelogs by table to Kafka Topics**
+
+        If you want the changefeed to create a dedicated Kafka topic for each table, choose this mode. Then, all Kafka messages of a table are sent to a dedicated Kafka topic. You can define topic names for tables by setting the topic prefix, separator, and suffix. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix>_<DatabaseName>_<TableName>_<Suffix>`.
+
+        For changelogs of non-row events, such as Create Schema Event, you can specify a topic name in the **Default Topic Name** field. The changefeed will create a topic accordingly to collect such changelogs.
+
+   - **Distribute changelogs by database to Kafka Topics**
+
+        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can define topic names of databases by setting the topic prefix, separator, and suffix. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix>_<DatabaseName>_<Suffix>`.
+
+   - **Send all changelogs to one specified Kafka Topic**
+
+        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages of the cluster will be sent to one Kafka topic. You can define the topic name in the **Default Topic Name** field.
+
+5. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
+
+   - **Distribute changelogs by index value to Kafka partition**
+
+        If you want the changefeed to send Kafka messages of a table to different partitions, choose this distribution method. The index value of a row changelog will determine which partition the changelog is sent to. This distribution method provides a better partition balance and ensures row-level orderliness.
+
+   - **Distribute changelogs by table to Kafka partitions**
+
+        If you want the changefeed to send Kafka messages of a table to one Kafka partition, choose this distribution method. The table name of a row changelog will determine which partition the changelog is sent to. This distribution method ensures table orderliness but might cause unbalanced partitions.
+
+6. In the **Topic Configuration** area, configure the following numbers. The changefeed will automatically create the Kafka topics according to the numbers.
+
+   - **Replication Factor**: controls how many Kafka servers each Kafka message is replicated to.
+   - **Partition Number**: controls how many partitions exist in a topic.
+
+7. Click **Next** to check the configurations you set and go to the next page.
+
+## Step 4. Review the configurations
+
+On this page, you can review all the changefeed configurations that you set.
+
+If you find any error, you can go back to fix the error. If there is no error, you can click the check box at the bottom, and then click **Create** to create the changefeed.
+
+## Step 5. Manage the changefeed
+
+After a changefeed is created, you can navigate to the **Changefeed** tab of your TiDB cluster and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
+
+In the **Changefeed Detail** dialog, you can manage the changefeed as follows:
+
+- Check the running state of the changefeed.
+- Click **Delete** to delete the changefeed.
+- Click **Pause** or **Resume** to pause or resume the changefeed.
 
 ## Restrictions
 
