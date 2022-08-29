@@ -15,6 +15,10 @@ TiDB version: 6.1.1
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that `SHOW DATABASES LIKE …` is case-sensitive [#34766](https://github.com/pingcap/tidb/issues/34766)
     - Change the default value of [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) from `1` to `0`, which disables Join Reorder's support for Outer Join is enabled by default.
 
++ Diagnosis
+
+    - Continuous Profiling is now disabled by default.
+
 ## Improvements
 
 - Add some contents in the `TiDB-community-toolkit` binary package. For details, see [TiDB Installation Packages](/binary-package.md).
@@ -22,18 +26,22 @@ TiDB version: 6.1.1
 
 + TiDB
 
-<!-- <planner> -->
-(dup: release-6.2.0.md > # Performance)[User document](/optimizer-hints.md#semi_join_rewrite) [#35323](https://github.com/pingcap/tidb/issues/35323)
-(dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
+    <!-- <planner> -->
+    (dup: release-6.2.0.md > # Performance)[User document](/optimizer-hints.md#semi_join_rewrite) [#35323](https://github.com/pingcap/tidb/issues/35323)
+    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
 
-<!-- <transaction> -->
-(dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
+    <!-- <transaction> -->
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
     (dup: release-6.2.0.md > Improvements> TiKV)- Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355)
     - Support filter useless metrics samples to reduce the metrics data size. [#12355](https://github.com/tikv/tikv/issues/12355)
     (dup: release-6.2.0.md > Improvements> TiKV)- Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145)
+
++ PD
+
+    - 改进 balance region 在空间快均衡阶段的调度速度 [#5320](https://github.com/tikv/pd/pull/5320)
 
 + Tools
 
@@ -55,36 +63,36 @@ TiDB version: 6.1.1
 
 + TiDB
 
-<!-- <execution> -->
-- Fix the issue that IndexLookupHashJoin may hangs when used with limit [#35638](https://github.com/pingcap/tidb/issues/35638)
-- Fix the issue that TiDB may panic during update stmt [#32311](https://github.com/pingcap/tidb/issues/32311)
-- Fix the bug that `show columns` may send cop request [#36496](https://github.com/pingcap/tidb/issues/36496)
-- Fix bug that `show warnings` may return `invalid memory address or nil pointer dereference` error [#31569](https://github.com/pingcap/tidb/issues/31569)
-- Fix the case sensitive issues for `show database like` statement [#34766](https://github.com/pingcap/tidb/issues/34766)
-- Fix bug that static partition prune may return wrong result for agg query if the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
+    <!-- <execution> -->
+    - Fix the issue that IndexLookupHashJoin may hangs when used with limit [#35638](https://github.com/pingcap/tidb/issues/35638)
+    - Fix the issue that TiDB may panic during update stmt [#32311](https://github.com/pingcap/tidb/issues/32311)
+    - Fix the bug that `show columns` may send cop request [#36496](https://github.com/pingcap/tidb/issues/36496)
+    - Fix bug that `show warnings` may return `invalid memory address or nil pointer dereference` error [#31569](https://github.com/pingcap/tidb/issues/31569)
+    - Fix the case sensitive issues for `show database like` statement [#34766](https://github.com/pingcap/tidb/issues/34766)
+    - Fix bug that static partition prune may return wrong result for agg query if the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
 
-<!-- <planner> -->
-- Fix outer join reorder will push down its outer join condition wrongly [#37238](https://github.com/pingcap/tidb/issues/37238)
-- Fix that cte-schema hashcode is cloned wrongly when cte is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
-- Fix the wrong join reorder produced by some right outer join [#36912](https://github.com/pingcap/tidb/issues/36912)
-- Fix the wrong nullable value infered for firstrow agg function with EqualAll [#34584](https://github.com/pingcap/tidb/issues/34584)
-- Fix that plan cache cannot work when there's a binding with ignore_plan_cache hint [#34596](https://github.com/pingcap/tidb/issues/34596)
-- Fix the missing exchange between hash-partition window and single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
-- Fix that some predicates are wrongly removed after partition pruning [#33966](https://github.com/pingcap/tidb/issues/33966)
-- Fix the wrong default value set for partial aggregation when aggregation is pushed-down [#35295](https://github.com/pingcap/tidb/issues/35295)
+    <!-- <planner> -->
+    - Fix outer join reorder will push down its outer join condition wrongly [#37238](https://github.com/pingcap/tidb/issues/37238)
+    - Fix that cte-schema hashcode is cloned wrongly when cte is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
+    - Fix the wrong join reorder produced by some right outer join [#36912](https://github.com/pingcap/tidb/issues/36912)
+    - Fix the wrong nullable value infered for firstrow agg function with EqualAll [#34584](https://github.com/pingcap/tidb/issues/34584)
+    - Fix that plan cache cannot work when there's a binding with ignore_plan_cache hint [#34596](https://github.com/pingcap/tidb/issues/34596)
+    - Fix the missing exchange between hash-partition window and single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
+    - Fix that some predicates are wrongly removed after partition pruning [#33966](https://github.com/pingcap/tidb/issues/33966)
+    - Fix the wrong default value set for partial aggregation when aggregation is pushed-down [#35295](https://github.com/pingcap/tidb/issues/35295)
 
-<!-- <sql-infra> -->
-(dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might report "index-out-of-range" and "non used index" errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
-- Fix the issue that when using TiDB with Binlog, the Drainer may crash because the invalid schema version after `ALTER SEQUENCE` statement [#36276](https://github.com/pingcap/tidb/issues/36276)
-- Fix the incorrect TiDB states that may appear on startup under very extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791)
-- Fix the issue that the execution plans for the partition table may show `UnknownPlanID` in TiDB Dashboard. [#35153](https://github.com/pingcap/tidb/issues/35153)
+    <!-- <sql-infra> -->
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might report "index-out-of-range" and "non used index" errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
+    - Fix the issue that when using TiDB with Binlog, the Drainer may crash because the invalid schema version after `ALTER SEQUENCE` statement [#36276](https://github.com/pingcap/tidb/issues/36276)
+    - Fix the incorrect TiDB states that may appear on startup under very extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791)
+    - Fix the issue that the execution plans for the partition table may show `UnknownPlanID` in TiDB Dashboard. [#35153](https://github.com/pingcap/tidb/issues/35153)
 
-<!-- <transaction> -->
-(dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that the column list does not work in the LOAD DATA statement [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-(dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
-- Remove the limitation of `tidb_gc_life_time` [#35392](https://github.com/pingcap/tidb/issues/35392)
-- Fix the load data statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298)
-- Fix the long recovery time issue when the hiberate region is used [#34906](https://github.com/pingcap/tidb/issues/34906)
+    <!-- <transaction> -->
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that the column list does not work in the LOAD DATA statement [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
+    - Remove the limitation of `tidb_gc_life_time` [#35392](https://github.com/pingcap/tidb/issues/35392)
+    - Fix the load data statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298)
+    - Fix the long recovery time issue when the hiberate region is used [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
@@ -110,6 +118,7 @@ TiDB version: 6.1.1
     - Fix the issue that the online process is not accurate when having invalid label settings. [#5234](https://github.com/tikv/pd/issues/5234)
     - Fix the problem that grpc handles return errors inappropriately [#5373](https://github.com/tikv/pd/issues/5373)
     - Fix the issue that `/regions/replicated` may return the wrong status [#5095](https://github.com/tikv/pd/issues/5095)
+    - 修复 gRPC 处理返回错误不恰当的问题 [#5376](https://github.com/tikv/pd/pull/5376)
 
 + TiFlash
 
