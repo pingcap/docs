@@ -30,7 +30,7 @@ In most scenarios, you are recommended to use private endpoint connection over V
 - You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
-## Set up private endpoint with AWS
+## Set up a private endpoint with AWS
 
 This section describes how to set up a private endpoint with AWS PrivateLink.
 
@@ -40,7 +40,7 @@ Take the following steps to set up a private endpoint. If you have multiple clus
 
 TiDB Cloud supports private endpoints only for Dedicated Tier clusters. You are expected to create a Dedicated Tier cluster before creating a private endpoint. For detailed instructions, see [Create a TiDB Cluster in TiDB Cloud](/tidb-cloud/create-tidb-cluster.md).
 
-#### Step 1. Find the entrance
+#### Step 1. Open the private endpoint creation page
 
 To find the entrance to creating a private endpoint, take the following steps:
 
@@ -53,9 +53,8 @@ To find the entrance to creating a private endpoint, take the following steps:
 >
 > 1. In the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
 > 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
-> 3. Select the **Private Endpoint** tab. If no private endpoint has been created, click **Create** on the dialog to open the creation page.
+> 3. Select the **Private Endpoint** tab. If no private endpoint has been created, click **Create** in the dialog to open the creation page.
 
-On the creation page, a flow bar is displayed indicating the stages of creating a private endpoint: **Choose Cluster** > **Service Endpoint** > **Interface Endpoint** > **Accept Endpoint Connection** > **Enable Private DNS**.
 
 #### Step 2. Choose a TiDB cluster
 
@@ -79,20 +78,18 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
 1. Fill in the **VPC ID** and **Subnet IDs** fields. You can get the IDs from your AWS Management Console.
 
-    If you do not know how to get these IDs, click **Show Instruction** and you will see two snapshots of the AWS Management Console that illustrate how to get these IDs.
+    If you do not know how to get these IDs, click **Show Instruction** and you will see two screenshots for reference.
 
-2. Take a note of the endpoint service name after the endpoint service creation is complete.
-
-    After the endpoint service is created, the endpoint service name is available in the command in the **Create VPC Interface Endpoint** area.
+2. After the endpoint service is created, check the command in the **Create VPC Interface Endpoint** area, and take a note of your endpoint service name.
 
     ![Endpoint service name](/media/tidb-cloud/private-endpoint/private-endpoint-service-name.png)
 
-3. Create the VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
+3. Create a VPC interface endpoint in AWS. You can either use the AWS Management Console or the AWS CLI.
 
     <SimpleTab>
     <div label="Use AWS Console">
 
-    To use the AWS Management Console to create the VPC interface, perform the following steps:
+    To use the AWS Management Console to create the VPC interface endpoint, perform the following steps:
 
     1. In your AWS Management Console, go to **VPC** > **Endpoints**, and click **Create Endpoint** in the upper-right corner. The **Create endpoint** page is displayed.
 
@@ -158,7 +155,7 @@ Fill in the box with the your VPC endpoint ID and click **Next**.
 
 Click the **Copy** button to copy the command and run it in your AWS CLI. The `<your_vpc_endpoint_id>` placeholder is automatically replaced with the value you have provided in Step 5.
 
-Alternatively, you can enable private DNS in your AWS Management Console. If you do not know how to do it, click **Show Instruction** and you will see a snapshots of the AWS Management Console that illustrates how to enable private DNS.
+Alternatively, you can enable private DNS in your AWS Management Console. If you do not know how to do it, click **Show Instruction** and you will see a screenshot for reference.
 
 Then click **Create** to finalize the creation of the private endpoint.
 
