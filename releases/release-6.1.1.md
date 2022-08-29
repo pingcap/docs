@@ -36,7 +36,7 @@ TiDB version: 6.1.1
 + TiKV
 
     (dup: release-6.2.0.md > Improvements> TiKV)- Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355)
-    - Support filter useless metrics samples to reduce the metrics data size. [#12355](https://github.com/tikv/tikv/issues/12355)
+    - 支持过滤不常用 metrics 以减少流量 [#12698](https://github.com/tikv/tikv/issues/12698)
     (dup: release-6.2.0.md > Improvements> TiKV)- Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145)
 
 + PD
@@ -56,7 +56,7 @@ TiDB version: 6.1.1
     + TiCDC
 
         - Add a sink uri parameter `transaction-atomicity` to support splitting the large transaction in a changefeed. This can greatly reduce the lantency and memory consumption of large transactions. [#5231](https://github.com/pingcap/tiflow/issues/5231)
-        - Reduce the goroutine number when initializing a capture with lots of regions[#5610](https://github.com/pingcap/tiflow/issues/5610)
+        (dup: release-6.2.0.md > Improvements> Tools> TiCDC)- Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610)
         - An enhancement of MySQL sink to turn off safe-mode automatically [#5611](https://github.com/pingcap/tiflow/issues/5611)
 
 ## Bug fixes
@@ -74,10 +74,10 @@ TiDB version: 6.1.1
     - Fix outer join reorder will push down its outer join condition wrongly [#37238](https://github.com/pingcap/tidb/issues/37238)
     - Fix that cte-schema hashcode is cloned wrongly when cte is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
     - Fix the wrong join reorder produced by some right outer join [#36912](https://github.com/pingcap/tidb/issues/36912)
-    - Fix the wrong nullable value infered for firstrow agg function with EqualAll [#34584](https://github.com/pingcap/tidb/issues/34584)
+    (dup: release-5.4.2.md > Bug Fixes> TiDB)- Fix the issue of incorrectly inferred null flag of the TiFlash `firstrow` aggregate function in the EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
     - Fix that plan cache cannot work when there's a binding with ignore_plan_cache hint [#34596](https://github.com/pingcap/tidb/issues/34596)
     - Fix the missing exchange between hash-partition window and single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
-    - Fix that some predicates are wrongly removed after partition pruning [#33966](https://github.com/pingcap/tidb/issues/33966)
+    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix the wrong default value set for partial aggregation when aggregation is pushed-down [#35295](https://github.com/pingcap/tidb/issues/35295)
 
     <!-- <sql-infra> -->
@@ -91,7 +91,7 @@ TiDB version: 6.1.1
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
     - Remove the limitation of `tidb_gc_life_time` [#35392](https://github.com/pingcap/tidb/issues/35392)
     - Fix the load data statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298)
-    - Fix the long recovery time issue when the hiberate region is used [#34906](https://github.com/pingcap/tidb/issues/34906)
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
@@ -148,7 +148,7 @@ TiDB version: 6.1.1
     + Backup & Restore (BR)
 
         (dup: release-5.4.2.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [#35279](https://github.com/pingcap/tidb/issues/35279)
-        - Adjust the backup organization structure and add a store_id related prefix under the backup path. [#30087](https://github.com/pingcap/tidb/issues/30087)
+        (dup: release-6.2.0.md > Improvements> Tools> Backup & Restore (BR))- Adjust the backup data directory structure to fix backup failure caused by S3 rate limiting in large cluster backup [#30087](https://github.com/pingcap/tidb/issues/30087)
         - Fix the incorrect backup time costs in log [#35553](https://github.com/pingcap/tidb/issues/35553)
 
     + Dumpling
