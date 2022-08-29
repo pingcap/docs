@@ -57,7 +57,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
 2. Select your Kafka version. If you do not known that, use Kafka V2.
 3. Select a desired compression type for the stream data.
-4. Enable the **TLS Encryption** option if your Kafka have enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
+4. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 5. Select the **Authentication** option according to your Kafka authentication configuration.
 
     - If your Kafka does not require authentication, keep the default option **Disable**.
@@ -69,21 +69,21 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
 1. In the **Data Format** area, select your desired format of Kafka messages.
 
-   - Avro is a compact, fast, binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
+   - Avro is a compact, fast, and binary data format with rich data structures, which is widely used in various flow systems. For more information, see [Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol).
    - Canal-JSON is a plain JSON text format, which is easy to parse. For more information, see [Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json).
 
 2. Enable the **TiDB Extension** option if you want to add TiDB-extension fields to the Kafka message body.
 
     For more information about TiDB-extension fields, see [TiDB extension fields in Avro data format](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol#tidb-extension-fields) and [TiDB extension fields in Canal-JSON data format](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field).
 
-3. If you select **Avro** as your data format, you will see some Avro specific configurations on the page, and you can fill in these configurations as follows:
+3. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
     - In the **Handle Decimal** and **Handle Bigint Unsigned** configurations, specify how TiDB Cloud handles the decimal and Bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoints. If you enable **HTTP Authentication**, you also need to fill in the username and password for the schema registry.
+    - In the **Schema Registry** area, fill in your schema registry endpoints. If you enable **HTTP Authentication**, you also need to fill in the user name and password for the schema registry.
 
 4. In the **Topic Distribution** area, select a distribution mode, specify a default Kafka topic name, and set the corresponding topic prefix, separator, and suffix.
 
-    The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or cerating one topic for all changelogs. If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
+    The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or creating one topic for all changelogs. If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
 
    - **Distribute changelogs by table to Kafka Topics**
 
@@ -122,15 +122,15 @@ On this page, you can review all the changefeed configurations that you set.
 
 If you find any error, you can go back to fix the error. If there is no error, you can click the check box at the bottom, and then click **Create** to create the changefeed.
 
-## Step 5. Manage the changefeed
+## Manage the changefeed
 
 After a changefeed is created, you can navigate to the **Changefeed** tab of your TiDB cluster and click **Sink to Apache Kafka** to open the **Changefeed Detail** dialog.
 
 In the **Changefeed Detail** dialog, you can manage the changefeed as follows:
 
 - Check the running state of the changefeed.
-- Click **Delete** to delete the changefeed.
-- Click **Pause** or **Resume** to pause or resume the changefeed.
+- Delete the changefeed by clicking **Delete**.
+- Pause or resume the changefeed by clicking **Pause** or **Resume**.
 
 ## Restrictions
 
