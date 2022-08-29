@@ -359,7 +359,7 @@
     - Key Features
       - [Checkpoints](/tidb-lightning/tidb-lightning-checkpoints.md)
       - [Table Filter](/table-filter.md)
-      - [CSV Support](/tidb-lightning/migrate-from-csv-using-tidb-lightning.md)
+      - [Data Source](/tidb-lightning/tidb-lightning-data-source.md)
       - [Backends](/tidb-lightning/tidb-lightning-backends.md)
       - [Physical Import Mode](/tidb-lightning/tidb-lightning-physical-import-mode.md)
       - [Physical Import Mode Usage](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md)
