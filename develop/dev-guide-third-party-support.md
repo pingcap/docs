@@ -1,13 +1,13 @@
 ---
-title: Third-Party Libraries Support by TiDB
-summary: Learn about third-party libraries support by TiDB.
+title: Third-Party Tools Support by TiDB
+summary: Learn about third-party tools support by TiDB.
 ---
 
-# Third-Party Libraries Support by TiDB
+# Third-Party Tools Support by TiDB
 
 > **Warning:**
 >
-> Only some of the supported third-party libraries are listed here. However, PingCAP has no way of knowing whether all third-party libraries use unsupported features and thus cannot guarantee compatibility.
+> Only some of the supported third-party tools are listed here. However, PingCAP has no way of knowing whether all third-party tools use unsupported features and thus cannot guarantee compatibility.
 
 TiDB is highly compatible with the MySQL 5.7 protocol, so most of the MySQL drivers, ORM frameworks, and other tools that adapt to MySQL are compatible with TiDB. This document focuses on these tools and their support levels for TiDB.
 
