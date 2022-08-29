@@ -5,7 +5,7 @@ summary: Learn about third-party tools support by TiDB.
 
 # Third-Party Tools Support by TiDB
 
-> **Warning:**
+> **Note:**
 >
 > Only some of the supported third-party tools are listed here. However, PingCAP has no way of knowing whether all third-party tools use unsupported features and thus cannot guarantee compatibility.
 
@@ -18,7 +18,7 @@ PingCAP works with the community and provides the following support levels for t
 - **_Full_**: Indicates that TiDB is already compatible with most functionalities of the corresponding third-party tool, and maintains compatibility with its newer versions. PingCAP will periodically conduct compatibility tests with the latest version of the tool.
 - **_Compatible_**: Indicates that because the corresponding third-party tool is adapted to MySQL and TiDB is highly compatible with the MySQL protocol, so TiDB can use most features of the tool. However, PingCAP has not completed a full test on all features of the tool, which might lead to some unexpected behaviors.
 
-> **Warning:**
+> **Note:**
 >
 > Unless specified, support for [Application retry and error handling](/develop/dev-guide-transaction-troubleshoot.md#application-retry-and-error-handling) is not included for **Driver** or **ORM frameworks**.
 
