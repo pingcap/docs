@@ -118,7 +118,6 @@ TiDB version: 6.1.1
     - Fix the issue that the online process is not accurate when having invalid label settings. [#5234](https://github.com/tikv/pd/issues/5234)
     - Fix the problem that grpc handles return errors inappropriately [#5373](https://github.com/tikv/pd/issues/5373)
     - Fix the issue that `/regions/replicated` may return the wrong status [#5095](https://github.com/tikv/pd/issues/5095)
-    - 修复 gRPC 处理返回错误不恰当的问题 [#5376](https://github.com/tikv/pd/pull/5376)
 
 + TiFlash
 
