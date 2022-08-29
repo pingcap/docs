@@ -1512,7 +1512,6 @@ Configuration items related to Raft Engine.
 > **Warning:**
 >
 > - This configuration item is only available for `format-version` >= 2.
-> - After log recycling is enabled, you **cannot** downgrade the TiKV cluster to a version earlier than v6.3.0. Otherwise, data corruption might occur.
 
 + Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling.
 + Default value: `true`
