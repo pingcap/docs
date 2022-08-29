@@ -9,7 +9,21 @@ The statistics mentioned in the [Introduction to Statistics](/statistics.md) sec
 
 Since they are only helpful in specific scenarios, extended statistics are not collected during the default manual or automatic `ANALYZE` to avoid the overhead of managing statistics. If you want to collect extended statistics, you need to "register" them with SQL commands first. Then TiDB will collect these registered extended statistics in addition to the common statistics the next time you manually or automatically `ANALYZE`.
 
-# The registration of the Extended Statistics
+## How to enable the Extended Statistics
+
+You can use the following command to enable the feature: 
+
+{{< copyable "sql" >}}
+
+```sql
+set global tidb_enable_extended_stats = on;
+```
+
+The default value of `tidb_enable_extended_stats` is `off`.
+
+## SQL Grammar
+
+### The registration of the Extended Statistics
 
 If you want to register the extended statistics, you can use the SQL `ALTER TABLE ADD STATS_EXTENDED`. The grammar is shown below:
 
@@ -27,6 +41,39 @@ This statement indicates that you want to collect the specified type of extended
 - `column_name` specifies the column group. It can be multiple columns. For `correlation` type, there should be and only be two columns.
 
 The extended statistics will be collected if the `mysql.stats_extended` has the corresponding record when we run the `ANALYZE` command. And the `status` column will be set to `1`, and the `version` column will be set to the new timestamp.
+
+### The deletion of the Extended Statistics
+
+Each TiDB node will maintain a cache for the extended statistics to improve the efficiency of visiting the extended statistics. TiDB will load the table `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table. Each row in the table `mysql.stats_extended` records a column `version`. Once the row is updated, the value of the column `version` will be increased so that we can load the table into the memory incrementally instead of a full loading.
+
+To delete a record of the extended statistics, TiDB provides the following command:
+
+{{< copyable "sql" >}}
+
+```sql
+ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
+```
+
+This command will mark the value of the corresponding record in the table `mysql.stats_extended`'s column `status` to `2`(meaning that the record is deleted) instead of deleting the record directly. Other TiDBs will read this change and delete the record in their memory cache. The background garbage collection will delete the record eventually.
+
+### Flush the cache of one TiDB node
+
+We don't suggest you directly operate on the table `mysql.stats_extended`. The direct operation on the table would not manifest in the cache, which may cause the inconsistency of the cache on the different TiDB nodes.
+
+If you do such an operation wrongly, you can use the following command on each TiDB node to load the data of the table fully instead of incrementally:
+
+{{< copyable "sql" >}}
+
+```sql
+ADMIN RELOAD STATS_EXTENDED;
+```
+### Collecting the Extended Statistics
+
+After registration, TiDB collects the extended statistic with the `ANALYZE` command manually or automatically, except below scenarios:
+
+- Statistics collection on indexes only
+- Statistics collection with `ANALYZE INCREMENTAL` command
+- Statistics collection with variable `tidb_enable_fast_analyze` is true
 
 ## The type of the Extended Statistics
 
@@ -73,48 +120,6 @@ SELECT * FROM t WHERE col1 <= 1 OR col1 IS NULL;
 The above estimation plus one will be the final estimation for the condition. This way, we don't need to use the independent assumption to get a significant estimation error.
 The optimizer will use the independent assumption if the correlation factor is less than the system variable `tidb_opt_correlation_threshold`. But it will increase the estimation heuristically. The larger the system variable `tidb_opt_correlation_exp_factor` is, the larger the estimation result is. The larger the absolute value of the correlation factor is, the larger the estimation result is.
 
-## The collection of the Extended Statistics
-
-After registration, TiDB collects the extended statistic with the ANALYZE command manually or automatically, except below scenarios:
-
-- Statistics collection on indexes only
-- Statistics collection with `ANALYZE INCREMENTAL` command
-- Statistics collection with variable `tidb_enable_fast_analyze` is true
-
-## The deletion of the Extended Statistics
-
-Each TiDB node will maintain a cache for the extended statistics to improve the efficiency of visiting the extended statistics. TiDB will load the table `mysql.stats_extended` periodically to ensure that the cache is kept the same as the data in the table. Each row in the table `mysql.stats_extended` records a column `version`. Once the row is updated, the value of the column `version` will be increased so that we can load the table into the memory incrementally instead of a full loading.
-
-To delete a record of the extended statistics, TiDB provides the following command:
-
-{{< copyable "sql" >}}
-
-```sql
-ALTER TABLE table_name DROP STATS_EXTENDED stats_name;
-```
-
-This command will mark the value of the corresponding record in the table `mysql.stats_extended`'s column `status` to `2`(meaning that the record is deleted) instead of deleting the record directly. Other TiDBs will read this change and delete the record in their memory cache. The background garbage collection will delete the record eventually.
-
-Don't operate the table `mysql.stats_extended` directly. This can cause the inconsistency of the cache of each TiDB node. If you do such an operation wrongly, you can use the following command to load the data of the table fully instead of incrementally:
-
-{{< copyable "sql" >}}
-
-```sql
-ADMIN RELOAD STATS_EXTENDED;
-```
-
 ## The dump and load of the Extended Statistics
 
 The way mentioned in the chapter [Introduction to Statistics](/statistics.md) is also suitable for extended statistics. The dump result is in the same JSON file as the normal statistics.
-
-## The switch
-
-You can use the following command to enable the feature: 
-
-{{< copyable "sql" >}}
-
-```sql
-set global tidb_enable_extended_stats = on;
-```
-
-The default value of `tidb_enable_extended_stats` is `off`.
