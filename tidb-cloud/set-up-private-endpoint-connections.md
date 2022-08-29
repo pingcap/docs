@@ -26,8 +26,8 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
-- You are using a TiCDC cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
-- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
+- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
+- You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
 ## Set up a private endpoint with AWS
@@ -51,10 +51,9 @@ To find the entrance to creating a private endpoint, take the following steps:
 >
 > Alternatively, you can find the entrance by following these steps:
 >
-> 1. In the TiDB Cloud console, navigate to the **Active Clusters** page and click the name of your newly created cluster.
-> 2. Click **Connect**. The **Connect to TiDB** dialog box is displayed.
+> 1. In the TiDB Cloud console, navigate to the **Clusters** page.
+> 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 > 3. Select the **Private Endpoint** tab. If no private endpoint has been created, click **Create** in the dialog to open the creation page.
-
 
 #### Step 2. Choose a TiDB cluster
 
@@ -112,7 +111,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
     </div>
     <div label="AWS CLI">
 
-    To use the AWS CLI to create an AWS Interface Endpoint, perform the following steps:
+    To use the AWS CLI to create a VPC interface endpoint, perform the following steps:
 
     1. Install AWS Command Line Interface (AWS CLI).
 
@@ -134,13 +133,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
     > **Tip:**
     >
-    > - If your service is spanning across more than three availability zones (AZs), you might not be able to select AZs in the **Subnets** area. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. The returned error message is as follows:
-    >
-    >    ```
-    >    An error occurred (InvalidParameter) when calling the CreateVpcEndpoint operation: The VPC endpoint service com.amazonaws.vpce.<your region>.<vpce-id> does not support the availability zone of the subnet: <corresponding subnet>
-    >    ```
-    >
-    >    To solve the issue, contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+    > - If your service is spanning across more than three availability zones (AZs), you will get an error message indicating that the VPC endpoint service does not support the AZ of the subnet. This issue occurs when there is an extra AZ in your selected region in addition to the AZs where your TiDB cluster is located. In this case, you can contact [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
     >
     > - You cannot copy the command until TiDB Cloud finishes creating endpoint service in the background.
 
