@@ -83,13 +83,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 4. Click **Get Endpoint** and wait for a few minutes. Then the connection command displays in the dialog.
 
-5. Use a SQL client to connect to TiDB from your server which has set up VPC peering with TiDB Cloud.
-
-    {{< copyable "shell" >}}
-
-    ```shell
-    mysql -u root -h <endpoint> -P <port number> -p
-    ```
+5. Under **Step 2: Connect with a SQL client** in the dialog box, click the tab of your preferred connection method, and then connect to your cluster with the connection string.
 
 ## Connect via SQL Shell
 
