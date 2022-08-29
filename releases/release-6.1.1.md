@@ -41,7 +41,7 @@ TiDB version: 6.1.1
 
 + PD
 
-    - 改进 balance region 在空间快均衡阶段的调度速度 [#5320](https://github.com/tikv/pd/pull/5320)
+    - Improve the speed of the balance region during the stage close to completion [#5320](https://github.com/tikv/pd/pull/5320)
 
 + Tools
 
