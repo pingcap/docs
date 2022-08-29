@@ -38,8 +38,8 @@ This document only describes the parameters that are not included in command-lin
 
 ### `memory-usage-limit`
 
-+ The memory usage limit for the TiKV instance. When the memory usage of TiKV almost reaches this threshold, it can occupy some internal components (such as evicting cached Raft entries) to release memory.
-+ Generally, you do not necessary to configure this configuration item explicitly, in which case the TiKV instance is set to use 75% of the total available system memory. Considering the behavior of `block-cache.capacity`, this means the rest 25% of memory is reserved for the OS page cache.
++ The limit on memory usage of the TiKV instance. When the memory usage of TiKV almost reaches this threshold, internal cache will be evicted to release memory.
++ In most cases, the TiKV instance is set to use 75% of the total available system memory, so you do not need to explicitly specify this configuration item. Considering the behavior of `storage.block-cache.capacity`, this means the rest 25% of memory is reserved for the OS page cache.
 + When deploying multiple TiKV nodes on a single physical machine, you still do not need to set this configuration item. In this case, the TiKV instance uses `5/3 * block-cache.capacity` of memory.
 + The default value for different system memory capacity is as follows:
 
