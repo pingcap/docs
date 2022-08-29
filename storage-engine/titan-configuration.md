@@ -110,7 +110,7 @@ To adjust Titan-related parameters using TiUP, refer to [Modify the configuratio
     rate-bytes-per-sec = 0
     ```
 
-## Disable Titan (experimental)
+## Disable Titan
 
 To disable Titan, you can configure the `rocksdb.defaultcf.titan.blob-run-mode` option. The optional values for `blob-run-mode` are as follows:
 
@@ -119,10 +119,6 @@ To disable Titan, you can configure the `rocksdb.defaultcf.titan.blob-run-mode` 
 - When the option is set to `fallback`, all newly written values are written into RocksDB, regardless of the value size. Also, all compacted values stored in the Titan blob file are automatically moved back to RocksDB.
 
 To disable Titan, set `blob-run-mode = "fallback"` and perform a full compaction using tikv-ctl. After that, check the monitoring metrics, confirm that the blob file size decreases to `0`. Then you can set `rocksdb.titan.enabled` to `false` and restart TiKV.
-
-> **Warning:**
->
-> Disabling Titan is an experimental feature. It is **NOT** recommended to use it if not necessary.
 
 ## Level Merge (experimental)
 
