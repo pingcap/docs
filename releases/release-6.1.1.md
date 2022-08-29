@@ -31,7 +31,6 @@ TiDB version: 6.1.1
 
 + TiKV
 
-    - In the new backup organization structure, we will see: `./br backup --pd "127.0.0.1:2379" -s "s3://backup/20220621" - After br command finished, we will have the structure below. ➜ backup tree . . └── 20220621 ├── backupmeta ├── store1 │ └── backup-xxx.sst ├── store100 │ └── backup-yyy.sst ├── store2 │ └── backup-zzz.sst ├── store3 ├── store4 └── store5` [#13063](https://github.com/tikv/tikv/issues/13063)
     (dup: release-6.2.0.md > Improvements> TiKV)- Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355)
     - Support filter useless metrics samples to reduce the metrics data size. [#12355](https://github.com/tikv/tikv/issues/12355)
     (dup: release-6.2.0.md > Improvements> TiKV)- Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145)
