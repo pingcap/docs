@@ -55,7 +55,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 ## Step 2. Configure the changefeed target
 
 1. Under **Brokers Configuration**, fill in your Kafka brokers endpoints. You can use commas `,` to separate multiple endpoints.
-2. Select your Kafka version. If you do not known that, use Kafka V2.
+2. Select your Kafka version. If you do not know that, use Kafka V2.
 3. Select a desired compression type for the stream data.
 4. Enable the **TLS Encryption** option if your Kafka has enabled TLS encryption and you want to use TLS encryption for the Kafka connection.
 5. Select the **Authentication** option according to your Kafka authentication configuration.
