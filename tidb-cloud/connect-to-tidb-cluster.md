@@ -57,7 +57,7 @@ To connect to your TiDB cluster via private endpoint, perform the following step
 1. In the TiDB Cloud console, navigate to the **Clusters** page.
 2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 3. Select the **Private Endpoint** tab.
-4. Set up a private endpoint. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-private-endpoint-with-aws).
+4. Set up a private endpoint. See [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md#set-up-a-private-endpoint-with-aws).
 
     If you have created a private endpoint, it is displayed under **Step 1: Create Private Endpoint**.
 

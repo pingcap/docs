@@ -158,7 +158,7 @@ See [Connect to TiDB cluster via private endpoint](/tidb-cloud/connect-to-tidb-c
 
 ## Private endpoint status reference
 
-When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md), the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](/tidb-cloud/set-up-private-endpoint-connections.md#step-1-find-the-entrance).
+When you use [private endpoint connections](/tidb-cloud/set-up-private-endpoint-connections.md), the statuses of private endpoints or private endpoint services are displayed on the [**Private Endpoint** page](/tidb-cloud/set-up-private-endpoint-connections.md#step-1-open-the-private-endpoint-creation-page).
 
 The possible statuses of a private endpoint are explained as follows:
 
