@@ -72,7 +72,7 @@ After TiFlash is deployed, TiFlash does not automatically replicate TiKV data. Y
 alter database tpcc set tiflash replica 2;
 ```
 
-To check whether the replication of all tables in the `tpcc` database is complete, execute the following statement, in which the `WHERE` clause is used to specify the databases and tables to be checked. If you want to check the replication status of all databases, you can remove the `WHERE` clause from the statement.
+To check whether the replication of all tables in the `tpcc` database is complete, execute the following statement, in which the `WHERE` clause is used to specify the databases and tables to be checked. If you want to check the replication status of all databases, remove the `WHERE` clause from the statement.
 
 {{< copyable "sql" >}}
 
@@ -101,7 +101,7 @@ analyze table stock;
 analyze table warehouse;
 analyze table nation;
 analyze table region;
-analyze table supplier
+analyze table supplier;
 ```
 
 ## Run the test
