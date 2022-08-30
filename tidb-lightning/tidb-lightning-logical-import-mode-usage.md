@@ -49,15 +49,15 @@ password = ""
 log-level = "error"
 ```
 
-For the complete configuration file, refer to [the configuration file and command line parameters](/tidb-lightning/tidb-lightning-configuration.md).
+For the complete configuration file, refer to [TiDB Lightning Configuration](/tidb-lightning/tidb-lightning-configuration.md).
 
 ## Conflict detection
 
-Conflicting data refers to two or more records with the same PK/UK column data. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
+Conflicting data refers to two or more records with the same data in the PK or UK column. When the data source contains conflicting data, the actual number of rows in the table is different from the total number of rows returned by the query using unique index.
 
 In logical import mode, you can configure the strategy for resolving conflicting data by setting the `on-duplicate` configuration item. Based on the strategy, TiDB Lightning imports data with different SQL statements.
 
-| Configuration | Default behavior of conflicting data | The corresponding SQL statement |
+| Strategy | Default behavior of conflicting data | The corresponding SQL statement |
 | :-- | :-- | :-- |
 | `replace` | Replace existing data with new data. | `REPLACE INTO ...` |
 | `ignore` | Keep existing data and ignore new data. | `INSERT IGNORE INTO ...` |

@@ -5,9 +5,9 @@ summary: Learn about the logical import mode in TiDB Lightning.
 
 # Logical Import Mode
 
-In logical import mode, TiDB Lightning first encodes data into SQL statements and then run the SQL statements to import data.
+In logical import mode, TiDB Lightning first encodes data into SQL statements and then runs the SQL statements to import data.
 
-If your TiDB cluster already contains data and provides service normally, it is recommended to import data in logical import mode. The behavior of logical import mode is the same as executing normal SQL statements, and thus it provides ACID compliance.
+If your TiDB cluster already contains data and provides service for external applications, it is recommended to import data in logical import mode. The behavior of logical import mode is the same as executing normal SQL statements, and thus it guarantees ACID compliance.
 
 ## Environment requirements
 
