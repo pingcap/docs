@@ -129,12 +129,12 @@ TiDB version: 6.1.1
 + TiFlash
 
     (dup: release-5.4.2.md > Bug Fixes> TiFlash)- Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154)
-    - Fix the issue that the `format` function might return a data truncated error [#4891](https://github.com/pingcap/tiflash/issues/4891)
+    - Fix the issue that the `format` function might return a `Data truncated` error [#4891](https://github.com/pingcap/tiflash/issues/4891)
     - Fix the issue that some obsolete data might persist in storage and cannot be deleted [#5659](https://github.com/pingcap/tiflash/issues/5659)
     - Fix unnecessary CPU usage in some edge cases [#5409](https://github.com/pingcap/tiflash/issues/5409)
     - Fix a bug that TiFlash cannot work in a cluster using IPv6 [#5247](https://github.com/pingcap/tiflash/issues/5247)
     - Fix a bug that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356)
-    - Fix a bug that thread resources might leak in case of MinTSOScheduler query errors [#5556](https://github.com/pingcap/tiflash/issues/5556)
+    - Fix a bug that thread resources might leak in case of `MinTSOScheduler` query errors [#5556](https://github.com/pingcap/tiflash/issues/5556)
 
 + Tools
 
