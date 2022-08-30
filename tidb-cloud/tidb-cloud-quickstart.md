@@ -133,12 +133,13 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
-    - **Data Source Type**: `AWS S3`.
-    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`.
     - **Data Format**: select **TiDB Dumpling**.
-    - **Setup Credentials**: enter `arn:aws:iam::385595570414:role/import-sample-access` for Role-ARN.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: leave this field blank.
+    - **Location**: `AWS`
+    - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`
+    - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
+    - **Target Cluster**: fill in the **Username** and **Password** fields
+
+    Confirm the compliance of cross region. Click **Next**.
 
     </div>
 
@@ -146,24 +147,23 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-    - **Data Source Type**: `Google Cloud Stroage`.
-    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
-    - **Data Format**: select **TiDB Dumpling**.
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: leave this field blank.
+    - **Data Format**: select **TiDB Dumpling**
+    - **Location**: `Google Cloud`
+    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`
+    - **Target Cluster**: fill in the **Username** and **Password** fields
+
+    Confirm the compliance of cross region. Click **Next**.
 
     </div>
     </SimpleTab>
 
-4. Click **Import**.
+4. Modify the file patterns and add the table filter rules if needed. Click **Next**.
 
-    A warning message about the database resource consumption is displayed. For a newly created cluster, you can ignore the warning message.
+5. On the **Preview** page, confirm the import data and then click **Start Import**.
 
-5. Click **Confirm**.
+The data import process will take 5 to 10 minutes. When the data import progress shows **Completed**, you have successfully imported the sample data and the database schema to your database in TiDB Cloud.
 
-    TiDB Cloud starts validating whether it can access the sample data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically.
-
-The data import process will take 5 to 10 minutes. When the data import progress bar shows **Success**, you successfully import the sample data and the database schema in your database.
+Once the cluster finishes the data importing process, you will get the sample data in your database.
 
 ## Step 4. Query data
 
