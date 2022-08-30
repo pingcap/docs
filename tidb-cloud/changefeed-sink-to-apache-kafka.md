@@ -86,4 +86,6 @@ In this page, you can review the configuration you have set. If there is any err
 
 ## Restrictions
 
-Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
+- Only one kafka changefeed of a TiDB cluster can be created.
+- Do not support uploading self-signed TLS certificates to connect to Kafka brokers temporarily.
+- Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#restrictions).
