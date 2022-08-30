@@ -112,7 +112,7 @@ TiDB version: 6.1.1
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the panic issue that might occur when a peer is being split and destroyed at the same time [#12825](https://github.com/tikv/tikv/issues/12825)
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the panic issue that might occur when the source peer catches up logs by snapshot in the Region merge process [#12663](https://github.com/tikv/tikv/issues/12663)
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
-    - Fix encryption keys not cleaned up when Raft Engine is enabled [#13123](https://github.com/tikv/tikv/issues/13123)
+    - Fix potential panic when parallel recovery is enabled for Raft Engine [#13123](https://github.com/tikv/tikv/issues/13123)
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the issue that the Commit Log Duration of a new Region is too high, which causes QPS to drop [#13077](https://github.com/tikv/tikv/issues/13077)
     - Fix a rare case panic when Raft Engine is enabled [#12698](https://github.com/tikv/tikv/issues/12698)
     - Avoid redundant log warnings when procfs is not available [#13116](https://github.com/tikv/tikv/issues/13116)
