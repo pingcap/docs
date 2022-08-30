@@ -55,7 +55,7 @@ TiDB version: 6.1.1
 
         - Add a retry mechanism on errors such as `stale command` to improve import success rate [#36877](https://github.com/pingcap/tidb/issues/36877)
 
-    + TiDB Data Migration
+    + TiDB Data Migration (DM)
 
         - User can manually set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505)
 
@@ -141,21 +141,21 @@ TiDB version: 6.1.1
 
     + TiDB Lightning
 
-        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
+        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
         - Fix the `read index not ready` error by adding a retry mechanism [#36566](https://github.com/pingcap/tidb/issues/36566)
-        - Hide sensitive log for server mode [#36374](https://github.com/pingcap/tidb/issues/36374)
-        - Support columns that start with slash/number/non-ascii characters for Parquet files [36980](https://github.com/pingcap/tidb/issues/36980)
-        - Fix the issue that de-duplication might result in panic in extreme cases [#36163](https://github.com/pingcap/tidb/issues/34163)
+        - Fix the issue that sensitive information in logs is printed in server mode [#36374](https://github.com/pingcap/tidb/issues/36374)
+        - Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [36980](https://github.com/pingcap/tidb/issues/36980)
+        - Fix the issue that de-duplication might panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163)
 
-    + TiDB Data Migration
+    + TiDB Data Migration (DM)
 
         - Fix the issue that the `txn-entry-size-limit` configuration item does not take effect in DM [#6161](https://github.com/pingcap/tiflow/issues/6161)
         - Fix the issue that the `check-task` command cannot handle special characters [#5895](https://github.com/pingcap/tiflow/issues/5895)
-        - Fix the issue of the possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
+        - Fix the issue of possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
         - Fix the different output format for the `operate-schema` command [#5688](https://github.com/pingcap/tiflow/issues/5688)
         - Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
         - Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
-        - Fix the issue that DM fails to start when TiDB uses IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
+        - Fix the issue that DM fails to start when TiDB uses an IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
 
     + TiCDC
 
