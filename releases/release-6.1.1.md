@@ -88,10 +88,11 @@ TiDB version: 6.1.1
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
 
     <!-- <sql-infra> -->
-    (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might report "index-out-of-range" and "non used index" errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
-    - Fix the issue that when using TiDB with Binlog, the Drainer may crash because the invalid schema version after `ALTER SEQUENCE` statement [#36276](https://github.com/pingcap/tidb/issues/36276)
-    - Fix the incorrect TiDB states that may appear on startup under very extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791)
-    - Fix the issue that the execution plans for the partition table may show `UnknownPlanID` in TiDB Dashboard. [#35153](https://github.com/pingcap/tidb/issues/35153)
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might get `index-out-of-range` and `non used index` errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that a partition is incorrectly pruned if a partition key is used in the query condition and the collate is different from the one in the query partition table [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
+    - Fix the issue that when TiDB Binlog is enabled, executing the `ALTER SEQUENCE` statement might cause wrong metadata version and cause Drainer to exit [#36276](https://github.com/pingcap/tidb/issues/36276)
+    - Fix the issue of incorrect TiDB states that might appear on startup in very extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791)
+    - Fix the potential `UnknownPlanID` issue that occurs when querying the execution plans for partitioned tables in TiDB Dashboard. [#35153](https://github.com/pingcap/tidb/issues/35153)
 
     <!-- <transaction> -->
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that the column list does not work in the LOAD DATA statement [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
