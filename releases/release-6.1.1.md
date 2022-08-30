@@ -139,11 +139,29 @@ TiDB version: 6.1.1
 
 + Tools
 
+    + TiDB Lightning
+
+        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
+        - Fix the `read index not ready` error by adding a retry mechanism [#36566](https://github.com/pingcap/tidb/issues/36566)
+        - Hide sensitive log for server mode [#36374](https://github.com/pingcap/tidb/issues/36374)
+        - Support columns that start with slash/number/non-ascii characters for Parquet files [36980](https://github.com/pingcap/tidb/issues/36980)
+        - Fix the issue that de-duplication might result in panic in extreme cases [#36163](https://github.com/pingcap/tidb/issues/34163)
+
+    + TiDB Data Migration
+
+        - Fix the issue that the `txn-entry-size-limit` configuration item does not take effect in DM [#6161](https://github.com/pingcap/tiflow/issues/6161)
+        - Fix the issue that the `check-task` command cannot handle special characters [#5895](https://github.com/pingcap/tiflow/issues/5895)
+        - Fix the issue of the possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
+        - Fix the different output format for the `operate-schema` command [#5688](https://github.com/pingcap/tiflow/issues/5688)
+        - Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
+        - Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
+        - Fix the issue that DM fails to start when TiDB uses IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
+
     + TiCDC
 
         - Fix the wrong maximum compatible version number [#6039](https://github.com/pingcap/tiflow/issues/6039)
         - Fix a bug that may cause the cdc server to panic when it receives an HTTP request before it fully starts [#5639](https://github.com/pingcap/tiflow/issues/5639)
-        - Fix the ddl sink panic issue when the changefeed sync-point is enabled [#4934](https://github.com/pingcap/tiflow/issues/4934)    
+        - Fix the ddl sink panic issue when the changefeed sync-point is enabled [#4934](https://github.com/pingcap/tiflow/issues/4934)
         - Fix the issue that the changefeed is stuck in some scenarios when sync-point is enabled [#6827](https://github.com/pingcap/tiflow/issues/6827)
         - Fix a bug that changefeed API does not work after the cdc server restarts [#5837](https://github.com/pingcap/tiflow/issues/5837)
         - Fix the data race issue in the black hole sink [#6206](https://github.com/pingcap/tiflow/issues/6206)
@@ -162,24 +180,6 @@ TiDB version: 6.1.1
 
         - Fix the issue that GetDSN does not support IPv6 [#36112](https://github.com/pingcap/tidb/issues/36112)
 
-    + TiDB Lightning
-
-        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
-        - Fix the `read index not ready` error by adding a retry mechanism [#36566](https://github.com/pingcap/tidb/issues/36566)
-        - Hide sensitive log for server mode [#36374](https://github.com/pingcap/tidb/issues/36374)
-        - Support columns that start with slash/number/non-ascii characters for Parquet files [36980](https://github.com/pingcap/tidb/issues/36980)
-        - Fix the issue that de-duplication might result in panic in extreme cases [#36163](https://github.com/pingcap/tidb/issues/34163)
-
     + TiDB Binlog
 
         - Fix a bug that Drainer cannot send requests correctly to Pump when `compressor` is set to `gzip` [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
-
-    + TiDB Data Migration
-
-        - Fix the issue that the `txn-entry-size-limit` configuration item does not take effect in DM [#6161](https://github.com/pingcap/tiflow/issues/6161)
-        - Fix the issue that the `check-task` command cannot handle special characters [#5895](https://github.com/pingcap/tiflow/issues/5895)
-        - Fix the issue of the possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
-        - Fix the different output format for the `operate-schema` command [#5688](https://github.com/pingcap/tiflow/issues/5688)
-        - Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
-        - Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
-        - Fix the issue that DM fails to start when TiDB uses IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
