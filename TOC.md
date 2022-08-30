@@ -868,6 +868,7 @@
   - [Table Filter](/table-filter.md)
   - [Schedule Replicas by Topology Labels](/schedule-replicas-by-topology-labels.md)
 - FAQs
+  - [FAQ Summary](/faq/faq-overview.md)
   - [TiDB FAQs](/faq/tidb-faq.md)
   - [SQL FAQs](/faq/sql-faq.md)
   - [Deployment FAQs](/faq/deploy-and-maintain-faq.md)
@@ -883,7 +884,7 @@
   - [TiDB Versioning](/releases/versioning.md)
   - [TiDB Installation Packages](/binary-package.md)
   - v6.2
-    - [6.2.0](/releases/release-6.2.0.md)
+    - [6.2.0-DMR](/releases/release-6.2.0.md)
   - v6.1
     - [6.1.0](/releases/release-6.1.0.md)
   - v6.0
