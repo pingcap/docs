@@ -121,11 +121,12 @@ TiDB version: 6.1.1
 + TiFlash
 
     (dup: release-5.4.2.md > Bug Fixes> TiFlash)- Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154)
-    - Fix the issue that format throw data truncated error [#4891](https://github.com/pingcap/tiflash/issues/4891)
-    - fix the problem that there may be some obsolete data left in storage which cannot be deleted [#5659](https://github.com/pingcap/tiflash/issues/5659)
-    - Reduce unnecessary CPU usage in some edge cases [#5409](https://github.com/pingcap/tiflash/issues/5409)
-    - Fix a bug that TiFlash can not work in a cluster using ipv6 [#5247](https://github.com/pingcap/tiflash/issues/5247)
-    - Fix a panic issue in parallel aggregation when an exception is thrown. [#5356](https://github.com/pingcap/tiflash/issues/5356)
+    - Fix the issue that the `format` function might return a data truncated error [#4891](https://github.com/pingcap/tiflash/issues/4891)
+    - Fix the issue that some obsolete data might persist in storage and cannot be deleted [#5659](https://github.com/pingcap/tiflash/issues/5659)
+    - Fix unnecessary CPU usage in some edge cases [#5409](https://github.com/pingcap/tiflash/issues/5409)
+    - Fix a bug that TiFlash cannot work in a cluster using IPv6 [#5247](https://github.com/pingcap/tiflash/issues/5247)
+    - Fix a bug that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356)
+    - Fix a bug that thread resources might leak in case of MinTSOScheduler query errors [#5556](https://github.com/pingcap/tiflash/issues/5556)
 
 + Tools
 
@@ -149,11 +150,11 @@ TiDB version: 6.1.1
 
         (dup: release-5.4.2.md > Bug Fixes> Tools> Backup & Restore (BR))- Fix a bug that BR reports `ErrRestoreTableIDMismatch` in RawKV mode [#35279](https://github.com/pingcap/tidb/issues/35279)
         (dup: release-6.2.0.md > Improvements> Tools> Backup & Restore (BR))- Adjust the backup data directory structure to fix backup failure caused by S3 rate limiting in large cluster backup [#30087](https://github.com/pingcap/tidb/issues/30087)
-        - Fix the incorrect backup time costs in log [#35553](https://github.com/pingcap/tidb/issues/35553)
+        - Fix incorrect backup time in the summary log [#35553](https://github.com/pingcap/tidb/issues/35553)
 
     + Dumpling
 
-        - use net.JoinHostPort to generate host-port part of URI [#36112](https://github.com/pingcap/tidb/issues/36112)
+        - Fix the issue that GetDSN does not support IPv6 [#36112](https://github.com/pingcap/tidb/issues/36112)
 
     + TiDB Lightning
 
@@ -165,7 +166,7 @@ TiDB version: 6.1.1
 
     + TiDB Binlog
 
-        - [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
+        - Fix a bug that Drainer cannot send requests correctly to Pump when `compressor` is set to `gzip` [#1152](https://github.com/pingcap/tidb-binlog/issues/1152)
 
     + TiDB Data Migration
 
