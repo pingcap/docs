@@ -12,26 +12,32 @@ TiDB version: 6.1.1
 
 + TiDB
 
-    (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that `SHOW DATABASES LIKE …` is case-sensitive [#34766](https://github.com/pingcap/tidb/issues/34766)
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Make the `SHOW DATABASES LIKE …` statement case-insensitive [#34766](https://github.com/pingcap/tidb/issues/34766)
     - Change the default value of [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) from `1` to `0`, which disables Join Reorder's support for Outer Join is enabled by default.
 
 + Diagnosis
 
-    - Continuous Profiling is now disabled by default.
+    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash OOM issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687).
+
+## Other changes
+
+- Add the following contents in the `TiDB-community-toolkit` binary package. For details, see [TiDB Installation Packages](/binary-package.md).
+
+    - `server-{version}-linux-amd64.tar.gz`
+    - `grafana-{version}-linux-amd64.tar.gz`
+    - `alertmanager-{version}-linux-amd64.tar.gz`
+    - `prometheus-{version}-linux-amd64.tar.gz`
+    - `blackbox_exporter-{version}-linux-amd64.tar.gz`
+    - `node_exporter-{version}-linux-amd64.tar.gz`
+
+- Introduce differentiated supports for different operating systems or platforms. See [].
 
 ## Improvements
-
-- Add some contents in the `TiDB-community-toolkit` binary package. For details, see [TiDB Installation Packages](/binary-package.md).
-- Add a document to introduce TiDB's support for different operating systems. See [].
 
 + TiDB
 
     <!-- <planner> -->
     (dup: release-6.2.0.md > # Performance)- Add a new optimizer `SEMI_JOIN_REWRITE` to improve the performance of `EXISTS` queries [#35323](https://github.com/pingcap/tidb/issues/35323)
-    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
-
-    <!-- <transaction> -->
-    (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
 
@@ -64,11 +70,11 @@ TiDB version: 6.1.1
 + TiDB
 
     <!-- <execution> -->
-    - Fix the issue that IndexLookupHashJoin may hangs when used with limit [#35638](https://github.com/pingcap/tidb/issues/35638)
-    - Fix the issue that TiDB may panic during update stmt [#32311](https://github.com/pingcap/tidb/issues/32311)
-    - Fix the bug that `show columns` may send cop request [#36496](https://github.com/pingcap/tidb/issues/36496)
-    - Fix bug that `show warnings` may return `invalid memory address or nil pointer dereference` error [#31569](https://github.com/pingcap/tidb/issues/31569)
-    - Fix bug that static partition prune may return wrong result for agg query if the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
+    - Fix the issue that `IndexLookupHashJoin` might hang when used with `LIMIT` [#35638](https://github.com/pingcap/tidb/issues/35638)
+    - Fix the issue that TiDB might panic when executing the `UPDATE` statement [#32311](https://github.com/pingcap/tidb/issues/32311)
+    - Fix a bug that TiDB might send coprocessor requests when executing the `SHOW COLUMNS` statement [#36496](https://github.com/pingcap/tidb/issues/36496)
+    - Fix a bug that TiDB might return the `invalid memory address or nil pointer dereference` error when executing the `SHOW WARNINGS` statement [#31569](https://github.com/pingcap/tidb/issues/31569)
+    - Fix a bug that in the static partition prune mode, SQL statements with an aggregate condition might return wrong result when the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
 
     <!-- <planner> -->
     - Fix outer join reorder will push down its outer join condition wrongly [#37238](https://github.com/pingcap/tidb/issues/37238)
@@ -79,6 +85,7 @@ TiDB version: 6.1.1
     - Fix the missing exchange between hash-partition window and single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix the wrong default value set for partial aggregation when aggregation is pushed-down [#35295](https://github.com/pingcap/tidb/issues/35295)
+    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
 
     <!-- <sql-infra> -->
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might report "index-out-of-range" and "non used index" errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
@@ -91,6 +98,7 @@ TiDB version: 6.1.1
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
     - Remove the limitation of `tidb_gc_life_time` [#35392](https://github.com/pingcap/tidb/issues/35392)
     - Fix the load data statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298)
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
