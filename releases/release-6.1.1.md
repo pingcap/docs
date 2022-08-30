@@ -36,12 +36,12 @@ TiDB version: 6.1.1
 + TiKV
 
     (dup: release-6.2.0.md > Improvements> TiKV)- Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355)
-    - 支持过滤不常用 metrics 以减少流量 [#12698](https://github.com/tikv/tikv/issues/12698)
+    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](/tikv-configuration-file.md#simplify-metrics-new-in-v620) configuration item [#12355](https://github.com/tikv/tikv/issues/12355)
     (dup: release-6.2.0.md > Improvements> TiKV)- Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145)
 
 + PD
 
-    - Improve the speed of the balance region during the stage close to completion [#5320](https://github.com/tikv/pd/pull/5320)
+    - Improve the speed of the Balance Region during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990)
 
 + Tools
 
