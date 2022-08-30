@@ -77,14 +77,14 @@ TiDB version: 6.1.1
     - Fix a bug that in the static partition prune mode, SQL statements with an aggregate condition might return wrong result when the table is empty [#35295](https://github.com/pingcap/tidb/issues/35295)
 
     <!-- <planner> -->
-    - Fix outer join reorder will push down its outer join condition wrongly [#37238](https://github.com/pingcap/tidb/issues/37238)
-    - Fix that cte-schema hashcode is cloned wrongly when cte is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
-    - Fix the wrong join reorder produced by some right outer join [#36912](https://github.com/pingcap/tidb/issues/36912)
+    - Fix the issue that the Join Reorder operation will mistakenly push down its Outer Join condition [#37238](https://github.com/pingcap/tidb/issues/37238)
+    - Fix the issue that CTE-schema hash code is cloned mistakenly, which causes the `cannot find column` error when CTE is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
+    - Fix the issue that the wrong join reorder in some right outer join scenarios causes wrong query result [#36912](https://github.com/pingcap/tidb/issues/36912)
     (dup: release-5.4.2.md > Bug Fixes> TiDB)- Fix the issue of incorrectly inferred null flag of the TiFlash `firstrow` aggregate function in the EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
-    - Fix that plan cache cannot work when there's a binding with ignore_plan_cache hint [#34596](https://github.com/pingcap/tidb/issues/34596)
-    - Fix the missing exchange between hash-partition window and single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
+    - Fix the issue that Plan Cache does not work when a binding is created with the `ignore_plan_cache` hint [#34596](https://github.com/pingcap/tidb/issues/34596)
+    - Fix the issu that an `EXCHANGE` operator is missing between the hash-partition window and the single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
-    - Fix the wrong default value set for partial aggregation when aggregation is pushed-down [#35295](https://github.com/pingcap/tidb/issues/35295)
+    - Fix the issue of wrong query result when a wrong default value is set for partial aggregation after the aggregation is pushed down [#35295](https://github.com/pingcap/tidb/issues/35295)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
 
     <!-- <sql-infra> -->
