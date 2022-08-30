@@ -52,7 +52,7 @@ Whenever you use or set a database user name, you must include the prefix in the
 To get the prefix for your cluster, take the following steps:
 
 1. Navigate to the **Clusters** page.
-2. Click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+2. Click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
     > **Tip:**
     >
@@ -81,6 +81,7 @@ Alternatively, you can log in to the TiDB Cloud console, and then click **Resume
 - You cannot create any changefeeds (Apache Kafka Sink and MySQL Sink) or use [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) to replicate incremental data.
 - You cannot use VPC Peering to connect to clusters.
 - You cannot scale clusters to larger storage, standard nodes, or increase the number of nodes.
+- You cannot [pause or resume](/tidb-cloud/pause-or-resume-tidb-cluster.md) a Developer Tier cluster.
 - You cannot view the [Monitoring page](/tidb-cloud/built-in-monitoring.md).
 - You cannot use the third-party monitoring service.
 - You cannot customize the port number of a TiDB cluster.
@@ -96,4 +97,4 @@ To create a Dedicated Tier cluster, you need to [add a payment method](/tidb-clo
 
 > **Note:**
 >
-> You cannot decrease the cluster storage size after your cluster is created.
+> You cannot decrease the node storage after your cluster is created.

@@ -20,7 +20,7 @@ To connect to your TiDB cluster via standard connection, perform the following s
 
 1. Navigate to the **Clusters** page.
 
-2. Find the area of your cluster, and click **Connect** in the upper-right corner of the area. A connection dialog box is displayed.
+2. Locate your cluster, and click **Connect** in the upper-right corner of the cluster area. A connection dialog box is displayed.
 
     > **Tip:**
     >
@@ -55,7 +55,7 @@ To connect to your TiDB cluster via VPC peering, perform the following steps:
 
 1. Navigate to the **Clusters** page.
 
-2. Find the area of your cluster, click **Connect** in the upper-right corner of the area, and select the **VPC Peering** tab in the connection dialog.
+2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **VPC Peering** tab in the connection dialog.
 
     > **Tip:**
     >
@@ -79,7 +79,7 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 
 1. Navigate to the **Clusters** page.
 
-2. Find the area of your cluster, click **Connect** in the upper-right corner of the area, and select the **Web SQL Shell** tab in the connection dialog.
+2. Locate your cluster, click **Connect** in the upper-right corner of the cluster area, and select the **Web SQL Shell** tab in the connection dialog.
 
     > **Tip:**
     >
@@ -91,4 +91,4 @@ To connect to your TiDB cluster using SQL shell, perform the following steps:
 
 ## What's next
 
-After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](https://docs.pingcap.com/tidb/stable/basic-sql-operations).
+After you have successfully connected to your TiDB cluster, you can [explore SQL statements with TiDB](/basic-sql-operations.md).

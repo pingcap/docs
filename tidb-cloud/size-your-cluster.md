@@ -44,7 +44,7 @@ For high availability, it is recommended that you configure at least two TiDB no
 
 TiKV is responsible for storing data. It is horizontally scalable.
 
-You can configure node size, node quantity, and storage size for TiKV.
+You can configure node size, node quantity, and node storage for TiKV.
 
 To learn performance test results of different cluster scales, see [TiDB Cloud Performance Reference](/tidb-cloud/tidb-cloud-performance-reference.md).
 
@@ -80,25 +80,25 @@ Minimum number of TiKV nodes: `ceil(compressed size of your data ÷ one TiKV cap
 
 Supposing the size of your MySQL dump files is 5 TB and the TiDB compression ratio is 70%, the storage needed is 3584 GB.
 
-For example, if you configure the storage size of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
+For example, if you configure the node storage of each TiKV node on AWS as 1024 GB, the required number of TiKV nodes is as follows:
 
 Minimum number of TiKV nodes: `ceil(3584 ÷ 1024) × 3 = 12`
 
-### TiKV storage size
+### TiKV node storage
 
-- 8 vCPU or 16 vCPU TiKV supports up to 4 TiB storage capacity.
-- 4 vCPU TiKV supports up to 2 TiB storage capacity.
-- 2 vCPU TiKV supports up to 500 GiB storage capacity.
+- Each 8 vCPU or 16 vCPU TiKV node supports up to 4 TiB storage capacity.
+- Each 4 vCPU TiKV node supports up to 2 TiB storage capacity.
+- Each 2 vCPU TiKV node supports up to 500 GiB storage capacity.
 
 > **Note:**
 >
-> You cannot decrease the TiKV storage size after the cluster creation.
+> You cannot decrease the TiKV node storage after the cluster creation.
 
 ## Size TiFlash
 
 TiFlash synchronizes data from TiKV in real time and supports real-time analytics workloads right out of the box. It is horizontally scalable.
 
-You can configure node size, node quantity, and storage size for TiFlash.
+You can configure node size, node quantity, and node storage for TiFlash.
 
 ### TiFlash node size
 
@@ -117,14 +117,14 @@ The minimum number of TiFlash nodes depends on the TiFlash replica counts for sp
 
 Minimum number of TiFlash nodes: `min((compressed size of table A * replicas for table A + compressed size of table B * replicas for table B) / size of each TiFlash capacity, max(replicas for table A, replicas for table B))`
 
-For example, if you configure the storage size of each TiFlash node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash nodes is as follows:
+For example, if you configure the node storage of each TiFlash node on AWS as 1024 GB, and set 2 replicas for table A (the compressed size is 800 GB) and 1 replica for table B (the compressed size is 100 GB), then the required number of TiFlash nodes is as follows:
 
 Minimum number of TiFlash nodes: `min((800 GB * 2 + 100 GB * 1) / 1024 GB, max(2, 1)) ≈ 2`
 
-### TiFlash storage size
+### TiFlash node storage
 
-TiFlash supports up to 2 TiB storage capacity.
+Each TiFlash node supports up to 2 TiB storage capacity.
 
 > **Note:**
 >
-> You cannot decrease the TiFlash storage size after the cluster creation.
+> You cannot decrease the TiFlash node storage after the cluster creation.

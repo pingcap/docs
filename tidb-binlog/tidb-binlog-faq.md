@@ -1,9 +1,9 @@
 ---
-title: TiDB Binlog FAQ
+title: TiDB Binlog FAQs
 summary: Learn about the frequently asked questions (FAQs) and answers about TiDB Binlog.
 ---
 
-# TiDB Binlog FAQ
+# TiDB Binlog FAQs
 
 This document collects the frequently asked questions (FAQs) about TiDB Binlog.
 
