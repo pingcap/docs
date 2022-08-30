@@ -47,11 +47,11 @@ TiDB version: 6.1.1
 
     + TiDB Lightning
 
-        - add retry strategy on `stale command` error [#36877](https://github.com/pingcap/tidb/issues/36877)
+        - Add a retry mechanism on errors such as `stale command` to improve import success rate [#36877](https://github.com/pingcap/tidb/issues/36877)
 
     + TiDB Data Migration
 
-        - User can set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505)
+        - User can manually set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505)
 
     + TiCDC
 
@@ -155,11 +155,11 @@ TiDB version: 6.1.1
 
     + TiDB Lightning
 
-        - fix connect to tidb when using ipv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
-        - add ReadIndexNotReady as retryable ingest error [#36566](https://github.com/pingcap/tidb/issues/36566)
-        - hide sensitive log for server mode lightning [#36374](https://github.com/pingcap/tidb/issues/36374)
-        - support column starts with slash/number/non-ascii for parquet file [36980](https://github.com/pingcap/tidb/issues/36980)
-        - Fix panic when downstream table schema has changed [#37233](https://github.com/pingcap/tidb/pull/37233)
+        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880)
+        - Fix the `read index not ready` error by adding a retry mechanism [#36566](https://github.com/pingcap/tidb/issues/36566)
+        - Hide sensitive log for server mode [#36374](https://github.com/pingcap/tidb/issues/36374)
+        - Support columns that start with slash/number/non-ascii characters for Parquet files [36980](https://github.com/pingcap/tidb/issues/36980)
+        - Fix the issue that de-duplication might result in panic in extreme cases [#36163](https://github.com/pingcap/tidb/issues/34163)
 
     + TiDB Binlog
 
@@ -167,9 +167,9 @@ TiDB version: 6.1.1
 
     + TiDB Data Migration
 
-        - Fix the 'txn-entry-size-limit' config is not effective in DM [#6161](https://github.com/pingcap/tiflow/issues/6161)
-        - Fix a bug that get tables without using quote schema name [#5895](https://github.com/pingcap/tiflow/issues/5895)
-        - Fix the issue of the possible data race in query-status [#4811](https://github.com/pingcap/tiflow/issues/4811)
-        - Fix different output format for `operate-schema` command [#5688](https://github.com/pingcap/tiflow/issues/5688)
-        - Fix goroutine leak when relay meet error [#6193](https://github.com/pingcap/tiflow/issues/6193)
-        - Fix issue of DM Worker may stuck when get DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
+        - Fix the issue that the `txn-entry-size-limit` configuration item does not take effect in DM [#6161](https://github.com/pingcap/tiflow/issues/6161)
+        - Fix the issue that the `check-task` command cannot handle special characters [#5895](https://github.com/pingcap/tiflow/issues/5895)
+        - Fix the issue of the possible data race in `query-status` [#4811](https://github.com/pingcap/tiflow/issues/4811)
+        - Fix the different output format for the `operate-schema` command [#5688](https://github.com/pingcap/tiflow/issues/5688)
+        - Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
+        - Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
