@@ -105,17 +105,17 @@ TiDB version: 6.1.1
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
     - Fix encryption keys not cleaned up when Raft Engine is enabled [#13123](https://github.com/tikv/tikv/issues/13123)
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the issue that the Commit Log Duration of a new Region is too high, which causes QPS to drop [#13077](https://github.com/tikv/tikv/issues/13077)
-    - Fix a rare case panic when enabling raft-engine [#12698](https://github.com/tikv/tikv/issues/12698)
+    - Fix a rare case panic when Raft Engine is enabled [#12698](https://github.com/tikv/tikv/issues/12698)
     - Avoid redundant log warnings when procfs is not available [#13116](https://github.com/tikv/tikv/issues/13116)
     - Fix the wrong expression of `Unified Read Pool CPU` in dashboard [#13086](https://github.com/tikv/tikv/issues/13086)
     - Make default `region-split-check-diff` not less than bucket size [#12598](https://github.com/tikv/tikv/issues/12598)
-    - Fix panics when apply snapshot is aborted and raft engine is enabled [#12470](https://github.com/tikv/tikv/issues/12470)
-    - Refactor pd client to avoid potential deadlock(RWR). [#13191](https://github.com/tikv/tikv/issues/13191)
+    - Fix panics when apply snapshot is aborted and Raft Engine is enabled [#12470](https://github.com/tikv/tikv/issues/12470)
+    - Refactor PD client to avoid potential deadlock(RWR) [#13191](https://github.com/tikv/tikv/issues/13191)
 
 + PD
 
-    - Fix the issue that the online process is not accurate when having invalid label settings. [#5234](https://github.com/tikv/pd/issues/5234)
-    - Fix the problem that grpc handles return errors inappropriately [#5373](https://github.com/tikv/pd/issues/5373)
+    - Fix the issue that the online process is not accurate when having invalid label settings [#5234](https://github.com/tikv/pd/issues/5234)
+    - Fix the problem that gRPC handles return errors inappropriately [#5373](https://github.com/tikv/pd/issues/5373)
     - Fix the issue that `/regions/replicated` may return the wrong status [#5095](https://github.com/tikv/pd/issues/5095)
 
 + TiFlash
