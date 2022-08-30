@@ -80,6 +80,7 @@
   - Connect to Your TiDB Cluster
     - [Connect via a SQL Client](/tidb-cloud/connect-to-tidb-cluster.md)
     - [Connect via SQL Shell](/tidb-cloud/connect-to-tidb-cluster.md#connect-via-sql-shell)
+  - [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md)
   - [Set Up VPC Peering Connections](/tidb-cloud/set-up-vpc-peering-connections.md)
   - Use an HTAP Cluster with TiFlash
     - [TiFlash Overview](/tiflash/tiflash-overview.md)
