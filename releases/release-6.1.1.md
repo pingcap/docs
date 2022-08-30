@@ -173,3 +173,4 @@ TiDB version: 6.1.1
         - Fix the different output format for the `operate-schema` command [#5688](https://github.com/pingcap/tiflow/issues/5688)
         - Fix goroutine leak when relay meets an error [#6193](https://github.com/pingcap/tiflow/issues/6193)
         - Fix the issue that DM Worker might get stuck when getting DB Conn [#3733](https://github.com/pingcap/tiflow/issues/3733)
+        - Fix the issue that DM fails to start when TiDB uses IPv6 host [#6249](https://github.com/pingcap/tiflow/issues/6249)
