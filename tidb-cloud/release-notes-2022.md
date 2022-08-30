@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://en.pingcap.com/tidb-cl
 
   For more information, see [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md).
 
-**General changes**
+**Console changes**
 
 * Provide sample connection strings of MySQL, MyCLI, JDBC, Python, Go, and Node.js in the VPC Peering tab and Private Endpoint tab of the [Connect](/tidb-cloud/connect-to-tidb-cluster.md) dialog for Dedicated Tier clusters.
 
