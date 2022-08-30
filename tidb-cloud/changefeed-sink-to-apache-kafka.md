@@ -34,7 +34,7 @@ If your Apache Kafka service is in a GCP VPC that has no internet access, take t
 1. [Set up a VPC peering connection](/tidb-cloud/set-up-vpc-peering-connections.md) between the VPC of the Apache Kafka service and your TiDB cluster.
 2. Modify the ingress firewall rules of the VPC where Apache Kafka is located.
 
-    You must add the CIDR of the Region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the VPC Peering page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
+    You must add the CIDR of the region where your TiDB Cloud cluster is located to the ingress firewall rules. The CIDR can be found on the **VPC Peering** page. Doing so allows the traffic to flow from your TiDB cluster to the Kafka brokers.
 
 ### Kafka ACL authorization
 
@@ -96,7 +96,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
    - **Send all changelogs to one specified Kafka Topic**
 
-        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages of the cluster will be sent to one Kafka topic. You can define the topic name in the **Default Topic Name** field.
+        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Default Topic Name** field.
 
 5. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
 
