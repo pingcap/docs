@@ -15,17 +15,13 @@ This document describes the hardware requirements of using TiDB Lightning to imp
 
 1. Install TiUP using the following command:
 
-    {{< copyable "shell-regular" >}}
-
     ```shell
     curl --proto '=https' --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh
     ```
 
-    This command automatically adds TiUP to the `PATH` environment variable. You need to start a new terminal session or run `source ~/.bashrc` before you can use TiUP. (You may also need to run `source ~/.profile`.)
+    This command automatically adds TiUP to the `PATH` environment variable. You need to start a new terminal session or run `source ~/.bashrc` before you can use TiUP. (According to your environment, you may need to run `source ~/.profile`. For the specific command, check the output of TiUP.)
 
-2. Install TiUP DM component:
-
-    {{< copyable "shell-regular" >}}
+2. Install TiUP Lightning component:
 
     ```shell
     tiup install tidb-lightning
@@ -127,6 +123,6 @@ Refer to the [Download TiDB Tools](/download-ecosystem-tools.md) document to dow
 
 ### Upgrade TiDB Lightning
 
-You can upgrade TiDB Lightning by replacing the binaries alone. No further configuration is needed. See [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning) for the detailed instructions of restarting TiDB Lightning.
+You can upgrade TiDB Lightning by replacing the binaries alone. No further configuration is needed. For the detailed instructions of restarting TiDB Lightning, see [FAQ](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning).
 
 If an import task is running, we recommend you to wait until it finishes before upgrading TiDB Lightning. Otherwise, there might be chances that you need to reimport from scratch, because there is no guarantee that checkpoints work across versions.
