@@ -29,7 +29,7 @@ BR can generate the following types of backup files:
 
 ### Naming format of SST files
 
-SST files are named in the format of `storeID_regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the format are explained as follows:
+When data is backed up to Google Cloud Storage or Azure Blob Storage, SST files are named in the format of `storeID_regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the format are explained as follows:
 
 - `storeID` is the TiKV node ID.
 - `regionID` is the Region ID.
@@ -38,7 +38,13 @@ SST files are named in the format of `storeID_regionID_regionEpoch_keyHash_times
 - `timestamp` is the Unix timestamp of an SST file when it is generated at TiKV.
 - `cf` indicates the Column Family of RocksDB (`default` or `write` by default).
 
-When data is backed up to Amazon S3 or a network disk, the SST files are named in the format of `regionID_regionEpoch_keyHash_timestamp_cf`.
+When data is backed up to Amazon S3 or a network disk, the SST files are named in the format of `regionID_regionEpoch_keyHash_timestamp_cf`. The fields in the format are explained as follows:
+
+- `regionID` is the Region ID.
+- `regionEpoch` is the version number of a Region.
+- `keyHash` is the Hash (sha256) value of the startKey of a range, which ensures the uniqueness of a key.
+- `timestamp` is the Unix timestamp of an SST file when it is generated at TiKV.
+- `cf` indicates the Column Family of RocksDB (`default` or `write` by default).
 
 ### Storage format of SST files
 
