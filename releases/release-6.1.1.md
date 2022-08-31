@@ -47,7 +47,7 @@ TiDB version: 6.1.1
 
 + PD
 
-    - Improve the speed of the region balance during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990)
+    - Improve the scheduling speed of Balance Region in specific stages [#4990](https://github.com/tikv/pd/issues/4990)
 
 + Tools
 
