@@ -130,7 +130,7 @@ Test scales:
 
 Test results:
 
-**TiDB: 8 vCPU, 16 GiB \* 2; TiKV: 8 vCPU, 32 GiB \* 3**
+**TiDB (8 vCPU, 16 GiB) \* 2; TiKV (8 vCPU, 32 GiB) \* 3**
 
 - Optimal performance with low latency
 
