@@ -121,29 +121,29 @@ TiDB version: 6.1.1
 
 + PD
 
-    - Fix the issue that the online progress is inaccurate when label configurations of cluster nodes are invalid[#5234](https://github.com/tikv/pd/issues/5234) @
-    - Fix PD panics caused by the issue that gRPC handles errors inappropriately when `enable-forwarding` is enabled [#5373](https://github.com/tikv/pd/issues/5373) @
-    - Fix the issue that `/regions/replicated` might return a wrong status [#5095](https://github.com/tikv/pd/issues/5095) @
+    - Fix the issue that the online progress is inaccurate when label configurations of cluster nodes are invalid[#5234](https://github.com/tikv/pd/issues/5234) @[rleungx (Ryan Leung)](https://github.com/rleungx)
+    - Fix PD panics caused by the issue that gRPC handles errors inappropriately when `enable-forwarding` is enabled [#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies (buffer)](https://github.com/bufferflies)
+    - Fix the issue that `/regions/replicated` might return a wrong status [#5095](https://github.com/tikv/pd/issues/5095) @[rleungx (Ryan Leung)](https://github.com/rleungx)
 
 + TiFlash
 
-    (dup: release-5.4.2.md > Bug Fixes> TiFlash)- Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154) @
-    - Fix the issue that the `format` function might return a `Data truncated` error [#4891](https://github.com/pingcap/tiflash/issues/4891) @
-    - Fix the issue that some obsolete data might persist in storage and cannot be deleted [#5659](https://github.com/pingcap/tiflash/issues/5659) @
-    - Fix unnecessary CPU usage in some edge cases [#5409](https://github.com/pingcap/tiflash/issues/5409) @
-    - Fix a bug that TiFlash cannot work in a cluster using IPv6 [#5247](https://github.com/pingcap/tiflash/issues/5247) @
-    - Fix a bug that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356) @
-    - Fix a bug that thread resources might leak in case of `MinTSOScheduler` query errors [#5556](https://github.com/pingcap/tiflash/issues/5556) @
+    (dup: release-5.4.2.md > Bug Fixes> TiFlash)- Fix the issue that TiFlash crashes after dropping a column of a table with clustered indexes in some situations [#5154](https://github.com/pingcap/tiflash/issues/5154) @[hongyunyan (hongyunyan)](https://github.com/hongyunyan)
+    - Fix the issue that the `format` function might return a `Data truncated` error [#4891](https://github.com/pingcap/tiflash/issues/4891) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - Fix the issue that some obsolete data might persist in storage and cannot be deleted [#5659](https://github.com/pingcap/tiflash/issues/5659) @[lidezhu](https://github.com/lidezhu)
+    - Fix unnecessary CPU usage in some edge cases [#5409](https://github.com/pingcap/tiflash/issues/5409) @[breezewish (Wenxuan)](https://github.com/breezewish)
+    - Fix a bug that TiFlash cannot work in a cluster using IPv6 [#5247](https://github.com/pingcap/tiflash/issues/5247) @[solotzg (Zhigao Tong)](https://github.com/solotzg)
+    - Fix a bug that TiFlash might crash due to an error in parallel aggregation [#5356](https://github.com/pingcap/tiflash/issues/5356) @[gengliqi (Liqi Geng)](https://github.com/gengliqi)
+    - Fix a bug that thread resources might leak in case of `MinTSOScheduler` query errors [#5556](https://github.com/pingcap/tiflash/issues/5556) @[windtalker (xufei)](https://github.com/windtalker)
 
 + Tools
 
     + TiDB Lightning
 
-        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880) @
-        - Fix the `read index not ready` error by adding a retry mechanism [#36566](https://github.com/pingcap/tidb/issues/36566) @
-        - Fix the issue that sensitive information in logs is printed in server mode [#36374](https://github.com/pingcap/tidb/issues/36374) @
-        - Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [36980](https://github.com/pingcap/tidb/issues/36980) @
-        - Fix the issue that de-duplication might panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163) @
+        - Fix the issue that TiDB Lightning fails to connect to TiDB when TiDB uses an IPv6 host [#35880](https://github.com/pingcap/tidb/issues/35880) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the `read index not ready` error by adding a retry mechanism [#36566](https://github.com/pingcap/tidb/issues/36566) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that sensitive information in logs is printed in server mode [#36374](https://github.com/pingcap/tidb/issues/36374) @[lichunzhu (Chunzhu Li)](https://github.com/lichunzhu)
+        - Fix the issue that TiDB Lightning does not support columns starting with slash, number, or non-ascii characters in Parquet files [#36980](https://github.com/pingcap/tidb/issues/36980) @[D3Hunter](https://github.com/D3Hunter)
+        - Fix the issue that de-duplication might panic in extreme cases [#34163](https://github.com/pingcap/tidb/issues/34163) @[ForwardStar (ForwardStar)](https://github.com/ForwardStar)
 
     + TiDB Data Migration (DM)
 
