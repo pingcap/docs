@@ -80,7 +80,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
     - In the **Handle Decimal** and **Handle Bigint Unsigned** configurations, specify how TiDB Cloud handles the decimal and Bigint data types in Kafka messages.
     - In the **Schema Registry** area, fill in your schema registry endpoints. If you enable **HTTP Authentication**, you also need to fill in the user name and password for the schema registry.
 
-4. In the **Topic Distribution** area, select a distribution mode, specify a default Kafka topic name, and set the corresponding topic prefix, separator, and suffix.
+4. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 
     The distribution mode controls how the changefeed creates Kafka topics, by tables, by databases, or creating one topic for all changelogs. If you select **Avro** as your data format, you can only choose the **Distribute changelogs by table to Kafka Topics** mode in the **Distribute Mode** drop-down list.
 
@@ -96,7 +96,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
    - **Send all changelogs to one specified Kafka Topic**
 
-        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Default Topic Name** field.
+        If you want the changefeed to create one Kafka topic for all changelogs, choose this mode. Then, all Kafka messages in the changefeed will be sent to one Kafka topic. You can define the topic name in the **Topic Name** field.
 
 5. In the **Partition Distribution** area, you can decide which partition a Kafka message will be sent to:
 
