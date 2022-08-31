@@ -47,7 +47,7 @@ TiDB version: 6.1.1
 
 + PD
 
-    - Improve the speed of the Balance Region during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990)
+    - Improve the speed of the region balance during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990)
 
 + Tools
 
@@ -123,9 +123,9 @@ TiDB version: 6.1.1
 
 + PD
 
-    - Fix the issue that the online process is not accurate when setting invalid label [#5234](https://github.com/tikv/pd/issues/5234)
-    - Fix the issue that PD might panic when enabling `enable-forwarding` and gRPC handles errors inappropriately [#5373](https://github.com/tikv/pd/issues/5373)
-    - Fix the issue that `/regions/replicated` might return the wrong status [#5095](https://github.com/tikv/pd/issues/5095)
+    - Fix the issue that the online progress is inaccurate when label configurations of cluster nodes are invalid[#5234](https://github.com/tikv/pd/issues/5234)
+    - Fix PD panics caused by the issue that gRPC handles errors inappropriately when `enable-forwarding` is enabled [#5373](https://github.com/tikv/pd/issues/5373)
+    - Fix the issue that `/regions/replicated` might return a wrong status [#5095](https://github.com/tikv/pd/issues/5095)
 
 + TiFlash
 
