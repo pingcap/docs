@@ -369,9 +369,11 @@
       - [Web Interface](/tidb-lightning/tidb-lightning-web-interface.md)
     - [Deploy](/tidb-lightning/deploy-tidb-lightning.md)
     - [Configure](/tidb-lightning/tidb-lightning-configuration.md)
-    - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
-    - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
-    - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
+    - Reference
+      - [Command Line Flags](/tidb-lightning/tidb-lightning-command-line-full.md)
+      - [Monitor](/tidb-lightning/monitor-tidb-lightning.md)
+      - [FAQ](/tidb-lightning/tidb-lightning-faq.md)
+      - [Glossary](/tidb-lightning/tidb-lightning-glossary.md)
   - TiDB Data Migration
     - [About TiDB Data Migration](/dm/dm-overview.md)
     - [Architecture](/dm/dm-arch.md)
