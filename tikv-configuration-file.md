@@ -205,6 +205,11 @@ This document only describes the parameters that are not included in command-lin
 + Specifies the queue size of the Raft messages in TiKV. If too many messages not sent in time result in a full buffer, or messages discarded, you can specify a greater value to improve system stability.
 + Default value: `8192`
 
+### `simplify-metrics` <span class="version-mark">New in v6.1.1</span>
+
++ Specifies whether to simplify the returned monitoring metrics. After you set the value to `true`, TiKV reduces the amount of data returned for each request by filtering out some metrics.
++ Default value: `false`
+
 ### `forward-max-connections-per-address` <span class="version-mark">New in v5.0.0</span>
 
 + Sets the size of the connection pool for service and forwarding requests to the server. Setting it to too small a value affects the request latency and load balancing.
