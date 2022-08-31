@@ -45,9 +45,9 @@ When data is backed up to Amazon S3 or a network disk, the SST files are named i
 - For details about the storage format of SST files, see [Rocksdb BlockBasedTable Format](https://github.com/facebook/rocksdb/wiki/Rocksdb-BlockBasedTable-Format).
 - For details about the encoding format of backup data in SST files, see [Mapping of table data to Key-Value](/tidb-computing.md#mapping-of-table-data-to-key-value).
 
-### Backup file layout
+### Backup file structure
 
-When you back up data to Google Cloud Storage or Azure Blob Storage, SST files, backupmeta files, and backup.lock files are stored in the same directory in the following layout:
+When you back up data to Google Cloud Storage or Azure Blob Storage, the SST files, backupmeta files, and backup.lock files are stored in the same directory in the following structure:
 
 ```
 .
@@ -59,7 +59,7 @@ When you back up data to Google Cloud Storage or Azure Blob Storage, SST files, 
     └── {storeID}-{regionID}-{regionEpoch}-{keyHash}-{timestamp}-{cf}.sst
 ```
 
-When you back up data to Amazon S3 or a network disk, SST files are stored in sub-directories based on the storeID. The layout is as follows:
+When you back up data to Amazon S3 or a network disk, the SST files are stored in sub-directories based on the storeID. The structure is as follows:
 
 ```
 .
