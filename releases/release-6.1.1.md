@@ -12,12 +12,12 @@ TiDB version: 6.1.1
 
 + TiDB
 
-    (dup: release-6.2.0.md > Bug fixes> TiDB)- Make the `SHOW DATABASES LIKE …` statement case-insensitive [#34766](https://github.com/pingcap/tidb/issues/34766)
+    (dup: release-6.2.0.md > Bug fixes> TiDB)- Make the `SHOW DATABASES LIKE …` statement case-insensitive [#34766](https://github.com/pingcap/tidb/issues/34766) @[e1ijah1](https://github.com/e1ijah1)
     - Change the default value of [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610) from `1` to `0`, which disables Join Reorder's support for Outer Join is enabled by default.
 
 + Diagnosis
 
-    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash OOM issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687).
+    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash OOM issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687). @[mornyx](https://github.com/mornyx)
 
 ## Other changes
 
@@ -41,29 +41,29 @@ TiDB version: 6.1.1
 
 + TiKV
 
-    (dup: release-6.2.0.md > Improvements> TiKV)- Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355)
-    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](/tikv-configuration-file.md#simplify-metrics-new-in-v620) configuration item [#12355](https://github.com/tikv/tikv/issues/12355)
-    (dup: release-6.2.0.md > Improvements> TiKV)- Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145)
+    (dup: release-6.2.0.md > Improvements> TiKV)- Support compressing the metrics response using gzip to reduce the HTTP body size [#12355](https://github.com/tikv/tikv/issues/12355) @[winoros](https://github.com/winoros)
+    - Support reducing the amount of data returned for each request by filtering out some metrics using the [`server.simplify-metrics`](/tikv-configuration-file.md#simplify-metrics-new-in-v620) configuration item [#12355](https://github.com/tikv/tikv/issues/12355) @[glorv](https://github.com/glorv)
+    (dup: release-6.2.0.md > Improvements> TiKV)- Support dynamically modifying the number of sub-compaction operations performed concurrently in RocksDB (`rocksdb.max-sub-compactions`) [#13145](https://github.com/tikv/tikv/issues/13145) @[ethercflow](https://github.com/ethercflow)
 
 + PD
 
-    - Improve the speed of the region balance during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990)
+    - Improve the speed of the region balance during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990) @[bufferflies](https://github.com/bufferflies)
 
 + Tools
 
     + TiDB Lightning
 
-        - Add a retry mechanism on errors such as `stale command` to improve import success rate [#36877](https://github.com/pingcap/tidb/issues/36877)
+        - Add a retry mechanism on errors such as `stale command` to improve import success rate [#36877](https://github.com/pingcap/tidb/issues/36877) @[D3Hunter](https://github.com/D3Hunter)
 
     + TiDB Data Migration (DM)
 
-        - User can manually set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505)
+        - User can manually set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
     + TiCDC
 
-        - Add a sink uri parameter `transaction-atomicity` to support splitting the large transaction in a changefeed. This can greatly reduce the latency and memory consumption of large transactions. [#5231](https://github.com/pingcap/tiflow/issues/5231)
-        - (dup: release-6.2.0.md > Improvements> Tools> TiCDC)- Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610)
-        - Enhance the MySQL sink to turn off the safe mode automatically [#5611](https://github.com/pingcap/tiflow/issues/5611)
+        - Add a sink uri parameter `transaction-atomicity` to support splitting the large transaction in a changefeed. This can greatly reduce the latency and memory consumption of large transactions. [#5231](https://github.com/pingcap/tiflow/issues/5231) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - (dup: release-6.2.0.md > Improvements> Tools> TiCDC)- Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
+        - Enhance the MySQL sink to turn off the safe mode automatically [#5611](https://github.com/pingcap/tiflow/issues/5611) @[overvenus](https://github.com/overvenus)
 
 ## Bug fixes
 
