@@ -92,7 +92,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 
    - **Distribute changelogs by database to Kafka Topics**
 
-        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can define topic names of databases by setting the topic prefix, separator, and suffix. For example, if you set the separator as `_`, the topic names are in the format of `<Prefix>_<DatabaseName>_<Suffix>`.
+        If you want the changefeed to create a dedicated Kafka topic for each database, choose this mode. Then, all Kafka messages of a database are sent to a dedicated Kafka topic. You can define topic names of databases by setting the topic prefix and suffix.
 
    - **Send all changelogs to one specified Kafka Topic**
 
