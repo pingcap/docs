@@ -30,7 +30,7 @@ TiDB version: 6.1.1
     - `blackbox_exporter-{version}-linux-amd64.tar.gz`
     - `node_exporter-{version}-linux-amd64.tar.gz`
 
-- Introduce differentiated supports for different operating systems or platforms. See [].
+- Introduce multi-level supports for different operating systems or platforms. See [].
 
 ## Improvements
 
@@ -47,7 +47,7 @@ TiDB version: 6.1.1
 
 + PD
 
-    - Improve the speed of the region balance during the stage close to completion [#4990](https://github.com/tikv/pd/issues/4990) @[bufferflies](https://github.com/bufferflies)
+    - Improve the scheduling speed of Balance Region in specific stages [#4990](https://github.com/tikv/pd/issues/4990) @[bufferflies](https://github.com/bufferflies)
 
 + Tools
 
@@ -57,7 +57,7 @@ TiDB version: 6.1.1
 
     + TiDB Data Migration (DM)
 
-        - User can manually set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - Users can manually set the amount of concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
     + TiCDC
 
