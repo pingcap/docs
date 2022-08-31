@@ -70,7 +70,7 @@ TiDB version: 6.1.1
 + TiDB
 
     <!-- <execution> -->
-    - Fix the issue that `IndexLookupHashJoin` might hang when used with `LIMIT` [#35638](https://github.com/pingcap/tidb/issues/35638)
+    - Fix the issue that `INL_HASH_JOIN ` might hang when used with `LIMIT` [#35638](https://github.com/pingcap/tidb/issues/35638)
     - Fix the issue that TiDB might panic when executing the `UPDATE` statement [#32311](https://github.com/pingcap/tidb/issues/32311)
     - Fix a bug that TiDB might send coprocessor requests when executing the `SHOW COLUMNS` statement [#36496](https://github.com/pingcap/tidb/issues/36496)
     - Fix a bug that TiDB might return the `invalid memory address or nil pointer dereference` error when executing the `SHOW WARNINGS` statement [#31569](https://github.com/pingcap/tidb/issues/31569)
@@ -78,14 +78,13 @@ TiDB version: 6.1.1
 
     <!-- <planner> -->
     - Fix the issue that the Join Reorder operation will mistakenly push down its Outer Join condition [#37238](https://github.com/pingcap/tidb/issues/37238)
-    - Fix the issue that CTE-schema hash code is cloned mistakenly, which causes the `cannot find column` error when CTE is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
+    - Fix the issue that CTE-schema hash code is cloned mistakenly, which causes the `Can't find column ... in schema ...` error when CTE is referenced more than once [#35404](https://github.com/pingcap/tidb/issues/35404)
     - Fix the issue that the wrong join reorder in some right outer join scenarios causes wrong query result [#36912](https://github.com/pingcap/tidb/issues/36912)
     (dup: release-5.4.2.md > Bug Fixes> TiDB)- Fix the issue of incorrectly inferred null flag of the TiFlash `firstrow` aggregate function in the EqualAll case [#34584](https://github.com/pingcap/tidb/issues/34584)
-    - Fix the issue that Plan Cache does not work when a binding is created with the `ignore_plan_cache` hint [#34596](https://github.com/pingcap/tidb/issues/34596)
+    - Fix the issue that Plan Cache does not work when a binding is created with the `IGNORE_PLAN_CACHE` hint [#34596](https://github.com/pingcap/tidb/issues/34596)
     - Fix the issu that an `EXCHANGE` operator is missing between the hash-partition window and the single-partition window [#35990](https://github.com/pingcap/tidb/issues/35990)
     (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
     - Fix the issue of wrong query result when a wrong default value is set for partial aggregation after the aggregation is pushed down [#35295](https://github.com/pingcap/tidb/issues/35295)
-    (dup: release-5.2.4.md > Bug fixes> TiDB)- Fix the issue that partitioned tables cannot fully use indexes to scan data in some cases [#33966](https://github.com/pingcap/tidb/issues/33966)
 
     <!-- <sql-infra> -->
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might get `index-out-of-range` and `non used index` errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
@@ -98,8 +97,7 @@ TiDB version: 6.1.1
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that the column list does not work in the LOAD DATA statement [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     (dup: release-5.3.2.md > Bug Fixes> TiDB)- Fix the issue of the `data and columnID count not match` error that occurs when inserting duplicated values with TiDB Binlog enabled [#33608](https://github.com/pingcap/tidb/issues/33608)
     - Remove the limitation of `tidb_gc_life_time` [#35392](https://github.com/pingcap/tidb/issues/35392)
-    - Fix the load data statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298)
-    (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
+    - Fix the `LOAD DATA` statement dead loop when an empty filed terminator is used [#33298](https://github.com/pingcap/tidb/issues/33298)
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Avoid sending requests to unhealthy TiKV nodes to improve availability [#34906](https://github.com/pingcap/tidb/issues/34906)
 
 + TiKV
