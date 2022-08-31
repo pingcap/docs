@@ -21,7 +21,7 @@ Test environment:
 
 Test scale:
 
-- TiDB: 2 vCPU \* 2; TiKV: 2 vCPU \* 3
+- TiDB (2 vCPU, 8 GiB) \* 2; TiKV (2 vCPU, 8 GiB) \* 3
 
 Test results:
 
@@ -73,7 +73,7 @@ Test environment:
 
 Test scale:
 
-- TiDB: 4 vCPU \* 2; TiKV: 4 vCPU \* 3
+- TiDB (4 vCPU, 16 GiB) \* 2; TiKV (4 vCPU, 16 GiB) \* 3
 
 Test results:
 
@@ -125,12 +125,12 @@ Test environment:
 
 Test scales:
 
-- TiDB: 8 vCPU \* 2; TiKV: 8 vCPU \* 3
-- TiDB: 8 vCPU \* 4; TiKV: 8 vCPU \* 6
+- TiDB (8 vCPU, 16 GiB) \* 2; TiKV (8 vCPU, 32 GiB) \* 3
+- TiDB (8 vCPU, 16 GiB) \* 4; TiKV (8 vCPU, 32 GiB) \* 6
 
 Test results:
 
-**TiDB: 8 vCPU \* 2; TiKV: 8 vCPU \* 3**
+**TiDB (8 vCPU, 16 GiB) \* 2; TiKV (8 vCPU, 32 GiB) \* 3**
 
 - Optimal performance with low latency
 
@@ -168,7 +168,7 @@ Test results:
     | Update Index      | 2,000   | 15,146 | 15,146 | 132           |
     | Update Non-index  | 2,000   | 34,505 | 34,505 | 58            |
 
-**TiDB: 8 vCPU \* 4; TiKV: 8 vCPU \* 6**
+**TiDB (8 vCPU, 16 GiB) \* 4; TiKV (8 vCPU, 32 GiB) \* 6**
 
 - Optimal performance with low latency
 
@@ -218,12 +218,12 @@ Test environment:
 
 Test scales:
 
-- TiDB: 16 vCPU \* 2; TiKV: 16 vCPU \* 3
-- TiDB: 16 vCPU \* 4; TiKV: 16 vCPU \* 6
+- TiDB (16 vCPU, 32 GiB) \* 2; TiKV (16 vCPU, 64 GiB) \* 3
+- TiDB (16 vCPU, 32 GiB) \* 4; TiKV (16 vCPU, 64 GiB) \* 6
 
 Test results:
 
-**TiDB: 16 vCPU \* 2; TiKV: 16 vCPU \* 3**
+**TiDB (16 vCPU, 32 GiB) \* 2; TiKV (16 vCPU, 64 GiB) \* 3**
 
 - Optimal performance with low latency
 
@@ -261,7 +261,7 @@ Test results:
     | Update Index      | 3,000   | 29,576  | 29,576  | 101          |
     | Update Non-index  | 3,000   | 64,624  | 64,624  | 46           |
 
-**TiDB: 16 vCPU \* 4; TiKV: 16 vCPU \* 6**
+**TiDB (16 vCPU, 32 GiB) \* 4; TiKV (16 vCPU, 64 GiB) \* 6**
 
 - Optimal performance with low latency
 
