@@ -90,7 +90,7 @@ TiDB version: 6.1.1
     <!-- <sql-infra> -->
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that querying partitioned tables might get `index-out-of-range` and `non used index` errors in some cases [#35181](https://github.com/pingcap/tidb/issues/35181)
     (dup: release-6.2.0.md > Bug fixes> TiDB)- Fix the issue that a partition is incorrectly pruned if a partition key is used in the query condition and the collate is different from the one in the query partition table [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
-    - Fix the issue that when TiDB Binlog is enabled, executing the `ALTER SEQUENCE` statement might cause wrong metadata version and cause Drainer to exit [#36276](https://github.com/pingcap/tidb/issues/36276)
+    - Fix the issue that when TiDB Binlog is enabled, executing the `ALTER SEQUENCE` statement might cause a wrong metadata version and cause Drainer to exit [#36276](https://github.com/pingcap/tidb/issues/36276)
     - Fix the issue of incorrect TiDB status that might appear on startup in some extreme cases [#36791](https://github.com/pingcap/tidb/issues/36791)
     - Fix the potential `UnknownPlanID` issue that occurs when querying the execution plans for partitioned tables in TiDB Dashboard [#35153](https://github.com/pingcap/tidb/issues/35153)
 
@@ -104,7 +104,7 @@ TiDB version: 6.1.1
 
 + TiKV
 
-    - Fix a bug that regions may be overlapped if Raftstore is busy [#13160](https://github.com/tikv/tikv/issues/13160)
+    - Fix a bug that Regions might be overlapped if Raftstore is busy [#13160](https://github.com/tikv/tikv/issues/13160)
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the issue that PD does not reconnect to TiKV after the Region heartbeat is interrupted [#12934](https://github.com/tikv/tikv/issues/12934)
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue that TiKV panics when performing type conversion for an empty string [#12673](https://github.com/tikv/tikv/issues/12673)
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the issue of inconsistent Region size configuration between TiKV and PD [#12518](https://github.com/tikv/tikv/issues/12518)
@@ -114,12 +114,12 @@ TiDB version: 6.1.1
     (dup: release-5.3.2.md > Bug Fixes> TiKV)- Fix the issue of frequent PD client reconnection that occurs when the PD client meets an error [#12345](https://github.com/tikv/tikv/issues/12345)
     - Fix potential panic when parallel recovery is enabled for Raft Engine [#13123](https://github.com/tikv/tikv/issues/13123)
     (dup: release-6.2.0.md > Bug fixes> TiKV)- Fix the issue that the Commit Log Duration of a new Region is too high, which causes QPS to drop [#13077](https://github.com/tikv/tikv/issues/13077)
-    - Fix a rare case panic when Raft Engine is enabled [#12698](https://github.com/tikv/tikv/issues/12698)
-    - Avoid redundant log warnings when proc filesystem (procfs) is not available [#13116](https://github.com/tikv/tikv/issues/13116)
+    - Fix rare panics when Raft Engine is enabled [#12698](https://github.com/tikv/tikv/issues/12698)
+    - Avoid redundant log warnings when proc filesystem (procfs) cannot be found [#13116](https://github.com/tikv/tikv/issues/13116)
     - Fix the wrong expression of `Unified Read Pool CPU` in dashboard [#13086](https://github.com/tikv/tikv/issues/13086)
-    - Fix the issue that when a Region is large, the default [`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff) might larger than the bucket size [#12598](https://github.com/tikv/tikv/issues/12598)
+    - Fix the issue that when a Region is large, the default [`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff) might be larger than the bucket size [#12598](https://github.com/tikv/tikv/issues/12598)
     - Fix the issue that TiKV might panic when Apply Snapshot is aborted and Raft Engine is enabled [#12470](https://github.com/tikv/tikv/issues/12470)
-    - Fix the issue that PD client might deadlock [#13191](https://github.com/tikv/tikv/issues/13191)
+    - Fix the issue that the PD client might cause deadlocks [#13191](https://github.com/tikv/tikv/issues/13191) [#12933](https://github.com/tikv/tikv/issues/12933)
 
 + PD
 
