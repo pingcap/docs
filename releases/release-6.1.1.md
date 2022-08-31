@@ -57,7 +57,7 @@ TiDB version: 6.1.1
 
     + TiDB Data Migration (DM)
 
-        - User can manually set concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505)
+        - Users can manually set the amount of concurrency for lightning loader [#5505](https://github.com/pingcap/tiflow/issues/5505)
 
     + TiCDC
 
