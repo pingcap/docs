@@ -168,7 +168,7 @@ Test results:
     | Update Index      | 2,000   | 15,146 | 15,146 | 132           |
     | Update Non-index  | 2,000   | 34,505 | 34,505 | 58            |
 
-**TiDB: 8 vCPU, 16 GiB \* 4; TiKV: 8 vCPU, 32 GiB \* 6**
+**TiDB (8 vCPU, 16 GiB) \* 4; TiKV (8 vCPU, 32 GiB) \* 6**
 
 - Optimal performance with low latency
 
