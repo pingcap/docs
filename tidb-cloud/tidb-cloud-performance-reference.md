@@ -125,7 +125,7 @@ Test environment:
 
 Test scales:
 
-- TiDB: 8 vCPU, 16 GiB \* 2; TiKV: 8 vCPU, 32 GiB \* 3
+- TiDB (8 vCPU, 16 GiB) \* 2; TiKV (8 vCPU, 32 GiB) \* 3
 - TiDB: 8 vCPU, 16 GiB \* 4; TiKV: 8 vCPU, 32 GiB \* 6
 
 Test results:
