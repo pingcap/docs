@@ -167,8 +167,8 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
             For example:
 
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+            - `my-data?.sql`: all CSV files starting with `my-data` and one character (such as `my-data1.sql` and `my-data2.sql`) will be imported into the same target table.
+            - `my-data*.sql`: all CSV files starting with `my-data` will be imported into the same target table.
 
         - **Target table**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
 
