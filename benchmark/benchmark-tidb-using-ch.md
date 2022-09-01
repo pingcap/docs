@@ -1,5 +1,5 @@
 ---
-title: How to Run CH Benchmark Test on TiDB
+title: How to Run CH-benCHmark Test on TiDB
 summary: Learn how to run CH Benchmark test on TiDB.
 ---
 
