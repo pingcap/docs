@@ -4,7 +4,7 @@ title: TiDB 6.1.1 Release Notes
 
 # TiDB 6.1.1 Release Notes
 
-Release date: 2022-xx-xx
+Release date: September 1, 2022
 
 TiDB version: 6.1.1
 
