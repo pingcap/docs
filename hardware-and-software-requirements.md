@@ -7,14 +7,14 @@ summary: Learn the software and hardware recommendations for deploying and runni
 
 As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
-## OS and platform version requirements
+## OS and platform requirements
 
 <SimpleTab>
 <div label="For v6.1.1 and later v6.1.x versions">
 
-Since v6.1.1, for combinations of different operating systems and CPU architectures, TiDB provide multi-level supports for different quality standards.
+Since v6.1.1, TiDB provide multi-level supports of different quality standards for combinations of different operating systems and CPU architectures.
 
-+ For the following combinations of operating systems and CPU architectures, TiDB can meet the requirements for enterprise-level production quality, and the product features have been comprehensively and systematically verified:
++ For the following combinations of operating systems and CPU architectures, TiDB meets the requirements for enterprise-level production quality, and the product features have been comprehensively and systematically verified:
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
@@ -44,7 +44,7 @@ Since v6.1.1, for combinations of different operating systems and CPU architectu
     > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
     > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 
-+ If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to these 32-bit operating systems.
++ If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
 
 + Other operating system versions not mentioned above might work but are not officially supported.
 
