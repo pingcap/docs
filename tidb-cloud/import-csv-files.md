@@ -99,6 +99,14 @@ To import the CSV files to TiDB Cloud, take the following steps:
     - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **CSV Configuration**: check and update the CSV specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator. You can find the explanation of each CSV configuration right beside these fields.
 
+    - **Data Format**: select **CSV**.
+    - **Location**: select the location where your CSV files are located.
+    - **Bucket URL**: select the bucket URL where your CSV files are located.
+    - **Role-ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
+
+    Confirm the compliance of cross region. Click **Next**.
+
         > **Note:**
         >
         > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
