@@ -133,7 +133,7 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If your TiDB cluster is hosted by AWS (the Developer Tier is hosted by AWS by default), fill in the following parameters:
 
-    - **Data Format**: select **TiDB Dumpling**.
+    - **Data Format**: select **TiDB Dumpling**
     - **Location**: `AWS`
     - **Bucket URL**: enter the sample data URL `s3://tidbcloud-samples/data-ingestion/`
     - **Role-ARN**: enter `arn:aws:iam::385595570414:role/import-sample-access`
@@ -147,10 +147,10 @@ We provide Capital Bikeshare sample data for you to easily import data and run s
 
     If your TiDB cluster is hosted by GCP, fill in the following parameters:
 
-    - **Data Format**: select **TiDB Dumpling**
+    - **Data Format**: select **TiDB Dumpling**.
     - **Location**: `Google Cloud`
-    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`
-    - **Target Cluster**: fill in the **Username** and **Password** fields
+    - **Bucket URL**: enter the sample data URL `gcs://tidbcloud-samples-us-west1`.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
 
     Confirm the compliance of cross region. Click **Next**.
 
