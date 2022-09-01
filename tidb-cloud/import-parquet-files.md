@@ -94,20 +94,42 @@ To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, 
 To import the Parquet files to TiDB Cloud, take the following steps:
 
 1. Navigate to the **Clusters** page.
-2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import Task** page is displayed.
+2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
 
     > **Tip:**
     >
     > Alternatively, you can also click the name of your target cluster on the **Clusters** page and click **Import Data** in the upper-right corner.
 
-3. On the **Data Import Task** page, provide the following information.
+3. On the **Data Import** page, provide the following information.
 
-    - **Data Source Type**: select the type of the data source.
-    - **Bucket URL**: select the bucket URL where your Parquet files are located.
     - **Data Format**: select **Parquet**.
-    - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
+    - **Location**: select the location where your Parquet files are located.
+    - **Bucket URL**: select the bucket URL where your Parquet files are located.
+    - **Role-ARN**: (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
     - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+
+    Confirm the compliance of cross region. Click **Next**.
+
+4. Modify the file patterns and add the table filter rules if needed.
+
+    - **File Pattern**: enable the **Custom Pattern** feature if you want to import Parquet files whose filenames match a certain pattern to a single target table.
+
+        > **Note:**
+        >
+        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+
+        When you use this feature, you need to specify a custom mapping rule between Parquet files and a single target table in the following fields:
+
+        - **File Name**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly.
+
+            For example:
+
+            - `my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) will be imported into the same target table.
+            - `my-data*.parquet`: all Parquet files starting with `my-data` will be imported into the same target table.
+
+        - **Target table**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+
+    - **Tables filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
         For example:
 
@@ -118,36 +140,17 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import Parquet files whose filenames match a certain pattern to a single target table.
+5. Click **Next**.
 
-        > **Note:**
-        >
-        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
-
-        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between Parquet files and a single target table in the following fields:
-
-        - **Object Name Pattern**: enter a pattern that matches the names of the Parquet files to be imported. If you have one Parquet file only, you can enter the filename here directly.
-
-            For example:
-
-            - `my-data?.parquet`: all Parquet files starting with `my-data` and one character (such as `my-data1.parquet` and `my-data2.parquet`) will be imported into the same target table.
-            - `my-data*.parquet`: all Parquet files starting with `my-data` will be imported into the same target table.
-
-        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
-
-4. Click **Import**.
-
-    A warning message about the database resource consumption is displayed.
-
-5. Click **Confirm**.
+6. On the **Preview** page, confirm the import data and then click **Start Import**.
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-6. When the import progress shows success, check the number after **Total Files:**.
+7. When the import progress shows **Completed**, check the number after **Total Files:**.
 
     If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, check whether there are any typos in the **Object Name Pattern** field and try again.
 
-When running an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
+When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 
 If you get an importing error, do the following:
 
