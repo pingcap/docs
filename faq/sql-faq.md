@@ -45,7 +45,7 @@ USING
 
 > **Note:**
 >
-> The precision of `MAX_EXECUTION_TIME` is roughly 100ms. Before TiDB terminates the SQL statement, the tasks in TiKV might be started. To avoid the situation, it is recommended to set [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540) to `ON` to contain the resource consumed in TiKV.
+> The precision of `MAX_EXECUTION_TIME` is roughly 100ms. Before TiDB terminates the SQL statement, the tasks in TiKV might be started. If this happens, to reduce the TiKV resource consumption, it is recommended to set [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540) to `ON`.
 
 Dropping this SQL binding will remove the limit.
 
