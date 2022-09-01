@@ -160,13 +160,31 @@ This document uses the Amazon S3 as an example. The following example only lists
 
 ### Step 5. Perform the data import task
 
-After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters). You need to fill in the following information:
+After configuring the IAM Role, you can perform the data import task on the [TiDB Cloud console](https://tidbcloud.com/console/clusters).
 
-- **Data Source Type**: `AWS S3`.
-- **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. You can import the data in all MySQL instances that will be merged into `store.sales` in one go.
-- **Data Format**: choose the **CSV** format of your data.
-- **Target Cluster**: fill in the **Username** and **Password** fields.
-- **DB/Tables Filter**: if necessary, you can specify a [table filter](https://docs.pingcap.com/tidbcloud/table-filter#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
+1. Navigate to the **Active Clusters** page.
+
+2. Find the area of your target cluster and click **Import Data** in the upper-right corner of the area. The **Data Import** page is displayed.
+
+3. On the **Data Import** page, fill in the following information:
+
+    - **Data Format**: select **CSV**.
+    - **Location**: `AWS`
+    - **Bucket URL**: fill in the bucket URL of your source data. You can use the second-level directory corresponding to tables, `s3://dumpling-s3/store/sales` in this example. You can import the data in all MySQL instances that will be merged into `store.sales` in one go.
+    - **Role-ARN**: enter the Role-ARN you obtained.
+    - **Target Cluster**: fill in the **Username** and **Password** fields.
+
+    Confirm the compliance of cross region. Click **Next**.
+
+4. Modify the file patterns and add the table filter rules if needed. If necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
+
+5. Click **Next**.
+
+6. On the **Preview** page, confirm the import data and then click **Start Import**. For detailed information about modifying CSV configurations, see [Import CSV Files from Amazon S3 or GCS into TiDB Cloud](/tidb-cloud/import-csv-files.md).
+
+TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
+
+After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
 
 ## Perform incremental data replication from MySQL to TiDB Cloud
 
