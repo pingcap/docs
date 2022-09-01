@@ -1502,18 +1502,18 @@ Configuration items related to Raft Engine.
 > - After `format-version` with `2` is set, you **cannot** downgrade the TiKV cluster to a version earlier than v6.3.0. Otherwise, data corruption might occur.
 
 + Specifies the version of log files in Raft Engine.
-+ Optional values:
-    + `1`: Can be read by TiKV release 6.1 and above.
-    + `2`: Supports log recycling, can be read by TiKV release 6.3 and above.
++ Value Options:
+    + `1`: Default log file version for TiKV earlier than v6.3.0. Can be read by TiKV >= v6.1.0.
+    + `2`: Supports log recycling. Can be read by TiKV >= v6.3.0.
 + Default value: `2`
 
 ### `enable-log-recycle` <span class="version-mark">New in v6.3.0</span>
 
-> **Warning:**
+> **Note:**
 >
-> - This configuration item is only available for `format-version` >= 2.
+> - This configuration item is only available for [`format-version`](#format-version-new-in-v630) >= 2.
 
-+ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling.
++ Determines whether to recycle stale log files in Raft Engine. When it is enabled, logically purged log files will be reserved for recycling. This feature can reduce the long tail on `write` workloads.
 + Default value: `true`
 
 ## security
