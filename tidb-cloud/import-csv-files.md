@@ -84,7 +84,8 @@ To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do o
 
 To import the CSV files to TiDB Cloud, take the following steps:
 
-1. Navigate to the **Clusters** page.
+1. Log on to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+
 2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
 
     > **Tip:**

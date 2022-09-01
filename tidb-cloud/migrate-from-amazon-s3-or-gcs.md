@@ -61,7 +61,11 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 ### Step 3. Import data into TiDB Cloud
 
-1. On the **Data Import Task** page, besides the **Role ARN** field, you also need to fill in the following information:
+1. Log on to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+
+2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
+
+3. On the **Data Import** page, fill in the following information:
 
     - **Data Format**: select **TiDB Dumpling**.
     - **Location**: `AWS`
@@ -71,11 +75,11 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
     Confirm the compliance of cross region. Click **Next**.
 
-2. Modify the file patterns and add the table filter rules if needed. If necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
+4. Modify the file patterns and add the table filter rules if needed. If necessary, you can specify a [table filter](/table-filter.md#syntax). If you want to configure multiple filter rules, use `,` to separate the rules.
 
-3. Click **Next**.
+5. Click **Next**.
 
-4. On the **Preview** page, confirm the import data and then click **Start Import**.
+6. On the **Preview** page, confirm the import data and then click **Start Import**.
 
 TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
