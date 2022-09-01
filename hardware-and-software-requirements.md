@@ -8,12 +8,12 @@ aliases: ['/docs/dev/hardware-and-software-requirements/','/docs/dev/how-to/depl
 
 As an open source distributed NewSQL database with high performance, TiDB can be deployed in the Intel architecture server, ARM architecture server, and major virtualization environments and runs well. TiDB supports most of the major hardware networks and Linux operating systems.
 
-## Linux OS version requirements
+## OS and platform requirements
 
 | Linux OS        | Version      |
 | :-----------------------:| :----------: |
-| Red Hat Enterprise Linux | 7.3 or later 7.x releases |
-| CentOS                   | 7.3 or later 7.x releases |
+| Red Hat Enterprise Linux | 7.3 or later 7.x releases, 8.4 or later 8.4 releases |
+| CentOS                   | 7.3 or later 7.x releases, 8.4 or later 8.4 releases |
 | Oracle Enterprise Linux  | 7.3 or later 7.x releases |
 | Amazon Linux             | 2 |
 | Ubuntu LTS               | 16.04 or later |
@@ -24,10 +24,21 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 > - A large number of TiDB tests have been run on the CentOS 7.3 system, and in our community there are a lot of best practices in which TiDB is deployed on the Linux operating system. Therefore, it is recommended to deploy TiDB on CentOS 7.3 or later.
 > - The support for the Linux operating systems above includes the deployment and operation in physical servers as well as in major virtualized environments like VMware, KVM and XEN.
 > - Red Hat Enterprise Linux 8.0, CentOS 8 Stream, and Oracle Enterprise Linux 8.0 are not supported yet as the testing of these platforms is in progress.
-> - Support for CentOS 8 Linux is not planned because its upstream support ends on December 31, 2021.
+> - According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS ended on December 31, 2021.
 > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. Upgrading to Ubuntu 18.04 or later is strongly recommended.
 
 Other Linux OS versions such as Debian Linux and Fedora Linux might work but are not officially supported.
+
+### Libraries required for compiling and running TiDB
+
+|  Libraries required for compiling and building TiDB   |  Version   |
+|   :---   |   :---   |
+|   Golang  |  1.18.5 or later  |
+|   Rust    |   nightly-2022-07-31 or later  |
+|  GCC      |   7.x      |
+|  LLVM     |  13.0 or later  |
+
+Library required for running TiDB: glibc (2.28-151.el8 version）
 
 ## Software recommendations
 
