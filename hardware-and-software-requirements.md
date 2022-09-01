@@ -12,9 +12,9 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 <SimpleTab>
 <div label="For v6.1.1 and later v6.1.x versions">
 
-Since v6.1.1, TiDB provide multi-level supports of different quality standards for combinations of different operating systems and CPU architectures.
+Starting from v6.1.1, TiDB provides multi-level support for different quality standards on the combination of operating systems and CPU architectures.
 
-+ For the following combinations of operating systems and CPU architectures, TiDB meets the requirements for enterprise-level production quality, and the product features have been comprehensively and systematically verified:
++ For the following combinations of operating systems and CPU architectures, TiDB **provides enterprise-level production quality**, and the product features have been comprehensively and systematically verified:
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
@@ -27,7 +27,7 @@ Since v6.1.1, TiDB provide multi-level supports of different quality standards f
     >
     > According to [CentOS Linux EOL](https://www.centos.org/centos-linux-eol/), the upstream support for CentOS ended on December 31, 2021.
 
-+ For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality requirements**:
++ For the following combinations of operating systems and CPU architectures, you can compile, build, and deploy TiDB. In addition, you can also use the basic features of OLTP, OLAP, and the data tools. However, TiDB **does not guarantee enterprise-level production quality**:
 
     |  Operating systems   |   Supported CPU architectures   |
     |   :---   |   :---   |
