@@ -17,7 +17,7 @@ TiDB version: 6.1.1
 
 + Diagnosis
 
-    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash OOM issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687) @[mornyx](https://github.com/mornyx)
+    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash crash issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687) @[mornyx](https://github.com/mornyx)
 
 ## Other changes
 
