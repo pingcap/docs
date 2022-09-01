@@ -184,7 +184,7 @@ After configuring the IAM Role, you can perform the data import task on the [TiD
 
 TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added in [Step 2. Configure Amazon S3 access](#step-2-configure-amazon-s3-access).
+After the data is imported, if you want to remove the Amazon S3 access of TiDB Cloud, simply delete the policy that you added.
 
 ## Perform incremental data replication from MySQL to TiDB Cloud
 
