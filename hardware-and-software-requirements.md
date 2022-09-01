@@ -53,9 +53,9 @@ Starting from v6.1.1, TiDB provides multi-level support for different quality st
 
 | Linux OS        | Version      |
 | :-----------------------:| :----------: |
-| Red Hat Enterprise Linux | 7.3 or later 7.x releases |
-| CentOS                   | 7.3 or later 7.x releases |
-| Oracle Enterprise Linux  | 7.3 or later 7.x releases |
+| Red Hat Enterprise Linux | 7.3 or later 7.x versions |
+| CentOS                   | 7.3 or later 7.x versions |
+| Oracle Enterprise Linux  | 7.3 or later 7.x versions |
 | Amazon Linux             | 2 |
 | Ubuntu LTS               | 16.04 or later |
 
