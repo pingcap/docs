@@ -61,7 +61,7 @@ For detailed steps, see [Configure Amazon S3 access](/tidb-cloud/config-s3-and-g
 
 ### Step 3. Import data into TiDB Cloud
 
-1. Log on to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+1. Log in to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
 
 2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
 

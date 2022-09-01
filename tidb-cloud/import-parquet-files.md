@@ -93,13 +93,9 @@ To allow TiDB Cloud to access the Parquet files in the Amazon S3 or GCS bucket, 
 
 To import the Parquet files to TiDB Cloud, take the following steps:
 
-1. Log on to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+1. Log in to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
 
 2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your target cluster on the **Clusters** page and click **Import Data** in the upper-right corner.
 
 3. On the **Data Import** page, provide the following information.
 
@@ -113,11 +109,11 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 4. Modify the file patterns and add the table filter rules if needed.
 
-    - **File Pattern**: enable the **Custom Pattern** feature if you want to import Parquet files whose filenames match a certain pattern to a single target table.
+    - **File name**: modify the file pattern if you want to import Parquet files whose filenames match a certain pattern to a single target table.
 
         > **Note:**
         >
-        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
         When you use this feature, you need to specify a custom mapping rule between Parquet files and a single target table in the following fields:
 
@@ -149,7 +145,7 @@ To import the Parquet files to TiDB Cloud, take the following steps:
 
 7. When the import progress shows **Completed**, check the number after **Total Files:**.
 
-    If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, check whether there are any typos in the **Object Name Pattern** field and try again.
+    If the number is zero, it means no data files matched the value you entered in the **File name** field. In this case, check whether there are any typos in the **File name** field and try again.
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 

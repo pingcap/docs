@@ -84,13 +84,9 @@ To allow TiDB Cloud to access the CSV files in the Amazon S3 or GCS bucket, do o
 
 To import the CSV files to TiDB Cloud, take the following steps:
 
-1. Log on to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
+1. Log in to the [TiDB Cloud](https://tidbcloud.com/signin) console, and navigate to the **Clusters** page.
 
 2. Locate your target cluster, and click **Import Data** in the upper-right corner of the cluster area. The **Data Import** page is displayed.
-
-    > **Tip:**
-    >
-    > Alternatively, you can also click the name of your target cluster on the **Clusters** page and click **Import Data** in the upper-right corner.
 
 3. On the **Data Import** page, provide the following information.
 
@@ -110,9 +106,9 @@ To import the CSV files to TiDB Cloud, take the following steps:
         >
         > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-        To modify the file pattern, you need to specify a custom mapping rule between CSV files and a single target table in the following fields:
+        To modify the file pattern, specify a custom mapping rule between CSV files and a single target table in the following fields:
 
-        - **File name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, you can enter the file name here directly.
+        - **File name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, enter the file name here directly.
 
             For example:
 
@@ -146,7 +142,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
 8. When the import progress shows **Completed**, check the number after **Total Files:**.
 
-    If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, ensure that there are no typos in the **Object Name Pattern** field and try again.
+    If the number is zero, it means no data files matched the value you entered in the **File Name** field. In this case, ensure that there are no typos in the **File Name** field and try again.
 
 When you run an import task, if any unsupported or invalid conversions are detected, TiDB Cloud terminates the import job automatically and reports an importing error.
 
