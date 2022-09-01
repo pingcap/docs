@@ -12,9 +12,9 @@ As an open source distributed NewSQL database with high performance, TiDB can be
 
 | Linux OS        | Version      |
 | :-----------------------:| :----------: |
-| Red Hat Enterprise Linux | 7.3 or later 7.x releases, 8.4 or later 8.4 releases |
-| CentOS                   | 7.3 or later 7.x releases, 8.4 or later 8.4 releases |
-| Oracle Enterprise Linux  | 7.3 or later 7.x releases |
+| Red Hat Enterprise Linux | 7.3 or later 7.x versions, 8.4 or later 8.4 versions |
+| CentOS                   | 7.3 or later 7.x versions, 8.4 or later 8.4 versions |
+| Oracle Enterprise Linux  | 7.3 or later 7.x versions |
 | Amazon Linux             | 2 |
 | Ubuntu LTS               | 16.04 or later |
 
