@@ -1094,9 +1094,9 @@ Constraint checking is always performed in place for pessimistic transactions (d
 
 - Scope: SESSION | GLOBAL
 - Persists to cluster: Yes
-- Default value: `ON`
-- Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior, and the default value is `ON`.
-- For a cluster upgraded from a version earlier than v6.1.0, the default value is still `TRUE`.
+- Default value: In v6.1.0, the default value is `ON`. After v6.1.0, the default value is `OFF`.
+- Since v6.1.0, the [Join Reorder](/join-reorder.md) algorithm of TiDB supports Outer Join. This variable controls the support behavior. The default value is `OFF`, which means the Join Reorder's support for Outer Join is disabled by default.
+- For a cluster upgraded from a version earlier than v6.1.0, the default value is `OFF`. For a cluster upgraded from v6.1.0, the default value is `ON`.
 
 ### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
 
