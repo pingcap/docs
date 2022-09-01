@@ -17,7 +17,7 @@ TiDB version: 6.1.1
 
 + Diagnosis
 
-    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash OOM issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687). @[mornyx](https://github.com/mornyx)
+    - Disable the Continuous Profiling feature by default, which avoids the possible TiFlash OOM issue that occurs when this feature is enabled. For details, see [#5687](https://github.com/pingcap/tiflash/issues/5687) @[mornyx](https://github.com/mornyx)
 
 ## Other changes
 
@@ -37,7 +37,7 @@ TiDB version: 6.1.1
 + TiDB
 
     <!-- <planner> -->
-    - Add a new optimizer `SEMI_JOIN_REWRITE` to improve the performance of `EXISTS` queries [#35323](https://github.com/pingcap/tidb/issues/35323)
+    - Add a new optimizer `SEMI_JOIN_REWRITE` to improve the performance of `EXISTS` queries [#35323](https://github.com/pingcap/tidb/issues/35323) @[winoros](https://github.com/winoros)
 
 + TiKV
 
@@ -62,7 +62,7 @@ TiDB version: 6.1.1
     + TiCDC
 
         - Add a sink uri parameter `transaction-atomicity` to support splitting the large transaction in a changefeed. This can greatly reduce the latency and memory consumption of large transactions. [#5231](https://github.com/pingcap/tiflow/issues/5231) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - - Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
+        - Reduce performance overhead caused by runtime context switching in multi-Region scenarios [#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
         - Enhance the MySQL sink to turn off the safe mode automatically [#5611](https://github.com/pingcap/tiflow/issues/5611) @[overvenus](https://github.com/overvenus)
 
 ## Bug fixes
@@ -121,7 +121,7 @@ TiDB version: 6.1.1
 
 + PD
 
-    - Fix the issue that the online progress is inaccurate when label configurations of cluster nodes are invalid[#5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
+    - Fix the issue that the online progress is inaccurate when label configurations of cluster nodes are invalid [#5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
     - Fix PD panics caused by the issue that gRPC handles errors inappropriately when `enable-forwarding` is enabled [#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
     - Fix the issue that `/regions/replicated` might return a wrong status [#5095](https://github.com/tikv/pd/issues/5095) @[rleungx](https://github.com/rleungx)
 
