@@ -101,7 +101,7 @@ The lines that contain `checksum mismatched` provide the information `total_kvs:
 
 2. Consider using an external database to store the checkpoints (change `[checkpoint] dsn`) to reduce the target database's load.
 
-3. If TiDB Lightning was improperly restarted, see also the "[How to properly restart TiDB Lightning](#how-to-properly-restart-tidb-lightning)" section in the FAQ.
+3. If TiDB Lightning was improperly restarted, see also the "[How to properly restart TiDB Lightning](/tidb-lightning/tidb-lightning-faq.md#how-to-properly-restart-tidb-lightning)" section in the FAQ.
 
 ### `Checkpoint for … has invalid status:` (error code)
 
