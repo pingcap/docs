@@ -91,13 +91,7 @@ To import the CSV files to TiDB Cloud, take the following steps:
     >
     > Alternatively, you can also click the name of your target cluster on the **Clusters** page and click **Import Data** in the upper-right corner.
 
-3. On the **Data Import Task** page, provide the following information.
-
-    - **Data Source Type**: select the type of the data source.
-    - **Bucket URL**: select the bucket URL where your CSV files are located.
-    - **Data Format**: select **CSV**.
-    - **Setup Credentials** (This field is visible only for AWS S3): enter the Role ARN value for **Role-ARN**.
-    - **CSV Configuration**: check and update the CSV specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator. You can find the explanation of each CSV configuration right beside these fields.
+3. On the **Data Import** page, provide the following information.
 
     - **Data Format**: select **CSV**.
     - **Location**: select the location where your CSV files are located.
@@ -107,12 +101,26 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     Confirm the compliance of cross region. Click **Next**.
 
+4. Modify the file patterns and add the table filter rules if needed.
+
+    - **File Pattern**: modify the file pattern if you want to import CSV files whose filenames match a certain pattern to a single target table.
+
         > **Note:**
         >
-        > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
+        > When you use this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
 
-    - **Target Cluster**: fill in the **Username** and **Password** fields.
-    - **DB/Tables Filter**: if you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
+        To modify the file pattern, you need to specify a custom mapping rule between CSV files and a single target table in the following fields:
+
+        - **File name**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, you can enter the file name here directly.
+
+            For example:
+
+            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
+            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
+
+        - **Target table**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
+
+    - **Table Filter**: If you want to filter which tables to be imported, you can specify one or more table filters in this field, separated by `,`.
 
         For example:
 
@@ -123,32 +131,19 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
         For more information, see [table filter snytax](/table-filter.md#syntax).
 
-    - **Custom Pattern**: enable the **Custom Pattern** feature if you want to import CSV files whose filenames match a certain pattern to a single target table.
+5. Click **Next**.
 
-        > **Note:**
-        >
-        > After enabling this feature, one import task can only import data to a single table at a time. If you want to use this feature to import data into different tables, you need to import several times, each time specifying a different target table.
+6. On the **Preview** page, check and update the CSV specific configurations, including separator, delimiter, header, not-null, null, backslash-escape, and trim-last-separator. You can find the explanation of each CSV configuration right beside these fields.
 
-        When **Custom Pattern** is enabled, you are required to specify a custom mapping rule between CSV files and a single target table in the following fields:
+    > **Note:**
+    >
+    > For the configurations of separator, delimiter, and null, you can use both alphanumeric characters and certain special characters. The supported special characters include `\t`, `\b`, `\n`, `\r`, `\f`, and `\u0001`.
 
-        - **Object Name Pattern**: enter a pattern that matches the names of the CSV files to be imported. If you have one CSV file only, you can enter the filename here directly.
-
-            For example:
-
-            - `my-data?.csv`: all CSV files starting with `my-data` and one character (such as `my-data1.csv` and `my-data2.csv`) will be imported into the same target table.
-            - `my-data*.csv`: all CSV files starting with `my-data` will be imported into the same target table.
-
-        - **Target Table Name**: enter the name of the target table in TiDB Cloud, which must be in the `${db_name}.${table_name}` format. For example, `mydb.mytable`. Note that this field only accepts one specific table name, so wildcards are not supported.
-
-4. Click **Import**.
-
-    A warning message about the database resource consumption is displayed.
-
-5. Click **Confirm**.
+7. Click **Start Import**.
 
     TiDB Cloud starts validating whether it can access your data in the specified bucket URL. After the validation is completed and successful, the import task starts automatically. If you get the `AccessDenied` error, see [Troubleshoot Access Denied Errors during Data Import from S3](/tidb-cloud/troubleshoot-import-access-denied-error.md).
 
-6. When the import progress shows success, check the number after **Total Files:**.
+8. When the import progress shows **Completed**, check the number after **Total Files:**.
 
     If the number is zero, it means no data files matched the value you entered in the **Object Name Pattern** field. In this case, ensure that there are no typos in the **Object Name Pattern** field and try again.
 
