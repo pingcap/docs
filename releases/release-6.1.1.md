@@ -30,7 +30,7 @@ TiDB version: 6.1.1
     - `blackbox_exporter-{version}-linux-amd64.tar.gz`
     - `node_exporter-{version}-linux-amd64.tar.gz`
 
-- Introduce multi-level supports for different operating systems or platforms. See [].
+- Introduce multi-level support for different quality standards on the combination of operating systems and CPU architectures. See [OS and platform requirements](https://docs.pingcap.com/tidb/v6.1/hardware-and-software-requirements#os-and-platform-requirements).
 
 ## Improvements
 
