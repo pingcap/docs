@@ -27,9 +27,7 @@ For detailed usage of the TiUP Bench component, see [TiUP Bench](/tiup/tiup-benc
 
 **Loading data is usually the most time-consuming and problematic stage of the entire TPC-C test.**
 
-Taking 1000 warehouses as an example, you can execute the following TiUP command in shell for data load and test:
-
-{{< copyable "shell-regular" >}}
+Taking 1000 warehouses as an example, you can execute the following TiUP command in shell for data load and test. Note that you need to replace `172.16.5.140` and `4000` in this document with your own TiDB host and port values.
 
 ```shell
 tiup bench tpcc -H 172.16.5.140 -P 4000 -D tpcc --warehouses 1000 prepare -T 32
