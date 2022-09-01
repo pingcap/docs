@@ -9,6 +9,11 @@ This document shows all the released TiDB versions in reverse chronological orde
 
 | Version | Release Date |
 | :--- | :--- |
+<<<<<<< HEAD
+=======
+| [6.1.1](/releases/release-6.1.1.md) | 2022-09-01 |
+| [6.2.0-DMR](/releases/release-6.2.0.md) | 2022-08-23 |
+>>>>>>> 6e5290ca2 (releases: add TiDB 6.1.1 release notes (#10139))
 | [5.4.2](/releases/release-5.4.2.md) | 2022-07-08 |
 | [5.3.2](/releases/release-5.3.2.md) | 2022-06-29 |
 | [6.1.0](/releases/release-6.1.0.md) | 2022-06-13 |
