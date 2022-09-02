@@ -36,13 +36,14 @@ This section describes how to set up a private endpoint with AWS PrivateLink.
 
 Take the following steps to set up a private endpoint. If you have multiple clusters, you need to repeat these steps for each cluster that you want to connect to using AWS PrivateLink.
 
-There are 5 steps to set up a private endpoint connection with AWS PrivateLink:
+There are 6 steps to set up a private endpoint connection with AWS PrivateLink:
 
-1. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
-2. [Choose the service endpoint region](#step-2-choose-the-service-endpoint-region)
-3. [Create an AWS interface endpoint](#step-3-create-an-aws-interface-endpoint)
-4. [Accept the endpoint connection](#step-4-accept-the-endpoint-connection)
-5. [Enable private DNS](#step-5-enable-private-dns)
+1. [Do the prerequisites](#prerequisites).
+2. [Choose a TiDB cluster](#step-1-choose-a-tidb-cluster)
+3. [Choose the service endpoint region](#step-2-choose-the-service-endpoint-region)
+4. [Create an AWS interface endpoint](#step-3-create-an-aws-interface-endpoint)
+5. [Accept the endpoint connection](#step-4-accept-the-endpoint-connection)
+6. [Enable private DNS](#step-5-enable-private-dns)
 
 ### Prerequisites
 
