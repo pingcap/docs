@@ -63,6 +63,10 @@ To connect to your TiDB cluster via private endpoint, perform the following step
 
 5. Under **Step 2: Connect your application**, click the tab of your preferred connection method, and then connect to your cluster with the connection string. The placeholders `<cluster_endpoint_name>:<port>` in the connection string are automatically replaced with the real values.
 
+> **Tip:**
+>
+> If you cannot connect to the your application, the possible reason might be that the security group of your VPC endpoint in AWS is not properly selected. See [](/tidb-cloud/set-up-private-endpoint-connections.md#i-cannot-enable-private-dns-an-error-is-reported-indicating-that-the-enablednssupport-and-enablednshostnames-vpc-attributes-are-not-enabled) for solution.
+
 ## Connect via VPC peering
 
 > **Note:**
