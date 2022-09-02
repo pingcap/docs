@@ -76,7 +76,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
 
 1. Fill in the **VPC ID** and **Subnet IDs** fields. You can get the IDs from your AWS Management Console.
 
-2. After the endpoint service is created, check the command in the **Create VPC Interface Endpoint** area, and take a note of your endpoint service name.
+2. After the endpoint service is created, check the command in the lower area, and take a note of your endpoint service name.
 
     ![Endpoint service name](/media/tidb-cloud/private-endpoint/private-endpoint-service-name.png)
 
@@ -94,16 +94,13 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
     2. Under **Service category**, select **Other endpoint services**.
     3. Under **Service settings**, enter the endpoint service name you have obtained from the **Interface endpoint** page of the TiDB Cloud console, and click **Verify service**.
 
-        ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
+        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-2.png" height="50%" auto="Verify endpoint service" />
 
     4. After the service name is verified, under **VPC**, select your VPC in the drop-down list. Then the pre-populated **Subnets** area is displayed.
-    5. In the **Security groups** area, set up your security group properly.
-
-        ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
-
+    5. In the **Security groups** area, select up your security group properly.
     6. In the **Subnets** area, select the availability zones where your TiDB cluster is located. Then click **Create endpoint** at the bottom of the page.
 
-        ![Create endpoint service 2](/media/tidb-cloud/private-endpoint/create-endpoint-3.png)
+        <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" height="40%" auto="Create endpoint service 3" />
 
     > **Tip:**
     >
@@ -128,7 +125,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
         aws configure
         ```
 
-    3. Copy the command in the **Create VPC Interface Endpoint** area and run it in your terminal to create the VPC interface endpoint. Then click **Next**.
+    3. Copy the command in the lower area of the page and run it in your terminal to create the VPC interface endpoint. Then click **Next**.
 
     After the endpoint service is created, the placeholders in the command are automatically replaced with the real values.
 
@@ -197,8 +194,10 @@ The possible statuses of a private endpoint service are explained as follows:
 
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. Right-click your VPC endpoint and select **Manage security groups**.
 
-In the **Manage security groups** page, set the security group for your VPC endpoint properly.
+In the **Manage security groups** page, properly select the security group for your VPC endpoint.
 
-### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled.
+![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
+
+### I cannot enable private DNS. An error is reported indicating that the `enableDnsSupport` and `enableDnsHostnames` VPC attributes are not enabled
 
 When you create a VPC in AWS Management Console, the DNS hostnames setting is disabled by default. Before enabling private DNS, make sure that DNS hostname and DNS resolution are both enabled in your VPC setting.
