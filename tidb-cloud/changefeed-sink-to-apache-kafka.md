@@ -78,7 +78,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 3. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
     - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned Bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and are automatically filled in with your TiDB cluster endpoint and and password.
+    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and are automatically filled in with your TiDB cluster endpoint and password.
 
 4. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 
