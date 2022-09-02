@@ -106,7 +106,7 @@ At this stage, TiDB Cloud begins creating an endpoint service, which takes 3 to 
     6. Select your VPC in the drop-down list.
     7. In the **Security groups** area, select up your security group properly.
     8. In the **Subnets** area, select the availability zones where your TiDB cluster is located.
-    9 Click **Create endpoint**.
+    9. Click **Create endpoint**.
 
         <img src="../media/tidb-cloud/private-endpoint/create-endpoint-3.png" width="70%" auto="Create endpoint service 3" />
 
